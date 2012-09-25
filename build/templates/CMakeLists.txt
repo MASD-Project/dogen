@@ -13,3 +13,7 @@ message(STATUS "Transformed version.hpp.")
 set(doxy_template "${CMAKE_CURRENT_SOURCE_DIR}/doxygen/dogen.in")
 configure_file(${doxy_template} ${stage_doxygen_dir}/dogen.doxy)
 message(STATUS "Transformed dogen.doxy.")
+
+set(main_page_template "${CMAKE_CURRENT_SOURCE_DIR}/doxygen/mainpage.dox.in")
+configure_file(${main_page_template} ${stage_doxygen_dir}/dox/mainpage.dox)
+message(STATUS "Transformed mainpage.dox.")
