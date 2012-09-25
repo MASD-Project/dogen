@@ -17,5 +17,5 @@ set(CTEST_PROJECT_NAME "dogen")
 # kitware dashboard settings
 set(CTEST_DROP_METHOD "http")
 set(CTEST_DROP_SITE "kitanda.linkpc.net/cdash")
-set(CTEST_DROP_LOCATION "/submit.php?project=Dogen")
+set(CTEST_DROP_LOCATION "/submit.php?project=dogen")
 set(CTEST_DROP_SITE_CDASH TRUE)
