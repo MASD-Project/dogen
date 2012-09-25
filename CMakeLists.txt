@@ -206,11 +206,29 @@ include_directories(SYSTEM
 set(DOGEN_CPP_CODE_DIR ${CMAKE_SOURCE_DIR}/projects)
 
 # output directory
-set(DOGEN_DOXYGEN_DIR ${stage_doxygen_dir})
+set(site_checkout_dir "${stage_doxygen_dir}/site")
+set(DOGEN_DOXYGEN_DIR "${site_checkout_dir}/html/doxygen/dogen")
+
+if(NOT EXISTS "${site_checkout_dir}")
+    message(STATUS ${CTEST_GIT_COMMAND} clone git@github.com:kitanda/kitanda.github.com.git ${site_checkout_dir})
+    execute_process(COMMAND ${CTEST_GIT_COMMAND} clone git@github.com:kitanda/kitanda.github.com.git ${site_checkout_dir}
+        WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
+        ERROR_VARIABLE git_error
+        RESULT_VARIABLE ret_var
+        OUTPUT_STRIP_TRAILING_WHITESPACE)
+endif()
 
 # input file
 set(doxy_file ${stage_doxygen_dir}/dogen.doxy)
-add_custom_target(doxy doxygen ${doxy_file})
+add_custom_target(doxy
+    COMMAND cd ${site_checkout_dir} &&
+    ${CTEST_GIT_COMMAND} pull origin &&
+    doxygen ${doxy_file} &&
+    ${CTEST_GIT_COMMAND} add -A &&
+    ${CTEST_GIT_COMMAND} commit -m "Doc build: ${DOGEN_VERSION}-${CURRENT_GIT_COMMIT}" &&
+    ${CTEST_GIT_COMMAND} pull --rebase origin &&
+    ${CTEST_GIT_COMMAND} push origin
+    )
 
 #
 # include all sub directories
