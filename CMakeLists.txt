@@ -117,6 +117,23 @@ file(GLOB_RECURSE all_dia_test_models ABSOLUTE
     "${CMAKE_SOURCE_DIR}/test_data/dia_sml/input/*.dia")
 
 #
+# setup git
+#
+find_program(CTEST_GIT_COMMAND NAMES git)
+if(NOT DEFINED CTEST_GIT_COMMAND)
+    message(FATAL_ERROR "git not found.")
+endif()
+message(STATUS "Found git (${CTEST_GIT_COMMAND})...")
+
+# hash of the top commit
+execute_process(COMMAND ${CTEST_GIT_COMMAND} rev-list -n 1 HEAD
+    WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
+    ERROR_VARIABLE git_error
+    OUTPUT_VARIABLE CURRENT_GIT_COMMIT
+    RESULT_VARIABLE ret_var
+    OUTPUT_STRIP_TRAILING_WHITESPACE)
+
+#
 # useful vars
 #
 
