@@ -1,0 +1,33 @@
+/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+ *
+ * Copyright (C) 2012 Kitanda
+ *
+ * This file is distributed under the Kitanda Proprietary Software
+ * Licence. See doc/LICENCE.TXT for details.
+ *
+ */
+#include "dogen/class_without_package/test_data/class_1_sequence.hpp"
+#include "dogen/class_without_package/test_data/versioned_key_sequence.hpp"
+
+namespace dogen {
+namespace class_without_package {
+namespace detail {
+
+class_1_generator::value_type
+class_1_generator::next_term(const unsigned int position) {
+    class_1 r;
+
+    if (position == 0) {
+        r.an_attribute(static_cast<int>(0));
+    } else if (position == 1) {
+        r.an_attribute(static_cast<int>(30));
+    } else if (position == 2) {
+        r.an_attribute(static_cast<int>(60));
+    }
+
+    return r;
+}
+
+unsigned int class_1_generator::length() const { return(3); }
+
+} } }

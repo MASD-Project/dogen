@@ -1,0 +1,17 @@
+/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+ *
+ * Copyright (C) 2012 Kitanda
+ *
+ * This file is distributed under the Kitanda Proprietary Software
+ * Licence. See doc/LICENCE.TXT for details.
+ *
+ */
+
+// test include
+#include "${header_validation_target}"
+
+// test header guards.
+#include "${header_validation_target}"
+
+// dummy function to suppress ranlib warnings
+void ${DUMMY_FUNCTION}() { }

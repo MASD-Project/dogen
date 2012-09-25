@@ -1,0 +1,56 @@
+/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+ *
+ * Copyright (C) 2012 Kitanda
+ *
+ * This file is distributed under the Kitanda Proprietary Software
+ * Licence. See doc/LICENCE.TXT for details.
+ *
+ */
+#ifndef DOGEN_UTILITY_TEST_LOGGING_HPP
+#define DOGEN_UTILITY_TEST_LOGGING_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include <sstream>
+#include "dogen/utility/log/logger.hpp"
+#include "dogen/utility/log/scoped_life_cycle_manager.hpp"
+
+namespace dogen {
+namespace utility {
+namespace test {
+
+inline dogen::utility::log::scoped_life_cycle_manager
+scoped_life_cycle_manager_factory(std::string test_module,
+    std::string test_suite,
+    std::string function_name) {
+    std::ostringstream stream;
+
+    stream << "log/" << test_module << "/" << test_suite
+           << "/" << function_name;
+
+    using namespace dogen::utility::log;
+    return scoped_life_cycle_manager(stream.str());
+}
+
+} } }
+
+#ifdef SETUP_TEST_LOG
+#undef SETUP_TEST_LOG
+#endif
+#define SETUP_TEST_LOG(function_name)                                   \
+    auto sl(dogen::utility::test::scoped_life_cycle_manager_factory(  \
+            test_module, test_suite, function_name));
+
+#ifdef SETUP_TEST_LOG_SOURCE
+#undef SETUP_TEST_LOG_SOURCE
+#endif
+#define SETUP_TEST_LOG_SOURCE(function_name)                            \
+    dogen::utility::log::logger lg(                                   \
+        dogen::utility::log::logger_factory(test_suite));             \
+    using namespace dogen::utility::log;                              \
+    auto sl(dogen::utility::test::scoped_life_cycle_manager_factory(  \
+            test_module, test_suite, function_name));
+
+#endif

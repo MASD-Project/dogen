@@ -1,0 +1,134 @@
+/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+ *
+ * Copyright (C) 2012 Kitanda
+ *
+ * This file is distributed under the Kitanda Proprietary Software
+ * Licence. See doc/LICENCE.TXT for details.
+ *
+ */
+#ifndef DOGEN_UTILITY_TEST_ASSERTER_HPP
+#define DOGEN_UTILITY_TEST_ASSERTER_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include <string>
+#include <boost/filesystem/path.hpp>
+#include "dogen/utility/log/logger.hpp"
+#include "dogen/utility/test/xml_serialization_helper.hpp"
+#include "dogen/utility/test/file_asserter.hpp"
+
+namespace dogen {
+namespace utility {
+namespace test {
+
+class asserter {
+public:
+    asserter() = delete;
+    asserter(const asserter&) = delete;
+    ~asserter() = delete;
+    asserter(asserter&&) = delete;
+    asserter& operator=(const asserter&) = delete;
+
+private:
+    static dogen::utility::log::logger lg_;
+
+public:
+    static dogen::utility::log::logger logger() { return lg_; }
+
+public:
+    /**
+     * @brief Returns true if two objects are equal, false otherwise.
+     */
+    template<typename Entity>
+    static bool assert_object(Entity expected, Entity actual) {
+        using namespace dogen::utility::log;
+        BOOST_LOG_SEV(lg_, debug) <<"expected: " << expected;
+        BOOST_LOG_SEV(lg_, debug) <<"actual: " << actual;
+        return actual == expected;
+    }
+
+    /**
+     * @brief Outputs the actual object and compares it to its serialised form.
+     *
+     * @param actual_path File name where to place the actual object
+     * @param actual Actual object
+     * @param expected_path Baseline for the object.
+     */
+    template<typename Entity>
+    static bool assert_object(
+        boost::filesystem::path expected_path,
+        boost::filesystem::path actual_path,
+        Entity actual) {
+
+        using dogen::utility::test::xml_serialize;
+        using namespace dogen::utility::log;
+        BOOST_LOG_SEV(lg_, debug) << "writing actual: " << actual_path.string();
+        xml_serialize(actual_path, actual);
+
+        using dogen::utility::test::xml_deserialize;
+        using namespace dogen::utility::log;
+        BOOST_LOG_SEV(lg_, debug) << "reading expected: " << expected_path.string();
+        const auto expected(xml_deserialize<Entity>(expected_path));
+        using namespace dogen::utility::log;
+        BOOST_LOG_SEV(lg_, debug) << "diff -u " << expected_path.string()
+                                  << " " << actual_path.string();
+
+        return assert_object(expected, actual);
+    }
+
+    /**
+     * @brief Asserts that expected matches actual according to the
+     * file asserter passed in.
+     *
+     * @param expected_path path to the expected file
+     * @param actual_path path to the actual file
+     * @param fa file asserter to use
+     *
+     * @pre Assumes that fa.is_assertable for both actual and expected
+     * paths.
+     */
+    static bool assert_file(boost::filesystem::path expected_path,
+        boost::filesystem::path actual_path, file_asserter& fa);
+
+    /**
+     * @brief Asserts that expected matches actual according to the
+     * default file asserter.
+     *
+     * The default asserter is the byte-wise file asserter, which
+     * performs a byte-wise comparison between the contents of the
+     * files.
+     *
+     * @param expected_path path to the expected file
+     * @param actual_path path to the actual file
+     */
+    static bool assert_file(boost::filesystem::path expected_path,
+        boost::filesystem::path actual_path);
+
+    /**
+     * @brief Asserts that expected matches actual by ensuring they
+     * have the same files and the files have the same contents.
+     *
+     * It uses the byte-wise file asserter to compare contents.
+     */
+    static bool assert_directory(boost::filesystem::path expected_path,
+        boost::filesystem::path actual_path);
+
+    /**
+     * @brief Asserts that expected matches actual by ensuring they
+     * have the same files and the files have the same contents.
+     *
+     * File assertions are done by trying each file asserter passed in
+     * in turn. If none are assertable, the byte-wise file asserter is
+     * used. If more than one are assertable, they are all used in the
+     * order present in the vector until the first one fails.
+     */
+    static bool assert_directory(boost::filesystem::path expected_path,
+        boost::filesystem::path actual_path,
+        std::vector<file_asserter::shared_ptr> file_asserters);
+};
+
+} } }
+
+#endif

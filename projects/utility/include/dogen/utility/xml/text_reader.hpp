@@ -1,0 +1,217 @@
+/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+ *
+ * Copyright (C) 2012 Kitanda
+ *
+ * This file is distributed under the Kitanda Proprietary Software
+ * Licence. See doc/LICENCE.TXT for details.
+ *
+ */
+#ifndef DOGEN_UTILITY_XML_TEXT_READER_HPP
+#define DOGEN_UTILITY_XML_TEXT_READER_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include <utility>
+#include <boost/filesystem/path.hpp>
+#include "dogen/utility/xml/exception.hpp"
+#include "dogen/utility/xml/node_types.hpp"
+
+namespace dogen {
+namespace utility {
+namespace xml {
+
+/**
+ * @brief Represents a reader that provides fast, non-cached,
+ * forward-only access to XML data.
+ */
+class text_reader {
+public:
+    text_reader() = delete;
+    text_reader& operator=(const text_reader&) = delete;
+    text_reader(const text_reader&) = delete;
+    text_reader(text_reader&&) = default;
+
+public:
+    /**
+     * @brief Initialises the reader with a file name.
+     * @param file_name path to the XML file the reader will open.
+     * @param skip_whitespace if true, reads will skip whitespace
+     */
+    text_reader(boost::filesystem::path file_name, bool skip_whitespace = false);
+
+    ~text_reader();
+
+public:
+    /**
+     * @brief Reads the next node from the stream.
+     * @return True if there's more data to read, false otherwise.
+     */
+    bool read();
+
+    /**
+     * @brief Returns the type of the current node.
+     */
+    node_types node_type() const;
+
+    /**
+     * @brief Reads the value of the current node as a bool.
+     */
+    bool value_as_boolean() const;
+
+    /**
+     * @brief Reads the value of the current node as a double.
+     */
+    double value_as_double() const;
+
+    /**
+     * @brief Reads the value of the current node as an int.
+     */
+    int value_as_int() const;
+
+    /**
+     * @brief Reads the value of the current node as a long.
+     */
+    long value_as_long() const;
+
+    /**
+     * @brief Reads the value of the current node as a string.
+     */
+    std::string value_as_string() const;
+
+    /**
+     * @brief Template-based implementation of value method.
+     */
+    template<typename Type>
+    Type value() const {
+        using dogen::utility::xml::exception;
+        throw exception("Value not specialised for this type");
+    }
+
+    /**
+     * @brief Returns true if the current element has an attribute
+     * with the specified name, false otherwise.
+     */
+    bool has_attribute(std::string name) const;
+
+    /**
+     * @brief Returns the value of the specified attribute as a string
+     */
+    std::string get_attribute_as_string(std::string name) const;
+
+    /**
+     * @brief Returns the value of the specified attribute as boolean
+     */
+    bool get_attribute_as_boolean(std::string name) const;
+
+    /**
+     * @brief Returns the value of the specified attribute as int
+     */
+    int get_attribute_as_int(std::string name) const;
+
+    /**
+     * @brief Template-based implementation of get_attribute method.
+     */
+    template<typename Type>
+    Type get_attribute(std::string) const {
+        using dogen::utility::xml::exception;
+        throw exception("Value not specialised for this type");
+    }
+
+    /**
+     * @brief Returns the name of the current node.
+     */
+    std::string name() const;
+
+    /**
+     * @brief Returns true if the current node can have a value, false
+     * otherwise.
+     */
+    bool has_value() const;
+
+    /**
+     * @brief Returns true if the current node is self-closing.
+     */
+    bool is_empty() const;
+
+    /**
+     * @brief Returns true if the current node is the start of an
+     * element.
+     */
+    bool is_start_element() const;
+
+    /**
+     * @brief Returns true if the current node is the end of an
+     * element.
+     */
+    bool is_end_element() const;
+
+    /**
+     * @brief Skips the children of the current node
+     * @return False if there are no more nodes to read, true otherwise.
+     */
+    bool skip() const;
+
+    /**
+     * @brief Returns true if the current node is a type of white space.
+     */
+    bool is_whitespace() const;
+
+    /**
+     * @brief Returns the file name the reader is currently processing.
+     */
+    boost::filesystem::path file_name() const { return file_name_; }
+
+    /**
+     * @brief Close the text reader. Once called the text reader
+     * cannot be used again.
+     */
+    void close();
+
+private:
+    const boost::filesystem::path file_name_;
+    const bool skip_whitespace_;
+
+private: // pimpl
+    class impl;
+    std::unique_ptr<impl> impl_;
+};
+
+template<> inline std::string text_reader::value<std::string>() const {
+    return value_as_string();
+}
+
+template<> inline int text_reader::value<int>() const {
+    return value_as_int();
+}
+
+template<> inline long text_reader::value<long>() const {
+    return value_as_long();
+}
+
+template<> inline double text_reader::value<double>() const {
+    return value_as_double();
+}
+
+template<> inline bool text_reader::value<bool>() const {
+    return value_as_boolean();
+}
+
+template<> inline std::string
+text_reader::get_attribute<std::string>(std::string name) const {
+    return get_attribute_as_string(name);
+}
+
+template<> inline bool
+text_reader::get_attribute<bool>(std::string name) const {
+    return get_attribute_as_boolean(name);
+}
+
+template<> inline int
+text_reader::get_attribute<int>(std::string name) const {
+    return get_attribute_as_int(name);
+}
+
+} } }
+#endif

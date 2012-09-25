@@ -1,0 +1,55 @@
+/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+ *
+ * Copyright (C) 2012 Kitanda
+ *
+ * This file is distributed under the Kitanda Proprietary Software
+ * Licence. See doc/LICENCE.TXT for details.
+ *
+ */
+#ifndef DOGEN_DIA_SERIALIZATION_COMPOSITE_HPP
+#define DOGEN_DIA_SERIALIZATION_COMPOSITE_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include <boost/serialization/string.hpp>
+#include <boost/serialization/nvp.hpp>
+#include <boost/serialization/vector.hpp>
+#include <boost/serialization/shared_ptr.hpp>
+#include "dogen/dia/domain/composite.hpp"
+
+namespace dogen {
+namespace dia {
+namespace serialization {
+namespace detail {
+
+class composite_serializer {
+public:
+    template<typename Archive>
+    void serialize(Archive & archive,
+        dogen::dia::composite& value,
+        const unsigned int /*version*/) {
+        using boost::serialization::make_nvp;
+        archive & make_nvp("type", value.type_);
+        archive & make_nvp("value", value.value_);
+        archive & make_nvp("inner_composite", value.inner_composite_);
+    }
+};
+
+} } } }
+
+namespace boost {
+namespace serialization {
+
+template<class Archive>
+inline void serialize(Archive & archive,
+    dogen::dia::composite& value,
+    const unsigned int version) {
+    dogen::dia::serialization::detail::composite_serializer serializer;
+    serializer.serialize<Archive>(archive, value, version);
+}
+
+} }
+
+#endif

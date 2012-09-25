@@ -1,0 +1,92 @@
+/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+ *
+ * Copyright (C) 2012 Kitanda
+ *
+ * This file is distributed under the Kitanda Proprietary Software
+ * Licence. See doc/LICENCE.TXT for details.
+ *
+ */
+#include <ostream>
+#include "dogen/generator/generation_failure.hpp"
+#include "dogen/generator/backends/cpp/formatters/cpp_qualified_name.hpp"
+#include "dogen/generator/backends/cpp/formatters/cpp_licence.hpp"
+#include "dogen/generator/backends/cpp/formatters/cpp_io_header.hpp"
+#include "dogen/generator/backends/cpp/formatters/cpp_header_guards.hpp"
+#include "dogen/generator/backends/cpp/formatters/cpp_namespace.hpp"
+#include "dogen/generator/backends/cpp/formatters/cpp_namespace_helper.hpp"
+#include "dogen/generator/backends/cpp/formatters/cpp_includes.hpp"
+
+namespace {
+
+const bool is_system(true);
+const bool is_user(false);
+const std::string iosfwd("iosfwd");
+
+const std::string missing_class_view_model(
+    "File view model must contain a class view model");
+
+}
+
+namespace dogen {
+namespace generator {
+namespace backends {
+namespace cpp {
+namespace formatters {
+
+io_header::
+io_header(std::ostream& stream) :
+    stream_(stream),
+    facet_type_(cpp_facet_types::domain),
+    file_type_(cpp_file_types::header),
+    utility_(stream_, indenter_) {
+}
+
+file_formatter::shared_ptr io_header::create(std::ostream& stream) {
+    return file_formatter::shared_ptr(new io_header(stream));
+}
+
+void io_header::format(view_models::file_view_model vm) {
+    boost::optional<view_models::class_view_model> o(vm.class_vm());
+    if (!o)
+        throw generation_failure(missing_class_view_model);
+
+    licence licence(stream_);
+    licence.format();
+
+    header_guards guards(stream_);
+    guards.format_start(vm.header_guard());
+    utility_.blank_line();
+
+    std::list<std::string> system_dependencies(vm.system_dependencies());
+    system_dependencies.push_back(iosfwd);
+
+    cpp_includes includes(stream_);
+    includes.format(system_dependencies, is_system);
+    includes.format(vm.user_dependencies(), is_user);
+    utility_.blank_line();
+
+    {
+        const view_models::class_view_model& cvm(*o);
+        namespace_helper helper1(stream_, cvm.namespaces());
+        utility_.blank_line();
+
+        stream_ << indenter_ << "std::ostream&" << std::endl
+                << indenter_ << "operator<<(std::ostream& stream,"
+                << std::endl;
+
+        {
+            cpp_positive_indenter_scope s(indenter_);
+            stream_ << indenter_;
+
+            cpp_qualified_name qualified_name(stream_);
+            qualified_name.format(cvm);
+            stream_ << " value);" << std::endl;
+            utility_.blank_line();
+        }
+    }
+
+    utility_.blank_line(2);
+    guards.format_end();
+}
+
+} } } } }

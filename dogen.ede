@@ -1,0 +1,45 @@
+;; -*- mode: emacs-lisp; tab-width: 4; indent-tabs-mode: nil -*-
+(ede-cpp-root-project
+ "Dogen"
+ :name "Dogen Project"
+ :version "0.0.1"
+ :file "project.ede"
+ :include-path
+ '(
+   "/projects/config/include"
+   "/projects/dia/include"
+   "/projects/sml/include"
+   "/projects/utility/include"
+   "/projects/generator/include"
+   "/projects/driver/include"
+   "/projects/all_primitives/include"
+   "/projects/class_in_a_package/include"
+   "/projects/class_without_attributes/include"
+   "/projects/class_without_package/include"
+   "/projects/class_without_package_and_attributes/include"
+   "/projects/classes_in_a_package/include"
+   "/projects/classes_inside_and_outside_package/include"
+   "/projects/classes_without_package/include"
+   "/projects/compressed/include"
+   "/projects/disable_cmakelists/include"
+   "/projects/disable_complete_constructor/include"
+   "/projects/disable_facet_folders/include"
+   "/projects/disable_model_package/include"
+   "/projects/enable_facet_domain/include"
+   "/projects/enable_facet_hash/include"
+   "/projects/enable_facet_io/include"
+   "/projects/enable_facet_serialization/include"
+   "/projects/two_layers_with_objects/include"
+   "/projects/config/include"
+   )
+ :system-include-path
+ '("/usr/local/pfh/include"
+   "/usr/include/gtkmm-2.4"
+   "/usr/include/glibmm-2.4"
+   "/usr/include/libxml2"
+   )
+ :spp-table
+ '(("isUnix" . "")
+   ("BOOST_TEST_DYN_LINK" . "")
+   ("_MSC_VER" . ""))
+ )

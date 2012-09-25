@@ -1,0 +1,507 @@
+# -*- mode: fundamental; tab-width: 4; indent-tabs-mode: nil; -*-
+#
+# Copyright (C) 2012 Kitanda
+#
+# This file is distributed under the Kitanda Proprietary Software
+# Licence. See doc/LICENCE.TXT for details.
+#
+# Valgrind suppression file for Kitanda
+#
+
+# Leaks
+{
+    libnss_compat leak 1
+    Memcheck:Leak
+    fun:malloc
+    fun:__nss_lookup_function
+    obj:*
+    obj:*
+    fun:getpwuid_r@@GLIBC_2.1.2
+    obj:/usr/lib/libpq.so.5.2
+    obj:/usr/lib/libpq.so.5.2
+    obj:/usr/lib/libpq.so.5.2
+    obj:/usr/lib/libpq.so.5.2
+}
+
+{
+    libnss_compat leak 2
+    Memcheck:Leak
+    fun:malloc
+    fun:tsearch
+    fun:__nss_lookup_function
+    obj:*
+    obj:*
+    fun:getpwuid_r@@GLIBC_2.1.2
+    obj:/usr/lib/libpq.so.5.2
+    obj:/usr/lib/libpq.so.5.2
+    obj:/usr/lib/libpq.so.5.2
+    obj:/usr/lib/libpq.so.5.2
+}
+
+{
+    libnss_compat leak 3
+    Memcheck:Leak
+    fun:malloc
+    fun:nss_parse_service_list
+    fun:__nss_database_lookup
+    obj:*
+    obj:*
+    fun:getpwuid_r@@GLIBC_2.1.2
+    obj:/usr/lib/libpq.so.5.2
+    obj:/usr/lib/libpq.so.5.2
+}
+
+{
+   thread leak 1
+   Memcheck:Leak
+   fun:malloc
+   fun:_ZN5boost6detail25get_once_per_thread_epochEv
+   fun:_ZN5boost9call_onceIPFvvEEEvRNS_9once_flagET_
+   fun:_GLOBAL__sub_I_named_scope.cpp
+   fun:call_init
+   fun:_dl_init
+   obj:/lib/x86_64-linux-gnu/ld-2.13.so
+}
+
+{
+   thread leak 2
+   Memcheck:Leak
+   fun:_Znwm
+   fun:_ZN5boost12_GLOBAL__N_125make_external_thread_dataEv
+   fun:_ZN5boost6detail16add_new_tss_nodeEPKvNS_10shared_ptrINS0_20tss_cleanup_functionEEEPv
+   fun:_ZN5boost6detail12set_tss_dataEPKvNS_10shared_ptrINS0_20tss_cleanup_functionEEEPvb
+   fun:_ZN5boost12log_mt_posix10basic_coreIcED1Ev
+   fun:_ZN5boost6detail17sp_counted_impl_pINS_12log_mt_posix10basic_coreIcEEE7disposeEv
+   fun:_ZN5boost10shared_ptrINS_12log_mt_posix10basic_coreIcEEED1Ev
+   fun:__run_exit_handlers
+   fun:exit
+   fun:(below main)
+}
+
+{
+   thread leak 3
+   Memcheck:Leak
+   fun:_Znwm
+   fun:_ZNSt8_Rb_treeIPKvSt4pairIKS1_N5boost6detail13tss_data_nodeEESt10_Select1stIS7_ESt4lessIS1_ESaIS7_EE10_M_insert_IS2_IS1_S6_EEESt17_Rb_tree_iteratorIS7_EPKSt18_Rb_tree_node_baseSK_OT_
+   fun:_ZN5boost6detail16add_new_tss_nodeEPKvNS_10shared_ptrINS0_20tss_cleanup_functionEEEPv
+   fun:_ZN5boost6detail12set_tss_dataEPKvNS_10shared_ptrINS0_20tss_cleanup_functionEEEPvb
+   fun:_ZN5boost12log_mt_posix10basic_coreIcED1Ev
+   fun:_ZN5boost6detail17sp_counted_impl_pINS_12log_mt_posix10basic_coreIcEEE7disposeEv
+   fun:_ZN5boost10shared_ptrINS_12log_mt_posix10basic_coreIcEEED1Ev
+   fun:__run_exit_handlers
+   fun:exit
+   fun:(below main)
+}
+
+{
+   thread leak 4
+   Memcheck:Leak
+   fun:_Znwm
+   fun:_ZNSt8_Rb_treeIPKvSt4pairIKS1_N5boost6detail13tss_data_nodeEESt10_Select1stIS7_ESt4lessIS1_ESaIS7_EE10_M_insert_IS2_IS1_S6_EEESt17_Rb_tree_iteratorIS7_EPKSt18_Rb_tree_node_baseSK_OT_
+   fun:_ZN5boost6detail16add_new_tss_nodeEPKvNS_10shared_ptrINS0_20tss_cleanup_functionEEEPv
+   fun:_ZN5boost6detail12set_tss_dataEPKvNS_10shared_ptrINS0_20tss_cleanup_functionEEEPvb
+   fun:_ZN5boost6detail17sp_counted_impl_pINS_12log_mt_posix10attributes17basic_named_scopeIwE14implementationEE7disposeEv
+   fun:_ZN5boost10shared_ptrINS_12log_mt_posix10attributes17basic_named_scopeIwE14implementationEED1Ev
+   fun:__cxa_finalize
+   obj:/usr/local/pfh/lib/libboost_log.so.1.49.0
+   fun:_dl_fini
+   fun:__run_exit_handlers
+   fun:exit
+   fun:(below main)
+}
+
+{
+   thread leak 5
+   Memcheck:Leak
+   fun:_Znwm
+   fun:_ZNSt8_Rb_treeIPKvSt4pairIKS1_N5boost6detail13tss_data_nodeEESt10_Select1stIS7_ESt4lessIS1_ESaIS7_EE10_M_insert_IS2_IS1_S6_EEESt17_Rb_tree_iteratorIS7_EPKSt18_Rb_tree_node_baseSK_OT_
+   fun:_ZN5boost6detail16add_new_tss_nodeEPKvNS_10shared_ptrINS0_20tss_cleanup_functionEEEPv
+   fun:_ZN5boost6detail12set_tss_dataEPKvNS_10shared_ptrINS0_20tss_cleanup_functionEEEPvb
+   fun:_ZN5boost6detail17sp_counted_impl_pINS_12log_mt_posix10attributes17basic_named_scopeIcE14implementationEE7disposeEv
+   fun:_ZN5boost10shared_ptrINS_12log_mt_posix10attributes17basic_named_scopeIcE14implementationEED1Ev
+   fun:__cxa_finalize
+   obj:/usr/local/pfh/lib/libboost_log.so.1.49.0
+   fun:_dl_fini
+   fun:__run_exit_handlers
+   fun:exit
+   fun:(below main)
+}
+
+{
+   thread leak 6   
+   Memcheck:Leak
+   fun:_Znwm
+   fun:_ZN5boost12_GLOBAL__N_125make_external_thread_dataEv
+   fun:_ZN5boost6detail16add_new_tss_nodeEPKvNS_10shared_ptrINS0_20tss_cleanup_functionEEEPv
+   fun:_ZN5boost6detail12set_tss_dataEPKvNS_10shared_ptrINS0_20tss_cleanup_functionEEEPvb
+   fun:_ZN5boost12log_mt_posix10basic_coreIcE11open_recordERKNS0_19basic_attribute_setIcEE
+   fun:_ZN5boost12log_mt_posix7sources12basic_loggerIcNS1_18severity_logger_mtINS0_7trivial14severity_levelEEENS1_18multi_thread_modelINS0_3aux14light_rw_mutexEEEE20open_record_unlockedINS_9parameter3aux15tagged_argumentINS0_8keywords3tag8severityEKS5_EEEENS0_12basic_recordIcEERKT_
+   fun:_ZN5boost12log_mt_posix7sources21basic_severity_loggerINS1_12basic_loggerIcNS1_18severity_logger_mtINS0_7trivial14severity_levelEEENS1_18multi_thread_modelINS0_3aux14light_rw_mutexEEEEES6_E20open_record_unlockedINS_9parameter3aux15tagged_argumentINS0_8keywords3tag8severityEKS6_EEEENS0_12basic_recordIcEERKT_
+   fun:_ZN5boost12log_mt_posix7sources22basic_composite_loggerIcNS1_18severity_logger_mtINS0_7trivial14severity_levelEEENS1_18multi_thread_modelINS0_3aux14light_rw_mutexEEENS_3mpl7vector1INS1_8severityIS5_EEEEE11open_recordINS_9parameter3aux15tagged_argumentINS0_8keywords3tag8severityEKS5_EEEENS0_12basic_recordIcEERKT_
+   fun:_ZNK7kitanda5kuito12bootstrapper7executeEv
+   fun:_ZN5kuito17test_bootstrapper11test_methodEv
+   fun:_ZN5kuitoL25test_bootstrapper_invokerEv
+   fun:_ZN5boost9unit_test9ut_detail7invokerINS1_6unusedEE6invokeIPFvvEEES3_RT_
+   fun:_ZN5boost9unit_test9ut_detail16callback0_impl_tINS1_6unusedEPFvvEE6invokeEv
+   fun:_ZNK5boost9unit_test9callback0INS0_9ut_detail6unusedEEclEv
+   fun:_ZN5boost9unit_test12_GLOBAL__N_121zero_return_wrapper_tINS0_9callback0INS0_9ut_detail6unusedEEEEclEv
+   fun:_ZN5boost9unit_test9ut_detail7invokerIiE6invokeINS0_12_GLOBAL__N_121zero_return_wrapper_tINS0_9callback0INS1_6unusedEEEEEEEiRT_
+   fun:_ZN5boost9unit_test9ut_detail16callback0_impl_tIiNS0_12_GLOBAL__N_121zero_return_wrapper_tINS0_9callback0INS1_6unusedEEEEEE6invokeEv
+   fun:_ZNK5boost9unit_test9callback0IiEclEv
+   fun:_ZN5boost6detail9do_invokeINS_10scoped_ptrINS0_24translate_exception_baseEEENS_9unit_test9callback0IiEEEEiRKT_RKT0_
+   fun:_ZN5boost17execution_monitor13catch_signalsERKNS_9unit_test9callback0IiEE
+   fun:_ZN5boost17execution_monitor7executeERKNS_9unit_test9callback0IiEE
+   fun:_ZN5boost9unit_test19unit_test_monitor_t21execute_and_translateERKNS0_9test_caseE
+   fun:_ZN5boost9unit_test14framework_impl5visitERKNS0_9test_caseE
+   fun:_ZN5boost9unit_test18traverse_test_treeERKNS0_9test_caseERNS0_17test_tree_visitorE
+}
+
+{
+   thread leak 7
+   Memcheck:Leak
+   fun:_Znwm
+   fun:_ZN5boost12_GLOBAL__N_125make_external_thread_dataEv
+   fun:_ZN5boost6detail16add_new_tss_nodeEPKvNS_10shared_ptrINS0_20tss_cleanup_functionEEEPv
+   fun:_ZN5boost6detail12set_tss_dataEPKvNS_10shared_ptrINS0_20tss_cleanup_functionEEEPvb
+   fun:_ZN5boost6detail17sp_counted_impl_pINS_12log_mt_posix10attributes17basic_named_scopeIwE14implementationEE7disposeEv
+   fun:_ZN5boost10shared_ptrINS_12log_mt_posix10attributes17basic_named_scopeIwE14implementationEED1Ev
+   fun:__cxa_finalize
+   obj:/usr/local/pfh/lib/libboost_log.so.1.49.0
+   fun:_dl_fini
+   fun:__run_exit_handlers
+   fun:exit
+   fun:(below main)
+}
+
+{
+   thread leak 8
+   Memcheck:Leak
+   fun:_Znwm
+   fun:_ZN5boost12_GLOBAL__N_125make_external_thread_dataEv
+   fun:_ZN5boost6detail16add_new_tss_nodeEPKvNS_10shared_ptrINS0_20tss_cleanup_functionEEEPv
+   fun:_ZN5boost6detail12set_tss_dataEPKvNS_10shared_ptrINS0_20tss_cleanup_functionEEEPvb
+   fun:_ZN5boost12log_mt_posix10basic_coreIcE11open_recordERKNS0_19basic_attribute_setIcEE
+   fun:_ZN5boost12log_mt_posix7sources12basic_loggerIcNS1_18severity_logger_mtINS0_7trivial14severity_levelEEENS1_18multi_thread_modelINS0_3aux14light_rw_mutexEEEE20open_record_unlockedINS_9parameter3aux15tagged_argumentINS0_8keywords3tag8severityEKS5_EEEENS0_12basic_recordIcEERKT_
+   fun:_ZN5boost12log_mt_posix7sources21basic_severity_loggerINS1_12basic_loggerIcNS1_18severity_logger_mtINS0_7trivial14severity_levelEEENS1_18multi_thread_modelINS0_3aux14light_rw_mutexEEEEES6_E20open_record_unlockedINS_9parameter3aux15tagged_argumentINS0_8keywords3tag8severityEKS6_EEEENS0_12basic_recordIcEERKT_
+   fun:_ZN5boost12log_mt_posix7sources22basic_composite_loggerIcNS1_18severity_logger_mtINS0_7trivial14severity_levelEEENS1_18multi_thread_modelINS0_3aux14light_rw_mutexEEENS_3mpl7vector1INS1_8severityIS5_EEEEE11open_recordINS_9parameter3aux15tagged_argumentINS0_8keywords3tag8severityEKS5_EEEENS0_12basic_recordIcEERKT_
+   fun:_ZN7utility16exercise_logging11test_methodEv
+   fun:_ZN7utilityL24exercise_logging_invokerEv
+   fun:_ZN5boost9unit_test9ut_detail7invokerINS1_6unusedEE6invokeIPFvvEEES3_RT_
+   fun:_ZN5boost9unit_test9ut_detail16callback0_impl_tINS1_6unusedEPFvvEE6invokeEv
+   fun:_ZNK5boost9unit_test9callback0INS0_9ut_detail6unusedEEclEv
+   fun:_ZN5boost9unit_test12_GLOBAL__N_121zero_return_wrapper_tINS0_9callback0INS0_9ut_detail6unusedEEEEclEv
+   fun:_ZN5boost9unit_test9ut_detail7invokerIiE6invokeINS0_12_GLOBAL__N_121zero_return_wrapper_tINS0_9callback0INS1_6unusedEEEEEEEiRT_
+   fun:_ZN5boost9unit_test9ut_detail16callback0_impl_tIiNS0_12_GLOBAL__N_121zero_return_wrapper_tINS0_9callback0INS1_6unusedEEEEEE6invokeEv
+   fun:_ZNK5boost9unit_test9callback0IiEclEv
+   fun:_ZN5boost6detail9do_invokeINS_10scoped_ptrINS0_24translate_exception_baseEEENS_9unit_test9callback0IiEEEEiRKT_RKT0_
+   fun:_ZN5boost17execution_monitor13catch_signalsERKNS_9unit_test9callback0IiEE
+   fun:_ZN5boost17execution_monitor7executeERKNS_9unit_test9callback0IiEE
+   fun:_ZN5boost9unit_test19unit_test_monitor_t21execute_and_translateERKNS0_9test_caseE
+   fun:_ZN5boost9unit_test14framework_impl5visitERKNS0_9test_caseE
+   fun:_ZN5boost9unit_test18traverse_test_treeERKNS0_9test_caseERNS0_17test_tree_visitorE
+   fun:_ZN5boost9unit_test18traverse_test_treeEmRNS0_17test_tree_visitorE
+}
+
+{
+   thread leak 1 32-bit
+   Memcheck:Leak
+   fun:malloc
+   fun:_ZN5boost6detail25get_once_per_thread_epochEv
+   fun:_ZN5boost9call_onceIPFvvEEEvRNS_9once_flagET_
+   fun:_GLOBAL__sub_I_named_scope.cpp
+   fun:_dl_init
+   obj:/lib/i386-linux-gnu/ld-2.13.so
+}
+
+{
+   thread leak 2 32-bit
+   Memcheck:Leak
+   fun:_Znwj
+   fun:_ZN5boost12_GLOBAL__N_125make_external_thread_dataEv
+   fun:_ZN5boost6detail16add_new_tss_nodeEPKvNS_10shared_ptrINS0_20tss_cleanup_functionEEEPv
+   fun:_ZN5boost6detail12set_tss_dataEPKvNS_10shared_ptrINS0_20tss_cleanup_functionEEEPvb
+   fun:_ZN5boost12log_mt_posix10basic_coreIcED1Ev
+   fun:_ZN5boost6detail17sp_counted_impl_pINS_12log_mt_posix10basic_coreIcEEE7disposeEv
+   fun:exit
+   fun:(below main)
+}
+
+{
+   thread leak 3 32-bit
+   Memcheck:Leak
+   fun:_Znwj
+   fun:_ZNSt8_Rb_treeIPKvSt4pairIKS1_N5boost6detail13tss_data_nodeEESt10_Select1stIS7_ESt4lessIS1_ESaIS7_EE10_M_insert_IS2_IS1_S6_EEESt17_Rb_tree_iteratorIS7_EPKSt18_Rb_tree_node_baseSK_OT_
+   fun:_ZN5boost6detail16add_new_tss_nodeEPKvNS_10shared_ptrINS0_20tss_cleanup_functionEEEPv
+   fun:_ZN5boost6detail12set_tss_dataEPKvNS_10shared_ptrINS0_20tss_cleanup_functionEEEPvb
+   fun:_ZN5boost12log_mt_posix10basic_coreIcED1Ev
+   fun:_ZN5boost6detail17sp_counted_impl_pINS_12log_mt_posix10basic_coreIcEEE7disposeEv
+   fun:exit
+   fun:(below main)
+}
+
+{
+   thread leak 4 32-bit
+   Memcheck:Leak
+   fun:_Znwj
+   fun:_ZNSt8_Rb_treeIPKvSt4pairIKS1_N5boost6detail13tss_data_nodeEESt10_Select1stIS7_ESt4lessIS1_ESaIS7_EE10_M_insert_IS2_IS1_S6_EEESt17_Rb_tree_iteratorIS7_EPKSt18_Rb_tree_node_baseSK_OT_
+   fun:_ZN5boost6detail16add_new_tss_nodeEPKvNS_10shared_ptrINS0_20tss_cleanup_functionEEEPv
+   fun:_ZN5boost6detail12set_tss_dataEPKvNS_10shared_ptrINS0_20tss_cleanup_functionEEEPvb
+   fun:_ZN5boost6detail17sp_counted_impl_pINS_12log_mt_posix10attributes17basic_named_scopeIwE14implementationEE7disposeEv
+   fun:_ZN5boost10shared_ptrINS_12log_mt_posix10attributes17basic_named_scopeIwE14implementationEED1Ev
+   obj:/usr/local/pfh/lib/libboost_log.so.1.49.0
+   fun:_dl_fini
+   fun:__run_exit_handlers
+   fun:exit
+   fun:(below main)
+}
+
+{
+   thread leak 5 32-bit
+   Memcheck:Leak
+   fun:_Znwj
+   fun:_ZNSt8_Rb_treeIPKvSt4pairIKS1_N5boost6detail13tss_data_nodeEESt10_Select1stIS7_ESt4lessIS1_ESaIS7_EE10_M_insert_IS2_IS1_S6_EEESt17_Rb_tree_iteratorIS7_EPKSt18_Rb_tree_node_baseSK_OT_
+   fun:_ZN5boost6detail16add_new_tss_nodeEPKvNS_10shared_ptrINS0_20tss_cleanup_functionEEEPv
+   fun:_ZN5boost6detail12set_tss_dataEPKvNS_10shared_ptrINS0_20tss_cleanup_functionEEEPvb
+   fun:_ZN5boost6detail17sp_counted_impl_pINS_12log_mt_posix10attributes17basic_named_scopeIcE14implementationEE7disposeEv
+   fun:_ZN5boost10shared_ptrINS_12log_mt_posix10attributes17basic_named_scopeIcE14implementationEED1Ev
+   obj:/usr/local/pfh/lib/libboost_log.so.1.49.0
+   fun:_dl_fini
+   fun:__run_exit_handlers
+   fun:exit
+   fun:(below main)
+}
+
+{
+   thread leak 6 32-bit
+   Memcheck:Leak
+   fun:malloc
+   fun:_ZN5boost6detail25get_once_per_thread_epochEv
+   fun:_GLOBAL__sub_I_named_scope.cpp
+   fun:_dl_init
+   obj:/lib/i386-linux-gnu/ld-2.13.so
+}
+
+{
+   thread leak 7 32-bit
+   Memcheck:Leak
+   fun:_Znwj
+   fun:_ZN5boost12_GLOBAL__N_125make_external_thread_dataEv
+   fun:_ZN5boost6detail16add_new_tss_nodeEPKvNS_10shared_ptrINS0_20tss_cleanup_functionEEEPv
+   fun:_ZN5boost6detail12set_tss_dataEPKvNS_10shared_ptrINS0_20tss_cleanup_functionEEEPvb
+   fun:_ZN5boost12log_mt_posix10basic_coreIcE11open_recordERKNS0_19basic_attribute_setIcEE
+   fun:_ZN5boost12log_mt_posix7sources12basic_loggerIcNS1_18severity_logger_mtINS0_7trivial14severity_levelEEENS1_18multi_thread_modelINS0_3aux14light_rw_mutexEEEE20open_record_unlockedINS_9parameter3aux15tagged_argumentINS0_8keywords3tag8severityEKS5_EEEENS0_12basic_recordIcEERKT_
+   fun:_ZN5boost12log_mt_posix7sources21basic_severity_loggerINS1_12basic_loggerIcNS1_18severity_logger_mtINS0_7trivial14severity_levelEEENS1_18multi_thread_modelINS0_3aux14light_rw_mutexEEEEES6_E20open_record_unlockedINS_9parameter3aux15tagged_argumentINS0_8keywords3tag8severityEKS6_EEEENS0_12basic_recordIcEERKT_
+   fun:_ZN5boost12log_mt_posix7sources22basic_composite_loggerIcNS1_18severity_logger_mtINS0_7trivial14severity_levelEEENS1_18multi_thread_modelINS0_3aux14light_rw_mutexEEENS_3mpl7vector1INS1_8severityIS5_EEEEE11open_recordINS_9parameter3aux15tagged_argumentINS0_8keywords3tag8severityEKS5_EEEENS0_12basic_recordIcEERKT_
+   fun:_ZNK7kitanda5kuito12bootstrapper7executeEv
+   fun:_ZN5kuito17test_bootstrapper11test_methodEv
+   fun:_ZN5kuitoL25test_bootstrapper_invokerEv
+   fun:_ZN5boost9unit_test9ut_detail7invokerINS1_6unusedEE6invokeIPFvvEEES3_RT_
+   fun:_ZN5boost9unit_test9ut_detail16callback0_impl_tINS1_6unusedEPFvvEE6invokeEv
+   fun:_ZNK5boost9unit_test9callback0INS0_9ut_detail6unusedEEclEv
+   fun:_ZN5boost9unit_test12_GLOBAL__N_121zero_return_wrapper_tINS0_9callback0INS0_9ut_detail6unusedEEEEclEv
+   fun:_ZN5boost9unit_test9ut_detail7invokerIiE6invokeINS0_12_GLOBAL__N_121zero_return_wrapper_tINS0_9callback0INS1_6unusedEEEEEEEiRT_
+   fun:_ZN5boost9unit_test9ut_detail16callback0_impl_tIiNS0_12_GLOBAL__N_121zero_return_wrapper_tINS0_9callback0INS1_6unusedEEEEEE6invokeEv
+   fun:_ZNK5boost9unit_test9callback0IiEclEv
+   fun:_ZN5boost6detail9do_invokeINS_10scoped_ptrINS0_24translate_exception_baseEEENS_9unit_test9callback0IiEEEEiRKT_RKT0_
+   fun:_ZN5boost17execution_monitor13catch_signalsERKNS_9unit_test9callback0IiEE
+   fun:_ZN5boost17execution_monitor7executeERKNS_9unit_test9callback0IiEE
+   fun:_ZN5boost9unit_test19unit_test_monitor_t21execute_and_translateERKNS0_9test_caseE
+   fun:_ZN5boost9unit_test14framework_impl5visitERKNS0_9test_caseE
+   fun:_ZN5boost9unit_test18traverse_test_treeERKNS0_9test_caseERNS0_17test_tree_visitorE
+}
+
+{
+   thread leak 8 32-bit
+   Memcheck:Leak
+   fun:_Znwj
+   fun:_ZN5boost12_GLOBAL__N_125make_external_thread_dataEv
+   fun:_ZN5boost6detail16add_new_tss_nodeEPKvNS_10shared_ptrINS0_20tss_cleanup_functionEEEPv
+   fun:_ZN5boost6detail12set_tss_dataEPKvNS_10shared_ptrINS0_20tss_cleanup_functionEEEPvb
+   fun:_ZN5boost6detail17sp_counted_impl_pINS_12log_mt_posix10attributes17basic_named_scopeIwE14implementationEE7disposeEv
+   fun:_ZN5boost10shared_ptrINS_12log_mt_posix10attributes17basic_named_scopeIwE14implementationEED1Ev
+   obj:/usr/local/pfh/lib/libboost_log.so.1.49.0
+   fun:_dl_fini
+   fun:__run_exit_handlers
+   fun:exit
+   fun:(below main)
+}
+
+{
+   thread leak 9 32-bit
+   Memcheck:Leak
+   fun:_Znwj
+   fun:_ZN5boost12_GLOBAL__N_125make_external_thread_dataEv
+   fun:_ZN5boost6detail16add_new_tss_nodeEPKvNS_10shared_ptrINS0_20tss_cleanup_functionEEEPv
+   fun:_ZN5boost6detail12set_tss_dataEPKvNS_10shared_ptrINS0_20tss_cleanup_functionEEEPvb
+   fun:_ZN5boost12log_mt_posix10basic_coreIcE11open_recordERKNS0_19basic_attribute_setIcEE
+   fun:_ZN5boost12log_mt_posix7sources12basic_loggerIcNS1_18severity_logger_mtINS0_7trivial14severity_levelEEENS1_18multi_thread_modelINS0_3aux14light_rw_mutexEEEE20open_record_unlockedINS_9parameter3aux15tagged_argumentINS0_8keywords3tag8severityEKS5_EEEENS0_12basic_recordIcEERKT_
+   fun:_ZN5boost12log_mt_posix7sources21basic_severity_loggerINS1_12basic_loggerIcNS1_18severity_logger_mtINS0_7trivial14severity_levelEEENS1_18multi_thread_modelINS0_3aux14light_rw_mutexEEEEES6_E20open_record_unlockedINS_9parameter3aux15tagged_argumentINS0_8keywords3tag8severityEKS6_EEEENS0_12basic_recordIcEERKT_
+   fun:_ZN5boost12log_mt_posix7sources22basic_composite_loggerIcNS1_18severity_logger_mtINS0_7trivial14severity_levelEEENS1_18multi_thread_modelINS0_3aux14light_rw_mutexEEENS_3mpl7vector1INS1_8severityIS5_EEEEE11open_recordINS_9parameter3aux15tagged_argumentINS0_8keywords3tag8severityEKS5_EEEENS0_12basic_recordIcEERKT_
+   fun:_ZN7utility16exercise_logging11test_methodEv
+   fun:_ZN7utilityL24exercise_logging_invokerEv
+   fun:_ZN5boost9unit_test9ut_detail7invokerINS1_6unusedEE6invokeIPFvvEEES3_RT_
+   fun:_ZN5boost9unit_test9ut_detail16callback0_impl_tINS1_6unusedEPFvvEE6invokeEv
+   fun:_ZNK5boost9unit_test9callback0INS0_9ut_detail6unusedEEclEv
+   fun:_ZN5boost9unit_test12_GLOBAL__N_121zero_return_wrapper_tINS0_9callback0INS0_9ut_detail6unusedEEEEclEv
+   fun:_ZN5boost9unit_test9ut_detail7invokerIiE6invokeINS0_12_GLOBAL__N_121zero_return_wrapper_tINS0_9callback0INS1_6unusedEEEEEEEiRT_
+   fun:_ZN5boost9unit_test9ut_detail16callback0_impl_tIiNS0_12_GLOBAL__N_121zero_return_wrapper_tINS0_9callback0INS1_6unusedEEEEEE6invokeEv
+   fun:_ZNK5boost9unit_test9callback0IiEclEv
+   fun:_ZN5boost6detail9do_invokeINS_10scoped_ptrINS0_24translate_exception_baseEEENS_9unit_test9callback0IiEEEEiRKT_RKT0_
+   fun:_ZN5boost17execution_monitor13catch_signalsERKNS_9unit_test9callback0IiEE
+   fun:_ZN5boost17execution_monitor7executeERKNS_9unit_test9callback0IiEE
+   fun:_ZN5boost9unit_test19unit_test_monitor_t21execute_and_translateERKNS0_9test_caseE
+   fun:_ZN5boost9unit_test14framework_impl5visitERKNS0_9test_caseE
+   fun:_ZN5boost9unit_test18traverse_test_treeERKNS0_9test_caseERNS0_17test_tree_visitorE
+   fun:_ZN5boost9unit_test18traverse_test_treeEmRNS0_17test_tree_visitorE
+}
+
+{
+   thread leak 9
+   Memcheck:Leak
+   fun:_Znwm
+   fun:_ZN5boost12_GLOBAL__N_125make_external_thread_dataEv
+   fun:_ZN5boost6detail16add_new_tss_nodeEPKvNS_10shared_ptrINS0_20tss_cleanup_functionEEEPv
+   fun:_ZN5boost6detail12set_tss_dataEPKvNS_10shared_ptrINS0_20tss_cleanup_functionEEEPvb
+   fun:_ZN5boost12log_mt_posix10basic_coreIcE11open_recordERKNS0_19basic_attribute_setIcEE
+   fun:_ZN5boost12log_mt_posix7sources12basic_loggerIcNS1_18severity_logger_mtINS0_7trivial14severity_levelEEENS1_18multi_thread_modelINS0_3aux14light_rw_mutexEEEE20open_record_unlockedINS_9parameter3aux15tagged_argumentINS0_8keywords3tag8severityEKS5_EEEENS0_12basic_recordIcEERKT_
+   fun:_ZN5boost12log_mt_posix7sources21basic_severity_loggerINS1_12basic_loggerIcNS1_18severity_logger_mtINS0_7trivial14severity_levelEEENS1_18multi_thread_modelINS0_3aux14light_rw_mutexEEEEES6_E20open_record_unlockedINS_9parameter3aux15tagged_argumentINS0_8keywords3tag8severityEKS6_EEEENS0_12basic_recordIcEERKT_
+   fun:_ZN5boost12log_mt_posix7sources22basic_composite_loggerIcNS1_18severity_logger_mtINS0_7trivial14severity_levelEEENS1_18multi_thread_modelINS0_3aux14light_rw_mutexEEENS_3mpl7vector1INS1_8severityIS5_EEEEE11open_recordINS_9parameter3aux15tagged_argumentINS0_8keywords3tag8severityEKS5_EEEENS0_12basic_recordIcEERKT_
+   fun:_ZN7utility46exception_shall_be_usable_as_a_boost_exception11test_methodEv
+   fun:_ZN7utilityL54exception_shall_be_usable_as_a_boost_exception_invokerEv
+   fun:_ZN5boost9unit_test9ut_detail7invokerINS1_6unusedEE6invokeIPFvvEEES3_RT_
+   fun:_ZN5boost9unit_test9ut_detail16callback0_impl_tINS1_6unusedEPFvvEE6invokeEv
+   fun:_ZNK5boost9unit_test9callback0INS0_9ut_detail6unusedEEclEv
+   fun:_ZN5boost9unit_test12_GLOBAL__N_121zero_return_wrapper_tINS0_9callback0INS0_9ut_detail6unusedEEEEclEv
+   fun:_ZN5boost9unit_test9ut_detail7invokerIiE6invokeINS0_12_GLOBAL__N_121zero_return_wrapper_tINS0_9callback0INS1_6unusedEEEEEEEiRT_
+   fun:_ZN5boost9unit_test9ut_detail16callback0_impl_tIiNS0_12_GLOBAL__N_121zero_return_wrapper_tINS0_9callback0INS1_6unusedEEEEEE6invokeEv
+   fun:_ZNK5boost9unit_test9callback0IiEclEv
+   fun:_ZN5boost6detail9do_invokeINS_10scoped_ptrINS0_24translate_exception_baseEEENS_9unit_test9callback0IiEEEEiRKT_RKT0_
+   fun:_ZN5boost17execution_monitor13catch_signalsERKNS_9unit_test9callback0IiEE
+   fun:_ZN5boost17execution_monitor7executeERKNS_9unit_test9callback0IiEE
+   fun:_ZN5boost9unit_test19unit_test_monitor_t21execute_and_translateERKNS0_9test_caseE
+   fun:_ZN5boost9unit_test14framework_impl5visitERKNS0_9test_caseE
+   fun:_ZN5boost9unit_test18traverse_test_treeERKNS0_9test_caseERNS0_17test_tree_visitorE
+   fun:_ZN5boost9unit_test18traverse_test_treeEmRNS0_17test_tree_visitorE
+}
+
+{
+   thread leak 10 32-bit
+   Memcheck:Leak
+   fun:_Znwj
+   fun:_ZN5boost12_GLOBAL__N_125make_external_thread_dataEv
+   fun:_ZN5boost6detail16add_new_tss_nodeEPKvNS_10shared_ptrINS0_20tss_cleanup_functionEEEPv
+   fun:_ZN5boost6detail12set_tss_dataEPKvNS_10shared_ptrINS0_20tss_cleanup_functionEEEPvb
+   fun:_ZN5boost12log_mt_posix10basic_coreIcE11open_recordERKNS0_19basic_attribute_setIcEE
+   fun:_ZN5boost12log_mt_posix7sources12basic_loggerIcNS1_18severity_logger_mtINS0_7trivial14severity_levelEEENS1_18multi_thread_modelINS0_3aux14light_rw_mutexEEEE20open_record_unlockedINS_9parameter3aux15tagged_argumentINS0_8keywords3tag8severityEKS5_EEEENS0_12basic_recordIcEERKT_
+   fun:_ZN5boost12log_mt_posix7sources21basic_severity_loggerINS1_12basic_loggerIcNS1_18severity_logger_mtINS0_7trivial14severity_levelEEENS1_18multi_thread_modelINS0_3aux14light_rw_mutexEEEEES6_E20open_record_unlockedINS_9parameter3aux15tagged_argumentINS0_8keywords3tag8severityEKS6_EEEENS0_12basic_recordIcEERKT_
+   fun:_ZN5boost12log_mt_posix7sources22basic_composite_loggerIcNS1_18severity_logger_mtINS0_7trivial14severity_levelEEENS1_18multi_thread_modelINS0_3aux14light_rw_mutexEEENS_3mpl7vector1INS1_8severityIS5_EEEEE11open_recordINS_9parameter3aux15tagged_argumentINS0_8keywords3tag8severityEKS5_EEEENS0_12basic_recordIcEERKT_
+   fun:_ZN7utility46exception_shall_be_usable_as_a_boost_exception11test_methodEv
+   fun:_ZN7utilityL54exception_shall_be_usable_as_a_boost_exception_invokerEv
+   fun:_ZN5boost9unit_test9ut_detail7invokerINS1_6unusedEE6invokeIPFvvEEES3_RT_
+   fun:_ZN5boost9unit_test9ut_detail16callback0_impl_tINS1_6unusedEPFvvEE6invokeEv
+   fun:_ZNK5boost9unit_test9callback0INS0_9ut_detail6unusedEEclEv
+   fun:_ZN5boost9unit_test12_GLOBAL__N_121zero_return_wrapper_tINS0_9callback0INS0_9ut_detail6unusedEEEEclEv
+   fun:_ZN5boost9unit_test9ut_detail7invokerIiE6invokeINS0_12_GLOBAL__N_121zero_return_wrapper_tINS0_9callback0INS1_6unusedEEEEEEEiRT_
+   fun:_ZN5boost9unit_test9ut_detail16callback0_impl_tIiNS0_12_GLOBAL__N_121zero_return_wrapper_tINS0_9callback0INS1_6unusedEEEEEE6invokeEv
+   fun:_ZNK5boost9unit_test9callback0IiEclEv
+   fun:_ZN5boost6detail9do_invokeINS_10scoped_ptrINS0_24translate_exception_baseEEENS_9unit_test9callback0IiEEEEiRKT_RKT0_
+   fun:_ZN5boost17execution_monitor13catch_signalsERKNS_9unit_test9callback0IiEE
+   fun:_ZN5boost17execution_monitor7executeERKNS_9unit_test9callback0IiEE
+   fun:_ZN5boost9unit_test19unit_test_monitor_t21execute_and_translateERKNS0_9test_caseE
+   fun:_ZN5boost9unit_test14framework_impl5visitERKNS0_9test_caseE
+   fun:_ZN5boost9unit_test18traverse_test_treeERKNS0_9test_caseERNS0_17test_tree_visitorE
+   fun:_ZN5boost9unit_test18traverse_test_treeEmRNS0_17test_tree_visitorE
+}
+
+{
+   libxml strange leaks
+   Memcheck:Leak
+   fun:calloc
+   fun:_dlerror_run
+   fun:dlopen@@GLIBC_2.2.5
+   obj:/lib/x86_64-linux-gnu/liblzma.so.5.0.0
+   fun:lzma_auto_decoder
+   obj:/usr/lib/x86_64-linux-gnu/libxml2.so.2.8.0
+   fun:__libxml2_xzread
+   obj:/usr/lib/x86_64-linux-gnu/libxml2.so.2.8.0
+   fun:xmlParserInputBufferGrow
+   fun:xmlNewTextReader
+   fun:xmlNewTextReaderFilename
+}
+
+{
+   libxml strange leaks 2
+   Memcheck:Leak
+   fun:malloc
+   fun:local_strdup
+   fun:_dl_map_object
+   fun:dl_open_worker
+   fun:_dl_catch_error
+   fun:_dl_open
+   fun:dlopen_doit
+   fun:_dl_catch_error
+   fun:_dlerror_run
+   fun:dlopen@@GLIBC_2.2.5
+   obj:/lib/x86_64-linux-gnu/liblzma.so.5.0.0
+   fun:lzma_auto_decoder
+   obj:/usr/lib/x86_64-linux-gnu/libxml2.so.2.8.0
+   fun:__libxml2_xzread
+   obj:/usr/lib/x86_64-linux-gnu/libxml2.so.2.8.0
+   fun:xmlParserInputBufferGrow
+   fun:xmlNewTextReader
+   fun:xmlNewTextReaderFilename
+}
+
+{
+   boost log leaks
+   Memcheck:Leak
+   fun:_Znwm
+   fun:_ZN5boost12_GLOBAL__N_125make_external_thread_dataEv
+   fun:_ZN5boost6detail16add_new_tss_nodeEPKvNS_10shared_ptrINS0_20tss_cleanup_functionEEEPv
+   fun:_ZN5boost6detail12set_tss_dataEPKvNS_10shared_ptrINS0_20tss_cleanup_functionEEEPvb
+   fun:_ZN5boost12log_mt_posix10basic_coreIcE11open_recordERKNS0_19basic_attribute_setIcEE
+   fun:_ZN5boost12log_mt_posix7sources12basic_loggerIcNS1_15severity_loggerIN7kitanda7utility3log14severity_levelEEENS1_19single_thread_modelEE20open_record_unlockedINS_9parameter3aux15tagged_argumentINS0_8keywords3tag8severityEKS7_EEEENS0_12basic_recordIcEERKT_
+   fun:_ZN5boost12log_mt_posix7sources21basic_severity_loggerINS1_12basic_loggerIcNS1_15severity_loggerIN7kitanda7utility3log14severity_levelEEENS1_19single_thread_modelEEES8_E20open_record_unlockedINS_9parameter3aux15tagged_argumentINS0_8keywords3tag8severityEKS8_EEEENS0_12basic_recordIcEERKT_
+   fun:_ZN5boost12log_mt_posix7sources22basic_composite_loggerIcNS1_15severity_loggerIN7kitanda7utility3log14severity_levelEEENS1_19single_thread_modelENS_3mpl7vector1INS1_8severityIS7_EEEEE11open_recordINS_9parameter3aux15tagged_argumentINS0_8keywords3tag8severityEKS7_EEEENS0_12basic_recordIcEERKT_
+}
+
+{
+   boost log leaks 32-bit
+   Memcheck:Leak
+   fun:_Znwj
+   fun:_ZN5boost12_GLOBAL__N_125make_external_thread_dataEv
+   fun:_ZN5boost6detail16add_new_tss_nodeEPKvNS_10shared_ptrINS0_20tss_cleanup_functionEEEPv
+   fun:_ZN5boost6detail12set_tss_dataEPKvNS_10shared_ptrINS0_20tss_cleanup_functionEEEPvb
+   fun:_ZN5boost12log_mt_posix10basic_coreIcE11open_recordERKNS0_19basic_attribute_setIcEE
+   fun:_ZN5boost12log_mt_posix7sources12basic_loggerIcNS1_15severity_loggerIN7kitanda7utility3log14severity_levelEEENS1_19single_thread_modelEE20open_record_unlockedINS_9parameter3aux15tagged_argumentINS0_8keywords3tag8severityEKS7_EEEENS0_12basic_recordIcEERKT_
+   fun:_ZN5boost12log_mt_posix7sources21basic_severity_loggerINS1_12basic_loggerIcNS1_15severity_loggerIN7kitanda7utility3log14severity_levelEEENS1_19single_thread_modelEEES8_E20open_record_unlockedINS_9parameter3aux15tagged_argumentINS0_8keywords3tag8severityEKS8_EEEENS0_12basic_recordIcEERKT_
+   fun:_ZN5boost12log_mt_posix7sources22basic_composite_loggerIcNS1_15severity_loggerIN7kitanda7utility3log14severity_levelEEENS1_19single_thread_modelENS_3mpl7vector1INS1_8severityIS7_EEEEE11open_recordINS_9parameter3aux15tagged_argumentINS0_8keywords3tag8severityEKS7_EEEENS0_12basic_recordIcEERKT_
+}
+
+{
+   boost log 10
+   Memcheck:Leak
+   fun:_Znwm
+   fun:_ZN5boost12_GLOBAL__N_125make_external_thread_dataEv
+   fun:_ZN5boost6detail16add_new_tss_nodeEPKvNS_10shared_ptrINS0_20tss_cleanup_functionEEEPv
+   fun:_ZN5boost6detail12set_tss_dataEPKvNS_10shared_ptrINS0_20tss_cleanup_functionEEEPvb
+   fun:_ZN5boost12log_mt_posix10basic_coreIcE11open_recordERKNS0_19basic_attribute_setIcEE
+   fun:_ZN5boost12log_mt_posix7sources12basic_loggerIcNS1_23severity_channel_loggerIN7kitanda7utility3log14severity_levelESsEENS1_19single_thread_modelEE20open_record_unlockedINS_9parameter3aux15tagged_argumentINS0_8keywords3tag8severityEKS7_EEEENS0_12basic_recordIcEERKT_
+   fun:_ZN5boost12log_mt_posix7sources21basic_severity_loggerINS1_20basic_channel_loggerINS1_12basic_loggerIcNS1_23severity_channel_loggerIN7kitanda7utility3log14severity_levelESsEENS1_19single_thread_modelEEESsEES9_E20open_record_unlockedINS_9parameter3aux15tagged_argumentINS0_8keywords3tag8severityEKS9_EEEENS0_12basic_recordIcEERKT_
+   fun:_ZN5boost12log_mt_posix7sources22basic_composite_loggerIcNS1_23severity_channel_loggerIN7kitanda7utility3log14severity_levelESsEENS1_19single_thread_modelENS_3mpl7vector2INS1_8severityIS7_EENS1_7channelISsEEEEE11open_recordINS_9parameter3aux15tagged_argumentINS0_8keywords3tag8severityEKS7_EEEENS0_12basic_recordIcEERKT_
+   fun:*
+}
+
+{
+   boost log 10 32-bit
+   Memcheck:Leak
+   fun:_Znwj
+   fun:_ZN5boost12_GLOBAL__N_125make_external_thread_dataEv
+   fun:_ZN5boost6detail16add_new_tss_nodeEPKvNS_10shared_ptrINS0_20tss_cleanup_functionEEEPv
+   fun:_ZN5boost6detail12set_tss_dataEPKvNS_10shared_ptrINS0_20tss_cleanup_functionEEEPvb
+   fun:_ZN5boost12log_mt_posix10basic_coreIcE11open_recordERKNS0_19basic_attribute_setIcEE
+   fun:_ZN5boost12log_mt_posix7sources12basic_loggerIcNS1_23severity_channel_loggerIN7kitanda7utility3log14severity_levelESsEENS1_19single_thread_modelEE20open_record_unlockedINS_9parameter3aux15tagged_argumentINS0_8keywords3tag8severityEKS7_EEEENS0_12basic_recordIcEERKT_
+   fun:_ZN5boost12log_mt_posix7sources21basic_severity_loggerINS1_20basic_channel_loggerINS1_12basic_loggerIcNS1_23severity_channel_loggerIN7kitanda7utility3log14severity_levelESsEENS1_19single_thread_modelEEESsEES9_E20open_record_unlockedINS_9parameter3aux15tagged_argumentINS0_8keywords3tag8severityEKS9_EEEENS0_12basic_recordIcEERKT_
+   fun:_ZN5boost12log_mt_posix7sources22basic_composite_loggerIcNS1_23severity_channel_loggerIN7kitanda7utility3log14severity_levelESsEENS1_19single_thread_modelENS_3mpl7vector2INS1_8severityIS7_EENS1_7channelISsEEEEE11open_recordINS_9parameter3aux15tagged_argumentINS0_8keywords3tag8severityEKS7_EEEENS0_12basic_recordIcEERKT_
+   fun:*
+}

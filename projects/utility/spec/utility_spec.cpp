@@ -1,0 +1,320 @@
+/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+ *
+ * Copyright (C) 2012 Kitanda
+ *
+ * This file is distributed under the Kitanda Proprietary Software
+ * Licence. See doc/LICENCE.TXT for details.
+ *
+ */
+#define BOOST_TEST_DYN_LINK
+#define BOOST_TEST_MODULE utility_spec
+#include <string>
+#include <sstream>
+#include <boost/test/included/unit_test.hpp>
+#include <boost/exception/diagnostic_information.hpp>
+#include <boost/throw_exception.hpp>
+#include "dogen/utility/test/logging.hpp"
+#include "dogen/utility/io/jsonify_io.hpp"
+#include "dogen/utility/io/vector_io.hpp"
+#include "dogen/utility/io/pair_io.hpp"
+#include "dogen/utility/io/map_io.hpp"
+#include "dogen/utility/test/logging.hpp"
+#include "dogen/utility/log/life_cycle_manager.hpp"
+#include "dogen/utility/log/scoped_life_cycle_manager.hpp"
+#include "dogen/utility/log/logger.hpp"
+#include "dogen/utility/exception/utility_exception.hpp"
+#include "dogen/utility/io/hex_dumper_io.hpp"
+
+namespace this_is_a_test {
+
+class test_entity {
+public:
+    test_entity() : a_property_(10) {}
+
+public:
+    int a_property() const { return a_property_; }
+    void a_property(int value) { a_property_ = value; }
+
+private:
+    int a_property_;
+};
+
+inline std::ostream&
+operator<<(std::ostream& stream, const test_entity& value) {
+
+    return stream << "\"test_entity\" {"
+                  << " \"a_property\": " << value.a_property()
+                  << "}";
+}
+
+}
+
+namespace {
+
+class complex_type {
+public:
+    explicit complex_type(const int i) : i_(i) { }
+    int get() const { return(i_); }
+
+private:
+    int i_;
+};
+
+inline std::ostream&
+operator<<(std::ostream& stream, const complex_type& insertee) {
+    stream << "complex_type: { " << insertee.get() << " } ";
+    return(stream);
+}
+
+class test_exception_class : public dogen::utility::exception::exception {
+public:
+    test_exception_class(const char* message) :
+        dogen::utility::exception::exception(message) { }
+};
+
+const std::string prefix("log/utility/");
+
+std::string log_file_name(std::string function, unsigned int postfix = 0) {
+    std::ostringstream stream;
+    stream << prefix << function;
+    if (postfix != 0)
+        stream << postfix;
+    return stream.str();
+}
+
+const std::string test_suite("utility_spec");
+const std::string test_module("utility");
+
+}
+
+BOOST_AUTO_TEST_SUITE(utility)
+
+BOOST_AUTO_TEST_CASE(exercise_log_life_cycle_manager) {
+    // exericise 1: write a simple type to log file.
+    using namespace dogen::utility::log;
+    life_cycle_manager lcm;
+    const bool log_to_console(true);
+    lcm.initialise(log_file_name("exercise_log_life_cycle_manager", 1),
+        severity_level::debug,
+        log_to_console);
+
+    using namespace boost::log;
+    logger lg(logger_factory(test_suite));
+
+    BOOST_LOG_SEV(lg, warn) << "this is a streamed number: " << 123 << ".";
+    BOOST_LOG_SEV(lg, debug) << "this is a debug statement";
+
+    // exericise 2: write an entity to log file.
+    this_is_a_test::test_entity entity;
+    entity.a_property(20);
+    BOOST_LOG_SEV(lg, info) << "this is an entity: " << entity;
+
+    // exercise 3: write something at a log level lower than the
+    // current log level.
+    BOOST_LOG_SEV(lg, fine_debug) << "this statement should not appear";
+
+    // exercise 4: exercise error log levels
+    BOOST_LOG_SEV(lg, error) << "this statement is an error";
+    BOOST_LOG_SEV(lg, fatal) << "this statement is fatal";
+
+    // exercise 5: shutdown logging and initialise it with different settings.
+    lcm.shutdown();
+    lcm.initialise(log_file_name("exercise_log_life_cycle_manager", 2),
+        severity_level::fatal);
+    BOOST_LOG_SEV(lg, error) << "this statement should not appear";
+    BOOST_LOG_SEV(lg, fatal) << "this statement should appear";
+    lcm.shutdown();
+    BOOST_CHECK(true);
+}
+
+BOOST_AUTO_TEST_CASE(exercise_scoped_log_life_cycle_manager) {
+    using namespace dogen::utility::log;
+    logger lg(logger_factory(test_suite));
+    const bool log_to_console(true);
+
+    {
+        scoped_life_cycle_manager slcm(
+            log_file_name("exercise_scoped_log_life_cycle_manager", 1),
+            severity_level::debug,
+            log_to_console);
+        BOOST_LOG_SEV(lg, fine_debug)
+            << "scoped1: " << "this statement should not appear";
+        BOOST_LOG_SEV(lg, fatal)
+            << "scoped2: " << "this statement should appear";
+    }
+
+    {
+        scoped_life_cycle_manager slcm(
+            log_file_name("exercise_scoped_log_life_cycle_manager", 2),
+            severity_level::fine_debug,
+            log_to_console);
+        BOOST_LOG_SEV(lg, fine_debug)
+            << "scoped3: " << "this statement should appear";
+        BOOST_LOG_SEV(lg, fatal)
+            << "scoped4: " << "this statement should appear";
+    }
+}
+
+BOOST_AUTO_TEST_CASE(exericise_exception_derived_classes) {
+    SETUP_TEST_LOG_SOURCE("exericise_exception_derived_classes");
+    const std::string message("test message");
+
+    // exercise 1: as a standard exception
+    try {
+        BOOST_THROW_EXCEPTION(test_exception_class(message.c_str()));
+        BOOST_FAIL("Expected test_exception to be thrown.");
+    } catch(const std::exception& e) {
+        const std::string what(e.what());
+        BOOST_CHECK(what == message);
+        BOOST_LOG_SEV(lg, info) << "Exception thrown as expected. what: "
+                                << e.what();
+    }
+
+    // exercise 2: as a boost exception
+    try {
+        BOOST_THROW_EXCEPTION(test_exception_class(message.c_str()));
+        BOOST_FAIL("Expected test_exception to be thrown.");
+    } catch(const boost::exception& e) {
+        BOOST_LOG_SEV(lg, info)
+            << "Exception test_exception thrown as expected.";
+        BOOST_LOG_SEV(lg, info) << "diagnostic: "
+                                << boost::diagnostic_information(e);
+        BOOST_CHECK(true);
+    }
+}
+
+BOOST_AUTO_TEST_CASE(exception_shall_be_usable_as_a_standard_exception) {
+    SETUP_TEST_LOG_SOURCE("exception_shall_be_usable_as_a_standard_exception");
+    const std::string message("test message");
+    try {
+        throw(dogen::utility::exception::exception(message.c_str()));
+        BOOST_FAIL("dogen::utility::exception::exception not thrown.");
+    } catch(const std::exception& e) {
+        const std::string what(e.what());
+        BOOST_CHECK(what == message);
+        BOOST_LOG_SEV(lg, info) << "Exception thrown as expected. what: "
+                                << e.what();
+        BOOST_CHECK(true);
+    }
+}
+
+BOOST_AUTO_TEST_CASE(exception_shall_be_usable_as_a_boost_exception) {
+    SETUP_TEST_LOG_SOURCE("exception_shall_be_usable_as_a_boost_exception");
+    const std::string message("test message");
+    try {
+        BOOST_THROW_EXCEPTION(
+            dogen::utility::exception::exception(message.c_str()));
+        BOOST_FAIL("dogen::utility::exception::exception not thrown.");
+    } catch(const boost::exception& e) {
+        BOOST_LOG_SEV(lg, debug) << "Exception thrown as expected. diagnostic: "
+                                 << boost::diagnostic_information(e);
+        BOOST_CHECK(true);
+    }
+}
+
+BOOST_AUTO_TEST_CASE(exericise_hex_dumper_with_a_non_multiple_of_16) {
+    SETUP_TEST_LOG_SOURCE("exericise_hex_dumper_with_a_non_multiple_of_16");
+    const unsigned int size(1000);
+    char str[size];
+    for (unsigned int i(0); i < size; ++i) {
+        str[i] = char(i % 256);
+    }
+    std::ostringstream stream;
+    dogen::utility::streaming::hex_dumper(stream, str, size);
+    BOOST_LOG_SEV(lg, debug) << stream.str();
+    BOOST_CHECK(true);
+}
+
+BOOST_AUTO_TEST_CASE(exericise_hex_dumper_with_a_multiple_of_16) {
+    SETUP_TEST_LOG_SOURCE("exericise_hex_dumper_with_a_multiple_of_16");
+    const unsigned int size(64);
+    char str[size];
+    for (unsigned int i(0); i < size; ++i) {
+        str[i] = char(i % 256);
+    }
+    std::ostringstream stream;
+    dogen::utility::streaming::hex_dumper(stream, str, size);
+    BOOST_LOG_SEV(lg, debug) << stream.str();
+    BOOST_CHECK(true);
+}
+
+BOOST_AUTO_TEST_CASE(exericise_hex_dumper_with_less_than_16) {
+    SETUP_TEST_LOG_SOURCE("exericise_hex_dumper_with_a_multiple_of_16");
+    const unsigned int size(10);
+    char str[size];
+    for (unsigned int i(0); i < size; ++i) {
+        str[i] = char(i % 256);
+    }
+    std::ostringstream stream;
+    dogen::utility::streaming::hex_dumper(stream, str, size);
+    BOOST_LOG_SEV(lg, debug) << stream.str();
+    BOOST_CHECK(true);
+}
+
+BOOST_AUTO_TEST_CASE(exericise_hex_dumper_with_an_empty_buffer) {
+    SETUP_TEST_LOG_SOURCE("exericise_hex_dumper_with_an_empty_buffer");
+    const unsigned int size(0);
+    char str[1];
+    std::ostringstream stream;
+    dogen::utility::streaming::hex_dumper(stream, str, size);
+    BOOST_LOG_SEV(lg, debug) << stream.str();
+    BOOST_CHECK(true);
+}
+
+BOOST_AUTO_TEST_CASE(exercise_vector_inserter) {
+    SETUP_TEST_LOG_SOURCE("exercise_vector_inserter");
+    std::vector<int> ints;
+    ints.push_back(10);
+    ints.push_back(20);
+    ints.push_back(30);
+    BOOST_LOG_SEV(lg, debug) << "ints: " << ints;
+    BOOST_CHECK(true);
+}
+
+BOOST_AUTO_TEST_CASE(exercise_map_inserter) {
+    SETUP_TEST_LOG_SOURCE("exercise_map_inserter");
+    std::map<std::string, std::string> strings;
+    strings.insert(std::make_pair("first key", "first value"));
+    strings.insert(std::make_pair("second key", "second value"));
+    strings.insert(std::make_pair("third key", "third value"));
+    BOOST_LOG_SEV(lg, debug) << "strings: " << strings;
+    BOOST_CHECK(true);
+}
+
+BOOST_AUTO_TEST_CASE(exercise_pair_inserter) {
+    SETUP_TEST_LOG_SOURCE("exercise_pair_inserter");
+    std::pair<int, std::string> pair(std::make_pair(12, "test"));
+    BOOST_LOG_SEV(lg, debug) << "pair: " << pair;
+    BOOST_CHECK(true);
+}
+
+BOOST_AUTO_TEST_CASE(exercise_jsonify_inserter) {
+    SETUP_TEST_LOG_SOURCE("exercise_jsonify_inserter");
+    using dogen::utility::streaming::jsonify;
+
+    // exercise 1: strings
+    BOOST_LOG_SEV(lg, debug) << "std::string: "
+                             << jsonify(std::string("abc def"));
+    BOOST_LOG_SEV(lg, debug) << "unsigned char: "
+                             << jsonify((unsigned char)'a');
+    BOOST_LOG_SEV(lg, debug) << "char: " << jsonify('b');
+
+    // exercise 2: complex types
+    complex_type ct(12);
+    BOOST_LOG_SEV(lg, debug) << "complex_type: " << jsonify(ct);
+
+    // exercise 3: numbers
+    BOOST_LOG_SEV(lg, debug) << "unsigned int: " << jsonify((unsigned int)123);
+    BOOST_LOG_SEV(lg, debug) << "int: " << jsonify((int)457);
+    BOOST_LOG_SEV(lg, debug) << "unsigned short: "
+                             << jsonify((unsigned short)10);
+    BOOST_LOG_SEV(lg, debug) << "short: " << jsonify((short)15);
+    BOOST_LOG_SEV(lg, debug) << "unsigned long: "
+                             << jsonify((unsigned long)12345);
+    BOOST_LOG_SEV(lg, debug) << "long: " << jsonify((long)54321);
+    BOOST_LOG_SEV(lg, debug) << "float: " << jsonify((float)12.123);
+    BOOST_LOG_SEV(lg, debug) << "double: " << jsonify((double)3.14);
+    BOOST_CHECK(true);
+}
+
+BOOST_AUTO_TEST_SUITE_END()

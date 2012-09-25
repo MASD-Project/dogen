@@ -1,0 +1,407 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE boost_serialization>
+<boost_serialization signature="serialization::archive" version="9">
+<entity class_id="0" tracking_level="0" version="0">
+	<diagram_data class_id="1" tracking_level="0" version="0">
+		<attributes class_id="2" tracking_level="0" version="0">
+			<count>6</count>
+			<item_version>0</item_version>
+			<item class_id="3" tracking_level="1" version="0" object_id="_0">
+				<name>background</name>
+				<value class_id="4" tracking_level="0" version="0">
+					<which>1</which>
+					<value class_id="5" tracking_level="0" version="0">
+						<value>#ffffff</value>
+					</value>
+				</value>
+			</item>
+			<item object_id="_1">
+				<name>pagebreak</name>
+				<value>
+					<which>1</which>
+					<value>
+						<value>#000099</value>
+					</value>
+				</value>
+			</item>
+			<item object_id="_2">
+				<name>paper</name>
+				<value>
+					<which>10</which>
+					<value class_id="6" tracking_level="0" version="0">
+						<count>1</count>
+						<item_version>0</item_version>
+						<item class_id="7" tracking_level="1" version="0" object_id="_3">
+							<type>paper</type>
+							<value class_id="8" tracking_level="0" version="0">
+								<count>8</count>
+								<item_version>1</item_version>
+								<item class_id="9" tracking_level="0" version="1">
+									<px class_id_reference="3" object_id="_4">
+										<name>name</name>
+										<value>
+											<which>6</which>
+											<value class_id="10" tracking_level="0" version="0">
+												<value>#A4#</value>
+											</value>
+										</value>
+									</px>
+								</item>
+								<item>
+									<px class_id_reference="3" object_id="_5">
+										<name>tmargin</name>
+										<value>
+											<which>3</which>
+											<value class_id="11" tracking_level="0" version="0">
+												<value>2.8222000598907471</value>
+											</value>
+										</value>
+									</px>
+								</item>
+								<item>
+									<px class_id_reference="3" object_id="_6">
+										<name>bmargin</name>
+										<value>
+											<which>3</which>
+											<value>
+												<value>2.8222000598907471</value>
+											</value>
+										</value>
+									</px>
+								</item>
+								<item>
+									<px class_id_reference="3" object_id="_7">
+										<name>lmargin</name>
+										<value>
+											<which>3</which>
+											<value>
+												<value>2.8222000598907471</value>
+											</value>
+										</value>
+									</px>
+								</item>
+								<item>
+									<px class_id_reference="3" object_id="_8">
+										<name>rmargin</name>
+										<value>
+											<which>3</which>
+											<value>
+												<value>2.8222000598907471</value>
+											</value>
+										</value>
+									</px>
+								</item>
+								<item>
+									<px class_id_reference="3" object_id="_9">
+										<name>is_portrait</name>
+										<value>
+											<which>5</which>
+											<value class_id="12" tracking_level="0" version="0">
+												<value>true</value>
+											</value>
+										</value>
+									</px>
+								</item>
+								<item>
+									<px class_id_reference="3" object_id="_10">
+										<name>scaling</name>
+										<value>
+											<which>3</which>
+											<value>
+												<value>1</value>
+											</value>
+										</value>
+									</px>
+								</item>
+								<item>
+									<px class_id_reference="3" object_id="_11">
+										<name>fitto</name>
+										<value>
+											<which>5</which>
+											<value>
+												<value>false</value>
+											</value>
+										</value>
+									</px>
+								</item>
+							</value>
+							<inner_composite class_id="13" tracking_level="0" version="1">
+								<px class_id="-1"></px>
+							</inner_composite>
+						</item>
+					</value>
+				</value>
+			</item>
+			<item object_id="_12">
+				<name>grid</name>
+				<value>
+					<which>10</which>
+					<value>
+						<count>1</count>
+						<item_version>0</item_version>
+						<item object_id="_13">
+							<type>grid</type>
+							<value>
+								<count>4</count>
+								<item_version>1</item_version>
+								<item>
+									<px class_id_reference="3" object_id="_14">
+										<name>width_x</name>
+										<value>
+											<which>3</which>
+											<value>
+												<value>1</value>
+											</value>
+										</value>
+									</px>
+								</item>
+								<item>
+									<px class_id_reference="3" object_id="_15">
+										<name>width_y</name>
+										<value>
+											<which>3</which>
+											<value>
+												<value>1</value>
+											</value>
+										</value>
+									</px>
+								</item>
+								<item>
+									<px class_id_reference="3" object_id="_16">
+										<name>visible_x</name>
+										<value>
+											<which>4</which>
+											<value class_id="14" tracking_level="0" version="0">
+												<value>1</value>
+											</value>
+										</value>
+									</px>
+								</item>
+								<item>
+									<px class_id_reference="3" object_id="_17">
+										<name>visible_y</name>
+										<value>
+											<which>4</which>
+											<value>
+												<value>1</value>
+											</value>
+										</value>
+									</px>
+								</item>
+							</value>
+							<inner_composite>
+								<px class_id_reference="7" object_id="_18">
+									<type>color</type>
+									<value>
+										<count>0</count>
+										<item_version>1</item_version>
+									</value>
+									<inner_composite>
+										<px class_id="-1"></px>
+									</inner_composite>
+								</px>
+							</inner_composite>
+						</item>
+					</value>
+				</value>
+			</item>
+			<item object_id="_19">
+				<name>color</name>
+				<value>
+					<which>1</which>
+					<value>
+						<value>#d6d6d6</value>
+					</value>
+				</value>
+			</item>
+			<item object_id="_20">
+				<name>guides</name>
+				<value>
+					<which>10</which>
+					<value>
+						<count>1</count>
+						<item_version>0</item_version>
+						<item object_id="_21">
+							<type>guides</type>
+							<value>
+								<count>2</count>
+								<item_version>1</item_version>
+								<item>
+									<px class_id_reference="3" object_id="_22">
+										<name>hguides</name>
+										<value>
+											<which>0</which>
+											<value class_id="15" tracking_level="0" version="0">
+												<dummy>0</dummy>
+											</value>
+										</value>
+									</px>
+								</item>
+								<item>
+									<px class_id_reference="3" object_id="_23">
+										<name>vguides</name>
+										<value>
+											<which>0</which>
+											<value>
+												<dummy>0</dummy>
+											</value>
+										</value>
+									</px>
+								</item>
+							</value>
+							<inner_composite>
+								<px class_id="-1"></px>
+							</inner_composite>
+						</item>
+					</value>
+				</value>
+			</item>
+		</attributes>
+	</diagram_data>
+	<layers class_id="16" tracking_level="0" version="0">
+		<count>1</count>
+		<item_version>0</item_version>
+		<item class_id="17" tracking_level="0" version="0">
+			<name>Background</name>
+			<visible>1</visible>
+			<active>1</active>
+			<objects class_id="18" tracking_level="0" version="0">
+				<count>1</count>
+				<item_version>0</item_version>
+				<item class_id="19" tracking_level="0" version="0">
+					<type>UML - LargePackage</type>
+					<version>0</version>
+					<id>O0</id>
+					<attributes>
+						<count>12</count>
+						<item_version>0</item_version>
+						<item object_id="_24">
+							<name>obj_pos</name>
+							<value>
+								<which>2</which>
+								<value class_id="20" tracking_level="0" version="0">
+									<value>11.25,12.6875</value>
+								</value>
+							</value>
+						</item>
+						<item object_id="_25">
+							<name>obj_bb</name>
+							<value>
+								<which>7</which>
+								<value class_id="21" tracking_level="0" version="0">
+									<value>11.2,11.6375;30.9875,27.175</value>
+								</value>
+							</value>
+						</item>
+						<item object_id="_26">
+							<name>meta</name>
+							<value>
+								<which>10</which>
+								<value>
+									<count>1</count>
+									<item_version>0</item_version>
+									<item object_id="_27">
+										<type>dict</type>
+										<value>
+											<count>0</count>
+											<item_version>1</item_version>
+										</value>
+										<inner_composite>
+											<px class_id="-1"></px>
+										</inner_composite>
+									</item>
+								</value>
+							</value>
+						</item>
+						<item object_id="_28">
+							<name>elem_corner</name>
+							<value>
+								<which>2</which>
+								<value>
+									<value>11.25,12.6875</value>
+								</value>
+							</value>
+						</item>
+						<item object_id="_29">
+							<name>elem_width</name>
+							<value>
+								<which>3</which>
+								<value>
+									<value>19.6875</value>
+								</value>
+							</value>
+						</item>
+						<item object_id="_30">
+							<name>elem_height</name>
+							<value>
+								<which>3</which>
+								<value>
+									<value>14.4375</value>
+								</value>
+							</value>
+						</item>
+						<item object_id="_31">
+							<name>line_width</name>
+							<value>
+								<which>3</which>
+								<value>
+									<value>0.10000000149011612</value>
+								</value>
+							</value>
+						</item>
+						<item object_id="_32">
+							<name>line_colour</name>
+							<value>
+								<which>1</which>
+								<value>
+									<value>#000000</value>
+								</value>
+							</value>
+						</item>
+						<item object_id="_33">
+							<name>fill_colour</name>
+							<value>
+								<which>1</which>
+								<value>
+									<value>#ffffff</value>
+								</value>
+							</value>
+						</item>
+						<item object_id="_34">
+							<name>text_colour</name>
+							<value>
+								<which>1</which>
+								<value>
+									<value>#000000</value>
+								</value>
+							</value>
+						</item>
+						<item object_id="_35">
+							<name>stereotype</name>
+							<value>
+								<which>6</which>
+								<value>
+									<value>##</value>
+								</value>
+							</value>
+						</item>
+						<item object_id="_36">
+							<name>name</name>
+							<value>
+								<which>6</which>
+								<value>
+									<value>#package_1#</value>
+								</value>
+							</value>
+						</item>
+					</attributes>
+					<child_node class_id="22" tracking_level="0" version="0">
+						<initialized>0</initialized>
+					</child_node>
+				</item>
+			</objects>
+		</item>
+	</layers>
+</entity>
+</boost_serialization>
+

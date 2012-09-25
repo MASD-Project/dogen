@@ -1,0 +1,44 @@
+/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+ *
+ * Copyright (C) 2012 Kitanda
+ *
+ * This file is distributed under the Kitanda Proprietary Software
+ * Licence. See doc/LICENCE.TXT for details.
+ *
+ */
+#include <ostream>
+#include "dogen/utility/exception/invalid_enum_value.hpp"
+#include "dogen/utility/serialization/archive_types.hpp"
+
+namespace {
+
+const std::string invalid("\"archive_types::invalid\"");
+const std::string xml("\"archive_types::xml\"");
+const std::string text("\"archive_types::text\"");
+const std::string binary("\"archive_types::binary\"");
+
+const std::string error_message("Invalid or unexpected object type");
+
+}
+
+namespace dogen {
+namespace utility {
+namespace serialization {
+
+std::ostream& operator<<(std::ostream& stream, archive_types value) {
+    switch (value) {
+    case archive_types::invalid:
+        return stream << invalid;
+    case archive_types::xml:
+        return stream << xml;
+    case archive_types::text:
+        return stream << text;
+    case archive_types::binary:
+        return stream << binary;
+    default:
+        break;
+    }
+    throw utility::exception::invalid_enum_value(error_message);
+}
+
+} } }

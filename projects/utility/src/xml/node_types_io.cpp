@@ -1,0 +1,60 @@
+#include <string>
+#include <ostream>
+#include "dogen/utility/exception/invalid_enum_value.hpp"
+#include "dogen/utility/xml/node_types_io.hpp"
+
+namespace {
+
+const std::string none("none");
+const std::string element("element");
+const std::string attribute("attribute");
+const std::string text("text");
+const std::string cdata("cdata");
+const std::string entity_reference("entity_reference");
+const std::string entity("entity");
+const std::string processing_instruction("processing_instruction");
+const std::string comment("comment");
+const std::string document("document");
+const std::string document_type("document_type_declaration");
+const std::string document_fragment("document_fragment");
+const std::string notation("notation");
+const std::string whitespace("whitespace");
+const std::string significant_whitespace("significant_whitespace");
+const std::string end_element("end_element");
+const std::string end_entity("end_entity");
+const std::string xml_declaration("xml_declaration");
+
+const std::string error_message("Invalid or unexpected node type");
+}
+
+namespace dogen {
+namespace utility {
+namespace xml {
+
+std::ostream& operator<<(std::ostream& stream, node_types value) {
+    switch (value) {
+    case node_types::none: return stream << none;
+    case node_types::element: return stream << element;
+    case node_types::attribute: return stream << attribute;
+    case node_types::text: return stream << text;
+    case node_types::cdata: return stream << cdata;
+    case node_types::entity_reference: return stream << entity_reference;
+    case node_types::entity: return stream << entity;
+    case node_types::processing_instruction:
+        return stream << processing_instruction;
+    case node_types::comment: return stream << comment;
+    case node_types::document: return stream << document;
+    case node_types::document_type: return stream << document_type;
+    case node_types::document_fragment: return stream << document_fragment;
+    case node_types::notation: return stream << notation;
+    case node_types::whitespace: return stream << whitespace;
+    case node_types::significant_whitespace:
+        return stream << significant_whitespace;
+    case node_types::end_element: return stream << end_element;
+    case node_types::end_entity: return stream << end_entity;
+    case node_types::xml_declaration: return stream << xml_declaration;
+    }
+    throw dogen::utility::exception::invalid_enum_value(error_message);
+}
+
+} } }

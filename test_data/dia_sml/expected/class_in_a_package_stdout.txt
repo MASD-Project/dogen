@@ -1,0 +1,1319 @@
+Filename: /empty_tds/actual/include/class_in_a_package/database/class_in_a_package_db.hpp
+Contents: 
+/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+ *
+ * Copyright (C) 2012 Kitanda
+ *
+ * This file is distributed under the Kitanda Proprietary Software
+ * Licence. See doc/LICENCE.TXT for details.
+ *
+ */
+#include "class_in_a_package/database/package1/first_class_db.hpp"
+
+Filename: /empty_tds/actual/include/class_in_a_package/database/package1/first_class_db.hpp
+Contents: 
+/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+ *
+ * Copyright (C) 2012 Kitanda
+ *
+ * This file is distributed under the Kitanda Proprietary Software
+ * Licence. See doc/LICENCE.TXT for details.
+ *
+ */
+#ifndef CLASS_IN_A_PACKAGE_DATABASE_PACKAGE1_FIRST_CLASS_DB_HPP
+#define CLASS_IN_A_PACKAGE_DATABASE_PACKAGE1_FIRST_CLASS_DB_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include <boost/optional.hpp>
+#include <pqxx/connection.hxx>
+#include <vector>
+#include "class_in_a_package/domain/package1/first_class.hpp"
+
+namespace class_in_a_package {
+namespace package1 {
+
+class first_class_data_exchanger {
+public:
+    first_class_data_exchanger() = default;
+    first_class_data_exchanger(const first_class_data_exchanger&) = delete;
+    ~first_class_data_exchanger() = default;
+    first_class_data_exchanger(first_class_data_exchanger&&) = delete;
+
+private:
+    std::string format_sql(const std::string& format_str,
+        const boost::optional<versioned_key> id = boost::optional<versioned_key>());
+
+    std::vector<class_in_a_package::package1::first_class> load_internal(
+        pqxx::connection& connection,
+        const boost::optional<versioned_key> id =boost::optional<versioned_key>());
+
+    void erase_internal(pqxx::connection& connection,
+        const boost::optional<versioned_key> id = boost::optional<versioned_key>());
+
+public:
+    std::vector<class_in_a_package::package1::first_class> load(
+        pqxx::connection& connection,
+        const boost::optional<versioned_key> id =boost::optional<versioned_key>());
+
+    void save(
+        pqxx::connection& connection,
+        std::vector<class_in_a_package::package1::first_class> values);
+
+    void erase(pqxx::connection& connection);
+    void erase(pqxx::connection& connection, versioned_key id);
+};
+
+} }
+#endif
+
+Filename: /empty_tds/actual/include/class_in_a_package/domain/class_in_a_package.hpp
+Contents: 
+/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+ *
+ * Copyright (C) 2012 Kitanda
+ *
+ * This file is distributed under the Kitanda Proprietary Software
+ * Licence. See doc/LICENCE.TXT for details.
+ *
+ */
+#include "class_in_a_package/domain/package1/first_class.hpp"
+#include "class_in_a_package/domain/unversioned_key.hpp"
+#include "class_in_a_package/domain/versioned_key.hpp"
+
+Filename: /empty_tds/actual/include/class_in_a_package/domain/package1/first_class.hpp
+Contents: 
+/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+ *
+ * Copyright (C) 2012 Kitanda
+ *
+ * This file is distributed under the Kitanda Proprietary Software
+ * Licence. See doc/LICENCE.TXT for details.
+ *
+ */
+#ifndef CLASS_IN_A_PACKAGE_DOMAIN_PACKAGE1_FIRST_CLASS_HPP
+#define CLASS_IN_A_PACKAGE_DOMAIN_PACKAGE1_FIRST_CLASS_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include <algorithm>
+#include <iosfwd>
+#include "class_in_a_package/domain/versioned_key.hpp"
+
+namespace class_in_a_package {
+namespace package1 {
+
+class first_class_serializer;
+
+class first_class {
+public:
+    first_class(const first_class&) = default;
+    ~first_class() = default;
+    first_class(first_class&&) = default;
+
+public:
+    first_class();
+
+public:
+    first_class(
+        int public_attribute,
+        int private_attribute,
+        class_in_a_package::versioned_key versioned_key);
+
+public:
+    friend class class_in_a_package::package1::first_class_serializer;
+
+public:
+    void to_stream(std::ostream& stream) const;
+
+public:
+    int public_attribute() const {
+        return public_attribute_;
+    }
+
+    void public_attribute(int value) {
+        public_attribute_ = value;
+    }
+
+    int private_attribute() const {
+        return private_attribute_;
+    }
+
+    void private_attribute(int value) {
+        private_attribute_ = value;
+    }
+
+    class_in_a_package::versioned_key versioned_key() const {
+        return versioned_key_;
+    }
+
+    void versioned_key(class_in_a_package::versioned_key value) {
+        versioned_key_ = value;
+    }
+
+public:
+    bool operator==(const first_class& rhs) const {
+        return public_attribute_ == rhs.public_attribute_ &&
+            private_attribute_ == rhs.private_attribute_ &&
+            versioned_key_ == rhs.versioned_key_;
+    }
+
+    bool operator!=(const first_class rhs) const {
+        return !this->operator==(rhs);
+    }
+
+public:
+    void swap(first_class& other);
+    first_class& operator=(first_class other);
+
+private:
+    int public_attribute_;
+    int private_attribute_;
+    class_in_a_package::versioned_key versioned_key_;
+};
+
+} }
+
+namespace std {
+
+template<>
+inline void swap(
+    class_in_a_package::package1::first_class& lhs,
+    class_in_a_package::package1::first_class& rhs) {
+    lhs.swap(rhs);
+}
+
+}
+
+#endif
+
+Filename: /empty_tds/actual/include/class_in_a_package/domain/unversioned_key.hpp
+Contents: 
+/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+ *
+ * Copyright (C) 2012 Kitanda
+ *
+ * This file is distributed under the Kitanda Proprietary Software
+ * Licence. See doc/LICENCE.TXT for details.
+ *
+ */
+#ifndef CLASS_IN_A_PACKAGE_DOMAIN_UNVERSIONED_KEY_HPP
+#define CLASS_IN_A_PACKAGE_DOMAIN_UNVERSIONED_KEY_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include <algorithm>
+#include <iosfwd>
+
+namespace class_in_a_package {
+
+class unversioned_key_serializer;
+
+class unversioned_key {
+public:
+    unversioned_key(const unversioned_key&) = default;
+    ~unversioned_key() = default;
+    unversioned_key(unversioned_key&&) = default;
+
+public:
+    unversioned_key();
+
+public:
+    explicit unversioned_key(unsigned int id);
+
+public:
+    friend class class_in_a_package::unversioned_key_serializer;
+
+public:
+    void to_stream(std::ostream& stream) const;
+
+public:
+    unsigned int id() const {
+        return id_;
+    }
+
+    void id(unsigned int value) {
+        id_ = value;
+    }
+
+public:
+    bool operator==(const unversioned_key& rhs) const {
+        return id_ == rhs.id_;
+    }
+
+    bool operator!=(const unversioned_key rhs) const {
+        return !this->operator==(rhs);
+    }
+
+public:
+    void swap(unversioned_key& other);
+    unversioned_key& operator=(unversioned_key other);
+
+private:
+    unsigned int id_;
+};
+
+}
+
+namespace std {
+
+template<>
+inline void swap(
+    class_in_a_package::unversioned_key& lhs,
+    class_in_a_package::unversioned_key& rhs) {
+    lhs.swap(rhs);
+}
+
+}
+
+#endif
+
+Filename: /empty_tds/actual/include/class_in_a_package/domain/versioned_key.hpp
+Contents: 
+/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+ *
+ * Copyright (C) 2012 Kitanda
+ *
+ * This file is distributed under the Kitanda Proprietary Software
+ * Licence. See doc/LICENCE.TXT for details.
+ *
+ */
+#ifndef CLASS_IN_A_PACKAGE_DOMAIN_VERSIONED_KEY_HPP
+#define CLASS_IN_A_PACKAGE_DOMAIN_VERSIONED_KEY_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include <algorithm>
+#include <iosfwd>
+#include "class_in_a_package/domain/unversioned_key.hpp"
+
+namespace class_in_a_package {
+
+class versioned_key_serializer;
+
+class versioned_key {
+public:
+    versioned_key(const versioned_key&) = default;
+    ~versioned_key() = default;
+    versioned_key(versioned_key&&) = default;
+
+public:
+    versioned_key();
+
+public:
+    versioned_key(
+        unsigned int id,
+        unsigned int version);
+
+public:
+    friend class class_in_a_package::versioned_key_serializer;
+
+public:
+    void to_stream(std::ostream& stream) const;
+
+public:
+    unversioned_key to_unversioned() const;
+
+public:
+    unsigned int id() const {
+        return id_;
+    }
+
+    void id(unsigned int value) {
+        id_ = value;
+    }
+
+    unsigned int version() const {
+        return version_;
+    }
+
+    void version(unsigned int value) {
+        version_ = value;
+    }
+
+public:
+    bool operator==(const versioned_key& rhs) const {
+        return id_ == rhs.id_ &&
+            version_ == rhs.version_;
+    }
+
+    bool operator!=(const versioned_key rhs) const {
+        return !this->operator==(rhs);
+    }
+
+public:
+    void swap(versioned_key& other);
+    versioned_key& operator=(versioned_key other);
+
+private:
+    unsigned int id_;
+    unsigned int version_;
+};
+
+}
+
+namespace std {
+
+template<>
+inline void swap(
+    class_in_a_package::versioned_key& lhs,
+    class_in_a_package::versioned_key& rhs) {
+    lhs.swap(rhs);
+}
+
+}
+
+#endif
+
+Filename: /empty_tds/actual/include/class_in_a_package/hash/class_in_a_package_hash.hpp
+Contents: 
+/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+ *
+ * Copyright (C) 2012 Kitanda
+ *
+ * This file is distributed under the Kitanda Proprietary Software
+ * Licence. See doc/LICENCE.TXT for details.
+ *
+ */
+#include "class_in_a_package/hash/package1/first_class_hash.hpp"
+#include "class_in_a_package/hash/unversioned_key_hash.hpp"
+#include "class_in_a_package/hash/versioned_key_hash.hpp"
+
+Filename: /empty_tds/actual/include/class_in_a_package/hash/package1/first_class_hash.hpp
+Contents: 
+/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+ *
+ * Copyright (C) 2012 Kitanda
+ *
+ * This file is distributed under the Kitanda Proprietary Software
+ * Licence. See doc/LICENCE.TXT for details.
+ *
+ */
+#ifndef CLASS_IN_A_PACKAGE_HASH_PACKAGE1_FIRST_CLASS_HASH_HPP
+#define CLASS_IN_A_PACKAGE_HASH_PACKAGE1_FIRST_CLASS_HASH_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include <functional>
+#include "class_in_a_package/domain/package1/first_class.hpp"
+#include "class_in_a_package/hash/versioned_key_hash.hpp"
+#include "kitanda/utility/hash/combine.hpp"
+
+namespace std {
+
+template<>
+class hash<class_in_a_package::package1::first_class> {
+public:
+    size_t operator()(class_in_a_package::package1::first_class value) const {
+        using kitanda::utility::hash::combine;
+        std::size_t seed(0);
+
+        combine(seed, value.public_attribute());
+        combine(seed, value.private_attribute());
+        combine(seed, value.versioned_key());
+
+        return seed;
+    }
+};
+
+}
+#endif
+
+Filename: /empty_tds/actual/include/class_in_a_package/hash/unversioned_key_hash.hpp
+Contents: 
+/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+ *
+ * Copyright (C) 2012 Kitanda
+ *
+ * This file is distributed under the Kitanda Proprietary Software
+ * Licence. See doc/LICENCE.TXT for details.
+ *
+ */
+#ifndef CLASS_IN_A_PACKAGE_HASH_UNVERSIONED_KEY_HASH_HPP
+#define CLASS_IN_A_PACKAGE_HASH_UNVERSIONED_KEY_HASH_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include <functional>
+#include "class_in_a_package/domain/unversioned_key.hpp"
+#include "kitanda/utility/hash/combine.hpp"
+
+namespace std {
+
+template<>
+class hash<class_in_a_package::unversioned_key> {
+public:
+    size_t operator()(class_in_a_package::unversioned_key value) const {
+        using kitanda::utility::hash::combine;
+        std::size_t seed(0);
+
+        combine(seed, value.id());
+
+        return seed;
+    }
+};
+
+}
+#endif
+
+Filename: /empty_tds/actual/include/class_in_a_package/hash/versioned_key_hash.hpp
+Contents: 
+/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+ *
+ * Copyright (C) 2012 Kitanda
+ *
+ * This file is distributed under the Kitanda Proprietary Software
+ * Licence. See doc/LICENCE.TXT for details.
+ *
+ */
+#ifndef CLASS_IN_A_PACKAGE_HASH_VERSIONED_KEY_HASH_HPP
+#define CLASS_IN_A_PACKAGE_HASH_VERSIONED_KEY_HASH_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include <functional>
+#include "class_in_a_package/domain/versioned_key.hpp"
+#include "kitanda/utility/hash/combine.hpp"
+
+namespace std {
+
+template<>
+class hash<class_in_a_package::versioned_key> {
+public:
+    size_t operator()(class_in_a_package::versioned_key value) const {
+        using kitanda::utility::hash::combine;
+        std::size_t seed(0);
+
+        combine(seed, value.id());
+        combine(seed, value.version());
+
+        return seed;
+    }
+};
+
+}
+#endif
+
+Filename: /empty_tds/actual/include/class_in_a_package/io/class_in_a_package_io.hpp
+Contents: 
+/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+ *
+ * Copyright (C) 2012 Kitanda
+ *
+ * This file is distributed under the Kitanda Proprietary Software
+ * Licence. See doc/LICENCE.TXT for details.
+ *
+ */
+#include "class_in_a_package/io/package1/first_class_io.hpp"
+#include "class_in_a_package/io/unversioned_key_io.hpp"
+#include "class_in_a_package/io/versioned_key_io.hpp"
+
+Filename: /empty_tds/actual/include/class_in_a_package/io/package1/first_class_io.hpp
+Contents: 
+/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+ *
+ * Copyright (C) 2012 Kitanda
+ *
+ * This file is distributed under the Kitanda Proprietary Software
+ * Licence. See doc/LICENCE.TXT for details.
+ *
+ */
+#ifndef CLASS_IN_A_PACKAGE_IO_PACKAGE1_FIRST_CLASS_IO_HPP
+#define CLASS_IN_A_PACKAGE_IO_PACKAGE1_FIRST_CLASS_IO_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include <iosfwd>
+#include "class_in_a_package/domain/package1/first_class.hpp"
+
+namespace class_in_a_package {
+namespace package1 {
+
+std::ostream&
+operator<<(std::ostream& stream,
+    class_in_a_package::package1::first_class value);
+
+} }
+
+#endif
+
+Filename: /empty_tds/actual/include/class_in_a_package/io/unversioned_key_io.hpp
+Contents: 
+/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+ *
+ * Copyright (C) 2012 Kitanda
+ *
+ * This file is distributed under the Kitanda Proprietary Software
+ * Licence. See doc/LICENCE.TXT for details.
+ *
+ */
+#ifndef CLASS_IN_A_PACKAGE_IO_UNVERSIONED_KEY_IO_HPP
+#define CLASS_IN_A_PACKAGE_IO_UNVERSIONED_KEY_IO_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include <iosfwd>
+#include "class_in_a_package/domain/unversioned_key.hpp"
+
+namespace class_in_a_package {
+
+std::ostream&
+operator<<(std::ostream& stream,
+    class_in_a_package::unversioned_key value);
+
+}
+
+#endif
+
+Filename: /empty_tds/actual/include/class_in_a_package/io/versioned_key_io.hpp
+Contents: 
+/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+ *
+ * Copyright (C) 2012 Kitanda
+ *
+ * This file is distributed under the Kitanda Proprietary Software
+ * Licence. See doc/LICENCE.TXT for details.
+ *
+ */
+#ifndef CLASS_IN_A_PACKAGE_IO_VERSIONED_KEY_IO_HPP
+#define CLASS_IN_A_PACKAGE_IO_VERSIONED_KEY_IO_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include <iosfwd>
+#include "class_in_a_package/domain/versioned_key.hpp"
+
+namespace class_in_a_package {
+
+std::ostream&
+operator<<(std::ostream& stream,
+    class_in_a_package::versioned_key value);
+
+}
+
+#endif
+
+Filename: /empty_tds/actual/include/class_in_a_package/serialization/class_in_a_package_ser.hpp
+Contents: 
+/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+ *
+ * Copyright (C) 2012 Kitanda
+ *
+ * This file is distributed under the Kitanda Proprietary Software
+ * Licence. See doc/LICENCE.TXT for details.
+ *
+ */
+#include "class_in_a_package/serialization/package1/first_class_ser.hpp"
+#include "class_in_a_package/serialization/unversioned_key_ser.hpp"
+#include "class_in_a_package/serialization/versioned_key_ser.hpp"
+
+Filename: /empty_tds/actual/include/class_in_a_package/serialization/package1/first_class_ser.hpp
+Contents: 
+/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+ *
+ * Copyright (C) 2012 Kitanda
+ *
+ * This file is distributed under the Kitanda Proprietary Software
+ * Licence. See doc/LICENCE.TXT for details.
+ *
+ */
+#ifndef CLASS_IN_A_PACKAGE_SERIALIZATION_PACKAGE1_FIRST_CLASS_SER_HPP
+#define CLASS_IN_A_PACKAGE_SERIALIZATION_PACKAGE1_FIRST_CLASS_SER_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include <boost/serialization/nvp.hpp>
+#include "class_in_a_package/domain/package1/first_class.hpp"
+#include "class_in_a_package/serialization/versioned_key_ser.hpp"
+
+namespace class_in_a_package {
+namespace package1 {
+
+class first_class_serializer {
+public:
+    template<typename Archive>
+    void serialize(Archive & archive,
+        class_in_a_package::package1::first_class& value,
+        const unsigned int /*version*/) {
+        using boost::serialization::make_nvp;
+
+        archive & make_nvp("public_attribute", value.public_attribute_);
+        archive & make_nvp("private_attribute", value.private_attribute_);
+        archive & make_nvp("versioned_key", value.versioned_key_);
+    }
+};
+
+} }
+
+namespace boost {
+namespace serialization {
+
+template<class Archive>
+inline void serialize(Archive & archive,
+    class_in_a_package::package1::first_class& value,
+    const unsigned int version) {
+    class_in_a_package::package1::first_class_serializer serializer;
+    serializer.serialize<Archive>(archive, value, version);
+}
+
+} }
+
+#endif
+
+Filename: /empty_tds/actual/include/class_in_a_package/serialization/unversioned_key_ser.hpp
+Contents: 
+/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+ *
+ * Copyright (C) 2012 Kitanda
+ *
+ * This file is distributed under the Kitanda Proprietary Software
+ * Licence. See doc/LICENCE.TXT for details.
+ *
+ */
+#ifndef CLASS_IN_A_PACKAGE_SERIALIZATION_UNVERSIONED_KEY_SER_HPP
+#define CLASS_IN_A_PACKAGE_SERIALIZATION_UNVERSIONED_KEY_SER_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include <boost/serialization/nvp.hpp>
+#include "class_in_a_package/domain/unversioned_key.hpp"
+
+namespace class_in_a_package {
+
+class unversioned_key_serializer {
+public:
+    template<typename Archive>
+    void serialize(Archive & archive,
+        class_in_a_package::unversioned_key& value,
+        const unsigned int /*version*/) {
+        using boost::serialization::make_nvp;
+
+        archive & make_nvp("id", value.id_);
+    }
+};
+
+}
+
+namespace boost {
+namespace serialization {
+
+template<class Archive>
+inline void serialize(Archive & archive,
+    class_in_a_package::unversioned_key& value,
+    const unsigned int version) {
+    class_in_a_package::unversioned_key_serializer serializer;
+    serializer.serialize<Archive>(archive, value, version);
+}
+
+} }
+
+#endif
+
+Filename: /empty_tds/actual/include/class_in_a_package/serialization/versioned_key_ser.hpp
+Contents: 
+/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+ *
+ * Copyright (C) 2012 Kitanda
+ *
+ * This file is distributed under the Kitanda Proprietary Software
+ * Licence. See doc/LICENCE.TXT for details.
+ *
+ */
+#ifndef CLASS_IN_A_PACKAGE_SERIALIZATION_VERSIONED_KEY_SER_HPP
+#define CLASS_IN_A_PACKAGE_SERIALIZATION_VERSIONED_KEY_SER_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include <boost/serialization/nvp.hpp>
+#include "class_in_a_package/domain/versioned_key.hpp"
+
+namespace class_in_a_package {
+
+class versioned_key_serializer {
+public:
+    template<typename Archive>
+    void serialize(Archive & archive,
+        class_in_a_package::versioned_key& value,
+        const unsigned int /*version*/) {
+        using boost::serialization::make_nvp;
+
+        archive & make_nvp("id", value.id_);
+        archive & make_nvp("version", value.version_);
+    }
+};
+
+}
+
+namespace boost {
+namespace serialization {
+
+template<class Archive>
+inline void serialize(Archive & archive,
+    class_in_a_package::versioned_key& value,
+    const unsigned int version) {
+    class_in_a_package::versioned_key_serializer serializer;
+    serializer.serialize<Archive>(archive, value, version);
+}
+
+} }
+
+#endif
+
+Filename: /empty_tds/actual/include/class_in_a_package/test_data/class_in_a_package_sequence.hpp
+Contents: 
+/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+ *
+ * Copyright (C) 2012 Kitanda
+ *
+ * This file is distributed under the Kitanda Proprietary Software
+ * Licence. See doc/LICENCE.TXT for details.
+ *
+ */
+#include "class_in_a_package/test_data/package1/first_class_sequence.hpp"
+#include "class_in_a_package/test_data/unversioned_key_sequence.hpp"
+#include "class_in_a_package/test_data/versioned_key_sequence.hpp"
+
+Filename: /empty_tds/actual/include/class_in_a_package/test_data/package1/first_class_sequence.hpp
+Contents: 
+/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+ *
+ * Copyright (C) 2012 Kitanda
+ *
+ * This file is distributed under the Kitanda Proprietary Software
+ * Licence. See doc/LICENCE.TXT for details.
+ *
+ */
+#ifndef CLASS_IN_A_PACKAGE_TEST_DATA_PACKAGE1_FIRST_CLASS_SEQUENCE_HPP
+#define CLASS_IN_A_PACKAGE_TEST_DATA_PACKAGE1_FIRST_CLASS_SEQUENCE_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include "class_in_a_package/domain/package1/first_class.hpp"
+#include "kitanda/utility/test_data/generator.hpp"
+#include "kitanda/utility/test_data/sequence.hpp"
+
+namespace class_in_a_package {
+namespace package1 {
+
+namespace detail {
+
+class first_class_generator {
+public:
+    typedef class_in_a_package::package1::first_class value_type;
+
+public:
+    value_type next_term(const unsigned int position);
+    unsigned int length() const;
+};
+
+}
+
+typedef kitanda::utility::test_data::sequence<
+    detail::first_class_generator> first_class_sequence;
+
+} }
+
+#endif
+
+Filename: /empty_tds/actual/include/class_in_a_package/test_data/unversioned_key_sequence.hpp
+Contents: 
+/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+ *
+ * Copyright (C) 2012 Kitanda
+ *
+ * This file is distributed under the Kitanda Proprietary Software
+ * Licence. See doc/LICENCE.TXT for details.
+ *
+ */
+#ifndef CLASS_IN_A_PACKAGE_TEST_DATA_UNVERSIONED_KEY_SEQUENCE_HPP
+#define CLASS_IN_A_PACKAGE_TEST_DATA_UNVERSIONED_KEY_SEQUENCE_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include "class_in_a_package/domain/unversioned_key.hpp"
+#include "kitanda/utility/test_data/generator.hpp"
+#include "kitanda/utility/test_data/sequence.hpp"
+
+namespace class_in_a_package {
+
+namespace detail {
+
+class unversioned_key_generator {
+public:
+    typedef class_in_a_package::unversioned_key value_type;
+
+public:
+    value_type next_term(const unsigned int position);
+    unsigned int length() const;
+};
+
+}
+
+typedef kitanda::utility::test_data::sequence<
+    detail::unversioned_key_generator> unversioned_key_sequence;
+
+}
+
+#endif
+
+Filename: /empty_tds/actual/include/class_in_a_package/test_data/versioned_key_sequence.hpp
+Contents: 
+/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+ *
+ * Copyright (C) 2012 Kitanda
+ *
+ * This file is distributed under the Kitanda Proprietary Software
+ * Licence. See doc/LICENCE.TXT for details.
+ *
+ */
+#ifndef CLASS_IN_A_PACKAGE_TEST_DATA_VERSIONED_KEY_SEQUENCE_HPP
+#define CLASS_IN_A_PACKAGE_TEST_DATA_VERSIONED_KEY_SEQUENCE_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include "class_in_a_package/domain/versioned_key.hpp"
+#include "kitanda/utility/test_data/generator.hpp"
+#include "kitanda/utility/test_data/sequence.hpp"
+
+namespace class_in_a_package {
+
+namespace detail {
+
+class versioned_key_generator {
+public:
+    typedef class_in_a_package::versioned_key value_type;
+
+public:
+    value_type next_term(const unsigned int position);
+    unsigned int length() const;
+};
+
+}
+
+typedef kitanda::utility::test_data::sequence<
+    detail::versioned_key_generator> versioned_key_sequence;
+
+}
+
+#endif
+
+Filename: /empty_tds/actual/src/class_in_a_package/CMakeLists.txt
+Contents: 
+# -*- mode: cmake; tab-width: 4; indent-tabs-mode: nil -*-
+#
+# Copyright (C) 2012 Kitanda
+#
+# This file is distributed under the Kitanda Proprietary Software
+# Licence. See doc/LICENCE.TXT for details.
+#
+set(all_files "")
+file(GLOB_RECURSE all_files RELATIVE
+    "${CMAKE_CURRENT_SOURCE_DIR}/"
+    "${CMAKE_CURRENT_SOURCE_DIR}/*.cpp")
+
+add_library(class_in_a_package STATIC ${all_files})
+set_target_properties(class_in_a_package PROPERTIES
+    OUTPUT_NAME kitanda_class_in_a_package)
+
+Filename: /empty_tds/actual/src/class_in_a_package/database/package1/first_class_db.cpp
+Contents: 
+/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+ *
+ * Copyright (C) 2012 Kitanda
+ *
+ * This file is distributed under the Kitanda Proprietary Software
+ * Licence. See doc/LICENCE.TXT for details.
+ *
+ */
+#include <boost/format.hpp>
+#include <pqxx/result.hxx>
+#include <pqxx/transaction.hxx>
+#include "class_in_a_package/database/package1/first_class_db.hpp"
+
+namespace {
+
+enum fields {
+    public_attribute_field = 0,
+    private_attribute_field = 1,
+    versioned_key_field = 2
+};
+
+const std::string load_name("statement_class_in_a_package_package1_first_class_load");
+const std::string load_id_name("statement_class_in_a_package_package1_first_class_load_id");
+const std::string load_work_name("work_class_in_a_package_package1_first_class_load");
+const std::string load_sql("select * from class_in_a_package_package1_first_class_load($0, $1, $2);");
+
+const std::string erase_name("statement_class_in_a_package_package1_first_class_erase");
+const std::string erase_id_name("statement_class_in_a_package_package1_first_class_erase_id");
+const std::string erase_work_name("work_class_in_a_package_package1_first_class_erase");
+const std::string erase_sql("select * from class_in_a_package_package1_first_class_erase($0, $1, $2);");
+
+const std::string save_name("statement_class_in_a_package_package1_first_class_save");
+const std::string save_work_name("work_class_in_a_package_package1_first_class_save");
+const std::string save_sql("select class_in_a_package_package1_first_class_save($0, $1, $2);");
+
+}
+
+namespace class_in_a_package {
+namespace package1 {
+
+std::string first_class_data_exchanger::
+format_sql(const std::string& format_str, const boost::optional<versioned_key> id) {
+    return (boost::format(format_str) % (id ? "$1" : "null")).str();
+}
+
+
+
+} }
+
+Filename: /empty_tds/actual/src/class_in_a_package/domain/package1/first_class.cpp
+Contents: 
+/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+ *
+ * Copyright (C) 2012 Kitanda
+ *
+ * This file is distributed under the Kitanda Proprietary Software
+ * Licence. See doc/LICENCE.TXT for details.
+ *
+ */
+#include <ostream>
+#include "class_in_a_package/domain/package1/first_class.hpp"
+#include "class_in_a_package/io/versioned_key_io.hpp"
+#include "kitanda/utility/io/jsonify_io.hpp"
+
+namespace class_in_a_package {
+namespace package1 {
+
+first_class::first_class()
+    : public_attribute_(static_cast<int>(0)),
+      private_attribute_(static_cast<int>(0)) { }
+
+first_class::first_class(
+    int public_attribute,
+    int private_attribute,
+    class_in_a_package::versioned_key versioned_key)
+    : public_attribute_(public_attribute),
+      private_attribute_(private_attribute),
+      versioned_key_(versioned_key) { }
+
+void first_class::to_stream(std::ostream& stream) const {
+    using kitanda::utility::streaming::jsonify;
+
+    stream << " {"
+           << "\"__type__\": " << "\"first_class\"" << ","
+           << "\"public_attribute\": " << jsonify(public_attribute_) << ","
+           << "\"private_attribute\": " << jsonify(private_attribute_) << ","
+           << "\"versioned_key\": " << jsonify(versioned_key_)
+           << " }";
+}
+
+void first_class::swap(first_class& other) {
+    std::swap(public_attribute_, other.public_attribute_);
+    std::swap(private_attribute_, other.private_attribute_);
+    std::swap(versioned_key_, other.versioned_key_);
+}
+
+first_class& first_class::operator=(first_class other) {
+    std::swap(*this, other);
+    return *this;
+}
+
+} }
+Filename: /empty_tds/actual/src/class_in_a_package/domain/unversioned_key.cpp
+Contents: 
+/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+ *
+ * Copyright (C) 2012 Kitanda
+ *
+ * This file is distributed under the Kitanda Proprietary Software
+ * Licence. See doc/LICENCE.TXT for details.
+ *
+ */
+#include <ostream>
+#include "class_in_a_package/domain/unversioned_key.hpp"
+#include "kitanda/utility/io/jsonify_io.hpp"
+
+namespace class_in_a_package {
+
+unversioned_key::unversioned_key()
+    : id_(static_cast<unsigned int>(0)) { }
+
+unversioned_key::unversioned_key(unsigned int id)
+    : id_(id) { }
+
+void unversioned_key::to_stream(std::ostream& stream) const {
+    using kitanda::utility::streaming::jsonify;
+
+    stream << " {"
+           << "\"__type__\": " << "\"unversioned_key\"" << ","
+           << "\"id\": " << jsonify(id_)
+           << " }";
+}
+
+void unversioned_key::swap(unversioned_key& other) {
+    std::swap(id_, other.id_);
+}
+
+unversioned_key& unversioned_key::operator=(unversioned_key other) {
+    std::swap(*this, other);
+    return *this;
+}
+
+}
+Filename: /empty_tds/actual/src/class_in_a_package/domain/versioned_key.cpp
+Contents: 
+/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+ *
+ * Copyright (C) 2012 Kitanda
+ *
+ * This file is distributed under the Kitanda Proprietary Software
+ * Licence. See doc/LICENCE.TXT for details.
+ *
+ */
+#include <ostream>
+#include "class_in_a_package/domain/versioned_key.hpp"
+#include "kitanda/utility/io/jsonify_io.hpp"
+
+namespace class_in_a_package {
+
+versioned_key::versioned_key()
+    : id_(static_cast<unsigned int>(0)),
+      version_(static_cast<unsigned int>(0)) { }
+
+versioned_key::versioned_key(
+    unsigned int id,
+    unsigned int version)
+    : id_(id),
+      version_(version) { }
+
+void versioned_key::to_stream(std::ostream& stream) const {
+    using kitanda::utility::streaming::jsonify;
+
+    stream << " {"
+           << "\"__type__\": " << "\"versioned_key\"" << ","
+           << "\"id\": " << jsonify(id_) << ","
+           << "\"version\": " << jsonify(version_)
+           << " }";
+}
+
+unversioned_key versioned_key::to_unversioned() const {
+    return unversioned_key(id());
+}
+
+void versioned_key::swap(versioned_key& other) {
+    std::swap(id_, other.id_);
+    std::swap(version_, other.version_);
+}
+
+versioned_key& versioned_key::operator=(versioned_key other) {
+    std::swap(*this, other);
+    return *this;
+}
+
+}
+Filename: /empty_tds/actual/src/class_in_a_package/io/package1/first_class_io.cpp
+Contents: 
+/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+ *
+ * Copyright (C) 2012 Kitanda
+ *
+ * This file is distributed under the Kitanda Proprietary Software
+ * Licence. See doc/LICENCE.TXT for details.
+ *
+ */
+#include <ostream>
+#include "class_in_a_package/io/package1/first_class_io.hpp"
+
+namespace class_in_a_package {
+namespace package1 {
+
+std::ostream& operator<<(std::ostream& stream, first_class value) {
+    value.to_stream(stream);
+    return(stream);
+}
+
+} }
+Filename: /empty_tds/actual/src/class_in_a_package/io/unversioned_key_io.cpp
+Contents: 
+/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+ *
+ * Copyright (C) 2012 Kitanda
+ *
+ * This file is distributed under the Kitanda Proprietary Software
+ * Licence. See doc/LICENCE.TXT for details.
+ *
+ */
+#include <ostream>
+#include "class_in_a_package/io/unversioned_key_io.hpp"
+
+namespace class_in_a_package {
+
+std::ostream& operator<<(std::ostream& stream, unversioned_key value) {
+    value.to_stream(stream);
+    return(stream);
+}
+
+}
+Filename: /empty_tds/actual/src/class_in_a_package/io/versioned_key_io.cpp
+Contents: 
+/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+ *
+ * Copyright (C) 2012 Kitanda
+ *
+ * This file is distributed under the Kitanda Proprietary Software
+ * Licence. See doc/LICENCE.TXT for details.
+ *
+ */
+#include <ostream>
+#include "class_in_a_package/io/versioned_key_io.hpp"
+
+namespace class_in_a_package {
+
+std::ostream& operator<<(std::ostream& stream, versioned_key value) {
+    value.to_stream(stream);
+    return(stream);
+}
+
+}
+Filename: /empty_tds/actual/src/class_in_a_package/test_data/package1/first_class_sequence.cpp
+Contents: 
+/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+ *
+ * Copyright (C) 2012 Kitanda
+ *
+ * This file is distributed under the Kitanda Proprietary Software
+ * Licence. See doc/LICENCE.TXT for details.
+ *
+ */
+#include "class_in_a_package/test_data/package1/first_class_sequence.hpp"
+#include "class_in_a_package/test_data/versioned_key_sequence.hpp"
+
+namespace class_in_a_package {
+namespace package1 {
+namespace detail {
+
+first_class_generator::value_type
+first_class_generator::next_term(const unsigned int position) {
+    first_class r;
+
+    if (position == 0) {
+        r.public_attribute(static_cast<int>(0));
+        r.private_attribute(static_cast<int>(1));
+    } else if (position == 1) {
+        r.public_attribute(static_cast<int>(30));
+        r.private_attribute(static_cast<int>(31));
+    } else if (position == 2) {
+        r.public_attribute(static_cast<int>(60));
+        r.private_attribute(static_cast<int>(61));
+    }
+
+    return r;
+}
+
+unsigned int first_class_generator::length() const { return(3); }
+
+} } }
+
+Filename: /empty_tds/actual/src/class_in_a_package/test_data/unversioned_key_sequence.cpp
+Contents: 
+/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+ *
+ * Copyright (C) 2012 Kitanda
+ *
+ * This file is distributed under the Kitanda Proprietary Software
+ * Licence. See doc/LICENCE.TXT for details.
+ *
+ */
+#include "class_in_a_package/test_data/unversioned_key_sequence.hpp"
+
+namespace class_in_a_package {
+namespace detail {
+
+unversioned_key_generator::value_type
+unversioned_key_generator::next_term(const unsigned int position) {
+    unversioned_key r;
+
+    if (position == 0) {
+        r.id(static_cast<unsigned int>(0));
+    } else if (position == 1) {
+        r.id(static_cast<unsigned int>(30));
+    } else if (position == 2) {
+        r.id(static_cast<unsigned int>(60));
+    }
+
+    return r;
+}
+
+unsigned int unversioned_key_generator::length() const { return(3); }
+
+} }
+
+Filename: /empty_tds/actual/src/class_in_a_package/test_data/versioned_key_sequence.cpp
+Contents: 
+/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+ *
+ * Copyright (C) 2012 Kitanda
+ *
+ * This file is distributed under the Kitanda Proprietary Software
+ * Licence. See doc/LICENCE.TXT for details.
+ *
+ */
+#include "class_in_a_package/test_data/versioned_key_sequence.hpp"
+
+namespace class_in_a_package {
+namespace detail {
+
+versioned_key_generator::value_type
+versioned_key_generator::next_term(const unsigned int position) {
+    versioned_key r;
+
+    if (position == 0) {
+        r.id(static_cast<unsigned int>(0));
+        r.version(static_cast<unsigned int>(1));
+    } else if (position == 1) {
+        r.id(static_cast<unsigned int>(30));
+        r.version(static_cast<unsigned int>(31));
+    } else if (position == 2) {
+        r.id(static_cast<unsigned int>(60));
+        r.version(static_cast<unsigned int>(61));
+    }
+
+    return r;
+}
+
+unsigned int versioned_key_generator::length() const { return(3); }
+
+} }
+
