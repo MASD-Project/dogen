@@ -133,6 +133,21 @@ execute_process(COMMAND ${CTEST_GIT_COMMAND} rev-list -n 1 HEAD
     RESULT_VARIABLE ret_var
     OUTPUT_STRIP_TRAILING_WHITESPACE)
 
+# ssh
+find_program(ssh_executable ssh)
+if(ssh_executable)
+    message(STATUS "Found ssh (${ssh_executable})...")
+else()
+    message(FATAL_ERROR "Could not find a valid ssh installation.")
+endif()
+
+find_program(scp_executable scp)
+if(scp_executable)
+    message(STATUS "Found scp (${scp_executable})...")
+else()
+    message(FATAL_ERROR "Could not find a valid ssh installation.")
+endif()
+
 #
 # useful vars
 #
@@ -212,6 +227,24 @@ set(DOGEN_DOXYGEN_DIR ${stage_doxygen_dir})
 # input file
 set(doxy_file ${stage_doxygen_dir}/dogen.doxy)
 add_custom_target(doxy doxygen ${doxy_file})
+
+set(server "kitanda.linkpc.net")
+set(remote_site "/Users/git/Repositories/website/org/doxygen/dogen")
+set(remote_file "git@${server}:${remote_site}")
+
+add_custom_target(deploy_doxy
+    COMMAND ${ssh_executable} git@${server} 'rm -rf ${remote_site}.new
+    /tmp/dogen_doxygen.tgz && mkdir ${remote_site}.new'
+    COMMAND tar -C ${stage_doxygen_dir} -zcf ${stage_dir}/dogen_doxygen.tgz .
+    COMMAND ${scp_executable} ${stage_dir}/dogen_doxygen.tgz
+    git@${server}:/tmp/dogen_doxygen.tgz
+    COMMAND ${ssh_executable} git@${server} 'tar -C ${remote_site}.new/
+    -zxf /tmp/dogen_doxygen.tgz'
+    COMMAND ${ssh_executable} git@${server} 'mv ${remote_site} ${remote_site}.old'
+    COMMAND ${ssh_executable} git@${server} 'mv ${remote_site}.new ${remote_site}'
+    COMMAND ${ssh_executable} git@${server} 'rm -rf ${remote_site}.old'
+    )
+add_dependencies(deploy_doxy doxy)
 
 #
 # include all sub directories
