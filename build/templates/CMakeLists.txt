@@ -17,3 +17,7 @@ message(STATUS "Transformed dogen.doxy.")
 set(main_page_template "${CMAKE_CURRENT_SOURCE_DIR}/doxygen/mainpage.dox.in")
 configure_file(${main_page_template} ${stage_doxygen_dir}/dox/mainpage.dox)
 message(STATUS "Transformed mainpage.dox.")
+
+set(htaccess_template "${CMAKE_CURRENT_SOURCE_DIR}/doxygen/htaccess")
+configure_file(${htaccess_template} ${stage_doxygen_dir}/.htaccess)
+message(STATUS "Transformed htaccess.")
