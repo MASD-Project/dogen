@@ -41,7 +41,6 @@ endif()
 if(WIN32 AND NOT UNIX)
     # There is a bug in NSI that does not handle full unix paths properly. Make
     # sure there is at least one set of four (4) backslashes.
-    ${CPACK_PACKAGE_INSTALL_DIRECTORY}
     set(CPACK_PACKAGE_ICON "${CMAKE_SOURCE_DIR}\\\\images\\\\application_dogen.png")
     set(CPACK_NSIS_INSTALLED_ICON_NAME "bin\\\\dogen_driver.exe")
     set(CPACK_NSIS_DISPLAY_NAME "Dogen")
