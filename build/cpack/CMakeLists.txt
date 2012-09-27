@@ -41,13 +41,15 @@ endif()
 if(WIN32 AND NOT UNIX)
     # There is a bug in NSI that does not handle full unix paths properly. Make
     # sure there is at least one set of four (4) backslashes.
-    set(CPACK_PACKAGE_ICON "${CMAKE_SOURCE_DIR}\\\\images/application_dogen.png")
+    ${CPACK_PACKAGE_INSTALL_DIRECTORY}
+    set(CPACK_PACKAGE_ICON "${CMAKE_SOURCE_DIR}\\\\images\\\\application_dogen.png")
     set(CPACK_NSIS_INSTALLED_ICON_NAME "bin\\\\dogen_driver.exe")
-    set(CPACK_NSIS_DISPLAY_NAME "${CPACK_PACKAGE_INSTALL_DIRECTORY} Dogen")
+    set(CPACK_NSIS_DISPLAY_NAME "Dogen")
     set(CPACK_NSIS_HELP_LINK "http:\\\\\\\\http://kitanda.co.uk/html/index.html")
     set(CPACK_NSIS_URL_INFO_ABOUT "http:\\\\\\\\http://kitanda.co.uk/html/index.html")
     set(CPACK_NSIS_CONTACT "info@kitanda.co.uk")
     set(CPACK_NSIS_MODIFY_PATH ON)
+
 else(WIN32 AND NOT UNIX)
     set(CPACK_STRIP_FILES "")
     set(CPACK_SOURCE_STRIP_FILES "")
