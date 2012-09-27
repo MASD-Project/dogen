@@ -13,6 +13,7 @@ file(GLOB_RECURSE driver_files RELATIVE
 add_executable(driver ${driver_files})
 set(binary_name "dogen_driver")
 set_target_properties(driver PROPERTIES OUTPUT_NAME ${binary_name})
+install(TARGETS driver DESTINATION bin)
 
 target_link_libraries(driver
     generator

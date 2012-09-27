@@ -158,6 +158,7 @@ site_name(DOGEN_SITE)
 # staging directory
 set(stage_dir ${CMAKE_BINARY_DIR}/stage)
 set(stage_bin_dir ${CMAKE_BINARY_DIR}/stage/bin)
+set(stage_pkg_dir ${CMAKE_BINARY_DIR}/stage/pkg)
 set(stage_test_data_dir ${stage_dir}/test_data)
 set(stage_doxygen_dir ${stage_dir}/doxygen)
 
