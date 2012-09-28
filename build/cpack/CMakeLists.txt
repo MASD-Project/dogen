@@ -47,7 +47,7 @@ elseif(APPLE)
     set(CPACK_BUNDLE_PLIST ${stage_dir}/tmp_pkg/macosx/Info.plist)
     set(CPACK_BUNDLE_ICON ${CMAKE_CURRENT_SOURCE_DIR}/application_dogen.icns)
     set(CPACK_BUNDLE_NAME "dogen")
-    set(CPACK_BUNDLE_STARTUP_COMMAND ${stage_dir}/tmp_pkg}/macosx/start)
+    set(CPACK_BUNDLE_STARTUP_COMMAND ${stage_dir}/tmp_pkg/macosx/start)
     set(CPACK_PACKAGE_EXECUTABLES "dogen_driver" "Dogen - domain generator")
 
 elseif(UNIX)
