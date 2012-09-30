@@ -157,77 +157,63 @@ add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/enable_facet_io/src)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/enable_facet_serialization/src)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/two_layers_with_objects/src)
 
-# # create a target for each test model
-# set(ignore_file false)
-# add_custom_target(rebase_codegen)
-# add_custom_target(diff_codegen)
-# add_custom_target(clean_codegen)
-# foreach(dia_model ${all_dia_test_models})
-#     set(model_name "")
-#     get_filename_component(model_name ${dia_model} NAME_WE)
-#     set(model_folder_name "${model_name}")
+# global targets for codegen
+add_custom_target(rebase_codegen)
+add_custom_target(diff_codegen)
+add_custom_target(clean_codegen)
 
-#     if(EXISTS "${stage_test_data_dir}/${model_folder_name}/actual/src")
-#         set(target_name "diff_${model_name}")
-#         add_custom_target(${target_name}
-#             COMMAND diff -r -u ${stage_test_data_dir}/${model_folder_name}/expected
-#             ${stage_test_data_dir}/${model_folder_name}/actual
-#             WORKING_DIRECTORY ${stage_bin_dir})
-#         add_dependencies(diff_codegen ${target_name})
+# targets for each test model
+foreach(dia_model ${all_dia_test_models})
+    set(model_name "")
+    get_filename_component(model_name ${dia_model} NAME_WE)
 
-#         set(root "${CMAKE_SOURCE_DIR}")
-#         set(git_src_dir "${root}/code/cpp/src/dogen/test_models")
-#         set(git_inc_dir "${root}/code/cpp/include/kitanda/dogen/test_models")
+    set(top_dir "${stage_test_data_dir}/${model_name}")
+    set(actual_dir "${top_dir}/actual/${model_name}")
+    set(expect_dir "${top_dir}/expected/${model_name}")
+    set(git_dir "${CMAKE_CURRENT_SOURCE_DIR}/${model_name}")
 
-#         set(target_name "rebase_${model_name}")
-#         add_custom_target(${target_name}
-#             COMMAND rm -rf ${git_src_dir}/${model_folder_name}
-#             ${git_inc_dir}/${model_folder_name}
-#             COMMAND cp -r ${stage_test_data_dir}/${model_folder_name}/actual/src/*
-#             ${git_src_dir}/
-#             COMMAND cp -r ${stage_test_data_dir}/${model_folder_name}/actual/include/*
-#             ${git_inc_dir}/
-#             WORKING_DIRECTORY ${stage_bin_dir})
-#         add_dependencies(rebase_codegen ${target_name})
+    if(EXISTS "${actual_dir}")
+        set(target_name "diff_${model_name}")
+        add_custom_target(${target_name}
+            COMMAND diff -r -u ${expect_dir} ${actual_dir}
+            WORKING_DIRECTORY ${stage_bin_dir})
+        add_dependencies(diff_codegen ${target_name})
 
-#         set(target_name "clean_${model_name}")
-#         add_custom_target(${target_name}
-#             COMMAND rm -rf ${stage_test_data_dir}/${model_folder_name}/actual
-#             COMMAND mkdir ${stage_test_data_dir}/${model_folder_name}/actual
-#             WORKING_DIRECTORY ${stage_bin_dir})
-#         add_dependencies(clean_codegen ${target_name})
-#         message(STATUS "Processed data set: ${model_name}")
-#     endif()
-# endforeach()
+        set(target_name "rebase_${model_name}")
+        add_custom_target(${target_name}
+            COMMAND rm -rf ${git_dir}
+            COMMAND cp -r ${actual_dir} ${git_dir}
+            WORKING_DIRECTORY ${stage_bin_dir})
+        add_dependencies(rebase_codegen ${target_name})
 
-# # copy all generated files into the expected directory of test data
-# set(ignore_file false)
-# foreach(dia_model ${all_dia_test_models})
-#     set(model_name "")
-#     get_filename_component(model_name ${dia_model} NAME_WE)
+        set(target_name "clean_${model_name}")
+        add_custom_target(${target_name}
+            COMMAND rm -rf ${actual_dir}
+            COMMAND mkdir ${actual_dir}
+            WORKING_DIRECTORY ${stage_bin_dir})
+        add_dependencies(clean_codegen ${target_name})
+        message(STATUS "Processed model: ${model_name}")
+    endif()
+endforeach()
 
-#     set(actual_dir "${stage_test_data_dir}/${model_name}/actual")
-#     file(MAKE_DIRECTORY ${actual_dir})
+# copy all generated files into the expected directory of test data
+foreach(dia_model ${all_dia_test_models})
+    set(model_name "")
+    get_filename_component(model_name "${dia_model}" NAME_WE)
+    message(STATUS "Created data set for model: ${model_name}")
 
-#     set(expected_dir "${stage_test_data_dir}/${model_name}/expected")
-#     file(REMOVE_RECURSE ${expected_dir})
-#     file(MAKE_DIRECTORY ${expected_dir})
+    set(git_dir "${CMAKE_CURRENT_SOURCE_DIR}/${model_name}")
+    if(IS_DIRECTORY "${git_dir}")
+        set(top_dir "${stage_test_data_dir}/${model_name}")
+        set(actual_dir "${top_dir}/actual")
+        if(NOT IS_DIRECTORY "${actual_dir}")
+            file(MAKE_DIRECTORY "${actual_dir}")
+        endif()
 
-#     if (model_name STREQUAL "disable_model_package")
-#         set(model_name "dmp")
-#     endif()
-
-#     set(cpp_dir "${CMAKE_SOURCE_DIR}/code/cpp")
-#     set(src_dir "${cpp_dir}/src/dogen/test_models/${model_name}")
-#     if(IS_DIRECTORY ${src_dir})
-#         set(dest_dir "${expected_dir}/src/")
-#         file(COPY ${src_dir} DESTINATION ${dest_dir})
-#     endif()
-
-#     set(src_dir "${cpp_dir}/include/kitanda/dogen/test_models/${model_name}")
-#     if(IS_DIRECTORY ${src_dir})
-#         set(dest_dir "${expected_dir}/include/")
-#         file(COPY ${src_dir} DESTINATION ${dest_dir})
-#     endif()
-# endforeach()
-# add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/utility/spec)
+        set(expected_dir "${top_dir}/expected")
+        if(IS_DIRECTORY "${expected_dir}")
+            file(REMOVE_RECURSE "${expected_dir}")
+        endif()
+        file(COPY "${git_dir}" DESTINATION "${expected_dir}")
+    endif()
+endforeach()
