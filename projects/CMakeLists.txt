@@ -214,6 +214,8 @@ foreach(dia_model ${all_dia_test_models})
         if(IS_DIRECTORY "${expected_dir}")
             file(REMOVE_RECURSE "${expected_dir}")
         endif()
-        file(COPY "${git_dir}" DESTINATION "${expected_dir}")
+
+        # FIXME: do not copy for now due to max path size
+        # file(COPY "${git_dir}" DESTINATION "${expected_dir}")
     endif()
 endforeach()
