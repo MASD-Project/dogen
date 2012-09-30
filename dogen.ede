@@ -3,7 +3,7 @@
  "Dogen"
  :name "Dogen Project"
  :version "0.0.1"
- :file "project.ede"
+ :file "dogen.ede"
  :include-path
  '(
    "/projects/config/include"
