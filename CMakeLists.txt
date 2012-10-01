@@ -179,34 +179,7 @@ if(WITH_DEBUG)
     set(DOGEN_VERSION "${DOGEN_VERSION}-debug")
 endif()
 
-# additional include
-include_directories(
-    ${CMAKE_SOURCE_DIR}/projects/config/include
-    ${CMAKE_SOURCE_DIR}/projects/dia/include
-    ${CMAKE_SOURCE_DIR}/projects/sml/include
-    ${CMAKE_SOURCE_DIR}/projects/utility/include
-    ${CMAKE_SOURCE_DIR}/projects/generator/include
-    ${CMAKE_SOURCE_DIR}/projects/driver/include
-
-    ${CMAKE_SOURCE_DIR}/projects/all_primitives/include
-    ${CMAKE_SOURCE_DIR}/projects/classes_in_a_package/include
-    ${CMAKE_SOURCE_DIR}/projects/classes_inside_and_outside_package/include
-    ${CMAKE_SOURCE_DIR}/projects/classes_without_package/include
-    ${CMAKE_SOURCE_DIR}/projects/class_in_a_package/include
-    ${CMAKE_SOURCE_DIR}/projects/class_without_attributes/include
-    ${CMAKE_SOURCE_DIR}/projects/class_without_package/include
-    ${CMAKE_SOURCE_DIR}/projects/class_without_package_and_attributes/include
-    ${CMAKE_SOURCE_DIR}/projects/compressed/include
-    ${CMAKE_SOURCE_DIR}/projects/disable_complete_constructor/include
-    ${CMAKE_SOURCE_DIR}/projects/disable_facet_folders/include
-    ${CMAKE_SOURCE_DIR}/projects/disable_cmakelists/include
-    ${CMAKE_SOURCE_DIR}/projects/enable_facet_domain/include
-    ${CMAKE_SOURCE_DIR}/projects/enable_facet_hash/include
-    ${CMAKE_SOURCE_DIR}/projects/enable_facet_io/include
-    ${CMAKE_SOURCE_DIR}/projects/enable_facet_serialization/include
-    ${CMAKE_SOURCE_DIR}/projects/two_layers_with_objects/include
-    )
-
+# system includes
 include_directories(SYSTEM
     ${LIBXML2_INCLUDE_DIR}
     # for sigc++config.h multiarch
