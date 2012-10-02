@@ -4,8 +4,10 @@
  *
  * @mainpage About
  *
- * @b Dogen is the Domain Generator. Generator is the code generator
- * that creates object models for domain driven programming.
+ * @b Dogen is the Domain Generator.
+ *
+ * Dogen is a code generator that creates object models for domain
+ * driven programming.
  *
  * The key concept in Dogen is that of a @e domain @e type. Its
  * basically a POD in C++ terminology or a POJO in java terms: a data
