@@ -418,10 +418,10 @@ BOOST_IGNORE_AUTO_TEST_CASE(empty_package_model_generates_expected_code) {
     BOOST_CHECK(check_code_generation(t));
 }
 
-BOOST_IGNORE_AUTO_TEST_CASE(classes_inside_and_outside_package_model_generates_expected_code) {
-    SETUP_TEST_LOG("classes_inside_and_outside_package_model_generates_expected_code");
+BOOST_IGNORE_AUTO_TEST_CASE(classes_inout_package_model_generates_expected_code) {
+    SETUP_TEST_LOG("classes_inout_package_model_generates_expected_code");
     using dogen::utility::test_data::dia_sml;
-    const auto t(dia_sml::input_classes_inside_and_outside_package_dia());
+    const auto t(dia_sml::input_classes_inout_package_dia());
     BOOST_CHECK(check_code_generation(t));
 }
 
@@ -439,10 +439,10 @@ BOOST_IGNORE_AUTO_TEST_CASE(class_without_package_model_generates_expected_code)
     BOOST_CHECK(check_code_generation(t));
 }
 
-BOOST_IGNORE_AUTO_TEST_CASE(class_without_package_and_attributes_model_generates_expected_code) {
-    SETUP_TEST_LOG("class_without_package_and_attributes_model_generates_expected_code");
+BOOST_IGNORE_AUTO_TEST_CASE(stand_alone_class_model_generates_expected_code) {
+    SETUP_TEST_LOG("stand_alone_class_model_generates_expected_code");
     using dogen::utility::test_data::dia_sml;
-    const auto t(dia_sml::input_class_without_package_and_attributes_dia());
+    const auto t(dia_sml::input_stand_alone_class_dia());
     BOOST_CHECK(check_code_generation(t));
 }
 

@@ -36,10 +36,10 @@ public:
     static boost::filesystem::path input_compressed_dia();
     static boost::filesystem::path input_empty_dia();
     static boost::filesystem::path input_two_empty_layers_dia();
-    static boost::filesystem::path input_class_without_package_and_attributes_dia();
+    static boost::filesystem::path input_stand_alone_class_dia();
     static boost::filesystem::path input_empty_package_dia();
     static boost::filesystem::path input_class_without_name_dia();
-    static boost::filesystem::path input_classes_inside_and_outside_package_dia();
+    static boost::filesystem::path input_classes_inout_package_dia();
     static boost::filesystem::path input_class_without_attributes_dia();
     static boost::filesystem::path input_class_without_package_dia();
     static boost::filesystem::path input_classes_in_a_package_dia();
@@ -66,10 +66,10 @@ public:
     static boost::filesystem::path expected_compressed_dia_xml();
     static boost::filesystem::path expected_empty_dia_xml();
     static boost::filesystem::path expected_two_empty_layers_dia_xml();
-    static boost::filesystem::path expected_class_without_package_and_attributes_dia_xml();
+    static boost::filesystem::path expected_stand_alone_class_dia_xml();
     static boost::filesystem::path expected_empty_package_dia_xml();
     static boost::filesystem::path expected_class_without_name_dia_xml();
-    static boost::filesystem::path expected_classes_inside_and_outside_package_dia_xml();
+    static boost::filesystem::path expected_classes_inout_package_dia_xml();
     static boost::filesystem::path expected_class_without_attributes_dia_xml();
     static boost::filesystem::path expected_class_without_package_dia_xml();
     static boost::filesystem::path expected_classes_in_a_package_dia_xml();
@@ -84,10 +84,10 @@ public:
     static boost::filesystem::path actual_compressed_dia_xml();
     static boost::filesystem::path actual_empty_dia_xml();
     static boost::filesystem::path actual_two_empty_layers_dia_xml();
-    static boost::filesystem::path actual_class_without_package_and_attributes_dia_xml();
+    static boost::filesystem::path actual_stand_alone_class_dia_xml();
     static boost::filesystem::path actual_empty_package_dia_xml();
     static boost::filesystem::path actual_class_without_name_dia_xml();
-    static boost::filesystem::path actual_classes_inside_and_outside_package_dia_xml();
+    static boost::filesystem::path actual_classes_inout_package_dia_xml();
     static boost::filesystem::path actual_class_without_attributes_dia_xml();
     static boost::filesystem::path actual_class_without_package_dia_xml();
     static boost::filesystem::path actual_classes_in_a_package_dia_xml();

@@ -136,12 +136,12 @@ include_directories(
 
     ${CMAKE_SOURCE_DIR}/projects/all_primitives/include
     ${CMAKE_SOURCE_DIR}/projects/classes_in_a_package/include
-    ${CMAKE_SOURCE_DIR}/projects/classes_inside_and_outside_package/include
+    ${CMAKE_SOURCE_DIR}/projects/classes_inout_package/include
     ${CMAKE_SOURCE_DIR}/projects/classes_without_package/include
     ${CMAKE_SOURCE_DIR}/projects/class_in_a_package/include
     ${CMAKE_SOURCE_DIR}/projects/class_without_attributes/include
     ${CMAKE_SOURCE_DIR}/projects/class_without_package/include
-    ${CMAKE_SOURCE_DIR}/projects/class_without_package_and_attributes/include
+    ${CMAKE_SOURCE_DIR}/projects/stand_alone_class/include
     ${CMAKE_SOURCE_DIR}/projects/compressed/include
     ${CMAKE_SOURCE_DIR}/projects/disable_complete_constructor/include
     ${CMAKE_SOURCE_DIR}/projects/disable_facet_folders/include
@@ -170,13 +170,13 @@ add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/driver/spec)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/all_primitives/src)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/all_primitives/spec)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/classes_in_a_package/src)
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/classes_inside_and_outside_package/src)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/classes_inout_package/src)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/classes_without_package/src)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/class_in_a_package/src)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/class_in_a_package/spec)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/class_without_attributes/src)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/class_without_package/src)
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/class_without_package_and_attributes/src)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/stand_alone_class/src)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/compressed/src)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/disable_complete_constructor/src)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/enable_facet_domain/src)

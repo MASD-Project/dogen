@@ -74,12 +74,12 @@ BOOST_AUTO_TEST_CASE(two_empty_layers_diagram_results_in_expected_objects) {
     BOOST_CHECK(test_hydrator(input, expected, actual));
 }
 
-BOOST_AUTO_TEST_CASE(class_without_package_and_attributes_results_in_expected_objects) {
-    SETUP_TEST_LOG_SOURCE("class_without_package_and_attributes_results_in_expected_objects");
+BOOST_AUTO_TEST_CASE(stand_alone_class_results_in_expected_objects) {
+    SETUP_TEST_LOG_SOURCE("stand_alone_class_results_in_expected_objects");
     using dogen::utility::test_data::dia_sml;
-    const auto input(dia_sml::input_class_without_package_and_attributes_dia());
-    const auto actual(dia_sml::actual_class_without_package_and_attributes_dia_xml());
-    const auto expected(dia_sml::expected_class_without_package_and_attributes_dia_xml());
+    const auto input(dia_sml::input_stand_alone_class_dia());
+    const auto actual(dia_sml::actual_stand_alone_class_dia_xml());
+    const auto expected(dia_sml::expected_stand_alone_class_dia_xml());
     BOOST_CHECK(test_hydrator(input, expected, actual));
 }
 
@@ -104,9 +104,9 @@ BOOST_AUTO_TEST_CASE(class_without_name_results_in_expected_objects) {
 BOOST_AUTO_TEST_CASE(class_in_a_package_class_without_package_results_in_expected_objects) {
     SETUP_TEST_LOG_SOURCE("class_in_a_package_class_without_package_results_in_expected_objects");
     using dogen::utility::test_data::dia_sml;
-    const auto input(dia_sml::input_classes_inside_and_outside_package_dia());
-    const auto actual(dia_sml::actual_classes_inside_and_outside_package_dia_xml());
-    const auto expected(dia_sml::expected_classes_inside_and_outside_package_dia_xml());
+    const auto input(dia_sml::input_classes_inout_package_dia());
+    const auto actual(dia_sml::actual_classes_inout_package_dia_xml());
+    const auto expected(dia_sml::expected_classes_inout_package_dia_xml());
     BOOST_CHECK(test_hydrator(input, expected, actual));
 }
 

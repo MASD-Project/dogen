@@ -250,13 +250,13 @@ add_dependencies(build_all
     all_primitives
     all_primitives_spec
     classes_in_a_package
-    classes_inside_and_outside_package
+    classes_inout_package
     classes_without_package
     class_in_a_package
     class_in_a_package_spec
     class_without_attributes
     class_without_package
-    class_without_package_and_attributes
+    stand_alone_class
     compressed
     disable_complete_constructor
     enable_facet_domain

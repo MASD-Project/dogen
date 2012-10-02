@@ -21,12 +21,12 @@ path input_class_in_a_package_dia("dia_sml/input/class_in_a_package.dia");
 path input_compressed_dia("dia_sml/input/compressed.dia");
 path input_empty_dia("dia_sml/input/empty.dia");
 path input_two_empty_layers_dia("dia_sml/input/two_empty_layers.dia");
-path input_class_without_package_and_attributes_dia(
-    "dia_sml/input/class_without_package_and_attributes.dia");
+path input_stand_alone_class_dia(
+    "dia_sml/input/stand_alone_class.dia");
 path input_empty_package_dia("dia_sml/input/empty_package.dia");
 path input_class_without_name_dia("dia_sml/input/class_without_name.dia");
-path input_classes_inside_and_outside_package_dia(
-    "dia_sml/input/classes_inside_and_outside_package.dia");
+path input_classes_inout_package_dia(
+    "dia_sml/input/classes_inout_package.dia");
 path input_class_without_attributes_dia(
     "dia_sml/input/class_without_attributes.dia");
 path input_class_without_package_dia("dia_sml/input/class_without_package.dia");
@@ -70,14 +70,14 @@ path expected_empty_dia_xml(
     "dia_sml/expected/empty.diaxml");
 path expected_two_empty_layers_dia_xml(
     "dia_sml/expected/two_empty_layers.diaxml");
-path expected_class_without_package_and_attributes_dia_xml(
-    "dia_sml/expected/class_without_package_and_attributes.diaxml");
+path expected_stand_alone_class_dia_xml(
+    "dia_sml/expected/stand_alone_class.diaxml");
 path expected_empty_package_dia_xml(
     "dia_sml/expected/empty_package.diaxml");
 path expected_class_without_name_dia_xml(
     "dia_sml/expected/class_without_name.diaxml");
-path expected_classes_inside_and_outside_package_dia_xml(
-    "dia_sml/expected/classes_inside_and_outside_package.diaxml");
+path expected_classes_inout_package_dia_xml(
+    "dia_sml/expected/classes_inout_package.diaxml");
 path expected_class_without_attributes_dia_xml(
     "dia_sml/expected/class_without_attributes.diaxml");
 path expected_class_without_package_dia_xml(
@@ -105,14 +105,14 @@ path actual_empty_dia_xml(
     "dia_sml/actual/empty.diaxml");
 path actual_two_empty_layers_dia_xml(
     "dia_sml/actual/two_empty_layers.diaxml");
-path actual_class_without_package_and_attributes_dia_xml(
-    "dia_sml/actual/class_without_package_and_attributes.diaxml");
+path actual_stand_alone_class_dia_xml(
+    "dia_sml/actual/stand_alone_class.diaxml");
 path actual_empty_package_dia_xml(
     "dia_sml/actual/empty_package.diaxml");
 path actual_class_without_name_dia_xml(
     "dia_sml/actual/class_without_name.diaxml");
-path actual_classes_inside_and_outside_package_dia_xml(
-    "dia_sml/actual/classes_inside_and_outside_package.diaxml");
+path actual_classes_inout_package_dia_xml(
+    "dia_sml/actual/classes_inout_package.diaxml");
 path actual_class_without_attributes_dia_xml(
     "dia_sml/actual/class_without_attributes.diaxml");
 path actual_class_without_package_dia_xml(
@@ -162,9 +162,9 @@ path dia_sml::input_two_empty_layers_dia() {
     return validating_resolver::resolve(::input_two_empty_layers_dia);
 }
 
-path dia_sml::input_class_without_package_and_attributes_dia() {
+path dia_sml::input_stand_alone_class_dia() {
     return validating_resolver::resolve(
-        ::input_class_without_package_and_attributes_dia);
+        ::input_stand_alone_class_dia);
 }
 
 path dia_sml::input_empty_package_dia() {
@@ -175,9 +175,9 @@ path dia_sml::input_class_without_name_dia() {
     return validating_resolver::resolve(::input_empty_package_dia);
 }
 
-path dia_sml::input_classes_inside_and_outside_package_dia() {
+path dia_sml::input_classes_inout_package_dia() {
     return validating_resolver::resolve(
-        ::input_classes_inside_and_outside_package_dia);
+        ::input_classes_inout_package_dia);
 }
 
 path dia_sml::input_class_without_attributes_dia() {
@@ -281,9 +281,9 @@ path dia_sml::expected_two_empty_layers_dia_xml() {
     return validating_resolver::resolve(::expected_two_empty_layers_dia_xml);
 }
 
-path dia_sml::expected_class_without_package_and_attributes_dia_xml() {
+path dia_sml::expected_stand_alone_class_dia_xml() {
     return validating_resolver::resolve(
-        ::expected_class_without_package_and_attributes_dia_xml);
+        ::expected_stand_alone_class_dia_xml);
 }
 
 path dia_sml::expected_empty_package_dia_xml() {
@@ -296,9 +296,9 @@ path dia_sml::expected_class_without_name_dia_xml() {
         ::expected_empty_package_dia_xml);
 }
 
-path dia_sml::expected_classes_inside_and_outside_package_dia_xml() {
+path dia_sml::expected_classes_inout_package_dia_xml() {
     return validating_resolver::resolve(
-        ::expected_classes_inside_and_outside_package_dia_xml);
+        ::expected_classes_inout_package_dia_xml);
 }
 
 path dia_sml::expected_class_without_attributes_dia_xml() {
@@ -360,9 +360,9 @@ path dia_sml::actual_two_empty_layers_dia_xml() {
     return resolver::resolve(::actual_two_empty_layers_dia_xml);
 }
 
-path dia_sml::actual_class_without_package_and_attributes_dia_xml() {
+path dia_sml::actual_stand_alone_class_dia_xml() {
     return resolver::resolve(
-        ::actual_class_without_package_and_attributes_dia_xml);
+        ::actual_stand_alone_class_dia_xml);
 }
 
 path dia_sml::actual_empty_package_dia_xml() {
@@ -375,9 +375,9 @@ path dia_sml::actual_class_without_name_dia_xml() {
         ::actual_class_without_name_dia_xml);
 }
 
-path dia_sml::actual_classes_inside_and_outside_package_dia_xml() {
+path dia_sml::actual_classes_inout_package_dia_xml() {
     return resolver::resolve(
-        ::actual_classes_inside_and_outside_package_dia_xml);
+        ::actual_classes_inout_package_dia_xml);
 }
 
 path dia_sml::actual_class_without_attributes_dia_xml() {
