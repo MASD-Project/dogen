@@ -39,7 +39,7 @@ void validator::validate(const settings& s) {
         if (!cpp.project_directory().empty())
             throw configuration_error(unexpected_project_dir);
     } else {
-        if (!cpp.include_directory().empty() && !cpp.source_directory().empty())
+        if (!cpp.include_directory().empty() || !cpp.source_directory().empty())
             throw configuration_error(unexpected_source_include);
 
         if (cpp.project_directory().empty())
