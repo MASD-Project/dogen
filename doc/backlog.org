@@ -35,3 +35,7 @@ need to fix these tests and re-enable them.
 
 We still have the model we create manually in the old sandbox. It has
 to be moved into github.
+
+*** Update the licence information on all files
+
+We still have the temporary licence details on all source code.
