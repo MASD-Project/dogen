@@ -17,6 +17,7 @@
 #include "dogen/utility/exception/invalid_enum_value.hpp"
 #include "dogen/utility/serialization/xml_helper.hpp"
 #include "dogen/utility/log/logger.hpp"
+#include "dogen/generator/config/validator.hpp"
 #include "dogen/generator/housekeeper.hpp"
 #include "dogen/generator/generation_failure.hpp"
 #include "dogen/generator/modeling/dia_to_sml.hpp"
@@ -67,6 +68,8 @@ generator::generator(const config::settings& s)
 
     if (settings_.output().output_to_stdout())
         throw generation_failure(incorrect_stdout_config);
+
+    config::validator::validate(s);
 }
 
 generator::
@@ -75,6 +78,8 @@ generator(const config::settings& s, const output_fn& o)
 
     if (!settings_.output().output_to_stdout() || !output_)
         throw generation_failure(incorrect_stdout_config);
+
+    config::validator::validate(s);
 }
 
 bool generator::housekeeping_required() const {
