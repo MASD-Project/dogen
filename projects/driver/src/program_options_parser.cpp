@@ -384,8 +384,9 @@ transform_cpp_settings(boost::program_options::variables_map vm) const {
     generator::config::cpp_settings r;
 
     r.verbose(verbose_);
+    r.split_project(vm.count(cpp_split_project_arg));
 
-    if (vm.count(cpp_split_project_arg)) {
+    if (r.split_project()) {
         if (vm.count(cpp_project_dir_arg))
             throw_project_dir_with_split();
 
@@ -398,12 +399,19 @@ transform_cpp_settings(boost::program_options::variables_map vm) const {
     }
 
     using boost::filesystem::path;
-    if (!vm.count(cpp_source_dir_arg) && !vm.count(cpp_include_dir_arg)) {
-        r.source_directory(current_path_);
-        r.include_directory(current_path_);
+    if (r.split_project()) {
+        if (!vm.count(cpp_source_dir_arg) && !vm.count(cpp_include_dir_arg)) {
+            r.source_directory(current_path_);
+            r.include_directory(current_path_);
+        } else {
+            r.source_directory(vm[cpp_source_dir_arg].as<std::string>());
+            r.include_directory(vm[cpp_include_dir_arg].as<std::string>());
+        }
     } else {
-        r.source_directory(vm[cpp_source_dir_arg].as<std::string>());
-        r.include_directory(vm[cpp_include_dir_arg].as<std::string>());
+        if (!vm.count(cpp_project_dir_arg))
+            r.project_directory(current_path_);
+        else
+            r.project_directory(vm[cpp_project_dir_arg].as<std::string>());
     }
 
     r.disable_backend(vm.count(cpp_disable_backend_arg));

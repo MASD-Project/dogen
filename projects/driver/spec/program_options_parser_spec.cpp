@@ -416,8 +416,10 @@ BOOST_AUTO_TEST_CASE(not_supplying_cpp_arguments_results_in_expected_settings) {
     BOOST_LOG_SEV(lg, debug) << "settings: " << s;
 
     const auto cs(s.cpp());
-    BOOST_CHECK(!cs.source_directory().empty());
-    BOOST_CHECK(!cs.include_directory().empty());
+    BOOST_CHECK(!cs.split_project());
+    BOOST_CHECK(!cs.project_directory().empty());
+    BOOST_CHECK(cs.source_directory().empty());
+    BOOST_CHECK(cs.include_directory().empty());
 
     BOOST_CHECK(!cs.disable_backend());
     BOOST_CHECK(!cs.disable_cmakelists());
@@ -477,6 +479,35 @@ BOOST_AUTO_TEST_CASE(supplying_valid_arguments_with_version_results_in_version) 
         version_arg
     };
     check_version(o);
+}
+
+BOOST_AUTO_TEST_CASE(supplying_project_directory_results_in_expected_settings) {
+    SETUP_TEST_LOG_SOURCE("supplying_project_directory_results_in_expected_settings");
+    const std::vector<std::string> o = {
+        target_arg, target_value_arg,
+        cpp_project_dir_arg, cpp_project_dir_value_arg
+    };
+
+    const auto s(check_valid_arguments(o));
+    BOOST_LOG_SEV(lg, debug) << "settings: " << s;
+
+    const auto cs(s.cpp());
+    BOOST_CHECK(cs.project_directory() == cpp_project_dir_value_arg);
+}
+
+BOOST_AUTO_TEST_CASE(supplying_split_without_source_and_include_defaults_them) {
+    SETUP_TEST_LOG_SOURCE("supplying_split_without_source_and_include_defaults_them");
+    const std::vector<std::string> o = {
+        target_arg, target_value_arg,
+        cpp_split_project_arg
+    };
+
+    const auto s(check_valid_arguments(o));
+    BOOST_LOG_SEV(lg, debug) << "settings: " << s;
+
+    const auto cs(s.cpp());
+    BOOST_CHECK(!cs.source_directory().empty());
+    BOOST_CHECK(!cs.include_directory().empty());
 }
 
 BOOST_AUTO_TEST_CASE(supplying_source_or_include_without_split_throws) {
