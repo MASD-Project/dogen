@@ -46,6 +46,8 @@ const std::string binary_archive_type("binary");
 const std::string stop_after_merging_arg("stop-after-merging");
 const std::string stop_after_formatting_arg("stop-after-formatting");
 
+const std::string cpp_split_project_arg("cpp-split-project");
+const std::string cpp_project_dir_arg("cpp-project-dir");
 const std::string cpp_source_dir_arg("cpp-source-dir");
 const std::string cpp_include_dir_arg("cpp-include-dir");
 const std::string cpp_disable_backend_arg("cpp-disable-backend");
@@ -187,13 +189,22 @@ program_options_parser::cpp_options_factory() const {
             "Do not generate a constructor taking as arguments all member "
             "variables")
         ("cpp-disable-cmakelists", "Do not generate 'CMakeLists.txt' for C++.")
+        ("cpp-split-project,y",
+            "Split the model project into a source and include directory, "
+            "with individually configurable locations.")
+        ("cpp-project-dir,x",
+            value<std::string>(),
+            "Output directory for all project files. Defaults to '.'"
+            "Cannot be used with --cpp-split-project")
         ("cpp-source-dir,s",
             value<std::string>(),
             "Output directory for C++ source files. Defaults to '.'"
+            "Can only be used with --cpp-split-project."
             "If supplied, include directory must be supplied too.")
         ("cpp-include-dir,i",
             value<std::string>(),
             "Output directory for C++ include files. Defaults to '.'"
+            "Can only be used with --cpp-split-project."
             "If supplied, source directory must be supplied too.")
         ("cpp-enable-facet",
             value<std::vector<std::string> >(),
@@ -305,6 +316,22 @@ help_function(std::function<void(std::string)> value) {
     help_function_ = value;
 }
 
+void program_options_parser::throw_project_dir_with_split() const {
+    std::ostringstream stream;
+    stream << "Argument project-dir cannot be used in"
+           << " conjunction with project splitting. "
+           << " Try `dogen --help' for more information.";
+    throw parser_validation_error(stream.str());
+}
+
+void program_options_parser::throw_include_source_without_split() const {
+    std::ostringstream stream;
+    stream << "Arguments source-dir and include-dir"
+           << " require project splitting. "
+           << " Try `dogen --help' for more information.";
+    throw parser_validation_error(stream.str());
+}
+
 void program_options_parser::throw_missing_include_source() const {
     std::ostringstream stream;
     stream << "You must supply both source-dir and include-dir"
@@ -357,8 +384,18 @@ transform_cpp_settings(boost::program_options::variables_map vm) const {
     generator::config::cpp_settings r;
 
     r.verbose(verbose_);
-    if (vm.count(cpp_source_dir_arg) != vm.count(cpp_include_dir_arg))
-        throw_missing_include_source();
+
+    if (vm.count(cpp_split_project_arg)) {
+        if (vm.count(cpp_project_dir_arg))
+            throw_project_dir_with_split();
+
+        if (vm.count(cpp_source_dir_arg) != vm.count(cpp_include_dir_arg))
+            throw_missing_include_source();
+
+    } else {
+        if (vm.count(cpp_source_dir_arg) || vm.count(cpp_include_dir_arg))
+            throw_include_source_without_split();
+    }
 
     using boost::filesystem::path;
     if (!vm.count(cpp_source_dir_arg) && !vm.count(cpp_include_dir_arg)) {

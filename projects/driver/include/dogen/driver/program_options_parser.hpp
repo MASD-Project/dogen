@@ -47,6 +47,8 @@ public:
     program_options_parser(int argc, char** argv);
 
 private:
+    void throw_project_dir_with_split() const;
+    void throw_include_source_without_split() const;
     void throw_missing_include_source() const;
     void throw_missing_target() const;
 

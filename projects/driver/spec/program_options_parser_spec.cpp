@@ -19,7 +19,7 @@
 namespace {
 
 const std::string empty;
-const std::string test_module("dogen");
+const std::string test_module("driver");
 const std::string test_suite("program_options_parser_spec");
 const std::string help_sanity_line("General options");
 const std::string missing_target("Mandatory parameter target is missing");
@@ -28,6 +28,10 @@ const std::string invalid_archive_type("Invalid archive type");
 const std::string unknown_option("unknown option invalid-argument");
 const std::string source_include_error(
     "You must supply both source-dir and include-dir");
+const std::string split_project_dir_error(
+    "Argument project-dir cannot be used in conjunction with project splitting");
+const std::string source_include_without_split(
+    "Arguments source-dir and include-dir require project splitting");
 
 const std::string help_arg("--help");
 const std::string version_arg("--version");
@@ -53,6 +57,9 @@ const std::string reference_value_1_arg("some reference");
 const std::string reference_value_2_arg("another reference");
 const std::string disable_model_package_arg("--disable-model-package");
 
+const std::string cpp_split_project_arg("--cpp-split-project");
+const std::string cpp_project_dir_arg("--cpp-project-dir");
+const std::string cpp_project_dir_value_arg("a project dir");
 const std::string cpp_source_arg("--cpp-source-dir");
 const std::string cpp_source_value_arg("some_source");
 const std::string cpp_include_arg("--cpp-include-dir");
@@ -155,7 +162,16 @@ void check_exception(std::vector<std::string> options, std::string expected) {
     using dogen::driver::parser_validation_error;
     auto lambda([&](const parser_validation_error& e) {
             const std::string msg(e.what());
-            return boost::starts_with(msg, expected);
+
+            if (!boost::starts_with(msg, expected)) {
+                using namespace dogen::utility::log;
+                logger lg(logger_factory(test_suite));
+                BOOST_LOG_SEV(lg, error)
+                    << "Unexpected exception text. Expected: '" << expected
+                    << "'. Actual: '" << msg << "'.";
+                return false;
+            }
+            return true;
         });
 
     BOOST_CHECK_EXCEPTION(parser.parse(), parser_validation_error, lambda);
@@ -294,6 +310,7 @@ BOOST_AUTO_TEST_CASE(not_supplying_modeling_options_other_than_target_results_in
 BOOST_AUTO_TEST_CASE(supplying_arguments_without_target_throws) {
     SETUP_TEST_LOG("supplying_arguments_without_target_throws");
     const std::vector<std::string> o = {
+        cpp_split_project_arg,
         cpp_source_arg, cpp_source_value_arg,
         cpp_include_arg, cpp_include_value_arg
     };
@@ -304,6 +321,7 @@ BOOST_AUTO_TEST_CASE(supplying_cpp_arguments_results_in_expected_settings) {
     SETUP_TEST_LOG_SOURCE("supplying_cpp_arguments_results_in_expected_settings");
     const std::vector<std::string> o = {
         target_arg, target_value_arg,
+        cpp_split_project_arg,
         cpp_source_arg, cpp_source_value_arg,
         cpp_include_arg, cpp_include_value_arg,
         cpp_disable_backend_arg,
@@ -461,10 +479,43 @@ BOOST_AUTO_TEST_CASE(supplying_valid_arguments_with_version_results_in_version) 
     check_version(o);
 }
 
+BOOST_AUTO_TEST_CASE(supplying_source_or_include_without_split_throws) {
+    SETUP_TEST_LOG("supplying_source_or_include_without_split_throws");
+    const std::vector<std::string> o0 = {
+        target_arg, target_value_arg,
+        cpp_source_arg, cpp_source_value_arg
+    };
+    check_exception(o0, source_include_without_split);
+
+    const std::vector<std::string> o1 = {
+        target_arg, target_value_arg,
+        cpp_include_arg, cpp_include_value_arg
+    };
+    check_exception(o1, source_include_without_split);
+
+    const std::vector<std::string> o2 = {
+        target_arg, target_value_arg,
+        cpp_source_arg, cpp_source_value_arg,
+        cpp_include_arg, cpp_include_value_arg
+    };
+    check_exception(o2, source_include_without_split);
+}
+
+BOOST_AUTO_TEST_CASE(supplying_project_dir_with_split_throws) {
+    SETUP_TEST_LOG("supplying_project_dir_with_split_throws");
+    const std::vector<std::string> o = {
+        target_arg, target_value_arg,
+        cpp_split_project_arg,
+        cpp_project_dir_arg, cpp_project_dir_value_arg
+    };
+    check_exception(o, split_project_dir_error);
+}
+
 BOOST_AUTO_TEST_CASE(supplying_source_and_no_include_throws) {
     SETUP_TEST_LOG("supplying_source_and_no_include_throws");
     const std::vector<std::string> o = {
         target_arg, target_value_arg,
+        cpp_split_project_arg,
         cpp_source_arg, cpp_source_value_arg
     };
     check_exception(o, source_include_error);
@@ -474,6 +525,7 @@ BOOST_AUTO_TEST_CASE(supplying_include_and_no_source_throws) {
     SETUP_TEST_LOG("supplying_include_and_no_source_throws");
     const std::vector<std::string> o = {
         target_arg, target_value_arg,
+        cpp_split_project_arg,
         cpp_include_arg, cpp_include_value_arg
     };
     check_exception(o, source_include_error);
