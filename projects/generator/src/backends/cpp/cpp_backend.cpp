@@ -120,8 +120,7 @@ cpp_backend::generate_file_view_model(view_models::file_view_model vm) const {
     return std::make_pair(vm.file_path(), stream.str());
 }
 
-backend::value_type
-cpp_backend::generate_file_view_models() const {
+backend::value_type cpp_backend::generate_file_view_models() const {
     const auto f(settings_.enabled_facets());
     const bool dfi(settings_.disable_facet_includers());
     const bool dk(settings_.disable_versioning());

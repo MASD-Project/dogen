@@ -102,30 +102,30 @@ std::string cpp_location_manager::extension(cpp_file_types file_type) const {
 boost::filesystem::path
 cpp_location_manager::relative_path(cpp_location_request request) const {
 
-    boost::filesystem::path result;
+    boost::filesystem::path r;
     for(auto n : request.external_package_path())
-        result /= n;
+        r /= n;
 
-    result /= request.model_name();
-    result /= facet_directory(request.facet_type());
+    r /= request.model_name();
+    r /= facet_directory(request.facet_type());
 
     for(auto n : request.package_path())
-        result /= n;
+        r /= n;
 
     std::ostringstream stream;
     stream << request.file_name() << facet_postfix(request.facet_type())
            << extension(request.file_type());
-    result /= stream.str();
+    r /= stream.str();
 
-    return result;
+    return r;
 }
 
 boost::filesystem::path
 cpp_location_manager::absolute_path(cpp_location_request request) const {
 
-    auto result(file_type_directory(request.file_type()));
-    result /= relative_path(request);
-    return result;
+    auto r(file_type_directory(request.file_type()));
+    r /= relative_path(request);
+    return r;
 }
 
 boost::filesystem::path
@@ -135,13 +135,13 @@ cpp_location_manager::absolute_path(std::string name) const {
 
 std::vector<boost::filesystem::path>
 cpp_location_manager::managed_directories() const {
-    std::vector<boost::filesystem::path> d;
+    std::vector<boost::filesystem::path> r;
 
-    d.reserve(2);
-    d.push_back(settings_.source_directory() /= model_name_);
-    d.push_back(settings_.include_directory() /= model_name_);
+    r.reserve(2);
+    r.push_back(settings_.source_directory() /= model_name_);
+    r.push_back(settings_.include_directory() /= model_name_);
 
-    return d;
+    return r;
 }
 
 } } } }
