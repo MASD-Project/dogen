@@ -31,6 +31,7 @@ public:
 public:
     cpp_settings() :
         verbose_(false),
+        split_project_(false),
         disable_backend_(false),
         disable_cmakelists_(false),
         disable_complete_constructor_(false),
@@ -43,6 +44,8 @@ public:
 
     cpp_settings(cpp_settings&& rhs)
     : verbose_(std::move(rhs.verbose_)),
+      split_project_(std::move(rhs.split_project_)),
+      project_directory_(std::move(rhs.project_directory_)),
       source_directory_(std::move(rhs.source_directory_)),
       include_directory_(std::move(rhs.include_directory_)),
       disable_backend_(std::move(rhs.disable_backend_)),
@@ -76,8 +79,41 @@ public:
     /**@}*/
 
     /**
+     * @brief If true, project is split into source and include
+     * directories, both configurable.
+     *
+     * If false, there is only a single top-level directory for the
+     * entire project, containing as sub-directories both the source
+     * and include directories.
+     */
+    /**@{*/
+    bool split_project() const { return split_project_; }
+    cpp_settings& split_project(bool value) {
+        split_project_ = value;
+        return *this;
+    }
+    /**@}*/
+
+    /**
+     * @brief Directory in which to place all of the C++ code.
+     *
+     * Implies project splitting is off.
+     */
+    /**@{*/
+    boost::filesystem::path project_directory() const {
+        return project_directory_;
+    }
+    cpp_settings& project_directory(boost::filesystem::path value) {
+        project_directory_ = value;
+        return *this;
+    }
+    /**@}*/
+
+    /**
      * @brief Directory in which to place the C++ implementation
      * files.
+     *
+     * Can only be supplied if split project is set to true.
      */
     /**@{*/
     boost::filesystem::path source_directory() const {
@@ -91,6 +127,8 @@ public:
 
     /**
      * @brief Directory in which to place the C++ header files.
+     *
+     * Can only be supplied if split project is set to true.
      */
     /**@{*/
     boost::filesystem::path include_directory() const {
@@ -327,6 +365,8 @@ public:
 
 private:
     bool verbose_;
+    bool split_project_;
+    boost::filesystem::path project_directory_;
     boost::filesystem::path source_directory_;
     boost::filesystem::path include_directory_;
     bool disable_backend_;

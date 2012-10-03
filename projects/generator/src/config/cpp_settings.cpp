@@ -24,6 +24,8 @@ operator<<(std::ostream& stream, cpp_settings value) {
     using dogen::utility::streaming::jsonify;
     stream << "\"cpp_settings\": { "
            << "\"verbose\":" << value.verbose() << ", "
+           << "\"split_project\":" << value.split_project() << ", "
+           << "\"project_dir\": " << value.project_directory() << ", "
            << "\"src_dir\": " << value.source_directory() << ", "
            << "\"include_dir\": " << value.include_directory() << ", "
            << "\"disable_backend\": " << value.disable_backend() << ", "
