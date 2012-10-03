@@ -133,4 +133,15 @@ cpp_location_manager::absolute_path(std::string name) const {
     return settings_.source_directory() / model_name_ / name;
 }
 
+std::vector<boost::filesystem::path>
+cpp_location_manager::managed_directories() const {
+    std::vector<boost::filesystem::path> d;
+
+    d.reserve(2);
+    d.push_back(settings_.source_directory() /= model_name_);
+    d.push_back(settings_.include_directory() /= model_name_);
+
+    return d;
+}
+
 } } } }

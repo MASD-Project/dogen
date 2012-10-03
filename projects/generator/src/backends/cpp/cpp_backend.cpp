@@ -35,13 +35,6 @@ cpp_backend(sml::model model, config::cpp_settings settings) :
     model_(model), settings_(settings),
     location_manager_(model.name(), settings_) {
 
-    settings_.source_directory(settings_.source_directory() /= model_.name());
-    settings_.include_directory(settings.include_directory() /= model_.name());
-
-    managed_directories_.reserve(2);
-    managed_directories_.push_back(settings_.source_directory());
-    managed_directories_.push_back(settings_.include_directory());
-
     if (settings_.use_integrated_io()) {
         const auto f(settings_.enabled_facets());
         const bool has_io_facet(f.find(cpp_facet_types::io) != f.end());
@@ -161,7 +154,7 @@ backend::value_type cpp_backend::generate() {
 }
 
 std::vector<boost::filesystem::path> cpp_backend::managed_directories() const {
-    return managed_directories_;
+    return location_manager_.managed_directories();
 }
 
 } } } }

@@ -66,7 +66,6 @@ private:
     const sml::model model_;
     config::cpp_settings settings_;
     const cpp_location_manager location_manager_;
-    std::vector<boost::filesystem::path> managed_directories_;
 };
 
 } } } }

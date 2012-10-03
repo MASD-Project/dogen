@@ -51,6 +51,7 @@ public:
     boost::filesystem::path relative_path(cpp_location_request request) const;
     boost::filesystem::path absolute_path(cpp_location_request request) const;
     boost::filesystem::path absolute_path(std::string name) const;
+    std::vector<boost::filesystem::path> managed_directories() const;
 
 private:
     const std::string model_name_;
