@@ -61,6 +61,7 @@ config::cpp_settings mock_settings_factory::build_cpp_settings(
 
     config::cpp_settings r;
     r.verbose(verbose);
+    r.split_project(true);
     r.source_directory(src_dir);
     r.include_directory(include_dir);
 
