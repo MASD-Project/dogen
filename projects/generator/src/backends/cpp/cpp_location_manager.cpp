@@ -138,8 +138,8 @@ cpp_location_manager::managed_directories() const {
     std::vector<boost::filesystem::path> r;
 
     r.reserve(2);
-    r.push_back(settings_.source_directory() /= model_name_);
-    r.push_back(settings_.include_directory() /= model_name_);
+    r.push_back(settings_.source_directory() / model_name_);
+    r.push_back(settings_.include_directory() / model_name_);
 
     return r;
 }
