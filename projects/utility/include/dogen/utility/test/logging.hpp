@@ -40,17 +40,17 @@ scoped_life_cycle_manager_factory(std::string test_module,
 #undef SETUP_TEST_LOG
 #endif
 #define SETUP_TEST_LOG(function_name)                                   \
-    auto sl(dogen::utility::test::scoped_life_cycle_manager_factory(  \
+    auto sl(dogen::utility::test::scoped_life_cycle_manager_factory(    \
             test_module, test_suite, function_name));
 
 #ifdef SETUP_TEST_LOG_SOURCE
 #undef SETUP_TEST_LOG_SOURCE
 #endif
 #define SETUP_TEST_LOG_SOURCE(function_name)                            \
-    dogen::utility::log::logger lg(                                   \
-        dogen::utility::log::logger_factory(test_suite));             \
-    using namespace dogen::utility::log;                              \
-    auto sl(dogen::utility::test::scoped_life_cycle_manager_factory(  \
+    dogen::utility::log::logger lg(                                     \
+        dogen::utility::log::logger_factory(test_suite));               \
+    using namespace dogen::utility::log;                                \
+    auto sl(dogen::utility::test::scoped_life_cycle_manager_factory(    \
             test_module, test_suite, function_name));
 
 #endif
