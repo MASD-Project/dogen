@@ -12,11 +12,11 @@
 #include "dogen/utility/io/vector_io.hpp"
 #include "dogen/utility/test/logging.hpp"
 #include "dogen/utility/test/canned_tests.hpp"
-#include "dogen/all_primitives/domain/all_primitives.hpp"
-#include "dogen/all_primitives/io/all_primitives_io.hpp"
-#include "dogen/all_primitives/serialization/all_primitives_ser.hpp"
-#include "dogen/all_primitives/test_data/all_primitives_sequence.hpp"
-#include "dogen/all_primitives/hash/all_primitives_hash.hpp"
+#include "dogen/all_primitives/domain/all.hpp"
+#include "dogen/all_primitives/io/all.hpp"
+#include "dogen/all_primitives/serialization/all.hpp"
+#include "dogen/all_primitives/test_data/all.hpp"
+#include "dogen/all_primitives/hash/all.hpp"
 
 namespace {
 

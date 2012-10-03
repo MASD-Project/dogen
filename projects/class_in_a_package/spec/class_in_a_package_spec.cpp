@@ -12,11 +12,11 @@
 #include "dogen/utility/io/vector_io.hpp"
 #include "dogen/utility/test/logging.hpp"
 #include "dogen/utility/test/canned_tests.hpp"
-#include "dogen/class_in_a_package/domain/class_in_a_package.hpp"
-#include "dogen/class_in_a_package/io/class_in_a_package_io.hpp"
-#include "dogen/class_in_a_package/serialization/class_in_a_package_ser.hpp"
-#include "dogen/class_in_a_package/test_data/class_in_a_package_sequence.hpp"
-#include "dogen/class_in_a_package/hash/class_in_a_package_hash.hpp"
+#include "dogen/class_in_a_package/domain/all.hpp"
+#include "dogen/class_in_a_package/io/all.hpp"
+#include "dogen/class_in_a_package/serialization/all.hpp"
+#include "dogen/class_in_a_package/test_data/all.hpp"
+#include "dogen/class_in_a_package/hash/all.hpp"
 
 namespace {
 
