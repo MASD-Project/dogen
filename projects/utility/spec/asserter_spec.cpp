@@ -157,8 +157,8 @@ BOOST_AUTO_TEST_CASE(assert_object_serialize_and_compare_returns_true_if_items_a
     BOOST_CHECK(asserter::assert_object(e, a, ts));
 }
 
-BOOST_AUTO_TEST_CASE(assert_object_serialize_and_compare_fails_if_items_are_different) {
-    SETUP_TEST_LOG("assert_object_serialize_and_compare_fails_if_items_are_different");
+BOOST_AUTO_TEST_CASE(assert_object_serialize_and_compare_returns_false_if_items_are_different) {
+    SETUP_TEST_LOG("assert_object_serialize_and_compare_returns_false_if_items_are_different");
     using dogen::utility::test_data::tds_test_good;
     const auto a(tds_test_good::actual_test_serializer_2_xmltst());
     const auto e(tds_test_good::expected_test_serializer_xmltst());
@@ -166,6 +166,36 @@ BOOST_AUTO_TEST_CASE(assert_object_serialize_and_compare_fails_if_items_are_diff
     test_serialization ts(10);
     using dogen::utility::test::asserter;
     BOOST_CHECK(!asserter::assert_object(e, a, ts));
+}
+
+BOOST_AUTO_TEST_CASE(assert_equals_returns_false_if_items_are_different) {
+    SETUP_TEST_LOG("assert_equals_returns_false_if_items_are_different");
+
+    std::string e_str("some string");
+    std::string a_str("another string");
+
+    using dogen::utility::test::asserter;
+    BOOST_CHECK(!asserter::assert_equals(e_str, a_str));
+
+    int e_int(0);
+    int a_int(1);
+    BOOST_CHECK(!asserter::assert_equals(e_int, a_int));
+}
+
+BOOST_AUTO_TEST_CASE(assert_equals_returns_true_if_items_are_equal) {
+    SETUP_TEST_LOG("assert_equals_returns_true_if_items_are_equal");
+
+    std::string e_str("some string");
+    std::string a_str("some string");
+
+    using dogen::utility::test::asserter;
+    BOOST_CHECK(asserter::assert_equals(e_str, a_str));
+    BOOST_CHECK(asserter::assert_equals(e_str, e_str));
+
+    int e_int(0);
+    int a_int(0);
+    BOOST_CHECK(asserter::assert_equals(e_int, a_int));
+    BOOST_CHECK(asserter::assert_equals(e_int, e_int));
 }
 
 BOOST_AUTO_TEST_SUITE_END()

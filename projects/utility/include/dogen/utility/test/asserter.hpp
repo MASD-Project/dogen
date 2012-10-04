@@ -127,6 +127,24 @@ public:
     static bool assert_directory(boost::filesystem::path expected_path,
         boost::filesystem::path actual_path,
         std::vector<file_asserter::shared_ptr> file_asserters);
+
+    /**
+     * @brief Asserts that expected matches equal via the equality
+     * operator.
+     *
+     * The entity concept requires both the equality operator and the
+     * inserter operator.
+     *
+     * @param expected object with the expected state
+     * @param actual object that was actually generated
+     */
+    template<typename Entity>
+    static bool assert_equals(const Entity& expected, const Entity& actual) {
+        using namespace dogen::utility::log;
+        BOOST_LOG_SEV(lg_, debug) << "expected: " << expected;
+        BOOST_LOG_SEV(lg_, debug) << "actual: " << actual;
+        return expected == actual;
+    }
 };
 
 } } }
