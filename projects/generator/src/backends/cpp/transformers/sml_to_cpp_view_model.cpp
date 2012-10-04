@@ -28,11 +28,13 @@ const std::string extension("HPP");
 const std::string namespace_separator("::");
 const std::string unammed_model("unnamed_model");
 
+const std::string includer_name("all");
 const std::string versioned_name("versioned_key");
 const std::string unversioned_name("unversioned_key");
 const std::string id_name("id");
 const std::string version_name("version");
 const std::string uint_name("unsigned int");
+const std::string bool_type("bool");
 
 }
 
@@ -161,7 +163,7 @@ view_models::class_view_model sml_to_cpp_view_model::transform_class(
             sml::meta_types::primitive);
         if (k.is_primitive()) {
             has_primitive_properties = true;
-            if (k.type() == "bool")
+            if (k.type() == bool_type)
                 has_boolean_properties = true;
         }
 
@@ -366,9 +368,8 @@ sml_to_cpp_view_model::transform_facet_includers() const {
 
     for (cpp_facet_types ft : facet_types_) {
         sml::qualified_name qn;
-        const auto n(model_.name().empty() ? unammed_model : model_.name());
+        const auto n(includer_name);
         qn.type_name(n);
-
         const auto rq(location_request_factory(ft, file_type, qn));
 
         view_models::file_view_model vm;
