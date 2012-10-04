@@ -13,10 +13,10 @@
 #include "dogen/utility/test/logging.hpp"
 #include "dogen/utility/test/canned_tests.hpp"
 #include "dogen/class_in_a_package/domain/all.hpp"
-#include "dogen/class_in_a_package/io/all.hpp"
-#include "dogen/class_in_a_package/serialization/all.hpp"
-#include "dogen/class_in_a_package/test_data/all.hpp"
-#include "dogen/class_in_a_package/hash/all.hpp"
+#include "dogen/class_in_a_package/io/all_io.hpp"
+#include "dogen/class_in_a_package/serialization/all_ser.hpp"
+#include "dogen/class_in_a_package/test_data/all_sequence.hpp"
+#include "dogen/class_in_a_package/hash/all_hash.hpp"
 
 namespace {
 
