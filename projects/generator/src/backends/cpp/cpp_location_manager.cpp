@@ -100,11 +100,17 @@ std::string cpp_location_manager::extension(cpp_file_types file_type) const {
 }
 
 boost::filesystem::path
-cpp_location_manager::relative_path(cpp_location_request request) const {
-
+cpp_location_manager::relative_logical_path(cpp_location_request request) const {
     boost::filesystem::path r;
     for(auto n : request.external_package_path())
         r /= n;
+
+    return r / relative_physical_path(request);
+}
+
+boost::filesystem::path
+cpp_location_manager::relative_physical_path(cpp_location_request request) const {
+    boost::filesystem::path r;
 
     r /= request.model_name();
     r /= facet_directory(request.facet_type());
@@ -124,7 +130,7 @@ boost::filesystem::path
 cpp_location_manager::absolute_path(cpp_location_request request) const {
 
     auto r(file_type_directory(request.file_type()));
-    r /= relative_path(request);
+    r /= relative_physical_path(request);
     return r;
 }
 

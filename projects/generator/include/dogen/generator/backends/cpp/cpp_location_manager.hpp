@@ -48,9 +48,41 @@ private:
     std::string extension(cpp_file_types file_type) const;
 
 public:
-    boost::filesystem::path relative_path(cpp_location_request request) const;
-    boost::filesystem::path absolute_path(cpp_location_request request) const;
-    boost::filesystem::path absolute_path(std::string name) const;
+    typedef boost::filesystem::path path;
+
+    /**
+     * @brief Returns the path to the requested location taking into
+     * account the external package path.
+     *
+     * Logical relative paths are used for include files; they need to
+     * take into account existing namespaces the user may have already
+     * defined.
+     */
+    path relative_logical_path(cpp_location_request request) const;
+
+    /**
+     * @brief Returns the path to the requested location, excluding
+     * the external package path.
+     *
+     * When combined with the source or include directories, the
+     * physical path matches the location on the hard drive for the
+     * artefact in question.
+     */
+    path relative_physical_path(cpp_location_request request) const;
+
+    /**
+     * @brief Returns the absolute path for the request, taking into
+     * account source and include directories, etc.
+     */
+    path absolute_path(cpp_location_request request) const;
+
+    /**
+     * @brief Returns an absolute path into the source directory for
+     * the current model.
+     *
+     * @param name name of the item we're getting the path for.
+     */
+    path absolute_path(std::string name) const;
     std::vector<boost::filesystem::path> managed_directories() const;
 
 private:

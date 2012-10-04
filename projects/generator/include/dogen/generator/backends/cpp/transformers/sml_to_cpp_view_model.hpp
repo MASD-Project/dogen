@@ -89,8 +89,7 @@ private:
     to_header_guard_name(boost::filesystem::path relative_path) const;
 
     cpp_location_request location_request_factory(cpp_facet_types facet_type,
-        cpp_file_types file_type, sml::qualified_name name,
-        bool ignore_external_package_path = false) const;
+        cpp_file_types file_type, sml::qualified_name name) const;
 
     /**
      * @brief Generate a class view model for a given key type.

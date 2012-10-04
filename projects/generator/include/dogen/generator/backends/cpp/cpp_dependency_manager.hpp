@@ -52,10 +52,8 @@ public:
 private:
     bool has_versioned_dependency(cpp_facet_types ft, cpp_file_types flt) const;
 
-    cpp_location_request
-    location_request_factory(cpp_facet_types ft, cpp_file_types flt,
-        sml::qualified_name name,
-        bool ignore_external_package_path = false) const;
+    cpp_location_request location_request_factory(cpp_facet_types ft,
+        cpp_file_types flt, sml::qualified_name name) const;
 
     /**
      * @brief Returns the dependency to the unversioned key domain

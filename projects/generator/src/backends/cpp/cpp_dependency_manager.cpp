@@ -30,8 +30,7 @@ cpp_dependency_manager::cpp_dependency_manager(sml::model model,
 
 cpp_location_request cpp_dependency_manager::
 location_request_factory(cpp_facet_types ft, cpp_file_types flt,
-    sml::qualified_name name,
-    bool ignore_external_package_path) const {
+    sml::qualified_name name) const {
 
     cpp_location_request r;
     r.facet_type(ft);
@@ -39,8 +38,7 @@ location_request_factory(cpp_facet_types ft, cpp_file_types flt,
     r.model_name(model_.name());
     r.package_path(name.package_path());
     r.file_name(name.type_name());
-    if (!ignore_external_package_path)
-        r.external_package_path(name.external_package_path());
+    r.external_package_path(name.external_package_path());
     return r;
 }
 
@@ -72,7 +70,7 @@ std::string cpp_dependency_manager::unversioned_dependency() const {
     const auto d(cpp_facet_types::domain);
     const auto h(cpp_file_types::header);
     const auto rq(location_request_factory(d, h, qn));
-    return location_manager_.relative_path(rq).generic_string();
+    return location_manager_.relative_logical_path(rq).generic_string();
 }
 
 bool cpp_dependency_manager::
@@ -114,7 +112,7 @@ versioned_dependency(cpp_facet_types ft, cpp_file_types flt) const {
 
     const auto h(cpp_file_types::header);
     const auto rq(location_request_factory(actual_facet, h, qn));
-    return location_manager_.relative_path(rq).generic_string();
+    return location_manager_.relative_logical_path(rq).generic_string();
 }
 
 std::string cpp_dependency_manager::
@@ -122,14 +120,14 @@ domain_header_dependency(sml::qualified_name name) const {
     const auto d(cpp_facet_types::domain);
     const auto h(cpp_file_types::header);
     const auto rq(location_request_factory(d, h, name));
-    return location_manager_.relative_path(rq).generic_string();
+    return location_manager_.relative_logical_path(rq).generic_string();
 }
 
 std::string cpp_dependency_manager::header_dependency(
     sml::qualified_name name, cpp_facet_types facet_type) const {
     const auto h(cpp_file_types::header);
     const auto rq(location_request_factory(facet_type, h, name));
-    return location_manager_.relative_path(rq).generic_string();
+    return location_manager_.relative_logical_path(rq).generic_string();
 }
 
 std::list<std::string> cpp_dependency_manager::

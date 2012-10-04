@@ -194,7 +194,7 @@ view_models::class_view_model sml_to_cpp_view_model::transform_class(
 
 cpp_location_request sml_to_cpp_view_model::
 location_request_factory(cpp_facet_types facet_type, cpp_file_types file_type,
-    sml::qualified_name name, bool ignore_external_package_path) const {
+    sml::qualified_name name) const {
 
     cpp_location_request r;
     r.facet_type(facet_type);
@@ -202,8 +202,7 @@ location_request_factory(cpp_facet_types facet_type, cpp_file_types file_type,
     r.model_name(model_.name());
     r.package_path(name.package_path());
     r.file_name(name.type_name());
-    if (!ignore_external_package_path)
-        r.external_package_path(name.external_package_path());
+    r.external_package_path(name.external_package_path());
     return r;
 }
 
@@ -218,14 +217,12 @@ transform_file(cpp_facet_types ft, cpp_file_types flt, sml::pod pod) {
     r.aspect_type(cpp_aspect_types::main);
     r.class_vm(transform_class(pod, ns));
 
-    const bool ignore_external_package_path(true);
     r.file_path(
         location_manager_.absolute_path(
-            location_request_factory(ft, flt, name,
-                ignore_external_package_path)));
+            location_request_factory(ft, flt, name)));
 
     if (flt == cpp_file_types::header) {
-        const auto rp(location_manager_.relative_path(
+        const auto rp(location_manager_.relative_logical_path(
                 location_request_factory(ft, flt, name)));
         r.header_guard(to_header_guard_name(rp));
         dependency_manager_.register_header(ft, rp);
@@ -325,13 +322,12 @@ create_key_file_view_model(cpp_facet_types ft, cpp_file_types flt,
 
     if (flt == cpp_file_types::header) {
         const auto rq(location_request_factory(ft, flt, qn));
-        const auto rp(location_manager_.relative_path(rq));
+        const auto rp(location_manager_.relative_logical_path(rq));
         r.header_guard(to_header_guard_name(rp));
         dependency_manager_.register_header(ft, rp);
     }
 
-    const bool no_epp(true);
-    const auto rq(location_request_factory(ft, flt, qn, no_epp));
+    const auto rq(location_request_factory(ft, flt, qn));
     r.file_path(location_manager_.absolute_path(rq));
 
     log_generating_file(ft, at, flt, name);
@@ -373,8 +369,7 @@ sml_to_cpp_view_model::transform_facet_includers() const {
         const auto n(model_.name().empty() ? unammed_model : model_.name());
         qn.type_name(n);
 
-        const bool no_epp(true);
-        const auto rq(location_request_factory(ft, file_type, qn, no_epp));
+        const auto rq(location_request_factory(ft, file_type, qn));
 
         view_models::file_view_model vm;
         vm.facet_type(ft);
