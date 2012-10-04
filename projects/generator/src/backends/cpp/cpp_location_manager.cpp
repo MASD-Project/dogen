@@ -20,8 +20,8 @@ const std::string serialization_postfix("_ser");
 const std::string test_data_postfix("_sequence");
 const std::string database_postfix("_db");
 
-const std::string hpp_extension(".hpp");
-const std::string cpp_extension(".cpp");
+const std::string src_dir("src");
+const std::string include_dir("include");
 
 const std::string invalid_facet_types_enum("Invalid value for cpp_facet_types");
 const std::string invalid_file_types_enum("Invalid value for cpp_file_types");
@@ -34,7 +34,16 @@ namespace cpp {
 
 cpp_location_manager::cpp_location_manager(std::string model_name,
     config::cpp_settings settings) :
-    model_name_(model_name), settings_(settings) { }
+    model_name_(model_name), settings_(settings) {
+
+    if (settings_.split_project()) {
+        source_directory_ = settings_.source_directory();
+        include_directory_ = settings_.include_directory();
+    } else {
+        source_directory_ = settings_.project_directory() / src_dir;
+        include_directory_ = settings_.project_directory() / include_dir;
+    }
+}
 
 std::string cpp_location_manager::facet_directory(cpp_facet_types facet) const {
     if (settings_.disable_facet_folders())
@@ -79,9 +88,8 @@ std::string cpp_location_manager::facet_postfix(cpp_facet_types facet) const {
 boost::filesystem::path
 cpp_location_manager::file_type_directory(cpp_file_types file_type) const {
     switch(file_type) {
-    case cpp_file_types::header: return settings_.include_directory(); break;
-    case cpp_file_types::implementation:
-        return settings_.source_directory(); break;
+    case cpp_file_types::header: return include_directory_; break;
+    case cpp_file_types::implementation: return source_directory_; break;
     default:
         using utility::exception::invalid_enum_value;
         throw invalid_enum_value(invalid_file_types_enum);
@@ -136,7 +144,7 @@ cpp_location_manager::absolute_path(cpp_location_request request) const {
 
 boost::filesystem::path
 cpp_location_manager::absolute_path(std::string name) const {
-    return settings_.source_directory() / model_name_ / name;
+    return source_directory_ / model_name_ / name;
 }
 
 std::vector<boost::filesystem::path>
@@ -144,8 +152,8 @@ cpp_location_manager::managed_directories() const {
     std::vector<boost::filesystem::path> r;
 
     r.reserve(2);
-    r.push_back(settings_.source_directory() / model_name_);
-    r.push_back(settings_.include_directory() / model_name_);
+    r.push_back(source_directory_ / model_name_);
+    r.push_back(include_directory_ / model_name_);
 
     return r;
 }

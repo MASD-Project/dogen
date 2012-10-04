@@ -88,6 +88,8 @@ public:
 private:
     const std::string model_name_;
     config::cpp_settings settings_;
+    boost::filesystem::path source_directory_;
+    boost::filesystem::path include_directory_;
 };
 
 } } } }
