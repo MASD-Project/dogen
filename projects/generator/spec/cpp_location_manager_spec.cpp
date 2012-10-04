@@ -108,33 +108,33 @@ BOOST_AUTO_TEST_CASE(split_project_configuration_results_in_expected_locations) 
     using dogen::generator::backends::cpp::cpp_location_request;
     const auto rq(request(cpp_facet_types::domain, cpp_file_types::header));
 
-    std::string e("c/d/test/domain/a/b/a_type.hpp");
-    std::string a(lm.relative_logical_path(rq).string());
+    boost::filesystem::path e("c/d/test/domain/a/b/a_type.hpp");
+    boost::filesystem::path a(lm.relative_logical_path(rq));
 
     using dogen::utility::test::asserter;
     BOOST_CHECK(asserter::assert_equals(e, a));
 
     e = "test/domain/a/b/a_type.hpp";
-    a = lm.relative_physical_path(rq).string();
+    a = lm.relative_physical_path(rq);
     BOOST_CHECK(asserter::assert_equals(e, a));
 
     e = "include directory/test/domain/a/b/a_type.hpp";
-    a = lm.absolute_path(rq).string();
+    a = lm.absolute_path(rq);
     BOOST_CHECK(asserter::assert_equals(e, a));
 
     e = "source directory/test/a_type";
-    a = lm.absolute_path(type_name).string();
+    a = lm.absolute_path(type_name);
     BOOST_CHECK(asserter::assert_equals(e, a));
 
     const auto md(lm.managed_directories());
     BOOST_CHECK(md.size() == 2);
 
     e = "source directory/test";
-    a = md[0].string();
+    a = md[0];
     BOOST_CHECK(asserter::assert_equals(e, a));
 
     e = "include directory/test";
-    a = md[1].string();
+    a = md[1];
     BOOST_CHECK(asserter::assert_equals(e, a));
 }
 
@@ -151,22 +151,22 @@ BOOST_AUTO_TEST_CASE(disabling_facet_folders_removes_facet_folders_from_location
 
     auto lambda([&](cpp_facet_types ft, cpp_file_types flt) {
             const auto rq(request(ft, flt));
-            std::string e("c/d/test/a/b/a_type");
-            std::string a(lm.relative_logical_path(rq).string());
+            boost::filesystem::path e("c/d/test/a/b/a_type");
+            boost::filesystem::path a(lm.relative_logical_path(rq));
 
             using dogen::utility::test::asserter;
-            BOOST_CHECK(asserter::assert_contains(e, a));
+            BOOST_CHECK(asserter::assert_starts_with(e.string(), a.string()));
 
             e = "test/a/b/a_type";
-            a = lm.relative_physical_path(rq).string();
-            BOOST_CHECK(asserter::assert_contains(e, a));
+            a = lm.relative_physical_path(rq);
+            BOOST_CHECK(asserter::assert_starts_with(e.string(), a.string()));
 
             if (flt == cpp_file_types::header)
                 e = "include directory/test/a/b/a_type";
             else
                 e = "source directory/test/a/b/a_type";
-            a = lm.absolute_path(rq).string();
-            BOOST_CHECK(asserter::assert_contains(e, a));
+            a = lm.absolute_path(rq);
+            BOOST_CHECK(asserter::assert_starts_with(e.string(), a.string()));
         });
 
     auto pi([&](cpp_facet_types ft) {
