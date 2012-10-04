@@ -198,4 +198,46 @@ BOOST_AUTO_TEST_CASE(assert_equals_returns_true_if_items_are_equal) {
     BOOST_CHECK(asserter::assert_equals(e_int, e_int));
 }
 
+BOOST_AUTO_TEST_CASE(assert_starts_with_returns_false_if_strings_start_differently) {
+    SETUP_TEST_LOG("assert_starts_with_returns_false_if_strings_start_differently");
+
+    std::string e_str("some");
+    std::string a_str("asome string");
+
+    using dogen::utility::test::asserter;
+    BOOST_CHECK(!asserter::assert_starts_with(e_str, a_str));
+}
+
+BOOST_AUTO_TEST_CASE(assert_starts_with_returns_true_if_strings_start_the_same_way) {
+    SETUP_TEST_LOG("assert_starts_with_returns_true_if_strings_start_the_same_way");
+
+    std::string e_str("some");
+    std::string a_str("some string");
+
+    using dogen::utility::test::asserter;
+    BOOST_CHECK(asserter::assert_starts_with(e_str, a_str));
+    BOOST_CHECK(asserter::assert_starts_with(e_str, e_str));
+}
+
+BOOST_AUTO_TEST_CASE(assert_contains_returns_false_if_strings_are_not_related) {
+    SETUP_TEST_LOG("assert_contains_returns_false_if_strings_are_not_related");
+
+    std::string e_str("some");
+    std::string a_str("unrelated string");
+
+    using dogen::utility::test::asserter;
+    BOOST_CHECK(!asserter::assert_contains(e_str, a_str));
+}
+
+BOOST_AUTO_TEST_CASE(assert_contains_returns_true_if_expected_is_a_subset_of_actual) {
+    SETUP_TEST_LOG("assert_contains_returns_true_if_expected_is_a_subset_of_actual");
+
+    std::string e_str("str");
+    std::string a_str("some string");
+
+    using dogen::utility::test::asserter;
+    BOOST_CHECK(asserter::assert_contains(e_str, a_str));
+    BOOST_CHECK(asserter::assert_contains(e_str, e_str));
+}
+
 BOOST_AUTO_TEST_SUITE_END()

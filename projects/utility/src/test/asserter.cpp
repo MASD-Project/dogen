@@ -18,6 +18,8 @@
 #include <boost/algorithm/string/predicate.hpp>
 #include <boost/filesystem.hpp>
 #include <boost/filesystem/operations.hpp>
+#include <boost/algorithm/string/predicate.hpp>
+
 #include "dogen/utility/filesystem/file.hpp"
 #include "dogen/utility/io/set_io.hpp"
 #include "dogen/utility/io/vector_io.hpp"
@@ -30,6 +32,10 @@ using boost::filesystem::path;
 namespace {
 
 const std::string empty;
+const std::string contains("assert contains");
+const std::string starts_with("assert starts with");
+const std::string directory("assert directory");
+const std::string file("assert file");
 
 std::set<path> items_in_directory(path top_dir) {
     std::set<path> r;
@@ -89,9 +95,18 @@ namespace test {
 dogen::utility::log::logger asserter::lg_(
     dogen::utility::log::logger_factory("asserter"));
 
+bool asserter::handle_assert(const bool result, const std::string assertion) {
+    using namespace dogen::utility::log;
+    if (!result)
+        BOOST_LOG_SEV(lg_, error) << assertion << " failed.";
+    else
+        BOOST_LOG_SEV(lg_, debug) << assertion << " succeeded.";
+    return result;
+}
+
 bool asserter::assert_file(boost::filesystem::path expected_path,
     boost::filesystem::path actual_path, file_asserter& fa) {
-    return fa.assert_file(expected_path, actual_path);
+    return handle_assert(fa.assert_file(expected_path, actual_path), file);
 }
 
 bool asserter::assert_file(boost::filesystem::path expected_path,
@@ -115,7 +130,7 @@ bool asserter::assert_directory(boost::filesystem::path expected_path,
     const auto expected(lambda(expected_path));
     const auto actual(lambda(actual_path));
     if (!compare_paths(expected, actual))
-        return false;
+        return handle_assert(false, directory);
 
     bool r(true);
     auto cf([&](boost::tuple<path, path> tuple) {
@@ -142,13 +157,29 @@ bool asserter::assert_directory(boost::filesystem::path expected_path,
         });
 
     boost::for_each(boost::combine(expected.get<1>(), actual.get<1>()), cf);
-    return r;
+    return handle_assert(r, directory);
 }
 
 bool asserter::assert_directory(boost::filesystem::path expected_path,
     boost::filesystem::path actual_path) {
     std::vector<file_asserter::shared_ptr> v;
     return assert_directory(expected_path, actual_path, v);
+}
+
+bool asserter::
+assert_starts_with(const std::string expected, const std::string actual) {
+    using namespace dogen::utility::log;
+    BOOST_LOG_SEV(lg_, debug) << "expected: " << expected;
+    BOOST_LOG_SEV(lg_, debug) << "actual: " << actual;
+    return handle_assert(boost::starts_with(actual, expected), starts_with);
+}
+
+bool asserter::
+assert_contains(const std::string expected, const std::string actual) {
+    using namespace dogen::utility::log;
+    BOOST_LOG_SEV(lg_, debug) << "expected: " << expected;
+    BOOST_LOG_SEV(lg_, debug) << "actual: " << actual;
+    return handle_assert(boost::contains(actual, expected), contains);
 }
 
 } } }

@@ -37,6 +37,9 @@ private:
 public:
     static dogen::utility::log::logger logger() { return lg_; }
 
+private:
+    static bool handle_assert(const bool result, const std::string assertion);
+
 public:
     /**
      * @brief Returns true if two objects are equal, false otherwise.
@@ -46,7 +49,7 @@ public:
         using namespace dogen::utility::log;
         BOOST_LOG_SEV(lg_, debug) <<"expected: " << expected;
         BOOST_LOG_SEV(lg_, debug) <<"actual: " << actual;
-        return actual == expected;
+        return handle_assert(expected == actual, "assert object");
     }
 
     /**
@@ -129,7 +132,7 @@ public:
         std::vector<file_asserter::shared_ptr> file_asserters);
 
     /**
-     * @brief Asserts that expected matches equal via the equality
+     * @brief Returns true if expected matches equal via the equality
      * operator.
      *
      * The entity concept requires both the equality operator and the
@@ -143,8 +146,22 @@ public:
         using namespace dogen::utility::log;
         BOOST_LOG_SEV(lg_, debug) << "expected: " << expected;
         BOOST_LOG_SEV(lg_, debug) << "actual: " << actual;
-        return expected == actual;
+        return handle_assert(expected == actual, "assert equals");
     }
+
+    /**
+     * @brief Returns true if the actual string starts with the
+     * content supplied by the expected string.
+     */
+    static bool assert_starts_with(const std::string expected,
+        const std::string actual);
+
+    /**
+     * @brief Returns true if the actual string contains the expected
+     * string.
+     */
+    static bool assert_contains(const std::string expected,
+        const std::string actual);
 };
 
 } } }
