@@ -1,0 +1,252 @@
+/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+ *
+ * Copyright (C) 2012 Kitanda
+ *
+ * This file is distributed under the Kitanda Proprietary Software
+ * Licence. See doc/LICENCE.TXT for details.
+ *
+c */
+#include <sstream>
+#include <boost/test/unit_test.hpp>
+#include <boost/algorithm/string/predicate.hpp>
+#include <boost/range/algorithm/for_each.hpp>
+#include "dogen/utility/test/logging.hpp"
+#include "dogen/utility/io/list_io.hpp"
+#include "dogen/utility/test/asserter.hpp"
+#include "dogen/generator/config/cpp_settings.hpp"
+#include "dogen/generator/backends/cpp/cpp_location_manager.hpp"
+#include "dogen/generator/backends/cpp/cpp_location_request.hpp"
+#include "dogen/generator/test/mock_settings_factory.hpp"
+
+using namespace dogen::generator::backends::cpp;
+
+namespace {
+
+const std::string empty;
+const std::string test_module("generator");
+const std::string test_suite("cpp_location_manager_spec");
+
+const std::string test_model_name("test");
+const boost::filesystem::path src_dir("source directory");
+const boost::filesystem::path include_dir("include directory");
+const boost::filesystem::path project_dir("proj directory");
+const std::string type_name("a_type");
+const std::list<std::string> package_path_1({ "a", "b" });
+const std::list<std::string> external_package_path_1({ "c", "d" });
+
+const std::vector<cpp_facet_types> facets =
+{
+    cpp_facet_types::domain,
+    cpp_facet_types::serialization,
+    cpp_facet_types::hash,
+    cpp_facet_types::io,
+    cpp_facet_types::database,
+    cpp_facet_types::test_data
+};
+
+
+dogen::generator::config::cpp_settings split_project_settings() {
+    return dogen::generator::test::mock_settings_factory::
+        build_cpp_settings(src_dir, include_dir);
+}
+
+cpp_location_request request(cpp_facet_types ft, cpp_file_types flt,
+    std::string type_name, std::list<std::string> package_path,
+    std::list<std::string> external_package_path) {
+
+    cpp_location_request r;
+
+    r.facet_type(ft);
+    r.file_type(flt);
+    r.model_name(test_model_name);
+    r.package_path(package_path);
+    r.file_name(type_name);
+    r.external_package_path(external_package_path);
+
+    return r;
+}
+
+cpp_location_request request(cpp_facet_types ft, cpp_file_types flt) {
+    return request(ft, flt, type_name, package_path_1, external_package_path_1);
+}
+
+std::list<std::string>
+generate_all_filenames(dogen::generator::config::cpp_settings s, bool with_path) {
+    using dogen::generator::backends::cpp::cpp_location_manager;
+    cpp_location_manager lm(test_model_name, s);
+
+    std::list<std::string> r;
+    auto lambda([&](cpp_facet_types ft, cpp_file_types flt) {
+            const auto rq(request(ft, flt));
+            const auto p(lm.relative_logical_path(rq));
+            r.push_back(with_path ? p.string() : p.filename().string());
+        });
+
+    auto pi([&](cpp_facet_types ft) {
+            lambda(ft, cpp_file_types::header);
+            lambda(ft, cpp_file_types::implementation);
+        });
+
+    boost::for_each(facets, pi);
+    return r;
+}
+
+}
+
+BOOST_AUTO_TEST_SUITE(cpp_location_manager)
+
+BOOST_AUTO_TEST_CASE(split_project_configuration_results_in_expected_locations) {
+    SETUP_TEST_LOG_SOURCE("split_project_configuration_results_in_expected_locations");
+    using dogen::generator::backends::cpp::cpp_location_manager;
+    const auto s(split_project_settings());
+    BOOST_CHECK(s.split_project());
+
+    cpp_location_manager lm(test_model_name, s);
+    using dogen::generator::backends::cpp::cpp_location_request;
+    const auto rq(request(cpp_facet_types::domain, cpp_file_types::header));
+
+    std::string e("c/d/test/domain/a/b/a_type.hpp");
+    std::string a(lm.relative_logical_path(rq).string());
+
+    using dogen::utility::test::asserter;
+    BOOST_CHECK(asserter::assert_equals(e, a));
+
+    e = "test/domain/a/b/a_type.hpp";
+    a = lm.relative_physical_path(rq).string();
+    BOOST_CHECK(asserter::assert_equals(e, a));
+
+    e = "include directory/test/domain/a/b/a_type.hpp";
+    a = lm.absolute_path(rq).string();
+    BOOST_CHECK(asserter::assert_equals(e, a));
+
+    e = "source directory/test/a_type";
+    a = lm.absolute_path(type_name).string();
+    BOOST_CHECK(asserter::assert_equals(e, a));
+
+    const auto md(lm.managed_directories());
+    BOOST_CHECK(md.size() == 2);
+
+    e = "source directory/test";
+    a = md[0].string();
+    BOOST_CHECK(asserter::assert_equals(e, a));
+
+    e = "include directory/test";
+    a = md[1].string();
+    BOOST_CHECK(asserter::assert_equals(e, a));
+}
+
+BOOST_AUTO_TEST_CASE(disabling_facet_folders_removes_facet_folders_from_locations) {
+    SETUP_TEST_LOG_SOURCE("disabling_facet_folders_removes_facet_folders_from_locations");
+
+    auto s(split_project_settings());
+    s.disable_facet_folders(true);
+    BOOST_LOG_SEV(lg, debug) << "settings: " << s;
+    BOOST_CHECK(s.split_project());
+
+    using dogen::generator::backends::cpp::cpp_location_manager;
+    cpp_location_manager lm(test_model_name, s);
+
+    auto lambda([&](cpp_facet_types ft, cpp_file_types flt) {
+            const auto rq(request(ft, flt));
+            std::string e("c/d/test/a/b/a_type");
+            std::string a(lm.relative_logical_path(rq).string());
+
+            using dogen::utility::test::asserter;
+            BOOST_CHECK(asserter::assert_contains(e, a));
+
+            e = "test/a/b/a_type";
+            a = lm.relative_physical_path(rq).string();
+            BOOST_CHECK(asserter::assert_contains(e, a));
+
+            if (flt == cpp_file_types::header)
+                e = "include directory/test/a/b/a_type";
+            else
+                e = "source directory/test/a/b/a_type";
+            a = lm.absolute_path(rq).string();
+            BOOST_CHECK(asserter::assert_contains(e, a));
+        });
+
+    auto pi([&](cpp_facet_types ft) {
+        lambda(ft, cpp_file_types::header);
+        lambda(ft, cpp_file_types::implementation);
+    });
+    boost::for_each(facets, pi);
+}
+
+BOOST_AUTO_TEST_CASE(enabling_unique_file_names_results_in_different_names_across_facets) {
+    SETUP_TEST_LOG_SOURCE("enabling_unique_file_names_results_in_different_names_across_facets");
+
+    auto s(split_project_settings());
+    s.disable_unique_file_names(true);
+    BOOST_LOG_SEV(lg, debug) << "settings: " << s;
+
+    using dogen::generator::backends::cpp::cpp_location_manager;
+    cpp_location_manager lm(test_model_name, s);
+
+    const bool with_path(false);
+    std::list<std::string> files(generate_all_filenames(s, with_path));
+    BOOST_LOG_SEV(lg, debug) << "before sorting: " << files;
+    BOOST_CHECK(files.size() == facets.size() * 2);
+
+    files.sort();
+    files.unique();
+    BOOST_LOG_SEV(lg, debug) << "after sorting: " << files;
+
+    BOOST_CHECK(files.size() == 2);
+    BOOST_CHECK(files.front() == "a_type.hpp" || files.front() == "a_type.cpp");
+    BOOST_CHECK(files.back() == "a_type.hpp" || files.back() == "a_type.cpp");
+}
+
+BOOST_AUTO_TEST_CASE(disabling_unique_file_names_results_in_the_same_names_across_facets) {
+    SETUP_TEST_LOG_SOURCE("disabling_unique_file_names_results_in_the_same_names_across_facets");
+
+    auto s(split_project_settings());
+    s.disable_unique_file_names(false);
+    BOOST_LOG_SEV(lg, debug) << "settings: " << s;
+
+    using dogen::generator::backends::cpp::cpp_location_manager;
+    cpp_location_manager lm(test_model_name, s);
+
+    const bool with_path(false);
+    std::list<std::string> files(generate_all_filenames(s, with_path));
+    BOOST_LOG_SEV(lg, debug) << "before sorting: " << files;
+    const std::size_t sz(files.size());
+    BOOST_CHECK(sz == facets.size() * 2);
+
+    files.sort();
+    files.unique();
+    BOOST_LOG_SEV(lg, debug) << "after sorting: " << files;
+    BOOST_CHECK(sz == files.size());
+}
+
+BOOST_AUTO_TEST_CASE(changing_facet_folder_names_results_in_new_folder_names_in_location) {
+    SETUP_TEST_LOG_SOURCE("changing_facet_folder_names_names_results_in_new_folder_names_in_location");
+
+    auto s(split_project_settings());
+    s.disable_unique_file_names(false);
+    s.domain_facet_folder("unique_name_1");
+    s.hash_facet_folder("unique_name_2");
+    s.io_facet_folder("unique_name_3");
+    s.serialization_facet_folder("unique_name_4");
+    s.database_facet_folder("unique_name_5");
+    s.test_data_facet_folder("unique_name_6");
+    BOOST_LOG_SEV(lg, debug) << "settings: " << s;
+
+    using dogen::generator::backends::cpp::cpp_location_manager;
+    cpp_location_manager lm(test_model_name, s);
+
+    const bool with_path(true);
+    std::list<std::string> files(generate_all_filenames(s, with_path));
+    BOOST_LOG_SEV(lg, debug) << "before removing: " << files;
+    BOOST_CHECK(files.size() == facets.size() * 2);
+
+    auto lambda([](const std::string& f) {
+            return boost::contains(f, "unique_name");
+        });
+
+    files.remove_if(lambda);
+    BOOST_LOG_SEV(lg, debug) << "after removing: " << files;
+    BOOST_CHECK(files.empty());
+}
+
+BOOST_AUTO_TEST_SUITE_END()
