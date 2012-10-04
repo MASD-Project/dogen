@@ -72,7 +72,9 @@ public:
         dogen::utility::exception::exception(message) { }
 };
 
-const std::string prefix("log/utility/");
+const std::string test_suite("utility_spec");
+const std::string test_module("utility");
+const std::string prefix("log/utility/utility_spec/");
 
 std::string log_file_name(std::string function, unsigned int postfix = 0) {
     std::ostringstream stream;
@@ -81,9 +83,6 @@ std::string log_file_name(std::string function, unsigned int postfix = 0) {
         stream << postfix;
     return stream.str();
 }
-
-const std::string test_suite("utility_spec");
-const std::string test_module("utility");
 
 }
 
