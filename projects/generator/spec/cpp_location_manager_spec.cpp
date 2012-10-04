@@ -33,6 +33,9 @@ const boost::filesystem::path project_dir("proj directory");
 const std::string type_name("a_type");
 const std::list<std::string> package_path_1({ "a", "b" });
 const std::list<std::string> external_package_path_1({ "c", "d" });
+const std::string unique_name("unique_name");
+const std::string header_extension(".hxx");
+const std::string source_extension(".cxx");
 
 const std::vector<cpp_facet_types> facets =
 {
@@ -224,12 +227,12 @@ BOOST_AUTO_TEST_CASE(changing_facet_folder_names_results_in_new_folder_names_in_
 
     auto s(split_project_settings());
     s.disable_unique_file_names(false);
-    s.domain_facet_folder("unique_name_1");
-    s.hash_facet_folder("unique_name_2");
-    s.io_facet_folder("unique_name_3");
-    s.serialization_facet_folder("unique_name_4");
-    s.database_facet_folder("unique_name_5");
-    s.test_data_facet_folder("unique_name_6");
+    s.domain_facet_folder(unique_name + "_1");
+    s.hash_facet_folder(unique_name + "_2");
+    s.io_facet_folder(unique_name + "_3");
+    s.serialization_facet_folder(unique_name + "_4");
+    s.database_facet_folder(unique_name + "_5");
+    s.test_data_facet_folder(unique_name + "_6");
     BOOST_LOG_SEV(lg, debug) << "settings: " << s;
 
     using dogen::generator::backends::cpp::cpp_location_manager;
@@ -241,7 +244,33 @@ BOOST_AUTO_TEST_CASE(changing_facet_folder_names_results_in_new_folder_names_in_
     BOOST_CHECK(files.size() == facets.size() * 2);
 
     auto lambda([](const std::string& f) {
-            return boost::contains(f, "unique_name");
+            return boost::contains(f, unique_name);
+        });
+
+    files.remove_if(lambda);
+    BOOST_LOG_SEV(lg, debug) << "after removing: " << files;
+    BOOST_CHECK(files.empty());
+}
+
+BOOST_AUTO_TEST_CASE(changing_file_extensions_results_expected_file_names) {
+    SETUP_TEST_LOG_SOURCE("changing_file_extensions_results_expected_file_names");
+
+    auto s(split_project_settings());
+    s.header_extension(header_extension);
+    s.source_extension(source_extension);
+    BOOST_LOG_SEV(lg, debug) << "settings: " << s;
+
+    using dogen::generator::backends::cpp::cpp_location_manager;
+    cpp_location_manager lm(test_model_name, s);
+
+    const bool with_path(false);
+    std::list<std::string> files(generate_all_filenames(s, with_path));
+    BOOST_LOG_SEV(lg, debug) << "before removing: " << files;
+    BOOST_CHECK(files.size() == facets.size() * 2);
+
+    auto lambda([](const std::string& f) {
+            return boost::contains(f, header_extension) ||
+                boost::contains(f, source_extension);
         });
 
     files.remove_if(lambda);
