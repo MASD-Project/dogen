@@ -14,8 +14,7 @@
 #endif
 
 #include <string>
-#include <boost/algorithm/string/predicate.hpp>
-#include "dogen/utility/log/logger.hpp"
+#include "dogen/utility/test/asserter.hpp"
 
 namespace dogen {
 namespace utility {
@@ -28,14 +27,7 @@ public:
 
     bool operator()(const Exception& e) {
         const std::string actual(e.what());
-
-        using namespace dogen::utility::log;
-        logger lg_(logger_factory("contains_checker"));
-
-        BOOST_LOG_SEV(lg_, debug) <<"expected: " << expected_;
-        BOOST_LOG_SEV(lg_, debug) <<"actual: " << actual;
-
-        return boost::contains(actual, expected_);
+        return asserter::assert_contains(expected_, actual);
     }
 
 private:
