@@ -82,7 +82,9 @@ generate_all_filenames(dogen::generator::config::cpp_settings s, bool with_path)
     auto lambda([&](cpp_facet_types ft, cpp_file_types flt) {
             const auto rq(request(ft, flt));
             const auto p(lm.relative_logical_path(rq));
-            r.push_back(with_path ? p.string() : p.filename().string());
+            r.push_back(with_path ?
+                p.generic_string() :
+                p.filename().generic_string());
         });
 
     auto pi([&](cpp_facet_types ft) {
@@ -155,18 +157,21 @@ BOOST_AUTO_TEST_CASE(disabling_facet_folders_removes_facet_folders_from_location
             boost::filesystem::path a(lm.relative_logical_path(rq));
 
             using dogen::utility::test::asserter;
-            BOOST_CHECK(asserter::assert_starts_with(e.string(), a.string()));
+            BOOST_CHECK(asserter::assert_starts_with(
+                    e.generic_string(), a.generic_string()));
 
             e = "test/a/b/a_type";
             a = lm.relative_physical_path(rq);
-            BOOST_CHECK(asserter::assert_starts_with(e.string(), a.string()));
+            BOOST_CHECK(asserter::assert_starts_with(
+                    e.generic_string(), a.generic_string()));
 
             if (flt == cpp_file_types::header)
                 e = "include directory/test/a/b/a_type";
             else
                 e = "source directory/test/a/b/a_type";
             a = lm.absolute_path(rq);
-            BOOST_CHECK(asserter::assert_starts_with(e.string(), a.string()));
+            BOOST_CHECK(asserter::assert_starts_with(
+                    e.generic_string(), a.generic_string()));
         });
 
     auto pi([&](cpp_facet_types ft) {
