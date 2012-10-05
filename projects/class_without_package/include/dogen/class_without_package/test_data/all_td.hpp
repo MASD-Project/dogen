@@ -6,6 +6,6 @@
  * Licence. See doc/LICENCE.TXT for details.
  *
  */
-#include "dogen/class_without_package/test_data/class_1_sequence.hpp"
-#include "dogen/class_without_package/test_data/unversioned_key_sequence.hpp"
-#include "dogen/class_without_package/test_data/versioned_key_sequence.hpp"
+#include "dogen/class_without_package/test_data/class_1_td.hpp"
+#include "dogen/class_without_package/test_data/unversioned_key_td.hpp"
+#include "dogen/class_without_package/test_data/versioned_key_td.hpp"
