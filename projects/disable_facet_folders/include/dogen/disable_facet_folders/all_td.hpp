@@ -6,6 +6,6 @@
  * Licence. See doc/LICENCE.TXT for details.
  *
  */
-#include "dogen/disable_facet_folders/package1/first_class_sequence.hpp"
-#include "dogen/disable_facet_folders/unversioned_key_sequence.hpp"
-#include "dogen/disable_facet_folders/versioned_key_sequence.hpp"
+#include "dogen/disable_facet_folders/package1/first_class_td.hpp"
+#include "dogen/disable_facet_folders/unversioned_key_td.hpp"
+#include "dogen/disable_facet_folders/versioned_key_td.hpp"

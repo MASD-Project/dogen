@@ -198,7 +198,7 @@ BOOST_AUTO_TEST_CASE(disable_complete_constructor_generates_expected_code) {
     BOOST_CHECK(check_code_generation(t, lambda));
 }
 
-BOOST_IGNORE_AUTO_TEST_CASE(disable_facet_folders_generates_expected_code) {
+BOOST_AUTO_TEST_CASE(disable_facet_folders_generates_expected_code) {
     SETUP_TEST_LOG("disable_facet_folders_generates_expected_code");
     auto lambda([](dogen::utility::test_data::codegen_tds tds) {
             auto s(default_mock_settings(tds));
