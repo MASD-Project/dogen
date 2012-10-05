@@ -293,7 +293,7 @@ BOOST_AUTO_TEST_CASE(enable_facet_domain_generates_expected_code) {
     BOOST_CHECK(check_code_generation(t, lambda));
 }
 
-BOOST_IGNORE_AUTO_TEST_CASE(enable_facet_hash_generates_expected_code) {
+BOOST_AUTO_TEST_CASE(enable_facet_hash_generates_expected_code) {
     SETUP_TEST_LOG("enable_facet_hash_generates_expected_code");
     auto lambda([](dogen::utility::test_data::codegen_tds tds) {
             auto s(default_mock_settings(tds));
