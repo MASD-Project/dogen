@@ -172,7 +172,7 @@ path dia_sml::input_empty_package_dia() {
 }
 
 path dia_sml::input_class_without_name_dia() {
-    return validating_resolver::resolve(::input_empty_package_dia);
+    return validating_resolver::resolve(::input_class_without_name_dia);
 }
 
 path dia_sml::input_classes_inout_package_dia() {
@@ -293,7 +293,7 @@ path dia_sml::expected_empty_package_dia_xml() {
 
 path dia_sml::expected_class_without_name_dia_xml() {
     return validating_resolver::resolve(
-        ::expected_empty_package_dia_xml);
+        ::expected_class_without_name_dia_xml);
 }
 
 path dia_sml::expected_classes_inout_package_dia_xml() {

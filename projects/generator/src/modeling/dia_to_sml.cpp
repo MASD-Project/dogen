@@ -47,7 +47,7 @@ const std::string uml_attribute_expected("UML atttribute expected");
 const std::string expected_attribute_value_not_found("Expected attribute value: ");
 const std::string name_attribute_expected("Could not find name attribute");
 const std::string type_attribute_expected("Could not find type attribute");
-const std::string invalid_dia_object_name("Dia object name is invalid: ");
+const std::string empty_dia_object_name("Dia object name is empty");
 const std::string root_vertex_id("root");
 
 struct visit_state {
@@ -244,7 +244,7 @@ transform_qualified_name(dogen::dia::attribute a,
     name.type_name(transform_string_attribute(a));
     if (name.type_name().empty()) {
         using dogen::utility::exception::exception;
-        throw exception(invalid_dia_object_name);
+        throw exception(empty_dia_object_name);
     }
     return name;
 }

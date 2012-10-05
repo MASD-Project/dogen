@@ -46,7 +46,7 @@ const std::string extra_folder("dmp");
 const std::string domain_facet_must_be_enabled("Domain facet must be enabled");
 const std::string io_facet_and_integrated_io_error(
     "Integrated IO cannot be used with the IO facet");
-const std::string dia_invalid_name("Dia object name is invalid");
+const std::string dia_invalid_name("Dia object name is empty");
 
 std::vector<dogen::utility::test::file_asserter::shared_ptr>
 file_asserters() {
@@ -388,18 +388,31 @@ BOOST_IGNORE_AUTO_TEST_CASE(class_in_a_package_model_generates_expected_code) {
     BOOST_CHECK(check_code_generation(dia_sml::input_class_in_a_package_dia()));
 }
 
-BOOST_AUTO_TEST_CASE(two_empty_layers_model_generates_expected_code) {
-    SETUP_TEST_LOG("two_empty_layers_model_generates_expected_code");
+BOOST_AUTO_TEST_CASE(two_empty_layers_model_does_not_generate_code) {
+    SETUP_TEST_LOG("two_empty_layers_model_does_not_generate_code");
     using dogen::utility::test_data::dia_sml;
     const auto t(dia_sml::input_two_empty_layers_dia());
     BOOST_CHECK(check_code_generation(t));
 }
 
-BOOST_IGNORE_AUTO_TEST_CASE(class_without_name_model_generates_expected_code) {
-    SETUP_TEST_LOG("class_without_name_model_generates_expected_code");
+BOOST_AUTO_TEST_CASE(class_without_name_model_throws) {
+    SETUP_TEST_LOG("class_without_name_model_throws");
     using dogen::utility::test_data::dia_sml;
     const auto t(dia_sml::input_class_without_name_dia());
-    BOOST_CHECK(check_code_generation(t));
+
+    using dogen::utility::test_data::dia_sml;
+    using dogen::utility::test_data::codegen_tds;
+    codegen_tds tds(t);
+
+    auto s(default_mock_settings(tds));
+    dogen::generator::generator cg(s);
+
+    using dogen::generator::generation_failure;
+    auto lambda([](const generation_failure& e) {
+            const std::string msg(e.what());
+            return boost::contains(msg, dia_invalid_name);
+        });
+    BOOST_CHECK_EXCEPTION(cg.generate(), generation_failure, lambda);
 }
 
 BOOST_IGNORE_AUTO_TEST_CASE(empty_model_generates_expected_code) {
@@ -409,8 +422,8 @@ BOOST_IGNORE_AUTO_TEST_CASE(empty_model_generates_expected_code) {
     BOOST_CHECK(check_code_generation(t));
 }
 
-BOOST_IGNORE_AUTO_TEST_CASE(empty_package_model_generates_expected_code) {
-    SETUP_TEST_LOG("empty_package_model_generates_expected_code");
+BOOST_IGNORE_AUTO_TEST_CASE(empty_package_model_does_not_generate_code) {
+    SETUP_TEST_LOG("empty_package_model_does_not_generate_code");
     using dogen::utility::test_data::dia_sml;
     const auto t(dia_sml::input_empty_package_dia());
     BOOST_CHECK(check_code_generation(t));
@@ -472,8 +485,8 @@ BOOST_IGNORE_AUTO_TEST_CASE(two_layers_with_objects_model_generates_expected_cod
     BOOST_CHECK(check_code_generation(t));
 }
 
-BOOST_IGNORE_AUTO_TEST_CASE(package_without_name_model_generates_expected_code) {
-    SETUP_TEST_LOG("package_without_name_model_generates_expected_code");
+BOOST_IGNORE_AUTO_TEST_CASE(package_without_name_model_throws) {
+    SETUP_TEST_LOG("package_without_name_model_throws");
     using dogen::utility::test_data::dia_sml;
     const auto t(dia_sml::input_package_without_name_dia());
 
