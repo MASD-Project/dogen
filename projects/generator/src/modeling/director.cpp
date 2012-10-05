@@ -164,6 +164,8 @@ boost::optional<sml::model> director::create_model() const {
     if (has_generatable_types(m))
         return boost::optional<model>(m);
 
+    BOOST_LOG_SEV(lg, warn) << "No generatable types found.";
+
     return boost::optional<model>();
 }
 
