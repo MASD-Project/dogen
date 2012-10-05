@@ -26,6 +26,7 @@ const std::string using_target_dir_message("Using Target directory: ");
 const std::string created_target_dir_message("Created target directory: ");
 
 const std::string error_generating_files("error generating file: ");
+const std::string path_size_warning("Full path exceeds 255 bytes.");
 
 }
 
@@ -40,6 +41,8 @@ void file_outputter::
 log_writing_file(boost::filesystem::path path) const {
     using namespace dogen::utility::log;
     BOOST_LOG_SEV(lg, debug) << writing_file_message << path.string();
+    if (path.string().size() > 255)
+        BOOST_LOG_SEV(lg, warn) << path_size_warning << path.string();
 }
 
 void file_outputter::
