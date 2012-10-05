@@ -2,10 +2,22 @@ Filename: /empty_tds/actual/include/class_in_a_package/database/all_db.hpp
 Contents: 
 /* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
  *
- * Copyright (C) 2012 Kitanda
+ * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
  *
- * This file is distributed under the Kitanda Proprietary Software
- * Licence. See doc/LICENCE.TXT for details.
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. Seethe
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General PublicLicense
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+ * MA 02110-1301, USA.
  *
  */
 #include "class_in_a_package/database/package1/first_class_db.hpp"
@@ -14,10 +26,22 @@ Filename: /empty_tds/actual/include/class_in_a_package/database/package1/first_c
 Contents: 
 /* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
  *
- * Copyright (C) 2012 Kitanda
+ * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
  *
- * This file is distributed under the Kitanda Proprietary Software
- * Licence. See doc/LICENCE.TXT for details.
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. Seethe
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General PublicLicense
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+ * MA 02110-1301, USA.
  *
  */
 #ifndef CLASS_IN_A_PACKAGE_DATABASE_PACKAGE1_FIRST_CLASS_DB_HPP
@@ -73,10 +97,22 @@ Filename: /empty_tds/actual/include/class_in_a_package/domain/all.hpp
 Contents: 
 /* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
  *
- * Copyright (C) 2012 Kitanda
+ * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
  *
- * This file is distributed under the Kitanda Proprietary Software
- * Licence. See doc/LICENCE.TXT for details.
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. Seethe
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General PublicLicense
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+ * MA 02110-1301, USA.
  *
  */
 #include "class_in_a_package/domain/package1/first_class.hpp"
@@ -87,10 +123,22 @@ Filename: /empty_tds/actual/include/class_in_a_package/domain/package1/first_cla
 Contents: 
 /* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
  *
- * Copyright (C) 2012 Kitanda
+ * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
  *
- * This file is distributed under the Kitanda Proprietary Software
- * Licence. See doc/LICENCE.TXT for details.
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. Seethe
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General PublicLicense
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+ * MA 02110-1301, USA.
  *
  */
 #ifndef CLASS_IN_A_PACKAGE_DOMAIN_PACKAGE1_FIRST_CLASS_HPP
@@ -195,10 +243,22 @@ Filename: /empty_tds/actual/include/class_in_a_package/domain/unversioned_key.hp
 Contents: 
 /* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
  *
- * Copyright (C) 2012 Kitanda
+ * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
  *
- * This file is distributed under the Kitanda Proprietary Software
- * Licence. See doc/LICENCE.TXT for details.
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. Seethe
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General PublicLicense
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+ * MA 02110-1301, USA.
  *
  */
 #ifndef CLASS_IN_A_PACKAGE_DOMAIN_UNVERSIONED_KEY_HPP
@@ -278,10 +338,22 @@ Filename: /empty_tds/actual/include/class_in_a_package/domain/versioned_key.hpp
 Contents: 
 /* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
  *
- * Copyright (C) 2012 Kitanda
+ * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
  *
- * This file is distributed under the Kitanda Proprietary Software
- * Licence. See doc/LICENCE.TXT for details.
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. Seethe
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General PublicLicense
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+ * MA 02110-1301, USA.
  *
  */
 #ifndef CLASS_IN_A_PACKAGE_DOMAIN_VERSIONED_KEY_HPP
@@ -377,10 +449,22 @@ Filename: /empty_tds/actual/include/class_in_a_package/hash/all_hash.hpp
 Contents: 
 /* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
  *
- * Copyright (C) 2012 Kitanda
+ * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
  *
- * This file is distributed under the Kitanda Proprietary Software
- * Licence. See doc/LICENCE.TXT for details.
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. Seethe
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General PublicLicense
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+ * MA 02110-1301, USA.
  *
  */
 #include "class_in_a_package/hash/package1/first_class_hash.hpp"
@@ -391,10 +475,22 @@ Filename: /empty_tds/actual/include/class_in_a_package/hash/package1/first_class
 Contents: 
 /* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
  *
- * Copyright (C) 2012 Kitanda
+ * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
  *
- * This file is distributed under the Kitanda Proprietary Software
- * Licence. See doc/LICENCE.TXT for details.
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. Seethe
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General PublicLicense
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+ * MA 02110-1301, USA.
  *
  */
 #ifndef CLASS_IN_A_PACKAGE_HASH_PACKAGE1_FIRST_CLASS_HASH_HPP
@@ -433,10 +529,22 @@ Filename: /empty_tds/actual/include/class_in_a_package/hash/unversioned_key_hash
 Contents: 
 /* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
  *
- * Copyright (C) 2012 Kitanda
+ * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
  *
- * This file is distributed under the Kitanda Proprietary Software
- * Licence. See doc/LICENCE.TXT for details.
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. Seethe
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General PublicLicense
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+ * MA 02110-1301, USA.
  *
  */
 #ifndef CLASS_IN_A_PACKAGE_HASH_UNVERSIONED_KEY_HASH_HPP
@@ -472,10 +580,22 @@ Filename: /empty_tds/actual/include/class_in_a_package/hash/versioned_key_hash.h
 Contents: 
 /* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
  *
- * Copyright (C) 2012 Kitanda
+ * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
  *
- * This file is distributed under the Kitanda Proprietary Software
- * Licence. See doc/LICENCE.TXT for details.
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. Seethe
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General PublicLicense
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+ * MA 02110-1301, USA.
  *
  */
 #ifndef CLASS_IN_A_PACKAGE_HASH_VERSIONED_KEY_HASH_HPP
@@ -512,10 +632,22 @@ Filename: /empty_tds/actual/include/class_in_a_package/io/all_io.hpp
 Contents: 
 /* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
  *
- * Copyright (C) 2012 Kitanda
+ * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
  *
- * This file is distributed under the Kitanda Proprietary Software
- * Licence. See doc/LICENCE.TXT for details.
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. Seethe
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General PublicLicense
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+ * MA 02110-1301, USA.
  *
  */
 #include "class_in_a_package/io/package1/first_class_io.hpp"
@@ -526,10 +658,22 @@ Filename: /empty_tds/actual/include/class_in_a_package/io/package1/first_class_i
 Contents: 
 /* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
  *
- * Copyright (C) 2012 Kitanda
+ * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
  *
- * This file is distributed under the Kitanda Proprietary Software
- * Licence. See doc/LICENCE.TXT for details.
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. Seethe
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General PublicLicense
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+ * MA 02110-1301, USA.
  *
  */
 #ifndef CLASS_IN_A_PACKAGE_IO_PACKAGE1_FIRST_CLASS_IO_HPP
@@ -557,10 +701,22 @@ Filename: /empty_tds/actual/include/class_in_a_package/io/unversioned_key_io.hpp
 Contents: 
 /* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
  *
- * Copyright (C) 2012 Kitanda
+ * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
  *
- * This file is distributed under the Kitanda Proprietary Software
- * Licence. See doc/LICENCE.TXT for details.
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. Seethe
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General PublicLicense
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+ * MA 02110-1301, USA.
  *
  */
 #ifndef CLASS_IN_A_PACKAGE_IO_UNVERSIONED_KEY_IO_HPP
@@ -587,10 +743,22 @@ Filename: /empty_tds/actual/include/class_in_a_package/io/versioned_key_io.hpp
 Contents: 
 /* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
  *
- * Copyright (C) 2012 Kitanda
+ * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
  *
- * This file is distributed under the Kitanda Proprietary Software
- * Licence. See doc/LICENCE.TXT for details.
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. Seethe
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General PublicLicense
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+ * MA 02110-1301, USA.
  *
  */
 #ifndef CLASS_IN_A_PACKAGE_IO_VERSIONED_KEY_IO_HPP
@@ -617,10 +785,22 @@ Filename: /empty_tds/actual/include/class_in_a_package/serialization/all_ser.hpp
 Contents: 
 /* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
  *
- * Copyright (C) 2012 Kitanda
+ * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
  *
- * This file is distributed under the Kitanda Proprietary Software
- * Licence. See doc/LICENCE.TXT for details.
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. Seethe
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General PublicLicense
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+ * MA 02110-1301, USA.
  *
  */
 #include "class_in_a_package/serialization/package1/first_class_ser.hpp"
@@ -631,10 +811,22 @@ Filename: /empty_tds/actual/include/class_in_a_package/serialization/package1/fi
 Contents: 
 /* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
  *
- * Copyright (C) 2012 Kitanda
+ * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
  *
- * This file is distributed under the Kitanda Proprietary Software
- * Licence. See doc/LICENCE.TXT for details.
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. Seethe
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General PublicLicense
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+ * MA 02110-1301, USA.
  *
  */
 #ifndef CLASS_IN_A_PACKAGE_SERIALIZATION_PACKAGE1_FIRST_CLASS_SER_HPP
@@ -686,10 +878,22 @@ Filename: /empty_tds/actual/include/class_in_a_package/serialization/unversioned
 Contents: 
 /* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
  *
- * Copyright (C) 2012 Kitanda
+ * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
  *
- * This file is distributed under the Kitanda Proprietary Software
- * Licence. See doc/LICENCE.TXT for details.
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. Seethe
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General PublicLicense
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+ * MA 02110-1301, USA.
  *
  */
 #ifndef CLASS_IN_A_PACKAGE_SERIALIZATION_UNVERSIONED_KEY_SER_HPP
@@ -737,10 +941,22 @@ Filename: /empty_tds/actual/include/class_in_a_package/serialization/versioned_k
 Contents: 
 /* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
  *
- * Copyright (C) 2012 Kitanda
+ * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
  *
- * This file is distributed under the Kitanda Proprietary Software
- * Licence. See doc/LICENCE.TXT for details.
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. Seethe
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General PublicLicense
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+ * MA 02110-1301, USA.
  *
  */
 #ifndef CLASS_IN_A_PACKAGE_SERIALIZATION_VERSIONED_KEY_SER_HPP
@@ -789,10 +1005,22 @@ Filename: /empty_tds/actual/include/class_in_a_package/test_data/all_td.hpp
 Contents: 
 /* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
  *
- * Copyright (C) 2012 Kitanda
+ * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
  *
- * This file is distributed under the Kitanda Proprietary Software
- * Licence. See doc/LICENCE.TXT for details.
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. Seethe
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General PublicLicense
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+ * MA 02110-1301, USA.
  *
  */
 #include "class_in_a_package/test_data/package1/first_class_td.hpp"
@@ -803,10 +1031,22 @@ Filename: /empty_tds/actual/include/class_in_a_package/test_data/package1/first_
 Contents: 
 /* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
  *
- * Copyright (C) 2012 Kitanda
+ * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
  *
- * This file is distributed under the Kitanda Proprietary Software
- * Licence. See doc/LICENCE.TXT for details.
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. Seethe
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General PublicLicense
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+ * MA 02110-1301, USA.
  *
  */
 #ifndef CLASS_IN_A_PACKAGE_TEST_DATA_PACKAGE1_FIRST_CLASS_TD_HPP
@@ -847,10 +1087,22 @@ Filename: /empty_tds/actual/include/class_in_a_package/test_data/unversioned_key
 Contents: 
 /* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
  *
- * Copyright (C) 2012 Kitanda
+ * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
  *
- * This file is distributed under the Kitanda Proprietary Software
- * Licence. See doc/LICENCE.TXT for details.
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. Seethe
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General PublicLicense
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+ * MA 02110-1301, USA.
  *
  */
 #ifndef CLASS_IN_A_PACKAGE_TEST_DATA_UNVERSIONED_KEY_TD_HPP
@@ -890,10 +1142,22 @@ Filename: /empty_tds/actual/include/class_in_a_package/test_data/versioned_key_t
 Contents: 
 /* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
  *
- * Copyright (C) 2012 Kitanda
+ * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
  *
- * This file is distributed under the Kitanda Proprietary Software
- * Licence. See doc/LICENCE.TXT for details.
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. Seethe
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General PublicLicense
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+ * MA 02110-1301, USA.
  *
  */
 #ifndef CLASS_IN_A_PACKAGE_TEST_DATA_VERSIONED_KEY_TD_HPP
@@ -951,10 +1215,22 @@ Filename: /empty_tds/actual/src/class_in_a_package/database/package1/first_class
 Contents: 
 /* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
  *
- * Copyright (C) 2012 Kitanda
+ * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
  *
- * This file is distributed under the Kitanda Proprietary Software
- * Licence. See doc/LICENCE.TXT for details.
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. Seethe
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General PublicLicense
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+ * MA 02110-1301, USA.
  *
  */
 #include <boost/format.hpp>
@@ -1002,10 +1278,22 @@ Filename: /empty_tds/actual/src/class_in_a_package/domain/package1/first_class.c
 Contents: 
 /* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
  *
- * Copyright (C) 2012 Kitanda
+ * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
  *
- * This file is distributed under the Kitanda Proprietary Software
- * Licence. See doc/LICENCE.TXT for details.
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. Seethe
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General PublicLicense
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+ * MA 02110-1301, USA.
  *
  */
 #include <ostream>
@@ -1055,10 +1343,22 @@ Filename: /empty_tds/actual/src/class_in_a_package/domain/unversioned_key.cpp
 Contents: 
 /* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
  *
- * Copyright (C) 2012 Kitanda
+ * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
  *
- * This file is distributed under the Kitanda Proprietary Software
- * Licence. See doc/LICENCE.TXT for details.
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. Seethe
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General PublicLicense
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+ * MA 02110-1301, USA.
  *
  */
 #include <ostream>
@@ -1096,10 +1396,22 @@ Filename: /empty_tds/actual/src/class_in_a_package/domain/versioned_key.cpp
 Contents: 
 /* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
  *
- * Copyright (C) 2012 Kitanda
+ * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
  *
- * This file is distributed under the Kitanda Proprietary Software
- * Licence. See doc/LICENCE.TXT for details.
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. Seethe
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General PublicLicense
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+ * MA 02110-1301, USA.
  *
  */
 #include <ostream>
@@ -1147,10 +1459,22 @@ Filename: /empty_tds/actual/src/class_in_a_package/io/package1/first_class_io.cp
 Contents: 
 /* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
  *
- * Copyright (C) 2012 Kitanda
+ * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
  *
- * This file is distributed under the Kitanda Proprietary Software
- * Licence. See doc/LICENCE.TXT for details.
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. Seethe
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General PublicLicense
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+ * MA 02110-1301, USA.
  *
  */
 #include <ostream>
@@ -1169,10 +1493,22 @@ Filename: /empty_tds/actual/src/class_in_a_package/io/unversioned_key_io.cpp
 Contents: 
 /* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
  *
- * Copyright (C) 2012 Kitanda
+ * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
  *
- * This file is distributed under the Kitanda Proprietary Software
- * Licence. See doc/LICENCE.TXT for details.
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. Seethe
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General PublicLicense
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+ * MA 02110-1301, USA.
  *
  */
 #include <ostream>
@@ -1190,10 +1526,22 @@ Filename: /empty_tds/actual/src/class_in_a_package/io/versioned_key_io.cpp
 Contents: 
 /* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
  *
- * Copyright (C) 2012 Kitanda
+ * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
  *
- * This file is distributed under the Kitanda Proprietary Software
- * Licence. See doc/LICENCE.TXT for details.
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. Seethe
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General PublicLicense
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+ * MA 02110-1301, USA.
  *
  */
 #include <ostream>
@@ -1211,10 +1559,22 @@ Filename: /empty_tds/actual/src/class_in_a_package/test_data/package1/first_clas
 Contents: 
 /* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
  *
- * Copyright (C) 2012 Kitanda
+ * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
  *
- * This file is distributed under the Kitanda Proprietary Software
- * Licence. See doc/LICENCE.TXT for details.
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. Seethe
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General PublicLicense
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+ * MA 02110-1301, USA.
  *
  */
 #include "class_in_a_package/test_data/package1/first_class_td.hpp"
@@ -1250,10 +1610,22 @@ Filename: /empty_tds/actual/src/class_in_a_package/test_data/unversioned_key_td.
 Contents: 
 /* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
  *
- * Copyright (C) 2012 Kitanda
+ * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
  *
- * This file is distributed under the Kitanda Proprietary Software
- * Licence. See doc/LICENCE.TXT for details.
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. Seethe
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General PublicLicense
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+ * MA 02110-1301, USA.
  *
  */
 #include "class_in_a_package/test_data/unversioned_key_td.hpp"
@@ -1284,10 +1656,22 @@ Filename: /empty_tds/actual/src/class_in_a_package/test_data/versioned_key_td.cp
 Contents: 
 /* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
  *
- * Copyright (C) 2012 Kitanda
+ * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
  *
- * This file is distributed under the Kitanda Proprietary Software
- * Licence. See doc/LICENCE.TXT for details.
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. Seethe
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General PublicLicense
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+ * MA 02110-1301, USA.
  *
  */
 #include "class_in_a_package/test_data/versioned_key_td.hpp"
