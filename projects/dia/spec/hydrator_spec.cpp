@@ -8,6 +8,7 @@
  */
 #include <boost/test/unit_test.hpp>
 #include <boost/filesystem.hpp>
+#include "dogen/utility/test/macros.hpp"
 #include "dogen/utility/test/logging.hpp"
 #include "dogen/utility/test/asserter.hpp"
 #include "dogen/utility/test_data/dia_sml.hpp"
@@ -92,7 +93,7 @@ BOOST_AUTO_TEST_CASE(class_with_empty_package_results_in_expected_objects) {
     BOOST_CHECK(test_hydrator(input, expected, actual));
 }
 
-BOOST_AUTO_TEST_CASE(class_without_name_results_in_expected_objects) {
+BOOST_IGNORE_AUTO_TEST_CASE(class_without_name_results_in_expected_objects) {
     SETUP_TEST_LOG_SOURCE("class_without_name_results_in_expected_objects");
     using dogen::utility::test_data::dia_sml;
     const auto input(dia_sml::input_class_without_name_dia());
