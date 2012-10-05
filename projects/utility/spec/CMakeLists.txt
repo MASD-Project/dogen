@@ -28,4 +28,4 @@ add_custom_target(run_${spec_name}
     WORKING_DIRECTORY ${stage_bin_dir}
     DEPENDS ${spec_name})
 
-add_boost_tests(${main_name} ${files})
+add_boost_tests(${main_name} ${spec_files})
