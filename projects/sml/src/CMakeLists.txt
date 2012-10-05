@@ -13,4 +13,4 @@ file(GLOB_RECURSE sml_files RELATIVE
 add_library(sml STATIC ${sml_files})
 set_target_properties(sml PROPERTIES OUTPUT_NAME dogen_sml)
 set_target_properties(sml
-    PROPERTIES VERSION ${KITANDA_VERSION} SOVERSION ${KITANDA_MAJOR_VERSION})
+    PROPERTIES VERSION ${DOGEN_VERSION} SOVERSION ${DOGEN_MAJOR_VERSION})

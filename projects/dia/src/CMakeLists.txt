@@ -13,4 +13,4 @@ file(GLOB_RECURSE dia_files RELATIVE
 add_library(dia STATIC ${dia_files})
 set_target_properties(dia PROPERTIES OUTPUT_NAME dogen_dia)
 set_target_properties(dia
-    PROPERTIES VERSION ${KITANDA_VERSION} SOVERSION ${KITANDA_MAJOR_VERSION})
+    PROPERTIES VERSION ${DOGEN_VERSION} SOVERSION ${DOGEN_MAJOR_VERSION})

@@ -13,4 +13,4 @@ file(GLOB_RECURSE generator_files RELATIVE
 add_library(generator STATIC ${generator_files})
 set_target_properties(generator PROPERTIES OUTPUT_NAME dogen_generator)
 set_target_properties(generator
-    PROPERTIES VERSION ${KITANDA_VERSION} SOVERSION ${KITANDA_MAJOR_VERSION})
+    PROPERTIES VERSION ${DOGEN_VERSION} SOVERSION ${DOGEN_MAJOR_VERSION})

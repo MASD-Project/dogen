@@ -14,4 +14,4 @@ add_library(utility STATIC ${utility_files})
 set_target_properties(utility
     PROPERTIES OUTPUT_NAME dogen_utility)
 set_target_properties(utility
-    PROPERTIES VERSION ${KITANDA_VERSION} SOVERSION ${KITANDA_MAJOR_VERSION})
+    PROPERTIES VERSION ${DOGEN_VERSION} SOVERSION ${DOGEN_MAJOR_VERSION})
