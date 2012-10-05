@@ -49,11 +49,11 @@ void licence::format() {
             << " * but WITHOUT ANY WARRANTY; without even the implied warranty "
             << "of" << std::endl
             << " * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See"
-            << "the" << std::endl
+            << " the" << std::endl
             << " * GNU General Public License for more details." << std::endl
             << " *" << std::endl
             << " * You should have received a copy of the GNU General Public"
-            << "License" << std::endl
+            << " License" << std::endl
             << " * along with this program; if not, write to the Free Software"
             << std::endl
             << " * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,"
