@@ -1,4 +1,4 @@
-Filename: /empty_tds/actual/include/class_in_a_package/database/class_in_a_package_db.hpp
+Filename: /empty_tds/actual/include/class_in_a_package/database/all_db.hpp
 Contents: 
 /* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
  *
@@ -69,7 +69,7 @@ public:
 } }
 #endif
 
-Filename: /empty_tds/actual/include/class_in_a_package/domain/class_in_a_package.hpp
+Filename: /empty_tds/actual/include/class_in_a_package/domain/all.hpp
 Contents: 
 /* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
  *
@@ -373,7 +373,7 @@ inline void swap(
 
 #endif
 
-Filename: /empty_tds/actual/include/class_in_a_package/hash/class_in_a_package_hash.hpp
+Filename: /empty_tds/actual/include/class_in_a_package/hash/all_hash.hpp
 Contents: 
 /* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
  *
@@ -407,7 +407,7 @@ Contents:
 #include <functional>
 #include "class_in_a_package/domain/package1/first_class.hpp"
 #include "class_in_a_package/hash/versioned_key_hash.hpp"
-#include "kitanda/utility/hash/combine.hpp"
+#include "dogen/utility/hash/combine.hpp"
 
 namespace std {
 
@@ -415,7 +415,7 @@ template<>
 class hash<class_in_a_package::package1::first_class> {
 public:
     size_t operator()(class_in_a_package::package1::first_class value) const {
-        using kitanda::utility::hash::combine;
+        using dogen::utility::hash::combine;
         std::size_t seed(0);
 
         combine(seed, value.public_attribute());
@@ -448,7 +448,7 @@ Contents:
 
 #include <functional>
 #include "class_in_a_package/domain/unversioned_key.hpp"
-#include "kitanda/utility/hash/combine.hpp"
+#include "dogen/utility/hash/combine.hpp"
 
 namespace std {
 
@@ -456,7 +456,7 @@ template<>
 class hash<class_in_a_package::unversioned_key> {
 public:
     size_t operator()(class_in_a_package::unversioned_key value) const {
-        using kitanda::utility::hash::combine;
+        using dogen::utility::hash::combine;
         std::size_t seed(0);
 
         combine(seed, value.id());
@@ -487,7 +487,7 @@ Contents:
 
 #include <functional>
 #include "class_in_a_package/domain/versioned_key.hpp"
-#include "kitanda/utility/hash/combine.hpp"
+#include "dogen/utility/hash/combine.hpp"
 
 namespace std {
 
@@ -495,7 +495,7 @@ template<>
 class hash<class_in_a_package::versioned_key> {
 public:
     size_t operator()(class_in_a_package::versioned_key value) const {
-        using kitanda::utility::hash::combine;
+        using dogen::utility::hash::combine;
         std::size_t seed(0);
 
         combine(seed, value.id());
@@ -508,7 +508,7 @@ public:
 }
 #endif
 
-Filename: /empty_tds/actual/include/class_in_a_package/io/class_in_a_package_io.hpp
+Filename: /empty_tds/actual/include/class_in_a_package/io/all_io.hpp
 Contents: 
 /* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
  *
@@ -613,7 +613,7 @@ operator<<(std::ostream& stream,
 
 #endif
 
-Filename: /empty_tds/actual/include/class_in_a_package/serialization/class_in_a_package_ser.hpp
+Filename: /empty_tds/actual/include/class_in_a_package/serialization/all_ser.hpp
 Contents: 
 /* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
  *
@@ -785,7 +785,7 @@ inline void serialize(Archive & archive,
 
 #endif
 
-Filename: /empty_tds/actual/include/class_in_a_package/test_data/class_in_a_package_sequence.hpp
+Filename: /empty_tds/actual/include/class_in_a_package/test_data/all_td.hpp
 Contents: 
 /* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
  *
@@ -795,11 +795,11 @@ Contents:
  * Licence. See doc/LICENCE.TXT for details.
  *
  */
-#include "class_in_a_package/test_data/package1/first_class_sequence.hpp"
-#include "class_in_a_package/test_data/unversioned_key_sequence.hpp"
-#include "class_in_a_package/test_data/versioned_key_sequence.hpp"
+#include "class_in_a_package/test_data/package1/first_class_td.hpp"
+#include "class_in_a_package/test_data/unversioned_key_td.hpp"
+#include "class_in_a_package/test_data/versioned_key_td.hpp"
 
-Filename: /empty_tds/actual/include/class_in_a_package/test_data/package1/first_class_sequence.hpp
+Filename: /empty_tds/actual/include/class_in_a_package/test_data/package1/first_class_td.hpp
 Contents: 
 /* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
  *
@@ -809,16 +809,16 @@ Contents:
  * Licence. See doc/LICENCE.TXT for details.
  *
  */
-#ifndef CLASS_IN_A_PACKAGE_TEST_DATA_PACKAGE1_FIRST_CLASS_SEQUENCE_HPP
-#define CLASS_IN_A_PACKAGE_TEST_DATA_PACKAGE1_FIRST_CLASS_SEQUENCE_HPP
+#ifndef CLASS_IN_A_PACKAGE_TEST_DATA_PACKAGE1_FIRST_CLASS_TD_HPP
+#define CLASS_IN_A_PACKAGE_TEST_DATA_PACKAGE1_FIRST_CLASS_TD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include "class_in_a_package/domain/package1/first_class.hpp"
-#include "kitanda/utility/test_data/generator.hpp"
-#include "kitanda/utility/test_data/sequence.hpp"
+#include "dogen/utility/test_data/generator.hpp"
+#include "dogen/utility/test_data/sequence.hpp"
 
 namespace class_in_a_package {
 namespace package1 {
@@ -836,14 +836,14 @@ public:
 
 }
 
-typedef kitanda::utility::test_data::sequence<
+typedef dogen::utility::test_data::sequence<
     detail::first_class_generator> first_class_sequence;
 
 } }
 
 #endif
 
-Filename: /empty_tds/actual/include/class_in_a_package/test_data/unversioned_key_sequence.hpp
+Filename: /empty_tds/actual/include/class_in_a_package/test_data/unversioned_key_td.hpp
 Contents: 
 /* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
  *
@@ -853,16 +853,16 @@ Contents:
  * Licence. See doc/LICENCE.TXT for details.
  *
  */
-#ifndef CLASS_IN_A_PACKAGE_TEST_DATA_UNVERSIONED_KEY_SEQUENCE_HPP
-#define CLASS_IN_A_PACKAGE_TEST_DATA_UNVERSIONED_KEY_SEQUENCE_HPP
+#ifndef CLASS_IN_A_PACKAGE_TEST_DATA_UNVERSIONED_KEY_TD_HPP
+#define CLASS_IN_A_PACKAGE_TEST_DATA_UNVERSIONED_KEY_TD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include "class_in_a_package/domain/unversioned_key.hpp"
-#include "kitanda/utility/test_data/generator.hpp"
-#include "kitanda/utility/test_data/sequence.hpp"
+#include "dogen/utility/test_data/generator.hpp"
+#include "dogen/utility/test_data/sequence.hpp"
 
 namespace class_in_a_package {
 
@@ -879,14 +879,14 @@ public:
 
 }
 
-typedef kitanda::utility::test_data::sequence<
+typedef dogen::utility::test_data::sequence<
     detail::unversioned_key_generator> unversioned_key_sequence;
 
 }
 
 #endif
 
-Filename: /empty_tds/actual/include/class_in_a_package/test_data/versioned_key_sequence.hpp
+Filename: /empty_tds/actual/include/class_in_a_package/test_data/versioned_key_td.hpp
 Contents: 
 /* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
  *
@@ -896,16 +896,16 @@ Contents:
  * Licence. See doc/LICENCE.TXT for details.
  *
  */
-#ifndef CLASS_IN_A_PACKAGE_TEST_DATA_VERSIONED_KEY_SEQUENCE_HPP
-#define CLASS_IN_A_PACKAGE_TEST_DATA_VERSIONED_KEY_SEQUENCE_HPP
+#ifndef CLASS_IN_A_PACKAGE_TEST_DATA_VERSIONED_KEY_TD_HPP
+#define CLASS_IN_A_PACKAGE_TEST_DATA_VERSIONED_KEY_TD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include "class_in_a_package/domain/versioned_key.hpp"
-#include "kitanda/utility/test_data/generator.hpp"
-#include "kitanda/utility/test_data/sequence.hpp"
+#include "dogen/utility/test_data/generator.hpp"
+#include "dogen/utility/test_data/sequence.hpp"
 
 namespace class_in_a_package {
 
@@ -922,7 +922,7 @@ public:
 
 }
 
-typedef kitanda::utility::test_data::sequence<
+typedef dogen::utility::test_data::sequence<
     detail::versioned_key_generator> versioned_key_sequence;
 
 }
@@ -945,7 +945,7 @@ file(GLOB_RECURSE all_files RELATIVE
 
 add_library(class_in_a_package STATIC ${all_files})
 set_target_properties(class_in_a_package PROPERTIES
-    OUTPUT_NAME kitanda_class_in_a_package)
+    OUTPUT_NAME dogen_class_in_a_package)
 
 Filename: /empty_tds/actual/src/class_in_a_package/database/package1/first_class_db.cpp
 Contents: 
@@ -1011,7 +1011,7 @@ Contents:
 #include <ostream>
 #include "class_in_a_package/domain/package1/first_class.hpp"
 #include "class_in_a_package/io/versioned_key_io.hpp"
-#include "kitanda/utility/io/jsonify_io.hpp"
+#include "dogen/utility/io/jsonify_io.hpp"
 
 namespace class_in_a_package {
 namespace package1 {
@@ -1029,7 +1029,7 @@ first_class::first_class(
       versioned_key_(versioned_key) { }
 
 void first_class::to_stream(std::ostream& stream) const {
-    using kitanda::utility::streaming::jsonify;
+    using dogen::utility::streaming::jsonify;
 
     stream << " {"
            << "\"__type__\": " << "\"first_class\"" << ","
@@ -1063,7 +1063,7 @@ Contents:
  */
 #include <ostream>
 #include "class_in_a_package/domain/unversioned_key.hpp"
-#include "kitanda/utility/io/jsonify_io.hpp"
+#include "dogen/utility/io/jsonify_io.hpp"
 
 namespace class_in_a_package {
 
@@ -1074,7 +1074,7 @@ unversioned_key::unversioned_key(unsigned int id)
     : id_(id) { }
 
 void unversioned_key::to_stream(std::ostream& stream) const {
-    using kitanda::utility::streaming::jsonify;
+    using dogen::utility::streaming::jsonify;
 
     stream << " {"
            << "\"__type__\": " << "\"unversioned_key\"" << ","
@@ -1104,7 +1104,7 @@ Contents:
  */
 #include <ostream>
 #include "class_in_a_package/domain/versioned_key.hpp"
-#include "kitanda/utility/io/jsonify_io.hpp"
+#include "dogen/utility/io/jsonify_io.hpp"
 
 namespace class_in_a_package {
 
@@ -1119,7 +1119,7 @@ versioned_key::versioned_key(
       version_(version) { }
 
 void versioned_key::to_stream(std::ostream& stream) const {
-    using kitanda::utility::streaming::jsonify;
+    using dogen::utility::streaming::jsonify;
 
     stream << " {"
            << "\"__type__\": " << "\"versioned_key\"" << ","
@@ -1207,7 +1207,7 @@ std::ostream& operator<<(std::ostream& stream, versioned_key value) {
 }
 
 }
-Filename: /empty_tds/actual/src/class_in_a_package/test_data/package1/first_class_sequence.cpp
+Filename: /empty_tds/actual/src/class_in_a_package/test_data/package1/first_class_td.cpp
 Contents: 
 /* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
  *
@@ -1217,8 +1217,8 @@ Contents:
  * Licence. See doc/LICENCE.TXT for details.
  *
  */
-#include "class_in_a_package/test_data/package1/first_class_sequence.hpp"
-#include "class_in_a_package/test_data/versioned_key_sequence.hpp"
+#include "class_in_a_package/test_data/package1/first_class_td.hpp"
+#include "class_in_a_package/test_data/versioned_key_td.hpp"
 
 namespace class_in_a_package {
 namespace package1 {
@@ -1246,7 +1246,7 @@ unsigned int first_class_generator::length() const { return(3); }
 
 } } }
 
-Filename: /empty_tds/actual/src/class_in_a_package/test_data/unversioned_key_sequence.cpp
+Filename: /empty_tds/actual/src/class_in_a_package/test_data/unversioned_key_td.cpp
 Contents: 
 /* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
  *
@@ -1256,7 +1256,7 @@ Contents:
  * Licence. See doc/LICENCE.TXT for details.
  *
  */
-#include "class_in_a_package/test_data/unversioned_key_sequence.hpp"
+#include "class_in_a_package/test_data/unversioned_key_td.hpp"
 
 namespace class_in_a_package {
 namespace detail {
@@ -1280,7 +1280,7 @@ unsigned int unversioned_key_generator::length() const { return(3); }
 
 } }
 
-Filename: /empty_tds/actual/src/class_in_a_package/test_data/versioned_key_sequence.cpp
+Filename: /empty_tds/actual/src/class_in_a_package/test_data/versioned_key_td.cpp
 Contents: 
 /* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
  *
@@ -1290,7 +1290,7 @@ Contents:
  * Licence. See doc/LICENCE.TXT for details.
  *
  */
-#include "class_in_a_package/test_data/versioned_key_sequence.hpp"
+#include "class_in_a_package/test_data/versioned_key_td.hpp"
 
 namespace class_in_a_package {
 namespace detail {

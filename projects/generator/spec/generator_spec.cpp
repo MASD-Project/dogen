@@ -131,7 +131,7 @@ BOOST_AUTO_TEST_CASE(debug_options_generate_expected_debug_info) {
     BOOST_CHECK(asserter::assert_directory(tds::expected(), tds::actual(), f));
 }
 
-BOOST_IGNORE_AUTO_TEST_CASE(stdout_option_generates_expected_output) {
+BOOST_AUTO_TEST_CASE(stdout_option_generates_expected_output) {
     SETUP_TEST_LOG("stdout_option_generates_expected_output");
     auto s(empty_tds_mock_settings());
     auto fs(s.output());
