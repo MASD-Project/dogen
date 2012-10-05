@@ -1,30 +1,32 @@
 # -*- mode: cmake; tab-width: 4; indent-tabs-mode: nil -*-
 #
-# Copyright (C) 2011 Kitanda
+# Copyright (C) 2012 Kitanda
 #
 # This file is distributed under the Kitanda Proprietary Software
 # Licence. See doc/LICENCE.TXT for details.
 #
-set(sml_spec_files "")
-file(GLOB_RECURSE sml_spec_files RELATIVE
+set(main_name "sml")
+set(spec_name "${main_name}_spec")
+set(spec_files "")
+file(GLOB_RECURSE spec_files RELATIVE
     "${CMAKE_CURRENT_SOURCE_DIR}/"
     "${CMAKE_CURRENT_SOURCE_DIR}/*.cpp")
 
-add_executable(sml_spec ${sml_spec_files})
-set(binary_name "dogen_sml_spec")
-set_target_properties(sml_spec PROPERTIES OUTPUT_NAME ${binary_name})
+add_executable(${spec_name} ${spec_files})
+set(binary_name "dogen_${spec_name}")
+set_target_properties(${spec_name} PROPERTIES OUTPUT_NAME ${binary_name})
 
-target_link_libraries(sml_spec
-    sml
+target_link_libraries(${spec_name}
+    ${main_name}
     utility
     ${LIBXML2_LIBRARIES}
     ${Boost_LIBRARIES})
 
-set(sml_spec_cmd ${stage_bin_dir}/${binary_name} ${boost_test_parameters})
+set(${spec_name}_cmd ${stage_bin_dir}/${binary_name} ${boost_test_parameters})
 
-add_custom_target(run_sml_spec
-    COMMAND ${sml_spec_cmd}
+add_custom_target(run_${spec_name}
+    COMMAND ${${spec_name}_cmd}
     WORKING_DIRECTORY ${stage_bin_dir}
-    DEPENDS sml_spec)
+    DEPENDS ${spec_name})
 
-add_boost_tests(sml ${sml_spec_files})
+add_boost_tests(${main_name} ${files})
