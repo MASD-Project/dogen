@@ -30,5 +30,6 @@ add_custom_target(run_generator_spec
     COMMAND ${generator_spec_cmd}
     WORKING_DIRECTORY ${stage_bin_dir}
     DEPENDS generator_spec)
+add_dependencies(run_all_specs run_generator_spec)
 
 add_boost_tests(generator ${generator_spec_files})

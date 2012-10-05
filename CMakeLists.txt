@@ -221,66 +221,20 @@ add_custom_target(deploy_doxy
 add_dependencies(deploy_doxy doxy)
 
 #
-# include all sub directories
-#
-add_subdirectory(${CMAKE_SOURCE_DIR}/build/templates)
-add_subdirectory(${CMAKE_SOURCE_DIR}/build/cpack)
-add_subdirectory(${CMAKE_SOURCE_DIR}/test_data)
-add_subdirectory(${CMAKE_SOURCE_DIR}/projects)
-
-#
 # aggregate targets
 #
-add_custom_target(build_all)
-add_dependencies(build_all
-    sml
-    sml_spec
-    dogen
-    dogen_spec
-    utility
-    utility_spec
-    dia
-    dia_spec
-    header_validation
-    generator
-    generator_spec
-    driver
-    driver_spec
-
-    all_primitives
-    all_primitives_spec
-    classes_in_a_package
-    classes_inout_package
-    classes_without_package
-    class_in_a_package
-    class_in_a_package_spec
-    class_without_attributes
-    class_without_package
-    stand_alone_class
-    compressed
-    disable_complete_constructor
-    enable_facet_domain
-    enable_facet_hash
-    enable_facet_io
-    enable_facet_serialization
-    two_layers_with_objects
-    )
-
 add_custom_target(run_all_specs)
-add_dependencies(run_all_specs
-    clean_codegen
-    build_all
-    run_sml_spec
-    run_dia_spec
-    run_generator_spec
-    run_driver_spec
-    run_utility_spec
-    run_all_primitives_spec
-    run_class_in_a_package_spec
-    )
 
 add_custom_target(rebase)
 add_dependencies(rebase rebase_codegen rebase_dataset)
 
 add_custom_target(diff)
 add_dependencies(diff diff_codegen diff_dataset)
+
+#
+# include all sub directories
+#
+add_subdirectory(${CMAKE_SOURCE_DIR}/build/templates)
+add_subdirectory(${CMAKE_SOURCE_DIR}/build/cpack)
+add_subdirectory(${CMAKE_SOURCE_DIR}/test_data)
+add_subdirectory(${CMAKE_SOURCE_DIR}/projects)

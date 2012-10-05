@@ -49,5 +49,6 @@ add_custom_target(run_driver_spec
     COMMAND ${driver_spec_cmd}
     WORKING_DIRECTORY ${stage_bin_dir}
     DEPENDS driver_spec)
+add_dependencies(run_all_specs run_driver_spec)
 
 add_boost_tests(driver ${driver_spec_files})

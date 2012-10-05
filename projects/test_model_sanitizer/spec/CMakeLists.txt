@@ -5,7 +5,7 @@
 # This file is distributed under the Kitanda Proprietary Software
 # Licence. See doc/LICENCE.TXT for details.
 #
-set(main_name "all_primitives")
+set(main_name "test_model_sanitizer")
 set(spec_name "${main_name}_spec")
 set(spec_files "")
 file(GLOB_RECURSE spec_files RELATIVE
@@ -17,7 +17,8 @@ set(binary_name "dogen_${spec_name}")
 set_target_properties(${spec_name} PROPERTIES OUTPUT_NAME ${binary_name})
 
 target_link_libraries(${spec_name}
-    ${main_name}
+    all_primitives
+    class_in_a_package
     utility
     ${LIBXML2_LIBRARIES}
     ${Boost_LIBRARIES})
@@ -28,5 +29,6 @@ add_custom_target(run_${spec_name}
     COMMAND ${${spec_name}_cmd}
     WORKING_DIRECTORY ${stage_bin_dir}
     DEPENDS ${spec_name})
+add_dependencies(run_all_specs run_${spec_name})
 
 add_boost_tests(${main_name} ${spec_files})

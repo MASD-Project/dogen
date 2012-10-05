@@ -27,5 +27,6 @@ add_custom_target(run_${spec_name}
     COMMAND ${${spec_name}_cmd}
     WORKING_DIRECTORY ${stage_bin_dir}
     DEPENDS ${spec_name})
+add_dependencies(run_all_specs run_${spec_name})
 
 add_boost_tests(${main_name} ${spec_files})
