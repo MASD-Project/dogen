@@ -32,6 +32,8 @@
    "/projects/two_layers_with_objects/include"
    "/projects/dmp/include"
    "/projects/config/include"
+   "/projects/split_project/include"
+   "/projects/prototype/include"
    )
  :system-include-path
  '("/usr/local/pfh/include"
