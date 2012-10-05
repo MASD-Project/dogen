@@ -152,6 +152,7 @@ include_directories(
     ${CMAKE_SOURCE_DIR}/projects/enable_facet_serialization/include
     ${CMAKE_SOURCE_DIR}/projects/two_layers_with_objects/include
     ${CMAKE_SOURCE_DIR}/projects/dmp/include
+    ${CMAKE_SOURCE_DIR}/projects/split_project/dir/inc
     )
 
 #
@@ -185,6 +186,7 @@ add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/enable_facet_io/src)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/enable_facet_serialization/src)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/two_layers_with_objects/src)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dmp/src)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/split_project/source/split_project)
 
 # global targets for codegen
 add_custom_target(rebase_codegen)

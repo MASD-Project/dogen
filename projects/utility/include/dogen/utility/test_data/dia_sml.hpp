@@ -59,6 +59,7 @@ public:
     static boost::filesystem::path input_rename_facet_folder_dia();
     static boost::filesystem::path input_use_integrated_io_dia();
     static boost::filesystem::path input_all_primitives_dia();
+    static boost::filesystem::path input_split_project_dia();
 
     static boost::filesystem::path expected();
     static boost::filesystem::path expected_class_in_a_package_dia_xml();

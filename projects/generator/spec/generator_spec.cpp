@@ -511,6 +511,25 @@ BOOST_AUTO_TEST_CASE(all_primitives_model_generates_expected_code) {
     BOOST_CHECK(check_code_generation(t));
 }
 
+BOOST_AUTO_TEST_CASE(split_project_model_generates_expected_code) {
+    SETUP_TEST_LOG("split_project_model_generates_expected_code");
+    using dogen::utility::test_data::dia_sml;
+
+    // note that we keep the project name just to make the life easier
+    // for the rebaselining scripts.
+    auto lambda([](dogen::utility::test_data::codegen_tds tds) {
+            using dogen::generator::test::mock_settings_factory;
+            return mock_settings_factory::build_settings(
+                tds.target(),
+                tds.actual() / "split_project/source",
+                tds.actual() / "split_project/dir/inc/dogen",
+                package_path);
+        });
+
+    const auto t(dia_sml::input_split_project_dia());
+    BOOST_CHECK(check_code_generation(t, lambda));
+}
+
 BOOST_AUTO_TEST_CASE(housekeeping_is_not_triggered_when_we_are_not_generating_files) {
     SETUP_TEST_LOG("housekeeping_is_not_triggered_when_we_are_not_generating_files");
     auto s(empty_tds_mock_settings());
