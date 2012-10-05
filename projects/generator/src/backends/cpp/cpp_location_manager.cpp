@@ -17,7 +17,7 @@ const std::string domain_postfix;
 const std::string io_postfix("_io");
 const std::string hash_postfix("_hash");
 const std::string serialization_postfix("_ser");
-const std::string test_data_postfix("_sequence");
+const std::string test_data_postfix("_td");
 const std::string database_postfix("_db");
 
 const std::string src_dir("src");

@@ -6,25 +6,26 @@
  * Licence. See doc/LICENCE.TXT for details.
  *
  */
-#ifndef DOGEN_DISABLE_COMPLETE_CONSTRUCTOR_TEST_DATA_UNVERSIONED_KEY_SEQUENCE_HPP
-#define DOGEN_DISABLE_COMPLETE_CONSTRUCTOR_TEST_DATA_UNVERSIONED_KEY_SEQUENCE_HPP
+#ifndef DOGEN_DISABLE_COMPLETE_CONSTRUCTOR_TEST_DATA_PACKAGE1_FIRST_CLASS_TD_HPP
+#define DOGEN_DISABLE_COMPLETE_CONSTRUCTOR_TEST_DATA_PACKAGE1_FIRST_CLASS_TD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/disable_complete_constructor/domain/unversioned_key.hpp"
+#include "dogen/disable_complete_constructor/domain/package1/first_class.hpp"
 #include "dogen/utility/test_data/generator.hpp"
 #include "dogen/utility/test_data/sequence.hpp"
 
 namespace dogen {
 namespace disable_complete_constructor {
+namespace package1 {
 
 namespace detail {
 
-class unversioned_key_generator {
+class first_class_generator {
 public:
-    typedef dogen::disable_complete_constructor::unversioned_key value_type;
+    typedef dogen::disable_complete_constructor::package1::first_class value_type;
 
 public:
     value_type next_term(const unsigned int position);
@@ -34,8 +35,8 @@ public:
 }
 
 typedef dogen::utility::test_data::sequence<
-    detail::unversioned_key_generator> unversioned_key_sequence;
+    detail::first_class_generator> first_class_sequence;
 
-} }
+} } }
 
 #endif

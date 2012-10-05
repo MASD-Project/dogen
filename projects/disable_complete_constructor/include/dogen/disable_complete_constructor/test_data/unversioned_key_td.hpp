@@ -6,14 +6,14 @@
  * Licence. See doc/LICENCE.TXT for details.
  *
  */
-#ifndef DOGEN_DISABLE_COMPLETE_CONSTRUCTOR_TEST_DATA_VERSIONED_KEY_SEQUENCE_HPP
-#define DOGEN_DISABLE_COMPLETE_CONSTRUCTOR_TEST_DATA_VERSIONED_KEY_SEQUENCE_HPP
+#ifndef DOGEN_DISABLE_COMPLETE_CONSTRUCTOR_TEST_DATA_UNVERSIONED_KEY_TD_HPP
+#define DOGEN_DISABLE_COMPLETE_CONSTRUCTOR_TEST_DATA_UNVERSIONED_KEY_TD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/disable_complete_constructor/domain/versioned_key.hpp"
+#include "dogen/disable_complete_constructor/domain/unversioned_key.hpp"
 #include "dogen/utility/test_data/generator.hpp"
 #include "dogen/utility/test_data/sequence.hpp"
 
@@ -22,9 +22,9 @@ namespace disable_complete_constructor {
 
 namespace detail {
 
-class versioned_key_generator {
+class unversioned_key_generator {
 public:
-    typedef dogen::disable_complete_constructor::versioned_key value_type;
+    typedef dogen::disable_complete_constructor::unversioned_key value_type;
 
 public:
     value_type next_term(const unsigned int position);
@@ -34,7 +34,7 @@ public:
 }
 
 typedef dogen::utility::test_data::sequence<
-    detail::versioned_key_generator> versioned_key_sequence;
+    detail::unversioned_key_generator> unversioned_key_sequence;
 
 } }
 
