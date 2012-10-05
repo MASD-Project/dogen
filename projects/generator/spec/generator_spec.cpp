@@ -485,7 +485,7 @@ BOOST_IGNORE_AUTO_TEST_CASE(two_layers_with_objects_model_generates_expected_cod
     BOOST_CHECK(check_code_generation(t));
 }
 
-BOOST_IGNORE_AUTO_TEST_CASE(package_without_name_model_throws) {
+BOOST_AUTO_TEST_CASE(package_without_name_model_throws) {
     SETUP_TEST_LOG("package_without_name_model_throws");
     using dogen::utility::test_data::dia_sml;
     const auto t(dia_sml::input_package_without_name_dia());
