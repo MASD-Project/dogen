@@ -435,7 +435,8 @@ void dia_to_sml::populate_graph(std::vector<dia::object> objects) {
 
 sml::model dia_to_sml::transform() {
     using namespace dogen::utility::log;
-    BOOST_LOG_SEV(lg, info) << "Transforming diagram: " << diagram_;
+    BOOST_LOG_SEV(lg, info) << "Transforming diagram: " << model_name_;
+    BOOST_LOG_SEV(lg, debug) << "Contents: " << diagram_;
     for (dia::layer layer : diagram_.layers())
         populate_graph(layer.objects());
 
