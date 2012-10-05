@@ -213,13 +213,12 @@ BOOST_AUTO_TEST_CASE(disable_facet_folders_generates_expected_code) {
     BOOST_CHECK(check_code_generation(t, lambda));
 }
 
-BOOST_IGNORE_AUTO_TEST_CASE(disable_model_package_generates_expected_code) {
+BOOST_AUTO_TEST_CASE(disable_model_package_generates_expected_code) {
     SETUP_TEST_LOG("disable_model_package_generates_expected_code");
     auto lambda([](dogen::utility::test_data::codegen_tds tds) {
             auto s(default_mock_settings(tds));
             auto cs(s.cpp());
-            cs.source_directory(cs.source_directory() /= extra_folder);
-            cs.include_directory(cs.include_directory() /= extra_folder);
+            cs.project_directory(cs.project_directory() /= extra_folder);
             s.cpp(cs);
 
             auto ms(s.modeling());

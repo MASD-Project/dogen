@@ -151,6 +151,7 @@ include_directories(
     ${CMAKE_SOURCE_DIR}/projects/enable_facet_io/include
     ${CMAKE_SOURCE_DIR}/projects/enable_facet_serialization/include
     ${CMAKE_SOURCE_DIR}/projects/two_layers_with_objects/include
+    ${CMAKE_SOURCE_DIR}/projects/dmp/include
     )
 
 #
@@ -183,6 +184,7 @@ add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/enable_facet_hash/src)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/enable_facet_io/src)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/enable_facet_serialization/src)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/two_layers_with_objects/src)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dmp/src)
 
 # global targets for codegen
 add_custom_target(rebase_codegen)
@@ -195,9 +197,15 @@ foreach(dia_model ${all_dia_test_models})
     get_filename_component(model_name ${dia_model} NAME_WE)
 
     set(top_dir "${stage_test_data_dir}/${model_name}")
-    set(actual_dir "${top_dir}/actual/${model_name}")
-    set(expect_dir "${top_dir}/expected/${model_name}")
-    set(git_dir "${CMAKE_CURRENT_SOURCE_DIR}/${model_name}")
+
+    set(model_folder_name "${model_name}")
+    if (model_name STREQUAL "disable_model_package")
+        set(model_folder_name "dmp")
+    endif()
+
+    set(actual_dir "${top_dir}/actual/${model_folder_name}")
+    set(expect_dir "${top_dir}/expected/${model_folder_name}")
+    set(git_dir "${CMAKE_CURRENT_SOURCE_DIR}/${model_folder_name}")
 
     if(EXISTS "${actual_dir}")
         set(target_name "diff_${model_name}")
@@ -239,7 +247,12 @@ foreach(dia_model ${all_dia_test_models})
         file(REMOVE_RECURSE "${expected_dir}")
     endif()
 
-    set(git_dir "${CMAKE_CURRENT_SOURCE_DIR}/${model_name}")
+    set(model_folder_name "${model_name}")
+    if (model_name STREQUAL "disable_model_package")
+        set(model_folder_name "dmp")
+    endif()
+
+    set(git_dir "${CMAKE_CURRENT_SOURCE_DIR}/${model_folder_name}")
     if(IS_DIRECTORY "${git_dir}")
         file(COPY "${git_dir}" DESTINATION "${expected_dir}")
     else()

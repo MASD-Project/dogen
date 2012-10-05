@@ -30,6 +30,7 @@
    "/projects/enable_facet_io/include"
    "/projects/enable_facet_serialization/include"
    "/projects/two_layers_with_objects/include"
+   "/projects/dmp/include"
    "/projects/config/include"
    )
  :system-include-path
