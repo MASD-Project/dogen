@@ -6,7 +6,7 @@
  * Licence. See doc/LICENCE.TXT for details.
  *
  */
-#include "dogen/class_in_a_package/test_data/versioned_key_sequence.hpp"
+#include "dogen/class_in_a_package/test_data/versioned_key_td.hpp"
 
 namespace dogen {
 namespace class_in_a_package {
