@@ -27,7 +27,7 @@ const std::string test_suite("test_data_spec");
 
 }
 
-BOOST_AUTO_TEST_SUITE(org_test_data)
+BOOST_AUTO_TEST_SUITE(test_data)
 
 BOOST_AUTO_TEST_CASE(exercise_currency_sequences) {
     SETUP_TEST_LOG("exercise_currency_sequences");
