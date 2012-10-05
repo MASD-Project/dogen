@@ -200,7 +200,7 @@ foreach(dia_model ${all_dia_test_models})
     set(expect_dir "${top_dir}/expected/${model_name}")
     set(git_dir "${CMAKE_CURRENT_SOURCE_DIR}/${model_name}")
 
-    if(EXISTS "${actual_dir}/${model_name}")
+    if(EXISTS "${actual_dir}")
         set(target_name "diff_${model_name}")
         add_custom_target(${target_name}
             COMMAND diff -r -u ${expect_dir} ${actual_dir}
