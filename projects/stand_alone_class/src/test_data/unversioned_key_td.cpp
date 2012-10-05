@@ -6,7 +6,7 @@
  * Licence. See doc/LICENCE.TXT for details.
  *
  */
-#include "dogen/stand_alone_class/test_data/unversioned_key_sequence.hpp"
+#include "dogen/stand_alone_class/test_data/unversioned_key_td.hpp"
 
 namespace dogen {
 namespace stand_alone_class {
