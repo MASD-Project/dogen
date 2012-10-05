@@ -6,26 +6,27 @@
  * Licence. See doc/LICENCE.TXT for details.
  *
  */
-#include "dogen/classes_in_a_package/test_data/package_1/class_1_sequence.hpp"
-#include "dogen/classes_in_a_package/test_data/versioned_key_sequence.hpp"
+#include "dogen/classes_in_a_package/test_data/unversioned_key_td.hpp"
 
 namespace dogen {
 namespace classes_in_a_package {
-namespace package_1 {
 namespace detail {
 
-class_1_generator::value_type
-class_1_generator::next_term(const unsigned int position) {
-    class_1 r;
+unversioned_key_generator::value_type
+unversioned_key_generator::next_term(const unsigned int position) {
+    unversioned_key r;
 
     if (position == 0) {
+        r.id(static_cast<unsigned int>(0));
     } else if (position == 1) {
+        r.id(static_cast<unsigned int>(30));
     } else if (position == 2) {
+        r.id(static_cast<unsigned int>(60));
     }
 
     return r;
 }
 
-unsigned int class_1_generator::length() const { return(3); }
+unsigned int unversioned_key_generator::length() const { return(3); }
 
-} } } }
+} } }

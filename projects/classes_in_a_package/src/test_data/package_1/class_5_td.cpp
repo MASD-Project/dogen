@@ -6,17 +6,17 @@
  * Licence. See doc/LICENCE.TXT for details.
  *
  */
-#include "dogen/classes_in_a_package/test_data/package_1/class_2_sequence.hpp"
-#include "dogen/classes_in_a_package/test_data/versioned_key_sequence.hpp"
+#include "dogen/classes_in_a_package/test_data/package_1/class_5_td.hpp"
+#include "dogen/classes_in_a_package/test_data/versioned_key_td.hpp"
 
 namespace dogen {
 namespace classes_in_a_package {
 namespace package_1 {
 namespace detail {
 
-class_2_generator::value_type
-class_2_generator::next_term(const unsigned int position) {
-    class_2 r;
+class_5_generator::value_type
+class_5_generator::next_term(const unsigned int position) {
+    class_5 r;
 
     if (position == 0) {
     } else if (position == 1) {
@@ -26,6 +26,6 @@ class_2_generator::next_term(const unsigned int position) {
     return r;
 }
 
-unsigned int class_2_generator::length() const { return(3); }
+unsigned int class_5_generator::length() const { return(3); }
 
 } } } }
