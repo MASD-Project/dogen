@@ -464,7 +464,7 @@ BOOST_AUTO_TEST_CASE(classes_in_a_package_model_generates_expected_code) {
     BOOST_CHECK(check_code_generation(t));
 }
 
-BOOST_IGNORE_AUTO_TEST_CASE(classes_without_package_model_generates_expected_code) {
+BOOST_AUTO_TEST_CASE(classes_without_package_model_generates_expected_code) {
     SETUP_TEST_LOG("classes_without_package_model_generates_expected_code");
     using dogen::utility::test_data::dia_sml;
     const auto t(dia_sml::input_classes_without_package_dia());

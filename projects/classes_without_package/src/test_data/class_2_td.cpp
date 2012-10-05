@@ -6,8 +6,8 @@
  * Licence. See doc/LICENCE.TXT for details.
  *
  */
-#include "dogen/classes_without_package/test_data/class_2_sequence.hpp"
-#include "dogen/classes_without_package/test_data/versioned_key_sequence.hpp"
+#include "dogen/classes_without_package/test_data/class_2_td.hpp"
+#include "dogen/classes_without_package/test_data/versioned_key_td.hpp"
 
 namespace dogen {
 namespace classes_without_package {

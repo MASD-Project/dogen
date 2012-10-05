@@ -6,16 +6,16 @@
  * Licence. See doc/LICENCE.TXT for details.
  *
  */
-#include "dogen/classes_without_package/test_data/class_4_sequence.hpp"
-#include "dogen/classes_without_package/test_data/versioned_key_sequence.hpp"
+#include "dogen/classes_without_package/test_data/class_5_td.hpp"
+#include "dogen/classes_without_package/test_data/versioned_key_td.hpp"
 
 namespace dogen {
 namespace classes_without_package {
 namespace detail {
 
-class_4_generator::value_type
-class_4_generator::next_term(const unsigned int position) {
-    class_4 r;
+class_5_generator::value_type
+class_5_generator::next_term(const unsigned int position) {
+    class_5 r;
 
     if (position == 0) {
     } else if (position == 1) {
@@ -25,6 +25,6 @@ class_4_generator::next_term(const unsigned int position) {
     return r;
 }
 
-unsigned int class_4_generator::length() const { return(3); }
+unsigned int class_5_generator::length() const { return(3); }
 
 } } }

@@ -6,14 +6,14 @@
  * Licence. See doc/LICENCE.TXT for details.
  *
  */
-#ifndef DOGEN_CLASSES_WITHOUT_PACKAGE_TEST_DATA_CLASS_2_SEQUENCE_HPP
-#define DOGEN_CLASSES_WITHOUT_PACKAGE_TEST_DATA_CLASS_2_SEQUENCE_HPP
+#ifndef DOGEN_CLASSES_WITHOUT_PACKAGE_TEST_DATA_CLASS_4_TD_HPP
+#define DOGEN_CLASSES_WITHOUT_PACKAGE_TEST_DATA_CLASS_4_TD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/classes_without_package/domain/class_2.hpp"
+#include "dogen/classes_without_package/domain/class_4.hpp"
 #include "dogen/utility/test_data/generator.hpp"
 #include "dogen/utility/test_data/sequence.hpp"
 
@@ -22,9 +22,9 @@ namespace classes_without_package {
 
 namespace detail {
 
-class class_2_generator {
+class class_4_generator {
 public:
-    typedef dogen::classes_without_package::class_2 value_type;
+    typedef dogen::classes_without_package::class_4 value_type;
 
 public:
     value_type next_term(const unsigned int position);
@@ -34,7 +34,7 @@ public:
 }
 
 typedef dogen::utility::test_data::sequence<
-    detail::class_2_generator> class_2_sequence;
+    detail::class_4_generator> class_4_sequence;
 
 } }
 
