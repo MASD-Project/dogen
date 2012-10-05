@@ -10,6 +10,7 @@
 
 namespace {
 
+const std::string empty;
 const std::string header_extension(".hpp");
 const std::string source_extension(".cpp");
 const std::string domain_facet_folder("domain");
@@ -86,6 +87,16 @@ config::cpp_settings mock_settings_factory::build_cpp_settings(
     return r;
 }
 
+config::cpp_settings mock_settings_factory::build_cpp_settings(
+    boost::filesystem::path project_dir,
+    bool verbose) {
+
+    config::cpp_settings r(build_cpp_settings(empty, empty, verbose));
+    r.split_project(false);
+    r.project_directory(project_dir);
+    return r;
+}
+
 config::settings
 mock_settings_factory::build_settings(boost::filesystem::path target,
     boost::filesystem::path src_dir,
@@ -95,6 +106,19 @@ mock_settings_factory::build_settings(boost::filesystem::path target,
     config::settings r;
     r.modeling(build_modeling_settings(target, package_path, verbose));
     r.cpp(build_cpp_settings(src_dir, include_dir, verbose));
+    r.troubleshooting(build_troubleshooting_settings(verbose));
+    r.output(build_output_settings(verbose));
+    return r;
+}
+
+config::settings
+mock_settings_factory::build_settings(boost::filesystem::path target,
+    boost::filesystem::path project_dir,
+    std::string package_path,
+    bool verbose) {
+    config::settings r;
+    r.modeling(build_modeling_settings(target, package_path, verbose));
+    r.cpp(build_cpp_settings(project_dir, verbose));
     r.troubleshooting(build_troubleshooting_settings(verbose));
     r.output(build_output_settings(verbose));
     return r;

@@ -40,6 +40,10 @@ public:
         boost::filesystem::path include_dir,
         bool verbose = true);
 
+    static config::cpp_settings build_cpp_settings(
+        boost::filesystem::path project_dir,
+        bool verbose = true);
+
     static config::modeling_settings build_modeling_settings(
         boost::filesystem::path target,
         std::string package_path,
@@ -48,6 +52,11 @@ public:
     static config::settings build_settings(boost::filesystem::path target,
         boost::filesystem::path src_dir,
         boost::filesystem::path include_dir,
+        std::string package_path,
+        bool verbose = true);
+
+    static config::settings build_settings(boost::filesystem::path target,
+        boost::filesystem::path project_dir,
         std::string package_path,
         bool verbose = true);
 };

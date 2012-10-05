@@ -29,7 +29,7 @@ const std::string test_suite("cpp_location_manager_spec");
 const std::string test_model_name("test");
 const boost::filesystem::path src_dir("source directory");
 const boost::filesystem::path include_dir("include directory");
-const boost::filesystem::path project_dir("proj directory");
+const boost::filesystem::path project_dir("project directory");
 const std::string type_name("a_type");
 const std::list<std::string> package_path_1({ "a", "b" });
 const std::list<std::string> external_package_path_1({ "c", "d" });
@@ -47,6 +47,10 @@ const std::vector<cpp_facet_types> facets =
     cpp_facet_types::test_data
 };
 
+dogen::generator::config::cpp_settings non_split_project_settings() {
+    return dogen::generator::test::mock_settings_factory::
+        build_cpp_settings(project_dir);
+}
 
 dogen::generator::config::cpp_settings split_project_settings() {
     return dogen::generator::test::mock_settings_factory::
@@ -108,7 +112,7 @@ BOOST_AUTO_TEST_CASE(split_project_configuration_results_in_expected_locations) 
 
     cpp_location_manager lm(test_model_name, s);
     using dogen::generator::backends::cpp::cpp_location_request;
-    const auto rq(request(cpp_facet_types::domain, cpp_file_types::header));
+    auto rq(request(cpp_facet_types::domain, cpp_file_types::header));
 
     boost::filesystem::path e("c/d/test/domain/a/b/a_type.hpp");
     boost::filesystem::path a(lm.relative_logical_path(rq));
@@ -137,6 +141,76 @@ BOOST_AUTO_TEST_CASE(split_project_configuration_results_in_expected_locations) 
 
     e = "include directory/test";
     a = md[1];
+    BOOST_CHECK(asserter::assert_equals(e, a));
+
+    rq = request(cpp_facet_types::io, cpp_file_types::implementation);
+    e = "c/d/test/io/a/b/a_type_io.cpp";
+    a = lm.relative_logical_path(rq);
+    BOOST_CHECK(asserter::assert_equals(e, a));
+
+    e = "test/io/a/b/a_type_io.cpp";
+    a = lm.relative_physical_path(rq);
+    BOOST_CHECK(asserter::assert_equals(e, a));
+
+    e = "source directory/test/io/a/b/a_type_io.cpp";
+    a = lm.absolute_path(rq);
+    BOOST_CHECK(asserter::assert_equals(e, a));
+
+    e = "source directory/test/a_type";
+    a = lm.absolute_path(type_name);
+    BOOST_CHECK(asserter::assert_equals(e, a));
+}
+
+BOOST_AUTO_TEST_CASE(non_split_project_configuration_results_in_expected_locations) {
+    SETUP_TEST_LOG_SOURCE("non_split_project_configuration_results_in_expected_locations");
+    using dogen::generator::backends::cpp::cpp_location_manager;
+    const auto s(non_split_project_settings());
+    BOOST_CHECK(!s.split_project());
+
+    cpp_location_manager lm(test_model_name, s);
+    using dogen::generator::backends::cpp::cpp_location_request;
+    auto rq(request(cpp_facet_types::domain, cpp_file_types::header));
+
+    boost::filesystem::path e("c/d/test/domain/a/b/a_type.hpp");
+    boost::filesystem::path a(lm.relative_logical_path(rq));
+
+    using dogen::utility::test::asserter;
+    BOOST_CHECK(asserter::assert_equals(e, a));
+
+    e = "c/d/test/domain/a/b/a_type.hpp";
+    a = lm.relative_physical_path(rq);
+    BOOST_CHECK(asserter::assert_equals(e, a));
+
+    e = "project directory/test/include/c/d/test/domain/a/b/a_type.hpp";
+    a = lm.absolute_path(rq);
+    BOOST_CHECK(asserter::assert_equals(e, a));
+
+    e = "project directory/test/src/a_type";
+    a = lm.absolute_path(type_name);
+    BOOST_CHECK(asserter::assert_equals(e, a));
+
+    const auto md(lm.managed_directories());
+    BOOST_CHECK(md.size() == 1);
+
+    e = "project directory/test";
+    a = md[0];
+    BOOST_CHECK(asserter::assert_equals(e, a));
+
+    rq = request(cpp_facet_types::io, cpp_file_types::implementation);
+    e = "io/a/b/a_type_io.cpp";
+    a = lm.relative_logical_path(rq);
+    BOOST_CHECK(asserter::assert_equals(e, a));
+
+    e = "io/a/b/a_type_io.cpp";
+    a = lm.relative_physical_path(rq);
+    BOOST_CHECK(asserter::assert_equals(e, a));
+
+    e = "project directory/test/src/io/a/b/a_type_io.cpp";
+    a = lm.absolute_path(rq);
+    BOOST_CHECK(asserter::assert_equals(e, a));
+
+    e = "project directory/test/src/a_type";
+    a = lm.absolute_path(type_name);
     BOOST_CHECK(asserter::assert_equals(e, a));
 }
 
