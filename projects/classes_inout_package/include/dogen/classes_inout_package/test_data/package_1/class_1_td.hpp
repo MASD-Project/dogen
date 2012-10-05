@@ -6,25 +6,26 @@
  * Licence. See doc/LICENCE.TXT for details.
  *
  */
-#ifndef DOGEN_CLASSES_INOUT_PACKAGE_TEST_DATA_VERSIONED_KEY_SEQUENCE_HPP
-#define DOGEN_CLASSES_INOUT_PACKAGE_TEST_DATA_VERSIONED_KEY_SEQUENCE_HPP
+#ifndef DOGEN_CLASSES_INOUT_PACKAGE_TEST_DATA_PACKAGE_1_CLASS_1_TD_HPP
+#define DOGEN_CLASSES_INOUT_PACKAGE_TEST_DATA_PACKAGE_1_CLASS_1_TD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/classes_inout_package/domain/versioned_key.hpp"
+#include "dogen/classes_inout_package/domain/package_1/class_1.hpp"
 #include "dogen/utility/test_data/generator.hpp"
 #include "dogen/utility/test_data/sequence.hpp"
 
 namespace dogen {
 namespace classes_inout_package {
+namespace package_1 {
 
 namespace detail {
 
-class versioned_key_generator {
+class class_1_generator {
 public:
-    typedef dogen::classes_inout_package::versioned_key value_type;
+    typedef dogen::classes_inout_package::package_1::class_1 value_type;
 
 public:
     value_type next_term(const unsigned int position);
@@ -34,8 +35,8 @@ public:
 }
 
 typedef dogen::utility::test_data::sequence<
-    detail::versioned_key_generator> versioned_key_sequence;
+    detail::class_1_generator> class_1_sequence;
 
-} }
+} } }
 
 #endif
