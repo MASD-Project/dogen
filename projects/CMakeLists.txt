@@ -200,7 +200,7 @@ foreach(dia_model ${all_dia_test_models})
     set(expect_dir "${top_dir}/expected/${model_name}")
     set(git_dir "${CMAKE_CURRENT_SOURCE_DIR}/${model_name}")
 
-    if(EXISTS "${actual_dir}")
+    if(EXISTS "${actual_dir}/${model_name}")
         set(target_name "diff_${model_name}")
         add_custom_target(${target_name}
             COMMAND diff -r -u ${expect_dir} ${actual_dir}
@@ -228,21 +228,26 @@ endforeach()
 foreach(dia_model ${all_dia_test_models})
     set(model_name "")
     get_filename_component(model_name "${dia_model}" NAME_WE)
-    message(STATUS "Created data set for model: ${model_name}")
+
+    set(top_dir "${stage_test_data_dir}/${model_name}")
+    set(actual_dir "${top_dir}/actual")
+    if(NOT IS_DIRECTORY "${actual_dir}")
+        file(MAKE_DIRECTORY "${actual_dir}")
+    endif()
+
+    set(expected_dir "${top_dir}/expected")
+    if(IS_DIRECTORY "${expected_dir}")
+        file(REMOVE_RECURSE "${expected_dir}")
+    endif()
 
     set(git_dir "${CMAKE_CURRENT_SOURCE_DIR}/${model_name}")
     if(IS_DIRECTORY "${git_dir}")
-        set(top_dir "${stage_test_data_dir}/${model_name}")
-        set(actual_dir "${top_dir}/actual")
-        if(NOT IS_DIRECTORY "${actual_dir}")
-            file(MAKE_DIRECTORY "${actual_dir}")
-        endif()
-
-        set(expected_dir "${top_dir}/expected")
-        if(IS_DIRECTORY "${expected_dir}")
-            file(REMOVE_RECURSE "${expected_dir}")
-        endif()
-
         file(COPY "${git_dir}" DESTINATION "${expected_dir}")
+    else()
+        if(NOT EXISTS "${expected_dir}")
+            file(MAKE_DIRECTORY "${expected_dir}")
+        endif()
     endif()
+
+    message(STATUS "Created data set for model: ${model_name}")
 endforeach()
