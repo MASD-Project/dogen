@@ -66,10 +66,7 @@ dogen::generator::config::settings
 default_mock_settings(dogen::utility::test_data::codegen_tds tds) {
     using dogen::generator::test::mock_settings_factory;
     return mock_settings_factory::build_settings(
-            tds.target(),
-            tds.actual_src(),
-            tds.actual_include(),
-            package_path);
+        tds.target(), tds.actual(), package_path);
 }
 
 dogen::generator::config::settings debug_dogen_mock_settings() {
@@ -185,11 +182,12 @@ BOOST_AUTO_TEST_CASE(disabling_cpp_backend_results_in_no_cpp_output) {
     BOOST_CHECK(asserter::assert_directory(tds::expected(), tds::actual()));
 }
 
-BOOST_IGNORE_AUTO_TEST_CASE(disable_complete_constructor_generates_expected_code) {
+BOOST_AUTO_TEST_CASE(disable_complete_constructor_generates_expected_code) {
     SETUP_TEST_LOG("disable_complete_constructor_generates_expected_code");
     auto lambda([](dogen::utility::test_data::codegen_tds tds) {
             auto s(default_mock_settings(tds));
             auto cs(s.cpp());
+            cs.split_project(false);
             cs.disable_complete_constructor(true);
             s.cpp(cs);
             return s;

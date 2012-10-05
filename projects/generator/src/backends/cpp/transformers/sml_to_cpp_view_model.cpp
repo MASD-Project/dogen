@@ -370,6 +370,7 @@ sml_to_cpp_view_model::transform_facet_includers() const {
         sml::qualified_name qn;
         const auto n(includer_name);
         qn.type_name(n);
+        qn.external_package_path(model_.external_package_path());
         const auto rq(location_request_factory(ft, file_type, qn));
 
         view_models::file_view_model vm;
