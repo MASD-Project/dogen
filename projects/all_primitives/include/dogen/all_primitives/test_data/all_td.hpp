@@ -6,6 +6,6 @@
  * Licence. See doc/LICENCE.TXT for details.
  *
  */
-#include "dogen/all_primitives/test_data/a_class_sequence.hpp"
-#include "dogen/all_primitives/test_data/unversioned_key_sequence.hpp"
-#include "dogen/all_primitives/test_data/versioned_key_sequence.hpp"
+#include "dogen/all_primitives/test_data/a_class_td.hpp"
+#include "dogen/all_primitives/test_data/unversioned_key_td.hpp"
+#include "dogen/all_primitives/test_data/versioned_key_td.hpp"
