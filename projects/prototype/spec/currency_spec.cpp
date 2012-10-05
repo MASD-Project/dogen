@@ -29,7 +29,7 @@
 
 namespace  {
 
-const std::string test_module("org");
+const std::string test_module("prototype");
 const std::string test_suite("currency_spec");
 
 }

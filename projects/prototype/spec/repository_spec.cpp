@@ -24,7 +24,7 @@
 
 namespace {
 
-const std::string test_module("org");
+const std::string test_module("prototype");
 const std::string test_suite("repository_spec");
 
 typedef std::vector<dogen::prototype::currency> currencies_type;

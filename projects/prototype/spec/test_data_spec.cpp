@@ -22,8 +22,8 @@
 
 namespace  {
 
-const std::string test_module("org");
-const std::string test_suite("org_test_data_spec");
+const std::string test_module("prototype");
+const std::string test_suite("test_data_spec");
 
 }
 
