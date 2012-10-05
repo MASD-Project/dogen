@@ -14,6 +14,7 @@
 #include <boost/range/algorithm/set_algorithm.hpp>
 #include "dogen/utility/io/list_io.hpp"
 #include "dogen/utility/io/set_io.hpp"
+#include "dogen/utility/io/vector_io.hpp"
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/generator/housekeeper.hpp"
 
@@ -33,11 +34,15 @@ inline void log_expected_actual(std::set<path> e, std::set<path> a) {
 }
 
 inline void log_no_extra_files() {
-    BOOST_LOG_SEV(lg, debug) << "no extra files found.";
+    BOOST_LOG_SEV(lg, info) << "no extra files found.";
 }
 
 inline void log_extra_files(std::list<path> delta) {
     BOOST_LOG_SEV(lg, debug) << "Found extra files: " << delta;
+}
+
+inline void log_managed_dirs(std::vector<path> dirs) {
+    BOOST_LOG_SEV(lg, info) << "Managed directories: " << dirs;
 }
 
 }
@@ -54,6 +59,7 @@ housekeeper::housekeeper(
     verbose_(verbose),
     delete_fn_(fn) {
 
+    log_managed_dirs(managed_directories_);
     if (delete_fn_)
         return;
 
