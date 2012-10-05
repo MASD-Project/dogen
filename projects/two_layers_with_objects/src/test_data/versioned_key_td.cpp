@@ -6,7 +6,7 @@
  * Licence. See doc/LICENCE.TXT for details.
  *
  */
-#include "dogen/two_layers_with_objects/test_data/versioned_key_sequence.hpp"
+#include "dogen/two_layers_with_objects/test_data/versioned_key_td.hpp"
 
 namespace dogen {
 namespace two_layers_with_objects {
