@@ -388,7 +388,7 @@ BOOST_IGNORE_AUTO_TEST_CASE(class_in_a_package_model_generates_expected_code) {
     BOOST_CHECK(check_code_generation(dia_sml::input_class_in_a_package_dia()));
 }
 
-BOOST_IGNORE_AUTO_TEST_CASE(two_empty_layers_model_generates_expected_code) {
+BOOST_AUTO_TEST_CASE(two_empty_layers_model_generates_expected_code) {
     SETUP_TEST_LOG("two_empty_layers_model_generates_expected_code");
     using dogen::utility::test_data::dia_sml;
     const auto t(dia_sml::input_two_empty_layers_dia());
