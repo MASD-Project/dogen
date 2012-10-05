@@ -243,7 +243,6 @@ foreach(dia_model ${all_dia_test_models})
             file(REMOVE_RECURSE "${expected_dir}")
         endif()
 
-        file(COPY "${git_dir}" DESTINATION "${top_dir}")
-        file(RENAME "${top_dir}/${model_name}" "${expected_dir}")
+        file(COPY "${git_dir}" DESTINATION "${expected_dir}")
     endif()
 endforeach()
