@@ -184,6 +184,7 @@ add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/driver/spec)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/test_model_sanitizer/spec)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/prototype/src)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/prototype/spec)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/prototype/sql)
 
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/all_primitives/src)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/classes_in_a_package/src)
