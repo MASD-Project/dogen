@@ -30,6 +30,8 @@
 #include <boost/archive/xml_oarchive.hpp>
 #include <boost/archive/xml_iarchive.hpp>
 #include "dogen/utility/log/logger.hpp"
+#include <boost/filesystem/operations.hpp>
+#include "dogen/utility/filesystem/file_not_found.hpp"
 
 namespace dogen {
 namespace utility {
@@ -43,6 +45,12 @@ Entity xml_deserialize(boost::filesystem::path path) {
     using namespace dogen::utility::log;
     logger lg(logger_factory("xml_deserialize"));
     BOOST_LOG_SEV(lg, debug) << "Reading file: " << path.string();
+
+    if (!boost::filesystem::exists(path)) {
+        BOOST_LOG_SEV(lg, error) << "Could not find file: " << path.string();
+        throw utility::filesystem::file_not_found(path.string());
+    }
+
     boost::filesystem::ifstream input_stream(path);
     boost::archive::xml_iarchive input_archive(input_stream);
     Entity entity;

@@ -27,8 +27,10 @@
 
 #include <boost/filesystem/path.hpp>
 #include <boost/filesystem/fstream.hpp>
+#include <boost/filesystem/operations.hpp>
 #include <boost/archive/xml_oarchive.hpp>
 #include <boost/archive/xml_iarchive.hpp>
+#include "dogen/utility/filesystem/file_not_found.hpp"
 
 namespace dogen {
 namespace utility {
@@ -39,6 +41,9 @@ namespace serialization {
  */
 template<typename Entity>
 Entity xml_deserialize(boost::filesystem::path path) {
+    if (!boost::filesystem::exists(path))
+        throw utility::filesystem::file_not_found(path.string());
+
     boost::filesystem::ifstream input_stream(path);
     boost::archive::xml_iarchive input_archive(input_stream);
     Entity entity;
@@ -47,9 +52,7 @@ Entity xml_deserialize(boost::filesystem::path path) {
 }
 
 /**
- * @brief Serialises the given entity into actual_path and
- * compares the result with the deserialised value of
- * expected_path.
+ * @brief Serialises entity into the file given by path.
  */
 template<typename Entity>
 void xml_serialize(boost::filesystem::path path, Entity entity) {
