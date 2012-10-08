@@ -18,10 +18,10 @@
  * MA 02110-1301, USA.
  *
  */
-#define DOGEN_VERSION "0.0.17-debug"
+#define DOGEN_VERSION "0.0.18-debug"
 #define DOGEN_MAJOR_VERSION 0
 #define DOGEN_MINOR_VERSION 0
-#define DOGEN_PATCH_VERSION 17
+#define DOGEN_PATCH_VERSION 18
 #define DOGEN_DATABASE_SUPPORT 1
 
 // Note: to bring in macros from cmake directly use:
