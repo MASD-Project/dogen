@@ -70,6 +70,7 @@ path input_rename_facet_folder_dia("dia_sml/input/rename_facet_folder.dia");
 path input_use_integrated_io_dia("dia_sml/input/use_integrated_io.dia");
 path input_all_primitives_dia("dia_sml/input/all_primitives.dia");
 path input_split_project_dia("dia_sml/input/split_project.dia");
+path input_trivial_inheritance_dia("dia_sml/input/trivial_inheritance.dia");
 
 path expected(
     "dia_sml/expected");
@@ -105,6 +106,8 @@ path expected_two_layers_with_objects_dia_xml(
     "dia_sml/expected/two_layers_with_objects.diaxml");
 path expected_class_in_a_package_stdout_txt(
     "dia_sml/expected/class_in_a_package_stdout.txt");
+path expected_trivial_inheritance_dia_xml(
+    "dia_sml/expected/trivial_inheritance.diaxml");
 
 path actual(
     "dia_sml/actual");
@@ -140,6 +143,8 @@ path actual_two_layers_with_objects_dia_xml(
     "dia_sml/actual/two_layers_with_objects.diaxml");
 path actual_class_in_a_package_stdout_txt(
     "dia_sml/actual/class_in_a_package_stdout.txt");
+path actual_trivial_inheritance_dia_xml(
+    "dia_sml/actual/trivial_inheritance.diaxml");
 
 }
 
@@ -270,6 +275,10 @@ path dia_sml::input_all_primitives_dia() {
     return validating_resolver::resolve(::input_all_primitives_dia);
 }
 
+path dia_sml::input_trivial_inheritance_dia() {
+    return validating_resolver::resolve(::input_trivial_inheritance_dia);
+}
+
 path dia_sml::input_split_project_dia() {
     return validating_resolver::resolve(::input_split_project_dia);
 }
@@ -353,6 +362,11 @@ path dia_sml::expected_two_layers_with_objects_dia_xml() {
         ::expected_two_layers_with_objects_dia_xml);
 }
 
+path dia_sml::expected_trivial_inheritance_dia_xml() {
+    return resolver::resolve(
+        ::expected_trivial_inheritance_dia_xml);
+}
+
 path dia_sml::actual() {
     return validating_resolver::resolve(::actual);
 }
@@ -430,6 +444,11 @@ path dia_sml::actual_two_layers_with_objects_dia_xml() {
 path dia_sml::actual_class_in_a_package_stdout_txt() {
     return resolver::resolve(
         ::actual_class_in_a_package_stdout_txt);
+}
+
+path dia_sml::actual_trivial_inheritance_dia_xml() {
+    return resolver::resolve(
+        ::actual_trivial_inheritance_dia_xml);
 }
 
 } } }
