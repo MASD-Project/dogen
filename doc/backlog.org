@@ -3,39 +3,3 @@
 This file contains all stories that haven't been assigned to a sprint.
 
 ** Development Stories
-
-*** Rename includer to =all.hpp=
-
-We only need facet post-fixes when facet folders are disabled.
-
-*** Do not have a split for =src= and =include=
-
-Or at least have an option to switch it off. When the option is off do
-not create model folders. Expected behaviour with split:
-
-- =include=: concatenate the include directory passed in to the
-  namespace of the model.
-- =src=: source directory followed by model name.
-
-Expected behaviour without split:
-
-- top-level directory housing the model with model name, split by =src= and
-  =include=. =src= contains code directly. Include contains EPP plus
-  model name, etc.
-
-Suggested option =cpp-split-include-src=.
-
-*** Re-enable all ignored tests
-
-We have a number of generator tests which are ignored due to the
-layout changes to the folder structure with the move to github. We
-need to fix these tests and re-enable them.
-
-*** Move the manual model into github
-
-We still have the model we create manually in the old sandbox. It has
-to be moved into github.
-
-*** Update the licence information on all files
-
-We still have the temporary licence details on all source code.
