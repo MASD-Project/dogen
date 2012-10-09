@@ -34,6 +34,11 @@ namespace serialization { namespace detail { class child_node_serializer; } }
 
 /**
  * @brief Represents a child_node in a diagram.
+ *
+ * Child nodes are used in Dia to represent the relationship between a
+ * package and the entities it contains. For example, if class O1 is
+ * inside package O0 then class O1 will have a child node element with
+ * a parent pointing to O0.
  */
 class child_node {
 public:
