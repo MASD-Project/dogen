@@ -80,6 +80,10 @@ public:
         stream_ << value;
     }
 
+    void operator()(const dogen::dia::composite& value) const {
+        stream_ << value;
+    }
+
     void operator()(const std::vector<dogen::dia::composite>& value) const {
         stream_ << "\"values\":" << value;
     }

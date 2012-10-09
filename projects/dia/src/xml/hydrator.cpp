@@ -159,6 +159,9 @@ AttributeValue hydrator::read_attribute_value() {
     AttributeValue result;
     result.value(read_xml_string_attribute(dia_val));
     reader_.skip();
+
+    BOOST_LOG_SEV(lg, debug) << "Reading generic attribute value: "
+                             << result.value();
     return result;
 }
 
@@ -169,6 +172,9 @@ dia::string hydrator::read_attribute_value() {
     result.value(reader_.value<std::string>());
     reader_.read();
     reader_.skip();
+
+    BOOST_LOG_SEV(lg, debug) << "Reading string attribute value: "
+                             << result.value();
     return result;
 }
 
@@ -179,6 +185,53 @@ font hydrator::read_attribute_value() {
     result.style(read_xml_string_attribute(dia_style));
     result.name(read_xml_string_attribute(dia_name));
     reader_.skip();
+
+    BOOST_LOG_SEV(lg, debug) << "Reading font attribute value: "
+                             << result.name();
+    return result;
+}
+
+template<>
+composite hydrator::read_attribute_value() {
+    composite result;
+    result.type(read_xml_string_attribute(dia_type));
+    BOOST_LOG_SEV(lg, debug) << "Reading composite attribute value: "
+                             << result.type();
+
+    const bool is_self_closing(reader_.is_empty());
+    reader_.read();
+
+    if (is_self_closing)
+        return result;
+
+    typedef boost::shared_ptr<attribute> attribute_ptr;
+    std::vector<attribute_ptr> attributes;
+
+    typedef boost::shared_ptr<composite> composite_ptr;
+    composite_ptr inner_composite;
+    do {
+        if (is_start_element(dia_composite)) {
+            validate_self_closing();
+
+            if (inner_composite) {
+                using xml::exception;
+                throw exception(expected_one_inner_composite);
+            }
+
+            inner_composite = composite_ptr(new composite());
+            inner_composite->type(read_xml_string_attribute(dia_type));
+            result.inner_composite(inner_composite);
+            reader_.skip();
+        } else if (is_start_element(dia_attribute)) {
+            attribute_ptr ptr(new attribute(read_attribute()));
+            attributes.push_back(ptr);
+        } else {
+            throw xml::exception(unexpected_element);
+        }
+    } while (!is_end_element(dia_composite));
+    result.value(attributes);
+    reader_.skip(); // skip the composite end element
+
     return result;
 }
 
@@ -236,6 +289,7 @@ attribute hydrator::read_attribute() {
 
     attribute attribute;
     attribute.name(read_xml_string_attribute(dia_name));
+    BOOST_LOG_SEV(lg, debug) << "Reading attribute: " << attribute.name();
     const bool is_self_closing(reader_.is_empty());
 
     if (!reader_.read())
@@ -273,7 +327,7 @@ attribute hydrator::read_attribute() {
         else if (name == dia_enum)
             values.push_back(read_attribute_value<enumeration>());
         else if (name == dia_composite)
-            values.push_back(read_attribute_value<std::vector<composite> >());
+            values.push_back(read_attribute_value<composite>());
     }
     attribute.values(values);
 

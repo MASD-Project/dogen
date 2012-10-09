@@ -60,6 +60,7 @@ public:
     rectangle,
     font,
     enumeration,
+    composite,
     std::vector<composite>
     > attribute_value;
 

@@ -64,7 +64,7 @@ const std::string root_vertex_id("root");
 const std::string unexpected_attribute_value_size(
     "Unexpected attribute value size: ");
 const std::string unexpected_attribute_value_type(
-    "Did not find expected attribute value: ");
+    "Did not find expected attribute value type: ");
 
 class dia_dfs_visitor : public boost::default_dfs_visitor {
 private:
@@ -146,25 +146,18 @@ public:
 private:
     template<typename AttributeValue>
     AttributeValue
-    attribute_value(const dogen::dia::attribute& a,
+    attribute_value(const dogen::dia::attribute::attribute_value& v,
         const std::string& description) const {
-        const auto values(a.values());
-        if (values.size() != 1) {
-            BOOST_LOG_SEV(lg, warn) << "Expected attribute to have one"
-                                    << " value but found " << values.size();
-
-            using dogen::utility::exception::exception;
-            throw exception(unexpected_attribute_value_size +
-                boost::lexical_cast<std::string>(values.size()));
-        }
 
         AttributeValue r;
         try {
-            r = boost::get<AttributeValue>(a.values().front());
+            r = boost::get<AttributeValue>(v);
         } catch (const boost::bad_get&) {
+            BOOST_LOG_SEV(lg, error) << unexpected_attribute_value_type
+                                     << description;
+
             using dogen::utility::exception::exception;
-            throw exception(unexpected_attribute_value_type + a.name() +
-                " (" + description + ")" );
+            throw exception(unexpected_attribute_value_type + description);
         }
         return r;
     }
@@ -238,7 +231,18 @@ private:
 
 std::string dia_dfs_visitor::
 transform_string_attribute(const dogen::dia::attribute& a) const {
-    const auto v(attribute_value<dogen::dia::string>(a, dia_string));
+    const auto values(a.values());
+    if (values.size() != 1) {
+        BOOST_LOG_SEV(lg, error) << "Expected attribute to have one"
+                                 << " value but found " << values.size();
+
+        using dogen::utility::exception::exception;
+        throw exception(unexpected_attribute_value_size +
+            boost::lexical_cast<std::string>(values.size()));
+    }
+
+    using dogen::dia::string;
+    const auto v(attribute_value<string>(values.front(), dia_string));
     std::string name(v.value());
     boost::erase_all(name, hash_character);
     boost::trim(name);
@@ -357,24 +361,29 @@ dia_dfs_visitor::transform_pod(const dogen::dia::object& o) {
         }
 
         if (attribute.name() == dia_attributes) {
-            if (attribute.values().empty()) {
-                BOOST_LOG_SEV(lg, debug) << "attribute is empty";
+            const auto values(attribute.values());
+
+            if (values.empty()) {
+                BOOST_LOG_SEV(lg, debug) << "Attribute is empty.";
                 continue;
             }
 
-            typedef std::vector<dogen::dia::composite> composites;
-            const auto uml_attributes(attribute_value<composites>(
-                    attribute, dia_composite));
-
             std::vector<dogen::sml::property> properties;
-            for (auto uml_attribute : uml_attributes) {
-                BOOST_LOG_SEV(lg, debug) << "attribute has type: "
-                                         << attribute.name();
-                if (uml_attribute.type() != dia_uml_attribute) {
+            for (auto v : values) {
+                using dogen::dia::composite;
+                const auto c(attribute_value<composite>(v, dia_composite));
+
+                if (c.type() != dia_uml_attribute) {
+                    BOOST_LOG_SEV(lg, error) << "Expected composite type "
+                                             << " to be " << dia_uml_attribute
+                                             << "but was " << c.type();
+
                     using dogen::utility::exception::exception;
                     throw exception(uml_attribute_expected);
                 }
-                properties.push_back(transform_property(uml_attribute));
+                BOOST_LOG_SEV(lg, debug) << "Found composite of type "
+                                         << c.type();
+                properties.push_back(transform_property(c));
             }
             pod.properties(properties);
         }
