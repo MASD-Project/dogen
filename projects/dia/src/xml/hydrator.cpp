@@ -235,55 +235,6 @@ composite hydrator::read_attribute_value() {
     return result;
 }
 
-template<>
-std::vector<composite> hydrator::read_attribute_value() {
-    // attributes can have values with multiple composites. we need to
-    // loop and read them all.
-    std::vector<composite> result;
-    while (is_start_element(dia_composite)) {
-        composite c;
-        c.type(read_xml_string_attribute(dia_type));
-
-        const bool is_self_closing(reader_.is_empty());
-        reader_.read();
-
-        if (is_self_closing) {
-            result.push_back(c);
-            continue;
-        }
-
-        typedef boost::shared_ptr<attribute> attribute_ptr;
-        std::vector<attribute_ptr> attributes;
-
-        typedef boost::shared_ptr<composite> composite_ptr;
-        composite_ptr inner_composite;
-        do {
-            if (is_start_element(dia_composite)) {
-                validate_self_closing();
-
-                if (inner_composite) {
-                    using xml::exception;
-                    throw exception(expected_one_inner_composite);
-                }
-
-                inner_composite = composite_ptr(new composite());
-                inner_composite->type(read_xml_string_attribute(dia_type));
-                c.inner_composite(inner_composite);
-                reader_.skip();
-            } else if (is_start_element(dia_attribute)) {
-                attribute_ptr ptr(new attribute(read_attribute()));
-                attributes.push_back(ptr);
-            } else {
-                throw xml::exception(unexpected_element);
-            }
-        } while (!is_end_element(dia_composite));
-        c.value(attributes);
-        result.push_back(c);
-        reader_.skip(); // skip the composite end element
-    }
-    return result;
-}
-
 attribute hydrator::read_attribute() {
     validate_current_element(dia_attribute);
 

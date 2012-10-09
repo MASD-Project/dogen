@@ -49,7 +49,7 @@ simple_attribute_generator::next_term(const unsigned int position) {
 
 composite_attribute_generator::value_type
 composite_attribute_generator::next_term(const unsigned int position) {
-    std::vector<dogen::dia::composite> composites;
+    dogen::dia::composite composite;
     std::vector<attribute::attribute_value> value;
     std::string name;
 
@@ -61,8 +61,7 @@ composite_attribute_generator::next_term(const unsigned int position) {
         name = "composite_2";
 
     simple_composite_sequence sequence;
-    composites.push_back(sequence());
-    value.push_back(composites);
+    value.push_back(sequence());
     return dogen::dia::attribute(name, value);
 }
 
