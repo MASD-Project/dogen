@@ -62,15 +62,15 @@ public:
      * target, false otherwise.
      * @param verbose output debugging information for troubleshooting
      */
-    dia_to_sml(dia::diagram diagram, std::string model_name,
-        std::string external_package_path, bool is_target, bool verbose);
+    dia_to_sml(const dia::diagram& diagram, const std::string& model_name,
+        const std::string& external_package_path, bool is_target, bool verbose);
 
 private:
     /**
      * @brief Populates the graph with a directed acyclic graph of
      * dependencies between Dia objects.
      */
-    void populate_graph(std::vector<dia::object> objects);
+    void populate_graph(const std::vector<dia::object>& objects);
 
 public:
     /**

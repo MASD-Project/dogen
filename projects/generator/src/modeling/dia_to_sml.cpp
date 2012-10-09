@@ -66,7 +66,6 @@ const std::string unexpected_attribute_value_size(
 const std::string unexpected_attribute_value_type(
     "Did not find expected attribute value: ");
 
-
 struct visit_state {
     std::string model_name;
     std::unordered_map<dogen::sml::qualified_name, dogen::sml::pod> pods;
@@ -100,7 +99,8 @@ public:
     }
 
 private:
-    std::list<std::string> split_delimited_string(std::string str) const {
+    std::list<std::string>
+    split_delimited_string(const std::string& str) const {
         const boost::char_separator<char> sep(delimiter);
         boost::tokenizer<boost::char_separator<char> > tokens(str, sep);
 
@@ -124,7 +124,8 @@ private:
 
     template<typename AttributeValue>
     AttributeValue
-    attribute_value(dogen::dia::attribute a, std::string description) const {
+    attribute_value(const dogen::dia::attribute& a,
+        const std::string& description) const {
         const auto values(a.values());
         if (values.size() != 1) {
             BOOST_LOG_SEV(lg, warn) << "Expected attribute to have one"
@@ -150,7 +151,7 @@ private:
      * @brief Parses a Dia string attribute, removing any invalid formatting.
      */
     std::string
-    transform_string_attribute(dogen::dia::attribute attribute) const;
+    transform_string_attribute(const dogen::dia::attribute& attribute) const;
 
     /**
      * @brief Converts the Dia attribute into a qualified name.
@@ -158,7 +159,7 @@ private:
      * @param attribute Name Dia attribute.
      */
     dogen::sml::qualified_name
-    transform_qualified_name(dogen::dia::attribute attribute,
+    transform_qualified_name(const dogen::dia::attribute& attribute,
         dogen::sml::meta_types meta_type) const;
 
     /**
@@ -166,7 +167,7 @@ private:
      * name from it.
      */
     dogen::sml::qualified_name
-    transform_qualified_name(std::string type_string) const;
+    transform_qualified_name(const std::string& type_string) const;
 
     /**
      * @brief Converts a package in Dia format into a package in SML
@@ -175,7 +176,7 @@ private:
      * @param object Dia object which contains a UML package.
      */
     std::pair<dogen::sml::qualified_name, dogen::sml::package>
-    transform_package(dogen::dia::object object);
+    transform_package(const dogen::dia::object& object);
 
     /**
      * @brief Converts a Dia composite storing the UML attribute into
@@ -184,7 +185,7 @@ private:
      * @param uml_attribute the Dia UML attribute
      */
     dogen::sml::property
-    transform_property(dogen::dia::composite uml_attribute) const;
+    transform_property(const dogen::dia::composite& uml_attribute) const;
 
     /**
      * @brief Converts a class in Dia format into a pod in SML
@@ -193,28 +194,28 @@ private:
      * @param object Dia object which contains a UML class.
      */
     std::pair<dogen::sml::qualified_name, dogen::sml::pod>
-    transform_pod(dogen::dia::object object);
+    transform_pod(const dogen::dia::object& object);
 
     /**
      * @brief Processes any type of Dia object.
      *
      * @param object Any Dia object, including the dummy root object.
      */
-    void process_dia_object(dogen::dia::object object);
+    void process_dia_object(const dogen::dia::object& object);
 
     /**
      * @brief Changes package path to reflect the current object.
      *
      * @param object Any Dia object, including the dummy root object.
      */
-    void update_package_path(dogen::dia::object object);
+    void update_package_path(const dogen::dia::object& object);
 
 private:
     std::shared_ptr<visit_state> state_;
 };
 
 std::string dia_dfs_visitor::
-transform_string_attribute(dogen::dia::attribute a) const {
+transform_string_attribute(const dogen::dia::attribute& a) const {
     const auto v(attribute_value<dogen::dia::string>(a, dia_string));
     std::string name(v.value());
     boost::erase_all(name, hash_character);
@@ -223,7 +224,7 @@ transform_string_attribute(dogen::dia::attribute a) const {
 }
 
 dogen::sml::qualified_name
-dia_dfs_visitor::transform_qualified_name(std::string type_string) const {
+dia_dfs_visitor::transform_qualified_name(const std::string& type_string) const {
     dogen::sml::qualified_name result;
 
     if (std::string::npos == type_string.find(delimiter)) {
@@ -250,7 +251,7 @@ dia_dfs_visitor::transform_qualified_name(std::string type_string) const {
 }
 
 dogen::sml::qualified_name dia_dfs_visitor::
-transform_qualified_name(dogen::dia::attribute a,
+transform_qualified_name(const dogen::dia::attribute& a,
     dogen::sml::meta_types meta_type) const {
     if (a.name() != dia_name) {
         using dogen::utility::exception::exception;
@@ -272,7 +273,7 @@ transform_qualified_name(dogen::dia::attribute a,
 }
 
 std::pair<dogen::sml::qualified_name, dogen::sml::package>
-dia_dfs_visitor::transform_package(dogen::dia::object o) {
+dia_dfs_visitor::transform_package(const dogen::dia::object& o) {
     dogen::sml::package package;
 
     for (auto a : o.attributes()) {
@@ -290,7 +291,7 @@ dia_dfs_visitor::transform_package(dogen::dia::object o) {
 }
 
 dogen::sml::property dia_dfs_visitor::
-transform_property(dogen::dia::composite uml_attribute) const {
+transform_property(const dogen::dia::composite& uml_attribute) const {
     dogen::sml::property property;
     typedef boost::shared_ptr<dogen::dia::attribute> attribute_ptr;
 
@@ -321,7 +322,7 @@ transform_property(dogen::dia::composite uml_attribute) const {
 }
 
 std::pair<dogen::sml::qualified_name, dogen::sml::pod>
-dia_dfs_visitor::transform_pod(dogen::dia::object o) {
+dia_dfs_visitor::transform_pod(const dogen::dia::object& o) {
     dogen::sml::pod pod;
 
     pod.generate(state_->is_target);
@@ -364,7 +365,7 @@ dia_dfs_visitor::transform_pod(dogen::dia::object o) {
     return std::make_pair(pod.name(), pod);
 }
 
-void dia_dfs_visitor::update_package_path(dogen::dia::object o) {
+void dia_dfs_visitor::update_package_path(const dogen::dia::object& o) {
     if (o.id() == root_vertex_id)
         return; // root is a dummy object, ignore it.
 
@@ -391,7 +392,7 @@ void dia_dfs_visitor::update_package_path(dogen::dia::object o) {
     }
 }
 
-void dia_dfs_visitor::process_dia_object(dogen::dia::object o) {
+void dia_dfs_visitor::process_dia_object(const dogen::dia::object& o) {
     if (o.id() == root_vertex_id)
         return; // root is a dummy object, ignore it.
 
@@ -416,8 +417,9 @@ namespace dogen {
 namespace generator {
 namespace modeling {
 
-dia_to_sml::dia_to_sml(dia::diagram diagram, std::string model_name,
-    std::string external_package_path, bool is_target, bool verbose)
+dia_to_sml::
+dia_to_sml(const dia::diagram& diagram, const std::string& model_name,
+    const std::string& external_package_path, bool is_target, bool verbose)
     : diagram_(diagram),
       model_name_(model_name),
       external_package_path_(external_package_path),
@@ -431,8 +433,8 @@ dia_to_sml::dia_to_sml(dia::diagram diagram, std::string model_name,
     graph_[root_vertex_] = root;
 }
 
-void dia_to_sml::populate_graph(std::vector<dia::object> objects) {
-    auto find_or_add([&](std::string id) {
+void dia_to_sml::populate_graph(const std::vector<dia::object>& objects) {
+    auto find_or_add([&](const std::string& id) {
             const auto i(id_to_vertex_.find(id));
             if (i != id_to_vertex_.end())
                 return i->second;
