@@ -32,18 +32,19 @@ object_generator::next_term(const unsigned int position) {
     std::vector<dogen::dia::attribute> attributes;
     simple_attribute_sequence sequence;
     child_node_sequence sequence2;
+    std::vector<dogen::dia::connection> connections;
 
     if (position == 0) {
         attributes.push_back(sequence());
         return dogen::dia::object(
             "UML - LargePackage", position, "O0", attributes,
-            boost::optional<dogen::dia::child_node>());
+            boost::optional<dogen::dia::child_node>(), connections);
     } else if (position == 1) {
         sequence();
         attributes.push_back(sequence());
         return dogen::dia::object(
             "UML - Class", position, "O1", attributes,
-            boost::optional<dogen::dia::child_node>(sequence2()));
+            boost::optional<dogen::dia::child_node>(sequence2()), connections);
     }
 
     sequence();
@@ -51,7 +52,7 @@ object_generator::next_term(const unsigned int position) {
     attributes.push_back(sequence());
     return dogen::dia::object(
         "UML - LargePackage", position, "O2", attributes,
-        boost::optional<dogen::dia::child_node>(sequence2()));
+        boost::optional<dogen::dia::child_node>(sequence2()), connections);
 }
 
 } } } }

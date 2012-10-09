@@ -32,6 +32,7 @@
 #include "dogen/dia/domain/object_types.hpp"
 #include "dogen/dia/domain/attribute.hpp"
 #include "dogen/dia/domain/child_node.hpp"
+#include "dogen/dia/domain/connection.hpp"
 
 namespace dogen {
 namespace dia {
@@ -52,17 +53,19 @@ private:
 
 public:
     object() : version_() { }
-    object(std::string type, int version, std::string id,
-        std::vector<attribute> attributes,
-        boost::optional<dogen::dia::child_node> child_node)
+    object(const std::string& type, int version, const std::string& id,
+        const std::vector<attribute>& attributes,
+        const boost::optional<dogen::dia::child_node>& child_node,
+        const std::vector<connection>& connections)
         : type_(type), version_(version), id_(id), attributes_(attributes),
-          child_node_(child_node) { }
+          child_node_(child_node), connections_(connections) { }
 
     object(object&& other) : type_(std::move(other.type_)),
                              version_(std::move(other.version_)),
                              id_(std::move(other.id_)),
                              attributes_(std::move(other.attributes_)),
-                             child_node_(std::move(other.child_node_)) { }
+                             child_node_(std::move(other.child_node_)),
+                             connections_(std::move(other.connections_)) { }
 
 public:
     /**
@@ -112,6 +115,19 @@ public:
     }
     /**@}*/
 
+    /**
+     * @brief Connection details for this object.
+     */
+    /**@{*/
+    std::vector<connection> connections() const {
+        return(connections_);
+    }
+
+    void connections(const std::vector<connection>& value) {
+        connections_ = value;
+    }
+    /**@}*/
+
 public:
     bool operator==(dogen::dia::object value) const {
         return
@@ -132,6 +148,7 @@ private:
     std::string id_;
     std::vector<attribute> attributes_;
     boost::optional<dogen::dia::child_node> child_node_;
+    std::vector<connection> connections_;
 };
 
 } }

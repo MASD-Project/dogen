@@ -18,29 +18,22 @@
  * MA 02110-1301, USA.
  *
  */
-#include <ostream>
-#include "dogen/utility/io/optional_io.hpp"
-#include "dogen/utility/io/vector_io.hpp"
-#include "dogen/dia/io/object_io.hpp"
-#include "dogen/dia/io/attribute_io.hpp"
-#include "dogen/dia/io/child_node_io.hpp"
-#include "dogen/dia/io/connection_io.hpp"
+#ifndef DOGEN_DIA_IO_CONNECTION_IO_HPP
+#define DOGEN_DIA_IO_CONNECTION_IO_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include <iosfwd>
+#include "dogen/dia/domain/connection.hpp"
 
 namespace dogen {
 namespace dia {
 
 std::ostream&
-operator<<(std::ostream& stream, dogen::dia::object object) {
-    stream << "\"object\": {"
-           << " \"type\": \"" << object.type() << "\","
-           << " \"version\": \"" << object.version() << "\","
-           << " \"id\": \"" << object.id() << "\", "
-           << " \"attributes\":" << object.attributes() << ","
-           << object.child_node()
-           << " \"connections\":" << object.connections() << ","
-           << object.connections()
-           << " }";
-    return(stream);
-}
+operator<<(std::ostream& stream, const dogen::dia::connection& connection);
 
 } }
+
+#endif

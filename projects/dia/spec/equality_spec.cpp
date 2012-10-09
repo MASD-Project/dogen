@@ -119,10 +119,11 @@ BOOST_AUTO_TEST_CASE(objects_with_different_attributes_are_not_equal) {
     attributes.push_back(sequence());
 
     boost::optional<dogen::dia::child_node> child;
-    dogen::dia::object a("UML - LargePackage", 0, "O0", attributes, child);
+    std::vector<dogen::dia::connection> con;
+    dogen::dia::object a("UML - LargePackage", 0, "O0", attributes, child, con);
 
     attributes.push_back(sequence());
-    dogen::dia::object b("UML - LargePackage", 0, "O0", attributes, child);
+    dogen::dia::object b("UML - LargePackage", 0, "O0", attributes, child, con);
 
     BOOST_CHECK(a != b);
     BOOST_CHECK(b != a);
