@@ -21,6 +21,7 @@
 #include <ostream>
 #include <boost/variant/apply_visitor.hpp>
 #include "dogen/utility/io/vector_io.hpp"
+#include "dogen/utility/io/jsonify_io.hpp"
 #include "dogen/dia/io/color_io.hpp"
 #include "dogen/dia/io/point_io.hpp"
 #include "dogen/dia/io/real_io.hpp"
@@ -83,29 +84,32 @@ public:
         stream_ << "\"values\":" << value;
     }
 
-    void operator()(const dogen::dia::empty&) const {
-        stream_ << " \"value\": \"empty\"";
-    }
-
 private:
     std::ostream& stream_;
 };
+
 }
 
 namespace dogen {
 namespace dia {
 
 std::ostream&
-operator<<(std::ostream& stream, dogen::dia::attribute attribute) {
+operator<<(std::ostream& stream, const dogen::dia::attribute& attribute) {
     stream << "\"attribute\": {"
            << " \"name\": \"" << attribute.name() << "\",";
 
-    // we need to create a local variable here because the visitor
-    // uses a non-const reference to the value and we cannot have
-    // non-const references to temporaries.
-    dogen::dia::attribute::attribute_value value(attribute.value());
-    boost::apply_visitor(attribute_value_visitor(stream), value);
+    stream << " \"value\": [ ";
+    const auto& values(attribute.values());
+    for(auto i(values.cbegin()); i != values.cend(); ++i) {
+        if (i != values.cbegin()) stream << ", ";
 
+        // we need to create a local variable here because the visitor
+        // uses a non-const reference to the value and we cannot have
+        // non-const references to temporaries.
+        dogen::dia::attribute::attribute_value v(*i);
+        boost::apply_visitor(attribute_value_visitor(stream), v);
+    }
+    stream << " ]";
     stream << " }";
     return(stream);
 }

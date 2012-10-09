@@ -245,27 +245,32 @@ attribute hydrator::read_attribute() {
         if (!is_attribute_value(name))
             throw xml::exception(unsupported_value + name);
 
+        std::vector<attribute::attribute_value> values;
         if (name == dia_color)
-            attribute.value(read_attribute_value<color>());
+            values.push_back(read_attribute_value<color>());
         else if (name == dia_integer)
-            attribute.value(read_attribute_value<integer>());
+            values.push_back(read_attribute_value<integer>());
         else if (name == dia_real)
-            attribute.value(read_attribute_value<real>());
+            values.push_back(read_attribute_value<real>());
         else if (name == dia_point)
-            attribute.value(read_attribute_value<point>());
+            values.push_back(read_attribute_value<point>());
         else if (name == dia_boolean)
-            attribute.value(read_attribute_value<boolean>());
+            values.push_back(read_attribute_value<boolean>());
         else if (name == dia_string)
-            attribute.value(read_attribute_value<string>());
+            values.push_back(read_attribute_value<string>());
         else if (name == dia_rectangle)
-            attribute.value(read_attribute_value<rectangle>());
+            values.push_back(read_attribute_value<rectangle>());
         else if (name == dia_font)
-            attribute.value(read_attribute_value<font>());
+            values.push_back(read_attribute_value<font>());
         else if (name == dia_enum)
-            attribute.value(read_attribute_value<enumeration>());
+            values.push_back(read_attribute_value<enumeration>());
         else if (name == dia_composite)
-            attribute.value(
-                read_attribute_value<std::vector<composite> >());
+            values.push_back(read_attribute_value<std::vector<composite> >());
+        else {
+            BOOST_LOG_SEV(lg, warn) << "Ignoring unrecognised attribute value: "
+                                    << name;
+        }
+        attribute.values(values);
     }
 
     // if we were not on a self-closing attribute tag, then we need to

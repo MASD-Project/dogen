@@ -45,18 +45,12 @@ namespace dia {
 
 namespace serialization { namespace detail { class attribute_serializer; } }
 
-struct empty {
-    int dummy;
-    bool operator==(const empty&) const { return true; }
-};
-
 /**
  * @brief Attribute in a Dia diagram.
  */
 class attribute {
 public:
     typedef boost::variant<
-    empty,
     color,
     point,
     real,
@@ -79,11 +73,12 @@ private:
     friend class dogen::dia::serialization::detail::attribute_serializer;
 
 public:
-    attribute(std::string name, attribute_value value)
-        : name_(name), value_(value) { }
+    attribute(const std::string& name,
+        const std::vector<attribute_value>& values)
+        : name_(name), values_(values) { }
 
     explicit attribute(attribute&& other) : name_(std::move(other.name_)),
-                                   value_(std::move(other.value_)) { }
+                                   values_(std::move(other.values_)) { }
 
 public:
     /**
@@ -91,22 +86,22 @@ public:
      */
     /**@{*/
     std::string name() const { return(name_); }
-    void name(std::string value) { name_ = value; }
+    void name(const std::string& value) { name_ = value; }
     /**@}*/
 
     /**
-     * @brief Value of the attribute.
+     * @brief Values for the attribute.
      */
     /**@{*/
-    attribute_value value() const { return(value_); }
-    void value(attribute_value value) { value_ = value; }
+    std::vector<attribute_value> values() const { return(values_); }
+    void values(const std::vector<attribute_value>& values) { values_ = values; }
     /**@}*/
 
 public:
     bool operator==(const dogen::dia::attribute& value) const {
         return
             name_ == value.name() &&
-            value_ == value.value();
+            values_ == value.values();
     }
 
     bool operator!=(const dogen::dia::attribute& value) const {
@@ -115,7 +110,7 @@ public:
 
 private:
     std::string name_;
-    attribute_value value_;
+    std::vector<attribute_value> values_;
 };
 
 } }

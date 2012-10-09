@@ -37,8 +37,10 @@ void test_empty_attribute() {
     logger lg(logger_factory(test_suite));
 
     Sequence sequence;
-    dogen::dia::attribute a("background", sequence());
-    dogen::dia::attribute b("background", dogen::dia::empty());
+    std::vector<dogen::dia::attribute::attribute_value> v1, v2;
+    v1.push_back(sequence());
+    dogen::dia::attribute a("background", v1);
+    dogen::dia::attribute b("background", v2);
 
     using dogen::utility::streaming::jsonify;
     BOOST_LOG_SEV(lg, debug) << "a: " << jsonify(a);
@@ -89,8 +91,8 @@ BOOST_AUTO_TEST_CASE(equality_operator_behaves_correctly) {
     test_equality<diagram_sequence>();
 }
 
-BOOST_AUTO_TEST_CASE(empty_attribute_value_is_only_equal_to_itself) {
-    SETUP_TEST_LOG_SOURCE("empty_attribute_value_is_only_equal_to_itself");
+BOOST_AUTO_TEST_CASE(attributes_with_empty_values_are_only_equal_to_other_attributes_with_empty_values) {
+    SETUP_TEST_LOG_SOURCE("attributes_with_empty_values_are_only_equal_to_other_attributes_with_empty_values");
     using namespace dogen::dia::test_data;
 
     test_empty_attribute<string_sequence>();
@@ -103,8 +105,9 @@ BOOST_AUTO_TEST_CASE(empty_attribute_value_is_only_equal_to_itself) {
     test_empty_attribute<boolean_sequence>();
 
     // empty must be equal to itself
-    dogen::dia::attribute a("test", dogen::dia::empty());
-    dogen::dia::attribute b("test", dogen::dia::empty());
+    std::vector<dogen::dia::attribute::attribute_value> v1;
+    dogen::dia::attribute a("test", v1);
+    dogen::dia::attribute b("test", v1);
     BOOST_CHECK(a == b);
     BOOST_CHECK(b == a);
 }

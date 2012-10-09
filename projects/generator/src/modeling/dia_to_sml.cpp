@@ -21,6 +21,7 @@
 #include <string>
 #include <algorithm>
 #include <functional>
+#include <boost/lexical_cast.hpp>
 #include <boost/optional.hpp>
 #include <boost/tokenizer.hpp>
 #include <boost/range/combine.hpp>
@@ -56,11 +57,15 @@ const std::string dia_composite("composite");
 
 const std::string hash_character("#");
 const std::string uml_attribute_expected("UML atttribute expected");
-const std::string expected_attribute_value_not_found("Expected attribute value: ");
 const std::string name_attribute_expected("Could not find name attribute");
 const std::string type_attribute_expected("Could not find type attribute");
 const std::string empty_dia_object_name("Dia object name is empty");
 const std::string root_vertex_id("root");
+const std::string unexpected_attribute_value_size(
+    "Unexpected attribute value size: ");
+const std::string unexpected_attribute_value_type(
+    "Did not find expected attribute value: ");
+
 
 struct visit_state {
     std::string model_name;
@@ -120,20 +125,25 @@ private:
     template<typename AttributeValue>
     AttributeValue
     attribute_value(dogen::dia::attribute a, std::string description) const {
-        AttributeValue value;
+        const auto values(a.values());
+        if (values.size() != 1) {
+            BOOST_LOG_SEV(lg, warn) << "Expected attribute to have one"
+                                    << " value but found " << values.size();
+
+            using dogen::utility::exception::exception;
+            throw exception(unexpected_attribute_value_size +
+                boost::lexical_cast<std::string>(values.size()));
+        }
+
+        AttributeValue r;
         try {
-            value = boost::get<AttributeValue>(a.value());
+            r = boost::get<AttributeValue>(a.values().front());
         } catch (const boost::bad_get&) {
             using dogen::utility::exception::exception;
-            throw exception(expected_attribute_value_not_found + a.name() +
+            throw exception(unexpected_attribute_value_type + a.name() +
                 " (" + description + ")" );
         }
-        return value;
-    }
-
-    bool is_attribute_value_empty(dogen::dia::attribute a) const {
-        const dogen::dia::attribute::attribute_value v(a.value());
-        return boost::get<dogen::dia::empty>(&v) != nullptr;
+        return r;
     }
 
     /**
@@ -324,7 +334,7 @@ dia_dfs_visitor::transform_pod(dogen::dia::object o) {
         }
 
         if (attribute.name() == dia_attributes) {
-            if (is_attribute_value_empty(attribute)) {
+            if (attribute.values().empty()) {
                 BOOST_LOG_SEV(lg, debug) << "attribute is empty";
                 continue;
             }

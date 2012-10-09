@@ -31,21 +31,26 @@ namespace detail {
 
 simple_attribute_generator::value_type
 simple_attribute_generator::next_term(const unsigned int position) {
+    std::vector<attribute::attribute_value> value;
     if (position == 0) {
         color_sequence sequence;
-        return dogen::dia::attribute("background", sequence());
+        value.push_back(sequence());
+        return dogen::dia::attribute("background", value);
     } else if (position == 1) {
         real_sequence sequence;
-        return dogen::dia::attribute("pagebreak", sequence());
+        value.push_back(sequence());
+        return dogen::dia::attribute("pagebreak", value);
     }
 
     boolean_sequence sequence;
-    return dogen::dia::attribute("is_portrait", sequence());
+    value.push_back(sequence());
+    return dogen::dia::attribute("is_portrait", value);
 }
 
 composite_attribute_generator::value_type
 composite_attribute_generator::next_term(const unsigned int position) {
     std::vector<dogen::dia::composite> composites;
+    std::vector<attribute::attribute_value> value;
     std::string name;
 
     if (position == 0)
@@ -57,7 +62,8 @@ composite_attribute_generator::next_term(const unsigned int position) {
 
     simple_composite_sequence sequence;
     composites.push_back(sequence());
-    return dogen::dia::attribute(name, composites);
+    value.push_back(composites);
+    return dogen::dia::attribute(name, value);
 }
 
 } } } }

@@ -55,7 +55,7 @@ public:
         const unsigned int /*version*/) {
         using boost::serialization::make_nvp;
         archive & make_nvp("name", value.name_);
-        archive & make_nvp("value", value.value_);
+        archive & make_nvp("values", value.values_);
     }
 };
 
@@ -63,13 +63,6 @@ public:
 
 namespace boost {
 namespace serialization {
-
-template<class Archive>
-inline void serialize(Archive & archive,
-    dogen::dia::empty& value,
-    const unsigned int) {
-    archive & make_nvp("dummy", value.dummy);
-}
 
 template<class Archive>
 inline void serialize(Archive & archive,

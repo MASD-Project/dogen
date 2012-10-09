@@ -32,7 +32,7 @@ namespace dogen {
 namespace dia {
 
 std::ostream&
-operator<<(std::ostream& stream, dogen::dia::attribute attribute);
+operator<<(std::ostream& stream, const dogen::dia::attribute& attribute);
 
 } }
 
