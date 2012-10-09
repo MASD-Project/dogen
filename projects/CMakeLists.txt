@@ -162,6 +162,7 @@ include_directories(
     ${CMAKE_SOURCE_DIR}/projects/dmp/include
     ${CMAKE_SOURCE_DIR}/projects/split_project/dir/inc
     ${CMAKE_SOURCE_DIR}/projects/prototype/include
+    ${CMAKE_SOURCE_DIR}/projects/trivial_inheritance/include
     )
 
 #
