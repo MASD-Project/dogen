@@ -1396,7 +1396,7 @@
 						<item object_id="_104">
 							<name>orth_points</name>
 							<values>
-								<count>1</count>
+								<count>4</count>
 								<item_version>0</item_version>
 								<item>
 									<which>1</which>
@@ -1404,16 +1404,46 @@
 										<value>27.1887,17.3875</value>
 									</value>
 								</item>
+								<item>
+									<which>1</which>
+									<value>
+										<value>27.1887,20.8125</value>
+									</value>
+								</item>
+								<item>
+									<which>1</which>
+									<value>
+										<value>32.7088,20.8125</value>
+									</value>
+								</item>
+								<item>
+									<which>1</which>
+									<value>
+										<value>32.7088,23.4375</value>
+									</value>
+								</item>
 							</values>
 						</item>
 						<item object_id="_105">
 							<name>orth_orient</name>
 							<values>
-								<count>1</count>
+								<count>3</count>
 								<item_version>0</item_version>
 								<item>
 									<which>8</which>
 									<value class_id="24" tracking_level="0" version="0">
+										<value>1</value>
+									</value>
+								</item>
+								<item>
+									<which>8</which>
+									<value>
+										<value>0</value>
+									</value>
+								</item>
+								<item>
+									<which>8</which>
+									<value>
 										<value>1</value>
 									</value>
 								</item>

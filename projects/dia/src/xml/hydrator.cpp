@@ -238,14 +238,16 @@ attribute hydrator::read_attribute() {
     if (is_self_closing)
         return attribute; // no more content to read related to this attribute
 
-    if (reader_.is_start_element()) {
+    std::vector<attribute::attribute_value> values;
+    while (reader_.is_start_element()) {
         // are we inside an attribute? the attribute values below
         // should only appear if we are.
         const std::string name(reader_.name());
-        if (!is_attribute_value(name))
+        if (!is_attribute_value(name)) {
+            BOOST_LOG_SEV(lg, error) << unsupported_value << name;
             throw xml::exception(unsupported_value + name);
+        }
 
-        std::vector<attribute::attribute_value> values;
         if (name == dia_color)
             values.push_back(read_attribute_value<color>());
         else if (name == dia_integer)
@@ -266,12 +268,8 @@ attribute hydrator::read_attribute() {
             values.push_back(read_attribute_value<enumeration>());
         else if (name == dia_composite)
             values.push_back(read_attribute_value<std::vector<composite> >());
-        else {
-            BOOST_LOG_SEV(lg, warn) << "Ignoring unrecognised attribute value: "
-                                    << name;
-        }
-        attribute.values(values);
     }
+    attribute.values(values);
 
     // if we were not on a self-closing attribute tag, then we need to
     // consume the attribute end element.
