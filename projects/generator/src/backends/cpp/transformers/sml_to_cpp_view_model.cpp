@@ -38,7 +38,6 @@ const std::string dot(".");
 const std::string separator("_");
 const std::string extension("HPP");
 const std::string namespace_separator("::");
-const std::string unammed_model("unnamed_model");
 
 const std::string includer_name("all");
 const std::string versioned_name("versioned_key");

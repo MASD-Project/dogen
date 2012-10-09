@@ -22,6 +22,13 @@
 #include <ostream>
 #include "dogen/generator/backends/cpp/formatters/cpp_cmakelists.hpp"
 
+namespace {
+
+const std::string unnamed_model("unnamed_model");
+
+}
+
+
 namespace dogen {
 namespace generator {
 namespace backends {
@@ -32,6 +39,10 @@ cpp_cmakelists::cpp_cmakelists(std::ostream& stream) : stream_(stream) {
 }
 
 void cpp_cmakelists::format(view_models::cmakelists_view_model vm) {
+    const std::string mn(vm.model_name().empty() ?
+        unnamed_model :
+        vm.model_name());
+
     stream_ << "# -*- mode: cmake; tab-width: 4; indent-tabs-mode: nil -*-"
             << std::endl
             << "#" << std::endl
@@ -65,10 +76,10 @@ void cpp_cmakelists::format(view_models::cmakelists_view_model vm) {
             << "    \"${CMAKE_CURRENT_SOURCE_DIR}/\"" << std::endl
             << "    \"${CMAKE_CURRENT_SOURCE_DIR}/*.cpp\")" << std::endl
             << std::endl
-            << "add_library(" << vm.model_name() << " STATIC ${all_files})"
+            << "add_library(" << mn << " STATIC ${all_files})"
             << std::endl
-            << "set_target_properties(" << vm.model_name() << " PROPERTIES"
-            << std::endl << "    OUTPUT_NAME dogen_" << vm.model_name() << ")"
+            << "set_target_properties(" << mn << " PROPERTIES"
+            << std::endl << "    OUTPUT_NAME dogen_" << mn << ")"
             << std::endl;
 }
 

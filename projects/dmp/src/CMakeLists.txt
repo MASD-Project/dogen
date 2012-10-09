@@ -22,6 +22,6 @@ file(GLOB_RECURSE all_files RELATIVE
     "${CMAKE_CURRENT_SOURCE_DIR}/"
     "${CMAKE_CURRENT_SOURCE_DIR}/*.cpp")
 
-add_library( STATIC ${all_files})
-set_target_properties( PROPERTIES
-    OUTPUT_NAME dogen_)
+add_library(unnamed_model STATIC ${all_files})
+set_target_properties(unnamed_model PROPERTIES
+    OUTPUT_NAME dogen_unnamed_model)
