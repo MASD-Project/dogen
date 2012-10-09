@@ -43,8 +43,8 @@
 
 namespace {
 
-static dogen::utility::log::logger
-lg(dogen::utility::log::logger_factory("dia_to_sml"));
+using namespace dogen::utility::log;
+static logger lg(logger_factory("dia_to_sml"));
 
 const char* delimiter = "::";
 const std::string dia_name("name");
@@ -287,19 +287,25 @@ transform_property(dogen::dia::composite uml_attribute) const {
     for (const attribute_ptr a : uml_attribute.value()) {
         if (a->name() == dia_name)
             property.name(transform_string_attribute(*a));
-
-        if (a->name() == dia_type) {
+        else if (a->name() == dia_type) {
             const std::string s(transform_string_attribute(*a));
             property.type_name(transform_qualified_name(s));
+        } else {
+            BOOST_LOG_SEV(lg, warn) << "Ignoring unexpected attribute: "
+                                    << a->name();
         }
     }
 
     using dogen::utility::exception::exception;
-    if (property.name().empty())
+    if (property.name().empty()) {
+        BOOST_LOG_SEV(lg, error) << "Could not find a name attribute.";
         throw exception(name_attribute_expected);
+    }
 
-    if (property.type_name().type_name().empty())
+    if (property.type_name().type_name().empty()) {
+        BOOST_LOG_SEV(lg, error) << "Could not find a type attribute.";
         throw exception(type_attribute_expected);
+    }
 
     return property;
 }
@@ -310,8 +316,7 @@ dia_dfs_visitor::transform_pod(dogen::dia::object o) {
 
     pod.generate(state_->is_target);
     for (auto attribute : o.attributes()) {
-        using namespace dogen::utility::log;
-        BOOST_LOG_SEV(lg, debug) << "\t\tFound attribute: " << attribute.name();
+        BOOST_LOG_SEV(lg, debug) << "Found attribute: " << attribute.name();
 
         if (attribute.name() == dia_name) {
             using dogen::sml::meta_types;
@@ -320,7 +325,7 @@ dia_dfs_visitor::transform_pod(dogen::dia::object o) {
 
         if (attribute.name() == dia_attributes) {
             if (is_attribute_value_empty(attribute)) {
-                BOOST_LOG_SEV(lg, debug) << "\t\t\tattribute is empty";
+                BOOST_LOG_SEV(lg, debug) << "attribute is empty";
                 continue;
             }
 
@@ -330,7 +335,7 @@ dia_dfs_visitor::transform_pod(dogen::dia::object o) {
 
             std::vector<dogen::sml::property> properties;
             for (auto uml_attribute : uml_attributes) {
-                BOOST_LOG_SEV(lg, debug) << "\t\t\tattribute has type: "
+                BOOST_LOG_SEV(lg, debug) << "attribute has type: "
                                          << attribute.name();
                 if (uml_attribute.type() != dia_uml_attribute) {
                     using dogen::utility::exception::exception;
@@ -364,7 +369,6 @@ void dia_dfs_visitor::update_package_path(dogen::dia::object o) {
     for (auto a : o.attributes()) {
         found_name = a.name() == dia_name;
         if (found_name) {
-            using namespace dogen::utility::log;
             BOOST_LOG_SEV(lg, debug) << "Updating package_path: " << o.id();
             state_->package_path.push_back(transform_string_attribute(a));
             break;
@@ -385,14 +389,13 @@ void dia_dfs_visitor::process_dia_object(dogen::dia::object o) {
     const auto type(parse_object_type(o.type()));
 
     using dogen::dia::object_types;
-    using namespace dogen::utility::log;
     if (type == object_types::uml_large_package) {
         BOOST_LOG_SEV(lg, debug) << "Processing uml_large_package: "
                                  << o.id();
         state_->package_path.pop_back();
         state_->packages.insert(transform_package(o));
     } else if (type == object_types::uml_class) {
-        BOOST_LOG_SEV(lg, debug) << "\tProcessing uml_class: " << o.id();
+        BOOST_LOG_SEV(lg, debug) << "Processing uml_class: " << o.id();
         state_->pods.insert(transform_pod(o));
     }
 }
@@ -439,14 +442,12 @@ void dia_to_sml::populate_graph(std::vector<dia::object> objects) {
         const std::string parent_id(o.child_node()->parent());
         const vertex_descriptor_type parent_vertex(find_or_add(parent_id));
         boost::add_edge(parent_vertex, vertex, graph_);
-        using namespace dogen::utility::log;
         BOOST_LOG_SEV(lg, debug) << "Adding object to graph: " << o.id()
                                  << " Parent ID: " << parent_id;
     }
 }
 
 sml::model dia_to_sml::transform() {
-    using namespace dogen::utility::log;
     BOOST_LOG_SEV(lg, info) << "Transforming diagram: " << model_name_;
     BOOST_LOG_SEV(lg, debug) << "Contents: " << diagram_;
     for (dia::layer layer : diagram_.layers())
