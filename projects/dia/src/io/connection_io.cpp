@@ -29,7 +29,7 @@ operator<<(std::ostream& stream, const dogen::dia::connection& connection) {
     stream << "\"connection\": {"
            << " \"handle\": \"" << connection.handle() << "\","
            << " \"to\": \"" << connection.to() << "\","
-           << " \"connection_slot\": \"" << connection.connection_slot()
+           << " \"connection_slot\": \"" << connection.connection_slot() << "\""
            << " }";
     return(stream);
 }

@@ -21,6 +21,7 @@
 #include "dogen/dia/test_data/child_node_sequence.hpp"
 #include "dogen/dia/test_data/attribute_sequence.hpp"
 #include "dogen/dia/test_data/object_sequence.hpp"
+#include "dogen/dia/test_data/connection_sequence.hpp"
 
 namespace dogen {
 namespace dia {
@@ -32,16 +33,19 @@ object_generator::next_term(const unsigned int position) {
     std::vector<dogen::dia::attribute> attributes;
     simple_attribute_sequence sequence;
     child_node_sequence sequence2;
+    connection_sequence sq3;
     std::vector<dogen::dia::connection> connections;
 
     if (position == 0) {
         attributes.push_back(sequence());
+        connections.push_back(sq3());
         return dogen::dia::object(
             "UML - LargePackage", position, "O0", attributes,
             boost::optional<dogen::dia::child_node>(), connections);
     } else if (position == 1) {
         sequence();
         attributes.push_back(sequence());
+        connections.push_back(sq3());
         return dogen::dia::object(
             "UML - Class", position, "O1", attributes,
             boost::optional<dogen::dia::child_node>(sequence2()), connections);
@@ -50,6 +54,7 @@ object_generator::next_term(const unsigned int position) {
     sequence();
     sequence();
     attributes.push_back(sequence());
+    connections.push_back(sq3());
     return dogen::dia::object(
         "UML - LargePackage", position, "O2", attributes,
         boost::optional<dogen::dia::child_node>(sequence2()), connections);

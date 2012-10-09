@@ -98,16 +98,18 @@ operator<<(std::ostream& stream, const dogen::dia::attribute& attribute) {
     stream << "\"attribute\": {"
            << " \"name\": \"" << attribute.name() << "\",";
 
-    stream << " \"value\": [ ";
+    stream << " \"values\": [ ";
     const auto& values(attribute.values());
     for(auto i(values.cbegin()); i != values.cend(); ++i) {
         if (i != values.cbegin()) stream << ", ";
 
+        stream << "{ ";
         // we need to create a local variable here because the visitor
         // uses a non-const reference to the value and we cannot have
         // non-const references to temporaries.
         dogen::dia::attribute::attribute_value v(*i);
         boost::apply_visitor(attribute_value_visitor(stream), v);
+        stream << " }";
     }
     stream << " ]";
     stream << " }";

@@ -34,11 +34,10 @@ operator<<(std::ostream& stream, dogen::dia::object object) {
     stream << "\"object\": {"
            << " \"type\": \"" << object.type() << "\","
            << " \"version\": \"" << object.version() << "\","
-           << " \"id\": \"" << object.id() << "\", "
-           << " \"attributes\":" << object.attributes() << ","
-           << object.child_node()
-           << " \"connections\":" << object.connections() << ","
-           << object.connections()
+           << " \"id\": \"" << object.id() << "\","
+           << " \"attributes\": " << object.attributes() << ","
+           << object.child_node() << ","
+           << " \"connections\": " << object.connections()
            << " }";
     return(stream);
 }
