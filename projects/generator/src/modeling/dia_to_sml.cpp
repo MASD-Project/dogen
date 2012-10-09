@@ -19,6 +19,7 @@
  *
  */
 #include <string>
+#include <sstream>
 #include <algorithm>
 #include <functional>
 #include <boost/lexical_cast.hpp>
@@ -36,16 +37,18 @@
 #include "dogen/dia/domain/composite.hpp"
 #include "dogen/dia/domain/attribute.hpp"
 #include "dogen/dia/utility/dia_utility.hpp"
-#include "dogen/utility/exception/utility_exception.hpp"
 #include "dogen/dia/io/object_io.hpp"
 #include "dogen/dia/io/diagram_io.hpp"
 #include "dogen/utility/log/logger.hpp"
+#include "dogen/generator/modeling/transformation_error.hpp"
 #include "dogen/generator/modeling/dia_to_sml.hpp"
 
 namespace {
 
 using namespace dogen::utility::log;
 static logger lg(logger_factory("dia_to_sml"));
+
+using dogen::generator::modeling::transformation_error;
 
 const char* delimiter = "::";
 const std::string dia_name("name");
@@ -60,6 +63,7 @@ const std::string uml_attribute_expected("UML atttribute expected");
 const std::string name_attribute_expected("Could not find name attribute");
 const std::string type_attribute_expected("Could not find type attribute");
 const std::string empty_dia_object_name("Dia object name is empty");
+const std::string error_parsing_object_type("Fail to parse object type: ");
 const std::string root_vertex_id("root");
 const std::string unexpected_attribute_value_size(
     "Unexpected attribute value size: ");
@@ -155,9 +159,8 @@ private:
         } catch (const boost::bad_get&) {
             BOOST_LOG_SEV(lg, error) << unexpected_attribute_value_type
                                      << description;
-
-            using dogen::utility::exception::exception;
-            throw exception(unexpected_attribute_value_type + description);
+            throw transformation_error(unexpected_attribute_value_type +
+                description);
         }
         return r;
     }
@@ -225,6 +228,13 @@ private:
      */
     void update_package_path(const dogen::dia::object& object);
 
+    /**
+     * @brief Parses a string representing an object type into its enum.
+     *
+     * @param s string with an object type
+     */
+    dogen::dia::object_types parse_object_type(const std::string s);
+
 private:
     std::shared_ptr<visit_state> state_;
 };
@@ -235,9 +245,7 @@ transform_string_attribute(const dogen::dia::attribute& a) const {
     if (values.size() != 1) {
         BOOST_LOG_SEV(lg, error) << "Expected attribute to have one"
                                  << " value but found " << values.size();
-
-        using dogen::utility::exception::exception;
-        throw exception(unexpected_attribute_value_size +
+        throw transformation_error(unexpected_attribute_value_size +
             boost::lexical_cast<std::string>(values.size()));
     }
 
@@ -280,8 +288,8 @@ dogen::sml::qualified_name dia_dfs_visitor::
 transform_qualified_name(const dogen::dia::attribute& a,
     dogen::sml::meta_types meta_type) const {
     if (a.name() != dia_name) {
-        using dogen::utility::exception::exception;
-        throw exception(name_attribute_expected);
+        BOOST_LOG_SEV(lg, error) << name_attribute_expected;
+        throw transformation_error(name_attribute_expected);
     }
 
     dogen::sml::qualified_name name;
@@ -292,8 +300,8 @@ transform_qualified_name(const dogen::dia::attribute& a,
 
     name.type_name(transform_string_attribute(a));
     if (name.type_name().empty()) {
-        using dogen::utility::exception::exception;
-        throw exception(empty_dia_object_name);
+        BOOST_LOG_SEV(lg, error) << empty_dia_object_name;
+        throw transformation_error(empty_dia_object_name);
     }
     return name;
 }
@@ -310,9 +318,10 @@ dia_dfs_visitor::transform_package(const dogen::dia::object& o) {
     }
 
     if (package.name().type_name().empty()) {
-        using dogen::utility::exception::exception;
-        throw exception(name_attribute_expected + o.id());
+        throw transformation_error(name_attribute_expected + o.id());
+        BOOST_LOG_SEV(lg, error) << name_attribute_expected + o.id();
     }
+
     return std::make_pair(package.name(), package);
 }
 
@@ -333,15 +342,14 @@ transform_property(const dogen::dia::composite& uml_attribute) const {
         }
     }
 
-    using dogen::utility::exception::exception;
     if (property.name().empty()) {
         BOOST_LOG_SEV(lg, error) << "Could not find a name attribute.";
-        throw exception(name_attribute_expected);
+        throw transformation_error(name_attribute_expected);
     }
 
     if (property.type_name().type_name().empty()) {
         BOOST_LOG_SEV(lg, error) << "Could not find a type attribute.";
-        throw exception(type_attribute_expected);
+        throw transformation_error(type_attribute_expected);
     }
 
     return property;
@@ -377,9 +385,7 @@ dia_dfs_visitor::transform_pod(const dogen::dia::object& o) {
                     BOOST_LOG_SEV(lg, error) << "Expected composite type "
                                              << " to be " << dia_uml_attribute
                                              << "but was " << c.type();
-
-                    using dogen::utility::exception::exception;
-                    throw exception(uml_attribute_expected);
+                    throw transformation_error(uml_attribute_expected);
                 }
                 BOOST_LOG_SEV(lg, debug) << "Found composite of type "
                                          << c.type();
@@ -390,21 +396,35 @@ dia_dfs_visitor::transform_pod(const dogen::dia::object& o) {
     }
 
     if (pod.name().type_name().empty()) {
-        using dogen::utility::exception::exception;
-        throw exception(name_attribute_expected + o.id());
+        BOOST_LOG_SEV(lg, error) << name_attribute_expected + o.id();
+        throw transformation_error(name_attribute_expected + o.id());
     }
     return std::make_pair(pod.name(), pod);
+}
+
+dogen::dia::object_types dia_dfs_visitor::
+parse_object_type(const std::string s) {
+    dogen::dia::object_types r;
+    try {
+        using dogen::dia::utility::parse_object_type;
+        r = parse_object_type(s);
+    } catch(const std::exception& e) {
+        std::ostringstream stream;
+        stream << error_parsing_object_type << "'" << s
+               << "'. Error: " << e.what();
+        BOOST_LOG_SEV(lg, error) << stream.str();
+        throw transformation_error(stream.str());
+    }
+    return r;
 }
 
 void dia_dfs_visitor::update_package_path(const dogen::dia::object& o) {
     if (o.id() == root_vertex_id)
         return; // root is a dummy object, ignore it.
 
-    using dogen::dia::utility::parse_object_type;
-    const auto type(parse_object_type(o.type()));
-
     using dogen::dia::object_types;
-    if (type != object_types::uml_large_package)
+    object_types ot(parse_object_type(o.type()));
+    if (ot != object_types::uml_large_package)
         return; // only packages contribute to the package path
 
     bool found_name(false);
@@ -418,8 +438,8 @@ void dia_dfs_visitor::update_package_path(const dogen::dia::object& o) {
     }
 
     if (!found_name) {
-        using dogen::utility::exception::exception;
-        throw exception(name_attribute_expected + o.id());
+        BOOST_LOG_SEV(lg, error) << name_attribute_expected + o.id();
+        throw transformation_error(name_attribute_expected + o.id());
     }
 }
 
@@ -427,16 +447,14 @@ void dia_dfs_visitor::process_dia_object(const dogen::dia::object& o) {
     if (o.id() == root_vertex_id)
         return; // root is a dummy object, ignore it.
 
-    using dogen::dia::utility::parse_object_type;
-    const auto type(parse_object_type(o.type()));
-
     using dogen::dia::object_types;
-    if (type == object_types::uml_large_package) {
+    object_types ot(parse_object_type(o.type()));
+    if (ot == object_types::uml_large_package) {
         BOOST_LOG_SEV(lg, debug) << "Processing uml_large_package: "
                                  << o.id();
         state_->package_path.pop_back();
         state_->packages.insert(transform_package(o));
-    } else if (type == object_types::uml_class) {
+    } else if (ot == object_types::uml_class) {
         BOOST_LOG_SEV(lg, debug) << "Processing uml_class: " << o.id();
         state_->pods.insert(transform_pod(o));
     }

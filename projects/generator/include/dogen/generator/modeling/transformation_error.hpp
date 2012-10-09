@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_GENERATOR_MODELING_VALIDATION_ERROR_HPP
-#define DOGEN_GENERATOR_MODELING_VALIDATION_ERROR_HPP
+#ifndef DOGEN_GENERATOR_MODELING_TRANSFORMATION_ERROR_HPP
+#define DOGEN_GENERATOR_MODELING_TRANSFORMATION_ERROR_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -32,15 +32,16 @@ namespace generator {
 namespace modeling {
 
 /**
- * @brief A fatal error has occurred during code generation.
+ * @brief A fatal error has occurred while transforming a Dia model
+ * into its SML representation.
  */
-class validation_error : public utility::exception::exception {
+class transformation_error : public utility::exception::exception {
 public:
-    validation_error(std::string message)
+    transformation_error(std::string message)
         : utility::exception::exception(message) { }
-    validation_error() { }
+    transformation_error() { }
 
-    virtual ~validation_error() throw() {}
+    virtual ~transformation_error() throw() {}
 };
 
 } } }
