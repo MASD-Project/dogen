@@ -18,11 +18,15 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/xml/node_types_io.hpp"
 #include "dogen/dia/xml/dia_xml_exception.hpp"
 #include "dogen/dia/xml/hydrator.hpp"
 
 namespace {
+
+static dogen::utility::log::logger
+lg(dogen::utility::log::logger_factory("hydrator"));
 
 // exception messages
 const std::string unexpected_element("Unexpected element: ");
@@ -69,6 +73,8 @@ const bool skip_whitespace(true);
 namespace dogen {
 namespace dia {
 namespace xml {
+
+using namespace dogen::utility::log;
 
 hydrator::hydrator(boost::filesystem::path file_name)
     : file_name_(file_name),
@@ -277,6 +283,8 @@ object hydrator::read_object() {
     object.type(read_xml_string_attribute(dia_type));
     object.version(read_xml_int_attribute(dia_version));
     object.id(read_xml_string_attribute(dia_id));
+    BOOST_LOG_SEV(lg, debug) << "Reading object: '" << object.id()
+                             << "' of type: " << object.type();
 
     if (!reader_.read())
         throw xml::exception(unexpected_eod);
@@ -287,12 +295,15 @@ object hydrator::read_object() {
             attributes.push_back(read_attribute());
         else if (is_start_element(dia_child_node))
             object.child_node(read_child_node());
-        else
+        else {
+            BOOST_LOG_SEV(lg, warn) << "Skipping element: '" << reader_.name();
             reader_.skip();
+        }
     } while (!is_end_element(dia_object));
 
     reader_.read();
     object.attributes(attributes);
+    BOOST_LOG_SEV(lg, debug) << "Read object: " << object.id();
     return object;
 }
 
@@ -303,6 +314,7 @@ layer hydrator::read_layer() {
     layer.name(read_xml_string_attribute(dia_name));
     layer.visible(try_read_xml_bool_attribute(dia_layer_visible));
     layer.active(try_read_xml_bool_attribute(dia_layer_active));
+    BOOST_LOG_SEV(lg, debug) << "Reading layer: " << layer.name();
 
     std::vector<object> objects;
     const bool is_self_closing(reader_.is_empty());
@@ -316,12 +328,14 @@ layer hydrator::read_layer() {
     }
 
     layer.objects(objects);
+    BOOST_LOG_SEV(lg, debug) << "Read layer: " << layer.name();
     return layer;
 }
 
 diagram_data hydrator::read_diagram_data() {
     next_element(dia_diagramdata);
     diagram_data diagram_data;
+    BOOST_LOG_SEV(lg, debug) << "Reading diagram data.";
 
     if (!reader_.read())
         throw xml::exception(unexpected_eod);
@@ -334,11 +348,13 @@ diagram_data hydrator::read_diagram_data() {
     reader_.read();
 
     diagram_data.attributes(attributes);
+    BOOST_LOG_SEV(lg, debug) << "Read diagram data.";
     return diagram_data;
 }
 
 diagram hydrator::read_diagram() {
     next_element(dia_diagram);
+    BOOST_LOG_SEV(lg, debug) << "Reading diagram.";
 
     diagram diagram;
     diagram.diagram_data(read_diagram_data());
@@ -349,10 +365,12 @@ diagram hydrator::read_diagram() {
     } while (!is_end_element(dia_diagram));
 
     diagram.layers(layers);
+    BOOST_LOG_SEV(lg, debug) << "Read diagram.";
     return diagram;
 }
 
 diagram hydrator::hydrate() {
+    BOOST_LOG_SEV(lg, debug) << "Hydrating dia file: " << file_name_;
     return read_diagram();
 }
 
