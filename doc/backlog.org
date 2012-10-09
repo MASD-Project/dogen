@@ -3,3 +3,17 @@
 This file contains all stories that haven't been assigned to a sprint.
 
 ** Development Stories
+
+*** Handle unnamed models properly
+
+The option disable model name was meant to allow the generation of
+flat models, without any folders or namespaces for the model
+name. However, as a side-effect, this also means the artefacts being
+generated do not have any names. This resulted in the creation of a
+libSTATIC, purely because the next command in the cmake add_library is
+STATIC (e.g. static library). As a quick hack, when an empty model
+name is detected, a model named "unnamed_model" is created.
+
+The correct solution for this is to have a flag (or flags) at the SML
+level which state whether to use the model name for folders, packages,
+etc. The view model generation will then take this into account.
