@@ -514,6 +514,10 @@
 					<child_node class_id="22" tracking_level="0" version="0">
 						<initialized>0</initialized>
 					</child_node>
+					<connections class_id="23" tracking_level="0" version="0">
+						<count>0</count>
+						<item_version>0</item_version>
+					</connections>
 				</item>
 			</objects>
 		</item>

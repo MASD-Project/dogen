@@ -60,6 +60,8 @@ private:
     bool try_read_xml_bool_attribute(std::string name);
 
     child_node read_child_node();
+    connection read_connection();
+    std::vector<connection> read_connections();
     object read_object();
     template<typename AttributeValue> AttributeValue read_attribute_value();
     attribute read_attribute();

@@ -835,6 +835,10 @@
 					<child_node class_id="23" tracking_level="0" version="0">
 						<initialized>0</initialized>
 					</child_node>
+					<connections class_id="24" tracking_level="0" version="0">
+						<count>0</count>
+						<item_version>0</item_version>
+					</connections>
 				</item>
 				<item>
 					<type>UML - Class</type>
@@ -1335,6 +1339,10 @@
 					<child_node>
 						<initialized>0</initialized>
 					</child_node>
+					<connections>
+						<count>0</count>
+						<item_version>0</item_version>
+					</connections>
 				</item>
 				<item>
 					<type>UML - Generalization</type>
@@ -1431,7 +1439,7 @@
 								<item_version>0</item_version>
 								<item>
 									<which>8</which>
-									<value class_id="24" tracking_level="0" version="0">
+									<value class_id="25" tracking_level="0" version="0">
 										<value>1</value>
 									</value>
 								</item>
@@ -1518,6 +1526,20 @@
 					<child_node>
 						<initialized>0</initialized>
 					</child_node>
+					<connections>
+						<count>2</count>
+						<item_version>0</item_version>
+						<item class_id="26" tracking_level="0" version="0">
+							<handle>0</handle>
+							<to>O0</to>
+							<connection_slot>6</connection_slot>
+						</item>
+						<item>
+							<handle>1</handle>
+							<to>O1</to>
+							<connection_slot>1</connection_slot>
+						</item>
+					</connections>
 				</item>
 			</objects>
 		</item>

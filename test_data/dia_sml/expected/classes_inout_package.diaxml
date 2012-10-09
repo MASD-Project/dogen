@@ -514,6 +514,10 @@
 					<child_node class_id="22" tracking_level="0" version="0">
 						<initialized>0</initialized>
 					</child_node>
+					<connections class_id="23" tracking_level="0" version="0">
+						<count>0</count>
+						<item_version>0</item_version>
+					</connections>
 				</item>
 				<item>
 					<type>UML - Class</type>
@@ -815,7 +819,7 @@
 								<item_version>0</item_version>
 								<item>
 									<which>7</which>
-									<value class_id="23" tracking_level="0" version="0">
+									<value class_id="24" tracking_level="0" version="0">
 										<family>monospace</family>
 										<style>0</style>
 										<name>Courier</name>
@@ -1014,10 +1018,14 @@
 					<child_node>
 						<initialized>1</initialized>
 						<item_version>0</item_version>
-						<value class_id="24" tracking_level="0" version="0">
+						<value class_id="25" tracking_level="0" version="0">
 							<parent>O0</parent>
 						</value>
 					</child_node>
+					<connections>
+						<count>0</count>
+						<item_version>0</item_version>
+					</connections>
 				</item>
 				<item>
 					<type>UML - Class</type>
@@ -1518,6 +1526,10 @@
 					<child_node>
 						<initialized>0</initialized>
 					</child_node>
+					<connections>
+						<count>0</count>
+						<item_version>0</item_version>
+					</connections>
 				</item>
 			</objects>
 		</item>

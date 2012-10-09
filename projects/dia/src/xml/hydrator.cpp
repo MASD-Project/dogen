@@ -32,6 +32,7 @@ lg(dogen::utility::log::logger_factory("hydrator"));
 const std::string unexpected_element("Unexpected element: ");
 const std::string unexpected_eod("Unexpected end of document");
 const std::string unsupported_value("Unsupported attribute value: ");
+const std::string unexpected_connection_type("Unexpected connection type: ");
 const std::string expected_self_closing("Expected self-closing: ");
 const std::string expected_one_inner_composite("Expected only one inner composite");
 
@@ -52,6 +53,8 @@ const std::string dia_font("dia:font");
 const std::string dia_enum("dia:enum");
 const std::string dia_composite("dia:composite");
 const std::string dia_object("dia:object");
+const std::string dia_connections("dia:connections");
+const std::string dia_connection("dia:connection");
 
 // dia XML attribute names
 const std::string dia_name("name");
@@ -64,6 +67,9 @@ const std::string dia_id("id");
 const std::string dia_parent("parent");
 const std::string dia_layer_visible("visible");
 const std::string dia_layer_active("active");
+const std::string dia_handle("handle");
+const std::string dia_to("to");
+const std::string dia_connection_slot("connection");
 
 // useful constants
 const bool skip_whitespace(true);
@@ -279,6 +285,37 @@ attribute hydrator::read_attribute() {
     return attribute;
 }
 
+connection hydrator::read_connection() {
+    validate_current_element(dia_connection);
+    connection r;
+
+    r.handle(read_xml_string_attribute(dia_handle));
+    r.to(read_xml_string_attribute(dia_to));
+    r.connection_slot(read_xml_string_attribute(dia_connection_slot));
+    reader_.skip();
+    return r;
+}
+
+std::vector<connection> hydrator::read_connections() {
+    validate_current_element(dia_connections);
+    reader_.read();
+
+    std::vector<connection> r;
+    do {
+        if (!is_start_element(dia_connection)) {
+            BOOST_LOG_SEV(lg, error) << unexpected_connection_type
+                                     << reader_.name();
+            throw xml::exception(unexpected_connection_type +
+                reader_.name());
+        }
+        r.push_back(read_connection());
+    } while (!is_end_element(dia_connections));
+    reader_.read();
+
+    BOOST_LOG_SEV(lg, debug) << "Object has " << r.size() << " connections";
+    return r;
+}
+
 object hydrator::read_object() {
     validate_current_element(dia_object);
     object object;
@@ -298,7 +335,9 @@ object hydrator::read_object() {
             attributes.push_back(read_attribute());
         else if (is_start_element(dia_child_node))
             object.child_node(read_child_node());
-        else {
+        else if (is_start_element(dia_connections)) {
+            object.connections(read_connections());
+        } else {
             BOOST_LOG_SEV(lg, warn) << "Skipping element: '" << reader_.name();
             reader_.skip();
         }
@@ -306,6 +345,7 @@ object hydrator::read_object() {
 
     reader_.read();
     object.attributes(attributes);
+
     BOOST_LOG_SEV(lg, debug) << "Read object: " << object.id();
     return object;
 }
