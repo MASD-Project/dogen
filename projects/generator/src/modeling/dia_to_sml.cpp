@@ -77,16 +77,26 @@ const std::string unexpected_attribute_value_type(
 class dia_dfs_visitor : public boost::default_dfs_visitor {
 private:
     struct visit_state {
-        std::string model_name;
-        std::unordered_map<dogen::sml::qualified_name, dogen::sml::pod> pods;
+        visit_state(const std::string& model_name,
+            const std::list<std::string>& external_package_path,
+            bool verbose, bool is_target,
+            const std::vector<dogen::dia::object>& relationships)
+            : model_name_(model_name),
+              external_package_path_(external_package_path),
+              verbose_(verbose), is_target_(is_target),
+              relationships_(relationships) {}
+
+        const std::string model_name_;
+        std::unordered_map<dogen::sml::qualified_name, dogen::sml::pod> pods_;
         std::unordered_map<dogen::sml::qualified_name, dogen::sml::primitive>
-        primitives;
+        primitives_;
         std::unordered_map<dogen::sml::qualified_name, dogen::sml::package>
-        packages;
-        std::list<std::string> package_path;
-        std::list<std::string> external_package_path;
-        bool verbose;
-        bool is_target;
+        packages_;
+        std::list<std::string> package_path_;
+        const std::list<std::string> external_package_path_;
+        const bool verbose_;
+        const bool is_target_;
+        const std::vector<dogen::dia::object> relationships_;
     };
 
 public:
@@ -96,14 +106,13 @@ public:
     dia_dfs_visitor(dia_dfs_visitor&&) = default;
 
 public:
-    dia_dfs_visitor(std::string model_name, std::string external_package_path,
-        bool verbose, bool is_target) : state_(new visit_state()) {
-        state_->model_name = model_name;
-        state_->external_package_path =
-            split_delimited_string(external_package_path);
-        state_->verbose = verbose;
-        state_->is_target = is_target;
-    }
+    dia_dfs_visitor(const std::string& model_name,
+        const std::string& external_package_path,
+        bool verbose, bool is_target,
+        const std::vector<dogen::dia::object>& relationships)
+        : state_(new visit_state(model_name,
+                split_delimited_string(external_package_path), verbose,
+                is_target, relationships)) { }
 
 private:
     std::list<std::string>
@@ -130,25 +139,25 @@ public:
 public:
     std::unordered_map<dogen::sml::qualified_name, dogen::sml::pod>
     pods() const {
-        return state_->pods;
+        return state_->pods_;
     }
 
     std::unordered_map<dogen::sml::qualified_name, dogen::sml::primitive>
     primitives() const {
-        return state_->primitives;
+        return state_->primitives_;
     }
 
     std::unordered_map<dogen::sml::qualified_name, dogen::sml::package>
     packages() const {
-        return state_->packages;
+        return state_->packages_;
     }
 
     std::list<std::string> package_path() const {
-        return state_->package_path;
+        return state_->package_path_;
     }
 
     std::list<std::string> external_package_path() const {
-        return state_->external_package_path;
+        return state_->external_package_path_;
     }
 
 private:
@@ -306,10 +315,10 @@ transform_qualified_name(const dogen::dia::attribute& a,
     }
 
     dogen::sml::qualified_name name;
-    name.model_name(state_->model_name);
+    name.model_name(state_->model_name_);
     name.meta_type(meta_type);
-    name.external_package_path(state_->external_package_path);
-    name.package_path(state_->package_path);
+    name.external_package_path(state_->external_package_path_);
+    name.package_path(state_->package_path_);
 
     name.type_name(transform_string_attribute(a));
     if (name.type_name().empty()) {
@@ -372,7 +381,7 @@ std::pair<dogen::sml::qualified_name, dogen::sml::pod>
 dia_dfs_visitor::transform_pod(const dogen::dia::object& o) {
     dogen::sml::pod pod;
 
-    pod.generate(state_->is_target);
+    pod.generate(state_->is_target_);
     for (auto attribute : o.attributes()) {
         BOOST_LOG_SEV(lg, debug) << "Found attribute: " << attribute.name();
 
@@ -445,7 +454,7 @@ void dia_dfs_visitor::push_package_path(const dogen::dia::object& o) {
         found_name = a.name() == dia_name;
         if (found_name) {
             BOOST_LOG_SEV(lg, debug) << "Updating package_path: " << o.id();
-            state_->package_path.push_back(transform_string_attribute(a));
+            state_->package_path_.push_back(transform_string_attribute(a));
             break;
         }
     }
@@ -465,7 +474,7 @@ void dia_dfs_visitor::pop_package_path(const dogen::dia::object& o) {
     if (ot != object_types::uml_large_package)
         return; // only packages contribute to the package path
 
-    state_->package_path.pop_back();
+    state_->package_path_.pop_back();
 }
 
 void dia_dfs_visitor::process_dia_object(const dogen::dia::object& o) {
@@ -477,11 +486,11 @@ void dia_dfs_visitor::process_dia_object(const dogen::dia::object& o) {
     if (ot == object_types::uml_large_package) {
         BOOST_LOG_SEV(lg, debug) << "Processing uml_large_package: "
                                  << o.id();
-        state_->packages.insert(transform_package(o));
+        state_->packages_.insert(transform_package(o));
         push_package_path(o);
     } else if (ot == object_types::uml_class) {
         BOOST_LOG_SEV(lg, debug) << "Processing uml_class: " << o.id();
-        state_->pods.insert(transform_pod(o));
+        state_->pods_.insert(transform_pod(o));
     }
 }
 
@@ -602,7 +611,7 @@ sml::model dia_to_sml::transform() {
         setup_data_structures(layer.objects());
 
     const std::string epp(external_package_path_);
-    dia_dfs_visitor v(model_name_, epp, verbose_, is_target_);
+    dia_dfs_visitor v(model_name_, epp, verbose_, is_target_, relationships_);
     boost::depth_first_search(graph_, boost::visitor(v));
 
     using sml::model;
