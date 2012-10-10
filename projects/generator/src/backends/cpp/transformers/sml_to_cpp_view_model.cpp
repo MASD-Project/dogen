@@ -26,8 +26,8 @@
 #include <boost/algorithm/string/predicate.hpp>
 #include <boost/graph/depth_first_search.hpp>
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/generator/backends/cpp/transformers/transformation_error.hpp"
-#include "dogen/generator/backends/cpp/transformers/sml_to_cpp_view_model.hpp"
+#include "dogen/generator/backends/cpp/view_models/transformation_error.hpp"
+#include "dogen/generator/backends/cpp/view_models/sml_to_cpp_view_model.hpp"
 
 namespace {
 

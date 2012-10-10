@@ -19,7 +19,7 @@
  *
  */
 #include <boost/test/unit_test.hpp>
-#include "dogen/generator/backends/cpp/transformers/sml_to_cpp_view_model.hpp"
+#include "dogen/generator/backends/cpp/view_models/sml_to_cpp_view_model.hpp"
 #include "dogen/utility/test_data/dia_sml.hpp"
 #include "dogen/utility/io/list_io.hpp"
 #include "dogen/utility/test/xml_serialization_helper.hpp"
