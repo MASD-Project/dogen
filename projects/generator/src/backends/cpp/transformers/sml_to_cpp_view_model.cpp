@@ -316,8 +316,7 @@ has_implementation(cpp_facet_types facet_type) const {
         facet_type == cpp_facet_types::test_data;
 }
 
-std::vector<view_models::file_view_model>
-sml_to_cpp_view_model::transform_pods() {
+void sml_to_cpp_view_model::setup_qualified_name_to_class_view_model_map() {
     const auto pods(model_.pods());
     BOOST_LOG_SEV(lg, debug) << "Transforming pods: " << pods.size();
 
@@ -340,7 +339,10 @@ sml_to_cpp_view_model::transform_pods() {
     sml_dfs_visitor v(model_.schema_name(), disable_keys_);
     boost::depth_first_search(graph_, boost::visitor(v));
     qname_to_class_ = v.class_view_models();
+}
 
+std::vector<view_models::file_view_model>
+sml_to_cpp_view_model::transform_pods() {
     std::vector<view_models::file_view_model> r;
     auto lambda([&](cpp_facet_types f, cpp_file_types ft, sml::pod p) {
             const std::string n(p.name().type_name());
@@ -348,7 +350,8 @@ sml_to_cpp_view_model::transform_pods() {
             r.push_back(transform_file(f, ft, p));
         });
 
-    for (auto pair : model_.pods()) {
+    const auto pods(model_.pods());
+    for (auto pair : pods) {
         const sml::pod p(pair.second);
 
         if (!p.generate())
@@ -489,6 +492,7 @@ sml_to_cpp_view_model::transform_facet_includers() const {
 std::vector<view_models::file_view_model>
 sml_to_cpp_view_model::transform() {
     log_started();
+    setup_qualified_name_to_class_view_model_map();
     auto r(transform_pods());
 
     log_keys();

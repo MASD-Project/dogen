@@ -130,7 +130,12 @@ private:
     std::vector<view_models::file_view_model> transform_facet_includers() const;
 
     /**
-     * @brief Transforms all pods
+     * @brief Sets up the qualified name to class view map
+     */
+    void setup_qualified_name_to_class_view_model_map();
+
+    /**
+     * @brief Transforms pods into view models.
      */
     std::vector<view_models::file_view_model> transform_pods();
 
