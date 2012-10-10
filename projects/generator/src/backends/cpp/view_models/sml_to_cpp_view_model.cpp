@@ -41,6 +41,8 @@ const std::string separator("_");
 const std::string extension("HPP");
 const std::string namespace_separator("::");
 
+const std::string parent_view_model_not_found(
+    "Parent view model not found for pod: ");
 const std::string view_model_not_found("View model not found for pod: ");
 const std::string includer_name("all");
 const std::string versioned_name("versioned_key");
@@ -137,13 +139,33 @@ void sml_dfs_visitor::process_sml_pod(const dogen::sml::pod& pod) {
     const dogen::sml::qualified_name name(pod.name());
     const std::list<std::string> ns(join_namespaces(name));
 
-    using dogen::generator::backends::cpp::view_models::class_view_model;
+    using namespace dogen::generator::backends::cpp::view_models;
     class_view_model cvm(name.type_name());
+
+    if (pod.parent_name()) {
+        const auto pqn(*pod.parent_name());
+        BOOST_LOG_SEV(lg, debug) << "Class '" << name.type_name()
+                                 << "' has parent '" << pqn.type_name() << "'";
+
+        const auto i(state_->class_view_models_.find(pqn));
+        if (i == state_->class_view_models_.end()) {
+            throw transformation_error(parent_view_model_not_found +
+                name.type_name());
+        }
+
+        parent_view_model parent(pqn.type_name());
+        parent.properties(i->second.properties());
+        parent.namespaces(i->second.namespaces());
+
+        std::list<parent_view_model> parents;
+        parents.push_back(parent);
+        cvm.parents(parents);
+    }
+
     cvm.namespaces(ns);
     cvm.database_name(database_name(name));
     cvm.schema_name(state_->schema_name_);
 
-    using dogen::generator::backends::cpp::view_models::property_view_model;
     std::list<property_view_model> properties_vm;
     bool has_primitive_properties(false);
     bool has_boolean_properties(false);

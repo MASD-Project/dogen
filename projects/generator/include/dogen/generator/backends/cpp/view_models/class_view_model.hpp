@@ -27,8 +27,10 @@
 
 #include <list>
 #include <string>
+#include <unordered_map>
 #include <boost/tuple/tuple.hpp>
 #include "dogen/generator/backends/cpp/view_models/property_view_model.hpp"
+#include "dogen/generator/backends/cpp/view_models/parent_view_model.hpp"
 
 namespace dogen {
 namespace generator {
@@ -126,9 +128,22 @@ public:
     void schema_name(std::string value) { schema_name_ = value; }
     /**@}*/
 
+    /**
+     * @brief Parents for this class.
+     */
+    /**@{*/
+    std::list<parent_view_model> parents() {
+        return parents_;
+    }
+    void parents(const std::list<parent_view_model>& value) {
+        parents_ = value;
+    }
+    /**@}*/
+
 private:
     std::list<std::string> namespaces_;
     std::list<property_view_model> properties_;
+    std::list<parent_view_model> parents_;
     std::string name_;
     bool has_primitive_properties_;
     bool has_boolean_properties_;
