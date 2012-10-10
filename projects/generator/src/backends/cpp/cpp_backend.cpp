@@ -137,7 +137,7 @@ backend::value_type cpp_backend::generate_file_view_models() const {
     const bool dfi(settings_.disable_facet_includers());
     const bool dk(settings_.disable_versioning());
 
-    using transformers::sml_to_cpp_view_model;
+    using view_models::sml_to_cpp_view_model;
     const bool iio(settings_.use_integrated_io());
     const bool disable_io(f.find(cpp_facet_types::io) == f.end());
     sml_to_cpp_view_model t(location_manager_, f, model_, dfi, dk, iio,

@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_GENERATOR_BACKENDS_CPP_TRANSFORMERS_TRANSFORMATION_ERROR_HPP
-#define DOGEN_GENERATOR_BACKENDS_CPP_TRANSFORMERS_TRANSFORMATION_ERROR_HPP
+#ifndef DOGEN_GENERATOR_BACKENDS_CPP_VIEW_MODELS_TRANSFORMATION_ERROR_HPP
+#define DOGEN_GENERATOR_BACKENDS_CPP_VIEW_MODELS_TRANSFORMATION_ERROR_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -31,7 +31,7 @@ namespace dogen {
 namespace generator {
 namespace backends {
 namespace cpp {
-namespace transformers {
+namespace view_models {
 
 /**
  * @brief A fatal error has occurred while transforming a Dia model

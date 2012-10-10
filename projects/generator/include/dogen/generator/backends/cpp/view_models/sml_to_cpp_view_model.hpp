@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_GENERATOR_BACKENDS_CPP_TRANSFORMERS_SML_TO_CPP_VIEW_MODEL_HPP
-#define DOGEN_GENERATOR_BACKENDS_CPP_TRANSFORMERS_SML_TO_CPP_VIEW_MODEL_HPP
+#ifndef DOGEN_GENERATOR_BACKENDS_CPP_VIEW_MODELS_SML_TO_CPP_VIEW_MODEL_HPP
+#define DOGEN_GENERATOR_BACKENDS_CPP_VIEW_MODELS_SML_TO_CPP_VIEW_MODEL_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -46,7 +46,7 @@ namespace dogen {
 namespace generator {
 namespace backends {
 namespace cpp {
-namespace transformers {
+namespace view_models {
 
 /**
  * @brief Transformer responsible for converting an SML model instance
@@ -98,8 +98,7 @@ private:
      * @param is_versioned if true, generates the versioned key view
      * model, if false the unversioned key.
      */
-    view_models::class_view_model
-    create_key_class_view_model(bool is_versioned) const;
+    class_view_model create_key_class_view_model(bool is_versioned) const;
 
     /**
      * @brief Generate a file view model for a given key type.
@@ -107,27 +106,25 @@ private:
      * @param is_versioned if true, generates the versioned key view
      * model, if false the unversioned key.
      */
-    view_models::file_view_model
-    create_key_file_view_model(cpp_facet_types facet_type,
+    file_view_model create_key_file_view_model(cpp_facet_types facet_type,
         cpp_file_types file_type, cpp_aspect_types aspect_type);
 
 private:
     /**
      * @brief Transforms a SML pod into a C++ file view.
      */
-    view_models::file_view_model
-    transform_file(cpp_facet_types facet_type, cpp_file_types file_type,
-        const sml::pod& pod);
+    file_view_model transform_file(cpp_facet_types facet_type,
+        cpp_file_types file_type, const sml::pod& pod);
 
     /**
      * @brief Transforms all versioned and unversioned keys.
      */
-    std::vector<view_models::file_view_model> transform_keys();
+    std::vector<file_view_model> transform_keys();
 
     /**
      * @brief Transforms all facet includers
      */
-    std::vector<view_models::file_view_model> transform_facet_includers() const;
+    std::vector<file_view_model> transform_facet_includers() const;
 
     /**
      * @brief Sets up the qualified name to class view map
@@ -137,14 +134,14 @@ private:
     /**
      * @brief Transforms pods into view models.
      */
-    std::vector<view_models::file_view_model> transform_pods();
+    std::vector<file_view_model> transform_pods();
 
 public:
     /**
      * @brief Transforms the SML model instance into the corresponding
      * C++ view model.
      */
-    std::vector<view_models::file_view_model> transform();
+    std::vector<file_view_model> transform();
 
 private:
     // graph of dependencies
@@ -169,8 +166,7 @@ private:
     const bool disable_facet_includers_;
     const bool disable_keys_;
     cpp_dependency_manager dependency_manager_;
-    std::unordered_map<sml::qualified_name, view_models::class_view_model>
-    qname_to_class_;
+    std::unordered_map<sml::qualified_name, class_view_model> qname_to_class_;
     graph_type graph_;
     qname_to_vertex_type qname_to_vertex_;
     vertex_descriptor_type root_vertex_;

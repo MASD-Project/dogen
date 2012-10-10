@@ -195,7 +195,7 @@ namespace dogen {
 namespace generator {
 namespace backends {
 namespace cpp {
-namespace transformers {
+namespace view_models {
 
 sml_to_cpp_view_model::
 sml_to_cpp_view_model(const cpp_location_manager& location_manager,
@@ -276,12 +276,12 @@ location_request_factory(cpp_facet_types facet_type, cpp_file_types file_type,
     return r;
 }
 
-view_models::file_view_model sml_to_cpp_view_model::
+file_view_model sml_to_cpp_view_model::
 transform_file(cpp_facet_types ft, cpp_file_types flt, const sml::pod& pod) {
     const sml::qualified_name name(pod.name());
     const std::list<std::string> ns(join_namespaces(name));
 
-    view_models::file_view_model r;
+    file_view_model r;
     r.facet_type(ft);
     r.file_type(flt);
     r.aspect_type(cpp_aspect_types::main);
@@ -347,9 +347,8 @@ void sml_to_cpp_view_model::setup_qualified_name_to_class_view_model_map() {
     qname_to_class_ = v.class_view_models();
 }
 
-std::vector<view_models::file_view_model>
-sml_to_cpp_view_model::transform_pods() {
-    std::vector<view_models::file_view_model> r;
+std::vector<file_view_model> sml_to_cpp_view_model::transform_pods() {
+    std::vector<file_view_model> r;
     auto lambda([&](cpp_facet_types f, cpp_file_types ft, sml::pod p) {
             const std::string n(p.name().type_name());
             log_generating_file(f, cpp_aspect_types::main, ft, n);
@@ -375,12 +374,12 @@ sml_to_cpp_view_model::transform_pods() {
     return r;
 }
 
-view_models::class_view_model
+class_view_model
 sml_to_cpp_view_model::create_key_class_view_model(bool is_versioned) const {
     const std::string name(is_versioned ? versioned_name : unversioned_name);
     BOOST_LOG_SEV(lg, debug) << "Creating key class" << name;
 
-    view_models::class_view_model r;
+    class_view_model r;
     r.name(name);
 
     sml::qualified_name qn;
@@ -392,13 +391,13 @@ sml_to_cpp_view_model::create_key_class_view_model(bool is_versioned) const {
     r.namespaces(ns);
 
     auto lambda([](std::string name, std::string type) {
-            view_models::property_view_model r(name);
+            property_view_model r(name);
             r.type(type);
             r.is_primitive(true);
             return r;
         });
 
-    std::list<view_models::property_view_model> properties;
+    std::list<property_view_model> properties;
     properties.push_back(lambda(id_name, uint_name));
     if (is_versioned)
         properties.push_back(lambda(version_name, uint_name));
@@ -409,10 +408,10 @@ sml_to_cpp_view_model::create_key_class_view_model(bool is_versioned) const {
     return r;
 }
 
-view_models::file_view_model sml_to_cpp_view_model::
+file_view_model sml_to_cpp_view_model::
 create_key_file_view_model(cpp_facet_types ft, cpp_file_types flt,
     cpp_aspect_types at) {
-    view_models::file_view_model r;
+    file_view_model r;
     r.facet_type(ft);
     r.file_type(flt);
     r.aspect_type(at);
@@ -442,9 +441,9 @@ create_key_file_view_model(cpp_facet_types ft, cpp_file_types flt,
     return r;
 }
 
-std::vector<view_models::file_view_model>
+std::vector<file_view_model>
 sml_to_cpp_view_model::transform_keys() {
-    std::vector<view_models::file_view_model> r;
+    std::vector<file_view_model> r;
 
     const auto h(cpp_file_types::header);
     const auto i(cpp_file_types::implementation);
@@ -466,9 +465,9 @@ sml_to_cpp_view_model::transform_keys() {
     return r;
 }
 
-std::vector<view_models::file_view_model>
+std::vector<file_view_model>
 sml_to_cpp_view_model::transform_facet_includers() const {
-    std::vector<view_models::file_view_model> r;
+    std::vector<file_view_model> r;
     const cpp_file_types file_type(cpp_file_types::header);
     const auto aspect_type(cpp_aspect_types::includers);
 
@@ -480,7 +479,7 @@ sml_to_cpp_view_model::transform_facet_includers() const {
         qn.external_package_path(model_.external_package_path());
         const auto rq(location_request_factory(ft, file_type, qn));
 
-        view_models::file_view_model vm;
+        file_view_model vm;
         vm.facet_type(ft);
         vm.file_path(location_manager_.absolute_path(rq));
         vm.file_type(file_type);
@@ -495,8 +494,7 @@ sml_to_cpp_view_model::transform_facet_includers() const {
     return r;
 }
 
-std::vector<view_models::file_view_model>
-sml_to_cpp_view_model::transform() {
+std::vector<file_view_model> sml_to_cpp_view_model::transform() {
     log_started();
     setup_qualified_name_to_class_view_model_map();
     auto r(transform_pods());

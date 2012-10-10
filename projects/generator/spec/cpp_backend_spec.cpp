@@ -74,7 +74,7 @@ BOOST_AUTO_TEST_CASE(view_model_transformer_correctly_transforms_domain_files) {
     std::set<cpp_facet_types> ft;
     ft.insert(cpp_facet_types::domain);
 
-    using dogen::generator::backends::cpp::transformers::sml_to_cpp_view_model;
+    using dogen::generator::backends::cpp::view_models::sml_to_cpp_view_model;
     const bool no_includers(false);
     const bool no_keys(false);
     const bool no_iio(false);
@@ -173,7 +173,7 @@ BOOST_AUTO_TEST_CASE(disabling_facet_includers_results_in_no_facet_includers) {
     std::set<cpp_facet_types> ft;
     ft.insert(cpp_facet_types::domain);
 
-    using dogen::generator::backends::cpp::transformers::sml_to_cpp_view_model;
+    using dogen::generator::backends::cpp::view_models::sml_to_cpp_view_model;
     bool no_includers(true);
     bool no_keys(false);
     const bool no_iio(false);
@@ -210,7 +210,7 @@ BOOST_AUTO_TEST_CASE(disabling_keys_results_in_no_keys) {
     std::set<cpp_facet_types> ft;
     ft.insert(cpp_facet_types::domain);
 
-    using dogen::generator::backends::cpp::transformers::sml_to_cpp_view_model;
+    using dogen::generator::backends::cpp::view_models::sml_to_cpp_view_model;
     bool no_includers(false);
     bool no_keys(true);
     const bool no_iio(false);
