@@ -56,9 +56,9 @@ namespace cpp {
 namespace transformers {
 
 sml_to_cpp_view_model::
-sml_to_cpp_view_model(cpp_location_manager location_manager,
-    std::set<cpp_facet_types> facet_types,
-    sml::model model, bool disable_facet_includers,
+sml_to_cpp_view_model(const cpp_location_manager& location_manager,
+    const std::set<cpp_facet_types>& facet_types,
+    const sml::model& model, bool disable_facet_includers,
     bool disable_keys, bool use_integrated_io, bool disable_io) :
     location_manager_(location_manager),
     facet_types_(facet_types),
@@ -111,7 +111,7 @@ void sml_to_cpp_view_model::log_finished(unsigned int count) const {
 }
 
 std::list<std::string> sml_to_cpp_view_model::
-join_namespaces(sml::qualified_name name) const {
+join_namespaces(const sml::qualified_name& name) const {
     std::list<std::string> result(name.external_package_path());
 
     if (!name.model_name().empty())
@@ -123,7 +123,7 @@ join_namespaces(sml::qualified_name name) const {
 }
 
 std::string sml_to_cpp_view_model::
-database_name(sml::qualified_name name) const {
+database_name(const sml::qualified_name& name) const {
     std::ostringstream stream;
 
     if (!name.model_name().empty())
@@ -138,7 +138,7 @@ database_name(sml::qualified_name name) const {
 }
 
 std::string sml_to_cpp_view_model::
-to_header_guard_name(boost::filesystem::path relative_path) const {
+to_header_guard_name(const boost::filesystem::path& relative_path) const {
     bool is_first(true);
     std::ostringstream stream;
     for (auto p : relative_path) {
@@ -152,7 +152,7 @@ to_header_guard_name(boost::filesystem::path relative_path) const {
 }
 
 view_models::class_view_model sml_to_cpp_view_model::transform_class(
-    sml::pod pod, std::list<std::string> namespaces) const {
+    const sml::pod& pod, const std::list<std::string>& namespaces) const {
     const sml::qualified_name name(pod.name());
     view_models::class_view_model r(name.type_name());
     r.namespaces(namespaces);
@@ -220,7 +220,7 @@ location_request_factory(cpp_facet_types facet_type, cpp_file_types file_type,
 }
 
 view_models::file_view_model sml_to_cpp_view_model::
-transform_file(cpp_facet_types ft, cpp_file_types flt, sml::pod pod) {
+transform_file(cpp_facet_types ft, cpp_file_types flt, const sml::pod& pod) {
     const sml::qualified_name name(pod.name());
     const std::list<std::string> ns(join_namespaces(name));
 

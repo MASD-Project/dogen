@@ -59,9 +59,9 @@ public:
     sml_to_cpp_view_model& operator=(const sml_to_cpp_view_model&) = delete;
 
 public:
-    sml_to_cpp_view_model(cpp_location_manager location_manager,
-        std::set<cpp_facet_types> facet_types,
-        sml::model model, bool disable_facet_includers,
+    sml_to_cpp_view_model(const cpp_location_manager& location_manager,
+        const std::set<cpp_facet_types>& facet_types,
+        const sml::model& model, bool disable_facet_includers,
         bool disable_keys, bool use_integrated_io,
         bool disable_io);
 
@@ -79,13 +79,13 @@ private:
      * qualified name into a list of strings with C++ namespaces.
      */
     std::list<std::string>
-    join_namespaces(sml::qualified_name name) const;
+    join_namespaces(const sml::qualified_name& name) const;
 
     /**
      * @brief Returns the identifier to be used for this name on a
      * database context.
      */
-    std::string database_name(sml::qualified_name name) const;
+    std::string database_name(const sml::qualified_name& name) const;
 
     /**
      * @brief Returns true if the facet requires a C++ source file,
@@ -98,7 +98,7 @@ private:
      * header guard name.
      */
     std::string
-    to_header_guard_name(boost::filesystem::path relative_path) const;
+    to_header_guard_name(const boost::filesystem::path& relative_path) const;
 
     cpp_location_request location_request_factory(cpp_facet_types facet_type,
         cpp_file_types file_type, sml::qualified_name name) const;
@@ -127,14 +127,14 @@ private:
      * @brief Transforms an SML pod into a C++ class view.
      */
     view_models::class_view_model transform_class(
-        sml::pod pod, std::list<std::string> namespaces) const;
+        const sml::pod& pod, const std::list<std::string>& namespaces) const;
 
     /**
      * @brief Transforms a SML pod into a C++ file view.
      */
     view_models::file_view_model
     transform_file(cpp_facet_types facet_type, cpp_file_types file_type,
-        sml::pod pod);
+        const sml::pod& pod);
 
     /**
      * @brief Transforms all versioned and unversioned keys.
