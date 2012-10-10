@@ -68,6 +68,7 @@ const std::string name_attribute_expected("Could not find name attribute");
 const std::string type_attribute_expected("Could not find type attribute");
 const std::string empty_dia_object_name("Dia object name is empty");
 const std::string error_parsing_object_type("Fail to parse object type: ");
+const std::string parent_not_found("Object has a parent but its not defined: ");
 const std::string root_vertex_id("root");
 const std::string unexpected_attribute_value_size(
     "Unexpected attribute value size: ");
@@ -80,11 +81,11 @@ private:
         visit_state(const std::string& model_name,
             const std::list<std::string>& external_package_path,
             bool verbose, bool is_target,
-            const std::vector<dogen::dia::object>& relationships)
+            const std::unordered_map<std::string, std::string> child_to_parent)
             : model_name_(model_name),
               external_package_path_(external_package_path),
               verbose_(verbose), is_target_(is_target),
-              relationships_(relationships) {}
+              child_to_parent_(child_to_parent) { }
 
         const std::string model_name_;
         std::unordered_map<dogen::sml::qualified_name, dogen::sml::pod> pods_;
@@ -96,7 +97,9 @@ private:
         const std::list<std::string> external_package_path_;
         const bool verbose_;
         const bool is_target_;
-        const std::vector<dogen::dia::object> relationships_;
+        const std::unordered_map<std::string, std::string> child_to_parent_;
+        std::unordered_map<std::string, dogen::sml::qualified_name>
+        dia_id_to_qname_;
     };
 
 public:
@@ -112,9 +115,28 @@ public:
         const std::vector<dogen::dia::object>& relationships)
         : state_(new visit_state(model_name,
                 split_delimited_string(external_package_path), verbose,
-                is_target, relationships)) { }
+                is_target, setup_child_to_parent(relationships))) { }
 
 private:
+    std::unordered_map<std::string, std::string>
+    setup_child_to_parent(
+        const std::vector<dogen::dia::object>& relationships) const {
+
+        std::unordered_map<std::string, std::string> r;
+        for (const auto relationship : relationships) {
+            using dogen::dia::object_types;
+            object_types ot(parse_object_type(relationship.type()));
+            if (ot == object_types::uml_generalization) {
+                const auto connections(relationship.connections());
+                const auto parent(connections.front());
+                const auto child(connections.back());
+
+                r.insert(std::make_pair(child.to(), parent.to()));
+            }
+        }
+        return r;
+    }
+
     std::list<std::string>
     split_delimited_string(const std::string& str) const {
         const boost::char_separator<char> sep(delimiter);
@@ -225,7 +247,7 @@ private:
      * @param object Dia object which contains a UML class.
      */
     std::pair<dogen::sml::qualified_name, dogen::sml::pod>
-    transform_pod(const dogen::dia::object& object);
+    transform_pod(const dogen::dia::object& object) const;
 
     /**
      * @brief Processes any type of Dia object.
@@ -255,7 +277,7 @@ private:
      *
      * @param s string with an object type
      */
-    dogen::dia::object_types parse_object_type(const std::string s);
+    dogen::dia::object_types parse_object_type(const std::string s) const;
 
 private:
     std::shared_ptr<visit_state> state_;
@@ -378,7 +400,7 @@ transform_property(const dogen::dia::composite& uml_attribute) const {
 }
 
 std::pair<dogen::sml::qualified_name, dogen::sml::pod>
-dia_dfs_visitor::transform_pod(const dogen::dia::object& o) {
+dia_dfs_visitor::transform_pod(const dogen::dia::object& o) const {
     dogen::sml::pod pod;
 
     pod.generate(state_->is_target_);
@@ -421,11 +443,24 @@ dia_dfs_visitor::transform_pod(const dogen::dia::object& o) {
         BOOST_LOG_SEV(lg, error) << name_attribute_expected + o.id();
         throw transformation_error(name_attribute_expected + o.id());
     }
+
+    const auto i(state_->child_to_parent_.find(o.id()));
+    if (i != state_->child_to_parent_.end()) {
+        const auto j(state_->dia_id_to_qname_.find(i->second));
+        if (j == state_->dia_id_to_qname_.end()) {
+            BOOST_LOG_SEV(lg, error) << "Object has a parent but "
+                                     << " there is no QName mapping defined."
+                                     << " Child ID: '" << o.id()
+                                     << "' Parent ID: '" << i->second << "'";
+            throw transformation_error(parent_not_found + o.id());
+        }
+        pod.parent_name(j->second);
+    }
     return std::make_pair(pod.name(), pod);
 }
 
 dogen::dia::object_types dia_dfs_visitor::
-parse_object_type(const std::string s) {
+parse_object_type(const std::string s) const {
     dogen::dia::object_types r;
     try {
         using dogen::dia::utility::parse_object_type;
@@ -490,7 +525,9 @@ void dia_dfs_visitor::process_dia_object(const dogen::dia::object& o) {
         push_package_path(o);
     } else if (ot == object_types::uml_class) {
         BOOST_LOG_SEV(lg, debug) << "Processing uml_class: " << o.id();
-        state_->pods_.insert(transform_pod(o));
+        const auto p(transform_pod(o));
+        state_->pods_.insert(p);
+        state_->dia_id_to_qname_.insert(std::make_pair(o.id(), p.first));
     }
 }
 
