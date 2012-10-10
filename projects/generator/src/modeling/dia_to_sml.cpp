@@ -59,6 +59,10 @@ const std::string dia_string("string");
 const std::string dia_composite("composite");
 
 const std::string hash_character("#");
+const std::string unexpected_number_of_connections(
+    "Expected 2 connections but found: ");
+const std::string relationship_target_not_found(
+    "Relationship points to object with non-existent ID: ");
 const std::string uml_attribute_expected("UML atttribute expected");
 const std::string name_attribute_expected("Could not find name attribute");
 const std::string type_attribute_expected("Could not find type attribute");
@@ -114,13 +118,13 @@ private:
 
 public:
     template<typename Vertex, typename Graph>
-    void discover_vertex(Vertex u, const Graph& g) {
-        update_package_path(g[u]);
+    void discover_vertex(const Vertex& u, const Graph& g) {
+        process_dia_object(g[u]);
     }
 
     template<typename Vertex, typename Graph>
-    void finish_vertex(Vertex u, const Graph& g) {
-        process_dia_object(g[u]);
+    void finish_vertex(const Vertex& u, const Graph& g) {
+        pop_package_path(g[u]);
     }
 
 public:
@@ -222,11 +226,20 @@ private:
     void process_dia_object(const dogen::dia::object& object);
 
     /**
-     * @brief Changes package path to reflect the current object.
+     * @brief If the object is a package, pushes its name to the
+     * package path.
      *
      * @param object Any Dia object, including the dummy root object.
      */
-    void update_package_path(const dogen::dia::object& object);
+    void push_package_path(const dogen::dia::object& object);
+
+    /**
+     * @brief If the object is a package, pops its name from the
+     * package path.
+     *
+     * @param object Any Dia object, including the dummy root object.
+     */
+    void pop_package_path(const dogen::dia::object& object);
 
     /**
      * @brief Parses a string representing an object type into its enum.
@@ -418,7 +431,7 @@ parse_object_type(const std::string s) {
     return r;
 }
 
-void dia_dfs_visitor::update_package_path(const dogen::dia::object& o) {
+void dia_dfs_visitor::push_package_path(const dogen::dia::object& o) {
     if (o.id() == root_vertex_id)
         return; // root is a dummy object, ignore it.
 
@@ -443,6 +456,18 @@ void dia_dfs_visitor::update_package_path(const dogen::dia::object& o) {
     }
 }
 
+void dia_dfs_visitor::pop_package_path(const dogen::dia::object& o) {
+    if (o.id() == root_vertex_id)
+        return; // root is a dummy object, ignore it.
+
+    using dogen::dia::object_types;
+    object_types ot(parse_object_type(o.type()));
+    if (ot != object_types::uml_large_package)
+        return; // only packages contribute to the package path
+
+    state_->package_path.pop_back();
+}
+
 void dia_dfs_visitor::process_dia_object(const dogen::dia::object& o) {
     if (o.id() == root_vertex_id)
         return; // root is a dummy object, ignore it.
@@ -452,8 +477,8 @@ void dia_dfs_visitor::process_dia_object(const dogen::dia::object& o) {
     if (ot == object_types::uml_large_package) {
         BOOST_LOG_SEV(lg, debug) << "Processing uml_large_package: "
                                  << o.id();
-        state_->package_path.pop_back();
         state_->packages.insert(transform_package(o));
+        push_package_path(o);
     } else if (ot == object_types::uml_class) {
         BOOST_LOG_SEV(lg, debug) << "Processing uml_class: " << o.id();
         state_->pods.insert(transform_pod(o));
@@ -482,8 +507,8 @@ dia_to_sml(const dia::diagram& diagram, const std::string& model_name,
     graph_[root_vertex_] = root;
 }
 
-void dia_to_sml::populate_graph(const std::vector<dia::object>& objects) {
-    auto find_or_add([&](const std::string& id) {
+void dia_to_sml::setup_data_structures(const std::vector<dia::object>& objects) {
+    auto lambda([&](const std::string& id) {
             const auto i(id_to_vertex_.find(id));
             if (i != id_to_vertex_.end())
                 return i->second;
@@ -493,26 +518,88 @@ void dia_to_sml::populate_graph(const std::vector<dia::object>& objects) {
             return vertex;
         });
 
+    std::unordered_map<std::string, vertex_descriptor_type> orphans;
     for (const auto o : objects) {
-        const vertex_descriptor_type vertex(find_or_add(o.id()));
-        graph_[vertex] = o;
-        if (!o.child_node()) {
-            boost::add_edge(root_vertex_, vertex, graph_);
+        if (!o.connections().empty()) {
+            relationships_.push_back(o);
             continue;
         }
+
+        const vertex_descriptor_type vertex(lambda(o.id()));
+        graph_[vertex] = o;
+        if (!o.child_node()) {
+            orphans.insert(std::make_pair(o.id(), vertex));
+            continue;
+        }
+
         const std::string parent_id(o.child_node()->parent());
-        const vertex_descriptor_type parent_vertex(find_or_add(parent_id));
+        const vertex_descriptor_type parent_vertex(lambda(parent_id));
         boost::add_edge(parent_vertex, vertex, graph_);
         BOOST_LOG_SEV(lg, debug) << "Adding object to graph: " << o.id()
                                  << " Parent ID: " << parent_id;
+    }
+
+    for (const auto o : relationships_) {
+        BOOST_LOG_SEV(lg, debug) << "Processing connections for object: '"
+                                 << o.id() << "' of type: '"
+                                 << o.type()
+                                 << "'";
+
+        const auto connections(o.connections());
+        if (connections.size() != 2) {
+            BOOST_LOG_SEV(lg, error) << unexpected_number_of_connections
+                                     << connections.size();
+
+            throw transformation_error(unexpected_number_of_connections +
+                boost::lexical_cast<std::string>(connections.size()));
+        }
+
+        const auto parent(connections.front());
+        const auto p(id_to_vertex_.find(parent.to()));
+        if (p == id_to_vertex_.end()) {
+            BOOST_LOG_SEV(lg, error) << relationship_target_not_found
+                                     << parent.to();
+
+            throw transformation_error(relationship_target_not_found +
+                parent.to());
+        }
+
+        const auto child(connections.back());
+        const auto c(id_to_vertex_.find(child.to()));
+        if (c == id_to_vertex_.end()) {
+            BOOST_LOG_SEV(lg, error) << relationship_target_not_found
+                                     << child.to();
+
+            throw transformation_error(relationship_target_not_found +
+                child.to());
+        }
+
+        BOOST_LOG_SEV(lg, debug) << "Connecting parent '"
+                                 << parent.to() << "' to child: '"
+                                 << child.to()
+                                 << "'";
+        boost::add_edge(p->second, c->second, graph_);
+
+        const auto k(orphans.find(child.to()));
+        if (k != orphans.end()) {
+            BOOST_LOG_SEV(lg, debug) << "Object is no longer orphan: "
+                                     << k->first << "'";
+            orphans.erase(k);
+        }
+    }
+
+    for (const auto o : orphans) {
+        BOOST_LOG_SEV(lg, debug) << "Connecting root to '" << o.first << "'";
+        boost::add_edge(root_vertex_, o.second, graph_);
     }
 }
 
 sml::model dia_to_sml::transform() {
     BOOST_LOG_SEV(lg, info) << "Transforming diagram: " << model_name_;
     BOOST_LOG_SEV(lg, debug) << "Contents: " << diagram_;
+
     for (dia::layer layer : diagram_.layers())
-        populate_graph(layer.objects());
+        setup_data_structures(layer.objects());
 
     const std::string epp(external_package_path_);
     dia_dfs_visitor v(model_name_, epp, verbose_, is_target_);

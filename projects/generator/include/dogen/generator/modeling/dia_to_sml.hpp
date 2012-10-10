@@ -67,10 +67,13 @@ public:
 
 private:
     /**
-     * @brief Populates the graph with a directed acyclic graph of
-     * dependencies between Dia objects.
+     * @brief Populates the internal data structures with Dia objects.
+     *
+     * Creates a directed acyclic graph of dependencies between Dia
+     * objects, and separates all the relationships from the rest for
+     * second-pass processing.
      */
-    void populate_graph(const std::vector<dia::object>& objects);
+    void setup_data_structures(const std::vector<dia::object>& objects);
 
 public:
     /**
@@ -101,6 +104,7 @@ private:
     graph_type graph_;
     id_to_vertex_type id_to_vertex_;
     vertex_descriptor_type root_vertex_;
+    std::vector<dia::object> relationships_;
     const bool is_target_;
     const bool verbose_;
 };
