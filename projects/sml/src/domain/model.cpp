@@ -43,11 +43,11 @@ bool model::operator==(const model& rhs) const {
 void model::to_stream(std::ostream& stream) const {
     stream << "\"model\": {"
            << "\"name\": \"" << name_ << "\","
-           << "\"packages\":" << packages_ << ","
-           << "\"pods\":" << pods_ << ","
-           << "\"primitives\":" << primitives_
-           << "\"external_package_path:" << external_package_path_
-           << "\"schema_name:\"" << schema_name_
+           << "\"packages\": " << packages_ << ","
+           << "\"pods\": " << pods_ << ","
+           << "\"primitives\": " << primitives_ << ","
+           << "\"external_package_path\": " << external_package_path_ << ","
+           << "\"schema_name\": \"" << schema_name_ << "\""
            << " }";
 }
 
