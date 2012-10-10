@@ -24,14 +24,15 @@
 #include <boost/algorithm/string.hpp>
 #include <boost/algorithm/string/join.hpp>
 #include <boost/algorithm/string/predicate.hpp>
+#include <boost/graph/depth_first_search.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/generator/backends/cpp/transformers/transformation_error.hpp"
 #include "dogen/generator/backends/cpp/transformers/sml_to_cpp_view_model.hpp"
 
 namespace {
 
-static dogen::utility::log::logger
-lg(dogen::utility::log::logger_factory("sml_to_view_model"));
+using namespace dogen::utility::log;
+static logger lg(logger_factory("sml_to_view_model"));
 
 const std::string empty;
 const std::list<std::string> empty_package_path;
@@ -48,6 +49,145 @@ const std::string id_name("id");
 const std::string version_name("version");
 const std::string uint_name("unsigned int");
 const std::string bool_type("bool");
+
+/**
+ * @brief Flattens all the SML namespace information stored in
+ * qualified name into a list of strings with C++ namespaces.
+ */
+std::list<std::string> join_namespaces(const dogen::sml::qualified_name& name) {
+    std::list<std::string> result(name.external_package_path());
+
+    if (!name.model_name().empty())
+        result.push_back(name.model_name());
+
+    std::list<std::string> package_path(name.package_path());
+    result.insert(result.end(), package_path.begin(), package_path.end());
+    return result;
+}
+
+/**
+ * @brief Returns the identifier to be used for this name on a
+ * database context.
+ */
+std::string database_name(const dogen::sml::qualified_name& name) {
+    std::ostringstream stream;
+
+    if (!name.model_name().empty())
+        stream << name.model_name() << "_";
+
+    for (const auto p : name.package_path())
+        stream << p << "_";
+
+    stream << name.type_name();
+
+    return stream.str();
+}
+
+class sml_dfs_visitor : public boost::default_dfs_visitor {
+private:
+    typedef std::unordered_map<
+    dogen::sml::qualified_name,
+    dogen::generator::backends::cpp::view_models::class_view_model>
+    qname_to_class_view_model_type;
+
+    struct visit_state {
+        visit_state(const std::string& schema_name, bool disable_keys)
+            : schema_name_(schema_name), disable_keys_(disable_keys) { }
+
+        qname_to_class_view_model_type class_view_models_;
+        const std::string schema_name_;
+        const bool disable_keys_;
+    };
+
+public:
+    sml_dfs_visitor& operator=(const sml_dfs_visitor&) = default;
+    sml_dfs_visitor(const sml_dfs_visitor&) = default;
+    sml_dfs_visitor(sml_dfs_visitor&&) = default;
+
+public:
+    sml_dfs_visitor(const std::string& schema_name, bool disable_keys)
+        : state_(new visit_state(schema_name, disable_keys)) { }
+
+public:
+    template<typename Vertex, typename Graph>
+    void discover_vertex(const Vertex& u, const Graph& g) {
+        process_sml_pod(g[u]);
+    }
+
+    template<typename Vertex, typename Graph>
+    void finish_vertex(const Vertex& /*u*/, const Graph& /*g*/) {
+    }
+
+private:
+    /**
+     * @brief Transforms an SML pod into a C++ class view.
+     */
+    void process_sml_pod(const dogen::sml::pod& pod);
+
+public:
+    qname_to_class_view_model_type class_view_models() {
+        return state_->class_view_models_;
+    }
+
+private:
+    std::shared_ptr<visit_state> state_;
+};
+
+void sml_dfs_visitor::process_sml_pod(const dogen::sml::pod& pod) {
+    const dogen::sml::qualified_name name(pod.name());
+    const std::list<std::string> ns(join_namespaces(name));
+
+    using dogen::generator::backends::cpp::view_models::class_view_model;
+    class_view_model cvm(name.type_name());
+    cvm.namespaces(ns);
+    cvm.database_name(database_name(name));
+    cvm.schema_name(state_->schema_name_);
+
+    using dogen::generator::backends::cpp::view_models::property_view_model;
+    std::list<property_view_model> properties_vm;
+    bool has_primitive_properties(false);
+    bool has_boolean_properties(false);
+    for(const auto p : pod.properties()) {
+        std::list<std::string> ns_list(join_namespaces(p.type_name()));
+        ns_list.push_back(p.type_name().type_name());
+
+        using boost::algorithm::join;
+        const std::string ns(join(ns_list, namespace_separator));
+        property_view_model k(p.name());
+        k.type(ns);
+
+        using dogen::sml::meta_types;
+        k.is_primitive(p.type_name().meta_type() == meta_types::primitive);
+        if (k.is_primitive()) {
+            has_primitive_properties = true;
+            if (k.type() == bool_type)
+                has_boolean_properties = true;
+        }
+        properties_vm.push_back(k);
+    }
+
+    if (!state_->disable_keys_) {
+        dogen::sml::qualified_name vn;
+        vn.type_name(versioned_name);
+        vn.model_name(name.model_name());
+        vn.external_package_path(name.external_package_path());
+
+        std::list<std::string> ns_list(join_namespaces(vn));
+        ns_list.push_back(versioned_name);
+
+        using boost::algorithm::join;
+        const std::string ns(join(ns_list, namespace_separator));
+        property_view_model k(versioned_name);
+        k.type(ns);
+        k.is_primitive(false);
+        properties_vm.push_back(k);
+    }
+
+    cvm.properties(properties_vm);
+    cvm.has_primitive_properties(has_primitive_properties);
+    cvm.has_boolean_properties(has_boolean_properties);
+    state_->class_view_models_.insert(std::make_pair(name, cvm));
+}
 
 }
 
@@ -67,10 +207,10 @@ sml_to_cpp_view_model(const cpp_location_manager& location_manager,
     model_(model), disable_facet_includers_(disable_facet_includers),
     disable_keys_(disable_keys),
     dependency_manager_(model, location_manager, disable_keys,
-        use_integrated_io, disable_io) { }
+        use_integrated_io, disable_io),
+    root_vertex_(boost::add_vertex(graph_)) { }
 
 void sml_to_cpp_view_model::log_keys() const {
-    using namespace dogen::utility::log;
     if (disable_keys_)
         BOOST_LOG_SEV(lg, warn) << "Keys are NOT enabled, "
                                 << "NOT generating views for them.";
@@ -80,7 +220,6 @@ void sml_to_cpp_view_model::log_keys() const {
 }
 
 void sml_to_cpp_view_model::log_includers() const {
-    using namespace dogen::utility::log;
     if (disable_facet_includers_)
         BOOST_LOG_SEV(lg, warn) << "Includers are NOT enabled, "
                                 << "NOT generating views for them.";
@@ -92,7 +231,6 @@ void sml_to_cpp_view_model::log_includers() const {
 void sml_to_cpp_view_model::
 log_generating_file(cpp_facet_types facet, cpp_aspect_types aspect,
     cpp_file_types ft, std::string name) const {
-    using namespace dogen::utility::log;
     BOOST_LOG_SEV(lg, debug) << "Generating file view model. "
                              << "facet type: " << facet
                              << " aspect type: " << aspect
@@ -102,41 +240,12 @@ log_generating_file(cpp_facet_types facet, cpp_aspect_types aspect,
 
 
 void sml_to_cpp_view_model::log_started() const {
-    using namespace dogen::utility::log;
     BOOST_LOG_SEV(lg, info) << "Started transforming.";
 }
 
 void sml_to_cpp_view_model::log_finished(unsigned int count) const {
-    using namespace dogen::utility::log;
     BOOST_LOG_SEV(lg, info) << "Finished transforming. "
                             << "Generated files count: " << count;
-}
-
-std::list<std::string> sml_to_cpp_view_model::
-join_namespaces(const sml::qualified_name& name) const {
-    std::list<std::string> result(name.external_package_path());
-
-    if (!name.model_name().empty())
-        result.push_back(name.model_name());
-
-    std::list<std::string> package_path(name.package_path());
-    result.insert(result.end(), package_path.begin(), package_path.end());
-    return result;
-}
-
-std::string sml_to_cpp_view_model::
-database_name(const sml::qualified_name& name) const {
-    std::ostringstream stream;
-
-    if (!name.model_name().empty())
-        stream << name.model_name() << "_";
-
-    for (const auto p : name.package_path())
-        stream << p << "_";
-
-    stream << name.type_name();
-
-    return stream.str();
 }
 
 std::string sml_to_cpp_view_model::
@@ -151,61 +260,6 @@ to_header_guard_name(const boost::filesystem::path& relative_path) const {
         is_first = false;
     }
     return stream.str();
-}
-
-view_models::class_view_model
-sml_to_cpp_view_model::transform_class(const sml::pod& pod) const {
-    const sml::qualified_name name(pod.name());
-    const std::list<std::string> ns(join_namespaces(name));
-    view_models::class_view_model r(name.type_name());
-    r.namespaces(ns);
-    r.database_name(database_name(name));
-    r.schema_name(model_.schema_name());
-
-    std::list<view_models::property_view_model> properties_vm;
-    bool has_primitive_properties(false);
-    bool has_boolean_properties(false);
-    for(const auto p : pod.properties()) {
-        std::list<std::string> ns_list(join_namespaces(p.type_name()));
-        ns_list.push_back(p.type_name().type_name());
-
-        using boost::algorithm::join;
-        const std::string ns(join(ns_list, namespace_separator));
-        view_models::property_view_model k(p.name());
-        k.type(ns);
-        k.is_primitive(p.type_name().meta_type() ==
-            sml::meta_types::primitive);
-        if (k.is_primitive()) {
-            has_primitive_properties = true;
-            if (k.type() == bool_type)
-                has_boolean_properties = true;
-        }
-
-        properties_vm.push_back(k);
-    }
-
-    if (!disable_keys_) {
-        sml::qualified_name vn;
-        vn.type_name(versioned_name);
-        vn.model_name(name.model_name());
-        vn.external_package_path(name.external_package_path());
-
-        std::list<std::string> ns_list(join_namespaces(vn));
-        ns_list.push_back(versioned_name);
-
-        using boost::algorithm::join;
-        const std::string ns(join(ns_list, namespace_separator));
-        view_models::property_view_model k(versioned_name);
-        k.type(ns);
-        k.is_primitive(false);
-
-        properties_vm.push_back(k);
-    }
-
-    r.properties(properties_vm);
-    r.has_primitive_properties(has_primitive_properties);
-    r.has_boolean_properties(has_boolean_properties);
-    return r;
 }
 
 cpp_location_request sml_to_cpp_view_model::
@@ -264,11 +318,28 @@ has_implementation(cpp_facet_types facet_type) const {
 
 std::vector<view_models::file_view_model>
 sml_to_cpp_view_model::transform_pods() {
+    const auto pods(model_.pods());
+    BOOST_LOG_SEV(lg, debug) << "Transforming pods: " << pods.size();
+
+    auto pi([&](const sml::qualified_name& qname) {
+            const auto i(qname_to_vertex_.find(qname));
+            if (i != qname_to_vertex_.end())
+                return i->second;
+
+            const auto vertex(boost::add_vertex(graph_));
+            qname_to_vertex_.insert(std::make_pair(qname, vertex));
+            return vertex;
+        });
+
     for (const auto pair : model_.pods()) {
-        const sml::pod p(pair.second);
-        const sml::qualified_name n(pair.first);
-        qname_to_class_.insert(std::make_pair(n, transform_class(p)));
+        const vertex_descriptor_type vertex(pi(pair.first));
+        graph_[vertex] = pair.second;
+        boost::add_edge(root_vertex_, vertex, graph_);
     }
+
+    sml_dfs_visitor v(model_.schema_name(), disable_keys_);
+    boost::depth_first_search(graph_, boost::visitor(v));
+    qname_to_class_ = v.class_view_models();
 
     std::vector<view_models::file_view_model> r;
     auto lambda([&](cpp_facet_types f, cpp_file_types ft, sml::pod p) {
@@ -290,12 +361,16 @@ sml_to_cpp_view_model::transform_pods() {
                 lambda(ft, cpp_file_types::implementation, p);
         }
     }
+
+    BOOST_LOG_SEV(lg, debug) << "Transformed pods: " << pods.size();
     return r;
 }
 
 view_models::class_view_model
 sml_to_cpp_view_model::create_key_class_view_model(bool is_versioned) const {
     const std::string name(is_versioned ? versioned_name : unversioned_name);
+    BOOST_LOG_SEV(lg, debug) << "Creating key class" << name;
+
     view_models::class_view_model r;
     r.name(name);
 
@@ -320,13 +395,14 @@ sml_to_cpp_view_model::create_key_class_view_model(bool is_versioned) const {
         properties.push_back(lambda(version_name, uint_name));
     r.properties(properties);
     r.has_primitive_properties(true);
+
+    BOOST_LOG_SEV(lg, debug) << "Created key class" << name;
     return r;
 }
 
 view_models::file_view_model sml_to_cpp_view_model::
 create_key_file_view_model(cpp_facet_types ft, cpp_file_types flt,
     cpp_aspect_types at) {
-
     view_models::file_view_model r;
     r.facet_type(ft);
     r.file_type(flt);
@@ -336,6 +412,7 @@ create_key_file_view_model(cpp_facet_types ft, cpp_file_types flt,
     r.class_vm(create_key_class_view_model(is_versioned));
 
     const std::string name(r.class_vm()->name());
+    log_generating_file(ft, at, flt, name);
     r.system_dependencies(dependency_manager_.system(name, ft, flt, at));
     r.user_dependencies(dependency_manager_.user(name, ft, flt, at));
 
@@ -353,8 +430,6 @@ create_key_file_view_model(cpp_facet_types ft, cpp_file_types flt,
 
     const auto rq(location_request_factory(ft, flt, qn));
     r.file_path(location_manager_.absolute_path(rq));
-
-    log_generating_file(ft, at, flt, name);
     return r;
 }
 
@@ -391,6 +466,7 @@ sml_to_cpp_view_model::transform_facet_includers() const {
     for (cpp_facet_types ft : facet_types_) {
         sml::qualified_name qn;
         const auto n(includer_name);
+        log_generating_file(ft, aspect_type, file_type, n);
         qn.type_name(n);
         qn.external_package_path(model_.external_package_path());
         const auto rq(location_request_factory(ft, file_type, qn));
@@ -405,7 +481,6 @@ sml_to_cpp_view_model::transform_facet_includers() const {
         vm.user_dependencies(dependency_manager_.user(n, ft, file_type, a));
         vm.aspect_type(a);
 
-        log_generating_file(ft, aspect_type, file_type, n);
         r.push_back(vm);
     }
     return r;

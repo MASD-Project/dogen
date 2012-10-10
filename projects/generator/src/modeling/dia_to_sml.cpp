@@ -553,7 +553,8 @@ dia_to_sml(const dia::diagram& diagram, const std::string& model_name,
     graph_[root_vertex_] = root;
 }
 
-void dia_to_sml::setup_data_structures(const std::vector<dia::object>& objects) {
+void dia_to_sml::
+setup_data_structures(const std::vector<dia::object>& objects) {
     auto lambda([&](const std::string& id) {
             const auto i(id_to_vertex_.find(id));
             if (i != id_to_vertex_.end())

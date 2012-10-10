@@ -19,6 +19,7 @@
  *
  */
 #include <boost/test/unit_test.hpp>
+#include "dogen/generator/backends/cpp/transformers/sml_to_cpp_view_model.hpp"
 #include "dogen/utility/test_data/dia_sml.hpp"
 #include "dogen/utility/io/list_io.hpp"
 #include "dogen/utility/test/xml_serialization_helper.hpp"
@@ -26,7 +27,6 @@
 #include "dogen/sml/domain/model.hpp"
 #include "dogen/sml/io/model_io.hpp"
 #include "dogen/sml/serialization/model_ser.hpp"
-#include "dogen/generator/backends/cpp/transformers/sml_to_cpp_view_model.hpp"
 #include "dogen/generator/test/mock_settings_factory.hpp"
 
 namespace {

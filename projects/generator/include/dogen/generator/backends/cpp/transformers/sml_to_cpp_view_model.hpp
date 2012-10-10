@@ -31,6 +31,7 @@
 #include <string>
 #include <vector>
 #include <unordered_map>
+#include <boost/graph/adjacency_list.hpp>
 #include "dogen/generator/backends/cpp/cpp_location_manager.hpp"
 #include "dogen/generator/backends/cpp/cpp_dependency_manager.hpp"
 #include "dogen/generator/backends/cpp/cpp_aspect_types.hpp"
@@ -76,19 +77,6 @@ private:
 
 private:
     /**
-     * @brief Flattens all the SML namespace information stored in
-     * qualified name into a list of strings with C++ namespaces.
-     */
-    std::list<std::string>
-    join_namespaces(const sml::qualified_name& name) const;
-
-    /**
-     * @brief Returns the identifier to be used for this name on a
-     * database context.
-     */
-    std::string database_name(const sml::qualified_name& name) const;
-
-    /**
      * @brief Returns true if the facet requires a C++ source file,
      * false otherwise.
      */
@@ -125,11 +113,6 @@ private:
 
 private:
     /**
-     * @brief Transforms an SML pod into a C++ class view.
-     */
-    view_models::class_view_model transform_class(const sml::pod& pod) const;
-
-    /**
      * @brief Transforms a SML pod into a C++ file view.
      */
     view_models::file_view_model
@@ -159,6 +142,22 @@ public:
     std::vector<view_models::file_view_model> transform();
 
 private:
+    // graph of dependencies
+    typedef boost::adjacency_list<
+    boost::vecS, // outer edge list type
+    boost::vecS, // vertex list type
+    boost::directedS, // directed graph
+    sml::pod> graph_type;
+
+    // type of the vertices
+    typedef boost::graph_traits<graph_type>::vertex_descriptor
+    vertex_descriptor_type;
+
+    // map of qname to vertex
+    typedef std::unordered_map<sml::qualified_name, vertex_descriptor_type>
+    qname_to_vertex_type;
+
+private:
     const cpp_location_manager location_manager_;
     const std::set<cpp_facet_types> facet_types_;
     const sml::model model_;
@@ -167,6 +166,9 @@ private:
     cpp_dependency_manager dependency_manager_;
     std::unordered_map<sml::qualified_name, view_models::class_view_model>
     qname_to_class_;
+    graph_type graph_;
+    qname_to_vertex_type qname_to_vertex_;
+    vertex_descriptor_type root_vertex_;
 };
 
 } } } } }
