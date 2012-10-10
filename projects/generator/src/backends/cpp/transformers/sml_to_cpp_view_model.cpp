@@ -25,6 +25,7 @@
 #include <boost/algorithm/string/join.hpp>
 #include <boost/algorithm/string/predicate.hpp>
 #include "dogen/utility/log/logger.hpp"
+#include "dogen/generator/backends/cpp/transformers/transformation_error.hpp"
 #include "dogen/generator/backends/cpp/transformers/sml_to_cpp_view_model.hpp"
 
 namespace {
@@ -39,6 +40,7 @@ const std::string separator("_");
 const std::string extension("HPP");
 const std::string namespace_separator("::");
 
+const std::string view_model_not_found("View model not found for pod: ");
 const std::string includer_name("all");
 const std::string versioned_name("versioned_key");
 const std::string unversioned_name("unversioned_key");
@@ -228,15 +230,18 @@ transform_file(cpp_facet_types ft, cpp_file_types flt, const sml::pod& pod) {
     r.facet_type(ft);
     r.file_type(flt);
     r.aspect_type(cpp_aspect_types::main);
-    r.class_vm(transform_class(pod, ns));
 
-    r.file_path(
-        location_manager_.absolute_path(
-            location_request_factory(ft, flt, name)));
+    const auto i(qname_to_class_.find(name));
+    if (i == qname_to_class_.end())
+        throw transformation_error(view_model_not_found + name.type_name());
+
+    r.class_vm(i->second);
+    auto rq(location_request_factory(ft, flt, name));
+    r.file_path(location_manager_.absolute_path(rq));
 
     if (flt == cpp_file_types::header) {
-        const auto rp(location_manager_.relative_logical_path(
-                location_request_factory(ft, flt, name)));
+        rq = location_request_factory(ft, flt, name);
+        const auto rp(location_manager_.relative_logical_path(rq));
         r.header_guard(to_header_guard_name(rp));
         dependency_manager_.register_header(ft, rp);
     }
@@ -256,10 +261,16 @@ has_implementation(cpp_facet_types facet_type) const {
         facet_type == cpp_facet_types::test_data;
 }
 
-std::vector<view_models::file_view_model> sml_to_cpp_view_model::
-transform_pods() {
-    std::vector<view_models::file_view_model> r;
+std::vector<view_models::file_view_model>
+sml_to_cpp_view_model::transform_pods() {
+    for (const auto pair : model_.pods()) {
+        const sml::pod p(pair.second);
+        const sml::qualified_name n(p.name());
+        const std::list<std::string> ns(join_namespaces(n));
+        qname_to_class_.insert(std::make_pair(n, transform_class(p, ns)));
+    }
 
+    std::vector<view_models::file_view_model> r;
     auto lambda([&](cpp_facet_types f, cpp_file_types ft, sml::pod p) {
             const std::string n(p.name().type_name());
             log_generating_file(f, cpp_aspect_types::main, ft, n);
@@ -267,16 +278,16 @@ transform_pods() {
         });
 
     for (auto pair : model_.pods()) {
-        const sml::pod pod(pair.second);
+        const sml::pod p(pair.second);
 
-        if (!pod.generate())
+        if (!p.generate())
             continue;
 
-        for (cpp_facet_types facet_type : facet_types_) {
-            lambda(facet_type, cpp_file_types::header, pod);
+        for (const auto ft: facet_types_) {
+            lambda(ft, cpp_file_types::header, p);
 
-            if (has_implementation(facet_type))
-                lambda(facet_type, cpp_file_types::implementation, pod);
+            if (has_implementation(ft))
+                lambda(ft, cpp_file_types::implementation, p);
         }
     }
     return r;

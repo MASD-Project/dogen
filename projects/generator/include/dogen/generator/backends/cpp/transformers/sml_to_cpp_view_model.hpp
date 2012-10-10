@@ -30,6 +30,7 @@
 #include <list>
 #include <string>
 #include <vector>
+#include <unordered_map>
 #include "dogen/generator/backends/cpp/cpp_location_manager.hpp"
 #include "dogen/generator/backends/cpp/cpp_dependency_manager.hpp"
 #include "dogen/generator/backends/cpp/cpp_aspect_types.hpp"
@@ -165,6 +166,8 @@ private:
     const bool disable_facet_includers_;
     const bool disable_keys_;
     cpp_dependency_manager dependency_manager_;
+    std::unordered_map<sml::qualified_name, view_models::class_view_model>
+    qname_to_class_;
 };
 
 } } } } }
