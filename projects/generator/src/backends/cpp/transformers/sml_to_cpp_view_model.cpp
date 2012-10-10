@@ -332,8 +332,14 @@ void sml_to_cpp_view_model::setup_qualified_name_to_class_view_model_map() {
 
     for (const auto pair : model_.pods()) {
         const vertex_descriptor_type vertex(pi(pair.first));
-        graph_[vertex] = pair.second;
-        boost::add_edge(root_vertex_, vertex, graph_);
+        const auto pod(pair.second);
+        graph_[vertex] = pod;
+
+        if (pod.parent_name()) {
+            const vertex_descriptor_type parent_vertex(pi(*pod.parent_name()));
+            boost::add_edge(parent_vertex, vertex, graph_);
+        } else
+            boost::add_edge(root_vertex_, vertex, graph_);
     }
 
     sml_dfs_visitor v(model_.schema_name(), disable_keys_);
