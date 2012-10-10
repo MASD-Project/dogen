@@ -153,11 +153,12 @@ to_header_guard_name(const boost::filesystem::path& relative_path) const {
     return stream.str();
 }
 
-view_models::class_view_model sml_to_cpp_view_model::transform_class(
-    const sml::pod& pod, const std::list<std::string>& namespaces) const {
+view_models::class_view_model
+sml_to_cpp_view_model::transform_class(const sml::pod& pod) const {
     const sml::qualified_name name(pod.name());
+    const std::list<std::string> ns(join_namespaces(name));
     view_models::class_view_model r(name.type_name());
-    r.namespaces(namespaces);
+    r.namespaces(ns);
     r.database_name(database_name(name));
     r.schema_name(model_.schema_name());
 
@@ -265,9 +266,8 @@ std::vector<view_models::file_view_model>
 sml_to_cpp_view_model::transform_pods() {
     for (const auto pair : model_.pods()) {
         const sml::pod p(pair.second);
-        const sml::qualified_name n(p.name());
-        const std::list<std::string> ns(join_namespaces(n));
-        qname_to_class_.insert(std::make_pair(n, transform_class(p, ns)));
+        const sml::qualified_name n(pair.first);
+        qname_to_class_.insert(std::make_pair(n, transform_class(p)));
     }
 
     std::vector<view_models::file_view_model> r;

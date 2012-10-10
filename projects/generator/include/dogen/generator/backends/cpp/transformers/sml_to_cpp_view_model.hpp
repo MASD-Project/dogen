@@ -127,8 +127,7 @@ private:
     /**
      * @brief Transforms an SML pod into a C++ class view.
      */
-    view_models::class_view_model transform_class(
-        const sml::pod& pod, const std::list<std::string>& namespaces) const;
+    view_models::class_view_model transform_class(const sml::pod& pod) const;
 
     /**
      * @brief Transforms a SML pod into a C++ file view.
