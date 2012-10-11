@@ -567,3 +567,42 @@
    fun:_ZN5boost10shared_ptrINS_12log_mt_posix10attributes17basic_named_scopeIcE14implementationEED1Ev
    fun:*
 }
+
+{
+   clang 32-bit 4
+   Memcheck:Leak
+   fun:_Znwj
+   fun:_ZN5boost12_GLOBAL__N_125make_external_thread_dataEv
+   fun:_ZN5boost6detail16add_new_tss_nodeEPKvNS_10shared_ptrINS0_20tss_cleanup_functionEEEPv
+   fun:_ZN5boost6detail12set_tss_dataEPKvNS_10shared_ptrINS0_20tss_cleanup_functionEEEPvb
+   fun:_ZN5boost12log_mt_posix10basic_coreIcED1Ev
+   fun:_ZN5boost6detail17sp_counted_impl_pINS_12log_mt_posix10basic_coreIcEEE7disposeEv
+   fun:_ZN5boost10shared_ptrINS_12log_mt_posix10basic_coreIcEEED1Ev
+   fun:*
+}
+
+{
+   clang 32-bit 5
+   Memcheck:Leak
+   fun:_Znwj
+   fun:_ZNSt8_Rb_treeIPKvSt4pairIKS1_N5boost6detail13tss_data_nodeEESt10_Select1stIS7_ESt4lessIS1_ESaIS7_EE10_M_insert_IS2_IS1_S6_EEESt17_Rb_tree_iteratorIS7_EPKSt18_Rb_tree_node_baseSK_OT_
+   fun:_ZN5boost6detail16add_new_tss_nodeEPKvNS_10shared_ptrINS0_20tss_cleanup_functionEEEPv
+   fun:_ZN5boost6detail12set_tss_dataEPKvNS_10shared_ptrINS0_20tss_cleanup_functionEEEPvb
+   fun:_ZN5boost12log_mt_posix10basic_coreIcED1Ev
+   fun:_ZN5boost6detail17sp_counted_impl_pINS_12log_mt_posix10basic_coreIcEEE7disposeEv
+   fun:_ZN5boost10shared_ptrINS_12log_mt_posix10basic_coreIcEEED1Ev
+   fun:*
+}
+
+{
+   clang 32-bit 6
+   Memcheck:Leak
+   fun:_Znwj
+   fun:_ZN5boost12_GLOBAL__N_125make_external_thread_dataEv
+   fun:_ZN5boost6detail16add_new_tss_nodeEPKvNS_10shared_ptrINS0_20tss_cleanup_functionEEEPv
+   fun:_ZN5boost6detail12set_tss_dataEPKvNS_10shared_ptrINS0_20tss_cleanup_functionEEEPvb
+   fun:_ZN5boost12log_mt_posix10basic_coreIcED1Ev
+   fun:_ZN5boost6detail17sp_counted_impl_pINS_12log_mt_posix10basic_coreIcEEE7disposeEv
+   fun:_ZN5boost10shared_ptrINS_12log_mt_posix10basic_coreIcEEED1Ev
+   fun:*
+}
