@@ -35,6 +35,7 @@
 #include "dogen/sml/io/model_io.hpp"
 #include "dogen/dia/serialization/diagram_ser.hpp"
 #include "dogen/sml/serialization/model_ser.hpp"
+#include "dogen/utility/test/exception_checkers.hpp"
 
 namespace  {
 
@@ -92,6 +93,9 @@ dogen::sml::pod mock_pod(unsigned int i) {
 }
 
 }
+
+using dogen::utility::test::contains_checker;
+using dogen::generator::modeling::validation_error;
 
 BOOST_AUTO_TEST_SUITE(modeling)
 
@@ -172,12 +176,8 @@ BOOST_AUTO_TEST_CASE(type_with_incorrect_model_name_throws) {
     m.pods(pods);
     builder.add_target(m);
 
-    using dogen::generator::modeling::validation_error;
-    auto lambda([](const validation_error& e) {
-            const std::string msg(e.what());
-            return boost::contains(msg, incorrect_model);
-        });
-    BOOST_CHECK_EXCEPTION(builder.build(), validation_error, lambda);
+    contains_checker<validation_error> c(incorrect_model);
+    BOOST_CHECK_EXCEPTION(builder.build(), validation_error, c);
 }
 
 BOOST_AUTO_TEST_CASE(type_with_inconsistent_key_value_pair_throws) {
@@ -193,12 +193,8 @@ BOOST_AUTO_TEST_CASE(type_with_inconsistent_key_value_pair_throws) {
     m.pods(pods);
     builder.add_target(m);
 
-    using dogen::generator::modeling::validation_error;
-    auto lambda([](const validation_error& e) {
-            const std::string msg(e.what());
-            return boost::contains(msg, inconsistent_kvp);
-        });
-    BOOST_CHECK_EXCEPTION(builder.build(), validation_error, lambda);
+    contains_checker<validation_error> c(inconsistent_kvp);
+    BOOST_CHECK_EXCEPTION(builder.build(), validation_error, c);
 }
 
 BOOST_AUTO_TEST_CASE(not_adding_a_target_throws) {
@@ -210,12 +206,8 @@ BOOST_AUTO_TEST_CASE(not_adding_a_target_throws) {
     dogen::generator::modeling::sml_builder builder(verbose, schema_name);
     builder.add(m);
 
-    using dogen::generator::modeling::validation_error;
-    auto lambda([](const validation_error& e) {
-            const std::string msg(e.what());
-            return boost::contains(msg, missing_target);
-        });
-    BOOST_CHECK_EXCEPTION(builder.build(), validation_error, lambda);
+    contains_checker<validation_error> c(missing_target);
+    BOOST_CHECK_EXCEPTION(builder.build(), validation_error, c);
 }
 
 BOOST_AUTO_TEST_CASE(adding_more_than_one_target_throws) {
@@ -229,12 +221,8 @@ BOOST_AUTO_TEST_CASE(adding_more_than_one_target_throws) {
     dogen::generator::modeling::sml_builder builder(verbose, schema_name);
     builder.add_target(m0);
 
-    using dogen::generator::modeling::validation_error;
-    auto lambda([](const validation_error& e) {
-            const std::string msg(e.what());
-            return boost::contains(msg, too_many_targets);
-        });
-    BOOST_CHECK_EXCEPTION(builder.add_target(m1), validation_error, lambda);
+    contains_checker<validation_error> c(too_many_targets);
+    BOOST_CHECK_EXCEPTION(builder.add_target(m1), validation_error, c);
 }
 
 BOOST_AUTO_TEST_CASE(pod_with_property_type_in_the_same_model_results_in_successful_build) {
@@ -356,13 +344,8 @@ BOOST_AUTO_TEST_CASE(pod_with_missing_property_type_throws) {
     m0.name(model_name(0));
 
     builder.add_target(m0);
-
-    using dogen::generator::modeling::validation_error;
-    auto lambda([](const validation_error& e) {
-            const std::string msg(e.what());
-            return boost::contains(msg, undefined_type);
-        });
-    BOOST_CHECK_EXCEPTION(builder.build(), validation_error, lambda);
+    contains_checker<validation_error> c(undefined_type);
+    BOOST_CHECK_EXCEPTION(builder.build(), validation_error, c);
 }
 
 BOOST_AUTO_TEST_CASE(pod_with_parent_in_the_same_model_builds_successfully) {
@@ -501,12 +484,8 @@ BOOST_AUTO_TEST_CASE(pod_with_third_degree_parent_missing_within_single_model_th
     m.name(mn);
 
     builder.add_target(m);
-    using dogen::generator::modeling::validation_error;
-    auto lambda([](const validation_error& e) {
-            const std::string msg(e.what());
-            return boost::contains(msg, missing_parent);
-        });
-    BOOST_CHECK_EXCEPTION(builder.build(), validation_error, lambda);
+    contains_checker<validation_error> c(missing_parent);
+    BOOST_CHECK_EXCEPTION(builder.build(), validation_error, c);
 }
 
 BOOST_AUTO_TEST_CASE(pod_with_third_degree_parent_in_different_models_builds_successfully) {
@@ -607,12 +586,8 @@ BOOST_AUTO_TEST_CASE(pod_with_missing_third_degree_parent_in_different_models_th
     builder.add(m1);
     builder.add(m2);
 
-    using dogen::generator::modeling::validation_error;
-    auto lambda([](const validation_error& e) {
-            const std::string msg(e.what());
-            return boost::contains(msg, missing_parent);
-        });
-    BOOST_CHECK_EXCEPTION(builder.build(), validation_error, lambda);
+    contains_checker<validation_error> c(missing_parent);
+    BOOST_CHECK_EXCEPTION(builder.build(), validation_error, c);
 }
 
 BOOST_AUTO_TEST_CASE(pod_incorrect_meta_type_throws) {
@@ -637,12 +612,8 @@ BOOST_AUTO_TEST_CASE(pod_incorrect_meta_type_throws) {
 
     builder.add_target(m);
 
-    using dogen::generator::modeling::validation_error;
-    auto lambda([](const validation_error& e) {
-            const std::string msg(e.what());
-            return boost::contains(msg, incorrect_meta_type);
-        });
-    BOOST_CHECK_EXCEPTION(builder.build(), validation_error, lambda);
+    contains_checker<validation_error> c(incorrect_meta_type);
+    BOOST_CHECK_EXCEPTION(builder.build(), validation_error, c);
 }
 
 BOOST_AUTO_TEST_CASE(setting_builder_schema_name_propagates_to_combined_model) {

@@ -342,7 +342,7 @@ void sml_to_cpp_view_model::setup_qualified_name_to_class_view_model_map() {
     const auto pods(model_.pods());
     BOOST_LOG_SEV(lg, debug) << "Transforming pods: " << pods.size();
 
-    auto pi([&](const sml::qualified_name& qname) {
+    auto pi([&](const sml::qualified_name& qname) -> vertex_descriptor_type {
             const auto i(qname_to_vertex_.find(qname));
             if (i != qname_to_vertex_.end())
                 return i->second;
@@ -412,7 +412,7 @@ sml_to_cpp_view_model::create_key_class_view_model(bool is_versioned) const {
     const std::list<std::string> ns(join_namespaces(qn));
     r.namespaces(ns);
 
-    auto lambda([](std::string name, std::string type) {
+    auto lambda([](std::string name, std::string type) -> property_view_model {
             property_view_model r(name);
             r.type(type);
             r.is_primitive(true);

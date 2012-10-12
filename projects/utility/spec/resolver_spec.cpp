@@ -107,7 +107,7 @@ BOOST_AUTO_TEST_CASE(validating_resolver_throws_for_non_existent_paths) {
     BOOST_CHECK_EXCEPTION(
         validating_resolver::resolve(i),
         file_not_found,
-        [](const file_not_found& e) {
+        [](const file_not_found& e) -> bool {
             const std::string msg(e.what());
             return boost::starts_with(msg, ::file_not_found) &&
                 boost::contains(msg, non_existent_file);

@@ -69,7 +69,8 @@ std::set<path> items_in_directory(path top_dir) {
 
 std::set<std::string> normalise(path base, std::set<path> paths) {
     std::set<std::string> r;
-    boost::copy(paths | boost::adaptors::transformed([&](path p) {
+    boost::copy(paths |
+        boost::adaptors::transformed([&](path p) -> std::string {
                 using boost::replace_first_copy;
                 return replace_first_copy(p.string(), base.string(), empty);
             }),

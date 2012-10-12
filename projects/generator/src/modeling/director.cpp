@@ -157,7 +157,7 @@ boost::optional<sml::model> director::create_model() const {
     builder.add(primitive_model_factory::create());
 
     using sml::model;
-    const auto lambda([&](boost::filesystem::path p, bool is_target) {
+    const auto lambda([&](boost::filesystem::path p, bool is_target) -> model {
             const dia::diagram d(hydrate_diagram(p));
             return model(to_sml(d, p.stem().string(), is_target));
         });

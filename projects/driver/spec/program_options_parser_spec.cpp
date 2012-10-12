@@ -172,7 +172,7 @@ void check_exception(std::vector<std::string> options, std::string expected) {
     auto parser(setup_parser(options, help, version));
 
     using dogen::driver::parser_validation_error;
-    auto lambda([&](const parser_validation_error& e) {
+    auto lambda([&](const parser_validation_error& e) -> bool {
             const std::string msg(e.what());
 
             if (!boost::starts_with(msg, expected)) {

@@ -45,6 +45,7 @@
 #include "dogen/sml/serialization/model_ser.hpp"
 #include "dogen/dia/test/dia_file_asserter.hpp"
 #include "dogen/sml/test/sml_file_asserter.hpp"
+#include "dogen/utility/test/exception_checkers.hpp"
 
 namespace  {
 
@@ -119,6 +120,9 @@ bool check_code_generation(boost::filesystem::path target) {
 }
 
 }
+
+using dogen::utility::test::contains_checker;
+using dogen::generator::generation_failure;
 
 BOOST_AUTO_TEST_SUITE(generator)
 
@@ -196,7 +200,8 @@ BOOST_AUTO_TEST_CASE(disabling_cpp_backend_results_in_no_cpp_output) {
 
 BOOST_AUTO_TEST_CASE(disable_complete_constructor_generates_expected_code) {
     SETUP_TEST_LOG("disable_complete_constructor_generates_expected_code");
-    auto lambda([](dogen::utility::test_data::codegen_tds tds) {
+    using dogen::generator::config::settings;
+    auto lambda([](dogen::utility::test_data::codegen_tds tds) -> settings {
             auto s(default_mock_settings(tds));
             auto cs(s.cpp());
             cs.split_project(false);
@@ -212,7 +217,8 @@ BOOST_AUTO_TEST_CASE(disable_complete_constructor_generates_expected_code) {
 
 BOOST_AUTO_TEST_CASE(disable_facet_folders_generates_expected_code) {
     SETUP_TEST_LOG("disable_facet_folders_generates_expected_code");
-    auto lambda([](dogen::utility::test_data::codegen_tds tds) {
+    using dogen::generator::config::settings;
+    auto lambda([](dogen::utility::test_data::codegen_tds tds) -> settings {
             auto s(default_mock_settings(tds));
             auto cs(s.cpp());
             cs.disable_facet_folders(true);
@@ -247,7 +253,8 @@ BOOST_AUTO_TEST_CASE(disable_model_package_generates_expected_code) {
 
 BOOST_AUTO_TEST_CASE(disable_cmakelists_generates_expected_code) {
     SETUP_TEST_LOG("disable_cmakelists_generates_expected_code");
-    auto lambda([](dogen::utility::test_data::codegen_tds tds) {
+    using dogen::generator::config::settings;
+    auto lambda([](dogen::utility::test_data::codegen_tds tds) -> settings {
             auto s(default_mock_settings(tds));
             auto cs(s.cpp());
             cs.disable_cmakelists(true);
@@ -276,12 +283,8 @@ BOOST_AUTO_TEST_CASE(not_enabling_facet_domain_throws) {
     s.cpp(cs);
 
     dogen::generator::generator cg(s);
-    using dogen::generator::generation_failure;
-    auto lambda([](const generation_failure& e) {
-            const std::string msg(e.what());
-            return boost::contains(msg, domain_facet_must_be_enabled);
-        });
-    BOOST_CHECK_EXCEPTION(cg.generate(), generation_failure, lambda);
+    contains_checker<generation_failure> c(domain_facet_must_be_enabled);
+    BOOST_CHECK_EXCEPTION(cg.generate(), generation_failure, c);
 }
 
 BOOST_AUTO_TEST_CASE(enable_facet_domain_generates_expected_code) {
@@ -385,12 +388,8 @@ BOOST_AUTO_TEST_CASE(enabling_facet_io_and_using_integrated_io_throws) {
     s.cpp(cs);
 
     dogen::generator::generator cg(s);
-    using dogen::generator::generation_failure;
-    auto lambda([](const generation_failure& e) {
-            const std::string msg(e.what());
-            return boost::contains(msg, io_facet_and_integrated_io_error);
-        });
-    BOOST_CHECK_EXCEPTION(cg.generate(), generation_failure, lambda);
+    contains_checker<generation_failure> c(io_facet_and_integrated_io_error);
+    BOOST_CHECK_EXCEPTION(cg.generate(), generation_failure, c);
 }
 
 BOOST_AUTO_TEST_CASE(class_in_a_package_model_generates_expected_code) {
@@ -417,13 +416,8 @@ BOOST_AUTO_TEST_CASE(class_without_name_model_throws) {
 
     auto s(default_mock_settings(tds));
     dogen::generator::generator cg(s);
-
-    using dogen::generator::generation_failure;
-    auto lambda([](const generation_failure& e) {
-            const std::string msg(e.what());
-            return boost::contains(msg, dia_invalid_name);
-        });
-    BOOST_CHECK_EXCEPTION(cg.generate(), generation_failure, lambda);
+    contains_checker<generation_failure> c(dia_invalid_name);
+    BOOST_CHECK_EXCEPTION(cg.generate(), generation_failure, c);
 }
 
 BOOST_AUTO_TEST_CASE(empty_model_generates_expected_code) {
@@ -514,13 +508,8 @@ BOOST_AUTO_TEST_CASE(package_without_name_model_throws) {
 
     auto s(default_mock_settings(tds));
     dogen::generator::generator cg(s);
-
-    using dogen::generator::generation_failure;
-    auto lambda([](const generation_failure& e) {
-            const std::string msg(e.what());
-            return boost::contains(msg, dia_invalid_name);
-        });
-    BOOST_CHECK_EXCEPTION(cg.generate(), generation_failure, lambda);
+    contains_checker<generation_failure> c(dia_invalid_name);
+    BOOST_CHECK_EXCEPTION(cg.generate(), generation_failure, c);
 }
 
 BOOST_AUTO_TEST_CASE(all_primitives_model_generates_expected_code) {

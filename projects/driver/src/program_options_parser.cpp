@@ -536,7 +536,8 @@ transform_troubleshooting_settings(variables_map vm) const {
     r.stop_after_formatting(vm.count(stop_after_formatting_arg));
 
     bool need_debug_dir(false);
-    auto lambda([&](std::string arg) {
+    using utility::serialization::archive_types;
+    auto lambda([&](std::string arg) -> archive_types {
             if (vm.count(arg)) {
                 need_debug_dir = true;
                 using utility::exception::invalid_enum_value;
@@ -546,7 +547,6 @@ transform_troubleshooting_settings(variables_map vm) const {
                     throw parser_validation_error(e.what());
                 }
             }
-            using utility::serialization::archive_types;
             return archive_types::invalid;
         });
 

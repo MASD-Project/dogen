@@ -555,7 +555,7 @@ dia_to_sml(const dia::diagram& diagram, const std::string& model_name,
 
 void dia_to_sml::
 setup_data_structures(const std::vector<dia::object>& objects) {
-    auto lambda([&](const std::string& id) {
+    auto lambda([&](const std::string& id) -> vertex_descriptor_type {
             const auto i(id_to_vertex_.find(id));
             if (i != id_to_vertex_.end())
                 return i->second;

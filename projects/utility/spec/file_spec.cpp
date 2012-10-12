@@ -74,7 +74,7 @@ BOOST_AUTO_TEST_CASE(read_file_content_throws_when_reading_non_existent_file) {
     BOOST_LOG_SEV(lg, info) << "input path: " << i.string();
 
     using dogen::utility::filesystem::file_not_found;
-    auto pred([](const file_not_found& e) {
+    auto pred([](const file_not_found& e) -> bool {
             const std::string msg(e.what());
             return boost::starts_with(msg, ::file_not_found) &&
                 boost::contains(msg, ::non_existent_file);

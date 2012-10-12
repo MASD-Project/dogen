@@ -116,7 +116,7 @@ BOOST_AUTO_TEST_CASE(assert_file_throws_for_non_existent_files) {
     BOOST_LOG_SEV(lg, info) << "b: " << b.string();
 
     using dogen::utility::filesystem::file_not_found;
-    auto f([](const file_not_found& e) {
+    auto f([](const file_not_found& e) -> bool {
             const std::string msg(e.what());
             return boost::starts_with(msg, ::file_not_found) &&
                 boost::contains(msg, ::non_existent_file);
