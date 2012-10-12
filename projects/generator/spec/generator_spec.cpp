@@ -21,6 +21,7 @@
 #include <sstream>
 #define BOOST_TEST_DYN_LINK
 #define BOOST_TEST_MODULE generator_spec
+#include <memory>
 #include <boost/test/included/unit_test.hpp>
 #include <boost/algorithm/string/predicate.hpp>
 #include <boost/algorithm/string/replace.hpp>
@@ -156,8 +157,9 @@ BOOST_AUTO_TEST_CASE(stdout_option_generates_expected_output) {
 
     s.output(fs);
 
-    std::ostringstream stream;
-    auto lambda([&]() -> std::ostream& {return stream;});
+    // use a pointer to avoid -Wreturn-stack-address on clang
+    std::unique_ptr<std::ostringstream> stream(new std::ostringstream());
+    auto lambda([&]() -> std::ostream& {return *stream;});
 
     dogen::generator::generator cg(s, lambda);
     cg.generate();
@@ -166,7 +168,7 @@ BOOST_AUTO_TEST_CASE(stdout_option_generates_expected_output) {
     const auto expected(dia_sml::expected_class_in_a_package_stdout_txt());
     auto actual(dia_sml::actual_class_in_a_package_stdout_txt());
 
-    std::string contents(stream.str());
+    std::string contents(stream->str());
     using dogen::utility::test_data::resolver;
     const auto top_dir(resolver::resolve(boost::filesystem::path()));
     boost::replace_all(contents, top_dir.generic_string(), empty);
