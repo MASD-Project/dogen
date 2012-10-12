@@ -235,7 +235,8 @@ BOOST_AUTO_TEST_CASE(disable_facet_folders_generates_expected_code) {
 
 BOOST_AUTO_TEST_CASE(disable_model_package_generates_expected_code) {
     SETUP_TEST_LOG("disable_model_package_generates_expected_code");
-    auto lambda([](dogen::utility::test_data::codegen_tds tds) {
+    using dogen::generator::config::settings;
+    auto lambda([](dogen::utility::test_data::codegen_tds tds) -> settings {
             auto s(default_mock_settings(tds));
             auto cs(s.cpp());
             cs.project_directory(cs.project_directory() /= extra_folder);
@@ -291,7 +292,8 @@ BOOST_AUTO_TEST_CASE(not_enabling_facet_domain_throws) {
 
 BOOST_AUTO_TEST_CASE(enable_facet_domain_generates_expected_code) {
     SETUP_TEST_LOG("enable_facet_domain_generates_expected_code");
-    auto lambda([](dogen::utility::test_data::codegen_tds tds) {
+    using dogen::generator::config::settings;
+    auto lambda([](dogen::utility::test_data::codegen_tds tds) -> settings {
             auto s(default_mock_settings(tds));
             auto cs(s.cpp());
             using dogen::generator::backends::cpp::cpp_facet_types;
@@ -311,7 +313,8 @@ BOOST_AUTO_TEST_CASE(enable_facet_domain_generates_expected_code) {
 
 BOOST_AUTO_TEST_CASE(enable_facet_hash_generates_expected_code) {
     SETUP_TEST_LOG("enable_facet_hash_generates_expected_code");
-    auto lambda([](dogen::utility::test_data::codegen_tds tds) {
+    using dogen::generator::config::settings;
+    auto lambda([](dogen::utility::test_data::codegen_tds tds) ->  settings {
             auto s(default_mock_settings(tds));
             auto cs(s.cpp());
             using dogen::generator::backends::cpp::cpp_facet_types;
@@ -331,7 +334,8 @@ BOOST_AUTO_TEST_CASE(enable_facet_hash_generates_expected_code) {
 
 BOOST_AUTO_TEST_CASE(enable_facet_serialization_generates_expected_code) {
     SETUP_TEST_LOG("enable_facet_serialization_generates_expected_code");
-    auto lambda([](dogen::utility::test_data::codegen_tds tds) {
+    using dogen::generator::config::settings;
+    auto lambda([](dogen::utility::test_data::codegen_tds tds) -> settings {
             auto s(default_mock_settings(tds));
             auto cs(s.cpp());
             using dogen::generator::backends::cpp::cpp_facet_types;
@@ -352,7 +356,8 @@ BOOST_AUTO_TEST_CASE(enable_facet_serialization_generates_expected_code) {
 
 BOOST_AUTO_TEST_CASE(enable_facet_io_generates_expected_code) {
     SETUP_TEST_LOG("enable_facet_io_generates_expected_code");
-    auto lambda([](dogen::utility::test_data::codegen_tds tds) {
+    using dogen::generator::config::settings;
+    auto lambda([](dogen::utility::test_data::codegen_tds tds) -> settings {
             auto s(default_mock_settings(tds));
             auto cs(s.cpp());
             using dogen::generator::backends::cpp::cpp_facet_types;
@@ -527,7 +532,8 @@ BOOST_AUTO_TEST_CASE(split_project_model_generates_expected_code) {
 
     // note that we keep the project name just to make the life easier
     // for the rebaselining scripts.
-    auto lambda([](dogen::utility::test_data::codegen_tds tds) {
+    using dogen::generator::config::settings;
+    auto lambda([](dogen::utility::test_data::codegen_tds tds) -> settings {
             using dogen::generator::test::mock_settings_factory;
             return mock_settings_factory::build_settings(
                 tds.target(),
@@ -562,8 +568,8 @@ BOOST_AUTO_TEST_CASE(housekeeping_is_not_triggered_when_we_are_not_generating_fi
     os.output_to_stdout(true);
     os.output_to_file(false);
     s.output(os);
-    std::ostringstream stream;
-    auto lambda([&]() -> std::ostream& {return stream;});
+    std::unique_ptr<std::ostringstream> stream(new std::ostringstream());
+    auto lambda([&]() -> std::ostream& {return *stream;});
     dogen::generator::generator cg3(s, lambda);
     BOOST_CHECK(!cg3.housekeeping_required());
 
