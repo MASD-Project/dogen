@@ -606,3 +606,11 @@
    fun:_ZN5boost10shared_ptrINS_12log_mt_posix10basic_coreIcEEED1Ev
    fun:*
 }
+
+{
+   clang 32-bit 7 R_gzopen suppression
+   Memcheck:Cond
+   fun:inflateReset2
+   fun:inflateInit2_
+   fun:*
+}
