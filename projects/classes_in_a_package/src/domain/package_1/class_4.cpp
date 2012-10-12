@@ -43,6 +43,10 @@ void class_4::swap(class_4& other) {
     std::swap(versioned_key_, other.versioned_key_);
 }
 
+bool class_4::operator==(const class_4& rhs) const {
+    return versioned_key_ == rhs.versioned_key_;
+}
+
 class_4& class_4::operator=(class_4 other) {
     std::swap(*this, other);
     return *this;

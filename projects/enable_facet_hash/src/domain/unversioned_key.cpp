@@ -35,6 +35,10 @@ void unversioned_key::swap(unversioned_key& other) {
     std::swap(id_, other.id_);
 }
 
+bool unversioned_key::operator==(const unversioned_key& rhs) const {
+    return id_ == rhs.id_;
+}
+
 unversioned_key& unversioned_key::operator=(unversioned_key other) {
     std::swap(*this, other);
     return *this;

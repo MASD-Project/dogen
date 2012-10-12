@@ -161,34 +161,7 @@ void cpp_class_declaration::equality(class_view_model vm) {
     else
         stream_ << "rhs";
 
-    stream_ << ") const ";
-
-    utility_.open_scope();
-    {
-        cpp_positive_indenter_scope s(indenter_);
-        if (vm.properties().empty())
-            stream_ << indenter_ << "return true";
-        else {
-            stream_ << indenter_ << "return ";
-            bool is_first(true);
-            {
-                cpp_positive_indenter_scope s(indenter_);
-                for (const auto p : vm.properties()) {
-                    if (!is_first)
-                        stream_ << " &&" << std::endl << indenter_;
-                    {
-                        cpp_positive_indenter_scope s(indenter_);
-                        stream_ << utility_.as_member_variable(p.name())
-                                << " == rhs."
-                                << utility_.as_member_variable(p.name());
-                    }
-                    is_first = false;
-                }
-            }
-        }
-        stream_ << ";" << std::endl;
-    }
-    utility_.close_scope();
+    stream_ << ") const;" << std::endl;
     utility_.blank_line();
 
     stream_ << indenter_ << "bool operator!=(const " << vm.name()

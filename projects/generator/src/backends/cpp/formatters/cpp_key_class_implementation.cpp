@@ -71,6 +71,7 @@ void cpp_key_class_implementation::format(class_view_model vm) {
         to_stream(vm);
     to_unversioned_key(vm);
     swap(vm);
+    equals_operator(vm);
     assignment_operator(vm);
 }
 

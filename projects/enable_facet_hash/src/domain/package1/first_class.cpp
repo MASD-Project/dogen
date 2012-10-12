@@ -44,6 +44,12 @@ void first_class::swap(first_class& other) {
     std::swap(versioned_key_, other.versioned_key_);
 }
 
+bool first_class::operator==(const first_class& rhs) const {
+    return public_attribute_ == rhs.public_attribute_ &&
+        private_attribute_ == rhs.private_attribute_ &&
+        versioned_key_ == rhs.versioned_key_;
+}
+
 first_class& first_class::operator=(first_class other) {
     std::swap(*this, other);
     return *this;

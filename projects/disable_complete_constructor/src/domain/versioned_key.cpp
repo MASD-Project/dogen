@@ -50,6 +50,11 @@ void versioned_key::swap(versioned_key& other) {
     std::swap(version_, other.version_);
 }
 
+bool versioned_key::operator==(const versioned_key& rhs) const {
+    return id_ == rhs.id_ &&
+        version_ == rhs.version_;
+}
+
 versioned_key& versioned_key::operator=(versioned_key other) {
     std::swap(*this, other);
     return *this;

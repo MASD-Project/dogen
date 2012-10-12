@@ -42,6 +42,10 @@ void child::swap(child& other) {
     std::swap(versioned_key_, other.versioned_key_);
 }
 
+bool child::operator==(const child& rhs) const {
+    return versioned_key_ == rhs.versioned_key_;
+}
+
 child& child::operator=(child other) {
     std::swap(*this, other);
     return *this;

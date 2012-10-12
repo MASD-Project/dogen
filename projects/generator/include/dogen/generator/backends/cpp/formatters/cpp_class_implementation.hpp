@@ -57,6 +57,7 @@ protected:
     void complete_constructor(class_view_model vm);
     void to_stream(class_view_model vm);
     void swap(class_view_model vm);
+    void equals_operator(class_view_model vm);
     void assignment_operator(class_view_model vm);
 
 public:

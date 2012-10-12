@@ -72,10 +72,7 @@ public:
     }
 
 public:
-    bool operator==(const versioned_key& rhs) const {
-        return id_ == rhs.id_ &&
-            version_ == rhs.version_;
-    }
+    bool operator==(const versioned_key& rhs) const;
 
     bool operator!=(const versioned_key rhs) const {
         return !this->operator==(rhs);

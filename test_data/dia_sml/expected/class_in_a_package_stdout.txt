@@ -204,11 +204,7 @@ public:
     }
 
 public:
-    bool operator==(const first_class& rhs) const {
-        return public_attribute_ == rhs.public_attribute_ &&
-            private_attribute_ == rhs.private_attribute_ &&
-            versioned_key_ == rhs.versioned_key_;
-    }
+    bool operator==(const first_class& rhs) const;
 
     bool operator!=(const first_class rhs) const {
         return !this->operator==(rhs);
@@ -303,9 +299,7 @@ public:
     }
 
 public:
-    bool operator==(const unversioned_key& rhs) const {
-        return id_ == rhs.id_;
-    }
+    bool operator==(const unversioned_key& rhs) const;
 
     bool operator!=(const unversioned_key rhs) const {
         return !this->operator==(rhs);
@@ -412,10 +406,7 @@ public:
     }
 
 public:
-    bool operator==(const versioned_key& rhs) const {
-        return id_ == rhs.id_ &&
-            version_ == rhs.version_;
-    }
+    bool operator==(const versioned_key& rhs) const;
 
     bool operator!=(const versioned_key rhs) const {
         return !this->operator==(rhs);
@@ -1345,6 +1336,12 @@ void first_class::swap(first_class& other) {
     std::swap(versioned_key_, other.versioned_key_);
 }
 
+bool first_class::operator==(const first_class& rhs) const {
+    return public_attribute_ == rhs.public_attribute_ &&
+        private_attribute_ == rhs.private_attribute_ &&
+        versioned_key_ == rhs.versioned_key_;
+}
+
 first_class& first_class::operator=(first_class other) {
     std::swap(*this, other);
     return *this;
@@ -1396,6 +1393,10 @@ void unversioned_key::to_stream(std::ostream& stream) const {
 
 void unversioned_key::swap(unversioned_key& other) {
     std::swap(id_, other.id_);
+}
+
+bool unversioned_key::operator==(const unversioned_key& rhs) const {
+    return id_ == rhs.id_;
 }
 
 unversioned_key& unversioned_key::operator=(unversioned_key other) {
@@ -1459,6 +1460,11 @@ unversioned_key versioned_key::to_unversioned() const {
 void versioned_key::swap(versioned_key& other) {
     std::swap(id_, other.id_);
     std::swap(version_, other.version_);
+}
+
+bool versioned_key::operator==(const versioned_key& rhs) const {
+    return id_ == rhs.id_ &&
+        version_ == rhs.version_;
 }
 
 versioned_key& versioned_key::operator=(versioned_key other) {

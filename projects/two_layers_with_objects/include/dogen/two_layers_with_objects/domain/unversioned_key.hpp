@@ -61,9 +61,7 @@ public:
     }
 
 public:
-    bool operator==(const unversioned_key& rhs) const {
-        return id_ == rhs.id_;
-    }
+    bool operator==(const unversioned_key& rhs) const;
 
     bool operator!=(const unversioned_key rhs) const {
         return !this->operator==(rhs);

@@ -60,9 +60,7 @@ public:
     }
 
 public:
-    bool operator==(const parent& rhs) const {
-        return versioned_key_ == rhs.versioned_key_;
-    }
+    bool operator==(const parent& rhs) const;
 
     bool operator!=(const parent rhs) const {
         return !this->operator==(rhs);

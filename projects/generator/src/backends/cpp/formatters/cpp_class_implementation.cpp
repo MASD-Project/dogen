@@ -179,6 +179,46 @@ void cpp_class_implementation::swap(view_models::class_view_model vm) {
     utility_.blank_line();
 }
 
+void cpp_class_implementation::equals_operator(class_view_model vm) {
+    stream_ << indenter_ << "bool " << vm.name() << "::operator==(const "
+            << vm.name() <<  "& ";
+
+    if (vm.properties().empty())
+        stream_ << "/*rhs*/";
+    else
+        stream_ << "rhs";
+
+    stream_ << ") const ";
+
+    utility_.open_scope();
+    {
+        cpp_positive_indenter_scope s(indenter_);
+        if (vm.properties().empty())
+            stream_ << indenter_ << "return true";
+        else {
+            stream_ << indenter_ << "return ";
+            bool is_first(true);
+            {
+                cpp_positive_indenter_scope s(indenter_);
+                for (const auto p : vm.properties()) {
+                    if (!is_first)
+                        stream_ << " &&" << std::endl << indenter_;
+                    {
+                        cpp_positive_indenter_scope s(indenter_);
+                        stream_ << utility_.as_member_variable(p.name())
+                                << " == rhs."
+                                << utility_.as_member_variable(p.name());
+                    }
+                    is_first = false;
+                }
+            }
+        }
+        stream_ << ";" << std::endl;
+    }
+    utility_.close_scope();
+    utility_.blank_line();
+}
+
 void cpp_class_implementation::
 assignment_operator(view_models::class_view_model vm) {
     if (vm.properties().empty())

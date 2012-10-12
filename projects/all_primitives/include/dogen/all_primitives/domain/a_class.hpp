@@ -162,20 +162,7 @@ public:
     }
 
 public:
-    bool operator==(const a_class& rhs) const {
-        return bool_property_ == rhs.bool_property_ &&
-            char_property_ == rhs.char_property_ &&
-            uchar_property_ == rhs.uchar_property_ &&
-            int_property_ == rhs.int_property_ &&
-            uint_property_ == rhs.uint_property_ &&
-            long_property_ == rhs.long_property_ &&
-            ulong_property_ == rhs.ulong_property_ &&
-            long_long_property_ == rhs.long_long_property_ &&
-            ulong_long_property_ == rhs.ulong_long_property_ &&
-            short_property_ == rhs.short_property_ &&
-            ushort_property_ == rhs.ushort_property_ &&
-            versioned_key_ == rhs.versioned_key_;
-    }
+    bool operator==(const a_class& rhs) const;
 
     bool operator!=(const a_class rhs) const {
         return !this->operator==(rhs);

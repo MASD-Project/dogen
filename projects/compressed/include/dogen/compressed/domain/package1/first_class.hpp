@@ -82,11 +82,7 @@ public:
     }
 
 public:
-    bool operator==(const first_class& rhs) const {
-        return public_attribute_ == rhs.public_attribute_ &&
-            private_attribute_ == rhs.private_attribute_ &&
-            versioned_key_ == rhs.versioned_key_;
-    }
+    bool operator==(const first_class& rhs) const;
 
     bool operator!=(const first_class rhs) const {
         return !this->operator==(rhs);
