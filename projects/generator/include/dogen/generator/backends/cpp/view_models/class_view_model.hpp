@@ -47,12 +47,14 @@ public:
 
 public:
     class_view_model() : has_primitive_properties_(false),
-                         has_boolean_properties_(false) {}
+                         has_boolean_properties_(false),
+                         is_parent_(false) { }
 
     explicit class_view_model(std::string name)
         : name_(name),
           has_primitive_properties_(false),
-          has_boolean_properties_(false) { }
+          has_boolean_properties_(false),
+          is_parent_(false) { }
 
 public:
     /**
@@ -140,6 +142,16 @@ public:
     }
     /**@}*/
 
+    /**
+     * @brief True if this class is the parent of one or more classes,
+     * false otherwise.
+     */
+    /**@{*/
+    bool is_parent() const { return is_parent_; }
+    void is_parent(bool value) { is_parent_ = value; }
+    /**@}*/
+
+
 private:
     std::list<std::string> namespaces_;
     std::list<property_view_model> properties_;
@@ -149,6 +161,7 @@ private:
     bool has_boolean_properties_;
     std::string database_name_;
     std::string schema_name_;
+    bool is_parent_;
 };
 
 } } } } }

@@ -52,6 +52,41 @@ const std::string property_1("public_attribute");
 const std::string property_2("private_attribute");
 const std::string property_type("int");
 
+const std::string domain("domain");
+const std::string versioned_key("versioned_key");
+const std::string pod_with_parent_model_name("pod_with_parent");
+const std::string pod_parent_name("parent");
+const std::string pod_child_name("child");
+const boost::filesystem::path project_dir("project directory");
+const boost::filesystem::path src_dir("source directory");
+const boost::filesystem::path include_dir("include directory");
+
+dogen::sml::pod
+mock_pod(const std::string& type_name, const std::string& model_name) {
+    dogen::sml::qualified_name qn;
+    qn.model_name(model_name);
+    qn.type_name(type_name);
+    qn.meta_type(dogen::sml::meta_types::pod);
+
+    dogen::sml::pod r;
+    r.name(qn);
+    r.generate(true);
+    return r;
+}
+
+dogen::sml::model pod_with_parent_model() {
+    const auto p(mock_pod(pod_parent_name, pod_with_parent_model_name));
+    auto c(mock_pod(pod_child_name, pod_with_parent_model_name));
+    c.parent_name(p.name());
+    const std::unordered_map<dogen::sml::qualified_name, dogen::sml::pod> pods {
+        { p.name(), p }, { c.name(), c }
+    };
+    dogen::sml::model r;
+    r.name(pod_with_parent_model_name);
+    r.pods(pods);
+    return r;
+}
+
 }
 
 BOOST_AUTO_TEST_SUITE(cpp_backend)
@@ -132,6 +167,7 @@ BOOST_AUTO_TEST_CASE(view_model_transformer_correctly_transforms_domain_files) {
         const auto class_vm(*o);
         BOOST_LOG_SEV(lg, debug) << "class name: " << class_vm.name();
         BOOST_CHECK(class_vm.name() == class_name);
+        BOOST_CHECK(!class_vm.is_parent());
 
         const auto ns(class_vm.namespaces());
         BOOST_LOG_SEV(lg, debug) << "namespaces: " << ns;
@@ -210,12 +246,13 @@ BOOST_AUTO_TEST_CASE(disabling_keys_results_in_no_keys) {
     std::set<cpp_facet_types> ft;
     ft.insert(cpp_facet_types::domain);
 
-    using dogen::generator::backends::cpp::view_models::sml_to_cpp_view_model;
     bool no_includers(false);
     bool no_keys(true);
     const bool no_iio(false);
     const bool disable_io(false);
-    sml_to_cpp_view_model t(lm, ft, input, no_includers, no_keys, no_iio, disable_io);
+    using dogen::generator::backends::cpp::view_models::sml_to_cpp_view_model;
+    sml_to_cpp_view_model t(lm, ft, input, no_includers, no_keys, no_iio,
+        disable_io);
 
     using namespace dogen::generator::backends::cpp::view_models;
     std::vector<file_view_model> actual(t.transform());
@@ -225,6 +262,58 @@ BOOST_AUTO_TEST_CASE(disabling_keys_results_in_no_keys) {
     for (const auto f : actual) {
         BOOST_CHECK(f.aspect_type() != cpp_aspect_types::versioned_key);
         BOOST_CHECK(f.aspect_type() != cpp_aspect_types::unversioned_key);
+    }
+}
+
+BOOST_AUTO_TEST_CASE(is_parent_flag_is_correctly_set_on_view_models) {
+    SETUP_TEST_LOG_SOURCE("is_parent_flag_is_correctly_set_on_view_models");
+    const auto m(pod_with_parent_model());
+    const auto pods(m.pods());
+    BOOST_CHECK(pods.size() == 2);
+    const auto pod(pods.begin()->second);
+
+    using dogen::generator::test::mock_settings_factory;
+    const auto s(mock_settings_factory::build_cpp_settings(empty, empty));
+
+    using namespace dogen::generator::backends::cpp;
+    cpp_location_manager lm(m.name(), s);
+
+    bool no_includers(true);
+    bool no_keys(true);
+    bool integrated_io(false);
+    bool disable_io(false);
+
+    using dogen::generator::backends::cpp::cpp_dependency_manager;
+    cpp_dependency_manager dm(m, lm, no_keys, integrated_io, disable_io);
+
+    using dogen::generator::backends::cpp::cpp_facet_types;
+    std::set<cpp_facet_types> ft;
+    ft.insert(cpp_facet_types::domain);
+
+    using dogen::generator::backends::cpp::view_models::sml_to_cpp_view_model;
+    sml_to_cpp_view_model t(lm, ft, m, no_includers, no_keys, integrated_io,
+        disable_io);
+
+    using namespace dogen::generator::backends::cpp::view_models;
+    std::vector<file_view_model> actual(t.transform());
+
+    // 2 headers and 2 implementation files
+    BOOST_CHECK(actual.size() == 4);
+    BOOST_LOG_SEV(lg, debug) << "files generated: " << actual.size();
+    using dogen::generator::backends::cpp::cpp_aspect_types;
+    for (const auto fvm : actual) {
+        BOOST_LOG_SEV(lg, debug) << "file: " << fvm.file_path();
+        BOOST_CHECK(fvm.aspect_type() == cpp_aspect_types::main);
+        const auto o(fvm.class_vm());
+        BOOST_REQUIRE(o);
+
+        const auto cvm(*o);
+        if (cvm.name() == pod_parent_name)
+            BOOST_CHECK(cvm.is_parent());
+        else {
+            BOOST_CHECK(cvm.name() == pod_child_name);
+            BOOST_CHECK(!cvm.is_parent());
+        }
     }
 }
 
