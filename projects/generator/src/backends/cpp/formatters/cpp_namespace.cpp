@@ -31,7 +31,7 @@ namespace formatters {
 cpp_namespace::cpp_namespace(std::ostream& stream)
     : stream_(stream) { }
 
-void cpp_namespace::format_start(std::string name) {
+void cpp_namespace::format_start(const std::string& name) {
     stream_ << "namespace";
     if (name.empty())
         stream_ << " {";

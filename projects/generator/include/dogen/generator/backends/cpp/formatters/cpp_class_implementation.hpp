@@ -53,15 +53,15 @@ public:
     explicit cpp_class_implementation(std::ostream& stream);
 
 protected:
-    void default_constructor(class_view_model vm);
-    void complete_constructor(class_view_model vm);
-    void to_stream(class_view_model vm);
-    void swap(class_view_model vm);
-    void equals_operator(class_view_model vm);
-    void assignment_operator(class_view_model vm);
+    void default_constructor(const class_view_model& vm);
+    void complete_constructor(const class_view_model& vm);
+    void to_stream(const class_view_model& vm);
+    void swap(const class_view_model& vm);
+    void equals_operator(const class_view_model& vm);
+    void assignment_operator(const class_view_model& vm);
 
 public:
-    virtual void format(class_view_model vm) = 0;
+    virtual void format(const class_view_model& vm) = 0;
 
 protected:
     std::ostream& stream_;

@@ -40,6 +40,10 @@ namespace formatters {
 
 class domain_header : public file_formatter {
 public:
+    typedef view_models::class_view_model class_view_model;
+    typedef view_models::file_view_model file_view_model;
+
+public:
     domain_header() = delete;
     domain_header(const domain_header&) = default;
     domain_header(domain_header&&) = default;
@@ -57,13 +61,13 @@ public:
         bool disable_io);
 
 private:
-    void inserter_operator(view_models::class_view_model vm);
-    void swap_method(view_models::class_view_model vm);
+    void inserter_operator(const class_view_model& vm);
+    void swap_method(const class_view_model& vm);
     void class_declaration(cpp_aspect_types aspect_type,
-        view_models::class_view_model vm);
+        const class_view_model& vm);
 
 public:
-    virtual void format(view_models::file_view_model vm) override;
+    virtual void format(const file_view_model& vm) override;
 
 private:
     std::ostream& stream_;

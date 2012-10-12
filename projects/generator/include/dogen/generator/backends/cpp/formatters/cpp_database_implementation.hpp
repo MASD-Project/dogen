@@ -62,16 +62,16 @@ private:
         unsigned int number_of_parameters);
     std::string
     make_identifier(std::string type, std::string name, std::string operation);
-    void anonymous_namespace(class_view_model vm);
-    void format_sql(class_view_model vm);
-    void load_internal(class_view_model vm);
-    void erase_internal(class_view_model vm);
-    void load(class_view_model vm);
-    void save(class_view_model vm);
-    void erase(class_view_model vm);
+    void anonymous_namespace(const class_view_model& vm);
+    void format_sql(const class_view_model& vm);
+    void load_internal(const class_view_model& vm);
+    void erase_internal(const class_view_model& vm);
+    void load(const class_view_model& vm);
+    void save(const class_view_model& vm);
+    void erase(const class_view_model& vm);
 
 public:
-    virtual void format(file_view_model vm) override;
+    virtual void format(const file_view_model& vm) override;
 
 private:
     std::ostream& stream_;

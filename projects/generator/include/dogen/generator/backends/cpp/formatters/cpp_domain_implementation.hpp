@@ -40,6 +40,10 @@ namespace formatters {
 
 class domain_implementation : public file_formatter {
 public:
+    typedef view_models::class_view_model class_view_model;
+    typedef view_models::file_view_model file_view_model;
+
+public:
     domain_implementation() = delete;
     domain_implementation(const domain_implementation&) = default;
     domain_implementation(domain_implementation&&) = default;
@@ -53,9 +57,9 @@ public:
     virtual ~domain_implementation() noexcept {}
 
 private:
-    void inserter_operator(view_models::class_view_model vm);
+    void inserter_operator(const class_view_model& vm);
     void class_implementation(cpp_aspect_types aspect_type,
-        view_models::class_view_model vm);
+        const class_view_model& vm);
 
 public:
     static file_formatter::shared_ptr create(std::ostream& stream,
@@ -63,7 +67,7 @@ public:
         bool disable_io);
 
 public:
-    virtual void format(view_models::file_view_model vm) override;
+    virtual void format(const file_view_model& vm) override;
 
 private:
     std::ostream& stream_;

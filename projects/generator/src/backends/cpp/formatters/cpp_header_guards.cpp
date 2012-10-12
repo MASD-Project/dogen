@@ -45,7 +45,7 @@ namespace formatters {
 header_guards::header_guards(std::ostream& stream)
     : stream_(stream) { }
 
-void header_guards::format_start(std::string guard_name) {
+void header_guards::format_start(const std::string& guard_name) {
     stream_ << ifndef << guard_name;
     stream_ << std::endl << define << guard_name;
 

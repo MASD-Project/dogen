@@ -40,6 +40,10 @@ namespace formatters {
 
 class hash_header : public file_formatter {
 public:
+    typedef view_models::class_view_model class_view_model;
+    typedef view_models::file_view_model file_view_model;
+
+public:
     hash_header() = delete;
     hash_header(const hash_header&) = default;
     hash_header(hash_header&&) = default;
@@ -53,11 +57,11 @@ public:
     static file_formatter::shared_ptr create(std::ostream& stream);
 
 private:
-    void operator_bracket_method(view_models::class_view_model vm);
-    void hash_class(view_models::class_view_model vm);
+    void operator_bracket_method(const class_view_model& vm);
+    void hash_class(const class_view_model& vm);
 
 public:
-    virtual void format(view_models::file_view_model vm) override;
+    virtual void format(const file_view_model& vm) override;
 
 private:
     std::ostream& stream_;

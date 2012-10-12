@@ -64,15 +64,15 @@ void cpp_utility::blank_line(unsigned int how_many) {
         stream_ << std::endl;
 }
 
-std::string cpp_utility::as_member_variable(std::string property_name) const {
+std::string cpp_utility::as_member_variable(const std::string& property_name) const {
     return property_name + member_variable_postfix;
 }
 
-std::string cpp_utility::quote(std::string original) const {
+std::string cpp_utility::quote(const std::string& original) const {
     return ::quote + original + ::quote;
 }
 
-std::string cpp_utility::quote_escaped(std::string original) const {
+std::string cpp_utility::quote_escaped(const std::string& original) const {
     return ::quote_escaped + original + ::quote_escaped;
 }
 

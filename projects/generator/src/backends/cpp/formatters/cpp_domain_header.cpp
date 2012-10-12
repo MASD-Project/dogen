@@ -68,7 +68,7 @@ create(std::ostream& stream, bool disable_complete_constructor,
             disable_complete_constructor, use_integrated_io, disable_io));
 }
 
-void domain_header::inserter_operator(view_models::class_view_model vm) {
+void domain_header::inserter_operator(const class_view_model& vm) {
     if (!use_integrated_io_ || disable_io_)
         return;
 
@@ -77,7 +77,7 @@ void domain_header::inserter_operator(view_models::class_view_model vm) {
     utility_.blank_line();
 }
 
-void domain_header::swap_method(view_models::class_view_model vm) {
+void domain_header::swap_method(const class_view_model& vm) {
     if (vm.properties().empty())
         return;
 
@@ -106,7 +106,7 @@ void domain_header::swap_method(view_models::class_view_model vm) {
 }
 
 void domain_header::class_declaration(cpp_aspect_types aspect_type,
-    view_models::class_view_model vm) {
+    const class_view_model& vm) {
 
     if (aspect_type== cpp_aspect_types::main) {
         cpp_domain_class_declaration
@@ -129,7 +129,7 @@ void domain_header::class_declaration(cpp_aspect_types aspect_type,
     throw invalid_enum_value(invalid_facet_types_enum);
 }
 
-void domain_header::format(view_models::file_view_model vm) {
+void domain_header::format(const file_view_model& vm) {
     boost::optional<view_models::class_view_model> o(vm.class_vm());
     if (!o)
         throw generation_failure(missing_class_view_model);

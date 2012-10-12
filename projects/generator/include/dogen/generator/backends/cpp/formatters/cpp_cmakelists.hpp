@@ -38,6 +38,9 @@ namespace formatters {
 
 class cpp_cmakelists {
 public:
+    typedef view_models::cmakelists_view_model cmakelists_view_model;
+
+public:
     cpp_cmakelists() = delete;
     cpp_cmakelists(const cpp_cmakelists&) = default;
     ~cpp_cmakelists() noexcept = default;
@@ -48,7 +51,7 @@ public:
     explicit cpp_cmakelists(std::ostream& stream);
 
 public:
-    void format(view_models::cmakelists_view_model vm);
+    void format(const cmakelists_view_model& vm);
 
 private:
     std::ostream& stream_;

@@ -50,7 +50,7 @@ public:
     explicit cpp_qualified_name(std::ostream& stream);
 
 public:
-    void format(class_view_model vm);
+    void format(const class_view_model& vm);
 
 private:
     std::ostream& stream_;

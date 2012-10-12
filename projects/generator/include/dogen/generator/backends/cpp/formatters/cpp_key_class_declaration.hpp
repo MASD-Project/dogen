@@ -52,11 +52,11 @@ public:
     virtual ~cpp_key_class_declaration() noexcept {}
 
 private:
-    void hand_crafted_constructors(class_view_model vm);
+    void hand_crafted_constructors(const class_view_model& vm);
     void to_unversioned_key();
 
 public:
-    virtual void format(class_view_model vm) override;
+    virtual void format(const class_view_model& vm) override;
 
 private:
     const bool disable_complete_constructor_;

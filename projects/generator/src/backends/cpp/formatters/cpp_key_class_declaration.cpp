@@ -35,7 +35,7 @@ cpp_key_class_declaration(std::ostream& stream,
       is_versioned_(is_versioned), disable_io_(disable_io) {}
 
 void cpp_key_class_declaration::
-hand_crafted_constructors(class_view_model vm) {
+hand_crafted_constructors(const class_view_model& vm) {
     default_constructor(vm);
     if (!disable_complete_constructor_)
         complete_constructor(vm);
@@ -51,7 +51,7 @@ void cpp_key_class_declaration::to_unversioned_key() {
     utility_.blank_line();
 }
 
-void cpp_key_class_declaration::format(class_view_model vm) {
+void cpp_key_class_declaration::format(const class_view_model& vm) {
     open_class(vm);
     {
         cpp_positive_indenter_scope s(indenter_);

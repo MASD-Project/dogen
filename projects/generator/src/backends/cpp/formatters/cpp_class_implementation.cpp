@@ -47,7 +47,7 @@ namespace formatters {
 cpp_class_implementation::cpp_class_implementation(std::ostream& stream)
     : stream_(stream), utility_(stream_, indenter_) { }
 
-void cpp_class_implementation::default_constructor(class_view_model vm) {
+void cpp_class_implementation::default_constructor(const class_view_model& vm) {
     if (!vm.has_primitive_properties())
         return;
 
@@ -74,7 +74,7 @@ void cpp_class_implementation::default_constructor(class_view_model vm) {
     utility_.blank_line();
 }
 
-void cpp_class_implementation::complete_constructor(class_view_model vm) {
+void cpp_class_implementation::complete_constructor(const class_view_model& vm) {
     const auto props(vm.properties());
     if (props.empty())
         return;
@@ -113,7 +113,7 @@ void cpp_class_implementation::complete_constructor(class_view_model vm) {
     utility_.blank_line();
 }
 
-void cpp_class_implementation::to_stream(view_models::class_view_model vm) {
+void cpp_class_implementation::to_stream(const class_view_model& vm) {
     stream_ << "void " << vm.name()
             << "::to_stream(std::ostream& stream) const ";
 
@@ -157,7 +157,7 @@ void cpp_class_implementation::to_stream(view_models::class_view_model vm) {
     utility_.blank_line();
 }
 
-void cpp_class_implementation::swap(view_models::class_view_model vm) {
+void cpp_class_implementation::swap(const class_view_model& vm) {
     if (vm.properties().empty())
         return;
 
@@ -179,7 +179,7 @@ void cpp_class_implementation::swap(view_models::class_view_model vm) {
     utility_.blank_line();
 }
 
-void cpp_class_implementation::equals_operator(class_view_model vm) {
+void cpp_class_implementation::equals_operator(const class_view_model& vm) {
     stream_ << indenter_ << "bool " << vm.name() << "::operator==(const "
             << vm.name() <<  "& ";
 
@@ -220,7 +220,7 @@ void cpp_class_implementation::equals_operator(class_view_model vm) {
 }
 
 void cpp_class_implementation::
-assignment_operator(view_models::class_view_model vm) {
+assignment_operator(const class_view_model& vm) {
     if (vm.properties().empty())
         return;
 

@@ -50,9 +50,9 @@ public:
     void open_scope();
     void close_scope();
     void blank_line(unsigned int how_many = 1);
-    std::string as_member_variable(std::string property_name) const;
-    std::string quote(std::string original) const;
-    std::string quote_escaped(std::string original) const;
+    std::string as_member_variable(const std::string& property_name) const;
+    std::string quote(const std::string& original) const;
+    std::string quote_escaped(const std::string& original) const;
 
 private:
     std::ostream& stream_;

@@ -31,7 +31,7 @@ namespace formatters {
 cpp_class_declaration::cpp_class_declaration(std::ostream& stream)
     : stream_(stream), utility_(stream_, indenter_) { }
 
-void cpp_class_declaration::open_class(class_view_model vm) {
+void cpp_class_declaration::open_class(const class_view_model& vm) {
     stream_ << indenter_ << "class " << vm.name() << " {" << std::endl;
 }
 
@@ -39,7 +39,7 @@ void cpp_class_declaration::close_class() {
     stream_ << indenter_ << "};" << std::endl;
 }
 
-void cpp_class_declaration::default_constructor(class_view_model vm) {
+void cpp_class_declaration::default_constructor(const class_view_model& vm) {
     if (!vm.has_primitive_properties())
         return;
 
@@ -49,7 +49,7 @@ void cpp_class_declaration::default_constructor(class_view_model vm) {
     utility_.blank_line();
 }
 
-void cpp_class_declaration::complete_constructor(class_view_model vm) {
+void cpp_class_declaration::complete_constructor(const class_view_model& vm) {
     const auto props(vm.properties());
     if (props.empty())
         return;
@@ -77,7 +77,7 @@ void cpp_class_declaration::complete_constructor(class_view_model vm) {
     utility_.blank_line();
 }
 
-void cpp_class_declaration::compiler_generated_constuctors(class_view_model vm) {
+void cpp_class_declaration::compiler_generated_constuctors(const class_view_model& vm) {
     utility_.public_access_specifier();
 
     if (!vm.has_primitive_properties())
@@ -97,7 +97,7 @@ void cpp_class_declaration::compiler_generated_constuctors(class_view_model vm) 
     utility_.blank_line();
 }
 
-void cpp_class_declaration::friends(class_view_model vm) {
+void cpp_class_declaration::friends(const class_view_model& vm) {
     utility_.public_access_specifier();
     stream_ << indenter_ << "friend class ";
 
@@ -108,7 +108,7 @@ void cpp_class_declaration::friends(class_view_model vm) {
     utility_.blank_line();
 }
 
-void cpp_class_declaration::getters_and_setters(class_view_model vm) {
+void cpp_class_declaration::getters_and_setters(const class_view_model& vm) {
     if (vm.properties().empty())
         return;
 
@@ -139,7 +139,7 @@ void cpp_class_declaration::getters_and_setters(class_view_model vm) {
     }
 }
 
-void cpp_class_declaration::member_variables(class_view_model vm) {
+void cpp_class_declaration::member_variables(const class_view_model& vm) {
     if (vm.properties().empty())
         return;
 
@@ -151,7 +151,7 @@ void cpp_class_declaration::member_variables(class_view_model vm) {
     }
 }
 
-void cpp_class_declaration::equality(class_view_model vm) {
+void cpp_class_declaration::equality(const class_view_model& vm) {
     utility_.public_access_specifier();
     stream_ << indenter_ << "bool operator==(const " << vm.name()
             <<  "& ";
@@ -182,7 +182,7 @@ void cpp_class_declaration::to_stream() {
     utility_.blank_line();
 }
 
-void cpp_class_declaration::swap_and_assignment(class_view_model vm) {
+void cpp_class_declaration::swap_and_assignment(const class_view_model& vm) {
     if (vm.properties().empty())
         return;
 

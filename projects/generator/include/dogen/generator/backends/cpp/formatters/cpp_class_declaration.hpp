@@ -52,20 +52,20 @@ public:
     virtual ~cpp_class_declaration() noexcept {}
 
 protected:
-    void open_class(class_view_model vm);
+    void open_class(const class_view_model& vm);
     void close_class();
-    void compiler_generated_constuctors(class_view_model vm);
-    void default_constructor(class_view_model vm);
-    void complete_constructor(class_view_model vm);
-    void friends(class_view_model vm);
-    void getters_and_setters(class_view_model vm);
-    void member_variables(class_view_model vm);
-    void equality(class_view_model vm);
+    void compiler_generated_constuctors(const class_view_model& vm);
+    void default_constructor(const class_view_model& vm);
+    void complete_constructor(const class_view_model& vm);
+    void friends(const class_view_model& vm);
+    void getters_and_setters(const class_view_model& vm);
+    void member_variables(const class_view_model& vm);
+    void equality(const class_view_model& vm);
     void to_stream();
-    void swap_and_assignment(class_view_model vm);
+    void swap_and_assignment(const class_view_model& vm);
 
 public:
-    virtual void format(class_view_model vm) = 0;
+    virtual void format(const class_view_model& vm) = 0;
 
 protected:
     std::ostream& stream_;

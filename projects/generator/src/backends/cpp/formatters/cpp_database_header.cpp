@@ -64,7 +64,7 @@ file_formatter::shared_ptr database_header::create(std::ostream& stream) {
 }
 
 void database_header::
-compiler_generated_constuctors(view_models::class_view_model vm) {
+compiler_generated_constuctors(const class_view_model& vm) {
     utility_.public_access_specifier();
 
     const std::string class_name(vm.name() + name_suffix);
@@ -97,7 +97,7 @@ void database_header::format_sql() {
     utility_.blank_line();
 }
 
-void database_header::load_internal(view_models::class_view_model vm) {
+void database_header::load_internal(const class_view_model& vm) {
     stream_ << indenter_ << "std::vector<";
 
     cpp_qualified_name qualified_name(stream_);
@@ -127,7 +127,7 @@ void database_header::erase_internal() {
     utility_.blank_line();
 }
 
-void database_header::load(view_models::class_view_model vm) {
+void database_header::load(const class_view_model& vm) {
     stream_ << indenter_ << "std::vector<";
 
     cpp_qualified_name qualified_name(stream_);
@@ -144,7 +144,7 @@ void database_header::load(view_models::class_view_model vm) {
     utility_.blank_line();
 }
 
-void database_header::save(view_models::class_view_model vm) {
+void database_header::save(const class_view_model& vm) {
     stream_ << indenter_ << "void save(" << std::endl;
     {
         cpp_positive_indenter_scope s(indenter_);
@@ -169,7 +169,7 @@ void database_header::erase() {
     utility_.blank_line();
 }
 
-void database_header::format(view_models::file_view_model vm) {
+void database_header::format(const file_view_model& vm) {
     boost::optional<view_models::class_view_model> o(vm.class_vm());
     if (!o)
         throw generation_failure(missing_class_view_model);

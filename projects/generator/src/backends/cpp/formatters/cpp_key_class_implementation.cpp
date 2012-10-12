@@ -36,13 +36,13 @@ cpp_key_class_implementation(std::ostream& stream,
     disable_io_(disable_io) { }
 
 void cpp_key_class_implementation::
-hand_crafted_constructors(class_view_model vm) {
+hand_crafted_constructors(const class_view_model& vm) {
     default_constructor(vm);
     if (!disable_complete_constructor_)
         complete_constructor(vm);
 }
 
-void cpp_key_class_implementation::to_unversioned_key(class_view_model vm) {
+void cpp_key_class_implementation::to_unversioned_key(const class_view_model& vm) {
     if (!is_versioned_)
         return;
 
@@ -65,7 +65,7 @@ void cpp_key_class_implementation::to_unversioned_key(class_view_model vm) {
     utility_.blank_line();
 }
 
-void cpp_key_class_implementation::format(class_view_model vm) {
+void cpp_key_class_implementation::format(const class_view_model& vm) {
     hand_crafted_constructors(vm);
     if (!disable_io_)
         to_stream(vm);

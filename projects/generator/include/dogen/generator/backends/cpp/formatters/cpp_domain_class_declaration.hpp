@@ -52,10 +52,10 @@ public:
     virtual ~cpp_domain_class_declaration() noexcept {}
 
 private:
-    void hand_crafted_constructors(class_view_model vm);
+    void hand_crafted_constructors(const class_view_model& vm);
 
 public:
-    virtual void format(class_view_model vm) override;
+    virtual void format(const class_view_model& vm) override;
 
 private:
     const bool disable_complete_constructor_;

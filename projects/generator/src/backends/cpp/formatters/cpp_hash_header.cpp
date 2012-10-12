@@ -60,7 +60,7 @@ file_formatter::shared_ptr hash_header::create(std::ostream& stream) {
     return file_formatter::shared_ptr(new hash_header(stream));
 }
 
-void hash_header::operator_bracket_method(view_models::class_view_model vm) {
+void hash_header::operator_bracket_method(const class_view_model& vm) {
     stream_ << indenter_ << "size_t operator()(";
 
     cpp_qualified_name qualified_name(stream_);
@@ -94,7 +94,7 @@ void hash_header::operator_bracket_method(view_models::class_view_model vm) {
     utility_.close_scope();
 }
 
-void hash_header::hash_class(view_models::class_view_model vm) {
+void hash_header::hash_class(const class_view_model& vm) {
     stream_ << indenter_ << "template<>" << std::endl
             << indenter_ << "class hash<";
 
@@ -111,7 +111,7 @@ void hash_header::hash_class(view_models::class_view_model vm) {
     stream_ << indenter_ << "};" << std::endl;
 }
 
-void hash_header::format(view_models::file_view_model vm) {
+void hash_header::format(const file_view_model& vm) {
     boost::optional<view_models::class_view_model> o(vm.class_vm());
     if (!o)
         throw generation_failure(missing_class_view_model);

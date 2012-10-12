@@ -41,6 +41,9 @@ namespace formatters {
 
 class facet_includer : public file_formatter {
 public:
+    typedef view_models::file_view_model file_view_model;
+
+public:
     facet_includer() = delete;
     facet_includer(const facet_includer&) = default;
     facet_includer(facet_includer&&) = default;
@@ -55,7 +58,7 @@ public:
         cpp_facet_types facet_type);
 
 public:
-    virtual void format(view_models::file_view_model vm) override;
+    virtual void format(const file_view_model& vm) override;
 
 private:
     std::ostream& stream_;

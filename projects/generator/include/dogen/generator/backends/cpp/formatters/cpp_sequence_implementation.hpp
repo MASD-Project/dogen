@@ -40,6 +40,10 @@ namespace formatters {
 
 class sequence_implementation : public file_formatter {
 public:
+    typedef view_models::class_view_model class_view_model;
+    typedef view_models::file_view_model file_view_model;
+
+public:
     sequence_implementation() = delete;
     sequence_implementation(const sequence_implementation&) = default;
     sequence_implementation(sequence_implementation&&) = default;
@@ -54,11 +58,11 @@ public:
     static file_formatter::shared_ptr create(std::ostream& stream);
 
 private:
-    void length_method(view_models::class_view_model vm);
-    void next_term_method(view_models::class_view_model vm);
+    void length_method(const class_view_model& vm);
+    void next_term_method(const class_view_model& vm);
 
 public:
-    virtual void format(view_models::file_view_model vm) override;
+    virtual void format(const file_view_model& vm) override;
 
 private:
     std::ostream& stream_;

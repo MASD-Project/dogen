@@ -50,11 +50,11 @@ public:
     virtual ~cpp_key_class_implementation() noexcept {}
 
 private:
-    void hand_crafted_constructors(class_view_model vm);
-    void to_unversioned_key(class_view_model vm);
+    void hand_crafted_constructors(const class_view_model& vm);
+    void to_unversioned_key(const class_view_model& vm);
 
 public:
-    virtual void format(class_view_model vm) override;
+    virtual void format(const class_view_model& vm) override;
 
 private:
     const bool is_versioned_;

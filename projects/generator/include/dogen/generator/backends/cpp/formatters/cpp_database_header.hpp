@@ -57,16 +57,16 @@ public:
     static file_formatter::shared_ptr create(std::ostream& stream);
 
 private:
-    void compiler_generated_constuctors(class_view_model vm);
+    void compiler_generated_constuctors(const class_view_model& vm);
     void format_sql();
-    void load_internal(class_view_model vm);
+    void load_internal(const class_view_model& vm);
     void erase_internal();
-    void load(class_view_model vm);
-    void save(class_view_model vm);
+    void load(const class_view_model& vm);
+    void save(const class_view_model& vm);
     void erase();
 
 public:
-    virtual void format(file_view_model vm) override;
+    virtual void format(const file_view_model& vm) override;
 
 private:
     std::ostream& stream_;

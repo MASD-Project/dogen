@@ -65,7 +65,7 @@ serialization_header::create(std::ostream& stream,
         new serialization_header(stream, disable_xml_serialization));
 }
 
-void serialization_header::serialize_method(view_models::class_view_model vm) {
+void serialization_header::serialize_method(const class_view_model& vm) {
     stream_ << indenter_ << "template<class Archive>" << std::endl
             << indenter_ << "inline void serialize(Archive & archive,"
             << std::endl;
@@ -92,7 +92,7 @@ void serialization_header::serialize_method(view_models::class_view_model vm) {
     utility_.close_scope();
 }
 
-void serialization_header::serializer_class(view_models::class_view_model vm) {
+void serialization_header::serializer_class(const class_view_model& vm) {
     stream_ << "class " << vm.name() << "_serializer ";
     utility_.open_scope();
     {
@@ -145,7 +145,7 @@ void serialization_header::serializer_class(view_models::class_view_model vm) {
     stream_ << indenter_ << "};" << std::endl;
 }
 
-void serialization_header::format(view_models::file_view_model vm) {
+void serialization_header::format(const file_view_model& vm) {
     boost::optional<view_models::class_view_model> o(vm.class_vm());
     if (!o)
         throw generation_failure(missing_class_view_model);

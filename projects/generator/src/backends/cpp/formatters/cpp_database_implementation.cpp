@@ -106,7 +106,7 @@ make_sql(std::string name, std::string schema_name, std::string operation,
     return utility_.quote(stream.str());
 }
 
-void database_implementation::anonymous_namespace(class_view_model vm) {
+void database_implementation::anonymous_namespace(const class_view_model& vm) {
     namespace_helper ns_helper(stream_, std::list<std::string> { });
     utility_.blank_line();
 
@@ -166,7 +166,7 @@ void database_implementation::anonymous_namespace(class_view_model vm) {
     utility_.blank_line(); // namespace end
 }
 
-void database_implementation::format_sql(class_view_model vm) {
+void database_implementation::format_sql(const class_view_model& vm) {
     const std::string class_name(vm.name() + name_suffix);
 
     stream_ << indenter_ << "std::string " << class_name << "::"
@@ -185,27 +185,27 @@ void database_implementation::format_sql(class_view_model vm) {
     utility_.close_scope();
 }
 
-void database_implementation::load_internal(class_view_model) {
+void database_implementation::load_internal(const class_view_model&) {
 
 }
 
-void database_implementation::erase_internal(class_view_model) {
+void database_implementation::erase_internal(const class_view_model&) {
 
 }
 
-void database_implementation::load(class_view_model) {
+void database_implementation::load(const class_view_model&) {
 
 }
 
-void database_implementation::save(class_view_model) {
+void database_implementation::save(const class_view_model&) {
 
 }
 
-void database_implementation::erase(class_view_model) {
+void database_implementation::erase(const class_view_model&) {
 
 }
 
-void database_implementation::format(view_models::file_view_model vm) {
+void database_implementation::format(const file_view_model& vm) {
     boost::optional<view_models::class_view_model> o(vm.class_vm());
     if (!o)
         throw generation_failure(missing_class_view_model);

@@ -40,6 +40,10 @@ namespace formatters {
 
 class sequence_header : public file_formatter {
 public:
+    typedef view_models::class_view_model class_view_model;
+    typedef view_models::file_view_model file_view_model;
+
+public:
     sequence_header() = delete;
     sequence_header(const sequence_header&) = default;
     sequence_header(sequence_header&&) = default;
@@ -53,11 +57,11 @@ public:
     static file_formatter::shared_ptr create(std::ostream& stream);
 
 private:
-    void generator_class(view_models::class_view_model vm);
-    void sequence_typedefs(view_models::class_view_model vm);
+    void generator_class(const class_view_model& vm);
+    void sequence_typedefs(const class_view_model& vm);
 
 public:
-    virtual void format(view_models::file_view_model vm) override;
+    virtual void format(const file_view_model& vm) override;
 
 private:
     std::ostream& stream_;

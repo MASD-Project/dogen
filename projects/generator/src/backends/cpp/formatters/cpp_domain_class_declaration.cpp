@@ -34,13 +34,13 @@ cpp_domain_class_declaration(std::ostream& stream,
       disable_io_(disable_io) {}
 
 void cpp_domain_class_declaration::
-hand_crafted_constructors(class_view_model vm) {
+hand_crafted_constructors(const class_view_model& vm) {
     default_constructor(vm);
     if (!disable_complete_constructor_)
         complete_constructor(vm);
 }
 
-void cpp_domain_class_declaration::format(class_view_model vm) {
+void cpp_domain_class_declaration::format(const class_view_model& vm) {
     open_class(vm);
     {
         cpp_positive_indenter_scope s(indenter_);

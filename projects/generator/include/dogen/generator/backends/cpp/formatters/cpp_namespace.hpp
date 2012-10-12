@@ -46,7 +46,7 @@ public:
     explicit cpp_namespace(std::ostream& stream);
 
 public:
-    void format_start(std::string name);
+    void format_start(const std::string& name);
     void format_end();
 
 private:

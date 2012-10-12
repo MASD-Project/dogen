@@ -36,6 +36,9 @@ namespace formatters {
 
 class file_formatter {
 public:
+    typedef view_models::file_view_model file_view_model;
+
+public:
     file_formatter(const file_formatter&) = default;
     virtual ~file_formatter() noexcept = default;
     file_formatter(file_formatter&&) = default;
@@ -48,7 +51,7 @@ public:
     typedef std::shared_ptr<file_formatter> shared_ptr;
 
 public:
-    virtual void format(view_models::file_view_model vm) = 0;
+    virtual void format(const file_view_model& vm) = 0;
 };
 
 } } } } }

@@ -84,7 +84,7 @@ create(std::ostream& stream, bool disable_complete_constructor,
 }
 
 void domain_implementation::
-inserter_operator(view_models::class_view_model vm) {
+inserter_operator(const class_view_model& vm) {
     if (!use_integrated_io_ || disable_io_)
         return;
 
@@ -102,7 +102,7 @@ inserter_operator(view_models::class_view_model vm) {
 }
 
 void domain_implementation::class_implementation(cpp_aspect_types aspect_type,
-    view_models::class_view_model vm) {
+    const class_view_model& vm) {
 
     if (aspect_type== cpp_aspect_types::main) {
         cpp_domain_class_implementation
@@ -125,7 +125,7 @@ void domain_implementation::class_implementation(cpp_aspect_types aspect_type,
     throw invalid_enum_value(invalid_facet_types_enum);
 }
 
-void domain_implementation::format(view_models::file_view_model vm) {
+void domain_implementation::format(const file_view_model& vm) {
     boost::optional<view_models::class_view_model> o(vm.class_vm());
     if (!o)
         throw generation_failure(missing_class_view_model);

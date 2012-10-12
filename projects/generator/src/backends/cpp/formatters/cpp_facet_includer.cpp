@@ -50,7 +50,7 @@ create(std::ostream& stream,cpp_facet_types facet_type) {
     return file_formatter::shared_ptr(new facet_includer(stream, facet_type));
 }
 
-void facet_includer::format(view_models::file_view_model vm) {
+void facet_includer::format(const file_view_model& vm) {
     if (vm.class_vm())
         throw generation_failure(unexpected_class_view_model);
 

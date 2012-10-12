@@ -40,6 +40,10 @@ namespace formatters {
 
 class serialization_header : public file_formatter {
 public:
+    typedef view_models::class_view_model class_view_model;
+    typedef view_models::file_view_model file_view_model;
+
+public:
     serialization_header() = delete;
     serialization_header(const serialization_header&) = default;
     serialization_header(serialization_header&&) = default;
@@ -54,11 +58,11 @@ public:
         bool disable_xml_serialization);
 
 private:
-    void serializer_class(view_models::class_view_model vm);
-    void serialize_method(view_models::class_view_model vm);
+    void serializer_class(const class_view_model& vm);
+    void serialize_method(const class_view_model& vm);
 
 public:
-    virtual void format(view_models::file_view_model vm) override;
+    virtual void format(const file_view_model& vm) override;
 
 private:
     std::ostream& stream_;

@@ -57,7 +57,7 @@ file_formatter::shared_ptr io_header::create(std::ostream& stream) {
     return file_formatter::shared_ptr(new io_header(stream));
 }
 
-void io_header::format(view_models::file_view_model vm) {
+void io_header::format(const file_view_model& vm) {
     boost::optional<view_models::class_view_model> o(vm.class_vm());
     if (!o)
         throw generation_failure(missing_class_view_model);

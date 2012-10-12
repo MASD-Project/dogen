@@ -40,6 +40,9 @@ namespace formatters {
 
 class io_implementation : public file_formatter {
 public:
+    typedef view_models::file_view_model file_view_model;
+
+public:
     io_implementation() = delete;
     io_implementation(const io_implementation&) = default;
     io_implementation(io_implementation&&) = default;
@@ -53,7 +56,7 @@ public:
     static file_formatter::shared_ptr create(std::ostream& stream);
 
 public:
-    virtual void format(view_models::file_view_model vm) override;
+    virtual void format(const file_view_model& vm) override;
 
 private:
     std::ostream& stream_;

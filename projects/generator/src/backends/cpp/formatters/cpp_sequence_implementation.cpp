@@ -60,7 +60,7 @@ sequence_implementation::create(std::ostream& stream) {
 }
 
 void sequence_implementation::
-next_term_method(view_models::class_view_model vm) {
+next_term_method(const class_view_model& vm) {
     const std::string name(vm.name() + "_generator");
     stream_ << indenter_ << name << "::value_type" << std::endl
             << indenter_ << name << "::next_term(const unsigned int position) ";
@@ -99,13 +99,13 @@ next_term_method(view_models::class_view_model vm) {
     utility_.close_scope();
 }
 
-void sequence_implementation::length_method(view_models::class_view_model vm) {
+void sequence_implementation::length_method(const class_view_model& vm) {
     stream_ << indenter_ << "unsigned int "
             << vm.name() << "_generator::length() const { return("
             << generator_length_ << "); }" << std::endl;
 }
 
-void sequence_implementation::format(view_models::file_view_model vm) {
+void sequence_implementation::format(const file_view_model& vm) {
     boost::optional<view_models::class_view_model> o(vm.class_vm());
     if (!o)
         throw generation_failure(missing_class_view_model);
