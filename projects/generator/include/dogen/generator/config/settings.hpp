@@ -47,9 +47,9 @@ public:
 public:
     settings(settings&& rhs)
     : modeling_(std::move(rhs.modeling_)),
-      cpp_(rhs.cpp_),
-      sql_(rhs.sql_),
-      troubleshooting_(rhs.troubleshooting_),
+      cpp_(std::move(rhs.cpp_)),
+      sql_(std::move(rhs.sql_)),
+      troubleshooting_(std::move(rhs.troubleshooting_)),
       output_(std::move(rhs.output_)) { }
 
 public:

@@ -74,6 +74,8 @@ public:
       hash_facet_folder_(std::move(rhs.hash_facet_folder_)),
       io_facet_folder_(std::move(rhs.io_facet_folder_)),
       serialization_facet_folder_(std::move(rhs.serialization_facet_folder_)),
+      test_data_facet_folder_(std::move(rhs.test_data_facet_folder_)),
+      database_facet_folder_(std::move(rhs.database_facet_folder_)),
       disable_xml_serialization_(std::move(rhs.disable_xml_serialization_)),
       use_integrated_io_(std::move(rhs.use_integrated_io_)),
       disable_versioning_(std::move(rhs.disable_versioning_)) { }
