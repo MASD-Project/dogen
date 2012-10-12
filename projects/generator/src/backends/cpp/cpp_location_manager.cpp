@@ -19,10 +19,14 @@
  *
  */
 #include <sstream>
+#include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/exception/invalid_enum_value.hpp"
 #include "dogen/generator/backends/cpp/cpp_location_manager.hpp"
 
 namespace {
+
+using namespace dogen::utility::log;
+static logger lg(logger_factory("location_manager"));
 
 const std::string empty;
 const std::string domain_postfix;
@@ -58,6 +62,13 @@ cpp_location_manager::cpp_location_manager(std::string model_name,
         include_directory_ = settings_.project_directory() / model_name_;
         include_directory_ /= include_dir;
     }
+
+    BOOST_LOG_SEV(lg, debug)
+        << "Initial configuration:"
+        << " settings: " << settings_
+        << " include_directory: " << include_directory_
+        << " source_directory_: " << source_directory_
+        << " model name: " << model_name;
 }
 
 std::string cpp_location_manager::facet_directory(cpp_facet_types facet) const {

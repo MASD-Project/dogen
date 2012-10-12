@@ -18,9 +18,13 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen/utility/log/logger.hpp"
 #include "dogen/generator/backends/cpp/cpp_dependency_manager.hpp"
 
 namespace {
+
+using namespace dogen::utility::log;
+static logger lg(logger_factory("dependency_manager"));
 
 const std::string empty;
 const std::string versioned_name("versioned_key");
@@ -38,7 +42,15 @@ cpp_dependency_manager::cpp_dependency_manager(sml::model model,
     bool use_integrated_io, bool disable_io)
     : model_(model), location_manager_(location_manager),
       disable_keys_(disable_keys), use_integrated_io_(use_integrated_io),
-      disable_io_(disable_io) { }
+      disable_io_(disable_io) {
+
+    BOOST_LOG_SEV(lg, debug)
+        << "Initial configuration:"
+        << " disable_keys: " << disable_keys_
+        << " use_integrated_io: " << use_integrated_io_
+        << " disable_io: " << disable_io_
+        << " model name: " << model_.name();
+}
 
 cpp_location_request cpp_dependency_manager::
 location_request_factory(cpp_facet_types ft, cpp_file_types flt,
@@ -97,9 +109,14 @@ has_versioned_dependency(cpp_facet_types ft, cpp_file_types flt) const {
             ft == cpp_facet_types::database))
         return false;
 
+    // FIXME: hacked for now
     if (is_implementation && ft == cpp_facet_types::domain &&
-        (use_integrated_io_ || disable_io_))
+        (disable_io_ || use_integrated_io_))
         return false;
+
+    // if (is_implementation && ft == cpp_facet_types::domain &&
+    //     (disable_io_ || !use_integrated_io_))
+    //     return false;
 
     const bool is_header(flt == cpp_file_types::header);
     if (is_header && (ft == cpp_facet_types::test_data ||
