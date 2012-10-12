@@ -53,10 +53,17 @@ public:
     cpp_dependency_manager() = delete;
     cpp_dependency_manager(const cpp_dependency_manager&) = default;
     ~cpp_dependency_manager() = default;
-    cpp_dependency_manager(cpp_dependency_manager&&) = default;
     cpp_dependency_manager& operator=(const cpp_dependency_manager&) = delete;
 
 public:
+    cpp_dependency_manager(cpp_dependency_manager&& rhs)
+    : model_(std::move(rhs.model_)),
+      location_manager_(std::move(rhs.location_manager_)),
+      headers_for_facet_(std::move(rhs.headers_for_facet_)),
+      disable_keys_(std::move(rhs.disable_keys_)),
+      use_integrated_io_(std::move(rhs.use_integrated_io_)),
+      disable_io_(std::move(rhs.disable_io_)) { }
+
     cpp_dependency_manager(sml::model model,
         cpp_location_manager location_manager, bool disable_keys,
         bool use_integrated_io, bool disable_io);

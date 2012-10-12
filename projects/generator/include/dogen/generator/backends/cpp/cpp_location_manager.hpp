@@ -47,10 +47,15 @@ public:
     cpp_location_manager() = delete;
     cpp_location_manager(const cpp_location_manager&) = default;
     ~cpp_location_manager() = default;
-    cpp_location_manager(cpp_location_manager&&) = default;
     cpp_location_manager& operator=(const cpp_location_manager&) = delete;
 
 public:
+    cpp_location_manager(cpp_location_manager&& rhs)
+    : model_name_(std::move(rhs.model_name_)),
+      settings_(std::move(rhs.settings_)),
+      source_directory_(std::move(rhs.source_directory_)),
+      include_directory_(std::move(rhs.include_directory_)) { }
+
     cpp_location_manager(std::string model_name, config::cpp_settings settings);
 
 private:
