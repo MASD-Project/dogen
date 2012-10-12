@@ -106,6 +106,8 @@ path expected_two_layers_with_objects_dia_xml(
     "dia_sml/expected/two_layers_with_objects.diaxml");
 path expected_class_in_a_package_stdout_txt(
     "dia_sml/expected/class_in_a_package_stdout.txt");
+path expected_all_primitives_dia_xml(
+    "dia_sml/expected/all_primitives.diaxml");
 path expected_trivial_inheritance_dia_xml(
     "dia_sml/expected/trivial_inheritance.diaxml");
 
@@ -143,6 +145,8 @@ path actual_two_layers_with_objects_dia_xml(
     "dia_sml/actual/two_layers_with_objects.diaxml");
 path actual_class_in_a_package_stdout_txt(
     "dia_sml/actual/class_in_a_package_stdout.txt");
+path actual_all_primitives_dia_xml(
+    "dia_sml/actual/all_primitives.diaxml");
 path actual_trivial_inheritance_dia_xml(
     "dia_sml/actual/trivial_inheritance.diaxml");
 
@@ -362,6 +366,10 @@ path dia_sml::expected_two_layers_with_objects_dia_xml() {
         ::expected_two_layers_with_objects_dia_xml);
 }
 
+path dia_sml::expected_all_primitives_dia_xml() {
+    return resolver::resolve(::expected_all_primitives_dia_xml);
+}
+
 path dia_sml::expected_trivial_inheritance_dia_xml() {
     return resolver::resolve(
         ::expected_trivial_inheritance_dia_xml);
@@ -447,8 +455,11 @@ path dia_sml::actual_class_in_a_package_stdout_txt() {
 }
 
 path dia_sml::actual_trivial_inheritance_dia_xml() {
-    return resolver::resolve(
-        ::actual_trivial_inheritance_dia_xml);
+    return resolver::resolve(::actual_trivial_inheritance_dia_xml);
+}
+
+path dia_sml::actual_all_primitives_dia_xml() {
+    return resolver::resolve(::actual_all_primitives_dia_xml);
 }
 
 } } }

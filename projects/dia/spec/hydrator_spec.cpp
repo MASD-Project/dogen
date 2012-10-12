@@ -177,6 +177,15 @@ BOOST_AUTO_TEST_CASE(two_layers_with_objects_results_in_expected_objects) {
     BOOST_CHECK(test_hydrator(input, expected, actual));
 }
 
+BOOST_AUTO_TEST_CASE(all_primitives_results_in_expected_objects) {
+    SETUP_TEST_LOG_SOURCE("all_primitives_results_in_expected_objects");
+    using dogen::utility::test_data::dia_sml;
+    const auto input(dia_sml::input_all_primitives_dia());
+    const auto actual(dia_sml::actual_all_primitives_dia_xml());
+    const auto expected(dia_sml::expected_all_primitives_dia_xml());
+    BOOST_CHECK(test_hydrator(input, expected, actual));
+}
+
 BOOST_AUTO_TEST_CASE(trivial_inheritance_results_in_expected_objects) {
     SETUP_TEST_LOG_SOURCE("trivial_inheritance_results_in_expected_objects");
     using dogen::utility::test_data::dia_sml;

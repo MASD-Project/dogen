@@ -91,6 +91,7 @@ public:
     static boost::filesystem::path expected_package_without_name_dia_xml();
     static boost::filesystem::path expected_two_layers_with_objects_dia_xml();
     static boost::filesystem::path expected_class_in_a_package_stdout_txt();
+    static boost::filesystem::path expected_all_primitives_dia_xml();
     static boost::filesystem::path expected_trivial_inheritance_dia_xml();
 
     static boost::filesystem::path actual();
@@ -110,6 +111,7 @@ public:
     static boost::filesystem::path actual_package_without_name_dia_xml();
     static boost::filesystem::path actual_two_layers_with_objects_dia_xml();
     static boost::filesystem::path actual_class_in_a_package_stdout_txt();
+    static boost::filesystem::path actual_all_primitives_dia_xml();
     static boost::filesystem::path actual_trivial_inheritance_dia_xml();
 };
 
