@@ -31,7 +31,6 @@
 #include <boost/filesystem.hpp>
 #include <boost/filesystem/operations.hpp>
 #include <boost/algorithm/string/predicate.hpp>
-
 #include "dogen/utility/filesystem/file.hpp"
 #include "dogen/utility/io/set_io.hpp"
 #include "dogen/utility/io/vector_io.hpp"
