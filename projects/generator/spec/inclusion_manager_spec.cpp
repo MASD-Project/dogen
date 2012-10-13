@@ -88,17 +88,17 @@ default_inclusion_manager(const dogen::sml::model& m) {
     return cpp_inclusion_manager(m, lm, no_keys, integrated_io, no_io);
 }
 
-std::list<std::string>
-domain_header_user_deps(
-    const dogen::generator::backends::cpp::cpp_inclusion_manager& d,
-    const dogen::sml::pod& p) {
+// std::list<std::string>
+// domain_header_user_deps(
+//     const dogen::generator::backends::cpp::cpp_inclusion_manager& d,
+//     const dogen::sml::pod& p) {
 
-    using namespace dogen::generator::backends::cpp;
-    cpp_facet_types ft(cpp_facet_types::domain);
-    cpp_file_types flt(cpp_file_types::header);
-    cpp_aspect_types at(cpp_aspect_types::main);
-    return d.user(p, ft, flt, at);
-}
+//     using namespace dogen::generator::backends::cpp;
+//     cpp_facet_types ft(cpp_facet_types::domain);
+//     cpp_file_types flt(cpp_file_types::header);
+//     cpp_aspect_types at(cpp_aspect_types::main);
+//     return d.user(p, ft, flt, at);
+// }
 
 }
 
