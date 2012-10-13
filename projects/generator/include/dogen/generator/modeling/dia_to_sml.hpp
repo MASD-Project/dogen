@@ -28,6 +28,7 @@
 #include <list>
 #include <utility>
 #include <unordered_map>
+#include <unordered_set>
 #include <boost/graph/adjacency_list.hpp>
 #include "dogen/dia/domain/diagram.hpp"
 #include "dogen/sml/domain/package.hpp"
@@ -104,7 +105,8 @@ private:
     graph_type graph_;
     id_to_vertex_type id_to_vertex_;
     vertex_descriptor_type root_vertex_;
-    std::vector<dia::object> relationships_;
+    std::unordered_map<std::string, std::string> child_to_parent_dia_ids_;
+    std::unordered_set<std::string> parent_dia_ids_;
     const bool is_target_;
     const bool verbose_;
 };

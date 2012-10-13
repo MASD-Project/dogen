@@ -75,17 +75,39 @@ const std::string unexpected_attribute_value_size(
 const std::string unexpected_attribute_value_type(
     "Did not find expected attribute value type: ");
 
+/**
+ * @brief Parses a string representing an object type into its enum.
+ *
+ * @param s string with an object type
+ */
+dogen::dia::object_types parse_object_type(const std::string s) {
+    dogen::dia::object_types r;
+    try {
+        using dogen::dia::utility::parse_object_type;
+        r = parse_object_type(s);
+    } catch(const std::exception& e) {
+        std::ostringstream stream;
+        stream << error_parsing_object_type << "'" << s
+               << "'. Error: " << e.what();
+        BOOST_LOG_SEV(lg, error) << stream.str();
+        throw transformation_error(stream.str());
+    }
+    return r;
+}
+
 class dia_dfs_visitor : public boost::default_dfs_visitor {
 private:
     struct visit_state {
         visit_state(const std::string& model_name,
             const std::list<std::string>& external_package_path,
             bool verbose, bool is_target,
-            const std::unordered_map<std::string, std::string> child_to_parent)
+            const std::unordered_map<std::string, std::string>& child_to_parent,
+            const std::unordered_set<std::string>& parent_ids)
             : model_name_(model_name),
               external_package_path_(external_package_path),
               verbose_(verbose), is_target_(is_target),
-              child_to_parent_(child_to_parent) { }
+              child_to_parent_(child_to_parent),
+              parent_ids_(parent_ids) { }
 
         const std::string model_name_;
         std::unordered_map<dogen::sml::qualified_name, dogen::sml::pod> pods_;
@@ -98,6 +120,7 @@ private:
         const bool verbose_;
         const bool is_target_;
         const std::unordered_map<std::string, std::string> child_to_parent_;
+        const std::unordered_set<std::string> parent_ids_;
         std::unordered_map<std::string, dogen::sml::qualified_name>
         dia_id_to_qname_;
     };
@@ -112,31 +135,13 @@ public:
     dia_dfs_visitor(const std::string& model_name,
         const std::string& external_package_path,
         bool verbose, bool is_target,
-        const std::vector<dogen::dia::object>& relationships)
+        const std::unordered_map<std::string, std::string>& child_to_parent,
+        const std::unordered_set<std::string>& parent_ids)
         : state_(new visit_state(model_name,
                 split_delimited_string(external_package_path), verbose,
-                is_target, setup_child_to_parent(relationships))) { }
+                is_target, child_to_parent, parent_ids)) { }
 
 private:
-    std::unordered_map<std::string, std::string>
-    setup_child_to_parent(
-        const std::vector<dogen::dia::object>& relationships) const {
-
-        std::unordered_map<std::string, std::string> r;
-        for (const auto relationship : relationships) {
-            using dogen::dia::object_types;
-            object_types ot(parse_object_type(relationship.type()));
-            if (ot == object_types::uml_generalization) {
-                const auto connections(relationship.connections());
-                const auto parent(connections.front());
-                const auto child(connections.back());
-
-                r.insert(std::make_pair(child.to(), parent.to()));
-            }
-        }
-        return r;
-    }
-
     std::list<std::string>
     split_delimited_string(const std::string& str) const {
         const boost::char_separator<char> sep(delimiter);
@@ -271,13 +276,6 @@ private:
      * @param object Any Dia object, including the dummy root object.
      */
     void pop_package_path(const dogen::dia::object& object);
-
-    /**
-     * @brief Parses a string representing an object type into its enum.
-     *
-     * @param s string with an object type
-     */
-    dogen::dia::object_types parse_object_type(const std::string s) const;
 
 private:
     std::shared_ptr<visit_state> state_;
@@ -456,23 +454,11 @@ dia_dfs_visitor::transform_pod(const dogen::dia::object& o) const {
         }
         pod.parent_name(j->second);
     }
-    return std::make_pair(pod.name(), pod);
-}
 
-dogen::dia::object_types dia_dfs_visitor::
-parse_object_type(const std::string s) const {
-    dogen::dia::object_types r;
-    try {
-        using dogen::dia::utility::parse_object_type;
-        r = parse_object_type(s);
-    } catch(const std::exception& e) {
-        std::ostringstream stream;
-        stream << error_parsing_object_type << "'" << s
-               << "'. Error: " << e.what();
-        BOOST_LOG_SEV(lg, error) << stream.str();
-        throw transformation_error(stream.str());
-    }
-    return r;
+    const auto j(state_->parent_ids_.find(o.id()));
+    pod.is_parent(j != state_->parent_ids_.end());
+
+    return std::make_pair(pod.name(), pod);
 }
 
 void dia_dfs_visitor::push_package_path(const dogen::dia::object& o) {
@@ -573,9 +559,10 @@ setup_data_structures(const std::vector<dia::object>& objects) {
         });
 
     std::unordered_map<std::string, vertex_descriptor_type> orphans;
+    std::vector<dogen::dia::object> relationships;
     for (const auto o : objects) {
         if (!o.connections().empty()) {
-            relationships_.push_back(o);
+            relationships.push_back(o);
             continue;
         }
 
@@ -593,13 +580,20 @@ setup_data_structures(const std::vector<dia::object>& objects) {
                                  << " Parent ID: " << parent_id;
     }
 
-    for (const auto o : relationships_) {
+    for (const auto r : relationships) {
         BOOST_LOG_SEV(lg, debug) << "Processing connections for object: '"
-                                 << o.id() << "' of type: '"
-                                 << o.type()
+                                 << r.id() << "' of type: '"
+                                 << r.type()
                                  << "'";
 
-        const auto connections(o.connections());
+        using dogen::dia::object_types;
+        object_types ot(parse_object_type(r.type()));
+        if (ot != object_types::uml_generalization) {
+            BOOST_LOG_SEV(lg, warn) << "Ignoring type: '" << r.type() << "'";
+            continue;
+        }
+
+        const auto connections(r.connections());
         if (connections.size() != 2) {
             BOOST_LOG_SEV(lg, error) << unexpected_number_of_connections
                                      << connections.size();
@@ -617,6 +611,7 @@ setup_data_structures(const std::vector<dia::object>& objects) {
             throw transformation_error(relationship_target_not_found +
                 parent.to());
         }
+        parent_dia_ids_.insert(parent.to());
 
         const auto child(connections.back());
         const auto c(id_to_vertex_.find(child.to()));
@@ -633,6 +628,18 @@ setup_data_structures(const std::vector<dia::object>& objects) {
                                  << child.to()
                                  << "'";
         boost::add_edge(p->second, c->second, graph_);
+        const auto pair(std::make_pair(child.to(), parent.to()));
+        const bool key_exists(!child_to_parent_dia_ids_.insert(pair).second);
+
+        if (key_exists) {
+            std::ostringstream ss;
+            ss << "Child has more than one parent: '"
+               << child.to() << "'. Multiple inheritance "
+               << "is not supported.";
+
+            BOOST_LOG_SEV(lg, error) << ss.str();
+            throw transformation_error(ss.str());
+        }
 
         const auto k(orphans.find(child.to()));
         if (k != orphans.end()) {
@@ -656,7 +663,8 @@ sml::model dia_to_sml::transform() {
         setup_data_structures(layer.objects());
 
     const std::string epp(external_package_path_);
-    dia_dfs_visitor v(model_name_, epp, verbose_, is_target_, relationships_);
+    dia_dfs_visitor v(model_name_, epp, verbose_, is_target_,
+        child_to_parent_dia_ids_, parent_dia_ids_);
     boost::depth_first_search(graph_, boost::visitor(v));
 
     using sml::model;

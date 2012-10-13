@@ -75,9 +75,12 @@ mock_pod(const std::string& type_name, const std::string& model_name) {
 }
 
 dogen::sml::model pod_with_parent_model() {
-    const auto p(mock_pod(pod_parent_name, pod_with_parent_model_name));
+    auto p(mock_pod(pod_parent_name, pod_with_parent_model_name));
+    p.is_parent(true);
+
     auto c(mock_pod(pod_child_name, pod_with_parent_model_name));
     c.parent_name(p.name());
+
     const std::unordered_map<dogen::sml::qualified_name, dogen::sml::pod> pods {
         { p.name(), p }, { c.name(), c }
     };

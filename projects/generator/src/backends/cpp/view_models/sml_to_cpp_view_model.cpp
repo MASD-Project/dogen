@@ -94,15 +94,12 @@ private:
     qname_to_class_view_model_type;
 
     struct visit_state {
-        visit_state(const std::string& schema_name, bool disable_keys,
-            const std::unordered_set<dogen::sml::qualified_name>& parent_names)
-            : schema_name_(schema_name), disable_keys_(disable_keys),
-              parent_names_(parent_names) { }
+        visit_state(const std::string& schema_name, bool disable_keys)
+            : schema_name_(schema_name), disable_keys_(disable_keys) { }
 
         qname_to_class_view_model_type class_view_models_;
         const std::string schema_name_;
         const bool disable_keys_;
-        const std::unordered_set<dogen::sml::qualified_name> parent_names_;
     };
 
 public:
@@ -111,9 +108,8 @@ public:
     sml_dfs_visitor(sml_dfs_visitor&&) = default;
 
 public:
-    sml_dfs_visitor(const std::string& schema_name, bool disable_keys,
-        const std::unordered_set<dogen::sml::qualified_name>& parent_names)
-        : state_(new visit_state(schema_name, disable_keys, parent_names)) { }
+    sml_dfs_visitor(const std::string& schema_name, bool disable_keys)
+        : state_(new visit_state(schema_name, disable_keys)) { }
 
 public:
     template<typename Vertex, typename Graph>
@@ -154,6 +150,9 @@ void sml_dfs_visitor::process_sml_pod(const dogen::sml::pod& pod) {
 
         const auto i(state_->class_view_models_.find(pqn));
         if (i == state_->class_view_models_.end()) {
+            BOOST_LOG_SEV(lg, error) << parent_view_model_not_found
+                                     << name.type_name();
+
             throw transformation_error(parent_view_model_not_found +
                 name.type_name());
         }
@@ -170,9 +169,7 @@ void sml_dfs_visitor::process_sml_pod(const dogen::sml::pod& pod) {
     cvm.namespaces(ns);
     cvm.database_name(database_name(name));
     cvm.schema_name(state_->schema_name_);
-
-    const auto pn(state_->parent_names_);
-    cvm.is_parent(pn.find(name) != pn.end());
+    cvm.is_parent(pod.is_parent());
 
     std::list<property_view_model> properties_vm;
     bool has_primitive_properties(false);
@@ -317,8 +314,12 @@ transform_file(cpp_facet_types ft, cpp_file_types flt, const sml::pod& pod) {
     r.aspect_type(cpp_aspect_types::main);
 
     const auto i(qname_to_class_.find(name));
-    if (i == qname_to_class_.end())
+    if (i == qname_to_class_.end()) {
+        BOOST_LOG_SEV(lg, error) << view_model_not_found
+                                 << name.type_name();
+
         throw transformation_error(view_model_not_found + name.type_name());
+    }
 
     r.class_vm(i->second);
     auto rq(location_request_factory(ft, flt, name));
@@ -360,7 +361,6 @@ void sml_to_cpp_view_model::setup_qualified_name_to_class_view_model_map() {
             return vertex;
         });
 
-    std::unordered_set<dogen::sml::qualified_name> parent_names;
     for (const auto pair : model_.pods()) {
         const vertex_descriptor_type vertex(pi(pair.first));
         const auto pod(pair.second);
@@ -369,12 +369,11 @@ void sml_to_cpp_view_model::setup_qualified_name_to_class_view_model_map() {
         if (pod.parent_name()) {
             const vertex_descriptor_type parent_vertex(pi(*pod.parent_name()));
             boost::add_edge(parent_vertex, vertex, graph_);
-            parent_names.insert(*pod.parent_name());
         } else
             boost::add_edge(root_vertex_, vertex, graph_);
     }
 
-    sml_dfs_visitor v(model_.schema_name(), disable_keys_, parent_names);
+    sml_dfs_visitor v(model_.schema_name(), disable_keys_);
     boost::depth_first_search(graph_, boost::visitor(v));
     qname_to_class_ = v.class_view_models();
 }

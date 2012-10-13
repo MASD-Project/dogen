@@ -151,7 +151,6 @@ public:
     void is_parent(bool value) { is_parent_ = value; }
     /**@}*/
 
-
 private:
     std::list<std::string> namespaces_;
     std::list<property_view_model> properties_;
