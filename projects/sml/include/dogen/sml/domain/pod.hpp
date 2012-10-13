@@ -61,7 +61,10 @@ public:
      * @param properties list of properties for the pod.
      * @param parent_name qualified name for the pod's parent, if the
      * pod has one.
-     * @param generate Whether this pod should be code generated or not.
+     * @param generate Whether this pod should be code generated or
+     * not.
+     * @param is_parent If true, this pod is the parent of another pod
+     * in this model.
      */
     pod(qualified_name name,
         std::vector<dogen::sml::property> properties,
