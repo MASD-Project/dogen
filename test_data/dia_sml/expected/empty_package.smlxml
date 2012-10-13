@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE boost_serialization>
+<boost_serialization signature="serialization::archive" version="9">
+<entity class_id="0" tracking_level="0" version="0">
+	<name>empty_package</name>
+	<packages class_id="1" tracking_level="0" version="0">
+		<count>1</count>
+		<bucket_count>11</bucket_count>
+		<item_version>0</item_version>
+		<item class_id="2" tracking_level="0" version="0">
+			<first class_id="3" tracking_level="0" version="0">
+				<model_name>empty_package</model_name>
+				<external_package_path class_id="4" tracking_level="0" version="0">
+					<count>0</count>
+					<item_version>0</item_version>
+				</external_package_path>
+				<package_path>
+					<count>0</count>
+					<item_version>0</item_version>
+				</package_path>
+				<type_name>package_1</type_name>
+				<meta_type>4</meta_type>
+			</first>
+			<second class_id="5" tracking_level="0" version="0">
+				<name>
+					<model_name>empty_package</model_name>
+					<external_package_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</external_package_path>
+					<package_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</package_path>
+					<type_name>package_1</type_name>
+					<meta_type>4</meta_type>
+				</name>
+			</second>
+		</item>
+	</packages>
+	<pods class_id="6" tracking_level="0" version="0">
+		<count>0</count>
+		<bucket_count>11</bucket_count>
+		<item_version>0</item_version>
+	</pods>
+	<primitives class_id="7" tracking_level="0" version="0">
+		<count>0</count>
+		<bucket_count>11</bucket_count>
+		<item_version>0</item_version>
+	</primitives>
+	<external_package_path>
+		<count>0</count>
+		<item_version>0</item_version>
+	</external_package_path>
+	<schema_name></schema_name>
+</entity>
+</boost_serialization>
+

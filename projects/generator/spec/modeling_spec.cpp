@@ -92,17 +92,10 @@ dogen::sml::pod mock_pod(unsigned int i) {
     return mock_pod(i, model_name(i));
 }
 
-}
-
-using dogen::utility::test::contains_checker;
-using dogen::generator::modeling::validation_error;
-
-BOOST_AUTO_TEST_SUITE(modeling)
-
-BOOST_AUTO_TEST_CASE(class_in_a_package_dia_transforms_into_expected_sml) {
-    SETUP_TEST_LOG_SOURCE("class_in_a_package_dia_transforms_into_expected_sml");
-    using dogen::utility::test_data::dia_sml;
-    auto input_path(dia_sml::expected_class_in_a_package_dia_xml());
+bool test_dia_to_sml(
+    boost::filesystem::path input_path,
+    boost::filesystem::path expected_path,
+    boost::filesystem::path actual_path) {
 
     using dogen::utility::test::xml_deserialize;
     const auto input(xml_deserialize<dogen::dia::diagram>(input_path));
@@ -110,19 +103,102 @@ BOOST_AUTO_TEST_CASE(class_in_a_package_dia_transforms_into_expected_sml) {
     const std::string epp;
     const bool is_target(true);
     const bool verbose(true);
+    const std::string model_name(input_path.stem().string());
 
     using dogen::generator::modeling::dia_to_sml;
-    dia_to_sml dia_to_sml(
-        input, class_in_a_package_model_name, epp, is_target, verbose);
-    dogen::sml::model actual(dia_to_sml.transform());
-
-    auto actual_path(dia_sml::actual_class_in_a_package_sml_xml());
-    auto expected_path(dia_sml::expected_class_in_a_package_sml_xml());
-    BOOST_LOG_SEV(lg, debug) << "diff -u " << expected_path.string()
-                             << " " << actual_path.string();
+    dia_to_sml d(input, model_name, epp, is_target, verbose);
+    dogen::sml::model actual(d.transform());
 
     using dogen::utility::test::asserter;
-    BOOST_CHECK(asserter::assert_object(expected_path, actual_path, actual));
+    return asserter::assert_object(expected_path, actual_path, actual);
+}
+
+}
+
+using dogen::utility::test_data::dia_sml;
+using dogen::utility::test::contains_checker;
+using dogen::generator::modeling::validation_error;
+
+BOOST_AUTO_TEST_SUITE(modeling)
+
+BOOST_AUTO_TEST_CASE(class_in_a_package_dia_transforms_into_expected_sml) {
+    SETUP_TEST_LOG("class_in_a_package_dia_transforms_into_expected_sml");
+    const auto input_path(dia_sml::expected_class_in_a_package_dia_xml());
+    const auto actual_path(dia_sml::actual_class_in_a_package_sml_xml());
+    const auto expected_path(dia_sml::expected_class_in_a_package_sml_xml());
+    BOOST_CHECK(test_dia_to_sml(input_path, expected_path, actual_path));
+}
+
+BOOST_AUTO_TEST_CASE(empty_dia_transforms_into_expected_sml) {
+    SETUP_TEST_LOG("empty_dia_transforms_into_expected_sml");
+    const auto input_path(dia_sml::expected_empty_dia_xml());
+    const auto actual_path(dia_sml::actual_empty_sml_xml());
+    const auto expected_path(dia_sml::expected_empty_sml_xml());
+    BOOST_CHECK(test_dia_to_sml(input_path, expected_path, actual_path));
+}
+
+BOOST_AUTO_TEST_CASE(empty_package_dia_transforms_into_expected_sml) {
+    SETUP_TEST_LOG("empty_package_dia_transforms_into_expected_sml");
+    const auto input_path(dia_sml::expected_empty_package_dia_xml());
+    const auto actual_path(dia_sml::actual_empty_package_sml_xml());
+    const auto expected_path(dia_sml::expected_empty_package_sml_xml());
+    BOOST_CHECK(test_dia_to_sml(input_path, expected_path, actual_path));
+}
+
+BOOST_AUTO_TEST_CASE(classes_inout_package_dia_transforms_into_expected_sml) {
+    SETUP_TEST_LOG("classes_inout_package_dia_transforms_into_expected_sml");
+    const auto input_path(dia_sml::expected_classes_inout_package_dia_xml());
+    const auto actual_path(dia_sml::actual_classes_inout_package_sml_xml());
+    const auto expected_path(dia_sml::expected_classes_inout_package_sml_xml());
+    BOOST_CHECK(test_dia_to_sml(input_path, expected_path, actual_path));
+}
+
+BOOST_AUTO_TEST_CASE(class_without_attributes_dia_transforms_into_expected_sml) {
+    SETUP_TEST_LOG("class_without_attributes_dia_transforms_into_expected_sml");
+    const auto input_path(dia_sml::expected_class_without_attributes_dia_xml());
+    const auto actual_path(dia_sml::actual_class_without_attributes_sml_xml());
+    const auto expected_path(dia_sml::expected_class_without_attributes_sml_xml());
+    BOOST_CHECK(test_dia_to_sml(input_path, expected_path, actual_path));
+}
+
+BOOST_AUTO_TEST_CASE(class_without_package_dia_transforms_into_expected_sml) {
+    SETUP_TEST_LOG("class_without_package_dia_transforms_into_expected_sml");
+    const auto input_path(dia_sml::expected_class_without_package_dia_xml());
+    const auto actual_path(dia_sml::actual_class_without_package_sml_xml());
+    const auto expected_path(dia_sml::expected_class_without_package_sml_xml());
+    BOOST_CHECK(test_dia_to_sml(input_path, expected_path, actual_path));
+}
+
+BOOST_AUTO_TEST_CASE(classes_without_package_dia_transforms_into_expected_sml) {
+    SETUP_TEST_LOG("classes_without_package_dia_transforms_into_expected_sml");
+    const auto input_path(dia_sml::expected_classes_without_package_dia_xml());
+    const auto actual_path(dia_sml::actual_classes_without_package_sml_xml());
+    const auto expected_path(dia_sml::expected_classes_without_package_sml_xml());
+    BOOST_CHECK(test_dia_to_sml(input_path, expected_path, actual_path));
+}
+
+BOOST_AUTO_TEST_CASE(two_layers_with_objects_dia_transforms_into_expected_sml) {
+    SETUP_TEST_LOG("two_layers_with_objects_dia_transforms_into_expected_sml");
+    const auto input_path(dia_sml::expected_two_layers_with_objects_dia_xml());
+    const auto actual_path(dia_sml::actual_two_layers_with_objects_sml_xml());
+    const auto expected_path(dia_sml::expected_two_layers_with_objects_sml_xml());
+    BOOST_CHECK(test_dia_to_sml(input_path, expected_path, actual_path));
+}
+
+BOOST_AUTO_TEST_CASE(all_primitives_dia_transforms_into_expected_sml) {
+    SETUP_TEST_LOG("all_primitives_dia_transforms_into_expected_sml");
+    const auto input_path(dia_sml::expected_all_primitives_dia_xml());
+    const auto actual_path(dia_sml::actual_all_primitives_sml_xml());
+    const auto expected_path(dia_sml::expected_all_primitives_sml_xml());
+    BOOST_CHECK(test_dia_to_sml(input_path, expected_path, actual_path));
+}
+
+BOOST_AUTO_TEST_CASE(trivial_inheritance_dia_transforms_into_expected_sml) {
+    SETUP_TEST_LOG("trivial_inheritance_dia_transforms_into_expected_sml");
+    const auto input_path(dia_sml::expected_trivial_inheritance_dia_xml());
+    const auto actual_path(dia_sml::actual_trivial_inheritance_sml_xml());
+    const auto expected_path(dia_sml::expected_trivial_inheritance_sml_xml());
+    BOOST_CHECK(test_dia_to_sml(input_path, expected_path, actual_path));
 }
 
 BOOST_AUTO_TEST_CASE(building_n_distinct_models_with_one_pod_each_results_in_n_pods_in_combined_model) {

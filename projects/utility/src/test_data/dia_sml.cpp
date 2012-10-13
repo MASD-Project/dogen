@@ -82,34 +82,54 @@ path expected_compressed_dia_xml(
     "dia_sml/expected/compressed.diaxml");
 path expected_empty_dia_xml(
     "dia_sml/expected/empty.diaxml");
+path expected_empty_sml_xml(
+    "dia_sml/expected/empty.smlxml");
 path expected_two_empty_layers_dia_xml(
     "dia_sml/expected/two_empty_layers.diaxml");
 path expected_stand_alone_class_dia_xml(
     "dia_sml/expected/stand_alone_class.diaxml");
 path expected_empty_package_dia_xml(
     "dia_sml/expected/empty_package.diaxml");
+path expected_empty_package_sml_xml(
+    "dia_sml/expected/empty_package.smlxml");
 path expected_class_without_name_dia_xml(
     "dia_sml/expected/class_without_name.diaxml");
 path expected_classes_inout_package_dia_xml(
     "dia_sml/expected/classes_inout_package.diaxml");
+path expected_classes_inout_package_sml_xml(
+    "dia_sml/expected/classes_inout_package.smlxml");
 path expected_class_without_attributes_dia_xml(
     "dia_sml/expected/class_without_attributes.diaxml");
+path expected_class_without_attributes_sml_xml(
+    "dia_sml/expected/class_without_attributes.smlxml");
 path expected_class_without_package_dia_xml(
     "dia_sml/expected/class_without_package.diaxml");
+path expected_class_without_package_sml_xml(
+    "dia_sml/expected/class_without_package.smlxml");
 path expected_classes_in_a_package_dia_xml(
     "dia_sml/expected/classes_in_a_package.diaxml");
+path expected_classes_in_a_package_sml_xml(
+    "dia_sml/expected/classes_in_a_package.smlxml");
 path expected_classes_without_package_dia_xml(
     "dia_sml/expected/classes_without_package.diaxml");
+path expected_classes_without_package_sml_xml(
+    "dia_sml/expected/classes_without_package.smlxml");
 path expected_package_without_name_dia_xml(
     "dia_sml/expected/package_without_name.diaxml");
 path expected_two_layers_with_objects_dia_xml(
     "dia_sml/expected/two_layers_with_objects.diaxml");
+path expected_two_layers_with_objects_sml_xml(
+    "dia_sml/expected/two_layers_with_objects.smlxml");
 path expected_class_in_a_package_stdout_txt(
     "dia_sml/expected/class_in_a_package_stdout.txt");
 path expected_all_primitives_dia_xml(
     "dia_sml/expected/all_primitives.diaxml");
+path expected_all_primitives_sml_xml(
+    "dia_sml/expected/all_primitives.smlxml");
 path expected_trivial_inheritance_dia_xml(
     "dia_sml/expected/trivial_inheritance.diaxml");
+path expected_trivial_inheritance_sml_xml(
+    "dia_sml/expected/trivial_inheritance.smlxml");
 
 path actual(
     "dia_sml/actual");
@@ -121,34 +141,52 @@ path actual_compressed_dia_xml(
     "dia_sml/actual/compressed.diaxml");
 path actual_empty_dia_xml(
     "dia_sml/actual/empty.diaxml");
+path actual_empty_sml_xml(
+    "dia_sml/actual/empty.smlxml");
 path actual_two_empty_layers_dia_xml(
     "dia_sml/actual/two_empty_layers.diaxml");
 path actual_stand_alone_class_dia_xml(
     "dia_sml/actual/stand_alone_class.diaxml");
 path actual_empty_package_dia_xml(
     "dia_sml/actual/empty_package.diaxml");
+path actual_empty_package_sml_xml(
+    "dia_sml/actual/empty_package.smlxml");
 path actual_class_without_name_dia_xml(
     "dia_sml/actual/class_without_name.diaxml");
 path actual_classes_inout_package_dia_xml(
     "dia_sml/actual/classes_inout_package.diaxml");
+path actual_classes_inout_package_sml_xml(
+    "dia_sml/actual/classes_inout_package.smlxml");
 path actual_class_without_attributes_dia_xml(
     "dia_sml/actual/class_without_attributes.diaxml");
+path actual_class_without_attributes_sml_xml(
+    "dia_sml/actual/class_without_attributes.smlxml");
 path actual_class_without_package_dia_xml(
     "dia_sml/actual/class_without_package.diaxml");
+path actual_class_without_package_sml_xml(
+    "dia_sml/actual/class_without_package.smlxml");
 path actual_classes_in_a_package_dia_xml(
     "dia_sml/actual/classes_in_a_package.diaxml");
 path actual_classes_without_package_dia_xml(
     "dia_sml/actual/classes_without_package.diaxml");
+path actual_classes_without_package_sml_xml(
+    "dia_sml/actual/classes_without_package.smlxml");
 path actual_package_without_name_dia_xml(
     "dia_sml/actual/package_without_name.diaxml");
 path actual_two_layers_with_objects_dia_xml(
     "dia_sml/actual/two_layers_with_objects.diaxml");
+path actual_two_layers_with_objects_sml_xml(
+    "dia_sml/actual/two_layers_with_objects.smlxml");
 path actual_class_in_a_package_stdout_txt(
     "dia_sml/actual/class_in_a_package_stdout.txt");
 path actual_all_primitives_dia_xml(
     "dia_sml/actual/all_primitives.diaxml");
+path actual_all_primitives_sml_xml(
+    "dia_sml/actual/all_primitives.smlxml");
 path actual_trivial_inheritance_dia_xml(
     "dia_sml/actual/trivial_inheritance.diaxml");
+path actual_trivial_inheritance_sml_xml(
+    "dia_sml/actual/trivial_inheritance.smlxml");
 
 }
 
@@ -185,8 +223,7 @@ path dia_sml::input_two_empty_layers_dia() {
 }
 
 path dia_sml::input_stand_alone_class_dia() {
-    return validating_resolver::resolve(
-        ::input_stand_alone_class_dia);
+    return validating_resolver::resolve(::input_stand_alone_class_dia);
 }
 
 path dia_sml::input_empty_package_dia() {
@@ -307,6 +344,10 @@ path dia_sml::expected_empty_dia_xml() {
     return validating_resolver::resolve(::expected_empty_dia_xml);
 }
 
+path dia_sml::expected_empty_sml_xml() {
+    return validating_resolver::resolve(::expected_empty_sml_xml);
+}
+
 path dia_sml::expected_two_empty_layers_dia_xml() {
     return validating_resolver::resolve(::expected_two_empty_layers_dia_xml);
 }
@@ -317,8 +358,11 @@ path dia_sml::expected_stand_alone_class_dia_xml() {
 }
 
 path dia_sml::expected_empty_package_dia_xml() {
-    return validating_resolver::resolve(
-        ::expected_empty_package_dia_xml);
+    return validating_resolver::resolve(::expected_empty_package_dia_xml);
+}
+
+path dia_sml::expected_empty_package_sml_xml() {
+    return validating_resolver::resolve(::expected_empty_package_sml_xml);
 }
 
 path dia_sml::expected_class_without_name_dia_xml() {
@@ -331,14 +375,29 @@ path dia_sml::expected_classes_inout_package_dia_xml() {
         ::expected_classes_inout_package_dia_xml);
 }
 
+path dia_sml::expected_classes_inout_package_sml_xml() {
+    return validating_resolver::resolve(
+        ::expected_classes_inout_package_sml_xml);
+}
+
 path dia_sml::expected_class_without_attributes_dia_xml() {
     return validating_resolver::resolve(
         ::expected_class_without_attributes_dia_xml);
 }
 
+path dia_sml::expected_class_without_attributes_sml_xml() {
+    return validating_resolver::resolve(
+        ::expected_class_without_attributes_sml_xml);
+}
+
 path dia_sml::expected_class_without_package_dia_xml() {
     return validating_resolver::resolve(
         ::expected_class_without_package_dia_xml);
+}
+
+path dia_sml::expected_class_without_package_sml_xml() {
+    return validating_resolver::resolve(
+        ::expected_class_without_package_sml_xml);
 }
 
 path dia_sml::expected_classes_in_a_package_dia_xml() {
@@ -349,6 +408,11 @@ path dia_sml::expected_classes_in_a_package_dia_xml() {
 path dia_sml::expected_classes_without_package_dia_xml() {
     return validating_resolver::resolve(
         ::expected_classes_without_package_dia_xml);
+}
+
+path dia_sml::expected_classes_without_package_sml_xml() {
+    return validating_resolver::resolve(
+        ::expected_classes_without_package_sml_xml);
 }
 
 path dia_sml::expected_package_without_name_dia_xml() {
@@ -366,13 +430,25 @@ path dia_sml::expected_two_layers_with_objects_dia_xml() {
         ::expected_two_layers_with_objects_dia_xml);
 }
 
+path dia_sml::expected_two_layers_with_objects_sml_xml() {
+    return validating_resolver::resolve(
+        ::expected_two_layers_with_objects_sml_xml);
+}
+
 path dia_sml::expected_all_primitives_dia_xml() {
-    return resolver::resolve(::expected_all_primitives_dia_xml);
+    return validating_resolver::resolve(::expected_all_primitives_dia_xml);
+}
+
+path dia_sml::expected_all_primitives_sml_xml() {
+    return validating_resolver::resolve(::expected_all_primitives_sml_xml);
 }
 
 path dia_sml::expected_trivial_inheritance_dia_xml() {
-    return resolver::resolve(
-        ::expected_trivial_inheritance_dia_xml);
+    return validating_resolver::resolve(::expected_trivial_inheritance_dia_xml);
+}
+
+path dia_sml::expected_trivial_inheritance_sml_xml() {
+    return validating_resolver::resolve(::expected_trivial_inheritance_sml_xml);
 }
 
 path dia_sml::actual() {
@@ -395,38 +471,52 @@ path dia_sml::actual_empty_dia_xml() {
     return resolver::resolve(::actual_empty_dia_xml);
 }
 
+path dia_sml::actual_empty_sml_xml() {
+    return resolver::resolve(::actual_empty_sml_xml);
+}
+
 path dia_sml::actual_two_empty_layers_dia_xml() {
     return resolver::resolve(::actual_two_empty_layers_dia_xml);
 }
 
 path dia_sml::actual_stand_alone_class_dia_xml() {
-    return resolver::resolve(
-        ::actual_stand_alone_class_dia_xml);
+    return resolver::resolve(::actual_stand_alone_class_dia_xml);
 }
 
 path dia_sml::actual_empty_package_dia_xml() {
-    return resolver::resolve(
-        ::actual_empty_package_dia_xml);
+    return resolver::resolve(::actual_empty_package_dia_xml);
+}
+
+path dia_sml::actual_empty_package_sml_xml() {
+    return resolver::resolve(::actual_empty_package_sml_xml);
 }
 
 path dia_sml::actual_class_without_name_dia_xml() {
-    return resolver::resolve(
-        ::actual_class_without_name_dia_xml);
+    return resolver::resolve(::actual_class_without_name_dia_xml);
 }
 
 path dia_sml::actual_classes_inout_package_dia_xml() {
-    return resolver::resolve(
-        ::actual_classes_inout_package_dia_xml);
+    return resolver::resolve(::actual_classes_inout_package_dia_xml);
+}
+
+path dia_sml::actual_classes_inout_package_sml_xml() {
+    return resolver::resolve(::actual_classes_inout_package_sml_xml);
 }
 
 path dia_sml::actual_class_without_attributes_dia_xml() {
-    return resolver::resolve(
-        ::actual_class_without_attributes_dia_xml);
+    return resolver::resolve(::actual_class_without_attributes_dia_xml);
+}
+
+path dia_sml::actual_class_without_attributes_sml_xml() {
+    return resolver::resolve(::actual_class_without_attributes_sml_xml);
 }
 
 path dia_sml::actual_class_without_package_dia_xml() {
-    return resolver::resolve(
-        ::actual_class_without_package_dia_xml);
+    return resolver::resolve(::actual_class_without_package_dia_xml);
+}
+
+path dia_sml::actual_class_without_package_sml_xml() {
+    return resolver::resolve(::actual_class_without_package_sml_xml);
 }
 
 path dia_sml::actual_classes_in_a_package_dia_xml() {
@@ -435,31 +525,43 @@ path dia_sml::actual_classes_in_a_package_dia_xml() {
 }
 
 path dia_sml::actual_classes_without_package_dia_xml() {
-    return resolver::resolve(
-        ::actual_classes_without_package_dia_xml);
+    return resolver::resolve(::actual_classes_without_package_dia_xml);
+}
+
+path dia_sml::actual_classes_without_package_sml_xml() {
+    return resolver::resolve(::actual_classes_without_package_sml_xml);
 }
 
 path dia_sml::actual_package_without_name_dia_xml() {
-    return resolver::resolve(
-        ::actual_package_without_name_dia_xml);
+    return resolver::resolve(::actual_package_without_name_dia_xml);
 }
 
 path dia_sml::actual_two_layers_with_objects_dia_xml() {
-    return resolver::resolve(
-        ::actual_two_layers_with_objects_dia_xml);
+    return resolver::resolve(::actual_two_layers_with_objects_dia_xml);
+}
+
+path dia_sml::actual_two_layers_with_objects_sml_xml() {
+    return resolver::resolve(::actual_two_layers_with_objects_sml_xml);
 }
 
 path dia_sml::actual_class_in_a_package_stdout_txt() {
-    return resolver::resolve(
-        ::actual_class_in_a_package_stdout_txt);
+    return resolver::resolve(::actual_class_in_a_package_stdout_txt);
 }
 
 path dia_sml::actual_trivial_inheritance_dia_xml() {
     return resolver::resolve(::actual_trivial_inheritance_dia_xml);
 }
 
+path dia_sml::actual_trivial_inheritance_sml_xml() {
+    return resolver::resolve(::actual_trivial_inheritance_sml_xml);
+}
+
 path dia_sml::actual_all_primitives_dia_xml() {
     return resolver::resolve(::actual_all_primitives_dia_xml);
+}
+
+path dia_sml::actual_all_primitives_sml_xml() {
+    return resolver::resolve(::actual_all_primitives_sml_xml);
 }
 
 } } }
