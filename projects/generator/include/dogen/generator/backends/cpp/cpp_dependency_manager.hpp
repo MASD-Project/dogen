@@ -64,15 +64,16 @@ public:
       use_integrated_io_(std::move(rhs.use_integrated_io_)),
       disable_io_(std::move(rhs.disable_io_)) { }
 
-    cpp_dependency_manager(sml::model model,
-        cpp_location_manager location_manager, bool disable_keys,
+    cpp_dependency_manager(const sml::model& model,
+        const cpp_location_manager& location_manager, bool disable_keys,
         bool use_integrated_io, bool disable_io);
 
 private:
-    bool has_versioned_dependency(cpp_facet_types ft, cpp_file_types flt) const;
+    bool has_versioned_dependency(const sml::pod& pod, cpp_facet_types ft,
+        cpp_file_types flt) const;
 
     cpp_location_request location_request_factory(cpp_facet_types ft,
-        cpp_file_types flt, sml::qualified_name name) const;
+        cpp_file_types flt, const sml::qualified_name& name) const;
 
     /**
      * @brief Returns the dependency to the unversioned key domain
@@ -91,16 +92,16 @@ private:
      * @brief Returns the dependency to the domain header.
      */
     std::string
-    domain_header_dependency(sml::qualified_name name) const;
+    domain_header_dependency(const sml::qualified_name& name) const;
 
     /**
      * @brief Returns the dependency to the header file.
      */
-    std::string header_dependency(sml::qualified_name name,
+    std::string header_dependency(const sml::qualified_name& name,
         cpp_facet_types ft) const;
 
     std::list<std::string>
-    user(sml::qualified_name name, cpp_facet_types ft,
+    user(const sml::qualified_name& name, cpp_facet_types ft,
         cpp_file_types flt, cpp_aspect_types at) const;
 
 public:
@@ -112,7 +113,7 @@ public:
      * includers.
      */
     void register_header(cpp_facet_types ft,
-        boost::filesystem::path relative_path);
+        const boost::filesystem::path& relative_path);
 
 public:
     /**
@@ -125,9 +126,9 @@ public:
      * dependencies. These are ignored when you supply just @e name.
      */
     /**@{*/
-    std::list<std::string> system(std::string name,
+    std::list<std::string> system(const std::string& name,
         cpp_facet_types ft, cpp_file_types flt, cpp_aspect_types at) const;
-    std::list<std::string> system(sml::pod pod,
+    std::list<std::string> system(const sml::pod& pod,
         cpp_facet_types ft, cpp_file_types flt, cpp_aspect_types at) const;
     /**@}*/
 
@@ -142,9 +143,9 @@ public:
      * dependencies. These are ignored when you supply just @e name.
      */
     /**@{*/
-    std::list<std::string> user(std::string name,
+    std::list<std::string> user(const std::string& name,
         cpp_facet_types ft, cpp_file_types flt, cpp_aspect_types at) const;
-    std::list<std::string> user(sml::pod pod,
+    std::list<std::string> user(const sml::pod& pod,
         cpp_facet_types ft, cpp_file_types flt, cpp_aspect_types at) const;
     /**@}*/
 
