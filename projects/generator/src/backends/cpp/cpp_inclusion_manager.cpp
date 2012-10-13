@@ -24,7 +24,7 @@
 namespace {
 
 using namespace dogen::utility::log;
-static logger lg(logger_factory("dependency_manager"));
+static logger lg(logger_factory("inclusion_manager"));
 
 const std::string empty;
 const std::string versioned_name("versioned_key");
@@ -37,7 +37,7 @@ namespace generator {
 namespace backends {
 namespace cpp {
 
-cpp_dependency_manager::cpp_dependency_manager(const sml::model& model,
+cpp_inclusion_manager::cpp_inclusion_manager(const sml::model& model,
     const cpp_location_manager& location_manager, bool disable_keys,
     bool use_integrated_io, bool disable_io)
     : model_(model), location_manager_(location_manager),
@@ -52,7 +52,7 @@ cpp_dependency_manager::cpp_dependency_manager(const sml::model& model,
         << " model name: " << model_.name();
 }
 
-cpp_location_request cpp_dependency_manager::
+cpp_location_request cpp_inclusion_manager::
 location_request_factory(cpp_facet_types ft, cpp_file_types flt,
     const sml::qualified_name& name) const {
 
@@ -66,19 +66,19 @@ location_request_factory(cpp_facet_types ft, cpp_file_types flt,
     return r;
 }
 
-void cpp_dependency_manager::register_header(cpp_facet_types ft,
+void cpp_inclusion_manager::register_header(cpp_facet_types ft,
     const boost::filesystem::path& relative_path) {
     headers_for_facet_[ft].push_back(relative_path.generic_string());
 }
 
-std::list<std::string> cpp_dependency_manager::
+std::list<std::string> cpp_inclusion_manager::
 system(const std::string& /*name*/, cpp_facet_types /*ft*/,
     cpp_file_types /*flt*/, cpp_aspect_types /*at*/) const {
     std::list<std::string> r;
     return r;
 }
 
-std::list<std::string> cpp_dependency_manager::
+std::list<std::string> cpp_inclusion_manager::
 system(const sml::pod& /*pod*/, cpp_facet_types /*ft*/,
     cpp_file_types /*flt*/, cpp_aspect_types /*at*/) const {
 
@@ -86,7 +86,7 @@ system(const sml::pod& /*pod*/, cpp_facet_types /*ft*/,
     return r;
 }
 
-std::string cpp_dependency_manager::unversioned_dependency() const {
+std::string cpp_inclusion_manager::unversioned_dependency() const {
     sml::qualified_name qn;
     qn.type_name(unversioned_name);
     qn.external_package_path(model_.external_package_path());
@@ -98,7 +98,7 @@ std::string cpp_dependency_manager::unversioned_dependency() const {
     return location_manager_.relative_logical_path(rq).generic_string();
 }
 
-bool cpp_dependency_manager::
+bool cpp_inclusion_manager::
 has_versioned_dependency(const sml::pod& /*pod*/, cpp_facet_types ft,
     cpp_file_types flt) const {
     if (disable_keys_)
@@ -129,7 +129,7 @@ has_versioned_dependency(const sml::pod& /*pod*/, cpp_facet_types ft,
     return true;
 }
 
-std::string cpp_dependency_manager::
+std::string cpp_inclusion_manager::
 versioned_dependency(cpp_facet_types ft, cpp_file_types flt) const {
     const bool is_implementation(flt == cpp_file_types::implementation);
     cpp_facet_types actual_facet(ft);
@@ -146,7 +146,7 @@ versioned_dependency(cpp_facet_types ft, cpp_file_types flt) const {
     return location_manager_.relative_logical_path(rq).generic_string();
 }
 
-std::string cpp_dependency_manager::
+std::string cpp_inclusion_manager::
 domain_header_dependency(const sml::qualified_name& name) const {
     const auto d(cpp_facet_types::domain);
     const auto h(cpp_file_types::header);
@@ -154,14 +154,14 @@ domain_header_dependency(const sml::qualified_name& name) const {
     return location_manager_.relative_logical_path(rq).generic_string();
 }
 
-std::string cpp_dependency_manager::header_dependency(
+std::string cpp_inclusion_manager::header_dependency(
     const sml::qualified_name& name, cpp_facet_types facet_type) const {
     const auto h(cpp_file_types::header);
     const auto rq(location_request_factory(facet_type, h, name));
     return location_manager_.relative_logical_path(rq).generic_string();
 }
 
-std::list<std::string> cpp_dependency_manager::
+std::list<std::string> cpp_inclusion_manager::
 user(const sml::qualified_name& name, cpp_facet_types facet_type,
     cpp_file_types file_type, cpp_aspect_types aspect_type) const {
 
@@ -189,7 +189,7 @@ user(const sml::qualified_name& name, cpp_facet_types facet_type,
 }
 
 std::list<std::string>
-cpp_dependency_manager::user(const std::string& name, cpp_facet_types ft,
+cpp_inclusion_manager::user(const std::string& name, cpp_facet_types ft,
     cpp_file_types flt, cpp_aspect_types at) const {
 
     sml::qualified_name qn;
@@ -199,7 +199,7 @@ cpp_dependency_manager::user(const std::string& name, cpp_facet_types ft,
     return user(qn, ft, flt, at);
 }
 
-std::list<std::string> cpp_dependency_manager::
+std::list<std::string> cpp_inclusion_manager::
 user(const sml::pod& pod, cpp_facet_types ft, cpp_file_types flt,
     cpp_aspect_types at) const {
     std::list<std::string> r(user(pod.name(), ft, flt, at));

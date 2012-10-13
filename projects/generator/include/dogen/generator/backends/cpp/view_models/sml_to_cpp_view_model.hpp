@@ -165,7 +165,7 @@ private:
     const sml::model model_;
     const bool disable_facet_includers_;
     const bool disable_keys_;
-    cpp_dependency_manager dependency_manager_;
+    cpp_inclusion_manager inclusion_manager_;
     std::unordered_map<sml::qualified_name, class_view_model> qname_to_class_;
     graph_type graph_;
     qname_to_vertex_type qname_to_vertex_;

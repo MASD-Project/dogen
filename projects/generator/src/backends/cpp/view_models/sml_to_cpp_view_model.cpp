@@ -233,7 +233,7 @@ sml_to_cpp_view_model(const cpp_location_manager& location_manager,
     facet_types_(facet_types),
     model_(model), disable_facet_includers_(disable_facet_includers),
     disable_keys_(disable_keys),
-    dependency_manager_(model, location_manager, disable_keys,
+    inclusion_manager_(model, location_manager, disable_keys,
         use_integrated_io, disable_io),
     root_vertex_(boost::add_vertex(graph_)) { }
 
@@ -329,12 +329,12 @@ transform_file(cpp_facet_types ft, cpp_file_types flt, const sml::pod& pod) {
         rq = location_request_factory(ft, flt, name);
         const auto rp(location_manager_.relative_logical_path(rq));
         r.header_guard(to_header_guard_name(rp));
-        dependency_manager_.register_header(ft, rp);
+        inclusion_manager_.register_header(ft, rp);
     }
 
     const cpp_aspect_types at(cpp_aspect_types::main);
-    r.system_dependencies(dependency_manager_.system(pod, ft, flt, at));
-    r.user_dependencies(dependency_manager_.user(pod, ft, flt, at));
+    r.system_dependencies(inclusion_manager_.system(pod, ft, flt, at));
+    r.user_dependencies(inclusion_manager_.user(pod, ft, flt, at));
     return r;
 }
 
@@ -452,8 +452,8 @@ create_key_file_view_model(cpp_facet_types ft, cpp_file_types flt,
 
     const std::string name(r.class_vm()->name());
     log_generating_file(ft, at, flt, name);
-    r.system_dependencies(dependency_manager_.system(name, ft, flt, at));
-    r.user_dependencies(dependency_manager_.user(name, ft, flt, at));
+    r.system_dependencies(inclusion_manager_.system(name, ft, flt, at));
+    r.user_dependencies(inclusion_manager_.user(name, ft, flt, at));
 
     sml::qualified_name qn;
     qn.external_package_path(model_.external_package_path());
@@ -464,7 +464,7 @@ create_key_file_view_model(cpp_facet_types ft, cpp_file_types flt,
         const auto rq(location_request_factory(ft, flt, qn));
         const auto rp(location_manager_.relative_logical_path(rq));
         r.header_guard(to_header_guard_name(rp));
-        dependency_manager_.register_header(ft, rp);
+        inclusion_manager_.register_header(ft, rp);
     }
 
     const auto rq(location_request_factory(ft, flt, qn));
@@ -516,8 +516,8 @@ sml_to_cpp_view_model::transform_facet_includers() const {
         vm.file_type(file_type);
 
         const auto a(cpp_aspect_types::includers);
-        vm.system_dependencies(dependency_manager_.system(n, ft, file_type, a));
-        vm.user_dependencies(dependency_manager_.user(n, ft, file_type, a));
+        vm.system_dependencies(inclusion_manager_.system(n, ft, file_type, a));
+        vm.user_dependencies(inclusion_manager_.user(n, ft, file_type, a));
         vm.aspect_type(a);
 
         r.push_back(vm);

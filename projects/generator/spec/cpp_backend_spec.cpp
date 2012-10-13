@@ -286,8 +286,8 @@ BOOST_AUTO_TEST_CASE(is_parent_flag_is_correctly_set_on_view_models) {
     bool integrated_io(false);
     bool disable_io(false);
 
-    using dogen::generator::backends::cpp::cpp_dependency_manager;
-    cpp_dependency_manager dm(m, lm, no_keys, integrated_io, disable_io);
+    using dogen::generator::backends::cpp::cpp_inclusion_manager;
+    cpp_inclusion_manager dm(m, lm, no_keys, integrated_io, disable_io);
 
     using dogen::generator::backends::cpp::cpp_facet_types;
     std::set<cpp_facet_types> ft;
