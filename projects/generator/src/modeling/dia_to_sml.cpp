@@ -547,6 +547,13 @@ dia_to_sml(const dia::diagram& diagram, const std::string& model_name,
       is_target_(is_target),
       verbose_(verbose) {
 
+    BOOST_LOG_SEV(lg, debug) << "Initialised with configuration:"
+                             << " model_name: " << model_name_
+                             << " external_package_path: "
+                             << external_package_path_
+                             << " is_target: " << is_target_
+                             << " verbose: " << verbose_;
+
     id_to_vertex_.insert(std::make_pair(root_vertex_id, root_vertex_));
     dia::object root;
     root.id(root_vertex_id);
