@@ -34,7 +34,9 @@ bool pod::operator==(const pod& rhs) const {
     return
         name_ == rhs.name_ &&
         properties_ == rhs.properties_ &&
-        parent_name_ == rhs.parent_name_;
+        parent_name_ == rhs.parent_name_ &&
+        generate_ == rhs.generate_ &&
+        is_parent_ == rhs.is_parent_;
 }
 
 void pod::to_stream(std::ostream& stream) const {
