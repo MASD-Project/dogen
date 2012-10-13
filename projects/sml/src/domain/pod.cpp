@@ -45,7 +45,8 @@ void pod::to_stream(std::ostream& stream) const {
            << name() << ","
            << "\"properties\":" << properties() << ","
            << parent_name() << ","
-           << "\"generate\": " << generate_
+           << "\"generate\": " << generate_ << ","
+           << "\"is_parent\": " << is_parent_
            << " }";
 }
 

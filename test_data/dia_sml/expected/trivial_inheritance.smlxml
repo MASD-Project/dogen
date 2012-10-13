@@ -62,6 +62,7 @@
 					</value>
 				</parent_name>
 				<generate>1</generate>
+				<is_parent>0</is_parent>
 			</second>
 		</item>
 		<item>
@@ -100,6 +101,7 @@
 					<initialized>0</initialized>
 				</parent_name>
 				<generate>1</generate>
+				<is_parent>0</is_parent>
 			</second>
 		</item>
 	</pods>

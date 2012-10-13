@@ -44,7 +44,6 @@ class pod_serializer;
  */
 class pod {
 public:
-    pod() = default;
     pod(const pod&) = default;
     pod& operator=(const pod&) = default;
     ~pod() = default;
@@ -53,6 +52,8 @@ private:
     friend class pod_serializer;
 
 public:
+    pod() : generate_(false), is_parent_(false) { }
+
     /**
      * @brief Initialises the pod.
      *
@@ -64,14 +65,16 @@ public:
      */
     pod(qualified_name name,
         std::vector<dogen::sml::property> properties,
-        boost::optional<qualified_name> parent_name, bool generate)
+        boost::optional<qualified_name> parent_name, bool generate,
+        bool is_parent)
         : name_(name), properties_(properties), parent_name_(parent_name),
-          generate_(generate) { }
+          generate_(generate), is_parent_(is_parent) { }
 
     pod(pod&& rhs) : name_(std::move(rhs.name_)),
                      properties_(std::move(rhs.properties_)),
                      parent_name_(std::move(rhs.parent_name_)),
-                     generate_(std::move(rhs.generate_)) { }
+                     generate_(std::move(rhs.generate_)),
+                     is_parent_(std::move(rhs.is_parent_)) { }
 
 public:
     /**
@@ -111,6 +114,15 @@ public:
     void generate(bool value) { generate_ = value; }
     /**@}*/
 
+    /**
+     * @brief True if this class is the parent of one or more classes,
+     * false otherwise.
+     */
+    /**@{*/
+    bool is_parent() const { return is_parent_; }
+    void is_parent(bool value) { is_parent_ = value; }
+    /**@}*/
+
 public:
     void to_stream(std::ostream& stream) const;
 
@@ -126,6 +138,7 @@ private:
     std::vector<dogen::sml::property> properties_;
     boost::optional<qualified_name> parent_name_;
     bool generate_;
+    bool is_parent_;
 };
 
 } }

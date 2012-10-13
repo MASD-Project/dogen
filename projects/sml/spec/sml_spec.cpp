@@ -108,8 +108,9 @@ BOOST_AUTO_TEST_CASE(exercise_type_and_descendants_io) {
 
     const std::vector<dogen::sml::property> p;
     const bool generate(true);
+    const bool parent(false);
 
-    dogen::sml::pod pod(child_type_name, p, parent_type_name, generate);
+    dogen::sml::pod pod(child_type_name, p, parent_type_name, generate, parent);
     BOOST_LOG_SEV(lg, info) << pod;
     BOOST_CHECK(true);
 }
