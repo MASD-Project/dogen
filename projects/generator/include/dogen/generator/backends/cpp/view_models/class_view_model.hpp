@@ -134,7 +134,7 @@ public:
      * @brief Parents for this class.
      */
     /**@{*/
-    std::list<parent_view_model> parents() {
+    std::list<parent_view_model> parents() const {
         return parents_;
     }
     void parents(const std::list<parent_view_model>& value) {
