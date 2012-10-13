@@ -19,7 +19,7 @@
  *
  */
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/generator/backends/cpp/cpp_dependency_manager.hpp"
+#include "dogen/generator/backends/cpp/cpp_inclusion_manager.hpp"
 
 namespace {
 

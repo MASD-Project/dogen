@@ -33,7 +33,7 @@
 #include <unordered_map>
 #include <boost/graph/adjacency_list.hpp>
 #include "dogen/generator/backends/cpp/cpp_location_manager.hpp"
-#include "dogen/generator/backends/cpp/cpp_dependency_manager.hpp"
+#include "dogen/generator/backends/cpp/cpp_inclusion_manager.hpp"
 #include "dogen/generator/backends/cpp/cpp_aspect_types.hpp"
 #include "dogen/generator/backends/cpp/cpp_file_types.hpp"
 #include "dogen/generator/backends/cpp/cpp_facet_types.hpp"
