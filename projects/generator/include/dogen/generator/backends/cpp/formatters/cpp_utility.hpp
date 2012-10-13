@@ -51,6 +51,7 @@ public:
     void close_scope();
     void blank_line(unsigned int how_many = 1);
     std::string as_member_variable(const std::string& property_name) const;
+    std::string as_getter(const std::string& property_name) const;
     std::string quote(const std::string& original) const;
     std::string quote_escaped(const std::string& original) const;
 
