@@ -28,8 +28,8 @@ IM should ask the LM for any settings which the LM already contains
 such as disable keys, rather than duplicate these as constructor
 parameters. This also avoid inconsistencies between the two.
 
-*** Update org model to reflect latest database API                    :epic:
-**** Add versioned and unversioned key to org model                   :story:
+*** Update prototype model to reflect latest database API              :epic:
+**** Add versioned and unversioned key to prototype model             :story:
 **** Refactor setup of SQL from load/erase methods                    :story:
 **** Create new range based SQL methods                               :story:
 **** Remove transaction setup from exchanger                          :story:
@@ -69,7 +69,7 @@ spec. However, it only tests a few select models.
 
 Formatters:
 
-- File names are: FQN_ENTITY, e.g. kitanda_org_currency_table
+- File names are: FQN_ENTITY, e.g. kitanda_prototype_currency_table
 - create: table, load, save, erase, test data generators, test
 - drop: table, load, save, erase, test data generators, test
 - domains
@@ -122,7 +122,7 @@ Ideally, get a state of affairs that resebles something like this:
 
 ***** Review and fix existing targets                                  :task:
 
-- Rename all =currency= targets to =org= targets
+- Rename all =currency= targets to =prototype= targets
 - Ensure the targets have correct dependencies
 
 ***** Add support for multiple databases                               :task:
@@ -544,4 +544,3 @@ comment for a test but forgot to keep on doing it. Example:
 
 This helps make the purpose of the test clearer when the name is not
 sufficient.
-
