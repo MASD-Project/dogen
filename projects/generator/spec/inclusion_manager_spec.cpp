@@ -126,16 +126,16 @@ includes_for_one_pod_model(cpp_facet_types ft,
     BOOST_CHECK(pods.size() == 1);
     const auto p(pods.begin()->second);
 
-    auto d(factory(m));
+    auto im(factory(m));
     std::vector<std::list<std::string> > r;
     r.reserve(4);
 
     const cpp_aspect_types main(cpp_aspect_types::main);
-    r.push_back(d.user(p, ft,  cpp_file_types::header, main));
-    r.push_back(d.system(p, ft,  cpp_file_types::header, main));
+    r.push_back(im.user(p, ft,  cpp_file_types::header, main));
+    r.push_back(im.system(p, ft,  cpp_file_types::header, main));
 
-    r.push_back(d.user(p, ft,  cpp_file_types::implementation, main));
-    r.push_back(d.system(p, ft,  cpp_file_types::implementation, main));
+    r.push_back(im.user(p, ft,  cpp_file_types::implementation, main));
+    r.push_back(im.system(p, ft,  cpp_file_types::implementation, main));
     return r;
 }
 
@@ -387,10 +387,13 @@ BOOST_AUTO_TEST_CASE(processing_one_pod_model_with_no_keys_configuration_generat
         all.splice(all.end(), i[header_system]);
         all.splice(all.end(), i[implementation_user]);
         all.splice(all.end(), i[implementation_system]);
+        BOOST_LOG_SEV(lg, debug) << "all dependencies for facet "
+                                 << facet << ": "
+                                 << all;
 
+        BOOST_CHECK(!all.empty());
         for (const auto s : all)
             BOOST_CHECK(!boost::contains(s, versioned_key));
-
     }
 }
 
