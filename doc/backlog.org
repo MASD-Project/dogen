@@ -4,6 +4,8 @@ This file contains all stories that haven't been assigned to a sprint.
 
 ** Development Stories
 
+Stories that we intend to look at, at some point.
+
 *** Handle unnamed models properly
 
 The option disable model name was meant to allow the generation of
@@ -25,3 +27,521 @@ we also have a location manager inside of the inclusion manager. The
 IM should ask the LM for any settings which the LM already contains
 such as disable keys, rather than duplicate these as constructor
 parameters. This also avoid inconsistencies between the two.
+
+*** Update org model to reflect latest database API                    :epic:
+**** Add versioned and unversioned key to org model                   :story:
+**** Refactor setup of SQL from load/erase methods                    :story:
+**** Create new range based SQL methods                               :story:
+**** Remove transaction setup from exchanger                          :story:
+**** Modify tables and stored procedures to match the new API structure :story:
+**** Modify test data generator and test procs to match the new API structure :story:
+**** Deploy new SQL on all environments                               :story:
+***** Newton                                                            :task:
+***** Pascal                                                            :task:
+***** iMac                                                              :task:
+***** Lorenz                                                            :task:
+***** Euler                                                             :task:
+***** Ronin                                                             :task:
+***** Oppenheimer                                                       :task:
+***** Erdos                                                             :task:
+*** Update C++ code generator to latest database API                  :story:
+**** Update data exchanger header                                      :task:
+**** Update data exchanger implementation                              :task:
+*** Use explicit casting for versioned to unversioned conversions     :story:
+
+At present we have to_versioned; in reality this would be dealt much
+better using explicit casts:
+
+#+begin_example
+explicit operator std::string() { return "explicit"; }
+#+end_example
+
+*** Create tests for all generated models                             :story:
+
+At the moment we have a spec for code generated models: generated code
+spec. However, it only tests a few select models.
+
+*** Add SQL support to Dogen                                           :epic:
+**** Note on formatters                                                :note:
+
+- Use an attribute with the type to determine if we want only the ID of
+  the foreign key in C++ code or if we want a whole type.
+
+Formatters:
+
+- File names are: FQN_ENTITY, e.g. kitanda_org_currency_table
+- create: table, load, save, erase, test data generators, test
+- drop: table, load, save, erase, test data generators, test
+- domains
+- create schema formatter
+- create all tables
+- create all procs
+- drop all tables
+- drop all procs
+- drop all
+- create all
+
+**** Create SQL backend                                               :story:
+***** Create new backend                                               :task:
+***** Create new location manager                                      :task:
+***** Create aspect and facet types                                    :task:
+***** Create a view model for table and stored procedure               :task:
+***** Create a transformer from SML to view model                      :task:
+***** Add SQL command line options                                     :task:
+**** Add table support                                                :story:
+***** Create table formatter                                           :task:
+***** Drop table formatter                                             :task:
+***** Test formatters                                                  :task:
+
+**** Add load support                                                 :story:
+***** Create load formatter                                            :task:
+***** Drop load formatter                                              :task:
+***** Test formatters                                                  :task:
+
+**** Add save support                                                 :story:
+***** Create save formatter                                            :task:
+***** Drop save formatter                                              :task:
+***** Test formatters                                                  :task:
+
+**** Add delete support                                               :story:
+***** Create delete formatter                                          :task:
+***** Drop delete formatter                                            :task:
+***** Test formatters                                                  :task:
+
+**** Add test support                                                 :story:
+***** Create test formatter                                            :task:
+***** Drop test formatter                                              :task:
+***** Test formatters                                                  :task:
+
+**** Analyse deployment support on CMake                              :story:
+
+Ideally, get a state of affairs that resebles something like this:
+
+- make deploy_database
+- make undeploy_database
+
+***** Review and fix existing targets                                  :task:
+
+- Rename all =currency= targets to =org= targets
+- Ensure the targets have correct dependencies
+
+***** Add support for multiple databases                               :task:
+
+*** Add database tests for generated code                             :story:
+*** Missing =enable_facet_XYZ= tests                                  :story:
+
+- database
+- test data
+
+*** Log should use path for file names                                :story:
+
+At present we are passing the log file name as a string and
+concatenating using "/". This is not very good for Windows. We should
+use =boost::filesystem::path= throughout and do a =.string= at the
+very end if boost log does not support boost filesystem (or use the
+path directly if it does).
+
+*** Before throwing write exception to log file                       :story:
+
+We have cases were an exception is thrown and its impossible to figure
+out where. If we logged before throw we'd have all the context.
+
+*** Investigate generation of setters using const ref                 :story:
+
+It seems its possible to overload setters with both by value and by
+const ref. We need to figure out how this works.
+
+http://www.codesynthesis.com/~boris/blog/2012/06/19/efficient-argument-passing-cxx11-part1/
+
+***** Update class template                                            :task:
+***** Update tests                                                     :task:
+
+*** Create model with invalid primitive type                          :story:
+
+At present we are validating that all primitive types work but we
+don't check that an invalid type doesn't work.
+
+*** Private properties should be ignored                              :story:
+
+At present we treat private properties as if they were public; we
+should ignore them. We need to go through all the models and change
+the private ones to public before we do this.
+
+*** Sanity check packages automatically
+
+- sanity check that package installed correctly, e.g. check for a few
+  key files.
+- run sanity tests, e.g. create a dogen model and validate the results
+- run uninstaller and sanity check that files are gone
+  - this should actually be a build agent so we can see that deployment
+    is green. We should create a deployment CMake script that does this.
+- build package and drop them on a well known location;
+- Create a batch script that polls this location for new packages;
+  when one is found run package installer.
+- we should create a set of VMs that are specific for testing - the
+  test environments. One per OS. These are clean builds with nothing
+  on them. To start off with they may contain postgres so we can
+  connect locally.
+
+*** Package names should follow a well-known convention
+
+We need to make sure our package names are consistent with the
+platform conventions.
+
+- [[http://pastebin.com/TR17TUy9][Example of platform IFs]]
+- [[http://libdivsufsort.googlecode.com/svn-history/r6/trunk/CMakeModules/ProjectCPack.cmake][Example CPack]]
+- [[http://cmake.3232098.n2.nabble.com/Automatically-add-a-revision-number-to-the-CPack-installer-name-td7356239.htmlhttp://cmake.3232098.n2.nabble.com/Automatically-add-a-revision-number-to-the-CPack-installer-name-td7356239.html][Automatically add a revision number to the CPack installer name]]
+- [[http://www.cmake.org/Wiki/CMake:CPackConfiguration][CPack Configuration]]
+
+*** Have licence and copyright information in packages                :story:
+
+We need to copy LICENCE.TXT from the doc directory in the build process
+
+Files ReadMe.txt and Copyright.txt were created in
+cpack/CMakeLists.txt only to allow the packaging process
+
+*** Check if we've replaced =assert_object= with =assert_file=        :story:
+
+Assert file is now able to do intelligent comparisons based on the
+extension of the file. From a cursory look, all the usages we have of
+assert object can be replaced by assert file. If that's the case we
+can also remove this function.
+
+*** Code generation of exception classes
+
+The code generator should generate exception classes too. We need some
+form of attribute (perhaps a Dia stereotype) to mark the class as an
+exception and then the code generator will use a different template
+for the class generator. We could have an option of boost exception or
+not. We may need to have a form of inheriting from a base exception
+for a given model.
+
+*** Investigate GDB visualisers for generated models
+
+It would be great if the code generator created GDB visualisers for
+the types in a generated models such that one could inspect values of
+STL containers with types of that model.
+
+- [[http://sourceware.org/gdb/onlinedocs/gdb/Pretty-Printing.html][Pretty printing]]
+- [[https://github.com/ruediger/Boost-Pretty-Printer][Boost pretty printer]]
+- [[https://groups.google.com/group/boost-list/browse_thread/thread/ff232ac626bf41cf/18fbf516ceb091da?pli%3D1][Example for multi-index]]
+
+*** Replace manual exception checks with =BOOST_CHECK_EXCEPTION=
+
+In the past we were testing for exceptions by doing a try and catch:
+
+#+begin_example
+    try {
+        std::generate_n(std::back_inserter(terms), beyond_end, sequence);
+        BOOST_FAIL("Expected sequence_exhausted exception to be thrown.");
+    } catch (const kitanda::utility::test_data::sequence_exhausted& e) {
+        BOOST_TEST_MESSAGE("Exception thrown as expected: " << e.what());
+        BOOST_CHECK(true);
+    }
+#+end_example
+
+We have now found out about =BOOST_CHECK_EXCEPTION=, so we should
+replace the manual checks on all specs that have them. Example usage:
+
+#+begin_example
+    BOOST_CHECK_EXCEPTION(
+        reader.get_attribute_as_string(label_non_existent_attribute),
+        exception,
+        std::bind(check_exception, _1, message_error_get_attribute)
+        );
+#+end_example
+
+*** Investigate if boost json compiles                                :story:
+
+We must make sure that the json we're hand-crafting is actually
+standards compliant. This is because we use standard json tools to
+parse log files. See [[file:../cpp_coding_standards.org][coding standards]] for links to C++ JSON libraries.
+
+http://www.codeproject.com/Articles/20027/JSON-Spirit-A-C-JSON-Parser-Generator-Implemented
+
+*** Licence year is hard-coded to 2012
+
+At present the licence formatter has an hard-coded year of 2012. It
+should really be a parameter passed in.
+
+*** Add multiple database support to makefiles
+
+Our makefiles don't cope very well with the test/development database
+separation. There is a massive hack required to populate both
+databases (changing makefile manually and then reverting the change).
+
+There should be a way of passing in the database name as an
+environment variable into the makefile (not into the cmake as we want
+to be able to change databases without having to rebuild makefiles).
+
+*** Use stereotypes to convey meta model information
+
+We should parse Dia stereotypes and use them to determine the correct
+SML type to map to. Classes should default to =pod= unless told
+otherwise.
+
+We can also have stereotypes to enable/disable facets for a given
+type:
+
+- non/tabulateable: database
+- non/orderable: less than
+- non/comparable:equality
+- non/hashable: hash
+- non/serializable: serialization
+- non/outputtable: IO
+
+*** Organise the valgrind suppressions a bit better
+
+In Sprint 9 we fixed a whole bunch of strange valgrind memory leak
+warnings that were coming from the guts of boost threading and boost
+log. We did it by using the generate suppression from valgrind. We
+should be able to summarise all of those suppressions to only one or
+two (there are some twenty at the moment). We also need to
+double-check with boost if these are real problems.
+
+*** Generator usage in template tests needs to be cleaned
+
+At present some template tests in =utility/test= ask for a
+generator, other for instances. We should only have one way of doing
+this. We should probably always ask for generators as this means less
+boiler plate code in tests. It does mean a fixed dependency on
+generators.
+
+*** Replace old style for iterations in IO
+
+At present we are still doing C++-03 iterations in the STL IO files
+such as =vector_io=, =list_io=, etc. We should be using the new =for=
+syntax for C++-11.
+
+*** Dogen should generate stand alone CMake                           :story:
+
+There should be an option to generate a stand alone =CMakeLists.txt= -
+the domain should compile in total isolation from kitanda. This is
+useful for demos, etc.
+
+*** Rename qualified_name to qname                                    :story:
+
+QName is well known. It also allows for better method names such as
+=type_qname= instead of =type_name= where its not obvious that its a
+qualified name rather than a string.
+
+*** Using boost macro to throw exception
+
+There were some advantages to using =BOOST_THROW_EXCEPTION=, can't quite
+remember why. We need to figure out if we should replace our usages of
+=throw= with this macro.
+
+*** Create forward declaration facet
+
+We should aim to define almost nothing in header files where possible
+and forward declare. To make life easier we could have a =_fwd= header
+for each entity which only forward declares it. It would be useful for
+IO and for the behavioural code.
+
+*** Implement assignment operator
+
+At present we are generating the default assignment operator when
+there are no properties; however, we do not generate a manual
+assignment operator for the converse case.
+
+*** Rename pod in SML
+
+We mistakingly called complex types =pod= because of a lack of
+understanding of what a C++ pod type is. They should really be called
+=complex_type=. This would be a good time to clean up the inheritance
+tree:
+
+- type: parent; has a name
+- simple_type: primitives; child of type.
+- complex_type: pods; child of type.
+- enumeration: child of type.
+- ...
+
+*** Add an includer for all includers
+
+It would be nice to totally include a model. For that we need an
+includer that includes all other includers.
+
+*** Add new equivalence operator to domain types
+
+We should have an operator that compares the state of two objects
+ignoring the version.
+
+*** Remove jsonify from all generated code
+
+As we have a meta-model we should be able to manually determine the
+correct JSON for every meta-type. At present jsonify is adding
+spurious brackets, breaking the JSON.
+
+*** Property types are always fully qualified
+
+When we code generate non-primitive properties we always fully qualify
+them even if they are on the same namespace as the containing type.
+
+*** Support "cross-facet interference"
+
+In a few cases its useful to disable bits of a facet when another
+facet is switched off because those bits do not belong to the main
+facet the formatter is working on. At present this happens in the
+following cases:
+
+- Forward declaration of serialisation in domain when serialisation is
+  off
+- Friend of serialisation in domain when serialisation is
+  off
+- declaration and implementation of to_stream when IO is off
+- declaration and implementation of inserter when IO is off and
+  integrated IO is on.
+
+We need a way of accessing the on/off state of all facets from any
+formatter so that they can make cross facet decisions. A quick hack
+was to add yet another flag: =disable_io= which is disabled when the
+IO facet is not present and passed on to the relevant formatters. This
+needs to be replaced by a more general approach.
+
+*** Add run spec targets for each test
+
+We could piggy back on the ctest functionality and add a target for
+each test so one could =make enable_facet_domain= and =make
+run_enable_facet_domain=. The targets need to be prefixed with module
+name and test suite.
+
+*** Dependencies should be called includes
+
+At present we use user dependencies for user includes and system
+dependencies for system includes. However, all this code is modeling
+C++ code so it should really be called "includes" rather than
+"dependencies" as they do not model any other type of dependency. This
+means the dependency manager should be called the inclusion manager,
+which is a more apt name.
+
+*** Dependency manager should manage all includes
+
+At present the formatters are hacked to add any necessary includes,
+mainly system ones. These decisions should all be done by the
+dependency manager.
+
+*** SML builder should live in SML
+
+We don't have any dependencies outside of SML in the builder so it
+should be moved inside of SML. Perhaps a transformers folder. We need
+to move the tests, etc.
+
+*** Add option to ignore files based on regex
+
+We need a way of excluding manually added files from the managed
+files. We should have a command line option to ignore files based on a
+regex.
+
+*** Clean up WinSock definition in CMakeLists
+
+We did a crud implementation of finding WinSock just to get windows to
+build. There should be a FindWinSock somewhere. If not create one.
+
+*** Create release and debug builds
+
+At present all our builds are have debug symbols and no
+optimisation. We need to setup debug and release builds. We should
+append a post-fix of =-release= and =-debug= to the build name.
+
+*** Modeling director does not support all archive types
+
+At present the modeling director always outputs in XML. it should
+respect the archive type requested by the user.
+
+*** Make code generation decisions based on class hierarchy
+
+- if a class is not part of a class hierarchy, we could define the IO
+  facet externally. If a class is part of a hierarchy we need to have
+  a virtual member function.
+- if a class is part of a hierarchy and marked with a stereotype of
+  =unique= or =shared= we should create a typedef for
+  =boost::unique_ptr= or =boost::shared_ptr= respectively. It should
+  also add a create method.
+- if a class only has primitives we can avoid defining a swap method.
+
+*** Test database deployment
+
+We need to setup a build that deploys all the SQL (tables, procs, etc)
+to a clean database, runs all SQL tests and un-deploys all the SQL.
+
+*** Test json output with boost json
+*** Setup a postgres url in cmake file                                :story:
+
+The database password is set to trust. We should really have user
+passwords. To make things more secure we should also pass in the
+database credentials to the unit tests. One potential approach is to
+do so in cmake. Example from VTK:
+
+#+begin_src cmake
+IF ( BUILD_TESTING )
+   SET ( VTK_PSQL_TEST_URL "" CACHE STRING "A URL for a PostgreSQL server
+         of the form psql://[[username[:password]@]hostname[:port]]/[dbname]" )
+ENDIF ( BUILD_TESTING )
+#+end_src
+
+Suggestion: maybe there's a possibility of using an environment
+variable for all the used parameters (username, hostname, etc)
+
+
+*** Add unit test benchmarking
+
+[[https://svn.boost.org/trac/boost/ticket/7082][Raised ticket]]
+
+- nightly builds should run all unit tests in "benchmarking mode";
+- for each test we should find the sweet spot for N repetitions;
+- when plugged into ctest, make sure the benchmark tests have
+  different names from the main tests otherwise the timing history
+  will be nonsense.
+- [[http://lists.boost.org/boost-users/2011/01/65790.php][sent]] email to boost users mailing list asking for benchmarking
+  support.
+
+** Won't fix
+
+Stories which we do not think we are going to work on.
+
+*** Tests for error conditions in libxml
+
+We do not have any errors that check for error conditions directly in
+libxml. This is why the coverage of these functions is red.
+
+*** Check that custom targets in CMake have correct dependencies
+
+At present we have a number of custom targets, which create a new Make
+target. These are good because they do not require re-running CMake to
+manage the files in the output directory; however, we do not have the
+correct dependencies between the targets and the target
+dependencies. For example, create_scripts should check to see if any
+script has changed before re-generating the tarball; it seems to have
+no dependencies so it will always regenerate the tarball. We need to:
+
+- check all custom targets and see what their current behaviour is:
+  a) change a dependency and rebuild the target and see if the
+  change is picked up or not; b) change no dependencies and re-run the
+  target and ensure that nothing happens.
+- add dependencies as required.
+
+*** Enable doxygen warnings for all undocumented code
+
+At present doxygen only warns about undocumented parameters when a
+function already has documented parameters. We should consider
+enabling warnings for all undocumented code. We also need to figure
+out how to mark code as ignored (for example serialisation helpers,
+etc won't require documentation).
+
+
+*** Add specification comments to tests
+
+We started off by adding a technical specification as a doxygen
+comment for a test but forgot to keep on doing it. Example:
+
+#+begin_example
+/**
+ * @brief It shall not be possible to create more terms than those
+ * supported by a finite sequence, using std::generate_n.
+ */
+#+end_example
+
+This helps make the purpose of the test clearer when the name is not
+sufficient.
+
