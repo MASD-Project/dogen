@@ -135,8 +135,8 @@ using dogen::utility::test::asserter;
 
 BOOST_AUTO_TEST_SUITE(inclusion_manager)
 
-BOOST_AUTO_TEST_CASE(one_pod_model_with_default_includes_generates_expected_domain_includes) {
-    SETUP_TEST_LOG_SOURCE("one_pod_model_with_default_includes_generates_expected_domain_includes");
+BOOST_AUTO_TEST_CASE(processing_one_pod_model_with_default_configuration_generates_expected_domain_includes) {
+    SETUP_TEST_LOG_SOURCE("processing_one_pod_model_with_default_configuration_generates_expected_domain_includes");
 
     using namespace dogen::generator::backends::cpp;
     const auto i(includes_for_one_pod_model(cpp_facet_types::domain,
@@ -172,8 +172,8 @@ BOOST_AUTO_TEST_CASE(one_pod_model_with_default_includes_generates_expected_doma
     BOOST_CHECK(is.empty());
 }
 
-BOOST_AUTO_TEST_CASE(one_pod_model_with_default_includes_generates_expected_io_includes) {
-    SETUP_TEST_LOG_SOURCE("one_pod_model_with_default_includes_generates_expected_io_includes");
+BOOST_AUTO_TEST_CASE(processing_one_pod_model_with_default_configuration_generates_expected_io_includes) {
+    SETUP_TEST_LOG_SOURCE("processing_one_pod_model_with_default_configuration_generates_expected_io_includes");
 
     using namespace dogen::generator::backends::cpp;
     const auto i(includes_for_one_pod_model(cpp_facet_types::io,
@@ -204,8 +204,8 @@ BOOST_AUTO_TEST_CASE(one_pod_model_with_default_includes_generates_expected_io_i
     BOOST_CHECK(is.empty());
 }
 
-BOOST_AUTO_TEST_CASE(one_pod_model_with_default_includes_generates_expected_serialisation_includes) {
-    SETUP_TEST_LOG_SOURCE("one_pod_model_with_default_includes_generates_expected_serialisation_includes");
+BOOST_AUTO_TEST_CASE(processing_one_pod_model_with_default_configuration_generates_expected_serialisation_includes) {
+    SETUP_TEST_LOG_SOURCE("processing_one_pod_model_with_default_configuration_generates_expected_serialisation_includes");
 
     using namespace dogen::generator::backends::cpp;
     const auto i(includes_for_one_pod_model(cpp_facet_types::serialization,
@@ -246,8 +246,8 @@ BOOST_AUTO_TEST_CASE(one_pod_model_with_default_includes_generates_expected_seri
     BOOST_CHECK(is.empty());
 }
 
-BOOST_AUTO_TEST_CASE(one_pod_model_with_default_includes_generates_expected_hash_includes) {
-    SETUP_TEST_LOG_SOURCE("one_pod_model_with_default_includes_generates_expected_hash_includes");
+BOOST_AUTO_TEST_CASE(processing_one_pod_model_with_default_configuration_generates_expected_hash_includes) {
+    SETUP_TEST_LOG_SOURCE("processing_one_pod_model_with_default_configuration_generates_expected_hash_includes");
 
     using namespace dogen::generator::backends::cpp;
     const auto i(includes_for_one_pod_model(cpp_facet_types::hash,
@@ -286,8 +286,8 @@ BOOST_AUTO_TEST_CASE(one_pod_model_with_default_includes_generates_expected_hash
     BOOST_CHECK(is.empty());
 }
 
-BOOST_AUTO_TEST_CASE(one_pod_model_with_default_includes_generates_expected_test_data_includes) {
-    SETUP_TEST_LOG_SOURCE("one_pod_model_with_default_includes_generates_expected_test_data_includes");
+BOOST_AUTO_TEST_CASE(processing_one_pod_model_with_default_configuration_generates_expected_test_data_includes) {
+    SETUP_TEST_LOG_SOURCE("processing_one_pod_model_with_default_configuration_generates_expected_test_data_includes");
 
     using namespace dogen::generator::backends::cpp;
     const auto i(includes_for_one_pod_model(cpp_facet_types::test_data,
@@ -326,8 +326,8 @@ BOOST_AUTO_TEST_CASE(one_pod_model_with_default_includes_generates_expected_test
     BOOST_CHECK(is.empty());
 }
 
-BOOST_AUTO_TEST_CASE(one_pod_model_with_default_includes_generates_expected_database_includes) {
-    SETUP_TEST_LOG_SOURCE("one_pod_model_with_default_includes_generates_expected_database_includes");
+BOOST_AUTO_TEST_CASE(processing_one_pod_model_with_default_configuration_generates_expected_database_includes) {
+    SETUP_TEST_LOG_SOURCE("processing_one_pod_model_with_default_configuration_generates_expected_database_includes");
 
     using namespace dogen::generator::backends::cpp;
     const auto i(includes_for_one_pod_model(cpp_facet_types::database,
