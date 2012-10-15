@@ -37,10 +37,6 @@ const bool is_user(false);
 const std::string empty;
 const std::string underscore("_");
 const std::string dot(".");
-const std::string boost_format_include("boost/format.hpp");
-const std::string pqxx_result_include("pqxx/result.hxx");
-const std::string pqxx_transaction_include("pqxx/transaction.hxx");
-
 const std::string statement_name("statement");
 const std::string work_name("work");
 const std::string load_name("load");
@@ -48,9 +44,7 @@ const std::string load_id_name("load_id");
 const std::string save_name("save");
 const std::string erase_name("erase");
 const std::string erase_id_name("erase_id");
-
 const std::string name_suffix("_data_exchanger");
-
 const std::string missing_class_view_model(
     "File view model must contain a class view model");
 
@@ -213,13 +207,8 @@ void database_implementation::format(const file_view_model& vm) {
     licence licence(stream_);
     licence.format();
 
-    std::list<std::string> system_dependencies(vm.system_dependencies());
-    system_dependencies.push_back(boost_format_include);
-    system_dependencies.push_back(pqxx_result_include);
-    system_dependencies.push_back(pqxx_transaction_include);
-
     cpp_includes includes(stream_);
-    includes.format(system_dependencies, is_system);
+    includes.format(vm.system_dependencies(), is_system);
     includes.format(vm.user_dependencies(), is_user);
     utility_.blank_line();
 

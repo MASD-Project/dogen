@@ -34,12 +34,8 @@ namespace {
 
 const bool is_system(true);
 const bool is_user(false);
-const std::string vector_include("vector");
-const std::string boost_optional_include("boost/optional.hpp");
-const std::string pqxx_connection_include("pqxx/connection.hxx");
 const std::string detail_ns("detail");
 const std::string name_suffix("_data_exchanger");
-
 const std::string missing_class_view_model(
     "File view model must contain a class view model");
 
@@ -54,7 +50,7 @@ namespace formatters {
 database_header::
 database_header(std::ostream& stream) :
     stream_(stream),
-    facet_type_(cpp_facet_types::test_data),
+    facet_type_(cpp_facet_types::database),
     file_type_(cpp_file_types::header),
     utility_(stream_, indenter_) {
 }
@@ -181,13 +177,8 @@ void database_header::format(const file_view_model& vm) {
     guards.format_start(vm.header_guard());
     utility_.blank_line();
 
-    std::list<std::string> system_dependencies(vm.system_dependencies());
-    system_dependencies.push_back(vector_include);
-    system_dependencies.push_back(boost_optional_include);
-    system_dependencies.push_back(pqxx_connection_include);
-
     cpp_includes includes(stream_);
-    includes.format(system_dependencies, is_system);
+    includes.format(vm.system_dependencies(), is_system);
     includes.format(vm.user_dependencies(), is_user);
     utility_.blank_line();
 

@@ -29,6 +29,12 @@ static logger lg(logger_factory("inclusion_manager"));
 const std::string empty;
 const std::string versioned_name("versioned_key");
 const std::string unversioned_name("unversioned_key");
+const std::string vector_include("vector");
+const std::string boost_optional_include("boost/optional.hpp");
+const std::string pqxx_connection_include("pqxx/connection.hxx");
+const std::string boost_format_include("boost/format.hpp");
+const std::string pqxx_result_include("pqxx/result.hxx");
+const std::string pqxx_transaction_include("pqxx/transaction.hxx");
 
 }
 
@@ -79,10 +85,22 @@ system(const std::string& /*name*/, cpp_facet_types /*ft*/,
 }
 
 std::list<std::string> cpp_inclusion_manager::
-system(const sml::pod& /*pod*/, cpp_facet_types /*ft*/,
-    cpp_file_types /*flt*/, cpp_aspect_types /*at*/) const {
+system(const sml::pod& /*pod*/, cpp_facet_types ft,
+    cpp_file_types flt, cpp_aspect_types /*at*/) const {
 
     std::list<std::string> r;
+
+    if (ft == cpp_facet_types::database) {
+        if (flt == cpp_file_types::header) {
+            r.push_back(vector_include);
+            r.push_back(boost_optional_include);
+            r.push_back(pqxx_connection_include);
+        } else if (flt == cpp_file_types::implementation) {
+            r.push_back(boost_format_include);
+            r.push_back(pqxx_result_include);
+            r.push_back(pqxx_transaction_include);
+        }
+    }
     return r;
 }
 

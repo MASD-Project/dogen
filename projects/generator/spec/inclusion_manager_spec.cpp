@@ -44,6 +44,12 @@ const std::string io("io");
 const std::string database("database");
 const std::string serialization("serialization");
 const std::string versioned_key("versioned_key");
+const std::string vector("vector");
+const std::string boost_optional("optional.hpp");
+const std::string pqxx_connection("connection.hxx");
+const std::string boost_format("format.hpp");
+const std::string pqxx_result("result.hxx");
+const std::string pqxx_transaction("transaction.hxx");
 const std::string io_postfix("_io.hpp");
 const std::string database_postfix("_db.hpp");
 const std::string serialization_postfix("_ser.hpp");
@@ -358,7 +364,13 @@ BOOST_AUTO_TEST_CASE(processing_one_pod_model_with_default_configuration_generat
 
     const auto hs(i[header_system]);
     BOOST_LOG_SEV(lg, debug) << "header system dependencies: " << hs;
-    BOOST_CHECK(hs.empty());
+    BOOST_CHECK(hs.size() == 3);
+    for (const auto s : hs) {
+        BOOST_CHECK(
+            boost::ends_with(s, vector) ||
+            boost::ends_with(s, boost_optional) ||
+            boost::ends_with(s, pqxx_connection));
+    }
 
     // implementation
     const auto iu(i[implementation_user]);
@@ -372,7 +384,13 @@ BOOST_AUTO_TEST_CASE(processing_one_pod_model_with_default_configuration_generat
 
     const auto is(i[implementation_system]);
     BOOST_LOG_SEV(lg, debug) << "implementation system dependencies: " << is;
-    BOOST_CHECK(is.empty());
+    BOOST_CHECK(hs.size() == 3);
+    for (const auto s : is) {
+        BOOST_CHECK(
+            boost::ends_with(s, boost_format) ||
+            boost::ends_with(s, pqxx_result) ||
+            boost::ends_with(s, pqxx_transaction));
+    }
 }
 
 BOOST_AUTO_TEST_CASE(processing_one_pod_model_with_no_keys_configuration_generates_no_key_includes) {
