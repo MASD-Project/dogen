@@ -31,6 +31,8 @@
 #include "dogen/generator/test/mock_settings_factory.hpp"
 #include "dogen/generator/backends/cpp/cpp_inclusion_manager.hpp"
 
+using namespace dogen::generator::backends::cpp;
+
 namespace  {
 
 const std::string test_suite("inclusion_manager_spec");
@@ -84,12 +86,8 @@ dogen::sml::model one_pod_model() {
     return r;
 }
 
-dogen::generator::backends::cpp::cpp_inclusion_manager
-default_inclusion_manager(const dogen::sml::model& m) {
-    const auto s(mock_settings());
-
-    using namespace dogen::generator::backends::cpp;
-    cpp_location_manager lm(m.name(), s);
+cpp_inclusion_manager default_inclusion_manager(const dogen::sml::model& m) {
+    cpp_location_manager lm(m.name(), mock_settings());
 
     bool no_keys(false);
     bool integrated_io(false);
@@ -98,12 +96,12 @@ default_inclusion_manager(const dogen::sml::model& m) {
 }
 
 typedef std::function<
-    dogen::generator::backends::cpp::cpp_inclusion_manager
+    cpp_inclusion_manager
     (const dogen::sml::model&)
     > inclusion_manager_factory;
 
 std::vector<std::list<std::string> >
-includes_for_one_pod_model(dogen::generator::backends::cpp::cpp_facet_types ft,
+includes_for_one_pod_model(cpp_facet_types ft,
     const inclusion_manager_factory& factory) {
     const auto m(one_pod_model());
     const auto pods(m.pods());
@@ -138,9 +136,9 @@ BOOST_AUTO_TEST_SUITE(inclusion_manager)
 BOOST_AUTO_TEST_CASE(processing_one_pod_model_with_default_configuration_generates_expected_domain_includes) {
     SETUP_TEST_LOG_SOURCE("processing_one_pod_model_with_default_configuration_generates_expected_domain_includes");
 
-    using namespace dogen::generator::backends::cpp;
-    const auto i(includes_for_one_pod_model(cpp_facet_types::domain,
-            default_inclusion_manager));
+    const auto f(default_inclusion_manager);
+    const auto i(includes_for_one_pod_model(cpp_facet_types::domain, f));
+    BOOST_REQUIRE(i.size() == 4);
 
     // header
     const auto hu(i[header_user]);
@@ -175,9 +173,9 @@ BOOST_AUTO_TEST_CASE(processing_one_pod_model_with_default_configuration_generat
 BOOST_AUTO_TEST_CASE(processing_one_pod_model_with_default_configuration_generates_expected_io_includes) {
     SETUP_TEST_LOG_SOURCE("processing_one_pod_model_with_default_configuration_generates_expected_io_includes");
 
-    using namespace dogen::generator::backends::cpp;
-    const auto i(includes_for_one_pod_model(cpp_facet_types::io,
-            default_inclusion_manager));
+    const auto f(default_inclusion_manager);
+    const auto i(includes_for_one_pod_model(cpp_facet_types::io, f));
+    BOOST_REQUIRE(i.size() == 4);
 
     // header
     const auto hu(i[header_user]);
@@ -207,9 +205,9 @@ BOOST_AUTO_TEST_CASE(processing_one_pod_model_with_default_configuration_generat
 BOOST_AUTO_TEST_CASE(processing_one_pod_model_with_default_configuration_generates_expected_serialisation_includes) {
     SETUP_TEST_LOG_SOURCE("processing_one_pod_model_with_default_configuration_generates_expected_serialisation_includes");
 
-    using namespace dogen::generator::backends::cpp;
-    const auto i(includes_for_one_pod_model(cpp_facet_types::serialization,
-            default_inclusion_manager));
+    const auto f(default_inclusion_manager);
+    const auto i(includes_for_one_pod_model(cpp_facet_types::serialization, f));
+    BOOST_REQUIRE(i.size() == 4);
 
     // header
     const auto hu(i[header_user]);
@@ -249,9 +247,9 @@ BOOST_AUTO_TEST_CASE(processing_one_pod_model_with_default_configuration_generat
 BOOST_AUTO_TEST_CASE(processing_one_pod_model_with_default_configuration_generates_expected_hash_includes) {
     SETUP_TEST_LOG_SOURCE("processing_one_pod_model_with_default_configuration_generates_expected_hash_includes");
 
-    using namespace dogen::generator::backends::cpp;
-    const auto i(includes_for_one_pod_model(cpp_facet_types::hash,
-            default_inclusion_manager));
+    const auto f(default_inclusion_manager);
+    const auto i(includes_for_one_pod_model(cpp_facet_types::hash, f));
+    BOOST_REQUIRE(i.size() == 4);
 
     // header
     const auto hu(i[header_user]);
@@ -289,9 +287,9 @@ BOOST_AUTO_TEST_CASE(processing_one_pod_model_with_default_configuration_generat
 BOOST_AUTO_TEST_CASE(processing_one_pod_model_with_default_configuration_generates_expected_test_data_includes) {
     SETUP_TEST_LOG_SOURCE("processing_one_pod_model_with_default_configuration_generates_expected_test_data_includes");
 
-    using namespace dogen::generator::backends::cpp;
-    const auto i(includes_for_one_pod_model(cpp_facet_types::test_data,
-            default_inclusion_manager));
+    const auto f(default_inclusion_manager);
+    const auto i(includes_for_one_pod_model(cpp_facet_types::test_data, f));
+    BOOST_REQUIRE(i.size() == 4);
 
     // header
     const auto hu(i[header_user]);
@@ -329,9 +327,9 @@ BOOST_AUTO_TEST_CASE(processing_one_pod_model_with_default_configuration_generat
 BOOST_AUTO_TEST_CASE(processing_one_pod_model_with_default_configuration_generates_expected_database_includes) {
     SETUP_TEST_LOG_SOURCE("processing_one_pod_model_with_default_configuration_generates_expected_database_includes");
 
-    using namespace dogen::generator::backends::cpp;
-    const auto i(includes_for_one_pod_model(cpp_facet_types::database,
-            default_inclusion_manager));
+    const auto f(default_inclusion_manager);
+    const auto i(includes_for_one_pod_model(cpp_facet_types::database, f));
+    BOOST_REQUIRE(i.size() == 4);
 
     // header
     const auto hu(i[header_user]);
