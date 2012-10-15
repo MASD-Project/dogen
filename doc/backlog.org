@@ -1,3 +1,7 @@
+#+title: Backlog
+#+options: date:nil toc:nil author:nil num:nil
+#+tags: story(s) epic(e) task(t) note(n) spike(p)
+
 * Backlog
 
 This file contains all stories that haven't been assigned to a sprint.
