@@ -57,6 +57,16 @@ const boost::filesystem::path project_dir("project directory");
 const boost::filesystem::path src_dir("source directory");
 const boost::filesystem::path include_dir("include directory");
 
+const std::vector<cpp_facet_types> facets =
+{
+    cpp_facet_types::domain,
+    cpp_facet_types::serialization,
+    cpp_facet_types::hash,
+    cpp_facet_types::io,
+    cpp_facet_types::database,
+    cpp_facet_types::test_data
+};
+
 dogen::generator::config::cpp_settings mock_settings() {
     return dogen::generator::test::mock_settings_factory::
         build_cpp_settings(project_dir);
@@ -88,8 +98,16 @@ dogen::sml::model one_pod_model() {
 
 cpp_inclusion_manager default_inclusion_manager(const dogen::sml::model& m) {
     cpp_location_manager lm(m.name(), mock_settings());
-
     bool no_keys(false);
+    bool integrated_io(false);
+    bool no_io(false);
+    return cpp_inclusion_manager(m, lm, no_keys, integrated_io, no_io);
+}
+
+cpp_inclusion_manager
+inclusion_manager_with_no_keys(const dogen::sml::model& m) {
+    cpp_location_manager lm(m.name(), mock_settings());
+    bool no_keys(true);
     bool integrated_io(false);
     bool no_io(false);
     return cpp_inclusion_manager(m, lm, no_keys, integrated_io, no_io);
@@ -112,7 +130,6 @@ includes_for_one_pod_model(cpp_facet_types ft,
     std::vector<std::list<std::string> > r;
     r.reserve(4);
 
-    using namespace dogen::generator::backends::cpp;
     const cpp_aspect_types main(cpp_aspect_types::main);
     r.push_back(d.user(p, ft,  cpp_file_types::header, main));
     r.push_back(d.system(p, ft,  cpp_file_types::header, main));
@@ -356,6 +373,25 @@ BOOST_AUTO_TEST_CASE(processing_one_pod_model_with_default_configuration_generat
     const auto is(i[implementation_system]);
     BOOST_LOG_SEV(lg, debug) << "implementation system dependencies: " << is;
     BOOST_CHECK(is.empty());
+}
+
+BOOST_AUTO_TEST_CASE(processing_one_pod_model_with_no_keys_configuration_generates_no_key_includes) {
+    SETUP_TEST_LOG_SOURCE("processing_one_pod_model_with_no_keys_configuration_generates_no_key_includes");
+
+    const auto f(inclusion_manager_with_no_keys);
+    for (const auto facet : facets) {
+        auto i(includes_for_one_pod_model(facet, f));
+        BOOST_REQUIRE(i.size() == 4);
+
+        auto all(i[header_user]);
+        all.splice(all.end(), i[header_system]);
+        all.splice(all.end(), i[implementation_user]);
+        all.splice(all.end(), i[implementation_system]);
+
+        for (const auto s : all)
+            BOOST_CHECK(!boost::contains(s, versioned_key));
+
+    }
 }
 
 BOOST_AUTO_TEST_SUITE_END()
