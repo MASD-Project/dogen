@@ -46,7 +46,7 @@ const std::string serialization("serialization");
 const std::string versioned_key("versioned_key");
 const std::string ostream("ostream");
 const std::string state_saver("boost/io/ios_state.hpp");
-
+const std::string functional("functional");
 const std::string vector("vector");
 const std::string boost_optional("optional.hpp");
 const std::string pqxx_connection("connection.hxx");
@@ -300,10 +300,10 @@ BOOST_AUTO_TEST_CASE(processing_one_pod_model_with_default_configuration_generat
     BOOST_CHECK(asserter::assert_contains(versioned_key, b));
     BOOST_CHECK(asserter::assert_contains(hash, b));
 
-    // FIXME: missing hash headers
     const auto hs(i[header_system]);
     BOOST_LOG_SEV(lg, debug) << "header system dependencies: " << hs;
-    BOOST_CHECK(hs.empty());
+    BOOST_CHECK(hs.size() == 1);
+    BOOST_CHECK(asserter::assert_contains(hs.front(), functional));
 
     // implementation
     const auto iu(i[implementation_user]);

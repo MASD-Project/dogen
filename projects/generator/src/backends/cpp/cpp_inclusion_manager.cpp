@@ -40,6 +40,7 @@ const std::string iosfwd("iosfwd");
 const std::string algorithm("algorithm");
 const std::string ostream("ostream");
 const std::string state_saver("boost/io/ios_state.hpp");
+const std::string functional("functional");
 
 }
 
@@ -102,6 +103,9 @@ system(const std::string& /*name*/, cpp_facet_types ft,
             r.push_back(ostream);
     }
 
+    if (is_header && ft == cpp_facet_types::hash)
+        r.push_back(functional);
+
     return r;
 }
 
@@ -132,6 +136,9 @@ system(const sml::pod& pod, cpp_facet_types ft,
             }
         }
     }
+
+    if (is_header && ft == cpp_facet_types::hash)
+        r.push_back(functional);
 
     if (ft == cpp_facet_types::database) {
         if (is_header) {
