@@ -17,3 +17,11 @@ name is detected, a model named "unnamed_model" is created.
 The correct solution for this is to have a flag (or flags) at the SML
 level which state whether to use the model name for folders, packages,
 etc. The view model generation will then take this into account.
+
+*** Disable keys in inclusion manager should use location manager
+
+We have settings in location manager which contain disable_versioning;
+we also have a location manager inside of the inclusion manager. The
+IM should ask the LM for any settings which the LM already contains
+such as disable keys, rather than duplicate these as constructor
+parameters. This also avoid inconsistencies between the two.
