@@ -18,6 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#include <functional>
 #include <boost/test/unit_test.hpp>
 #include <boost/algorithm/string/predicate.hpp>
 #include "dogen/utility/io/list_io.hpp"
@@ -35,10 +36,18 @@ namespace  {
 const std::string test_suite("inclusion_manager_spec");
 const std::string test_module("generator");
 const std::string domain("domain");
+const std::string hash("hash");
+const std::string test_data("test_data");
 const std::string io("io");
+const std::string database("database");
+const std::string serialization("serialization");
 const std::string versioned_key("versioned_key");
 const std::string io_postfix("_io.hpp");
-const std::string only_one_pod_model_name("only_one_pod");
+const std::string database_postfix("_db.hpp");
+const std::string serialization_postfix("_ser.hpp");
+const std::string hash_postfix("_hash.hpp");
+const std::string test_data_postfix("_td.hpp");
+const std::string one_pod_model_name("one_pod");
 const std::string pod_parent_name("parent");
 const std::string pod_name("pod0");
 const std::string pod_child_name("child");
@@ -64,13 +73,13 @@ mock_pod(const std::string& type_name, const std::string& model_name) {
     return r;
 }
 
-dogen::sml::model only_one_pod_model() {
-    const auto p(mock_pod(pod_name, only_one_pod_model_name));
+dogen::sml::model one_pod_model() {
+    const auto p(mock_pod(pod_name, one_pod_model_name));
     const std::unordered_map<dogen::sml::qualified_name, dogen::sml::pod> pods {
         { p.name(), p }
     };
     dogen::sml::model r;
-    r.name(only_one_pod_model_name);
+    r.name(one_pod_model_name);
     r.pods(pods);
     return r;
 }
@@ -88,17 +97,37 @@ default_inclusion_manager(const dogen::sml::model& m) {
     return cpp_inclusion_manager(m, lm, no_keys, integrated_io, no_io);
 }
 
-// std::list<std::string>
-// domain_header_user_deps(
-//     const dogen::generator::backends::cpp::cpp_inclusion_manager& d,
-//     const dogen::sml::pod& p) {
+typedef std::function<
+    dogen::generator::backends::cpp::cpp_inclusion_manager
+    (const dogen::sml::model&)
+    > inclusion_manager_factory;
 
-//     using namespace dogen::generator::backends::cpp;
-//     cpp_facet_types ft(cpp_facet_types::domain);
-//     cpp_file_types flt(cpp_file_types::header);
-//     cpp_aspect_types at(cpp_aspect_types::main);
-//     return d.user(p, ft, flt, at);
-// }
+std::vector<std::list<std::string> >
+includes_for_one_pod_model(dogen::generator::backends::cpp::cpp_facet_types ft,
+    const inclusion_manager_factory& factory) {
+    const auto m(one_pod_model());
+    const auto pods(m.pods());
+    BOOST_CHECK(pods.size() == 1);
+    const auto p(pods.begin()->second);
+
+    auto d(factory(m));
+    std::vector<std::list<std::string> > r;
+    r.reserve(4);
+
+    using namespace dogen::generator::backends::cpp;
+    const cpp_aspect_types main(cpp_aspect_types::main);
+    r.push_back(d.user(p, ft,  cpp_file_types::header, main));
+    r.push_back(d.system(p, ft,  cpp_file_types::header, main));
+
+    r.push_back(d.user(p, ft,  cpp_file_types::implementation, main));
+    r.push_back(d.system(p, ft,  cpp_file_types::implementation, main));
+    return r;
+}
+
+const unsigned int header_user(0);
+const unsigned int header_system(1);
+const unsigned int implementation_user(2);
+const unsigned int implementation_system(3);
 
 }
 
@@ -106,74 +135,229 @@ using dogen::utility::test::asserter;
 
 BOOST_AUTO_TEST_SUITE(inclusion_manager)
 
-BOOST_AUTO_TEST_CASE(validate_dependencies_for_model_with_only_one_pod_and_default_location_manager) {
-    SETUP_TEST_LOG_SOURCE("validate_dependencies_for_model_with_only_one_pod_and_default_location_manager");
+BOOST_AUTO_TEST_CASE(one_pod_model_with_default_includes_generates_expected_domain_includes) {
+    SETUP_TEST_LOG_SOURCE("one_pod_model_with_default_includes_generates_expected_domain_includes");
 
-    const auto m(only_one_pod_model());
-    const auto pods(m.pods());
-    BOOST_CHECK(pods.size() == 1);
-    const auto pod(pods.begin()->second);
-
-    auto dm(default_inclusion_manager(m));
     using namespace dogen::generator::backends::cpp;
-    auto lambda([&](cpp_facet_types ft, cpp_file_types flt) {
-            return dm.user(pod, ft, flt, cpp_aspect_types::main);
-        });
+    const auto i(includes_for_one_pod_model(cpp_facet_types::domain,
+            default_inclusion_manager));
 
-    auto pi([&](cpp_facet_types ft, cpp_file_types flt) {
-            return dm.system(pod, ft, flt, cpp_aspect_types::main);
-        });
-
-    // domain header
-    auto r(lambda(cpp_facet_types::domain, cpp_file_types::header));
-    BOOST_LOG_SEV(lg, debug) << "domain header user dependencies: " << r;
-    BOOST_CHECK(r.size() == 1);
-    BOOST_CHECK(asserter::assert_contains(versioned_key, r.front()));
+    // header
+    const auto hu(i[header_user]);
+    BOOST_LOG_SEV(lg, debug) << "header user dependencies: " << hu;
+    BOOST_CHECK(hu.size() == 1);
+    BOOST_CHECK(asserter::assert_contains(versioned_key, hu.front()));
 
     // FIXME: no iosfwd, expected with current impl
-    r = pi(cpp_facet_types::domain, cpp_file_types::header);
-    BOOST_LOG_SEV(lg, debug) << "domain header  system dependencies: " << r;
-    BOOST_CHECK(r.empty());
+    const auto hs(i[header_system]);
+    BOOST_LOG_SEV(lg, debug) << "header  system dependencies: " << hs;
+    BOOST_CHECK(hs.empty());
 
-    // domain implementation
-    r = lambda(cpp_facet_types::domain, cpp_file_types::implementation);
-    BOOST_LOG_SEV(lg, debug) << "domain imp user dependencies: " << r;
-    BOOST_CHECK(r.size() == 2);
-    if (boost::ends_with(r.front(), io_postfix)) {
-        BOOST_CHECK(asserter::assert_contains(versioned_key, r.front()));
-        BOOST_CHECK(asserter::assert_contains(io, r.front()));
-    } else {
-        BOOST_CHECK(asserter::assert_contains(pod_name, r.front()));
-        BOOST_CHECK(asserter::assert_contains(domain, r.front()));
-    }
+    // implementation
+    const auto iu(i[implementation_user]);
+    BOOST_LOG_SEV(lg, debug) << "implementation user dependencies: " << iu;
+    BOOST_CHECK(iu.size() == 2);
+    std::string a(iu.front()), b(iu.back());
+    if (!boost::ends_with(b, io_postfix))
+        std::swap(a,b);
 
-    r = pi(cpp_facet_types::domain, cpp_file_types::implementation);
-    BOOST_LOG_SEV(lg, debug) << "domain impl system dependencies: " << r;
-    BOOST_CHECK(r.empty());
+    BOOST_CHECK(asserter::assert_contains(pod_name, a));
+    BOOST_CHECK(asserter::assert_contains(domain, a));
 
-    // io header
-    r = lambda(cpp_facet_types::io, cpp_file_types::header);
-    BOOST_LOG_SEV(lg, debug) << "io header user dependencies: " << r;
-    BOOST_CHECK(r.size() == 1);
-    BOOST_CHECK(asserter::assert_contains(pod_name, r.front()));
-    BOOST_CHECK(asserter::assert_contains(domain, r.front()));
+    BOOST_CHECK(asserter::assert_contains(versioned_key, b));
+    BOOST_CHECK(asserter::assert_contains(io, b));
 
-    // FIXME: no iosfwd, expected with current impl
-    r = pi(cpp_facet_types::io, cpp_file_types::header);
-    BOOST_LOG_SEV(lg, debug) << "io impl system dependencies: " << r;
-    BOOST_CHECK(r.empty());
+    const auto is(i[implementation_system]);
+    BOOST_LOG_SEV(lg, debug) << "implementation system dependencies: " << is;
+    BOOST_CHECK(is.empty());
+}
 
-    // io implementation
-    r = lambda(cpp_facet_types::io, cpp_file_types::implementation);
-    BOOST_LOG_SEV(lg, debug) << "io imp user dependencies: " << r;
-    BOOST_CHECK(r.size() == 1);
-    BOOST_CHECK(asserter::assert_contains(pod_name, r.front()));
-    BOOST_CHECK(asserter::assert_contains(io, r.front()));
+BOOST_AUTO_TEST_CASE(one_pod_model_with_default_includes_generates_expected_io_includes) {
+    SETUP_TEST_LOG_SOURCE("one_pod_model_with_default_includes_generates_expected_io_includes");
+
+    using namespace dogen::generator::backends::cpp;
+    const auto i(includes_for_one_pod_model(cpp_facet_types::io,
+            default_inclusion_manager));
+
+    // header
+    const auto hu(i[header_user]);
+    BOOST_LOG_SEV(lg, debug) << "header user dependencies: " << hu;
+    BOOST_CHECK(hu.size() == 1);
+    BOOST_CHECK(asserter::assert_contains(pod_name, hu.front()));
+    BOOST_CHECK(asserter::assert_contains(domain, hu.front()));
+
+    // FIXME: no iosfwd, expected with current code
+    const auto hs(i[header_system]);
+    BOOST_LOG_SEV(lg, debug) << "header system dependencies: " << hs;
+    BOOST_CHECK(hs.empty());
+
+    // implementation
+    const auto iu(i[implementation_user]);
+    BOOST_LOG_SEV(lg, debug) << "implementation user dependencies: " << iu;
+    BOOST_CHECK(iu.size() == 1);
+    BOOST_CHECK(asserter::assert_contains(pod_name, iu.front()));
+    BOOST_CHECK(asserter::assert_contains(io, iu.front()));
 
     // FIXME: no ostream
-    r = pi(cpp_facet_types::io, cpp_file_types::implementation);
-    BOOST_LOG_SEV(lg, debug) << "io impl system dependencies: " << r;
-    BOOST_CHECK(r.empty());
+    const auto is(i[implementation_system]);
+    BOOST_LOG_SEV(lg, debug) << "implementation system dependencies: " << is;
+    BOOST_CHECK(is.empty());
+}
+
+BOOST_AUTO_TEST_CASE(one_pod_model_with_default_includes_generates_expected_serialisation_includes) {
+    SETUP_TEST_LOG_SOURCE("one_pod_model_with_default_includes_generates_expected_serialisation_includes");
+
+    using namespace dogen::generator::backends::cpp;
+    const auto i(includes_for_one_pod_model(cpp_facet_types::serialization,
+            default_inclusion_manager));
+
+    // header
+    const auto hu(i[header_user]);
+    BOOST_LOG_SEV(lg, debug) << "header user dependencies: "
+                             << hu;
+    BOOST_CHECK(hu.size() == 2);
+    auto a(hu.front());
+    auto b(hu.back());
+    if (!boost::ends_with(b, serialization_postfix))
+        std::swap(a,b);
+
+    BOOST_CHECK(asserter::assert_contains(pod_name, a));
+    BOOST_CHECK(asserter::assert_contains(domain, a));
+
+    BOOST_CHECK(asserter::assert_contains(versioned_key, b));
+    BOOST_CHECK(asserter::assert_contains(serialization, b));
+
+    // FIXME: missing serialisation headers
+    const auto hs(i[header_system]);
+    BOOST_LOG_SEV(lg, debug) << "header system dependencies: " << hs;
+    BOOST_CHECK(hs.empty());
+
+    // implementation
+    const auto iu(i[implementation_user]);
+    BOOST_LOG_SEV(lg, debug) << "implementation user dependencies: " << iu;
+
+    a = iu.front();
+    BOOST_CHECK(boost::ends_with(a, serialization_postfix));
+    BOOST_CHECK(asserter::assert_contains(pod_name, a));
+    BOOST_CHECK(asserter::assert_contains(serialization, a));
+
+    const auto is(i[implementation_system]);
+    BOOST_LOG_SEV(lg, debug) << "implementation system dependencies: " << is;
+    BOOST_CHECK(is.empty());
+}
+
+BOOST_AUTO_TEST_CASE(one_pod_model_with_default_includes_generates_expected_hash_includes) {
+    SETUP_TEST_LOG_SOURCE("one_pod_model_with_default_includes_generates_expected_hash_includes");
+
+    using namespace dogen::generator::backends::cpp;
+    const auto i(includes_for_one_pod_model(cpp_facet_types::hash,
+            default_inclusion_manager));
+
+    // header
+    const auto hu(i[header_user]);
+    BOOST_LOG_SEV(lg, debug) << "header user dependencies: " << hu;
+    BOOST_CHECK(hu.size() == 2);
+    auto a(hu.front());
+    auto b(hu.back());
+    if (!boost::ends_with(b, hash_postfix))
+        std::swap(a,b);
+
+    BOOST_CHECK(asserter::assert_contains(pod_name, a));
+    BOOST_CHECK(asserter::assert_contains(domain, a));
+
+    BOOST_CHECK(asserter::assert_contains(versioned_key, b));
+    BOOST_CHECK(asserter::assert_contains(hash, b));
+
+    // FIXME: missing hash headers
+    const auto hs(i[header_system]);
+    BOOST_LOG_SEV(lg, debug) << "header system dependencies: " << hs;
+    BOOST_CHECK(hs.empty());
+
+    // implementation
+    const auto iu(i[implementation_user]);
+    BOOST_LOG_SEV(lg, debug) << "implementation user dependencies: " << iu;
+    a = iu.front();
+    BOOST_CHECK(boost::ends_with(a, hash_postfix));
+    BOOST_CHECK(asserter::assert_contains(pod_name, a));
+    BOOST_CHECK(asserter::assert_contains(hash, a));
+
+    const auto is(i[implementation_system]);
+    BOOST_LOG_SEV(lg, debug) << "implementation system dependencies: " << is;
+    BOOST_CHECK(is.empty());
+}
+
+BOOST_AUTO_TEST_CASE(one_pod_model_with_default_includes_generates_expected_test_data_includes) {
+    SETUP_TEST_LOG_SOURCE("one_pod_model_with_default_includes_generates_expected_test_data_includes");
+
+    using namespace dogen::generator::backends::cpp;
+    const auto i(includes_for_one_pod_model(cpp_facet_types::test_data,
+            default_inclusion_manager));
+
+    // header
+    const auto hu(i[header_user]);
+    BOOST_LOG_SEV(lg, debug) << "header user dependencies: " << hu;
+    BOOST_CHECK(hu.size() == 1);
+
+    BOOST_CHECK(asserter::assert_contains(pod_name, hu.front()));
+    BOOST_CHECK(asserter::assert_contains(domain, hu.front()));
+
+    const auto hs(i[header_system]);
+    BOOST_LOG_SEV(lg, debug) << "header system dependencies: " << hs;
+    BOOST_CHECK(hs.empty());
+
+    // implementation
+    const auto iu(i[implementation_user]);
+    BOOST_LOG_SEV(lg, debug) << "implementation user dependencies: " << iu;
+    BOOST_CHECK(iu.size() == 2);
+
+    auto a(iu.front());
+    auto b(iu.back());
+    if (!boost::ends_with(b, test_data_postfix))
+        std::swap(a,b);
+
+    BOOST_CHECK(asserter::assert_contains(pod_name, a));
+    BOOST_CHECK(asserter::assert_contains(test_data, a));
+
+    BOOST_CHECK(asserter::assert_contains(versioned_key, b));
+    BOOST_CHECK(asserter::assert_contains(test_data, b));
+
+    const auto is(i[implementation_system]);
+    BOOST_LOG_SEV(lg, debug) << "implementation system dependencies: " << is;
+    BOOST_CHECK(is.empty());
+}
+
+BOOST_AUTO_TEST_CASE(one_pod_model_with_default_includes_generates_expected_database_includes) {
+    SETUP_TEST_LOG_SOURCE("one_pod_model_with_default_includes_generates_expected_database_includes");
+
+    using namespace dogen::generator::backends::cpp;
+    const auto i(includes_for_one_pod_model(cpp_facet_types::database,
+            default_inclusion_manager));
+
+    // header
+    const auto hu(i[header_user]);
+    BOOST_LOG_SEV(lg, debug) << "header user dependencies: " << hu;
+    BOOST_CHECK(hu.size() == 1);
+
+    BOOST_CHECK(asserter::assert_contains(pod_name, hu.front()));
+    BOOST_CHECK(asserter::assert_contains(domain, hu.front()));
+
+    const auto hs(i[header_system]);
+    BOOST_LOG_SEV(lg, debug) << "header system dependencies: " << hs;
+    BOOST_CHECK(hs.empty());
+
+    // implementation
+    const auto iu(i[implementation_user]);
+    BOOST_LOG_SEV(lg, debug) << "implementation user dependencies: " << iu;
+    BOOST_CHECK(iu.size() == 1);
+
+    const auto a(iu.front());
+    BOOST_CHECK(boost::ends_with(a, database_postfix));
+    BOOST_CHECK(asserter::assert_contains(pod_name, a));
+    BOOST_CHECK(asserter::assert_contains(database, a));
+
+    const auto is(i[implementation_system]);
+    BOOST_LOG_SEV(lg, debug) << "implementation system dependencies: " << is;
+    BOOST_CHECK(is.empty());
 }
 
 BOOST_AUTO_TEST_SUITE_END()
