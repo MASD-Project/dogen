@@ -27,6 +27,7 @@ using namespace dogen::utility::log;
 static logger lg(logger_factory("inclusion_manager"));
 
 const std::string empty;
+const std::string bool_type("bool");
 const std::string versioned_name("versioned_key");
 const std::string unversioned_name("unversioned_key");
 const std::string vector_include("vector");
@@ -35,6 +36,10 @@ const std::string pqxx_connection_include("pqxx/connection.hxx");
 const std::string boost_format_include("boost/format.hpp");
 const std::string pqxx_result_include("pqxx/result.hxx");
 const std::string pqxx_transaction_include("pqxx/transaction.hxx");
+const std::string iosfwd("iosfwd");
+const std::string algorithm("algorithm");
+const std::string ostream("ostream");
+const std::string state_saver("boost/io/ios_state.hpp");
 
 }
 
@@ -78,29 +83,70 @@ void cpp_inclusion_manager::register_header(cpp_facet_types ft,
 }
 
 std::list<std::string> cpp_inclusion_manager::
-system(const std::string& /*name*/, cpp_facet_types /*ft*/,
-    cpp_file_types /*flt*/, cpp_aspect_types /*at*/) const {
+system(const std::string& /*name*/, cpp_facet_types ft,
+    cpp_file_types flt, cpp_aspect_types at) const {
+
     std::list<std::string> r;
+
+    if (at != cpp_aspect_types::versioned_key &&
+        at != cpp_aspect_types::unversioned_key)
+        return r;
+
+    const bool is_header(flt == cpp_file_types::header);
+    const bool is_implementation(flt == cpp_file_types::implementation);
+    if (ft == cpp_facet_types::domain) {
+        if (is_header) {
+            r.push_back(iosfwd);
+            r.push_back(algorithm);
+        } else if (is_implementation)
+            r.push_back(ostream);
+    }
+
     return r;
 }
 
 std::list<std::string> cpp_inclusion_manager::
-system(const sml::pod& /*pod*/, cpp_facet_types ft,
-    cpp_file_types flt, cpp_aspect_types /*at*/) const {
+system(const sml::pod& pod, cpp_facet_types ft,
+    cpp_file_types flt, cpp_aspect_types at) const {
 
     std::list<std::string> r;
+    if (at != cpp_aspect_types::main)
+        return r;
+
+    const bool is_implementation(flt == cpp_file_types::implementation);
+    const bool is_header(flt == cpp_file_types::header);
+    if (ft == cpp_facet_types::domain) {
+        if (is_header) {
+            r.push_back(iosfwd);
+            // if (!pod.properties().empty())
+            r.push_back(algorithm);
+        }
+
+        if (is_implementation) {
+            r.push_back(ostream);
+            for(const auto p : pod.properties()) {
+                if (p.type_name().type_name() == bool_type) {
+                    r.push_back(state_saver);
+                    break;
+                }
+            }
+        }
+    }
 
     if (ft == cpp_facet_types::database) {
-        if (flt == cpp_file_types::header) {
+        if (is_header) {
             r.push_back(vector_include);
             r.push_back(boost_optional_include);
             r.push_back(pqxx_connection_include);
-        } else if (flt == cpp_file_types::implementation) {
+        }
+
+        if (is_implementation) {
             r.push_back(boost_format_include);
             r.push_back(pqxx_result_include);
             r.push_back(pqxx_transaction_include);
         }
     }
+
     return r;
 }
 

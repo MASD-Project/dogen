@@ -36,8 +36,6 @@ namespace {
 
 const bool is_system(true);
 const bool is_user(false);
-const std::string ostream("ostream");
-const std::string state_saver("boost/io/ios_state.hpp");
 const std::string jsonify_include("dogen/utility/io/jsonify_io.hpp");
 const std::string jsonify_using("using dogen::utility::streaming::jsonify;");
 const std::string type("__type__");
@@ -133,21 +131,15 @@ void domain_implementation::format(const file_view_model& vm) {
     licence licence(stream_);
     licence.format();
 
-    auto system_dependencies(vm.system_dependencies());
-    system_dependencies.push_back(ostream);
-
-    const view_models::class_view_model& cvm(*o);
-    if (cvm.has_boolean_properties())
-        system_dependencies.push_back(state_saver);
-
     auto user_dependencies(vm.user_dependencies());
     user_dependencies.push_back(jsonify_include);
 
     cpp_includes includes(stream_);
-    includes.format(system_dependencies, is_system);
+    includes.format(vm.system_dependencies(), is_system);
     includes.format(user_dependencies, is_user);
     utility_.blank_line();
 
+    const view_models::class_view_model& cvm(*o);
     namespace_helper ns_helper(stream_, cvm.namespaces());
     utility_.blank_line();
     class_implementation(vm.aspect_type(), cvm);

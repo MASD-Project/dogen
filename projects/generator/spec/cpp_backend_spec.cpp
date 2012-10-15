@@ -92,6 +92,9 @@ dogen::sml::model pod_with_parent_model() {
 
 }
 
+using namespace dogen::generator::backends::cpp;
+using namespace dogen::generator::backends::cpp::view_models;
+
 BOOST_AUTO_TEST_SUITE(cpp_backend)
 
 BOOST_AUTO_TEST_CASE(view_model_transformer_correctly_transforms_domain_files) {
@@ -105,21 +108,17 @@ BOOST_AUTO_TEST_CASE(view_model_transformer_correctly_transforms_domain_files) {
     using dogen::generator::test::mock_settings_factory;
     const auto s(mock_settings_factory::build_cpp_settings(empty, empty));
 
-    using dogen::generator::backends::cpp::cpp_location_manager;
     cpp_location_manager lm(test_model_name, s);
 
-    using dogen::generator::backends::cpp::cpp_facet_types;
     std::set<cpp_facet_types> ft;
     ft.insert(cpp_facet_types::domain);
 
-    using dogen::generator::backends::cpp::view_models::sml_to_cpp_view_model;
     const bool no_includers(false);
     const bool no_keys(false);
     const bool no_iio(false);
     const bool disable_io(false);
     sml_to_cpp_view_model t(lm, ft, input, no_includers, no_keys, no_iio, disable_io);
 
-    using namespace dogen::generator::backends::cpp::view_models;
     std::vector<file_view_model> actual(t.transform());
 
     BOOST_CHECK(actual.size() == 7);
@@ -127,7 +126,6 @@ BOOST_AUTO_TEST_CASE(view_model_transformer_correctly_transforms_domain_files) {
         BOOST_LOG_SEV(lg, debug) << "file: " << f.file_path();
         BOOST_CHECK(f.facet_type() == cpp_facet_types::domain);
 
-        using dogen::generator::backends::cpp::cpp_file_types;
         BOOST_CHECK(f.file_type() == cpp_file_types::header ||
             f.file_type() == cpp_file_types::implementation);
 
@@ -135,8 +133,17 @@ BOOST_AUTO_TEST_CASE(view_model_transformer_correctly_transforms_domain_files) {
         BOOST_LOG_SEV(lg, debug) << "user deps: " << f.user_dependencies();
         BOOST_LOG_SEV(lg, debug) << "header guard:" << f.header_guard();
 
-        BOOST_CHECK(f.system_dependencies().empty());
-        using dogen::generator::backends::cpp::cpp_aspect_types;
+        if (f.facet_type() == cpp_facet_types::domain &&
+            f.file_type() == cpp_file_types::header &&
+            f.aspect_type() != cpp_aspect_types::includers)
+            BOOST_CHECK(f.system_dependencies().size() == 2);
+        else if (f.facet_type() == cpp_facet_types::domain &&
+            f.file_type() == cpp_file_types::implementation &&
+            f.aspect_type() != cpp_aspect_types::includers)
+            BOOST_CHECK(f.system_dependencies().size() == 1);
+        else
+            BOOST_CHECK(f.system_dependencies().empty());
+
         const auto o(f.class_vm());
         if (!o) {
             BOOST_CHECK(f.file_type() == cpp_file_types::header);
@@ -205,25 +212,20 @@ BOOST_AUTO_TEST_CASE(disabling_facet_includers_results_in_no_facet_includers) {
     using dogen::generator::test::mock_settings_factory;
     const auto s(mock_settings_factory::build_cpp_settings(empty, empty));
 
-    using dogen::generator::backends::cpp::cpp_location_manager;
     cpp_location_manager lm(test_model_name, s);
 
-    using dogen::generator::backends::cpp::cpp_facet_types;
     std::set<cpp_facet_types> ft;
     ft.insert(cpp_facet_types::domain);
 
-    using dogen::generator::backends::cpp::view_models::sml_to_cpp_view_model;
     bool no_includers(true);
     bool no_keys(false);
     const bool no_iio(false);
     const bool disable_io(false);
     sml_to_cpp_view_model t(lm, ft, input, no_includers, no_keys, no_iio, disable_io);
 
-    using namespace dogen::generator::backends::cpp::view_models;
     std::vector<file_view_model> actual(t.transform());
 
     BOOST_CHECK(actual.size() == 6);
-    using dogen::generator::backends::cpp::cpp_aspect_types;
     for (const auto f : actual) {
         BOOST_CHECK(f.aspect_type() != cpp_aspect_types::includers);
         const auto o(f.class_vm());
@@ -242,10 +244,8 @@ BOOST_AUTO_TEST_CASE(disabling_keys_results_in_no_keys) {
     using dogen::generator::test::mock_settings_factory;
     const auto s(mock_settings_factory::build_cpp_settings(empty, empty));
 
-    using dogen::generator::backends::cpp::cpp_location_manager;
     cpp_location_manager lm(test_model_name, s);
 
-    using dogen::generator::backends::cpp::cpp_facet_types;
     std::set<cpp_facet_types> ft;
     ft.insert(cpp_facet_types::domain);
 
@@ -253,15 +253,13 @@ BOOST_AUTO_TEST_CASE(disabling_keys_results_in_no_keys) {
     bool no_keys(true);
     const bool no_iio(false);
     const bool disable_io(false);
-    using dogen::generator::backends::cpp::view_models::sml_to_cpp_view_model;
+
     sml_to_cpp_view_model t(lm, ft, input, no_includers, no_keys, no_iio,
         disable_io);
 
-    using namespace dogen::generator::backends::cpp::view_models;
     std::vector<file_view_model> actual(t.transform());
 
     BOOST_CHECK(actual.size() == 3);
-    using dogen::generator::backends::cpp::cpp_aspect_types;
     for (const auto f : actual) {
         BOOST_CHECK(f.aspect_type() != cpp_aspect_types::versioned_key);
         BOOST_CHECK(f.aspect_type() != cpp_aspect_types::unversioned_key);
@@ -278,7 +276,6 @@ BOOST_AUTO_TEST_CASE(is_parent_flag_is_correctly_set_on_view_models) {
     using dogen::generator::test::mock_settings_factory;
     const auto s(mock_settings_factory::build_cpp_settings(empty, empty));
 
-    using namespace dogen::generator::backends::cpp;
     cpp_location_manager lm(m.name(), s);
 
     bool no_includers(true);
@@ -286,24 +283,21 @@ BOOST_AUTO_TEST_CASE(is_parent_flag_is_correctly_set_on_view_models) {
     bool integrated_io(false);
     bool disable_io(false);
 
-    using dogen::generator::backends::cpp::cpp_inclusion_manager;
     cpp_inclusion_manager dm(m, lm, no_keys, integrated_io, disable_io);
 
-    using dogen::generator::backends::cpp::cpp_facet_types;
     std::set<cpp_facet_types> ft;
     ft.insert(cpp_facet_types::domain);
 
-    using dogen::generator::backends::cpp::view_models::sml_to_cpp_view_model;
+
     sml_to_cpp_view_model t(lm, ft, m, no_includers, no_keys, integrated_io,
         disable_io);
 
-    using namespace dogen::generator::backends::cpp::view_models;
     std::vector<file_view_model> actual(t.transform());
 
     // 2 headers and 2 implementation files
     BOOST_CHECK(actual.size() == 4);
     BOOST_LOG_SEV(lg, debug) << "files generated: " << actual.size();
-    using dogen::generator::backends::cpp::cpp_aspect_types;
+
     for (const auto fvm : actual) {
         BOOST_LOG_SEV(lg, debug) << "file: " << fvm.file_path();
         BOOST_CHECK(fvm.aspect_type() == cpp_aspect_types::main);

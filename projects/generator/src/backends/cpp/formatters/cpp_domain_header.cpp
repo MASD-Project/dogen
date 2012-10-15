@@ -35,9 +35,6 @@ namespace {
 
 const bool is_system(true);
 const bool is_user(false);
-const std::string iosfwd("iosfwd");
-const std::string algorithm("algorithm");
-
 const std::string invalid_facet_types_enum("Invalid value for cpp_facet_types");
 const std::string missing_class_view_model(
     "File view model must contain a class view model");
@@ -141,18 +138,12 @@ void domain_header::format(const file_view_model& vm) {
     guards.format_start(vm.header_guard());
     utility_.blank_line();
 
-    std::list<std::string> system_dependencies(vm.system_dependencies());
-    system_dependencies.push_back(iosfwd);
-
-    const view_models::class_view_model& cvm(*o);
-    if (!cvm.properties().empty())
-        system_dependencies.push_back(algorithm);
-
     cpp_includes includes(stream_);
-    includes.format(system_dependencies, is_system);
+    includes.format(vm.system_dependencies(), is_system);
     includes.format(vm.user_dependencies(), is_user);
     utility_.blank_line();
 
+    const view_models::class_view_model& cvm(*o);
     {
         namespace_helper ns(stream_, cvm.namespaces());
         utility_.blank_line();

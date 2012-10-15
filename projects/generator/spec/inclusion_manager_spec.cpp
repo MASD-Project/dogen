@@ -44,12 +44,18 @@ const std::string io("io");
 const std::string database("database");
 const std::string serialization("serialization");
 const std::string versioned_key("versioned_key");
+const std::string ostream("ostream");
+const std::string state_saver("boost/io/ios_state.hpp");
+
 const std::string vector("vector");
 const std::string boost_optional("optional.hpp");
 const std::string pqxx_connection("connection.hxx");
 const std::string boost_format("format.hpp");
 const std::string pqxx_result("result.hxx");
 const std::string pqxx_transaction("transaction.hxx");
+const std::string iosfwd("iosfwd");
+const std::string algorithm("algorithm");
+
 const std::string io_postfix("_io.hpp");
 const std::string database_postfix("_db.hpp");
 const std::string serialization_postfix("_ser.hpp");
@@ -169,10 +175,14 @@ BOOST_AUTO_TEST_CASE(processing_one_pod_model_with_default_configuration_generat
     BOOST_CHECK(hu.size() == 1);
     BOOST_CHECK(asserter::assert_contains(versioned_key, hu.front()));
 
-    // FIXME: no iosfwd, expected with current impl
     const auto hs(i[header_system]);
     BOOST_LOG_SEV(lg, debug) << "header  system dependencies: " << hs;
-    BOOST_CHECK(hs.empty());
+    BOOST_CHECK(hs.size() == 2);
+    for (const auto s : hs) {
+        BOOST_CHECK(
+            boost::ends_with(s, iosfwd) ||
+            boost::ends_with(s, algorithm));
+    }
 
     // implementation
     const auto iu(i[implementation_user]);
@@ -190,7 +200,8 @@ BOOST_AUTO_TEST_CASE(processing_one_pod_model_with_default_configuration_generat
 
     const auto is(i[implementation_system]);
     BOOST_LOG_SEV(lg, debug) << "implementation system dependencies: " << is;
-    BOOST_CHECK(is.empty());
+    BOOST_CHECK(is.size() == 1);
+    BOOST_CHECK(boost::ends_with(is.front(), ostream));
 }
 
 BOOST_AUTO_TEST_CASE(processing_one_pod_model_with_default_configuration_generates_expected_io_includes) {
