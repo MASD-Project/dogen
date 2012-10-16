@@ -34,6 +34,7 @@ const std::string vector_include("vector");
 const std::string boost_optional_include("boost/optional.hpp");
 const std::string pqxx_connection_include("pqxx/connection.hxx");
 const std::string boost_format_include("boost/format.hpp");
+const std::string boost_nvp("boost/serialization/nvp.hpp");
 const std::string pqxx_result_include("pqxx/result.hxx");
 const std::string pqxx_transaction_include("pqxx/transaction.hxx");
 const std::string iosfwd("iosfwd");
@@ -113,6 +114,11 @@ system(const std::string& /*name*/, cpp_facet_types ft,
         else if (ft == cpp_facet_types::io && is_implementation)
             r.push_back(ostream);
     }
+
+    if (is_header && ft == cpp_facet_types::serialization &&
+        !settings_.disable_xml_serialization())
+        r.push_back(boost_nvp);
+
     return r;
 }
 
@@ -167,6 +173,11 @@ system(const sml::pod& pod, cpp_facet_types ft,
         else if (is_implementation)
             r.push_back(ostream);
     }
+
+    if (is_header && ft == cpp_facet_types::serialization &&
+        !settings_.disable_xml_serialization())
+        r.push_back(boost_nvp);
+
     return r;
 }
 

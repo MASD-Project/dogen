@@ -49,6 +49,7 @@ const std::string state_saver("boost/io/ios_state.hpp");
 const std::string functional("functional");
 const std::string vector("vector");
 const std::string boost_optional("optional.hpp");
+const std::string boost_nvp("nvp.hpp");
 const std::string pqxx_connection("connection.hxx");
 const std::string boost_format("format.hpp");
 const std::string pqxx_result("result.hxx");
@@ -246,8 +247,7 @@ BOOST_AUTO_TEST_CASE(processing_one_pod_model_with_default_configuration_generat
 
     // header
     const auto hu(i[header_user]);
-    BOOST_LOG_SEV(lg, debug) << "header user dependencies: "
-                             << hu;
+    BOOST_LOG_SEV(lg, debug) << "header user dependencies: " << hu;
     BOOST_CHECK(hu.size() == 2);
     auto a(hu.front());
     auto b(hu.back());
@@ -260,10 +260,10 @@ BOOST_AUTO_TEST_CASE(processing_one_pod_model_with_default_configuration_generat
     BOOST_CHECK(asserter::assert_contains(versioned_key, b));
     BOOST_CHECK(asserter::assert_contains(serialization, b));
 
-    // FIXME: missing serialisation headers
     const auto hs(i[header_system]);
     BOOST_LOG_SEV(lg, debug) << "header system dependencies: " << hs;
-    BOOST_CHECK(hs.empty());
+    BOOST_CHECK(hs.size() == 1);
+    BOOST_CHECK(asserter::assert_contains(boost_nvp, hs.front()));
 
     // implementation
     const auto iu(i[implementation_user]);

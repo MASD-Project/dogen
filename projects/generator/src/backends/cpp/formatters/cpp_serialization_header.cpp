@@ -37,7 +37,6 @@ const bool is_system(true);
 const bool is_user(false);
 const std::string boost_ns("boost");
 const std::string serialization_ns("serialization");
-const std::string nvp("boost/serialization/nvp.hpp");
 
 const std::string missing_class_view_model(
     "File view model must contain a class view model");
@@ -157,12 +156,8 @@ void serialization_header::format(const file_view_model& vm) {
     guards.format_start(vm.header_guard());
     utility_.blank_line();
 
-    std::list<std::string> system_dependencies(vm.system_dependencies());
-    if (!disable_xml_serialization_)
-        system_dependencies.push_back(nvp);
-
     cpp_includes includes(stream_);
-    includes.format(system_dependencies, is_system);
+    includes.format(vm.system_dependencies(), is_system);
     includes.format(vm.user_dependencies(), is_user);
     utility_.blank_line();
 
