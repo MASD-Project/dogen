@@ -29,6 +29,9 @@
 #include "dogen/sml/serialization/model_ser.hpp"
 #include "dogen/generator/test/mock_settings_factory.hpp"
 
+using namespace dogen::generator::backends::cpp;
+using namespace dogen::generator::backends::cpp::view_models;
+
 namespace {
 
 const std::string empty;
@@ -90,10 +93,24 @@ dogen::sml::model pod_with_parent_model() {
     return r;
 }
 
+dogen::generator::config::cpp_settings create_settings(
+    bool disable_facet_includers = false, bool disable_versioning = false,
+    bool use_integrated_io = false) {
+
+    using dogen::generator::test::mock_settings_factory;
+    auto r(mock_settings_factory::build_cpp_settings(empty, empty));
+
+    std::set<cpp_facet_types> ft;
+    ft.insert(cpp_facet_types::domain);
+
+    r.enabled_facets(ft);
+    r.use_integrated_io(use_integrated_io);
+    r.disable_versioning(disable_versioning);
+    r.disable_facet_includers(disable_facet_includers);
+    return r;
 }
 
-using namespace dogen::generator::backends::cpp;
-using namespace dogen::generator::backends::cpp::view_models;
+}
 
 BOOST_AUTO_TEST_SUITE(cpp_backend)
 
@@ -103,21 +120,15 @@ BOOST_AUTO_TEST_CASE(view_model_transformer_correctly_transforms_domain_files) {
     auto input_path(dia_sml::expected_class_in_a_package_sml_xml());
 
     using dogen::utility::test::xml_deserialize;
-    const auto input(xml_deserialize<dogen::sml::model>(input_path));
-
-    using dogen::generator::test::mock_settings_factory;
-    const auto s(mock_settings_factory::build_cpp_settings(empty, empty));
+    const auto m(xml_deserialize<dogen::sml::model>(input_path));
+    const auto s(create_settings());
 
     cpp_location_manager lm(test_model_name, s);
+    cpp_inclusion_manager im(m, lm,
+        s.disable_versioning(),
+        s.use_integrated_io(), false);
 
-    std::set<cpp_facet_types> ft;
-    ft.insert(cpp_facet_types::domain);
-
-    const bool no_includers(false);
-    const bool no_keys(false);
-    const bool no_iio(false);
-    const bool disable_io(false);
-    sml_to_cpp_view_model t(lm, ft, input, no_includers, no_keys, no_iio, disable_io);
+    sml_to_cpp_view_model t(lm, im, s, m);
 
     std::vector<file_view_model> actual(t.transform());
 
@@ -207,21 +218,17 @@ BOOST_AUTO_TEST_CASE(disabling_facet_includers_results_in_no_facet_includers) {
     auto input_path(dia_sml::expected_class_in_a_package_sml_xml());
 
     using dogen::utility::test::xml_deserialize;
-    const auto input(xml_deserialize<dogen::sml::model>(input_path));
+    const auto m(xml_deserialize<dogen::sml::model>(input_path));
 
-    using dogen::generator::test::mock_settings_factory;
-    const auto s(mock_settings_factory::build_cpp_settings(empty, empty));
+    const bool disable_facet_includers(true);
+    const auto s(create_settings(disable_facet_includers));
 
     cpp_location_manager lm(test_model_name, s);
+    cpp_inclusion_manager im(m, lm,
+        s.disable_versioning(),
+        s.use_integrated_io(), false);
 
-    std::set<cpp_facet_types> ft;
-    ft.insert(cpp_facet_types::domain);
-
-    bool no_includers(true);
-    bool no_keys(false);
-    const bool no_iio(false);
-    const bool disable_io(false);
-    sml_to_cpp_view_model t(lm, ft, input, no_includers, no_keys, no_iio, disable_io);
+    sml_to_cpp_view_model t(lm, im, s, m);
 
     std::vector<file_view_model> actual(t.transform());
 
@@ -239,23 +246,18 @@ BOOST_AUTO_TEST_CASE(disabling_keys_results_in_no_keys) {
     auto input_path(dia_sml::expected_class_in_a_package_sml_xml());
 
     using dogen::utility::test::xml_deserialize;
-    const auto input(xml_deserialize<dogen::sml::model>(input_path));
+    const auto m(xml_deserialize<dogen::sml::model>(input_path));
 
-    using dogen::generator::test::mock_settings_factory;
-    const auto s(mock_settings_factory::build_cpp_settings(empty, empty));
+    const bool disable_facet_includers(false);
+    const bool disable_versioning(true);
+    const auto s(create_settings(disable_facet_includers, disable_versioning));
 
     cpp_location_manager lm(test_model_name, s);
+    cpp_inclusion_manager im(m, lm,
+        s.disable_versioning(),
+        s.use_integrated_io(), false);
 
-    std::set<cpp_facet_types> ft;
-    ft.insert(cpp_facet_types::domain);
-
-    bool no_includers(false);
-    bool no_keys(true);
-    const bool no_iio(false);
-    const bool disable_io(false);
-
-    sml_to_cpp_view_model t(lm, ft, input, no_includers, no_keys, no_iio,
-        disable_io);
+    sml_to_cpp_view_model t(lm, im, s, m);
 
     std::vector<file_view_model> actual(t.transform());
 
@@ -273,25 +275,16 @@ BOOST_AUTO_TEST_CASE(is_parent_flag_is_correctly_set_on_view_models) {
     BOOST_CHECK(pods.size() == 2);
     const auto pod(pods.begin()->second);
 
-    using dogen::generator::test::mock_settings_factory;
-    const auto s(mock_settings_factory::build_cpp_settings(empty, empty));
-
+    const bool disable_facet_includers(true);
+    const bool disable_versioning(true);
+    const auto s(create_settings(disable_facet_includers, disable_versioning));
     cpp_location_manager lm(m.name(), s);
 
-    bool no_includers(true);
-    bool no_keys(true);
-    bool integrated_io(false);
-    bool disable_io(false);
+    cpp_inclusion_manager im(m, lm,
+        s.disable_versioning(),
+        s.use_integrated_io(), false);
 
-    cpp_inclusion_manager dm(m, lm, no_keys, integrated_io, disable_io);
-
-    std::set<cpp_facet_types> ft;
-    ft.insert(cpp_facet_types::domain);
-
-
-    sml_to_cpp_view_model t(lm, ft, m, no_includers, no_keys, integrated_io,
-        disable_io);
-
+    sml_to_cpp_view_model t(lm, im, s, m);
     std::vector<file_view_model> actual(t.transform());
 
     // 2 headers and 2 implementation files

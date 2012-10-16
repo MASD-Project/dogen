@@ -226,19 +226,17 @@ namespace view_models {
 
 sml_to_cpp_view_model::
 sml_to_cpp_view_model(const cpp_location_manager& location_manager,
-    const std::set<cpp_facet_types>& facet_types,
-    const sml::model& model, bool disable_facet_includers,
-    bool disable_keys, bool use_integrated_io, bool disable_io) :
+    const cpp_inclusion_manager& inclusion_manager,
+    const config::cpp_settings& settings,
+    const sml::model& model) :
     location_manager_(location_manager),
-    facet_types_(facet_types),
-    model_(model), disable_facet_includers_(disable_facet_includers),
-    disable_keys_(disable_keys),
-    inclusion_manager_(model, location_manager, disable_keys,
-        use_integrated_io, disable_io),
+    inclusion_manager_(inclusion_manager),
+    settings_(settings),
+    model_(model),
     root_vertex_(boost::add_vertex(graph_)) { }
 
 void sml_to_cpp_view_model::log_keys() const {
-    if (disable_keys_)
+    if (settings_.disable_versioning())
         BOOST_LOG_SEV(lg, warn) << "Keys are NOT enabled, "
                                 << "NOT generating views for them.";
     else
@@ -247,7 +245,7 @@ void sml_to_cpp_view_model::log_keys() const {
 }
 
 void sml_to_cpp_view_model::log_includers() const {
-    if (disable_facet_includers_)
+    if (settings_.disable_facet_includers())
         BOOST_LOG_SEV(lg, warn) << "Includers are NOT enabled, "
                                 << "NOT generating views for them.";
     else
@@ -373,7 +371,7 @@ void sml_to_cpp_view_model::setup_qualified_name_to_class_view_model_map() {
             boost::add_edge(root_vertex_, vertex, graph_);
     }
 
-    sml_dfs_visitor v(model_.schema_name(), disable_keys_);
+    sml_dfs_visitor v(model_.schema_name(), settings_.disable_versioning());
     boost::depth_first_search(graph_, boost::visitor(v));
     qname_to_class_ = v.class_view_models();
 }
@@ -393,7 +391,7 @@ std::vector<file_view_model> sml_to_cpp_view_model::transform_pods() {
         if (!p.generate())
             continue;
 
-        for (const auto ft: facet_types_) {
+        for (const auto ft: settings_.enabled_facets()) {
             lambda(ft, cpp_file_types::header, p);
 
             if (has_implementation(ft))
@@ -481,7 +479,7 @@ sml_to_cpp_view_model::transform_keys() {
     const auto v(cpp_aspect_types::versioned_key);
     const auto u(cpp_aspect_types::unversioned_key);
 
-    for (cpp_facet_types ft : facet_types_) {
+    for (cpp_facet_types ft : settings_.enabled_facets()) {
         if (ft == cpp_facet_types::database)
             continue;
 
@@ -502,7 +500,7 @@ sml_to_cpp_view_model::transform_facet_includers() const {
     const cpp_file_types file_type(cpp_file_types::header);
     const auto aspect_type(cpp_aspect_types::includers);
 
-    for (cpp_facet_types ft : facet_types_) {
+    for (cpp_facet_types ft : settings_.enabled_facets()) {
         sml::qualified_name qn;
         const auto n(includer_name);
         log_generating_file(ft, aspect_type, file_type, n);
@@ -531,13 +529,13 @@ std::vector<file_view_model> sml_to_cpp_view_model::transform() {
     auto r(transform_pods());
 
     log_keys();
-    if (!disable_keys_) {
+    if (!settings_.disable_versioning()) {
         const auto k(transform_keys());
         r.insert(r.end(), k.begin(), k.end());
     }
 
     log_includers();
-    if (disable_facet_includers_)
+    if (settings_.disable_facet_includers())
         return r;
 
     const auto fi(transform_facet_includers());

@@ -32,6 +32,7 @@
 #include <vector>
 #include <unordered_map>
 #include <boost/graph/adjacency_list.hpp>
+#include "dogen/generator/config/cpp_settings.hpp"
 #include "dogen/generator/backends/cpp/cpp_location_manager.hpp"
 #include "dogen/generator/backends/cpp/cpp_inclusion_manager.hpp"
 #include "dogen/generator/backends/cpp/cpp_aspect_types.hpp"
@@ -62,10 +63,9 @@ public:
 
 public:
     sml_to_cpp_view_model(const cpp_location_manager& location_manager,
-        const std::set<cpp_facet_types>& facet_types,
-        const sml::model& model, bool disable_facet_includers,
-        bool disable_keys, bool use_integrated_io,
-        bool disable_io);
+        const cpp_inclusion_manager& inclusion_manager,
+        const config::cpp_settings& settings,
+        const sml::model& model);
 
 private:
     void log_started() const;
@@ -161,11 +161,9 @@ private:
 
 private:
     const cpp_location_manager location_manager_;
-    const std::set<cpp_facet_types> facet_types_;
-    const sml::model model_;
-    const bool disable_facet_includers_;
-    const bool disable_keys_;
     cpp_inclusion_manager inclusion_manager_;
+    const config::cpp_settings settings_;
+    const sml::model model_;
     std::unordered_map<sml::qualified_name, class_view_model> qname_to_class_;
     graph_type graph_;
     qname_to_vertex_type qname_to_vertex_;

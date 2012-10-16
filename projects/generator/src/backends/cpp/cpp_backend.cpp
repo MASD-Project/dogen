@@ -18,6 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen/generator/backends/cpp/cpp_inclusion_manager.hpp"
 #include "dogen/generator/generation_failure.hpp"
 #include "dogen/generator/backends/cpp/formatters/factory.hpp"
 #include "dogen/generator/backends/cpp/formatters/file_formatter.hpp"
@@ -131,14 +132,13 @@ generate_file_view_model(const view_models::file_view_model& vm) const {
 
 backend::value_type cpp_backend::generate_file_view_models() const {
     const auto f(settings_.enabled_facets());
-    const bool dfi(settings_.disable_facet_includers());
-    const bool dk(settings_.disable_versioning());
+    const bool disable_io(f.find(cpp_facet_types::io) == f.end());
+    cpp_inclusion_manager im(model_, location_manager_,
+        settings_.disable_versioning(),
+        settings_.use_integrated_io(), disable_io);
 
     using view_models::sml_to_cpp_view_model;
-    const bool iio(settings_.use_integrated_io());
-    const bool disable_io(f.find(cpp_facet_types::io) == f.end());
-    sml_to_cpp_view_model t(location_manager_, f, model_, dfi, dk, iio,
-        disable_io);
+    sml_to_cpp_view_model t(location_manager_, im, settings_, model_);
     std::vector<view_models::file_view_model> fvms(t.transform());
     log_file_views(fvms.size());
 
