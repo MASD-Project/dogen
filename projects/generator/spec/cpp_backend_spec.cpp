@@ -110,6 +110,36 @@ dogen::generator::config::cpp_settings create_settings(
     return r;
 }
 
+std::vector<file_view_model> execute_transformer(
+    const boost::filesystem::path& input_path,
+    bool disable_facet_includers = false, bool disable_versioning = false) {
+
+    using dogen::utility::test::xml_deserialize;
+    const auto m(xml_deserialize<dogen::sml::model>(input_path));
+    auto s(create_settings());
+    s.disable_versioning(disable_versioning);
+    s.disable_facet_includers(disable_facet_includers);
+
+    cpp_location_manager lm(test_model_name, s);
+    cpp_inclusion_manager im(m, lm, s);
+    sml_to_cpp_view_model t(lm, im, s, m);
+    return t.transform();
+}
+
+std::vector<file_view_model> execute_transformer(
+    const dogen::sml::model& model, bool disable_facet_includers = false,
+    bool disable_versioning = false) {
+
+    auto s(create_settings());
+    s.disable_versioning(disable_versioning);
+    s.disable_facet_includers(disable_facet_includers);
+
+    cpp_location_manager lm(test_model_name, s);
+    cpp_inclusion_manager im(model, lm, s);
+    sml_to_cpp_view_model t(lm, im, s, model);
+    return t.transform();
+}
+
 }
 
 BOOST_AUTO_TEST_SUITE(cpp_backend)
@@ -118,19 +148,7 @@ BOOST_AUTO_TEST_CASE(view_model_transformer_correctly_transforms_domain_files) {
     SETUP_TEST_LOG_SOURCE("view_model_transformer_correctly_transforms_domain_files");
     using dogen::utility::test_data::dia_sml;
     auto input_path(dia_sml::expected_class_in_a_package_sml_xml());
-
-    using dogen::utility::test::xml_deserialize;
-    const auto m(xml_deserialize<dogen::sml::model>(input_path));
-    const auto s(create_settings());
-
-    cpp_location_manager lm(test_model_name, s);
-    cpp_inclusion_manager im(m, lm,
-        s.disable_versioning(),
-        s.use_integrated_io(), false);
-
-    sml_to_cpp_view_model t(lm, im, s, m);
-
-    std::vector<file_view_model> actual(t.transform());
+    std::vector<file_view_model> actual(execute_transformer(input_path));
 
     BOOST_CHECK(actual.size() == 7);
     for (const auto f : actual) {
@@ -181,7 +199,7 @@ BOOST_AUTO_TEST_CASE(view_model_transformer_correctly_transforms_domain_files) {
             BOOST_CHECK(f.header_guard() == header_guard_name);
         } else {
             BOOST_CHECK(f.header_guard() == empty);
-            BOOST_CHECK(f.user_dependencies().size() == 2);
+            BOOST_CHECK(f.user_dependencies().size() == 1);
             BOOST_CHECK(f.user_dependencies().front() == user_dependency);
         }
 
@@ -216,21 +234,8 @@ BOOST_AUTO_TEST_CASE(disabling_facet_includers_results_in_no_facet_includers) {
     SETUP_TEST_LOG("disabling_facet_includers_results_in_no_facet_includers");
     using dogen::utility::test_data::dia_sml;
     auto input_path(dia_sml::expected_class_in_a_package_sml_xml());
-
-    using dogen::utility::test::xml_deserialize;
-    const auto m(xml_deserialize<dogen::sml::model>(input_path));
-
     const bool disable_facet_includers(true);
-    const auto s(create_settings(disable_facet_includers));
-
-    cpp_location_manager lm(test_model_name, s);
-    cpp_inclusion_manager im(m, lm,
-        s.disable_versioning(),
-        s.use_integrated_io(), false);
-
-    sml_to_cpp_view_model t(lm, im, s, m);
-
-    std::vector<file_view_model> actual(t.transform());
+    const auto actual(execute_transformer(input_path, disable_facet_includers));
 
     BOOST_CHECK(actual.size() == 6);
     for (const auto f : actual) {
@@ -244,22 +249,9 @@ BOOST_AUTO_TEST_CASE(disabling_keys_results_in_no_keys) {
     SETUP_TEST_LOG("disabling_facet_includers_results_in_no_facet_includers");
     using dogen::utility::test_data::dia_sml;
     auto input_path(dia_sml::expected_class_in_a_package_sml_xml());
-
-    using dogen::utility::test::xml_deserialize;
-    const auto m(xml_deserialize<dogen::sml::model>(input_path));
-
     const bool disable_facet_includers(false);
     const bool disable_versioning(true);
-    const auto s(create_settings(disable_facet_includers, disable_versioning));
-
-    cpp_location_manager lm(test_model_name, s);
-    cpp_inclusion_manager im(m, lm,
-        s.disable_versioning(),
-        s.use_integrated_io(), false);
-
-    sml_to_cpp_view_model t(lm, im, s, m);
-
-    std::vector<file_view_model> actual(t.transform());
+    const auto actual(execute_transformer(input_path, disable_facet_includers, disable_versioning));
 
     BOOST_CHECK(actual.size() == 3);
     for (const auto f : actual) {
@@ -277,15 +269,8 @@ BOOST_AUTO_TEST_CASE(is_parent_flag_is_correctly_set_on_view_models) {
 
     const bool disable_facet_includers(true);
     const bool disable_versioning(true);
-    const auto s(create_settings(disable_facet_includers, disable_versioning));
-    cpp_location_manager lm(m.name(), s);
-
-    cpp_inclusion_manager im(m, lm,
-        s.disable_versioning(),
-        s.use_integrated_io(), false);
-
-    sml_to_cpp_view_model t(lm, im, s, m);
-    std::vector<file_view_model> actual(t.transform());
+    const auto actual(execute_transformer(m, disable_facet_includers,
+            disable_versioning));
 
     // 2 headers and 2 implementation files
     BOOST_CHECK(actual.size() == 4);

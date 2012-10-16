@@ -131,11 +131,7 @@ generate_file_view_model(const view_models::file_view_model& vm) const {
 }
 
 backend::value_type cpp_backend::generate_file_view_models() const {
-    const auto f(settings_.enabled_facets());
-    const bool disable_io(f.find(cpp_facet_types::io) == f.end());
-    cpp_inclusion_manager im(model_, location_manager_,
-        settings_.disable_versioning(),
-        settings_.use_integrated_io(), disable_io);
+    cpp_inclusion_manager im(model_, location_manager_, settings_);
 
     using view_models::sml_to_cpp_view_model;
     sml_to_cpp_view_model t(location_manager_, im, settings_, model_);

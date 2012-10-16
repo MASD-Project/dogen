@@ -109,20 +109,21 @@ dogen::sml::model one_pod_model() {
 }
 
 cpp_inclusion_manager default_inclusion_manager(const dogen::sml::model& m) {
-    cpp_location_manager lm(m.name(), mock_settings());
-    bool no_keys(false);
-    bool integrated_io(false);
-    bool no_io(false);
-    return cpp_inclusion_manager(m, lm, no_keys, integrated_io, no_io);
+    auto s(mock_settings());
+    s.use_integrated_io(false);
+    s.disable_versioning(false);
+
+    cpp_location_manager lm(m.name(), s);
+    return cpp_inclusion_manager(m, lm, s);
 }
 
 cpp_inclusion_manager
 inclusion_manager_with_no_keys(const dogen::sml::model& m) {
-    cpp_location_manager lm(m.name(), mock_settings());
-    bool no_keys(true);
-    bool integrated_io(false);
-    bool no_io(false);
-    return cpp_inclusion_manager(m, lm, no_keys, integrated_io, no_io);
+    auto s(mock_settings());
+    s.use_integrated_io(false);
+    s.disable_versioning(true);
+    cpp_location_manager lm(m.name(), s);
+    return cpp_inclusion_manager(m, lm, s);
 }
 
 typedef std::function<

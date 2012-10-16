@@ -29,6 +29,7 @@
 #include <list>
 #include <string>
 #include <boost/filesystem/path.hpp>
+#include "dogen/generator/config/cpp_settings.hpp"
 #include "dogen/generator/backends/cpp/cpp_location_manager.hpp"
 #include "dogen/generator/backends/cpp/cpp_aspect_types.hpp"
 #include "dogen/generator/backends/cpp/cpp_facet_types.hpp"
@@ -59,14 +60,13 @@ public:
     cpp_inclusion_manager(cpp_inclusion_manager&& rhs)
     : model_(std::move(rhs.model_)),
       location_manager_(std::move(rhs.location_manager_)),
-      headers_for_facet_(std::move(rhs.headers_for_facet_)),
-      disable_keys_(std::move(rhs.disable_keys_)),
-      use_integrated_io_(std::move(rhs.use_integrated_io_)),
-      disable_io_(std::move(rhs.disable_io_)) { }
+      settings_(std::move(rhs.settings_)),
+      disable_io_(std::move(rhs.disable_io_)),
+      headers_for_facet_(std::move(rhs.headers_for_facet_))  { }
 
     cpp_inclusion_manager(const sml::model& model,
-        const cpp_location_manager& location_manager, bool disable_keys,
-        bool use_integrated_io, bool disable_io);
+        const cpp_location_manager& location_manager,
+        const config::cpp_settings settings);
 
 private:
     bool has_versioned_dependency(const sml::pod& pod, cpp_facet_types ft,
@@ -152,10 +152,9 @@ public:
 private:
     const sml::model model_;
     const cpp_location_manager location_manager_;
+    const config::cpp_settings settings_;
+    bool disable_io_;
     std::map<cpp_facet_types, std::list<std::string> > headers_for_facet_;
-    const bool disable_keys_;
-    const bool use_integrated_io_;
-    const bool disable_io_;
 };
 
 } } } }

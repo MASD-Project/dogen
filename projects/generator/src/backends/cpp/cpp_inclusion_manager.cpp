@@ -50,16 +50,17 @@ namespace backends {
 namespace cpp {
 
 cpp_inclusion_manager::cpp_inclusion_manager(const sml::model& model,
-    const cpp_location_manager& location_manager, bool disable_keys,
-    bool use_integrated_io, bool disable_io)
-    : model_(model), location_manager_(location_manager),
-      disable_keys_(disable_keys), use_integrated_io_(use_integrated_io),
-      disable_io_(disable_io) {
+    const cpp_location_manager& location_manager,
+    const config::cpp_settings settings)
+    : model_(model), location_manager_(location_manager), settings_(settings) {
+
+    const auto f(settings_.enabled_facets());
+    disable_io_ = f.find(cpp_facet_types::io) == f.end();
 
     BOOST_LOG_SEV(lg, debug)
         << "Initial configuration:"
-        << " disable_keys: " << disable_keys_
-        << " use_integrated_io: " << use_integrated_io_
+        << " disable_versioning: " << settings_.disable_versioning()
+        << " use_integrated_io: " << settings_.use_integrated_io()
         << " disable_io: " << disable_io_
         << " model name: " << model_.name();
 }
@@ -184,7 +185,7 @@ std::string cpp_inclusion_manager::unversioned_dependency() const {
 bool cpp_inclusion_manager::
 has_versioned_dependency(const sml::pod& /*pod*/, cpp_facet_types ft,
     cpp_file_types flt) const {
-    if (disable_keys_)
+    if (settings_.disable_versioning())
         return false;
 
     const bool is_implementation(flt == cpp_file_types::implementation);
@@ -196,7 +197,7 @@ has_versioned_dependency(const sml::pod& /*pod*/, cpp_facet_types ft,
 
     // FIXME: hacked for now
     if (is_implementation && ft == cpp_facet_types::domain &&
-        (disable_io_ || use_integrated_io_))
+        (disable_io_ || settings_.use_integrated_io()))
         return false;
 
     // if (is_implementation && ft == cpp_facet_types::domain &&
