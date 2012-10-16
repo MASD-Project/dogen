@@ -324,4 +324,17 @@ user(const sml::pod& pod, cpp_facet_types ft, cpp_file_types flt,
     return r;
 }
 
+std::pair<std::list<std::string>, std::list<std::string> >
+cpp_inclusion_manager::includes(const std::string& name, cpp_facet_types ft,
+    cpp_file_types flt, cpp_aspect_types at) const {
+    return std::make_pair(system(name, ft, flt, at), user(name, ft, flt, at));
+}
+
+std::pair<std::list<std::string>, std::list<std::string> >
+cpp_inclusion_manager::includes(const sml::pod& pod, cpp_facet_types ft,
+    cpp_file_types flt, cpp_aspect_types at) const {
+    return std::make_pair(system(pod, ft, flt, at), user(pod, ft, flt, at));
+}
+
+
 } } } }

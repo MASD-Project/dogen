@@ -28,6 +28,7 @@
 #include <map>
 #include <list>
 #include <string>
+#include <utility>
 #include <boost/filesystem/path.hpp>
 #include "dogen/generator/config/cpp_settings.hpp"
 #include "dogen/generator/backends/cpp/cpp_location_manager.hpp"
@@ -115,7 +116,7 @@ public:
     void register_header(cpp_facet_types ft,
         const boost::filesystem::path& relative_path);
 
-public:
+private:
     /**
      * @brief Returns all the system dependencies for the type.
      *
@@ -147,6 +148,29 @@ public:
         cpp_facet_types ft, cpp_file_types flt, cpp_aspect_types at) const;
     std::list<std::string> user(const sml::pod& pod,
         cpp_facet_types ft, cpp_file_types flt, cpp_aspect_types at) const;
+    /**@}*/
+
+public:
+    /**
+     * @brief Returns all includes.
+     *
+     * These are files on this domain model or other models that it
+     * may depend on.
+     *
+     * If you choose the signature with @e pod, properties and parents
+     * are taken into account when generating the list of
+     * dependencies. These are ignored when you supply just @e name.
+     *
+     * @return The first element of the tuple is the system includes,
+     * the second the user includes.
+     */
+    /**@{*/
+    std::pair<std::list<std::string>, std::list<std::string> >
+    includes(const std::string& name, cpp_facet_types ft,
+        cpp_file_types flt, cpp_aspect_types at) const;
+    std::pair<std::list<std::string>, std::list<std::string> >
+    includes(const sml::pod& pod, cpp_facet_types ft,
+        cpp_file_types flt, cpp_aspect_types at) const;
     /**@}*/
 
 private:

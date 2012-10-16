@@ -149,18 +149,20 @@ includes_for_one_pod_model(cpp_facet_types ft,
     r.reserve(4);
 
     const cpp_aspect_types main(cpp_aspect_types::main);
-    r.push_back(im.user(p, ft,  cpp_file_types::header, main));
-    r.push_back(im.system(p, ft,  cpp_file_types::header, main));
+    const auto i0(im.includes(p, ft,  cpp_file_types::header, main));
+    r.push_back(i0.first);
+    r.push_back(i0.second);
 
-    r.push_back(im.user(p, ft,  cpp_file_types::implementation, main));
-    r.push_back(im.system(p, ft,  cpp_file_types::implementation, main));
+    const auto i1(im.includes(p, ft,  cpp_file_types::implementation, main));
+    r.push_back(i1.first);
+    r.push_back(i1.second);
     return r;
 }
 
-const unsigned int header_user(0);
-const unsigned int header_system(1);
-const unsigned int implementation_user(2);
-const unsigned int implementation_system(3);
+const unsigned int header_system(0);
+const unsigned int header_user(1);
+const unsigned int implementation_system(2);
+const unsigned int implementation_user(3);
 
 }
 
