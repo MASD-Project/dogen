@@ -102,7 +102,7 @@ bool generator::housekeeping_required() const {
         settings_.output().output_to_file();
 }
 
-void generator::output(outputters::outputter::value_type o) const {
+void generator::output(const outputters::outputter::value_type& o) const {
     if (settings_.troubleshooting().stop_after_formatting()) {
         log_stop_after_formatting();
         return;
@@ -137,7 +137,7 @@ void generator::generate(backends::backend& b) const {
     hk.tidy_up();
 }
 
-void generator::generate(sml::model m) const {
+void generator::generate(const sml::model& m) const {
     const auto lambda([&](backends::backend::ptr p) { generate(*p); });
     backends::factory f(m, settings_);
     boost::for_each(f.create(), lambda);

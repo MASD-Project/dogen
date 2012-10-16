@@ -50,15 +50,15 @@ public:
     cpp_backend& operator=(const cpp_backend&) = default;
 
 public:
-    cpp_backend(sml::model model, config::cpp_settings settings);
+    cpp_backend(const sml::model& model, const config::cpp_settings& settings);
     virtual ~cpp_backend() noexcept {}
 
 public:
     static backend::ptr
-    create(sml::model model, config::cpp_settings settings);
+    create(const sml::model& model, const config::cpp_settings& settings);
 
 private:
-    void log_formating_view(std::string view_name) const;
+    void log_formating_view(const std::string& view_name) const;
     void log_started() const;
     void log_finished() const;
     void log_cmakelists_disabled() const;
@@ -66,7 +66,7 @@ private:
 
 private:
     backend::value_entry_type
-    generate_file_view_model(view_models::file_view_model vm) const;
+    generate_file_view_model(const view_models::file_view_model& vm) const;
     backend::value_type generate_file_view_models() const;
     backend::value_entry_type generate_cmakelists() const;
 
@@ -76,7 +76,7 @@ public:
 
 private:
     const sml::model model_;
-    config::cpp_settings settings_;
+    const config::cpp_settings settings_;
     const cpp_location_manager location_manager_;
 };
 

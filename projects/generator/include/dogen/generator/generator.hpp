@@ -86,7 +86,7 @@ private:
      * @brief Outputs the pair file name and contents to its output
      * destination.
      */
-    void output(outputters::outputter::value_type o) const;
+    void output(const outputters::outputter::value_type& o) const;
 
 public: // public section for testing purposes only
     /**
@@ -110,7 +110,7 @@ public: // public section for testing purposes only
      * @brief Given a merged model, generates all of its
      * representations.
      */
-    void generate(sml::model m) const;
+    void generate(const sml::model& m) const;
 
 public:
     /**

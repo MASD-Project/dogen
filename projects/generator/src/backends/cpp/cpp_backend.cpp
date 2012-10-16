@@ -26,10 +26,11 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/generator/backends/cpp/cpp_backend.hpp"
 
+using namespace dogen::utility::log;
+
 namespace {
 
-static dogen::utility::log::logger
-lg(dogen::utility::log::logger_factory("cpp_backend"));
+static logger lg(logger_factory("cpp_backend"));
 
 const std::string unsupported_aspect_type("Unsupported aspect type");
 const std::string domain_facet_must_be_enabled("Domain facet must be enabled");
@@ -43,7 +44,7 @@ namespace backends {
 namespace cpp {
 
 cpp_backend::
-cpp_backend(sml::model model, config::cpp_settings settings) :
+cpp_backend(const sml::model& model, const config::cpp_settings& settings) :
     model_(model), settings_(settings),
     location_manager_(model.name(), settings_) {
 
@@ -62,33 +63,29 @@ cpp_backend(sml::model model, config::cpp_settings settings) :
     }
 }
 
-backend::ptr
-cpp_backend::create(sml::model model, config::cpp_settings settings) {
+backend::ptr cpp_backend::
+create(const sml::model& model, const config::cpp_settings& settings) {
     return backend::ptr(new cpp_backend(model, settings));
 }
 
-void cpp_backend::log_formating_view(std::string view_name) const {
-    using namespace dogen::utility::log;
+void cpp_backend::log_formating_view(const std::string& view_name) const {
+
     BOOST_LOG_SEV(lg, debug) << "Formatting file view: " << view_name;
 }
 
 void cpp_backend::log_started() const {
-    using namespace dogen::utility::log;
     BOOST_LOG_SEV(lg, info) << "C++ backend started.";
 }
 
 void cpp_backend::log_finished() const {
-    using namespace dogen::utility::log;
     BOOST_LOG_SEV(lg, info) << "C++ backend finished.";
 }
 
 void cpp_backend::log_cmakelists_disabled() const {
-    using namespace dogen::utility::log;
     BOOST_LOG_SEV(lg, info) << "CMakeLists.txt generation disabled.";
 }
 
 void cpp_backend::log_file_views(unsigned int how_many) const {
-    using namespace dogen::utility::log;
     BOOST_LOG_SEV(lg, debug) << "File views returned by SML to C++ view model"
                              << " transformer: " << how_many;
 }
@@ -105,8 +102,8 @@ backend::value_entry_type cpp_backend::generate_cmakelists() const {
     return std::make_pair(vm.file_path(), stream.str());
 }
 
-backend::value_entry_type
-cpp_backend::generate_file_view_model(view_models::file_view_model vm) const {
+backend::value_entry_type cpp_backend::
+generate_file_view_model(const view_models::file_view_model& vm) const {
     log_formating_view(vm.file_path().string());
     std::ostringstream stream;
     const auto f(settings_.enabled_facets());
