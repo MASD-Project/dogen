@@ -272,21 +272,21 @@ user(const sml::qualified_name& name, cpp_facet_types facet_type,
     const bool is_domain(facet_type == cpp_facet_types::domain);
     const bool is_versioned(aspect_type == cpp_aspect_types::versioned_key);
 
+    std::list<std::string> r;
     if (is_versioned && is_header && is_domain)
-        return return_type { unversioned_dependency() };
+        r.push_back(unversioned_dependency());
 
     if (is_header && !is_domain)
-        return return_type { domain_header_dependency(name) };
+        r.push_back(domain_header_dependency(name));
 
     if (file_type == cpp_file_types::implementation) {
-        std::list<std::string> r;
+
         r.push_back(header_dependency(name, facet_type));
         if (is_domain)
             r.push_back(jsonify_include);
-        return r;
     }
 
-    return return_type { };
+    return r;
 }
 
 std::list<std::string>
