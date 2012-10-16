@@ -410,15 +410,6 @@ each test so one could =make enable_facet_domain= and =make
 run_enable_facet_domain=. The targets need to be prefixed with module
 name and test suite.
 
-*** Dependencies should be called includes
-
-At present we use user dependencies for user includes and system
-dependencies for system includes. However, all this code is modeling
-C++ code so it should really be called "includes" rather than
-"dependencies" as they do not model any other type of dependency. This
-means the dependency manager should be called the inclusion manager,
-which is a more apt name.
-
 *** Dependency manager should manage all includes
 
 At present the formatters are hacked to add any necessary includes,
