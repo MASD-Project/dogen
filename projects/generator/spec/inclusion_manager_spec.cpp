@@ -218,10 +218,10 @@ BOOST_AUTO_TEST_CASE(processing_one_pod_model_with_default_configuration_generat
     BOOST_CHECK(asserter::assert_contains(pod_name, hu.front()));
     BOOST_CHECK(asserter::assert_contains(domain, hu.front()));
 
-    // FIXME: no iosfwd, expected with current code
     const auto hs(i[header_system]);
     BOOST_LOG_SEV(lg, debug) << "header system dependencies: " << hs;
-    BOOST_CHECK(hs.empty());
+    BOOST_CHECK(hs.size() == 1);
+    BOOST_CHECK(asserter::assert_contains(iosfwd, hs.front()));
 
     // implementation
     const auto iu(i[implementation_user]);
@@ -230,10 +230,10 @@ BOOST_AUTO_TEST_CASE(processing_one_pod_model_with_default_configuration_generat
     BOOST_CHECK(asserter::assert_contains(pod_name, iu.front()));
     BOOST_CHECK(asserter::assert_contains(io, iu.front()));
 
-    // FIXME: no ostream
     const auto is(i[implementation_system]);
     BOOST_LOG_SEV(lg, debug) << "implementation system dependencies: " << is;
-    BOOST_CHECK(is.empty());
+    BOOST_CHECK(is.size() == 1);
+    BOOST_CHECK(asserter::assert_contains(ostream, is.front()));
 }
 
 BOOST_AUTO_TEST_CASE(processing_one_pod_model_with_default_configuration_generates_expected_serialisation_includes) {

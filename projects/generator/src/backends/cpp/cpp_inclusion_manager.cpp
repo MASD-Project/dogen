@@ -106,6 +106,12 @@ system(const std::string& /*name*/, cpp_facet_types ft,
     if (is_header && ft == cpp_facet_types::hash)
         r.push_back(functional);
 
+    if (ft == cpp_facet_types::io) {
+        if (is_header)
+            r.push_back(iosfwd);
+        else if (ft == cpp_facet_types::io && is_implementation)
+            r.push_back(ostream);
+    }
     return r;
 }
 
@@ -123,7 +129,7 @@ system(const sml::pod& pod, cpp_facet_types ft,
         if (is_header) {
             r.push_back(iosfwd);
             // if (!pod.properties().empty())
-            r.push_back(algorithm);
+                r.push_back(algorithm);
         }
 
         if (is_implementation) {
@@ -154,6 +160,12 @@ system(const sml::pod& pod, cpp_facet_types ft,
         }
     }
 
+    if (ft == cpp_facet_types::io) {
+        if (is_header)
+            r.push_back(iosfwd);
+        else if (is_implementation)
+            r.push_back(ostream);
+    }
     return r;
 }
 

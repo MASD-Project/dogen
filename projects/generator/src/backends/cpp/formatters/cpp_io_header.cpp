@@ -69,11 +69,8 @@ void io_header::format(const file_view_model& vm) {
     guards.format_start(vm.header_guard());
     utility_.blank_line();
 
-    std::list<std::string> system_dependencies(vm.system_dependencies());
-    system_dependencies.push_back(iosfwd);
-
     cpp_includes includes(stream_);
-    includes.format(system_dependencies, is_system);
+    includes.format(vm.system_dependencies(), is_system);
     includes.format(vm.user_dependencies(), is_user);
     utility_.blank_line();
 
