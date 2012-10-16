@@ -56,7 +56,8 @@ public:
       source_directory_(std::move(rhs.source_directory_)),
       include_directory_(std::move(rhs.include_directory_)) { }
 
-    cpp_location_manager(std::string model_name, config::cpp_settings settings);
+    cpp_location_manager(const std::string& model_name,
+        const config::cpp_settings& settings);
 
 private:
     std::string facet_directory(cpp_facet_types facet) const;
@@ -75,7 +76,7 @@ public:
      * take into account existing namespaces the user may have already
      * defined.
      */
-    path relative_logical_path(cpp_location_request request) const;
+    path relative_logical_path(const cpp_location_request& request) const;
 
     /**
      * @brief Returns the path to the requested location, excluding
@@ -85,13 +86,13 @@ public:
      * physical path matches the location on the hard drive for the
      * artefact in question.
      */
-    path relative_physical_path(cpp_location_request request) const;
+    path relative_physical_path(const cpp_location_request& request) const;
 
     /**
      * @brief Returns the absolute path for the request, taking into
      * account source and include directories, etc.
      */
-    path absolute_path(cpp_location_request request) const;
+    path absolute_path(const cpp_location_request& request) const;
 
     /**
      * @brief Returns an absolute path into the source directory for
@@ -99,12 +100,12 @@ public:
      *
      * @param name name of the item we're getting the path for.
      */
-    path absolute_path(std::string name) const;
+    path absolute_path(const std::string& name) const;
     std::vector<boost::filesystem::path> managed_directories() const;
 
 private:
     const std::string model_name_;
-    config::cpp_settings settings_;
+    const config::cpp_settings settings_;
     boost::filesystem::path source_directory_;
     boost::filesystem::path include_directory_;
 };

@@ -48,8 +48,8 @@ namespace generator {
 namespace backends {
 namespace cpp {
 
-cpp_location_manager::cpp_location_manager(std::string model_name,
-    config::cpp_settings settings) :
+cpp_location_manager::cpp_location_manager(const std::string& model_name,
+    const config::cpp_settings& settings) :
     model_name_(model_name), settings_(settings) {
 
     if (settings_.split_project()) {
@@ -133,8 +133,8 @@ std::string cpp_location_manager::extension(cpp_file_types file_type) const {
     }
 }
 
-boost::filesystem::path
-cpp_location_manager::relative_logical_path(cpp_location_request request) const {
+boost::filesystem::path cpp_location_manager::relative_logical_path(
+    const cpp_location_request& request) const {
     boost::filesystem::path r;
 
     if (settings_.split_project()) {
@@ -146,8 +146,8 @@ cpp_location_manager::relative_logical_path(cpp_location_request request) const 
     return relative_physical_path(request);
 }
 
-boost::filesystem::path
-cpp_location_manager::relative_physical_path(cpp_location_request request) const {
+boost::filesystem::path cpp_location_manager::relative_physical_path(
+    const cpp_location_request& request) const {
     boost::filesystem::path r;
 
     if (settings_.split_project())
@@ -171,7 +171,7 @@ cpp_location_manager::relative_physical_path(cpp_location_request request) const
 }
 
 boost::filesystem::path
-cpp_location_manager::absolute_path(cpp_location_request request) const {
+cpp_location_manager::absolute_path(const cpp_location_request& request) const {
 
     auto r(file_type_directory(request.file_type()));
     r /= relative_physical_path(request);
@@ -179,7 +179,7 @@ cpp_location_manager::absolute_path(cpp_location_request request) const {
 }
 
 boost::filesystem::path
-cpp_location_manager::absolute_path(std::string name) const {
+cpp_location_manager::absolute_path(const std::string& name) const {
     if (settings_.split_project())
         return source_directory_ / model_name_ / name;
     return source_directory_ / name;
