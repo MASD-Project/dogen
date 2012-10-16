@@ -208,8 +208,8 @@ void database_implementation::format(const file_view_model& vm) {
     licence.format();
 
     cpp_includes includes(stream_);
-    includes.format(vm.system_dependencies(), is_system);
-    includes.format(vm.user_dependencies(), is_user);
+    includes.format(vm.system_includes(), is_system);
+    includes.format(vm.user_includes(), is_user);
     utility_.blank_line();
 
     const view_models::class_view_model& cvm(*o);

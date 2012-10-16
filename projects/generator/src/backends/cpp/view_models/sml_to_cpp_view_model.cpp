@@ -331,8 +331,8 @@ transform_file(cpp_facet_types ft, cpp_file_types flt, const sml::pod& pod) {
     }
 
     const cpp_aspect_types at(cpp_aspect_types::main);
-    r.system_dependencies(inclusion_manager_.system(pod, ft, flt, at));
-    r.user_dependencies(inclusion_manager_.user(pod, ft, flt, at));
+    r.system_includes(inclusion_manager_.system(pod, ft, flt, at));
+    r.user_includes(inclusion_manager_.user(pod, ft, flt, at));
     return r;
 }
 
@@ -450,8 +450,8 @@ create_key_file_view_model(cpp_facet_types ft, cpp_file_types flt,
 
     const std::string name(r.class_vm()->name());
     log_generating_file(ft, at, flt, name);
-    r.system_dependencies(inclusion_manager_.system(name, ft, flt, at));
-    r.user_dependencies(inclusion_manager_.user(name, ft, flt, at));
+    r.system_includes(inclusion_manager_.system(name, ft, flt, at));
+    r.user_includes(inclusion_manager_.user(name, ft, flt, at));
 
     sml::qualified_name qn;
     qn.external_package_path(model_.external_package_path());
@@ -514,8 +514,8 @@ sml_to_cpp_view_model::transform_facet_includers() const {
         vm.file_type(file_type);
 
         const auto a(cpp_aspect_types::includers);
-        vm.system_dependencies(inclusion_manager_.system(n, ft, file_type, a));
-        vm.user_dependencies(inclusion_manager_.user(n, ft, file_type, a));
+        vm.system_includes(inclusion_manager_.system(n, ft, file_type, a));
+        vm.user_includes(inclusion_manager_.user(n, ft, file_type, a));
         vm.aspect_type(a);
 
         r.push_back(vm);

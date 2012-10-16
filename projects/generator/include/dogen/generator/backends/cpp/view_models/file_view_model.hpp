@@ -55,8 +55,8 @@ public:
     aspect_type_(std::move(o.aspect_type_)),
     class_vm_(std::move(o.class_vm_)),
     header_guard_(std::move(o.header_guard_)),
-    system_dependencies_(std::move(o.system_dependencies_)),
-    user_dependencies_(std::move(o.user_dependencies_)),
+    system_includes_(std::move(o.system_includes_)),
+    user_includes_(std::move(o.user_includes_)),
     file_path_(std::move(o.file_path_)) {}
 
 public:
@@ -77,18 +77,18 @@ public:
     void header_guard(std::string value) { header_guard_ = value; }
     std::string header_guard() const { return header_guard_; }
 
-    void system_dependencies(std::list<std::string> value) {
-        system_dependencies_ = value;
+    void system_includes(std::list<std::string> value) {
+        system_includes_ = value;
     }
-    std::list<std::string> system_dependencies() const {
-        return system_dependencies_;
+    std::list<std::string> system_includes() const {
+        return system_includes_;
     }
 
-    void user_dependencies(std::list<std::string> value) {
-        user_dependencies_ = value;
+    void user_includes(std::list<std::string> value) {
+        user_includes_ = value;
     }
-    std::list<std::string> user_dependencies() const {
-        return user_dependencies_;
+    std::list<std::string> user_includes() const {
+        return user_includes_;
     }
 
     void file_path(boost::filesystem::path value) { file_path_ = value; }
@@ -100,8 +100,8 @@ private:
     cpp_aspect_types aspect_type_;
     boost::optional<class_view_model> class_vm_;
     std::string header_guard_;
-    std::list<std::string> system_dependencies_;
-    std::list<std::string> user_dependencies_;
+    std::list<std::string> system_includes_;
+    std::list<std::string> user_includes_;
     boost::filesystem::path file_path_;
 };
 
