@@ -23,6 +23,3 @@
 #define DOGEN_MINOR_VERSION ${DOGEN_MINOR_VERSION}
 #define DOGEN_PATCH_VERSION ${DOGEN_PATCH_VERSION}
 #define DOGEN_DATABASE_SUPPORT ${DOGEN_DATABASE_SUPPORT}
-
-// Note: to bring in macros from cmake directly use:
-// #cmakedefine WITH_DATABASE_SUPPORT
