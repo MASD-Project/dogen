@@ -44,6 +44,8 @@ const std::string state_saver("boost/io/ios_state.hpp");
 const std::string functional("functional");
 const std::string jsonify_include("dogen/utility/io/jsonify_io.hpp");
 const std::string hash_combine("dogen/utility/hash/combine.hpp");
+const std::string generator_include("dogen/utility/test_data/generator.hpp");
+const std::string sequence_include("dogen/utility/test_data/sequence.hpp");
 
 }
 
@@ -283,6 +285,11 @@ user(const sml::qualified_name& name, cpp_facet_types facet_type,
 
     if (is_header && facet_type == cpp_facet_types::hash)
         r.push_back(hash_combine);
+
+    if (is_header && facet_type == cpp_facet_types::test_data) {
+        r.push_back(generator_include);
+        r.push_back(sequence_include);
+    }
 
     if (file_type == cpp_file_types::implementation) {
 

@@ -33,10 +33,7 @@ namespace {
 
 const bool is_system(false);
 const bool is_user(false);
-const std::string generator_include("dogen/utility/test_data/generator.hpp");
-const std::string sequence_include("dogen/utility/test_data/sequence.hpp");
 const std::string detail_ns("detail");
-
 const std::string missing_class_view_model(
     "File view model must contain a class view model");
 
@@ -106,13 +103,9 @@ void sequence_header::format(const file_view_model& vm) {
     guards.format_start(vm.header_guard());
     utility_.blank_line();
 
-    std::list<std::string> user_dependencies(vm.user_dependencies());
-    user_dependencies.push_back(generator_include);
-    user_dependencies.push_back(sequence_include);
-
     cpp_includes includes(stream_);
     includes.format(vm.system_dependencies(), is_system);
-    includes.format(user_dependencies, is_user);
+    includes.format(vm.user_dependencies(), is_user);
     utility_.blank_line();
 
     {
