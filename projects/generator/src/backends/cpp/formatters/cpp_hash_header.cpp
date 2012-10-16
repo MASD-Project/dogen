@@ -33,7 +33,6 @@ namespace {
 
 const bool is_system(true);
 const bool is_user(false);
-const std::string hash_combine("dogen/utility/hash/combine.hpp");
 const std::string std_ns("std");
 
 const std::string missing_class_view_model(
@@ -122,12 +121,9 @@ void hash_header::format(const file_view_model& vm) {
     guards.format_start(vm.header_guard());
     stream_ << std::endl;
 
-    std::list<std::string> user_dependencies(vm.user_dependencies());
-    user_dependencies.push_back(hash_combine);
-
     cpp_includes includes(stream_);
     includes.format(vm.system_dependencies(), is_system);
-    includes.format(user_dependencies, is_user);
+    includes.format(vm.user_dependencies(), is_user);
     utility_.blank_line();
 
     {

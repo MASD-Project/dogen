@@ -43,6 +43,7 @@ const std::string ostream("ostream");
 const std::string state_saver("boost/io/ios_state.hpp");
 const std::string functional("functional");
 const std::string jsonify_include("dogen/utility/io/jsonify_io.hpp");
+const std::string hash_combine("dogen/utility/hash/combine.hpp");
 
 }
 
@@ -136,6 +137,7 @@ system(const sml::pod& pod, cpp_facet_types ft,
     if (ft == cpp_facet_types::domain) {
         if (is_header) {
             r.push_back(iosfwd);
+            // FIXME: for some reason we had this if in formatter
             // if (!pod.properties().empty())
                 r.push_back(algorithm);
         }
@@ -278,6 +280,9 @@ user(const sml::qualified_name& name, cpp_facet_types facet_type,
 
     if (is_header && !is_domain)
         r.push_back(domain_header_dependency(name));
+
+    if (is_header && facet_type == cpp_facet_types::hash)
+        r.push_back(hash_combine);
 
     if (file_type == cpp_file_types::implementation) {
 

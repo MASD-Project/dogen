@@ -45,7 +45,7 @@ const std::string database("database");
 const std::string serialization("serialization");
 const std::string versioned_key("versioned_key");
 const std::string ostream("ostream");
-const std::string state_saver("boost/io/ios_state.hpp");
+const std::string state_saver("ios_state.hpp");
 const std::string functional("functional");
 const std::string vector("vector");
 const std::string boost_optional("optional.hpp");
@@ -56,7 +56,8 @@ const std::string pqxx_result("result.hxx");
 const std::string pqxx_transaction("transaction.hxx");
 const std::string iosfwd("iosfwd");
 const std::string algorithm("algorithm");
-const std::string jsonify_include("dogen/utility/io/jsonify_io.hpp");
+const std::string jsonify_include("jsonify_io.hpp");
+const std::string hash_combine("combine.hpp");
 
 const std::string io_postfix("_io.hpp");
 const std::string database_postfix("_db.hpp");
@@ -287,17 +288,13 @@ BOOST_AUTO_TEST_CASE(processing_one_pod_model_with_default_configuration_generat
     // header
     const auto hu(i[header_user]);
     BOOST_LOG_SEV(lg, debug) << "header user dependencies: " << hu;
-    BOOST_CHECK(hu.size() == 2);
-    auto a(hu.front());
-    auto b(hu.back());
-    if (!boost::ends_with(b, hash_postfix))
-        std::swap(a,b);
-
-    BOOST_CHECK(asserter::assert_contains(pod_name, a));
-    BOOST_CHECK(asserter::assert_contains(domain, a));
-
-    BOOST_CHECK(asserter::assert_contains(versioned_key, b));
-    BOOST_CHECK(asserter::assert_contains(hash, b));
+    BOOST_CHECK(hu.size() == 3);
+    for (const auto s : hu) {
+        BOOST_CHECK(
+            (boost::contains(s, pod_name) && boost::contains(s, domain)) ||
+            (boost::contains(s, versioned_key) && boost::contains(s, hash)) ||
+            (boost::ends_with(s, hash_combine)));
+    }
 
     const auto hs(i[header_system]);
     BOOST_LOG_SEV(lg, debug) << "header system dependencies: " << hs;
@@ -307,10 +304,9 @@ BOOST_AUTO_TEST_CASE(processing_one_pod_model_with_default_configuration_generat
     // implementation
     const auto iu(i[implementation_user]);
     BOOST_LOG_SEV(lg, debug) << "implementation user dependencies: " << iu;
-    a = iu.front();
-    BOOST_CHECK(boost::ends_with(a, hash_postfix));
-    BOOST_CHECK(asserter::assert_contains(pod_name, a));
-    BOOST_CHECK(asserter::assert_contains(hash, a));
+    BOOST_CHECK(boost::ends_with(iu.front(), hash_postfix));
+    BOOST_CHECK(asserter::assert_contains(pod_name, iu.front()));
+    BOOST_CHECK(asserter::assert_contains(hash, iu.front()));
 
     const auto is(i[implementation_system]);
     BOOST_LOG_SEV(lg, debug) << "implementation system dependencies: " << is;
