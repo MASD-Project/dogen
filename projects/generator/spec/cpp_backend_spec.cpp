@@ -199,7 +199,7 @@ BOOST_AUTO_TEST_CASE(view_model_transformer_correctly_transforms_domain_files) {
             BOOST_CHECK(f.header_guard() == header_guard_name);
         } else {
             BOOST_CHECK(f.header_guard() == empty);
-            BOOST_CHECK(f.user_dependencies().size() == 1);
+            BOOST_CHECK(f.user_dependencies().size() == 2);
             BOOST_CHECK(f.user_dependencies().front() == user_dependency);
         }
 

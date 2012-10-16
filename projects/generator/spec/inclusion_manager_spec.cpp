@@ -56,6 +56,7 @@ const std::string pqxx_result("result.hxx");
 const std::string pqxx_transaction("transaction.hxx");
 const std::string iosfwd("iosfwd");
 const std::string algorithm("algorithm");
+const std::string jsonify_include("dogen/utility/io/jsonify_io.hpp");
 
 const std::string io_postfix("_io.hpp");
 const std::string database_postfix("_db.hpp");
@@ -189,16 +190,13 @@ BOOST_AUTO_TEST_CASE(processing_one_pod_model_with_default_configuration_generat
     // implementation
     const auto iu(i[implementation_user]);
     BOOST_LOG_SEV(lg, debug) << "implementation user dependencies: " << iu;
-    BOOST_CHECK(iu.size() == 2);
-    std::string a(iu.front()), b(iu.back());
-    if (!boost::ends_with(b, io_postfix))
-        std::swap(a,b);
-
-    BOOST_CHECK(asserter::assert_contains(pod_name, a));
-    BOOST_CHECK(asserter::assert_contains(domain, a));
-
-    BOOST_CHECK(asserter::assert_contains(versioned_key, b));
-    BOOST_CHECK(asserter::assert_contains(io, b));
+    BOOST_CHECK(iu.size() == 3);
+    for (const auto s : iu) {
+        BOOST_CHECK(
+            (boost::contains(s, pod_name) && boost::contains(s, domain)) ||
+            (boost::contains(s, versioned_key) && boost::contains(s, io)) ||
+            (boost::contains(s, jsonify_include)));
+    }
 
     const auto is(i[implementation_system]);
     BOOST_LOG_SEV(lg, debug) << "implementation system dependencies: " << is;

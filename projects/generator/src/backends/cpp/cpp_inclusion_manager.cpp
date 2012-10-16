@@ -42,6 +42,7 @@ const std::string algorithm("algorithm");
 const std::string ostream("ostream");
 const std::string state_saver("boost/io/ios_state.hpp");
 const std::string functional("functional");
+const std::string jsonify_include("dogen/utility/io/jsonify_io.hpp");
 
 }
 
@@ -277,8 +278,13 @@ user(const sml::qualified_name& name, cpp_facet_types facet_type,
     if (is_header && !is_domain)
         return return_type { domain_header_dependency(name) };
 
-    if (file_type == cpp_file_types::implementation)
-        return return_type { header_dependency(name, facet_type) };
+    if (file_type == cpp_file_types::implementation) {
+        std::list<std::string> r;
+        r.push_back(header_dependency(name, facet_type));
+        if (is_domain)
+            r.push_back(jsonify_include);
+        return r;
+    }
 
     return return_type { };
 }
