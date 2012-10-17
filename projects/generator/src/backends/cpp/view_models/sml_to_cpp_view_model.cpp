@@ -514,12 +514,11 @@ sml_to_cpp_view_model::transform_facet_includers() const {
         vm.facet_type(ft);
         vm.file_path(location_manager_.absolute_path(rq));
         vm.file_type(file_type);
+        vm.aspect_type(cpp_aspect_types::includers);
 
-        const auto a(cpp_aspect_types::includers);
-        const auto includes(inclusion_manager_.includes(n, ft, file_type, a));
-        vm.system_includes(includes.first);
-        vm.user_includes(includes.second);
-        vm.aspect_type(a);
+        const auto includes(inclusion_manager_.includes_for_includer_files(ft));
+        vm.system_includes(includes.system);
+        vm.user_includes(includes.user);
 
         r.push_back(vm);
     }

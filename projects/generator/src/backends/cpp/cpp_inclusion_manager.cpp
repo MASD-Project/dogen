@@ -268,18 +268,15 @@ std::list<std::string> cpp_inclusion_manager::
 user(const sml::qualified_name& name, cpp_facet_types facet_type,
     cpp_file_types file_type, cpp_aspect_types aspect_type) const {
 
-    if (aspect_type == cpp_aspect_types::includers) {
-        const auto i(headers_for_facet_.find(facet_type));
-        if (i != headers_for_facet_.end())
-            return i->second;
-    }
+    std::list<std::string> r;
+    if (aspect_type == cpp_aspect_types::includers)
+        return r;
 
     typedef std::list<std::string> return_type;
     const bool is_header(file_type == cpp_file_types::header);
     const bool is_domain(facet_type == cpp_facet_types::domain);
     const bool is_versioned(aspect_type == cpp_aspect_types::versioned_key);
 
-    std::list<std::string> r;
     if (is_versioned && is_header && is_domain)
         r.push_back(unversioned_dependency());
 
@@ -339,5 +336,13 @@ cpp_inclusion_manager::includes(const sml::pod& pod, cpp_facet_types ft,
     return std::make_pair(system(pod, ft, flt, at), user(pod, ft, flt, at));
 }
 
+inclusion_lists
+cpp_inclusion_manager::includes_for_includer_files(cpp_facet_types ft) const {
+    inclusion_lists r;
+    const auto i(headers_for_facet_.find(ft));
+    if (i != headers_for_facet_.end())
+        r.user = i->second;
+    return r;
+}
 
 } } } }

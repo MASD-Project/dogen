@@ -44,6 +44,15 @@ namespace backends {
 namespace cpp {
 
 /**
+ * @brief Result of a request for includes
+ *
+ */
+struct inclusion_lists {
+    std::list<std::string> system;
+    std::list<std::string> user;
+};
+
+/**
  * @brief Responsible for computing all dependencies for a given
  * type.
  *
@@ -151,6 +160,20 @@ private:
     /**@}*/
 
 public:
+    /**
+     * @brief Returns the includes for a given includer.
+     *
+     * Includers are header files composed exclusively of includes for
+     * all files in a given facet. This method returns that list of
+     * includes.
+     *
+     * This method must be called after all pods have been processed,
+     * as the list is built up from previous calls.
+     *
+     * @param ft Facet for which we want the inclusion lists.
+     */
+    inclusion_lists includes_for_includer_files(cpp_facet_types ft) const;
+
     /**
      * @brief Returns all includes.
      *
