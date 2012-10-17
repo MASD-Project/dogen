@@ -173,7 +173,7 @@ void sml_dfs_visitor::process_sml_pod(const dogen::sml::pod& pod) {
 
     std::list<property_view_model> properties_vm;
     bool has_primitive_properties(false);
-    bool has_boolean_properties(false);
+    bool requires_stream_manipulators(false);
     for(const auto p : pod.properties()) {
         std::list<std::string> ns_list(join_namespaces(p.type_name()));
         ns_list.push_back(p.type_name().type_name());
@@ -188,7 +188,7 @@ void sml_dfs_visitor::process_sml_pod(const dogen::sml::pod& pod) {
         if (k.is_primitive()) {
             has_primitive_properties = true;
             if (k.type() == bool_type)
-                has_boolean_properties = true;
+                requires_stream_manipulators = true;
         }
         properties_vm.push_back(k);
     }
@@ -212,7 +212,7 @@ void sml_dfs_visitor::process_sml_pod(const dogen::sml::pod& pod) {
 
     cvm.properties(properties_vm);
     cvm.has_primitive_properties(has_primitive_properties);
-    cvm.has_boolean_properties(has_boolean_properties);
+    cvm.requires_stream_manipulators(requires_stream_manipulators);
     state_->class_view_models_.insert(std::make_pair(name, cvm));
 }
 

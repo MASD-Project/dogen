@@ -138,7 +138,7 @@ public:
      * as bool, etc we are expected to change the state of the stream
      * so state saving is required.
      */
-    bool requires_formatting(
+    bool requires_stream_manipulators(
         const std::list<dogen::sml::qualified_name>& names) const;
 
 private:
@@ -174,9 +174,9 @@ private:
      * compile, but on the flip side, all inclusion related code is
      * kept in one place.
      */
-    void append_implementation_dependencies(const bool requires_formatting,
-        const cpp_facet_types ft, const cpp_file_types flt,
-        inclusion_lists& il) const;
+    void append_implementation_dependencies(
+        const bool requires_stream_manipulators, const cpp_facet_types ft,
+        const cpp_file_types flt, inclusion_lists& il) const;
 
     /**
      * @brief Appends to the inclusion lists dependencies brought

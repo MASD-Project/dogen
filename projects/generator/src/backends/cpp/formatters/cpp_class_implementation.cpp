@@ -121,7 +121,7 @@ void cpp_class_implementation::to_stream(const class_view_model& vm) {
     {
         cpp_positive_indenter_scope s(indenter_);
 
-        if (vm.has_boolean_properties()) {
+        if (vm.requires_stream_manipulators()) {
             stream_ << indenter_ << "boost::io::ios_flags_saver ifs(stream);"
                     << std::endl;
             stream_ << indenter_ << "stream << std::boolalpha;" << std::endl;

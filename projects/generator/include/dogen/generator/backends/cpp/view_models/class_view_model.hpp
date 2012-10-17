@@ -47,13 +47,13 @@ public:
 
 public:
     class_view_model() : has_primitive_properties_(false),
-                         has_boolean_properties_(false),
+                         requires_stream_manipulators_(false),
                          is_parent_(false) { }
 
     explicit class_view_model(std::string name)
         : name_(name),
           has_primitive_properties_(false),
-          has_boolean_properties_(false),
+          requires_stream_manipulators_(false),
           is_parent_(false) { }
 
 public:
@@ -101,15 +101,18 @@ public:
     /**@}*/
 
     /**
-     * @brief True if the class has at least one boolean property,
-     * false otherwise.
+     * @brief True if the class has member variables which require
+     * changing the stream with manipulators, false otherwise.
+     *
+     * Examples are boolean variables, which should be outputted as
+     * true or false and as such require boolalpha.
      */
     /**@{*/
-    bool has_boolean_properties() const {
-        return(has_boolean_properties_);
+    bool requires_stream_manipulators() const {
+        return(requires_stream_manipulators_);
     }
-    void has_boolean_properties(bool value) {
-        has_boolean_properties_ = value;
+    void requires_stream_manipulators(bool value) {
+        requires_stream_manipulators_ = value;
     }
     /**@}*/
 
@@ -157,7 +160,7 @@ private:
     std::list<parent_view_model> parents_;
     std::string name_;
     bool has_primitive_properties_;
-    bool has_boolean_properties_;
+    bool requires_stream_manipulators_;
     std::string database_name_;
     std::string schema_name_;
     bool is_parent_;

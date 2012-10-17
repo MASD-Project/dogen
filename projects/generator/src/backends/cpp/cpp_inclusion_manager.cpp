@@ -201,7 +201,7 @@ void cpp_inclusion_manager::append_versioning_dependencies(
 }
 
 void cpp_inclusion_manager::
-append_implementation_dependencies(const bool requires_formatting,
+append_implementation_dependencies(const bool requires_stream_manipulators,
     const cpp_facet_types ft, const cpp_file_types flt,
     inclusion_lists& il) const {
 
@@ -254,7 +254,8 @@ append_implementation_dependencies(const bool requires_formatting,
     // FIXME: IIO problems, hacked for now
     // ((is_domain && settings_.use_integrated_io()) ||
     // (is_io && !settings_.use_integrated_io()))
-    if (is_implementation && io_enabled_ && requires_formatting && is_domain)
+    if (is_implementation && io_enabled_ && requires_stream_manipulators &&
+        is_domain)
         il.system.push_back(state_saver);
 
     /*
@@ -326,7 +327,7 @@ append_self_dependencies(dogen::sml::qualified_name name,
         il.user.push_back(header_dependency(name, ft));
 }
 
-bool cpp_inclusion_manager::requires_formatting(
+bool cpp_inclusion_manager::requires_stream_manipulators(
     const std::list<dogen::sml::qualified_name>& names) const {
     using dogen::sml::qualified_name;
     const auto i(boost::find_if(names, [](const qualified_name& n) {
@@ -352,7 +353,8 @@ includes_for_pod(const sml::pod& pod, cpp_facet_types ft, cpp_file_types flt,
     append_versioning_dependencies(ft, flt, at, r);
 
     const auto names(pod_to_qualified_names(pod));
-    append_implementation_dependencies(requires_formatting(names), ft, flt, r);
+    bool rsm(requires_stream_manipulators(names));
+    append_implementation_dependencies(rsm, ft, flt, r);
     append_relationship_dependencies(names, ft, flt, r);
     append_self_dependencies(pod.name(), ft, flt, r);
 
@@ -366,8 +368,8 @@ includes_for_versioning(const std::string& name, cpp_facet_types ft,
     inclusion_lists r;
     append_versioning_dependencies(ft, flt, at, r);
 
-    const bool requires_formatting(false);
-    append_implementation_dependencies(requires_formatting, ft, flt, r);
+    const bool requires_manipulators(false);
+    append_implementation_dependencies(requires_manipulators, ft, flt, r);
 
     sml::qualified_name n;
     n.external_package_path(model_.external_package_path());
