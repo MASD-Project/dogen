@@ -141,7 +141,7 @@ includes_for_one_pod_model(cpp_facet_types ft,
     const inclusion_manager_factory& factory) {
     const auto m(one_pod_model());
     const auto pods(m.pods());
-    BOOST_CHECK(pods.size() == 1);
+    BOOST_REQUIRE(pods.size() == 1);
     const auto p(pods.begin()->second);
 
     auto im(factory(m));
@@ -149,13 +149,13 @@ includes_for_one_pod_model(cpp_facet_types ft,
     r.reserve(4);
 
     const cpp_aspect_types main(cpp_aspect_types::main);
-    const auto i0(im.includes(p, ft,  cpp_file_types::header, main));
-    r.push_back(i0.first);
-    r.push_back(i0.second);
+    const auto i0(im.includes_for_pod(p, ft,  cpp_file_types::header, main));
+    r.push_back(i0.system);
+    r.push_back(i0.user);
 
-    const auto i1(im.includes(p, ft,  cpp_file_types::implementation, main));
-    r.push_back(i1.first);
-    r.push_back(i1.second);
+    const auto i1(im.includes_for_pod(p, ft,  cpp_file_types::implementation, main));
+    r.push_back(i1.system);
+    r.push_back(i1.user);
     return r;
 }
 
@@ -180,12 +180,12 @@ BOOST_AUTO_TEST_CASE(processing_one_pod_model_with_default_configuration_generat
     // header
     const auto hu(i[header_user]);
     BOOST_LOG_SEV(lg, debug) << "header user dependencies: " << hu;
-    BOOST_CHECK(hu.size() == 1);
+    BOOST_REQUIRE(hu.size() == 1);
     BOOST_CHECK(asserter::assert_contains(versioned_key, hu.front()));
 
     const auto hs(i[header_system]);
     BOOST_LOG_SEV(lg, debug) << "header  system dependencies: " << hs;
-    BOOST_CHECK(hs.size() == 2);
+    BOOST_REQUIRE(hs.size() == 2);
     for (const auto s : hs) {
         BOOST_CHECK(
             boost::ends_with(s, iosfwd) ||
@@ -195,7 +195,7 @@ BOOST_AUTO_TEST_CASE(processing_one_pod_model_with_default_configuration_generat
     // implementation
     const auto iu(i[implementation_user]);
     BOOST_LOG_SEV(lg, debug) << "implementation user dependencies: " << iu;
-    BOOST_CHECK(iu.size() == 3);
+    BOOST_REQUIRE(iu.size() == 3);
     for (const auto s : iu) {
         BOOST_CHECK(
             (boost::contains(s, pod_name) && boost::contains(s, domain)) ||
@@ -205,7 +205,7 @@ BOOST_AUTO_TEST_CASE(processing_one_pod_model_with_default_configuration_generat
 
     const auto is(i[implementation_system]);
     BOOST_LOG_SEV(lg, debug) << "implementation system dependencies: " << is;
-    BOOST_CHECK(is.size() == 1);
+    BOOST_REQUIRE(is.size() == 1);
     BOOST_CHECK(boost::ends_with(is.front(), ostream));
 }
 
@@ -219,25 +219,25 @@ BOOST_AUTO_TEST_CASE(processing_one_pod_model_with_default_configuration_generat
     // header
     const auto hu(i[header_user]);
     BOOST_LOG_SEV(lg, debug) << "header user dependencies: " << hu;
-    BOOST_CHECK(hu.size() == 1);
+    BOOST_REQUIRE(hu.size() == 1);
     BOOST_CHECK(asserter::assert_contains(pod_name, hu.front()));
     BOOST_CHECK(asserter::assert_contains(domain, hu.front()));
 
     const auto hs(i[header_system]);
     BOOST_LOG_SEV(lg, debug) << "header system dependencies: " << hs;
-    BOOST_CHECK(hs.size() == 1);
+    BOOST_REQUIRE(hs.size() == 1);
     BOOST_CHECK(asserter::assert_contains(iosfwd, hs.front()));
 
     // implementation
     const auto iu(i[implementation_user]);
     BOOST_LOG_SEV(lg, debug) << "implementation user dependencies: " << iu;
-    BOOST_CHECK(iu.size() == 1);
+    BOOST_REQUIRE(iu.size() == 1);
     BOOST_CHECK(asserter::assert_contains(pod_name, iu.front()));
     BOOST_CHECK(asserter::assert_contains(io, iu.front()));
 
     const auto is(i[implementation_system]);
     BOOST_LOG_SEV(lg, debug) << "implementation system dependencies: " << is;
-    BOOST_CHECK(is.size() == 1);
+    BOOST_REQUIRE(is.size() == 1);
     BOOST_CHECK(asserter::assert_contains(ostream, is.front()));
 }
 
@@ -251,7 +251,7 @@ BOOST_AUTO_TEST_CASE(processing_one_pod_model_with_default_configuration_generat
     // header
     const auto hu(i[header_user]);
     BOOST_LOG_SEV(lg, debug) << "header user dependencies: " << hu;
-    BOOST_CHECK(hu.size() == 2);
+    BOOST_REQUIRE(hu.size() == 2);
     auto a(hu.front());
     auto b(hu.back());
     if (!boost::ends_with(b, serialization_postfix))
@@ -265,7 +265,7 @@ BOOST_AUTO_TEST_CASE(processing_one_pod_model_with_default_configuration_generat
 
     const auto hs(i[header_system]);
     BOOST_LOG_SEV(lg, debug) << "header system dependencies: " << hs;
-    BOOST_CHECK(hs.size() == 1);
+    BOOST_REQUIRE(hs.size() == 1);
     BOOST_CHECK(asserter::assert_contains(boost_nvp, hs.front()));
 
     // implementation
@@ -292,7 +292,7 @@ BOOST_AUTO_TEST_CASE(processing_one_pod_model_with_default_configuration_generat
     // header
     const auto hu(i[header_user]);
     BOOST_LOG_SEV(lg, debug) << "header user dependencies: " << hu;
-    BOOST_CHECK(hu.size() == 3);
+    BOOST_REQUIRE(hu.size() == 3);
     for (const auto s : hu) {
         BOOST_CHECK(
             (boost::contains(s, pod_name) && boost::contains(s, domain)) ||
@@ -302,7 +302,7 @@ BOOST_AUTO_TEST_CASE(processing_one_pod_model_with_default_configuration_generat
 
     const auto hs(i[header_system]);
     BOOST_LOG_SEV(lg, debug) << "header system dependencies: " << hs;
-    BOOST_CHECK(hs.size() == 1);
+    BOOST_REQUIRE(hs.size() == 1);
     BOOST_CHECK(asserter::assert_contains(hs.front(), functional));
 
     // implementation
@@ -327,7 +327,7 @@ BOOST_AUTO_TEST_CASE(processing_one_pod_model_with_default_configuration_generat
     // header
     const auto hu(i[header_user]);
     BOOST_LOG_SEV(lg, debug) << "header user dependencies: " << hu;
-    BOOST_CHECK(hu.size() == 3);
+    BOOST_REQUIRE(hu.size() == 3);
     for (const auto s : hu) {
         BOOST_CHECK(
             (boost::contains(s, pod_name) && boost::contains(s, domain)) ||
@@ -342,18 +342,12 @@ BOOST_AUTO_TEST_CASE(processing_one_pod_model_with_default_configuration_generat
     // implementation
     const auto iu(i[implementation_user]);
     BOOST_LOG_SEV(lg, debug) << "implementation user dependencies: " << iu;
-    BOOST_CHECK(iu.size() == 2);
-
-    auto a(iu.front());
-    auto b(iu.back());
-    if (!boost::ends_with(b, test_data_postfix))
-        std::swap(a,b);
-
-    BOOST_CHECK(asserter::assert_contains(pod_name, a));
-    BOOST_CHECK(asserter::assert_contains(test_data, a));
-
-    BOOST_CHECK(asserter::assert_contains(versioned_key, b));
-    BOOST_CHECK(asserter::assert_contains(test_data, b));
+    BOOST_REQUIRE(iu.size() == 2);
+    for (const auto s : iu) {
+        BOOST_CHECK(
+            (boost::contains(s, pod_name) && boost::contains(s, test_data)) ||
+            (boost::contains(s, versioned_key) && boost::contains(s, test_data)));
+    }
 
     const auto is(i[implementation_system]);
     BOOST_LOG_SEV(lg, debug) << "implementation system dependencies: " << is;
@@ -370,14 +364,14 @@ BOOST_AUTO_TEST_CASE(processing_one_pod_model_with_default_configuration_generat
     // header
     const auto hu(i[header_user]);
     BOOST_LOG_SEV(lg, debug) << "header user dependencies: " << hu;
-    BOOST_CHECK(hu.size() == 1);
+    BOOST_REQUIRE(hu.size() == 1);
 
     BOOST_CHECK(asserter::assert_contains(pod_name, hu.front()));
     BOOST_CHECK(asserter::assert_contains(domain, hu.front()));
 
     const auto hs(i[header_system]);
     BOOST_LOG_SEV(lg, debug) << "header system dependencies: " << hs;
-    BOOST_CHECK(hs.size() == 3);
+    BOOST_REQUIRE(hs.size() == 3);
     for (const auto s : hs) {
         BOOST_CHECK(
             boost::ends_with(s, vector) ||
@@ -388,7 +382,7 @@ BOOST_AUTO_TEST_CASE(processing_one_pod_model_with_default_configuration_generat
     // implementation
     const auto iu(i[implementation_user]);
     BOOST_LOG_SEV(lg, debug) << "implementation user dependencies: " << iu;
-    BOOST_CHECK(iu.size() == 1);
+    BOOST_REQUIRE(iu.size() == 1);
 
     const auto a(iu.front());
     BOOST_CHECK(boost::ends_with(a, database_postfix));
@@ -397,7 +391,7 @@ BOOST_AUTO_TEST_CASE(processing_one_pod_model_with_default_configuration_generat
 
     const auto is(i[implementation_system]);
     BOOST_LOG_SEV(lg, debug) << "implementation system dependencies: " << is;
-    BOOST_CHECK(hs.size() == 3);
+    BOOST_REQUIRE(hs.size() == 3);
     for (const auto s : is) {
         BOOST_CHECK(
             boost::ends_with(s, boost_format) ||

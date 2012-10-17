@@ -18,6 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/range/algorithm.hpp>
+#include <boost/range/algorithm/find_first_of.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/generator/backends/cpp/cpp_inclusion_manager.hpp"
 
@@ -92,103 +94,6 @@ void cpp_inclusion_manager::register_header(cpp_facet_types ft,
     headers_for_facet_[ft].push_back(relative_path.generic_string());
 }
 
-std::list<std::string> cpp_inclusion_manager::
-system(const std::string& /*name*/, cpp_facet_types ft,
-    cpp_file_types flt, cpp_aspect_types at) const {
-
-    std::list<std::string> r;
-
-    if (at != cpp_aspect_types::versioned_key &&
-        at != cpp_aspect_types::unversioned_key)
-        return r;
-
-    const bool is_header(flt == cpp_file_types::header);
-    const bool is_implementation(flt == cpp_file_types::implementation);
-    if (ft == cpp_facet_types::domain) {
-        if (is_header) {
-            r.push_back(iosfwd);
-            r.push_back(algorithm);
-        } else if (is_implementation)
-            r.push_back(ostream);
-    }
-
-    if (is_header && ft == cpp_facet_types::hash)
-        r.push_back(functional);
-
-    if (ft == cpp_facet_types::io) {
-        if (is_header)
-            r.push_back(iosfwd);
-        else if (ft == cpp_facet_types::io && is_implementation)
-            r.push_back(ostream);
-    }
-
-    if (is_header && ft == cpp_facet_types::serialization &&
-        !settings_.disable_xml_serialization())
-        r.push_back(boost_nvp);
-
-    return r;
-}
-
-std::list<std::string> cpp_inclusion_manager::
-system(const sml::pod& pod, cpp_facet_types ft,
-    cpp_file_types flt, cpp_aspect_types at) const {
-
-    std::list<std::string> r;
-    if (at != cpp_aspect_types::main)
-        return r;
-
-    const bool is_implementation(flt == cpp_file_types::implementation);
-    const bool is_header(flt == cpp_file_types::header);
-    if (ft == cpp_facet_types::domain) {
-        if (is_header) {
-            r.push_back(iosfwd);
-            // FIXME: for some reason we had this if in formatter
-            // if (!pod.properties().empty())
-                r.push_back(algorithm);
-        }
-
-        if (is_implementation) {
-            r.push_back(ostream);
-            for(const auto p : pod.properties()) {
-                if (p.type_name().type_name() == bool_type) {
-                    r.push_back(state_saver);
-                    break;
-                }
-            }
-        }
-    }
-
-    if (is_header && ft == cpp_facet_types::hash)
-        r.push_back(functional);
-
-    if (ft == cpp_facet_types::database) {
-        if (is_header) {
-            r.push_back(vector_include);
-            r.push_back(boost_optional_include);
-            r.push_back(pqxx_connection_include);
-        }
-
-        if (is_implementation) {
-            r.push_back(boost_format_include);
-            r.push_back(pqxx_result_include);
-            r.push_back(pqxx_transaction_include);
-        }
-    }
-
-    if (ft == cpp_facet_types::io) {
-        if (is_header)
-            r.push_back(iosfwd);
-        else if (is_implementation)
-            r.push_back(ostream);
-    }
-
-    if (is_header && ft == cpp_facet_types::serialization &&
-        !settings_.disable_xml_serialization())
-        r.push_back(boost_nvp);
-
-    return r;
-}
-
 std::string cpp_inclusion_manager::unversioned_dependency() const {
     sml::qualified_name qn;
     qn.type_name(unversioned_name);
@@ -201,51 +106,15 @@ std::string cpp_inclusion_manager::unversioned_dependency() const {
     return location_manager_.relative_logical_path(rq).generic_string();
 }
 
-bool cpp_inclusion_manager::
-has_versioned_dependency(const sml::pod& /*pod*/, cpp_facet_types ft,
-    cpp_file_types flt) const {
-    if (settings_.disable_versioning())
-        return false;
-
-    const bool is_implementation(flt == cpp_file_types::implementation);
-    if (is_implementation && (ft == cpp_facet_types::hash ||
-            ft == cpp_facet_types::io ||
-            ft == cpp_facet_types::serialization ||
-            ft == cpp_facet_types::database))
-        return false;
-
-    // FIXME: hacked for now
-    if (is_implementation && ft == cpp_facet_types::domain &&
-        (!io_enabled_ || settings_.use_integrated_io()))
-        return false;
-
-    // if (is_implementation && ft == cpp_facet_types::domain &&
-    //     (!io_enabled_ || !use_integrated_io_))
-    //     return false;
-
-    const bool is_header(flt == cpp_file_types::header);
-    if (is_header && (ft == cpp_facet_types::test_data ||
-            ft == cpp_facet_types::database ||
-            ft == cpp_facet_types::io))
-        return false;
-
-    return true;
-}
-
 std::string cpp_inclusion_manager::
-versioned_dependency(cpp_facet_types ft, cpp_file_types flt) const {
-    const bool is_implementation(flt == cpp_file_types::implementation);
-    cpp_facet_types actual_facet(ft);
-    if (is_implementation && ft == cpp_facet_types::domain)
-        actual_facet = cpp_facet_types::io;
-
+versioned_dependency(cpp_facet_types ft) const {
     sml::qualified_name qn;
     qn.type_name(versioned_name);
     qn.external_package_path(model_.external_package_path());
     qn.model_name(model_.name());
 
     const auto h(cpp_file_types::header);
-    const auto rq(location_request_factory(actual_facet, h, qn));
+    const auto rq(location_request_factory(ft, h, qn));
     return location_manager_.relative_logical_path(rq).generic_string();
 }
 
@@ -264,76 +133,206 @@ std::string cpp_inclusion_manager::header_dependency(
     return location_manager_.relative_logical_path(rq).generic_string();
 }
 
-std::list<std::string> cpp_inclusion_manager::
-user(const sml::qualified_name& name, cpp_facet_types facet_type,
-    cpp_file_types file_type, cpp_aspect_types aspect_type) const {
+std::list<dogen::sml::qualified_name>
+cpp_inclusion_manager::pod_to_qualified_names(const sml::pod& pod) const {
+    std::list<dogen::sml::qualified_name> r;
 
-    std::list<std::string> r;
-    if (aspect_type == cpp_aspect_types::includers)
-        return r;
+    if (pod.parent_name())
+        r.push_back(*pod.parent_name());
 
-    typedef std::list<std::string> return_type;
-    const bool is_header(file_type == cpp_file_types::header);
-    const bool is_domain(facet_type == cpp_facet_types::domain);
-    const bool is_versioned(aspect_type == cpp_aspect_types::versioned_key);
-
-    if (is_versioned && is_header && is_domain)
-        r.push_back(unversioned_dependency());
-
-    if (is_header && !is_domain)
-        r.push_back(domain_header_dependency(name));
-
-    if (is_header && facet_type == cpp_facet_types::hash)
-        r.push_back(hash_combine);
-
-    if (is_header && facet_type == cpp_facet_types::test_data) {
-        r.push_back(generator_include);
-        r.push_back(sequence_include);
-    }
-
-    if (file_type == cpp_file_types::implementation) {
-
-        r.push_back(header_dependency(name, facet_type));
-        if (is_domain)
-            r.push_back(jsonify_include);
-    }
+    for(const auto p : pod.properties())
+        r.push_back(p.type_name());
 
     return r;
 }
 
-std::list<std::string>
-cpp_inclusion_manager::user(const std::string& name, cpp_facet_types ft,
-    cpp_file_types flt, cpp_aspect_types at) const {
+void cpp_inclusion_manager::append_versioning_dependencies(
+    const cpp_facet_types ft, const cpp_file_types flt, cpp_aspect_types at,
+    inclusion_lists& il) const {
 
-    sml::qualified_name qn;
-    qn.external_package_path(model_.external_package_path());
-    qn.type_name(name);
-    qn.model_name(model_.name());
-    return user(qn, ft, flt, at);
+    if (settings_.disable_versioning() ||
+        at == cpp_aspect_types::unversioned_key ||
+        at == cpp_aspect_types::includers)
+        return;
+
+    /*
+     * rule 1: versioned header depends on unversioned header.
+     */
+    const bool is_header(flt == cpp_file_types::header);
+    const bool is_domain(ft == cpp_facet_types::domain);
+    if (at == cpp_aspect_types::versioned_key) {
+        if (is_header && is_domain)
+            il.user.push_back(unversioned_dependency());
+        return;
+    }
+
+    cpp_facet_types version_facet(ft);
+
+    /*
+     * rule 2: domain implementation needs access to the versioned key
+     * IO header file when IO is enabled and we are using integrated
+     * IO.
+     */
+    const bool is_implementation(flt == cpp_file_types::implementation);
+    // FIXME: just to keep existing behaviour.
+    // const bool iio(settings_.use_integrated_io());
+    const bool rule1(is_implementation && is_domain && io_enabled_/* && iio*/);
+    if (rule1)
+        version_facet = cpp_facet_types::io;
+
+    /*
+     * rule 3: test data implementation requires access to version in
+     * order to generate versioned key objects.
+     */
+    const bool is_test_data(ft == cpp_facet_types::test_data);
+    const bool rule2(is_implementation && is_test_data);
+
+    /*
+     * rule 4: serialization and hash headers need versioned key in
+     * order to serialise and hash these objects
+     * (respectively). Domain needs the version for its property.
+     */
+    const bool is_hash(ft == cpp_facet_types::hash);
+    const bool is_serialization(ft == cpp_facet_types::serialization);
+    const bool rule3(is_header && (is_domain || is_hash || is_serialization));
+
+    if (rule1 || rule2 || rule3)
+        il.user.push_back(versioned_dependency(version_facet));
 }
 
-std::list<std::string> cpp_inclusion_manager::
-user(const sml::pod& pod, cpp_facet_types ft, cpp_file_types flt,
-    cpp_aspect_types at) const {
-    std::list<std::string> r(user(pod.name(), ft, flt, at));
+void cpp_inclusion_manager::
+append_implementation_dependencies(const bool requires_formatting,
+    const cpp_facet_types ft, const cpp_file_types flt,
+    inclusion_lists& il) const {
 
-    if (has_versioned_dependency(pod, ft, flt))
-        r.push_back(versioned_dependency(ft, flt));
+    /*
+     * STL
+     */
+    // iosfwd
+    const bool is_header(flt == cpp_file_types::header);
+    const bool is_domain(ft == cpp_facet_types::domain);
+    const bool is_io(ft == cpp_facet_types::io);
+    if (is_header && (is_domain || is_io))
+        il.system.push_back(iosfwd);
+
+    // algorithm
+    if (is_header && is_domain)
+        il.system.push_back(algorithm);
+
+    // ostream
+    const bool is_implementation(flt == cpp_file_types::implementation);
+    if (is_implementation && (is_domain || is_io))
+        il.system.push_back(ostream);
+
+    // functional
+    const bool is_hash(ft == cpp_facet_types::hash);
+    if (is_header && is_hash)
+        il.system.push_back(functional);
+
+    // vector
+    const bool is_database(ft == cpp_facet_types::database);
+    if (is_header && is_database)
+        il.system.push_back(vector_include);
+
+    /*
+     * boost
+     */
+    // optional
+    if (is_header && is_database)
+        il.system.push_back(boost_optional_include);
+
+    // format
+    if (is_implementation && is_database)
+        il.system.push_back(boost_format_include);
+
+    // nvp serialisation
+    const bool is_serialization(ft == cpp_facet_types::serialization);
+    if (is_header && is_serialization && !settings_.disable_xml_serialization())
+        il.system.push_back(boost_nvp);
+
+    // state saver
+    // FIXME: IIO problems, hacked for now
+    // ((is_domain && settings_.use_integrated_io()) ||
+    // (is_io && !settings_.use_integrated_io()))
+    if (is_implementation && io_enabled_ && requires_formatting && is_domain)
+        il.system.push_back(state_saver);
+
+    /*
+     * pqxx
+     */
+    // connection
+    if (is_header && is_database)
+        il.system.push_back(pqxx_connection_include);
+
+    // result
+    if (is_implementation && is_database)
+        il.system.push_back(pqxx_result_include);
+
+    // transaction
+    if (is_implementation && is_database)
+        il.system.push_back(pqxx_transaction_include);
+
+    /*
+     * Dogen dependencies
+     */
+    // hash combine
+    if (is_header && is_hash)
+        il.user.push_back(hash_combine);
+
+    // generator
+    const bool is_test_data(ft == cpp_facet_types::test_data);
+    if (is_header && is_test_data)
+        il.user.push_back(generator_include);
+
+    // sequence
+    if (is_header && is_test_data)
+        il.user.push_back(sequence_include);
+
+    // jsonify
+    if (is_implementation && is_domain)
+        il.user.push_back(jsonify_include);
+}
+
+void cpp_inclusion_manager::append_relationship_dependencies(
+    const std::list<dogen::sml::qualified_name>& /*names*/,
+    const cpp_facet_types /*ft*/, const cpp_file_types /*flt*/,
+    inclusion_lists& /*il*/) const {
 
     // FIXME: handle properties etc.
-    return r;
+    // for(const auto n : names)
+    //
+    //     r.push_back(p.type_name());
 }
 
-std::pair<std::list<std::string>, std::list<std::string> >
-cpp_inclusion_manager::includes(const std::string& name, cpp_facet_types ft,
-    cpp_file_types flt, cpp_aspect_types at) const {
-    return std::make_pair(system(name, ft, flt, at), user(name, ft, flt, at));
+void cpp_inclusion_manager::
+append_self_dependencies(dogen::sml::qualified_name name,
+    const cpp_facet_types ft, const cpp_file_types flt,
+    inclusion_lists& il) const {
+
+    /*
+     * rule 1: all header files depend on the domain header file,
+     * except for the domain header file itself.
+     */
+    const bool is_header(flt == cpp_file_types::header);
+    const bool is_domain(ft == cpp_facet_types::domain);
+    if (is_header && !is_domain)
+        il.user.push_back(domain_header_dependency(name));
+
+    /*
+     * rule 2: all implementation files depend on the domain header file
+     */
+    const bool is_implementation(flt == cpp_file_types::implementation);
+    if (is_implementation)
+        il.user.push_back(header_dependency(name, ft));
 }
 
-std::pair<std::list<std::string>, std::list<std::string> >
-cpp_inclusion_manager::includes(const sml::pod& pod, cpp_facet_types ft,
-    cpp_file_types flt, cpp_aspect_types at) const {
-    return std::make_pair(system(pod, ft, flt, at), user(pod, ft, flt, at));
+bool cpp_inclusion_manager::requires_formatting(
+    const std::list<dogen::sml::qualified_name>& names) const {
+    using dogen::sml::qualified_name;
+    const auto i(boost::find_if(names, [](const qualified_name& n) {
+                return n.type_name() == bool_type;
+            }));
+    return i != names.end();
 }
 
 inclusion_lists
@@ -342,6 +341,40 @@ cpp_inclusion_manager::includes_for_includer_files(cpp_facet_types ft) const {
     const auto i(headers_for_facet_.find(ft));
     if (i != headers_for_facet_.end())
         r.user = i->second;
+    return r;
+}
+
+inclusion_lists cpp_inclusion_manager::
+includes_for_pod(const sml::pod& pod, cpp_facet_types ft, cpp_file_types flt,
+    cpp_aspect_types at) const {
+
+    inclusion_lists r;
+    append_versioning_dependencies(ft, flt, at, r);
+
+    const auto names(pod_to_qualified_names(pod));
+    append_implementation_dependencies(requires_formatting(names), ft, flt, r);
+    append_relationship_dependencies(names, ft, flt, r);
+    append_self_dependencies(pod.name(), ft, flt, r);
+
+    return r;
+}
+
+inclusion_lists cpp_inclusion_manager::
+includes_for_versioning(const std::string& name, cpp_facet_types ft,
+    cpp_file_types flt, cpp_aspect_types at) const {
+
+    inclusion_lists r;
+    append_versioning_dependencies(ft, flt, at, r);
+
+    const bool requires_formatting(false);
+    append_implementation_dependencies(requires_formatting, ft, flt, r);
+
+    sml::qualified_name n;
+    n.external_package_path(model_.external_package_path());
+    n.type_name(name);
+    n.model_name(model_.name());
+    append_self_dependencies(n, ft, flt, r);
+
     return r;
 }
 

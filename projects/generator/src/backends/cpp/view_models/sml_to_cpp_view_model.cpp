@@ -331,9 +331,9 @@ transform_file(cpp_facet_types ft, cpp_file_types flt, const sml::pod& pod) {
     }
 
     const cpp_aspect_types at(cpp_aspect_types::main);
-    const auto includes(inclusion_manager_.includes(pod, ft, flt, at));
-    r.system_includes(includes.first);
-    r.user_includes(includes.second);
+    const auto includes(inclusion_manager_.includes_for_pod(pod, ft, flt, at));
+    r.system_includes(includes.system);
+    r.user_includes(includes.user);
     return r;
 }
 
@@ -451,9 +451,9 @@ create_key_file_view_model(cpp_facet_types ft, cpp_file_types flt,
 
     const std::string name(r.class_vm()->name());
     log_generating_file(ft, at, flt, name);
-    const auto includes(inclusion_manager_.includes(name, ft, flt, at));
-    r.system_includes(includes.first);
-    r.user_includes(includes.second);
+    const auto i(inclusion_manager_.includes_for_versioning(name, ft, flt, at));
+    r.system_includes(i.system);
+    r.user_includes(i.user);
 
     sml::qualified_name qn;
     qn.external_package_path(model_.external_package_path());

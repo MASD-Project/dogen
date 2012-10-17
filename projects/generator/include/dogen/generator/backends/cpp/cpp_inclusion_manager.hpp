@@ -44,8 +44,7 @@ namespace backends {
 namespace cpp {
 
 /**
- * @brief Result of a request for includes
- *
+ * @brief Result of a request for includes.
  */
 struct inclusion_lists {
     std::list<std::string> system;
@@ -53,11 +52,19 @@ struct inclusion_lists {
 };
 
 /**
- * @brief Responsible for computing all dependencies for a given
- * type.
+ * @brief Responsible for computing all the include dependencies for a
+ * given type.
  *
- * Dependencies in this sense are all include files required in order
- * to successfully compile the current file.
+ * The include dependencies we concern ourselves with are all files
+ * required in order to successfully compile the current file. We make
+ * the traditional distinction with regards to type of inclusion:
+ *
+ * @li @e System includes are those which are in the system include path and
+ * are expected to be included using angle brackets;
+ *
+ * @li @e User includes are those which are in the user include path
+ * and are expected to be included using double-quotes.
+ *
  */
 class cpp_inclusion_manager {
 public:
@@ -79,40 +86,37 @@ public:
         const config::cpp_settings& settings);
 
 private:
-    bool has_versioned_dependency(const sml::pod& pod, cpp_facet_types ft,
-        cpp_file_types flt) const;
-
     cpp_location_request location_request_factory(cpp_facet_types ft,
         cpp_file_types flt, const sml::qualified_name& name) const;
 
     /**
-     * @brief Returns the dependency to the unversioned key domain
+     * @brief Returns the include path to the unversioned key domain
      * header.
      */
     std::string unversioned_dependency() const;
 
     /**
-     * @brief Returns the dependency to the versioned key header of
-     * the given facet.
+     * @brief Returns the include path to the versioned key header.
+     *
+     * @param ft Facet for which we require the versioned key header.
      */
-    std::string
-    versioned_dependency(cpp_facet_types ft, cpp_file_types flt) const;
+    std::string versioned_dependency(cpp_facet_types ft) const;
 
     /**
-     * @brief Returns the dependency to the domain header.
+     * @brief Returns the include path to the domain header.
+     *
+     * @param name Qualified name of the type for which we require the
+     * domain header.
      */
     std::string
     domain_header_dependency(const sml::qualified_name& name) const;
 
     /**
-     * @brief Returns the dependency to the header file.
+     * @brief Returns the include path to the header file, for the
+     * given facet.
      */
     std::string header_dependency(const sml::qualified_name& name,
         cpp_facet_types ft) const;
-
-    std::list<std::string>
-    user(const sml::qualified_name& name, cpp_facet_types ft,
-        cpp_file_types flt, cpp_aspect_types at) const;
 
 public:
     /**
@@ -125,39 +129,78 @@ public:
     void register_header(cpp_facet_types ft,
         const boost::filesystem::path& relative_path);
 
+    /**
+     * @brief Returns true if there is a type in the list of qualified
+     * names which requires special formatting.
+     *
+     * The objective of this function is to determine if one is
+     * required to use ios stream state saving or not. For types such
+     * as bool, etc we are expected to change the state of the stream
+     * so state saving is required.
+     */
+    bool requires_formatting(
+        const std::list<dogen::sml::qualified_name>& names) const;
+
 private:
     /**
-     * @brief Returns all the system dependencies for the type.
+     * @brief Flattens the given pod into a list containing all
+     * qualified names it is related to, except itself.
      *
-     * These are STL files, boost files, etc.
-     *
-     * If you choose the signature with @e pod, properties and parents
-     * are taken into account when generating the list of
-     * dependencies. These are ignored when you supply just @e name.
+     * The qualified names list includes all types used by the
+     * properties of the pod, as well as its parent, if any.
      */
-    /**@{*/
-    std::list<std::string> system(const std::string& name,
-        cpp_facet_types ft, cpp_file_types flt, cpp_aspect_types at) const;
-    std::list<std::string> system(const sml::pod& pod,
-        cpp_facet_types ft, cpp_file_types flt, cpp_aspect_types at) const;
-    /**@}*/
+    std::list<dogen::sml::qualified_name>
+    pod_to_qualified_names(const sml::pod& pod) const;
 
     /**
-     * @brief Returns all user dependencies for the type.
-     *
-     * These are files on this domain model or other models that it
-     * may depend on.
-     *
-     * If you choose the signature with @e pod, properties and parents
-     * are taken into account when generating the list of
-     * dependencies. These are ignored when you supply just @e name.
+     * @brief Appends to the inclusion lists all dependencies related
+     * to versioning.
      */
-    /**@{*/
-    std::list<std::string> user(const std::string& name,
-        cpp_facet_types ft, cpp_file_types flt, cpp_aspect_types at) const;
-    std::list<std::string> user(const sml::pod& pod,
-        cpp_facet_types ft, cpp_file_types flt, cpp_aspect_types at) const;
-    /**@}*/
+    void append_versioning_dependencies(const cpp_facet_types ft,
+        const cpp_file_types flt, cpp_aspect_types at,
+        inclusion_lists& il) const;
+
+    /**
+     * @brief Appends to the inclusion lists all dependencies related
+     * to the formatter implementation.
+     *
+     * The objective of this method is to pick up all header files
+     * which are required due to the current source code
+     * implementation we have in respective formatter. Formatters are
+     * normally given by the pair facet, file type.
+     *
+     * Its not ideal to have to change the code in the formatter and
+     * then the inclusion manager to get the generated models to
+     * compile, but on the flip side, all inclusion related code is
+     * kept in one place.
+     */
+    void append_implementation_dependencies(const bool requires_formatting,
+        const cpp_facet_types ft, const cpp_file_types flt,
+        inclusion_lists& il) const;
+
+    /**
+     * @brief Appends to the inclusion lists dependencies brought
+     * about by all the relationships of the type with other types.
+     *
+     * In this sense, by relationship we mean either
+     * specialisation/generalisation or association - e.g. the parent
+     * of the type and all types of all properties it may have.
+     */
+    void append_relationship_dependencies(
+        const std::list<dogen::sml::qualified_name>& names,
+        const cpp_facet_types ft, const cpp_file_types flt,
+        inclusion_lists& il) const;
+
+    /**
+     * @brief Appends to the inclusion lists dependencies related to
+     * the type itself.
+     *
+     * For instance, this is the case of the implementation file
+     * including the header file.
+     */
+    void append_self_dependencies(dogen::sml::qualified_name name,
+        const cpp_facet_types ft, const cpp_file_types flt,
+        inclusion_lists& il) const;
 
 public:
     /**
@@ -175,26 +218,20 @@ public:
     inclusion_lists includes_for_includer_files(cpp_facet_types ft) const;
 
     /**
-     * @brief Returns all includes.
+     * @brief Returns the includes for version related types.
      *
-     * These are files on this domain model or other models that it
-     * may depend on.
-     *
-     * If you choose the signature with @e pod, properties and parents
-     * are taken into account when generating the list of
-     * dependencies. These are ignored when you supply just @e name.
-     *
-     * @return The first element of the tuple is the system includes,
-     * the second the user includes.
+     * Every model for which versioning has been enabled has a
+     * versioned and unversioned key. This method returns the includes
+     * that involve those files.
      */
-    /**@{*/
-    std::pair<std::list<std::string>, std::list<std::string> >
-    includes(const std::string& name, cpp_facet_types ft,
+    inclusion_lists includes_for_versioning(const std::string& name,
+        cpp_facet_types ft, cpp_file_types flt, cpp_aspect_types at) const;
+
+    /**
+     * @brief Returns all the includes required for the given pod.
+     */
+    inclusion_lists includes_for_pod(const sml::pod& pod, cpp_facet_types ft,
         cpp_file_types flt, cpp_aspect_types at) const;
-    std::pair<std::list<std::string>, std::list<std::string> >
-    includes(const sml::pod& pod, cpp_facet_types ft,
-        cpp_file_types flt, cpp_aspect_types at) const;
-    /**@}*/
 
 private:
     const sml::model model_;
