@@ -41,9 +41,9 @@ public:
     property_view_model& operator=(const property_view_model&) = default;
 
 public:
-    property_view_model() : is_primitive_(false) {}
+    property_view_model() : is_primitive_(false), is_string_like_(false) {}
     explicit property_view_model(std::string name)
-        : name_(name), is_primitive_(false) { }
+        : name_(name), is_primitive_(false), is_string_like_(false) { }
 
 public:
     /**
@@ -70,11 +70,20 @@ public:
     void is_primitive(bool value) { is_primitive_ = value; }
     /**@}*/
 
+    /**
+     * @brief If true, the meta type of the property is either string
+     * or char.
+     */
+    /**@{*/
+    bool is_string_like() const { return is_string_like_; }
+    void is_string_like(bool value) { is_string_like_ = value; }
+    /**@}*/
 
 private:
     std::string name_;
     std::string type_;
     bool is_primitive_;
+    bool is_string_like_;
 };
 
 } } } } }

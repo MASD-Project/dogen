@@ -19,6 +19,7 @@
  *
  */
 #include <ostream>
+#include "dogen/generator/backends/cpp/formatters/cpp_inserter_implementation.hpp"
 #include "dogen/generator/backends/cpp/formatters/cpp_class_implementation.hpp"
 
 namespace {
@@ -121,37 +122,9 @@ void cpp_class_implementation::to_stream(const class_view_model& vm) {
     {
         cpp_positive_indenter_scope s(indenter_);
 
-        if (vm.requires_stream_manipulators()) {
-            stream_ << indenter_ << "boost::io::ios_flags_saver ifs(stream);"
-                    << std::endl;
-            stream_ << indenter_ << "stream << std::boolalpha;" << std::endl;
-            utility_.blank_line();
-        }
-
-        stream_ << indenter_ << jsonify_using << std::endl;
-        utility_.blank_line();
-
-        stream_ << indenter_ << "stream " << inserter
-                << utility_.quote(open_bracket)
-                << std::endl;
-
-        stream_ << indenter_ << special_indent << inserter
-                << utility_.quote(utility_.quote_escaped(type) + colon)
-                << space_inserter
-                << utility_.quote(utility_.quote_escaped(vm.name()));
-
-        for (const auto p : vm.properties()) {
-            stream_ << space_inserter << utility_.quote(comma) << std::endl;
-
-            stream_ << indenter_ << special_indent << inserter
-                    << utility_.quote(utility_.quote_escaped(p.name())
-                        + colon) << space_inserter
-                    << "jsonify(" << utility_.as_member_variable(p.name())
-                    << ")";
-        }
-        stream_ << std::endl;
-        stream_ << indenter_ << special_indent << inserter
-                << utility_.quote(close_bracket) << semi_colon << std::endl;
+        const bool inside_class(true);
+        cpp_inserter_implementation inserter(stream_, indenter_, inside_class);
+        inserter.format(vm);
     }
     utility_.close_scope();
     utility_.blank_line();

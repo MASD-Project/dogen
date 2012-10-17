@@ -30,12 +30,11 @@ versioned_key::versioned_key()
       version_(static_cast<unsigned int>(0)) { }
 
 void versioned_key::to_stream(std::ostream& stream) const {
-    using dogen::utility::streaming::jsonify;
 
-    stream << " {"
-           << "\"__type__\": " << "\"versioned_key\"" << ","
-           << "\"id\": " << jsonify(id_) << ","
-           << "\"version\": " << jsonify(version_)
+    stream << " { "
+           << "\"__type__\": " << "\"versioned_key\"" << ", "
+           << "\"id\": " << id_ << ", "
+           << "\"version\": " << version_
            << " }";
 }
 

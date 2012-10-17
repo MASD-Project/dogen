@@ -52,6 +52,9 @@ const std::string id_name("id");
 const std::string version_name("version");
 const std::string uint_name("unsigned int");
 const std::string bool_type("bool");
+const std::string string_type("string");
+const std::string char_type("char");
+const std::string uchar_type("unsigned char");
 
 /**
  * @brief Flattens all the SML namespace information stored in
@@ -189,6 +192,11 @@ void sml_dfs_visitor::process_sml_pod(const dogen::sml::pod& pod) {
             has_primitive_properties = true;
             if (k.type() == bool_type)
                 requires_stream_manipulators = true;
+
+            k.is_string_like(
+                k.type() == string_type ||
+                k.type() == char_type ||
+                k.type() == uchar_type);
         }
         properties_vm.push_back(k);
     }

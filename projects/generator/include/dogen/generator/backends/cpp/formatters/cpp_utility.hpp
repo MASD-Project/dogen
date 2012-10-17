@@ -52,8 +52,34 @@ public:
     void blank_line(unsigned int how_many = 1);
     std::string as_member_variable(const std::string& property_name) const;
     std::string as_getter(const std::string& property_name) const;
+
+    /**
+     * @brief Adds double quotes to original.
+     *
+     * Using single quotes to denote the string boundary (e.g. they
+     * are not actually on the string), an original of 'a' produces
+     * the output '"a"'.
+     */
     std::string quote(const std::string& original) const;
+
+    /**
+     * @brief Adds escapped quotes to original.
+     *
+     * Using single quotes to denote the string boundary (e.g. they
+     * are not actually on the string), an original of 'a' produces
+     * the output '\"a\"'.
+     */
     std::string quote_escaped(const std::string& original) const;
+
+    /**
+     * @brief Adds escapped quotes to original, with c++ streaming
+     * syntax.
+     *
+     * Using single quotes to denote the string boundary (e.g. they
+     * are not actually on the string), an original of 'a' produces
+     * the output '<< "\"" << a << "\"""'.
+     */
+    std::string quote_escaped_streamed(const std::string& original) const;
 
 private:
     std::ostream& stream_;

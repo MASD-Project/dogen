@@ -48,16 +48,17 @@ public:
     cpp_inserter_implementation& operator=(const cpp_inserter_implementation&) = default;
 
 public:
-    cpp_inserter_implementation(std::ostream& stream, const bool use_getters);
+    cpp_inserter_implementation(std::ostream& stream, cpp_indenter& indenter,
+        const bool is_inside_class);
     virtual ~cpp_inserter_implementation() noexcept {}
 
 public:
     void format(const class_view_model& vm);
 
 protected:
-    const bool use_getters_;
+    const bool is_inside_class_;
     std::ostream& stream_;
-    cpp_indenter indenter_;
+    cpp_indenter& indenter_;
     cpp_utility utility_;
 };
 

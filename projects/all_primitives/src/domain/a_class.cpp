@@ -70,22 +70,21 @@ void a_class::to_stream(std::ostream& stream) const {
     boost::io::ios_flags_saver ifs(stream);
     stream << std::boolalpha;
 
-    using dogen::utility::streaming::jsonify;
 
-    stream << " {"
-           << "\"__type__\": " << "\"a_class\"" << ","
-           << "\"bool_property\": " << jsonify(bool_property_) << ","
-           << "\"char_property\": " << jsonify(char_property_) << ","
-           << "\"uchar_property\": " << jsonify(uchar_property_) << ","
-           << "\"int_property\": " << jsonify(int_property_) << ","
-           << "\"uint_property\": " << jsonify(uint_property_) << ","
-           << "\"long_property\": " << jsonify(long_property_) << ","
-           << "\"ulong_property\": " << jsonify(ulong_property_) << ","
-           << "\"long_long_property\": " << jsonify(long_long_property_) << ","
-           << "\"ulong_long_property\": " << jsonify(ulong_long_property_) << ","
-           << "\"short_property\": " << jsonify(short_property_) << ","
-           << "\"ushort_property\": " << jsonify(ushort_property_) << ","
-           << "\"versioned_key\": " << jsonify(versioned_key_)
+    stream << " { "
+           << "\"__type__\": " << "\"a_class\"" << ", "
+           << "\"bool_property\": " << bool_property_ << ", "
+           << "\"char_property\": " << "\"" << char_property_ << "\"" << ", "
+           << "\"uchar_property\": " << "\"" << uchar_property_ << "\"" << ", "
+           << "\"int_property\": " << int_property_ << ", "
+           << "\"uint_property\": " << uint_property_ << ", "
+           << "\"long_property\": " << long_property_ << ", "
+           << "\"ulong_property\": " << ulong_property_ << ", "
+           << "\"long_long_property\": " << long_long_property_ << ", "
+           << "\"ulong_long_property\": " << ulong_long_property_ << ", "
+           << "\"short_property\": " << short_property_ << ", "
+           << "\"ushort_property\": " << ushort_property_ << ", "
+           << "\"versioned_key\": " << versioned_key_
            << " }";
 }
 

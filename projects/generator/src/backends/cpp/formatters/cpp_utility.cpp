@@ -30,6 +30,8 @@ const std::string close_bracket("}");
 const std::string function_brackets("()");
 const std::string quote_escaped("\\\"");
 const std::string quote("\"");
+const std::string inserter("<< ");
+const std::string space(" ");
 
 const std::string public_access_specifier("public:");
 const std::string private_access_specifier("private:");
@@ -81,6 +83,15 @@ std::string cpp_utility::quote(const std::string& original) const {
 
 std::string cpp_utility::quote_escaped(const std::string& original) const {
     return ::quote_escaped + original + ::quote_escaped;
+}
+
+std::string
+cpp_utility::quote_escaped_streamed(const std::string& original) const {
+    std::ostringstream s;
+    s << ::quote << ::quote_escaped << ::quote << space
+      << inserter << original << space
+      << inserter << ::quote << ::quote_escaped << ::quote;
+    return s.str();
 }
 
 } } } } }

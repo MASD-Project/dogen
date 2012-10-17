@@ -40,13 +40,12 @@ first_class::first_class(
       versioned_key_(versioned_key) { }
 
 void first_class::to_stream(std::ostream& stream) const {
-    using dogen::utility::streaming::jsonify;
 
-    stream << " {"
-           << "\"__type__\": " << "\"first_class\"" << ","
-           << "\"public_attribute\": " << jsonify(public_attribute_) << ","
-           << "\"private_attribute\": " << jsonify(private_attribute_) << ","
-           << "\"versioned_key\": " << jsonify(versioned_key_)
+    stream << " { "
+           << "\"__type__\": " << "\"first_class\"" << ", "
+           << "\"public_attribute\": " << public_attribute_ << ", "
+           << "\"private_attribute\": " << private_attribute_ << ", "
+           << "\"versioned_key\": " << versioned_key_
            << " }";
 }
 

@@ -31,11 +31,10 @@ a_class::a_class(dogen::split_project::versioned_key versioned_key)
     : versioned_key_(versioned_key) { }
 
 void a_class::to_stream(std::ostream& stream) const {
-    using dogen::utility::streaming::jsonify;
 
-    stream << " {"
-           << "\"__type__\": " << "\"a_class\"" << ","
-           << "\"versioned_key\": " << jsonify(versioned_key_)
+    stream << " { "
+           << "\"__type__\": " << "\"a_class\"" << ", "
+           << "\"versioned_key\": " << versioned_key_
            << " }";
 }
 

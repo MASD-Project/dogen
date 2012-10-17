@@ -30,11 +30,10 @@ parent::parent(dogen::trivial_inheritance::versioned_key versioned_key)
     : versioned_key_(versioned_key) { }
 
 void parent::to_stream(std::ostream& stream) const {
-    using dogen::utility::streaming::jsonify;
 
-    stream << " {"
-           << "\"__type__\": " << "\"parent\"" << ","
-           << "\"versioned_key\": " << jsonify(versioned_key_)
+    stream << " { "
+           << "\"__type__\": " << "\"parent\"" << ", "
+           << "\"versioned_key\": " << versioned_key_
            << " }";
 }
 

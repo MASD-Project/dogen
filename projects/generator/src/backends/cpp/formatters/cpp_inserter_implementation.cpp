@@ -25,7 +25,6 @@
 namespace {
 
 // FIXME: until we add support to indenter.
-const std::string std_string("std::string");
 const std::string special_indent("       ");
 const std::string type("__type__");
 const std::string inserter("<< ");
@@ -35,7 +34,7 @@ const std::string close_bracket(" }");
 const std::string colon(": ");
 const std::string semi_colon(";");
 const std::string space(" ");
-const std::string comma(",");
+const std::string spaced_comma(", ");
 
 }
 
@@ -46,8 +45,10 @@ namespace cpp {
 namespace formatters {
 
 cpp_inserter_implementation::
-cpp_inserter_implementation(std::ostream& stream, const bool use_getters)
-    : use_getters_(use_getters), stream_(stream), utility_(stream_, indenter_) {
+cpp_inserter_implementation(std::ostream& stream, cpp_indenter& indenter,
+    const bool is_inside_class)
+    : is_inside_class_(is_inside_class), stream_(stream), indenter_(indenter),
+      utility_(stream_, indenter_) {
 }
 
 void cpp_inserter_implementation::format(const class_view_model& vm) {
@@ -71,33 +72,32 @@ void cpp_inserter_implementation::format(const class_view_model& vm) {
             << utility_.quote(utility_.quote_escaped(vm.name()));
 
     for (const auto p : vm.properties()) {
-        stream_ << space_inserter << utility_.quote(comma) << std::endl;
+        stream_ << space_inserter << utility_.quote(spaced_comma) << std::endl;
 
         stream_ << indenter_ << special_indent << inserter
                 << utility_.quote(utility_.quote_escaped(p.name())
                     + colon) << space_inserter;
 
         std::ostringstream ss;
-        ss << "value."
-           << (use_getters_ ?
-               utility_.as_getter(p.name()) :
-               utility_.as_member_variable(p.name()));
+        if (is_inside_class_)
+            ss << utility_.as_member_variable(p.name());
+        else
+            ss << "value." << utility_.as_getter(p.name());
 
-        if (p.is_primitive())
+        if (p.is_string_like())
+            stream_ << utility_.quote_escaped_streamed(ss.str());
+        else if (p.is_primitive())
             stream_ << ss.str();
-        else if (p.type() == std_string)
-            stream_ << utility_.quote(ss.str());
-        else {
-            stream_ << utility_.quote(" { ") << space_inserter
-                    << ss.str() << space_inserter
-                    << utility_.quote(" } ");
-        }
+        else
+            stream_ << ss.str();
     }
 
     stream_ << std::endl;
     stream_ << indenter_ << special_indent << inserter
             << utility_.quote(close_bracket) << semi_colon << std::endl;
-    stream_ << indenter_ << "return(stream);" << std::endl;
+
+    if (!is_inside_class_)
+        stream_ << indenter_ << "return(stream);" << std::endl;
 }
 
 

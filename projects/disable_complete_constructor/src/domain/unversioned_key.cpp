@@ -29,11 +29,10 @@ unversioned_key::unversioned_key()
     : id_(static_cast<unsigned int>(0)) { }
 
 void unversioned_key::to_stream(std::ostream& stream) const {
-    using dogen::utility::streaming::jsonify;
 
-    stream << " {"
-           << "\"__type__\": " << "\"unversioned_key\"" << ","
-           << "\"id\": " << jsonify(id_)
+    stream << " { "
+           << "\"__type__\": " << "\"unversioned_key\"" << ", "
+           << "\"id\": " << id_
            << " }";
 }
 
