@@ -1,0 +1,104 @@
+/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+ *
+ * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+ * MA 02110-1301, USA.
+ *
+ */
+#include <ostream>
+#include <sstream>
+#include "dogen/generator/backends/cpp/formatters/cpp_inserter_implementation.hpp"
+
+namespace {
+
+// FIXME: until we add support to indenter.
+const std::string std_string("std::string");
+const std::string special_indent("       ");
+const std::string type("__type__");
+const std::string inserter("<< ");
+const std::string space_inserter(" << ");
+const std::string open_bracket(" {");
+const std::string close_bracket(" }");
+const std::string colon(": ");
+const std::string semi_colon(";");
+const std::string space(" ");
+const std::string comma(",");
+
+}
+
+namespace dogen {
+namespace generator {
+namespace backends {
+namespace cpp {
+namespace formatters {
+
+cpp_inserter_implementation::
+cpp_inserter_implementation(std::ostream& stream, const bool use_getters)
+    : use_getters_(use_getters), stream_(stream), utility_(stream_, indenter_) {
+}
+
+void cpp_inserter_implementation::format(const class_view_model& vm) {
+    if (vm.requires_stream_manipulators()) {
+        stream_ << indenter_
+                << "boost::io::ios_flags_saver ifs(stream);"
+                << std::endl;
+        stream_ << indenter_ << "stream << std::boolalpha;"
+                << std::endl;
+        utility_.blank_line();
+    }
+
+    utility_.blank_line();
+    stream_ << indenter_ << "stream " << inserter
+            << utility_.quote(" { ")
+            << std::endl;
+
+    stream_ << indenter_ << special_indent << inserter
+            << utility_.quote(utility_.quote_escaped(type) + colon)
+            << space_inserter
+            << utility_.quote(utility_.quote_escaped(vm.name()));
+
+    for (const auto p : vm.properties()) {
+        stream_ << space_inserter << utility_.quote(comma) << std::endl;
+
+        stream_ << indenter_ << special_indent << inserter
+                << utility_.quote(utility_.quote_escaped(p.name())
+                    + colon) << space_inserter;
+
+        std::ostringstream ss;
+        ss << "value."
+           << (use_getters_ ?
+               utility_.as_getter(p.name()) :
+               utility_.as_member_variable(p.name()));
+
+        if (p.is_primitive())
+            stream_ << ss.str();
+        else if (p.type() == std_string)
+            stream_ << utility_.quote(ss.str());
+        else {
+            stream_ << utility_.quote(" { ") << space_inserter
+                    << ss.str() << space_inserter
+                    << utility_.quote(" } ");
+        }
+    }
+
+    stream_ << std::endl;
+    stream_ << indenter_ << special_indent << inserter
+            << utility_.quote(close_bracket) << semi_colon << std::endl;
+    stream_ << indenter_ << "return(stream);" << std::endl;
+}
+
+
+} } } } }
