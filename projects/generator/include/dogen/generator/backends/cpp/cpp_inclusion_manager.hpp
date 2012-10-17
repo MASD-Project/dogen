@@ -62,12 +62,12 @@ public:
     : model_(std::move(rhs.model_)),
       location_manager_(std::move(rhs.location_manager_)),
       settings_(std::move(rhs.settings_)),
-      disable_io_(std::move(rhs.disable_io_)),
+      io_enabled_(std::move(rhs.io_enabled_)),
       headers_for_facet_(std::move(rhs.headers_for_facet_))  { }
 
     cpp_inclusion_manager(const sml::model& model,
         const cpp_location_manager& location_manager,
-        const config::cpp_settings settings);
+        const config::cpp_settings& settings);
 
 private:
     bool has_versioned_dependency(const sml::pod& pod, cpp_facet_types ft,
@@ -177,7 +177,7 @@ private:
     const sml::model model_;
     const cpp_location_manager location_manager_;
     const config::cpp_settings settings_;
-    bool disable_io_;
+    const bool io_enabled_;
     std::map<cpp_facet_types, std::list<std::string> > headers_for_facet_;
 };
 

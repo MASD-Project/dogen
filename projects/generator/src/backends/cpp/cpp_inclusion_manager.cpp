@@ -47,6 +47,11 @@ const std::string hash_combine("dogen/utility/hash/combine.hpp");
 const std::string generator_include("dogen/utility/test_data/generator.hpp");
 const std::string sequence_include("dogen/utility/test_data/sequence.hpp");
 
+using dogen::generator::backends::cpp::cpp_facet_types;
+bool io_enabled(const std::set<cpp_facet_types>& f) {
+    return f.find(cpp_facet_types::io) != f.end();
+}
+
 }
 
 namespace dogen {
@@ -56,17 +61,15 @@ namespace cpp {
 
 cpp_inclusion_manager::cpp_inclusion_manager(const sml::model& model,
     const cpp_location_manager& location_manager,
-    const config::cpp_settings settings)
-    : model_(model), location_manager_(location_manager), settings_(settings) {
-
-    const auto f(settings_.enabled_facets());
-    disable_io_ = f.find(cpp_facet_types::io) == f.end();
+    const config::cpp_settings& settings)
+    : model_(model), location_manager_(location_manager), settings_(settings),
+      io_enabled_(io_enabled(settings_.enabled_facets())) {
 
     BOOST_LOG_SEV(lg, debug)
         << "Initial configuration:"
         << " disable_versioning: " << settings_.disable_versioning()
         << " use_integrated_io: " << settings_.use_integrated_io()
-        << " disable_io: " << disable_io_
+        << " io_enabled: " << io_enabled_
         << " model name: " << model_.name();
 }
 
@@ -213,11 +216,11 @@ has_versioned_dependency(const sml::pod& /*pod*/, cpp_facet_types ft,
 
     // FIXME: hacked for now
     if (is_implementation && ft == cpp_facet_types::domain &&
-        (disable_io_ || settings_.use_integrated_io()))
+        (!io_enabled_ || settings_.use_integrated_io()))
         return false;
 
     // if (is_implementation && ft == cpp_facet_types::domain &&
-    //     (disable_io_ || !use_integrated_io_))
+    //     (!io_enabled_ || !use_integrated_io_))
     //     return false;
 
     const bool is_header(flt == cpp_file_types::header);
