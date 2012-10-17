@@ -35,7 +35,6 @@
 #include "dogen/utility/log/scoped_life_cycle_manager.hpp"
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/exception/utility_exception.hpp"
-#include "dogen/utility/io/hex_dumper_io.hpp"
 
 namespace this_is_a_test {
 
@@ -221,55 +220,6 @@ BOOST_AUTO_TEST_CASE(exception_shall_be_usable_as_a_boost_exception) {
                                  << boost::diagnostic_information(e);
         BOOST_CHECK(true);
     }
-}
-
-BOOST_AUTO_TEST_CASE(exericise_hex_dumper_with_a_non_multiple_of_16) {
-    SETUP_TEST_LOG_SOURCE("exericise_hex_dumper_with_a_non_multiple_of_16");
-    const unsigned int size(1000);
-    char str[size];
-    for (unsigned int i(0); i < size; ++i) {
-        str[i] = char(i % 256);
-    }
-    std::ostringstream stream;
-    dogen::utility::streaming::hex_dumper(stream, str, size);
-    BOOST_LOG_SEV(lg, debug) << stream.str();
-    BOOST_CHECK(true);
-}
-
-BOOST_AUTO_TEST_CASE(exericise_hex_dumper_with_a_multiple_of_16) {
-    SETUP_TEST_LOG_SOURCE("exericise_hex_dumper_with_a_multiple_of_16");
-    const unsigned int size(64);
-    char str[size];
-    for (unsigned int i(0); i < size; ++i) {
-        str[i] = char(i % 256);
-    }
-    std::ostringstream stream;
-    dogen::utility::streaming::hex_dumper(stream, str, size);
-    BOOST_LOG_SEV(lg, debug) << stream.str();
-    BOOST_CHECK(true);
-}
-
-BOOST_AUTO_TEST_CASE(exericise_hex_dumper_with_less_than_16) {
-    SETUP_TEST_LOG_SOURCE("exericise_hex_dumper_with_a_multiple_of_16");
-    const unsigned int size(10);
-    char str[size];
-    for (unsigned int i(0); i < size; ++i) {
-        str[i] = char(i % 256);
-    }
-    std::ostringstream stream;
-    dogen::utility::streaming::hex_dumper(stream, str, size);
-    BOOST_LOG_SEV(lg, debug) << stream.str();
-    BOOST_CHECK(true);
-}
-
-BOOST_AUTO_TEST_CASE(exericise_hex_dumper_with_an_empty_buffer) {
-    SETUP_TEST_LOG_SOURCE("exericise_hex_dumper_with_an_empty_buffer");
-    const unsigned int size(0);
-    char str[1];
-    std::ostringstream stream;
-    dogen::utility::streaming::hex_dumper(stream, str, size);
-    BOOST_LOG_SEV(lg, debug) << stream.str();
-    BOOST_CHECK(true);
 }
 
 BOOST_AUTO_TEST_CASE(exercise_vector_inserter) {
