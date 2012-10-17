@@ -18,9 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include <ostream>
 #include "dogen/dmp/domain/package1/first_class.hpp"
-#include "dogen/dmp/io/versioned_key_io.hpp"
 #include "dogen/utility/io/jsonify_io.hpp"
 
 namespace dogen {
@@ -38,16 +36,6 @@ first_class::first_class(
     : public_attribute_(public_attribute),
       private_attribute_(private_attribute),
       versioned_key_(versioned_key) { }
-
-void first_class::to_stream(std::ostream& stream) const {
-
-    stream << " { "
-           << "\"__type__\": " << "\"first_class\"" << ", "
-           << "\"public_attribute\": " << public_attribute_ << ", "
-           << "\"private_attribute\": " << private_attribute_ << ", "
-           << "\"versioned_key\": " << versioned_key_
-           << " }";
-}
 
 void first_class::swap(first_class& other) {
     std::swap(public_attribute_, other.public_attribute_);

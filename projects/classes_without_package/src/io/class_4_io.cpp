@@ -20,12 +20,16 @@
  */
 #include <ostream>
 #include "dogen/classes_without_package/io/class_4_io.hpp"
+#include "dogen/classes_without_package/io/versioned_key_io.hpp"
 
 namespace dogen {
 namespace classes_without_package {
 
 std::ostream& operator<<(std::ostream& stream, class_4 value) {
-    value.to_stream(stream);
+    stream << " { "
+           << "\"__type__\": " << "\"class_4\"" << ", "
+           << "\"versioned_key\": " << value.versioned_key()
+           << " }";
     return(stream);
 }
 

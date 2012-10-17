@@ -18,7 +18,6 @@
  * MA 02110-1301, USA.
  *
  */
-#include <ostream>
 #include "dogen/disable_complete_constructor/domain/versioned_key.hpp"
 #include "dogen/utility/io/jsonify_io.hpp"
 
@@ -28,15 +27,6 @@ namespace disable_complete_constructor {
 versioned_key::versioned_key()
     : id_(static_cast<unsigned int>(0)),
       version_(static_cast<unsigned int>(0)) { }
-
-void versioned_key::to_stream(std::ostream& stream) const {
-
-    stream << " { "
-           << "\"__type__\": " << "\"versioned_key\"" << ", "
-           << "\"id\": " << id_ << ", "
-           << "\"version\": " << version_
-           << " }";
-}
 
 unversioned_key versioned_key::to_unversioned() const {
     unversioned_key uk;

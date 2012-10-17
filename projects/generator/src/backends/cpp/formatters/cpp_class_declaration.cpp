@@ -32,7 +32,25 @@ cpp_class_declaration::cpp_class_declaration(std::ostream& stream)
     : stream_(stream), utility_(stream_, indenter_) { }
 
 void cpp_class_declaration::open_class(const class_view_model& vm) {
-    stream_ << indenter_ << "class " << vm.name() << " {" << std::endl;
+    stream_ << indenter_ << "class " << vm.name();
+
+    const auto parents(vm.parents());
+    if (!parents.empty()) {
+        stream_ << " :";
+
+        if (parents.size() == 1) {
+            stream_ << " public " << parents.front().name();
+        } else {
+            bool is_first(true);
+            cpp_positive_indenter_scope s(indenter_);
+            for (const auto p : vm.parents()) {
+                stream_ << (is_first ? "" : ",") << std::endl << indenter_;
+                stream_ << " public " << p.name();
+                is_first = false;
+            }
+        }
+    }
+    stream_ << " {" << std::endl;
 }
 
 void cpp_class_declaration::close_class() {
@@ -77,6 +95,15 @@ void cpp_class_declaration::complete_constructor(const class_view_model& vm) {
     utility_.blank_line();
 }
 
+void cpp_class_declaration::destructor(const class_view_model& vm) {
+    // need to define a destructor for derived classes due to strange
+    // clang errors
+    if (!vm.is_parent() && !vm.parents().empty()) {
+        stream_ << indenter_ << "virtual ~" << vm.name()
+                << "() noexcept { }" << std::endl;
+    }
+}
+
 void cpp_class_declaration::compiler_generated_constuctors(const class_view_model& vm) {
     utility_.public_access_specifier();
 
@@ -85,9 +112,16 @@ void cpp_class_declaration::compiler_generated_constuctors(const class_view_mode
 
     stream_ << indenter_ << vm.name() << "(const " << vm.name()
             << "&) = default;" << std::endl
-            << indenter_ << "~" << vm.name() << "() = default;" << std::endl
             << indenter_ << vm.name() << "(" << vm.name() << "&&) = default;"
             << std::endl;
+
+    if (vm.is_parent()) {
+        stream_ << indenter_ << "virtual ~" << vm.name()
+                << "() noexcept = default;" << std::endl;
+    } else if (vm.parents().empty()) {
+        stream_ << indenter_ << "~" << vm.name() << "() = default;"
+                << std::endl;
+    }
 
     if (vm.properties().empty()) {
         stream_ << indenter_ << vm.name() << "& operator=(const " << vm.name()
@@ -175,10 +209,20 @@ void cpp_class_declaration::equality(const class_view_model& vm) {
     utility_.blank_line();
 }
 
-void cpp_class_declaration::to_stream() {
+void cpp_class_declaration::to_stream(const class_view_model& vm) {
+    if (!vm.is_parent() && vm.parents().empty())
+        return;
+
     utility_.public_access_specifier();
-    stream_ << indenter_ << "void to_stream(std::ostream& stream) const;"
-            << std::endl;
+    if (vm.is_parent()) {
+        stream_ << indenter_
+                << "virtual void to_stream(std::ostream& stream) const;"
+                << std::endl;
+    } else {
+        stream_ << indenter_
+                << "void to_stream(std::ostream& stream) const override;"
+                << std::endl;
+    }
     utility_.blank_line();
 }
 

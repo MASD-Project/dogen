@@ -174,36 +174,44 @@ void cpp_inclusion_manager::append_versioning_dependencies(
      * IO.
      */
     const bool is_implementation(flt == cpp_file_types::implementation);
-    // FIXME: just to keep existing behaviour.
-    // const bool iio(settings_.use_integrated_io());
-    const bool rule1(is_implementation && is_domain && io_enabled_/* && iio*/);
-    if (rule1)
+    const bool iio(settings_.use_integrated_io());
+    const bool rule2(is_implementation && is_domain && io_enabled_ && iio);
+    if (rule2)
         version_facet = cpp_facet_types::io;
 
     /*
-     * rule 3: test data implementation requires access to version in
+     * rule 3: io implementation needs access to the versioned key
+     * IO header file when IO is enabled and we are not using integrated
+     * IO.
+     */
+    const bool is_io(ft == cpp_facet_types::io);
+    const bool rule3(is_implementation && is_io && io_enabled_ && !iio);
+
+    /*
+     * rule 4: test data implementation requires access to version in
      * order to generate versioned key objects.
      */
     const bool is_test_data(ft == cpp_facet_types::test_data);
-    const bool rule2(is_implementation && is_test_data);
+    const bool rule4(is_implementation && is_test_data);
 
     /*
-     * rule 4: serialization and hash headers need versioned key in
+     * rule 5: serialization and hash headers need versioned key in
      * order to serialise and hash these objects
      * (respectively). Domain needs the version for its property.
      */
     const bool is_hash(ft == cpp_facet_types::hash);
     const bool is_serialization(ft == cpp_facet_types::serialization);
-    const bool rule3(is_header && (is_domain || is_hash || is_serialization));
+    const bool rule5(is_header && (is_domain || is_hash || is_serialization));
 
-    if (rule1 || rule2 || rule3)
+    if (rule2 || rule3 || rule4 || rule5)
         il.user.push_back(versioned_dependency(version_facet));
 }
 
 void cpp_inclusion_manager::
-append_implementation_dependencies(const bool requires_stream_manipulators,
-    const cpp_facet_types ft, const cpp_file_types flt,
-    inclusion_lists& il) const {
+append_implementation_dependencies(const cpp_facet_types ft,
+    const cpp_file_types flt, inclusion_lists& il,
+    const bool requires_stream_manipulators,
+    const bool is_parent_or_child) const {
 
     /*
      * STL
@@ -212,7 +220,10 @@ append_implementation_dependencies(const bool requires_stream_manipulators,
     const bool is_header(flt == cpp_file_types::header);
     const bool is_domain(ft == cpp_facet_types::domain);
     const bool is_io(ft == cpp_facet_types::io);
-    if (is_header && (is_domain || is_io))
+    const bool domain_with_io(is_domain &&
+        (settings_.use_integrated_io() || is_parent_or_child));
+
+    if (is_header && io_enabled_ && (domain_with_io || is_io))
         il.system.push_back(iosfwd);
 
     // algorithm
@@ -221,7 +232,8 @@ append_implementation_dependencies(const bool requires_stream_manipulators,
 
     // ostream
     const bool is_implementation(flt == cpp_file_types::implementation);
-    if (is_implementation && (is_domain || is_io))
+    const bool io_without_iio(is_io && !settings_.use_integrated_io());
+    if (is_implementation && io_enabled_ && (domain_with_io || io_without_iio))
         il.system.push_back(ostream);
 
     // functional
@@ -251,11 +263,8 @@ append_implementation_dependencies(const bool requires_stream_manipulators,
         il.system.push_back(boost_nvp);
 
     // state saver
-    // FIXME: IIO problems, hacked for now
-    // ((is_domain && settings_.use_integrated_io()) ||
-    // (is_io && !settings_.use_integrated_io()))
     if (is_implementation && io_enabled_ && requires_stream_manipulators &&
-        is_domain)
+        (domain_with_io || io_without_iio))
         il.system.push_back(state_saver);
 
     /*
@@ -295,14 +304,16 @@ append_implementation_dependencies(const bool requires_stream_manipulators,
 }
 
 void cpp_inclusion_manager::append_relationship_dependencies(
-    const std::list<dogen::sml::qualified_name>& /*names*/,
-    const cpp_facet_types /*ft*/, const cpp_file_types /*flt*/,
-    inclusion_lists& /*il*/) const {
+    const std::list<dogen::sml::qualified_name>& names,
+    const cpp_facet_types ft, const cpp_file_types flt,
+    inclusion_lists& il) const {
 
-    // FIXME: handle properties etc.
-    // for(const auto n : names)
-    //
-    //     r.push_back(p.type_name());
+    for(const auto n : names) {
+        const bool is_primitive(n.meta_type() == sml::meta_types::primitive);
+
+        if (flt == cpp_file_types::header && !is_primitive)
+            il.user.push_back(header_dependency(n, ft));
+    }
 }
 
 void cpp_inclusion_manager::
@@ -330,10 +341,15 @@ append_self_dependencies(dogen::sml::qualified_name name,
 bool cpp_inclusion_manager::requires_stream_manipulators(
     const std::list<dogen::sml::qualified_name>& names) const {
     using dogen::sml::qualified_name;
-    const auto i(boost::find_if(names, [](const qualified_name& n) {
-                return n.type_name() == bool_type;
-            }));
-    return i != names.end();
+    for (const auto n : names) {
+        if (n.type_name() == bool_type)
+            return true;
+    }
+    return false;
+}
+
+bool cpp_inclusion_manager::is_parent_or_child(const dogen::sml::pod& p) const {
+    return p.parent_name() || p.is_parent();
 }
 
 inclusion_lists
@@ -353,8 +369,9 @@ includes_for_pod(const sml::pod& pod, cpp_facet_types ft, cpp_file_types flt,
     append_versioning_dependencies(ft, flt, at, r);
 
     const auto names(pod_to_qualified_names(pod));
-    bool rsm(requires_stream_manipulators(names));
-    append_implementation_dependencies(rsm, ft, flt, r);
+    const bool rsm(requires_stream_manipulators(names));
+    const bool pc(is_parent_or_child(pod));
+    append_implementation_dependencies(ft, flt, r, rsm, pc);
     append_relationship_dependencies(names, ft, flt, r);
     append_self_dependencies(pod.name(), ft, flt, r);
 
@@ -368,8 +385,7 @@ includes_for_versioning(const std::string& name, cpp_facet_types ft,
     inclusion_lists r;
     append_versioning_dependencies(ft, flt, at, r);
 
-    const bool requires_manipulators(false);
-    append_implementation_dependencies(requires_manipulators, ft, flt, r);
+    append_implementation_dependencies(ft, flt, r);
 
     sml::qualified_name n;
     n.external_package_path(model_.external_package_path());

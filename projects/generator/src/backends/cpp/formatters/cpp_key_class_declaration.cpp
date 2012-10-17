@@ -37,6 +37,7 @@ cpp_key_class_declaration(std::ostream& stream,
 void cpp_key_class_declaration::
 hand_crafted_constructors(const class_view_model& vm) {
     default_constructor(vm);
+    destructor(vm);
     if (!disable_complete_constructor_)
         complete_constructor(vm);
 }
@@ -59,7 +60,7 @@ void cpp_key_class_declaration::format(const class_view_model& vm) {
         hand_crafted_constructors(vm);
         friends(vm);
         if (!disable_io_)
-            to_stream();
+            to_stream(vm);
         to_unversioned_key();
         getters_and_setters(vm);
         equality(vm);

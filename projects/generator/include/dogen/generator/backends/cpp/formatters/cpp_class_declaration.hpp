@@ -57,11 +57,12 @@ protected:
     void compiler_generated_constuctors(const class_view_model& vm);
     void default_constructor(const class_view_model& vm);
     void complete_constructor(const class_view_model& vm);
+    void destructor(const class_view_model& vm);
     void friends(const class_view_model& vm);
     void getters_and_setters(const class_view_model& vm);
     void member_variables(const class_view_model& vm);
     void equality(const class_view_model& vm);
-    void to_stream();
+    void to_stream(const class_view_model& vm);
     void swap_and_assignment(const class_view_model& vm);
 
 public:

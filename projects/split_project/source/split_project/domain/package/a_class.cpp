@@ -18,9 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include <ostream>
 #include "dogen/split_project/domain/package/a_class.hpp"
-#include "dogen/split_project/io/versioned_key_io.hpp"
 #include "dogen/utility/io/jsonify_io.hpp"
 
 namespace dogen {
@@ -29,14 +27,6 @@ namespace package {
 
 a_class::a_class(dogen::split_project::versioned_key versioned_key)
     : versioned_key_(versioned_key) { }
-
-void a_class::to_stream(std::ostream& stream) const {
-
-    stream << " { "
-           << "\"__type__\": " << "\"a_class\"" << ", "
-           << "\"versioned_key\": " << versioned_key_
-           << " }";
-}
 
 void a_class::swap(a_class& other) {
     std::swap(versioned_key_, other.versioned_key_);

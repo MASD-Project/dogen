@@ -18,9 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include <ostream>
 #include "dogen/two_layers_with_objects/domain/Package_2/class_2.hpp"
-#include "dogen/two_layers_with_objects/io/versioned_key_io.hpp"
 #include "dogen/utility/io/jsonify_io.hpp"
 
 namespace dogen {
@@ -29,14 +27,6 @@ namespace Package_2 {
 
 class_2::class_2(dogen::two_layers_with_objects::versioned_key versioned_key)
     : versioned_key_(versioned_key) { }
-
-void class_2::to_stream(std::ostream& stream) const {
-
-    stream << " { "
-           << "\"__type__\": " << "\"class_2\"" << ", "
-           << "\"versioned_key\": " << versioned_key_
-           << " }";
-}
 
 void class_2::swap(class_2& other) {
     std::swap(versioned_key_, other.versioned_key_);

@@ -26,7 +26,6 @@
 #endif
 
 #include <algorithm>
-#include <iosfwd>
 #include "dogen/disable_facet_folders/versioned_key.hpp"
 
 namespace dogen {
@@ -38,8 +37,8 @@ class first_class_serializer;
 class first_class {
 public:
     first_class(const first_class&) = default;
-    ~first_class() = default;
     first_class(first_class&&) = default;
+    ~first_class() = default;
 
 public:
     first_class();
@@ -52,9 +51,6 @@ public:
 
 public:
     friend class dogen::disable_facet_folders::package1::first_class_serializer;
-
-public:
-    void to_stream(std::ostream& stream) const;
 
 public:
     int public_attribute() const {

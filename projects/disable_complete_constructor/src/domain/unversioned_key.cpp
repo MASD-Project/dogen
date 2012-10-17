@@ -18,7 +18,6 @@
  * MA 02110-1301, USA.
  *
  */
-#include <ostream>
 #include "dogen/disable_complete_constructor/domain/unversioned_key.hpp"
 #include "dogen/utility/io/jsonify_io.hpp"
 
@@ -27,14 +26,6 @@ namespace disable_complete_constructor {
 
 unversioned_key::unversioned_key()
     : id_(static_cast<unsigned int>(0)) { }
-
-void unversioned_key::to_stream(std::ostream& stream) const {
-
-    stream << " { "
-           << "\"__type__\": " << "\"unversioned_key\"" << ", "
-           << "\"id\": " << id_
-           << " }";
-}
 
 void unversioned_key::swap(unversioned_key& other) {
     std::swap(id_, other.id_);

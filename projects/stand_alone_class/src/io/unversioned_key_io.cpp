@@ -25,7 +25,10 @@ namespace dogen {
 namespace stand_alone_class {
 
 std::ostream& operator<<(std::ostream& stream, unversioned_key value) {
-    value.to_stream(stream);
+    stream << " { "
+           << "\"__type__\": " << "\"unversioned_key\"" << ", "
+           << "\"id\": " << value.id()
+           << " }";
     return(stream);
 }
 

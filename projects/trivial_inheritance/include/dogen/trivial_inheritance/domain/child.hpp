@@ -27,6 +27,7 @@
 
 #include <algorithm>
 #include <iosfwd>
+#include "dogen/trivial_inheritance/domain/parent.hpp"
 #include "dogen/trivial_inheritance/domain/versioned_key.hpp"
 
 namespace dogen {
@@ -34,13 +35,13 @@ namespace trivial_inheritance {
 
 class child_serializer;
 
-class child {
+class child : public parent {
 public:
     child() = default;
     child(const child&) = default;
-    ~child() = default;
     child(child&&) = default;
 
+    virtual ~child() noexcept { }
 public:
     explicit child(dogen::trivial_inheritance::versioned_key versioned_key);
 
@@ -48,7 +49,7 @@ public:
     friend class dogen::trivial_inheritance::child_serializer;
 
 public:
-    void to_stream(std::ostream& stream) const;
+    void to_stream(std::ostream& stream) const override;
 
 public:
     dogen::trivial_inheritance::versioned_key versioned_key() const {

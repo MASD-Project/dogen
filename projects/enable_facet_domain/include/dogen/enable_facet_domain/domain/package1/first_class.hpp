@@ -26,7 +26,6 @@
 #endif
 
 #include <algorithm>
-#include <iosfwd>
 #include "dogen/enable_facet_domain/domain/versioned_key.hpp"
 
 namespace dogen {
@@ -38,8 +37,8 @@ class first_class_serializer;
 class first_class {
 public:
     first_class(const first_class&) = default;
-    ~first_class() = default;
     first_class(first_class&&) = default;
+    ~first_class() = default;
 
 public:
     first_class();

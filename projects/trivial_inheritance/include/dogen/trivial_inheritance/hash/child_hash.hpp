@@ -27,6 +27,7 @@
 
 #include <functional>
 #include "dogen/trivial_inheritance/domain/child.hpp"
+#include "dogen/trivial_inheritance/hash/parent_hash.hpp"
 #include "dogen/trivial_inheritance/hash/versioned_key_hash.hpp"
 #include "dogen/utility/hash/combine.hpp"
 

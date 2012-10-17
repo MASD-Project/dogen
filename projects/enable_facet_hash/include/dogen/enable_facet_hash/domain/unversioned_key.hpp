@@ -26,7 +26,6 @@
 #endif
 
 #include <algorithm>
-#include <iosfwd>
 
 namespace dogen {
 namespace enable_facet_hash {
@@ -36,8 +35,8 @@ class unversioned_key_serializer;
 class unversioned_key {
 public:
     unversioned_key(const unversioned_key&) = default;
-    ~unversioned_key() = default;
     unversioned_key(unversioned_key&&) = default;
+    ~unversioned_key() = default;
 
 public:
     unversioned_key();

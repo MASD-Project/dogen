@@ -20,13 +20,19 @@
  */
 #include <ostream>
 #include "dogen/compressed/io/package1/first_class_io.hpp"
+#include "dogen/compressed/io/versioned_key_io.hpp"
 
 namespace dogen {
 namespace compressed {
 namespace package1 {
 
 std::ostream& operator<<(std::ostream& stream, first_class value) {
-    value.to_stream(stream);
+    stream << " { "
+           << "\"__type__\": " << "\"first_class\"" << ", "
+           << "\"public_attribute\": " << value.public_attribute() << ", "
+           << "\"private_attribute\": " << value.private_attribute() << ", "
+           << "\"versioned_key\": " << value.versioned_key()
+           << " }";
     return(stream);
 }
 

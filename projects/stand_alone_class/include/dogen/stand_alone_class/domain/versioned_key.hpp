@@ -26,7 +26,6 @@
 #endif
 
 #include <algorithm>
-#include <iosfwd>
 #include "dogen/stand_alone_class/domain/unversioned_key.hpp"
 
 namespace dogen {
@@ -37,8 +36,8 @@ class versioned_key_serializer;
 class versioned_key {
 public:
     versioned_key(const versioned_key&) = default;
-    ~versioned_key() = default;
     versioned_key(versioned_key&&) = default;
+    ~versioned_key() = default;
 
 public:
     versioned_key();
@@ -50,9 +49,6 @@ public:
 
 public:
     friend class dogen::stand_alone_class::versioned_key_serializer;
-
-public:
-    void to_stream(std::ostream& stream) const;
 
 public:
     unversioned_key to_unversioned() const;

@@ -26,7 +26,6 @@
 #endif
 
 #include <algorithm>
-#include <iosfwd>
 
 namespace dogen {
 namespace disable_facet_folders {
@@ -36,8 +35,8 @@ class unversioned_key_serializer;
 class unversioned_key {
 public:
     unversioned_key(const unversioned_key&) = default;
-    ~unversioned_key() = default;
     unversioned_key(unversioned_key&&) = default;
+    ~unversioned_key() = default;
 
 public:
     unversioned_key();
@@ -47,9 +46,6 @@ public:
 
 public:
     friend class dogen::disable_facet_folders::unversioned_key_serializer;
-
-public:
-    void to_stream(std::ostream& stream) const;
 
 public:
     unsigned int id() const {

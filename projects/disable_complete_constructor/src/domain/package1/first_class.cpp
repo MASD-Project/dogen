@@ -18,9 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include <ostream>
 #include "dogen/disable_complete_constructor/domain/package1/first_class.hpp"
-#include "dogen/disable_complete_constructor/io/versioned_key_io.hpp"
 #include "dogen/utility/io/jsonify_io.hpp"
 
 namespace dogen {
@@ -30,16 +28,6 @@ namespace package1 {
 first_class::first_class()
     : public_attribute_(static_cast<int>(0)),
       private_attribute_(static_cast<int>(0)) { }
-
-void first_class::to_stream(std::ostream& stream) const {
-
-    stream << " { "
-           << "\"__type__\": " << "\"first_class\"" << ", "
-           << "\"public_attribute\": " << public_attribute_ << ", "
-           << "\"private_attribute\": " << private_attribute_ << ", "
-           << "\"versioned_key\": " << versioned_key_
-           << " }";
-}
 
 void first_class::swap(first_class& other) {
     std::swap(public_attribute_, other.public_attribute_);

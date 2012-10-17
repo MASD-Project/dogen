@@ -28,6 +28,7 @@
 #include <boost/optional.hpp>
 #include <pqxx/connection.hxx>
 #include <vector>
+#include "dogen/trivial_inheritance/database/parent_db.hpp"
 #include "dogen/trivial_inheritance/domain/child.hpp"
 
 namespace dogen {

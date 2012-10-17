@@ -26,7 +26,6 @@
 #endif
 
 #include <algorithm>
-#include <iosfwd>
 #include "dogen/all_primitives/domain/versioned_key.hpp"
 
 namespace dogen {
@@ -37,8 +36,8 @@ class a_class_serializer;
 class a_class {
 public:
     a_class(const a_class&) = default;
-    ~a_class() = default;
     a_class(a_class&&) = default;
+    ~a_class() = default;
 
 public:
     a_class();
@@ -60,9 +59,6 @@ public:
 
 public:
     friend class dogen::all_primitives::a_class_serializer;
-
-public:
-    void to_stream(std::ostream& stream) const;
 
 public:
     bool bool_property() const {

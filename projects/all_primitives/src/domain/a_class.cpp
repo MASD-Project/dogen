@@ -18,10 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include <boost/io/ios_state.hpp>
-#include <ostream>
 #include "dogen/all_primitives/domain/a_class.hpp"
-#include "dogen/all_primitives/io/versioned_key_io.hpp"
 #include "dogen/utility/io/jsonify_io.hpp"
 
 namespace dogen {
@@ -65,28 +62,6 @@ a_class::a_class(
       short_property_(short_property),
       ushort_property_(ushort_property),
       versioned_key_(versioned_key) { }
-
-void a_class::to_stream(std::ostream& stream) const {
-    boost::io::ios_flags_saver ifs(stream);
-    stream << std::boolalpha;
-
-
-    stream << " { "
-           << "\"__type__\": " << "\"a_class\"" << ", "
-           << "\"bool_property\": " << bool_property_ << ", "
-           << "\"char_property\": " << "\"" << char_property_ << "\"" << ", "
-           << "\"uchar_property\": " << "\"" << uchar_property_ << "\"" << ", "
-           << "\"int_property\": " << int_property_ << ", "
-           << "\"uint_property\": " << uint_property_ << ", "
-           << "\"long_property\": " << long_property_ << ", "
-           << "\"ulong_property\": " << ulong_property_ << ", "
-           << "\"long_long_property\": " << long_long_property_ << ", "
-           << "\"ulong_long_property\": " << ulong_long_property_ << ", "
-           << "\"short_property\": " << short_property_ << ", "
-           << "\"ushort_property\": " << ushort_property_ << ", "
-           << "\"versioned_key\": " << versioned_key_
-           << " }";
-}
 
 void a_class::swap(a_class& other) {
     std::swap(bool_property_, other.bool_property_);

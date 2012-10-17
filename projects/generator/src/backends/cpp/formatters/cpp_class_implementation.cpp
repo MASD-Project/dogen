@@ -26,7 +26,6 @@ namespace {
 
 // FIXME: until we add support to indenter.
 const std::string special_indent("       ");
-const std::string jsonify_using("using dogen::utility::streaming::jsonify;");
 const std::string type("__type__");
 const std::string inserter("<< ");
 const std::string space_inserter(" << ");
@@ -115,6 +114,9 @@ void cpp_class_implementation::complete_constructor(const class_view_model& vm) 
 }
 
 void cpp_class_implementation::to_stream(const class_view_model& vm) {
+    if (!vm.is_parent() || vm.parents().empty())
+        return;
+
     stream_ << "void " << vm.name()
             << "::to_stream(std::ostream& stream) const ";
 

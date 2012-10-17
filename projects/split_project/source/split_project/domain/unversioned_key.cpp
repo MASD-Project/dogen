@@ -18,7 +18,6 @@
  * MA 02110-1301, USA.
  *
  */
-#include <ostream>
 #include "dogen/split_project/domain/unversioned_key.hpp"
 #include "dogen/utility/io/jsonify_io.hpp"
 
@@ -30,14 +29,6 @@ unversioned_key::unversioned_key()
 
 unversioned_key::unversioned_key(unsigned int id)
     : id_(id) { }
-
-void unversioned_key::to_stream(std::ostream& stream) const {
-
-    stream << " { "
-           << "\"__type__\": " << "\"unversioned_key\"" << ", "
-           << "\"id\": " << id_
-           << " }";
-}
 
 void unversioned_key::swap(unversioned_key& other) {
     std::swap(id_, other.id_);

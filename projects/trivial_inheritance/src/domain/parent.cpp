@@ -20,7 +20,6 @@
  */
 #include <ostream>
 #include "dogen/trivial_inheritance/domain/parent.hpp"
-#include "dogen/trivial_inheritance/io/versioned_key_io.hpp"
 #include "dogen/utility/io/jsonify_io.hpp"
 
 namespace dogen {
@@ -28,14 +27,6 @@ namespace trivial_inheritance {
 
 parent::parent(dogen::trivial_inheritance::versioned_key versioned_key)
     : versioned_key_(versioned_key) { }
-
-void parent::to_stream(std::ostream& stream) const {
-
-    stream << " { "
-           << "\"__type__\": " << "\"parent\"" << ", "
-           << "\"versioned_key\": " << versioned_key_
-           << " }";
-}
 
 void parent::swap(parent& other) {
     std::swap(versioned_key_, other.versioned_key_);

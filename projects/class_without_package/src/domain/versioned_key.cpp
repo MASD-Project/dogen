@@ -18,7 +18,6 @@
  * MA 02110-1301, USA.
  *
  */
-#include <ostream>
 #include "dogen/class_without_package/domain/versioned_key.hpp"
 #include "dogen/utility/io/jsonify_io.hpp"
 
@@ -34,15 +33,6 @@ versioned_key::versioned_key(
     unsigned int version)
     : id_(id),
       version_(version) { }
-
-void versioned_key::to_stream(std::ostream& stream) const {
-
-    stream << " { "
-           << "\"__type__\": " << "\"versioned_key\"" << ", "
-           << "\"id\": " << id_ << ", "
-           << "\"version\": " << version_
-           << " }";
-}
 
 unversioned_key versioned_key::to_unversioned() const {
     return unversioned_key(id());

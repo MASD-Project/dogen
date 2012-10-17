@@ -165,11 +165,11 @@ BOOST_AUTO_TEST_CASE(view_model_transformer_correctly_transforms_domain_files) {
         if (f.facet_type() == cpp_facet_types::domain &&
             f.file_type() == cpp_file_types::header &&
             f.aspect_type() != cpp_aspect_types::includers)
-            BOOST_CHECK(f.system_includes().size() == 2);
+            BOOST_CHECK(f.system_includes().size() == 1);
         else if (f.facet_type() == cpp_facet_types::domain &&
             f.file_type() == cpp_file_types::implementation &&
             f.aspect_type() != cpp_aspect_types::includers)
-            BOOST_CHECK(f.system_includes().size() == 1);
+            BOOST_CHECK(f.system_includes().empty());
         else
             BOOST_CHECK(f.system_includes().empty());
 

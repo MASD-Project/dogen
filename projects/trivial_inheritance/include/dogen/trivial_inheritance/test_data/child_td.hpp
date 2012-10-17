@@ -26,6 +26,7 @@
 #endif
 
 #include "dogen/trivial_inheritance/domain/child.hpp"
+#include "dogen/trivial_inheritance/test_data/parent_td.hpp"
 #include "dogen/utility/test_data/generator.hpp"
 #include "dogen/utility/test_data/sequence.hpp"
 

@@ -26,7 +26,6 @@
 #endif
 
 #include <algorithm>
-#include <iosfwd>
 #include "dogen/two_layers_with_objects/domain/versioned_key.hpp"
 
 namespace dogen {
@@ -39,17 +38,14 @@ class class_2 {
 public:
     class_2() = default;
     class_2(const class_2&) = default;
-    ~class_2() = default;
     class_2(class_2&&) = default;
+    ~class_2() = default;
 
 public:
     explicit class_2(dogen::two_layers_with_objects::versioned_key versioned_key);
 
 public:
     friend class dogen::two_layers_with_objects::Package_2::class_2_serializer;
-
-public:
-    void to_stream(std::ostream& stream) const;
 
 public:
     dogen::two_layers_with_objects::versioned_key versioned_key() const {

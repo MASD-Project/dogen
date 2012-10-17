@@ -18,7 +18,6 @@
  * MA 02110-1301, USA.
  *
  */
-#include <ostream>
 #include "dogen/enable_facet_hash/domain/package1/first_class.hpp"
 #include "dogen/utility/io/jsonify_io.hpp"
 

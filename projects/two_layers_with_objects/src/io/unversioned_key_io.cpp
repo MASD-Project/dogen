@@ -25,7 +25,10 @@ namespace dogen {
 namespace two_layers_with_objects {
 
 std::ostream& operator<<(std::ostream& stream, unversioned_key value) {
-    value.to_stream(stream);
+    stream << " { "
+           << "\"__type__\": " << "\"unversioned_key\"" << ", "
+           << "\"id\": " << value.id()
+           << " }";
     return(stream);
 }
 

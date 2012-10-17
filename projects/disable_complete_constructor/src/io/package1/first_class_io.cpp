@@ -20,13 +20,19 @@
  */
 #include <ostream>
 #include "dogen/disable_complete_constructor/io/package1/first_class_io.hpp"
+#include "dogen/disable_complete_constructor/io/versioned_key_io.hpp"
 
 namespace dogen {
 namespace disable_complete_constructor {
 namespace package1 {
 
 std::ostream& operator<<(std::ostream& stream, first_class value) {
-    value.to_stream(stream);
+    stream << " { "
+           << "\"__type__\": " << "\"first_class\"" << ", "
+           << "\"public_attribute\": " << value.public_attribute() << ", "
+           << "\"private_attribute\": " << value.private_attribute() << ", "
+           << "\"versioned_key\": " << value.versioned_key()
+           << " }";
     return(stream);
 }
 

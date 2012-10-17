@@ -185,28 +185,24 @@ BOOST_AUTO_TEST_CASE(processing_one_pod_model_with_default_configuration_generat
 
     const auto hs(i[header_system]);
     BOOST_LOG_SEV(lg, debug) << "header  system dependencies: " << hs;
-    BOOST_REQUIRE(hs.size() == 2);
+    BOOST_REQUIRE(hs.size() == 1);
     for (const auto s : hs) {
-        BOOST_CHECK(
-            boost::ends_with(s, iosfwd) ||
-            boost::ends_with(s, algorithm));
+        BOOST_CHECK(boost::ends_with(s, algorithm));
     }
 
     // implementation
     const auto iu(i[implementation_user]);
     BOOST_LOG_SEV(lg, debug) << "implementation user dependencies: " << iu;
-    BOOST_REQUIRE(iu.size() == 3);
+    BOOST_REQUIRE(iu.size() == 2);
     for (const auto s : iu) {
         BOOST_CHECK(
             (boost::contains(s, pod_name) && boost::contains(s, domain)) ||
-            (boost::contains(s, versioned_key) && boost::contains(s, io)) ||
             (boost::contains(s, jsonify_include)));
     }
 
     const auto is(i[implementation_system]);
     BOOST_LOG_SEV(lg, debug) << "implementation system dependencies: " << is;
-    BOOST_REQUIRE(is.size() == 1);
-    BOOST_CHECK(boost::ends_with(is.front(), ostream));
+    BOOST_REQUIRE(is.empty());
 }
 
 BOOST_AUTO_TEST_CASE(processing_one_pod_model_with_default_configuration_generates_expected_io_includes) {
@@ -231,9 +227,12 @@ BOOST_AUTO_TEST_CASE(processing_one_pod_model_with_default_configuration_generat
     // implementation
     const auto iu(i[implementation_user]);
     BOOST_LOG_SEV(lg, debug) << "implementation user dependencies: " << iu;
-    BOOST_REQUIRE(iu.size() == 1);
-    BOOST_CHECK(asserter::assert_contains(pod_name, iu.front()));
-    BOOST_CHECK(asserter::assert_contains(io, iu.front()));
+    BOOST_REQUIRE(iu.size() == 2);
+    for (const auto s : iu) {
+        BOOST_CHECK(
+            (boost::contains(s, pod_name) && boost::contains(s, io)) ||
+            (boost::contains(s, versioned_key) && boost::contains(s, io)));
+    }
 
     const auto is(i[implementation_system]);
     BOOST_LOG_SEV(lg, debug) << "implementation system dependencies: " << is;

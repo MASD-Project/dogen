@@ -21,6 +21,7 @@
 #include <ostream>
 #include "dogen/generator/generation_failure.hpp"
 #include "dogen/utility/exception/invalid_enum_value.hpp"
+#include "dogen/generator/backends/cpp/formatters/cpp_inserter_implementation.hpp"
 #include "dogen/generator/backends/cpp/formatters/cpp_licence.hpp"
 #include "dogen/generator/backends/cpp/formatters/cpp_header_guards.hpp"
 #include "dogen/generator/backends/cpp/formatters/cpp_namespace.hpp"
@@ -36,8 +37,6 @@ namespace {
 
 const bool is_system(true);
 const bool is_user(false);
-const std::string jsonify_using("using dogen::utility::streaming::jsonify;");
-const std::string type("__type__");
 const std::string inserter("<< ");
 const std::string space_inserter(" << ");
 const std::string open_bracket(" {");
@@ -85,14 +84,21 @@ inserter_operator(const class_view_model& vm) {
     if (!use_integrated_io_ || disable_io_)
         return;
 
-    stream_ << indenter_ << "std::ostream& operator<<(std::ostream& stream, "
-            << vm.name() << " value) ";
+    stream_ << indenter_ << "std::ostream& operator<<(std::ostream& stream"
+            << ", const " << vm.name() << "& value) ";
 
     utility_.open_scope();
     {
         cpp_positive_indenter_scope s(indenter_);
-        stream_ << indenter_ << "value.to_stream(stream);" << std::endl;
-        stream_ << indenter_ << "return stream;" << std::endl;
+
+        if (vm.is_parent() || !vm.parents().empty()) {
+            stream_ << indenter_ << "value.to_stream(stream);" << std::endl
+                    << indenter_ << "return(stream);" << std::endl;
+        } else {
+            const bool inside_class(false);
+            cpp_inserter_implementation i(stream_, indenter_, inside_class);
+            i.format(vm);
+        }
     }
     utility_.close_scope();
     utility_.blank_line();

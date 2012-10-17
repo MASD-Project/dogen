@@ -20,13 +20,17 @@
  */
 #include <ostream>
 #include "dogen/split_project/io/package/a_class_io.hpp"
+#include "dogen/split_project/io/versioned_key_io.hpp"
 
 namespace dogen {
 namespace split_project {
 namespace package {
 
 std::ostream& operator<<(std::ostream& stream, a_class value) {
-    value.to_stream(stream);
+    stream << " { "
+           << "\"__type__\": " << "\"a_class\"" << ", "
+           << "\"versioned_key\": " << value.versioned_key()
+           << " }";
     return(stream);
 }
 

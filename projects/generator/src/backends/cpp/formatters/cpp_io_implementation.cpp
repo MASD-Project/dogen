@@ -20,7 +20,7 @@
  */
 #include <ostream>
 #include "dogen/generator/generation_failure.hpp"
-#include "dogen/generator/backends/cpp/formatters/cpp_io_implementation.hpp"
+#include "dogen/generator/backends/cpp/formatters/cpp_inserter_implementation.hpp"
 #include "dogen/generator/backends/cpp/formatters/cpp_qualified_name.hpp"
 #include "dogen/generator/backends/cpp/formatters/cpp_header_guards.hpp"
 #include "dogen/generator/backends/cpp/formatters/cpp_licence.hpp"
@@ -29,6 +29,7 @@
 #include "dogen/generator/backends/cpp/formatters/cpp_includes.hpp"
 #include "dogen/generator/backends/cpp/formatters/cpp_indenter.hpp"
 #include "dogen/generator/backends/cpp/formatters/cpp_utility.hpp"
+#include "dogen/generator/backends/cpp/formatters/cpp_io_implementation.hpp"
 
 namespace {
 
@@ -81,8 +82,14 @@ void io_implementation::format(const file_view_model& vm) {
         stream_ << cvm.name() << " value) ";
         utility_.open_scope();
 
-        stream_ << indenter_ << "value.to_stream(stream);" << std::endl
-                << indenter_ << "return(stream);" << std::endl;
+        if (cvm.is_parent() || !cvm.parents().empty()) {
+            stream_ << indenter_ << "value.to_stream(stream);" << std::endl
+                    << indenter_ << "return(stream);" << std::endl;
+        } else {
+            const bool inside_class(false);
+            cpp_inserter_implementation i(stream_, indenter_, inside_class);
+            i.format(cvm);
+        }
     }
     utility_.close_scope();
     utility_.blank_line();

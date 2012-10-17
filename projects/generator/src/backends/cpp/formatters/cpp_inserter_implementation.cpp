@@ -26,6 +26,7 @@ namespace {
 
 // FIXME: until we add support to indenter.
 const std::string special_indent("       ");
+const std::string parent("__parent_");
 const std::string type("__type__");
 const std::string inserter("<< ");
 const std::string space_inserter(" << ");
@@ -34,7 +35,14 @@ const std::string close_bracket(" }");
 const std::string colon(": ");
 const std::string semi_colon(";");
 const std::string space(" ");
+const std::string underscore("_");
 const std::string spaced_comma(", ");
+
+std::string parent_tag(const unsigned int number) {
+    std::ostringstream s;
+    s << parent << number << underscore << underscore;
+    return s.str();
+}
 
 }
 
@@ -53,15 +61,13 @@ cpp_inserter_implementation(std::ostream& stream, cpp_indenter& indenter,
 
 void cpp_inserter_implementation::format(const class_view_model& vm) {
     if (vm.requires_stream_manipulators()) {
-        stream_ << indenter_
-                << "boost::io::ios_flags_saver ifs(stream);"
+        stream_ << indenter_ << "boost::io::ios_flags_saver ifs(stream);"
                 << std::endl;
         stream_ << indenter_ << "stream << std::boolalpha;"
                 << std::endl;
         utility_.blank_line();
     }
 
-    utility_.blank_line();
     stream_ << indenter_ << "stream " << inserter
             << utility_.quote(" { ")
             << std::endl;
@@ -70,6 +76,19 @@ void cpp_inserter_implementation::format(const class_view_model& vm) {
             << utility_.quote(utility_.quote_escaped(type) + colon)
             << space_inserter
             << utility_.quote(utility_.quote_escaped(vm.name()));
+
+    unsigned int i(0);
+    for (const auto p : vm.parents()) {
+        stream_ << space_inserter << utility_.quote(spaced_comma) << std::endl;
+
+        stream_ << indenter_ << special_indent << inserter
+                << utility_.quote(utility_.quote_escaped(parent_tag(i)) + colon)
+                << space_inserter;
+
+        stream_ << indenter_ << p.name() << "::to_stream(stream);"
+                << std::endl;
+        ++i;
+    }
 
     for (const auto p : vm.properties()) {
         stream_ << space_inserter << utility_.quote(spaced_comma) << std::endl;

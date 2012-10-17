@@ -26,7 +26,6 @@
 #endif
 
 #include <algorithm>
-#include <iosfwd>
 #include "dogen/classes_without_package/domain/versioned_key.hpp"
 
 namespace dogen {
@@ -38,17 +37,14 @@ class class_4 {
 public:
     class_4() = default;
     class_4(const class_4&) = default;
-    ~class_4() = default;
     class_4(class_4&&) = default;
+    ~class_4() = default;
 
 public:
     explicit class_4(dogen::classes_without_package::versioned_key versioned_key);
 
 public:
     friend class dogen::classes_without_package::class_4_serializer;
-
-public:
-    void to_stream(std::ostream& stream) const;
 
 public:
     dogen::classes_without_package::versioned_key versioned_key() const {

@@ -149,7 +149,6 @@ Contents:
 #endif
 
 #include <algorithm>
-#include <iosfwd>
 #include "class_in_a_package/domain/versioned_key.hpp"
 
 namespace class_in_a_package {
@@ -160,8 +159,8 @@ class first_class_serializer;
 class first_class {
 public:
     first_class(const first_class&) = default;
-    ~first_class() = default;
     first_class(first_class&&) = default;
+    ~first_class() = default;
 
 public:
     first_class();
@@ -174,9 +173,6 @@ public:
 
 public:
     friend class class_in_a_package::package1::first_class_serializer;
-
-public:
-    void to_stream(std::ostream& stream) const;
 
 public:
     int public_attribute() const {
@@ -265,7 +261,6 @@ Contents:
 #endif
 
 #include <algorithm>
-#include <iosfwd>
 
 namespace class_in_a_package {
 
@@ -274,8 +269,8 @@ class unversioned_key_serializer;
 class unversioned_key {
 public:
     unversioned_key(const unversioned_key&) = default;
-    ~unversioned_key() = default;
     unversioned_key(unversioned_key&&) = default;
+    ~unversioned_key() = default;
 
 public:
     unversioned_key();
@@ -285,9 +280,6 @@ public:
 
 public:
     friend class class_in_a_package::unversioned_key_serializer;
-
-public:
-    void to_stream(std::ostream& stream) const;
 
 public:
     unsigned int id() const {
@@ -358,7 +350,6 @@ Contents:
 #endif
 
 #include <algorithm>
-#include <iosfwd>
 #include "class_in_a_package/domain/unversioned_key.hpp"
 
 namespace class_in_a_package {
@@ -368,8 +359,8 @@ class versioned_key_serializer;
 class versioned_key {
 public:
     versioned_key(const versioned_key&) = default;
-    ~versioned_key() = default;
     versioned_key(versioned_key&&) = default;
+    ~versioned_key() = default;
 
 public:
     versioned_key();
@@ -381,9 +372,6 @@ public:
 
 public:
     friend class class_in_a_package::versioned_key_serializer;
-
-public:
-    void to_stream(std::ostream& stream) const;
 
 public:
     unversioned_key to_unversioned() const;
@@ -1299,9 +1287,7 @@ Contents:
  * MA 02110-1301, USA.
  *
  */
-#include <ostream>
 #include "class_in_a_package/domain/package1/first_class.hpp"
-#include "class_in_a_package/io/versioned_key_io.hpp"
 #include "dogen/utility/io/jsonify_io.hpp"
 
 namespace class_in_a_package {
@@ -1318,16 +1304,6 @@ first_class::first_class(
     : public_attribute_(public_attribute),
       private_attribute_(private_attribute),
       versioned_key_(versioned_key) { }
-
-void first_class::to_stream(std::ostream& stream) const {
-
-    stream << " { "
-           << "\"__type__\": " << "\"first_class\"" << ", "
-           << "\"public_attribute\": " << public_attribute_ << ", "
-           << "\"private_attribute\": " << private_attribute_ << ", "
-           << "\"versioned_key\": " << versioned_key_
-           << " }";
-}
 
 void first_class::swap(first_class& other) {
     std::swap(public_attribute_, other.public_attribute_);
@@ -1369,7 +1345,6 @@ Contents:
  * MA 02110-1301, USA.
  *
  */
-#include <ostream>
 #include "class_in_a_package/domain/unversioned_key.hpp"
 #include "dogen/utility/io/jsonify_io.hpp"
 
@@ -1380,14 +1355,6 @@ unversioned_key::unversioned_key()
 
 unversioned_key::unversioned_key(unsigned int id)
     : id_(id) { }
-
-void unversioned_key::to_stream(std::ostream& stream) const {
-
-    stream << " { "
-           << "\"__type__\": " << "\"unversioned_key\"" << ", "
-           << "\"id\": " << id_
-           << " }";
-}
 
 void unversioned_key::swap(unversioned_key& other) {
     std::swap(id_, other.id_);
@@ -1425,7 +1392,6 @@ Contents:
  * MA 02110-1301, USA.
  *
  */
-#include <ostream>
 #include "class_in_a_package/domain/versioned_key.hpp"
 #include "dogen/utility/io/jsonify_io.hpp"
 
@@ -1440,15 +1406,6 @@ versioned_key::versioned_key(
     unsigned int version)
     : id_(id),
       version_(version) { }
-
-void versioned_key::to_stream(std::ostream& stream) const {
-
-    stream << " { "
-           << "\"__type__\": " << "\"versioned_key\"" << ", "
-           << "\"id\": " << id_ << ", "
-           << "\"version\": " << version_
-           << " }";
-}
 
 unversioned_key versioned_key::to_unversioned() const {
     return unversioned_key(id());
@@ -1494,12 +1451,18 @@ Contents:
  */
 #include <ostream>
 #include "class_in_a_package/io/package1/first_class_io.hpp"
+#include "class_in_a_package/io/versioned_key_io.hpp"
 
 namespace class_in_a_package {
 namespace package1 {
 
 std::ostream& operator<<(std::ostream& stream, first_class value) {
-    value.to_stream(stream);
+    stream << " { "
+           << "\"__type__\": " << "\"first_class\"" << ", "
+           << "\"public_attribute\": " << value.public_attribute() << ", "
+           << "\"private_attribute\": " << value.private_attribute() << ", "
+           << "\"versioned_key\": " << value.versioned_key()
+           << " }";
     return(stream);
 }
 
@@ -1532,7 +1495,10 @@ Contents:
 namespace class_in_a_package {
 
 std::ostream& operator<<(std::ostream& stream, unversioned_key value) {
-    value.to_stream(stream);
+    stream << " { "
+           << "\"__type__\": " << "\"unversioned_key\"" << ", "
+           << "\"id\": " << value.id()
+           << " }";
     return(stream);
 }
 
@@ -1565,7 +1531,11 @@ Contents:
 namespace class_in_a_package {
 
 std::ostream& operator<<(std::ostream& stream, versioned_key value) {
-    value.to_stream(stream);
+    stream << " { "
+           << "\"__type__\": " << "\"versioned_key\"" << ", "
+           << "\"id\": " << value.id() << ", "
+           << "\"version\": " << value.version()
+           << " }";
     return(stream);
 }
 

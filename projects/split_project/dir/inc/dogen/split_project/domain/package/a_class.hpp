@@ -26,7 +26,6 @@
 #endif
 
 #include <algorithm>
-#include <iosfwd>
 #include "dogen/split_project/domain/versioned_key.hpp"
 
 namespace dogen {
@@ -39,17 +38,14 @@ class a_class {
 public:
     a_class() = default;
     a_class(const a_class&) = default;
-    ~a_class() = default;
     a_class(a_class&&) = default;
+    ~a_class() = default;
 
 public:
     explicit a_class(dogen::split_project::versioned_key versioned_key);
 
 public:
     friend class dogen::split_project::package::a_class_serializer;
-
-public:
-    void to_stream(std::ostream& stream) const;
 
 public:
     dogen::split_project::versioned_key versioned_key() const {

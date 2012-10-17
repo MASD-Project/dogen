@@ -141,6 +141,12 @@ public:
     bool requires_stream_manipulators(
         const std::list<dogen::sml::qualified_name>& names) const;
 
+    /**
+     * @brief Returns true if the pod is in a inheritance
+     * relationship, as either the parent or the child.
+     */
+    bool is_parent_or_child(const dogen::sml::pod& p) const;
+
 private:
     /**
      * @brief Flattens the given pod into a list containing all
@@ -175,8 +181,9 @@ private:
      * kept in one place.
      */
     void append_implementation_dependencies(
-        const bool requires_stream_manipulators, const cpp_facet_types ft,
-        const cpp_file_types flt, inclusion_lists& il) const;
+        const cpp_facet_types ft, const cpp_file_types flt,
+        inclusion_lists& il, const bool requires_stream_manipulators = false,
+        const bool is_parent_or_child = false) const;
 
     /**
      * @brief Appends to the inclusion lists dependencies brought

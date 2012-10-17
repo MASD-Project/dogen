@@ -26,7 +26,6 @@
 #endif
 
 #include <algorithm>
-#include <iosfwd>
 #include "dogen/enable_facet_hash/domain/unversioned_key.hpp"
 
 namespace dogen {
@@ -37,8 +36,8 @@ class versioned_key_serializer;
 class versioned_key {
 public:
     versioned_key(const versioned_key&) = default;
-    ~versioned_key() = default;
     versioned_key(versioned_key&&) = default;
+    ~versioned_key() = default;
 
 public:
     versioned_key();

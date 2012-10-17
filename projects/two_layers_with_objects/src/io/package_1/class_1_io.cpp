@@ -20,13 +20,17 @@
  */
 #include <ostream>
 #include "dogen/two_layers_with_objects/io/package_1/class_1_io.hpp"
+#include "dogen/two_layers_with_objects/io/versioned_key_io.hpp"
 
 namespace dogen {
 namespace two_layers_with_objects {
 namespace package_1 {
 
 std::ostream& operator<<(std::ostream& stream, class_1 value) {
-    value.to_stream(stream);
+    stream << " { "
+           << "\"__type__\": " << "\"class_1\"" << ", "
+           << "\"versioned_key\": " << value.versioned_key()
+           << " }";
     return(stream);
 }
 

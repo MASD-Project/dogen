@@ -18,14 +18,33 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/io/ios_state.hpp>
 #include <ostream>
 #include "dogen/all_primitives/io/a_class_io.hpp"
+#include "dogen/all_primitives/io/versioned_key_io.hpp"
 
 namespace dogen {
 namespace all_primitives {
 
 std::ostream& operator<<(std::ostream& stream, a_class value) {
-    value.to_stream(stream);
+    boost::io::ios_flags_saver ifs(stream);
+    stream << std::boolalpha;
+
+    stream << " { "
+           << "\"__type__\": " << "\"a_class\"" << ", "
+           << "\"bool_property\": " << value.bool_property() << ", "
+           << "\"char_property\": " << "\"" << value.char_property() << "\"" << ", "
+           << "\"uchar_property\": " << "\"" << value.uchar_property() << "\"" << ", "
+           << "\"int_property\": " << value.int_property() << ", "
+           << "\"uint_property\": " << value.uint_property() << ", "
+           << "\"long_property\": " << value.long_property() << ", "
+           << "\"ulong_property\": " << value.ulong_property() << ", "
+           << "\"long_long_property\": " << value.long_long_property() << ", "
+           << "\"ulong_long_property\": " << value.ulong_long_property() << ", "
+           << "\"short_property\": " << value.short_property() << ", "
+           << "\"ushort_property\": " << value.ushort_property() << ", "
+           << "\"versioned_key\": " << value.versioned_key()
+           << " }";
     return(stream);
 }
 

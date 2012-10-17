@@ -27,6 +27,7 @@
 
 #include <iosfwd>
 #include "dogen/trivial_inheritance/domain/child.hpp"
+#include "dogen/trivial_inheritance/io/parent_io.hpp"
 
 namespace dogen {
 namespace trivial_inheritance {
