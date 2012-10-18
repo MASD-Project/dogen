@@ -18,9 +18,33 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/trivial_inheritance/hash/child_without_members_hash.hpp"
-#include "dogen/trivial_inheritance/hash/parent_with_members_hash.hpp"
-#include "dogen/trivial_inheritance/hash/parent_without_members_hash.hpp"
-#include "dogen/trivial_inheritance/hash/second_child_without_members_hash.hpp"
-#include "dogen/trivial_inheritance/hash/unversioned_key_hash.hpp"
+#ifndef DOGEN_TRIVIAL_INHERITANCE_HASH_PARENT_WITH_MEMBERS_HASH_HPP
+#define DOGEN_TRIVIAL_INHERITANCE_HASH_PARENT_WITH_MEMBERS_HASH_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include <functional>
+#include "dogen/trivial_inheritance/domain/parent_with_members.hpp"
 #include "dogen/trivial_inheritance/hash/versioned_key_hash.hpp"
+#include "dogen/utility/hash/combine.hpp"
+
+namespace std {
+
+template<>
+class hash<dogen::trivial_inheritance::parent_with_members> {
+public:
+    size_t operator()(dogen::trivial_inheritance::parent_with_members value) const {
+        using dogen::utility::hash::combine;
+        std::size_t seed(0);
+
+        combine(seed, value.prop_0());
+        combine(seed, value.versioned_key());
+
+        return seed;
+    }
+};
+
+}
+#endif

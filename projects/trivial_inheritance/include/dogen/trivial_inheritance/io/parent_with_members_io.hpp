@@ -18,9 +18,23 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/trivial_inheritance/hash/child_without_members_hash.hpp"
-#include "dogen/trivial_inheritance/hash/parent_with_members_hash.hpp"
-#include "dogen/trivial_inheritance/hash/parent_without_members_hash.hpp"
-#include "dogen/trivial_inheritance/hash/second_child_without_members_hash.hpp"
-#include "dogen/trivial_inheritance/hash/unversioned_key_hash.hpp"
-#include "dogen/trivial_inheritance/hash/versioned_key_hash.hpp"
+#ifndef DOGEN_TRIVIAL_INHERITANCE_IO_PARENT_WITH_MEMBERS_IO_HPP
+#define DOGEN_TRIVIAL_INHERITANCE_IO_PARENT_WITH_MEMBERS_IO_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include <iosfwd>
+#include "dogen/trivial_inheritance/domain/parent_with_members.hpp"
+
+namespace dogen {
+namespace trivial_inheritance {
+
+std::ostream&
+operator<<(std::ostream& stream,
+    dogen::trivial_inheritance::parent_with_members value);
+
+} }
+
+#endif

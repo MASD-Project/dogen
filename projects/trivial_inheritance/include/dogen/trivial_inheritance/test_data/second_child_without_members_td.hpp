@@ -18,9 +18,37 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/trivial_inheritance/domain/child_without_members.hpp"
-#include "dogen/trivial_inheritance/domain/parent_with_members.hpp"
-#include "dogen/trivial_inheritance/domain/parent_without_members.hpp"
+#ifndef DOGEN_TRIVIAL_INHERITANCE_TEST_DATA_SECOND_CHILD_WITHOUT_MEMBERS_TD_HPP
+#define DOGEN_TRIVIAL_INHERITANCE_TEST_DATA_SECOND_CHILD_WITHOUT_MEMBERS_TD_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
 #include "dogen/trivial_inheritance/domain/second_child_without_members.hpp"
-#include "dogen/trivial_inheritance/domain/unversioned_key.hpp"
-#include "dogen/trivial_inheritance/domain/versioned_key.hpp"
+#include "dogen/trivial_inheritance/test_data/parent_with_members_td.hpp"
+#include "dogen/utility/test_data/generator.hpp"
+#include "dogen/utility/test_data/sequence.hpp"
+
+namespace dogen {
+namespace trivial_inheritance {
+
+namespace detail {
+
+class second_child_without_members_generator {
+public:
+    typedef dogen::trivial_inheritance::second_child_without_members value_type;
+
+public:
+    value_type next_term(const unsigned int position);
+    unsigned int length() const;
+};
+
+}
+
+typedef dogen::utility::test_data::sequence<
+    detail::second_child_without_members_generator> second_child_without_members_sequence;
+
+} }
+
+#endif

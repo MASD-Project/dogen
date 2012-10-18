@@ -18,9 +18,25 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/trivial_inheritance/hash/child_without_members_hash.hpp"
-#include "dogen/trivial_inheritance/hash/parent_with_members_hash.hpp"
-#include "dogen/trivial_inheritance/hash/parent_without_members_hash.hpp"
-#include "dogen/trivial_inheritance/hash/second_child_without_members_hash.hpp"
-#include "dogen/trivial_inheritance/hash/unversioned_key_hash.hpp"
-#include "dogen/trivial_inheritance/hash/versioned_key_hash.hpp"
+#include "dogen/trivial_inheritance/test_data/second_child_without_members_td.hpp"
+#include "dogen/trivial_inheritance/test_data/versioned_key_td.hpp"
+
+namespace dogen {
+namespace trivial_inheritance {
+namespace detail {
+
+second_child_without_members_generator::value_type
+second_child_without_members_generator::next_term(const unsigned int position) {
+    second_child_without_members r;
+
+    if (position == 0) {
+    } else if (position == 1) {
+    } else if (position == 2) {
+    }
+
+    return r;
+}
+
+unsigned int second_child_without_members_generator::length() const { return(3); }
+
+} } }
