@@ -19,7 +19,6 @@
  *
  */
 #include "dogen/enable_facet_serialization/domain/unversioned_key.hpp"
-#include "dogen/utility/io/jsonify_io.hpp"
 
 namespace dogen {
 namespace enable_facet_serialization {

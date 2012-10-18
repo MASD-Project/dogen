@@ -44,7 +44,6 @@ const std::string algorithm("algorithm");
 const std::string ostream("ostream");
 const std::string state_saver("boost/io/ios_state.hpp");
 const std::string functional("functional");
-const std::string jsonify_include("dogen/utility/io/jsonify_io.hpp");
 const std::string hash_combine("dogen/utility/hash/combine.hpp");
 const std::string generator_include("dogen/utility/test_data/generator.hpp");
 const std::string sequence_include("dogen/utility/test_data/sequence.hpp");
@@ -297,10 +296,6 @@ append_implementation_dependencies(const cpp_facet_types ft,
     // sequence
     if (is_header && is_test_data)
         il.user.push_back(sequence_include);
-
-    // jsonify
-    if (is_implementation && is_domain)
-        il.user.push_back(jsonify_include);
 }
 
 void cpp_inclusion_manager::append_relationship_dependencies(

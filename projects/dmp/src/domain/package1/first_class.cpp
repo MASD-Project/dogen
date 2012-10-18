@@ -19,7 +19,6 @@
  *
  */
 #include "dogen/dmp/domain/package1/first_class.hpp"
-#include "dogen/utility/io/jsonify_io.hpp"
 
 namespace dogen {
 namespace dmp {

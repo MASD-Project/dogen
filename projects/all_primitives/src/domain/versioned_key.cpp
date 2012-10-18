@@ -19,7 +19,6 @@
  *
  */
 #include "dogen/all_primitives/domain/versioned_key.hpp"
-#include "dogen/utility/io/jsonify_io.hpp"
 
 namespace dogen {
 namespace all_primitives {

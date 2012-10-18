@@ -19,7 +19,6 @@
  *
  */
 #include "dogen/class_in_a_package/domain/versioned_key.hpp"
-#include "dogen/utility/io/jsonify_io.hpp"
 
 namespace dogen {
 namespace class_in_a_package {

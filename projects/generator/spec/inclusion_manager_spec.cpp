@@ -56,7 +56,6 @@ const std::string pqxx_result("result.hxx");
 const std::string pqxx_transaction("transaction.hxx");
 const std::string iosfwd("iosfwd");
 const std::string algorithm("algorithm");
-const std::string jsonify_include("jsonify_io.hpp");
 const std::string hash_combine("combine.hpp");
 const std::string generator_include("generator.hpp");
 const std::string sequence_include("sequence.hpp");
@@ -186,19 +185,14 @@ BOOST_AUTO_TEST_CASE(processing_one_pod_model_with_default_configuration_generat
     const auto hs(i[header_system]);
     BOOST_LOG_SEV(lg, debug) << "header  system dependencies: " << hs;
     BOOST_REQUIRE(hs.size() == 1);
-    for (const auto s : hs) {
-        BOOST_CHECK(boost::ends_with(s, algorithm));
-    }
+    BOOST_CHECK(boost::ends_with(hs.front(), algorithm));
 
     // implementation
     const auto iu(i[implementation_user]);
     BOOST_LOG_SEV(lg, debug) << "implementation user dependencies: " << iu;
-    BOOST_REQUIRE(iu.size() == 2);
-    for (const auto s : iu) {
-        BOOST_CHECK(
-            (boost::contains(s, pod_name) && boost::contains(s, domain)) ||
-            (boost::contains(s, jsonify_include)));
-    }
+    BOOST_REQUIRE(iu.size() == 1);
+    BOOST_CHECK(boost::contains(iu.front(), pod_name) &&
+        boost::contains(iu.front(), domain));
 
     const auto is(i[implementation_system]);
     BOOST_LOG_SEV(lg, debug) << "implementation system dependencies: " << is;

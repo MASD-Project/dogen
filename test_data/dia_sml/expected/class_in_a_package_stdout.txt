@@ -1288,7 +1288,6 @@ Contents:
  *
  */
 #include "class_in_a_package/domain/package1/first_class.hpp"
-#include "dogen/utility/io/jsonify_io.hpp"
 
 namespace class_in_a_package {
 namespace package1 {
@@ -1346,7 +1345,6 @@ Contents:
  *
  */
 #include "class_in_a_package/domain/unversioned_key.hpp"
-#include "dogen/utility/io/jsonify_io.hpp"
 
 namespace class_in_a_package {
 
@@ -1393,7 +1391,6 @@ Contents:
  *
  */
 #include "class_in_a_package/domain/versioned_key.hpp"
-#include "dogen/utility/io/jsonify_io.hpp"
 
 namespace class_in_a_package {
 

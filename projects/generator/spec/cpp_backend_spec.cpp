@@ -199,9 +199,8 @@ BOOST_AUTO_TEST_CASE(view_model_transformer_correctly_transforms_domain_files) {
             BOOST_CHECK(f.header_guard() == header_guard_name);
         } else {
             BOOST_CHECK(f.header_guard() == empty);
-            BOOST_CHECK(f.user_includes().size() == 2);
-            BOOST_CHECK(f.user_includes().front() == user_dependency ||
-                f.user_includes().back() == user_dependency);
+            BOOST_CHECK(f.user_includes().size() == 1);
+            BOOST_CHECK(f.user_includes().front() == user_dependency);
         }
 
         const auto class_vm(*o);

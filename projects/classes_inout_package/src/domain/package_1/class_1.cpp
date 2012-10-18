@@ -19,7 +19,6 @@
  *
  */
 #include "dogen/classes_inout_package/domain/package_1/class_1.hpp"
-#include "dogen/utility/io/jsonify_io.hpp"
 
 namespace dogen {
 namespace classes_inout_package {

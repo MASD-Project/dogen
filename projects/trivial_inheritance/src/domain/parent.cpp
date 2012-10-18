@@ -20,7 +20,6 @@
  */
 #include <ostream>
 #include "dogen/trivial_inheritance/domain/parent.hpp"
-#include "dogen/utility/io/jsonify_io.hpp"
 
 namespace dogen {
 namespace trivial_inheritance {

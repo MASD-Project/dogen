@@ -19,7 +19,6 @@
  *
  */
 #include "dogen/trivial_inheritance/domain/unversioned_key.hpp"
-#include "dogen/utility/io/jsonify_io.hpp"
 
 namespace dogen {
 namespace trivial_inheritance {

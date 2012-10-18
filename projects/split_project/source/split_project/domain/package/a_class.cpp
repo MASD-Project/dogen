@@ -19,7 +19,6 @@
  *
  */
 #include "dogen/split_project/domain/package/a_class.hpp"
-#include "dogen/utility/io/jsonify_io.hpp"
 
 namespace dogen {
 namespace split_project {

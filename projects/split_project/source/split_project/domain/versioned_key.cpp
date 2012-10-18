@@ -19,7 +19,6 @@
  *
  */
 #include "dogen/split_project/domain/versioned_key.hpp"
-#include "dogen/utility/io/jsonify_io.hpp"
 
 namespace dogen {
 namespace split_project {

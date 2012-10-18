@@ -19,7 +19,6 @@
  *
  */
 #include "dogen/two_layers_with_objects/domain/versioned_key.hpp"
-#include "dogen/utility/io/jsonify_io.hpp"
 
 namespace dogen {
 namespace two_layers_with_objects {

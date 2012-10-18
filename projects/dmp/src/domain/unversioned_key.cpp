@@ -19,7 +19,6 @@
  *
  */
 #include "dogen/dmp/domain/unversioned_key.hpp"
-#include "dogen/utility/io/jsonify_io.hpp"
 
 namespace dogen {
 namespace dmp {

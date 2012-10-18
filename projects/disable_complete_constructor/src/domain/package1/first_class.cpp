@@ -19,7 +19,6 @@
  *
  */
 #include "dogen/disable_complete_constructor/domain/package1/first_class.hpp"
-#include "dogen/utility/io/jsonify_io.hpp"
 
 namespace dogen {
 namespace disable_complete_constructor {

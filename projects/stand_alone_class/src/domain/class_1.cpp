@@ -19,7 +19,6 @@
  *
  */
 #include "dogen/stand_alone_class/domain/class_1.hpp"
-#include "dogen/utility/io/jsonify_io.hpp"
 
 namespace dogen {
 namespace stand_alone_class {
