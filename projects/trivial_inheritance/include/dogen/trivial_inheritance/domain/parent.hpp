@@ -39,7 +39,6 @@ public:
     parent() = default;
     parent(const parent&) = default;
     parent(parent&&) = default;
-    virtual ~parent() noexcept = default;
 
 public:
     explicit parent(dogen::trivial_inheritance::versioned_key versioned_key);
@@ -48,7 +47,7 @@ public:
     friend class dogen::trivial_inheritance::parent_serializer;
 
 public:
-    virtual void to_stream(std::ostream& stream) const;
+    virtual std::ostream& to_stream(std::ostream& stream) const;
 
 public:
     dogen::trivial_inheritance::versioned_key versioned_key() const {

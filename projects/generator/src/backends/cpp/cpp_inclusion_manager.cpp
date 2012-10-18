@@ -147,7 +147,7 @@ cpp_inclusion_manager::pod_to_qualified_names(const sml::pod& pod) const {
 
 void cpp_inclusion_manager::append_versioning_dependencies(
     const cpp_facet_types ft, const cpp_file_types flt, cpp_aspect_types at,
-    inclusion_lists& il) const {
+    inclusion_lists& il, const bool is_parent_or_child) const {
 
     if (settings_.disable_versioning() ||
         at == cpp_aspect_types::unversioned_key ||
@@ -170,11 +170,12 @@ void cpp_inclusion_manager::append_versioning_dependencies(
     /*
      * rule 2: domain implementation needs access to the versioned key
      * IO header file when IO is enabled and we are using integrated
-     * IO.
+     * IO, or we are in the presence of inheritance.
      */
     const bool is_implementation(flt == cpp_file_types::implementation);
     const bool iio(settings_.use_integrated_io());
-    const bool rule2(is_implementation && is_domain && io_enabled_ && iio);
+    const bool rule2(is_implementation && is_domain && io_enabled_ &&
+        (iio || is_parent_or_child));
     if (rule2)
         version_facet = cpp_facet_types::io;
 
@@ -215,7 +216,7 @@ append_implementation_dependencies(const cpp_facet_types ft,
     /*
      * STL
      */
-    // iosfwd
+    // iosfwd:
     const bool is_header(flt == cpp_file_types::header);
     const bool is_domain(ft == cpp_facet_types::domain);
     const bool is_io(ft == cpp_facet_types::io);
@@ -225,11 +226,11 @@ append_implementation_dependencies(const cpp_facet_types ft,
     if (is_header && io_enabled_ && (domain_with_io || is_io))
         il.system.push_back(iosfwd);
 
-    // algorithm
+    // algorithm: domain headers need it for the swap function.
     if (is_header && is_domain)
         il.system.push_back(algorithm);
 
-    // ostream
+    // ostream:
     const bool is_implementation(flt == cpp_file_types::implementation);
     const bool io_without_iio(is_io && !settings_.use_integrated_io());
     if (is_implementation && io_enabled_ && (domain_with_io || io_without_iio))
@@ -304,9 +305,13 @@ void cpp_inclusion_manager::append_relationship_dependencies(
     inclusion_lists& il) const {
 
     for(const auto n : names) {
+        /*
+         * rule 1: headers need the corresponding header file for the
+         * dependency.
+         */
         const bool is_primitive(n.meta_type() == sml::meta_types::primitive);
-
-        if (flt == cpp_file_types::header && !is_primitive)
+        const bool is_header(flt == cpp_file_types::header);
+        if (is_header && !is_primitive)
             il.user.push_back(header_dependency(n, ft));
     }
 }
@@ -360,12 +365,12 @@ inclusion_lists cpp_inclusion_manager::
 includes_for_pod(const sml::pod& pod, cpp_facet_types ft, cpp_file_types flt,
     cpp_aspect_types at) const {
 
-    inclusion_lists r;
-    append_versioning_dependencies(ft, flt, at, r);
-
     const auto names(pod_to_qualified_names(pod));
     const bool rsm(requires_stream_manipulators(names));
     const bool pc(is_parent_or_child(pod));
+    inclusion_lists r;
+
+    append_versioning_dependencies(ft, flt, at, r, pc);
     append_implementation_dependencies(ft, flt, r, rsm, pc);
     append_relationship_dependencies(names, ft, flt, r);
     append_self_dependencies(pod.name(), ft, flt, r);
@@ -379,7 +384,6 @@ includes_for_versioning(const std::string& name, cpp_facet_types ft,
 
     inclusion_lists r;
     append_versioning_dependencies(ft, flt, at, r);
-
     append_implementation_dependencies(ft, flt, r);
 
     sml::qualified_name n;

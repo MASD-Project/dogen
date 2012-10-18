@@ -82,11 +82,10 @@ void cpp_inserter_implementation::format(const class_view_model& vm) {
         stream_ << space_inserter << utility_.quote(spaced_comma) << std::endl;
 
         stream_ << indenter_ << special_indent << inserter
-                << utility_.quote(utility_.quote_escaped(parent_tag(i)) + colon)
-                << space_inserter;
+                << utility_.quote(utility_.quote_escaped(parent_tag(i)) +
+                    colon);
 
-        stream_ << indenter_ << p.name() << "::to_stream(stream);"
-                << std::endl;
+        stream_ << space_inserter << p.name() << "::to_stream(stream)";
         ++i;
     }
 
@@ -114,9 +113,7 @@ void cpp_inserter_implementation::format(const class_view_model& vm) {
     stream_ << std::endl;
     stream_ << indenter_ << special_indent << inserter
             << utility_.quote(close_bracket) << semi_colon << std::endl;
-
-    if (!is_inside_class_)
-        stream_ << indenter_ << "return(stream);" << std::endl;
+    stream_ << indenter_ << "return(stream);" << std::endl;
 }
 
 

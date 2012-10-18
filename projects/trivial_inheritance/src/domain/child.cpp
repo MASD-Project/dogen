@@ -20,12 +20,22 @@
  */
 #include <ostream>
 #include "dogen/trivial_inheritance/domain/child.hpp"
+#include "dogen/trivial_inheritance/io/versioned_key_io.hpp"
 
 namespace dogen {
 namespace trivial_inheritance {
 
 child::child(dogen::trivial_inheritance::versioned_key versioned_key)
     : versioned_key_(versioned_key) { }
+
+std::ostream& child::to_stream(std::ostream& stream) const {
+    stream << " { "
+           << "\"__type__\": " << "\"child\"" << ", "
+           << "\"__parent_0__\": " << parent::to_stream(stream) << ", "
+           << "\"versioned_key\": " << versioned_key_
+           << " }";
+    return(stream);
+}
 
 void child::swap(child& other) {
     std::swap(versioned_key_, other.versioned_key_);

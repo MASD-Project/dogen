@@ -164,7 +164,7 @@ private:
      */
     void append_versioning_dependencies(const cpp_facet_types ft,
         const cpp_file_types flt, cpp_aspect_types at,
-        inclusion_lists& il) const;
+        inclusion_lists& il, const bool is_parent_or_child = false) const;
 
     /**
      * @brief Appends to the inclusion lists all dependencies related

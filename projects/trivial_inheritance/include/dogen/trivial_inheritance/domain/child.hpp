@@ -41,7 +41,6 @@ public:
     child(const child&) = default;
     child(child&&) = default;
 
-    virtual ~child() noexcept { }
 public:
     explicit child(dogen::trivial_inheritance::versioned_key versioned_key);
 
@@ -49,7 +48,7 @@ public:
     friend class dogen::trivial_inheritance::child_serializer;
 
 public:
-    void to_stream(std::ostream& stream) const override;
+    std::ostream& to_stream(std::ostream& stream) const override;
 
 public:
     dogen::trivial_inheritance::versioned_key versioned_key() const {

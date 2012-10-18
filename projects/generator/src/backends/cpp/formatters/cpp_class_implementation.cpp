@@ -114,10 +114,10 @@ void cpp_class_implementation::complete_constructor(const class_view_model& vm) 
 }
 
 void cpp_class_implementation::to_stream(const class_view_model& vm) {
-    if (!vm.is_parent() || vm.parents().empty())
+    if (!vm.is_parent() && vm.parents().empty())
         return;
 
-    stream_ << "void " << vm.name()
+    stream_ << "std::ostream& " << vm.name()
             << "::to_stream(std::ostream& stream) const ";
 
     utility_.open_scope();

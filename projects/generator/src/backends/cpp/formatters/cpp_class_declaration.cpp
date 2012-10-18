@@ -96,9 +96,11 @@ void cpp_class_declaration::complete_constructor(const class_view_model& vm) {
 }
 
 void cpp_class_declaration::destructor(const class_view_model& vm) {
-    // need to define a destructor for derived classes due to strange
-    // clang errors
-    if (!vm.is_parent() && !vm.parents().empty()) {
+    /*
+     * need to define a destructor for parent and derived classes due
+     * to strange clang errors: undefined reference to `vtable.
+     */
+    if (vm.is_parent() && !vm.parents().empty()) {
         stream_ << indenter_ << "virtual ~" << vm.name()
                 << "() noexcept { }" << std::endl;
     }
@@ -115,10 +117,7 @@ void cpp_class_declaration::compiler_generated_constuctors(const class_view_mode
             << indenter_ << vm.name() << "(" << vm.name() << "&&) = default;"
             << std::endl;
 
-    if (vm.is_parent()) {
-        stream_ << indenter_ << "virtual ~" << vm.name()
-                << "() noexcept = default;" << std::endl;
-    } else if (vm.parents().empty()) {
+    if (!vm.is_parent() && vm.parents().empty()) {
         stream_ << indenter_ << "~" << vm.name() << "() = default;"
                 << std::endl;
     }
@@ -216,11 +215,13 @@ void cpp_class_declaration::to_stream(const class_view_model& vm) {
     utility_.public_access_specifier();
     if (vm.is_parent()) {
         stream_ << indenter_
-                << "virtual void to_stream(std::ostream& stream) const;"
+                << "virtual std::ostream& to_stream("
+                << "std::ostream& stream) const;"
                 << std::endl;
     } else {
         stream_ << indenter_
-                << "void to_stream(std::ostream& stream) const override;"
+                << "std::ostream& to_stream(std::ostream& stream) "
+                << "const override;"
                 << std::endl;
     }
     utility_.blank_line();

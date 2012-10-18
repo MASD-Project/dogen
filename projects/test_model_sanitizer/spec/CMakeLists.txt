@@ -31,6 +31,7 @@ set_target_properties(${spec_name} PROPERTIES OUTPUT_NAME ${binary_name})
 target_link_libraries(${spec_name}
     all_primitives
     class_in_a_package
+    trivial_inheritance
     utility
     ${LIBXML2_LIBRARIES}
     ${Boost_LIBRARIES})
