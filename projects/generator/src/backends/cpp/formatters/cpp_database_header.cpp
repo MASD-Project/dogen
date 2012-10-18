@@ -72,7 +72,7 @@ compiler_generated_constuctors(const class_view_model& vm) {
             << indenter_ << class_name << "(" << class_name << "&&) = delete;"
             << std::endl;
 
-    if (vm.properties().empty()) {
+    if (vm.all_properties().empty()) {
         stream_ << indenter_ << vm.name() << "& operator=(const " << vm.name()
                 << "&) = delete;" << std::endl;
     }

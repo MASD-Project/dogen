@@ -93,11 +93,12 @@ void serialization_header::serialize_method(const class_view_model& vm) {
 
 void serialization_header::serializer_class(const class_view_model& vm) {
     stream_ << "class " << vm.name() << "_serializer ";
+    const auto parents(vm.parents());
     utility_.open_scope();
     {
         cpp_positive_indenter_scope s(indenter_);
         utility_.public_access_specifier();
-        const bool has_properties(!vm.properties().empty());
+        const bool has_properties(!vm.all_properties().empty());
 
         stream_ << indenter_ << "template<typename Archive>" << std::endl
                 << indenter_ << "void serialize(Archive & "
@@ -122,6 +123,14 @@ void serialization_header::serializer_class(const class_view_model& vm) {
                             << std::endl;
                 utility_.blank_line();
 
+                for (const auto p : parents) {
+                    stream_ << "boost::serialization::base_object<" << p.name()
+                            << ">(&value);" << std::endl;
+                }
+
+                if (!parents.empty())
+                    utility_.blank_line();
+
                 for (const auto p : vm.properties()) {
                     if (disable_xml_serialization_) {
                         stream_ << indenter_ << "archive & value."
@@ -142,6 +151,10 @@ void serialization_header::serializer_class(const class_view_model& vm) {
         utility_.close_scope();
     }
     stream_ << indenter_ << "};" << std::endl;
+    for (const auto p : parents) {
+        stream_ << indenter_ << "BOOST_CLASS_EXPORT(" << p.name() << ");"
+                << std::endl;
+    }
 }
 
 void serialization_header::format(const file_view_model& vm) {

@@ -36,10 +36,11 @@ first_class::first_class(
       private_attribute_(private_attribute),
       versioned_key_(versioned_key) { }
 
-void first_class::swap(first_class& other) {
-    std::swap(public_attribute_, other.public_attribute_);
-    std::swap(private_attribute_, other.private_attribute_);
-    std::swap(versioned_key_, other.versioned_key_);
+void first_class::swap(first_class& other) noexcept {
+    using std::swap;
+    swap(public_attribute_, other.public_attribute_);
+    swap(private_attribute_, other.private_attribute_);
+    swap(versioned_key_, other.versioned_key_);
 }
 
 bool first_class::operator==(const first_class& rhs) const {
@@ -49,7 +50,8 @@ bool first_class::operator==(const first_class& rhs) const {
 }
 
 first_class& first_class::operator=(first_class other) {
-    std::swap(*this, other);
+    using std::swap;
+    swap(*this, other);
     return *this;
 }
 

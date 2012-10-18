@@ -40,8 +40,8 @@ public:
         std::size_t seed(0);
 
         combine(seed, value.versioned_key());
-
         return seed;
+
     }
 };
 

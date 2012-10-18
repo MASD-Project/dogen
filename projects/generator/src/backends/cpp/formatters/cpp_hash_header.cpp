@@ -64,11 +64,8 @@ void hash_header::operator_bracket_method(const class_view_model& vm) {
     cpp_qualified_name qualified_name(stream_);
     qualified_name.format(vm);
 
-    if (vm.properties().empty())
-        stream_ << " /*value*/";
-    else
-        stream_ << " value";
-    stream_ << ") const ";
+    stream_ << (vm.all_properties().empty() ? " /*value*/" : " value")
+            << ") const ";
 
     utility_.open_scope();
     {
@@ -78,16 +75,25 @@ void hash_header::operator_bracket_method(const class_view_model& vm) {
                 << std::endl
                 << indenter_ << "std::size_t seed(0);" << std::endl;
 
-        if (!vm.properties().empty()) {
+        const auto parents(vm.parents());
+        if (!parents.empty())
             utility_.blank_line();
 
-            for (const auto p : vm.properties()) {
-                stream_ << indenter_ << "combine(seed, value." << p.name()
-                        << "());" << std::endl;
-            }
+        for (const auto p : parents) {
+            stream_ << indenter_ << "combine(seed, (*(dynamic_cast<"
+                    << p.name() << ">(this)));" << std::endl;
+        }
+
+        const auto props(vm.properties());
+        if (!props.empty())
             utility_.blank_line();
+
+        for (const auto p : props) {
+            stream_ << indenter_ << "combine(seed, value." << p.name()
+                    << "());" << std::endl;
         }
         stream_ << indenter_ << "return seed;" << std::endl;
+        utility_.blank_line();
     }
     utility_.close_scope();
 }

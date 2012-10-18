@@ -26,8 +26,9 @@ namespace classes_without_package {
 class_4::class_4(dogen::classes_without_package::versioned_key versioned_key)
     : versioned_key_(versioned_key) { }
 
-void class_4::swap(class_4& other) {
-    std::swap(versioned_key_, other.versioned_key_);
+void class_4::swap(class_4& other) noexcept {
+    using std::swap;
+    swap(versioned_key_, other.versioned_key_);
 }
 
 bool class_4::operator==(const class_4& rhs) const {
@@ -35,7 +36,8 @@ bool class_4::operator==(const class_4& rhs) const {
 }
 
 class_4& class_4::operator=(class_4 other) {
-    std::swap(*this, other);
+    using std::swap;
+    swap(*this, other);
     return *this;
 }
 

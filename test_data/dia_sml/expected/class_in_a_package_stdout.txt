@@ -202,14 +202,15 @@ public:
 public:
     bool operator==(const first_class& rhs) const;
 
-    bool operator!=(const first_class rhs) const {
+    bool operator!=(const first_class& rhs) const {
         return !this->operator==(rhs);
     }
 
 public:
-    void swap(first_class& other);
-    first_class& operator=(first_class other);
+    void swap(first_class& other) noexcept;
 
+public:
+    first_class& operator=(first_class other);
 private:
     int public_attribute_;
     int private_attribute_;
@@ -293,14 +294,15 @@ public:
 public:
     bool operator==(const unversioned_key& rhs) const;
 
-    bool operator!=(const unversioned_key rhs) const {
+    bool operator!=(const unversioned_key& rhs) const {
         return !this->operator==(rhs);
     }
 
 public:
-    void swap(unversioned_key& other);
-    unversioned_key& operator=(unversioned_key other);
+    void swap(unversioned_key& other) noexcept;
 
+public:
+    unversioned_key& operator=(unversioned_key other);
 private:
     unsigned int id_;
 };
@@ -396,14 +398,15 @@ public:
 public:
     bool operator==(const versioned_key& rhs) const;
 
-    bool operator!=(const versioned_key rhs) const {
+    bool operator!=(const versioned_key& rhs) const {
         return !this->operator==(rhs);
     }
 
 public:
-    void swap(versioned_key& other);
-    versioned_key& operator=(versioned_key other);
+    void swap(versioned_key& other) noexcept;
 
+public:
+    versioned_key& operator=(versioned_key other);
 private:
     unsigned int id_;
     unsigned int version_;
@@ -496,8 +499,8 @@ public:
         combine(seed, value.public_attribute());
         combine(seed, value.private_attribute());
         combine(seed, value.versioned_key());
-
         return seed;
+
     }
 };
 
@@ -547,8 +550,8 @@ public:
         std::size_t seed(0);
 
         combine(seed, value.id());
-
         return seed;
+
     }
 };
 
@@ -599,8 +602,8 @@ public:
 
         combine(seed, value.id());
         combine(seed, value.version());
-
         return seed;
+
     }
 };
 
@@ -1304,10 +1307,11 @@ first_class::first_class(
       private_attribute_(private_attribute),
       versioned_key_(versioned_key) { }
 
-void first_class::swap(first_class& other) {
-    std::swap(public_attribute_, other.public_attribute_);
-    std::swap(private_attribute_, other.private_attribute_);
-    std::swap(versioned_key_, other.versioned_key_);
+void first_class::swap(first_class& other) noexcept {
+    using std::swap;
+    swap(public_attribute_, other.public_attribute_);
+    swap(private_attribute_, other.private_attribute_);
+    swap(versioned_key_, other.versioned_key_);
 }
 
 bool first_class::operator==(const first_class& rhs) const {
@@ -1317,7 +1321,8 @@ bool first_class::operator==(const first_class& rhs) const {
 }
 
 first_class& first_class::operator=(first_class other) {
-    std::swap(*this, other);
+    using std::swap;
+    swap(*this, other);
     return *this;
 }
 
@@ -1354,8 +1359,9 @@ unversioned_key::unversioned_key()
 unversioned_key::unversioned_key(unsigned int id)
     : id_(id) { }
 
-void unversioned_key::swap(unversioned_key& other) {
-    std::swap(id_, other.id_);
+void unversioned_key::swap(unversioned_key& other) noexcept {
+    using std::swap;
+    swap(id_, other.id_);
 }
 
 bool unversioned_key::operator==(const unversioned_key& rhs) const {
@@ -1363,7 +1369,8 @@ bool unversioned_key::operator==(const unversioned_key& rhs) const {
 }
 
 unversioned_key& unversioned_key::operator=(unversioned_key other) {
-    std::swap(*this, other);
+    using std::swap;
+    swap(*this, other);
     return *this;
 }
 
@@ -1408,9 +1415,10 @@ unversioned_key versioned_key::to_unversioned() const {
     return unversioned_key(id());
 }
 
-void versioned_key::swap(versioned_key& other) {
-    std::swap(id_, other.id_);
-    std::swap(version_, other.version_);
+void versioned_key::swap(versioned_key& other) noexcept {
+    using std::swap;
+    swap(id_, other.id_);
+    swap(version_, other.version_);
 }
 
 bool versioned_key::operator==(const versioned_key& rhs) const {
@@ -1419,7 +1427,8 @@ bool versioned_key::operator==(const versioned_key& rhs) const {
 }
 
 versioned_key& versioned_key::operator=(versioned_key other) {
-    std::swap(*this, other);
+    using std::swap;
+    swap(*this, other);
     return *this;
 }
 

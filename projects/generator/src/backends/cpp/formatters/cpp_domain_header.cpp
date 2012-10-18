@@ -75,7 +75,8 @@ void domain_header::inserter_operator(const class_view_model& vm) {
 }
 
 void domain_header::swap_method(const class_view_model& vm) {
-    if (vm.properties().empty())
+    // swap overload is only available in leaf classes - MEC++-33
+    if (vm.all_properties().empty() || vm.is_parent())
         return;
 
     namespace_helper ns(stream_, std::list<std::string> { "std" });
@@ -160,7 +161,7 @@ void domain_header::format(const file_view_model& vm) {
     utility_.blank_line(2);
 
     swap_method(cvm);
-    if (!cvm.properties().empty())
+    if (!cvm.all_properties().empty())
         utility_.blank_line(2);
 
     guards.format_end();

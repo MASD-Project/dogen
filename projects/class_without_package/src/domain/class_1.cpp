@@ -32,9 +32,10 @@ class_1::class_1(
     : an_attribute_(an_attribute),
       versioned_key_(versioned_key) { }
 
-void class_1::swap(class_1& other) {
-    std::swap(an_attribute_, other.an_attribute_);
-    std::swap(versioned_key_, other.versioned_key_);
+void class_1::swap(class_1& other) noexcept {
+    using std::swap;
+    swap(an_attribute_, other.an_attribute_);
+    swap(versioned_key_, other.versioned_key_);
 }
 
 bool class_1::operator==(const class_1& rhs) const {
@@ -43,7 +44,8 @@ bool class_1::operator==(const class_1& rhs) const {
 }
 
 class_1& class_1::operator=(class_1 other) {
-    std::swap(*this, other);
+    using std::swap;
+    swap(*this, other);
     return *this;
 }
 

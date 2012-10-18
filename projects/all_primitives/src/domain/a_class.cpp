@@ -62,19 +62,20 @@ a_class::a_class(
       ushort_property_(ushort_property),
       versioned_key_(versioned_key) { }
 
-void a_class::swap(a_class& other) {
-    std::swap(bool_property_, other.bool_property_);
-    std::swap(char_property_, other.char_property_);
-    std::swap(uchar_property_, other.uchar_property_);
-    std::swap(int_property_, other.int_property_);
-    std::swap(uint_property_, other.uint_property_);
-    std::swap(long_property_, other.long_property_);
-    std::swap(ulong_property_, other.ulong_property_);
-    std::swap(long_long_property_, other.long_long_property_);
-    std::swap(ulong_long_property_, other.ulong_long_property_);
-    std::swap(short_property_, other.short_property_);
-    std::swap(ushort_property_, other.ushort_property_);
-    std::swap(versioned_key_, other.versioned_key_);
+void a_class::swap(a_class& other) noexcept {
+    using std::swap;
+    swap(bool_property_, other.bool_property_);
+    swap(char_property_, other.char_property_);
+    swap(uchar_property_, other.uchar_property_);
+    swap(int_property_, other.int_property_);
+    swap(uint_property_, other.uint_property_);
+    swap(long_property_, other.long_property_);
+    swap(ulong_property_, other.ulong_property_);
+    swap(long_long_property_, other.long_long_property_);
+    swap(ulong_long_property_, other.ulong_long_property_);
+    swap(short_property_, other.short_property_);
+    swap(ushort_property_, other.ushort_property_);
+    swap(versioned_key_, other.versioned_key_);
 }
 
 bool a_class::operator==(const a_class& rhs) const {
@@ -93,7 +94,8 @@ bool a_class::operator==(const a_class& rhs) const {
 }
 
 a_class& a_class::operator=(a_class other) {
-    std::swap(*this, other);
+    using std::swap;
+    swap(*this, other);
     return *this;
 }
 

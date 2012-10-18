@@ -59,14 +59,15 @@ public:
 public:
     bool operator==(const a_class& rhs) const;
 
-    bool operator!=(const a_class rhs) const {
+    bool operator!=(const a_class& rhs) const {
         return !this->operator==(rhs);
     }
 
 public:
-    void swap(a_class& other);
-    a_class& operator=(a_class other);
+    void swap(a_class& other) noexcept;
 
+public:
+    a_class& operator=(a_class other);
 private:
     dogen::split_project::versioned_key versioned_key_;
 };

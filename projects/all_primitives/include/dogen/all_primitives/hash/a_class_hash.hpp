@@ -51,8 +51,8 @@ public:
         combine(seed, value.short_property());
         combine(seed, value.ushort_property());
         combine(seed, value.versioned_key());
-
         return seed;
+
     }
 };
 

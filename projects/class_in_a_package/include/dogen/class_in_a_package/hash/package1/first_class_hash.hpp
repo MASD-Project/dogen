@@ -42,8 +42,8 @@ public:
         combine(seed, value.public_attribute());
         combine(seed, value.private_attribute());
         combine(seed, value.versioned_key());
-
         return seed;
+
     }
 };
 

@@ -56,14 +56,15 @@ public:
 public:
     bool operator==(const unversioned_key& rhs) const;
 
-    bool operator!=(const unversioned_key rhs) const {
+    bool operator!=(const unversioned_key& rhs) const {
         return !this->operator==(rhs);
     }
 
 public:
-    void swap(unversioned_key& other);
-    unversioned_key& operator=(unversioned_key other);
+    void swap(unversioned_key& other) noexcept;
 
+public:
+    unversioned_key& operator=(unversioned_key other);
 private:
     unsigned int id_;
 };

@@ -18,6 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#include <iostream>
 #include <ostream>
 #include "dogen/generator/backends/cpp/formatters/cpp_qualified_name.hpp"
 #include "dogen/generator/backends/cpp/formatters/cpp_class_declaration.hpp"
@@ -68,7 +69,7 @@ void cpp_class_declaration::default_constructor(const class_view_model& vm) {
 }
 
 void cpp_class_declaration::complete_constructor(const class_view_model& vm) {
-    const auto props(vm.properties());
+    const auto props(vm.all_properties());
     if (props.empty())
         return;
 
@@ -85,7 +86,7 @@ void cpp_class_declaration::complete_constructor(const class_view_model& vm) {
     {
         cpp_positive_indenter_scope s(indenter_);
         bool is_first(true);
-        for (const auto p : vm.properties()) {
+        for (const auto p : props) {
             stream_ << (is_first ? "" : ",") << std::endl;
             stream_ << indenter_ << p.type() << " " << p.name();
             is_first = false;
@@ -97,12 +98,16 @@ void cpp_class_declaration::complete_constructor(const class_view_model& vm) {
 
 void cpp_class_declaration::destructor(const class_view_model& vm) {
     /*
-     * need to define a destructor for parent and derived classes due
-     * to strange clang errors: undefined reference to `vtable.
+     * according to MEC++, item 33, base classes should always be
+     * abstract. this avoids all sorts of tricky problems with
+     * assignment and swap.
+     *
+     * incidentally, this also fixes some strange clang errors:
+     * undefined reference to `vtable.
      */
-    if (vm.is_parent() && !vm.parents().empty()) {
+    if (vm.is_parent()) {
         stream_ << indenter_ << "virtual ~" << vm.name()
-                << "() noexcept { }" << std::endl;
+                << "() noexcept = 0;" << std::endl;
     }
 }
 
@@ -122,7 +127,7 @@ void cpp_class_declaration::compiler_generated_constuctors(const class_view_mode
                 << std::endl;
     }
 
-    if (vm.properties().empty()) {
+    if (vm.all_properties().empty()) {
         stream_ << indenter_ << vm.name() << "& operator=(const " << vm.name()
                 << "&) = default;" << std::endl;
     }
@@ -185,20 +190,18 @@ void cpp_class_declaration::member_variables(const class_view_model& vm) {
 }
 
 void cpp_class_declaration::equality(const class_view_model& vm) {
-    utility_.public_access_specifier();
-    stream_ << indenter_ << "bool operator==(const " << vm.name()
-            <<  "& ";
-
-    if (vm.properties().empty())
-        stream_ << "/*rhs*/";
+    // equality is only public in leaf classes - MEC++-33
+    if (vm.is_parent())
+        utility_.protected_access_specifier();
     else
-        stream_ << "rhs";
+        utility_.public_access_specifier();
 
-    stream_ << ") const;" << std::endl;
+    stream_ << indenter_ << "bool operator==(const " << vm.name()
+            <<  "& rhs) const;" << std::endl;
     utility_.blank_line();
 
     stream_ << indenter_ << "bool operator!=(const " << vm.name()
-            << " rhs) const ";
+            << "& rhs) const ";
     utility_.open_scope();
     {
         cpp_positive_indenter_scope s(indenter_);
@@ -228,15 +231,26 @@ void cpp_class_declaration::to_stream(const class_view_model& vm) {
 }
 
 void cpp_class_declaration::swap_and_assignment(const class_view_model& vm) {
-    if (vm.properties().empty())
+    if (vm.all_properties().empty())
         return;
 
-    utility_.public_access_specifier();
-    stream_ << indenter_ << "void swap(" << vm.name() << "& other);"
-            << std::endl
-            << indenter_ << vm.name() << "& operator=(" << vm.name()
-            << " other);"
+    // swap is only public in leaf classes - MEC++-33
+    if (vm.is_parent())
+        utility_.protected_access_specifier();
+    else
+        utility_.public_access_specifier();
+
+    stream_ << indenter_ << "void swap(" << vm.name() << "& other) noexcept;"
             << std::endl;
+    utility_.blank_line();
+
+    // assignment is only available in leaf classes - MEC++-33
+    if (!vm.is_parent()) {
+        utility_.public_access_specifier();
+        stream_ << indenter_ << vm.name() << "& operator=(" << vm.name()
+                << " other);";
+    }
+
     utility_.blank_line();
 }
 

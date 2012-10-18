@@ -37,9 +37,10 @@ unversioned_key versioned_key::to_unversioned() const {
     return unversioned_key(id());
 }
 
-void versioned_key::swap(versioned_key& other) {
-    std::swap(id_, other.id_);
-    std::swap(version_, other.version_);
+void versioned_key::swap(versioned_key& other) noexcept {
+    using std::swap;
+    swap(id_, other.id_);
+    swap(version_, other.version_);
 }
 
 bool versioned_key::operator==(const versioned_key& rhs) const {
@@ -48,7 +49,8 @@ bool versioned_key::operator==(const versioned_key& rhs) const {
 }
 
 versioned_key& versioned_key::operator=(versioned_key other) {
-    std::swap(*this, other);
+    using std::swap;
+    swap(*this, other);
     return *this;
 }
 

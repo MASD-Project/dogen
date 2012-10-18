@@ -73,14 +73,15 @@ public:
 public:
     bool operator==(const versioned_key& rhs) const;
 
-    bool operator!=(const versioned_key rhs) const {
+    bool operator!=(const versioned_key& rhs) const {
         return !this->operator==(rhs);
     }
 
 public:
-    void swap(versioned_key& other);
-    versioned_key& operator=(versioned_key other);
+    void swap(versioned_key& other) noexcept;
 
+public:
+    versioned_key& operator=(versioned_key other);
 private:
     unsigned int id_;
     unsigned int version_;

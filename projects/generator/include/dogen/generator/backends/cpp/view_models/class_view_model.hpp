@@ -50,7 +50,7 @@ public:
                          requires_stream_manipulators_(false),
                          is_parent_(false) { }
 
-    explicit class_view_model(std::string name)
+    explicit class_view_model(const std::string& name)
         : name_(name),
           has_primitive_properties_(false),
           requires_stream_manipulators_(false),
@@ -72,11 +72,12 @@ public:
      */
     /**@{*/
     std::string name() const { return name_; }
-    void name(std::string value) { name_ = value; }
+    void name(const std::string& value) { name_ = value; }
     /**@}*/
 
     /**
-     * @brief Properties of the class.
+     * @brief Properties of the class itself (e.g. excludes inherited
+     * properties).
      */
     /**@{*/
     std::list<property_view_model> properties() const {
@@ -84,6 +85,18 @@ public:
     }
     void properties(std::list<property_view_model> value) {
         properties_ = value;
+    }
+    /**@}*/
+
+    /**
+     * @brief All properties of the class including inherited.
+     */
+    /**@{*/
+    std::list<property_view_model> all_properties() const {
+        return all_properties_;
+    }
+    void all_properties(std::list<property_view_model> value) {
+        all_properties_ = value;
     }
     /**@}*/
 
@@ -157,6 +170,7 @@ public:
 private:
     std::list<std::string> namespaces_;
     std::list<property_view_model> properties_;
+    std::list<property_view_model> all_properties_;
     std::list<parent_view_model> parents_;
     std::string name_;
     bool has_primitive_properties_;

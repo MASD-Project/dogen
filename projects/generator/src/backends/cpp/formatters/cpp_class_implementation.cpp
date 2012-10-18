@@ -75,7 +75,7 @@ void cpp_class_implementation::default_constructor(const class_view_model& vm) {
 }
 
 void cpp_class_implementation::complete_constructor(const class_view_model& vm) {
-    const auto props(vm.properties());
+    const auto props(vm.all_properties());
     if (props.empty())
         return;
 
@@ -98,10 +98,22 @@ void cpp_class_implementation::complete_constructor(const class_view_model& vm) 
     {
         cpp_positive_indenter_scope s(indenter_);
         bool is_first(true);
-        for (const auto p : props) {
-            if (is_first)
-                stream_ << indenter_ << ": ";
-            else
+        stream_ << indenter_ << ": ";
+
+        for (const auto p : vm.parents()) {
+            stream_ << p.name() << "(";
+            for (const auto prop : p.properties()) {
+                if (!is_first)
+                    stream_ << "," << std::endl << indenter_ << "  ";
+
+                stream_ << prop.name();
+                is_first = false;
+            }
+            stream_ << ")";
+        }
+
+        for (const auto p : vm.properties()) {
+            if (!is_first)
                 stream_ << "," << std::endl << indenter_ << "  ";
 
             stream_ << utility_.as_member_variable(p.name()) << "("
@@ -133,21 +145,32 @@ void cpp_class_implementation::to_stream(const class_view_model& vm) {
 }
 
 void cpp_class_implementation::swap(const class_view_model& vm) {
-    if (vm.properties().empty())
+    if (vm.all_properties().empty())
         return;
 
     stream_ << indenter_ << "void " << vm.name() << "::swap("
-            << vm.name() << "& other) ";
+            << vm.name() << "& other) noexcept ";
 
     utility_.open_scope();
     {
         cpp_positive_indenter_scope s(indenter_);
-        for (const auto p : vm.properties()) {
-            stream_ << indenter_ << "std::swap("
-                    << utility_.as_member_variable(p.name())
-                    << ", other."
-                    << utility_.as_member_variable(p.name())
-                    << ");" << std::endl;
+        const auto parents(vm.parents());
+        for (const auto p : parents)
+            stream_ << indenter_ << p.name() << "::swap(other);" << std::endl;
+
+        if (!parents.empty())
+            utility_.blank_line();
+
+        const auto props(vm.properties());
+        if (!props.empty()) {
+            stream_ << indenter_ << "using std::swap;" << std::endl;
+            for (const auto p : props) {
+                stream_ << indenter_ << "swap("
+                        << utility_.as_member_variable(p.name())
+                        << ", other."
+                        << utility_.as_member_variable(p.name())
+                        << ");" << std::endl;
+            }
         }
     }
     utility_.close_scope();
@@ -158,7 +181,7 @@ void cpp_class_implementation::equals_operator(const class_view_model& vm) {
     stream_ << indenter_ << "bool " << vm.name() << "::operator==(const "
             << vm.name() <<  "& ";
 
-    if (vm.properties().empty())
+    if (vm.all_properties().empty())
         stream_ << "/*rhs*/";
     else
         stream_ << "rhs";
@@ -168,13 +191,25 @@ void cpp_class_implementation::equals_operator(const class_view_model& vm) {
     utility_.open_scope();
     {
         cpp_positive_indenter_scope s(indenter_);
-        if (vm.properties().empty())
+        if (vm.all_properties().empty())
             stream_ << indenter_ << "return true";
         else {
             stream_ << indenter_ << "return ";
             bool is_first(true);
             {
                 cpp_positive_indenter_scope s(indenter_);
+                const auto parents(vm.parents());
+                for (const auto p : parents) {
+                    if (!is_first)
+                        stream_ << " &&" << std::endl << indenter_;
+                    {
+                        cpp_positive_indenter_scope s(indenter_);
+                        stream_ << indenter_ << p.name() << "::operator==(rhs)"
+                                << std::endl;
+                    }
+                    is_first = false;
+                }
+
                 for (const auto p : vm.properties()) {
                     if (!is_first)
                         stream_ << " &&" << std::endl << indenter_;
@@ -196,7 +231,8 @@ void cpp_class_implementation::equals_operator(const class_view_model& vm) {
 
 void cpp_class_implementation::
 assignment_operator(const class_view_model& vm) {
-    if (vm.properties().empty())
+    // assignment is only available in leaf classes - MEC++-33
+    if (vm.all_properties().empty() || vm.is_parent())
         return;
 
     stream_ << indenter_ << vm.name() << "& "
@@ -206,7 +242,8 @@ assignment_operator(const class_view_model& vm) {
     utility_.open_scope();
     {
         cpp_positive_indenter_scope s(indenter_);
-        stream_ << indenter_ << "std::swap(*this, other);"
+        stream_ << indenter_ << "using std::swap;" << std::endl;
+        stream_ << indenter_ << "swap(*this, other);"
                 << std::endl
                 << indenter_ << "return *this;"
                 << std::endl;

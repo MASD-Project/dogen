@@ -145,6 +145,7 @@ void sml_dfs_visitor::process_sml_pod(const dogen::sml::pod& pod) {
 
     using namespace dogen::generator::backends::cpp::view_models;
     class_view_model cvm(name.type_name());
+    std::list<property_view_model> all_props_vm;
 
     if (pod.parent_name()) {
         const auto pqn(*pod.parent_name());
@@ -162,6 +163,7 @@ void sml_dfs_visitor::process_sml_pod(const dogen::sml::pod& pod) {
 
         parent_view_model parent(pqn.type_name());
         parent.properties(i->second.properties());
+        all_props_vm.splice(all_props_vm.end(), i->second.properties());
         parent.namespaces(i->second.namespaces());
 
         std::list<parent_view_model> parents;
@@ -174,7 +176,7 @@ void sml_dfs_visitor::process_sml_pod(const dogen::sml::pod& pod) {
     cvm.schema_name(state_->schema_name_);
     cvm.is_parent(pod.is_parent());
 
-    std::list<property_view_model> properties_vm;
+    std::list<property_view_model> props_vm;
     bool has_primitive_properties(false);
     bool requires_stream_manipulators(false);
     for(const auto p : pod.properties()) {
@@ -198,10 +200,10 @@ void sml_dfs_visitor::process_sml_pod(const dogen::sml::pod& pod) {
                 k.type() == char_type ||
                 k.type() == uchar_type);
         }
-        properties_vm.push_back(k);
+        props_vm.push_back(k);
     }
 
-    if (!state_->disable_keys_) {
+    if (!state_->disable_keys_ && !pod.parent_name()) {
         dogen::sml::qualified_name vn;
         vn.type_name(versioned_name);
         vn.model_name(name.model_name());
@@ -215,10 +217,11 @@ void sml_dfs_visitor::process_sml_pod(const dogen::sml::pod& pod) {
         property_view_model k(versioned_name);
         k.type(ns);
         k.is_primitive(false);
-        properties_vm.push_back(k);
+        props_vm.push_back(k);
     }
-
-    cvm.properties(properties_vm);
+    all_props_vm.insert(all_props_vm.end(), props_vm.begin(), props_vm.end());
+    cvm.properties(props_vm);
+    cvm.all_properties(all_props_vm);
     cvm.has_primitive_properties(has_primitive_properties);
     cvm.requires_stream_manipulators(requires_stream_manipulators);
     state_->class_view_models_.insert(std::make_pair(name, cvm));
@@ -440,6 +443,7 @@ sml_to_cpp_view_model::create_key_class_view_model(bool is_versioned) const {
     if (is_versioned)
         properties.push_back(lambda(version_name, uint_name));
     r.properties(properties);
+    r.all_properties(properties);
     r.has_primitive_properties(true);
 
     BOOST_LOG_SEV(lg, debug) << "Created key class" << name;

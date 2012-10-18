@@ -110,7 +110,7 @@ void database_implementation::anonymous_namespace(const class_view_model& vm) {
         cpp_positive_indenter_scope s(indenter_);
         bool is_first(true);
         unsigned int i(0);
-        for (auto p : vm.properties()) {
+        for (auto p : vm.all_properties()) {
             if (!is_first)
                 stream_ << "," << std::endl;
             stream_ << indenter_ << p.name() << "_field = " << i;
@@ -135,7 +135,7 @@ void database_implementation::anonymous_namespace(const class_view_model& vm) {
     auto pi([&](std::string operation) {
             const std::string dbn(vm.database_name());
             const std::string sn(vm.schema_name());
-            const unsigned int p(vm.properties().size());
+            const unsigned int p(vm.all_properties().size());
             stream_ << indenter_ << string_type << operation << "_sql("
                     << make_sql(dbn, sn, operation, p)
                     << ");" << std::endl;

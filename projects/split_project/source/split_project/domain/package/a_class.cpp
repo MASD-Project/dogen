@@ -27,8 +27,9 @@ namespace package {
 a_class::a_class(dogen::split_project::versioned_key versioned_key)
     : versioned_key_(versioned_key) { }
 
-void a_class::swap(a_class& other) {
-    std::swap(versioned_key_, other.versioned_key_);
+void a_class::swap(a_class& other) noexcept {
+    using std::swap;
+    swap(versioned_key_, other.versioned_key_);
 }
 
 bool a_class::operator==(const a_class& rhs) const {
@@ -36,7 +37,8 @@ bool a_class::operator==(const a_class& rhs) const {
 }
 
 a_class& a_class::operator=(a_class other) {
-    std::swap(*this, other);
+    using std::swap;
+    swap(*this, other);
     return *this;
 }
 

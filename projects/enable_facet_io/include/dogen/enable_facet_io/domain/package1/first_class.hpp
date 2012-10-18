@@ -80,14 +80,15 @@ public:
 public:
     bool operator==(const first_class& rhs) const;
 
-    bool operator!=(const first_class rhs) const {
+    bool operator!=(const first_class& rhs) const {
         return !this->operator==(rhs);
     }
 
 public:
-    void swap(first_class& other);
-    first_class& operator=(first_class other);
+    void swap(first_class& other) noexcept;
 
+public:
+    first_class& operator=(first_class other);
 private:
     int public_attribute_;
     int private_attribute_;

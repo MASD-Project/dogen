@@ -40,8 +40,8 @@ public:
 
         combine(seed, value.id());
         combine(seed, value.version());
-
         return seed;
+
     }
 };
 

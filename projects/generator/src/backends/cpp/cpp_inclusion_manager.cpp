@@ -37,6 +37,7 @@ const std::string boost_optional_include("boost/optional.hpp");
 const std::string pqxx_connection_include("pqxx/connection.hxx");
 const std::string boost_format_include("boost/format.hpp");
 const std::string boost_nvp("boost/serialization/nvp.hpp");
+const std::string boost_export("boost/serialization/export.hpp");
 const std::string pqxx_result_include("pqxx/result.hxx");
 const std::string pqxx_transaction_include("pqxx/transaction.hxx");
 const std::string iosfwd("iosfwd");
@@ -262,6 +263,10 @@ append_implementation_dependencies(const cpp_facet_types ft,
     if (is_header && is_serialization && !settings_.disable_xml_serialization())
         il.system.push_back(boost_nvp);
 
+    // boost serialisation export
+    if (is_header && is_serialization && is_parent_or_child)
+        il.system.push_back(boost_export);
+
     // state saver
     if (is_implementation && io_enabled_ && requires_stream_manipulators &&
         (domain_with_io || io_without_iio))
@@ -311,6 +316,7 @@ void cpp_inclusion_manager::append_relationship_dependencies(
          */
         const bool is_primitive(n.meta_type() == sml::meta_types::primitive);
         const bool is_header(flt == cpp_file_types::header);
+
         if (is_header && !is_primitive)
             il.user.push_back(header_dependency(n, ft));
     }

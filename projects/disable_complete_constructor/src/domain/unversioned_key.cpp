@@ -26,8 +26,9 @@ namespace disable_complete_constructor {
 unversioned_key::unversioned_key()
     : id_(static_cast<unsigned int>(0)) { }
 
-void unversioned_key::swap(unversioned_key& other) {
-    std::swap(id_, other.id_);
+void unversioned_key::swap(unversioned_key& other) noexcept {
+    using std::swap;
+    swap(id_, other.id_);
 }
 
 bool unversioned_key::operator==(const unversioned_key& rhs) const {
@@ -35,7 +36,8 @@ bool unversioned_key::operator==(const unversioned_key& rhs) const {
 }
 
 unversioned_key& unversioned_key::operator=(unversioned_key other) {
-    std::swap(*this, other);
+    using std::swap;
+    swap(*this, other);
     return *this;
 }
 
