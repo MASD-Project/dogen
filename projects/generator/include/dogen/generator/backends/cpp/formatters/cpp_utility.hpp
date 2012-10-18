@@ -44,8 +44,14 @@ public:
         stream_(stream), indenter_(indenter) { }
 
 public:
+    /**
+     * @brief Inserts the desired c++ access specifier.
+     */
+    /**@{*/
     void public_access_specifier();
+    void protected_access_specifier();
     void private_access_specifier();
+    /**@}*/
 
     void open_scope();
     void close_scope();

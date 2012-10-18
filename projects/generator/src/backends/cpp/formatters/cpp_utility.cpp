@@ -34,6 +34,7 @@ const std::string inserter("<< ");
 const std::string space(" ");
 
 const std::string public_access_specifier("public:");
+const std::string protected_access_specifier("protected:");
 const std::string private_access_specifier("private:");
 
 }
@@ -47,6 +48,11 @@ namespace formatters {
 void cpp_utility::public_access_specifier() {
     cpp_negative_indenter_scope s(indenter_);
     stream_ << ::public_access_specifier << std::endl;
+}
+
+void cpp_utility::protected_access_specifier() {
+    cpp_negative_indenter_scope s(indenter_);
+    stream_ << ::protected_access_specifier << std::endl;
 }
 
 void cpp_utility::private_access_specifier() {
