@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_TRIVIAL_INHERITANCE_DATABASE_CHILD_DB_HPP
-#define DOGEN_TRIVIAL_INHERITANCE_DATABASE_CHILD_DB_HPP
+#ifndef DOGEN_TRIVIAL_INHERITANCE_DATABASE_PARENT_WITHOUT_MEMBERS_DB_HPP
+#define DOGEN_TRIVIAL_INHERITANCE_DATABASE_PARENT_WITHOUT_MEMBERS_DB_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -28,24 +28,23 @@
 #include <boost/optional.hpp>
 #include <pqxx/connection.hxx>
 #include <vector>
-#include "dogen/trivial_inheritance/database/parent_db.hpp"
-#include "dogen/trivial_inheritance/domain/child.hpp"
+#include "dogen/trivial_inheritance/domain/parent_without_members.hpp"
 
 namespace dogen {
 namespace trivial_inheritance {
 
-class child_data_exchanger {
+class parent_without_members_data_exchanger {
 public:
-    child_data_exchanger() = default;
-    child_data_exchanger(const child_data_exchanger&) = delete;
-    ~child_data_exchanger() = default;
-    child_data_exchanger(child_data_exchanger&&) = delete;
+    parent_without_members_data_exchanger() = default;
+    parent_without_members_data_exchanger(const parent_without_members_data_exchanger&) = delete;
+    ~parent_without_members_data_exchanger() = default;
+    parent_without_members_data_exchanger(parent_without_members_data_exchanger&&) = delete;
 
 private:
     std::string format_sql(const std::string& format_str,
         const boost::optional<versioned_key> id = boost::optional<versioned_key>());
 
-    std::vector<dogen::trivial_inheritance::child> load_internal(
+    std::vector<dogen::trivial_inheritance::parent_without_members> load_internal(
         pqxx::connection& connection,
         const boost::optional<versioned_key> id =boost::optional<versioned_key>());
 
@@ -53,13 +52,13 @@ private:
         const boost::optional<versioned_key> id = boost::optional<versioned_key>());
 
 public:
-    std::vector<dogen::trivial_inheritance::child> load(
+    std::vector<dogen::trivial_inheritance::parent_without_members> load(
         pqxx::connection& connection,
         const boost::optional<versioned_key> id =boost::optional<versioned_key>());
 
     void save(
         pqxx::connection& connection,
-        std::vector<dogen::trivial_inheritance::child> values);
+        std::vector<dogen::trivial_inheritance::parent_without_members> values);
 
     void erase(pqxx::connection& connection);
     void erase(pqxx::connection& connection, versioned_key id);

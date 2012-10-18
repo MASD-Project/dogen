@@ -23,7 +23,7 @@
 					<count>0</count>
 					<item_version>0</item_version>
 				</package_path>
-				<type_name>child</type_name>
+				<type_name>child_without_members</type_name>
 				<meta_type>2</meta_type>
 			</first>
 			<second class_id="6" tracking_level="0" version="0">
@@ -37,7 +37,7 @@
 						<count>0</count>
 						<item_version>0</item_version>
 					</package_path>
-					<type_name>child</type_name>
+					<type_name>child_without_members</type_name>
 					<meta_type>2</meta_type>
 				</name>
 				<properties class_id="7" tracking_level="0" version="0">
@@ -57,7 +57,7 @@
 							<count>0</count>
 							<item_version>0</item_version>
 						</package_path>
-						<type_name>parent</type_name>
+						<type_name>parent_without_members</type_name>
 						<meta_type>2</meta_type>
 					</value>
 				</parent_name>
@@ -76,7 +76,7 @@
 					<count>0</count>
 					<item_version>0</item_version>
 				</package_path>
-				<type_name>parent</type_name>
+				<type_name>parent_without_members</type_name>
 				<meta_type>2</meta_type>
 			</first>
 			<second>
@@ -90,7 +90,7 @@
 						<count>0</count>
 						<item_version>0</item_version>
 					</package_path>
-					<type_name>parent</type_name>
+					<type_name>parent_without_members</type_name>
 					<meta_type>2</meta_type>
 				</name>
 				<properties>

@@ -18,25 +18,16 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/trivial_inheritance/test_data/child_td.hpp"
-#include "dogen/trivial_inheritance/test_data/versioned_key_td.hpp"
+#include <ostream>
+#include "dogen/trivial_inheritance/io/parent_without_members_io.hpp"
+#include "dogen/trivial_inheritance/io/versioned_key_io.hpp"
 
 namespace dogen {
 namespace trivial_inheritance {
-namespace detail {
 
-child_generator::value_type
-child_generator::next_term(const unsigned int position) {
-    child r;
-
-    if (position == 0) {
-    } else if (position == 1) {
-    } else if (position == 2) {
-    }
-
-    return r;
+std::ostream& operator<<(std::ostream& stream, parent_without_members value) {
+    value.to_stream(stream);
+    return(stream);
 }
 
-unsigned int child_generator::length() const { return(3); }
-
-} } }
+} }

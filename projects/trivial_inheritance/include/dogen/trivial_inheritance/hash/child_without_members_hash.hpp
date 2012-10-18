@@ -18,36 +18,33 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_TRIVIAL_INHERITANCE_TEST_DATA_PARENT_TD_HPP
-#define DOGEN_TRIVIAL_INHERITANCE_TEST_DATA_PARENT_TD_HPP
+#ifndef DOGEN_TRIVIAL_INHERITANCE_HASH_CHILD_WITHOUT_MEMBERS_HASH_HPP
+#define DOGEN_TRIVIAL_INHERITANCE_HASH_CHILD_WITHOUT_MEMBERS_HASH_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/trivial_inheritance/domain/parent.hpp"
-#include "dogen/utility/test_data/generator.hpp"
-#include "dogen/utility/test_data/sequence.hpp"
+#include <functional>
+#include "dogen/trivial_inheritance/domain/child_without_members.hpp"
+#include "dogen/trivial_inheritance/hash/parent_without_members_hash.hpp"
+#include "dogen/trivial_inheritance/hash/versioned_key_hash.hpp"
+#include "dogen/utility/hash/combine.hpp"
 
-namespace dogen {
-namespace trivial_inheritance {
+namespace std {
 
-namespace detail {
-
-class parent_generator {
+template<>
+class hash<dogen::trivial_inheritance::child_without_members> {
 public:
-    typedef dogen::trivial_inheritance::parent value_type;
+    size_t operator()(dogen::trivial_inheritance::child_without_members value) const {
+        using dogen::utility::hash::combine;
+        std::size_t seed(0);
 
-public:
-    value_type next_term(const unsigned int position);
-    unsigned int length() const;
+        combine(seed, value.versioned_key());
+
+        return seed;
+    }
 };
 
 }
-
-typedef dogen::utility::test_data::sequence<
-    detail::parent_generator> parent_sequence;
-
-} }
-
 #endif

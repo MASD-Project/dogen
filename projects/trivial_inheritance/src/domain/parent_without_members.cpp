@@ -19,32 +19,32 @@
  *
  */
 #include <ostream>
-#include "dogen/trivial_inheritance/domain/parent.hpp"
+#include "dogen/trivial_inheritance/domain/parent_without_members.hpp"
 #include "dogen/trivial_inheritance/io/versioned_key_io.hpp"
 
 namespace dogen {
 namespace trivial_inheritance {
 
-parent::parent(dogen::trivial_inheritance::versioned_key versioned_key)
+parent_without_members::parent_without_members(dogen::trivial_inheritance::versioned_key versioned_key)
     : versioned_key_(versioned_key) { }
 
-std::ostream& parent::to_stream(std::ostream& stream) const {
+std::ostream& parent_without_members::to_stream(std::ostream& stream) const {
     stream << " { "
-           << "\"__type__\": " << "\"parent\"" << ", "
+           << "\"__type__\": " << "\"parent_without_members\"" << ", "
            << "\"versioned_key\": " << versioned_key_
            << " }";
     return(stream);
 }
 
-void parent::swap(parent& other) {
+void parent_without_members::swap(parent_without_members& other) {
     std::swap(versioned_key_, other.versioned_key_);
 }
 
-bool parent::operator==(const parent& rhs) const {
+bool parent_without_members::operator==(const parent_without_members& rhs) const {
     return versioned_key_ == rhs.versioned_key_;
 }
 
-parent& parent::operator=(parent other) {
+parent_without_members& parent_without_members::operator=(parent_without_members other) {
     std::swap(*this, other);
     return *this;
 }

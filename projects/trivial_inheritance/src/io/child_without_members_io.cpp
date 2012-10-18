@@ -19,13 +19,13 @@
  *
  */
 #include <ostream>
-#include "dogen/trivial_inheritance/io/parent_io.hpp"
+#include "dogen/trivial_inheritance/io/child_without_members_io.hpp"
 #include "dogen/trivial_inheritance/io/versioned_key_io.hpp"
 
 namespace dogen {
 namespace trivial_inheritance {
 
-std::ostream& operator<<(std::ostream& stream, parent value) {
+std::ostream& operator<<(std::ostream& stream, child_without_members value) {
     value.to_stream(stream);
     return(stream);
 }

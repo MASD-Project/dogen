@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/trivial_inheritance/domain/child.hpp"
-#include "dogen/trivial_inheritance/domain/parent.hpp"
+#include "dogen/trivial_inheritance/domain/child_without_members.hpp"
+#include "dogen/trivial_inheritance/domain/parent_without_members.hpp"
 #include "dogen/trivial_inheritance/domain/unversioned_key.hpp"
 #include "dogen/trivial_inheritance/domain/versioned_key.hpp"

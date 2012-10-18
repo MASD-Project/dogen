@@ -18,25 +18,25 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_TRIVIAL_INHERITANCE_SERIALIZATION_PARENT_SER_HPP
-#define DOGEN_TRIVIAL_INHERITANCE_SERIALIZATION_PARENT_SER_HPP
+#ifndef DOGEN_TRIVIAL_INHERITANCE_SERIALIZATION_PARENT_WITHOUT_MEMBERS_SER_HPP
+#define DOGEN_TRIVIAL_INHERITANCE_SERIALIZATION_PARENT_WITHOUT_MEMBERS_SER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <boost/serialization/nvp.hpp>
-#include "dogen/trivial_inheritance/domain/parent.hpp"
+#include "dogen/trivial_inheritance/domain/parent_without_members.hpp"
 #include "dogen/trivial_inheritance/serialization/versioned_key_ser.hpp"
 
 namespace dogen {
 namespace trivial_inheritance {
 
-class parent_serializer {
+class parent_without_members_serializer {
 public:
     template<typename Archive>
     void serialize(Archive & archive,
-        dogen::trivial_inheritance::parent& value,
+        dogen::trivial_inheritance::parent_without_members& value,
         const unsigned int /*version*/) {
         using boost::serialization::make_nvp;
 
@@ -51,9 +51,9 @@ namespace serialization {
 
 template<class Archive>
 inline void serialize(Archive & archive,
-    dogen::trivial_inheritance::parent& value,
+    dogen::trivial_inheritance::parent_without_members& value,
     const unsigned int version) {
-    dogen::trivial_inheritance::parent_serializer serializer;
+    dogen::trivial_inheritance::parent_without_members_serializer serializer;
     serializer.serialize<Archive>(archive, value, version);
 }
 

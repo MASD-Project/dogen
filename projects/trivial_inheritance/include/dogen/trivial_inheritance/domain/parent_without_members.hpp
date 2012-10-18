@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_TRIVIAL_INHERITANCE_DOMAIN_CHILD_HPP
-#define DOGEN_TRIVIAL_INHERITANCE_DOMAIN_CHILD_HPP
+#ifndef DOGEN_TRIVIAL_INHERITANCE_DOMAIN_PARENT_WITHOUT_MEMBERS_HPP
+#define DOGEN_TRIVIAL_INHERITANCE_DOMAIN_PARENT_WITHOUT_MEMBERS_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -27,28 +27,27 @@
 
 #include <algorithm>
 #include <iosfwd>
-#include "dogen/trivial_inheritance/domain/parent.hpp"
 #include "dogen/trivial_inheritance/domain/versioned_key.hpp"
 
 namespace dogen {
 namespace trivial_inheritance {
 
-class child_serializer;
+class parent_without_members_serializer;
 
-class child : public parent {
+class parent_without_members {
 public:
-    child() = default;
-    child(const child&) = default;
-    child(child&&) = default;
-
-public:
-    explicit child(dogen::trivial_inheritance::versioned_key versioned_key);
+    parent_without_members() = default;
+    parent_without_members(const parent_without_members&) = default;
+    parent_without_members(parent_without_members&&) = default;
 
 public:
-    friend class dogen::trivial_inheritance::child_serializer;
+    explicit parent_without_members(dogen::trivial_inheritance::versioned_key versioned_key);
 
 public:
-    std::ostream& to_stream(std::ostream& stream) const override;
+    friend class dogen::trivial_inheritance::parent_without_members_serializer;
+
+public:
+    virtual std::ostream& to_stream(std::ostream& stream) const;
 
 public:
     dogen::trivial_inheritance::versioned_key versioned_key() const {
@@ -60,15 +59,15 @@ public:
     }
 
 public:
-    bool operator==(const child& rhs) const;
+    bool operator==(const parent_without_members& rhs) const;
 
-    bool operator!=(const child rhs) const {
+    bool operator!=(const parent_without_members rhs) const {
         return !this->operator==(rhs);
     }
 
 public:
-    void swap(child& other);
-    child& operator=(child other);
+    void swap(parent_without_members& other);
+    parent_without_members& operator=(parent_without_members other);
 
 private:
     dogen::trivial_inheritance::versioned_key versioned_key_;
@@ -80,8 +79,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::trivial_inheritance::child& lhs,
-    dogen::trivial_inheritance::child& rhs) {
+    dogen::trivial_inheritance::parent_without_members& lhs,
+    dogen::trivial_inheritance::parent_without_members& rhs) {
     lhs.swap(rhs);
 }
 

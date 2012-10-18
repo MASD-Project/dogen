@@ -352,7 +352,7 @@
 								<item>
 									<which>6</which>
 									<value class_id="20" tracking_level="0" version="0">
-										<value>25.3875,15.1375;28.99,17.4375</value>
+										<value>25.3875,15.1375;37.4525,17.4375</value>
 									</value>
 								</item>
 							</values>
@@ -378,7 +378,7 @@
 								<item>
 									<which>2</which>
 									<value>
-										<value>3.5024999999999999</value>
+										<value>11.965</value>
 									</value>
 								</item>
 							</values>
@@ -404,7 +404,7 @@
 								<item>
 									<which>5</which>
 									<value>
-										<value>#parent#</value>
+										<value>#parent_without_members#</value>
 									</value>
 								</item>
 							</values>
@@ -856,7 +856,7 @@
 								<item>
 									<which>6</which>
 									<value>
-										<value>31.325,23.3875;34.0925,25.6875</value>
+										<value>31.325,23.3875;42.555,25.6875</value>
 									</value>
 								</item>
 							</values>
@@ -882,7 +882,7 @@
 								<item>
 									<which>2</which>
 									<value>
-										<value>2.6675</value>
+										<value>11.129999999999999</value>
 									</value>
 								</item>
 							</values>
@@ -908,7 +908,7 @@
 								<item>
 									<which>5</which>
 									<value>
-										<value>#child#</value>
+										<value>#child_without_members#</value>
 									</value>
 								</item>
 							</values>
@@ -1347,7 +1347,7 @@
 								<item>
 									<which>1</which>
 									<value>
-										<value>27.1887,17.3875</value>
+										<value>31.42,17.3875</value>
 									</value>
 								</item>
 							</values>
@@ -1360,7 +1360,7 @@
 								<item>
 									<which>6</which>
 									<value>
-										<value>26.3388,17.3375;32.7588,23.4875</value>
+										<value>30.57,17.3375;36.99,23.4875</value>
 									</value>
 								</item>
 							</values>
@@ -1393,25 +1393,25 @@
 								<item>
 									<which>1</which>
 									<value>
-										<value>27.1887,17.3875</value>
+										<value>31.42,17.3875</value>
 									</value>
 								</item>
 								<item>
 									<which>1</which>
 									<value>
-										<value>27.1887,20.8125</value>
+										<value>31.42,20.8125</value>
 									</value>
 								</item>
 								<item>
 									<which>1</which>
 									<value>
-										<value>32.7088,20.8125</value>
+										<value>36.94,20.8125</value>
 									</value>
 								</item>
 								<item>
 									<which>1</which>
 									<value>
-										<value>32.7088,23.4375</value>
+										<value>36.94,23.4375</value>
 									</value>
 								</item>
 							</values>

@@ -43,32 +43,28 @@ BOOST_AUTO_TEST_SUITE(trivial_inheritance)
 
 BOOST_AUTO_TEST_CASE(validate_equality) {
     SETUP_TEST_LOG("validate_equality");
-    // test_equality<parent_sequence>();
-    // test_equality<child_sequence>();
     test_equality<versioned_key_sequence>();
     test_equality<unversioned_key_sequence>();
 }
 
 BOOST_AUTO_TEST_CASE(validate_serialisation) {
     SETUP_TEST_LOG("validate_serialisation");
-    rountrip_type<parent_sequence>();
-    rountrip_type<child_sequence>();
+    rountrip_type<parent_without_members_sequence>();
+    rountrip_type<child_without_members_sequence>();
     rountrip_type<versioned_key_sequence>();
     rountrip_type<unversioned_key_sequence>();
 }
 
 BOOST_AUTO_TEST_CASE(validate_hashing) {
     SETUP_TEST_LOG("validate_hashing");
-    // test_hashing<parent_sequence>();
-    // test_hashing<child_sequence>();
     test_hashing<versioned_key_sequence>();
     test_hashing<unversioned_key_sequence>();
 }
 
 BOOST_AUTO_TEST_CASE(validate_swap) {
     SETUP_TEST_LOG("validate_hashing");
-    test_swap<parent_sequence>();
-    test_swap<child_sequence>();
+    test_swap<parent_without_members_sequence>();
+    test_swap<child_without_members_sequence>();
     test_swap<versioned_key_sequence>();
     test_swap<unversioned_key_sequence>();
 }
