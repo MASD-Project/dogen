@@ -320,13 +320,9 @@ BOOST_AUTO_TEST_CASE(processing_one_pod_model_with_default_configuration_generat
     // header
     const auto hu(i[header_user]);
     BOOST_LOG_SEV(lg, debug) << "header user dependencies: " << hu;
-    BOOST_REQUIRE(hu.size() == 3);
-    for (const auto s : hu) {
-        BOOST_CHECK(
-            (boost::contains(s, pod_name) && boost::contains(s, domain)) ||
-            (boost::ends_with(s, generator_include)) ||
-            (boost::ends_with(s, sequence_include)));
-    }
+    BOOST_REQUIRE(hu.size() == 1);
+    BOOST_CHECK(boost::contains(hu.front(), pod_name) &&
+        boost::contains(hu.front(), domain));
 
     const auto hs(i[header_system]);
     BOOST_LOG_SEV(lg, debug) << "header system dependencies: " << hs;

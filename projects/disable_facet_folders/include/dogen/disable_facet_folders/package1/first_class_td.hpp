@@ -26,8 +26,6 @@
 #endif
 
 #include "dogen/disable_facet_folders/package1/first_class.hpp"
-#include "dogen/utility/test_data/generator.hpp"
-#include "dogen/utility/test_data/sequence.hpp"
 
 namespace dogen {
 namespace disable_facet_folders {

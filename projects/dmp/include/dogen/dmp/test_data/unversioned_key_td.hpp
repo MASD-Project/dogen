@@ -26,8 +26,6 @@
 #endif
 
 #include "dogen/dmp/domain/unversioned_key.hpp"
-#include "dogen/utility/test_data/generator.hpp"
-#include "dogen/utility/test_data/sequence.hpp"
 
 namespace dogen {
 namespace dmp {

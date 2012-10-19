@@ -46,8 +46,6 @@ const std::string ostream("ostream");
 const std::string state_saver("boost/io/ios_state.hpp");
 const std::string functional("functional");
 const std::string hash_combine("dogen/utility/hash/combine.hpp");
-const std::string generator_include("dogen/utility/test_data/generator.hpp");
-const std::string sequence_include("dogen/utility/test_data/sequence.hpp");
 
 using dogen::generator::backends::cpp::cpp_facet_types;
 bool io_enabled(const std::set<cpp_facet_types>& f) {
@@ -293,15 +291,6 @@ append_implementation_dependencies(const cpp_facet_types ft,
     // hash combine
     if (is_header && is_hash)
         il.user.push_back(hash_combine);
-
-    // generator
-    const bool is_test_data(ft == cpp_facet_types::test_data);
-    if (is_header && is_test_data)
-        il.user.push_back(generator_include);
-
-    // sequence
-    if (is_header && is_test_data)
-        il.user.push_back(sequence_include);
 }
 
 void cpp_inclusion_manager::append_relationship_dependencies(

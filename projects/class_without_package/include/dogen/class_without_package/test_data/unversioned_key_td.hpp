@@ -26,8 +26,6 @@
 #endif
 
 #include "dogen/class_without_package/domain/unversioned_key.hpp"
-#include "dogen/utility/test_data/generator.hpp"
-#include "dogen/utility/test_data/sequence.hpp"
 
 namespace dogen {
 namespace class_without_package {

@@ -26,8 +26,6 @@
 #endif
 
 #include "dogen/classes_in_a_package/domain/package_1/class_4.hpp"
-#include "dogen/utility/test_data/generator.hpp"
-#include "dogen/utility/test_data/sequence.hpp"
 
 namespace dogen {
 namespace classes_in_a_package {

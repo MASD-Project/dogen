@@ -26,8 +26,6 @@
 #endif
 
 #include "dogen/split_project/domain/package/a_class.hpp"
-#include "dogen/utility/test_data/generator.hpp"
-#include "dogen/utility/test_data/sequence.hpp"
 
 namespace dogen {
 namespace split_project {

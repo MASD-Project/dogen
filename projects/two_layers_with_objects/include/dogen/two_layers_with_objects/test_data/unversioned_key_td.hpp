@@ -26,8 +26,6 @@
 #endif
 
 #include "dogen/two_layers_with_objects/domain/unversioned_key.hpp"
-#include "dogen/utility/test_data/generator.hpp"
-#include "dogen/utility/test_data/sequence.hpp"
 
 namespace dogen {
 namespace two_layers_with_objects {

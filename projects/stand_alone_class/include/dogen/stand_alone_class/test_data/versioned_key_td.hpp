@@ -26,8 +26,6 @@
 #endif
 
 #include "dogen/stand_alone_class/domain/versioned_key.hpp"
-#include "dogen/utility/test_data/generator.hpp"
-#include "dogen/utility/test_data/sequence.hpp"
 
 namespace dogen {
 namespace stand_alone_class {

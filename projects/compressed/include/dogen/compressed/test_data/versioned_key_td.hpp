@@ -26,8 +26,6 @@
 #endif
 
 #include "dogen/compressed/domain/versioned_key.hpp"
-#include "dogen/utility/test_data/generator.hpp"
-#include "dogen/utility/test_data/sequence.hpp"
 
 namespace dogen {
 namespace compressed {

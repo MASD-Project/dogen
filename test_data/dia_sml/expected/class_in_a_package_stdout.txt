@@ -1033,8 +1033,6 @@ Contents:
 #endif
 
 #include "class_in_a_package/domain/package1/first_class.hpp"
-#include "dogen/utility/test_data/generator.hpp"
-#include "dogen/utility/test_data/sequence.hpp"
 
 namespace class_in_a_package {
 namespace package1 {
@@ -1087,8 +1085,6 @@ Contents:
 #endif
 
 #include "class_in_a_package/domain/unversioned_key.hpp"
-#include "dogen/utility/test_data/generator.hpp"
-#include "dogen/utility/test_data/sequence.hpp"
 
 namespace class_in_a_package {
 
@@ -1140,8 +1136,6 @@ Contents:
 #endif
 
 #include "class_in_a_package/domain/versioned_key.hpp"
-#include "dogen/utility/test_data/generator.hpp"
-#include "dogen/utility/test_data/sequence.hpp"
 
 namespace class_in_a_package {
 

@@ -26,8 +26,6 @@
 #endif
 
 #include "dogen/dmp/domain/package1/first_class.hpp"
-#include "dogen/utility/test_data/generator.hpp"
-#include "dogen/utility/test_data/sequence.hpp"
 
 namespace dogen {
 namespace dmp {
