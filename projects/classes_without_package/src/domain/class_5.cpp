@@ -23,7 +23,7 @@
 namespace dogen {
 namespace classes_without_package {
 
-class_5::class_5(dogen::classes_without_package::versioned_key versioned_key)
+class_5::class_5(const dogen::classes_without_package::versioned_key& versioned_key)
     : versioned_key_(versioned_key) { }
 
 void class_5::swap(class_5& other) noexcept {

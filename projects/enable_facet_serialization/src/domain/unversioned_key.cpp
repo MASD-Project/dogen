@@ -26,7 +26,7 @@ namespace enable_facet_serialization {
 unversioned_key::unversioned_key()
     : id_(static_cast<unsigned int>(0)) { }
 
-unversioned_key::unversioned_key(unsigned int id)
+unversioned_key::unversioned_key(const unsigned int id)
     : id_(id) { }
 
 void unversioned_key::swap(unversioned_key& other) noexcept {

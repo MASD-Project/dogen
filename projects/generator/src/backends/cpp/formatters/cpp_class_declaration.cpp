@@ -79,8 +79,13 @@ void cpp_class_declaration::complete_constructor(const class_view_model& vm) {
     utility_.public_access_specifier();
     if (props.size() == 1) {
         const auto p(*props.begin());
-        stream_ << indenter_ << "explicit " << vm.name() << "("
-                << p.type() << " " << p.name() << ");" << std::endl;
+        stream_ << indenter_ << "explicit " << vm.name() << "(const "
+                << p.type();
+
+        if (!p.is_primitive())
+            stream_ << "&";
+
+        stream_ << " " << p.name() << ");" << std::endl;
         utility_.blank_line();
         return;
     }
@@ -91,7 +96,12 @@ void cpp_class_declaration::complete_constructor(const class_view_model& vm) {
         bool is_first(true);
         for (const auto p : props) {
             stream_ << (is_first ? "" : ",") << std::endl;
-            stream_ << indenter_ << p.type() << " " << p.name();
+            stream_ << indenter_ << "const " << p.type();
+
+            if (!p.is_primitive())
+                stream_ << "&";
+
+            stream_ << " " << p.name();
             is_first = false;
         }
         stream_ << ");" << std::endl;
@@ -112,6 +122,7 @@ void cpp_class_declaration::destructor(const class_view_model& vm) {
         stream_ << indenter_ << "virtual ~" << vm.name()
                 << "() noexcept = 0;" << std::endl;
     }
+    utility_.blank_line();
 }
 
 void cpp_class_declaration::compiler_generated_constuctors(const class_view_model& vm) {
@@ -134,7 +145,6 @@ void cpp_class_declaration::compiler_generated_constuctors(const class_view_mode
         stream_ << indenter_ << vm.name() << "& operator=(const " << vm.name()
                 << "&) = default;" << std::endl;
     }
-
     utility_.blank_line();
 }
 
@@ -167,13 +177,17 @@ void cpp_class_declaration::getters_and_setters(const class_view_model& vm) {
         utility_.close_scope();
         utility_.blank_line();
 
-        stream_ << indenter_ << "void " << p.name() << "("
-                << p.type() << " value) ";
+        stream_ << indenter_ << "void " << p.name() << "(const " << p.type();
+
+        if (!p.is_primitive())
+            stream_ << "&";
+
+        stream_ << " v) ";
         utility_.open_scope();
         {
             cpp_positive_indenter_scope s(indenter_);
             stream_ << indenter_ << utility_.as_member_variable(p.name())
-                    << " = value;" << std::endl;
+                    << " = v;" << std::endl;
         }
         utility_.close_scope();
         utility_.blank_line();

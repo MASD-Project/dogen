@@ -41,8 +41,9 @@ public:
 public:
     unversioned_key();
 
+
 public:
-    explicit unversioned_key(unsigned int id);
+    explicit unversioned_key(const unsigned int id);
 
 public:
     friend class dogen::enable_facet_domain::unversioned_key_serializer;
@@ -52,8 +53,8 @@ public:
         return id_;
     }
 
-    void id(unsigned int value) {
-        id_ = value;
+    void id(const unsigned int v) {
+        id_ = v;
     }
 
 public:

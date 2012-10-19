@@ -43,11 +43,12 @@ public:
 public:
     first_class();
 
+
 public:
     first_class(
-        int public_attribute,
-        int private_attribute,
-        dogen::enable_facet_serialization::versioned_key versioned_key);
+        const int public_attribute,
+        const int private_attribute,
+        const dogen::enable_facet_serialization::versioned_key& versioned_key);
 
 public:
     friend class dogen::enable_facet_serialization::package1::first_class_serializer;
@@ -57,24 +58,24 @@ public:
         return public_attribute_;
     }
 
-    void public_attribute(int value) {
-        public_attribute_ = value;
+    void public_attribute(const int v) {
+        public_attribute_ = v;
     }
 
     int private_attribute() const {
         return private_attribute_;
     }
 
-    void private_attribute(int value) {
-        private_attribute_ = value;
+    void private_attribute(const int v) {
+        private_attribute_ = v;
     }
 
     dogen::enable_facet_serialization::versioned_key versioned_key() const {
         return versioned_key_;
     }
 
-    void versioned_key(dogen::enable_facet_serialization::versioned_key value) {
-        versioned_key_ = value;
+    void versioned_key(const dogen::enable_facet_serialization::versioned_key& v) {
+        versioned_key_ = v;
     }
 
 public:

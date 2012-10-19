@@ -43,6 +43,7 @@ public:
 public:
     first_class();
 
+
 public:
     friend class dogen::disable_complete_constructor::package1::first_class_serializer;
 
@@ -51,24 +52,24 @@ public:
         return public_attribute_;
     }
 
-    void public_attribute(int value) {
-        public_attribute_ = value;
+    void public_attribute(const int v) {
+        public_attribute_ = v;
     }
 
     int private_attribute() const {
         return private_attribute_;
     }
 
-    void private_attribute(int value) {
-        private_attribute_ = value;
+    void private_attribute(const int v) {
+        private_attribute_ = v;
     }
 
     dogen::disable_complete_constructor::versioned_key versioned_key() const {
         return versioned_key_;
     }
 
-    void versioned_key(dogen::disable_complete_constructor::versioned_key value) {
-        versioned_key_ = value;
+    void versioned_key(const dogen::disable_complete_constructor::versioned_key& v) {
+        versioned_key_ = v;
     }
 
 public:

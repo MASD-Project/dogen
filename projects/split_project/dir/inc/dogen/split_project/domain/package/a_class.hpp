@@ -41,8 +41,9 @@ public:
     a_class(a_class&&) = default;
     ~a_class() = default;
 
+
 public:
-    explicit a_class(dogen::split_project::versioned_key versioned_key);
+    explicit a_class(const dogen::split_project::versioned_key& versioned_key);
 
 public:
     friend class dogen::split_project::package::a_class_serializer;
@@ -52,8 +53,8 @@ public:
         return versioned_key_;
     }
 
-    void versioned_key(dogen::split_project::versioned_key value) {
-        versioned_key_ = value;
+    void versioned_key(const dogen::split_project::versioned_key& v) {
+        versioned_key_ = v;
     }
 
 public:

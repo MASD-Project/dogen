@@ -24,7 +24,7 @@ namespace dogen {
 namespace two_layers_with_objects {
 namespace Package_2 {
 
-class_2::class_2(dogen::two_layers_with_objects::versioned_key versioned_key)
+class_2::class_2(const dogen::two_layers_with_objects::versioned_key& versioned_key)
     : versioned_key_(versioned_key) { }
 
 void class_2::swap(class_2& other) noexcept {

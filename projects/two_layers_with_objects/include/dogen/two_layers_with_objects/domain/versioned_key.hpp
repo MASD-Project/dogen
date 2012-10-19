@@ -42,10 +42,11 @@ public:
 public:
     versioned_key();
 
+
 public:
     versioned_key(
-        unsigned int id,
-        unsigned int version);
+        const unsigned int id,
+        const unsigned int version);
 
 public:
     friend class dogen::two_layers_with_objects::versioned_key_serializer;
@@ -58,16 +59,16 @@ public:
         return id_;
     }
 
-    void id(unsigned int value) {
-        id_ = value;
+    void id(const unsigned int v) {
+        id_ = v;
     }
 
     unsigned int version() const {
         return version_;
     }
 
-    void version(unsigned int value) {
-        version_ = value;
+    void version(const unsigned int v) {
+        version_ = v;
     }
 
 public:

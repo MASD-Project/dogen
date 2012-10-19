@@ -28,8 +28,8 @@ versioned_key::versioned_key()
       version_(static_cast<unsigned int>(0)) { }
 
 versioned_key::versioned_key(
-    unsigned int id,
-    unsigned int version)
+    const unsigned int id,
+    const unsigned int version)
     : id_(id),
       version_(version) { }
 

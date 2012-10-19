@@ -42,10 +42,11 @@ public:
 public:
     class_1();
 
+
 public:
     class_1(
-        int an_attribute,
-        dogen::class_without_package::versioned_key versioned_key);
+        const int an_attribute,
+        const dogen::class_without_package::versioned_key& versioned_key);
 
 public:
     friend class dogen::class_without_package::class_1_serializer;
@@ -55,16 +56,16 @@ public:
         return an_attribute_;
     }
 
-    void an_attribute(int value) {
-        an_attribute_ = value;
+    void an_attribute(const int v) {
+        an_attribute_ = v;
     }
 
     dogen::class_without_package::versioned_key versioned_key() const {
         return versioned_key_;
     }
 
-    void versioned_key(dogen::class_without_package::versioned_key value) {
-        versioned_key_ = value;
+    void versioned_key(const dogen::class_without_package::versioned_key& v) {
+        versioned_key_ = v;
     }
 
 public:

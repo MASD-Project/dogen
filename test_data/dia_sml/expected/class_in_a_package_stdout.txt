@@ -165,11 +165,12 @@ public:
 public:
     first_class();
 
+
 public:
     first_class(
-        int public_attribute,
-        int private_attribute,
-        class_in_a_package::versioned_key versioned_key);
+        const int public_attribute,
+        const int private_attribute,
+        const class_in_a_package::versioned_key& versioned_key);
 
 public:
     friend class class_in_a_package::package1::first_class_serializer;
@@ -179,24 +180,24 @@ public:
         return public_attribute_;
     }
 
-    void public_attribute(int value) {
-        public_attribute_ = value;
+    void public_attribute(const int v) {
+        public_attribute_ = v;
     }
 
     int private_attribute() const {
         return private_attribute_;
     }
 
-    void private_attribute(int value) {
-        private_attribute_ = value;
+    void private_attribute(const int v) {
+        private_attribute_ = v;
     }
 
     class_in_a_package::versioned_key versioned_key() const {
         return versioned_key_;
     }
 
-    void versioned_key(class_in_a_package::versioned_key value) {
-        versioned_key_ = value;
+    void versioned_key(const class_in_a_package::versioned_key& v) {
+        versioned_key_ = v;
     }
 
 public:
@@ -276,8 +277,9 @@ public:
 public:
     unversioned_key();
 
+
 public:
-    explicit unversioned_key(unsigned int id);
+    explicit unversioned_key(const unsigned int id);
 
 public:
     friend class class_in_a_package::unversioned_key_serializer;
@@ -287,8 +289,8 @@ public:
         return id_;
     }
 
-    void id(unsigned int value) {
-        id_ = value;
+    void id(const unsigned int v) {
+        id_ = v;
     }
 
 public:
@@ -367,10 +369,11 @@ public:
 public:
     versioned_key();
 
+
 public:
     versioned_key(
-        unsigned int id,
-        unsigned int version);
+        const unsigned int id,
+        const unsigned int version);
 
 public:
     friend class class_in_a_package::versioned_key_serializer;
@@ -383,16 +386,16 @@ public:
         return id_;
     }
 
-    void id(unsigned int value) {
-        id_ = value;
+    void id(const unsigned int v) {
+        id_ = v;
     }
 
     unsigned int version() const {
         return version_;
     }
 
-    void version(unsigned int value) {
-        version_ = value;
+    void version(const unsigned int v) {
+        version_ = v;
     }
 
 public:
@@ -1294,9 +1297,9 @@ first_class::first_class()
       private_attribute_(static_cast<int>(0)) { }
 
 first_class::first_class(
-    int public_attribute,
-    int private_attribute,
-    class_in_a_package::versioned_key versioned_key)
+    const int public_attribute,
+    const int private_attribute,
+    const class_in_a_package::versioned_key& versioned_key)
     : public_attribute_(public_attribute),
       private_attribute_(private_attribute),
       versioned_key_(versioned_key) { }
@@ -1350,7 +1353,7 @@ namespace class_in_a_package {
 unversioned_key::unversioned_key()
     : id_(static_cast<unsigned int>(0)) { }
 
-unversioned_key::unversioned_key(unsigned int id)
+unversioned_key::unversioned_key(const unsigned int id)
     : id_(id) { }
 
 void unversioned_key::swap(unversioned_key& other) noexcept {
@@ -1400,8 +1403,8 @@ versioned_key::versioned_key()
       version_(static_cast<unsigned int>(0)) { }
 
 versioned_key::versioned_key(
-    unsigned int id,
-    unsigned int version)
+    const unsigned int id,
+    const unsigned int version)
     : id_(id),
       version_(version) { }
 

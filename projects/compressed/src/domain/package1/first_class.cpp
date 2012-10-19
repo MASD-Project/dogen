@@ -29,9 +29,9 @@ first_class::first_class()
       private_attribute_(static_cast<int>(0)) { }
 
 first_class::first_class(
-    int public_attribute,
-    int private_attribute,
-    dogen::compressed::versioned_key versioned_key)
+    const int public_attribute,
+    const int private_attribute,
+    const dogen::compressed::versioned_key& versioned_key)
     : public_attribute_(public_attribute),
       private_attribute_(private_attribute),
       versioned_key_(versioned_key) { }

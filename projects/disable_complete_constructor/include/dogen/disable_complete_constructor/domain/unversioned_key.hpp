@@ -41,6 +41,7 @@ public:
 public:
     unversioned_key();
 
+
 public:
     friend class dogen::disable_complete_constructor::unversioned_key_serializer;
 
@@ -49,8 +50,8 @@ public:
         return id_;
     }
 
-    void id(unsigned int value) {
-        id_ = value;
+    void id(const unsigned int v) {
+        id_ = v;
     }
 
 public:

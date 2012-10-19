@@ -42,6 +42,7 @@ public:
 public:
     versioned_key();
 
+
 public:
     friend class dogen::disable_complete_constructor::versioned_key_serializer;
 
@@ -53,16 +54,16 @@ public:
         return id_;
     }
 
-    void id(unsigned int value) {
-        id_ = value;
+    void id(const unsigned int v) {
+        id_ = v;
     }
 
     unsigned int version() const {
         return version_;
     }
 
-    void version(unsigned int value) {
-        version_ = value;
+    void version(const unsigned int v) {
+        version_ = v;
     }
 
 public:

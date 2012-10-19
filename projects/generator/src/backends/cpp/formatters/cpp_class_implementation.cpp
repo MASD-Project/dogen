@@ -83,13 +83,23 @@ void cpp_class_implementation::complete_constructor(const class_view_model& vm) 
 
     if (props.size() == 1) {
         const auto p(*props.begin());
-        stream_ << p.type() << " " << p.name() << ")" << std::endl;
+        stream_ << "const " << p.type();
+
+        if (!p.is_primitive())
+            stream_ << "&";
+
+        stream_ << " " << p.name() << ")" << std::endl;
     } else {
         cpp_positive_indenter_scope s(indenter_);
         bool is_first(true);
         for (const auto p : props) {
             stream_ << (is_first ? "" : ",") << std::endl;
-            stream_ << indenter_ << p.type() << " " << p.name();
+            stream_ << indenter_ << "const " << p.type();
+
+            if (!p.is_primitive())
+                stream_ << "&";
+
+            stream_ << " " << p.name();
             is_first = false;
         }
         stream_ << ")" << std::endl;

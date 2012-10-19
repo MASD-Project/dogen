@@ -41,8 +41,9 @@ public:
     class_2(class_2&&) = default;
     ~class_2() = default;
 
+
 public:
-    explicit class_2(dogen::two_layers_with_objects::versioned_key versioned_key);
+    explicit class_2(const dogen::two_layers_with_objects::versioned_key& versioned_key);
 
 public:
     friend class dogen::two_layers_with_objects::Package_2::class_2_serializer;
@@ -52,8 +53,8 @@ public:
         return versioned_key_;
     }
 
-    void versioned_key(dogen::two_layers_with_objects::versioned_key value) {
-        versioned_key_ = value;
+    void versioned_key(const dogen::two_layers_with_objects::versioned_key& v) {
+        versioned_key_ = v;
     }
 
 public:

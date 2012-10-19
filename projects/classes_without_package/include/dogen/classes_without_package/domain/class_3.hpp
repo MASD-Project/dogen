@@ -40,8 +40,9 @@ public:
     class_3(class_3&&) = default;
     ~class_3() = default;
 
+
 public:
-    explicit class_3(dogen::classes_without_package::versioned_key versioned_key);
+    explicit class_3(const dogen::classes_without_package::versioned_key& versioned_key);
 
 public:
     friend class dogen::classes_without_package::class_3_serializer;
@@ -51,8 +52,8 @@ public:
         return versioned_key_;
     }
 
-    void versioned_key(dogen::classes_without_package::versioned_key value) {
-        versioned_key_ = value;
+    void versioned_key(const dogen::classes_without_package::versioned_key& v) {
+        versioned_key_ = v;
     }
 
 public:

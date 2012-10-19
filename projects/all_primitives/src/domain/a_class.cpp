@@ -37,18 +37,18 @@ a_class::a_class()
       ushort_property_(static_cast<unsigned short>(0)) { }
 
 a_class::a_class(
-    bool bool_property,
-    char char_property,
-    unsigned char uchar_property,
-    int int_property,
-    unsigned int uint_property,
-    long long_property,
-    unsigned long ulong_property,
-    long long long_long_property,
-    unsigned long long ulong_long_property,
-    short short_property,
-    unsigned short ushort_property,
-    dogen::all_primitives::versioned_key versioned_key)
+    const bool bool_property,
+    const char char_property,
+    const unsigned char uchar_property,
+    const int int_property,
+    const unsigned int uint_property,
+    const long long_property,
+    const unsigned long ulong_property,
+    const long long long_long_property,
+    const unsigned long long ulong_long_property,
+    const short short_property,
+    const unsigned short ushort_property,
+    const dogen::all_primitives::versioned_key& versioned_key)
     : bool_property_(bool_property),
       char_property_(char_property),
       uchar_property_(uchar_property),
