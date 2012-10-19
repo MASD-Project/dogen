@@ -59,12 +59,12 @@ file_formatter::shared_ptr hash_header::create(std::ostream& stream) {
 }
 
 void hash_header::operator_bracket_method(const class_view_model& vm) {
-    stream_ << indenter_ << "size_t operator()(";
+    stream_ << indenter_ << "size_t operator()(const ";
 
     cpp_qualified_name qualified_name(stream_);
     qualified_name.format(vm);
 
-    stream_ << (vm.all_properties().empty() ? " /*value*/" : " value")
+    stream_ << (vm.all_properties().empty() ? " /*value*/" : "& value")
             << ") const ";
 
     utility_.open_scope();
@@ -80,8 +80,8 @@ void hash_header::operator_bracket_method(const class_view_model& vm) {
             utility_.blank_line();
 
         for (const auto p : parents) {
-            stream_ << indenter_ << "combine(seed, (*(dynamic_cast<"
-                    << p.name() << ">(this)));" << std::endl;
+            stream_ << indenter_ << "combine(seed, dynamic_cast<const "
+                    << p.name() << "&>(value));" << std::endl;
         }
 
         const auto props(vm.properties());

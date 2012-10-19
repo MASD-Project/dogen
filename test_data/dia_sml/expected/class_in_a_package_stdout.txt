@@ -486,7 +486,7 @@ namespace std {
 template<>
 class hash<class_in_a_package::package1::first_class> {
 public:
-    size_t operator()(class_in_a_package::package1::first_class value) const {
+    size_t operator()(const class_in_a_package::package1::first_class& value) const {
         using dogen::utility::hash::combine;
         std::size_t seed(0);
 
@@ -539,7 +539,7 @@ namespace std {
 template<>
 class hash<class_in_a_package::unversioned_key> {
 public:
-    size_t operator()(class_in_a_package::unversioned_key value) const {
+    size_t operator()(const class_in_a_package::unversioned_key& value) const {
         using dogen::utility::hash::combine;
         std::size_t seed(0);
 
@@ -590,7 +590,7 @@ namespace std {
 template<>
 class hash<class_in_a_package::versioned_key> {
 public:
-    size_t operator()(class_in_a_package::versioned_key value) const {
+    size_t operator()(const class_in_a_package::versioned_key& value) const {
         using dogen::utility::hash::combine;
         std::size_t seed(0);
 

@@ -38,7 +38,6 @@ public:
     void serialize(Archive & archive,
         dogen::enable_facet_serialization::package1::first_class& value,
         const unsigned int /*version*/) {
-
         archive & value.public_attribute_;
         archive & value.private_attribute_;
         archive & value.versioned_key_;

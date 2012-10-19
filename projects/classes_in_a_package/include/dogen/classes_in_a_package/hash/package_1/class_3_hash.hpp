@@ -35,7 +35,7 @@ namespace std {
 template<>
 class hash<dogen::classes_in_a_package::package_1::class_3> {
 public:
-    size_t operator()(dogen::classes_in_a_package::package_1::class_3 value) const {
+    size_t operator()(const dogen::classes_in_a_package::package_1::class_3& value) const {
         using dogen::utility::hash::combine;
         std::size_t seed(0);
 

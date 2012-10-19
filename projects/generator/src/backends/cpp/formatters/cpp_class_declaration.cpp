@@ -125,7 +125,8 @@ void cpp_class_declaration::destructor(const class_view_model& vm) {
     }
 }
 
-void cpp_class_declaration::compiler_generated_constuctors(const class_view_model& vm) {
+void cpp_class_declaration::
+compiler_generated_constuctors(const class_view_model& vm) {
     utility_.public_access_specifier();
 
     if (!vm.has_primitive_properties())

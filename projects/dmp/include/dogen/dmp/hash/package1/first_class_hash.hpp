@@ -35,7 +35,7 @@ namespace std {
 template<>
 class hash<dogen::dmp::package1::first_class> {
 public:
-    size_t operator()(dogen::dmp::package1::first_class value) const {
+    size_t operator()(const dogen::dmp::package1::first_class& value) const {
         using dogen::utility::hash::combine;
         std::size_t seed(0);
 

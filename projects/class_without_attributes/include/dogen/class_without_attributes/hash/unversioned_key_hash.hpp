@@ -34,7 +34,7 @@ namespace std {
 template<>
 class hash<dogen::class_without_attributes::unversioned_key> {
 public:
-    size_t operator()(dogen::class_without_attributes::unversioned_key value) const {
+    size_t operator()(const dogen::class_without_attributes::unversioned_key& value) const {
         using dogen::utility::hash::combine;
         std::size_t seed(0);
 

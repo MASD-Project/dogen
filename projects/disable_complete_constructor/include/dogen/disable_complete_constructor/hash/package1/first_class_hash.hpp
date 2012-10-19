@@ -35,7 +35,7 @@ namespace std {
 template<>
 class hash<dogen::disable_complete_constructor::package1::first_class> {
 public:
-    size_t operator()(dogen::disable_complete_constructor::package1::first_class value) const {
+    size_t operator()(const dogen::disable_complete_constructor::package1::first_class& value) const {
         using dogen::utility::hash::combine;
         std::size_t seed(0);
 

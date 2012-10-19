@@ -34,7 +34,7 @@ namespace std {
 template<>
 class hash<dogen::compressed::versioned_key> {
 public:
-    size_t operator()(dogen::compressed::versioned_key value) const {
+    size_t operator()(const dogen::compressed::versioned_key& value) const {
         using dogen::utility::hash::combine;
         std::size_t seed(0);
 

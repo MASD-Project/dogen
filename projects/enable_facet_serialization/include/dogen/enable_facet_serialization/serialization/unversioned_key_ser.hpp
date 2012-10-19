@@ -36,7 +36,6 @@ public:
     void serialize(Archive & archive,
         dogen::enable_facet_serialization::unversioned_key& value,
         const unsigned int /*version*/) {
-
         archive & value.id_;
     }
 };
