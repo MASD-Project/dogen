@@ -42,7 +42,6 @@ public:
 public:
     versioned_key();
 
-
 public:
     friend class dogen::disable_complete_constructor::versioned_key_serializer;
 
@@ -68,16 +67,14 @@ public:
 
 public:
     bool operator==(const versioned_key& rhs) const;
-
     bool operator!=(const versioned_key& rhs) const {
         return !this->operator==(rhs);
     }
 
 public:
     void swap(versioned_key& other) noexcept;
-
-public:
     versioned_key& operator=(versioned_key other);
+
 private:
     unsigned int id_;
     unsigned int version_;

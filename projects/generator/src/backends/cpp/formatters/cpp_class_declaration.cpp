@@ -121,8 +121,8 @@ void cpp_class_declaration::destructor(const class_view_model& vm) {
     if (vm.is_parent()) {
         stream_ << indenter_ << "virtual ~" << vm.name()
                 << "() noexcept = 0;" << std::endl;
+        utility_.blank_line();
     }
-    utility_.blank_line();
 }
 
 void cpp_class_declaration::compiler_generated_constuctors(const class_view_model& vm) {
@@ -215,8 +215,6 @@ void cpp_class_declaration::equality(const class_view_model& vm) {
 
     stream_ << indenter_ << "bool operator==(const " << vm.name()
             <<  "& rhs) const;" << std::endl;
-    utility_.blank_line();
-
     stream_ << indenter_ << "bool operator!=(const " << vm.name()
             << "& rhs) const ";
     utility_.open_scope();
@@ -259,13 +257,11 @@ void cpp_class_declaration::swap_and_assignment(const class_view_model& vm) {
 
     stream_ << indenter_ << "void swap(" << vm.name() << "& other) noexcept;"
             << std::endl;
-    utility_.blank_line();
 
     // assignment is only available in leaf classes - MEC++-33
     if (!vm.is_parent()) {
-        utility_.public_access_specifier();
         stream_ << indenter_ << vm.name() << "& operator=(" << vm.name()
-                << " other);";
+                << " other);" << std::endl;
     }
 
     utility_.blank_line();

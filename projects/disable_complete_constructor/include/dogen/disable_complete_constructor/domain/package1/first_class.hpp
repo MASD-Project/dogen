@@ -43,7 +43,6 @@ public:
 public:
     first_class();
 
-
 public:
     friend class dogen::disable_complete_constructor::package1::first_class_serializer;
 
@@ -74,16 +73,14 @@ public:
 
 public:
     bool operator==(const first_class& rhs) const;
-
     bool operator!=(const first_class& rhs) const {
         return !this->operator==(rhs);
     }
 
 public:
     void swap(first_class& other) noexcept;
-
-public:
     first_class& operator=(first_class other);
+
 private:
     int public_attribute_;
     int private_attribute_;

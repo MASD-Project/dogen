@@ -40,7 +40,6 @@ public:
     class_5(class_5&&) = default;
     ~class_5() = default;
 
-
 public:
     explicit class_5(const dogen::classes_without_package::versioned_key& versioned_key);
 
@@ -58,16 +57,14 @@ public:
 
 public:
     bool operator==(const class_5& rhs) const;
-
     bool operator!=(const class_5& rhs) const {
         return !this->operator==(rhs);
     }
 
 public:
     void swap(class_5& other) noexcept;
-
-public:
     class_5& operator=(class_5 other);
+
 private:
     dogen::classes_without_package::versioned_key versioned_key_;
 };

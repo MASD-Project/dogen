@@ -41,7 +41,6 @@ public:
     class_1(class_1&&) = default;
     ~class_1() = default;
 
-
 public:
     explicit class_1(const dogen::two_layers_with_objects::versioned_key& versioned_key);
 
@@ -59,16 +58,14 @@ public:
 
 public:
     bool operator==(const class_1& rhs) const;
-
     bool operator!=(const class_1& rhs) const {
         return !this->operator==(rhs);
     }
 
 public:
     void swap(class_1& other) noexcept;
-
-public:
     class_1& operator=(class_1 other);
+
 private:
     dogen::two_layers_with_objects::versioned_key versioned_key_;
 };

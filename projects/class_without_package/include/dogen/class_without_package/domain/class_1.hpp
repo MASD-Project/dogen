@@ -42,7 +42,6 @@ public:
 public:
     class_1();
 
-
 public:
     class_1(
         const int an_attribute,
@@ -70,16 +69,14 @@ public:
 
 public:
     bool operator==(const class_1& rhs) const;
-
     bool operator!=(const class_1& rhs) const {
         return !this->operator==(rhs);
     }
 
 public:
     void swap(class_1& other) noexcept;
-
-public:
     class_1& operator=(class_1 other);
+
 private:
     int an_attribute_;
     dogen::class_without_package::versioned_key versioned_key_;
