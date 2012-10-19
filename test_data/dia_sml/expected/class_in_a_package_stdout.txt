@@ -156,7 +156,7 @@ namespace package1 {
 
 class first_class_serializer;
 
-class first_class {
+class first_class final {
 public:
     first_class(const first_class&) = default;
     first_class(first_class&&) = default;
@@ -267,7 +267,7 @@ namespace class_in_a_package {
 
 class unversioned_key_serializer;
 
-class unversioned_key {
+class unversioned_key final {
 public:
     unversioned_key(const unversioned_key&) = default;
     unversioned_key(unversioned_key&&) = default;
@@ -358,7 +358,7 @@ namespace class_in_a_package {
 
 class versioned_key_serializer;
 
-class versioned_key {
+class versioned_key final {
 public:
     versioned_key(const versioned_key&) = default;
     versioned_key(versioned_key&&) = default;

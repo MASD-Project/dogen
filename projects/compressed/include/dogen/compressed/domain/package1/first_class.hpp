@@ -34,7 +34,7 @@ namespace package1 {
 
 class first_class_serializer;
 
-class first_class {
+class first_class final {
 public:
     first_class(const first_class&) = default;
     first_class(first_class&&) = default;

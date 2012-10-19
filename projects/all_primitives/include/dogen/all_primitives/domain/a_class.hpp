@@ -33,7 +33,7 @@ namespace all_primitives {
 
 class a_class_serializer;
 
-class a_class {
+class a_class final {
 public:
     a_class(const a_class&) = default;
     a_class(a_class&&) = default;

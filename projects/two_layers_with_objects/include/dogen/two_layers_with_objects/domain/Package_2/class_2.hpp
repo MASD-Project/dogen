@@ -34,7 +34,7 @@ namespace Package_2 {
 
 class class_2_serializer;
 
-class class_2 {
+class class_2 final {
 public:
     class_2() = default;
     class_2(const class_2&) = default;

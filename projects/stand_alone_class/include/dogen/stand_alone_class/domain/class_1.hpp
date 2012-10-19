@@ -33,7 +33,7 @@ namespace stand_alone_class {
 
 class class_1_serializer;
 
-class class_1 {
+class class_1 final {
 public:
     class_1() = default;
     class_1(const class_1&) = default;

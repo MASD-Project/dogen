@@ -33,7 +33,7 @@ namespace disable_cmakelists {
 
 class versioned_key_serializer;
 
-class versioned_key {
+class versioned_key final {
 public:
     versioned_key(const versioned_key&) = default;
     versioned_key(versioned_key&&) = default;

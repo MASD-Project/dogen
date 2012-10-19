@@ -32,7 +32,7 @@ namespace dmp {
 
 class unversioned_key_serializer;
 
-class unversioned_key {
+class unversioned_key final {
 public:
     unversioned_key(const unversioned_key&) = default;
     unversioned_key(unversioned_key&&) = default;

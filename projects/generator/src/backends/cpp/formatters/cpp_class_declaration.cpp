@@ -35,6 +35,9 @@ cpp_class_declaration::cpp_class_declaration(std::ostream& stream)
 void cpp_class_declaration::open_class(const class_view_model& vm) {
     stream_ << indenter_ << "class " << vm.name();
 
+    if (!vm.is_parent())
+        stream_ << " final";
+
     const auto parents(vm.parents());
     if (!parents.empty()) {
         stream_ << " :";

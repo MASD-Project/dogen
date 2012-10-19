@@ -33,7 +33,7 @@ namespace classes_without_package {
 
 class class_4_serializer;
 
-class class_4 {
+class class_4 final {
 public:
     class_4() = default;
     class_4(const class_4&) = default;
