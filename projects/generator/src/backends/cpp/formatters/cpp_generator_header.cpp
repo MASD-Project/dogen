@@ -45,19 +45,19 @@ namespace backends {
 namespace cpp {
 namespace formatters {
 
-sequence_header::
-sequence_header(std::ostream& stream) :
+generator_header::
+generator_header(std::ostream& stream) :
     stream_(stream),
     facet_type_(cpp_facet_types::test_data),
     file_type_(cpp_file_types::header),
     utility_(stream_, indenter_) {
 }
 
-file_formatter::shared_ptr sequence_header::create(std::ostream& stream) {
-    return file_formatter::shared_ptr(new sequence_header(stream));
+file_formatter::shared_ptr generator_header::create(std::ostream& stream) {
+    return file_formatter::shared_ptr(new generator_header(stream));
 }
 
-void sequence_header::generator_class(const class_view_model& vm) {
+void generator_header::generator_class(const class_view_model& vm) {
     const std::string class_name(vm.name() + "_generator");
 
     stream_ << indenter_ << "class " << class_name << " ";
@@ -82,7 +82,7 @@ void sequence_header::generator_class(const class_view_model& vm) {
     stream_ << "};";
 }
 
-void sequence_header::sequence_typedefs(const class_view_model& vm) {
+void generator_header::generator_typedefs(const class_view_model& vm) {
     stream_ << indenter_ << "typedef dogen::utility::test_data::sequence<"
             << std::endl;
 
@@ -91,7 +91,7 @@ void sequence_header::sequence_typedefs(const class_view_model& vm) {
             << "_sequence;" << std::endl;
 }
 
-void sequence_header::format(const file_view_model& vm) {
+void generator_header::format(const file_view_model& vm) {
     boost::optional<view_models::class_view_model> o(vm.class_vm());
     if (!o)
         throw generation_failure(missing_class_view_model);
@@ -122,7 +122,7 @@ void sequence_header::format(const file_view_model& vm) {
             utility_.blank_line(2);
         }
         utility_.blank_line(2);
-        sequence_typedefs(cvm);
+        generator_typedefs(cvm);
         utility_.blank_line();
     }
     utility_.blank_line(2);

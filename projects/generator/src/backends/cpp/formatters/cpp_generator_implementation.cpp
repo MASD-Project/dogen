@@ -46,8 +46,8 @@ namespace backends {
 namespace cpp {
 namespace formatters {
 
-sequence_implementation::
-sequence_implementation(std::ostream& stream) :
+generator_implementation::
+generator_implementation(std::ostream& stream) :
     stream_(stream),
     facet_type_(cpp_facet_types::test_data),
     file_type_(cpp_file_types::implementation),
@@ -55,11 +55,11 @@ sequence_implementation(std::ostream& stream) :
     generator_length_(3) { }
 
 file_formatter::shared_ptr
-sequence_implementation::create(std::ostream& stream) {
-    return file_formatter::shared_ptr(new sequence_implementation(stream));
+generator_implementation::create(std::ostream& stream) {
+    return file_formatter::shared_ptr(new generator_implementation(stream));
 }
 
-void sequence_implementation::
+void generator_implementation::
 next_term_method(const class_view_model& vm) {
     const std::string name(vm.name() + "_generator");
     stream_ << indenter_ << name << "::value_type" << std::endl
@@ -99,13 +99,13 @@ next_term_method(const class_view_model& vm) {
     utility_.close_scope();
 }
 
-void sequence_implementation::length_method(const class_view_model& vm) {
+void generator_implementation::length_method(const class_view_model& vm) {
     stream_ << indenter_ << "unsigned int "
             << vm.name() << "_generator::length() const { return("
             << generator_length_ << "); }" << std::endl;
 }
 
-void sequence_implementation::format(const file_view_model& vm) {
+void generator_implementation::format(const file_view_model& vm) {
     boost::optional<view_models::class_view_model> o(vm.class_vm());
     if (!o)
         throw generation_failure(missing_class_view_model);

@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_GENERATOR_BACKENDS_CPP_FORMATTERS_CPP_SEQUENCE_HEADER_HPP
-#define DOGEN_GENERATOR_BACKENDS_CPP_FORMATTERS_CPP_SEQUENCE_HEADER_HPP
+#ifndef DOGEN_GENERATOR_BACKENDS_CPP_FORMATTERS_CPP_GENERATOR_HEADER_HPP
+#define DOGEN_GENERATOR_BACKENDS_CPP_FORMATTERS_CPP_GENERATOR_HEADER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -38,27 +38,27 @@ namespace backends {
 namespace cpp {
 namespace formatters {
 
-class sequence_header : public file_formatter {
+class generator_header : public file_formatter {
 public:
     typedef view_models::class_view_model class_view_model;
     typedef view_models::file_view_model file_view_model;
 
 public:
-    sequence_header() = delete;
-    sequence_header(const sequence_header&) = default;
-    sequence_header(sequence_header&&) = default;
-    sequence_header& operator=(const sequence_header&) = default;
+    generator_header() = delete;
+    generator_header(const generator_header&) = default;
+    generator_header(generator_header&&) = default;
+    generator_header& operator=(const generator_header&) = default;
 
 public:
-    explicit sequence_header(std::ostream& stream);
-    virtual ~sequence_header() noexcept {}
+    explicit generator_header(std::ostream& stream);
+    virtual ~generator_header() noexcept {}
 
 public:
     static file_formatter::shared_ptr create(std::ostream& stream);
 
 private:
     void generator_class(const class_view_model& vm);
-    void sequence_typedefs(const class_view_model& vm);
+    void generator_typedefs(const class_view_model& vm);
 
 public:
     virtual void format(const file_view_model& vm) override;

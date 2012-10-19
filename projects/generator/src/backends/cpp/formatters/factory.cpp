@@ -81,9 +81,9 @@ create(std::ostream& stream, cpp_facet_types facet_type,
         break;
     case cpp_facet_types::test_data:
         if (file_type == cpp_file_types::header)
-            return sequence_header::create(stream);
+            return generator_header::create(stream);
         else
-            return sequence_implementation::create(stream);
+            return generator_implementation::create(stream);
         break;
     case cpp_facet_types::database:
         if (file_type == cpp_file_types::header)
