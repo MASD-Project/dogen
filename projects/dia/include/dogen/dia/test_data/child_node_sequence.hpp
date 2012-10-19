@@ -42,9 +42,9 @@ namespace detail {
  */
 class child_node_generator {
 public:
-    typedef dogen::dia::child_node value_type;
+    typedef dogen::dia::child_node result_type;
 
-    value_type next_term(const unsigned int position) {
+    result_type next_term(const unsigned int position) {
         if (position == 0)
             return dogen::dia::child_node("O0");
         else if (position == 1)

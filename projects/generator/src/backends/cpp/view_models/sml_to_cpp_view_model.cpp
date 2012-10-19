@@ -21,7 +21,6 @@
 #include <list>
 #include <sstream>
 #include <unordered_set>
-#include <boost/tuple/tuple.hpp>
 #include <boost/algorithm/string.hpp>
 #include <boost/algorithm/string/join.hpp>
 #include <boost/algorithm/string/predicate.hpp>
@@ -50,11 +49,39 @@ const std::string versioned_name("versioned_key");
 const std::string unversioned_name("unversioned_key");
 const std::string id_name("id");
 const std::string version_name("version");
-const std::string uint_name("unsigned int");
+
 const std::string bool_type("bool");
 const std::string string_type("string");
 const std::string char_type("char");
 const std::string uchar_type("unsigned char");
+const std::string short_type("short");
+const std::string ushort_type("unsigned short");
+const std::string int_type("int");
+const std::string uint_type("unsigned int");
+const std::string long_type("long");
+const std::string ulong_type("unsigned long");
+const std::string long_long_type("long_long");
+const std::string ulong_long_type("unsigned long long");
+
+bool is_char_like(const std::string& type_name) {
+    return type_name == char_type || type_name == uchar_type;
+}
+
+bool is_string_like(const std::string& type_name) {
+    return is_char_like(type_name) || type_name == string_type;
+}
+
+bool is_int_like(const std::string& type_name) {
+    return
+        type_name == short_type ||
+        type_name == ushort_type ||
+        type_name == int_type ||
+        type_name == uint_type ||
+        type_name == long_type ||
+        type_name == ulong_type ||
+        type_name == long_long_type ||
+        type_name == ulong_long_type;
+}
 
 /**
  * @brief Flattens all the SML namespace information stored in
@@ -184,9 +211,13 @@ void sml_dfs_visitor::process_sml_pod(const dogen::sml::pod& pod) {
         ns_list.push_back(p.type_name().type_name());
 
         using boost::algorithm::join;
-        const std::string ns(join(ns_list, namespace_separator));
+        std::string ns(join(ns_list, namespace_separator));
         property_view_model k(p.name());
         k.type(ns);
+
+        boost::replace_all(ns, "::", "_");
+        boost::replace_all(ns, " ", "_");
+        k.identifiable_type(ns);
 
         using dogen::sml::meta_types;
         k.is_primitive(p.type_name().meta_type() == meta_types::primitive);
@@ -195,10 +226,9 @@ void sml_dfs_visitor::process_sml_pod(const dogen::sml::pod& pod) {
             if (k.type() == bool_type)
                 requires_stream_manipulators = true;
 
-            k.is_string_like(
-                k.type() == string_type ||
-                k.type() == char_type ||
-                k.type() == uchar_type);
+            k.is_char_like(is_char_like(k.type()));
+            k.is_string_like(is_string_like(k.type()));
+            k.is_int_like(is_int_like(k.type()));
         }
         props_vm.push_back(k);
     }
@@ -213,9 +243,14 @@ void sml_dfs_visitor::process_sml_pod(const dogen::sml::pod& pod) {
         ns_list.push_back(versioned_name);
 
         using boost::algorithm::join;
-        const std::string ns(join(ns_list, namespace_separator));
+        std::string ns(join(ns_list, namespace_separator));
         property_view_model k(versioned_name);
         k.type(ns);
+
+        boost::replace_all(ns, "::", "_");
+        boost::replace_all(ns, " ", "_");
+        k.identifiable_type(ns);
+
         k.is_primitive(false);
         props_vm.push_back(k);
     }
@@ -431,17 +466,25 @@ sml_to_cpp_view_model::create_key_class_view_model(bool is_versioned) const {
     const std::list<std::string> ns(join_namespaces(qn));
     r.namespaces(ns);
 
-    auto lambda([](std::string name, std::string type) -> property_view_model {
+    auto lambda([&](const std::string& name, std::string type)
+        -> property_view_model {
             property_view_model r(name);
             r.type(type);
             r.is_primitive(true);
+            r.is_int_like(true);
+
+            using boost::algorithm::join;
+            boost::replace_all(type, "::", "_");
+            boost::replace_all(type, " ", "_");
+            r.identifiable_type(type);
+
             return r;
         });
 
     std::list<property_view_model> properties;
-    properties.push_back(lambda(id_name, uint_name));
+    properties.push_back(lambda(id_name, uint_type));
     if (is_versioned)
-        properties.push_back(lambda(version_name, uint_name));
+        properties.push_back(lambda(version_name, uint_type));
     r.properties(properties);
     r.all_properties(properties);
     r.has_primitive_properties(true);

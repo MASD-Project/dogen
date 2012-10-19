@@ -29,7 +29,7 @@ namespace dia {
 namespace test_data {
 namespace detail {
 
-simple_attribute_generator::value_type
+simple_attribute_generator::result_type
 simple_attribute_generator::next_term(const unsigned int position) {
     std::vector<attribute::attribute_value> value;
     if (position == 0) {
@@ -47,7 +47,7 @@ simple_attribute_generator::next_term(const unsigned int position) {
     return dogen::dia::attribute("is_portrait", value);
 }
 
-composite_attribute_generator::value_type
+composite_attribute_generator::result_type
 composite_attribute_generator::next_term(const unsigned int position) {
     dogen::dia::composite composite;
     std::vector<attribute::attribute_value> value;

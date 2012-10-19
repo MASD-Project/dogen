@@ -32,21 +32,19 @@
 namespace dogen {
 namespace compressed {
 
-namespace detail {
 
 class versioned_key_generator {
 public:
-    typedef dogen::compressed::versioned_key value_type;
+    typedef dogen::compressed::versioned_key result_type;
 
 public:
-    value_type next_term(const unsigned int position);
-    unsigned int length() const;
+    static void populate(const unsigned int position, result_type& v);
+    static result_type create(const unsigned int position);
+    result_type operator()();
+
+private:
+    unsigned int position_;
 };
-
-}
-
-typedef dogen::utility::test_data::sequence<
-    detail::versioned_key_generator> versioned_key_sequence;
 
 } }
 

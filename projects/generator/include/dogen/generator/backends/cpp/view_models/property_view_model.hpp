@@ -41,9 +41,12 @@ public:
     property_view_model& operator=(const property_view_model&) = default;
 
 public:
-    property_view_model() : is_primitive_(false), is_string_like_(false) {}
-    explicit property_view_model(std::string name)
-        : name_(name), is_primitive_(false), is_string_like_(false) { }
+    property_view_model() : is_primitive_(false), is_string_like_(false),
+                            is_char_like_(false), is_int_like_(false) {}
+
+    explicit property_view_model(const std::string& name)
+        : name_(name), is_primitive_(false), is_string_like_(false),
+          is_char_like_(false), is_int_like_(false) {}
 
 public:
     /**
@@ -51,7 +54,7 @@ public:
      */
     /**@{*/
     std::string name() const { return name_; }
-    void name(std::string value) { name_ = value; }
+    void name(const std::string& value) { name_ = value; }
     /**@}*/
 
     /**
@@ -63,6 +66,18 @@ public:
     /**@}*/
 
     /**
+     * @brief Representation of the type name which is usable to
+     * concatenate to generate identifier names.
+     *
+     * For example, if the type is unsigned long, its identifiable
+     * type is unsigned_long.
+     */
+    /**@{*/
+    std::string identifiable_type() const { return identifiable_type_; }
+    void identifiable_type(std::string value) { identifiable_type_ = value; }
+    /**@}*/
+
+    /**
      * @brief If true, the meta type of the property is primitive.
      */
     /**@{*/
@@ -71,19 +86,40 @@ public:
     /**@}*/
 
     /**
-     * @brief If true, the meta type of the property is either string
-     * or char.
+     * @brief If true, the type of the property is either string,
+     * char or unsigned char.
      */
     /**@{*/
     bool is_string_like() const { return is_string_like_; }
     void is_string_like(bool value) { is_string_like_ = value; }
     /**@}*/
 
+    /**
+     * @brief If true, the meta type of the property is either char or
+     * unsigned char.
+     */
+    /**@{*/
+    bool is_char_like() const { return is_char_like_; }
+    void is_char_like(bool value) { is_char_like_ = value; }
+    /**@}*/
+
+    /**
+     * @brief If true, the meta type of the property is short, int,
+     * long, long long or their unsigned counterparts.
+     */
+    /**@{*/
+    bool is_int_like() const { return is_int_like_; }
+    void is_int_like(bool value) { is_int_like_ = value; }
+    /**@}*/
+
 private:
     std::string name_;
     std::string type_;
+    std::string identifiable_type_;
     bool is_primitive_;
     bool is_string_like_;
+    bool is_char_like_;
+    bool is_int_like_;
 };
 
 } } } } }

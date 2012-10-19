@@ -20,25 +20,33 @@
  */
 #include "dogen/class_in_a_package/test_data/unversioned_key_td.hpp"
 
+namespace {
+
+unsigned int create_unsigned_int(const unsigned int position) {
+    return static_cast<unsigned int>(position);
+}
+
+}
+
 namespace dogen {
 namespace class_in_a_package {
-namespace detail {
 
-unversioned_key_generator::value_type
-unversioned_key_generator::next_term(const unsigned int position) {
+void unversioned_key_generator::
+populate(const unsigned int position, result_type& v) {
+    v.id(create_unsigned_int(position + 0));
+}
+
+unversioned_key_generator::result_type
+unversioned_key_generator::create(const unsigned int position) {
     unversioned_key r;
-
-    if (position == 0) {
-        r.id(static_cast<unsigned int>(0));
-    } else if (position == 1) {
-        r.id(static_cast<unsigned int>(30));
-    } else if (position == 2) {
-        r.id(static_cast<unsigned int>(60));
-    }
-
+    unversioned_key_generator::populate(position, r);
     return r;
 }
 
-unsigned int unversioned_key_generator::length() const { return(3); }
+unversioned_key_generator::result_type
+unversioned_key_generator::operator()() {
+    return create(position_++);
 
-} } }
+}
+
+} }

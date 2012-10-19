@@ -42,10 +42,10 @@ namespace detail {
  */
 class rectangle_generator {
 public:
-    typedef dogen::dia::rectangle value_type;
+    typedef dogen::dia::rectangle result_type;
 
 public:
-    value_type next_term(const unsigned int position) {
+    result_type next_term(const unsigned int position) {
         if (position == 0)
             return dogen::dia::rectangle("-48.8625,-15.05;-39.4075,-11.35");
         else if (position == 1)

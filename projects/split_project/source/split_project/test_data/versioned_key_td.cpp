@@ -20,28 +20,34 @@
  */
 #include "dogen/split_project/test_data/versioned_key_td.hpp"
 
+namespace {
+
+unsigned int create_unsigned_int(const unsigned int position) {
+    return static_cast<unsigned int>(position);
+}
+
+}
+
 namespace dogen {
 namespace split_project {
-namespace detail {
 
-versioned_key_generator::value_type
-versioned_key_generator::next_term(const unsigned int position) {
+void versioned_key_generator::
+populate(const unsigned int position, result_type& v) {
+    v.id(create_unsigned_int(position + 0));
+    v.version(create_unsigned_int(position + 1));
+}
+
+versioned_key_generator::result_type
+versioned_key_generator::create(const unsigned int position) {
     versioned_key r;
-
-    if (position == 0) {
-        r.id(static_cast<unsigned int>(0));
-        r.version(static_cast<unsigned int>(1));
-    } else if (position == 1) {
-        r.id(static_cast<unsigned int>(30));
-        r.version(static_cast<unsigned int>(31));
-    } else if (position == 2) {
-        r.id(static_cast<unsigned int>(60));
-        r.version(static_cast<unsigned int>(61));
-    }
-
+    versioned_key_generator::populate(position, r);
     return r;
 }
 
-unsigned int versioned_key_generator::length() const { return(3); }
+versioned_key_generator::result_type
+versioned_key_generator::operator()() {
+    return create(position_++);
 
-} } }
+}
+
+} }

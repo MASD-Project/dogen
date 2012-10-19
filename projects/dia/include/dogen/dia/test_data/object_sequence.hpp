@@ -42,10 +42,10 @@ namespace detail {
  */
 class object_generator {
 public:
-    typedef dogen::dia::object value_type;
+    typedef dogen::dia::object result_type;
 
 public:
-    value_type next_term(const unsigned int position);
+    result_type next_term(const unsigned int position);
     unsigned int length() const { return(3); }
 };
 

@@ -26,7 +26,7 @@ namespace dogen {
 namespace prototype {
 namespace detail {
 
-complete_currency_generator::value_type
+complete_currency_generator::result_type
 complete_currency_generator::next_term(const unsigned int position) {
     // manual process atm. see GH-24
     using dogen::prototype::versioned_key;
@@ -218,7 +218,7 @@ complete_currency_generator::next_term(const unsigned int position) {
     }
 }
 
-majors_currency_generator::value_type
+majors_currency_generator::result_type
 majors_currency_generator::next_term(const unsigned int position) {
     const dogen::prototype::versioned_key vk;
 
@@ -239,7 +239,7 @@ majors_currency_generator::next_term(const unsigned int position) {
     }
 }
 
-unrealistic_currency_generator::value_type
+unrealistic_currency_generator::result_type
 unrealistic_currency_generator::next_term(const unsigned int position) {
     unsigned int iterator(position);
     const unsigned int base(26);

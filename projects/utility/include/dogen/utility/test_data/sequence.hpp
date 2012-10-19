@@ -46,7 +46,7 @@ public:
 };
 
 /**
- * @brief Generates sequences of Generator::value_type.
+ * @brief Generates sequences of Generator::result_type.
  *
  * sequence is designed to be plugged to STL algorithms such as
  * generate and generate_n.
@@ -56,9 +56,9 @@ public:
  *
  * @section s_0_1 Generator concept
  *
- * @li Generator::value_type;
+ * @li Generator::result_type;
  * @li Generator::Generator(const bool use_default_version);
- * @li Generator::value_type Generator::next_term(const unsigned int term);
+ * @li Generator::result_type Generator::next_term(const unsigned int term);
  * @li unsigned int Generator::length() const;
  *
  */
@@ -71,7 +71,7 @@ public:
      sequence() : position_(0) { }
 
 public:
-    typedef typename Generator::value_type value_type;
+    typedef typename Generator::result_type result_type;
 
 public:
     /**
@@ -89,7 +89,7 @@ public:
     void reset() { position_ = 0; }
 
 public:
-    value_type operator()() {
+    result_type operator()() {
         if (length() && position_ >= length())
             BOOST_THROW_EXCEPTION(sequence_exhausted());
         return(generator_.next_term(position_++));

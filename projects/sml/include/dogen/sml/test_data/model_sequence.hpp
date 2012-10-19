@@ -46,10 +46,10 @@ namespace detail {
  */
 class model_generator {
 public:
-    typedef dogen::sml::model value_type;
+    typedef dogen::sml::model result_type;
 
 public:
-    value_type next_term(const unsigned int position) {
+    result_type next_term(const unsigned int position) {
         dogen::sml::model result;
         std::unordered_map<qualified_name, package> packages;
         std::unordered_map<qualified_name, pod> pods;

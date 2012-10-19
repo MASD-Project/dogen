@@ -42,10 +42,10 @@ namespace detail {
  */
 class string_generator {
 public:
-    typedef dogen::dia::string value_type;
+    typedef dogen::dia::string result_type;
 
 public:
-    value_type next_term(const unsigned int position) {
+    result_type next_term(const unsigned int position) {
         if (position == 0)
             return dogen::dia::string("#A4#");
         else if (position == 1)

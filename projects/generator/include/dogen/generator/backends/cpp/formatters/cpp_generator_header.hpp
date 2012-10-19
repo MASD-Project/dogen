@@ -58,7 +58,6 @@ public:
 
 private:
     void generator_class(const class_view_model& vm);
-    void generator_typedefs(const class_view_model& vm);
 
 public:
     virtual void format(const file_view_model& vm) override;

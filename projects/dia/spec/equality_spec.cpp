@@ -53,12 +53,12 @@ void test_empty_attribute() {
 template<typename Sequence>
 void test_equality() {
     Sequence sequence;
-    const typename Sequence::value_type a(sequence());
-    const typename Sequence::value_type b(a);
-    const typename Sequence::value_type c(sequence());
+    const typename Sequence::result_type a(sequence());
+    const typename Sequence::result_type b(a);
+    const typename Sequence::result_type c(sequence());
 
     typedef dogen::utility::test::equality_tester
-        <typename Sequence::value_type> equality_tester;
+        <typename Sequence::result_type> equality_tester;
     equality_tester::an_object_is_equal_to_itself(a);
     equality_tester::identical_objects_are_equal(a, b);
     equality_tester::distinct_objects_are_unequal(a, c);

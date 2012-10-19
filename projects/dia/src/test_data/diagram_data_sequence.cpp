@@ -26,7 +26,7 @@ namespace dia {
 namespace test_data {
 namespace detail {
 
-diagram_data_generator::value_type
+diagram_data_generator::result_type
 diagram_data_generator::next_term(const unsigned int position) {
     std::vector<dogen::dia::attribute> attributes;
     simple_attribute_sequence sequence;

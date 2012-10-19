@@ -25,7 +25,7 @@ namespace prototype {
 
 namespace detail {
 
-versioned_key_generator::value_type
+versioned_key_generator::result_type
 versioned_key_generator::next_term(const unsigned int position) {
     versioned_key r;
 

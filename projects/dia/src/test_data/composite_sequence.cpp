@@ -25,7 +25,7 @@ namespace dia {
 namespace test_data {
 namespace detail {
 
-simple_composite_generator::value_type
+simple_composite_generator::result_type
 simple_composite_generator::next_term(const unsigned int position) {
     typedef boost::shared_ptr<dogen::dia::attribute> attribute_ptr;
     std::vector<attribute_ptr> attributes;
@@ -51,7 +51,7 @@ simple_composite_generator::next_term(const unsigned int position) {
     return dogen::dia::composite(type, attributes, inner_composite);
 }
 
-composite_composite_generator::value_type
+composite_composite_generator::result_type
 composite_composite_generator::next_term(const unsigned int position) {
     typedef boost::shared_ptr<dogen::dia::attribute> attribute_ptr;
     std::vector<attribute_ptr> attributes;

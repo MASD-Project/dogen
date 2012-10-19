@@ -42,10 +42,10 @@ namespace detail {
  */
 class font_generator {
 public:
-    typedef dogen::dia::font value_type;
+    typedef dogen::dia::font result_type;
 
 public:
-    value_type next_term(const unsigned int position) {
+    result_type next_term(const unsigned int position) {
         if (position == 0)
             return dogen::dia::font("monospace", "0", "Courier");
         else if (position == 1)

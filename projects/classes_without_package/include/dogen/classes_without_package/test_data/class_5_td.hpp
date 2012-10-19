@@ -32,21 +32,19 @@
 namespace dogen {
 namespace classes_without_package {
 
-namespace detail {
 
 class class_5_generator {
 public:
-    typedef dogen::classes_without_package::class_5 value_type;
+    typedef dogen::classes_without_package::class_5 result_type;
 
 public:
-    value_type next_term(const unsigned int position);
-    unsigned int length() const;
+    static void populate(const unsigned int position, result_type& v);
+    static result_type create(const unsigned int position);
+    result_type operator()();
+
+private:
+    unsigned int position_;
 };
-
-}
-
-typedef dogen::utility::test_data::sequence<
-    detail::class_5_generator> class_5_sequence;
 
 } }
 

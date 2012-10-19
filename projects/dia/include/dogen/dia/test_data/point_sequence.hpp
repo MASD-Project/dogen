@@ -42,10 +42,10 @@ namespace detail {
  */
 class point_generator {
 public:
-    typedef dogen::dia::point value_type;
+    typedef dogen::dia::point result_type;
 
 public:
-    value_type next_term(const unsigned int position) {
+    result_type next_term(const unsigned int position) {
         if (position == 0)
             return dogen::dia::point("-61.25,-18.25");
         else if (position == 1)

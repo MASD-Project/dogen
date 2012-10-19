@@ -26,7 +26,7 @@ namespace dia {
 namespace test_data {
 namespace detail {
 
-layer_generator::value_type
+layer_generator::result_type
 layer_generator::next_term(const unsigned int position) {
     std::vector<dogen::dia::object> objects;
     object_sequence sequence;

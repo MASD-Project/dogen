@@ -33,7 +33,6 @@ namespace {
 
 const bool is_system(false);
 const bool is_user(false);
-const std::string detail_ns("detail");
 const std::string missing_class_view_model(
     "File view model must contain a class view model");
 
@@ -69,26 +68,27 @@ void generator_header::generator_class(const class_view_model& vm) {
         stream_ << indenter_ << "typedef ";
         cpp_qualified_name qualified_name(stream_);
         qualified_name.format(vm);
-        stream_ << " value_type;" << std::endl;
+        stream_ << " result_type;" << std::endl;
         utility_.blank_line();
 
         utility_.public_access_specifier();
         stream_ << indenter_
-                << "value_type next_term(const unsigned int position);"
+                << "static void populate(const unsigned int position,"
+                <<" result_type& v);"
                 << std::endl;
 
-        stream_ << indenter_ << "unsigned int length() const;" << std::endl;
+        stream_ << indenter_
+                << "static result_type create(const unsigned int position);"
+                << std::endl;
+
+        stream_ << indenter_ << "result_type operator()();" << std::endl;
+        utility_.blank_line();
+
+        utility_.private_access_specifier();
+        stream_ << indenter_ << "unsigned int "
+                << utility_.as_member_variable("position") << ";" << std::endl;
     }
     stream_ << "};";
-}
-
-void generator_header::generator_typedefs(const class_view_model& vm) {
-    stream_ << indenter_ << "typedef dogen::utility::test_data::sequence<"
-            << std::endl;
-
-    cpp_positive_indenter_scope s(indenter_);
-    stream_ << indenter_ << "detail::" << vm.name() << "_generator> " << vm.name()
-            << "_sequence;" << std::endl;
 }
 
 void generator_header::format(const file_view_model& vm) {
@@ -114,16 +114,10 @@ void generator_header::format(const file_view_model& vm) {
         namespace_helper ns_helper(stream_, namespaces);
         utility_.blank_line();
 
-        {
-            typedef std::list<std::string> list;
-            namespace_helper ns_helper(stream_, list { detail_ns});
-            utility_.blank_line();
-            generator_class(cvm);
-            utility_.blank_line(2);
-        }
-        utility_.blank_line(2);
-        generator_typedefs(cvm);
+        typedef std::list<std::string> list;
         utility_.blank_line();
+        generator_class(cvm);
+        utility_.blank_line(2);
     }
     utility_.blank_line(2);
     guards.format_end();

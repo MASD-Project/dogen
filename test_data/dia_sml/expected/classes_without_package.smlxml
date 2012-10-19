@@ -5,12 +5,12 @@
 	<name>classes_without_package</name>
 	<packages class_id="1" tracking_level="0" version="0">
 		<count>0</count>
-		<bucket_count>23</bucket_count>
+		<bucket_count>11</bucket_count>
 		<item_version>0</item_version>
 	</packages>
 	<pods class_id="2" tracking_level="0" version="0">
 		<count>5</count>
-		<bucket_count>23</bucket_count>
+		<bucket_count>11</bucket_count>
 		<item_version>0</item_version>
 		<item class_id="3" tracking_level="0" version="0">
 			<first class_id="4" tracking_level="0" version="0">
@@ -62,7 +62,7 @@
 					<count>0</count>
 					<item_version>0</item_version>
 				</package_path>
-				<type_name>class_3</type_name>
+				<type_name>class_2</type_name>
 				<meta_type>2</meta_type>
 			</first>
 			<second>
@@ -76,7 +76,7 @@
 						<count>0</count>
 						<item_version>0</item_version>
 					</package_path>
-					<type_name>class_3</type_name>
+					<type_name>class_2</type_name>
 					<meta_type>2</meta_type>
 				</name>
 				<properties>
@@ -101,7 +101,7 @@
 					<count>0</count>
 					<item_version>0</item_version>
 				</package_path>
-				<type_name>class_2</type_name>
+				<type_name>class_3</type_name>
 				<meta_type>2</meta_type>
 			</first>
 			<second>
@@ -115,7 +115,7 @@
 						<count>0</count>
 						<item_version>0</item_version>
 					</package_path>
-					<type_name>class_2</type_name>
+					<type_name>class_3</type_name>
 					<meta_type>2</meta_type>
 				</name>
 				<properties>
@@ -210,7 +210,7 @@
 	</pods>
 	<primitives class_id="9" tracking_level="0" version="0">
 		<count>0</count>
-		<bucket_count>23</bucket_count>
+		<bucket_count>11</bucket_count>
 		<item_version>0</item_version>
 	</primitives>
 	<external_package_path>

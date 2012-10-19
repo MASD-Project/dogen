@@ -41,7 +41,7 @@ template<typename Sequence>
 void rountrip_type() {
     Sequence sequence;
     dogen::utility::test::serialization_tester<
-        typename Sequence::value_type>::
+        typename Sequence::result_type>::
         all_roundtrips_produce_the_same_entity(sequence());
 }
 

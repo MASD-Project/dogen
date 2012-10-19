@@ -44,10 +44,10 @@ namespace detail {
  */
 class pod_generator {
 public:
-    typedef dogen::sml::pod value_type;
+    typedef dogen::sml::pod result_type;
 
 public:
-    value_type next_term(const unsigned int position) {
+    result_type next_term(const unsigned int position) {
         dogen::sml::pod result;
         dogen::sml::test_data::property_sequence pseq;
         dogen::sml::test_data::qualified_name_sequence qseq;

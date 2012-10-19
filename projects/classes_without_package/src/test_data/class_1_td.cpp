@@ -21,22 +21,34 @@
 #include "dogen/classes_without_package/test_data/class_1_td.hpp"
 #include "dogen/classes_without_package/test_data/versioned_key_td.hpp"
 
+namespace {
+
+dogen::classes_without_package::versioned_key
+create_dogen_classes_without_package_versioned_key(const unsigned int position) {
+    return dogen::classes_without_package::versioned_key_generator::create(position);
+}
+
+}
+
 namespace dogen {
 namespace classes_without_package {
-namespace detail {
 
-class_1_generator::value_type
-class_1_generator::next_term(const unsigned int position) {
+void class_1_generator::
+populate(const unsigned int position, result_type& v) {
+    v.versioned_key(create_dogen_classes_without_package_versioned_key(position + 0));
+}
+
+class_1_generator::result_type
+class_1_generator::create(const unsigned int position) {
     class_1 r;
-
-    if (position == 0) {
-    } else if (position == 1) {
-    } else if (position == 2) {
-    }
-
+    class_1_generator::populate(position, r);
     return r;
 }
 
-unsigned int class_1_generator::length() const { return(3); }
+class_1_generator::result_type
+class_1_generator::operator()() {
+    return create(position_++);
 
-} } }
+}
+
+} }

@@ -42,10 +42,10 @@ namespace detail {
  */
 class integer_generator {
 public:
-    typedef dogen::dia::integer value_type;
+    typedef dogen::dia::integer result_type;
 
 public:
-    value_type next_term(const unsigned int position) {
+    result_type next_term(const unsigned int position) {
         if (position == 0)
             return dogen::dia::integer("40");
         else if (position == 1)

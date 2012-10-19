@@ -33,21 +33,19 @@ namespace dogen {
 namespace class_without_attributes {
 namespace package_1 {
 
-namespace detail {
 
 class class_1_generator {
 public:
-    typedef dogen::class_without_attributes::package_1::class_1 value_type;
+    typedef dogen::class_without_attributes::package_1::class_1 result_type;
 
 public:
-    value_type next_term(const unsigned int position);
-    unsigned int length() const;
+    static void populate(const unsigned int position, result_type& v);
+    static result_type create(const unsigned int position);
+    result_type operator()();
+
+private:
+    unsigned int position_;
 };
-
-}
-
-typedef dogen::utility::test_data::sequence<
-    detail::class_1_generator> class_1_sequence;
 
 } } }
 

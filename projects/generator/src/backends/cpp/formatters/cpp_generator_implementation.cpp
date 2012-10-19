@@ -19,6 +19,7 @@
  *
  */
 #include <ostream>
+#include <unordered_set>
 #include "dogen/generator/generation_failure.hpp"
 #include "dogen/generator/backends/cpp/formatters/cpp_licence.hpp"
 #include "dogen/generator/backends/cpp/formatters/cpp_header_guards.hpp"
@@ -31,10 +32,10 @@
 
 namespace {
 
+const std::string int_type("int");
+const std::string string_type("std::string");
 const bool is_system(true);
 const bool is_user(false);
-const std::string detail_ns("detail");
-
 const std::string missing_class_view_model(
     "File view model must contain a class view model");
 
@@ -51,8 +52,7 @@ generator_implementation(std::ostream& stream) :
     stream_(stream),
     facet_type_(cpp_facet_types::test_data),
     file_type_(cpp_file_types::implementation),
-    utility_(stream_, indenter_),
-    generator_length_(3) { }
+    utility_(stream_, indenter_) { }
 
 file_formatter::shared_ptr
 generator_implementation::create(std::ostream& stream) {
@@ -60,49 +60,188 @@ generator_implementation::create(std::ostream& stream) {
 }
 
 void generator_implementation::
-next_term_method(const class_view_model& vm) {
+domain_type_helper(const std::string& identifiable_type_name,
+    const std::string& type_name) {
+    stream_ << indenter_ << type_name << std::endl
+            << "create_" << identifiable_type_name
+            << "(const unsigned int position) ";
+
+    utility_.open_scope();
+    {
+        cpp_positive_indenter_scope s(indenter_);
+        stream_ << indenter_ << "return " << type_name
+                << "_generator::create(position);" << std::endl;
+    }
+    utility_.close_scope();
+}
+
+void generator_implementation::bool_helper() {
+    stream_ << indenter_ << "bool create_bool(const unsigned int position) "
+            << std::endl;
+
+    utility_.open_scope();
+    {
+        cpp_positive_indenter_scope s(indenter_);
+        stream_ << indenter_ << "return (position % 2) == 0;" << std::endl;
+    }
+    utility_.close_scope();
+}
+
+void generator_implementation::string_helper() {
+    stream_ << indenter_ << "std::string create_std_string"
+            << "(const std::string& prefix, const unsigned int position) ";
+
+    utility_.open_scope();
+    {
+        cpp_positive_indenter_scope s(indenter_);
+        stream_ << indenter_ << "std::ostringstream s;" << std::endl
+                << indenter_ << "s << prefix << " << utility_.quote("_")
+                << " << position;" << std::endl;
+        utility_.blank_line();
+        stream_ << indenter_ << "return s.str();" << std::endl;
+    }
+    utility_.close_scope();
+}
+
+void generator_implementation::
+char_like_helper(const std::string& identifiable_type_name,
+    const std::string& type_name) {
+    stream_ << indenter_ << type_name << " create_" << identifiable_type_name
+            << "(const unsigned int position) ";
+
+    utility_.open_scope();
+    {
+        cpp_positive_indenter_scope s(indenter_);
+        stream_ << indenter_
+                << "return static_cast<" << type_name
+                << ">((position % 95) + 32);" << std::endl;
+    }
+    utility_.close_scope();
+}
+
+void generator_implementation::
+int_like_helper(const std::string& identifiable_type_name,
+    const std::string& type_name) {
+    stream_ << indenter_ << type_name << " create_" << identifiable_type_name
+            << "(const unsigned int position) ";
+
+    utility_.open_scope();
+    {
+        cpp_positive_indenter_scope s(indenter_);
+        if (type_name == int_type)
+            stream_ << indenter_ << "return position;";
+        else
+            stream_ << indenter_ << "return static_cast<" << type_name
+                    << ">(position);";
+
+        stream_ << std::endl;
+    }
+    utility_.close_scope();
+}
+
+void generator_implementation::
+create_helper_methods(const class_view_model& vm) {
+    const auto props(vm.properties());
+    if (props.empty())
+        return;
+
+    namespace_helper ns_helper(stream_, std::list<std::string> { });
+    std::unordered_set<std::string> types_done;
+
+    utility_.blank_line();
+    for (const auto p : props) {
+        if (types_done.find(p.type()) == types_done.end()) {
+            if (p.is_primitive()) {
+                if (p.type() == string_type) {
+                    string_helper();
+                    utility_.blank_line();
+                } else if (p.is_char_like()) {
+                    char_like_helper(p.identifiable_type(), p.type());
+                    utility_.blank_line();
+                } else if (p.is_int_like()) {
+                    int_like_helper(p.identifiable_type(), p.type());
+                    utility_.blank_line();
+                }
+            } else {
+                domain_type_helper(p.identifiable_type(), p.type());
+                utility_.blank_line();
+            }
+        }
+        types_done.insert(p.type());
+    }
+}
+
+void generator_implementation::populate_method(const class_view_model& vm) {
+    const auto props(vm.properties());
+    if (props.empty())
+        return;
+
     const std::string name(vm.name() + "_generator");
-    stream_ << indenter_ << name << "::value_type" << std::endl
-            << indenter_ << name << "::next_term(const unsigned int position) ";
+    stream_ << indenter_ << "void " << name << "::" << std::endl
+            << "populate(const unsigned int position, result_type& v) " ;
+
+    utility_.open_scope();
+    {
+        cpp_positive_indenter_scope s(indenter_);
+        unsigned int j(0);
+        for (const auto p : props) {
+            if (p.is_primitive()) {
+                if (p.type() == string_type) {
+                    stream_ << indenter_ << "v." << p.name()
+                            << "(create_std_string("
+                            << utility_.quote(p.name())
+                            << ", position + " << j << "));"
+                            << std::endl;
+                } else if (p.is_char_like() || p.is_int_like()) {
+                    stream_ << indenter_ << "v." << p.name()
+                            << "(create_" << p.identifiable_type()
+                            << "(position + " << j << "));"
+                            << std::endl;
+                }
+                ++j;
+            } else {
+                stream_ << indenter_ << "v." << p.name()
+                        << "(create_" << p.identifiable_type()
+                        << "(position + " << j << "));"
+                        << std::endl;
+            }
+        }
+    }
+    utility_.close_scope();
+}
+
+void generator_implementation::create_method(const class_view_model& vm) {
+    const std::string name(vm.name() + "_generator");
+    stream_ << indenter_ << name << "::result_type" << std::endl
+            << name << "::create(const unsigned int position) ";
+
     utility_.open_scope();
     {
         cpp_positive_indenter_scope s(indenter_);
         stream_ << indenter_ << vm.name() << " r;" << std::endl;
-        utility_.blank_line();
-
-        bool is_first(true);
-        for (unsigned int i(0); i < generator_length_; ++i) {
-            stream_ << indenter_ << (is_first ? "" : "} else ")
-                    << "if (position == " << i << ") ";
-            utility_.open_scope();
-            {
-                cpp_positive_indenter_scope s(indenter_);
-                unsigned int j(0);
-                for (const auto p : vm.properties()) {
-                    if (p.is_primitive()) {
-                        stream_ << indenter_ << "r." << p.name()
-                                << "(" << "static_cast<" << p.type()
-                                << ">("
-                                << (i * 30 + j) << "));"
-                                << std::endl;
-                    }
-                    ++j;
-                }
-            }
-            is_first = false;
+        if (!vm.properties().empty()) {
+            stream_ << indenter_ << name << "::populate(position, r);"
+                    << std::endl;
         }
-        utility_.close_scope();
-        utility_.blank_line();
-
         stream_ << indenter_ << "return r;" << std::endl;
     }
     utility_.close_scope();
 }
 
-void generator_implementation::length_method(const class_view_model& vm) {
-    stream_ << indenter_ << "unsigned int "
-            << vm.name() << "_generator::length() const { return("
-            << generator_length_ << "); }" << std::endl;
+void generator_implementation::function_operator(const class_view_model& vm) {
+    const std::string name(vm.name() + "_generator");
+    stream_ << indenter_ << name << "::result_type" << std::endl
+            << name << "::operator()() ";
+
+    utility_.open_scope();
+    {
+        cpp_positive_indenter_scope s(indenter_);
+        stream_ << indenter_ << "return create("
+                << utility_.as_member_variable("position") << "++);"
+                << std::endl;
+        utility_.blank_line();
+    }
+    utility_.close_scope();
 }
 
 void generator_implementation::format(const file_view_model& vm) {
@@ -118,16 +257,20 @@ void generator_implementation::format(const file_view_model& vm) {
     includes.format(vm.user_includes(), is_user);
     utility_.blank_line();
 
+    const class_view_model& cvm(*o);
+    create_helper_methods(cvm);
+    utility_.blank_line(2);
+
     {
-        const view_models::class_view_model& cvm(*o);
         std::list<std::string> ns(cvm.namespaces());
-        ns.push_back(detail_ns);
         namespace_helper ns_helper(stream_, ns);
 
         utility_.blank_line();
-        next_term_method(cvm);
+        populate_method(cvm);
         utility_.blank_line();
-        length_method(cvm);
+        create_method(cvm);
+        utility_.blank_line();
+        function_operator(cvm);
         utility_.blank_line();
     }
     utility_.blank_line();

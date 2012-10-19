@@ -21,23 +21,35 @@
 #include "dogen/split_project/test_data/package/a_class_td.hpp"
 #include "dogen/split_project/test_data/versioned_key_td.hpp"
 
+namespace {
+
+dogen::split_project::versioned_key
+create_dogen_split_project_versioned_key(const unsigned int position) {
+    return dogen::split_project::versioned_key_generator::create(position);
+}
+
+}
+
 namespace dogen {
 namespace split_project {
 namespace package {
-namespace detail {
 
-a_class_generator::value_type
-a_class_generator::next_term(const unsigned int position) {
+void a_class_generator::
+populate(const unsigned int position, result_type& v) {
+    v.versioned_key(create_dogen_split_project_versioned_key(position + 0));
+}
+
+a_class_generator::result_type
+a_class_generator::create(const unsigned int position) {
     a_class r;
-
-    if (position == 0) {
-    } else if (position == 1) {
-    } else if (position == 2) {
-    }
-
+    a_class_generator::populate(position, r);
     return r;
 }
 
-unsigned int a_class_generator::length() const { return(3); }
+a_class_generator::result_type
+a_class_generator::operator()() {
+    return create(position_++);
 
-} } } }
+}
+
+} } }

@@ -57,7 +57,7 @@ public:
  * @post generate_vector shall never create an empty vector.
  */
 template<typename Sequence>
-std::vector<typename Sequence::value_type>
+std::vector<typename Sequence::result_type>
 generate_vector(const unsigned int size = 0) {
     Sequence sequence;
 
@@ -72,7 +72,7 @@ generate_vector(const unsigned int size = 0) {
     }
 
     const unsigned int actual_size(size ? size : sequence.length());
-    std::vector<typename Sequence::value_type> container;
+    std::vector<typename Sequence::result_type> container;
     container.reserve(actual_size);
     std::generate_n(std::back_inserter(container), actual_size, sequence);
     return(container);

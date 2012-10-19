@@ -18,6 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+/*
 #include <boost/test/unit_test.hpp>
 #include "dogen/utility/io/vector_io.hpp"
 #include "dogen/utility/test/logging.hpp"
@@ -70,3 +71,4 @@ BOOST_AUTO_TEST_CASE(validate_swap) {
 }
 
 BOOST_AUTO_TEST_SUITE_END()
+*/

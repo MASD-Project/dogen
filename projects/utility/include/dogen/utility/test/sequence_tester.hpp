@@ -41,7 +41,7 @@ namespace test {
 template<typename Sequence>
 class sequence_tester {
 public:
-    typedef typename Sequence::value_type entity_type;
+    typedef typename Sequence::result_type entity_type;
     typedef Sequence sequence_type;
 
 public:

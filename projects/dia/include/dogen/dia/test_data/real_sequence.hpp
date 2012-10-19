@@ -42,10 +42,10 @@ namespace detail {
  */
 class real_generator {
 public:
-    typedef dogen::dia::real value_type;
+    typedef dogen::dia::real result_type;
 
 public:
-    value_type next_term(const unsigned int position) {
+    result_type next_term(const unsigned int position) {
         if (position == 0)
             return dogen::dia::real("29.6875");
         else if (position == 1)

@@ -42,10 +42,10 @@ namespace detail {
  */
 class meta_types_generator {
 public:
-    typedef dogen::sml::meta_types value_type;
+    typedef dogen::sml::meta_types result_type;
 
 public:
-    value_type next_term(const unsigned int position) {
+    result_type next_term(const unsigned int position) {
         dogen::sml::meta_types name = dogen::sml::meta_types();
 
         if (position == 0)

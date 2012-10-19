@@ -58,8 +58,19 @@ public:
     static file_formatter::shared_ptr create(std::ostream& stream);
 
 private:
-    void length_method(const class_view_model& vm);
-    void next_term_method(const class_view_model& vm);
+    void domain_type_helper(const std::string& identifiable_type_name,
+        const std::string& type_name);
+    void bool_helper();
+    void string_helper();
+    void char_like_helper(const std::string& identifiable_type_name,
+        const std::string& type_name);
+    void int_like_helper(const std::string& identifiable_type_name,
+        const std::string& type_name);
+    void create_helper_methods(const class_view_model& vm);
+
+    void populate_method(const class_view_model& vm);
+    void create_method(const class_view_model& vm);
+    void function_operator(const class_view_model& vm);
 
 public:
     virtual void format(const file_view_model& vm) override;
@@ -70,7 +81,6 @@ private:
     const cpp_file_types file_type_;
     cpp_indenter indenter_;
     cpp_utility utility_;
-    const unsigned int generator_length_;
 };
 
 } } } } }

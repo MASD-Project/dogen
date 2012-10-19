@@ -42,10 +42,10 @@ namespace detail {
  */
 class qualified_name_generator {
 public:
-    typedef dogen::sml::qualified_name value_type;
+    typedef dogen::sml::qualified_name result_type;
 
 public:
-    value_type next_term(const unsigned int position) {
+    result_type next_term(const unsigned int position) {
         dogen::sml::qualified_name name;
 
         name.model_name("model_0");

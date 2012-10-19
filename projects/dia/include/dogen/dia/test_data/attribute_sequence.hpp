@@ -42,10 +42,10 @@ namespace detail {
  */
 class simple_attribute_generator {
 public:
-    typedef dogen::dia::attribute value_type;
+    typedef dogen::dia::attribute result_type;
 
 public:
-    value_type next_term(const unsigned int position);
+    result_type next_term(const unsigned int position);
     unsigned int length() const { return(3); }
 };
 
@@ -56,10 +56,10 @@ public:
  */
 class composite_attribute_generator {
 public:
-    typedef dogen::dia::attribute value_type;
+    typedef dogen::dia::attribute result_type;
 
 public:
-    value_type next_term(const unsigned int position);
+    result_type next_term(const unsigned int position);
     unsigned int length() const { return(3); }
 };
 

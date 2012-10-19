@@ -43,30 +43,30 @@ BOOST_AUTO_TEST_SUITE(all_primitives)
 
 BOOST_AUTO_TEST_CASE(validate_equality) {
     SETUP_TEST_LOG("validate_equality");
-    test_equality<a_class_sequence>();
-    test_equality<versioned_key_sequence>();
-    test_equality<unversioned_key_sequence>();
+    test_equality<a_class_generator>();
+    test_equality<versioned_key_generator>();
+    test_equality<unversioned_key_generator>();
 }
 
 BOOST_AUTO_TEST_CASE(validate_serialisation) {
     SETUP_TEST_LOG("validate_serialisation");
-    rountrip_type<a_class_sequence>();
-    rountrip_type<versioned_key_sequence>();
-    rountrip_type<unversioned_key_sequence>();
+    rountrip_type<a_class_generator>();
+    rountrip_type<versioned_key_generator>();
+    rountrip_type<unversioned_key_generator>();
 }
 
 BOOST_AUTO_TEST_CASE(validate_hashing) {
     SETUP_TEST_LOG("validate_hashing");
-    test_hashing<a_class_sequence>();
-    test_hashing<versioned_key_sequence>();
-    test_hashing<unversioned_key_sequence>();
+    test_hashing<a_class_generator>();
+    test_hashing<versioned_key_generator>();
+    test_hashing<unversioned_key_generator>();
 }
 
 BOOST_AUTO_TEST_CASE(validate_swap) {
     SETUP_TEST_LOG("validate_hashing");
-    test_swap<a_class_sequence>();
-    test_swap<versioned_key_sequence>();
-    test_swap<unversioned_key_sequence>();
+    test_swap<a_class_generator>();
+    test_swap<versioned_key_generator>();
+    test_swap<unversioned_key_generator>();
 }
 
 BOOST_AUTO_TEST_SUITE_END()

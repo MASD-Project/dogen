@@ -44,10 +44,10 @@ namespace detail {
  */
 class primitive_generator {
 public:
-    typedef dogen::sml::primitive value_type;
+    typedef dogen::sml::primitive result_type;
 
 public:
-    value_type next_term(const unsigned int position) {
+    result_type next_term(const unsigned int position) {
         dogen::sml::primitive result;
         dogen::sml::test_data::qualified_name_sequence sequence;
 

@@ -36,10 +36,10 @@ namespace detail {
 
 class versioned_key_generator {
 public:
-    typedef versioned_key value_type;
+    typedef versioned_key result_type;
 
 public:
-    value_type next_term(const unsigned int position);
+    result_type next_term(const unsigned int position);
     unsigned int length() const;
 };
 

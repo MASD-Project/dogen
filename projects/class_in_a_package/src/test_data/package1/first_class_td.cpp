@@ -21,29 +21,41 @@
 #include "dogen/class_in_a_package/test_data/package1/first_class_td.hpp"
 #include "dogen/class_in_a_package/test_data/versioned_key_td.hpp"
 
+namespace {
+
+int create_int(const unsigned int position) {
+    return position;
+}
+
+dogen::class_in_a_package::versioned_key
+create_dogen_class_in_a_package_versioned_key(const unsigned int position) {
+    return dogen::class_in_a_package::versioned_key_generator::create(position);
+}
+
+}
+
 namespace dogen {
 namespace class_in_a_package {
 namespace package1 {
-namespace detail {
 
-first_class_generator::value_type
-first_class_generator::next_term(const unsigned int position) {
+void first_class_generator::
+populate(const unsigned int position, result_type& v) {
+    v.public_attribute(create_int(position + 0));
+    v.private_attribute(create_int(position + 1));
+    v.versioned_key(create_dogen_class_in_a_package_versioned_key(position + 2));
+}
+
+first_class_generator::result_type
+first_class_generator::create(const unsigned int position) {
     first_class r;
-
-    if (position == 0) {
-        r.public_attribute(static_cast<int>(0));
-        r.private_attribute(static_cast<int>(1));
-    } else if (position == 1) {
-        r.public_attribute(static_cast<int>(30));
-        r.private_attribute(static_cast<int>(31));
-    } else if (position == 2) {
-        r.public_attribute(static_cast<int>(60));
-        r.private_attribute(static_cast<int>(61));
-    }
-
+    first_class_generator::populate(position, r);
     return r;
 }
 
-unsigned int first_class_generator::length() const { return(3); }
+first_class_generator::result_type
+first_class_generator::operator()() {
+    return create(position_++);
 
-} } } }
+}
+
+} } }

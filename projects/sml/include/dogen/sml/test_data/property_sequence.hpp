@@ -43,10 +43,10 @@ namespace detail {
  */
 class property_generator {
 public:
-    typedef dogen::sml::property value_type;
+    typedef dogen::sml::property result_type;
 
 public:
-    value_type next_term(const unsigned int position) {
+    result_type next_term(const unsigned int position) {
         test_data::qualified_name_sequence seq;
         dogen::sml::property p;
 

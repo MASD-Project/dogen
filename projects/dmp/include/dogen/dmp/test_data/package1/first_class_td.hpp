@@ -33,21 +33,19 @@ namespace dogen {
 namespace dmp {
 namespace package1 {
 
-namespace detail {
 
 class first_class_generator {
 public:
-    typedef dogen::dmp::package1::first_class value_type;
+    typedef dogen::dmp::package1::first_class result_type;
 
 public:
-    value_type next_term(const unsigned int position);
-    unsigned int length() const;
+    static void populate(const unsigned int position, result_type& v);
+    static result_type create(const unsigned int position);
+    result_type operator()();
+
+private:
+    unsigned int position_;
 };
-
-}
-
-typedef dogen::utility::test_data::sequence<
-    detail::first_class_generator> first_class_sequence;
 
 } } }
 

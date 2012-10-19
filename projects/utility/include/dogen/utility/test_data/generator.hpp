@@ -37,14 +37,14 @@ namespace test_data {
 template<typename Entity>
 class generator {
 public:
-    typedef Entity value_type;
+    typedef Entity result_type;
 
 public:
     generator(const unsigned int length) : length_(length) { }
     virtual ~generator() { }
 
 public:
-    virtual value_type next_term(const unsigned int position) = 0;
+    virtual result_type next_term(const unsigned int position) = 0;
     unsigned int length() const { return(length_); }
 
 private:

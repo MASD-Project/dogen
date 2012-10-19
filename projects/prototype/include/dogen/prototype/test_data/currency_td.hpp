@@ -47,7 +47,7 @@ public:
     complete_currency_generator() : currency_generator(178) { }
 
 public:
-    value_type next_term(const unsigned int position);
+    result_type next_term(const unsigned int position);
 };
 
 /**
@@ -61,7 +61,7 @@ public:
     majors_currency_generator() : currency_generator(8) { }
 
 public:
-    value_type next_term(const unsigned int position);
+    result_type next_term(const unsigned int position);
 };
 
 /**
@@ -75,7 +75,7 @@ public:
         currency_generator(26 * 26 * 26/*permutations with 3 letters*/) { }
 
 public:
-    value_type next_term(const unsigned int position);
+    result_type next_term(const unsigned int position);
 };
 
 }

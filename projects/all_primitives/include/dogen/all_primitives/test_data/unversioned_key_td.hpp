@@ -32,21 +32,19 @@
 namespace dogen {
 namespace all_primitives {
 
-namespace detail {
 
 class unversioned_key_generator {
 public:
-    typedef dogen::all_primitives::unversioned_key value_type;
+    typedef dogen::all_primitives::unversioned_key result_type;
 
 public:
-    value_type next_term(const unsigned int position);
-    unsigned int length() const;
+    static void populate(const unsigned int position, result_type& v);
+    static result_type create(const unsigned int position);
+    result_type operator()();
+
+private:
+    unsigned int position_;
 };
-
-}
-
-typedef dogen::utility::test_data::sequence<
-    detail::unversioned_key_generator> unversioned_key_sequence;
 
 } }
 

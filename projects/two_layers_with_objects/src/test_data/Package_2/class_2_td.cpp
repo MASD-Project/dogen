@@ -21,23 +21,35 @@
 #include "dogen/two_layers_with_objects/test_data/Package_2/class_2_td.hpp"
 #include "dogen/two_layers_with_objects/test_data/versioned_key_td.hpp"
 
+namespace {
+
+dogen::two_layers_with_objects::versioned_key
+create_dogen_two_layers_with_objects_versioned_key(const unsigned int position) {
+    return dogen::two_layers_with_objects::versioned_key_generator::create(position);
+}
+
+}
+
 namespace dogen {
 namespace two_layers_with_objects {
 namespace Package_2 {
-namespace detail {
 
-class_2_generator::value_type
-class_2_generator::next_term(const unsigned int position) {
+void class_2_generator::
+populate(const unsigned int position, result_type& v) {
+    v.versioned_key(create_dogen_two_layers_with_objects_versioned_key(position + 0));
+}
+
+class_2_generator::result_type
+class_2_generator::create(const unsigned int position) {
     class_2 r;
-
-    if (position == 0) {
-    } else if (position == 1) {
-    } else if (position == 2) {
-    }
-
+    class_2_generator::populate(position, r);
     return r;
 }
 
-unsigned int class_2_generator::length() const { return(3); }
+class_2_generator::result_type
+class_2_generator::operator()() {
+    return create(position_++);
 
-} } } }
+}
+
+} } }

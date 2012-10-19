@@ -21,55 +21,79 @@
 #include "dogen/all_primitives/test_data/a_class_td.hpp"
 #include "dogen/all_primitives/test_data/versioned_key_td.hpp"
 
+namespace {
+
+char create_char(const unsigned int position) {
+    return static_cast<char>((position % 95) + 32);
+}
+
+unsigned char create_unsigned_char(const unsigned int position) {
+    return static_cast<unsigned char>((position % 95) + 32);
+}
+
+int create_int(const unsigned int position) {
+    return position;
+}
+
+unsigned int create_unsigned_int(const unsigned int position) {
+    return static_cast<unsigned int>(position);
+}
+
+long create_long(const unsigned int position) {
+    return static_cast<long>(position);
+}
+
+unsigned long create_unsigned_long(const unsigned int position) {
+    return static_cast<unsigned long>(position);
+}
+
+unsigned long long create_unsigned_long_long(const unsigned int position) {
+    return static_cast<unsigned long long>(position);
+}
+
+short create_short(const unsigned int position) {
+    return static_cast<short>(position);
+}
+
+unsigned short create_unsigned_short(const unsigned int position) {
+    return static_cast<unsigned short>(position);
+}
+
+dogen::all_primitives::versioned_key
+create_dogen_all_primitives_versioned_key(const unsigned int position) {
+    return dogen::all_primitives::versioned_key_generator::create(position);
+}
+
+}
+
 namespace dogen {
 namespace all_primitives {
-namespace detail {
 
-a_class_generator::value_type
-a_class_generator::next_term(const unsigned int position) {
+void a_class_generator::
+populate(const unsigned int position, result_type& v) {
+    v.char_property(create_char(position + 1));
+    v.uchar_property(create_unsigned_char(position + 2));
+    v.int_property(create_int(position + 3));
+    v.uint_property(create_unsigned_int(position + 4));
+    v.long_property(create_long(position + 5));
+    v.ulong_property(create_unsigned_long(position + 6));
+    v.ulong_long_property(create_unsigned_long_long(position + 8));
+    v.short_property(create_short(position + 9));
+    v.ushort_property(create_unsigned_short(position + 10));
+    v.versioned_key(create_dogen_all_primitives_versioned_key(position + 11));
+}
+
+a_class_generator::result_type
+a_class_generator::create(const unsigned int position) {
     a_class r;
-
-    if (position == 0) {
-        r.bool_property(static_cast<bool>(0));
-        r.char_property(static_cast<char>(1));
-        r.uchar_property(static_cast<unsigned char>(2));
-        r.int_property(static_cast<int>(3));
-        r.uint_property(static_cast<unsigned int>(4));
-        r.long_property(static_cast<long>(5));
-        r.ulong_property(static_cast<unsigned long>(6));
-        r.long_long_property(static_cast<long long>(7));
-        r.ulong_long_property(static_cast<unsigned long long>(8));
-        r.short_property(static_cast<short>(9));
-        r.ushort_property(static_cast<unsigned short>(10));
-    } else if (position == 1) {
-        r.bool_property(static_cast<bool>(30));
-        r.char_property(static_cast<char>(31));
-        r.uchar_property(static_cast<unsigned char>(32));
-        r.int_property(static_cast<int>(33));
-        r.uint_property(static_cast<unsigned int>(34));
-        r.long_property(static_cast<long>(35));
-        r.ulong_property(static_cast<unsigned long>(36));
-        r.long_long_property(static_cast<long long>(37));
-        r.ulong_long_property(static_cast<unsigned long long>(38));
-        r.short_property(static_cast<short>(39));
-        r.ushort_property(static_cast<unsigned short>(40));
-    } else if (position == 2) {
-        r.bool_property(static_cast<bool>(60));
-        r.char_property(static_cast<char>(61));
-        r.uchar_property(static_cast<unsigned char>(62));
-        r.int_property(static_cast<int>(63));
-        r.uint_property(static_cast<unsigned int>(64));
-        r.long_property(static_cast<long>(65));
-        r.ulong_property(static_cast<unsigned long>(66));
-        r.long_long_property(static_cast<long long>(67));
-        r.ulong_long_property(static_cast<unsigned long long>(68));
-        r.short_property(static_cast<short>(69));
-        r.ushort_property(static_cast<unsigned short>(70));
-    }
-
+    a_class_generator::populate(position, r);
     return r;
 }
 
-unsigned int a_class_generator::length() const { return(3); }
+a_class_generator::result_type
+a_class_generator::operator()() {
+    return create(position_++);
 
-} } }
+}
+
+} }

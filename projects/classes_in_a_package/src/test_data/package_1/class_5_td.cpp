@@ -21,23 +21,35 @@
 #include "dogen/classes_in_a_package/test_data/package_1/class_5_td.hpp"
 #include "dogen/classes_in_a_package/test_data/versioned_key_td.hpp"
 
+namespace {
+
+dogen::classes_in_a_package::versioned_key
+create_dogen_classes_in_a_package_versioned_key(const unsigned int position) {
+    return dogen::classes_in_a_package::versioned_key_generator::create(position);
+}
+
+}
+
 namespace dogen {
 namespace classes_in_a_package {
 namespace package_1 {
-namespace detail {
 
-class_5_generator::value_type
-class_5_generator::next_term(const unsigned int position) {
+void class_5_generator::
+populate(const unsigned int position, result_type& v) {
+    v.versioned_key(create_dogen_classes_in_a_package_versioned_key(position + 0));
+}
+
+class_5_generator::result_type
+class_5_generator::create(const unsigned int position) {
     class_5 r;
-
-    if (position == 0) {
-    } else if (position == 1) {
-    } else if (position == 2) {
-    }
-
+    class_5_generator::populate(position, r);
     return r;
 }
 
-unsigned int class_5_generator::length() const { return(3); }
+class_5_generator::result_type
+class_5_generator::operator()() {
+    return create(position_++);
 
-} } } }
+}
+
+} } }

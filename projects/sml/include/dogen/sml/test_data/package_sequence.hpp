@@ -43,10 +43,10 @@ namespace detail {
  */
 class package_generator {
 public:
-    typedef dogen::sml::package value_type;
+    typedef dogen::sml::package result_type;
 
 public:
-    value_type next_term(const unsigned int position) {
+    result_type next_term(const unsigned int position) {
         dogen::sml::package result;
         qualified_name_sequence seq;
 
