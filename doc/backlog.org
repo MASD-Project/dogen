@@ -10,6 +10,11 @@ This file contains all stories that haven't been assigned to a sprint.
 
 Stories that we intend to look at, at some point.
 
+*** Check if we have a test model with versioning disabled
+
+It seems all the test models are using versioning. We need a test
+without it.
+
 *** Handle unnamed models properly
 
 The option disable model name was meant to allow the generation of
@@ -477,7 +482,6 @@ ENDIF ( BUILD_TESTING )
 
 Suggestion: maybe there's a possibility of using an environment
 variable for all the used parameters (username, hostname, etc)
-
 
 *** Add unit test benchmarking
 
