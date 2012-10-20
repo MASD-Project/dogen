@@ -113,10 +113,9 @@ set(header_validation_files "")
 set(ignore_file false)
 set(file_counter "0")
 foreach(hpp_file ${all_hpp_files})
-    # FIXME:
-    if (hpp_file MATCHES "trivial_inheritance")
-        set(ignore_file true)
-    endif()
+    # if (hpp_file MATCHES "PROJECT_TO_IGNORE")
+    #     set(ignore_file true)
+    # endif()
 
     if(NOT ignore_file)
         set(input_filename ${CMAKE_SOURCE_DIR}/${header_validation_template})
