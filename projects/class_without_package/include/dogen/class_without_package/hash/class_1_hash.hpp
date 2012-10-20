@@ -42,7 +42,6 @@ public:
         combine(seed, value.an_attribute());
         combine(seed, value.versioned_key());
         return seed;
-
     }
 };
 

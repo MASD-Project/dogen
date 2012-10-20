@@ -494,7 +494,6 @@ public:
         combine(seed, value.private_attribute());
         combine(seed, value.versioned_key());
         return seed;
-
     }
 };
 
@@ -545,7 +544,6 @@ public:
 
         combine(seed, value.id());
         return seed;
-
     }
 };
 
@@ -597,7 +595,6 @@ public:
         combine(seed, value.id());
         combine(seed, value.version());
         return seed;
-
     }
 };
 

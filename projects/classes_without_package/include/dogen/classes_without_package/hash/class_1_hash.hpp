@@ -41,7 +41,6 @@ public:
 
         combine(seed, value.versioned_key());
         return seed;
-
     }
 };
 

@@ -93,7 +93,6 @@ void hash_header::operator_bracket_method(const class_view_model& vm) {
                     << "());" << std::endl;
         }
         stream_ << indenter_ << "return seed;" << std::endl;
-        utility_.blank_line();
     }
     utility_.close_scope();
 }

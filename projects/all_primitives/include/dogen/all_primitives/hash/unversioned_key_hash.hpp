@@ -40,7 +40,6 @@ public:
 
         combine(seed, value.id());
         return seed;
-
     }
 };
 
