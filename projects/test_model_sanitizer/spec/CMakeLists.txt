@@ -24,7 +24,12 @@ file(GLOB_RECURSE spec_files RELATIVE
     "${CMAKE_CURRENT_SOURCE_DIR}/"
     "${CMAKE_CURRENT_SOURCE_DIR}/*.cpp")
 
-add_executable(${spec_name} ${spec_files})
+# we need to add these manually as the point of this test model
+# is not to generate a make file.
+file(GLOB_RECURSE disable_cmakelists_files ABSOLUTE
+    "${CMAKE_SOURCE_DIR}/projects/disable_cmakelists/src/*.cpp")
+
+add_executable(${spec_name} ${spec_files} ${disable_cmakelists_files})
 set(binary_name "dogen_${spec_name}")
 set_target_properties(${spec_name} PROPERTIES OUTPUT_NAME ${binary_name})
 
