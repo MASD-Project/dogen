@@ -241,7 +241,6 @@ void generator_implementation::function_operator(const class_view_model& vm) {
         stream_ << indenter_ << "return create("
                 << utility_.as_member_variable("position") << "++);"
                 << std::endl;
-        utility_.blank_line();
     }
     utility_.close_scope();
 }

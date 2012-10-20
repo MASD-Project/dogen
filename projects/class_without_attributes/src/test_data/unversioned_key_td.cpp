@@ -48,7 +48,6 @@ unversioned_key_generator::create(const unsigned int position) {
 unversioned_key_generator::result_type
 unversioned_key_generator::operator()() {
     return create(position_++);
-
 }
 
 } }

@@ -51,7 +51,6 @@ class_4_generator::create(const unsigned int position) {
 class_4_generator::result_type
 class_4_generator::operator()() {
     return create(position_++);
-
 }
 
 } } }

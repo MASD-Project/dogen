@@ -49,7 +49,6 @@ versioned_key_generator::create(const unsigned int position) {
 versioned_key_generator::result_type
 versioned_key_generator::operator()() {
     return create(position_++);
-
 }
 
 } }

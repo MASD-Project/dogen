@@ -1597,7 +1597,6 @@ first_class_generator::create(const unsigned int position) {
 first_class_generator::result_type
 first_class_generator::operator()() {
     return create(position_++);
-
 }
 
 } }
@@ -1653,7 +1652,6 @@ unversioned_key_generator::create(const unsigned int position) {
 unversioned_key_generator::result_type
 unversioned_key_generator::operator()() {
     return create(position_++);
-
 }
 
 }
@@ -1710,7 +1708,6 @@ versioned_key_generator::create(const unsigned int position) {
 versioned_key_generator::result_type
 versioned_key_generator::operator()() {
     return create(position_++);
-
 }
 
 }
