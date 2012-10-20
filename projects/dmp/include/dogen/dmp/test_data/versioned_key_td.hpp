@@ -33,6 +33,9 @@ namespace dmp {
 
 class versioned_key_generator {
 public:
+    versioned_key_generator();
+
+public:
     typedef dogen::dmp::versioned_key result_type;
 
 public:

@@ -33,6 +33,9 @@ namespace classes_inout_package {
 
 class class_2_generator {
 public:
+    class_2_generator();
+
+public:
     typedef dogen::classes_inout_package::class_2 result_type;
 
 public:

@@ -33,6 +33,9 @@ namespace split_project {
 
 class unversioned_key_generator {
 public:
+    unversioned_key_generator();
+
+public:
     typedef dogen::split_project::unversioned_key result_type;
 
 public:

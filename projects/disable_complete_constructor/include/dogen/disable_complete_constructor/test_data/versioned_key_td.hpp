@@ -33,6 +33,9 @@ namespace disable_complete_constructor {
 
 class versioned_key_generator {
 public:
+    versioned_key_generator();
+
+public:
     typedef dogen::disable_complete_constructor::versioned_key result_type;
 
 public:

@@ -33,6 +33,9 @@ namespace class_without_package {
 
 class unversioned_key_generator {
 public:
+    unversioned_key_generator();
+
+public:
     typedef dogen::class_without_package::unversioned_key result_type;
 
 public:

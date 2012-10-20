@@ -33,6 +33,9 @@ namespace all_primitives {
 
 class unversioned_key_generator {
 public:
+    unversioned_key_generator();
+
+public:
     typedef dogen::all_primitives::unversioned_key result_type;
 
 public:

@@ -34,6 +34,9 @@ namespace package_1 {
 
 class class_1_generator {
 public:
+    class_1_generator();
+
+public:
     typedef dogen::class_without_attributes::package_1::class_1 result_type;
 
 public:

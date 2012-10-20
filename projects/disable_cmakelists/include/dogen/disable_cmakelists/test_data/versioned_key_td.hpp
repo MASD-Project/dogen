@@ -33,6 +33,9 @@ namespace disable_cmakelists {
 
 class versioned_key_generator {
 public:
+    versioned_key_generator();
+
+public:
     typedef dogen::disable_cmakelists::versioned_key result_type;
 
 public:

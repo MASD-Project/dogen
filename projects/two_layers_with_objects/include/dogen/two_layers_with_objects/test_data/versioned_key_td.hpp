@@ -33,6 +33,9 @@ namespace two_layers_with_objects {
 
 class versioned_key_generator {
 public:
+    versioned_key_generator();
+
+public:
     typedef dogen::two_layers_with_objects::versioned_key result_type;
 
 public:

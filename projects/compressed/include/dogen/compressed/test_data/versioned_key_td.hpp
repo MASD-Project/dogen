@@ -33,6 +33,9 @@ namespace compressed {
 
 class versioned_key_generator {
 public:
+    versioned_key_generator();
+
+public:
     typedef dogen::compressed::versioned_key result_type;
 
 public:

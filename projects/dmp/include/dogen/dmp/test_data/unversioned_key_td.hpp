@@ -33,6 +33,9 @@ namespace dmp {
 
 class unversioned_key_generator {
 public:
+    unversioned_key_generator();
+
+public:
     typedef dogen::dmp::unversioned_key result_type;
 
 public:

@@ -33,6 +33,9 @@ namespace stand_alone_class {
 
 class class_1_generator {
 public:
+    class_1_generator();
+
+public:
     typedef dogen::stand_alone_class::class_1 result_type;
 
 public:

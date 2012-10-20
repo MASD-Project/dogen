@@ -33,6 +33,9 @@ namespace stand_alone_class {
 
 class unversioned_key_generator {
 public:
+    unversioned_key_generator();
+
+public:
     typedef dogen::stand_alone_class::unversioned_key result_type;
 
 public:

@@ -31,6 +31,8 @@ unsigned int create_unsigned_int(const unsigned int position) {
 namespace dogen {
 namespace class_without_package {
 
+unversioned_key_generator::unversioned_key_generator() : position_(0) { }
+
 void unversioned_key_generator::
 populate(const unsigned int position, result_type& v) {
     v.id(create_unsigned_int(position + 0));

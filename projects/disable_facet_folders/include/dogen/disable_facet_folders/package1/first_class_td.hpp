@@ -34,6 +34,9 @@ namespace package1 {
 
 class first_class_generator {
 public:
+    first_class_generator();
+
+public:
     typedef dogen::disable_facet_folders::package1::first_class result_type;
 
 public:

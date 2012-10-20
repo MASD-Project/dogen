@@ -1040,6 +1040,9 @@ namespace package1 {
 
 class first_class_generator {
 public:
+    first_class_generator();
+
+public:
     typedef class_in_a_package::package1::first_class result_type;
 
 public:
@@ -1091,6 +1094,9 @@ namespace class_in_a_package {
 
 class unversioned_key_generator {
 public:
+    unversioned_key_generator();
+
+public:
     typedef class_in_a_package::unversioned_key result_type;
 
 public:
@@ -1141,6 +1147,9 @@ namespace class_in_a_package {
 
 
 class versioned_key_generator {
+public:
+    versioned_key_generator();
+
 public:
     typedef class_in_a_package::versioned_key result_type;
 
@@ -1569,6 +1578,8 @@ create_class_in_a_package_versioned_key(const unsigned int position) {
 namespace class_in_a_package {
 namespace package1 {
 
+first_class_generator::first_class_generator() : position_(0) { }
+
 void first_class_generator::
 populate(const unsigned int position, result_type& v) {
     v.public_attribute(create_int(position + 0));
@@ -1625,6 +1636,8 @@ unsigned int create_unsigned_int(const unsigned int position) {
 
 namespace class_in_a_package {
 
+unversioned_key_generator::unversioned_key_generator() : position_(0) { }
+
 void unversioned_key_generator::
 populate(const unsigned int position, result_type& v) {
     v.id(create_unsigned_int(position + 0));
@@ -1678,6 +1691,8 @@ unsigned int create_unsigned_int(const unsigned int position) {
 }
 
 namespace class_in_a_package {
+
+versioned_key_generator::versioned_key_generator() : position_(0) { }
 
 void versioned_key_generator::
 populate(const unsigned int position, result_type& v) {

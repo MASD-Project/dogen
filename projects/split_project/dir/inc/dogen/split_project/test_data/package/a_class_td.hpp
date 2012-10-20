@@ -34,6 +34,9 @@ namespace package {
 
 class a_class_generator {
 public:
+    a_class_generator();
+
+public:
     typedef dogen::split_project::package::a_class result_type;
 
 public:

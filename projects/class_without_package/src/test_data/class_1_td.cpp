@@ -37,6 +37,8 @@ create_dogen_class_without_package_versioned_key(const unsigned int position) {
 namespace dogen {
 namespace class_without_package {
 
+class_1_generator::class_1_generator() : position_(0) { }
+
 void class_1_generator::
 populate(const unsigned int position, result_type& v) {
     v.an_attribute(create_int(position + 0));

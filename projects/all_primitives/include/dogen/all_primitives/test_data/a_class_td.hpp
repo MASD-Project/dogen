@@ -33,6 +33,9 @@ namespace all_primitives {
 
 class a_class_generator {
 public:
+    a_class_generator();
+
+public:
     typedef dogen::all_primitives::a_class result_type;
 
 public:

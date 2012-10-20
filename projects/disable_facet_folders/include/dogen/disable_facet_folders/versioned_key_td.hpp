@@ -33,6 +33,9 @@ namespace disable_facet_folders {
 
 class versioned_key_generator {
 public:
+    versioned_key_generator();
+
+public:
     typedef dogen::disable_facet_folders::versioned_key result_type;
 
 public:

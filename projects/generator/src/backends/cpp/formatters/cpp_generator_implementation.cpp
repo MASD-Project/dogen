@@ -246,6 +246,12 @@ void generator_implementation::function_operator(const class_view_model& vm) {
     utility_.close_scope();
 }
 
+void generator_implementation::default_constructor(const class_view_model& vm) {
+    const std::string name(vm.name() + "_generator");
+    stream_ << indenter_ << name << "::" << name << "() : position_(0) { }";
+    utility_.blank_line();
+}
+
 void generator_implementation::format(const file_view_model& vm) {
     boost::optional<view_models::class_view_model> o(vm.class_vm());
     if (!o)
@@ -267,6 +273,8 @@ void generator_implementation::format(const file_view_model& vm) {
         std::list<std::string> ns(cvm.namespaces());
         namespace_helper ns_helper(stream_, ns);
 
+        utility_.blank_line();
+        default_constructor(cvm);
         utility_.blank_line();
         populate_method(cvm);
         utility_.blank_line();

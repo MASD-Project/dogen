@@ -33,6 +33,9 @@ namespace classes_without_package {
 
 class versioned_key_generator {
 public:
+    versioned_key_generator();
+
+public:
     typedef dogen::classes_without_package::versioned_key result_type;
 
 public:

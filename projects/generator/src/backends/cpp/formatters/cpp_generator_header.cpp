@@ -63,6 +63,11 @@ void generator_header::generator_class(const class_view_model& vm) {
     utility_.open_scope();
     {
         cpp_positive_indenter_scope s(indenter_);
+
+        utility_.public_access_specifier();
+        stream_ << indenter_ << class_name << "();" << std::endl;
+        utility_.blank_line();
+
         utility_.public_access_specifier();
 
         stream_ << indenter_ << "typedef ";

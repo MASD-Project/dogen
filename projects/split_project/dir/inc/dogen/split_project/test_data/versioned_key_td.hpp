@@ -33,6 +33,9 @@ namespace split_project {
 
 class versioned_key_generator {
 public:
+    versioned_key_generator();
+
+public:
     typedef dogen::split_project::versioned_key result_type;
 
 public:

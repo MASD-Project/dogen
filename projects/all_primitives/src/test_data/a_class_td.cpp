@@ -77,6 +77,8 @@ create_dogen_all_primitives_versioned_key(const unsigned int position) {
 namespace dogen {
 namespace all_primitives {
 
+a_class_generator::a_class_generator() : position_(0) { }
+
 void a_class_generator::
 populate(const unsigned int position, result_type& v) {
     v.bool_property(create_bool(position + 0));

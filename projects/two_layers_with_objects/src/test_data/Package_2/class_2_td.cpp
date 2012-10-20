@@ -34,6 +34,8 @@ namespace dogen {
 namespace two_layers_with_objects {
 namespace Package_2 {
 
+class_2_generator::class_2_generator() : position_(0) { }
+
 void class_2_generator::
 populate(const unsigned int position, result_type& v) {
     v.versioned_key(create_dogen_two_layers_with_objects_versioned_key(position + 0));

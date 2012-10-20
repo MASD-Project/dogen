@@ -33,6 +33,9 @@ namespace all_primitives {
 
 class versioned_key_generator {
 public:
+    versioned_key_generator();
+
+public:
     typedef dogen::all_primitives::versioned_key result_type;
 
 public:

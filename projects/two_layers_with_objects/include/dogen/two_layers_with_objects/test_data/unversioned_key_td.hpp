@@ -33,6 +33,9 @@ namespace two_layers_with_objects {
 
 class unversioned_key_generator {
 public:
+    unversioned_key_generator();
+
+public:
     typedef dogen::two_layers_with_objects::unversioned_key result_type;
 
 public:

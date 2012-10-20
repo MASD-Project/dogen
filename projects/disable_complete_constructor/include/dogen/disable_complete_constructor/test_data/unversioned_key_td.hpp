@@ -33,6 +33,9 @@ namespace disable_complete_constructor {
 
 class unversioned_key_generator {
 public:
+    unversioned_key_generator();
+
+public:
     typedef dogen::disable_complete_constructor::unversioned_key result_type;
 
 public:

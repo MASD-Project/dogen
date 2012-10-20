@@ -33,6 +33,9 @@ namespace classes_without_package {
 
 class class_3_generator {
 public:
+    class_3_generator();
+
+public:
     typedef dogen::classes_without_package::class_3 result_type;
 
 public:

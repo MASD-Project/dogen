@@ -38,6 +38,8 @@ namespace dogen {
 namespace disable_cmakelists {
 namespace package1 {
 
+first_class_generator::first_class_generator() : position_(0) { }
+
 void first_class_generator::
 populate(const unsigned int position, result_type& v) {
     v.public_attribute(create_int(position + 0));

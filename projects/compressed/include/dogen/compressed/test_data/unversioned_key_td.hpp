@@ -33,6 +33,9 @@ namespace compressed {
 
 class unversioned_key_generator {
 public:
+    unversioned_key_generator();
+
+public:
     typedef dogen::compressed::unversioned_key result_type;
 
 public:

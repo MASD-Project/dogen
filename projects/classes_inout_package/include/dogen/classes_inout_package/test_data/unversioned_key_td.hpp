@@ -33,6 +33,9 @@ namespace classes_inout_package {
 
 class unversioned_key_generator {
 public:
+    unversioned_key_generator();
+
+public:
     typedef dogen::classes_inout_package::unversioned_key result_type;
 
 public:

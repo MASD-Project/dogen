@@ -34,6 +34,8 @@ namespace dogen {
 namespace split_project {
 namespace package {
 
+a_class_generator::a_class_generator() : position_(0) { }
+
 void a_class_generator::
 populate(const unsigned int position, result_type& v) {
     v.versioned_key(create_dogen_split_project_versioned_key(position + 0));

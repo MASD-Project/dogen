@@ -34,6 +34,9 @@ namespace Package_2 {
 
 class class_2_generator {
 public:
+    class_2_generator();
+
+public:
     typedef dogen::two_layers_with_objects::Package_2::class_2 result_type;
 
 public:

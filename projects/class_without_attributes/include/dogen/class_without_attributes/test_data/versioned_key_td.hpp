@@ -33,6 +33,9 @@ namespace class_without_attributes {
 
 class versioned_key_generator {
 public:
+    versioned_key_generator();
+
+public:
     typedef dogen::class_without_attributes::versioned_key result_type;
 
 public:

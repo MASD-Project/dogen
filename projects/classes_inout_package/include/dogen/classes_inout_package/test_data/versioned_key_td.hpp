@@ -33,6 +33,9 @@ namespace classes_inout_package {
 
 class versioned_key_generator {
 public:
+    versioned_key_generator();
+
+public:
     typedef dogen::classes_inout_package::versioned_key result_type;
 
 public:

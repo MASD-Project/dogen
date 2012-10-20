@@ -34,6 +34,9 @@ namespace package_1 {
 
 class class_5_generator {
 public:
+    class_5_generator();
+
+public:
     typedef dogen::classes_in_a_package::package_1::class_5 result_type;
 
 public:
