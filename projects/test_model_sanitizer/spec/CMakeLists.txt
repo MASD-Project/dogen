@@ -46,6 +46,7 @@ target_link_libraries(${spec_name}
     disable_facet_folders
     unnamed_model # disable model package
     enable_facet_domain
+    enable_facet_hash
     trivial_inheritance
     utility
     ${LIBXML2_LIBRARIES}
