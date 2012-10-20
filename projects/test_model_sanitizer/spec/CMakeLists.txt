@@ -43,6 +43,7 @@ target_link_libraries(${spec_name}
     class_without_package
     compressed
     disable_complete_constructor
+    disable_facet_folders
     trivial_inheritance
     utility
     ${LIBXML2_LIBRARIES}
