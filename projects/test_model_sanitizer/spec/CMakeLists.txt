@@ -34,6 +34,7 @@ target_link_libraries(${spec_name}
     classes_inout_package
     classes_without_package
     class_without_attributes
+    class_without_package
     class_in_a_package
     trivial_inheritance
     utility
