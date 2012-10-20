@@ -48,6 +48,7 @@ target_link_libraries(${spec_name}
     enable_facet_domain
     enable_facet_hash
     enable_facet_io
+    enable_facet_serialization
     trivial_inheritance
     utility
     ${LIBXML2_LIBRARIES}
