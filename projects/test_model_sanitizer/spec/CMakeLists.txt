@@ -32,6 +32,7 @@ target_link_libraries(${spec_name}
     all_primitives
     classes_in_a_package
     classes_inout_package
+    classes_without_package
     class_in_a_package
     trivial_inheritance
     utility
