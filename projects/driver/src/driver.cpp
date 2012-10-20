@@ -96,7 +96,9 @@ int main(int argc, char* argv[]) {
             cg.generate();
         }
     } catch (const std::exception& e) {
-        std::cerr << e.what() << std::endl;
+        std::cerr << "Error: " << e.what() << std::endl
+                  << "Use --help option to see usage instructions."
+                  << std::endl;
         BOOST_LOG_SEV(lg, fatal) << e.what();
         return 1;
     }
