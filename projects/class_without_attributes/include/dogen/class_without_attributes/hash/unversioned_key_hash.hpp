@@ -27,19 +27,24 @@
 
 #include <functional>
 #include "dogen/class_without_attributes/domain/unversioned_key.hpp"
-#include "dogen/utility/hash/combine.hpp"
+
+namespace dogen {
+namespace class_without_attributes {
+
+class unversioned_key_hasher {
+public:
+    static std::size_t hash(const unversioned_key& v);
+};
+
+} }
 
 namespace std {
 
 template<>
 class hash<dogen::class_without_attributes::unversioned_key> {
 public:
-    size_t operator()(const dogen::class_without_attributes::unversioned_key& value) const {
-        using dogen::utility::hash::combine;
-        std::size_t seed(0);
-
-        combine(seed, value.id());
-        return seed;
+    size_t operator()(const dogen::class_without_attributes::unversioned_key& v) const {
+        return dogen::class_without_attributes::unversioned_key_hasher::hash(v);
     }
 };
 

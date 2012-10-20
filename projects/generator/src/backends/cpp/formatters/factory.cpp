@@ -24,6 +24,7 @@
 #include "dogen/generator/backends/cpp/formatters/cpp_domain_implementation.hpp"
 #include "dogen/generator/backends/cpp/formatters/cpp_facet_includer.hpp"
 #include "dogen/generator/backends/cpp/formatters/cpp_hash_header.hpp"
+#include "dogen/generator/backends/cpp/formatters/cpp_hash_implementation.hpp"
 #include "dogen/generator/backends/cpp/formatters/cpp_io_header.hpp"
 #include "dogen/generator/backends/cpp/formatters/cpp_io_implementation.hpp"
 #include "dogen/generator/backends/cpp/formatters/cpp_generator_header.hpp"
@@ -73,7 +74,10 @@ create(std::ostream& stream, cpp_facet_types facet_type,
             return io_implementation::create(stream);
         break;
     case cpp_facet_types::hash:
-        return hash_header::create(stream);
+        if (file_type == cpp_file_types::header)
+            return hash_header::create(stream);
+        else
+            return hash_implementation::create(stream);
         break;
     case cpp_facet_types::serialization:
         return serialization_header::create(stream,

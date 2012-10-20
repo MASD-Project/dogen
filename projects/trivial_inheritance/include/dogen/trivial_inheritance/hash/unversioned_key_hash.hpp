@@ -27,19 +27,24 @@
 
 #include <functional>
 #include "dogen/trivial_inheritance/domain/unversioned_key.hpp"
-#include "dogen/utility/hash/combine.hpp"
+
+namespace dogen {
+namespace trivial_inheritance {
+
+class unversioned_key_hasher {
+public:
+    static std::size_t hash(const unversioned_key& v);
+};
+
+} }
 
 namespace std {
 
 template<>
 class hash<dogen::trivial_inheritance::unversioned_key> {
 public:
-    size_t operator()(const dogen::trivial_inheritance::unversioned_key& value) const {
-        using dogen::utility::hash::combine;
-        std::size_t seed(0);
-
-        combine(seed, value.id());
-        return seed;
+    size_t operator()(const dogen::trivial_inheritance::unversioned_key& v) const {
+        return dogen::trivial_inheritance::unversioned_key_hasher::hash(v);
     }
 };
 

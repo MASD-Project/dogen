@@ -27,19 +27,24 @@
 
 #include <functional>
 #include "dogen/all_primitives/domain/unversioned_key.hpp"
-#include "dogen/utility/hash/combine.hpp"
+
+namespace dogen {
+namespace all_primitives {
+
+class unversioned_key_hasher {
+public:
+    static std::size_t hash(const unversioned_key& v);
+};
+
+} }
 
 namespace std {
 
 template<>
 class hash<dogen::all_primitives::unversioned_key> {
 public:
-    size_t operator()(const dogen::all_primitives::unversioned_key& value) const {
-        using dogen::utility::hash::combine;
-        std::size_t seed(0);
-
-        combine(seed, value.id());
-        return seed;
+    size_t operator()(const dogen::all_primitives::unversioned_key& v) const {
+        return dogen::all_primitives::unversioned_key_hasher::hash(v);
     }
 };
 

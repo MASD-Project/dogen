@@ -154,7 +154,8 @@ void cpp_inclusion_manager::append_versioning_dependencies(
         return;
 
     /*
-     * rule 1: versioned header depends on unversioned header.
+     * rule 1: domain versioned header depends on domain unversioned
+     * header.
      */
     const bool is_header(flt == cpp_file_types::header);
     const bool is_domain(ft == cpp_facet_types::domain);
@@ -194,15 +195,20 @@ void cpp_inclusion_manager::append_versioning_dependencies(
     const bool rule4(is_implementation && is_test_data);
 
     /*
-     * rule 5: serialization and hash headers need versioned key in
-     * order to serialise and hash these objects
-     * (respectively). Domain needs the version for its property.
+     * rule 5: serialization headers need versioned key in order to
+     * serialise. Domain needs the version for its property.
+     */
+    const bool is_serialization(ft == cpp_facet_types::serialization);
+    const bool rule5(is_header && (is_domain || is_serialization));
+
+    /*
+     * rule 6: hash implementation needs versioned key in order to
+     * hash.
      */
     const bool is_hash(ft == cpp_facet_types::hash);
-    const bool is_serialization(ft == cpp_facet_types::serialization);
-    const bool rule5(is_header && (is_domain || is_hash || is_serialization));
+    const bool rule6(is_implementation && is_hash);
 
-    if (rule2 || rule3 || rule4 || rule5)
+    if (rule2 || rule3 || rule4 || rule5 || rule6)
         il.user.push_back(versioned_dependency(version_facet));
 }
 
@@ -289,7 +295,7 @@ append_implementation_dependencies(const cpp_facet_types ft,
      * Dogen dependencies
      */
     // hash combine
-    if (is_header && is_hash)
+    if (is_implementation && is_hash)
         il.user.push_back(hash_combine);
 }
 

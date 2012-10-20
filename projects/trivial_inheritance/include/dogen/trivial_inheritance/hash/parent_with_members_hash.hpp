@@ -27,21 +27,24 @@
 
 #include <functional>
 #include "dogen/trivial_inheritance/domain/parent_with_members.hpp"
-#include "dogen/trivial_inheritance/hash/versioned_key_hash.hpp"
-#include "dogen/utility/hash/combine.hpp"
+
+namespace dogen {
+namespace trivial_inheritance {
+
+class parent_with_members_hasher {
+public:
+    static std::size_t hash(const parent_with_members& v);
+};
+
+} }
 
 namespace std {
 
 template<>
 class hash<dogen::trivial_inheritance::parent_with_members> {
 public:
-    size_t operator()(const dogen::trivial_inheritance::parent_with_members& value) const {
-        using dogen::utility::hash::combine;
-        std::size_t seed(0);
-
-        combine(seed, value.prop_0());
-        combine(seed, value.versioned_key());
-        return seed;
+    size_t operator()(const dogen::trivial_inheritance::parent_with_members& v) const {
+        return dogen::trivial_inheritance::parent_with_members_hasher::hash(v);
     }
 };
 

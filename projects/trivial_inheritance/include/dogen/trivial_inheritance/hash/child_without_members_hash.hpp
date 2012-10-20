@@ -28,20 +28,24 @@
 #include <functional>
 #include "dogen/trivial_inheritance/domain/child_without_members.hpp"
 #include "dogen/trivial_inheritance/hash/parent_without_members_hash.hpp"
-#include "dogen/trivial_inheritance/hash/versioned_key_hash.hpp"
-#include "dogen/utility/hash/combine.hpp"
+
+namespace dogen {
+namespace trivial_inheritance {
+
+class child_without_members_hasher {
+public:
+    static std::size_t hash(const child_without_members& v);
+};
+
+} }
 
 namespace std {
 
 template<>
 class hash<dogen::trivial_inheritance::child_without_members> {
 public:
-    size_t operator()(const dogen::trivial_inheritance::child_without_members& value) const {
-        using dogen::utility::hash::combine;
-        std::size_t seed(0);
-
-        combine(seed, dynamic_cast<const parent_without_members&>(value));
-        return seed;
+    size_t operator()(const dogen::trivial_inheritance::child_without_members& v) const {
+        return dogen::trivial_inheritance::child_without_members_hasher::hash(v);
     }
 };
 

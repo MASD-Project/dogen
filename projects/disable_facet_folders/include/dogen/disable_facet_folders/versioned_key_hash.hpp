@@ -27,20 +27,24 @@
 
 #include <functional>
 #include "dogen/disable_facet_folders/versioned_key.hpp"
-#include "dogen/utility/hash/combine.hpp"
+
+namespace dogen {
+namespace disable_facet_folders {
+
+class versioned_key_hasher {
+public:
+    static std::size_t hash(const versioned_key& v);
+};
+
+} }
 
 namespace std {
 
 template<>
 class hash<dogen::disable_facet_folders::versioned_key> {
 public:
-    size_t operator()(const dogen::disable_facet_folders::versioned_key& value) const {
-        using dogen::utility::hash::combine;
-        std::size_t seed(0);
-
-        combine(seed, value.id());
-        combine(seed, value.version());
-        return seed;
+    size_t operator()(const dogen::disable_facet_folders::versioned_key& v) const {
+        return dogen::disable_facet_folders::versioned_key_hasher::hash(v);
     }
 };
 

@@ -58,6 +58,7 @@ public:
 
 private:
     void operator_bracket_method(const class_view_model& vm);
+    void hash_helper_class(const class_view_model& vm);
     void hash_class(const class_view_model& vm);
 
 public:

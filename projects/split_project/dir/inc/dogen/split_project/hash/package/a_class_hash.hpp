@@ -27,20 +27,25 @@
 
 #include <functional>
 #include "dogen/split_project/domain/package/a_class.hpp"
-#include "dogen/split_project/hash/versioned_key_hash.hpp"
-#include "dogen/utility/hash/combine.hpp"
+
+namespace dogen {
+namespace split_project {
+namespace package {
+
+class a_class_hasher {
+public:
+    static std::size_t hash(const a_class& v);
+};
+
+} } }
 
 namespace std {
 
 template<>
 class hash<dogen::split_project::package::a_class> {
 public:
-    size_t operator()(const dogen::split_project::package::a_class& value) const {
-        using dogen::utility::hash::combine;
-        std::size_t seed(0);
-
-        combine(seed, value.versioned_key());
-        return seed;
+    size_t operator()(const dogen::split_project::package::a_class& v) const {
+        return dogen::split_project::package::a_class_hasher::hash(v);
     }
 };
 

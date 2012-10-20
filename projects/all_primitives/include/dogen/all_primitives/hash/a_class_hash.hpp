@@ -27,31 +27,24 @@
 
 #include <functional>
 #include "dogen/all_primitives/domain/a_class.hpp"
-#include "dogen/all_primitives/hash/versioned_key_hash.hpp"
-#include "dogen/utility/hash/combine.hpp"
+
+namespace dogen {
+namespace all_primitives {
+
+class a_class_hasher {
+public:
+    static std::size_t hash(const a_class& v);
+};
+
+} }
 
 namespace std {
 
 template<>
 class hash<dogen::all_primitives::a_class> {
 public:
-    size_t operator()(const dogen::all_primitives::a_class& value) const {
-        using dogen::utility::hash::combine;
-        std::size_t seed(0);
-
-        combine(seed, value.bool_property());
-        combine(seed, value.char_property());
-        combine(seed, value.uchar_property());
-        combine(seed, value.int_property());
-        combine(seed, value.uint_property());
-        combine(seed, value.long_property());
-        combine(seed, value.ulong_property());
-        combine(seed, value.long_long_property());
-        combine(seed, value.ulong_long_property());
-        combine(seed, value.short_property());
-        combine(seed, value.ushort_property());
-        combine(seed, value.versioned_key());
-        return seed;
+    size_t operator()(const dogen::all_primitives::a_class& v) const {
+        return dogen::all_primitives::a_class_hasher::hash(v);
     }
 };
 

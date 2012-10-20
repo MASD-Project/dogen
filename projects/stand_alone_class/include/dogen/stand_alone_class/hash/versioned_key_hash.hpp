@@ -27,20 +27,24 @@
 
 #include <functional>
 #include "dogen/stand_alone_class/domain/versioned_key.hpp"
-#include "dogen/utility/hash/combine.hpp"
+
+namespace dogen {
+namespace stand_alone_class {
+
+class versioned_key_hasher {
+public:
+    static std::size_t hash(const versioned_key& v);
+};
+
+} }
 
 namespace std {
 
 template<>
 class hash<dogen::stand_alone_class::versioned_key> {
 public:
-    size_t operator()(const dogen::stand_alone_class::versioned_key& value) const {
-        using dogen::utility::hash::combine;
-        std::size_t seed(0);
-
-        combine(seed, value.id());
-        combine(seed, value.version());
-        return seed;
+    size_t operator()(const dogen::stand_alone_class::versioned_key& v) const {
+        return dogen::stand_alone_class::versioned_key_hasher::hash(v);
     }
 };
 

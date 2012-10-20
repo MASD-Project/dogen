@@ -387,6 +387,7 @@ bool sml_to_cpp_view_model::
 has_implementation(cpp_facet_types facet_type) const {
     return
         facet_type == cpp_facet_types::domain ||
+        facet_type == cpp_facet_types::hash ||
         facet_type == cpp_facet_types::io ||
         facet_type == cpp_facet_types::database ||
         facet_type == cpp_facet_types::test_data;

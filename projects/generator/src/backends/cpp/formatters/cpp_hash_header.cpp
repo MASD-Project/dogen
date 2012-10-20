@@ -64,37 +64,31 @@ void hash_header::operator_bracket_method(const class_view_model& vm) {
     cpp_qualified_name qualified_name(stream_);
     qualified_name.format(vm);
 
-    stream_ << (vm.all_properties().empty() ? " /*value*/" : "& value")
-            << ") const ";
+    stream_ << "& v) const ";
 
     utility_.open_scope();
     {
         cpp_positive_indenter_scope s(indenter_);
 
-        stream_ << indenter_ << "using dogen::utility::hash::combine;"
-                << std::endl
-                << indenter_ << "std::size_t seed(0);" << std::endl;
-
-        const auto parents(vm.parents());
-        if (!parents.empty())
-            utility_.blank_line();
-
-        for (const auto p : parents) {
-            stream_ << indenter_ << "combine(seed, dynamic_cast<const "
-                    << p.name() << "&>(value));" << std::endl;
-        }
-
-        const auto props(vm.properties());
-        if (!props.empty())
-            utility_.blank_line();
-
-        for (const auto p : props) {
-            stream_ << indenter_ << "combine(seed, value." << p.name()
-                    << "());" << std::endl;
-        }
-        stream_ << indenter_ << "return seed;" << std::endl;
+        stream_ << indenter_ << "return ";
+        qualified_name.format(vm);
+        stream_ << "_hasher::hash(v);" << std::endl;
     }
     utility_.close_scope();
+}
+
+void hash_header::hash_helper_class(const class_view_model& vm) {
+    stream_ << indenter_ << indenter_ << "class " << vm.name()
+            << "_hasher ";
+
+    utility_.open_scope();
+    {
+        cpp_positive_indenter_scope s(indenter_);
+        utility_.public_access_specifier();
+        stream_ << indenter_ << "static std::size_t hash(const "
+                << vm.name() << "& v);" << std::endl;
+    }
+    stream_ << indenter_ << "};" << std::endl;
 }
 
 void hash_header::hash_class(const class_view_model& vm) {
@@ -131,13 +125,21 @@ void hash_header::format(const file_view_model& vm) {
     includes.format(vm.user_includes(), is_user);
     utility_.blank_line();
 
+    const view_models::class_view_model& cvm(*o);
+    {
+        namespace_helper helper1(stream_, cvm.namespaces());
+        utility_.blank_line();
+        hash_helper_class(cvm);
+        utility_.blank_line();
+    }
+
+    utility_.blank_line(2);
     {
         std::list<std::string> namespaces;
         namespaces.push_back(std_ns);
         namespace_helper ns_helper(stream_, namespaces);
 
         utility_.blank_line();
-        const view_models::class_view_model& cvm(*o);
         hash_class(cvm);
         utility_.blank_line();
     }

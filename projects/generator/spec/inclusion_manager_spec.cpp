@@ -285,13 +285,9 @@ BOOST_AUTO_TEST_CASE(processing_one_pod_model_with_default_configuration_generat
     // header
     const auto hu(i[header_user]);
     BOOST_LOG_SEV(lg, debug) << "header user dependencies: " << hu;
-    BOOST_REQUIRE(hu.size() == 3);
-    for (const auto s : hu) {
-        BOOST_CHECK(
-            (boost::contains(s, pod_name) && boost::contains(s, domain)) ||
-            (boost::contains(s, versioned_key) && boost::contains(s, hash)) ||
-            (boost::ends_with(s, hash_combine)));
-    }
+    BOOST_REQUIRE(hu.size() == 1);
+    BOOST_CHECK(boost::contains(hu.front(), pod_name) &&
+        boost::contains(hu.front(), domain));
 
     const auto hs(i[header_system]);
     BOOST_LOG_SEV(lg, debug) << "header system dependencies: " << hs;
@@ -301,9 +297,13 @@ BOOST_AUTO_TEST_CASE(processing_one_pod_model_with_default_configuration_generat
     // implementation
     const auto iu(i[implementation_user]);
     BOOST_LOG_SEV(lg, debug) << "implementation user dependencies: " << iu;
-    BOOST_CHECK(boost::ends_with(iu.front(), hash_postfix));
-    BOOST_CHECK(asserter::assert_contains(pod_name, iu.front()));
-    BOOST_CHECK(asserter::assert_contains(hash, iu.front()));
+    BOOST_REQUIRE(iu.size() == 3);
+    for (const auto s : iu) {
+        BOOST_CHECK(
+            (boost::contains(s, pod_name) && boost::contains(s, hash)) ||
+            (boost::contains(s, versioned_key) && boost::contains(s, hash)) ||
+            (boost::ends_with(s, hash_combine)));
+    }
 
     const auto is(i[implementation_system]);
     BOOST_LOG_SEV(lg, debug) << "implementation system dependencies: " << is;

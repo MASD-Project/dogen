@@ -27,22 +27,25 @@
 
 #include <functional>
 #include "dogen/enable_facet_hash/domain/package1/first_class.hpp"
-#include "dogen/enable_facet_hash/hash/versioned_key_hash.hpp"
-#include "dogen/utility/hash/combine.hpp"
+
+namespace dogen {
+namespace enable_facet_hash {
+namespace package1 {
+
+class first_class_hasher {
+public:
+    static std::size_t hash(const first_class& v);
+};
+
+} } }
 
 namespace std {
 
 template<>
 class hash<dogen::enable_facet_hash::package1::first_class> {
 public:
-    size_t operator()(const dogen::enable_facet_hash::package1::first_class& value) const {
-        using dogen::utility::hash::combine;
-        std::size_t seed(0);
-
-        combine(seed, value.public_attribute());
-        combine(seed, value.private_attribute());
-        combine(seed, value.versioned_key());
-        return seed;
+    size_t operator()(const dogen::enable_facet_hash::package1::first_class& v) const {
+        return dogen::enable_facet_hash::package1::first_class_hasher::hash(v);
     }
 };
 
