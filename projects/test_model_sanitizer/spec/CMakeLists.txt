@@ -50,6 +50,7 @@ target_link_libraries(${spec_name}
     enable_facet_io
     enable_facet_serialization
     split_project
+    stand_alone_class
     trivial_inheritance
     utility
     ${LIBXML2_LIBRARIES}
