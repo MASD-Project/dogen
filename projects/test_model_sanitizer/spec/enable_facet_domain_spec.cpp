@@ -58,7 +58,6 @@ std::ostream& operator<<(std::ostream& o, const first_class& v) {
 
 } } }
 
-
 using namespace dogen::enable_facet_domain;
 using namespace dogen::enable_facet_domain::package1;
 using namespace dogen::utility::test;

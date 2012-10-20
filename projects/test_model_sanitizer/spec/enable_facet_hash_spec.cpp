@@ -70,7 +70,6 @@ std::ostream& operator<<(std::ostream& o, const first_class& v) {
 
 } } }
 
-
 using namespace dogen::enable_facet_hash;
 using namespace dogen::enable_facet_hash::package1;
 using namespace dogen::utility::test;
