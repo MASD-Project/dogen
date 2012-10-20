@@ -23,6 +23,10 @@
 
 namespace {
 
+bool create_bool(const unsigned int position) {
+    return (position % 2) == 0;
+}
+
 char create_char(const unsigned int position) {
     return static_cast<char>((position % 95) + 32);
 }
@@ -45,6 +49,10 @@ long create_long(const unsigned int position) {
 
 unsigned long create_unsigned_long(const unsigned int position) {
     return static_cast<unsigned long>(position);
+}
+
+long long create_long_long(const unsigned int position) {
+    return static_cast<long long>(position);
 }
 
 unsigned long long create_unsigned_long_long(const unsigned int position) {
@@ -71,12 +79,14 @@ namespace all_primitives {
 
 void a_class_generator::
 populate(const unsigned int position, result_type& v) {
+    v.bool_property(create_bool(position + 0));
     v.char_property(create_char(position + 1));
     v.uchar_property(create_unsigned_char(position + 2));
     v.int_property(create_int(position + 3));
     v.uint_property(create_unsigned_int(position + 4));
     v.long_property(create_long(position + 5));
     v.ulong_property(create_unsigned_long(position + 6));
+    v.long_long_property(create_long_long(position + 7));
     v.ulong_long_property(create_unsigned_long_long(position + 8));
     v.short_property(create_short(position + 9));
     v.ushort_property(create_unsigned_short(position + 10));

@@ -60,7 +60,7 @@ const std::string int_type("int");
 const std::string uint_type("unsigned int");
 const std::string long_type("long");
 const std::string ulong_type("unsigned long");
-const std::string long_long_type("long_long");
+const std::string long_long_type("long long");
 const std::string ulong_long_type("unsigned long long");
 
 bool is_char_like(const std::string& type_name) {

@@ -33,6 +33,7 @@
 namespace {
 
 const std::string int_type("int");
+const std::string bool_type("bool");
 const std::string string_type("std::string");
 const bool is_system(true);
 const bool is_user(false);
@@ -76,9 +77,7 @@ domain_type_helper(const std::string& identifiable_type_name,
 }
 
 void generator_implementation::bool_helper() {
-    stream_ << indenter_ << "bool create_bool(const unsigned int position) "
-            << std::endl;
-
+    stream_ << indenter_ << "bool create_bool(const unsigned int position) ";
     utility_.open_scope();
     {
         cpp_positive_indenter_scope s(indenter_);
@@ -161,6 +160,9 @@ create_helper_methods(const class_view_model& vm) {
                 } else if (p.is_int_like()) {
                     int_like_helper(p.identifiable_type(), p.type());
                     utility_.blank_line();
+                } else if (p.type() == bool_type) {
+                    bool_helper();
+                    utility_.blank_line();
                 }
             } else {
                 domain_type_helper(p.identifiable_type(), p.type());
@@ -192,7 +194,7 @@ void generator_implementation::populate_method(const class_view_model& vm) {
                             << utility_.quote(p.name())
                             << ", position + " << j << "));"
                             << std::endl;
-                } else if (p.is_char_like() || p.is_int_like()) {
+                } else {
                     stream_ << indenter_ << "v." << p.name()
                             << "(create_" << p.identifiable_type()
                             << "(position + " << j << "));"
