@@ -26,27 +26,26 @@
 #endif
 
 #include "dogen/trivial_inheritance/domain/parent_with_members.hpp"
-#include "dogen/utility/test_data/generator.hpp"
-#include "dogen/utility/test_data/sequence.hpp"
 
 namespace dogen {
 namespace trivial_inheritance {
 
-namespace detail {
 
 class parent_with_members_generator {
 public:
-    typedef dogen::trivial_inheritance::parent_with_members value_type;
+    parent_with_members_generator();
 
 public:
-    value_type next_term(const unsigned int position);
-    unsigned int length() const;
+    typedef dogen::trivial_inheritance::parent_with_members result_type;
+
+public:
+    static void populate(const unsigned int position, result_type& v);
+    static result_type create(const unsigned int position);
+    result_type operator()();
+
+private:
+    unsigned int position_;
 };
-
-}
-
-typedef dogen::utility::test_data::sequence<
-    detail::parent_with_members_generator> parent_with_members_sequence;
 
 } }
 

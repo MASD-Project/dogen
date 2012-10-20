@@ -21,25 +21,40 @@
 #include "dogen/trivial_inheritance/test_data/parent_with_members_td.hpp"
 #include "dogen/trivial_inheritance/test_data/versioned_key_td.hpp"
 
+namespace {
+
+int create_int(const unsigned int position) {
+    return position;
+}
+
+dogen::trivial_inheritance::versioned_key
+create_dogen_trivial_inheritance_versioned_key(const unsigned int position) {
+    return dogen::trivial_inheritance::versioned_key_generator::create(position);
+}
+
+}
+
 namespace dogen {
 namespace trivial_inheritance {
-namespace detail {
 
-parent_with_members_generator::value_type
-parent_with_members_generator::next_term(const unsigned int position) {
+parent_with_members_generator::parent_with_members_generator() : position_(0) { }
+
+void parent_with_members_generator::
+populate(const unsigned int position, result_type& v) {
+    v.prop_0(create_int(position + 0));
+    v.versioned_key(create_dogen_trivial_inheritance_versioned_key(position + 1));
+}
+
+parent_with_members_generator::result_type
+parent_with_members_generator::create(const unsigned int position) {
     parent_with_members r;
-
-    if (position == 0) {
-        r.prop_0(static_cast<int>(0));
-    } else if (position == 1) {
-        r.prop_0(static_cast<int>(30));
-    } else if (position == 2) {
-        r.prop_0(static_cast<int>(60));
-    }
-
+    parent_with_members_generator::populate(position, r);
     return r;
 }
 
-unsigned int parent_with_members_generator::length() const { return(3); }
+parent_with_members_generator::result_type
+parent_with_members_generator::operator()() {
+    return create(position_++);
+}
 
-} } }
+} }

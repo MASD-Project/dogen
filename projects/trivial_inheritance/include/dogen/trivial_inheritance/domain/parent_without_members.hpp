@@ -40,8 +40,10 @@ public:
     parent_without_members(const parent_without_members&) = default;
     parent_without_members(parent_without_members&&) = default;
 
+    virtual ~parent_without_members() noexcept = 0;
+
 public:
-    explicit parent_without_members(dogen::trivial_inheritance::versioned_key versioned_key);
+    explicit parent_without_members(const dogen::trivial_inheritance::versioned_key& versioned_key);
 
 public:
     friend class dogen::trivial_inheritance::parent_without_members_serializer;
@@ -54,20 +56,18 @@ public:
         return versioned_key_;
     }
 
-    void versioned_key(dogen::trivial_inheritance::versioned_key value) {
-        versioned_key_ = value;
+    void versioned_key(const dogen::trivial_inheritance::versioned_key& v) {
+        versioned_key_ = v;
     }
 
-public:
+protected:
     bool operator==(const parent_without_members& rhs) const;
-
-    bool operator!=(const parent_without_members rhs) const {
+    bool operator!=(const parent_without_members& rhs) const {
         return !this->operator==(rhs);
     }
 
-public:
-    void swap(parent_without_members& other);
-    parent_without_members& operator=(parent_without_members other);
+protected:
+    void swap(parent_without_members& other) noexcept;
 
 private:
     dogen::trivial_inheritance::versioned_key versioned_key_;
@@ -75,15 +75,6 @@ private:
 
 } }
 
-namespace std {
 
-template<>
-inline void swap(
-    dogen::trivial_inheritance::parent_without_members& lhs,
-    dogen::trivial_inheritance::parent_without_members& rhs) {
-    lhs.swap(rhs);
-}
-
-}
 
 #endif

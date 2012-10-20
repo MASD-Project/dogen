@@ -32,7 +32,7 @@ namespace trivial_inheritance {
 
 class unversioned_key_serializer;
 
-class unversioned_key {
+class unversioned_key final {
 public:
     unversioned_key(const unversioned_key&) = default;
     unversioned_key(unversioned_key&&) = default;
@@ -42,7 +42,7 @@ public:
     unversioned_key();
 
 public:
-    explicit unversioned_key(unsigned int id);
+    explicit unversioned_key(const unsigned int id);
 
 public:
     friend class dogen::trivial_inheritance::unversioned_key_serializer;
@@ -52,19 +52,18 @@ public:
         return id_;
     }
 
-    void id(unsigned int value) {
-        id_ = value;
+    void id(const unsigned int v) {
+        id_ = v;
     }
 
 public:
     bool operator==(const unversioned_key& rhs) const;
-
-    bool operator!=(const unversioned_key rhs) const {
+    bool operator!=(const unversioned_key& rhs) const {
         return !this->operator==(rhs);
     }
 
 public:
-    void swap(unversioned_key& other);
+    void swap(unversioned_key& other) noexcept;
     unversioned_key& operator=(unversioned_key other);
 
 private:

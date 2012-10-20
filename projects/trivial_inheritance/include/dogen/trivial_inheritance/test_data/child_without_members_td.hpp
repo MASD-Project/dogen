@@ -27,27 +27,26 @@
 
 #include "dogen/trivial_inheritance/domain/child_without_members.hpp"
 #include "dogen/trivial_inheritance/test_data/parent_without_members_td.hpp"
-#include "dogen/utility/test_data/generator.hpp"
-#include "dogen/utility/test_data/sequence.hpp"
 
 namespace dogen {
 namespace trivial_inheritance {
 
-namespace detail {
 
 class child_without_members_generator {
 public:
-    typedef dogen::trivial_inheritance::child_without_members value_type;
+    child_without_members_generator();
 
 public:
-    value_type next_term(const unsigned int position);
-    unsigned int length() const;
+    typedef dogen::trivial_inheritance::child_without_members result_type;
+
+public:
+    static void populate(const unsigned int position, result_type& v);
+    static result_type create(const unsigned int position);
+    result_type operator()();
+
+private:
+    unsigned int position_;
 };
-
-}
-
-typedef dogen::utility::test_data::sequence<
-    detail::child_without_members_generator> child_without_members_sequence;
 
 } }
 

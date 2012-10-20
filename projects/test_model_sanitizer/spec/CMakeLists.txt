@@ -52,7 +52,7 @@ target_link_libraries(${spec_name}
     split_project
     stand_alone_class
     two_layers_with_objects
-    trivial_inheritance
+    # FIXME: trivial_inheritance
     utility
     ${LIBXML2_LIBRARIES}
     ${Boost_LIBRARIES})

@@ -35,14 +35,14 @@ namespace trivial_inheritance {
 
 class child_without_members_serializer;
 
-class child_without_members : public parent_without_members {
+class child_without_members final : public parent_without_members {
 public:
     child_without_members() = default;
     child_without_members(const child_without_members&) = default;
     child_without_members(child_without_members&&) = default;
 
 public:
-    explicit child_without_members(dogen::trivial_inheritance::versioned_key versioned_key);
+    explicit child_without_members(const dogen::trivial_inheritance::versioned_key& versioned_key);
 
 public:
     friend class dogen::trivial_inheritance::child_without_members_serializer;
@@ -51,27 +51,15 @@ public:
     std::ostream& to_stream(std::ostream& stream) const override;
 
 public:
-    dogen::trivial_inheritance::versioned_key versioned_key() const {
-        return versioned_key_;
-    }
-
-    void versioned_key(dogen::trivial_inheritance::versioned_key value) {
-        versioned_key_ = value;
-    }
-
-public:
     bool operator==(const child_without_members& rhs) const;
-
-    bool operator!=(const child_without_members rhs) const {
+    bool operator!=(const child_without_members& rhs) const {
         return !this->operator==(rhs);
     }
 
 public:
-    void swap(child_without_members& other);
+    void swap(child_without_members& other) noexcept;
     child_without_members& operator=(child_without_members other);
 
-private:
-    dogen::trivial_inheritance::versioned_key versioned_key_;
 };
 
 } }

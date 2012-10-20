@@ -33,7 +33,7 @@ namespace trivial_inheritance {
 
 class versioned_key_serializer;
 
-class versioned_key {
+class versioned_key final {
 public:
     versioned_key(const versioned_key&) = default;
     versioned_key(versioned_key&&) = default;
@@ -44,8 +44,8 @@ public:
 
 public:
     versioned_key(
-        unsigned int id,
-        unsigned int version);
+        const unsigned int id,
+        const unsigned int version);
 
 public:
     friend class dogen::trivial_inheritance::versioned_key_serializer;
@@ -58,27 +58,26 @@ public:
         return id_;
     }
 
-    void id(unsigned int value) {
-        id_ = value;
+    void id(const unsigned int v) {
+        id_ = v;
     }
 
     unsigned int version() const {
         return version_;
     }
 
-    void version(unsigned int value) {
-        version_ = value;
+    void version(const unsigned int v) {
+        version_ = v;
     }
 
 public:
     bool operator==(const versioned_key& rhs) const;
-
-    bool operator!=(const versioned_key rhs) const {
+    bool operator!=(const versioned_key& rhs) const {
         return !this->operator==(rhs);
     }
 
 public:
-    void swap(versioned_key& other);
+    void swap(versioned_key& other) noexcept;
     versioned_key& operator=(versioned_key other);
 
 private:

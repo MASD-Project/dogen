@@ -21,22 +21,23 @@
 #include "dogen/trivial_inheritance/test_data/second_child_without_members_td.hpp"
 #include "dogen/trivial_inheritance/test_data/versioned_key_td.hpp"
 
+
+
 namespace dogen {
 namespace trivial_inheritance {
-namespace detail {
 
-second_child_without_members_generator::value_type
-second_child_without_members_generator::next_term(const unsigned int position) {
+second_child_without_members_generator::second_child_without_members_generator() : position_(0) { }
+
+
+second_child_without_members_generator::result_type
+second_child_without_members_generator::create(const unsigned int position) {
     second_child_without_members r;
-
-    if (position == 0) {
-    } else if (position == 1) {
-    } else if (position == 2) {
-    }
-
     return r;
 }
 
-unsigned int second_child_without_members_generator::length() const { return(3); }
+second_child_without_members_generator::result_type
+second_child_without_members_generator::operator()() {
+    return create(position_++);
+}
 
-} } }
+} }

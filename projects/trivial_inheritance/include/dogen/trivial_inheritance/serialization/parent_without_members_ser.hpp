@@ -25,6 +25,7 @@
 #pragma once
 #endif
 
+#include <boost/serialization/export.hpp>
 #include <boost/serialization/nvp.hpp>
 #include "dogen/trivial_inheritance/domain/parent_without_members.hpp"
 #include "dogen/trivial_inheritance/serialization/versioned_key_ser.hpp"

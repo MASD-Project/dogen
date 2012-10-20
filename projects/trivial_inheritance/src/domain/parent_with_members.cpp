@@ -29,8 +29,8 @@ parent_with_members::parent_with_members()
     : prop_0_(static_cast<int>(0)) { }
 
 parent_with_members::parent_with_members(
-    int prop_0,
-    dogen::trivial_inheritance::versioned_key versioned_key)
+    const int prop_0,
+    const dogen::trivial_inheritance::versioned_key& versioned_key)
     : prop_0_(prop_0),
       versioned_key_(versioned_key) { }
 
@@ -43,19 +43,15 @@ std::ostream& parent_with_members::to_stream(std::ostream& stream) const {
     return(stream);
 }
 
-void parent_with_members::swap(parent_with_members& other) {
-    std::swap(prop_0_, other.prop_0_);
-    std::swap(versioned_key_, other.versioned_key_);
+void parent_with_members::swap(parent_with_members& other) noexcept {
+    using std::swap;
+    swap(prop_0_, other.prop_0_);
+    swap(versioned_key_, other.versioned_key_);
 }
 
 bool parent_with_members::operator==(const parent_with_members& rhs) const {
     return prop_0_ == rhs.prop_0_ &&
         versioned_key_ == rhs.versioned_key_;
-}
-
-parent_with_members& parent_with_members::operator=(parent_with_members other) {
-    std::swap(*this, other);
-    return *this;
 }
 
 } }

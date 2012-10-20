@@ -25,6 +25,7 @@
 #pragma once
 #endif
 
+#include <boost/serialization/export.hpp>
 #include <boost/serialization/nvp.hpp>
 #include "dogen/trivial_inheritance/domain/child_without_members.hpp"
 #include "dogen/trivial_inheritance/serialization/parent_without_members_ser.hpp"
@@ -39,13 +40,14 @@ public:
     void serialize(Archive & archive,
         dogen::trivial_inheritance::child_without_members& value,
         const unsigned int /*version*/) {
-        using boost::serialization::make_nvp;
-
-        archive & make_nvp("versioned_key", value.versioned_key_);
+        using boost::serialization::base_object;
+        archive & base_object<parent_without_members>(value);
     }
 };
 
 } }
+
+BOOST_CLASS_EXPORT(dogen::trivial_inheritance::child_without_members);
 
 namespace boost {
 namespace serialization {

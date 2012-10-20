@@ -35,12 +35,11 @@ namespace std {
 template<>
 class hash<dogen::trivial_inheritance::parent_without_members> {
 public:
-    size_t operator()(dogen::trivial_inheritance::parent_without_members value) const {
+    size_t operator()(const dogen::trivial_inheritance::parent_without_members& value) const {
         using dogen::utility::hash::combine;
         std::size_t seed(0);
 
         combine(seed, value.versioned_key());
-
         return seed;
     }
 };

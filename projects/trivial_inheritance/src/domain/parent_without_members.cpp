@@ -25,7 +25,7 @@
 namespace dogen {
 namespace trivial_inheritance {
 
-parent_without_members::parent_without_members(dogen::trivial_inheritance::versioned_key versioned_key)
+parent_without_members::parent_without_members(const dogen::trivial_inheritance::versioned_key& versioned_key)
     : versioned_key_(versioned_key) { }
 
 std::ostream& parent_without_members::to_stream(std::ostream& stream) const {
@@ -36,17 +36,13 @@ std::ostream& parent_without_members::to_stream(std::ostream& stream) const {
     return(stream);
 }
 
-void parent_without_members::swap(parent_without_members& other) {
-    std::swap(versioned_key_, other.versioned_key_);
+void parent_without_members::swap(parent_without_members& other) noexcept {
+    using std::swap;
+    swap(versioned_key_, other.versioned_key_);
 }
 
 bool parent_without_members::operator==(const parent_without_members& rhs) const {
     return versioned_key_ == rhs.versioned_key_;
-}
-
-parent_without_members& parent_without_members::operator=(parent_without_members other) {
-    std::swap(*this, other);
-    return *this;
 }
 
 } }
