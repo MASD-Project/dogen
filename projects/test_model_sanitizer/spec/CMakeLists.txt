@@ -44,6 +44,7 @@ target_link_libraries(${spec_name}
     compressed
     disable_complete_constructor
     disable_facet_folders
+    unnamed_model # disable model package
     trivial_inheritance
     utility
     ${LIBXML2_LIBRARIES}
