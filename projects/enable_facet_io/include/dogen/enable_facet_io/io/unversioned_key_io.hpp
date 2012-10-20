@@ -32,8 +32,8 @@ namespace dogen {
 namespace enable_facet_io {
 
 std::ostream&
-operator<<(std::ostream& stream,
-    dogen::enable_facet_io::unversioned_key value);
+operator<<(std::ostream& s,
+     const dogen::enable_facet_io::unversioned_key& v);
 
 } }
 

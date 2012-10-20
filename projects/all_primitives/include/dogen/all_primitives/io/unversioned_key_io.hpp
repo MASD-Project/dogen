@@ -32,8 +32,8 @@ namespace dogen {
 namespace all_primitives {
 
 std::ostream&
-operator<<(std::ostream& stream,
-    dogen::all_primitives::unversioned_key value);
+operator<<(std::ostream& s,
+     const dogen::all_primitives::unversioned_key& v);
 
 } }
 

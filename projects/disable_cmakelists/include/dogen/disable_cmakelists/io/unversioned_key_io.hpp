@@ -32,8 +32,8 @@ namespace dogen {
 namespace disable_cmakelists {
 
 std::ostream&
-operator<<(std::ostream& stream,
-    dogen::disable_cmakelists::unversioned_key value);
+operator<<(std::ostream& s,
+     const dogen::disable_cmakelists::unversioned_key& v);
 
 } }
 

@@ -32,8 +32,8 @@ namespace dogen {
 namespace class_without_attributes {
 
 std::ostream&
-operator<<(std::ostream& stream,
-    dogen::class_without_attributes::versioned_key value);
+operator<<(std::ostream& s,
+     const dogen::class_without_attributes::versioned_key& v);
 
 } }
 

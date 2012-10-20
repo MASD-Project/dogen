@@ -40,14 +40,15 @@ public:
     void serialize(Archive & archive,
         dogen::trivial_inheritance::child_without_members& value,
         const unsigned int /*version*/) {
+        using boost::serialization::make_nvp;
         using boost::serialization::base_object;
-        archive & base_object<parent_without_members>(value);
+        archive & make_nvp("parent_without_members", base_object<parent_without_members>(value));
     }
 };
 
 } }
 
-BOOST_CLASS_EXPORT(dogen::trivial_inheritance::child_without_members);
+BOOST_CLASS_EXPORT(dogen::trivial_inheritance::child_without_members)
 
 namespace boost {
 namespace serialization {

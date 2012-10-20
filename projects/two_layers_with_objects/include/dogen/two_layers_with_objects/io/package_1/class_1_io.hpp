@@ -33,8 +33,8 @@ namespace two_layers_with_objects {
 namespace package_1 {
 
 std::ostream&
-operator<<(std::ostream& stream,
-    dogen::two_layers_with_objects::package_1::class_1 value);
+operator<<(std::ostream& s,
+     const dogen::two_layers_with_objects::package_1::class_1& v);
 
 } } }
 

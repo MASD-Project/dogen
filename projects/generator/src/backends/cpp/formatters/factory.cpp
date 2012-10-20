@@ -30,6 +30,7 @@
 #include "dogen/generator/backends/cpp/formatters/cpp_generator_header.hpp"
 #include "dogen/generator/backends/cpp/formatters/cpp_generator_implementation.hpp"
 #include "dogen/generator/backends/cpp/formatters/cpp_serialization_header.hpp"
+#include "dogen/generator/backends/cpp/formatters/cpp_serialization_implementation.hpp"
 #include "dogen/generator/backends/cpp/formatters/cpp_database_header.hpp"
 #include "dogen/generator/backends/cpp/formatters/cpp_database_implementation.hpp"
 #include "dogen/generator/backends/cpp/formatters/factory.hpp"
@@ -80,8 +81,11 @@ create(std::ostream& stream, cpp_facet_types facet_type,
             return hash_implementation::create(stream);
         break;
     case cpp_facet_types::serialization:
-        return serialization_header::create(stream,
-            settings_.disable_xml_serialization());
+        if (file_type == cpp_file_types::header)
+            return serialization_header::create(stream,
+                settings_.disable_xml_serialization());
+        else
+            return serialization_implementation::create(stream);
         break;
     case cpp_facet_types::test_data:
         if (file_type == cpp_file_types::header)

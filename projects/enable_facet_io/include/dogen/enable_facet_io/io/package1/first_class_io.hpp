@@ -33,8 +33,8 @@ namespace enable_facet_io {
 namespace package1 {
 
 std::ostream&
-operator<<(std::ostream& stream,
-    dogen::enable_facet_io::package1::first_class value);
+operator<<(std::ostream& s,
+     const dogen::enable_facet_io::package1::first_class& v);
 
 } } }
 

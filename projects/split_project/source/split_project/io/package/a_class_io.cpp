@@ -26,12 +26,12 @@ namespace dogen {
 namespace split_project {
 namespace package {
 
-std::ostream& operator<<(std::ostream& stream, a_class value) {
-    stream << " { "
+std::ostream& operator<<(std::ostream& s, const a_class& v) {
+    s << " { "
            << "\"__type__\": " << "\"a_class\"" << ", "
-           << "\"versioned_key\": " << value.versioned_key()
+           << "\"versioned_key\": " << v.versioned_key()
            << " }";
-    return(stream);
+    return(s);
 }
 
 } } }

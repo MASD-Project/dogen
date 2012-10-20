@@ -32,8 +32,8 @@ namespace dogen {
 namespace class_without_package {
 
 std::ostream&
-operator<<(std::ostream& stream,
-    dogen::class_without_package::class_1 value);
+operator<<(std::ostream& s,
+     const dogen::class_without_package::class_1& v);
 
 } }
 

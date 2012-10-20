@@ -32,8 +32,8 @@ namespace dogen {
 namespace stand_alone_class {
 
 std::ostream&
-operator<<(std::ostream& stream,
-    dogen::stand_alone_class::class_1 value);
+operator<<(std::ostream& s,
+     const dogen::stand_alone_class::class_1& v);
 
 } }
 

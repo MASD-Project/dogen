@@ -33,8 +33,8 @@ namespace disable_complete_constructor {
 namespace package1 {
 
 std::ostream&
-operator<<(std::ostream& stream,
-    dogen::disable_complete_constructor::package1::first_class value);
+operator<<(std::ostream& s,
+     const dogen::disable_complete_constructor::package1::first_class& v);
 
 } } }
 

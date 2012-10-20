@@ -26,12 +26,12 @@ namespace dogen {
 namespace classes_inout_package {
 namespace package_1 {
 
-std::ostream& operator<<(std::ostream& stream, class_1 value) {
-    stream << " { "
+std::ostream& operator<<(std::ostream& s, const class_1& v) {
+    s << " { "
            << "\"__type__\": " << "\"class_1\"" << ", "
-           << "\"versioned_key\": " << value.versioned_key()
+           << "\"versioned_key\": " << v.versioned_key()
            << " }";
-    return(stream);
+    return(s);
 }
 
 } } }

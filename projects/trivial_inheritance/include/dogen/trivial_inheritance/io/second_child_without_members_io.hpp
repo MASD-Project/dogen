@@ -33,8 +33,8 @@ namespace dogen {
 namespace trivial_inheritance {
 
 std::ostream&
-operator<<(std::ostream& stream,
-    dogen::trivial_inheritance::second_child_without_members value);
+operator<<(std::ostream& s,
+     const dogen::trivial_inheritance::second_child_without_members& v);
 
 } }
 

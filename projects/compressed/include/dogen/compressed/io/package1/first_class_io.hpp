@@ -33,8 +33,8 @@ namespace compressed {
 namespace package1 {
 
 std::ostream&
-operator<<(std::ostream& stream,
-    dogen::compressed::package1::first_class value);
+operator<<(std::ostream& s,
+     const dogen::compressed::package1::first_class& v);
 
 } } }
 

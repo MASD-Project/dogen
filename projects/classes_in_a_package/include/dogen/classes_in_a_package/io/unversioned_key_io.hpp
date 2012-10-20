@@ -32,8 +32,8 @@ namespace dogen {
 namespace classes_in_a_package {
 
 std::ostream&
-operator<<(std::ostream& stream,
-    dogen::classes_in_a_package::unversioned_key value);
+operator<<(std::ostream& s,
+     const dogen::classes_in_a_package::unversioned_key& v);
 
 } }
 

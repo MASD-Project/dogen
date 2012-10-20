@@ -61,14 +61,14 @@ cpp_inserter_implementation(std::ostream& stream, cpp_indenter& indenter,
 
 void cpp_inserter_implementation::format(const class_view_model& vm) {
     if (vm.requires_stream_manipulators()) {
-        stream_ << indenter_ << "boost::io::ios_flags_saver ifs(stream);"
+        stream_ << indenter_ << "boost::io::ios_flags_saver ifs(s);"
                 << std::endl;
-        stream_ << indenter_ << "stream << std::boolalpha;"
+        stream_ << indenter_ << "s << std::boolalpha;"
                 << std::endl;
         utility_.blank_line();
     }
 
-    stream_ << indenter_ << "stream " << inserter
+    stream_ << indenter_ << "s " << inserter
             << utility_.quote(" { ")
             << std::endl;
 
@@ -85,7 +85,7 @@ void cpp_inserter_implementation::format(const class_view_model& vm) {
                 << utility_.quote(utility_.quote_escaped(parent_tag(i)) +
                     colon);
 
-        stream_ << space_inserter << p.name() << "::to_stream(stream)";
+        stream_ << space_inserter << p.name() << "::to_stream(s)";
         ++i;
     }
 
@@ -100,7 +100,7 @@ void cpp_inserter_implementation::format(const class_view_model& vm) {
         if (is_inside_class_)
             ss << utility_.as_member_variable(p.name());
         else
-            ss << "value." << utility_.as_getter(p.name());
+            ss << "v." << utility_.as_getter(p.name());
 
         if (p.is_string_like())
             stream_ << utility_.quote_escaped_streamed(ss.str());
@@ -113,7 +113,7 @@ void cpp_inserter_implementation::format(const class_view_model& vm) {
     stream_ << std::endl;
     stream_ << indenter_ << special_indent << inserter
             << utility_.quote(close_bracket) << semi_colon << std::endl;
-    stream_ << indenter_ << "return(stream);" << std::endl;
+    stream_ << indenter_ << "return(s);" << std::endl;
 }
 
 

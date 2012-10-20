@@ -24,13 +24,13 @@
 namespace dogen {
 namespace all_primitives {
 
-std::ostream& operator<<(std::ostream& stream, versioned_key value) {
-    stream << " { "
+std::ostream& operator<<(std::ostream& s, const versioned_key& v) {
+    s << " { "
            << "\"__type__\": " << "\"versioned_key\"" << ", "
-           << "\"id\": " << value.id() << ", "
-           << "\"version\": " << value.version()
+           << "\"id\": " << v.id() << ", "
+           << "\"version\": " << v.version()
            << " }";
-    return(stream);
+    return(s);
 }
 
 } }

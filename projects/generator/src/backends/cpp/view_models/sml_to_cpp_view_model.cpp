@@ -383,14 +383,19 @@ transform_file(cpp_facet_types ft, cpp_file_types flt, const sml::pod& pod) {
     return r;
 }
 
-bool sml_to_cpp_view_model::
-has_implementation(cpp_facet_types facet_type) const {
+bool sml_to_cpp_view_model::has_implementation(const cpp_facet_types ft) const {
     return
-        facet_type == cpp_facet_types::domain ||
-        facet_type == cpp_facet_types::hash ||
-        facet_type == cpp_facet_types::io ||
-        facet_type == cpp_facet_types::database ||
-        facet_type == cpp_facet_types::test_data;
+        ft == cpp_facet_types::domain ||
+        ft == cpp_facet_types::hash ||
+        ft == cpp_facet_types::io ||
+        ft == cpp_facet_types::database ||
+        ft == cpp_facet_types::test_data;
+}
+
+bool sml_to_cpp_view_model::
+has_implementation(const cpp_facet_types ft, const sml::pod& p) const {
+    return has_implementation(ft) || (ft == cpp_facet_types::serialization &&
+        (p.is_parent() || p.parent_name()));
 }
 
 void sml_to_cpp_view_model::setup_qualified_name_to_class_view_model_map() {
@@ -442,7 +447,7 @@ std::vector<file_view_model> sml_to_cpp_view_model::transform_pods() {
         for (const auto ft: settings_.enabled_facets()) {
             lambda(ft, cpp_file_types::header, p);
 
-            if (has_implementation(ft))
+            if (has_implementation(ft, p))
                 lambda(ft, cpp_file_types::implementation, p);
         }
     }

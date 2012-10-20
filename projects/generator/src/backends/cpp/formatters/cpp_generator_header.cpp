@@ -82,16 +82,19 @@ void generator_header::generator_class(const class_view_model& vm) {
                 <<" result_type& v);"
                 << std::endl;
 
-        stream_ << indenter_
-                << "static result_type create(const unsigned int position);"
-                << std::endl;
+        if (!vm.is_parent()) {
+            stream_ << indenter_
+                    << "static result_type create(const unsigned int position);"
+                    << std::endl;
 
-        stream_ << indenter_ << "result_type operator()();" << std::endl;
-        utility_.blank_line();
+            stream_ << indenter_ << "result_type operator()();" << std::endl;
+            utility_.blank_line();
 
-        utility_.private_access_specifier();
-        stream_ << indenter_ << "unsigned int "
-                << utility_.as_member_variable("position") << ";" << std::endl;
+            utility_.private_access_specifier();
+            stream_ << indenter_ << "unsigned int "
+                    << utility_.as_member_variable("position") << ";"
+                    << std::endl;
+        }
     }
     stream_ << "};";
 }

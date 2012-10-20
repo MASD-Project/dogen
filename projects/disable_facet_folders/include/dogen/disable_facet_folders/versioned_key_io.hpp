@@ -32,8 +32,8 @@ namespace dogen {
 namespace disable_facet_folders {
 
 std::ostream&
-operator<<(std::ostream& stream,
-    dogen::disable_facet_folders::versioned_key value);
+operator<<(std::ostream& s,
+     const dogen::disable_facet_folders::versioned_key& v);
 
 } }
 

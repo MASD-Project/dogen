@@ -69,8 +69,8 @@ void domain_header::inserter_operator(const class_view_model& vm) {
     if (!use_integrated_io_ || disable_io_)
         return;
 
-    stream_ << indenter_ << "std::ostream& operator<<(std::ostream& stream, "
-            << vm.name() << " value);" << std::endl;
+    stream_ << indenter_ << "std::ostream& operator<<(std::ostream& s, "
+            << "const " << vm.name() << "& v);" << std::endl;
     utility_.blank_line();
 }
 

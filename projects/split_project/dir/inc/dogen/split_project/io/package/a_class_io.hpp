@@ -33,8 +33,8 @@ namespace split_project {
 namespace package {
 
 std::ostream&
-operator<<(std::ostream& stream,
-    dogen::split_project::package::a_class value);
+operator<<(std::ostream& s,
+     const dogen::split_project::package::a_class& v);
 
 } } }
 

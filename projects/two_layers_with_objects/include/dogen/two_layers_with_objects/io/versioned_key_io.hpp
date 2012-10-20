@@ -32,8 +32,8 @@ namespace dogen {
 namespace two_layers_with_objects {
 
 std::ostream&
-operator<<(std::ostream& stream,
-    dogen::two_layers_with_objects::versioned_key value);
+operator<<(std::ostream& s,
+     const dogen::two_layers_with_objects::versioned_key& v);
 
 } }
 

@@ -31,12 +31,12 @@ second_child_without_members::second_child_without_members(
     : parent_with_members(prop_0,
       versioned_key) { }
 
-std::ostream& second_child_without_members::to_stream(std::ostream& stream) const {
-    stream << " { "
+std::ostream& second_child_without_members::to_stream(std::ostream& s) const {
+    s << " { "
            << "\"__type__\": " << "\"second_child_without_members\"" << ", "
-           << "\"__parent_0__\": " << parent_with_members::to_stream(stream)
+           << "\"__parent_0__\": " << parent_with_members::to_stream(s)
            << " }";
-    return(stream);
+    return(s);
 }
 
 void second_child_without_members::swap(second_child_without_members& other) noexcept {

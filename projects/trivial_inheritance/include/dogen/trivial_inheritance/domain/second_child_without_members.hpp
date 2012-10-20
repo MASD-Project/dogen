@@ -50,7 +50,7 @@ public:
     friend class dogen::trivial_inheritance::second_child_without_members_serializer;
 
 public:
-    std::ostream& to_stream(std::ostream& stream) const override;
+    std::ostream& to_stream(std::ostream& s) const override;
 
 public:
     bool operator==(const second_child_without_members& rhs) const;

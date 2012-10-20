@@ -32,8 +32,8 @@ namespace dogen {
 namespace dmp {
 
 std::ostream&
-operator<<(std::ostream& stream,
-    dogen::dmp::unversioned_key value);
+operator<<(std::ostream& s,
+     const dogen::dmp::unversioned_key& v);
 
 } }
 

@@ -33,23 +33,12 @@ create_dogen_trivial_inheritance_versioned_key(const unsigned int position) {
 namespace dogen {
 namespace trivial_inheritance {
 
-parent_without_members_generator::parent_without_members_generator() : position_(0) { }
 
 void parent_without_members_generator::
 populate(const unsigned int position, result_type& v) {
     v.versioned_key(create_dogen_trivial_inheritance_versioned_key(position + 0));
 }
 
-parent_without_members_generator::result_type
-parent_without_members_generator::create(const unsigned int position) {
-    parent_without_members r;
-    parent_without_members_generator::populate(position, r);
-    return r;
-}
 
-parent_without_members_generator::result_type
-parent_without_members_generator::operator()() {
-    return create(position_++);
-}
 
 } }

@@ -206,7 +206,7 @@ add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/enable_facet_serialization/src)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/two_layers_with_objects/src)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dmp/src)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/split_project/source/split_project)
-# FIXME: add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/trivial_inheritance/src)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/trivial_inheritance/src)
 
 # global targets for codegen
 add_custom_target(rebase_codegen)

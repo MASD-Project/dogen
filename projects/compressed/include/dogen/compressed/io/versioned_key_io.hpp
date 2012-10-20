@@ -32,8 +32,8 @@ namespace dogen {
 namespace compressed {
 
 std::ostream&
-operator<<(std::ostream& stream,
-    dogen::compressed::versioned_key value);
+operator<<(std::ostream& s,
+     const dogen::compressed::versioned_key& v);
 
 } }
 

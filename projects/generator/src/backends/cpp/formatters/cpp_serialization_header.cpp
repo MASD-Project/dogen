@@ -120,27 +120,31 @@ void serialization_header::serializer_class(const class_view_model& vm) {
 
             utility_.open_scope();
             {
+                if (!disable_xml_serialization_ && has_properties_or_parents) {
+                    stream_ << indenter_
+                            << "using boost::serialization::make_nvp;"
+                            << std::endl;
+                }
+
                 if (has_parents) {
                     stream_ << indenter_
                             << "using boost::serialization::base_object;"
                             << std::endl;
 
+                    if (has_properties)
+                        utility_.blank_line();
+
                     for (const auto p : parents) {
                         stream_ << indenter_
-                                << "archive & base_object<"
-                                << p.name() << ">(value);" << std::endl;
+                                << "archive & make_nvp("
+                                << utility_.quote(p.name())
+                                << ", base_object<"
+                                << p.name() << ">(value));" << std::endl;
                     }
-
-                    if (has_parents && has_properties)
-                        utility_.blank_line();
                 }
 
-                if (!disable_xml_serialization_ && has_properties) {
-                    stream_ << indenter_
-                            << "using boost::serialization::make_nvp;"
-                            << std::endl;
+                if (has_properties && (has_parents || !disable_xml_serialization_))
                     utility_.blank_line();
-                }
 
                 for (const auto p : props) {
                     if (disable_xml_serialization_) {
@@ -197,7 +201,7 @@ void serialization_header::format(const file_view_model& vm) {
 
         cpp_qualified_name qualified_name(stream_);
         qualified_name.format(cvm);
-        stream_ << ");" << std::endl;
+        stream_ << ")" << std::endl;
     }
 
     {

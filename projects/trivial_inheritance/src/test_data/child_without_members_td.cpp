@@ -32,6 +32,7 @@ child_without_members_generator::child_without_members_generator() : position_(0
 child_without_members_generator::result_type
 child_without_members_generator::create(const unsigned int position) {
     child_without_members r;
+    parent_without_members_generator::populate(position, r);
     return r;
 }
 

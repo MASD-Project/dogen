@@ -213,15 +213,32 @@ void generator_implementation::populate_method(const class_view_model& vm) {
 }
 
 void generator_implementation::create_method(const class_view_model& vm) {
+    if (vm.is_parent())
+        return;
+
+    const bool has_properties(!vm.properties().empty());
+    const auto parents(vm.parents());
+    const bool has_parents(!parents.empty());
+    const bool has_properties_or_parents(has_properties || has_parents);
+
     const std::string name(vm.name() + "_generator");
     stream_ << indenter_ << name << "::result_type" << std::endl
-            << name << "::create(const unsigned int position) ";
+            << name << "::create(const unsigned int"
+            << (has_properties_or_parents ? " position" : "/*position*/")
+            << ") ";
 
     utility_.open_scope();
     {
         cpp_positive_indenter_scope s(indenter_);
         stream_ << indenter_ << vm.name() << " r;" << std::endl;
-        if (!vm.properties().empty()) {
+
+        for (const auto p : parents) {
+            stream_ << indenter_ << p.name()
+                    << "_generator::populate(position, r);"
+                    << std::endl;
+        }
+
+        if (has_properties) {
             stream_ << indenter_ << name << "::populate(position, r);"
                     << std::endl;
         }
@@ -231,6 +248,9 @@ void generator_implementation::create_method(const class_view_model& vm) {
 }
 
 void generator_implementation::function_operator(const class_view_model& vm) {
+    if (vm.is_parent())
+        return;
+
     const std::string name(vm.name() + "_generator");
     stream_ << indenter_ << name << "::result_type" << std::endl
             << name << "::operator()() ";
@@ -246,6 +266,9 @@ void generator_implementation::function_operator(const class_view_model& vm) {
 }
 
 void generator_implementation::default_constructor(const class_view_model& vm) {
+    if (vm.is_parent())
+        return;
+
     const std::string name(vm.name() + "_generator");
     stream_ << indenter_ << name << "::" << name << "() : position_(0) { }";
     utility_.blank_line();

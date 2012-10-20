@@ -34,13 +34,13 @@ parent_with_members::parent_with_members(
     : prop_0_(prop_0),
       versioned_key_(versioned_key) { }
 
-std::ostream& parent_with_members::to_stream(std::ostream& stream) const {
-    stream << " { "
+std::ostream& parent_with_members::to_stream(std::ostream& s) const {
+    s << " { "
            << "\"__type__\": " << "\"parent_with_members\"" << ", "
            << "\"prop_0\": " << prop_0_ << ", "
            << "\"versioned_key\": " << versioned_key_
            << " }";
-    return(stream);
+    return(s);
 }
 
 void parent_with_members::swap(parent_with_members& other) noexcept {

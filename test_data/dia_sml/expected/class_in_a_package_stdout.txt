@@ -672,8 +672,8 @@ namespace class_in_a_package {
 namespace package1 {
 
 std::ostream&
-operator<<(std::ostream& stream,
-    class_in_a_package::package1::first_class value);
+operator<<(std::ostream& s,
+     const class_in_a_package::package1::first_class& v);
 
 } }
 
@@ -714,8 +714,8 @@ Contents:
 namespace class_in_a_package {
 
 std::ostream&
-operator<<(std::ostream& stream,
-    class_in_a_package::unversioned_key value);
+operator<<(std::ostream& s,
+     const class_in_a_package::unversioned_key& v);
 
 }
 
@@ -756,8 +756,8 @@ Contents:
 namespace class_in_a_package {
 
 std::ostream&
-operator<<(std::ostream& stream,
-    class_in_a_package::versioned_key value);
+operator<<(std::ostream& s,
+     const class_in_a_package::versioned_key& v);
 
 }
 
@@ -1577,14 +1577,14 @@ Contents:
 namespace class_in_a_package {
 namespace package1 {
 
-std::ostream& operator<<(std::ostream& stream, first_class value) {
-    stream << " { "
+std::ostream& operator<<(std::ostream& s, const first_class& v) {
+    s << " { "
            << "\"__type__\": " << "\"first_class\"" << ", "
-           << "\"public_attribute\": " << value.public_attribute() << ", "
-           << "\"private_attribute\": " << value.private_attribute() << ", "
-           << "\"versioned_key\": " << value.versioned_key()
+           << "\"public_attribute\": " << v.public_attribute() << ", "
+           << "\"private_attribute\": " << v.private_attribute() << ", "
+           << "\"versioned_key\": " << v.versioned_key()
            << " }";
-    return(stream);
+    return(s);
 }
 
 } }
@@ -1615,12 +1615,12 @@ Contents:
 
 namespace class_in_a_package {
 
-std::ostream& operator<<(std::ostream& stream, unversioned_key value) {
-    stream << " { "
+std::ostream& operator<<(std::ostream& s, const unversioned_key& v) {
+    s << " { "
            << "\"__type__\": " << "\"unversioned_key\"" << ", "
-           << "\"id\": " << value.id()
+           << "\"id\": " << v.id()
            << " }";
-    return(stream);
+    return(s);
 }
 
 }
@@ -1651,13 +1651,13 @@ Contents:
 
 namespace class_in_a_package {
 
-std::ostream& operator<<(std::ostream& stream, versioned_key value) {
-    stream << " { "
+std::ostream& operator<<(std::ostream& s, const versioned_key& v) {
+    s << " { "
            << "\"__type__\": " << "\"versioned_key\"" << ", "
-           << "\"id\": " << value.id() << ", "
-           << "\"version\": " << value.version()
+           << "\"id\": " << v.id() << ", "
+           << "\"version\": " << v.version()
            << " }";
-    return(stream);
+    return(s);
 }
 
 }

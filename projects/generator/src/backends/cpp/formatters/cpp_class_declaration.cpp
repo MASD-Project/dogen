@@ -235,11 +235,11 @@ void cpp_class_declaration::to_stream(const class_view_model& vm) {
     if (vm.is_parent()) {
         stream_ << indenter_
                 << "virtual std::ostream& to_stream("
-                << "std::ostream& stream) const;"
+                << "std::ostream& s) const;"
                 << std::endl;
     } else {
         stream_ << indenter_
-                << "std::ostream& to_stream(std::ostream& stream) "
+                << "std::ostream& to_stream(std::ostream& s) "
                 << "const override;"
                 << std::endl;
     }

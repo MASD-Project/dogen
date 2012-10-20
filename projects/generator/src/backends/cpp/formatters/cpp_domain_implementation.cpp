@@ -84,16 +84,16 @@ inserter_operator(const class_view_model& vm) {
     if (!use_integrated_io_ || disable_io_)
         return;
 
-    stream_ << indenter_ << "std::ostream& operator<<(std::ostream& stream"
-            << ", const " << vm.name() << "& value) ";
+    stream_ << indenter_ << "std::ostream& operator<<(std::ostream& s"
+            << ", const " << vm.name() << "& v) ";
 
     utility_.open_scope();
     {
         cpp_positive_indenter_scope s(indenter_);
 
         if (vm.is_parent() || !vm.parents().empty()) {
-            stream_ << indenter_ << "value.to_stream(stream);" << std::endl
-                    << indenter_ << "return(stream);" << std::endl;
+            stream_ << indenter_ << "v.to_stream(s);" << std::endl
+                    << indenter_ << "return(s);" << std::endl;
         } else {
             const bool inside_class(false);
             cpp_inserter_implementation i(stream_, indenter_, inside_class);

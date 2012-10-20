@@ -26,14 +26,14 @@ namespace dogen {
 namespace compressed {
 namespace package1 {
 
-std::ostream& operator<<(std::ostream& stream, first_class value) {
-    stream << " { "
+std::ostream& operator<<(std::ostream& s, const first_class& v) {
+    s << " { "
            << "\"__type__\": " << "\"first_class\"" << ", "
-           << "\"public_attribute\": " << value.public_attribute() << ", "
-           << "\"private_attribute\": " << value.private_attribute() << ", "
-           << "\"versioned_key\": " << value.versioned_key()
+           << "\"public_attribute\": " << v.public_attribute() << ", "
+           << "\"private_attribute\": " << v.private_attribute() << ", "
+           << "\"versioned_key\": " << v.versioned_key()
            << " }";
-    return(stream);
+    return(s);
 }
 
 } } }

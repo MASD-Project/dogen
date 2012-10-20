@@ -80,7 +80,10 @@ private:
      * @brief Returns true if the facet requires a C++ source file,
      * false otherwise.
      */
-    bool has_implementation(cpp_facet_types facet_type) const;
+    /**@{*/
+    bool has_implementation(const cpp_facet_types ft) const;
+    bool has_implementation(const cpp_facet_types ft, const sml::pod& p) const;
+    /**@}*/
 
     /**
      * @brief Transforms a relative path to a header file into a C++

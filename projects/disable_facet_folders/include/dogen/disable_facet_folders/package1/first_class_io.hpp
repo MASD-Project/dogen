@@ -33,8 +33,8 @@ namespace disable_facet_folders {
 namespace package1 {
 
 std::ostream&
-operator<<(std::ostream& stream,
-    dogen::disable_facet_folders::package1::first_class value);
+operator<<(std::ostream& s,
+     const dogen::disable_facet_folders::package1::first_class& v);
 
 } } }
 

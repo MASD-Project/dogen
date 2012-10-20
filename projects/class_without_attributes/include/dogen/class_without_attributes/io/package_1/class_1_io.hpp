@@ -33,8 +33,8 @@ namespace class_without_attributes {
 namespace package_1 {
 
 std::ostream&
-operator<<(std::ostream& stream,
-    dogen::class_without_attributes::package_1::class_1 value);
+operator<<(std::ostream& s,
+     const dogen::class_without_attributes::package_1::class_1& v);
 
 } } }
 

@@ -77,7 +77,7 @@ void hash_implementation::hasher_hash_method(const class_view_model& vm) {
 
         for (const auto p : parents) {
             stream_ << indenter_ << "combine(seed, dynamic_cast<const "
-                    << p.name() << "&>(value));" << std::endl;
+                    << p.name() << "&>(v));" << std::endl;
         }
 
         const auto props(vm.properties());

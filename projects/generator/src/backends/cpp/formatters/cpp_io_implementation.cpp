@@ -76,15 +76,15 @@ void io_implementation::format(const file_view_model& vm) {
     namespace_helper ns_helper(stream_, cvm.namespaces());
     utility_.blank_line();
 
-    stream_ << "std::ostream& operator<<(std::ostream& stream, ";
+    stream_ << "std::ostream& operator<<(std::ostream& s, ";
     {
         cpp_positive_indenter_scope s(indenter_);
-        stream_ << cvm.name() << " value) ";
+        stream_ << "const " << cvm.name() << "& v) ";
         utility_.open_scope();
 
         if (cvm.is_parent() || !cvm.parents().empty()) {
-            stream_ << indenter_ << "value.to_stream(stream);" << std::endl
-                    << indenter_ << "return(stream);" << std::endl;
+            stream_ << indenter_ << "v.to_stream(s);" << std::endl
+                    << indenter_ << "return(s);" << std::endl;
         } else {
             const bool inside_class(false);
             cpp_inserter_implementation i(stream_, indenter_, inside_class);

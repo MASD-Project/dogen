@@ -26,26 +26,26 @@
 namespace dogen {
 namespace all_primitives {
 
-std::ostream& operator<<(std::ostream& stream, a_class value) {
-    boost::io::ios_flags_saver ifs(stream);
-    stream << std::boolalpha;
+std::ostream& operator<<(std::ostream& s, const a_class& v) {
+    boost::io::ios_flags_saver ifs(s);
+    s << std::boolalpha;
 
-    stream << " { "
+    s << " { "
            << "\"__type__\": " << "\"a_class\"" << ", "
-           << "\"bool_property\": " << value.bool_property() << ", "
-           << "\"char_property\": " << "\"" << value.char_property() << "\"" << ", "
-           << "\"uchar_property\": " << "\"" << value.uchar_property() << "\"" << ", "
-           << "\"int_property\": " << value.int_property() << ", "
-           << "\"uint_property\": " << value.uint_property() << ", "
-           << "\"long_property\": " << value.long_property() << ", "
-           << "\"ulong_property\": " << value.ulong_property() << ", "
-           << "\"long_long_property\": " << value.long_long_property() << ", "
-           << "\"ulong_long_property\": " << value.ulong_long_property() << ", "
-           << "\"short_property\": " << value.short_property() << ", "
-           << "\"ushort_property\": " << value.ushort_property() << ", "
-           << "\"versioned_key\": " << value.versioned_key()
+           << "\"bool_property\": " << v.bool_property() << ", "
+           << "\"char_property\": " << "\"" << v.char_property() << "\"" << ", "
+           << "\"uchar_property\": " << "\"" << v.uchar_property() << "\"" << ", "
+           << "\"int_property\": " << v.int_property() << ", "
+           << "\"uint_property\": " << v.uint_property() << ", "
+           << "\"long_property\": " << v.long_property() << ", "
+           << "\"ulong_property\": " << v.ulong_property() << ", "
+           << "\"long_long_property\": " << v.long_long_property() << ", "
+           << "\"ulong_long_property\": " << v.ulong_long_property() << ", "
+           << "\"short_property\": " << v.short_property() << ", "
+           << "\"ushort_property\": " << v.ushort_property() << ", "
+           << "\"versioned_key\": " << v.versioned_key()
            << " }";
-    return(stream);
+    return(s);
 }
 
 } }

@@ -29,7 +29,7 @@ std::size_t child_without_members_hasher::hash(const child_without_members& v) {
     using dogen::utility::hash::combine;
     std::size_t seed(0);
 
-    combine(seed, dynamic_cast<const parent_without_members&>(value));
+    combine(seed, dynamic_cast<const parent_without_members&>(v));
     return seed;
 }
 

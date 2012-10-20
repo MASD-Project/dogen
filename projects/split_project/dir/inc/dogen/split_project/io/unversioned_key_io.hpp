@@ -32,8 +32,8 @@ namespace dogen {
 namespace split_project {
 
 std::ostream&
-operator<<(std::ostream& stream,
-    dogen::split_project::unversioned_key value);
+operator<<(std::ostream& s,
+     const dogen::split_project::unversioned_key& v);
 
 } }
 

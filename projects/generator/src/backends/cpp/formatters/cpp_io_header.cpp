@@ -80,16 +80,16 @@ void io_header::format(const file_view_model& vm) {
         utility_.blank_line();
 
         stream_ << indenter_ << "std::ostream&" << std::endl
-                << indenter_ << "operator<<(std::ostream& stream,"
+                << indenter_ << "operator<<(std::ostream& s,"
                 << std::endl;
 
         {
             cpp_positive_indenter_scope s(indenter_);
-            stream_ << indenter_;
+            stream_ << indenter_ << " const ";
 
             cpp_qualified_name qualified_name(stream_);
             qualified_name.format(cvm);
-            stream_ << " value);" << std::endl;
+            stream_ << "& v);" << std::endl;
             utility_.blank_line();
         }
     }

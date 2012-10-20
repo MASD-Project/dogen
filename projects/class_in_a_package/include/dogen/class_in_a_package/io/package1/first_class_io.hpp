@@ -33,8 +33,8 @@ namespace class_in_a_package {
 namespace package1 {
 
 std::ostream&
-operator<<(std::ostream& stream,
-    dogen::class_in_a_package::package1::first_class value);
+operator<<(std::ostream& s,
+     const dogen::class_in_a_package::package1::first_class& v);
 
 } } }
 

@@ -26,12 +26,12 @@ namespace dogen {
 namespace two_layers_with_objects {
 namespace Package_2 {
 
-std::ostream& operator<<(std::ostream& stream, class_2 value) {
-    stream << " { "
+std::ostream& operator<<(std::ostream& s, const class_2& v) {
+    s << " { "
            << "\"__type__\": " << "\"class_2\"" << ", "
-           << "\"versioned_key\": " << value.versioned_key()
+           << "\"versioned_key\": " << v.versioned_key()
            << " }";
-    return(stream);
+    return(s);
 }
 
 } } }

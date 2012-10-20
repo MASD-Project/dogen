@@ -140,7 +140,7 @@ void cpp_class_implementation::to_stream(const class_view_model& vm) {
         return;
 
     stream_ << "std::ostream& " << vm.name()
-            << "::to_stream(std::ostream& stream) const ";
+            << "::to_stream(std::ostream& s) const ";
 
     utility_.open_scope();
     {

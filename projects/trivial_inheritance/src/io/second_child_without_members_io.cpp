@@ -25,9 +25,9 @@
 namespace dogen {
 namespace trivial_inheritance {
 
-std::ostream& operator<<(std::ostream& stream, second_child_without_members value) {
-    value.to_stream(stream);
-    return(stream);
+std::ostream& operator<<(std::ostream& s, const second_child_without_members& v) {
+    v.to_stream(s);
+    return(s);
 }
 
 } }

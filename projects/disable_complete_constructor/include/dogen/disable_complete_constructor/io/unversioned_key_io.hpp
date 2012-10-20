@@ -32,8 +32,8 @@ namespace dogen {
 namespace disable_complete_constructor {
 
 std::ostream&
-operator<<(std::ostream& stream,
-    dogen::disable_complete_constructor::unversioned_key value);
+operator<<(std::ostream& s,
+     const dogen::disable_complete_constructor::unversioned_key& v);
 
 } }
 

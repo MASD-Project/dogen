@@ -40,11 +40,6 @@ public:
 
 public:
     static void populate(const unsigned int position, result_type& v);
-    static result_type create(const unsigned int position);
-    result_type operator()();
-
-private:
-    unsigned int position_;
 };
 
 } }
