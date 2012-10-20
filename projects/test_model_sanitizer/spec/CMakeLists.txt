@@ -33,9 +33,10 @@ target_link_libraries(${spec_name}
     classes_in_a_package
     classes_inout_package
     classes_without_package
+    class_in_a_package
     class_without_attributes
     class_without_package
-    class_in_a_package
+    compressed
     trivial_inheritance
     utility
     ${LIBXML2_LIBRARIES}
