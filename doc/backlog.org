@@ -10,6 +10,12 @@ This file contains all stories that haven't been assigned to a sprint.
 
 Stories that we intend to look at, at some point.
 
+*** Test model sanity checks fail for enable facet serialisation
+
+For some reason we are unable to compile the serialisation test for
+the test model which focuses only on the serialisation facet. Test is
+ignored for the moment.
+
 *** Formatter for includes should do both system and user
 
 We have two calls to do the user and system includes in the include
