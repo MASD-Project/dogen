@@ -78,11 +78,6 @@ better using explicit casts:
 explicit operator std::string() { return "explicit"; }
 #+end_example
 
-*** Create tests for all generated models                             :story:
-
-At the moment we have a spec for code generated models: generated code
-spec. However, it only tests a few select models.
-
 *** Add SQL support to Dogen                                           :epic:
 **** Note on formatters                                                :note:
 
