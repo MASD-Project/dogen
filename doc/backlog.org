@@ -10,6 +10,10 @@ This file contains all stories that haven't been assigned to a sprint.
 
 Stories that we intend to look at, at some point.
 
+*** Remove facet and file types in formatters
+
+We seem to have member variables for no reason.
+
 *** Test model sanity checks fail for enable facet serialisation
 
 For some reason we are unable to compile the serialisation test for
