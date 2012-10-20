@@ -44,11 +44,13 @@ const std::string debug_dir_arg("debug-dir");
 const std::string save_dia_model_arg("save-dia-model");
 const std::string save_sml_model_arg("save-sml-model");
 
-const std::string invalid_facet_type("Invalid facet type");
+const std::string invalid_facet_type("Invalid facet type: ");
 const std::string domain_facet_type("domain");
 const std::string io_facet_type("io");
 const std::string hash_facet_type("hash");
 const std::string serialization_facet_type("serialization");
+const std::string test_data_facet_type("test_data");
+const std::string database_facet_type("database");
 
 const std::string invalid_archive_type("Invalid archive type");
 const std::string xml_archive_type("xml");
@@ -222,7 +224,7 @@ program_options_parser::cpp_options_factory() const {
             value<std::vector<std::string> >(),
             "If set, only domain and enabled facets are generated. "
             "By default all facets are generated. Valid values: "
-            "[io | hash | serialization | test_data].")
+            "[io | hash | serialization | database | test_data].")
         ("cpp-header-extension",
             value<std::string>()->default_value(".hpp"),
             "Extension for C++ header files, including leading '.'.")
@@ -364,7 +366,7 @@ void program_options_parser::version_function(std::function<void()> value) {
 }
 
 dogen::utility::serialization::archive_types
-program_options_parser::parse_archive_type(std::string s) const {
+program_options_parser::parse_archive_type(const std::string& s) const {
     if (s == xml_archive_type)
         return archive_types::xml;
     if (s == text_archive_type)
@@ -377,22 +379,20 @@ program_options_parser::parse_archive_type(std::string s) const {
 }
 
 dogen::generator::backends::cpp::cpp_facet_types
-program_options_parser::parse_facet_types(std::string s) {
-    if (s == domain_facet_type)
-        return cpp_facet_types::domain;
-    if (s == hash_facet_type)
-        return cpp_facet_types::hash;
-    if (s == serialization_facet_type)
-        return cpp_facet_types::serialization;
-    if (s == io_facet_type)
-        return cpp_facet_types::io;
+program_options_parser::parse_facet_types(const std::string& s) {
+    if (s == domain_facet_type) return cpp_facet_types::domain;
+    if (s == hash_facet_type) return cpp_facet_types::hash;
+    if (s == serialization_facet_type) return cpp_facet_types::serialization;
+    if (s == io_facet_type) return cpp_facet_types::io;
+    if (s == test_data_facet_type) return cpp_facet_types::test_data;
+    if (s == database_facet_type) return cpp_facet_types::database;
 
     using utility::exception::invalid_enum_value;
-    throw invalid_enum_value(invalid_facet_type);
+    throw invalid_enum_value(invalid_facet_type + s);
 }
 
 generator::config::cpp_settings program_options_parser::
-transform_cpp_settings(boost::program_options::variables_map vm) const {
+transform_cpp_settings(const boost::program_options::variables_map& vm) const {
     generator::config::cpp_settings r;
 
     r.verbose(verbose_);
@@ -487,7 +487,7 @@ transform_cpp_settings(boost::program_options::variables_map vm) const {
 }
 
 generator::config::sql_settings program_options_parser::
-transform_sql_settings(boost::program_options::variables_map vm) const {
+transform_sql_settings(const boost::program_options::variables_map& vm) const {
     generator::config::sql_settings r;
 
     r.verbose(verbose_);
@@ -500,8 +500,9 @@ transform_sql_settings(boost::program_options::variables_map vm) const {
     return r;
 }
 
-generator::config::modeling_settings program_options_parser::
-transform_modeling_settings(boost::program_options::variables_map vm) const {
+generator::config::modeling_settings
+program_options_parser::transform_modeling_settings(
+    const boost::program_options::variables_map& vm) const {
     generator::config::modeling_settings r;
 
     r.verbose(verbose_);
@@ -528,7 +529,7 @@ transform_modeling_settings(boost::program_options::variables_map vm) const {
 }
 
 generator::config::troubleshooting_settings program_options_parser::
-transform_troubleshooting_settings(variables_map vm) const {
+transform_troubleshooting_settings(const variables_map& vm) const {
     generator::config::troubleshooting_settings r;
 
     r.verbose(verbose_);
@@ -561,8 +562,8 @@ transform_troubleshooting_settings(variables_map vm) const {
     return r;
 }
 
-generator::config::output_settings
-program_options_parser::transform_output_settings(variables_map vm) const {
+generator::config::output_settings program_options_parser::
+transform_output_settings(const variables_map& vm) const {
     generator::config::output_settings r;
     r.verbose(verbose_);
     r.output_to_stdout(vm.count(output_to_stdout_arg));

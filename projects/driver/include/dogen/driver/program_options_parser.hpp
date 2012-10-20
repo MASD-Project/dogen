@@ -81,22 +81,22 @@ private:
 
 public:
     typedef dogen::utility::serialization::archive_types archive_types;
-    archive_types parse_archive_type(std::string s) const;
+    archive_types parse_archive_type(const std::string& s) const;
 
     typedef dogen::generator::backends::cpp::cpp_facet_types cpp_facet_types;
-    static cpp_facet_types parse_facet_types(std::string s);
+    static cpp_facet_types parse_facet_types(const std::string& s);
 
 private:
     generator::config::modeling_settings
-    transform_modeling_settings(variables_map vm) const;
+    transform_modeling_settings(const variables_map& vm) const;
     generator::config::cpp_settings
-    transform_cpp_settings(variables_map vm) const;
+    transform_cpp_settings(const variables_map& vm) const;
     generator::config::sql_settings
-    transform_sql_settings(variables_map vm) const;
+    transform_sql_settings(const variables_map& vm) const;
     generator::config::troubleshooting_settings
-    transform_troubleshooting_settings(variables_map vm) const;
+    transform_troubleshooting_settings(const variables_map& vm) const;
     generator::config::output_settings
-    transform_output_settings(variables_map vm) const;
+    transform_output_settings(const variables_map& vm) const;
 
 public:
     void help_function(std::function<void(std::string)> value);
