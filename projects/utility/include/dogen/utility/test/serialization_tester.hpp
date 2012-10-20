@@ -122,9 +122,9 @@ public:
      * @brief Test round-trip using a EOS portable archive.
      */
     static void eos_roundtrip_produces_the_same_entity(const entity_type&) {
-        using namespace dogen::utility::log;
-        logger lg(logger_factory("serialization_tester"));
-        BOOST_LOG_SEV(lg, debug) << "Portable binary serialization: ";
+        // using namespace dogen::utility::log;
+        // logger lg(logger_factory("serialization_tester"));
+        // BOOST_LOG_SEV(lg, debug) << "Portable binary serialization: ";
         // roundtrip_produces_the_same_entity<eos::portable_iarchive,
         //     eos::portable_oarchive>(a);
     }
