@@ -227,9 +227,9 @@ void sml_dfs_visitor::process_sml_pod(const dogen::sml::pod& pod) {
                 requires_stream_manipulators = true;
 
             k.is_char_like(is_char_like(k.type()));
-            k.is_string_like(is_string_like(k.type()));
             k.is_int_like(is_int_like(k.type()));
         }
+        k.is_string_like(is_string_like(k.type()));
         props_vm.push_back(k);
     }
 

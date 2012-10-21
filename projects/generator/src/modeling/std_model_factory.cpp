@@ -55,16 +55,24 @@ sml::pod std_model_factory::create_pod(const std::string& name) {
 sml::model std_model_factory::create() {
     using namespace sml;
     std::unordered_map<qualified_name, primitive> primitives;
-    const auto lambda([&](std::string name){
-            primitive p(create_primitive(name));
-            primitives.insert(std::make_pair(p.name(), p));
+    std::unordered_map<qualified_name, pod> pods;
+
+    // const auto lambda([&](std::string name){
+    //         primitive p(create_primitive(name));
+    //         primitives.insert(std::make_pair(p.name(), p));
+    //     });
+
+    const auto pi([&](std::string name){
+            pod p(create_pod(name));
+            pods.insert(std::make_pair(p.name(), p));
         });
 
-    lambda(string_name);
+    pi(string_name);
 
     model r;
     r.name(model_name);
     r.primitives(primitives);
+    r.pods(pods);
     return r;
 }
 
