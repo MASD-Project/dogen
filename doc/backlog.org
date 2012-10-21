@@ -16,13 +16,6 @@ For some reason we are unable to compile the serialisation test for
 the test model which focuses only on the serialisation facet. Test is
 ignored for the moment.
 
-*** Formatter for includes should do both system and user
-
-We have two calls to do the user and system includes in the include
-formatter but in reality they are always done both at the same
-time. This is a fragile API, we should just pass in the view model and
-let the formatter do both.
-
 *** Check if we have a test model with versioning disabled
 
 It seems all the test models are using versioning. We need a test
