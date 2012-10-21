@@ -34,7 +34,7 @@ namespace {
 
 const std::string int_type("int");
 const std::string bool_type("bool");
-const std::string string_type("std::string");
+const std::string string_type("string");
 const std::string missing_class_view_model(
     "File view model must contain a class view model");
 
@@ -147,10 +147,7 @@ create_helper_methods(const class_view_model& vm) {
     for (const auto p : props) {
         if (types_done.find(p.type()) == types_done.end()) {
             if (p.is_primitive()) {
-                if (p.type() == string_type) {
-                    string_helper();
-                    utility_.blank_line();
-                } else if (p.is_char_like()) {
+                if (p.is_char_like()) {
                     char_like_helper(p.identifiable_type(), p.type());
                     utility_.blank_line();
                 } else if (p.is_int_like()) {
@@ -161,8 +158,13 @@ create_helper_methods(const class_view_model& vm) {
                     utility_.blank_line();
                 }
             } else {
-                domain_type_helper(p.identifiable_type(), p.type());
-                utility_.blank_line();
+                if (p.type() == string_type) {
+                    string_helper();
+                    utility_.blank_line();
+                } else {
+                    domain_type_helper(p.identifiable_type(), p.type());
+                    utility_.blank_line();
+                }
             }
         }
         types_done.insert(p.type());
@@ -184,6 +186,12 @@ void generator_implementation::populate_method(const class_view_model& vm) {
         unsigned int j(0);
         for (const auto p : props) {
             if (p.is_primitive()) {
+                    stream_ << indenter_ << "v." << p.name()
+                            << "(create_" << p.identifiable_type()
+                            << "(position + " << j << "));"
+                            << std::endl;
+                ++j;
+            } else {
                 if (p.type() == string_type) {
                     stream_ << indenter_ << "v." << p.name()
                             << "(create_std_string("
@@ -196,12 +204,6 @@ void generator_implementation::populate_method(const class_view_model& vm) {
                             << "(position + " << j << "));"
                             << std::endl;
                 }
-                ++j;
-            } else {
-                stream_ << indenter_ << "v." << p.name()
-                        << "(create_" << p.identifiable_type()
-                        << "(position + " << j << "));"
-                        << std::endl;
             }
         }
     }

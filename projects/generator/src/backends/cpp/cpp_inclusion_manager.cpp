@@ -29,6 +29,7 @@ using namespace dogen::utility::log;
 static logger lg(logger_factory("inclusion_manager"));
 
 const std::string empty;
+const std::string std_model("std");
 const std::string bool_type("bool");
 const std::string versioned_name("versioned_key");
 const std::string unversioned_name("unversioned_key");
@@ -38,8 +39,10 @@ const std::string pqxx_connection_include("pqxx/connection.hxx");
 const std::string boost_format_include("boost/format.hpp");
 const std::string boost_nvp("boost/serialization/nvp.hpp");
 const std::string boost_export("boost/serialization/export.hpp");
+const std::string boost_string("boost/serialization/string.hpp");
 const std::string pqxx_result_include("pqxx/result.hxx");
 const std::string pqxx_transaction_include("pqxx/transaction.hxx");
+const std::string std_string("string");
 const std::string iosfwd("iosfwd");
 const std::string algorithm("algorithm");
 const std::string ostream("ostream");
@@ -291,12 +294,33 @@ append_implementation_dependencies(const cpp_facet_types ft,
         il.system.push_back(pqxx_transaction_include);
 }
 
+void cpp_inclusion_manager::append_std_dependencies(
+    const cpp_facet_types ft, const cpp_file_types flt,
+    const dogen::sml::qualified_name& qname,
+    inclusion_lists& il) const {
+
+    const bool is_header(flt == cpp_file_types::header);
+    const bool is_domain(ft == cpp_facet_types::domain);
+    if (is_header && is_domain && qname.type_name() == std_string)
+        il.system.push_back(std_string);
+
+    const bool is_serialization(ft == cpp_facet_types::serialization);
+    if (is_header && is_serialization && qname.type_name() == std_string)
+        il.system.push_back(boost_string);
+}
+
 void cpp_inclusion_manager::append_relationship_dependencies(
     const std::list<dogen::sml::qualified_name>& names,
     const cpp_facet_types ft, const cpp_file_types flt,
     inclusion_lists& il) const {
 
     for(const auto n : names) {
+        // handle all special models first
+        if (n.model_name() == std_model) {
+            append_std_dependencies(ft, flt, n, il);
+            continue;
+        }
+
         /*
          * rule 1: headers need the corresponding header file for the
          * dependency.

@@ -186,6 +186,14 @@ private:
         const bool is_parent_or_child = false) const;
 
     /**
+     * @brief
+     */
+    void append_std_dependencies(
+        const cpp_facet_types ft, const cpp_file_types flt,
+        const dogen::sml::qualified_name& qname,
+        inclusion_lists& il) const;
+
+    /**
      * @brief Appends to the inclusion lists dependencies brought
      * about by all the relationships of the type with other types.
      *
