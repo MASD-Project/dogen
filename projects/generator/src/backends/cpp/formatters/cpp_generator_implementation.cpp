@@ -34,7 +34,7 @@ namespace {
 
 const std::string int_type("int");
 const std::string bool_type("bool");
-const std::string string_type("string");
+const std::string string_type("std::string");
 const std::string missing_class_view_model(
     "File view model must contain a class view model");
 
