@@ -25,7 +25,7 @@
 namespace {
 
 // FIXME: until we add support to indenter.
-const std::string special_indent("       ");
+const std::string special_indent("  ");
 const std::string parent("__parent_");
 const std::string type("__type__");
 const std::string inserter("<< ");
@@ -78,18 +78,26 @@ void cpp_inserter_implementation::format(const class_view_model& vm) {
             << utility_.quote(utility_.quote_escaped(vm.name()));
 
     unsigned int i(0);
-    for (const auto p : vm.parents()) {
+    const auto parents(vm.parents());
+    for (const auto p : parents) {
+        if (i != 0)
+            stream_ << indenter_ << "s";
+
         stream_ << space_inserter << utility_.quote(spaced_comma) << std::endl;
 
         stream_ << indenter_ << special_indent << inserter
                 << utility_.quote(utility_.quote_escaped(parent_tag(i)) +
-                    colon);
+                    colon) << semi_colon << std::endl;
 
-        stream_ << space_inserter << p.name() << "::to_stream(s)";
+        stream_ << indenter_ << p.name() << "::to_stream(s);" << std::endl;
         ++i;
     }
 
-    for (const auto p : vm.properties()) {
+    const auto props(vm.properties());
+    if (!parents.empty())
+        stream_ << indenter_ << "s";
+
+    for (const auto p : props) {
         stream_ << space_inserter << utility_.quote(spaced_comma) << std::endl;
 
         stream_ << indenter_ << special_indent << inserter
@@ -110,10 +118,15 @@ void cpp_inserter_implementation::format(const class_view_model& vm) {
             stream_ << ss.str();
     }
 
-    stream_ << std::endl;
-    stream_ << indenter_ << special_indent << inserter
-            << utility_.quote(close_bracket) << semi_colon << std::endl;
-    stream_ << indenter_ << "return(s);" << std::endl;
+    if (!props.empty()) {
+        stream_ << std::endl
+                << indenter_ << special_indent << inserter;
+    } else
+        stream_ << space_inserter;
+
+    stream_ << utility_.quote(close_bracket) << semi_colon << std::endl;
+    if (!is_inside_class_)
+        stream_ << indenter_ << "return(s);" << std::endl;
 }
 
 

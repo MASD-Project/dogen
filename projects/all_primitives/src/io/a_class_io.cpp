@@ -31,20 +31,20 @@ std::ostream& operator<<(std::ostream& s, const a_class& v) {
     s << std::boolalpha;
 
     s << " { "
-           << "\"__type__\": " << "\"a_class\"" << ", "
-           << "\"bool_property\": " << v.bool_property() << ", "
-           << "\"char_property\": " << "\"" << v.char_property() << "\"" << ", "
-           << "\"uchar_property\": " << "\"" << v.uchar_property() << "\"" << ", "
-           << "\"int_property\": " << v.int_property() << ", "
-           << "\"uint_property\": " << v.uint_property() << ", "
-           << "\"long_property\": " << v.long_property() << ", "
-           << "\"ulong_property\": " << v.ulong_property() << ", "
-           << "\"long_long_property\": " << v.long_long_property() << ", "
-           << "\"ulong_long_property\": " << v.ulong_long_property() << ", "
-           << "\"short_property\": " << v.short_property() << ", "
-           << "\"ushort_property\": " << v.ushort_property() << ", "
-           << "\"versioned_key\": " << v.versioned_key()
-           << " }";
+      << "\"__type__\": " << "\"a_class\"" << ", "
+      << "\"bool_property\": " << v.bool_property() << ", "
+      << "\"char_property\": " << "\"" << v.char_property() << "\"" << ", "
+      << "\"uchar_property\": " << "\"" << v.uchar_property() << "\"" << ", "
+      << "\"int_property\": " << v.int_property() << ", "
+      << "\"uint_property\": " << v.uint_property() << ", "
+      << "\"long_property\": " << v.long_property() << ", "
+      << "\"ulong_property\": " << v.ulong_property() << ", "
+      << "\"long_long_property\": " << v.long_long_property() << ", "
+      << "\"ulong_long_property\": " << v.ulong_long_property() << ", "
+      << "\"short_property\": " << v.short_property() << ", "
+      << "\"ushort_property\": " << v.ushort_property() << ", "
+      << "\"versioned_key\": " << v.versioned_key()
+      << " }";
     return(s);
 }
 

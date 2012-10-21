@@ -139,7 +139,7 @@ void cpp_class_implementation::to_stream(const class_view_model& vm) {
     if (!vm.is_parent() && vm.parents().empty())
         return;
 
-    stream_ << "std::ostream& " << vm.name()
+    stream_ << "void " << vm.name()
             << "::to_stream(std::ostream& s) const ";
 
     utility_.open_scope();
@@ -214,8 +214,7 @@ void cpp_class_implementation::equals_operator(const class_view_model& vm) {
                         stream_ << " &&" << std::endl << indenter_;
                     {
                         cpp_positive_indenter_scope s(indenter_);
-                        stream_ << indenter_ << p.name() << "::operator==(rhs)"
-                                << std::endl;
+                        stream_ << p.name() << "::operator==(rhs)";
                     }
                     is_first = false;
                 }

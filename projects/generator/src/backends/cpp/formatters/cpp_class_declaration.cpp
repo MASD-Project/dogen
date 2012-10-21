@@ -234,12 +234,12 @@ void cpp_class_declaration::to_stream(const class_view_model& vm) {
     utility_.public_access_specifier();
     if (vm.is_parent()) {
         stream_ << indenter_
-                << "virtual std::ostream& to_stream("
+                << "virtual void to_stream("
                 << "std::ostream& s) const;"
                 << std::endl;
     } else {
         stream_ << indenter_
-                << "std::ostream& to_stream(std::ostream& s) "
+                << "void to_stream(std::ostream& s) "
                 << "const override;"
                 << std::endl;
     }

@@ -27,9 +27,9 @@ namespace stand_alone_class {
 
 std::ostream& operator<<(std::ostream& s, const class_1& v) {
     s << " { "
-           << "\"__type__\": " << "\"class_1\"" << ", "
-           << "\"versioned_key\": " << v.versioned_key()
-           << " }";
+      << "\"__type__\": " << "\"class_1\"" << ", "
+      << "\"versioned_key\": " << v.versioned_key()
+      << " }";
     return(s);
 }
 

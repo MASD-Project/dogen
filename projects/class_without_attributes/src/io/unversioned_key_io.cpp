@@ -26,9 +26,9 @@ namespace class_without_attributes {
 
 std::ostream& operator<<(std::ostream& s, const unversioned_key& v) {
     s << " { "
-           << "\"__type__\": " << "\"unversioned_key\"" << ", "
-           << "\"id\": " << v.id()
-           << " }";
+      << "\"__type__\": " << "\"unversioned_key\"" << ", "
+      << "\"id\": " << v.id()
+      << " }";
     return(s);
 }
 

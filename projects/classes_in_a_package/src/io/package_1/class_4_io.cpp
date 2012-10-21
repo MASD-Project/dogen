@@ -28,9 +28,9 @@ namespace package_1 {
 
 std::ostream& operator<<(std::ostream& s, const class_4& v) {
     s << " { "
-           << "\"__type__\": " << "\"class_4\"" << ", "
-           << "\"versioned_key\": " << v.versioned_key()
-           << " }";
+      << "\"__type__\": " << "\"class_4\"" << ", "
+      << "\"versioned_key\": " << v.versioned_key()
+      << " }";
     return(s);
 }
 

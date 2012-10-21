@@ -1579,11 +1579,11 @@ namespace package1 {
 
 std::ostream& operator<<(std::ostream& s, const first_class& v) {
     s << " { "
-           << "\"__type__\": " << "\"first_class\"" << ", "
-           << "\"public_attribute\": " << v.public_attribute() << ", "
-           << "\"private_attribute\": " << v.private_attribute() << ", "
-           << "\"versioned_key\": " << v.versioned_key()
-           << " }";
+      << "\"__type__\": " << "\"first_class\"" << ", "
+      << "\"public_attribute\": " << v.public_attribute() << ", "
+      << "\"private_attribute\": " << v.private_attribute() << ", "
+      << "\"versioned_key\": " << v.versioned_key()
+      << " }";
     return(s);
 }
 
@@ -1617,9 +1617,9 @@ namespace class_in_a_package {
 
 std::ostream& operator<<(std::ostream& s, const unversioned_key& v) {
     s << " { "
-           << "\"__type__\": " << "\"unversioned_key\"" << ", "
-           << "\"id\": " << v.id()
-           << " }";
+      << "\"__type__\": " << "\"unversioned_key\"" << ", "
+      << "\"id\": " << v.id()
+      << " }";
     return(s);
 }
 
@@ -1653,10 +1653,10 @@ namespace class_in_a_package {
 
 std::ostream& operator<<(std::ostream& s, const versioned_key& v) {
     s << " { "
-           << "\"__type__\": " << "\"versioned_key\"" << ", "
-           << "\"id\": " << v.id() << ", "
-           << "\"version\": " << v.version()
-           << " }";
+      << "\"__type__\": " << "\"versioned_key\"" << ", "
+      << "\"id\": " << v.id() << ", "
+      << "\"version\": " << v.version()
+      << " }";
     return(s);
 }
 

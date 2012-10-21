@@ -27,10 +27,10 @@ namespace class_without_package {
 
 std::ostream& operator<<(std::ostream& s, const class_1& v) {
     s << " { "
-           << "\"__type__\": " << "\"class_1\"" << ", "
-           << "\"an_attribute\": " << v.an_attribute() << ", "
-           << "\"versioned_key\": " << v.versioned_key()
-           << " }";
+      << "\"__type__\": " << "\"class_1\"" << ", "
+      << "\"an_attribute\": " << v.an_attribute() << ", "
+      << "\"versioned_key\": " << v.versioned_key()
+      << " }";
     return(s);
 }
 

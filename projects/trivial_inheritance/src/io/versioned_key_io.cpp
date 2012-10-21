@@ -26,10 +26,10 @@ namespace trivial_inheritance {
 
 std::ostream& operator<<(std::ostream& s, const versioned_key& v) {
     s << " { "
-           << "\"__type__\": " << "\"versioned_key\"" << ", "
-           << "\"id\": " << v.id() << ", "
-           << "\"version\": " << v.version()
-           << " }";
+      << "\"__type__\": " << "\"versioned_key\"" << ", "
+      << "\"id\": " << v.id() << ", "
+      << "\"version\": " << v.version()
+      << " }";
     return(s);
 }
 

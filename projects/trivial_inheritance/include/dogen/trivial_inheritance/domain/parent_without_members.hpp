@@ -49,7 +49,7 @@ public:
     friend class dogen::trivial_inheritance::parent_without_members_serializer;
 
 public:
-    virtual std::ostream& to_stream(std::ostream& s) const;
+    virtual void to_stream(std::ostream& s) const;
 
 public:
     dogen::trivial_inheritance::versioned_key versioned_key() const {

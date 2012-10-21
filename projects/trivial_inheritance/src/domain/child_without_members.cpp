@@ -28,12 +28,12 @@ namespace trivial_inheritance {
 child_without_members::child_without_members(const dogen::trivial_inheritance::versioned_key& versioned_key)
     : parent_without_members(versioned_key) { }
 
-std::ostream& child_without_members::to_stream(std::ostream& s) const {
+void child_without_members::to_stream(std::ostream& s) const {
     s << " { "
-           << "\"__type__\": " << "\"child_without_members\"" << ", "
-           << "\"__parent_0__\": " << parent_without_members::to_stream(s)
-           << " }";
-    return(s);
+      << "\"__type__\": " << "\"child_without_members\"" << ", "
+      << "\"__parent_0__\": ";
+    parent_without_members::to_stream(s);
+    s << " }";
 }
 
 void child_without_members::swap(child_without_members& other) noexcept {
@@ -42,8 +42,7 @@ void child_without_members::swap(child_without_members& other) noexcept {
 }
 
 bool child_without_members::operator==(const child_without_members& rhs) const {
-    return             parent_without_members::operator==(rhs)
-;
+    return parent_without_members::operator==(rhs);
 }
 
 child_without_members& child_without_members::operator=(child_without_members other) {
