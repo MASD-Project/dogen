@@ -359,12 +359,6 @@ and forward declare. To make life easier we could have a =_fwd= header
 for each entity which only forward declares it. It would be useful for
 IO and for the behavioural code.
 
-*** Implement assignment operator
-
-At present we are generating the default assignment operator when
-there are no properties; however, we do not generate a manual
-assignment operator for the converse case.
-
 *** Rename pod in SML
 
 We mistakingly called complex types =pod= because of a lack of
