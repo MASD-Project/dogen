@@ -42,7 +42,6 @@ namespace formatters {
 facet_includer::
 facet_includer(std::ostream& stream, cpp_facet_types facet_type) :
     stream_(stream), facet_type_(facet_type),
-    file_type_(cpp_file_types::header),
     utility_(stream_, indenter_) { }
 
 file_formatter::shared_ptr facet_includer::

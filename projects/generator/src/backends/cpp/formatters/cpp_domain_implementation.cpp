@@ -65,8 +65,6 @@ domain_implementation::
 domain_implementation(std::ostream& stream, bool disable_complete_constructor,
     bool use_integrated_io, bool disable_io) :
     stream_(stream),
-    facet_type_(cpp_facet_types::domain),
-    file_type_(cpp_file_types::implementation),
     utility_(stream_, indenter_),
     disable_complete_constructor_(disable_complete_constructor),
     use_integrated_io_(use_integrated_io),

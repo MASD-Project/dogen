@@ -52,8 +52,6 @@ namespace formatters {
 serialization_header::
 serialization_header(std::ostream& stream, bool disable_xml_serialization) :
     stream_(stream),
-    facet_type_(cpp_facet_types::serialization),
-    file_type_(cpp_file_types::header),
     utility_(stream_, indenter_),
     disable_xml_serialization_(disable_xml_serialization) { }
 

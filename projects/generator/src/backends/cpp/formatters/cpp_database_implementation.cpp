@@ -59,8 +59,6 @@ namespace formatters {
 database_implementation::
 database_implementation(std::ostream& stream) :
     stream_(stream),
-    facet_type_(cpp_facet_types::database),
-    file_type_(cpp_file_types::implementation),
     utility_(stream_, indenter_) { }
 
 file_formatter::shared_ptr

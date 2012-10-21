@@ -49,8 +49,6 @@ namespace formatters {
 hash_implementation::
 hash_implementation(std::ostream& stream) :
     stream_(stream),
-    facet_type_(cpp_facet_types::hash),
-    file_type_(cpp_file_types::implementation),
     utility_(stream_, indenter_) {
 }
 

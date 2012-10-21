@@ -47,8 +47,6 @@ namespace formatters {
 generator_header::
 generator_header(std::ostream& stream) :
     stream_(stream),
-    facet_type_(cpp_facet_types::test_data),
-    file_type_(cpp_file_types::header),
     utility_(stream_, indenter_) {
 }
 

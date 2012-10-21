@@ -50,8 +50,6 @@ namespace formatters {
 database_header::
 database_header(std::ostream& stream) :
     stream_(stream),
-    facet_type_(cpp_facet_types::database),
-    file_type_(cpp_file_types::header),
     utility_(stream_, indenter_) {
 }
 

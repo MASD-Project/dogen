@@ -51,8 +51,6 @@ domain_header::
 domain_header(std::ostream& stream, bool disable_complete_constructor,
     bool use_integrated_io, bool disable_io) :
     stream_(stream),
-    facet_type_(cpp_facet_types::domain),
-    file_type_(cpp_file_types::header),
     utility_(stream_, indenter_),
     disable_complete_constructor_(disable_complete_constructor),
     use_integrated_io_(use_integrated_io),

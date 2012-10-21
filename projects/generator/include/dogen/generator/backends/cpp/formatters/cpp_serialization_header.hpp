@@ -66,8 +66,6 @@ public:
 
 private:
     std::ostream& stream_;
-    const cpp_facet_types facet_type_;
-    const cpp_file_types file_type_;
     cpp_indenter indenter_;
     cpp_utility utility_;
     const bool disable_xml_serialization_;
