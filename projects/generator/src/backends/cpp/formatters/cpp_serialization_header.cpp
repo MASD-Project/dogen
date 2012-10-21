@@ -33,8 +33,6 @@
 
 namespace {
 
-const bool is_system(true);
-const bool is_user(false);
 const std::string boost_ns("boost");
 const std::string serialization_ns("serialization");
 
@@ -180,8 +178,7 @@ void serialization_header::format(const file_view_model& vm) {
     utility_.blank_line();
 
     cpp_includes includes(stream_);
-    includes.format(vm.system_includes(), is_system);
-    includes.format(vm.user_includes(), is_user);
+    includes.format(vm);
     utility_.blank_line();
 
     const view_models::class_view_model& cvm(*o);

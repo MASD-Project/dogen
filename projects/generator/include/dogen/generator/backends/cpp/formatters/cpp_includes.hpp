@@ -28,6 +28,7 @@
 #include <list>
 #include <string>
 #include <iosfwd>
+#include "dogen/generator/backends/cpp/view_models/file_view_model.hpp"
 
 namespace dogen {
 namespace generator {
@@ -36,6 +37,9 @@ namespace cpp {
 namespace formatters {
 
 class cpp_includes {
+public:
+    typedef view_models::file_view_model file_view_model;
+
 public:
     cpp_includes() = delete;
     cpp_includes(const cpp_includes&) = default;
@@ -46,8 +50,11 @@ public:
 public:
     explicit cpp_includes(std::ostream& stream);
 
+private:
+    void format(std::list<std::string> v, bool is_system);
+
 public:
-    void format(std::list<std::string> value, bool is_system);
+    void format(const file_view_model& vm);
 
 private:
     std::ostream& stream_;

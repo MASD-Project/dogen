@@ -32,8 +32,6 @@
 
 namespace {
 
-const bool is_system(true);
-const bool is_user(false);
 const std::string detail_ns("detail");
 const std::string name_suffix("_data_exchanger");
 const std::string missing_class_view_model(
@@ -176,8 +174,7 @@ void database_header::format(const file_view_model& vm) {
     utility_.blank_line();
 
     cpp_includes includes(stream_);
-    includes.format(vm.system_includes(), is_system);
-    includes.format(vm.user_includes(), is_user);
+    includes.format(vm);
     utility_.blank_line();
 
     {

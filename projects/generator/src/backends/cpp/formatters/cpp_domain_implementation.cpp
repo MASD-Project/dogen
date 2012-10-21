@@ -35,8 +35,6 @@
 
 namespace {
 
-const bool is_system(true);
-const bool is_user(false);
 const std::string inserter("<< ");
 const std::string space_inserter(" << ");
 const std::string open_bracket(" {");
@@ -135,8 +133,7 @@ void domain_implementation::format(const file_view_model& vm) {
     licence.format();
 
     cpp_includes includes(stream_);
-    includes.format(vm.system_includes(), is_system);
-    includes.format(vm.user_includes(), is_user);
+    includes.format(vm);
     utility_.blank_line();
 
     const view_models::class_view_model& cvm(*o);

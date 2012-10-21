@@ -23,6 +23,9 @@
 
 namespace {
 
+const bool is_system(true);
+const bool is_user(false);
+
 const std::string include("#include ");
 const std::string open_system("<");
 const std::string close_system(">");
@@ -39,14 +42,19 @@ namespace formatters {
 
 cpp_includes::cpp_includes(std::ostream& stream) : stream_(stream) {}
 
-void cpp_includes::format(std::list<std::string> value, bool is_system) {
-    value.sort();
-    for (auto i : value) {
+void cpp_includes::format(std::list<std::string> v, bool is_system) {
+    v.sort();
+    for (auto i : v) {
         stream_ << include << (is_system ? open_system : open_user)
                 << i
                 << (is_system ? close_system : close_user)
                 << std::endl;
     }
+}
+
+void cpp_includes::format(const file_view_model& vm) {
+    format(vm.system_includes(), is_system);
+    format(vm.user_includes(), is_user);
 }
 
 } } } } }

@@ -31,8 +31,6 @@
 
 namespace {
 
-const bool is_system(false);
-const bool is_user(false);
 const std::string missing_class_view_model(
     "File view model must contain a class view model");
 
@@ -110,8 +108,7 @@ void generator_header::format(const file_view_model& vm) {
     utility_.blank_line();
 
     cpp_includes includes(stream_);
-    includes.format(vm.system_includes(), is_system);
-    includes.format(vm.user_includes(), is_user);
+    includes.format(vm);
     utility_.blank_line();
 
     {

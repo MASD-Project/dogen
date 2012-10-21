@@ -35,8 +35,6 @@ namespace {
 const std::string int_type("int");
 const std::string bool_type("bool");
 const std::string string_type("std::string");
-const bool is_system(true);
-const bool is_user(false);
 const std::string missing_class_view_model(
     "File view model must contain a class view model");
 
@@ -281,8 +279,7 @@ void generator_implementation::format(const file_view_model& vm) {
     licence.format();
 
     cpp_includes includes(stream_);
-    includes.format(vm.system_includes(), is_system);
-    includes.format(vm.user_includes(), is_user);
+    includes.format(vm);
     utility_.blank_line();
 
     const class_view_model& cvm(*o);
