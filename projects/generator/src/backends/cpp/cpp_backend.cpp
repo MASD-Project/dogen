@@ -96,6 +96,9 @@ backend::value_entry_type cpp_backend::generate_cmakelists() const {
     vm.file_path(location_manager_.absolute_path(vm.file_name()));
     vm.model_name(model_.name());
 
+    if (!model_.external_package_path().empty())
+        vm.product_name(model_.external_package_path().front());
+
     log_formating_view(vm.file_path().string());
     std::ostringstream stream;
     formatters::cpp_cmakelists formatter(stream);

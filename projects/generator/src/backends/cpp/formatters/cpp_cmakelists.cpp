@@ -24,6 +24,8 @@
 
 namespace {
 
+const std::string empty("");
+const std::string underscore("_");
 const std::string unnamed_model("unnamed_model");
 
 }
@@ -79,7 +81,9 @@ void cpp_cmakelists::format(const cmakelists_view_model& vm) {
             << "add_library(" << mn << " STATIC ${all_files})"
             << std::endl
             << "set_target_properties(" << mn << " PROPERTIES"
-            << std::endl << "    OUTPUT_NAME dogen_" << mn << ")"
+            << std::endl << "    OUTPUT_NAME " << vm.product_name()
+            << (vm.product_name().empty() ? empty : underscore)
+            << mn << ")"
             << std::endl;
 }
 

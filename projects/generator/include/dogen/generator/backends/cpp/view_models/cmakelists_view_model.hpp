@@ -51,6 +51,9 @@ public:
     std::string model_name() const { return(model_name_); }
     void model_name(const std::string& value) { model_name_ = value; }
 
+    std::string product_name() const { return(product_name_); }
+    void product_name(const std::string& value) { product_name_ = value; }
+
     void file_path(boost::filesystem::path value) { file_path_ = value; }
     boost::filesystem::path file_path() const { return file_path_; }
 
@@ -59,6 +62,7 @@ public:
 private:
     boost::filesystem::path file_path_;
     std::string model_name_;
+    std::string product_name_;
 };
 
 } } } } }

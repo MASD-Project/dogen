@@ -1200,7 +1200,7 @@ file(GLOB_RECURSE all_files RELATIVE
 
 add_library(class_in_a_package STATIC ${all_files})
 set_target_properties(class_in_a_package PROPERTIES
-    OUTPUT_NAME dogen_class_in_a_package)
+    OUTPUT_NAME class_in_a_package)
 
 Filename: /empty_tds/actual/src/class_in_a_package/database/package1/first_class_db.cpp
 Contents: 
