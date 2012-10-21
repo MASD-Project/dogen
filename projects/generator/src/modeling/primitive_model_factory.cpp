@@ -42,7 +42,7 @@ namespace dogen {
 namespace generator {
 namespace modeling {
 
-sml::primitive primitive_model_factory::create(std::string name) {
+sml::primitive primitive_model_factory::create(const std::string& name) {
     sml::qualified_name q;
     q.type_name(name);
     q.meta_type(sml::meta_types::primitive);
@@ -54,7 +54,7 @@ sml::primitive primitive_model_factory::create(std::string name) {
 sml::model primitive_model_factory::create() {
     using namespace sml;
     std::unordered_map<qualified_name, primitive> p;
-    const auto lambda([&](std::string name){
+    const auto lambda([&](const std::string& name){
             primitive prim(create(name));
             p.insert(std::make_pair(prim.name(), prim));
         });

@@ -27,6 +27,7 @@
 #include "dogen/dia/serialization/diagram_ser.hpp"
 #include "dogen/sml/serialization/model_ser.hpp"
 #include "dogen/generator/modeling/primitive_model_factory.hpp"
+#include "dogen/generator/modeling/std_model_factory.hpp"
 #include "dogen/sml/io/model_io.hpp"
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/generator/modeling/director.hpp"
@@ -155,6 +156,7 @@ bool director::has_generatable_types(sml::model m) const {
 boost::optional<sml::model> director::create_model() const {
     sml_builder builder(verbose_, settings_.sql().schema_name());
     builder.add(primitive_model_factory::create());
+    builder.add(std_model_factory::create());
 
     using sml::model;
     const auto lambda([&](boost::filesystem::path p, bool is_target) -> model {

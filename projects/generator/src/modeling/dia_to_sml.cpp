@@ -299,8 +299,8 @@ transform_string_attribute(const dogen::dia::attribute& a) const {
     return name;
 }
 
-dogen::sml::qualified_name
-dia_dfs_visitor::transform_qualified_name(const std::string& type_string) const {
+dogen::sml::qualified_name dia_dfs_visitor::
+transform_qualified_name(const std::string& type_string) const {
     dogen::sml::qualified_name result;
 
     if (std::string::npos == type_string.find(delimiter)) {
@@ -314,10 +314,10 @@ dia_dfs_visitor::transform_qualified_name(const std::string& type_string) const 
     std::list<std::string> token_list;
     std::copy(tokens.begin(), tokens.end(), std::back_inserter(token_list));
 
-    result.model_name(token_list.back());
-    token_list.pop_back();
+    result.model_name(token_list.front());
+    result.type_name(token_list.back());
 
-    result.type_name(token_list.front());
+    token_list.pop_back();
     token_list.pop_front();
 
     if (!token_list.empty())

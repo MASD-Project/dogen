@@ -94,15 +94,14 @@ sml_builder::resolve_properties(sml::pod pod) {
             continue;
         }
 
-        using namespace dogen::utility::log;
-        BOOST_LOG_SEV(lg, error) << "failed to find property type:" << pqn
-                                 << "pods: " << pods
-                                 << "primitives: " << primitives;
-
         std::ostringstream stream;
         stream << undefined_type << ". pod: "
                << pod.name().type_name() << ". property type: "
                << pqn.type_name();
+
+        using namespace dogen::utility::log;
+        BOOST_LOG_SEV(lg, error) << stream.str() << ". QName: " << pqn;
+
         throw validation_error(stream.str());
     }
     return r;

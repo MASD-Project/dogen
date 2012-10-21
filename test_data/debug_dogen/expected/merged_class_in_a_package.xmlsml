@@ -5,12 +5,12 @@
 	<name>class_in_a_package</name>
 	<packages class_id="1" tracking_level="0" version="0">
 		<count>0</count>
-		<bucket_count>23</bucket_count>
+		<bucket_count>11</bucket_count>
 		<item_version>0</item_version>
 	</packages>
 	<pods class_id="2" tracking_level="0" version="0">
 		<count>1</count>
-		<bucket_count>23</bucket_count>
+		<bucket_count>11</bucket_count>
 		<item_version>0</item_version>
 		<item class_id="3" tracking_level="0" version="0">
 			<first class_id="4" tracking_level="0" version="0">
@@ -89,7 +89,7 @@
 		</item>
 	</pods>
 	<primitives class_id="10" tracking_level="0" version="0">
-		<count>11</count>
+		<count>12</count>
 		<bucket_count>23</bucket_count>
 		<item_version>0</item_version>
 		<item class_id="11" tracking_level="0" version="0">
@@ -103,7 +103,7 @@
 					<count>0</count>
 					<item_version>0</item_version>
 				</package_path>
-				<type_name>bool</type_name>
+				<type_name>unsigned long long</type_name>
 				<meta_type>5</meta_type>
 			</first>
 			<second class_id="12" tracking_level="0" version="0">
@@ -117,127 +117,7 @@
 						<count>0</count>
 						<item_version>0</item_version>
 					</package_path>
-					<type_name>bool</type_name>
-					<meta_type>5</meta_type>
-				</name>
-			</second>
-		</item>
-		<item>
-			<first>
-				<model_name></model_name>
-				<external_package_path>
-					<count>0</count>
-					<item_version>0</item_version>
-				</external_package_path>
-				<package_path>
-					<count>0</count>
-					<item_version>0</item_version>
-				</package_path>
-				<type_name>char</type_name>
-				<meta_type>5</meta_type>
-			</first>
-			<second>
-				<name>
-					<model_name></model_name>
-					<external_package_path>
-						<count>0</count>
-						<item_version>0</item_version>
-					</external_package_path>
-					<package_path>
-						<count>0</count>
-						<item_version>0</item_version>
-					</package_path>
-					<type_name>char</type_name>
-					<meta_type>5</meta_type>
-				</name>
-			</second>
-		</item>
-		<item>
-			<first>
-				<model_name></model_name>
-				<external_package_path>
-					<count>0</count>
-					<item_version>0</item_version>
-				</external_package_path>
-				<package_path>
-					<count>0</count>
-					<item_version>0</item_version>
-				</package_path>
-				<type_name>unsigned char</type_name>
-				<meta_type>5</meta_type>
-			</first>
-			<second>
-				<name>
-					<model_name></model_name>
-					<external_package_path>
-						<count>0</count>
-						<item_version>0</item_version>
-					</external_package_path>
-					<package_path>
-						<count>0</count>
-						<item_version>0</item_version>
-					</package_path>
-					<type_name>unsigned char</type_name>
-					<meta_type>5</meta_type>
-				</name>
-			</second>
-		</item>
-		<item>
-			<first>
-				<model_name></model_name>
-				<external_package_path>
-					<count>0</count>
-					<item_version>0</item_version>
-				</external_package_path>
-				<package_path>
-					<count>0</count>
-					<item_version>0</item_version>
-				</package_path>
-				<type_name>long long</type_name>
-				<meta_type>5</meta_type>
-			</first>
-			<second>
-				<name>
-					<model_name></model_name>
-					<external_package_path>
-						<count>0</count>
-						<item_version>0</item_version>
-					</external_package_path>
-					<package_path>
-						<count>0</count>
-						<item_version>0</item_version>
-					</package_path>
-					<type_name>long long</type_name>
-					<meta_type>5</meta_type>
-				</name>
-			</second>
-		</item>
-		<item>
-			<first>
-				<model_name></model_name>
-				<external_package_path>
-					<count>0</count>
-					<item_version>0</item_version>
-				</external_package_path>
-				<package_path>
-					<count>0</count>
-					<item_version>0</item_version>
-				</package_path>
-				<type_name>int</type_name>
-				<meta_type>5</meta_type>
-			</first>
-			<second>
-				<name>
-					<model_name></model_name>
-					<external_package_path>
-						<count>0</count>
-						<item_version>0</item_version>
-					</external_package_path>
-					<package_path>
-						<count>0</count>
-						<item_version>0</item_version>
-					</package_path>
-					<type_name>int</type_name>
+					<type_name>unsigned long long</type_name>
 					<meta_type>5</meta_type>
 				</name>
 			</second>
@@ -283,7 +163,7 @@
 					<count>0</count>
 					<item_version>0</item_version>
 				</package_path>
-				<type_name>unsigned long</type_name>
+				<type_name>bool</type_name>
 				<meta_type>5</meta_type>
 			</first>
 			<second>
@@ -297,7 +177,7 @@
 						<count>0</count>
 						<item_version>0</item_version>
 					</package_path>
-					<type_name>unsigned long</type_name>
+					<type_name>bool</type_name>
 					<meta_type>5</meta_type>
 				</name>
 			</second>
@@ -313,7 +193,7 @@
 					<count>0</count>
 					<item_version>0</item_version>
 				</package_path>
-				<type_name>long</type_name>
+				<type_name>long long</type_name>
 				<meta_type>5</meta_type>
 			</first>
 			<second>
@@ -327,7 +207,7 @@
 						<count>0</count>
 						<item_version>0</item_version>
 					</package_path>
-					<type_name>long</type_name>
+					<type_name>long long</type_name>
 					<meta_type>5</meta_type>
 				</name>
 			</second>
@@ -343,7 +223,7 @@
 					<count>0</count>
 					<item_version>0</item_version>
 				</package_path>
-				<type_name>unsigned long long</type_name>
+				<type_name>char</type_name>
 				<meta_type>5</meta_type>
 			</first>
 			<second>
@@ -357,7 +237,67 @@
 						<count>0</count>
 						<item_version>0</item_version>
 					</package_path>
-					<type_name>unsigned long long</type_name>
+					<type_name>char</type_name>
+					<meta_type>5</meta_type>
+				</name>
+			</second>
+		</item>
+		<item>
+			<first>
+				<model_name>std</model_name>
+				<external_package_path>
+					<count>0</count>
+					<item_version>0</item_version>
+				</external_package_path>
+				<package_path>
+					<count>0</count>
+					<item_version>0</item_version>
+				</package_path>
+				<type_name>string</type_name>
+				<meta_type>5</meta_type>
+			</first>
+			<second>
+				<name>
+					<model_name>std</model_name>
+					<external_package_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</external_package_path>
+					<package_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</package_path>
+					<type_name>string</type_name>
+					<meta_type>5</meta_type>
+				</name>
+			</second>
+		</item>
+		<item>
+			<first>
+				<model_name></model_name>
+				<external_package_path>
+					<count>0</count>
+					<item_version>0</item_version>
+				</external_package_path>
+				<package_path>
+					<count>0</count>
+					<item_version>0</item_version>
+				</package_path>
+				<type_name>unsigned short</type_name>
+				<meta_type>5</meta_type>
+			</first>
+			<second>
+				<name>
+					<model_name></model_name>
+					<external_package_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</external_package_path>
+					<package_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</package_path>
+					<type_name>unsigned short</type_name>
 					<meta_type>5</meta_type>
 				</name>
 			</second>
@@ -403,7 +343,7 @@
 					<count>0</count>
 					<item_version>0</item_version>
 				</package_path>
-				<type_name>unsigned short</type_name>
+				<type_name>unsigned long</type_name>
 				<meta_type>5</meta_type>
 			</first>
 			<second>
@@ -417,7 +357,97 @@
 						<count>0</count>
 						<item_version>0</item_version>
 					</package_path>
-					<type_name>unsigned short</type_name>
+					<type_name>unsigned long</type_name>
+					<meta_type>5</meta_type>
+				</name>
+			</second>
+		</item>
+		<item>
+			<first>
+				<model_name></model_name>
+				<external_package_path>
+					<count>0</count>
+					<item_version>0</item_version>
+				</external_package_path>
+				<package_path>
+					<count>0</count>
+					<item_version>0</item_version>
+				</package_path>
+				<type_name>unsigned char</type_name>
+				<meta_type>5</meta_type>
+			</first>
+			<second>
+				<name>
+					<model_name></model_name>
+					<external_package_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</external_package_path>
+					<package_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</package_path>
+					<type_name>unsigned char</type_name>
+					<meta_type>5</meta_type>
+				</name>
+			</second>
+		</item>
+		<item>
+			<first>
+				<model_name></model_name>
+				<external_package_path>
+					<count>0</count>
+					<item_version>0</item_version>
+				</external_package_path>
+				<package_path>
+					<count>0</count>
+					<item_version>0</item_version>
+				</package_path>
+				<type_name>int</type_name>
+				<meta_type>5</meta_type>
+			</first>
+			<second>
+				<name>
+					<model_name></model_name>
+					<external_package_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</external_package_path>
+					<package_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</package_path>
+					<type_name>int</type_name>
+					<meta_type>5</meta_type>
+				</name>
+			</second>
+		</item>
+		<item>
+			<first>
+				<model_name></model_name>
+				<external_package_path>
+					<count>0</count>
+					<item_version>0</item_version>
+				</external_package_path>
+				<package_path>
+					<count>0</count>
+					<item_version>0</item_version>
+				</package_path>
+				<type_name>long</type_name>
+				<meta_type>5</meta_type>
+			</first>
+			<second>
+				<name>
+					<model_name></model_name>
+					<external_package_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</external_package_path>
+					<package_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</package_path>
+					<type_name>long</type_name>
 					<meta_type>5</meta_type>
 				</name>
 			</second>
