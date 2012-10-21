@@ -42,6 +42,7 @@ const std::string boost_export("boost/serialization/export.hpp");
 const std::string boost_string("boost/serialization/string.hpp");
 const std::string pqxx_result_include("pqxx/result.hxx");
 const std::string pqxx_transaction_include("pqxx/transaction.hxx");
+const std::string sstream("sstream");
 const std::string std_string("string");
 const std::string iosfwd("iosfwd");
 const std::string algorithm("algorithm");
@@ -307,6 +308,11 @@ void cpp_inclusion_manager::append_std_dependencies(
     const bool is_serialization(ft == cpp_facet_types::serialization);
     if (is_header && is_serialization && qname.type_name() == std_string)
         il.system.push_back(boost_string);
+
+    const bool is_implementation(flt == cpp_file_types::implementation);
+    const bool is_test_data(ft == cpp_facet_types::test_data);
+    if (is_implementation && is_test_data && qname.type_name() == std_string)
+        il.system.push_back(sstream);
 }
 
 void cpp_inclusion_manager::append_relationship_dependencies(
