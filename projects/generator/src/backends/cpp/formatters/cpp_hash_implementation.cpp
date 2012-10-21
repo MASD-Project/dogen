@@ -58,6 +58,21 @@ file_formatter::shared_ptr hash_implementation::create(std::ostream& stream) {
     return file_formatter::shared_ptr(new hash_implementation(stream));
 }
 
+void hash_implementation::combine_function() {
+    stream_ << indenter_ << "template <typename HashableType>" << std::endl
+            << indenter_ << "inline void combine(std::size_t& seed, "
+            << "const HashableType& value)" << std::endl;
+
+    utility_.open_scope();
+    {
+        cpp_positive_indenter_scope s(indenter_);
+        stream_ << indenter_ << "std::hash<HashableType> hasher;" << std::endl
+                << indenter_ << "seed ^= hasher(value) + 0x9e3779b9 + "
+                << "(seed << 6) + (seed >> 2);" << std::endl;
+    }
+    utility_.close_scope();
+}
+
 void hash_implementation::hasher_hash_method(const class_view_model& vm) {
     stream_ << indenter_ << "std::size_t " << vm.name() << "_hasher::"
             << "hash(const "
@@ -67,9 +82,7 @@ void hash_implementation::hasher_hash_method(const class_view_model& vm) {
     {
         cpp_positive_indenter_scope s(indenter_);
 
-        stream_ << indenter_ << "using dogen::utility::hash::combine;"
-                << std::endl
-                << indenter_ << "std::size_t seed(0);" << std::endl;
+        stream_ << indenter_ << "std::size_t seed(0);" << std::endl;
 
         const auto parents(vm.parents());
         if (!parents.empty())
@@ -109,6 +122,14 @@ void hash_implementation::format(const file_view_model& vm) {
     includes.format(vm.system_includes(), is_system);
     includes.format(vm.user_includes(), is_user);
     utility_.blank_line();
+
+    {
+        namespace_helper nsh(stream_, std::list<std::string> { });
+        utility_.blank_line();
+        combine_function();
+        utility_.blank_line();
+    }
+    utility_.blank_line(2);
 
     {
         const class_view_model& cvm(*o);

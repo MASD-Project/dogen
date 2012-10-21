@@ -127,7 +127,7 @@ void hash_header::format(const file_view_model& vm) {
 
     const view_models::class_view_model& cvm(*o);
     {
-        namespace_helper helper1(stream_, cvm.namespaces());
+        namespace_helper nsh(stream_, cvm.namespaces());
         utility_.blank_line();
         hash_helper_class(cvm);
         utility_.blank_line();
@@ -137,7 +137,7 @@ void hash_header::format(const file_view_model& vm) {
     {
         std::list<std::string> namespaces;
         namespaces.push_back(std_ns);
-        namespace_helper ns_helper(stream_, namespaces);
+        namespace_helper nsh(stream_, namespaces);
 
         utility_.blank_line();
         hash_class(cvm);

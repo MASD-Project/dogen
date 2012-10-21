@@ -20,13 +20,22 @@
  */
 #include "dogen/all_primitives/hash/a_class_hash.hpp"
 #include "dogen/all_primitives/hash/versioned_key_hash.hpp"
-#include "dogen/utility/hash/combine.hpp"
+
+namespace {
+
+template <typename HashableType>
+inline void combine(std::size_t& seed, const HashableType& value)
+{
+    std::hash<HashableType> hasher;
+    seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
+}
+
+}
 
 namespace dogen {
 namespace all_primitives {
 
 std::size_t a_class_hasher::hash(const a_class& v) {
-    using dogen::utility::hash::combine;
     std::size_t seed(0);
 
     combine(seed, v.bool_property());

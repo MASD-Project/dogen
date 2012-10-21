@@ -19,13 +19,22 @@
  *
  */
 #include "dogen/disable_cmakelists/hash/unversioned_key_hash.hpp"
-#include "dogen/utility/hash/combine.hpp"
+
+namespace {
+
+template <typename HashableType>
+inline void combine(std::size_t& seed, const HashableType& value)
+{
+    std::hash<HashableType> hasher;
+    seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
+}
+
+}
 
 namespace dogen {
 namespace disable_cmakelists {
 
 std::size_t unversioned_key_hasher::hash(const unversioned_key& v) {
-    using dogen::utility::hash::combine;
     std::size_t seed(0);
 
     combine(seed, v.id());

@@ -20,14 +20,23 @@
  */
 #include "dogen/disable_complete_constructor/hash/package1/first_class_hash.hpp"
 #include "dogen/disable_complete_constructor/hash/versioned_key_hash.hpp"
-#include "dogen/utility/hash/combine.hpp"
+
+namespace {
+
+template <typename HashableType>
+inline void combine(std::size_t& seed, const HashableType& value)
+{
+    std::hash<HashableType> hasher;
+    seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
+}
+
+}
 
 namespace dogen {
 namespace disable_complete_constructor {
 namespace package1 {
 
 std::size_t first_class_hasher::hash(const first_class& v) {
-    using dogen::utility::hash::combine;
     std::size_t seed(0);
 
     combine(seed, v.public_attribute());

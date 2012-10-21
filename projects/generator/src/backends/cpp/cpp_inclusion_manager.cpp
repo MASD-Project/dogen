@@ -45,7 +45,6 @@ const std::string algorithm("algorithm");
 const std::string ostream("ostream");
 const std::string state_saver("boost/io/ios_state.hpp");
 const std::string functional("functional");
-const std::string hash_combine("dogen/utility/hash/combine.hpp");
 
 using dogen::generator::backends::cpp::cpp_facet_types;
 bool io_enabled(const std::set<cpp_facet_types>& f) {
@@ -290,13 +289,6 @@ append_implementation_dependencies(const cpp_facet_types ft,
     // transaction
     if (is_implementation && is_database)
         il.system.push_back(pqxx_transaction_include);
-
-    /*
-     * Dogen dependencies
-     */
-    // hash combine
-    if (is_implementation && is_hash)
-        il.user.push_back(hash_combine);
 }
 
 void cpp_inclusion_manager::append_relationship_dependencies(

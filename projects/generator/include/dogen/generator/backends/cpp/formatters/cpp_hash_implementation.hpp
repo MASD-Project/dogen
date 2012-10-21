@@ -57,6 +57,7 @@ public:
     static file_formatter::shared_ptr create(std::ostream& stream);
 
 private:
+    void combine_function();
     void hasher_hash_method(const class_view_model& vm);
 
 public:

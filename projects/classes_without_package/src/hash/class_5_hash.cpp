@@ -20,13 +20,22 @@
  */
 #include "dogen/classes_without_package/hash/class_5_hash.hpp"
 #include "dogen/classes_without_package/hash/versioned_key_hash.hpp"
-#include "dogen/utility/hash/combine.hpp"
+
+namespace {
+
+template <typename HashableType>
+inline void combine(std::size_t& seed, const HashableType& value)
+{
+    std::hash<HashableType> hasher;
+    seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
+}
+
+}
 
 namespace dogen {
 namespace classes_without_package {
 
 std::size_t class_5_hasher::hash(const class_5& v) {
-    using dogen::utility::hash::combine;
     std::size_t seed(0);
 
     combine(seed, v.versioned_key());

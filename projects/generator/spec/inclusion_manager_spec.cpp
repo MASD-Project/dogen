@@ -56,7 +56,6 @@ const std::string pqxx_result("result.hxx");
 const std::string pqxx_transaction("transaction.hxx");
 const std::string iosfwd("iosfwd");
 const std::string algorithm("algorithm");
-const std::string hash_combine("combine.hpp");
 const std::string generator_include("generator.hpp");
 const std::string sequence_include("sequence.hpp");
 
@@ -297,12 +296,11 @@ BOOST_AUTO_TEST_CASE(processing_one_pod_model_with_default_configuration_generat
     // implementation
     const auto iu(i[implementation_user]);
     BOOST_LOG_SEV(lg, debug) << "implementation user dependencies: " << iu;
-    BOOST_REQUIRE(iu.size() == 3);
+    BOOST_REQUIRE(iu.size() == 2);
     for (const auto s : iu) {
         BOOST_CHECK(
             (boost::contains(s, pod_name) && boost::contains(s, hash)) ||
-            (boost::contains(s, versioned_key) && boost::contains(s, hash)) ||
-            (boost::ends_with(s, hash_combine)));
+            (boost::contains(s, versioned_key) && boost::contains(s, hash)));
     }
 
     const auto is(i[implementation_system]);
