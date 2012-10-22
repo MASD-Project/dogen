@@ -44,18 +44,21 @@ public:
     factory& operator=(const factory&) = default;
 
 public:
-    typedef file_formatter::shared_ptr production_type;
+    typedef file_formatter::shared_ptr result_type;
 
 public:
     factory(config::cpp_settings settings, bool disable_io)
         : settings_(settings), disable_io_(disable_io) { }
 
-public:
-    production_type
-    create(std::ostream& stream, cpp_facet_types facet_type) const;
+private:
+    result_type create_main_formatter(std::ostream& s, cpp_facet_types ft,
+        cpp_file_types flt) const;
+    result_type create_includer_formatter(std::ostream& s, cpp_facet_types ft) const;
+    result_type create_fwd_decl_formatter(std::ostream& s, cpp_facet_types ft) const;
 
-    production_type create(std::ostream& stream, cpp_facet_types facet_type,
-        cpp_file_types file_type) const;
+public:
+    result_type create(std::ostream& s, cpp_facet_types ft,
+        cpp_file_types flt, cpp_aspect_types at) const;
 
 private:
     const config::cpp_settings settings_;

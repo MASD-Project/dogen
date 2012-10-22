@@ -18,47 +18,33 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_GENERATOR_BACKENDS_FACTORY_HPP
-#define DOGEN_GENERATOR_BACKENDS_FACTORY_HPP
+#ifndef DOGEN_GENERATOR_BACKENDS_CPP_FORMATTERS_PRODUCTION_FAILURE_HPP
+#define DOGEN_GENERATOR_BACKENDS_CPP_FORMATTERS_PRODUCTION_FAILURE_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/generator/config/settings.hpp"
-#include "dogen/generator/backends/backend.hpp"
-#include "dogen/sml/domain/model.hpp"
+#include "dogen/utility/exception/utility_exception.hpp"
 
 namespace dogen {
 namespace generator {
 namespace backends {
+namespace cpp {
+namespace formatters {
 
-class factory {
+/**
+ * @brief A fatal error has occurred during option parsing.
+ */
+class production_failure : public utility::exception::exception {
 public:
-    factory() = delete;
-    factory(const factory&) = default;
-    ~factory() = default;
-    factory(factory&&) = default;
-    factory& operator=(const factory&) = default;
+    production_failure(std::string message)
+        : utility::exception::exception(message) { }
+    production_failure() { }
 
-public:
-    typedef std::vector<backend::ptr> result_type;
-
-public:
-    factory(sml::model model, config::settings settings)
-        : settings_(settings), model_(model) { }
-
-private:
-    void log_cpp_backend_disabled() const;
-
-public:
-    result_type create() const;
-
-private:
-    const config::settings settings_;
-    const sml::model model_;
+    virtual ~production_failure() throw() {}
 };
 
-} } }
+} } } } }
 
 #endif

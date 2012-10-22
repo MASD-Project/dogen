@@ -29,6 +29,7 @@ const std::string main("\"cpp_aspect_types::main\"");
 const std::string includers("\"cpp_aspect_types::includers\"");
 const std::string versioned_key("\"cpp_aspect_types::versioned_key\"");
 const std::string unversioned_key("\"cpp_aspect_types::unversioned_key\"");
+const std::string forward_decls("\"cpp_aspect_types::forward_decls\"");
 const std::string error_message("\"Invalid or unexpected aspect type\"");
 
 }
@@ -50,6 +51,8 @@ std::ostream& operator<<(std::ostream& stream, cpp_aspect_types value) {
         return stream << versioned_key;
     case cpp_aspect_types::unversioned_key:
         return stream << unversioned_key;
+    case cpp_aspect_types::forward_decls:
+        return stream << forward_decls;
     default:
         break;
     }

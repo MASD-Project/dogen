@@ -348,14 +348,15 @@ location_request_factory(cpp_facet_types facet_type, cpp_file_types file_type,
 }
 
 file_view_model sml_to_cpp_view_model::
-transform_file(cpp_facet_types ft, cpp_file_types flt, const sml::pod& pod) {
-    const sml::qualified_name name(pod.name());
+transform_file(cpp_facet_types ft, cpp_file_types flt, cpp_aspect_types at,
+    const sml::pod& p) {
+    const sml::qualified_name name(p.name());
     const std::list<std::string> ns(join_namespaces(name));
 
     file_view_model r;
     r.facet_type(ft);
     r.file_type(flt);
-    r.aspect_type(cpp_aspect_types::main);
+    r.aspect_type(at);
 
     const auto i(qname_to_class_.find(name));
     if (i == qname_to_class_.end()) {
@@ -376,8 +377,7 @@ transform_file(cpp_facet_types ft, cpp_file_types flt, const sml::pod& pod) {
         inclusion_manager_.register_header(ft, rp);
     }
 
-    const cpp_aspect_types at(cpp_aspect_types::main);
-    const auto includes(inclusion_manager_.includes_for_pod(pod, ft, flt, at));
+    const auto includes(inclusion_manager_.includes_for_pod(p, ft, flt, at));
     r.system_includes(includes.system);
     r.user_includes(includes.user);
     return r;
@@ -396,6 +396,10 @@ bool sml_to_cpp_view_model::
 has_implementation(const cpp_facet_types ft, const sml::pod& p) const {
     return has_implementation(ft) || (ft == cpp_facet_types::serialization &&
         (p.is_parent() || p.parent_name()));
+}
+
+bool sml_to_cpp_view_model::has_forward_decls(const cpp_facet_types ft) const {
+    return ft == cpp_facet_types::domain;
 }
 
 void sml_to_cpp_view_model::setup_qualified_name_to_class_view_model_map() {
@@ -431,10 +435,11 @@ void sml_to_cpp_view_model::setup_qualified_name_to_class_view_model_map() {
 
 std::vector<file_view_model> sml_to_cpp_view_model::transform_pods() {
     std::vector<file_view_model> r;
-    auto lambda([&](cpp_facet_types f, cpp_file_types ft, sml::pod p) {
+    auto lambda([&](cpp_facet_types ft, cpp_file_types flt, cpp_aspect_types at,
+            const sml::pod& p) {
             const std::string n(p.name().type_name());
-            log_generating_file(f, cpp_aspect_types::main, ft, n);
-            r.push_back(transform_file(f, ft, p));
+            log_generating_file(ft, at, flt, n);
+            r.push_back(transform_file(ft, flt, at, p));
         });
 
     const auto pods(model_.pods());
@@ -444,11 +449,18 @@ std::vector<file_view_model> sml_to_cpp_view_model::transform_pods() {
         if (!p.generate())
             continue;
 
+        const auto header(cpp_file_types::header);
+        const auto implementation(cpp_file_types::implementation);
+        const auto main(cpp_aspect_types::main);
+        // const auto forward_decls(cpp_aspect_types::forward_decls);
         for (const auto ft: settings_.enabled_facets()) {
-            lambda(ft, cpp_file_types::header, p);
+            lambda(ft, header, main, p);
 
             if (has_implementation(ft, p))
-                lambda(ft, cpp_file_types::implementation, p);
+                lambda(ft, implementation, main, p);
+
+            // if (has_forward_decls(ft))
+            //     lambda(ft, header, forward_decls, p);
         }
     }
 

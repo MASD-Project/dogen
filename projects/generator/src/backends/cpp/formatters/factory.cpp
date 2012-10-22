@@ -18,7 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/utility/exception/invalid_enum_value.hpp"
+#include <sstream>
+#include "dogen/generator/backends/cpp/formatters/production_failure.hpp"
 #include "dogen/generator/backends/cpp/formatters/cpp_facet_includer.hpp"
 #include "dogen/generator/backends/cpp/formatters/cpp_domain_header.hpp"
 #include "dogen/generator/backends/cpp/formatters/cpp_domain_implementation.hpp"
@@ -33,11 +34,12 @@
 #include "dogen/generator/backends/cpp/formatters/cpp_serialization_implementation.hpp"
 #include "dogen/generator/backends/cpp/formatters/cpp_database_header.hpp"
 #include "dogen/generator/backends/cpp/formatters/cpp_database_implementation.hpp"
+#include "dogen/generator/backends/cpp/formatters/cpp_domain_forward_decls_header.hpp"
 #include "dogen/generator/backends/cpp/formatters/factory.hpp"
 
 namespace {
 
-const std::string invalid_facet_types_enum("Invalid value for cpp_facet_types");
+const std::string production_failure_msg("Formatter factory not setup for: ");
 
 }
 
@@ -47,63 +49,102 @@ namespace backends {
 namespace cpp {
 namespace formatters {
 
-factory::production_type
-factory::create(std::ostream& stream, cpp_facet_types facet_type) const {
-    return facet_includer::create(stream, facet_type);
-}
+factory::result_type
+factory::create_main_formatter(std::ostream& s, cpp_facet_types ft,
+    cpp_file_types flt) const {
 
-factory::production_type factory::
-create(std::ostream& stream, cpp_facet_types facet_type,
-    cpp_file_types file_type) const {
-    switch (facet_type) {
+    switch (ft) {
     case cpp_facet_types::domain:
-        if (file_type == cpp_file_types::header)
-            return domain_header::create(stream,
+        if (flt == cpp_file_types::header)
+            return domain_header::create(s,
                 settings_.disable_complete_constructor(),
                 settings_.use_integrated_io(),
                 disable_io_);
         else
-            return domain_implementation::create(stream,
+            return domain_implementation::create(s,
                 settings_.disable_complete_constructor(),
                 settings_.use_integrated_io(),
                 disable_io_);
         break;
     case cpp_facet_types::io:
-        if (file_type == cpp_file_types::header)
-            return io_header::create(stream);
+        if (flt == cpp_file_types::header)
+            return io_header::create(s);
         else
-            return io_implementation::create(stream);
+            return io_implementation::create(s);
         break;
     case cpp_facet_types::hash:
-        if (file_type == cpp_file_types::header)
-            return hash_header::create(stream);
+        if (flt == cpp_file_types::header)
+            return hash_header::create(s);
         else
-            return hash_implementation::create(stream);
+            return hash_implementation::create(s);
         break;
     case cpp_facet_types::serialization:
-        if (file_type == cpp_file_types::header)
-            return serialization_header::create(stream,
+        if (flt == cpp_file_types::header)
+            return serialization_header::create(s,
                 settings_.disable_xml_serialization());
         else
-            return serialization_implementation::create(stream);
+            return serialization_implementation::create(s);
         break;
     case cpp_facet_types::test_data:
-        if (file_type == cpp_file_types::header)
-            return generator_header::create(stream);
+        if (flt == cpp_file_types::header)
+            return generator_header::create(s);
         else
-            return generator_implementation::create(stream);
+            return generator_implementation::create(s);
         break;
     case cpp_facet_types::database:
-        if (file_type == cpp_file_types::header)
-            return database_header::create(stream);
+        if (flt == cpp_file_types::header)
+            return database_header::create(s);
         else
-            return database_implementation::create(stream);
+            return database_implementation::create(s);
         break;
 
-    default:
-        using utility::exception::invalid_enum_value;
-        throw invalid_enum_value(invalid_facet_types_enum);
-    }
+    default: {
+        std::ostringstream s;
+        s << production_failure_msg << ft << ", " << flt;
+        throw production_failure(s.str());
+    } }
+}
+
+    factory::result_type factory::
+create_includer_formatter(std::ostream& s, cpp_facet_types ft) const {
+    return facet_includer::create(s, ft);
+}
+
+factory::result_type factory::
+create_fwd_decl_formatter(std::ostream& s, cpp_facet_types ft) const {
+    switch (ft) {
+    case cpp_facet_types::domain:
+        return domain_forward_decls_header::create(s);
+        break;
+
+    default: {
+        std::ostringstream s;
+        s << production_failure_msg << ft;
+        throw production_failure(s.str());
+    } }
+}
+
+factory::result_type
+factory::create(std::ostream& s, cpp_facet_types ft, cpp_file_types flt,
+    cpp_aspect_types at) const {
+
+    switch (at) {
+    case cpp_aspect_types::versioned_key:
+    case cpp_aspect_types::unversioned_key:
+    case cpp_aspect_types::main:
+        return create_main_formatter(s, ft, flt);
+        break;
+    case cpp_aspect_types::includers:
+        return create_includer_formatter(s, ft);
+        break;
+    case cpp_aspect_types::forward_decls:
+        return create_fwd_decl_formatter(s, ft);
+        break;
+    default: {
+        std::ostringstream s;
+        s << production_failure_msg << ft << ", " << flt << ", " << at;
+        throw production_failure(s.str());
+    } }
 }
 
 } } } } }

@@ -86,6 +86,11 @@ private:
     /**@}*/
 
     /**
+     * @brief Returns true if facet has forward declarations, false otherwise.
+     */
+    bool has_forward_decls(const cpp_facet_types ft) const;
+
+    /**
      * @brief Transforms a relative path to a header file into a C++
      * header guard name.
      */
@@ -116,8 +121,8 @@ private:
     /**
      * @brief Transforms a SML pod into a C++ file view.
      */
-    file_view_model transform_file(cpp_facet_types facet_type,
-        cpp_file_types file_type, const sml::pod& pod);
+    file_view_model transform_file(cpp_facet_types ft, cpp_file_types flt,
+        cpp_aspect_types at, const sml::pod& p);
 
     /**
      * @brief Transforms all versioned and unversioned keys.

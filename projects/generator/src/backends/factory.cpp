@@ -34,8 +34,8 @@ void factory::log_cpp_backend_disabled() const {
     BOOST_LOG_SEV(lg, info) << "C++ backend is disabled, skipping it.";
 }
 
-factory::production_type factory::create() const {
-    production_type r;
+factory::result_type factory::create() const {
+    result_type r;
 
     if (settings_.cpp().disable_backend())
         log_cpp_backend_disabled();

@@ -33,7 +33,6 @@ namespace {
 
 static logger lg(logger_factory("cpp_backend"));
 
-const std::string unsupported_aspect_type("Unsupported aspect type");
 const std::string domain_facet_must_be_enabled("Domain facet must be enabled");
 const std::string integrated_io_incompatible_with_io_facet(
     "Integrated IO cannot be used with the IO facet");
@@ -109,28 +108,14 @@ backend::value_entry_type cpp_backend::generate_cmakelists() const {
 backend::value_entry_type cpp_backend::
 generate_file_view_model(const view_models::file_view_model& vm) const {
     log_formating_view(vm.file_path().string());
-    std::ostringstream stream;
     const auto f(settings_.enabled_facets());
     const bool disable_io(f.find(cpp_facet_types::io) == f.end());
     formatters::factory factory(settings_, disable_io);
     formatters::file_formatter::shared_ptr ff;
-
-    switch (vm.aspect_type()) {
-    case cpp_aspect_types::versioned_key:
-    case cpp_aspect_types::unversioned_key:
-    case cpp_aspect_types::main:
-        ff = factory.create(stream, vm.facet_type(), vm.file_type());
-        break;
-    case cpp_aspect_types::includers:
-        ff = factory.create(stream, vm.facet_type());
-        break;
-    default:
-        using dogen::utility::exception::invalid_enum_value;
-        throw invalid_enum_value(unsupported_aspect_type);
-    }
-
+    std::ostringstream s;
+    ff = factory.create(s, vm.facet_type(), vm.file_type(), vm.aspect_type());
     ff->format(vm);
-    return std::make_pair(vm.file_path(), stream.str());
+    return std::make_pair(vm.file_path(), s.str());
 }
 
 backend::value_type cpp_backend::generate_file_view_models() const {
