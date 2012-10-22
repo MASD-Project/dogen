@@ -33,8 +33,10 @@
 #include <boost/archive/xml_iarchive.hpp>
 #include <boost/archive/binary_oarchive.hpp>
 #include <boost/archive/binary_iarchive.hpp>
+#ifdef __linux__
 #include "eos/portable_iarchive.hpp"
 #include "eos/portable_oarchive.hpp"
+#endif
 #include "dogen/utility/io/jsonify_io.hpp"
 #include "dogen/utility/log/logger.hpp"
 
