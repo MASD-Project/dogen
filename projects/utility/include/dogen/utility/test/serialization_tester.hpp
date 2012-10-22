@@ -33,8 +33,8 @@
 #include <boost/archive/xml_iarchive.hpp>
 #include <boost/archive/binary_oarchive.hpp>
 #include <boost/archive/binary_iarchive.hpp>
-// #include "eos/portable_iarchive.hpp"
-// #include "eos/portable_oarchive.hpp"
+#include "eos/portable_iarchive.hpp"
+#include "eos/portable_oarchive.hpp"
 #include "dogen/utility/io/jsonify_io.hpp"
 #include "dogen/utility/log/logger.hpp"
 
@@ -121,12 +121,12 @@ public:
     /**
      * @brief Test round-trip using a EOS portable archive.
      */
-    static void eos_roundtrip_produces_the_same_entity(const entity_type&) {
-        // using namespace dogen::utility::log;
-        // logger lg(logger_factory("serialization_tester"));
-        // BOOST_LOG_SEV(lg, debug) << "Portable binary serialization: ";
-        // roundtrip_produces_the_same_entity<eos::portable_iarchive,
-        //     eos::portable_oarchive>(a);
+    static void eos_roundtrip_produces_the_same_entity(const entity_type& a) {
+        using namespace dogen::utility::log;
+        logger lg(logger_factory("serialization_tester"));
+        BOOST_LOG_SEV(lg, debug) << "Portable binary serialization: ";
+        roundtrip_produces_the_same_entity<eos::portable_iarchive,
+                                           eos::portable_oarchive>(a);
     }
 
     /**
@@ -147,8 +147,8 @@ public:
         using namespace boost::archive;
         roundtrip_produces_the_same_entity<text_iarchive, text_oarchive>(a);
         roundtrip_produces_the_same_entity<binary_iarchive, binary_oarchive>(a);
-        // roundtrip_produces_the_same_entity<eos::portable_iarchive,
-        //     eos::portable_oarchive>(a);
+        roundtrip_produces_the_same_entity<eos::portable_iarchive,
+            eos::portable_oarchive>(a);
     }
 };
 
