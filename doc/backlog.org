@@ -10,6 +10,15 @@ This file contains all stories that haven't been assigned to a sprint.
 
 Stories that we intend to look at, at some point.
 
+*** Remove manager post-fix
+
+We should rename location manager to locator and inclusion manager to
+includer. The word manager does not add any more meaning to their
+responsibilities. We need to find a clearer word to describe what we
+call includer at the moment; a header that includes a set of other
+headers - for example all headers for facet X or all headers for
+domain model Y. Header aggregator, etc.
+
 *** Test model sanity checks fail for enable facet serialisation
 
 For some reason we are unable to compile the serialisation test for
