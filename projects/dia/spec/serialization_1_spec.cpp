@@ -30,7 +30,7 @@
 namespace {
 
 const std::string test_module("dia");
-const std::string test_suite("serialization_spec");
+const std::string test_suite("serialization_1_spec");
 
 /**
  * @brief Performs a serialisation round-trip using a test object
@@ -47,7 +47,7 @@ void rountrip_type() {
 
 }
 
-BOOST_AUTO_TEST_SUITE(serialization)
+BOOST_AUTO_TEST_SUITE(serialization_1)
 
 BOOST_AUTO_TEST_CASE(roundtrips_of_the_same_type_produce_the_same_entity) {
     SETUP_TEST_LOG_SOURCE("roundtrips_of_the_same_type_produce_the_same_entity");
@@ -62,14 +62,6 @@ BOOST_AUTO_TEST_CASE(roundtrips_of_the_same_type_produce_the_same_entity) {
     rountrip_type<point_sequence>();
     rountrip_type<boolean_sequence>();
     rountrip_type<simple_attribute_sequence>();
-    rountrip_type<composite_attribute_sequence>();
-    rountrip_type<simple_composite_sequence>();
-    rountrip_type<composite_composite_sequence>();
-    rountrip_type<child_node_sequence>();
-    rountrip_type<object_sequence>();
-    rountrip_type<layer_sequence>();
-    rountrip_type<diagram_data_sequence>();
-    rountrip_type<diagram_sequence>();
 }
 
 BOOST_AUTO_TEST_SUITE_END()
