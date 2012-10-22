@@ -152,8 +152,10 @@ public:
         using namespace boost::archive;
         roundtrip_produces_the_same_entity<text_iarchive, text_oarchive>(a);
         roundtrip_produces_the_same_entity<binary_iarchive, binary_oarchive>(a);
+#ifdef __linux__
         roundtrip_produces_the_same_entity<eos::portable_iarchive,
             eos::portable_oarchive>(a);
+#endif
     }
 };
 
