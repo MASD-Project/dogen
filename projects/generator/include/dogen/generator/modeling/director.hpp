@@ -49,7 +49,7 @@ public:
     director& operator=(const director&) = default;
 
 public:
-    explicit director(config::settings settings);
+    explicit director(const config::settings& settings);
 
 private:
     /**
@@ -60,7 +60,7 @@ private:
      * @param model a textual representation for either SML or Dia.
      */
     std::string extension(utility::serialization::archive_types archive_type,
-        std::string model) const;
+        const std::string& model) const;
 
     /**
      * @brief Returns true if configured to save Dia models, false
@@ -74,14 +74,14 @@ private:
      * @param d Dia model to save.
      * @param file_name name of the file to save.
      */
-    void save_diagram(dia::diagram d, std::string file_name) const;
+    void save_diagram(const dia::diagram& d, const std::string& file_name) const;
 
     /**
      * @brief Reads a Dia diagram from the filesystem.
      *
      * @param path location of the diagram to read.
      */
-    dia::diagram hydrate_diagram(boost::filesystem::path path) const;
+    dia::diagram hydrate_diagram(const boost::filesystem::path& path) const;
 
     /**
      * @brief Returns true if configured to save SML models, false
@@ -94,19 +94,33 @@ private:
      *
      * @param m SML model to save.
      */
-    void save_model(sml::model m, std::string prefix) const;
+    void save_model(const sml::model& m, const std::string& prefix) const;
+
+    /**
+     * @brief Creates a versioned or unversioned key system pod.
+     */
+    sml::pod create_key_system_pod(const sml::model& m,
+        const bool is_versioned) const;
+
+    /**
+     * @brief Inject system defined types into the model.
+     *
+     * @param m SML model to operate on.
+     */
+    void inject_system_types(sml::model& m) const;
 
     /**
      * @brief Converts a Dia diagram to its SML representation.
      */
     sml::model
-    to_sml(dia::diagram d, std::string file_name, bool is_target) const;
+    to_sml(const dia::diagram& d, const std::string& file_name,
+        const bool is_target) const;
 
     /**
      * @brief Returns true if there are any types that require code
      * generation, false otherwise.
      */
-    bool has_generatable_types(sml::model m) const;
+    bool has_generatable_types(const sml::model& m) const;
 
 public:
     /**

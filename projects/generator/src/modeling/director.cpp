@@ -44,6 +44,11 @@ const std::string text_extension(".txt");
 const std::string binary_extension(".bin");
 const std::string dia_model("dia");
 const std::string sml_model("sml");
+const std::string versioned_name("versioned_key");
+const std::string unversioned_name("unversioned_key");
+const std::string uint_name("unsigned int");
+const std::string id_name("id");
+const std::string version_name("version");
 const std::string invalid_archive_type("Invalid or unexpected archive type");
 
 }
@@ -52,12 +57,12 @@ namespace dogen {
 namespace generator {
 namespace modeling {
 
-director::director(config::settings settings)
+director::director(const config::settings& settings)
     : settings_(settings), verbose_(settings_.troubleshooting().verbose()) { }
 
 std::string director::
 extension(utility::serialization::archive_types archive_type,
-    std::string model) const {
+    const std::string& model) const {
     using utility::serialization::archive_types;
     switch (archive_type) {
     case archive_types::xml:
@@ -77,7 +82,8 @@ bool director::is_save_dia_model_enabled() const {
         utility::serialization::archive_types::invalid;
 }
 
-void director::save_diagram(dia::diagram d, std::string name) const {
+void director::
+save_diagram(const dia::diagram& d, const std::string& name) const {
     if (!is_save_dia_model_enabled())
         return;
 
@@ -95,7 +101,7 @@ void director::save_diagram(dia::diagram d, std::string name) const {
 }
 
 dia::diagram
-director::hydrate_diagram(boost::filesystem::path path) const {
+director::hydrate_diagram(const boost::filesystem::path& path) const {
     dia::xml::hydrator h(path);
     dia::diagram r(h.hydrate());
     save_diagram(r, path.stem().string());
@@ -107,7 +113,8 @@ bool director::is_save_sml_model_enabled() const {
         utility::serialization::archive_types::invalid;
 }
 
-void director::save_model(sml::model m, std::string prefix) const {
+void director::
+save_model(const sml::model& m, const std::string& prefix) const {
     if (!is_save_sml_model_enabled())
         return;
 
@@ -124,8 +131,70 @@ void director::save_model(sml::model m, std::string prefix) const {
     xml_serialize<sml::model>(p, m);
 }
 
+sml::pod director::
+create_key_system_pod(const sml::model& m, const bool is_versioned) const {
+    sml::qualified_name qn;
+    qn.type_name(is_versioned ? versioned_name : unversioned_name);
+    qn.model_name(m.name());
+    qn.external_package_path(m.external_package_path());
+    qn.meta_type(sml::meta_types::pod);
+
+    sml::pod r;
+    r.name(qn);
+    r.generate(true);
+
+    const auto vtc(sml::category_types::versioned_key);
+    const auto uvtc(sml::category_types::unversioned_key);
+    r.category_type(is_versioned ? vtc : uvtc);
+
+    auto props(r.properties());
+
+    sml::qualified_name uint_qn;
+    uint_qn.type_name(uint_name);
+    uint_qn.meta_type(sml::meta_types::primitive);
+
+    sml::property id;
+    id.name(id_name);
+    id.type_name(uint_qn);
+    props.push_back(id);
+
+    if (is_versioned) {
+        sml::property version;
+        version.name(version_name);
+        version.type_name(uint_qn);
+        props.push_back(version);
+    }
+    r.properties(props);
+    return r;
+}
+
+void director::inject_system_types(sml::model& m) const {
+    const bool is_versioned(true);
+    const auto versioned_pod(create_key_system_pod(m, is_versioned));
+
+    sml::property vk_prop;
+    vk_prop.name(versioned_name);
+    vk_prop.type_name(versioned_pod.name());
+
+    auto pods(m.pods());
+    for (auto pair : pods) {
+        auto& pod(pair.second);
+        auto props(pod.properties());
+        props.push_back(vk_prop);
+        pod.properties(props);
+    }
+
+    pods.insert(std::make_pair(versioned_pod.name(), versioned_pod));
+
+    const auto unversioned_pod(create_key_system_pod(m, !is_versioned));
+    pods.insert(std::make_pair(unversioned_pod.name(), unversioned_pod));
+
+    m.pods(pods);
+}
+
 sml::model director::
-to_sml(dia::diagram d, std::string file_name, bool is_target) const {
+to_sml(const dia::diagram& d, const std::string& file_name,
+    const bool is_target) const {
     const std::string epp(settings_.modeling().external_package_path());
     const std::string name(settings_.modeling().disable_model_package() ?
         empty : file_name);
@@ -134,11 +203,14 @@ to_sml(dia::diagram d, std::string file_name, bool is_target) const {
     dia_to_sml dia_to_sml(d, name, epp, is_target, verbose_);
 
     sml::model m(dia_to_sml.transform());
+    // if (is_target)
+    //     inject_system_types(m);
+
     save_model(m, empty);
     return std::move(m);
 }
 
-bool director::has_generatable_types(sml::model m) const {
+bool director::has_generatable_types(const sml::model& m) const {
     bool r(false);
 
     for (const auto p : m.pods()) {

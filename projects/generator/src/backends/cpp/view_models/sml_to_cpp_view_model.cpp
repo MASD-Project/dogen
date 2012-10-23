@@ -357,6 +357,7 @@ transform_file(cpp_facet_types ft, cpp_file_types flt, cpp_aspect_types at,
     r.facet_type(ft);
     r.file_type(flt);
     r.aspect_type(at);
+    r.category_type(p.category_type());
 
     const auto i(qname_to_class_.find(name));
     if (i == qname_to_class_.end()) {

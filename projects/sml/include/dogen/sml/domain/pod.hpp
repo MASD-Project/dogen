@@ -67,6 +67,8 @@ public:
      * not.
      * @param is_parent If true, this pod is the parent of another pod
      * in this model.
+     * @param category_type Whether the type is user defined or one of
+     * the well known system types.
      */
     pod(qualified_name name,
         std::vector<dogen::sml::property> properties,
