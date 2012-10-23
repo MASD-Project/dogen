@@ -30,7 +30,6 @@
 #include "dogen/generator/backends/cpp/formatters/cpp_indenter.hpp"
 #include "dogen/generator/backends/cpp/formatters/cpp_utility.hpp"
 #include "dogen/generator/backends/cpp/view_models/file_view_model.hpp"
-#include "dogen/generator/backends/cpp/formatters/file_formatter.hpp"
 
 namespace dogen {
 namespace generator {
@@ -38,7 +37,7 @@ namespace backends {
 namespace cpp {
 namespace formatters {
 
-class class_forward_declaration : public file_formatter {
+class class_forward_declaration {
 public:
     typedef view_models::class_view_model class_view_model;
     typedef view_models::file_view_model file_view_model;
@@ -55,10 +54,7 @@ public:
     virtual ~class_forward_declaration() noexcept {}
 
 public:
-    static file_formatter::shared_ptr create(std::ostream& stream);
-
-public:
-    virtual void format(const file_view_model& vm) override;
+    void format(const class_view_model& vm, cpp_facet_types ft);
 
 private:
     std::ostream& stream_;

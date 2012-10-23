@@ -97,8 +97,9 @@ private:
     std::string
     to_header_guard_name(const boost::filesystem::path& relative_path) const;
 
-    cpp_location_request location_request_factory(cpp_facet_types facet_type,
-        cpp_file_types file_type, sml::qualified_name name) const;
+    cpp_location_request location_request_factory(cpp_facet_types ft,
+        cpp_file_types flt, cpp_aspect_types at,
+        const sml::qualified_name& n) const;
 
     /**
      * @brief Generate a class view model for a given key type.

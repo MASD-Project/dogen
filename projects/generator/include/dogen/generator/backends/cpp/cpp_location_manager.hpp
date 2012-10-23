@@ -32,6 +32,7 @@
 #include "dogen/generator/backends/cpp/cpp_location_request.hpp"
 #include "dogen/generator/backends/cpp/cpp_facet_types.hpp"
 #include "dogen/generator/backends/cpp/cpp_file_types.hpp"
+#include "dogen/generator/backends/cpp/cpp_aspect_types.hpp"
 
 namespace dogen {
 namespace generator {
@@ -62,6 +63,7 @@ public:
 private:
     std::string facet_directory(cpp_facet_types facet) const;
     std::string facet_postfix(cpp_facet_types facet) const;
+    std::string aspect_postfix(cpp_aspect_types aspect) const;
     boost::filesystem::path file_type_directory(cpp_file_types file_type) const;
     std::string extension(cpp_file_types file_type) const;
 

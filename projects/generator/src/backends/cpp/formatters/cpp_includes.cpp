@@ -40,7 +40,8 @@ namespace backends {
 namespace cpp {
 namespace formatters {
 
-cpp_includes::cpp_includes(std::ostream& stream) : stream_(stream) {}
+cpp_includes::cpp_includes(std::ostream& stream, const bool blank_line)
+    : stream_(stream), utility_(stream_, indenter_), blank_line_(blank_line) { }
 
 void cpp_includes::format(std::list<std::string> v, bool is_system) {
     v.sort();
@@ -53,8 +54,17 @@ void cpp_includes::format(std::list<std::string> v, bool is_system) {
 }
 
 void cpp_includes::format(const file_view_model& vm) {
+    const auto sys(vm.system_includes());
+    const auto usr(vm.user_includes());
+
+    if (sys.empty() && usr.empty())
+        return;
+
     format(vm.system_includes(), is_system);
     format(vm.user_includes(), is_user);
+
+    if (blank_line_)
+        utility_.blank_line();
 }
 
 } } } } }

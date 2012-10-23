@@ -30,6 +30,7 @@
 #include <boost/filesystem/path.hpp>
 #include "dogen/generator/backends/cpp/cpp_facet_types.hpp"
 #include "dogen/generator/backends/cpp/cpp_file_types.hpp"
+#include "dogen/generator/backends/cpp/cpp_aspect_types.hpp"
 
 namespace dogen {
 namespace generator {
@@ -45,7 +46,8 @@ public:
 
     cpp_location_request() :
         facet_type_(cpp_facet_types::invalid),
-        file_type_(cpp_file_types::invalid) { }
+        file_type_(cpp_file_types::invalid),
+        aspect_type_(cpp_aspect_types::invalid) { }
 
 public:
     void facet_type(cpp_facet_types value) { facet_type_ = value; }
@@ -53,6 +55,9 @@ public:
 
     void file_type(cpp_file_types value) { file_type_ = value; }
     cpp_file_types file_type() const { return file_type_; }
+
+    void aspect_type(cpp_aspect_types value) { aspect_type_ = value; }
+    cpp_aspect_types aspect_type() const { return aspect_type_; }
 
     void model_name(std::string value) { model_name_ = value; }
     std::string model_name() const { return model_name_; }
@@ -74,6 +79,7 @@ public:
 private:
     cpp_facet_types facet_type_;
     cpp_file_types file_type_;
+    cpp_aspect_types aspect_type_;
     std::string model_name_;
     std::list<std::string> external_package_path_;
     std::list<std::string> package_path_;

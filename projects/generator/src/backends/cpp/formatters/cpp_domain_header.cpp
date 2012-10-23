@@ -21,6 +21,7 @@
 #include <ostream>
 #include "dogen/generator/generation_failure.hpp"
 #include "dogen/utility/exception/invalid_enum_value.hpp"
+#include "dogen/generator/backends/cpp/formatters/cpp_class_forward_declaration.hpp"
 #include "dogen/generator/backends/cpp/formatters/cpp_qualified_name.hpp"
 #include "dogen/generator/backends/cpp/formatters/cpp_licence.hpp"
 #include "dogen/generator/backends/cpp/formatters/cpp_header_guards.hpp"
@@ -62,7 +63,8 @@ create(std::ostream& stream, bool disable_complete_constructor,
             disable_complete_constructor, use_integrated_io, disable_io));
 }
 
-void domain_header::inserter_operator(const class_view_model& vm) {
+void domain_header::
+inserter_operator(const class_view_model& vm) {
     if (!use_integrated_io_ || disable_io_)
         return;
 
@@ -71,7 +73,14 @@ void domain_header::inserter_operator(const class_view_model& vm) {
     utility_.blank_line();
 }
 
-void domain_header::swap_method(const class_view_model& vm) {
+void domain_header::serializer_forward_declaration(const class_view_model& vm) {
+    stream_ << indenter_ << "class " << vm.name() << "_serializer;"
+            << std::endl;
+    utility_.blank_line();
+}
+
+void domain_header::
+swap_method(const class_view_model& vm) {
     // swap overload is only available in leaf classes - MEC++-33
     if (vm.all_properties().empty() || vm.is_parent())
         return;
@@ -101,29 +110,57 @@ void domain_header::swap_method(const class_view_model& vm) {
 }
 
 void domain_header::
-class_declaration(const cpp_aspect_types at, const sml::category_types ct,
-    const class_view_model& vm) {
+class_declaration(const sml::category_types ct, const class_view_model& vm) {
 
     using utility::exception::invalid_enum_value;
-    if (at == cpp_aspect_types::main) {
-
-        if (ct == sml::category_types::versioned_key ||
-            ct == sml::category_types::unversioned_key) {
-            const bool is_versioned(ct == sml::category_types::versioned_key);
-            cpp_key_class_declaration
-                f(stream_, disable_complete_constructor_, is_versioned,
-                    disable_io_);
-            f.format(vm);
-            return;
-        } else if (ct == sml::category_types::user_defined) {
-            cpp_domain_class_declaration
-                f(stream_, disable_complete_constructor_, disable_io_);
-            f.format(vm);
-            return;
-        }
-        throw invalid_enum_value(invalid_category_type);
+    if (ct == sml::category_types::versioned_key ||
+        ct == sml::category_types::unversioned_key) {
+        const bool is_versioned(ct == sml::category_types::versioned_key);
+        cpp_key_class_declaration
+            f(stream_, disable_complete_constructor_, is_versioned, disable_io_);
+        f.format(vm);
+        return;
+    } else if (ct == sml::category_types::user_defined) {
+        cpp_domain_class_declaration
+            f(stream_, disable_complete_constructor_, disable_io_);
+        f.format(vm);
+        return;
     }
-    throw invalid_enum_value(invalid_aspect_type);
+
+    throw invalid_enum_value(invalid_category_type);
+}
+
+void domain_header::format_main(const sml::category_types ct,
+    const class_view_model& vm) {
+
+    {
+        namespace_helper ns(stream_, vm.namespaces());
+        utility_.blank_line();
+
+        serializer_forward_declaration(vm);
+        class_declaration(ct, vm);
+        inserter_operator(vm);
+    }
+    utility_.blank_line(2);
+
+    swap_method(vm);
+    if (!vm.all_properties().empty())
+        utility_.blank_line(2);
+
+}
+
+void domain_header::format_forward_declaration(const cpp_facet_types ft,
+    const class_view_model& vm) {
+
+    {
+        namespace_helper ns(stream_, vm.namespaces());
+        utility_.blank_line();
+
+        class_forward_declaration f(stream_);
+        f.format(vm, ft);
+    }
+    utility_.blank_line(2);
+    return;
 }
 
 void domain_header::format(const file_view_model& vm) {
@@ -140,27 +177,19 @@ void domain_header::format(const file_view_model& vm) {
 
     cpp_includes includes(stream_);
     includes.format(vm);
-    utility_.blank_line();
 
+    const auto at(vm.aspect_type());
+    const auto ft(vm.facet_type());
+    const auto ct(vm.category_type());
     const view_models::class_view_model& cvm(*o);
-    {
-        namespace_helper ns(stream_, cvm.namespaces());
-        utility_.blank_line();
-
-        stream_ << indenter_ << "class " << cvm.name()
-                << "_serializer;" << std::endl;
-        utility_.blank_line();
-
-        class_declaration(vm.aspect_type(), vm.category_type(), cvm);
-        utility_.blank_line();
-
-        inserter_operator(cvm);
+    if (at == cpp_aspect_types::main)
+        format_main(ct, cvm);
+    else if (at == cpp_aspect_types::forward_decls)
+        format_forward_declaration(ft, cvm);
+    else {
+        using utility::exception::invalid_enum_value;
+        throw invalid_enum_value(invalid_aspect_type);
     }
-    utility_.blank_line(2);
-
-    swap_method(cvm);
-    if (!cvm.all_properties().empty())
-        utility_.blank_line(2);
 
     guards.format_end();
 }

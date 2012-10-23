@@ -303,16 +303,17 @@ to_header_guard_name(const boost::filesystem::path& relative_path) const {
 }
 
 cpp_location_request sml_to_cpp_view_model::
-location_request_factory(cpp_facet_types facet_type, cpp_file_types file_type,
-    sml::qualified_name name) const {
+location_request_factory(cpp_facet_types ft, cpp_file_types flt,
+    cpp_aspect_types at, const sml::qualified_name& n) const {
 
     cpp_location_request r;
-    r.facet_type(facet_type);
-    r.file_type(file_type);
+    r.facet_type(ft);
+    r.file_type(flt);
+    r.aspect_type(at);
     r.model_name(model_.name());
-    r.package_path(name.package_path());
-    r.file_name(name.type_name());
-    r.external_package_path(name.external_package_path());
+    r.package_path(n.package_path());
+    r.file_name(n.type_name());
+    r.external_package_path(n.external_package_path());
     return r;
 }
 
@@ -337,14 +338,15 @@ transform_file(cpp_facet_types ft, cpp_file_types flt, cpp_aspect_types at,
     }
 
     r.class_vm(i->second);
-    auto rq(location_request_factory(ft, flt, name));
+    auto rq(location_request_factory(ft, flt, at, name));
     r.file_path(location_manager_.absolute_path(rq));
 
     if (flt == cpp_file_types::header) {
-        rq = location_request_factory(ft, flt, name);
+        rq = location_request_factory(ft, flt, at, name);
         const auto rp(location_manager_.relative_logical_path(rq));
         r.header_guard(to_header_guard_name(rp));
-        inclusion_manager_.register_header(ft, rp);
+        if (at == cpp_aspect_types::main)
+            inclusion_manager_.register_header(ft, rp);
     }
 
     const auto includes(inclusion_manager_.includes_for_pod(p, ft, flt, at));
@@ -422,7 +424,7 @@ std::vector<file_view_model> sml_to_cpp_view_model::transform_pods() {
         const auto header(cpp_file_types::header);
         const auto implementation(cpp_file_types::implementation);
         const auto main(cpp_aspect_types::main);
-        // const auto forward_decls(cpp_aspect_types::forward_decls);
+        const auto forward_decls(cpp_aspect_types::forward_decls);
         for (const auto ft: settings_.enabled_facets()) {
             const bool is_system_type(
                 p.category_type() == sml::category_types::versioned_key ||
@@ -436,8 +438,8 @@ std::vector<file_view_model> sml_to_cpp_view_model::transform_pods() {
             if (has_implementation(ft, p))
                 lambda(ft, implementation, main, p);
 
-            // if (has_forward_decls(ft))
-            //     lambda(ft, header, forward_decls, p);
+            if (has_forward_decls(ft))
+                lambda(ft, header, forward_decls, p);
         }
     }
 
@@ -449,21 +451,21 @@ std::vector<file_view_model>
 sml_to_cpp_view_model::transform_facet_includers() const {
     std::vector<file_view_model> r;
     const cpp_file_types file_type(cpp_file_types::header);
-    const auto aspect_type(cpp_aspect_types::includers);
+    const auto at(cpp_aspect_types::includers);
 
     for (cpp_facet_types ft : settings_.enabled_facets()) {
         sml::qualified_name qn;
         const auto n(includer_name);
-        log_generating_file(ft, aspect_type, file_type, n);
+        log_generating_file(ft, at, file_type, n);
         qn.type_name(n);
         qn.external_package_path(model_.external_package_path());
-        const auto rq(location_request_factory(ft, file_type, qn));
+        const auto rq(location_request_factory(ft, file_type, at, qn));
 
         file_view_model vm;
         vm.facet_type(ft);
         vm.file_path(location_manager_.absolute_path(rq));
         vm.file_type(file_type);
-        vm.aspect_type(cpp_aspect_types::includers);
+        vm.aspect_type(at);
 
         const auto includes(inclusion_manager_.includes_for_includer_files(ft));
         vm.system_includes(includes.system);

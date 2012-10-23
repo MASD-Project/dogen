@@ -59,6 +59,7 @@ void cpp_class_declaration::open_class(const class_view_model& vm) {
 
 void cpp_class_declaration::close_class() {
     stream_ << indenter_ << "};" << std::endl;
+    utility_.blank_line();
 }
 
 void cpp_class_declaration::default_constructor(const class_view_model& vm) {

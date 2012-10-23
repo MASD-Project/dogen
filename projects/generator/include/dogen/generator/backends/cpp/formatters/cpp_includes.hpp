@@ -28,6 +28,8 @@
 #include <list>
 #include <string>
 #include <iosfwd>
+#include "dogen/generator/backends/cpp/formatters/cpp_indenter.hpp"
+#include "dogen/generator/backends/cpp/formatters/cpp_utility.hpp"
 #include "dogen/generator/backends/cpp/view_models/file_view_model.hpp"
 
 namespace dogen {
@@ -48,7 +50,7 @@ public:
     cpp_includes& operator=(const cpp_includes&) = default;
 
 public:
-    explicit cpp_includes(std::ostream& stream);
+    explicit cpp_includes(std::ostream& stream, const bool blank_line = true);
 
 private:
     void format(std::list<std::string> v, bool is_system);
@@ -58,6 +60,9 @@ public:
 
 private:
     std::ostream& stream_;
+    cpp_indenter indenter_;
+    cpp_utility utility_;
+    const bool blank_line_;
 };
 
 } } } } }

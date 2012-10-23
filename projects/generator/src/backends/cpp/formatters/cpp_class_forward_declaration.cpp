@@ -33,9 +33,7 @@
 
 namespace {
 
-const std::string invalid_facet_types_enum("Invalid value for cpp_facet_types");
-const std::string missing_class_view_model(
-    "File view model must contain a class view model");
+const std::string invalid_facet_types("Invalid value for cpp_facet_types");
 
 }
 
@@ -50,39 +48,17 @@ class_forward_declaration(std::ostream& stream) :
     stream_(stream),
     utility_(stream_, indenter_) { }
 
-file_formatter::shared_ptr class_forward_declaration::
-create(std::ostream& stream) {
-    return file_formatter::shared_ptr(new class_forward_declaration(stream));
-}
-
-
-void class_forward_declaration::format(const file_view_model& vm) {
-    boost::optional<view_models::class_view_model> o(vm.class_vm());
-    if (!o)
-        throw generation_failure(missing_class_view_model);
-
-    licence licence(stream_);
-    licence.format();
-
-    header_guards guards(stream_);
-    guards.format_start(vm.header_guard());
-    utility_.blank_line();
-
-    cpp_includes includes(stream_);
-    includes.format(vm);
-    utility_.blank_line();
-
-    const view_models::class_view_model& cvm(*o);
-    {
-        namespace_helper ns(stream_, cvm.namespaces());
-        utility_.blank_line();
-
-        stream_ << indenter_ << "class " << cvm.name() << std::endl;
-        utility_.blank_line();
+void class_forward_declaration::
+format(const class_view_model& vm, cpp_facet_types ft) {
+    if (ft != cpp_facet_types::domain) {
+        using dogen::utility::exception::invalid_enum_value;
+        throw invalid_enum_value(invalid_facet_types);
     }
-    utility_.blank_line(2);
 
-    guards.format_end();
+    if (ft == cpp_facet_types::domain) {
+        stream_ << indenter_ << "class " << vm.name() << ";" << std::endl;
+    }
+    utility_.blank_line();
 }
 
 } } } } }

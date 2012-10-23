@@ -30,6 +30,7 @@
 #include <string>
 #include <utility>
 #include <boost/filesystem/path.hpp>
+#include "dogen/sml/domain/category_types.hpp"
 #include "dogen/generator/config/cpp_settings.hpp"
 #include "dogen/generator/backends/cpp/cpp_location_manager.hpp"
 #include "dogen/generator/backends/cpp/cpp_aspect_types.hpp"
@@ -87,7 +88,8 @@ public:
 
 private:
     cpp_location_request location_request_factory(cpp_facet_types ft,
-        cpp_file_types flt, const sml::qualified_name& name) const;
+        cpp_file_types flt, cpp_aspect_types at,
+        const sml::qualified_name& name) const;
 
     /**
      * @brief Returns the include path to the unversioned key domain

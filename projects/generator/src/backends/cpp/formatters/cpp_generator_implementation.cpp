@@ -282,7 +282,6 @@ void generator_implementation::format(const file_view_model& vm) {
 
     cpp_includes includes(stream_);
     includes.format(vm);
-    utility_.blank_line();
 
     const class_view_model& cvm(*o);
     create_helper_methods(cvm);

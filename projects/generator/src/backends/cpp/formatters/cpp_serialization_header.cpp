@@ -179,7 +179,6 @@ void serialization_header::format(const file_view_model& vm) {
 
     cpp_includes includes(stream_);
     includes.format(vm);
-    utility_.blank_line();
 
     const view_models::class_view_model& cvm(*o);
     {

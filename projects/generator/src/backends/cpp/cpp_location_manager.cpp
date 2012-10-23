@@ -35,18 +35,23 @@ const std::string hash_postfix("_hash");
 const std::string serialization_postfix("_ser");
 const std::string test_data_postfix("_td");
 const std::string database_postfix("_db");
+const std::string forward_decls_postfix("_fwd");
 
 const std::string src_dir("src");
 const std::string include_dir("include");
 
-const std::string invalid_facet_types_enum("Invalid value for cpp_facet_types");
-const std::string invalid_file_types_enum("Invalid value for cpp_file_types");
+const std::string invalid_facet_types("Invalid value for cpp_facet_types");
+const std::string invalid_file_types("Invalid value for cpp_file_types");
+const std::string invalid_aspect_types("Invalid value for cpp_aspect_types");
+
 }
 
 namespace dogen {
 namespace generator {
 namespace backends {
 namespace cpp {
+
+using utility::exception::invalid_enum_value;
 
 cpp_location_manager::cpp_location_manager(const std::string& model_name,
     const config::cpp_settings& settings) :
@@ -89,8 +94,7 @@ std::string cpp_location_manager::facet_directory(cpp_facet_types facet) const {
         return settings_.database_facet_folder();
         break;
     default:
-        using utility::exception::invalid_enum_value;
-        throw invalid_enum_value(invalid_facet_types_enum);
+        throw invalid_enum_value(invalid_facet_types);
     }
 }
 
@@ -106,8 +110,23 @@ std::string cpp_location_manager::facet_postfix(cpp_facet_types facet) const {
     case cpp_facet_types::test_data: return test_data_postfix; break;
     case cpp_facet_types::database: return database_postfix; break;
     default:
-        using utility::exception::invalid_enum_value;
-        throw invalid_enum_value(invalid_facet_types_enum);
+        BOOST_LOG_SEV(lg, error) << invalid_facet_types;
+        throw invalid_enum_value(invalid_facet_types);
+    }
+}
+
+std::string
+cpp_location_manager::aspect_postfix(cpp_aspect_types aspect) const {
+    if (settings_.disable_unique_file_names())
+        return empty;
+
+    switch(aspect) {
+    case cpp_aspect_types::main: return empty; break;
+    case cpp_aspect_types::includers: return empty; break;
+    case cpp_aspect_types::forward_decls: return forward_decls_postfix; break;
+    default:
+        BOOST_LOG_SEV(lg, error) << invalid_aspect_types;
+        throw invalid_enum_value(invalid_aspect_types);
     }
 }
 
@@ -117,8 +136,8 @@ cpp_location_manager::file_type_directory(cpp_file_types file_type) const {
     case cpp_file_types::header: return include_directory_; break;
     case cpp_file_types::implementation: return source_directory_; break;
     default:
-        using utility::exception::invalid_enum_value;
-        throw invalid_enum_value(invalid_file_types_enum);
+        BOOST_LOG_SEV(lg, error) << invalid_file_types;
+        throw invalid_enum_value(invalid_file_types);
     }
 }
 
@@ -128,8 +147,8 @@ std::string cpp_location_manager::extension(cpp_file_types file_type) const {
     case cpp_file_types::implementation:
         return settings_.source_extension(); break;
     default:
-        using utility::exception::invalid_enum_value;
-        throw invalid_enum_value(invalid_file_types_enum);
+        BOOST_LOG_SEV(lg, error) << invalid_file_types;
+        throw invalid_enum_value(invalid_file_types);
     }
 }
 
@@ -163,7 +182,9 @@ boost::filesystem::path cpp_location_manager::relative_physical_path(
         r /= n;
 
     std::ostringstream stream;
-    stream << request.file_name() << facet_postfix(request.facet_type())
+    stream << request.file_name()
+           << aspect_postfix(request.aspect_type())
+           << facet_postfix(request.facet_type())
            << extension(request.file_type());
     r /= stream.str();
 

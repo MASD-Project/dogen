@@ -62,10 +62,15 @@ public:
         bool disable_io);
 
 private:
+    void serializer_forward_declaration(const class_view_model& vm);
     void inserter_operator(const class_view_model& vm);
     void swap_method(const class_view_model& vm);
-    void class_declaration(const cpp_aspect_types at,
-        const sml::category_types ct, const class_view_model& vm);
+    void class_declaration(const sml::category_types ct,
+        const class_view_model& vm);
+
+    void format_main(const sml::category_types ct, const class_view_model& vm);
+    void format_forward_declaration(const cpp_facet_types ft,
+        const class_view_model& vm);
 
 public:
     virtual void format(const file_view_model& vm) override;

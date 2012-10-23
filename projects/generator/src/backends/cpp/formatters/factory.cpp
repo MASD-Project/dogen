@@ -19,6 +19,7 @@
  *
  */
 #include <sstream>
+#include "dogen/utility/log/logger.hpp"
 #include "dogen/generator/backends/cpp/formatters/production_failure.hpp"
 #include "dogen/generator/backends/cpp/formatters/cpp_facet_includer.hpp"
 #include "dogen/generator/backends/cpp/formatters/cpp_domain_header.hpp"
@@ -34,11 +35,13 @@
 #include "dogen/generator/backends/cpp/formatters/cpp_serialization_implementation.hpp"
 #include "dogen/generator/backends/cpp/formatters/cpp_database_header.hpp"
 #include "dogen/generator/backends/cpp/formatters/cpp_database_implementation.hpp"
-#include "dogen/generator/backends/cpp/formatters/cpp_class_forward_declaration.hpp"
 #include "dogen/generator/backends/cpp/formatters/factory.hpp"
+
+using namespace dogen::utility::log;
 
 namespace {
 
+static logger lg(logger_factory("formatters::factory"));
 const std::string production_failure_msg("Formatter factory not setup for: ");
 
 }
@@ -105,23 +108,16 @@ factory::create_main_formatter(std::ostream& s, cpp_facet_types ft,
     } }
 }
 
-    factory::result_type factory::
+factory::result_type factory::
 create_includer_formatter(std::ostream& s, cpp_facet_types ft) const {
     return facet_includer::create(s, ft);
 }
 
-factory::result_type factory::
-create_fwd_decl_formatter(std::ostream& s, cpp_facet_types ft) const {
-    switch (ft) {
-    case cpp_facet_types::domain:
-        return class_forward_declaration::create(s);
-        break;
-
-    default: {
-        std::ostringstream s;
-        s << production_failure_msg << ft;
-        throw production_failure(s.str());
-    } }
+factory::result_type factory::create_fwd_decl_formatter(std::ostream& s) const {
+    return domain_header::create(s,
+        settings_.disable_complete_constructor(),
+        settings_.use_integrated_io(),
+        disable_io_);
 }
 
 factory::result_type
@@ -136,11 +132,12 @@ factory::create(std::ostream& s, cpp_facet_types ft, cpp_file_types flt,
         return create_includer_formatter(s, ft);
         break;
     case cpp_aspect_types::forward_decls:
-        return create_fwd_decl_formatter(s, ft);
+        return create_fwd_decl_formatter(s);
         break;
     default: {
         std::ostringstream s;
         s << production_failure_msg << ft << ", " << flt << ", " << at;
+        BOOST_LOG_SEV(lg, error) << s.str();
         throw production_failure(s.str());
     } }
 }

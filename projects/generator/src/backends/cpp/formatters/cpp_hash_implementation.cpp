@@ -116,7 +116,6 @@ void hash_implementation::format(const file_view_model& vm) {
 
     cpp_includes includes(stream_);
     includes.format(vm);
-    utility_.blank_line();
 
     {
         namespace_helper nsh(stream_, std::list<std::string> { });

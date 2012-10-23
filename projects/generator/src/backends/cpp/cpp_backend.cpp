@@ -69,7 +69,6 @@ create(const sml::model& model, const config::cpp_settings& settings) {
 }
 
 void cpp_backend::log_formating_view(const std::string& view_name) const {
-
     BOOST_LOG_SEV(lg, debug) << "Formatting file view: " << view_name;
 }
 

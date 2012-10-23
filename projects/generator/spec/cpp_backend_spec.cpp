@@ -150,7 +150,7 @@ BOOST_AUTO_TEST_CASE(view_model_transformer_correctly_transforms_domain_files) {
     auto input_path(dia_sml::expected_class_in_a_package_sml_xml());
     std::vector<file_view_model> actual(execute_transformer(input_path));
 
-    BOOST_CHECK(actual.size() == 3);
+    BOOST_CHECK(actual.size() == 4);
     for (const auto f : actual) {
         BOOST_LOG_SEV(lg, debug) << "file: " << f.file_path();
         BOOST_CHECK(f.facet_type() == cpp_facet_types::domain);
@@ -161,6 +161,9 @@ BOOST_AUTO_TEST_CASE(view_model_transformer_correctly_transforms_domain_files) {
         BOOST_LOG_SEV(lg, debug) << "sys deps: " << f.system_includes();
         BOOST_LOG_SEV(lg, debug) << "user deps: " << f.user_includes();
         BOOST_LOG_SEV(lg, debug) << "header guard:" << f.header_guard();
+
+        if (f.aspect_type() == cpp_aspect_types::forward_decls)
+            continue;
 
         if (f.facet_type() == cpp_facet_types::domain &&
             f.file_type() == cpp_file_types::header &&
@@ -226,7 +229,7 @@ BOOST_AUTO_TEST_CASE(disabling_facet_includers_results_in_no_facet_includers) {
     const bool disable_facet_includers(true);
     const auto actual(execute_transformer(input_path, disable_facet_includers));
 
-    BOOST_CHECK(actual.size() == 2);
+    BOOST_CHECK(actual.size() == 3);
     for (const auto f : actual) {
         BOOST_CHECK(f.aspect_type() != cpp_aspect_types::includers);
         const auto o(f.class_vm());
@@ -242,7 +245,7 @@ BOOST_AUTO_TEST_CASE(disabling_keys_results_in_no_keys) {
     const bool disable_versioning(true);
     const auto actual(execute_transformer(input_path, disable_facet_includers, disable_versioning));
 
-    BOOST_CHECK(actual.size() == 3);
+    BOOST_CHECK(actual.size() == 4);
     using dogen::sml::category_types;
     for (const auto f : actual) {
         BOOST_CHECK(f.category_type() != category_types::versioned_key);
@@ -262,13 +265,16 @@ BOOST_AUTO_TEST_CASE(is_parent_flag_is_correctly_set_on_view_models) {
     const auto actual(execute_transformer(m, disable_facet_includers,
             disable_versioning));
 
-    // 2 headers and 2 implementation files
-    BOOST_CHECK(actual.size() == 4);
+    // 2 headers and 2 implementation files plus 2 forward decls
+    BOOST_CHECK(actual.size() == 6);
     BOOST_LOG_SEV(lg, debug) << "files generated: " << actual.size();
 
     for (const auto fvm : actual) {
         BOOST_LOG_SEV(lg, debug) << "file: " << fvm.file_path();
-        BOOST_CHECK(fvm.aspect_type() == cpp_aspect_types::main);
+        BOOST_CHECK(
+            fvm.aspect_type() == cpp_aspect_types::main ||
+            fvm.aspect_type() == cpp_aspect_types::forward_decls
+            );
         const auto o(fvm.class_vm());
         BOOST_REQUIRE(o);
 

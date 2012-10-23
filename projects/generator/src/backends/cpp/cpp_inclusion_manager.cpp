@@ -79,11 +79,12 @@ cpp_inclusion_manager::cpp_inclusion_manager(const sml::model& model,
 
 cpp_location_request cpp_inclusion_manager::
 location_request_factory(cpp_facet_types ft, cpp_file_types flt,
-    const sml::qualified_name& name) const {
+    cpp_aspect_types at, const sml::qualified_name& name) const {
 
     cpp_location_request r;
     r.facet_type(ft);
     r.file_type(flt);
+    r.aspect_type(at);
     r.model_name(model_.name());
     r.package_path(name.package_path());
     r.file_name(name.type_name());
@@ -104,7 +105,7 @@ std::string cpp_inclusion_manager::unversioned_dependency() const {
 
     const auto d(cpp_facet_types::domain);
     const auto h(cpp_file_types::header);
-    const auto rq(location_request_factory(d, h, qn));
+    const auto rq(location_request_factory(d, h, cpp_aspect_types::main, qn));
     return location_manager_.relative_logical_path(rq).generic_string();
 }
 
@@ -116,7 +117,7 @@ versioned_dependency(cpp_facet_types ft) const {
     qn.model_name(model_.name());
 
     const auto h(cpp_file_types::header);
-    const auto rq(location_request_factory(ft, h, qn));
+    const auto rq(location_request_factory(ft, h, cpp_aspect_types::main, qn));
     return location_manager_.relative_logical_path(rq).generic_string();
 }
 
@@ -124,14 +125,15 @@ std::string cpp_inclusion_manager::
 domain_header_dependency(const sml::qualified_name& name) const {
     const auto d(cpp_facet_types::domain);
     const auto h(cpp_file_types::header);
-    const auto rq(location_request_factory(d, h, name));
+    const auto rq(location_request_factory(d, h, cpp_aspect_types::main, name));
     return location_manager_.relative_logical_path(rq).generic_string();
 }
 
 std::string cpp_inclusion_manager::header_dependency(
     const sml::qualified_name& name, cpp_facet_types facet_type) const {
     const auto h(cpp_file_types::header);
-    const auto rq(location_request_factory(facet_type, h, name));
+    const auto main(cpp_aspect_types::main);
+    const auto rq(location_request_factory(facet_type, h, main, name));
     return location_manager_.relative_logical_path(rq).generic_string();
 }
 
@@ -373,10 +375,13 @@ inclusion_lists cpp_inclusion_manager::
 includes_for_pod(const sml::pod& pod, cpp_facet_types ft, cpp_file_types flt,
     cpp_aspect_types at) const {
 
+    inclusion_lists r;
+    if (at == cpp_aspect_types::forward_decls)
+        return r;
+
     const auto names(pod_to_qualified_names(pod));
     const bool rsm(requires_stream_manipulators(names));
     const bool pc(is_parent_or_child(pod));
-    inclusion_lists r;
 
     append_versioning_dependencies(ft, flt, at, pod.category_type(), r);
     append_implementation_dependencies(ft, flt, r, rsm, pc);
