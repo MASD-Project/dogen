@@ -111,7 +111,8 @@ private:
      * domain header.
      */
     std::string
-    domain_header_dependency(const sml::qualified_name& name) const;
+    domain_header_dependency(const sml::qualified_name& name,
+        const cpp_aspect_types at) const;
 
     /**
      * @brief Returns the include path to the header file, for the
@@ -217,7 +218,7 @@ private:
      */
     void append_self_dependencies(dogen::sml::qualified_name name,
         const cpp_facet_types ft, const cpp_file_types flt,
-        inclusion_lists& il) const;
+        cpp_aspect_types at, inclusion_lists& il) const;
 
 public:
     /**

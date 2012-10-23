@@ -122,10 +122,11 @@ versioned_dependency(cpp_facet_types ft) const {
 }
 
 std::string cpp_inclusion_manager::
-domain_header_dependency(const sml::qualified_name& name) const {
+domain_header_dependency(const sml::qualified_name& name,
+    const cpp_aspect_types at) const {
     const auto d(cpp_facet_types::domain);
     const auto h(cpp_file_types::header);
-    const auto rq(location_request_factory(d, h, cpp_aspect_types::main, name));
+    const auto rq(location_request_factory(d, h, at, name));
     return location_manager_.relative_logical_path(rq).generic_string();
 }
 
@@ -329,19 +330,34 @@ void cpp_inclusion_manager::append_relationship_dependencies(
 void cpp_inclusion_manager::
 append_self_dependencies(dogen::sml::qualified_name name,
     const cpp_facet_types ft, const cpp_file_types flt,
-    inclusion_lists& il) const {
+    cpp_aspect_types at, inclusion_lists& il) const {
+
+    if (at == cpp_aspect_types::forward_decls) {
+        /*
+         * rule 1: non-domain forward declarations depend on the
+         * domain header.
+         */
+        const bool is_header(flt == cpp_file_types::header);
+        const bool is_domain(ft == cpp_facet_types::domain);
+        const auto fwd(cpp_aspect_types::forward_decls);
+        if (is_header && !is_domain)
+            il.user.push_back(domain_header_dependency(name, fwd));
+
+        return;
+    }
 
     /*
-     * rule 1: all header files depend on the domain header file,
+     * rule 2: all header files depend on the domain header file,
      * except for the domain header file itself.
      */
     const bool is_header(flt == cpp_file_types::header);
     const bool is_domain(ft == cpp_facet_types::domain);
+    const auto main(cpp_aspect_types::main);
     if (is_header && !is_domain)
-        il.user.push_back(domain_header_dependency(name));
+        il.user.push_back(domain_header_dependency(name, main));
 
     /*
-     * rule 2: all implementation files depend on the domain header file.
+     * rule 3: all implementation files depend on the domain header file.
      */
     const bool is_implementation(flt == cpp_file_types::implementation);
     if (is_implementation)
@@ -376,8 +392,10 @@ includes_for_pod(const sml::pod& pod, cpp_facet_types ft, cpp_file_types flt,
     cpp_aspect_types at) const {
 
     inclusion_lists r;
-    if (at == cpp_aspect_types::forward_decls)
+    if (at == cpp_aspect_types::forward_decls) {
+        append_self_dependencies(pod.name(), ft, flt, at, r);
         return r;
+    }
 
     const auto names(pod_to_qualified_names(pod));
     const bool rsm(requires_stream_manipulators(names));
@@ -386,7 +404,7 @@ includes_for_pod(const sml::pod& pod, cpp_facet_types ft, cpp_file_types flt,
     append_versioning_dependencies(ft, flt, at, pod.category_type(), r);
     append_implementation_dependencies(ft, flt, r, rsm, pc);
     append_relationship_dependencies(names, ft, flt, pc, r);
-    append_self_dependencies(pod.name(), ft, flt, r);
+    append_self_dependencies(pod.name(), ft, flt, at, r);
 
     return r;
 }

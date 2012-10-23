@@ -371,7 +371,9 @@ has_implementation(const cpp_facet_types ft, const sml::pod& p) const {
 }
 
 bool sml_to_cpp_view_model::has_forward_decls(const cpp_facet_types ft) const {
-    return ft == cpp_facet_types::domain;
+    return
+        ft == cpp_facet_types::domain ||
+        ft == cpp_facet_types::serialization;
 }
 
 void sml_to_cpp_view_model::setup_qualified_name_to_class_view_model_map() {

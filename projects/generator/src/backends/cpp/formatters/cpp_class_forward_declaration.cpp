@@ -50,15 +50,31 @@ class_forward_declaration(std::ostream& stream) :
 
 void class_forward_declaration::
 format(const class_view_model& vm, cpp_facet_types ft) {
-    if (ft != cpp_facet_types::domain) {
-        using dogen::utility::exception::invalid_enum_value;
-        throw invalid_enum_value(invalid_facet_types);
-    }
-
     if (ft == cpp_facet_types::domain) {
         stream_ << indenter_ << "class " << vm.name() << ";" << std::endl;
+        utility_.blank_line();
+        return;
+    } else if (ft == cpp_facet_types::serialization) {
+        stream_ << indenter_ << "template<class Archive>" << std::endl
+                << indenter_ << "void save(Archive& ar, const ";
+
+        cpp_qualified_name qualified_name(stream_);
+        qualified_name.format(vm);
+
+        stream_ << indenter_ << "& v, unsigned int version);" << std::endl;
+        utility_.blank_line();
+
+        stream_ << indenter_ << "template<class Archive>" << std::endl
+                << indenter_ << "void load(Archive& ar, ";
+        qualified_name.format(vm);
+
+        stream_ << indenter_ << "& v, unsigned int version);" << std::endl;
+        utility_.blank_line();
+        return;
     }
-    utility_.blank_line();
+
+    using dogen::utility::exception::invalid_enum_value;
+    throw invalid_enum_value(invalid_facet_types);
 }
 
 } } } } }
