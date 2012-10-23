@@ -26,6 +26,7 @@
 #endif
 
 #include <algorithm>
+#include "dogen/split_project/serialization/unversioned_key_fwd_ser.hpp"
 
 namespace dogen {
 namespace split_project {

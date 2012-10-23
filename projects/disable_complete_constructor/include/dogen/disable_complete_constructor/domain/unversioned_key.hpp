@@ -26,6 +26,7 @@
 #endif
 
 #include <algorithm>
+#include "dogen/disable_complete_constructor/serialization/unversioned_key_fwd_ser.hpp"
 
 namespace dogen {
 namespace disable_complete_constructor {

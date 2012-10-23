@@ -28,6 +28,7 @@
 #include <algorithm>
 #include <iosfwd>
 #include "dogen/trivial_inheritance/domain/parent_with_members.hpp"
+#include "dogen/trivial_inheritance/serialization/second_child_without_members_fwd_ser.hpp"
 
 namespace dogen {
 namespace trivial_inheritance {

@@ -80,6 +80,7 @@ public:
       location_manager_(std::move(rhs.location_manager_)),
       settings_(std::move(rhs.settings_)),
       io_enabled_(std::move(rhs.io_enabled_)),
+      serialization_enabled_(std::move(rhs.serialization_enabled_)),
       headers_for_facet_(std::move(rhs.headers_for_facet_))  { }
 
     cpp_inclusion_manager(const sml::model& model,
@@ -119,7 +120,7 @@ private:
      * given facet.
      */
     std::string header_dependency(const sml::qualified_name& name,
-        cpp_facet_types ft) const;
+        cpp_facet_types ft, const cpp_aspect_types at) const;
 
 public:
     /**
@@ -246,6 +247,7 @@ private:
     const cpp_location_manager location_manager_;
     const config::cpp_settings settings_;
     const bool io_enabled_;
+    const bool serialization_enabled_;
     std::map<cpp_facet_types, std::list<std::string> > headers_for_facet_;
 };
 

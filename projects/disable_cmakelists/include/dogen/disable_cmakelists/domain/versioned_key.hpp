@@ -27,6 +27,7 @@
 
 #include <algorithm>
 #include "dogen/disable_cmakelists/domain/unversioned_key.hpp"
+#include "dogen/disable_cmakelists/serialization/versioned_key_fwd_ser.hpp"
 
 namespace dogen {
 namespace disable_cmakelists {

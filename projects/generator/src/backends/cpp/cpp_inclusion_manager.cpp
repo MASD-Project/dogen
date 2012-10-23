@@ -52,8 +52,8 @@ const std::string state_saver("boost/io/ios_state.hpp");
 const std::string functional("functional");
 
 using dogen::generator::backends::cpp::cpp_facet_types;
-bool io_enabled(const std::set<cpp_facet_types>& f) {
-    return f.find(cpp_facet_types::io) != f.end();
+bool contains(const std::set<cpp_facet_types>& f, cpp_facet_types ft) {
+    return f.find(ft) != f.end();
 }
 
 }
@@ -67,13 +67,16 @@ cpp_inclusion_manager::cpp_inclusion_manager(const sml::model& model,
     const cpp_location_manager& location_manager,
     const config::cpp_settings& settings)
     : model_(model), location_manager_(location_manager), settings_(settings),
-      io_enabled_(io_enabled(settings_.enabled_facets())) {
+      io_enabled_(contains(settings_.enabled_facets(), cpp_facet_types::io)),
+      serialization_enabled_(contains(settings_.enabled_facets(),
+              cpp_facet_types::serialization)) {
 
     BOOST_LOG_SEV(lg, debug)
         << "Initial configuration:"
         << " disable_versioning: " << settings_.disable_versioning()
         << " use_integrated_io: " << settings_.use_integrated_io()
         << " io_enabled: " << io_enabled_
+        << " serialization_enabled: " << serialization_enabled_
         << " model name: " << model_.name();
 }
 
@@ -131,9 +134,10 @@ domain_header_dependency(const sml::qualified_name& name,
 }
 
 std::string cpp_inclusion_manager::header_dependency(
-    const sml::qualified_name& name, cpp_facet_types facet_type) const {
+    const sml::qualified_name& name, cpp_facet_types facet_type,
+    const cpp_aspect_types at) const {
     const auto h(cpp_file_types::header);
-    const auto main(cpp_aspect_types::main);
+    const auto main(at);
     const auto rq(location_request_factory(facet_type, h, main, name));
     return location_manager_.relative_logical_path(rq).generic_string();
 }
@@ -299,9 +303,10 @@ void cpp_inclusion_manager::append_relationship_dependencies(
         const bool is_header(flt == cpp_file_types::header);
         const bool is_domain(ft == cpp_facet_types::domain);
         const bool is_ser(ft == cpp_facet_types::serialization);
+        const auto main(cpp_aspect_types::main);
 
         if (is_header && !is_primitive && (is_domain || is_ser))
-            il.user.push_back(header_dependency(n, ft));
+            il.user.push_back(header_dependency(n, ft, main));
 
         /*
          * rule 3: hash, IO and test data implementations need the
@@ -313,7 +318,7 @@ void cpp_inclusion_manager::append_relationship_dependencies(
         const bool is_td(ft == cpp_facet_types::test_data);
 
         if (is_implementation && (is_hash || is_io || is_td))
-            il.user.push_back(header_dependency(n, ft));
+            il.user.push_back(header_dependency(n, ft, main));
 
         /*
          * rule 4: parents and children and integrated IO require IO
@@ -323,7 +328,7 @@ void cpp_inclusion_manager::append_relationship_dependencies(
             (settings_.use_integrated_io() || is_parent_or_child));
 
         if (is_implementation && io_enabled_ && domain_with_io)
-            il.user.push_back(header_dependency(n, cpp_facet_types::io));
+            il.user.push_back(header_dependency(n, cpp_facet_types::io, main));
     }
 }
 
@@ -347,21 +352,30 @@ append_self_dependencies(dogen::sml::qualified_name name,
     }
 
     /*
-     * rule 2: all header files depend on the domain header file,
-     * except for the domain header file itself.
+     * rule 2: if serialisation is enabled, domain headers depend on
+     * the serialisation forward declaration headers.
      */
     const bool is_header(flt == cpp_file_types::header);
     const bool is_domain(ft == cpp_facet_types::domain);
+    const auto fwd(cpp_aspect_types::forward_decls);
+    if (is_header && is_domain && serialization_enabled_)
+        il.user.push_back(header_dependency(name,
+                cpp_facet_types::serialization, fwd));
+
+    /*
+     * rule 3: all header files depend on the domain header file,
+     * except for the domain header file itself.
+     */
     const auto main(cpp_aspect_types::main);
     if (is_header && !is_domain)
         il.user.push_back(domain_header_dependency(name, main));
 
     /*
-     * rule 3: all implementation files depend on the domain header file.
+     * rule 4: all implementation files depend on the domain header file.
      */
     const bool is_implementation(flt == cpp_file_types::implementation);
     if (is_implementation)
-        il.user.push_back(header_dependency(name, ft));
+        il.user.push_back(header_dependency(name, ft, main));
 }
 
 bool cpp_inclusion_manager::requires_stream_manipulators(

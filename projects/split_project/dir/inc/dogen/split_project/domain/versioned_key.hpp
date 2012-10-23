@@ -27,6 +27,7 @@
 
 #include <algorithm>
 #include "dogen/split_project/domain/unversioned_key.hpp"
+#include "dogen/split_project/serialization/versioned_key_fwd_ser.hpp"
 
 namespace dogen {
 namespace split_project {

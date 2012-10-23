@@ -26,6 +26,7 @@
 #endif
 
 #include <algorithm>
+#include "dogen/compressed/serialization/unversioned_key_fwd_ser.hpp"
 
 namespace dogen {
 namespace compressed {

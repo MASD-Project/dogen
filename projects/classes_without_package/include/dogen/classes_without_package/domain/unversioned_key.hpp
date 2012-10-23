@@ -26,6 +26,7 @@
 #endif
 
 #include <algorithm>
+#include "dogen/classes_without_package/serialization/unversioned_key_fwd_ser.hpp"
 
 namespace dogen {
 namespace classes_without_package {

@@ -27,6 +27,7 @@
 
 #include <algorithm>
 #include "dogen/enable_facet_serialization/domain/unversioned_key.hpp"
+#include "dogen/enable_facet_serialization/serialization/versioned_key_fwd_ser.hpp"
 
 namespace dogen {
 namespace enable_facet_serialization {

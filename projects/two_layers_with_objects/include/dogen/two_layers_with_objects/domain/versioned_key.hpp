@@ -27,6 +27,7 @@
 
 #include <algorithm>
 #include "dogen/two_layers_with_objects/domain/unversioned_key.hpp"
+#include "dogen/two_layers_with_objects/serialization/versioned_key_fwd_ser.hpp"
 
 namespace dogen {
 namespace two_layers_with_objects {

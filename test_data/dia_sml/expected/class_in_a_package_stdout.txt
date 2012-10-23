@@ -150,6 +150,7 @@ Contents:
 
 #include <algorithm>
 #include "class_in_a_package/domain/versioned_key.hpp"
+#include "class_in_a_package/serialization/package1/first_class_fwd_ser.hpp"
 
 namespace class_in_a_package {
 namespace package1 {
@@ -298,6 +299,7 @@ Contents:
 #endif
 
 #include <algorithm>
+#include "class_in_a_package/serialization/unversioned_key_fwd_ser.hpp"
 
 namespace class_in_a_package {
 
@@ -424,6 +426,7 @@ Contents:
 
 #include <algorithm>
 #include "class_in_a_package/domain/unversioned_key.hpp"
+#include "class_in_a_package/serialization/versioned_key_fwd_ser.hpp"
 
 namespace class_in_a_package {
 

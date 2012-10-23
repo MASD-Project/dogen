@@ -27,6 +27,7 @@
 
 #include <algorithm>
 #include "dogen/classes_inout_package/domain/versioned_key.hpp"
+#include "dogen/classes_inout_package/serialization/package_1/class_1_fwd_ser.hpp"
 
 namespace dogen {
 namespace classes_inout_package {

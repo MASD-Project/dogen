@@ -62,6 +62,7 @@ const std::string sequence_include("sequence.hpp");
 const std::string io_postfix("_io.hpp");
 const std::string database_postfix("_db.hpp");
 const std::string serialization_postfix("_ser.hpp");
+const std::string fwd_serialization_postfix("fwd_ser.hpp");
 const std::string hash_postfix("_hash.hpp");
 const std::string test_data_postfix("_td.hpp");
 const std::string one_pod_model_name("one_pod");
@@ -178,7 +179,8 @@ BOOST_AUTO_TEST_CASE(processing_one_pod_model_with_default_configuration_generat
     // header
     const auto hu(i[header_user]);
     BOOST_LOG_SEV(lg, debug) << "header user dependencies: " << hu;
-    BOOST_REQUIRE(hu.empty());
+    BOOST_REQUIRE(hu.size() == 1);
+    BOOST_CHECK(boost::ends_with(hu.front(), fwd_serialization_postfix));
 
     const auto hs(i[header_system]);
     BOOST_LOG_SEV(lg, debug) << "header  system dependencies: " << hs;

@@ -27,6 +27,7 @@
 
 #include <algorithm>
 #include "dogen/all_primitives/domain/unversioned_key.hpp"
+#include "dogen/all_primitives/serialization/versioned_key_fwd_ser.hpp"
 
 namespace dogen {
 namespace all_primitives {

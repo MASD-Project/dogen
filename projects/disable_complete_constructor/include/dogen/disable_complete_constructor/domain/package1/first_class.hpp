@@ -27,6 +27,7 @@
 
 #include <algorithm>
 #include "dogen/disable_complete_constructor/domain/versioned_key.hpp"
+#include "dogen/disable_complete_constructor/serialization/package1/first_class_fwd_ser.hpp"
 
 namespace dogen {
 namespace disable_complete_constructor {

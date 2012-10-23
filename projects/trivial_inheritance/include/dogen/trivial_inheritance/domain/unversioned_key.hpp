@@ -26,6 +26,7 @@
 #endif
 
 #include <algorithm>
+#include "dogen/trivial_inheritance/serialization/unversioned_key_fwd_ser.hpp"
 
 namespace dogen {
 namespace trivial_inheritance {

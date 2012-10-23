@@ -27,6 +27,7 @@
 
 #include <algorithm>
 #include "dogen/dmp/domain/unversioned_key.hpp"
+#include "dogen/dmp/serialization/versioned_key_fwd_ser.hpp"
 
 namespace dogen {
 namespace dmp {

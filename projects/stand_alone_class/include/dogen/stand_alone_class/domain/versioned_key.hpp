@@ -27,6 +27,7 @@
 
 #include <algorithm>
 #include "dogen/stand_alone_class/domain/unversioned_key.hpp"
+#include "dogen/stand_alone_class/serialization/versioned_key_fwd_ser.hpp"
 
 namespace dogen {
 namespace stand_alone_class {

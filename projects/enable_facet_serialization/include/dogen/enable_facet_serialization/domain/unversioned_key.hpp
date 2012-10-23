@@ -26,6 +26,7 @@
 #endif
 
 #include <algorithm>
+#include "dogen/enable_facet_serialization/serialization/unversioned_key_fwd_ser.hpp"
 
 namespace dogen {
 namespace enable_facet_serialization {

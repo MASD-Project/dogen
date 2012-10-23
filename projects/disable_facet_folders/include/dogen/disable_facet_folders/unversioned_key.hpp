@@ -26,6 +26,7 @@
 #endif
 
 #include <algorithm>
+#include "dogen/disable_facet_folders/unversioned_key_fwd_ser.hpp"
 
 namespace dogen {
 namespace disable_facet_folders {

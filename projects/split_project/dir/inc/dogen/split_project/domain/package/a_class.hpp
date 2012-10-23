@@ -27,6 +27,7 @@
 
 #include <algorithm>
 #include "dogen/split_project/domain/versioned_key.hpp"
+#include "dogen/split_project/serialization/package/a_class_fwd_ser.hpp"
 
 namespace dogen {
 namespace split_project {

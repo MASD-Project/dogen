@@ -26,6 +26,7 @@
 #endif
 
 #include <algorithm>
+#include "dogen/disable_facet_folders/package1/first_class_fwd_ser.hpp"
 #include "dogen/disable_facet_folders/versioned_key.hpp"
 
 namespace dogen {

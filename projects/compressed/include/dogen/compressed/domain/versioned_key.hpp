@@ -27,6 +27,7 @@
 
 #include <algorithm>
 #include "dogen/compressed/domain/unversioned_key.hpp"
+#include "dogen/compressed/serialization/versioned_key_fwd_ser.hpp"
 
 namespace dogen {
 namespace compressed {

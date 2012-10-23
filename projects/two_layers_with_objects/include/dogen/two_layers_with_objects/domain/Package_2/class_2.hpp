@@ -27,6 +27,7 @@
 
 #include <algorithm>
 #include "dogen/two_layers_with_objects/domain/versioned_key.hpp"
+#include "dogen/two_layers_with_objects/serialization/Package_2/class_2_fwd_ser.hpp"
 
 namespace dogen {
 namespace two_layers_with_objects {

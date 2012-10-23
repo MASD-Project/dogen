@@ -27,6 +27,7 @@
 
 #include <algorithm>
 #include "dogen/class_without_attributes/domain/versioned_key.hpp"
+#include "dogen/class_without_attributes/serialization/package_1/class_1_fwd_ser.hpp"
 
 namespace dogen {
 namespace class_without_attributes {

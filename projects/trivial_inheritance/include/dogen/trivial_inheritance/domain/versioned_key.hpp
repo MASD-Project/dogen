@@ -27,6 +27,7 @@
 
 #include <algorithm>
 #include "dogen/trivial_inheritance/domain/unversioned_key.hpp"
+#include "dogen/trivial_inheritance/serialization/versioned_key_fwd_ser.hpp"
 
 namespace dogen {
 namespace trivial_inheritance {

@@ -26,6 +26,7 @@
 #endif
 
 #include <algorithm>
+#include "dogen/dmp/serialization/unversioned_key_fwd_ser.hpp"
 
 namespace dogen {
 namespace dmp {

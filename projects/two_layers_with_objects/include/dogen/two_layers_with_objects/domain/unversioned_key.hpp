@@ -26,6 +26,7 @@
 #endif
 
 #include <algorithm>
+#include "dogen/two_layers_with_objects/serialization/unversioned_key_fwd_ser.hpp"
 
 namespace dogen {
 namespace two_layers_with_objects {
