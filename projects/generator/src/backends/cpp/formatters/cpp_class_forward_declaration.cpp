@@ -45,18 +45,18 @@ namespace backends {
 namespace cpp {
 namespace formatters {
 
-domain_forward_decls_header::
-domain_forward_decls_header(std::ostream& stream) :
+class_forward_declaration::
+class_forward_declaration(std::ostream& stream) :
     stream_(stream),
     utility_(stream_, indenter_) { }
 
-file_formatter::shared_ptr domain_forward_decls_header::
+file_formatter::shared_ptr class_forward_declaration::
 create(std::ostream& stream) {
-    return file_formatter::shared_ptr(new domain_forward_decls_header(stream));
+    return file_formatter::shared_ptr(new class_forward_declaration(stream));
 }
 
 
-void domain_forward_decls_header::format(const file_view_model& vm) {
+void class_forward_declaration::format(const file_view_model& vm) {
     boost::optional<view_models::class_view_model> o(vm.class_vm());
     if (!o)
         throw generation_failure(missing_class_view_model);

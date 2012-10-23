@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_GENERATOR_BACKENDS_CPP_FORMATTERS_CPP_DOMAIN_FORWARD_DECLS_HEADER_HPP
-#define DOGEN_GENERATOR_BACKENDS_CPP_FORMATTERS_CPP_DOMAIN_FORWARD_DECLS_HEADER_HPP
+#ifndef DOGEN_GENERATOR_BACKENDS_CPP_FORMATTERS_CPP_CLASS_FORWARD_DECLARATION_HPP
+#define DOGEN_GENERATOR_BACKENDS_CPP_FORMATTERS_CPP_CLASS_FORWARD_DECLARATION_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -38,21 +38,21 @@ namespace backends {
 namespace cpp {
 namespace formatters {
 
-class domain_forward_decls_header : public file_formatter {
+class class_forward_declaration : public file_formatter {
 public:
     typedef view_models::class_view_model class_view_model;
     typedef view_models::file_view_model file_view_model;
 
 public:
-    domain_forward_decls_header() = delete;
-    domain_forward_decls_header(const domain_forward_decls_header&) = default;
-    domain_forward_decls_header(domain_forward_decls_header&&) = default;
-    domain_forward_decls_header& operator=(const domain_forward_decls_header&) = default;
+    class_forward_declaration() = delete;
+    class_forward_declaration(const class_forward_declaration&) = default;
+    class_forward_declaration(class_forward_declaration&&) = default;
+    class_forward_declaration& operator=(const class_forward_declaration&) = default;
 
 public:
-    domain_forward_decls_header(std::ostream& stream);
+    class_forward_declaration(std::ostream& stream);
 
-    virtual ~domain_forward_decls_header() noexcept {}
+    virtual ~class_forward_declaration() noexcept {}
 
 public:
     static file_formatter::shared_ptr create(std::ostream& stream);

@@ -114,7 +114,7 @@ factory::result_type factory::
 create_fwd_decl_formatter(std::ostream& s, cpp_facet_types ft) const {
     switch (ft) {
     case cpp_facet_types::domain:
-        return domain_forward_decls_header::create(s);
+        return class_forward_declaration::create(s);
         break;
 
     default: {
