@@ -48,6 +48,13 @@ public:
 public:
     friend class dogen::split_project::package::a_class_serializer;
 
+private:
+    template<typename Archive>
+    friend void boost::serialization::save(Archive& ar, const a_class& v, unsigned int version);
+
+    template<typename Archive>
+    friend void boost::serialization::load(Archive& ar, a_class& v, unsigned int version);
+
 public:
     dogen::split_project::versioned_key versioned_key() const {
         return versioned_key_;

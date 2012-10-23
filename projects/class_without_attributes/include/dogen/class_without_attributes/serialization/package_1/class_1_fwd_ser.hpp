@@ -27,9 +27,8 @@
 
 #include "dogen/class_without_attributes/domain/package_1/class_1_fwd.hpp"
 
-namespace dogen {
-namespace class_without_attributes {
-namespace package_1 {
+namespace boost {
+namespace serialization {
 
 template<class Archive>
 void save(Archive& ar, const dogen::class_without_attributes::package_1::class_1& v, unsigned int version);
@@ -37,6 +36,6 @@ void save(Archive& ar, const dogen::class_without_attributes::package_1::class_1
 template<class Archive>
 void load(Archive& ar, dogen::class_without_attributes::package_1::class_1& v, unsigned int version);
 
-} } }
+} }
 
 #endif

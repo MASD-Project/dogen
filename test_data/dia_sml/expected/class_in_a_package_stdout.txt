@@ -175,6 +175,13 @@ public:
 public:
     friend class class_in_a_package::package1::first_class_serializer;
 
+private:
+    template<typename Archive>
+    friend void boost::serialization::save(Archive& ar, const first_class& v, unsigned int version);
+
+    template<typename Archive>
+    friend void boost::serialization::load(Archive& ar, first_class& v, unsigned int version);
+
 public:
     int public_attribute() const {
         return public_attribute_;
@@ -320,6 +327,13 @@ public:
 public:
     friend class class_in_a_package::unversioned_key_serializer;
 
+private:
+    template<typename Archive>
+    friend void boost::serialization::save(Archive& ar, const unversioned_key& v, unsigned int version);
+
+    template<typename Archive>
+    friend void boost::serialization::load(Archive& ar, unversioned_key& v, unsigned int version);
+
 public:
     unsigned int id() const {
         return id_;
@@ -448,6 +462,13 @@ public:
 
 public:
     friend class class_in_a_package::versioned_key_serializer;
+
+private:
+    template<typename Archive>
+    friend void boost::serialization::save(Archive& ar, const versioned_key& v, unsigned int version);
+
+    template<typename Archive>
+    friend void boost::serialization::load(Archive& ar, versioned_key& v, unsigned int version);
 
 public:
     unversioned_key to_unversioned() const;
@@ -935,8 +956,8 @@ Contents:
 
 #include "class_in_a_package/domain/package1/first_class_fwd.hpp"
 
-namespace class_in_a_package {
-namespace package1 {
+namespace boost {
+namespace serialization {
 
 template<class Archive>
 void save(Archive& ar, const class_in_a_package::package1::first_class& v, unsigned int version);
@@ -1046,7 +1067,8 @@ Contents:
 
 #include "class_in_a_package/domain/unversioned_key_fwd.hpp"
 
-namespace class_in_a_package {
+namespace boost {
+namespace serialization {
 
 template<class Archive>
 void save(Archive& ar, const class_in_a_package::unversioned_key& v, unsigned int version);
@@ -1054,7 +1076,7 @@ void save(Archive& ar, const class_in_a_package::unversioned_key& v, unsigned in
 template<class Archive>
 void load(Archive& ar, class_in_a_package::unversioned_key& v, unsigned int version);
 
-}
+} }
 
 #endif
 
@@ -1152,7 +1174,8 @@ Contents:
 
 #include "class_in_a_package/domain/versioned_key_fwd.hpp"
 
-namespace class_in_a_package {
+namespace boost {
+namespace serialization {
 
 template<class Archive>
 void save(Archive& ar, const class_in_a_package::versioned_key& v, unsigned int version);
@@ -1160,7 +1183,7 @@ void save(Archive& ar, const class_in_a_package::versioned_key& v, unsigned int 
 template<class Archive>
 void load(Archive& ar, class_in_a_package::versioned_key& v, unsigned int version);
 
-}
+} }
 
 #endif
 

@@ -27,9 +27,8 @@
 
 #include "dogen/split_project/domain/package/a_class_fwd.hpp"
 
-namespace dogen {
-namespace split_project {
-namespace package {
+namespace boost {
+namespace serialization {
 
 template<class Archive>
 void save(Archive& ar, const dogen::split_project::package::a_class& v, unsigned int version);
@@ -37,6 +36,6 @@ void save(Archive& ar, const dogen::split_project::package::a_class& v, unsigned
 template<class Archive>
 void load(Archive& ar, dogen::split_project::package::a_class& v, unsigned int version);
 
-} } }
+} }
 
 #endif

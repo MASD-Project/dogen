@@ -29,8 +29,10 @@ namespace backends {
 namespace cpp {
 namespace formatters {
 
-cpp_class_declaration::cpp_class_declaration(std::ostream& stream)
-    : stream_(stream), utility_(stream_, indenter_) { }
+cpp_class_declaration::
+cpp_class_declaration(std::ostream& stream, const bool disable_serialization)
+    : stream_(stream), utility_(stream_, indenter_),
+      disable_serialization_(disable_serialization) { }
 
 void cpp_class_declaration::open_class(const class_view_model& vm) {
     stream_ << indenter_ << "class " << vm.name();
@@ -151,13 +153,27 @@ compiler_generated_constuctors(const class_view_model& vm) {
 }
 
 void cpp_class_declaration::friends(const class_view_model& vm) {
+    if (disable_serialization_)
+        return;
+
     utility_.public_access_specifier();
     stream_ << indenter_ << "friend class ";
-
     cpp_qualified_name qualified_name(stream_);
     qualified_name.format(vm);
-
     stream_ << "_serializer;" << std::endl;
+    utility_.blank_line();
+
+    utility_.private_access_specifier();
+
+    stream_ << indenter_ << "template<typename Archive>" << std::endl
+            << indenter_ << "friend void boost::serialization::save(Archive& ar"
+            << ", const " << vm.name() << "& v, unsigned int version);"
+            << std::endl;
+    utility_.blank_line();
+
+    stream_ << indenter_ << "template<typename Archive>" << std::endl
+            << indenter_ << "friend void boost::serialization::load(Archive& ar"
+            << ", " << vm.name() << "& v, unsigned int version);" << std::endl;
     utility_.blank_line();
 }
 

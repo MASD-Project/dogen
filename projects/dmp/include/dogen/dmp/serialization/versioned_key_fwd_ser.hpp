@@ -27,8 +27,8 @@
 
 #include "dogen/dmp/domain/versioned_key_fwd.hpp"
 
-namespace dogen {
-namespace dmp {
+namespace boost {
+namespace serialization {
 
 template<class Archive>
 void save(Archive& ar, const dogen::dmp::versioned_key& v, unsigned int version);

@@ -27,8 +27,8 @@
 
 #include "dogen/disable_cmakelists/domain/unversioned_key_fwd.hpp"
 
-namespace dogen {
-namespace disable_cmakelists {
+namespace boost {
+namespace serialization {
 
 template<class Archive>
 void save(Archive& ar, const dogen::disable_cmakelists::unversioned_key& v, unsigned int version);

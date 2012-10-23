@@ -30,9 +30,6 @@
 
 namespace {
 
-const std::string boost_ns("boost");
-const std::string serialization_ns("serialization");
-
 const std::string missing_class_view_model(
     "File view model must contain a class view model");
 

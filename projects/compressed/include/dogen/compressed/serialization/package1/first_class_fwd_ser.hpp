@@ -27,9 +27,8 @@
 
 #include "dogen/compressed/domain/package1/first_class_fwd.hpp"
 
-namespace dogen {
-namespace compressed {
-namespace package1 {
+namespace boost {
+namespace serialization {
 
 template<class Archive>
 void save(Archive& ar, const dogen::compressed::package1::first_class& v, unsigned int version);
@@ -37,6 +36,6 @@ void save(Archive& ar, const dogen::compressed::package1::first_class& v, unsign
 template<class Archive>
 void load(Archive& ar, dogen::compressed::package1::first_class& v, unsigned int version);
 
-} } }
+} }
 
 #endif

@@ -29,8 +29,9 @@ namespace formatters {
 
 cpp_key_class_declaration::
 cpp_key_class_declaration(std::ostream& stream,
-    bool disable_complete_constructor, bool is_versioned, bool disable_io)
-    : cpp_class_declaration(stream),
+    const bool disable_complete_constructor, const bool is_versioned,
+    const bool disable_io, const bool disable_serialization)
+    : cpp_class_declaration(stream, disable_serialization),
       disable_complete_constructor_(disable_complete_constructor),
       is_versioned_(is_versioned), disable_io_(disable_io) {}
 

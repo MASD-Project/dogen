@@ -27,9 +27,8 @@
 
 #include "dogen/classes_inout_package/domain/package_1/class_1_fwd.hpp"
 
-namespace dogen {
-namespace classes_inout_package {
-namespace package_1 {
+namespace boost {
+namespace serialization {
 
 template<class Archive>
 void save(Archive& ar, const dogen::classes_inout_package::package_1::class_1& v, unsigned int version);
@@ -37,6 +36,6 @@ void save(Archive& ar, const dogen::classes_inout_package::package_1::class_1& v
 template<class Archive>
 void load(Archive& ar, dogen::classes_inout_package::package_1::class_1& v, unsigned int version);
 
-} } }
+} }
 
 #endif

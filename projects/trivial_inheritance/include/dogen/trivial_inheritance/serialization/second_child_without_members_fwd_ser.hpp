@@ -27,8 +27,8 @@
 
 #include "dogen/trivial_inheritance/domain/second_child_without_members_fwd.hpp"
 
-namespace dogen {
-namespace trivial_inheritance {
+namespace boost {
+namespace serialization {
 
 template<class Archive>
 void save(Archive& ar, const dogen::trivial_inheritance::second_child_without_members& v, unsigned int version);

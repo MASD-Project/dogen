@@ -45,6 +45,13 @@ public:
 public:
     friend class dogen::disable_full_ctor::unversioned_key_serializer;
 
+private:
+    template<typename Archive>
+    friend void boost::serialization::save(Archive& ar, const unversioned_key& v, unsigned int version);
+
+    template<typename Archive>
+    friend void boost::serialization::load(Archive& ar, unversioned_key& v, unsigned int version);
+
 public:
     unsigned int id() const {
         return id_;

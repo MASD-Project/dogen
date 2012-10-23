@@ -53,6 +53,13 @@ public:
 public:
     friend class dogen::disable_cmakelists::package1::first_class_serializer;
 
+private:
+    template<typename Archive>
+    friend void boost::serialization::save(Archive& ar, const first_class& v, unsigned int version);
+
+    template<typename Archive>
+    friend void boost::serialization::load(Archive& ar, first_class& v, unsigned int version);
+
 public:
     int public_attribute() const {
         return public_attribute_;

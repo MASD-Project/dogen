@@ -32,8 +32,6 @@ namespace dogen {
 namespace enable_facet_hash {
 namespace package1 {
 
-class first_class_serializer;
-
 class first_class final {
 public:
     first_class(const first_class&) = default;
@@ -48,9 +46,6 @@ public:
         const int public_attribute,
         const int private_attribute,
         const dogen::enable_facet_hash::versioned_key& versioned_key);
-
-public:
-    friend class dogen::enable_facet_hash::package1::first_class_serializer;
 
 public:
     int public_attribute() const {

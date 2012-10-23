@@ -61,6 +61,13 @@ public:
 public:
     friend class dogen::all_primitives::a_class_serializer;
 
+private:
+    template<typename Archive>
+    friend void boost::serialization::save(Archive& ar, const a_class& v, unsigned int version);
+
+    template<typename Archive>
+    friend void boost::serialization::load(Archive& ar, a_class& v, unsigned int version);
+
 public:
     bool bool_property() const {
         return bool_property_;

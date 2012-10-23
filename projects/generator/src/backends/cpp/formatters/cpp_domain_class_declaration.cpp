@@ -28,10 +28,11 @@ namespace formatters {
 
 cpp_domain_class_declaration::
 cpp_domain_class_declaration(std::ostream& stream,
-    bool disable_complete_constructor, bool disable_io)
-    : cpp_class_declaration(stream),
+    const bool disable_complete_constructor, const bool disable_io,
+    const bool serialization_enabled)
+    : cpp_class_declaration(stream, serialization_enabled),
       disable_complete_constructor_(disable_complete_constructor),
-      disable_io_(disable_io) {}
+      disable_io_(disable_io) { }
 
 void cpp_domain_class_declaration::
 hand_crafted_constructors(const class_view_model& vm) {

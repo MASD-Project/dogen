@@ -27,8 +27,8 @@
 
 #include "dogen/disable_full_ctor/domain/unversioned_key_fwd.hpp"
 
-namespace dogen {
-namespace disable_full_ctor {
+namespace boost {
+namespace serialization {
 
 template<class Archive>
 void save(Archive& ar, const dogen::disable_full_ctor::unversioned_key& v, unsigned int version);

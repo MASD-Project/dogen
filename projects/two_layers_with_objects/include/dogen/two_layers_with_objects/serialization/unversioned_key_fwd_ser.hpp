@@ -27,8 +27,8 @@
 
 #include "dogen/two_layers_with_objects/domain/unversioned_key_fwd.hpp"
 
-namespace dogen {
-namespace two_layers_with_objects {
+namespace boost {
+namespace serialization {
 
 template<class Archive>
 void save(Archive& ar, const dogen::two_layers_with_objects::unversioned_key& v, unsigned int version);

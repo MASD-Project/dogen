@@ -27,8 +27,8 @@
 
 #include "dogen/class_without_package/domain/class_1_fwd.hpp"
 
-namespace dogen {
-namespace class_without_package {
+namespace boost {
+namespace serialization {
 
 template<class Archive>
 void save(Archive& ar, const dogen::class_without_package::class_1& v, unsigned int version);

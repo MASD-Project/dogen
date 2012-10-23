@@ -48,6 +48,13 @@ public:
 public:
     friend class dogen::two_layers_with_objects::Package_2::class_2_serializer;
 
+private:
+    template<typename Archive>
+    friend void boost::serialization::save(Archive& ar, const class_2& v, unsigned int version);
+
+    template<typename Archive>
+    friend void boost::serialization::load(Archive& ar, class_2& v, unsigned int version);
+
 public:
     dogen::two_layers_with_objects::versioned_key versioned_key() const {
         return versioned_key_;

@@ -27,9 +27,8 @@
 
 #include "dogen/dmp/domain/package1/first_class_fwd.hpp"
 
-namespace dogen {
-namespace dmp {
-namespace package1 {
+namespace boost {
+namespace serialization {
 
 template<class Archive>
 void save(Archive& ar, const dogen::dmp::package1::first_class& v, unsigned int version);
@@ -37,6 +36,6 @@ void save(Archive& ar, const dogen::dmp::package1::first_class& v, unsigned int 
 template<class Archive>
 void load(Archive& ar, dogen::dmp::package1::first_class& v, unsigned int version);
 
-} } }
+} }
 
 #endif

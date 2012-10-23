@@ -27,8 +27,8 @@
 
 #include "dogen/classes_inout_package/domain/versioned_key_fwd.hpp"
 
-namespace dogen {
-namespace classes_inout_package {
+namespace boost {
+namespace serialization {
 
 template<class Archive>
 void save(Archive& ar, const dogen::classes_inout_package::versioned_key& v, unsigned int version);

@@ -49,6 +49,13 @@ public:
 public:
     friend class dogen::trivial_inheritance::second_child_without_members_serializer;
 
+private:
+    template<typename Archive>
+    friend void boost::serialization::save(Archive& ar, const second_child_without_members& v, unsigned int version);
+
+    template<typename Archive>
+    friend void boost::serialization::load(Archive& ar, second_child_without_members& v, unsigned int version);
+
 public:
     void to_stream(std::ostream& s) const override;
 

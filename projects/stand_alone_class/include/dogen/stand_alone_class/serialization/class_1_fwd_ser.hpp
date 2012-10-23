@@ -27,8 +27,8 @@
 
 #include "dogen/stand_alone_class/domain/class_1_fwd.hpp"
 
-namespace dogen {
-namespace stand_alone_class {
+namespace boost {
+namespace serialization {
 
 template<class Archive>
 void save(Archive& ar, const dogen::stand_alone_class::class_1& v, unsigned int version);

@@ -27,8 +27,8 @@
 
 #include "dogen/class_without_attributes/domain/unversioned_key_fwd.hpp"
 
-namespace dogen {
-namespace class_without_attributes {
+namespace boost {
+namespace serialization {
 
 template<class Archive>
 void save(Archive& ar, const dogen::class_without_attributes::unversioned_key& v, unsigned int version);

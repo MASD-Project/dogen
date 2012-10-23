@@ -49,6 +49,13 @@ public:
 public:
     friend class dogen::trivial_inheritance::parent_without_members_serializer;
 
+private:
+    template<typename Archive>
+    friend void boost::serialization::save(Archive& ar, const parent_without_members& v, unsigned int version);
+
+    template<typename Archive>
+    friend void boost::serialization::load(Archive& ar, parent_without_members& v, unsigned int version);
+
 public:
     virtual void to_stream(std::ostream& s) const;
 

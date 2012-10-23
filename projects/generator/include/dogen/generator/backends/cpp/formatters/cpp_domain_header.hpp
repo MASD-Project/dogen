@@ -51,15 +51,16 @@ public:
     domain_header& operator=(const domain_header&) = default;
 
 public:
-    domain_header(std::ostream& stream, bool disable_complete_constructor,
-        bool use_integrated_io, bool disable_io);
+    domain_header(std::ostream& stream, const bool disable_complete_constructor,
+        const bool use_integrated_io, const bool disable_io,
+        const bool serialization_enabled);
 
     virtual ~domain_header() noexcept {}
 
 public:
     static file_formatter::shared_ptr create(std::ostream& stream,
-        bool disable_complete_constructor, bool use_integrated_io,
-        bool disable_io);
+        const bool disable_complete_constructor, const bool use_integrated_io,
+        const bool disable_io, const bool disable_serialization);
 
 private:
     void serializer_forward_declaration(const class_view_model& vm);
@@ -82,6 +83,7 @@ private:
     const bool disable_complete_constructor_;
     const bool use_integrated_io_;
     const bool disable_io_;
+    const bool disable_serialization_;
 };
 
 } } } } }

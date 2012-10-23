@@ -48,7 +48,8 @@ public:
 
 public:
     cpp_domain_class_declaration(std::ostream& stream,
-        bool disable_complete_constructor, bool disable_io_);
+        const bool disable_complete_constructor, const bool disable_io_,
+        const bool serialization_enabled);
     virtual ~cpp_domain_class_declaration() noexcept {}
 
 private:

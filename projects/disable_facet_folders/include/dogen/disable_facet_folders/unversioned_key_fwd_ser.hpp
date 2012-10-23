@@ -27,8 +27,8 @@
 
 #include "dogen/disable_facet_folders/unversioned_key_fwd.hpp"
 
-namespace dogen {
-namespace disable_facet_folders {
+namespace boost {
+namespace serialization {
 
 template<class Archive>
 void save(Archive& ar, const dogen::disable_facet_folders::unversioned_key& v, unsigned int version);

@@ -27,9 +27,8 @@
 
 #include "dogen/two_layers_with_objects/domain/package_1/class_1_fwd.hpp"
 
-namespace dogen {
-namespace two_layers_with_objects {
-namespace package_1 {
+namespace boost {
+namespace serialization {
 
 template<class Archive>
 void save(Archive& ar, const dogen::two_layers_with_objects::package_1::class_1& v, unsigned int version);
@@ -37,6 +36,6 @@ void save(Archive& ar, const dogen::two_layers_with_objects::package_1::class_1&
 template<class Archive>
 void load(Archive& ar, dogen::two_layers_with_objects::package_1::class_1& v, unsigned int version);
 
-} } }
+} }
 
 #endif

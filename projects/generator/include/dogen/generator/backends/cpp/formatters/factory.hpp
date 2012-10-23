@@ -47,8 +47,7 @@ public:
     typedef file_formatter::shared_ptr result_type;
 
 public:
-    factory(config::cpp_settings settings, bool disable_io)
-        : settings_(settings), disable_io_(disable_io) { }
+    factory(const config::cpp_settings& settings);
 
 private:
     result_type create_main_formatter(std::ostream& s, cpp_facet_types ft,
@@ -64,6 +63,7 @@ public:
 private:
     const config::cpp_settings settings_;
     const bool disable_io_;
+    const bool disable_serialization_;
 };
 
 } } } } }

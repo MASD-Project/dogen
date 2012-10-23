@@ -27,8 +27,8 @@
 
 #include "dogen/trivial_inheritance/domain/unversioned_key_fwd.hpp"
 
-namespace dogen {
-namespace trivial_inheritance {
+namespace boost {
+namespace serialization {
 
 template<class Archive>
 void save(Archive& ar, const dogen::trivial_inheritance::unversioned_key& v, unsigned int version);

@@ -44,6 +44,11 @@ namespace {
 static logger lg(logger_factory("formatters::factory"));
 const std::string production_failure_msg("Formatter factory not setup for: ");
 
+using dogen::generator::backends::cpp::cpp_facet_types;
+bool contains(const std::set<cpp_facet_types>& f, cpp_facet_types ft) {
+    return f.find(ft) != f.end();
+}
+
 }
 
 namespace dogen {
@@ -51,6 +56,14 @@ namespace generator {
 namespace backends {
 namespace cpp {
 namespace formatters {
+
+
+factory::factory(const config::cpp_settings& settings)
+    : settings_(settings),
+      disable_io_(!contains(settings_.enabled_facets(),
+              cpp_facet_types::io)),
+      disable_serialization_(!contains(settings_.enabled_facets(),
+              cpp_facet_types::serialization)) { }
 
 factory::result_type
 factory::create_main_formatter(std::ostream& s, cpp_facet_types ft,
@@ -62,7 +75,7 @@ factory::create_main_formatter(std::ostream& s, cpp_facet_types ft,
             return domain_header::create(s,
                 settings_.disable_complete_constructor(),
                 settings_.use_integrated_io(),
-                disable_io_);
+                disable_io_, disable_serialization_);
         else
             return domain_implementation::create(s,
                 settings_.disable_complete_constructor(),
@@ -117,7 +130,7 @@ factory::result_type factory::create_fwd_decl_formatter(std::ostream& s) const {
     return domain_header::create(s,
         settings_.disable_complete_constructor(),
         settings_.use_integrated_io(),
-        disable_io_);
+        disable_io_, disable_serialization_);
 }
 
 factory::result_type

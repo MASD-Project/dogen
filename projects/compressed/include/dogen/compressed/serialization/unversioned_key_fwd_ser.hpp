@@ -27,8 +27,8 @@
 
 #include "dogen/compressed/domain/unversioned_key_fwd.hpp"
 
-namespace dogen {
-namespace compressed {
+namespace boost {
+namespace serialization {
 
 template<class Archive>
 void save(Archive& ar, const dogen::compressed::unversioned_key& v, unsigned int version);

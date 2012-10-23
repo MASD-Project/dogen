@@ -30,8 +30,6 @@
 namespace dogen {
 namespace enable_facet_io {
 
-class unversioned_key_serializer;
-
 class unversioned_key final {
 public:
     unversioned_key(const unversioned_key&) = default;
@@ -43,9 +41,6 @@ public:
 
 public:
     explicit unversioned_key(const unsigned int id);
-
-public:
-    friend class dogen::enable_facet_io::unversioned_key_serializer;
 
 public:
     unsigned int id() const {

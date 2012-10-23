@@ -31,8 +31,6 @@
 namespace dogen {
 namespace enable_facet_domain {
 
-class versioned_key_serializer;
-
 class versioned_key final {
 public:
     versioned_key(const versioned_key&) = default;
@@ -46,9 +44,6 @@ public:
     versioned_key(
         const unsigned int id,
         const unsigned int version);
-
-public:
-    friend class dogen::enable_facet_domain::versioned_key_serializer;
 
 public:
     unversioned_key to_unversioned() const;

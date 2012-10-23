@@ -34,6 +34,8 @@
 
 namespace {
 
+const std::string boost_ns("boost");
+const std::string serialization_ns("serialization");
 const std::string invalid_aspect_type("Invalid value for cpp_aspect_types");
 const std::string invalid_category_type("Invalid value for category_types");
 const std::string missing_class_view_model(
@@ -48,19 +50,22 @@ namespace cpp {
 namespace formatters {
 
 domain_header::
-domain_header(std::ostream& stream, bool disable_complete_constructor,
-    bool use_integrated_io, bool disable_io) :
+domain_header(std::ostream& stream, const bool disable_complete_constructor,
+    const bool use_integrated_io, const bool disable_io,
+    const bool disable_serialization) :
     stream_(stream),
     utility_(stream_, indenter_),
     disable_complete_constructor_(disable_complete_constructor),
     use_integrated_io_(use_integrated_io),
-    disable_io_(disable_io) { }
+    disable_io_(disable_io), disable_serialization_(disable_serialization) { }
 
 file_formatter::shared_ptr domain_header::
-create(std::ostream& stream, bool disable_complete_constructor,
-    bool use_integrated_io, bool disable_io) {
+create(std::ostream& stream, const bool disable_complete_constructor,
+    const bool use_integrated_io, const bool disable_io,
+    const bool disable_serialization) {
     return file_formatter::shared_ptr(new domain_header(stream,
-            disable_complete_constructor, use_integrated_io, disable_io));
+            disable_complete_constructor, use_integrated_io, disable_io,
+            disable_serialization));
 }
 
 void domain_header::
@@ -74,6 +79,9 @@ inserter_operator(const class_view_model& vm) {
 }
 
 void domain_header::serializer_forward_declaration(const class_view_model& vm) {
+    if (disable_serialization_)
+        return;
+
     stream_ << indenter_ << "class " << vm.name() << "_serializer;"
             << std::endl;
     utility_.blank_line();
@@ -117,12 +125,14 @@ class_declaration(const sml::category_types ct, const class_view_model& vm) {
         ct == sml::category_types::unversioned_key) {
         const bool is_versioned(ct == sml::category_types::versioned_key);
         cpp_key_class_declaration
-            f(stream_, disable_complete_constructor_, is_versioned, disable_io_);
+            f(stream_, disable_complete_constructor_, is_versioned,
+                disable_io_, disable_serialization_);
         f.format(vm);
         return;
     } else if (ct == sml::category_types::user_defined) {
         cpp_domain_class_declaration
-            f(stream_, disable_complete_constructor_, disable_io_);
+            f(stream_, disable_complete_constructor_, disable_io_,
+                disable_serialization_);
         f.format(vm);
         return;
     }
@@ -153,7 +163,13 @@ void domain_header::format_forward_declaration(const cpp_facet_types ft,
     const class_view_model& vm) {
 
     {
-        namespace_helper ns(stream_, vm.namespaces());
+        std::list<std::string> ns;
+        if (ft == cpp_facet_types::serialization)
+            ns = { boost_ns, serialization_ns };
+        else
+            ns = vm.namespaces();
+
+        namespace_helper nsh(stream_, ns);
         utility_.blank_line();
 
         class_forward_declaration f(stream_);

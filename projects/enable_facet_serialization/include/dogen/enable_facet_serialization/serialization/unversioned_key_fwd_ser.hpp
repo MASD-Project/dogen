@@ -27,8 +27,8 @@
 
 #include "dogen/enable_facet_serialization/domain/unversioned_key_fwd.hpp"
 
-namespace dogen {
-namespace enable_facet_serialization {
+namespace boost {
+namespace serialization {
 
 template<class Archive>
 void save(Archive& ar, const dogen::enable_facet_serialization::unversioned_key& v, unsigned int version);

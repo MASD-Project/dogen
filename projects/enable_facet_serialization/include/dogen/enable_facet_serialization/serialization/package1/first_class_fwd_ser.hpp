@@ -27,9 +27,8 @@
 
 #include "dogen/enable_facet_serialization/domain/package1/first_class_fwd.hpp"
 
-namespace dogen {
-namespace enable_facet_serialization {
-namespace package1 {
+namespace boost {
+namespace serialization {
 
 template<class Archive>
 void save(Archive& ar, const dogen::enable_facet_serialization::package1::first_class& v, unsigned int version);
@@ -37,6 +36,6 @@ void save(Archive& ar, const dogen::enable_facet_serialization::package1::first_
 template<class Archive>
 void load(Archive& ar, dogen::enable_facet_serialization::package1::first_class& v, unsigned int version);
 
-} } }
+} }
 
 #endif

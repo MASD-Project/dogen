@@ -27,8 +27,8 @@
 
 #include "dogen/all_primitives/domain/a_class_fwd.hpp"
 
-namespace dogen {
-namespace all_primitives {
+namespace boost {
+namespace serialization {
 
 template<class Archive>
 void save(Archive& ar, const dogen::all_primitives::a_class& v, unsigned int version);

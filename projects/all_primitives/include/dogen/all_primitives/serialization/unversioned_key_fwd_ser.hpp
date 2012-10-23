@@ -27,8 +27,8 @@
 
 #include "dogen/all_primitives/domain/unversioned_key_fwd.hpp"
 
-namespace dogen {
-namespace all_primitives {
+namespace boost {
+namespace serialization {
 
 template<class Archive>
 void save(Archive& ar, const dogen::all_primitives::unversioned_key& v, unsigned int version);

@@ -27,8 +27,8 @@
 
 #include "dogen/split_project/domain/unversioned_key_fwd.hpp"
 
-namespace dogen {
-namespace split_project {
+namespace boost {
+namespace serialization {
 
 template<class Archive>
 void save(Archive& ar, const dogen::split_project::unversioned_key& v, unsigned int version);

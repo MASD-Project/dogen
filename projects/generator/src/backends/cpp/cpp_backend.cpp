@@ -107,9 +107,7 @@ backend::value_entry_type cpp_backend::generate_cmakelists() const {
 backend::value_entry_type cpp_backend::
 generate_file_view_model(const view_models::file_view_model& vm) const {
     log_formating_view(vm.file_path().string());
-    const auto f(settings_.enabled_facets());
-    const bool disable_io(f.find(cpp_facet_types::io) == f.end());
-    formatters::factory factory(settings_, disable_io);
+    formatters::factory factory(settings_);
     formatters::file_formatter::shared_ptr ff;
     std::ostringstream s;
     ff = factory.create(s, vm.facet_type(), vm.file_type(), vm.aspect_type());

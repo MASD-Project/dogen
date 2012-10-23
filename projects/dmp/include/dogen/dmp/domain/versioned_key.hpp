@@ -51,6 +51,13 @@ public:
 public:
     friend class dogen::dmp::versioned_key_serializer;
 
+private:
+    template<typename Archive>
+    friend void boost::serialization::save(Archive& ar, const versioned_key& v, unsigned int version);
+
+    template<typename Archive>
+    friend void boost::serialization::load(Archive& ar, versioned_key& v, unsigned int version);
+
 public:
     unversioned_key to_unversioned() const;
 

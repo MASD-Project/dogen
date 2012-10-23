@@ -48,7 +48,8 @@ public:
     cpp_class_declaration& operator=(const cpp_class_declaration&) = default;
 
 public:
-    explicit cpp_class_declaration(std::ostream& stream);
+    cpp_class_declaration(std::ostream& stream,
+        const bool disable_serialization);
     virtual ~cpp_class_declaration() noexcept {}
 
 protected:
@@ -72,6 +73,7 @@ protected:
     std::ostream& stream_;
     cpp_indenter indenter_;
     cpp_utility utility_;
+    const bool disable_serialization_;
 };
 
 } } } } }
