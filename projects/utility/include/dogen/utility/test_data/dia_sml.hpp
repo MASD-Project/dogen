@@ -59,7 +59,7 @@ public:
     static boost::filesystem::path input_package_without_name_dia();
     static boost::filesystem::path input_two_layers_with_objects_dia();
     static boost::filesystem::path input_disable_cmakelists_dia();
-    static boost::filesystem::path input_disable_complete_constructor_dia();
+    static boost::filesystem::path input_disable_full_ctor_dia();
     static boost::filesystem::path input_disable_facet_folders_dia();
     static boost::filesystem::path input_disable_model_package_dia();
     static boost::filesystem::path input_disable_unique_file_names_dia();

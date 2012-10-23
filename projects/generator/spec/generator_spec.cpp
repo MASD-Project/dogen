@@ -200,8 +200,8 @@ BOOST_AUTO_TEST_CASE(disabling_cpp_backend_results_in_no_cpp_output) {
     BOOST_CHECK(asserter::assert_directory(tds::expected(), tds::actual()));
 }
 
-BOOST_AUTO_TEST_CASE(disable_complete_constructor_generates_expected_code) {
-    SETUP_TEST_LOG("disable_complete_constructor_generates_expected_code");
+BOOST_AUTO_TEST_CASE(disable_full_ctor_generates_expected_code) {
+    SETUP_TEST_LOG("disable_full_ctor_generates_expected_code");
     using dogen::generator::config::settings;
     auto lambda([](dogen::utility::test_data::codegen_tds tds) -> settings {
             auto s(default_mock_settings(tds));
@@ -213,7 +213,7 @@ BOOST_AUTO_TEST_CASE(disable_complete_constructor_generates_expected_code) {
         });
 
     using dogen::utility::test_data::dia_sml;
-    const auto t(dia_sml::input_disable_complete_constructor_dia());
+    const auto t(dia_sml::input_disable_full_ctor_dia());
     BOOST_CHECK(check_code_generation(t, lambda));
 }
 

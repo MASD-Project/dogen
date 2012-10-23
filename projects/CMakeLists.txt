@@ -155,7 +155,7 @@ include_directories(
     ${CMAKE_SOURCE_DIR}/projects/class_without_package/include
     ${CMAKE_SOURCE_DIR}/projects/stand_alone_class/include
     ${CMAKE_SOURCE_DIR}/projects/compressed/include
-    ${CMAKE_SOURCE_DIR}/projects/disable_complete_constructor/include
+    ${CMAKE_SOURCE_DIR}/projects/disable_full_ctor/include
     ${CMAKE_SOURCE_DIR}/projects/disable_facet_folders/include
     ${CMAKE_SOURCE_DIR}/projects/disable_cmakelists/include
     ${CMAKE_SOURCE_DIR}/projects/enable_facet_domain/include
@@ -196,7 +196,7 @@ add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/class_without_attributes/src)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/class_without_package/src)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/stand_alone_class/src)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/compressed/src)
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/disable_complete_constructor/src)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/disable_full_ctor/src)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/disable_facet_folders/src)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/enable_facet_domain/src)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/enable_facet_hash/src)

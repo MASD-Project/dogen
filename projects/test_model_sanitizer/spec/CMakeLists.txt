@@ -42,7 +42,7 @@ target_link_libraries(${spec_name}
     class_without_attributes
     class_without_package
     compressed
-    disable_complete_constructor
+    disable_full_ctor
     disable_facet_folders
     unnamed_model # disable model package
     enable_facet_domain

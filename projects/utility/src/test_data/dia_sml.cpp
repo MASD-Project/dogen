@@ -49,8 +49,8 @@ path input_package_without_name_dia("dia_sml/input/package_without_name.dia");
 path input_two_layers_with_objects_dia(
     "dia_sml/input/two_layers_with_objects.dia");
 path input_disable_cmakelists_dia("dia_sml/input/disable_cmakelists.dia");
-path input_disable_complete_constructor_dia(
-    "dia_sml/input/disable_complete_constructor.dia"
+path input_disable_full_ctor_dia(
+    "dia_sml/input/disable_full_ctor.dia"
     );
 path input_disable_facet_folders_dia("dia_sml/input/disable_facet_folders.dia");
 path input_disable_model_package_dia("dia_sml/input/disable_model_package.dia");
@@ -267,9 +267,9 @@ path dia_sml::input_disable_cmakelists_dia() {
     return validating_resolver::resolve(::input_disable_cmakelists_dia);
 }
 
-path dia_sml::input_disable_complete_constructor_dia() {
+path dia_sml::input_disable_full_ctor_dia() {
     return validating_resolver::resolve(
-        ::input_disable_complete_constructor_dia);
+        ::input_disable_full_ctor_dia);
 }
 
 path dia_sml::input_disable_facet_folders_dia() {
