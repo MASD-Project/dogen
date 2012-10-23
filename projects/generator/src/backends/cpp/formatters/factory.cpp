@@ -34,7 +34,7 @@
 #include "dogen/generator/backends/cpp/formatters/cpp_serialization_implementation.hpp"
 #include "dogen/generator/backends/cpp/formatters/cpp_database_header.hpp"
 #include "dogen/generator/backends/cpp/formatters/cpp_database_implementation.hpp"
-#include "dogen/generator/backends/cpp/formatters/cpp_domain_forward_decls_header.hpp"
+#include "dogen/generator/backends/cpp/formatters/cpp_class_forward_declaration.hpp"
 #include "dogen/generator/backends/cpp/formatters/factory.hpp"
 
 namespace {
