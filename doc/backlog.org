@@ -10,6 +10,17 @@ This file contains all stories that haven't been assigned to a sprint.
 
 Stories that we intend to look at, at some point.
 
+*** Create a class with file information
+
+In C++ backend we use four parameters that get passed all over the
+place: facet, aspect, file type and category. We should:
+
+- rename file type to file kind (interface, implementation)
+- create a class containing the four bits of information called file
+  type
+- replace all the API calls with file type
+- change the view model to take a file type
+
 *** Remove manager post-fix
 
 We should rename location manager to locator and inclusion manager to
