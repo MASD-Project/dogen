@@ -23,13 +23,13 @@
 #include "dogen/utility/exception/invalid_enum_value.hpp"
 #include "dogen/generator/backends/cpp/formatters/cpp_qualified_name.hpp"
 #include "dogen/generator/backends/cpp/formatters/cpp_licence.hpp"
-#include "dogen/generator/backends/cpp/formatters/cpp_class_forward_declaration.hpp"
 #include "dogen/generator/backends/cpp/formatters/cpp_header_guards.hpp"
 #include "dogen/generator/backends/cpp/formatters/cpp_namespace.hpp"
 #include "dogen/generator/backends/cpp/formatters/cpp_domain_class_declaration.hpp"
 #include "dogen/generator/backends/cpp/formatters/cpp_key_class_declaration.hpp"
 #include "dogen/generator/backends/cpp/formatters/cpp_namespace_helper.hpp"
 #include "dogen/generator/backends/cpp/formatters/cpp_includes.hpp"
+#include "dogen/generator/backends/cpp/formatters/cpp_class_forward_declaration.hpp"
 
 namespace {
 
