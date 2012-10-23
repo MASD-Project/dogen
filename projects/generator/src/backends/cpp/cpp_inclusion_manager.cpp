@@ -30,6 +30,7 @@ static logger lg(logger_factory("inclusion_manager"));
 
 const std::string empty;
 const std::string std_model("std");
+const std::string primitive_model("primitive_model");
 const std::string bool_type("bool");
 const std::string versioned_name("versioned_key");
 const std::string unversioned_name("unversioned_key");
@@ -149,11 +150,9 @@ cpp_inclusion_manager::pod_to_qualified_names(const sml::pod& pod) const {
 
 void cpp_inclusion_manager::append_versioning_dependencies(
     const cpp_facet_types ft, const cpp_file_types flt, cpp_aspect_types at,
-    inclusion_lists& il, const bool is_parent_or_child) const {
+    const sml::category_types ct, inclusion_lists& il) const {
 
-    if (settings_.disable_versioning() ||
-        at == cpp_aspect_types::unversioned_key ||
-        at == cpp_aspect_types::includers)
+    if (settings_.disable_versioning())
         return;
 
     /*
@@ -162,57 +161,10 @@ void cpp_inclusion_manager::append_versioning_dependencies(
      */
     const bool is_header(flt == cpp_file_types::header);
     const bool is_domain(ft == cpp_facet_types::domain);
-    if (at == cpp_aspect_types::versioned_key) {
-        if (is_header && is_domain)
-            il.user.push_back(unversioned_dependency());
-        return;
-    }
-
-    cpp_facet_types version_facet(ft);
-
-    /*
-     * rule 2: domain implementation needs access to the versioned key
-     * IO header file when IO is enabled and we are using integrated
-     * IO, or we are in the presence of inheritance.
-     */
-    const bool is_implementation(flt == cpp_file_types::implementation);
-    const bool iio(settings_.use_integrated_io());
-    const bool rule2(is_implementation && is_domain && io_enabled_ &&
-        (iio || is_parent_or_child));
-    if (rule2)
-        version_facet = cpp_facet_types::io;
-
-    /*
-     * rule 3: io implementation needs access to the versioned key
-     * IO header file when IO is enabled and we are not using integrated
-     * IO.
-     */
-    const bool is_io(ft == cpp_facet_types::io);
-    const bool rule3(is_implementation && is_io && io_enabled_ && !iio);
-
-    /*
-     * rule 4: test data implementation requires access to version in
-     * order to generate versioned key objects.
-     */
-    const bool is_test_data(ft == cpp_facet_types::test_data);
-    const bool rule4(is_implementation && is_test_data);
-
-    /*
-     * rule 5: serialization headers need versioned key in order to
-     * serialise. Domain needs the version for its property.
-     */
-    const bool is_serialization(ft == cpp_facet_types::serialization);
-    const bool rule5(is_header && (is_domain || is_serialization));
-
-    /*
-     * rule 6: hash implementation needs versioned key in order to
-     * hash.
-     */
-    const bool is_hash(ft == cpp_facet_types::hash);
-    const bool rule6(is_implementation && is_hash);
-
-    if (rule2 || rule3 || rule4 || rule5 || rule6)
-        il.user.push_back(versioned_dependency(version_facet));
+    const bool is_main(at == cpp_aspect_types::main);
+    const bool is_versioned_key(ct == sml::category_types::versioned_key);
+    if (is_versioned_key && is_main && is_header && is_domain)
+        il.user.push_back(unversioned_dependency());
 }
 
 void cpp_inclusion_manager::
@@ -318,24 +270,57 @@ void cpp_inclusion_manager::append_std_dependencies(
 void cpp_inclusion_manager::append_relationship_dependencies(
     const std::list<dogen::sml::qualified_name>& names,
     const cpp_facet_types ft, const cpp_file_types flt,
-    inclusion_lists& il) const {
+    const bool is_parent_or_child, inclusion_lists& il) const {
 
     for(const auto n : names) {
         // handle all special models first
         if (n.model_name() == std_model) {
             append_std_dependencies(ft, flt, n, il);
             continue;
-        }
+        } else if (n.model_name() == primitive_model)
+            continue;
 
         /*
-         * rule 1: headers need the corresponding header file for the
-         * dependency.
+         * rule 1: primitives never require header files. Not quite
+         * sure when this could happen, as they should be part of a
+         * special model.
          */
         const bool is_primitive(n.meta_type() == sml::meta_types::primitive);
-        const bool is_header(flt == cpp_file_types::header);
+        if (is_primitive)
+            continue; // primitve on non-primitives model
 
-        if (is_header && !is_primitive)
+        /*
+         * rule 2: domain and serialisation headers need the
+         * corresponding header file for the dependency
+         */
+        const bool is_header(flt == cpp_file_types::header);
+        const bool is_domain(ft == cpp_facet_types::domain);
+        const bool is_ser(ft == cpp_facet_types::serialization);
+
+        if (is_header && !is_primitive && (is_domain || is_ser))
             il.user.push_back(header_dependency(n, ft));
+
+        /*
+         * rule 3: hash, IO and test data implementations need the
+         * corresponding header file for the dependency
+         */
+        const bool is_implementation(flt == cpp_file_types::implementation);
+        const bool is_hash(ft == cpp_facet_types::hash);
+        const bool is_io(ft == cpp_facet_types::io);
+        const bool is_td(ft == cpp_facet_types::test_data);
+
+        if (is_implementation && (is_hash || is_io || is_td))
+            il.user.push_back(header_dependency(n, ft));
+
+        /*
+         * rule 4: parents and children and integrated IO require IO
+         * headers in domain implementation.
+         */
+        const bool domain_with_io(is_domain &&
+            (settings_.use_integrated_io() || is_parent_or_child));
+
+        if (is_implementation && io_enabled_ && domain_with_io)
+            il.user.push_back(header_dependency(n, cpp_facet_types::io));
     }
 }
 
@@ -354,7 +339,7 @@ append_self_dependencies(dogen::sml::qualified_name name,
         il.user.push_back(domain_header_dependency(name));
 
     /*
-     * rule 2: all implementation files depend on the domain header file
+     * rule 2: all implementation files depend on the domain header file.
      */
     const bool is_implementation(flt == cpp_file_types::implementation);
     if (is_implementation)
@@ -393,27 +378,10 @@ includes_for_pod(const sml::pod& pod, cpp_facet_types ft, cpp_file_types flt,
     const bool pc(is_parent_or_child(pod));
     inclusion_lists r;
 
-    append_versioning_dependencies(ft, flt, at, r, pc);
+    append_versioning_dependencies(ft, flt, at, pod.category_type(), r);
     append_implementation_dependencies(ft, flt, r, rsm, pc);
-    append_relationship_dependencies(names, ft, flt, r);
+    append_relationship_dependencies(names, ft, flt, pc, r);
     append_self_dependencies(pod.name(), ft, flt, r);
-
-    return r;
-}
-
-inclusion_lists cpp_inclusion_manager::
-includes_for_versioning(const std::string& name, cpp_facet_types ft,
-    cpp_file_types flt, cpp_aspect_types at) const {
-
-    inclusion_lists r;
-    append_versioning_dependencies(ft, flt, at, r);
-    append_implementation_dependencies(ft, flt, r);
-
-    sml::qualified_name n;
-    n.external_package_path(model_.external_package_path());
-    n.type_name(name);
-    n.model_name(model_.name());
-    append_self_dependencies(n, ft, flt, r);
 
     return r;
 }

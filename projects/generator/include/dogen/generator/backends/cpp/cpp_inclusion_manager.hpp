@@ -164,7 +164,7 @@ private:
      */
     void append_versioning_dependencies(const cpp_facet_types ft,
         const cpp_file_types flt, cpp_aspect_types at,
-        inclusion_lists& il, const bool is_parent_or_child = false) const;
+        const sml::category_types ct, inclusion_lists& il) const;
 
     /**
      * @brief Appends to the inclusion lists all dependencies related
@@ -204,7 +204,7 @@ private:
     void append_relationship_dependencies(
         const std::list<dogen::sml::qualified_name>& names,
         const cpp_facet_types ft, const cpp_file_types flt,
-        inclusion_lists& il) const;
+        const bool is_parent_or_child, inclusion_lists& il) const;
 
     /**
      * @brief Appends to the inclusion lists dependencies related to
@@ -231,16 +231,6 @@ public:
      * @param ft Facet for which we want the inclusion lists.
      */
     inclusion_lists includes_for_includer_files(cpp_facet_types ft) const;
-
-    /**
-     * @brief Returns the includes for version related types.
-     *
-     * Every model for which versioning has been enabled has a
-     * versioned and unversioned key. This method returns the includes
-     * that involve those files.
-     */
-    inclusion_lists includes_for_versioning(const std::string& name,
-        cpp_facet_types ft, cpp_file_types flt, cpp_aspect_types at) const;
 
     /**
      * @brief Returns all the includes required for the given pod.

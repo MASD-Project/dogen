@@ -129,8 +129,6 @@ factory::create(std::ostream& s, cpp_facet_types ft, cpp_file_types flt,
     cpp_aspect_types at) const {
 
     switch (at) {
-    case cpp_aspect_types::versioned_key:
-    case cpp_aspect_types::unversioned_key:
     case cpp_aspect_types::main:
         return create_main_formatter(s, ft, flt);
         break;

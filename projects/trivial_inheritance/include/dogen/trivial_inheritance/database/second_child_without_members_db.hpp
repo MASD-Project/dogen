@@ -28,7 +28,6 @@
 #include <boost/optional.hpp>
 #include <pqxx/connection.hxx>
 #include <vector>
-#include "dogen/trivial_inheritance/database/parent_with_members_db.hpp"
 #include "dogen/trivial_inheritance/domain/second_child_without_members.hpp"
 
 namespace dogen {

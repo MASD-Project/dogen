@@ -19,7 +19,7 @@
  *
  */
 #include "dogen/trivial_inheritance/test_data/child_without_members_td.hpp"
-#include "dogen/trivial_inheritance/test_data/versioned_key_td.hpp"
+#include "dogen/trivial_inheritance/test_data/parent_without_members_td.hpp"
 
 
 

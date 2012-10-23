@@ -178,8 +178,7 @@ BOOST_AUTO_TEST_CASE(processing_one_pod_model_with_default_configuration_generat
     // header
     const auto hu(i[header_user]);
     BOOST_LOG_SEV(lg, debug) << "header user dependencies: " << hu;
-    BOOST_REQUIRE(hu.size() == 1);
-    BOOST_CHECK(asserter::assert_contains(versioned_key, hu.front()));
+    BOOST_REQUIRE(hu.empty());
 
     const auto hs(i[header_system]);
     BOOST_LOG_SEV(lg, debug) << "header  system dependencies: " << hs;
@@ -220,12 +219,9 @@ BOOST_AUTO_TEST_CASE(processing_one_pod_model_with_default_configuration_generat
     // implementation
     const auto iu(i[implementation_user]);
     BOOST_LOG_SEV(lg, debug) << "implementation user dependencies: " << iu;
-    BOOST_REQUIRE(iu.size() == 2);
-    for (const auto s : iu) {
-        BOOST_CHECK(
-            (boost::contains(s, pod_name) && boost::contains(s, io)) ||
-            (boost::contains(s, versioned_key) && boost::contains(s, io)));
-    }
+    BOOST_REQUIRE(iu.size() == 1);
+    BOOST_CHECK(boost::contains(iu.front(), pod_name) &&
+        boost::contains(iu.front(), io));
 
     const auto is(i[implementation_system]);
     BOOST_LOG_SEV(lg, debug) << "implementation system dependencies: " << is;
@@ -243,17 +239,9 @@ BOOST_AUTO_TEST_CASE(processing_one_pod_model_with_default_configuration_generat
     // header
     const auto hu(i[header_user]);
     BOOST_LOG_SEV(lg, debug) << "header user dependencies: " << hu;
-    BOOST_REQUIRE(hu.size() == 2);
-    auto a(hu.front());
-    auto b(hu.back());
-    if (!boost::ends_with(b, serialization_postfix))
-        std::swap(a,b);
-
-    BOOST_CHECK(asserter::assert_contains(pod_name, a));
-    BOOST_CHECK(asserter::assert_contains(domain, a));
-
-    BOOST_CHECK(asserter::assert_contains(versioned_key, b));
-    BOOST_CHECK(asserter::assert_contains(serialization, b));
+    BOOST_REQUIRE(hu.size() == 1);
+    BOOST_CHECK(asserter::assert_contains(pod_name, hu.front()));
+    BOOST_CHECK(asserter::assert_contains(domain, hu.front()));
 
     const auto hs(i[header_system]);
     BOOST_LOG_SEV(lg, debug) << "header system dependencies: " << hs;
@@ -264,10 +252,9 @@ BOOST_AUTO_TEST_CASE(processing_one_pod_model_with_default_configuration_generat
     const auto iu(i[implementation_user]);
     BOOST_LOG_SEV(lg, debug) << "implementation user dependencies: " << iu;
 
-    a = iu.front();
-    BOOST_CHECK(boost::ends_with(a, serialization_postfix));
-    BOOST_CHECK(asserter::assert_contains(pod_name, a));
-    BOOST_CHECK(asserter::assert_contains(serialization, a));
+    BOOST_CHECK(boost::ends_with(iu.front(), serialization_postfix));
+    BOOST_CHECK(asserter::assert_contains(pod_name, iu.front()));
+    BOOST_CHECK(asserter::assert_contains(serialization, iu.front()));
 
     const auto is(i[implementation_system]);
     BOOST_LOG_SEV(lg, debug) << "implementation system dependencies: " << is;
@@ -296,12 +283,9 @@ BOOST_AUTO_TEST_CASE(processing_one_pod_model_with_default_configuration_generat
     // implementation
     const auto iu(i[implementation_user]);
     BOOST_LOG_SEV(lg, debug) << "implementation user dependencies: " << iu;
-    BOOST_REQUIRE(iu.size() == 2);
-    for (const auto s : iu) {
-        BOOST_CHECK(
-            (boost::contains(s, pod_name) && boost::contains(s, hash)) ||
-            (boost::contains(s, versioned_key) && boost::contains(s, hash)));
-    }
+    BOOST_REQUIRE(iu.size() == 1);
+    BOOST_CHECK(boost::contains(iu.front(), pod_name) &&
+        boost::contains(iu.front(), hash));
 
     const auto is(i[implementation_system]);
     BOOST_LOG_SEV(lg, debug) << "implementation system dependencies: " << is;
@@ -329,12 +313,9 @@ BOOST_AUTO_TEST_CASE(processing_one_pod_model_with_default_configuration_generat
     // implementation
     const auto iu(i[implementation_user]);
     BOOST_LOG_SEV(lg, debug) << "implementation user dependencies: " << iu;
-    BOOST_REQUIRE(iu.size() == 2);
-    for (const auto s : iu) {
-        BOOST_CHECK(
-            (boost::contains(s, pod_name) && boost::contains(s, test_data)) ||
-            (boost::contains(s, versioned_key) && boost::contains(s, test_data)));
-    }
+    BOOST_REQUIRE(iu.size() == 1);
+    BOOST_CHECK(boost::contains(iu.front(), pod_name) &&
+        boost::contains(iu.front(), test_data));
 
     const auto is(i[implementation_system]);
     BOOST_LOG_SEV(lg, debug) << "implementation system dependencies: " << is;

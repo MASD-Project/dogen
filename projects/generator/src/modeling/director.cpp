@@ -32,10 +32,11 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/generator/modeling/director.hpp"
 
+using namespace dogen::utility::log;
+
 namespace {
 
-static dogen::utility::log::logger
-lg(dogen::utility::log::logger_factory("modeling::director"));
+static logger lg(logger_factory("director"));
 
 const std::string empty;
 const std::string merged("merged_");
@@ -93,7 +94,6 @@ save_diagram(const dia::diagram& d, const std::string& name) const {
     using utility::serialization::archive_types;
     archive_types at(settings_.troubleshooting().save_dia_model());
     p.replace_extension(extension(at, dia_model));
-    using namespace dogen::utility::log;
     BOOST_LOG_SEV(lg, info) << "Saving Dia model to path: " << p;
 
     using dogen::utility::serialization::xml_serialize;
@@ -124,7 +124,6 @@ save_model(const sml::model& m, const std::string& prefix) const {
     using utility::serialization::archive_types;
     archive_types at(settings_.troubleshooting().save_sml_model());
     p.replace_extension(extension(at, sml_model));
-    using namespace dogen::utility::log;
     BOOST_LOG_SEV(lg, info) << "Saving SML model to path: " << p;
 
     using dogen::utility::serialization::xml_serialize;
@@ -169,6 +168,19 @@ create_key_system_pod(const sml::model& m, const bool is_versioned) const {
 }
 
 void director::inject_system_types(sml::model& m) const {
+    if (settings_.cpp().disable_versioning()) {
+        BOOST_LOG_SEV(lg, warn) << "Keys are NOT enabled, "
+                                << "NOT injecting them into model.";
+        return;
+    } else {
+        BOOST_LOG_SEV(lg, info) << "Keys are enabled, "
+                                << "so injecting them into model.";
+    }
+
+    auto pods(m.pods());
+    if (pods.empty())
+        return;
+
     const bool is_versioned(true);
     const auto versioned_pod(create_key_system_pod(m, is_versioned));
 
@@ -176,9 +188,11 @@ void director::inject_system_types(sml::model& m) const {
     vk_prop.name(versioned_name);
     vk_prop.type_name(versioned_pod.name());
 
-    auto pods(m.pods());
-    for (auto pair : pods) {
-        auto& pod(pair.second);
+    for (auto i(std::begin(pods)); i != std::end(pods); ++i) {
+        auto& pod(i->second);
+        if (pod.parent_name())
+            continue;
+
         auto props(pod.properties());
         props.push_back(vk_prop);
         pod.properties(props);
@@ -203,8 +217,8 @@ to_sml(const dia::diagram& d, const std::string& file_name,
     dia_to_sml dia_to_sml(d, name, epp, is_target, verbose_);
 
     sml::model m(dia_to_sml.transform());
-    // if (is_target)
-    //     inject_system_types(m);
+    if (is_target)
+        inject_system_types(m);
 
     save_model(m, empty);
     return std::move(m);
@@ -219,7 +233,6 @@ bool director::has_generatable_types(const sml::model& m) const {
             break;
         }
     }
-    using namespace dogen::utility::log;
     BOOST_LOG_SEV(lg, debug) << "Total pods found by builder: "
                              << m.pods().size();
     return r;
@@ -243,7 +256,6 @@ boost::optional<sml::model> director::create_model() const {
 
     model m(builder.build());
 
-    using namespace dogen::utility::log;
     BOOST_LOG_SEV(lg, debug) << "Merged model: " << m;
     save_model(m, merged);
 

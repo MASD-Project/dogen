@@ -124,12 +124,11 @@ private:
     qname_to_class_view_model_type;
 
     struct visit_state {
-        visit_state(const std::string& schema_name, bool disable_keys)
-            : schema_name_(schema_name), disable_keys_(disable_keys) { }
+        explicit visit_state(const std::string& schema_name)
+            : schema_name_(schema_name) { }
 
         qname_to_class_view_model_type class_view_models_;
         const std::string schema_name_;
-        const bool disable_keys_;
     };
 
 public:
@@ -138,8 +137,8 @@ public:
     sml_dfs_visitor(sml_dfs_visitor&&) = default;
 
 public:
-    sml_dfs_visitor(const std::string& schema_name, bool disable_keys)
-        : state_(new visit_state(schema_name, disable_keys)) { }
+    explicit sml_dfs_visitor(const std::string& schema_name)
+        : state_(new visit_state(schema_name)) { }
 
 public:
     template<typename Vertex, typename Graph>
@@ -233,27 +232,6 @@ void sml_dfs_visitor::process_sml_pod(const dogen::sml::pod& pod) {
         props_vm.push_back(k);
     }
 
-    if (!state_->disable_keys_ && !pod.parent_name()) {
-        dogen::sml::qualified_name vn;
-        vn.type_name(versioned_name);
-        vn.model_name(name.model_name());
-        vn.external_package_path(name.external_package_path());
-
-        std::list<std::string> ns_list(join_namespaces(vn));
-        ns_list.push_back(versioned_name);
-
-        using boost::algorithm::join;
-        std::string ns(join(ns_list, namespace_separator));
-        property_view_model k(versioned_name);
-        k.type(ns);
-
-        boost::replace_all(ns, "::", "_");
-        boost::replace_all(ns, " ", "_");
-        k.identifiable_type(ns);
-
-        k.is_primitive(false);
-        props_vm.push_back(k);
-    }
     all_props_vm.insert(all_props_vm.end(), props_vm.begin(), props_vm.end());
     cvm.properties(props_vm);
     cvm.all_properties(all_props_vm);
@@ -280,15 +258,6 @@ sml_to_cpp_view_model(const cpp_location_manager& location_manager,
     settings_(settings),
     model_(model),
     root_vertex_(boost::add_vertex(graph_)) { }
-
-void sml_to_cpp_view_model::log_keys() const {
-    if (settings_.disable_versioning())
-        BOOST_LOG_SEV(lg, warn) << "Keys are NOT enabled, "
-                                << "NOT generating views for them.";
-    else
-        BOOST_LOG_SEV(lg, info) << "Keys are enabled, "
-                                << "so generating views for them.";
-}
 
 void sml_to_cpp_view_model::log_includers() const {
     if (settings_.disable_facet_includers())
@@ -429,7 +398,7 @@ void sml_to_cpp_view_model::setup_qualified_name_to_class_view_model_map() {
             boost::add_edge(root_vertex_, vertex, graph_);
     }
 
-    sml_dfs_visitor v(model_.schema_name(), settings_.disable_versioning());
+    sml_dfs_visitor v(model_.schema_name());
     boost::depth_first_search(graph_, boost::visitor(v));
     qname_to_class_ = v.class_view_models();
 }
@@ -455,6 +424,13 @@ std::vector<file_view_model> sml_to_cpp_view_model::transform_pods() {
         const auto main(cpp_aspect_types::main);
         // const auto forward_decls(cpp_aspect_types::forward_decls);
         for (const auto ft: settings_.enabled_facets()) {
+            const bool is_system_type(
+                p.category_type() == sml::category_types::versioned_key ||
+                p.category_type() == sml::category_types::unversioned_key);
+
+            if (ft == cpp_facet_types::database && is_system_type)
+                continue;
+
             lambda(ft, header, main, p);
 
             if (has_implementation(ft, p))
@@ -466,107 +442,6 @@ std::vector<file_view_model> sml_to_cpp_view_model::transform_pods() {
     }
 
     BOOST_LOG_SEV(lg, debug) << "Transformed pods: " << pods.size();
-    return r;
-}
-
-class_view_model
-sml_to_cpp_view_model::create_key_class_view_model(bool is_versioned) const {
-    const std::string name(is_versioned ? versioned_name : unversioned_name);
-    BOOST_LOG_SEV(lg, debug) << "Creating key class" << name;
-
-    class_view_model r;
-    r.name(name);
-
-    sml::qualified_name qn;
-    qn.type_name(name);
-    qn.model_name(model_.name());
-    qn.external_package_path(model_.external_package_path());
-
-    const std::list<std::string> ns(join_namespaces(qn));
-    r.namespaces(ns);
-
-    auto lambda([&](const std::string& name, std::string type)
-        -> property_view_model {
-            property_view_model r(name);
-            r.type(type);
-            r.is_primitive(true);
-            r.is_int_like(true);
-
-            using boost::algorithm::join;
-            boost::replace_all(type, "::", "_");
-            boost::replace_all(type, " ", "_");
-            r.identifiable_type(type);
-
-            return r;
-        });
-
-    std::list<property_view_model> properties;
-    properties.push_back(lambda(id_name, uint_type));
-    if (is_versioned)
-        properties.push_back(lambda(version_name, uint_type));
-    r.properties(properties);
-    r.all_properties(properties);
-    r.has_primitive_properties(true);
-
-    BOOST_LOG_SEV(lg, debug) << "Created key class" << name;
-    return r;
-}
-
-file_view_model sml_to_cpp_view_model::
-create_key_file_view_model(cpp_facet_types ft, cpp_file_types flt,
-    cpp_aspect_types at) {
-    file_view_model r;
-    r.facet_type(ft);
-    r.file_type(flt);
-    r.aspect_type(at);
-
-    const bool is_versioned(at == cpp_aspect_types::versioned_key);
-    r.class_vm(create_key_class_view_model(is_versioned));
-
-    const std::string name(r.class_vm()->name());
-    log_generating_file(ft, at, flt, name);
-    const auto i(inclusion_manager_.includes_for_versioning(name, ft, flt, at));
-    r.system_includes(i.system);
-    r.user_includes(i.user);
-
-    sml::qualified_name qn;
-    qn.external_package_path(model_.external_package_path());
-    qn.type_name(name);
-    qn.model_name(model_.name());
-
-    if (flt == cpp_file_types::header) {
-        const auto rq(location_request_factory(ft, flt, qn));
-        const auto rp(location_manager_.relative_logical_path(rq));
-        r.header_guard(to_header_guard_name(rp));
-        inclusion_manager_.register_header(ft, rp);
-    }
-
-    const auto rq(location_request_factory(ft, flt, qn));
-    r.file_path(location_manager_.absolute_path(rq));
-    return r;
-}
-
-std::vector<file_view_model>
-sml_to_cpp_view_model::transform_keys() {
-    std::vector<file_view_model> r;
-
-    const auto h(cpp_file_types::header);
-    const auto i(cpp_file_types::implementation);
-    const auto v(cpp_aspect_types::versioned_key);
-    const auto u(cpp_aspect_types::unversioned_key);
-
-    for (cpp_facet_types ft : settings_.enabled_facets()) {
-        if (ft == cpp_facet_types::database)
-            continue;
-
-        r.push_back(create_key_file_view_model(ft, h, v));
-        r.push_back(create_key_file_view_model(ft, h, u));
-
-        if (has_implementation(ft)) {
-            r.push_back(create_key_file_view_model(ft, i, v));
-            r.push_back(create_key_file_view_model(ft, i, u));
-        }
-    }
     return r;
 }
 
@@ -603,12 +478,6 @@ std::vector<file_view_model> sml_to_cpp_view_model::transform() {
     log_started();
     setup_qualified_name_to_class_view_model_map();
     auto r(transform_pods());
-
-    log_keys();
-    if (!settings_.disable_versioning()) {
-        const auto k(transform_keys());
-        r.insert(r.end(), k.begin(), k.end());
-    }
 
     log_includers();
     if (settings_.disable_facet_includers())

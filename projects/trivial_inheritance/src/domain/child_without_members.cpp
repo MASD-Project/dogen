@@ -20,7 +20,7 @@
  */
 #include <ostream>
 #include "dogen/trivial_inheritance/domain/child_without_members.hpp"
-#include "dogen/trivial_inheritance/io/versioned_key_io.hpp"
+#include "dogen/trivial_inheritance/io/parent_without_members_io.hpp"
 
 namespace dogen {
 namespace trivial_inheritance {

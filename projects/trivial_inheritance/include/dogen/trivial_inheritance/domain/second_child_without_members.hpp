@@ -28,7 +28,6 @@
 #include <algorithm>
 #include <iosfwd>
 #include "dogen/trivial_inheritance/domain/parent_with_members.hpp"
-#include "dogen/trivial_inheritance/domain/versioned_key.hpp"
 
 namespace dogen {
 namespace trivial_inheritance {

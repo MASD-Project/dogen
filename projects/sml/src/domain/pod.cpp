@@ -51,7 +51,7 @@ void pod::to_stream(std::ostream& stream) const {
            << parent_name() << ", "
            << "\"generate\": " << generate_ << ", "
            << "\"is_parent\": " << is_parent_ << ", "
-           << "\"category_type\": " << category_type_
+           << "\"category_type\":" << "\"" << category_type_ << "\""
            << " }";
 }
 

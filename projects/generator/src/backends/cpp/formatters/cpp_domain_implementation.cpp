@@ -44,9 +44,11 @@ const std::string semi_colon(";");
 const std::string space(" ");
 const std::string comma(",");
 
-const std::string invalid_facet_types_enum("Invalid value for cpp_facet_types");
 const std::string missing_class_view_model(
     "File view model must contain a class view model");
+
+const std::string invalid_aspect_type("Invalid value for cpp_aspect_types");
+const std::string invalid_category_type("Invalid value for category_types");
 
 // FIXME: until we add support to indenter.
 const std::string special_indent("       ");
@@ -100,28 +102,29 @@ inserter_operator(const class_view_model& vm) {
     utility_.blank_line();
 }
 
-void domain_implementation::class_implementation(cpp_aspect_types aspect_type,
+void domain_implementation::
+class_implementation(cpp_aspect_types at, const sml::category_types ct,
     const class_view_model& vm) {
 
-    if (aspect_type== cpp_aspect_types::main) {
-        cpp_domain_class_implementation
-            f(stream_, disable_complete_constructor_, disable_io_);
-        f.format(vm);
-        return;
-    }
-
-    if (aspect_type== cpp_aspect_types::versioned_key ||
-        aspect_type== cpp_aspect_types::unversioned_key) {
-        const bool is_versioned(aspect_type== cpp_aspect_types::versioned_key);
-        cpp_key_class_implementation
-            f(stream_, is_versioned, disable_complete_constructor_,
-                disable_io_);
-        f.format(vm);
-        return;
-    }
-
     using utility::exception::invalid_enum_value;
-    throw invalid_enum_value(invalid_facet_types_enum);
+    if (at == cpp_aspect_types::main) {
+        if (ct == sml::category_types::versioned_key ||
+            ct == sml::category_types::unversioned_key) {
+            const bool is_versioned(ct == sml::category_types::versioned_key);
+            cpp_key_class_implementation
+                f(stream_, is_versioned, disable_complete_constructor_,
+                    disable_io_);
+            f.format(vm);
+            return;
+        } else if (ct == sml::category_types::user_defined) {
+            cpp_domain_class_implementation
+                f(stream_, disable_complete_constructor_, disable_io_);
+            f.format(vm);
+            return;
+        }
+        throw invalid_enum_value(invalid_category_type);
+    }
+    throw invalid_enum_value(invalid_aspect_type);
 }
 
 void domain_implementation::format(const file_view_model& vm) {
@@ -139,7 +142,7 @@ void domain_implementation::format(const file_view_model& vm) {
     const view_models::class_view_model& cvm(*o);
     namespace_helper ns_helper(stream_, cvm.namespaces());
     utility_.blank_line();
-    class_implementation(vm.aspect_type(), cvm);
+    class_implementation(vm.aspect_type(), vm.category_type(), cvm);
     inserter_operator(cvm);
 }
 

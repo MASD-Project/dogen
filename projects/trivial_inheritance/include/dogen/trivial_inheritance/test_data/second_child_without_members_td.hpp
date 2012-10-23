@@ -26,7 +26,6 @@
 #endif
 
 #include "dogen/trivial_inheritance/domain/second_child_without_members.hpp"
-#include "dogen/trivial_inheritance/test_data/parent_with_members_td.hpp"
 
 namespace dogen {
 namespace trivial_inheritance {

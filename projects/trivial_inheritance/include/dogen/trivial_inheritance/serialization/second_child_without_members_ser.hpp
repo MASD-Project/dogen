@@ -29,7 +29,6 @@
 #include <boost/serialization/nvp.hpp>
 #include "dogen/trivial_inheritance/domain/second_child_without_members.hpp"
 #include "dogen/trivial_inheritance/serialization/parent_with_members_ser.hpp"
-#include "dogen/trivial_inheritance/serialization/versioned_key_ser.hpp"
 
 namespace dogen {
 namespace trivial_inheritance {

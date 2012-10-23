@@ -27,7 +27,6 @@
 
 #include <functional>
 #include "dogen/trivial_inheritance/domain/second_child_without_members.hpp"
-#include "dogen/trivial_inheritance/hash/parent_with_members_hash.hpp"
 
 namespace dogen {
 namespace trivial_inheritance {

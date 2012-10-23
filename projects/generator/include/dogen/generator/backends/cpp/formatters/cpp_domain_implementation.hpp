@@ -58,8 +58,8 @@ public:
 
 private:
     void inserter_operator(const class_view_model& vm);
-    void class_implementation(cpp_aspect_types aspect_type,
-        const class_view_model& vm);
+    void class_implementation(const cpp_aspect_types at,
+        const sml::category_types ct, const class_view_model& vm);
 
 public:
     static file_formatter::shared_ptr create(std::ostream& stream,

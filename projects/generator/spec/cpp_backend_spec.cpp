@@ -150,7 +150,7 @@ BOOST_AUTO_TEST_CASE(view_model_transformer_correctly_transforms_domain_files) {
     auto input_path(dia_sml::expected_class_in_a_package_sml_xml());
     std::vector<file_view_model> actual(execute_transformer(input_path));
 
-    BOOST_CHECK(actual.size() == 7);
+    BOOST_CHECK(actual.size() == 3);
     for (const auto f : actual) {
         BOOST_LOG_SEV(lg, debug) << "file: " << f.file_path();
         BOOST_CHECK(f.facet_type() == cpp_facet_types::domain);
@@ -178,19 +178,8 @@ BOOST_AUTO_TEST_CASE(view_model_transformer_correctly_transforms_domain_files) {
             BOOST_CHECK(f.file_type() == cpp_file_types::header);
             BOOST_CHECK(f.aspect_type() == cpp_aspect_types::includers);
             BOOST_CHECK(f.header_guard().empty());
-            BOOST_CHECK(f.user_includes().size() == 3);
-            for (const auto d : f.user_includes()) {
-                BOOST_CHECK(d == user_dependency || d == versioned_dependency ||
-                    d == unversioned_dependency);
-            }
-            continue;
-        }
-
-        if (f.aspect_type() == cpp_aspect_types::versioned_key) {
-            // FIXME
-            continue;
-        } else if (f.aspect_type() == cpp_aspect_types::unversioned_key) {
-            // FIXME
+            BOOST_CHECK(f.user_includes().size() == 1);
+            BOOST_CHECK(f.user_includes().front() == user_dependency);
             continue;
         }
 
@@ -216,7 +205,7 @@ BOOST_AUTO_TEST_CASE(view_model_transformer_correctly_transforms_domain_files) {
 
         const auto properties(class_vm.properties());
         BOOST_LOG_SEV(lg, debug) << "property count: " << properties.size();
-        BOOST_REQUIRE(properties.size() == 3);
+        BOOST_REQUIRE(properties.size() == 2);
 
         for (const auto p : properties) {
             BOOST_LOG_SEV(lg, debug) << "property type: " << p.type()
@@ -237,7 +226,7 @@ BOOST_AUTO_TEST_CASE(disabling_facet_includers_results_in_no_facet_includers) {
     const bool disable_facet_includers(true);
     const auto actual(execute_transformer(input_path, disable_facet_includers));
 
-    BOOST_CHECK(actual.size() == 6);
+    BOOST_CHECK(actual.size() == 2);
     for (const auto f : actual) {
         BOOST_CHECK(f.aspect_type() != cpp_aspect_types::includers);
         const auto o(f.class_vm());
@@ -254,9 +243,10 @@ BOOST_AUTO_TEST_CASE(disabling_keys_results_in_no_keys) {
     const auto actual(execute_transformer(input_path, disable_facet_includers, disable_versioning));
 
     BOOST_CHECK(actual.size() == 3);
+    using dogen::sml::category_types;
     for (const auto f : actual) {
-        BOOST_CHECK(f.aspect_type() != cpp_aspect_types::versioned_key);
-        BOOST_CHECK(f.aspect_type() != cpp_aspect_types::unversioned_key);
+        BOOST_CHECK(f.category_type() != category_types::versioned_key);
+        BOOST_CHECK(f.category_type() != category_types::unversioned_key);
     }
 }
 

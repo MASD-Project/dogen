@@ -27,6 +27,7 @@
 
 #include <iosfwd>
 #include <boost/filesystem/path.hpp>
+#include "dogen/sml/domain/category_types.hpp"
 #include "dogen/generator/backends/cpp/formatters/cpp_indenter.hpp"
 #include "dogen/generator/backends/cpp/formatters/cpp_utility.hpp"
 #include "dogen/generator/backends/cpp/view_models/file_view_model.hpp"
@@ -63,8 +64,8 @@ public:
 private:
     void inserter_operator(const class_view_model& vm);
     void swap_method(const class_view_model& vm);
-    void class_declaration(cpp_aspect_types aspect_type,
-        const class_view_model& vm);
+    void class_declaration(const cpp_aspect_types at,
+        const sml::category_types ct, const class_view_model& vm);
 
 public:
     virtual void format(const file_view_model& vm) override;

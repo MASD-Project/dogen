@@ -23,17 +23,18 @@
 #include "dogen/utility/exception/invalid_enum_value.hpp"
 #include "dogen/generator/backends/cpp/formatters/cpp_qualified_name.hpp"
 #include "dogen/generator/backends/cpp/formatters/cpp_licence.hpp"
-#include "dogen/generator/backends/cpp/formatters/cpp_domain_header.hpp"
 #include "dogen/generator/backends/cpp/formatters/cpp_header_guards.hpp"
 #include "dogen/generator/backends/cpp/formatters/cpp_namespace.hpp"
 #include "dogen/generator/backends/cpp/formatters/cpp_domain_class_declaration.hpp"
 #include "dogen/generator/backends/cpp/formatters/cpp_key_class_declaration.hpp"
 #include "dogen/generator/backends/cpp/formatters/cpp_namespace_helper.hpp"
 #include "dogen/generator/backends/cpp/formatters/cpp_includes.hpp"
+#include "dogen/generator/backends/cpp/formatters/cpp_domain_header.hpp"
 
 namespace {
 
-const std::string invalid_facet_types_enum("Invalid value for cpp_facet_types");
+const std::string invalid_aspect_type("Invalid value for cpp_aspect_types");
+const std::string invalid_category_type("Invalid value for category_types");
 const std::string missing_class_view_model(
     "File view model must contain a class view model");
 
@@ -99,28 +100,30 @@ void domain_header::swap_method(const class_view_model& vm) {
     utility_.blank_line();
 }
 
-void domain_header::class_declaration(cpp_aspect_types aspect_type,
+void domain_header::
+class_declaration(const cpp_aspect_types at, const sml::category_types ct,
     const class_view_model& vm) {
 
-    if (aspect_type== cpp_aspect_types::main) {
-        cpp_domain_class_declaration
-            f(stream_, disable_complete_constructor_, disable_io_);
-        f.format(vm);
-        return;
-    }
-
-    if (aspect_type== cpp_aspect_types::versioned_key ||
-        aspect_type== cpp_aspect_types::unversioned_key) {
-        const bool is_versioned(aspect_type== cpp_aspect_types::versioned_key);
-        cpp_key_class_declaration
-            f(stream_, disable_complete_constructor_, is_versioned,
-                disable_io_);
-        f.format(vm);
-        return;
-    }
-
     using utility::exception::invalid_enum_value;
-    throw invalid_enum_value(invalid_facet_types_enum);
+    if (at == cpp_aspect_types::main) {
+
+        if (ct == sml::category_types::versioned_key ||
+            ct == sml::category_types::unversioned_key) {
+            const bool is_versioned(ct == sml::category_types::versioned_key);
+            cpp_key_class_declaration
+                f(stream_, disable_complete_constructor_, is_versioned,
+                    disable_io_);
+            f.format(vm);
+            return;
+        } else if (ct == sml::category_types::user_defined) {
+            cpp_domain_class_declaration
+                f(stream_, disable_complete_constructor_, disable_io_);
+            f.format(vm);
+            return;
+        }
+        throw invalid_enum_value(invalid_category_type);
+    }
+    throw invalid_enum_value(invalid_aspect_type);
 }
 
 void domain_header::format(const file_view_model& vm) {
@@ -148,7 +151,7 @@ void domain_header::format(const file_view_model& vm) {
                 << "_serializer;" << std::endl;
         utility_.blank_line();
 
-        class_declaration(vm.aspect_type(), cvm);
+        class_declaration(vm.aspect_type(), vm.category_type(), cvm);
         utility_.blank_line();
 
         inserter_operator(cvm);
