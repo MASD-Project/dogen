@@ -107,10 +107,11 @@ BOOST_AUTO_TEST_CASE(exercise_type_and_descendants_io) {
             package_path, "parent_pod", dogen::sml::meta_types::pod));
 
     const std::vector<dogen::sml::property> p;
-    const bool generate(true);
+    const bool gen(true);
     const bool parent(false);
+    const auto ct(dogen::sml::category_types::user_defined);
 
-    dogen::sml::pod pod(child_type_name, p, parent_type_name, generate, parent);
+    dogen::sml::pod pod(child_type_name, p, parent_type_name, gen, parent, ct);
     BOOST_LOG_SEV(lg, info) << pod;
     BOOST_CHECK(true);
 }

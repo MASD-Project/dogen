@@ -31,6 +31,7 @@
 #include <iosfwd>
 #include <utility>
 #include <boost/optional.hpp>
+#include "dogen/sml/domain/category_types.hpp"
 #include "dogen/sml/domain/property.hpp"
 #include "dogen/sml/domain/qualified_name.hpp"
 
@@ -52,7 +53,8 @@ private:
     friend class pod_serializer;
 
 public:
-    pod() : generate_(false), is_parent_(false) { }
+    pod() : generate_(false), is_parent_(false),
+            category_type_(category_types::invalid) { }
 
     /**
      * @brief Initialises the pod.
@@ -69,15 +71,17 @@ public:
     pod(qualified_name name,
         std::vector<dogen::sml::property> properties,
         boost::optional<qualified_name> parent_name, bool generate,
-        bool is_parent)
+        bool is_parent, category_types category_type)
         : name_(name), properties_(properties), parent_name_(parent_name),
-          generate_(generate), is_parent_(is_parent) { }
+          generate_(generate), is_parent_(is_parent),
+          category_type_(category_type) { }
 
     pod(pod&& rhs) : name_(std::move(rhs.name_)),
                      properties_(std::move(rhs.properties_)),
                      parent_name_(std::move(rhs.parent_name_)),
                      generate_(std::move(rhs.generate_)),
-                     is_parent_(std::move(rhs.is_parent_)) { }
+                     is_parent_(std::move(rhs.is_parent_)),
+                     category_type_(std::move(rhs.category_type_)) { }
 
 public:
     /**
@@ -126,6 +130,15 @@ public:
     void is_parent(bool value) { is_parent_ = value; }
     /**@}*/
 
+    /**
+     * @brief Category of this type - whether its system or user
+     * defined.
+     */
+    /**@{*/
+    sml::category_types category_type() const { return category_type_; }
+    void category_type(sml::category_types value) { category_type_ = value; }
+    /**@}*/
+
 public:
     void to_stream(std::ostream& stream) const;
 
@@ -142,6 +155,7 @@ private:
     boost::optional<qualified_name> parent_name_;
     bool generate_;
     bool is_parent_;
+    sml::category_types category_type_;
 };
 
 } }

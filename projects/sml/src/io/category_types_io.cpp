@@ -21,17 +21,15 @@
 #include <string>
 #include <ostream>
 #include "dogen/utility/exception/invalid_enum_value.hpp"
-#include "dogen/sml/io/meta_types_io.hpp"
+#include "dogen/sml/io/category_types_io.hpp"
 
 namespace {
 
-const std::string prefix("meta_types::");
+const std::string prefix("category_types::");
 const std::string invalid("invalid");
-const std::string enumeration("enumeration");
-const std::string pod("pod");
-const std::string primitive("primitive");
-const std::string attribute("attribute");
-const std::string package("package");
+const std::string user_defined("user_defined");
+const std::string versioned_key("versioned_key");
+const std::string unversioned_key("unversioned_key");
 
 const std::string error_message("Invalid enum value");
 
@@ -40,20 +38,16 @@ const std::string error_message("Invalid enum value");
 namespace dogen {
 namespace sml {
 
-std::ostream& operator<<(std::ostream& stream, meta_types value) {
+std::ostream& operator<<(std::ostream& stream, category_types value) {
     switch (value) {
-    case meta_types::invalid:
+    case category_types::invalid:
         return stream << prefix << invalid;
-    case meta_types::enumeration:
-        return stream << prefix << enumeration;
-    case meta_types::pod:
-        return stream << prefix << pod;
-    case meta_types::attribute:
-        return stream << prefix << attribute;
-    case meta_types::package:
-        return stream << prefix << package;
-    case meta_types::primitive:
-        return stream << prefix << primitive;
+    case category_types::user_defined:
+        return stream << prefix << user_defined;
+    case category_types::versioned_key:
+        return stream << prefix << versioned_key;
+    case category_types::unversioned_key:
+        return stream << prefix << unversioned_key;
     default:
         using utility::exception::invalid_enum_value;
         throw invalid_enum_value(error_message);

@@ -18,38 +18,29 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_SML_SERIALIZATION_POD_SER_HPP
-#define DOGEN_SML_SERIALIZATION_POD_SER_HPP
+#ifndef DOGEN_SML_SERIALIZATION_CATEGORY_TYPES_SER_HPP
+#define DOGEN_SML_SERIALIZATION_CATEGORY_TYPES_SER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <string>
+#include <boost/serialization/string.hpp>
 #include <boost/serialization/nvp.hpp>
-#include <boost/serialization/vector.hpp>
-#include <boost/serialization/optional.hpp>
-#include "dogen/sml/domain/pod.hpp"
-#include "dogen/sml/serialization/property_ser.hpp"
-#include "dogen/sml/serialization/category_types_ser.hpp"
-#include "dogen/sml/serialization/qualified_name_ser.hpp"
+#include "dogen/sml/domain/category_types.hpp"
 
 namespace dogen {
 namespace sml {
 
-class pod_serializer {
+class category_types_serializer {
 public:
     template<typename Archive>
     void serialize(Archive & archive,
-        dogen::sml::pod& value,
+        dogen::sml::category_types& value,
         const unsigned int /*version*/) {
         using boost::serialization::make_nvp;
-        archive & make_nvp("name", value.name_);
-        archive & make_nvp("properties", value.properties_);
-        archive & make_nvp("parent_name", value.parent_name_);
-        archive & make_nvp("generate", value.generate_);
-        archive & make_nvp("is_parent", value.is_parent_);
-        archive & make_nvp("category_type", value.category_type_);
+        archive & make_nvp("category_types", value);
     }
 };
 
@@ -60,9 +51,9 @@ namespace serialization {
 
 template<class Archive>
 inline void serialize(Archive & archive,
-    dogen::sml::pod& value,
+    dogen::sml::category_types& value,
     const unsigned int version) {
-    dogen::sml::pod_serializer serializer;
+    dogen::sml::category_types_serializer serializer;
     serializer.serialize<Archive>(archive, value, version);
 }
 

@@ -23,6 +23,7 @@
 #include "dogen/utility/io/optional_io.hpp"
 #include "dogen/utility/io/vector_io.hpp"
 #include "dogen/utility/io/list_io.hpp"
+#include "dogen/sml/io/category_types_io.hpp"
 #include "dogen/sml/io/property_io.hpp"
 #include "dogen/sml/io/qualified_name_io.hpp"
 #include "dogen/sml/domain/pod.hpp"
@@ -36,7 +37,8 @@ bool pod::operator==(const pod& rhs) const {
         properties_ == rhs.properties_ &&
         parent_name_ == rhs.parent_name_ &&
         generate_ == rhs.generate_ &&
-        is_parent_ == rhs.is_parent_;
+        is_parent_ == rhs.is_parent_ &&
+        category_type_ == rhs.category_type_;
 }
 
 void pod::to_stream(std::ostream& stream) const {
@@ -44,11 +46,12 @@ void pod::to_stream(std::ostream& stream) const {
 
     stream << std::boolalpha;
     stream << "\"pod\": {"
-           << name() << ","
-           << "\"properties\":" << properties() << ","
-           << parent_name() << ","
-           << "\"generate\": " << generate_ << ","
-           << "\"is_parent\": " << is_parent_
+           << name() << ", "
+           << "\"properties\":" << properties() << ", "
+           << parent_name() << ", "
+           << "\"generate\": " << generate_ << ", "
+           << "\"is_parent\": " << is_parent_ << ", "
+           << "\"category_type\": " << category_type_
            << " }";
 }
 

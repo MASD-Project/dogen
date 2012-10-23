@@ -49,6 +49,7 @@
 				</parent_name>
 				<generate>1</generate>
 				<is_parent>0</is_parent>
+				<category_type>1</category_type>
 			</second>
 		</item>
 		<item>
@@ -88,6 +89,7 @@
 				</parent_name>
 				<generate>1</generate>
 				<is_parent>0</is_parent>
+				<category_type>1</category_type>
 			</second>
 		</item>
 		<item>
@@ -127,6 +129,7 @@
 				</parent_name>
 				<generate>1</generate>
 				<is_parent>0</is_parent>
+				<category_type>1</category_type>
 			</second>
 		</item>
 		<item>
@@ -166,6 +169,7 @@
 				</parent_name>
 				<generate>1</generate>
 				<is_parent>0</is_parent>
+				<category_type>1</category_type>
 			</second>
 		</item>
 		<item>
@@ -205,6 +209,7 @@
 				</parent_name>
 				<generate>1</generate>
 				<is_parent>0</is_parent>
+				<category_type>1</category_type>
 			</second>
 		</item>
 	</pods>

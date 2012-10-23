@@ -402,6 +402,7 @@ dia_dfs_visitor::transform_pod(const dogen::dia::object& o) const {
     dogen::sml::pod pod;
 
     pod.generate(state_->is_target_);
+    pod.category_type(dogen::sml::category_types::user_defined);
     for (auto attribute : o.attributes()) {
         BOOST_LOG_SEV(lg, debug) << "Found attribute: " << attribute.name();
 
