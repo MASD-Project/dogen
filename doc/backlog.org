@@ -10,6 +10,11 @@ This file contains all stories that haven't been assigned to a sprint.
 
 Stories that we intend to look at, at some point.
 
+*** Add tests for invalid types
+
+- type name is blank (or variable name)
+- type name does not exist on any model
+
 *** Add tests for disconnected connections
 
 We should throw if a diagram has a disconnected inheritance or
