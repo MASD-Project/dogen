@@ -18,10 +18,35 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/trivial_inheritance/test_data/child_without_members_td.hpp"
-#include "dogen/trivial_inheritance/test_data/parent_with_members_td.hpp"
-#include "dogen/trivial_inheritance/test_data/parent_without_members_td.hpp"
-#include "dogen/trivial_inheritance/test_data/second_child_without_members_td.hpp"
-#include "dogen/trivial_inheritance/test_data/third_child_with_members_td.hpp"
-#include "dogen/trivial_inheritance/test_data/unversioned_key_td.hpp"
-#include "dogen/trivial_inheritance/test_data/versioned_key_td.hpp"
+#ifndef DOGEN_TRIVIAL_INHERITANCE_HASH_THIRD_CHILD_WITH_MEMBERS_HASH_HPP
+#define DOGEN_TRIVIAL_INHERITANCE_HASH_THIRD_CHILD_WITH_MEMBERS_HASH_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include <functional>
+#include "dogen/trivial_inheritance/domain/third_child_with_members.hpp"
+
+namespace dogen {
+namespace trivial_inheritance {
+
+class third_child_with_members_hasher {
+public:
+    static std::size_t hash(const third_child_with_members& v);
+};
+
+} }
+
+namespace std {
+
+template<>
+class hash<dogen::trivial_inheritance::third_child_with_members> {
+public:
+    size_t operator()(const dogen::trivial_inheritance::third_child_with_members& v) const {
+        return dogen::trivial_inheritance::third_child_with_members_hasher::hash(v);
+    }
+};
+
+}
+#endif

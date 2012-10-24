@@ -18,10 +18,35 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/trivial_inheritance/test_data/child_without_members_td.hpp"
-#include "dogen/trivial_inheritance/test_data/parent_with_members_td.hpp"
-#include "dogen/trivial_inheritance/test_data/parent_without_members_td.hpp"
-#include "dogen/trivial_inheritance/test_data/second_child_without_members_td.hpp"
-#include "dogen/trivial_inheritance/test_data/third_child_with_members_td.hpp"
-#include "dogen/trivial_inheritance/test_data/unversioned_key_td.hpp"
-#include "dogen/trivial_inheritance/test_data/versioned_key_td.hpp"
+#ifndef DOGEN_TRIVIAL_INHERITANCE_TEST_DATA_THIRD_CHILD_WITH_MEMBERS_TD_HPP
+#define DOGEN_TRIVIAL_INHERITANCE_TEST_DATA_THIRD_CHILD_WITH_MEMBERS_TD_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include "dogen/trivial_inheritance/domain/third_child_with_members.hpp"
+
+namespace dogen {
+namespace trivial_inheritance {
+
+
+class third_child_with_members_generator {
+public:
+    third_child_with_members_generator();
+
+public:
+    typedef dogen::trivial_inheritance::third_child_with_members result_type;
+
+public:
+    static void populate(const unsigned int position, result_type& v);
+    static result_type create(const unsigned int position);
+    result_type operator()();
+
+private:
+    unsigned int position_;
+};
+
+} }
+
+#endif

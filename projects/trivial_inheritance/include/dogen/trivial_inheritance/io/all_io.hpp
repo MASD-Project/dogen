@@ -22,5 +22,6 @@
 #include "dogen/trivial_inheritance/io/parent_with_members_io.hpp"
 #include "dogen/trivial_inheritance/io/parent_without_members_io.hpp"
 #include "dogen/trivial_inheritance/io/second_child_without_members_io.hpp"
+#include "dogen/trivial_inheritance/io/third_child_with_members_io.hpp"
 #include "dogen/trivial_inheritance/io/unversioned_key_io.hpp"
 #include "dogen/trivial_inheritance/io/versioned_key_io.hpp"

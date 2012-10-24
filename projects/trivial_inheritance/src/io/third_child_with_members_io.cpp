@@ -18,10 +18,16 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/trivial_inheritance/test_data/child_without_members_td.hpp"
-#include "dogen/trivial_inheritance/test_data/parent_with_members_td.hpp"
-#include "dogen/trivial_inheritance/test_data/parent_without_members_td.hpp"
-#include "dogen/trivial_inheritance/test_data/second_child_without_members_td.hpp"
-#include "dogen/trivial_inheritance/test_data/third_child_with_members_td.hpp"
-#include "dogen/trivial_inheritance/test_data/unversioned_key_td.hpp"
-#include "dogen/trivial_inheritance/test_data/versioned_key_td.hpp"
+#include <ostream>
+#include "dogen/trivial_inheritance/io/parent_with_members_io.hpp"
+#include "dogen/trivial_inheritance/io/third_child_with_members_io.hpp"
+
+namespace dogen {
+namespace trivial_inheritance {
+
+std::ostream& operator<<(std::ostream& s, const third_child_with_members& v) {
+    v.to_stream(s);
+    return(s);
+}
+
+} }

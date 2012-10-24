@@ -22,3 +22,4 @@
 #include "dogen/trivial_inheritance/database/parent_with_members_db.hpp"
 #include "dogen/trivial_inheritance/database/parent_without_members_db.hpp"
 #include "dogen/trivial_inheritance/database/second_child_without_members_db.hpp"
+#include "dogen/trivial_inheritance/database/third_child_with_members_db.hpp"
