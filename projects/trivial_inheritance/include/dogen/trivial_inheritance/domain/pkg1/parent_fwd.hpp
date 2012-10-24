@@ -18,14 +18,19 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/trivial_inheritance/test_data/child_of_a_child1_td.hpp"
-#include "dogen/trivial_inheritance/test_data/child_of_a_child2_td.hpp"
-#include "dogen/trivial_inheritance/test_data/child_without_members_td.hpp"
-#include "dogen/trivial_inheritance/test_data/parent_with_members_td.hpp"
-#include "dogen/trivial_inheritance/test_data/parent_without_members_td.hpp"
-#include "dogen/trivial_inheritance/test_data/pkg1/child_td.hpp"
-#include "dogen/trivial_inheritance/test_data/pkg1/parent_td.hpp"
-#include "dogen/trivial_inheritance/test_data/second_child_without_members_td.hpp"
-#include "dogen/trivial_inheritance/test_data/third_child_with_members_td.hpp"
-#include "dogen/trivial_inheritance/test_data/unversioned_key_td.hpp"
-#include "dogen/trivial_inheritance/test_data/versioned_key_td.hpp"
+#ifndef DOGEN_TRIVIAL_INHERITANCE_DOMAIN_PKG1_PARENT_FWD_HPP
+#define DOGEN_TRIVIAL_INHERITANCE_DOMAIN_PKG1_PARENT_FWD_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+namespace dogen {
+namespace trivial_inheritance {
+namespace pkg1 {
+
+class parent;
+
+} } }
+
+#endif

@@ -18,14 +18,39 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/trivial_inheritance/test_data/child_of_a_child1_td.hpp"
-#include "dogen/trivial_inheritance/test_data/child_of_a_child2_td.hpp"
-#include "dogen/trivial_inheritance/test_data/child_without_members_td.hpp"
-#include "dogen/trivial_inheritance/test_data/parent_with_members_td.hpp"
-#include "dogen/trivial_inheritance/test_data/parent_without_members_td.hpp"
 #include "dogen/trivial_inheritance/test_data/pkg1/child_td.hpp"
 #include "dogen/trivial_inheritance/test_data/pkg1/parent_td.hpp"
-#include "dogen/trivial_inheritance/test_data/second_child_without_members_td.hpp"
-#include "dogen/trivial_inheritance/test_data/third_child_with_members_td.hpp"
-#include "dogen/trivial_inheritance/test_data/unversioned_key_td.hpp"
-#include "dogen/trivial_inheritance/test_data/versioned_key_td.hpp"
+
+namespace {
+
+int create_int(const unsigned int position) {
+    return position;
+}
+
+}
+
+namespace dogen {
+namespace trivial_inheritance {
+namespace pkg1 {
+
+child_generator::child_generator() : position_(0) { }
+
+void child_generator::
+populate(const unsigned int position, result_type& v) {
+    v.prop_1(create_int(position + 0));
+}
+
+child_generator::result_type
+child_generator::create(const unsigned int position) {
+    child r;
+    parent_generator::populate(position, r);
+    child_generator::populate(position, r);
+    return r;
+}
+
+child_generator::result_type
+child_generator::operator()() {
+    return create(position_++);
+}
+
+} } }

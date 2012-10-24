@@ -23,6 +23,8 @@
 #include "dogen/trivial_inheritance/serialization/child_without_members_ser.hpp"
 #include "dogen/trivial_inheritance/serialization/parent_with_members_ser.hpp"
 #include "dogen/trivial_inheritance/serialization/parent_without_members_ser.hpp"
+#include "dogen/trivial_inheritance/serialization/pkg1/child_ser.hpp"
+#include "dogen/trivial_inheritance/serialization/pkg1/parent_ser.hpp"
 #include "dogen/trivial_inheritance/serialization/second_child_without_members_ser.hpp"
 #include "dogen/trivial_inheritance/serialization/third_child_with_members_ser.hpp"
 #include "dogen/trivial_inheritance/serialization/unversioned_key_ser.hpp"

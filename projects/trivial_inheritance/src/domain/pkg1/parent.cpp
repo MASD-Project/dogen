@@ -18,14 +18,40 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/trivial_inheritance/domain/child_of_a_child1.hpp"
-#include "dogen/trivial_inheritance/domain/child_of_a_child2.hpp"
-#include "dogen/trivial_inheritance/domain/child_without_members.hpp"
-#include "dogen/trivial_inheritance/domain/parent_with_members.hpp"
-#include "dogen/trivial_inheritance/domain/parent_without_members.hpp"
-#include "dogen/trivial_inheritance/domain/pkg1/child.hpp"
+#include <ostream>
 #include "dogen/trivial_inheritance/domain/pkg1/parent.hpp"
-#include "dogen/trivial_inheritance/domain/second_child_without_members.hpp"
-#include "dogen/trivial_inheritance/domain/third_child_with_members.hpp"
-#include "dogen/trivial_inheritance/domain/unversioned_key.hpp"
-#include "dogen/trivial_inheritance/domain/versioned_key.hpp"
+#include "dogen/trivial_inheritance/io/versioned_key_io.hpp"
+
+namespace dogen {
+namespace trivial_inheritance {
+namespace pkg1 {
+
+parent::parent()
+    : prop_0_(static_cast<unsigned int>(0)) { }
+
+parent::parent(
+    const unsigned int prop_0,
+    const dogen::trivial_inheritance::versioned_key& versioned_key)
+    : prop_0_(prop_0),
+      versioned_key_(versioned_key) { }
+
+void parent::to_stream(std::ostream& s) const {
+    s << " { "
+      << "\"__type__\": " << "\"parent\"" << ", "
+      << "\"prop_0\": " << prop_0_ << ", "
+      << "\"versioned_key\": " << versioned_key_
+      << " }";
+}
+
+void parent::swap(parent& other) noexcept {
+    using std::swap;
+    swap(prop_0_, other.prop_0_);
+    swap(versioned_key_, other.versioned_key_);
+}
+
+bool parent::operator==(const parent& rhs) const {
+    return prop_0_ == rhs.prop_0_ &&
+        versioned_key_ == rhs.versioned_key_;
+}
+
+} } }

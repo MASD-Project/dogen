@@ -18,14 +18,29 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/trivial_inheritance/test_data/child_of_a_child1_td.hpp"
-#include "dogen/trivial_inheritance/test_data/child_of_a_child2_td.hpp"
-#include "dogen/trivial_inheritance/test_data/child_without_members_td.hpp"
-#include "dogen/trivial_inheritance/test_data/parent_with_members_td.hpp"
-#include "dogen/trivial_inheritance/test_data/parent_without_members_td.hpp"
-#include "dogen/trivial_inheritance/test_data/pkg1/child_td.hpp"
-#include "dogen/trivial_inheritance/test_data/pkg1/parent_td.hpp"
-#include "dogen/trivial_inheritance/test_data/second_child_without_members_td.hpp"
-#include "dogen/trivial_inheritance/test_data/third_child_with_members_td.hpp"
-#include "dogen/trivial_inheritance/test_data/unversioned_key_td.hpp"
-#include "dogen/trivial_inheritance/test_data/versioned_key_td.hpp"
+#ifndef DOGEN_TRIVIAL_INHERITANCE_SERIALIZATION_PKG1_PARENT_SER_HPP
+#define DOGEN_TRIVIAL_INHERITANCE_SERIALIZATION_PKG1_PARENT_SER_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include <boost/serialization/assume_abstract.hpp>
+#include <boost/serialization/split_free.hpp>
+#include "dogen/trivial_inheritance/domain/pkg1/parent.hpp"
+
+BOOST_SERIALIZATION_SPLIT_FREE(dogen::trivial_inheritance::pkg1::parent)
+BOOST_SERIALIZATION_ASSUME_ABSTRACT(dogen::trivial_inheritance::pkg1::parent)
+
+namespace boost {
+namespace serialization {
+
+template<typename Archive>
+void save(Archive& ar, const dogen::trivial_inheritance::pkg1::parent& v, unsigned int version);
+
+template<typename Archive>
+void load(Archive& ar, dogen::trivial_inheritance::pkg1::parent& v, unsigned int version);
+
+} }
+
+#endif

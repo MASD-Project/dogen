@@ -18,14 +18,24 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/trivial_inheritance/test_data/child_of_a_child1_td.hpp"
-#include "dogen/trivial_inheritance/test_data/child_of_a_child2_td.hpp"
-#include "dogen/trivial_inheritance/test_data/child_without_members_td.hpp"
-#include "dogen/trivial_inheritance/test_data/parent_with_members_td.hpp"
-#include "dogen/trivial_inheritance/test_data/parent_without_members_td.hpp"
-#include "dogen/trivial_inheritance/test_data/pkg1/child_td.hpp"
-#include "dogen/trivial_inheritance/test_data/pkg1/parent_td.hpp"
-#include "dogen/trivial_inheritance/test_data/second_child_without_members_td.hpp"
-#include "dogen/trivial_inheritance/test_data/third_child_with_members_td.hpp"
-#include "dogen/trivial_inheritance/test_data/unversioned_key_td.hpp"
-#include "dogen/trivial_inheritance/test_data/versioned_key_td.hpp"
+#ifndef DOGEN_TRIVIAL_INHERITANCE_IO_PKG1_CHILD_IO_HPP
+#define DOGEN_TRIVIAL_INHERITANCE_IO_PKG1_CHILD_IO_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include <iosfwd>
+#include "dogen/trivial_inheritance/domain/pkg1/child.hpp"
+
+namespace dogen {
+namespace trivial_inheritance {
+namespace pkg1 {
+
+std::ostream&
+operator<<(std::ostream& s,
+     const dogen::trivial_inheritance::pkg1::child& v);
+
+} } }
+
+#endif

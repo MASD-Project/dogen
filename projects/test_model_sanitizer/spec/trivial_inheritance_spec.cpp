@@ -49,6 +49,7 @@ BOOST_AUTO_TEST_CASE(validate_equality) {
     test_equality<second_child_without_members_generator>();
     test_equality<child_of_a_child1_generator>();
     test_equality<child_of_a_child2_generator>();
+    test_equality<pkg1::child_generator>();
 }
 
 BOOST_AUTO_TEST_CASE(validate_serialisation) {
@@ -59,6 +60,7 @@ BOOST_AUTO_TEST_CASE(validate_serialisation) {
     rountrip_type<second_child_without_members_generator>();
     rountrip_type<child_of_a_child1_generator>();
     rountrip_type<child_of_a_child2_generator>();
+    rountrip_type<pkg1::child_generator>();
 }
 
 BOOST_AUTO_TEST_CASE(validate_hashing) {
@@ -69,6 +71,7 @@ BOOST_AUTO_TEST_CASE(validate_hashing) {
     test_hashing<second_child_without_members_generator>();
     test_hashing<child_of_a_child1_generator>();
     test_hashing<child_of_a_child2_generator>();
+    test_hashing<pkg1::child_generator>();
 }
 
 BOOST_AUTO_TEST_CASE(validate_swap) {
@@ -79,6 +82,7 @@ BOOST_AUTO_TEST_CASE(validate_swap) {
     test_swap<second_child_without_members_generator>();
     test_swap<child_of_a_child1_generator>();
     test_swap<child_of_a_child2_generator>();
+    test_swap<pkg1::child_generator>();
 }
 
 BOOST_AUTO_TEST_SUITE_END()
