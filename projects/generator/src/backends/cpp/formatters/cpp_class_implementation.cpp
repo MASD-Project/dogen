@@ -19,6 +19,7 @@
  *
  */
 #include <ostream>
+#include "dogen/generator/backends/cpp/formatters/cpp_qualified_name.hpp"
 #include "dogen/generator/backends/cpp/formatters/cpp_inserter_implementation.hpp"
 #include "dogen/generator/backends/cpp/formatters/cpp_class_implementation.hpp"
 
@@ -111,7 +112,10 @@ void cpp_class_implementation::complete_constructor(const class_view_model& vm) 
         stream_ << indenter_ << ": ";
 
         for (const auto p : vm.parents()) {
-            stream_ << p.name() << "(";
+            cpp_qualified_name qualified_name(stream_);
+            qualified_name.format(p);
+
+            stream_ << "(";
             for (const auto prop : p.properties()) {
                 if (!is_first)
                     stream_ << "," << std::endl << indenter_ << "  ";

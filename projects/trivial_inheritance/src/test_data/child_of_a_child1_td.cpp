@@ -32,7 +32,7 @@ child_of_a_child1_generator::child_of_a_child1_generator() : position_(0) { }
 child_of_a_child1_generator::result_type
 child_of_a_child1_generator::create(const unsigned int position) {
     child_of_a_child1 r;
-    third_child_with_members_generator::populate(position, r);
+    dogen::trivial_inheritance::third_child_with_members_generator::populate(position, r);
     return r;
 }
 

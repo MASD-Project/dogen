@@ -44,8 +44,10 @@ void cpp_class_declaration::open_class(const class_view_model& vm) {
     if (!parents.empty()) {
         stream_ << " :";
 
+        cpp_qualified_name qualified_name(stream_);
         if (parents.size() == 1) {
-            stream_ << " public " << parents.front().name();
+            stream_ << " public ";
+            qualified_name.format(parents.front());
         } else {
             bool is_first(true);
             cpp_positive_indenter_scope s(indenter_);

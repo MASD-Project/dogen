@@ -26,7 +26,7 @@ namespace dogen {
 namespace trivial_inheritance {
 
 child_without_members::child_without_members(const dogen::trivial_inheritance::versioned_key& versioned_key)
-    : parent_without_members(versioned_key) { }
+    : dogen::trivial_inheritance::parent_without_members(versioned_key) { }
 
 void child_without_members::to_stream(std::ostream& s) const {
     s << " { "

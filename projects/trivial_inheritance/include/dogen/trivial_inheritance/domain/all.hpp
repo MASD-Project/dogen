@@ -25,6 +25,8 @@
 #include "dogen/trivial_inheritance/domain/parent_without_members.hpp"
 #include "dogen/trivial_inheritance/domain/pkg1/child.hpp"
 #include "dogen/trivial_inheritance/domain/pkg1/parent.hpp"
+#include "dogen/trivial_inheritance/domain/pkg2/parent.hpp"
+#include "dogen/trivial_inheritance/domain/pkg3/child.hpp"
 #include "dogen/trivial_inheritance/domain/second_child_without_members.hpp"
 #include "dogen/trivial_inheritance/domain/third_child_with_members.hpp"
 #include "dogen/trivial_inheritance/domain/unversioned_key.hpp"

@@ -19,6 +19,7 @@
  *
  */
 #include <ostream>
+#include "dogen/generator/backends/cpp/formatters/cpp_qualified_name.hpp"
 #include "dogen/generator/generation_failure.hpp"
 #include "dogen/generator/backends/cpp/formatters/cpp_licence.hpp"
 #include "dogen/generator/backends/cpp/formatters/cpp_header_guards.hpp"
@@ -85,8 +86,10 @@ void hash_implementation::hasher_hash_method(const class_view_model& vm) {
             utility_.blank_line();
 
         for (const auto p : parents) {
-            stream_ << indenter_ << "combine(seed, dynamic_cast<const "
-                    << p.name() << "&>(v));" << std::endl;
+            stream_ << indenter_ << "combine(seed, dynamic_cast<const ";
+            cpp_qualified_name qualified_name(stream_);
+            qualified_name.format(p);
+            stream_ << "&>(v));" << std::endl;
         }
 
         const auto props(vm.properties());

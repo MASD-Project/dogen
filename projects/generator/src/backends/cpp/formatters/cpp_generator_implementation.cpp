@@ -231,8 +231,10 @@ void generator_implementation::create_method(const class_view_model& vm) {
         stream_ << indenter_ << vm.name() << " r;" << std::endl;
 
         for (const auto p : parents) {
-            stream_ << indenter_ << p.name()
-                    << "_generator::populate(position, r);"
+            stream_ << indenter_;
+            cpp_qualified_name qualified_name(stream_);
+            qualified_name.format(p);
+            stream_ << "_generator::populate(position, r);"
                     << std::endl;
         }
 

@@ -39,7 +39,7 @@ namespace pkg1 {
 std::size_t child_hasher::hash(const child& v) {
     std::size_t seed(0);
 
-    combine(seed, dynamic_cast<const parent&>(v));
+    combine(seed, dynamic_cast<const dogen::trivial_inheritance::pkg1::parent&>(v));
 
     combine(seed, v.prop_1());
     return seed;

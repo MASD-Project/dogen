@@ -18,7 +18,7 @@
 					<count>0</count>
 					<item_version>0</item_version>
 				</package_path>
-				<type_name>Package_2</type_name>
+				<type_name>package_1</type_name>
 				<meta_type>4</meta_type>
 			</first>
 			<second class_id="5" tracking_level="0" version="0">
@@ -32,7 +32,7 @@
 						<count>0</count>
 						<item_version>0</item_version>
 					</package_path>
-					<type_name>Package_2</type_name>
+					<type_name>package_1</type_name>
 					<meta_type>4</meta_type>
 				</name>
 			</second>
@@ -48,7 +48,7 @@
 					<count>0</count>
 					<item_version>0</item_version>
 				</package_path>
-				<type_name>package_1</type_name>
+				<type_name>Package_2</type_name>
 				<meta_type>4</meta_type>
 			</first>
 			<second>
@@ -62,7 +62,7 @@
 						<count>0</count>
 						<item_version>0</item_version>
 					</package_path>
-					<type_name>package_1</type_name>
+					<type_name>Package_2</type_name>
 					<meta_type>4</meta_type>
 				</name>
 			</second>

@@ -25,6 +25,8 @@
 #include "dogen/trivial_inheritance/hash/parent_without_members_hash.hpp"
 #include "dogen/trivial_inheritance/hash/pkg1/child_hash.hpp"
 #include "dogen/trivial_inheritance/hash/pkg1/parent_hash.hpp"
+#include "dogen/trivial_inheritance/hash/pkg2/parent_hash.hpp"
+#include "dogen/trivial_inheritance/hash/pkg3/child_hash.hpp"
 #include "dogen/trivial_inheritance/hash/second_child_without_members_hash.hpp"
 #include "dogen/trivial_inheritance/hash/third_child_with_members_hash.hpp"
 #include "dogen/trivial_inheritance/hash/unversioned_key_hash.hpp"

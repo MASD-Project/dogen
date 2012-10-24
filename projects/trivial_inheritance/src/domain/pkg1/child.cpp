@@ -33,7 +33,7 @@ child::child(
     const unsigned int prop_0,
     const dogen::trivial_inheritance::versioned_key& versioned_key,
     const int prop_1)
-    : parent(prop_0,
+    : dogen::trivial_inheritance::pkg1::parent(prop_0,
       versioned_key),
       prop_1_(prop_1) { }
 

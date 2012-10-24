@@ -33,7 +33,7 @@ child_of_a_child2::child_of_a_child2(
     const dogen::trivial_inheritance::versioned_key& versioned_key,
     const unsigned int prop_1,
     const unsigned int prop_2)
-    : third_child_with_members(prop_0,
+    : dogen::trivial_inheritance::third_child_with_members(prop_0,
       versioned_key,
       prop_1),
       prop_2_(prop_2) { }

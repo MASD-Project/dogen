@@ -43,7 +43,7 @@ populate(const unsigned int position, result_type& v) {
 child_generator::result_type
 child_generator::create(const unsigned int position) {
     child r;
-    parent_generator::populate(position, r);
+    dogen::trivial_inheritance::pkg1::parent_generator::populate(position, r);
     child_generator::populate(position, r);
     return r;
 }

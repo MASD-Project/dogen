@@ -33,7 +33,7 @@
 namespace dogen {
 namespace trivial_inheritance {
 
-class second_child_without_members final : public parent_with_members {
+class second_child_without_members final : public dogen::trivial_inheritance::parent_with_members {
 public:
     second_child_without_members() = default;
     second_child_without_members(const second_child_without_members&) = default;

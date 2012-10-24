@@ -34,7 +34,7 @@ namespace dogen {
 namespace trivial_inheritance {
 namespace pkg1 {
 
-class child final : public parent {
+class child final : public dogen::trivial_inheritance::pkg1::parent {
 public:
     child(const child&) = default;
     child(child&&) = default;

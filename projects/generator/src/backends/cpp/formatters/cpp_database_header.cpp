@@ -26,7 +26,6 @@
 #include "dogen/generator/backends/cpp/formatters/cpp_namespace.hpp"
 #include "dogen/generator/backends/cpp/formatters/cpp_includes.hpp"
 #include "dogen/generator/backends/cpp/formatters/cpp_namespace_helper.hpp"
-#include "dogen/generator/backends/cpp/formatters/cpp_qualified_name.hpp"
 #include "dogen/generator/backends/cpp/formatters/cpp_indenter.hpp"
 #include "dogen/generator/backends/cpp/formatters/cpp_database_header.hpp"
 

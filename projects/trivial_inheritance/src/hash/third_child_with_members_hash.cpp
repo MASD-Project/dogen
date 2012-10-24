@@ -38,7 +38,7 @@ namespace trivial_inheritance {
 std::size_t third_child_with_members_hasher::hash(const third_child_with_members& v) {
     std::size_t seed(0);
 
-    combine(seed, dynamic_cast<const parent_with_members&>(v));
+    combine(seed, dynamic_cast<const dogen::trivial_inheritance::parent_with_members&>(v));
 
     combine(seed, v.prop_1());
     return seed;
