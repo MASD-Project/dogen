@@ -10,6 +10,11 @@ This file contains all stories that haven't been assigned to a sprint.
 
 Stories that we intend to look at, at some point.
 
+*** Add tests for disconnected connections
+
+We should throw if a diagram has a disconnected inheritance or
+composition relationship.
+
 *** Add tests for duplicate identifiers in Dia
 
 Detect if a diagram defines the same class or package multiple
