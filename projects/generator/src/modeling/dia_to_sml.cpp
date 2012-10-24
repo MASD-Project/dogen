@@ -30,7 +30,6 @@
 #include <boost/range/algorithm.hpp>
 #include <boost/range/algorithm/set_algorithm.hpp>
 #include <boost/variant/get.hpp>
-#include <boost/variant/apply_visitor.hpp>
 #include <boost/algorithm/string/trim.hpp>
 #include <boost/algorithm/string/erase.hpp>
 #include <boost/graph/depth_first_search.hpp>
@@ -41,6 +40,7 @@
 #include "dogen/dia/io/diagram_io.hpp"
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/generator/modeling/transformation_error.hpp"
+#include "dogen/generator/modeling/dia_object_to_sml_package.hpp"
 #include "dogen/generator/modeling/dia_to_sml.hpp"
 
 namespace {
@@ -51,6 +51,7 @@ static logger lg(logger_factory("dia_to_sml"));
 using dogen::generator::modeling::transformation_error;
 
 const char* delimiter = "::";
+const std::string empty;
 const std::string dia_name("name");
 const std::string dia_type("type");
 const std::string dia_attributes("attributes");
@@ -67,6 +68,7 @@ const std::string uml_attribute_expected("UML atttribute expected");
 const std::string name_attribute_expected("Could not find name attribute");
 const std::string type_attribute_expected("Could not find type attribute");
 const std::string empty_dia_object_name("Dia object name is empty");
+const std::string missing_package_for_id("Missing package for dia object ID: ");
 const std::string error_parsing_object_type("Fail to parse object type: ");
 const std::string parent_not_found("Object has a parent but its not defined: ");
 const std::string root_vertex_id("root");
@@ -74,6 +76,8 @@ const std::string unexpected_attribute_value_size(
     "Unexpected attribute value size: ");
 const std::string unexpected_attribute_value_type(
     "Did not find expected attribute value type: ");
+const std::string unexpected_child_node(
+    "Non UML package object has a child node: ");
 
 /**
  * @brief Parses a string representing an object type into its enum.
@@ -102,25 +106,27 @@ private:
             const std::list<std::string>& external_package_path,
             bool verbose, bool is_target,
             const std::unordered_map<std::string, std::string>& child_to_parent,
-            const std::unordered_set<std::string>& parent_ids)
+            const std::unordered_set<std::string>& parent_ids,
+            const std::unordered_map<std::string, dogen::sml::package>&
+            packages_by_id)
             : model_name_(model_name),
               external_package_path_(external_package_path),
               verbose_(verbose), is_target_(is_target),
               child_to_parent_(child_to_parent),
-              parent_ids_(parent_ids) { }
+              parent_ids_(parent_ids),
+              packages_by_id_(packages_by_id) { }
 
         const std::string model_name_;
         std::unordered_map<dogen::sml::qualified_name, dogen::sml::pod> pods_;
         std::unordered_map<dogen::sml::qualified_name, dogen::sml::primitive>
         primitives_;
-        std::unordered_map<dogen::sml::qualified_name, dogen::sml::package>
-        packages_;
-        std::list<std::string> package_path_;
         const std::list<std::string> external_package_path_;
         const bool verbose_;
         const bool is_target_;
         const std::unordered_map<std::string, std::string> child_to_parent_;
         const std::unordered_set<std::string> parent_ids_;
+        const std::unordered_map<std::string, dogen::sml::package>
+        packages_by_id_;
         std::unordered_map<std::string, dogen::sml::qualified_name>
         dia_id_to_qname_;
     };
@@ -136,10 +142,12 @@ public:
         const std::string& external_package_path,
         bool verbose, bool is_target,
         const std::unordered_map<std::string, std::string>& child_to_parent,
-        const std::unordered_set<std::string>& parent_ids)
+        const std::unordered_set<std::string>& parent_ids,
+        const std::unordered_map<std::string, dogen::sml::package>&
+        packages_by_id)
         : state_(new visit_state(model_name,
                 split_delimited_string(external_package_path), verbose,
-                is_target, child_to_parent, parent_ids)) { }
+                is_target, child_to_parent, parent_ids, packages_by_id)) { }
 
 private:
     std::list<std::string>
@@ -158,11 +166,6 @@ public:
         process_dia_object(g[u]);
     }
 
-    template<typename Vertex, typename Graph>
-    void finish_vertex(const Vertex& u, const Graph& g) {
-        pop_package_path(g[u]);
-    }
-
 public:
     std::unordered_map<dogen::sml::qualified_name, dogen::sml::pod>
     pods() const {
@@ -172,15 +175,6 @@ public:
     std::unordered_map<dogen::sml::qualified_name, dogen::sml::primitive>
     primitives() const {
         return state_->primitives_;
-    }
-
-    std::unordered_map<dogen::sml::qualified_name, dogen::sml::package>
-    packages() const {
-        return state_->packages_;
-    }
-
-    std::list<std::string> package_path() const {
-        return state_->package_path_;
     }
 
     std::list<std::string> external_package_path() const {
@@ -218,7 +212,7 @@ private:
      */
     dogen::sml::qualified_name
     transform_qualified_name(const dogen::dia::attribute& attribute,
-        dogen::sml::meta_types meta_type) const;
+        dogen::sml::meta_types meta_type, const std::string& pkg_id) const;
 
     /**
      * @brief Parses a Dia type string, generating an SML qualified
@@ -226,15 +220,6 @@ private:
      */
     dogen::sml::qualified_name
     transform_qualified_name(const std::string& type_string) const;
-
-    /**
-     * @brief Converts a package in Dia format into a package in SML
-     * format.
-     *
-     * @param object Dia object which contains a UML package.
-     */
-    std::pair<dogen::sml::qualified_name, dogen::sml::package>
-    transform_package(const dogen::dia::object& object);
 
     /**
      * @brief Converts a Dia composite storing the UML attribute into
@@ -260,22 +245,6 @@ private:
      * @param object Any Dia object, including the dummy root object.
      */
     void process_dia_object(const dogen::dia::object& object);
-
-    /**
-     * @brief If the object is a package, pushes its name to the
-     * package path.
-     *
-     * @param object Any Dia object, including the dummy root object.
-     */
-    void push_package_path(const dogen::dia::object& object);
-
-    /**
-     * @brief If the object is a package, pops its name from the
-     * package path.
-     *
-     * @param object Any Dia object, including the dummy root object.
-     */
-    void pop_package_path(const dogen::dia::object& object);
 
 private:
     std::shared_ptr<visit_state> state_;
@@ -328,7 +297,7 @@ transform_qualified_name(const std::string& type_string) const {
 
 dogen::sml::qualified_name dia_dfs_visitor::
 transform_qualified_name(const dogen::dia::attribute& a,
-    dogen::sml::meta_types meta_type) const {
+    dogen::sml::meta_types meta_type, const std::string& pkg_id) const {
     if (a.name() != dia_name) {
         BOOST_LOG_SEV(lg, error) << name_attribute_expected;
         throw transformation_error(name_attribute_expected);
@@ -338,7 +307,17 @@ transform_qualified_name(const dogen::dia::attribute& a,
     name.model_name(state_->model_name_);
     name.meta_type(meta_type);
     name.external_package_path(state_->external_package_path_);
-    name.package_path(state_->package_path_);
+
+    if (!pkg_id.empty()) {
+        const auto i(state_->packages_by_id_.find(pkg_id));
+        if (i == state_->packages_by_id_.end()) {
+            BOOST_LOG_SEV(lg, error) << missing_package_for_id << pkg_id;
+            throw transformation_error(missing_package_for_id + pkg_id);
+        }
+        auto pp(i->second.name().package_path());
+        pp.push_back(i->second.name().type_name());
+        name.package_path(pp);
+    }
 
     name.type_name(transform_string_attribute(a));
     if (name.type_name().empty()) {
@@ -346,25 +325,6 @@ transform_qualified_name(const dogen::dia::attribute& a,
         throw transformation_error(empty_dia_object_name);
     }
     return name;
-}
-
-std::pair<dogen::sml::qualified_name, dogen::sml::package>
-dia_dfs_visitor::transform_package(const dogen::dia::object& o) {
-    dogen::sml::package package;
-
-    for (auto a : o.attributes()) {
-        if (a.name() == dia_name) {
-            using dogen::sml::meta_types;
-            package.name(transform_qualified_name(a, meta_types::package));
-        }
-    }
-
-    if (package.name().type_name().empty()) {
-        throw transformation_error(name_attribute_expected + o.id());
-        BOOST_LOG_SEV(lg, error) << name_attribute_expected + o.id();
-    }
-
-    return std::make_pair(package.name(), package);
 }
 
 dogen::sml::property dia_dfs_visitor::
@@ -407,8 +367,11 @@ dia_dfs_visitor::transform_pod(const dogen::dia::object& o) const {
         BOOST_LOG_SEV(lg, debug) << "Found attribute: " << attribute.name();
 
         if (attribute.name() == dia_name) {
+            const std::string pkg_id(o.child_node() ?
+                o.child_node()->parent() : empty);
             using dogen::sml::meta_types;
-            pod.name(transform_qualified_name(attribute, meta_types::pod));
+            pod.name(transform_qualified_name(attribute, meta_types::pod,
+                    pkg_id));
         }
 
         if (attribute.name() == dia_attributes) {
@@ -462,55 +425,13 @@ dia_dfs_visitor::transform_pod(const dogen::dia::object& o) const {
     return std::make_pair(pod.name(), pod);
 }
 
-void dia_dfs_visitor::push_package_path(const dogen::dia::object& o) {
-    if (o.id() == root_vertex_id)
-        return; // root is a dummy object, ignore it.
-
-    using dogen::dia::object_types;
-    object_types ot(parse_object_type(o.type()));
-    if (ot != object_types::uml_large_package)
-        return; // only packages contribute to the package path
-
-    bool found_name(false);
-    for (auto a : o.attributes()) {
-        found_name = a.name() == dia_name;
-        if (found_name) {
-            BOOST_LOG_SEV(lg, debug) << "Updating package_path: " << o.id();
-            state_->package_path_.push_back(transform_string_attribute(a));
-            break;
-        }
-    }
-
-    if (!found_name) {
-        BOOST_LOG_SEV(lg, error) << name_attribute_expected + o.id();
-        throw transformation_error(name_attribute_expected + o.id());
-    }
-}
-
-void dia_dfs_visitor::pop_package_path(const dogen::dia::object& o) {
-    if (o.id() == root_vertex_id)
-        return; // root is a dummy object, ignore it.
-
-    using dogen::dia::object_types;
-    object_types ot(parse_object_type(o.type()));
-    if (ot != object_types::uml_large_package)
-        return; // only packages contribute to the package path
-
-    state_->package_path_.pop_back();
-}
-
 void dia_dfs_visitor::process_dia_object(const dogen::dia::object& o) {
     if (o.id() == root_vertex_id)
         return; // root is a dummy object, ignore it.
 
     using dogen::dia::object_types;
     object_types ot(parse_object_type(o.type()));
-    if (ot == object_types::uml_large_package) {
-        BOOST_LOG_SEV(lg, debug) << "Processing uml_large_package: "
-                                 << o.id();
-        state_->packages_.insert(transform_package(o));
-        push_package_path(o);
-    } else if (ot == object_types::uml_class) {
+    if (ot == object_types::uml_class) {
         BOOST_LOG_SEV(lg, debug) << "Processing uml_class: " << o.id();
         const auto p(transform_pod(o));
         state_->pods_.insert(p);
@@ -532,7 +453,8 @@ dia_to_sml(const dia::diagram& diagram, const std::string& model_name,
       external_package_path_(external_package_path),
       root_vertex_(boost::add_vertex(graph_)),
       is_target_(is_target),
-      verbose_(verbose) {
+      verbose_(verbose),
+      package_transformer_(model_name_, external_package_path_, verbose_) {
 
     BOOST_LOG_SEV(lg, debug) << "Initialised with configuration:"
                              << " model_name: " << model_name_
@@ -549,6 +471,8 @@ dia_to_sml(const dia::diagram& diagram, const std::string& model_name,
 
 void dia_to_sml::
 setup_data_structures(const std::vector<dia::object>& objects) {
+    BOOST_LOG_SEV(lg, debug) << "Setting up data structures";
+
     auto lambda([&](const std::string& id) -> vertex_descriptor_type {
             const auto i(id_to_vertex_.find(id));
             if (i != id_to_vertex_.end())
@@ -562,6 +486,11 @@ setup_data_structures(const std::vector<dia::object>& objects) {
     std::unordered_map<std::string, vertex_descriptor_type> orphans;
     std::vector<dogen::dia::object> relationships;
     for (const auto o : objects) {
+        if (package_transformer_.is_uml_package(o)) {
+            package_transformer_.add_object(o);
+            continue;
+        }
+
         if (!o.connections().empty()) {
             relationships.push_back(o);
             continue;
@@ -569,16 +498,7 @@ setup_data_structures(const std::vector<dia::object>& objects) {
 
         const vertex_descriptor_type vertex(lambda(o.id()));
         graph_[vertex] = o;
-        if (!o.child_node()) {
-            orphans.insert(std::make_pair(o.id(), vertex));
-            continue;
-        }
-
-        const std::string parent_id(o.child_node()->parent());
-        const vertex_descriptor_type parent_vertex(lambda(parent_id));
-        boost::add_edge(parent_vertex, vertex, graph_);
-        BOOST_LOG_SEV(lg, debug) << "Adding object to graph: " << o.id()
-                                 << " Parent ID: " << parent_id;
+        orphans.insert(std::make_pair(o.id(), vertex));
     }
 
     for (const auto r : relationships) {
@@ -662,14 +582,20 @@ sml::model dia_to_sml::transform() {
 
     for (dia::layer layer : diagram_.layers())
         setup_data_structures(layer.objects());
+    packages_by_id_ = package_transformer_.transform();
 
     const std::string epp(external_package_path_);
     dia_dfs_visitor v(model_name_, epp, verbose_, is_target_,
-        child_to_parent_dia_ids_, parent_dia_ids_);
+        child_to_parent_dia_ids_, parent_dia_ids_, packages_by_id_);
     boost::depth_first_search(graph_, boost::visitor(v));
 
+    std::unordered_map<dogen::sml::qualified_name, dogen::sml::package>
+        packages;
+    for (const auto p : packages_by_id_)
+        packages.insert(std::make_pair(p.second.name(), p.second));
+
     using sml::model;
-    return model(model_name_, v.packages(), v.pods(), v.primitives(),
+    return model(model_name_, packages, v.pods(), v.primitives(),
         v.external_package_path());
 }
 

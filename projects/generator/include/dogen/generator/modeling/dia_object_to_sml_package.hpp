@@ -18,70 +18,64 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_GENERATOR_MODELING_DIA_TO_SML_HPP
-#define DOGEN_GENERATOR_MODELING_DIA_TO_SML_HPP
+#ifndef DOGEN_GENERATOR_MODELING_DIA_OBJECT_TO_SML_PACKAGE_HPP
+#define DOGEN_GENERATOR_MODELING_DIA_OBJECT_TO_SML_PACKAGE_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <list>
-#include <utility>
+#include <string>
 #include <unordered_map>
-#include <unordered_set>
 #include <boost/graph/adjacency_list.hpp>
 #include "dogen/dia/domain/diagram.hpp"
 #include "dogen/sml/domain/package.hpp"
-#include "dogen/sml/domain/pod.hpp"
-#include "dogen/sml/domain/model.hpp"
-#include "dogen/dia/domain/attribute.hpp"
-#include "dogen/dia/domain/object.hpp"
-#include "dogen/generator/modeling/dia_object_to_sml_package.hpp"
 
 namespace dogen {
 namespace generator {
 namespace modeling {
 
-/**
- * @brief Transforms a Dia diagram from its object model into SML.
- */
-class dia_to_sml {
+class dia_object_to_sml_package {
 public:
-    dia_to_sml() = delete;
-    dia_to_sml& operator=(const dia_to_sml&) = delete;
-    dia_to_sml(const dia_to_sml&) = delete;
-    dia_to_sml(dia_to_sml&&) = default;
+    dia_object_to_sml_package() = default;
+    dia_object_to_sml_package(const dia_object_to_sml_package&) = default;
+    ~dia_object_to_sml_package() = default;
+    dia_object_to_sml_package(dia_object_to_sml_package&&) = default;
+    dia_object_to_sml_package& operator=(const dia_object_to_sml_package&) = default;
 
 public:
     /**
      * @brief Initialises the transformer
      *
-     * @param diagram source of the transformation
      * @param model_name name of the model represented by the diagram
      * @param external_package_path external packages which contain the
      * model to generate
-     * @param is_target true if this model is the code generation
-     * target, false otherwise.
      * @param verbose output debugging information for troubleshooting
      */
-    dia_to_sml(const dia::diagram& diagram, const std::string& model_name,
-        const std::string& external_package_path, bool is_target, bool verbose);
-
-private:
-    /**
-     * @brief Populates the internal data structures with Dia objects.
-     *
-     * Creates a directed acyclic graph of dependencies between Dia
-     * objects, and separates all the relationships from the rest for
-     * second-pass processing.
-     */
-    void setup_data_structures(const std::vector<dia::object>& objects);
+    dia_object_to_sml_package(const std::string& model_name,
+        const std::string& external_package_path, bool verbose);
 
 public:
     /**
-     * @brief Execute the transformation from a Dia diagram into a SML model.
+     * @brief Returns true if the dia object represents a UML package,
+     * false otherwise.
      */
-    sml::model transform();
+    bool is_uml_package(const dia::object& o) const;
+
+    /**
+     * @brief Add object to transformer.
+     *
+     * @pre is_uml_package must be true for object
+     */
+    void add_object(const dia::object& o);
+
+public:
+    /**
+     * @brief Transforms all the added dia objects into SML packages.
+     *
+     * Key of the map is the dia object ID.
+     */
+    std::unordered_map<std::string, sml::package> transform();
 
 private:
     // graph of dependencies
@@ -99,19 +93,12 @@ private:
     typedef std::unordered_map<std::string, vertex_descriptor_type>
     id_to_vertex_type;
 
-private:
-    const dia::diagram diagram_;
     const std::string model_name_;
     const std::string external_package_path_;
     graph_type graph_;
     id_to_vertex_type id_to_vertex_;
     vertex_descriptor_type root_vertex_;
-    std::unordered_map<std::string, std::string> child_to_parent_dia_ids_;
-    std::unordered_set<std::string> parent_dia_ids_;
-    std::unordered_map<std::string, sml::package> packages_by_id_;
-    const bool is_target_;
     const bool verbose_;
-    dia_object_to_sml_package package_transformer_;
 };
 
 } } }
