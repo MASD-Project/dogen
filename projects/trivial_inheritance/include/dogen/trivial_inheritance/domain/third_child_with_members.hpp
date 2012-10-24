@@ -33,13 +33,15 @@
 namespace dogen {
 namespace trivial_inheritance {
 
-class third_child_with_members final : public parent_with_members {
+class third_child_with_members : public parent_with_members {
 public:
     third_child_with_members(const third_child_with_members&) = default;
     third_child_with_members(third_child_with_members&&) = default;
 
 public:
     third_child_with_members();
+
+    virtual ~third_child_with_members() noexcept = 0;
 
 public:
     third_child_with_members(
@@ -55,7 +57,7 @@ private:
     friend void boost::serialization::load(Archive& ar, third_child_with_members& v, unsigned int version);
 
 public:
-    void to_stream(std::ostream& s) const override;
+    virtual void to_stream(std::ostream& s) const;
 
 public:
     unsigned int prop_1() const {
@@ -66,31 +68,24 @@ public:
         prop_1_ = v;
     }
 
-public:
+protected:
     bool operator==(const third_child_with_members& rhs) const;
     bool operator!=(const third_child_with_members& rhs) const {
         return !this->operator==(rhs);
     }
 
-public:
+protected:
     void swap(third_child_with_members& other) noexcept;
-    third_child_with_members& operator=(third_child_with_members other);
 
 private:
     unsigned int prop_1_;
 };
 
+
+inline third_child_with_members::~third_child_with_members() noexcept { }
+
 } }
 
-namespace std {
 
-template<>
-inline void swap(
-    dogen::trivial_inheritance::third_child_with_members& lhs,
-    dogen::trivial_inheritance::third_child_with_members& rhs) {
-    lhs.swap(rhs);
-}
-
-}
 
 #endif

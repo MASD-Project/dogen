@@ -32,24 +32,12 @@ unsigned int create_unsigned_int(const unsigned int position) {
 namespace dogen {
 namespace trivial_inheritance {
 
-third_child_with_members_generator::third_child_with_members_generator() : position_(0) { }
 
 void third_child_with_members_generator::
 populate(const unsigned int position, result_type& v) {
     v.prop_1(create_unsigned_int(position + 0));
 }
 
-third_child_with_members_generator::result_type
-third_child_with_members_generator::create(const unsigned int position) {
-    third_child_with_members r;
-    parent_with_members_generator::populate(position, r);
-    third_child_with_members_generator::populate(position, r);
-    return r;
-}
 
-third_child_with_members_generator::result_type
-third_child_with_members_generator::operator()() {
-    return create(position_++);
-}
 
 } }

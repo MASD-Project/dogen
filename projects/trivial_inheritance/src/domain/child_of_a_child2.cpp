@@ -19,43 +19,51 @@
  *
  */
 #include <ostream>
-#include "dogen/trivial_inheritance/domain/third_child_with_members.hpp"
-#include "dogen/trivial_inheritance/io/parent_with_members_io.hpp"
+#include "dogen/trivial_inheritance/domain/child_of_a_child2.hpp"
+#include "dogen/trivial_inheritance/io/third_child_with_members_io.hpp"
 
 namespace dogen {
 namespace trivial_inheritance {
 
-third_child_with_members::third_child_with_members()
-    : prop_1_(static_cast<unsigned int>(0)) { }
+child_of_a_child2::child_of_a_child2()
+    : prop_2_(static_cast<unsigned int>(0)) { }
 
-third_child_with_members::third_child_with_members(
+child_of_a_child2::child_of_a_child2(
     const int prop_0,
     const dogen::trivial_inheritance::versioned_key& versioned_key,
-    const unsigned int prop_1)
-    : parent_with_members(prop_0,
-      versioned_key),
-      prop_1_(prop_1) { }
+    const unsigned int prop_1,
+    const unsigned int prop_2)
+    : third_child_with_members(prop_0,
+      versioned_key,
+      prop_1),
+      prop_2_(prop_2) { }
 
-void third_child_with_members::to_stream(std::ostream& s) const {
+void child_of_a_child2::to_stream(std::ostream& s) const {
     s << " { "
-      << "\"__type__\": " << "\"third_child_with_members\"" << ", "
+      << "\"__type__\": " << "\"child_of_a_child2\"" << ", "
       << "\"__parent_0__\": ";
-    parent_with_members::to_stream(s);
+    third_child_with_members::to_stream(s);
     s << ", "
-      << "\"prop_1\": " << prop_1_
+      << "\"prop_2\": " << prop_2_
       << " }";
 }
 
-void third_child_with_members::swap(third_child_with_members& other) noexcept {
-    parent_with_members::swap(other);
+void child_of_a_child2::swap(child_of_a_child2& other) noexcept {
+    third_child_with_members::swap(other);
 
     using std::swap;
-    swap(prop_1_, other.prop_1_);
+    swap(prop_2_, other.prop_2_);
 }
 
-bool third_child_with_members::operator==(const third_child_with_members& rhs) const {
-    return parent_with_members::operator==(rhs) &&
-        prop_1_ == rhs.prop_1_;
+bool child_of_a_child2::operator==(const child_of_a_child2& rhs) const {
+    return third_child_with_members::operator==(rhs) &&
+        prop_2_ == rhs.prop_2_;
+}
+
+child_of_a_child2& child_of_a_child2::operator=(child_of_a_child2 other) {
+    using std::swap;
+    swap(*this, other);
+    return *this;
 }
 
 } }

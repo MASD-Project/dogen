@@ -19,43 +19,41 @@
  *
  */
 #include <ostream>
-#include "dogen/trivial_inheritance/domain/third_child_with_members.hpp"
-#include "dogen/trivial_inheritance/io/parent_with_members_io.hpp"
+#include "dogen/trivial_inheritance/domain/child_of_a_child1.hpp"
+#include "dogen/trivial_inheritance/io/third_child_with_members_io.hpp"
 
 namespace dogen {
 namespace trivial_inheritance {
 
-third_child_with_members::third_child_with_members()
-    : prop_1_(static_cast<unsigned int>(0)) { }
-
-third_child_with_members::third_child_with_members(
+child_of_a_child1::child_of_a_child1(
     const int prop_0,
     const dogen::trivial_inheritance::versioned_key& versioned_key,
     const unsigned int prop_1)
-    : parent_with_members(prop_0,
-      versioned_key),
-      prop_1_(prop_1) { }
+    : third_child_with_members(prop_0,
+      versioned_key,
+      prop_1) { }
 
-void third_child_with_members::to_stream(std::ostream& s) const {
+void child_of_a_child1::to_stream(std::ostream& s) const {
     s << " { "
-      << "\"__type__\": " << "\"third_child_with_members\"" << ", "
+      << "\"__type__\": " << "\"child_of_a_child1\"" << ", "
       << "\"__parent_0__\": ";
-    parent_with_members::to_stream(s);
-    s << ", "
-      << "\"prop_1\": " << prop_1_
-      << " }";
+    third_child_with_members::to_stream(s);
+    s << " }";
 }
 
-void third_child_with_members::swap(third_child_with_members& other) noexcept {
-    parent_with_members::swap(other);
+void child_of_a_child1::swap(child_of_a_child1& other) noexcept {
+    third_child_with_members::swap(other);
 
+}
+
+bool child_of_a_child1::operator==(const child_of_a_child1& rhs) const {
+    return third_child_with_members::operator==(rhs);
+}
+
+child_of_a_child1& child_of_a_child1::operator=(child_of_a_child1 other) {
     using std::swap;
-    swap(prop_1_, other.prop_1_);
-}
-
-bool third_child_with_members::operator==(const third_child_with_members& rhs) const {
-    return parent_with_members::operator==(rhs) &&
-        prop_1_ == rhs.prop_1_;
+    swap(*this, other);
+    return *this;
 }
 
 } }

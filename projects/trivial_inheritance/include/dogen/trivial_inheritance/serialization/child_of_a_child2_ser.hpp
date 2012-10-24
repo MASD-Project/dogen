@@ -18,28 +18,39 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_TRIVIAL_INHERITANCE_SERIALIZATION_THIRD_CHILD_WITH_MEMBERS_SER_HPP
-#define DOGEN_TRIVIAL_INHERITANCE_SERIALIZATION_THIRD_CHILD_WITH_MEMBERS_SER_HPP
+#ifndef DOGEN_TRIVIAL_INHERITANCE_SERIALIZATION_CHILD_OF_A_CHILD2_SER_HPP
+#define DOGEN_TRIVIAL_INHERITANCE_SERIALIZATION_CHILD_OF_A_CHILD2_SER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <boost/serialization/assume_abstract.hpp>
+#include <boost/serialization/export.hpp>
 #include <boost/serialization/split_free.hpp>
-#include "dogen/trivial_inheritance/domain/third_child_with_members.hpp"
+#include <boost/type_traits/is_virtual_base_of.hpp>
+#include "dogen/trivial_inheritance/domain/child_of_a_child2.hpp"
 
-BOOST_SERIALIZATION_SPLIT_FREE(dogen::trivial_inheritance::third_child_with_members)
-BOOST_SERIALIZATION_ASSUME_ABSTRACT(dogen::trivial_inheritance::third_child_with_members)
+namespace boost {
+
+template<>struct
+is_virtual_base_of<
+    dogen::trivial_inheritance::third_child_with_members,
+    dogen::trivial_inheritance::child_of_a_child2
+> : public mpl::true_ {};
+
+}
+
+BOOST_SERIALIZATION_SPLIT_FREE(dogen::trivial_inheritance::child_of_a_child2)
+BOOST_CLASS_EXPORT_KEY(dogen::trivial_inheritance::child_of_a_child2)
 
 namespace boost {
 namespace serialization {
 
 template<typename Archive>
-void save(Archive& ar, const dogen::trivial_inheritance::third_child_with_members& v, unsigned int version);
+void save(Archive& ar, const dogen::trivial_inheritance::child_of_a_child2& v, unsigned int version);
 
 template<typename Archive>
-void load(Archive& ar, dogen::trivial_inheritance::third_child_with_members& v, unsigned int version);
+void load(Archive& ar, dogen::trivial_inheritance::child_of_a_child2& v, unsigned int version);
 
 } }
 

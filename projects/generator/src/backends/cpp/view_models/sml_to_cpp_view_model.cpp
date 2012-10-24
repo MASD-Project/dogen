@@ -188,8 +188,8 @@ void sml_dfs_visitor::process_sml_pod(const dogen::sml::pod& pod) {
         }
 
         parent_view_model parent(pqn.type_name());
-        parent.properties(i->second.properties());
-        all_props_vm.splice(all_props_vm.end(), i->second.properties());
+        parent.properties(i->second.all_properties());
+        all_props_vm.splice(all_props_vm.end(), i->second.all_properties());
         parent.namespaces(i->second.namespaces());
 
         std::list<parent_view_model> parents;

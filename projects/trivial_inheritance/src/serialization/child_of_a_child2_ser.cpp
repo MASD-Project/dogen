@@ -25,11 +25,11 @@
 #include <boost/archive/xml_iarchive.hpp>
 #include <boost/archive/xml_oarchive.hpp>
 #include <boost/serialization/nvp.hpp>
-#include "dogen/trivial_inheritance/serialization/parent_with_members_ser.hpp"
+#include "dogen/trivial_inheritance/serialization/child_of_a_child2_ser.hpp"
 #include "dogen/trivial_inheritance/serialization/third_child_with_members_ser.hpp"
 
 BOOST_CLASS_TRACKING(
-    dogen::trivial_inheritance::third_child_with_members,
+    dogen::trivial_inheritance::child_of_a_child2,
     boost::serialization::track_selectively)
 
 namespace boost {
@@ -37,34 +37,36 @@ namespace serialization {
 
 template<typename Archive>
 void save(Archive& ar,
-    const dogen::trivial_inheritance::third_child_with_members& v,
+    const dogen::trivial_inheritance::child_of_a_child2& v,
     const unsigned int /*version*/) {
-    ar << make_nvp("parent_with_members", base_object<dogen::trivial_inheritance::parent_with_members>(v));
+    ar << make_nvp("third_child_with_members", base_object<dogen::trivial_inheritance::third_child_with_members>(v));
 
-    ar << make_nvp("prop_1", v.prop_1_);
+    ar << make_nvp("prop_2", v.prop_2_);
 }
 
 template<typename Archive>
 void load(Archive& ar,
-    dogen::trivial_inheritance::third_child_with_members& v,
+    dogen::trivial_inheritance::child_of_a_child2& v,
     const unsigned int /*version*/) {
-    ar >> make_nvp("parent_with_members", base_object<dogen::trivial_inheritance::parent_with_members>(v));
+    ar >> make_nvp("third_child_with_members", base_object<dogen::trivial_inheritance::third_child_with_members>(v));
 
-    ar >> make_nvp("prop_1", v.prop_1_);
+    ar >> make_nvp("prop_2", v.prop_2_);
 }
 
 } }
 
+BOOST_CLASS_EXPORT_IMPLEMENT(dogen::trivial_inheritance::child_of_a_child2)
+
 namespace boost {
 namespace serialization {
 
-template void save(archive::text_oarchive& ar, const dogen::trivial_inheritance::third_child_with_members& v, unsigned int version);
-template void load(archive::text_iarchive& ar, dogen::trivial_inheritance::third_child_with_members& v, unsigned int version);
+template void save(archive::text_oarchive& ar, const dogen::trivial_inheritance::child_of_a_child2& v, unsigned int version);
+template void load(archive::text_iarchive& ar, dogen::trivial_inheritance::child_of_a_child2& v, unsigned int version);
 
-template void save(archive::binary_oarchive& ar, const dogen::trivial_inheritance::third_child_with_members& v, unsigned int version);
-template void load(archive::binary_iarchive& ar, dogen::trivial_inheritance::third_child_with_members& v, unsigned int version);
+template void save(archive::binary_oarchive& ar, const dogen::trivial_inheritance::child_of_a_child2& v, unsigned int version);
+template void load(archive::binary_iarchive& ar, dogen::trivial_inheritance::child_of_a_child2& v, unsigned int version);
 
-template void save(archive::xml_oarchive& ar, const dogen::trivial_inheritance::third_child_with_members& v, unsigned int version);
-template void load(archive::xml_iarchive& ar, dogen::trivial_inheritance::third_child_with_members& v, unsigned int version);
+template void save(archive::xml_oarchive& ar, const dogen::trivial_inheritance::child_of_a_child2& v, unsigned int version);
+template void load(archive::xml_iarchive& ar, dogen::trivial_inheritance::child_of_a_child2& v, unsigned int version);
 
 } }

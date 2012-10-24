@@ -9,7 +9,7 @@
 		<item_version>0</item_version>
 	</packages>
 	<pods class_id="2" tracking_level="0" version="0">
-		<count>5</count>
+		<count>7</count>
 		<bucket_count>11</bucket_count>
 		<item_version>0</item_version>
 		<item class_id="3" tracking_level="0" version="0">
@@ -173,6 +173,77 @@
 					</value>
 				</parent_name>
 				<generate>1</generate>
+				<is_parent>1</is_parent>
+				<category_type>1</category_type>
+			</second>
+		</item>
+		<item>
+			<first>
+				<model_name>trivial_inheritance</model_name>
+				<external_package_path>
+					<count>0</count>
+					<item_version>0</item_version>
+				</external_package_path>
+				<package_path>
+					<count>0</count>
+					<item_version>0</item_version>
+				</package_path>
+				<type_name>child_of_a_child2</type_name>
+				<meta_type>2</meta_type>
+			</first>
+			<second>
+				<name>
+					<model_name>trivial_inheritance</model_name>
+					<external_package_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</external_package_path>
+					<package_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</package_path>
+					<type_name>child_of_a_child2</type_name>
+					<meta_type>2</meta_type>
+				</name>
+				<properties>
+					<count>1</count>
+					<item_version>0</item_version>
+					<item>
+						<name>prop_2</name>
+						<type_name>
+							<model_name></model_name>
+							<external_package_path>
+								<count>0</count>
+								<item_version>0</item_version>
+							</external_package_path>
+							<package_path>
+								<count>0</count>
+								<item_version>0</item_version>
+							</package_path>
+							<type_name>unsigned int</type_name>
+							<meta_type>0</meta_type>
+						</type_name>
+						<default_value></default_value>
+					</item>
+				</properties>
+				<parent_name>
+					<initialized>1</initialized>
+					<item_version>0</item_version>
+					<value>
+						<model_name>trivial_inheritance</model_name>
+						<external_package_path>
+							<count>0</count>
+							<item_version>0</item_version>
+						</external_package_path>
+						<package_path>
+							<count>0</count>
+							<item_version>0</item_version>
+						</package_path>
+						<type_name>third_child_with_members</type_name>
+						<meta_type>2</meta_type>
+					</value>
+				</parent_name>
+				<generate>1</generate>
 				<is_parent>0</is_parent>
 				<category_type>1</category_type>
 			</second>
@@ -223,6 +294,60 @@
 							<item_version>0</item_version>
 						</package_path>
 						<type_name>parent_with_members</type_name>
+						<meta_type>2</meta_type>
+					</value>
+				</parent_name>
+				<generate>1</generate>
+				<is_parent>0</is_parent>
+				<category_type>1</category_type>
+			</second>
+		</item>
+		<item>
+			<first>
+				<model_name>trivial_inheritance</model_name>
+				<external_package_path>
+					<count>0</count>
+					<item_version>0</item_version>
+				</external_package_path>
+				<package_path>
+					<count>0</count>
+					<item_version>0</item_version>
+				</package_path>
+				<type_name>child_of_a_child1</type_name>
+				<meta_type>2</meta_type>
+			</first>
+			<second>
+				<name>
+					<model_name>trivial_inheritance</model_name>
+					<external_package_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</external_package_path>
+					<package_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</package_path>
+					<type_name>child_of_a_child1</type_name>
+					<meta_type>2</meta_type>
+				</name>
+				<properties>
+					<count>0</count>
+					<item_version>0</item_version>
+				</properties>
+				<parent_name>
+					<initialized>1</initialized>
+					<item_version>0</item_version>
+					<value>
+						<model_name>trivial_inheritance</model_name>
+						<external_package_path>
+							<count>0</count>
+							<item_version>0</item_version>
+						</external_package_path>
+						<package_path>
+							<count>0</count>
+							<item_version>0</item_version>
+						</package_path>
+						<type_name>third_child_with_members</type_name>
 						<meta_type>2</meta_type>
 					</value>
 				</parent_name>

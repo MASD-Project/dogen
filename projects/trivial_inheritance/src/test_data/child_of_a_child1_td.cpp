@@ -19,11 +19,26 @@
  *
  */
 #include "dogen/trivial_inheritance/test_data/child_of_a_child1_td.hpp"
-#include "dogen/trivial_inheritance/test_data/child_of_a_child2_td.hpp"
-#include "dogen/trivial_inheritance/test_data/child_without_members_td.hpp"
-#include "dogen/trivial_inheritance/test_data/parent_with_members_td.hpp"
-#include "dogen/trivial_inheritance/test_data/parent_without_members_td.hpp"
-#include "dogen/trivial_inheritance/test_data/second_child_without_members_td.hpp"
 #include "dogen/trivial_inheritance/test_data/third_child_with_members_td.hpp"
-#include "dogen/trivial_inheritance/test_data/unversioned_key_td.hpp"
-#include "dogen/trivial_inheritance/test_data/versioned_key_td.hpp"
+
+
+
+namespace dogen {
+namespace trivial_inheritance {
+
+child_of_a_child1_generator::child_of_a_child1_generator() : position_(0) { }
+
+
+child_of_a_child1_generator::result_type
+child_of_a_child1_generator::create(const unsigned int position) {
+    child_of_a_child1 r;
+    third_child_with_members_generator::populate(position, r);
+    return r;
+}
+
+child_of_a_child1_generator::result_type
+child_of_a_child1_generator::operator()() {
+    return create(position_++);
+}
+
+} }
