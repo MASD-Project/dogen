@@ -18,18 +18,17 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/trivial_inheritance/io/child_of_a_child1_io.hpp"
-#include "dogen/trivial_inheritance/io/child_of_a_child2_io.hpp"
-#include "dogen/trivial_inheritance/io/child_without_members_io.hpp"
+#include <ostream>
 #include "dogen/trivial_inheritance/io/parent_outside_io.hpp"
-#include "dogen/trivial_inheritance/io/parent_with_members_io.hpp"
-#include "dogen/trivial_inheritance/io/parent_without_members_io.hpp"
-#include "dogen/trivial_inheritance/io/pkg1/child_io.hpp"
-#include "dogen/trivial_inheritance/io/pkg1/parent_io.hpp"
-#include "dogen/trivial_inheritance/io/pkg2/parent_io.hpp"
-#include "dogen/trivial_inheritance/io/pkg3/child_io.hpp"
 #include "dogen/trivial_inheritance/io/pkg4/child_io.hpp"
-#include "dogen/trivial_inheritance/io/second_child_without_members_io.hpp"
-#include "dogen/trivial_inheritance/io/third_child_with_members_io.hpp"
-#include "dogen/trivial_inheritance/io/unversioned_key_io.hpp"
-#include "dogen/trivial_inheritance/io/versioned_key_io.hpp"
+
+namespace dogen {
+namespace trivial_inheritance {
+namespace pkg4 {
+
+std::ostream& operator<<(std::ostream& s, const child& v) {
+    v.to_stream(s);
+    return(s);
+}
+
+} } }

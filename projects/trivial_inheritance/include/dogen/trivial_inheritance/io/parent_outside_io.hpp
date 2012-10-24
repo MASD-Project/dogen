@@ -18,18 +18,23 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/trivial_inheritance/domain/child_of_a_child1.hpp"
-#include "dogen/trivial_inheritance/domain/child_of_a_child2.hpp"
-#include "dogen/trivial_inheritance/domain/child_without_members.hpp"
+#ifndef DOGEN_TRIVIAL_INHERITANCE_IO_PARENT_OUTSIDE_IO_HPP
+#define DOGEN_TRIVIAL_INHERITANCE_IO_PARENT_OUTSIDE_IO_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include <iosfwd>
 #include "dogen/trivial_inheritance/domain/parent_outside.hpp"
-#include "dogen/trivial_inheritance/domain/parent_with_members.hpp"
-#include "dogen/trivial_inheritance/domain/parent_without_members.hpp"
-#include "dogen/trivial_inheritance/domain/pkg1/child.hpp"
-#include "dogen/trivial_inheritance/domain/pkg1/parent.hpp"
-#include "dogen/trivial_inheritance/domain/pkg2/parent.hpp"
-#include "dogen/trivial_inheritance/domain/pkg3/child.hpp"
-#include "dogen/trivial_inheritance/domain/pkg4/child.hpp"
-#include "dogen/trivial_inheritance/domain/second_child_without_members.hpp"
-#include "dogen/trivial_inheritance/domain/third_child_with_members.hpp"
-#include "dogen/trivial_inheritance/domain/unversioned_key.hpp"
-#include "dogen/trivial_inheritance/domain/versioned_key.hpp"
+
+namespace dogen {
+namespace trivial_inheritance {
+
+std::ostream&
+operator<<(std::ostream& s,
+     const dogen::trivial_inheritance::parent_outside& v);
+
+} }
+
+#endif

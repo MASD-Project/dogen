@@ -18,18 +18,30 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/trivial_inheritance/io/child_of_a_child1_io.hpp"
-#include "dogen/trivial_inheritance/io/child_of_a_child2_io.hpp"
-#include "dogen/trivial_inheritance/io/child_without_members_io.hpp"
-#include "dogen/trivial_inheritance/io/parent_outside_io.hpp"
-#include "dogen/trivial_inheritance/io/parent_with_members_io.hpp"
-#include "dogen/trivial_inheritance/io/parent_without_members_io.hpp"
-#include "dogen/trivial_inheritance/io/pkg1/child_io.hpp"
-#include "dogen/trivial_inheritance/io/pkg1/parent_io.hpp"
-#include "dogen/trivial_inheritance/io/pkg2/parent_io.hpp"
-#include "dogen/trivial_inheritance/io/pkg3/child_io.hpp"
-#include "dogen/trivial_inheritance/io/pkg4/child_io.hpp"
-#include "dogen/trivial_inheritance/io/second_child_without_members_io.hpp"
-#include "dogen/trivial_inheritance/io/third_child_with_members_io.hpp"
-#include "dogen/trivial_inheritance/io/unversioned_key_io.hpp"
+#include <ostream>
+#include "dogen/trivial_inheritance/domain/parent_outside.hpp"
 #include "dogen/trivial_inheritance/io/versioned_key_io.hpp"
+
+namespace dogen {
+namespace trivial_inheritance {
+
+parent_outside::parent_outside(const dogen::trivial_inheritance::versioned_key& versioned_key)
+    : versioned_key_(versioned_key) { }
+
+void parent_outside::to_stream(std::ostream& s) const {
+    s << " { "
+      << "\"__type__\": " << "\"parent_outside\"" << ", "
+      << "\"versioned_key\": " << versioned_key_
+      << " }";
+}
+
+void parent_outside::swap(parent_outside& other) noexcept {
+    using std::swap;
+    swap(versioned_key_, other.versioned_key_);
+}
+
+bool parent_outside::operator==(const parent_outside& rhs) const {
+    return versioned_key_ == rhs.versioned_key_;
+}
+
+} }

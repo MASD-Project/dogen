@@ -18,18 +18,36 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/trivial_inheritance/domain/child_of_a_child1.hpp"
-#include "dogen/trivial_inheritance/domain/child_of_a_child2.hpp"
-#include "dogen/trivial_inheritance/domain/child_without_members.hpp"
-#include "dogen/trivial_inheritance/domain/parent_outside.hpp"
-#include "dogen/trivial_inheritance/domain/parent_with_members.hpp"
-#include "dogen/trivial_inheritance/domain/parent_without_members.hpp"
-#include "dogen/trivial_inheritance/domain/pkg1/child.hpp"
-#include "dogen/trivial_inheritance/domain/pkg1/parent.hpp"
-#include "dogen/trivial_inheritance/domain/pkg2/parent.hpp"
-#include "dogen/trivial_inheritance/domain/pkg3/child.hpp"
+#ifndef DOGEN_TRIVIAL_INHERITANCE_HASH_PKG4_CHILD_HASH_HPP
+#define DOGEN_TRIVIAL_INHERITANCE_HASH_PKG4_CHILD_HASH_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include <functional>
 #include "dogen/trivial_inheritance/domain/pkg4/child.hpp"
-#include "dogen/trivial_inheritance/domain/second_child_without_members.hpp"
-#include "dogen/trivial_inheritance/domain/third_child_with_members.hpp"
-#include "dogen/trivial_inheritance/domain/unversioned_key.hpp"
-#include "dogen/trivial_inheritance/domain/versioned_key.hpp"
+
+namespace dogen {
+namespace trivial_inheritance {
+namespace pkg4 {
+
+class child_hasher {
+public:
+    static std::size_t hash(const child& v);
+};
+
+} } }
+
+namespace std {
+
+template<>
+class hash<dogen::trivial_inheritance::pkg4::child> {
+public:
+    size_t operator()(const dogen::trivial_inheritance::pkg4::child& v) const {
+        return dogen::trivial_inheritance::pkg4::child_hasher::hash(v);
+    }
+};
+
+}
+#endif

@@ -18,18 +18,27 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/trivial_inheritance/test_data/child_of_a_child1_td.hpp"
-#include "dogen/trivial_inheritance/test_data/child_of_a_child2_td.hpp"
-#include "dogen/trivial_inheritance/test_data/child_without_members_td.hpp"
 #include "dogen/trivial_inheritance/test_data/parent_outside_td.hpp"
-#include "dogen/trivial_inheritance/test_data/parent_with_members_td.hpp"
-#include "dogen/trivial_inheritance/test_data/parent_without_members_td.hpp"
-#include "dogen/trivial_inheritance/test_data/pkg1/child_td.hpp"
-#include "dogen/trivial_inheritance/test_data/pkg1/parent_td.hpp"
-#include "dogen/trivial_inheritance/test_data/pkg2/parent_td.hpp"
-#include "dogen/trivial_inheritance/test_data/pkg3/child_td.hpp"
-#include "dogen/trivial_inheritance/test_data/pkg4/child_td.hpp"
-#include "dogen/trivial_inheritance/test_data/second_child_without_members_td.hpp"
-#include "dogen/trivial_inheritance/test_data/third_child_with_members_td.hpp"
-#include "dogen/trivial_inheritance/test_data/unversioned_key_td.hpp"
 #include "dogen/trivial_inheritance/test_data/versioned_key_td.hpp"
+
+namespace {
+
+dogen::trivial_inheritance::versioned_key
+create_dogen_trivial_inheritance_versioned_key(const unsigned int position) {
+    return dogen::trivial_inheritance::versioned_key_generator::create(position);
+}
+
+}
+
+namespace dogen {
+namespace trivial_inheritance {
+
+
+void parent_outside_generator::
+populate(const unsigned int position, result_type& v) {
+    v.versioned_key(create_dogen_trivial_inheritance_versioned_key(position + 0));
+}
+
+
+
+} }

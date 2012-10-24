@@ -18,18 +18,28 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/trivial_inheritance/hash/child_of_a_child1_hash.hpp"
-#include "dogen/trivial_inheritance/hash/child_of_a_child2_hash.hpp"
-#include "dogen/trivial_inheritance/hash/child_without_members_hash.hpp"
 #include "dogen/trivial_inheritance/hash/parent_outside_hash.hpp"
-#include "dogen/trivial_inheritance/hash/parent_with_members_hash.hpp"
-#include "dogen/trivial_inheritance/hash/parent_without_members_hash.hpp"
-#include "dogen/trivial_inheritance/hash/pkg1/child_hash.hpp"
-#include "dogen/trivial_inheritance/hash/pkg1/parent_hash.hpp"
-#include "dogen/trivial_inheritance/hash/pkg2/parent_hash.hpp"
-#include "dogen/trivial_inheritance/hash/pkg3/child_hash.hpp"
-#include "dogen/trivial_inheritance/hash/pkg4/child_hash.hpp"
-#include "dogen/trivial_inheritance/hash/second_child_without_members_hash.hpp"
-#include "dogen/trivial_inheritance/hash/third_child_with_members_hash.hpp"
-#include "dogen/trivial_inheritance/hash/unversioned_key_hash.hpp"
 #include "dogen/trivial_inheritance/hash/versioned_key_hash.hpp"
+
+namespace {
+
+template <typename HashableType>
+inline void combine(std::size_t& seed, const HashableType& value)
+{
+    std::hash<HashableType> hasher;
+    seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
+}
+
+}
+
+namespace dogen {
+namespace trivial_inheritance {
+
+std::size_t parent_outside_hasher::hash(const parent_outside& v) {
+    std::size_t seed(0);
+
+    combine(seed, v.versioned_key());
+    return seed;
+}
+
+} }
