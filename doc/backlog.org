@@ -10,6 +10,11 @@ This file contains all stories that haven't been assigned to a sprint.
 
 Stories that we intend to look at, at some point.
 
+*** Add support for protected attributes
+
+We need to distinguish between public and protected attributes when in
+the presence of inheritance. If not, issue a warning.
+
 *** Add tests for invalid types
 
 - type name is blank (or variable name)
