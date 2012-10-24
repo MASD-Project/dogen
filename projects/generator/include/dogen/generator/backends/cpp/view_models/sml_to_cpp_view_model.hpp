@@ -80,10 +80,7 @@ private:
      * @brief Returns true if the facet requires a C++ source file,
      * false otherwise.
      */
-    /**@{*/
     bool has_implementation(const cpp_facet_types ft) const;
-    bool has_implementation(const cpp_facet_types ft, const sml::pod& p) const;
-    /**@}*/
 
     /**
      * @brief Returns true if facet has forward declarations, false otherwise.

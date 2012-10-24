@@ -33,8 +33,6 @@ namespace dogen {
 namespace split_project {
 namespace package {
 
-class a_class_serializer;
-
 class a_class final {
 public:
     a_class() = default;
@@ -44,9 +42,6 @@ public:
 
 public:
     explicit a_class(const dogen::split_project::versioned_key& versioned_key);
-
-public:
-    friend class dogen::split_project::package::a_class_serializer;
 
 private:
     template<typename Archive>

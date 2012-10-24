@@ -32,8 +32,6 @@
 namespace dogen {
 namespace classes_without_package {
 
-class class_3_serializer;
-
 class class_3 final {
 public:
     class_3() = default;
@@ -43,9 +41,6 @@ public:
 
 public:
     explicit class_3(const dogen::classes_without_package::versioned_key& versioned_key);
-
-public:
-    friend class dogen::classes_without_package::class_3_serializer;
 
 private:
     template<typename Archive>

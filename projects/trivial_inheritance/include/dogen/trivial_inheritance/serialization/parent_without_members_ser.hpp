@@ -25,38 +25,21 @@
 #pragma once
 #endif
 
-#include <boost/serialization/export.hpp>
-#include <boost/serialization/nvp.hpp>
+#include <boost/serialization/assume_abstract.hpp>
+#include <boost/serialization/split_free.hpp>
 #include "dogen/trivial_inheritance/domain/parent_without_members.hpp"
-#include "dogen/trivial_inheritance/serialization/versioned_key_ser.hpp"
 
-namespace dogen {
-namespace trivial_inheritance {
-
-class parent_without_members_serializer {
-public:
-    template<typename Archive>
-    void serialize(Archive & archive,
-        dogen::trivial_inheritance::parent_without_members& value,
-        const unsigned int /*version*/) {
-        using boost::serialization::make_nvp;
-
-        archive & make_nvp("versioned_key", value.versioned_key_);
-    }
-};
-
-} }
+BOOST_SERIALIZATION_SPLIT_FREE(dogen::trivial_inheritance::parent_without_members)
+BOOST_SERIALIZATION_ASSUME_ABSTRACT(dogen::trivial_inheritance::parent_without_members)
 
 namespace boost {
 namespace serialization {
 
-template<class Archive>
-inline void serialize(Archive & archive,
-    dogen::trivial_inheritance::parent_without_members& value,
-    const unsigned int version) {
-    dogen::trivial_inheritance::parent_without_members_serializer serializer;
-    serializer.serialize<Archive>(archive, value, version);
-}
+template<typename Archive>
+void save(Archive& ar, const dogen::trivial_inheritance::parent_without_members& v, unsigned int version);
+
+template<typename Archive>
+void load(Archive& ar, dogen::trivial_inheritance::parent_without_members& v, unsigned int version);
 
 } }
 

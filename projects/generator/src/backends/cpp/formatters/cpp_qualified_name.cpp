@@ -35,6 +35,12 @@ namespace formatters {
 cpp_qualified_name::cpp_qualified_name(std::ostream& stream)
     : stream_(stream) { }
 
+void cpp_qualified_name::format(const parent_view_model& vm) {
+    for(auto n : vm.namespaces())
+        stream_ << n << separator;
+    stream_ << vm.name();
+}
+
 void cpp_qualified_name::format(const class_view_model& vm) {
     for(auto n : vm.namespaces())
         stream_ << n << separator;

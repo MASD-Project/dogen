@@ -33,8 +33,6 @@
 namespace dogen {
 namespace trivial_inheritance {
 
-class second_child_without_members_serializer;
-
 class second_child_without_members final : public parent_with_members {
 public:
     second_child_without_members() = default;
@@ -45,9 +43,6 @@ public:
     second_child_without_members(
         const int prop_0,
         const dogen::trivial_inheritance::versioned_key& versioned_key);
-
-public:
-    friend class dogen::trivial_inheritance::second_child_without_members_serializer;
 
 private:
     template<typename Archive>

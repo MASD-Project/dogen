@@ -25,37 +25,21 @@
 #pragma once
 #endif
 
-#include <boost/serialization/nvp.hpp>
+#include <boost/serialization/export.hpp>
+#include <boost/serialization/split_free.hpp>
 #include "dogen/stand_alone_class/domain/class_1.hpp"
-#include "dogen/stand_alone_class/serialization/versioned_key_ser.hpp"
 
-namespace dogen {
-namespace stand_alone_class {
-
-class class_1_serializer {
-public:
-    template<typename Archive>
-    void serialize(Archive & archive,
-        dogen::stand_alone_class::class_1& value,
-        const unsigned int /*version*/) {
-        using boost::serialization::make_nvp;
-
-        archive & make_nvp("versioned_key", value.versioned_key_);
-    }
-};
-
-} }
+BOOST_SERIALIZATION_SPLIT_FREE(dogen::stand_alone_class::class_1)
+BOOST_CLASS_EXPORT_KEY(dogen::stand_alone_class::class_1)
 
 namespace boost {
 namespace serialization {
 
-template<class Archive>
-inline void serialize(Archive & archive,
-    dogen::stand_alone_class::class_1& value,
-    const unsigned int version) {
-    dogen::stand_alone_class::class_1_serializer serializer;
-    serializer.serialize<Archive>(archive, value, version);
-}
+template<typename Archive>
+void save(Archive& ar, const dogen::stand_alone_class::class_1& v, unsigned int version);
+
+template<typename Archive>
+void load(Archive& ar, dogen::stand_alone_class::class_1& v, unsigned int version);
 
 } }
 

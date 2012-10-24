@@ -32,8 +32,6 @@
 namespace dogen {
 namespace stand_alone_class {
 
-class versioned_key_serializer;
-
 class versioned_key final {
 public:
     versioned_key(const versioned_key&) = default;
@@ -47,9 +45,6 @@ public:
     versioned_key(
         const unsigned int id,
         const unsigned int version);
-
-public:
-    friend class dogen::stand_alone_class::versioned_key_serializer;
 
 private:
     template<typename Archive>

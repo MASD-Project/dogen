@@ -32,8 +32,6 @@
 namespace dogen {
 namespace two_layers_with_objects {
 
-class versioned_key_serializer;
-
 class versioned_key final {
 public:
     versioned_key(const versioned_key&) = default;
@@ -47,9 +45,6 @@ public:
     versioned_key(
         const unsigned int id,
         const unsigned int version);
-
-public:
-    friend class dogen::two_layers_with_objects::versioned_key_serializer;
 
 private:
     template<typename Archive>

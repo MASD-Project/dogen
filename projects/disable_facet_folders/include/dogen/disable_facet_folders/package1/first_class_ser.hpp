@@ -25,40 +25,21 @@
 #pragma once
 #endif
 
-#include <boost/serialization/nvp.hpp>
+#include <boost/serialization/export.hpp>
+#include <boost/serialization/split_free.hpp>
 #include "dogen/disable_facet_folders/package1/first_class.hpp"
-#include "dogen/disable_facet_folders/versioned_key_ser.hpp"
 
-namespace dogen {
-namespace disable_facet_folders {
-namespace package1 {
-
-class first_class_serializer {
-public:
-    template<typename Archive>
-    void serialize(Archive & archive,
-        dogen::disable_facet_folders::package1::first_class& value,
-        const unsigned int /*version*/) {
-        using boost::serialization::make_nvp;
-
-        archive & make_nvp("public_attribute", value.public_attribute_);
-        archive & make_nvp("private_attribute", value.private_attribute_);
-        archive & make_nvp("versioned_key", value.versioned_key_);
-    }
-};
-
-} } }
+BOOST_SERIALIZATION_SPLIT_FREE(dogen::disable_facet_folders::package1::first_class)
+BOOST_CLASS_EXPORT_KEY(dogen::disable_facet_folders::package1::first_class)
 
 namespace boost {
 namespace serialization {
 
-template<class Archive>
-inline void serialize(Archive & archive,
-    dogen::disable_facet_folders::package1::first_class& value,
-    const unsigned int version) {
-    dogen::disable_facet_folders::package1::first_class_serializer serializer;
-    serializer.serialize<Archive>(archive, value, version);
-}
+template<typename Archive>
+void save(Archive& ar, const dogen::disable_facet_folders::package1::first_class& v, unsigned int version);
+
+template<typename Archive>
+void load(Archive& ar, dogen::disable_facet_folders::package1::first_class& v, unsigned int version);
 
 } }
 

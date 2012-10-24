@@ -361,13 +361,8 @@ bool sml_to_cpp_view_model::has_implementation(const cpp_facet_types ft) const {
         ft == cpp_facet_types::hash ||
         ft == cpp_facet_types::io ||
         ft == cpp_facet_types::database ||
-        ft == cpp_facet_types::test_data;
-}
-
-bool sml_to_cpp_view_model::
-has_implementation(const cpp_facet_types ft, const sml::pod& p) const {
-    return has_implementation(ft) || (ft == cpp_facet_types::serialization &&
-        (p.is_parent() || p.parent_name()));
+        ft == cpp_facet_types::test_data ||
+        ft == cpp_facet_types::serialization;
 }
 
 bool sml_to_cpp_view_model::has_forward_decls(const cpp_facet_types ft) const {
@@ -437,7 +432,7 @@ std::vector<file_view_model> sml_to_cpp_view_model::transform_pods() {
 
             lambda(ft, header, main, p);
 
-            if (has_implementation(ft, p))
+            if (has_implementation(ft))
                 lambda(ft, implementation, main, p);
 
             if (has_forward_decls(ft))

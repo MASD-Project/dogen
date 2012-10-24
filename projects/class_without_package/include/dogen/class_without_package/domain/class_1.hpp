@@ -32,8 +32,6 @@
 namespace dogen {
 namespace class_without_package {
 
-class class_1_serializer;
-
 class class_1 final {
 public:
     class_1(const class_1&) = default;
@@ -47,9 +45,6 @@ public:
     class_1(
         const int an_attribute,
         const dogen::class_without_package::versioned_key& versioned_key);
-
-public:
-    friend class dogen::class_without_package::class_1_serializer;
 
 private:
     template<typename Archive>

@@ -32,8 +32,6 @@
 namespace dogen {
 namespace all_primitives {
 
-class a_class_serializer;
-
 class a_class final {
 public:
     a_class(const a_class&) = default;
@@ -57,9 +55,6 @@ public:
         const short short_property,
         const unsigned short ushort_property,
         const dogen::all_primitives::versioned_key& versioned_key);
-
-public:
-    friend class dogen::all_primitives::a_class_serializer;
 
 private:
     template<typename Archive>

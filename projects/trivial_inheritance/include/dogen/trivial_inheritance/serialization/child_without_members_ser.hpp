@@ -26,39 +26,31 @@
 #endif
 
 #include <boost/serialization/export.hpp>
-#include <boost/serialization/nvp.hpp>
+#include <boost/serialization/split_free.hpp>
+#include <boost/type_traits/is_virtual_base_of.hpp>
 #include "dogen/trivial_inheritance/domain/child_without_members.hpp"
-#include "dogen/trivial_inheritance/serialization/parent_without_members_ser.hpp"
 
-namespace dogen {
-namespace trivial_inheritance {
+namespace boost {
 
-class child_without_members_serializer {
-public:
-    template<typename Archive>
-    void serialize(Archive & archive,
-        dogen::trivial_inheritance::child_without_members& value,
-        const unsigned int /*version*/) {
-        using boost::serialization::make_nvp;
-        using boost::serialization::base_object;
-        archive & make_nvp("parent_without_members", base_object<parent_without_members>(value));
-    }
-};
+template<>struct
+is_virtual_base_of<
+    dogen::trivial_inheritance::parent_without_members,
+    dogen::trivial_inheritance::child_without_members
+> : public mpl::true_ {};
 
-} }
+}
 
-BOOST_CLASS_EXPORT(dogen::trivial_inheritance::child_without_members)
+BOOST_SERIALIZATION_SPLIT_FREE(dogen::trivial_inheritance::child_without_members)
+BOOST_CLASS_EXPORT_KEY(dogen::trivial_inheritance::child_without_members)
 
 namespace boost {
 namespace serialization {
 
-template<class Archive>
-inline void serialize(Archive & archive,
-    dogen::trivial_inheritance::child_without_members& value,
-    const unsigned int version) {
-    dogen::trivial_inheritance::child_without_members_serializer serializer;
-    serializer.serialize<Archive>(archive, value, version);
-}
+template<typename Archive>
+void save(Archive& ar, const dogen::trivial_inheritance::child_without_members& v, unsigned int version);
+
+template<typename Archive>
+void load(Archive& ar, dogen::trivial_inheritance::child_without_members& v, unsigned int version);
 
 } }
 

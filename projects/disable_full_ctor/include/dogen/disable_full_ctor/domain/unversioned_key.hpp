@@ -31,8 +31,6 @@
 namespace dogen {
 namespace disable_full_ctor {
 
-class unversioned_key_serializer;
-
 class unversioned_key final {
 public:
     unversioned_key(const unversioned_key&) = default;
@@ -41,9 +39,6 @@ public:
 
 public:
     unversioned_key();
-
-public:
-    friend class dogen::disable_full_ctor::unversioned_key_serializer;
 
 private:
     template<typename Archive>

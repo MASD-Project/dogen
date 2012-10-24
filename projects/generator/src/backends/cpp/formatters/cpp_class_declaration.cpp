@@ -156,13 +156,6 @@ void cpp_class_declaration::friends(const class_view_model& vm) {
     if (disable_serialization_)
         return;
 
-    utility_.public_access_specifier();
-    stream_ << indenter_ << "friend class ";
-    cpp_qualified_name qualified_name(stream_);
-    qualified_name.format(vm);
-    stream_ << "_serializer;" << std::endl;
-    utility_.blank_line();
-
     utility_.private_access_specifier();
 
     stream_ << indenter_ << "template<typename Archive>" << std::endl

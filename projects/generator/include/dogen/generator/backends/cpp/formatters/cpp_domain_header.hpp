@@ -63,7 +63,6 @@ public:
         const bool disable_io, const bool disable_serialization);
 
 private:
-    void serializer_forward_declaration(const class_view_model& vm);
     void inserter_operator(const class_view_model& vm);
     void swap_method(const class_view_model& vm);
     void class_declaration(const sml::category_types ct,

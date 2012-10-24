@@ -25,37 +25,21 @@
 #pragma once
 #endif
 
+#include <boost/serialization/export.hpp>
+#include <boost/serialization/split_free.hpp>
 #include "dogen/enable_facet_serialization/domain/package1/first_class.hpp"
-#include "dogen/enable_facet_serialization/serialization/versioned_key_ser.hpp"
 
-namespace dogen {
-namespace enable_facet_serialization {
-namespace package1 {
-
-class first_class_serializer {
-public:
-    template<typename Archive>
-    void serialize(Archive & archive,
-        dogen::enable_facet_serialization::package1::first_class& value,
-        const unsigned int /*version*/) {
-        archive & value.public_attribute_;
-        archive & value.private_attribute_;
-        archive & value.versioned_key_;
-    }
-};
-
-} } }
+BOOST_SERIALIZATION_SPLIT_FREE(dogen::enable_facet_serialization::package1::first_class)
+BOOST_CLASS_EXPORT_KEY(dogen::enable_facet_serialization::package1::first_class)
 
 namespace boost {
 namespace serialization {
 
-template<class Archive>
-inline void serialize(Archive & archive,
-    dogen::enable_facet_serialization::package1::first_class& value,
-    const unsigned int version) {
-    dogen::enable_facet_serialization::package1::first_class_serializer serializer;
-    serializer.serialize<Archive>(archive, value, version);
-}
+template<typename Archive>
+void save(Archive& ar, const dogen::enable_facet_serialization::package1::first_class& v, unsigned int version);
+
+template<typename Archive>
+void load(Archive& ar, dogen::enable_facet_serialization::package1::first_class& v, unsigned int version);
 
 } }
 

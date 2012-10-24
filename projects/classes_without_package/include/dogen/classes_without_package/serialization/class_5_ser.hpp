@@ -25,37 +25,21 @@
 #pragma once
 #endif
 
-#include <boost/serialization/nvp.hpp>
+#include <boost/serialization/export.hpp>
+#include <boost/serialization/split_free.hpp>
 #include "dogen/classes_without_package/domain/class_5.hpp"
-#include "dogen/classes_without_package/serialization/versioned_key_ser.hpp"
 
-namespace dogen {
-namespace classes_without_package {
-
-class class_5_serializer {
-public:
-    template<typename Archive>
-    void serialize(Archive & archive,
-        dogen::classes_without_package::class_5& value,
-        const unsigned int /*version*/) {
-        using boost::serialization::make_nvp;
-
-        archive & make_nvp("versioned_key", value.versioned_key_);
-    }
-};
-
-} }
+BOOST_SERIALIZATION_SPLIT_FREE(dogen::classes_without_package::class_5)
+BOOST_CLASS_EXPORT_KEY(dogen::classes_without_package::class_5)
 
 namespace boost {
 namespace serialization {
 
-template<class Archive>
-inline void serialize(Archive & archive,
-    dogen::classes_without_package::class_5& value,
-    const unsigned int version) {
-    dogen::classes_without_package::class_5_serializer serializer;
-    serializer.serialize<Archive>(archive, value, version);
-}
+template<typename Archive>
+void save(Archive& ar, const dogen::classes_without_package::class_5& v, unsigned int version);
+
+template<typename Archive>
+void load(Archive& ar, dogen::classes_without_package::class_5& v, unsigned int version);
 
 } }
 

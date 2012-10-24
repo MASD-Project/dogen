@@ -25,33 +25,21 @@
 #pragma once
 #endif
 
+#include <boost/serialization/export.hpp>
+#include <boost/serialization/split_free.hpp>
 #include "dogen/enable_facet_serialization/domain/unversioned_key.hpp"
 
-namespace dogen {
-namespace enable_facet_serialization {
-
-class unversioned_key_serializer {
-public:
-    template<typename Archive>
-    void serialize(Archive & archive,
-        dogen::enable_facet_serialization::unversioned_key& value,
-        const unsigned int /*version*/) {
-        archive & value.id_;
-    }
-};
-
-} }
+BOOST_SERIALIZATION_SPLIT_FREE(dogen::enable_facet_serialization::unversioned_key)
+BOOST_CLASS_EXPORT_KEY(dogen::enable_facet_serialization::unversioned_key)
 
 namespace boost {
 namespace serialization {
 
-template<class Archive>
-inline void serialize(Archive & archive,
-    dogen::enable_facet_serialization::unversioned_key& value,
-    const unsigned int version) {
-    dogen::enable_facet_serialization::unversioned_key_serializer serializer;
-    serializer.serialize<Archive>(archive, value, version);
-}
+template<typename Archive>
+void save(Archive& ar, const dogen::enable_facet_serialization::unversioned_key& v, unsigned int version);
+
+template<typename Archive>
+void load(Archive& ar, dogen::enable_facet_serialization::unversioned_key& v, unsigned int version);
 
 } }
 

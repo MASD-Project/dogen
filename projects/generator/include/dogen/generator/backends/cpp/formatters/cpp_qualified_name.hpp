@@ -28,6 +28,7 @@
 #include <iosfwd>
 #include <string>
 #include "dogen/generator/backends/cpp/view_models/class_view_model.hpp"
+#include "dogen/generator/backends/cpp/view_models/parent_view_model.hpp"
 
 namespace dogen {
 namespace generator {
@@ -38,6 +39,7 @@ namespace formatters {
 class cpp_qualified_name {
 public:
     typedef view_models::class_view_model class_view_model;
+    typedef view_models::parent_view_model parent_view_model;
 
 public:
     cpp_qualified_name() = delete;
@@ -51,6 +53,7 @@ public:
 
 public:
     void format(const class_view_model& vm);
+    void format(const parent_view_model& vm);
 
 private:
     std::ostream& stream_;

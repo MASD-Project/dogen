@@ -184,10 +184,10 @@ private:
      * compile, but on the flip side, all inclusion related code is
      * kept in one place.
      */
-    void append_implementation_dependencies(
+    void append_implementation_dependencies(const sml::pod& pod,
         const cpp_facet_types ft, const cpp_file_types flt,
-        inclusion_lists& il, const bool requires_stream_manipulators = false,
-        const bool is_parent_or_child = false) const;
+        inclusion_lists& il,
+        const bool requires_stream_manipulators = false) const;
 
     /**
      * @brief

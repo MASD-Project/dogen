@@ -33,8 +33,6 @@ namespace dogen {
 namespace disable_cmakelists {
 namespace package1 {
 
-class first_class_serializer;
-
 class first_class final {
 public:
     first_class(const first_class&) = default;
@@ -49,9 +47,6 @@ public:
         const int public_attribute,
         const int private_attribute,
         const dogen::disable_cmakelists::versioned_key& versioned_key);
-
-public:
-    friend class dogen::disable_cmakelists::package1::first_class_serializer;
 
 private:
     template<typename Archive>

@@ -78,15 +78,6 @@ inserter_operator(const class_view_model& vm) {
     utility_.blank_line();
 }
 
-void domain_header::serializer_forward_declaration(const class_view_model& vm) {
-    if (disable_serialization_)
-        return;
-
-    stream_ << indenter_ << "class " << vm.name() << "_serializer;"
-            << std::endl;
-    utility_.blank_line();
-}
-
 void domain_header::
 swap_method(const class_view_model& vm) {
     // swap overload is only available in leaf classes - MEC++-33
@@ -146,8 +137,6 @@ void domain_header::format_main(const sml::category_types ct,
     {
         namespace_helper ns(stream_, vm.namespaces());
         utility_.blank_line();
-
-        serializer_forward_declaration(vm);
         class_declaration(ct, vm);
         inserter_operator(vm);
     }
@@ -156,7 +145,6 @@ void domain_header::format_main(const sml::category_types ct,
     swap_method(vm);
     if (!vm.all_properties().empty())
         utility_.blank_line(2);
-
 }
 
 void domain_header::format_forward_declaration(const cpp_facet_types ft,

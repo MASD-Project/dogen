@@ -33,8 +33,6 @@ namespace dogen {
 namespace two_layers_with_objects {
 namespace Package_2 {
 
-class class_2_serializer;
-
 class class_2 final {
 public:
     class_2() = default;
@@ -44,9 +42,6 @@ public:
 
 public:
     explicit class_2(const dogen::two_layers_with_objects::versioned_key& versioned_key);
-
-public:
-    friend class dogen::two_layers_with_objects::Package_2::class_2_serializer;
 
 private:
     template<typename Archive>

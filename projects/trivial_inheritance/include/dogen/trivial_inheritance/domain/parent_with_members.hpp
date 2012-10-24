@@ -33,8 +33,6 @@
 namespace dogen {
 namespace trivial_inheritance {
 
-class parent_with_members_serializer;
-
 class parent_with_members {
 public:
     parent_with_members(const parent_with_members&) = default;
@@ -49,9 +47,6 @@ public:
     parent_with_members(
         const int prop_0,
         const dogen::trivial_inheritance::versioned_key& versioned_key);
-
-public:
-    friend class dogen::trivial_inheritance::parent_with_members_serializer;
 
 private:
     template<typename Archive>

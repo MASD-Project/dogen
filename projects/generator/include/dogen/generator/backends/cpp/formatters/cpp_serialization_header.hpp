@@ -50,16 +50,14 @@ public:
     serialization_header& operator=(const serialization_header&) = default;
 
 public:
-    serialization_header(std::ostream& stream, bool disable_xml_serialization);
+    explicit serialization_header(std::ostream& stream);
     virtual ~serialization_header() noexcept {}
 
 public:
-    static file_formatter::shared_ptr create(std::ostream& stream,
-        bool disable_xml_serialization);
+    static file_formatter::shared_ptr create(std::ostream& stream);
 
 private:
-    void serializer_class(const class_view_model& vm);
-    void serialize_method(const class_view_model& vm);
+    void load_and_save_functions(const class_view_model& vm);
 
 public:
     virtual void format(const file_view_model& vm) override;
@@ -68,7 +66,6 @@ private:
     std::ostream& stream_;
     cpp_indenter indenter_;
     cpp_utility utility_;
-    const bool disable_xml_serialization_;
 };
 
 } } } } }

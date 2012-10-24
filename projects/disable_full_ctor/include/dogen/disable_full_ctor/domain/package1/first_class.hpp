@@ -33,8 +33,6 @@ namespace dogen {
 namespace disable_full_ctor {
 namespace package1 {
 
-class first_class_serializer;
-
 class first_class final {
 public:
     first_class(const first_class&) = default;
@@ -43,9 +41,6 @@ public:
 
 public:
     first_class();
-
-public:
-    friend class dogen::disable_full_ctor::package1::first_class_serializer;
 
 private:
     template<typename Archive>

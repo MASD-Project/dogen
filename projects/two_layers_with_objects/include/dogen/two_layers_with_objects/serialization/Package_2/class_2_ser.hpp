@@ -25,38 +25,21 @@
 #pragma once
 #endif
 
-#include <boost/serialization/nvp.hpp>
+#include <boost/serialization/export.hpp>
+#include <boost/serialization/split_free.hpp>
 #include "dogen/two_layers_with_objects/domain/Package_2/class_2.hpp"
-#include "dogen/two_layers_with_objects/serialization/versioned_key_ser.hpp"
 
-namespace dogen {
-namespace two_layers_with_objects {
-namespace Package_2 {
-
-class class_2_serializer {
-public:
-    template<typename Archive>
-    void serialize(Archive & archive,
-        dogen::two_layers_with_objects::Package_2::class_2& value,
-        const unsigned int /*version*/) {
-        using boost::serialization::make_nvp;
-
-        archive & make_nvp("versioned_key", value.versioned_key_);
-    }
-};
-
-} } }
+BOOST_SERIALIZATION_SPLIT_FREE(dogen::two_layers_with_objects::Package_2::class_2)
+BOOST_CLASS_EXPORT_KEY(dogen::two_layers_with_objects::Package_2::class_2)
 
 namespace boost {
 namespace serialization {
 
-template<class Archive>
-inline void serialize(Archive & archive,
-    dogen::two_layers_with_objects::Package_2::class_2& value,
-    const unsigned int version) {
-    dogen::two_layers_with_objects::Package_2::class_2_serializer serializer;
-    serializer.serialize<Archive>(archive, value, version);
-}
+template<typename Archive>
+void save(Archive& ar, const dogen::two_layers_with_objects::Package_2::class_2& v, unsigned int version);
+
+template<typename Archive>
+void load(Archive& ar, dogen::two_layers_with_objects::Package_2::class_2& v, unsigned int version);
 
 } }
 

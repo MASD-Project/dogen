@@ -32,8 +32,6 @@
 namespace dogen {
 namespace split_project {
 
-class versioned_key_serializer;
-
 class versioned_key final {
 public:
     versioned_key(const versioned_key&) = default;
@@ -47,9 +45,6 @@ public:
     versioned_key(
         const unsigned int id,
         const unsigned int version);
-
-public:
-    friend class dogen::split_project::versioned_key_serializer;
 
 private:
     template<typename Archive>

@@ -23,13 +23,13 @@
 #include <ostream>
 #include "dogen/generator/generation_failure.hpp"
 #include "dogen/generator/backends/cpp/formatters/cpp_licence.hpp"
-#include "dogen/generator/backends/cpp/formatters/cpp_serialization_header.hpp"
 #include "dogen/generator/backends/cpp/formatters/cpp_header_guards.hpp"
 #include "dogen/generator/backends/cpp/formatters/cpp_namespace.hpp"
 #include "dogen/generator/backends/cpp/formatters/cpp_includes.hpp"
 #include "dogen/generator/backends/cpp/formatters/cpp_namespace_helper.hpp"
 #include "dogen/generator/backends/cpp/formatters/cpp_qualified_name.hpp"
 #include "dogen/generator/backends/cpp/formatters/cpp_indenter.hpp"
+#include "dogen/generator/backends/cpp/formatters/cpp_serialization_header.hpp"
 
 namespace {
 
@@ -48,121 +48,26 @@ namespace cpp {
 namespace formatters {
 
 serialization_header::
-serialization_header(std::ostream& stream, bool disable_xml_serialization) :
-    stream_(stream),
-    utility_(stream_, indenter_),
-    disable_xml_serialization_(disable_xml_serialization) { }
+serialization_header(std::ostream& stream) :
+    stream_(stream), utility_(stream_, indenter_) { }
 
 file_formatter::shared_ptr
-serialization_header::create(std::ostream& stream,
-    bool disable_xml_serialization) {
-    return file_formatter::shared_ptr(
-        new serialization_header(stream, disable_xml_serialization));
+serialization_header::create(std::ostream& stream) {
+    return file_formatter::shared_ptr(new serialization_header(stream));
 }
 
-void serialization_header::serialize_method(const class_view_model& vm) {
-    stream_ << indenter_ << "template<class Archive>" << std::endl
-            << indenter_ << "inline void serialize(Archive & archive,"
-            << std::endl;
+void serialization_header::load_and_save_functions(const class_view_model& vm) {
+    cpp_qualified_name qualified_name(stream_);
+    stream_ << indenter_ << "template<typename Archive>" << std::endl
+            << indenter_ << "void save(Archive& ar, const ";
+    qualified_name.format(vm);
+    stream_ << "& v, unsigned int version);" << std::endl;
+    utility_.blank_line();
 
-    {
-        cpp_positive_indenter_scope s(indenter_);
-
-        stream_ << indenter_;
-        cpp_qualified_name qualified_name(stream_);
-        qualified_name.format(vm);
-
-        stream_ << "& value," << std::endl
-                << indenter_ << "const unsigned int version) ";
-        utility_.open_scope();
-
-        stream_ << indenter_;
-        qualified_name.format(vm);
-
-        stream_ << "_serializer serializer;" << std::endl
-                << indenter_
-                << "serializer.serialize<Archive>(archive, value, version);"
-                << std::endl;
-    }
-    utility_.close_scope();
-}
-
-void serialization_header::serializer_class(const class_view_model& vm) {
-    stream_ << "class " << vm.name() << "_serializer ";
-    utility_.open_scope();
-    {
-        cpp_positive_indenter_scope s(indenter_);
-        utility_.public_access_specifier();
-        const auto parents(vm.parents());
-        const auto props(vm.properties());
-        const bool has_properties(!props.empty());
-        const bool has_parents(!parents.empty());
-        const bool has_properties_or_parents(has_properties || has_parents);
-
-        stream_ << indenter_ << "template<typename Archive>" << std::endl
-                << indenter_ << "void serialize(Archive & "
-                << (has_properties_or_parents ? "archive," : "/*archive*/,")
-                << std::endl;
-
-        {
-            cpp_positive_indenter_scope s(indenter_);
-            stream_ << indenter_;
-            cpp_qualified_name qualified_name(stream_);
-            qualified_name.format(vm);
-
-            stream_ << (has_properties_or_parents ? "& value," : "& /*value*/,")
-                    << std::endl
-                    << indenter_ << "const unsigned int /*version*/) ";
-
-            utility_.open_scope();
-            {
-                if (!disable_xml_serialization_ && has_properties_or_parents) {
-                    stream_ << indenter_
-                            << "using boost::serialization::make_nvp;"
-                            << std::endl;
-                }
-
-                if (has_parents) {
-                    stream_ << indenter_
-                            << "using boost::serialization::base_object;"
-                            << std::endl;
-
-                    if (has_properties)
-                        utility_.blank_line();
-
-                    for (const auto p : parents) {
-                        stream_ << indenter_
-                                << "archive & make_nvp("
-                                << utility_.quote(p.name())
-                                << ", base_object<"
-                                << p.name() << ">(value));" << std::endl;
-                    }
-                }
-
-                if (has_properties && (has_parents || !disable_xml_serialization_))
-                    utility_.blank_line();
-
-                for (const auto p : props) {
-                    if (disable_xml_serialization_) {
-                        stream_ << indenter_ << "archive & value."
-                                << utility_.as_member_variable(p.name())
-                                << ";"
-                                << std::endl;
-                    } else {
-                        stream_ << indenter_ << "archive & make_nvp("
-                                << utility_.quote(p.name())
-                                << ", value."
-                                << utility_.as_member_variable(p.name())
-                                << ");"
-                                << std::endl;
-                    }
-                }
-            }
-        }
-        utility_.close_scope();
-    }
-
-    stream_ << indenter_ << "};" << std::endl;
+    stream_ << indenter_ << "template<typename Archive>" << std::endl
+            << indenter_ << "void load(Archive& ar" << ", ";
+    qualified_name.format(vm);
+    stream_ << "& v, unsigned int version);" << std::endl;
 }
 
 void serialization_header::format(const file_view_model& vm) {
@@ -181,33 +86,52 @@ void serialization_header::format(const file_view_model& vm) {
     includes.format(vm);
 
     const view_models::class_view_model& cvm(*o);
+    cpp_qualified_name qualified_name(stream_);
+    const auto parents(cvm.parents());
+    if (!cvm.is_parent() && !parents.empty())
     {
-        namespace_helper helper1(stream_, cvm.namespaces());
-        utility_.blank_line();
-        serializer_class(cvm);
-        utility_.blank_line();
+        {
+            std::list<std::string> ns { boost_ns };
+            namespace_helper nsh(stream_, ns);
+            utility_.blank_line();
+
+            for (const auto p : parents) {
+                stream_ << indenter_ << "template<>struct" << std::endl
+                        << indenter_ << "is_virtual_base_of<" << std::endl;
+                {
+                    cpp_positive_indenter_scope s(indenter_);
+                    stream_ << indenter_;
+                    qualified_name.format(p);
+                    stream_ << "," << std::endl
+                            << indenter_;
+                    qualified_name.format(cvm);
+                    stream_ << std::endl;
+                }
+                stream_ << indenter_ << "> : public mpl::true_ {};"
+                        << std::endl;
+                utility_.blank_line();
+            }
+        }
+        utility_.blank_line(2);
     }
+
+    stream_ << indenter_ << "BOOST_SERIALIZATION_SPLIT_FREE(";
+    qualified_name.format(cvm);
+    stream_ << ")" << std::endl;
+
+    if (cvm.is_parent())
+        stream_ << indenter_ << "BOOST_SERIALIZATION_ASSUME_ABSTRACT(";
+    else
+        stream_ << indenter_ << "BOOST_CLASS_EXPORT_KEY(";
+    qualified_name.format(cvm);
+    stream_ << ")" << std::endl;
     utility_.blank_line();
 
-    if (!cvm.parents().empty()) {
-        utility_.blank_line();
-        stream_ << indenter_ << "BOOST_CLASS_EXPORT(";
-
-        cpp_qualified_name qualified_name(stream_);
-        qualified_name.format(cvm);
-        stream_ << ")" << std::endl;
-    }
-
     {
-        std::list<std::string> namespaces;
-        namespaces.push_back(boost_ns);
-        namespaces.push_back(serialization_ns);
-
+        std::list<std::string> ns { boost_ns, serialization_ns };
+        namespace_helper nsh(stream_, ns);
         utility_.blank_line();
-        namespace_helper ns_helper(stream_, namespaces);
-
-        utility_.blank_line();
-        serialize_method(cvm);
+        load_and_save_functions(cvm);
         utility_.blank_line();
     }
 

@@ -39,6 +39,18 @@ const std::string boost_optional_include("boost/optional.hpp");
 const std::string pqxx_connection_include("pqxx/connection.hxx");
 const std::string boost_format_include("boost/format.hpp");
 const std::string boost_nvp("boost/serialization/nvp.hpp");
+const std::string boost_split_free("boost/serialization/split_free.hpp");
+const std::string boost_assume_abstract(
+    "boost/serialization/assume_abstract.hpp");
+const std::string boost_is_virtual_base_of(
+    "boost/type_traits/is_virtual_base_of.hpp");
+const std::string boost_xml_oarchive("boost/archive/xml_oarchive.hpp");
+const std::string boost_xml_iarchive("boost/archive/xml_iarchive.hpp");
+const std::string boost_text_oarchive("boost/archive/text_oarchive.hpp");
+const std::string boost_text_iarchive("boost/archive/text_iarchive.hpp");
+const std::string boost_binary_oarchive("boost/archive/binary_oarchive.hpp");
+const std::string boost_binary_iarchive("boost/archive/binary_iarchive.hpp");
+
 const std::string boost_export("boost/serialization/export.hpp");
 const std::string boost_string("boost/serialization/string.hpp");
 const std::string pqxx_result_include("pqxx/result.hxx");
@@ -175,10 +187,9 @@ void cpp_inclusion_manager::append_versioning_dependencies(
 }
 
 void cpp_inclusion_manager::
-append_implementation_dependencies(const cpp_facet_types ft,
-    const cpp_file_types flt, inclusion_lists& il,
-    const bool requires_stream_manipulators,
-    const bool is_parent_or_child) const {
+append_implementation_dependencies(const sml::pod& p,
+    const cpp_facet_types ft, const cpp_file_types flt, inclusion_lists& il,
+    const bool requires_stream_manipulators) const {
 
     /*
      * STL
@@ -187,8 +198,9 @@ append_implementation_dependencies(const cpp_facet_types ft,
     const bool is_header(flt == cpp_file_types::header);
     const bool is_domain(ft == cpp_facet_types::domain);
     const bool is_io(ft == cpp_facet_types::io);
+
     const bool domain_with_io(is_domain &&
-        (settings_.use_integrated_io() || is_parent_or_child));
+        (settings_.use_integrated_io() || p.parent_name() || p.is_parent()));
 
     if (is_header && io_enabled_ && (domain_with_io || is_io))
         il.system.push_back(iosfwd);
@@ -226,12 +238,37 @@ append_implementation_dependencies(const cpp_facet_types ft,
 
     // nvp serialisation
     const bool is_serialization(ft == cpp_facet_types::serialization);
-    if (is_header && is_serialization && !settings_.disable_xml_serialization())
+    if (is_implementation && is_serialization &&
+        !settings_.disable_xml_serialization())
         il.system.push_back(boost_nvp);
 
+    // split free serialisation
+    if (is_header && is_serialization)
+        il.system.push_back(boost_split_free);
+
+    // assume abstract
+    if (is_header && is_serialization && p.is_parent())
+        il.system.push_back(boost_assume_abstract);
+
     // boost serialisation export
-    if (is_header && is_serialization && is_parent_or_child)
+    if (is_header && is_serialization && !p.is_parent())
         il.system.push_back(boost_export);
+
+    // boost virtual base of
+    if (is_header && is_serialization && !p.is_parent() && p.parent_name())
+        il.system.push_back(boost_is_virtual_base_of);
+
+    // boost archive types
+    if (is_implementation && is_serialization) {
+        if (!settings_.disable_xml_serialization()) {
+            il.system.push_back(boost_xml_oarchive);
+            il.system.push_back(boost_xml_iarchive);
+        }
+        il.system.push_back(boost_text_oarchive);
+        il.system.push_back(boost_text_iarchive);
+        il.system.push_back(boost_binary_oarchive);
+        il.system.push_back(boost_binary_iarchive);
+    }
 
     // state saver
     if (is_implementation && io_enabled_ && requires_stream_manipulators &&
@@ -297,27 +334,28 @@ void cpp_inclusion_manager::append_relationship_dependencies(
             continue; // primitve on non-primitives model
 
         /*
-         * rule 2: domain and serialisation headers need the
-         * corresponding header file for the dependency
+         * rule 2: domain headers need the corresponding header file
+         * for the dependency
          */
         const bool is_header(flt == cpp_file_types::header);
         const bool is_domain(ft == cpp_facet_types::domain);
-        const bool is_ser(ft == cpp_facet_types::serialization);
         const auto main(cpp_aspect_types::main);
 
-        if (is_header && !is_primitive && (is_domain || is_ser))
+        if (is_header && !is_primitive && is_domain)
             il.user.push_back(header_dependency(n, ft, main));
 
         /*
-         * rule 3: hash, IO and test data implementations need the
-         * corresponding header file for the dependency
+         * rule 3: hash, IO, serialisation and test data
+         * implementations need the corresponding header file for the
+         * dependency
          */
         const bool is_implementation(flt == cpp_file_types::implementation);
         const bool is_hash(ft == cpp_facet_types::hash);
         const bool is_io(ft == cpp_facet_types::io);
+        const bool is_ser(ft == cpp_facet_types::serialization);
         const bool is_td(ft == cpp_facet_types::test_data);
 
-        if (is_implementation && (is_hash || is_io || is_td))
+        if (is_implementation && (is_hash || is_io || is_td || is_ser))
             il.user.push_back(header_dependency(n, ft, main));
 
         /*
@@ -416,7 +454,7 @@ includes_for_pod(const sml::pod& pod, cpp_facet_types ft, cpp_file_types flt,
     const bool pc(is_parent_or_child(pod));
 
     append_versioning_dependencies(ft, flt, at, pod.category_type(), r);
-    append_implementation_dependencies(ft, flt, r, rsm, pc);
+    append_implementation_dependencies(pod, ft, flt, r, rsm);
     append_relationship_dependencies(names, ft, flt, pc, r);
     append_self_dependencies(pod.name(), ft, flt, at, r);
 

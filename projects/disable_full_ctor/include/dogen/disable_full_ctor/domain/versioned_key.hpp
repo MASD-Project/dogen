@@ -32,8 +32,6 @@
 namespace dogen {
 namespace disable_full_ctor {
 
-class versioned_key_serializer;
-
 class versioned_key final {
 public:
     versioned_key(const versioned_key&) = default;
@@ -42,9 +40,6 @@ public:
 
 public:
     versioned_key();
-
-public:
-    friend class dogen::disable_full_ctor::versioned_key_serializer;
 
 private:
     template<typename Archive>

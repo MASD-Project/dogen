@@ -31,8 +31,6 @@
 namespace dogen {
 namespace classes_in_a_package {
 
-class unversioned_key_serializer;
-
 class unversioned_key final {
 public:
     unversioned_key(const unversioned_key&) = default;
@@ -44,9 +42,6 @@ public:
 
 public:
     explicit unversioned_key(const unsigned int id);
-
-public:
-    friend class dogen::classes_in_a_package::unversioned_key_serializer;
 
 private:
     template<typename Archive>
