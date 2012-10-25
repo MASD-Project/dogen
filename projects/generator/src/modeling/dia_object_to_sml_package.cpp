@@ -18,7 +18,6 @@
  * MA 02110-1301, USA.
  *
  */
-#include <boost/tokenizer.hpp>
 #include <boost/variant/get.hpp>
 #include <boost/lexical_cast.hpp>
 #include <boost/range/algorithm.hpp>
@@ -28,6 +27,7 @@
 #include "dogen/dia/utility/dia_utility.hpp"
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/generator/modeling/transformation_error.hpp"
+#include "dogen/generator/modeling/identifier_parser.hpp"
 #include "dogen/generator/modeling/dia_object_to_sml_package.hpp"
 
 namespace {
@@ -37,7 +37,6 @@ static logger lg(logger_factory("dia_object_to_sml_package"));
 
 using dogen::generator::modeling::transformation_error;
 
-const char* delimiter = "::";
 const std::string root_vertex_id("root");
 const std::string hash_character("#");
 const std::string dia_string("string");
@@ -95,23 +94,16 @@ public:
     dia_dfs_visitor(const dia_dfs_visitor&) = default;
     dia_dfs_visitor(dia_dfs_visitor&&) = default;
 
+private:
+    typedef dogen::generator::modeling::identifier_parser identifier_parser;
+
 public:
     dia_dfs_visitor(const std::string& model_name,
         const std::string& external_package_path,
         bool verbose)
         : state_(new visit_state(model_name,
-                split_delimited_string(external_package_path), verbose)) { }
-
-private:
-    std::list<std::string>
-    split_delimited_string(const std::string& str) const {
-        const boost::char_separator<char> sep(delimiter);
-        boost::tokenizer<boost::char_separator<char> > tokens(str, sep);
-
-        std::list<std::string> r;
-        boost::copy(tokens, std::inserter(r, r.end()));
-        return r;
-    }
+                identifier_parser::parse_scoped_name(external_package_path),
+                verbose)) { }
 
 public:
     template<typename Vertex, typename Graph>
@@ -153,13 +145,6 @@ private:
     dogen::sml::qualified_name
     transform_qualified_name(const dogen::dia::attribute& attribute,
         dogen::sml::meta_types meta_type) const;
-
-    /**
-     * @brief Parses a Dia type string, generating an SML qualified
-     * name from it.
-     */
-    dogen::sml::qualified_name
-    transform_qualified_name(const std::string& type_string) const;
 
     /**
      * @brief Converts a package in Dia format into a package in SML
@@ -211,33 +196,6 @@ transform_string_attribute(const dogen::dia::attribute& a) const {
         throw transformation_error(unexpected_attribute_value_type +
             dia_string);
     }
-}
-
-dogen::sml::qualified_name dia_dfs_visitor::
-transform_qualified_name(const std::string& type_string) const {
-    dogen::sml::qualified_name result;
-
-    if (std::string::npos == type_string.find(delimiter)) {
-        result.type_name(type_string);
-        return result;
-    }
-
-    const boost::char_separator<char> sep(delimiter);
-    boost::tokenizer<boost::char_separator<char> > tokens(type_string, sep);
-
-    std::list<std::string> token_list;
-    std::copy(tokens.begin(), tokens.end(), std::back_inserter(token_list));
-
-    result.model_name(token_list.front());
-    result.type_name(token_list.back());
-
-    token_list.pop_back();
-    token_list.pop_front();
-
-    if (!token_list.empty())
-        result.package_path(token_list);
-
-    return result;
 }
 
 dogen::sml::qualified_name dia_dfs_visitor::

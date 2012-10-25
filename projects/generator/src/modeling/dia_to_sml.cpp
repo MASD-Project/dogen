@@ -24,7 +24,6 @@
 #include <functional>
 #include <boost/lexical_cast.hpp>
 #include <boost/optional.hpp>
-#include <boost/tokenizer.hpp>
 #include <boost/range/combine.hpp>
 #include <boost/range/adaptors.hpp>
 #include <boost/range/algorithm.hpp>
@@ -41,6 +40,7 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/generator/modeling/transformation_error.hpp"
 #include "dogen/generator/modeling/dia_object_to_sml_package.hpp"
+#include "dogen/generator/modeling/identifier_parser.hpp"
 #include "dogen/generator/modeling/dia_to_sml.hpp"
 
 namespace {
@@ -50,7 +50,6 @@ static logger lg(logger_factory("dia_to_sml"));
 
 using dogen::generator::modeling::transformation_error;
 
-const char* delimiter = "::";
 const std::string empty;
 const std::string dia_name("name");
 const std::string dia_type("type");
@@ -137,6 +136,9 @@ public:
     dia_dfs_visitor(const dia_dfs_visitor&) = default;
     dia_dfs_visitor(dia_dfs_visitor&&) = default;
 
+private:
+    typedef dogen::generator::modeling::identifier_parser identifier_parser;
+
 public:
     dia_dfs_visitor(const std::string& model_name,
         const std::string& external_package_path,
@@ -146,19 +148,9 @@ public:
         const std::unordered_map<std::string, dogen::sml::package>&
         packages_by_id)
         : state_(new visit_state(model_name,
-                split_delimited_string(external_package_path), verbose,
-                is_target, child_to_parent, parent_ids, packages_by_id)) { }
-
-private:
-    std::list<std::string>
-    split_delimited_string(const std::string& str) const {
-        const boost::char_separator<char> sep(delimiter);
-        boost::tokenizer<boost::char_separator<char> > tokens(str, sep);
-
-        std::list<std::string> r;
-        boost::copy(tokens, std::inserter(r, r.end()));
-        return r;
-    }
+                identifier_parser::parse_scoped_name(external_package_path),
+                verbose, is_target, child_to_parent, parent_ids,
+                packages_by_id)) { }
 
 public:
     template<typename Vertex, typename Graph>
@@ -269,33 +261,6 @@ transform_string_attribute(const dogen::dia::attribute& a) const {
 }
 
 dogen::sml::qualified_name dia_dfs_visitor::
-transform_qualified_name(const std::string& type_string) const {
-    dogen::sml::qualified_name result;
-
-    if (std::string::npos == type_string.find(delimiter)) {
-        result.type_name(type_string);
-        return result;
-    }
-
-    const boost::char_separator<char> sep(delimiter);
-    boost::tokenizer<boost::char_separator<char> > tokens(type_string, sep);
-
-    std::list<std::string> token_list;
-    std::copy(tokens.begin(), tokens.end(), std::back_inserter(token_list));
-
-    result.model_name(token_list.front());
-    result.type_name(token_list.back());
-
-    token_list.pop_back();
-    token_list.pop_front();
-
-    if (!token_list.empty())
-        result.package_path(token_list);
-
-    return result;
-}
-
-dogen::sml::qualified_name dia_dfs_visitor::
 transform_qualified_name(const dogen::dia::attribute& a,
     dogen::sml::meta_types meta_type, const std::string& pkg_id) const {
     if (a.name() != dia_name) {
@@ -337,7 +302,7 @@ transform_property(const dogen::dia::composite& uml_attribute) const {
             property.name(transform_string_attribute(*a));
         else if (a->name() == dia_type) {
             const std::string s(transform_string_attribute(*a));
-            property.type_name(transform_qualified_name(s));
+            property.type_name(identifier_parser::parse_qualified_name(s));
         } else {
             BOOST_LOG_SEV(lg, warn) << "Ignoring unexpected attribute: "
                                     << a->name();
