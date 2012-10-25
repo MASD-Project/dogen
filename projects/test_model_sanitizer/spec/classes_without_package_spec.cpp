@@ -85,4 +85,15 @@ BOOST_AUTO_TEST_CASE(validate_swap) {
     test_swap<unversioned_key_generator>();
 }
 
+BOOST_AUTO_TEST_CASE(validate_io) {
+    SETUP_TEST_LOG("validate_io");
+    test_io<class_1_generator>();
+    test_io<class_2_generator>();
+    test_io<class_3_generator>();
+    test_io<class_4_generator>();
+    test_io<class_5_generator>();
+    test_io<versioned_key_generator>();
+    test_io<unversioned_key_generator>();
+}
+
 BOOST_AUTO_TEST_SUITE_END()

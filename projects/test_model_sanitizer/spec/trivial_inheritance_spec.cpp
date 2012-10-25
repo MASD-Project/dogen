@@ -93,4 +93,17 @@ BOOST_AUTO_TEST_CASE(validate_swap) {
     test_swap<pkg4::child_generator>();
 }
 
+BOOST_AUTO_TEST_CASE(validate_io) {
+    SETUP_TEST_LOG("validate_io");
+    test_io<versioned_key_generator>();
+    test_io<unversioned_key_generator>();
+    test_io<child_without_members_generator>();
+    test_io<second_child_without_members_generator>();
+    test_io<child_of_a_child1_generator>();
+    test_io<child_of_a_child2_generator>();
+    test_io<pkg1::child_generator>();
+    test_io<pkg3::child_generator>();
+    test_io<pkg4::child_generator>();
+}
+
 BOOST_AUTO_TEST_SUITE_END()

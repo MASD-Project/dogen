@@ -64,4 +64,9 @@ BOOST_AUTO_TEST_CASE(validate_swap) {
     test_swap<first_class_generator>();
 }
 
+BOOST_AUTO_TEST_CASE(validate_io) {
+    SETUP_TEST_LOG("validate_io");
+    test_io<first_class_generator>();
+}
+
 BOOST_AUTO_TEST_SUITE_END()

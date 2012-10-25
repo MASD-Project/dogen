@@ -69,4 +69,11 @@ BOOST_AUTO_TEST_CASE(validate_swap) {
     test_swap<unversioned_key_generator>();
 }
 
+BOOST_AUTO_TEST_CASE(validate_io) {
+    SETUP_TEST_LOG("validate_hashing");
+    test_swap<package1::first_class_generator>();
+    test_swap<versioned_key_generator>();
+    test_swap<unversioned_key_generator>();
+}
+
 BOOST_AUTO_TEST_SUITE_END()

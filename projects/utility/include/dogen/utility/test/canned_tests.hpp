@@ -27,6 +27,7 @@
 
 #include <boost/test/unit_test.hpp>
 #include "dogen/utility/test/asserter.hpp"
+#include "dogen/utility/test/io_tester.hpp"
 #include "dogen/utility/test/hash_tester.hpp"
 #include "dogen/utility/test/equality_tester.hpp"
 #include "dogen/utility/test/serialization_tester.hpp"
@@ -79,6 +80,13 @@ void test_swap() {
     std::swap(c, d);
     BOOST_CHECK(c == b);
     BOOST_CHECK(d == a);
+}
+
+template<typename Sequence>
+void test_io() {
+    Sequence seq;
+    utility::test::io_tester<typename Sequence::result_type>::
+        inserter_operator_produces_valid_json(seq());
 }
 
 } } }
