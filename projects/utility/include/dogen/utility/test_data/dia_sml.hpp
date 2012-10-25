@@ -44,6 +44,7 @@ public:
     static boost::filesystem::path non_existent_file();
 
     static boost::filesystem::path input();
+    static boost::filesystem::path input_std_model_dia();
     static boost::filesystem::path input_class_in_a_package_dia();
     static boost::filesystem::path input_compressed_dia();
     static boost::filesystem::path input_empty_dia();

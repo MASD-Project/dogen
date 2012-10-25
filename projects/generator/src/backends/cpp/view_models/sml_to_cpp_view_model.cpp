@@ -51,7 +51,7 @@ const std::string id_name("id");
 const std::string version_name("version");
 
 const std::string bool_type("bool");
-const std::string string_type("string");
+const std::string string_type("std::string");
 const std::string char_type("char");
 const std::string uchar_type("unsigned char");
 const std::string short_type("short");

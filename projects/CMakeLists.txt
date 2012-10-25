@@ -167,6 +167,7 @@ include_directories(
     ${CMAKE_SOURCE_DIR}/projects/split_project/dir/inc
     ${CMAKE_SOURCE_DIR}/projects/prototype/include
     ${CMAKE_SOURCE_DIR}/projects/trivial_inheritance/include
+    ${CMAKE_SOURCE_DIR}/projects/std_model/include
     )
 
 #
@@ -206,6 +207,7 @@ add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/two_layers_with_objects/src)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dmp/src)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/split_project/source/split_project)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/trivial_inheritance/src)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/std_model/src)
 
 # global targets for codegen
 add_custom_target(rebase_codegen)

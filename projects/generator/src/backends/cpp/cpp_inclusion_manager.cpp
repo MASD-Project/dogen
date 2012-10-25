@@ -302,10 +302,10 @@ void cpp_inclusion_manager::append_std_dependencies(
         il.system.push_back(std_string);
 
     const bool is_serialization(ft == cpp_facet_types::serialization);
-    if (is_header && is_serialization && qname.type_name() == std_string)
+    const bool is_implementation(flt == cpp_file_types::implementation);
+    if (is_implementation && is_serialization && qname.type_name() == std_string)
         il.system.push_back(boost_string);
 
-    const bool is_implementation(flt == cpp_file_types::implementation);
     const bool is_test_data(ft == cpp_facet_types::test_data);
     if (is_implementation && is_test_data && qname.type_name() == std_string)
         il.system.push_back(sstream);

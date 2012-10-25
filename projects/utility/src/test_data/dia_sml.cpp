@@ -29,6 +29,7 @@ namespace {
 path data_set("dia_sml");
 path non_existent_file("dia_sml/input/non_existent_file.dia");
 path input("dia_sml/input");
+path input_std_model_dia("dia_sml/input/std_model.dia");
 path input_class_in_a_package_dia("dia_sml/input/class_in_a_package.dia");
 path input_compressed_dia("dia_sml/input/compressed.dia");
 path input_empty_dia("dia_sml/input/empty.dia");
@@ -204,6 +205,10 @@ path dia_sml::non_existent_file() {
 
 path dia_sml::input() {
     return validating_resolver::resolve(::input);
+}
+
+path dia_sml::input_std_model_dia() {
+    return validating_resolver::resolve(::input_std_model_dia);
 }
 
 path dia_sml::input_class_in_a_package_dia() {

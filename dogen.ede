@@ -35,6 +35,7 @@
    "/projects/split_project/dir/inc"
    "/projects/prototype/include"
    "/projects/trivial_inheritance/include"
+   "/projects/std_model/include"
    )
  :system-include-path
  '("/usr/local/pfh/include"

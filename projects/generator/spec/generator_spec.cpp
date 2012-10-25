@@ -504,6 +504,13 @@ BOOST_AUTO_TEST_CASE(trivial_inheritance_model_generates_expected_code) {
     BOOST_CHECK(check_code_generation(t));
 }
 
+BOOST_AUTO_TEST_CASE(std_model_generates_expected_code) {
+    SETUP_TEST_LOG("std_model_generates_expected_code");
+    using dogen::utility::test_data::dia_sml;
+    const auto t(dia_sml::input_std_model_dia());
+    BOOST_CHECK(check_code_generation(t));
+}
+
 BOOST_AUTO_TEST_CASE(package_without_name_model_throws) {
     SETUP_TEST_LOG("package_without_name_model_throws");
     using dogen::utility::test_data::dia_sml;
