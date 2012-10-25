@@ -26,6 +26,44 @@ namespace {
 
 const char* delimiter = "::";
 
+/*
+ * EBNF:
+ *
+ * nested_name_specifier = class_or_namespace_name '::' [nested_name_specifier]
+ * class_or_namespace_name = class_name | namespace_name
+ * class_name = identifier
+ * namespace_name = identifier | template_id
+ * identifier = nondigit | identifier nondigit | identifier digit
+ * nondigit = boost::spirit::qi::alpha | '_'
+ * digit = boost::spirit::qi::digit
+ * template_id = template_name '<' [ template_argument_list ] '>'
+ * template_argument_list = template_argument | template_argument_list ',' template_argument
+ * template_argument = type_id | id_expression
+ * type_id = type_specifier_seq [ abstract_declarator ]
+ * type_specifier_seq = type_specifier | type_specifier_seq
+ * type_specifier = simple_type_specifier | cv_qualifier
+ * simple_type_specifier =
+ *
+ * [ '::' ] [ nested_name_specifier ] type_name
+ * [ '::' ] nested_name_specifier 'template' template_id
+ * 'char'
+ * 'wchar_t'
+ * 'bool'
+ * 'short'
+ * 'int'
+ * 'long'
+ * 'signed'
+ * 'unsigned'
+ * 'float'
+ * 'double'
+ * 'void'
+ *
+ * type_name = class_name
+ * cv_qualifier = 'const'
+ * abstract_declarator = ptr_operator [ abstract_declarator ]
+ * ptr_operator = '*' [ cv_qualifier_seq ] | '&' | [ '::' ] nested_name_specifier '*' [ cv_qualifier_seq ]
+ *
+ */
 }
 
 namespace dogen {
