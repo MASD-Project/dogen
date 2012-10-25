@@ -28,11 +28,11 @@ bool create_bool(const unsigned int position) {
 }
 
 char create_char(const unsigned int position) {
-    return static_cast<char>((position % 95) + 32);
+    return static_cast<char>(((position % 95) + 32) == 34) ? 35 : ((position % 95) + 32);
 }
 
 unsigned char create_unsigned_char(const unsigned int position) {
-    return static_cast<unsigned char>((position % 95) + 32);
+    return static_cast<unsigned char>(((position % 95) + 32) == 34) ? 35 : ((position % 95) + 32);
 }
 
 int create_int(const unsigned int position) {

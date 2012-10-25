@@ -35,6 +35,7 @@
 #include "dogen/utility/log/scoped_life_cycle_manager.hpp"
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/exception/utility_exception.hpp"
+#include "dogen/utility/test/json_validator.hpp"
 
 namespace this_is_a_test {
 
@@ -276,6 +277,22 @@ BOOST_AUTO_TEST_CASE(exercise_jsonify_inserter) {
     BOOST_LOG_SEV(lg, debug) << "float: " << jsonify((float)12.123);
     BOOST_LOG_SEV(lg, debug) << "double: " << jsonify((double)3.14);
     BOOST_CHECK(true);
+}
+
+BOOST_AUTO_TEST_CASE(valid_json_parses_successfully) {
+    SETUP_TEST_LOG_SOURCE("valid_json_parses_successfully");
+
+    std::stringstream s;
+    s << "{ \"__type__\": \"class_b\", \"prop_0\":  { \"__type__\": \"class_a\", \"prop_0\": 0, \"versioned_key\":  { \"__type__\": \"versioned_key\", \"id\": 1, \"version\": 2 } }, \"versioned_key\":  { \"__type__\": \"versioned_key\", \"id\": 0, \"version\": 1 } }";
+    BOOST_CHECK(dogen::utility::test::json_validator::validate(s));
+}
+
+BOOST_AUTO_TEST_CASE(invalid_json_fails_to_parse) {
+    SETUP_TEST_LOG_SOURCE("invalid_json_fails_to_parse");
+
+    std::stringstream s;
+    s << "{ \"__type__\": \"class_b\", \"prop_0\":  { \"__type__\": \"class_a\", \"prop_0\": 0, \"versioned_key\":  { \"__type__\": \"versioned_key\", \"id\": 1, \"version\": 2 } }, \"versioned_key\":  { \"__type__\": \"versioned_key\", \"id\": 0, \"version\": 1";
+    BOOST_CHECK(!dogen::utility::test::json_validator::validate(s));
 }
 
 BOOST_AUTO_TEST_SUITE_END()

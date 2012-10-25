@@ -18,43 +18,22 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_UTILITY_TEST_IO_TESTER_HPP
-#define DOGEN_UTILITY_TEST_IO_TESTER_HPP
+#ifndef DOGEN_UTILITY_TEST_JSON_VALIDATOR_HPP
+#define DOGEN_UTILITY_TEST_JSON_VALIDATOR_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <sstream>
-#include <boost/test/unit_test.hpp>
-#include "dogen/utility/log/logger.hpp"
-#include "dogen/utility/test/json_validator.hpp"
+#include <iosfwd>
 
 namespace dogen {
 namespace utility {
 namespace test {
 
-/**
- * @brief Ensures the inserter operator produces valid JSON.
- */
-template<typename Entity>
-class io_tester {
+class json_validator {
 public:
-    typedef Entity entity_type;
-
-public:
-    static void inserter_operator_produces_valid_json(const Entity& a) {
-        using namespace dogen::utility::log;
-        logger lg(logger_factory("io_tester"));
-        BOOST_LOG_SEV(lg, debug) << "json: " << a;
-
-        std::stringstream s;
-        s << a;
-        if (!json_validator::validate(s)) {
-            BOOST_LOG_SEV(lg, error) << "JSON fails to validate";
-            BOOST_CHECK_MESSAGE(false, "JSON fails to validate");
-        }
-    }
+    static bool validate(std::istream& s);
 };
 
 } } }

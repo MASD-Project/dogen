@@ -109,7 +109,9 @@ char_like_helper(const std::string& identifiable_type_name,
         cpp_positive_indenter_scope s(indenter_);
         stream_ << indenter_
                 << "return static_cast<" << type_name
-                << ">((position % 95) + 32);" << std::endl;
+                << ">(((position % 95) + 32) == 34) ? 35 :"
+                << " ((position % 95) + 32);"
+                << std::endl;
     }
     utility_.close_scope();
 }
