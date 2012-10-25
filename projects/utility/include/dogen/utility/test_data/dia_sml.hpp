@@ -74,6 +74,7 @@ public:
     static boost::filesystem::path input_all_primitives_dia();
     static boost::filesystem::path input_split_project_dia();
     static boost::filesystem::path input_trivial_inheritance_dia();
+    static boost::filesystem::path input_trivial_association_dia();
 
     static boost::filesystem::path expected();
     static boost::filesystem::path expected_class_in_a_package_dia_xml();

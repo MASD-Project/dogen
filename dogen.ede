@@ -35,6 +35,7 @@
    "/projects/split_project/dir/inc"
    "/projects/prototype/include"
    "/projects/trivial_inheritance/include"
+   "/projects/trivial_association/include"
    "/projects/std_model/include"
    )
  :system-include-path

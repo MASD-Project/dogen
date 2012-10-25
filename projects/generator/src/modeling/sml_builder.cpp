@@ -31,13 +31,13 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/generator/modeling/sml_builder.hpp"
 
+using namespace dogen::utility::log;
 namespace  {
 
-static dogen::utility::log::logger
-lg(dogen::utility::log::logger_factory("sml_builder"));
+static logger lg(logger_factory("sml_builder"));
 
 const std::string orphan_pod("Pod's parent could not be located: ");
-const std::string undefined_type("Pod has property with undefined type");
+const std::string undefined_type("Pod has property with undefined type: ");
 const std::string missing_target("No target model found");
 
 }
@@ -46,10 +46,10 @@ namespace dogen {
 namespace generator {
 namespace modeling {
 
-sml_builder::sml_builder(bool verbose, std::string schema_name)
+sml_builder::sml_builder(const bool verbose, const std::string& schema_name)
     : verbose_(verbose), has_target_(false), schema_name_(schema_name) { }
 
-void sml_builder::resolve_parent(sml::pod pod) {
+void sml_builder::resolve_parent(const sml::pod& pod) {
     const auto pods(merged_model_.pods());
     auto parent(pod.parent_name());
 
@@ -68,41 +68,62 @@ void sml_builder::resolve_parent(sml::pod pod) {
     }
 }
 
-std::vector<sml::property>
-sml_builder::resolve_properties(sml::pod pod) {
+sml::qualified_name
+sml_builder::resolve_partial_type(sml::qualified_name n) const {
     const auto pods(merged_model_.pods());
-    const auto primitives(merged_model_.primitives());
+    sml::qualified_name r(n);
 
+    auto lambda([&]() {
+            BOOST_LOG_SEV(lg, debug) << "Resolved type " << n.type_name()
+                                     << ". Result: " << r;
+        });
+
+    // first try the type as it was read originally.
+    r.meta_type(sml::meta_types::pod);
+    auto i(pods.find(r));
+    if (i != pods.end()) {
+        lambda();
+        return r;
+    }
+
+    // its not a pod, could it be a primitive?
+    const auto primitives(merged_model_.primitives());
+    r.meta_type(sml::meta_types::primitive);
+    auto j(primitives.find(r));
+    if (j != primitives.end()) {
+        lambda();
+        return r;
+    }
+
+    if (r.model_name().empty()) {
+        // it could be a type defined in this model
+        r.meta_type(sml::meta_types::pod);
+        r.model_name(merged_model_.name());
+        r.external_package_path(merged_model_.external_package_path());
+        i = pods.find(r);
+        if (i != pods.end()) {
+            lambda();
+            return r;
+        }
+    }
+
+    BOOST_LOG_SEV(lg, error) << undefined_type << n.type_name();
+    throw validation_error(undefined_type + n.type_name());
+}
+
+std::vector<sml::property>
+sml_builder::resolve_properties(const sml::pod& pod) {
     auto r(pod.properties());
     for (unsigned int i(0); i < r.size(); ++i) {
         sml::property property(r[i]);
-        sml::qualified_name pqn(property.type_name());
+        property.type_name(resolve_partial_type(property.type_name()));
+        r[i] = property;
 
-        pqn.meta_type(sml::meta_types::pod);
-        const auto j(pods.find(pqn));
-        if (j != pods.end()) {
-            property.type_name(pqn);
-            r[i] = property;
-            continue;
-        }
-
-        pqn.meta_type(sml::meta_types::primitive);
-        const auto k(primitives.find(pqn));
-        if (k != primitives.end()) {
-            property.type_name(pqn);
-            r[i] = property;
-            continue;
-        }
-
-        std::ostringstream stream;
-        stream << undefined_type << ". pod: "
-               << pod.name().type_name() << ". property type: "
-               << pqn.type_name();
-
-        using namespace dogen::utility::log;
-        BOOST_LOG_SEV(lg, error) << stream.str() << ". QName: " << pqn;
-
-        throw validation_error(stream.str());
+        // FIXME: provide additional context for exceptions
+        // std::ostringstream stream;
+        // stream << undefined_type << ". pod: "
+        //        << pod.name().type_name() << ". property type: "
+        //        << pqn.type_name();
     }
     return r;
 }
@@ -132,7 +153,6 @@ void sml_builder::merge() {
     auto pods(merged_model_.pods());
     auto primitives(merged_model_.primitives());
     for (const auto m : models_) {
-        using namespace dogen::utility::log;
         BOOST_LOG_SEV(lg, info) << "merging model: " << m.name()
                                 << " pods: " << m.pods().size()
                                 << " primitives: " << m.primitives().size();
@@ -176,7 +196,6 @@ void sml_builder::merge() {
 }
 
 void sml_builder::add_target(sml::model model) {
-    using namespace dogen::utility::log;
     if (has_target_) {
         std::ostringstream stream;
         stream << "Only one target expected. Last target model name: '"
@@ -195,7 +214,7 @@ void sml_builder::add_target(sml::model model) {
 }
 
 void sml_builder::add(sml::model model) {
-    using namespace dogen::utility::log;
+
     BOOST_LOG_SEV(lg, debug) << "adding model: " << model.name();
     models_.push_back(model);
 }
@@ -203,7 +222,6 @@ void sml_builder::add(sml::model model) {
 sml::model sml_builder::build() {
     merge();
     resolve();
-    using namespace dogen::utility::log;
     BOOST_LOG_SEV(lg, debug) << "merged model: " << merged_model_;
     return merged_model_;
 }

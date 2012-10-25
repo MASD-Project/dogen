@@ -44,12 +44,14 @@ public:
     sml_builder& operator=(const sml_builder&) = default;
 
 public:
-    sml_builder(bool verbose, std::string schema_name);
+    sml_builder(const bool verbose, const std::string& schema_name);
 
 private:
+    sml::qualified_name
+    resolve_partial_type(sml::qualified_name t) const;
     std::vector<sml::property>
-    resolve_properties(sml::pod pod);
-    void resolve_parent(sml::pod pod);
+    resolve_properties(const sml::pod& pod);
+    void resolve_parent(const sml::pod& pod);
     void resolve();
     void merge();
 

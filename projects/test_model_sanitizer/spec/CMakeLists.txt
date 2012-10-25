@@ -53,6 +53,7 @@ target_link_libraries(${spec_name}
     stand_alone_class
     two_layers_with_objects
     trivial_inheritance
+    trivial_association
     std_model
     utility
     ${LIBXML2_LIBRARIES}
