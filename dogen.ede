@@ -22,7 +22,7 @@
    "/projects/classes_without_package/include"
    "/projects/compressed/include"
    "/projects/disable_cmakelists/include"
-   "/projects/disable_complete_constructor/include"
+   "/projects/disable_full_ctor/include"
    "/projects/disable_facet_folders/include"
    "/projects/disable_model_package/include"
    "/projects/enable_facet_domain/include"
