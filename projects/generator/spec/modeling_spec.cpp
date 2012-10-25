@@ -31,11 +31,16 @@
 #include "dogen/dia/xml/hydrator.hpp"
 #include "dogen/generator/modeling/dia_to_sml.hpp"
 #include "dogen/generator/modeling/sml_builder.hpp"
+#include "dogen/generator/modeling/identifier_parser.hpp"
 #include "dogen/sml/domain/model.hpp"
 #include "dogen/sml/io/model_io.hpp"
+#include "dogen/sml/io/qualified_name_io.hpp"
 #include "dogen/dia/serialization/diagram_ser.hpp"
 #include "dogen/sml/serialization/model_ser.hpp"
 #include "dogen/utility/test/exception_checkers.hpp"
+
+using namespace dogen::generator::modeling;
+using dogen::utility::test::asserter;
 
 namespace  {
 
@@ -105,11 +110,8 @@ bool test_dia_to_sml(
     const bool verbose(true);
     const std::string model_name(input_path.stem().string());
 
-    using dogen::generator::modeling::dia_to_sml;
     dia_to_sml d(input, model_name, epp, is_target, verbose);
     dogen::sml::model actual(d.transform());
-
-    using dogen::utility::test::asserter;
     return asserter::assert_object(expected_path, actual_path, actual);
 }
 
@@ -117,7 +119,6 @@ bool test_dia_to_sml(
 
 using dogen::utility::test_data::dia_sml;
 using dogen::utility::test::contains_checker;
-using dogen::generator::modeling::validation_error;
 
 BOOST_AUTO_TEST_SUITE(modeling)
 
@@ -204,7 +205,7 @@ BOOST_AUTO_TEST_CASE(trivial_inheritance_dia_transforms_into_expected_sml) {
 BOOST_AUTO_TEST_CASE(building_n_distinct_models_with_one_pod_each_results_in_n_pods_in_combined_model) {
     SETUP_TEST_LOG("building_n_distinct_models_with_one_pod_each_results_in_n_pods_in_combined_model");
     const unsigned int n(5);
-    dogen::generator::modeling::sml_builder builder(verbose, schema_name);
+    sml_builder builder(verbose, schema_name);
 
     std::list<dogen::sml::qualified_name> names;
     for (unsigned int i(0); i < n; ++i) {
@@ -231,7 +232,7 @@ BOOST_AUTO_TEST_CASE(building_n_distinct_models_with_one_pod_each_results_in_n_p
 
 BOOST_AUTO_TEST_CASE(building_empty_model_results_in_empty_combined_model) {
     SETUP_TEST_LOG("building_empty_model_results_in_empty_combined_model");
-    dogen::generator::modeling::sml_builder builder(verbose, schema_name);
+    sml_builder builder(verbose, schema_name);
     dogen::sml::model m;
     builder.add_target(m);
 
@@ -242,7 +243,7 @@ BOOST_AUTO_TEST_CASE(building_empty_model_results_in_empty_combined_model) {
 
 BOOST_AUTO_TEST_CASE(type_with_incorrect_model_name_throws) {
     SETUP_TEST_LOG("type_with_incorrect_model_name_throws");
-    dogen::generator::modeling::sml_builder builder(verbose, schema_name);
+    sml_builder builder(verbose, schema_name);
     using namespace dogen::sml;
     pod p(mock_pod(1));
 
@@ -258,7 +259,7 @@ BOOST_AUTO_TEST_CASE(type_with_incorrect_model_name_throws) {
 
 BOOST_AUTO_TEST_CASE(type_with_inconsistent_key_value_pair_throws) {
     SETUP_TEST_LOG_SOURCE("type_with_inconsistent_key_value_pair_throws");
-    dogen::generator::modeling::sml_builder builder(verbose, schema_name);
+    sml_builder builder(verbose, schema_name);
     using namespace dogen::sml;
     pod p(mock_pod(0));
     pod q(mock_pod(1));
@@ -279,7 +280,7 @@ BOOST_AUTO_TEST_CASE(not_adding_a_target_throws) {
     m.name(model_name(0));
 
     const bool verbose(true);
-    dogen::generator::modeling::sml_builder builder(verbose, schema_name);
+    sml_builder builder(verbose, schema_name);
     builder.add(m);
 
     contains_checker<validation_error> c(missing_target);
@@ -294,7 +295,7 @@ BOOST_AUTO_TEST_CASE(adding_more_than_one_target_throws) {
     dogen::sml::model m1;
     m1.name(model_name(1));
 
-    dogen::generator::modeling::sml_builder builder(verbose, schema_name);
+    sml_builder builder(verbose, schema_name);
     builder.add_target(m0);
 
     contains_checker<validation_error> c(too_many_targets);
@@ -303,7 +304,7 @@ BOOST_AUTO_TEST_CASE(adding_more_than_one_target_throws) {
 
 BOOST_AUTO_TEST_CASE(pod_with_property_type_in_the_same_model_results_in_successful_build) {
     SETUP_TEST_LOG("pod_with_property_type_in_the_same_model_results_in_successful_build");
-    dogen::generator::modeling::sml_builder builder(verbose, schema_name);
+    sml_builder builder(verbose, schema_name);
 
     using namespace dogen::sml;
     const std::string mn(model_name(0));
@@ -346,7 +347,7 @@ BOOST_AUTO_TEST_CASE(pod_with_property_type_in_the_same_model_results_in_success
 
 BOOST_AUTO_TEST_CASE(pod_with_property_type_in_different_model_results_in_successful_build) {
     SETUP_TEST_LOG("pod_with_property_type_in_different_model_results_in_successful_build");
-    dogen::generator::modeling::sml_builder builder(verbose, schema_name);
+    sml_builder builder(verbose, schema_name);
 
     using namespace dogen::sml;
     pod pod0(mock_pod(0));
@@ -395,7 +396,7 @@ BOOST_AUTO_TEST_CASE(pod_with_property_type_in_different_model_results_in_succes
 
 BOOST_AUTO_TEST_CASE(pod_with_missing_property_type_throws) {
     SETUP_TEST_LOG("pod_with_missing_property_type_throws");
-    dogen::generator::modeling::sml_builder builder(verbose, schema_name);
+    sml_builder builder(verbose, schema_name);
 
     using namespace dogen::sml;
     pod pod0(mock_pod(0));
@@ -426,7 +427,7 @@ BOOST_AUTO_TEST_CASE(pod_with_missing_property_type_throws) {
 
 BOOST_AUTO_TEST_CASE(pod_with_parent_in_the_same_model_builds_successfully) {
     SETUP_TEST_LOG("pod_with_parent_in_the_same_model_builds_successfully");
-    dogen::generator::modeling::sml_builder builder(verbose, schema_name);
+    sml_builder builder(verbose, schema_name);
 
     using namespace dogen::sml;
     const std::string mn(model_name(0));
@@ -459,7 +460,7 @@ BOOST_AUTO_TEST_CASE(pod_with_parent_in_the_same_model_builds_successfully) {
 
 BOOST_AUTO_TEST_CASE(pod_with_parent_in_different_models_builds_successfully) {
     SETUP_TEST_LOG("pod_with_parent_in_different_models_builds_successfully");
-    dogen::generator::modeling::sml_builder builder(verbose, schema_name);
+    sml_builder builder(verbose, schema_name);
 
     using namespace dogen::sml;
     pod pod0(mock_pod(0));
@@ -498,7 +499,7 @@ BOOST_AUTO_TEST_CASE(pod_with_parent_in_different_models_builds_successfully) {
 
 BOOST_AUTO_TEST_CASE(pod_with_third_degree_parent_in_same_model_builds_successfully) {
     SETUP_TEST_LOG("pod_with_third_degree_parent_in_same_model_builds_successfully");
-    dogen::generator::modeling::sml_builder builder(verbose, schema_name);
+    sml_builder builder(verbose, schema_name);
 
     using namespace dogen::sml;
     const std::string mn(model_name(0));
@@ -537,7 +538,7 @@ BOOST_AUTO_TEST_CASE(pod_with_third_degree_parent_in_same_model_builds_successfu
 
 BOOST_AUTO_TEST_CASE(pod_with_third_degree_parent_missing_within_single_model_throws) {
     SETUP_TEST_LOG("pod_with_third_degree_parent_missing_within_single_model_throws");
-    dogen::generator::modeling::sml_builder builder(verbose, schema_name);
+    sml_builder builder(verbose, schema_name);
 
     using namespace dogen::sml;
     const std::string mn(model_name(0));
@@ -566,7 +567,7 @@ BOOST_AUTO_TEST_CASE(pod_with_third_degree_parent_missing_within_single_model_th
 
 BOOST_AUTO_TEST_CASE(pod_with_third_degree_parent_in_different_models_builds_successfully) {
     SETUP_TEST_LOG("pod_with_third_degree_parent_in_different_models_builds_successfully");
-    dogen::generator::modeling::sml_builder builder(verbose, schema_name);
+    sml_builder builder(verbose, schema_name);
 
     using namespace dogen::sml;
     pod pod0(mock_pod(0));
@@ -625,7 +626,7 @@ BOOST_AUTO_TEST_CASE(pod_with_third_degree_parent_in_different_models_builds_suc
 
 BOOST_AUTO_TEST_CASE(pod_with_missing_third_degree_parent_in_different_models_throws) {
     SETUP_TEST_LOG("pod_with_missing_third_degree_parent_in_different_models_throws");
-    dogen::generator::modeling::sml_builder builder(verbose, schema_name);
+    sml_builder builder(verbose, schema_name);
 
     using namespace dogen::sml;
     pod pod0(mock_pod(0));
@@ -668,7 +669,7 @@ BOOST_AUTO_TEST_CASE(pod_with_missing_third_degree_parent_in_different_models_th
 
 BOOST_AUTO_TEST_CASE(pod_incorrect_meta_type_throws) {
     SETUP_TEST_LOG("pod_incorrect_meta_type_throws");
-    dogen::generator::modeling::sml_builder builder(verbose, schema_name);
+    sml_builder builder(verbose, schema_name);
 
     using namespace dogen::sml;
     pod p(mock_pod(0));
@@ -694,12 +695,46 @@ BOOST_AUTO_TEST_CASE(pod_incorrect_meta_type_throws) {
 
 BOOST_AUTO_TEST_CASE(setting_builder_schema_name_propagates_to_combined_model) {
     SETUP_TEST_LOG("building_empty_model_results_in_empty_combined_model");
-    dogen::generator::modeling::sml_builder builder(verbose, schema_name);
+    sml_builder builder(verbose, schema_name);
     dogen::sml::model m;
     builder.add_target(m);
 
     const auto combined(builder.build());
     BOOST_CHECK(combined.schema_name() == schema_name);
+}
+
+BOOST_AUTO_TEST_CASE(parsing_string_with_inner_namespaces_produces_expected_qualified_name) {
+    SETUP_TEST_LOG("parsing_string_with_inner_namespaces_produces_expected_qualified_name");
+    const std::string s("a::b::c::z");
+    const auto a(identifier_parser::parse_qualified_name(s));
+
+    dogen::sml::qualified_name e;
+    e.type_name("z");
+    e.package_path(std::list<std::string> { "b", "c"});
+    e.model_name("a");
+    BOOST_CHECK(asserter::assert_equals(a, e));
+}
+
+BOOST_AUTO_TEST_CASE(parsing_string_with_no_colons_produces_expected_qualified_name) {
+    SETUP_TEST_LOG("parsing_string_with_no_colons_produces_expected_qualified_name");
+    const std::string s("z");
+    const auto a(identifier_parser::parse_qualified_name(s));
+
+    dogen::sml::qualified_name e;
+    e.type_name("z");
+    BOOST_CHECK(asserter::assert_equals(a, e));
+}
+
+
+BOOST_AUTO_TEST_CASE(parsing_string_with_one_colon_produces_expected_qualified_name) {
+    SETUP_TEST_LOG("parsing_string_with_one_colon_produces_expected_qualified_name");
+    const std::string s("a::z");
+    const auto a(identifier_parser::parse_qualified_name(s));
+
+    dogen::sml::qualified_name e;
+    e.model_name("a");
+    e.type_name("z");
+    BOOST_CHECK(asserter::assert_equals(a, e));
 }
 
 BOOST_AUTO_TEST_SUITE_END()

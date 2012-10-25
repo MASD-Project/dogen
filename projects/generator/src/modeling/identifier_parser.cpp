@@ -28,7 +28,6 @@ const char* delimiter = "::";
 
 }
 
-
 namespace dogen {
 namespace generator {
 namespace modeling {
