@@ -26,6 +26,7 @@ namespace {
 const std::string uml_large_package("UML - LargePackage");
 const std::string uml_class("UML - Class");
 const std::string uml_generalization("UML - Generalization");
+const std::string uml_association("UML - Association");
 const std::string error_message("Invalid or unsupported Dia type");
 
 }
@@ -43,6 +44,9 @@ object_types parse_object_type(const std::string& dia_type) {
 
     if (dia_type == uml_generalization)
         return object_types::uml_generalization;
+
+    if (dia_type == uml_association)
+        return object_types::uml_association;
 
     throw dogen::utility::exception::exception(error_message);
 }

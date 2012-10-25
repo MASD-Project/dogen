@@ -18,7 +18,23 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/trivial_association/database/class_a_db.hpp"
-#include "dogen/trivial_association/database/class_b_db.hpp"
-#include "dogen/trivial_association/database/class_c_db.hpp"
-#include "dogen/trivial_association/database/class_d_db.hpp"
+#ifndef DOGEN_TRIVIAL_ASSOCIATION_IO_CLASS_C_IO_HPP
+#define DOGEN_TRIVIAL_ASSOCIATION_IO_CLASS_C_IO_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include <iosfwd>
+#include "dogen/trivial_association/domain/class_c.hpp"
+
+namespace dogen {
+namespace trivial_association {
+
+std::ostream&
+operator<<(std::ostream& s,
+     const dogen::trivial_association::class_c& v);
+
+} }
+
+#endif

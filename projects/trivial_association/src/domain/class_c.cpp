@@ -18,7 +18,27 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/trivial_association/database/class_a_db.hpp"
-#include "dogen/trivial_association/database/class_b_db.hpp"
-#include "dogen/trivial_association/database/class_c_db.hpp"
-#include "dogen/trivial_association/database/class_d_db.hpp"
+#include "dogen/trivial_association/domain/class_c.hpp"
+
+namespace dogen {
+namespace trivial_association {
+
+class_c::class_c(const dogen::trivial_association::versioned_key& versioned_key)
+    : versioned_key_(versioned_key) { }
+
+void class_c::swap(class_c& other) noexcept {
+    using std::swap;
+    swap(versioned_key_, other.versioned_key_);
+}
+
+bool class_c::operator==(const class_c& rhs) const {
+    return versioned_key_ == rhs.versioned_key_;
+}
+
+class_c& class_c::operator=(class_c other) {
+    using std::swap;
+    swap(*this, other);
+    return *this;
+}
+
+} }

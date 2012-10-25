@@ -18,7 +18,24 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/trivial_association/database/class_a_db.hpp"
-#include "dogen/trivial_association/database/class_b_db.hpp"
-#include "dogen/trivial_association/database/class_c_db.hpp"
-#include "dogen/trivial_association/database/class_d_db.hpp"
+#ifndef DOGEN_TRIVIAL_ASSOCIATION_SERIALIZATION_CLASS_D_FWD_SER_HPP
+#define DOGEN_TRIVIAL_ASSOCIATION_SERIALIZATION_CLASS_D_FWD_SER_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include "dogen/trivial_association/domain/class_d_fwd.hpp"
+
+namespace boost {
+namespace serialization {
+
+template<class Archive>
+void save(Archive& ar, const dogen::trivial_association::class_d& v, unsigned int version);
+
+template<class Archive>
+void load(Archive& ar, dogen::trivial_association::class_d& v, unsigned int version);
+
+} }
+
+#endif

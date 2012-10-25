@@ -18,7 +18,35 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/trivial_association/database/class_a_db.hpp"
-#include "dogen/trivial_association/database/class_b_db.hpp"
-#include "dogen/trivial_association/database/class_c_db.hpp"
-#include "dogen/trivial_association/database/class_d_db.hpp"
+#ifndef DOGEN_TRIVIAL_ASSOCIATION_TEST_DATA_CLASS_D_TD_HPP
+#define DOGEN_TRIVIAL_ASSOCIATION_TEST_DATA_CLASS_D_TD_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include "dogen/trivial_association/domain/class_d.hpp"
+
+namespace dogen {
+namespace trivial_association {
+
+
+class class_d_generator {
+public:
+    class_d_generator();
+
+public:
+    typedef dogen::trivial_association::class_d result_type;
+
+public:
+    static void populate(const unsigned int position, result_type& v);
+    static result_type create(const unsigned int position);
+    result_type operator()();
+
+private:
+    unsigned int position_;
+};
+
+} }
+
+#endif

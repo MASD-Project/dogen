@@ -20,5 +20,7 @@
  */
 #include "dogen/trivial_association/hash/class_a_hash.hpp"
 #include "dogen/trivial_association/hash/class_b_hash.hpp"
+#include "dogen/trivial_association/hash/class_c_hash.hpp"
+#include "dogen/trivial_association/hash/class_d_hash.hpp"
 #include "dogen/trivial_association/hash/unversioned_key_hash.hpp"
 #include "dogen/trivial_association/hash/versioned_key_hash.hpp"

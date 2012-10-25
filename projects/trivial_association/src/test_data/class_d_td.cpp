@@ -18,9 +18,38 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/trivial_association/test_data/class_a_td.hpp"
-#include "dogen/trivial_association/test_data/class_b_td.hpp"
-#include "dogen/trivial_association/test_data/class_c_td.hpp"
 #include "dogen/trivial_association/test_data/class_d_td.hpp"
-#include "dogen/trivial_association/test_data/unversioned_key_td.hpp"
 #include "dogen/trivial_association/test_data/versioned_key_td.hpp"
+
+namespace {
+
+dogen::trivial_association::versioned_key
+create_dogen_trivial_association_versioned_key(const unsigned int position) {
+    return dogen::trivial_association::versioned_key_generator::create(position);
+}
+
+}
+
+namespace dogen {
+namespace trivial_association {
+
+class_d_generator::class_d_generator() : position_(0) { }
+
+void class_d_generator::
+populate(const unsigned int position, result_type& v) {
+    v.versioned_key(create_dogen_trivial_association_versioned_key(position + 0));
+}
+
+class_d_generator::result_type
+class_d_generator::create(const unsigned int position) {
+    class_d r;
+    class_d_generator::populate(position, r);
+    return r;
+}
+
+class_d_generator::result_type
+class_d_generator::operator()() {
+    return create(position_++);
+}
+
+} }
