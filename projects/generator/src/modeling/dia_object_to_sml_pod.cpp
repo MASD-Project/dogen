@@ -222,13 +222,6 @@ private:
         dogen::sml::meta_types meta_type, const std::string& pkg_id) const;
 
     /**
-     * @brief Parses a Dia type string, generating an SML qualified
-     * name from it.
-     */
-    dogen::sml::qualified_name
-    transform_qualified_name(const std::string& type_string) const;
-
-    /**
      * @brief Converts a Dia composite storing the UML attribute into
      * an SML property
      *

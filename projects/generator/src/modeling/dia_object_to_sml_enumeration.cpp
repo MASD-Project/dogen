@@ -124,10 +124,62 @@ dogen::dia::stereotypes parse_stereotype(const std::string s) {
     return r;
 }
 
+template<typename AttributeValue>
+AttributeValue
+attribute_value(const dogen::dia::attribute::attribute_value& v,
+    const std::string& description) {
+
+    AttributeValue r;
+    try {
+        r = boost::get<AttributeValue>(v);
+    } catch (const boost::bad_get&) {
+        BOOST_LOG_SEV(lg, error) << unexpected_attribute_value_type
+                                 << description;
+        throw transformation_error(unexpected_attribute_value_type +
+            description);
+    }
+    return r;
 }
 
-/*
-std::string dia_dfs_visitor::
+}
+
+namespace dogen {
+namespace generator {
+namespace modeling {
+
+dogen::sml::qualified_name dia_object_to_sml_enumeration::
+transform_qualified_name(const dogen::dia::attribute& a,
+    dogen::sml::meta_types meta_type, const std::string& pkg_id) const {
+    if (a.name() != dia_name) {
+        BOOST_LOG_SEV(lg, error) << name_attribute_expected;
+        throw transformation_error(name_attribute_expected);
+    }
+
+    dogen::sml::qualified_name name;
+    name.model_name(model_name_);
+    name.meta_type(meta_type);
+    name.external_package_path(external_package_path_);
+
+    if (!pkg_id.empty()) {
+        const auto i(packages_.find(pkg_id));
+        if (i == packages_.end()) {
+            BOOST_LOG_SEV(lg, error) << missing_package_for_id << pkg_id;
+            throw transformation_error(missing_package_for_id + pkg_id);
+        }
+        auto pp(i->second.name().package_path());
+        pp.push_back(i->second.name().type_name());
+        name.package_path(pp);
+    }
+
+    name.type_name(transform_string_attribute(a));
+    if (name.type_name().empty()) {
+        BOOST_LOG_SEV(lg, error) << empty_dia_object_name;
+        throw transformation_error(empty_dia_object_name);
+    }
+    return name;
+}
+
+std::string dia_object_to_sml_enumeration::
 transform_string_attribute(const dogen::dia::attribute& a) const {
     const auto values(a.values());
     if (values.size() != 1) {
@@ -145,72 +197,50 @@ transform_string_attribute(const dogen::dia::attribute& a) const {
     return name;
 }
 
-dogen::sml::qualified_name dia_dfs_visitor::
-transform_qualified_name(const dogen::dia::attribute& a,
-    dogen::sml::meta_types meta_type, const std::string& pkg_id) const {
-    if (a.name() != dia_name) {
-        BOOST_LOG_SEV(lg, error) << name_attribute_expected;
-        throw transformation_error(name_attribute_expected);
-    }
+dia_object_to_sml_enumeration::
+dia_object_to_sml_enumeration(const std::string& model_name,
+    const std::list<std::string>& external_package_path,
+    bool is_target, bool verbose)
+    : model_name_(model_name), external_package_path_(external_package_path),
+      is_target_(is_target), verbose_(verbose) { }
 
-    dogen::sml::qualified_name name;
-    name.model_name(state_->model_name_);
-    name.meta_type(meta_type);
-    name.external_package_path(state_->external_package_path_);
+bool dia_object_to_sml_enumeration::is_processable(const dia::object& o) const {
+    using dogen::dia::object_types;
+    object_types ot(parse_object_type(o.type()));
+    if (ot != object_types::uml_class)
+        return false;
 
-    if (!pkg_id.empty()) {
-        const auto i(state_->packages_by_id_.find(pkg_id));
-        if (i == state_->packages_by_id_.end()) {
-            BOOST_LOG_SEV(lg, error) << missing_package_for_id << pkg_id;
-            throw transformation_error(missing_package_for_id + pkg_id);
-        }
-        auto pp(i->second.name().package_path());
-        pp.push_back(i->second.name().type_name());
-        name.package_path(pp);
-    }
+    for (auto a : o.attributes()) {
+        if (a.name() != dia_stereotype)
+            continue;
 
-    name.type_name(transform_string_attribute(a));
-    if (name.type_name().empty()) {
-        BOOST_LOG_SEV(lg, error) << empty_dia_object_name;
-        throw transformation_error(empty_dia_object_name);
+        using dogen::dia::stereotypes;
+        const std::string v(transform_string_attribute(a));
+        if (v.empty())
+            return false;
+
+        const auto st(parse_stereotype(v));
+        if (st == stereotypes::enumeration)
+            return true;
     }
-    return name;
+    return false;
 }
 
-dogen::sml::property dia_dfs_visitor::
-transform_property(const dogen::dia::composite& uml_attribute) const {
-    dogen::sml::property property;
-    typedef boost::shared_ptr<dogen::dia::attribute> attribute_ptr;
+void dia_object_to_sml_enumeration::add_object(const dia::object& o) {
+    BOOST_LOG_SEV(lg, debug) << "Adding enumeration object: " << o.id();
 
-    for (const attribute_ptr a : uml_attribute.value()) {
-        if (a->name() == dia_name)
-            property.name(transform_string_attribute(*a));
-        else if (a->name() == dia_type) {
-            const std::string s(transform_string_attribute(*a));
-            property.type_name(identifier_parser::parse_qualified_name(s));
-        } else if (a->name() == dia_documentation) {
-            const std::string doc(transform_string_attribute(*a));
-            property.documentation(doc);
-        } else {
-            BOOST_LOG_SEV(lg, warn) << "Ignoring unexpected attribute: "
-                                    << a->name();
-        }
+    if (!is_processable(o)) {
+        BOOST_LOG_SEV(lg, error) << "Expected composite type "
+                                 << " to be " << dia_uml_attribute
+                                 << "but was " << o.type();
+        throw transformation_error(uml_attribute_expected);
+
     }
 
-    if (property.name().empty()) {
-        BOOST_LOG_SEV(lg, error) << "Could not find a name attribute.";
-        throw transformation_error(name_attribute_expected);
-    }
-
-    if (property.type_name().type_name().empty()) {
-        BOOST_LOG_SEV(lg, error) << "Could not find a type attribute.";
-        throw transformation_error(type_attribute_expected);
-    }
-
-    return property;
+    objects_.push_back(o);
 }
 
-dogen::sml::enumerator dia_dfs_visitor::
+dogen::sml::enumerator dia_object_to_sml_enumeration::
 transform_enumerator(const dogen::dia::composite& uml_attribute,
     const unsigned int position) const {
     dogen::sml::enumerator r;
@@ -234,11 +264,11 @@ transform_enumerator(const dogen::dia::composite& uml_attribute,
     return r;
 }
 
-std::pair<dogen::sml::qualified_name, dogen::sml::enumeration>
-dia_dfs_visitor::transform_enumeration(const dogen::dia::object& o) const {
+sml::enumeration dia_object_to_sml_enumeration::
+transform_enumeration(const dia::object& o) const {
     dogen::sml::enumeration r;
 
-    r.generate(state_->is_target_);
+    r.generate(is_target_);
     for (auto a : o.attributes()) {
         BOOST_LOG_SEV(lg, debug) << "Found attribute: " << a.name();
         if (a.name() == dia_name) {
@@ -278,64 +308,18 @@ dia_dfs_visitor::transform_enumeration(const dogen::dia::object& o) const {
         }
 
     }
-    return std::make_pair(r.name(), r);
-}
-
-void dia_dfs_visitor::process_dia_object(const dogen::dia::object& o) {
-    if (o.id() == root_vertex_id)
-        return; // root is a dummy object, ignore it.
-
-    using dogen::dia::object_types;
-    object_types ot(parse_object_type(o.type()));
-    if (ot == object_types::uml_class) {
-        BOOST_LOG_SEV(lg, debug) << "Processing uml_class: " << o.id();
-
-        for (auto a : o.attributes()) {
-            if (a.name() == dia_stereotype) {
-                using dogen::dia::stereotypes;
-                const std::string v(transform_string_attribute(a));
-                if (!v.empty()) {
-                    const auto st(parse_stereotype(v));
-                    if (st == stereotypes::enumeration) {
-                        BOOST_LOG_SEV(lg, debug) << "Class is an enumeration.";
-                        return;
-                    }
-                }
-            }
-        }
-        const auto p(transform_pod(o));
-        state_->pods_.insert(p);
-        state_->dia_id_to_qname_.insert(std::make_pair(o.id(), p.first));
-    }
-}
-
-}
-
-*/
-
-namespace dogen {
-namespace generator {
-namespace modeling {
-
-dia_object_to_sml_enumeration::
-dia_object_to_sml_enumeration(const std::string& model_name,
-    const std::list<std::string>& external_package_path,
-    bool is_target, bool verbose)
-    : model_name_(model_name), external_package_path_(external_package_path),
-      is_target_(is_target), verbose_(verbose) { }
-
-bool dia_object_to_sml_enumeration::is_processable(const dia::object& /*o*/) const {
-    return false;
-}
-
-void dia_object_to_sml_enumeration::add_object(const dia::object& /*o*/) {
-
+    return r;
 }
 
 std::unordered_map<sml::qualified_name, sml::enumeration>
 dia_object_to_sml_enumeration::
-transform(std::unordered_map<std::string, sml::package> /*packages*/) {
+transform(std::unordered_map<std::string, sml::package> packages) {
+    packages_ = packages;
     std::unordered_map<sml::qualified_name, sml::enumeration> r;
+    for (const auto o : objects_) {
+        auto e(transform_enumeration(o));
+        r.insert(std::make_pair(e.name(), e));
+    }
     return r;
 }
 

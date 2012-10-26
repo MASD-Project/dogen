@@ -35,7 +35,7 @@ void enumerator::to_stream(std::ostream& stream) const {
     stream << "\"enumerator\": {"
            << "\"name\":" << "\"" << name_ << "\", "
            << "\"value\":" << "\"" << value_ << "\", "
-           << "\"documentation\":" << "\"" << documentation_
+           << "\"documentation\":" << "\"" << documentation_ << "\" "
            << " }";
 }
 

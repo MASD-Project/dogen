@@ -51,6 +51,16 @@ public:
         const std::list<std::string>& external_package_path,
         bool is_target, bool verbose);
 
+private:
+    sml::qualified_name transform_qualified_name(const dia::attribute& a,
+        sml::meta_types meta_type, const std::string& pkg_id) const;
+
+    std::string transform_string_attribute(const dia::attribute& a) const;
+    sml::enumerator transform_enumerator(const dia::composite& uml_attribute,
+        const unsigned int position) const;
+
+    sml::enumeration transform_enumeration(const dia::object& o) const;
+
 public:
     bool is_processable(const dia::object& o) const;
     void add_object(const dia::object& o);
@@ -63,6 +73,8 @@ private:
     const std::list<std::string> external_package_path_;
     const bool is_target_;
     const bool verbose_;
+    std::list<dia::object> objects_;
+    std::unordered_map<std::string, sml::package> packages_;
 };
 
 } } }

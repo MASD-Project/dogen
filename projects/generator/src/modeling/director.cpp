@@ -233,8 +233,14 @@ bool director::has_generatable_types(const sml::model& m) const {
             break;
         }
     }
-    BOOST_LOG_SEV(lg, debug) << "Total pods found by builder: "
-                             << m.pods().size();
+
+    for (const auto e : m.enumerations()) {
+        if (e.second.generate()) {
+            r = true;
+            break;
+        }
+    }
+
     return r;
 }
 
@@ -258,6 +264,10 @@ boost::optional<sml::model> director::create_model() const {
 
     BOOST_LOG_SEV(lg, debug) << "Merged model: " << m;
     save_model(m, merged);
+
+    BOOST_LOG_SEV(lg, debug) << "Totals: pods: " << m.pods().size()
+                             << " enumerations: " << m.enumerations().size()
+                             << " primitives: " << m.primitives().size();
 
     if (has_generatable_types(m))
         return boost::optional<model>(m);

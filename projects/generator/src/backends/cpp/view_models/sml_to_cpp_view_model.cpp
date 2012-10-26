@@ -589,7 +589,14 @@ std::vector<file_view_model> sml_to_cpp_view_model::transform() {
     log_started();
     create_class_view_models();
     create_enumeration_view_models();
-    auto r(transform_pods());
+
+    std::vector<file_view_model> r;
+    auto p(transform_pods());
+    auto e(transform_enumerations());
+
+    r.reserve(p.size() + e.size());
+    r.insert(r.end(), p.begin(), p.end());
+    r.insert(r.end(), e.begin(), e.end());
 
     log_includers();
     if (settings_.disable_facet_includers())

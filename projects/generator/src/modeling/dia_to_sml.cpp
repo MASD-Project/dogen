@@ -91,13 +91,13 @@ setup_data_structures(const std::vector<dia::object>& objects) {
             continue;
         }
 
-        if (pod_transformer_.is_processable(o)) {
-            pod_transformer_.add_object(o);
+        if (enumeration_transformer_.is_processable(o)) {
+            enumeration_transformer_.add_object(o);
             continue;
         }
 
-        if (enumeration_transformer_.is_processable(o)) {
-            enumeration_transformer_.add_object(o);
+        if (pod_transformer_.is_processable(o)) {
+            pod_transformer_.add_object(o);
             continue;
         }
     }

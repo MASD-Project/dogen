@@ -42,7 +42,7 @@ void enumeration::to_stream(std::ostream& stream) const {
     stream << std::boolalpha
            << "\"enumeration\": {"
            << name() << ", "
-           << "generate" << generate() << ", "
+           << "generate: " << generate() << ", "
            << "\"documentation\":" << "\"" << documentation_ << "\", "
            << enumerators()
            << " }";
