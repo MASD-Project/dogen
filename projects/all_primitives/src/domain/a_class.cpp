@@ -34,7 +34,9 @@ a_class::a_class()
       long_long_property_(static_cast<long long>(0)),
       ulong_long_property_(static_cast<unsigned long long>(0)),
       short_property_(static_cast<short>(0)),
-      ushort_property_(static_cast<unsigned short>(0)) { }
+      ushort_property_(static_cast<unsigned short>(0)),
+      double_property_(static_cast<double>(0)),
+      float_property_(static_cast<float>(0)) { }
 
 a_class::a_class(
     const bool bool_property,
@@ -48,6 +50,8 @@ a_class::a_class(
     const unsigned long long ulong_long_property,
     const short short_property,
     const unsigned short ushort_property,
+    const double double_property,
+    const float float_property,
     const dogen::all_primitives::versioned_key& versioned_key)
     : bool_property_(bool_property),
       char_property_(char_property),
@@ -60,6 +64,8 @@ a_class::a_class(
       ulong_long_property_(ulong_long_property),
       short_property_(short_property),
       ushort_property_(ushort_property),
+      double_property_(double_property),
+      float_property_(float_property),
       versioned_key_(versioned_key) { }
 
 void a_class::swap(a_class& other) noexcept {
@@ -75,6 +81,8 @@ void a_class::swap(a_class& other) noexcept {
     swap(ulong_long_property_, other.ulong_long_property_);
     swap(short_property_, other.short_property_);
     swap(ushort_property_, other.ushort_property_);
+    swap(double_property_, other.double_property_);
+    swap(float_property_, other.float_property_);
     swap(versioned_key_, other.versioned_key_);
 }
 
@@ -90,6 +98,8 @@ bool a_class::operator==(const a_class& rhs) const {
         ulong_long_property_ == rhs.ulong_long_property_ &&
         short_property_ == rhs.short_property_ &&
         ushort_property_ == rhs.ushort_property_ &&
+        double_property_ == rhs.double_property_ &&
+        float_property_ == rhs.float_property_ &&
         versioned_key_ == rhs.versioned_key_;
 }
 

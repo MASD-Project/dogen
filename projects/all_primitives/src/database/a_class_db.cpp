@@ -37,22 +37,24 @@ enum fields {
     ulong_long_property_field = 8,
     short_property_field = 9,
     ushort_property_field = 10,
-    versioned_key_field = 11
+    double_property_field = 11,
+    float_property_field = 12,
+    versioned_key_field = 13
 };
 
 const std::string load_name("statement_all_primitives_a_class_load");
 const std::string load_id_name("statement_all_primitives_a_class_load_id");
 const std::string load_work_name("work_all_primitives_a_class_load");
-const std::string load_sql("select * from all_primitives_a_class_load($0, $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11);");
+const std::string load_sql("select * from all_primitives_a_class_load($0, $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13);");
 
 const std::string erase_name("statement_all_primitives_a_class_erase");
 const std::string erase_id_name("statement_all_primitives_a_class_erase_id");
 const std::string erase_work_name("work_all_primitives_a_class_erase");
-const std::string erase_sql("select * from all_primitives_a_class_erase($0, $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11);");
+const std::string erase_sql("select * from all_primitives_a_class_erase($0, $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13);");
 
 const std::string save_name("statement_all_primitives_a_class_save");
 const std::string save_work_name("work_all_primitives_a_class_save");
-const std::string save_sql("select all_primitives_a_class_save($0, $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11);");
+const std::string save_sql("select all_primitives_a_class_save($0, $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13);");
 
 }
 

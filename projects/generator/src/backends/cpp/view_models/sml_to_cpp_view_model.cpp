@@ -62,6 +62,8 @@ const std::string long_type("long");
 const std::string ulong_type("unsigned long");
 const std::string long_long_type("long long");
 const std::string ulong_long_type("unsigned long long");
+const std::string double_type("double");
+const std::string float_type("float");
 
 bool is_char_like(const std::string& type_name) {
     return type_name == char_type || type_name == uchar_type;
@@ -80,7 +82,9 @@ bool is_int_like(const std::string& type_name) {
         type_name == long_type ||
         type_name == ulong_type ||
         type_name == long_long_type ||
-        type_name == ulong_long_type;
+        type_name == ulong_long_type ||
+        type_name == double_type ||
+        type_name == float_type;
 }
 
 /**

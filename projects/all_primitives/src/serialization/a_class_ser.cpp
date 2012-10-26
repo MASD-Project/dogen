@@ -46,6 +46,8 @@ void save(Archive& ar,
     ar << make_nvp("ulong_long_property", v.ulong_long_property_);
     ar << make_nvp("short_property", v.short_property_);
     ar << make_nvp("ushort_property", v.ushort_property_);
+    ar << make_nvp("double_property", v.double_property_);
+    ar << make_nvp("float_property", v.float_property_);
     ar << make_nvp("versioned_key", v.versioned_key_);
 }
 
@@ -64,6 +66,8 @@ void load(Archive& ar,
     ar >> make_nvp("ulong_long_property", v.ulong_long_property_);
     ar >> make_nvp("short_property", v.short_property_);
     ar >> make_nvp("ushort_property", v.ushort_property_);
+    ar >> make_nvp("double_property", v.double_property_);
+    ar >> make_nvp("float_property", v.float_property_);
     ar >> make_nvp("versioned_key", v.versioned_key_);
 }
 

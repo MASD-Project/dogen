@@ -41,7 +41,7 @@
 					<meta_type>2</meta_type>
 				</name>
 				<properties class_id="7" tracking_level="0" version="0">
-					<count>11</count>
+					<count>13</count>
 					<item_version>0</item_version>
 					<item class_id="8" tracking_level="0" version="0">
 						<name>bool_property</name>
@@ -226,6 +226,40 @@
 								<item_version>0</item_version>
 							</package_path>
 							<type_name>unsigned short</type_name>
+							<meta_type>0</meta_type>
+						</type_name>
+						<default_value></default_value>
+					</item>
+					<item>
+						<name>double_property</name>
+						<type_name>
+							<model_name></model_name>
+							<external_package_path>
+								<count>0</count>
+								<item_version>0</item_version>
+							</external_package_path>
+							<package_path>
+								<count>0</count>
+								<item_version>0</item_version>
+							</package_path>
+							<type_name>double</type_name>
+							<meta_type>0</meta_type>
+						</type_name>
+						<default_value></default_value>
+					</item>
+					<item>
+						<name>float_property</name>
+						<type_name>
+							<model_name></model_name>
+							<external_package_path>
+								<count>0</count>
+								<item_version>0</item_version>
+							</external_package_path>
+							<package_path>
+								<count>0</count>
+								<item_version>0</item_version>
+							</package_path>
+							<type_name>float</type_name>
 							<meta_type>0</meta_type>
 						</type_name>
 						<default_value></default_value>

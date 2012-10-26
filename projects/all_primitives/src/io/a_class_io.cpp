@@ -43,6 +43,8 @@ std::ostream& operator<<(std::ostream& s, const a_class& v) {
       << "\"ulong_long_property\": " << v.ulong_long_property() << ", "
       << "\"short_property\": " << v.short_property() << ", "
       << "\"ushort_property\": " << v.ushort_property() << ", "
+      << "\"double_property\": " << v.double_property() << ", "
+      << "\"float_property\": " << v.float_property() << ", "
       << "\"versioned_key\": " << v.versioned_key()
       << " }";
     return(s);

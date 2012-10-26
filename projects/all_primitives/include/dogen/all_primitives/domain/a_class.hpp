@@ -54,6 +54,8 @@ public:
         const unsigned long long ulong_long_property,
         const short short_property,
         const unsigned short ushort_property,
+        const double double_property,
+        const float float_property,
         const dogen::all_primitives::versioned_key& versioned_key);
 
 private:
@@ -152,6 +154,22 @@ public:
         ushort_property_ = v;
     }
 
+    double double_property() const {
+        return double_property_;
+    }
+
+    void double_property(const double v) {
+        double_property_ = v;
+    }
+
+    float float_property() const {
+        return float_property_;
+    }
+
+    void float_property(const float v) {
+        float_property_ = v;
+    }
+
     dogen::all_primitives::versioned_key versioned_key() const {
         return versioned_key_;
     }
@@ -182,6 +200,8 @@ private:
     unsigned long long ulong_long_property_;
     short short_property_;
     unsigned short ushort_property_;
+    double double_property_;
+    float float_property_;
     dogen::all_primitives::versioned_key versioned_key_;
 };
 

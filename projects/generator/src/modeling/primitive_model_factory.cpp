@@ -34,9 +34,10 @@ const std::string long_long_name("long long");
 const std::string ulong_long_name("unsigned long long");
 const std::string short_name("short");
 const std::string ushort_name("unsigned short");
+const std::string double_name("double");
+const std::string float_name("float");
 
 }
-
 
 namespace dogen {
 namespace generator {
@@ -70,6 +71,8 @@ sml::model primitive_model_factory::create() {
     lambda(ulong_long_name);
     lambda(short_name);
     lambda(ushort_name);
+    lambda(double_name);
+    lambda(float_name);
 
     model r;
     r.name(model_name);

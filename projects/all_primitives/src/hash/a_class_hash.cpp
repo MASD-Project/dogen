@@ -49,6 +49,8 @@ std::size_t a_class_hasher::hash(const a_class& v) {
     combine(seed, v.ulong_long_property());
     combine(seed, v.short_property());
     combine(seed, v.ushort_property());
+    combine(seed, v.double_property());
+    combine(seed, v.float_property());
     combine(seed, v.versioned_key());
 
     return seed;

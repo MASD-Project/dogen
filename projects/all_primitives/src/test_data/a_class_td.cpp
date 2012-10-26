@@ -67,6 +67,14 @@ unsigned short create_unsigned_short(const unsigned int position) {
     return static_cast<unsigned short>(position);
 }
 
+double create_double(const unsigned int position) {
+    return static_cast<double>(position);
+}
+
+float create_float(const unsigned int position) {
+    return static_cast<float>(position);
+}
+
 dogen::all_primitives::versioned_key
 create_dogen_all_primitives_versioned_key(const unsigned int position) {
     return dogen::all_primitives::versioned_key_generator::create(position);
@@ -92,7 +100,9 @@ populate(const unsigned int position, result_type& v) {
     v.ulong_long_property(create_unsigned_long_long(position + 8));
     v.short_property(create_short(position + 9));
     v.ushort_property(create_unsigned_short(position + 10));
-    v.versioned_key(create_dogen_all_primitives_versioned_key(position + 11));
+    v.double_property(create_double(position + 11));
+    v.float_property(create_float(position + 12));
+    v.versioned_key(create_dogen_all_primitives_versioned_key(position + 13));
 }
 
 a_class_generator::result_type
