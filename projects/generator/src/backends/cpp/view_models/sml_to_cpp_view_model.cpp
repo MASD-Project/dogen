@@ -25,6 +25,7 @@
 #include <boost/algorithm/string/join.hpp>
 #include <boost/algorithm/string/predicate.hpp>
 #include <boost/graph/depth_first_search.hpp>
+#include "dogen/sml/io/meta_types_io.hpp"
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/generator/backends/cpp/view_models/transformation_error.hpp"
 #include "dogen/generator/backends/cpp/view_models/sml_to_cpp_view_model.hpp"
@@ -43,7 +44,8 @@ const std::string namespace_separator("::");
 
 const std::string parent_view_model_not_found(
     "Parent view model not found for pod: ");
-const std::string view_model_not_found("View model not found for pod: ");
+const std::string view_model_not_found("View model not found: ");
+const std::string unsupported_meta_type("Meta type not supported: ");
 const std::string includer_name("all");
 const std::string versioned_name("versioned_key");
 const std::string unversioned_name("unversioned_key");
@@ -324,26 +326,13 @@ location_request_factory(cpp_facet_types ft, cpp_file_types flt,
 }
 
 file_view_model sml_to_cpp_view_model::
-transform_file(cpp_facet_types ft, cpp_file_types flt, cpp_aspect_types at,
-    const sml::pod& p) {
-    const sml::qualified_name name(p.name());
-    const std::list<std::string> ns(join_namespaces(name));
-
+create_file(cpp_facet_types ft, cpp_file_types flt, cpp_aspect_types at,
+    const sml::qualified_name& name) {
     file_view_model r;
     r.facet_type(ft);
     r.file_type(flt);
     r.aspect_type(at);
-    r.category_type(p.category_type());
 
-    const auto i(qname_to_class_.find(name));
-    if (i == qname_to_class_.end()) {
-        BOOST_LOG_SEV(lg, error) << view_model_not_found
-                                 << name.type_name();
-
-        throw transformation_error(view_model_not_found + name.type_name());
-    }
-
-    r.class_vm(i->second);
     auto rq(location_request_factory(ft, flt, at, name));
     r.file_path(location_manager_.absolute_path(rq));
 
@@ -355,49 +344,120 @@ transform_file(cpp_facet_types ft, cpp_file_types flt, cpp_aspect_types at,
             inclusion_manager_.register_header(ft, rp);
     }
 
+    return r;
+}
+
+file_view_model sml_to_cpp_view_model::
+transform_file(cpp_facet_types ft, cpp_file_types flt, cpp_aspect_types at,
+    const sml::pod& p) {
+    const sml::qualified_name name(p.name());
+    const std::list<std::string> ns(join_namespaces(name));
+
+    file_view_model r(create_file(ft, flt, at, name));
+    r.category_type(p.category_type());
+
+    const auto i(qname_to_class_.find(name));
+    if (i == qname_to_class_.end()) {
+        BOOST_LOG_SEV(lg, error) << view_model_not_found
+                                 << name.type_name();
+
+        throw transformation_error(view_model_not_found + name.type_name());
+    }
+    r.class_vm(i->second);
+
     const auto includes(inclusion_manager_.includes_for_pod(p, ft, flt, at));
     r.system_includes(includes.system);
     r.user_includes(includes.user);
     return r;
 }
 
-bool sml_to_cpp_view_model::has_implementation(const cpp_facet_types ft) const {
-    return
-        ft == cpp_facet_types::domain ||
-        ft == cpp_facet_types::hash ||
-        ft == cpp_facet_types::io ||
-        ft == cpp_facet_types::database ||
-        ft == cpp_facet_types::test_data ||
-        ft == cpp_facet_types::serialization;
+file_view_model sml_to_cpp_view_model::
+transform_file(cpp_facet_types ft, cpp_file_types flt, cpp_aspect_types at,
+    const sml::enumeration& e) {
+    const sml::qualified_name name(e.name());
+    const std::list<std::string> ns(join_namespaces(name));
+
+    file_view_model r(create_file(ft, flt, at, name));
+    r.category_type(sml::category_types::user_defined);
+
+    const auto i(qname_to_enumeration_.find(name));
+    if (i == qname_to_enumeration_.end()) {
+        BOOST_LOG_SEV(lg, error) << view_model_not_found
+                                 << name.type_name();
+
+        throw transformation_error(view_model_not_found + name.type_name());
+    }
+    r.enumeration_vm(i->second);
+    return r;
 }
 
-bool sml_to_cpp_view_model::has_forward_decls(const cpp_facet_types ft) const {
-    return
-        ft == cpp_facet_types::domain ||
-        ft == cpp_facet_types::serialization;
+bool sml_to_cpp_view_model::has_implementation(const cpp_facet_types ft,
+    const dogen::sml::meta_types mt) const {
+    using dogen::sml::meta_types;
+    if (mt == meta_types::pod) {
+        return
+            ft == cpp_facet_types::domain ||
+            ft == cpp_facet_types::hash ||
+            ft == cpp_facet_types::io ||
+            ft == cpp_facet_types::database ||
+            ft == cpp_facet_types::test_data ||
+            ft == cpp_facet_types::serialization;
+    } else if (mt == meta_types::enumeration) {
+        return
+            ft == cpp_facet_types::domain ||
+            ft == cpp_facet_types::hash ||
+            ft == cpp_facet_types::io ||
+            ft == cpp_facet_types::database ||
+            ft == cpp_facet_types::test_data ||
+            ft == cpp_facet_types::serialization;
+    }
+
+    std::ostringstream s;
+    s << unsupported_meta_type << mt;
+    BOOST_LOG_SEV(lg, error) << s.str();
+    throw transformation_error(s.str());
 }
 
-void sml_to_cpp_view_model::setup_qualified_name_to_class_view_model_map() {
+bool sml_to_cpp_view_model::has_forward_decls(const cpp_facet_types ft,
+    const dogen::sml::meta_types mt) const {
+    using dogen::sml::meta_types;
+    if (mt == meta_types::pod) {
+        return
+            ft == cpp_facet_types::domain ||
+            ft == cpp_facet_types::serialization;
+    } else if (mt == meta_types::enumeration) {
+        return
+            ft == cpp_facet_types::domain ||
+            ft == cpp_facet_types::serialization;
+    }
+
+    std::ostringstream s;
+    s << unsupported_meta_type << mt;
+    BOOST_LOG_SEV(lg, error) << s.str();
+    throw transformation_error(s.str());
+}
+
+void sml_to_cpp_view_model::create_class_view_models() {
     const auto pods(model_.pods());
     BOOST_LOG_SEV(lg, debug) << "Transforming pods: " << pods.size();
 
-    auto pi([&](const sml::qualified_name& qname) -> vertex_descriptor_type {
-            const auto i(qname_to_vertex_.find(qname));
+    auto lambda([&](const sml::qualified_name& n) -> vertex_descriptor_type {
+            const auto i(qname_to_vertex_.find(n));
             if (i != qname_to_vertex_.end())
                 return i->second;
 
             const auto vertex(boost::add_vertex(graph_));
-            qname_to_vertex_.insert(std::make_pair(qname, vertex));
+            qname_to_vertex_.insert(std::make_pair(n, vertex));
             return vertex;
         });
 
-    for (const auto pair : model_.pods()) {
-        const vertex_descriptor_type vertex(pi(pair.first));
+    for (const auto pair : pods) {
+        const vertex_descriptor_type vertex(lambda(pair.first));
         const auto pod(pair.second);
         graph_[vertex] = pod;
 
         if (pod.parent_name()) {
-            const vertex_descriptor_type parent_vertex(pi(*pod.parent_name()));
+            const vertex_descriptor_type parent_vertex(lambda(*pod.parent_name()));
             boost::add_edge(parent_vertex, vertex, graph_);
         } else
             boost::add_edge(root_vertex_, vertex, graph_);
@@ -406,6 +466,20 @@ void sml_to_cpp_view_model::setup_qualified_name_to_class_view_model_map() {
     sml_dfs_visitor v(model_.schema_name());
     boost::depth_first_search(graph_, boost::visitor(v));
     qname_to_class_ = v.class_view_models();
+}
+
+
+void sml_to_cpp_view_model::create_enumeration_view_models() {
+    const auto enumerations(model_.enumerations());
+    BOOST_LOG_SEV(lg, debug) << "Transforming enumerations: "
+                             << enumerations.size();
+
+    for (const auto pair : enumerations) {
+        const auto e(pair.second);
+        enumeration_view_model vm;
+        //vm.name(e.name);
+        qname_to_enumeration_.insert(std::make_pair(e.name(), vm));
+    }
 }
 
 std::vector<file_view_model> sml_to_cpp_view_model::transform_pods() {
@@ -438,15 +512,47 @@ std::vector<file_view_model> sml_to_cpp_view_model::transform_pods() {
 
             lambda(ft, header, main, p);
 
-            if (has_implementation(ft))
+            if (has_implementation(ft, sml::meta_types::pod))
                 lambda(ft, implementation, main, p);
 
-            if (has_forward_decls(ft))
+            if (has_forward_decls(ft, sml::meta_types::pod))
                 lambda(ft, header, forward_decls, p);
         }
     }
 
     BOOST_LOG_SEV(lg, debug) << "Transformed pods: " << pods.size();
+    return r;
+}
+
+std::vector<file_view_model> sml_to_cpp_view_model::transform_enumerations() {
+    std::vector<file_view_model> r;
+    auto lambda([&](cpp_facet_types ft, cpp_file_types flt, cpp_aspect_types at,
+            const sml::enumeration& e) {
+            const std::string n(e.name().type_name());
+            log_generating_file(ft, at, flt, n);
+            r.push_back(transform_file(ft, flt, at, e));
+        });
+
+    for (auto pair : model_.enumerations()) {
+        const sml::enumeration e(pair.second);
+
+        if (!e.generate())
+            continue;
+
+        const auto header(cpp_file_types::header);
+        const auto implementation(cpp_file_types::implementation);
+        const auto main(cpp_aspect_types::main);
+        const auto forward_decls(cpp_aspect_types::forward_decls);
+        for (const auto ft: settings_.enabled_facets()) {
+            lambda(ft, header, main, e);
+
+            if (has_implementation(ft, sml::meta_types::enumeration))
+                lambda(ft, implementation, main, e);
+
+            if (has_forward_decls(ft, sml::meta_types::enumeration))
+                lambda(ft, header, forward_decls, e);
+        }
+    }
     return r;
 }
 
@@ -481,7 +587,8 @@ sml_to_cpp_view_model::transform_facet_includers() const {
 
 std::vector<file_view_model> sml_to_cpp_view_model::transform() {
     log_started();
-    setup_qualified_name_to_class_view_model_map();
+    create_class_view_models();
+    create_enumeration_view_models();
     auto r(transform_pods());
 
     log_includers();

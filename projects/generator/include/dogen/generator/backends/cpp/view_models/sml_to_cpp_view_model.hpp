@@ -38,6 +38,7 @@
 #include "dogen/generator/backends/cpp/cpp_aspect_types.hpp"
 #include "dogen/generator/backends/cpp/cpp_file_types.hpp"
 #include "dogen/generator/backends/cpp/cpp_facet_types.hpp"
+#include "dogen/sml/domain/meta_types.hpp"
 #include "dogen/sml/domain/package.hpp"
 #include "dogen/sml/domain/pod.hpp"
 #include "dogen/sml/domain/model.hpp"
@@ -80,12 +81,14 @@ private:
      * @brief Returns true if the facet requires a C++ source file,
      * false otherwise.
      */
-    bool has_implementation(const cpp_facet_types ft) const;
+    bool has_implementation(const cpp_facet_types ft,
+        const dogen::sml::meta_types mt) const;
 
     /**
      * @brief Returns true if facet has forward declarations, false otherwise.
      */
-    bool has_forward_decls(const cpp_facet_types ft) const;
+    bool has_forward_decls(const cpp_facet_types ft,
+        const dogen::sml::meta_types mt) const;
 
     /**
      * @brief Transforms a relative path to a header file into a C++
@@ -117,10 +120,23 @@ private:
 
 private:
     /**
+     * @brief Performs the initial setup of the file view model.
+     */
+    file_view_model create_file(cpp_facet_types ft, cpp_file_types flt,
+        cpp_aspect_types at, const sml::qualified_name& name);
+
+    /**
      * @brief Transforms a SML pod into a C++ file view.
      */
     file_view_model transform_file(cpp_facet_types ft, cpp_file_types flt,
         cpp_aspect_types at, const sml::pod& p);
+
+    /**
+     * @brief Transforms a SML enumeration into a C++ file view.
+     */
+    file_view_model
+    transform_file(cpp_facet_types ft, cpp_file_types flt, cpp_aspect_types at,
+        const sml::enumeration& e);
 
     /**
      * @brief Transforms all versioned and unversioned keys.
@@ -133,14 +149,24 @@ private:
     std::vector<file_view_model> transform_facet_includers() const;
 
     /**
-     * @brief Sets up the qualified name to class view map
+     * @brief Creates all the class view models
      */
-    void setup_qualified_name_to_class_view_model_map();
+    void create_class_view_models();
 
     /**
-     * @brief Transforms pods into view models.
+     * @brief Creates all the enumeration view models
+     */
+    void create_enumeration_view_models();
+
+    /**
+     * @brief Transforms pods into file view models.
      */
     std::vector<file_view_model> transform_pods();
+
+    /**
+     * @brief Transforms enumerations into view models.
+     */
+    std::vector<file_view_model> transform_enumerations();
 
 public:
     /**
@@ -171,6 +197,8 @@ private:
     const config::cpp_settings settings_;
     const sml::model model_;
     std::unordered_map<sml::qualified_name, class_view_model> qname_to_class_;
+    std::unordered_map<sml::qualified_name, enumeration_view_model>
+    qname_to_enumeration_;
     graph_type graph_;
     qname_to_vertex_type qname_to_vertex_;
     vertex_descriptor_type root_vertex_;
