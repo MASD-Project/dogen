@@ -73,17 +73,19 @@ public:
     pod(qualified_name name,
         std::vector<dogen::sml::property> properties,
         boost::optional<qualified_name> parent_name, bool generate,
-        bool is_parent, category_types category_type)
+        bool is_parent, category_types category_type,
+        const std::string& documentation)
         : name_(name), properties_(properties), parent_name_(parent_name),
           generate_(generate), is_parent_(is_parent),
-          category_type_(category_type) { }
+          category_type_(category_type), documentation_(documentation) { }
 
     pod(pod&& rhs) : name_(std::move(rhs.name_)),
                      properties_(std::move(rhs.properties_)),
                      parent_name_(std::move(rhs.parent_name_)),
                      generate_(std::move(rhs.generate_)),
                      is_parent_(std::move(rhs.is_parent_)),
-                     category_type_(std::move(rhs.category_type_)) { }
+                     category_type_(std::move(rhs.category_type_)),
+                     documentation_(std::move(rhs.documentation_)) { }
 
 public:
     /**
@@ -115,7 +117,7 @@ public:
     /**@}*/
 
     /**
-     * @brief Returns true if this pod should be code generated, false
+     * @brief Returns true if this pod is to be code generated, false
      * otherwise.
      */
     /**@{*/
@@ -141,6 +143,14 @@ public:
     void category_type(sml::category_types value) { category_type_ = value; }
     /**@}*/
 
+    /**
+     * @brief Doxygen documentation for the type.
+     */
+    /**@{*/
+    std::string documentation() const { return documentation_; }
+    void documentation(const std::string& value) { documentation_ = value; }
+    /**@}*/
+
 public:
     void to_stream(std::ostream& stream) const;
 
@@ -158,6 +168,7 @@ private:
     bool generate_;
     bool is_parent_;
     sml::category_types category_type_;
+    std::string documentation_;
 };
 
 } }

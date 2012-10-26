@@ -19,6 +19,7 @@
  *
  */
 #include <ostream>
+#include <boost/io/ios_state.hpp>
 #include "dogen/sml/io/qualified_name_io.hpp"
 #include "dogen/sml/domain/primitive.hpp"
 
@@ -26,12 +27,20 @@ namespace dogen {
 namespace sml {
 
 bool primitive::operator==(const primitive& rhs) const {
-    return name_ == rhs.name_;
+    return
+        name_ == rhs.name_ &&
+        generate_ == rhs.generate_ &&
+        documentation_ == rhs.documentation_;
 }
 
 void primitive::to_stream(std::ostream& stream) const {
-    stream << "\"primitive\": {"
-           << name()
+    boost::io::ios_flags_saver ifs(stream);
+
+    stream << std::boolalpha
+           << "\"primitive\": {"
+           << name() << ", "
+           << "\"generate\": " << generate_ << ", "
+           << "\"documentation\":" << "\"" << documentation_ << "\""
            << " }";
 }
 

@@ -27,7 +27,9 @@ const std::string uml_large_package("UML - LargePackage");
 const std::string uml_class("UML - Class");
 const std::string uml_generalization("UML - Generalization");
 const std::string uml_association("UML - Association");
-const std::string error_message("Invalid or unsupported Dia type");
+const std::string invalid_dia_type("Invalid or unsupported Dia type");
+
+const std::string enumeration("enumeration");
 
 }
 
@@ -35,20 +37,27 @@ namespace dogen {
 namespace dia {
 namespace utility {
 
-object_types parse_object_type(const std::string& dia_type) {
-    if (dia_type == uml_large_package)
+object_types parse_object_type(const std::string& ot) {
+    if (ot == uml_large_package)
         return object_types::uml_large_package;
 
-    if (dia_type == uml_class)
+    if (ot == uml_class)
         return object_types::uml_class;
 
-    if (dia_type == uml_generalization)
+    if (ot == uml_generalization)
         return object_types::uml_generalization;
 
-    if (dia_type == uml_association)
+    if (ot == uml_association)
         return object_types::uml_association;
 
-    throw dogen::utility::exception::exception(error_message);
+    throw dogen::utility::exception::exception(invalid_dia_type);
+}
+
+stereotypes parse_stereotype(const std::string& st) {
+    if (st == enumeration)
+        return stereotypes::enumeration;
+
+    throw dogen::utility::exception::exception(invalid_dia_type);
 }
 
 } } }

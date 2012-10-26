@@ -27,6 +27,7 @@
 
 #include <string>
 #include <boost/serialization/nvp.hpp>
+#include <boost/serialization/string.hpp>
 #include <boost/serialization/vector.hpp>
 #include <boost/serialization/optional.hpp>
 #include "dogen/sml/domain/pod.hpp"
@@ -50,6 +51,7 @@ public:
         archive & make_nvp("generate", value.generate_);
         archive & make_nvp("is_parent", value.is_parent_);
         archive & make_nvp("category_type", value.category_type_);
+        archive & make_nvp("documentation", value.documentation_);
     }
 };
 

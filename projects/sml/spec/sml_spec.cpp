@@ -44,6 +44,8 @@ namespace {
 const std::string test_module("sml");
 const std::string test_suite("sml_spec");
 
+const std::string documentation("@brief sample doc");
+
 /**
  * @brief Performs a serialisation round-trip using a test object
  * read from Sequence.
@@ -111,7 +113,8 @@ BOOST_AUTO_TEST_CASE(exercise_type_and_descendants_io) {
     const bool parent(false);
     const auto ct(dogen::sml::category_types::user_defined);
 
-    dogen::sml::pod pod(child_type_name, p, parent_type_name, gen, parent, ct);
+    dogen::sml::pod pod(child_type_name, p, parent_type_name, gen, parent, ct,
+        documentation);
     BOOST_LOG_SEV(lg, info) << pod;
     BOOST_CHECK(true);
 }
@@ -132,7 +135,8 @@ BOOST_AUTO_TEST_CASE(exercise_qualified_name_and_property_io) {
     BOOST_LOG_SEV(lg, info) << qualified_name;
 
     dogen::sml::property
-        property("property_name", qualified_name, "property_default_value");
+        property("property_name", qualified_name, "property_default_value",
+            documentation);
     BOOST_LOG_SEV(lg, info) << property;
 }
 

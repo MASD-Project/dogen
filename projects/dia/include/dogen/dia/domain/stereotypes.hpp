@@ -18,29 +18,24 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_DIA_UTILITY_UTILITY_HPP
-#define DOGEN_DIA_UTILITY_UTILITY_HPP
+#ifndef DOGEN_DIA_DOMAIN_STEREOTYPES_HPP
+#define DOGEN_DIA_DOMAIN_STEREOTYPES_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <string>
-#include "dogen/dia/domain/object_types.hpp"
-#include "dogen/dia/domain/stereotypes.hpp"
-
 namespace dogen {
 namespace dia {
 
 /**
- * @brief Helper functions and classes for the Dia domain object.
+ * @brief Identifier for the type of Dia object.
  */
+enum class stereotypes : unsigned int {
+    invalid = 0,
+    enumeration = 1
+};
 
-namespace utility {
-
-object_types parse_object_type(const std::string& ot);
-stereotypes parse_stereotype(const std::string& st);
-
-} } }
+} }
 
 #endif

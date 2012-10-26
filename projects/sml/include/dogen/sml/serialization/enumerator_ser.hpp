@@ -18,29 +18,47 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_DIA_UTILITY_UTILITY_HPP
-#define DOGEN_DIA_UTILITY_UTILITY_HPP
+#ifndef DOGEN_SML_SERIALIZATION_ENUMERATOR_SER_HPP
+#define DOGEN_SML_SERIALIZATION_ENUMERATOR_SER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <string>
-#include "dogen/dia/domain/object_types.hpp"
-#include "dogen/dia/domain/stereotypes.hpp"
+#include <boost/serialization/nvp.hpp>
+#include <boost/serialization/string.hpp>
+#include "dogen/sml/domain/enumerator.hpp"
 
 namespace dogen {
-namespace dia {
+namespace sml {
 
-/**
- * @brief Helper functions and classes for the Dia domain object.
- */
+class enumerator_serializer {
+public:
+    template<typename Archive>
+    void serialize(Archive & archive,
+        dogen::sml::enumerator& value,
+        const unsigned int /*version*/) {
+        using boost::serialization::make_nvp;
+        archive & make_nvp("name", value.name_);
+        archive & make_nvp("value", value.value_);
+        archive & make_nvp("documentation", value.documentation_);
+    }
+};
 
-namespace utility {
+} }
 
-object_types parse_object_type(const std::string& ot);
-stereotypes parse_stereotype(const std::string& st);
+namespace boost {
+namespace serialization {
 
-} } }
+template<class Archive>
+inline void serialize(Archive & archive,
+    dogen::sml::enumerator& value,
+    const unsigned int version) {
+    dogen::sml::enumerator_serializer serializer;
+    serializer.serialize<Archive>(archive, value, version);
+}
+
+} }
 
 #endif

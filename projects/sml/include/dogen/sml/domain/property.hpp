@@ -57,9 +57,12 @@ public:
      * @param default_value the default value the property should take
      * if not specified
      */
-    inline property(std::string name, dogen::sml::qualified_name type_name,
-        std::string default_value)
-        : name_(name), type_name_(type_name ), default_value_(default_value){ }
+    inline property(const std::string& name,
+        const dogen::sml::qualified_name& type_name,
+        const std::string& default_value,
+        const std::string& documentation)
+        : name_(name), type_name_(type_name ), default_value_(default_value),
+          documentation_(documentation) { }
 
 public:
     /**
@@ -84,6 +87,14 @@ public:
         default_value_ = default_value;
     }
 
+    /**
+     * @brief Doxygen documentation for the type.
+     */
+    /**@{*/
+    std::string documentation() const { return documentation_; }
+    void documentation(const std::string& value) { documentation_ = value; }
+    /**@}*/
+
 public:
     bool operator==(const property& rhs) const;
 
@@ -98,6 +109,7 @@ private:
     std::string name_;
     dogen::sml::qualified_name type_name_;
     std::string default_value_;
+    std::string documentation_;
 };
 
 } }

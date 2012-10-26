@@ -18,34 +18,36 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_SML_DOMAIN_PRIMITIVE_HPP
-#define DOGEN_SML_DOMAIN_PRIMITIVE_HPP
+#ifndef DOGEN_SML_DOMAIN_ENUMERATION_HPP
+#define DOGEN_SML_DOMAIN_ENUMERATION_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <string>
+#include <vector>
+#include "dogen/sml/domain/enumerator.hpp"
 #include "dogen/sml/domain/qualified_name.hpp"
 
 namespace dogen {
 namespace sml {
 
-class primitive_serializer;
+class enumeration_serializer;
 
-class primitive {
+class enumeration {
 public:
-    primitive(const primitive&) = default;
-    ~primitive() = default;
-    primitive(primitive&&) = default;
-    primitive& operator=(const primitive&) = default;
+    enumeration(const enumeration&) = default;
+    ~enumeration() = default;
+    enumeration(enumeration&&) = default;
+    enumeration& operator=(const enumeration&) = default;
 
 private:
-    friend class primitive_serializer;
+    friend class enumeration_serializer;
 
 public:
-    primitive() : generate_(false) { }
-    primitive(const qualified_name& name, const bool generate,
+    enumeration() : generate_(false) { }
+    enumeration(const qualified_name& name, const bool generate,
         const std::string& documentation)
         : name_(name), generate_(generate), documentation_(documentation) { }
 
@@ -55,11 +57,11 @@ public:
      */
     /**@{*/
     qualified_name name() const { return name_; }
-    void name(const qualified_name& value) { name_ = value; }
+    void name(qualified_name value) { name_ = value; }
     /**@}*/
 
     /**
-     * @brief Returns true if this type is to be code generated, false
+     * @brief Returns true if this pod is to be code generated, false
      * otherwise.
      */
     /**@{*/
@@ -75,13 +77,23 @@ public:
     void documentation(const std::string& value) { documentation_ = value; }
     /**@}*/
 
+    /**
+     * @brief Enumerators for this enumeration
+     */
+    /**@{*/
+    std::vector<enumerator> enumerators() const { return enumerators_; }
+    void enumerators(const std::vector<enumerator>& v) {
+        enumerators_ = v;
+    }
+    /**@}*/
+
 public:
     void to_stream(std::ostream& stream) const;
 
 public:
-    bool operator==(const primitive& rhs) const;
+    bool operator==(const enumeration& rhs) const;
 
-    bool operator!=(const primitive& rhs) const {
+    bool operator!=(const enumeration& rhs) const {
         return(!this->operator==(rhs));
     }
 
@@ -89,6 +101,7 @@ private:
     qualified_name name_;
     bool generate_;
     std::string documentation_;
+    std::vector<enumerator> enumerators_;
 };
 
 } }

@@ -503,7 +503,7 @@
             <dia:string>#documentation#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#annotation#</dia:string>
+            <dia:string>#std::string#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -612,16 +612,16 @@
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="17.2208,-5.59166"/>
+        <dia:point val="17.2208,-5.5917"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="13.3633,-6.34166;17.9708,2.82917"/>
+        <dia:rectangle val="13.3633,-6.3417;17.9708,2.82917"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="17.2208,-5.59166"/>
+        <dia:point val="17.2208,-5.5917"/>
         <dia:point val="17.2208,-2.01903"/>
         <dia:point val="13.4133,-2.01903"/>
         <dia:point val="13.4133,2.02917"/>
@@ -2263,7 +2263,7 @@
         <dia:point val="37.2791,2.08261"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="23.4583,-6.34166;37.4791,2.88261"/>
+        <dia:rectangle val="23.4583,-6.3417;37.4791,2.88261"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -2272,7 +2272,7 @@
         <dia:point val="37.2791,2.08261"/>
         <dia:point val="37.2791,-3.03405"/>
         <dia:point val="24.2083,-3.03405"/>
-        <dia:point val="24.2083,-5.59166"/>
+        <dia:point val="24.2083,-5.5917"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>

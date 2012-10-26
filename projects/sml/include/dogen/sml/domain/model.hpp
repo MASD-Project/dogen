@@ -31,6 +31,7 @@
 #include "dogen/sml/domain/qualified_name.hpp"
 #include "dogen/sml/hash/qualified_name_hash.hpp"
 #include "dogen/sml/domain/primitive.hpp"
+#include "dogen/sml/domain/enumeration.hpp"
 #include "dogen/sml/domain/package.hpp"
 #include "dogen/sml/domain/pod.hpp"
 
@@ -68,9 +69,10 @@ public:
         std::unordered_map<qualified_name, package> packages,
         std::unordered_map<qualified_name, pod> pods,
         std::unordered_map<qualified_name, primitive> primitives,
+        std::unordered_map<qualified_name, enumeration> enumerations,
         std::list<std::string> external_package_path) :
         name_(name), packages_(packages), pods_(pods),
-        primitives_(primitives),
+        primitives_(primitives), enumerations_(enumerations),
         external_package_path_(external_package_path) { }
 
 public:
@@ -121,6 +123,18 @@ public:
     /**@}*/
 
     /**
+     * @brief Enumerations contained in the model.
+     */
+    /**@{*/
+    std::unordered_map<qualified_name, enumeration> enumerations() const {
+        return enumerations_;
+    }
+    void enumerations(std::unordered_map<qualified_name, enumeration> v) {
+        enumerations_ = v;
+    }
+    /**@}*/
+
+    /**
      * @brief Path of packages that contain this model.
      */
     std::list<std::string> external_package_path() const {
@@ -154,6 +168,7 @@ private:
     std::unordered_map<qualified_name, package> packages_;
     std::unordered_map<qualified_name, pod> pods_;
     std::unordered_map<qualified_name, primitive> primitives_;
+    std::unordered_map<qualified_name, enumeration> enumerations_;
     std::list<std::string> external_package_path_;
     std::string schema_name_;
 };

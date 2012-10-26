@@ -50,6 +50,7 @@
 				<generate>1</generate>
 				<is_parent>0</is_parent>
 				<category_type>1</category_type>
+				<documentation></documentation>
 			</second>
 		</item>
 		<item>
@@ -90,6 +91,7 @@
 				<generate>1</generate>
 				<is_parent>0</is_parent>
 				<category_type>1</category_type>
+				<documentation></documentation>
 			</second>
 		</item>
 		<item>
@@ -130,6 +132,7 @@
 				<generate>1</generate>
 				<is_parent>0</is_parent>
 				<category_type>1</category_type>
+				<documentation></documentation>
 			</second>
 		</item>
 		<item>
@@ -170,6 +173,7 @@
 				<generate>1</generate>
 				<is_parent>0</is_parent>
 				<category_type>1</category_type>
+				<documentation></documentation>
 			</second>
 		</item>
 		<item>
@@ -210,6 +214,7 @@
 				<generate>1</generate>
 				<is_parent>0</is_parent>
 				<category_type>1</category_type>
+				<documentation></documentation>
 			</second>
 		</item>
 	</pods>
@@ -218,6 +223,11 @@
 		<bucket_count>11</bucket_count>
 		<item_version>0</item_version>
 	</primitives>
+	<enumerations class_id="10" tracking_level="0" version="0">
+		<count>0</count>
+		<bucket_count>11</bucket_count>
+		<item_version>0</item_version>
+	</enumerations>
 	<external_package_path>
 		<count>0</count>
 		<item_version>0</item_version>

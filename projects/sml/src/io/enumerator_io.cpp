@@ -18,29 +18,16 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_DIA_UTILITY_UTILITY_HPP
-#define DOGEN_DIA_UTILITY_UTILITY_HPP
-
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
-
-#include <string>
-#include "dogen/dia/domain/object_types.hpp"
-#include "dogen/dia/domain/stereotypes.hpp"
+#include <ostream>
+#include "dogen/sml/io/enumerator_io.hpp"
 
 namespace dogen {
-namespace dia {
+namespace sml {
 
-/**
- * @brief Helper functions and classes for the Dia domain object.
- */
+std::ostream&
+operator<<(std::ostream& stream, const dogen::sml::enumerator& enumerator) {
+    enumerator.to_stream(stream);
+    return(stream);
+}
 
-namespace utility {
-
-object_types parse_object_type(const std::string& ot);
-stereotypes parse_stereotype(const std::string& st);
-
-} } }
-
-#endif
+} }

@@ -18,29 +18,34 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_DIA_UTILITY_UTILITY_HPP
-#define DOGEN_DIA_UTILITY_UTILITY_HPP
-
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
-
-#include <string>
-#include "dogen/dia/domain/object_types.hpp"
-#include "dogen/dia/domain/stereotypes.hpp"
+#include <ostream>
+#include <boost/io/ios_state.hpp>
+#include "dogen/utility/io/vector_io.hpp"
+#include "dogen/sml/io/qualified_name_io.hpp"
+#include "dogen/sml/io/enumerator_io.hpp"
+#include "dogen/sml/domain/enumeration.hpp"
 
 namespace dogen {
-namespace dia {
+namespace sml {
 
-/**
- * @brief Helper functions and classes for the Dia domain object.
- */
+bool enumeration::operator==(const enumeration& rhs) const {
+    return
+        name_ == rhs.name() &&
+        generate_ == rhs.generate() &&
+        documentation_ == rhs.documentation() &&
+        enumerators_ == rhs.enumerators();
+}
 
-namespace utility {
+void enumeration::to_stream(std::ostream& stream) const {
+    boost::io::ios_flags_saver ifs(stream);
 
-object_types parse_object_type(const std::string& ot);
-stereotypes parse_stereotype(const std::string& st);
+    stream << std::boolalpha
+           << "\"enumeration\": {"
+           << name() << ", "
+           << "generate" << generate() << ", "
+           << "\"documentation\":" << "\"" << documentation_ << "\", "
+           << enumerators()
+           << " }";
+}
 
-} } }
-
-#endif
+} }

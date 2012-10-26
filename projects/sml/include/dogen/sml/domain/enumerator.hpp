@@ -18,53 +18,52 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_SML_DOMAIN_PRIMITIVE_HPP
-#define DOGEN_SML_DOMAIN_PRIMITIVE_HPP
+#ifndef DOGEN_SML_DOMAIN_ENUMERATOR_HPP
+#define DOGEN_SML_DOMAIN_ENUMERATOR_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <string>
-#include "dogen/sml/domain/qualified_name.hpp"
 
 namespace dogen {
 namespace sml {
 
-class primitive_serializer;
+class enumerator_serializer;
 
-class primitive {
+class enumerator {
 public:
-    primitive(const primitive&) = default;
-    ~primitive() = default;
-    primitive(primitive&&) = default;
-    primitive& operator=(const primitive&) = default;
+    enumerator() = default;
+    enumerator(const enumerator&) = default;
+    ~enumerator() = default;
+    enumerator(enumerator&&) = default;
+    enumerator& operator=(const enumerator&) = default;
 
 private:
-    friend class primitive_serializer;
+    friend class enumerator_serializer;
 
 public:
-    primitive() : generate_(false) { }
-    primitive(const qualified_name& name, const bool generate,
+    enumerator(const std::string& name, const std::string& v,
         const std::string& documentation)
-        : name_(name), generate_(generate), documentation_(documentation) { }
+        : name_(name), value_(v), documentation_(documentation) { }
 
 public:
     /**
      * @brief Qualified name for the type.
      */
     /**@{*/
-    qualified_name name() const { return name_; }
-    void name(const qualified_name& value) { name_ = value; }
+    std::string name() const { return name_; }
+    void name(const std::string& value) { name_ = value; }
     /**@}*/
 
     /**
-     * @brief Returns true if this type is to be code generated, false
-     * otherwise.
+     * @brief Value for the enumerator. It must be an instance of the
+     * type defined in the enumeration.
      */
     /**@{*/
-    bool generate() const { return generate_; }
-    void generate(bool value) { generate_ = value; }
+    std::string value() const { return value_; }
+    void value(bool v) { value_ = v; }
     /**@}*/
 
     /**
@@ -79,15 +78,15 @@ public:
     void to_stream(std::ostream& stream) const;
 
 public:
-    bool operator==(const primitive& rhs) const;
+    bool operator==(const enumerator& rhs) const;
 
-    bool operator!=(const primitive& rhs) const {
+    bool operator!=(const enumerator& rhs) const {
         return(!this->operator==(rhs));
     }
 
 private:
-    qualified_name name_;
-    bool generate_;
+    std::string name_;
+    std::string value_;
     std::string documentation_;
 };
 

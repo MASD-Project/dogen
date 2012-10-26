@@ -18,29 +18,34 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_DIA_UTILITY_UTILITY_HPP
-#define DOGEN_DIA_UTILITY_UTILITY_HPP
-
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
-
 #include <string>
-#include "dogen/dia/domain/object_types.hpp"
-#include "dogen/dia/domain/stereotypes.hpp"
+#include <ostream>
+#include "dogen/utility/exception/invalid_enum_value.hpp"
+#include "dogen/dia/io/stereotypes_io.hpp"
+
+namespace {
+
+const std::string prefix("stereotypes::");
+const std::string invalid("invalid");
+const std::string enumeration("enumeration");
+
+const std::string error_message("Invalid or unexpected object type");
+
+}
 
 namespace dogen {
 namespace dia {
 
-/**
- * @brief Helper functions and classes for the Dia domain object.
- */
+std::ostream& operator<<(std::ostream& stream, stereotypes value) {
+    switch (value) {
+    case stereotypes::invalid:
+        return stream << prefix << invalid;
+    case stereotypes::enumeration:
+        return stream << prefix << enumeration;
+    default:
+        break;
+    }
+    throw utility::exception::invalid_enum_value(error_message);
+}
 
-namespace utility {
-
-object_types parse_object_type(const std::string& ot);
-stereotypes parse_stereotype(const std::string& st);
-
-} } }
-
-#endif
+} }

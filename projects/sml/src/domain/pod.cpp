@@ -38,20 +38,22 @@ bool pod::operator==(const pod& rhs) const {
         parent_name_ == rhs.parent_name_ &&
         generate_ == rhs.generate_ &&
         is_parent_ == rhs.is_parent_ &&
-        category_type_ == rhs.category_type_;
+        category_type_ == rhs.category_type_ &&
+        documentation_ == rhs.documentation_;
 }
 
 void pod::to_stream(std::ostream& stream) const {
     boost::io::ios_flags_saver ifs(stream);
 
-    stream << std::boolalpha;
-    stream << "\"pod\": {"
+    stream << std::boolalpha
+           << "\"pod\": {"
            << name() << ", "
            << "\"properties\":" << properties() << ", "
            << parent_name() << ", "
            << "\"generate\": " << generate_ << ", "
            << "\"is_parent\": " << is_parent_ << ", "
-           << "\"category_type\":" << "\"" << category_type_ << "\""
+           << "\"category_type\":" << "\"" << category_type_ << "\", "
+           << "\"documentation\":" << "\"" << documentation_ << "\""
            << " }";
 }
 

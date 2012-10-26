@@ -32,6 +32,7 @@
 #include "dogen/sml/test_data/package_sequence.hpp"
 #include "dogen/sml/test_data/pod_sequence.hpp"
 #include "dogen/sml/test_data/primitive_sequence.hpp"
+#include "dogen/sml/test_data/enumeration_sequence.hpp"
 
 namespace dogen {
 namespace sml {
@@ -54,6 +55,7 @@ public:
         std::unordered_map<qualified_name, package> packages;
         std::unordered_map<qualified_name, pod> pods;
         std::unordered_map<qualified_name, primitive> primitives;
+        std::unordered_map<qualified_name, enumeration> enumerations;
 
         std::list<std::string> external_package_path;
         external_package_path.push_back("external_package_path_0");
@@ -63,39 +65,66 @@ public:
         package_sequence pkg_seq;
         pod_sequence pod_seq;
         primitive_sequence prim_seq;
+        enumeration_sequence enum_seq;
 
         if (position == 0) {
             result.name("model_0");
             result.schema_name("model_schema_0");
-            const dogen::sml::qualified_name qname(qsec());
-            packages[qname] = pkg_seq();
-            pods[qname] = pod_seq();
-            primitives[qname] = prim_seq();
+
+            const auto pkg(pkg_seq());
+            packages[pkg.name()] = pkg;
+
+            const auto pod(pod_seq());
+            pods[pod.name()] = pod;
+
+            const auto prim(prim_seq());
+            primitives[prim.name()] = prim;
+
+            const auto en(enum_seq());
+            enumerations[en.name()] = en;
         } else if (position == 1){
             result.name("model_1");
             result.schema_name("model_schema_1");
-            qsec();
-            const dogen::sml::qualified_name qname(qsec());
+
             pkg_seq();
-            packages[qname] = pkg_seq();
+            const auto pkg(pkg_seq());
+            packages[pkg.name()] = pkg;
+
             pod_seq();
-            pods[qname] = pod_seq();
+            const auto pod(pod_seq());
+            pods[pod.name()] = pod;
+
             prim_seq();
-            primitives[qname] = prim_seq();
+            const auto prim(prim_seq());
+            primitives[prim.name()] = prim;
+
+            enum_seq();
+            const auto en(enum_seq());
+            enumerations[en.name()] = en;
         }
         else {
             result.name("model_2");
             result.schema_name("model_schema_2");
-            const dogen::sml::qualified_name qname(qsec());
             pkg_seq();
             pkg_seq();
-            packages[qname] = pkg_seq();
+            const auto pkg(pkg_seq());
+            packages[pkg.name()] = pkg;
+
             pod_seq();
             pod_seq();
-            pods[qname] = pod_seq();
+            const auto pod(pod_seq());
+            pods[pod.name()] = pod;
+
             prim_seq();
             prim_seq();
-            primitives[qname] = prim_seq();
+            const auto prim(prim_seq());
+            primitives[prim.name()] = prim;
+
+            enum_seq();
+            enum_seq();
+            const auto en(enum_seq());
+            enumerations[en.name()] = en;
+
         }
         result.packages(packages);
         result.pods(pods);

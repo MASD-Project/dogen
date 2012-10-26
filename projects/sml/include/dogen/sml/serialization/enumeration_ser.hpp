@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_SML_SERIALIZATION_MODEL_SER_HPP
-#define DOGEN_SML_SERIALIZATION_MODEL_SER_HPP
+#ifndef DOGEN_SML_SERIALIZATION_ENUMERATION_SER_HPP
+#define DOGEN_SML_SERIALIZATION_ENUMERATION_SER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -27,33 +27,25 @@
 
 #include <string>
 #include <boost/serialization/nvp.hpp>
-#include <boost/serialization/list.hpp>
-#include <boost/serialization/string.hpp>
-#include "dogen/utility/serialization/unordered_map.hpp"
-#include "dogen/sml/domain/model.hpp"
+#include <boost/serialization/vector.hpp>
+#include "dogen/sml/domain/enumeration.hpp"
 #include "dogen/sml/serialization/qualified_name_ser.hpp"
-#include "dogen/sml/serialization/package_ser.hpp"
-#include "dogen/sml/serialization/pod_ser.hpp"
-#include "dogen/sml/serialization/primitive_ser.hpp"
-#include "dogen/sml/serialization/enumeration_ser.hpp"
+#include "dogen/sml/serialization/enumerator_ser.hpp"
 
 namespace dogen {
 namespace sml {
 
-class model_serializer {
+class enumeration_serializer {
 public:
     template<typename Archive>
-    void serialize(Archive & ar,
-        dogen::sml::model& value,
+    void serialize(Archive & archive,
+        dogen::sml::enumeration& value,
         const unsigned int /*version*/) {
         using boost::serialization::make_nvp;
-        ar & make_nvp("name", value.name_);
-        ar & make_nvp("packages", value.packages_);
-        ar & make_nvp("pods", value.pods_);
-        ar & make_nvp("primitives", value.primitives_);
-        ar & make_nvp("enumerations", value.enumerations_);
-        ar & make_nvp("external_package_path", value.external_package_path_);
-        ar & make_nvp("schema_name", value.schema_name_);
+        archive & make_nvp("name", value.name_);
+        archive & make_nvp("generate", value.generate_);
+        archive & make_nvp("documentation", value.documentation_);
+        archive & make_nvp("enumerators", value.enumerators_);
     }
 };
 
@@ -64,9 +56,9 @@ namespace serialization {
 
 template<class Archive>
 inline void serialize(Archive & archive,
-    dogen::sml::model& value,
+    dogen::sml::enumeration& value,
     const unsigned int version) {
-    dogen::sml::model_serializer serializer;
+    dogen::sml::enumeration_serializer serializer;
     serializer.serialize<Archive>(archive, value, version);
 }
 

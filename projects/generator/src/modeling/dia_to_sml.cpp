@@ -34,6 +34,10 @@
 #include <boost/graph/depth_first_search.hpp>
 #include "dogen/dia/domain/composite.hpp"
 #include "dogen/dia/domain/attribute.hpp"
+#include "dogen/dia/domain/object_types.hpp"
+#include "dogen/dia/domain/stereotypes.hpp"
+#include "dogen/dia/io/object_types_io.hpp"
+#include "dogen/dia/io/stereotypes_io.hpp"
 #include "dogen/dia/utility/dia_utility.hpp"
 #include "dogen/dia/io/object_io.hpp"
 #include "dogen/dia/io/diagram_io.hpp"
@@ -57,6 +61,7 @@ const std::string dia_attributes("attributes");
 const std::string dia_uml_attribute("umlattribute");
 const std::string dia_string("string");
 const std::string dia_composite("composite");
+const std::string dia_stereotype("stereotype");
 
 const std::string hash_character("#");
 const std::string unexpected_number_of_connections(
@@ -88,6 +93,26 @@ dogen::dia::object_types parse_object_type(const std::string s) {
     try {
         using dogen::dia::utility::parse_object_type;
         r = parse_object_type(s);
+    } catch(const std::exception& e) {
+        std::ostringstream stream;
+        stream << error_parsing_object_type << "'" << s
+               << "'. Error: " << e.what();
+        BOOST_LOG_SEV(lg, error) << stream.str();
+        throw transformation_error(stream.str());
+    }
+    return r;
+}
+
+/**
+ * @brief Parses a string representing a stereotype into its enum
+ *
+ * @param s string with a stereotype
+ */
+dogen::dia::stereotypes parse_stereotype(const std::string s) {
+    dogen::dia::stereotypes r;
+    try {
+        using dogen::dia::utility::parse_stereotype;
+        r = parse_stereotype(s);
     } catch(const std::exception& e) {
         std::ostringstream stream;
         stream << error_parsing_object_type << "'" << s
@@ -398,6 +423,20 @@ void dia_dfs_visitor::process_dia_object(const dogen::dia::object& o) {
     object_types ot(parse_object_type(o.type()));
     if (ot == object_types::uml_class) {
         BOOST_LOG_SEV(lg, debug) << "Processing uml_class: " << o.id();
+
+        for (auto a : o.attributes()) {
+            if (a.name() == dia_stereotype) {
+                using dogen::dia::stereotypes;
+                const std::string v(transform_string_attribute(a));
+                if (!v.empty()) {
+                    const auto st(parse_stereotype(v));
+                    if (st == stereotypes::enumeration) {
+                        BOOST_LOG_SEV(lg, debug) << "Class is an enumeration.";
+                        return;
+                    }
+                }
+            }
+        }
         const auto p(transform_pod(o));
         state_->pods_.insert(p);
         state_->dia_id_to_qname_.insert(std::make_pair(o.id(), p.first));
@@ -559,8 +598,12 @@ sml::model dia_to_sml::transform() {
     for (const auto p : packages_by_id_)
         packages.insert(std::make_pair(p.second.name(), p.second));
 
+    // FIXME
+    std::unordered_map<dogen::sml::qualified_name, dogen::sml::enumeration>
+        enumerations;
+
     using sml::model;
-    return model(model_name_, packages, v.pods(), v.primitives(),
+    return model(model_name_, packages, v.pods(), v.primitives(), enumerations,
         v.external_package_path());
 }
 

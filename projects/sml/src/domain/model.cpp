@@ -26,6 +26,7 @@
 #include "dogen/sml/io/package_io.hpp"
 #include "dogen/sml/io/pod_io.hpp"
 #include "dogen/sml/io/primitive_io.hpp"
+#include "dogen/sml/io/enumeration_io.hpp"
 
 namespace dogen {
 namespace sml {
@@ -36,6 +37,7 @@ bool model::operator==(const model& rhs) const {
         packages_ == rhs.packages_ &&
         pods_ == rhs.pods_ &&
         primitives_ == rhs.primitives_ &&
+        enumerations_ == rhs.enumerations_ &&
         external_package_path_ == rhs.external_package_path_ &&
         schema_name_ == rhs.schema_name_;
 }
@@ -46,6 +48,7 @@ void model::to_stream(std::ostream& stream) const {
            << "\"packages\": " << packages_ << ","
            << "\"pods\": " << pods_ << ","
            << "\"primitives\": " << primitives_ << ","
+           << "\"enumerations\": " << enumerations_ << ","
            << "\"external_package_path\": " << external_package_path_ << ","
            << "\"schema_name\": \"" << schema_name_ << "\""
            << " }";
