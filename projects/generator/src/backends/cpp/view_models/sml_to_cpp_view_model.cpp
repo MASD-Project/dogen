@@ -205,6 +205,7 @@ void sml_dfs_visitor::process_sml_pod(const dogen::sml::pod& pod) {
     cvm.database_name(database_name(name));
     cvm.schema_name(state_->schema_name_);
     cvm.is_parent(pod.is_parent());
+    cvm.documentation(pod.documentation());
 
     std::list<property_view_model> props_vm;
     bool has_primitive_properties(false);
@@ -217,6 +218,7 @@ void sml_dfs_visitor::process_sml_pod(const dogen::sml::pod& pod) {
         std::string ns(join(ns_list, namespace_separator));
         property_view_model k(p.name());
         k.type(ns);
+        k.documentation(p.documentation());
 
         boost::replace_all(ns, "::", "_");
         boost::replace_all(ns, " ", "_");

@@ -36,6 +36,7 @@
    "/projects/prototype/include"
    "/projects/trivial_inheritance/include"
    "/projects/trivial_association/include"
+   "/projects/comments/include"
    "/projects/std_model/include"
    )
  :system-include-path

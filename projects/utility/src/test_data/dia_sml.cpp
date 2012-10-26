@@ -73,6 +73,7 @@ path input_all_primitives_dia("dia_sml/input/all_primitives.dia");
 path input_split_project_dia("dia_sml/input/split_project.dia");
 path input_trivial_inheritance_dia("dia_sml/input/trivial_inheritance.dia");
 path input_trivial_association_dia("dia_sml/input/trivial_association.dia");
+path input_comments_dia("dia_sml/input/comments.dia");
 
 path expected(
     "dia_sml/expected");
@@ -136,6 +137,10 @@ path expected_trivial_association_dia_xml(
     "dia_sml/expected/trivial_association.diaxml");
 path expected_trivial_association_sml_xml(
     "dia_sml/expected/trivial_association.smlxml");
+path expected_comments_dia_xml(
+    "dia_sml/expected/comments.diaxml");
+path expected_comments_sml_xml(
+    "dia_sml/expected/comments.smlxml");
 
 path actual(
     "dia_sml/actual");
@@ -197,6 +202,10 @@ path actual_trivial_association_dia_xml(
     "dia_sml/actual/trivial_association.diaxml");
 path actual_trivial_association_sml_xml(
     "dia_sml/actual/trivial_association.smlxml");
+path actual_comments_dia_xml(
+    "dia_sml/actual/comments.diaxml");
+path actual_comments_sml_xml(
+    "dia_sml/actual/comments.smlxml");
 
 }
 
@@ -338,6 +347,10 @@ path dia_sml::input_trivial_association_dia() {
     return validating_resolver::resolve(::input_trivial_association_dia);
 }
 
+path dia_sml::input_comments_dia() {
+    return validating_resolver::resolve(::input_comments_dia);
+}
+
 path dia_sml::input_split_project_dia() {
     return validating_resolver::resolve(::input_split_project_dia);
 }
@@ -469,6 +482,14 @@ path dia_sml::expected_trivial_inheritance_sml_xml() {
     return validating_resolver::resolve(::expected_trivial_inheritance_sml_xml);
 }
 
+path dia_sml::expected_comments_dia_xml() {
+    return resolver::resolve(::expected_comments_dia_xml);
+}
+
+path dia_sml::expected_comments_sml_xml() {
+    return resolver::resolve(::expected_comments_sml_xml);
+}
+
 path dia_sml::actual() {
     return validating_resolver::resolve(::actual);
 }
@@ -580,6 +601,14 @@ path dia_sml::actual_all_primitives_dia_xml() {
 
 path dia_sml::actual_all_primitives_sml_xml() {
     return resolver::resolve(::actual_all_primitives_sml_xml);
+}
+
+path dia_sml::actual_comments_dia_xml() {
+    return resolver::resolve(::actual_comments_sml_xml);
+}
+
+path dia_sml::actual_comments_sml_xml() {
+    return resolver::resolve(::actual_comments_sml_xml);
 }
 
 } } }

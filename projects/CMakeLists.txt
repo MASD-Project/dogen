@@ -169,6 +169,7 @@ include_directories(
     ${CMAKE_SOURCE_DIR}/projects/trivial_inheritance/include
     ${CMAKE_SOURCE_DIR}/projects/trivial_association/include
     ${CMAKE_SOURCE_DIR}/projects/std_model/include
+    ${CMAKE_SOURCE_DIR}/projects/comments/include
     )
 
 #
@@ -210,6 +211,7 @@ add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/split_project/source/split_project)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/trivial_inheritance/src)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/trivial_association/src)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/std_model/src)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/comments/src)
 
 # global targets for codegen
 add_custom_target(rebase_codegen)

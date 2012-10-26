@@ -62,6 +62,7 @@ const std::string dia_uml_attribute("umlattribute");
 const std::string dia_string("string");
 const std::string dia_composite("composite");
 const std::string dia_stereotype("stereotype");
+const std::string dia_documentation("comment");
 
 const std::string hash_character("#");
 const std::string unexpected_number_of_connections(
@@ -328,6 +329,9 @@ transform_property(const dogen::dia::composite& uml_attribute) const {
         else if (a->name() == dia_type) {
             const std::string s(transform_string_attribute(*a));
             property.type_name(identifier_parser::parse_qualified_name(s));
+        } else if (a->name() == dia_documentation) {
+            const std::string doc(transform_string_attribute(*a));
+            property.documentation(doc);
         } else {
             BOOST_LOG_SEV(lg, warn) << "Ignoring unexpected attribute: "
                                     << a->name();
@@ -362,6 +366,11 @@ dia_dfs_visitor::transform_pod(const dogen::dia::object& o) const {
             using dogen::sml::meta_types;
             pod.name(transform_qualified_name(attribute, meta_types::pod,
                     pkg_id));
+        }
+
+        if (attribute.name() == dia_documentation) {
+            const std::string doc(transform_string_attribute(attribute));
+            pod.documentation(doc);
         }
 
         if (attribute.name() == dia_attributes) {

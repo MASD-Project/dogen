@@ -167,6 +167,14 @@ public:
     void is_parent(bool value) { is_parent_ = value; }
     /**@}*/
 
+    /**
+     * @brief Documentation for the property
+     */
+    /**@{*/
+    std::string documentation() const { return documentation_; }
+    void documentation(const std::string& v) { documentation_ = v; }
+    /**@}*/
+
 private:
     std::list<std::string> namespaces_;
     std::list<property_view_model> properties_;
@@ -178,6 +186,7 @@ private:
     std::string database_name_;
     std::string schema_name_;
     bool is_parent_;
+    std::string documentation_;
 };
 
 } } } } }

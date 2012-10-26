@@ -75,6 +75,7 @@ public:
     static boost::filesystem::path input_split_project_dia();
     static boost::filesystem::path input_trivial_inheritance_dia();
     static boost::filesystem::path input_trivial_association_dia();
+    static boost::filesystem::path input_comments_dia();
 
     static boost::filesystem::path expected();
     static boost::filesystem::path expected_class_in_a_package_dia_xml();
@@ -104,6 +105,8 @@ public:
     static boost::filesystem::path expected_all_primitives_sml_xml();
     static boost::filesystem::path expected_trivial_inheritance_dia_xml();
     static boost::filesystem::path expected_trivial_inheritance_sml_xml();
+    static boost::filesystem::path expected_comments_dia_xml();
+    static boost::filesystem::path expected_comments_sml_xml();
 
     static boost::filesystem::path actual();
     static boost::filesystem::path actual_class_in_a_package_dia_xml();
@@ -133,6 +136,10 @@ public:
     static boost::filesystem::path actual_all_primitives_sml_xml();
     static boost::filesystem::path actual_trivial_inheritance_dia_xml();
     static boost::filesystem::path actual_trivial_inheritance_sml_xml();
+    static boost::filesystem::path actual_comments_dia_xml();
+    static boost::filesystem::path actual_comments_sml_xml();
+
+
 };
 
 } } }

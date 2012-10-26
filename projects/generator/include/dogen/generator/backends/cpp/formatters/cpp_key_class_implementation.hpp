@@ -25,6 +25,7 @@
 #pragma once
 #endif
 
+#include "dogen/generator/backends/cpp/view_models/class_view_model.hpp"
 #include "dogen/generator/backends/cpp/formatters/cpp_class_implementation.hpp"
 
 namespace dogen {

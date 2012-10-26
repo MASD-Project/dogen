@@ -112,6 +112,14 @@ public:
     void is_int_like(bool value) { is_int_like_ = value; }
     /**@}*/
 
+    /**
+     * @brief Documentation for the property
+     */
+    /**@{*/
+    std::string documentation() const { return documentation_; }
+    void documentation(const std::string& v) { documentation_ = v; }
+    /**@}*/
+
 private:
     std::string name_;
     std::string type_;
@@ -120,6 +128,7 @@ private:
     bool is_string_like_;
     bool is_char_like_;
     bool is_int_like_;
+    std::string documentation_;
 };
 
 } } } } }

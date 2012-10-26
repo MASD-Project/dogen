@@ -20,6 +20,7 @@
  */
 #include <iostream>
 #include <ostream>
+#include "dogen/generator/backends/cpp/formatters/cpp_doxygen_comments.hpp"
 #include "dogen/generator/backends/cpp/formatters/cpp_qualified_name.hpp"
 #include "dogen/generator/backends/cpp/formatters/cpp_class_declaration.hpp"
 
@@ -35,6 +36,8 @@ cpp_class_declaration(std::ostream& stream, const bool disable_serialization)
       disable_serialization_(disable_serialization) { }
 
 void cpp_class_declaration::open_class(const class_view_model& vm) {
+    cpp_doxygen_comments dc(stream_, indenter_);
+    dc.format(vm.documentation());
     stream_ << indenter_ << "class " << vm.name();
 
     if (!vm.is_parent())
@@ -177,7 +180,10 @@ void cpp_class_declaration::getters_and_setters(const class_view_model& vm) {
         return;
 
     utility_.public_access_specifier();
+    cpp_doxygen_comments dc(stream_, indenter_);
     for (const auto p : vm.properties()) {
+        dc.format(p.documentation());
+        dc.format_start_block(p.documentation());
         stream_ << indenter_ << p.type() << " " << p.name()
                 << "() const ";
         utility_.open_scope();
@@ -203,6 +209,7 @@ void cpp_class_declaration::getters_and_setters(const class_view_model& vm) {
                     << " = v;" << std::endl;
         }
         utility_.close_scope();
+        dc.format_end_block(p.documentation());
         utility_.blank_line();
     }
 }
