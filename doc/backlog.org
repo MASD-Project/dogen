@@ -298,14 +298,6 @@ replace the manual checks on all specs that have them. Example usage:
         );
 #+end_example
 
-*** Investigate if boost json compiles                                :story:
-
-We must make sure that the json we're hand-crafting is actually
-standards compliant. This is because we use standard json tools to
-parse log files. See [[file:../cpp_coding_standards.org][coding standards]] for links to C++ JSON libraries.
-
-http://www.codeproject.com/Articles/20027/JSON-Spirit-A-C-JSON-Parser-Generator-Implemented
-
 *** Licence year is hard-coded to 2012
 
 At present the licence formatter has an hard-coded year of 2012. It
