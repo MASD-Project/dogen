@@ -31,6 +31,7 @@
 #include <boost/optional.hpp>
 #include <boost/filesystem/path.hpp>
 #include "dogen/sml/domain/category_types.hpp"
+#include "dogen/generator/backends/cpp/view_models/enumeration_view_model.hpp"
 #include "dogen/generator/backends/cpp/view_models/class_view_model.hpp"
 #include "dogen/generator/backends/cpp/cpp_facet_types.hpp"
 #include "dogen/generator/backends/cpp/cpp_file_types.hpp"
@@ -84,6 +85,13 @@ public:
     }
     boost::optional<class_view_model> class_vm() const { return class_vm_; }
 
+    void enumeration_vm(boost::optional<enumeration_view_model> value) {
+        enumeration_vm_ = value;
+    }
+    boost::optional<enumeration_view_model> enumeration_vm() const {
+        return enumeration_vm_;
+    }
+
     void header_guard(std::string value) { header_guard_ = value; }
     std::string header_guard() const { return header_guard_; }
 
@@ -110,6 +118,7 @@ private:
     cpp_aspect_types aspect_type_;
     sml::category_types category_type_;
     boost::optional<class_view_model> class_vm_;
+    boost::optional<enumeration_view_model> enumeration_vm_;
     std::string header_guard_;
     std::list<std::string> system_includes_;
     std::list<std::string> user_includes_;

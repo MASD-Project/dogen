@@ -249,6 +249,17 @@ private:
     transform_property(const dogen::dia::composite& uml_attribute) const;
 
     /**
+     * @brief Converts a Dia composite storing the UML attribute into
+     * a SML enumerator.
+     *
+     * @param uml_attribute the Dia UML attribute
+     * @param position used to determine the enumerator's value
+     */
+    dogen::sml::enumerator
+    transform_enumerator(const dogen::dia::composite& uml_attribute,
+        const unsigned int position) const;
+
+    /**
      * @brief Converts a class in Dia format into a pod in SML
      * format.
      *
@@ -256,6 +267,16 @@ private:
      */
     std::pair<dogen::sml::qualified_name, dogen::sml::pod>
     transform_pod(const dogen::dia::object& object) const;
+
+    /**
+     * @brief Converts a UML class in dia format to an enumeration in
+     * SML.
+     * @pre the class must have a stereotype of enumeration and
+     * conform to the enumeration layout.
+     * @param object Dia object which contains a UML class.
+     */
+    std::pair<dogen::sml::qualified_name, dogen::sml::enumeration>
+    transform_enumeration(const dogen::dia::object& o) const;
 
     /**
      * @brief Processes any type of Dia object.
@@ -351,6 +372,30 @@ transform_property(const dogen::dia::composite& uml_attribute) const {
     return property;
 }
 
+dogen::sml::enumerator dia_dfs_visitor::
+transform_enumerator(const dogen::dia::composite& uml_attribute,
+    const unsigned int position) const {
+    dogen::sml::enumerator r;
+    for (const auto a : uml_attribute.value()) {
+        if (a->name() == dia_name) {
+            r.name(transform_string_attribute(*a));
+        } else if (a->name() == dia_documentation) {
+            const std::string doc(transform_string_attribute(*a));
+            r.documentation(doc);
+        } else {
+            BOOST_LOG_SEV(lg, warn) << "Ignoring unexpected attribute: "
+                                    << a->name();
+        }
+    }
+    r.value(boost::lexical_cast<std::string>(position));
+    if (r.name().empty()) {
+        BOOST_LOG_SEV(lg, error) << "Could not find a name attribute.";
+        throw transformation_error(name_attribute_expected);
+    }
+
+    return r;
+}
+
 std::pair<dogen::sml::qualified_name, dogen::sml::pod>
 dia_dfs_visitor::transform_pod(const dogen::dia::object& o) const {
     dogen::sml::pod pod;
@@ -422,6 +467,53 @@ dia_dfs_visitor::transform_pod(const dogen::dia::object& o) const {
     pod.is_parent(j != state_->parent_ids_.end());
 
     return std::make_pair(pod.name(), pod);
+}
+
+std::pair<dogen::sml::qualified_name, dogen::sml::enumeration>
+dia_dfs_visitor::transform_enumeration(const dogen::dia::object& o) const {
+    dogen::sml::enumeration r;
+
+    r.generate(state_->is_target_);
+    for (auto a : o.attributes()) {
+        BOOST_LOG_SEV(lg, debug) << "Found attribute: " << a.name();
+        if (a.name() == dia_name) {
+            const std::string pkg_id(o.child_node() ?
+                o.child_node()->parent() : empty);
+            using dogen::sml::meta_types;
+            r.name(transform_qualified_name(a, meta_types::enumeration,
+                    pkg_id));
+        }
+
+        if (a.name() == dia_attributes) {
+            const auto values(a.values());
+
+            if (values.empty()) {
+                BOOST_LOG_SEV(lg, debug) << "Attribute is empty.";
+                continue;
+            }
+
+            std::vector<dogen::sml::enumerator> enumerators;
+            unsigned int pos(0);
+            for (auto v : values) {
+                using dogen::dia::composite;
+                const auto c(attribute_value<composite>(v, dia_composite));
+
+                if (c.type() != dia_uml_attribute) {
+                    BOOST_LOG_SEV(lg, error) << "Expected composite type "
+                                             << " to be "
+                                             << dia_uml_attribute
+                                             << "but was " << c.type();
+                    throw transformation_error(uml_attribute_expected);
+                }
+                BOOST_LOG_SEV(lg, debug) << "Found composite of type "
+                                         << c.type();
+                enumerators.push_back(transform_enumerator(c, pos++));
+            }
+            r.enumerators(enumerators);
+        }
+
+    }
+    return std::make_pair(r.name(), r);
 }
 
 void dia_dfs_visitor::process_dia_object(const dogen::dia::object& o) {

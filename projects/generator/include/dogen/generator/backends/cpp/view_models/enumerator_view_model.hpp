@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_SML_DOMAIN_ENUMERATOR_HPP
-#define DOGEN_SML_DOMAIN_ENUMERATOR_HPP
+#ifndef DOGEN_GENERATOR_BACKENDS_CPP_VIEW_MODELS_ENUMERATOR_VIEW_MODEL_HPP
+#define DOGEN_GENERATOR_BACKENDS_CPP_VIEW_MODELS_ENUMERATOR_VIEW_MODEL_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -28,29 +28,25 @@
 #include <string>
 
 namespace dogen {
-namespace sml {
+namespace generator {
+namespace backends {
+namespace cpp {
+namespace view_models {
 
-class enumerator_serializer;
-
-class enumerator {
+class enumerator_view_model {
 public:
-    enumerator() = default;
-    enumerator(const enumerator&) = default;
-    ~enumerator() = default;
-    enumerator(enumerator&&) = default;
-    enumerator& operator=(const enumerator&) = default;
-
-private:
-    friend class enumerator_serializer;
+    enumerator_view_model() = default;
+    enumerator_view_model(const enumerator_view_model&) = default;
+    ~enumerator_view_model() = default;
+    enumerator_view_model(enumerator_view_model&&) = default;
+    enumerator_view_model& operator=(const enumerator_view_model&) = default;
 
 public:
-    enumerator(const std::string& name, const std::string& v,
-        const std::string& documentation)
-        : name_(name), value_(v), documentation_(documentation) { }
+    explicit enumerator_view_model(const std::string& name) : name_(name) {}
 
 public:
     /**
-     * @brief Qualified name for the type.
+     * @brief Name of the enumerator.
      */
     /**@{*/
     std::string name() const { return name_; }
@@ -58,31 +54,20 @@ public:
     /**@}*/
 
     /**
-     * @brief Value for the enumerator. It must be an instance of the
-     * type defined in the enumeration.
+     * @brief Value of the enumerator.
      */
     /**@{*/
     std::string value() const { return value_; }
-    void value(const std::string& v) { value_ = v; }
+    void type(const std::string& v) { value_ = v; }
     /**@}*/
 
     /**
-     * @brief Doxygen documentation for the type.
+     * @brief Documentation for the property
      */
     /**@{*/
     std::string documentation() const { return documentation_; }
-    void documentation(const std::string& value) { documentation_ = value; }
+    void documentation(const std::string& v) { documentation_ = v; }
     /**@}*/
-
-public:
-    void to_stream(std::ostream& stream) const;
-
-public:
-    bool operator==(const enumerator& rhs) const;
-
-    bool operator!=(const enumerator& rhs) const {
-        return(!this->operator==(rhs));
-    }
 
 private:
     std::string name_;
@@ -90,6 +75,6 @@ private:
     std::string documentation_;
 };
 
-} }
+} } } } }
 
 #endif
