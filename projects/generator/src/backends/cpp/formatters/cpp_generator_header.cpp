@@ -32,7 +32,9 @@
 namespace {
 
 const std::string missing_class_view_model(
-    "File view model must contain a class view model");
+    "Meta type is pod but class view model is empty");
+const std::string missing_enumeration_view_model(
+    "Meta type is enumeration but enumeration view model is empty");
 
 }
 
@@ -96,10 +98,6 @@ void generator_header::generator_class(const class_view_model& vm) {
 }
 
 void generator_header::format(const file_view_model& vm) {
-    boost::optional<view_models::class_view_model> o(vm.class_vm());
-    if (!o)
-        throw generation_failure(missing_class_view_model);
-
     licence licence(stream_);
     licence.format();
 
@@ -110,18 +108,31 @@ void generator_header::format(const file_view_model& vm) {
     cpp_includes includes(stream_);
     includes.format(vm);
 
-    {
-        const view_models::class_view_model& cvm(*o);
-        std::list<std::string> namespaces(cvm.namespaces());
-        namespace_helper ns_helper(stream_, namespaces);
-        utility_.blank_line();
+    if (vm.meta_type() == sml::meta_types::enumeration) {
+        const auto o(vm.enumeration_vm());
+        if (!o)
+            throw generation_failure(missing_enumeration_view_model);
 
-        typedef std::list<std::string> list;
-        utility_.blank_line();
-        generator_class(cvm);
+        const auto evm(*o);
+        stream_ << "fixme: " << evm.name() << std::endl;
+    } else if (vm.meta_type() == sml::meta_types::pod) {
+        boost::optional<view_models::class_view_model> o(vm.class_vm());
+        if (!o)
+            throw generation_failure(missing_class_view_model);
+
+        {
+            const view_models::class_view_model& cvm(*o);
+            std::list<std::string> namespaces(cvm.namespaces());
+            namespace_helper ns_helper(stream_, namespaces);
+            utility_.blank_line();
+
+            typedef std::list<std::string> list;
+            utility_.blank_line();
+            generator_class(cvm);
+            utility_.blank_line(2);
+        }
         utility_.blank_line(2);
     }
-    utility_.blank_line(2);
     guards.format_end();
 }
 

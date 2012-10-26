@@ -36,7 +36,9 @@ const std::string int_type("int");
 const std::string bool_type("bool");
 const std::string string_type("std::string");
 const std::string missing_class_view_model(
-    "File view model must contain a class view model");
+    "Meta type is pod but class view model is empty");
+const std::string missing_enumeration_view_model(
+    "Meta type is enumeration but enumeration view model is empty");
 
 }
 
@@ -277,35 +279,44 @@ void generator_implementation::default_constructor(const class_view_model& vm) {
 }
 
 void generator_implementation::format(const file_view_model& vm) {
-    boost::optional<view_models::class_view_model> o(vm.class_vm());
-    if (!o)
-        throw generation_failure(missing_class_view_model);
-
     licence licence(stream_);
     licence.format();
 
     cpp_includes includes(stream_);
     includes.format(vm);
 
-    const class_view_model& cvm(*o);
-    create_helper_methods(cvm);
-    utility_.blank_line(2);
+    if (vm.meta_type() == sml::meta_types::enumeration) {
+        const auto o(vm.enumeration_vm());
+        if (!o)
+            throw generation_failure(missing_enumeration_view_model);
 
-    {
-        std::list<std::string> ns(cvm.namespaces());
-        namespace_helper ns_helper(stream_, ns);
+        const auto evm(*o);
+        stream_ << "fixme: " << evm.name() << std::endl;
+    } else if (vm.meta_type() == sml::meta_types::pod) {
+        boost::optional<view_models::class_view_model> o(vm.class_vm());
+        if (!o)
+            throw generation_failure(missing_class_view_model);
 
-        utility_.blank_line();
-        default_constructor(cvm);
-        utility_.blank_line();
-        populate_method(cvm);
-        utility_.blank_line();
-        create_method(cvm);
-        utility_.blank_line();
-        function_operator(cvm);
+        const class_view_model& cvm(*o);
+        create_helper_methods(cvm);
+        utility_.blank_line(2);
+
+        {
+            std::list<std::string> ns(cvm.namespaces());
+            namespace_helper ns_helper(stream_, ns);
+
+            utility_.blank_line();
+            default_constructor(cvm);
+            utility_.blank_line();
+            populate_method(cvm);
+            utility_.blank_line();
+            create_method(cvm);
+            utility_.blank_line();
+            function_operator(cvm);
+            utility_.blank_line();
+        }
         utility_.blank_line();
     }
-    utility_.blank_line();
 }
 
 } } } } }

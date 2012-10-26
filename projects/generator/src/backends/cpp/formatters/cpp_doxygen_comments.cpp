@@ -59,6 +59,15 @@ void cpp_doxygen_comments::format(const std::string& documentation) {
     stream_ << indenter_ << " */" << std::endl;
 }
 
+void cpp_doxygen_comments::format_inline(const std::string& documentation) {
+    std::string trimmed(boost::algorithm::trim_copy(documentation));
+    if (trimmed.empty())
+        return;
+
+    const auto s(boost::algorithm::trim_right_copy(documentation));
+    stream_ << " ///< " << s;
+}
+
 void cpp_doxygen_comments::
 format_start_block(const std::string& documentation) {
     std::string trimmed(boost::algorithm::trim_copy(documentation));

@@ -27,15 +27,7 @@ namespace {
 
 // FIXME: until we add support to indenter.
 const std::string special_indent("       ");
-const std::string type("__type__");
-const std::string inserter("<< ");
-const std::string space_inserter(" << ");
-const std::string open_bracket(" {");
-const std::string close_bracket(" }");
-const std::string colon(": ");
-const std::string semi_colon(";");
 const std::string space(" ");
-const std::string comma(",");
 
 }
 

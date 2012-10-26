@@ -74,7 +74,7 @@ private:
     void log_keys() const;
     void log_includers() const;
     void log_generating_file(cpp_facet_types facet, cpp_aspect_types aspect,
-        cpp_file_types file, std::string name) const;
+        cpp_file_types file, std::string name, sml::meta_types mt) const;
 
 private:
     /**

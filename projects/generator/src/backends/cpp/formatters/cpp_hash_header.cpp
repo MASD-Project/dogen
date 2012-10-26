@@ -34,7 +34,9 @@ namespace {
 const std::string std_ns("std");
 
 const std::string missing_class_view_model(
-    "File view model must contain a class view model");
+    "Meta type is pod but class view model is empty");
+const std::string missing_enumeration_view_model(
+    "Meta type is enumeration but enumeration view model is empty");
 
 }
 
@@ -105,10 +107,6 @@ void hash_header::hash_class(const class_view_model& vm) {
 }
 
 void hash_header::format(const file_view_model& vm) {
-    boost::optional<view_models::class_view_model> o(vm.class_vm());
-    if (!o)
-        throw generation_failure(missing_class_view_model);
-
     licence licence(stream_);
     licence.format();
 
@@ -119,26 +117,39 @@ void hash_header::format(const file_view_model& vm) {
     cpp_includes includes(stream_);
     includes.format(vm);
 
-    const view_models::class_view_model& cvm(*o);
-    {
-        namespace_helper nsh(stream_, cvm.namespaces());
-        utility_.blank_line();
-        hash_helper_class(cvm);
+    if (vm.meta_type() == sml::meta_types::enumeration) {
+        const auto o(vm.enumeration_vm());
+        if (!o)
+            throw generation_failure(missing_enumeration_view_model);
+
+        const auto evm(*o);
+        stream_ << "fixme: " << evm.name() << std::endl;
+    } else if (vm.meta_type() == sml::meta_types::pod) {
+
+        boost::optional<view_models::class_view_model> o(vm.class_vm());
+        if (!o)
+            throw generation_failure(missing_class_view_model);
+
+        const view_models::class_view_model& cvm(*o);
+        {
+            namespace_helper nsh(stream_, cvm.namespaces());
+            utility_.blank_line();
+            hash_helper_class(cvm);
+            utility_.blank_line();
+        }
+
+        utility_.blank_line(2);
+        {
+            std::list<std::string> namespaces;
+            namespaces.push_back(std_ns);
+            namespace_helper nsh(stream_, namespaces);
+
+            utility_.blank_line();
+            hash_class(cvm);
+            utility_.blank_line();
+        }
         utility_.blank_line();
     }
-
-    utility_.blank_line(2);
-    {
-        std::list<std::string> namespaces;
-        namespaces.push_back(std_ns);
-        namespace_helper nsh(stream_, namespaces);
-
-        utility_.blank_line();
-        hash_class(cvm);
-        utility_.blank_line();
-    }
-
-    utility_.blank_line();
     guards.format_end();
 }
 

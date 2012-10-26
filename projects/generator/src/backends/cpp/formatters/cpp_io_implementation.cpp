@@ -36,7 +36,9 @@ namespace {
 const std::string ostream("ostream");
 
 const std::string missing_class_view_model(
-    "File view model must contain a class view model");
+    "Meta type is pod but class view model is empty");
+const std::string missing_enumeration_view_model(
+    "Meta type is enumeration but enumeration view model is empty");
 
 }
 
@@ -56,37 +58,46 @@ file_formatter::shared_ptr io_implementation::create(std::ostream& stream) {
 }
 
 void io_implementation::format(const file_view_model& vm) {
-    boost::optional<view_models::class_view_model> o(vm.class_vm());
-    if (!o)
-        throw generation_failure(missing_class_view_model);
-
     licence licence(stream_);
     licence.format();
 
     cpp_includes includes(stream_);
     includes.format(vm);
 
-    const view_models::class_view_model& cvm(*o);
-    namespace_helper ns_helper(stream_, cvm.namespaces());
-    utility_.blank_line();
+    if (vm.meta_type() == sml::meta_types::enumeration) {
+        const auto o(vm.enumeration_vm());
+        if (!o)
+            throw generation_failure(missing_enumeration_view_model);
 
-    stream_ << "std::ostream& operator<<(std::ostream& s, ";
-    {
-        cpp_positive_indenter_scope s(indenter_);
-        stream_ << "const " << cvm.name() << "& v) ";
-        utility_.open_scope();
+        const auto evm(*o);
+        stream_ << "fixme: " << evm.name() << std::endl;
+    } else if (vm.meta_type() == sml::meta_types::pod) {
+        boost::optional<view_models::class_view_model> o(vm.class_vm());
+        if (!o)
+            throw generation_failure(missing_class_view_model);
 
-        if (cvm.is_parent() || !cvm.parents().empty()) {
-            stream_ << indenter_ << "v.to_stream(s);" << std::endl
-                    << indenter_ << "return(s);" << std::endl;
-        } else {
-            const bool inside_class(false);
-            cpp_inserter_implementation i(stream_, indenter_, inside_class);
-            i.format(cvm);
+        const view_models::class_view_model& cvm(*o);
+        namespace_helper ns_helper(stream_, cvm.namespaces());
+        utility_.blank_line();
+
+        stream_ << "std::ostream& operator<<(std::ostream& s, ";
+        {
+            cpp_positive_indenter_scope s(indenter_);
+            stream_ << "const " << cvm.name() << "& v) ";
+            utility_.open_scope();
+
+            if (cvm.is_parent() || !cvm.parents().empty()) {
+                stream_ << indenter_ << "v.to_stream(s);" << std::endl
+                        << indenter_ << "return(s);" << std::endl;
+            } else {
+                const bool inside_class(false);
+                cpp_inserter_implementation i(stream_, indenter_, inside_class);
+                i.format(cvm);
+            }
         }
+        utility_.close_scope();
+        utility_.blank_line();
     }
-    utility_.close_scope();
-    utility_.blank_line();
 }
 
 } } } } }

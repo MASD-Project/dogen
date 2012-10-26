@@ -43,7 +43,9 @@ const std::string erase_name("erase");
 const std::string erase_id_name("erase_id");
 const std::string name_suffix("_data_exchanger");
 const std::string missing_class_view_model(
-    "File view model must contain a class view model");
+    "Meta type is pod but class view model is empty");
+const std::string missing_enumeration_view_model(
+    "Meta type is enumeration but enumeration view model is empty");
 
 }
 
@@ -195,28 +197,37 @@ void database_implementation::erase(const class_view_model&) {
 }
 
 void database_implementation::format(const file_view_model& vm) {
-    boost::optional<view_models::class_view_model> o(vm.class_vm());
-    if (!o)
-        throw generation_failure(missing_class_view_model);
-
     licence licence(stream_);
     licence.format();
 
     cpp_includes includes(stream_);
     includes.format(vm);
 
-    const view_models::class_view_model& cvm(*o);
-    anonymous_namespace(cvm);
-    utility_.blank_line(2);
+    if (vm.meta_type() == sml::meta_types::enumeration) {
+        const auto o(vm.enumeration_vm());
+        if (!o)
+            throw generation_failure(missing_enumeration_view_model);
 
-    {
-        namespace_helper ns_helper(stream_, cvm.namespaces());
-        utility_.blank_line();
+        const auto evm(*o);
+        stream_ << "fixme: " << evm.name() << std::endl;
+    } else if (vm.meta_type() == sml::meta_types::pod) {
+        boost::optional<view_models::class_view_model> o(vm.class_vm());
+        if (!o)
+            throw generation_failure(missing_class_view_model);
 
-        format_sql(cvm);
-        utility_.blank_line();
-
+        const view_models::class_view_model& cvm(*o);
+        anonymous_namespace(cvm);
         utility_.blank_line(2);
+
+        {
+            namespace_helper ns_helper(stream_, cvm.namespaces());
+            utility_.blank_line();
+
+            format_sql(cvm);
+            utility_.blank_line();
+
+            utility_.blank_line(2);
+        }
     }
     utility_.blank_line();
 }

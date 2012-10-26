@@ -30,11 +30,13 @@
 #include <utility>
 #include <boost/optional.hpp>
 #include <boost/filesystem/path.hpp>
+#include "dogen/sml/domain/meta_types.hpp"
 #include "dogen/sml/domain/category_types.hpp"
 #include "dogen/generator/backends/cpp/view_models/enumeration_view_model.hpp"
 #include "dogen/generator/backends/cpp/view_models/class_view_model.hpp"
 #include "dogen/generator/backends/cpp/cpp_facet_types.hpp"
 #include "dogen/generator/backends/cpp/cpp_file_types.hpp"
+#include "dogen/generator/backends/cpp/cpp_aspect_types.hpp"
 #include "dogen/generator/backends/cpp/cpp_aspect_types.hpp"
 
 namespace dogen {
@@ -61,7 +63,9 @@ public:
     file_type_(std::move(o.file_type_)),
     aspect_type_(std::move(o.aspect_type_)),
     category_type_(std::move(o.category_type_)),
+    meta_type_(std::move(o.meta_type_)),
     class_vm_(std::move(o.class_vm_)),
+    enumeration_vm_(std::move(o.enumeration_vm_)),
     header_guard_(std::move(o.header_guard_)),
     system_includes_(std::move(o.system_includes_)),
     user_includes_(std::move(o.user_includes_)),
@@ -79,6 +83,9 @@ public:
 
     void category_type(sml::category_types value) { category_type_ = value; }
     sml::category_types category_type() const { return category_type_; }
+
+    void meta_type(sml::meta_types value) { meta_type_ = value; }
+    sml::meta_types meta_type() const { return meta_type_; }
 
     void class_vm(boost::optional<class_view_model> value) {
         class_vm_ = value;
@@ -117,6 +124,7 @@ private:
     cpp_file_types file_type_;
     cpp_aspect_types aspect_type_;
     sml::category_types category_type_;
+    sml::meta_types meta_type_;
     boost::optional<class_view_model> class_vm_;
     boost::optional<enumeration_view_model> enumeration_vm_;
     std::string header_guard_;

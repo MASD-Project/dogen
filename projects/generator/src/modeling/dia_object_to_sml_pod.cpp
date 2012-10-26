@@ -105,26 +105,6 @@ dogen::dia::object_types parse_object_type(const std::string s) {
     return r;
 }
 
-/**
- * @brief Parses a string representing a stereotype into its enum
- *
- * @param s string with a stereotype
- */
-dogen::dia::stereotypes parse_stereotype(const std::string s) {
-    dogen::dia::stereotypes r;
-    try {
-        using dogen::dia::utility::parse_stereotype;
-        r = parse_stereotype(s);
-    } catch(const std::exception& e) {
-        std::ostringstream stream;
-        stream << error_parsing_object_type << "'" << s
-               << "'. Error: " << e.what();
-        BOOST_LOG_SEV(lg, error) << stream.str();
-        throw transformation_error(stream.str());
-    }
-    return r;
-}
-
 class dia_dfs_visitor : public boost::default_dfs_visitor {
 private:
     struct visit_state {

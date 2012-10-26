@@ -35,7 +35,9 @@ namespace {
 const std::string std_ns("std");
 
 const std::string missing_class_view_model(
-    "File view model must contain a class view model");
+    "Meta type is pod but class view model is empty");
+const std::string missing_enumeration_view_model(
+    "Meta type is enumeration but enumeration view model is empty");
 
 }
 
@@ -110,33 +112,40 @@ void hash_implementation::hasher_hash_method(const class_view_model& vm) {
 }
 
 void hash_implementation::format(const file_view_model& vm) {
-    boost::optional<view_models::class_view_model> o(vm.class_vm());
-    if (!o)
-        throw generation_failure(missing_class_view_model);
-
     licence licence(stream_);
     licence.format();
 
     cpp_includes includes(stream_);
     includes.format(vm);
 
-    {
-        namespace_helper nsh(stream_, std::list<std::string> { });
-        utility_.blank_line();
-        combine_function();
+    if (vm.meta_type() == sml::meta_types::enumeration) {
+        const auto o(vm.enumeration_vm());
+        if (!o)
+            throw generation_failure(missing_enumeration_view_model);
+
+        const auto evm(*o);
+        stream_ << "fixme: " << evm.name() << std::endl;
+    } else if (vm.meta_type() == sml::meta_types::pod) {
+        boost::optional<view_models::class_view_model> o(vm.class_vm());
+        if (!o)
+            throw generation_failure(missing_class_view_model);
+        {
+            namespace_helper nsh(stream_, std::list<std::string> { });
+            utility_.blank_line();
+            combine_function();
+            utility_.blank_line();
+        }
+        utility_.blank_line(2);
+        {
+            const class_view_model& cvm(*o);
+            namespace_helper ns_helper(stream_, cvm.namespaces());
+            utility_.blank_line();
+
+            hasher_hash_method(cvm);
+            utility_.blank_line();
+        }
         utility_.blank_line();
     }
-    utility_.blank_line(2);
-
-    {
-        const class_view_model& cvm(*o);
-        namespace_helper ns_helper(stream_, cvm.namespaces());
-        utility_.blank_line();
-
-        hasher_hash_method(cvm);
-        utility_.blank_line();
-    }
-    utility_.blank_line();
 }
 
 } } } } }

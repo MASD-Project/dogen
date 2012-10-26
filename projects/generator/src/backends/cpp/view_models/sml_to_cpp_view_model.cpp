@@ -278,14 +278,14 @@ void sml_to_cpp_view_model::log_includers() const {
 
 void sml_to_cpp_view_model::
 log_generating_file(cpp_facet_types facet, cpp_aspect_types aspect,
-    cpp_file_types ft, std::string name) const {
+    cpp_file_types ft, std::string name, sml::meta_types mt) const {
     BOOST_LOG_SEV(lg, debug) << "Generating file view model. "
                              << "facet type: " << facet
                              << " aspect type: " << aspect
                              << " file type: " << ft
+                             << " meta type: " << mt
                              << " name: " << name;
 }
-
 
 void sml_to_cpp_view_model::log_started() const {
     BOOST_LOG_SEV(lg, info) << "Started transforming.";
@@ -355,6 +355,7 @@ transform_file(cpp_facet_types ft, cpp_file_types flt, cpp_aspect_types at,
 
     file_view_model r(create_file(ft, flt, at, name));
     r.category_type(p.category_type());
+    r.meta_type(p.name().meta_type());
 
     const auto i(qname_to_class_.find(name));
     if (i == qname_to_class_.end()) {
@@ -379,6 +380,7 @@ transform_file(cpp_facet_types ft, cpp_file_types flt, cpp_aspect_types at,
 
     file_view_model r(create_file(ft, flt, at, name));
     r.category_type(sml::category_types::user_defined);
+    r.meta_type(e.name().meta_type());
 
     const auto i(qname_to_enumeration_.find(name));
     if (i == qname_to_enumeration_.end()) {
@@ -476,8 +478,16 @@ void sml_to_cpp_view_model::create_enumeration_view_models() {
 
     for (const auto pair : enumerations) {
         const auto e(pair.second);
+
+        const dogen::sml::qualified_name name(e.name());
+        const std::list<std::string> ns(join_namespaces(name));
+
         enumeration_view_model vm;
-        //vm.name(e.name);
+        vm.name(e.name().type_name());
+        vm.namespaces(ns);
+        vm.documentation(e.documentation());
+        // vm.database_name(database_name(name));
+        // vm.schema_name(schema_name_);
         qname_to_enumeration_.insert(std::make_pair(e.name(), vm));
     }
 }
@@ -487,7 +497,7 @@ std::vector<file_view_model> sml_to_cpp_view_model::transform_pods() {
     auto lambda([&](cpp_facet_types ft, cpp_file_types flt, cpp_aspect_types at,
             const sml::pod& p) {
             const std::string n(p.name().type_name());
-            log_generating_file(ft, at, flt, n);
+            log_generating_file(ft, at, flt, n, p.name().meta_type());
             r.push_back(transform_file(ft, flt, at, p));
         });
 
@@ -529,7 +539,7 @@ std::vector<file_view_model> sml_to_cpp_view_model::transform_enumerations() {
     auto lambda([&](cpp_facet_types ft, cpp_file_types flt, cpp_aspect_types at,
             const sml::enumeration& e) {
             const std::string n(e.name().type_name());
-            log_generating_file(ft, at, flt, n);
+            log_generating_file(ft, at, flt, n, e.name().meta_type());
             r.push_back(transform_file(ft, flt, at, e));
         });
 
@@ -565,7 +575,7 @@ sml_to_cpp_view_model::transform_facet_includers() const {
     for (cpp_facet_types ft : settings_.enabled_facets()) {
         sml::qualified_name qn;
         const auto n(includer_name);
-        log_generating_file(ft, at, file_type, n);
+        log_generating_file(ft, at, file_type, n, sml::meta_types::invalid);
         qn.type_name(n);
         qn.external_package_path(model_.external_package_path());
         const auto rq(location_request_factory(ft, file_type, at, qn));

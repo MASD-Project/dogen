@@ -30,6 +30,7 @@
 #include "dogen/generator/backends/cpp/formatters/cpp_key_class_declaration.hpp"
 #include "dogen/generator/backends/cpp/formatters/cpp_namespace_helper.hpp"
 #include "dogen/generator/backends/cpp/formatters/cpp_includes.hpp"
+#include "dogen/generator/backends/cpp/formatters/cpp_enumeration_declaration.hpp"
 #include "dogen/generator/backends/cpp/formatters/cpp_domain_header.hpp"
 
 namespace {
@@ -39,7 +40,10 @@ const std::string serialization_ns("serialization");
 const std::string invalid_aspect_type("Invalid value for cpp_aspect_types");
 const std::string invalid_category_type("Invalid value for category_types");
 const std::string missing_class_view_model(
-    "File view model must contain a class view model");
+    "Meta type is pod but class view model is empty");
+
+const std::string missing_enumeration_view_model(
+    "Meta type is enumeration but enumeration view model is empty");
 
 }
 
@@ -176,10 +180,6 @@ void domain_header::format_forward_declaration(const cpp_facet_types ft,
 }
 
 void domain_header::format(const file_view_model& vm) {
-    boost::optional<view_models::class_view_model> o(vm.class_vm());
-    if (!o)
-        throw generation_failure(missing_class_view_model);
-
     licence licence(stream_);
     licence.format();
 
@@ -190,17 +190,31 @@ void domain_header::format(const file_view_model& vm) {
     cpp_includes includes(stream_);
     includes.format(vm);
 
-    const auto at(vm.aspect_type());
-    const auto ft(vm.facet_type());
-    const auto ct(vm.category_type());
-    const view_models::class_view_model& cvm(*o);
-    if (at == cpp_aspect_types::main)
-        format_main(ct, cvm);
-    else if (at == cpp_aspect_types::forward_decls)
-        format_forward_declaration(ft, cvm);
-    else {
-        using utility::exception::invalid_enum_value;
-        throw invalid_enum_value(invalid_aspect_type);
+    if (vm.meta_type() == sml::meta_types::enumeration) {
+        const auto o(vm.enumeration_vm());
+        if (!o)
+            throw generation_failure(missing_enumeration_view_model);
+
+        cpp_enumeration_declaration f(stream_);
+        const auto evm(*o);
+        f.format(evm);
+    } else if (vm.meta_type() == sml::meta_types::pod) {
+        boost::optional<view_models::class_view_model> o(vm.class_vm());
+        if (!o)
+            throw generation_failure(missing_class_view_model);
+
+        const auto at(vm.aspect_type());
+        const auto ft(vm.facet_type());
+        const auto ct(vm.category_type());
+        const view_models::class_view_model& cvm(*o);
+        if (at == cpp_aspect_types::main)
+            format_main(ct, cvm);
+        else if (at == cpp_aspect_types::forward_decls)
+            format_forward_declaration(ft, cvm);
+        else {
+            using utility::exception::invalid_enum_value;
+            throw invalid_enum_value(invalid_aspect_type);
+        }
     }
 
     guards.format_end();

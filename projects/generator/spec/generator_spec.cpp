@@ -520,9 +520,9 @@ BOOST_AUTO_TEST_CASE(comments_model_generates_expected_code) {
 
 BOOST_AUTO_TEST_CASE(enumeration_model_generates_expected_code) {
     SETUP_TEST_LOG("enumeration_model_generates_expected_code");
-    // using dogen::utility::test_data::dia_sml;
-    // const auto t(dia_sml::input_enumeration_dia());
-    // BOOST_CHECK(check_code_generation(t));
+    using dogen::utility::test_data::dia_sml;
+    const auto t(dia_sml::input_enumeration_dia());
+    BOOST_CHECK(check_code_generation(t));
 }
 
 BOOST_AUTO_TEST_CASE(std_model_generates_expected_code) {

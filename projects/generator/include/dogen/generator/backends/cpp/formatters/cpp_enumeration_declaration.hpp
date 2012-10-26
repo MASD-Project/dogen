@@ -18,15 +18,18 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef KITANDA_DOGEN_BACKENDS_CPP_FORMATTERS_DOXYGEN_COMMENTS_HPP
-#define KITANDA_DOGEN_BACKENDS_CPP_FORMATTERS_DOXYGEN_COMMENTS_HPP
+#ifndef DOGEN_GENERATOR_BACKENDS_CPP_FORMATTERS_CPP_ENUMERATION_DECLARATION_HPP
+#define DOGEN_GENERATOR_BACKENDS_CPP_FORMATTERS_CPP_ENUMERATION_DECLARATION_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <iosfwd>
+#include <string>
+#include "dogen/generator/backends/cpp/view_models/enumeration_view_model.hpp"
 #include "dogen/generator/backends/cpp/formatters/cpp_indenter.hpp"
+#include "dogen/generator/backends/cpp/formatters/cpp_utility.hpp"
 
 namespace dogen {
 namespace generator {
@@ -34,26 +37,28 @@ namespace backends {
 namespace cpp {
 namespace formatters {
 
-class cpp_doxygen_comments {
+class cpp_enumeration_declaration {
 public:
-    cpp_doxygen_comments() = delete;
-    cpp_doxygen_comments(const cpp_doxygen_comments&) = default;
-    ~cpp_doxygen_comments() = default;
-    cpp_doxygen_comments(cpp_doxygen_comments&&) = default;
-    cpp_doxygen_comments& operator=(const cpp_doxygen_comments&) = default;
+    typedef view_models::enumeration_view_model enumeration_view_model;
 
 public:
-    cpp_doxygen_comments(std::ostream& stream, cpp_indenter& indenter);
+    cpp_enumeration_declaration() = default;
+    ~cpp_enumeration_declaration() = default;
+    cpp_enumeration_declaration(const cpp_enumeration_declaration&) = default;
+    cpp_enumeration_declaration(cpp_enumeration_declaration&&) = default;
+    cpp_enumeration_declaration& operator=(
+        const cpp_enumeration_declaration&) = default;
 
 public:
-    void format(const std::string& documentation);
-    void format_inline(const std::string& documentation);
-    void format_start_block(const std::string& documentation);
-    void format_end_block(const std::string& documentation);
+    cpp_enumeration_declaration(std::ostream& stream);
 
-private:
+public:
+    void format(const enumeration_view_model& vm);
+
+protected:
     std::ostream& stream_;
-    cpp_indenter& indenter_;
+    cpp_indenter indenter_;
+    cpp_utility utility_;
 };
 
 } } } } }
