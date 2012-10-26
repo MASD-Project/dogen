@@ -483,7 +483,6 @@ respect the archive type requested by the user.
 We need to setup a build that deploys all the SQL (tables, procs, etc)
 to a clean database, runs all SQL tests and un-deploys all the SQL.
 
-*** Test json output with boost json
 *** Setup a postgres url in cmake file                                :story:
 
 The database password is set to trust. We should really have user
