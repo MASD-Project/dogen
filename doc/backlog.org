@@ -400,12 +400,6 @@ includer that includes all other includers.
 We should have an operator that compares the state of two objects
 ignoring the version.
 
-*** Remove jsonify from all generated code
-
-As we have a meta-model we should be able to manually determine the
-correct JSON for every meta-type. At present jsonify is adding
-spurious brackets, breaking the JSON.
-
 *** Property types are always fully qualified
 
 When we code generate non-primitive properties we always fully qualify
