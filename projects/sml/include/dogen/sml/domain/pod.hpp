@@ -69,6 +69,7 @@ public:
      * in this model.
      * @param category_type Whether the type is user defined or one of
      * the well known system types.
+     * @param documentation the documentation for the pod
      */
     pod(qualified_name name,
         std::vector<dogen::sml::property> properties,

@@ -55,6 +55,7 @@ public:
      * @param name of the property
      * @param type_name the type name associated with the property
      * @param default_value the default value the property should take
+     * @param documentation the documentation for the property
      * if not specified
      */
     inline property(const std::string& name,

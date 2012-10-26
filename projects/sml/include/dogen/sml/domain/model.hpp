@@ -62,6 +62,7 @@ public:
      * @param packages packages contained in the model.
      * @param pods pods contained in the model.
      * @param primitives primitives contained in the model.
+     * @param enumerations enumerations contained in the model.
      * @param external_package_path Path of packages that contain this
      * model
      */
