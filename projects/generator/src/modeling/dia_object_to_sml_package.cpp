@@ -99,11 +99,10 @@ private:
 
 public:
     dia_dfs_visitor(const std::string& model_name,
-        const std::string& external_package_path,
+        const std::list<std::string>& external_package_path,
         bool verbose)
-        : state_(new visit_state(model_name,
-                identifier_parser::parse_scoped_name(external_package_path),
-                verbose)) { }
+        : state_(new visit_state(model_name, external_package_path, verbose)) {
+    }
 
 public:
     template<typename Vertex, typename Graph>
@@ -283,7 +282,7 @@ namespace modeling {
 
 dia_object_to_sml_package::dia_object_to_sml_package(
     const std::string& model_name,
-    const std::string& external_package_path, bool verbose)
+    const std::list<std::string>& external_package_path, bool verbose)
     : model_name_(model_name), external_package_path_(external_package_path),
       root_vertex_(boost::add_vertex(graph_)), verbose_(verbose) {
 
@@ -292,7 +291,7 @@ dia_object_to_sml_package::dia_object_to_sml_package(
     graph_[root_vertex_] = root;
 }
 
-bool dia_object_to_sml_package::is_uml_package(const dia::object& o) const {
+bool dia_object_to_sml_package::is_processable(const dia::object& o) const {
     using dogen::dia::object_types;
     object_types ot(parse_object_type(o.type()));
     return ot == object_types::uml_large_package;
@@ -301,7 +300,7 @@ bool dia_object_to_sml_package::is_uml_package(const dia::object& o) const {
 void dia_object_to_sml_package::add_object(const dia::object& o) {
     BOOST_LOG_SEV(lg, debug) << "Adding package object: " << o.id();
 
-    if (!is_uml_package(o)) {
+    if (!is_processable(o)) {
         BOOST_LOG_SEV(lg, error) << "Expected composite type "
                                  << " to be " << dia_uml_attribute
                                  << "but was " << o.type();

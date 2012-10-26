@@ -74,6 +74,7 @@ path input_split_project_dia("dia_sml/input/split_project.dia");
 path input_trivial_inheritance_dia("dia_sml/input/trivial_inheritance.dia");
 path input_trivial_association_dia("dia_sml/input/trivial_association.dia");
 path input_comments_dia("dia_sml/input/comments.dia");
+path input_enumeration_dia("dia_sml/input/enumeration.dia");
 
 path expected(
     "dia_sml/expected");
@@ -141,6 +142,10 @@ path expected_comments_dia_xml(
     "dia_sml/expected/comments.diaxml");
 path expected_comments_sml_xml(
     "dia_sml/expected/comments.smlxml");
+path expected_enumeration_dia_xml(
+    "dia_sml/expected/enumeration.diaxml");
+path expected_enumeration_sml_xml(
+    "dia_sml/expected/enumeration.smlxml");
 
 path actual(
     "dia_sml/actual");
@@ -206,6 +211,10 @@ path actual_comments_dia_xml(
     "dia_sml/actual/comments.diaxml");
 path actual_comments_sml_xml(
     "dia_sml/actual/comments.smlxml");
+path actual_enumeration_dia_xml(
+    "dia_sml/actual/enumeration.diaxml");
+path actual_enumeration_sml_xml(
+    "dia_sml/actual/enumeration.smlxml");
 
 }
 
@@ -351,6 +360,10 @@ path dia_sml::input_comments_dia() {
     return validating_resolver::resolve(::input_comments_dia);
 }
 
+path dia_sml::input_enumeration_dia() {
+    return validating_resolver::resolve(::input_enumeration_dia);
+}
+
 path dia_sml::input_split_project_dia() {
     return validating_resolver::resolve(::input_split_project_dia);
 }
@@ -483,11 +496,19 @@ path dia_sml::expected_trivial_inheritance_sml_xml() {
 }
 
 path dia_sml::expected_comments_dia_xml() {
-    return resolver::resolve(::expected_comments_dia_xml);
+    return validating_resolver::resolve(::expected_comments_dia_xml);
 }
 
 path dia_sml::expected_comments_sml_xml() {
-    return resolver::resolve(::expected_comments_sml_xml);
+    return validating_resolver::resolve(::expected_comments_sml_xml);
+}
+
+path dia_sml::expected_enumeration_dia_xml() {
+    return resolver::resolve(::expected_enumeration_dia_xml);
+}
+
+path dia_sml::expected_enumeration_sml_xml() {
+    return resolver::resolve(::expected_enumeration_sml_xml);
 }
 
 path dia_sml::actual() {
@@ -609,6 +630,14 @@ path dia_sml::actual_comments_dia_xml() {
 
 path dia_sml::actual_comments_sml_xml() {
     return resolver::resolve(::actual_comments_sml_xml);
+}
+
+path dia_sml::actual_enumeration_dia_xml() {
+    return resolver::resolve(::actual_enumeration_sml_xml);
+}
+
+path dia_sml::actual_enumeration_sml_xml() {
+    return resolver::resolve(::actual_enumeration_sml_xml);
 }
 
 } } }

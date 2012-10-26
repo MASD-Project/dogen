@@ -36,7 +36,9 @@
 #include "dogen/sml/domain/model.hpp"
 #include "dogen/dia/domain/attribute.hpp"
 #include "dogen/dia/domain/object.hpp"
+#include "dogen/generator/modeling/dia_object_to_sml_pod.hpp"
 #include "dogen/generator/modeling/dia_object_to_sml_package.hpp"
+#include "dogen/generator/modeling/dia_object_to_sml_enumeration.hpp"
 
 namespace dogen {
 namespace generator {
@@ -84,34 +86,15 @@ public:
     sml::model transform();
 
 private:
-    // graph of dependencies
-    typedef boost::adjacency_list<
-    boost::vecS, // outer edge list type
-    boost::vecS, // vertex list type
-    boost::directedS, // directed graph
-    dia::object> graph_type;
-
-    // type of the vertices
-    typedef boost::graph_traits<graph_type>::vertex_descriptor
-    vertex_descriptor_type;
-
-    // map of Dia object ID to vertex
-    typedef std::unordered_map<std::string, vertex_descriptor_type>
-    id_to_vertex_type;
-
-private:
     const dia::diagram diagram_;
     const std::string model_name_;
-    const std::string external_package_path_;
-    graph_type graph_;
-    id_to_vertex_type id_to_vertex_;
-    vertex_descriptor_type root_vertex_;
-    std::unordered_map<std::string, std::string> child_to_parent_dia_ids_;
-    std::unordered_set<std::string> parent_dia_ids_;
-    std::unordered_map<std::string, sml::package> packages_by_id_;
+    const std::list<std::string> external_package_path_;
     const bool is_target_;
     const bool verbose_;
+    std::unordered_map<std::string, sml::package> packages_;
     dia_object_to_sml_package package_transformer_;
+    dia_object_to_sml_pod pod_transformer_;
+    dia_object_to_sml_enumeration enumeration_transformer_;
 };
 
 } } }
