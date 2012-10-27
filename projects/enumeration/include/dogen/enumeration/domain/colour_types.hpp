@@ -29,10 +29,11 @@ namespace dogen {
 namespace enumeration {
 
 enum class colour_types : unsigned int {
-    red = 0, ///< this is colour red
-    blue = 1, ///< this is blue
-    green = 2,
-    gray = 3 ///< another comment
+    invalid = 0, ///< Represents an uninitialised enum
+    red = 1, ///< this is colour red
+    blue = 2, ///< this is blue
+    green = 3,
+    gray = 4 ///< another comment
 };
 
 } }

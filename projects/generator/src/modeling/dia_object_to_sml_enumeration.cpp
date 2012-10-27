@@ -288,8 +288,15 @@ transform_enumeration(const dia::object& o) const {
                 continue;
             }
 
+            dogen::sml::enumerator invalid;
+            invalid.name("invalid");
+            invalid.documentation("Represents an uninitialised enum");
+            invalid.value("0");
+
             std::vector<dogen::sml::enumerator> enumerators;
-            unsigned int pos(0);
+            enumerators.push_back(invalid);
+
+            unsigned int pos(1);
             for (auto v : values) {
                 using dogen::dia::composite;
                 const auto c(attribute_value<composite>(v, dia_composite));

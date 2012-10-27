@@ -26,7 +26,7 @@ namespace enumeration {
 book_types_generator::book_types_generator() : position_(0) { }
 void book_types_generator::
 populate(const unsigned int position, result_type& v) {
-    v = static_cast<book_types>(position % 3);
+    v = static_cast<book_types>(position % 4);
 }
 
 book_types_generator::result_type

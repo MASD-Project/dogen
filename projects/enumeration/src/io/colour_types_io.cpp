@@ -30,6 +30,9 @@ std::ostream& operator<<(std::ostream& s, const colour_types& v) {
 
     std::string attr;
     switch (v) {
+    case colour_types::invalid:
+        attr = "\"invalid\"";
+        break;
     case colour_types::red:
         attr = "\"red\"";
         break;

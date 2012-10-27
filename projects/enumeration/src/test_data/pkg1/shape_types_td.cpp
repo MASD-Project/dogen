@@ -27,7 +27,7 @@ namespace pkg1 {
 shape_types_generator::shape_types_generator() : position_(0) { }
 void shape_types_generator::
 populate(const unsigned int position, result_type& v) {
-    v = static_cast<shape_types>(position % 4);
+    v = static_cast<shape_types>(position % 5);
 }
 
 shape_types_generator::result_type

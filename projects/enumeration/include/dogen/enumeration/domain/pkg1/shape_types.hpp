@@ -30,10 +30,11 @@ namespace enumeration {
 namespace pkg1 {
 
 enum class shape_types : unsigned int {
-    triangle = 0, ///< some comment
-    square = 1, ///< other comment
-    rectangle = 2,
-    cube = 3 ///< some comment
+    invalid = 0, ///< Represents an uninitialised enum
+    triangle = 1, ///< some comment
+    square = 2, ///< other comment
+    rectangle = 3,
+    cube = 4 ///< some comment
 };
 
 } } }

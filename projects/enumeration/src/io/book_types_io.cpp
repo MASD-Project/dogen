@@ -30,6 +30,9 @@ std::ostream& operator<<(std::ostream& s, const book_types& v) {
 
     std::string attr;
     switch (v) {
+    case book_types::invalid:
+        attr = "\"invalid\"";
+        break;
     case book_types::great:
         attr = "\"great\"";
         break;

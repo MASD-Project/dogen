@@ -53,6 +53,7 @@ void test_equality() {
 template<typename Sequence>
 void rountrip_type() {
     Sequence sequence;
+    sequence(); // throw the first one away
     utility::test::serialization_tester<typename Sequence::result_type>::
         all_roundtrips_produce_the_same_entity(sequence());
 }

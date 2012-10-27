@@ -31,6 +31,9 @@ std::ostream& operator<<(std::ostream& s, const shape_types& v) {
 
     std::string attr;
     switch (v) {
+    case shape_types::invalid:
+        attr = "\"invalid\"";
+        break;
     case shape_types::triangle:
         attr = "\"triangle\"";
         break;

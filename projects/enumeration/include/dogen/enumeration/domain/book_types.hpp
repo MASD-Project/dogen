@@ -34,9 +34,10 @@ namespace enumeration {
  * this is a long comment
  */
 enum class book_types : unsigned int {
-    great = 0,
-    not_so_great = 1,
-    bad = 2
+    invalid = 0, ///< Represents an uninitialised enum
+    great = 1,
+    not_so_great = 2,
+    bad = 3
 };
 
 } }
