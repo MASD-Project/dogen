@@ -455,15 +455,9 @@ includes_for_enumeration(const sml::enumeration& e, cpp_facet_types ft,
         r.system.push_back(functional);
 
     // nvp serialisation
-    const bool is_implementation(flt == cpp_file_types::implementation);
     const bool is_serialization(ft == cpp_facet_types::serialization);
-    if (is_implementation && is_serialization &&
-        !settings_.disable_xml_serialization())
+    if (is_header && is_serialization && !settings_.disable_xml_serialization())
         r.system.push_back(boost_nvp);
-
-    // split free serialisation
-    if (is_header && is_serialization)
-        r.system.push_back(boost_split_free);
 
     return r;
 }

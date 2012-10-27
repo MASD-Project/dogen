@@ -25,8 +25,13 @@
 #pragma once
 #endif
 
-#include <boost/serialization/split_free.hpp>
+#include <boost/serialization/nvp.hpp>
 #include "dogen/enumeration/domain/book_types.hpp"
 
-// FIXME: book_types
+template<class Archive>
+void serialize(Archive& ar, dogen::enumeration::book_types& v, unsigned int version){
+    using boost::serialization::make_nvp;
+    ar & make_nvp("book_types", v);
+}
+
 #endif

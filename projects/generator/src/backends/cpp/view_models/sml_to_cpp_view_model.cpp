@@ -412,8 +412,7 @@ bool sml_to_cpp_view_model::has_implementation(const cpp_facet_types ft,
         return
             ft == cpp_facet_types::io ||
             ft == cpp_facet_types::database ||
-            ft == cpp_facet_types::test_data ||
-            ft == cpp_facet_types::serialization;
+            ft == cpp_facet_types::test_data;
     }
 
     std::ostringstream s;
@@ -430,9 +429,7 @@ bool sml_to_cpp_view_model::has_forward_decls(const cpp_facet_types ft,
             ft == cpp_facet_types::domain ||
             ft == cpp_facet_types::serialization;
     } else if (mt == meta_types::enumeration) {
-        return
-            ft == cpp_facet_types::domain ||
-            ft == cpp_facet_types::serialization;
+        return ft == cpp_facet_types::domain;
     }
 
     std::ostringstream s;

@@ -97,7 +97,8 @@ factory::create_main_formatter(std::ostream& s, cpp_facet_types ft,
         break;
     case cpp_facet_types::serialization:
         if (flt == cpp_file_types::header)
-            return serialization_header::create(s);
+            return serialization_header::create(s,
+                settings_.disable_xml_serialization());
         else
             return serialization_implementation::create(s,
                 settings_.disable_xml_serialization());

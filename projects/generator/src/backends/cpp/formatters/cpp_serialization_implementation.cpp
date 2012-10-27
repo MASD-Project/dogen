@@ -35,8 +35,8 @@ const std::string boost_ns("boost");
 const std::string serialization_ns("serialization");
 const std::string missing_class_view_model(
     "Meta type is pod but class view model is empty");
-const std::string missing_enumeration_view_model(
-    "Meta type is enumeration but enumeration view model is empty");
+const std::string enumeration_view_model_not_supported(
+    "Enumerations do not have an implementation");
 
 }
 
@@ -220,6 +220,56 @@ template_instantiations(const class_view_model& vm) {
     }
 }
 
+void serialization_implementation::format_class(const file_view_model& vm) {
+    const auto o(vm.class_vm());
+    if (!o)
+        throw generation_failure(missing_class_view_model);
+
+    const view_models::class_view_model& cvm(*o);
+    cpp_qualified_name qualified_name(stream_);
+    if (cvm.is_parent() || !cvm.parents().empty()) {
+        stream_ << indenter_ << "BOOST_CLASS_TRACKING(" << std::endl;
+        {
+            cpp_positive_indenter_scope s(indenter_);
+            stream_ << indenter_;
+            qualified_name.format(cvm);
+            stream_ << "," << std::endl;
+            stream_ << indenter_ << "boost::serialization"
+                    << "::track_selectively)"
+                    << std::endl;
+        }
+        utility_.blank_line();
+    }
+
+    {
+        std::list<std::string> ns { boost_ns, serialization_ns };
+        namespace_helper nsh(stream_, ns);
+        utility_.blank_line();
+        save_function(cvm);
+        load_function(cvm);
+    }
+    utility_.blank_line(2);
+
+    if (!cvm.is_parent()) {
+        stream_ << indenter_ << "BOOST_CLASS_EXPORT_IMPLEMENT(";
+        qualified_name.format(cvm);
+        stream_ << ")" << std::endl;
+        utility_.blank_line();
+    }
+
+    {
+        std::list<std::string> ns { boost_ns, serialization_ns };
+        namespace_helper nsh(stream_, ns);
+        utility_.blank_line();
+        template_instantiations(cvm);
+    }
+}
+
+void serialization_implementation::
+format_enumeration(const file_view_model&) {
+    throw generation_failure(enumeration_view_model_not_supported);
+}
+
 void serialization_implementation::format(const file_view_model& vm) {
     licence licence(stream_);
     licence.format();
@@ -227,57 +277,10 @@ void serialization_implementation::format(const file_view_model& vm) {
     cpp_includes includes(stream_);
     includes.format(vm);
 
-    if (vm.meta_type() == sml::meta_types::enumeration) {
-        const auto o(vm.enumeration_vm());
-        if (!o)
-            throw generation_failure(missing_enumeration_view_model);
-
-        const auto evm(*o);
-        stream_ << "// FIXME: " << evm.name() << std::endl;
-    } else if (vm.meta_type() == sml::meta_types::pod) {
-        boost::optional<view_models::class_view_model> o(vm.class_vm());
-        if (!o)
-            throw generation_failure(missing_class_view_model);
-
-        const view_models::class_view_model& cvm(*o);
-        cpp_qualified_name qualified_name(stream_);
-        if (cvm.is_parent() || !cvm.parents().empty()) {
-            stream_ << indenter_ << "BOOST_CLASS_TRACKING(" << std::endl;
-            {
-                cpp_positive_indenter_scope s(indenter_);
-                stream_ << indenter_;
-                qualified_name.format(cvm);
-                stream_ << "," << std::endl;
-                stream_ << indenter_ << "boost::serialization"
-                        << "::track_selectively)"
-                        << std::endl;
-            }
-            utility_.blank_line();
-        }
-
-        {
-            std::list<std::string> ns { boost_ns, serialization_ns };
-            namespace_helper nsh(stream_, ns);
-            utility_.blank_line();
-            save_function(cvm);
-            load_function(cvm);
-        }
-        utility_.blank_line(2);
-
-        if (!cvm.is_parent()) {
-            stream_ << indenter_ << "BOOST_CLASS_EXPORT_IMPLEMENT(";
-            qualified_name.format(cvm);
-            stream_ << ")" << std::endl;
-            utility_.blank_line();
-        }
-
-        {
-            std::list<std::string> ns { boost_ns, serialization_ns };
-            namespace_helper nsh(stream_, ns);
-            utility_.blank_line();
-            template_instantiations(cvm);
-        }
-    }
+    if (vm.meta_type() == sml::meta_types::enumeration)
+        format_enumeration(vm);
+    else if (vm.meta_type() == sml::meta_types::pod)
+        format_class(vm);
 }
 
 } } } } }
