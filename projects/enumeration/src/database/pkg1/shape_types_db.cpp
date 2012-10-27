@@ -20,5 +20,5 @@
  */
 #include "dogen/enumeration/database/pkg1/shape_types_db.hpp"
 
-// FIXME: shape_types
+void dummy_function_shape_types() { }
 

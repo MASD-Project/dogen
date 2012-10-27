@@ -34,6 +34,8 @@ set(binary_name "dogen_${spec_name}")
 set_target_properties(${spec_name} PROPERTIES OUTPUT_NAME ${binary_name})
 
 target_link_libraries(${spec_name}
+    ${LIBXML2_LIBRARIES}
+    ${Boost_LIBRARIES}
     all_primitives
     classes_in_a_package
     classes_inout_package
@@ -57,8 +59,7 @@ target_link_libraries(${spec_name}
     enumeration
     std_model
     utility
-    ${LIBXML2_LIBRARIES}
-    ${Boost_LIBRARIES})
+    )
 
 set(${spec_name}_cmd ${stage_bin_dir}/${binary_name} ${boost_test_parameters})
 

@@ -20,5 +20,5 @@
  */
 #include "dogen/enumeration/database/book_types_db.hpp"
 
-// FIXME: book_types
+void dummy_function_book_types() { }
 

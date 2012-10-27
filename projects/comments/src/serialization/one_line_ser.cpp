@@ -28,6 +28,11 @@
 #include "dogen/comments/serialization/one_line_ser.hpp"
 #include "dogen/comments/serialization/versioned_key_ser.hpp"
 
+#ifdef __linux__
+#include "eos/portable_iarchive.hpp"
+#include "eos/portable_oarchive.hpp"
+#endif
+
 namespace boost {
 namespace serialization {
 
@@ -58,6 +63,9 @@ BOOST_CLASS_EXPORT_IMPLEMENT(dogen::comments::one_line)
 namespace boost {
 namespace serialization {
 
+template void save(archive::polymorphic_oarchive& ar, const dogen::comments::one_line& v, unsigned int version);
+template void load(archive::polymorphic_iarchive& ar, dogen::comments::one_line& v, unsigned int version);
+
 template void save(archive::text_oarchive& ar, const dogen::comments::one_line& v, unsigned int version);
 template void load(archive::text_iarchive& ar, dogen::comments::one_line& v, unsigned int version);
 
@@ -66,5 +74,10 @@ template void load(archive::binary_iarchive& ar, dogen::comments::one_line& v, u
 
 template void save(archive::xml_oarchive& ar, const dogen::comments::one_line& v, unsigned int version);
 template void load(archive::xml_iarchive& ar, dogen::comments::one_line& v, unsigned int version);
+
+#ifdef __linux__
+template void save(eos::portable_oarchive& ar, const dogen::comments::one_line& v, unsigned int version);
+template void load(eos::portable_iarchive& ar, dogen::comments::one_line& v, unsigned int version);
+#endif
 
 } }

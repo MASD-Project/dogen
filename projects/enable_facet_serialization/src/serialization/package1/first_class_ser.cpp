@@ -25,6 +25,11 @@
 #include "dogen/enable_facet_serialization/serialization/package1/first_class_ser.hpp"
 #include "dogen/enable_facet_serialization/serialization/versioned_key_ser.hpp"
 
+#ifdef __linux__
+#include "eos/portable_iarchive.hpp"
+#include "eos/portable_oarchive.hpp"
+#endif
+
 namespace boost {
 namespace serialization {
 
@@ -53,10 +58,18 @@ BOOST_CLASS_EXPORT_IMPLEMENT(dogen::enable_facet_serialization::package1::first_
 namespace boost {
 namespace serialization {
 
+template void save(archive::polymorphic_oarchive& ar, const dogen::enable_facet_serialization::package1::first_class& v, unsigned int version);
+template void load(archive::polymorphic_iarchive& ar, dogen::enable_facet_serialization::package1::first_class& v, unsigned int version);
+
 template void save(archive::text_oarchive& ar, const dogen::enable_facet_serialization::package1::first_class& v, unsigned int version);
 template void load(archive::text_iarchive& ar, dogen::enable_facet_serialization::package1::first_class& v, unsigned int version);
 
 template void save(archive::binary_oarchive& ar, const dogen::enable_facet_serialization::package1::first_class& v, unsigned int version);
 template void load(archive::binary_iarchive& ar, dogen::enable_facet_serialization::package1::first_class& v, unsigned int version);
+
+#ifdef __linux__
+template void save(eos::portable_oarchive& ar, const dogen::enable_facet_serialization::package1::first_class& v, unsigned int version);
+template void load(eos::portable_iarchive& ar, dogen::enable_facet_serialization::package1::first_class& v, unsigned int version);
+#endif
 
 } }

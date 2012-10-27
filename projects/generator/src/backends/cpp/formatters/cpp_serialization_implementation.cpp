@@ -189,9 +189,19 @@ void serialization_implementation::load_function(const class_view_model& vm) {
 
 void serialization_implementation::
 template_instantiations(const class_view_model& vm) {
+    stream_ << indenter_ << "template void save("
+            << "archive::polymorphic_oarchive& ar, const ";
+    cpp_qualified_name qualified_name(stream_);
+    qualified_name.format(vm);
+    stream_ << "& v, unsigned int version);" << std::endl;
+    stream_ << indenter_ << "template void load("
+            << "archive::polymorphic_iarchive& ar, ";
+    qualified_name.format(vm);
+    stream_ << "& v, unsigned int version);" << std::endl;
+    utility_.blank_line();
+
     stream_ << indenter_ << "template void save(archive::text_oarchive& ar, "
             << "const ";
-    cpp_qualified_name qualified_name(stream_);
     qualified_name.format(vm);
     stream_ << "& v, unsigned int version);" << std::endl;
     stream_ << indenter_ << "template void load(archive::text_iarchive& ar, ";
@@ -218,6 +228,17 @@ template_instantiations(const class_view_model& vm) {
         stream_ << "& v, unsigned int version);" << std::endl;
         utility_.blank_line();
     }
+
+    stream_ << "#ifdef __linux__" << std::endl
+            << indenter_ << "template void save(eos::portable_oarchive& ar, "
+            << "const ";
+    qualified_name.format(vm);
+    stream_ << "& v, unsigned int version);" << std::endl;
+    stream_ << indenter_ << "template void load(eos::portable_iarchive& ar, ";
+    qualified_name.format(vm);
+    stream_ << "& v, unsigned int version);" << std::endl
+            << "#endif" << std::endl;
+    utility_.blank_line();
 }
 
 void serialization_implementation::format_class(const file_view_model& vm) {
@@ -276,6 +297,13 @@ void serialization_implementation::format(const file_view_model& vm) {
 
     cpp_includes includes(stream_);
     includes.format(vm);
+
+    // FIXME: massive hack for EOS workaround
+    stream_ << "#ifdef __linux__" << std::endl
+            << "#include \"eos/portable_iarchive.hpp\"" << std::endl
+            << "#include \"eos/portable_oarchive.hpp\"" << std::endl
+            << "#endif" << std::endl;
+    utility_.blank_line();
 
     if (vm.meta_type() == sml::meta_types::enumeration)
         format_enumeration(vm);

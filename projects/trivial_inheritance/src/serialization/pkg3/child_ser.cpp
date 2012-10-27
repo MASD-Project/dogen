@@ -28,6 +28,11 @@
 #include "dogen/trivial_inheritance/serialization/pkg2/parent_ser.hpp"
 #include "dogen/trivial_inheritance/serialization/pkg3/child_ser.hpp"
 
+#ifdef __linux__
+#include "eos/portable_iarchive.hpp"
+#include "eos/portable_oarchive.hpp"
+#endif
+
 BOOST_CLASS_TRACKING(
     dogen::trivial_inheritance::pkg3::child,
     boost::serialization::track_selectively)
@@ -60,6 +65,9 @@ BOOST_CLASS_EXPORT_IMPLEMENT(dogen::trivial_inheritance::pkg3::child)
 namespace boost {
 namespace serialization {
 
+template void save(archive::polymorphic_oarchive& ar, const dogen::trivial_inheritance::pkg3::child& v, unsigned int version);
+template void load(archive::polymorphic_iarchive& ar, dogen::trivial_inheritance::pkg3::child& v, unsigned int version);
+
 template void save(archive::text_oarchive& ar, const dogen::trivial_inheritance::pkg3::child& v, unsigned int version);
 template void load(archive::text_iarchive& ar, dogen::trivial_inheritance::pkg3::child& v, unsigned int version);
 
@@ -68,5 +76,10 @@ template void load(archive::binary_iarchive& ar, dogen::trivial_inheritance::pkg
 
 template void save(archive::xml_oarchive& ar, const dogen::trivial_inheritance::pkg3::child& v, unsigned int version);
 template void load(archive::xml_iarchive& ar, dogen::trivial_inheritance::pkg3::child& v, unsigned int version);
+
+#ifdef __linux__
+template void save(eos::portable_oarchive& ar, const dogen::trivial_inheritance::pkg3::child& v, unsigned int version);
+template void load(eos::portable_iarchive& ar, dogen::trivial_inheritance::pkg3::child& v, unsigned int version);
+#endif
 
 } }

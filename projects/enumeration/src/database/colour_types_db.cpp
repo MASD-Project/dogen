@@ -20,5 +20,5 @@
  */
 #include "dogen/enumeration/database/colour_types_db.hpp"
 
-// FIXME: colour_types
+void dummy_function_colour_types() { }
 
