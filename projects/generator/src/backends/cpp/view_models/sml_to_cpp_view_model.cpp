@@ -478,7 +478,6 @@ void sml_to_cpp_view_model::create_enumeration_view_models() {
 
     for (const auto pair : enumerations) {
         const auto e(pair.second);
-
         const dogen::sml::qualified_name name(e.name());
         const std::list<std::string> ns(join_namespaces(name));
 
@@ -486,6 +485,15 @@ void sml_to_cpp_view_model::create_enumeration_view_models() {
         vm.name(e.name().type_name());
         vm.namespaces(ns);
         vm.documentation(e.documentation());
+        std::list<enumerator_view_model> enumerators;
+        for (const auto en : e.enumerators()) {
+            enumerator_view_model evm;
+            evm.name(en.name());
+            evm.value(en.value());
+            evm.documentation(en.documentation());
+            enumerators.push_back(evm);
+        }
+        vm.enumerators(enumerators);
         // vm.database_name(database_name(name));
         // vm.schema_name(schema_name_);
         qname_to_enumeration_.insert(std::make_pair(e.name(), vm));

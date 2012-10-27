@@ -58,7 +58,7 @@ public:
      */
     /**@{*/
     std::string value() const { return value_; }
-    void type(const std::string& v) { value_ = v; }
+    void value(const std::string& v) { value_ = v; }
     /**@}*/
 
     /**

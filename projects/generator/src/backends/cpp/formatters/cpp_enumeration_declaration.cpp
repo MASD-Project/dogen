@@ -45,16 +45,19 @@ void cpp_enumeration_declaration::format(const enumeration_view_model& vm) {
     {
         cpp_positive_indenter_scope s(indenter_);
         bool is_first(true);
-        for (auto e : vm.enumerators()) {
+        const auto enumerators(vm.enumerators());
+        for (auto e : enumerators) {
             if (!is_first)
-                stream_ << ", " << std::endl;
+                stream_ << std::endl;
 
             stream_ << indenter_ << e.name() << " = " << e.value()
-                    << (is_first ? "" : ",");
+                    << (is_first ? "," : ",");
 
             dc.format_inline(e.documentation());
             is_first = false;
         }
+        if (!enumerators.empty())
+            stream_ << std::endl;
         utility_.blank_line();
     }
     utility_.blank_line();

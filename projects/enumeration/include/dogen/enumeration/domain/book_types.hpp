@@ -26,6 +26,9 @@
 #endif
 
 enum class book_types : unsigned int {
+    great = 0,
+    not_so_great = 1,
+    bad = 2,
 
 
 };
