@@ -28,6 +28,11 @@
 namespace dogen {
 namespace enumeration {
 
+/*
+ * @brief this is a brief comment
+ *
+ * this is a long comment
+ */
 enum class book_types : unsigned int {
     great = 0,
     not_so_great = 1,

@@ -320,14 +320,10 @@ void dia_dfs_visitor::process_dia_object(const dogen::dia::object& o) const {
                 o.child_node()->parent() : empty);
             using dogen::sml::meta_types;
             pod.name(transform_qualified_name(a, meta_types::pod, pkg_id));
-        }
-
-        if (a.name() == dia_documentation) {
+        } else if (a.name() == dia_documentation) {
             const std::string doc(transform_string_attribute(a));
             pod.documentation(doc);
-        }
-
-        if (a.name() == dia_attributes) {
+        } else if (a.name() == dia_attributes) {
             const auto values(a.values());
 
             if (values.empty()) {

@@ -277,9 +277,10 @@ transform_enumeration(const dia::object& o) const {
             using dogen::sml::meta_types;
             r.name(transform_qualified_name(a, meta_types::enumeration,
                     pkg_id));
-        }
-
-        if (a.name() == dia_attributes) {
+        } else if (a.name() == dia_documentation) {
+            const std::string doc(transform_string_attribute(a));
+            r.documentation(doc);
+        } if (a.name() == dia_attributes) {
             const auto values(a.values());
 
             if (values.empty()) {
