@@ -25,7 +25,10 @@
 #pragma once
 #endif
 
+#include <iosfwd>
 #include "dogen/enumeration/domain/book_types.hpp"
 
-// FIXME: book_types
+std::ostream&
+operator<<(std::ostream& s, const dogen::enumeration::book_types& v);
+
 #endif

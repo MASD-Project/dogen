@@ -25,7 +25,10 @@
 #pragma once
 #endif
 
+#include <iosfwd>
 #include "dogen/enumeration/domain/pkg1/shape_types.hpp"
 
-// FIXME: shape_types
+std::ostream&
+operator<<(std::ostream& s, const dogen::enumeration::pkg1::shape_types& v);
+
 #endif

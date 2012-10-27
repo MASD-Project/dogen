@@ -55,6 +55,10 @@ public:
 public:
     static file_formatter::shared_ptr create(std::ostream& stream);
 
+private:
+    void format_class(const file_view_model& vm);
+    void format_enumeration(const file_view_model& vm);
+
 public:
     virtual void format(const file_view_model& vm) override;
 

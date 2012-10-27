@@ -376,17 +376,16 @@ append_self_dependencies(dogen::sml::qualified_name name,
     const cpp_aspect_types at, const sml::meta_types mt,
     inclusion_lists& il) const {
 
+    const bool is_header(flt == cpp_file_types::header);
+    const bool is_domain(ft == cpp_facet_types::domain);
+    const auto fwd(cpp_aspect_types::forward_decls);
     if (at == cpp_aspect_types::forward_decls) {
         /*
          * rule 1: non-domain forward declarations depend on the
          * domain header.
          */
-        const bool is_header(flt == cpp_file_types::header);
-        const bool is_domain(ft == cpp_facet_types::domain);
-        const auto fwd(cpp_aspect_types::forward_decls);
         if (is_header && !is_domain)
             il.user.push_back(domain_header_dependency(name, fwd));
-
         return;
     }
 
@@ -394,9 +393,6 @@ append_self_dependencies(dogen::sml::qualified_name name,
      * rule 2: if serialisation is enabled, domain headers depend on
      * the serialisation forward declaration headers.
      */
-    const bool is_header(flt == cpp_file_types::header);
-    const bool is_domain(ft == cpp_facet_types::domain);
-    const auto fwd(cpp_aspect_types::forward_decls);
     if (is_header && is_domain && serialization_enabled_
         && mt == sml::meta_types::pod)
         il.user.push_back(header_dependency(name,
@@ -458,6 +454,11 @@ includes_for_enumeration(const sml::enumeration& e, cpp_facet_types ft,
     const bool is_serialization(ft == cpp_facet_types::serialization);
     if (is_header && is_serialization && !settings_.disable_xml_serialization())
         r.system.push_back(boost_nvp);
+
+    // iosfwd
+    const bool is_io(ft == cpp_facet_types::io);
+    if (is_header && is_io && io_enabled_)
+        r.system.push_back(iosfwd);
 
     return r;
 }

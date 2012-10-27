@@ -25,7 +25,10 @@
 #pragma once
 #endif
 
+#include <iosfwd>
 #include "dogen/enumeration/domain/colour_types.hpp"
 
-// FIXME: colour_types
+std::ostream&
+operator<<(std::ostream& s, const dogen::enumeration::colour_types& v);
+
 #endif
