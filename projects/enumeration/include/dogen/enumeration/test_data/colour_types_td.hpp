@@ -18,6 +18,12 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/enumeration/serialization/book_types_ser.hpp"
-#include "dogen/enumeration/serialization/colour_types_ser.hpp"
-#include "dogen/enumeration/serialization/pkg1/shape_types_ser.hpp"
+#ifndef DOGEN_ENUMERATION_TEST_DATA_COLOUR_TYPES_TD_HPP
+#define DOGEN_ENUMERATION_TEST_DATA_COLOUR_TYPES_TD_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+// FIXME: colour_types
+#endif

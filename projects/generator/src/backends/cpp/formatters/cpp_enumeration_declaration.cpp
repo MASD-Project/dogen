@@ -18,12 +18,18 @@
  * MA 02110-1301, USA.
  *
  */
-#include <iostream>
 #include <ostream>
+#include <sstream>
 #include "dogen/generator/backends/cpp/formatters/cpp_doxygen_comments.hpp"
 #include "dogen/generator/backends/cpp/formatters/cpp_doxygen_comments.hpp"
 #include "dogen/generator/backends/cpp/formatters/cpp_qualified_name.hpp"
 #include "dogen/generator/backends/cpp/formatters/cpp_enumeration_declaration.hpp"
+
+namespace {
+
+const std::string empty;
+
+}
 
 namespace dogen {
 namespace generator {
@@ -36,31 +42,33 @@ cpp_enumeration_declaration(std::ostream& stream)
     : stream_(stream), utility_(stream_, indenter_) { }
 
 void cpp_enumeration_declaration::format(const enumeration_view_model& vm) {
-    cpp_doxygen_comments dc(stream_, indenter_);
-    dc.format(vm.documentation());
+    cpp_doxygen_comments dc1(stream_, indenter_);
+    dc1.format(vm.documentation());
 
-    stream_ << indenter_ << "enum class " << vm.name()
-            << " : unsigned int ";
+    stream_ << indenter_ << "enum class " << vm.name() << " : unsigned int ";
     utility_.open_scope();
     {
         cpp_positive_indenter_scope s(indenter_);
         bool is_first(true);
         const auto enumerators(vm.enumerators());
-        for (auto e : enumerators) {
-            if (!is_first)
-                stream_ << std::endl;
+        std::ostringstream assignment;
+        std::ostringstream comment;
+        for (auto i(enumerators.cbegin()); i != enumerators.cend(); ++i) {
+            if (!is_first) {
+                stream_ << assignment.str() << "," << comment.str()
+                        << std::endl;
+                assignment.str(empty);
+                comment.str(empty);
+            }
 
-            stream_ << indenter_ << e.name() << " = " << e.value()
-                    << (is_first ? "," : ",");
-
-            dc.format_inline(e.documentation());
+            const auto e(*i);
+            assignment << indenter_ << e.name() << " = " << e.value();
+            cpp_doxygen_comments dc2(comment, indenter_);
+            dc2.format_inline(e.documentation());
             is_first = false;
         }
-        if (!enumerators.empty())
-            stream_ << std::endl;
-        utility_.blank_line();
+        stream_ << assignment.str() << comment.str() << std::endl;
     }
-    utility_.blank_line();
     stream_ << indenter_ << "};" << std::endl;
     utility_.blank_line();
 }

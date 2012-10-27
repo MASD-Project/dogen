@@ -25,12 +25,14 @@
 #pragma once
 #endif
 
+namespace dogen {
+namespace enumeration {
+
 enum class book_types : unsigned int {
     great = 0,
     not_so_great = 1,
-    bad = 2,
-
-
+    bad = 2
 };
 
+} }
 #endif

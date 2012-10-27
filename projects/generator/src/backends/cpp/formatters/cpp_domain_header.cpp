@@ -179,9 +179,14 @@ void domain_header::format_enumeration(const file_view_model& vm) {
     if (!o)
         throw generation_failure(missing_enumeration_view_model);
 
-    cpp_enumeration_declaration f(stream_);
-    const auto evm(*o);
-    f.format(evm);
+    {
+        const auto evm(*o);
+        namespace_helper ns(stream_, evm.namespaces());
+        utility_.blank_line();
+        cpp_enumeration_declaration f(stream_);
+        f.format(evm);
+    }
+    utility_.blank_line();
 }
 
 void domain_header::format(const file_view_model& vm) {

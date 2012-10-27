@@ -18,6 +18,19 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/enumeration/serialization/book_types_ser.hpp"
-#include "dogen/enumeration/serialization/colour_types_ser.hpp"
-#include "dogen/enumeration/serialization/pkg1/shape_types_ser.hpp"
+#ifndef DOGEN_ENUMERATION_SERIALIZATION_PKG1_SHAPE_TYPES_FWD_SER_HPP
+#define DOGEN_ENUMERATION_SERIALIZATION_PKG1_SHAPE_TYPES_FWD_SER_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+namespace dogen {
+namespace enumeration {
+namespace pkg1 {
+
+enum class shape_types;
+
+} } }
+
+#endif

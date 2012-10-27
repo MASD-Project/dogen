@@ -18,6 +18,22 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/enumeration/serialization/book_types_ser.hpp"
-#include "dogen/enumeration/serialization/colour_types_ser.hpp"
-#include "dogen/enumeration/serialization/pkg1/shape_types_ser.hpp"
+#ifndef DOGEN_ENUMERATION_DOMAIN_COLOUR_TYPES_HPP
+#define DOGEN_ENUMERATION_DOMAIN_COLOUR_TYPES_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+namespace dogen {
+namespace enumeration {
+
+enum class colour_types : unsigned int {
+    red = 0, ///< this is colour red
+    blue = 1, ///< this is blue
+    green = 2,
+    gray = 3 ///< another comment
+};
+
+} }
+#endif

@@ -19,3 +19,5 @@
  *
  */
 #include "dogen/enumeration/io/book_types_io.hpp"
+#include "dogen/enumeration/io/colour_types_io.hpp"
+#include "dogen/enumeration/io/pkg1/shape_types_io.hpp"

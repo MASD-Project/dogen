@@ -28,7 +28,7 @@
 namespace dogen {
 namespace enumeration {
 
-class book_types;
+enum class book_types;
 
 } }
 
