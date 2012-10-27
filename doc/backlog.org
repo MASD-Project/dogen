@@ -10,6 +10,10 @@ This file contains all stories that haven't been assigned to a sprint.
 
 Stories that we intend to look at, at some point.
 
+*** Add test for disabling XML
+
+At present we are not testing model generation with XML disabled.
+
 *** IO header could depend on domain forward decl
 
 At present we are depending on the domain header but it seems we could
