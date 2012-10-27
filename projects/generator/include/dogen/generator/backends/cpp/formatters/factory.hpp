@@ -52,9 +52,6 @@ public:
 private:
     result_type create_main_formatter(std::ostream& s, cpp_facet_types ft,
         cpp_file_types flt) const;
-    result_type create_includer_formatter(std::ostream& s,
-        cpp_facet_types ft) const;
-    result_type create_fwd_decl_formatter(std::ostream& s) const;
 
 public:
     result_type create(std::ostream& s, cpp_facet_types ft,

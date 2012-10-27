@@ -21,7 +21,6 @@
 #include <ostream>
 #include "dogen/generator/generation_failure.hpp"
 #include "dogen/utility/exception/invalid_enum_value.hpp"
-#include "dogen/generator/backends/cpp/formatters/cpp_class_forward_declaration.hpp"
 #include "dogen/generator/backends/cpp/formatters/cpp_qualified_name.hpp"
 #include "dogen/generator/backends/cpp/formatters/cpp_licence.hpp"
 #include "dogen/generator/backends/cpp/formatters/cpp_header_guards.hpp"
@@ -159,39 +158,16 @@ void domain_header::format_main(const sml::category_types ct,
         utility_.blank_line(2);
 }
 
-void domain_header::format_forward_declaration(const cpp_facet_types ft,
-    const class_view_model& vm) {
-
-    {
-        std::list<std::string> ns;
-        if (ft == cpp_facet_types::serialization)
-            ns = { boost_ns, serialization_ns };
-        else
-            ns = vm.namespaces();
-
-        namespace_helper nsh(stream_, ns);
-        utility_.blank_line();
-
-        class_forward_declaration f(stream_);
-        f.format(vm, ft);
-    }
-    utility_.blank_line(2);
-    return;
-}
-
 void domain_header::format_class(const file_view_model& vm) {
     boost::optional<view_models::class_view_model> o(vm.class_vm());
     if (!o)
         throw generation_failure(missing_class_view_model);
 
     const auto at(vm.aspect_type());
-    const auto ft(vm.facet_type());
     const auto ct(vm.category_type());
     const view_models::class_view_model& cvm(*o);
     if (at == cpp_aspect_types::main)
         format_main(ct, cvm);
-    else if (at == cpp_aspect_types::forward_decls)
-        format_forward_declaration(ft, cvm);
     else {
         using utility::exception::invalid_enum_value;
         throw invalid_enum_value(invalid_aspect_type);

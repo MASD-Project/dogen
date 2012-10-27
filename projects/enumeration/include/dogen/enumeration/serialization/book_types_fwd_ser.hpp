@@ -25,9 +25,11 @@
 #pragma once
 #endif
 
-enum class book_types : unsigned int {
+namespace dogen {
+namespace enumeration {
 
+class book_types;
 
-};
+} }
 
 #endif

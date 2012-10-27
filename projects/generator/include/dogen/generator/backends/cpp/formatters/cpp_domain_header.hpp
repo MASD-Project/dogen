@@ -70,10 +70,7 @@ private:
     void swap_method(const class_view_model& vm);
     void class_declaration(const sml::category_types ct,
         const class_view_model& vm);
-
     void format_main(const sml::category_types ct, const class_view_model& vm);
-    void format_forward_declaration(const cpp_facet_types ft,
-        const class_view_model& vm);
 
 private:
     void format_class(const file_view_model& vm);

@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_GENERATOR_BACKENDS_CPP_FORMATTERS_CPP_CLASS_FORWARD_DECLARATION_HPP
-#define DOGEN_GENERATOR_BACKENDS_CPP_FORMATTERS_CPP_CLASS_FORWARD_DECLARATION_HPP
+#ifndef DOGEN_GENERATOR_BACKENDS_CPP_FORMATTERS_CPP_FORWARD_DECLARATIONS_HEADER_HPP
+#define DOGEN_GENERATOR_BACKENDS_CPP_FORMATTERS_CPP_FORWARD_DECLARATIONS_HEADER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -27,9 +27,13 @@
 
 #include <iosfwd>
 #include <boost/filesystem/path.hpp>
+#include "dogen/sml/domain/category_types.hpp"
 #include "dogen/generator/backends/cpp/formatters/cpp_indenter.hpp"
 #include "dogen/generator/backends/cpp/formatters/cpp_utility.hpp"
+#include "dogen/generator/backends/cpp/view_models/class_view_model.hpp"
+#include "dogen/generator/backends/cpp/view_models/enumeration_view_model.hpp"
 #include "dogen/generator/backends/cpp/view_models/file_view_model.hpp"
+#include "dogen/generator/backends/cpp/formatters/file_formatter.hpp"
 
 namespace dogen {
 namespace generator {
@@ -37,24 +41,34 @@ namespace backends {
 namespace cpp {
 namespace formatters {
 
-class class_forward_declaration {
+class forward_declarations_header : public file_formatter {
 public:
+    typedef view_models::enumeration_view_model enumeration_view_model;
     typedef view_models::class_view_model class_view_model;
     typedef view_models::file_view_model file_view_model;
 
 public:
-    class_forward_declaration() = delete;
-    class_forward_declaration(const class_forward_declaration&) = default;
-    class_forward_declaration(class_forward_declaration&&) = default;
-    class_forward_declaration& operator=(const class_forward_declaration&) = default;
+    forward_declarations_header() = delete;
+    forward_declarations_header(const forward_declarations_header&) = default;
+    forward_declarations_header(forward_declarations_header&&) = default;
+    forward_declarations_header& operator=(const forward_declarations_header&) = default;
 
 public:
-    class_forward_declaration(std::ostream& stream);
-
-    virtual ~class_forward_declaration() noexcept {}
+    explicit forward_declarations_header(std::ostream& stream);
+    virtual ~forward_declarations_header() noexcept {}
 
 public:
-    void format(const class_view_model& vm, cpp_facet_types ft);
+    static file_formatter::shared_ptr create(std::ostream& stream);
+
+private:
+    void format_serialization_class(const class_view_model& vm);
+    void format_domain_class(const class_view_model& vm);
+
+    void format_class(const file_view_model& vm);
+    void format_enumeration(const file_view_model& vm);
+
+public:
+    virtual void format(const file_view_model& vm) override;
 
 private:
     std::ostream& stream_;
