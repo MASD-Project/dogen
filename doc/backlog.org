@@ -10,6 +10,16 @@ This file contains all stories that haven't been assigned to a sprint.
 
 Stories that we intend to look at, at some point.
 
+*** Use boost exception infrastructure for inner exceptions
+
+At present our exceptions are not very meaningful; we are not giving
+any context around the error. Boost exception comes with support for
+this:
+
+http://www.boost.org/doc/libs/1_43_0/libs/exception/doc/motivation.html
+
+We need to start using this infrastructure.
+
 *** Add test for disabling XML
 
 At present we are not testing model generation with XML disabled.
