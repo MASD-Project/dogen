@@ -20,4 +20,26 @@
  */
 #include "dogen/enumeration/test_data/pkg1/shape_types_td.hpp"
 
-// FIXME: shape_types
+namespace dogen {
+namespace enumeration {
+namespace pkg1 {
+
+shape_types_generator::shape_types_generator() : position_(0) { }
+void shape_types_generator::
+populate(const unsigned int position, result_type& v) {
+    v = static_cast<shape_types>(position % 4);
+}
+
+shape_types_generator::result_type
+shape_types_generator::create(const unsigned int  position) {
+    result_type r;
+    shape_types_generator::populate(position, r);
+    return r;
+}
+
+shape_types_generator::result_type
+shape_types_generator::operator()() {
+    return create(position_++);
+}
+
+} } }

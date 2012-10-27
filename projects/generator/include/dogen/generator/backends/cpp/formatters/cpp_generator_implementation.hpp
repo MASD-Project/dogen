@@ -73,6 +73,10 @@ private:
     void function_operator(const class_view_model& vm);
     void default_constructor(const class_view_model& vm);
 
+private:
+    void format_class(const file_view_model& vm);
+    void format_enumeration(const file_view_model& vm);
+
 public:
     virtual void format(const file_view_model& vm) override;
 

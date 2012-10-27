@@ -20,4 +20,25 @@
  */
 #include "dogen/enumeration/test_data/book_types_td.hpp"
 
-// FIXME: book_types
+namespace dogen {
+namespace enumeration {
+
+book_types_generator::book_types_generator() : position_(0) { }
+void book_types_generator::
+populate(const unsigned int position, result_type& v) {
+    v = static_cast<book_types>(position % 3);
+}
+
+book_types_generator::result_type
+book_types_generator::create(const unsigned int  position) {
+    result_type r;
+    book_types_generator::populate(position, r);
+    return r;
+}
+
+book_types_generator::result_type
+book_types_generator::operator()() {
+    return create(position_++);
+}
+
+} }

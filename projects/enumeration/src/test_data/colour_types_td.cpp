@@ -20,4 +20,25 @@
  */
 #include "dogen/enumeration/test_data/colour_types_td.hpp"
 
-// FIXME: colour_types
+namespace dogen {
+namespace enumeration {
+
+colour_types_generator::colour_types_generator() : position_(0) { }
+void colour_types_generator::
+populate(const unsigned int position, result_type& v) {
+    v = static_cast<colour_types>(position % 4);
+}
+
+colour_types_generator::result_type
+colour_types_generator::create(const unsigned int  position) {
+    result_type r;
+    colour_types_generator::populate(position, r);
+    return r;
+}
+
+colour_types_generator::result_type
+colour_types_generator::operator()() {
+    return create(position_++);
+}
+
+} }
