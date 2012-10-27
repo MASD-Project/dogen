@@ -35,4 +35,5 @@ enum class book_types : unsigned int {
 };
 
 } }
+
 #endif

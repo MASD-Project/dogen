@@ -36,4 +36,5 @@ enum class colour_types : unsigned int {
 };
 
 } }
+
 #endif

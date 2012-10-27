@@ -37,4 +37,5 @@ enum class shape_types : unsigned int {
 };
 
 } } }
+
 #endif

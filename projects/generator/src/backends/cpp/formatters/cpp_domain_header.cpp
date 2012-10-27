@@ -186,7 +186,7 @@ void domain_header::format_enumeration(const file_view_model& vm) {
         cpp_enumeration_declaration f(stream_);
         f.format(evm);
     }
-    utility_.blank_line();
+    utility_.blank_line(2);
 }
 
 void domain_header::format(const file_view_model& vm) {
