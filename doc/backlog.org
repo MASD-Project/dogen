@@ -280,7 +280,8 @@ form of attribute (perhaps a Dia stereotype) to mark the class as an
 exception and then the code generator will use a different template
 for the class generator. We could have an option of boost exception or
 not. We may need to have a form of inheriting from a base exception
-for a given model.
+for a given model. We also need to be able to inherit from other
+exceptions in a model.
 
 *** Investigate GDB visualisers for generated models
 
