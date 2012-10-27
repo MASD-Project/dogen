@@ -30,7 +30,6 @@
 namespace dogen {
 namespace trivial_association {
 
-
 class class_b_generator {
 public:
     class_b_generator();

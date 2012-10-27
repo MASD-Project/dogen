@@ -31,7 +31,6 @@ namespace dogen {
 namespace class_in_a_package {
 namespace package1 {
 
-
 class first_class_generator {
 public:
     first_class_generator();

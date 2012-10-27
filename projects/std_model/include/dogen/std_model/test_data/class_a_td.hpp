@@ -30,7 +30,6 @@
 namespace dogen {
 namespace std_model {
 
-
 class class_a_generator {
 public:
     class_a_generator();

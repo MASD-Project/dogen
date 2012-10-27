@@ -30,7 +30,6 @@
 namespace dogen {
 namespace two_layers_with_objects {
 
-
 class versioned_key_generator {
 public:
     versioned_key_generator();

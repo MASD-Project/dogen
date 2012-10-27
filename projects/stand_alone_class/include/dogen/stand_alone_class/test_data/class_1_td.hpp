@@ -30,7 +30,6 @@
 namespace dogen {
 namespace stand_alone_class {
 
-
 class class_1_generator {
 public:
     class_1_generator();

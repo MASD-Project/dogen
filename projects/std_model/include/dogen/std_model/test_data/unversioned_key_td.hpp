@@ -30,7 +30,6 @@
 namespace dogen {
 namespace std_model {
 
-
 class unversioned_key_generator {
 public:
     unversioned_key_generator();

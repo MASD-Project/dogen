@@ -30,7 +30,6 @@
 namespace dogen {
 namespace trivial_inheritance {
 
-
 class unversioned_key_generator {
 public:
     unversioned_key_generator();

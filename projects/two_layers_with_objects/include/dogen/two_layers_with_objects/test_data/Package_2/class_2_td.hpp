@@ -31,7 +31,6 @@ namespace dogen {
 namespace two_layers_with_objects {
 namespace Package_2 {
 
-
 class class_2_generator {
 public:
     class_2_generator();

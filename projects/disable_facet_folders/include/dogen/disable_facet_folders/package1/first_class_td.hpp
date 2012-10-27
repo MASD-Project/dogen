@@ -31,7 +31,6 @@ namespace dogen {
 namespace disable_facet_folders {
 namespace package1 {
 
-
 class first_class_generator {
 public:
     first_class_generator();

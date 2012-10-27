@@ -30,7 +30,6 @@
 namespace dogen {
 namespace classes_without_package {
 
-
 class class_5_generator {
 public:
     class_5_generator();

@@ -30,7 +30,6 @@
 namespace dogen {
 namespace class_without_attributes {
 
-
 class versioned_key_generator {
 public:
     versioned_key_generator();

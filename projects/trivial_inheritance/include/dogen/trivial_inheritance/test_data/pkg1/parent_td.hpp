@@ -31,7 +31,6 @@ namespace dogen {
 namespace trivial_inheritance {
 namespace pkg1 {
 
-
 class parent_generator {
 public:
     parent_generator();

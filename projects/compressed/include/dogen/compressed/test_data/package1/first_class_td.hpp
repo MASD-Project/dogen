@@ -31,7 +31,6 @@ namespace dogen {
 namespace compressed {
 namespace package1 {
 
-
 class first_class_generator {
 public:
     first_class_generator();

@@ -30,7 +30,6 @@
 namespace dogen {
 namespace disable_full_ctor {
 
-
 class versioned_key_generator {
 public:
     versioned_key_generator();

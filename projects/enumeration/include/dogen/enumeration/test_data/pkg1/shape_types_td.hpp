@@ -27,5 +27,26 @@
 
 #include "dogen/enumeration/domain/pkg1/shape_types.hpp"
 
-// FIXME: shape_types
+namespace dogen {
+namespace enumeration {
+namespace pkg1 {
+
+class shape_types_generator {
+public:
+    shape_types_generator();
+
+public:
+    typedef dogen::enumeration::pkg1::shape_types result_type;
+
+public:
+    static void populate(const unsigned int position, result_type& v);
+    static result_type create(const unsigned int position);
+    result_type operator()();
+
+private:
+    unsigned int position_;
+};
+
+} } }
+
 #endif

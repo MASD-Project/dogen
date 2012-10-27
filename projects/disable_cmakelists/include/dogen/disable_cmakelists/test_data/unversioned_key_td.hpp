@@ -30,7 +30,6 @@
 namespace dogen {
 namespace disable_cmakelists {
 
-
 class unversioned_key_generator {
 public:
     unversioned_key_generator();

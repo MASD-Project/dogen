@@ -30,7 +30,6 @@
 namespace dogen {
 namespace disable_facet_folders {
 
-
 class versioned_key_generator {
 public:
     versioned_key_generator();

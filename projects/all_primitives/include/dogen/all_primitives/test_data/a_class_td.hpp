@@ -30,7 +30,6 @@
 namespace dogen {
 namespace all_primitives {
 
-
 class a_class_generator {
 public:
     a_class_generator();

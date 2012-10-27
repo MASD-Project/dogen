@@ -30,7 +30,6 @@
 namespace dogen {
 namespace trivial_association {
 
-
 class versioned_key_generator {
 public:
     versioned_key_generator();

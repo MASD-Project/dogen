@@ -30,7 +30,6 @@
 namespace dogen {
 namespace comments {
 
-
 class versioned_key_generator {
 public:
     versioned_key_generator();

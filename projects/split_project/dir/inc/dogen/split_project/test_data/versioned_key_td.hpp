@@ -30,7 +30,6 @@
 namespace dogen {
 namespace split_project {
 
-
 class versioned_key_generator {
 public:
     versioned_key_generator();

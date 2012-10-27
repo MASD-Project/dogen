@@ -31,7 +31,6 @@ namespace dogen {
 namespace split_project {
 namespace package {
 
-
 class a_class_generator {
 public:
     a_class_generator();

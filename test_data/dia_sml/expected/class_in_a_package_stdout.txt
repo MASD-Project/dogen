@@ -1249,7 +1249,6 @@ Contents:
 namespace class_in_a_package {
 namespace package1 {
 
-
 class first_class_generator {
 public:
     first_class_generator();
@@ -1303,7 +1302,6 @@ Contents:
 
 namespace class_in_a_package {
 
-
 class unversioned_key_generator {
 public:
     unversioned_key_generator();
@@ -1356,7 +1354,6 @@ Contents:
 #include "class_in_a_package/domain/versioned_key.hpp"
 
 namespace class_in_a_package {
-
 
 class versioned_key_generator {
 public:

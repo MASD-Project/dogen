@@ -30,7 +30,6 @@
 namespace dogen {
 namespace trivial_inheritance {
 
-
 class parent_with_members_generator {
 public:
     parent_with_members_generator();

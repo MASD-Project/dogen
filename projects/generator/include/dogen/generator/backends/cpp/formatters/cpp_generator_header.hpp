@@ -27,6 +27,7 @@
 
 #include <iosfwd>
 #include <boost/filesystem/path.hpp>
+#include "dogen/generator/backends/cpp/view_models/enumeration_view_model.hpp"
 #include "dogen/generator/backends/cpp/view_models/file_view_model.hpp"
 #include "dogen/generator/backends/cpp/formatters/cpp_indenter.hpp"
 #include "dogen/generator/backends/cpp/formatters/cpp_utility.hpp"
@@ -41,6 +42,7 @@ namespace formatters {
 class generator_header : public file_formatter {
 public:
     typedef view_models::class_view_model class_view_model;
+    typedef view_models::enumeration_view_model enumeration_view_model;
     typedef view_models::file_view_model file_view_model;
 
 public:
@@ -58,6 +60,11 @@ public:
 
 private:
     void generator_class(const class_view_model& vm);
+    void generator_class(const enumeration_view_model& vm);
+
+private:
+    void format_class(const file_view_model& vm);
+    void format_enumeration(const file_view_model& vm);
 
 public:
     virtual void format(const file_view_model& vm) override;

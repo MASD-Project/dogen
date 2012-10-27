@@ -30,7 +30,6 @@
 namespace dogen {
 namespace trivial_inheritance {
 
-
 class parent_outside_generator {
 public:
     parent_outside_generator();

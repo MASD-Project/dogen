@@ -31,7 +31,6 @@ namespace dogen {
 namespace class_without_attributes {
 namespace package_1 {
 
-
 class class_1_generator {
 public:
     class_1_generator();

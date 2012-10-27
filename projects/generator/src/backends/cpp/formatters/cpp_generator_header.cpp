@@ -54,6 +54,47 @@ file_formatter::shared_ptr generator_header::create(std::ostream& stream) {
     return file_formatter::shared_ptr(new generator_header(stream));
 }
 
+void generator_header::generator_class(const enumeration_view_model& vm) {
+    const std::string class_name(vm.name() + "_generator");
+
+    stream_ << indenter_ << "class " << class_name << " ";
+    utility_.open_scope();
+    {
+        cpp_positive_indenter_scope s(indenter_);
+
+        utility_.public_access_specifier();
+        stream_ << indenter_ << class_name << "();" << std::endl;
+        utility_.blank_line();
+
+        utility_.public_access_specifier();
+
+        stream_ << indenter_ << "typedef ";
+        cpp_qualified_name qualified_name(stream_);
+        qualified_name.format(vm);
+        stream_ << " result_type;" << std::endl;
+        utility_.blank_line();
+
+        utility_.public_access_specifier();
+        stream_ << indenter_
+                << "static void populate(const unsigned int position,"
+                <<" result_type& v);"
+                << std::endl;
+
+        stream_ << indenter_
+                << "static result_type create(const unsigned int position);"
+                << std::endl;
+
+        stream_ << indenter_ << "result_type operator()();" << std::endl;
+        utility_.blank_line();
+
+        utility_.private_access_specifier();
+        stream_ << indenter_ << "unsigned int "
+                << utility_.as_member_variable("position") << ";"
+                << std::endl;
+    }
+    stream_ << "};";
+}
+
 void generator_header::generator_class(const class_view_model& vm) {
     const std::string class_name(vm.name() + "_generator");
 
@@ -97,6 +138,40 @@ void generator_header::generator_class(const class_view_model& vm) {
     stream_ << "};";
 }
 
+void generator_header::format_enumeration(const file_view_model& vm) {
+    const auto o(vm.enumeration_vm());
+    if (!o)
+        throw generation_failure(missing_enumeration_view_model);
+
+    const auto evm(*o);
+    {
+        std::list<std::string> namespaces(evm.namespaces());
+        namespace_helper ns_helper(stream_, namespaces);
+        utility_.blank_line();
+
+        generator_class(evm);
+        utility_.blank_line(2);
+    }
+    utility_.blank_line(2);
+}
+
+void generator_header::format_class(const file_view_model& vm) {
+    boost::optional<view_models::class_view_model> o(vm.class_vm());
+    if (!o)
+        throw generation_failure(missing_class_view_model);
+
+    {
+        const view_models::class_view_model& cvm(*o);
+        std::list<std::string> namespaces(cvm.namespaces());
+        namespace_helper ns_helper(stream_, namespaces);
+        utility_.blank_line();
+
+        generator_class(cvm);
+        utility_.blank_line(2);
+    }
+    utility_.blank_line(2);
+}
+
 void generator_header::format(const file_view_model& vm) {
     licence licence(stream_);
     licence.format();
@@ -108,31 +183,11 @@ void generator_header::format(const file_view_model& vm) {
     cpp_includes includes(stream_);
     includes.format(vm);
 
-    if (vm.meta_type() == sml::meta_types::enumeration) {
-        const auto o(vm.enumeration_vm());
-        if (!o)
-            throw generation_failure(missing_enumeration_view_model);
+    if (vm.meta_type() == sml::meta_types::enumeration)
+        format_enumeration(vm);
+    else if (vm.meta_type() == sml::meta_types::pod)
+        format_class(vm);
 
-        const auto evm(*o);
-        stream_ << "// FIXME: " << evm.name() << std::endl;
-    } else if (vm.meta_type() == sml::meta_types::pod) {
-        boost::optional<view_models::class_view_model> o(vm.class_vm());
-        if (!o)
-            throw generation_failure(missing_class_view_model);
-
-        {
-            const view_models::class_view_model& cvm(*o);
-            std::list<std::string> namespaces(cvm.namespaces());
-            namespace_helper ns_helper(stream_, namespaces);
-            utility_.blank_line();
-
-            typedef std::list<std::string> list;
-            utility_.blank_line();
-            generator_class(cvm);
-            utility_.blank_line(2);
-        }
-        utility_.blank_line(2);
-    }
     guards.format_end();
 }
 

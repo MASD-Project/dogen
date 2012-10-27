@@ -30,7 +30,6 @@
 namespace dogen {
 namespace classes_in_a_package {
 
-
 class versioned_key_generator {
 public:
     versioned_key_generator();

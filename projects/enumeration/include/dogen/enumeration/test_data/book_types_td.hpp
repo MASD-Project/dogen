@@ -27,5 +27,25 @@
 
 #include "dogen/enumeration/domain/book_types.hpp"
 
-// FIXME: book_types
+namespace dogen {
+namespace enumeration {
+
+class book_types_generator {
+public:
+    book_types_generator();
+
+public:
+    typedef dogen::enumeration::book_types result_type;
+
+public:
+    static void populate(const unsigned int position, result_type& v);
+    static result_type create(const unsigned int position);
+    result_type operator()();
+
+private:
+    unsigned int position_;
+};
+
+} }
+
 #endif

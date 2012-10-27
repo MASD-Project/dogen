@@ -30,7 +30,6 @@
 namespace dogen {
 namespace comments {
 
-
 class one_line_generator {
 public:
     one_line_generator();

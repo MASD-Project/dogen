@@ -31,7 +31,6 @@ namespace dogen {
 namespace disable_full_ctor {
 namespace package1 {
 
-
 class first_class_generator {
 public:
     first_class_generator();
