@@ -60,6 +60,7 @@ const std::string std_string("string");
 const std::string iosfwd("iosfwd");
 const std::string algorithm("algorithm");
 const std::string ostream("ostream");
+const std::string stdexcept("stdexcept");
 const std::string state_saver("boost/io/ios_state.hpp");
 const std::string functional("functional");
 
@@ -459,6 +460,15 @@ includes_for_enumeration(const sml::enumeration& e, cpp_facet_types ft,
     const bool is_io(ft == cpp_facet_types::io);
     if (is_header && is_io && io_enabled_)
         r.system.push_back(iosfwd);
+
+    // ostream
+    const bool is_implementation(flt == cpp_file_types::implementation);
+    if (is_implementation && is_io && io_enabled_)
+        r.system.push_back(ostream);
+
+    // stdexcept
+    if (is_implementation && is_io && io_enabled_)
+        r.system.push_back(stdexcept);
 
     return r;
 }

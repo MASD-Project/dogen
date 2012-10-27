@@ -87,12 +87,14 @@ void io_header::format_enumeration(const file_view_model& vm) {
         throw generation_failure(missing_enumeration_view_model);
 
     const auto evm(*o);
-    stream_ << indenter_ << "std::ostream&" << std::endl
-            << "operator<<(std::ostream& s, "
-            << "const ";
-    cpp_qualified_name qualified_name(stream_);
-    qualified_name.format(evm);
-    stream_ << "& v);";
+    {
+        namespace_helper ns_helper(stream_, evm.namespaces());
+        utility_.blank_line();
+
+        stream_ << indenter_ << "std::ostream& operator<<(std::ostream& s, "
+                << "const " << evm.name() << "& v);" << std::endl;
+        utility_.blank_line();
+    }
     utility_.blank_line(2);
 }
 

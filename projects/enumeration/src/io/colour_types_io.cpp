@@ -18,6 +18,26 @@
  * MA 02110-1301, USA.
  *
  */
+#include <ostream>
+#include <stdexcept>
 #include "dogen/enumeration/io/colour_types_io.hpp"
 
-// FIXME: colour_types
+namespace dogen {
+namespace enumeration {
+
+std::ostream& operator<<(std::ostream& s, const colour_types& v) {
+    switch (v) {
+    case colour_types::red:
+        return s << "colour_types" << "::" << "red";
+    case colour_types::blue:
+        return s << "colour_types" << "::" << "blue";
+    case colour_types::green:
+        return s << "colour_types" << "::" << "green";
+    case colour_types::gray:
+        return s << "colour_types" << "::" << "gray";
+    default:
+        throw std::invalid_argument("Invalid value for colour_types");
+    }
+}
+
+} }

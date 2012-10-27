@@ -28,7 +28,11 @@
 #include <iosfwd>
 #include "dogen/enumeration/domain/colour_types.hpp"
 
-std::ostream&
-operator<<(std::ostream& s, const dogen::enumeration::colour_types& v);
+namespace dogen {
+namespace enumeration {
+
+std::ostream& operator<<(std::ostream& s, const colour_types& v);
+
+} }
 
 #endif

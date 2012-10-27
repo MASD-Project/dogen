@@ -18,6 +18,27 @@
  * MA 02110-1301, USA.
  *
  */
+#include <ostream>
+#include <stdexcept>
 #include "dogen/enumeration/io/pkg1/shape_types_io.hpp"
 
-// FIXME: shape_types
+namespace dogen {
+namespace enumeration {
+namespace pkg1 {
+
+std::ostream& operator<<(std::ostream& s, const shape_types& v) {
+    switch (v) {
+    case shape_types::triangle:
+        return s << "shape_types" << "::" << "triangle";
+    case shape_types::square:
+        return s << "shape_types" << "::" << "square";
+    case shape_types::rectangle:
+        return s << "shape_types" << "::" << "rectangle";
+    case shape_types::cube:
+        return s << "shape_types" << "::" << "cube";
+    default:
+        throw std::invalid_argument("Invalid value for shape_types");
+    }
+}
+
+} } }

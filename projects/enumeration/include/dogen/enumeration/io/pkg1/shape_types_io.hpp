@@ -28,7 +28,12 @@
 #include <iosfwd>
 #include "dogen/enumeration/domain/pkg1/shape_types.hpp"
 
-std::ostream&
-operator<<(std::ostream& s, const dogen::enumeration::pkg1::shape_types& v);
+namespace dogen {
+namespace enumeration {
+namespace pkg1 {
+
+std::ostream& operator<<(std::ostream& s, const shape_types& v);
+
+} } }
 
 #endif

@@ -213,6 +213,7 @@ add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/trivial_inheritance/src)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/trivial_association/src)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/std_model/src)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/comments/src)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/enumeration/src)
 
 # global targets for codegen
 add_custom_target(rebase_codegen)

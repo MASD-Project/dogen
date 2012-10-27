@@ -18,6 +18,24 @@
  * MA 02110-1301, USA.
  *
  */
+#include <ostream>
+#include <stdexcept>
 #include "dogen/enumeration/io/book_types_io.hpp"
 
-// FIXME: book_types
+namespace dogen {
+namespace enumeration {
+
+std::ostream& operator<<(std::ostream& s, const book_types& v) {
+    switch (v) {
+    case book_types::great:
+        return s << "book_types" << "::" << "great";
+    case book_types::not_so_great:
+        return s << "book_types" << "::" << "not_so_great";
+    case book_types::bad:
+        return s << "book_types" << "::" << "bad";
+    default:
+        throw std::invalid_argument("Invalid value for book_types");
+    }
+}
+
+} }

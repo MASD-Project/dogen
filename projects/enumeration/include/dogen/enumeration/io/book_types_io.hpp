@@ -28,7 +28,11 @@
 #include <iosfwd>
 #include "dogen/enumeration/domain/book_types.hpp"
 
-std::ostream&
-operator<<(std::ostream& s, const dogen::enumeration::book_types& v);
+namespace dogen {
+namespace enumeration {
+
+std::ostream& operator<<(std::ostream& s, const book_types& v);
+
+} }
 
 #endif
