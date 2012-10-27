@@ -18,5 +18,5 @@
  * MA 02110-1301, USA.
  *
  */
-fixme: book_types
+// FIXME: book_types
 

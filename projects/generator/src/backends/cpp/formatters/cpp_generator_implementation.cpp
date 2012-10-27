@@ -291,7 +291,7 @@ void generator_implementation::format(const file_view_model& vm) {
             throw generation_failure(missing_enumeration_view_model);
 
         const auto evm(*o);
-        stream_ << "fixme: " << evm.name() << std::endl;
+        stream_ << "// FIXME: " << evm.name() << std::endl;
     } else if (vm.meta_type() == sml::meta_types::pod) {
         boost::optional<view_models::class_view_model> o(vm.class_vm());
         if (!o)
