@@ -38,6 +38,7 @@
    "/projects/trivial_association/include"
    "/projects/comments/include"
    "/projects/std_model/include"
+   "/projects/enumeration/include"
    )
  :system-include-path
  '("/usr/local/pfh/include"

@@ -18,4 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/serialization/nvp.hpp>
+#include "dogen/enumeration/serialization/pkg1/shape_types_ser.hpp"
+
 // FIXME: shape_types

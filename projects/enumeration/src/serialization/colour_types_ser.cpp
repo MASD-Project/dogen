@@ -18,4 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/serialization/nvp.hpp>
+#include "dogen/enumeration/serialization/colour_types_ser.hpp"
+
 // FIXME: colour_types

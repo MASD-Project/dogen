@@ -66,6 +66,10 @@ public:
         bool disable_complete_constructor, bool use_integrated_io,
         bool disable_io);
 
+private:
+    void format_class(const file_view_model& vm);
+    void format_enumeration(const file_view_model& vm);
+
 public:
     virtual void format(const file_view_model& vm) override;
 

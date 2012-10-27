@@ -25,6 +25,9 @@
 #pragma once
 #endif
 
+#include <boost/serialization/split_free.hpp>
+#include "dogen/enumeration/domain/colour_types_fwd.hpp"
+
 namespace dogen {
 namespace enumeration {
 

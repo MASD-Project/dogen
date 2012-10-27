@@ -25,5 +25,19 @@
 #pragma once
 #endif
 
-// FIXME: shape_types
+#include <functional>
+#include "dogen/enumeration/domain/pkg1/shape_types.hpp"
+
+namespace std {
+
+template<>
+class hash<dogen::enumeration::pkg1::shape_types> {
+public:
+    size_t operator()(const dogen::enumeration::pkg1::shape_types& v) const {
+        return std::hash<unsigned int>()(static_cast<unsigned int>(v));
+    }
+};
+
+}
+
 #endif

@@ -32,6 +32,7 @@
 #include <boost/filesystem/path.hpp>
 #include "dogen/sml/domain/category_types.hpp"
 #include "dogen/generator/config/cpp_settings.hpp"
+#include "dogen/sml/domain/meta_types.hpp"
 #include "dogen/generator/backends/cpp/cpp_location_manager.hpp"
 #include "dogen/generator/backends/cpp/cpp_aspect_types.hpp"
 #include "dogen/generator/backends/cpp/cpp_facet_types.hpp"
@@ -219,7 +220,8 @@ private:
      */
     void append_self_dependencies(dogen::sml::qualified_name name,
         const cpp_facet_types ft, const cpp_file_types flt,
-        cpp_aspect_types at, inclusion_lists& il) const;
+        const cpp_aspect_types at, const sml::meta_types mt,
+        inclusion_lists& il) const;
 
 public:
     /**
@@ -241,6 +243,13 @@ public:
      */
     inclusion_lists includes_for_pod(const sml::pod& pod, cpp_facet_types ft,
         cpp_file_types flt, cpp_aspect_types at) const;
+
+    /**
+     * @brief Returns all the includes required for the given
+     * enumeration.
+     */
+    inclusion_lists includes_for_enumeration(const sml::enumeration& e,
+        cpp_facet_types ft, cpp_file_types flt, cpp_aspect_types at) const;
 
 private:
     const sml::model model_;

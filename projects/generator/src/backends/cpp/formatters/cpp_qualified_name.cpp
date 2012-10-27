@@ -24,6 +24,14 @@
 namespace {
 
 const std::string separator("::");
+
+template<typename T>
+void format(std::ostream& s, const T& t) {
+    for(auto n : t.namespaces())
+        s << n << separator;
+    s << t.name();
+}
+
 }
 
 namespace dogen {
@@ -36,15 +44,15 @@ cpp_qualified_name::cpp_qualified_name(std::ostream& stream)
     : stream_(stream) { }
 
 void cpp_qualified_name::format(const parent_view_model& vm) {
-    for(auto n : vm.namespaces())
-        stream_ << n << separator;
-    stream_ << vm.name();
+    ::format<parent_view_model>(stream_, vm);
 }
 
 void cpp_qualified_name::format(const class_view_model& vm) {
-    for(auto n : vm.namespaces())
-        stream_ << n << separator;
-    stream_ << vm.name();
+    ::format<class_view_model>(stream_, vm);
+}
+
+void cpp_qualified_name::format(const enumeration_view_model& vm) {
+    ::format<enumeration_view_model>(stream_, vm);
 }
 
 } } } } }

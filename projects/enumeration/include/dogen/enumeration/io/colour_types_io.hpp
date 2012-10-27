@@ -25,5 +25,7 @@
 #pragma once
 #endif
 
+#include "dogen/enumeration/domain/colour_types.hpp"
+
 // FIXME: colour_types
 #endif

@@ -46,8 +46,8 @@ const std::string comma(",");
 
 const std::string missing_class_view_model(
     "Meta type is pod but class view model is empty");
-const std::string missing_enumeration_view_model(
-    "Meta type is enumeration but enumeration view model is empty");
+const std::string enumeration_view_model_not_supported(
+    "Enumerations do not have an implementation");
 
 const std::string invalid_aspect_type("Invalid value for cpp_aspect_types");
 const std::string invalid_category_type("Invalid value for category_types");
@@ -129,6 +129,22 @@ class_implementation(cpp_aspect_types at, const sml::category_types ct,
     throw invalid_enum_value(invalid_aspect_type);
 }
 
+void domain_implementation::format_class(const file_view_model& vm) {
+    boost::optional<view_models::class_view_model> o(vm.class_vm());
+    if (!o)
+        throw generation_failure(missing_class_view_model);
+
+    const view_models::class_view_model& cvm(*o);
+    namespace_helper ns_helper(stream_, cvm.namespaces());
+    utility_.blank_line();
+    class_implementation(vm.aspect_type(), vm.category_type(), cvm);
+    inserter_operator(cvm);
+}
+
+void domain_implementation::format_enumeration(const file_view_model&) {
+    throw generation_failure(enumeration_view_model_not_supported);
+}
+
 void domain_implementation::format(const file_view_model& vm) {
     licence licence(stream_);
     licence.format();
@@ -136,24 +152,10 @@ void domain_implementation::format(const file_view_model& vm) {
     cpp_includes includes(stream_);
     includes.format(vm);
 
-    if (vm.meta_type() == sml::meta_types::enumeration) {
-        const auto o(vm.enumeration_vm());
-        if (!o)
-            throw generation_failure(missing_enumeration_view_model);
-
-        const auto evm(*o);
-        stream_ << "// FIXME: " << evm.name() << std::endl;
-    } else if (vm.meta_type() == sml::meta_types::pod) {
-        boost::optional<view_models::class_view_model> o(vm.class_vm());
-        if (!o)
-            throw generation_failure(missing_class_view_model);
-
-        const view_models::class_view_model& cvm(*o);
-        namespace_helper ns_helper(stream_, cvm.namespaces());
-        utility_.blank_line();
-        class_implementation(vm.aspect_type(), vm.category_type(), cvm);
-        inserter_operator(cvm);
-    }
+    if (vm.meta_type() == sml::meta_types::enumeration)
+        format_enumeration(vm);
+    else if (vm.meta_type() == sml::meta_types::pod)
+        format_class(vm);
 }
 
 } } } } }

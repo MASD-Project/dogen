@@ -106,6 +106,71 @@ void hash_header::hash_class(const class_view_model& vm) {
     stream_ << indenter_ << "};" << std::endl;
 }
 
+void hash_header::format_class(const file_view_model& vm) {
+    const auto o(vm.enumeration_vm());
+    if (!o)
+        throw generation_failure(missing_enumeration_view_model);
+
+    const auto evm(*o);
+    {
+        namespace_helper nsh(stream_, std::list<std::string> { std_ns });
+        utility_.blank_line();
+
+        stream_ << indenter_ << "template<>" << std::endl
+                << indenter_ << "class hash<";
+
+        cpp_qualified_name qnf(stream_);
+        qnf.format(evm);
+
+        stream_ << "> ";
+        utility_.open_scope();
+        utility_.public_access_specifier();
+        {
+            cpp_positive_indenter_scope s(indenter_);
+            stream_ << indenter_ << "size_t operator()(const ";
+            qnf.format(evm);
+            stream_ << "& v) const ";
+            utility_.open_scope();
+            {
+                cpp_positive_indenter_scope s(indenter_);
+                stream_ << indenter_ << "return std::hash<unsigned int>()("
+                        << "static_cast<unsigned int>(v));" << std::endl;
+            }
+            stream_ << indenter_;
+        }
+        utility_.close_scope();
+        stream_ << "};" << std::endl;
+        utility_.blank_line();
+    }
+    utility_.blank_line(2);
+}
+
+void hash_header::format_enumeration(const file_view_model& vm) {
+    const auto o(vm.class_vm());
+    if (!o)
+        throw generation_failure(missing_class_view_model);
+
+    const view_models::class_view_model& cvm(*o);
+    {
+        namespace_helper nsh(stream_, cvm.namespaces());
+        utility_.blank_line();
+        hash_helper_class(cvm);
+        utility_.blank_line();
+    }
+
+    utility_.blank_line(2);
+    {
+        std::list<std::string> namespaces;
+        namespaces.push_back(std_ns);
+        namespace_helper nsh(stream_, namespaces);
+
+        utility_.blank_line();
+        hash_class(cvm);
+        utility_.blank_line();
+    }
+    utility_.blank_line();
+}
+
 void hash_header::format(const file_view_model& vm) {
     licence licence(stream_);
     licence.format();
@@ -117,39 +182,10 @@ void hash_header::format(const file_view_model& vm) {
     cpp_includes includes(stream_);
     includes.format(vm);
 
-    if (vm.meta_type() == sml::meta_types::enumeration) {
-        const auto o(vm.enumeration_vm());
-        if (!o)
-            throw generation_failure(missing_enumeration_view_model);
-
-        const auto evm(*o);
-        stream_ << "// FIXME: " << evm.name() << std::endl;
-    } else if (vm.meta_type() == sml::meta_types::pod) {
-
-        boost::optional<view_models::class_view_model> o(vm.class_vm());
-        if (!o)
-            throw generation_failure(missing_class_view_model);
-
-        const view_models::class_view_model& cvm(*o);
-        {
-            namespace_helper nsh(stream_, cvm.namespaces());
-            utility_.blank_line();
-            hash_helper_class(cvm);
-            utility_.blank_line();
-        }
-
-        utility_.blank_line(2);
-        {
-            std::list<std::string> namespaces;
-            namespaces.push_back(std_ns);
-            namespace_helper nsh(stream_, namespaces);
-
-            utility_.blank_line();
-            hash_class(cvm);
-            utility_.blank_line();
-        }
-        utility_.blank_line();
-    }
+    if (vm.meta_type() == sml::meta_types::enumeration)
+        format_class(vm);
+    else if (vm.meta_type() == sml::meta_types::pod)
+        format_enumeration(vm);
     guards.format_end();
 }
 

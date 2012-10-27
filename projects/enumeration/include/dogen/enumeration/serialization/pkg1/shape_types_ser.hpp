@@ -25,5 +25,8 @@
 #pragma once
 #endif
 
+#include <boost/serialization/split_free.hpp>
+#include "dogen/enumeration/domain/pkg1/shape_types.hpp"
+
 // FIXME: shape_types
 #endif

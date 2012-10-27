@@ -60,6 +60,10 @@ private:
     void combine_function();
     void hasher_hash_method(const class_view_model& vm);
 
+private:
+    void format_class(const file_view_model& vm);
+    void format_enumeration(const file_view_model& vm);
+
 public:
     virtual void format(const file_view_model& vm) override;
 

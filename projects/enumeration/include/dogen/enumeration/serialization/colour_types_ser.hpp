@@ -25,5 +25,8 @@
 #pragma once
 #endif
 
+#include <boost/serialization/split_free.hpp>
+#include "dogen/enumeration/domain/colour_types.hpp"
+
 // FIXME: colour_types
 #endif

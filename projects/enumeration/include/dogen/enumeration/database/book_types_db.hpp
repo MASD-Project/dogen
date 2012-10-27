@@ -25,6 +25,8 @@
 #pragma once
 #endif
 
+#include "dogen/enumeration/domain/book_types.hpp"
+
 // FIXME: book_types
 
 #endif

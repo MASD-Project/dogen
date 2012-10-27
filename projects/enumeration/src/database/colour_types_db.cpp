@@ -18,5 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen/enumeration/database/colour_types_db.hpp"
+
 // FIXME: colour_types
 

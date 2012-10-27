@@ -390,6 +390,10 @@ transform_file(cpp_facet_types ft, cpp_file_types flt, cpp_aspect_types at,
         throw transformation_error(view_model_not_found + name.type_name());
     }
     r.enumeration_vm(i->second);
+
+    const auto in(inclusion_manager_.includes_for_enumeration(e, ft, flt, at));
+    r.system_includes(in.system);
+    r.user_includes(in.user);
     return r;
 }
 
@@ -406,8 +410,6 @@ bool sml_to_cpp_view_model::has_implementation(const cpp_facet_types ft,
             ft == cpp_facet_types::serialization;
     } else if (mt == meta_types::enumeration) {
         return
-            ft == cpp_facet_types::domain ||
-            ft == cpp_facet_types::hash ||
             ft == cpp_facet_types::io ||
             ft == cpp_facet_types::database ||
             ft == cpp_facet_types::test_data ||

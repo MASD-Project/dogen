@@ -18,5 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen/enumeration/database/pkg1/shape_types_db.hpp"
+
 // FIXME: shape_types
 

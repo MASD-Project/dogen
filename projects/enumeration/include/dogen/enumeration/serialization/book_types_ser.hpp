@@ -25,5 +25,8 @@
 #pragma once
 #endif
 
+#include <boost/serialization/split_free.hpp>
+#include "dogen/enumeration/domain/book_types.hpp"
+
 // FIXME: book_types
 #endif

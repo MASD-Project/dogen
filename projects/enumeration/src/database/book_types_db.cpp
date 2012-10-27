@@ -18,5 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen/enumeration/database/book_types_db.hpp"
+
 // FIXME: book_types
 

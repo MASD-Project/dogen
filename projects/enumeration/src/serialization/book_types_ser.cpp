@@ -18,4 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/serialization/nvp.hpp>
+#include "dogen/enumeration/serialization/book_types_ser.hpp"
+
 // FIXME: book_types

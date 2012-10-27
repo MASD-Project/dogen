@@ -373,7 +373,8 @@ void cpp_inclusion_manager::append_relationship_dependencies(
 void cpp_inclusion_manager::
 append_self_dependencies(dogen::sml::qualified_name name,
     const cpp_facet_types ft, const cpp_file_types flt,
-    cpp_aspect_types at, inclusion_lists& il) const {
+    const cpp_aspect_types at, const sml::meta_types mt,
+    inclusion_lists& il) const {
 
     if (at == cpp_aspect_types::forward_decls) {
         /*
@@ -396,7 +397,8 @@ append_self_dependencies(dogen::sml::qualified_name name,
     const bool is_header(flt == cpp_file_types::header);
     const bool is_domain(ft == cpp_facet_types::domain);
     const auto fwd(cpp_aspect_types::forward_decls);
-    if (is_header && is_domain && serialization_enabled_)
+    if (is_header && is_domain && serialization_enabled_
+        && mt == sml::meta_types::pod)
         il.user.push_back(header_dependency(name,
                 cpp_facet_types::serialization, fwd));
 
@@ -440,12 +442,40 @@ cpp_inclusion_manager::includes_for_includer_files(cpp_facet_types ft) const {
 }
 
 inclusion_lists cpp_inclusion_manager::
+includes_for_enumeration(const sml::enumeration& e, cpp_facet_types ft,
+    cpp_file_types flt, cpp_aspect_types at) const {
+    inclusion_lists r;
+
+    append_self_dependencies(e.name(), ft, flt, at, e.name().meta_type(), r);
+
+    // functional
+    const bool is_header(flt == cpp_file_types::header);
+    const bool is_hash(ft == cpp_facet_types::hash);
+    if (is_header && is_hash)
+        r.system.push_back(functional);
+
+    // nvp serialisation
+    const bool is_implementation(flt == cpp_file_types::implementation);
+    const bool is_serialization(ft == cpp_facet_types::serialization);
+    if (is_implementation && is_serialization &&
+        !settings_.disable_xml_serialization())
+        r.system.push_back(boost_nvp);
+
+    // split free serialisation
+    if (is_header && is_serialization)
+        r.system.push_back(boost_split_free);
+
+    return r;
+}
+
+inclusion_lists cpp_inclusion_manager::
 includes_for_pod(const sml::pod& pod, cpp_facet_types ft, cpp_file_types flt,
     cpp_aspect_types at) const {
 
     inclusion_lists r;
+    const auto n(pod.name());
     if (at == cpp_aspect_types::forward_decls) {
-        append_self_dependencies(pod.name(), ft, flt, at, r);
+        append_self_dependencies(n, ft, flt, at, n.meta_type(), r);
         return r;
     }
 
@@ -456,7 +486,7 @@ includes_for_pod(const sml::pod& pod, cpp_facet_types ft, cpp_file_types flt,
     append_versioning_dependencies(ft, flt, at, pod.category_type(), r);
     append_implementation_dependencies(pod, ft, flt, r, rsm);
     append_relationship_dependencies(names, ft, flt, pc, r);
-    append_self_dependencies(pod.name(), ft, flt, at, r);
+    append_self_dependencies(n, ft, flt, at, n.meta_type(), r);
 
     return r;
 }

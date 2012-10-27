@@ -25,5 +25,19 @@
 #pragma once
 #endif
 
-// FIXME: colour_types
+#include <functional>
+#include "dogen/enumeration/domain/colour_types.hpp"
+
+namespace std {
+
+template<>
+class hash<dogen::enumeration::colour_types> {
+public:
+    size_t operator()(const dogen::enumeration::colour_types& v) const {
+        return std::hash<unsigned int>()(static_cast<unsigned int>(v));
+    }
+};
+
+}
+
 #endif
