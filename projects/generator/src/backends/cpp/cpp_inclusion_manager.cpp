@@ -50,6 +50,8 @@ const std::string boost_text_oarchive("boost/archive/text_oarchive.hpp");
 const std::string boost_text_iarchive("boost/archive/text_iarchive.hpp");
 const std::string boost_binary_oarchive("boost/archive/binary_oarchive.hpp");
 const std::string boost_binary_iarchive("boost/archive/binary_iarchive.hpp");
+const std::string boost_poly_iarchive("boost/archive/polymorphic_iarchive.hpp");
+const std::string boost_poly_oarchive("boost/archive/polymorphic_oarchive.hpp");
 
 const std::string boost_export("boost/serialization/export.hpp");
 const std::string boost_string("boost/serialization/string.hpp");
@@ -269,6 +271,8 @@ append_implementation_dependencies(const sml::pod& p,
         il.system.push_back(boost_text_iarchive);
         il.system.push_back(boost_binary_oarchive);
         il.system.push_back(boost_binary_iarchive);
+        il.system.push_back(boost_poly_iarchive);
+        il.system.push_back(boost_poly_oarchive);
     }
 
     // state saver
