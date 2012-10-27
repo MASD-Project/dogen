@@ -145,7 +145,7 @@ void serialization_header::format_enumeration(const file_view_model& vm) {
     cpp_qualified_name qnf(stream_);
     qnf.format(evm);
 
-    stream_ << "& v, unsigned int version)";
+    stream_ << "& v, unsigned int /*version*/)";
     utility_.open_scope();
     {
         cpp_positive_indenter_scope s(indenter_);

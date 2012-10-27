@@ -29,7 +29,7 @@
 #include "dogen/enumeration/domain/colour_types.hpp"
 
 template<class Archive>
-void serialize(Archive& ar, dogen::enumeration::colour_types& v, unsigned int version){
+void serialize(Archive& ar, dogen::enumeration::colour_types& v, unsigned int /*version*/){
     using boost::serialization::make_nvp;
     ar & make_nvp("colour_types", v);
 }
