@@ -27,18 +27,27 @@ namespace enumeration {
 namespace pkg1 {
 
 std::ostream& operator<<(std::ostream& s, const shape_types& v) {
+    s << "{ " << "\"__type__\": " << "\"shape_types\", " << "\"value\": ";
+
+    std::string attr;
     switch (v) {
     case shape_types::triangle:
-        return s << "shape_types" << "::" << "triangle";
+        attr = "\"triangle\"";
+        break;
     case shape_types::square:
-        return s << "shape_types" << "::" << "square";
+        attr = "\"square\"";
+        break;
     case shape_types::rectangle:
-        return s << "shape_types" << "::" << "rectangle";
+        attr = "\"rectangle\"";
+        break;
     case shape_types::cube:
-        return s << "shape_types" << "::" << "cube";
+        attr = "\"cube\"";
+        break;
     default:
         throw std::invalid_argument("Invalid value for shape_types");
     }
+    s << attr << " }";
+    return s;
 }
 
 } } }

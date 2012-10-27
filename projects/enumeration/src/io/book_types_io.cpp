@@ -26,16 +26,24 @@ namespace dogen {
 namespace enumeration {
 
 std::ostream& operator<<(std::ostream& s, const book_types& v) {
+    s << "{ " << "\"__type__\": " << "\"book_types\", " << "\"value\": ";
+
+    std::string attr;
     switch (v) {
     case book_types::great:
-        return s << "book_types" << "::" << "great";
+        attr = "\"great\"";
+        break;
     case book_types::not_so_great:
-        return s << "book_types" << "::" << "not_so_great";
+        attr = "\"not_so_great\"";
+        break;
     case book_types::bad:
-        return s << "book_types" << "::" << "bad";
+        attr = "\"bad\"";
+        break;
     default:
         throw std::invalid_argument("Invalid value for book_types");
     }
+    s << attr << " }";
+    return s;
 }
 
 } }

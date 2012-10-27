@@ -26,18 +26,27 @@ namespace dogen {
 namespace enumeration {
 
 std::ostream& operator<<(std::ostream& s, const colour_types& v) {
+    s << "{ " << "\"__type__\": " << "\"colour_types\", " << "\"value\": ";
+
+    std::string attr;
     switch (v) {
     case colour_types::red:
-        return s << "colour_types" << "::" << "red";
+        attr = "\"red\"";
+        break;
     case colour_types::blue:
-        return s << "colour_types" << "::" << "blue";
+        attr = "\"blue\"";
+        break;
     case colour_types::green:
-        return s << "colour_types" << "::" << "green";
+        attr = "\"green\"";
+        break;
     case colour_types::gray:
-        return s << "colour_types" << "::" << "gray";
+        attr = "\"gray\"";
+        break;
     default:
         throw std::invalid_argument("Invalid value for colour_types");
     }
+    s << attr << " }";
+    return s;
 }
 
 } }

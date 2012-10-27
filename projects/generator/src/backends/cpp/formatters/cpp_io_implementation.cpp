@@ -35,6 +35,10 @@ namespace {
 
 const std::string ostream("ostream");
 const std::string spaced_inserter(" << ");
+const std::string type("__type__");
+const std::string colon(": ");
+const std::string comma(", ");
+const std::string semi_colon(";");
 
 const std::string missing_class_view_model(
     "Meta type is pod but class view model is empty");
@@ -72,6 +76,18 @@ void io_implementation::format_enumeration(const file_view_model& vm) {
     utility_.open_scope();
     {
         cpp_positive_indenter_scope s(indenter_);
+        stream_ << indenter_ << "s" << spaced_inserter
+                << utility_.quote("{ ") << spaced_inserter
+                << utility_.quote(utility_.quote_escaped(type) + colon);
+
+        stream_ << spaced_inserter
+                << utility_.quote(utility_.quote_escaped(evm.name()) + comma)
+                << spaced_inserter
+                << utility_.quote(utility_.quote_escaped("value") + colon)
+                << ";" << std::endl;
+        utility_.blank_line();
+
+        stream_ << indenter_ << "std::string attr;" << std::endl;
         stream_ << indenter_ << "switch (v) ";
         utility_.open_scope();
         {
@@ -81,12 +97,11 @@ void io_implementation::format_enumeration(const file_view_model& vm) {
                         << std::endl;
                 {
                     cpp_positive_indenter_scope s(indenter_);
-                    stream_ << indenter_ << "return s"
-                            << spaced_inserter << utility_.quote(evm.name())
-                            << spaced_inserter << utility_.quote("::")
-                            << spaced_inserter << utility_.quote(e.name())
-                            << ";"
-                            << std::endl;
+                    stream_ << indenter_ << "attr = "
+                            << utility_.quote(utility_.quote_escaped(e.name()))
+                            << semi_colon
+                            << std::endl
+                            << indenter_ << "break;" << std::endl;
                 }
             }
             stream_ << indenter_ << "default:" << std::endl;
@@ -98,6 +113,12 @@ void io_implementation::format_enumeration(const file_view_model& vm) {
             }
             utility_.close_scope();
         }
+        stream_ << indenter_ << "s" << spaced_inserter
+                << "attr"
+                << spaced_inserter << utility_.quote(" }")
+                << semi_colon
+                << std::endl
+                << indenter_ << "return s;" << std::endl;
     }
     utility_.close_scope();
     utility_.blank_line();

@@ -54,6 +54,7 @@ target_link_libraries(${spec_name}
     two_layers_with_objects
     trivial_inheritance
     trivial_association
+    enumeration
     std_model
     utility
     ${LIBXML2_LIBRARIES}
