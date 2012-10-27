@@ -10,6 +10,11 @@ This file contains all stories that haven't been assigned to a sprint.
 
 Stories that we intend to look at, at some point.
 
+*** Add test model with versioning disabled
+
+We don't seem to have a test model for the versioning disabled
+scenario.
+
 *** Use boost exception infrastructure for inner exceptions
 
 At present our exceptions are not very meaningful; we are not giving
