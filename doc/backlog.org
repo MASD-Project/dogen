@@ -10,6 +10,13 @@ This file contains all stories that haven't been assigned to a sprint.
 
 Stories that we intend to look at, at some point.
 
+*** Create interfaces to help with mocking
+
+We should be doing a bit more IoC, particularly with inclusion
+manager, location manager etc. In order to do so we could define
+interfaces for these classes and provide mocks for the tests. This
+would make the tests considerably smaller.
+
 *** Add test model with versioning disabled
 
 We don't seem to have a test model for the versioning disabled
