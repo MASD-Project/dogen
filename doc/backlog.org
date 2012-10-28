@@ -10,6 +10,12 @@ This file contains all stories that haven't been assigned to a sprint.
 
 Stories that we intend to look at, at some point.
 
+*** Test relationships between pods and other meta types
+
+We should validate that pods are only related to other pods -
+e.g. they cannot inherit from exception or enumeration or
+vice-versa. Add tests for this.
+
 *** Add support for configurable enumerations types
 
 At present our enumerations always use unsigned int as the underlying
