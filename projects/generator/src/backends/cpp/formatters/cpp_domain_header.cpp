@@ -220,6 +220,8 @@ void domain_header::format(const file_view_model& vm) {
         format_enumeration(vm);
     else if (vm.meta_type() == sml::meta_types::pod)
         format_class(vm);
+    else if (vm.meta_type() == sml::meta_types::exception)
+        format_exception(vm);
 
     guards.format_end();
 }

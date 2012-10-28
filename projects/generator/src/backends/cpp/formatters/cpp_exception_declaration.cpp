@@ -46,7 +46,7 @@ void cpp_exception_declaration::format(const exception_view_model& vm) {
     dc1.format(vm.documentation());
 
     stream_ << indenter_ << "class " << vm.name()
-            << " : public virtual std::exception,"
+            << " : public virtual std::exception, "
             << "public virtual boost::exception ";
     utility_.open_scope();
     {
@@ -56,16 +56,19 @@ void cpp_exception_declaration::format(const exception_view_model& vm) {
                 << std::endl;
         stream_ << indenter_ << "~" << vm.name() << "() noexcept = default;"
                 << std::endl;
-
         utility_.blank_line();
+
+        utility_.public_access_specifier();
         stream_ << indenter_ << vm.name()
                 << "(const std::string& message) : message_(message) { }"
                 << std::endl;
+        utility_.blank_line();
 
         utility_.public_access_specifier();
-        stream_ << indenter_ << "const char* what() const noexcept() {"
-                << "return(message_.c_str()); }"
+        stream_ << indenter_ << "const char* what() const noexcept {"
+                << " return(message_.c_str()); }"
                 << std::endl;
+        utility_.blank_line();
 
         utility_.private_access_specifier();
         stream_ << indenter_ << "const std::string message_;"

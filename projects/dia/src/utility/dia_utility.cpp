@@ -30,6 +30,7 @@ const std::string uml_association("UML - Association");
 const std::string invalid_dia_type("Invalid or unsupported Dia type");
 
 const std::string enumeration("enumeration");
+const std::string exception("exception");
 
 }
 
@@ -56,6 +57,9 @@ object_types parse_object_type(const std::string& ot) {
 stereotypes parse_stereotype(const std::string& st) {
     if (st == enumeration)
         return stereotypes::enumeration;
+
+    if (st == exception)
+        return stereotypes::exception;
 
     throw dogen::utility::exception::exception(invalid_dia_type);
 }

@@ -241,6 +241,13 @@ bool director::has_generatable_types(const sml::model& m) const {
         }
     }
 
+    for (const auto e : m.exceptions()) {
+        if (e.second.generate()) {
+            r = true;
+            break;
+        }
+    }
+
     return r;
 }
 
@@ -267,6 +274,7 @@ boost::optional<sml::model> director::create_model() const {
 
     BOOST_LOG_SEV(lg, debug) << "Totals: pods: " << m.pods().size()
                              << " enumerations: " << m.enumerations().size()
+                             << " exceptions: " << m.exceptions().size()
                              << " primitives: " << m.primitives().size();
 
     if (has_generatable_types(m))

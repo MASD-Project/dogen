@@ -41,6 +41,8 @@ const std::string missing_class_view_model(
     "Meta type is pod but class view model is empty");
 const std::string missing_enumeration_view_model(
     "Meta type is enumeration but enumeration view model is empty");
+const std::string missing_exception_view_model(
+    "Meta type is exception but enumeration view model is empty");
 
 }
 
@@ -130,6 +132,22 @@ void forward_declarations_header::format_enumeration(const file_view_model& vm) 
     utility_.blank_line(2);
 }
 
+void forward_declarations_header::format_exception(const file_view_model& vm) {
+    const auto o(vm.exception_vm());
+    if (!o)
+        throw generation_failure(missing_exception_view_model);
+
+    const auto evm(*o);
+    {
+        namespace_helper nsh(stream_, evm.namespaces());
+        utility_.blank_line();
+
+        stream_ << indenter_ << "class " << evm.name() << ";" << std::endl;
+        utility_.blank_line();
+    }
+    utility_.blank_line(2);
+}
+
 void forward_declarations_header::format(const file_view_model& vm) {
     if (vm.aspect_type() != cpp_aspect_types::forward_decls) {
         using dogen::utility::exception::invalid_enum_value;
@@ -150,6 +168,8 @@ void forward_declarations_header::format(const file_view_model& vm) {
         format_enumeration(vm);
     else if (vm.meta_type() == sml::meta_types::pod)
         format_class(vm);
+    else if (vm.meta_type() == sml::meta_types::exception)
+        format_exception(vm);
 
     guards.format_end();
 }

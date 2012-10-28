@@ -48,6 +48,8 @@
 #include "dogen/sml/test/sml_file_asserter.hpp"
 #include "dogen/utility/test/exception_checkers.hpp"
 
+using dogen::utility::test_data::dia_sml;
+
 namespace  {
 
 const std::string empty;
@@ -164,7 +166,6 @@ BOOST_AUTO_TEST_CASE(stdout_option_generates_expected_output) {
     dogen::generator::generator cg(s, lambda);
     cg.generate();
 
-    using dogen::utility::test_data::dia_sml;
     const auto expected(dia_sml::expected_class_in_a_package_stdout_txt());
     auto actual(dia_sml::actual_class_in_a_package_stdout_txt());
 
@@ -212,7 +213,6 @@ BOOST_AUTO_TEST_CASE(disable_full_ctor_generates_expected_code) {
             return s;
         });
 
-    using dogen::utility::test_data::dia_sml;
     const auto t(dia_sml::input_disable_full_ctor_dia());
     BOOST_CHECK(check_code_generation(t, lambda));
 }
@@ -228,7 +228,6 @@ BOOST_AUTO_TEST_CASE(disable_facet_folders_generates_expected_code) {
             return s;
         });
 
-    using dogen::utility::test_data::dia_sml;
     const auto t(dia_sml::input_disable_facet_folders_dia());
     BOOST_CHECK(check_code_generation(t, lambda));
 }
@@ -249,7 +248,6 @@ BOOST_AUTO_TEST_CASE(disable_model_package_generates_expected_code) {
             return s;
         });
 
-    using dogen::utility::test_data::dia_sml;
     const auto t(dia_sml::input_disable_model_package_dia());
     BOOST_CHECK(check_code_generation(t, lambda));
 }
@@ -265,14 +263,12 @@ BOOST_AUTO_TEST_CASE(disable_cmakelists_generates_expected_code) {
             return s;
         });
 
-    using dogen::utility::test_data::dia_sml;
     const auto t(dia_sml::input_disable_cmakelists_dia());
     BOOST_CHECK(check_code_generation(t, lambda));
 }
 
 BOOST_AUTO_TEST_CASE(not_enabling_facet_domain_throws) {
     SETUP_TEST_LOG("not_enabling_facet_domain_throws");
-    using dogen::utility::test_data::dia_sml;
     const auto t(dia_sml::input_enable_facet_hash_dia());
 
     using dogen::utility::test_data::codegen_tds;
@@ -306,7 +302,6 @@ BOOST_AUTO_TEST_CASE(enable_facet_domain_generates_expected_code) {
             return s;
         });
 
-    using dogen::utility::test_data::dia_sml;
     const auto t(dia_sml::input_enable_facet_domain_dia());
     BOOST_CHECK(check_code_generation(t, lambda));
 }
@@ -327,7 +322,6 @@ BOOST_AUTO_TEST_CASE(enable_facet_hash_generates_expected_code) {
             return s;
         });
 
-    using dogen::utility::test_data::dia_sml;
     const auto t(dia_sml::input_enable_facet_hash_dia());
     BOOST_CHECK(check_code_generation(t, lambda));
 }
@@ -349,7 +343,6 @@ BOOST_AUTO_TEST_CASE(enable_facet_serialization_generates_expected_code) {
             return s;
         });
 
-    using dogen::utility::test_data::dia_sml;
     const auto t(dia_sml::input_enable_facet_serialization_dia());
     BOOST_CHECK(check_code_generation(t, lambda));
 }
@@ -370,14 +363,12 @@ BOOST_AUTO_TEST_CASE(enable_facet_io_generates_expected_code) {
             return s;
         });
 
-    using dogen::utility::test_data::dia_sml;
     const auto t(dia_sml::input_enable_facet_io_dia());
     BOOST_CHECK(check_code_generation(t, lambda));
 }
 
 BOOST_AUTO_TEST_CASE(enabling_facet_io_and_using_integrated_io_throws) {
     SETUP_TEST_LOG("enabling_facet_io_and_using_integrated_io_throws");
-    using dogen::utility::test_data::dia_sml;
     const auto t(dia_sml::input_enable_facet_io_dia());
 
     using dogen::utility::test_data::codegen_tds;
@@ -401,23 +392,19 @@ BOOST_AUTO_TEST_CASE(enabling_facet_io_and_using_integrated_io_throws) {
 
 BOOST_AUTO_TEST_CASE(class_in_a_package_model_generates_expected_code) {
     SETUP_TEST_LOG("class_in_a_package_model_generates_expected_code");
-    using dogen::utility::test_data::dia_sml;
     BOOST_CHECK(check_code_generation(dia_sml::input_class_in_a_package_dia()));
 }
 
 BOOST_AUTO_TEST_CASE(two_empty_layers_model_does_not_generate_code) {
     SETUP_TEST_LOG("two_empty_layers_model_does_not_generate_code");
-    using dogen::utility::test_data::dia_sml;
     const auto t(dia_sml::input_two_empty_layers_dia());
     BOOST_CHECK(check_code_generation(t));
 }
 
 BOOST_AUTO_TEST_CASE(class_without_name_model_throws) {
     SETUP_TEST_LOG("class_without_name_model_throws");
-    using dogen::utility::test_data::dia_sml;
     const auto t(dia_sml::input_class_without_name_dia());
 
-    using dogen::utility::test_data::dia_sml;
     using dogen::utility::test_data::codegen_tds;
     codegen_tds tds(t);
 
@@ -429,115 +416,104 @@ BOOST_AUTO_TEST_CASE(class_without_name_model_throws) {
 
 BOOST_AUTO_TEST_CASE(empty_model_generates_expected_code) {
     SETUP_TEST_LOG("empty_model_generates_expected_code");
-    using dogen::utility::test_data::dia_sml;
     const auto t(dia_sml::input_empty_dia());
     BOOST_CHECK(check_code_generation(t));
 }
 
 BOOST_AUTO_TEST_CASE(empty_package_model_does_not_generate_code) {
     SETUP_TEST_LOG("empty_package_model_does_not_generate_code");
-    using dogen::utility::test_data::dia_sml;
     const auto t(dia_sml::input_empty_package_dia());
     BOOST_CHECK(check_code_generation(t));
 }
 
 BOOST_AUTO_TEST_CASE(classes_inout_package_model_generates_expected_code) {
     SETUP_TEST_LOG("classes_inout_package_model_generates_expected_code");
-    using dogen::utility::test_data::dia_sml;
     const auto t(dia_sml::input_classes_inout_package_dia());
     BOOST_CHECK(check_code_generation(t));
 }
 
 BOOST_AUTO_TEST_CASE(class_without_attributes_model_generates_expected_code) {
     SETUP_TEST_LOG("class_without_attributes_model_generates_expected_code");
-    using dogen::utility::test_data::dia_sml;
     const auto t(dia_sml::input_class_without_attributes_dia());
     BOOST_CHECK(check_code_generation(t));
 }
 
 BOOST_AUTO_TEST_CASE(class_without_package_model_generates_expected_code) {
     SETUP_TEST_LOG("class_without_package_model_generates_expected_code");
-    using dogen::utility::test_data::dia_sml;
     const auto t(dia_sml::input_class_without_package_dia());
     BOOST_CHECK(check_code_generation(t));
 }
 
 BOOST_AUTO_TEST_CASE(stand_alone_class_model_generates_expected_code) {
     SETUP_TEST_LOG("stand_alone_class_model_generates_expected_code");
-    using dogen::utility::test_data::dia_sml;
     const auto t(dia_sml::input_stand_alone_class_dia());
     BOOST_CHECK(check_code_generation(t));
 }
 
 BOOST_AUTO_TEST_CASE(classes_in_a_package_model_generates_expected_code) {
     SETUP_TEST_LOG("classes_in_a_package_model_generates_expected_code");
-    using dogen::utility::test_data::dia_sml;
     const auto t(dia_sml::input_classes_in_a_package_dia());
     BOOST_CHECK(check_code_generation(t));
 }
 
 BOOST_AUTO_TEST_CASE(classes_without_package_model_generates_expected_code) {
     SETUP_TEST_LOG("classes_without_package_model_generates_expected_code");
-    using dogen::utility::test_data::dia_sml;
     const auto t(dia_sml::input_classes_without_package_dia());
     BOOST_CHECK(check_code_generation(t));
 }
 
 BOOST_AUTO_TEST_CASE(compressed_model_generates_expected_code) {
     SETUP_TEST_LOG("compressed_model_generates_expected_code");
-    using dogen::utility::test_data::dia_sml;
     const auto t(dia_sml::input_compressed_dia());
     BOOST_CHECK(check_code_generation(t));
 }
 
 BOOST_AUTO_TEST_CASE(two_layers_with_objects_model_generates_expected_code) {
     SETUP_TEST_LOG("two_layers_with_objects_model_generates_expected_code");
-    using dogen::utility::test_data::dia_sml;
     const auto t(dia_sml::input_two_layers_with_objects_dia());
     BOOST_CHECK(check_code_generation(t));
 }
 
 BOOST_AUTO_TEST_CASE(trivial_inheritance_model_generates_expected_code) {
     SETUP_TEST_LOG("trivial_inheritance_model_generates_expected_code");
-    using dogen::utility::test_data::dia_sml;
     const auto t(dia_sml::input_trivial_inheritance_dia());
     BOOST_CHECK(check_code_generation(t));
 }
 
 BOOST_AUTO_TEST_CASE(trivial_association_model_generates_expected_code) {
     SETUP_TEST_LOG("trivial_association_model_generates_expected_code");
-    using dogen::utility::test_data::dia_sml;
     const auto t(dia_sml::input_trivial_association_dia());
     BOOST_CHECK(check_code_generation(t));
 }
 
 BOOST_AUTO_TEST_CASE(comments_model_generates_expected_code) {
     SETUP_TEST_LOG("comments_model_generates_expected_code");
-    using dogen::utility::test_data::dia_sml;
     const auto t(dia_sml::input_comments_dia());
     BOOST_CHECK(check_code_generation(t));
 }
 
 BOOST_AUTO_TEST_CASE(enumeration_model_generates_expected_code) {
     SETUP_TEST_LOG("enumeration_model_generates_expected_code");
-    using dogen::utility::test_data::dia_sml;
     const auto t(dia_sml::input_enumeration_dia());
+    BOOST_CHECK(check_code_generation(t));
+}
+
+BOOST_AUTO_TEST_CASE(exception_model_generates_expected_code) {
+    SETUP_TEST_LOG("exception_model_generates_expected_code");
+    const auto t(dia_sml::input_exception_dia());
     BOOST_CHECK(check_code_generation(t));
 }
 
 BOOST_AUTO_TEST_CASE(std_model_generates_expected_code) {
     SETUP_TEST_LOG("std_model_generates_expected_code");
-    using dogen::utility::test_data::dia_sml;
     const auto t(dia_sml::input_std_model_dia());
     BOOST_CHECK(check_code_generation(t));
 }
 
 BOOST_AUTO_TEST_CASE(package_without_name_model_throws) {
     SETUP_TEST_LOG("package_without_name_model_throws");
-    using dogen::utility::test_data::dia_sml;
     const auto t(dia_sml::input_package_without_name_dia());
 
-    using dogen::utility::test_data::dia_sml;
     using dogen::utility::test_data::codegen_tds;
     codegen_tds tds(t);
 
@@ -549,14 +525,12 @@ BOOST_AUTO_TEST_CASE(package_without_name_model_throws) {
 
 BOOST_AUTO_TEST_CASE(all_primitives_model_generates_expected_code) {
     SETUP_TEST_LOG("all_primitives_model_generates_expected_code");
-    using dogen::utility::test_data::dia_sml;
     const auto t(dia_sml::input_all_primitives_dia());
     BOOST_CHECK(check_code_generation(t));
 }
 
 BOOST_AUTO_TEST_CASE(split_project_model_generates_expected_code) {
     SETUP_TEST_LOG("split_project_model_generates_expected_code");
-    using dogen::utility::test_data::dia_sml;
 
     // note that we keep the project name just to make the life easier
     // for the rebaselining scripts.

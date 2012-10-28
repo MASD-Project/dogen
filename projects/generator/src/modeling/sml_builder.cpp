@@ -153,11 +153,15 @@ void sml_builder::merge() {
     auto pods(merged_model_.pods());
     auto primitives(merged_model_.primitives());
     auto enumerations(merged_model_.enumerations());
+    auto exceptions(merged_model_.exceptions());
+
     for (const auto m : models_) {
         BOOST_LOG_SEV(lg, info) << "merging model: '" << m.name()
                                 << "' pods: " << m.pods().size()
                                 << " primitives: " << m.primitives().size()
-                                << " enumerations: " << m.enumerations().size();
+                                << " enumerations: " << m.enumerations().size()
+                                << " exceptions: " << m.exceptions().size();
+
 
         for (const auto p : m.pods()) {
             if (p.first.model_name() != m.name()) {
@@ -195,10 +199,14 @@ void sml_builder::merge() {
             enumerations.insert(p);
         }
 
+        for (const auto p : m.exceptions()) {
+            exceptions.insert(p);
+        }
     }
     merged_model_.pods(pods);
     merged_model_.primitives(primitives);
     merged_model_.enumerations(enumerations);
+    merged_model_.exceptions(exceptions);
     merged_model_.external_package_path(external_package_path_);
     merged_model_.schema_name(schema_name_);
 }

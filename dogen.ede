@@ -39,6 +39,7 @@
    "/projects/comments/include"
    "/projects/std_model/include"
    "/projects/enumeration/include"
+   "/projects/exception/include"
    )
  :system-include-path
  '("/usr/local/pfh/include"

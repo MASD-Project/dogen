@@ -77,6 +77,7 @@ public:
     static boost::filesystem::path input_trivial_association_dia();
     static boost::filesystem::path input_comments_dia();
     static boost::filesystem::path input_enumeration_dia();
+    static boost::filesystem::path input_exception_dia();
 
     static boost::filesystem::path expected();
     static boost::filesystem::path expected_class_in_a_package_dia_xml();
@@ -110,6 +111,8 @@ public:
     static boost::filesystem::path expected_comments_sml_xml();
     static boost::filesystem::path expected_enumeration_dia_xml();
     static boost::filesystem::path expected_enumeration_sml_xml();
+    static boost::filesystem::path expected_exception_dia_xml();
+    static boost::filesystem::path expected_exception_sml_xml();
 
     static boost::filesystem::path actual();
     static boost::filesystem::path actual_class_in_a_package_dia_xml();
@@ -143,6 +146,8 @@ public:
     static boost::filesystem::path actual_comments_sml_xml();
     static boost::filesystem::path actual_enumeration_dia_xml();
     static boost::filesystem::path actual_enumeration_sml_xml();
+    static boost::filesystem::path actual_exception_dia_xml();
+    static boost::filesystem::path actual_exception_sml_xml();
 };
 
 } } }

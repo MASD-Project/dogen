@@ -74,6 +74,7 @@ const std::string type_attribute_expected("Could not find type attribute");
 const std::string empty_dia_object_name("Dia object name is empty");
 const std::string missing_package_for_id("Missing package for dia object ID: ");
 const std::string error_parsing_object_type("Fail to parse object type: ");
+const std::string error_parsing_stereotype("Fail to parse stereotype: ");
 const std::string parent_not_found("Object has a parent but its not defined: ");
 const std::string root_vertex_id("root");
 const std::string unexpected_attribute_value_size(
@@ -115,7 +116,7 @@ dogen::dia::stereotypes parse_stereotype(const std::string s) {
         r = parse_stereotype(s);
     } catch(const std::exception& e) {
         std::ostringstream stream;
-        stream << error_parsing_object_type << "'" << s
+        stream << error_parsing_stereotype << "'" << s
                << "'. Error: " << e.what();
         BOOST_LOG_SEV(lg, error) << stream.str();
         throw transformation_error(stream.str());

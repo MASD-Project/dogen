@@ -171,6 +171,7 @@ include_directories(
     ${CMAKE_SOURCE_DIR}/projects/std_model/include
     ${CMAKE_SOURCE_DIR}/projects/comments/include
     ${CMAKE_SOURCE_DIR}/projects/enumeration/include
+    ${CMAKE_SOURCE_DIR}/projects/exception/include
     )
 
 #
@@ -214,6 +215,7 @@ add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/trivial_association/src)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/std_model/src)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/comments/src)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/enumeration/src)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/exception/src)
 
 # global targets for codegen
 add_custom_target(rebase_codegen)
