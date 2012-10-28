@@ -10,6 +10,12 @@ This file contains all stories that haven't been assigned to a sprint.
 
 Stories that we intend to look at, at some point.
 
+*** Header only models shall not generate projects
+
+A project with just exceptions does not need a make file, and fails to
+compile if a makefile is generated. We need a way to not generate a
+makefile if there are no implementation files generated.
+
 *** Empty features should not show up
 
 If there are no files for a feature, we should not generate includers
