@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_GENERATOR_BACKENDS_CPP_VIEW_MODELS_ENUMERATION_VIEW_MODEL_HPP
-#define DOGEN_GENERATOR_BACKENDS_CPP_VIEW_MODELS_ENUMERATION_VIEW_MODEL_HPP
+#ifndef DOGEN_GENERATOR_BACKENDS_CPP_VIEW_MODELS_EXCEPTION_VIEW_MODEL_HPP
+#define DOGEN_GENERATOR_BACKENDS_CPP_VIEW_MODELS_EXCEPTION_VIEW_MODEL_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -27,7 +27,6 @@
 
 #include <list>
 #include <string>
-#include "dogen/generator/backends/cpp/view_models/enumerator_view_model.hpp"
 
 namespace dogen {
 namespace generator {
@@ -35,16 +34,16 @@ namespace backends {
 namespace cpp {
 namespace view_models {
 
-class enumeration_view_model {
+class exception_view_model {
 public:
-    enumeration_view_model() = default;
-    enumeration_view_model(const enumeration_view_model&) = default;
-    ~enumeration_view_model() = default;
-    enumeration_view_model(enumeration_view_model&&) = default;
-    enumeration_view_model& operator=(const enumeration_view_model&) = default;
+    exception_view_model() = default;
+    exception_view_model(const exception_view_model&) = default;
+    ~exception_view_model() = default;
+    exception_view_model(exception_view_model&&) = default;
+    exception_view_model& operator=(const exception_view_model&) = default;
 
 public:
-    explicit enumeration_view_model(const std::string& name)
+    explicit exception_view_model(const std::string& name)
         : name_(name) { }
 
 public:
@@ -67,19 +66,6 @@ public:
     /**@}*/
 
     /**
-     * @brief Properties of the class itself (e.g. excludes inherited
-     * properties).
-     */
-    /**@{*/
-    std::list<enumerator_view_model> enumerators() const {
-        return enumerators_;
-    }
-    void enumerators(std::list<enumerator_view_model> v) {
-        enumerators_ = v;
-    }
-    /**@}*/
-
-    /**
      * @brief Documentation for the property
      */
     /**@{*/
@@ -89,7 +75,6 @@ public:
 
 private:
     std::list<std::string> namespaces_;
-    std::list<enumerator_view_model> enumerators_;
     std::string name_;
     std::string documentation_;
 };

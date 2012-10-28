@@ -397,6 +397,31 @@ transform_file(cpp_facet_types ft, cpp_file_types flt, cpp_aspect_types at,
     return r;
 }
 
+file_view_model sml_to_cpp_view_model::
+transform_file(cpp_facet_types ft, cpp_file_types flt, cpp_aspect_types at,
+    const sml::exception& e) {
+    const sml::qualified_name name(e.name());
+    const std::list<std::string> ns(join_namespaces(name));
+
+    file_view_model r(create_file(ft, flt, at, name));
+    r.category_type(sml::category_types::user_defined);
+    r.meta_type(e.name().meta_type());
+
+    const auto i(qname_to_exception_.find(name));
+    if (i == qname_to_exception_.end()) {
+        BOOST_LOG_SEV(lg, error) << view_model_not_found
+                                 << name.type_name();
+
+        throw transformation_error(view_model_not_found + name.type_name());
+    }
+    r.exception_vm(i->second);
+
+    const auto in(inclusion_manager_.includes_for_exception(e, ft, flt, at));
+    r.system_includes(in.system);
+    r.user_includes(in.user);
+    return r;
+}
+
 bool sml_to_cpp_view_model::has_implementation(const cpp_facet_types ft,
     const dogen::sml::meta_types mt) const {
     using dogen::sml::meta_types;
@@ -413,7 +438,8 @@ bool sml_to_cpp_view_model::has_implementation(const cpp_facet_types ft,
             ft == cpp_facet_types::io ||
             ft == cpp_facet_types::database ||
             ft == cpp_facet_types::test_data;
-    }
+    } else if (mt == meta_types::enumeration)
+        return false;
 
     std::ostringstream s;
     s << unsupported_meta_type << mt;
@@ -429,6 +455,8 @@ bool sml_to_cpp_view_model::has_forward_decls(const cpp_facet_types ft,
             ft == cpp_facet_types::domain ||
             ft == cpp_facet_types::serialization;
     } else if (mt == meta_types::enumeration) {
+        return ft == cpp_facet_types::domain;
+    } else if (mt == meta_types::exception) {
         return ft == cpp_facet_types::domain;
     }
 
@@ -496,6 +524,26 @@ void sml_to_cpp_view_model::create_enumeration_view_models() {
         // vm.database_name(database_name(name));
         // vm.schema_name(schema_name_);
         qname_to_enumeration_.insert(std::make_pair(e.name(), vm));
+    }
+}
+
+void sml_to_cpp_view_model::create_exception_view_models() {
+    const auto exceptions(model_.exceptions());
+    BOOST_LOG_SEV(lg, debug) << "Transforming exceptions: "
+                             << exceptions.size();
+
+    for (const auto pair : exceptions) {
+        const auto e(pair.second);
+        const dogen::sml::qualified_name name(e.name());
+        const std::list<std::string> ns(join_namespaces(name));
+
+        exception_view_model vm;
+        vm.name(e.name().type_name());
+        vm.namespaces(ns);
+        vm.documentation(e.documentation());
+        // vm.database_name(database_name(name));
+        // vm.schema_name(schema_name_);
+        qname_to_exception_.insert(std::make_pair(e.name(), vm));
     }
 }
 
@@ -573,6 +621,33 @@ std::vector<file_view_model> sml_to_cpp_view_model::transform_enumerations() {
     return r;
 }
 
+std::vector<file_view_model> sml_to_cpp_view_model::transform_exceptions() {
+    std::vector<file_view_model> r;
+    auto lambda([&](cpp_facet_types ft, cpp_file_types flt, cpp_aspect_types at,
+            const sml::exception& e) {
+            const std::string n(e.name().type_name());
+            log_generating_file(ft, at, flt, n, e.name().meta_type());
+            r.push_back(transform_file(ft, flt, at, e));
+        });
+
+    for (auto pair : model_.exceptions()) {
+        const sml::exception e(pair.second);
+
+        if (!e.generate())
+            continue;
+
+        const auto header(cpp_file_types::header);
+        const auto domain(cpp_facet_types::domain);
+        const auto main(cpp_aspect_types::main);
+        const auto forward_decls(cpp_aspect_types::forward_decls);
+        lambda(domain, header, main, e);
+
+        if (has_forward_decls(domain, sml::meta_types::exception))
+            lambda(cpp_facet_types::domain, header, forward_decls, e);
+    }
+    return r;
+}
+
 std::vector<file_view_model>
 sml_to_cpp_view_model::transform_facet_includers() const {
     std::vector<file_view_model> r;
@@ -606,14 +681,17 @@ std::vector<file_view_model> sml_to_cpp_view_model::transform() {
     log_started();
     create_class_view_models();
     create_enumeration_view_models();
+    create_exception_view_models();
 
     std::vector<file_view_model> r;
     auto p(transform_pods());
     auto e(transform_enumerations());
+    auto ex(transform_exceptions());
 
     r.reserve(p.size() + e.size());
     r.insert(r.end(), p.begin(), p.end());
     r.insert(r.end(), e.begin(), e.end());
+    r.insert(r.end(), ex.begin(), ex.end());
 
     log_includers();
     if (settings_.disable_facet_includers())

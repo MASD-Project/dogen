@@ -251,6 +251,13 @@ public:
     inclusion_lists includes_for_enumeration(const sml::enumeration& e,
         cpp_facet_types ft, cpp_file_types flt, cpp_aspect_types at) const;
 
+    /**
+     * @brief Returns all the includes required for the given
+     * exception.
+     */
+    inclusion_lists includes_for_exception(const sml::exception& e,
+        cpp_facet_types ft, cpp_file_types flt, cpp_aspect_types at) const;
+
 private:
     const sml::model model_;
     const cpp_location_manager location_manager_;

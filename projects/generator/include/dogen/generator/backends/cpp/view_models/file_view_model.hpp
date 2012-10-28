@@ -32,6 +32,7 @@
 #include <boost/filesystem/path.hpp>
 #include "dogen/sml/domain/meta_types.hpp"
 #include "dogen/sml/domain/category_types.hpp"
+#include "dogen/generator/backends/cpp/view_models/exception_view_model.hpp"
 #include "dogen/generator/backends/cpp/view_models/enumeration_view_model.hpp"
 #include "dogen/generator/backends/cpp/view_models/class_view_model.hpp"
 #include "dogen/generator/backends/cpp/cpp_facet_types.hpp"
@@ -66,6 +67,7 @@ public:
     meta_type_(std::move(o.meta_type_)),
     class_vm_(std::move(o.class_vm_)),
     enumeration_vm_(std::move(o.enumeration_vm_)),
+    exception_vm_(std::move(o.exception_vm_)),
     header_guard_(std::move(o.header_guard_)),
     system_includes_(std::move(o.system_includes_)),
     user_includes_(std::move(o.user_includes_)),
@@ -99,6 +101,13 @@ public:
         return enumeration_vm_;
     }
 
+    void exception_vm(boost::optional<exception_view_model> value) {
+        exception_vm_ = value;
+    }
+    boost::optional<exception_view_model> exception_vm() const {
+        return exception_vm_;
+    }
+
     void header_guard(std::string value) { header_guard_ = value; }
     std::string header_guard() const { return header_guard_; }
 
@@ -127,6 +136,7 @@ private:
     sml::meta_types meta_type_;
     boost::optional<class_view_model> class_vm_;
     boost::optional<enumeration_view_model> enumeration_vm_;
+    boost::optional<exception_view_model> exception_vm_;
     std::string header_guard_;
     std::list<std::string> system_includes_;
     std::list<std::string> user_includes_;

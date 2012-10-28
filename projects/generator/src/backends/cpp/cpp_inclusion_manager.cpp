@@ -55,6 +55,7 @@ const std::string boost_poly_oarchive("boost/archive/polymorphic_oarchive.hpp");
 
 const std::string boost_export("boost/serialization/export.hpp");
 const std::string boost_string("boost/serialization/string.hpp");
+const std::string boost_exception_info("boost/exception/info.hpp");
 const std::string pqxx_result_include("pqxx/result.hxx");
 const std::string pqxx_transaction_include("pqxx/transaction.hxx");
 const std::string sstream("sstream");
@@ -473,6 +474,26 @@ includes_for_enumeration(const sml::enumeration& e, cpp_facet_types ft,
     // stdexcept
     if (is_implementation && is_io && io_enabled_)
         r.system.push_back(stdexcept);
+
+    return r;
+}
+
+inclusion_lists cpp_inclusion_manager::
+includes_for_exception(const sml::exception& e, cpp_facet_types ft,
+    cpp_file_types flt, cpp_aspect_types at) const {
+    inclusion_lists r;
+
+    append_self_dependencies(e.name(), ft, flt, at, e.name().meta_type(), r);
+
+    // exception info
+    const bool is_header(flt == cpp_file_types::header);
+    const bool is_domain(ft == cpp_facet_types::domain);
+    if (is_header && is_domain)
+        r.system.push_back(boost_exception_info);
+
+    // string
+    if (is_header && is_domain)
+        r.system.push_back(std_string);
 
     return r;
 }

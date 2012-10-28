@@ -139,6 +139,13 @@ private:
         const sml::enumeration& e);
 
     /**
+     * @brief Transforms a SML exception into a C++ file view.
+     */
+    file_view_model
+    transform_file(cpp_facet_types ft, cpp_file_types flt, cpp_aspect_types at,
+        const sml::exception& e);
+
+    /**
      * @brief Transforms all versioned and unversioned keys.
      */
     std::vector<file_view_model> transform_keys();
@@ -159,6 +166,11 @@ private:
     void create_enumeration_view_models();
 
     /**
+     * @brief Creates all the exception view models
+     */
+    void create_exception_view_models();
+
+    /**
      * @brief Transforms pods into file view models.
      */
     std::vector<file_view_model> transform_pods();
@@ -167,6 +179,11 @@ private:
      * @brief Transforms enumerations into view models.
      */
     std::vector<file_view_model> transform_enumerations();
+
+    /**
+     * @brief Transforms exceptions into view models.
+     */
+    std::vector<file_view_model> transform_exceptions();
 
 public:
     /**
@@ -199,6 +216,8 @@ private:
     std::unordered_map<sml::qualified_name, class_view_model> qname_to_class_;
     std::unordered_map<sml::qualified_name, enumeration_view_model>
     qname_to_enumeration_;
+    std::unordered_map<sml::qualified_name, exception_view_model>
+    qname_to_exception_;
     graph_type graph_;
     qname_to_vertex_type qname_to_vertex_;
     vertex_descriptor_type root_vertex_;
