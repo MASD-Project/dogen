@@ -10,6 +10,11 @@ This file contains all stories that haven't been assigned to a sprint.
 
 Stories that we intend to look at, at some point.
 
+*** Empty features should not show up
+
+If there are no files for a feature, we should not generate includers
+and folders for that feature.
+
 *** Test relationships between pods and other meta types
 
 We should validate that pods are only related to other pods -
