@@ -31,6 +31,7 @@
 #include "dogen/generator/backends/cpp/formatters/cpp_indenter.hpp"
 #include "dogen/generator/backends/cpp/formatters/cpp_utility.hpp"
 #include "dogen/generator/backends/cpp/view_models/class_view_model.hpp"
+#include "dogen/generator/backends/cpp/view_models/exception_view_model.hpp"
 #include "dogen/generator/backends/cpp/view_models/enumeration_view_model.hpp"
 #include "dogen/generator/backends/cpp/view_models/file_view_model.hpp"
 #include "dogen/generator/backends/cpp/formatters/file_formatter.hpp"
@@ -43,6 +44,7 @@ namespace formatters {
 
 class domain_header : public file_formatter {
 public:
+    typedef view_models::exception_view_model exception_view_model;
     typedef view_models::enumeration_view_model enumeration_view_model;
     typedef view_models::class_view_model class_view_model;
     typedef view_models::file_view_model file_view_model;
@@ -75,6 +77,7 @@ private:
 private:
     void format_class(const file_view_model& vm);
     void format_enumeration(const file_view_model& vm);
+    void format_exception(const file_view_model& vm);
 
 public:
     virtual void format(const file_view_model& vm) override;

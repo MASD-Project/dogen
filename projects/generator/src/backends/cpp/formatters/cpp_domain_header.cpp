@@ -30,6 +30,7 @@
 #include "dogen/generator/backends/cpp/formatters/cpp_namespace_helper.hpp"
 #include "dogen/generator/backends/cpp/formatters/cpp_includes.hpp"
 #include "dogen/generator/backends/cpp/formatters/cpp_enumeration_declaration.hpp"
+#include "dogen/generator/backends/cpp/formatters/cpp_exception_declaration.hpp"
 #include "dogen/generator/backends/cpp/formatters/cpp_domain_header.hpp"
 
 namespace {
@@ -40,10 +41,10 @@ const std::string invalid_aspect_type("Invalid value for cpp_aspect_types");
 const std::string invalid_category_type("Invalid value for category_types");
 const std::string missing_class_view_model(
     "Meta type is pod but class view model is empty");
-
 const std::string missing_enumeration_view_model(
     "Meta type is enumeration but enumeration view model is empty");
-
+const std::string missing_exception_view_model(
+    "Meta type is exception but exception view model is empty");
 }
 
 namespace dogen {
@@ -184,6 +185,21 @@ void domain_header::format_enumeration(const file_view_model& vm) {
         namespace_helper ns(stream_, evm.namespaces());
         utility_.blank_line();
         cpp_enumeration_declaration f(stream_);
+        f.format(evm);
+    }
+    utility_.blank_line(2);
+}
+
+void domain_header::format_exception(const file_view_model& vm) {
+    const auto o(vm.exception_vm());
+    if (!o)
+        throw generation_failure(missing_exception_view_model);
+
+    {
+        const auto evm(*o);
+        namespace_helper ns(stream_, evm.namespaces());
+        utility_.blank_line();
+        cpp_exception_declaration f(stream_);
         f.format(evm);
     }
     utility_.blank_line(2);
