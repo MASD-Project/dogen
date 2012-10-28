@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_SML_DOMAIN_ENUMERATION_HPP
-#define DOGEN_SML_DOMAIN_ENUMERATION_HPP
+#ifndef DOGEN_SML_DOMAIN_EXCEPTION_HPP
+#define DOGEN_SML_DOMAIN_EXCEPTION_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -27,27 +27,26 @@
 
 #include <string>
 #include <vector>
-#include "dogen/sml/domain/enumerator.hpp"
 #include "dogen/sml/domain/qualified_name.hpp"
 
 namespace dogen {
 namespace sml {
 
-class enumeration_serializer;
+class exception_serializer;
 
-class enumeration {
+class exception {
 public:
-    enumeration(const enumeration&) = default;
-    ~enumeration() = default;
-    enumeration(enumeration&&) = default;
-    enumeration& operator=(const enumeration&) = default;
+    exception(const exception&) = default;
+    ~exception() = default;
+    exception(exception&&) = default;
+    exception& operator=(const exception&) = default;
 
 private:
-    friend class enumeration_serializer;
+    friend class exception_serializer;
 
 public:
-    enumeration() : generate_(false) { }
-    enumeration(const qualified_name& name, const bool generate,
+    exception() : generate_(false) { }
+    exception(const qualified_name& name, const bool generate,
         const std::string& documentation)
         : name_(name), generate_(generate), documentation_(documentation) { }
 
@@ -77,23 +76,13 @@ public:
     void documentation(const std::string& value) { documentation_ = value; }
     /**@}*/
 
-    /**
-     * @brief Enumerators for this enumeration
-     */
-    /**@{*/
-    std::vector<enumerator> enumerators() const { return enumerators_; }
-    void enumerators(const std::vector<enumerator>& v) {
-        enumerators_ = v;
-    }
-    /**@}*/
-
 public:
     void to_stream(std::ostream& stream) const;
 
 public:
-    bool operator==(const enumeration& rhs) const;
+    bool operator==(const exception& rhs) const;
 
-    bool operator!=(const enumeration& rhs) const {
+    bool operator!=(const exception& rhs) const {
         return(!this->operator==(rhs));
     }
 
@@ -101,7 +90,6 @@ private:
     qualified_name name_;
     bool generate_;
     std::string documentation_;
-    std::vector<enumerator> enumerators_;
 };
 
 } }

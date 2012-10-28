@@ -32,6 +32,7 @@ const std::string pod("pod");
 const std::string primitive("primitive");
 const std::string attribute("attribute");
 const std::string package("package");
+const std::string exception("exception");
 
 const std::string error_message("Invalid enum value");
 
@@ -54,6 +55,8 @@ std::ostream& operator<<(std::ostream& stream, meta_types value) {
         return stream << prefix << package;
     case meta_types::primitive:
         return stream << prefix << primitive;
+    case meta_types::exception:
+        return stream << prefix << exception;
     default:
         using utility::exception::invalid_enum_value;
         throw invalid_enum_value(error_message);

@@ -18,29 +18,16 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_SML_DOMAIN_META_TYPES_HPP
-#define DOGEN_SML_DOMAIN_META_TYPES_HPP
-
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
+#include <ostream>
+#include "dogen/sml/io/exception_io.hpp"
 
 namespace dogen {
 namespace sml {
 
-/**
- * @brief Set of all available types of types in SML.
- */
-enum class meta_types : unsigned int {
-    invalid = 0, ///< we don't yet know the type's type
-    enumeration = 1, ///< Type is an enumeration
-    pod = 2, ///< Type is Plain Old Data
-    attribute = 3, ///< Type is an attribute
-    package = 4, ///< Type is a package
-    primitive = 5, ///< Type is a primitive
-    exception = 6 ///< Type is an exception
-};
+std::ostream&
+operator<<(std::ostream& stream, const dogen::sml::exception& exception) {
+    exception.to_stream(stream);
+    return(stream);
+}
 
 } }
-
-#endif

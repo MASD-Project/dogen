@@ -18,29 +18,31 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_SML_DOMAIN_META_TYPES_HPP
-#define DOGEN_SML_DOMAIN_META_TYPES_HPP
-
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
+#include <ostream>
+#include <boost/io/ios_state.hpp>
+#include "dogen/utility/io/vector_io.hpp"
+#include "dogen/sml/io/qualified_name_io.hpp"
+#include "dogen/sml/domain/exception.hpp"
 
 namespace dogen {
 namespace sml {
 
-/**
- * @brief Set of all available types of types in SML.
- */
-enum class meta_types : unsigned int {
-    invalid = 0, ///< we don't yet know the type's type
-    enumeration = 1, ///< Type is an enumeration
-    pod = 2, ///< Type is Plain Old Data
-    attribute = 3, ///< Type is an attribute
-    package = 4, ///< Type is a package
-    primitive = 5, ///< Type is a primitive
-    exception = 6 ///< Type is an exception
-};
+bool exception::operator==(const exception& rhs) const {
+    return
+        name_ == rhs.name() &&
+        generate_ == rhs.generate() &&
+        documentation_ == rhs.documentation();
+}
+
+void exception::to_stream(std::ostream& stream) const {
+    boost::io::ios_flags_saver ifs(stream);
+
+    stream << std::boolalpha
+           << "\"exception\": {"
+           << name() << ", "
+           << "generate: " << generate() << ", "
+           << "\"documentation\":" << "\"" << documentation_ << "\", "
+           << " }";
+}
 
 } }
-
-#endif

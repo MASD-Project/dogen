@@ -32,6 +32,7 @@
 #include "dogen/sml/hash/qualified_name_hash.hpp"
 #include "dogen/sml/domain/primitive.hpp"
 #include "dogen/sml/domain/enumeration.hpp"
+#include "dogen/sml/domain/exception.hpp"
 #include "dogen/sml/domain/package.hpp"
 #include "dogen/sml/domain/pod.hpp"
 
@@ -63,6 +64,7 @@ public:
      * @param pods pods contained in the model.
      * @param primitives primitives contained in the model.
      * @param enumerations enumerations contained in the model.
+     * @param exceptions exceptions contained in the model.
      * @param external_package_path Path of packages that contain this
      * model
      */
@@ -71,10 +73,12 @@ public:
         std::unordered_map<qualified_name, pod> pods,
         std::unordered_map<qualified_name, primitive> primitives,
         std::unordered_map<qualified_name, enumeration> enumerations,
+        std::unordered_map<qualified_name, exception> exceptions,
         std::list<std::string> external_package_path) :
         name_(name), packages_(packages), pods_(pods),
         primitives_(primitives), enumerations_(enumerations),
-        external_package_path_(external_package_path) { }
+        exceptions_(exceptions), external_package_path_(external_package_path) {
+    }
 
 public:
     /**
@@ -136,6 +140,18 @@ public:
     /**@}*/
 
     /**
+     * @brief Exceptions contained in the model.
+     */
+    /**@{*/
+    std::unordered_map<qualified_name, exception> exceptions() const {
+        return exceptions_;
+    }
+    void exceptions(std::unordered_map<qualified_name, exception> v) {
+        exceptions_ = v;
+    }
+    /**@}*/
+
+    /**
      * @brief Path of packages that contain this model.
      */
     std::list<std::string> external_package_path() const {
@@ -170,6 +186,7 @@ private:
     std::unordered_map<qualified_name, pod> pods_;
     std::unordered_map<qualified_name, primitive> primitives_;
     std::unordered_map<qualified_name, enumeration> enumerations_;
+    std::unordered_map<qualified_name, exception> exceptions_;
     std::list<std::string> external_package_path_;
     std::string schema_name_;
 };

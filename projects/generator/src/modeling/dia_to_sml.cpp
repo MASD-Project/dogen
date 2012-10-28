@@ -122,9 +122,12 @@ sml::model dia_to_sml::transform() {
     std::unordered_map<dogen::sml::qualified_name, dogen::sml::primitive>
         primitives;
 
+    std::unordered_map<dogen::sml::qualified_name, dogen::sml::exception>
+        exceptions;
+
     using sml::model;
     return model(model_name_, packages, pods, primitives, enumerations,
-        external_package_path_);
+        exceptions, external_package_path_);
 }
 
 } } }
