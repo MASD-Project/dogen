@@ -39,36 +39,15 @@
 #include "dogen/generator/backends/factory.hpp"
 #include "dogen/generator/generator.hpp"
 
+using namespace dogen::utility::log;
+
 namespace {
 
 const std::string codegen_error("Error occurred during code generation: ");
 const std::string incorrect_stdout_config(
     "Configuration for output to stdout is incorrect");
 
-using namespace dogen::utility::log;
 auto lg(logger_factory("generator"));
-
-inline void log_started(const dogen::generator::config::settings& s) {
-    BOOST_LOG_SEV(lg, info) << "Code generator started.";
-    BOOST_LOG_SEV(lg, debug) << "Settings: " << s;
-}
-
-inline void log_finished() {
-    BOOST_LOG_SEV(lg, info) << "Code generator finished.";
-}
-
-inline void log_stop_after_merging() {
-    BOOST_LOG_SEV(lg, info)
-        << "Stopping after merging so not returning merged model";
-}
-
-inline void log_stop_after_formatting() {
-    BOOST_LOG_SEV(lg, warn) << "Stopping after formatting so not outputting";
-}
-
-inline void log_no_files() {
-    BOOST_LOG_SEV(lg, warn) << "No files were generated, nothing to output.";
-}
 
 }
 
@@ -104,12 +83,13 @@ bool generator::housekeeping_required() const {
 
 void generator::output(const outputters::outputter::value_type& o) const {
     if (settings_.troubleshooting().stop_after_formatting()) {
-        log_stop_after_formatting();
+        BOOST_LOG_SEV(lg, warn) << "Stopping after formatting so not outputting";
         return;
     }
 
     if (o.empty()) {
-        log_no_files();
+        BOOST_LOG_SEV(lg, warn) << "No files were generated, nothing to output.";
+
         return;
     }
 
@@ -148,14 +128,18 @@ boost::optional<sml::model> generator::merge_models() const {
     const auto r(d.create_model());
 
     if (settings_.troubleshooting().stop_after_merging()) {
-        log_stop_after_merging();
+        BOOST_LOG_SEV(lg, info) << "Stopping after merging so not returning"
+                                << " merged model";
+
         return boost::optional<sml::model>();
     }
     return r;
 }
 
 void generator::generate() const {
-    log_started(settings_);
+    BOOST_LOG_SEV(lg, info) << "Code generator started.";
+    BOOST_LOG_SEV(lg, debug) << "Settings: " << settings_;
+
     try {
         const auto o(merge_models());
         if (o)
@@ -163,7 +147,7 @@ void generator::generate() const {
     } catch (const std::exception& e) {
         throw generation_failure(codegen_error + e.what());
     }
-    log_finished();
+    BOOST_LOG_SEV(lg, info) << "Code generator finished.";
 }
 
 } }
