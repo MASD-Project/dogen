@@ -10,6 +10,11 @@ This file contains all stories that haven't been assigned to a sprint.
 
 Stories that we intend to look at, at some point.
 
+*** Add support for configurable enumerations types
+
+At present our enumerations always use unsigned int as the underlying
+type. It should be possible to override that from dia.
+
 *** Create interfaces to help with mocking
 
 We should be doing a bit more IoC, particularly with inclusion
