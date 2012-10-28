@@ -28,6 +28,7 @@ namespace {
 const std::string prefix("stereotypes::");
 const std::string invalid("invalid");
 const std::string enumeration("enumeration");
+const std::string exception("exception");
 
 const std::string error_message("Invalid or unexpected object type");
 
@@ -42,6 +43,8 @@ std::ostream& operator<<(std::ostream& stream, stereotypes value) {
         return stream << prefix << invalid;
     case stereotypes::enumeration:
         return stream << prefix << enumeration;
+    case stereotypes::exception:
+        return stream << prefix << exception;
     default:
         break;
     }

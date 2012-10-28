@@ -42,7 +42,7 @@
 #include "dogen/dia/io/diagram_io.hpp"
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/generator/modeling/transformation_error.hpp"
-#include "dogen/generator/modeling/dia_object_to_sml_enumeration.hpp"
+#include "dogen/generator/modeling/dia_object_to_sml_exception.hpp"
 #include "dogen/generator/modeling/identifier_parser.hpp"
 #include "dogen/generator/modeling/dia_to_sml.hpp"
 
@@ -146,7 +146,7 @@ namespace dogen {
 namespace generator {
 namespace modeling {
 
-dogen::sml::qualified_name dia_object_to_sml_enumeration::
+dogen::sml::qualified_name dia_object_to_sml_exception::
 transform_qualified_name(const dogen::dia::attribute& a,
     dogen::sml::meta_types meta_type, const std::string& pkg_id) const {
     if (a.name() != dia_name) {
@@ -178,7 +178,7 @@ transform_qualified_name(const dogen::dia::attribute& a,
     return name;
 }
 
-std::string dia_object_to_sml_enumeration::
+std::string dia_object_to_sml_exception::
 transform_string_attribute(const dogen::dia::attribute& a) const {
     const auto values(a.values());
     if (values.size() != 1) {
@@ -196,14 +196,14 @@ transform_string_attribute(const dogen::dia::attribute& a) const {
     return name;
 }
 
-dia_object_to_sml_enumeration::
-dia_object_to_sml_enumeration(const std::string& model_name,
+dia_object_to_sml_exception::
+dia_object_to_sml_exception(const std::string& model_name,
     const std::list<std::string>& external_package_path,
     bool is_target, bool verbose)
     : model_name_(model_name), external_package_path_(external_package_path),
       is_target_(is_target), verbose_(verbose) { }
 
-bool dia_object_to_sml_enumeration::is_processable(const dia::object& o) const {
+bool dia_object_to_sml_exception::is_processable(const dia::object& o) const {
     using dogen::dia::object_types;
     object_types ot(parse_object_type(o.type()));
     if (ot != object_types::uml_class)
@@ -219,14 +219,14 @@ bool dia_object_to_sml_enumeration::is_processable(const dia::object& o) const {
             return false;
 
         const auto st(parse_stereotype(v));
-        if (st == stereotypes::enumeration)
+        if (st == stereotypes::exception)
             return true;
     }
     return false;
 }
 
-void dia_object_to_sml_enumeration::add_object(const dia::object& o) {
-    BOOST_LOG_SEV(lg, debug) << "Adding enumeration object: " << o.id();
+void dia_object_to_sml_exception::add_object(const dia::object& o) {
+    BOOST_LOG_SEV(lg, debug) << "Adding exception object: " << o.id();
 
     if (!is_processable(o)) {
         BOOST_LOG_SEV(lg, error) << "Expected composite type "
@@ -239,33 +239,9 @@ void dia_object_to_sml_enumeration::add_object(const dia::object& o) {
     objects_.push_back(o);
 }
 
-dogen::sml::enumerator dia_object_to_sml_enumeration::
-transform_enumerator(const dogen::dia::composite& uml_attribute,
-    const unsigned int position) const {
-    dogen::sml::enumerator r;
-    for (const auto a : uml_attribute.value()) {
-        if (a->name() == dia_name) {
-            r.name(transform_string_attribute(*a));
-        } else if (a->name() == dia_documentation) {
-            const std::string doc(transform_string_attribute(*a));
-            r.documentation(doc);
-        } else {
-            BOOST_LOG_SEV(lg, warn) << "Ignoring unexpected attribute: "
-                                    << a->name();
-        }
-    }
-    r.value(boost::lexical_cast<std::string>(position));
-    if (r.name().empty()) {
-        BOOST_LOG_SEV(lg, error) << "Could not find a name attribute.";
-        throw transformation_error(name_attribute_expected);
-    }
-
-    return r;
-}
-
-sml::enumeration dia_object_to_sml_enumeration::
-transform_enumeration(const dia::object& o) const {
-    dogen::sml::enumeration r;
+sml::exception dia_object_to_sml_exception::
+transform_exception(const dia::object& o) const {
+    dogen::sml::exception r;
 
     r.generate(is_target_);
     for (auto a : o.attributes()) {
@@ -274,57 +250,23 @@ transform_enumeration(const dia::object& o) const {
             const std::string pkg_id(o.child_node() ?
                 o.child_node()->parent() : empty);
             using dogen::sml::meta_types;
-            r.name(transform_qualified_name(a, meta_types::enumeration,
+            r.name(transform_qualified_name(a, meta_types::exception,
                     pkg_id));
         } else if (a.name() == dia_documentation) {
             const std::string doc(transform_string_attribute(a));
             r.documentation(doc);
-        } if (a.name() == dia_attributes) {
-            const auto values(a.values());
-
-            if (values.empty()) {
-                BOOST_LOG_SEV(lg, debug) << "Attribute is empty.";
-                continue;
-            }
-
-            dogen::sml::enumerator invalid;
-            invalid.name("invalid");
-            invalid.documentation("Represents an uninitialised enum");
-            invalid.value("0");
-
-            std::vector<dogen::sml::enumerator> enumerators;
-            enumerators.push_back(invalid);
-
-            unsigned int pos(1);
-            for (auto v : values) {
-                using dogen::dia::composite;
-                const auto c(attribute_value<composite>(v, dia_composite));
-
-                if (c.type() != dia_uml_attribute) {
-                    BOOST_LOG_SEV(lg, error) << "Expected composite type "
-                                             << " to be "
-                                             << dia_uml_attribute
-                                             << "but was " << c.type();
-                    throw transformation_error(uml_attribute_expected);
-                }
-                BOOST_LOG_SEV(lg, debug) << "Found composite of type "
-                                         << c.type();
-                enumerators.push_back(transform_enumerator(c, pos++));
-            }
-            r.enumerators(enumerators);
         }
-
     }
     return r;
 }
 
-std::unordered_map<sml::qualified_name, sml::enumeration>
-dia_object_to_sml_enumeration::
+std::unordered_map<sml::qualified_name, sml::exception>
+dia_object_to_sml_exception::
 transform(std::unordered_map<std::string, sml::package> packages) {
     packages_ = packages;
-    std::unordered_map<sml::qualified_name, sml::enumeration> r;
+    std::unordered_map<sml::qualified_name, sml::exception> r;
     for (const auto o : objects_) {
-        auto e(transform_enumeration(o));
+        auto e(transform_exception(o));
         r.insert(std::make_pair(e.name(), e));
     }
     return r;

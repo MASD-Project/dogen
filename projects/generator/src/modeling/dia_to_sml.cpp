@@ -71,6 +71,8 @@ dia_to_sml(const dia::diagram& diagram, const std::string& model_name,
       pod_transformer_(model_name_, external_package_path_, is_target_,
           verbose_),
       enumeration_transformer_(model_name_, external_package_path_, is_target_,
+          verbose_),
+      exception_transformer_(model_name_, external_package_path_, is_target_,
           verbose_) {
 
     BOOST_LOG_SEV(lg, debug) << "Initialised with configuration:"
@@ -96,6 +98,11 @@ setup_data_structures(const std::vector<dia::object>& objects) {
             continue;
         }
 
+        if (exception_transformer_.is_processable(o)) {
+            exception_transformer_.add_object(o);
+            continue;
+        }
+
         if (pod_transformer_.is_processable(o)) {
             pod_transformer_.add_object(o);
             continue;
@@ -113,6 +120,7 @@ sml::model dia_to_sml::transform() {
 
     const auto pods(pod_transformer_.transform(packages_));
     const auto enumerations(enumeration_transformer_.transform(packages_));
+    const auto exceptions(exception_transformer_.transform(packages_));
 
     std::unordered_map<dogen::sml::qualified_name, dogen::sml::package>
         packages;
@@ -121,9 +129,6 @@ sml::model dia_to_sml::transform() {
 
     std::unordered_map<dogen::sml::qualified_name, dogen::sml::primitive>
         primitives;
-
-    std::unordered_map<dogen::sml::qualified_name, dogen::sml::exception>
-        exceptions;
 
     using sml::model;
     return model(model_name_, packages, pods, primitives, enumerations,

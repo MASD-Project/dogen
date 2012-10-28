@@ -39,6 +39,7 @@
 #include "dogen/generator/modeling/dia_object_to_sml_pod.hpp"
 #include "dogen/generator/modeling/dia_object_to_sml_package.hpp"
 #include "dogen/generator/modeling/dia_object_to_sml_enumeration.hpp"
+#include "dogen/generator/modeling/dia_object_to_sml_exception.hpp"
 
 namespace dogen {
 namespace generator {
@@ -95,6 +96,7 @@ private:
     dia_object_to_sml_package package_transformer_;
     dia_object_to_sml_pod pod_transformer_;
     dia_object_to_sml_enumeration enumeration_transformer_;
+    dia_object_to_sml_exception exception_transformer_;
 };
 
 } } }
