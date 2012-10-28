@@ -1,2 +1,13 @@
+# -*- mode: sh; tab-width: 4; indent-tabs-mode: nil -*-
+
+# dia auto save files
 *.autosave
+
+# backup files and emacs source control checkouts
 *~
+
+# windows thumbnails
+Thumbs.db
+
+# OSX system configuration files
+.DS_Store
