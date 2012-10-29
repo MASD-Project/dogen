@@ -18,19 +18,20 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_GENERATOR_MODELING_IDENTIFIER_PARSER_HPP
-#define DOGEN_GENERATOR_MODELING_IDENTIFIER_PARSER_HPP
+#ifndef DOGEN_SML_UTILITY_IDENTIFIER_PARSER_HPP
+#define DOGEN_SML_UTILITY_IDENTIFIER_PARSER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
+#include <list>
 #include <string>
 #include "dogen/sml/domain/qualified_name.hpp"
 
 namespace dogen {
-namespace generator {
-namespace modeling {
+namespace sml {
+namespace utility {
 
 class identifier_parser {
 public:
@@ -41,7 +42,7 @@ public:
     identifier_parser& operator=(const identifier_parser&) = default;
 
 public:
-    static sml::qualified_name parse_qualified_name(const std::string& n);
+    static qualified_name parse_qualified_name(const std::string& n);
     static std::list<std::string> parse_scoped_name(const std::string& n);
 };
 

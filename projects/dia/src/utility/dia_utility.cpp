@@ -27,7 +27,8 @@ const std::string uml_large_package("UML - LargePackage");
 const std::string uml_class("UML - Class");
 const std::string uml_generalization("UML - Generalization");
 const std::string uml_association("UML - Association");
-const std::string invalid_dia_type("Invalid or unsupported Dia type");
+const std::string invalid_object_type("Invalid value for object type: ");
+const std::string invalid_stereotype("Invalid value for stereotype: ");
 
 const std::string enumeration("enumeration");
 const std::string exception("exception");
@@ -51,7 +52,7 @@ object_types parse_object_type(const std::string& ot) {
     if (ot == uml_association)
         return object_types::uml_association;
 
-    throw dogen::utility::exception::exception(invalid_dia_type);
+    throw dogen::utility::exception::exception(invalid_object_type + ot);
 }
 
 stereotypes parse_stereotype(const std::string& st) {
@@ -61,7 +62,7 @@ stereotypes parse_stereotype(const std::string& st) {
     if (st == exception)
         return stereotypes::exception;
 
-    throw dogen::utility::exception::exception(invalid_dia_type);
+    throw dogen::utility::exception::exception(invalid_stereotype + st);
 }
 
 } } }

@@ -30,7 +30,6 @@
 #include "dogen/dia/io/diagram_io.hpp"
 #include "dogen/dia/xml/hydrator.hpp"
 #include "dogen/generator/modeling/dia_to_sml.hpp"
-#include "dogen/generator/modeling/identifier_parser.hpp"
 #include "dogen/sml/domain/model.hpp"
 #include "dogen/sml/io/model_io.hpp"
 #include "dogen/sml/io/qualified_name_io.hpp"
@@ -149,40 +148,6 @@ BOOST_AUTO_TEST_CASE(trivial_inheritance_dia_transforms_into_expected_sml) {
     const auto actual_path(dia_sml::actual_trivial_inheritance_sml_xml());
     const auto expected_path(dia_sml::expected_trivial_inheritance_sml_xml());
     BOOST_CHECK(test_dia_to_sml(input_path, expected_path, actual_path));
-}
-
-BOOST_AUTO_TEST_CASE(parsing_string_with_inner_namespaces_produces_expected_qualified_name) {
-    SETUP_TEST_LOG("parsing_string_with_inner_namespaces_produces_expected_qualified_name");
-    const std::string s("a::b::c::z");
-    const auto a(identifier_parser::parse_qualified_name(s));
-
-    dogen::sml::qualified_name e;
-    e.type_name("z");
-    e.package_path(std::list<std::string> { "b", "c"});
-    e.model_name("a");
-    BOOST_CHECK(asserter::assert_equals(a, e));
-}
-
-BOOST_AUTO_TEST_CASE(parsing_string_with_no_colons_produces_expected_qualified_name) {
-    SETUP_TEST_LOG("parsing_string_with_no_colons_produces_expected_qualified_name");
-    const std::string s("z");
-    const auto a(identifier_parser::parse_qualified_name(s));
-
-    dogen::sml::qualified_name e;
-    e.type_name("z");
-    BOOST_CHECK(asserter::assert_equals(a, e));
-}
-
-
-BOOST_AUTO_TEST_CASE(parsing_string_with_one_colon_produces_expected_qualified_name) {
-    SETUP_TEST_LOG("parsing_string_with_one_colon_produces_expected_qualified_name");
-    const std::string s("a::z");
-    const auto a(identifier_parser::parse_qualified_name(s));
-
-    dogen::sml::qualified_name e;
-    e.model_name("a");
-    e.type_name("z");
-    BOOST_CHECK(asserter::assert_equals(a, e));
 }
 
 BOOST_AUTO_TEST_SUITE_END()

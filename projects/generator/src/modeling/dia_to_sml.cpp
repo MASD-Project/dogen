@@ -44,7 +44,7 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/generator/modeling/transformation_error.hpp"
 #include "dogen/generator/modeling/dia_object_to_sml_package.hpp"
-#include "dogen/generator/modeling/identifier_parser.hpp"
+#include "dogen/sml/utility/identifier_parser.hpp"
 #include "dogen/generator/modeling/dia_to_sml.hpp"
 
 namespace {
@@ -64,7 +64,8 @@ dia_to_sml(const dia::diagram& diagram, const std::string& model_name,
     : diagram_(diagram),
       model_name_(model_name),
       external_package_path_(
-          identifier_parser::parse_scoped_name(external_package_path)),
+          sml::utility::identifier_parser::parse_scoped_name(
+              external_package_path)),
       is_target_(is_target),
       verbose_(verbose),
       package_transformer_(model_name_, external_package_path_, verbose_),

@@ -23,7 +23,9 @@
 #include "dogen/utility/test/logging.hpp"
 #include "dogen/utility/test/asserter.hpp"
 #include "dogen/sml/domain/model.hpp"
+#include "dogen/sml/io/qualified_name_io.hpp"
 #include "dogen/sml/domain/merging_error.hpp"
+#include "dogen/sml/utility/identifier_parser.hpp"
 #include "dogen/sml/utility/merger.hpp"
 #include "dogen/utility/test/exception_checkers.hpp"
 
@@ -82,9 +84,11 @@ dogen::sml::pod mock_pod(unsigned int i) {
 
 }
 
+using dogen::utility::test::asserter;
 using dogen::utility::test::contains_checker;
 using dogen::sml::merging_error;
 using dogen::sml::utility::merger;
+using dogen::sml::utility::identifier_parser;
 
 BOOST_AUTO_TEST_SUITE(utility)
 
@@ -588,5 +592,40 @@ BOOST_AUTO_TEST_CASE(setting_merged_schema_name_propagates_to_combined_model) {
     const auto combined(mg.merge());
     BOOST_CHECK(combined.schema_name() == schema_name);
 }
+
+BOOST_AUTO_TEST_CASE(parsing_string_with_inner_namespaces_produces_expected_qualified_name) {
+    SETUP_TEST_LOG("parsing_string_with_inner_namespaces_produces_expected_qualified_name");
+    const std::string s("a::b::c::z");
+    const auto a(identifier_parser::parse_qualified_name(s));
+
+    dogen::sml::qualified_name e;
+    e.type_name("z");
+    e.package_path(std::list<std::string> { "b", "c"});
+    e.model_name("a");
+    BOOST_CHECK(asserter::assert_equals(a, e));
+}
+
+BOOST_AUTO_TEST_CASE(parsing_string_with_no_colons_produces_expected_qualified_name) {
+    SETUP_TEST_LOG("parsing_string_with_no_colons_produces_expected_qualified_name");
+    const std::string s("z");
+    const auto a(identifier_parser::parse_qualified_name(s));
+
+    dogen::sml::qualified_name e;
+    e.type_name("z");
+    BOOST_CHECK(asserter::assert_equals(a, e));
+}
+
+
+BOOST_AUTO_TEST_CASE(parsing_string_with_one_colon_produces_expected_qualified_name) {
+    SETUP_TEST_LOG("parsing_string_with_one_colon_produces_expected_qualified_name");
+    const std::string s("a::z");
+    const auto a(identifier_parser::parse_qualified_name(s));
+
+    dogen::sml::qualified_name e;
+    e.model_name("a");
+    e.type_name("z");
+    BOOST_CHECK(asserter::assert_equals(a, e));
+}
+
 
 BOOST_AUTO_TEST_SUITE_END()

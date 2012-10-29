@@ -20,7 +20,7 @@
  */
 #include <boost/tokenizer.hpp>
 #include <boost/range/algorithm.hpp>
-#include "dogen/generator/modeling/identifier_parser.hpp"
+#include "dogen/sml/utility/identifier_parser.hpp"
 
 namespace {
 
@@ -67,12 +67,11 @@ const char* delimiter = "::";
 }
 
 namespace dogen {
-namespace generator {
-namespace modeling {
+namespace sml {
+namespace utility {
 
-sml::qualified_name
-identifier_parser::parse_qualified_name(const std::string& n) {
-    dogen::sml::qualified_name r;
+qualified_name identifier_parser::parse_qualified_name(const std::string& n) {
+    qualified_name r;
 
     if (std::string::npos == n.find(delimiter)) {
         r.type_name(n);

@@ -43,7 +43,6 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/generator/modeling/transformation_error.hpp"
 #include "dogen/generator/modeling/dia_object_to_sml_exception.hpp"
-#include "dogen/generator/modeling/identifier_parser.hpp"
 #include "dogen/generator/modeling/dia_to_sml.hpp"
 
 namespace {

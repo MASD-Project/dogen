@@ -27,7 +27,6 @@
 #include "dogen/dia/utility/dia_utility.hpp"
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/generator/modeling/transformation_error.hpp"
-#include "dogen/generator/modeling/identifier_parser.hpp"
 #include "dogen/generator/modeling/dia_object_to_sml_package.hpp"
 
 namespace {
@@ -93,9 +92,6 @@ public:
     dia_dfs_visitor& operator=(const dia_dfs_visitor&) = default;
     dia_dfs_visitor(const dia_dfs_visitor&) = default;
     dia_dfs_visitor(dia_dfs_visitor&&) = default;
-
-private:
-    typedef dogen::generator::modeling::identifier_parser identifier_parser;
 
 public:
     dia_dfs_visitor(const std::string& model_name,
