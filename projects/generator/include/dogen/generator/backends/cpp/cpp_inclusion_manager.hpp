@@ -152,6 +152,11 @@ public:
      */
     bool is_parent_or_child(const dogen::sml::pod& p) const;
 
+    /**
+     * @brief Remove duplicates from inclusion lists
+     */
+    void remove_duplicates(inclusion_lists& il) const;
+
 private:
     /**
      * @brief Flattens the given pod into a list containing all

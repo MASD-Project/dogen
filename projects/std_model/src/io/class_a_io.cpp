@@ -29,6 +29,7 @@ std::ostream& operator<<(std::ostream& s, const class_a& v) {
     s << " { "
       << "\"__type__\": " << "\"class_a\"" << ", "
       << "\"prop0\": " << "\"" << v.prop0() << "\"" << ", "
+      << "\"prop1\": " << "\"" << v.prop1() << "\"" << ", "
       << "\"versioned_key\": " << v.versioned_key()
       << " }";
     return(s);

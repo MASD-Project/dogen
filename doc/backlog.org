@@ -593,7 +593,6 @@ enabling warnings for all undocumented code. We also need to figure
 out how to mark code as ignored (for example serialisation helpers,
 etc won't require documentation).
 
-
 *** Add specification comments to tests
 
 We started off by adding a technical specification as a doxygen

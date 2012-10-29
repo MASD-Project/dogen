@@ -39,6 +39,7 @@ std::size_t class_a_hasher::hash(const class_a& v) {
     std::size_t seed(0);
 
     combine(seed, v.prop0());
+    combine(seed, v.prop1());
     combine(seed, v.versioned_key());
 
     return seed;

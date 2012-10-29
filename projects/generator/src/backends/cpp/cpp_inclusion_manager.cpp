@@ -434,6 +434,14 @@ bool cpp_inclusion_manager::is_parent_or_child(const dogen::sml::pod& p) const {
     return p.parent_name() || p.is_parent();
 }
 
+
+void cpp_inclusion_manager::remove_duplicates(inclusion_lists& il) const {
+    il.system.sort();
+    il.system.unique();
+    il.user.sort();
+    il.user.unique();
+}
+
 inclusion_lists
 cpp_inclusion_manager::includes_for_includer_files(cpp_facet_types ft) const {
     inclusion_lists r;
@@ -475,6 +483,7 @@ includes_for_enumeration(const sml::enumeration& e, cpp_facet_types ft,
     if (is_implementation && is_io && io_enabled_)
         r.system.push_back(stdexcept);
 
+    remove_duplicates(r);
     return r;
 }
 
@@ -495,6 +504,7 @@ includes_for_exception(const sml::exception& e, cpp_facet_types ft,
     if (is_header && is_domain)
         r.system.push_back(std_string);
 
+    remove_duplicates(r);
     return r;
 }
 
@@ -518,6 +528,7 @@ includes_for_pod(const sml::pod& pod, cpp_facet_types ft, cpp_file_types flt,
     append_relationship_dependencies(names, ft, flt, pc, r);
     append_self_dependencies(n, ft, flt, at, n.meta_type(), r);
 
+    remove_duplicates(r);
     return r;
 }
 

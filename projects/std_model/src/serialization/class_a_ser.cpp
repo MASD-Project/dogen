@@ -44,6 +44,7 @@ void save(Archive& ar,
     const dogen::std_model::class_a& v,
     const unsigned int /*version*/) {
     ar << make_nvp("prop0", v.prop0_);
+    ar << make_nvp("prop1", v.prop1_);
     ar << make_nvp("versioned_key", v.versioned_key_);
 }
 
@@ -52,6 +53,7 @@ void load(Archive& ar,
     dogen::std_model::class_a& v,
     const unsigned int /*version*/) {
     ar >> make_nvp("prop0", v.prop0_);
+    ar >> make_nvp("prop1", v.prop1_);
     ar >> make_nvp("versioned_key", v.versioned_key_);
 }
 

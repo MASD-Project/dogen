@@ -43,6 +43,7 @@ public:
 public:
     class_a(
         const std::string& prop0,
+        const std::string& prop1,
         const dogen::std_model::versioned_key& versioned_key);
 
 private:
@@ -60,6 +61,19 @@ public:
     void prop0(const std::string& v) {
         prop0_ = v;
     }
+
+    /*
+     * @brief test inclusion duplicates
+     */
+    /**@{*/
+    std::string prop1() const {
+        return prop1_;
+    }
+
+    void prop1(const std::string& v) {
+        prop1_ = v;
+    }
+    /**@}*/
 
     dogen::std_model::versioned_key versioned_key() const {
         return versioned_key_;
@@ -81,6 +95,7 @@ public:
 
 private:
     std::string prop0_;
+    std::string prop1_;
     dogen::std_model::versioned_key versioned_key_;
 };
 
