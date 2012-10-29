@@ -488,12 +488,6 @@ each test so one could =make enable_facet_domain= and =make
 run_enable_facet_domain=. The targets need to be prefixed with module
 name and test suite.
 
-*** SML builder should live in SML
-
-We don't have any dependencies outside of SML in the builder so it
-should be moved inside of SML. Perhaps a transformers folder. We need
-to move the tests, etc.
-
 *** Add option to ignore files based on regex
 
 We need a way of excluding manually added files from the managed
