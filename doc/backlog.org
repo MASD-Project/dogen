@@ -10,6 +10,12 @@ This file contains all stories that haven't been assigned to a sprint.
 
 Stories that we intend to look at, at some point.
 
+*** Empty directories should be deleted
+
+When housekeeper finishes deleting all extra files, it should check
+all of the processed directories to see if they are empty. If they
+are, it should delete the directory.
+
 *** Ignore files and folders based on regex
 
 We need the ability to specify one or more regular expressions that
