@@ -20,7 +20,8 @@
  */
 #include <sstream>
 #include <iostream>
-#include "dogen/generator/modeling/validation_error.hpp"
+#include "dogen/utility/log/logger.hpp"
+#include "dogen/sml/domain/merging_error.hpp"
 #include "dogen/utility/io/unordered_map_io.hpp"
 #include "dogen/utility/io/vector_io.hpp"
 #include "dogen/sml/io/qualified_name_io.hpp"
@@ -28,50 +29,52 @@
 #include "dogen/sml/io/property_io.hpp"
 #include "dogen/sml/io/pod_io.hpp"
 #include "dogen/sml/io/model_io.hpp"
-#include "dogen/utility/log/logger.hpp"
-#include "dogen/generator/modeling/sml_builder.hpp"
+#include "dogen/sml/utility/merger.hpp"
 
 using namespace dogen::utility::log;
-namespace  {
 
-static logger lg(logger_factory("sml_builder"));
+namespace {
+
+static logger lg(logger_factory("merger"));
 
 const std::string orphan_pod("Pod's parent could not be located: ");
 const std::string undefined_type("Pod has property with undefined type: ");
 const std::string missing_target("No target model found");
 
+typedef boost::error_info<struct tag_errmsg, std::string> errmsg_info;
+
 }
 
 namespace dogen {
-namespace generator {
-namespace modeling {
+namespace sml {
+namespace utility {
 
-sml_builder::sml_builder(const bool verbose, const std::string& schema_name)
+merger::merger(const bool verbose, const std::string& schema_name)
     : verbose_(verbose), has_target_(false), schema_name_(schema_name) { }
 
-void sml_builder::resolve_parent(const sml::pod& pod) {
+void merger::resolve_parent(const pod& pod) {
     const auto pods(merged_model_.pods());
     auto parent(pod.parent_name());
 
     while (parent) {
-        sml::qualified_name pqn(*parent);
+        qualified_name pqn(*parent);
         const auto i(pods.find(pqn));
         if (i == pods.end()) {
             std::ostringstream stream;
             stream << orphan_pod << ". pod: "
                    << pod.name().type_name() << ". parent: "
                    << pqn.type_name();
-            throw validation_error(stream.str());
+            throw merging_error(stream.str());
         }
 
         parent = i->second.parent_name();
     }
 }
 
-sml::qualified_name
-sml_builder::resolve_partial_type(sml::qualified_name n) const {
+qualified_name
+merger::resolve_partial_type(qualified_name n) const {
     const auto pods(merged_model_.pods());
-    sml::qualified_name r(n);
+    qualified_name r(n);
 
     auto lambda([&]() {
             BOOST_LOG_SEV(lg, debug) << "Resolved type " << n.type_name()
@@ -79,7 +82,7 @@ sml_builder::resolve_partial_type(sml::qualified_name n) const {
         });
 
     // first try the type as it was read originally.
-    r.meta_type(sml::meta_types::pod);
+    r.meta_type(meta_types::pod);
     auto i(pods.find(r));
     if (i != pods.end()) {
         lambda();
@@ -88,7 +91,7 @@ sml_builder::resolve_partial_type(sml::qualified_name n) const {
 
     // its not a pod, could it be a primitive?
     const auto primitives(merged_model_.primitives());
-    r.meta_type(sml::meta_types::primitive);
+    r.meta_type(meta_types::primitive);
     auto j(primitives.find(r));
     if (j != primitives.end()) {
         lambda();
@@ -97,7 +100,7 @@ sml_builder::resolve_partial_type(sml::qualified_name n) const {
 
     if (r.model_name().empty()) {
         // it could be a type defined in this model
-        r.meta_type(sml::meta_types::pod);
+        r.meta_type(meta_types::pod);
         r.model_name(merged_model_.name());
         r.external_package_path(merged_model_.external_package_path());
         i = pods.find(r);
@@ -108,7 +111,7 @@ sml_builder::resolve_partial_type(sml::qualified_name n) const {
 
         // try enumerations
         const auto enumerations(merged_model_.enumerations());
-        r.meta_type(sml::meta_types::enumeration);
+        r.meta_type(meta_types::enumeration);
         auto k(enumerations.find(r));
         if (k != enumerations.end()) {
             lambda();
@@ -117,33 +120,37 @@ sml_builder::resolve_partial_type(sml::qualified_name n) const {
     }
 
     BOOST_LOG_SEV(lg, error) << undefined_type << n.type_name();
-    throw validation_error(undefined_type + n.type_name());
+    throw merging_error(undefined_type + n.type_name());
 }
 
-std::vector<sml::property>
-sml_builder::resolve_properties(const sml::pod& pod) {
+std::vector<property>
+merger::resolve_properties(const pod& pod) {
     auto r(pod.properties());
-    for (unsigned int i(0); i < r.size(); ++i) {
-        sml::property property(r[i]);
-        property.type_name(resolve_partial_type(property.type_name()));
-        r[i] = property;
 
-        // FIXME: provide additional context for exceptions
-        // std::ostringstream stream;
-        // stream << undefined_type << ". pod: "
-        //        << pod.name().type_name() << ". property type: "
-        //        << pqn.type_name();
+    for (unsigned int i(0); i < r.size(); ++i) {
+        property property(r[i]);
+
+        try {
+            property.type_name(resolve_partial_type(property.type_name()));
+            r[i] = property;
+        } catch (const merging_error& e) {
+            std::ostringstream s;
+            s << "Property: " << property.name()
+              << " type: " << property.type_name();
+            e << errmsg_info(s.str());
+            throw;
+        }
     }
     return r;
 }
 
-void sml_builder::resolve() {
+void merger::resolve() {
     const auto primitives(merged_model_.primitives());
     auto pods(merged_model_.pods());
 
     for (auto i(pods.begin()); i != pods.end(); ++i) {
-        const sml::qualified_name qualified_name(i->first);
-        sml::pod& pod(i->second);
+        const qualified_name qualified_name(i->first);
+        pod& pod(i->second);
         if (!pod.generate())
             continue;
 
@@ -153,9 +160,9 @@ void sml_builder::resolve() {
     merged_model_.pods(pods);
 }
 
-void sml_builder::merge() {
+void merger::combine() {
     if (!has_target_)
-        throw validation_error(missing_target);
+        throw merging_error(missing_target);
 
     merged_model_.name(name_);
 
@@ -165,7 +172,7 @@ void sml_builder::merge() {
     auto exceptions(merged_model_.exceptions());
 
     for (const auto m : models_) {
-        BOOST_LOG_SEV(lg, info) << "merging model: '" << m.name()
+        BOOST_LOG_SEV(lg, info) << "Combining model: '" << m.name()
                                 << "' pods: " << m.pods().size()
                                 << " primitives: " << m.primitives().size()
                                 << " enumerations: " << m.enumerations().size()
@@ -179,14 +186,14 @@ void sml_builder::merge() {
                        << m.name() << "'. Pod qualified name: "
                        << p.first;
                 BOOST_LOG_SEV(lg, error) << stream.str();
-                throw validation_error(stream.str());
+                throw merging_error(stream.str());
             }
 
-            if (p.first.meta_type() != sml::meta_types::pod) {
+            if (p.first.meta_type() != meta_types::pod) {
                 std::ostringstream stream;
                 stream << "Pod has incorrect meta_type: '" << p.first;
                 BOOST_LOG_SEV(lg, error) << stream.str();
-                throw validation_error(stream.str());
+                throw merging_error(stream.str());
             }
 
             if (p.first != p.second.name()) {
@@ -194,7 +201,7 @@ void sml_builder::merge() {
                 stream << "Inconsistency between key and value qualified names: "
                        << " key: " << p.first << " value: " << p.second.name();
                 BOOST_LOG_SEV(lg, error) << stream.str();
-                throw validation_error(stream.str());
+                throw merging_error(stream.str());
             }
 
             pods.insert(p);
@@ -220,14 +227,14 @@ void sml_builder::merge() {
     merged_model_.schema_name(schema_name_);
 }
 
-void sml_builder::add_target(sml::model model) {
+void merger::add_target(model model) {
     if (has_target_) {
         std::ostringstream stream;
         stream << "Only one target expected. Last target model name: '"
                << name_ << "'. New target model name: "
                << model.name();
         BOOST_LOG_SEV(lg, error) << stream.str();
-        throw validation_error(stream.str());
+        throw merging_error(stream.str());
     }
 
     name_ = model.name();
@@ -238,14 +245,14 @@ void sml_builder::add_target(sml::model model) {
     BOOST_LOG_SEV(lg, debug) << "added target model: " << model.name();
 }
 
-void sml_builder::add(sml::model model) {
+void merger::add(model model) {
 
     BOOST_LOG_SEV(lg, debug) << "adding model: " << model.name();
     models_.push_back(model);
 }
 
-sml::model sml_builder::build() {
-    merge();
+model merger::merge() {
+    combine();
     resolve();
     BOOST_LOG_SEV(lg, debug) << "merged model: " << merged_model_;
     return merged_model_;

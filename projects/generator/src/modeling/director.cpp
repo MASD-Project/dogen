@@ -19,8 +19,8 @@
  *
  */
 #include <boost/filesystem.hpp>
+#include "dogen/sml/utility/merger.hpp"
 #include "dogen/generator/modeling/dia_to_sml.hpp"
-#include "dogen/generator/modeling/sml_builder.hpp"
 #include "dogen/utility/exception/invalid_enum_value.hpp"
 #include "dogen/utility/serialization/xml_helper.hpp"
 #include "dogen/dia/xml/hydrator.hpp"
@@ -252,9 +252,9 @@ bool director::has_generatable_types(const sml::model& m) const {
 }
 
 boost::optional<sml::model> director::create_model() const {
-    sml_builder builder(verbose_, settings_.sql().schema_name());
-    builder.add(primitive_model_factory::create());
-    builder.add(std_model_factory::create());
+    sml::utility::merger merger(verbose_, settings_.sql().schema_name());
+    merger.add(primitive_model_factory::create());
+    merger.add(std_model_factory::create());
 
     using sml::model;
     const auto lambda([&](boost::filesystem::path p, bool is_target) -> model {
@@ -263,11 +263,11 @@ boost::optional<sml::model> director::create_model() const {
         });
 
     const bool is_target(true);
-    builder.add_target(lambda(settings_.modeling().target(), is_target));
+    merger.add_target(lambda(settings_.modeling().target(), is_target));
     for (const auto r : settings_.modeling().references())
-        builder.add(lambda(r, !is_target));
+        merger.add(lambda(r, !is_target));
 
-    model m(builder.build());
+    model m(merger.merge());
 
     BOOST_LOG_SEV(lg, debug) << "Merged model: " << m;
     save_model(m, merged);

@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_GENERATOR_MODELING_SML_BUILDER_HPP
-#define DOGEN_GENERATOR_MODELING_SML_BUILDER_HPP
+#ifndef DOGEN_GENERATOR_MODELING_MERGER_HPP
+#define DOGEN_GENERATOR_MODELING_MERGER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -28,42 +28,39 @@
 #include <list>
 #include <vector>
 #include <string>
-#include "dogen/utility/exception/utility_exception.hpp"
 #include "dogen/sml/domain/model.hpp"
 
 namespace dogen {
-namespace generator {
-namespace modeling {
+namespace sml {
+namespace utility {
 
-class sml_builder {
+class merger {
 public:
-    sml_builder() = delete;
-    sml_builder(const sml_builder&) = default;
-    ~sml_builder() = default;
-    sml_builder(sml_builder&&) = default;
-    sml_builder& operator=(const sml_builder&) = default;
+    merger() = delete;
+    merger(const merger&) = default;
+    ~merger() = default;
+    merger(merger&&) = default;
+    merger& operator=(const merger&) = default;
 
 public:
-    sml_builder(const bool verbose, const std::string& schema_name);
+    merger(const bool verbose, const std::string& schema_name);
 
 private:
-    sml::qualified_name
-    resolve_partial_type(sml::qualified_name t) const;
-    std::vector<sml::property>
-    resolve_properties(const sml::pod& pod);
-    void resolve_parent(const sml::pod& pod);
+    qualified_name resolve_partial_type(qualified_name t) const;
+    std::vector<property> resolve_properties(const pod& pod);
+    void resolve_parent(const pod& pod);
     void resolve();
-    void merge();
+    void combine();
 
 public:
-    void add_target(sml::model model);
-    void add(sml::model model);
-    sml::model build();
+    void add_target(model model);
+    void add(model model);
+    model merge();
 
 private:
     std::string name_;
-    std::list<sml::model> models_;
-    sml::model merged_model_;
+    std::list<model> models_;
+    model merged_model_;
     const bool verbose_;
     bool has_target_;
     std::list<std::string> external_package_path_;
