@@ -10,6 +10,13 @@ This file contains all stories that haven't been assigned to a sprint.
 
 Stories that we intend to look at, at some point.
 
+*** Typedef keys for each type
+
+We should really have different names for each key. Ideally even
+different types, if its easy. We need to consult modern c++ for
+this. If its not possible for each key to be a different type, we
+should at least provide a typedef on each class.
+
 *** Cross package referencing tests
 
 Scenarios:
