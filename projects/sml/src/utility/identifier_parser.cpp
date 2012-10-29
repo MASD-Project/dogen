@@ -20,22 +20,36 @@
  */
 #include <boost/tokenizer.hpp>
 #include <boost/range/algorithm.hpp>
+#include <boost/spirit/include/qi.hpp>
+#include "dogen/sml/domain/parsing_error.hpp"
 #include "dogen/sml/utility/identifier_parser.hpp"
 
 namespace {
 
 const char* delimiter = "::";
+const std::string error_msg("Failed to parse string: ");
+using namespace boost::spirit;
 
-/*
+/**
+ * @brief
+ *
  * EBNF:
+ *
+ * identifier = nondigit | identifier nondigit | identifier digit
+ * nondigit = boost::spirit::qi::alpha | '_'
+ * digit = boost::spirit::qi::digit
+ * primitive = 'char' | 'wchar_t' | 'bool' | 'short' | 'int' | 'long'
+ *    'signed' | 'unsigned' | 'float' | 'double' | 'void'
+ * scope_resolution = '::'
+ * cv_qualifier = 'const'
+ * cv_qualifier_seq = cv_qualifier [ cv_qualifier_seq ]
+ * ptr_operator = '*' [ cv_qualifier_seq ] | '&' | [ '::' ]
+ * abstract_declarator = ptr_operator [ abstract_declarator ]
  *
  * nested_name_specifier = class_or_namespace_name '::' [nested_name_specifier]
  * class_or_namespace_name = class_name | namespace_name
  * class_name = identifier
  * namespace_name = identifier | template_id
- * identifier = nondigit | identifier nondigit | identifier digit
- * nondigit = boost::spirit::qi::alpha | '_'
- * digit = boost::spirit::qi::digit
  * template_id = template_name '<' [ template_argument_list ] '>'
  * template_argument_list = template_argument | template_argument_list ',' template_argument
  * template_argument = type_id | id_expression
@@ -46,24 +60,54 @@ const char* delimiter = "::";
  *
  * [ '::' ] [ nested_name_specifier ] type_name
  * [ '::' ] nested_name_specifier 'template' template_id
- * 'char'
- * 'wchar_t'
- * 'bool'
- * 'short'
- * 'int'
- * 'long'
- * 'signed'
- * 'unsigned'
- * 'float'
- * 'double'
- * 'void'
+ * primitive
  *
  * type_name = class_name
- * cv_qualifier = 'const'
- * abstract_declarator = ptr_operator [ abstract_declarator ]
- * ptr_operator = '*' [ cv_qualifier_seq ] | '&' | [ '::' ] nested_name_specifier '*' [ cv_qualifier_seq ]
+ * nested_name_specifier '*' [ cv_qualifier_seq ]
+
  *
  */
+template<typename Iterator>
+struct grammar : qi::grammar<Iterator> {
+    qi::rule<Iterator> digit, nondigit, identifier, name,
+        scope_operator, nested_name, unsigned_keyword, signable_primitive,
+        primitive, type_name, template_id, templated_name,
+        template_argument_list, template_argument;
+
+    grammar() : grammar::base_type(type_name) {
+        digit = boost::spirit::qi::digit;
+        nondigit = boost::spirit::qi::alpha | "_";
+        name = nondigit >> *(nondigit | digit);
+        scope_operator = "::";
+        nested_name = name >> *(scope_operator >> name);
+        signable_primitive =
+            -(qi::lit("unsigned") >> qi::lit(" ")) >>
+            (
+                qi::lit("short") | "wchar_t" | "char" | "int" |
+                (
+                    qi::lit("long") >> -(qi::lit(" ") >> qi::lit("long"))));
+        primitive =
+            qi::lit("bool") |
+            signable_primitive |
+            "float" | "double" |
+            "void";
+        type_name = primitive | (nested_name >> -(templated_name));
+
+        templated_name = "<" >> template_argument_list >> ">";
+        template_argument_list = nested_name >> *("," >> nested_name);
+
+        // template_argument_list = template_argument |
+        //     (template_argument_list >> "," >> template_argument);
+        template_argument = nested_name;
+
+        // cv_qualifier = "const";
+        // cv_qualifier_seq = cv_qualifier -(cv_qualifier_seq);
+        // ptr_operator = qi::lit("*") -(cv_qualifier_seq) | "&"
+        //     | -(scope_resolution);
+        // abstract_declarator = ptr_operator -(abstract_declarator);
+    }
+};
+
 }
 
 namespace dogen {
@@ -79,6 +123,15 @@ identifier_parser(const std::unordered_set<std::string>& packages,
 
 std::list<qualified_name>identifier_parser::
 parse_qualified_name(const std::string& n) {
+    std::string::const_iterator it(n.begin());
+    std::string::const_iterator end(n.end());
+
+    grammar<std::string::const_iterator> g;
+    const bool ok(boost::spirit::qi::parse(it, end, g));
+
+    if (!ok || it != end)
+        throw parsing_error(error_msg + n);
+
     std::list<qualified_name> r;
 
     qualified_name main_type;

@@ -24,11 +24,15 @@
 #include "dogen/utility/test/asserter.hpp"
 #include "dogen/utility/io/list_io.hpp"
 #include "dogen/sml/domain/model.hpp"
+#include "dogen/sml/domain/parsing_error.hpp"
 #include "dogen/sml/io/qualified_name_io.hpp"
 #include "dogen/sml/domain/merging_error.hpp"
 #include "dogen/sml/utility/identifier_parser.hpp"
 #include "dogen/sml/utility/merger.hpp"
 #include "dogen/utility/test/exception_checkers.hpp"
+
+using dogen::utility::test::asserter;
+using dogen::sml::utility::identifier_parser;
 
 namespace  {
 
@@ -83,13 +87,23 @@ dogen::sml::pod mock_pod(unsigned int i) {
     return mock_pod(i, model_name(i));
 }
 
+bool test_primitive(const std::string& s) {
+    identifier_parser ip;
+    const auto a(ip.parse_qualified_name(s));
+
+    std::list<dogen::sml::qualified_name> l;
+    dogen::sml::qualified_name e;
+    e.type_name(s);
+    l.push_back(e);
+    return asserter::assert_equals(a, l);
 }
 
-using dogen::utility::test::asserter;
+}
+
 using dogen::utility::test::contains_checker;
 using dogen::sml::merging_error;
 using dogen::sml::utility::merger;
-using dogen::sml::utility::identifier_parser;
+using dogen::sml::parsing_error;
 
 BOOST_AUTO_TEST_SUITE(utility)
 
@@ -609,19 +623,18 @@ BOOST_AUTO_TEST_CASE(parsing_string_with_inner_namespaces_produces_expected_qual
     BOOST_CHECK(asserter::assert_equals(a, l));
 }
 
-BOOST_AUTO_TEST_CASE(parsing_string_with_no_colons_produces_expected_qualified_name) {
-    SETUP_TEST_LOG("parsing_string_with_no_colons_produces_expected_qualified_name");
-    const std::string s("z");
+BOOST_AUTO_TEST_CASE(parsing_string_with_scope_operator_produces_expected_qualified_name) {
+    SETUP_TEST_LOG("parsing_string_with_scope_operator_produces_expected_qualified_name");
+    const std::string s("zeta");
     identifier_parser ip;
     const auto a(ip.parse_qualified_name(s));
 
     std::list<dogen::sml::qualified_name> l;
     dogen::sml::qualified_name e;
-    e.type_name("z");
+    e.type_name("zeta");
     l.push_back(e);
     BOOST_CHECK(asserter::assert_equals(a, l));
 }
-
 
 BOOST_AUTO_TEST_CASE(parsing_string_with_one_colon_produces_expected_qualified_name) {
     SETUP_TEST_LOG("parsing_string_with_one_colon_produces_expected_qualified_name");
@@ -637,5 +650,64 @@ BOOST_AUTO_TEST_CASE(parsing_string_with_one_colon_produces_expected_qualified_n
     BOOST_CHECK(asserter::assert_equals(a, l));
 }
 
+BOOST_AUTO_TEST_CASE(string_starting_with_digit_fails_to_parse) {
+    SETUP_TEST_LOG("string_starting_with_digit_fails_to_parse");
+    const std::string s("0a");
+    identifier_parser ip;
+    BOOST_CHECK_THROW(ip.parse_qualified_name(s), parsing_error);
+}
+
+BOOST_AUTO_TEST_CASE(string_ending_with_scope_operator_fails_to_parse) {
+    SETUP_TEST_LOG("string_ending_with_scope_operator_fails_to_parse");
+    const std::string s("a::");
+    identifier_parser ip;
+    BOOST_CHECK_THROW(ip.parse_qualified_name(s), parsing_error);
+}
+
+BOOST_AUTO_TEST_CASE(scope_operator_followed_by_scope_operator_fails_to_parse) {
+    SETUP_TEST_LOG("scope_operator_followed_by_scope_operator_fails_to_parse");
+    const std::string s("A::::");
+    identifier_parser ip;
+    BOOST_CHECK_THROW(ip.parse_qualified_name(s), parsing_error);
+}
+
+BOOST_AUTO_TEST_CASE(all_primitive_types_are_valid) {
+    SETUP_TEST_LOG("all_primitive_types_are_valid");
+    BOOST_CHECK(test_primitive("char"));
+    BOOST_CHECK(test_primitive("unsigned char"));
+    BOOST_CHECK(test_primitive("wchar_t"));
+    BOOST_CHECK(test_primitive("unsigned wchar_t"));
+    BOOST_CHECK(test_primitive("bool"));
+    BOOST_CHECK(test_primitive("short"));
+    BOOST_CHECK(test_primitive("unsigned short"));
+    BOOST_CHECK(test_primitive("int"));
+    BOOST_CHECK(test_primitive("unsigned int"));
+    BOOST_CHECK(test_primitive("long"));
+    BOOST_CHECK(test_primitive("unsigned long"));
+    BOOST_CHECK(test_primitive("long long"));
+    BOOST_CHECK(test_primitive("unsigned long long"));
+    BOOST_CHECK(test_primitive("void"));
+    BOOST_CHECK(test_primitive("float"));
+    BOOST_CHECK(test_primitive("double"));
+}
+
+BOOST_AUTO_TEST_CASE(unsignable_types_cannot_be_unsigned) {
+    SETUP_TEST_LOG("unsignable_types_cannot_be_unsigned");
+    identifier_parser ip;
+    BOOST_CHECK_THROW(ip.parse_qualified_name("unsigned bool"), parsing_error);
+    BOOST_CHECK_THROW(ip.parse_qualified_name("unsigned x"), parsing_error);
+    BOOST_CHECK_THROW(ip.parse_qualified_name("unsigned float"), parsing_error);
+    BOOST_CHECK_THROW(ip.parse_qualified_name("unsigned double"), parsing_error);
+}
+
+BOOST_AUTO_TEST_CASE(parsing_string_with_template_arguments_produces_expected_qualified_names) {
+    SETUP_TEST_LOG("parsing_string_with_template_arguments_produces_expected_qualified_name");
+    identifier_parser ip;
+    ip.parse_qualified_name("type<abc>");
+    ip.parse_qualified_name("type<abc,cde>");
+    ip.parse_qualified_name("std::vector<std::string>");
+    ip.parse_qualified_name("std::unordered_map<std::string,my::type>");
+    // ip.parse_qualified_name("std::vector<std::shared_ptr<std::string>>");
+}
 
 BOOST_AUTO_TEST_SUITE_END()
