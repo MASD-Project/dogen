@@ -24,6 +24,8 @@
 #include "dogen/sml/domain/merging_error.hpp"
 #include "dogen/utility/io/unordered_map_io.hpp"
 #include "dogen/utility/io/vector_io.hpp"
+#include "dogen/utility/io/list_io.hpp"
+#include "dogen/sml/io/enumeration_io.hpp"
 #include "dogen/sml/io/qualified_name_io.hpp"
 #include "dogen/sml/io/primitive_io.hpp"
 #include "dogen/sml/io/property_io.hpp"
@@ -98,7 +100,7 @@ merger::resolve_partial_type(qualified_name n) const {
         return r;
     }
 
-    if (r.model_name().empty()) {
+    if (r.model_name().empty() || r.model_name() == merged_model_.name()) {
         // it could be a type defined in this model
         r.meta_type(meta_types::pod);
         r.model_name(merged_model_.name());
@@ -111,7 +113,10 @@ merger::resolve_partial_type(qualified_name n) const {
 
         // try enumerations
         const auto enumerations(merged_model_.enumerations());
+        BOOST_LOG_SEV(lg, debug) << enumerations;
+
         r.meta_type(meta_types::enumeration);
+        BOOST_LOG_SEV(lg, debug) << r;
         auto k(enumerations.find(r));
         if (k != enumerations.end()) {
             lambda();
@@ -119,7 +124,7 @@ merger::resolve_partial_type(qualified_name n) const {
         }
     }
 
-    BOOST_LOG_SEV(lg, error) << undefined_type << n.type_name();
+    BOOST_LOG_SEV(lg, error) << undefined_type << n;
     throw merging_error(undefined_type + n.type_name());
 }
 

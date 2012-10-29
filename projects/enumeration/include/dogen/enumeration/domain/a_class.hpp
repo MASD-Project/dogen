@@ -28,6 +28,7 @@
 #include <algorithm>
 #include "dogen/enumeration/domain/book_types.hpp"
 #include "dogen/enumeration/domain/colour_types.hpp"
+#include "dogen/enumeration/domain/pkg1/shape_types.hpp"
 #include "dogen/enumeration/domain/versioned_key.hpp"
 #include "dogen/enumeration/serialization/a_class_fwd_ser.hpp"
 
@@ -45,6 +46,7 @@ public:
     a_class(
         const dogen::enumeration::colour_types& colour_type,
         const dogen::enumeration::book_types& book_type,
+        const dogen::enumeration::pkg1::shape_types& shape_type,
         const dogen::enumeration::versioned_key& versioned_key);
 
 private:
@@ -71,6 +73,14 @@ public:
         book_type_ = v;
     }
 
+    dogen::enumeration::pkg1::shape_types shape_type() const {
+        return shape_type_;
+    }
+
+    void shape_type(const dogen::enumeration::pkg1::shape_types& v) {
+        shape_type_ = v;
+    }
+
     dogen::enumeration::versioned_key versioned_key() const {
         return versioned_key_;
     }
@@ -92,6 +102,7 @@ public:
 private:
     dogen::enumeration::colour_types colour_type_;
     dogen::enumeration::book_types book_type_;
+    dogen::enumeration::pkg1::shape_types shape_type_;
     dogen::enumeration::versioned_key versioned_key_;
 };
 

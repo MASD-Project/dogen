@@ -21,6 +21,7 @@
 #include "dogen/enumeration/test_data/a_class_td.hpp"
 #include "dogen/enumeration/test_data/book_types_td.hpp"
 #include "dogen/enumeration/test_data/colour_types_td.hpp"
+#include "dogen/enumeration/test_data/pkg1/shape_types_td.hpp"
 #include "dogen/enumeration/test_data/versioned_key_td.hpp"
 
 namespace {
@@ -33,6 +34,11 @@ create_dogen_enumeration_colour_types(const unsigned int position) {
 dogen::enumeration::book_types
 create_dogen_enumeration_book_types(const unsigned int position) {
     return dogen::enumeration::book_types_generator::create(position);
+}
+
+dogen::enumeration::pkg1::shape_types
+create_dogen_enumeration_pkg1_shape_types(const unsigned int position) {
+    return dogen::enumeration::pkg1::shape_types_generator::create(position);
 }
 
 dogen::enumeration::versioned_key
@@ -51,6 +57,7 @@ void a_class_generator::
 populate(const unsigned int position, result_type& v) {
     v.colour_type(create_dogen_enumeration_colour_types(position + 0));
     v.book_type(create_dogen_enumeration_book_types(position + 0));
+    v.shape_type(create_dogen_enumeration_pkg1_shape_types(position + 0));
     v.versioned_key(create_dogen_enumeration_versioned_key(position + 0));
 }
 
