@@ -112,9 +112,10 @@ BOOST_AUTO_TEST_CASE(exercise_type_and_descendants_io) {
     const bool gen(true);
     const bool parent(false);
     const auto ct(dogen::sml::category_types::user_defined);
+    const unsigned int no_type_args(0);
 
     dogen::sml::pod pod(child_type_name, p, parent_type_name, gen, parent, ct,
-        documentation);
+        documentation, no_type_args);
     BOOST_LOG_SEV(lg, info) << pod;
     BOOST_CHECK(true);
 }
@@ -134,9 +135,11 @@ BOOST_AUTO_TEST_CASE(exercise_qualified_name_and_property_io) {
 
     BOOST_LOG_SEV(lg, info) << qualified_name;
 
+    const auto type_args(std::list<dogen::sml::qualified_name>{ });
+    const bool not_pointer(false);
     dogen::sml::property
         property("property_name", qualified_name, "property_default_value",
-            documentation);
+            documentation, type_args, not_pointer);
     BOOST_LOG_SEV(lg, info) << property;
 }
 

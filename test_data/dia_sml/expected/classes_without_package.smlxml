@@ -51,6 +51,7 @@
 				<is_parent>0</is_parent>
 				<category_type>1</category_type>
 				<documentation></documentation>
+				<number_of_type_arguments>0</number_of_type_arguments>
 			</second>
 		</item>
 		<item>
@@ -92,6 +93,7 @@
 				<is_parent>0</is_parent>
 				<category_type>1</category_type>
 				<documentation></documentation>
+				<number_of_type_arguments>0</number_of_type_arguments>
 			</second>
 		</item>
 		<item>
@@ -133,6 +135,7 @@
 				<is_parent>0</is_parent>
 				<category_type>1</category_type>
 				<documentation></documentation>
+				<number_of_type_arguments>0</number_of_type_arguments>
 			</second>
 		</item>
 		<item>
@@ -174,6 +177,7 @@
 				<is_parent>0</is_parent>
 				<category_type>1</category_type>
 				<documentation></documentation>
+				<number_of_type_arguments>0</number_of_type_arguments>
 			</second>
 		</item>
 		<item>
@@ -215,6 +219,7 @@
 				<is_parent>0</is_parent>
 				<category_type>1</category_type>
 				<documentation></documentation>
+				<number_of_type_arguments>0</number_of_type_arguments>
 			</second>
 		</item>
 	</pods>

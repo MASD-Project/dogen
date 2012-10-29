@@ -52,6 +52,8 @@ public:
         archive & make_nvp("is_parent", value.is_parent_);
         archive & make_nvp("category_type", value.category_type_);
         archive & make_nvp("documentation", value.documentation_);
+        archive & make_nvp("number_of_type_arguments",
+            value.number_of_type_arguments_);
     }
 };
 

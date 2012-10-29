@@ -66,6 +66,7 @@ public:
             seq();
             p.type_name(seq());
         }
+        p.is_pointer(false);
         return p;
     }
 

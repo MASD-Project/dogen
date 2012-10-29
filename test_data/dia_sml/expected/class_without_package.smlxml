@@ -59,24 +59,30 @@
 							<meta_type>0</meta_type>
 						</type_name>
 						<default_value></default_value>
+						<type_arguments class_id="9" tracking_level="0" version="0">
+							<count>0</count>
+							<item_version>0</item_version>
+						</type_arguments>
+						<is_pointer>0</is_pointer>
 					</item>
 				</properties>
-				<parent_name class_id="9" tracking_level="0" version="0">
+				<parent_name class_id="10" tracking_level="0" version="0">
 					<initialized>0</initialized>
 				</parent_name>
 				<generate>1</generate>
 				<is_parent>0</is_parent>
 				<category_type>1</category_type>
 				<documentation></documentation>
+				<number_of_type_arguments>0</number_of_type_arguments>
 			</second>
 		</item>
 	</pods>
-	<primitives class_id="10" tracking_level="0" version="0">
+	<primitives class_id="11" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>11</bucket_count>
 		<item_version>0</item_version>
 	</primitives>
-	<enumerations class_id="11" tracking_level="0" version="0">
+	<enumerations class_id="12" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>11</bucket_count>
 		<item_version>0</item_version>

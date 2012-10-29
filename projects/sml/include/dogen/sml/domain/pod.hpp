@@ -54,7 +54,8 @@ private:
 
 public:
     pod() : generate_(false), is_parent_(false),
-            category_type_(category_types::invalid) { }
+            category_type_(category_types::invalid),
+            number_of_type_arguments_(0) { }
 
     /**
      * @brief Initialises the pod.
@@ -70,15 +71,19 @@ public:
      * @param category_type Whether the type is user defined or one of
      * the well known system types.
      * @param documentation the documentation for the pod
+     * @param number_of_type_arguments If the type is a generic type,
+     * how many arguments does it expect.
      */
     pod(qualified_name name,
         std::vector<dogen::sml::property> properties,
         boost::optional<qualified_name> parent_name, bool generate,
         bool is_parent, category_types category_type,
-        const std::string& documentation)
+        const std::string& documentation,
+        const unsigned int number_of_type_arguments)
         : name_(name), properties_(properties), parent_name_(parent_name),
           generate_(generate), is_parent_(is_parent),
-          category_type_(category_type), documentation_(documentation) { }
+          category_type_(category_type), documentation_(documentation),
+          number_of_type_arguments_(number_of_type_arguments) { }
 
     pod(pod&& rhs) : name_(std::move(rhs.name_)),
                      properties_(std::move(rhs.properties_)),
@@ -86,7 +91,9 @@ public:
                      generate_(std::move(rhs.generate_)),
                      is_parent_(std::move(rhs.is_parent_)),
                      category_type_(std::move(rhs.category_type_)),
-                     documentation_(std::move(rhs.documentation_)) { }
+                     documentation_(std::move(rhs.documentation_)),
+                     number_of_type_arguments_(
+                         std::move(rhs.number_of_type_arguments_)) { }
 
 public:
     /**
@@ -152,6 +159,18 @@ public:
     void documentation(const std::string& value) { documentation_ = value; }
     /**@}*/
 
+    /**
+     * @brief How many type arguments does this type have
+     */
+    /**@{*/
+    unsigned int number_of_type_arguments() const {
+        return number_of_type_arguments_;
+    }
+    void number_of_type_arguments(const unsigned int v) {
+        number_of_type_arguments_ = v;
+    }
+    /**@}*/
+
 public:
     void to_stream(std::ostream& stream) const;
 
@@ -170,6 +189,7 @@ private:
     bool is_parent_;
     sml::category_types category_type_;
     std::string documentation_;
+    unsigned int number_of_type_arguments_;
 };
 
 } }

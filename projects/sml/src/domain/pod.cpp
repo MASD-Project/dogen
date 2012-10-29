@@ -39,7 +39,8 @@ bool pod::operator==(const pod& rhs) const {
         generate_ == rhs.generate_ &&
         is_parent_ == rhs.is_parent_ &&
         category_type_ == rhs.category_type_ &&
-        documentation_ == rhs.documentation_;
+        documentation_ == rhs.documentation_ &&
+        number_of_type_arguments_ == rhs.number_of_type_arguments_;
 }
 
 void pod::to_stream(std::ostream& stream) const {
@@ -53,7 +54,8 @@ void pod::to_stream(std::ostream& stream) const {
            << "\"generate\": " << generate_ << ", "
            << "\"is_parent\": " << is_parent_ << ", "
            << "\"category_type\":" << "\"" << category_type_ << "\", "
-           << "\"documentation\":" << "\"" << documentation_ << "\""
+           << "\"documentation\":" << "\"" << documentation_ << "\", "
+           << "\"number_of_type_arguments:\"" << number_of_type_arguments_
            << " }";
 }
 
