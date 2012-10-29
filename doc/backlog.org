@@ -10,6 +10,25 @@ This file contains all stories that haven't been assigned to a sprint.
 
 Stories that we intend to look at, at some point.
 
+*** Cross package referencing tests
+
+Scenarios:
+
+- object in root refers to object in package: A => pkg1::B;
+- object in root refers to object in package inside of package: A =>
+  pkg1::pkg2::B;
+- object inside of package refers to object inside of the same
+  package: pkg1::A => pkg1::B (must be qualified);
+- object in package refers to root object: pkg1::A => B;
+- object in package refers to object in other package: pkg1::A =>
+  pkg2::B;
+- object in package refers to object in package in package: pkg1::A =>
+  pkg1::pkg2::B;
+- object in package refers to object in other package in package: pkg1::A =>
+  pkg2::pkg3::B;
+- object in package in package refers to object in package in package:
+  pkg1::pkg2::A => pkg3::pkg4::B.
+
 *** Empty directories should be deleted
 
 When housekeeper finishes deleting all extra files, it should check
