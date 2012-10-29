@@ -18,9 +18,23 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/enumeration/serialization/a_class_ser.hpp"
-#include "dogen/enumeration/serialization/book_types_ser.hpp"
-#include "dogen/enumeration/serialization/colour_types_ser.hpp"
-#include "dogen/enumeration/serialization/pkg1/shape_types_ser.hpp"
-#include "dogen/enumeration/serialization/unversioned_key_ser.hpp"
-#include "dogen/enumeration/serialization/versioned_key_ser.hpp"
+#include <ostream>
+#include "dogen/enumeration/io/a_class_io.hpp"
+#include "dogen/enumeration/io/book_types_io.hpp"
+#include "dogen/enumeration/io/colour_types_io.hpp"
+#include "dogen/enumeration/io/versioned_key_io.hpp"
+
+namespace dogen {
+namespace enumeration {
+
+std::ostream& operator<<(std::ostream& s, const a_class& v) {
+    s << " { "
+      << "\"__type__\": " << "\"a_class\"" << ", "
+      << "\"colour_type\": " << v.colour_type() << ", "
+      << "\"book_type\": " << v.book_type() << ", "
+      << "\"versioned_key\": " << v.versioned_key()
+      << " }";
+    return(s);
+}
+
+} }

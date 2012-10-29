@@ -18,6 +18,9 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen/enumeration/hash/a_class_hash.hpp"
 #include "dogen/enumeration/hash/book_types_hash.hpp"
 #include "dogen/enumeration/hash/colour_types_hash.hpp"
 #include "dogen/enumeration/hash/pkg1/shape_types_hash.hpp"
+#include "dogen/enumeration/hash/unversioned_key_hash.hpp"
+#include "dogen/enumeration/hash/versioned_key_hash.hpp"

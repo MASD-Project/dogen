@@ -18,6 +18,9 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen/enumeration/test_data/a_class_td.hpp"
 #include "dogen/enumeration/test_data/book_types_td.hpp"
 #include "dogen/enumeration/test_data/colour_types_td.hpp"
 #include "dogen/enumeration/test_data/pkg1/shape_types_td.hpp"
+#include "dogen/enumeration/test_data/unversioned_key_td.hpp"
+#include "dogen/enumeration/test_data/versioned_key_td.hpp"

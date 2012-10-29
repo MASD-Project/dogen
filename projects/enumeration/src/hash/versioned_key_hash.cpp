@@ -18,9 +18,29 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/enumeration/serialization/a_class_ser.hpp"
-#include "dogen/enumeration/serialization/book_types_ser.hpp"
-#include "dogen/enumeration/serialization/colour_types_ser.hpp"
-#include "dogen/enumeration/serialization/pkg1/shape_types_ser.hpp"
-#include "dogen/enumeration/serialization/unversioned_key_ser.hpp"
-#include "dogen/enumeration/serialization/versioned_key_ser.hpp"
+#include "dogen/enumeration/hash/versioned_key_hash.hpp"
+
+namespace {
+
+template <typename HashableType>
+inline void combine(std::size_t& seed, const HashableType& value)
+{
+    std::hash<HashableType> hasher;
+    seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
+}
+
+}
+
+namespace dogen {
+namespace enumeration {
+
+std::size_t versioned_key_hasher::hash(const versioned_key& v) {
+    std::size_t seed(0);
+
+    combine(seed, v.id());
+    combine(seed, v.version());
+
+    return seed;
+}
+
+} }

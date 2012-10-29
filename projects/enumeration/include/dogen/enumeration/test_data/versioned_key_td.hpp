@@ -18,9 +18,34 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/enumeration/serialization/a_class_ser.hpp"
-#include "dogen/enumeration/serialization/book_types_ser.hpp"
-#include "dogen/enumeration/serialization/colour_types_ser.hpp"
-#include "dogen/enumeration/serialization/pkg1/shape_types_ser.hpp"
-#include "dogen/enumeration/serialization/unversioned_key_ser.hpp"
-#include "dogen/enumeration/serialization/versioned_key_ser.hpp"
+#ifndef DOGEN_ENUMERATION_TEST_DATA_VERSIONED_KEY_TD_HPP
+#define DOGEN_ENUMERATION_TEST_DATA_VERSIONED_KEY_TD_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include "dogen/enumeration/domain/versioned_key.hpp"
+
+namespace dogen {
+namespace enumeration {
+
+class versioned_key_generator {
+public:
+    versioned_key_generator();
+
+public:
+    typedef dogen::enumeration::versioned_key result_type;
+
+public:
+    static void populate(const unsigned int position, result_type& v);
+    static result_type create(const unsigned int position);
+    result_type operator()();
+
+private:
+    unsigned int position_;
+};
+
+} }
+
+#endif

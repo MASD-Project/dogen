@@ -18,9 +18,29 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/enumeration/serialization/a_class_ser.hpp"
-#include "dogen/enumeration/serialization/book_types_ser.hpp"
-#include "dogen/enumeration/serialization/colour_types_ser.hpp"
-#include "dogen/enumeration/serialization/pkg1/shape_types_ser.hpp"
-#include "dogen/enumeration/serialization/unversioned_key_ser.hpp"
-#include "dogen/enumeration/serialization/versioned_key_ser.hpp"
+#ifndef DOGEN_ENUMERATION_SERIALIZATION_VERSIONED_KEY_SER_HPP
+#define DOGEN_ENUMERATION_SERIALIZATION_VERSIONED_KEY_SER_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include <boost/serialization/export.hpp>
+#include <boost/serialization/split_free.hpp>
+#include "dogen/enumeration/domain/versioned_key.hpp"
+
+BOOST_SERIALIZATION_SPLIT_FREE(dogen::enumeration::versioned_key)
+BOOST_CLASS_EXPORT_KEY(dogen::enumeration::versioned_key)
+
+namespace boost {
+namespace serialization {
+
+template<typename Archive>
+void save(Archive& ar, const dogen::enumeration::versioned_key& v, unsigned int version);
+
+template<typename Archive>
+void load(Archive& ar, dogen::enumeration::versioned_key& v, unsigned int version);
+
+} }
+
+#endif

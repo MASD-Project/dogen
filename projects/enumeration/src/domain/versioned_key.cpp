@@ -18,9 +18,40 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/enumeration/serialization/a_class_ser.hpp"
-#include "dogen/enumeration/serialization/book_types_ser.hpp"
-#include "dogen/enumeration/serialization/colour_types_ser.hpp"
-#include "dogen/enumeration/serialization/pkg1/shape_types_ser.hpp"
-#include "dogen/enumeration/serialization/unversioned_key_ser.hpp"
-#include "dogen/enumeration/serialization/versioned_key_ser.hpp"
+#include "dogen/enumeration/domain/versioned_key.hpp"
+
+namespace dogen {
+namespace enumeration {
+
+versioned_key::versioned_key()
+    : id_(static_cast<unsigned int>(0)),
+      version_(static_cast<unsigned int>(0)) { }
+
+versioned_key::versioned_key(
+    const unsigned int id,
+    const unsigned int version)
+    : id_(id),
+      version_(version) { }
+
+unversioned_key versioned_key::to_unversioned() const {
+    return unversioned_key(id());
+}
+
+void versioned_key::swap(versioned_key& other) noexcept {
+    using std::swap;
+    swap(id_, other.id_);
+    swap(version_, other.version_);
+}
+
+bool versioned_key::operator==(const versioned_key& rhs) const {
+    return id_ == rhs.id_ &&
+        version_ == rhs.version_;
+}
+
+versioned_key& versioned_key::operator=(versioned_key other) {
+    using std::swap;
+    swap(*this, other);
+    return *this;
+}
+
+} }

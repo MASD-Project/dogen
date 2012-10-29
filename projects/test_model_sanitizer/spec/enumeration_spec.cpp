@@ -46,6 +46,7 @@ BOOST_AUTO_TEST_CASE(validate_equality) {
     test_equality<book_types_generator>();
     test_equality<colour_types_generator>();
     test_equality<pkg1::shape_types_generator>();
+    test_equality<a_class_generator>();
 }
 
 BOOST_AUTO_TEST_CASE(validate_serialisation) {
@@ -53,6 +54,7 @@ BOOST_AUTO_TEST_CASE(validate_serialisation) {
     rountrip_type<book_types_generator>();
     rountrip_type<colour_types_generator>();
     rountrip_type<pkg1::shape_types_generator>();
+    rountrip_type<a_class_generator>();
 }
 
 BOOST_AUTO_TEST_CASE(validate_hashing) {
@@ -60,6 +62,7 @@ BOOST_AUTO_TEST_CASE(validate_hashing) {
     test_hashing<book_types_generator>();
     test_hashing<colour_types_generator>();
     test_hashing<pkg1::shape_types_generator>();
+    test_hashing<a_class_generator>();
 }
 
 BOOST_AUTO_TEST_CASE(validate_swap) {
@@ -67,6 +70,7 @@ BOOST_AUTO_TEST_CASE(validate_swap) {
     test_swap<book_types_generator>();
     test_swap<colour_types_generator>();
     test_swap<pkg1::shape_types_generator>();
+    test_swap<a_class_generator>();
 }
 
 BOOST_AUTO_TEST_CASE(validate_io) {
@@ -74,6 +78,7 @@ BOOST_AUTO_TEST_CASE(validate_io) {
     test_io<book_types_generator>();
     test_io<colour_types_generator>();
     test_io<pkg1::shape_types_generator>();
+    test_io<a_class_generator>();
 }
 
 BOOST_AUTO_TEST_SUITE_END()

@@ -18,9 +18,37 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/enumeration/serialization/a_class_ser.hpp"
-#include "dogen/enumeration/serialization/book_types_ser.hpp"
-#include "dogen/enumeration/serialization/colour_types_ser.hpp"
-#include "dogen/enumeration/serialization/pkg1/shape_types_ser.hpp"
-#include "dogen/enumeration/serialization/unversioned_key_ser.hpp"
-#include "dogen/enumeration/serialization/versioned_key_ser.hpp"
+#include "dogen/enumeration/test_data/versioned_key_td.hpp"
+
+namespace {
+
+unsigned int create_unsigned_int(const unsigned int position) {
+    return static_cast<unsigned int>(position);
+}
+
+}
+
+namespace dogen {
+namespace enumeration {
+
+versioned_key_generator::versioned_key_generator() : position_(0) { }
+
+void versioned_key_generator::
+populate(const unsigned int position, result_type& v) {
+    v.id(create_unsigned_int(position + 0));
+    v.version(create_unsigned_int(position + 1));
+}
+
+versioned_key_generator::result_type
+versioned_key_generator::create(const unsigned int position) {
+    versioned_key r;
+    versioned_key_generator::populate(position, r);
+    return r;
+}
+
+versioned_key_generator::result_type
+versioned_key_generator::operator()() {
+    return create(position_++);
+}
+
+} }

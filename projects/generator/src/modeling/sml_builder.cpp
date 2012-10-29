@@ -105,6 +105,15 @@ sml_builder::resolve_partial_type(sml::qualified_name n) const {
             lambda();
             return r;
         }
+
+        // try enumerations
+        const auto enumerations(merged_model_.enumerations());
+        r.meta_type(sml::meta_types::enumeration);
+        auto k(enumerations.find(r));
+        if (k != enumerations.end()) {
+            lambda();
+            return r;
+        }
     }
 
     BOOST_LOG_SEV(lg, error) << undefined_type << n.type_name();

@@ -18,9 +18,35 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/enumeration/serialization/a_class_ser.hpp"
-#include "dogen/enumeration/serialization/book_types_ser.hpp"
-#include "dogen/enumeration/serialization/colour_types_ser.hpp"
-#include "dogen/enumeration/serialization/pkg1/shape_types_ser.hpp"
-#include "dogen/enumeration/serialization/unversioned_key_ser.hpp"
-#include "dogen/enumeration/serialization/versioned_key_ser.hpp"
+#ifndef DOGEN_ENUMERATION_HASH_A_CLASS_HASH_HPP
+#define DOGEN_ENUMERATION_HASH_A_CLASS_HASH_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include <functional>
+#include "dogen/enumeration/domain/a_class.hpp"
+
+namespace dogen {
+namespace enumeration {
+
+class a_class_hasher {
+public:
+    static std::size_t hash(const a_class& v);
+};
+
+} }
+
+namespace std {
+
+template<>
+class hash<dogen::enumeration::a_class> {
+public:
+    size_t operator()(const dogen::enumeration::a_class& v) const {
+        return dogen::enumeration::a_class_hasher::hash(v);
+    }
+};
+
+}
+#endif
