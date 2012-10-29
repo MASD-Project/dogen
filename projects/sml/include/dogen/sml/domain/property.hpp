@@ -60,6 +60,8 @@ public:
      * if not specified
      * @param is_pointer if true, the property is a pointer; if not,
      * its a stack variable.
+     * @param type_arguments if the type is a generic type, contains
+     * all of the type arguments.
      */
     inline property(const std::string& name,
         const dogen::sml::qualified_name& type_name,
