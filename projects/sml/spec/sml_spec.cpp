@@ -113,9 +113,10 @@ BOOST_AUTO_TEST_CASE(exercise_type_and_descendants_io) {
     const bool parent(false);
     const auto ct(dogen::sml::category_types::user_defined);
     const unsigned int no_type_args(0);
+    const unsigned int not_container(false);
 
     dogen::sml::pod pod(child_type_name, p, parent_type_name, gen, parent, ct,
-        documentation, no_type_args);
+        documentation, no_type_args, not_container);
     BOOST_LOG_SEV(lg, info) << pod;
     BOOST_CHECK(true);
 }

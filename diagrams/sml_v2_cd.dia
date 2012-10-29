@@ -1612,7 +1612,7 @@
         <dia:point val="-10.9229,40.1292"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-10.9729,40.0792;6.9521,47.7792"/>
+        <dia:rectangle val="-10.9729,40.0792;6.9521,48.5792"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-10.9229,40.1292"/>
@@ -1621,7 +1621,7 @@
         <dia:real val="17.824999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="7.5999999999999996"/>
+        <dia:real val="8.4000000000000004"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#pod#</dia:string>
@@ -1855,6 +1855,29 @@
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#unsigned int#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#is_container#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>#bool#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -2442,16 +2465,16 @@
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="6.9021,47.7292"/>
+        <dia:point val="6.9021,48.5292"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="1.6162,47.6792;8.6421,60.0187"/>
+        <dia:rectangle val="1.6162,48.4792;8.6421,60.0187"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="6.9021,47.7292"/>
+        <dia:point val="6.9021,48.5292"/>
         <dia:point val="6.9021,53.125"/>
         <dia:point val="2.3662,53.125"/>
         <dia:point val="2.3662,59.2187"/>

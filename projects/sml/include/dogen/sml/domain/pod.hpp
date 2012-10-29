@@ -55,7 +55,8 @@ private:
 public:
     pod() : generate_(false), is_parent_(false),
             category_type_(category_types::invalid),
-            number_of_type_arguments_(0) { }
+            number_of_type_arguments_(0),
+            is_container_(false) { }
 
     /**
      * @brief Initialises the pod.
@@ -73,17 +74,19 @@ public:
      * @param documentation the documentation for the pod
      * @param number_of_type_arguments If the type is a generic type,
      * how many arguments does it expect.
+     * @param is_container If true the pod is a container type, false otherwise.
      */
     pod(qualified_name name,
         std::vector<dogen::sml::property> properties,
         boost::optional<qualified_name> parent_name, bool generate,
         bool is_parent, category_types category_type,
         const std::string& documentation,
-        const unsigned int number_of_type_arguments)
+        const unsigned int number_of_type_arguments, bool is_container)
         : name_(name), properties_(properties), parent_name_(parent_name),
           generate_(generate), is_parent_(is_parent),
           category_type_(category_type), documentation_(documentation),
-          number_of_type_arguments_(number_of_type_arguments) { }
+          number_of_type_arguments_(number_of_type_arguments),
+          is_container_(is_container) { }
 
     pod(pod&& rhs) : name_(std::move(rhs.name_)),
                      properties_(std::move(rhs.properties_)),
@@ -93,7 +96,8 @@ public:
                      category_type_(std::move(rhs.category_type_)),
                      documentation_(std::move(rhs.documentation_)),
                      number_of_type_arguments_(
-                         std::move(rhs.number_of_type_arguments_)) { }
+                         std::move(rhs.number_of_type_arguments_)),
+                     is_container_(rhs.is_container_) { }
 
 public:
     /**
@@ -171,6 +175,15 @@ public:
     }
     /**@}*/
 
+    /**
+     * @brief If true the pod is a container type, false otherwise.
+     */
+    /**@{*/
+    bool is_container() const { return is_container_; }
+    void is_container(const bool value) { is_container_ = value; }
+    /**@}*/
+
+
 public:
     void to_stream(std::ostream& stream) const;
 
@@ -190,6 +203,7 @@ private:
     sml::category_types category_type_;
     std::string documentation_;
     unsigned int number_of_type_arguments_;
+    bool is_container_;
 };
 
 } }

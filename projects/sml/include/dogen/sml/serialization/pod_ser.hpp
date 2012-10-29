@@ -54,6 +54,7 @@ public:
         archive & make_nvp("documentation", value.documentation_);
         archive & make_nvp("number_of_type_arguments",
             value.number_of_type_arguments_);
+        archive & make_nvp("is_container", value.is_container_);
     }
 };
 
