@@ -69,6 +69,8 @@ const std::string unexpected_number_of_connections(
     "Expected 2 connections but found: ");
 const std::string relationship_target_not_found(
     "Relationship points to object with non-existent ID: ");
+const std::string invalid_type_string(
+    "String provided with type did not parse into SML qualified names: ");
 const std::string invalid_object("Object not processable by pod transformer: ");
 const std::string uml_attribute_expected("UML atttribute expected");
 const std::string name_attribute_expected("Could not find name attribute");
@@ -305,7 +307,15 @@ transform_property(const dogen::dia::composite& uml_attribute) const {
             property.name(transform_string_attribute(*a));
         else if (a->name() == dia_type) {
             const std::string s(transform_string_attribute(*a));
-            property.type_name(state_->parser_.parse_qualified_name(s));
+            auto names(state_->parser_.parse_qualified_name(s));
+            if (names.empty()) {
+                BOOST_LOG_SEV(lg, error) << invalid_type_string << s;
+                throw transformation_error(invalid_type_string + s);
+            }
+
+            property.type_name(names.front());
+            names.pop_front();
+            property.type_arguments(names);
         } else if (a->name() == dia_documentation) {
             const std::string doc(transform_string_attribute(*a));
             property.documentation(doc);

@@ -57,7 +57,7 @@ public:
         const std::string model_name);
 
 public:
-    qualified_name parse_qualified_name(const std::string& n);
+    std::list<qualified_name> parse_qualified_name(const std::string& n);
     static std::list<std::string> parse_scoped_name(const std::string& n);
 
 private:

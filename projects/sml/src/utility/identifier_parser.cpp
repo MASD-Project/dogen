@@ -77,11 +77,14 @@ identifier_parser(const std::unordered_set<std::string>& packages,
     : packages_(packages), external_package_path_(external_package_path),
       model_name_(model_name) { }
 
-qualified_name identifier_parser::parse_qualified_name(const std::string& n) {
-    qualified_name r;
+std::list<qualified_name>identifier_parser::
+parse_qualified_name(const std::string& n) {
+    std::list<qualified_name> r;
 
+    qualified_name main_type;
     if (n.find(delimiter) == std::string::npos) {
-        r.type_name(n);
+        main_type.type_name(n);
+        r.push_back(main_type);
         return r;
     }
 
@@ -93,17 +96,19 @@ qualified_name identifier_parser::parse_qualified_name(const std::string& n) {
 
     const auto i(packages_.find(token_list.front()));
     if (i != packages_.end()) {
-        r.model_name(model_name_);
+        main_type.model_name(model_name_);
     } else {
-        r.model_name(token_list.front());
+        main_type.model_name(token_list.front());
         token_list.pop_front();
     }
 
-    r.type_name(token_list.back());
+    main_type.type_name(token_list.back());
     token_list.pop_back();
 
     if (!token_list.empty())
-        r.package_path(token_list);
+        main_type.package_path(token_list);
+
+    r.push_back(main_type);
 
     return r;
 }

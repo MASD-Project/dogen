@@ -22,6 +22,7 @@
 #include <boost/test/unit_test.hpp>
 #include "dogen/utility/test/logging.hpp"
 #include "dogen/utility/test/asserter.hpp"
+#include "dogen/utility/io/list_io.hpp"
 #include "dogen/sml/domain/model.hpp"
 #include "dogen/sml/io/qualified_name_io.hpp"
 #include "dogen/sml/domain/merging_error.hpp"
@@ -599,11 +600,13 @@ BOOST_AUTO_TEST_CASE(parsing_string_with_inner_namespaces_produces_expected_qual
     identifier_parser ip;
     const auto a(ip.parse_qualified_name(s));
 
+    std::list<dogen::sml::qualified_name> l;
     dogen::sml::qualified_name e;
     e.type_name("z");
     e.package_path(std::list<std::string> { "b", "c"});
     e.model_name("a");
-    BOOST_CHECK(asserter::assert_equals(a, e));
+    l.push_back(e);
+    BOOST_CHECK(asserter::assert_equals(a, l));
 }
 
 BOOST_AUTO_TEST_CASE(parsing_string_with_no_colons_produces_expected_qualified_name) {
@@ -612,9 +615,11 @@ BOOST_AUTO_TEST_CASE(parsing_string_with_no_colons_produces_expected_qualified_n
     identifier_parser ip;
     const auto a(ip.parse_qualified_name(s));
 
+    std::list<dogen::sml::qualified_name> l;
     dogen::sml::qualified_name e;
     e.type_name("z");
-    BOOST_CHECK(asserter::assert_equals(a, e));
+    l.push_back(e);
+    BOOST_CHECK(asserter::assert_equals(a, l));
 }
 
 
@@ -624,10 +629,12 @@ BOOST_AUTO_TEST_CASE(parsing_string_with_one_colon_produces_expected_qualified_n
     identifier_parser ip;
     const auto a(ip.parse_qualified_name(s));
 
+    std::list<dogen::sml::qualified_name> l;
     dogen::sml::qualified_name e;
     e.model_name("a");
     e.type_name("z");
-    BOOST_CHECK(asserter::assert_equals(a, e));
+    l.push_back(e);
+    BOOST_CHECK(asserter::assert_equals(a, l));
 }
 
 
