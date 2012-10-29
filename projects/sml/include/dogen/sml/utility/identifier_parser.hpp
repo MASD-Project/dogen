@@ -27,6 +27,7 @@
 
 #include <list>
 #include <string>
+#include <unordered_set>
 #include "dogen/sml/domain/qualified_name.hpp"
 
 namespace dogen {
@@ -42,8 +43,27 @@ public:
     identifier_parser& operator=(const identifier_parser&) = default;
 
 public:
-    static qualified_name parse_qualified_name(const std::string& n);
+    /**
+     * @brief Initialises the parser.
+     *
+     * @param packages names of all the top-level packages in the
+     * current model.
+     * @param external_package_path packages external to the current
+     * model
+     * @param model_name name of the current model
+     */
+    identifier_parser(const std::unordered_set<std::string>& packages,
+        const std::list<std::string>& external_package_path,
+        const std::string model_name);
+
+public:
+    qualified_name parse_qualified_name(const std::string& n);
     static std::list<std::string> parse_scoped_name(const std::string& n);
+
+private:
+    const std::unordered_set<std::string> packages_;
+    const std::list<std::string> external_package_path_;
+    const std::string model_name_;
 };
 
 } } }

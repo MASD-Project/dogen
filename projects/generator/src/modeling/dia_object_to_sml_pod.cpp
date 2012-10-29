@@ -114,13 +114,15 @@ private:
             const std::unordered_map<std::string, std::string>& child_to_parent,
             const std::unordered_set<std::string>& parent_ids,
             const std::unordered_map<std::string, dogen::sml::package>&
-            packages_by_id)
+            packages_by_id,
+            const std::unordered_set<std::string> top_level_packages)
             : model_name_(model_name),
               external_package_path_(external_package_path),
               verbose_(verbose), is_target_(is_target),
               child_to_parent_(child_to_parent),
               parent_ids_(parent_ids),
-              packages_by_id_(packages_by_id) { }
+              packages_by_id_(packages_by_id),
+              parser_(top_level_packages, external_package_path, model_name) { }
 
         const std::string model_name_;
         std::unordered_map<dogen::sml::qualified_name, dogen::sml::pod> pods_;
@@ -133,6 +135,7 @@ private:
         packages_by_id_;
         std::unordered_map<std::string, dogen::sml::qualified_name>
         dia_id_to_qname_;
+        dogen::sml::utility::identifier_parser parser_;
     };
 
 public:
@@ -142,7 +145,10 @@ public:
     dia_dfs_visitor(dia_dfs_visitor&&) = default;
 
 private:
-    typedef dogen::sml::utility::identifier_parser identifier_parser;
+    std::unordered_set<std::string>
+    top_level_packages(
+        const std::string& model_name,
+        const std::unordered_map<std::string, dogen::sml::package> packages) const;
 
 public:
     dia_dfs_visitor(const std::string& model_name,
@@ -154,7 +160,8 @@ public:
         packages_by_id)
         : state_(new visit_state(model_name,
                 external_package_path, verbose, is_target, child_to_parent,
-                parent_ids, packages_by_id)) { }
+                parent_ids, packages_by_id,
+                top_level_packages(model_name, packages_by_id))) { }
 
 public:
     template<typename Vertex, typename Graph>
@@ -222,6 +229,22 @@ private:
     std::shared_ptr<visit_state> state_;
 };
 
+std::unordered_set<std::string>
+dia_dfs_visitor::top_level_packages(
+    const std::string& model_name,
+    const std::unordered_map<std::string, dogen::sml::package> packages) const {
+
+    std::unordered_set<std::string> r;
+    for (const auto pair : packages) {
+        const auto p(pair.second);
+        const bool is_top_level(p.name().package_path().empty());
+        const bool is_correct_model(p.name().model_name() == model_name);
+        if (is_top_level && is_correct_model)
+            r.insert(p.name().type_name());
+    }
+    return r;
+}
+
 std::string dia_dfs_visitor::
 transform_string_attribute(const dogen::dia::attribute& a) const {
     const auto values(a.values());
@@ -282,7 +305,7 @@ transform_property(const dogen::dia::composite& uml_attribute) const {
             property.name(transform_string_attribute(*a));
         else if (a->name() == dia_type) {
             const std::string s(transform_string_attribute(*a));
-            property.type_name(identifier_parser::parse_qualified_name(s));
+            property.type_name(state_->parser_.parse_qualified_name(s));
         } else if (a->name() == dia_documentation) {
             const std::string doc(transform_string_attribute(*a));
             property.documentation(doc);

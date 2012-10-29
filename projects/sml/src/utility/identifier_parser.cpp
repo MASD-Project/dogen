@@ -70,10 +70,17 @@ namespace dogen {
 namespace sml {
 namespace utility {
 
+identifier_parser::
+identifier_parser(const std::unordered_set<std::string>& packages,
+    const std::list<std::string>& external_package_path,
+    const std::string model_name)
+    : packages_(packages), external_package_path_(external_package_path),
+      model_name_(model_name) { }
+
 qualified_name identifier_parser::parse_qualified_name(const std::string& n) {
     qualified_name r;
 
-    if (std::string::npos == n.find(delimiter)) {
+    if (n.find(delimiter) == std::string::npos) {
         r.type_name(n);
         return r;
     }
@@ -84,11 +91,16 @@ qualified_name identifier_parser::parse_qualified_name(const std::string& n) {
     std::list<std::string> token_list;
     std::copy(tokens.begin(), tokens.end(), std::back_inserter(token_list));
 
-    r.model_name(token_list.front());
-    r.type_name(token_list.back());
+    const auto i(packages_.find(token_list.front()));
+    if (i != packages_.end()) {
+        r.model_name(model_name_);
+    } else {
+        r.model_name(token_list.front());
+        token_list.pop_front();
+    }
 
+    r.type_name(token_list.back());
     token_list.pop_back();
-    token_list.pop_front();
 
     if (!token_list.empty())
         r.package_path(token_list);

@@ -596,7 +596,8 @@ BOOST_AUTO_TEST_CASE(setting_merged_schema_name_propagates_to_combined_model) {
 BOOST_AUTO_TEST_CASE(parsing_string_with_inner_namespaces_produces_expected_qualified_name) {
     SETUP_TEST_LOG("parsing_string_with_inner_namespaces_produces_expected_qualified_name");
     const std::string s("a::b::c::z");
-    const auto a(identifier_parser::parse_qualified_name(s));
+    identifier_parser ip;
+    const auto a(ip.parse_qualified_name(s));
 
     dogen::sml::qualified_name e;
     e.type_name("z");
@@ -608,7 +609,8 @@ BOOST_AUTO_TEST_CASE(parsing_string_with_inner_namespaces_produces_expected_qual
 BOOST_AUTO_TEST_CASE(parsing_string_with_no_colons_produces_expected_qualified_name) {
     SETUP_TEST_LOG("parsing_string_with_no_colons_produces_expected_qualified_name");
     const std::string s("z");
-    const auto a(identifier_parser::parse_qualified_name(s));
+    identifier_parser ip;
+    const auto a(ip.parse_qualified_name(s));
 
     dogen::sml::qualified_name e;
     e.type_name("z");
@@ -619,7 +621,8 @@ BOOST_AUTO_TEST_CASE(parsing_string_with_no_colons_produces_expected_qualified_n
 BOOST_AUTO_TEST_CASE(parsing_string_with_one_colon_produces_expected_qualified_name) {
     SETUP_TEST_LOG("parsing_string_with_one_colon_produces_expected_qualified_name");
     const std::string s("a::z");
-    const auto a(identifier_parser::parse_qualified_name(s));
+    identifier_parser ip;
+    const auto a(ip.parse_qualified_name(s));
 
     dogen::sml::qualified_name e;
     e.model_name("a");
