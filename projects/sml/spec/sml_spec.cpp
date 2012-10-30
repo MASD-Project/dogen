@@ -136,11 +136,12 @@ BOOST_AUTO_TEST_CASE(exercise_qualified_name_and_property_io) {
 
     BOOST_LOG_SEV(lg, info) << qualified_name;
 
-    const auto type_args(std::list<dogen::sml::qualified_name>{ });
+    std::list<dogen::sml::nested_qualified_name> l;
     const bool not_pointer(false);
+    dogen::sml::nested_qualified_name nqn(qualified_name, l, not_pointer);
+
     dogen::sml::property
-        property("property_name", qualified_name, "property_default_value",
-            documentation, type_args, not_pointer);
+        property("property_name", nqn, "property_default_value", documentation);
     BOOST_LOG_SEV(lg, info) << property;
 }
 

@@ -27,7 +27,7 @@
 
 #include "dogen/utility/test_data/generator.hpp"
 #include "dogen/utility/test_data/sequence.hpp"
-#include "dogen/sml/test_data/qualified_name_sequence.hpp"
+#include "dogen/sml/test_data/nested_qualified_name_sequence.hpp"
 #include "dogen/sml/domain/property.hpp"
 
 namespace dogen {
@@ -47,7 +47,7 @@ public:
 
 public:
     result_type next_term(const unsigned int position) {
-        test_data::qualified_name_sequence seq;
+        test_data::nested_qualified_name_sequence seq;
         dogen::sml::property p;
 
         if (position == 0) {
@@ -66,7 +66,6 @@ public:
             seq();
             p.type_name(seq());
         }
-        p.is_pointer(false);
         return p;
     }
 

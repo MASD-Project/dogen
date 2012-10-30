@@ -27,6 +27,7 @@
 #include "dogen/utility/io/list_io.hpp"
 #include "dogen/sml/io/enumeration_io.hpp"
 #include "dogen/sml/io/qualified_name_io.hpp"
+#include "dogen/sml/io/nested_qualified_name_io.hpp"
 #include "dogen/sml/io/primitive_io.hpp"
 #include "dogen/sml/io/property_io.hpp"
 #include "dogen/sml/io/pod_io.hpp"
@@ -73,41 +74,40 @@ void merger::resolve_parent(const pod& pod) {
     }
 }
 
-qualified_name
-merger::resolve_partial_type(qualified_name n) const {
+nested_qualified_name
+merger::resolve_partial_type(nested_qualified_name n) const {
     const auto pods(merged_model_.pods());
-    qualified_name r(n);
+    qualified_name r(n.type());
 
-    auto lambda([&]() {
-            BOOST_LOG_SEV(lg, debug) << "Resolved type " << n.type_name()
+    auto lambda([&]() -> nested_qualified_name {
+            BOOST_LOG_SEV(lg, debug) << "Resolved type " << n.type()
                                      << ". Result: " << r;
+            nested_qualified_name nqn;
+            nqn.type(r);
+            return nqn;
         });
 
     // first try the type as it was read originally.
     r.meta_type(meta_types::pod);
     auto i(pods.find(r));
-    if (i != pods.end()) {
-        lambda();
-        return r;
-    }
+    if (i != pods.end())
+        return lambda();
 
     // then try setting package path
     r.external_package_path(merged_model_.external_package_path());
     i = pods.find(r);
-    if (i != pods.end()) {
-        lambda();
-        return r;
-    }
+    if (i != pods.end())
+        return lambda();
+
+    // reset external package path
     r.external_package_path(std::list<std::string>{});
 
     // its not a pod, could it be a primitive?
     const auto primitives(merged_model_.primitives());
     r.meta_type(meta_types::primitive);
     auto j(primitives.find(r));
-    if (j != primitives.end()) {
-        lambda();
-        return r;
-    }
+    if (j != primitives.end())
+        return lambda();
 
     if (r.model_name().empty() || r.model_name() == merged_model_.name()) {
         // it could be a type defined in this model
@@ -115,10 +115,8 @@ merger::resolve_partial_type(qualified_name n) const {
         r.model_name(merged_model_.name());
         r.external_package_path(merged_model_.external_package_path());
         i = pods.find(r);
-        if (i != pods.end()) {
-            lambda();
-            return r;
-        }
+        if (i != pods.end())
+            return lambda();
 
         // try enumerations
         const auto enumerations(merged_model_.enumerations());
@@ -127,14 +125,12 @@ merger::resolve_partial_type(qualified_name n) const {
         r.meta_type(meta_types::enumeration);
         BOOST_LOG_SEV(lg, debug) << r;
         auto k(enumerations.find(r));
-        if (k != enumerations.end()) {
-            lambda();
-            return r;
-        }
+        if (k != enumerations.end())
+            return lambda();
     }
 
     BOOST_LOG_SEV(lg, error) << undefined_type << n;
-    throw merging_error(undefined_type + n.type_name());
+    throw merging_error(undefined_type + n.type().type_name());
 }
 
 std::vector<property>

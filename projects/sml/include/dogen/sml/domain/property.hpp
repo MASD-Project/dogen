@@ -27,7 +27,7 @@
 
 #include <string>
 #include <vector>
-#include "dogen/sml/domain/qualified_name.hpp"
+#include "dogen/sml/domain/nested_qualified_name.hpp"
 
 namespace dogen {
 namespace sml {
@@ -39,6 +39,7 @@ class property_serializer;
  */
 class property {
 public:
+    property() = default;
     property(const property&) = default;
     ~property() = default;
     property(property&&) = default;
@@ -48,8 +49,6 @@ private:
     friend class property_serializer;
 
 public:
-    property() : is_pointer_(false) { }
-
     /**
      * @brief Initialises the property.
      *
@@ -57,21 +56,13 @@ public:
      * @param type_name the type name associated with the property
      * @param default_value the default value the property should take
      * @param documentation the documentation for the property
-     * if not specified
-     * @param is_pointer if true, the property is a pointer; if not,
-     * its a stack variable.
-     * @param type_arguments if the type is a generic type, contains
-     * all of the type arguments.
      */
     inline property(const std::string& name,
-        const dogen::sml::qualified_name& type_name,
+        const dogen::sml::nested_qualified_name& type_name,
         const std::string& default_value,
-        const std::string& documentation,
-        const std::list<dogen::sml::qualified_name>& type_arguments,
-        const bool is_pointer)
+        const std::string& documentation)
         : name_(name), type_name_(type_name ), default_value_(default_value),
-          documentation_(documentation), type_arguments_(type_arguments),
-          is_pointer_(is_pointer) { }
+          documentation_(documentation) { }
 
 public:
     /**
@@ -83,8 +74,8 @@ public:
     /**
      * @brief Type name for the property.
      */
-    dogen::sml::qualified_name type_name() const { return type_name_; }
-    void type_name(dogen::sml::qualified_name type_name) {
+    dogen::sml::nested_qualified_name type_name() const { return type_name_; }
+    void type_name(dogen::sml::nested_qualified_name type_name) {
         type_name_ = type_name;
     }
 
@@ -104,27 +95,6 @@ public:
     void documentation(const std::string& value) { documentation_ = value; }
     /**@}*/
 
-    /**
-     * @brief If the type is a generic type, these are its arguments.
-     */
-    /**@{*/
-    std::list<dogen::sml::qualified_name> type_arguments() const {
-        return type_arguments_;
-    }
-    void type_arguments(const std::list<dogen::sml::qualified_name>& value) {
-        type_arguments_ = value;
-    }
-    /**@}*/
-
-    /**
-     * @brief If true, the property has a pointer of type
-     * type_name. If false, its a stack variable.
-     */
-    /**@{*/
-    bool is_pointer() const { return is_pointer_; }
-    void is_pointer(const bool value) { is_pointer_ = value; }
-    /**@}*/
-
 public:
     bool operator==(const property& rhs) const;
 
@@ -137,11 +107,9 @@ public:
 
 private:
     std::string name_;
-    dogen::sml::qualified_name type_name_;
+    dogen::sml::nested_qualified_name type_name_;
     std::string default_value_;
     std::string documentation_;
-    std::list<dogen::sml::qualified_name> type_arguments_;
-    bool is_pointer_;
 };
 
 } }

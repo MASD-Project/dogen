@@ -28,6 +28,7 @@
 #include <list>
 #include <vector>
 #include <string>
+#include "dogen/sml/domain/nested_qualified_name.hpp"
 #include "dogen/sml/domain/model.hpp"
 
 namespace dogen {
@@ -46,7 +47,7 @@ public:
     merger(const bool verbose, const std::string& schema_name);
 
 private:
-    qualified_name resolve_partial_type(qualified_name t) const;
+    nested_qualified_name resolve_partial_type(nested_qualified_name t) const;
     std::vector<property> resolve_properties(const pod& pod);
     void resolve_parent(const pod& pod);
     void resolve();

@@ -158,6 +158,9 @@ public:
     void remove_duplicates(inclusion_lists& il) const;
 
 private:
+    void recurse_nested_qnames(const dogen::sml::nested_qualified_name&
+        nested_qname, std::list<dogen::sml::qualified_name>& qnames) const;
+
     /**
      * @brief Flattens the given pod into a list containing all
      * qualified names it is related to, except itself.

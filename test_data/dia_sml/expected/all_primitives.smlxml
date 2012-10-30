@@ -45,292 +45,318 @@
 					<item_version>0</item_version>
 					<item class_id="8" tracking_level="0" version="0">
 						<name>bool_property</name>
-						<type_name>
-							<model_name></model_name>
-							<external_package_path>
+						<type_name class_id="9" tracking_level="0" version="0">
+							<type>
+								<model_name></model_name>
+								<external_package_path>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_package_path>
+								<package_path>
+									<count>0</count>
+									<item_version>0</item_version>
+								</package_path>
+								<type_name>bool</type_name>
+								<meta_type>0</meta_type>
+							</type>
+							<children_ class_id="10" tracking_level="0" version="0">
 								<count>0</count>
 								<item_version>0</item_version>
-							</external_package_path>
-							<package_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</package_path>
-							<type_name>bool</type_name>
-							<meta_type>0</meta_type>
+							</children_>
+							<is_pointer>0</is_pointer>
 						</type_name>
 						<default_value></default_value>
-						<type_arguments class_id="9" tracking_level="0" version="0">
-							<count>0</count>
-							<item_version>0</item_version>
-						</type_arguments>
-						<is_pointer>0</is_pointer>
 					</item>
 					<item>
 						<name>char_property</name>
 						<type_name>
-							<model_name></model_name>
-							<external_package_path>
+							<type>
+								<model_name></model_name>
+								<external_package_path>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_package_path>
+								<package_path>
+									<count>0</count>
+									<item_version>0</item_version>
+								</package_path>
+								<type_name>char</type_name>
+								<meta_type>0</meta_type>
+							</type>
+							<children_>
 								<count>0</count>
 								<item_version>0</item_version>
-							</external_package_path>
-							<package_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</package_path>
-							<type_name>char</type_name>
-							<meta_type>0</meta_type>
+							</children_>
+							<is_pointer>0</is_pointer>
 						</type_name>
 						<default_value></default_value>
-						<type_arguments>
-							<count>0</count>
-							<item_version>0</item_version>
-						</type_arguments>
-						<is_pointer>0</is_pointer>
 					</item>
 					<item>
 						<name>uchar_property</name>
 						<type_name>
-							<model_name></model_name>
-							<external_package_path>
+							<type>
+								<model_name></model_name>
+								<external_package_path>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_package_path>
+								<package_path>
+									<count>0</count>
+									<item_version>0</item_version>
+								</package_path>
+								<type_name>unsigned char</type_name>
+								<meta_type>0</meta_type>
+							</type>
+							<children_>
 								<count>0</count>
 								<item_version>0</item_version>
-							</external_package_path>
-							<package_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</package_path>
-							<type_name>unsigned char</type_name>
-							<meta_type>0</meta_type>
+							</children_>
+							<is_pointer>0</is_pointer>
 						</type_name>
 						<default_value></default_value>
-						<type_arguments>
-							<count>0</count>
-							<item_version>0</item_version>
-						</type_arguments>
-						<is_pointer>0</is_pointer>
 					</item>
 					<item>
 						<name>int_property</name>
 						<type_name>
-							<model_name></model_name>
-							<external_package_path>
+							<type>
+								<model_name></model_name>
+								<external_package_path>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_package_path>
+								<package_path>
+									<count>0</count>
+									<item_version>0</item_version>
+								</package_path>
+								<type_name>int</type_name>
+								<meta_type>0</meta_type>
+							</type>
+							<children_>
 								<count>0</count>
 								<item_version>0</item_version>
-							</external_package_path>
-							<package_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</package_path>
-							<type_name>int</type_name>
-							<meta_type>0</meta_type>
+							</children_>
+							<is_pointer>0</is_pointer>
 						</type_name>
 						<default_value></default_value>
-						<type_arguments>
-							<count>0</count>
-							<item_version>0</item_version>
-						</type_arguments>
-						<is_pointer>0</is_pointer>
 					</item>
 					<item>
 						<name>uint_property</name>
 						<type_name>
-							<model_name></model_name>
-							<external_package_path>
+							<type>
+								<model_name></model_name>
+								<external_package_path>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_package_path>
+								<package_path>
+									<count>0</count>
+									<item_version>0</item_version>
+								</package_path>
+								<type_name>unsigned int</type_name>
+								<meta_type>0</meta_type>
+							</type>
+							<children_>
 								<count>0</count>
 								<item_version>0</item_version>
-							</external_package_path>
-							<package_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</package_path>
-							<type_name>unsigned int</type_name>
-							<meta_type>0</meta_type>
+							</children_>
+							<is_pointer>0</is_pointer>
 						</type_name>
 						<default_value></default_value>
-						<type_arguments>
-							<count>0</count>
-							<item_version>0</item_version>
-						</type_arguments>
-						<is_pointer>0</is_pointer>
 					</item>
 					<item>
 						<name>long_property</name>
 						<type_name>
-							<model_name></model_name>
-							<external_package_path>
+							<type>
+								<model_name></model_name>
+								<external_package_path>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_package_path>
+								<package_path>
+									<count>0</count>
+									<item_version>0</item_version>
+								</package_path>
+								<type_name>long</type_name>
+								<meta_type>0</meta_type>
+							</type>
+							<children_>
 								<count>0</count>
 								<item_version>0</item_version>
-							</external_package_path>
-							<package_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</package_path>
-							<type_name>long</type_name>
-							<meta_type>0</meta_type>
+							</children_>
+							<is_pointer>0</is_pointer>
 						</type_name>
 						<default_value></default_value>
-						<type_arguments>
-							<count>0</count>
-							<item_version>0</item_version>
-						</type_arguments>
-						<is_pointer>0</is_pointer>
 					</item>
 					<item>
 						<name>ulong_property</name>
 						<type_name>
-							<model_name></model_name>
-							<external_package_path>
+							<type>
+								<model_name></model_name>
+								<external_package_path>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_package_path>
+								<package_path>
+									<count>0</count>
+									<item_version>0</item_version>
+								</package_path>
+								<type_name>unsigned long</type_name>
+								<meta_type>0</meta_type>
+							</type>
+							<children_>
 								<count>0</count>
 								<item_version>0</item_version>
-							</external_package_path>
-							<package_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</package_path>
-							<type_name>unsigned long</type_name>
-							<meta_type>0</meta_type>
+							</children_>
+							<is_pointer>0</is_pointer>
 						</type_name>
 						<default_value></default_value>
-						<type_arguments>
-							<count>0</count>
-							<item_version>0</item_version>
-						</type_arguments>
-						<is_pointer>0</is_pointer>
 					</item>
 					<item>
 						<name>long_long_property</name>
 						<type_name>
-							<model_name></model_name>
-							<external_package_path>
+							<type>
+								<model_name></model_name>
+								<external_package_path>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_package_path>
+								<package_path>
+									<count>0</count>
+									<item_version>0</item_version>
+								</package_path>
+								<type_name>long long</type_name>
+								<meta_type>0</meta_type>
+							</type>
+							<children_>
 								<count>0</count>
 								<item_version>0</item_version>
-							</external_package_path>
-							<package_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</package_path>
-							<type_name>long long</type_name>
-							<meta_type>0</meta_type>
+							</children_>
+							<is_pointer>0</is_pointer>
 						</type_name>
 						<default_value></default_value>
-						<type_arguments>
-							<count>0</count>
-							<item_version>0</item_version>
-						</type_arguments>
-						<is_pointer>0</is_pointer>
 					</item>
 					<item>
 						<name>ulong_long_property</name>
 						<type_name>
-							<model_name></model_name>
-							<external_package_path>
+							<type>
+								<model_name></model_name>
+								<external_package_path>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_package_path>
+								<package_path>
+									<count>0</count>
+									<item_version>0</item_version>
+								</package_path>
+								<type_name>unsigned long long</type_name>
+								<meta_type>0</meta_type>
+							</type>
+							<children_>
 								<count>0</count>
 								<item_version>0</item_version>
-							</external_package_path>
-							<package_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</package_path>
-							<type_name>unsigned long long</type_name>
-							<meta_type>0</meta_type>
+							</children_>
+							<is_pointer>0</is_pointer>
 						</type_name>
 						<default_value></default_value>
-						<type_arguments>
-							<count>0</count>
-							<item_version>0</item_version>
-						</type_arguments>
-						<is_pointer>0</is_pointer>
 					</item>
 					<item>
 						<name>short_property</name>
 						<type_name>
-							<model_name></model_name>
-							<external_package_path>
+							<type>
+								<model_name></model_name>
+								<external_package_path>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_package_path>
+								<package_path>
+									<count>0</count>
+									<item_version>0</item_version>
+								</package_path>
+								<type_name>short</type_name>
+								<meta_type>0</meta_type>
+							</type>
+							<children_>
 								<count>0</count>
 								<item_version>0</item_version>
-							</external_package_path>
-							<package_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</package_path>
-							<type_name>short</type_name>
-							<meta_type>0</meta_type>
+							</children_>
+							<is_pointer>0</is_pointer>
 						</type_name>
 						<default_value></default_value>
-						<type_arguments>
-							<count>0</count>
-							<item_version>0</item_version>
-						</type_arguments>
-						<is_pointer>0</is_pointer>
 					</item>
 					<item>
 						<name>ushort_property</name>
 						<type_name>
-							<model_name></model_name>
-							<external_package_path>
+							<type>
+								<model_name></model_name>
+								<external_package_path>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_package_path>
+								<package_path>
+									<count>0</count>
+									<item_version>0</item_version>
+								</package_path>
+								<type_name>unsigned short</type_name>
+								<meta_type>0</meta_type>
+							</type>
+							<children_>
 								<count>0</count>
 								<item_version>0</item_version>
-							</external_package_path>
-							<package_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</package_path>
-							<type_name>unsigned short</type_name>
-							<meta_type>0</meta_type>
+							</children_>
+							<is_pointer>0</is_pointer>
 						</type_name>
 						<default_value></default_value>
-						<type_arguments>
-							<count>0</count>
-							<item_version>0</item_version>
-						</type_arguments>
-						<is_pointer>0</is_pointer>
 					</item>
 					<item>
 						<name>double_property</name>
 						<type_name>
-							<model_name></model_name>
-							<external_package_path>
+							<type>
+								<model_name></model_name>
+								<external_package_path>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_package_path>
+								<package_path>
+									<count>0</count>
+									<item_version>0</item_version>
+								</package_path>
+								<type_name>double</type_name>
+								<meta_type>0</meta_type>
+							</type>
+							<children_>
 								<count>0</count>
 								<item_version>0</item_version>
-							</external_package_path>
-							<package_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</package_path>
-							<type_name>double</type_name>
-							<meta_type>0</meta_type>
+							</children_>
+							<is_pointer>0</is_pointer>
 						</type_name>
 						<default_value></default_value>
-						<type_arguments>
-							<count>0</count>
-							<item_version>0</item_version>
-						</type_arguments>
-						<is_pointer>0</is_pointer>
 					</item>
 					<item>
 						<name>float_property</name>
 						<type_name>
-							<model_name></model_name>
-							<external_package_path>
+							<type>
+								<model_name></model_name>
+								<external_package_path>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_package_path>
+								<package_path>
+									<count>0</count>
+									<item_version>0</item_version>
+								</package_path>
+								<type_name>float</type_name>
+								<meta_type>0</meta_type>
+							</type>
+							<children_>
 								<count>0</count>
 								<item_version>0</item_version>
-							</external_package_path>
-							<package_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</package_path>
-							<type_name>float</type_name>
-							<meta_type>0</meta_type>
+							</children_>
+							<is_pointer>0</is_pointer>
 						</type_name>
 						<default_value></default_value>
-						<type_arguments>
-							<count>0</count>
-							<item_version>0</item_version>
-						</type_arguments>
-						<is_pointer>0</is_pointer>
 					</item>
 				</properties>
-				<parent_name class_id="10" tracking_level="0" version="0">
+				<parent_name class_id="11" tracking_level="0" version="0">
 					<initialized>0</initialized>
 				</parent_name>
 				<generate>1</generate>
@@ -342,12 +368,12 @@
 			</second>
 		</item>
 	</pods>
-	<primitives class_id="11" tracking_level="0" version="0">
+	<primitives class_id="12" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>11</bucket_count>
 		<item_version>0</item_version>
 	</primitives>
-	<enumerations class_id="12" tracking_level="0" version="0">
+	<enumerations class_id="13" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>11</bucket_count>
 		<item_version>0</item_version>

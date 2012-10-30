@@ -22,7 +22,7 @@
 #include "dogen/utility/io/list_io.hpp"
 #include "dogen/sml/domain/qualified_name.hpp"
 #include "dogen/sml/io/property_io.hpp"
-#include "dogen/sml/io/qualified_name_io.hpp"
+#include "dogen/sml/io/nested_qualified_name_io.hpp"
 
 namespace dogen {
 namespace sml {
@@ -32,19 +32,15 @@ bool property::operator==(const property& rhs) const {
         name_ == rhs.name_ &&
         type_name_ == rhs.type_name_ &&
         default_value_ == rhs.default_value_ &&
-        documentation_ == rhs.documentation_ &&
-        type_arguments_ == rhs.type_arguments_ &&
-        is_pointer_ == rhs.is_pointer_;
+        documentation_ == rhs.documentation_;
 }
 
 void property::to_stream(std::ostream& stream) const {
     stream << "\"property\": {"
            << "\"name\":\"" << name() << "\","
-           << "\"qualified_name\":" << type_name() << ","
+           << "\"type_name\":" << type_name() << ","
            << "\"default_value\":\"" << default_value() << "\","
-           << "\"documentation\":\"" << documentation() << "\","
-           << "\"type_arguments\":\"" << type_arguments_ << "\","
-           << "\"is_pointer:\"" << is_pointer_
+           << "\"documentation\":\"" << documentation()
            << "}";
 }
 

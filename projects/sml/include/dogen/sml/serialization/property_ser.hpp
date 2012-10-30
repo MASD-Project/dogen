@@ -30,7 +30,7 @@
 #include <boost/serialization/list.hpp>
 #include <boost/serialization/string.hpp>
 #include "dogen/sml/domain/property.hpp"
-#include "dogen/sml/serialization/qualified_name_ser.hpp"
+#include "dogen/sml/serialization/nested_qualified_name_ser.hpp"
 
 namespace dogen {
 namespace sml {
@@ -46,8 +46,6 @@ public:
         archive & make_nvp("name", value.name_);
         archive & make_nvp("type_name", value.type_name_);
         archive & make_nvp("default_value", value.default_value_);
-        archive & make_nvp("type_arguments", value.type_arguments_);
-        archive & make_nvp("is_pointer", value.is_pointer_);
     }
 };
 

@@ -213,8 +213,9 @@ void sml_dfs_visitor::process_sml_pod(const dogen::sml::pod& pod) {
     bool has_primitive_properties(false);
     bool requires_stream_manipulators(false);
     for(const auto p : pod.properties()) {
-        std::list<std::string> ns_list(join_namespaces(p.type_name()));
-        ns_list.push_back(p.type_name().type_name());
+        // FIXME
+        std::list<std::string> ns_list(join_namespaces(p.type_name().type()));
+        ns_list.push_back(p.type_name().type().type_name());
 
         using boost::algorithm::join;
         std::string ns(join(ns_list, namespace_separator));
@@ -227,7 +228,7 @@ void sml_dfs_visitor::process_sml_pod(const dogen::sml::pod& pod) {
         k.identifiable_type(ns);
 
         using dogen::sml::meta_types;
-        k.is_primitive(p.type_name().meta_type() == meta_types::primitive);
+        k.is_primitive(p.type_name().type().meta_type() == meta_types::primitive);
         if (k.is_primitive()) {
             has_primitive_properties = true;
             if (k.type() == bool_type)

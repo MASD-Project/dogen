@@ -313,9 +313,12 @@ transform_property(const dogen::dia::composite& uml_attribute) const {
                 throw transformation_error(invalid_type_string + s);
             }
 
-            property.type_name(names.front());
+            // FIXME
+            dogen::sml::nested_qualified_name nqn;
+            nqn.type(names.front());
+            property.type_name(nqn);
             names.pop_front();
-            property.type_arguments(names);
+            // property.type_arguments(names);
         } else if (a->name() == dia_documentation) {
             const std::string doc(transform_string_attribute(*a));
             property.documentation(doc);
@@ -330,7 +333,7 @@ transform_property(const dogen::dia::composite& uml_attribute) const {
         throw transformation_error(name_attribute_expected);
     }
 
-    if (property.type_name().type_name().empty()) {
+    if (property.type_name().type().type_name().empty()) {
         BOOST_LOG_SEV(lg, error) << "Could not find a type attribute.";
         throw transformation_error(type_attribute_expected);
     }

@@ -20,7 +20,7 @@
  */
 #include <ostream>
 #include "dogen/utility/io/vector_io.hpp"
-#include "dogen/sml/io/qualified_name_io.hpp"
+#include "dogen/sml/io/nested_qualified_name_io.hpp"
 #include "dogen/sml/io/property_io.hpp"
 
 namespace dogen {
@@ -29,7 +29,7 @@ namespace sml {
 std::ostream& operator<<(std::ostream& stream, dogen::sml::property property) {
     stream << "\"property\": {"
            << "\"name\": \"" << property.name() << "\","
-           << property.type_name() << ","
+           << "\"type_name\": \"" << property.type_name() << ","
            << "\"default_value\": \"" << property.default_value() << "\""
            << " }";
     return(stream);

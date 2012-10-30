@@ -36,7 +36,6 @@ class nested_qualified_name_serializer;
 
 class nested_qualified_name {
 public:
-    nested_qualified_name() = default;
     nested_qualified_name(const nested_qualified_name&) = default;
     ~nested_qualified_name() = default;
     nested_qualified_name(nested_qualified_name&&) = default;
@@ -46,9 +45,11 @@ private:
     friend class nested_qualified_name_serializer;
 
 public:
+    nested_qualified_name() : is_pointer_() { }
+
     nested_qualified_name(const qualified_name& type,
-        std::list<nested_qualified_name> children)
-        : type_(type), children_(children) { }
+        std::list<nested_qualified_name> children, bool is_pointer)
+        : type_(type), children_(children), is_pointer_(is_pointer) { }
 
 public:
     /**
@@ -63,6 +64,15 @@ public:
     std::list<nested_qualified_name> children() const { return(children_); }
     void childred(const std::list<nested_qualified_name>& v) { children_ = v; }
 
+    /**
+     * @brief If true, the top-level type should be a pointer. If
+     * false, its a stack variable.
+     */
+    /**@{*/
+    bool is_pointer() const { return is_pointer_; }
+    void is_pointer(const bool value) { is_pointer_ = value; }
+    /**@}*/
+
 public:
     void to_stream(std::ostream& stream) const;
 
@@ -76,6 +86,7 @@ public:
 private:
     qualified_name type_;
     std::list<nested_qualified_name> children_;
+    bool is_pointer_;
 };
 
 } }

@@ -223,7 +223,10 @@ BOOST_AUTO_TEST_CASE(pod_with_property_type_in_the_same_model_results_in_success
     dogen::sml::qualified_name qn;
     qn.type_name(pod1.name().type_name());
     qn.model_name(pod1.name().model_name());
-    p.type_name(qn);
+
+    dogen::sml::nested_qualified_name nqn;
+    nqn.type(qn);
+    p.type_name(nqn);
     props.push_back(p);
     pod0.properties(props);
 
@@ -246,8 +249,8 @@ BOOST_AUTO_TEST_CASE(pod_with_property_type_in_the_same_model_results_in_success
     BOOST_CHECK(i != pods.end());
     BOOST_CHECK(i->second.properties().size() == 1);
     const auto updated_pod0(i->second.properties()[0]);
-    BOOST_CHECK(updated_pod0.type_name().type_name() == pod1.name().type_name());
-    BOOST_CHECK(updated_pod0.type_name().meta_type() == meta_types::pod);
+    BOOST_CHECK(updated_pod0.type_name().type().type_name() == pod1.name().type_name());
+    BOOST_CHECK(updated_pod0.type_name().type().meta_type() == meta_types::pod);
 }
 
 BOOST_AUTO_TEST_CASE(pod_with_property_type_in_different_model_results_in_successful_merge) {
@@ -265,7 +268,10 @@ BOOST_AUTO_TEST_CASE(pod_with_property_type_in_different_model_results_in_succes
     dogen::sml::qualified_name qn;
     qn.type_name(pod1.name().type_name());
     qn.model_name(pod1.name().model_name());
-    p.type_name(qn);
+
+    dogen::sml::nested_qualified_name nqn;
+    nqn.type(qn);
+    p.type_name(nqn);
     props.push_back(p);
     pod0.properties(props);
 
@@ -295,8 +301,8 @@ BOOST_AUTO_TEST_CASE(pod_with_property_type_in_different_model_results_in_succes
     BOOST_CHECK(i != pods.end());
     BOOST_CHECK(i->second.properties().size() == 1);
     const auto updated_pod0(i->second.properties()[0]);
-    BOOST_CHECK(updated_pod0.type_name().type_name() == pod1.name().type_name());
-    BOOST_CHECK(updated_pod0.type_name().meta_type() == meta_types::pod);
+    BOOST_CHECK(updated_pod0.type_name().type().type_name() == pod1.name().type_name());
+    BOOST_CHECK(updated_pod0.type_name().type().meta_type() == meta_types::pod);
 }
 
 BOOST_AUTO_TEST_CASE(pod_with_missing_property_type_throws) {
@@ -314,7 +320,10 @@ BOOST_AUTO_TEST_CASE(pod_with_missing_property_type_throws) {
     dogen::sml::qualified_name qn;
     qn.type_name(pod1.name().type_name());
     qn.model_name(pod1.name().model_name());
-    p.type_name(qn);
+
+    dogen::sml::nested_qualified_name nqn;
+    nqn.type(qn);
+    p.type_name(nqn);
     props.push_back(p);
     pod0.properties(props);
 

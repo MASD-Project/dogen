@@ -158,6 +158,15 @@ std::string cpp_inclusion_manager::header_dependency(
     return location_manager_.relative_logical_path(rq).generic_string();
 }
 
+void cpp_inclusion_manager::
+recurse_nested_qnames(const dogen::sml::nested_qualified_name&
+    nested_qname, std::list<dogen::sml::qualified_name>& qnames) const {
+
+    qnames.push_back(nested_qname.type());
+    for (const auto nqn : nested_qname.children())
+        recurse_nested_qnames(nqn, qnames);
+}
+
 std::list<dogen::sml::qualified_name>
 cpp_inclusion_manager::pod_to_qualified_names(const sml::pod& pod) const {
     std::list<dogen::sml::qualified_name> r;
@@ -165,8 +174,8 @@ cpp_inclusion_manager::pod_to_qualified_names(const sml::pod& pod) const {
     if (pod.parent_name())
         r.push_back(*pod.parent_name());
 
-    for(const auto p : pod.properties())
-        r.push_back(p.type_name());
+    for (const auto p : pod.properties())
+        recurse_nested_qnames(p.type_name(), r);
 
     return r;
 }

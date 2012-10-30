@@ -53,6 +53,7 @@ public:
         dogen::sml::nested_qualified_name c;
 
         r.type(seq());
+        r.is_pointer(false);
         if (position == 0) {
             c.type(seq());
             l.push_back(c);

@@ -42,6 +42,7 @@ public:
         using boost::serialization::make_nvp;
         ar & make_nvp("type", value.type_);
         ar & make_nvp("children_", value.children_);
+        ar & make_nvp("is_pointer", value.is_pointer_);
     }
 };
 
