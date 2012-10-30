@@ -18,9 +18,16 @@
  * MA 02110-1301, USA.
  *
  */
+#include <iostream>
 #include <boost/tokenizer.hpp>
 #include <boost/range/algorithm.hpp>
 #include <boost/spirit/include/qi.hpp>
+#include <boost/spirit/include/phoenix_function.hpp>
+#include <boost/spirit/include/phoenix_stl.hpp>
+#include <boost/spirit/include/phoenix_core.hpp>
+#include <boost/spirit/include/phoenix_fusion.hpp>
+#include <boost/spirit/include/phoenix_operator.hpp>
+#include <boost/spirit/include/phoenix_object.hpp>
 #include "dogen/sml/domain/parsing_error.hpp"
 #include "dogen/sml/utility/identifier_parser.hpp"
 
@@ -29,82 +36,87 @@ namespace {
 const char* delimiter = "::";
 const std::string error_msg("Failed to parse string: ");
 using namespace boost::spirit;
+bool debug(false);
 
-/**
- * @brief
- *
- * EBNF:
- *
- * identifier = nondigit | identifier nondigit | identifier digit
- * nondigit = boost::spirit::qi::alpha | '_'
- * digit = boost::spirit::qi::digit
- * primitive = 'char' | 'wchar_t' | 'bool' | 'short' | 'int' | 'long'
- *    'signed' | 'unsigned' | 'float' | 'double' | 'void'
- * scope_resolution = '::'
- * cv_qualifier = 'const'
- * cv_qualifier_seq = cv_qualifier [ cv_qualifier_seq ]
- * ptr_operator = '*' [ cv_qualifier_seq ] | '&' | [ '::' ]
- * abstract_declarator = ptr_operator [ abstract_declarator ]
- *
- * nested_name_specifier = class_or_namespace_name '::' [nested_name_specifier]
- * class_or_namespace_name = class_name | namespace_name
- * class_name = identifier
- * namespace_name = identifier | template_id
- * template_id = template_name '<' [ template_argument_list ] '>'
- * template_argument_list = template_argument | template_argument_list ',' template_argument
- * template_argument = type_id | id_expression
- * type_id = type_specifier_seq [ abstract_declarator ]
- * type_specifier_seq = type_specifier | type_specifier_seq
- * type_specifier = simple_type_specifier | cv_qualifier
- * simple_type_specifier =
- *
- * [ '::' ] [ nested_name_specifier ] type_name
- * [ '::' ] nested_name_specifier 'template' template_id
- * primitive
- *
- * type_name = class_name
- * nested_name_specifier '*' [ cv_qualifier_seq ]
+void add_nested_name(const std::string& s) {
+    if (debug)
+        std::cout << "|" << s << "|" << std::endl;
+}
 
- *
- */
+void add_primitive(const std::string& s) {
+    if (debug)
+        std::cout << "%" << s << "%" << std::endl;
+}
+
+void start_template() {
+    if (debug)
+        std::cout << "starting template" << std::endl;
+}
+
+void next_type_argument() {
+    if (debug)
+        std::cout << "next type argument" << std::endl;
+}
+
+void end_template() {
+    if (debug)
+        std::cout << "ending template" << std::endl;
+}
+
 template<typename Iterator>
 struct grammar : qi::grammar<Iterator> {
-    qi::rule<Iterator> digit, nondigit, identifier, name,
-        scope_operator, nested_name, unsigned_keyword, signable_primitive,
-        primitive, type_name, template_id, templated_name,
-        template_argument_list, template_argument;
+    qi::rule<Iterator, std::string()> nested_name, name, nondigit, alphanum,
+        primitive, signable_primitive;
+    qi::rule<Iterator> identifier, scope_operator, type_name, template_id,
+        templated_name, template_argument_list, template_argument;
 
     grammar() : grammar::base_type(type_name) {
-        digit = boost::spirit::qi::digit;
-        nondigit = boost::spirit::qi::alpha | "_";
-        name = nondigit >> *(nondigit | digit);
+        using qi::on_error;
+        using qi::fail;
+        using boost::spirit::qi::labels::_val;
+        using boost::spirit::qi::_1;
+        using boost::spirit::ascii::string;
+
+        using boost::phoenix::val;
+        using boost::phoenix::at_c;
+        using boost::phoenix::push_back;
+        using boost::phoenix::construct;
+
+        alphanum = boost::spirit::qi::alnum | string("_");
+        nondigit = boost::spirit::qi::alpha | string("_");
+        name %= lexeme[nondigit >> *(alphanum)];
         scope_operator = "::";
-        nested_name = name >> *(scope_operator >> name);
+        nested_name = name[add_nested_name]
+            >> *(scope_operator >> name[add_nested_name]);
         signable_primitive =
-            -(qi::lit("unsigned") >> qi::lit(" ")) >>
+            -(string("unsigned") >> string(" ")) >>
             (
-                qi::lit("short") | "wchar_t" | "char" | "int" |
+                string("short") | string("wchar_t") | string("char") |
+                string("int") |
                 (
-                    qi::lit("long") >> -(qi::lit(" ") >> qi::lit("long"))));
+                    string("long") >> -(string(" ") >> string("long"))));
         primitive =
-            qi::lit("bool") |
+            string("bool") |
             signable_primitive |
-            "float" | "double" |
-            "void";
-        type_name = primitive | (nested_name >> -(templated_name));
+            string("float") | string("double") | string("void");
+        type_name %= primitive[add_primitive] |
+            (nested_name >> -(templated_name));
 
-        templated_name = "<" >> template_argument_list >> ">";
-        template_argument_list = nested_name >> *("," >> nested_name);
+        templated_name = qi::lit("<")[start_template]
+            >> template_argument_list >> qi::lit(">")[end_template];
+        template_argument_list %= type_name
+            >> *(qi::lit(",")[next_type_argument] >> type_name);
 
-        // template_argument_list = template_argument |
-        //     (template_argument_list >> "," >> template_argument);
-        // template_argument = nested_name;
-
-        // cv_qualifier = "const";
-        // cv_qualifier_seq = cv_qualifier -(cv_qualifier_seq);
-        // ptr_operator = qi::lit("*") -(cv_qualifier_seq) | "&"
-        //     | -(scope_resolution);
-        // abstract_declarator = ptr_operator -(abstract_declarator);
+        on_error<fail>
+            (
+                type_name,
+                std::cout << val("Error! Expecting ")
+                << _4                               // what failed?
+                << val(" here: \"")
+                << construct<std::string>(_3, _2)   // iterators to error-pos, end
+                << val("\"")
+                << std::endl
+                );
     }
 };
 

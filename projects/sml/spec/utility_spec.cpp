@@ -706,8 +706,9 @@ BOOST_AUTO_TEST_CASE(parsing_string_with_template_arguments_produces_expected_qu
     ip.parse_qualified_name("type<abc>");
     ip.parse_qualified_name("type<abc,cde>");
     ip.parse_qualified_name("std::vector<std::string>");
+    ip.parse_qualified_name("std::vector<unsigned int>");
     ip.parse_qualified_name("std::unordered_map<std::string,my::type>");
-    // ip.parse_qualified_name("std::vector<std::shared_ptr<std::string>>");
+    ip.parse_qualified_name("std::vector<std::shared_ptr<std::string>>");
 }
 
 BOOST_AUTO_TEST_SUITE_END()
