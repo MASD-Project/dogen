@@ -104,7 +104,7 @@ location_request_factory(cpp_facet_types ft, cpp_file_types flt,
     r.facet_type(ft);
     r.file_type(flt);
     r.aspect_type(at);
-    r.model_name(model_.name());
+    r.model_name(name.model_name());
     r.package_path(name.package_path());
     r.file_name(name.type_name());
     r.external_package_path(name.external_package_path());
