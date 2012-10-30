@@ -91,6 +91,15 @@ merger::resolve_partial_type(qualified_name n) const {
         return r;
     }
 
+    // then try setting package path
+    r.external_package_path(merged_model_.external_package_path());
+    i = pods.find(r);
+    if (i != pods.end()) {
+        lambda();
+        return r;
+    }
+    r.external_package_path(std::list<std::string>{});
+
     // its not a pod, could it be a primitive?
     const auto primitives(merged_model_.primitives());
     r.meta_type(meta_types::primitive);
