@@ -263,10 +263,9 @@ boost::optional<sml::model> director::create_model() const {
         });
 
     const bool is_target(true);
-    merger.add_target(lambda(settings_.modeling().target(), is_target));
     for (const auto r : settings_.modeling().references())
         merger.add(lambda(r, !is_target));
-
+    merger.add_target(lambda(settings_.modeling().target(), is_target));
     model m(merger.merge());
 
     BOOST_LOG_SEV(lg, debug) << "Merged model: " << m;
