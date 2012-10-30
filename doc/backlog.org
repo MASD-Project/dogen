@@ -15,6 +15,13 @@ Stories that we intend to look at, at some point.
 At present we do not have any tests were a pod in one model makes use
 of types defined in another model.
 
+After some experimentation by JS we found out that this is not going
+to work for non-trivial cases. This is because we do not have model
+dependency management. We need to create a dag of dependencies between
+models in the merger to ensure we process the models in the correct
+order. When we initially read up a model it could declare what models
+it depends on, this is then used to build the DAG.
+
 *** Typedef keys for each type
 
 We should really have different names for each key. Ideally even
