@@ -19,6 +19,7 @@
  *
  */
 #include <iostream>
+#include <functional>
 #include <boost/tokenizer.hpp>
 #include <boost/range/algorithm.hpp>
 #include <boost/spirit/include/qi.hpp>
@@ -30,13 +31,16 @@
 #include <boost/spirit/include/phoenix_object.hpp>
 #include "dogen/sml/domain/parsing_error.hpp"
 #include "dogen/sml/utility/identifier_parser.hpp"
+#include "dogen/sml/utility/nested_qualified_name_builder.hpp"
 
 namespace {
 
 const char* delimiter = "::";
 const std::string error_msg("Failed to parse string: ");
 using namespace boost::spirit;
-bool debug(false);
+
+/*
+bool debug(true);
 
 void add_nested_name(const std::string& s) {
     if (debug)
@@ -62,15 +66,54 @@ void end_template() {
     if (debug)
         std::cout << "ending template" << std::endl;
 }
+*/
+
+using dogen::sml::utility::nested_qualified_name_builder;
 
 template<typename Iterator>
 struct grammar : qi::grammar<Iterator> {
+    std::shared_ptr<nested_qualified_name_builder> builder;
     qi::rule<Iterator, std::string()> nested_name, name, nondigit, alphanum,
         primitive, signable_primitive;
     qi::rule<Iterator> identifier, scope_operator, type_name, template_id,
         templated_name, template_argument_list, template_argument;
 
-    grammar() : grammar::base_type(type_name) {
+    std::function<void()> start_template_, next_type_argument_, end_template_;
+    std::function<void(const std::string&)> add_nested_name_, add_primitive_;
+
+    void add_nested_name(const std::string& s) {
+        builder->add_name(s);
+    }
+
+    void add_primitive(const std::string& s) {
+        builder->add_primitive(s);
+    }
+
+    void start_template() {
+        builder->start_children();
+    }
+
+    void next_type_argument() {
+        builder->next_child();
+    }
+
+    void end_template() {
+        builder->end_children();
+    }
+
+    void setup_functors() {
+        add_nested_name_ = std::bind(&grammar::add_nested_name, this,
+            std::placeholders::_1);
+        add_primitive_ = std::bind(&grammar::add_primitive, this,
+            std::placeholders::_1);
+        start_template_ = std::bind(&grammar::start_template, this);
+        next_type_argument_ = std::bind(&grammar::next_type_argument, this);
+        end_template_ = std::bind(&grammar::end_template, this);
+    }
+
+    grammar(std::shared_ptr<nested_qualified_name_builder> b)
+        : grammar::base_type(type_name), builder(b) {
+        setup_functors();
         using qi::on_error;
         using qi::fail;
         using boost::spirit::qi::labels::_val;
@@ -86,8 +129,8 @@ struct grammar : qi::grammar<Iterator> {
         nondigit = boost::spirit::qi::alpha | string("_");
         name %= lexeme[nondigit >> *(alphanum)];
         scope_operator = "::";
-        nested_name = name[add_nested_name]
-            >> *(scope_operator >> name[add_nested_name]);
+        nested_name = name[add_nested_name_]
+            >> *(scope_operator >> name[add_nested_name_]);
         signable_primitive =
             -(string("unsigned") >> string(" ")) >>
             (
@@ -99,13 +142,13 @@ struct grammar : qi::grammar<Iterator> {
             string("bool") |
             signable_primitive |
             string("float") | string("double") | string("void");
-        type_name %= primitive[add_primitive] |
+        type_name %= primitive[add_primitive_] |
             (nested_name >> -(templated_name));
 
-        templated_name = qi::lit("<")[start_template]
-            >> template_argument_list >> qi::lit(">")[end_template];
+        templated_name = qi::lit("<")[start_template_]
+            >> template_argument_list >> qi::lit(">")[end_template_];
         template_argument_list %= type_name
-            >> *(qi::lit(",")[next_type_argument] >> type_name);
+            >> *(qi::lit(",")[next_type_argument_] >> type_name);
 
         on_error<fail>
             (
@@ -133,49 +176,21 @@ identifier_parser(const std::unordered_set<std::string>& packages,
     : packages_(packages), external_package_path_(external_package_path),
       model_name_(model_name) { }
 
-std::list<qualified_name>identifier_parser::
+nested_qualified_name identifier_parser::
 parse_qualified_name(const std::string& n) {
     std::string::const_iterator it(n.begin());
     std::string::const_iterator end(n.end());
 
-    grammar<std::string::const_iterator> g;
+    std::shared_ptr<nested_qualified_name_builder>
+        builder(new nested_qualified_name_builder(packages_,
+                external_package_path_, model_name_));
+    grammar<std::string::const_iterator> g(builder);
     const bool ok(boost::spirit::qi::parse(it, end, g));
 
     if (!ok || it != end)
         throw parsing_error(error_msg + n);
 
-    std::list<qualified_name> r;
-
-    qualified_name main_type;
-    if (n.find(delimiter) == std::string::npos) {
-        main_type.type_name(n);
-        r.push_back(main_type);
-        return r;
-    }
-
-    const boost::char_separator<char> sep(delimiter);
-    boost::tokenizer<boost::char_separator<char> > tokens(n, sep);
-
-    std::list<std::string> token_list;
-    std::copy(tokens.begin(), tokens.end(), std::back_inserter(token_list));
-
-    const auto i(packages_.find(token_list.front()));
-    if (i != packages_.end()) {
-        main_type.model_name(model_name_);
-    } else {
-        main_type.model_name(token_list.front());
-        token_list.pop_front();
-    }
-
-    main_type.type_name(token_list.back());
-    token_list.pop_back();
-
-    if (!token_list.empty())
-        main_type.package_path(token_list);
-
-    r.push_back(main_type);
-
-    return r;
+    return builder->build();
 }
 
 std::list<std::string>

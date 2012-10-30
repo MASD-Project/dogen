@@ -62,7 +62,7 @@ public:
      * @brief Child types.
      */
     std::list<nested_qualified_name> children() const { return(children_); }
-    void childred(const std::list<nested_qualified_name>& v) { children_ = v; }
+    void children(const std::list<nested_qualified_name>& v) { children_ = v; }
 
     /**
      * @brief If true, the top-level type should be a pointer. If

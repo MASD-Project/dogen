@@ -307,18 +307,12 @@ transform_property(const dogen::dia::composite& uml_attribute) const {
             property.name(transform_string_attribute(*a));
         else if (a->name() == dia_type) {
             const std::string s(transform_string_attribute(*a));
-            auto names(state_->parser_.parse_qualified_name(s));
-            if (names.empty()) {
+            auto nested_name(state_->parser_.parse_qualified_name(s));
+            if (nested_name.type().type_name().empty()) {
                 BOOST_LOG_SEV(lg, error) << invalid_type_string << s;
                 throw transformation_error(invalid_type_string + s);
             }
-
-            // FIXME
-            dogen::sml::nested_qualified_name nqn;
-            nqn.type(names.front());
-            property.type_name(nqn);
-            names.pop_front();
-            // property.type_arguments(names);
+            property.type_name(nested_name);
         } else if (a->name() == dia_documentation) {
             const std::string doc(transform_string_attribute(*a));
             property.documentation(doc);

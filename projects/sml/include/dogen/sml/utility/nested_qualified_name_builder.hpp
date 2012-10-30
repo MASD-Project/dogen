@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_SML_UTILITY_IDENTIFIER_PARSER_HPP
-#define DOGEN_SML_UTILITY_IDENTIFIER_PARSER_HPP
+#ifndef DOGEN_SML_UTILITY_NESTED_QUALIFIED_NAME_BUILDER_HPP
+#define DOGEN_SML_UTILITY_NESTED_QUALIFIED_NAME_BUILDER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -27,43 +27,56 @@
 
 #include <list>
 #include <string>
+#include <memory>
 #include <unordered_set>
+#include "dogen/sml/domain/qualified_name.hpp"
 #include "dogen/sml/domain/nested_qualified_name.hpp"
 
 namespace dogen {
 namespace sml {
 namespace utility {
 
-class identifier_parser {
-public:
-    identifier_parser() = default;
-    identifier_parser(const identifier_parser&) = default;
-    ~identifier_parser() = default;
-    identifier_parser(identifier_parser&&) = default;
-    identifier_parser& operator=(const identifier_parser&) = default;
+class nested_qualified_name_builder {
+private:
+    struct node {
+        std::shared_ptr<node> parent;
+        qualified_name data;
+        std::list<std::shared_ptr<node> > children;
+    };
 
 public:
-    /**
-     * @brief Initialises the parser.
-     *
-     * @param packages names of all the top-level packages in the
-     * current model.
-     * @param external_package_path packages external to the current
-     * model
-     * @param model_name name of the current model
-     */
-    identifier_parser(const std::unordered_set<std::string>& packages,
+    nested_qualified_name_builder() = delete;
+    nested_qualified_name_builder(
+        const nested_qualified_name_builder&) = delete;
+    ~nested_qualified_name_builder() = default;
+    nested_qualified_name_builder(nested_qualified_name_builder&&) = delete;
+    nested_qualified_name_builder& operator=(const nested_qualified_name_builder&) = delete;
+
+public:
+    nested_qualified_name_builder(
+        const std::unordered_set<std::string>& packages,
         const std::list<std::string>& external_package_path,
-        const std::string model_name);
+        const std::string& model_name);
+
+private:
+    void finish_current_node();
+    void build_node(nested_qualified_name& qn, std::shared_ptr<node> node);
 
 public:
-    nested_qualified_name parse_qualified_name(const std::string& n);
-    static std::list<std::string> parse_scoped_name(const std::string& n);
+    void add_name(const std::string& n);
+    void add_primitive(const std::string& n);
+    void start_children();
+    void next_child();
+    void end_children();
+    nested_qualified_name build();
 
 private:
     const std::unordered_set<std::string> packages_;
     const std::list<std::string> external_package_path_;
     const std::string model_name_;
+    std::list<std::string> names_;
+    std::shared_ptr<node> root_;
+    std::shared_ptr<node> current_;
 };
 
 } } }
