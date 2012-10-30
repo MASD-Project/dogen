@@ -64,27 +64,22 @@ using namespace boost::spirit;
  *
  * type_name = class_name
  * nested_name_specifier '*' [ cv_qualifier_seq ]
+
  *
  */
-
-void print(const std::string& s) {
-    std::cout << "'" << s << "'" << std::endl;
-}
-
 template<typename Iterator>
 struct grammar : qi::grammar<Iterator> {
-    qi::rule<Iterator, std::string()> nested_name, name;
-    qi::rule<Iterator> digit, nondigit, identifier, /*name,*/
-        scope_operator, /*nested_name,*/ unsigned_keyword, signable_primitive,
+    qi::rule<Iterator> digit, nondigit, identifier, name,
+        scope_operator, nested_name, unsigned_keyword, signable_primitive,
         primitive, type_name, template_id, templated_name,
         template_argument_list, template_argument;
 
     grammar() : grammar::base_type(type_name) {
         digit = boost::spirit::qi::digit;
         nondigit = boost::spirit::qi::alpha | "_";
-        name = (nondigit >> *(nondigit | digit));
+        name = nondigit >> *(nondigit | digit);
         scope_operator = "::";
-        nested_name = name[print] >> *(scope_operator >> name[print]);
+        nested_name = name >> *(scope_operator >> name);
         signable_primitive =
             -(qi::lit("unsigned") >> qi::lit(" ")) >>
             (
@@ -96,11 +91,10 @@ struct grammar : qi::grammar<Iterator> {
             signable_primitive |
             "float" | "double" |
             "void";
-        type_name = primitive | (nested_name[print] >> -(templated_name));
+        type_name = primitive | (nested_name >> -(templated_name));
 
         templated_name = "<" >> template_argument_list >> ">";
-        template_argument_list = nested_name[print]
-            >> *("," >> nested_name[print]);
+        template_argument_list = nested_name >> *("," >> nested_name);
 
         // template_argument_list = template_argument |
         //     (template_argument_list >> "," >> template_argument);
