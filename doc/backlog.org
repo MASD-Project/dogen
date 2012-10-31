@@ -10,6 +10,11 @@ This file contains all stories that haven't been assigned to a sprint.
 
 Stories that we intend to look at, at some point.
 
+*** Throw if user supplies type arguments
+
+We don't support generic types (see [[Supporting%20user%20defined%20generic%20types][Supporting user defined generic
+types]]) so we should throw if a user attempts to use them.
+
 *** Consider adding a fluent option
 
 It would be fairly trivial to allow generation of model types with
