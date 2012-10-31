@@ -650,3 +650,18 @@ comment for a test but forgot to keep on doing it. Example:
 
 This helps make the purpose of the test clearer when the name is not
 sufficient.
+*** Supporting user defined generic types
+
+At present we have a bit of a hack to support templates. However, all
+that is required to allow users to create their own template types is:
+
+- parse dia information for type arguments
+- change pod to have type arguments
+- change merger to allow variables of the type of the type argument
+- change view model to propagate type arguments
+- change formatter to create template class if type arguments are
+  present
+
+However this would then mean that IO and serialisation would fail
+since they are implemented on the cpp. As there is no need for
+template types, this seems like an ok limitation.
