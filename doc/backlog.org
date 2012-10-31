@@ -10,6 +10,18 @@ This file contains all stories that haven't been assigned to a sprint.
 
 Stories that we intend to look at, at some point.
 
+*** Add support for boost variant
+
+In order to be able to code generate the dia model we need support for
+boost variant. One possible implementation:
+
+- create a new stereotype: variant. works very much like enumeration,
+  except attributes in class are a list of types
+- create a formatter etc for variants
+- add support for default variant visitor. this could be fairly
+  generic so we could also use it as part of the visitor patter for
+  class hierarchies
+
 *** Throw if user supplies type arguments
 
 We don't support generic types (see [[Supporting%20user%20defined%20generic%20types][Supporting user defined generic
