@@ -70,7 +70,8 @@ public:
         result.is_parent(false);
         result.category_type(category_types::user_defined);
         result.number_of_type_arguments(0);
-        result.is_container(false);
+        result.is_sequence_container(false);
+        result.is_associative_container(false);
         return result;
     }
 

@@ -84,7 +84,8 @@
 				<category_type>1</category_type>
 				<documentation></documentation>
 				<number_of_type_arguments>0</number_of_type_arguments>
-				<is_container>0</is_container>
+				<is_sequence_container>0</is_sequence_container>
+				<is_associative_container>0</is_associative_container>
 			</second>
 		</item>
 		<item>
@@ -127,7 +128,8 @@
 				<category_type>1</category_type>
 				<documentation></documentation>
 				<number_of_type_arguments>0</number_of_type_arguments>
-				<is_container>0</is_container>
+				<is_sequence_container>0</is_sequence_container>
+				<is_associative_container>0</is_associative_container>
 			</second>
 		</item>
 	</pods>

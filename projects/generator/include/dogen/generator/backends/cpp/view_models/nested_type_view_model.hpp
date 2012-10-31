@@ -114,6 +114,22 @@ public:
     /**@}*/
 
     /**
+     * @brief If true, type is a container.
+     */
+    /**@{*/
+    bool is_container() const { return is_container_; }
+    void is_container(bool value) { is_container_ = value; }
+    /**@}*/
+
+    /**
+     * @brief If true, the type is an associative container.
+     */
+    /**@{*/
+    bool is_associative_container() const { return is_associative_container_; }
+    void is_associative_container(bool v) { is_associative_container_ = v; }
+    /**@}*/
+
+    /**
      * @brief If the type is a generic type, returns all the type
      * arguments.
      */
@@ -130,6 +146,8 @@ private:
     bool is_string_like_;
     bool is_char_like_;
     bool is_int_like_;
+    bool is_container_;
+    bool is_associative_container_;
     std::list<nested_type_view_model> children_;
 };
 

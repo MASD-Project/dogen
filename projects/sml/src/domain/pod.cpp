@@ -41,7 +41,8 @@ bool pod::operator==(const pod& rhs) const {
         category_type_ == rhs.category_type_ &&
         documentation_ == rhs.documentation_ &&
         number_of_type_arguments_ == rhs.number_of_type_arguments_ &&
-        is_container_ == rhs.is_container_;
+        is_sequence_container_ == rhs.is_sequence_container_ &&
+        is_associative_container_ == rhs.is_associative_container_;
 }
 
 void pod::to_stream(std::ostream& stream) const {
@@ -58,7 +59,8 @@ void pod::to_stream(std::ostream& stream) const {
            << "\"documentation\":" << "\"" << documentation_ << "\", "
            << "\"number_of_type_arguments\":" << number_of_type_arguments_
            << "\", "
-           << "\"is_container\":" << is_container_
+           << "\"is_sequence_container\":" << is_sequence_container_ << "\", "
+           << "\"is_associative_container\":" << is_associative_container_
            << " }";
 }
 

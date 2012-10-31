@@ -54,7 +54,10 @@ public:
         archive & make_nvp("documentation", value.documentation_);
         archive & make_nvp("number_of_type_arguments",
             value.number_of_type_arguments_);
-        archive & make_nvp("is_container", value.is_container_);
+        archive & make_nvp("is_sequence_container",
+            value.is_sequence_container_);
+        archive & make_nvp("is_associative_container",
+            value.is_associative_container_);
     }
 };
 
