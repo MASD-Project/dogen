@@ -10,6 +10,19 @@ This file contains all stories that haven't been assigned to a sprint.
 
 Stories that we intend to look at, at some point.
 
+*** Formatters are actually just view model IO
+
+In reality, the formatters are nothing but glorified inserters. When
+we start generating the view model, we should not generate the
+traditional =io= and re-implement the formatters as inserters so that
+one can simply take a file view model and stream it and it should
+result in a compilable file. The end result will be a domain model
+with:
+
+- domain: code generated view model
+- io: formatters refactored as inserters
+- utility: view model transformer
+
 *** Cross model referencing tests
 
 At present we do not have any tests were a pod in one model makes use
