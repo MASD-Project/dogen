@@ -42,6 +42,7 @@
 #include "dogen/sml/domain/package.hpp"
 #include "dogen/sml/domain/pod.hpp"
 #include "dogen/sml/domain/model.hpp"
+#include "dogen/sml/domain/nested_qualified_name.hpp"
 #include "dogen/generator/backends/cpp/view_models/file_view_model.hpp"
 
 namespace dogen {

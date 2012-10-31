@@ -211,11 +211,11 @@ BOOST_AUTO_TEST_CASE(view_model_transformer_correctly_transforms_domain_files) {
         BOOST_REQUIRE(properties.size() == 2);
 
         for (const auto p : properties) {
-            BOOST_LOG_SEV(lg, debug) << "property type: " << p.type()
+            BOOST_LOG_SEV(lg, debug) << "property type: " << p.type().name()
                                      << " name: " << p.name();
 
             if (p.name() == property_1 || p.name() == property_2)
-                BOOST_CHECK(p.type() == property_type);
+                BOOST_CHECK(p.type().name() == property_type);
             else
                 BOOST_CHECK(p.name() == "versioned_key");
         }

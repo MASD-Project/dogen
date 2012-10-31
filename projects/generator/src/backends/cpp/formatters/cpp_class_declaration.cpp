@@ -88,9 +88,9 @@ void cpp_class_declaration::complete_constructor(const class_view_model& vm) {
     if (props.size() == 1) {
         const auto p(*props.begin());
         stream_ << indenter_ << "explicit " << vm.name() << "(const "
-                << p.type();
+                << p.type().complete_name();
 
-        if (!p.is_primitive())
+        if (!p.type().is_primitive())
             stream_ << "&";
 
         stream_ << " " << p.name() << ");" << std::endl;
@@ -104,9 +104,9 @@ void cpp_class_declaration::complete_constructor(const class_view_model& vm) {
         bool is_first(true);
         for (const auto p : props) {
             stream_ << (is_first ? "" : ",") << std::endl;
-            stream_ << indenter_ << "const " << p.type();
+            stream_ << indenter_ << "const " << p.type().complete_name();
 
-            if (!p.is_primitive())
+            if (!p.type().is_primitive())
                 stream_ << "&";
 
             stream_ << " " << p.name();
@@ -184,7 +184,7 @@ void cpp_class_declaration::getters_and_setters(const class_view_model& vm) {
     for (const auto p : vm.properties()) {
         dc.format(p.documentation());
         dc.format_start_block(p.documentation());
-        stream_ << indenter_ << p.type() << " " << p.name()
+        stream_ << indenter_ << p.type().complete_name() << " " << p.name()
                 << "() const ";
         utility_.open_scope();
         {
@@ -196,9 +196,10 @@ void cpp_class_declaration::getters_and_setters(const class_view_model& vm) {
         utility_.close_scope();
         utility_.blank_line();
 
-        stream_ << indenter_ << "void " << p.name() << "(const " << p.type();
+        stream_ << indenter_ << "void " << p.name() << "(const "
+                << p.type().complete_name();
 
-        if (!p.is_primitive())
+        if (!p.type().is_primitive())
             stream_ << "&";
 
         stream_ << " v) ";
@@ -220,7 +221,7 @@ void cpp_class_declaration::member_variables(const class_view_model& vm) {
 
     utility_.private_access_specifier();
     for (const auto p : vm.properties()) {
-        stream_ << indenter_ << p.type() << " "
+        stream_ << indenter_ << p.type().complete_name() << " "
                 << utility_.as_member_variable(p.name()) << ";"
                 << std::endl;
     }

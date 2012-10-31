@@ -110,9 +110,9 @@ void cpp_inserter_implementation::format(const class_view_model& vm) {
         else
             ss << "v." << utility_.as_getter(p.name());
 
-        if (p.is_string_like())
+        if (p.type().is_string_like())
             stream_ << utility_.quote_escaped_streamed(ss.str());
-        else if (p.is_primitive())
+        else if (p.type().is_primitive())
             stream_ << ss.str();
         else
             stream_ << ss.str();

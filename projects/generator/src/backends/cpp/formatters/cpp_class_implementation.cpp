@@ -50,7 +50,7 @@ void cpp_class_implementation::default_constructor(const class_view_model& vm) {
         cpp_positive_indenter_scope s(indenter_);
         bool is_first(true);
         for (const auto p : vm.properties()) {
-            if (!p.is_primitive())
+            if (!p.type().is_primitive())
                 continue;
 
             if (is_first)
@@ -59,7 +59,7 @@ void cpp_class_implementation::default_constructor(const class_view_model& vm) {
                 stream_ << "," << std::endl << indenter_ << "  ";
 
             stream_ << utility_.as_member_variable(p.name()) << "("
-                    << "static_cast<" << p.type() << ">(0))";
+                    << "static_cast<" << p.type().complete_name() << ">(0))";
             is_first = false;
         }
         stream_ << " { }" << std::endl;
@@ -76,9 +76,9 @@ void cpp_class_implementation::complete_constructor(const class_view_model& vm) 
 
     if (props.size() == 1) {
         const auto p(*props.begin());
-        stream_ << "const " << p.type();
+        stream_ << "const " << p.type().complete_name();
 
-        if (!p.is_primitive())
+        if (!p.type().is_primitive())
             stream_ << "&";
 
         stream_ << " " << p.name() << ")" << std::endl;
@@ -87,9 +87,9 @@ void cpp_class_implementation::complete_constructor(const class_view_model& vm) 
         bool is_first(true);
         for (const auto p : props) {
             stream_ << (is_first ? "" : ",") << std::endl;
-            stream_ << indenter_ << "const " << p.type();
+            stream_ << indenter_ << "const " << p.type().complete_name();
 
-            if (!p.is_primitive())
+            if (!p.type().is_primitive())
                 stream_ << "&";
 
             stream_ << " " << p.name();

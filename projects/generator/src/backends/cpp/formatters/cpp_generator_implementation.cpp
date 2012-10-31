@@ -149,29 +149,32 @@ create_helper_methods(const class_view_model& vm) {
 
     utility_.blank_line();
     for (const auto p : props) {
-        if (types_done.find(p.type()) == types_done.end()) {
-            if (p.is_primitive()) {
-                if (p.is_char_like()) {
-                    char_like_helper(p.identifiable_type(), p.type());
+        if (types_done.find(p.type().name()) == types_done.end()) {
+            if (p.type().is_primitive()) {
+                if (p.type().is_char_like()) {
+                    char_like_helper(p.type().identifiable_name(),
+                        p.type().name());
                     utility_.blank_line();
-                } else if (p.is_int_like()) {
-                    int_like_helper(p.identifiable_type(), p.type());
+                } else if (p.type().is_int_like()) {
+                    int_like_helper(p.type().identifiable_name(),
+                        p.type().name());
                     utility_.blank_line();
-                } else if (p.type() == bool_type) {
+                } else if (p.type().name() == bool_type) {
                     bool_helper();
                     utility_.blank_line();
                 }
             } else {
-                if (p.type() == string_type) {
+                if (p.type().name() == string_type) {
                     string_helper();
                     utility_.blank_line();
                 } else {
-                    domain_type_helper(p.identifiable_type(), p.type());
+                    domain_type_helper(p.type().identifiable_name(),
+                        p.type().name());
                     utility_.blank_line();
                 }
             }
         }
-        types_done.insert(p.type());
+        types_done.insert(p.type().name());
     }
 }
 
@@ -189,14 +192,14 @@ void generator_implementation::populate_method(const class_view_model& vm) {
         cpp_positive_indenter_scope s(indenter_);
         unsigned int j(0);
         for (const auto p : props) {
-            if (p.is_primitive()) {
+            if (p.type().is_primitive()) {
                     stream_ << indenter_ << "v." << p.name()
-                            << "(create_" << p.identifiable_type()
+                            << "(create_" << p.type().identifiable_name()
                             << "(position + " << j << "));"
                             << std::endl;
                 ++j;
             } else {
-                if (p.type() == string_type) {
+                if (p.type().name() == string_type) {
                     stream_ << indenter_ << "v." << p.name()
                             << "(create_std_string("
                             << utility_.quote(p.name())
@@ -204,7 +207,7 @@ void generator_implementation::populate_method(const class_view_model& vm) {
                             << std::endl;
                 } else {
                     stream_ << indenter_ << "v." << p.name()
-                            << "(create_" << p.identifiable_type()
+                            << "(create_" << p.type().identifiable_name()
                             << "(position + " << j << "));"
                             << std::endl;
                 }
