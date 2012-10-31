@@ -22,8 +22,20 @@
 
 namespace {
 const std::string model_name("std");
-
 const std::string string_name("string");
+const std::string vector_name("vector");
+const std::string deque_name("deque");
+const std::string array_name("array");
+const std::string list_name("list");
+const std::string forward_list_name("forward_list");
+const std::string set_name("set");
+const std::string multiset_name("multiset");
+const std::string unordered_set_name("unordered_set");
+const std::string unordered_multiset_name("unordered_multiset");
+const std::string map_name("map");
+const std::string multimap_name("multimap");
+const std::string unordered_map_name("unordered_map");
+const std::string unordered_multimap_name("unordered_multimap");
 
 }
 
@@ -42,13 +54,16 @@ sml::primitive std_model_factory::create_primitive(const std::string& name) {
     return r;
 }
 
-sml::pod std_model_factory::create_pod(const std::string& name) {
+sml::pod std_model_factory::
+create_pod(const std::string& name, bool is_sequence, bool is_associative) {
     sml::qualified_name q;
     q.type_name(name);
     q.meta_type(sml::meta_types::pod);
     q.model_name(model_name);
     sml::pod r;
     r.name(q);
+    r.is_sequence_container(is_sequence);
+    r.is_associative_container(is_associative);
     return r;
 }
 
@@ -62,12 +77,25 @@ sml::model std_model_factory::create() {
     //         primitives.insert(std::make_pair(p.name(), p));
     //     });
 
-    const auto pi([&](std::string name){
-            pod p(create_pod(name));
+    const auto pi([&](std::string name, bool is_sequence, bool is_associative) {
+            pod p(create_pod(name, is_sequence, is_associative));
             pods.insert(std::make_pair(p.name(), p));
         });
 
-    pi(string_name);
+    pi(string_name, false, false);
+    pi(vector_name, true, false);
+    pi(deque_name, true, false);
+    pi(array_name, true, false);
+    pi(list_name, true, false);
+    pi(forward_list_name, true, false);
+
+    pi(set_name, false, true);
+    pi(multiset_name, false, true);
+    pi(unordered_set_name, false, true);
+    pi(unordered_multiset_name, false, true);
+    pi(map_name, false, true);
+    pi(multimap_name, false, true);
+    pi(unordered_map_name, false, true);
 
     model r;
     r.name(model_name);
