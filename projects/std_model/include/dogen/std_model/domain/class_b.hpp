@@ -28,6 +28,7 @@
 #include <algorithm>
 #include <string>
 #include <vector>
+#include "dogen/std_model/domain/class_a.hpp"
 #include "dogen/std_model/domain/versioned_key.hpp"
 #include "dogen/std_model/serialization/class_b_fwd_ser.hpp"
 
@@ -44,6 +45,7 @@ public:
 public:
     class_b(
         const std::vector<std::string>& prop_0,
+        const std::vector<dogen::std_model::class_a>& prop_1,
         const dogen::std_model::versioned_key& versioned_key);
 
 private:
@@ -60,6 +62,14 @@ public:
 
     void prop_0(const std::vector<std::string>& v) {
         prop_0_ = v;
+    }
+
+    std::vector<dogen::std_model::class_a> prop_1() const {
+        return prop_1_;
+    }
+
+    void prop_1(const std::vector<dogen::std_model::class_a>& v) {
+        prop_1_ = v;
     }
 
     dogen::std_model::versioned_key versioned_key() const {
@@ -82,6 +92,7 @@ public:
 
 private:
     std::vector<std::string> prop_0_;
+    std::vector<dogen::std_model::class_a> prop_1_;
     dogen::std_model::versioned_key versioned_key_;
 };
 
