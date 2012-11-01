@@ -21,6 +21,7 @@
 #include "dogen/std_model/hash/class_a_hash.hpp"
 #include "dogen/std_model/hash/class_b_hash.hpp"
 #include "dogen/std_model/hash/class_d_hash.hpp"
+#include "dogen/std_model/hash/class_e_hash.hpp"
 #include "dogen/std_model/hash/pkg1/class_c_hash.hpp"
 #include "dogen/std_model/hash/unversioned_key_hash.hpp"
 #include "dogen/std_model/hash/versioned_key_hash.hpp"

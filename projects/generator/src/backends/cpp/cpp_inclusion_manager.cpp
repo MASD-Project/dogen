@@ -55,6 +55,7 @@ const std::string boost_poly_oarchive("boost/archive/polymorphic_oarchive.hpp");
 const std::string boost_export("boost/serialization/export.hpp");
 const std::string boost_string("boost/serialization/string.hpp");
 const std::string boost_vector("boost/serialization/vector.hpp");
+const std::string boost_deque("boost/serialization/deque.hpp");
 const std::string boost_list("boost/serialization/list.hpp");
 const std::string boost_exception_info("boost/exception/info.hpp");
 const std::string pqxx_result_include("pqxx/result.hxx");
@@ -62,6 +63,7 @@ const std::string pqxx_transaction_include("pqxx/transaction.hxx");
 const std::string sstream("sstream");
 const std::string std_string("string");
 const std::string std_vector("vector");
+const std::string std_deque("deque");
 const std::string std_list("list");
 const std::string iosfwd("iosfwd");
 const std::string algorithm("algorithm");
@@ -348,6 +350,15 @@ void cpp_inclusion_manager::append_std_dependencies(
 
     if (is_implementation && is_serialization && qname.type_name() == std_list)
         il.system.push_back(boost_list);
+
+    /*
+     * std::deque
+     */
+    if (is_header && is_domain && qname.type_name() == std_deque)
+        il.system.push_back(std_deque);
+
+    if (is_implementation && is_serialization && qname.type_name() == std_deque)
+        il.system.push_back(boost_deque);
 }
 
 void cpp_inclusion_manager::append_relationship_dependencies(

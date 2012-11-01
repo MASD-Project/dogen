@@ -21,6 +21,7 @@
 #include "dogen/std_model/domain/class_a.hpp"
 #include "dogen/std_model/domain/class_b.hpp"
 #include "dogen/std_model/domain/class_d.hpp"
+#include "dogen/std_model/domain/class_e.hpp"
 #include "dogen/std_model/domain/pkg1/class_c.hpp"
 #include "dogen/std_model/domain/unversioned_key.hpp"
 #include "dogen/std_model/domain/versioned_key.hpp"
