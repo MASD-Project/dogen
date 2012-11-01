@@ -10,6 +10,25 @@ This file contains all stories that haven't been assigned to a sprint.
 
 Stories that we intend to look at, at some point.
 
+*** Support for ordered containers
+
+In order to provide support for ordered containers such as maps and
+sets we need to define =operator<=. However, it makes no sense to code
+generate this operator as its unlikely we'll get it right. We could
+assume the user wants to always sort by key, but that seems like a bad
+assumption. The alternatives are:
+
+- to expect a user-defined =entity_name_less_than.hpp= in domain. we'd
+  automatically ignore any files matching this patter so the user can
+  create them and not lose it. The problem with this approach is that
+  we may have different sort criteria. This is a good YAGNI start.
+- to provide the =Compare= parameter in the template and then expect a
+  user-defined =entity_name_Compare.hpp=. The same ignore
+  applies. This would allow users to provide any number of comparison
+  operations.
+
+Either approach requires [[Ignore%20files%20and%20folders%20based%20on%20regex][Ignore files and folders based on regex]].
+
 *** Rename =cpp_inserter_implementation=
 
 We used =cpp_inserter_implementation= to provide all sorts of utility
