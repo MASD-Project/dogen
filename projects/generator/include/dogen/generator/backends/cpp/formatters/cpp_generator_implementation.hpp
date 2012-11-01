@@ -66,6 +66,11 @@ private:
         const std::string& container_type_name,
         unsigned int quantity,
         const std::string& containee_identifiable_type_name);
+    void associative_container_helper(
+        const std::string& container_identifiable_type_name,
+        const std::string& container_type_name,
+        unsigned int quantity,
+        const std::string& containee_identifiable_type_name);
 
     void associative_container_helper(const std::string& identifiable_type_name,
         const std::string& type_name, unsigned int quantity);

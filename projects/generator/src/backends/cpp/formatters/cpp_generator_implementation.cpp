@@ -91,6 +91,36 @@ sequence_container_helper(const std::string& container_identifiable_type_name,
     utility_.blank_line();
 }
 
+void generator_implementation::
+associative_container_helper(const std::string& container_identifiable_type_name,
+    const std::string& container_type_name,
+    unsigned int quantity,
+    const std::string& containee_identifiable_type_name) {
+    stream_ << indenter_ << container_type_name << " create_"
+            << container_identifiable_type_name
+            << "(unsigned int position) ";
+
+    utility_.open_scope();
+    {
+        cpp_positive_indenter_scope s(indenter_);
+        stream_ << indenter_ << container_type_name << " r;"
+                << std::endl;
+        stream_ << indenter_ << "for (unsigned int i(0); i < " << quantity
+                << "; ++i) ";
+        utility_.open_scope();
+        {
+            cpp_positive_indenter_scope s(indenter_);
+            stream_ << indenter_ << "r.insert(create_"
+                    << containee_identifiable_type_name
+                    << "(position + i));" << std::endl;
+        }
+        utility_.close_scope();
+        stream_ << indenter_ << "return r;" << std::endl;
+    }
+    utility_.close_scope();
+    utility_.blank_line();
+}
+
 // void generator_implementation::
 // associative_container_helper(const std::string& identifiable_type_name,
 //     const std::string& type_name, unsigned int quantity) {
@@ -216,6 +246,13 @@ recursive_helper_method_creator(const nested_type_view_model& vm,
         sequence_container_helper(
             vm.complete_identifiable_name(), vm.complete_name(), 10,
             containee_vm.complete_identifiable_name());
+    } else if (vm.is_associative_container()) {
+        if (children.size() == 1) {
+            const auto containee_vm(children.front());
+            associative_container_helper(
+                vm.complete_identifiable_name(), vm.complete_name(), 10,
+                containee_vm.complete_identifiable_name());
+        }
     } else {
         if (vm.name() == string_type) {
             string_helper();

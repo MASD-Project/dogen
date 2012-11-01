@@ -129,6 +129,11 @@ recursive_helper_method_creator(const nested_type_view_model& vm,
 
         const auto containee_vm(children.front());
         sequence_container_helper(vm, containee_vm);
+    } else if (vm.is_associative_container()) {
+        if (children.size() == 1) {
+            const auto containee_vm(children.front());
+            sequence_container_helper(vm, containee_vm);
+        }
     }
     types_done.insert(vm.complete_identifiable_name());
 }
