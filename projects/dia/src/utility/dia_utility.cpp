@@ -27,6 +27,8 @@ const std::string uml_large_package("UML - LargePackage");
 const std::string uml_class("UML - Class");
 const std::string uml_generalization("UML - Generalization");
 const std::string uml_association("UML - Association");
+const std::string uml_note("UML - Note");
+const std::string uml_message("UML - Message");
 const std::string invalid_object_type("Invalid value for object type: ");
 const std::string invalid_stereotype("Invalid value for stereotype: ");
 
@@ -51,6 +53,12 @@ object_types parse_object_type(const std::string& ot) {
 
     if (ot == uml_association)
         return object_types::uml_association;
+
+    if (ot == uml_note)
+        return object_types::uml_note;
+
+    if (ot == uml_message)
+        return object_types::uml_message;
 
     throw dogen::utility::exception::exception(invalid_object_type + ot);
 }

@@ -32,12 +32,10 @@
 #include <boost/algorithm/string/trim.hpp>
 #include <boost/algorithm/string/erase.hpp>
 #include <boost/graph/depth_first_search.hpp>
+#include "dogen/dia/domain/object_types.hpp"
+#include "dogen/dia/io/object_types_io.hpp"
 #include "dogen/dia/domain/composite.hpp"
 #include "dogen/dia/domain/attribute.hpp"
-#include "dogen/dia/domain/object_types.hpp"
-#include "dogen/dia/domain/stereotypes.hpp"
-#include "dogen/dia/io/object_types_io.hpp"
-#include "dogen/dia/io/stereotypes_io.hpp"
 #include "dogen/dia/utility/dia_utility.hpp"
 #include "dogen/dia/io/object_io.hpp"
 #include "dogen/dia/io/diagram_io.hpp"
@@ -51,6 +49,31 @@ namespace {
 
 using namespace dogen::utility::log;
 static logger lg(logger_factory("dia_to_sml"));
+
+const std::string error_parsing_object_type("Fail to parse object type: ");
+const std::string unsupported_object_type("Dia object type is not supported: ");
+
+using dogen::generator::modeling::transformation_error;
+
+/**
+ * @brief Parses a string representing an object type into its enum.
+ *
+ * @param s string with an object type
+ */
+dogen::dia::object_types parse_object_type(const std::string s) {
+    dogen::dia::object_types r;
+    try {
+        using dogen::dia::utility::parse_object_type;
+        r = parse_object_type(s);
+    } catch(const std::exception& e) {
+        std::ostringstream stream;
+        stream << error_parsing_object_type << "'" << s
+               << "'. Error: " << e.what();
+        BOOST_LOG_SEV(lg, error) << stream.str();
+        throw transformation_error(stream.str());
+    }
+    return r;
+}
 
 }
 
@@ -84,11 +107,21 @@ dia_to_sml(const dia::diagram& diagram, const std::string& model_name,
                              << " verbose: " << verbose_;
 }
 
+
+bool dia_to_sml::is_ignorable_object(const dia::object& o) {
+    using dia::object_types;
+    const auto ot(parse_object_type(o.type()));
+    return ot == object_types::uml_note || ot == object_types::uml_message;
+}
+
 void dia_to_sml::
 setup_data_structures(const std::vector<dia::object>& objects) {
     BOOST_LOG_SEV(lg, debug) << "Setting up data structures";
 
     for (const auto o : objects) {
+        if (is_ignorable_object(o))
+            continue;
+
         if (package_transformer_.is_processable(o)) {
             package_transformer_.add_object(o);
             continue;
@@ -108,6 +141,8 @@ setup_data_structures(const std::vector<dia::object>& objects) {
             pod_transformer_.add_object(o);
             continue;
         }
+
+        throw transformation_error(unsupported_object_type + o.id());
     }
 }
 

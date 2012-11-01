@@ -31,6 +31,8 @@ const std::string uml_large_package("uml_large_package");
 const std::string uml_class("uml_class");
 const std::string uml_generalization("uml_generalization");
 const std::string uml_association("uml_association");
+const std::string uml_note("uml_note");
+const std::string uml_message("uml_message");
 
 const std::string error_message("Invalid or unexpected object type");
 
@@ -51,6 +53,10 @@ std::ostream& operator<<(std::ostream& stream, object_types value) {
         return stream << prefix << uml_generalization;
     case object_types::uml_association:
         return stream << prefix << uml_association;
+    case object_types::uml_note:
+        return stream << prefix << uml_note;
+    case object_types::uml_message:
+        return stream << prefix << uml_message;
     default:
         break;
     }

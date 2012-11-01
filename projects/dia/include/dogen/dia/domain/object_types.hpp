@@ -36,7 +36,9 @@ enum class object_types : unsigned int {
     uml_large_package = 1, ///< A UML package
     uml_class = 2, ///< A UML class
     uml_generalization = 3, ///< UML Inheritance
-    uml_association = 4 ///< UML Association
+    uml_association = 4, ///< UML Association
+    uml_note = 5, ///< UML Note
+    uml_message = 6, ///< UML Message
 };
 
 } }

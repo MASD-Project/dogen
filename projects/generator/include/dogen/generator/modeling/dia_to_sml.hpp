@@ -80,6 +80,9 @@ private:
      */
     void setup_data_structures(const std::vector<dia::object>& objects);
 
+private:
+    bool is_ignorable_object(const dia::object& o);
+
 public:
     /**
      * @brief Execute the transformation from a Dia diagram into a SML model.

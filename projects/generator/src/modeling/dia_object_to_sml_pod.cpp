@@ -506,8 +506,13 @@ void dia_object_to_sml_pod::setup_graph() {
     }
 }
 
-bool dia_object_to_sml_pod::is_processable(const dia::object& /*o*/) const {
-    return true;
+bool dia_object_to_sml_pod::is_processable(const dia::object& o) const {
+    using dia::object_types;
+    const auto ot(parse_object_type(o.type()));
+    return
+        ot == object_types::uml_generalization ||
+        ot == object_types::uml_association ||
+        ot == object_types::uml_class;
 }
 
 void dia_object_to_sml_pod::add_object(const dia::object& o) {
