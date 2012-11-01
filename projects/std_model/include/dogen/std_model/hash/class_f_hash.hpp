@@ -18,9 +18,35 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/std_model/database/class_a_db.hpp"
-#include "dogen/std_model/database/class_b_db.hpp"
-#include "dogen/std_model/database/class_d_db.hpp"
-#include "dogen/std_model/database/class_e_db.hpp"
-#include "dogen/std_model/database/class_f_db.hpp"
-#include "dogen/std_model/database/pkg1/class_c_db.hpp"
+#ifndef DOGEN_STD_MODEL_HASH_CLASS_F_HASH_HPP
+#define DOGEN_STD_MODEL_HASH_CLASS_F_HASH_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include <functional>
+#include "dogen/std_model/domain/class_f.hpp"
+
+namespace dogen {
+namespace std_model {
+
+class class_f_hasher {
+public:
+    static std::size_t hash(const class_f& v);
+};
+
+} }
+
+namespace std {
+
+template<>
+class hash<dogen::std_model::class_f> {
+public:
+    size_t operator()(const dogen::std_model::class_f& v) const {
+        return dogen::std_model::class_f_hasher::hash(v);
+    }
+};
+
+}
+#endif

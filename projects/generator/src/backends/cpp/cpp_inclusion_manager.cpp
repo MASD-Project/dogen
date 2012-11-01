@@ -67,6 +67,7 @@ const std::string std_vector("vector");
 const std::string std_set("set");
 const std::string std_deque("deque");
 const std::string std_list("list");
+const std::string std_unordered_map("unordered_map");
 const std::string iosfwd("iosfwd");
 const std::string algorithm("algorithm");
 const std::string ostream("ostream");
@@ -370,6 +371,23 @@ void cpp_inclusion_manager::append_std_dependencies(
 
     if (is_implementation && is_serialization && qname.type_name() == std_set)
         il.system.push_back(boost_set);
+
+    /*
+     * std::unordered_map
+     */
+    if (is_header && is_domain && qname.type_name() == std_unordered_map)
+        il.system.push_back(std_unordered_map);
+
+    // FIXME: massive hack. boost doesn't have support for
+    // serialisation so we are using our own hacked header
+    std::string private_ser_header("utility/serialization/unordered_map.hpp");
+    const auto epp(model_.external_package_path());
+    if (!epp.empty())
+        private_ser_header = epp.front() + "/" + private_ser_header;
+
+    if (is_implementation && is_serialization &&
+        qname.type_name() == std_unordered_map)
+        il.user.push_back(private_ser_header);
 }
 
 void cpp_inclusion_manager::append_relationship_dependencies(

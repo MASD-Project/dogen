@@ -40,6 +40,7 @@ static logger lg(logger_factory("sml_to_view_model"));
 const std::string empty;
 const std::list<std::string> empty_package_path;
 const std::string dot(".");
+const std::string comma(",");
 const std::string space(" ");
 const std::string less_than("<");
 const std::string more_than(">");
@@ -198,6 +199,7 @@ std::string sml_dfs_visitor::to_identifiable_name(const std::string n) const {
 
     boost::replace_all(r, namespace_separator, separator);
     boost::replace_all(r, space, separator);
+    boost::replace_all(r, comma, empty);
     boost::replace_all(r, less_than, separator);
     boost::replace_all(r, more_than, empty);
 

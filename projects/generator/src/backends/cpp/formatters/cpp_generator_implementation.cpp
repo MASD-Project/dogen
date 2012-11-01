@@ -109,7 +109,7 @@ associative_container_helper(
     if (children.size() != 1 && children.size() != 2)
         throw generation_failure(invalid_associative_container);
 
-    const auto container_identifiable_type_name(vm.identifiable_name());
+    const auto container_identifiable_type_name(vm.complete_identifiable_name());
     const auto container_type_name(vm.complete_name());
 
     stream_ << indenter_ << container_type_name << " create_"

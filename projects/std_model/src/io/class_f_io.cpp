@@ -18,11 +18,38 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/std_model/io/class_a_io.hpp"
-#include "dogen/std_model/io/class_b_io.hpp"
-#include "dogen/std_model/io/class_d_io.hpp"
-#include "dogen/std_model/io/class_e_io.hpp"
+#include <ostream>
 #include "dogen/std_model/io/class_f_io.hpp"
-#include "dogen/std_model/io/pkg1/class_c_io.hpp"
-#include "dogen/std_model/io/unversioned_key_io.hpp"
 #include "dogen/std_model/io/versioned_key_io.hpp"
+
+namespace std {
+
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, std::string>& v) {
+    s << "[";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << " [ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
+        s << "\"" << i->first << "\"";
+        s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
+        s << "\"" << i->first << "\"";
+        s << " } ]";
+    }
+    s << " ] ";
+    return s;
+}
+
+}
+
+namespace dogen {
+namespace std_model {
+
+std::ostream& operator<<(std::ostream& s, const class_f& v) {
+    s << " { "
+      << "\"__type__\": " << "\"class_f\"" << ", "
+      << "\"prop_0\": " << v.prop_0() << ", "
+      << "\"versioned_key\": " << v.versioned_key()
+      << " }";
+    return(s);
+}
+
+} }

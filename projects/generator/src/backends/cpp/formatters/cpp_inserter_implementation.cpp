@@ -143,7 +143,7 @@ associative_container_helper(const nested_type_view_model& vm) {
         {
             cpp_positive_indenter_scope s(indenter_);
             stream_ << indenter_ << "s" << space_inserter
-                    << utility_.quote("[ ") << ";" << std::endl;
+                    << utility_.quote("[") << ";" << std::endl;
             stream_ << indenter_
                     << "for (auto i(v.begin()); i != v.end(); ++i) ";
             utility_.open_scope();
@@ -153,14 +153,15 @@ associative_container_helper(const nested_type_view_model& vm) {
                         << utility_.quote(", ") << ";" << std::endl;
 
 
-                stream_ << indenter_ << "s" << space_inserter << " { { "
+                stream_ << indenter_ << "s" << space_inserter
+                        << utility_.quote(" [ { ") << space_inserter
                         << utility_.quote(utility_.quote_escaped(type) + colon)
                         << space_inserter
                         << utility_.quote(utility_.quote_escaped("key"))
                         << space_inserter << utility_.quote(spaced_comma)
                         << space_inserter
                         << utility_.quote(utility_.quote_escaped("data") +
-                            colon) << std::endl;
+                            colon) << ";" << std::endl;
 
                 const auto key(children.front());
                 if (key.is_string_like()) {
@@ -170,14 +171,15 @@ associative_container_helper(const nested_type_view_model& vm) {
                 } else
                     stream_ << indenter_ << "s << i->first;" << std::endl;
 
-                stream_ << indenter_ << "s" << space_inserter << " }, { "
+                stream_ << indenter_ << "s" << space_inserter
+                        << utility_.quote(" }, { ") << space_inserter
                         << utility_.quote(utility_.quote_escaped(type) + colon)
                         << space_inserter
                         << utility_.quote(utility_.quote_escaped("value"))
                         << space_inserter << utility_.quote(spaced_comma)
                         << space_inserter
                         << utility_.quote(utility_.quote_escaped("data") +
-                            colon) << std::endl;
+                            colon) << ";" << std::endl;
 
                 const auto value(children.back());
                 if (value.is_string_like()) {
@@ -187,12 +189,13 @@ associative_container_helper(const nested_type_view_model& vm) {
                 } else
                     stream_ << indenter_ << "s << i->first;" << std::endl;
 
-                stream_ << indenter_ << "s" << space_inserter << " } } "
+                stream_ << indenter_ << "s" << space_inserter
+                        << utility_.quote(" } ]") << ";"
                         << std::endl;
             }
             utility_.close_scope();
             stream_ << indenter_ << "s" << space_inserter
-                    << utility_.quote("] ") << ";" << std::endl;
+                    << utility_.quote(" ] ") << ";" << std::endl;
             stream_ << indenter_ << "return s;" << std::endl;
         }
         utility_.close_scope();

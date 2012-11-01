@@ -18,9 +18,23 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/std_model/database/class_a_db.hpp"
-#include "dogen/std_model/database/class_b_db.hpp"
-#include "dogen/std_model/database/class_d_db.hpp"
-#include "dogen/std_model/database/class_e_db.hpp"
-#include "dogen/std_model/database/class_f_db.hpp"
-#include "dogen/std_model/database/pkg1/class_c_db.hpp"
+#ifndef DOGEN_STD_MODEL_IO_CLASS_F_IO_HPP
+#define DOGEN_STD_MODEL_IO_CLASS_F_IO_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include <iosfwd>
+#include "dogen/std_model/domain/class_f.hpp"
+
+namespace dogen {
+namespace std_model {
+
+std::ostream&
+operator<<(std::ostream& s,
+     const dogen::std_model::class_f& v);
+
+} }
+
+#endif
