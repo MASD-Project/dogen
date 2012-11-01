@@ -19,6 +19,7 @@
  *
  */
 #include <ostream>
+#include "dogen/std_model/io/class_a_io.hpp"
 #include "dogen/std_model/io/class_f_io.hpp"
 #include "dogen/std_model/io/versioned_key_io.hpp"
 
@@ -28,10 +29,28 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::s
     s << "[";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
-        s << " [ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
+        s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
         s << "\"" << i->first << "\"";
         s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
+        s << "\"" << i->second << "\"";
+        s << " } ]";
+    }
+    s << " ] ";
+    return s;
+}
+
+}
+
+namespace std {
+
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, dogen::std_model::class_a>& v) {
+    s << "[";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
         s << "\"" << i->first << "\"";
+        s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
+        s << i->second;
         s << " } ]";
     }
     s << " ] ";
@@ -47,6 +66,7 @@ std::ostream& operator<<(std::ostream& s, const class_f& v) {
     s << " { "
       << "\"__type__\": " << "\"class_f\"" << ", "
       << "\"prop_0\": " << v.prop_0() << ", "
+      << "\"prop_1\": " << v.prop_1() << ", "
       << "\"versioned_key\": " << v.versioned_key()
       << " }";
     return(s);

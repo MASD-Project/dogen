@@ -19,6 +19,7 @@
  *
  */
 #include <sstream>
+#include "dogen/std_model/test_data/class_a_td.hpp"
 #include "dogen/std_model/test_data/class_f_td.hpp"
 #include "dogen/std_model/test_data/versioned_key_td.hpp"
 
@@ -38,6 +39,19 @@ std::unordered_map<std::string, std::string> create_std_unordered_map_std_string
     return r;
 }
 
+dogen::std_model::class_a
+create_dogen_std_model_class_a(const unsigned int position) {
+    return dogen::std_model::class_a_generator::create(position);
+}
+
+std::unordered_map<std::string, dogen::std_model::class_a> create_std_unordered_map_std_string_dogen_std_model_class_a(unsigned int position) {
+    std::unordered_map<std::string, dogen::std_model::class_a> r;
+    for (unsigned int i(0); i < 10; ++i) {
+        r.insert(std::make_pair(create_std_string(position + i), create_dogen_std_model_class_a(position + i)));
+    }
+    return r;
+}
+
 dogen::std_model::versioned_key
 create_dogen_std_model_versioned_key(const unsigned int position) {
     return dogen::std_model::versioned_key_generator::create(position);
@@ -53,7 +67,8 @@ class_f_generator::class_f_generator() : position_(0) { }
 void class_f_generator::
 populate(const unsigned int position, result_type& v) {
     v.prop_0(create_std_unordered_map_std_string_std_string(position + 0));
-    v.versioned_key(create_dogen_std_model_versioned_key(position + 1));
+    v.prop_1(create_std_unordered_map_std_string_dogen_std_model_class_a(position + 1));
+    v.versioned_key(create_dogen_std_model_versioned_key(position + 2));
 }
 
 class_f_generator::result_type

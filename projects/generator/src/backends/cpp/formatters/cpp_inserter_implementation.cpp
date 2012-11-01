@@ -154,7 +154,7 @@ associative_container_helper(const nested_type_view_model& vm) {
 
 
                 stream_ << indenter_ << "s" << space_inserter
-                        << utility_.quote(" [ { ") << space_inserter
+                        << utility_.quote("[ { ") << space_inserter
                         << utility_.quote(utility_.quote_escaped(type) + colon)
                         << space_inserter
                         << utility_.quote(utility_.quote_escaped("key"))
@@ -184,10 +184,10 @@ associative_container_helper(const nested_type_view_model& vm) {
                 const auto value(children.back());
                 if (value.is_string_like()) {
                     stream_ << indenter_ << "s" << space_inserter
-                            << utility_.quote_escaped_streamed("i->first")
+                            << utility_.quote_escaped_streamed("i->second")
                             << ";" << std::endl;
                 } else
-                    stream_ << indenter_ << "s << i->first;" << std::endl;
+                    stream_ << indenter_ << "s << i->second;" << std::endl;
 
                 stream_ << indenter_ << "s" << space_inserter
                         << utility_.quote(" } ]") << ";"
