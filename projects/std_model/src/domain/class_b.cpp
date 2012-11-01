@@ -18,5 +18,32 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/std_model/database/class_a_db.hpp"
-#include "dogen/std_model/database/class_b_db.hpp"
+#include "dogen/std_model/domain/class_b.hpp"
+
+namespace dogen {
+namespace std_model {
+
+class_b::class_b(
+    const std::vector<std::string>& prop_0,
+    const dogen::std_model::versioned_key& versioned_key)
+    : prop_0_(prop_0),
+      versioned_key_(versioned_key) { }
+
+void class_b::swap(class_b& other) noexcept {
+    using std::swap;
+    swap(prop_0_, other.prop_0_);
+    swap(versioned_key_, other.versioned_key_);
+}
+
+bool class_b::operator==(const class_b& rhs) const {
+    return prop_0_ == rhs.prop_0_ &&
+        versioned_key_ == rhs.versioned_key_;
+}
+
+class_b& class_b::operator=(class_b other) {
+    using std::swap;
+    swap(*this, other);
+    return *this;
+}
+
+} }

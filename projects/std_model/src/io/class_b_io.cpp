@@ -18,5 +18,34 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/std_model/database/class_a_db.hpp"
-#include "dogen/std_model/database/class_b_db.hpp"
+#include <ostream>
+#include "dogen/std_model/io/class_b_io.hpp"
+#include "dogen/std_model/io/versioned_key_io.hpp"
+
+namespace std {
+
+std::ostream& operator<<(std::ostream& s, const std::vector<std::string>& v) {
+    s << "[ ";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << *i;
+    }
+    s << "] ";
+    return s;
+}
+
+}
+
+namespace dogen {
+namespace std_model {
+
+std::ostream& operator<<(std::ostream& s, const class_b& v) {
+    s << " { "
+      << "\"__type__\": " << "\"class_b\"" << ", "
+      << "\"prop_0\": " << v.prop_0() << ", "
+      << "\"versioned_key\": " << v.versioned_key()
+      << " }";
+    return(s);
+}
+
+} }

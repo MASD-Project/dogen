@@ -74,17 +74,20 @@ void merger::resolve_parent(const pod& pod) {
     }
 }
 
-nested_qualified_name
-merger::resolve_partial_type(nested_qualified_name n) const {
+void
+merger::resolve_partial_type(nested_qualified_name& n) const {
+    auto children(n.children());
+    for (auto i(children.begin()); i != children.end(); ++i)
+        resolve_partial_type(*i);
+    n.children(children);
+
     const auto pods(merged_model_.pods());
     qualified_name r(n.type());
 
-    auto lambda([&]() -> nested_qualified_name {
+    auto lambda([&]() {
             BOOST_LOG_SEV(lg, debug) << "Resolved type " << n.type()
                                      << ". Result: " << r;
-            nested_qualified_name nqn;
-            nqn.type(r);
-            return nqn;
+            n.type(r);
         });
 
     // first try the type as it was read originally.
@@ -141,7 +144,9 @@ merger::resolve_properties(const pod& pod) {
         property property(r[i]);
 
         try {
-            property.type_name(resolve_partial_type(property.type_name()));
+            auto t(property.type_name());
+            resolve_partial_type(t);
+            property.type_name(t);
             r[i] = property;
         } catch (const merging_error& e) {
             std::ostringstream s;

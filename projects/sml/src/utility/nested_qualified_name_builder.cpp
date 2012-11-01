@@ -21,13 +21,14 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/io/unordered_set_io.hpp"
 #include "dogen/utility/io/list_io.hpp"
+#include "dogen/sml/io/nested_qualified_name_io.hpp"
 #include "dogen/sml/utility/nested_qualified_name_builder.hpp"
 
 using namespace dogen::utility::log;
 
 namespace {
 
-auto lg(logger_factory("generator"));
+auto lg(logger_factory("nested_qualified_name_builder"));
 
 }
 
@@ -147,7 +148,7 @@ nested_qualified_name nested_qualified_name_builder::build() {
     nested_qualified_name r;
     build_node(r, root_);
 
-    BOOST_LOG_SEV(lg, debug) << "finished build";
+    BOOST_LOG_SEV(lg, debug) << "finished build. Final name: " << r;
 
     return r;
 }

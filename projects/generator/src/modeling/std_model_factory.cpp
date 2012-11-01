@@ -62,6 +62,11 @@ create_pod(const std::string& name, bool is_sequence, bool is_associative) {
     q.model_name(model_name);
     sml::pod r;
     r.name(q);
+    if (is_sequence)
+        r.number_of_type_arguments(1);
+    else if (is_associative)
+        r.number_of_type_arguments(2);
+
     r.is_sequence_container(is_sequence);
     r.is_associative_container(is_associative);
     return r;

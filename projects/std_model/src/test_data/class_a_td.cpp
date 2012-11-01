@@ -24,10 +24,9 @@
 
 namespace {
 
-std::string create_std_string(const std::string& prefix, const unsigned int position) {
+std::string create_std_string(const unsigned int position) {
     std::ostringstream s;
-    s << prefix << "_" << position;
-
+    s << "a_string_" << position;
     return s.str();
 }
 
@@ -45,9 +44,9 @@ class_a_generator::class_a_generator() : position_(0) { }
 
 void class_a_generator::
 populate(const unsigned int position, result_type& v) {
-    v.prop0(create_std_string("prop0", position + 0));
-    v.prop1(create_std_string("prop1", position + 0));
-    v.versioned_key(create_dogen_std_model_versioned_key(position + 0));
+    v.prop0(create_std_string(position + 0));
+    v.prop1(create_std_string(position + 1));
+    v.versioned_key(create_dogen_std_model_versioned_key(position + 2));
 }
 
 class_a_generator::result_type

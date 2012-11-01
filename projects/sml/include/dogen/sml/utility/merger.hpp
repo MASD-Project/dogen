@@ -47,7 +47,7 @@ public:
     merger(const bool verbose, const std::string& schema_name);
 
 private:
-    nested_qualified_name resolve_partial_type(nested_qualified_name t) const;
+    void resolve_partial_type(nested_qualified_name& t) const;
     std::vector<property> resolve_properties(const pod& pod);
     void resolve_parent(const pod& pod);
     void resolve();

@@ -144,7 +144,7 @@ void cpp_class_implementation::to_stream(const class_view_model& vm) {
 
         const bool inside_class(true);
         cpp_inserter_implementation inserter(stream_, indenter_, inside_class);
-        inserter.format(vm);
+        inserter.format_inserter_implementation(vm);
     }
     utility_.close_scope();
     utility_.blank_line();

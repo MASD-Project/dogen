@@ -20,6 +20,8 @@
  */
 #include <ostream>
 #include <sstream>
+#include "dogen/generator/generation_failure.hpp"
+#include "dogen/generator/backends/cpp/formatters/cpp_namespace_helper.hpp"
 #include "dogen/generator/backends/cpp/formatters/cpp_inserter_implementation.hpp"
 
 namespace {
@@ -37,6 +39,9 @@ const std::string semi_colon(";");
 const std::string space(" ");
 const std::string underscore("_");
 const std::string spaced_comma(", ");
+
+const std::string invalid_sequence_container(
+    "Sequence containers have exactly one type argument");
 
 std::string parent_tag(const unsigned int number) {
     std::ostringstream s;
@@ -59,7 +64,88 @@ cpp_inserter_implementation(std::ostream& stream, cpp_indenter& indenter,
       utility_(stream_, indenter_) {
 }
 
-void cpp_inserter_implementation::format(const class_view_model& vm) {
+bool cpp_inserter_implementation::
+is_insertable(const nested_type_view_model& vm) {
+    return !vm.is_sequence_container() && !vm.is_associative_container();
+}
+
+void cpp_inserter_implementation::sequence_container_helper(
+    const nested_type_view_model& container,
+    const nested_type_view_model& containee) {
+
+    {
+        namespace_helper ns_helper(stream_, container.namespaces());
+
+        utility_.blank_line();
+        stream_ << indenter_ << "std::ostream& operator<<"
+                << "(std::ostream& s, const "
+                << container.complete_name() << "& v) ";
+
+        utility_.open_scope();
+        {
+            cpp_positive_indenter_scope s(indenter_);
+            stream_ << indenter_ << "s" << space_inserter
+                    << utility_.quote("[ ") << ";" << std::endl;
+            stream_ << indenter_
+                    << "for (auto i(v.begin()); i != v.end(); ++i) ";
+            utility_.open_scope();
+            {
+                cpp_positive_indenter_scope s(indenter_);
+                stream_ << indenter_ << "if (i != v.begin()) s" << space_inserter
+                        << utility_.quote(", ") << ";" << std::endl;
+                if (is_insertable(containee))
+                    stream_ << indenter_ << "s << *i;" << std::endl;
+                else {
+                    stream_ << indenter_ << "insert_"
+                            << containee.complete_identifiable_name()
+                            << "(s, i));" << std::endl;
+                }
+            }
+            utility_.close_scope();
+            stream_ << indenter_ << "s" << space_inserter
+                    << utility_.quote("] ") << ";" << std::endl;
+            stream_ << indenter_ << "return s;" << std::endl;
+        }
+        utility_.close_scope();
+        utility_.blank_line();
+    }
+    utility_.blank_line(2);
+}
+
+void cpp_inserter_implementation::
+recursive_helper_method_creator(const nested_type_view_model& vm,
+    std::unordered_set<std::string>& types_done) {
+
+    if (types_done.find(vm.complete_identifiable_name()) != types_done.end())
+        return;
+
+    const auto children(vm.children());
+    for (const auto c : children)
+        recursive_helper_method_creator(c, types_done);
+
+    if (vm.is_sequence_container()) {
+        if (children.size() != 1)
+            throw generation_failure(invalid_sequence_container);
+
+        const auto containee_vm(children.front());
+        sequence_container_helper(vm, containee_vm);
+    }
+    types_done.insert(vm.complete_identifiable_name());
+}
+
+void cpp_inserter_implementation::
+format_helper_methods(const class_view_model& vm) {
+    const auto props(vm.properties());
+    if (props.empty())
+        return;
+
+    std::unordered_set<std::string> types_done;
+    for (const auto p : props)
+        recursive_helper_method_creator(p.type(), types_done);
+}
+
+void cpp_inserter_implementation::
+format_inserter_implementation(const class_view_model& vm) {
     if (vm.requires_stream_manipulators()) {
         stream_ << indenter_ << "boost::io::ios_flags_saver ifs(s);"
                 << std::endl;

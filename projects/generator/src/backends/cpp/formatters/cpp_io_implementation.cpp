@@ -62,6 +62,15 @@ file_formatter::shared_ptr io_implementation::create(std::ostream& stream) {
     return file_formatter::shared_ptr(new io_implementation(stream));
 }
 
+void io_implementation::io_helper_methods(const class_view_model& vm) {
+    if (vm.is_parent() || !vm.parents().empty())
+        return;
+
+    const bool inside_class(false);
+    cpp_inserter_implementation i(stream_, indenter_, inside_class);
+    i.format_helper_methods(vm);
+}
+
 void io_implementation::format_enumeration(const file_view_model& vm) {
     const auto o(vm.enumeration_vm());
     if (!o)
@@ -130,6 +139,8 @@ void io_implementation::format_class(const file_view_model& vm) {
         throw generation_failure(missing_class_view_model);
 
     const view_models::class_view_model& cvm(*o);
+    io_helper_methods(cvm);
+
     namespace_helper ns_helper(stream_, cvm.namespaces());
     utility_.blank_line();
 
@@ -145,7 +156,7 @@ void io_implementation::format_class(const file_view_model& vm) {
         } else {
             const bool inside_class(false);
             cpp_inserter_implementation i(stream_, indenter_, inside_class);
-            i.format(cvm);
+            i.format_inserter_implementation(cvm);
         }
     }
     utility_.close_scope();

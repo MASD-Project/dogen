@@ -19,7 +19,6 @@
  *
  */
 #include <ostream>
-#include <unordered_set>
 #include "dogen/generator/generation_failure.hpp"
 #include "dogen/generator/backends/cpp/formatters/cpp_licence.hpp"
 #include "dogen/generator/backends/cpp/formatters/cpp_header_guards.hpp"
@@ -35,6 +34,10 @@ namespace {
 const std::string int_type("int");
 const std::string bool_type("bool");
 const std::string string_type("std::string");
+const std::string invalid_sequence_container(
+    "Sequence containers have exactly one type argument");
+const std::string invalid_associative_container(
+    "Associative containers have exactly two type arguments");
 const std::string missing_class_view_model(
     "Meta type is pod but class view model is empty");
 const std::string missing_enumeration_view_model(
@@ -57,6 +60,52 @@ file_formatter::shared_ptr
 generator_implementation::create(std::ostream& stream) {
     return file_formatter::shared_ptr(new generator_implementation(stream));
 }
+
+void generator_implementation::
+sequence_container_helper(const std::string& container_identifiable_type_name,
+    const std::string& container_type_name,
+    unsigned int quantity,
+    const std::string& containee_identifiable_type_name) {
+    stream_ << indenter_ << container_type_name << " create_"
+            << container_identifiable_type_name
+            << "(unsigned int position) ";
+
+    utility_.open_scope();
+    {
+        cpp_positive_indenter_scope s(indenter_);
+        stream_ << indenter_ << container_type_name << " r;"
+                << std::endl;
+        stream_ << indenter_ << "for (unsigned int i(0); i < " << quantity
+                << "; ++i) ";
+        utility_.open_scope();
+        {
+            cpp_positive_indenter_scope s(indenter_);
+            stream_ << indenter_ << "r.push_back(create_"
+                    << containee_identifiable_type_name
+                    << "(position + i));" << std::endl;
+        }
+        utility_.close_scope();
+        stream_ << indenter_ << "return r;" << std::endl;
+    }
+    utility_.close_scope();
+    utility_.blank_line();
+}
+
+// void generator_implementation::
+// associative_container_helper(const std::string& identifiable_type_name,
+//     const std::string& type_name, unsigned int quantity) {
+//     stream_ << indenter_ << type_name << std::endl
+//             << "create_" << identifiable_type_name
+//             << "(const unsigned int position) ";
+
+//     utility_.open_scope();
+//     {
+//         cpp_positive_indenter_scope s(indenter_);
+//         stream_ << indenter_ << "return " << type_name
+//                 << "_generator::create(position);" << std::endl;
+//     }
+//     utility_.close_scope();
+// }
 
 void generator_implementation::
 domain_type_helper(const std::string& identifiable_type_name,
@@ -86,15 +135,14 @@ void generator_implementation::bool_helper() {
 
 void generator_implementation::string_helper() {
     stream_ << indenter_ << "std::string create_std_string"
-            << "(const std::string& prefix, const unsigned int position) ";
+            << "(const unsigned int position) ";
 
     utility_.open_scope();
     {
         cpp_positive_indenter_scope s(indenter_);
         stream_ << indenter_ << "std::ostringstream s;" << std::endl
-                << indenter_ << "s << prefix << " << utility_.quote("_")
+                << indenter_ << "s << " << utility_.quote("a_string_")
                 << " << position;" << std::endl;
-        utility_.blank_line();
         stream_ << indenter_ << "return s.str();" << std::endl;
     }
     utility_.close_scope();
@@ -139,6 +187,48 @@ int_like_helper(const std::string& identifiable_type_name,
 }
 
 void generator_implementation::
+recursive_helper_method_creator(const nested_type_view_model& vm,
+    std::unordered_set<std::string>& types_done) {
+
+    if (types_done.find(vm.complete_identifiable_name()) != types_done.end())
+        return;
+
+    const auto children(vm.children());
+    for (const auto c : children)
+        recursive_helper_method_creator(c, types_done);
+
+    if (vm.is_primitive()) {
+        if (vm.is_char_like()) {
+            char_like_helper(vm.identifiable_name(), vm.name());
+            utility_.blank_line();
+        } else if (vm.is_int_like()) {
+            int_like_helper(vm.identifiable_name(), vm.name());
+            utility_.blank_line();
+        } else if (vm.name() == bool_type) {
+            bool_helper();
+            utility_.blank_line();
+        }
+    } else if (vm.is_sequence_container()) {
+        if (children.size() != 1)
+            throw generation_failure(invalid_sequence_container);
+
+        const auto containee_vm(children.front());
+        sequence_container_helper(
+            vm.complete_identifiable_name(), vm.complete_name(), 10,
+            containee_vm.complete_identifiable_name());
+    } else {
+        if (vm.name() == string_type) {
+            string_helper();
+            utility_.blank_line();
+        } else {
+            domain_type_helper(vm.identifiable_name(), vm.name());
+            utility_.blank_line();
+        }
+    }
+    types_done.insert(vm.complete_identifiable_name());
+}
+
+void generator_implementation::
 create_helper_methods(const class_view_model& vm) {
     const auto props(vm.properties());
     if (props.empty())
@@ -148,34 +238,8 @@ create_helper_methods(const class_view_model& vm) {
     std::unordered_set<std::string> types_done;
 
     utility_.blank_line();
-    for (const auto p : props) {
-        if (types_done.find(p.type().name()) == types_done.end()) {
-            if (p.type().is_primitive()) {
-                if (p.type().is_char_like()) {
-                    char_like_helper(p.type().identifiable_name(),
-                        p.type().name());
-                    utility_.blank_line();
-                } else if (p.type().is_int_like()) {
-                    int_like_helper(p.type().identifiable_name(),
-                        p.type().name());
-                    utility_.blank_line();
-                } else if (p.type().name() == bool_type) {
-                    bool_helper();
-                    utility_.blank_line();
-                }
-            } else {
-                if (p.type().name() == string_type) {
-                    string_helper();
-                    utility_.blank_line();
-                } else {
-                    domain_type_helper(p.type().identifiable_name(),
-                        p.type().name());
-                    utility_.blank_line();
-                }
-            }
-        }
-        types_done.insert(p.type().name());
-    }
+    for (const auto p : props)
+        recursive_helper_method_creator(p.type(), types_done);
 }
 
 void generator_implementation::populate_method(const class_view_model& vm) {
@@ -192,26 +256,10 @@ void generator_implementation::populate_method(const class_view_model& vm) {
         cpp_positive_indenter_scope s(indenter_);
         unsigned int j(0);
         for (const auto p : props) {
-            if (p.type().is_primitive()) {
-                    stream_ << indenter_ << "v." << p.name()
-                            << "(create_" << p.type().identifiable_name()
-                            << "(position + " << j << "));"
-                            << std::endl;
-                ++j;
-            } else {
-                if (p.type().name() == string_type) {
-                    stream_ << indenter_ << "v." << p.name()
-                            << "(create_std_string("
-                            << utility_.quote(p.name())
-                            << ", position + " << j << "));"
-                            << std::endl;
-                } else {
-                    stream_ << indenter_ << "v." << p.name()
-                            << "(create_" << p.type().identifiable_name()
-                            << "(position + " << j << "));"
-                            << std::endl;
-                }
-            }
+            stream_ << indenter_ << "v." << p.name() << "("
+                    << "create_" << p.type().complete_identifiable_name()
+                    << "(position + " << j << "));" << std::endl;
+            ++j;
         }
     }
     utility_.close_scope();

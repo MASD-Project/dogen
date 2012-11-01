@@ -26,8 +26,10 @@
 #endif
 
 #include <iosfwd>
+#include <unordered_set>
 #include <boost/filesystem/path.hpp>
 #include "dogen/generator/backends/cpp/view_models/file_view_model.hpp"
+#include "dogen/generator/backends/cpp/view_models/nested_type_view_model.hpp"
 #include "dogen/generator/backends/cpp/formatters/cpp_indenter.hpp"
 #include "dogen/generator/backends/cpp/formatters/cpp_utility.hpp"
 #include "dogen/generator/backends/cpp/formatters/file_formatter.hpp"
@@ -42,6 +44,7 @@ class hash_implementation : public file_formatter {
 public:
     typedef view_models::class_view_model class_view_model;
     typedef view_models::file_view_model file_view_model;
+    typedef view_models::nested_type_view_model nested_type_view_model;
 
 public:
     hash_implementation() = delete;
@@ -55,6 +58,18 @@ public:
 
 public:
     static file_formatter::shared_ptr create(std::ostream& stream);
+
+private:
+    bool is_hashable(const nested_type_view_model& vm);
+
+private:
+    void sequence_container_helper(
+        const std::string& container_identifiable_type_name,
+        const std::string& container_type_name,
+        const nested_type_view_model& containee);
+    void recursive_helper_method_creator(const nested_type_view_model& vm,
+        std::unordered_set<std::string>& types_done);
+    void create_helper_methods(const class_view_model& vm);
 
 private:
     void combine_function();

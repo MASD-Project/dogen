@@ -19,5 +19,6 @@
  *
  */
 #include "dogen/std_model/io/class_a_io.hpp"
+#include "dogen/std_model/io/class_b_io.hpp"
 #include "dogen/std_model/io/unversioned_key_io.hpp"
 #include "dogen/std_model/io/versioned_key_io.hpp"

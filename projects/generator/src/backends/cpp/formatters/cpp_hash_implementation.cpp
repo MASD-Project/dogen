@@ -19,8 +19,8 @@
  *
  */
 #include <ostream>
-#include "dogen/generator/backends/cpp/formatters/cpp_qualified_name.hpp"
 #include "dogen/generator/generation_failure.hpp"
+#include "dogen/generator/backends/cpp/formatters/cpp_qualified_name.hpp"
 #include "dogen/generator/backends/cpp/formatters/cpp_licence.hpp"
 #include "dogen/generator/backends/cpp/formatters/cpp_header_guards.hpp"
 #include "dogen/generator/backends/cpp/formatters/cpp_namespace.hpp"
@@ -34,6 +34,8 @@ namespace {
 
 const std::string std_ns("std");
 
+const std::string invalid_sequence_container(
+    "Sequence containers have exactly one type argument");
 const std::string missing_class_view_model(
     "Meta type is pod but class view model is empty");
 const std::string enumeration_view_model_not_supported(
@@ -49,12 +51,14 @@ namespace formatters {
 
 hash_implementation::
 hash_implementation(std::ostream& stream) :
-    stream_(stream),
-    utility_(stream_, indenter_) {
-}
+    stream_(stream), utility_(stream_, indenter_) { }
 
 file_formatter::shared_ptr hash_implementation::create(std::ostream& stream) {
     return file_formatter::shared_ptr(new hash_implementation(stream));
+}
+
+bool hash_implementation::is_hashable(const nested_type_view_model& vm) {
+    return !vm.is_sequence_container() && !vm.is_associative_container();
 }
 
 void hash_implementation::combine_function() {
@@ -70,6 +74,70 @@ void hash_implementation::combine_function() {
                 << "(seed << 6) + (seed >> 2);" << std::endl;
     }
     utility_.close_scope();
+}
+
+void hash_implementation::
+sequence_container_helper(const std::string& container_identifiable_type_name,
+    const std::string& container_type_name,
+    const nested_type_view_model& containee) {
+    utility_.blank_line();
+    stream_ << indenter_ << "std::size_t hash_"
+            << container_identifiable_type_name
+            << "(const " << container_type_name << "& v)";
+
+    utility_.open_scope();
+    {
+        cpp_positive_indenter_scope s(indenter_);
+        stream_ << indenter_ << "std::size_t seed(0);"
+                << std::endl;
+        stream_ << indenter_ << "for (const auto i : v) ";
+        utility_.open_scope();
+        {
+            cpp_positive_indenter_scope s(indenter_);
+            if (is_hashable(containee)) {
+                stream_ << indenter_ << "combine(seed, i);" << std::endl;
+            } else {
+                stream_ << indenter_ << "combine(seed, "
+                        << "hash_" << containee.complete_identifiable_name()
+                        << "(i));" << std::endl;
+            }
+        }
+        utility_.close_scope();
+        stream_ << indenter_ << "return seed;" << std::endl;
+    }
+    utility_.close_scope();
+}
+
+void hash_implementation::
+recursive_helper_method_creator(const nested_type_view_model& vm,
+    std::unordered_set<std::string>& types_done) {
+
+    if (types_done.find(vm.complete_identifiable_name()) != types_done.end())
+        return;
+
+    const auto children(vm.children());
+    for (const auto c : children)
+        recursive_helper_method_creator(c, types_done);
+
+    if (vm.is_sequence_container()) {
+        if (children.size() != 1)
+            throw generation_failure(invalid_sequence_container);
+
+        const auto containee_vm(children.front());
+        sequence_container_helper(
+            vm.complete_identifiable_name(), vm.complete_name(), containee_vm);
+    }
+    types_done.insert(vm.complete_identifiable_name());
+}
+
+void hash_implementation::create_helper_methods(const class_view_model& vm) {
+    const auto props(vm.properties());
+    if (props.empty())
+        return;
+
+    std::unordered_set<std::string> types_done;
+    for (const auto p : props)
+        recursive_helper_method_creator(p.type(), types_done);
 }
 
 void hash_implementation::hasher_hash_method(const class_view_model& vm) {
@@ -99,8 +167,15 @@ void hash_implementation::hasher_hash_method(const class_view_model& vm) {
             utility_.blank_line();
 
         for (const auto p : props) {
-            stream_ << indenter_ << "combine(seed, v." << p.name()
-                    << "());" << std::endl;
+            if (is_hashable(p.type())) {
+                stream_ << indenter_ << "combine(seed, v." << p.name()
+                        << "());" << std::endl;
+            } else {
+                stream_ << indenter_ << "combine(seed, "
+                        << "hash_" << p.type().complete_identifiable_name()
+                        << "(v." << p.name()
+                        << "()));" << std::endl;
+            }
         }
 
         if (props.size() > 1)
@@ -115,15 +190,17 @@ void hash_implementation::format_class(const file_view_model& vm) {
     boost::optional<view_models::class_view_model> o(vm.class_vm());
     if (!o)
         throw generation_failure(missing_class_view_model);
+
+    const class_view_model& cvm(*o);
     {
         namespace_helper nsh(stream_, std::list<std::string> { });
         utility_.blank_line();
         combine_function();
+        create_helper_methods(cvm);
         utility_.blank_line();
     }
     utility_.blank_line(2);
     {
-        const class_view_model& cvm(*o);
         namespace_helper ns_helper(stream_, cvm.namespaces());
         utility_.blank_line();
 

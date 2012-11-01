@@ -43,11 +43,14 @@ public:
 
 public:
     nested_type_view_model() : is_primitive_(false), is_string_like_(false),
-                            is_char_like_(false), is_int_like_(false) {}
+                               is_char_like_(false), is_int_like_(false),
+                               is_sequence_container_(false),
+                               is_associative_container_(false) {}
 
     explicit nested_type_view_model(const std::string& name)
         : name_(name), is_primitive_(false), is_string_like_(false),
-          is_char_like_(false), is_int_like_(false) {}
+          is_char_like_(false), is_int_like_(false),
+          is_sequence_container_(false), is_associative_container_(false) {}
 
 public:
     /**
@@ -56,14 +59,6 @@ public:
     /**@{*/
     std::string name() const { return name_; }
     void name(const std::string& value) { name_ = value; }
-    /**@}*/
-
-    /**
-     * @brief Complete name, including all type arguments
-     */
-    /**@{*/
-    std::string complete_name() const { return complete_name_; }
-    void complete_name(const std::string& v) { complete_name_ = v; }
     /**@}*/
 
     /**
@@ -76,6 +71,26 @@ public:
     /**@{*/
     std::string identifiable_name() const { return identifiable_name_; }
     void identifiable_name(std::string value) { identifiable_name_ = value; }
+    /**@}*/
+
+    /**
+     * @brief Complete name, including all type arguments
+     */
+    /**@{*/
+    std::string complete_name() const { return complete_name_; }
+    void complete_name(const std::string& v) { complete_name_ = v; }
+    /**@}*/
+
+    /**
+     * @brief Complete name as an identifiable string.
+     */
+    /**@{*/
+    std::string complete_identifiable_name() const {
+        return complete_identifiable_name_;
+    }
+    void complete_identifiable_name(const std::string& v) {
+        complete_identifiable_name_ = v;
+    }
     /**@}*/
 
     /**
@@ -114,11 +129,11 @@ public:
     /**@}*/
 
     /**
-     * @brief If true, type is a container.
+     * @brief If true, type is a sequence container.
      */
     /**@{*/
-    bool is_container() const { return is_container_; }
-    void is_container(bool value) { is_container_ = value; }
+    bool is_sequence_container() const { return is_sequence_container_; }
+    void is_sequence_container(bool v) { is_sequence_container_ = v; }
     /**@}*/
 
     /**
@@ -138,17 +153,29 @@ public:
     void children(std::list<nested_type_view_model> v) { children_ = v; }
     /**@}*/
 
+    /**
+     * @brief List of all namespaces containing the class.
+     */
+    /**@{*/
+    std::list<std::string> namespaces() const { return namespaces_; }
+    void namespaces(const std::list<std::string>& value) {
+        namespaces_ = value;
+    }
+    /**@}*/
+
 private:
     std::string name_;
-    std::string complete_name_;
     std::string identifiable_name_;
+    std::string complete_name_;
+    std::string complete_identifiable_name_;
     bool is_primitive_;
     bool is_string_like_;
     bool is_char_like_;
     bool is_int_like_;
-    bool is_container_;
+    bool is_sequence_container_;
     bool is_associative_container_;
     std::list<nested_type_view_model> children_;
+    std::list<std::string> namespaces_;
 };
 
 } } } } }

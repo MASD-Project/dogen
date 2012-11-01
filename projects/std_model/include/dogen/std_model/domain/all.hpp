@@ -19,5 +19,6 @@
  *
  */
 #include "dogen/std_model/domain/class_a.hpp"
+#include "dogen/std_model/domain/class_b.hpp"
 #include "dogen/std_model/domain/unversioned_key.hpp"
 #include "dogen/std_model/domain/versioned_key.hpp"

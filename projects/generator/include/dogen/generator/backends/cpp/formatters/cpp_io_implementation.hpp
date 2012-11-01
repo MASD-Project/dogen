@@ -40,6 +40,7 @@ namespace formatters {
 
 class io_implementation : public file_formatter {
 public:
+    typedef view_models::class_view_model class_view_model;
     typedef view_models::file_view_model file_view_model;
 
 public:
@@ -54,6 +55,9 @@ public:
 
 public:
     static file_formatter::shared_ptr create(std::ostream& stream);
+
+private:
+    void io_helper_methods(const class_view_model& vm);
 
 private:
     void format_class(const file_view_model& vm);

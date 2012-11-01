@@ -18,5 +18,18 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/std_model/database/class_a_db.hpp"
-#include "dogen/std_model/database/class_b_db.hpp"
+#ifndef DOGEN_STD_MODEL_DOMAIN_CLASS_B_FWD_HPP
+#define DOGEN_STD_MODEL_DOMAIN_CLASS_B_FWD_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+namespace dogen {
+namespace std_model {
+
+class class_b;
+
+} }
+
+#endif

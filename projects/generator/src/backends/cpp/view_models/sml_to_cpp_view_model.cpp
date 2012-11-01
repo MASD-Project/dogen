@@ -41,6 +41,8 @@ const std::string empty;
 const std::list<std::string> empty_package_path;
 const std::string dot(".");
 const std::string space(" ");
+const std::string less_than("<");
+const std::string more_than(">");
 const std::string separator("_");
 const std::string extension("HPP");
 const std::string namespace_separator("::");
@@ -131,12 +133,15 @@ private:
     dogen::sml::qualified_name,
     dogen::generator::backends::cpp::view_models::class_view_model>
     qname_to_class_view_model_type;
+    typedef std::unordered_map<dogen::sml::qualified_name, dogen::sml::pod>
+    pod_map_type;
 
     struct visit_state {
-        explicit visit_state(const std::string& schema_name)
-            : schema_name_(schema_name) { }
+        visit_state(const std::string& schema_name, pod_map_type pods)
+            : pods_(pods), schema_name_(schema_name) { }
 
         qname_to_class_view_model_type class_view_models_;
+        pod_map_type pods_;
         const std::string schema_name_;
     };
 
@@ -146,8 +151,8 @@ public:
     sml_dfs_visitor(sml_dfs_visitor&&) = default;
 
 public:
-    explicit sml_dfs_visitor(const std::string& schema_name)
-        : state_(new visit_state(schema_name)) { }
+    explicit sml_dfs_visitor(const std::string& schema_name, pod_map_type pods)
+        : state_(new visit_state(schema_name, pods)) { }
 
 public:
     template<typename Vertex, typename Graph>
@@ -159,6 +164,12 @@ public:
     void finish_vertex(const Vertex& /*u*/, const Graph& /*g*/) {}
 
 private:
+    /**
+     * @brief Converts a qualified type name to a name that can be
+     * used as an identifier.
+     */
+    std::string to_identifiable_name(const std::string n) const;
+
     /**
      * @brief Transforms a nested qualified name into a view model
      * type name.
@@ -182,6 +193,17 @@ private:
     std::shared_ptr<visit_state> state_;
 };
 
+std::string sml_dfs_visitor::to_identifiable_name(const std::string n) const {
+    std::string r(n);
+
+    boost::replace_all(r, namespace_separator, separator);
+    boost::replace_all(r, space, separator);
+    boost::replace_all(r, less_than, separator);
+    boost::replace_all(r, more_than, empty);
+
+    return r;
+}
+
 void sml_dfs_visitor::transform_nested_qualified_name(
     const dogen::sml::nested_qualified_name& nqn,
     dogen::generator::backends::cpp::view_models::nested_type_view_model&
@@ -189,16 +211,12 @@ void sml_dfs_visitor::transform_nested_qualified_name(
 
     const auto qn(nqn.type());
     std::list<std::string> ns_list(join_namespaces(qn));
+    vm.namespaces(ns_list);
     ns_list.push_back(qn.type_name());
 
     using boost::algorithm::join;
     std::string ns(join(ns_list, namespace_separator));
     vm.name(ns);
-    complete_name += vm.name();
-
-    boost::replace_all(ns, namespace_separator, separator);
-    boost::replace_all(ns, space, separator);
-    vm.identifiable_name(ns);
 
     using dogen::sml::meta_types;
     vm.is_primitive(qn.meta_type() == meta_types::primitive);
@@ -208,14 +226,26 @@ void sml_dfs_visitor::transform_nested_qualified_name(
     }
     vm.is_string_like(is_string_like(vm.name()));
 
+    if (qn.meta_type() == meta_types::pod) {
+        const auto i(state_->pods_.find(qn));
+        if (i == state_->pods_.end()) {
+            using dogen::generator::backends::cpp::view_models::transformation_error;
+            throw transformation_error("pod not found in pod container: " +
+                qn.type_name());
+        }
+        vm.is_sequence_container(i->second.is_sequence_container());
+        vm.is_associative_container(i->second.is_associative_container());
+    }
+
     using dogen::generator::backends::cpp::view_models::nested_type_view_model;
     const auto nqn_children(nqn.children());
 
+    std::string my_complete_name(vm.name());
     auto lambda([&](char c) {
             if (!nqn_children.empty()) {
-                if (complete_name[complete_name.length() - 1] == c)
-                    complete_name += " ";
-                complete_name += c;
+                if (my_complete_name[my_complete_name.length() - 1] == c)
+                    my_complete_name += " ";
+                my_complete_name += c;
             }
         });
 
@@ -224,15 +254,19 @@ void sml_dfs_visitor::transform_nested_qualified_name(
     bool is_first(true);
     for (const auto c : nqn.children()) {
         if (!is_first)
-            complete_name += ", ";
+            my_complete_name += ", ";
 
         nested_type_view_model cvm;
-        transform_nested_qualified_name(c, cvm, complete_name);
+        transform_nested_qualified_name(c, cvm, my_complete_name);
         children.push_back(cvm);
         is_first = false;
     }
     lambda('>');
+
+    vm.identifiable_name(to_identifiable_name(ns));
+    vm.complete_identifiable_name(to_identifiable_name(my_complete_name));
     vm.children(children);
+    complete_name += my_complete_name;
 }
 
 void sml_dfs_visitor::process_sml_pod(const dogen::sml::pod& pod) {
@@ -546,7 +580,7 @@ void sml_to_cpp_view_model::create_class_view_models() {
             boost::add_edge(root_vertex_, vertex, graph_);
     }
 
-    sml_dfs_visitor v(model_.schema_name());
+    sml_dfs_visitor v(model_.schema_name(), pods);
     boost::depth_first_search(graph_, boost::visitor(v));
     qname_to_class_ = v.class_view_models();
 }

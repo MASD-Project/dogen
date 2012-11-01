@@ -56,9 +56,9 @@ a_class_generator::a_class_generator() : position_(0) { }
 void a_class_generator::
 populate(const unsigned int position, result_type& v) {
     v.colour_type(create_dogen_enumeration_colour_types(position + 0));
-    v.book_type(create_dogen_enumeration_book_types(position + 0));
-    v.shape_type(create_dogen_enumeration_pkg1_shape_types(position + 0));
-    v.versioned_key(create_dogen_enumeration_versioned_key(position + 0));
+    v.book_type(create_dogen_enumeration_book_types(position + 1));
+    v.shape_type(create_dogen_enumeration_pkg1_shape_types(position + 2));
+    v.versioned_key(create_dogen_enumeration_versioned_key(position + 3));
 }
 
 a_class_generator::result_type

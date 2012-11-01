@@ -79,6 +79,16 @@ create(std::ostream& stream, bool disable_complete_constructor,
             disable_complete_constructor, use_integrated_io, disable_io));
 }
 
+void domain_implementation::io_helper_methods(const class_view_model& vm) {
+    if ((!use_integrated_io_ || (!vm.is_parent() && vm.parents().empty())) ||
+        disable_io_)
+        return;
+
+    const bool inside_class(false);
+    cpp_inserter_implementation i(stream_, indenter_, inside_class);
+    i.format_helper_methods(vm);
+}
+
 void domain_implementation::
 inserter_operator(const class_view_model& vm) {
     if (!use_integrated_io_ || disable_io_)
@@ -97,7 +107,7 @@ inserter_operator(const class_view_model& vm) {
         } else {
             const bool inside_class(false);
             cpp_inserter_implementation i(stream_, indenter_, inside_class);
-            i.format(vm);
+            i.format_inserter_implementation(vm);
         }
     }
     utility_.close_scope();
@@ -135,6 +145,8 @@ void domain_implementation::format_class(const file_view_model& vm) {
         throw generation_failure(missing_class_view_model);
 
     const view_models::class_view_model& cvm(*o);
+    io_helper_methods(cvm);
+
     namespace_helper ns_helper(stream_, cvm.namespaces());
     utility_.blank_line();
     class_implementation(vm.aspect_type(), vm.category_type(), cvm);

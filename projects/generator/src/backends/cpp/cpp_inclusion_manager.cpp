@@ -34,7 +34,6 @@ const std::string primitive_model("primitive_model");
 const std::string bool_type("bool");
 const std::string versioned_name("versioned_key");
 const std::string unversioned_name("unversioned_key");
-const std::string vector_include("vector");
 const std::string boost_optional_include("boost/optional.hpp");
 const std::string pqxx_connection_include("pqxx/connection.hxx");
 const std::string boost_format_include("boost/format.hpp");
@@ -55,11 +54,13 @@ const std::string boost_poly_oarchive("boost/archive/polymorphic_oarchive.hpp");
 
 const std::string boost_export("boost/serialization/export.hpp");
 const std::string boost_string("boost/serialization/string.hpp");
+const std::string boost_vector("boost/serialization/vector.hpp");
 const std::string boost_exception_info("boost/exception/info.hpp");
 const std::string pqxx_result_include("pqxx/result.hxx");
 const std::string pqxx_transaction_include("pqxx/transaction.hxx");
 const std::string sstream("sstream");
 const std::string std_string("string");
+const std::string std_vector("vector");
 const std::string iosfwd("iosfwd");
 const std::string algorithm("algorithm");
 const std::string ostream("ostream");
@@ -236,7 +237,7 @@ append_implementation_dependencies(const sml::pod& p,
     // vector
     const bool is_database(ft == cpp_facet_types::database);
     if (is_header && is_database)
-        il.system.push_back(vector_include);
+        il.system.push_back(std_vector);
 
     /*
      * boost
@@ -311,6 +312,9 @@ void cpp_inclusion_manager::append_std_dependencies(
     const dogen::sml::qualified_name& qname,
     inclusion_lists& il) const {
 
+    /*
+     * std::string
+     */
     const bool is_header(flt == cpp_file_types::header);
     const bool is_domain(ft == cpp_facet_types::domain);
     if (is_header && is_domain && qname.type_name() == std_string)
@@ -324,6 +328,15 @@ void cpp_inclusion_manager::append_std_dependencies(
     const bool is_test_data(ft == cpp_facet_types::test_data);
     if (is_implementation && is_test_data && qname.type_name() == std_string)
         il.system.push_back(sstream);
+
+    /*
+     * std::vector
+     */
+    if (is_header && is_domain && qname.type_name() == std_vector)
+        il.system.push_back(std_vector);
+
+    if (is_implementation && is_serialization && qname.type_name() == std_vector)
+        il.system.push_back(boost_vector);
 }
 
 void cpp_inclusion_manager::append_relationship_dependencies(

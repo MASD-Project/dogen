@@ -27,6 +27,8 @@
 
 #include <iosfwd>
 #include <string>
+#include <unordered_set>
+#include "dogen/generator/backends/cpp/view_models/nested_type_view_model.hpp"
 #include "dogen/generator/backends/cpp/view_models/class_view_model.hpp"
 #include "dogen/generator/backends/cpp/formatters/cpp_indenter.hpp"
 #include "dogen/generator/backends/cpp/formatters/cpp_utility.hpp"
@@ -40,6 +42,7 @@ namespace formatters {
 class cpp_inserter_implementation {
 public:
     typedef view_models::class_view_model class_view_model;
+    typedef view_models::nested_type_view_model nested_type_view_model;
 
 public:
     cpp_inserter_implementation() = delete;
@@ -52,8 +55,19 @@ public:
         const bool is_inside_class);
     virtual ~cpp_inserter_implementation() noexcept {}
 
+private:
+    bool is_insertable(const nested_type_view_model& vm);
+
+private:
+    void sequence_container_helper(
+        const nested_type_view_model& container,
+        const nested_type_view_model& containee);
+    void recursive_helper_method_creator(const nested_type_view_model& vm,
+        std::unordered_set<std::string>& types_done);
+
 public:
-    void format(const class_view_model& vm);
+    void format_helper_methods(const class_view_model& vm);
+    void format_inserter_implementation(const class_view_model& vm);
 
 protected:
     const bool is_inside_class_;
