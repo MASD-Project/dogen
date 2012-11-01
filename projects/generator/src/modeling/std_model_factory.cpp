@@ -69,6 +69,7 @@ create_pod(const std::string& name, bool is_sequence, bool is_associative) {
 
     r.is_sequence_container(is_sequence);
     r.is_associative_container(is_associative);
+    r.is_smart_pointer(false);
     return r;
 }
 

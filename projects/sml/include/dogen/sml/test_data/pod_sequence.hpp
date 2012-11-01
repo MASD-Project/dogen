@@ -72,6 +72,7 @@ public:
         result.number_of_type_arguments(0);
         result.is_sequence_container(false);
         result.is_associative_container(false);
+        result.is_smart_pointer(false);
         return result;
     }
 

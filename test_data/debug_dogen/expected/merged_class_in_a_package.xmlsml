@@ -78,6 +78,7 @@
 				<number_of_type_arguments>0</number_of_type_arguments>
 				<is_sequence_container>0</is_sequence_container>
 				<is_associative_container>0</is_associative_container>
+				<is_smart_pointer>0</is_smart_pointer>
 			</second>
 		</item>
 		<item>
@@ -122,6 +123,7 @@
 				<number_of_type_arguments>2</number_of_type_arguments>
 				<is_sequence_container>0</is_sequence_container>
 				<is_associative_container>1</is_associative_container>
+				<is_smart_pointer>0</is_smart_pointer>
 			</second>
 		</item>
 		<item>
@@ -166,6 +168,7 @@
 				<number_of_type_arguments>2</number_of_type_arguments>
 				<is_sequence_container>0</is_sequence_container>
 				<is_associative_container>1</is_associative_container>
+				<is_smart_pointer>0</is_smart_pointer>
 			</second>
 		</item>
 		<item>
@@ -284,6 +287,7 @@
 				<number_of_type_arguments>0</number_of_type_arguments>
 				<is_sequence_container>0</is_sequence_container>
 				<is_associative_container>0</is_associative_container>
+				<is_smart_pointer>0</is_smart_pointer>
 			</second>
 		</item>
 		<item>
@@ -328,6 +332,7 @@
 				<number_of_type_arguments>2</number_of_type_arguments>
 				<is_sequence_container>0</is_sequence_container>
 				<is_associative_container>1</is_associative_container>
+				<is_smart_pointer>0</is_smart_pointer>
 			</second>
 		</item>
 		<item>
@@ -372,6 +377,7 @@
 				<number_of_type_arguments>2</number_of_type_arguments>
 				<is_sequence_container>0</is_sequence_container>
 				<is_associative_container>1</is_associative_container>
+				<is_smart_pointer>0</is_smart_pointer>
 			</second>
 		</item>
 		<item>
@@ -416,6 +422,7 @@
 				<number_of_type_arguments>1</number_of_type_arguments>
 				<is_sequence_container>1</is_sequence_container>
 				<is_associative_container>0</is_associative_container>
+				<is_smart_pointer>0</is_smart_pointer>
 			</second>
 		</item>
 		<item>
@@ -460,6 +467,7 @@
 				<number_of_type_arguments>2</number_of_type_arguments>
 				<is_sequence_container>0</is_sequence_container>
 				<is_associative_container>1</is_associative_container>
+				<is_smart_pointer>0</is_smart_pointer>
 			</second>
 		</item>
 		<item>
@@ -504,6 +512,7 @@
 				<number_of_type_arguments>0</number_of_type_arguments>
 				<is_sequence_container>0</is_sequence_container>
 				<is_associative_container>0</is_associative_container>
+				<is_smart_pointer>0</is_smart_pointer>
 			</second>
 		</item>
 		<item>
@@ -548,6 +557,7 @@
 				<number_of_type_arguments>1</number_of_type_arguments>
 				<is_sequence_container>1</is_sequence_container>
 				<is_associative_container>0</is_associative_container>
+				<is_smart_pointer>0</is_smart_pointer>
 			</second>
 		</item>
 		<item>
@@ -592,6 +602,7 @@
 				<number_of_type_arguments>1</number_of_type_arguments>
 				<is_sequence_container>1</is_sequence_container>
 				<is_associative_container>0</is_associative_container>
+				<is_smart_pointer>0</is_smart_pointer>
 			</second>
 		</item>
 		<item>
@@ -636,6 +647,7 @@
 				<number_of_type_arguments>1</number_of_type_arguments>
 				<is_sequence_container>1</is_sequence_container>
 				<is_associative_container>0</is_associative_container>
+				<is_smart_pointer>0</is_smart_pointer>
 			</second>
 		</item>
 		<item>
@@ -728,6 +740,7 @@
 				<number_of_type_arguments>0</number_of_type_arguments>
 				<is_sequence_container>0</is_sequence_container>
 				<is_associative_container>0</is_associative_container>
+				<is_smart_pointer>0</is_smart_pointer>
 			</second>
 		</item>
 		<item>
@@ -772,6 +785,7 @@
 				<number_of_type_arguments>1</number_of_type_arguments>
 				<is_sequence_container>1</is_sequence_container>
 				<is_associative_container>0</is_associative_container>
+				<is_smart_pointer>0</is_smart_pointer>
 			</second>
 		</item>
 		<item>
@@ -816,6 +830,7 @@
 				<number_of_type_arguments>2</number_of_type_arguments>
 				<is_sequence_container>0</is_sequence_container>
 				<is_associative_container>1</is_associative_container>
+				<is_smart_pointer>0</is_smart_pointer>
 			</second>
 		</item>
 		<item>
@@ -860,6 +875,7 @@
 				<number_of_type_arguments>2</number_of_type_arguments>
 				<is_sequence_container>0</is_sequence_container>
 				<is_associative_container>1</is_associative_container>
+				<is_smart_pointer>0</is_smart_pointer>
 			</second>
 		</item>
 	</pods>

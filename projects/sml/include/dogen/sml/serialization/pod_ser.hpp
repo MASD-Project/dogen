@@ -58,6 +58,7 @@ public:
             value.is_sequence_container_);
         archive & make_nvp("is_associative_container",
             value.is_associative_container_);
+        archive & make_nvp("is_smart_pointer", value.is_smart_pointer_);
     }
 };
 

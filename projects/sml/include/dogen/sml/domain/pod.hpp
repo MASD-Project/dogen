@@ -57,7 +57,8 @@ public:
             category_type_(category_types::invalid),
             number_of_type_arguments_(0),
             is_sequence_container_(false),
-            is_associative_container_(false) { }
+            is_associative_container_(false),
+            is_smart_pointer_(false) { }
 
     /**
      * @brief Initialises the pod.
@@ -79,6 +80,8 @@ public:
      * container type, false otherwise.
      * @param is_associative_container If true the pod is a sequence
      * container type, false otherwise.
+     * @param is_smart_pointer If true the pod represents a smart
+     * pointer, false otherwise.
      */
     pod(qualified_name name,
         std::vector<dogen::sml::property> properties,
@@ -86,13 +89,14 @@ public:
         bool is_parent, category_types category_type,
         const std::string& documentation,
         const unsigned int number_of_type_arguments, bool is_sequence_container,
-        bool is_associative_container)
+        bool is_associative_container, bool is_smart_pointer)
         : name_(name), properties_(properties), parent_name_(parent_name),
           generate_(generate), is_parent_(is_parent),
           category_type_(category_type), documentation_(documentation),
           number_of_type_arguments_(number_of_type_arguments),
           is_sequence_container_(is_sequence_container),
-          is_associative_container_(is_associative_container) { }
+          is_associative_container_(is_associative_container),
+          is_smart_pointer_(is_smart_pointer) { }
 
     pod(pod&& rhs) : name_(std::move(rhs.name_)),
                      properties_(std::move(rhs.properties_)),
@@ -103,9 +107,12 @@ public:
                      documentation_(std::move(rhs.documentation_)),
                      number_of_type_arguments_(
                          std::move(rhs.number_of_type_arguments_)),
-                     is_sequence_container_(rhs.is_sequence_container_),
-                     is_associative_container_(rhs.is_associative_container_) {
-    }
+                     is_sequence_container_(
+                         std::move(rhs.is_sequence_container_)),
+                     is_associative_container_(
+                         std::move(rhs.is_associative_container_)),
+                     is_smart_pointer_(
+                         std::move(rhs.is_smart_pointer_)) { }
 
 public:
     /**
@@ -199,6 +206,14 @@ public:
     void is_associative_container(const bool v) { is_associative_container_ = v; }
     /**@}*/
 
+    /**
+     * @brief If true the pod is a smart pointer, false otherwise.
+     */
+    /**@{*/
+    bool is_smart_pointer() const { return is_smart_pointer_; }
+    void is_smart_pointer(const bool v) { is_smart_pointer_ = v; }
+    /**@}*/
+
 public:
     void to_stream(std::ostream& stream) const;
 
@@ -220,6 +235,7 @@ private:
     unsigned int number_of_type_arguments_;
     bool is_sequence_container_;
     bool is_associative_container_;
+    bool is_smart_pointer_;
 };
 
 } }

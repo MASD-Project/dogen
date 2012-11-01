@@ -86,6 +86,7 @@
 				<number_of_type_arguments>0</number_of_type_arguments>
 				<is_sequence_container>0</is_sequence_container>
 				<is_associative_container>0</is_associative_container>
+				<is_smart_pointer>0</is_smart_pointer>
 			</second>
 		</item>
 	</pods>
