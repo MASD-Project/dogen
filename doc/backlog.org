@@ -10,6 +10,11 @@ This file contains all stories that haven't been assigned to a sprint.
 
 Stories that we intend to look at, at some point.
 
+*** JSON =__type__= should be fully qualified
+
+At present the JSON =__type__= is only the class name. It should
+really be fully qualified.
+
 *** Add support for _manual_ types
 
 Sometimes one requires data structures which are just too complicated
