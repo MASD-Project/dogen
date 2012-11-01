@@ -237,6 +237,7 @@ void sml_dfs_visitor::transform_nested_qualified_name(
         }
         vm.is_sequence_container(i->second.is_sequence_container());
         vm.is_associative_container(i->second.is_associative_container());
+        vm.is_smart_pointer(i->second.is_smart_pointer());
     }
 
     using dogen::generator::backends::cpp::view_models::nested_type_view_model;

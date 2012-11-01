@@ -45,12 +45,14 @@ public:
     nested_type_view_model() : is_primitive_(false), is_string_like_(false),
                                is_char_like_(false), is_int_like_(false),
                                is_sequence_container_(false),
-                               is_associative_container_(false) {}
+                               is_associative_container_(false),
+                               is_smart_pointer_(false) {}
 
     explicit nested_type_view_model(const std::string& name)
         : name_(name), is_primitive_(false), is_string_like_(false),
           is_char_like_(false), is_int_like_(false),
-          is_sequence_container_(false), is_associative_container_(false) {}
+          is_sequence_container_(false), is_associative_container_(false),
+          is_smart_pointer_(false) {}
 
 public:
     /**
@@ -145,6 +147,14 @@ public:
     /**@}*/
 
     /**
+     * @brief If true, the type is a smart pointer.
+     */
+    /**@{*/
+    bool is_smart_pointer() const { return is_smart_pointer_; }
+    void is_smart_pointer(bool v) { is_smart_pointer_ = v; }
+    /**@}*/
+
+    /**
      * @brief If the type is a generic type, returns all the type
      * arguments.
      */
@@ -174,6 +184,7 @@ private:
     bool is_int_like_;
     bool is_sequence_container_;
     bool is_associative_container_;
+    bool is_smart_pointer_;
     std::list<nested_type_view_model> children_;
     std::list<std::string> namespaces_;
 };
