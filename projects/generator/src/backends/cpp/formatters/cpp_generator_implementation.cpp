@@ -37,7 +37,7 @@ const std::string string_type("std::string");
 const std::string invalid_sequence_container(
     "Sequence containers have exactly one type argument");
 const std::string invalid_associative_container(
-    "Associative containers have exactly two type arguments");
+    "Associative containers have one or two type arguments");
 const std::string missing_class_view_model(
     "Meta type is pod but class view model is empty");
 const std::string missing_enumeration_view_model(
@@ -105,6 +105,10 @@ void generator_implementation::
 associative_container_helper(
     const nested_type_view_model& vm, unsigned int quantity) {
 
+    const auto children(vm.children());
+    if (children.size() != 1 && children.size() != 2)
+        throw generation_failure(invalid_associative_container);
+
     const auto container_identifiable_type_name(vm.identifiable_name());
     const auto container_type_name(vm.complete_name());
 
@@ -122,7 +126,6 @@ associative_container_helper(
         utility_.open_scope();
         {
             cpp_positive_indenter_scope s(indenter_);
-            const auto children(vm.children());
             if (children.size() == 1) {
                 const auto containee_vm(children.front());
                 const auto containee_identifiable_type_name(
@@ -131,6 +134,15 @@ associative_container_helper(
                 stream_ << indenter_ << "r.insert(create_"
                         << containee_identifiable_type_name
                         << "(position + i));" << std::endl;
+            } else {
+                const auto key(children.front());
+                const auto value(children.back());
+                stream_ << indenter_ << "r.insert(std::make_pair("
+                        << "create_" << key.complete_identifiable_name()
+                        << "(position + i), "
+                        << "create_" << value.complete_identifiable_name()
+                        << "(position + i)));"
+                        << std::endl;
             }
         }
         utility_.close_scope();
