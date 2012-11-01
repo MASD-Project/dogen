@@ -27,22 +27,27 @@ namespace {
 
 enum fields {
     prop_0_field = 0,
-    versioned_key_field = 1
+    prop_1_field = 1,
+    prop_2_field = 2,
+    prop_3_field = 3,
+    prop_4_field = 4,
+    prop_5_field = 5,
+    versioned_key_field = 6
 };
 
 const std::string load_name("statement_std_model_class_d_load");
 const std::string load_id_name("statement_std_model_class_d_load_id");
 const std::string load_work_name("work_std_model_class_d_load");
-const std::string load_sql("select * from std_model_class_d_load($0, $1);");
+const std::string load_sql("select * from std_model_class_d_load($0, $1, $2, $3, $4, $5, $6);");
 
 const std::string erase_name("statement_std_model_class_d_erase");
 const std::string erase_id_name("statement_std_model_class_d_erase_id");
 const std::string erase_work_name("work_std_model_class_d_erase");
-const std::string erase_sql("select * from std_model_class_d_erase($0, $1);");
+const std::string erase_sql("select * from std_model_class_d_erase($0, $1, $2, $3, $4, $5, $6);");
 
 const std::string save_name("statement_std_model_class_d_save");
 const std::string save_work_name("work_std_model_class_d_save");
-const std::string save_sql("select std_model_class_d_save($0, $1);");
+const std::string save_sql("select std_model_class_d_save($0, $1, $2, $3, $4, $5, $6);");
 
 }
 

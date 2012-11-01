@@ -28,6 +28,8 @@
 #include <algorithm>
 #include <list>
 #include <string>
+#include "dogen/std_model/domain/class_a.hpp"
+#include "dogen/std_model/domain/pkg1/class_c.hpp"
 #include "dogen/std_model/domain/versioned_key.hpp"
 #include "dogen/std_model/serialization/class_d_fwd_ser.hpp"
 
@@ -44,6 +46,11 @@ public:
 public:
     class_d(
         const std::list<std::string>& prop_0,
+        const std::list<dogen::std_model::class_a>& prop_1,
+        const std::list<dogen::std_model::pkg1::class_c>& prop_2,
+        const std::list<unsigned int>& prop_3,
+        const std::list<dogen::std_model::class_a>& prop_4,
+        const std::list<std::list<unsigned int> >& prop_5,
         const dogen::std_model::versioned_key& versioned_key);
 
 private:
@@ -60,6 +67,46 @@ public:
 
     void prop_0(const std::list<std::string>& v) {
         prop_0_ = v;
+    }
+
+    std::list<dogen::std_model::class_a> prop_1() const {
+        return prop_1_;
+    }
+
+    void prop_1(const std::list<dogen::std_model::class_a>& v) {
+        prop_1_ = v;
+    }
+
+    std::list<dogen::std_model::pkg1::class_c> prop_2() const {
+        return prop_2_;
+    }
+
+    void prop_2(const std::list<dogen::std_model::pkg1::class_c>& v) {
+        prop_2_ = v;
+    }
+
+    std::list<unsigned int> prop_3() const {
+        return prop_3_;
+    }
+
+    void prop_3(const std::list<unsigned int>& v) {
+        prop_3_ = v;
+    }
+
+    std::list<dogen::std_model::class_a> prop_4() const {
+        return prop_4_;
+    }
+
+    void prop_4(const std::list<dogen::std_model::class_a>& v) {
+        prop_4_ = v;
+    }
+
+    std::list<std::list<unsigned int> > prop_5() const {
+        return prop_5_;
+    }
+
+    void prop_5(const std::list<std::list<unsigned int> >& v) {
+        prop_5_ = v;
     }
 
     dogen::std_model::versioned_key versioned_key() const {
@@ -82,6 +129,11 @@ public:
 
 private:
     std::list<std::string> prop_0_;
+    std::list<dogen::std_model::class_a> prop_1_;
+    std::list<dogen::std_model::pkg1::class_c> prop_2_;
+    std::list<unsigned int> prop_3_;
+    std::list<dogen::std_model::class_a> prop_4_;
+    std::list<std::list<unsigned int> > prop_5_;
     dogen::std_model::versioned_key versioned_key_;
 };
 

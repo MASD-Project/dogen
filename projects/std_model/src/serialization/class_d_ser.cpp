@@ -29,7 +29,9 @@
 #include <boost/serialization/list.hpp>
 #include <boost/serialization/nvp.hpp>
 #include <boost/serialization/string.hpp>
+#include "dogen/std_model/serialization/class_a_ser.hpp"
 #include "dogen/std_model/serialization/class_d_ser.hpp"
+#include "dogen/std_model/serialization/pkg1/class_c_ser.hpp"
 #include "dogen/std_model/serialization/versioned_key_ser.hpp"
 
 #ifdef __linux__
@@ -45,6 +47,11 @@ void save(Archive& ar,
     const dogen::std_model::class_d& v,
     const unsigned int /*version*/) {
     ar << make_nvp("prop_0", v.prop_0_);
+    ar << make_nvp("prop_1", v.prop_1_);
+    ar << make_nvp("prop_2", v.prop_2_);
+    ar << make_nvp("prop_3", v.prop_3_);
+    ar << make_nvp("prop_4", v.prop_4_);
+    ar << make_nvp("prop_5", v.prop_5_);
     ar << make_nvp("versioned_key", v.versioned_key_);
 }
 
@@ -53,6 +60,11 @@ void load(Archive& ar,
     dogen::std_model::class_d& v,
     const unsigned int /*version*/) {
     ar >> make_nvp("prop_0", v.prop_0_);
+    ar >> make_nvp("prop_1", v.prop_1_);
+    ar >> make_nvp("prop_2", v.prop_2_);
+    ar >> make_nvp("prop_3", v.prop_3_);
+    ar >> make_nvp("prop_4", v.prop_4_);
+    ar >> make_nvp("prop_5", v.prop_5_);
     ar >> make_nvp("versioned_key", v.versioned_key_);
 }
 

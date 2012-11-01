@@ -18,7 +18,9 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen/std_model/hash/class_a_hash.hpp"
 #include "dogen/std_model/hash/class_d_hash.hpp"
+#include "dogen/std_model/hash/pkg1/class_c_hash.hpp"
 #include "dogen/std_model/hash/versioned_key_hash.hpp"
 
 namespace {
@@ -38,6 +40,38 @@ inline std::size_t hash_std_list_std_string(const std::list<std::string>& v){
     return seed;
 }
 
+inline std::size_t hash_std_list_dogen_std_model_class_a(const std::list<dogen::std_model::class_a>& v){
+    std::size_t seed(0);
+    for (const auto i : v) {
+        combine(seed, i);
+    }
+    return seed;
+}
+
+inline std::size_t hash_std_list_dogen_std_model_pkg1_class_c(const std::list<dogen::std_model::pkg1::class_c>& v){
+    std::size_t seed(0);
+    for (const auto i : v) {
+        combine(seed, i);
+    }
+    return seed;
+}
+
+inline std::size_t hash_std_list_unsigned_int(const std::list<unsigned int>& v){
+    std::size_t seed(0);
+    for (const auto i : v) {
+        combine(seed, i);
+    }
+    return seed;
+}
+
+inline std::size_t hash_std_list_std_list_unsigned_int_(const std::list<std::list<unsigned int> >& v){
+    std::size_t seed(0);
+    for (const auto i : v) {
+        combine(seed, hash_std_list_unsigned_int(i));
+    }
+    return seed;
+}
+
 }
 
 namespace dogen {
@@ -47,6 +81,11 @@ std::size_t class_d_hasher::hash(const class_d& v) {
     std::size_t seed(0);
 
     combine(seed, hash_std_list_std_string(v.prop_0()));
+    combine(seed, hash_std_list_dogen_std_model_class_a(v.prop_1()));
+    combine(seed, hash_std_list_dogen_std_model_pkg1_class_c(v.prop_2()));
+    combine(seed, hash_std_list_unsigned_int(v.prop_3()));
+    combine(seed, hash_std_list_dogen_std_model_class_a(v.prop_4()));
+    combine(seed, hash_std_list_std_list_unsigned_int_(v.prop_5()));
     combine(seed, v.versioned_key());
 
     return seed;
