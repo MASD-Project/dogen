@@ -66,6 +66,20 @@ std::ostream& operator<<(std::ostream& s, const std::vector<dogen::std_model::pk
 
 }
 
+namespace std {
+
+std::ostream& operator<<(std::ostream& s, const std::vector<unsigned int>& v) {
+    s << "[ ";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << *i;
+    }
+    s << "] ";
+    return s;
+}
+
+}
+
 namespace dogen {
 namespace std_model {
 
@@ -75,6 +89,7 @@ std::ostream& operator<<(std::ostream& s, const class_b& v) {
       << "\"prop_0\": " << v.prop_0() << ", "
       << "\"prop_1\": " << v.prop_1() << ", "
       << "\"prop_2\": " << v.prop_2() << ", "
+      << "\"prop_3\": " << v.prop_3() << ", "
       << "\"versioned_key\": " << v.versioned_key()
       << " }";
     return(s);
