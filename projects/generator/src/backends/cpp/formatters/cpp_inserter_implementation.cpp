@@ -77,7 +77,7 @@ void cpp_inserter_implementation::sequence_container_helper(
         namespace_helper ns_helper(stream_, container.namespaces());
 
         utility_.blank_line();
-        stream_ << indenter_ << "std::ostream& operator<<"
+        stream_ << indenter_ << "inline std::ostream& operator<<"
                 << "(std::ostream& s, const "
                 << container.complete_name() << "& v) ";
 

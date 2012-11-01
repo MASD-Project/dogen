@@ -27,6 +27,8 @@
 #include <boost/archive/xml_iarchive.hpp>
 #include <boost/archive/xml_oarchive.hpp>
 #include <boost/serialization/nvp.hpp>
+#include <boost/serialization/vector.hpp>
+#include "dogen/std_model/serialization/class_a_ser.hpp"
 #include "dogen/std_model/serialization/pkg1/class_c_ser.hpp"
 #include "dogen/std_model/serialization/versioned_key_ser.hpp"
 
@@ -43,6 +45,7 @@ void save(Archive& ar,
     const dogen::std_model::pkg1::class_c& v,
     const unsigned int /*version*/) {
     ar << make_nvp("prop_0", v.prop_0_);
+    ar << make_nvp("prop_1", v.prop_1_);
     ar << make_nvp("versioned_key", v.versioned_key_);
 }
 
@@ -51,6 +54,7 @@ void load(Archive& ar,
     dogen::std_model::pkg1::class_c& v,
     const unsigned int /*version*/) {
     ar >> make_nvp("prop_0", v.prop_0_);
+    ar >> make_nvp("prop_1", v.prop_1_);
     ar >> make_nvp("versioned_key", v.versioned_key_);
 }
 

@@ -26,7 +26,7 @@
 
 namespace std {
 
-std::ostream& operator<<(std::ostream& s, const std::vector<std::string>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::vector<std::string>& v) {
     s << "[ ";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -40,7 +40,7 @@ std::ostream& operator<<(std::ostream& s, const std::vector<std::string>& v) {
 
 namespace std {
 
-std::ostream& operator<<(std::ostream& s, const std::vector<dogen::std_model::class_a>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::vector<dogen::std_model::class_a>& v) {
     s << "[ ";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -54,7 +54,7 @@ std::ostream& operator<<(std::ostream& s, const std::vector<dogen::std_model::cl
 
 namespace std {
 
-std::ostream& operator<<(std::ostream& s, const std::vector<dogen::std_model::pkg1::class_c>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::vector<dogen::std_model::pkg1::class_c>& v) {
     s << "[ ";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -68,7 +68,7 @@ std::ostream& operator<<(std::ostream& s, const std::vector<dogen::std_model::pk
 
 namespace std {
 
-std::ostream& operator<<(std::ostream& s, const std::vector<unsigned int>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::vector<unsigned int>& v) {
     s << "[ ";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";

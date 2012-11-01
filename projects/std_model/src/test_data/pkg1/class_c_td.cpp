@@ -18,6 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen/std_model/test_data/class_a_td.hpp"
 #include "dogen/std_model/test_data/pkg1/class_c_td.hpp"
 #include "dogen/std_model/test_data/versioned_key_td.hpp"
 
@@ -25,6 +26,19 @@ namespace {
 
 int create_int(const unsigned int position) {
     return position;
+}
+
+dogen::std_model::class_a
+create_dogen_std_model_class_a(const unsigned int position) {
+    return dogen::std_model::class_a_generator::create(position);
+}
+
+std::vector<dogen::std_model::class_a> create_std_vector_dogen_std_model_class_a(unsigned int position) {
+    std::vector<dogen::std_model::class_a> r;
+    for (unsigned int i(0); i < 10; ++i) {
+        r.push_back(create_dogen_std_model_class_a(position + i));
+    }
+    return r;
 }
 
 dogen::std_model::versioned_key
@@ -43,7 +57,8 @@ class_c_generator::class_c_generator() : position_(0) { }
 void class_c_generator::
 populate(const unsigned int position, result_type& v) {
     v.prop_0(create_int(position + 0));
-    v.versioned_key(create_dogen_std_model_versioned_key(position + 1));
+    v.prop_1(create_std_vector_dogen_std_model_class_a(position + 1));
+    v.versioned_key(create_dogen_std_model_versioned_key(position + 2));
 }
 
 class_c_generator::result_type

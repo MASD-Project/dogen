@@ -29,18 +29,22 @@ class_c::class_c()
 
 class_c::class_c(
     const int prop_0,
+    const std::vector<dogen::std_model::class_a>& prop_1,
     const dogen::std_model::versioned_key& versioned_key)
     : prop_0_(prop_0),
+      prop_1_(prop_1),
       versioned_key_(versioned_key) { }
 
 void class_c::swap(class_c& other) noexcept {
     using std::swap;
     swap(prop_0_, other.prop_0_);
+    swap(prop_1_, other.prop_1_);
     swap(versioned_key_, other.versioned_key_);
 }
 
 bool class_c::operator==(const class_c& rhs) const {
     return prop_0_ == rhs.prop_0_ &&
+        prop_1_ == rhs.prop_1_ &&
         versioned_key_ == rhs.versioned_key_;
 }
 
