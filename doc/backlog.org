@@ -10,6 +10,12 @@ This file contains all stories that haven't been assigned to a sprint.
 
 Stories that we intend to look at, at some point.
 
+*** Rename =cpp_inserter_implementation=
+
+We used =cpp_inserter_implementation= to provide all sorts of utility
+methods for IO. This class should really be named IO utility or
+something of the sort.
+
 *** JSON =__type__= should be fully qualified
 
 At present the JSON =__type__= is only the class name. It should
