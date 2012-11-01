@@ -10,6 +10,14 @@ This file contains all stories that haven't been assigned to a sprint.
 
 Stories that we intend to look at, at some point.
 
+*** Serialisation support for C++-11 specific containers
+
+We can't add =std::array= or =std::forward_list= because there is no
+serialisation support in boost 1.49. A mail was sent to the list to
+see if this has changed in latter versions:
+
+http://lists.boost.org/boost-users/2012/11/76458.php
+
 *** Support for ordered containers
 
 In order to provide support for ordered containers such as maps and
