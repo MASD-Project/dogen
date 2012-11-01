@@ -18,12 +18,35 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/std_model/io/class_a_io.hpp"
-#include "dogen/std_model/io/class_b_io.hpp"
-#include "dogen/std_model/io/class_d_io.hpp"
-#include "dogen/std_model/io/class_e_io.hpp"
-#include "dogen/std_model/io/class_f_io.hpp"
-#include "dogen/std_model/io/class_g_io.hpp"
-#include "dogen/std_model/io/pkg1/class_c_io.hpp"
-#include "dogen/std_model/io/unversioned_key_io.hpp"
-#include "dogen/std_model/io/versioned_key_io.hpp"
+#ifndef DOGEN_STD_MODEL_HASH_CLASS_G_HASH_HPP
+#define DOGEN_STD_MODEL_HASH_CLASS_G_HASH_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include <functional>
+#include "dogen/std_model/domain/class_g.hpp"
+
+namespace dogen {
+namespace std_model {
+
+class class_g_hasher {
+public:
+    static std::size_t hash(const class_g& v);
+};
+
+} }
+
+namespace std {
+
+template<>
+class hash<dogen::std_model::class_g> {
+public:
+    size_t operator()(const dogen::std_model::class_g& v) const {
+        return dogen::std_model::class_g_hasher::hash(v);
+    }
+};
+
+}
+#endif

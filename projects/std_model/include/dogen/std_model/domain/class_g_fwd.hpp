@@ -18,12 +18,18 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/std_model/io/class_a_io.hpp"
-#include "dogen/std_model/io/class_b_io.hpp"
-#include "dogen/std_model/io/class_d_io.hpp"
-#include "dogen/std_model/io/class_e_io.hpp"
-#include "dogen/std_model/io/class_f_io.hpp"
-#include "dogen/std_model/io/class_g_io.hpp"
-#include "dogen/std_model/io/pkg1/class_c_io.hpp"
-#include "dogen/std_model/io/unversioned_key_io.hpp"
-#include "dogen/std_model/io/versioned_key_io.hpp"
+#ifndef DOGEN_STD_MODEL_DOMAIN_CLASS_G_FWD_HPP
+#define DOGEN_STD_MODEL_DOMAIN_CLASS_G_FWD_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+namespace dogen {
+namespace std_model {
+
+class class_g;
+
+} }
+
+#endif

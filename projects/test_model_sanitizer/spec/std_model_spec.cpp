@@ -50,6 +50,7 @@ BOOST_AUTO_TEST_CASE(validate_equality) {
     test_equality<class_d_generator>();
     test_equality<class_e_generator>();
     test_equality<class_f_generator>();
+    test_equality<class_g_generator>();
 }
 
 BOOST_AUTO_TEST_CASE(validate_serialisation) {
@@ -61,6 +62,7 @@ BOOST_AUTO_TEST_CASE(validate_serialisation) {
     rountrip_type<class_d_generator>();
     rountrip_type<class_e_generator>();
     rountrip_type<class_f_generator>();
+    rountrip_type<class_g_generator>();
 }
 
 BOOST_AUTO_TEST_CASE(validate_hashing) {
@@ -72,6 +74,7 @@ BOOST_AUTO_TEST_CASE(validate_hashing) {
     test_hashing<class_d_generator>();
     test_hashing<class_e_generator>();
     test_hashing<class_f_generator>();
+    test_hashing<class_g_generator>();
 }
 
 BOOST_AUTO_TEST_CASE(validate_swap) {
@@ -83,6 +86,7 @@ BOOST_AUTO_TEST_CASE(validate_swap) {
     test_swap<class_d_generator>();
     test_swap<class_e_generator>();
     test_swap<class_f_generator>();
+    test_swap<class_g_generator>();
 }
 
 BOOST_AUTO_TEST_CASE(validate_io) {
@@ -94,6 +98,7 @@ BOOST_AUTO_TEST_CASE(validate_io) {
     test_io<class_d_generator>();
     test_io<class_e_generator>();
     test_io<class_f_generator>();
+    test_io<class_g_generator>();
 }
 
 BOOST_AUTO_TEST_SUITE_END()

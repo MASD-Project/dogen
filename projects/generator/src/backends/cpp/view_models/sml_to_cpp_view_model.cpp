@@ -267,6 +267,7 @@ void sml_dfs_visitor::transform_nested_qualified_name(
 
     vm.identifiable_name(to_identifiable_name(ns));
     vm.complete_identifiable_name(to_identifiable_name(my_complete_name));
+    vm.complete_name(my_complete_name);
     vm.children(children);
     complete_name += my_complete_name;
 }

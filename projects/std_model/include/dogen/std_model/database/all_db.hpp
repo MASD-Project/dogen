@@ -23,4 +23,5 @@
 #include "dogen/std_model/database/class_d_db.hpp"
 #include "dogen/std_model/database/class_e_db.hpp"
 #include "dogen/std_model/database/class_f_db.hpp"
+#include "dogen/std_model/database/class_g_db.hpp"
 #include "dogen/std_model/database/pkg1/class_c_db.hpp"

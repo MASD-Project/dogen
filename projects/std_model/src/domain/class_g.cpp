@@ -18,12 +18,36 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/std_model/domain/class_a.hpp"
-#include "dogen/std_model/domain/class_b.hpp"
-#include "dogen/std_model/domain/class_d.hpp"
-#include "dogen/std_model/domain/class_e.hpp"
-#include "dogen/std_model/domain/class_f.hpp"
 #include "dogen/std_model/domain/class_g.hpp"
-#include "dogen/std_model/domain/pkg1/class_c.hpp"
-#include "dogen/std_model/domain/unversioned_key.hpp"
-#include "dogen/std_model/domain/versioned_key.hpp"
+
+namespace dogen {
+namespace std_model {
+
+class_g::class_g(
+    const std::unordered_map<dogen::std_model::class_a, std::vector<dogen::std_model::pkg1::class_c> >& prop_0,
+    const std::unordered_map<dogen::std_model::pkg1::class_c, std::list<dogen::std_model::class_a> >& prop_1,
+    const dogen::std_model::versioned_key& versioned_key)
+    : prop_0_(prop_0),
+      prop_1_(prop_1),
+      versioned_key_(versioned_key) { }
+
+void class_g::swap(class_g& other) noexcept {
+    using std::swap;
+    swap(prop_0_, other.prop_0_);
+    swap(prop_1_, other.prop_1_);
+    swap(versioned_key_, other.versioned_key_);
+}
+
+bool class_g::operator==(const class_g& rhs) const {
+    return prop_0_ == rhs.prop_0_ &&
+        prop_1_ == rhs.prop_1_ &&
+        versioned_key_ == rhs.versioned_key_;
+}
+
+class_g& class_g::operator=(class_g other) {
+    using std::swap;
+    swap(*this, other);
+    return *this;
+}
+
+} }

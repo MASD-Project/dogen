@@ -23,6 +23,7 @@
 #include "dogen/std_model/hash/class_d_hash.hpp"
 #include "dogen/std_model/hash/class_e_hash.hpp"
 #include "dogen/std_model/hash/class_f_hash.hpp"
+#include "dogen/std_model/hash/class_g_hash.hpp"
 #include "dogen/std_model/hash/pkg1/class_c_hash.hpp"
 #include "dogen/std_model/hash/unversioned_key_hash.hpp"
 #include "dogen/std_model/hash/versioned_key_hash.hpp"

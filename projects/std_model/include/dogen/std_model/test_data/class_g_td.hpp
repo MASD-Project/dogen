@@ -18,12 +18,34 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/std_model/io/class_a_io.hpp"
-#include "dogen/std_model/io/class_b_io.hpp"
-#include "dogen/std_model/io/class_d_io.hpp"
-#include "dogen/std_model/io/class_e_io.hpp"
-#include "dogen/std_model/io/class_f_io.hpp"
-#include "dogen/std_model/io/class_g_io.hpp"
-#include "dogen/std_model/io/pkg1/class_c_io.hpp"
-#include "dogen/std_model/io/unversioned_key_io.hpp"
-#include "dogen/std_model/io/versioned_key_io.hpp"
+#ifndef DOGEN_STD_MODEL_TEST_DATA_CLASS_G_TD_HPP
+#define DOGEN_STD_MODEL_TEST_DATA_CLASS_G_TD_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include "dogen/std_model/domain/class_g.hpp"
+
+namespace dogen {
+namespace std_model {
+
+class class_g_generator {
+public:
+    class_g_generator();
+
+public:
+    typedef dogen::std_model::class_g result_type;
+
+public:
+    static void populate(const unsigned int position, result_type& v);
+    static result_type create(const unsigned int position);
+    result_type operator()();
+
+private:
+    unsigned int position_;
+};
+
+} }
+
+#endif
