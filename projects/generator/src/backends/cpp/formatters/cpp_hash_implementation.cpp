@@ -36,6 +36,8 @@ const std::string std_ns("std");
 
 const std::string invalid_sequence_container(
     "Sequence containers have exactly one type argument");
+const std::string invalid_associative_container(
+    "Associative containers have one or two type arguments");
 const std::string missing_class_view_model(
     "Meta type is pod but class view model is empty");
 const std::string enumeration_view_model_not_supported(
@@ -77,9 +79,15 @@ void hash_implementation::combine_function() {
 }
 
 void hash_implementation::
-sequence_container_helper(const std::string& container_identifiable_type_name,
-    const std::string& container_type_name,
-    const nested_type_view_model& containee) {
+sequence_container_helper(const nested_type_view_model& vm) {
+    const auto children(vm.children());
+    if (children.size() != 1)
+        throw generation_failure(invalid_sequence_container);
+
+    const std::string container_identifiable_type_name(
+        vm.complete_identifiable_name());
+    const std::string container_type_name(vm.complete_name());
+
     utility_.blank_line();
     stream_ << indenter_ << "inline std::size_t hash_"
             << container_identifiable_type_name
@@ -94,12 +102,67 @@ sequence_container_helper(const std::string& container_identifiable_type_name,
         utility_.open_scope();
         {
             cpp_positive_indenter_scope s(indenter_);
+            const auto containee(children.front());
             if (is_hashable(containee)) {
                 stream_ << indenter_ << "combine(seed, i);" << std::endl;
             } else {
                 stream_ << indenter_ << "combine(seed, "
                         << "hash_" << containee.complete_identifiable_name()
                         << "(i));" << std::endl;
+            }
+        }
+        utility_.close_scope();
+        stream_ << indenter_ << "return seed;" << std::endl;
+    }
+    utility_.close_scope();
+}
+
+void hash_implementation::
+associative_container_helper(const nested_type_view_model& vm) {
+    const auto children(vm.children());
+    if (children.size() != 1 && children.size() != 2)
+        throw generation_failure(invalid_associative_container);
+
+    if (children.size() == 1) {
+        sequence_container_helper(children.front());
+        return;
+    }
+
+    const std::string container_identifiable_type_name(
+        vm.complete_identifiable_name());
+    const std::string container_type_name(vm.complete_name());
+
+    utility_.blank_line();
+    stream_ << indenter_ << "inline std::size_t hash_"
+            << container_identifiable_type_name
+            << "(const " << container_type_name << "& v)";
+
+    utility_.open_scope();
+    {
+        cpp_positive_indenter_scope s(indenter_);
+        stream_ << indenter_ << "std::size_t seed(0);"
+                << std::endl;
+        stream_ << indenter_ << "for (const auto i : v) ";
+        utility_.open_scope();
+        {
+            cpp_positive_indenter_scope s(indenter_);
+            const auto key(children.front());
+            const auto value(children.back());
+
+            if (is_hashable(key)) {
+                stream_ << indenter_ << "combine(seed, i.first);" << std::endl;
+            } else {
+                stream_ << indenter_ << "combine(seed, "
+                        << "hash_" << key.complete_identifiable_name()
+                        << "(i.first));" << std::endl;
+            }
+
+            if (is_hashable(value)) {
+                stream_ << indenter_ << "combine(seed, i.second);" << std::endl;
+            } else {
+                stream_ << indenter_ << "combine(seed, "
+                        << "hash_" << value.complete_identifiable_name()
+                        << "(i.second));" << std::endl;
             }
         }
         utility_.close_scope();
@@ -119,20 +182,10 @@ recursive_helper_method_creator(const nested_type_view_model& vm,
     for (const auto c : children)
         recursive_helper_method_creator(c, types_done);
 
-    if (vm.is_sequence_container()) {
-        if (children.size() != 1)
-            throw generation_failure(invalid_sequence_container);
-
-        const auto containee_vm(children.front());
-        sequence_container_helper(
-            vm.complete_identifiable_name(), vm.complete_name(), containee_vm);
-    } else if (vm.is_associative_container()) {
-        if (children.size() == 1) {
-            const auto containee_vm(children.front());
-            sequence_container_helper(
-                vm.complete_identifiable_name(), vm.complete_name(), containee_vm);
-        }
-    }
+    if (vm.is_sequence_container())
+        sequence_container_helper(vm);
+    else if (vm.is_associative_container())
+        associative_container_helper(vm);
 
     types_done.insert(vm.complete_identifiable_name());
 }
