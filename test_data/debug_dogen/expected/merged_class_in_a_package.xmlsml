@@ -9,7 +9,7 @@
 		<item_version>0</item_version>
 	</packages>
 	<pods class_id="2" tracking_level="0" version="0">
-		<count>16</count>
+		<count>19</count>
 		<bucket_count>23</bucket_count>
 		<item_version>0</item_version>
 		<item class_id="3" tracking_level="0" version="0">
@@ -83,6 +83,96 @@
 		</item>
 		<item>
 			<first>
+				<model_name>boost</model_name>
+				<external_package_path>
+					<count>0</count>
+					<item_version>0</item_version>
+				</external_package_path>
+				<package_path>
+					<count>0</count>
+					<item_version>0</item_version>
+				</package_path>
+				<type_name>shared_ptr</type_name>
+				<meta_type>2</meta_type>
+			</first>
+			<second>
+				<name>
+					<model_name>boost</model_name>
+					<external_package_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</external_package_path>
+					<package_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</package_path>
+					<type_name>shared_ptr</type_name>
+					<meta_type>2</meta_type>
+				</name>
+				<properties>
+					<count>0</count>
+					<item_version>0</item_version>
+				</properties>
+				<parent_name>
+					<initialized>0</initialized>
+				</parent_name>
+				<generate>0</generate>
+				<is_parent>0</is_parent>
+				<category_type>0</category_type>
+				<documentation></documentation>
+				<number_of_type_arguments>0</number_of_type_arguments>
+				<is_sequence_container>0</is_sequence_container>
+				<is_associative_container>0</is_associative_container>
+				<is_smart_pointer>1</is_smart_pointer>
+			</second>
+		</item>
+		<item>
+			<first>
+				<model_name>boost</model_name>
+				<external_package_path>
+					<count>0</count>
+					<item_version>0</item_version>
+				</external_package_path>
+				<package_path>
+					<count>0</count>
+					<item_version>0</item_version>
+				</package_path>
+				<type_name>scoped_ptr</type_name>
+				<meta_type>2</meta_type>
+			</first>
+			<second>
+				<name>
+					<model_name>boost</model_name>
+					<external_package_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</external_package_path>
+					<package_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</package_path>
+					<type_name>scoped_ptr</type_name>
+					<meta_type>2</meta_type>
+				</name>
+				<properties>
+					<count>0</count>
+					<item_version>0</item_version>
+				</properties>
+				<parent_name>
+					<initialized>0</initialized>
+				</parent_name>
+				<generate>0</generate>
+				<is_parent>0</is_parent>
+				<category_type>0</category_type>
+				<documentation></documentation>
+				<number_of_type_arguments>1</number_of_type_arguments>
+				<is_sequence_container>1</is_sequence_container>
+				<is_associative_container>0</is_associative_container>
+				<is_smart_pointer>1</is_smart_pointer>
+			</second>
+		</item>
+		<item>
+			<first>
 				<model_name>std</model_name>
 				<external_package_path>
 					<count>0</count>
@@ -124,6 +214,51 @@
 				<is_sequence_container>0</is_sequence_container>
 				<is_associative_container>1</is_associative_container>
 				<is_smart_pointer>0</is_smart_pointer>
+			</second>
+		</item>
+		<item>
+			<first>
+				<model_name>boost</model_name>
+				<external_package_path>
+					<count>0</count>
+					<item_version>0</item_version>
+				</external_package_path>
+				<package_path>
+					<count>0</count>
+					<item_version>0</item_version>
+				</package_path>
+				<type_name>weak_ptr</type_name>
+				<meta_type>2</meta_type>
+			</first>
+			<second>
+				<name>
+					<model_name>boost</model_name>
+					<external_package_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</external_package_path>
+					<package_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</package_path>
+					<type_name>weak_ptr</type_name>
+					<meta_type>2</meta_type>
+				</name>
+				<properties>
+					<count>0</count>
+					<item_version>0</item_version>
+				</properties>
+				<parent_name>
+					<initialized>0</initialized>
+				</parent_name>
+				<generate>0</generate>
+				<is_parent>0</is_parent>
+				<category_type>0</category_type>
+				<documentation></documentation>
+				<number_of_type_arguments>1</number_of_type_arguments>
+				<is_sequence_container>1</is_sequence_container>
+				<is_associative_container>0</is_associative_container>
+				<is_smart_pointer>1</is_smart_pointer>
 			</second>
 		</item>
 		<item>
