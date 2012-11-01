@@ -28,11 +28,13 @@ class_b::class_b(
     const std::vector<dogen::std_model::class_a>& prop_1,
     const std::vector<dogen::std_model::pkg1::class_c>& prop_2,
     const std::vector<unsigned int>& prop_3,
+    const std::vector<dogen::std_model::class_a>& prop_4,
     const dogen::std_model::versioned_key& versioned_key)
     : prop_0_(prop_0),
       prop_1_(prop_1),
       prop_2_(prop_2),
       prop_3_(prop_3),
+      prop_4_(prop_4),
       versioned_key_(versioned_key) { }
 
 void class_b::swap(class_b& other) noexcept {
@@ -41,6 +43,7 @@ void class_b::swap(class_b& other) noexcept {
     swap(prop_1_, other.prop_1_);
     swap(prop_2_, other.prop_2_);
     swap(prop_3_, other.prop_3_);
+    swap(prop_4_, other.prop_4_);
     swap(versioned_key_, other.versioned_key_);
 }
 
@@ -49,6 +52,7 @@ bool class_b::operator==(const class_b& rhs) const {
         prop_1_ == rhs.prop_1_ &&
         prop_2_ == rhs.prop_2_ &&
         prop_3_ == rhs.prop_3_ &&
+        prop_4_ == rhs.prop_4_ &&
         versioned_key_ == rhs.versioned_key_;
 }
 

@@ -96,7 +96,8 @@ populate(const unsigned int position, result_type& v) {
     v.prop_1(create_std_vector_dogen_std_model_class_a(position + 1));
     v.prop_2(create_std_vector_dogen_std_model_pkg1_class_c(position + 2));
     v.prop_3(create_std_vector_unsigned_int(position + 3));
-    v.versioned_key(create_dogen_std_model_versioned_key(position + 4));
+    v.prop_4(create_std_vector_dogen_std_model_class_a(position + 4));
+    v.versioned_key(create_dogen_std_model_versioned_key(position + 5));
 }
 
 class_b_generator::result_type

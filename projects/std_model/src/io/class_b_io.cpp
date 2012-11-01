@@ -90,6 +90,7 @@ std::ostream& operator<<(std::ostream& s, const class_b& v) {
       << "\"prop_1\": " << v.prop_1() << ", "
       << "\"prop_2\": " << v.prop_2() << ", "
       << "\"prop_3\": " << v.prop_3() << ", "
+      << "\"prop_4\": " << v.prop_4() << ", "
       << "\"versioned_key\": " << v.versioned_key()
       << " }";
     return(s);

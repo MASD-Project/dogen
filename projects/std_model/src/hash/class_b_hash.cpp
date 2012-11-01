@@ -76,6 +76,7 @@ std::size_t class_b_hasher::hash(const class_b& v) {
     combine(seed, hash_std_vector_dogen_std_model_class_a(v.prop_1()));
     combine(seed, hash_std_vector_dogen_std_model_pkg1_class_c(v.prop_2()));
     combine(seed, hash_std_vector_unsigned_int(v.prop_3()));
+    combine(seed, hash_std_vector_dogen_std_model_class_a(v.prop_4()));
     combine(seed, v.versioned_key());
 
     return seed;
