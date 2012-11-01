@@ -51,6 +51,7 @@ void save(Archive& ar,
     ar << make_nvp("prop_2", v.prop_2_);
     ar << make_nvp("prop_3", v.prop_3_);
     ar << make_nvp("prop_4", v.prop_4_);
+    ar << make_nvp("prop_5", v.prop_5_);
     ar << make_nvp("versioned_key", v.versioned_key_);
 }
 
@@ -63,6 +64,7 @@ void load(Archive& ar,
     ar >> make_nvp("prop_2", v.prop_2_);
     ar >> make_nvp("prop_3", v.prop_3_);
     ar >> make_nvp("prop_4", v.prop_4_);
+    ar >> make_nvp("prop_5", v.prop_5_);
     ar >> make_nvp("versioned_key", v.versioned_key_);
 }
 

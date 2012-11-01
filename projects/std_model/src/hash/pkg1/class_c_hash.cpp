@@ -31,7 +31,7 @@ inline void combine(std::size_t& seed, const HashableType& value)
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 }
 
-std::size_t hash_std_vector_dogen_std_model_class_a(const std::vector<dogen::std_model::class_a>& v){
+inline std::size_t hash_std_vector_dogen_std_model_class_a(const std::vector<dogen::std_model::class_a>& v){
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i);

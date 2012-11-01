@@ -78,6 +78,14 @@ std::vector<unsigned int> create_std_vector_unsigned_int(unsigned int position) 
     return r;
 }
 
+std::vector<std::vector<unsigned int> > create_std_vector_std_vector_unsigned_int_(unsigned int position) {
+    std::vector<std::vector<unsigned int> > r;
+    for (unsigned int i(0); i < 10; ++i) {
+        r.push_back(create_std_vector_unsigned_int(position + i));
+    }
+    return r;
+}
+
 dogen::std_model::versioned_key
 create_dogen_std_model_versioned_key(const unsigned int position) {
     return dogen::std_model::versioned_key_generator::create(position);
@@ -97,7 +105,8 @@ populate(const unsigned int position, result_type& v) {
     v.prop_2(create_std_vector_dogen_std_model_pkg1_class_c(position + 2));
     v.prop_3(create_std_vector_unsigned_int(position + 3));
     v.prop_4(create_std_vector_dogen_std_model_class_a(position + 4));
-    v.versioned_key(create_dogen_std_model_versioned_key(position + 5));
+    v.prop_5(create_std_vector_std_vector_unsigned_int_(position + 5));
+    v.versioned_key(create_dogen_std_model_versioned_key(position + 6));
 }
 
 class_b_generator::result_type

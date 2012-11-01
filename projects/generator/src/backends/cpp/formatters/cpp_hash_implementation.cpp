@@ -81,7 +81,7 @@ sequence_container_helper(const std::string& container_identifiable_type_name,
     const std::string& container_type_name,
     const nested_type_view_model& containee) {
     utility_.blank_line();
-    stream_ << indenter_ << "std::size_t hash_"
+    stream_ << indenter_ << "inline std::size_t hash_"
             << container_identifiable_type_name
             << "(const " << container_type_name << "& v)";
 

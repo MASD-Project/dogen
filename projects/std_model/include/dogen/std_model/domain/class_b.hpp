@@ -50,6 +50,7 @@ public:
         const std::vector<dogen::std_model::pkg1::class_c>& prop_2,
         const std::vector<unsigned int>& prop_3,
         const std::vector<dogen::std_model::class_a>& prop_4,
+        const std::vector<std::vector<unsigned int> >& prop_5,
         const dogen::std_model::versioned_key& versioned_key);
 
 private:
@@ -100,6 +101,14 @@ public:
         prop_4_ = v;
     }
 
+    std::vector<std::vector<unsigned int> > prop_5() const {
+        return prop_5_;
+    }
+
+    void prop_5(const std::vector<std::vector<unsigned int> >& v) {
+        prop_5_ = v;
+    }
+
     dogen::std_model::versioned_key versioned_key() const {
         return versioned_key_;
     }
@@ -124,6 +133,7 @@ private:
     std::vector<dogen::std_model::pkg1::class_c> prop_2_;
     std::vector<unsigned int> prop_3_;
     std::vector<dogen::std_model::class_a> prop_4_;
+    std::vector<std::vector<unsigned int> > prop_5_;
     dogen::std_model::versioned_key versioned_key_;
 };
 
