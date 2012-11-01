@@ -18,7 +18,29 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/std_model/database/class_a_db.hpp"
-#include "dogen/std_model/database/class_b_db.hpp"
-#include "dogen/std_model/database/class_d_db.hpp"
-#include "dogen/std_model/database/pkg1/class_c_db.hpp"
+#ifndef DOGEN_STD_MODEL_SERIALIZATION_CLASS_D_SER_HPP
+#define DOGEN_STD_MODEL_SERIALIZATION_CLASS_D_SER_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include <boost/serialization/export.hpp>
+#include <boost/serialization/split_free.hpp>
+#include "dogen/std_model/domain/class_d.hpp"
+
+BOOST_SERIALIZATION_SPLIT_FREE(dogen::std_model::class_d)
+BOOST_CLASS_EXPORT_KEY(dogen::std_model::class_d)
+
+namespace boost {
+namespace serialization {
+
+template<typename Archive>
+void save(Archive& ar, const dogen::std_model::class_d& v, unsigned int version);
+
+template<typename Archive>
+void load(Archive& ar, dogen::std_model::class_d& v, unsigned int version);
+
+} }
+
+#endif

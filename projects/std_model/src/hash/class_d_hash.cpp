@@ -18,7 +18,38 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/std_model/database/class_a_db.hpp"
-#include "dogen/std_model/database/class_b_db.hpp"
-#include "dogen/std_model/database/class_d_db.hpp"
-#include "dogen/std_model/database/pkg1/class_c_db.hpp"
+#include "dogen/std_model/hash/class_d_hash.hpp"
+#include "dogen/std_model/hash/versioned_key_hash.hpp"
+
+namespace {
+
+template <typename HashableType>
+inline void combine(std::size_t& seed, const HashableType& value)
+{
+    std::hash<HashableType> hasher;
+    seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
+}
+
+inline std::size_t hash_std_list_std_string(const std::list<std::string>& v){
+    std::size_t seed(0);
+    for (const auto i : v) {
+        combine(seed, i);
+    }
+    return seed;
+}
+
+}
+
+namespace dogen {
+namespace std_model {
+
+std::size_t class_d_hasher::hash(const class_d& v) {
+    std::size_t seed(0);
+
+    combine(seed, hash_std_list_std_string(v.prop_0()));
+    combine(seed, v.versioned_key());
+
+    return seed;
+}
+
+} }
