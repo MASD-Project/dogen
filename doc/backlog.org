@@ -10,6 +10,13 @@ This file contains all stories that haven't been assigned to a sprint.
 
 Stories that we intend to look at, at some point.
 
+*** Full constructor parameter comments
+
+We could use the comments in properties to populate the comments for
+the full constructor for each parameter. This would require taking the
+first line of the documentation of each property and then stitching
+them together for the full constructor.
+
 *** Serialisation support for C++-11 specific containers
 
 We can't add =std::array= or =std::forward_list= because there is no
