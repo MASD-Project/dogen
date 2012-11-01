@@ -30,6 +30,7 @@
 #include <boost/serialization/string.hpp>
 #include "dogen/std_model/serialization/class_a_ser.hpp"
 #include "dogen/std_model/serialization/class_f_ser.hpp"
+#include "dogen/std_model/serialization/pkg1/class_c_ser.hpp"
 #include "dogen/std_model/serialization/versioned_key_ser.hpp"
 #include "dogen/utility/serialization/unordered_map.hpp"
 
@@ -47,6 +48,7 @@ void save(Archive& ar,
     const unsigned int /*version*/) {
     ar << make_nvp("prop_0", v.prop_0_);
     ar << make_nvp("prop_1", v.prop_1_);
+    ar << make_nvp("prop_2", v.prop_2_);
     ar << make_nvp("versioned_key", v.versioned_key_);
 }
 
@@ -56,6 +58,7 @@ void load(Archive& ar,
     const unsigned int /*version*/) {
     ar >> make_nvp("prop_0", v.prop_0_);
     ar >> make_nvp("prop_1", v.prop_1_);
+    ar >> make_nvp("prop_2", v.prop_2_);
     ar >> make_nvp("versioned_key", v.versioned_key_);
 }
 

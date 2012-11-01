@@ -30,6 +30,7 @@ static logger lg(logger_factory("inclusion_manager"));
 
 const std::string empty;
 const std::string std_model("std");
+const std::string boost_model("boost");
 const std::string primitive_model("primitive_model");
 const std::string bool_type("bool");
 const std::string versioned_name("versioned_key");
@@ -93,7 +94,9 @@ cpp_inclusion_manager::cpp_inclusion_manager(const sml::model& model,
     : model_(model), location_manager_(location_manager), settings_(settings),
       io_enabled_(contains(settings_.enabled_facets(), cpp_facet_types::io)),
       serialization_enabled_(contains(settings_.enabled_facets(),
-              cpp_facet_types::serialization)) {
+              cpp_facet_types::serialization)),
+      hash_enabled_(contains(settings_.enabled_facets(),
+              cpp_facet_types::hash)) {
 
     BOOST_LOG_SEV(lg, debug)
         << "Initial configuration:"
@@ -101,6 +104,7 @@ cpp_inclusion_manager::cpp_inclusion_manager(const sml::model& model,
         << " use_integrated_io: " << settings_.use_integrated_io()
         << " io_enabled: " << io_enabled_
         << " serialization_enabled: " << serialization_enabled_
+        << " hash_enabled_: " << hash_enabled_
         << " model name: " << model_.name();
 }
 
@@ -167,8 +171,35 @@ std::string cpp_inclusion_manager::header_dependency(
 }
 
 void cpp_inclusion_manager::
-recurse_nested_qnames(const dogen::sml::nested_qualified_name&
-    nested_qname, std::list<dogen::sml::qualified_name>& qnames) const {
+recurse_nested_qnames_keys(const dogen::sml::nested_qualified_name& nested_qname,
+    std::list<dogen::sml::qualified_name>& keys) const {
+
+    if (nested_qname.type().meta_type() == sml::meta_types::pod) {
+        const auto pods(model_.pods());
+        const auto i(pods.find(nested_qname.type()));
+        if (i != pods.end() && i->second.is_associative_container()) {
+            if (nested_qname.children().size() >= 1)
+                keys.push_back(nested_qname.children().front().type());
+        } else {
+            for (const auto nqn : nested_qname.children())
+                recurse_nested_qnames_keys(nqn, keys);
+        }
+    }
+}
+
+std::list<dogen::sml::qualified_name>
+cpp_inclusion_manager::pod_to_keys(const sml::pod& pod) const {
+    std::list<dogen::sml::qualified_name> r;
+
+    for (const auto p : pod.properties())
+        recurse_nested_qnames_keys(p.type_name(), r);
+
+    return r;
+}
+
+void cpp_inclusion_manager::
+recurse_nested_qnames(const dogen::sml::nested_qualified_name& nested_qname,
+    std::list<dogen::sml::qualified_name>& qnames) const {
 
     qnames.push_back(nested_qname.type());
     for (const auto nqn : nested_qname.children())
@@ -392,6 +423,7 @@ void cpp_inclusion_manager::append_std_dependencies(
 
 void cpp_inclusion_manager::append_relationship_dependencies(
     const std::list<dogen::sml::qualified_name>& names,
+    const std::list<dogen::sml::qualified_name>& keys,
     const cpp_facet_types ft, const cpp_file_types flt,
     const bool is_parent_or_child, inclusion_lists& il) const {
 
@@ -438,7 +470,7 @@ void cpp_inclusion_manager::append_relationship_dependencies(
             il.user.push_back(header_dependency(n, ft, main));
 
         /*
-         * rule 4: parents and children and integrated IO require IO
+         * rule 4: parents and children with integrated IO require IO
          * headers in domain implementation.
          */
         const bool domain_with_io(is_domain &&
@@ -446,6 +478,23 @@ void cpp_inclusion_manager::append_relationship_dependencies(
 
         if (is_implementation && io_enabled_ && domain_with_io)
             il.user.push_back(header_dependency(n, cpp_facet_types::io, main));
+    }
+
+    for (const auto k : keys) {
+        // keys from special models can be ignored
+        if (k.model_name() == std_model ||
+            k.model_name() == boost_model ||
+            k.model_name() == primitive_model)
+            continue;
+
+        /*
+         * rule 5: domain headers require hashing for all keys.
+         */
+        const bool is_header(flt == cpp_file_types::header);
+        const bool is_domain(ft == cpp_facet_types::domain);
+        const auto main(cpp_aspect_types::main);
+        if (is_header && hash_enabled_ && is_domain)
+            il.user.push_back(header_dependency(k, cpp_facet_types::hash, main));
     }
 }
 
@@ -506,7 +555,6 @@ bool cpp_inclusion_manager::requires_stream_manipulators(
 bool cpp_inclusion_manager::is_parent_or_child(const dogen::sml::pod& p) const {
     return p.parent_name() || p.is_parent();
 }
-
 
 void cpp_inclusion_manager::remove_duplicates(inclusion_lists& il) const {
     il.system.sort();
@@ -593,12 +641,13 @@ includes_for_pod(const sml::pod& pod, cpp_facet_types ft, cpp_file_types flt,
     }
 
     const auto names(pod_to_qualified_names(pod));
+    const auto keys(pod_to_keys(pod));
     const bool rsm(requires_stream_manipulators(names));
     const bool pc(is_parent_or_child(pod));
 
     append_versioning_dependencies(ft, flt, at, pod.category_type(), r);
     append_implementation_dependencies(pod, ft, flt, r, rsm);
-    append_relationship_dependencies(names, ft, flt, pc, r);
+    append_relationship_dependencies(names, keys, ft, flt, pc, r);
     append_self_dependencies(n, ft, flt, at, n.meta_type(), r);
 
     remove_duplicates(r);

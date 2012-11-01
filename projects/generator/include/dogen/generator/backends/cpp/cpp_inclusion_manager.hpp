@@ -82,6 +82,7 @@ public:
       settings_(std::move(rhs.settings_)),
       io_enabled_(std::move(rhs.io_enabled_)),
       serialization_enabled_(std::move(rhs.serialization_enabled_)),
+      hash_enabled_(std::move(rhs.hash_enabled_)),
       headers_for_facet_(std::move(rhs.headers_for_facet_))  { }
 
     cpp_inclusion_manager(const sml::model& model,
@@ -158,6 +159,12 @@ public:
     void remove_duplicates(inclusion_lists& il) const;
 
 private:
+    void recurse_nested_qnames_keys(const dogen::sml::nested_qualified_name&
+        nested_qname, std::list<dogen::sml::qualified_name>& keys) const;
+
+    std::list<dogen::sml::qualified_name>
+    pod_to_keys(const sml::pod& pod) const;
+
     void recurse_nested_qnames(const dogen::sml::nested_qualified_name&
         nested_qname, std::list<dogen::sml::qualified_name>& qnames) const;
 
@@ -216,6 +223,7 @@ private:
      */
     void append_relationship_dependencies(
         const std::list<dogen::sml::qualified_name>& names,
+        const std::list<dogen::sml::qualified_name>& keys,
         const cpp_facet_types ft, const cpp_file_types flt,
         const bool is_parent_or_child, inclusion_lists& il) const;
 
@@ -272,6 +280,7 @@ private:
     const config::cpp_settings settings_;
     const bool io_enabled_;
     const bool serialization_enabled_;
+    const bool hash_enabled_;
     std::map<cpp_facet_types, std::list<std::string> > headers_for_facet_;
 };
 
