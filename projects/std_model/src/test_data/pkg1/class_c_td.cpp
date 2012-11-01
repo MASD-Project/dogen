@@ -18,8 +18,44 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/std_model/test_data/class_a_td.hpp"
-#include "dogen/std_model/test_data/class_b_td.hpp"
 #include "dogen/std_model/test_data/pkg1/class_c_td.hpp"
-#include "dogen/std_model/test_data/unversioned_key_td.hpp"
 #include "dogen/std_model/test_data/versioned_key_td.hpp"
+
+namespace {
+
+int create_int(const unsigned int position) {
+    return position;
+}
+
+dogen::std_model::versioned_key
+create_dogen_std_model_versioned_key(const unsigned int position) {
+    return dogen::std_model::versioned_key_generator::create(position);
+}
+
+}
+
+namespace dogen {
+namespace std_model {
+namespace pkg1 {
+
+class_c_generator::class_c_generator() : position_(0) { }
+
+void class_c_generator::
+populate(const unsigned int position, result_type& v) {
+    v.prop_0(create_int(position + 0));
+    v.versioned_key(create_dogen_std_model_versioned_key(position + 1));
+}
+
+class_c_generator::result_type
+class_c_generator::create(const unsigned int position) {
+    class_c r;
+    class_c_generator::populate(position, r);
+    return r;
+}
+
+class_c_generator::result_type
+class_c_generator::operator()() {
+    return create(position_++);
+}
+
+} } }

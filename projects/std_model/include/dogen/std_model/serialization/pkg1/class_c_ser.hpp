@@ -18,8 +18,29 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/std_model/test_data/class_a_td.hpp"
-#include "dogen/std_model/test_data/class_b_td.hpp"
-#include "dogen/std_model/test_data/pkg1/class_c_td.hpp"
-#include "dogen/std_model/test_data/unversioned_key_td.hpp"
-#include "dogen/std_model/test_data/versioned_key_td.hpp"
+#ifndef DOGEN_STD_MODEL_SERIALIZATION_PKG1_CLASS_C_SER_HPP
+#define DOGEN_STD_MODEL_SERIALIZATION_PKG1_CLASS_C_SER_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include <boost/serialization/export.hpp>
+#include <boost/serialization/split_free.hpp>
+#include "dogen/std_model/domain/pkg1/class_c.hpp"
+
+BOOST_SERIALIZATION_SPLIT_FREE(dogen::std_model::pkg1::class_c)
+BOOST_CLASS_EXPORT_KEY(dogen::std_model::pkg1::class_c)
+
+namespace boost {
+namespace serialization {
+
+template<typename Archive>
+void save(Archive& ar, const dogen::std_model::pkg1::class_c& v, unsigned int version);
+
+template<typename Archive>
+void load(Archive& ar, dogen::std_model::pkg1::class_c& v, unsigned int version);
+
+} }
+
+#endif

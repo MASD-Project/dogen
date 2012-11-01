@@ -18,8 +18,36 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/std_model/test_data/class_a_td.hpp"
-#include "dogen/std_model/test_data/class_b_td.hpp"
-#include "dogen/std_model/test_data/pkg1/class_c_td.hpp"
-#include "dogen/std_model/test_data/unversioned_key_td.hpp"
-#include "dogen/std_model/test_data/versioned_key_td.hpp"
+#include "dogen/std_model/domain/pkg1/class_c.hpp"
+
+namespace dogen {
+namespace std_model {
+namespace pkg1 {
+
+class_c::class_c()
+    : prop_0_(static_cast<int>(0)) { }
+
+class_c::class_c(
+    const int prop_0,
+    const dogen::std_model::versioned_key& versioned_key)
+    : prop_0_(prop_0),
+      versioned_key_(versioned_key) { }
+
+void class_c::swap(class_c& other) noexcept {
+    using std::swap;
+    swap(prop_0_, other.prop_0_);
+    swap(versioned_key_, other.versioned_key_);
+}
+
+bool class_c::operator==(const class_c& rhs) const {
+    return prop_0_ == rhs.prop_0_ &&
+        versioned_key_ == rhs.versioned_key_;
+}
+
+class_c& class_c::operator=(class_c other) {
+    using std::swap;
+    swap(*this, other);
+    return *this;
+}
+
+} } }

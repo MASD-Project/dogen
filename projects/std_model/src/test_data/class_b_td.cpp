@@ -21,6 +21,7 @@
 #include <sstream>
 #include "dogen/std_model/test_data/class_a_td.hpp"
 #include "dogen/std_model/test_data/class_b_td.hpp"
+#include "dogen/std_model/test_data/pkg1/class_c_td.hpp"
 #include "dogen/std_model/test_data/versioned_key_td.hpp"
 
 namespace {
@@ -52,6 +53,19 @@ std::vector<dogen::std_model::class_a> create_std_vector_dogen_std_model_class_a
     return r;
 }
 
+dogen::std_model::pkg1::class_c
+create_dogen_std_model_pkg1_class_c(const unsigned int position) {
+    return dogen::std_model::pkg1::class_c_generator::create(position);
+}
+
+std::vector<dogen::std_model::pkg1::class_c> create_std_vector_dogen_std_model_pkg1_class_c(unsigned int position) {
+    std::vector<dogen::std_model::pkg1::class_c> r;
+    for (unsigned int i(0); i < 10; ++i) {
+        r.push_back(create_dogen_std_model_pkg1_class_c(position + i));
+    }
+    return r;
+}
+
 dogen::std_model::versioned_key
 create_dogen_std_model_versioned_key(const unsigned int position) {
     return dogen::std_model::versioned_key_generator::create(position);
@@ -68,7 +82,8 @@ void class_b_generator::
 populate(const unsigned int position, result_type& v) {
     v.prop_0(create_std_vector_std_string(position + 0));
     v.prop_1(create_std_vector_dogen_std_model_class_a(position + 1));
-    v.versioned_key(create_dogen_std_model_versioned_key(position + 2));
+    v.prop_2(create_std_vector_dogen_std_model_pkg1_class_c(position + 2));
+    v.versioned_key(create_dogen_std_model_versioned_key(position + 3));
 }
 
 class_b_generator::result_type

@@ -18,8 +18,21 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/std_model/test_data/class_a_td.hpp"
-#include "dogen/std_model/test_data/class_b_td.hpp"
-#include "dogen/std_model/test_data/pkg1/class_c_td.hpp"
-#include "dogen/std_model/test_data/unversioned_key_td.hpp"
-#include "dogen/std_model/test_data/versioned_key_td.hpp"
+#include <ostream>
+#include "dogen/std_model/io/pkg1/class_c_io.hpp"
+#include "dogen/std_model/io/versioned_key_io.hpp"
+
+namespace dogen {
+namespace std_model {
+namespace pkg1 {
+
+std::ostream& operator<<(std::ostream& s, const class_c& v) {
+    s << " { "
+      << "\"__type__\": " << "\"class_c\"" << ", "
+      << "\"prop_0\": " << v.prop_0() << ", "
+      << "\"versioned_key\": " << v.versioned_key()
+      << " }";
+    return(s);
+}
+
+} } }

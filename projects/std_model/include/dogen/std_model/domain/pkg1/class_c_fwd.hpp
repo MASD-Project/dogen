@@ -18,8 +18,19 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/std_model/test_data/class_a_td.hpp"
-#include "dogen/std_model/test_data/class_b_td.hpp"
-#include "dogen/std_model/test_data/pkg1/class_c_td.hpp"
-#include "dogen/std_model/test_data/unversioned_key_td.hpp"
-#include "dogen/std_model/test_data/versioned_key_td.hpp"
+#ifndef DOGEN_STD_MODEL_DOMAIN_PKG1_CLASS_C_FWD_HPP
+#define DOGEN_STD_MODEL_DOMAIN_PKG1_CLASS_C_FWD_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+namespace dogen {
+namespace std_model {
+namespace pkg1 {
+
+class class_c;
+
+} } }
+
+#endif
