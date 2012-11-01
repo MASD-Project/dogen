@@ -93,9 +93,14 @@ void cpp_inserter_implementation::sequence_container_helper(
                 cpp_positive_indenter_scope s(indenter_);
                 stream_ << indenter_ << "if (i != v.begin()) s" << space_inserter
                         << utility_.quote(", ") << ";" << std::endl;
-                if (is_insertable(containee))
-                    stream_ << indenter_ << "s << *i;" << std::endl;
-                else {
+                if (is_insertable(containee)) {
+                    if (containee.is_string_like()) {
+                        stream_ << indenter_ << "s" << space_inserter
+                                << utility_.quote_escaped_streamed("*i")
+                                << ";" << std::endl;
+                    } else
+                        stream_ << indenter_ << "s << *i;" << std::endl;
+                } else {
                     stream_ << indenter_ << "insert_"
                             << containee.complete_identifiable_name()
                             << "(s, i));" << std::endl;

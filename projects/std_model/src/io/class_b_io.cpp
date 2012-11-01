@@ -28,7 +28,7 @@ std::ostream& operator<<(std::ostream& s, const std::vector<std::string>& v) {
     s << "[ ";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
-        s << *i;
+        s << "\"" << *i << "\"";
     }
     s << "] ";
     return s;
