@@ -44,6 +44,8 @@ const std::string invalid_sequence_container(
     "Sequence containers have exactly one type argument");
 const std::string invalid_associative_container(
     "Associative containers have one or two type arguments");
+const std::string invalid_smart_pointer(
+    "Smart pointers have exactly one type argument");
 
 std::string parent_tag(const unsigned int number) {
     std::ostringstream s;
@@ -205,6 +207,77 @@ associative_container_helper(const nested_type_view_model& vm) {
 }
 
 void cpp_inserter_implementation::
+smart_pointer_helper(const nested_type_view_model& vm) {
+    const auto children(vm.children());
+    if (children.size() != 1)
+        throw generation_failure(invalid_smart_pointer);
+
+    const auto container(vm);
+    {
+        namespace_helper ns_helper(stream_, container.namespaces());
+
+        utility_.blank_line();
+        stream_ << indenter_ << "inline std::ostream& operator<<"
+                << "(std::ostream& s, const "
+                << container.complete_name() << "& v) ";
+
+        utility_.open_scope();
+        {
+            cpp_positive_indenter_scope s(indenter_);
+            stream_ << indenter_ << "s" << space_inserter
+                    << utility_.quote("{ ") << space_inserter
+                    << utility_.quote(utility_.quote_escaped(type) + colon)
+                    << space_inserter
+                    << utility_.quote(utility_.quote_escaped(vm.name()))
+                    << space_inserter << utility_.quote(spaced_comma)
+                    << std::endl;
+
+            stream_ << indenter_ << special_indent << inserter
+                    << utility_.quote(utility_.quote_escaped("memory") +
+                        colon)
+                    << space_inserter
+                    << utility_.quote_escaped_streamed(
+                        "static_cast<void*>(v.get())")
+                    << space_inserter << utility_.quote(spaced_comma) << ";"
+                    << std::endl;
+
+            utility_.blank_line();
+            stream_ << indenter_ << "if (v)" << std::endl;
+            {
+                cpp_positive_indenter_scope s(indenter_);
+                const auto containee(children.front());
+                stream_ << indenter_ << "s" << space_inserter
+                        << utility_.quote(utility_.quote_escaped("data") +
+                            colon);
+                if (containee.is_string_like()) {
+                    stream_ << space_inserter
+                            << utility_.quote_escaped_streamed("*v")
+                            << ";" << std::endl;
+                } else
+                    stream_ << space_inserter << "*v;" << std::endl;
+            }
+            stream_ << indenter_ << "else" << std::endl;
+            {
+                cpp_positive_indenter_scope s(indenter_);
+
+                stream_ << indenter_ << "s" << space_inserter
+                        << utility_.quote(utility_.quote_escaped("data") +
+                            colon)
+                        << utility_.quote(utility_.quote_escaped("<empty>"))
+                        << ";" << std::endl;
+            }
+            stream_ << indenter_ << "s" << inserter << utility_.quote(" }")
+                    << ";";
+            utility_.blank_line();
+            stream_ << indenter_ << "return s;" << std::endl;
+        }
+        utility_.close_scope();
+        utility_.blank_line();
+    }
+    utility_.blank_line(2);
+}
+
+void cpp_inserter_implementation::
 recursive_helper_method_creator(const nested_type_view_model& vm,
     std::unordered_set<std::string>& types_done) {
 
@@ -219,6 +292,8 @@ recursive_helper_method_creator(const nested_type_view_model& vm,
         sequence_container_helper(vm);
     else if (vm.is_associative_container())
         associative_container_helper(vm);
+    else if (vm.is_smart_pointer())
+        smart_pointer_helper(vm);
 
     types_done.insert(vm.complete_identifiable_name());
 }

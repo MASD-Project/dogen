@@ -30,36 +30,11 @@ static logger lg(logger_factory("inclusion_manager"));
 
 const std::string empty;
 const std::string std_model("std");
-const std::string boost_model("boost");
 const std::string primitive_model("primitive_model");
 const std::string bool_type("bool");
 const std::string versioned_name("versioned_key");
 const std::string unversioned_name("unversioned_key");
-const std::string boost_optional_include("boost/optional.hpp");
 const std::string pqxx_connection_include("pqxx/connection.hxx");
-const std::string boost_format_include("boost/format.hpp");
-const std::string boost_nvp("boost/serialization/nvp.hpp");
-const std::string boost_split_free("boost/serialization/split_free.hpp");
-const std::string boost_assume_abstract(
-    "boost/serialization/assume_abstract.hpp");
-const std::string boost_is_virtual_base_of(
-    "boost/type_traits/is_virtual_base_of.hpp");
-const std::string boost_xml_oarchive("boost/archive/xml_oarchive.hpp");
-const std::string boost_xml_iarchive("boost/archive/xml_iarchive.hpp");
-const std::string boost_text_oarchive("boost/archive/text_oarchive.hpp");
-const std::string boost_text_iarchive("boost/archive/text_iarchive.hpp");
-const std::string boost_binary_oarchive("boost/archive/binary_oarchive.hpp");
-const std::string boost_binary_iarchive("boost/archive/binary_iarchive.hpp");
-const std::string boost_poly_iarchive("boost/archive/polymorphic_iarchive.hpp");
-const std::string boost_poly_oarchive("boost/archive/polymorphic_oarchive.hpp");
-
-const std::string boost_export("boost/serialization/export.hpp");
-const std::string boost_string("boost/serialization/string.hpp");
-const std::string boost_vector("boost/serialization/vector.hpp");
-const std::string boost_set("boost/serialization/set.hpp");
-const std::string boost_deque("boost/serialization/deque.hpp");
-const std::string boost_list("boost/serialization/list.hpp");
-const std::string boost_exception_info("boost/exception/info.hpp");
 const std::string pqxx_result_include("pqxx/result.hxx");
 const std::string pqxx_transaction_include("pqxx/transaction.hxx");
 const std::string sstream("sstream");
@@ -96,7 +71,7 @@ cpp_inclusion_manager::cpp_inclusion_manager(const sml::model& model,
       serialization_enabled_(contains(settings_.enabled_facets(),
               cpp_facet_types::serialization)),
       hash_enabled_(contains(settings_.enabled_facets(),
-              cpp_facet_types::hash)) {
+              cpp_facet_types::hash)), boost_() {
 
     BOOST_LOG_SEV(lg, debug)
         << "Initial configuration:"
@@ -282,52 +257,52 @@ append_implementation_dependencies(const sml::pod& p,
      */
     // optional
     if (is_header && is_database)
-        il.system.push_back(boost_optional_include);
+        il.system.push_back(boost_.include(boost_types::optional));
 
     // format
     if (is_implementation && is_database)
-        il.system.push_back(boost_format_include);
+        il.system.push_back(boost_.include(boost_types::format));
 
     // nvp serialisation
     const bool is_serialization(ft == cpp_facet_types::serialization);
     if (is_implementation && is_serialization &&
         !settings_.disable_xml_serialization())
-        il.system.push_back(boost_nvp);
+        il.system.push_back(boost_.include(boost_types::nvp));
 
     // split free serialisation
     if (is_header && is_serialization)
-        il.system.push_back(boost_split_free);
+        il.system.push_back(boost_.include(boost_types::split_free));
 
     // assume abstract
     if (is_header && is_serialization && p.is_parent())
-        il.system.push_back(boost_assume_abstract);
+        il.system.push_back(boost_.include(boost_types::assume_abstract));
 
     // boost serialisation export
     if (is_header && is_serialization && !p.is_parent())
-        il.system.push_back(boost_export);
+        il.system.push_back(boost_.include(boost_types::serialization_export));
 
     // boost virtual base of
     if (is_header && is_serialization && !p.is_parent() && p.parent_name())
-        il.system.push_back(boost_is_virtual_base_of);
+        il.system.push_back(boost_.include(boost_types::is_virtual_base_of));
 
     // boost archive types
     if (is_implementation && is_serialization) {
         if (!settings_.disable_xml_serialization()) {
-            il.system.push_back(boost_xml_oarchive);
-            il.system.push_back(boost_xml_iarchive);
+            il.system.push_back(boost_.include(boost_types::xml_oarchive));
+            il.system.push_back(boost_.include(boost_types::xml_iarchive));
         }
-        il.system.push_back(boost_text_oarchive);
-        il.system.push_back(boost_text_iarchive);
-        il.system.push_back(boost_binary_oarchive);
-        il.system.push_back(boost_binary_iarchive);
-        il.system.push_back(boost_poly_iarchive);
-        il.system.push_back(boost_poly_oarchive);
+        il.system.push_back(boost_.include(boost_types::text_oarchive));
+        il.system.push_back(boost_.include(boost_types::text_iarchive));
+        il.system.push_back(boost_.include(boost_types::binary_oarchive));
+        il.system.push_back(boost_.include(boost_types::binary_iarchive));
+        il.system.push_back(boost_.include(boost_types::polymorphic_iarchive));
+        il.system.push_back(boost_.include(boost_types::polymorphic_oarchive));
     }
 
     // state saver
     if (is_implementation && io_enabled_ && requires_stream_manipulators &&
         (domain_with_io || io_without_iio))
-        il.system.push_back(state_saver);
+        il.system.push_back(boost_.include(boost_types::io_ios_state));
 
     /*
      * pqxx
@@ -345,6 +320,27 @@ append_implementation_dependencies(const sml::pod& p,
         il.system.push_back(pqxx_transaction_include);
 }
 
+void cpp_inclusion_manager::append_boost_dependencies(
+    const cpp_facet_types ft, const cpp_file_types flt,
+    const dogen::sml::qualified_name& qname,
+    inclusion_lists& il) const {
+
+    /*
+     * boost::shared_ptr
+     */
+    const bool is_header(flt == cpp_file_types::header);
+    const bool is_domain(ft == cpp_facet_types::domain);
+    const bool is_sp(qname.type_name() == boost_.type(boost_types::shared_ptr));
+    if (is_header && is_domain && is_sp)
+        il.system.push_back(boost_.include(boost_types::shared_ptr));
+
+    const bool is_serialization(ft == cpp_facet_types::serialization);
+    const bool is_implementation(flt == cpp_file_types::implementation);
+    if (is_implementation && is_serialization && is_sp)
+        il.system.push_back(
+            boost_.include(boost_types::serialization_shared_ptr));
+}
+
 void cpp_inclusion_manager::append_std_dependencies(
     const cpp_facet_types ft, const cpp_file_types flt,
     const dogen::sml::qualified_name& qname,
@@ -360,11 +356,12 @@ void cpp_inclusion_manager::append_std_dependencies(
 
     const bool is_serialization(ft == cpp_facet_types::serialization);
     const bool is_implementation(flt == cpp_file_types::implementation);
-    if (is_implementation && is_serialization && qname.type_name() == std_string)
-        il.system.push_back(boost_string);
+    const bool is_string(qname.type_name() == std_string);
+    if (is_implementation && is_serialization && is_string)
+        il.system.push_back(boost_.include(boost_types::string));
 
     const bool is_test_data(ft == cpp_facet_types::test_data);
-    if (is_implementation && is_test_data && qname.type_name() == std_string)
+    if (is_implementation && is_test_data && is_string)
         il.system.push_back(sstream);
 
     /*
@@ -373,8 +370,9 @@ void cpp_inclusion_manager::append_std_dependencies(
     if (is_header && is_domain && qname.type_name() == std_vector)
         il.system.push_back(std_vector);
 
-    if (is_implementation && is_serialization && qname.type_name() == std_vector)
-        il.system.push_back(boost_vector);
+    const bool is_vector(qname.type_name() == std_vector);
+    if (is_implementation && is_serialization && is_vector)
+        il.system.push_back(boost_.include(boost_types::vector));
 
     /*
      * std::list
@@ -383,7 +381,7 @@ void cpp_inclusion_manager::append_std_dependencies(
         il.system.push_back(std_list);
 
     if (is_implementation && is_serialization && qname.type_name() == std_list)
-        il.system.push_back(boost_list);
+        il.system.push_back(boost_.include(boost_types::list));
 
     /*
      * std::deque
@@ -392,7 +390,7 @@ void cpp_inclusion_manager::append_std_dependencies(
         il.system.push_back(std_deque);
 
     if (is_implementation && is_serialization && qname.type_name() == std_deque)
-        il.system.push_back(boost_deque);
+        il.system.push_back(boost_.include(boost_types::deque));
 
     /*
      * std::set
@@ -401,7 +399,7 @@ void cpp_inclusion_manager::append_std_dependencies(
         il.system.push_back(std_set);
 
     if (is_implementation && is_serialization && qname.type_name() == std_set)
-        il.system.push_back(boost_set);
+        il.system.push_back(boost_.include(boost_types::set));
 
     /*
      * std::unordered_map
@@ -431,6 +429,9 @@ void cpp_inclusion_manager::append_relationship_dependencies(
         // handle all special models first
         if (n.model_name() == std_model) {
             append_std_dependencies(ft, flt, n, il);
+            continue;
+        } else if (n.model_name() == boost_.model()) {
+            append_boost_dependencies(ft, flt, n, il);
             continue;
         } else if (n.model_name() == primitive_model)
             continue;
@@ -483,7 +484,7 @@ void cpp_inclusion_manager::append_relationship_dependencies(
     for (const auto k : keys) {
         // keys from special models can be ignored
         if (k.model_name() == std_model ||
-            k.model_name() == boost_model ||
+            k.model_name() == boost_.model() ||
             k.model_name() == primitive_model)
             continue;
 
@@ -588,7 +589,7 @@ includes_for_enumeration(const sml::enumeration& e, cpp_facet_types ft,
     // nvp serialisation
     const bool is_serialization(ft == cpp_facet_types::serialization);
     if (is_header && is_serialization && !settings_.disable_xml_serialization())
-        r.system.push_back(boost_nvp);
+        r.system.push_back(boost_.include(boost_types::nvp));
 
     // iosfwd
     const bool is_io(ft == cpp_facet_types::io);
@@ -619,7 +620,7 @@ includes_for_exception(const sml::exception& e, cpp_facet_types ft,
     const bool is_header(flt == cpp_file_types::header);
     const bool is_domain(ft == cpp_facet_types::domain);
     if (is_header && is_domain)
-        r.system.push_back(boost_exception_info);
+        r.system.push_back(boost_.include(boost_types::exception_info));
 
     // string
     if (is_header && is_domain)

@@ -56,6 +56,7 @@ target_link_libraries(${spec_name}
     trivial_association
     enumeration
     std_model
+    boost_model
     utility
     ${LIBXML2_LIBRARIES}
     ${Boost_LIBRARIES}

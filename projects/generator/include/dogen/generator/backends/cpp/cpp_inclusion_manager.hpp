@@ -30,6 +30,7 @@
 #include <string>
 #include <utility>
 #include <boost/filesystem/path.hpp>
+#include "dogen/generator/backends/cpp/boost_model_helper.hpp"
 #include "dogen/sml/domain/category_types.hpp"
 #include "dogen/generator/config/cpp_settings.hpp"
 #include "dogen/sml/domain/meta_types.hpp"
@@ -83,7 +84,8 @@ public:
       io_enabled_(std::move(rhs.io_enabled_)),
       serialization_enabled_(std::move(rhs.serialization_enabled_)),
       hash_enabled_(std::move(rhs.hash_enabled_)),
-      headers_for_facet_(std::move(rhs.headers_for_facet_))  { }
+      headers_for_facet_(std::move(rhs.headers_for_facet_)),
+      boost_(std::move(rhs.boost_)) { }
 
     cpp_inclusion_manager(const sml::model& model,
         const cpp_location_manager& location_manager,
@@ -206,7 +208,17 @@ private:
         const bool requires_stream_manipulators = false) const;
 
     /**
-     * @brief
+     * @brief Handles all dependencies to types in the boost
+     * libraries.
+     */
+    void append_boost_dependencies(
+        const cpp_facet_types ft, const cpp_file_types flt,
+        const dogen::sml::qualified_name& qname,
+        inclusion_lists& il) const;
+
+    /**
+     * @brief Handles all dependencies to types in the standard
+     * library.
      */
     void append_std_dependencies(
         const cpp_facet_types ft, const cpp_file_types flt,
@@ -282,6 +294,7 @@ private:
     const bool serialization_enabled_;
     const bool hash_enabled_;
     std::map<cpp_facet_types, std::list<std::string> > headers_for_facet_;
+    const boost_model_helper boost_;
 };
 
 } } } }

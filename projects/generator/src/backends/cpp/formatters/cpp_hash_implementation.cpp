@@ -38,6 +38,8 @@ const std::string invalid_sequence_container(
     "Sequence containers have exactly one type argument");
 const std::string invalid_associative_container(
     "Associative containers have one or two type arguments");
+const std::string invalid_smart_pointer(
+    "Smart pointers have exactly one type argument");
 const std::string missing_class_view_model(
     "Meta type is pod but class view model is empty");
 const std::string enumeration_view_model_not_supported(
@@ -60,7 +62,10 @@ file_formatter::shared_ptr hash_implementation::create(std::ostream& stream) {
 }
 
 bool hash_implementation::is_hashable(const nested_type_view_model& vm) {
-    return !vm.is_sequence_container() && !vm.is_associative_container();
+    return
+        !vm.is_sequence_container() &&
+        !vm.is_associative_container() &&
+        !vm.is_smart_pointer();
 }
 
 void hash_implementation::combine_function() {
@@ -172,6 +177,40 @@ associative_container_helper(const nested_type_view_model& vm) {
 }
 
 void hash_implementation::
+smart_pointer_helper(const nested_type_view_model& vm) {
+    const auto children(vm.children());
+    if (children.size() != 1)
+        throw generation_failure(invalid_smart_pointer);
+
+    const std::string container_identifiable_type_name(
+        vm.complete_identifiable_name());
+    const std::string container_type_name(vm.complete_name());
+
+    utility_.blank_line();
+    stream_ << indenter_ << "inline std::size_t hash_"
+            << container_identifiable_type_name
+            << "(const " << container_type_name << "& v)";
+
+    utility_.open_scope();
+    {
+        cpp_positive_indenter_scope s(indenter_);
+        stream_ << indenter_ << "std::size_t seed(0);"
+                << std::endl;
+
+        const auto containee(children.front());
+        if (is_hashable(containee)) {
+            stream_ << indenter_ << "combine(seed, *v);" << std::endl;
+        } else {
+            stream_ << indenter_ << "combine(seed, "
+                    << "hash_" << containee.complete_identifiable_name()
+                    << "(*v));" << std::endl;
+        }
+        stream_ << indenter_ << "return seed;" << std::endl;
+    }
+    utility_.close_scope();
+}
+
+void hash_implementation::
 recursive_helper_method_creator(const nested_type_view_model& vm,
     std::unordered_set<std::string>& types_done) {
 
@@ -186,6 +225,8 @@ recursive_helper_method_creator(const nested_type_view_model& vm,
         sequence_container_helper(vm);
     else if (vm.is_associative_container())
         associative_container_helper(vm);
+    else if (vm.is_smart_pointer())
+        smart_pointer_helper(vm);
 
     types_done.insert(vm.complete_identifiable_name());
 }

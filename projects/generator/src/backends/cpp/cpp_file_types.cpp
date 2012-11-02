@@ -27,7 +27,7 @@ namespace {
 const std::string invalid("\"cpp_file_types::invalid\"");
 const std::string header("\"cpp_file_types::header\"");
 const std::string implementation("\"cpp_file_types::implementation\"");
-const std::string error_message("\"Invalid or unexpected file type\"");
+const std::string error_message("Invalid or unexpected file type");
 
 }
 

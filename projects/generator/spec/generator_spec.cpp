@@ -510,6 +510,12 @@ BOOST_AUTO_TEST_CASE(std_model_generates_expected_code) {
     BOOST_CHECK(check_code_generation(t));
 }
 
+BOOST_AUTO_TEST_CASE(boost_model_generates_expected_code) {
+    SETUP_TEST_LOG("boost_model_generates_expected_code");
+    const auto t(dia_sml::input_boost_model_dia());
+    BOOST_CHECK(check_code_generation(t));
+}
+
 BOOST_AUTO_TEST_CASE(package_without_name_model_throws) {
     SETUP_TEST_LOG("package_without_name_model_throws");
     const auto t(dia_sml::input_package_without_name_dia());
