@@ -10,6 +10,13 @@ This file contains all stories that haven't been assigned to a sprint.
 
 Stories that we intend to look at, at some point.
 
+*** Add PFH libraries to packages
+
+At present our packages on windows and OSX don't run because we are
+missing all of the boost, etc dependencies which are not present on
+the OS. On linux is luck of the draw, it may or may nor run. We should
+just add the dependencies to our packages.
+
 *** Create development packages
 
 We need to create packages with header files and shared/static
