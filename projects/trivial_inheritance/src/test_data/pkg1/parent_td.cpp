@@ -18,6 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen/trivial_inheritance/test_data/pkg1/child_td.hpp"
 #include "dogen/trivial_inheritance/test_data/pkg1/parent_td.hpp"
 #include "dogen/trivial_inheritance/test_data/versioned_key_td.hpp"
 
@@ -45,6 +46,10 @@ populate(const unsigned int position, result_type& v) {
     v.versioned_key(create_dogen_trivial_inheritance_versioned_key(position + 1));
 }
 
+parent_generator::result_type*
+parent_generator::create_ptr(const unsigned int position) {
+    return dogen::trivial_inheritance::pkg1::child_generator::create_ptr(position);
+}
 
 
 } } }

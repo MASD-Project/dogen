@@ -342,13 +342,15 @@ create_helper_methods(const class_view_model& vm) {
 
 void generator_implementation::populate_method(const class_view_model& vm) {
     const auto props(vm.properties());
-    if (props.empty())
-        return;
-
     const std::string name(vm.name() + "_generator");
-    stream_ << indenter_ << "void " << name << "::" << std::endl
-            << "populate(const unsigned int position, result_type& v) " ;
 
+    stream_ << indenter_ << "void " << name << "::" << std::endl;
+    if (!props.empty()) {
+        stream_ << "populate(const unsigned int position, result_type& v) " ;
+    } else {
+        stream_ << "populate(const unsigned int /*position*/, "
+                << "result_type& /*v*/) " ;
+    }
     utility_.open_scope();
     {
         cpp_positive_indenter_scope s(indenter_);
@@ -400,6 +402,46 @@ void generator_implementation::create_method(const class_view_model& vm) {
     utility_.close_scope();
 }
 
+void generator_implementation::create_method_ptr(const class_view_model& vm) {
+    auto leaves(vm.leaves());
+    const std::string name(vm.name() + "_generator");
+    stream_ << indenter_ << name << "::result_type*" << std::endl
+            << name << "::create_ptr(const unsigned int position) ";
+
+    utility_.open_scope();
+    {
+        cpp_positive_indenter_scope s(indenter_);
+
+        if (leaves.empty()) {
+            stream_ << indenter_ << vm.name() << "* p = new " << vm.name()
+                    << "();" << std::endl
+                    << indenter_ << name << "::populate(position, *p);"
+                    << std::endl
+                    << indenter_ << "return p;" << std::endl;
+        } else {
+            const auto front(leaves.front());
+            leaves.pop_front();
+            unsigned int i(0);
+            unsigned int total(leaves.size());
+            for (const auto l : leaves) {
+                stream_ << indenter_ << "if ((position % " << total << ") == "
+                        << i++ << ")"
+                        << std::endl;
+                {
+                    cpp_positive_indenter_scope s(indenter_);
+                    stream_ << indenter_ << "return " << l
+                            << "_generator::create_ptr(position);"
+                            << std::endl;
+                }
+            }
+            stream_ << indenter_ << "return " << front
+                    << "_generator::create_ptr(position);"
+                    << std::endl;
+        }
+    }
+    utility_.close_scope();
+}
+
 void generator_implementation::function_operator(const class_view_model& vm) {
     if (vm.is_parent())
         return;
@@ -446,6 +488,7 @@ void generator_implementation::format_class(const file_view_model& vm) {
         populate_method(cvm);
         utility_.blank_line();
         create_method(cvm);
+        create_method_ptr(cvm);
         utility_.blank_line();
         function_operator(cvm);
         utility_.blank_line();

@@ -53,6 +53,12 @@ first_class_generator::create(const unsigned int position) {
     first_class_generator::populate(position, r);
     return r;
 }
+first_class_generator::result_type*
+first_class_generator::create_ptr(const unsigned int position) {
+    first_class* p = new first_class();
+    first_class_generator::populate(position, *p);
+    return p;
+}
 
 first_class_generator::result_type
 first_class_generator::operator()() {

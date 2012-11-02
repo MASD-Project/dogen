@@ -134,6 +134,12 @@ void generator_header::generator_class(const class_view_model& vm) {
                     << utility_.as_member_variable("position") << ";"
                     << std::endl;
         }
+
+        utility_.public_access_specifier();
+        stream_ << indenter_
+                << "static result_type* create_ptr("
+                << "const unsigned int position);"
+                << std::endl;
     }
     stream_ << "};";
 }

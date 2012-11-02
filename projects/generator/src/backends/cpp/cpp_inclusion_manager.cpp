@@ -422,6 +422,7 @@ void cpp_inclusion_manager::append_std_dependencies(
 void cpp_inclusion_manager::append_relationship_dependencies(
     const std::list<dogen::sml::qualified_name>& names,
     const std::list<dogen::sml::qualified_name>& keys,
+    const std::list<dogen::sml::qualified_name>& leaves,
     const cpp_facet_types ft, const cpp_file_types flt,
     const bool is_parent_or_child, inclusion_lists& il) const {
 
@@ -498,6 +499,17 @@ void cpp_inclusion_manager::append_relationship_dependencies(
         const auto main(cpp_aspect_types::main);
         if (!is_primitive && is_header && hash_enabled_ && is_domain)
             il.user.push_back(header_dependency(k, cpp_facet_types::hash, main));
+    }
+
+    for (const auto l : leaves) {
+        /*
+         * rule 6: leaves require generators in test data.
+         */
+        const bool is_implementation(flt == cpp_file_types::implementation);
+        const bool is_td(ft == cpp_facet_types::test_data);
+        const auto main(cpp_aspect_types::main);
+        if (is_implementation && is_td)
+            il.user.push_back(header_dependency(l, ft, main));
     }
 }
 
@@ -650,7 +662,7 @@ includes_for_pod(const sml::pod& pod, cpp_facet_types ft, cpp_file_types flt,
 
     append_versioning_dependencies(ft, flt, at, pod.category_type(), r);
     append_implementation_dependencies(pod, ft, flt, r, rsm);
-    append_relationship_dependencies(names, keys, ft, flt, pc, r);
+    append_relationship_dependencies(names, keys, pod.leaves(), ft, flt, pc, r);
     append_self_dependencies(n, ft, flt, at, n.meta_type(), r);
 
     remove_duplicates(r);

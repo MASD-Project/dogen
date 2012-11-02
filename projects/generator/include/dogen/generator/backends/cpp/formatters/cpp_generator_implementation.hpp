@@ -82,6 +82,7 @@ private:
 private:
     void populate_method(const class_view_model& vm);
     void create_method(const class_view_model& vm);
+    void create_method_ptr(const class_view_model& vm);
     void function_operator(const class_view_model& vm);
     void default_constructor(const class_view_model& vm);
 

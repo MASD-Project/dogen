@@ -28,12 +28,21 @@ namespace trivial_inheritance {
 
 child_of_a_child1_generator::child_of_a_child1_generator() : position_(0) { }
 
+void child_of_a_child1_generator::
+populate(const unsigned int /*position*/, result_type& /*v*/) {
+}
 
 child_of_a_child1_generator::result_type
 child_of_a_child1_generator::create(const unsigned int position) {
     child_of_a_child1 r;
     dogen::trivial_inheritance::third_child_with_members_generator::populate(position, r);
     return r;
+}
+child_of_a_child1_generator::result_type*
+child_of_a_child1_generator::create_ptr(const unsigned int position) {
+    child_of_a_child1* p = new child_of_a_child1();
+    child_of_a_child1_generator::populate(position, *p);
+    return p;
 }
 
 child_of_a_child1_generator::result_type

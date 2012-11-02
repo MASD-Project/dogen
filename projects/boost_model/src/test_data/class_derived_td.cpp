@@ -46,6 +46,12 @@ class_derived_generator::create(const unsigned int position) {
     class_derived_generator::populate(position, r);
     return r;
 }
+class_derived_generator::result_type*
+class_derived_generator::create_ptr(const unsigned int position) {
+    class_derived* p = new class_derived();
+    class_derived_generator::populate(position, *p);
+    return p;
+}
 
 class_derived_generator::result_type
 class_derived_generator::operator()() {

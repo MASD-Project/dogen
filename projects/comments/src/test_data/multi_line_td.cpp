@@ -46,6 +46,12 @@ multi_line_generator::create(const unsigned int position) {
     multi_line_generator::populate(position, r);
     return r;
 }
+multi_line_generator::result_type*
+multi_line_generator::create_ptr(const unsigned int position) {
+    multi_line* p = new multi_line();
+    multi_line_generator::populate(position, *p);
+    return p;
+}
 
 multi_line_generator::result_type
 multi_line_generator::operator()() {

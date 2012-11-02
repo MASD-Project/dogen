@@ -19,6 +19,7 @@
  *
  */
 #include "dogen/boost_model/test_data/class_base_td.hpp"
+#include "dogen/boost_model/test_data/class_derived_td.hpp"
 #include "dogen/boost_model/test_data/versioned_key_td.hpp"
 
 namespace {
@@ -44,6 +45,10 @@ populate(const unsigned int position, result_type& v) {
     v.versioned_key(create_dogen_boost_model_versioned_key(position + 1));
 }
 
+class_base_generator::result_type*
+class_base_generator::create_ptr(const unsigned int position) {
+    return dogen::boost_model::class_derived_generator::create_ptr(position);
+}
 
 
 } }

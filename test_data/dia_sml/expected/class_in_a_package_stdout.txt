@@ -1263,6 +1263,8 @@ public:
 
 private:
     unsigned int position_;
+public:
+    static result_type* create_ptr(const unsigned int position);
 };
 
 } }
@@ -1316,6 +1318,8 @@ public:
 
 private:
     unsigned int position_;
+public:
+    static result_type* create_ptr(const unsigned int position);
 };
 
 }
@@ -1369,6 +1373,8 @@ public:
 
 private:
     unsigned int position_;
+public:
+    static result_type* create_ptr(const unsigned int position);
 };
 
 }
@@ -2194,6 +2200,12 @@ first_class_generator::create(const unsigned int position) {
     first_class_generator::populate(position, r);
     return r;
 }
+first_class_generator::result_type*
+first_class_generator::create_ptr(const unsigned int position) {
+    first_class* p = new first_class();
+    first_class_generator::populate(position, *p);
+    return p;
+}
 
 first_class_generator::result_type
 first_class_generator::operator()() {
@@ -2248,6 +2260,12 @@ unversioned_key_generator::create(const unsigned int position) {
     unversioned_key r;
     unversioned_key_generator::populate(position, r);
     return r;
+}
+unversioned_key_generator::result_type*
+unversioned_key_generator::create_ptr(const unsigned int position) {
+    unversioned_key* p = new unversioned_key();
+    unversioned_key_generator::populate(position, *p);
+    return p;
 }
 
 unversioned_key_generator::result_type
@@ -2304,6 +2322,12 @@ versioned_key_generator::create(const unsigned int position) {
     versioned_key r;
     versioned_key_generator::populate(position, r);
     return r;
+}
+versioned_key_generator::result_type*
+versioned_key_generator::create_ptr(const unsigned int position) {
+    versioned_key* p = new versioned_key();
+    versioned_key_generator::populate(position, *p);
+    return p;
 }
 
 versioned_key_generator::result_type

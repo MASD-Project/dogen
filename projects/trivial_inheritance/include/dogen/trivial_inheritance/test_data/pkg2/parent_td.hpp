@@ -40,6 +40,8 @@ public:
 
 public:
     static void populate(const unsigned int position, result_type& v);
+public:
+    static result_type* create_ptr(const unsigned int position);
 };
 
 } } }

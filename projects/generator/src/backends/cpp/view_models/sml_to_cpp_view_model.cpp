@@ -351,8 +351,7 @@ void sml_dfs_visitor::process_sml_pod(const dogen::sml::pod& pod) {
         std::list<std::string> leaf_name(join_namespaces(l));
         leaf_name.push_back(l.type_name());
         using boost::join;
-        leaves.push_back(to_identifiable_name(
-                join(leaf_name, namespace_separator)));
+        leaves.push_back(join(leaf_name, namespace_separator));
     }
     cvm.leaves(leaves);
     state_->class_view_models_.insert(std::make_pair(name, cvm));

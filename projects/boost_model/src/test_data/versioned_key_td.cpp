@@ -45,6 +45,12 @@ versioned_key_generator::create(const unsigned int position) {
     versioned_key_generator::populate(position, r);
     return r;
 }
+versioned_key_generator::result_type*
+versioned_key_generator::create_ptr(const unsigned int position) {
+    versioned_key* p = new versioned_key();
+    versioned_key_generator::populate(position, *p);
+    return p;
+}
 
 versioned_key_generator::result_type
 versioned_key_generator::operator()() {

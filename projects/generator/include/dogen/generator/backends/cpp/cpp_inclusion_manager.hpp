@@ -236,6 +236,7 @@ private:
     void append_relationship_dependencies(
         const std::list<dogen::sml::qualified_name>& names,
         const std::list<dogen::sml::qualified_name>& keys,
+        const std::list<dogen::sml::qualified_name>& leaves,
         const cpp_facet_types ft, const cpp_file_types flt,
         const bool is_parent_or_child, inclusion_lists& il) const;
 

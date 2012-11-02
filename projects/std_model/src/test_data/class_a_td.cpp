@@ -55,6 +55,12 @@ class_a_generator::create(const unsigned int position) {
     class_a_generator::populate(position, r);
     return r;
 }
+class_a_generator::result_type*
+class_a_generator::create_ptr(const unsigned int position) {
+    class_a* p = new class_a();
+    class_a_generator::populate(position, *p);
+    return p;
+}
 
 class_a_generator::result_type
 class_a_generator::operator()() {

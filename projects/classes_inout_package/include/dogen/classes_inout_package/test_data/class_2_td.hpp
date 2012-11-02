@@ -44,6 +44,8 @@ public:
 
 private:
     unsigned int position_;
+public:
+    static result_type* create_ptr(const unsigned int position);
 };
 
 } }
