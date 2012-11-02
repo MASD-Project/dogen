@@ -181,12 +181,9 @@ smart_pointer_helper(const nested_type_view_model& vm) {
                 << std::endl;
         {
             cpp_positive_indenter_scope s(indenter_);
-            stream_ << indenter_ << "new "
-                    << containee_vm.complete_name()
-                    << "(";
-
-            stream_ << "create_" << containee_identifiable_type_name
-                    << "(position)));" << std::endl;
+            stream_ << indenter_ << "create_"
+                    << containee_identifiable_type_name
+                    << "_ptr(position));" << std::endl;
         }
         stream_ << indenter_ << "return r;" << std::endl;
     }
@@ -196,16 +193,26 @@ smart_pointer_helper(const nested_type_view_model& vm) {
 
 void generator_implementation::
 domain_type_helper(const std::string& identifiable_type_name,
-    const std::string& type_name) {
-    stream_ << indenter_ << type_name << std::endl
+    const std::string& type_name, bool as_pointer) {
+    stream_ << indenter_ << type_name << (as_pointer ? "*" : "")
+            << std::endl
             << "create_" << identifiable_type_name
+            << (as_pointer ? "_ptr" : "")
             << "(const unsigned int position) ";
 
     utility_.open_scope();
     {
         cpp_positive_indenter_scope s(indenter_);
-        stream_ << indenter_ << "return " << type_name
-                << "_generator::create(position);" << std::endl;
+        if (as_pointer) {
+            stream_ << indenter_ << type_name << "* p = new " << type_name
+                    << "();" << std::endl
+                    << indenter_ << type_name
+                    << "_generator::populate(position, *p);" << std::endl
+                    << "return p;" << std::endl;
+        } else {
+            stream_ << indenter_ << "return " << type_name
+                    << "_generator::create(position);" << std::endl;
+        }
     }
     utility_.close_scope();
 }
@@ -275,15 +282,19 @@ int_like_helper(const std::string& identifiable_type_name,
 
 void generator_implementation::
 recursive_helper_method_creator(const nested_type_view_model& vm,
-    std::unordered_set<std::string>& types_done) {
+    std::unordered_set<std::string>& types_done, bool as_pointer) {
     const unsigned int quantity(10);
 
-    if (types_done.find(vm.complete_identifiable_name()) != types_done.end())
+    std::string type_name(vm.complete_identifiable_name());
+    if (as_pointer)
+        type_name += "_ptr";
+
+    if (types_done.find(type_name) != types_done.end())
         return;
 
     const auto children(vm.children());
     for (const auto c : children)
-        recursive_helper_method_creator(c, types_done);
+        recursive_helper_method_creator(c, types_done, vm.is_smart_pointer());
 
     if (vm.is_primitive()) {
         if (vm.is_char_like()) {
@@ -307,11 +318,11 @@ recursive_helper_method_creator(const nested_type_view_model& vm,
             string_helper();
             utility_.blank_line();
         } else {
-            domain_type_helper(vm.identifiable_name(), vm.name());
+            domain_type_helper(vm.identifiable_name(), vm.name(), as_pointer);
             utility_.blank_line();
         }
     }
-    types_done.insert(vm.complete_identifiable_name());
+    types_done.insert(type_name);
 }
 
 void generator_implementation::
@@ -324,8 +335,9 @@ create_helper_methods(const class_view_model& vm) {
     std::unordered_set<std::string> types_done;
 
     utility_.blank_line();
+    const bool as_pointer(false);
     for (const auto p : props)
-        recursive_helper_method_creator(p.type(), types_done);
+        recursive_helper_method_creator(p.type(), types_done, as_pointer);
 }
 
 void generator_implementation::populate_method(const class_view_model& vm) {
