@@ -27,6 +27,7 @@
 
 #include <algorithm>
 #include <boost/shared_ptr.hpp>
+#include <vector>
 #include "dogen/boost_model/domain/class_a.hpp"
 #include "dogen/boost_model/domain/versioned_key.hpp"
 #include "dogen/boost_model/serialization/class_b_fwd_ser.hpp"
@@ -44,6 +45,7 @@ public:
 public:
     class_b(
         const boost::shared_ptr<dogen::boost_model::class_a>& prop_0,
+        const std::vector<boost::shared_ptr<dogen::boost_model::class_a> >& prop_1,
         const dogen::boost_model::versioned_key& versioned_key);
 
 private:
@@ -60,6 +62,14 @@ public:
 
     void prop_0(const boost::shared_ptr<dogen::boost_model::class_a>& v) {
         prop_0_ = v;
+    }
+
+    std::vector<boost::shared_ptr<dogen::boost_model::class_a> > prop_1() const {
+        return prop_1_;
+    }
+
+    void prop_1(const std::vector<boost::shared_ptr<dogen::boost_model::class_a> >& v) {
+        prop_1_ = v;
     }
 
     dogen::boost_model::versioned_key versioned_key() const {
@@ -82,6 +92,7 @@ public:
 
 private:
     boost::shared_ptr<dogen::boost_model::class_a> prop_0_;
+    std::vector<boost::shared_ptr<dogen::boost_model::class_a> > prop_1_;
     dogen::boost_model::versioned_key versioned_key_;
 };
 

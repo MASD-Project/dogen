@@ -36,6 +36,14 @@ create_boost_shared_ptr_dogen_boost_model_class_a(unsigned int position) {
     return r;
 }
 
+std::vector<boost::shared_ptr<dogen::boost_model::class_a> > create_std_vector_boost_shared_ptr_dogen_boost_model_class_a_(unsigned int position) {
+    std::vector<boost::shared_ptr<dogen::boost_model::class_a> > r;
+    for (unsigned int i(0); i < 10; ++i) {
+        r.push_back(create_boost_shared_ptr_dogen_boost_model_class_a(position + i));
+    }
+    return r;
+}
+
 dogen::boost_model::versioned_key
 create_dogen_boost_model_versioned_key(const unsigned int position) {
     return dogen::boost_model::versioned_key_generator::create(position);
@@ -51,7 +59,8 @@ class_b_generator::class_b_generator() : position_(0) { }
 void class_b_generator::
 populate(const unsigned int position, result_type& v) {
     v.prop_0(create_boost_shared_ptr_dogen_boost_model_class_a(position + 0));
-    v.versioned_key(create_dogen_boost_model_versioned_key(position + 1));
+    v.prop_1(create_std_vector_boost_shared_ptr_dogen_boost_model_class_a_(position + 1));
+    v.versioned_key(create_dogen_boost_model_versioned_key(position + 2));
 }
 
 class_b_generator::result_type
