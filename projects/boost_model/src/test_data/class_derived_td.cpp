@@ -18,10 +18,38 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/boost_model/domain/class_a.hpp"
-#include "dogen/boost_model/domain/class_b.hpp"
-#include "dogen/boost_model/domain/class_base.hpp"
-#include "dogen/boost_model/domain/class_derived.hpp"
-#include "dogen/boost_model/domain/pkg1/class_c.hpp"
-#include "dogen/boost_model/domain/unversioned_key.hpp"
-#include "dogen/boost_model/domain/versioned_key.hpp"
+#include "dogen/boost_model/test_data/class_base_td.hpp"
+#include "dogen/boost_model/test_data/class_derived_td.hpp"
+
+namespace {
+
+int create_int(const unsigned int position) {
+    return position;
+}
+
+}
+
+namespace dogen {
+namespace boost_model {
+
+class_derived_generator::class_derived_generator() : position_(0) { }
+
+void class_derived_generator::
+populate(const unsigned int position, result_type& v) {
+    v.prop_1(create_int(position + 0));
+}
+
+class_derived_generator::result_type
+class_derived_generator::create(const unsigned int position) {
+    class_derived r;
+    dogen::boost_model::class_base_generator::populate(position, r);
+    class_derived_generator::populate(position, r);
+    return r;
+}
+
+class_derived_generator::result_type
+class_derived_generator::operator()() {
+    return create(position_++);
+}
+
+} }

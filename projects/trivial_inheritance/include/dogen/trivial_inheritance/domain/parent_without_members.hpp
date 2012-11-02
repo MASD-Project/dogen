@@ -76,7 +76,6 @@ private:
     dogen::trivial_inheritance::versioned_key versioned_key_;
 };
 
-
 inline parent_without_members::~parent_without_members() noexcept { }
 
 } }

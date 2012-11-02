@@ -81,7 +81,6 @@ private:
     unsigned int prop_1_;
 };
 
-
 inline third_child_with_members::~third_child_with_members() noexcept { }
 
 } }

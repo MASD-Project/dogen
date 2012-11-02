@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_TRIVIAL_INHERITANCE_DOMAIN_PKG1_PARENT_HPP
-#define DOGEN_TRIVIAL_INHERITANCE_DOMAIN_PKG1_PARENT_HPP
+#ifndef DOGEN_BOOST_MODEL_DOMAIN_CLASS_BASE_HPP
+#define DOGEN_BOOST_MODEL_DOMAIN_CLASS_BASE_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -27,72 +27,71 @@
 
 #include <algorithm>
 #include <iosfwd>
-#include "dogen/trivial_inheritance/domain/versioned_key.hpp"
-#include "dogen/trivial_inheritance/serialization/pkg1/parent_fwd_ser.hpp"
+#include "dogen/boost_model/domain/versioned_key.hpp"
+#include "dogen/boost_model/serialization/class_base_fwd_ser.hpp"
 
 namespace dogen {
-namespace trivial_inheritance {
-namespace pkg1 {
+namespace boost_model {
 
-class parent {
+class class_base {
 public:
-    parent(const parent&) = default;
-    parent(parent&&) = default;
-
-public:
-    parent();
-
-    virtual ~parent() noexcept = 0;
+    class_base(const class_base&) = default;
+    class_base(class_base&&) = default;
 
 public:
-    parent(
-        const unsigned int prop_0,
-        const dogen::trivial_inheritance::versioned_key& versioned_key);
+    class_base();
+
+    virtual ~class_base() noexcept = 0;
+
+public:
+    class_base(
+        const int prop_0,
+        const dogen::boost_model::versioned_key& versioned_key);
 
 private:
     template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const parent& v, unsigned int version);
+    friend void boost::serialization::save(Archive& ar, const class_base& v, unsigned int version);
 
     template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, parent& v, unsigned int version);
+    friend void boost::serialization::load(Archive& ar, class_base& v, unsigned int version);
 
 public:
     virtual void to_stream(std::ostream& s) const;
 
 public:
-    unsigned int prop_0() const {
+    int prop_0() const {
         return prop_0_;
     }
 
-    void prop_0(const unsigned int v) {
+    void prop_0(const int v) {
         prop_0_ = v;
     }
 
-    dogen::trivial_inheritance::versioned_key versioned_key() const {
+    dogen::boost_model::versioned_key versioned_key() const {
         return versioned_key_;
     }
 
-    void versioned_key(const dogen::trivial_inheritance::versioned_key& v) {
+    void versioned_key(const dogen::boost_model::versioned_key& v) {
         versioned_key_ = v;
     }
 
 protected:
-    bool operator==(const parent& rhs) const;
-    bool operator!=(const parent& rhs) const {
+    bool operator==(const class_base& rhs) const;
+    bool operator!=(const class_base& rhs) const {
         return !this->operator==(rhs);
     }
 
 protected:
-    void swap(parent& other) noexcept;
+    void swap(class_base& other) noexcept;
 
 private:
-    unsigned int prop_0_;
-    dogen::trivial_inheritance::versioned_key versioned_key_;
+    int prop_0_;
+    dogen::boost_model::versioned_key versioned_key_;
 };
 
-inline parent::~parent() noexcept { }
+inline class_base::~class_base() noexcept { }
 
-} } }
+} }
 
 
 

@@ -46,6 +46,7 @@ void cpp_domain_class_implementation::format(const class_view_model& vm) {
     if (!disable_io_)
         to_stream(vm);
     swap(vm);
+    equals_method(vm);
     equals_operator(vm);
     assignment_operator(vm);
 }

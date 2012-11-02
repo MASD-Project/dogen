@@ -18,10 +18,39 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/boost_model/domain/class_a.hpp"
-#include "dogen/boost_model/domain/class_b.hpp"
+#include <ostream>
 #include "dogen/boost_model/domain/class_base.hpp"
-#include "dogen/boost_model/domain/class_derived.hpp"
-#include "dogen/boost_model/domain/pkg1/class_c.hpp"
-#include "dogen/boost_model/domain/unversioned_key.hpp"
-#include "dogen/boost_model/domain/versioned_key.hpp"
+#include "dogen/boost_model/io/versioned_key_io.hpp"
+
+namespace dogen {
+namespace boost_model {
+
+class_base::class_base()
+    : prop_0_(static_cast<int>(0)) { }
+
+class_base::class_base(
+    const int prop_0,
+    const dogen::boost_model::versioned_key& versioned_key)
+    : prop_0_(prop_0),
+      versioned_key_(versioned_key) { }
+
+void class_base::to_stream(std::ostream& s) const {
+    s << " { "
+      << "\"__type__\": " << "\"class_base\"" << ", "
+      << "\"prop_0\": " << prop_0_ << ", "
+      << "\"versioned_key\": " << versioned_key_
+      << " }";
+}
+
+void class_base::swap(class_base& other) noexcept {
+    using std::swap;
+    swap(prop_0_, other.prop_0_);
+    swap(versioned_key_, other.versioned_key_);
+}
+
+bool class_base::operator==(const class_base& rhs) const {
+    return prop_0_ == rhs.prop_0_ &&
+        versioned_key_ == rhs.versioned_key_;
+}
+
+} }

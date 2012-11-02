@@ -73,6 +73,23 @@ create(std::ostream& stream, const bool disable_complete_constructor,
 }
 
 void domain_header::
+equality_operator(const class_view_model& vm) {
+    if (!vm.is_parent())
+        return;
+
+    // FIXME
+    // stream_ << indenter_ << "inline bool operator==(const "
+    //         << vm.name() << "& lhs, const " << vm.name() << "& rhs) ";
+    // utility_.open_scope();
+    // {
+    //     cpp_positive_indenter_scope s(indenter_);
+    //     stream_ << indenter_ << "return lhs.equals(rhs);" << std::endl;
+    // }
+    // utility_.close_scope();
+    // utility_.blank_line();
+}
+
+void domain_header::
 inserter_operator(const class_view_model& vm) {
     if (!use_integrated_io_ || disable_io_)
         return;
@@ -144,13 +161,13 @@ void domain_header::format_main(const sml::category_types ct,
         class_declaration(ct, vm);
 
         if (vm.is_parent()) {
-            utility_.blank_line();
             stream_ << indenter_ << "inline " << vm.name() << "::~"<< vm.name()
                     << "() noexcept { }" << std::endl;
             utility_.blank_line();
         }
 
         inserter_operator(vm);
+        equality_operator(vm);
     }
     utility_.blank_line(2);
 

@@ -69,6 +69,7 @@ public:
 
 private:
     void inserter_operator(const class_view_model& vm);
+    void equality_operator(const class_view_model& vm);
     void swap_method(const class_view_model& vm);
     void class_declaration(const sml::category_types ct,
         const class_view_model& vm);

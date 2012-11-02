@@ -90,7 +90,6 @@ private:
     dogen::trivial_inheritance::versioned_key versioned_key_;
 };
 
-
 inline parent::~parent() noexcept { }
 
 } } }

@@ -20,6 +20,8 @@
  */
 #include "dogen/boost_model/serialization/class_a_ser.hpp"
 #include "dogen/boost_model/serialization/class_b_ser.hpp"
+#include "dogen/boost_model/serialization/class_base_ser.hpp"
+#include "dogen/boost_model/serialization/class_derived_ser.hpp"
 #include "dogen/boost_model/serialization/pkg1/class_c_ser.hpp"
 #include "dogen/boost_model/serialization/unversioned_key_ser.hpp"
 #include "dogen/boost_model/serialization/versioned_key_ser.hpp"

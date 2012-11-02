@@ -245,6 +245,24 @@ void cpp_class_declaration::equality(const class_view_model& vm) {
     }
     utility_.close_scope();
     utility_.blank_line();
+
+    // FIXME:
+    // if (!vm.is_parent() && vm.parents().empty())
+    //     return;
+
+    // utility_.public_access_specifier();
+    // if (vm.is_parent()) {
+    //     stream_ << indenter_
+    //             << "virtual bool equals(const " << vm.name()
+    //             <<  "& other) const = 0;"
+    //             << std::endl;
+    // } else {
+    //     stream_ << indenter_
+    //             << "bool equals(const " << vm.name()
+    //             <<  "& other) const override;"
+    //             << std::endl;
+    // }
+    // utility_.blank_line();
 }
 
 void cpp_class_declaration::to_stream(const class_view_model& vm) {

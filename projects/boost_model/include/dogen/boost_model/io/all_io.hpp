@@ -20,6 +20,8 @@
  */
 #include "dogen/boost_model/io/class_a_io.hpp"
 #include "dogen/boost_model/io/class_b_io.hpp"
+#include "dogen/boost_model/io/class_base_io.hpp"
+#include "dogen/boost_model/io/class_derived_io.hpp"
 #include "dogen/boost_model/io/pkg1/class_c_io.hpp"
 #include "dogen/boost_model/io/unversioned_key_io.hpp"
 #include "dogen/boost_model/io/versioned_key_io.hpp"

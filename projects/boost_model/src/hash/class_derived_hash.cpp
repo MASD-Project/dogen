@@ -18,10 +18,30 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/boost_model/domain/class_a.hpp"
-#include "dogen/boost_model/domain/class_b.hpp"
-#include "dogen/boost_model/domain/class_base.hpp"
-#include "dogen/boost_model/domain/class_derived.hpp"
-#include "dogen/boost_model/domain/pkg1/class_c.hpp"
-#include "dogen/boost_model/domain/unversioned_key.hpp"
-#include "dogen/boost_model/domain/versioned_key.hpp"
+#include "dogen/boost_model/hash/class_base_hash.hpp"
+#include "dogen/boost_model/hash/class_derived_hash.hpp"
+
+namespace {
+
+template <typename HashableType>
+inline void combine(std::size_t& seed, const HashableType& value)
+{
+    std::hash<HashableType> hasher;
+    seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
+}
+
+}
+
+namespace dogen {
+namespace boost_model {
+
+std::size_t class_derived_hasher::hash(const class_derived& v) {
+    std::size_t seed(0);
+
+    combine(seed, dynamic_cast<const dogen::boost_model::class_base&>(v));
+
+    combine(seed, v.prop_1());
+    return seed;
+}
+
+} }

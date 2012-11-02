@@ -20,6 +20,8 @@
  */
 #include "dogen/boost_model/hash/class_a_hash.hpp"
 #include "dogen/boost_model/hash/class_b_hash.hpp"
+#include "dogen/boost_model/hash/class_base_hash.hpp"
+#include "dogen/boost_model/hash/class_derived_hash.hpp"
 #include "dogen/boost_model/hash/pkg1/class_c_hash.hpp"
 #include "dogen/boost_model/hash/unversioned_key_hash.hpp"
 #include "dogen/boost_model/hash/versioned_key_hash.hpp"

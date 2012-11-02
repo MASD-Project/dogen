@@ -57,6 +57,7 @@ protected:
     void complete_constructor(const class_view_model& vm);
     void to_stream(const class_view_model& vm);
     void swap(const class_view_model& vm);
+    void equals_method(const class_view_model& vm);
     void equals_operator(const class_view_model& vm);
     void assignment_operator(const class_view_model& vm);
 

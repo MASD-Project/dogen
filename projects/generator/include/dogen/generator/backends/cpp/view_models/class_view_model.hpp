@@ -180,6 +180,7 @@ private:
     std::list<property_view_model> properties_;
     std::list<property_view_model> all_properties_;
     std::list<parent_view_model> parents_;
+    std::list<std::string> leafs_;
     std::string name_;
     bool has_primitive_properties_;
     bool requires_stream_manipulators_;

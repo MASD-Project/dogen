@@ -18,10 +18,40 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/boost_model/domain/class_a.hpp"
-#include "dogen/boost_model/domain/class_b.hpp"
-#include "dogen/boost_model/domain/class_base.hpp"
+#ifndef DOGEN_BOOST_MODEL_SERIALIZATION_CLASS_DERIVED_SER_HPP
+#define DOGEN_BOOST_MODEL_SERIALIZATION_CLASS_DERIVED_SER_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include <boost/serialization/export.hpp>
+#include <boost/serialization/split_free.hpp>
+#include <boost/type_traits/is_virtual_base_of.hpp>
 #include "dogen/boost_model/domain/class_derived.hpp"
-#include "dogen/boost_model/domain/pkg1/class_c.hpp"
-#include "dogen/boost_model/domain/unversioned_key.hpp"
-#include "dogen/boost_model/domain/versioned_key.hpp"
+
+namespace boost {
+
+template<>struct
+is_virtual_base_of<
+    dogen::boost_model::class_base,
+    dogen::boost_model::class_derived
+> : public mpl::true_ {};
+
+}
+
+BOOST_SERIALIZATION_SPLIT_FREE(dogen::boost_model::class_derived)
+BOOST_CLASS_EXPORT_KEY(dogen::boost_model::class_derived)
+
+namespace boost {
+namespace serialization {
+
+template<typename Archive>
+void save(Archive& ar, const dogen::boost_model::class_derived& v, unsigned int version);
+
+template<typename Archive>
+void load(Archive& ar, dogen::boost_model::class_derived& v, unsigned int version);
+
+} }
+
+#endif
