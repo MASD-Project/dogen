@@ -46,6 +46,8 @@
 #include "dogen/generator/modeling/transformation_error.hpp"
 #include "dogen/sml/utility/identifier_parser.hpp"
 #include "dogen/generator/modeling/dia_object_to_sml_pod.hpp"
+#include "dogen/utility/io/unordered_map_io.hpp"
+#include "dogen/utility/io/list_io.hpp"
 
 namespace {
 
@@ -79,6 +81,7 @@ const std::string empty_dia_object_name("Dia object name is empty");
 const std::string missing_package_for_id("Missing package for dia object ID: ");
 const std::string error_parsing_object_type("Fail to parse object type: ");
 const std::string parent_not_found("Object has a parent but its not defined: ");
+const std::string original_parent_not_found("Pod has no original parent: ");
 const std::string root_vertex_id("root");
 const std::string unexpected_attribute_value_size(
     "Unexpected attribute value size: ");
@@ -137,6 +140,10 @@ private:
         packages_by_id_;
         std::unordered_map<std::string, dogen::sml::qualified_name>
         dia_id_to_qname_;
+        std::unordered_map<dogen::sml::qualified_name,
+                           dogen::sml::qualified_name> original_parent_;
+        std::unordered_map<dogen::sml::qualified_name,
+                           std::list<dogen::sml::qualified_name> > leaves_;
         dogen::sml::utility::identifier_parser parser_;
     };
 
@@ -175,6 +182,12 @@ public:
     std::unordered_map<dogen::sml::qualified_name, dogen::sml::pod>
     pods() const {
         return state_->pods_;
+    }
+
+    std::unordered_map<dogen::sml::qualified_name,
+                       std::list<dogen::sml::qualified_name> >
+    leaves() const {
+        return state_->leaves_;
     }
 
 private:
@@ -400,8 +413,44 @@ void dia_dfs_visitor::process_dia_object(const dogen::dia::object& o) const {
 
     const auto j(state_->parent_ids_.find(o.id()));
     pod.is_parent(j != state_->parent_ids_.end());
-    state_->pods_.insert(std::make_pair(pod.name(), pod));
     state_->dia_id_to_qname_.insert(std::make_pair(o.id(), pod.name()));
+
+    if (!pod.parent_name())
+        state_->original_parent_.insert(std::make_pair(pod.name(), pod.name()));
+    else {
+        const auto k(state_->original_parent_.find(*pod.parent_name()));
+        if (k == state_->original_parent_.end()) {
+            BOOST_LOG_SEV(lg, error) << "Could not find the original parent of "
+                                     << pod.name().type_name();
+            throw transformation_error(original_parent_not_found +
+                pod.name().type_name());
+        }
+        pod.original_parent_name(k->second);
+        state_->original_parent_.insert(std::make_pair(pod.name(), k->second));
+    }
+
+    if (!pod.is_parent() && pod.parent_name()) {
+        auto parent(pod.parent_name());
+        while (parent) {
+            auto k(state_->leaves_.find(*parent));
+            if (k == state_->leaves_.end()) {
+                std::list<dogen::sml::qualified_name> l { pod.name() };
+                state_->leaves_.insert(std::make_pair(*parent, l));
+            } else {
+                k->second.push_back(pod.name());
+            }
+
+            auto j(state_->pods_.find(*parent));
+            if (j == state_->pods_.end()) {
+                BOOST_LOG_SEV(lg, error) << "Could not find the parent of "
+                                         << parent->type_name();
+                throw transformation_error(parent_not_found +
+                    parent->type_name());
+            }
+            parent = j->second.parent_name();
+        }
+    }
+    state_->pods_.insert(std::make_pair(pod.name(), pod));
 }
 
 }
@@ -552,7 +601,16 @@ transform(std::unordered_map<std::string, sml::package> packages) {
     dia_dfs_visitor v(model_name_, external_package_path_, verbose_, is_target_,
         child_to_parent_dia_ids_, parent_dia_ids_, packages);
     boost::depth_first_search(graph_, boost::visitor(v));
-    return v.pods();
+
+    auto pods(v.pods());
+    const auto all_leaves(v.leaves());
+    for (auto i(pods.begin()); i != pods.end(); ++i) {
+        auto j(all_leaves.find(i->first));
+        if (j != all_leaves.end()) {
+            i->second.leaves(j->second);
+        }
+    }
+    return pods;
 }
 
 } } }

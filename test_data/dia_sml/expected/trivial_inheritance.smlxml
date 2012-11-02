@@ -209,7 +209,22 @@
 					</value>
 				</parent_name>
 				<original_parent_name>
-					<initialized>0</initialized>
+					<initialized>1</initialized>
+					<item_version>0</item_version>
+					<value>
+						<model_name>trivial_inheritance</model_name>
+						<external_package_path>
+							<count>0</count>
+							<item_version>0</item_version>
+						</external_package_path>
+						<package_path>
+							<count>1</count>
+							<item_version>0</item_version>
+							<item>pkg1</item>
+						</package_path>
+						<type_name>parent</type_name>
+						<meta_type>2</meta_type>
+					</value>
 				</original_parent_name>
 				<leaves class_id="14" tracking_level="0" version="0">
 					<count>0</count>
@@ -302,7 +317,22 @@
 					</value>
 				</parent_name>
 				<original_parent_name>
-					<initialized>0</initialized>
+					<initialized>1</initialized>
+					<item_version>0</item_version>
+					<value>
+						<model_name>trivial_inheritance</model_name>
+						<external_package_path>
+							<count>0</count>
+							<item_version>0</item_version>
+						</external_package_path>
+						<package_path>
+							<count>1</count>
+							<item_version>0</item_version>
+							<item>pkg2</item>
+						</package_path>
+						<type_name>parent</type_name>
+						<meta_type>2</meta_type>
+					</value>
 				</original_parent_name>
 				<leaves>
 					<count>0</count>
@@ -383,8 +413,22 @@
 					<initialized>0</initialized>
 				</original_parent_name>
 				<leaves>
-					<count>0</count>
+					<count>1</count>
 					<item_version>0</item_version>
+					<item>
+						<model_name>trivial_inheritance</model_name>
+						<external_package_path>
+							<count>0</count>
+							<item_version>0</item_version>
+						</external_package_path>
+						<package_path>
+							<count>1</count>
+							<item_version>0</item_version>
+							<item>pkg1</item>
+						</package_path>
+						<type_name>child</type_name>
+						<meta_type>2</meta_type>
+					</item>
 				</leaves>
 				<generate>1</generate>
 				<is_parent>1</is_parent>
@@ -435,8 +479,21 @@
 					<initialized>0</initialized>
 				</original_parent_name>
 				<leaves>
-					<count>0</count>
+					<count>1</count>
 					<item_version>0</item_version>
+					<item>
+						<model_name>trivial_inheritance</model_name>
+						<external_package_path>
+							<count>0</count>
+							<item_version>0</item_version>
+						</external_package_path>
+						<package_path>
+							<count>0</count>
+							<item_version>0</item_version>
+						</package_path>
+						<type_name>child_without_members</type_name>
+						<meta_type>2</meta_type>
+					</item>
 				</leaves>
 				<generate>1</generate>
 				<is_parent>1</is_parent>
@@ -487,8 +544,22 @@
 					<initialized>0</initialized>
 				</original_parent_name>
 				<leaves>
-					<count>0</count>
+					<count>1</count>
 					<item_version>0</item_version>
+					<item>
+						<model_name>trivial_inheritance</model_name>
+						<external_package_path>
+							<count>0</count>
+							<item_version>0</item_version>
+						</external_package_path>
+						<package_path>
+							<count>1</count>
+							<item_version>0</item_version>
+							<item>pkg4</item>
+						</package_path>
+						<type_name>child</type_name>
+						<meta_type>2</meta_type>
+					</item>
 				</leaves>
 				<generate>1</generate>
 				<is_parent>1</is_parent>
@@ -550,7 +621,21 @@
 					</value>
 				</parent_name>
 				<original_parent_name>
-					<initialized>0</initialized>
+					<initialized>1</initialized>
+					<item_version>0</item_version>
+					<value>
+						<model_name>trivial_inheritance</model_name>
+						<external_package_path>
+							<count>0</count>
+							<item_version>0</item_version>
+						</external_package_path>
+						<package_path>
+							<count>0</count>
+							<item_version>0</item_version>
+						</package_path>
+						<type_name>parent_with_members</type_name>
+						<meta_type>2</meta_type>
+					</value>
 				</original_parent_name>
 				<leaves>
 					<count>0</count>
@@ -618,7 +703,21 @@
 					</value>
 				</parent_name>
 				<original_parent_name>
-					<initialized>0</initialized>
+					<initialized>1</initialized>
+					<item_version>0</item_version>
+					<value>
+						<model_name>trivial_inheritance</model_name>
+						<external_package_path>
+							<count>0</count>
+							<item_version>0</item_version>
+						</external_package_path>
+						<package_path>
+							<count>0</count>
+							<item_version>0</item_version>
+						</package_path>
+						<type_name>parent_outside</type_name>
+						<meta_type>2</meta_type>
+					</value>
 				</original_parent_name>
 				<leaves>
 					<count>0</count>
@@ -708,7 +807,21 @@
 					</value>
 				</parent_name>
 				<original_parent_name>
-					<initialized>0</initialized>
+					<initialized>1</initialized>
+					<item_version>0</item_version>
+					<value>
+						<model_name>trivial_inheritance</model_name>
+						<external_package_path>
+							<count>0</count>
+							<item_version>0</item_version>
+						</external_package_path>
+						<package_path>
+							<count>0</count>
+							<item_version>0</item_version>
+						</package_path>
+						<type_name>parent_with_members</type_name>
+						<meta_type>2</meta_type>
+					</value>
 				</original_parent_name>
 				<leaves>
 					<count>0</count>
@@ -774,7 +887,21 @@
 					</value>
 				</parent_name>
 				<original_parent_name>
-					<initialized>0</initialized>
+					<initialized>1</initialized>
+					<item_version>0</item_version>
+					<value>
+						<model_name>trivial_inheritance</model_name>
+						<external_package_path>
+							<count>0</count>
+							<item_version>0</item_version>
+						</external_package_path>
+						<package_path>
+							<count>0</count>
+							<item_version>0</item_version>
+						</package_path>
+						<type_name>parent_without_members</type_name>
+						<meta_type>2</meta_type>
+					</value>
 				</original_parent_name>
 				<leaves>
 					<count>0</count>
@@ -853,8 +980,47 @@
 					<initialized>0</initialized>
 				</original_parent_name>
 				<leaves>
-					<count>0</count>
+					<count>3</count>
 					<item_version>0</item_version>
+					<item>
+						<model_name>trivial_inheritance</model_name>
+						<external_package_path>
+							<count>0</count>
+							<item_version>0</item_version>
+						</external_package_path>
+						<package_path>
+							<count>0</count>
+							<item_version>0</item_version>
+						</package_path>
+						<type_name>second_child_without_members</type_name>
+						<meta_type>2</meta_type>
+					</item>
+					<item>
+						<model_name>trivial_inheritance</model_name>
+						<external_package_path>
+							<count>0</count>
+							<item_version>0</item_version>
+						</external_package_path>
+						<package_path>
+							<count>0</count>
+							<item_version>0</item_version>
+						</package_path>
+						<type_name>child_of_a_child1</type_name>
+						<meta_type>2</meta_type>
+					</item>
+					<item>
+						<model_name>trivial_inheritance</model_name>
+						<external_package_path>
+							<count>0</count>
+							<item_version>0</item_version>
+						</external_package_path>
+						<package_path>
+							<count>0</count>
+							<item_version>0</item_version>
+						</package_path>
+						<type_name>child_of_a_child2</type_name>
+						<meta_type>2</meta_type>
+					</item>
 				</leaves>
 				<generate>1</generate>
 				<is_parent>1</is_parent>
@@ -916,7 +1082,21 @@
 					</value>
 				</parent_name>
 				<original_parent_name>
-					<initialized>0</initialized>
+					<initialized>1</initialized>
+					<item_version>0</item_version>
+					<value>
+						<model_name>trivial_inheritance</model_name>
+						<external_package_path>
+							<count>0</count>
+							<item_version>0</item_version>
+						</external_package_path>
+						<package_path>
+							<count>0</count>
+							<item_version>0</item_version>
+						</package_path>
+						<type_name>parent_with_members</type_name>
+						<meta_type>2</meta_type>
+					</value>
 				</original_parent_name>
 				<leaves>
 					<count>0</count>
@@ -1006,11 +1186,51 @@
 					</value>
 				</parent_name>
 				<original_parent_name>
-					<initialized>0</initialized>
+					<initialized>1</initialized>
+					<item_version>0</item_version>
+					<value>
+						<model_name>trivial_inheritance</model_name>
+						<external_package_path>
+							<count>0</count>
+							<item_version>0</item_version>
+						</external_package_path>
+						<package_path>
+							<count>0</count>
+							<item_version>0</item_version>
+						</package_path>
+						<type_name>parent_with_members</type_name>
+						<meta_type>2</meta_type>
+					</value>
 				</original_parent_name>
 				<leaves>
-					<count>0</count>
+					<count>2</count>
 					<item_version>0</item_version>
+					<item>
+						<model_name>trivial_inheritance</model_name>
+						<external_package_path>
+							<count>0</count>
+							<item_version>0</item_version>
+						</external_package_path>
+						<package_path>
+							<count>0</count>
+							<item_version>0</item_version>
+						</package_path>
+						<type_name>child_of_a_child1</type_name>
+						<meta_type>2</meta_type>
+					</item>
+					<item>
+						<model_name>trivial_inheritance</model_name>
+						<external_package_path>
+							<count>0</count>
+							<item_version>0</item_version>
+						</external_package_path>
+						<package_path>
+							<count>0</count>
+							<item_version>0</item_version>
+						</package_path>
+						<type_name>child_of_a_child2</type_name>
+						<meta_type>2</meta_type>
+					</item>
 				</leaves>
 				<generate>1</generate>
 				<is_parent>1</is_parent>
@@ -1087,8 +1307,22 @@
 					<initialized>0</initialized>
 				</original_parent_name>
 				<leaves>
-					<count>0</count>
+					<count>1</count>
 					<item_version>0</item_version>
+					<item>
+						<model_name>trivial_inheritance</model_name>
+						<external_package_path>
+							<count>0</count>
+							<item_version>0</item_version>
+						</external_package_path>
+						<package_path>
+							<count>1</count>
+							<item_version>0</item_version>
+							<item>pkg3</item>
+						</package_path>
+						<type_name>child</type_name>
+						<meta_type>2</meta_type>
+					</item>
 				</leaves>
 				<generate>1</generate>
 				<is_parent>1</is_parent>
