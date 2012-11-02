@@ -53,6 +53,24 @@ inline std::ostream& operator<<(std::ostream& s, const std::vector<boost::shared
 
 }
 
+namespace std {
+
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<int, boost::shared_ptr<dogen::boost_model::class_a> >& v) {
+    s << "[";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
+        s << i->first;
+        s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
+        s << i->second;
+        s << " } ]";
+    }
+    s << " ] ";
+    return s;
+}
+
+}
+
 namespace dogen {
 namespace boost_model {
 
@@ -61,6 +79,7 @@ std::ostream& operator<<(std::ostream& s, const class_b& v) {
       << "\"__type__\": " << "\"class_b\"" << ", "
       << "\"prop_0\": " << v.prop_0() << ", "
       << "\"prop_1\": " << v.prop_1() << ", "
+      << "\"prop_2\": " << v.prop_2() << ", "
       << "\"versioned_key\": " << v.versioned_key()
       << " }";
     return(s);

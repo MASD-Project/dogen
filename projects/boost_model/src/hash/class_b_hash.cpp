@@ -45,6 +45,15 @@ inline std::size_t hash_std_vector_boost_shared_ptr_dogen_boost_model_class_a_(c
     return seed;
 }
 
+inline std::size_t hash_std_unordered_map_int_boost_shared_ptr_dogen_boost_model_class_a_(const std::unordered_map<int, boost::shared_ptr<dogen::boost_model::class_a> >& v){
+    std::size_t seed(0);
+    for (const auto i : v) {
+        combine(seed, i.first);
+        combine(seed, hash_boost_shared_ptr_dogen_boost_model_class_a(i.second));
+    }
+    return seed;
+}
+
 }
 
 namespace dogen {
@@ -55,6 +64,7 @@ std::size_t class_b_hasher::hash(const class_b& v) {
 
     combine(seed, hash_boost_shared_ptr_dogen_boost_model_class_a(v.prop_0()));
     combine(seed, hash_std_vector_boost_shared_ptr_dogen_boost_model_class_a_(v.prop_1()));
+    combine(seed, hash_std_unordered_map_int_boost_shared_ptr_dogen_boost_model_class_a_(v.prop_2()));
     combine(seed, v.versioned_key());
 
     return seed;

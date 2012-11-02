@@ -27,6 +27,7 @@
 
 #include <algorithm>
 #include <boost/shared_ptr.hpp>
+#include <unordered_map>
 #include <vector>
 #include "dogen/boost_model/domain/class_a.hpp"
 #include "dogen/boost_model/domain/versioned_key.hpp"
@@ -46,6 +47,7 @@ public:
     class_b(
         const boost::shared_ptr<dogen::boost_model::class_a>& prop_0,
         const std::vector<boost::shared_ptr<dogen::boost_model::class_a> >& prop_1,
+        const std::unordered_map<int, boost::shared_ptr<dogen::boost_model::class_a> >& prop_2,
         const dogen::boost_model::versioned_key& versioned_key);
 
 private:
@@ -72,6 +74,14 @@ public:
         prop_1_ = v;
     }
 
+    std::unordered_map<int, boost::shared_ptr<dogen::boost_model::class_a> > prop_2() const {
+        return prop_2_;
+    }
+
+    void prop_2(const std::unordered_map<int, boost::shared_ptr<dogen::boost_model::class_a> >& v) {
+        prop_2_ = v;
+    }
+
     dogen::boost_model::versioned_key versioned_key() const {
         return versioned_key_;
     }
@@ -93,6 +103,7 @@ public:
 private:
     boost::shared_ptr<dogen::boost_model::class_a> prop_0_;
     std::vector<boost::shared_ptr<dogen::boost_model::class_a> > prop_1_;
+    std::unordered_map<int, boost::shared_ptr<dogen::boost_model::class_a> > prop_2_;
     dogen::boost_model::versioned_key versioned_key_;
 };
 

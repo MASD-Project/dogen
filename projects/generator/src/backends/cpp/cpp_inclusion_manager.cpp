@@ -493,8 +493,10 @@ void cpp_inclusion_manager::append_relationship_dependencies(
          */
         const bool is_header(flt == cpp_file_types::header);
         const bool is_domain(ft == cpp_facet_types::domain);
+        const bool is_primitive(k.meta_type() == sml::meta_types::primitive);
+
         const auto main(cpp_aspect_types::main);
-        if (is_header && hash_enabled_ && is_domain)
+        if (!is_primitive && is_header && hash_enabled_ && is_domain)
             il.user.push_back(header_dependency(k, cpp_facet_types::hash, main));
     }
 }
