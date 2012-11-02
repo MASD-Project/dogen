@@ -48,6 +48,8 @@ public:
         archive & make_nvp("name", value.name_);
         archive & make_nvp("properties", value.properties_);
         archive & make_nvp("parent_name", value.parent_name_);
+        archive & make_nvp("original_parent_name", value.original_parent_name_);
+        archive & make_nvp("leaves", value.leaves_);
         archive & make_nvp("generate", value.generate_);
         archive & make_nvp("is_parent", value.is_parent_);
         archive & make_nvp("category_type", value.category_type_);

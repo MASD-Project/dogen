@@ -116,8 +116,9 @@ BOOST_AUTO_TEST_CASE(exercise_type_and_descendants_io) {
     const unsigned int not_container(false);
     const unsigned int not_smart_ptr(false);
 
-    dogen::sml::pod pod(child_type_name, p, parent_type_name, gen, parent, ct,
-        documentation, no_type_args, not_container, not_container, not_smart_ptr);
+    dogen::sml::pod pod(child_type_name, p, parent_type_name, parent_type_name,
+        std::list<dogen::sml::qualified_name>{}, gen, parent, ct, documentation,
+        no_type_args, not_container, not_container, not_smart_ptr);
     BOOST_LOG_SEV(lg, info) << pod;
     BOOST_CHECK(true);
 }

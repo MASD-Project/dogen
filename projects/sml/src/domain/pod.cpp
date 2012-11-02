@@ -36,6 +36,8 @@ bool pod::operator==(const pod& rhs) const {
         name_ == rhs.name_ &&
         properties_ == rhs.properties_ &&
         parent_name_ == rhs.parent_name_ &&
+        original_parent_name_ == rhs.original_parent_name_ &&
+        leaves_ == rhs.leaves_ &&
         generate_ == rhs.generate_ &&
         is_parent_ == rhs.is_parent_ &&
         category_type_ == rhs.category_type_ &&
@@ -54,6 +56,8 @@ void pod::to_stream(std::ostream& stream) const {
            << name() << ", "
            << "\"properties\":" << properties() << ", "
            << parent_name() << ", "
+           << original_parent_name() << ", "
+           << "\"leaves\":" << leaves() << ", "
            << "\"generate\": " << generate_ << ", "
            << "\"is_parent\": " << is_parent_ << ", "
            << "\"category_type\":" << "\"" << category_type_ << "\", "

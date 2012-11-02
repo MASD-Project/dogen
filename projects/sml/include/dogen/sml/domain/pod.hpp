@@ -67,10 +67,14 @@ public:
      * @param properties list of properties for the pod.
      * @param parent_name qualified name for the pod's parent, if the
      * pod has one.
+     * @param original_parent_name qualified name for the root of the
+     * inheritance tree, if the pod is part of one.
      * @param generate Whether this pod should be code generated or
      * not.
      * @param is_parent If true, this pod is the parent of another pod
      * in this model.
+     * @param leaves All concrete types which are indirectly or
+     * directly derived from this type
      * @param category_type Whether the type is user defined or one of
      * the well known system types.
      * @param documentation the documentation for the pod
@@ -85,12 +89,15 @@ public:
      */
     pod(qualified_name name,
         std::vector<dogen::sml::property> properties,
-        boost::optional<qualified_name> parent_name, bool generate,
+        boost::optional<qualified_name> parent_name,
+        boost::optional<qualified_name> original_parent_name,
+        std::list<qualified_name> leaves, bool generate,
         bool is_parent, category_types category_type,
         const std::string& documentation,
         const unsigned int number_of_type_arguments, bool is_sequence_container,
         bool is_associative_container, bool is_smart_pointer)
         : name_(name), properties_(properties), parent_name_(parent_name),
+          original_parent_name_(original_parent_name), leaves_(leaves),
           generate_(generate), is_parent_(is_parent),
           category_type_(category_type), documentation_(documentation),
           number_of_type_arguments_(number_of_type_arguments),
@@ -101,6 +108,8 @@ public:
     pod(pod&& rhs) : name_(std::move(rhs.name_)),
                      properties_(std::move(rhs.properties_)),
                      parent_name_(std::move(rhs.parent_name_)),
+                     original_parent_name_(std::move(rhs.original_parent_name_)),
+                     leaves_(std::move(rhs.leaves_)),
                      generate_(std::move(rhs.generate_)),
                      is_parent_(std::move(rhs.is_parent_)),
                      category_type_(std::move(rhs.category_type_)),
@@ -141,6 +150,28 @@ public:
     void parent_name(boost::optional<qualified_name> value) {
         parent_name_ = value;
     }
+    /**@}*/
+
+    /**
+     * @brief Qualified name for the root of the inheritance
+     * hierarchy, if the pod is part of one.
+     */
+    /**@{*/
+    boost::optional<qualified_name> original_parent_name() const {
+        return original_parent_name_;
+    }
+    void original_parent_name(boost::optional<qualified_name> v) {
+        original_parent_name_ = v;
+    }
+    /**@}*/
+
+    /**
+     * @brief All concrete types which are indirectly or directly
+     * derived from this type
+     */
+    /**@{*/
+    std::list<qualified_name> leaves() const { return leaves_; }
+    void leaves(std::list<qualified_name> v) { leaves_ = v; }
     /**@}*/
 
     /**
@@ -228,6 +259,8 @@ private:
     qualified_name name_;
     std::vector<dogen::sml::property> properties_;
     boost::optional<qualified_name> parent_name_;
+    boost::optional<qualified_name> original_parent_name_;
+    std::list<qualified_name> leaves_;
     bool generate_;
     bool is_parent_;
     sml::category_types category_type_;
