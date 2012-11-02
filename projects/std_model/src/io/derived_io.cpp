@@ -18,14 +18,17 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/std_model/serialization/base_ser.hpp"
-#include "dogen/std_model/serialization/class_a_ser.hpp"
-#include "dogen/std_model/serialization/class_b_ser.hpp"
-#include "dogen/std_model/serialization/class_d_ser.hpp"
-#include "dogen/std_model/serialization/class_e_ser.hpp"
-#include "dogen/std_model/serialization/class_f_ser.hpp"
-#include "dogen/std_model/serialization/class_g_ser.hpp"
-#include "dogen/std_model/serialization/derived_ser.hpp"
-#include "dogen/std_model/serialization/pkg1/class_c_ser.hpp"
-#include "dogen/std_model/serialization/unversioned_key_ser.hpp"
-#include "dogen/std_model/serialization/versioned_key_ser.hpp"
+#include <ostream>
+#include "dogen/std_model/io/base_io.hpp"
+#include "dogen/std_model/io/derived_io.hpp"
+#include "dogen/std_model/io/pkg1/class_c_io.hpp"
+
+namespace dogen {
+namespace std_model {
+
+std::ostream& operator<<(std::ostream& s, const derived& v) {
+    v.to_stream(s);
+    return(s);
+}
+
+} }

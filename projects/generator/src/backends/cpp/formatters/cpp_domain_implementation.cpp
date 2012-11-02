@@ -127,8 +127,10 @@ recursive_helper_method_creator(const nested_type_view_model& vm,
 }
 
 void domain_implementation::io_helper_methods(const class_view_model& vm) {
-    if ((!use_integrated_io_ || (!vm.is_parent() && vm.parents().empty())) ||
-        disable_io_)
+    const bool has_io(vm.is_parent() || !vm.parents().empty() ||
+        use_integrated_io_);
+
+    if (!has_io  || disable_io_)
         return;
 
     const bool inside_class(false);

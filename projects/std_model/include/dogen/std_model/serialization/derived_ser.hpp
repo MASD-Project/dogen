@@ -18,14 +18,40 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/std_model/domain/base.hpp"
-#include "dogen/std_model/domain/class_a.hpp"
-#include "dogen/std_model/domain/class_b.hpp"
-#include "dogen/std_model/domain/class_d.hpp"
-#include "dogen/std_model/domain/class_e.hpp"
-#include "dogen/std_model/domain/class_f.hpp"
-#include "dogen/std_model/domain/class_g.hpp"
+#ifndef DOGEN_STD_MODEL_SERIALIZATION_DERIVED_SER_HPP
+#define DOGEN_STD_MODEL_SERIALIZATION_DERIVED_SER_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include <boost/serialization/export.hpp>
+#include <boost/serialization/split_free.hpp>
+#include <boost/type_traits/is_virtual_base_of.hpp>
 #include "dogen/std_model/domain/derived.hpp"
-#include "dogen/std_model/domain/pkg1/class_c.hpp"
-#include "dogen/std_model/domain/unversioned_key.hpp"
-#include "dogen/std_model/domain/versioned_key.hpp"
+
+namespace boost {
+
+template<>struct
+is_virtual_base_of<
+    dogen::std_model::base,
+    dogen::std_model::derived
+> : public mpl::true_ {};
+
+}
+
+BOOST_SERIALIZATION_SPLIT_FREE(dogen::std_model::derived)
+BOOST_CLASS_EXPORT_KEY(dogen::std_model::derived)
+
+namespace boost {
+namespace serialization {
+
+template<typename Archive>
+void save(Archive& ar, const dogen::std_model::derived& v, unsigned int version);
+
+template<typename Archive>
+void load(Archive& ar, dogen::std_model::derived& v, unsigned int version);
+
+} }
+
+#endif

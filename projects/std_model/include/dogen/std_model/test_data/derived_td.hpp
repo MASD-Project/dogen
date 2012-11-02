@@ -18,14 +18,34 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/std_model/serialization/base_ser.hpp"
-#include "dogen/std_model/serialization/class_a_ser.hpp"
-#include "dogen/std_model/serialization/class_b_ser.hpp"
-#include "dogen/std_model/serialization/class_d_ser.hpp"
-#include "dogen/std_model/serialization/class_e_ser.hpp"
-#include "dogen/std_model/serialization/class_f_ser.hpp"
-#include "dogen/std_model/serialization/class_g_ser.hpp"
-#include "dogen/std_model/serialization/derived_ser.hpp"
-#include "dogen/std_model/serialization/pkg1/class_c_ser.hpp"
-#include "dogen/std_model/serialization/unversioned_key_ser.hpp"
-#include "dogen/std_model/serialization/versioned_key_ser.hpp"
+#ifndef DOGEN_STD_MODEL_TEST_DATA_DERIVED_TD_HPP
+#define DOGEN_STD_MODEL_TEST_DATA_DERIVED_TD_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include "dogen/std_model/domain/derived.hpp"
+
+namespace dogen {
+namespace std_model {
+
+class derived_generator {
+public:
+    derived_generator();
+
+public:
+    typedef dogen::std_model::derived result_type;
+
+public:
+    static void populate(const unsigned int position, result_type& v);
+    static result_type create(const unsigned int position);
+    result_type operator()();
+
+private:
+    unsigned int position_;
+};
+
+} }
+
+#endif

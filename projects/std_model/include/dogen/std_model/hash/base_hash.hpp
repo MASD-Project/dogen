@@ -18,14 +18,35 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/std_model/serialization/base_ser.hpp"
-#include "dogen/std_model/serialization/class_a_ser.hpp"
-#include "dogen/std_model/serialization/class_b_ser.hpp"
-#include "dogen/std_model/serialization/class_d_ser.hpp"
-#include "dogen/std_model/serialization/class_e_ser.hpp"
-#include "dogen/std_model/serialization/class_f_ser.hpp"
-#include "dogen/std_model/serialization/class_g_ser.hpp"
-#include "dogen/std_model/serialization/derived_ser.hpp"
-#include "dogen/std_model/serialization/pkg1/class_c_ser.hpp"
-#include "dogen/std_model/serialization/unversioned_key_ser.hpp"
-#include "dogen/std_model/serialization/versioned_key_ser.hpp"
+#ifndef DOGEN_STD_MODEL_HASH_BASE_HASH_HPP
+#define DOGEN_STD_MODEL_HASH_BASE_HASH_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include <functional>
+#include "dogen/std_model/domain/base.hpp"
+
+namespace dogen {
+namespace std_model {
+
+class base_hasher {
+public:
+    static std::size_t hash(const base& v);
+};
+
+} }
+
+namespace std {
+
+template<>
+class hash<dogen::std_model::base> {
+public:
+    size_t operator()(const dogen::std_model::base& v) const {
+        return dogen::std_model::base_hasher::hash(v);
+    }
+};
+
+}
+#endif

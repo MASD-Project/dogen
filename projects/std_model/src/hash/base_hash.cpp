@@ -18,14 +18,38 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/std_model/serialization/base_ser.hpp"
-#include "dogen/std_model/serialization/class_a_ser.hpp"
-#include "dogen/std_model/serialization/class_b_ser.hpp"
-#include "dogen/std_model/serialization/class_d_ser.hpp"
-#include "dogen/std_model/serialization/class_e_ser.hpp"
-#include "dogen/std_model/serialization/class_f_ser.hpp"
-#include "dogen/std_model/serialization/class_g_ser.hpp"
-#include "dogen/std_model/serialization/derived_ser.hpp"
-#include "dogen/std_model/serialization/pkg1/class_c_ser.hpp"
-#include "dogen/std_model/serialization/unversioned_key_ser.hpp"
-#include "dogen/std_model/serialization/versioned_key_ser.hpp"
+#include "dogen/std_model/hash/base_hash.hpp"
+#include "dogen/std_model/hash/versioned_key_hash.hpp"
+
+namespace {
+
+template <typename HashableType>
+inline void combine(std::size_t& seed, const HashableType& value)
+{
+    std::hash<HashableType> hasher;
+    seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
+}
+
+inline std::size_t hash_std_vector_std_string(const std::vector<std::string>& v){
+    std::size_t seed(0);
+    for (const auto i : v) {
+        combine(seed, i);
+    }
+    return seed;
+}
+
+}
+
+namespace dogen {
+namespace std_model {
+
+std::size_t base_hasher::hash(const base& v) {
+    std::size_t seed(0);
+
+    combine(seed, hash_std_vector_std_string(v.prop_0()));
+    combine(seed, v.versioned_key());
+
+    return seed;
+}
+
+} }

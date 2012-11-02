@@ -19,13 +19,38 @@
  *
  */
 #include "dogen/std_model/hash/base_hash.hpp"
-#include "dogen/std_model/hash/class_a_hash.hpp"
-#include "dogen/std_model/hash/class_b_hash.hpp"
-#include "dogen/std_model/hash/class_d_hash.hpp"
-#include "dogen/std_model/hash/class_e_hash.hpp"
-#include "dogen/std_model/hash/class_f_hash.hpp"
-#include "dogen/std_model/hash/class_g_hash.hpp"
 #include "dogen/std_model/hash/derived_hash.hpp"
 #include "dogen/std_model/hash/pkg1/class_c_hash.hpp"
-#include "dogen/std_model/hash/unversioned_key_hash.hpp"
-#include "dogen/std_model/hash/versioned_key_hash.hpp"
+
+namespace {
+
+template <typename HashableType>
+inline void combine(std::size_t& seed, const HashableType& value)
+{
+    std::hash<HashableType> hasher;
+    seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
+}
+
+inline std::size_t hash_std_list_dogen_std_model_pkg1_class_c(const std::list<dogen::std_model::pkg1::class_c>& v){
+    std::size_t seed(0);
+    for (const auto i : v) {
+        combine(seed, i);
+    }
+    return seed;
+}
+
+}
+
+namespace dogen {
+namespace std_model {
+
+std::size_t derived_hasher::hash(const derived& v) {
+    std::size_t seed(0);
+
+    combine(seed, dynamic_cast<const dogen::std_model::base&>(v));
+
+    combine(seed, hash_std_list_dogen_std_model_pkg1_class_c(v.prop_1()));
+    return seed;
+}
+
+} }

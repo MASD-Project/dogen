@@ -18,14 +18,29 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/std_model/serialization/base_ser.hpp"
-#include "dogen/std_model/serialization/class_a_ser.hpp"
-#include "dogen/std_model/serialization/class_b_ser.hpp"
-#include "dogen/std_model/serialization/class_d_ser.hpp"
-#include "dogen/std_model/serialization/class_e_ser.hpp"
-#include "dogen/std_model/serialization/class_f_ser.hpp"
-#include "dogen/std_model/serialization/class_g_ser.hpp"
-#include "dogen/std_model/serialization/derived_ser.hpp"
-#include "dogen/std_model/serialization/pkg1/class_c_ser.hpp"
-#include "dogen/std_model/serialization/unversioned_key_ser.hpp"
-#include "dogen/std_model/serialization/versioned_key_ser.hpp"
+#ifndef DOGEN_STD_MODEL_SERIALIZATION_BASE_SER_HPP
+#define DOGEN_STD_MODEL_SERIALIZATION_BASE_SER_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include <boost/serialization/assume_abstract.hpp>
+#include <boost/serialization/split_free.hpp>
+#include "dogen/std_model/domain/base.hpp"
+
+BOOST_SERIALIZATION_SPLIT_FREE(dogen::std_model::base)
+BOOST_SERIALIZATION_ASSUME_ABSTRACT(dogen::std_model::base)
+
+namespace boost {
+namespace serialization {
+
+template<typename Archive>
+void save(Archive& ar, const dogen::std_model::base& v, unsigned int version);
+
+template<typename Archive>
+void load(Archive& ar, dogen::std_model::base& v, unsigned int version);
+
+} }
+
+#endif
