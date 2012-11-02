@@ -42,6 +42,12 @@ void child::swap(child& other) noexcept {
 
 }
 
+bool child::equals(const dogen::trivial_inheritance::parent_outside& other) const {
+    const child* const p(dynamic_cast<const child* const>(&other));
+    if (!p) return false;
+    return *this == *p;
+}
+
 bool child::operator==(const child& rhs) const {
     return parent_outside::operator==(rhs);
 }

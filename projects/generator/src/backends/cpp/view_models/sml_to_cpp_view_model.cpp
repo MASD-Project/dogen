@@ -337,6 +337,24 @@ void sml_dfs_visitor::process_sml_pod(const dogen::sml::pod& pod) {
     cvm.all_properties(all_props_vm);
     cvm.has_primitive_properties(has_primitive_properties);
     cvm.requires_stream_manipulators(requires_stream_manipulators);
+
+    const auto opn(pod.original_parent_name());
+    if (opn) {
+        std::list<std::string> opn_name(join_namespaces(*opn));
+        opn_name.push_back(opn->type_name());
+        using boost::join;
+        cvm.original_parent_name(join(opn_name, namespace_separator));
+    }
+
+    std::list<std::string> leaves;
+    for (const auto l : pod.leaves()) {
+        std::list<std::string> leaf_name(join_namespaces(l));
+        leaf_name.push_back(l.type_name());
+        using boost::join;
+        leaves.push_back(to_identifiable_name(
+                join(leaf_name, namespace_separator)));
+    }
+    cvm.leaves(leaves);
     state_->class_view_models_.insert(std::make_pair(name, cvm));
 }
 

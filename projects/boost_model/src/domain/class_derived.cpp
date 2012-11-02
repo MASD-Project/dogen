@@ -53,6 +53,12 @@ void class_derived::swap(class_derived& other) noexcept {
     swap(prop_1_, other.prop_1_);
 }
 
+bool class_derived::equals(const dogen::boost_model::class_base& other) const {
+    const class_derived* const p(dynamic_cast<const class_derived* const>(&other));
+    if (!p) return false;
+    return *this == *p;
+}
+
 bool class_derived::operator==(const class_derived& rhs) const {
     return class_base::operator==(rhs) &&
         prop_1_ == rhs.prop_1_;

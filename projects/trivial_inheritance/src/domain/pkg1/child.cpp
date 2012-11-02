@@ -54,6 +54,12 @@ void child::swap(child& other) noexcept {
     swap(prop_1_, other.prop_1_);
 }
 
+bool child::equals(const dogen::trivial_inheritance::pkg1::parent& other) const {
+    const child* const p(dynamic_cast<const child* const>(&other));
+    if (!p) return false;
+    return *this == *p;
+}
+
 bool child::operator==(const child& rhs) const {
     return parent::operator==(rhs) &&
         prop_1_ == rhs.prop_1_;

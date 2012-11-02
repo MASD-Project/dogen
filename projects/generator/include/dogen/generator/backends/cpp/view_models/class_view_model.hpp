@@ -175,12 +175,32 @@ public:
     void documentation(const std::string& v) { documentation_ = v; }
     /**@}*/
 
+    /**
+     * @brief Parent at the root of a class hierarchy, if any.
+     */
+    /**@{*/
+    std::string original_parent_name() const { return original_parent_name_; }
+    void original_parent_name(const std::string& v) {
+        original_parent_name_ = v;
+    }
+    /**@}*/
+
+    /**
+     * @brief If the class is abstract, list of concrete types that
+     * descend from it. Names are in identifiable name format.
+     */
+    /**@{*/
+    std::list<std::string> leaves() const { return leaves_; }
+    void leaves(const std::list<std::string>& v) { leaves_ = v; }
+    /**@}*/
+
 private:
     std::list<std::string> namespaces_;
     std::list<property_view_model> properties_;
     std::list<property_view_model> all_properties_;
     std::list<parent_view_model> parents_;
-    std::list<std::string> leafs_;
+    std::string original_parent_name_;
+    std::list<std::string> leaves_;
     std::string name_;
     bool has_primitive_properties_;
     bool requires_stream_manipulators_;

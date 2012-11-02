@@ -59,6 +59,9 @@ public:
     }
 
 public:
+    bool equals(const dogen::trivial_inheritance::parent_without_members& other) const override;
+
+public:
     void swap(child_without_members& other) noexcept;
     child_without_members& operator=(child_without_members other);
 

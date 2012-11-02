@@ -69,6 +69,9 @@ protected:
         return !this->operator==(rhs);
     }
 
+public:
+    virtual bool equals(const parent_outside& other) const = 0;
+
 protected:
     void swap(parent_outside& other) noexcept;
 

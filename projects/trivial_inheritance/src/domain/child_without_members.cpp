@@ -41,6 +41,12 @@ void child_without_members::swap(child_without_members& other) noexcept {
 
 }
 
+bool child_without_members::equals(const dogen::trivial_inheritance::parent_without_members& other) const {
+    const child_without_members* const p(dynamic_cast<const child_without_members* const>(&other));
+    if (!p) return false;
+    return *this == *p;
+}
+
 bool child_without_members::operator==(const child_without_members& rhs) const {
     return parent_without_members::operator==(rhs);
 }

@@ -184,26 +184,25 @@ void cpp_class_implementation::swap(const class_view_model& vm) {
 }
 
 void cpp_class_implementation::equals_method(const class_view_model& vm) {
-    if (!vm.is_parent() && vm.parents().empty())
+    if (vm.is_parent() || vm.parents().empty())
         return;
 
-    // FIXME
-    // stream_ << indenter_ << "bool " << vm.name() << "::equals(const "
-    //         << vm.name() << "& other) const ";
-    // utility_.open_scope();
-    // {
-    //     cpp_positive_indenter_scope s(indenter_);
-    //     stream_ << indenter_ << vm.name()
-    //             << "* p(dynamic_cast<const " << vm.name()
-    //             << "* const>(&other));"
-    //             << std::endl;
-    //     stream_ << indenter_ << "if (!p) return false;"
-    //             << std::endl;
-    //     stream_ << indenter_ << "return *this == *p;"
-    //             << std::endl;
-    // }
-    // utility_.close_scope();
-    // utility_.blank_line();
+    stream_ << indenter_ << "bool " << vm.name() << "::equals(const "
+            << vm.original_parent_name() << "& other) const ";
+    utility_.open_scope();
+    {
+        cpp_positive_indenter_scope s(indenter_);
+        stream_ << indenter_ << "const " << vm.name()
+                << "* const p(dynamic_cast<const " << vm.name()
+                << "* const>(&other));"
+                << std::endl;
+        stream_ << indenter_ << "if (!p) return false;"
+                << std::endl;
+        stream_ << indenter_ << "return *this == *p;"
+                << std::endl;
+    }
+    utility_.close_scope();
+    utility_.blank_line();
 }
 
 void cpp_class_implementation::equals_operator(const class_view_model& vm) {

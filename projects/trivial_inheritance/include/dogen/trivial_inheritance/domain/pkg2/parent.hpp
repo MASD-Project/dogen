@@ -82,6 +82,9 @@ protected:
         return !this->operator==(rhs);
     }
 
+public:
+    virtual bool equals(const parent& other) const = 0;
+
 protected:
     void swap(parent& other) noexcept;
 

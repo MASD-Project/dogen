@@ -44,6 +44,12 @@ void second_child_without_members::swap(second_child_without_members& other) noe
 
 }
 
+bool second_child_without_members::equals(const dogen::trivial_inheritance::parent_with_members& other) const {
+    const second_child_without_members* const p(dynamic_cast<const second_child_without_members* const>(&other));
+    if (!p) return false;
+    return *this == *p;
+}
+
 bool second_child_without_members::operator==(const second_child_without_members& rhs) const {
     return parent_with_members::operator==(rhs);
 }

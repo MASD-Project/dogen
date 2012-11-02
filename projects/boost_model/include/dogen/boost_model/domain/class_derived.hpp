@@ -73,6 +73,9 @@ public:
     }
 
 public:
+    bool equals(const dogen::boost_model::class_base& other) const override;
+
+public:
     void swap(class_derived& other) noexcept;
     class_derived& operator=(class_derived other);
 

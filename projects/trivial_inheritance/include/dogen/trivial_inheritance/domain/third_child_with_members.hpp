@@ -74,6 +74,9 @@ protected:
         return !this->operator==(rhs);
     }
 
+public:
+    virtual bool equals(const dogen::trivial_inheritance::parent_with_members& other) const = 0;
+
 protected:
     void swap(third_child_with_members& other) noexcept;
 

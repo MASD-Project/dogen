@@ -60,6 +60,9 @@ public:
     }
 
 public:
+    bool equals(const dogen::trivial_inheritance::parent_outside& other) const override;
+
+public:
     void swap(child& other) noexcept;
     child& operator=(child other);
 
