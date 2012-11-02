@@ -10,6 +10,11 @@ This file contains all stories that haven't been assigned to a sprint.
 
 Stories that we intend to look at, at some point.
 
+*** Option to validate diagram
+
+It would be nice if one could just check if a dia diagram is valid for
+code generation, e.g. =--validate= or something along those lines.
+
 *** Shared pointers as keys in associative containers
 
 This is not supported; it would require generating the
