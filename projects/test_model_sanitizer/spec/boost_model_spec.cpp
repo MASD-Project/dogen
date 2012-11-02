@@ -45,35 +45,35 @@ BOOST_AUTO_TEST_CASE(validate_equality) {
     SETUP_TEST_LOG("validate_equality");
     test_equality<versioned_key_generator>();
     test_equality<unversioned_key_generator>();
-    // test_equality<class_b_generator>();
+    test_equality<class_b_generator>();
 }
 
 BOOST_AUTO_TEST_CASE(validate_serialisation) {
     SETUP_TEST_LOG("validate_serialisation");
     rountrip_type<versioned_key_generator>();
     rountrip_type<unversioned_key_generator>();
-    // rountrip_type<class_b_generator>();
+    rountrip_type<class_b_generator>();
 }
 
 BOOST_AUTO_TEST_CASE(validate_hashing) {
     SETUP_TEST_LOG("validate_hashing");
     test_hashing<versioned_key_generator>();
     test_hashing<unversioned_key_generator>();
-    // test_hashing<class_b_generator>();
+    test_hashing<class_b_generator>();
 }
 
 BOOST_AUTO_TEST_CASE(validate_swap) {
     SETUP_TEST_LOG("validate_hashing");
     test_swap<versioned_key_generator>();
     test_swap<unversioned_key_generator>();
-    // test_swap<class_b_generator>();
+    test_swap<class_b_generator>();
 }
 
 BOOST_AUTO_TEST_CASE(validate_io) {
     SETUP_TEST_LOG("validate_io");
     test_io<versioned_key_generator>();
     test_io<unversioned_key_generator>();
-    // test_io<class_b_generator>();
+    test_io<class_b_generator>();
 }
 
 BOOST_AUTO_TEST_SUITE_END()

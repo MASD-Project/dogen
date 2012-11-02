@@ -48,6 +48,8 @@ const std::string missing_class_view_model(
     "Meta type is pod but class view model is empty");
 const std::string enumeration_view_model_not_supported(
     "Enumerations do not have an implementation");
+const std::string invalid_smart_pointer(
+    "Smart pointers have exactly one type argument");
 
 const std::string invalid_aspect_type("Invalid value for cpp_aspect_types");
 const std::string invalid_category_type("Invalid value for category_types");
@@ -77,6 +79,51 @@ create(std::ostream& stream, bool disable_complete_constructor,
     bool use_integrated_io, bool disable_io) {
     return file_formatter::shared_ptr(new domain_implementation(stream,
             disable_complete_constructor, use_integrated_io, disable_io));
+}
+
+void domain_implementation::
+smart_pointer_helper(const nested_type_view_model& vm) {
+    const auto children(vm.children());
+    if (children.size() != 1)
+        throw generation_failure(invalid_smart_pointer);
+
+    const auto container(vm);
+    {
+        namespace_helper ns_helper(stream_, container.namespaces());
+
+        utility_.blank_line();
+        stream_ << indenter_ << "inline bool operator=="
+                << "(const " << container.complete_name() << "& lhs,"
+                << std::endl
+                << indenter_ << "const "
+                << container.complete_name() << "& rhs) ";
+
+        utility_.open_scope();
+        {
+            cpp_positive_indenter_scope s(indenter_);
+            stream_ << indenter_ << "return lhs && rhs && (*lhs == *rhs);"
+                    << std::endl;
+        }
+        utility_.close_scope();
+        utility_.blank_line();
+    }
+    utility_.blank_line(2);
+}
+
+void domain_implementation::
+recursive_helper_method_creator(const nested_type_view_model& vm,
+    std::unordered_set<std::string>& types_done) {
+    if (types_done.find(vm.complete_identifiable_name()) != types_done.end())
+        return;
+
+    const auto children(vm.children());
+    for (const auto c : children)
+        recursive_helper_method_creator(c, types_done);
+
+    if (vm.is_smart_pointer())
+        smart_pointer_helper(vm);
+
+    types_done.insert(vm.complete_identifiable_name());
 }
 
 void domain_implementation::io_helper_methods(const class_view_model& vm) {
@@ -146,6 +193,11 @@ void domain_implementation::format_class(const file_view_model& vm) {
 
     const view_models::class_view_model& cvm(*o);
     io_helper_methods(cvm);
+
+    std::unordered_set<std::string> types_done;
+    const auto props(cvm.properties());
+    for (const auto p : props)
+        recursive_helper_method_creator(p.type(), types_done);
 
     namespace_helper ns_helper(stream_, cvm.namespaces());
     utility_.blank_line();

@@ -20,6 +20,15 @@
  */
 #include "dogen/boost_model/domain/class_b.hpp"
 
+namespace boost {
+
+inline bool operator==(const boost::shared_ptr<dogen::boost_model::class_a>& lhs,
+const boost::shared_ptr<dogen::boost_model::class_a>& rhs) {
+    return lhs && rhs && (*lhs == *rhs);
+}
+
+}
+
 namespace dogen {
 namespace boost_model {
 

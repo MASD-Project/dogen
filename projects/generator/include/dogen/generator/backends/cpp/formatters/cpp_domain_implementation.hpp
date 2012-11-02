@@ -26,7 +26,9 @@
 #endif
 
 #include <iosfwd>
+#include <unordered_set>
 #include <boost/filesystem/path.hpp>
+#include "dogen/generator/backends/cpp/view_models/nested_type_view_model.hpp"
 #include "dogen/generator/backends/cpp/view_models/file_view_model.hpp"
 #include "dogen/generator/backends/cpp/formatters/cpp_indenter.hpp"
 #include "dogen/generator/backends/cpp/formatters/cpp_utility.hpp"
@@ -40,6 +42,7 @@ namespace formatters {
 
 class domain_implementation : public file_formatter {
 public:
+    typedef view_models::nested_type_view_model nested_type_view_model;
     typedef view_models::class_view_model class_view_model;
     typedef view_models::file_view_model file_view_model;
 
@@ -57,6 +60,10 @@ public:
     virtual ~domain_implementation() noexcept {}
 
 private:
+    void smart_pointer_helper(const nested_type_view_model& vm);
+    void recursive_helper_method_creator(const nested_type_view_model& vm,
+        std::unordered_set<std::string>& types_done);
+
     void io_helper_methods(const class_view_model& vm);
     void inserter_operator(const class_view_model& vm);
     void class_implementation(const cpp_aspect_types at,
