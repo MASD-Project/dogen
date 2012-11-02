@@ -18,62 +18,40 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/boost_model/domain/class_b.hpp"
-
-namespace boost {
-
-inline bool operator==(const boost::shared_ptr<dogen::boost_model::class_a>& lhs,
-const boost::shared_ptr<dogen::boost_model::class_a>& rhs) {
-    return lhs && rhs && (*lhs == *rhs);
-}
-
-}
-
-namespace boost {
-
-inline bool operator==(const boost::shared_ptr<dogen::boost_model::pkg1::class_c>& lhs,
-const boost::shared_ptr<dogen::boost_model::pkg1::class_c>& rhs) {
-    return lhs && rhs && (*lhs == *rhs);
-}
-
-}
+#include "dogen/boost_model/domain/pkg1/class_c.hpp"
 
 namespace dogen {
 namespace boost_model {
+namespace pkg1 {
 
-class_b::class_b(
-    const boost::shared_ptr<dogen::boost_model::class_a>& prop_0,
-    const std::vector<boost::shared_ptr<dogen::boost_model::class_a> >& prop_1,
-    const std::unordered_map<int, boost::shared_ptr<dogen::boost_model::class_a> >& prop_2,
-    const boost::shared_ptr<dogen::boost_model::pkg1::class_c>& prop_3,
+class_c::class_c()
+    : prop_0_(static_cast<int>(0)) { }
+
+class_c::class_c(
+    const int prop_0,
+    const std::vector<dogen::boost_model::class_a>& prop_1,
     const dogen::boost_model::versioned_key& versioned_key)
     : prop_0_(prop_0),
       prop_1_(prop_1),
-      prop_2_(prop_2),
-      prop_3_(prop_3),
       versioned_key_(versioned_key) { }
 
-void class_b::swap(class_b& other) noexcept {
+void class_c::swap(class_c& other) noexcept {
     using std::swap;
     swap(prop_0_, other.prop_0_);
     swap(prop_1_, other.prop_1_);
-    swap(prop_2_, other.prop_2_);
-    swap(prop_3_, other.prop_3_);
     swap(versioned_key_, other.versioned_key_);
 }
 
-bool class_b::operator==(const class_b& rhs) const {
+bool class_c::operator==(const class_c& rhs) const {
     return prop_0_ == rhs.prop_0_ &&
         prop_1_ == rhs.prop_1_ &&
-        prop_2_ == rhs.prop_2_ &&
-        prop_3_ == rhs.prop_3_ &&
         versioned_key_ == rhs.versioned_key_;
 }
 
-class_b& class_b::operator=(class_b other) {
+class_c& class_c::operator=(class_c other) {
     using std::swap;
     swap(*this, other);
     return *this;
 }
 
-} }
+} } }

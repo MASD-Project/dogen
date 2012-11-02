@@ -19,7 +19,40 @@
  *
  */
 #include "dogen/boost_model/hash/class_a_hash.hpp"
-#include "dogen/boost_model/hash/class_b_hash.hpp"
 #include "dogen/boost_model/hash/pkg1/class_c_hash.hpp"
-#include "dogen/boost_model/hash/unversioned_key_hash.hpp"
 #include "dogen/boost_model/hash/versioned_key_hash.hpp"
+
+namespace {
+
+template <typename HashableType>
+inline void combine(std::size_t& seed, const HashableType& value)
+{
+    std::hash<HashableType> hasher;
+    seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
+}
+
+inline std::size_t hash_std_vector_dogen_boost_model_class_a(const std::vector<dogen::boost_model::class_a>& v){
+    std::size_t seed(0);
+    for (const auto i : v) {
+        combine(seed, i);
+    }
+    return seed;
+}
+
+}
+
+namespace dogen {
+namespace boost_model {
+namespace pkg1 {
+
+std::size_t class_c_hasher::hash(const class_c& v) {
+    std::size_t seed(0);
+
+    combine(seed, v.prop_0());
+    combine(seed, hash_std_vector_dogen_boost_model_class_a(v.prop_1()));
+    combine(seed, v.versioned_key());
+
+    return seed;
+}
+
+} } }

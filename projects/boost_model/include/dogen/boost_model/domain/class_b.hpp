@@ -30,6 +30,7 @@
 #include <unordered_map>
 #include <vector>
 #include "dogen/boost_model/domain/class_a.hpp"
+#include "dogen/boost_model/domain/pkg1/class_c.hpp"
 #include "dogen/boost_model/domain/versioned_key.hpp"
 #include "dogen/boost_model/serialization/class_b_fwd_ser.hpp"
 
@@ -48,6 +49,7 @@ public:
         const boost::shared_ptr<dogen::boost_model::class_a>& prop_0,
         const std::vector<boost::shared_ptr<dogen::boost_model::class_a> >& prop_1,
         const std::unordered_map<int, boost::shared_ptr<dogen::boost_model::class_a> >& prop_2,
+        const boost::shared_ptr<dogen::boost_model::pkg1::class_c>& prop_3,
         const dogen::boost_model::versioned_key& versioned_key);
 
 private:
@@ -82,6 +84,14 @@ public:
         prop_2_ = v;
     }
 
+    boost::shared_ptr<dogen::boost_model::pkg1::class_c> prop_3() const {
+        return prop_3_;
+    }
+
+    void prop_3(const boost::shared_ptr<dogen::boost_model::pkg1::class_c>& v) {
+        prop_3_ = v;
+    }
+
     dogen::boost_model::versioned_key versioned_key() const {
         return versioned_key_;
     }
@@ -104,6 +114,7 @@ private:
     boost::shared_ptr<dogen::boost_model::class_a> prop_0_;
     std::vector<boost::shared_ptr<dogen::boost_model::class_a> > prop_1_;
     std::unordered_map<int, boost::shared_ptr<dogen::boost_model::class_a> > prop_2_;
+    boost::shared_ptr<dogen::boost_model::pkg1::class_c> prop_3_;
     dogen::boost_model::versioned_key versioned_key_;
 };
 

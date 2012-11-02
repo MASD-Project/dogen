@@ -20,6 +20,7 @@
  */
 #include "dogen/boost_model/test_data/class_a_td.hpp"
 #include "dogen/boost_model/test_data/class_b_td.hpp"
+#include "dogen/boost_model/test_data/pkg1/class_c_td.hpp"
 #include "dogen/boost_model/test_data/versioned_key_td.hpp"
 
 namespace {
@@ -56,6 +57,18 @@ std::unordered_map<int, boost::shared_ptr<dogen::boost_model::class_a> > create_
     return r;
 }
 
+dogen::boost_model::pkg1::class_c
+create_dogen_boost_model_pkg1_class_c(const unsigned int position) {
+    return dogen::boost_model::pkg1::class_c_generator::create(position);
+}
+
+boost::shared_ptr<dogen::boost_model::pkg1::class_c>
+create_boost_shared_ptr_dogen_boost_model_pkg1_class_c(unsigned int position) {
+    boost::shared_ptr<dogen::boost_model::pkg1::class_c> r(
+        new dogen::boost_model::pkg1::class_c(create_dogen_boost_model_pkg1_class_c(position)));
+    return r;
+}
+
 dogen::boost_model::versioned_key
 create_dogen_boost_model_versioned_key(const unsigned int position) {
     return dogen::boost_model::versioned_key_generator::create(position);
@@ -73,7 +86,8 @@ populate(const unsigned int position, result_type& v) {
     v.prop_0(create_boost_shared_ptr_dogen_boost_model_class_a(position + 0));
     v.prop_1(create_std_vector_boost_shared_ptr_dogen_boost_model_class_a_(position + 1));
     v.prop_2(create_std_unordered_map_int_boost_shared_ptr_dogen_boost_model_class_a_(position + 2));
-    v.versioned_key(create_dogen_boost_model_versioned_key(position + 3));
+    v.prop_3(create_boost_shared_ptr_dogen_boost_model_pkg1_class_c(position + 3));
+    v.versioned_key(create_dogen_boost_model_versioned_key(position + 4));
 }
 
 class_b_generator::result_type

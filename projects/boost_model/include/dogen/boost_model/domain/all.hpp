@@ -20,5 +20,6 @@
  */
 #include "dogen/boost_model/domain/class_a.hpp"
 #include "dogen/boost_model/domain/class_b.hpp"
+#include "dogen/boost_model/domain/pkg1/class_c.hpp"
 #include "dogen/boost_model/domain/unversioned_key.hpp"
 #include "dogen/boost_model/domain/versioned_key.hpp"

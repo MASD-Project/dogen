@@ -18,8 +18,37 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/boost_model/serialization/class_a_ser.hpp"
-#include "dogen/boost_model/serialization/class_b_ser.hpp"
-#include "dogen/boost_model/serialization/pkg1/class_c_ser.hpp"
-#include "dogen/boost_model/serialization/unversioned_key_ser.hpp"
-#include "dogen/boost_model/serialization/versioned_key_ser.hpp"
+#include <ostream>
+#include "dogen/boost_model/io/class_a_io.hpp"
+#include "dogen/boost_model/io/pkg1/class_c_io.hpp"
+#include "dogen/boost_model/io/versioned_key_io.hpp"
+
+namespace std {
+
+inline std::ostream& operator<<(std::ostream& s, const std::vector<dogen::boost_model::class_a>& v) {
+    s << "[ ";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << *i;
+    }
+    s << "] ";
+    return s;
+}
+
+}
+
+namespace dogen {
+namespace boost_model {
+namespace pkg1 {
+
+std::ostream& operator<<(std::ostream& s, const class_c& v) {
+    s << " { "
+      << "\"__type__\": " << "\"class_c\"" << ", "
+      << "\"prop_0\": " << v.prop_0() << ", "
+      << "\"prop_1\": " << v.prop_1() << ", "
+      << "\"versioned_key\": " << v.versioned_key()
+      << " }";
+    return(s);
+}
+
+} } }

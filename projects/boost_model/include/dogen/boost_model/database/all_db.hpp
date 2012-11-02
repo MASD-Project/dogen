@@ -20,3 +20,4 @@
  */
 #include "dogen/boost_model/database/class_a_db.hpp"
 #include "dogen/boost_model/database/class_b_db.hpp"
+#include "dogen/boost_model/database/pkg1/class_c_db.hpp"

@@ -21,6 +21,7 @@
 #include <ostream>
 #include "dogen/boost_model/io/class_a_io.hpp"
 #include "dogen/boost_model/io/class_b_io.hpp"
+#include "dogen/boost_model/io/pkg1/class_c_io.hpp"
 #include "dogen/boost_model/io/versioned_key_io.hpp"
 
 namespace boost {
@@ -71,6 +72,22 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<int, b
 
 }
 
+namespace boost {
+
+inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<dogen::boost_model::pkg1::class_c>& v) {
+    s << "{ " << "\"__type__\": " << "\"boost::shared_ptr\"" << ", "
+      << "\"memory\": " << "\"" << static_cast<void*>(v.get()) << "\"" << ", ";
+
+    if (v)
+        s << "\"data\": " << *v;
+    else
+        s << "\"data\": ""\"<empty>\"";
+    s<< " }";
+    return s;
+}
+
+}
+
 namespace dogen {
 namespace boost_model {
 
@@ -80,6 +97,7 @@ std::ostream& operator<<(std::ostream& s, const class_b& v) {
       << "\"prop_0\": " << v.prop_0() << ", "
       << "\"prop_1\": " << v.prop_1() << ", "
       << "\"prop_2\": " << v.prop_2() << ", "
+      << "\"prop_3\": " << v.prop_3() << ", "
       << "\"versioned_key\": " << v.versioned_key()
       << " }";
     return(s);

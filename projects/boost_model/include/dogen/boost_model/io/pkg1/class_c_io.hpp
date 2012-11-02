@@ -18,8 +18,24 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/boost_model/serialization/class_a_ser.hpp"
-#include "dogen/boost_model/serialization/class_b_ser.hpp"
-#include "dogen/boost_model/serialization/pkg1/class_c_ser.hpp"
-#include "dogen/boost_model/serialization/unversioned_key_ser.hpp"
-#include "dogen/boost_model/serialization/versioned_key_ser.hpp"
+#ifndef DOGEN_BOOST_MODEL_IO_PKG1_CLASS_C_IO_HPP
+#define DOGEN_BOOST_MODEL_IO_PKG1_CLASS_C_IO_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include <iosfwd>
+#include "dogen/boost_model/domain/pkg1/class_c.hpp"
+
+namespace dogen {
+namespace boost_model {
+namespace pkg1 {
+
+std::ostream&
+operator<<(std::ostream& s,
+     const dogen::boost_model::pkg1::class_c& v);
+
+} } }
+
+#endif
