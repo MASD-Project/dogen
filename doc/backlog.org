@@ -10,6 +10,28 @@ This file contains all stories that haven't been assigned to a sprint.
 
 Stories that we intend to look at, at some point.
 
+*** Shared pointers to primitive types
+
+At present we do not support shared pointers to primitive types. This
+is because they require special handling in serialisation. See:
+
+http://boost.2283326.n4.nabble.com/Serialization-of-boost-shared-ptr-lt-int-gt-td2554242.html
+
+We probably need to iterate through all the nested types and find out
+if there is a shared pointer to primitive; if there is, put in:
+
+#+begin_example
+// defined a "special kind of integer"
+BOOST_STRONG_TYPEDEF(int, tracked_int)
+
+// define serialization for a tracked int
+template<class Archive>
+void serialize(Archive &ar, tracked_int & ti, const unsigned int version){
+    // serialize the underlying int
+    ar & static_cast<int &>(ti);
+}
+#+end_example
+
 *** Create helpers for primitive and std model
 
 We are using literals and ad-hoc constants to describe types from the
