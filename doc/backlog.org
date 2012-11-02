@@ -10,6 +10,12 @@ This file contains all stories that haven't been assigned to a sprint.
 
 Stories that we intend to look at, at some point.
 
+*** Create development packages
+
+We need to create packages with header files and shared/static
+libraries, so that one can write client code without recompiling
+everything.
+
 *** Full constructor parameter comments
 
 We could use the comments in properties to populate the comments for
