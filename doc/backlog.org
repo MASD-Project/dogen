@@ -10,6 +10,14 @@ This file contains all stories that haven't been assigned to a sprint.
 
 Stories that we intend to look at, at some point.
 
+*** Shared pointers as keys in associative containers
+
+This is not supported; it would require generating the
+hashing/comparison infrastructure for shared pointers. Further, as it
+has been pointed out, keys should be immutable; having pointers as
+keys opens the doors to all sorts of problems. We need to throw an
+error at model building time if an user tries to do this.
+
 *** Shared pointers to primitive types
 
 At present we do not support shared pointers to primitive types. This
