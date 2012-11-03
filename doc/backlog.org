@@ -247,6 +247,8 @@ In terms of implementation, all we need to do is to get the string
 with a regular expression into the housekeeping manager and then use
 it to filter the list of files to delete.
 
+We could also have some predefined ignores such as =spec=.
+
 *** Header only models shall not generate projects
 
 A project with just exceptions does not need a make file, and fails to
