@@ -10,6 +10,28 @@ This file contains all stories that haven't been assigned to a sprint.
 
 Stories that we intend to look at, at some point.
 
+*** Support for components and groups
+
+We recently added support for creating multiple packages from a single
+source tree. We need generated models to have a new top-level cmake file:
+
+#+begin_example
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/src)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/spec)
+
+install(
+    DIRECTORY include/
+    DESTINATION include
+    COMPONENT headers
+    FILES_MATCHING PATTERN "*.hpp")
+#+end_example
+
+And the =src= cmake file:
+
+#+begin_example
+install(TARGETS dia ARCHIVE DESTINATION lib COMPONENT libraries)
+#+end_example
+
 *** Option to diff generated code
 
 It would be useful to have an option that would do everything except
