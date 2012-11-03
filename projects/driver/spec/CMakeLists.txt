@@ -64,3 +64,4 @@ add_custom_target(run_driver_spec
 add_dependencies(run_all_specs run_driver_spec)
 
 add_boost_tests(driver ${driver_spec_files})
+install(TARGETS driver_spec RUNTIME DESTINATION bin COMPONENT tests)

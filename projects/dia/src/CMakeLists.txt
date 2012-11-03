@@ -26,3 +26,5 @@ add_library(dia STATIC ${dia_files})
 set_target_properties(dia PROPERTIES OUTPUT_NAME dogen_dia)
 set_target_properties(dia
     PROPERTIES VERSION ${DOGEN_VERSION} SOVERSION ${DOGEN_MAJOR_VERSION})
+
+install(TARGETS dia ARCHIVE DESTINATION lib COMPONENT libraries)

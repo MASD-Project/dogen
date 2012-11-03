@@ -43,3 +43,4 @@ add_custom_target(run_${spec_name}
 add_dependencies(run_all_specs run_${spec_name})
 
 add_boost_tests(${main_name} ${spec_files})
+install(TARGETS ${spec_name} RUNTIME DESTINATION bin COMPONENT tests)

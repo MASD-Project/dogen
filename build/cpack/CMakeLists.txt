@@ -35,6 +35,35 @@ if(NOT DEFINED CPACK_SYSTEM_NAME)
     set(CPACK_SYSTEM_NAME "${CMAKE_SYSTEM_NAME}-${CMAKE_SYSTEM_PROCESSOR}")
 endif()
 
+#
+# Component configuration
+#
+set(CPACK_COMPONENTS_ALL applications libraries headers)
+set(CPACK_COMPONENT_APPLICATIONS_DISPLAY_NAME "Dogen Application")
+set(CPACK_COMPONENT_APPLICATIONS_DESCRIPTION
+    "The Domain Generator - Generates source code for domain driven development.")
+
+set(CPACK_COMPONENT_LIBRARIES_DISPLAY_NAME "Libraries")
+set(CPACK_COMPONENT_LIBRARIES_DESCRIPTION
+   "Static libraries used to build programs using Dogen")
+
+set(CPACK_COMPONENT_HEADERS_DISPLAY_NAME "C++ Headers")
+set(CPACK_COMPONENT_HEADERS_DESCRIPTION
+    "C/C++ header files for use with Dogen libraries")
+
+set(CPACK_COMPONENT_HEADERS_DEPENDS libraries)
+set(CPACK_COMPONENT_APPLICATIONS_GROUP "Runtime")
+set(CPACK_COMPONENT_LIBRARIES_GROUP "Development")
+set(CPACK_COMPONENT_HEADERS_GROUP "Development")
+set(CPACK_COMPONENT_GROUP_DEVELOPMENT_DESCRIPTION
+    "Tools needed to develop applications using Dogen")
+
+set(CPACK_COMPONENTS_IGNORE_GROUPS TRUE)
+set(CPACK_ARCHIVE_COMPONENT_INSTALL TRUE)
+
+#
+# platform specific
+#
 if(WIN32)
     set(CPACK_GENERATOR "NSIS")
     set(CPACK_SOURCE_GENERATOR "ZIP")
@@ -62,6 +91,11 @@ elseif(APPLE)
     set(CPACK_BUNDLE_STARTUP_COMMAND ${stage_dir}/tmp_pkg/macosx/start)
     set(CPACK_PACKAGE_EXECUTABLES "dogen_driver" "Dogen - domain generator")
 
+    set(CPACK_ALL_INSTALL_TYPES Full Developer)
+    set(CPACK_COMPONENT_LIBRARIES_INSTALL_TYPES Developer Full)
+    set(CPACK_COMPONENT_HEADERS_INSTALL_TYPES Developer Full)
+    set(CPACK_COMPONENT_APPLICATIONS_INSTALL_TYPES Full)
+
 elseif(UNIX)
     set(CPACK_STRIP_FILES "")
     set(CPACK_SOURCE_STRIP_FILES "")
@@ -85,20 +119,23 @@ elseif(UNIX)
         set(CPACK_GENERATOR "RPM")
         set(CPACK_RPM_PACKAGE_ARCHITECTURE ${CPACK_PACKAGE_ARCHITECTURE})
         set(CPACK_RPM_PACKAGE_RELEASE "1")
+        set(CPACK_RPM_COMPONENT_INSTALL ON)
     endif()
 
     # For Debian-based distros we want to create DEB packages.
     if("${LSB_DISTRIB}" MATCHES "Ubuntu|Debian")
         make_directory(${stage_dir}/tmp_pkg/debian)
         set(GTK_UPDATE_ICON_CACHE "gtk-update-icon-cache -f -t ${THEME_DIRECTORY}")
-
+        set(CPACK_DEB_PACKAGE_DEBUG "1")
         set(CPACK_GENERATOR "DEB")
+        set(CPACK_DEB_COMPONENT_INSTALL ON)
         set(CPACK_DEBIAN_PACKAGE_MAINTAINER "Kitanda Development Group")
         set(CPACK_SOURCE_GENERATOR "TGZ")
-
         set(CPACK_DEBIAN_PACKAGE_PRIORITY "extra")
         set(CPACK_DEBIAN_PACKAGE_SECTION "devel")
         set(CPACK_DEBIAN_PACKAGE_RECOMMENDS "")
+
+        # set(CPACK_DEBIAN_PACKAGE_SHLIBDEPS TRUE)
 
         # We need to alter the architecture names as per distro rules
         if("${CPACK_PACKAGE_ARCHITECTURE}" MATCHES "i[3-6]86")

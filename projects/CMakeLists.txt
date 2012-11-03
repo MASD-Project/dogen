@@ -178,16 +178,12 @@ include_directories(
 #
 # add all projects
 #
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dia/src)
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dia/spec)
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/sml/src)
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/sml/spec)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dia)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/sml)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/utility/src)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/utility/spec)
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/generator/src)
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/generator/spec)
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/driver/src)
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/driver/spec)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/generator)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/driver)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/test_model_sanitizer/spec)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/prototype/src)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/prototype/spec)

@@ -27,3 +27,5 @@ set_target_properties(utility
     PROPERTIES OUTPUT_NAME dogen_utility)
 set_target_properties(utility
     PROPERTIES VERSION ${DOGEN_VERSION} SOVERSION ${DOGEN_MAJOR_VERSION})
+
+install(TARGETS utility ARCHIVE DESTINATION lib COMPONENT libraries)

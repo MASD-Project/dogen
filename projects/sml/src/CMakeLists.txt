@@ -26,3 +26,5 @@ add_library(sml STATIC ${sml_files})
 set_target_properties(sml PROPERTIES OUTPUT_NAME dogen_sml)
 set_target_properties(sml
     PROPERTIES VERSION ${DOGEN_VERSION} SOVERSION ${DOGEN_MAJOR_VERSION})
+
+install(TARGETS sml ARCHIVE DESTINATION lib COMPONENT libraries)
