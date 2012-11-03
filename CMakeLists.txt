@@ -40,7 +40,7 @@ project(dogen)
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/build/cmake)
 
 # options
-option(WITH_DEBUG "Build the project with debug symbols" on)
+option(WITH_DEBUG "Build the project with debug symbols" off)
 option(WITH_PROFILING "Build the project with profiling support" off)
 
 #

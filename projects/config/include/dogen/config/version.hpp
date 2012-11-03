@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#define DOGEN_VERSION "0.0.18-debug"
+#define DOGEN_VERSION "0.0.18"
 #define DOGEN_MAJOR_VERSION 0
 #define DOGEN_MINOR_VERSION 0
 #define DOGEN_PATCH_VERSION 18
