@@ -10,6 +10,14 @@ This file contains all stories that haven't been assigned to a sprint.
 
 Stories that we intend to look at, at some point.
 
+*** Option to diff generated code
+
+It would be useful to have an option that would do everything except
+writing the files to disk; instead, it would diff them with the
+existing files and report if there are any differences. This would be
+useful to make sure the source code matches the latest version of the
+diagram.
+
 *** Option to validate diagram
 
 It would be nice if one could just check if a dia diagram is valid for
