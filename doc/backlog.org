@@ -105,6 +105,12 @@ missing all of the boost, etc dependencies which are not present on
 the OS. On linux is luck of the draw, it may or may nor run. We should
 just add the dependencies to our packages.
 
+We can do this by simply reading the =PFH_LOCATION= from the
+environment and then doing an =install= command with files pointing to
+the PFH.
+
+http://www.cmake.org/pipermail/cmake/2009-July/030770.html
+
 *** Create development packages
 
 We need to create packages with header files and shared/static
