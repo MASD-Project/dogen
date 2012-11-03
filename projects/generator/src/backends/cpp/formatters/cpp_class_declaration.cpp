@@ -229,22 +229,25 @@ void cpp_class_declaration::member_variables(const class_view_model& vm) {
 
 void cpp_class_declaration::equality(const class_view_model& vm) {
     // equality is only public in leaf classes - MEC++-33
-    if (vm.is_parent())
+    if (vm.is_parent()) {
         utility_.protected_access_specifier();
-    else
+        stream_ << indenter_ << "bool compare(const " << vm.name()
+                <<  "& rhs) const;" << std::endl;
+    } else {
         utility_.public_access_specifier();
 
-    stream_ << indenter_ << "bool operator==(const " << vm.name()
-            <<  "& rhs) const;" << std::endl;
-    stream_ << indenter_ << "bool operator!=(const " << vm.name()
-            << "& rhs) const ";
-    utility_.open_scope();
-    {
-        cpp_positive_indenter_scope s(indenter_);
-        stream_ << indenter_ << "return !this->operator==(rhs);" << std::endl;
+        stream_ << indenter_ << "bool operator==(const " << vm.name()
+                <<  "& rhs) const;" << std::endl;
+        stream_ << indenter_ << "bool operator!=(const " << vm.name()
+                << "& rhs) const ";
+        utility_.open_scope();
+        {
+            cpp_positive_indenter_scope s(indenter_);
+            stream_ << indenter_ << "return !this->operator==(rhs);" << std::endl;
+        }
+        utility_.close_scope();
+        utility_.blank_line();
     }
-    utility_.close_scope();
-    utility_.blank_line();
 
     if (!vm.is_parent() && vm.parents().empty())
         return;

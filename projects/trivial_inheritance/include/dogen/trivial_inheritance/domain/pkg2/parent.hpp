@@ -77,11 +77,7 @@ public:
     }
 
 protected:
-    bool operator==(const parent& rhs) const;
-    bool operator!=(const parent& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    bool compare(const parent& rhs) const;
 public:
     virtual bool equals(const parent& other) const = 0;
 
@@ -94,6 +90,10 @@ private:
 };
 
 inline parent::~parent() noexcept { }
+
+inline bool operator==(const parent& lhs, const parent& rhs) {
+    return lhs.equals(rhs);
+}
 
 } } }
 

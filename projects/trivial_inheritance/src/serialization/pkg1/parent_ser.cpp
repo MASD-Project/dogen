@@ -27,6 +27,7 @@
 #include <boost/archive/xml_iarchive.hpp>
 #include <boost/archive/xml_oarchive.hpp>
 #include <boost/serialization/nvp.hpp>
+#include "dogen/trivial_inheritance/serialization/pkg1/child_ser.hpp"
 #include "dogen/trivial_inheritance/serialization/pkg1/parent_ser.hpp"
 #include "dogen/trivial_inheritance/serialization/versioned_key_ser.hpp"
 
@@ -46,6 +47,7 @@ template<typename Archive>
 void save(Archive& ar,
     const dogen::trivial_inheritance::pkg1::parent& v,
     const unsigned int /*version*/) {
+    ar.template register_type<dogen::trivial_inheritance::pkg1::child>();
     ar << make_nvp("prop_0", v.prop_0_);
     ar << make_nvp("versioned_key", v.versioned_key_);
 }
@@ -54,6 +56,7 @@ template<typename Archive>
 void load(Archive& ar,
     dogen::trivial_inheritance::pkg1::parent& v,
     const unsigned int /*version*/) {
+    ar.template register_type<dogen::trivial_inheritance::pkg1::child>();
     ar >> make_nvp("prop_0", v.prop_0_);
     ar >> make_nvp("versioned_key", v.versioned_key_);
 }

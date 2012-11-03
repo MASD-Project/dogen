@@ -27,6 +27,7 @@
 #include <boost/archive/xml_iarchive.hpp>
 #include <boost/archive/xml_oarchive.hpp>
 #include <boost/serialization/nvp.hpp>
+#include "dogen/trivial_inheritance/serialization/child_without_members_ser.hpp"
 #include "dogen/trivial_inheritance/serialization/parent_without_members_ser.hpp"
 #include "dogen/trivial_inheritance/serialization/versioned_key_ser.hpp"
 
@@ -46,6 +47,7 @@ template<typename Archive>
 void save(Archive& ar,
     const dogen::trivial_inheritance::parent_without_members& v,
     const unsigned int /*version*/) {
+    ar.template register_type<dogen::trivial_inheritance::child_without_members>();
     ar << make_nvp("versioned_key", v.versioned_key_);
 }
 
@@ -53,6 +55,7 @@ template<typename Archive>
 void load(Archive& ar,
     dogen::trivial_inheritance::parent_without_members& v,
     const unsigned int /*version*/) {
+    ar.template register_type<dogen::trivial_inheritance::child_without_members>();
     ar >> make_nvp("versioned_key", v.versioned_key_);
 }
 

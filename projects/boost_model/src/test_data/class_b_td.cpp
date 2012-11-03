@@ -27,9 +27,7 @@ namespace {
 
 dogen::boost_model::class_a*
 create_dogen_boost_model_class_a_ptr(const unsigned int position) {
-    dogen::boost_model::class_a* p = new dogen::boost_model::class_a();
-    dogen::boost_model::class_a_generator::populate(position, *p);
-return p;
+    return dogen::boost_model::class_a_generator::create_ptr(position);
 }
 
 boost::shared_ptr<dogen::boost_model::class_a>
@@ -61,9 +59,7 @@ std::unordered_map<int, boost::shared_ptr<dogen::boost_model::class_a> > create_
 
 dogen::boost_model::pkg1::class_c*
 create_dogen_boost_model_pkg1_class_c_ptr(const unsigned int position) {
-    dogen::boost_model::pkg1::class_c* p = new dogen::boost_model::pkg1::class_c();
-    dogen::boost_model::pkg1::class_c_generator::populate(position, *p);
-return p;
+    return dogen::boost_model::pkg1::class_c_generator::create_ptr(position);
 }
 
 boost::shared_ptr<dogen::boost_model::pkg1::class_c>

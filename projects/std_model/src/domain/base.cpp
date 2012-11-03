@@ -59,7 +59,7 @@ void base::swap(base& other) noexcept {
     swap(versioned_key_, other.versioned_key_);
 }
 
-bool base::operator==(const base& rhs) const {
+bool base::compare(const base& rhs) const {
     return prop_0_ == rhs.prop_0_ &&
         versioned_key_ == rhs.versioned_key_;
 }

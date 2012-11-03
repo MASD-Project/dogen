@@ -28,6 +28,7 @@
 #include <boost/archive/xml_oarchive.hpp>
 #include <boost/serialization/nvp.hpp>
 #include "dogen/boost_model/serialization/class_base_ser.hpp"
+#include "dogen/boost_model/serialization/class_derived_ser.hpp"
 #include "dogen/boost_model/serialization/versioned_key_ser.hpp"
 
 #ifdef __linux__
@@ -46,6 +47,7 @@ template<typename Archive>
 void save(Archive& ar,
     const dogen::boost_model::class_base& v,
     const unsigned int /*version*/) {
+    ar.template register_type<dogen::boost_model::class_derived>();
     ar << make_nvp("prop_0", v.prop_0_);
     ar << make_nvp("versioned_key", v.versioned_key_);
 }
@@ -54,6 +56,7 @@ template<typename Archive>
 void load(Archive& ar,
     dogen::boost_model::class_base& v,
     const unsigned int /*version*/) {
+    ar.template register_type<dogen::boost_model::class_derived>();
     ar >> make_nvp("prop_0", v.prop_0_);
     ar >> make_nvp("versioned_key", v.versioned_key_);
 }

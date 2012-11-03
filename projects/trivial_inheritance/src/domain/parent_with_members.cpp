@@ -48,7 +48,7 @@ void parent_with_members::swap(parent_with_members& other) noexcept {
     swap(versioned_key_, other.versioned_key_);
 }
 
-bool parent_with_members::operator==(const parent_with_members& rhs) const {
+bool parent_with_members::compare(const parent_with_members& rhs) const {
     return prop_0_ == rhs.prop_0_ &&
         versioned_key_ == rhs.versioned_key_;
 }

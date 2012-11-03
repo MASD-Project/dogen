@@ -72,7 +72,7 @@ bool derived::equals(const dogen::std_model::base& other) const {
 }
 
 bool derived::operator==(const derived& rhs) const {
-    return base::operator==(rhs) &&
+    return base::compare(rhs) &&
         prop_1_ == rhs.prop_1_;
 }
 

@@ -206,8 +206,13 @@ void cpp_class_implementation::equals_method(const class_view_model& vm) {
 }
 
 void cpp_class_implementation::equals_operator(const class_view_model& vm) {
-    stream_ << indenter_ << "bool " << vm.name() << "::operator==(const "
-            << vm.name() <<  "& ";
+    if (vm.is_parent()) {
+        stream_ << indenter_ << "bool " << vm.name() << "::compare(const "
+                << vm.name() <<  "& ";
+    } else {
+        stream_ << indenter_ << "bool " << vm.name() << "::operator==(const "
+                << vm.name() <<  "& ";
+    }
 
     if (vm.all_properties().empty())
         stream_ << "/*rhs*/";
@@ -232,7 +237,7 @@ void cpp_class_implementation::equals_operator(const class_view_model& vm) {
                         stream_ << " &&" << std::endl << indenter_;
                     {
                         cpp_positive_indenter_scope s(indenter_);
-                        stream_ << p.name() << "::operator==(rhs)";
+                        stream_ << p.name() << "::compare(rhs)";
                     }
                     is_first = false;
                 }

@@ -30,6 +30,7 @@
 #include <boost/serialization/string.hpp>
 #include <boost/serialization/vector.hpp>
 #include "dogen/std_model/serialization/base_ser.hpp"
+#include "dogen/std_model/serialization/derived_ser.hpp"
 #include "dogen/std_model/serialization/versioned_key_ser.hpp"
 
 #ifdef __linux__
@@ -48,6 +49,7 @@ template<typename Archive>
 void save(Archive& ar,
     const dogen::std_model::base& v,
     const unsigned int /*version*/) {
+    ar.template register_type<dogen::std_model::derived>();
     ar << make_nvp("prop_0", v.prop_0_);
     ar << make_nvp("versioned_key", v.versioned_key_);
 }
@@ -56,6 +58,7 @@ template<typename Archive>
 void load(Archive& ar,
     dogen::std_model::base& v,
     const unsigned int /*version*/) {
+    ar.template register_type<dogen::std_model::derived>();
     ar >> make_nvp("prop_0", v.prop_0_);
     ar >> make_nvp("versioned_key", v.versioned_key_);
 }

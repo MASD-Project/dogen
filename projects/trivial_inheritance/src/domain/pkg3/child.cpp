@@ -61,7 +61,7 @@ bool child::equals(const dogen::trivial_inheritance::pkg2::parent& other) const 
 }
 
 bool child::operator==(const child& rhs) const {
-    return parent::operator==(rhs) &&
+    return parent::compare(rhs) &&
         prop_1_ == rhs.prop_1_;
 }
 

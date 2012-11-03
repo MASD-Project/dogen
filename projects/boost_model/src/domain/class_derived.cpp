@@ -60,7 +60,7 @@ bool class_derived::equals(const dogen::boost_model::class_base& other) const {
 }
 
 bool class_derived::operator==(const class_derived& rhs) const {
-    return class_base::operator==(rhs) &&
+    return class_base::compare(rhs) &&
         prop_1_ == rhs.prop_1_;
 }
 

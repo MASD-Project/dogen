@@ -51,7 +51,7 @@ bool second_child_without_members::equals(const dogen::trivial_inheritance::pare
 }
 
 bool second_child_without_members::operator==(const second_child_without_members& rhs) const {
-    return parent_with_members::operator==(rhs);
+    return parent_with_members::compare(rhs);
 }
 
 second_child_without_members& second_child_without_members::operator=(second_child_without_members other) {

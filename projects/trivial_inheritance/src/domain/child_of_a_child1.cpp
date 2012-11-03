@@ -53,7 +53,7 @@ bool child_of_a_child1::equals(const dogen::trivial_inheritance::parent_with_mem
 }
 
 bool child_of_a_child1::operator==(const child_of_a_child1& rhs) const {
-    return third_child_with_members::operator==(rhs);
+    return third_child_with_members::compare(rhs);
 }
 
 child_of_a_child1& child_of_a_child1::operator=(child_of_a_child1 other) {

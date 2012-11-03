@@ -77,16 +77,15 @@ equality_operator(const class_view_model& vm) {
     if (!vm.is_parent())
         return;
 
-    // FIXME
-    // stream_ << indenter_ << "inline bool operator==(const "
-    //         << vm.name() << "& lhs, const " << vm.name() << "& rhs) ";
-    // utility_.open_scope();
-    // {
-    //     cpp_positive_indenter_scope s(indenter_);
-    //     stream_ << indenter_ << "return lhs.equals(rhs);" << std::endl;
-    // }
-    // utility_.close_scope();
-    // utility_.blank_line();
+    stream_ << indenter_ << "inline bool operator==(const "
+            << vm.name() << "& lhs, const " << vm.name() << "& rhs) ";
+    utility_.open_scope();
+    {
+        cpp_positive_indenter_scope s(indenter_);
+        stream_ << indenter_ << "return lhs.equals(rhs);" << std::endl;
+    }
+    utility_.close_scope();
+    utility_.blank_line();
 }
 
 void domain_header::

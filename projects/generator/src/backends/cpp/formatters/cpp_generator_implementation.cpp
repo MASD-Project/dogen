@@ -204,11 +204,8 @@ domain_type_helper(const std::string& identifiable_type_name,
     {
         cpp_positive_indenter_scope s(indenter_);
         if (as_pointer) {
-            stream_ << indenter_ << type_name << "* p = new " << type_name
-                    << "();" << std::endl
-                    << indenter_ << type_name
-                    << "_generator::populate(position, *p);" << std::endl
-                    << "return p;" << std::endl;
+            stream_ << indenter_ << "return " << type_name
+                    << "_generator::create_ptr(position);" << std::endl;
         } else {
             stream_ << indenter_ << "return " << type_name
                     << "_generator::create(position);" << std::endl;

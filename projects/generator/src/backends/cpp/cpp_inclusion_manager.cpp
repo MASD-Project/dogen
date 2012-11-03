@@ -510,6 +510,14 @@ void cpp_inclusion_manager::append_relationship_dependencies(
         const auto main(cpp_aspect_types::main);
         if (is_implementation && is_td)
             il.user.push_back(header_dependency(l, ft, main));
+
+        /*
+         * rule 7: base classes require registering all leaves in
+         * serialisation implementation.
+         */
+        const bool is_ser(ft == cpp_facet_types::serialization);
+        if (is_implementation && is_ser)
+            il.user.push_back(header_dependency(l, ft, main));
     }
 }
 

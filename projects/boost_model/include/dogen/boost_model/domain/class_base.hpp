@@ -76,11 +76,7 @@ public:
     }
 
 protected:
-    bool operator==(const class_base& rhs) const;
-    bool operator!=(const class_base& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    bool compare(const class_base& rhs) const;
 public:
     virtual bool equals(const class_base& other) const = 0;
 
@@ -93,6 +89,10 @@ private:
 };
 
 inline class_base::~class_base() noexcept { }
+
+inline bool operator==(const class_base& lhs, const class_base& rhs) {
+    return lhs.equals(rhs);
+}
 
 } }
 

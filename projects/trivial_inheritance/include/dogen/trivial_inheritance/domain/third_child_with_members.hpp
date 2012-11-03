@@ -69,11 +69,7 @@ public:
     }
 
 protected:
-    bool operator==(const third_child_with_members& rhs) const;
-    bool operator!=(const third_child_with_members& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    bool compare(const third_child_with_members& rhs) const;
 public:
     virtual bool equals(const dogen::trivial_inheritance::parent_with_members& other) const = 0;
 
@@ -85,6 +81,10 @@ private:
 };
 
 inline third_child_with_members::~third_child_with_members() noexcept { }
+
+inline bool operator==(const third_child_with_members& lhs, const third_child_with_members& rhs) {
+    return lhs.equals(rhs);
+}
 
 } }
 

@@ -64,11 +64,7 @@ public:
     }
 
 protected:
-    bool operator==(const parent_without_members& rhs) const;
-    bool operator!=(const parent_without_members& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    bool compare(const parent_without_members& rhs) const;
 public:
     virtual bool equals(const parent_without_members& other) const = 0;
 
@@ -80,6 +76,10 @@ private:
 };
 
 inline parent_without_members::~parent_without_members() noexcept { }
+
+inline bool operator==(const parent_without_members& lhs, const parent_without_members& rhs) {
+    return lhs.equals(rhs);
+}
 
 } }
 

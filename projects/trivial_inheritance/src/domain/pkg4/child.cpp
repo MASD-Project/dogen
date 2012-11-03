@@ -49,7 +49,7 @@ bool child::equals(const dogen::trivial_inheritance::parent_outside& other) cons
 }
 
 bool child::operator==(const child& rhs) const {
-    return parent_outside::operator==(rhs);
+    return parent_outside::compare(rhs);
 }
 
 child& child::operator=(child other) {

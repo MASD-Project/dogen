@@ -53,8 +53,8 @@ void third_child_with_members::swap(third_child_with_members& other) noexcept {
     swap(prop_1_, other.prop_1_);
 }
 
-bool third_child_with_members::operator==(const third_child_with_members& rhs) const {
-    return parent_with_members::operator==(rhs) &&
+bool third_child_with_members::compare(const third_child_with_members& rhs) const {
+    return parent_with_members::compare(rhs) &&
         prop_1_ == rhs.prop_1_;
 }
 

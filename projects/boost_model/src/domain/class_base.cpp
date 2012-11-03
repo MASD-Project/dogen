@@ -48,7 +48,7 @@ void class_base::swap(class_base& other) noexcept {
     swap(versioned_key_, other.versioned_key_);
 }
 
-bool class_base::operator==(const class_base& rhs) const {
+bool class_base::compare(const class_base& rhs) const {
     return prop_0_ == rhs.prop_0_ &&
         versioned_key_ == rhs.versioned_key_;
 }
