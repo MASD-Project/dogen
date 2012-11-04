@@ -10,6 +10,17 @@ This file contains all stories that haven't been assigned to a sprint.
 
 Stories that we intend to look at, at some point.
 
+*** Add support for serialisation register types
+
+- remove all of the existing export machinery
+- create registrar for each model which registers types
+- create model dependencies, automatically populated
+- use model dependencies to load dependent models and to error if
+  there are missing references
+- add registrar depdendencies based on model dependencies
+- ensure we ignore all system models
+- remove config from source control, move it back to output directory
+
 *** Reduce size of doxygen packages
 
 We need to investigate our doxygen configuration to figure out why our
