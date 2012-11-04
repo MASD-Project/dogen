@@ -723,17 +723,6 @@ build. There should be a FindWinSock somewhere. If not create one.
 At present the modeling director always outputs in XML. it should
 respect the archive type requested by the user.
 
-*** Make code generation decisions based on class hierarchy
-
-- if a class is not part of a class hierarchy, we could define the IO
-  facet externally. If a class is part of a hierarchy we need to have
-  a virtual member function.
-- if a class is part of a hierarchy and marked with a stereotype of
-  =unique= or =shared= we should create a typedef for
-  =boost::unique_ptr= or =boost::shared_ptr= respectively. It should
-  also add a create method.
-- if a class only has primitives we can avoid defining a swap method.
-
 *** Test database deployment
 
 We need to setup a build that deploys all the SQL (tables, procs, etc)
