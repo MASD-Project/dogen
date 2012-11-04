@@ -541,6 +541,10 @@ platform conventions.
 - [[http://cmake.3232098.n2.nabble.com/Automatically-add-a-revision-number-to-the-CPack-installer-name-td7356239.htmlhttp://cmake.3232098.n2.nabble.com/Automatically-add-a-revision-number-to-the-CPack-installer-name-td7356239.html][Automatically add a revision number to the CPack installer name]]
 - [[http://www.cmake.org/Wiki/CMake:CPackConfiguration][CPack Configuration]]
 
+There are some known limitations in package naming:
+
+- http://public.kitware.com/Bug/view.php?id=12997
+
 *** Have licence and copyright information in packages                :story:
 
 We need to copy LICENCE.TXT from the doc directory in the build process
