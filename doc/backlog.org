@@ -718,12 +718,6 @@ name and test suite.
 We did a crud implementation of finding WinSock just to get windows to
 build. There should be a FindWinSock somewhere. If not create one.
 
-*** Create release and debug builds
-
-At present all our builds are have debug symbols and no
-optimisation. We need to setup debug and release builds. We should
-append a post-fix of =-release= and =-debug= to the build name.
-
 *** Modeling director does not support all archive types
 
 At present the modeling director always outputs in XML. it should
