@@ -58,7 +58,7 @@ set(CPACK_COMPONENT_TESTS_DISPLAY_NAME "Dogen unit tests")
 set(CPACK_COMPONENT_TESTS_DESCRIPTION
     "Unit tests used to test Dogen")
 
-set(CPACK_COMPONENT_DOCUMENTATION_DISPLAY_NAME "Dogen unit tests")
+set(CPACK_COMPONENT_DOCUMENTATION_DISPLAY_NAME "Dogen documentation")
 set(CPACK_COMPONENT_DOCUMENTATION_DESCRIPTION
     "Dogen documentation")
 
