@@ -133,7 +133,7 @@ endforeach()
 
 add_library(header_validation STATIC ${header_validation_files})
 set_target_properties(header_validation
-    PROPERTIES OUTPUT_NAME dogen_header_validation)
+    PROPERTIES OUTPUT_NAME dogen_header_validation-${DOGEN_VERSION})
 set_target_properties(header_validation
     PROPERTIES VERSION ${DOGEN_VERSION} SOVERSION ${DOGEN_MAJOR_VERSION})
 
