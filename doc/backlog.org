@@ -10,12 +10,6 @@ This file contains all stories that haven't been assigned to a sprint.
 
 Stories that we intend to look at, at some point.
 
-*** Create packages for doxygen
-
-We need to find a way of creating packages that install files from the
-output directory. The doxygen packages will be very large so its not
-clear they will be uploaded to github.
-
 *** Consider renaming specs to tests
 
 We started using the terminology specs to mean specifications because
