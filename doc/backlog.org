@@ -123,6 +123,17 @@ the PFH.
 
 http://www.cmake.org/pipermail/cmake/2009-July/030770.html
 
+For windows we need (according to dependency walker):
+
+- LIBBOOST_PROGRAM_OPTIONS-MGW47-MT-1_49.DLL
+- LIBBOOST_FILESYSTEM-MGW47-MT-1_49.DLL
+- LIBBOOST_THREAD-MGW47-MT-1_49.DLL
+- LIBBOOST_SERIALIZATION-MGW47-MT-1_49.DLL
+- LIBBOOST_SYSTEM-MGW47-MT-1_49.DLL
+- e:\gtkmm\bin\LIBXML2-2.DLL
+- LIBGCC_S_DW2-1.DLL
+- LIBSTDC++-6.DLL
+
 *** Full constructor parameter comments
 
 We could use the comments in properties to populate the comments for
