@@ -10,6 +10,15 @@ This file contains all stories that haven't been assigned to a sprint.
 
 Stories that we intend to look at, at some point.
 
+*** Reduce size of doxygen packages
+
+We need to investigate our doxygen configuration to figure out why our
+doxygen packages are so large - weighing at 350MB at the moment, they
+are too large to be uploaded to github. We need to find other
+project's doxygen configuration to figure out what we are doing wrong.
+
+The main problem must be related to PNG generation.
+
 *** Consider renaming specs to tests
 
 We started using the terminology specs to mean specifications because
