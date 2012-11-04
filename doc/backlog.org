@@ -103,12 +103,6 @@ the PFH.
 
 http://www.cmake.org/pipermail/cmake/2009-July/030770.html
 
-*** Create development packages
-
-We need to create packages with header files and shared/static
-libraries, so that one can write client code without recompiling
-everything.
-
 *** Full constructor parameter comments
 
 We could use the comments in properties to populate the comments for
