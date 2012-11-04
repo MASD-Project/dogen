@@ -647,6 +647,8 @@ QName is well known. It also allows for better method names such as
 =type_qname= instead of =type_name= where its not obvious that its a
 qualified name rather than a string.
 
+This task is waiting for SML to be code generated.
+
 *** Using boost macro to throw exception
 
 There were some advantages to using =BOOST_THROW_EXCEPTION=, can't quite
