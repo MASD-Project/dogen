@@ -513,6 +513,10 @@ the private ones to public before we do this.
 
 *** Sanity check packages automatically
 
+This work is also covered by tasks in the PFH backlog so update
+accordingly. This task only refers to the dogen specific parts of the
+task.
+
 - sanity check that package installed correctly, e.g. check for a few
   key files.
 - run sanity tests, e.g. create a dogen model and validate the results
