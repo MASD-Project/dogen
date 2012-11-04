@@ -668,6 +668,8 @@ tree:
 - enumeration: child of type.
 - ...
 
+This story is waiting for SML to be code generated.
+
 *** Add an includer for all includers
 
 It would be nice to totally include a model. For that we need an
