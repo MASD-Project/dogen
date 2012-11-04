@@ -23,7 +23,7 @@ file(GLOB_RECURSE sml_files RELATIVE
     "${CMAKE_CURRENT_SOURCE_DIR}/*.cpp")
 
 add_library(sml STATIC ${sml_files})
-set_target_properties(sml PROPERTIES OUTPUT_NAME dogen_sml)
+set_target_properties(sml PROPERTIES OUTPUT_NAME dogen_sml_${DOGEN_VERSION})
 set_target_properties(sml
     PROPERTIES VERSION ${DOGEN_VERSION} SOVERSION ${DOGEN_MAJOR_VERSION})
 

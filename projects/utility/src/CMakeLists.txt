@@ -24,7 +24,7 @@ file(GLOB_RECURSE utility_files RELATIVE
 
 add_library(utility STATIC ${utility_files})
 set_target_properties(utility
-    PROPERTIES OUTPUT_NAME dogen_utility)
+    PROPERTIES OUTPUT_NAME dogen_utility_${DOGEN_VERSION})
 set_target_properties(utility
     PROPERTIES VERSION ${DOGEN_VERSION} SOVERSION ${DOGEN_MAJOR_VERSION})
 

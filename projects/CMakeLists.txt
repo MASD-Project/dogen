@@ -139,13 +139,17 @@ set_target_properties(header_validation
 
 # user includes
 include_directories(
-    ${CMAKE_SOURCE_DIR}/projects/config/include
+    # generated header files
+    ${stage_inc_dir}/
+
+    # real code
     ${CMAKE_SOURCE_DIR}/projects/dia/include
     ${CMAKE_SOURCE_DIR}/projects/sml/include
     ${CMAKE_SOURCE_DIR}/projects/utility/include
     ${CMAKE_SOURCE_DIR}/projects/generator/include
     ${CMAKE_SOURCE_DIR}/projects/driver/include
 
+    # test models
     ${CMAKE_SOURCE_DIR}/projects/all_primitives/include
     ${CMAKE_SOURCE_DIR}/projects/classes_in_a_package/include
     ${CMAKE_SOURCE_DIR}/projects/classes_inout_package/include

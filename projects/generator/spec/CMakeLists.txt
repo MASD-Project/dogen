@@ -23,7 +23,7 @@ file(GLOB_RECURSE generator_spec_files RELATIVE
     "${CMAKE_CURRENT_SOURCE_DIR}/*.cpp")
 
 add_executable(generator_spec ${generator_spec_files})
-set(binary_name "dogen_generator_spec")
+set(binary_name "dogen_generator_spec-${DOGEN_VERSION}")
 set_target_properties(generator_spec PROPERTIES OUTPUT_NAME ${binary_name})
 
 target_link_libraries(generator_spec

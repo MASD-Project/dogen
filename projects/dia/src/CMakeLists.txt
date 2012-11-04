@@ -23,7 +23,7 @@ file(GLOB_RECURSE dia_files RELATIVE
     "${CMAKE_CURRENT_SOURCE_DIR}/*.cpp")
 
 add_library(dia STATIC ${dia_files})
-set_target_properties(dia PROPERTIES OUTPUT_NAME dogen_dia)
+set_target_properties(dia PROPERTIES OUTPUT_NAME dogen_dia_${DOGEN_VERSION})
 set_target_properties(dia
     PROPERTIES VERSION ${DOGEN_VERSION} SOVERSION ${DOGEN_MAJOR_VERSION})
 

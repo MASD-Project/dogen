@@ -103,11 +103,9 @@ if (WIN32)
 endif()
 
 # database
-set(DOGEN_DATABASE_SUPPORT 0)
 find_package(PQXX)
 if(PQXX_FOUND)
     message(STATUS "Found libpqxx...")
-    set(DOGEN_DATABASE_SUPPORT 1)
 else()
     message(FATAL_ERROR "libpqxx not found.")
 endif()
@@ -172,6 +170,7 @@ site_name(DOGEN_SITE)
 set(stage_dir ${CMAKE_BINARY_DIR}/stage)
 set(stage_bin_dir ${CMAKE_BINARY_DIR}/stage/bin)
 set(stage_pkg_dir ${CMAKE_BINARY_DIR}/stage/pkg)
+set(stage_inc_dir ${CMAKE_BINARY_DIR}/stage/include)
 set(stage_test_data_dir ${stage_dir}/test_data)
 set(stage_doxygen_dir ${stage_dir}/doxygen)
 
@@ -183,15 +182,14 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${stage_bin_dir})
 # version info
 set(DOGEN_MAJOR_VERSION 0)
 set(DOGEN_MINOR_VERSION 0)
-set(DOGEN_PATCH_VERSION 18)
-set(DOGEN_COMMIT_COUNT ${GIT_COMMIT_COUNT})
+set(DOGEN_PATCH_VERSION ${GIT_COMMIT_COUNT})
 set(DOGEN_VERSION "${DOGEN_MAJOR_VERSION}")
 set(DOGEN_VERSION "${DOGEN_VERSION}.${DOGEN_MINOR_VERSION}")
 set(DOGEN_VERSION "${DOGEN_VERSION}.${DOGEN_PATCH_VERSION}")
-message(STATUS "Dogen version: ${DOGEN_VERSION}-${DOGEN_COMMIT_COUNT}")
+message(STATUS "Product version: ${DOGEN_VERSION}")
 
 if(WITH_DEBUG)
-    set(DOGEN_VERSION "${DOGEN_VERSION}-debug")
+    set(DOGEN_VERSION "${DOGEN_VERSION}d")
 endif()
 
 # system includes
@@ -234,6 +232,11 @@ add_custom_target(deploy_doxy
     COMMAND ${ssh_executable} git@${server} 'rm -rf ${remote_site}.old'
     )
 add_dependencies(deploy_doxy doxy)
+install(
+    DIRECTORY ${stage_doxygen_dir}/html/
+    DESTINATION share/doc/${DOGEN_VERSION}/
+    COMPONENT documentation
+    )
 
 #
 # aggregate targets

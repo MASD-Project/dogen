@@ -30,7 +30,7 @@ file(GLOB_RECURSE disable_cmakelists_files ABSOLUTE
     "${CMAKE_SOURCE_DIR}/projects/disable_cmakelists/src/*.cpp")
 
 add_executable(${spec_name} ${spec_files} ${disable_cmakelists_files})
-set(binary_name "dogen_${spec_name}")
+set(binary_name "dogen_${spec_name}-${DOGEN_VERSION}")
 set_target_properties(${spec_name} PROPERTIES OUTPUT_NAME ${binary_name})
 
 target_link_libraries(${spec_name}
@@ -71,3 +71,4 @@ add_custom_target(run_${spec_name}
 add_dependencies(run_all_specs run_${spec_name})
 
 add_boost_tests(${main_name} ${spec_files})
+install(TARGETS ${spec_name} RUNTIME DESTINATION bin COMPONENT tests)

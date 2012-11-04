@@ -23,7 +23,7 @@ file(GLOB_RECURSE driver_files RELATIVE
     "${CMAKE_CURRENT_SOURCE_DIR}/*.cpp")
 
 add_executable(driver ${driver_files})
-set(binary_name "dogen_driver")
+set(binary_name "dogen_driver-${DOGEN_VERSION}")
 set_target_properties(driver PROPERTIES OUTPUT_NAME ${binary_name})
 
 target_link_libraries(driver

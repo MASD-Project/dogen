@@ -31,8 +31,6 @@
 #include "dogen/utility/test_data/generate_container.hpp"
 #include "dogen/utility/io/vector_io.hpp"
 
-#ifdef DOGEN_DATABASE_SUPPORT
-
 namespace dogen {
 namespace utility {
 namespace test {
@@ -276,32 +274,5 @@ public:
 };
 
 } } }
-
-#else
-
-namespace dogen {
-namespace utility {
-namespace test {
-
-template<typename Entity, typename Sequence, typename DataExchanger>
-class database {
-public:
-    static void saving_zero_entities_shall_do_nothing() {}
-    static void saving_one_entity_shall_increment_revision() {}
-    static void saving_n_entities_shall_increment_revision() {}
-    static void saving_with_wrong_version_shall_fail() {}
-    static void loading_by_existing_key_shall_load_one_entity() {}
-    static void loading_by_non_existing_key_shall_load_zero_entities() {}
-    static void loading_all_when_none_exist_shall_load_zero_entities() {}
-    static void erasing_all_when_none_exist_shall_do_nothing() {}
-    static void roundtrip_shall_produce_equal_entities() {}
-    static void loading_entity_by_key_shall_be_supported() {}
-    static void erasing_entity_by_key_shall_be_supported() {}
-    static void erasing_all_entities_shall_be_supported() {}
-};
-
-} } }
-
-#endif
 
 #endif
