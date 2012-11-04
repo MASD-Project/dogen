@@ -655,13 +655,6 @@ There were some advantages to using =BOOST_THROW_EXCEPTION=, can't quite
 remember why. We need to figure out if we should replace our usages of
 =throw= with this macro.
 
-*** Create forward declaration facet
-
-We should aim to define almost nothing in header files where possible
-and forward declare. To make life easier we could have a =_fwd= header
-for each entity which only forward declares it. It would be useful for
-IO and for the behavioural code.
-
 *** Rename pod in SML
 
 We mistakingly called complex types =pod= because of a lack of
