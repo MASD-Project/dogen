@@ -30,6 +30,7 @@
 #include <boost/serialization/list.hpp>
 #include <boost/serialization/string.hpp>
 #include "dogen/utility/serialization/unordered_map.hpp"
+#include "dogen/utility/serialization/unordered_set.hpp"
 #include "dogen/sml/domain/model.hpp"
 #include "dogen/sml/serialization/qualified_name_ser.hpp"
 #include "dogen/sml/serialization/package_ser.hpp"
@@ -54,6 +55,8 @@ public:
         ar & make_nvp("enumerations", value.enumerations_);
         ar & make_nvp("external_package_path", value.external_package_path_);
         ar & make_nvp("schema_name", value.schema_name_);
+        ar & make_nvp("is_system", value.is_system_);
+        ar & make_nvp("dependencies", value.dependencies_);
     }
 };
 

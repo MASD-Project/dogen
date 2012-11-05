@@ -22,6 +22,7 @@
 #include "dogen/sml/domain/model.hpp"
 #include "dogen/utility/io/list_io.hpp"
 #include "dogen/utility/io/unordered_map_io.hpp"
+#include "dogen/utility/io/unordered_set_io.hpp"
 #include "dogen/sml/io/qualified_name_io.hpp"
 #include "dogen/sml/io/package_io.hpp"
 #include "dogen/sml/io/pod_io.hpp"
@@ -39,18 +40,22 @@ bool model::operator==(const model& rhs) const {
         primitives_ == rhs.primitives_ &&
         enumerations_ == rhs.enumerations_ &&
         external_package_path_ == rhs.external_package_path_ &&
-        schema_name_ == rhs.schema_name_;
+        schema_name_ == rhs.schema_name_ &&
+        is_system_ == rhs.is_system_ &&
+        dependencies_ == rhs.dependencies_;
 }
 
 void model::to_stream(std::ostream& stream) const {
     stream << "\"model\": {"
-           << "\"name\": \"" << name_ << "\","
-           << "\"packages\": " << packages_ << ","
-           << "\"pods\": " << pods_ << ","
-           << "\"primitives\": " << primitives_ << ","
-           << "\"enumerations\": " << enumerations_ << ","
-           << "\"external_package_path\": " << external_package_path_ << ","
-           << "\"schema_name\": \"" << schema_name_ << "\""
+           << "\"name\": \"" << name_ << "\", "
+           << "\"packages\": " << packages_ << ", "
+           << "\"pods\": " << pods_ << ", "
+           << "\"primitives\": " << primitives_ << ", "
+           << "\"enumerations\": " << enumerations_ << ", "
+           << "\"external_package_path\": " << external_package_path_ << ", "
+           << "\"schema_name\": \"" << schema_name_ << "\", "
+           << "\"is_system\": " << is_system_ << ", "
+           << "\"dependencies\": " << dependencies_
            << " }";
 }
 

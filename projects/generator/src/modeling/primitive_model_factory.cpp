@@ -77,6 +77,7 @@ sml::model primitive_model_factory::create() {
     model r;
     r.name(model_name);
     r.primitives(p);
+    r.is_system(true);
     return r;
 }
 

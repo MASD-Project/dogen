@@ -392,6 +392,12 @@
 		<item_version>0</item_version>
 	</external_package_path>
 	<schema_name></schema_name>
+	<is_system>0</is_system>
+	<dependencies class_id="15" tracking_level="0" version="0">
+		<count>0</count>
+		<bucket_count>11</bucket_count>
+		<item_version>0</item_version>
+	</dependencies>
 </entity>
 </boost_serialization>
 

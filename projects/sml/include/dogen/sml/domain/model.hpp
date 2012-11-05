@@ -28,6 +28,7 @@
 #include <string>
 #include <vector>
 #include <unordered_map>
+#include <unordered_set>
 #include "dogen/sml/domain/qualified_name.hpp"
 #include "dogen/sml/hash/qualified_name_hash.hpp"
 #include "dogen/sml/domain/primitive.hpp"
@@ -46,7 +47,6 @@ class model_serializer;
  */
 class model {
 public:
-    model() = default;
     model(const model&) = default;
     ~model() = default;
     model(model&&) = default;
@@ -56,6 +56,8 @@ private:
     friend class model_serializer;
 
 public:
+    model() : is_system_(false) { }
+
     /**
      * @brief Initialises the structure.
      *
@@ -67,6 +69,9 @@ public:
      * @param exceptions exceptions contained in the model.
      * @param external_package_path Path of packages that contain this
      * model
+     * @param is_system If true this is a system model, false
+     * otherwise
+     * @param dependencies All other models this model depends on
      */
     model(std::string name,
         std::unordered_map<qualified_name, package> packages,
@@ -74,11 +79,13 @@ public:
         std::unordered_map<qualified_name, primitive> primitives,
         std::unordered_map<qualified_name, enumeration> enumerations,
         std::unordered_map<qualified_name, exception> exceptions,
-        std::list<std::string> external_package_path) :
+        std::list<std::string> external_package_path,
+        bool is_system,
+        std::unordered_set<qualified_name> dependencies) :
         name_(name), packages_(packages), pods_(pods),
         primitives_(primitives), enumerations_(enumerations),
-        exceptions_(exceptions), external_package_path_(external_package_path) {
-    }
+        exceptions_(exceptions), external_package_path_(external_package_path),
+        is_system_(is_system), dependencies_(dependencies) { }
 
 public:
     /**
@@ -170,6 +177,34 @@ public:
     void schema_name(std::string value) { schema_name_ = value; }
     /**@}*/
 
+    /**
+     * @brief If true, the model is a system model such as STL, boost,
+     * etc. If false, it is a user generated model.
+     *
+     * System models are a way to expose third party code into Dogen
+     * so that we can make use of these types. They need to be
+     * hand-coded in, because they require changes to the formatters.
+     *
+     * User models are regular Dogen models, normally made using Dia.
+     */
+    /**@{*/
+    bool is_system() const { return is_system_; }
+    void is_system(bool value) { is_system_ = value; }
+    /**@}*/
+
+    /**
+     * @brief All other models that this model depends on - both
+     * system and user defined.
+     */
+    /**@{*/
+    std::unordered_set<qualified_name> dependencies() const {
+        return dependencies_;
+    }
+    void dependencies(std::unordered_set<qualified_name> value) {
+        dependencies_ = value;
+    }
+    /**@}*/
+
 public:
     void to_stream(std::ostream& stream) const;
 
@@ -189,6 +224,8 @@ private:
     std::unordered_map<qualified_name, exception> exceptions_;
     std::list<std::string> external_package_path_;
     std::string schema_name_;
+    bool is_system_;
+    std::unordered_set<qualified_name> dependencies_;
 };
 
 } }

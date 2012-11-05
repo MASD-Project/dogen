@@ -160,7 +160,6 @@ merger::resolve_properties(const pod& pod) {
 }
 
 void merger::resolve() {
-    const auto primitives(merged_model_.primitives());
     auto pods(merged_model_.pods());
 
     for (auto i(pods.begin()); i != pods.end(); ++i) {

@@ -86,6 +86,7 @@ sml::model boost_model_factory::create() {
     r.name(model_name);
     r.primitives(primitives);
     r.pods(pods);
+    r.is_system(true);
     return r;
 }
 

@@ -129,6 +129,11 @@ public:
         result.packages(packages);
         result.pods(pods);
         result.primitives(primitives);
+        result.is_system(false);
+
+        qualified_name m1;
+        m1.model_name("m1");
+        result.dependencies(std::unordered_set<qualified_name>{ m1 });
         return result;
     }
 
