@@ -10,6 +10,10 @@ This file contains all stories that haven't been assigned to a sprint.
 
 Stories that we intend to look at, at some point.
 
+*** System models set meta-type to invalid
+
+Something is not quite right on the resolution logic
+
 *** Adding new modeling spec tests is hard
 
 In order to test models at the modeling level one needs to first
