@@ -28,13 +28,16 @@
 #include "dogen/sml/io/meta_types_io.hpp"
 #include "dogen/sml/domain/nested_qualified_name.hpp"
 #include "dogen/utility/log/logger.hpp"
+#include "dogen/utility/io/list_io.hpp"
+#include "dogen/generator/backends/cpp/view_models/registrar_view_model.hpp"
 #include "dogen/generator/backends/cpp/view_models/nested_type_view_model.hpp"
 #include "dogen/generator/backends/cpp/view_models/transformation_error.hpp"
 #include "dogen/generator/backends/cpp/view_models/sml_to_cpp_view_model.hpp"
 
+using namespace dogen::utility::log;
+
 namespace {
 
-using namespace dogen::utility::log;
 static logger lg(logger_factory("sml_to_view_model"));
 
 const std::string empty;
@@ -53,6 +56,7 @@ const std::string parent_view_model_not_found(
 const std::string view_model_not_found("View model not found: ");
 const std::string unsupported_meta_type("Meta type not supported: ");
 const std::string includer_name("all");
+const std::string registrar_name("registrar");
 const std::string versioned_name("versioned_key");
 const std::string unversioned_name("unversioned_key");
 const std::string id_name("id");
@@ -786,6 +790,77 @@ sml_to_cpp_view_model::transform_facet_includers() const {
     return r;
 }
 
+/**
+ * @brief Transforms the serialisation registrar
+ */
+std::vector<file_view_model>
+sml_to_cpp_view_model::transform_registrar() const {
+    std::vector<file_view_model> r;
+    const auto facets(settings_.enabled_facets());
+    if (facets.find(cpp_facet_types::serialization) == facets.end()) {
+        BOOST_LOG_SEV(lg, warn) << "Serialisaton not enabled"
+                                << " so NOT generating registrar";
+        return r;
+    }
+
+    BOOST_LOG_SEV(lg, debug) << "Transforming serialisaton registrar";
+
+    sml::qualified_name qn;
+    qn.model_name(model_.name());
+    qn.external_package_path(model_.external_package_path());
+
+    registrar_view_model rvm;
+    rvm.namespaces(join_namespaces(qn));
+    BOOST_LOG_SEV(lg, debug) << "Added namespaces: " << rvm.namespaces();
+
+    std::list<std::string> deps;
+    for (const auto d : model_.dependencies()) {
+        // FIXME: massive hack to filter out system models
+        if (d != "std" && d != "boost")
+            deps.push_back(d);
+    }
+    rvm.model_dependencies(deps);
+    BOOST_LOG_SEV(lg, debug) << "Added dependencies: "
+                             << rvm.model_dependencies();
+
+    std::list<std::string> leaves;
+    using boost::join;
+    for (const auto l : model_.leaves()) {
+        auto ns(join_namespaces(l));
+        ns.push_back(l.type_name());
+        leaves.push_back(join(ns, namespace_separator));
+    }
+    rvm.leaves(leaves);
+    BOOST_LOG_SEV(lg, debug) << "Added leaves: " << rvm.leaves();
+
+    auto lambda([&](const cpp_file_types flt) ->  file_view_model {
+            file_view_model fvm;
+            const auto ft(cpp_facet_types::serialization);
+            const auto at(cpp_aspect_types::registrar);
+            const auto n(registrar_name);
+            log_generating_file(ft, at, flt, n, sml::meta_types::invalid);
+            qn.type_name(n);
+            qn.external_package_path(model_.external_package_path());
+            const auto rq(location_request_factory(ft, flt, at, qn));
+
+            fvm.facet_type(ft);
+            fvm.file_path(location_manager_.absolute_path(rq));
+            fvm.file_type(flt);
+            fvm.aspect_type(at);
+            fvm.registrar_vm(rvm);
+
+            const auto includes(inclusion_manager_.includes_for_registrar(flt));
+            fvm.system_includes(includes.system);
+            fvm.user_includes(includes.user);
+
+            return fvm;
+        });
+
+    r.push_back(lambda(cpp_file_types::header));
+    r.push_back(lambda(cpp_file_types::implementation));
+    return r;
+}
+
 std::vector<file_view_model> sml_to_cpp_view_model::transform() {
     log_started();
     create_class_view_models();
@@ -796,11 +871,13 @@ std::vector<file_view_model> sml_to_cpp_view_model::transform() {
     auto p(transform_pods());
     auto e(transform_enumerations());
     auto ex(transform_exceptions());
+    auto reg(transform_registrar());
 
-    r.reserve(p.size() + e.size());
+    r.reserve(p.size() + e.size() + ex.size() + reg.size());
     r.insert(r.end(), p.begin(), p.end());
     r.insert(r.end(), e.begin(), e.end());
     r.insert(r.end(), ex.begin(), ex.end());
+    r.insert(r.end(), reg.begin(), reg.end());
 
     log_includers();
     if (settings_.disable_facet_includers())

@@ -124,6 +124,7 @@ cpp_location_manager::aspect_postfix(cpp_aspect_types aspect) const {
     case cpp_aspect_types::main: return empty; break;
     case cpp_aspect_types::includers: return empty; break;
     case cpp_aspect_types::forward_decls: return forward_decls_postfix; break;
+    case cpp_aspect_types::registrar: return empty; break;
     default:
         BOOST_LOG_SEV(lg, error) << invalid_aspect_types;
         throw invalid_enum_value(invalid_aspect_types);

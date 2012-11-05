@@ -653,6 +653,32 @@ includes_for_exception(const sml::exception& e, cpp_facet_types ft,
 }
 
 inclusion_lists cpp_inclusion_manager::
+includes_for_registrar(cpp_file_types flt) const {
+    inclusion_lists r;
+
+    if (flt == cpp_file_types::header)
+        return r;
+
+    const auto main(cpp_aspect_types::main);
+    const auto ft(cpp_facet_types::serialization);
+    for (const auto d : model_.leaves())
+        r.user.push_back(header_dependency(d, ft, main));
+
+    if (!settings_.disable_xml_serialization()) {
+        r.system.push_back(boost_.include(boost_types::xml_oarchive));
+        r.system.push_back(boost_.include(boost_types::xml_iarchive));
+    }
+    r.system.push_back(boost_.include(boost_types::text_oarchive));
+    r.system.push_back(boost_.include(boost_types::text_iarchive));
+    r.system.push_back(boost_.include(boost_types::binary_oarchive));
+    r.system.push_back(boost_.include(boost_types::binary_iarchive));
+    r.system.push_back(boost_.include(boost_types::polymorphic_iarchive));
+    r.system.push_back(boost_.include(boost_types::polymorphic_oarchive));
+
+    return r;
+}
+
+inclusion_lists cpp_inclusion_manager::
 includes_for_pod(const sml::pod& pod, cpp_facet_types ft, cpp_file_types flt,
     cpp_aspect_types at) const {
 

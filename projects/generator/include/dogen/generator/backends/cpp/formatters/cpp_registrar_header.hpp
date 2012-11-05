@@ -18,15 +18,19 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_GENERATOR_BACKENDS_CPP_FORMATTERS_FACTORY_HPP
-#define DOGEN_GENERATOR_BACKENDS_CPP_FORMATTERS_FACTORY_HPP
+#ifndef DOGEN_GENERATOR_BACKENDS_CPP_FORMATTERS_CPP_REGISTRAR_HEADER_HPP
+#define DOGEN_GENERATOR_BACKENDS_CPP_FORMATTERS_CPP_REGISTRAR_HEADER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
+#include <list>
 #include <iosfwd>
-#include "dogen/generator/config/cpp_settings.hpp"
+#include <boost/filesystem/path.hpp>
+#include "dogen/generator/backends/cpp/view_models/file_view_model.hpp"
+#include "dogen/generator/backends/cpp/formatters/cpp_indenter.hpp"
+#include "dogen/generator/backends/cpp/formatters/cpp_utility.hpp"
 #include "dogen/generator/backends/cpp/formatters/file_formatter.hpp"
 
 namespace dogen {
@@ -35,35 +39,30 @@ namespace backends {
 namespace cpp {
 namespace formatters {
 
-class factory {
+class registrar_header : public file_formatter {
 public:
-    factory() = delete;
-    factory(const factory&) = default;
-    ~factory() = default;
-    factory(factory&&) = default;
-    factory& operator=(const factory&) = default;
+    typedef view_models::file_view_model file_view_model;
 
 public:
-    typedef file_formatter::shared_ptr result_type;
+    registrar_header() = delete;
+    registrar_header(const registrar_header&) = default;
+    registrar_header(registrar_header&&) = default;
+    registrar_header& operator=(const registrar_header&) = default;
 
 public:
-    factory(const config::cpp_settings& settings);
+    registrar_header(std::ostream& stream);
+    virtual ~registrar_header() noexcept {}
+
+public:
+    static file_formatter::shared_ptr create(std::ostream& stream);
+
+public:
+    virtual void format(const file_view_model& vm) override;
 
 private:
-    result_type create_main_formatter(std::ostream& s, cpp_facet_types ft,
-        cpp_file_types flt) const;
-
-    result_type create_registrar_formatter(
-        std::ostream& s, cpp_file_types flt) const;
-
-public:
-    result_type create(std::ostream& s, cpp_facet_types ft,
-        cpp_file_types flt, cpp_aspect_types at) const;
-
-private:
-    const config::cpp_settings settings_;
-    const bool disable_io_;
-    const bool disable_serialization_;
+    std::ostream& stream_;
+    cpp_indenter indenter_;
+    cpp_utility utility_;
 };
 
 } } } } }

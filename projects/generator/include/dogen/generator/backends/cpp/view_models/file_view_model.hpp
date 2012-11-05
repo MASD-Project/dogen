@@ -35,6 +35,7 @@
 #include "dogen/generator/backends/cpp/view_models/exception_view_model.hpp"
 #include "dogen/generator/backends/cpp/view_models/enumeration_view_model.hpp"
 #include "dogen/generator/backends/cpp/view_models/class_view_model.hpp"
+#include "dogen/generator/backends/cpp/view_models/registrar_view_model.hpp"
 #include "dogen/generator/backends/cpp/cpp_facet_types.hpp"
 #include "dogen/generator/backends/cpp/cpp_file_types.hpp"
 #include "dogen/generator/backends/cpp/cpp_aspect_types.hpp"
@@ -68,6 +69,7 @@ public:
     class_vm_(std::move(o.class_vm_)),
     enumeration_vm_(std::move(o.enumeration_vm_)),
     exception_vm_(std::move(o.exception_vm_)),
+    registrar_vm_(std::move(o.registrar_vm_)),
     header_guard_(std::move(o.header_guard_)),
     system_includes_(std::move(o.system_includes_)),
     user_includes_(std::move(o.user_includes_)),
@@ -108,6 +110,13 @@ public:
         return exception_vm_;
     }
 
+    void registrar_vm(boost::optional<registrar_view_model> value) {
+        registrar_vm_ = value;
+    }
+    boost::optional<registrar_view_model> registrar_vm() const {
+        return registrar_vm_;
+    }
+
     void header_guard(std::string value) { header_guard_ = value; }
     std::string header_guard() const { return header_guard_; }
 
@@ -137,6 +146,7 @@ private:
     boost::optional<class_view_model> class_vm_;
     boost::optional<enumeration_view_model> enumeration_vm_;
     boost::optional<exception_view_model> exception_vm_;
+    boost::optional<registrar_view_model> registrar_vm_;
     std::string header_guard_;
     std::list<std::string> system_includes_;
     std::list<std::string> user_includes_;

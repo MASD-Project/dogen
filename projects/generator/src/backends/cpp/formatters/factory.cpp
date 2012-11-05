@@ -35,6 +35,8 @@
 #include "dogen/generator/backends/cpp/formatters/cpp_serialization_implementation.hpp"
 #include "dogen/generator/backends/cpp/formatters/cpp_database_header.hpp"
 #include "dogen/generator/backends/cpp/formatters/cpp_database_implementation.hpp"
+#include "dogen/generator/backends/cpp/formatters/cpp_registrar_header.hpp"
+#include "dogen/generator/backends/cpp/formatters/cpp_registrar_implementation.hpp"
 #include "dogen/generator/backends/cpp/formatters/cpp_forward_declarations_header.hpp"
 #include "dogen/generator/backends/cpp/formatters/factory.hpp"
 
@@ -123,6 +125,26 @@ factory::create_main_formatter(std::ostream& s, cpp_facet_types ft,
     } }
 }
 
+factory::result_type factory::create_registrar_formatter(
+    std::ostream& s, cpp_file_types flt) const {
+
+    switch (flt) {
+    case cpp_file_types::header:
+        return registrar_header::create(s);
+        break;
+
+    case cpp_file_types::implementation:
+        return registrar_implementation::create(s,
+            settings_.disable_xml_serialization());
+        break;
+
+    default: {
+        std::ostringstream ss;
+        ss << production_failure_msg << flt;
+        throw production_failure(ss.str());
+    } }
+}
+
 factory::result_type
 factory::create(std::ostream& s, cpp_facet_types ft, cpp_file_types flt,
     cpp_aspect_types at) const {
@@ -137,6 +159,10 @@ factory::create(std::ostream& s, cpp_facet_types ft, cpp_file_types flt,
     case cpp_aspect_types::forward_decls:
         return forward_declarations_header::create(s);
         break;
+    case cpp_aspect_types::registrar:
+        return create_registrar_formatter(s, flt);
+        break;
+
     default: {
         std::ostringstream s;
         s << production_failure_msg << ft << ", " << flt << ", " << at;

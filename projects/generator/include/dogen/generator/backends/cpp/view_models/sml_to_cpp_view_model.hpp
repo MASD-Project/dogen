@@ -157,6 +157,11 @@ private:
     std::vector<file_view_model> transform_facet_includers() const;
 
     /**
+     * @brief Transforms the serialisation registrar
+     */
+    std::vector<file_view_model> transform_registrar() const;
+
+    /**
      * @brief Creates all the class view models
      */
     void create_class_view_models();

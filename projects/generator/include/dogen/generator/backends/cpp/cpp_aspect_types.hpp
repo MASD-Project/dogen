@@ -46,6 +46,7 @@ enum class cpp_aspect_types : unsigned int {
     main = 1, ///< The representation of the domain type for this facet
     includers = 2, ///< Header file with includes for all headers in facet
     forward_decls = 3, ///< Forward declarations for type
+    registrar = 4 ///< Boost serialisation registration
 };
 
 std::ostream& operator<<(std::ostream& stream, cpp_aspect_types value);
