@@ -10,6 +10,21 @@ This file contains all stories that haven't been assigned to a sprint.
 
 Stories that we intend to look at, at some point.
 
+*** Naming of saved SML/Dia files is incorrect
+
+For some random reason when we use dogen to save SML/Dia files the
+names look like this:
+
+: test_data/dia_sml/expected/boost_model.xmldia
+: test_data/dia_sml/expected/std_model.xmldia
+
+but our tests expect:
+
+: test_data/dia_sml/expected/boost_model.diaxml
+: test_data/dia_sml/expected/std_model.diaxml
+
+This must be part of a refactoring that wasn't completed properly.
+
 *** Move system model factories into SML
 
 We do not have any generator dependencies in the system model
