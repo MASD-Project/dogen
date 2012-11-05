@@ -10,6 +10,11 @@ This file contains all stories that haven't been assigned to a sprint.
 
 Stories that we intend to look at, at some point.
 
+*** Move system model factories into SML
+
+We do not have any generator dependencies in the system model
+factories so they can safely be moved into SML.
+
 *** Add support for serialisation register types
 
 - create model dependencies, automatically populated. just a list of
