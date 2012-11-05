@@ -10,6 +10,16 @@ This file contains all stories that haven't been assigned to a sprint.
 
 Stories that we intend to look at, at some point.
 
+*** Adding new modeling spec tests is hard
+
+In order to test models at the modeling level one needs to first
+generate the dia input. This can be done as follows:
+
+: ./dogen_driver-0.0.507 --save-dia-model xml
+: --stop-after-merging -t ../../../../dogen/test_data/dia_sml/input/boost_model.dia
+
+From the bin directory. We need to make these steps a bit more obvious.
+
 *** Naming of saved SML/Dia files is incorrect
 
 For some random reason when we use dogen to save SML/Dia files the
