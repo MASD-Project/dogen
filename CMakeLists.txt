@@ -232,11 +232,13 @@ add_custom_target(deploy_doxy
     COMMAND ${ssh_executable} git@${server} 'rm -rf ${remote_site}.old'
     )
 add_dependencies(deploy_doxy doxy)
-install(
-    DIRECTORY ${stage_doxygen_dir}/html/
-    DESTINATION share/doc/${DOGEN_VERSION}/
-    COMPONENT documentation
-    )
+
+# FIXME: commented out due to breaks on OSX
+# install(
+#     DIRECTORY ${stage_doxygen_dir}/html/
+#     DESTINATION share/doc/${DOGEN_VERSION}/
+#     COMPONENT documentation
+#     )
 
 #
 # aggregate targets
