@@ -114,6 +114,10 @@ public:
     static boost::filesystem::path expected_enumeration_sml_xml();
     static boost::filesystem::path expected_exception_dia_xml();
     static boost::filesystem::path expected_exception_sml_xml();
+    static boost::filesystem::path expected_std_model_dia_xml();
+    static boost::filesystem::path expected_std_model_sml_xml();
+    static boost::filesystem::path expected_boost_model_dia_xml();
+    static boost::filesystem::path expected_boost_model_sml_xml();
 
     static boost::filesystem::path actual();
     static boost::filesystem::path actual_class_in_a_package_dia_xml();
@@ -149,6 +153,10 @@ public:
     static boost::filesystem::path actual_enumeration_sml_xml();
     static boost::filesystem::path actual_exception_dia_xml();
     static boost::filesystem::path actual_exception_sml_xml();
+    static boost::filesystem::path actual_std_model_dia_xml();
+    static boost::filesystem::path actual_std_model_sml_xml();
+    static boost::filesystem::path actual_boost_model_dia_xml();
+    static boost::filesystem::path actual_boost_model_sml_xml();
 };
 
 } } }

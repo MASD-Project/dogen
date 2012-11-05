@@ -36,9 +36,9 @@ bool nested_qualified_name::operator==(const nested_qualified_name& rhs) const {
 
 void nested_qualified_name::to_stream(std::ostream& stream) const {
     stream << "\"nested_qualified_name\": {"
-           << "\"type\":\"" << type_ << "\", "
-           << "\"children\":" << children_ << "\","
-           << "\"is_pointer:\"" << is_pointer_
+           << type_ << ", "
+           << "\"children\":" << children_ << ","
+           << "\"is_pointer\":" << is_pointer_
            << " }";
 }
 

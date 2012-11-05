@@ -63,10 +63,10 @@ void pod::to_stream(std::ostream& stream) const {
            << "\"category_type\":" << "\"" << category_type_ << "\", "
            << "\"documentation\":" << "\"" << documentation_ << "\", "
            << "\"number_of_type_arguments\":" << number_of_type_arguments_
-           << "\", "
-           << "\"is_sequence_container\":" << is_sequence_container_ << "\", "
+           << ", "
+           << "\"is_sequence_container\":" << is_sequence_container_ << ", "
            << "\"is_associative_container\":" << is_associative_container_
-           << "\", "
+           << ", "
            << "\"is_smart_pointer\":" << is_smart_pointer_
            << " }";
 }

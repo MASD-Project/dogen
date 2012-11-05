@@ -59,7 +59,6 @@ public:
     model merge();
 
 private:
-    std::string name_;
     std::list<model> models_;
     model merged_model_;
     const bool verbose_;

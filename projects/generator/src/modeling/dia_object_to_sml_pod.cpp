@@ -45,9 +45,9 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/generator/modeling/transformation_error.hpp"
 #include "dogen/sml/utility/identifier_parser.hpp"
-#include "dogen/generator/modeling/dia_object_to_sml_pod.hpp"
 #include "dogen/utility/io/unordered_map_io.hpp"
 #include "dogen/utility/io/list_io.hpp"
+#include "dogen/generator/modeling/dia_object_to_sml_pod.hpp"
 
 namespace {
 
@@ -144,6 +144,7 @@ private:
                            dogen::sml::qualified_name> original_parent_;
         std::unordered_map<dogen::sml::qualified_name,
                            std::list<dogen::sml::qualified_name> > leaves_;
+        std::unordered_set<std::string> dependencies_;
         dogen::sml::utility::identifier_parser parser_;
     };
 
@@ -190,6 +191,10 @@ public:
         return state_->leaves_;
     }
 
+    std::unordered_set<std::string> dependencies() const {
+        return state_->dependencies_;
+    }
+
 private:
     template<typename AttributeValue>
     AttributeValue
@@ -215,6 +220,12 @@ private:
     transform_string_attribute(const dogen::dia::attribute& attribute) const;
 
     /**
+     * @brief Converts a nested qualified name into model dependencies
+     */
+    void model_dependencies_for_nested_qualified_name(
+        const dogen::sml::nested_qualified_name& nqn);
+
+    /**
      * @brief Converts the Dia attribute into a qualified name.
      *
      * @param attribute Name Dia attribute.
@@ -230,7 +241,7 @@ private:
      * @param uml_attribute the Dia UML attribute
      */
     dogen::sml::property
-    transform_property(const dogen::dia::composite& uml_attribute) const;
+    transform_property(const dogen::dia::composite& uml_attribute);
 
     /**
      * @brief Converts a class in Dia format into a pod in SML
@@ -238,7 +249,7 @@ private:
      *
      * @param object Dia object which contains a UML class.
      */
-    void process_dia_object(const dogen::dia::object& o) const;
+    void process_dia_object(const dogen::dia::object& o);
 
 private:
     std::shared_ptr<visit_state> state_;
@@ -278,6 +289,18 @@ transform_string_attribute(const dogen::dia::attribute& a) const {
     return name;
 }
 
+void dia_dfs_visitor::model_dependencies_for_nested_qualified_name(
+    const dogen::sml::nested_qualified_name& nqn) {
+
+    // primitives model is empty
+    const auto mn(nqn.type().model_name());
+    if (!mn.empty() && mn != state_->model_name_)
+        state_->dependencies_.insert(mn);
+
+    for (const auto c : nqn.children())
+        model_dependencies_for_nested_qualified_name(c);
+}
+
 dogen::sml::qualified_name dia_dfs_visitor::
 transform_qualified_name(const dogen::dia::attribute& a,
     dogen::sml::meta_types meta_type, const std::string& pkg_id) const {
@@ -311,7 +334,7 @@ transform_qualified_name(const dogen::dia::attribute& a,
 }
 
 dogen::sml::property dia_dfs_visitor::
-transform_property(const dogen::dia::composite& uml_attribute) const {
+transform_property(const dogen::dia::composite& uml_attribute) {
     dogen::sml::property property;
     typedef boost::shared_ptr<dogen::dia::attribute> attribute_ptr;
 
@@ -326,6 +349,7 @@ transform_property(const dogen::dia::composite& uml_attribute) const {
                 throw transformation_error(invalid_type_string + s);
             }
             property.type_name(nested_name);
+            model_dependencies_for_nested_qualified_name(nested_name);
         } else if (a->name() == dia_documentation) {
             const std::string doc(transform_string_attribute(*a));
             property.documentation(doc);
@@ -348,7 +372,7 @@ transform_property(const dogen::dia::composite& uml_attribute) const {
     return property;
 }
 
-void dia_dfs_visitor::process_dia_object(const dogen::dia::object& o) const {
+void dia_dfs_visitor::process_dia_object(const dogen::dia::object& o) {
     if (o.id() == root_vertex_id)
         return; // root is a dummy object, ignore it.
 
@@ -595,19 +619,24 @@ void dia_object_to_sml_pod::add_object(const dia::object& o) {
 
 std::unordered_map<sml::qualified_name, sml::pod>
 dia_object_to_sml_pod::
-transform(std::unordered_map<std::string, sml::package> packages) {
+transform(std::unordered_map<std::string, sml::package> packages,
+    std::unordered_set<std::string>& dependencies,
+    std::unordered_set<dogen::sml::qualified_name>& leaves) {
     BOOST_LOG_SEV(lg, info) << "Transforming pods for diagram: " << model_name_;
     setup_graph();
     dia_dfs_visitor v(model_name_, external_package_path_, verbose_, is_target_,
         child_to_parent_dia_ids_, parent_dia_ids_, packages);
     boost::depth_first_search(graph_, boost::visitor(v));
 
+    dependencies.insert(v.dependencies().begin(), v.dependencies().end());
     auto pods(v.pods());
     const auto all_leaves(v.leaves());
     for (auto i(pods.begin()); i != pods.end(); ++i) {
         auto j(all_leaves.find(i->first));
         if (j != all_leaves.end()) {
             i->second.leaves(j->second);
+            for (const auto k : j->second)
+                leaves.insert(k);
         }
     }
     return pods;

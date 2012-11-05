@@ -82,7 +82,7 @@ public:
         std::unordered_map<qualified_name, exception> exceptions,
         std::list<std::string> external_package_path,
         bool is_system,
-        std::unordered_set<qualified_name> dependencies,
+        std::unordered_set<std::string> dependencies,
         std::unordered_set<qualified_name> leaves) :
         name_(name), packages_(packages), pods_(pods),
         primitives_(primitives), enumerations_(enumerations),
@@ -199,10 +199,10 @@ public:
      * system and user defined.
      */
     /**@{*/
-    std::unordered_set<qualified_name> dependencies() const {
+    std::unordered_set<std::string> dependencies() const {
         return dependencies_;
     }
-    void dependencies(std::unordered_set<qualified_name> value) {
+    void dependencies(std::unordered_set<std::string> value) {
         dependencies_ = value;
     }
     /**@}*/
@@ -241,7 +241,7 @@ private:
     std::list<std::string> external_package_path_;
     std::string schema_name_;
     bool is_system_;
-    std::unordered_set<qualified_name> dependencies_;
+    std::unordered_set<std::string> dependencies_;
     std::unordered_set<qualified_name> leaves_;
 };
 

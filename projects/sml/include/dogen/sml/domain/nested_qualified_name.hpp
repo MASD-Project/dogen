@@ -45,7 +45,7 @@ private:
     friend class nested_qualified_name_serializer;
 
 public:
-    nested_qualified_name() : is_pointer_() { }
+    nested_qualified_name() : is_pointer_(false) { }
 
     nested_qualified_name(const qualified_name& type,
         std::list<nested_qualified_name> children, bool is_pointer)

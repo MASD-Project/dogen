@@ -27,11 +27,7 @@ namespace dogen {
 namespace sml {
 
 std::ostream& operator<<(std::ostream& stream, dogen::sml::property property) {
-    stream << "\"property\": {"
-           << "\"name\": \"" << property.name() << "\","
-           << "\"type_name\": \"" << property.type_name() << ","
-           << "\"default_value\": \"" << property.default_value() << "\""
-           << " }";
+    property.to_stream(stream);
     return(stream);
 }
 

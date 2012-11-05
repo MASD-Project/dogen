@@ -39,35 +39,6 @@ const char* delimiter = "::";
 const std::string error_msg("Failed to parse string: ");
 using namespace boost::spirit;
 
-/*
-bool debug(true);
-
-void add_nested_name(const std::string& s) {
-    if (debug)
-        std::cout << "|" << s << "|" << std::endl;
-}
-
-void add_primitive(const std::string& s) {
-    if (debug)
-        std::cout << "%" << s << "%" << std::endl;
-}
-
-void start_template() {
-    if (debug)
-        std::cout << "starting template" << std::endl;
-}
-
-void next_type_argument() {
-    if (debug)
-        std::cout << "next type argument" << std::endl;
-}
-
-void end_template() {
-    if (debug)
-        std::cout << "ending template" << std::endl;
-}
-*/
-
 using dogen::sml::utility::nested_qualified_name_builder;
 
 template<typename Iterator>

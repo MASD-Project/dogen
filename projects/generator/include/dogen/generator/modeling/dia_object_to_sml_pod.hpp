@@ -61,7 +61,9 @@ public:
     void add_object(const dia::object& o);
 
     std::unordered_map<sml::qualified_name, sml::pod>
-    transform(std::unordered_map<std::string, sml::package> packages);
+    transform(std::unordered_map<std::string, sml::package> packages,
+        std::unordered_set<std::string>& dependencies,
+        std::unordered_set<dogen::sml::qualified_name>& leaves);
 
 private:
     // graph of dependencies

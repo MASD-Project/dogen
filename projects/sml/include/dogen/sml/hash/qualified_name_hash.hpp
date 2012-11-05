@@ -42,8 +42,11 @@ public:
         dogen::utility::hash::combine(seed, value.type_name());
         dogen::utility::hash::combine(seed, value.meta_type());
 
-        for (auto package_name : value.package_path())
-            dogen::utility::hash::combine(seed, package_name);
+        for (auto p : value.package_path())
+            dogen::utility::hash::combine(seed, p);
+
+        for (auto p : value.external_package_path())
+            dogen::utility::hash::combine(seed, p);
 
         return seed;
     }

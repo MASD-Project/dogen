@@ -41,6 +41,8 @@ public:
         const unsigned int /*version*/) {
         using boost::serialization::make_nvp;
         archive & make_nvp("name", value.name_);
+        archive & make_nvp("generate", value.generate_);
+        archive & make_nvp("documentation", value.documentation_);
     }
 };
 

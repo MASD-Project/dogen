@@ -152,6 +152,14 @@ path expected_exception_dia_xml(
     "dia_sml/expected/exception.diaxml");
 path expected_exception_sml_xml(
     "dia_sml/expected/exception.smlxml");
+path expected_std_model_dia_xml(
+    "dia_sml/expected/std_model.diaxml");
+path expected_std_model_sml_xml(
+    "dia_sml/expected/std_model.smlxml");
+path expected_boost_model_dia_xml(
+    "dia_sml/expected/boost_model.diaxml");
+path expected_boost_model_sml_xml(
+    "dia_sml/expected/boost_model.smlxml");
 
 path actual(
     "dia_sml/actual");
@@ -225,6 +233,14 @@ path actual_exception_dia_xml(
     "dia_sml/actual/exception.diaxml");
 path actual_exception_sml_xml(
     "dia_sml/actual/exception.smlxml");
+path actual_std_model_dia_xml(
+    "dia_sml/actual/std_model.diaxml");
+path actual_std_model_sml_xml(
+    "dia_sml/actual/std_model.smlxml");
+path actual_boost_model_dia_xml(
+    "dia_sml/actual/boost_model.diaxml");
+path actual_boost_model_sml_xml(
+    "dia_sml/actual/boost_model.smlxml");
 
 }
 
@@ -530,11 +546,27 @@ path dia_sml::expected_enumeration_sml_xml() {
 }
 
 path dia_sml::expected_exception_dia_xml() {
-    return resolver::resolve(::expected_exception_dia_xml);
+    return validating_resolver::resolve(::expected_exception_dia_xml);
 }
 
 path dia_sml::expected_exception_sml_xml() {
-    return resolver::resolve(::expected_exception_sml_xml);
+    return validating_resolver::resolve(::expected_exception_sml_xml);
+}
+
+path dia_sml::expected_std_model_dia_xml() {
+    return resolver::resolve(::expected_std_model_dia_xml);
+}
+
+path dia_sml::expected_std_model_sml_xml() {
+    return resolver::resolve(::expected_std_model_sml_xml);
+}
+
+path dia_sml::expected_boost_model_dia_xml() {
+    return resolver::resolve(::expected_boost_model_dia_xml);
+}
+
+path dia_sml::expected_boost_model_sml_xml() {
+    return resolver::resolve(::expected_boost_model_sml_xml);
 }
 
 path dia_sml::actual() {
@@ -672,6 +704,22 @@ path dia_sml::actual_exception_dia_xml() {
 
 path dia_sml::actual_exception_sml_xml() {
     return resolver::resolve(::actual_exception_sml_xml);
+}
+
+path dia_sml::actual_std_model_dia_xml() {
+    return resolver::resolve(::actual_std_model_sml_xml);
+}
+
+path dia_sml::actual_std_model_sml_xml() {
+    return resolver::resolve(::actual_std_model_sml_xml);
+}
+
+path dia_sml::actual_boost_model_dia_xml() {
+    return resolver::resolve(::actual_boost_model_sml_xml);
+}
+
+path dia_sml::actual_boost_model_sml_xml() {
+    return resolver::resolve(::actual_boost_model_sml_xml);
 }
 
 } } }

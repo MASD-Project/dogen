@@ -37,6 +37,7 @@
 #include "dogen/sml/serialization/pod_ser.hpp"
 #include "dogen/sml/serialization/primitive_ser.hpp"
 #include "dogen/sml/serialization/enumeration_ser.hpp"
+#include "dogen/sml/serialization/exception_ser.hpp"
 
 namespace dogen {
 namespace sml {
@@ -53,6 +54,7 @@ public:
         ar & make_nvp("pods", value.pods_);
         ar & make_nvp("primitives", value.primitives_);
         ar & make_nvp("enumerations", value.enumerations_);
+        ar & make_nvp("exceptions", value.exceptions_);
         ar & make_nvp("external_package_path", value.external_package_path_);
         ar & make_nvp("schema_name", value.schema_name_);
         ar & make_nvp("is_system", value.is_system_);

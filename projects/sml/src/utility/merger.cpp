@@ -178,8 +178,6 @@ void merger::combine() {
     if (!has_target_)
         throw merging_error(missing_target);
 
-    merged_model_.name(name_);
-
     auto pods(merged_model_.pods());
     auto primitives(merged_model_.primitives());
     auto enumerations(merged_model_.enumerations());
@@ -245,13 +243,16 @@ void merger::add_target(model model) {
     if (has_target_) {
         std::ostringstream stream;
         stream << "Only one target expected. Last target model name: '"
-               << name_ << "'. New target model name: "
+               << merged_model_.name() << "'. New target model name: "
                << model.name();
         BOOST_LOG_SEV(lg, error) << stream.str();
         throw merging_error(stream.str());
     }
 
-    name_ = model.name();
+    merged_model_.name(model.name());
+    merged_model_.dependencies(model.dependencies());
+    merged_model_.leaves(model.leaves());
+
     has_target_ = true;
     external_package_path_ = model.external_package_path();
 

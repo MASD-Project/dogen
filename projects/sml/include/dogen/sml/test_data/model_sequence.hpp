@@ -130,10 +130,7 @@ public:
         result.pods(pods);
         result.primitives(primitives);
         result.is_system(false);
-
-        qualified_name m1;
-        m1.model_name("m1");
-        result.dependencies(std::unordered_set<qualified_name>{ m1 });
+        result.dependencies(std::unordered_set<std::string>{ "d1" });
         result.leaves(std::unordered_set<qualified_name>{ qsec() });
 
         return result;

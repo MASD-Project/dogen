@@ -38,9 +38,9 @@ bool property::operator==(const property& rhs) const {
 void property::to_stream(std::ostream& stream) const {
     stream << "\"property\": {"
            << "\"name\":\"" << name() << "\","
-           << "\"type_name\":" << type_name() << ","
+           << type_name() << ","
            << "\"default_value\":\"" << default_value() << "\","
-           << "\"documentation\":\"" << documentation()
+           << "\"documentation\":\"" << documentation() << "\""
            << "}";
 }
 

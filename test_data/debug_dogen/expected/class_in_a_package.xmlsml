@@ -96,6 +96,7 @@
 							<is_pointer>0</is_pointer>
 						</type_name>
 						<default_value></default_value>
+						<documentation></documentation>
 					</item>
 				</properties>
 				<parent_name class_id="13" tracking_level="0" version="0">
@@ -172,6 +173,7 @@
 							<is_pointer>0</is_pointer>
 						</type_name>
 						<default_value></default_value>
+						<documentation></documentation>
 					</item>
 					<item>
 						<name>version</name>
@@ -196,6 +198,7 @@
 							<is_pointer>0</is_pointer>
 						</type_name>
 						<default_value></default_value>
+						<documentation></documentation>
 					</item>
 				</properties>
 				<parent_name>
@@ -274,6 +277,7 @@
 							<is_pointer>0</is_pointer>
 						</type_name>
 						<default_value></default_value>
+						<documentation></documentation>
 					</item>
 					<item>
 						<name>private_attribute</name>
@@ -298,6 +302,7 @@
 							<is_pointer>0</is_pointer>
 						</type_name>
 						<default_value></default_value>
+						<documentation></documentation>
 					</item>
 					<item>
 						<name>versioned_key</name>
@@ -322,6 +327,7 @@
 							<is_pointer>0</is_pointer>
 						</type_name>
 						<default_value></default_value>
+						<documentation></documentation>
 					</item>
 				</properties>
 				<parent_name>
@@ -355,18 +361,23 @@
 		<bucket_count>11</bucket_count>
 		<item_version>0</item_version>
 	</enumerations>
+	<exceptions class_id="17" tracking_level="0" version="0">
+		<count>0</count>
+		<bucket_count>11</bucket_count>
+		<item_version>0</item_version>
+	</exceptions>
 	<external_package_path>
 		<count>0</count>
 		<item_version>0</item_version>
 	</external_package_path>
 	<schema_name></schema_name>
 	<is_system>0</is_system>
-	<dependencies class_id="17" tracking_level="0" version="0">
+	<dependencies class_id="18" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>11</bucket_count>
 		<item_version>0</item_version>
 	</dependencies>
-	<leaves>
+	<leaves class_id="19" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>11</bucket_count>
 		<item_version>0</item_version>

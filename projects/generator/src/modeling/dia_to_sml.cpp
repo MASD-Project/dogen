@@ -154,7 +154,9 @@ sml::model dia_to_sml::transform() {
         setup_data_structures(layer.objects());
     packages_ = package_transformer_.transform();
 
-    const auto pods(pod_transformer_.transform(packages_));
+    std::unordered_set<std::string> deps;
+    std::unordered_set<dogen::sml::qualified_name> leaves;
+    const auto pods(pod_transformer_.transform(packages_, deps, leaves));
     const auto enumerations(enumeration_transformer_.transform(packages_));
     const auto exceptions(exception_transformer_.transform(packages_));
 
@@ -167,11 +169,9 @@ sml::model dia_to_sml::transform() {
         primitives;
 
     const bool is_system(false);
-    std::unordered_set<dogen::sml::qualified_name> dependencies;
-    std::unordered_set<dogen::sml::qualified_name> leaves;
     using sml::model;
     return model(model_name_, packages, pods, primitives, enumerations,
-        exceptions, external_package_path_, is_system, dependencies, leaves);
+        exceptions, external_package_path_, is_system, deps, leaves);
 }
 
 } } }

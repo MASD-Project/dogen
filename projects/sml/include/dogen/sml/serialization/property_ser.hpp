@@ -46,6 +46,7 @@ public:
         archive & make_nvp("name", value.name_);
         archive & make_nvp("type_name", value.type_name_);
         archive & make_nvp("default_value", value.default_value_);
+        archive & make_nvp("documentation", value.documentation_);
     }
 };
 
