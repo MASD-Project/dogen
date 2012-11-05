@@ -134,6 +134,8 @@ public:
         qualified_name m1;
         m1.model_name("m1");
         result.dependencies(std::unordered_set<qualified_name>{ m1 });
+        result.leaves(std::unordered_set<qualified_name>{ qsec() });
+
         return result;
     }
 

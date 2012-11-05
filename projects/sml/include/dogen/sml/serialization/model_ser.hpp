@@ -57,6 +57,7 @@ public:
         ar & make_nvp("schema_name", value.schema_name_);
         ar & make_nvp("is_system", value.is_system_);
         ar & make_nvp("dependencies", value.dependencies_);
+        ar & make_nvp("leaves", value.leaves_);
     }
 };
 

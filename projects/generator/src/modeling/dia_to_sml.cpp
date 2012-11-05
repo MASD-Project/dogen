@@ -168,9 +168,10 @@ sml::model dia_to_sml::transform() {
 
     const bool is_system(false);
     std::unordered_set<dogen::sml::qualified_name> dependencies;
+    std::unordered_set<dogen::sml::qualified_name> leaves;
     using sml::model;
     return model(model_name_, packages, pods, primitives, enumerations,
-        exceptions, external_package_path_, is_system, dependencies);
+        exceptions, external_package_path_, is_system, dependencies, leaves);
 }
 
 } } }

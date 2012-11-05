@@ -72,6 +72,7 @@ public:
      * @param is_system If true this is a system model, false
      * otherwise
      * @param dependencies All other models this model depends on
+     * @param leaves All concrete types which have a parent
      */
     model(std::string name,
         std::unordered_map<qualified_name, package> packages,
@@ -81,11 +82,12 @@ public:
         std::unordered_map<qualified_name, exception> exceptions,
         std::list<std::string> external_package_path,
         bool is_system,
-        std::unordered_set<qualified_name> dependencies) :
+        std::unordered_set<qualified_name> dependencies,
+        std::unordered_set<qualified_name> leaves) :
         name_(name), packages_(packages), pods_(pods),
         primitives_(primitives), enumerations_(enumerations),
         exceptions_(exceptions), external_package_path_(external_package_path),
-        is_system_(is_system), dependencies_(dependencies) { }
+        is_system_(is_system), dependencies_(dependencies), leaves_(leaves) { }
 
 public:
     /**
@@ -205,6 +207,20 @@ public:
     }
     /**@}*/
 
+    /**
+     * @brief All leaf types in this model.
+     *
+     * Leaves are types concrete types which have a parent.
+     */
+    /**@{*/
+    std::unordered_set<qualified_name> leaves() const {
+        return leaves_;
+    }
+    void leaves(std::unordered_set<qualified_name> value) {
+        leaves_ = value;
+    }
+    /**@}*/
+
 public:
     void to_stream(std::ostream& stream) const;
 
@@ -226,6 +242,7 @@ private:
     std::string schema_name_;
     bool is_system_;
     std::unordered_set<qualified_name> dependencies_;
+    std::unordered_set<qualified_name> leaves_;
 };
 
 } }

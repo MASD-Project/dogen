@@ -42,7 +42,8 @@ bool model::operator==(const model& rhs) const {
         external_package_path_ == rhs.external_package_path_ &&
         schema_name_ == rhs.schema_name_ &&
         is_system_ == rhs.is_system_ &&
-        dependencies_ == rhs.dependencies_;
+        dependencies_ == rhs.dependencies_ &&
+        leaves_ == rhs.leaves_;
 }
 
 void model::to_stream(std::ostream& stream) const {
@@ -56,6 +57,7 @@ void model::to_stream(std::ostream& stream) const {
            << "\"schema_name\": \"" << schema_name_ << "\", "
            << "\"is_system\": " << is_system_ << ", "
            << "\"dependencies\": " << dependencies_
+           << "\"leaves\": " << leaves_
            << " }";
 }
 
