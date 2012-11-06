@@ -25,8 +25,13 @@
 #include "dogen/disable_cmakelists/domain/all.hpp"
 #include "dogen/disable_cmakelists/io/all_io.hpp"
 #include "dogen/disable_cmakelists/serialization/all_ser.hpp"
+#include "dogen/disable_cmakelists/serialization/registrar_ser.hpp"
 #include "dogen/disable_cmakelists/test_data/all_td.hpp"
 #include "dogen/disable_cmakelists/hash/all_hash.hpp"
+
+template<typename Archive> void register_types(Archive& ar) {
+    dogen::disable_cmakelists::register_types<Archive>(ar);
+}
 
 namespace {
 

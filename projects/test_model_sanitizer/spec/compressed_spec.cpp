@@ -25,8 +25,13 @@
 #include "dogen/compressed/domain/all.hpp"
 #include "dogen/compressed/io/all_io.hpp"
 #include "dogen/compressed/serialization/all_ser.hpp"
+#include "dogen/compressed/serialization/registrar_ser.hpp"
 #include "dogen/compressed/test_data/all_td.hpp"
 #include "dogen/compressed/hash/all_hash.hpp"
+
+template<typename Archive> void register_types(Archive& ar) {
+    dogen::compressed::register_types<Archive>(ar);
+}
 
 namespace {
 

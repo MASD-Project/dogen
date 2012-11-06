@@ -25,8 +25,13 @@
 #include "dogen/disable_full_ctor/domain/all.hpp"
 #include "dogen/disable_full_ctor/io/all_io.hpp"
 #include "dogen/disable_full_ctor/serialization/all_ser.hpp"
+#include "dogen/disable_full_ctor/serialization/registrar_ser.hpp"
 #include "dogen/disable_full_ctor/test_data/all_td.hpp"
 #include "dogen/disable_full_ctor/hash/all_hash.hpp"
+
+template<typename Archive> void register_types(Archive& ar) {
+    dogen::disable_full_ctor::register_types<Archive>(ar);
+}
 
 namespace {
 

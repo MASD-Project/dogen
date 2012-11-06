@@ -25,8 +25,13 @@
 #include "dogen/stand_alone_class/domain/all.hpp"
 #include "dogen/stand_alone_class/io/all_io.hpp"
 #include "dogen/stand_alone_class/serialization/all_ser.hpp"
+#include "dogen/stand_alone_class/serialization/registrar_ser.hpp"
 #include "dogen/stand_alone_class/test_data/all_td.hpp"
 #include "dogen/stand_alone_class/hash/all_hash.hpp"
+
+template<typename Archive> void register_types(Archive& ar) {
+    dogen::stand_alone_class::register_types<Archive>(ar);
+}
 
 namespace {
 

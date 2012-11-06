@@ -25,8 +25,13 @@
 #include "dogen/class_without_attributes/domain/all.hpp"
 #include "dogen/class_without_attributes/io/all_io.hpp"
 #include "dogen/class_without_attributes/serialization/all_ser.hpp"
+#include "dogen/class_without_attributes/serialization/registrar_ser.hpp"
 #include "dogen/class_without_attributes/test_data/all_td.hpp"
 #include "dogen/class_without_attributes/hash/all_hash.hpp"
+
+template<typename Archive> void register_types(Archive& ar) {
+    dogen::class_without_attributes::register_types<Archive>(ar);
+}
 
 namespace {
 

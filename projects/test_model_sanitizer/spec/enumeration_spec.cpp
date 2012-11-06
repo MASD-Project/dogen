@@ -25,8 +25,13 @@
 #include "dogen/enumeration/domain/all.hpp"
 #include "dogen/enumeration/io/all_io.hpp"
 #include "dogen/enumeration/serialization/all_ser.hpp"
+#include "dogen/enumeration/serialization/registrar_ser.hpp"
 #include "dogen/enumeration/test_data/all_td.hpp"
 #include "dogen/enumeration/hash/all_hash.hpp"
+
+template<typename Archive> void register_types(Archive& ar) {
+    dogen::enumeration::register_types<Archive>(ar);
+}
 
 namespace {
 

@@ -30,22 +30,23 @@ enum fields {
     prop_1_field = 1,
     prop_2_field = 2,
     prop_3_field = 3,
-    versioned_key_field = 4
+    prop_4_field = 4,
+    versioned_key_field = 5
 };
 
 const std::string load_name("statement_boost_model_class_b_load");
 const std::string load_id_name("statement_boost_model_class_b_load_id");
 const std::string load_work_name("work_boost_model_class_b_load");
-const std::string load_sql("select * from boost_model_class_b_load($0, $1, $2, $3, $4);");
+const std::string load_sql("select * from boost_model_class_b_load($0, $1, $2, $3, $4, $5);");
 
 const std::string erase_name("statement_boost_model_class_b_erase");
 const std::string erase_id_name("statement_boost_model_class_b_erase_id");
 const std::string erase_work_name("work_boost_model_class_b_erase");
-const std::string erase_sql("select * from boost_model_class_b_erase($0, $1, $2, $3, $4);");
+const std::string erase_sql("select * from boost_model_class_b_erase($0, $1, $2, $3, $4, $5);");
 
 const std::string save_name("statement_boost_model_class_b_save");
 const std::string save_work_name("work_boost_model_class_b_save");
-const std::string save_sql("select boost_model_class_b_save($0, $1, $2, $3, $4);");
+const std::string save_sql("select boost_model_class_b_save($0, $1, $2, $3, $4, $5);");
 
 }
 

@@ -40,6 +40,8 @@
 #include "dogen/utility/io/jsonify_io.hpp"
 #include "dogen/utility/log/logger.hpp"
 
+template<typename Archive> void register_types(Archive& ar);
+
 namespace dogen {
 namespace utility {
 namespace test {
@@ -72,6 +74,7 @@ private:
         std::ostringstream output_stream;
         {
             OutputArchive output_archive(output_stream);
+            register_types<OutputArchive>(output_archive);
             output_archive << BOOST_SERIALIZATION_NVP(a);
         }
 
@@ -80,6 +83,7 @@ private:
         std::istringstream input_stream(output_stream.str());
         {
             InputArchive input_archive(input_stream);
+            register_types<InputArchive>(input_archive);
             input_archive >> BOOST_SERIALIZATION_NVP(b);
         }
         BOOST_LOG_SEV(lg, debug) << "after load: " << jsonify(b);

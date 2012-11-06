@@ -25,8 +25,13 @@
 #include "dogen/boost_model/domain/all.hpp"
 #include "dogen/boost_model/io/all_io.hpp"
 #include "dogen/boost_model/serialization/all_ser.hpp"
+#include "dogen/boost_model/serialization/registrar_ser.hpp"
 #include "dogen/boost_model/test_data/all_td.hpp"
 #include "dogen/boost_model/hash/all_hash.hpp"
+
+template<typename Archive> void register_types(Archive& ar) {
+    dogen::boost_model::register_types<Archive>(ar);
+}
 
 namespace {
 
