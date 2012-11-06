@@ -20,6 +20,8 @@
  */
 #include "dogen/std_model/test_data/base_td.hpp"
 #include "dogen/std_model/test_data/class_a_td.hpp"
+#include "dogen/std_model/test_data/class_a_unversioned_key_td.hpp"
+#include "dogen/std_model/test_data/class_a_versioned_key_td.hpp"
 #include "dogen/std_model/test_data/class_b_td.hpp"
 #include "dogen/std_model/test_data/class_d_td.hpp"
 #include "dogen/std_model/test_data/class_e_td.hpp"

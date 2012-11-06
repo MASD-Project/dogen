@@ -19,6 +19,8 @@
  *
  */
 #include "dogen/std_model/hash/class_a_hash.hpp"
+#include "dogen/std_model/hash/class_a_unversioned_key_hash.hpp"
+#include "dogen/std_model/hash/class_a_versioned_key_hash.hpp"
 #include "dogen/std_model/hash/pkg1/class_c_hash.hpp"
 
 namespace {
@@ -38,6 +40,22 @@ inline std::size_t hash_std_vector_dogen_std_model_class_a(const std::vector<dog
     return seed;
 }
 
+inline std::size_t hash_std_vector_dogen_std_model_class_a_unversioned_key(const std::vector<dogen::std_model::class_a_unversioned_key>& v){
+    std::size_t seed(0);
+    for (const auto i : v) {
+        combine(seed, i);
+    }
+    return seed;
+}
+
+inline std::size_t hash_std_vector_dogen_std_model_class_a_versioned_key(const std::vector<dogen::std_model::class_a_versioned_key>& v){
+    std::size_t seed(0);
+    for (const auto i : v) {
+        combine(seed, i);
+    }
+    return seed;
+}
+
 }
 
 namespace dogen {
@@ -49,6 +67,8 @@ std::size_t class_c_hasher::hash(const class_c&v) {
 
     combine(seed, v.prop_0());
     combine(seed, hash_std_vector_dogen_std_model_class_a(v.prop_1()));
+    combine(seed, hash_std_vector_dogen_std_model_class_a_unversioned_key(v.prop_2()));
+    combine(seed, hash_std_vector_dogen_std_model_class_a_versioned_key(v.prop_3()));
 
     return seed;
 }

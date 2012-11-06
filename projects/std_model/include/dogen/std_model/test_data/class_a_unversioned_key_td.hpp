@@ -18,31 +18,36 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/std_model/hash/class_a_hash.hpp"
-#include "dogen/std_model/hash/class_a_versioned_key_hash.hpp"
+#ifndef DOGEN_STD_MODEL_TEST_DATA_CLASS_A_UNVERSIONED_KEY_TD_HPP
+#define DOGEN_STD_MODEL_TEST_DATA_CLASS_A_UNVERSIONED_KEY_TD_HPP
 
-namespace {
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
-template <typename HashableType>
-inline void combine(std::size_t& seed, const HashableType& value)
-{
-    std::hash<HashableType> hasher;
-    seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
-}
-
-}
+#include "dogen/std_model/domain/class_a_unversioned_key.hpp"
 
 namespace dogen {
 namespace std_model {
 
-std::size_t class_a_hasher::hash(const class_a&v) {
-    std::size_t seed(0);
+class class_a_unversioned_key_generator {
+public:
+    class_a_unversioned_key_generator();
 
-    combine(seed, v.prop0());
-    combine(seed, v.prop1());
-    combine(seed, v.versioned_key());
+public:
+    typedef dogen::std_model::class_a_unversioned_key result_type;
 
-    return seed;
-}
+public:
+    static void populate(const unsigned int position, result_type& v);
+    static result_type create(const unsigned int position);
+    result_type operator()();
+
+private:
+    unsigned int position_;
+public:
+    static result_type* create_ptr(const unsigned int position);
+};
 
 } }
+
+#endif

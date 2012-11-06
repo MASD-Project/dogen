@@ -18,21 +18,12 @@
  * MA 02110-1301, USA.
  *
  */
-#include <sstream>
-#include "dogen/std_model/test_data/class_a_td.hpp"
 #include "dogen/std_model/test_data/class_a_versioned_key_td.hpp"
 
 namespace {
 
-std::string create_std_string(const unsigned int position) {
-    std::ostringstream s;
-    s << "a_string_" << position;
-    return s.str();
-}
-
-dogen::std_model::class_a_versioned_key
-create_dogen_std_model_class_a_versioned_key(const unsigned int position) {
-    return dogen::std_model::class_a_versioned_key_generator::create(position);
+unsigned int create_unsigned_int(const unsigned int position) {
+    return static_cast<unsigned int>(position);
 }
 
 }
@@ -40,30 +31,29 @@ create_dogen_std_model_class_a_versioned_key(const unsigned int position) {
 namespace dogen {
 namespace std_model {
 
-class_a_generator::class_a_generator() : position_(0) { }
+class_a_versioned_key_generator::class_a_versioned_key_generator() : position_(0) { }
 
-void class_a_generator::
+void class_a_versioned_key_generator::
 populate(const unsigned int position, result_type& v) {
-    v.prop0(create_std_string(position + 0));
-    v.prop1(create_std_string(position + 1));
-    v.versioned_key(create_dogen_std_model_class_a_versioned_key(position + 2));
+    v.id(create_unsigned_int(position + 0));
+    v.version(create_unsigned_int(position + 1));
 }
 
-class_a_generator::result_type
-class_a_generator::create(const unsigned int position) {
-    class_a r;
-    class_a_generator::populate(position, r);
+class_a_versioned_key_generator::result_type
+class_a_versioned_key_generator::create(const unsigned int position) {
+    class_a_versioned_key r;
+    class_a_versioned_key_generator::populate(position, r);
     return r;
 }
-class_a_generator::result_type*
-class_a_generator::create_ptr(const unsigned int position) {
-    class_a* p = new class_a();
-    class_a_generator::populate(position, *p);
+class_a_versioned_key_generator::result_type*
+class_a_versioned_key_generator::create_ptr(const unsigned int position) {
+    class_a_versioned_key* p = new class_a_versioned_key();
+    class_a_versioned_key_generator::populate(position, *p);
     return p;
 }
 
-class_a_generator::result_type
-class_a_generator::operator()() {
+class_a_versioned_key_generator::result_type
+class_a_versioned_key_generator::operator()() {
     return create(position_++);
 }
 

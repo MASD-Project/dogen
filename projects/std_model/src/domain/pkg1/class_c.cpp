@@ -29,19 +29,27 @@ class_c::class_c()
 
 class_c::class_c(
     const int prop_0,
-    const std::vector<dogen::std_model::class_a>& prop_1)
+    const std::vector<dogen::std_model::class_a>& prop_1,
+    const std::vector<dogen::std_model::class_a_unversioned_key>& prop_2,
+    const std::vector<dogen::std_model::class_a_versioned_key>& prop_3)
     : prop_0_(prop_0),
-      prop_1_(prop_1) { }
+      prop_1_(prop_1),
+      prop_2_(prop_2),
+      prop_3_(prop_3) { }
 
 void class_c::swap(class_c& other) noexcept {
     using std::swap;
     swap(prop_0_, other.prop_0_);
     swap(prop_1_, other.prop_1_);
+    swap(prop_2_, other.prop_2_);
+    swap(prop_3_, other.prop_3_);
 }
 
 bool class_c::operator==(const class_c& rhs) const {
     return prop_0_ == rhs.prop_0_ &&
-        prop_1_ == rhs.prop_1_;
+        prop_1_ == rhs.prop_1_ &&
+        prop_2_ == rhs.prop_2_ &&
+        prop_3_ == rhs.prop_3_;
 }
 
 class_c& class_c::operator=(class_c other) {

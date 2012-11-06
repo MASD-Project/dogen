@@ -18,31 +18,18 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/std_model/hash/class_a_hash.hpp"
-#include "dogen/std_model/hash/class_a_versioned_key_hash.hpp"
+#ifndef DOGEN_STD_MODEL_DOMAIN_CLASS_A_VERSIONED_KEY_FWD_HPP
+#define DOGEN_STD_MODEL_DOMAIN_CLASS_A_VERSIONED_KEY_FWD_HPP
 
-namespace {
-
-template <typename HashableType>
-inline void combine(std::size_t& seed, const HashableType& value)
-{
-    std::hash<HashableType> hasher;
-    seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
-}
-
-}
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
 namespace dogen {
 namespace std_model {
 
-std::size_t class_a_hasher::hash(const class_a&v) {
-    std::size_t seed(0);
-
-    combine(seed, v.prop0());
-    combine(seed, v.prop1());
-    combine(seed, v.versioned_key());
-
-    return seed;
-}
+class class_a_versioned_key;
 
 } }
+
+#endif

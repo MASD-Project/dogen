@@ -28,6 +28,8 @@
 #include <algorithm>
 #include <vector>
 #include "dogen/std_model/domain/class_a.hpp"
+#include "dogen/std_model/domain/class_a_unversioned_key.hpp"
+#include "dogen/std_model/domain/class_a_versioned_key.hpp"
 #include "dogen/std_model/serialization/pkg1/class_c_fwd_ser.hpp"
 
 namespace dogen {
@@ -46,7 +48,9 @@ public:
 public:
     class_c(
         const int prop_0,
-        const std::vector<dogen::std_model::class_a>& prop_1);
+        const std::vector<dogen::std_model::class_a>& prop_1,
+        const std::vector<dogen::std_model::class_a_unversioned_key>& prop_2,
+        const std::vector<dogen::std_model::class_a_versioned_key>& prop_3);
 
 private:
     template<typename Archive>
@@ -72,6 +76,22 @@ public:
         prop_1_ = v;
     }
 
+    std::vector<dogen::std_model::class_a_unversioned_key> prop_2() const {
+        return prop_2_;
+    }
+
+    void prop_2(const std::vector<dogen::std_model::class_a_unversioned_key>& v) {
+        prop_2_ = v;
+    }
+
+    std::vector<dogen::std_model::class_a_versioned_key> prop_3() const {
+        return prop_3_;
+    }
+
+    void prop_3(const std::vector<dogen::std_model::class_a_versioned_key>& v) {
+        prop_3_ = v;
+    }
+
 public:
     bool operator==(const class_c& rhs) const;
     bool operator!=(const class_c& rhs) const {
@@ -85,6 +105,8 @@ public:
 private:
     int prop_0_;
     std::vector<dogen::std_model::class_a> prop_1_;
+    std::vector<dogen::std_model::class_a_unversioned_key> prop_2_;
+    std::vector<dogen::std_model::class_a_versioned_key> prop_3_;
 };
 
 } } }

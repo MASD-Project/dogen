@@ -20,6 +20,7 @@
  */
 #include <ostream>
 #include "dogen/std_model/io/class_a_io.hpp"
+#include "dogen/std_model/io/class_a_versioned_key_io.hpp"
 
 namespace dogen {
 namespace std_model {
@@ -28,7 +29,8 @@ std::ostream& operator<<(std::ostream& s, const class_a& v) {
     s << " { "
       << "\"__type__\": " << "\"class_a\"" << ", "
       << "\"prop0\": " << "\"" << v.prop0() << "\"" << ", "
-      << "\"prop1\": " << "\"" << v.prop1() << "\""
+      << "\"prop1\": " << "\"" << v.prop1() << "\"" << ", "
+      << "\"versioned_key\": " << v.versioned_key()
       << " }";
     return(s);
 }

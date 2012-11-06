@@ -18,31 +18,30 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/std_model/hash/class_a_hash.hpp"
-#include "dogen/std_model/hash/class_a_versioned_key_hash.hpp"
-
-namespace {
-
-template <typename HashableType>
-inline void combine(std::size_t& seed, const HashableType& value)
-{
-    std::hash<HashableType> hasher;
-    seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
-}
-
-}
+#include "dogen/std_model/domain/class_a_unversioned_key.hpp"
 
 namespace dogen {
 namespace std_model {
 
-std::size_t class_a_hasher::hash(const class_a&v) {
-    std::size_t seed(0);
+class_a_unversioned_key::class_a_unversioned_key()
+    : id_(static_cast<unsigned int>(0)) { }
 
-    combine(seed, v.prop0());
-    combine(seed, v.prop1());
-    combine(seed, v.versioned_key());
+class_a_unversioned_key::class_a_unversioned_key(const unsigned int id)
+    : id_(id) { }
 
-    return seed;
+void class_a_unversioned_key::swap(class_a_unversioned_key& other) noexcept {
+    using std::swap;
+    swap(id_, other.id_);
+}
+
+bool class_a_unversioned_key::operator==(const class_a_unversioned_key& rhs) const {
+    return id_ == rhs.id_;
+}
+
+class_a_unversioned_key& class_a_unversioned_key::operator=(class_a_unversioned_key other) {
+    using std::swap;
+    swap(*this, other);
+    return *this;
 }
 
 } }

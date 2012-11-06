@@ -20,6 +20,8 @@
  */
 #include "dogen/std_model/domain/base.hpp"
 #include "dogen/std_model/domain/class_a.hpp"
+#include "dogen/std_model/domain/class_a_unversioned_key.hpp"
+#include "dogen/std_model/domain/class_a_versioned_key.hpp"
 #include "dogen/std_model/domain/class_b.hpp"
 #include "dogen/std_model/domain/class_d.hpp"
 #include "dogen/std_model/domain/class_e.hpp"
