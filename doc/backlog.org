@@ -667,16 +667,6 @@ extension of the file. From a cursory look, all the usages we have of
 assert object can be replaced by assert file. If that's the case we
 can also remove this function.
 
-*** Code generation of exception classes
-
-The code generator should generate exception classes too. We need some
-form of attribute (perhaps a Dia stereotype) to mark the class as an
-exception and then the code generator will use a different template
-for the class generator. We could have an option of boost exception or
-not. We may need to have a form of inheriting from a base exception
-for a given model. We also need to be able to inherit from other
-exceptions in a model.
-
 *** Investigate GDB visualisers for generated models
 
 It would be great if the code generator created GDB visualisers for
