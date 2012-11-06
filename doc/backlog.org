@@ -620,20 +620,6 @@ task.
   on them. To start off with they may contain postgres so we can
   connect locally.
 
-*** Package names should follow a well-known convention
-
-We need to make sure our package names are consistent with the
-platform conventions.
-
-- [[http://pastebin.com/TR17TUy9][Example of platform IFs]]
-- [[http://libdivsufsort.googlecode.com/svn-history/r6/trunk/CMakeModules/ProjectCPack.cmake][Example CPack]]
-- [[http://cmake.3232098.n2.nabble.com/Automatically-add-a-revision-number-to-the-CPack-installer-name-td7356239.htmlhttp://cmake.3232098.n2.nabble.com/Automatically-add-a-revision-number-to-the-CPack-installer-name-td7356239.html][Automatically add a revision number to the CPack installer name]]
-- [[http://www.cmake.org/Wiki/CMake:CPackConfiguration][CPack Configuration]]
-
-There are some known limitations in package naming:
-
-- http://public.kitware.com/Bug/view.php?id=12997
-
 *** Check if we've replaced =assert_object= with =assert_file=        :story:
 
 Assert file is now able to do intelligent comparisons based on the
@@ -912,3 +898,16 @@ hashing/comparison infrastructure for shared pointers. Further, as it
 has been pointed out, keys should be immutable; having pointers as
 keys opens the doors to all sorts of problems. We need to throw an
 error at model building time if an user tries to do this.
+*** Package names should follow a well-known convention
+
+We need to make sure our package names are consistent with the
+platform conventions.
+
+- [[http://pastebin.com/TR17TUy9][Example of platform IFs]]
+- [[http://libdivsufsort.googlecode.com/svn-history/r6/trunk/CMakeModules/ProjectCPack.cmake][Example CPack]]
+- [[http://cmake.3232098.n2.nabble.com/Automatically-add-a-revision-number-to-the-CPack-installer-name-td7356239.htmlhttp://cmake.3232098.n2.nabble.com/Automatically-add-a-revision-number-to-the-CPack-installer-name-td7356239.html][Automatically add a revision number to the CPack installer name]]
+- [[http://www.cmake.org/Wiki/CMake:CPackConfiguration][CPack Configuration]]
+
+There are some known limitations in package naming:
+
+- http://public.kitware.com/Bug/view.php?id=12997
