@@ -23,22 +23,8 @@
 namespace dogen {
 namespace comments {
 
-multi_line::multi_line(const dogen::comments::versioned_key& versioned_key)
-    : versioned_key_(versioned_key) { }
-
-void multi_line::swap(multi_line& other) noexcept {
-    using std::swap;
-    swap(versioned_key_, other.versioned_key_);
-}
-
-bool multi_line::operator==(const multi_line& rhs) const {
-    return versioned_key_ == rhs.versioned_key_;
-}
-
-multi_line& multi_line::operator=(multi_line other) {
-    using std::swap;
-    swap(*this, other);
-    return *this;
+bool multi_line::operator==(const multi_line& /*rhs*/) const {
+    return true;
 }
 
 } }

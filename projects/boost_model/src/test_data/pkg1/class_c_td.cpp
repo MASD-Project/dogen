@@ -20,7 +20,6 @@
  */
 #include "dogen/boost_model/test_data/class_a_td.hpp"
 #include "dogen/boost_model/test_data/pkg1/class_c_td.hpp"
-#include "dogen/boost_model/test_data/versioned_key_td.hpp"
 
 namespace {
 
@@ -41,11 +40,6 @@ std::vector<dogen::boost_model::class_a> create_std_vector_dogen_boost_model_cla
     return r;
 }
 
-dogen::boost_model::versioned_key
-create_dogen_boost_model_versioned_key(const unsigned int position) {
-    return dogen::boost_model::versioned_key_generator::create(position);
-}
-
 }
 
 namespace dogen {
@@ -58,7 +52,6 @@ void class_c_generator::
 populate(const unsigned int position, result_type& v) {
     v.prop_0(create_int(position + 0));
     v.prop_1(create_std_vector_dogen_boost_model_class_a(position + 1));
-    v.versioned_key(create_dogen_boost_model_versioned_key(position + 2));
 }
 
 class_c_generator::result_type

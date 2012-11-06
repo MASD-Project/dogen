@@ -20,12 +20,12 @@
  */
 #include <ostream>
 #include "dogen/trivial_inheritance/domain/parent_without_members.hpp"
-#include "dogen/trivial_inheritance/io/versioned_key_io.hpp"
+#include "dogen/trivial_inheritance/io/parent_without_members_versioned_key_io.hpp"
 
 namespace dogen {
 namespace trivial_inheritance {
 
-parent_without_members::parent_without_members(const dogen::trivial_inheritance::versioned_key& versioned_key)
+parent_without_members::parent_without_members(const dogen::trivial_inheritance::parent_without_members_versioned_key& versioned_key)
     : versioned_key_(versioned_key) { }
 
 void parent_without_members::to_stream(std::ostream& s) const {

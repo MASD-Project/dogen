@@ -84,8 +84,7 @@ config::cpp_settings mock_settings_factory::build_cpp_settings(
         cpp_facet_types::hash,
         cpp_facet_types::serialization,
         cpp_facet_types::io,
-        cpp_facet_types::test_data,
-        cpp_facet_types::database
+        cpp_facet_types::test_data
     };
     r.enabled_facets(f);
     r.header_extension(header_extension);

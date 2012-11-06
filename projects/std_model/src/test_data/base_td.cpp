@@ -21,7 +21,6 @@
 #include <sstream>
 #include "dogen/std_model/test_data/base_td.hpp"
 #include "dogen/std_model/test_data/derived_td.hpp"
-#include "dogen/std_model/test_data/versioned_key_td.hpp"
 
 namespace {
 
@@ -39,11 +38,6 @@ std::vector<std::string> create_std_vector_std_string(unsigned int position) {
     return r;
 }
 
-dogen::std_model::versioned_key
-create_dogen_std_model_versioned_key(const unsigned int position) {
-    return dogen::std_model::versioned_key_generator::create(position);
-}
-
 }
 
 namespace dogen {
@@ -53,7 +47,6 @@ namespace std_model {
 void base_generator::
 populate(const unsigned int position, result_type& v) {
     v.prop_0(create_std_vector_std_string(position + 0));
-    v.versioned_key(create_dogen_std_model_versioned_key(position + 1));
 }
 
 base_generator::result_type*

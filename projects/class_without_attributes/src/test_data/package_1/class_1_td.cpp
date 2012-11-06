@@ -19,16 +19,8 @@
  *
  */
 #include "dogen/class_without_attributes/test_data/package_1/class_1_td.hpp"
-#include "dogen/class_without_attributes/test_data/versioned_key_td.hpp"
 
-namespace {
 
-dogen::class_without_attributes::versioned_key
-create_dogen_class_without_attributes_versioned_key(const unsigned int position) {
-    return dogen::class_without_attributes::versioned_key_generator::create(position);
-}
-
-}
 
 namespace dogen {
 namespace class_without_attributes {
@@ -37,14 +29,12 @@ namespace package_1 {
 class_1_generator::class_1_generator() : position_(0) { }
 
 void class_1_generator::
-populate(const unsigned int position, result_type& v) {
-    v.versioned_key(create_dogen_class_without_attributes_versioned_key(position + 0));
+populate(const unsigned int /*position*/, result_type& /*v*/) {
 }
 
 class_1_generator::result_type
-class_1_generator::create(const unsigned int position) {
+class_1_generator::create(const unsigned int/*position*/) {
     class_1 r;
-    class_1_generator::populate(position, r);
     return r;
 }
 class_1_generator::result_type*

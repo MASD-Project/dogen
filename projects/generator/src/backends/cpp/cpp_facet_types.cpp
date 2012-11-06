@@ -30,7 +30,6 @@ const std::string hash("\"cpp_facet_types::hash\"");
 const std::string serialization("\"cpp_facet_types::serialization\"");
 const std::string io("\"cpp_facet_types::io\"");
 const std::string test_data("\"cpp_facet_types::test_data\"");
-const std::string database("\"cpp_facet_types::database\"");
 const std::string error_message("\"Invalid or unexpected C++ facet type\"");
 
 }
@@ -54,8 +53,6 @@ std::ostream& operator<<(std::ostream& stream, cpp_facet_types value) {
         return stream << io;
     case cpp_facet_types::test_data:
         return stream << test_data;
-    case cpp_facet_types::database:
-        return stream << database;
     default:
         break;
     }

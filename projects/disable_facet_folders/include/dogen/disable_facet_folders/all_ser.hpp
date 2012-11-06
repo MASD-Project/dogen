@@ -19,5 +19,3 @@
  *
  */
 #include "dogen/disable_facet_folders/package1/first_class_ser.hpp"
-#include "dogen/disable_facet_folders/unversioned_key_ser.hpp"
-#include "dogen/disable_facet_folders/versioned_key_ser.hpp"

@@ -19,5 +19,3 @@
  *
  */
 #include "dogen/disable_full_ctor/domain/package1/first_class.hpp"
-#include "dogen/disable_full_ctor/domain/unversioned_key.hpp"
-#include "dogen/disable_full_ctor/domain/versioned_key.hpp"

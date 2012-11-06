@@ -30,10 +30,8 @@ class_derived::class_derived()
 
 class_derived::class_derived(
     const int prop_0,
-    const dogen::boost_model::versioned_key& versioned_key,
     const int prop_1)
-    : dogen::boost_model::class_base(prop_0,
-      versioned_key),
+    : dogen::boost_model::class_base(prop_0),
       prop_1_(prop_1) { }
 
 void class_derived::to_stream(std::ostream& s) const {

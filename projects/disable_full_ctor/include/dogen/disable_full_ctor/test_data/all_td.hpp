@@ -19,5 +19,3 @@
  *
  */
 #include "dogen/disable_full_ctor/test_data/package1/first_class_td.hpp"
-#include "dogen/disable_full_ctor/test_data/unversioned_key_td.hpp"
-#include "dogen/disable_full_ctor/test_data/versioned_key_td.hpp"

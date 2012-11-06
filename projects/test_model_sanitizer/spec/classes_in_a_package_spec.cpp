@@ -54,8 +54,6 @@ BOOST_AUTO_TEST_CASE(validate_equality) {
     test_equality<class_3_generator>();
     test_equality<class_4_generator>();
     test_equality<class_5_generator>();
-    test_equality<versioned_key_generator>();
-    test_equality<unversioned_key_generator>();
 }
 
 BOOST_AUTO_TEST_CASE(validate_serialisation) {
@@ -65,8 +63,6 @@ BOOST_AUTO_TEST_CASE(validate_serialisation) {
     rountrip_type<class_3_generator>();
     rountrip_type<class_4_generator>();
     rountrip_type<class_5_generator>();
-    rountrip_type<versioned_key_generator>();
-    rountrip_type<unversioned_key_generator>();
 }
 
 BOOST_AUTO_TEST_CASE(validate_hashing) {
@@ -76,8 +72,6 @@ BOOST_AUTO_TEST_CASE(validate_hashing) {
     test_hashing<class_3_generator>();
     test_hashing<class_4_generator>();
     test_hashing<class_5_generator>();
-    test_hashing<versioned_key_generator>();
-    test_hashing<unversioned_key_generator>();
 }
 
 BOOST_AUTO_TEST_CASE(validate_swap) {
@@ -87,8 +81,6 @@ BOOST_AUTO_TEST_CASE(validate_swap) {
     test_swap<class_3_generator>();
     test_swap<class_4_generator>();
     test_swap<class_5_generator>();
-    test_swap<versioned_key_generator>();
-    test_swap<unversioned_key_generator>();
 }
 
 BOOST_AUTO_TEST_CASE(validate_io) {
@@ -98,8 +90,6 @@ BOOST_AUTO_TEST_CASE(validate_io) {
     test_io<class_3_generator>();
     test_io<class_4_generator>();
     test_io<class_5_generator>();
-    test_io<versioned_key_generator>();
-    test_io<unversioned_key_generator>();
 }
 
 BOOST_AUTO_TEST_SUITE_END()

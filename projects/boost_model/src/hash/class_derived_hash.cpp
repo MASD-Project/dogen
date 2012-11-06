@@ -35,7 +35,7 @@ inline void combine(std::size_t& seed, const HashableType& value)
 namespace dogen {
 namespace boost_model {
 
-std::size_t class_derived_hasher::hash(const class_derived& v) {
+std::size_t class_derived_hasher::hash(const class_derived&v) {
     std::size_t seed(0);
 
     combine(seed, dynamic_cast<const dogen::boost_model::class_base&>(v));

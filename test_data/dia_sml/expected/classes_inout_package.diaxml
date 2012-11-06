@@ -531,7 +531,7 @@
 								<item>
 									<which>6</which>
 									<value>
-										<value>11.575,14.95;15.3725,17.25</value>
+										<value>11.575,14.95;16.795,17.85</value>
 									</value>
 								</item>
 							</values>
@@ -557,7 +557,7 @@
 								<item>
 									<which>2</which>
 									<value>
-										<value>3.6975000000000002</value>
+										<value>5.1200000000000001</value>
 									</value>
 								</item>
 							</values>
@@ -570,7 +570,7 @@
 								<item>
 									<which>2</which>
 									<value>
-										<value>2.1999999999999997</value>
+										<value>2.7999999999999998</value>
 									</value>
 								</item>
 							</values>
@@ -967,18 +967,136 @@
 						<item object_id="_71">
 							<name>attributes</name>
 							<values>
-								<count>0</count>
+								<count>1</count>
 								<item_version>0</item_version>
+								<item>
+									<which>9</which>
+									<value object_id="_72">
+										<type>umlattribute</type>
+										<value>
+											<count>7</count>
+											<item_version>1</item_version>
+											<item>
+												<px class_id_reference="3" object_id="_73">
+													<name>name</name>
+													<values>
+														<count>1</count>
+														<item_version>0</item_version>
+														<item>
+															<which>5</which>
+															<value>
+																<value>#prop_0#</value>
+															</value>
+														</item>
+													</values>
+												</px>
+											</item>
+											<item>
+												<px class_id_reference="3" object_id="_74">
+													<name>type</name>
+													<values>
+														<count>1</count>
+														<item_version>0</item_version>
+														<item>
+															<which>5</which>
+															<value>
+																<value>#int#</value>
+															</value>
+														</item>
+													</values>
+												</px>
+											</item>
+											<item>
+												<px class_id_reference="3" object_id="_75">
+													<name>value</name>
+													<values>
+														<count>1</count>
+														<item_version>0</item_version>
+														<item>
+															<which>5</which>
+															<value>
+																<value>##</value>
+															</value>
+														</item>
+													</values>
+												</px>
+											</item>
+											<item>
+												<px class_id_reference="3" object_id="_76">
+													<name>comment</name>
+													<values>
+														<count>1</count>
+														<item_version>0</item_version>
+														<item>
+															<which>5</which>
+															<value>
+																<value>##</value>
+															</value>
+														</item>
+													</values>
+												</px>
+											</item>
+											<item>
+												<px class_id_reference="3" object_id="_77">
+													<name>visibility</name>
+													<values>
+														<count>1</count>
+														<item_version>0</item_version>
+														<item>
+															<which>8</which>
+															<value class_id="24" tracking_level="0" version="0">
+																<value>0</value>
+															</value>
+														</item>
+													</values>
+												</px>
+											</item>
+											<item>
+												<px class_id_reference="3" object_id="_78">
+													<name>abstract</name>
+													<values>
+														<count>1</count>
+														<item_version>0</item_version>
+														<item>
+															<which>4</which>
+															<value>
+																<value>false</value>
+															</value>
+														</item>
+													</values>
+												</px>
+											</item>
+											<item>
+												<px class_id_reference="3" object_id="_79">
+													<name>class_scope</name>
+													<values>
+														<count>1</count>
+														<item_version>0</item_version>
+														<item>
+															<which>4</which>
+															<value>
+																<value>false</value>
+															</value>
+														</item>
+													</values>
+												</px>
+											</item>
+										</value>
+										<inner_composite>
+											<px class_id="-1"></px>
+										</inner_composite>
+									</value>
+								</item>
 							</values>
 						</item>
-						<item object_id="_72">
+						<item object_id="_80">
 							<name>operations</name>
 							<values>
 								<count>0</count>
 								<item_version>0</item_version>
 							</values>
 						</item>
-						<item object_id="_73">
+						<item object_id="_81">
 							<name>template</name>
 							<values>
 								<count>1</count>
@@ -991,7 +1109,7 @@
 								</item>
 							</values>
 						</item>
-						<item object_id="_74">
+						<item object_id="_82">
 							<name>templates</name>
 							<values>
 								<count>0</count>
@@ -1002,7 +1120,7 @@
 					<child_node>
 						<initialized>1</initialized>
 						<item_version>0</item_version>
-						<value class_id="24" tracking_level="0" version="0">
+						<value class_id="25" tracking_level="0" version="0">
 							<parent>O0</parent>
 						</value>
 					</child_node>
@@ -1018,7 +1136,7 @@
 					<attributes>
 						<count>38</count>
 						<item_version>0</item_version>
-						<item object_id="_75">
+						<item object_id="_83">
 							<name>obj_pos</name>
 							<values>
 								<count>1</count>
@@ -1031,7 +1149,7 @@
 								</item>
 							</values>
 						</item>
-						<item object_id="_76">
+						<item object_id="_84">
 							<name>obj_bb</name>
 							<values>
 								<count>1</count>
@@ -1039,12 +1157,12 @@
 								<item>
 									<which>6</which>
 									<value>
-										<value>39.7625,17.0125;43.56,19.3125</value>
+										<value>39.7625,17.0125;44.9825,19.9125</value>
 									</value>
 								</item>
 							</values>
 						</item>
-						<item object_id="_77">
+						<item object_id="_85">
 							<name>elem_corner</name>
 							<values>
 								<count>1</count>
@@ -1057,7 +1175,7 @@
 								</item>
 							</values>
 						</item>
-						<item object_id="_78">
+						<item object_id="_86">
 							<name>elem_width</name>
 							<values>
 								<count>1</count>
@@ -1065,12 +1183,12 @@
 								<item>
 									<which>2</which>
 									<value>
-										<value>3.6975000000000002</value>
+										<value>5.1200000000000001</value>
 									</value>
 								</item>
 							</values>
 						</item>
-						<item object_id="_79">
+						<item object_id="_87">
 							<name>elem_height</name>
 							<values>
 								<count>1</count>
@@ -1078,12 +1196,12 @@
 								<item>
 									<which>2</which>
 									<value>
-										<value>2.1999999999999997</value>
+										<value>2.7999999999999998</value>
 									</value>
 								</item>
 							</values>
 						</item>
-						<item object_id="_80">
+						<item object_id="_88">
 							<name>name</name>
 							<values>
 								<count>1</count>
@@ -1096,7 +1214,7 @@
 								</item>
 							</values>
 						</item>
-						<item object_id="_81">
+						<item object_id="_89">
 							<name>stereotype</name>
 							<values>
 								<count>1</count>
@@ -1109,7 +1227,7 @@
 								</item>
 							</values>
 						</item>
-						<item object_id="_82">
+						<item object_id="_90">
 							<name>comment</name>
 							<values>
 								<count>1</count>
@@ -1122,7 +1240,7 @@
 								</item>
 							</values>
 						</item>
-						<item object_id="_83">
+						<item object_id="_91">
 							<name>abstract</name>
 							<values>
 								<count>1</count>
@@ -1135,7 +1253,7 @@
 								</item>
 							</values>
 						</item>
-						<item object_id="_84">
+						<item object_id="_92">
 							<name>suppress_attributes</name>
 							<values>
 								<count>1</count>
@@ -1148,7 +1266,7 @@
 								</item>
 							</values>
 						</item>
-						<item object_id="_85">
+						<item object_id="_93">
 							<name>suppress_operations</name>
 							<values>
 								<count>1</count>
@@ -1161,7 +1279,7 @@
 								</item>
 							</values>
 						</item>
-						<item object_id="_86">
+						<item object_id="_94">
 							<name>visible_attributes</name>
 							<values>
 								<count>1</count>
@@ -1174,7 +1292,7 @@
 								</item>
 							</values>
 						</item>
-						<item object_id="_87">
+						<item object_id="_95">
 							<name>visible_operations</name>
 							<values>
 								<count>1</count>
@@ -1187,7 +1305,7 @@
 								</item>
 							</values>
 						</item>
-						<item object_id="_88">
+						<item object_id="_96">
 							<name>visible_comments</name>
 							<values>
 								<count>1</count>
@@ -1200,7 +1318,7 @@
 								</item>
 							</values>
 						</item>
-						<item object_id="_89">
+						<item object_id="_97">
 							<name>wrap_operations</name>
 							<values>
 								<count>1</count>
@@ -1213,7 +1331,7 @@
 								</item>
 							</values>
 						</item>
-						<item object_id="_90">
+						<item object_id="_98">
 							<name>wrap_after_char</name>
 							<values>
 								<count>1</count>
@@ -1226,7 +1344,7 @@
 								</item>
 							</values>
 						</item>
-						<item object_id="_91">
+						<item object_id="_99">
 							<name>comment_line_length</name>
 							<values>
 								<count>1</count>
@@ -1239,7 +1357,7 @@
 								</item>
 							</values>
 						</item>
-						<item object_id="_92">
+						<item object_id="_100">
 							<name>comment_tagging</name>
 							<values>
 								<count>1</count>
@@ -1252,7 +1370,7 @@
 								</item>
 							</values>
 						</item>
-						<item object_id="_93">
+						<item object_id="_101">
 							<name>line_width</name>
 							<values>
 								<count>1</count>
@@ -1265,7 +1383,7 @@
 								</item>
 							</values>
 						</item>
-						<item object_id="_94">
+						<item object_id="_102">
 							<name>line_color</name>
 							<values>
 								<count>1</count>
@@ -1278,7 +1396,7 @@
 								</item>
 							</values>
 						</item>
-						<item object_id="_95">
+						<item object_id="_103">
 							<name>fill_color</name>
 							<values>
 								<count>1</count>
@@ -1291,7 +1409,7 @@
 								</item>
 							</values>
 						</item>
-						<item object_id="_96">
+						<item object_id="_104">
 							<name>text_color</name>
 							<values>
 								<count>1</count>
@@ -1304,7 +1422,7 @@
 								</item>
 							</values>
 						</item>
-						<item object_id="_97">
+						<item object_id="_105">
 							<name>normal_font</name>
 							<values>
 								<count>1</count>
@@ -1319,7 +1437,7 @@
 								</item>
 							</values>
 						</item>
-						<item object_id="_98">
+						<item object_id="_106">
 							<name>abstract_font</name>
 							<values>
 								<count>1</count>
@@ -1334,7 +1452,7 @@
 								</item>
 							</values>
 						</item>
-						<item object_id="_99">
+						<item object_id="_107">
 							<name>polymorphic_font</name>
 							<values>
 								<count>1</count>
@@ -1349,7 +1467,7 @@
 								</item>
 							</values>
 						</item>
-						<item object_id="_100">
+						<item object_id="_108">
 							<name>classname_font</name>
 							<values>
 								<count>1</count>
@@ -1364,7 +1482,7 @@
 								</item>
 							</values>
 						</item>
-						<item object_id="_101">
+						<item object_id="_109">
 							<name>abstract_classname_font</name>
 							<values>
 								<count>1</count>
@@ -1379,7 +1497,7 @@
 								</item>
 							</values>
 						</item>
-						<item object_id="_102">
+						<item object_id="_110">
 							<name>comment_font</name>
 							<values>
 								<count>1</count>
@@ -1394,7 +1512,7 @@
 								</item>
 							</values>
 						</item>
-						<item object_id="_103">
+						<item object_id="_111">
 							<name>normal_font_height</name>
 							<values>
 								<count>1</count>
@@ -1407,7 +1525,7 @@
 								</item>
 							</values>
 						</item>
-						<item object_id="_104">
+						<item object_id="_112">
 							<name>polymorphic_font_height</name>
 							<values>
 								<count>1</count>
@@ -1420,7 +1538,7 @@
 								</item>
 							</values>
 						</item>
-						<item object_id="_105">
+						<item object_id="_113">
 							<name>abstract_font_height</name>
 							<values>
 								<count>1</count>
@@ -1433,7 +1551,7 @@
 								</item>
 							</values>
 						</item>
-						<item object_id="_106">
+						<item object_id="_114">
 							<name>classname_font_height</name>
 							<values>
 								<count>1</count>
@@ -1446,7 +1564,7 @@
 								</item>
 							</values>
 						</item>
-						<item object_id="_107">
+						<item object_id="_115">
 							<name>abstract_classname_font_height</name>
 							<values>
 								<count>1</count>
@@ -1459,7 +1577,7 @@
 								</item>
 							</values>
 						</item>
-						<item object_id="_108">
+						<item object_id="_116">
 							<name>comment_font_height</name>
 							<values>
 								<count>1</count>
@@ -1472,21 +1590,139 @@
 								</item>
 							</values>
 						</item>
-						<item object_id="_109">
+						<item object_id="_117">
 							<name>attributes</name>
 							<values>
-								<count>0</count>
+								<count>1</count>
 								<item_version>0</item_version>
+								<item>
+									<which>9</which>
+									<value object_id="_118">
+										<type>umlattribute</type>
+										<value>
+											<count>7</count>
+											<item_version>1</item_version>
+											<item>
+												<px class_id_reference="3" object_id="_119">
+													<name>name</name>
+													<values>
+														<count>1</count>
+														<item_version>0</item_version>
+														<item>
+															<which>5</which>
+															<value>
+																<value>#prop_0#</value>
+															</value>
+														</item>
+													</values>
+												</px>
+											</item>
+											<item>
+												<px class_id_reference="3" object_id="_120">
+													<name>type</name>
+													<values>
+														<count>1</count>
+														<item_version>0</item_version>
+														<item>
+															<which>5</which>
+															<value>
+																<value>#int#</value>
+															</value>
+														</item>
+													</values>
+												</px>
+											</item>
+											<item>
+												<px class_id_reference="3" object_id="_121">
+													<name>value</name>
+													<values>
+														<count>1</count>
+														<item_version>0</item_version>
+														<item>
+															<which>5</which>
+															<value>
+																<value>##</value>
+															</value>
+														</item>
+													</values>
+												</px>
+											</item>
+											<item>
+												<px class_id_reference="3" object_id="_122">
+													<name>comment</name>
+													<values>
+														<count>1</count>
+														<item_version>0</item_version>
+														<item>
+															<which>5</which>
+															<value>
+																<value>##</value>
+															</value>
+														</item>
+													</values>
+												</px>
+											</item>
+											<item>
+												<px class_id_reference="3" object_id="_123">
+													<name>visibility</name>
+													<values>
+														<count>1</count>
+														<item_version>0</item_version>
+														<item>
+															<which>8</which>
+															<value>
+																<value>0</value>
+															</value>
+														</item>
+													</values>
+												</px>
+											</item>
+											<item>
+												<px class_id_reference="3" object_id="_124">
+													<name>abstract</name>
+													<values>
+														<count>1</count>
+														<item_version>0</item_version>
+														<item>
+															<which>4</which>
+															<value>
+																<value>false</value>
+															</value>
+														</item>
+													</values>
+												</px>
+											</item>
+											<item>
+												<px class_id_reference="3" object_id="_125">
+													<name>class_scope</name>
+													<values>
+														<count>1</count>
+														<item_version>0</item_version>
+														<item>
+															<which>4</which>
+															<value>
+																<value>false</value>
+															</value>
+														</item>
+													</values>
+												</px>
+											</item>
+										</value>
+										<inner_composite>
+											<px class_id="-1"></px>
+										</inner_composite>
+									</value>
+								</item>
 							</values>
 						</item>
-						<item object_id="_110">
+						<item object_id="_126">
 							<name>operations</name>
 							<values>
 								<count>0</count>
 								<item_version>0</item_version>
 							</values>
 						</item>
-						<item object_id="_111">
+						<item object_id="_127">
 							<name>template</name>
 							<values>
 								<count>1</count>
@@ -1499,7 +1735,7 @@
 								</item>
 							</values>
 						</item>
-						<item object_id="_112">
+						<item object_id="_128">
 							<name>templates</name>
 							<values>
 								<count>0</count>

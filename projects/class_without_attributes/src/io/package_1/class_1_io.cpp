@@ -20,17 +20,14 @@
  */
 #include <ostream>
 #include "dogen/class_without_attributes/io/package_1/class_1_io.hpp"
-#include "dogen/class_without_attributes/io/versioned_key_io.hpp"
 
 namespace dogen {
 namespace class_without_attributes {
 namespace package_1 {
 
-std::ostream& operator<<(std::ostream& s, const class_1& v) {
+std::ostream& operator<<(std::ostream& s, const class_1&) {
     s << " { "
-      << "\"__type__\": " << "\"class_1\"" << ", "
-      << "\"versioned_key\": " << v.versioned_key()
-      << " }";
+      << "\"__type__\": " << "\"class_1\"" << " }";
     return(s);
 }
 

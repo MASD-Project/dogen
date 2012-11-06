@@ -20,7 +20,6 @@
  */
 #include <sstream>
 #include "dogen/std_model/test_data/class_a_td.hpp"
-#include "dogen/std_model/test_data/versioned_key_td.hpp"
 
 namespace {
 
@@ -28,11 +27,6 @@ std::string create_std_string(const unsigned int position) {
     std::ostringstream s;
     s << "a_string_" << position;
     return s.str();
-}
-
-dogen::std_model::versioned_key
-create_dogen_std_model_versioned_key(const unsigned int position) {
-    return dogen::std_model::versioned_key_generator::create(position);
 }
 
 }
@@ -46,7 +40,6 @@ void class_a_generator::
 populate(const unsigned int position, result_type& v) {
     v.prop0(create_std_string(position + 0));
     v.prop1(create_std_string(position + 1));
-    v.versioned_key(create_dogen_std_model_versioned_key(position + 2));
 }
 
 class_a_generator::result_type

@@ -26,7 +26,6 @@
 #endif
 
 #include <algorithm>
-#include "dogen/boost_model/domain/versioned_key.hpp"
 #include "dogen/boost_model/serialization/class_a_fwd_ser.hpp"
 
 namespace dogen {
@@ -42,9 +41,7 @@ public:
     class_a();
 
 public:
-    class_a(
-        const unsigned int prop_0,
-        const dogen::boost_model::versioned_key& versioned_key);
+    explicit class_a(const unsigned int prop_0);
 
 private:
     template<typename Archive>
@@ -62,14 +59,6 @@ public:
         prop_0_ = v;
     }
 
-    dogen::boost_model::versioned_key versioned_key() const {
-        return versioned_key_;
-    }
-
-    void versioned_key(const dogen::boost_model::versioned_key& v) {
-        versioned_key_ = v;
-    }
-
 public:
     bool operator==(const class_a& rhs) const;
     bool operator!=(const class_a& rhs) const {
@@ -82,7 +71,6 @@ public:
 
 private:
     unsigned int prop_0_;
-    dogen::boost_model::versioned_key versioned_key_;
 };
 
 } }

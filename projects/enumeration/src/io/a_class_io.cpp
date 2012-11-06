@@ -23,7 +23,6 @@
 #include "dogen/enumeration/io/book_types_io.hpp"
 #include "dogen/enumeration/io/colour_types_io.hpp"
 #include "dogen/enumeration/io/pkg1/shape_types_io.hpp"
-#include "dogen/enumeration/io/versioned_key_io.hpp"
 
 namespace dogen {
 namespace enumeration {
@@ -33,8 +32,7 @@ std::ostream& operator<<(std::ostream& s, const a_class& v) {
       << "\"__type__\": " << "\"a_class\"" << ", "
       << "\"colour_type\": " << v.colour_type() << ", "
       << "\"book_type\": " << v.book_type() << ", "
-      << "\"shape_type\": " << v.shape_type() << ", "
-      << "\"versioned_key\": " << v.versioned_key()
+      << "\"shape_type\": " << v.shape_type()
       << " }";
     return(s);
 }

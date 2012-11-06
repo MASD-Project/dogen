@@ -79,7 +79,6 @@ const std::vector<cpp_facet_types> facets =
     cpp_facet_types::serialization,
     cpp_facet_types::hash,
     cpp_facet_types::io,
-    cpp_facet_types::database,
     cpp_facet_types::test_data
 };
 
@@ -322,52 +321,6 @@ BOOST_AUTO_TEST_CASE(processing_one_pod_model_with_default_configuration_generat
     const auto is(i[implementation_system]);
     BOOST_LOG_SEV(lg, debug) << "implementation system dependencies: " << is;
     BOOST_CHECK(is.empty());
-}
-
-BOOST_AUTO_TEST_CASE(processing_one_pod_model_with_default_configuration_generates_expected_database_includes) {
-    SETUP_TEST_LOG_SOURCE("processing_one_pod_model_with_default_configuration_generates_expected_database_includes");
-
-    const auto f(default_inclusion_manager);
-    const auto i(includes_for_one_pod_model(cpp_facet_types::database, f));
-    BOOST_REQUIRE(i.size() == 4);
-
-    // header
-    const auto hu(i[header_user]);
-    BOOST_LOG_SEV(lg, debug) << "header user dependencies: " << hu;
-    BOOST_REQUIRE(hu.size() == 1);
-
-    BOOST_CHECK(asserter::assert_contains(pod_name, hu.front()));
-    BOOST_CHECK(asserter::assert_contains(domain, hu.front()));
-
-    const auto hs(i[header_system]);
-    BOOST_LOG_SEV(lg, debug) << "header system dependencies: " << hs;
-    BOOST_REQUIRE(hs.size() == 3);
-    for (const auto s : hs) {
-        BOOST_CHECK(
-            boost::ends_with(s, vector) ||
-            boost::ends_with(s, boost_optional) ||
-            boost::ends_with(s, pqxx_connection));
-    }
-
-    // implementation
-    const auto iu(i[implementation_user]);
-    BOOST_LOG_SEV(lg, debug) << "implementation user dependencies: " << iu;
-    BOOST_REQUIRE(iu.size() == 1);
-
-    const auto a(iu.front());
-    BOOST_CHECK(boost::ends_with(a, database_postfix));
-    BOOST_CHECK(asserter::assert_contains(pod_name, a));
-    BOOST_CHECK(asserter::assert_contains(database, a));
-
-    const auto is(i[implementation_system]);
-    BOOST_LOG_SEV(lg, debug) << "implementation system dependencies: " << is;
-    BOOST_REQUIRE(hs.size() == 3);
-    for (const auto s : is) {
-        BOOST_CHECK(
-            boost::ends_with(s, boost_format) ||
-            boost::ends_with(s, pqxx_result) ||
-            boost::ends_with(s, pqxx_transaction));
-    }
 }
 
 BOOST_AUTO_TEST_CASE(processing_one_pod_model_with_no_keys_configuration_generates_no_key_includes) {

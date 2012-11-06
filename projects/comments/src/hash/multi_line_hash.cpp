@@ -19,26 +19,17 @@
  *
  */
 #include "dogen/comments/hash/multi_line_hash.hpp"
-#include "dogen/comments/hash/versioned_key_hash.hpp"
 
 namespace {
 
-template <typename HashableType>
-inline void combine(std::size_t& seed, const HashableType& value)
-{
-    std::hash<HashableType> hasher;
-    seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
-}
 
 }
 
 namespace dogen {
 namespace comments {
 
-std::size_t multi_line_hasher::hash(const multi_line& v) {
+std::size_t multi_line_hasher::hash(const multi_line&) {
     std::size_t seed(0);
-
-    combine(seed, v.versioned_key());
     return seed;
 }
 

@@ -28,7 +28,6 @@
 #include <boost/archive/xml_oarchive.hpp>
 #include <boost/serialization/nvp.hpp>
 #include "dogen/two_layers_with_objects/serialization/package_1/class_1_ser.hpp"
-#include "dogen/two_layers_with_objects/serialization/versioned_key_ser.hpp"
 
 #ifdef __linux__
 #include "eos/portable_iarchive.hpp"
@@ -42,14 +41,14 @@ template<typename Archive>
 void save(Archive& ar,
     const dogen::two_layers_with_objects::package_1::class_1& v,
     const unsigned int /*version*/) {
-    ar << make_nvp("versioned_key", v.versioned_key_);
+    ar << make_nvp("prop_0", v.prop_0_);
 }
 
 template<typename Archive>
 void load(Archive& ar,
     dogen::two_layers_with_objects::package_1::class_1& v,
     const unsigned int /*version*/) {
-    ar >> make_nvp("versioned_key", v.versioned_key_);
+    ar >> make_nvp("prop_0", v.prop_0_);
 }
 
 } }

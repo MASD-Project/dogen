@@ -52,7 +52,7 @@ a_class::a_class(
     const unsigned short ushort_property,
     const double double_property,
     const float float_property,
-    const dogen::all_primitives::versioned_key& versioned_key)
+    const dogen::all_primitives::a_class_versioned_key& versioned_key)
     : bool_property_(bool_property),
       char_property_(char_property),
       uchar_property_(uchar_property),

@@ -19,5 +19,3 @@
  *
  */
 #include "dogen/compressed/test_data/package1/first_class_td.hpp"
-#include "dogen/compressed/test_data/unversioned_key_td.hpp"
-#include "dogen/compressed/test_data/versioned_key_td.hpp"

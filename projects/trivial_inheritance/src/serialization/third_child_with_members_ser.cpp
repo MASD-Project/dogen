@@ -48,8 +48,6 @@ template<typename Archive>
 void save(Archive& ar,
     const dogen::trivial_inheritance::third_child_with_members& v,
     const unsigned int /*version*/) {
-    ar.template register_type<dogen::trivial_inheritance::child_of_a_child1>();
-    ar.template register_type<dogen::trivial_inheritance::child_of_a_child2>();
     ar << make_nvp("parent_with_members", base_object<dogen::trivial_inheritance::parent_with_members>(v));
 
     ar << make_nvp("prop_1", v.prop_1_);
@@ -59,8 +57,6 @@ template<typename Archive>
 void load(Archive& ar,
     dogen::trivial_inheritance::third_child_with_members& v,
     const unsigned int /*version*/) {
-    ar.template register_type<dogen::trivial_inheritance::child_of_a_child1>();
-    ar.template register_type<dogen::trivial_inheritance::child_of_a_child2>();
     ar >> make_nvp("parent_with_members", base_object<dogen::trivial_inheritance::parent_with_members>(v));
 
     ar >> make_nvp("prop_1", v.prop_1_);

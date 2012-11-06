@@ -28,7 +28,6 @@
 #include <algorithm>
 #include <vector>
 #include "dogen/boost_model/domain/class_a.hpp"
-#include "dogen/boost_model/domain/versioned_key.hpp"
 #include "dogen/boost_model/serialization/pkg1/class_c_fwd_ser.hpp"
 
 namespace dogen {
@@ -47,8 +46,7 @@ public:
 public:
     class_c(
         const int prop_0,
-        const std::vector<dogen::boost_model::class_a>& prop_1,
-        const dogen::boost_model::versioned_key& versioned_key);
+        const std::vector<dogen::boost_model::class_a>& prop_1);
 
 private:
     template<typename Archive>
@@ -74,14 +72,6 @@ public:
         prop_1_ = v;
     }
 
-    dogen::boost_model::versioned_key versioned_key() const {
-        return versioned_key_;
-    }
-
-    void versioned_key(const dogen::boost_model::versioned_key& v) {
-        versioned_key_ = v;
-    }
-
 public:
     bool operator==(const class_c& rhs) const;
     bool operator!=(const class_c& rhs) const {
@@ -95,7 +85,6 @@ public:
 private:
     int prop_0_;
     std::vector<dogen::boost_model::class_a> prop_1_;
-    dogen::boost_model::versioned_key versioned_key_;
 };
 
 } } }

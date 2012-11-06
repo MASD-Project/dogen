@@ -44,7 +44,7 @@ inline std::size_t hash_std_list_dogen_std_model_pkg1_class_c(const std::list<do
 namespace dogen {
 namespace std_model {
 
-std::size_t derived_hasher::hash(const derived& v) {
+std::size_t derived_hasher::hash(const derived&v) {
     std::size_t seed(0);
 
     combine(seed, dynamic_cast<const dogen::std_model::base&>(v));

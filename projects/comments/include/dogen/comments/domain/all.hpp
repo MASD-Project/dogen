@@ -20,5 +20,3 @@
  */
 #include "dogen/comments/domain/multi_line.hpp"
 #include "dogen/comments/domain/one_line.hpp"
-#include "dogen/comments/domain/unversioned_key.hpp"
-#include "dogen/comments/domain/versioned_key.hpp"

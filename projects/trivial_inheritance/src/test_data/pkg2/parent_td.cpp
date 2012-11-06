@@ -20,17 +20,11 @@
  */
 #include "dogen/trivial_inheritance/test_data/pkg2/parent_td.hpp"
 #include "dogen/trivial_inheritance/test_data/pkg3/child_td.hpp"
-#include "dogen/trivial_inheritance/test_data/versioned_key_td.hpp"
 
 namespace {
 
 int create_int(const unsigned int position) {
     return position;
-}
-
-dogen::trivial_inheritance::versioned_key
-create_dogen_trivial_inheritance_versioned_key(const unsigned int position) {
-    return dogen::trivial_inheritance::versioned_key_generator::create(position);
 }
 
 }
@@ -43,7 +37,6 @@ namespace pkg2 {
 void parent_generator::
 populate(const unsigned int position, result_type& v) {
     v.prop_0(create_int(position + 0));
-    v.versioned_key(create_dogen_trivial_inheritance_versioned_key(position + 1));
 }
 
 parent_generator::result_type*

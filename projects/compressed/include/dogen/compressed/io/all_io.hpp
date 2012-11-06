@@ -19,5 +19,3 @@
  *
  */
 #include "dogen/compressed/io/package1/first_class_io.hpp"
-#include "dogen/compressed/io/unversioned_key_io.hpp"
-#include "dogen/compressed/io/versioned_key_io.hpp"

@@ -40,7 +40,7 @@ public:
     child_without_members(child_without_members&&) = default;
 
 public:
-    explicit child_without_members(const dogen::trivial_inheritance::versioned_key& versioned_key);
+    explicit child_without_members(const dogen::trivial_inheritance::parent_without_members_versioned_key& versioned_key);
 
 private:
     template<typename Archive>

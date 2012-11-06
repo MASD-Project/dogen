@@ -19,7 +19,6 @@
  *
  */
 #include "dogen/two_layers_with_objects/hash/Package_2/class_2_hash.hpp"
-#include "dogen/two_layers_with_objects/hash/versioned_key_hash.hpp"
 
 namespace {
 
@@ -36,10 +35,10 @@ namespace dogen {
 namespace two_layers_with_objects {
 namespace Package_2 {
 
-std::size_t class_2_hasher::hash(const class_2& v) {
+std::size_t class_2_hasher::hash(const class_2&v) {
     std::size_t seed(0);
 
-    combine(seed, v.versioned_key());
+    combine(seed, v.prop_0());
     return seed;
 }
 

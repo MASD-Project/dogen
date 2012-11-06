@@ -19,5 +19,3 @@
  *
  */
 #include "dogen/enable_facet_hash/hash/package1/first_class_hash.hpp"
-#include "dogen/enable_facet_hash/hash/unversioned_key_hash.hpp"
-#include "dogen/enable_facet_hash/hash/versioned_key_hash.hpp"

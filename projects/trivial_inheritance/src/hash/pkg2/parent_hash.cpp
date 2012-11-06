@@ -19,7 +19,6 @@
  *
  */
 #include "dogen/trivial_inheritance/hash/pkg2/parent_hash.hpp"
-#include "dogen/trivial_inheritance/hash/versioned_key_hash.hpp"
 
 namespace {
 
@@ -36,12 +35,10 @@ namespace dogen {
 namespace trivial_inheritance {
 namespace pkg2 {
 
-std::size_t parent_hasher::hash(const parent& v) {
+std::size_t parent_hasher::hash(const parent&v) {
     std::size_t seed(0);
 
     combine(seed, v.prop_0());
-    combine(seed, v.versioned_key());
-
     return seed;
 }
 

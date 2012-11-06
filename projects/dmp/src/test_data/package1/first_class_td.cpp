@@ -19,17 +19,11 @@
  *
  */
 #include "dogen/dmp/test_data/package1/first_class_td.hpp"
-#include "dogen/dmp/test_data/versioned_key_td.hpp"
 
 namespace {
 
 int create_int(const unsigned int position) {
     return position;
-}
-
-dogen::dmp::versioned_key
-create_dogen_dmp_versioned_key(const unsigned int position) {
-    return dogen::dmp::versioned_key_generator::create(position);
 }
 
 }
@@ -44,7 +38,6 @@ void first_class_generator::
 populate(const unsigned int position, result_type& v) {
     v.public_attribute(create_int(position + 0));
     v.private_attribute(create_int(position + 1));
-    v.versioned_key(create_dogen_dmp_versioned_key(position + 2));
 }
 
 first_class_generator::result_type

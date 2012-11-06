@@ -41,16 +41,41 @@
 					<meta_type>2</meta_type>
 				</name>
 				<properties class_id="7" tracking_level="0" version="0">
-					<count>0</count>
+					<count>1</count>
 					<item_version>0</item_version>
+					<item class_id="8" tracking_level="0" version="0">
+						<name>prop_0</name>
+						<type_name class_id="9" tracking_level="0" version="0">
+							<type>
+								<model_name></model_name>
+								<external_package_path>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_package_path>
+								<package_path>
+									<count>0</count>
+									<item_version>0</item_version>
+								</package_path>
+								<type_name>int</type_name>
+								<meta_type>0</meta_type>
+							</type>
+							<children_ class_id="10" tracking_level="0" version="0">
+								<count>0</count>
+								<item_version>0</item_version>
+							</children_>
+							<is_pointer>0</is_pointer>
+						</type_name>
+						<default_value></default_value>
+						<documentation></documentation>
+					</item>
 				</properties>
-				<parent_name class_id="8" tracking_level="0" version="0">
+				<parent_name class_id="11" tracking_level="0" version="0">
 					<initialized>0</initialized>
 				</parent_name>
 				<original_parent_name>
 					<initialized>0</initialized>
 				</original_parent_name>
-				<leaves class_id="9" tracking_level="0" version="0">
+				<leaves class_id="12" tracking_level="0" version="0">
 					<count>0</count>
 					<item_version>0</item_version>
 				</leaves>
@@ -62,6 +87,7 @@
 				<is_sequence_container>0</is_sequence_container>
 				<is_associative_container>0</is_associative_container>
 				<is_smart_pointer>0</is_smart_pointer>
+				<is_cacheable>0</is_cacheable>
 			</second>
 		</item>
 		<item>
@@ -93,8 +119,33 @@
 					<meta_type>2</meta_type>
 				</name>
 				<properties>
-					<count>0</count>
+					<count>1</count>
 					<item_version>0</item_version>
+					<item>
+						<name>prop_0</name>
+						<type_name>
+							<type>
+								<model_name></model_name>
+								<external_package_path>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_package_path>
+								<package_path>
+									<count>0</count>
+									<item_version>0</item_version>
+								</package_path>
+								<type_name>int</type_name>
+								<meta_type>0</meta_type>
+							</type>
+							<children_>
+								<count>0</count>
+								<item_version>0</item_version>
+							</children_>
+							<is_pointer>0</is_pointer>
+						</type_name>
+						<default_value></default_value>
+						<documentation></documentation>
+					</item>
 				</properties>
 				<parent_name>
 					<initialized>0</initialized>
@@ -114,6 +165,7 @@
 				<is_sequence_container>0</is_sequence_container>
 				<is_associative_container>0</is_associative_container>
 				<is_smart_pointer>0</is_smart_pointer>
+				<is_cacheable>0</is_cacheable>
 			</second>
 		</item>
 		<item>
@@ -145,8 +197,33 @@
 					<meta_type>2</meta_type>
 				</name>
 				<properties>
-					<count>0</count>
+					<count>1</count>
 					<item_version>0</item_version>
+					<item>
+						<name>prop_0</name>
+						<type_name>
+							<type>
+								<model_name></model_name>
+								<external_package_path>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_package_path>
+								<package_path>
+									<count>0</count>
+									<item_version>0</item_version>
+								</package_path>
+								<type_name>int</type_name>
+								<meta_type>0</meta_type>
+							</type>
+							<children_>
+								<count>0</count>
+								<item_version>0</item_version>
+							</children_>
+							<is_pointer>0</is_pointer>
+						</type_name>
+						<default_value></default_value>
+						<documentation></documentation>
+					</item>
 				</properties>
 				<parent_name>
 					<initialized>0</initialized>
@@ -166,6 +243,7 @@
 				<is_sequence_container>0</is_sequence_container>
 				<is_associative_container>0</is_associative_container>
 				<is_smart_pointer>0</is_smart_pointer>
+				<is_cacheable>0</is_cacheable>
 			</second>
 		</item>
 		<item>
@@ -197,8 +275,33 @@
 					<meta_type>2</meta_type>
 				</name>
 				<properties>
-					<count>0</count>
+					<count>1</count>
 					<item_version>0</item_version>
+					<item>
+						<name>prop_0</name>
+						<type_name>
+							<type>
+								<model_name></model_name>
+								<external_package_path>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_package_path>
+								<package_path>
+									<count>0</count>
+									<item_version>0</item_version>
+								</package_path>
+								<type_name>int</type_name>
+								<meta_type>0</meta_type>
+							</type>
+							<children_>
+								<count>0</count>
+								<item_version>0</item_version>
+							</children_>
+							<is_pointer>0</is_pointer>
+						</type_name>
+						<default_value></default_value>
+						<documentation></documentation>
+					</item>
 				</properties>
 				<parent_name>
 					<initialized>0</initialized>
@@ -218,6 +321,7 @@
 				<is_sequence_container>0</is_sequence_container>
 				<is_associative_container>0</is_associative_container>
 				<is_smart_pointer>0</is_smart_pointer>
+				<is_cacheable>0</is_cacheable>
 			</second>
 		</item>
 		<item>
@@ -249,8 +353,33 @@
 					<meta_type>2</meta_type>
 				</name>
 				<properties>
-					<count>0</count>
+					<count>1</count>
 					<item_version>0</item_version>
+					<item>
+						<name>prop_0</name>
+						<type_name>
+							<type>
+								<model_name></model_name>
+								<external_package_path>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_package_path>
+								<package_path>
+									<count>0</count>
+									<item_version>0</item_version>
+								</package_path>
+								<type_name>int</type_name>
+								<meta_type>0</meta_type>
+							</type>
+							<children_>
+								<count>0</count>
+								<item_version>0</item_version>
+							</children_>
+							<is_pointer>0</is_pointer>
+						</type_name>
+						<default_value></default_value>
+						<documentation></documentation>
+					</item>
 				</properties>
 				<parent_name>
 					<initialized>0</initialized>
@@ -270,20 +399,21 @@
 				<is_sequence_container>0</is_sequence_container>
 				<is_associative_container>0</is_associative_container>
 				<is_smart_pointer>0</is_smart_pointer>
+				<is_cacheable>0</is_cacheable>
 			</second>
 		</item>
 	</pods>
-	<primitives class_id="10" tracking_level="0" version="0">
+	<primitives class_id="13" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>11</bucket_count>
 		<item_version>0</item_version>
 	</primitives>
-	<enumerations class_id="11" tracking_level="0" version="0">
+	<enumerations class_id="14" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>11</bucket_count>
 		<item_version>0</item_version>
 	</enumerations>
-	<exceptions class_id="12" tracking_level="0" version="0">
+	<exceptions class_id="15" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>11</bucket_count>
 		<item_version>0</item_version>
@@ -294,12 +424,12 @@
 	</external_package_path>
 	<schema_name></schema_name>
 	<is_system>0</is_system>
-	<dependencies class_id="13" tracking_level="0" version="0">
+	<dependencies class_id="16" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>11</bucket_count>
 		<item_version>0</item_version>
 	</dependencies>
-	<leaves class_id="14" tracking_level="0" version="0">
+	<leaves class_id="17" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>11</bucket_count>
 		<item_version>0</item_version>

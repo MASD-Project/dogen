@@ -19,5 +19,3 @@
  *
  */
 #include "dogen/compressed/hash/package1/first_class_hash.hpp"
-#include "dogen/compressed/hash/unversioned_key_hash.hpp"
-#include "dogen/compressed/hash/versioned_key_hash.hpp"

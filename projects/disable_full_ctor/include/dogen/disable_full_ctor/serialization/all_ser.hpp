@@ -19,5 +19,3 @@
  *
  */
 #include "dogen/disable_full_ctor/serialization/package1/first_class_ser.hpp"
-#include "dogen/disable_full_ctor/serialization/unversioned_key_ser.hpp"
-#include "dogen/disable_full_ctor/serialization/versioned_key_ser.hpp"

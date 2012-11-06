@@ -27,7 +27,6 @@
 
 #include <algorithm>
 #include "dogen/disable_facet_folders/package1/first_class_fwd_ser.hpp"
-#include "dogen/disable_facet_folders/versioned_key.hpp"
 
 namespace dogen {
 namespace disable_facet_folders {
@@ -45,8 +44,7 @@ public:
 public:
     first_class(
         const int public_attribute,
-        const int private_attribute,
-        const dogen::disable_facet_folders::versioned_key& versioned_key);
+        const int private_attribute);
 
 private:
     template<typename Archive>
@@ -72,14 +70,6 @@ public:
         private_attribute_ = v;
     }
 
-    dogen::disable_facet_folders::versioned_key versioned_key() const {
-        return versioned_key_;
-    }
-
-    void versioned_key(const dogen::disable_facet_folders::versioned_key& v) {
-        versioned_key_ = v;
-    }
-
 public:
     bool operator==(const first_class& rhs) const;
     bool operator!=(const first_class& rhs) const {
@@ -93,7 +83,6 @@ public:
 private:
     int public_attribute_;
     int private_attribute_;
-    dogen::disable_facet_folders::versioned_key versioned_key_;
 };
 
 } } }

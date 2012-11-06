@@ -19,5 +19,3 @@
  *
  */
 #include "dogen/exception/io/a_class_io.hpp"
-#include "dogen/exception/io/unversioned_key_io.hpp"
-#include "dogen/exception/io/versioned_key_io.hpp"

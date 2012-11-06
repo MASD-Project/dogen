@@ -19,5 +19,3 @@
  *
  */
 #include "dogen/split_project/hash/package/a_class_hash.hpp"
-#include "dogen/split_project/hash/unversioned_key_hash.hpp"
-#include "dogen/split_project/hash/versioned_key_hash.hpp"

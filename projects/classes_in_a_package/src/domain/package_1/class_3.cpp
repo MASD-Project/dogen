@@ -24,16 +24,19 @@ namespace dogen {
 namespace classes_in_a_package {
 namespace package_1 {
 
-class_3::class_3(const dogen::classes_in_a_package::versioned_key& versioned_key)
-    : versioned_key_(versioned_key) { }
+class_3::class_3()
+    : prop_0_(static_cast<int>(0)) { }
+
+class_3::class_3(const int prop_0)
+    : prop_0_(prop_0) { }
 
 void class_3::swap(class_3& other) noexcept {
     using std::swap;
-    swap(versioned_key_, other.versioned_key_);
+    swap(prop_0_, other.prop_0_);
 }
 
 bool class_3::operator==(const class_3& rhs) const {
-    return versioned_key_ == rhs.versioned_key_;
+    return prop_0_ == rhs.prop_0_;
 }
 
 class_3& class_3::operator=(class_3 other) {

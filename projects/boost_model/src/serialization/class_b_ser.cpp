@@ -33,7 +33,6 @@
 #include "dogen/boost_model/serialization/class_b_ser.hpp"
 #include "dogen/boost_model/serialization/class_base_ser.hpp"
 #include "dogen/boost_model/serialization/pkg1/class_c_ser.hpp"
-#include "dogen/boost_model/serialization/versioned_key_ser.hpp"
 #include "dogen/utility/serialization/unordered_map.hpp"
 
 #ifdef __linux__
@@ -54,7 +53,6 @@ void save(Archive& ar,
     ar << make_nvp("prop_3", v.prop_3_);
     ar << make_nvp("prop_4", v.prop_4_);
     ar << make_nvp("prop_5", v.prop_5_);
-    ar << make_nvp("versioned_key", v.versioned_key_);
 }
 
 template<typename Archive>
@@ -67,7 +65,6 @@ void load(Archive& ar,
     ar >> make_nvp("prop_3", v.prop_3_);
     ar >> make_nvp("prop_4", v.prop_4_);
     ar >> make_nvp("prop_5", v.prop_5_);
-    ar >> make_nvp("versioned_key", v.versioned_key_);
 }
 
 } }

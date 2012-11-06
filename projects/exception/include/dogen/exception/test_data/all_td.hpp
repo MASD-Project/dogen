@@ -19,5 +19,3 @@
  *
  */
 #include "dogen/exception/test_data/a_class_td.hpp"
-#include "dogen/exception/test_data/unversioned_key_td.hpp"
-#include "dogen/exception/test_data/versioned_key_td.hpp"

@@ -26,7 +26,6 @@
 #endif
 
 #include <algorithm>
-#include "dogen/split_project/domain/versioned_key.hpp"
 #include "dogen/split_project/serialization/package/a_class_fwd_ser.hpp"
 
 namespace dogen {
@@ -35,13 +34,15 @@ namespace package {
 
 class a_class final {
 public:
-    a_class() = default;
     a_class(const a_class&) = default;
     a_class(a_class&&) = default;
     ~a_class() = default;
 
 public:
-    explicit a_class(const dogen::split_project::versioned_key& versioned_key);
+    a_class();
+
+public:
+    explicit a_class(const int prop_0);
 
 private:
     template<typename Archive>
@@ -51,12 +52,12 @@ private:
     friend void boost::serialization::load(Archive& ar, a_class& v, unsigned int version);
 
 public:
-    dogen::split_project::versioned_key versioned_key() const {
-        return versioned_key_;
+    int prop_0() const {
+        return prop_0_;
     }
 
-    void versioned_key(const dogen::split_project::versioned_key& v) {
-        versioned_key_ = v;
+    void prop_0(const int v) {
+        prop_0_ = v;
     }
 
 public:
@@ -70,7 +71,7 @@ public:
     a_class& operator=(a_class other);
 
 private:
-    dogen::split_project::versioned_key versioned_key_;
+    int prop_0_;
 };
 
 } } }

@@ -44,7 +44,6 @@ public:
 public:
     class_derived(
         const int prop_0,
-        const dogen::boost_model::versioned_key& versioned_key,
         const int prop_1);
 
 private:

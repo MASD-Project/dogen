@@ -19,5 +19,3 @@
  *
  */
 #include "dogen/dmp/io/package1/first_class_io.hpp"
-#include "dogen/dmp/io/unversioned_key_io.hpp"
-#include "dogen/dmp/io/versioned_key_io.hpp"

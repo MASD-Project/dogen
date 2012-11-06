@@ -19,5 +19,3 @@
  *
  */
 #include "dogen/dmp/serialization/package1/first_class_ser.hpp"
-#include "dogen/dmp/serialization/unversioned_key_ser.hpp"
-#include "dogen/dmp/serialization/versioned_key_ser.hpp"

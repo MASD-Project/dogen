@@ -19,5 +19,3 @@
  *
  */
 #include "dogen/enable_facet_domain/domain/package1/first_class.hpp"
-#include "dogen/enable_facet_domain/domain/unversioned_key.hpp"
-#include "dogen/enable_facet_domain/domain/versioned_key.hpp"

@@ -19,5 +19,3 @@
  *
  */
 #include "dogen/enable_facet_serialization/serialization/package1/first_class_ser.hpp"
-#include "dogen/enable_facet_serialization/serialization/unversioned_key_ser.hpp"
-#include "dogen/enable_facet_serialization/serialization/versioned_key_ser.hpp"

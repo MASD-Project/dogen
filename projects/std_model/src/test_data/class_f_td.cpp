@@ -22,7 +22,6 @@
 #include "dogen/std_model/test_data/class_a_td.hpp"
 #include "dogen/std_model/test_data/class_f_td.hpp"
 #include "dogen/std_model/test_data/pkg1/class_c_td.hpp"
-#include "dogen/std_model/test_data/versioned_key_td.hpp"
 
 namespace {
 
@@ -66,11 +65,6 @@ std::unordered_map<dogen::std_model::class_a, dogen::std_model::pkg1::class_c> c
     return r;
 }
 
-dogen::std_model::versioned_key
-create_dogen_std_model_versioned_key(const unsigned int position) {
-    return dogen::std_model::versioned_key_generator::create(position);
-}
-
 }
 
 namespace dogen {
@@ -83,7 +77,6 @@ populate(const unsigned int position, result_type& v) {
     v.prop_0(create_std_unordered_map_std_string_std_string(position + 0));
     v.prop_1(create_std_unordered_map_std_string_dogen_std_model_class_a(position + 1));
     v.prop_2(create_std_unordered_map_dogen_std_model_class_a_dogen_std_model_pkg1_class_c(position + 2));
-    v.versioned_key(create_dogen_std_model_versioned_key(position + 3));
 }
 
 class_f_generator::result_type

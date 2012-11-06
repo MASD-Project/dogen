@@ -21,5 +21,3 @@
 #include "dogen/exception/domain/a_class.hpp"
 #include "dogen/exception/domain/my_error.hpp"
 #include "dogen/exception/domain/pkg/catastrophic_error.hpp"
-#include "dogen/exception/domain/unversioned_key.hpp"
-#include "dogen/exception/domain/versioned_key.hpp"

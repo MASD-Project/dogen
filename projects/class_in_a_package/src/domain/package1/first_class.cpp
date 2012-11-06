@@ -31,7 +31,7 @@ first_class::first_class()
 first_class::first_class(
     const int public_attribute,
     const int private_attribute,
-    const dogen::class_in_a_package::versioned_key& versioned_key)
+    const dogen::class_in_a_package::package1::first_class_versioned_key& versioned_key)
     : public_attribute_(public_attribute),
       private_attribute_(private_attribute),
       versioned_key_(versioned_key) { }

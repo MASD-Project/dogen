@@ -19,5 +19,3 @@
  *
  */
 #include "dogen/exception/hash/a_class_hash.hpp"
-#include "dogen/exception/hash/unversioned_key_hash.hpp"
-#include "dogen/exception/hash/versioned_key_hash.hpp"

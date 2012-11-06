@@ -20,5 +20,3 @@
  */
 #include "dogen/comments/test_data/multi_line_td.hpp"
 #include "dogen/comments/test_data/one_line_td.hpp"
-#include "dogen/comments/test_data/unversioned_key_td.hpp"
-#include "dogen/comments/test_data/versioned_key_td.hpp"

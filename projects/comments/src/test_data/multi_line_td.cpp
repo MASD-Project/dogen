@@ -19,16 +19,8 @@
  *
  */
 #include "dogen/comments/test_data/multi_line_td.hpp"
-#include "dogen/comments/test_data/versioned_key_td.hpp"
 
-namespace {
 
-dogen::comments::versioned_key
-create_dogen_comments_versioned_key(const unsigned int position) {
-    return dogen::comments::versioned_key_generator::create(position);
-}
-
-}
 
 namespace dogen {
 namespace comments {
@@ -36,14 +28,12 @@ namespace comments {
 multi_line_generator::multi_line_generator() : position_(0) { }
 
 void multi_line_generator::
-populate(const unsigned int position, result_type& v) {
-    v.versioned_key(create_dogen_comments_versioned_key(position + 0));
+populate(const unsigned int /*position*/, result_type& /*v*/) {
 }
 
 multi_line_generator::result_type
-multi_line_generator::create(const unsigned int position) {
+multi_line_generator::create(const unsigned int/*position*/) {
     multi_line r;
-    multi_line_generator::populate(position, r);
     return r;
 }
 multi_line_generator::result_type*

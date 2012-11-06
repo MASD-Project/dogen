@@ -19,17 +19,11 @@
  *
  */
 #include "dogen/exception/test_data/a_class_td.hpp"
-#include "dogen/exception/test_data/versioned_key_td.hpp"
 
 namespace {
 
 int create_int(const unsigned int position) {
     return position;
-}
-
-dogen::exception::versioned_key
-create_dogen_exception_versioned_key(const unsigned int position) {
-    return dogen::exception::versioned_key_generator::create(position);
 }
 
 }
@@ -42,7 +36,6 @@ a_class_generator::a_class_generator() : position_(0) { }
 void a_class_generator::
 populate(const unsigned int position, result_type& v) {
     v.prop_0(create_int(position + 0));
-    v.versioned_key(create_dogen_exception_versioned_key(position + 1));
 }
 
 a_class_generator::result_type

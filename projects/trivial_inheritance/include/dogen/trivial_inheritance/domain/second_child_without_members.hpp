@@ -40,9 +40,7 @@ public:
     second_child_without_members(second_child_without_members&&) = default;
 
 public:
-    second_child_without_members(
-        const int prop_0,
-        const dogen::trivial_inheritance::versioned_key& versioned_key);
+    explicit second_child_without_members(const int prop_0);
 
 private:
     template<typename Archive>

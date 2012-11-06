@@ -21,7 +21,6 @@
 #include "dogen/std_model/hash/class_a_hash.hpp"
 #include "dogen/std_model/hash/class_g_hash.hpp"
 #include "dogen/std_model/hash/pkg1/class_c_hash.hpp"
-#include "dogen/std_model/hash/versioned_key_hash.hpp"
 
 namespace {
 
@@ -71,12 +70,11 @@ inline std::size_t hash_std_unordered_map_dogen_std_model_pkg1_class_c_std_list_
 namespace dogen {
 namespace std_model {
 
-std::size_t class_g_hasher::hash(const class_g& v) {
+std::size_t class_g_hasher::hash(const class_g&v) {
     std::size_t seed(0);
 
     combine(seed, hash_std_unordered_map_dogen_std_model_class_a_std_vector_dogen_std_model_pkg1_class_c_(v.prop_0()));
     combine(seed, hash_std_unordered_map_dogen_std_model_pkg1_class_c_std_list_dogen_std_model_class_a_(v.prop_1()));
-    combine(seed, v.versioned_key());
 
     return seed;
 }

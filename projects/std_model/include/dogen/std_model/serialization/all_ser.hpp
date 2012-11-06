@@ -27,5 +27,3 @@
 #include "dogen/std_model/serialization/class_g_ser.hpp"
 #include "dogen/std_model/serialization/derived_ser.hpp"
 #include "dogen/std_model/serialization/pkg1/class_c_ser.hpp"
-#include "dogen/std_model/serialization/unversioned_key_ser.hpp"
-#include "dogen/std_model/serialization/versioned_key_ser.hpp"

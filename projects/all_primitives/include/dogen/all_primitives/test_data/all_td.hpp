@@ -19,5 +19,5 @@
  *
  */
 #include "dogen/all_primitives/test_data/a_class_td.hpp"
-#include "dogen/all_primitives/test_data/unversioned_key_td.hpp"
-#include "dogen/all_primitives/test_data/versioned_key_td.hpp"
+#include "dogen/all_primitives/test_data/a_class_unversioned_key_td.hpp"
+#include "dogen/all_primitives/test_data/a_class_versioned_key_td.hpp"

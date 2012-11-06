@@ -27,5 +27,3 @@
 #include "dogen/std_model/domain/class_g.hpp"
 #include "dogen/std_model/domain/derived.hpp"
 #include "dogen/std_model/domain/pkg1/class_c.hpp"
-#include "dogen/std_model/domain/unversioned_key.hpp"
-#include "dogen/std_model/domain/versioned_key.hpp"

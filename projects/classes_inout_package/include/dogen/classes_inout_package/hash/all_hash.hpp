@@ -20,5 +20,3 @@
  */
 #include "dogen/classes_inout_package/hash/class_2_hash.hpp"
 #include "dogen/classes_inout_package/hash/package_1/class_1_hash.hpp"
-#include "dogen/classes_inout_package/hash/unversioned_key_hash.hpp"
-#include "dogen/classes_inout_package/hash/versioned_key_hash.hpp"

@@ -19,13 +19,11 @@
  *
  */
 #include "dogen/two_layers_with_objects/test_data/package_1/class_1_td.hpp"
-#include "dogen/two_layers_with_objects/test_data/versioned_key_td.hpp"
 
 namespace {
 
-dogen::two_layers_with_objects::versioned_key
-create_dogen_two_layers_with_objects_versioned_key(const unsigned int position) {
-    return dogen::two_layers_with_objects::versioned_key_generator::create(position);
+int create_int(const unsigned int position) {
+    return position;
 }
 
 }
@@ -38,7 +36,7 @@ class_1_generator::class_1_generator() : position_(0) { }
 
 void class_1_generator::
 populate(const unsigned int position, result_type& v) {
-    v.versioned_key(create_dogen_two_layers_with_objects_versioned_key(position + 0));
+    v.prop_0(create_int(position + 0));
 }
 
 class_1_generator::result_type

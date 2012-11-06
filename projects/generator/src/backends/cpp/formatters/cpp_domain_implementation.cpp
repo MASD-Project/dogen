@@ -143,8 +143,10 @@ inserter_operator(const class_view_model& vm) {
     if (!use_integrated_io_ || disable_io_)
         return;
 
+    const bool no_arg(!vm.is_parent() && vm.parents().empty() &&
+        vm.properties().empty());
     stream_ << indenter_ << "std::ostream& operator<<(std::ostream& s"
-            << ", const " << vm.name() << "& v) ";
+            << ", const " << vm.name() << "&" << (no_arg ? ") " : "v) ");
 
     utility_.open_scope();
     {

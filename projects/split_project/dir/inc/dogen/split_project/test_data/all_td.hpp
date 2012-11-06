@@ -19,5 +19,3 @@
  *
  */
 #include "dogen/split_project/test_data/package/a_class_td.hpp"
-#include "dogen/split_project/test_data/unversioned_key_td.hpp"
-#include "dogen/split_project/test_data/versioned_key_td.hpp"

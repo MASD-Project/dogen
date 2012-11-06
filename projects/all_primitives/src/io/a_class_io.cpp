@@ -21,7 +21,7 @@
 #include <boost/io/ios_state.hpp>
 #include <ostream>
 #include "dogen/all_primitives/io/a_class_io.hpp"
-#include "dogen/all_primitives/io/versioned_key_io.hpp"
+#include "dogen/all_primitives/io/a_class_versioned_key_io.hpp"
 
 namespace dogen {
 namespace all_primitives {

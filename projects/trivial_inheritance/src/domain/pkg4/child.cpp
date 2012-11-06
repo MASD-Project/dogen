@@ -26,7 +26,7 @@ namespace dogen {
 namespace trivial_inheritance {
 namespace pkg4 {
 
-child::child(const dogen::trivial_inheritance::versioned_key& versioned_key)
+child::child(const dogen::trivial_inheritance::parent_outside_versioned_key& versioned_key)
     : dogen::trivial_inheritance::parent_outside(versioned_key) { }
 
 void child::to_stream(std::ostream& s) const {

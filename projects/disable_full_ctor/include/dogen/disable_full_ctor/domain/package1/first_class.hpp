@@ -26,7 +26,6 @@
 #endif
 
 #include <algorithm>
-#include "dogen/disable_full_ctor/domain/versioned_key.hpp"
 #include "dogen/disable_full_ctor/serialization/package1/first_class_fwd_ser.hpp"
 
 namespace dogen {
@@ -66,14 +65,6 @@ public:
         private_attribute_ = v;
     }
 
-    dogen::disable_full_ctor::versioned_key versioned_key() const {
-        return versioned_key_;
-    }
-
-    void versioned_key(const dogen::disable_full_ctor::versioned_key& v) {
-        versioned_key_ = v;
-    }
-
 public:
     bool operator==(const first_class& rhs) const;
     bool operator!=(const first_class& rhs) const {
@@ -87,7 +78,6 @@ public:
 private:
     int public_attribute_;
     int private_attribute_;
-    dogen::disable_full_ctor::versioned_key versioned_key_;
 };
 
 } } }

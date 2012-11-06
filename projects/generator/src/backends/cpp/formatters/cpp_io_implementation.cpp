@@ -147,10 +147,13 @@ void io_implementation::format_class(const file_view_model& vm) {
     stream_ << "std::ostream& operator<<(std::ostream& s, ";
     {
         cpp_positive_indenter_scope s(indenter_);
-        stream_ << "const " << cvm.name() << "& v) ";
+        const auto parents(cvm.parents());
+        const bool no_arg(!cvm.is_parent() && parents.empty() &&
+            cvm.properties().empty());
+        stream_ << "const " << cvm.name() << "&" << (no_arg ? ") " : " v) ");
         utility_.open_scope();
 
-        if (cvm.is_parent() || !cvm.parents().empty()) {
+        if (cvm.is_parent() || !parents.empty()) {
             stream_ << indenter_ << "v.to_stream(s);" << std::endl
                     << indenter_ << "return(s);" << std::endl;
         } else {

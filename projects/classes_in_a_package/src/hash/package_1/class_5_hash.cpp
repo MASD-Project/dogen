@@ -19,7 +19,6 @@
  *
  */
 #include "dogen/classes_in_a_package/hash/package_1/class_5_hash.hpp"
-#include "dogen/classes_in_a_package/hash/versioned_key_hash.hpp"
 
 namespace {
 
@@ -36,10 +35,10 @@ namespace dogen {
 namespace classes_in_a_package {
 namespace package_1 {
 
-std::size_t class_5_hasher::hash(const class_5& v) {
+std::size_t class_5_hasher::hash(const class_5&v) {
     std::size_t seed(0);
 
-    combine(seed, v.versioned_key());
+    combine(seed, v.prop_0());
     return seed;
 }
 

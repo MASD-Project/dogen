@@ -20,5 +20,3 @@
  */
 #include "dogen/two_layers_with_objects/io/Package_2/class_2_io.hpp"
 #include "dogen/two_layers_with_objects/io/package_1/class_1_io.hpp"
-#include "dogen/two_layers_with_objects/io/unversioned_key_io.hpp"
-#include "dogen/two_layers_with_objects/io/versioned_key_io.hpp"

@@ -19,5 +19,3 @@
  *
  */
 #include "dogen/class_without_package/serialization/class_1_ser.hpp"
-#include "dogen/class_without_package/serialization/unversioned_key_ser.hpp"
-#include "dogen/class_without_package/serialization/versioned_key_ser.hpp"

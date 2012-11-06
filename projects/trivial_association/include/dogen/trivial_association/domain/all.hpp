@@ -22,5 +22,3 @@
 #include "dogen/trivial_association/domain/class_b.hpp"
 #include "dogen/trivial_association/domain/class_c.hpp"
 #include "dogen/trivial_association/domain/class_d.hpp"
-#include "dogen/trivial_association/domain/unversioned_key.hpp"
-#include "dogen/trivial_association/domain/versioned_key.hpp"

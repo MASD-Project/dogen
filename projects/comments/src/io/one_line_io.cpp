@@ -20,7 +20,6 @@
  */
 #include <ostream>
 #include "dogen/comments/io/one_line_io.hpp"
-#include "dogen/comments/io/versioned_key_io.hpp"
 
 namespace dogen {
 namespace comments {
@@ -30,8 +29,7 @@ std::ostream& operator<<(std::ostream& s, const one_line& v) {
       << "\"__type__\": " << "\"one_line\"" << ", "
       << "\"prop_0\": " << v.prop_0() << ", "
       << "\"prop_1\": " << v.prop_1() << ", "
-      << "\"prop_2\": " << v.prop_2() << ", "
-      << "\"versioned_key\": " << v.versioned_key()
+      << "\"prop_2\": " << v.prop_2()
       << " }";
     return(s);
 }

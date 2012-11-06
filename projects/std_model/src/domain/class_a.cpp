@@ -25,23 +25,19 @@ namespace std_model {
 
 class_a::class_a(
     const std::string& prop0,
-    const std::string& prop1,
-    const dogen::std_model::versioned_key& versioned_key)
+    const std::string& prop1)
     : prop0_(prop0),
-      prop1_(prop1),
-      versioned_key_(versioned_key) { }
+      prop1_(prop1) { }
 
 void class_a::swap(class_a& other) noexcept {
     using std::swap;
     swap(prop0_, other.prop0_);
     swap(prop1_, other.prop1_);
-    swap(versioned_key_, other.versioned_key_);
 }
 
 bool class_a::operator==(const class_a& rhs) const {
     return prop0_ == rhs.prop0_ &&
-        prop1_ == rhs.prop1_ &&
-        versioned_key_ == rhs.versioned_key_;
+        prop1_ == rhs.prop1_;
 }
 
 class_a& class_a::operator=(class_a other) {

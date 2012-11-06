@@ -20,7 +20,6 @@
  */
 #include <ostream>
 #include "dogen/exception/io/a_class_io.hpp"
-#include "dogen/exception/io/versioned_key_io.hpp"
 
 namespace dogen {
 namespace exception {
@@ -28,8 +27,7 @@ namespace exception {
 std::ostream& operator<<(std::ostream& s, const a_class& v) {
     s << " { "
       << "\"__type__\": " << "\"a_class\"" << ", "
-      << "\"prop_0\": " << v.prop_0() << ", "
-      << "\"versioned_key\": " << v.versioned_key()
+      << "\"prop_0\": " << v.prop_0()
       << " }";
     return(s);
 }

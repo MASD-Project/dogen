@@ -28,7 +28,6 @@
 #include <boost/archive/xml_oarchive.hpp>
 #include <boost/serialization/nvp.hpp>
 #include "dogen/comments/serialization/multi_line_ser.hpp"
-#include "dogen/comments/serialization/versioned_key_ser.hpp"
 
 #ifdef __linux__
 #include "eos/portable_iarchive.hpp"
@@ -39,17 +38,15 @@ namespace boost {
 namespace serialization {
 
 template<typename Archive>
-void save(Archive& ar,
-    const dogen::comments::multi_line& v,
+void save(Archive& /*ar*/,
+    const dogen::comments::multi_line& /*v*/,
     const unsigned int /*version*/) {
-    ar << make_nvp("versioned_key", v.versioned_key_);
 }
 
 template<typename Archive>
-void load(Archive& ar,
-    dogen::comments::multi_line& v,
+void load(Archive& /*ar*/,
+    dogen::comments::multi_line& /*v*/,
     const unsigned int /*version*/) {
-    ar >> make_nvp("versioned_key", v.versioned_key_);
 }
 
 } }

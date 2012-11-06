@@ -42,7 +42,6 @@ public:
 public:
     child_of_a_child1(
         const int prop_0,
-        const dogen::trivial_inheritance::versioned_key& versioned_key,
         const unsigned int prop_1);
 
 private:

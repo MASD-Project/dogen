@@ -42,8 +42,7 @@ enum class cpp_facet_types : unsigned int {
     hash = 2, ///< Hashing for the domain type
     serialization = 3, ///< Serialisation for the domain type
     io = 4, ///< IO (streaming) for the domain type
-    test_data, ///< Test data generators for all domain types
-    database ///< Database code for the domain types
+    test_data ///< Test data generators for all domain types
 };
 
 std::ostream& operator<<(std::ostream& stream, cpp_facet_types value);

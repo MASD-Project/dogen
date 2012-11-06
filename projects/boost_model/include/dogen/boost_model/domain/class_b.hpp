@@ -32,7 +32,6 @@
 #include "dogen/boost_model/domain/class_a.hpp"
 #include "dogen/boost_model/domain/class_base.hpp"
 #include "dogen/boost_model/domain/pkg1/class_c.hpp"
-#include "dogen/boost_model/domain/versioned_key.hpp"
 #include "dogen/boost_model/serialization/class_b_fwd_ser.hpp"
 
 namespace dogen {
@@ -52,8 +51,7 @@ public:
         const std::unordered_map<int, boost::shared_ptr<dogen::boost_model::class_a> >& prop_2,
         const boost::shared_ptr<dogen::boost_model::pkg1::class_c>& prop_3,
         const boost::shared_ptr<dogen::boost_model::class_base>& prop_4,
-        const std::vector<boost::shared_ptr<dogen::boost_model::class_base> >& prop_5,
-        const dogen::boost_model::versioned_key& versioned_key);
+        const std::vector<boost::shared_ptr<dogen::boost_model::class_base> >& prop_5);
 
 private:
     template<typename Archive>
@@ -111,14 +109,6 @@ public:
         prop_5_ = v;
     }
 
-    dogen::boost_model::versioned_key versioned_key() const {
-        return versioned_key_;
-    }
-
-    void versioned_key(const dogen::boost_model::versioned_key& v) {
-        versioned_key_ = v;
-    }
-
 public:
     bool operator==(const class_b& rhs) const;
     bool operator!=(const class_b& rhs) const {
@@ -136,7 +126,6 @@ private:
     boost::shared_ptr<dogen::boost_model::pkg1::class_c> prop_3_;
     boost::shared_ptr<dogen::boost_model::class_base> prop_4_;
     std::vector<boost::shared_ptr<dogen::boost_model::class_base> > prop_5_;
-    dogen::boost_model::versioned_key versioned_key_;
 };
 
 } }

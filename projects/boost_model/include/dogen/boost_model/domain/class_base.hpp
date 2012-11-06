@@ -27,7 +27,6 @@
 
 #include <algorithm>
 #include <iosfwd>
-#include "dogen/boost_model/domain/versioned_key.hpp"
 #include "dogen/boost_model/serialization/class_base_fwd_ser.hpp"
 
 namespace dogen {
@@ -44,9 +43,7 @@ public:
     virtual ~class_base() noexcept = 0;
 
 public:
-    class_base(
-        const int prop_0,
-        const dogen::boost_model::versioned_key& versioned_key);
+    explicit class_base(const int prop_0);
 
 private:
     template<typename Archive>
@@ -67,14 +64,6 @@ public:
         prop_0_ = v;
     }
 
-    dogen::boost_model::versioned_key versioned_key() const {
-        return versioned_key_;
-    }
-
-    void versioned_key(const dogen::boost_model::versioned_key& v) {
-        versioned_key_ = v;
-    }
-
 protected:
     bool compare(const class_base& rhs) const;
 public:
@@ -85,7 +74,6 @@ protected:
 
 private:
     int prop_0_;
-    dogen::boost_model::versioned_key versioned_key_;
 };
 
 inline class_base::~class_base() noexcept { }

@@ -28,7 +28,7 @@
 #include <boost/archive/xml_oarchive.hpp>
 #include <boost/serialization/nvp.hpp>
 #include "dogen/all_primitives/serialization/a_class_ser.hpp"
-#include "dogen/all_primitives/serialization/versioned_key_ser.hpp"
+#include "dogen/all_primitives/serialization/a_class_versioned_key_ser.hpp"
 
 #ifdef __linux__
 #include "eos/portable_iarchive.hpp"

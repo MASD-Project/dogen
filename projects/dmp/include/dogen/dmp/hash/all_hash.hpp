@@ -19,5 +19,3 @@
  *
  */
 #include "dogen/dmp/hash/package1/first_class_hash.hpp"
-#include "dogen/dmp/hash/unversioned_key_hash.hpp"
-#include "dogen/dmp/hash/versioned_key_hash.hpp"

@@ -19,7 +19,6 @@
  *
  */
 #include "dogen/trivial_inheritance/hash/parent_with_members_hash.hpp"
-#include "dogen/trivial_inheritance/hash/versioned_key_hash.hpp"
 
 namespace {
 
@@ -35,12 +34,10 @@ inline void combine(std::size_t& seed, const HashableType& value)
 namespace dogen {
 namespace trivial_inheritance {
 
-std::size_t parent_with_members_hasher::hash(const parent_with_members& v) {
+std::size_t parent_with_members_hasher::hash(const parent_with_members&v) {
     std::size_t seed(0);
 
     combine(seed, v.prop_0());
-    combine(seed, v.versioned_key());
-
     return seed;
 }
 

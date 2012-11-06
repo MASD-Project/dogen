@@ -19,5 +19,3 @@
  *
  */
 #include "dogen/enable_facet_io/io/package1/first_class_io.hpp"
-#include "dogen/enable_facet_io/io/unversioned_key_io.hpp"
-#include "dogen/enable_facet_io/io/versioned_key_io.hpp"

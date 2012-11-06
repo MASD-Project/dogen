@@ -20,7 +20,6 @@
  */
 #include <ostream>
 #include "dogen/std_model/io/base_io.hpp"
-#include "dogen/std_model/io/versioned_key_io.hpp"
 
 namespace dogen {
 namespace std_model {

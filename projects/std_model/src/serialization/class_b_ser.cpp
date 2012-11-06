@@ -32,7 +32,6 @@
 #include "dogen/std_model/serialization/class_a_ser.hpp"
 #include "dogen/std_model/serialization/class_b_ser.hpp"
 #include "dogen/std_model/serialization/pkg1/class_c_ser.hpp"
-#include "dogen/std_model/serialization/versioned_key_ser.hpp"
 
 #ifdef __linux__
 #include "eos/portable_iarchive.hpp"
@@ -52,7 +51,6 @@ void save(Archive& ar,
     ar << make_nvp("prop_3", v.prop_3_);
     ar << make_nvp("prop_4", v.prop_4_);
     ar << make_nvp("prop_5", v.prop_5_);
-    ar << make_nvp("versioned_key", v.versioned_key_);
 }
 
 template<typename Archive>
@@ -65,7 +63,6 @@ void load(Archive& ar,
     ar >> make_nvp("prop_3", v.prop_3_);
     ar >> make_nvp("prop_4", v.prop_4_);
     ar >> make_nvp("prop_5", v.prop_5_);
-    ar >> make_nvp("versioned_key", v.versioned_key_);
 }
 
 } }

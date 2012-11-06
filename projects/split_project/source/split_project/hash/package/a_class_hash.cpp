@@ -19,7 +19,6 @@
  *
  */
 #include "dogen/split_project/hash/package/a_class_hash.hpp"
-#include "dogen/split_project/hash/versioned_key_hash.hpp"
 
 namespace {
 
@@ -36,10 +35,10 @@ namespace dogen {
 namespace split_project {
 namespace package {
 
-std::size_t a_class_hasher::hash(const a_class& v) {
+std::size_t a_class_hasher::hash(const a_class&v) {
     std::size_t seed(0);
 
-    combine(seed, v.versioned_key());
+    combine(seed, v.prop_0());
     return seed;
 }
 

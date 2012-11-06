@@ -21,7 +21,6 @@
 #include "dogen/std_model/hash/class_a_hash.hpp"
 #include "dogen/std_model/hash/class_d_hash.hpp"
 #include "dogen/std_model/hash/pkg1/class_c_hash.hpp"
-#include "dogen/std_model/hash/versioned_key_hash.hpp"
 
 namespace {
 
@@ -77,7 +76,7 @@ inline std::size_t hash_std_list_std_list_unsigned_int_(const std::list<std::lis
 namespace dogen {
 namespace std_model {
 
-std::size_t class_d_hasher::hash(const class_d& v) {
+std::size_t class_d_hasher::hash(const class_d&v) {
     std::size_t seed(0);
 
     combine(seed, hash_std_list_std_string(v.prop_0()));
@@ -86,7 +85,6 @@ std::size_t class_d_hasher::hash(const class_d& v) {
     combine(seed, hash_std_list_unsigned_int(v.prop_3()));
     combine(seed, hash_std_list_dogen_std_model_class_a(v.prop_4()));
     combine(seed, hash_std_list_std_list_unsigned_int_(v.prop_5()));
-    combine(seed, v.versioned_key());
 
     return seed;
 }

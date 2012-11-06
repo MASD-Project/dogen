@@ -22,7 +22,6 @@
 #include "dogen/enumeration/hash/book_types_hash.hpp"
 #include "dogen/enumeration/hash/colour_types_hash.hpp"
 #include "dogen/enumeration/hash/pkg1/shape_types_hash.hpp"
-#include "dogen/enumeration/hash/versioned_key_hash.hpp"
 
 namespace {
 
@@ -38,13 +37,12 @@ inline void combine(std::size_t& seed, const HashableType& value)
 namespace dogen {
 namespace enumeration {
 
-std::size_t a_class_hasher::hash(const a_class& v) {
+std::size_t a_class_hasher::hash(const a_class&v) {
     std::size_t seed(0);
 
     combine(seed, v.colour_type());
     combine(seed, v.book_type());
     combine(seed, v.shape_type());
-    combine(seed, v.versioned_key());
 
     return seed;
 }

@@ -26,7 +26,6 @@
 #endif
 
 #include <algorithm>
-#include "dogen/dmp/domain/versioned_key.hpp"
 #include "dogen/dmp/serialization/package1/first_class_fwd_ser.hpp"
 
 namespace dogen {
@@ -45,8 +44,7 @@ public:
 public:
     first_class(
         const int public_attribute,
-        const int private_attribute,
-        const dogen::dmp::versioned_key& versioned_key);
+        const int private_attribute);
 
 private:
     template<typename Archive>
@@ -72,14 +70,6 @@ public:
         private_attribute_ = v;
     }
 
-    dogen::dmp::versioned_key versioned_key() const {
-        return versioned_key_;
-    }
-
-    void versioned_key(const dogen::dmp::versioned_key& v) {
-        versioned_key_ = v;
-    }
-
 public:
     bool operator==(const first_class& rhs) const;
     bool operator!=(const first_class& rhs) const {
@@ -93,7 +83,6 @@ public:
 private:
     int public_attribute_;
     int private_attribute_;
-    dogen::dmp::versioned_key versioned_key_;
 };
 
 } } }

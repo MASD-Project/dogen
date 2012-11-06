@@ -20,5 +20,3 @@
  */
 #include "dogen/classes_inout_package/serialization/class_2_ser.hpp"
 #include "dogen/classes_inout_package/serialization/package_1/class_1_ser.hpp"
-#include "dogen/classes_inout_package/serialization/unversioned_key_ser.hpp"
-#include "dogen/classes_inout_package/serialization/versioned_key_ser.hpp"

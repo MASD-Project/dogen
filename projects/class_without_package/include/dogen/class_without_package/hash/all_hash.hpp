@@ -19,5 +19,3 @@
  *
  */
 #include "dogen/class_without_package/hash/class_1_hash.hpp"
-#include "dogen/class_without_package/hash/unversioned_key_hash.hpp"
-#include "dogen/class_without_package/hash/versioned_key_hash.hpp"

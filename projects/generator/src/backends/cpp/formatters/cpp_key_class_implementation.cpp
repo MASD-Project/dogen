@@ -42,34 +42,10 @@ hand_crafted_constructors(const class_view_model& vm) {
         complete_constructor(vm);
 }
 
-void cpp_key_class_implementation::to_unversioned_key(const class_view_model& vm) {
-    if (!is_versioned_)
-        return;
-
-    stream_ << indenter_ << "unversioned_key " << vm.name()
-            << "::to_unversioned() const ";
-
-    utility_.open_scope();
-    {
-        cpp_positive_indenter_scope s(indenter_);
-        if (!disable_complete_constructor_) {
-            stream_ << indenter_ << "return unversioned_key(id());"
-                    << std::endl;
-        } else {
-            stream_ << indenter_ << "unversioned_key uk;" << std::endl;
-            stream_ << indenter_ << "uk.id(id());" << std::endl;
-            stream_ << indenter_ << "return uk;" << std::endl;
-        }
-    }
-    utility_.close_scope();
-    utility_.blank_line();
-}
-
 void cpp_key_class_implementation::format(const class_view_model& vm) {
     hand_crafted_constructors(vm);
     if (!disable_io_)
         to_stream(vm);
-    to_unversioned_key(vm);
     swap(vm);
     equals_operator(vm);
     assignment_operator(vm);

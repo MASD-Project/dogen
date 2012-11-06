@@ -19,5 +19,3 @@
  *
  */
 #include "dogen/disable_cmakelists/io/package1/first_class_io.hpp"
-#include "dogen/disable_cmakelists/io/unversioned_key_io.hpp"
-#include "dogen/disable_cmakelists/io/versioned_key_io.hpp"

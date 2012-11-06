@@ -19,17 +19,11 @@
  *
  */
 #include "dogen/trivial_association/test_data/class_a_td.hpp"
-#include "dogen/trivial_association/test_data/versioned_key_td.hpp"
 
 namespace {
 
 int create_int(const unsigned int position) {
     return position;
-}
-
-dogen::trivial_association::versioned_key
-create_dogen_trivial_association_versioned_key(const unsigned int position) {
-    return dogen::trivial_association::versioned_key_generator::create(position);
 }
 
 }
@@ -42,7 +36,6 @@ class_a_generator::class_a_generator() : position_(0) { }
 void class_a_generator::
 populate(const unsigned int position, result_type& v) {
     v.prop_0(create_int(position + 0));
-    v.versioned_key(create_dogen_trivial_association_versioned_key(position + 1));
 }
 
 class_a_generator::result_type

@@ -22,7 +22,6 @@
 #include "dogen/boost_model/hash/class_b_hash.hpp"
 #include "dogen/boost_model/hash/class_base_hash.hpp"
 #include "dogen/boost_model/hash/pkg1/class_c_hash.hpp"
-#include "dogen/boost_model/hash/versioned_key_hash.hpp"
 
 namespace {
 
@@ -81,7 +80,7 @@ inline std::size_t hash_std_vector_boost_shared_ptr_dogen_boost_model_class_base
 namespace dogen {
 namespace boost_model {
 
-std::size_t class_b_hasher::hash(const class_b& v) {
+std::size_t class_b_hasher::hash(const class_b&v) {
     std::size_t seed(0);
 
     combine(seed, hash_boost_shared_ptr_dogen_boost_model_class_a(v.prop_0()));
@@ -90,7 +89,6 @@ std::size_t class_b_hasher::hash(const class_b& v) {
     combine(seed, hash_boost_shared_ptr_dogen_boost_model_pkg1_class_c(v.prop_3()));
     combine(seed, hash_boost_shared_ptr_dogen_boost_model_class_base(v.prop_4()));
     combine(seed, hash_std_vector_boost_shared_ptr_dogen_boost_model_class_base_(v.prop_5()));
-    combine(seed, v.versioned_key());
 
     return seed;
 }

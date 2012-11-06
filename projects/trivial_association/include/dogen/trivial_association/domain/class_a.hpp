@@ -26,7 +26,6 @@
 #endif
 
 #include <algorithm>
-#include "dogen/trivial_association/domain/versioned_key.hpp"
 #include "dogen/trivial_association/serialization/class_a_fwd_ser.hpp"
 
 namespace dogen {
@@ -42,9 +41,7 @@ public:
     class_a();
 
 public:
-    class_a(
-        const int prop_0,
-        const dogen::trivial_association::versioned_key& versioned_key);
+    explicit class_a(const int prop_0);
 
 private:
     template<typename Archive>
@@ -62,14 +59,6 @@ public:
         prop_0_ = v;
     }
 
-    dogen::trivial_association::versioned_key versioned_key() const {
-        return versioned_key_;
-    }
-
-    void versioned_key(const dogen::trivial_association::versioned_key& v) {
-        versioned_key_ = v;
-    }
-
 public:
     bool operator==(const class_a& rhs) const;
     bool operator!=(const class_a& rhs) const {
@@ -82,7 +71,6 @@ public:
 
 private:
     int prop_0_;
-    dogen::trivial_association::versioned_key versioned_key_;
 };
 
 } }

@@ -19,17 +19,11 @@
  *
  */
 #include "dogen/class_without_package/test_data/class_1_td.hpp"
-#include "dogen/class_without_package/test_data/versioned_key_td.hpp"
 
 namespace {
 
 int create_int(const unsigned int position) {
     return position;
-}
-
-dogen::class_without_package::versioned_key
-create_dogen_class_without_package_versioned_key(const unsigned int position) {
-    return dogen::class_without_package::versioned_key_generator::create(position);
 }
 
 }
@@ -42,7 +36,6 @@ class_1_generator::class_1_generator() : position_(0) { }
 void class_1_generator::
 populate(const unsigned int position, result_type& v) {
     v.an_attribute(create_int(position + 0));
-    v.versioned_key(create_dogen_class_without_package_versioned_key(position + 1));
 }
 
 class_1_generator::result_type

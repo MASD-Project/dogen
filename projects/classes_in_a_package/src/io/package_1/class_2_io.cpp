@@ -20,7 +20,6 @@
  */
 #include <ostream>
 #include "dogen/classes_in_a_package/io/package_1/class_2_io.hpp"
-#include "dogen/classes_in_a_package/io/versioned_key_io.hpp"
 
 namespace dogen {
 namespace classes_in_a_package {
@@ -29,7 +28,7 @@ namespace package_1 {
 std::ostream& operator<<(std::ostream& s, const class_2& v) {
     s << " { "
       << "\"__type__\": " << "\"class_2\"" << ", "
-      << "\"versioned_key\": " << v.versioned_key()
+      << "\"prop_0\": " << v.prop_0()
       << " }";
     return(s);
 }

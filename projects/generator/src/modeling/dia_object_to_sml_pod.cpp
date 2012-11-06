@@ -33,13 +33,13 @@
 #include <boost/algorithm/string/erase.hpp>
 #include <boost/graph/depth_first_search.hpp>
 #include "dogen/sml/hash/qualified_name_hash.hpp"
+#include "dogen/dia/utility/dia_utility.hpp"
 #include "dogen/dia/domain/composite.hpp"
 #include "dogen/dia/domain/attribute.hpp"
 #include "dogen/dia/domain/object_types.hpp"
 #include "dogen/dia/domain/stereotypes.hpp"
 #include "dogen/dia/io/object_types_io.hpp"
 #include "dogen/dia/io/stereotypes_io.hpp"
-#include "dogen/dia/utility/dia_utility.hpp"
 #include "dogen/dia/io/object_io.hpp"
 #include "dogen/dia/io/diagram_io.hpp"
 #include "dogen/utility/log/logger.hpp"
@@ -387,6 +387,16 @@ void dia_dfs_visitor::process_dia_object(const dogen::dia::object& o) {
                 o.child_node()->parent() : empty);
             using dogen::sml::meta_types;
             pod.name(transform_qualified_name(a, meta_types::pod, pkg_id));
+        } else if (a.name() == dia_stereotype) {
+            using dogen::dia::utility::parse_stereotype;
+            const auto v(transform_string_attribute(a));
+
+            if (v.empty())
+                continue;
+
+            const auto st(parse_stereotype(v));
+            using dogen::dia::stereotypes;
+            pod.is_cacheable(st == stereotypes::cacheable);
         } else if (a.name() == dia_documentation) {
             const std::string doc(transform_string_attribute(a));
             pod.documentation(doc);

@@ -20,7 +20,6 @@
  */
 #include <ostream>
 #include "dogen/disable_facet_folders/package1/first_class_io.hpp"
-#include "dogen/disable_facet_folders/versioned_key_io.hpp"
 
 namespace dogen {
 namespace disable_facet_folders {
@@ -30,8 +29,7 @@ std::ostream& operator<<(std::ostream& s, const first_class& v) {
     s << " { "
       << "\"__type__\": " << "\"first_class\"" << ", "
       << "\"public_attribute\": " << v.public_attribute() << ", "
-      << "\"private_attribute\": " << v.private_attribute() << ", "
-      << "\"versioned_key\": " << v.versioned_key()
+      << "\"private_attribute\": " << v.private_attribute()
       << " }";
     return(s);
 }

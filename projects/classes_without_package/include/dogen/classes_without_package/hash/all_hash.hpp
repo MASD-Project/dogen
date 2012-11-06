@@ -23,5 +23,3 @@
 #include "dogen/classes_without_package/hash/class_3_hash.hpp"
 #include "dogen/classes_without_package/hash/class_4_hash.hpp"
 #include "dogen/classes_without_package/hash/class_5_hash.hpp"
-#include "dogen/classes_without_package/hash/unversioned_key_hash.hpp"
-#include "dogen/classes_without_package/hash/versioned_key_hash.hpp"

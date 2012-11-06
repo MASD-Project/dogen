@@ -352,7 +352,7 @@
 								<item>
 									<which>6</which>
 									<value class_id="20" tracking_level="0" version="0">
-										<value>29.825,11.2;45.825,23.7</value>
+										<value>29.825,11.2;45.825,24.5</value>
 									</value>
 								</item>
 							</values>
@@ -391,7 +391,7 @@
 								<item>
 									<which>2</which>
 									<value>
-										<value>12.400000000000002</value>
+										<value>13.200000000000001</value>
 									</value>
 								</item>
 							</values>
@@ -417,7 +417,7 @@
 								<item>
 									<which>5</which>
 									<value>
-										<value>##</value>
+										<value>#cacheable#</value>
 									</value>
 								</item>
 							</values>

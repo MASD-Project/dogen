@@ -31,7 +31,6 @@
 #include "dogen/enumeration/serialization/book_types_ser.hpp"
 #include "dogen/enumeration/serialization/colour_types_ser.hpp"
 #include "dogen/enumeration/serialization/pkg1/shape_types_ser.hpp"
-#include "dogen/enumeration/serialization/versioned_key_ser.hpp"
 
 #ifdef __linux__
 #include "eos/portable_iarchive.hpp"
@@ -48,7 +47,6 @@ void save(Archive& ar,
     ar << make_nvp("colour_type", v.colour_type_);
     ar << make_nvp("book_type", v.book_type_);
     ar << make_nvp("shape_type", v.shape_type_);
-    ar << make_nvp("versioned_key", v.versioned_key_);
 }
 
 template<typename Archive>
@@ -58,7 +56,6 @@ void load(Archive& ar,
     ar >> make_nvp("colour_type", v.colour_type_);
     ar >> make_nvp("book_type", v.book_type_);
     ar >> make_nvp("shape_type", v.shape_type_);
-    ar >> make_nvp("versioned_key", v.versioned_key_);
 }
 
 } }

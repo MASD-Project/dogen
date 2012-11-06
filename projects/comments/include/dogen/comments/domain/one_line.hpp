@@ -26,7 +26,6 @@
 #endif
 
 #include <algorithm>
-#include "dogen/comments/domain/versioned_key.hpp"
 #include "dogen/comments/serialization/one_line_fwd_ser.hpp"
 
 namespace dogen {
@@ -48,8 +47,7 @@ public:
     one_line(
         const int prop_0,
         const int prop_1,
-        const int prop_2,
-        const dogen::comments::versioned_key& versioned_key);
+        const int prop_2);
 
 private:
     template<typename Archive>
@@ -95,14 +93,6 @@ public:
         prop_2_ = v;
     }
 
-    dogen::comments::versioned_key versioned_key() const {
-        return versioned_key_;
-    }
-
-    void versioned_key(const dogen::comments::versioned_key& v) {
-        versioned_key_ = v;
-    }
-
 public:
     bool operator==(const one_line& rhs) const;
     bool operator!=(const one_line& rhs) const {
@@ -117,7 +107,6 @@ private:
     int prop_0_;
     int prop_1_;
     int prop_2_;
-    dogen::comments::versioned_key versioned_key_;
 };
 
 } }

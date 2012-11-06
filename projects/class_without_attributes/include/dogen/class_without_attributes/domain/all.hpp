@@ -19,5 +19,3 @@
  *
  */
 #include "dogen/class_without_attributes/domain/package_1/class_1.hpp"
-#include "dogen/class_without_attributes/domain/unversioned_key.hpp"
-#include "dogen/class_without_attributes/domain/versioned_key.hpp"

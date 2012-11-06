@@ -32,7 +32,6 @@
 #include "dogen/std_model/serialization/class_a_ser.hpp"
 #include "dogen/std_model/serialization/class_g_ser.hpp"
 #include "dogen/std_model/serialization/pkg1/class_c_ser.hpp"
-#include "dogen/std_model/serialization/versioned_key_ser.hpp"
 #include "dogen/utility/serialization/unordered_map.hpp"
 
 #ifdef __linux__
@@ -49,7 +48,6 @@ void save(Archive& ar,
     const unsigned int /*version*/) {
     ar << make_nvp("prop_0", v.prop_0_);
     ar << make_nvp("prop_1", v.prop_1_);
-    ar << make_nvp("versioned_key", v.versioned_key_);
 }
 
 template<typename Archive>
@@ -58,7 +56,6 @@ void load(Archive& ar,
     const unsigned int /*version*/) {
     ar >> make_nvp("prop_0", v.prop_0_);
     ar >> make_nvp("prop_1", v.prop_1_);
-    ar >> make_nvp("versioned_key", v.versioned_key_);
 }
 
 } }

@@ -58,7 +58,8 @@ public:
             number_of_type_arguments_(0),
             is_sequence_container_(false),
             is_associative_container_(false),
-            is_smart_pointer_(false) { }
+            is_smart_pointer_(false),
+            is_cacheable_(false) { }
 
     /**
      * @brief Initialises the pod.
@@ -86,6 +87,7 @@ public:
      * container type, false otherwise.
      * @param is_smart_pointer If true the pod represents a smart
      * pointer, false otherwise.
+     * @param is_cacheable If true the pod requires cache support
      */
     pod(qualified_name name,
         std::vector<dogen::sml::property> properties,
@@ -95,7 +97,7 @@ public:
         bool is_parent, category_types category_type,
         const std::string& documentation,
         const unsigned int number_of_type_arguments, bool is_sequence_container,
-        bool is_associative_container, bool is_smart_pointer)
+        bool is_associative_container, bool is_smart_pointer, bool is_cacheable)
         : name_(name), properties_(properties), parent_name_(parent_name),
           original_parent_name_(original_parent_name), leaves_(leaves),
           generate_(generate), is_parent_(is_parent),
@@ -103,12 +105,13 @@ public:
           number_of_type_arguments_(number_of_type_arguments),
           is_sequence_container_(is_sequence_container),
           is_associative_container_(is_associative_container),
-          is_smart_pointer_(is_smart_pointer) { }
+          is_smart_pointer_(is_smart_pointer), is_cacheable_(is_cacheable) { }
 
     pod(pod&& rhs) : name_(std::move(rhs.name_)),
                      properties_(std::move(rhs.properties_)),
                      parent_name_(std::move(rhs.parent_name_)),
-                     original_parent_name_(std::move(rhs.original_parent_name_)),
+                     original_parent_name_(
+                         std::move(rhs.original_parent_name_)),
                      leaves_(std::move(rhs.leaves_)),
                      generate_(std::move(rhs.generate_)),
                      is_parent_(std::move(rhs.is_parent_)),
@@ -121,7 +124,8 @@ public:
                      is_associative_container_(
                          std::move(rhs.is_associative_container_)),
                      is_smart_pointer_(
-                         std::move(rhs.is_smart_pointer_)) { }
+                         std::move(rhs.is_smart_pointer_)),
+                     is_cacheable_(rhs.is_cacheable_) { }
 
 public:
     /**
@@ -245,6 +249,14 @@ public:
     void is_smart_pointer(const bool v) { is_smart_pointer_ = v; }
     /**@}*/
 
+    /**
+     * @brief If true the pod requires cache support.
+     */
+    /**@{*/
+    bool is_cacheable() const { return is_cacheable_; }
+    void is_cacheable(const bool v) { is_cacheable_ = v; }
+    /**@}*/
+
 public:
     void to_stream(std::ostream& stream) const;
 
@@ -269,6 +281,7 @@ private:
     bool is_sequence_container_;
     bool is_associative_container_;
     bool is_smart_pointer_;
+    bool is_cacheable_;
 };
 
 } }

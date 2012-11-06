@@ -73,6 +73,7 @@ public:
         result.is_sequence_container(false);
         result.is_associative_container(false);
         result.is_smart_pointer(false);
+        result.is_cacheable(false);
         return result;
     }
 

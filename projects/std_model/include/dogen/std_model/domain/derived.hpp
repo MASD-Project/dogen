@@ -44,7 +44,6 @@ public:
 public:
     derived(
         const std::vector<std::string>& prop_0,
-        const dogen::std_model::versioned_key& versioned_key,
         const std::list<dogen::std_model::pkg1::class_c>& prop_1);
 
 private:

@@ -19,5 +19,3 @@
  *
  */
 #include "dogen/disable_cmakelists/hash/package1/first_class_hash.hpp"
-#include "dogen/disable_cmakelists/hash/unversioned_key_hash.hpp"
-#include "dogen/disable_cmakelists/hash/versioned_key_hash.hpp"

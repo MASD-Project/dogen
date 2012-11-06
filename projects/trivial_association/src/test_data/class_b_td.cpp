@@ -20,18 +20,12 @@
  */
 #include "dogen/trivial_association/test_data/class_a_td.hpp"
 #include "dogen/trivial_association/test_data/class_b_td.hpp"
-#include "dogen/trivial_association/test_data/versioned_key_td.hpp"
 
 namespace {
 
 dogen::trivial_association::class_a
 create_dogen_trivial_association_class_a(const unsigned int position) {
     return dogen::trivial_association::class_a_generator::create(position);
-}
-
-dogen::trivial_association::versioned_key
-create_dogen_trivial_association_versioned_key(const unsigned int position) {
-    return dogen::trivial_association::versioned_key_generator::create(position);
 }
 
 }
@@ -44,7 +38,6 @@ class_b_generator::class_b_generator() : position_(0) { }
 void class_b_generator::
 populate(const unsigned int position, result_type& v) {
     v.prop_0(create_dogen_trivial_association_class_a(position + 0));
-    v.versioned_key(create_dogen_trivial_association_versioned_key(position + 1));
 }
 
 class_b_generator::result_type

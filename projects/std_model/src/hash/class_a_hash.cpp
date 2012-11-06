@@ -19,7 +19,6 @@
  *
  */
 #include "dogen/std_model/hash/class_a_hash.hpp"
-#include "dogen/std_model/hash/versioned_key_hash.hpp"
 
 namespace {
 
@@ -35,12 +34,11 @@ inline void combine(std::size_t& seed, const HashableType& value)
 namespace dogen {
 namespace std_model {
 
-std::size_t class_a_hasher::hash(const class_a& v) {
+std::size_t class_a_hasher::hash(const class_a&v) {
     std::size_t seed(0);
 
     combine(seed, v.prop0());
     combine(seed, v.prop1());
-    combine(seed, v.versioned_key());
 
     return seed;
 }

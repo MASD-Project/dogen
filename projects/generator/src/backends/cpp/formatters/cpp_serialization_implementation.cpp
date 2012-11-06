@@ -84,12 +84,6 @@ void serialization_implementation::save_function(const class_view_model& vm) {
 
         utility_.open_scope();
         {
-            for (const auto l : vm.leaves()) {
-                stream_ << indenter_
-                        << "ar.template register_type<" << l << ">();"
-                        << std::endl;
-            }
-
             for (const auto p : parents) {
                 if (disable_xml_serialization_) {
                     stream_ << indenter_ << "ar << base_object<";
@@ -151,12 +145,6 @@ void serialization_implementation::load_function(const class_view_model& vm) {
 
         utility_.open_scope();
         {
-            for (const auto l : vm.leaves()) {
-                stream_ << indenter_
-                        << "ar.template register_type<" << l << ">();"
-                        << std::endl;
-            }
-
             for (const auto p : parents) {
                 if (disable_xml_serialization_) {
                     stream_ << indenter_

@@ -19,7 +19,7 @@
  *
  */
 #include "dogen/class_in_a_package/hash/package1/first_class_hash.hpp"
-#include "dogen/class_in_a_package/hash/versioned_key_hash.hpp"
+#include "dogen/class_in_a_package/hash/package1/first_class_versioned_key_hash.hpp"
 
 namespace {
 
@@ -36,7 +36,7 @@ namespace dogen {
 namespace class_in_a_package {
 namespace package1 {
 
-std::size_t first_class_hasher::hash(const first_class& v) {
+std::size_t first_class_hasher::hash(const first_class&v) {
     std::size_t seed(0);
 
     combine(seed, v.public_attribute());

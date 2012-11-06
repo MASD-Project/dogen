@@ -19,5 +19,3 @@
  *
  */
 #include "dogen/disable_cmakelists/domain/package1/first_class.hpp"
-#include "dogen/disable_cmakelists/domain/unversioned_key.hpp"
-#include "dogen/disable_cmakelists/domain/versioned_key.hpp"

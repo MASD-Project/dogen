@@ -22,17 +22,11 @@
 #include "dogen/trivial_inheritance/test_data/child_of_a_child2_td.hpp"
 #include "dogen/trivial_inheritance/test_data/parent_with_members_td.hpp"
 #include "dogen/trivial_inheritance/test_data/second_child_without_members_td.hpp"
-#include "dogen/trivial_inheritance/test_data/versioned_key_td.hpp"
 
 namespace {
 
 int create_int(const unsigned int position) {
     return position;
-}
-
-dogen::trivial_inheritance::versioned_key
-create_dogen_trivial_inheritance_versioned_key(const unsigned int position) {
-    return dogen::trivial_inheritance::versioned_key_generator::create(position);
 }
 
 }
@@ -44,7 +38,6 @@ namespace trivial_inheritance {
 void parent_with_members_generator::
 populate(const unsigned int position, result_type& v) {
     v.prop_0(create_int(position + 0));
-    v.versioned_key(create_dogen_trivial_inheritance_versioned_key(position + 1));
 }
 
 parent_with_members_generator::result_type*

@@ -97,19 +97,6 @@ private:
         const sml::qualified_name& name) const;
 
     /**
-     * @brief Returns the include path to the unversioned key domain
-     * header.
-     */
-    std::string unversioned_dependency() const;
-
-    /**
-     * @brief Returns the include path to the versioned key header.
-     *
-     * @param ft Facet for which we require the versioned key header.
-     */
-    std::string versioned_dependency(cpp_facet_types ft) const;
-
-    /**
      * @brief Returns the include path to the domain header.
      *
      * @param name Qualified name of the type for which we require the
@@ -179,14 +166,6 @@ private:
      */
     std::list<dogen::sml::qualified_name>
     pod_to_qualified_names(const sml::pod& pod) const;
-
-    /**
-     * @brief Appends to the inclusion lists all dependencies related
-     * to versioning.
-     */
-    void append_versioning_dependencies(const cpp_facet_types ft,
-        const cpp_file_types flt, cpp_aspect_types at,
-        const sml::category_types ct, inclusion_lists& il) const;
 
     /**
      * @brief Appends to the inclusion lists all dependencies related

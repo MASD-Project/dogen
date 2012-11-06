@@ -19,7 +19,6 @@
  *
  */
 #include "dogen/comments/hash/one_line_hash.hpp"
-#include "dogen/comments/hash/versioned_key_hash.hpp"
 
 namespace {
 
@@ -35,13 +34,12 @@ inline void combine(std::size_t& seed, const HashableType& value)
 namespace dogen {
 namespace comments {
 
-std::size_t one_line_hasher::hash(const one_line& v) {
+std::size_t one_line_hasher::hash(const one_line&v) {
     std::size_t seed(0);
 
     combine(seed, v.prop_0());
     combine(seed, v.prop_1());
     combine(seed, v.prop_2());
-    combine(seed, v.versioned_key());
 
     return seed;
 }

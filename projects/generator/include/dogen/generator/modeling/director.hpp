@@ -99,7 +99,7 @@ private:
     /**
      * @brief Creates a versioned or unversioned key system pod.
      */
-    sml::pod create_key_system_pod(const sml::model& m,
+    sml::pod create_key_system_pod(const sml::pod& p,
         const bool is_versioned) const;
 
     /**

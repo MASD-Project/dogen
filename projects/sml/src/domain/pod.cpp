@@ -45,7 +45,8 @@ bool pod::operator==(const pod& rhs) const {
         number_of_type_arguments_ == rhs.number_of_type_arguments_ &&
         is_sequence_container_ == rhs.is_sequence_container_ &&
         is_associative_container_ == rhs.is_associative_container_ &&
-        is_smart_pointer_ == rhs.is_smart_pointer_;
+        is_smart_pointer_ == rhs.is_smart_pointer_ &&
+        is_cacheable_ == rhs.is_cacheable_;
 }
 
 void pod::to_stream(std::ostream& stream) const {
@@ -67,7 +68,8 @@ void pod::to_stream(std::ostream& stream) const {
            << "\"is_sequence_container\":" << is_sequence_container_ << ", "
            << "\"is_associative_container\":" << is_associative_container_
            << ", "
-           << "\"is_smart_pointer\":" << is_smart_pointer_
+           << "\"is_smart_pointer\":" << is_smart_pointer_ << ", "
+           << "\"is_cacheable\":" << is_cacheable_
            << " }";
 }
 

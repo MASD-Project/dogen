@@ -20,7 +20,6 @@
  */
 #include "dogen/std_model/hash/class_a_hash.hpp"
 #include "dogen/std_model/hash/pkg1/class_c_hash.hpp"
-#include "dogen/std_model/hash/versioned_key_hash.hpp"
 
 namespace {
 
@@ -45,12 +44,11 @@ namespace dogen {
 namespace std_model {
 namespace pkg1 {
 
-std::size_t class_c_hasher::hash(const class_c& v) {
+std::size_t class_c_hasher::hash(const class_c&v) {
     std::size_t seed(0);
 
     combine(seed, v.prop_0());
     combine(seed, hash_std_vector_dogen_std_model_class_a(v.prop_1()));
-    combine(seed, v.versioned_key());
 
     return seed;
 }

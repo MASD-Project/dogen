@@ -23,5 +23,3 @@
 #include "dogen/classes_without_package/io/class_3_io.hpp"
 #include "dogen/classes_without_package/io/class_4_io.hpp"
 #include "dogen/classes_without_package/io/class_5_io.hpp"
-#include "dogen/classes_without_package/io/unversioned_key_io.hpp"
-#include "dogen/classes_without_package/io/versioned_key_io.hpp"

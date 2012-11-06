@@ -19,5 +19,3 @@
  *
  */
 #include "dogen/disable_facet_folders/package1/first_class_io.hpp"
-#include "dogen/disable_facet_folders/unversioned_key_io.hpp"
-#include "dogen/disable_facet_folders/versioned_key_io.hpp"

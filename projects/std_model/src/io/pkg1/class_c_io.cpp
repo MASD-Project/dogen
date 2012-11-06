@@ -21,7 +21,6 @@
 #include <ostream>
 #include "dogen/std_model/io/class_a_io.hpp"
 #include "dogen/std_model/io/pkg1/class_c_io.hpp"
-#include "dogen/std_model/io/versioned_key_io.hpp"
 
 namespace std {
 
@@ -45,8 +44,7 @@ std::ostream& operator<<(std::ostream& s, const class_c& v) {
     s << " { "
       << "\"__type__\": " << "\"class_c\"" << ", "
       << "\"prop_0\": " << v.prop_0() << ", "
-      << "\"prop_1\": " << v.prop_1() << ", "
-      << "\"versioned_key\": " << v.versioned_key()
+      << "\"prop_1\": " << v.prop_1()
       << " }";
     return(s);
 }

@@ -23,22 +23,8 @@
 namespace dogen {
 namespace trivial_association {
 
-class_d::class_d(const dogen::trivial_association::versioned_key& versioned_key)
-    : versioned_key_(versioned_key) { }
-
-void class_d::swap(class_d& other) noexcept {
-    using std::swap;
-    swap(versioned_key_, other.versioned_key_);
-}
-
-bool class_d::operator==(const class_d& rhs) const {
-    return versioned_key_ == rhs.versioned_key_;
-}
-
-class_d& class_d::operator=(class_d other) {
-    using std::swap;
-    swap(*this, other);
-    return *this;
+bool class_d::operator==(const class_d& /*rhs*/) const {
+    return true;
 }
 
 } }

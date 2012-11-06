@@ -24,16 +24,19 @@ namespace dogen {
 namespace split_project {
 namespace package {
 
-a_class::a_class(const dogen::split_project::versioned_key& versioned_key)
-    : versioned_key_(versioned_key) { }
+a_class::a_class()
+    : prop_0_(static_cast<int>(0)) { }
+
+a_class::a_class(const int prop_0)
+    : prop_0_(prop_0) { }
 
 void a_class::swap(a_class& other) noexcept {
     using std::swap;
-    swap(versioned_key_, other.versioned_key_);
+    swap(prop_0_, other.prop_0_);
 }
 
 bool a_class::operator==(const a_class& rhs) const {
-    return versioned_key_ == rhs.versioned_key_;
+    return prop_0_ == rhs.prop_0_;
 }
 
 a_class& a_class::operator=(a_class other) {

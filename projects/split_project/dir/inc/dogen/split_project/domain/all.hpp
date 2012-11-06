@@ -19,5 +19,3 @@
  *
  */
 #include "dogen/split_project/domain/package/a_class.hpp"
-#include "dogen/split_project/domain/unversioned_key.hpp"
-#include "dogen/split_project/domain/versioned_key.hpp"

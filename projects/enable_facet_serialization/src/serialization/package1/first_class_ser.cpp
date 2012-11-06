@@ -25,7 +25,6 @@
 #include <boost/archive/text_iarchive.hpp>
 #include <boost/archive/text_oarchive.hpp>
 #include "dogen/enable_facet_serialization/serialization/package1/first_class_ser.hpp"
-#include "dogen/enable_facet_serialization/serialization/versioned_key_ser.hpp"
 
 #ifdef __linux__
 #include "eos/portable_iarchive.hpp"
@@ -41,7 +40,6 @@ void save(Archive& ar,
     const unsigned int /*version*/) {
     ar << v.public_attribute_;
     ar << v.private_attribute_;
-    ar << v.versioned_key_;
 }
 
 template<typename Archive>
@@ -50,7 +48,6 @@ void load(Archive& ar,
     const unsigned int /*version*/) {
     ar >> v.public_attribute_;
     ar >> v.private_attribute_;
-    ar >> v.versioned_key_;
 }
 
 } }

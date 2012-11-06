@@ -26,7 +26,6 @@
 #endif
 
 #include <algorithm>
-#include "dogen/trivial_association/domain/versioned_key.hpp"
 #include "dogen/trivial_association/serialization/class_c_fwd_ser.hpp"
 
 namespace dogen {
@@ -38,9 +37,7 @@ public:
     class_c(const class_c&) = default;
     class_c(class_c&&) = default;
     ~class_c() = default;
-
-public:
-    explicit class_c(const dogen::trivial_association::versioned_key& versioned_key);
+    class_c& operator=(const class_c&) = default;
 
 private:
     template<typename Archive>
@@ -50,39 +47,13 @@ private:
     friend void boost::serialization::load(Archive& ar, class_c& v, unsigned int version);
 
 public:
-    dogen::trivial_association::versioned_key versioned_key() const {
-        return versioned_key_;
-    }
-
-    void versioned_key(const dogen::trivial_association::versioned_key& v) {
-        versioned_key_ = v;
-    }
-
-public:
     bool operator==(const class_c& rhs) const;
     bool operator!=(const class_c& rhs) const {
         return !this->operator==(rhs);
     }
 
-public:
-    void swap(class_c& other) noexcept;
-    class_c& operator=(class_c other);
-
-private:
-    dogen::trivial_association::versioned_key versioned_key_;
 };
 
 } }
-
-namespace std {
-
-template<>
-inline void swap(
-    dogen::trivial_association::class_c& lhs,
-    dogen::trivial_association::class_c& rhs) {
-    lhs.swap(rhs);
-}
-
-}
 
 #endif

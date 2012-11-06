@@ -23,5 +23,3 @@
 #include "dogen/boost_model/domain/class_base.hpp"
 #include "dogen/boost_model/domain/class_derived.hpp"
 #include "dogen/boost_model/domain/pkg1/class_c.hpp"
-#include "dogen/boost_model/domain/unversioned_key.hpp"
-#include "dogen/boost_model/domain/versioned_key.hpp"

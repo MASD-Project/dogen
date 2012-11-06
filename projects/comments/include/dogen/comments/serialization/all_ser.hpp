@@ -20,5 +20,3 @@
  */
 #include "dogen/comments/serialization/multi_line_ser.hpp"
 #include "dogen/comments/serialization/one_line_ser.hpp"
-#include "dogen/comments/serialization/unversioned_key_ser.hpp"
-#include "dogen/comments/serialization/versioned_key_ser.hpp"

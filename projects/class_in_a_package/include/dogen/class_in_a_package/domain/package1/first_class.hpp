@@ -26,7 +26,7 @@
 #endif
 
 #include <algorithm>
-#include "dogen/class_in_a_package/domain/versioned_key.hpp"
+#include "dogen/class_in_a_package/domain/package1/first_class_versioned_key.hpp"
 #include "dogen/class_in_a_package/serialization/package1/first_class_fwd_ser.hpp"
 
 namespace dogen {
@@ -46,7 +46,7 @@ public:
     first_class(
         const int public_attribute,
         const int private_attribute,
-        const dogen::class_in_a_package::versioned_key& versioned_key);
+        const dogen::class_in_a_package::package1::first_class_versioned_key& versioned_key);
 
 private:
     template<typename Archive>
@@ -72,11 +72,11 @@ public:
         private_attribute_ = v;
     }
 
-    dogen::class_in_a_package::versioned_key versioned_key() const {
+    dogen::class_in_a_package::package1::first_class_versioned_key versioned_key() const {
         return versioned_key_;
     }
 
-    void versioned_key(const dogen::class_in_a_package::versioned_key& v) {
+    void versioned_key(const dogen::class_in_a_package::package1::first_class_versioned_key& v) {
         versioned_key_ = v;
     }
 
@@ -93,7 +93,7 @@ public:
 private:
     int public_attribute_;
     int private_attribute_;
-    dogen::class_in_a_package::versioned_key versioned_key_;
+    dogen::class_in_a_package::package1::first_class_versioned_key versioned_key_;
 };
 
 } } }

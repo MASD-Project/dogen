@@ -30,7 +30,6 @@
 #include <string>
 #include "dogen/std_model/domain/class_a.hpp"
 #include "dogen/std_model/domain/pkg1/class_c.hpp"
-#include "dogen/std_model/domain/versioned_key.hpp"
 #include "dogen/std_model/serialization/class_e_fwd_ser.hpp"
 
 namespace dogen {
@@ -50,8 +49,7 @@ public:
         const std::deque<dogen::std_model::pkg1::class_c>& prop_2,
         const std::deque<unsigned int>& prop_3,
         const std::deque<dogen::std_model::class_a>& prop_4,
-        const std::deque<std::deque<unsigned int> >& prop_5,
-        const dogen::std_model::versioned_key& versioned_key);
+        const std::deque<std::deque<unsigned int> >& prop_5);
 
 private:
     template<typename Archive>
@@ -109,14 +107,6 @@ public:
         prop_5_ = v;
     }
 
-    dogen::std_model::versioned_key versioned_key() const {
-        return versioned_key_;
-    }
-
-    void versioned_key(const dogen::std_model::versioned_key& v) {
-        versioned_key_ = v;
-    }
-
 public:
     bool operator==(const class_e& rhs) const;
     bool operator!=(const class_e& rhs) const {
@@ -134,7 +124,6 @@ private:
     std::deque<unsigned int> prop_3_;
     std::deque<dogen::std_model::class_a> prop_4_;
     std::deque<std::deque<unsigned int> > prop_5_;
-    dogen::std_model::versioned_key versioned_key_;
 };
 
 } }

@@ -31,10 +31,8 @@ child::child()
 
 child::child(
     const unsigned int prop_0,
-    const dogen::trivial_inheritance::versioned_key& versioned_key,
     const int prop_1)
-    : dogen::trivial_inheritance::pkg1::parent(prop_0,
-      versioned_key),
+    : dogen::trivial_inheritance::pkg1::parent(prop_0),
       prop_1_(prop_1) { }
 
 void child::to_stream(std::ostream& s) const {

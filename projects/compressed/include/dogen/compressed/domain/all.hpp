@@ -19,5 +19,3 @@
  *
  */
 #include "dogen/compressed/domain/package1/first_class.hpp"
-#include "dogen/compressed/domain/unversioned_key.hpp"
-#include "dogen/compressed/domain/versioned_key.hpp"

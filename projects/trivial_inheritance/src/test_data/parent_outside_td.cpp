@@ -19,14 +19,14 @@
  *
  */
 #include "dogen/trivial_inheritance/test_data/parent_outside_td.hpp"
+#include "dogen/trivial_inheritance/test_data/parent_outside_versioned_key_td.hpp"
 #include "dogen/trivial_inheritance/test_data/pkg4/child_td.hpp"
-#include "dogen/trivial_inheritance/test_data/versioned_key_td.hpp"
 
 namespace {
 
-dogen::trivial_inheritance::versioned_key
-create_dogen_trivial_inheritance_versioned_key(const unsigned int position) {
-    return dogen::trivial_inheritance::versioned_key_generator::create(position);
+dogen::trivial_inheritance::parent_outside_versioned_key
+create_dogen_trivial_inheritance_parent_outside_versioned_key(const unsigned int position) {
+    return dogen::trivial_inheritance::parent_outside_versioned_key_generator::create(position);
 }
 
 }
@@ -37,7 +37,7 @@ namespace trivial_inheritance {
 
 void parent_outside_generator::
 populate(const unsigned int position, result_type& v) {
-    v.versioned_key(create_dogen_trivial_inheritance_versioned_key(position + 0));
+    v.versioned_key(create_dogen_trivial_inheritance_parent_outside_versioned_key(position + 0));
 }
 
 parent_outside_generator::result_type*

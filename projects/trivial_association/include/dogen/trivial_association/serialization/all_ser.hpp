@@ -22,5 +22,3 @@
 #include "dogen/trivial_association/serialization/class_b_ser.hpp"
 #include "dogen/trivial_association/serialization/class_c_ser.hpp"
 #include "dogen/trivial_association/serialization/class_d_ser.hpp"
-#include "dogen/trivial_association/serialization/unversioned_key_ser.hpp"
-#include "dogen/trivial_association/serialization/versioned_key_ser.hpp"

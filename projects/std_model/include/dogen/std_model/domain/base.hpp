@@ -29,7 +29,6 @@
 #include <iosfwd>
 #include <string>
 #include <vector>
-#include "dogen/std_model/domain/versioned_key.hpp"
 #include "dogen/std_model/serialization/base_fwd_ser.hpp"
 
 namespace dogen {
@@ -44,9 +43,7 @@ public:
     virtual ~base() noexcept = 0;
 
 public:
-    base(
-        const std::vector<std::string>& prop_0,
-        const dogen::std_model::versioned_key& versioned_key);
+    explicit base(const std::vector<std::string>& prop_0);
 
 private:
     template<typename Archive>
@@ -67,14 +64,6 @@ public:
         prop_0_ = v;
     }
 
-    dogen::std_model::versioned_key versioned_key() const {
-        return versioned_key_;
-    }
-
-    void versioned_key(const dogen::std_model::versioned_key& v) {
-        versioned_key_ = v;
-    }
-
 protected:
     bool compare(const base& rhs) const;
 public:
@@ -85,7 +74,6 @@ protected:
 
 private:
     std::vector<std::string> prop_0_;
-    dogen::std_model::versioned_key versioned_key_;
 };
 
 inline base::~base() noexcept { }

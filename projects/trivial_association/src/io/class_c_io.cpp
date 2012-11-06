@@ -20,16 +20,13 @@
  */
 #include <ostream>
 #include "dogen/trivial_association/io/class_c_io.hpp"
-#include "dogen/trivial_association/io/versioned_key_io.hpp"
 
 namespace dogen {
 namespace trivial_association {
 
-std::ostream& operator<<(std::ostream& s, const class_c& v) {
+std::ostream& operator<<(std::ostream& s, const class_c&) {
     s << " { "
-      << "\"__type__\": " << "\"class_c\"" << ", "
-      << "\"versioned_key\": " << v.versioned_key()
-      << " }";
+      << "\"__type__\": " << "\"class_c\"" << " }";
     return(s);
 }
 

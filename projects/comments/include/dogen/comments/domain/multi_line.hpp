@@ -26,7 +26,6 @@
 #endif
 
 #include <algorithm>
-#include "dogen/comments/domain/versioned_key.hpp"
 #include "dogen/comments/serialization/multi_line_fwd_ser.hpp"
 
 namespace dogen {
@@ -43,9 +42,7 @@ public:
     multi_line(const multi_line&) = default;
     multi_line(multi_line&&) = default;
     ~multi_line() = default;
-
-public:
-    explicit multi_line(const dogen::comments::versioned_key& versioned_key);
+    multi_line& operator=(const multi_line&) = default;
 
 private:
     template<typename Archive>
@@ -55,39 +52,13 @@ private:
     friend void boost::serialization::load(Archive& ar, multi_line& v, unsigned int version);
 
 public:
-    dogen::comments::versioned_key versioned_key() const {
-        return versioned_key_;
-    }
-
-    void versioned_key(const dogen::comments::versioned_key& v) {
-        versioned_key_ = v;
-    }
-
-public:
     bool operator==(const multi_line& rhs) const;
     bool operator!=(const multi_line& rhs) const {
         return !this->operator==(rhs);
     }
 
-public:
-    void swap(multi_line& other) noexcept;
-    multi_line& operator=(multi_line other);
-
-private:
-    dogen::comments::versioned_key versioned_key_;
 };
 
 } }
-
-namespace std {
-
-template<>
-inline void swap(
-    dogen::comments::multi_line& lhs,
-    dogen::comments::multi_line& rhs) {
-    lhs.swap(rhs);
-}
-
-}
 
 #endif

@@ -20,7 +20,6 @@
  */
 #include <ostream>
 #include "dogen/std_model/domain/base.hpp"
-#include "dogen/std_model/io/versioned_key_io.hpp"
 
 namespace std {
 
@@ -39,29 +38,23 @@ inline std::ostream& operator<<(std::ostream& s, const std::vector<std::string>&
 namespace dogen {
 namespace std_model {
 
-base::base(
-    const std::vector<std::string>& prop_0,
-    const dogen::std_model::versioned_key& versioned_key)
-    : prop_0_(prop_0),
-      versioned_key_(versioned_key) { }
+base::base(const std::vector<std::string>& prop_0)
+    : prop_0_(prop_0) { }
 
 void base::to_stream(std::ostream& s) const {
     s << " { "
       << "\"__type__\": " << "\"base\"" << ", "
-      << "\"prop_0\": " << prop_0_ << ", "
-      << "\"versioned_key\": " << versioned_key_
+      << "\"prop_0\": " << prop_0_
       << " }";
 }
 
 void base::swap(base& other) noexcept {
     using std::swap;
     swap(prop_0_, other.prop_0_);
-    swap(versioned_key_, other.versioned_key_);
 }
 
 bool base::compare(const base& rhs) const {
-    return prop_0_ == rhs.prop_0_ &&
-        versioned_key_ == rhs.versioned_key_;
+    return prop_0_ == rhs.prop_0_;
 }
 
 } }

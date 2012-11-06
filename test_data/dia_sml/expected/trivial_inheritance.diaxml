@@ -352,7 +352,7 @@
 								<item>
 									<which>6</which>
 									<value class_id="20" tracking_level="0" version="0">
-										<value>0.9875,7.9875;13.0525,10.2875</value>
+										<value>0.9875,7.9875;13.0525,11.0875</value>
 									</value>
 								</item>
 							</values>
@@ -391,7 +391,7 @@
 								<item>
 									<which>2</which>
 									<value>
-										<value>2.1999999999999997</value>
+										<value>3</value>
 									</value>
 								</item>
 							</values>
@@ -417,7 +417,7 @@
 								<item>
 									<which>5</which>
 									<value>
-										<value>##</value>
+										<value>#cacheable#</value>
 									</value>
 								</item>
 							</values>
@@ -1347,7 +1347,7 @@
 								<item>
 									<which>1</which>
 									<value>
-										<value>7.02,10.2375</value>
+										<value>7.02,11.0375</value>
 									</value>
 								</item>
 							</values>
@@ -1360,7 +1360,7 @@
 								<item>
 									<which>6</which>
 									<value>
-										<value>6.17,10.1875;12.59,16.3375</value>
+										<value>6.17,10.9875;12.59,16.3375</value>
 									</value>
 								</item>
 							</values>
@@ -1393,19 +1393,19 @@
 								<item>
 									<which>1</which>
 									<value>
-										<value>7.02,10.2375</value>
+										<value>7.02,11.0375</value>
 									</value>
 								</item>
 								<item>
 									<which>1</which>
 									<value>
-										<value>7.02,13.6625</value>
+										<value>7.02,14.0625</value>
 									</value>
 								</item>
 								<item>
 									<which>1</which>
 									<value>
-										<value>12.54,13.6625</value>
+										<value>12.54,14.0625</value>
 									</value>
 								</item>
 								<item>
@@ -8626,7 +8626,7 @@
 								<item>
 									<which>6</which>
 									<value>
-										<value>74.3875,5.45698;81.7575,7.75698</value>
+										<value>74.3875,5.45698;81.7575,8.55698</value>
 									</value>
 								</item>
 							</values>
@@ -8665,7 +8665,7 @@
 								<item>
 									<which>2</which>
 									<value>
-										<value>2.1999999999999997</value>
+										<value>3</value>
 									</value>
 								</item>
 							</values>
@@ -8691,7 +8691,7 @@
 								<item>
 									<which>5</which>
 									<value>
-										<value>##</value>
+										<value>#cacheable#</value>
 									</value>
 								</item>
 							</values>
@@ -9804,7 +9804,7 @@
 								<item>
 									<which>1</which>
 									<value>
-										<value>78.0725,7.70698</value>
+										<value>78.0725,8.50698</value>
 									</value>
 								</item>
 							</values>
@@ -9817,7 +9817,7 @@
 								<item>
 									<which>6</which>
 									<value>
-										<value>77.2225,7.65698;81.4462,19.1195</value>
+										<value>77.2225,8.45698;81.4462,19.1195</value>
 									</value>
 								</item>
 							</values>
@@ -9850,19 +9850,19 @@
 								<item>
 									<which>1</which>
 									<value>
-										<value>78.0725,7.70698</value>
+										<value>78.0725,8.50698</value>
 									</value>
 								</item>
 								<item>
 									<which>1</which>
 									<value>
-										<value>78.0725,13.7882</value>
+										<value>78.0725,14.1882</value>
 									</value>
 								</item>
 								<item>
 									<which>1</which>
 									<value>
-										<value>81.3962,13.7882</value>
+										<value>81.3962,14.1882</value>
 									</value>
 								</item>
 								<item>

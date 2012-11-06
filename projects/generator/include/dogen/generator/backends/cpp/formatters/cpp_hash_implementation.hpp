@@ -71,7 +71,7 @@ private:
     void create_helper_methods(const class_view_model& vm);
 
 private:
-    void combine_function();
+    void combine_function(const class_view_model& vm);
     void hasher_hash_method(const class_view_model& vm);
 
 private:

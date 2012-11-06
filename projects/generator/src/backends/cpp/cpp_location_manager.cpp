@@ -34,7 +34,6 @@ const std::string io_postfix("_io");
 const std::string hash_postfix("_hash");
 const std::string serialization_postfix("_ser");
 const std::string test_data_postfix("_td");
-const std::string database_postfix("_db");
 const std::string forward_decls_postfix("_fwd");
 
 const std::string src_dir("src");
@@ -90,9 +89,6 @@ std::string cpp_location_manager::facet_directory(cpp_facet_types facet) const {
     case cpp_facet_types::test_data:
         return settings_.test_data_facet_folder();
         break;
-    case cpp_facet_types::database:
-        return settings_.database_facet_folder();
-        break;
     default:
         throw invalid_enum_value(invalid_facet_types);
     }
@@ -108,7 +104,6 @@ std::string cpp_location_manager::facet_postfix(cpp_facet_types facet) const {
     case cpp_facet_types::hash: return hash_postfix; break;
     case cpp_facet_types::serialization: return serialization_postfix; break;
     case cpp_facet_types::test_data: return test_data_postfix; break;
-    case cpp_facet_types::database: return database_postfix; break;
     default:
         BOOST_LOG_SEV(lg, error) << invalid_facet_types;
         throw invalid_enum_value(invalid_facet_types);

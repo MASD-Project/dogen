@@ -23,5 +23,3 @@
 #include "dogen/boost_model/test_data/class_base_td.hpp"
 #include "dogen/boost_model/test_data/class_derived_td.hpp"
 #include "dogen/boost_model/test_data/pkg1/class_c_td.hpp"
-#include "dogen/boost_model/test_data/unversioned_key_td.hpp"
-#include "dogen/boost_model/test_data/versioned_key_td.hpp"

@@ -26,7 +26,6 @@
 #endif
 
 #include <algorithm>
-#include "dogen/classes_in_a_package/domain/versioned_key.hpp"
 #include "dogen/classes_in_a_package/serialization/package_1/class_2_fwd_ser.hpp"
 
 namespace dogen {
@@ -35,13 +34,15 @@ namespace package_1 {
 
 class class_2 final {
 public:
-    class_2() = default;
     class_2(const class_2&) = default;
     class_2(class_2&&) = default;
     ~class_2() = default;
 
 public:
-    explicit class_2(const dogen::classes_in_a_package::versioned_key& versioned_key);
+    class_2();
+
+public:
+    explicit class_2(const int prop_0);
 
 private:
     template<typename Archive>
@@ -51,12 +52,12 @@ private:
     friend void boost::serialization::load(Archive& ar, class_2& v, unsigned int version);
 
 public:
-    dogen::classes_in_a_package::versioned_key versioned_key() const {
-        return versioned_key_;
+    int prop_0() const {
+        return prop_0_;
     }
 
-    void versioned_key(const dogen::classes_in_a_package::versioned_key& v) {
-        versioned_key_ = v;
+    void prop_0(const int v) {
+        prop_0_ = v;
     }
 
 public:
@@ -70,7 +71,7 @@ public:
     class_2& operator=(class_2 other);
 
 private:
-    dogen::classes_in_a_package::versioned_key versioned_key_;
+    int prop_0_;
 };
 
 } } }

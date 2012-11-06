@@ -543,13 +543,11 @@ bool sml_to_cpp_view_model::has_implementation(const cpp_facet_types ft,
             ft == cpp_facet_types::domain ||
             ft == cpp_facet_types::hash ||
             ft == cpp_facet_types::io ||
-            ft == cpp_facet_types::database ||
             ft == cpp_facet_types::test_data ||
             ft == cpp_facet_types::serialization;
     } else if (mt == meta_types::enumeration) {
         return
             ft == cpp_facet_types::io ||
-            ft == cpp_facet_types::database ||
             ft == cpp_facet_types::test_data;
     } else if (mt == meta_types::enumeration)
         return false;
@@ -681,13 +679,6 @@ std::vector<file_view_model> sml_to_cpp_view_model::transform_pods() {
         const auto main(cpp_aspect_types::main);
         const auto forward_decls(cpp_aspect_types::forward_decls);
         for (const auto ft: settings_.enabled_facets()) {
-            const bool is_system_type(
-                p.category_type() == sml::category_types::versioned_key ||
-                p.category_type() == sml::category_types::unversioned_key);
-
-            if (ft == cpp_facet_types::database && is_system_type)
-                continue;
-
             lambda(ft, header, main, p);
 
             if (has_implementation(ft, sml::meta_types::pod))

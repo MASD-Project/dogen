@@ -20,7 +20,6 @@
  */
 #include <ostream>
 #include "dogen/trivial_inheritance/domain/parent_with_members.hpp"
-#include "dogen/trivial_inheritance/io/versioned_key_io.hpp"
 
 namespace dogen {
 namespace trivial_inheritance {
@@ -28,29 +27,23 @@ namespace trivial_inheritance {
 parent_with_members::parent_with_members()
     : prop_0_(static_cast<int>(0)) { }
 
-parent_with_members::parent_with_members(
-    const int prop_0,
-    const dogen::trivial_inheritance::versioned_key& versioned_key)
-    : prop_0_(prop_0),
-      versioned_key_(versioned_key) { }
+parent_with_members::parent_with_members(const int prop_0)
+    : prop_0_(prop_0) { }
 
 void parent_with_members::to_stream(std::ostream& s) const {
     s << " { "
       << "\"__type__\": " << "\"parent_with_members\"" << ", "
-      << "\"prop_0\": " << prop_0_ << ", "
-      << "\"versioned_key\": " << versioned_key_
+      << "\"prop_0\": " << prop_0_
       << " }";
 }
 
 void parent_with_members::swap(parent_with_members& other) noexcept {
     using std::swap;
     swap(prop_0_, other.prop_0_);
-    swap(versioned_key_, other.versioned_key_);
 }
 
 bool parent_with_members::compare(const parent_with_members& rhs) const {
-    return prop_0_ == rhs.prop_0_ &&
-        versioned_key_ == rhs.versioned_key_;
+    return prop_0_ == rhs.prop_0_;
 }
 
 } }

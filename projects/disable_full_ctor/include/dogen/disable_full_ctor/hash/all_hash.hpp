@@ -19,5 +19,3 @@
  *
  */
 #include "dogen/disable_full_ctor/hash/package1/first_class_hash.hpp"
-#include "dogen/disable_full_ctor/hash/unversioned_key_hash.hpp"
-#include "dogen/disable_full_ctor/hash/versioned_key_hash.hpp"

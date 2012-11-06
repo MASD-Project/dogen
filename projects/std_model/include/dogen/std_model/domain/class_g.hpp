@@ -31,7 +31,6 @@
 #include <vector>
 #include "dogen/std_model/domain/class_a.hpp"
 #include "dogen/std_model/domain/pkg1/class_c.hpp"
-#include "dogen/std_model/domain/versioned_key.hpp"
 #include "dogen/std_model/hash/class_a_hash.hpp"
 #include "dogen/std_model/hash/pkg1/class_c_hash.hpp"
 #include "dogen/std_model/serialization/class_g_fwd_ser.hpp"
@@ -49,8 +48,7 @@ public:
 public:
     class_g(
         const std::unordered_map<dogen::std_model::class_a, std::vector<dogen::std_model::pkg1::class_c> >& prop_0,
-        const std::unordered_map<dogen::std_model::pkg1::class_c, std::list<dogen::std_model::class_a> >& prop_1,
-        const dogen::std_model::versioned_key& versioned_key);
+        const std::unordered_map<dogen::std_model::pkg1::class_c, std::list<dogen::std_model::class_a> >& prop_1);
 
 private:
     template<typename Archive>
@@ -76,14 +74,6 @@ public:
         prop_1_ = v;
     }
 
-    dogen::std_model::versioned_key versioned_key() const {
-        return versioned_key_;
-    }
-
-    void versioned_key(const dogen::std_model::versioned_key& v) {
-        versioned_key_ = v;
-    }
-
 public:
     bool operator==(const class_g& rhs) const;
     bool operator!=(const class_g& rhs) const {
@@ -97,7 +87,6 @@ public:
 private:
     std::unordered_map<dogen::std_model::class_a, std::vector<dogen::std_model::pkg1::class_c> > prop_0_;
     std::unordered_map<dogen::std_model::pkg1::class_c, std::list<dogen::std_model::class_a> > prop_1_;
-    dogen::std_model::versioned_key versioned_key_;
 };
 
 } }

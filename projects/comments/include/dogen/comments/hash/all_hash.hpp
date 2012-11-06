@@ -20,5 +20,3 @@
  */
 #include "dogen/comments/hash/multi_line_hash.hpp"
 #include "dogen/comments/hash/one_line_hash.hpp"
-#include "dogen/comments/hash/unversioned_key_hash.hpp"
-#include "dogen/comments/hash/versioned_key_hash.hpp"

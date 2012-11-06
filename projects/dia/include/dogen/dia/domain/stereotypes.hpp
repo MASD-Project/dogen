@@ -34,7 +34,8 @@ namespace dia {
 enum class stereotypes : unsigned int {
     invalid = 0,
     enumeration = 1,
-    exception = 2
+    exception = 2,
+    cacheable = 3
 };
 
 } }

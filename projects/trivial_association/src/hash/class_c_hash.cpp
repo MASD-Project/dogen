@@ -19,26 +19,17 @@
  *
  */
 #include "dogen/trivial_association/hash/class_c_hash.hpp"
-#include "dogen/trivial_association/hash/versioned_key_hash.hpp"
 
 namespace {
 
-template <typename HashableType>
-inline void combine(std::size_t& seed, const HashableType& value)
-{
-    std::hash<HashableType> hasher;
-    seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
-}
 
 }
 
 namespace dogen {
 namespace trivial_association {
 
-std::size_t class_c_hasher::hash(const class_c& v) {
+std::size_t class_c_hasher::hash(const class_c&) {
     std::size_t seed(0);
-
-    combine(seed, v.versioned_key());
     return seed;
 }
 

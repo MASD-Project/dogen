@@ -19,7 +19,6 @@
  *
  */
 #include "dogen/enable_facet_hash/hash/package1/first_class_hash.hpp"
-#include "dogen/enable_facet_hash/hash/versioned_key_hash.hpp"
 
 namespace {
 
@@ -36,12 +35,11 @@ namespace dogen {
 namespace enable_facet_hash {
 namespace package1 {
 
-std::size_t first_class_hasher::hash(const first_class& v) {
+std::size_t first_class_hasher::hash(const first_class&v) {
     std::size_t seed(0);
 
     combine(seed, v.public_attribute());
     combine(seed, v.private_attribute());
-    combine(seed, v.versioned_key());
 
     return seed;
 }

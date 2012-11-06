@@ -43,16 +43,6 @@ hand_crafted_constructors(const class_view_model& vm) {
         complete_constructor(vm);
 }
 
-void cpp_key_class_declaration::to_unversioned_key() {
-    if (!is_versioned_)
-        return;
-
-    utility_.public_access_specifier();
-    stream_ << indenter_ << "unversioned_key to_unversioned() const;"
-            << std::endl;
-    utility_.blank_line();
-}
-
 void cpp_key_class_declaration::format(const class_view_model& vm) {
     open_class(vm);
     {
@@ -62,7 +52,6 @@ void cpp_key_class_declaration::format(const class_view_model& vm) {
         friends(vm);
         if (!disable_io_)
             to_stream(vm);
-        to_unversioned_key();
         getters_and_setters(vm);
         equality(vm);
         swap_and_assignment(vm);

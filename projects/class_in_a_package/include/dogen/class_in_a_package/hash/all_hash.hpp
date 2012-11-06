@@ -19,5 +19,5 @@
  *
  */
 #include "dogen/class_in_a_package/hash/package1/first_class_hash.hpp"
-#include "dogen/class_in_a_package/hash/unversioned_key_hash.hpp"
-#include "dogen/class_in_a_package/hash/versioned_key_hash.hpp"
+#include "dogen/class_in_a_package/hash/package1/first_class_unversioned_key_hash.hpp"
+#include "dogen/class_in_a_package/hash/package1/first_class_versioned_key_hash.hpp"

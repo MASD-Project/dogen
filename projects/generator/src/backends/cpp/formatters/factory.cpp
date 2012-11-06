@@ -111,12 +111,6 @@ factory::create_main_formatter(std::ostream& s, cpp_facet_types ft,
         else
             return generator_implementation::create(s);
         break;
-    case cpp_facet_types::database:
-        if (flt == cpp_file_types::header)
-            return database_header::create(s);
-        else
-            return database_implementation::create(s);
-        break;
 
     default: {
         std::ostringstream s;

@@ -19,13 +19,11 @@
  *
  */
 #include "dogen/classes_inout_package/test_data/class_2_td.hpp"
-#include "dogen/classes_inout_package/test_data/versioned_key_td.hpp"
 
 namespace {
 
-dogen::classes_inout_package::versioned_key
-create_dogen_classes_inout_package_versioned_key(const unsigned int position) {
-    return dogen::classes_inout_package::versioned_key_generator::create(position);
+int create_int(const unsigned int position) {
+    return position;
 }
 
 }
@@ -37,7 +35,7 @@ class_2_generator::class_2_generator() : position_(0) { }
 
 void class_2_generator::
 populate(const unsigned int position, result_type& v) {
-    v.versioned_key(create_dogen_classes_inout_package_versioned_key(position + 0));
+    v.prop_0(create_int(position + 0));
 }
 
 class_2_generator::result_type

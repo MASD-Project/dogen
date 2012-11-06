@@ -26,7 +26,6 @@
 #endif
 
 #include <algorithm>
-#include "dogen/class_without_package/domain/versioned_key.hpp"
 #include "dogen/class_without_package/serialization/class_1_fwd_ser.hpp"
 
 namespace dogen {
@@ -42,9 +41,7 @@ public:
     class_1();
 
 public:
-    class_1(
-        const int an_attribute,
-        const dogen::class_without_package::versioned_key& versioned_key);
+    explicit class_1(const int an_attribute);
 
 private:
     template<typename Archive>
@@ -62,14 +59,6 @@ public:
         an_attribute_ = v;
     }
 
-    dogen::class_without_package::versioned_key versioned_key() const {
-        return versioned_key_;
-    }
-
-    void versioned_key(const dogen::class_without_package::versioned_key& v) {
-        versioned_key_ = v;
-    }
-
 public:
     bool operator==(const class_1& rhs) const;
     bool operator!=(const class_1& rhs) const {
@@ -82,7 +71,6 @@ public:
 
 private:
     int an_attribute_;
-    dogen::class_without_package::versioned_key versioned_key_;
 };
 
 } }

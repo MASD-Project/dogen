@@ -20,7 +20,6 @@
  */
 #include <ostream>
 #include "dogen/boost_model/io/class_base_io.hpp"
-#include "dogen/boost_model/io/versioned_key_io.hpp"
 
 namespace dogen {
 namespace boost_model {

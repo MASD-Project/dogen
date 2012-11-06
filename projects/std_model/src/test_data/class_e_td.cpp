@@ -22,7 +22,6 @@
 #include "dogen/std_model/test_data/class_a_td.hpp"
 #include "dogen/std_model/test_data/class_e_td.hpp"
 #include "dogen/std_model/test_data/pkg1/class_c_td.hpp"
-#include "dogen/std_model/test_data/versioned_key_td.hpp"
 
 namespace {
 
@@ -86,11 +85,6 @@ std::deque<std::deque<unsigned int> > create_std_deque_std_deque_unsigned_int_(u
     return r;
 }
 
-dogen::std_model::versioned_key
-create_dogen_std_model_versioned_key(const unsigned int position) {
-    return dogen::std_model::versioned_key_generator::create(position);
-}
-
 }
 
 namespace dogen {
@@ -106,7 +100,6 @@ populate(const unsigned int position, result_type& v) {
     v.prop_3(create_std_deque_unsigned_int(position + 3));
     v.prop_4(create_std_deque_dogen_std_model_class_a(position + 4));
     v.prop_5(create_std_deque_std_deque_unsigned_int_(position + 5));
-    v.versioned_key(create_dogen_std_model_versioned_key(position + 6));
 }
 
 class_e_generator::result_type

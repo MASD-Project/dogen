@@ -19,5 +19,3 @@
  *
  */
 #include "dogen/split_project/serialization/package/a_class_ser.hpp"
-#include "dogen/split_project/serialization/unversioned_key_ser.hpp"
-#include "dogen/split_project/serialization/versioned_key_ser.hpp"

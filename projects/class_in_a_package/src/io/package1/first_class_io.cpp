@@ -20,7 +20,7 @@
  */
 #include <ostream>
 #include "dogen/class_in_a_package/io/package1/first_class_io.hpp"
-#include "dogen/class_in_a_package/io/versioned_key_io.hpp"
+#include "dogen/class_in_a_package/io/package1/first_class_versioned_key_io.hpp"
 
 namespace dogen {
 namespace class_in_a_package {

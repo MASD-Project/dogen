@@ -352,7 +352,7 @@
 								<item>
 									<which>6</which>
 									<value class_id="20" tracking_level="0" version="0">
-										<value>16.95,9.575;20.7475,11.875</value>
+										<value>16.95,9.575;22.17,12.475</value>
 									</value>
 								</item>
 							</values>
@@ -378,7 +378,7 @@
 								<item>
 									<which>2</which>
 									<value>
-										<value>3.6975000000000002</value>
+										<value>5.1200000000000001</value>
 									</value>
 								</item>
 							</values>
@@ -391,7 +391,7 @@
 								<item>
 									<which>2</which>
 									<value>
-										<value>2.1999999999999997</value>
+										<value>2.7999999999999998</value>
 									</value>
 								</item>
 							</values>
@@ -788,18 +788,136 @@
 						<item object_id="_58">
 							<name>attributes</name>
 							<values>
-								<count>0</count>
+								<count>1</count>
 								<item_version>0</item_version>
+								<item>
+									<which>9</which>
+									<value object_id="_59">
+										<type>umlattribute</type>
+										<value>
+											<count>7</count>
+											<item_version>1</item_version>
+											<item>
+												<px class_id_reference="3" object_id="_60">
+													<name>name</name>
+													<values>
+														<count>1</count>
+														<item_version>0</item_version>
+														<item>
+															<which>5</which>
+															<value>
+																<value>#prop_0#</value>
+															</value>
+														</item>
+													</values>
+												</px>
+											</item>
+											<item>
+												<px class_id_reference="3" object_id="_61">
+													<name>type</name>
+													<values>
+														<count>1</count>
+														<item_version>0</item_version>
+														<item>
+															<which>5</which>
+															<value>
+																<value>#int#</value>
+															</value>
+														</item>
+													</values>
+												</px>
+											</item>
+											<item>
+												<px class_id_reference="3" object_id="_62">
+													<name>value</name>
+													<values>
+														<count>1</count>
+														<item_version>0</item_version>
+														<item>
+															<which>5</which>
+															<value>
+																<value>##</value>
+															</value>
+														</item>
+													</values>
+												</px>
+											</item>
+											<item>
+												<px class_id_reference="3" object_id="_63">
+													<name>comment</name>
+													<values>
+														<count>1</count>
+														<item_version>0</item_version>
+														<item>
+															<which>5</which>
+															<value>
+																<value>##</value>
+															</value>
+														</item>
+													</values>
+												</px>
+											</item>
+											<item>
+												<px class_id_reference="3" object_id="_64">
+													<name>visibility</name>
+													<values>
+														<count>1</count>
+														<item_version>0</item_version>
+														<item>
+															<which>8</which>
+															<value class_id="22" tracking_level="0" version="0">
+																<value>0</value>
+															</value>
+														</item>
+													</values>
+												</px>
+											</item>
+											<item>
+												<px class_id_reference="3" object_id="_65">
+													<name>abstract</name>
+													<values>
+														<count>1</count>
+														<item_version>0</item_version>
+														<item>
+															<which>4</which>
+															<value>
+																<value>false</value>
+															</value>
+														</item>
+													</values>
+												</px>
+											</item>
+											<item>
+												<px class_id_reference="3" object_id="_66">
+													<name>class_scope</name>
+													<values>
+														<count>1</count>
+														<item_version>0</item_version>
+														<item>
+															<which>4</which>
+															<value>
+																<value>false</value>
+															</value>
+														</item>
+													</values>
+												</px>
+											</item>
+										</value>
+										<inner_composite>
+											<px class_id="-1"></px>
+										</inner_composite>
+									</value>
+								</item>
 							</values>
 						</item>
-						<item object_id="_59">
+						<item object_id="_67">
 							<name>operations</name>
 							<values>
 								<count>0</count>
 								<item_version>0</item_version>
 							</values>
 						</item>
-						<item object_id="_60">
+						<item object_id="_68">
 							<name>template</name>
 							<values>
 								<count>1</count>
@@ -812,7 +930,7 @@
 								</item>
 							</values>
 						</item>
-						<item object_id="_61">
+						<item object_id="_69">
 							<name>templates</name>
 							<values>
 								<count>0</count>
@@ -820,10 +938,10 @@
 							</values>
 						</item>
 					</attributes>
-					<child_node class_id="22" tracking_level="0" version="0">
+					<child_node class_id="23" tracking_level="0" version="0">
 						<initialized>0</initialized>
 					</child_node>
-					<connections class_id="23" tracking_level="0" version="0">
+					<connections class_id="24" tracking_level="0" version="0">
 						<count>0</count>
 						<item_version>0</item_version>
 					</connections>

@@ -19,7 +19,6 @@
  *
  */
 #include "dogen/trivial_association/hash/class_a_hash.hpp"
-#include "dogen/trivial_association/hash/versioned_key_hash.hpp"
 
 namespace {
 
@@ -35,12 +34,10 @@ inline void combine(std::size_t& seed, const HashableType& value)
 namespace dogen {
 namespace trivial_association {
 
-std::size_t class_a_hasher::hash(const class_a& v) {
+std::size_t class_a_hasher::hash(const class_a&v) {
     std::size_t seed(0);
 
     combine(seed, v.prop_0());
-    combine(seed, v.versioned_key());
-
     return seed;
 }
 

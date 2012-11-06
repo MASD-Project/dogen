@@ -20,10 +20,11 @@
 					<item_version>0</item_version>
 				</external_package_path>
 				<package_path>
-					<count>0</count>
+					<count>1</count>
 					<item_version>0</item_version>
+					<item>package1</item>
 				</package_path>
-				<type_name>unversioned_key</type_name>
+				<type_name>first_class_versioned_key</type_name>
 				<meta_type>2</meta_type>
 			</first>
 			<second class_id="6" tracking_level="0" version="0">
@@ -34,14 +35,15 @@
 						<item_version>0</item_version>
 					</external_package_path>
 					<package_path>
-						<count>0</count>
+						<count>1</count>
 						<item_version>0</item_version>
+						<item>package1</item>
 					</package_path>
-					<type_name>unversioned_key</type_name>
+					<type_name>first_class_versioned_key</type_name>
 					<meta_type>2</meta_type>
 				</name>
 				<properties class_id="7" tracking_level="0" version="0">
-					<count>1</count>
+					<count>2</count>
 					<item_version>0</item_version>
 					<item class_id="8" tracking_level="0" version="0">
 						<name>id</name>
@@ -68,6 +70,31 @@
 						<default_value></default_value>
 						<documentation></documentation>
 					</item>
+					<item>
+						<name>version</name>
+						<type_name>
+							<type>
+								<model_name></model_name>
+								<external_package_path>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_package_path>
+								<package_path>
+									<count>0</count>
+									<item_version>0</item_version>
+								</package_path>
+								<type_name>unsigned int</type_name>
+								<meta_type>5</meta_type>
+							</type>
+							<children_>
+								<count>0</count>
+								<item_version>0</item_version>
+							</children_>
+							<is_pointer>0</is_pointer>
+						</type_name>
+						<default_value></default_value>
+						<documentation></documentation>
+					</item>
 				</properties>
 				<parent_name class_id="11" tracking_level="0" version="0">
 					<initialized>0</initialized>
@@ -81,12 +108,13 @@
 				</leaves>
 				<generate>1</generate>
 				<is_parent>0</is_parent>
-				<category_type>3</category_type>
+				<category_type>2</category_type>
 				<documentation></documentation>
 				<number_of_type_arguments>0</number_of_type_arguments>
 				<is_sequence_container>0</is_sequence_container>
 				<is_associative_container>0</is_associative_container>
 				<is_smart_pointer>0</is_smart_pointer>
+				<is_cacheable>0</is_cacheable>
 			</second>
 		</item>
 		<item>
@@ -139,6 +167,7 @@
 				<is_sequence_container>0</is_sequence_container>
 				<is_associative_container>0</is_associative_container>
 				<is_smart_pointer>1</is_smart_pointer>
+				<is_cacheable>0</is_cacheable>
 			</second>
 		</item>
 		<item>
@@ -191,6 +220,7 @@
 				<is_sequence_container>1</is_sequence_container>
 				<is_associative_container>0</is_associative_container>
 				<is_smart_pointer>1</is_smart_pointer>
+				<is_cacheable>0</is_cacheable>
 			</second>
 		</item>
 		<item>
@@ -243,6 +273,7 @@
 				<is_sequence_container>0</is_sequence_container>
 				<is_associative_container>1</is_associative_container>
 				<is_smart_pointer>0</is_smart_pointer>
+				<is_cacheable>0</is_cacheable>
 			</second>
 		</item>
 		<item>
@@ -295,6 +326,7 @@
 				<is_sequence_container>1</is_sequence_container>
 				<is_associative_container>0</is_associative_container>
 				<is_smart_pointer>1</is_smart_pointer>
+				<is_cacheable>0</is_cacheable>
 			</second>
 		</item>
 		<item>
@@ -347,6 +379,7 @@
 				<is_sequence_container>0</is_sequence_container>
 				<is_associative_container>1</is_associative_container>
 				<is_smart_pointer>0</is_smart_pointer>
+				<is_cacheable>0</is_cacheable>
 			</second>
 		</item>
 		<item>
@@ -442,10 +475,11 @@
 									<item_version>0</item_version>
 								</external_package_path>
 								<package_path>
-									<count>0</count>
+									<count>1</count>
 									<item_version>0</item_version>
+									<item>package1</item>
 								</package_path>
-								<type_name>versioned_key</type_name>
+								<type_name>first_class_versioned_key</type_name>
 								<meta_type>2</meta_type>
 							</type>
 							<children_>
@@ -476,6 +510,7 @@
 				<is_sequence_container>0</is_sequence_container>
 				<is_associative_container>0</is_associative_container>
 				<is_smart_pointer>0</is_smart_pointer>
+				<is_cacheable>1</is_cacheable>
 			</second>
 		</item>
 		<item>
@@ -528,6 +563,7 @@
 				<is_sequence_container>0</is_sequence_container>
 				<is_associative_container>1</is_associative_container>
 				<is_smart_pointer>0</is_smart_pointer>
+				<is_cacheable>0</is_cacheable>
 			</second>
 		</item>
 		<item>
@@ -580,6 +616,7 @@
 				<is_sequence_container>0</is_sequence_container>
 				<is_associative_container>1</is_associative_container>
 				<is_smart_pointer>0</is_smart_pointer>
+				<is_cacheable>0</is_cacheable>
 			</second>
 		</item>
 		<item>
@@ -632,6 +669,87 @@
 				<is_sequence_container>1</is_sequence_container>
 				<is_associative_container>0</is_associative_container>
 				<is_smart_pointer>0</is_smart_pointer>
+				<is_cacheable>0</is_cacheable>
+			</second>
+		</item>
+		<item>
+			<first>
+				<model_name>class_in_a_package</model_name>
+				<external_package_path>
+					<count>0</count>
+					<item_version>0</item_version>
+				</external_package_path>
+				<package_path>
+					<count>1</count>
+					<item_version>0</item_version>
+					<item>package1</item>
+				</package_path>
+				<type_name>first_class_unversioned_key</type_name>
+				<meta_type>2</meta_type>
+			</first>
+			<second>
+				<name>
+					<model_name>class_in_a_package</model_name>
+					<external_package_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</external_package_path>
+					<package_path>
+						<count>1</count>
+						<item_version>0</item_version>
+						<item>package1</item>
+					</package_path>
+					<type_name>first_class_unversioned_key</type_name>
+					<meta_type>2</meta_type>
+				</name>
+				<properties>
+					<count>1</count>
+					<item_version>0</item_version>
+					<item>
+						<name>id</name>
+						<type_name>
+							<type>
+								<model_name></model_name>
+								<external_package_path>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_package_path>
+								<package_path>
+									<count>0</count>
+									<item_version>0</item_version>
+								</package_path>
+								<type_name>unsigned int</type_name>
+								<meta_type>5</meta_type>
+							</type>
+							<children_>
+								<count>0</count>
+								<item_version>0</item_version>
+							</children_>
+							<is_pointer>0</is_pointer>
+						</type_name>
+						<default_value></default_value>
+						<documentation></documentation>
+					</item>
+				</properties>
+				<parent_name>
+					<initialized>0</initialized>
+				</parent_name>
+				<original_parent_name>
+					<initialized>0</initialized>
+				</original_parent_name>
+				<leaves>
+					<count>0</count>
+					<item_version>0</item_version>
+				</leaves>
+				<generate>1</generate>
+				<is_parent>0</is_parent>
+				<category_type>3</category_type>
+				<documentation></documentation>
+				<number_of_type_arguments>0</number_of_type_arguments>
+				<is_sequence_container>0</is_sequence_container>
+				<is_associative_container>0</is_associative_container>
+				<is_smart_pointer>0</is_smart_pointer>
+				<is_cacheable>0</is_cacheable>
 			</second>
 		</item>
 		<item>
@@ -684,6 +802,7 @@
 				<is_sequence_container>0</is_sequence_container>
 				<is_associative_container>1</is_associative_container>
 				<is_smart_pointer>0</is_smart_pointer>
+				<is_cacheable>0</is_cacheable>
 			</second>
 		</item>
 		<item>
@@ -736,6 +855,7 @@
 				<is_sequence_container>0</is_sequence_container>
 				<is_associative_container>0</is_associative_container>
 				<is_smart_pointer>0</is_smart_pointer>
+				<is_cacheable>0</is_cacheable>
 			</second>
 		</item>
 		<item>
@@ -788,6 +908,7 @@
 				<is_sequence_container>1</is_sequence_container>
 				<is_associative_container>0</is_associative_container>
 				<is_smart_pointer>0</is_smart_pointer>
+				<is_cacheable>0</is_cacheable>
 			</second>
 		</item>
 		<item>
@@ -840,6 +961,7 @@
 				<is_sequence_container>1</is_sequence_container>
 				<is_associative_container>0</is_associative_container>
 				<is_smart_pointer>0</is_smart_pointer>
+				<is_cacheable>0</is_cacheable>
 			</second>
 		</item>
 		<item>
@@ -892,108 +1014,7 @@
 				<is_sequence_container>1</is_sequence_container>
 				<is_associative_container>0</is_associative_container>
 				<is_smart_pointer>0</is_smart_pointer>
-			</second>
-		</item>
-		<item>
-			<first>
-				<model_name>class_in_a_package</model_name>
-				<external_package_path>
-					<count>0</count>
-					<item_version>0</item_version>
-				</external_package_path>
-				<package_path>
-					<count>0</count>
-					<item_version>0</item_version>
-				</package_path>
-				<type_name>versioned_key</type_name>
-				<meta_type>2</meta_type>
-			</first>
-			<second>
-				<name>
-					<model_name>class_in_a_package</model_name>
-					<external_package_path>
-						<count>0</count>
-						<item_version>0</item_version>
-					</external_package_path>
-					<package_path>
-						<count>0</count>
-						<item_version>0</item_version>
-					</package_path>
-					<type_name>versioned_key</type_name>
-					<meta_type>2</meta_type>
-				</name>
-				<properties>
-					<count>2</count>
-					<item_version>0</item_version>
-					<item>
-						<name>id</name>
-						<type_name>
-							<type>
-								<model_name></model_name>
-								<external_package_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</external_package_path>
-								<package_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</package_path>
-								<type_name>unsigned int</type_name>
-								<meta_type>5</meta_type>
-							</type>
-							<children_>
-								<count>0</count>
-								<item_version>0</item_version>
-							</children_>
-							<is_pointer>0</is_pointer>
-						</type_name>
-						<default_value></default_value>
-						<documentation></documentation>
-					</item>
-					<item>
-						<name>version</name>
-						<type_name>
-							<type>
-								<model_name></model_name>
-								<external_package_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</external_package_path>
-								<package_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</package_path>
-								<type_name>unsigned int</type_name>
-								<meta_type>5</meta_type>
-							</type>
-							<children_>
-								<count>0</count>
-								<item_version>0</item_version>
-							</children_>
-							<is_pointer>0</is_pointer>
-						</type_name>
-						<default_value></default_value>
-						<documentation></documentation>
-					</item>
-				</properties>
-				<parent_name>
-					<initialized>0</initialized>
-				</parent_name>
-				<original_parent_name>
-					<initialized>0</initialized>
-				</original_parent_name>
-				<leaves>
-					<count>0</count>
-					<item_version>0</item_version>
-				</leaves>
-				<generate>1</generate>
-				<is_parent>0</is_parent>
-				<category_type>2</category_type>
-				<documentation></documentation>
-				<number_of_type_arguments>0</number_of_type_arguments>
-				<is_sequence_container>0</is_sequence_container>
-				<is_associative_container>0</is_associative_container>
-				<is_smart_pointer>0</is_smart_pointer>
+				<is_cacheable>0</is_cacheable>
 			</second>
 		</item>
 		<item>
@@ -1046,6 +1067,7 @@
 				<is_sequence_container>1</is_sequence_container>
 				<is_associative_container>0</is_associative_container>
 				<is_smart_pointer>0</is_smart_pointer>
+				<is_cacheable>0</is_cacheable>
 			</second>
 		</item>
 		<item>
@@ -1098,6 +1120,7 @@
 				<is_sequence_container>0</is_sequence_container>
 				<is_associative_container>1</is_associative_container>
 				<is_smart_pointer>0</is_smart_pointer>
+				<is_cacheable>0</is_cacheable>
 			</second>
 		</item>
 		<item>
@@ -1150,6 +1173,7 @@
 				<is_sequence_container>0</is_sequence_container>
 				<is_associative_container>1</is_associative_container>
 				<is_smart_pointer>0</is_smart_pointer>
+				<is_cacheable>0</is_cacheable>
 			</second>
 		</item>
 	</pods>

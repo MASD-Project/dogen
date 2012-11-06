@@ -26,21 +26,16 @@ namespace class_without_package {
 class_1::class_1()
     : an_attribute_(static_cast<int>(0)) { }
 
-class_1::class_1(
-    const int an_attribute,
-    const dogen::class_without_package::versioned_key& versioned_key)
-    : an_attribute_(an_attribute),
-      versioned_key_(versioned_key) { }
+class_1::class_1(const int an_attribute)
+    : an_attribute_(an_attribute) { }
 
 void class_1::swap(class_1& other) noexcept {
     using std::swap;
     swap(an_attribute_, other.an_attribute_);
-    swap(versioned_key_, other.versioned_key_);
 }
 
 bool class_1::operator==(const class_1& rhs) const {
-    return an_attribute_ == rhs.an_attribute_ &&
-        versioned_key_ == rhs.versioned_key_;
+    return an_attribute_ == rhs.an_attribute_;
 }
 
 class_1& class_1::operator=(class_1 other) {

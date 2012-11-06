@@ -19,13 +19,11 @@
  *
  */
 #include "dogen/split_project/test_data/package/a_class_td.hpp"
-#include "dogen/split_project/test_data/versioned_key_td.hpp"
 
 namespace {
 
-dogen::split_project::versioned_key
-create_dogen_split_project_versioned_key(const unsigned int position) {
-    return dogen::split_project::versioned_key_generator::create(position);
+int create_int(const unsigned int position) {
+    return position;
 }
 
 }
@@ -38,7 +36,7 @@ a_class_generator::a_class_generator() : position_(0) { }
 
 void a_class_generator::
 populate(const unsigned int position, result_type& v) {
-    v.versioned_key(create_dogen_split_project_versioned_key(position + 0));
+    v.prop_0(create_int(position + 0));
 }
 
 a_class_generator::result_type

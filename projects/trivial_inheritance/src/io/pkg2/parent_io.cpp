@@ -20,7 +20,6 @@
  */
 #include <ostream>
 #include "dogen/trivial_inheritance/io/pkg2/parent_io.hpp"
-#include "dogen/trivial_inheritance/io/versioned_key_io.hpp"
 
 namespace dogen {
 namespace trivial_inheritance {

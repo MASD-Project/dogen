@@ -55,7 +55,6 @@ const std::vector<cpp_facet_types> facets =
     cpp_facet_types::serialization,
     cpp_facet_types::hash,
     cpp_facet_types::io,
-    cpp_facet_types::database,
     cpp_facet_types::test_data
 };
 

@@ -19,5 +19,3 @@
  *
  */
 #include "dogen/disable_cmakelists/serialization/package1/first_class_ser.hpp"
-#include "dogen/disable_cmakelists/serialization/unversioned_key_ser.hpp"
-#include "dogen/disable_cmakelists/serialization/versioned_key_ser.hpp"

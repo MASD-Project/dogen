@@ -56,15 +56,13 @@ class_b::class_b(
     const std::unordered_map<int, boost::shared_ptr<dogen::boost_model::class_a> >& prop_2,
     const boost::shared_ptr<dogen::boost_model::pkg1::class_c>& prop_3,
     const boost::shared_ptr<dogen::boost_model::class_base>& prop_4,
-    const std::vector<boost::shared_ptr<dogen::boost_model::class_base> >& prop_5,
-    const dogen::boost_model::versioned_key& versioned_key)
+    const std::vector<boost::shared_ptr<dogen::boost_model::class_base> >& prop_5)
     : prop_0_(prop_0),
       prop_1_(prop_1),
       prop_2_(prop_2),
       prop_3_(prop_3),
       prop_4_(prop_4),
-      prop_5_(prop_5),
-      versioned_key_(versioned_key) { }
+      prop_5_(prop_5) { }
 
 void class_b::swap(class_b& other) noexcept {
     using std::swap;
@@ -74,7 +72,6 @@ void class_b::swap(class_b& other) noexcept {
     swap(prop_3_, other.prop_3_);
     swap(prop_4_, other.prop_4_);
     swap(prop_5_, other.prop_5_);
-    swap(versioned_key_, other.versioned_key_);
 }
 
 bool class_b::operator==(const class_b& rhs) const {
@@ -83,8 +80,7 @@ bool class_b::operator==(const class_b& rhs) const {
         prop_2_ == rhs.prop_2_ &&
         prop_3_ == rhs.prop_3_ &&
         prop_4_ == rhs.prop_4_ &&
-        prop_5_ == rhs.prop_5_ &&
-        versioned_key_ == rhs.versioned_key_;
+        prop_5_ == rhs.prop_5_;
 }
 
 class_b& class_b::operator=(class_b other) {

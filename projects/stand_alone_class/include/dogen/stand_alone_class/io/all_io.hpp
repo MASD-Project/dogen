@@ -19,5 +19,3 @@
  *
  */
 #include "dogen/stand_alone_class/io/class_1_io.hpp"
-#include "dogen/stand_alone_class/io/unversioned_key_io.hpp"
-#include "dogen/stand_alone_class/io/versioned_key_io.hpp"

@@ -20,16 +20,13 @@
  */
 #include <ostream>
 #include "dogen/comments/io/multi_line_io.hpp"
-#include "dogen/comments/io/versioned_key_io.hpp"
 
 namespace dogen {
 namespace comments {
 
-std::ostream& operator<<(std::ostream& s, const multi_line& v) {
+std::ostream& operator<<(std::ostream& s, const multi_line&) {
     s << " { "
-      << "\"__type__\": " << "\"multi_line\"" << ", "
-      << "\"versioned_key\": " << v.versioned_key()
-      << " }";
+      << "\"__type__\": " << "\"multi_line\"" << " }";
     return(s);
 }
 

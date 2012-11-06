@@ -19,5 +19,3 @@
  *
  */
 #include "dogen/dmp/domain/package1/first_class.hpp"
-#include "dogen/dmp/domain/unversioned_key.hpp"
-#include "dogen/dmp/domain/versioned_key.hpp"

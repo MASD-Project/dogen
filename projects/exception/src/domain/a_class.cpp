@@ -26,21 +26,16 @@ namespace exception {
 a_class::a_class()
     : prop_0_(static_cast<int>(0)) { }
 
-a_class::a_class(
-    const int prop_0,
-    const dogen::exception::versioned_key& versioned_key)
-    : prop_0_(prop_0),
-      versioned_key_(versioned_key) { }
+a_class::a_class(const int prop_0)
+    : prop_0_(prop_0) { }
 
 void a_class::swap(a_class& other) noexcept {
     using std::swap;
     swap(prop_0_, other.prop_0_);
-    swap(versioned_key_, other.versioned_key_);
 }
 
 bool a_class::operator==(const a_class& rhs) const {
-    return prop_0_ == rhs.prop_0_ &&
-        versioned_key_ == rhs.versioned_key_;
+    return prop_0_ == rhs.prop_0_;
 }
 
 a_class& a_class::operator=(a_class other) {

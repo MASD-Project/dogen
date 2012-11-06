@@ -26,7 +26,6 @@
 #endif
 
 #include <algorithm>
-#include "dogen/enable_facet_hash/domain/versioned_key.hpp"
 
 namespace dogen {
 namespace enable_facet_hash {
@@ -44,8 +43,7 @@ public:
 public:
     first_class(
         const int public_attribute,
-        const int private_attribute,
-        const dogen::enable_facet_hash::versioned_key& versioned_key);
+        const int private_attribute);
 
 public:
     int public_attribute() const {
@@ -64,14 +62,6 @@ public:
         private_attribute_ = v;
     }
 
-    dogen::enable_facet_hash::versioned_key versioned_key() const {
-        return versioned_key_;
-    }
-
-    void versioned_key(const dogen::enable_facet_hash::versioned_key& v) {
-        versioned_key_ = v;
-    }
-
 public:
     bool operator==(const first_class& rhs) const;
     bool operator!=(const first_class& rhs) const {
@@ -85,7 +75,6 @@ public:
 private:
     int public_attribute_;
     int private_attribute_;
-    dogen::enable_facet_hash::versioned_key versioned_key_;
 };
 
 } } }

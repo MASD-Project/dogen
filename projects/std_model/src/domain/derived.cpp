@@ -42,10 +42,8 @@ namespace std_model {
 
 derived::derived(
     const std::vector<std::string>& prop_0,
-    const dogen::std_model::versioned_key& versioned_key,
     const std::list<dogen::std_model::pkg1::class_c>& prop_1)
-    : dogen::std_model::base(prop_0,
-      versioned_key),
+    : dogen::std_model::base(prop_0),
       prop_1_(prop_1) { }
 
 void derived::to_stream(std::ostream& s) const {

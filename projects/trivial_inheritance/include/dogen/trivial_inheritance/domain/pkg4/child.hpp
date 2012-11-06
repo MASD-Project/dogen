@@ -41,7 +41,7 @@ public:
     child(child&&) = default;
 
 public:
-    explicit child(const dogen::trivial_inheritance::versioned_key& versioned_key);
+    explicit child(const dogen::trivial_inheritance::parent_outside_versioned_key& versioned_key);
 
 private:
     template<typename Archive>

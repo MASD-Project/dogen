@@ -35,7 +35,7 @@ inline void combine(std::size_t& seed, const HashableType& value)
 namespace dogen {
 namespace trivial_inheritance {
 
-std::size_t second_child_without_members_hasher::hash(const second_child_without_members& v) {
+std::size_t second_child_without_members_hasher::hash(const second_child_without_members&v) {
     std::size_t seed(0);
 
     combine(seed, dynamic_cast<const dogen::trivial_inheritance::parent_with_members&>(v));

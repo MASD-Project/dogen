@@ -142,6 +142,7 @@
 				<is_sequence_container>0</is_sequence_container>
 				<is_associative_container>0</is_associative_container>
 				<is_smart_pointer>0</is_smart_pointer>
+				<is_cacheable>0</is_cacheable>
 			</second>
 		</item>
 		<item>
@@ -266,6 +267,7 @@
 				<is_sequence_container>0</is_sequence_container>
 				<is_associative_container>0</is_associative_container>
 				<is_smart_pointer>0</is_smart_pointer>
+				<is_cacheable>0</is_cacheable>
 			</second>
 		</item>
 		<item>
@@ -609,6 +611,7 @@
 				<is_sequence_container>0</is_sequence_container>
 				<is_associative_container>0</is_associative_container>
 				<is_smart_pointer>0</is_smart_pointer>
+				<is_cacheable>0</is_cacheable>
 			</second>
 		</item>
 		<item>
@@ -952,6 +955,7 @@
 				<is_sequence_container>0</is_sequence_container>
 				<is_associative_container>0</is_associative_container>
 				<is_smart_pointer>0</is_smart_pointer>
+				<is_cacheable>0</is_cacheable>
 			</second>
 		</item>
 		<item>
@@ -1200,6 +1204,7 @@
 				<is_sequence_container>0</is_sequence_container>
 				<is_associative_container>0</is_associative_container>
 				<is_smart_pointer>0</is_smart_pointer>
+				<is_cacheable>0</is_cacheable>
 			</second>
 		</item>
 		<item>
@@ -1543,6 +1548,7 @@
 				<is_sequence_container>0</is_sequence_container>
 				<is_associative_container>0</is_associative_container>
 				<is_smart_pointer>0</is_smart_pointer>
+				<is_cacheable>0</is_cacheable>
 			</second>
 		</item>
 		<item>
@@ -1669,6 +1675,7 @@
 				<is_sequence_container>0</is_sequence_container>
 				<is_associative_container>0</is_associative_container>
 				<is_smart_pointer>0</is_smart_pointer>
+				<is_cacheable>0</is_cacheable>
 			</second>
 		</item>
 		<item>
@@ -1779,6 +1786,7 @@
 				<is_sequence_container>0</is_sequence_container>
 				<is_associative_container>0</is_associative_container>
 				<is_smart_pointer>0</is_smart_pointer>
+				<is_cacheable>0</is_cacheable>
 			</second>
 		</item>
 		<item>
@@ -2003,6 +2011,7 @@
 				<is_sequence_container>0</is_sequence_container>
 				<is_associative_container>0</is_associative_container>
 				<is_smart_pointer>0</is_smart_pointer>
+				<is_cacheable>0</is_cacheable>
 			</second>
 		</item>
 	</pods>

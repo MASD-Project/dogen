@@ -19,5 +19,5 @@
  *
  */
 #include "dogen/all_primitives/domain/a_class.hpp"
-#include "dogen/all_primitives/domain/unversioned_key.hpp"
-#include "dogen/all_primitives/domain/versioned_key.hpp"
+#include "dogen/all_primitives/domain/a_class_unversioned_key.hpp"
+#include "dogen/all_primitives/domain/a_class_versioned_key.hpp"

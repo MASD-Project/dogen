@@ -29,6 +29,7 @@ const std::string prefix("stereotypes::");
 const std::string invalid("invalid");
 const std::string enumeration("enumeration");
 const std::string exception("exception");
+const std::string cacheable("cacheable");
 
 const std::string error_message("Invalid or unexpected object type");
 
@@ -45,6 +46,8 @@ std::ostream& operator<<(std::ostream& stream, stereotypes value) {
         return stream << prefix << enumeration;
     case stereotypes::exception:
         return stream << prefix << exception;
+    case stereotypes::cacheable:
+        return stream << prefix << cacheable;
     default:
         break;
     }

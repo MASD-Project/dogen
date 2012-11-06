@@ -19,5 +19,3 @@
  *
  */
 #include "dogen/exception/serialization/a_class_ser.hpp"
-#include "dogen/exception/serialization/unversioned_key_ser.hpp"
-#include "dogen/exception/serialization/versioned_key_ser.hpp"

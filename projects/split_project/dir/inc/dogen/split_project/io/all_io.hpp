@@ -19,5 +19,3 @@
  *
  */
 #include "dogen/split_project/io/package/a_class_io.hpp"
-#include "dogen/split_project/io/unversioned_key_io.hpp"
-#include "dogen/split_project/io/versioned_key_io.hpp"

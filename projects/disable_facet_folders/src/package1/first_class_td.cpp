@@ -19,17 +19,11 @@
  *
  */
 #include "dogen/disable_facet_folders/package1/first_class_td.hpp"
-#include "dogen/disable_facet_folders/versioned_key_td.hpp"
 
 namespace {
 
 int create_int(const unsigned int position) {
     return position;
-}
-
-dogen::disable_facet_folders::versioned_key
-create_dogen_disable_facet_folders_versioned_key(const unsigned int position) {
-    return dogen::disable_facet_folders::versioned_key_generator::create(position);
 }
 
 }
@@ -44,7 +38,6 @@ void first_class_generator::
 populate(const unsigned int position, result_type& v) {
     v.public_attribute(create_int(position + 0));
     v.private_attribute(create_int(position + 1));
-    v.versioned_key(create_dogen_disable_facet_folders_versioned_key(position + 2));
 }
 
 first_class_generator::result_type

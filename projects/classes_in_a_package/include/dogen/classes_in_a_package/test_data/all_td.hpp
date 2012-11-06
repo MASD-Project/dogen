@@ -23,5 +23,3 @@
 #include "dogen/classes_in_a_package/test_data/package_1/class_3_td.hpp"
 #include "dogen/classes_in_a_package/test_data/package_1/class_4_td.hpp"
 #include "dogen/classes_in_a_package/test_data/package_1/class_5_td.hpp"
-#include "dogen/classes_in_a_package/test_data/unversioned_key_td.hpp"
-#include "dogen/classes_in_a_package/test_data/versioned_key_td.hpp"

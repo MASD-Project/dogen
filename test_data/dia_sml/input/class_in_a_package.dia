@@ -68,7 +68,7 @@
         <dia:point val="-34.551,-31.5269"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-34.601,-32.5769;-4.81346,-14.9769"/>
+        <dia:rectangle val="-34.601,-32.5769;-4.8135,-14.9769"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -106,7 +106,7 @@
         <dia:point val="-25.5173,-27.2769"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-25.5673,-27.3269;-16.1123,-23.6269"/>
+        <dia:rectangle val="-25.5673,-27.3269;-16.1123,-22.8269"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-25.5173,-27.2769"/>
@@ -115,13 +115,13 @@
         <dia:real val="9.3550000000000004"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="3.6000000000000001"/>
+        <dia:real val="4.4000000000000004"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#first_class#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>##</dia:string>
+        <dia:string>#cacheable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>

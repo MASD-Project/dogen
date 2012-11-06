@@ -68,7 +68,10 @@ bool hash_implementation::is_hashable(const nested_type_view_model& vm) {
         !vm.is_smart_pointer();
 }
 
-void hash_implementation::combine_function() {
+void hash_implementation::combine_function(const class_view_model& vm) {
+    if (vm.properties().empty() && vm.parents().empty())
+        return;
+
     stream_ << indenter_ << "template <typename HashableType>" << std::endl
             << indenter_ << "inline void combine(std::size_t& seed, "
             << "const HashableType& value)" << std::endl;
@@ -242,9 +245,12 @@ void hash_implementation::create_helper_methods(const class_view_model& vm) {
 }
 
 void hash_implementation::hasher_hash_method(const class_view_model& vm) {
+    const auto props(vm.properties());
+    const auto parents(vm.parents());
     stream_ << indenter_ << "std::size_t " << vm.name() << "_hasher::"
             << "hash(const "
-            << vm.name() <<  "& v) ";
+            << vm.name() << "&"
+            << (props.empty() && parents.empty() ? ") " : "v) ");
 
     utility_.open_scope();
     {
@@ -263,7 +269,6 @@ void hash_implementation::hasher_hash_method(const class_view_model& vm) {
             stream_ << "&>(v));" << std::endl;
         }
 
-        const auto props(vm.properties());
         if (!props.empty())
             utility_.blank_line();
 
@@ -296,7 +301,7 @@ void hash_implementation::format_class(const file_view_model& vm) {
     {
         namespace_helper nsh(stream_, std::list<std::string> { });
         utility_.blank_line();
-        combine_function();
+        combine_function(cvm);
         create_helper_methods(cvm);
         utility_.blank_line();
     }

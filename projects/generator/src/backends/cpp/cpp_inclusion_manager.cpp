@@ -32,8 +32,6 @@ const std::string empty;
 const std::string std_model("std");
 const std::string primitive_model("primitive_model");
 const std::string bool_type("bool");
-const std::string versioned_name("versioned_key");
-const std::string unversioned_name("unversioned_key");
 const std::string pqxx_connection_include("pqxx/connection.hxx");
 const std::string pqxx_result_include("pqxx/result.hxx");
 const std::string pqxx_transaction_include("pqxx/transaction.hxx");
@@ -103,30 +101,6 @@ void cpp_inclusion_manager::register_header(cpp_facet_types ft,
     headers_for_facet_[ft].push_back(relative_path.generic_string());
 }
 
-std::string cpp_inclusion_manager::unversioned_dependency() const {
-    sml::qualified_name qn;
-    qn.type_name(unversioned_name);
-    qn.external_package_path(model_.external_package_path());
-    qn.model_name(model_.name());
-
-    const auto d(cpp_facet_types::domain);
-    const auto h(cpp_file_types::header);
-    const auto rq(location_request_factory(d, h, cpp_aspect_types::main, qn));
-    return location_manager_.relative_logical_path(rq).generic_string();
-}
-
-std::string cpp_inclusion_manager::
-versioned_dependency(cpp_facet_types ft) const {
-    sml::qualified_name qn;
-    qn.type_name(versioned_name);
-    qn.external_package_path(model_.external_package_path());
-    qn.model_name(model_.name());
-
-    const auto h(cpp_file_types::header);
-    const auto rq(location_request_factory(ft, h, cpp_aspect_types::main, qn));
-    return location_manager_.relative_logical_path(rq).generic_string();
-}
-
 std::string cpp_inclusion_manager::
 domain_header_dependency(const sml::qualified_name& name,
     const cpp_aspect_types at) const {
@@ -194,25 +168,6 @@ cpp_inclusion_manager::pod_to_qualified_names(const sml::pod& pod) const {
     return r;
 }
 
-void cpp_inclusion_manager::append_versioning_dependencies(
-    const cpp_facet_types ft, const cpp_file_types flt, cpp_aspect_types at,
-    const sml::category_types ct, inclusion_lists& il) const {
-
-    if (settings_.disable_versioning())
-        return;
-
-    /*
-     * rule 1: domain versioned header depends on domain unversioned
-     * header.
-     */
-    const bool is_header(flt == cpp_file_types::header);
-    const bool is_domain(ft == cpp_facet_types::domain);
-    const bool is_main(at == cpp_aspect_types::main);
-    const bool is_versioned_key(ct == sml::category_types::versioned_key);
-    if (is_versioned_key && is_main && is_header && is_domain)
-        il.user.push_back(unversioned_dependency());
-}
-
 void cpp_inclusion_manager::
 append_implementation_dependencies(const sml::pod& p,
     const cpp_facet_types ft, const cpp_file_types flt, inclusion_lists& il,
@@ -247,22 +202,9 @@ append_implementation_dependencies(const sml::pod& p,
     if (is_header && is_hash)
         il.system.push_back(functional);
 
-    // vector
-    const bool is_database(ft == cpp_facet_types::database);
-    if (is_header && is_database)
-        il.system.push_back(std_vector);
-
     /*
      * boost
      */
-    // optional
-    if (is_header && is_database)
-        il.system.push_back(boost_.include(boost_types::optional));
-
-    // format
-    if (is_implementation && is_database)
-        il.system.push_back(boost_.include(boost_types::format));
-
     // nvp serialisation
     const bool is_serialization(ft == cpp_facet_types::serialization);
     if (is_implementation && is_serialization &&
@@ -299,21 +241,6 @@ append_implementation_dependencies(const sml::pod& p,
     if (is_implementation && io_enabled_ && requires_stream_manipulators &&
         (domain_with_io || io_without_iio))
         il.system.push_back(boost_.include(boost_types::io_ios_state));
-
-    /*
-     * pqxx
-     */
-    // connection
-    if (is_header && is_database)
-        il.system.push_back(pqxx_connection_include);
-
-    // result
-    if (is_implementation && is_database)
-        il.system.push_back(pqxx_result_include);
-
-    // transaction
-    if (is_implementation && is_database)
-        il.system.push_back(pqxx_transaction_include);
 }
 
 void cpp_inclusion_manager::append_boost_dependencies(
@@ -690,7 +617,6 @@ includes_for_pod(const sml::pod& pod, cpp_facet_types ft, cpp_file_types flt,
     const bool rsm(requires_stream_manipulators(names));
     const bool pc(is_parent_or_child(pod));
 
-    append_versioning_dependencies(ft, flt, at, pod.category_type(), r);
     append_implementation_dependencies(pod, ft, flt, r, rsm);
     append_relationship_dependencies(names, keys, pod.leaves(), ft, flt, pc, r);
     append_self_dependencies(n, ft, flt, at, n.meta_type(), r);

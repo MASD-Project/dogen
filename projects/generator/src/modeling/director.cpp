@@ -132,11 +132,13 @@ save_model(const sml::model& m, const std::string& prefix) const {
 }
 
 sml::pod director::
-create_key_system_pod(const sml::model& m, const bool is_versioned) const {
+create_key_system_pod(const sml::pod& p, const bool is_versioned) const {
     sml::qualified_name qn;
-    qn.type_name(is_versioned ? versioned_name : unversioned_name);
-    qn.model_name(m.name());
-    qn.external_package_path(m.external_package_path());
+    qn.type_name(p.name().type_name() + "_" +
+        (is_versioned ? versioned_name : unversioned_name));
+    qn.model_name(p.name().model_name());
+    qn.package_path(p.name().package_path());
+    qn.external_package_path(p.name().external_package_path());
     qn.meta_type(sml::meta_types::pod);
 
     sml::pod r;
@@ -184,36 +186,42 @@ void director::inject_system_types(sml::model& m) const {
                                 << "so injecting them into model.";
     }
 
-    auto pods(m.pods());
-    if (pods.empty())
+    const auto old_pods(m.pods());
+    if (old_pods.empty())
         return;
 
+    std::unordered_map<sml::qualified_name, sml::pod> new_pods;
     const bool is_versioned(true);
-    const auto versioned_pod(create_key_system_pod(m, is_versioned));
+    for (auto i(std::begin(old_pods)); i != std::end(old_pods); ++i) {
+        auto pod(i->second);
 
-    sml::property vk_prop;
-    vk_prop.name(versioned_name);
-
-    sml::nested_qualified_name nqn;
-    nqn.type(versioned_pod.name());
-    vk_prop.type_name(nqn);
-
-    for (auto i(std::begin(pods)); i != std::end(pods); ++i) {
-        auto& pod(i->second);
-        if (pod.parent_name())
+        if (pod.parent_name()) {
+            new_pods.insert(std::make_pair(pod.name(), pod));
             continue;
+        }
 
         auto props(pod.properties());
-        props.push_back(vk_prop);
+        if (pod.is_cacheable()) {
+            const auto versioned_pod(create_key_system_pod(pod, is_versioned));
+            new_pods.insert(std::make_pair(versioned_pod.name(), versioned_pod));
+
+            sml::property vk_prop;
+            vk_prop.name(versioned_name);
+
+            sml::nested_qualified_name nqn;
+            nqn.type(versioned_pod.name());
+            vk_prop.type_name(nqn);
+
+            const auto unversioned_pod(create_key_system_pod(pod, !is_versioned));
+            new_pods.insert(
+                std::make_pair(unversioned_pod.name(), unversioned_pod));
+            props.push_back(vk_prop);
+        }
+
         pod.properties(props);
+        new_pods.insert(std::make_pair(pod.name(), pod));
     }
-
-    pods.insert(std::make_pair(versioned_pod.name(), versioned_pod));
-
-    const auto unversioned_pod(create_key_system_pod(m, !is_versioned));
-    pods.insert(std::make_pair(unversioned_pod.name(), unversioned_pod));
-
-    m.pods(pods);
+    m.pods(new_pods);
 }
 
 sml::model director::

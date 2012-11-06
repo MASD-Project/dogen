@@ -20,5 +20,3 @@
  */
 #include "dogen/two_layers_with_objects/test_data/Package_2/class_2_td.hpp"
 #include "dogen/two_layers_with_objects/test_data/package_1/class_1_td.hpp"
-#include "dogen/two_layers_with_objects/test_data/unversioned_key_td.hpp"
-#include "dogen/two_layers_with_objects/test_data/versioned_key_td.hpp"

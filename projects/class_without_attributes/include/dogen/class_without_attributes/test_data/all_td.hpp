@@ -19,5 +19,3 @@
  *
  */
 #include "dogen/class_without_attributes/test_data/package_1/class_1_td.hpp"
-#include "dogen/class_without_attributes/test_data/unversioned_key_td.hpp"
-#include "dogen/class_without_attributes/test_data/versioned_key_td.hpp"

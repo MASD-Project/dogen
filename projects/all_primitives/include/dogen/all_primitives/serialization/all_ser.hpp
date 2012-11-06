@@ -19,5 +19,5 @@
  *
  */
 #include "dogen/all_primitives/serialization/a_class_ser.hpp"
-#include "dogen/all_primitives/serialization/unversioned_key_ser.hpp"
-#include "dogen/all_primitives/serialization/versioned_key_ser.hpp"
+#include "dogen/all_primitives/serialization/a_class_unversioned_key_ser.hpp"
+#include "dogen/all_primitives/serialization/a_class_versioned_key_ser.hpp"

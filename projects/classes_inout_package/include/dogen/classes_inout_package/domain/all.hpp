@@ -20,5 +20,3 @@
  */
 #include "dogen/classes_inout_package/domain/class_2.hpp"
 #include "dogen/classes_inout_package/domain/package_1/class_1.hpp"
-#include "dogen/classes_inout_package/domain/unversioned_key.hpp"
-#include "dogen/classes_inout_package/domain/versioned_key.hpp"

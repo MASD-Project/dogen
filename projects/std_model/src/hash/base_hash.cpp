@@ -19,7 +19,6 @@
  *
  */
 #include "dogen/std_model/hash/base_hash.hpp"
-#include "dogen/std_model/hash/versioned_key_hash.hpp"
 
 namespace {
 
@@ -43,12 +42,10 @@ inline std::size_t hash_std_vector_std_string(const std::vector<std::string>& v)
 namespace dogen {
 namespace std_model {
 
-std::size_t base_hasher::hash(const base& v) {
+std::size_t base_hasher::hash(const base&v) {
     std::size_t seed(0);
 
     combine(seed, hash_std_vector_std_string(v.prop_0()));
-    combine(seed, v.versioned_key());
-
     return seed;
 }
 

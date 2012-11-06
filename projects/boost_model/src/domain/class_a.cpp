@@ -26,21 +26,16 @@ namespace boost_model {
 class_a::class_a()
     : prop_0_(static_cast<unsigned int>(0)) { }
 
-class_a::class_a(
-    const unsigned int prop_0,
-    const dogen::boost_model::versioned_key& versioned_key)
-    : prop_0_(prop_0),
-      versioned_key_(versioned_key) { }
+class_a::class_a(const unsigned int prop_0)
+    : prop_0_(prop_0) { }
 
 void class_a::swap(class_a& other) noexcept {
     using std::swap;
     swap(prop_0_, other.prop_0_);
-    swap(versioned_key_, other.versioned_key_);
 }
 
 bool class_a::operator==(const class_a& rhs) const {
-    return prop_0_ == rhs.prop_0_ &&
-        versioned_key_ == rhs.versioned_key_;
+    return prop_0_ == rhs.prop_0_;
 }
 
 class_a& class_a::operator=(class_a other) {

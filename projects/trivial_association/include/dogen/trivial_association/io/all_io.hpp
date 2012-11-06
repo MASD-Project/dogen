@@ -22,5 +22,3 @@
 #include "dogen/trivial_association/io/class_b_io.hpp"
 #include "dogen/trivial_association/io/class_c_io.hpp"
 #include "dogen/trivial_association/io/class_d_io.hpp"
-#include "dogen/trivial_association/io/unversioned_key_io.hpp"
-#include "dogen/trivial_association/io/versioned_key_io.hpp"

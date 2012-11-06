@@ -31,7 +31,6 @@
 #include "dogen/trivial_inheritance/serialization/child_of_a_child2_ser.hpp"
 #include "dogen/trivial_inheritance/serialization/parent_with_members_ser.hpp"
 #include "dogen/trivial_inheritance/serialization/second_child_without_members_ser.hpp"
-#include "dogen/trivial_inheritance/serialization/versioned_key_ser.hpp"
 
 #ifdef __linux__
 #include "eos/portable_iarchive.hpp"
@@ -49,22 +48,14 @@ template<typename Archive>
 void save(Archive& ar,
     const dogen::trivial_inheritance::parent_with_members& v,
     const unsigned int /*version*/) {
-    ar.template register_type<dogen::trivial_inheritance::second_child_without_members>();
-    ar.template register_type<dogen::trivial_inheritance::child_of_a_child1>();
-    ar.template register_type<dogen::trivial_inheritance::child_of_a_child2>();
     ar << make_nvp("prop_0", v.prop_0_);
-    ar << make_nvp("versioned_key", v.versioned_key_);
 }
 
 template<typename Archive>
 void load(Archive& ar,
     dogen::trivial_inheritance::parent_with_members& v,
     const unsigned int /*version*/) {
-    ar.template register_type<dogen::trivial_inheritance::second_child_without_members>();
-    ar.template register_type<dogen::trivial_inheritance::child_of_a_child1>();
-    ar.template register_type<dogen::trivial_inheritance::child_of_a_child2>();
     ar >> make_nvp("prop_0", v.prop_0_);
-    ar >> make_nvp("versioned_key", v.versioned_key_);
 }
 
 } }

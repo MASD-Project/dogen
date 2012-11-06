@@ -19,16 +19,9 @@
  *
  */
 #include "dogen/class_without_attributes/hash/package_1/class_1_hash.hpp"
-#include "dogen/class_without_attributes/hash/versioned_key_hash.hpp"
 
 namespace {
 
-template <typename HashableType>
-inline void combine(std::size_t& seed, const HashableType& value)
-{
-    std::hash<HashableType> hasher;
-    seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
-}
 
 }
 
@@ -36,10 +29,8 @@ namespace dogen {
 namespace class_without_attributes {
 namespace package_1 {
 
-std::size_t class_1_hasher::hash(const class_1& v) {
+std::size_t class_1_hasher::hash(const class_1&) {
     std::size_t seed(0);
-
-    combine(seed, v.versioned_key());
     return seed;
 }
 

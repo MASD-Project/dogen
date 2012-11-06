@@ -19,7 +19,6 @@
  *
  */
 #include "dogen/exception/hash/a_class_hash.hpp"
-#include "dogen/exception/hash/versioned_key_hash.hpp"
 
 namespace {
 
@@ -35,12 +34,10 @@ inline void combine(std::size_t& seed, const HashableType& value)
 namespace dogen {
 namespace exception {
 
-std::size_t a_class_hasher::hash(const a_class& v) {
+std::size_t a_class_hasher::hash(const a_class&v) {
     std::size_t seed(0);
 
     combine(seed, v.prop_0());
-    combine(seed, v.versioned_key());
-
     return seed;
 }
 

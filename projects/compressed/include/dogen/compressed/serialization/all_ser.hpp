@@ -19,5 +19,3 @@
  *
  */
 #include "dogen/compressed/serialization/package1/first_class_ser.hpp"
-#include "dogen/compressed/serialization/unversioned_key_ser.hpp"
-#include "dogen/compressed/serialization/versioned_key_ser.hpp"

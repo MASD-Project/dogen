@@ -19,17 +19,11 @@
  *
  */
 #include "dogen/comments/test_data/one_line_td.hpp"
-#include "dogen/comments/test_data/versioned_key_td.hpp"
 
 namespace {
 
 int create_int(const unsigned int position) {
     return position;
-}
-
-dogen::comments::versioned_key
-create_dogen_comments_versioned_key(const unsigned int position) {
-    return dogen::comments::versioned_key_generator::create(position);
 }
 
 }
@@ -44,7 +38,6 @@ populate(const unsigned int position, result_type& v) {
     v.prop_0(create_int(position + 0));
     v.prop_1(create_int(position + 1));
     v.prop_2(create_int(position + 2));
-    v.versioned_key(create_dogen_comments_versioned_key(position + 3));
 }
 
 one_line_generator::result_type

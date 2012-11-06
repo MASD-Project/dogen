@@ -26,7 +26,6 @@
 #endif
 
 #include <algorithm>
-#include "dogen/class_without_attributes/domain/versioned_key.hpp"
 #include "dogen/class_without_attributes/serialization/package_1/class_1_fwd_ser.hpp"
 
 namespace dogen {
@@ -39,9 +38,7 @@ public:
     class_1(const class_1&) = default;
     class_1(class_1&&) = default;
     ~class_1() = default;
-
-public:
-    explicit class_1(const dogen::class_without_attributes::versioned_key& versioned_key);
+    class_1& operator=(const class_1&) = default;
 
 private:
     template<typename Archive>
@@ -51,39 +48,13 @@ private:
     friend void boost::serialization::load(Archive& ar, class_1& v, unsigned int version);
 
 public:
-    dogen::class_without_attributes::versioned_key versioned_key() const {
-        return versioned_key_;
-    }
-
-    void versioned_key(const dogen::class_without_attributes::versioned_key& v) {
-        versioned_key_ = v;
-    }
-
-public:
     bool operator==(const class_1& rhs) const;
     bool operator!=(const class_1& rhs) const {
         return !this->operator==(rhs);
     }
 
-public:
-    void swap(class_1& other) noexcept;
-    class_1& operator=(class_1 other);
-
-private:
-    dogen::class_without_attributes::versioned_key versioned_key_;
 };
 
 } } }
-
-namespace std {
-
-template<>
-inline void swap(
-    dogen::class_without_attributes::package_1::class_1& lhs,
-    dogen::class_without_attributes::package_1::class_1& rhs) {
-    lhs.swap(rhs);
-}
-
-}
 
 #endif

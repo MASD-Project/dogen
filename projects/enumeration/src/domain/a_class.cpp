@@ -26,26 +26,22 @@ namespace enumeration {
 a_class::a_class(
     const dogen::enumeration::colour_types& colour_type,
     const dogen::enumeration::book_types& book_type,
-    const dogen::enumeration::pkg1::shape_types& shape_type,
-    const dogen::enumeration::versioned_key& versioned_key)
+    const dogen::enumeration::pkg1::shape_types& shape_type)
     : colour_type_(colour_type),
       book_type_(book_type),
-      shape_type_(shape_type),
-      versioned_key_(versioned_key) { }
+      shape_type_(shape_type) { }
 
 void a_class::swap(a_class& other) noexcept {
     using std::swap;
     swap(colour_type_, other.colour_type_);
     swap(book_type_, other.book_type_);
     swap(shape_type_, other.shape_type_);
-    swap(versioned_key_, other.versioned_key_);
 }
 
 bool a_class::operator==(const a_class& rhs) const {
     return colour_type_ == rhs.colour_type_ &&
         book_type_ == rhs.book_type_ &&
-        shape_type_ == rhs.shape_type_ &&
-        versioned_key_ == rhs.versioned_key_;
+        shape_type_ == rhs.shape_type_;
 }
 
 a_class& a_class::operator=(a_class other) {

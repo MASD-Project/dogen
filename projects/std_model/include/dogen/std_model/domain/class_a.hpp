@@ -27,7 +27,6 @@
 
 #include <algorithm>
 #include <string>
-#include "dogen/std_model/domain/versioned_key.hpp"
 #include "dogen/std_model/serialization/class_a_fwd_ser.hpp"
 
 namespace dogen {
@@ -43,8 +42,7 @@ public:
 public:
     class_a(
         const std::string& prop0,
-        const std::string& prop1,
-        const dogen::std_model::versioned_key& versioned_key);
+        const std::string& prop1);
 
 private:
     template<typename Archive>
@@ -75,14 +73,6 @@ public:
     }
     /**@}*/
 
-    dogen::std_model::versioned_key versioned_key() const {
-        return versioned_key_;
-    }
-
-    void versioned_key(const dogen::std_model::versioned_key& v) {
-        versioned_key_ = v;
-    }
-
 public:
     bool operator==(const class_a& rhs) const;
     bool operator!=(const class_a& rhs) const {
@@ -96,7 +86,6 @@ public:
 private:
     std::string prop0_;
     std::string prop1_;
-    dogen::std_model::versioned_key versioned_key_;
 };
 
 } }

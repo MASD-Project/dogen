@@ -23,5 +23,3 @@
 #include "dogen/classes_without_package/serialization/class_3_ser.hpp"
 #include "dogen/classes_without_package/serialization/class_4_ser.hpp"
 #include "dogen/classes_without_package/serialization/class_5_ser.hpp"
-#include "dogen/classes_without_package/serialization/unversioned_key_ser.hpp"
-#include "dogen/classes_without_package/serialization/versioned_key_ser.hpp"

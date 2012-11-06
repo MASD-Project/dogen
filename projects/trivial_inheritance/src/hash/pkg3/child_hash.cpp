@@ -36,7 +36,7 @@ namespace dogen {
 namespace trivial_inheritance {
 namespace pkg3 {
 
-std::size_t child_hasher::hash(const child& v) {
+std::size_t child_hasher::hash(const child&v) {
     std::size_t seed(0);
 
     combine(seed, dynamic_cast<const dogen::trivial_inheritance::pkg2::parent&>(v));

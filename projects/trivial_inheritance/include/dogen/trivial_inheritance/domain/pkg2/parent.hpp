@@ -27,7 +27,6 @@
 
 #include <algorithm>
 #include <iosfwd>
-#include "dogen/trivial_inheritance/domain/versioned_key.hpp"
 #include "dogen/trivial_inheritance/serialization/pkg2/parent_fwd_ser.hpp"
 
 namespace dogen {
@@ -45,9 +44,7 @@ public:
     virtual ~parent() noexcept = 0;
 
 public:
-    parent(
-        const int prop_0,
-        const dogen::trivial_inheritance::versioned_key& versioned_key);
+    explicit parent(const int prop_0);
 
 private:
     template<typename Archive>
@@ -68,14 +65,6 @@ public:
         prop_0_ = v;
     }
 
-    dogen::trivial_inheritance::versioned_key versioned_key() const {
-        return versioned_key_;
-    }
-
-    void versioned_key(const dogen::trivial_inheritance::versioned_key& v) {
-        versioned_key_ = v;
-    }
-
 protected:
     bool compare(const parent& rhs) const;
 public:
@@ -86,7 +75,6 @@ protected:
 
 private:
     int prop_0_;
-    dogen::trivial_inheritance::versioned_key versioned_key_;
 };
 
 inline parent::~parent() noexcept { }

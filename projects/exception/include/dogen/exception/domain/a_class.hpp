@@ -26,7 +26,6 @@
 #endif
 
 #include <algorithm>
-#include "dogen/exception/domain/versioned_key.hpp"
 #include "dogen/exception/serialization/a_class_fwd_ser.hpp"
 
 namespace dogen {
@@ -42,9 +41,7 @@ public:
     a_class();
 
 public:
-    a_class(
-        const int prop_0,
-        const dogen::exception::versioned_key& versioned_key);
+    explicit a_class(const int prop_0);
 
 private:
     template<typename Archive>
@@ -62,14 +59,6 @@ public:
         prop_0_ = v;
     }
 
-    dogen::exception::versioned_key versioned_key() const {
-        return versioned_key_;
-    }
-
-    void versioned_key(const dogen::exception::versioned_key& v) {
-        versioned_key_ = v;
-    }
-
 public:
     bool operator==(const a_class& rhs) const;
     bool operator!=(const a_class& rhs) const {
@@ -82,7 +71,6 @@ public:
 
 private:
     int prop_0_;
-    dogen::exception::versioned_key versioned_key_;
 };
 
 } }
