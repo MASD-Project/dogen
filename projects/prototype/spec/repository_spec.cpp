@@ -33,6 +33,11 @@
 #include "dogen/prototype/io/versioned_key_io.hpp"
 #include "dogen/prototype/io/unversioned_key_io.hpp"
 #include "dogen/prototype/io/currency_io.hpp"
+#include "dogen/prototype/serialization/registrar_ser.hpp"
+
+template<typename Archive> void register_types(Archive& ar) {
+    dogen::prototype::register_types<Archive>(ar);
+}
 
 namespace {
 

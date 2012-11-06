@@ -33,11 +33,16 @@
 #include "dogen/sml/test_data/qualified_name_sequence.hpp"
 #include "dogen/sml/hash/qualified_name_hash.hpp"
 #include "dogen/utility/test/serialization_tester.hpp"
+#include "dogen/sml/serialization/registrar_ser.hpp"
 #include "dogen/utility/test/equality_tester.hpp"
 #include "dogen/sml/domain/sml_domain.hpp"
 #include "dogen/sml/io/sml_io.hpp"
 #include "dogen/sml/serialization/sml_ser.hpp"
 #include "dogen/sml/test_data/sml_test_data.hpp"
+
+template<typename Archive> void register_types(Archive& ar) {
+    dogen::sml::register_types<Archive>(ar);
+}
 
 namespace {
 

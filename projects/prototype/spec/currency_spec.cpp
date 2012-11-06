@@ -38,6 +38,11 @@
 #include "dogen/utility/io/jsonify_io.hpp"
 #include "dogen/utility/io/vector_io.hpp"
 #include "dogen/prototype/io/currency_io.hpp"
+#include "dogen/prototype/serialization/registrar_ser.hpp"
+
+template<typename Archive> void register_types(Archive& ar) {
+    dogen::prototype::register_types<Archive>(ar);
+}
 
 namespace  {
 

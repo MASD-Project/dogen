@@ -22,10 +22,15 @@
 #include "dogen/utility/test/logging.hpp"
 #include "dogen/utility/test/asserter.hpp"
 #include "dogen/utility/test/serialization_tester.hpp"
+#include "dogen/dia/serialization/registrar_ser.hpp"
 #include "dogen/dia/domain/dia_domain.hpp"
 #include "dogen/dia/io/dia_io.hpp"
 #include "dogen/dia/serialization/dia_ser.hpp"
 #include "dogen/dia/test_data/dia_test_data.hpp"
+
+template<typename Archive> void register_types(Archive& ar) {
+    dogen::dia::register_types<Archive>(ar);
+}
 
 namespace {
 
