@@ -667,6 +667,13 @@ extension of the file. From a cursory look, all the usages we have of
 assert object can be replaced by assert file. If that's the case we
 can also remove this function.
 
+*** Exception classes should allow inheritance
+
+We need to have a form of inheriting from a base exception for a given
+model. We also need to be able to inherit from other exceptions in a
+model. At present exceptions are not pods so the dependency graph
+support is not there.
+
 *** Investigate GDB visualisers for generated models
 
 It would be great if the code generator created GDB visualisers for
