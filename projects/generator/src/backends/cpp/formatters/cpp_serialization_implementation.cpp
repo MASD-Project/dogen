@@ -283,13 +283,6 @@ void serialization_implementation::format_class(const file_view_model& vm) {
     }
     utility_.blank_line(2);
 
-    if (!cvm.is_parent()) {
-        stream_ << indenter_ << "BOOST_CLASS_EXPORT_IMPLEMENT(";
-        qualified_name.format(cvm);
-        stream_ << ")" << std::endl;
-        utility_.blank_line();
-    }
-
     {
         std::list<std::string> ns { boost_ns, serialization_ns };
         namespace_helper nsh(stream_, ns);

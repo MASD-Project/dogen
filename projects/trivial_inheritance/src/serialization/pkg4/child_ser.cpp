@@ -58,8 +58,6 @@ void load(Archive& ar,
 
 } }
 
-BOOST_CLASS_EXPORT_IMPLEMENT(dogen::trivial_inheritance::pkg4::child)
-
 namespace boost {
 namespace serialization {
 

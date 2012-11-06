@@ -62,8 +62,6 @@ void load(Archive& ar,
 
 } }
 
-BOOST_CLASS_EXPORT_IMPLEMENT(dogen::boost_model::class_derived)
-
 namespace boost {
 namespace serialization {
 

@@ -983,13 +983,10 @@ Contents:
 #pragma once
 #endif
 
-#include <boost/serialization/export.hpp>
 #include <boost/serialization/split_free.hpp>
 #include "class_in_a_package/domain/package1/first_class.hpp"
 
 BOOST_SERIALIZATION_SPLIT_FREE(class_in_a_package::package1::first_class)
-BOOST_CLASS_EXPORT_KEY(class_in_a_package::package1::first_class)
-
 namespace boost {
 namespace serialization {
 
@@ -1105,13 +1102,10 @@ Contents:
 #pragma once
 #endif
 
-#include <boost/serialization/export.hpp>
 #include <boost/serialization/split_free.hpp>
 #include "class_in_a_package/domain/unversioned_key.hpp"
 
 BOOST_SERIALIZATION_SPLIT_FREE(class_in_a_package::unversioned_key)
-BOOST_CLASS_EXPORT_KEY(class_in_a_package::unversioned_key)
-
 namespace boost {
 namespace serialization {
 
@@ -1198,13 +1192,10 @@ Contents:
 #pragma once
 #endif
 
-#include <boost/serialization/export.hpp>
 #include <boost/serialization/split_free.hpp>
 #include "class_in_a_package/domain/versioned_key.hpp"
 
 BOOST_SERIALIZATION_SPLIT_FREE(class_in_a_package::versioned_key)
-BOOST_CLASS_EXPORT_KEY(class_in_a_package::versioned_key)
-
 namespace boost {
 namespace serialization {
 
@@ -1988,8 +1979,6 @@ void load(Archive& ar,
 
 } }
 
-BOOST_CLASS_EXPORT_IMPLEMENT(class_in_a_package::package1::first_class)
-
 namespace boost {
 namespace serialization {
 
@@ -2127,8 +2116,6 @@ void load(Archive& ar,
 
 } }
 
-BOOST_CLASS_EXPORT_IMPLEMENT(class_in_a_package::unversioned_key)
-
 namespace boost {
 namespace serialization {
 
@@ -2208,8 +2195,6 @@ void load(Archive& ar,
 }
 
 } }
-
-BOOST_CLASS_EXPORT_IMPLEMENT(class_in_a_package::versioned_key)
 
 namespace boost {
 namespace serialization {

@@ -49,7 +49,7 @@ const std::string state_saver("ios_state.hpp");
 const std::string functional("functional");
 const std::string vector("vector");
 const std::string boost_optional("optional.hpp");
-const std::string boost_nvp("nvp.hpp");
+const std::string boost_split_free("split_free.hpp");
 const std::string pqxx_connection("connection.hxx");
 const std::string boost_format("format.hpp");
 const std::string pqxx_result("result.hxx");
@@ -247,9 +247,8 @@ BOOST_AUTO_TEST_CASE(processing_one_pod_model_with_default_configuration_generat
 
     const auto hs(i[header_system]);
     BOOST_LOG_SEV(lg, debug) << "header system dependencies: " << hs;
-    BOOST_REQUIRE(hs.size() == 2);
-    // FIXME
-    // BOOST_CHECK(asserter::assert_contains(boost_nvp, hs.front()));
+    BOOST_REQUIRE(hs.size() == 1);
+    BOOST_CHECK(asserter::assert_contains(boost_split_free, hs.front()));
 
     // implementation
     const auto iu(i[implementation_user]);
@@ -261,8 +260,7 @@ BOOST_AUTO_TEST_CASE(processing_one_pod_model_with_default_configuration_generat
 
     const auto is(i[implementation_system]);
     BOOST_LOG_SEV(lg, debug) << "implementation system dependencies: " << is;
-    // BOOST_CHECK(is.empty());
-    // FIXME
+    BOOST_REQUIRE(is.size() == 9);
 }
 
 BOOST_AUTO_TEST_CASE(processing_one_pod_model_with_default_configuration_generates_expected_hash_includes) {

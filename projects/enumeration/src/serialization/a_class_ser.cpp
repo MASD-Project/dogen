@@ -63,8 +63,6 @@ void load(Archive& ar,
 
 } }
 
-BOOST_CLASS_EXPORT_IMPLEMENT(dogen::enumeration::a_class)
-
 namespace boost {
 namespace serialization {
 

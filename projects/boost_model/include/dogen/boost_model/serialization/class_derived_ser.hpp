@@ -25,7 +25,6 @@
 #pragma once
 #endif
 
-#include <boost/serialization/export.hpp>
 #include <boost/serialization/split_free.hpp>
 #include <boost/type_traits/is_virtual_base_of.hpp>
 #include "dogen/boost_model/domain/class_derived.hpp"
@@ -41,8 +40,6 @@ is_virtual_base_of<
 }
 
 BOOST_SERIALIZATION_SPLIT_FREE(dogen::boost_model::class_derived)
-BOOST_CLASS_EXPORT_KEY(dogen::boost_model::class_derived)
-
 namespace boost {
 namespace serialization {
 

@@ -25,7 +25,6 @@
 #pragma once
 #endif
 
-#include <boost/serialization/export.hpp>
 #include <boost/serialization/split_free.hpp>
 #include <boost/type_traits/is_virtual_base_of.hpp>
 #include "dogen/trivial_inheritance/domain/pkg1/child.hpp"
@@ -41,8 +40,6 @@ is_virtual_base_of<
 }
 
 BOOST_SERIALIZATION_SPLIT_FREE(dogen::trivial_inheritance::pkg1::child)
-BOOST_CLASS_EXPORT_KEY(dogen::trivial_inheritance::pkg1::child)
-
 namespace boost {
 namespace serialization {
 

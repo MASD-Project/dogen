@@ -53,8 +53,6 @@ void load(Archive& ar,
 
 } }
 
-BOOST_CLASS_EXPORT_IMPLEMENT(dogen::split_project::unversioned_key)
-
 namespace boost {
 namespace serialization {
 

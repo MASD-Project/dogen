@@ -277,10 +277,6 @@ append_implementation_dependencies(const sml::pod& p,
     if (is_header && is_serialization && p.is_parent())
         il.system.push_back(boost_.include(boost_types::assume_abstract));
 
-    // boost serialisation export
-    if (is_header && is_serialization && !p.is_parent())
-        il.system.push_back(boost_.include(boost_types::serialization_export));
-
     // boost virtual base of
     if (is_header && is_serialization && !p.is_parent() && p.parent_name())
         il.system.push_back(boost_.include(boost_types::is_virtual_base_of));

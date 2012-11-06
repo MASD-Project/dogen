@@ -25,13 +25,10 @@
 #pragma once
 #endif
 
-#include <boost/serialization/export.hpp>
 #include <boost/serialization/split_free.hpp>
 #include "dogen/trivial_association/domain/versioned_key.hpp"
 
 BOOST_SERIALIZATION_SPLIT_FREE(dogen::trivial_association::versioned_key)
-BOOST_CLASS_EXPORT_KEY(dogen::trivial_association::versioned_key)
-
 namespace boost {
 namespace serialization {
 

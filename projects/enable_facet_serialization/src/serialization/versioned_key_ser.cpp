@@ -52,8 +52,6 @@ void load(Archive& ar,
 
 } }
 
-BOOST_CLASS_EXPORT_IMPLEMENT(dogen::enable_facet_serialization::versioned_key)
-
 namespace boost {
 namespace serialization {
 

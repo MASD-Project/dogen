@@ -58,8 +58,6 @@ void load(Archive& ar,
 
 } }
 
-BOOST_CLASS_EXPORT_IMPLEMENT(dogen::disable_cmakelists::package1::first_class)
-
 namespace boost {
 namespace serialization {
 

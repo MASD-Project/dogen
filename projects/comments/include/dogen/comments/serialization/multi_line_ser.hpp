@@ -25,13 +25,10 @@
 #pragma once
 #endif
 
-#include <boost/serialization/export.hpp>
 #include <boost/serialization/split_free.hpp>
 #include "dogen/comments/domain/multi_line.hpp"
 
 BOOST_SERIALIZATION_SPLIT_FREE(dogen::comments::multi_line)
-BOOST_CLASS_EXPORT_KEY(dogen::comments::multi_line)
-
 namespace boost {
 namespace serialization {
 

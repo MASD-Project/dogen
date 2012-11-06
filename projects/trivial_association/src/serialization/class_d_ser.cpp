@@ -54,8 +54,6 @@ void load(Archive& ar,
 
 } }
 
-BOOST_CLASS_EXPORT_IMPLEMENT(dogen::trivial_association::class_d)
-
 namespace boost {
 namespace serialization {
 

@@ -25,13 +25,10 @@
 #pragma once
 #endif
 
-#include <boost/serialization/export.hpp>
 #include <boost/serialization/split_free.hpp>
 #include "dogen/disable_full_ctor/domain/versioned_key.hpp"
 
 BOOST_SERIALIZATION_SPLIT_FREE(dogen::disable_full_ctor::versioned_key)
-BOOST_CLASS_EXPORT_KEY(dogen::disable_full_ctor::versioned_key)
-
 namespace boost {
 namespace serialization {
 

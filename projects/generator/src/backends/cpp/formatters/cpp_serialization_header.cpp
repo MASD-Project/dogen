@@ -114,14 +114,12 @@ void serialization_header::format_class(const file_view_model& vm) {
     qualified_name.format(cvm);
     stream_ << ")" << std::endl;
 
-    if (cvm.is_parent())
+    if (cvm.is_parent()) {
         stream_ << indenter_ << "BOOST_SERIALIZATION_ASSUME_ABSTRACT(";
-    else
-        stream_ << indenter_ << "BOOST_CLASS_EXPORT_KEY(";
-
-    qualified_name.format(cvm);
-    stream_ << ")" << std::endl;
-    utility_.blank_line();
+        qualified_name.format(cvm);
+        stream_ << ")" << std::endl;
+        utility_.blank_line();
+    }
 
     {
         std::list<std::string> ns { boost_ns, serialization_ns };

@@ -60,8 +60,6 @@ void load(Archive& ar,
 
 } }
 
-BOOST_CLASS_EXPORT_IMPLEMENT(dogen::comments::one_line)
-
 namespace boost {
 namespace serialization {
 
