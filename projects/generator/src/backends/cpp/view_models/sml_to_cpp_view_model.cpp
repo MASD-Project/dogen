@@ -830,6 +830,7 @@ sml_to_cpp_view_model::transform_registrar() const {
         ns.push_back(l.type_name());
         leaves.push_back(join(ns, namespace_separator));
     }
+    leaves.sort();
     rvm.leaves(leaves);
     BOOST_LOG_SEV(lg, debug) << "Added leaves: " << rvm.leaves();
 

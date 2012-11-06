@@ -43,13 +43,13 @@ namespace trivial_inheritance {
 
 template<typename Archive>
 void register_types(Archive& ar) {
-    ar.template register_type<dogen::trivial_inheritance::pkg3::child>();
-    ar.template register_type<dogen::trivial_inheritance::child_of_a_child2>();
     ar.template register_type<dogen::trivial_inheritance::child_of_a_child1>();
-    ar.template register_type<dogen::trivial_inheritance::second_child_without_members>();
-    ar.template register_type<dogen::trivial_inheritance::pkg4::child>();
+    ar.template register_type<dogen::trivial_inheritance::child_of_a_child2>();
     ar.template register_type<dogen::trivial_inheritance::child_without_members>();
     ar.template register_type<dogen::trivial_inheritance::pkg1::child>();
+    ar.template register_type<dogen::trivial_inheritance::pkg3::child>();
+    ar.template register_type<dogen::trivial_inheritance::pkg4::child>();
+    ar.template register_type<dogen::trivial_inheritance::second_child_without_members>();
 }
 
 template void register_types(boost::archive::polymorphic_oarchive& ar);
