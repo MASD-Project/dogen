@@ -10,6 +10,45 @@ This file contains all stories that haven't been assigned to a sprint.
 
 Stories that we intend to look at, at some point.
 
+*** Architecture refactoring                                           :epic:
+
+Each of these tasks is really a story, but we need to make sure the
+entire architecture hangs together before we start refactoring; this
+is the purpose of this story. Some of the stories here already have
+been captured in the backlog.
+
+- create a backend project that defines the back end interface and
+  provides a factory that takes an enum (c, c++, COM, etc) and returns
+  a backend. it also provides a mock backend.
+- split c++ backend from generator into backend. make it
+  implement the backend interface. fix all the naming issues. we need
+  to rename this backend as c-like or something of the kind because it
+  can be extended to generate C, COM, GObject, etc.
+- remove the cpp prefix on c++ files.
+- create model wrappers for std and primitives includes
+- make the c++ view model a dogen model.
+- implement formatters as part of the view model. leave them as
+  formatters, not as IO, so we can still IO the view model.
+- formatters are now c++ formatters.
+- create interfaces for the location and inclusion managers.
+- create a dogen model settings at top level, shared by all the dogen
+  components (driver, backend, etc).
+- create a front end component that defines the front end inteface,
+  has a factory that returns a front end based on an enum.
+- create the dia front end which contains the dia to SML code from
+  modeling.
+- create a middle-end component with the rest of the code in
+  modeling. create a factory based on an enum that returns the middle
+  end instance. create a mock.
+- middle end component will eventually be responsible for the
+  intermediate model.
+- generator is now a shell that interconnects front, middle and back
+  end based on configuration options.
+- code generate dia model
+- code generate SML model
+- use inheritance in SML model
+- refactor middle end to take advantage of inheritance
+
 *** System models set meta-type to invalid
 
 Something is not quite right on the resolution logic
