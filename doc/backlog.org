@@ -452,11 +452,6 @@ For some reason we are unable to compile the serialisation test for
 the test model which focuses only on the serialisation facet. Test is
 ignored for the moment.
 
-*** Check if we have a test model with versioning disabled
-
-It seems all the test models are using versioning. We need a test
-without it.
-
 *** Handle unnamed models properly
 
 The option disable model name was meant to allow the generation of
