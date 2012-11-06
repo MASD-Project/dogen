@@ -17,6 +17,13 @@ entire architecture hangs together before we start refactoring; this
 is the purpose of this story. Some of the stories here already have
 been captured in the backlog.
 
+- create "modes" of operation: relational, object-oriented and
+  procedural. they limit the types available in SML. relational only
+  allows primitives plus relational commands (FK and PK; FK is when
+  using a model type, PK is a marker on a property). procedural only
+  allows primitives plus model types. we will need pointer support for
+  this. object oriented is the current mode. the modes are validated
+  in the middle end.
 - create a backend project that defines the back end interface and
   provides a factory that takes an enum (c, c++, COM, etc) and returns
   a backend. it also provides a mock backend.
