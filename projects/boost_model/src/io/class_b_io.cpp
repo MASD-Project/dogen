@@ -105,6 +105,20 @@ inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<dogen::
 
 }
 
+namespace std {
+
+inline std::ostream& operator<<(std::ostream& s, const std::vector<boost::shared_ptr<dogen::boost_model::class_base> >& v) {
+    s << "[ ";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << *i;
+    }
+    s << "] ";
+    return s;
+}
+
+}
+
 namespace dogen {
 namespace boost_model {
 
@@ -116,6 +130,7 @@ std::ostream& operator<<(std::ostream& s, const class_b& v) {
       << "\"prop_2\": " << v.prop_2() << ", "
       << "\"prop_3\": " << v.prop_3() << ", "
       << "\"prop_4\": " << v.prop_4() << ", "
+      << "\"prop_5\": " << v.prop_5() << ", "
       << "\"versioned_key\": " << v.versioned_key()
       << " }";
     return(s);
