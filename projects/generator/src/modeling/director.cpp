@@ -235,8 +235,7 @@ to_sml(const dia::diagram& d, const std::string& file_name,
     dia_to_sml dia_to_sml(d, name, epp, is_target, verbose_);
 
     sml::model m(dia_to_sml.transform());
-    if (is_target)
-        inject_system_types(m);
+    inject_system_types(m);
 
     save_model(m, empty);
     return std::move(m);

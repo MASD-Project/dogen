@@ -22,6 +22,7 @@
 #include <sstream>
 #include <algorithm>
 #include <functional>
+#include <boost/throw_exception.hpp>
 #include <boost/lexical_cast.hpp>
 #include <boost/optional.hpp>
 #include <boost/range/combine.hpp>
@@ -105,7 +106,7 @@ dogen::dia::object_types parse_object_type(const std::string s) {
         stream << error_parsing_object_type << "'" << s
                << "'. Error: " << e.what();
         BOOST_LOG_SEV(lg, error) << stream.str();
-        throw transformation_error(stream.str());
+        BOOST_THROW_EXCEPTION(transformation_error(stream.str()));
     }
     return r;
 }
@@ -207,8 +208,9 @@ private:
         } catch (const boost::bad_get&) {
             BOOST_LOG_SEV(lg, error) << unexpected_attribute_value_type
                                      << description;
-            throw transformation_error(unexpected_attribute_value_type +
-                description);
+            BOOST_THROW_EXCEPTION(
+                transformation_error(unexpected_attribute_value_type +
+                    description));
         }
         return r;
     }
@@ -277,8 +279,9 @@ transform_string_attribute(const dogen::dia::attribute& a) const {
     if (values.size() != 1) {
         BOOST_LOG_SEV(lg, error) << "Expected attribute to have one"
                                  << " value but found " << values.size();
-        throw transformation_error(unexpected_attribute_value_size +
-            boost::lexical_cast<std::string>(values.size()));
+        BOOST_THROW_EXCEPTION(
+            transformation_error(unexpected_attribute_value_size +
+                boost::lexical_cast<std::string>(values.size())));
     }
 
     using dogen::dia::string;
@@ -306,7 +309,7 @@ transform_qualified_name(const dogen::dia::attribute& a,
     dogen::sml::meta_types meta_type, const std::string& pkg_id) const {
     if (a.name() != dia_name) {
         BOOST_LOG_SEV(lg, error) << name_attribute_expected;
-        throw transformation_error(name_attribute_expected);
+        BOOST_THROW_EXCEPTION(transformation_error(name_attribute_expected));
     }
 
     dogen::sml::qualified_name name;
@@ -318,7 +321,8 @@ transform_qualified_name(const dogen::dia::attribute& a,
         const auto i(state_->packages_by_id_.find(pkg_id));
         if (i == state_->packages_by_id_.end()) {
             BOOST_LOG_SEV(lg, error) << missing_package_for_id << pkg_id;
-            throw transformation_error(missing_package_for_id + pkg_id);
+            BOOST_THROW_EXCEPTION(
+                transformation_error(missing_package_for_id + pkg_id));
         }
         auto pp(i->second.name().package_path());
         pp.push_back(i->second.name().type_name());
@@ -328,7 +332,7 @@ transform_qualified_name(const dogen::dia::attribute& a,
     name.type_name(transform_string_attribute(a));
     if (name.type_name().empty()) {
         BOOST_LOG_SEV(lg, error) << empty_dia_object_name;
-        throw transformation_error(empty_dia_object_name);
+        BOOST_THROW_EXCEPTION(transformation_error(empty_dia_object_name));
     }
     return name;
 }
@@ -346,7 +350,8 @@ transform_property(const dogen::dia::composite& uml_attribute) {
             auto nested_name(state_->parser_.parse_qualified_name(s));
             if (nested_name.type().type_name().empty()) {
                 BOOST_LOG_SEV(lg, error) << invalid_type_string << s;
-                throw transformation_error(invalid_type_string + s);
+                BOOST_THROW_EXCEPTION(
+                    transformation_error(invalid_type_string + s));
             }
             property.type_name(nested_name);
             model_dependencies_for_nested_qualified_name(nested_name);
@@ -361,12 +366,12 @@ transform_property(const dogen::dia::composite& uml_attribute) {
 
     if (property.name().empty()) {
         BOOST_LOG_SEV(lg, error) << "Could not find a name attribute.";
-        throw transformation_error(name_attribute_expected);
+        BOOST_THROW_EXCEPTION(transformation_error(name_attribute_expected));
     }
 
     if (property.type_name().type().type_name().empty()) {
         BOOST_LOG_SEV(lg, error) << "Could not find a type attribute.";
-        throw transformation_error(type_attribute_expected);
+        BOOST_THROW_EXCEPTION(transformation_error(type_attribute_expected));
     }
 
     return property;
@@ -417,7 +422,8 @@ void dia_dfs_visitor::process_dia_object(const dogen::dia::object& o) {
                     BOOST_LOG_SEV(lg, error) << "Expected composite type "
                                              << " to be " << dia_uml_attribute
                                              << "but was " << c.type();
-                    throw transformation_error(uml_attribute_expected);
+                    BOOST_THROW_EXCEPTION(
+                        transformation_error(uml_attribute_expected));
                 }
                 BOOST_LOG_SEV(lg, debug) << "Found composite of type "
                                          << c.type();
@@ -429,7 +435,8 @@ void dia_dfs_visitor::process_dia_object(const dogen::dia::object& o) {
 
     if (pod.name().type_name().empty()) {
         BOOST_LOG_SEV(lg, error) << name_attribute_expected + o.id();
-        throw transformation_error(name_attribute_expected + o.id());
+        BOOST_THROW_EXCEPTION(
+            transformation_error(name_attribute_expected + o.id()));
     }
 
     const auto i(state_->child_to_parent_.find(o.id()));
@@ -440,7 +447,8 @@ void dia_dfs_visitor::process_dia_object(const dogen::dia::object& o) {
                                      << " there is no QName mapping defined."
                                      << " Child ID: '" << o.id()
                                      << "' Parent ID: '" << i->second << "'";
-            throw transformation_error(parent_not_found + o.id());
+            BOOST_THROW_EXCEPTION(
+                transformation_error(parent_not_found + o.id()));
         }
         pod.parent_name(j->second);
     }
@@ -456,8 +464,9 @@ void dia_dfs_visitor::process_dia_object(const dogen::dia::object& o) {
         if (k == state_->original_parent_.end()) {
             BOOST_LOG_SEV(lg, error) << "Could not find the original parent of "
                                      << pod.name().type_name();
-            throw transformation_error(original_parent_not_found +
-                pod.name().type_name());
+            BOOST_THROW_EXCEPTION(
+                transformation_error(original_parent_not_found +
+                    pod.name().type_name()));
         }
         pod.original_parent_name(k->second);
         state_->original_parent_.insert(std::make_pair(pod.name(), k->second));
@@ -478,8 +487,8 @@ void dia_dfs_visitor::process_dia_object(const dogen::dia::object& o) {
             if (j == state_->pods_.end()) {
                 BOOST_LOG_SEV(lg, error) << "Could not find the parent of "
                                          << parent->type_name();
-                throw transformation_error(parent_not_found +
-                    parent->type_name());
+                BOOST_THROW_EXCEPTION(transformation_error(parent_not_found +
+                        parent->type_name()));
             }
             parent = j->second.parent_name();
         }
@@ -514,6 +523,16 @@ is_relationship_processable(const dia::object& o) const {
 }
 
 void dia_object_to_sml_pod::process_relationship(const dia::object& o) {
+    const auto connections(o.connections());
+    const auto parent(connections.front());
+    const auto child(connections.back());
+    if (!is_relationship_processable(o)) {
+        BOOST_LOG_SEV(lg, warn) << "Ignoring type: '" << o.type() << "'"
+                                << " connecting: '" << parent.to() << "' "
+                                << " with: '" << child.to() << "'";
+        return;
+    }
+
     BOOST_LOG_SEV(lg, debug) << "Processing connections for object: '"
                              << o.id() << "' of type: '"
                              << o.type()
@@ -524,29 +543,21 @@ void dia_object_to_sml_pod::process_relationship(const dia::object& o) {
             if (i == id_to_vertex_.end()) {
                 BOOST_LOG_SEV(lg, error) << relationship_target_not_found << id;
 
-                throw transformation_error(relationship_target_not_found + id);
+                BOOST_THROW_EXCEPTION(
+                    transformation_error(relationship_target_not_found + id));
             }
             return i->second;
         });
 
-    const auto connections(o.connections());
     if (connections.size() != 2) {
         const auto size(boost::lexical_cast<std::string>(connections.size()));
         BOOST_LOG_SEV(lg, error) << unexpected_number_of_connections << size;
-        throw transformation_error(unexpected_number_of_connections + size);
+        BOOST_THROW_EXCEPTION(
+            transformation_error(unexpected_number_of_connections + size));
     }
 
-    const auto parent(connections.front());
-    const auto child(connections.back());
     const auto parent_vertex(lambda(parent.to()));
     const auto child_vertex(lambda(child.to()));
-
-    if (!is_relationship_processable(o)) {
-        BOOST_LOG_SEV(lg, warn) << "Ignoring type: '" << o.type() << "'"
-                                << " connecting: '" << parent.to() << "' "
-                                << " with: '" << child.to() << "'";
-        return;
-    }
 
     parent_dia_ids_.insert(parent.to());
 
@@ -566,7 +577,7 @@ void dia_object_to_sml_pod::process_relationship(const dia::object& o) {
            << "is not supported.";
 
         BOOST_LOG_SEV(lg, error) << ss.str();
-        throw transformation_error(ss.str());
+        BOOST_THROW_EXCEPTION(transformation_error(ss.str()));
     }
 
     const auto k(orphans_.find(child.to()));
@@ -604,7 +615,7 @@ void dia_object_to_sml_pod::add_object(const dia::object& o) {
     if (!is_processable(o)) {
         BOOST_LOG_SEV(lg, error) << "Object is not processable by pod "
                                  << "transformer: " << o.id() << o.type();
-        throw transformation_error(invalid_object);
+        BOOST_THROW_EXCEPTION(transformation_error(invalid_object));
     }
 
     auto lambda([&](const std::string& id) -> vertex_descriptor_type {

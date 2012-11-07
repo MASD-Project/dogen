@@ -20,6 +20,7 @@
  */
 #include <sstream>
 #include <iostream>
+#include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/sml/domain/merging_error.hpp"
 #include "dogen/utility/io/unordered_map_io.hpp"
@@ -67,7 +68,7 @@ void merger::resolve_parent(const pod& pod) {
             stream << orphan_pod << ". pod: "
                    << pod.name().type_name() << ". parent: "
                    << pqn.type_name();
-            throw merging_error(stream.str());
+            BOOST_THROW_EXCEPTION(merging_error(stream.str()));
         }
 
         parent = i->second.parent_name();
@@ -133,7 +134,7 @@ merger::resolve_partial_type(nested_qualified_name& n) const {
     }
 
     BOOST_LOG_SEV(lg, error) << undefined_type << n;
-    throw merging_error(undefined_type + n.type().type_name());
+    BOOST_THROW_EXCEPTION(merging_error(undefined_type + n.type().type_name()));
 }
 
 std::vector<property>
@@ -148,9 +149,10 @@ merger::resolve_properties(const pod& pod) {
             resolve_partial_type(t);
             property.type_name(t);
             r[i] = property;
-        } catch (const merging_error& e) {
+        } catch (boost::exception& e) {
             std::ostringstream s;
-            s << "Property: " << property.name()
+            s << "Pod: " << pod.name().type_name()
+              << " Property: " << property.name()
               << " type: " << property.type_name();
             e << errmsg_info(s.str());
             throw;
@@ -176,7 +178,7 @@ void merger::resolve() {
 
 void merger::combine() {
     if (!has_target_)
-        throw merging_error(missing_target);
+        BOOST_THROW_EXCEPTION(merging_error(missing_target));
 
     auto pods(merged_model_.pods());
     auto primitives(merged_model_.primitives());
@@ -198,14 +200,14 @@ void merger::combine() {
                        << m.name() << "'. Pod qualified name: "
                        << p.first;
                 BOOST_LOG_SEV(lg, error) << stream.str();
-                throw merging_error(stream.str());
+                BOOST_THROW_EXCEPTION(merging_error(stream.str()));
             }
 
             if (p.first.meta_type() != meta_types::pod) {
                 std::ostringstream stream;
                 stream << "Pod has incorrect meta_type: '" << p.first;
                 BOOST_LOG_SEV(lg, error) << stream.str();
-                throw merging_error(stream.str());
+                BOOST_THROW_EXCEPTION(merging_error(stream.str()));
             }
 
             if (p.first != p.second.name()) {
@@ -213,7 +215,7 @@ void merger::combine() {
                 stream << "Inconsistency between key and value qualified names: "
                        << " key: " << p.first << " value: " << p.second.name();
                 BOOST_LOG_SEV(lg, error) << stream.str();
-                throw merging_error(stream.str());
+                BOOST_THROW_EXCEPTION(merging_error(stream.str()));
             }
 
             pods.insert(p);
@@ -246,7 +248,7 @@ void merger::add_target(model model) {
                << merged_model_.name() << "'. New target model name: "
                << model.name();
         BOOST_LOG_SEV(lg, error) << stream.str();
-        throw merging_error(stream.str());
+        BOOST_THROW_EXCEPTION(merging_error(stream.str()));
     }
 
     merged_model_.name(model.name());

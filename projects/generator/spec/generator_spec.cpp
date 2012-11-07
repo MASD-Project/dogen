@@ -410,8 +410,8 @@ BOOST_AUTO_TEST_CASE(class_without_name_model_throws) {
 
     auto s(default_mock_settings(tds));
     dogen::generator::generator cg(s);
-    contains_checker<generation_failure> c(dia_invalid_name);
-    BOOST_CHECK_EXCEPTION(cg.generate(), generation_failure, c);
+    contains_checker<std::exception> c(dia_invalid_name);
+    BOOST_CHECK_EXCEPTION(cg.generate(), std::exception, c);
 }
 
 BOOST_AUTO_TEST_CASE(empty_model_generates_expected_code) {
@@ -525,8 +525,8 @@ BOOST_AUTO_TEST_CASE(package_without_name_model_throws) {
 
     auto s(default_mock_settings(tds));
     dogen::generator::generator cg(s);
-    contains_checker<generation_failure> c(dia_invalid_name);
-    BOOST_CHECK_EXCEPTION(cg.generate(), generation_failure, c);
+    contains_checker<std::exception> c(dia_invalid_name);
+    BOOST_CHECK_EXCEPTION(cg.generate(), std::exception, c);
 }
 
 BOOST_AUTO_TEST_CASE(all_primitives_model_generates_expected_code) {

@@ -49,6 +49,8 @@ const std::string incorrect_stdout_config(
 
 auto lg(logger_factory("generator"));
 
+typedef boost::error_info<struct tag_errmsg, std::string> errmsg_info;
+
 }
 
 namespace dogen {
@@ -144,8 +146,11 @@ void generator::generate() const {
         const auto o(merge_models());
         if (o)
             generate(*o);
-    } catch (const std::exception& e) {
-        throw generation_failure(codegen_error + e.what());
+    } catch (boost::exception& e) {
+        std::ostringstream s;
+        s << "Code generation failure.";
+        e << errmsg_info(s.str());
+        throw;
     }
     BOOST_LOG_SEV(lg, info) << "Code generator finished.";
 }

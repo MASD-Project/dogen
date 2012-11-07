@@ -19,6 +19,7 @@
  *
  */
 #include <iostream>
+#include <boost/exception/diagnostic_information.hpp>
 #include "dogen/utility/log/life_cycle_manager.hpp"
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/config/version.hpp"
@@ -95,6 +96,15 @@ int main(int argc, char* argv[]) {
             auto cg(code_generator_factory(s));
             cg.generate();
         }
+    } catch(const boost::exception& e) {
+        BOOST_LOG_SEV(lg, error) << "Error: "
+                                 << boost::diagnostic_information(e);
+
+        std::cerr << boost::diagnostic_information(e) << std::endl
+                  << "Use --help option to see usage instructions."
+                  << std::endl;
+
+        return 1;
     } catch (const std::exception& e) {
         std::cerr << "Error: " << e.what() << std::endl
                   << "Use --help option to see usage instructions."
