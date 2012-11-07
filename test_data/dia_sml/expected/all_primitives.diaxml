@@ -417,7 +417,7 @@
 								<item>
 									<which>5</which>
 									<value>
-										<value>#cacheable#</value>
+										<value>#versioned#</value>
 									</value>
 								</item>
 							</values>

@@ -34,7 +34,7 @@ const std::string invalid_stereotype("Invalid value for stereotype: ");
 
 const std::string enumeration("enumeration");
 const std::string exception("exception");
-const std::string cacheable("cacheable");
+const std::string versioned("versioned");
 
 }
 
@@ -71,8 +71,8 @@ stereotypes parse_stereotype(const std::string& st) {
     if (st == exception)
         return stereotypes::exception;
 
-    if (st == cacheable)
-        return stereotypes::cacheable;
+    if (st == versioned)
+        return stereotypes::versioned;
 
     throw dogen::utility::exception::exception(invalid_stereotype + st);
 }

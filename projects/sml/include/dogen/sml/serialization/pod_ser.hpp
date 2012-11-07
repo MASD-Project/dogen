@@ -61,7 +61,7 @@ public:
         archive & make_nvp("is_associative_container",
             value.is_associative_container_);
         archive & make_nvp("is_smart_pointer", value.is_smart_pointer_);
-        archive & make_nvp("is_cacheable", value.is_cacheable_);
+        archive & make_nvp("is_versioned", value.is_versioned_);
     }
 };
 

@@ -83,7 +83,7 @@
         <dia:string>#class_a#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#cacheable#</dia:string>
+        <dia:string>#versioned#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>

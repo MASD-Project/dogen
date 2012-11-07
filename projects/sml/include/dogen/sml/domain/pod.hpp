@@ -59,7 +59,7 @@ public:
             is_sequence_container_(false),
             is_associative_container_(false),
             is_smart_pointer_(false),
-            is_cacheable_(false) { }
+            is_versioned_(false) { }
 
     /**
      * @brief Initialises the pod.
@@ -87,7 +87,7 @@ public:
      * container type, false otherwise.
      * @param is_smart_pointer If true the pod represents a smart
      * pointer, false otherwise.
-     * @param is_cacheable If true the pod requires cache support
+     * @param is_versioned If true the pod requires versioning support
      */
     pod(qualified_name name,
         std::vector<dogen::sml::property> properties,
@@ -97,7 +97,7 @@ public:
         bool is_parent, category_types category_type,
         const std::string& documentation,
         const unsigned int number_of_type_arguments, bool is_sequence_container,
-        bool is_associative_container, bool is_smart_pointer, bool is_cacheable)
+        bool is_associative_container, bool is_smart_pointer, bool is_versioned)
         : name_(name), properties_(properties), parent_name_(parent_name),
           original_parent_name_(original_parent_name), leaves_(leaves),
           generate_(generate), is_parent_(is_parent),
@@ -105,7 +105,7 @@ public:
           number_of_type_arguments_(number_of_type_arguments),
           is_sequence_container_(is_sequence_container),
           is_associative_container_(is_associative_container),
-          is_smart_pointer_(is_smart_pointer), is_cacheable_(is_cacheable) { }
+          is_smart_pointer_(is_smart_pointer), is_versioned_(is_versioned) { }
 
     pod(pod&& rhs) : name_(std::move(rhs.name_)),
                      properties_(std::move(rhs.properties_)),
@@ -125,7 +125,7 @@ public:
                          std::move(rhs.is_associative_container_)),
                      is_smart_pointer_(
                          std::move(rhs.is_smart_pointer_)),
-                     is_cacheable_(rhs.is_cacheable_) { }
+                     is_versioned_(rhs.is_versioned_) { }
 
 public:
     /**
@@ -250,11 +250,11 @@ public:
     /**@}*/
 
     /**
-     * @brief If true the pod requires cache support.
+     * @brief If true the pod requires versioning support.
      */
     /**@{*/
-    bool is_cacheable() const { return is_cacheable_; }
-    void is_cacheable(const bool v) { is_cacheable_ = v; }
+    bool is_versioned() const { return is_versioned_; }
+    void is_versioned(const bool v) { is_versioned_ = v; }
     /**@}*/
 
 public:
@@ -281,7 +281,7 @@ private:
     bool is_sequence_container_;
     bool is_associative_container_;
     bool is_smart_pointer_;
-    bool is_cacheable_;
+    bool is_versioned_;
 };
 
 } }
