@@ -474,15 +474,6 @@ etc. The view model generation will then take this into account.
 *** Update C++ code generator to latest database API                  :story:
 **** Update data exchanger header                                      :task:
 **** Update data exchanger implementation                              :task:
-*** Use explicit casting for versioned to unversioned conversions     :story:
-
-At present we have to_versioned; in reality this would be dealt much
-better using explicit casts:
-
-#+begin_example
-explicit operator std::string() { return "explicit"; }
-#+end_example
-
 *** Add SQL support to Dogen                                           :epic:
 **** Note on formatters                                                :note:
 
