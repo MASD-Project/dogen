@@ -45,7 +45,8 @@ public:
     housekeeper& operator=(const housekeeper&) = delete;
 
 public:
-    housekeeper(std::vector<boost::filesystem::path> managed_directories,
+    housekeeper(const std::vector<std::string>& ignore_patterns,
+        std::vector<boost::filesystem::path> managed_directories,
         std::set<boost::filesystem::path> expected_files, bool verbose_,
         delete_fn fn = nullptr);
 
@@ -56,12 +57,15 @@ private:
     std::set<boost::filesystem::path>
     files_in_directory(boost::filesystem::path dir) const;
     std::set<boost::filesystem::path> find_actual_files() const;
+    std::list<boost::filesystem::path>
+    remove_ignores(std::list<boost::filesystem::path> files) const;
     void delete_files(std::list<boost::filesystem::path> files) const;
 
 public:
     void tidy_up() const;
 
 private:
+    const std::vector<std::string> ignore_patterns_;
     const std::vector<boost::filesystem::path> managed_directories_;
     const std::set<boost::filesystem::path> expected_files_;
     bool verbose_;

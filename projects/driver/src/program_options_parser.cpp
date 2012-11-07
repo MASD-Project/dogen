@@ -28,6 +28,7 @@
 #include <boost/range/adaptors.hpp>
 #include <boost/range/algorithm.hpp>
 #include <boost/range/algorithm/set_algorithm.hpp>
+#include "dogen/utility/io/vector_io.hpp"
 #include "dogen/utility/test_data/dia_sml.hpp"
 #include "dogen/utility/exception/invalid_enum_value.hpp"
 #include "dogen/driver/parser_validation_error.hpp"
@@ -97,6 +98,7 @@ const std::string disable_model_package("disable-model-package");
 const std::string output_to_stdout_arg("output-to-stdout");
 const std::string output_to_file_arg("output-to-file");
 const std::string delete_extra_files_arg("delete-extra-files");
+const std::string ignore_files_matching_regex_arg("ignore-files-matching-regex");
 const std::string force_write_arg("force-write");
 
 const std::string integrated_io_incompatible_with_io_facet(
@@ -181,7 +183,10 @@ program_options_parser::output_options_factory() const {
     boost::program_options::options_description r("Output options");
     r.add_options()
         ("delete-extra-files,d", "Delete any additional files found in "
-            "directories managed by Dogen. NOT IMPLEMENTED")
+            "directories managed by Dogen.")
+        ("ignore-files-matching-regex",
+            value<std::vector<std::string> >(),
+            "Ignore files matching regex, if they are on the deletion list")
         ("force-write", "Always write to file even when there are no differences")
         ("output-to-file", "Create files. Disabled by default if "
             "output-to-stdout is chosen.")
@@ -560,6 +565,10 @@ transform_output_settings(const variables_map& vm) const {
     r.output_to_stdout(vm.count(output_to_stdout_arg));
     r.output_to_file(vm.count(output_to_file_arg) || !r.output_to_stdout());
     r.delete_extra_files(vm.count(delete_extra_files_arg));
+    if (vm.count(ignore_files_matching_regex_arg)) {
+        r.ignore_patterns(
+            vm[ignore_files_matching_regex_arg].as<std::vector<std::string> >());
+    }
     r.force_write(vm.count(force_write_arg));
     return r;
 }

@@ -1,3 +1,24 @@
+/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+ *
+ * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+ * MA 02110-1301, USA.
+ *
+ */
+#include <regex>
 #include <iostream>
 #include <boost/filesystem/operations.hpp>
 #include <boost/range/combine.hpp>
@@ -16,6 +37,10 @@ using namespace dogen::utility::log;
 auto lg(logger_factory("housekeeper"));
 
 using boost::filesystem::path;
+inline void log_ignoring_file(path p) {
+    BOOST_LOG_SEV(lg, warn) << "Ignoring file: " << p.string();
+}
+
 inline void log_deleting_extra_file(path p) {
     BOOST_LOG_SEV(lg, warn) << "Removing extra file: " << p.string();
 }
@@ -33,25 +58,26 @@ inline void log_extra_files(std::list<path> delta) {
     BOOST_LOG_SEV(lg, debug) << "Found extra files: " << delta;
 }
 
-inline void log_managed_dirs(std::vector<path> dirs) {
-    BOOST_LOG_SEV(lg, info) << "Managed directories: " << dirs;
-}
-
 }
 
 namespace dogen {
 namespace generator {
 
 housekeeper::housekeeper(
+    const std::vector<std::string>& ignore_patterns,
     std::vector<boost::filesystem::path> managed_directories,
     std::set<boost::filesystem::path> expected_files, bool verbose,
     delete_fn fn) :
+    ignore_patterns_(ignore_patterns),
     managed_directories_(managed_directories),
     expected_files_(expected_files),
     verbose_(verbose),
     delete_fn_(fn) {
 
-    log_managed_dirs(managed_directories_);
+    BOOST_LOG_SEV(lg, info) << "initial configuration: "
+                            << "ignore patterns: " << ignore_patterns
+                            << " managed directories: " << managed_directories;
+
     if (delete_fn_)
         return;
 
@@ -91,6 +117,33 @@ void housekeeper::delete_files(std::list<boost::filesystem::path> files) const {
     }
 }
 
+std::list<boost::filesystem::path> housekeeper::
+remove_ignores(std::list<boost::filesystem::path> files) const {
+    std::list<boost::filesystem::path> r;
+    for (const auto f : files) {
+        bool ignore(false);
+        for (auto ip : ignore_patterns_) {
+            BOOST_LOG_SEV(lg, debug) << "Applying regex: " << ip << " to "
+                                     << f.generic_string();
+
+            std::regex expr(ip);
+            if (std::regex_match(f.generic_string(), expr)) {
+                BOOST_LOG_SEV(lg, debug) << "Regex matches";
+                ignore = true;
+                continue;
+            }
+        }
+
+        if (ignore)
+            log_ignoring_file(f);
+        else {
+            BOOST_LOG_SEV(lg, debug) << "Not ignoring file: " << f;
+            r.push_back(f);
+        }
+    }
+    return r;
+}
+
 void housekeeper::tidy_up() const {
     const auto af(find_actual_files());
     log_expected_actual(expected_files_, af);
@@ -104,7 +157,7 @@ void housekeeper::tidy_up() const {
     }
 
     log_extra_files(delta);
-    delete_fn_(delta);
+    delete_fn_(remove_ignores(delta));
 }
 
 } }

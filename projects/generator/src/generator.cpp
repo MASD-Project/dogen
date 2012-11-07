@@ -115,7 +115,8 @@ void generator::generate(backends::backend& b) const {
             }),
         std::inserter(expected_files, expected_files.end()));
 
-    housekeeper hk(b.managed_directories(), expected_files, verbose_);
+    housekeeper hk(settings_.output().ignore_patterns(),
+        b.managed_directories(), expected_files, verbose_);
     hk.tidy_up();
 }
 

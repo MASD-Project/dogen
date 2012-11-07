@@ -104,12 +104,26 @@ public:
     }
     /**@}*/
 
+    /**
+     * @brief List of regular expressions to filter out files to ignore.
+     */
+    /**@{*/
+    std::vector<std::string> ignore_patterns() const {
+        return ignore_patterns_;
+    }
+    output_settings& ignore_patterns(std::vector<std::string> value) {
+        ignore_patterns_ = value;
+        return *this;
+    }
+    /**@}*/
+
 private:
     bool verbose_;
     bool output_to_stdout_;
     bool output_to_file_;
     bool delete_extra_files_;
     bool force_write_;
+    std::vector<std::string> ignore_patterns_;
 };
 
 std::ostream& operator<<(std::ostream& stream, output_settings value);

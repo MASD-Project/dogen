@@ -20,6 +20,7 @@
  */
 #include <boost/io/ios_state.hpp>
 #include "dogen/generator/config/output_settings.hpp"
+#include "dogen/utility/io/vector_io.hpp"
 
 namespace dogen {
 namespace generator {
@@ -35,6 +36,7 @@ operator<<(std::ostream& stream, output_settings value) {
            << "\"output_to_stdout\": " << value.output_to_stdout() << ", "
            << "\"output_to_file\": " << value.output_to_file() << ", "
            << "\"delete_extra_files\": " << value.delete_extra_files() << ", "
+           << "\"ignore_patterns\": " << value.ignore_patterns() << ", "
            << "\"force_writes\": " << value.force_write()
            << " }";
 
