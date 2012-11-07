@@ -379,11 +379,6 @@ manager, location manager etc. In order to do so we could define
 interfaces for these classes and provide mocks for the tests. This
 would make the tests considerably smaller.
 
-*** Add test model with versioning disabled
-
-We don't seem to have a test model for the versioning disabled
-scenario.
-
 *** Add test for disabling XML
 
 At present we are not testing model generation with XML disabled.
