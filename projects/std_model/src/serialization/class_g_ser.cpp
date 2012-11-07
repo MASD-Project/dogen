@@ -30,6 +30,7 @@
 #include <boost/serialization/nvp.hpp>
 #include <boost/serialization/vector.hpp>
 #include "dogen/std_model/serialization/class_a_ser.hpp"
+#include "dogen/std_model/serialization/class_a_unversioned_key_ser.hpp"
 #include "dogen/std_model/serialization/class_g_ser.hpp"
 #include "dogen/std_model/serialization/pkg1/class_c_ser.hpp"
 #include "dogen/utility/serialization/unordered_map.hpp"
@@ -48,6 +49,7 @@ void save(Archive& ar,
     const unsigned int /*version*/) {
     ar << make_nvp("prop_0", v.prop_0_);
     ar << make_nvp("prop_1", v.prop_1_);
+    ar << make_nvp("prop_2", v.prop_2_);
 }
 
 template<typename Archive>
@@ -56,6 +58,7 @@ void load(Archive& ar,
     const unsigned int /*version*/) {
     ar >> make_nvp("prop_0", v.prop_0_);
     ar >> make_nvp("prop_1", v.prop_1_);
+    ar >> make_nvp("prop_2", v.prop_2_);
 }
 
 } }
