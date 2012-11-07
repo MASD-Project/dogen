@@ -10,6 +10,11 @@ This file contains all stories that haven't been assigned to a sprint.
 
 Stories that we intend to look at, at some point.
 
+*** Rename cacheable to keyable
+
+Types that have keys are not cacheable, they just happen to be
+suitable for using them in the cache. Rename this stereotype.
+
 *** Unordered map of user type in package fails
 
 We seem to have a strange bug whereby creating a
