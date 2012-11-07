@@ -1394,7 +1394,7 @@
         <dia:point val="38.9312,40.0938"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="38.8812,40.0438;63.7362,44.5438"/>
+        <dia:rectangle val="38.8812,40.0438;63.7362,45.3438"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="38.9312,40.0938"/>
@@ -1403,7 +1403,7 @@
         <dia:real val="24.755000000000003"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="4.4000000000000004"/>
+        <dia:real val="5.2000000000000011"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#class_g#</dia:string>
@@ -1545,6 +1545,29 @@
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#std::unordered_map&lt;class_a_unversioned_key,class_a&gt;#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#prop_3#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>#std::unordered_map&lt;class_a_versioned_key,class_a&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>

@@ -20,6 +20,7 @@
  */
 #include "dogen/std_model/hash/class_a_hash.hpp"
 #include "dogen/std_model/hash/class_a_unversioned_key_hash.hpp"
+#include "dogen/std_model/hash/class_a_versioned_key_hash.hpp"
 #include "dogen/std_model/hash/class_g_hash.hpp"
 #include "dogen/std_model/hash/pkg1/class_c_hash.hpp"
 
@@ -75,6 +76,15 @@ inline std::size_t hash_std_unordered_map_dogen_std_model_class_a_unversioned_ke
     return seed;
 }
 
+inline std::size_t hash_std_unordered_map_dogen_std_model_class_a_versioned_key_dogen_std_model_class_a(const std::unordered_map<dogen::std_model::class_a_versioned_key, dogen::std_model::class_a>& v){
+    std::size_t seed(0);
+    for (const auto i : v) {
+        combine(seed, i.first);
+        combine(seed, i.second);
+    }
+    return seed;
+}
+
 }
 
 namespace dogen {
@@ -86,6 +96,7 @@ std::size_t class_g_hasher::hash(const class_g&v) {
     combine(seed, hash_std_unordered_map_dogen_std_model_class_a_std_vector_dogen_std_model_pkg1_class_c_(v.prop_0()));
     combine(seed, hash_std_unordered_map_dogen_std_model_pkg1_class_c_std_list_dogen_std_model_class_a_(v.prop_1()));
     combine(seed, hash_std_unordered_map_dogen_std_model_class_a_unversioned_key_dogen_std_model_class_a(v.prop_2()));
+    combine(seed, hash_std_unordered_map_dogen_std_model_class_a_versioned_key_dogen_std_model_class_a(v.prop_3()));
 
     return seed;
 }

@@ -21,6 +21,7 @@
 #include <ostream>
 #include "dogen/std_model/io/class_a_io.hpp"
 #include "dogen/std_model/io/class_a_unversioned_key_io.hpp"
+#include "dogen/std_model/io/class_a_versioned_key_io.hpp"
 #include "dogen/std_model/io/class_g_io.hpp"
 #include "dogen/std_model/io/pkg1/class_c_io.hpp"
 
@@ -106,6 +107,24 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen:
 
 }
 
+namespace std {
+
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen::std_model::class_a_versioned_key, dogen::std_model::class_a>& v) {
+    s << "[";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
+        s << i->first;
+        s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
+        s << i->second;
+        s << " } ]";
+    }
+    s << " ] ";
+    return s;
+}
+
+}
+
 namespace dogen {
 namespace std_model {
 
@@ -114,7 +133,8 @@ std::ostream& operator<<(std::ostream& s, const class_g& v) {
       << "\"__type__\": " << "\"class_g\"" << ", "
       << "\"prop_0\": " << v.prop_0() << ", "
       << "\"prop_1\": " << v.prop_1() << ", "
-      << "\"prop_2\": " << v.prop_2()
+      << "\"prop_2\": " << v.prop_2() << ", "
+      << "\"prop_3\": " << v.prop_3()
       << " }";
     return(s);
 }
