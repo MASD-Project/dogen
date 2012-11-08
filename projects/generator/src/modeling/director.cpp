@@ -143,7 +143,7 @@ create_key_system_pod(const sml::pod& p, const bool is_versioned) const {
 
     sml::pod r;
     r.name(qn);
-    r.generate(true);
+    r.generate(p.generate());
 
     const auto vtc(sml::category_types::versioned_key);
     const auto uvtc(sml::category_types::unversioned_key);
