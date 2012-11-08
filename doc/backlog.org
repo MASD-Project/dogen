@@ -10,6 +10,53 @@ This file contains all stories that haven't been assigned to a sprint.
 
 Stories that we intend to look at, at some point.
 
+*** Generation of cache code
+
+Some thought on adding caching to dogen:
+
+- we could have "modes" in dogen; instead of the
+  relational/procedural/etc approach, it would be more task based:
+  domain, cache, database.
+- in cache mode we do not need to a target. we load up all diagrams in
+  references and we find all types which have a stereotype of
+  versioned. we mark them as generatable.
+- if a target is supplied, it can only have objects of stereotype
+  =mapping= or =cache= (tbd). These are simply a key-value-pair and
+  determine additional caches to create. the attributes must be called
+  key and value. the key entity must be versioned, value doesn't have
+  to.
+- for each versioned type, we create the following "shadow" pods: get,
+  put, erase. each has versioned and unversioned. these objects are in
+  the namespace cache::type_namespaces,
+  e.g. =cache::credit_risk::model_configuration::versioned_get= or
+  maybe
+  =cache::credit_risk::model_configuration::versioned::get=. they are
+  protocol messages to be sent on the wire.
+- new formatter: named cache, with unordered maps for an entity with
+  key, value. Any additional mappings that were added manually using
+  the target are also added to the kvp mapping.
+- new formatter: raw named cache, with unordered maps for an entity with
+  key, value. value is raw storage, with an indication of the type of
+  data being stored (e.g. xml, binary or text).
+- new formatter: repository. contains all of the named caches.
+- new formatter: dispatcher. given a message of one of the known types
+  (get/put/remove) it dispatches it to the correct location in the
+  repository and takes appropriate action. we may need one per named
+  cache.
+- put/get/erase are regular domain objects so they go through the
+  usual formatters
+
+Sample flow:
+
+: credit_risk::model_configuration_unversioned_key k(123);
+: cache::near near;
+: cache::credit_risk::model_configuration::named_cache nc(
+:    near.named_cache<credit_risk::model_configuration>());
+: std::future v(n.async_get(k));
+
+- we need to re-read the coherence docs to clarify the roles of
+  front/back cache, local/remote cache and near cache.
+
 *** Unordered map of user type in package fails
 
 We seem to have a strange bug whereby creating a
