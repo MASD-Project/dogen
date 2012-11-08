@@ -10,6 +10,11 @@ This file contains all stories that haven't been assigned to a sprint.
 
 Stories that we intend to look at, at some point.
 
+*** Use error codes in exceptions
+
+Avoid breaking tests every time the exception text changes by creating
+a error code property in kitanda exceptions.
+
 *** Multi-line strings on JSON
 
 Our inserters need to remove all newline characters before outputting
