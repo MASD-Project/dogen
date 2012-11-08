@@ -20,6 +20,9 @@
  */
 #include <vector>
 #include <functional>
+#include <iostream>
+#include <boost/coroutine/all.hpp>
+#include <boost/foreach.hpp>
 #include <boost/test/unit_test.hpp>
 #include <boost/filesystem/path.hpp>
 #include <boost/algorithm/string/predicate.hpp>
@@ -33,6 +36,10 @@
 #include "dogen/utility/xml/text_reader_io.hpp"
 #include "dogen/utility/xml/node_types.hpp"
 #include "dogen/utility/xml/node_types_io.hpp"
+
+typedef boost::coroutines::coroutine< int() >             coro1_t;
+typedef boost::coroutines::coroutine< void( int) >        coro2_t;
+typedef boost::range_iterator< coro1_t >::type      iterator_t;
 
 namespace {
 
@@ -173,6 +180,16 @@ void check_after_last_element(dogen::utility::xml::text_reader& reader) {
     BOOST_LOG_SEV(lg, debug) << reader;
 
     BOOST_CHECK(reader.node_type() == dogen::utility::xml::node_types::none);
+}
+
+void power(coro2_t & c, int number, int exponent)
+{
+    int counter = 0;
+    int result = 1;
+    while (counter++ < exponent) {
+        result = result * number;
+        c(result);
+    }
 }
 
 }
@@ -831,6 +848,25 @@ BOOST_AUTO_TEST_CASE(is_start_element_is_true_for_start_elements_false_otherwise
     BOOST_CHECK(reader.read());
     BOOST_CHECK(reader.name() == label_simple_node);
     BOOST_CHECK(!reader.is_start_element());
+}
+
+BOOST_AUTO_TEST_CASE(crap) {
+    {
+        std::cout << "using range functions" << std::endl;
+        coro1_t c(std::bind(power, std::placeholders::_1, 2, 8));
+        iterator_t e(boost::end(c));
+        for (iterator_t i(boost::begin(c)); i != e; ++i)
+            std::cout << *i <<  " ";
+    }
+
+    {
+        std::cout << "\nusing BOOST_FOREACH" << std::endl;
+        coro1_t c(std::bind(power, std::placeholders::_1, 2, 8));
+        BOOST_FOREACH(int i, c) {
+            std::cout << i <<  " ";
+        }
+    }
+    std::cout << "\nDone" << std::endl;
 }
 
 BOOST_AUTO_TEST_SUITE_END()

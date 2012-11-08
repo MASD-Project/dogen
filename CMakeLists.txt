@@ -62,6 +62,7 @@ find_package(Boost 1.49 REQUIRED COMPONENTS
     log
     filesystem
     program_options
+    context
     )
 
 find_package(LibXml2)
