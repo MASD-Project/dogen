@@ -25,13 +25,9 @@
 #include "dogen/trivial_inheritance/domain/all.hpp"
 #include "dogen/trivial_inheritance/io/all_io.hpp"
 #include "dogen/trivial_inheritance/serialization/all_ser.hpp"
-#include "dogen/trivial_inheritance/serialization/registrar_ser.hpp"
+#include "dogen/test_model_sanitizer/register_types.hpp"
 #include "dogen/trivial_inheritance/test_data/all_td.hpp"
 #include "dogen/trivial_inheritance/hash/all_hash.hpp"
-
-template<typename Archive> void register_types(Archive& ar) {
-    dogen::trivial_inheritance::register_types<Archive>(ar);
-}
 
 namespace {
 

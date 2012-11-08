@@ -25,13 +25,9 @@
 #include "dogen/all_primitives/domain/all.hpp"
 #include "dogen/all_primitives/io/all_io.hpp"
 #include "dogen/all_primitives/serialization/all_ser.hpp"
-#include "dogen/all_primitives/serialization/registrar_ser.hpp"
+#include "dogen/test_model_sanitizer/register_types.hpp"
 #include "dogen/all_primitives/test_data/all_td.hpp"
 #include "dogen/all_primitives/hash/all_hash.hpp"
-
-template<typename Archive> void register_types(Archive& ar) {
-    dogen::all_primitives::register_types<Archive>(ar);
-}
 
 namespace {
 

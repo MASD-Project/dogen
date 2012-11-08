@@ -149,6 +149,7 @@ include_directories(
     ${CMAKE_SOURCE_DIR}/projects/utility/include
     ${CMAKE_SOURCE_DIR}/projects/generator/include
     ${CMAKE_SOURCE_DIR}/projects/driver/include
+    ${CMAKE_SOURCE_DIR}/projects/test_model_sanitizer/include
 
     # test models
     ${CMAKE_SOURCE_DIR}/projects/all_primitives/include

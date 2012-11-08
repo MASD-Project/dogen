@@ -25,13 +25,9 @@
 #include "dogen/std_model/domain/all.hpp"
 #include "dogen/std_model/io/all_io.hpp"
 #include "dogen/std_model/serialization/all_ser.hpp"
-#include "dogen/std_model/serialization/registrar_ser.hpp"
+#include "dogen/test_model_sanitizer/register_types.hpp"
 #include "dogen/std_model/test_data/all_td.hpp"
 #include "dogen/std_model/hash/all_hash.hpp"
-
-template<typename Archive> void register_types(Archive& ar) {
-    dogen::std_model::register_types<Archive>(ar);
-}
 
 namespace {
 

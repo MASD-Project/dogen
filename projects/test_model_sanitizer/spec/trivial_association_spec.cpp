@@ -25,13 +25,9 @@
 #include "dogen/trivial_association/domain/all.hpp"
 #include "dogen/trivial_association/io/all_io.hpp"
 #include "dogen/trivial_association/serialization/all_ser.hpp"
-#include "dogen/trivial_association/serialization/registrar_ser.hpp"
+#include "dogen/test_model_sanitizer/register_types.hpp"
 #include "dogen/trivial_association/test_data/all_td.hpp"
 #include "dogen/trivial_association/hash/all_hash.hpp"
-
-template<typename Archive> void register_types(Archive& ar) {
-    dogen::trivial_association::register_types<Archive>(ar);
-}
 
 namespace {
 

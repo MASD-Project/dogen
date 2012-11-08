@@ -25,13 +25,9 @@
 #include "dogen/split_project/domain/all.hpp"
 #include "dogen/split_project/io/all_io.hpp"
 #include "dogen/split_project/serialization/all_ser.hpp"
-#include "dogen/split_project/serialization/registrar_ser.hpp"
+#include "dogen/test_model_sanitizer/register_types.hpp"
 #include "dogen/split_project/test_data/all_td.hpp"
 #include "dogen/split_project/hash/all_hash.hpp"
-
-template<typename Archive> void register_types(Archive& ar) {
-    dogen::split_project::register_types<Archive>(ar);
-}
 
 namespace {
 

@@ -25,13 +25,9 @@
 #include "dogen/two_layers_with_objects/domain/all.hpp"
 #include "dogen/two_layers_with_objects/io/all_io.hpp"
 #include "dogen/two_layers_with_objects/serialization/all_ser.hpp"
-#include "dogen/two_layers_with_objects/serialization/registrar_ser.hpp"
+#include "dogen/test_model_sanitizer/register_types.hpp"
 #include "dogen/two_layers_with_objects/test_data/all_td.hpp"
 #include "dogen/two_layers_with_objects/hash/all_hash.hpp"
-
-template<typename Archive> void register_types(Archive& ar) {
-    dogen::two_layers_with_objects::register_types<Archive>(ar);
-}
 
 namespace {
 

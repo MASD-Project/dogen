@@ -25,13 +25,9 @@
 #include "dogen/disable_facet_folders/all.hpp"
 #include "dogen/disable_facet_folders/all_io.hpp"
 #include "dogen/disable_facet_folders/all_ser.hpp"
-#include "dogen/disable_facet_folders/registrar_ser.hpp"
+#include "dogen/test_model_sanitizer/register_types.hpp"
 #include "dogen/disable_facet_folders/all_td.hpp"
 #include "dogen/disable_facet_folders/all_hash.hpp"
-
-template<typename Archive> void register_types(Archive& ar) {
-    dogen::disable_facet_folders::register_types<Archive>(ar);
-}
 
 namespace {
 

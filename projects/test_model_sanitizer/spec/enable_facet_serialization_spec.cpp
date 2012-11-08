@@ -23,6 +23,7 @@
 #include "dogen/utility/test/logging.hpp"
 #include "dogen/utility/test/macros.hpp"
 #include "dogen/utility/test/canned_tests.hpp"
+#include "dogen/test_model_sanitizer/register_types.hpp"
 #include "dogen/enable_facet_serialization/domain/all.hpp"
 #include "dogen/enable_facet_serialization/serialization/all_ser.hpp"
 
