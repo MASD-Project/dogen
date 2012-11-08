@@ -28,6 +28,8 @@
 #include "dogen/driver/program_options_parser.hpp"
 #include "dogen/driver/parser_validation_error.hpp"
 
+using namespace dogen::utility::log;
+
 namespace {
 
 const std::string empty;
@@ -37,7 +39,7 @@ const std::string help_sanity_line("General options");
 const std::string missing_target("Mandatory parameter target is missing");
 const std::string invalid_facet_type("Invalid facet type");
 const std::string invalid_archive_type("Invalid archive type");
-const std::string unknown_option("unknown option invalid-argument");
+const std::string unknown_option("invalid-argument");
 const std::string source_include_error(
     "You must supply both source-dir and include-dir");
 const std::string split_project_dir_error(
@@ -126,7 +128,6 @@ public:
     explicit help_mock(bool& called) : called_(called) { }
 
     void operator()(std::string description) {
-        using namespace dogen::utility::log;
         logger lg(logger_factory(test_suite));
         BOOST_LOG_SEV(lg, debug) << "description: " << description;
         BOOST_CHECK(!description.empty());
@@ -157,7 +158,6 @@ dogen::driver::program_options_parser setup_parser(
     bool& help_called,
     bool& version_called) {
 
-    using namespace dogen::utility::log;
     logger lg(logger_factory(test_suite));
     BOOST_LOG_SEV(lg, debug) << "options: " << options;
     dogen::driver::program_options_parser r(options);
@@ -174,15 +174,15 @@ void check_exception(std::vector<std::string> options, std::string expected) {
     using dogen::driver::parser_validation_error;
     auto lambda([&](const parser_validation_error& e) -> bool {
             const std::string msg(e.what());
+            logger lg(logger_factory(test_suite));
 
-            if (!boost::starts_with(msg, expected)) {
-                using namespace dogen::utility::log;
-                logger lg(logger_factory(test_suite));
+            BOOST_LOG_SEV(lg, debug) << "Caught an exception: '" << msg;
+            if (!boost::contains(msg, expected)) {
                 BOOST_LOG_SEV(lg, error)
-                    << "Unexpected exception text. Expected: '" << expected
-                    << "'. Actual: '" << msg << "'.";
+                    << "Unexpected exception text. Expected: '" << expected;
                 return false;
             }
+            BOOST_LOG_SEV(lg, debug) << "Text is the expected message";
             return true;
         });
 
