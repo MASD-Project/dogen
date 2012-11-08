@@ -21,6 +21,7 @@
 #define BOOST_RESULT_OF_USE_DECLTYPE
 #include <string>
 #include <sstream>
+#include <boost/throw_exception.hpp>
 #include <boost/filesystem.hpp>
 #include <boost/filesystem/path.hpp>
 #include <boost/filesystem/operations.hpp>
@@ -305,7 +306,7 @@ program_options_parser::variables_map_factory() const {
         store(parser.options(options).run(), r);
         notify(r);
     } catch (const error& e) {
-        throw parser_validation_error(e.what());
+        BOOST_THROW_EXCEPTION(parser_validation_error(e.what()));
     }
 
     if (r.count(help_arg)) {
@@ -335,7 +336,7 @@ void program_options_parser::throw_project_dir_with_split() const {
     stream << "Argument project-dir cannot be used in"
            << " conjunction with project splitting. "
            << " Try `dogen --help' for more information.";
-    throw parser_validation_error(stream.str());
+    BOOST_THROW_EXCEPTION(parser_validation_error(stream.str()));
 }
 
 void program_options_parser::throw_include_source_without_split() const {
@@ -343,7 +344,7 @@ void program_options_parser::throw_include_source_without_split() const {
     stream << "Arguments source-dir and include-dir"
            << " require project splitting. "
            << " Try `dogen --help' for more information.";
-    throw parser_validation_error(stream.str());
+    BOOST_THROW_EXCEPTION(parser_validation_error(stream.str()));
 }
 
 void program_options_parser::throw_missing_include_source() const {
@@ -351,14 +352,14 @@ void program_options_parser::throw_missing_include_source() const {
     stream << "You must supply both source-dir and include-dir"
            << " or not supply either. "
            << " Try `dogen --help' for more information.";
-    throw parser_validation_error(stream.str());
+    BOOST_THROW_EXCEPTION(parser_validation_error(stream.str()));
 }
 
 void program_options_parser::throw_missing_target() const {
     std::ostringstream stream;
     stream << "Mandatory parameter target is missing. "
            << "Try `dogen --help' for more information.";
-    throw parser_validation_error(stream.str());
+    BOOST_THROW_EXCEPTION(parser_validation_error(stream.str()));
 }
 
 void program_options_parser::version_function(std::function<void()> value) {
@@ -375,7 +376,7 @@ program_options_parser::parse_archive_type(const std::string& s) const {
         return archive_types::binary;
 
     using utility::exception::invalid_enum_value;
-    throw invalid_enum_value(invalid_archive_type);
+    BOOST_THROW_EXCEPTION(invalid_enum_value(invalid_archive_type));
 }
 
 dogen::generator::backends::cpp::cpp_facet_types
@@ -387,7 +388,7 @@ program_options_parser::parse_facet_types(const std::string& s) {
     if (s == test_data_facet_type) return cpp_facet_types::test_data;
 
     using utility::exception::invalid_enum_value;
-    throw invalid_enum_value(invalid_facet_type + s);
+    BOOST_THROW_EXCEPTION(invalid_enum_value(invalid_facet_type + s));
 }
 
 generator::config::cpp_settings program_options_parser::
@@ -458,15 +459,15 @@ transform_cpp_settings(const boost::program_options::variables_map& vm) const {
                     &program_options_parser::parse_facet_types),
                 std::inserter(set, set.end()));
         } catch (const utility::exception::invalid_enum_value& e) {
-            throw parser_validation_error(e.what());
+            BOOST_THROW_EXCEPTION(parser_validation_error(e.what()));
         }
 
         if (r.use_integrated_io()) {
             const auto f(r.enabled_facets());
             const bool has_io_facet(f.find(cpp_facet_types::io) != f.end());
             if (has_io_facet) {
-                throw parser_validation_error(
-                    integrated_io_incompatible_with_io_facet);
+                BOOST_THROW_EXCEPTION(parser_validation_error(
+                        integrated_io_incompatible_with_io_facet));
             }
         }
     } else {
@@ -541,7 +542,7 @@ transform_troubleshooting_settings(const variables_map& vm) const {
                 try {
                     return parse_archive_type(vm[arg].as<std::string>());
                 } catch (const invalid_enum_value& e) {
-                    throw parser_validation_error(e.what());
+                    BOOST_THROW_EXCEPTION(parser_validation_error(e.what()));
                 }
             }
             return archive_types::invalid;
