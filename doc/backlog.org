@@ -10,6 +10,11 @@ This file contains all stories that haven't been assigned to a sprint.
 
 Stories that we intend to look at, at some point.
 
+*** Registrar is not included in serialisation includer
+
+For some reason we are not including the registrar on the includer for
+serialisation.
+
 *** Generation of cache code
 
 Some thought on adding caching to dogen:
