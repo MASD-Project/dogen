@@ -143,6 +143,7 @@ execute_process(
     OUTPUT_VARIABLE GIT_COMMIT_COUNT
     RESULT_VARIABLE ret_var
     OUTPUT_STRIP_TRAILING_WHITESPACE)
+string(STRIP ${GIT_COMMIT_COUNT} GIT_COMMIT_COUNT)
 
 # ssh
 find_program(ssh_executable ssh)
