@@ -24,4 +24,6 @@ file(GLOB_RECURSE all_files RELATIVE
 
 add_library(two_layers_with_objects STATIC ${all_files})
 set_target_properties(two_layers_with_objects PROPERTIES
-    OUTPUT_NAME dogen_two_layers_with_objects)
+    OUTPUT_NAME dogen_two_layers_with_objects_${DOGEN_VERSION})
+
+install(TARGETS two_layers_with_objects ARCHIVE DESTINATION lib COMPONENT libraries)

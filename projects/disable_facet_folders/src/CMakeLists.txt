@@ -24,4 +24,6 @@ file(GLOB_RECURSE all_files RELATIVE
 
 add_library(disable_facet_folders STATIC ${all_files})
 set_target_properties(disable_facet_folders PROPERTIES
-    OUTPUT_NAME dogen_disable_facet_folders)
+    OUTPUT_NAME dogen_disable_facet_folders_${DOGEN_VERSION})
+
+install(TARGETS disable_facet_folders ARCHIVE DESTINATION lib COMPONENT libraries)

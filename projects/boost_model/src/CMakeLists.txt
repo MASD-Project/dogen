@@ -24,4 +24,6 @@ file(GLOB_RECURSE all_files RELATIVE
 
 add_library(boost_model STATIC ${all_files})
 set_target_properties(boost_model PROPERTIES
-    OUTPUT_NAME dogen_boost_model)
+    OUTPUT_NAME dogen_boost_model_${DOGEN_VERSION})
+
+install(TARGETS boost_model ARCHIVE DESTINATION lib COMPONENT libraries)

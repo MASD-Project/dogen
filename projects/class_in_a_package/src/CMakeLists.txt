@@ -24,4 +24,6 @@ file(GLOB_RECURSE all_files RELATIVE
 
 add_library(class_in_a_package STATIC ${all_files})
 set_target_properties(class_in_a_package PROPERTIES
-    OUTPUT_NAME dogen_class_in_a_package)
+    OUTPUT_NAME dogen_class_in_a_package_${DOGEN_VERSION})
+
+install(TARGETS class_in_a_package ARCHIVE DESTINATION lib COMPONENT libraries)

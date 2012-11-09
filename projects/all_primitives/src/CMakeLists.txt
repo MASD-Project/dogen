@@ -24,4 +24,6 @@ file(GLOB_RECURSE all_files RELATIVE
 
 add_library(all_primitives STATIC ${all_files})
 set_target_properties(all_primitives PROPERTIES
-    OUTPUT_NAME dogen_all_primitives)
+    OUTPUT_NAME dogen_all_primitives_${DOGEN_VERSION})
+
+install(TARGETS all_primitives ARCHIVE DESTINATION lib COMPONENT libraries)

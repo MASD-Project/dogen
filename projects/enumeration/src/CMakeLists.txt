@@ -24,4 +24,6 @@ file(GLOB_RECURSE all_files RELATIVE
 
 add_library(enumeration STATIC ${all_files})
 set_target_properties(enumeration PROPERTIES
-    OUTPUT_NAME dogen_enumeration)
+    OUTPUT_NAME dogen_enumeration_${DOGEN_VERSION})
+
+install(TARGETS enumeration ARCHIVE DESTINATION lib COMPONENT libraries)

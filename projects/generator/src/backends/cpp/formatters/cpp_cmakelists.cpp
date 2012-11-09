@@ -20,6 +20,7 @@
  */
 #include <sstream>
 #include <ostream>
+#include <boost/algorithm/string/case_conv.hpp>
 #include "dogen/generator/backends/cpp/formatters/cpp_cmakelists.hpp"
 
 namespace {
@@ -82,8 +83,18 @@ void cpp_cmakelists::format(const cmakelists_view_model& vm) {
             << std::endl
             << "set_target_properties(" << mn << " PROPERTIES"
             << std::endl << "    OUTPUT_NAME " << vm.product_name()
-            << (vm.product_name().empty() ? empty : underscore)
-            << mn << ")"
+            << (vm.product_name().empty() ? empty : underscore) << mn;
+
+    if (!vm.product_name().empty()) {
+        stream_ << underscore << "${"
+                << boost::algorithm::to_upper_copy(vm.product_name())
+                << "_VERSION}" << ")";
+    }
+
+    stream_ << std::endl
+            << std::endl
+            << "install(TARGETS " << mn << " ARCHIVE DESTINATION lib "
+            << "COMPONENT libraries)"
             << std::endl;
 }
 
