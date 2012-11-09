@@ -235,12 +235,11 @@ add_custom_target(deploy_doxy
     )
 add_dependencies(deploy_doxy doxy)
 
-# FIXME: commented out due to breaks on OSX
-# install(
-#     DIRECTORY ${stage_doxygen_dir}/html/
-#     DESTINATION share/doc/${DOGEN_VERSION}/
-#     COMPONENT documentation
-#     )
+install(
+    DIRECTORY ${stage_doxygen_dir}/html/
+    DESTINATION share/doc/${DOGEN_VERSION}/
+    COMPONENT documentation
+    )
 
 #
 # aggregate targets

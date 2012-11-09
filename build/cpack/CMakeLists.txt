@@ -40,7 +40,7 @@ endif()
 #
 
 # FIXME: documentation will be added when we fix doxygen
-set(CPACK_COMPONENTS_ALL applications libraries headers tests)
+set(CPACK_COMPONENTS_ALL applications libraries headers tests documentation)
 
 set(CPACK_COMPONENT_APPLICATIONS_DISPLAY_NAME "Dogen Application")
 set(CPACK_COMPONENT_APPLICATIONS_DESCRIPTION
