@@ -1,0 +1,120 @@
+#+title: Release Notes for Sprint 20
+#+options: date:nil toc:nil author:nil num:nil
+#+tags: story(s) epic(e) task(t) note(n) spike(p)
+
+* Release Notes
+
+This file contains all stories that were closed during sprint 20.
+
+** Development Stories Implemented
+
+*** Use explicit casting for versioned to unversioned conversions
+
+At present we have to_versioned; in reality this would be dealt much
+better using explicit casts:
+
+#+begin_example
+explicit operator std::string() { return "explicit"; }
+#+end_example
+
+*** Add test model with versioning disabled
+
+We don't seem to have a test model for the versioning disabled
+scenario.
+
+*** Rename cacheable to keyable
+
+Types that have keys are not cacheable, they just happen to be
+suitable for using them in the cache. Rename this stereotype.
+
+*** Ignore files and folders based on regex
+
+We need the ability to specify one or more regular expressions that
+will be used by dogen to ignore files and folders. This would allow
+users to mix their own hand-crafted types with the code generated
+types without problems.
+
+In terms of implementation, all we need to do is to get the string
+with a regular expression into the housekeeping manager and then use
+it to filter the list of files to delete.
+
+We could also have some predefined ignores such as =spec=.
+
+*** Check if we have a test model with versioning disabled
+
+It seems all the test models are using versioning. We need a test
+without it.
+
+*** Add support for serialisation register types
+
+- create model dependencies, automatically populated. just a list of
+  qualified names.
+- create a DAG in merger for the model dependencies to guarantee that
+  we merge models in dependency order. This solves most of the
+  problems in [[Cross%20model%20referencing%20tests][Cross model referencing tests]] (we just need tests).
+- use model dependencies to load dependent models and to error if
+  there are missing references.
+- create a model level list of leaves. these are the types the
+  registrar will work on.
+- create a new aspect type: registrar.
+- create header and implementation formatters for
+  registrar. Implementation calls register_type on all leaves.
+- update includer to add leaves plus registrar of dependent models
+  when returning paths for implementation of registrar.
+- add registrar dependencies based on model dependencies. Ensure we
+  ignore all system models here. Update registrar formatter to call
+  all dependent models' registrars' before doing its own.
+- remove all of the existing export machinery.
+
+*** Code generation of exception classes
+
+The code generator should generate exception classes too. We need some
+form of attribute (perhaps a Dia stereotype) to mark the class as an
+exception and then the code generator will use a different template
+for the class generator. We could have an option of boost exception or
+not. We may need to have a form of inheriting from a base exception
+for a given model. We also need to be able to inherit from other
+exceptions in a model.
+
+*** Create packages for doxygen
+
+We need to find a way of creating packages that install files from the
+output directory. The doxygen packages will be very large so its not
+clear they will be uploaded to github.
+
+*** Make code generation decisions based on class hierarchy
+
+- if a class is not part of a class hierarchy, we could define the IO
+  facet externally. If a class is part of a hierarchy we need to have
+  a virtual member function.
+- if a class is part of a hierarchy and marked with a stereotype of
+  =unique= or =shared= we should create a typedef for
+  =boost::unique_ptr= or =boost::shared_ptr= respectively. It should
+  also add a create method.
+- if a class only has primitives we can avoid defining a swap method.
+
+*** Create release and debug builds
+
+At present all our builds are have debug symbols and no
+optimisation. We need to setup debug and release builds. We should
+append a post-fix of =-release= and =-debug= to the build name.
+
+*** Create forward declaration facet
+
+We should aim to define almost nothing in header files where possible
+and forward declare. To make life easier we could have a =_fwd= header
+for each entity which only forward declares it. It would be useful for
+IO and for the behavioural code.
+
+*** Have licence and copyright information in packages
+
+We need to copy LICENCE.TXT from the doc directory in the build process
+
+Files ReadMe.txt and Copyright.txt were created in
+cpack/CMakeLists.txt only to allow the packaging process
+
+*** Create development packages
+
+We need to create packages with header files and shared/static
+libraries, so that one can write client code without recompiling
+everything.
