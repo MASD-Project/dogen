@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_GENERATOR_BACKENDS_CPP_FORMATTERS_CPP_CMAKELISTS_HPP
-#define DOGEN_GENERATOR_BACKENDS_CPP_FORMATTERS_CPP_CMAKELISTS_HPP
+#ifndef DOGEN_GENERATOR_BACKENDS_CPP_FORMATTERS_CPP_SRC_CMAKELISTS_HPP
+#define DOGEN_GENERATOR_BACKENDS_CPP_FORMATTERS_CPP_SRC_CMAKELISTS_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -36,19 +36,19 @@ namespace backends {
 namespace cpp {
 namespace formatters {
 
-class cpp_cmakelists {
+class cpp_src_cmakelists {
 public:
     typedef view_models::cmakelists_view_model cmakelists_view_model;
 
 public:
-    cpp_cmakelists() = delete;
-    cpp_cmakelists(const cpp_cmakelists&) = default;
-    ~cpp_cmakelists() noexcept = default;
-    cpp_cmakelists(cpp_cmakelists&&) = default;
-    cpp_cmakelists& operator=(const cpp_cmakelists&) = default;
+    cpp_src_cmakelists() = delete;
+    cpp_src_cmakelists(const cpp_src_cmakelists&) = default;
+    ~cpp_src_cmakelists() noexcept = default;
+    cpp_src_cmakelists(cpp_src_cmakelists&&) = default;
+    cpp_src_cmakelists& operator=(const cpp_src_cmakelists&) = default;
 
 public:
-    explicit cpp_cmakelists(std::ostream& stream);
+    explicit cpp_src_cmakelists(std::ostream& stream);
 
 public:
     void format(const cmakelists_view_model& vm);

@@ -99,7 +99,7 @@ backend::value_entry_type cpp_backend::generate_cmakelists() const {
 
     log_formating_view(vm.file_path().string());
     std::ostringstream stream;
-    formatters::cpp_cmakelists formatter(stream);
+    formatters::cpp_src_cmakelists formatter(stream);
     formatter.format(vm);
     return std::make_pair(vm.file_path(), stream.str());
 }

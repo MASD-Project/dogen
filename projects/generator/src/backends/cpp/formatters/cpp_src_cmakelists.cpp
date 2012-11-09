@@ -38,10 +38,10 @@ namespace backends {
 namespace cpp {
 namespace formatters {
 
-cpp_cmakelists::cpp_cmakelists(std::ostream& stream) : stream_(stream) {
+cpp_src_cmakelists::cpp_src_cmakelists(std::ostream& stream) : stream_(stream) {
 }
 
-void cpp_cmakelists::format(const cmakelists_view_model& vm) {
+void cpp_src_cmakelists::format(const cmakelists_view_model& vm) {
     const std::string mn(vm.model_name().empty() ?
         unnamed_model :
         vm.model_name());
