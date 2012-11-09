@@ -8,6 +8,15 @@ This file contains all stories that were closed during sprint 20.
 
 ** Development Stories Implemented
 
+*** Organise the valgrind suppressions a bit better
+
+In Sprint 9 we fixed a whole bunch of strange valgrind memory leak
+warnings that were coming from the guts of boost threading and boost
+log. We did it by using the generate suppression from valgrind. We
+should be able to summarise all of those suppressions to only one or
+two (there are some twenty at the moment). We also need to
+double-check with boost if these are real problems.
+
 *** Add test model with versioning disabled
 
 We don't seem to have a test model for the versioning disabled
@@ -110,8 +119,7 @@ We need to create packages with header files and shared/static
 libraries, so that one can write client code without recompiling
 everything.
 
-
-** Development Stories Not Relevant
+** Deprecated Development Stories
 
 *** Use explicit casting for versioned to unversioned conversions
 

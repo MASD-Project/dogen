@@ -742,15 +742,6 @@ There should be a way of passing in the database name as an
 environment variable into the makefile (not into the cmake as we want
 to be able to change databases without having to rebuild makefiles).
 
-*** Organise the valgrind suppressions a bit better
-
-In Sprint 9 we fixed a whole bunch of strange valgrind memory leak
-warnings that were coming from the guts of boost threading and boost
-log. We did it by using the generate suppression from valgrind. We
-should be able to summarise all of those suppressions to only one or
-two (there are some twenty at the moment). We also need to
-double-check with boost if these are real problems.
-
 *** Generator usage in template tests needs to be cleaned
 
 At present some template tests in =utility/test= ask for a
