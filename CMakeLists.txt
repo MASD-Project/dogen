@@ -215,7 +215,7 @@ set(DOGEN_DOXYGEN_DIR ${stage_doxygen_dir})
 
 # input file
 set(doxy_file ${stage_doxygen_dir}/dogen.doxy)
-add_custom_target(doxy doxygen ${doxy_file})
+add_custom_target(doxy ALL doxygen ${doxy_file})
 
 set(server "kitanda.linkpc.net")
 set(remote_site "/Users/git/Repositories/website/org/doxygen/dogen")
