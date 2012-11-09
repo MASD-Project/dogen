@@ -124,6 +124,13 @@ been captured in the backlog.
 - code generate SML model
 - use inheritance in SML model
 - refactor middle end to take advantage of inheritance
+- we need to split cmake generation from C++. We can't have backends
+  supporting two grammars at the same time. Also, we need to support
+  two backends writing to the same directories. This should not be a
+  problem since all the housekeeping and writing is done at the
+  generator level. Also, we could support a language option to cmake
+  such as C++, SQL etc which would trigger different types of
+  cmakefiles to come up.
 
 *** System models set meta-type to invalid
 
