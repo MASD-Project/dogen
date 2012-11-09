@@ -205,7 +205,6 @@ include_directories(SYSTEM
 #
 # doxygen
 #
-
 find_package(Doxygen)
 if(DOXYGEN_FOUND)
     # input directories (used in doxygen template)

@@ -10,6 +10,15 @@ This file contains all stories that haven't been assigned to a sprint.
 
 Stories that we intend to look at, at some point.
 
+*** Mix-and-match of manual projects
+
+With the ignore by regex feature its now possible to mix and match
+projects. However, dogen generates a makefile which does not include
+any manually generated projects. We need some intelligent logic in the
+src cmakefile that looks for other cmakefiles and adds them
+automatically in its =add_subdirectory=. This could be done by the
+CMake backend when that exists.
+
 *** Use error codes in exceptions
 
 Avoid breaking tests every time the exception text changes by creating
