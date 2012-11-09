@@ -969,3 +969,6 @@ platform conventions.
 There are some known limitations in package naming:
 
 - http://public.kitware.com/Bug/view.php?id=12997
+*** Test database deployment
+
+We need to setup a build that deploys all the SQL (tables, procs, etc)
