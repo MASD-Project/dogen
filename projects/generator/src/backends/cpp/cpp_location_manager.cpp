@@ -39,6 +39,8 @@ const std::string forward_decls_postfix("_fwd");
 const std::string src_dir("src");
 const std::string include_dir("include");
 
+const std::string absolute_path_with_split(
+    "Absolute path cannot be used with split projects");
 const std::string invalid_facet_types("Invalid value for cpp_facet_types");
 const std::string invalid_file_types("Invalid value for cpp_file_types");
 const std::string invalid_aspect_types("Invalid value for cpp_aspect_types");
@@ -207,6 +209,13 @@ cpp_location_manager::absolute_path_to_include(const std::string& name) const {
     if (settings_.split_project())
         return include_directory_ / model_name_ / name;
     return include_directory_ / name;
+}
+
+boost::filesystem::path
+cpp_location_manager::absolute_path(const std::string& name) const {
+    if (settings_.split_project())
+        throw utility::exception::exception(absolute_path_with_split);
+    return settings_.project_directory() / model_name_ / name;
 }
 
 std::vector<boost::filesystem::path>

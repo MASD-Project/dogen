@@ -23,6 +23,7 @@
 #include "dogen/generator/backends/cpp/formatters/factory.hpp"
 #include "dogen/generator/backends/cpp/formatters/file_formatter.hpp"
 #include "dogen/generator/backends/cpp/formatters/cpp_src_cmakelists.hpp"
+#include "dogen/generator/backends/cpp/formatters/cpp_include_cmakelists.hpp"
 #include "dogen/generator/backends/cpp/view_models/sml_to_cpp_view_model.hpp"
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/generator/backends/cpp/cpp_backend.hpp"
@@ -89,7 +90,7 @@ void cpp_backend::log_file_views(unsigned int how_many) const {
                              << " transformer: " << how_many;
 }
 
-backend::value_entry_type cpp_backend::generate_cmakelists() const {
+backend::value_type cpp_backend::generate_cmakelists() const {
     view_models::cmakelists_view_model vm;
     vm.file_path(location_manager_.absolute_path_to_src(vm.file_name()));
     vm.model_name(model_.name());
@@ -99,9 +100,22 @@ backend::value_entry_type cpp_backend::generate_cmakelists() const {
 
     log_formating_view(vm.file_path().string());
     std::ostringstream stream;
-    formatters::cpp_src_cmakelists formatter(stream);
-    formatter.format(vm);
-    return std::make_pair(vm.file_path(), stream.str());
+    formatters::cpp_src_cmakelists src(stream);
+    src.format(vm);
+
+    backend::value_type r;
+    r.insert(std::make_pair(vm.file_path(), stream.str()));
+
+    if (!settings_.split_project()) {
+        stream.str("");
+        vm.file_path(location_manager_.absolute_path(vm.file_name()));
+        log_formating_view(vm.file_path().string());
+        formatters::cpp_include_cmakelists inc(stream);
+        inc.format(vm);
+        r.insert(std::make_pair(vm.file_path(), stream.str()));
+    }
+
+    return r;
 }
 
 backend::value_entry_type cpp_backend::
@@ -135,8 +149,10 @@ backend::value_type cpp_backend::generate() {
     backend::value_type r(generate_file_view_models());
     if (settings_.disable_cmakelists())
         log_cmakelists_disabled();
-    else
-        r.insert(generate_cmakelists());
+    else {
+        const auto cm(generate_cmakelists());
+        r.insert(cm.begin(), cm.end());
+    }
 
     log_finished();
     return r;

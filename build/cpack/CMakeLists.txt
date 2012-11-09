@@ -38,9 +38,9 @@ endif()
 #
 # Component configuration
 #
-set(components "applications libraries headers tests ")
+set(components applications libraries headers tests)
 if(DOXYGEN_FOUND)
-    set(components "${components} documentation")
+    set(components ${components} documentation)
 endif()
 set(CPACK_COMPONENTS_ALL ${components})
 

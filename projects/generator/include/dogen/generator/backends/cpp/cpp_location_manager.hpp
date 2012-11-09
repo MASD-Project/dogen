@@ -113,6 +113,14 @@ public:
     path absolute_path_to_include(const std::string& name) const;
 
     /**
+     * @brief Returns an absolute path into the top level directory,
+     * if split projects is not on.
+     *
+     * @param name name of the item we're getting the path for.
+     */
+    path absolute_path(const std::string& name) const;
+
+    /**
      * @brief Returns the list of directories this location manager is
      * managing.
      */

@@ -68,7 +68,7 @@ private:
     backend::value_entry_type
     generate_file_view_model(const view_models::file_view_model& vm) const;
     backend::value_type generate_file_view_models() const;
-    backend::value_entry_type generate_cmakelists() const;
+    backend::value_type generate_cmakelists() const;
 
 public:
     backend::value_type generate() override;
