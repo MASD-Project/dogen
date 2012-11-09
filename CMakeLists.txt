@@ -206,40 +206,46 @@ include_directories(SYSTEM
 # doxygen
 #
 
-# input directories (used in doxygen template)
-set(DOGEN_CPP_CODE_DIR ${CMAKE_SOURCE_DIR}/projects)
-set(DOGEN_DOX_DIR ${stage_doxygen_dir}/dox)
+find_package(Doxygen)
+if(DOXYGEN_FOUND)
+    # input directories (used in doxygen template)
+    set(DOGEN_CPP_CODE_DIR ${CMAKE_SOURCE_DIR}/projects)
+    set(DOGEN_DOX_DIR ${stage_doxygen_dir}/dox)
 
-# output directory (used in doxygen template)
-set(DOGEN_DOXYGEN_DIR ${stage_doxygen_dir})
+    # output directory (used in doxygen template)
+    set(DOGEN_DOXYGEN_DIR ${stage_doxygen_dir})
 
-# input file
-set(doxy_file ${stage_doxygen_dir}/dogen.doxy)
-add_custom_target(doxy ALL doxygen ${doxy_file})
+    # input file
+    set(doxy_file ${stage_doxygen_dir}/dogen.doxy)
+    add_custom_target(doxy
+        ALL ${DOXYGEN_EXECUTABLE} ${doxy_file}
+        WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+        COMMENT "Generating API documentation with Doxygen" VERBATIM)
 
-set(server "kitanda.linkpc.net")
-set(remote_site "/Users/git/Repositories/website/org/doxygen/dogen")
-set(remote_file "git@${server}:${remote_site}")
+    set(server "kitanda.linkpc.net")
+    set(remote_site "/Users/git/Repositories/website/org/doxygen/dogen")
+    set(remote_file "git@${server}:${remote_site}")
 
-add_custom_target(deploy_doxy
-    COMMAND ${ssh_executable} git@${server} 'rm -rf ${remote_site}.new
-    /tmp/dogen_doxygen.tgz && mkdir ${remote_site}.new'
-    COMMAND tar -C ${stage_doxygen_dir} -zcf ${stage_dir}/dogen_doxygen.tgz .
-    COMMAND ${scp_executable} ${stage_dir}/dogen_doxygen.tgz
-    git@${server}:/tmp/dogen_doxygen.tgz
-    COMMAND ${ssh_executable} git@${server} 'tar -C ${remote_site}.new/
-    -zxf /tmp/dogen_doxygen.tgz'
-    COMMAND ${ssh_executable} git@${server} 'mv ${remote_site} ${remote_site}.old'
-    COMMAND ${ssh_executable} git@${server} 'mv ${remote_site}.new ${remote_site}'
-    COMMAND ${ssh_executable} git@${server} 'rm -rf ${remote_site}.old'
-    )
-add_dependencies(deploy_doxy doxy)
+    add_custom_target(deploy_doxy
+        COMMAND ${ssh_executable} git@${server} 'rm -rf ${remote_site}.new
+        /tmp/dogen_doxygen.tgz && mkdir ${remote_site}.new'
+        COMMAND tar -C ${stage_doxygen_dir} -zcf ${stage_dir}/dogen_doxygen.tgz .
+        COMMAND ${scp_executable} ${stage_dir}/dogen_doxygen.tgz
+        git@${server}:/tmp/dogen_doxygen.tgz
+        COMMAND ${ssh_executable} git@${server} 'tar -C ${remote_site}.new/
+        -zxf /tmp/dogen_doxygen.tgz'
+        COMMAND ${ssh_executable} git@${server} 'mv ${remote_site} ${remote_site}.old'
+        COMMAND ${ssh_executable} git@${server} 'mv ${remote_site}.new ${remote_site}'
+        COMMAND ${ssh_executable} git@${server} 'rm -rf ${remote_site}.old'
+        )
+    add_dependencies(deploy_doxy doxy)
 
-install(
-    DIRECTORY ${stage_doxygen_dir}/html/
-    DESTINATION share/doc/${DOGEN_VERSION}/
-    COMPONENT documentation
-    )
+    install(
+        DIRECTORY ${stage_doxygen_dir}/html/
+        DESTINATION share/doc/${DOGEN_VERSION}/
+        COMPONENT documentation
+        )
+endif()
 
 #
 # aggregate targets

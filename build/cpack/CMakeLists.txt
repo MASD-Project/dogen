@@ -38,9 +38,11 @@ endif()
 #
 # Component configuration
 #
-
-# FIXME: documentation will be added when we fix doxygen
-set(CPACK_COMPONENTS_ALL applications libraries headers tests documentation)
+set(components "applications libraries headers tests ")
+if(DOXYGEN_FOUND)
+    set(components "${components} documentation")
+endif()
+set(CPACK_COMPONENTS_ALL ${components})
 
 set(CPACK_COMPONENT_APPLICATIONS_DISPLAY_NAME "Dogen Application")
 set(CPACK_COMPONENT_APPLICATIONS_DESCRIPTION
@@ -58,9 +60,11 @@ set(CPACK_COMPONENT_TESTS_DISPLAY_NAME "Dogen unit tests")
 set(CPACK_COMPONENT_TESTS_DESCRIPTION
     "Unit tests used to test Dogen")
 
-set(CPACK_COMPONENT_DOCUMENTATION_DISPLAY_NAME "Dogen documentation")
-set(CPACK_COMPONENT_DOCUMENTATION_DESCRIPTION
-    "Dogen documentation")
+if(DOXYGEN_FOUND)
+    set(CPACK_COMPONENT_DOCUMENTATION_DISPLAY_NAME "Dogen documentation")
+    set(CPACK_COMPONENT_DOCUMENTATION_DESCRIPTION
+        "Dogen documentation")
+endif()
 
 set(CPACK_COMPONENT_HEADERS_DEPENDS libraries)
 set(CPACK_COMPONENT_TESTS_DEPENDS applications)
@@ -69,7 +73,10 @@ set(CPACK_COMPONENT_APPLICATIONS_GROUP "Runtime")
 set(CPACK_COMPONENT_LIBRARIES_GROUP "Development")
 set(CPACK_COMPONENT_HEADERS_GROUP "Development")
 set(CPACK_COMPONENT_TESTS_GROUP "Development")
-set(CPACK_COMPONENT_DOCUMENTATION_GROUP "Development")
+
+if(DOXYGEN_FOUND)
+    set(CPACK_COMPONENT_DOCUMENTATION_GROUP "Development")
+endif()
 
 set(CPACK_COMPONENT_GROUP_DEVELOPMENT_DESCRIPTION
     "Tools needed to develop applications using Dogen")
