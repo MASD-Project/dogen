@@ -141,7 +141,7 @@ BOOST_AUTO_TEST_CASE(split_project_configuration_results_in_expected_locations) 
     BOOST_CHECK(asserter::assert_equals(e, a));
 
     e = "source directory/test/a_type";
-    a = lm.absolute_path(type_name);
+    a = lm.absolute_path_to_src(type_name);
     BOOST_CHECK(asserter::assert_equals(e, a));
 
     const auto md(lm.managed_directories());
@@ -169,7 +169,7 @@ BOOST_AUTO_TEST_CASE(split_project_configuration_results_in_expected_locations) 
     BOOST_CHECK(asserter::assert_equals(e, a));
 
     e = "source directory/test/a_type";
-    a = lm.absolute_path(type_name);
+    a = lm.absolute_path_to_src(type_name);
     BOOST_CHECK(asserter::assert_equals(e, a));
 }
 
@@ -198,7 +198,7 @@ BOOST_AUTO_TEST_CASE(non_split_project_configuration_results_in_expected_locatio
     BOOST_CHECK(asserter::assert_equals(e, a));
 
     e = "project directory/test/src/a_type";
-    a = lm.absolute_path(type_name);
+    a = lm.absolute_path_to_src(type_name);
     BOOST_CHECK(asserter::assert_equals(e, a));
 
     const auto md(lm.managed_directories());
@@ -222,7 +222,7 @@ BOOST_AUTO_TEST_CASE(non_split_project_configuration_results_in_expected_locatio
     BOOST_CHECK(asserter::assert_equals(e, a));
 
     e = "project directory/test/src/a_type";
-    a = lm.absolute_path(type_name);
+    a = lm.absolute_path_to_src(type_name);
     BOOST_CHECK(asserter::assert_equals(e, a));
 }
 

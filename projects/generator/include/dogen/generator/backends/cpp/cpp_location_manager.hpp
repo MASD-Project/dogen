@@ -102,7 +102,20 @@ public:
      *
      * @param name name of the item we're getting the path for.
      */
-    path absolute_path(const std::string& name) const;
+    path absolute_path_to_src(const std::string& name) const;
+
+    /**
+     * @brief Returns an absolute path into the include directory for
+     * the current model.
+     *
+     * @param name name of the item we're getting the path for.
+     */
+    path absolute_path_to_include(const std::string& name) const;
+
+    /**
+     * @brief Returns the list of directories this location manager is
+     * managing.
+     */
     std::vector<boost::filesystem::path> managed_directories() const;
 
 private:

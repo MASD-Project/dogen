@@ -91,7 +91,7 @@ void cpp_backend::log_file_views(unsigned int how_many) const {
 
 backend::value_entry_type cpp_backend::generate_cmakelists() const {
     view_models::cmakelists_view_model vm;
-    vm.file_path(location_manager_.absolute_path(vm.file_name()));
+    vm.file_path(location_manager_.absolute_path_to_src(vm.file_name()));
     vm.model_name(model_.name());
 
     if (!model_.external_package_path().empty())

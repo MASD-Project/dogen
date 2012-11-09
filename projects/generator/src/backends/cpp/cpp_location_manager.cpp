@@ -196,10 +196,17 @@ cpp_location_manager::absolute_path(const cpp_location_request& request) const {
 }
 
 boost::filesystem::path
-cpp_location_manager::absolute_path(const std::string& name) const {
+cpp_location_manager::absolute_path_to_src(const std::string& name) const {
     if (settings_.split_project())
         return source_directory_ / model_name_ / name;
     return source_directory_ / name;
+}
+
+boost::filesystem::path
+cpp_location_manager::absolute_path_to_include(const std::string& name) const {
+    if (settings_.split_project())
+        return include_directory_ / model_name_ / name;
+    return include_directory_ / name;
 }
 
 std::vector<boost::filesystem::path>
