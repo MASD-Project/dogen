@@ -8,15 +8,6 @@ This file contains all stories that were closed during sprint 20.
 
 ** Development Stories Implemented
 
-*** Use explicit casting for versioned to unversioned conversions
-
-At present we have to_versioned; in reality this would be dealt much
-better using explicit casts:
-
-#+begin_example
-explicit operator std::string() { return "explicit"; }
-#+end_example
-
 *** Add test model with versioning disabled
 
 We don't seem to have a test model for the versioning disabled
@@ -118,3 +109,15 @@ cpack/CMakeLists.txt only to allow the packaging process
 We need to create packages with header files and shared/static
 libraries, so that one can write client code without recompiling
 everything.
+
+
+** Development Stories Not Relevant
+
+*** Use explicit casting for versioned to unversioned conversions
+
+At present we have to_versioned; in reality this would be dealt much
+better using explicit casts:
+
+#+begin_example
+explicit operator std::string() { return "explicit"; }
+#+end_example
