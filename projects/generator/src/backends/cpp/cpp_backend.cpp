@@ -22,7 +22,7 @@
 #include "dogen/generator/generation_failure.hpp"
 #include "dogen/generator/backends/cpp/formatters/factory.hpp"
 #include "dogen/generator/backends/cpp/formatters/file_formatter.hpp"
-#include "dogen/generator/backends/cpp/formatters/cpp_cmakelists.hpp"
+#include "dogen/generator/backends/cpp/formatters/cpp_src_cmakelists.hpp"
 #include "dogen/generator/backends/cpp/view_models/sml_to_cpp_view_model.hpp"
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/generator/backends/cpp/cpp_backend.hpp"

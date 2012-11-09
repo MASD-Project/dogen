@@ -21,7 +21,7 @@
 #include <sstream>
 #include <ostream>
 #include <boost/algorithm/string/case_conv.hpp>
-#include "dogen/generator/backends/cpp/formatters/cpp_cmakelists.hpp"
+#include "dogen/generator/backends/cpp/formatters/cpp_src_cmakelists.hpp"
 
 namespace {
 
