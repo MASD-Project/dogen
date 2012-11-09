@@ -85,9 +85,9 @@ LAYOUT_FILE            =
 # configuration options related to warning and progress messages
 #---------------------------------------------------------------------------
 QUIET                  = YES
-WARNINGS               = YES
+WARNINGS               = NO
 WARN_IF_UNDOCUMENTED   = NO
-WARN_IF_DOC_ERROR      = YES
+WARN_IF_DOC_ERROR      = NO
 WARN_NO_PARAMDOC       = NO
 WARN_FORMAT            = "$file:$line: $text"
 WARN_LOGFILE           =
