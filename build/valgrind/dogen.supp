@@ -70,3 +70,12 @@
    fun:inflateInit2_
    fun:*
 }
+
+
+{
+   make_external_thread_data
+   Memcheck:Leak
+   ...
+   fun:_ZN5boost12_GLOBAL__N_125make_external_thread_dataEv
+   ...
+}
