@@ -49,7 +49,6 @@
 {
    libxml2_xzread
    Memcheck:Leak
-   fun:calloc
    ...
    fun:lzma_auto_decoder
    ...
