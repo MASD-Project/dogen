@@ -18,8 +18,7 @@
 # MA 02110-1301, USA.
 #
 set(version_template "${CMAKE_CURRENT_SOURCE_DIR}/cpp/version.hpp.in")
-configure_file(${version_template}
-    ${stage_inc_dir}/dogen/config/version.hpp)
+configure_file(${version_template} ${stage_inc_dir}/dogen/config/version.hpp)
 message(STATUS "Transformed version.hpp.")
 
 set(doxy_template "${CMAKE_CURRENT_SOURCE_DIR}/doxygen/dogen.in")
