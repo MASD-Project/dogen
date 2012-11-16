@@ -41,7 +41,8 @@ struct json_grammar : qi::grammar<Iterator, Skipper> {
         string = qi::lexeme['"' >> *~qi::lit('"') >> '"'];
         value = string | number | object | array | "true" | "false" | "null";
         number = qi::double_;
-        array = "[" >> value >> *("," >> value) >> "]";
+        array = (qi::lexeme["["] >> "]") |
+            ("[" >> value >> *("," >> value) >> "]");
     }
 };
 
