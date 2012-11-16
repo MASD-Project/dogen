@@ -1,5 +1,6 @@
 #+title: Release Notes for Sprint 20
 #+options: date:nil toc:nil author:nil num:nil
+#+todo: ANALYSIS IMPLEMENTATION TESTING | COMPLETED CANCELLED
 #+tags: story(s) epic(e) task(t) note(n) spike(p)
 
 * Release Notes
@@ -8,7 +9,37 @@ This file contains all stories that were closed during sprint 20.
 
 ** Development Stories Implemented
 
-*** Organise the valgrind suppressions a bit better
+*** COMPLETED Add support for boost and STL models                    :story:
+    CLOSED: [2012-11-16 Fri 10:03]
+
+Allow the user to create classes that make use of the most common
+boost and STL types such as =std::list=, =std::vector=,
+=boost::shared_ptr=, etc.
+
+*** COMPLETED Allow the creation of models dependent on other models  :story:
+    CLOSED: [2012-11-16 Fri 10:02]
+
+*** COMPLETED Implement typed keys based on UML stereotype            :story:
+    CLOSED: [2012-11-16 Fri 10:06]
+
+At present we have a single versioned/unversioned key for all model
+types, resulting in "un-typed" code; e.g. a key for a model
+configuration could be used to retrieve a time series configuration by
+mistake. Instead what we need is to have different types for each of
+these keys such that one cannot use them with incorrect types.
+
+We should also generate keys only for types which are marked with a
+well known stereotype or else we will generate lots of unnecessary
+classes. Originally the stereotype was called =cacheable=.
+
+*** COMPLETED Rename cacheable UML stereotype to keyable              :story:
+    CLOSED: [2012-11-16 Fri 10:02]
+
+Types that have keys are not cacheable, they just happen to be
+suitable for using them in the cache. Rename this stereotype.
+
+*** COMPLETED Organise the valgrind suppressions a bit better         :story:
+    CLOSED: [2012-11-16 Fri 10:02]
 
 In Sprint 9 we fixed a whole bunch of strange valgrind memory leak
 warnings that were coming from the guts of boost threading and boost
@@ -17,17 +48,22 @@ should be able to summarise all of those suppressions to only one or
 two (there are some twenty at the moment). We also need to
 double-check with boost if these are real problems.
 
-*** Add test model with versioning disabled
+*** COMPLETED Add test model with versioning disabled                 :story:
+    CLOSED: [2012-11-16 Fri 10:02]
 
 We don't seem to have a test model for the versioning disabled
 scenario.
 
-*** Rename cacheable to keyable
+*** COMPLETED Check if we have a test model with versioning disabled  :story:
+    CLOSED: [2012-11-16 Fri 10:02]
 
-Types that have keys are not cacheable, they just happen to be
-suitable for using them in the cache. Rename this stereotype.
+It seems all the test models are using versioning. We need a test
+without it.
 
-*** Ignore files and folders based on regex
+*** COMPLETED Allow the installation of multiple versions side-by-side :story:
+    CLOSED: [2012-11-16 Fri 10:16]
+*** COMPLETED Ignore files and folders based on regex                 :story:
+    CLOSED: [2012-11-16 Fri 10:02]
 
 We need the ability to specify one or more regular expressions that
 will be used by dogen to ignore files and folders. This would allow
@@ -40,12 +76,8 @@ it to filter the list of files to delete.
 
 We could also have some predefined ignores such as =spec=.
 
-*** Check if we have a test model with versioning disabled
-
-It seems all the test models are using versioning. We need a test
-without it.
-
-*** Add support for serialisation register types
+*** COMPLETED Add support for inheritance in serialisation            :story:
+    CLOSED: [2012-11-16 Fri 10:02]
 
 - create model dependencies, automatically populated. just a list of
   qualified names.
@@ -66,7 +98,8 @@ without it.
   all dependent models' registrars' before doing its own.
 - remove all of the existing export machinery.
 
-*** Code generation of exception classes
+*** COMPLETED Code generation of exception classes                    :story:
+    CLOSED: [2012-11-16 Fri 10:02]
 
 The code generator should generate exception classes too. We need some
 form of attribute (perhaps a Dia stereotype) to mark the class as an
@@ -76,13 +109,15 @@ not. We may need to have a form of inheriting from a base exception
 for a given model. We also need to be able to inherit from other
 exceptions in a model.
 
-*** Create packages for doxygen
+*** COMPLETED Create packages for doxygen                             :story:
+    CLOSED: [2012-11-16 Fri 10:02]
 
 We need to find a way of creating packages that install files from the
 output directory. The doxygen packages will be very large so its not
 clear they will be uploaded to github.
 
-*** Make code generation decisions based on class hierarchy
+*** COMPLETED Make code generation decisions based on class hierarchy :story:
+    CLOSED: [2012-11-16 Fri 10:02]
 
 - if a class is not part of a class hierarchy, we could define the IO
   facet externally. If a class is part of a hierarchy we need to have
@@ -93,27 +128,31 @@ clear they will be uploaded to github.
   also add a create method.
 - if a class only has primitives we can avoid defining a swap method.
 
-*** Create release and debug builds
+*** COMPLETED Create release and debug builds                         :story:
+    CLOSED: [2012-11-16 Fri 10:02]
 
 At present all our builds are have debug symbols and no
 optimisation. We need to setup debug and release builds. We should
 append a post-fix of =-release= and =-debug= to the build name.
 
-*** Create forward declaration facet
+*** COMPLETED Create forward declaration facet                        :story:
+    CLOSED: [2012-11-16 Fri 10:02]
 
 We should aim to define almost nothing in header files where possible
 and forward declare. To make life easier we could have a =_fwd= header
 for each entity which only forward declares it. It would be useful for
 IO and for the behavioural code.
 
-*** Have licence and copyright information in packages
+*** COMPLETED Have licence and copyright information in packages      :story:
+    CLOSED: [2012-11-16 Fri 10:02]
 
 We need to copy LICENCE.TXT from the doc directory in the build process
 
 Files ReadMe.txt and Copyright.txt were created in
 cpack/CMakeLists.txt only to allow the packaging process
 
-*** Create development packages
+*** COMPLETED Create development packages                             :story:
+    CLOSED: [2012-11-16 Fri 10:02]
 
 We need to create packages with header files and shared/static
 libraries, so that one can write client code without recompiling
