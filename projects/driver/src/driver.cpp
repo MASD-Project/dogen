@@ -49,7 +49,8 @@ void help(const std::string& d) {
 void version() {
     std::cout << "dogen v" << DOGEN_VERSION << std::endl
               << "Copyright (C) 2012 Kitanda." << std::endl
-              << "Licence: Kitanda Proprietary Software Licence."
+              << "License: GPLv3 - GNU GPL version 3 or later "
+              << "<http://gnu.org/licenses/gpl.html>."
               << std::endl;
 }
 
