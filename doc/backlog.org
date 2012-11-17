@@ -10,6 +10,32 @@ This file contains all stories that haven't been assigned to a sprint.
 
 Stories that we intend to look at, at some point.
 
+*** shared pointer to vector fails to build
+
+If one has a property with type
+=boost::shared_ptr<std::vector<std::string>>=, we get the following
+error:
+
+: /home/marco/Development/kitanda/output/dogen/stage/bin/demo/demo_20/sprint_20/src/test_data/my_class_td.cpp: In function ‘boost::shared_ptr<std::vector<std::basic_string<char> > > {anonymous}::create_boost_shared_ptr_std_vector_std_string_(unsigned int)’:
+: /home/marco/Development/kitanda/output/dogen/stage/bin/demo/demo_20/sprint_20/src/test_data/my_class_td.cpp:47:50: error: ‘create_std_vector_std_string_ptr’ was not declared in this scope
+
+This is because the generated code is not creating a method to new
+vectors:
+
+: std::vector<std::string> create_std_vector_std_string(unsigned int position) {
+:    std::vector<std::string> r;
+:    for (unsigned int i(0); i < 10; ++i) {
+:        r.push_back(create_std_string(position + i));
+:    }
+:    return r;
+:}
+:
+:boost::shared_ptr<std::vector<std::string> >
+:create_boost_shared_ptr_std_vector_std_string_(unsigned int position) {
+:    boost::shared_ptr<std::vector<std::string> > r(
+:        create_std_vector_std_string_ptr(position));
+:    return r;
+:}
 
 *** Strange logging behaviour in tests
 
