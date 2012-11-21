@@ -401,7 +401,7 @@ void dia_dfs_visitor::process_dia_object(const dogen::dia::object& o) {
 
             const auto st(parse_stereotype(v));
             using dogen::dia::stereotypes;
-            pod.is_versioned(st == stereotypes::versioned);
+            pod.is_versioned(st == stereotypes::entity);
         } else if (a.name() == dia_documentation) {
             const std::string doc(transform_string_attribute(a));
             pod.documentation(doc);

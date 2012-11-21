@@ -417,7 +417,7 @@
 								<item>
 									<which>5</which>
 									<value>
-										<value>#versioned#</value>
+										<value>#entity#</value>
 									</value>
 								</item>
 							</values>

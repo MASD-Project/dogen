@@ -29,13 +29,15 @@ namespace dogen {
 namespace dia {
 
 /**
- * @brief Identifier for the type of Dia object.
+ * @brief Valid UML stereotypes for dogen
  */
 enum class stereotypes : unsigned int {
     invalid = 0,
     enumeration = 1,
     exception = 2,
-    versioned = 3
+    entity = 3,
+    value = 4,
+    service = 5
 };
 
 } }

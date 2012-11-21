@@ -34,7 +34,9 @@ const std::string invalid_stereotype("Invalid value for stereotype: ");
 
 const std::string enumeration("enumeration");
 const std::string exception("exception");
-const std::string versioned("versioned");
+const std::string entity("entity");
+const std::string value("value");
+const std::string service("service");
 
 }
 
@@ -71,8 +73,14 @@ stereotypes parse_stereotype(const std::string& st) {
     if (st == exception)
         return stereotypes::exception;
 
-    if (st == versioned)
-        return stereotypes::versioned;
+    if (st == entity)
+        return stereotypes::entity;
+
+    if (st == value)
+        return stereotypes::value;
+
+    if (st == service)
+        return stereotypes::service;
 
     throw dogen::utility::exception::exception(invalid_stereotype + st);
 }

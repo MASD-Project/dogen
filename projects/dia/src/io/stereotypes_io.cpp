@@ -30,7 +30,9 @@ const std::string invalid("invalid");
 const std::string enumeration("enumeration");
 const std::string exception("exception");
 const std::string versioned("versioned");
-
+const std::string entity("entity");
+const std::string value("value");
+const std::string service("service");
 const std::string error_message("Invalid or unexpected object type");
 
 }
@@ -46,8 +48,12 @@ std::ostream& operator<<(std::ostream& stream, stereotypes value) {
         return stream << prefix << enumeration;
     case stereotypes::exception:
         return stream << prefix << exception;
-    case stereotypes::versioned:
-        return stream << prefix << versioned;
+    case stereotypes::entity:
+        return stream << prefix << entity;
+    case stereotypes::value:
+        return stream << prefix << value;
+    case stereotypes::service:
+        return stream << prefix << service;
     default:
         break;
     }
