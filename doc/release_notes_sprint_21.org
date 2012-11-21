@@ -26,6 +26,17 @@ files to the includers. A better solution would be to add a stereotype
 of =manual= which would result in automatic ignoring of files for
 these types as well as adding them to includers.
 
+*** Add support for _manual_ types
+
+Sometimes one requires data structures which are just too complicated
+for code generation, such as =boost::multi_index=. In this cases one
+should add these domain types manually, together with their
+serialisation, etc. However, if one then wants to make use of these
+types from trivial types, the code generator will fail to resolve. We
+need a stereotype of _manual_ (or some such name) which allows the
+type to be declared to the type system but no further processing
+(including generation) will occur.
+
 *** COMPLETED Reduce size of doxygen packages
     CLOSED: [2012-11-21 Wed 16:37]
 

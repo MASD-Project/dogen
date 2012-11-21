@@ -366,17 +366,6 @@ something of the sort.
 At present the JSON =__type__= is only the class name. It should
 really be fully qualified.
 
-*** Add support for _manual_ types
-
-Sometimes one requires data structures which are just too complicated
-for code generation, such as =boost::multi_index=. In this cases one
-should add these domain types manually, together with their
-serialisation, etc. However, if one then wants to make use of these
-types from trivial types, the code generator will fail to resolve. We
-need a stereotype of _manual_ (or some such name) which allows the
-type to be declared to the type system but no further processing
-(including generation) will occur.
-
 *** Add support for boost variant
 
 In order to be able to code generate the dia model we need support for
