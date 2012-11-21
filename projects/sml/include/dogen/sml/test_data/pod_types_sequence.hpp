@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_SML_TEST_DATA_POD_SEQUENCE_HPP
-#define DOGEN_SML_TEST_DATA_POD_SEQUENCE_HPP
+#ifndef DOGEN_SML_TEST_DATA_POD_TYPES_SEQUENCE_HPP
+#define DOGEN_SML_TEST_DATA_POD_TYPES_SEQUENCE_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -27,9 +27,7 @@
 
 #include "dogen/utility/test_data/generator.hpp"
 #include "dogen/utility/test_data/sequence.hpp"
-#include "dogen/sml/domain/pod.hpp"
-#include "dogen/sml/test_data/property_sequence.hpp"
-#include "dogen/sml/test_data/qualified_name_sequence.hpp"
+#include "dogen/sml/domain/pod_types.hpp"
 
 namespace dogen {
 namespace sml {
@@ -42,36 +40,22 @@ namespace detail {
  *
  * @see sequence.
  */
-class pod_generator {
+class pod_types_generator {
 public:
-    typedef dogen::sml::pod result_type;
+    typedef dogen::sml::pod_types result_type;
 
 public:
     result_type next_term(const unsigned int position) {
-        dogen::sml::pod result;
-        dogen::sml::test_data::property_sequence pseq;
-        dogen::sml::test_data::qualified_name_sequence qseq;
-        std::vector<dogen::sml::property> properties;
+        dogen::sml::pod_types name = dogen::sml::pod_types();
 
-        if (position == 0) {
-            properties.push_back(pseq());
-        } else if (position == 1) {
-            result.generate(true);
-            pseq();
-            properties.push_back(pseq());
-        } else {
-            pseq();
-            pseq();
-            properties.push_back(pseq());
-        }
+        if (position == 0)
+            return pod_types::sequence_container;
+        else if (position == 1)
+            return pod_types::associative_container;
+        else
+            return pod_types::smart_pointer;
 
-        result.generate(position % 2);
-        result.properties(properties);
-        result.is_parent(false);
-        result.category_type(category_types::user_defined);
-        result.pod_type(pod_types::value);
-        result.number_of_type_arguments(0);
-        return result;
+        return name;
     }
 
     unsigned int length() const { return(3); }
@@ -79,7 +63,8 @@ public:
 
 }
 
-typedef utility::test_data::sequence<detail::pod_generator> pod_sequence;
+typedef utility::test_data::sequence<
+    detail::pod_types_generator> pod_types_sequence;
 
 } } }
 

@@ -32,8 +32,8 @@
 
 namespace {
 
-const std::string test_module("hashing");
-const std::string test_suite("sml_spec");
+const std::string test_module("sml");
+const std::string test_suite("hashing");
 const std::string documentation("@brief sample doc");
 
 template<typename Sequence>

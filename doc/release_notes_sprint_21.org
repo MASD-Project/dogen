@@ -72,11 +72,13 @@ type to be declared to the type system but no further processing
 Rename the code generated directory =domain= to =types= as it doesn't
 house the domain, but its types.
 
-**** Rename =versioned= stereotype to =entity=                         :task:
+**** COMPLETED Rename =versioned= stereotype to =entity=               :task:
+     CLOSED: [2012-11-21 Wed 21:31]
 
 The rationale is explained in the above description.
 
-**** Add stereotype of =value=                                         :task:
+**** COMPLETED Add stereotype of =value=                               :task:
+     CLOSED: [2012-11-21 Wed 21:31]
 
 This is the default case; effectively stereotype does nothing.
 

@@ -24,6 +24,7 @@
 #include "dogen/utility/io/vector_io.hpp"
 #include "dogen/utility/io/list_io.hpp"
 #include "dogen/sml/io/category_types_io.hpp"
+#include "dogen/sml/io/pod_types_io.hpp"
 #include "dogen/sml/io/property_io.hpp"
 #include "dogen/sml/io/qualified_name_io.hpp"
 #include "dogen/sml/domain/pod.hpp"
@@ -41,12 +42,9 @@ bool pod::operator==(const pod& rhs) const {
         generate_ == rhs.generate_ &&
         is_parent_ == rhs.is_parent_ &&
         category_type_ == rhs.category_type_ &&
+        pod_type_ == rhs.pod_type_ &&
         documentation_ == rhs.documentation_ &&
-        number_of_type_arguments_ == rhs.number_of_type_arguments_ &&
-        is_sequence_container_ == rhs.is_sequence_container_ &&
-        is_associative_container_ == rhs.is_associative_container_ &&
-        is_smart_pointer_ == rhs.is_smart_pointer_ &&
-        is_versioned_ == rhs.is_versioned_;
+        number_of_type_arguments_ == rhs.number_of_type_arguments_;
 }
 
 void pod::to_stream(std::ostream& stream) const {
@@ -62,14 +60,9 @@ void pod::to_stream(std::ostream& stream) const {
            << "\"generate\": " << generate_ << ", "
            << "\"is_parent\": " << is_parent_ << ", "
            << "\"category_type\":" << "\"" << category_type_ << "\", "
+           << "\"pod_type\":" << "\"" << pod_type_ << "\", "
            << "\"documentation\":" << "\"" << documentation_ << "\", "
            << "\"number_of_type_arguments\":" << number_of_type_arguments_
-           << ", "
-           << "\"is_sequence_container\":" << is_sequence_container_ << ", "
-           << "\"is_associative_container\":" << is_associative_container_
-           << ", "
-           << "\"is_smart_pointer\":" << is_smart_pointer_ << ", "
-           << "\"is_versioned\":" << is_versioned_
            << " }";
 }
 

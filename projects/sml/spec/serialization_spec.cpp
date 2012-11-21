@@ -37,8 +37,8 @@ template<typename Archive> void register_types(Archive& ar) {
 
 namespace {
 
-const std::string test_module("serialization");
-const std::string test_suite("sml_spec");
+const std::string test_module("sml");
+const std::string test_suite("serialization");
 const std::string documentation("@brief sample doc");
 
 /**

@@ -55,21 +55,19 @@ sml::primitive std_model_factory::create_primitive(const std::string& name) {
 }
 
 sml::pod std_model_factory::
-create_pod(const std::string& name, bool is_sequence, bool is_associative) {
+create_pod(const std::string& name, sml::pod_types pt) {
     sml::qualified_name q;
     q.type_name(name);
     q.meta_type(sml::meta_types::pod);
     q.model_name(model_name);
     sml::pod r;
     r.name(q);
-    if (is_sequence)
+    if (pt == sml::pod_types::sequence_container)
         r.number_of_type_arguments(1);
-    else if (is_associative)
+    else if (pt == sml::pod_types::associative_container)
         r.number_of_type_arguments(2);
 
-    r.is_sequence_container(is_sequence);
-    r.is_associative_container(is_associative);
-    r.is_smart_pointer(false);
+    r.pod_type(pt);
     return r;
 }
 
@@ -83,25 +81,25 @@ sml::model std_model_factory::create() {
     //         primitives.insert(std::make_pair(p.name(), p));
     //     });
 
-    const auto pi([&](std::string name, bool is_sequence, bool is_associative) {
-            pod p(create_pod(name, is_sequence, is_associative));
+    const auto pi([&](std::string name, sml::pod_types pt) {
+            pod p(create_pod(name, pt));
             pods.insert(std::make_pair(p.name(), p));
         });
 
-    pi(string_name, false, false);
-    pi(vector_name, true, false);
-    pi(deque_name, true, false);
-    pi(array_name, true, false);
-    pi(list_name, true, false);
-    pi(forward_list_name, true, false);
+    pi(string_name, sml::pod_types::value);
+    pi(vector_name, sml::pod_types::sequence_container);
+    pi(deque_name, sml::pod_types::sequence_container);
+    pi(array_name, sml::pod_types::sequence_container);
+    pi(list_name, sml::pod_types::sequence_container);
+    pi(forward_list_name, sml::pod_types::sequence_container);
 
-    pi(set_name, false, true);
-    pi(multiset_name, false, true);
-    pi(unordered_set_name, false, true);
-    pi(unordered_multiset_name, false, true);
-    pi(map_name, false, true);
-    pi(multimap_name, false, true);
-    pi(unordered_map_name, false, true);
+    pi(set_name, sml::pod_types::associative_container);
+    pi(multiset_name, sml::pod_types::associative_container);
+    pi(unordered_set_name, sml::pod_types::associative_container);
+    pi(unordered_multiset_name, sml::pod_types::associative_container);
+    pi(map_name, sml::pod_types::associative_container);
+    pi(multimap_name, sml::pod_types::associative_container);
+    pi(unordered_map_name, sml::pod_types::associative_container);
 
     model r;
     r.name(model_name);

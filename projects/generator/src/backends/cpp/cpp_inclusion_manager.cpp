@@ -126,7 +126,8 @@ recurse_nested_qnames_keys(const dogen::sml::nested_qualified_name& nested_qname
     if (nested_qname.type().meta_type() == sml::meta_types::pod) {
         const auto pods(model_.pods());
         const auto i(pods.find(nested_qname.type()));
-        if (i != pods.end() && i->second.is_associative_container()) {
+        const auto ac(sml::pod_types::associative_container);
+        if (i != pods.end() && i->second.pod_type() == ac) {
             if (nested_qname.children().size() >= 1)
                 keys.push_back(nested_qname.children().front().type());
         } else {

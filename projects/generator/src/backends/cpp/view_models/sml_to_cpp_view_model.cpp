@@ -239,9 +239,11 @@ void sml_dfs_visitor::transform_nested_qualified_name(
             throw transformation_error("pod not found in pod container: " +
                 qn.type_name());
         }
-        vm.is_sequence_container(i->second.is_sequence_container());
-        vm.is_associative_container(i->second.is_associative_container());
-        vm.is_smart_pointer(i->second.is_smart_pointer());
+        const auto pt(i->second.pod_type());
+        using dogen::sml::pod_types;
+        vm.is_sequence_container(pt == pod_types::sequence_container);
+        vm.is_associative_container(pt == pod_types::associative_container);
+        vm.is_smart_pointer(pt == pod_types::smart_pointer);
     }
 
     using dogen::generator::backends::cpp::view_models::nested_type_view_model;

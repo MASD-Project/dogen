@@ -18,36 +18,32 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_GENERATOR_MODELING_BOOST_MODEL_FACTORY_HPP
-#define DOGEN_GENERATOR_MODELING_BOOST_MODEL_FACTORY_HPP
+#ifndef DOGEN_SML_DOMAIN_POD_TYPES_HPP
+#define DOGEN_SML_DOMAIN_POD_TYPES_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <string>
-#include "dogen/sml/domain/model.hpp"
-
 namespace dogen {
-namespace generator {
-namespace modeling {
+namespace sml {
 
-class boost_model_factory {
-public:
-    boost_model_factory() = delete;
-    boost_model_factory(const boost_model_factory&) = delete;
-    ~boost_model_factory() = delete;
-    boost_model_factory(boost_model_factory&&) = delete;
-    boost_model_factory& operator=(const boost_model_factory&) = delete;
-
-private:
-    static sml::primitive create_primitive(const std::string& name);
-    static sml::pod create_pod(const std::string& name, sml::pod_types pt);
-
-public:
-    static sml::model create();
+/**
+ * @brief Types of pods.
+ *
+ * We need to classify pods with regards to distinguishing properties
+ * which make code generation different.
+ */
+enum class pod_types : unsigned int {
+    invalid = 0, ///< not a valid type of pod
+    sequence_container = 1, ///< Pod is a sequence container
+    associative_container = 2, ///< Pod is an associative container
+    smart_pointer = 3, ///< Pod is a smart pointer
+    entity = 4, ///< Pod is a domain entity
+    value = 5, ///< Pod is a domain value
+    service = 6 ///< Pod is a domain service
 };
 
-} } }
+} }
 
 #endif

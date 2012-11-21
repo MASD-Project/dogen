@@ -43,22 +43,19 @@ sml::primitive boost_model_factory::create_primitive(const std::string& name) {
 }
 
 sml::pod boost_model_factory::
-create_pod(const std::string& name, bool is_sequence, bool is_associative,
-    bool is_smart_ptr) {
+create_pod(const std::string& name, sml::pod_types pt) {
     sml::qualified_name q;
     q.type_name(name);
     q.meta_type(sml::meta_types::pod);
     q.model_name(model_name);
     sml::pod r;
     r.name(q);
-    if (is_sequence)
+    if (pt == sml::pod_types::sequence_container)
         r.number_of_type_arguments(1);
-    else if (is_associative)
+    else if (pt == sml::pod_types::associative_container)
         r.number_of_type_arguments(2);
 
-    r.is_sequence_container(is_sequence);
-    r.is_associative_container(is_associative);
-    r.is_smart_pointer(is_smart_ptr);
+    r.pod_type(pt);
     return r;
 }
 
@@ -72,15 +69,14 @@ sml::model boost_model_factory::create() {
     //         primitives.insert(std::make_pair(p.name(), p));
     //     });
 
-    const auto pi([&](std::string name, bool is_sequence, bool is_associative,
-            bool is_smart_ptr) {
-            pod p(create_pod(name, is_sequence, is_associative, is_smart_ptr));
+    const auto pi([&](std::string name, sml::pod_types pt) {
+            pod p(create_pod(name, pt));
             pods.insert(std::make_pair(p.name(), p));
         });
 
-    pi(shared_ptr_name, false, false, true);
-    pi(weak_ptr_name, true, false, true);
-    pi(scoped_ptr_name, true, false, true);
+    pi(shared_ptr_name, sml::pod_types::smart_pointer);
+    pi(weak_ptr_name, sml::pod_types::smart_pointer);
+    pi(scoped_ptr_name, sml::pod_types::smart_pointer);
 
     model r;
     r.name(model_name);

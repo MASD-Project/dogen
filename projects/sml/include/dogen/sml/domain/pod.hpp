@@ -31,6 +31,7 @@
 #include <iosfwd>
 #include <utility>
 #include <boost/optional.hpp>
+#include "dogen/sml/domain/pod_types.hpp"
 #include "dogen/sml/domain/category_types.hpp"
 #include "dogen/sml/domain/property.hpp"
 #include "dogen/sml/domain/qualified_name.hpp"
@@ -55,11 +56,8 @@ private:
 public:
     pod() : generate_(false), is_parent_(false),
             category_type_(category_types::invalid),
-            number_of_type_arguments_(0),
-            is_sequence_container_(false),
-            is_associative_container_(false),
-            is_smart_pointer_(false),
-            is_versioned_(false) { }
+            pod_type_(pod_types::invalid),
+            number_of_type_arguments_(0) { }
 
     /**
      * @brief Initialises the pod.
@@ -78,16 +76,10 @@ public:
      * directly derived from this type
      * @param category_type Whether the type is user defined or one of
      * the well known system types.
+     * @param pod_type What kind of pod is this.
      * @param documentation the documentation for the pod
      * @param number_of_type_arguments If the type is a generic type,
      * how many arguments does it expect.
-     * @param is_sequence_container If true the pod is a sequence
-     * container type, false otherwise.
-     * @param is_associative_container If true the pod is a sequence
-     * container type, false otherwise.
-     * @param is_smart_pointer If true the pod represents a smart
-     * pointer, false otherwise.
-     * @param is_versioned If true the pod requires versioning support
      */
     pod(qualified_name name,
         std::vector<dogen::sml::property> properties,
@@ -95,17 +87,14 @@ public:
         boost::optional<qualified_name> original_parent_name,
         std::list<qualified_name> leaves, bool generate,
         bool is_parent, category_types category_type,
-        const std::string& documentation,
-        const unsigned int number_of_type_arguments, bool is_sequence_container,
-        bool is_associative_container, bool is_smart_pointer, bool is_versioned)
+        pod_types pod_type, const std::string& documentation,
+        const unsigned int number_of_type_arguments)
         : name_(name), properties_(properties), parent_name_(parent_name),
           original_parent_name_(original_parent_name), leaves_(leaves),
           generate_(generate), is_parent_(is_parent),
-          category_type_(category_type), documentation_(documentation),
-          number_of_type_arguments_(number_of_type_arguments),
-          is_sequence_container_(is_sequence_container),
-          is_associative_container_(is_associative_container),
-          is_smart_pointer_(is_smart_pointer), is_versioned_(is_versioned) { }
+          category_type_(category_type), pod_type_(pod_type),
+          documentation_(documentation),
+          number_of_type_arguments_(number_of_type_arguments) { }
 
     pod(pod&& rhs) : name_(std::move(rhs.name_)),
                      properties_(std::move(rhs.properties_)),
@@ -116,16 +105,10 @@ public:
                      generate_(std::move(rhs.generate_)),
                      is_parent_(std::move(rhs.is_parent_)),
                      category_type_(std::move(rhs.category_type_)),
+                     pod_type_(std::move(rhs.pod_type_)),
                      documentation_(std::move(rhs.documentation_)),
                      number_of_type_arguments_(
-                         std::move(rhs.number_of_type_arguments_)),
-                     is_sequence_container_(
-                         std::move(rhs.is_sequence_container_)),
-                     is_associative_container_(
-                         std::move(rhs.is_associative_container_)),
-                     is_smart_pointer_(
-                         std::move(rhs.is_smart_pointer_)),
-                     is_versioned_(rhs.is_versioned_) { }
+                         std::move(rhs.number_of_type_arguments_)) { }
 
 public:
     /**
@@ -206,6 +189,14 @@ public:
     /**@}*/
 
     /**
+     * @brief What kind of pod is this.
+     */
+    /**@{*/
+    sml::pod_types pod_type() const { return pod_type_; }
+    void pod_type(sml::pod_types value) { pod_type_ = value; }
+    /**@}*/
+
+    /**
      * @brief Doxygen documentation for the type.
      */
     /**@{*/
@@ -223,38 +214,6 @@ public:
     void number_of_type_arguments(const unsigned int v) {
         number_of_type_arguments_ = v;
     }
-    /**@}*/
-
-    /**
-     * @brief If true the pod is a sequence container type, false otherwise.
-     */
-    /**@{*/
-    bool is_sequence_container() const { return is_sequence_container_; }
-    void is_sequence_container(const bool v) { is_sequence_container_ = v; }
-    /**@}*/
-
-    /**
-     * @brief If true the pod is an associative container type, false otherwise.
-     */
-    /**@{*/
-    bool is_associative_container() const { return is_associative_container_; }
-    void is_associative_container(const bool v) { is_associative_container_ = v; }
-    /**@}*/
-
-    /**
-     * @brief If true the pod is a smart pointer, false otherwise.
-     */
-    /**@{*/
-    bool is_smart_pointer() const { return is_smart_pointer_; }
-    void is_smart_pointer(const bool v) { is_smart_pointer_ = v; }
-    /**@}*/
-
-    /**
-     * @brief If true the pod requires versioning support.
-     */
-    /**@{*/
-    bool is_versioned() const { return is_versioned_; }
-    void is_versioned(const bool v) { is_versioned_ = v; }
     /**@}*/
 
 public:
@@ -276,12 +235,9 @@ private:
     bool generate_;
     bool is_parent_;
     sml::category_types category_type_;
+    sml::pod_types pod_type_;
     std::string documentation_;
     unsigned int number_of_type_arguments_;
-    bool is_sequence_container_;
-    bool is_associative_container_;
-    bool is_smart_pointer_;
-    bool is_versioned_;
 };
 
 } }

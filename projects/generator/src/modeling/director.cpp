@@ -201,7 +201,7 @@ void director::inject_system_types(sml::model& m) const {
         }
 
         auto props(pod.properties());
-        if (pod.is_versioned()) {
+        if (pod.pod_type() == sml::pod_types::entity) {
             const auto versioned_pod(create_key_system_pod(pod, is_versioned));
             new_pods.insert(std::make_pair(versioned_pod.name(), versioned_pod));
 

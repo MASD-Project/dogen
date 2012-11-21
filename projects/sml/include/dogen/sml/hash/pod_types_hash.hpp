@@ -18,36 +18,26 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_GENERATOR_MODELING_BOOST_MODEL_FACTORY_HPP
-#define DOGEN_GENERATOR_MODELING_BOOST_MODEL_FACTORY_HPP
+#ifndef DOGEN_SML_HASH_META_TYPE_HASH_HPP
+#define DOGEN_SML_HASH_META_TYPE_HASH_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <string>
-#include "dogen/sml/domain/model.hpp"
+#include <functional>
+#include "dogen/sml/domain/pod_types.hpp"
 
-namespace dogen {
-namespace generator {
-namespace modeling {
+namespace std {
 
-class boost_model_factory {
+template<>
+class hash<dogen::sml::pod_types> {
 public:
-    boost_model_factory() = delete;
-    boost_model_factory(const boost_model_factory&) = delete;
-    ~boost_model_factory() = delete;
-    boost_model_factory(boost_model_factory&&) = delete;
-    boost_model_factory& operator=(const boost_model_factory&) = delete;
-
-private:
-    static sml::primitive create_primitive(const std::string& name);
-    static sml::pod create_pod(const std::string& name, sml::pod_types pt);
-
-public:
-    static sml::model create();
+    size_t operator()(dogen::sml::pod_types value) const {
+        return std::hash<unsigned int>()(static_cast<unsigned int>(value));
+    }
 };
 
-} } }
+}
 
 #endif

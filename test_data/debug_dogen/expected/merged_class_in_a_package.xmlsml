@@ -109,12 +109,9 @@
 				<generate>1</generate>
 				<is_parent>0</is_parent>
 				<category_type>2</category_type>
+				<pod_type>0</pod_type>
 				<documentation></documentation>
 				<number_of_type_arguments>0</number_of_type_arguments>
-				<is_sequence_container>0</is_sequence_container>
-				<is_associative_container>0</is_associative_container>
-				<is_smart_pointer>0</is_smart_pointer>
-				<is_versioned>0</is_versioned>
 			</second>
 		</item>
 		<item>
@@ -162,12 +159,9 @@
 				<generate>0</generate>
 				<is_parent>0</is_parent>
 				<category_type>0</category_type>
+				<pod_type>3</pod_type>
 				<documentation></documentation>
 				<number_of_type_arguments>0</number_of_type_arguments>
-				<is_sequence_container>0</is_sequence_container>
-				<is_associative_container>0</is_associative_container>
-				<is_smart_pointer>1</is_smart_pointer>
-				<is_versioned>0</is_versioned>
 			</second>
 		</item>
 		<item>
@@ -215,12 +209,9 @@
 				<generate>0</generate>
 				<is_parent>0</is_parent>
 				<category_type>0</category_type>
+				<pod_type>3</pod_type>
 				<documentation></documentation>
-				<number_of_type_arguments>1</number_of_type_arguments>
-				<is_sequence_container>1</is_sequence_container>
-				<is_associative_container>0</is_associative_container>
-				<is_smart_pointer>1</is_smart_pointer>
-				<is_versioned>0</is_versioned>
+				<number_of_type_arguments>0</number_of_type_arguments>
 			</second>
 		</item>
 		<item>
@@ -268,12 +259,9 @@
 				<generate>0</generate>
 				<is_parent>0</is_parent>
 				<category_type>0</category_type>
+				<pod_type>2</pod_type>
 				<documentation></documentation>
 				<number_of_type_arguments>2</number_of_type_arguments>
-				<is_sequence_container>0</is_sequence_container>
-				<is_associative_container>1</is_associative_container>
-				<is_smart_pointer>0</is_smart_pointer>
-				<is_versioned>0</is_versioned>
 			</second>
 		</item>
 		<item>
@@ -321,12 +309,9 @@
 				<generate>0</generate>
 				<is_parent>0</is_parent>
 				<category_type>0</category_type>
+				<pod_type>3</pod_type>
 				<documentation></documentation>
-				<number_of_type_arguments>1</number_of_type_arguments>
-				<is_sequence_container>1</is_sequence_container>
-				<is_associative_container>0</is_associative_container>
-				<is_smart_pointer>1</is_smart_pointer>
-				<is_versioned>0</is_versioned>
+				<number_of_type_arguments>0</number_of_type_arguments>
 			</second>
 		</item>
 		<item>
@@ -374,12 +359,9 @@
 				<generate>0</generate>
 				<is_parent>0</is_parent>
 				<category_type>0</category_type>
+				<pod_type>2</pod_type>
 				<documentation></documentation>
 				<number_of_type_arguments>2</number_of_type_arguments>
-				<is_sequence_container>0</is_sequence_container>
-				<is_associative_container>1</is_associative_container>
-				<is_smart_pointer>0</is_smart_pointer>
-				<is_versioned>0</is_versioned>
 			</second>
 		</item>
 		<item>
@@ -505,12 +487,9 @@
 				<generate>1</generate>
 				<is_parent>0</is_parent>
 				<category_type>1</category_type>
+				<pod_type>4</pod_type>
 				<documentation></documentation>
 				<number_of_type_arguments>0</number_of_type_arguments>
-				<is_sequence_container>0</is_sequence_container>
-				<is_associative_container>0</is_associative_container>
-				<is_smart_pointer>0</is_smart_pointer>
-				<is_versioned>1</is_versioned>
 			</second>
 		</item>
 		<item>
@@ -558,12 +537,9 @@
 				<generate>0</generate>
 				<is_parent>0</is_parent>
 				<category_type>0</category_type>
+				<pod_type>2</pod_type>
 				<documentation></documentation>
 				<number_of_type_arguments>2</number_of_type_arguments>
-				<is_sequence_container>0</is_sequence_container>
-				<is_associative_container>1</is_associative_container>
-				<is_smart_pointer>0</is_smart_pointer>
-				<is_versioned>0</is_versioned>
 			</second>
 		</item>
 		<item>
@@ -611,12 +587,9 @@
 				<generate>0</generate>
 				<is_parent>0</is_parent>
 				<category_type>0</category_type>
+				<pod_type>2</pod_type>
 				<documentation></documentation>
 				<number_of_type_arguments>2</number_of_type_arguments>
-				<is_sequence_container>0</is_sequence_container>
-				<is_associative_container>1</is_associative_container>
-				<is_smart_pointer>0</is_smart_pointer>
-				<is_versioned>0</is_versioned>
 			</second>
 		</item>
 		<item>
@@ -664,12 +637,9 @@
 				<generate>0</generate>
 				<is_parent>0</is_parent>
 				<category_type>0</category_type>
+				<pod_type>1</pod_type>
 				<documentation></documentation>
 				<number_of_type_arguments>1</number_of_type_arguments>
-				<is_sequence_container>1</is_sequence_container>
-				<is_associative_container>0</is_associative_container>
-				<is_smart_pointer>0</is_smart_pointer>
-				<is_versioned>0</is_versioned>
 			</second>
 		</item>
 		<item>
@@ -744,12 +714,9 @@
 				<generate>1</generate>
 				<is_parent>0</is_parent>
 				<category_type>3</category_type>
+				<pod_type>0</pod_type>
 				<documentation></documentation>
 				<number_of_type_arguments>0</number_of_type_arguments>
-				<is_sequence_container>0</is_sequence_container>
-				<is_associative_container>0</is_associative_container>
-				<is_smart_pointer>0</is_smart_pointer>
-				<is_versioned>0</is_versioned>
 			</second>
 		</item>
 		<item>
@@ -797,12 +764,9 @@
 				<generate>0</generate>
 				<is_parent>0</is_parent>
 				<category_type>0</category_type>
+				<pod_type>2</pod_type>
 				<documentation></documentation>
 				<number_of_type_arguments>2</number_of_type_arguments>
-				<is_sequence_container>0</is_sequence_container>
-				<is_associative_container>1</is_associative_container>
-				<is_smart_pointer>0</is_smart_pointer>
-				<is_versioned>0</is_versioned>
 			</second>
 		</item>
 		<item>
@@ -850,12 +814,9 @@
 				<generate>0</generate>
 				<is_parent>0</is_parent>
 				<category_type>0</category_type>
+				<pod_type>5</pod_type>
 				<documentation></documentation>
 				<number_of_type_arguments>0</number_of_type_arguments>
-				<is_sequence_container>0</is_sequence_container>
-				<is_associative_container>0</is_associative_container>
-				<is_smart_pointer>0</is_smart_pointer>
-				<is_versioned>0</is_versioned>
 			</second>
 		</item>
 		<item>
@@ -903,12 +864,9 @@
 				<generate>0</generate>
 				<is_parent>0</is_parent>
 				<category_type>0</category_type>
+				<pod_type>1</pod_type>
 				<documentation></documentation>
 				<number_of_type_arguments>1</number_of_type_arguments>
-				<is_sequence_container>1</is_sequence_container>
-				<is_associative_container>0</is_associative_container>
-				<is_smart_pointer>0</is_smart_pointer>
-				<is_versioned>0</is_versioned>
 			</second>
 		</item>
 		<item>
@@ -956,12 +914,9 @@
 				<generate>0</generate>
 				<is_parent>0</is_parent>
 				<category_type>0</category_type>
+				<pod_type>1</pod_type>
 				<documentation></documentation>
 				<number_of_type_arguments>1</number_of_type_arguments>
-				<is_sequence_container>1</is_sequence_container>
-				<is_associative_container>0</is_associative_container>
-				<is_smart_pointer>0</is_smart_pointer>
-				<is_versioned>0</is_versioned>
 			</second>
 		</item>
 		<item>
@@ -1009,12 +964,9 @@
 				<generate>0</generate>
 				<is_parent>0</is_parent>
 				<category_type>0</category_type>
+				<pod_type>1</pod_type>
 				<documentation></documentation>
 				<number_of_type_arguments>1</number_of_type_arguments>
-				<is_sequence_container>1</is_sequence_container>
-				<is_associative_container>0</is_associative_container>
-				<is_smart_pointer>0</is_smart_pointer>
-				<is_versioned>0</is_versioned>
 			</second>
 		</item>
 		<item>
@@ -1062,12 +1014,9 @@
 				<generate>0</generate>
 				<is_parent>0</is_parent>
 				<category_type>0</category_type>
+				<pod_type>1</pod_type>
 				<documentation></documentation>
 				<number_of_type_arguments>1</number_of_type_arguments>
-				<is_sequence_container>1</is_sequence_container>
-				<is_associative_container>0</is_associative_container>
-				<is_smart_pointer>0</is_smart_pointer>
-				<is_versioned>0</is_versioned>
 			</second>
 		</item>
 		<item>
@@ -1115,12 +1064,9 @@
 				<generate>0</generate>
 				<is_parent>0</is_parent>
 				<category_type>0</category_type>
+				<pod_type>2</pod_type>
 				<documentation></documentation>
 				<number_of_type_arguments>2</number_of_type_arguments>
-				<is_sequence_container>0</is_sequence_container>
-				<is_associative_container>1</is_associative_container>
-				<is_smart_pointer>0</is_smart_pointer>
-				<is_versioned>0</is_versioned>
 			</second>
 		</item>
 		<item>
@@ -1168,12 +1114,9 @@
 				<generate>0</generate>
 				<is_parent>0</is_parent>
 				<category_type>0</category_type>
+				<pod_type>2</pod_type>
 				<documentation></documentation>
 				<number_of_type_arguments>2</number_of_type_arguments>
-				<is_sequence_container>0</is_sequence_container>
-				<is_associative_container>1</is_associative_container>
-				<is_smart_pointer>0</is_smart_pointer>
-				<is_versioned>0</is_versioned>
 			</second>
 		</item>
 	</pods>

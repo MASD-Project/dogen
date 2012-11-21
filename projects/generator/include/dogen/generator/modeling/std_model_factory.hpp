@@ -42,8 +42,7 @@ public:
 
 private:
     static sml::primitive create_primitive(const std::string& name);
-    static sml::pod create_pod(const std::string& name, bool is_sequence,
-        bool is_associative);
+    static sml::pod create_pod(const std::string& name, sml::pod_types pt);
 
 
 public:
