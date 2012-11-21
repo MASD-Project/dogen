@@ -26,7 +26,7 @@
 #endif
 
 #include <iosfwd>
-#include "dogen/all_primitives/domain/a_class.hpp"
+#include "dogen/all_primitives/types/a_class.hpp"
 
 namespace dogen {
 namespace all_primitives {

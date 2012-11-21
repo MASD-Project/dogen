@@ -26,7 +26,7 @@
 #endif
 
 #include <boost/serialization/nvp.hpp>
-#include "dogen/enumeration/domain/pkg1/shape_types.hpp"
+#include "dogen/enumeration/types/pkg1/shape_types.hpp"
 
 template<class Archive>
 void serialize(Archive& ar, dogen::enumeration::pkg1::shape_types& v, unsigned int /*version*/){

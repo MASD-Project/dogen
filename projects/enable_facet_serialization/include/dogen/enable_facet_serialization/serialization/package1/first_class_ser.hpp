@@ -26,7 +26,7 @@
 #endif
 
 #include <boost/serialization/split_free.hpp>
-#include "dogen/enable_facet_serialization/domain/package1/first_class.hpp"
+#include "dogen/enable_facet_serialization/types/package1/first_class.hpp"
 
 BOOST_SERIALIZATION_SPLIT_FREE(dogen::enable_facet_serialization::package1::first_class)
 namespace boost {

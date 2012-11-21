@@ -26,7 +26,7 @@
 #endif
 
 #include <boost/serialization/split_free.hpp>
-#include "dogen/enumeration/domain/a_class.hpp"
+#include "dogen/enumeration/types/a_class.hpp"
 
 BOOST_SERIALIZATION_SPLIT_FREE(dogen::enumeration::a_class)
 namespace boost {

@@ -26,7 +26,7 @@
 #endif
 
 #include <functional>
-#include "dogen/enumeration/domain/pkg1/shape_types.hpp"
+#include "dogen/enumeration/types/pkg1/shape_types.hpp"
 
 namespace std {
 

@@ -26,7 +26,7 @@
 #endif
 
 #include <boost/serialization/nvp.hpp>
-#include "dogen/enumeration/domain/colour_types.hpp"
+#include "dogen/enumeration/types/colour_types.hpp"
 
 template<class Archive>
 void serialize(Archive& ar, dogen::enumeration::colour_types& v, unsigned int /*version*/){

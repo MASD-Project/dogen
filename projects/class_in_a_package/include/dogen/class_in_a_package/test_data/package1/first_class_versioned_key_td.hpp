@@ -25,7 +25,7 @@
 #pragma once
 #endif
 
-#include "dogen/class_in_a_package/domain/package1/first_class_versioned_key.hpp"
+#include "dogen/class_in_a_package/types/package1/first_class_versioned_key.hpp"
 
 namespace dogen {
 namespace class_in_a_package {

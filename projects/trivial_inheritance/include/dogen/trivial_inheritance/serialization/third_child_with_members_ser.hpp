@@ -27,7 +27,7 @@
 
 #include <boost/serialization/assume_abstract.hpp>
 #include <boost/serialization/split_free.hpp>
-#include "dogen/trivial_inheritance/domain/third_child_with_members.hpp"
+#include "dogen/trivial_inheritance/types/third_child_with_members.hpp"
 
 BOOST_SERIALIZATION_SPLIT_FREE(dogen::trivial_inheritance::third_child_with_members)
 BOOST_SERIALIZATION_ASSUME_ABSTRACT(dogen::trivial_inheritance::third_child_with_members)

@@ -26,7 +26,7 @@
 #endif
 
 #include <boost/serialization/split_free.hpp>
-#include "dogen/two_layers_with_objects/domain/Package_2/class_2.hpp"
+#include "dogen/two_layers_with_objects/types/Package_2/class_2.hpp"
 
 BOOST_SERIALIZATION_SPLIT_FREE(dogen::two_layers_with_objects::Package_2::class_2)
 namespace boost {

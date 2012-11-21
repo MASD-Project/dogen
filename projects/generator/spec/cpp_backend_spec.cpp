@@ -40,13 +40,13 @@ const std::string test_suite("cpp_backend_spec");
 const std::string test_model_name("test");
 const std::string class_name("first_class");
 const std::string header_guard_name(
-    "CLASS_IN_A_PACKAGE_DOMAIN_PACKAGE1_FIRST_CLASS_HPP");
+    "CLASS_IN_A_PACKAGE_TYPES_PACKAGE1_FIRST_CLASS_HPP");
 const std::string user_dependency(
-    "class_in_a_package/domain/package1/first_class.hpp");
+    "class_in_a_package/types/package1/first_class.hpp");
 const std::string versioned_dependency(
-    "class_in_a_package/domain/versioned_key.hpp");
+    "class_in_a_package/types/versioned_key.hpp");
 const std::string unversioned_dependency(
-    "class_in_a_package/domain/unversioned_key.hpp");
+    "class_in_a_package/types/unversioned_key.hpp");
 
 const std::string namespace_1("class_in_a_package");
 const std::string namespace_2("package1");

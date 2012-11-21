@@ -26,7 +26,7 @@
 #endif
 
 #include <boost/serialization/split_free.hpp>
-#include "dogen/disable_cmakelists/domain/package1/first_class.hpp"
+#include "dogen/disable_cmakelists/types/package1/first_class.hpp"
 
 BOOST_SERIALIZATION_SPLIT_FREE(dogen::disable_cmakelists::package1::first_class)
 namespace boost {

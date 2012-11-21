@@ -26,7 +26,7 @@
 #endif
 
 #include <functional>
-#include "dogen/enable_facet_hash/domain/package1/first_class.hpp"
+#include "dogen/enable_facet_hash/types/package1/first_class.hpp"
 
 namespace dogen {
 namespace enable_facet_hash {

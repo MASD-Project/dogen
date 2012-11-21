@@ -22,7 +22,7 @@
 #include "dogen/utility/io/vector_io.hpp"
 #include "dogen/utility/test/logging.hpp"
 #include "dogen/utility/test/canned_tests.hpp"
-#include "dogen/enumeration/domain/all.hpp"
+#include "dogen/enumeration/types/all.hpp"
 #include "dogen/enumeration/io/all_io.hpp"
 #include "dogen/enumeration/serialization/all_ser.hpp"
 #include "dogen/test_model_sanitizer/register_types.hpp"

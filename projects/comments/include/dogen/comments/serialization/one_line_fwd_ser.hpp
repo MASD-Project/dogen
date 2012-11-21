@@ -25,7 +25,7 @@
 #pragma once
 #endif
 
-#include "dogen/comments/domain/one_line_fwd.hpp"
+#include "dogen/comments/types/one_line_fwd.hpp"
 
 namespace boost {
 namespace serialization {

@@ -26,7 +26,7 @@
 #endif
 
 #include <functional>
-#include "dogen/classes_without_package/domain/class_4.hpp"
+#include "dogen/classes_without_package/types/class_4.hpp"
 
 namespace dogen {
 namespace classes_without_package {

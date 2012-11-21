@@ -26,7 +26,7 @@
 #endif
 
 #include <boost/serialization/nvp.hpp>
-#include "dogen/enumeration/domain/book_types.hpp"
+#include "dogen/enumeration/types/book_types.hpp"
 
 template<class Archive>
 void serialize(Archive& ar, dogen::enumeration::book_types& v, unsigned int /*version*/){

@@ -26,7 +26,7 @@
 #endif
 
 #include <iosfwd>
-#include "dogen/dmp/domain/package1/first_class.hpp"
+#include "dogen/dmp/types/package1/first_class.hpp"
 
 namespace dogen {
 namespace dmp {

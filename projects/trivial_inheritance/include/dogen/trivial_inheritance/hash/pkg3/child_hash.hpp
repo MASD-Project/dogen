@@ -26,7 +26,7 @@
 #endif
 
 #include <functional>
-#include "dogen/trivial_inheritance/domain/pkg3/child.hpp"
+#include "dogen/trivial_inheritance/types/pkg3/child.hpp"
 
 namespace dogen {
 namespace trivial_inheritance {

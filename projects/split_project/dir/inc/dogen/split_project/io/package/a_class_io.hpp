@@ -26,7 +26,7 @@
 #endif
 
 #include <iosfwd>
-#include "dogen/split_project/domain/package/a_class.hpp"
+#include "dogen/split_project/types/package/a_class.hpp"
 
 namespace dogen {
 namespace split_project {

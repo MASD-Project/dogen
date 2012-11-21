@@ -26,7 +26,7 @@
 #endif
 
 #include <functional>
-#include "dogen/boost_model/domain/class_derived.hpp"
+#include "dogen/boost_model/types/class_derived.hpp"
 
 namespace dogen {
 namespace boost_model {

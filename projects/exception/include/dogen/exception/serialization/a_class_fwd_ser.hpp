@@ -25,7 +25,7 @@
 #pragma once
 #endif
 
-#include "dogen/exception/domain/a_class_fwd.hpp"
+#include "dogen/exception/types/a_class_fwd.hpp"
 
 namespace boost {
 namespace serialization {

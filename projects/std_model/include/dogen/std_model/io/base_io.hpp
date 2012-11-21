@@ -26,7 +26,7 @@
 #endif
 
 #include <iosfwd>
-#include "dogen/std_model/domain/base.hpp"
+#include "dogen/std_model/types/base.hpp"
 
 namespace dogen {
 namespace std_model {

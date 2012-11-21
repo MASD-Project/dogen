@@ -26,7 +26,7 @@
 #endif
 
 #include <iosfwd>
-#include "dogen/disable_cmakelists/domain/package1/first_class.hpp"
+#include "dogen/disable_cmakelists/types/package1/first_class.hpp"
 
 namespace dogen {
 namespace disable_cmakelists {

@@ -26,7 +26,7 @@
 #endif
 
 #include <iosfwd>
-#include "dogen/disable_full_ctor/domain/package1/first_class.hpp"
+#include "dogen/disable_full_ctor/types/package1/first_class.hpp"
 
 namespace dogen {
 namespace disable_full_ctor {

@@ -26,7 +26,7 @@
 #endif
 
 #include <boost/serialization/split_free.hpp>
-#include "dogen/stand_alone_class/domain/class_1.hpp"
+#include "dogen/stand_alone_class/types/class_1.hpp"
 
 BOOST_SERIALIZATION_SPLIT_FREE(dogen::stand_alone_class::class_1)
 namespace boost {

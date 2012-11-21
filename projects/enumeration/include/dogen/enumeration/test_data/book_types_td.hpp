@@ -25,7 +25,7 @@
 #pragma once
 #endif
 
-#include "dogen/enumeration/domain/book_types.hpp"
+#include "dogen/enumeration/types/book_types.hpp"
 
 namespace dogen {
 namespace enumeration {

@@ -25,7 +25,7 @@
 #pragma once
 #endif
 
-#include "dogen/trivial_inheritance/domain/parent_outside_versioned_key.hpp"
+#include "dogen/trivial_inheritance/types/parent_outside_versioned_key.hpp"
 
 namespace dogen {
 namespace trivial_inheritance {

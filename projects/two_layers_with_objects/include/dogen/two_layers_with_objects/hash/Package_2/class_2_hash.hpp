@@ -26,7 +26,7 @@
 #endif
 
 #include <functional>
-#include "dogen/two_layers_with_objects/domain/Package_2/class_2.hpp"
+#include "dogen/two_layers_with_objects/types/Package_2/class_2.hpp"
 
 namespace dogen {
 namespace two_layers_with_objects {

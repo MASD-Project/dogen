@@ -25,7 +25,7 @@
 #pragma once
 #endif
 
-#include "dogen/enable_facet_serialization/domain/package1/first_class_fwd.hpp"
+#include "dogen/enable_facet_serialization/types/package1/first_class_fwd.hpp"
 
 namespace boost {
 namespace serialization {

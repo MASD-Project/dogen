@@ -241,7 +241,7 @@ program_options_parser::cpp_options_factory() const {
         ("cpp-disable-unique-file-names", "Do not make file names unique. "
             "Defaults to true. Must be true if not generating facet folders.")
         ("cpp-domain-facet-folder",
-            value<std::string>()->default_value("domain"),
+            value<std::string>()->default_value("types"),
             "Name for the domain facet folder.")
         ("cpp-hash-facet-folder",
             value<std::string>()->default_value("hash"),

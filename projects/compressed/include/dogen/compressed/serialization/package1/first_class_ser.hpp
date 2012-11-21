@@ -26,7 +26,7 @@
 #endif
 
 #include <boost/serialization/split_free.hpp>
-#include "dogen/compressed/domain/package1/first_class.hpp"
+#include "dogen/compressed/types/package1/first_class.hpp"
 
 BOOST_SERIALIZATION_SPLIT_FREE(dogen::compressed::package1::first_class)
 namespace boost {

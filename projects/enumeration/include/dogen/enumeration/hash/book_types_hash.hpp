@@ -26,7 +26,7 @@
 #endif
 
 #include <functional>
-#include "dogen/enumeration/domain/book_types.hpp"
+#include "dogen/enumeration/types/book_types.hpp"
 
 namespace std {
 

@@ -25,7 +25,7 @@
 #pragma once
 #endif
 
-#include "dogen/two_layers_with_objects/domain/package_1/class_1.hpp"
+#include "dogen/two_layers_with_objects/types/package_1/class_1.hpp"
 
 namespace dogen {
 namespace two_layers_with_objects {

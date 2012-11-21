@@ -25,7 +25,7 @@
 #pragma once
 #endif
 
-#include "dogen/enumeration/domain/colour_types.hpp"
+#include "dogen/enumeration/types/colour_types.hpp"
 
 namespace dogen {
 namespace enumeration {

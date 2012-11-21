@@ -25,7 +25,7 @@
 #pragma once
 #endif
 
-#include "dogen/disable_cmakelists/domain/package1/first_class_fwd.hpp"
+#include "dogen/disable_cmakelists/types/package1/first_class_fwd.hpp"
 
 namespace boost {
 namespace serialization {

@@ -25,7 +25,7 @@
 #pragma once
 #endif
 
-#include "dogen/class_without_attributes/domain/package_1/class_1.hpp"
+#include "dogen/class_without_attributes/types/package_1/class_1.hpp"
 
 namespace dogen {
 namespace class_without_attributes {

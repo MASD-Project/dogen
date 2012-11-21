@@ -25,7 +25,7 @@
 #pragma once
 #endif
 
-#include "dogen/trivial_inheritance/domain/pkg3/child_fwd.hpp"
+#include "dogen/trivial_inheritance/types/pkg3/child_fwd.hpp"
 
 namespace boost {
 namespace serialization {

@@ -22,7 +22,7 @@
 #include "dogen/utility/io/vector_io.hpp"
 #include "dogen/utility/test/logging.hpp"
 #include "dogen/utility/test/canned_tests.hpp"
-#include "dogen/disable_cmakelists/domain/all.hpp"
+#include "dogen/disable_cmakelists/types/all.hpp"
 #include "dogen/disable_cmakelists/io/all_io.hpp"
 #include "dogen/disable_cmakelists/serialization/all_ser.hpp"
 #include "dogen/test_model_sanitizer/register_types.hpp"

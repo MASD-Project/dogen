@@ -37,7 +37,7 @@ namespace  {
 
 const std::string test_suite("inclusion_manager_spec");
 const std::string test_module("generator");
-const std::string domain("domain");
+const std::string types("types");
 const std::string hash("hash");
 const std::string test_data("test_data");
 const std::string io("io");
@@ -191,7 +191,7 @@ BOOST_AUTO_TEST_CASE(processing_one_pod_model_with_default_configuration_generat
     BOOST_LOG_SEV(lg, debug) << "implementation user dependencies: " << iu;
     BOOST_REQUIRE(iu.size() == 1);
     BOOST_CHECK(boost::contains(iu.front(), pod_name) &&
-        boost::contains(iu.front(), domain));
+        boost::contains(iu.front(), types));
 
     const auto is(i[implementation_system]);
     BOOST_LOG_SEV(lg, debug) << "implementation system dependencies: " << is;
@@ -210,7 +210,7 @@ BOOST_AUTO_TEST_CASE(processing_one_pod_model_with_default_configuration_generat
     BOOST_LOG_SEV(lg, debug) << "header user dependencies: " << hu;
     BOOST_REQUIRE(hu.size() == 1);
     BOOST_CHECK(asserter::assert_contains(pod_name, hu.front()));
-    BOOST_CHECK(asserter::assert_contains(domain, hu.front()));
+    BOOST_CHECK(asserter::assert_contains(types, hu.front()));
 
     const auto hs(i[header_system]);
     BOOST_LOG_SEV(lg, debug) << "header system dependencies: " << hs;
@@ -242,7 +242,7 @@ BOOST_AUTO_TEST_CASE(processing_one_pod_model_with_default_configuration_generat
     BOOST_LOG_SEV(lg, debug) << "header user dependencies: " << hu;
     BOOST_REQUIRE(hu.size() == 1);
     BOOST_CHECK(asserter::assert_contains(pod_name, hu.front()));
-    BOOST_CHECK(asserter::assert_contains(domain, hu.front()));
+    BOOST_CHECK(asserter::assert_contains(types, hu.front()));
 
     const auto hs(i[header_system]);
     BOOST_LOG_SEV(lg, debug) << "header system dependencies: " << hs;
@@ -274,7 +274,7 @@ BOOST_AUTO_TEST_CASE(processing_one_pod_model_with_default_configuration_generat
     BOOST_LOG_SEV(lg, debug) << "header user dependencies: " << hu;
     BOOST_REQUIRE(hu.size() == 1);
     BOOST_CHECK(boost::contains(hu.front(), pod_name) &&
-        boost::contains(hu.front(), domain));
+        boost::contains(hu.front(), types));
 
     const auto hs(i[header_system]);
     BOOST_LOG_SEV(lg, debug) << "header system dependencies: " << hs;
@@ -305,7 +305,7 @@ BOOST_AUTO_TEST_CASE(processing_one_pod_model_with_default_configuration_generat
     BOOST_LOG_SEV(lg, debug) << "header user dependencies: " << hu;
     BOOST_REQUIRE(hu.size() == 1);
     BOOST_CHECK(boost::contains(hu.front(), pod_name) &&
-        boost::contains(hu.front(), domain));
+        boost::contains(hu.front(), types));
 
     const auto hs(i[header_system]);
     BOOST_LOG_SEV(lg, debug) << "header system dependencies: " << hs;

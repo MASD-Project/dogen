@@ -27,7 +27,7 @@
 
 #include <boost/serialization/split_free.hpp>
 #include <boost/type_traits/is_virtual_base_of.hpp>
-#include "dogen/boost_model/domain/class_derived.hpp"
+#include "dogen/boost_model/types/class_derived.hpp"
 
 namespace boost {
 

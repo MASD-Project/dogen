@@ -26,7 +26,7 @@
 #endif
 
 #include <iosfwd>
-#include "dogen/trivial_inheritance/domain/parent_outside_unversioned_key.hpp"
+#include "dogen/trivial_inheritance/types/parent_outside_unversioned_key.hpp"
 
 namespace dogen {
 namespace trivial_inheritance {

@@ -27,7 +27,7 @@
 
 #include <boost/serialization/assume_abstract.hpp>
 #include <boost/serialization/split_free.hpp>
-#include "dogen/boost_model/domain/class_base.hpp"
+#include "dogen/boost_model/types/class_base.hpp"
 
 BOOST_SERIALIZATION_SPLIT_FREE(dogen::boost_model::class_base)
 BOOST_SERIALIZATION_ASSUME_ABSTRACT(dogen::boost_model::class_base)

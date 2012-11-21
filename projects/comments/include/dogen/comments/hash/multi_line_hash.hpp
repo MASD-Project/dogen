@@ -26,7 +26,7 @@
 #endif
 
 #include <functional>
-#include "dogen/comments/domain/multi_line.hpp"
+#include "dogen/comments/types/multi_line.hpp"
 
 namespace dogen {
 namespace comments {

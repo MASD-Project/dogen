@@ -27,7 +27,7 @@
 
 #include <boost/serialization/assume_abstract.hpp>
 #include <boost/serialization/split_free.hpp>
-#include "dogen/trivial_inheritance/domain/pkg2/parent.hpp"
+#include "dogen/trivial_inheritance/types/pkg2/parent.hpp"
 
 BOOST_SERIALIZATION_SPLIT_FREE(dogen::trivial_inheritance::pkg2::parent)
 BOOST_SERIALIZATION_ASSUME_ABSTRACT(dogen::trivial_inheritance::pkg2::parent)

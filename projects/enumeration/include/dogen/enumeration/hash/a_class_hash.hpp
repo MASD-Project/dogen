@@ -26,7 +26,7 @@
 #endif
 
 #include <functional>
-#include "dogen/enumeration/domain/a_class.hpp"
+#include "dogen/enumeration/types/a_class.hpp"
 
 namespace dogen {
 namespace enumeration {

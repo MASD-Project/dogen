@@ -26,7 +26,7 @@
 #endif
 
 #include <boost/serialization/split_free.hpp>
-#include "dogen/trivial_inheritance/domain/parent_without_members_unversioned_key.hpp"
+#include "dogen/trivial_inheritance/types/parent_without_members_unversioned_key.hpp"
 
 BOOST_SERIALIZATION_SPLIT_FREE(dogen::trivial_inheritance::parent_without_members_unversioned_key)
 namespace boost {

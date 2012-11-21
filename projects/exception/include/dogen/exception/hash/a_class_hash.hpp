@@ -26,7 +26,7 @@
 #endif
 
 #include <functional>
-#include "dogen/exception/domain/a_class.hpp"
+#include "dogen/exception/types/a_class.hpp"
 
 namespace dogen {
 namespace exception {

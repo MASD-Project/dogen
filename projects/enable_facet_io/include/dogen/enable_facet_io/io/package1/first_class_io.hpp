@@ -26,7 +26,7 @@
 #endif
 
 #include <iosfwd>
-#include "dogen/enable_facet_io/domain/package1/first_class.hpp"
+#include "dogen/enable_facet_io/types/package1/first_class.hpp"
 
 namespace dogen {
 namespace enable_facet_io {

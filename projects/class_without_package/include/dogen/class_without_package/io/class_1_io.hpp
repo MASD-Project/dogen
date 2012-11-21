@@ -26,7 +26,7 @@
 #endif
 
 #include <iosfwd>
-#include "dogen/class_without_package/domain/class_1.hpp"
+#include "dogen/class_without_package/types/class_1.hpp"
 
 namespace dogen {
 namespace class_without_package {

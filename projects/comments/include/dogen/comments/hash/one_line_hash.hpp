@@ -26,7 +26,7 @@
 #endif
 
 #include <functional>
-#include "dogen/comments/domain/one_line.hpp"
+#include "dogen/comments/types/one_line.hpp"
 
 namespace dogen {
 namespace comments {

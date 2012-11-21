@@ -26,7 +26,7 @@
 #endif
 
 #include <iosfwd>
-#include "dogen/trivial_association/domain/class_a.hpp"
+#include "dogen/trivial_association/types/class_a.hpp"
 
 namespace dogen {
 namespace trivial_association {

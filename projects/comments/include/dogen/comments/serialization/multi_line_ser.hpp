@@ -26,7 +26,7 @@
 #endif
 
 #include <boost/serialization/split_free.hpp>
-#include "dogen/comments/domain/multi_line.hpp"
+#include "dogen/comments/types/multi_line.hpp"
 
 BOOST_SERIALIZATION_SPLIT_FREE(dogen::comments::multi_line)
 namespace boost {

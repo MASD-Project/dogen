@@ -27,7 +27,7 @@
 
 #include <boost/serialization/split_free.hpp>
 #include <boost/type_traits/is_virtual_base_of.hpp>
-#include "dogen/trivial_inheritance/domain/second_child_without_members.hpp"
+#include "dogen/trivial_inheritance/types/second_child_without_members.hpp"
 
 namespace boost {
 

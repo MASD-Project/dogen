@@ -26,7 +26,7 @@
 #endif
 
 #include <boost/serialization/split_free.hpp>
-#include "dogen/trivial_association/domain/class_a.hpp"
+#include "dogen/trivial_association/types/class_a.hpp"
 
 BOOST_SERIALIZATION_SPLIT_FREE(dogen::trivial_association::class_a)
 namespace boost {

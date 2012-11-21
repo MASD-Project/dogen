@@ -26,7 +26,7 @@
 #endif
 
 #include <boost/serialization/split_free.hpp>
-#include "dogen/comments/domain/one_line.hpp"
+#include "dogen/comments/types/one_line.hpp"
 
 BOOST_SERIALIZATION_SPLIT_FREE(dogen::comments::one_line)
 namespace boost {

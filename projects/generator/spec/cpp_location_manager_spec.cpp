@@ -126,17 +126,17 @@ BOOST_AUTO_TEST_CASE(split_project_configuration_results_in_expected_locations) 
     using dogen::generator::backends::cpp::cpp_location_request;
     auto rq(request(cpp_facet_types::domain, cpp_file_types::header));
 
-    boost::filesystem::path e("c/d/test/domain/a/b/a_type.hpp");
+    boost::filesystem::path e("c/d/test/types/a/b/a_type.hpp");
     boost::filesystem::path a(lm.relative_logical_path(rq));
 
     using dogen::utility::test::asserter;
     BOOST_CHECK(asserter::assert_equals(e, a));
 
-    e = "test/domain/a/b/a_type.hpp";
+    e = "test/types/a/b/a_type.hpp";
     a = lm.relative_physical_path(rq);
     BOOST_CHECK(asserter::assert_equals(e, a));
 
-    e = "include directory/test/domain/a/b/a_type.hpp";
+    e = "include directory/test/types/a/b/a_type.hpp";
     a = lm.absolute_path(rq);
     BOOST_CHECK(asserter::assert_equals(e, a));
 
@@ -183,17 +183,17 @@ BOOST_AUTO_TEST_CASE(non_split_project_configuration_results_in_expected_locatio
     using dogen::generator::backends::cpp::cpp_location_request;
     auto rq(request(cpp_facet_types::domain, cpp_file_types::header));
 
-    boost::filesystem::path e("c/d/test/domain/a/b/a_type.hpp");
+    boost::filesystem::path e("c/d/test/types/a/b/a_type.hpp");
     boost::filesystem::path a(lm.relative_logical_path(rq));
 
     using dogen::utility::test::asserter;
     BOOST_CHECK(asserter::assert_equals(e, a));
 
-    e = "c/d/test/domain/a/b/a_type.hpp";
+    e = "c/d/test/types/a/b/a_type.hpp";
     a = lm.relative_physical_path(rq);
     BOOST_CHECK(asserter::assert_equals(e, a));
 
-    e = "project directory/test/include/c/d/test/domain/a/b/a_type.hpp";
+    e = "project directory/test/include/c/d/test/types/a/b/a_type.hpp";
     a = lm.absolute_path(rq);
     BOOST_CHECK(asserter::assert_equals(e, a));
 

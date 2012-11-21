@@ -27,7 +27,7 @@
 
 #include <boost/serialization/assume_abstract.hpp>
 #include <boost/serialization/split_free.hpp>
-#include "dogen/trivial_inheritance/domain/parent_outside.hpp"
+#include "dogen/trivial_inheritance/types/parent_outside.hpp"
 
 BOOST_SERIALIZATION_SPLIT_FREE(dogen::trivial_inheritance::parent_outside)
 BOOST_SERIALIZATION_ASSUME_ABSTRACT(dogen::trivial_inheritance::parent_outside)

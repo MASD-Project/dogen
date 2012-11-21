@@ -26,7 +26,7 @@
 #endif
 
 #include <functional>
-#include "dogen/compressed/domain/package1/first_class.hpp"
+#include "dogen/compressed/types/package1/first_class.hpp"
 
 namespace dogen {
 namespace compressed {

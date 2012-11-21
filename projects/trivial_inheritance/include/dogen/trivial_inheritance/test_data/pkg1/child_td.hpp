@@ -25,7 +25,7 @@
 #pragma once
 #endif
 
-#include "dogen/trivial_inheritance/domain/pkg1/child.hpp"
+#include "dogen/trivial_inheritance/types/pkg1/child.hpp"
 
 namespace dogen {
 namespace trivial_inheritance {

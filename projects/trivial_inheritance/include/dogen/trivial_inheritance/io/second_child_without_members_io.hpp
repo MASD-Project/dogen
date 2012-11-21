@@ -26,7 +26,7 @@
 #endif
 
 #include <iosfwd>
-#include "dogen/trivial_inheritance/domain/second_child_without_members.hpp"
+#include "dogen/trivial_inheritance/types/second_child_without_members.hpp"
 
 namespace dogen {
 namespace trivial_inheritance {

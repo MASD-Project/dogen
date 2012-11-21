@@ -25,7 +25,7 @@
 #pragma once
 #endif
 
-#include "dogen/std_model/domain/class_a_versioned_key_fwd.hpp"
+#include "dogen/std_model/types/class_a_versioned_key_fwd.hpp"
 
 namespace boost {
 namespace serialization {

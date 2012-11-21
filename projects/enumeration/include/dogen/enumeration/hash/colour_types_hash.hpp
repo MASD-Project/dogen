@@ -26,7 +26,7 @@
 #endif
 
 #include <functional>
-#include "dogen/enumeration/domain/colour_types.hpp"
+#include "dogen/enumeration/types/colour_types.hpp"
 
 namespace std {
 

@@ -26,7 +26,7 @@
 #endif
 
 #include <boost/serialization/split_free.hpp>
-#include "dogen/disable_full_ctor/domain/package1/first_class.hpp"
+#include "dogen/disable_full_ctor/types/package1/first_class.hpp"
 
 BOOST_SERIALIZATION_SPLIT_FREE(dogen::disable_full_ctor::package1::first_class)
 namespace boost {

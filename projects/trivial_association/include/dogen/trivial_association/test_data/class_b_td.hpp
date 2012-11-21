@@ -25,7 +25,7 @@
 #pragma once
 #endif
 
-#include "dogen/trivial_association/domain/class_b.hpp"
+#include "dogen/trivial_association/types/class_b.hpp"
 
 namespace dogen {
 namespace trivial_association {

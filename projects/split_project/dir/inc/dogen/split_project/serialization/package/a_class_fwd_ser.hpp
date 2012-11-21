@@ -25,7 +25,7 @@
 #pragma once
 #endif
 
-#include "dogen/split_project/domain/package/a_class_fwd.hpp"
+#include "dogen/split_project/types/package/a_class_fwd.hpp"
 
 namespace boost {
 namespace serialization {

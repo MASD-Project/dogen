@@ -26,7 +26,7 @@
 #endif
 
 #include <functional>
-#include "dogen/std_model/domain/class_b.hpp"
+#include "dogen/std_model/types/class_b.hpp"
 
 namespace dogen {
 namespace std_model {

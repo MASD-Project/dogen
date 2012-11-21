@@ -25,7 +25,7 @@
 #pragma once
 #endif
 
-#include "dogen/std_model/domain/class_g.hpp"
+#include "dogen/std_model/types/class_g.hpp"
 
 namespace dogen {
 namespace std_model {

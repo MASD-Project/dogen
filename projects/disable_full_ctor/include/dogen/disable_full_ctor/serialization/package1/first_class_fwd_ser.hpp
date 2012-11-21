@@ -25,7 +25,7 @@
 #pragma once
 #endif
 
-#include "dogen/disable_full_ctor/domain/package1/first_class_fwd.hpp"
+#include "dogen/disable_full_ctor/types/package1/first_class_fwd.hpp"
 
 namespace boost {
 namespace serialization {

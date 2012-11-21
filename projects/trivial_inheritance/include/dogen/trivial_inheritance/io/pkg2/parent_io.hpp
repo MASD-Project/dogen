@@ -26,7 +26,7 @@
 #endif
 
 #include <iosfwd>
-#include "dogen/trivial_inheritance/domain/pkg2/parent.hpp"
+#include "dogen/trivial_inheritance/types/pkg2/parent.hpp"
 
 namespace dogen {
 namespace trivial_inheritance {

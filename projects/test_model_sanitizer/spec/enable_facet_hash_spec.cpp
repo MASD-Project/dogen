@@ -22,7 +22,7 @@
 #include "dogen/utility/io/vector_io.hpp"
 #include "dogen/utility/test/logging.hpp"
 #include "dogen/utility/test/canned_tests.hpp"
-#include "dogen/enable_facet_hash/domain/all.hpp"
+#include "dogen/enable_facet_hash/types/all.hpp"
 
 namespace {
 

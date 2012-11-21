@@ -26,7 +26,7 @@
 #endif
 
 #include <boost/serialization/split_free.hpp>
-#include "dogen/std_model/domain/class_a_unversioned_key.hpp"
+#include "dogen/std_model/types/class_a_unversioned_key.hpp"
 
 BOOST_SERIALIZATION_SPLIT_FREE(dogen::std_model::class_a_unversioned_key)
 namespace boost {

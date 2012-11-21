@@ -26,7 +26,7 @@
 #endif
 
 #include <functional>
-#include "dogen/class_in_a_package/domain/package1/first_class.hpp"
+#include "dogen/class_in_a_package/types/package1/first_class.hpp"
 
 namespace dogen {
 namespace class_in_a_package {

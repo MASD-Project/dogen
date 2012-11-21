@@ -26,7 +26,7 @@
 #endif
 
 #include <iosfwd>
-#include "dogen/boost_model/domain/class_b.hpp"
+#include "dogen/boost_model/types/class_b.hpp"
 
 namespace dogen {
 namespace boost_model {

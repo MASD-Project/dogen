@@ -25,7 +25,7 @@ namespace {
 const std::string empty;
 const std::string header_extension(".hpp");
 const std::string source_extension(".cpp");
-const std::string domain_facet_folder("domain");
+const std::string domain_facet_folder("types");
 const std::string hash_facet_folder("hash");
 const std::string io_facet_folder("io");
 const std::string serialization_facet_folder("serialization");

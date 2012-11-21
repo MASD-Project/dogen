@@ -25,7 +25,7 @@
 #pragma once
 #endif
 
-#include "dogen/trivial_association/domain/class_d_fwd.hpp"
+#include "dogen/trivial_association/types/class_d_fwd.hpp"
 
 namespace boost {
 namespace serialization {

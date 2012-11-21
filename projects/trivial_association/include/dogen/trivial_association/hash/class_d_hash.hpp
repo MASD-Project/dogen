@@ -26,7 +26,7 @@
 #endif
 
 #include <functional>
-#include "dogen/trivial_association/domain/class_d.hpp"
+#include "dogen/trivial_association/types/class_d.hpp"
 
 namespace dogen {
 namespace trivial_association {

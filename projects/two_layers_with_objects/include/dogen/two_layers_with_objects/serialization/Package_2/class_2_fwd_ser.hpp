@@ -25,7 +25,7 @@
 #pragma once
 #endif
 
-#include "dogen/two_layers_with_objects/domain/Package_2/class_2_fwd.hpp"
+#include "dogen/two_layers_with_objects/types/Package_2/class_2_fwd.hpp"
 
 namespace boost {
 namespace serialization {

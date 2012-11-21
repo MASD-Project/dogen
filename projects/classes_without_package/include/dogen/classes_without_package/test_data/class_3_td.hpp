@@ -25,7 +25,7 @@
 #pragma once
 #endif
 
-#include "dogen/classes_without_package/domain/class_3.hpp"
+#include "dogen/classes_without_package/types/class_3.hpp"
 
 namespace dogen {
 namespace classes_without_package {
