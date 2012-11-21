@@ -66,7 +66,8 @@ need a stereotype of _manual_ (or some such name) which allows the
 type to be declared to the type system but no further processing
 (including generation) will occur.
 
-**** Rename =domain= to =types=                                        :task:
+**** COMPLETED Rename =domain= to =types=                              :task:
+     CLOSED: [2012-11-21 Wed 18:15]
 
 Rename the code generated directory =domain= to =types= as it doesn't
 house the domain, but its types.
