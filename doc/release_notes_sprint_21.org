@@ -18,7 +18,36 @@ Clock summary at [2012-11-21 Wed 16:34]
 | *Total time* | *0:00* |
 #+end:
 
-*** Mix-and-match of manual types
+*** Refactor type generation in dogen
+
+After reading [[http://domaindrivendesign.org/books/evans_2003][Domain Driver Design]] more carefully, it seems that we
+are making an incorrect separation between domain types: those which
+have behaviour from those who don't. Eric Evans splits types inside a
+domain as follows:
+
+- Entities (or reference objects): Those primarily driven by an ID,
+  similar to our =versioned= types;
+- Value objects: other objects which are not identifiable, but for
+  which state is an identity (e.g. number 4, string "xyz");
+- Services: the doers, those who are responsible for making/doing
+  things.
+
+We had a number of stories dealing with "manual" types, these are all
+part of this misunderstanding (attached to this story as notes). The
+correct implementation for this is to have stereotypes which allow
+dogen to make the above distinctions for types:
+
+- =entity=: equivalent to current versioned
+- =value=: default case if nothing is present
+- =service=: dogen will not code generate these types but will expect
+  the user to add them manually. It will add them to the includers and
+  warn if files are missing.
+
+In addition, we should rename the =domain= directory to =types= since
+everything is part of the domain model, but this directory is
+responsible for housing the types.
+
+**** Mix-and-match of manual types                                     :note:
 
 When adding types manually one needs to add a regex to get dogen to
 ignore these files. This works but it means dogen does not add these
@@ -26,7 +55,7 @@ files to the includers. A better solution would be to add a stereotype
 of =manual= which would result in automatic ignoring of files for
 these types as well as adding them to includers.
 
-*** Add support for _manual_ types
+**** Add support for _manual_ types                                    :note:
 
 Sometimes one requires data structures which are just too complicated
 for code generation, such as =boost::multi_index=. In this cases one
@@ -36,6 +65,29 @@ types from trivial types, the code generator will fail to resolve. We
 need a stereotype of _manual_ (or some such name) which allows the
 type to be declared to the type system but no further processing
 (including generation) will occur.
+
+**** Rename =domain= to =types=                                        :task:
+
+Rename the code generated directory =domain= to =types= as it doesn't
+house the domain, but its types.
+
+**** Rename =versioned= stereotype to =entity=                         :task:
+
+The rationale is explained in the above description.
+
+**** Add stereotype of =value=                                         :task:
+
+This is the default case; effectively stereotype does nothing.
+
+**** Add stereotype of =service=                                       :task:
+
+When present, we generate an empty pod, but we will not actually code
+generate files for this pod; we will just add the file names to the
+list of produced files so that housekeeper can ignore them. This is
+for all facets.
+
+This means we need to add an additional checking step after writing
+all files that verifies that all files are really on the filesystem.
 
 *** Typedef keys for each type
 
