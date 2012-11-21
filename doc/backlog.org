@@ -412,13 +412,6 @@ At present we do not have any tests were a pod in one model makes use
 of types defined in another model. This works fine but we should
 really have tests at the dogen level.
 
-*** Typedef keys for each type
-
-We should really have different names for each key. Ideally even
-different types, if its easy. We need to consult modern c++ for
-this. If its not possible for each key to be a different type, we
-should at least provide a typedef on each class.
-
 *** Cross package referencing tests
 
 Scenarios:

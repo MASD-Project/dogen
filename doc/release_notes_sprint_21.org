@@ -37,6 +37,13 @@ need a stereotype of _manual_ (or some such name) which allows the
 type to be declared to the type system but no further processing
 (including generation) will occur.
 
+*** Typedef keys for each type
+
+We should really have different names for each key. Ideally even
+different types, if its easy. We need to consult modern c++ for
+this. If its not possible for each key to be a different type, we
+should at least provide a typedef on each class.
+
 *** COMPLETED Reduce size of doxygen packages
     CLOSED: [2012-11-21 Wed 16:37]
 
