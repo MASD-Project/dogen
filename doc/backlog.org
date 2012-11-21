@@ -11,6 +11,13 @@ This file contains all stories that haven't been assigned to a sprint.
 
 Stories that we intend to look at, at some point.
 
+*** Add support for interfaces
+
+This is a very blue-skies story. When dogen starts supporting service
+types it would be useful to generate a service interface from
+dogen. In order to do this we'd have to parse the method definitions
+in dia and use those to construct an abstract base class.
+
 *** shared pointer to vector fails to build
 
 If one has a property with type
