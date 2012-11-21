@@ -11,6 +11,11 @@ This file contains all stories that haven't been assigned to a sprint.
 
 Stories that we intend to look at, at some point.
 
+*** Add support for default values
+
+It would be nice to be able to add a default value in dia and have it
+set on the default constructor, if the type is a primitive or a =std::string=.
+
 *** Generate the SML model from dogen
 
 Now that dogen is functional we should remove all the hand-crafted
