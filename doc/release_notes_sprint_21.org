@@ -8,4 +8,24 @@
 This file contains all stories that were closed during sprint 21.
 
 ** Development Stories Implemented
+
+
+#+begin: clocktable :maxlevel 3 :scope subtree
+Clock summary at [2012-11-21 Wed 16:34]
+
+| Headline     | Time   |
+|--------------+--------|
+| *Total time* | *0:00* |
+#+end:
+
+*** Mix-and-match of manual types
+
+When adding types manually one needs to add a regex to get dogen to
+ignore these files. This works but it means dogen does not add these
+files to the includers. A better solution would be to add a stereotype
+of =manual= which would result in automatic ignoring of files for
+these types as well as adding them to includers.
+
+
+
 ** Deprecated Development Stories

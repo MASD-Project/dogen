@@ -1,5 +1,6 @@
 #+title: Backlog
 #+options: date:nil toc:nil author:nil num:nil
+#+todo: ANALYSIS IMPLEMENTATION TESTING | COMPLETED CANCELLED
 #+tags: story(s) epic(e) task(t) note(n) spike(p)
 
 * Backlog
@@ -59,14 +60,6 @@ any manually generated projects. We need some intelligent logic in the
 src cmakefile that looks for other cmakefiles and adds them
 automatically in its =add_subdirectory=. This could be done by the
 CMake backend when that exists.
-
-*** Mix-and-match of manual types
-
-When adding types manually one needs to add a regex to get dogen to
-ignore these files. This works but it means dogen does not add these
-files to the includers. A better solution would be to add a stereotype
-of =manual= which would result in automatic ignoring of files for
-these types as well as adding them to includers.
 
 *** Use error codes in exceptions
 
