@@ -11,6 +11,11 @@ This file contains all stories that haven't been assigned to a sprint.
 
 Stories that we intend to look at, at some point.
 
+*** Generate the SML model from dogen
+
+Now that dogen is functional we should remove all the hand-crafted
+code in the SML model which could be code generated.
+
 *** Generate the Dia model from dogen
 
 Now that dogen is functional we should remove all the hand-crafted
