@@ -772,12 +772,6 @@ At present we are still doing C++-03 iterations in the STL IO files
 such as =vector_io=, =list_io=, etc. We should be using the new =for=
 syntax for C++-11.
 
-*** Dogen should generate stand alone CMake                           :story:
-
-There should be an option to generate a stand alone =CMakeLists.txt= -
-the domain should compile in total isolation from kitanda. This is
-useful for demos, etc.
-
 *** Rename qualified_name to qname                                    :story:
 
 QName is well known. It also allows for better method names such as

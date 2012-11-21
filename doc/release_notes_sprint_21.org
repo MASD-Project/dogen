@@ -54,6 +54,11 @@ project's doxygen configuration to figure out what we are doing wrong.
 
 The main problem must be related to PNG generation.
 
+*** COMPLETED Dogen should generate stand alone CMake                 :story:
+    CLOSED: [2012-11-21 Wed 16:45]
 
+There should be an option to generate a stand alone =CMakeLists.txt= -
+the domain should compile in total isolation from kitanda. This is
+useful for demos, etc.
 
 ** Deprecated Development Stories
