@@ -26,6 +26,16 @@ files to the includers. A better solution would be to add a stereotype
 of =manual= which would result in automatic ignoring of files for
 these types as well as adding them to includers.
 
+*** COMPLETED Reduce size of doxygen packages
+    CLOSED: [2012-11-21 Wed 16:37]
+
+We need to investigate our doxygen configuration to figure out why our
+doxygen packages are so large - weighing at 350MB at the moment, they
+are too large to be uploaded to github. We need to find other
+project's doxygen configuration to figure out what we are doing wrong.
+
+The main problem must be related to PNG generation.
+
 
 
 ** Deprecated Development Stories
