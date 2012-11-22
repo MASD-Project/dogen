@@ -275,15 +275,19 @@ boost::optional<sml::model> director::create_model() const {
     merger.add(boost_model_factory::create());
 
     using sml::model;
-    const auto lambda([&](boost::filesystem::path p, bool is_target) -> model {
-            const dia::diagram d(hydrate_diagram(p));
-            return model(to_sml(d, p.stem().string(), is_target));
+    const auto lambda([&](config::reference r, bool is_target) -> model {
+            const dia::diagram d(hydrate_diagram(r.path()));
+            return model(to_sml(d, r.path().stem().string(), is_target));
         });
 
     const bool is_target(true);
     for (const auto r : settings_.modeling().references())
         merger.add(lambda(r, !is_target));
-    merger.add_target(lambda(settings_.modeling().target(), is_target));
+
+    config::reference tr;
+    tr.path(settings_.modeling().target());
+    tr.external_package_path(settings_.modeling().external_package_path());
+    merger.add_target(lambda(tr, is_target));
     model m(merger.merge());
 
     BOOST_LOG_SEV(lg, debug) << "Merged model: " << m;

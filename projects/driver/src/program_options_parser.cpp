@@ -21,6 +21,7 @@
 #define BOOST_RESULT_OF_USE_DECLTYPE
 #include <string>
 #include <sstream>
+#include <boost/algorithm/string.hpp>
 #include <boost/throw_exception.hpp>
 #include <boost/filesystem.hpp>
 #include <boost/filesystem/path.hpp>
@@ -171,7 +172,8 @@ program_options_parser::modeling_options_factory() const {
             "Dia diagram to generate code for.")
         ("reference,r",
             value<std::vector<std::string> >(),
-            "Dia diagrams that our target diagram depends on.")
+            "Dia diagrams that our target diagram depends on."
+            "If required you can add the package path: file,PP.")
         ("disable-model-package",
             "Do not generate a top-level package with the model name.");
 
@@ -513,12 +515,28 @@ program_options_parser::transform_modeling_settings(
     }
 
     if (vm.count(reference_arg)) {
-        std::vector<boost::filesystem::path> o;
-        const auto i(vm[reference_arg].as<std::vector<std::string> >());
-        boost::copy(i | boost::adaptors::transformed([](std::string s) {
-                    return boost::filesystem::path(s);
-                }), std::back_inserter(o));
-        r.references(o);
+        std::vector<generator::config::reference> references;
+        typedef std::vector<std::string> strings_type;
+        const auto ra(vm[reference_arg].as<strings_type>());
+        for (const auto i : ra) {
+            strings_type tokens;
+            boost::split(tokens, i, boost::is_any_of(","));
+
+            if (tokens.empty())
+                BOOST_THROW_EXCEPTION(parser_validation_error(
+                        "Expected at least one argument for reference"));
+
+            if (tokens.size() > 2)
+                BOOST_THROW_EXCEPTION(parser_validation_error(
+                        "Expected only at most two arguments for reference"));
+
+            dogen::generator::config::reference ref;
+            ref.path(tokens[0]);
+            if (tokens.size() > 1)
+                ref.external_package_path(tokens[1]);
+            references.push_back(ref);
+        }
+        r.references(references);
     }
     r.disable_model_package(vm.count(disable_model_package));
 

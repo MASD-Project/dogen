@@ -69,6 +69,14 @@ const std::string external_package_path_value_arg("a package");
 const std::string reference_arg("--reference");
 const std::string reference_value_1_arg("some reference");
 const std::string reference_value_2_arg("another reference");
+const std::string reference_value_3_arg("a reference,package path 3");
+const std::string reference_value_4_arg("another reference,package path 4");
+
+const std::string reference_value_3_diagram("a reference");
+const std::string reference_value_3_package_path("package path 3");
+const std::string reference_value_4_diagram("another reference");
+const std::string reference_value_4_package_path("package path 4");
+
 const std::string disable_model_package_arg("--disable-model-package");
 
 const std::string cpp_split_project_arg("--cpp-split-project");
@@ -299,8 +307,36 @@ BOOST_AUTO_TEST_CASE(supplying_modeling_options_results_in_expected_settings) {
 
     const auto refs(ms.references());
     BOOST_REQUIRE(refs.size() == 2);
-    BOOST_CHECK(refs[0].string() == reference_value_1_arg);
-    BOOST_CHECK(refs[1].string() == reference_value_2_arg);
+    BOOST_CHECK(refs[0].path().string() == reference_value_1_arg);
+    BOOST_CHECK(refs[1].path().string() == reference_value_2_arg);
+}
+
+BOOST_AUTO_TEST_CASE(supplying_package_path_for_references_results_in_correct_package_path) {
+    SETUP_TEST_LOG_SOURCE("supplying_package_path_for_references_results_in_correct_package_path");
+    const std::vector<std::string> o = {
+        target_arg, target_value_arg,
+        external_package_path_arg,
+        external_package_path_value_arg,
+        reference_arg,
+        reference_value_3_arg,
+        reference_arg,
+        reference_value_4_arg,
+        disable_model_package_arg
+    };
+
+    const auto s(check_valid_arguments(o));
+    BOOST_LOG_SEV(lg, debug) << "settings: " << s;
+
+    const auto ms(s.modeling());
+    const auto refs(ms.references());
+    BOOST_REQUIRE(refs.size() == 2);
+
+    BOOST_CHECK(refs[0].path().string() == reference_value_3_diagram);
+    BOOST_CHECK(
+        refs[0].external_package_path() == reference_value_3_package_path);
+    BOOST_CHECK(refs[1].path().string() == reference_value_4_diagram);
+    BOOST_CHECK(
+        refs[1].external_package_path() == reference_value_4_package_path);
 }
 
 BOOST_AUTO_TEST_CASE(not_supplying_modeling_options_other_than_target_results_in_expected_settings) {

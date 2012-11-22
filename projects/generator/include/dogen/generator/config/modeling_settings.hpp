@@ -28,6 +28,7 @@
 #include <string>
 #include <vector>
 #include <boost/filesystem/path.hpp>
+#include "dogen/generator/config/reference.hpp"
 
 namespace dogen {
 namespace generator {
@@ -78,10 +79,10 @@ public:
      * @brief All external models in which this model depends.
      */
     /**@{*/
-    std::vector<boost::filesystem::path> references() const {
+    std::vector<reference> references() const {
         return references_;
     }
-    modeling_settings& references(std::vector<boost::filesystem::path> value) {
+    modeling_settings& references(std::vector<reference> value) {
         references_ = value;
         return *this;
     }
@@ -114,7 +115,7 @@ private:
     bool verbose_;
     boost::filesystem::path target_;
     std::string external_package_path_;
-    std::vector<boost::filesystem::path> references_;
+    std::vector<reference> references_;
     bool disable_model_package_;
 };
 
