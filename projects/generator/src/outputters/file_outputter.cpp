@@ -26,13 +26,16 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/generator/outputters/file_outputter.hpp"
 
+using namespace dogen::utility::log;
+
 namespace {
 
-static dogen::utility::log::logger
-lg(dogen::utility::log::logger_factory("file_outputter"));
+static logger lg(logger_factory("file_outputter"));
 
 const std::string outputter_name("file output");
 const std::string writing_file_message("Writing file: ");
+const std::string not_writing_file_message(
+    "File has no content so no writing: ");
 const std::string wrote_file_message("Wrote file: ");
 const std::string using_target_dir_message("Using Target directory: ");
 const std::string created_target_dir_message("Created target directory: ");
@@ -50,8 +53,12 @@ file_outputter::file_outputter(bool verbose, bool force_write)
     : verbose_(verbose), force_write_(force_write) {}
 
 void file_outputter::
+log_not_writing_file(boost::filesystem::path path) const {
+    BOOST_LOG_SEV(lg, debug) << not_writing_file_message << path.string();
+}
+
+void file_outputter::
 log_writing_file(boost::filesystem::path path) const {
-    using namespace dogen::utility::log;
     BOOST_LOG_SEV(lg, debug) << writing_file_message << path.string();
     if (path.string().size() > 255)
         BOOST_LOG_SEV(lg, warn) << path_size_warning << path.string();
@@ -59,29 +66,25 @@ log_writing_file(boost::filesystem::path path) const {
 
 void file_outputter::
 log_wrote_file(boost::filesystem::path path) const {
-    using namespace dogen::utility::log;
     BOOST_LOG_SEV(lg, debug) << wrote_file_message << path.string();
 }
 
 void file_outputter::
 log_created_directories(bool created, boost::filesystem::path directory) const {
-    using namespace dogen::utility::log;
     BOOST_LOG_SEV(lg, debug) << (created ? created_target_dir_message :
         using_target_dir_message) << directory.string();
 }
 
 void file_outputter::log_no_content_changes() const {
-    using namespace dogen::utility::log;
     BOOST_LOG_SEV(lg, debug) << "File contents have not changed, "
                              << "and force write is false so not writing";
 }
 
 void file_outputter::log_content_changes() const {
-    using namespace dogen::utility::log;
     BOOST_LOG_SEV(lg, debug) << "File contents have changed, need to write";
 }
 
-bool file_outputter::writing_needed(outputter::value_entry_type value) const {
+bool file_outputter::content_changed(outputter::value_entry_type value) const {
     if (force_write_)
         return true;
 
@@ -106,8 +109,13 @@ void file_outputter::to_file(outputter::value_entry_type value) const {
     try {
         const boost::filesystem::path path(value.first);
         const std::string contents(value.second);
-        log_writing_file(path.string());
 
+        if (contents.empty()) {
+            log_not_writing_file(path.string());
+            return;
+        }
+
+        log_writing_file(path.string());
         boost::filesystem::path dir(path);
         dir.remove_filename();
 
@@ -115,7 +123,7 @@ void file_outputter::to_file(outputter::value_entry_type value) const {
         const bool dir_exists(!create_directories(dir));
         log_created_directories(!dir_exists, dir);
 
-        if (!dir_exists || writing_needed(value)) {
+        if (!dir_exists || content_changed(value)) {
             using dogen::utility::filesystem::write_file_content;
             write_file_content(path, contents);
             log_wrote_file(path.string());

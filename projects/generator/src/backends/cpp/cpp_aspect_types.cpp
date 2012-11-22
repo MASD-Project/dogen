@@ -29,6 +29,7 @@ const std::string main("\"cpp_aspect_types::main\"");
 const std::string includers("\"cpp_aspect_types::includers\"");
 const std::string forward_decls("\"cpp_aspect_types::forward_decls\"");
 const std::string registrar("\"cpp_aspect_types::registrar\"");
+const std::string null_aspect("\"cpp_aspect_types::null_aspect\"");
 const std::string error_message("\"Invalid or unexpected aspect type\"");
 
 }
@@ -50,6 +51,8 @@ std::ostream& operator<<(std::ostream& stream, cpp_aspect_types value) {
         return stream << forward_decls;
     case cpp_aspect_types::registrar:
         return stream << registrar;
+    case cpp_aspect_types::null_aspect:
+        return stream << null_aspect;
     default:
         break;
     }

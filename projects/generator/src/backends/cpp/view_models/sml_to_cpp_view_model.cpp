@@ -472,6 +472,9 @@ transform_file(cpp_facet_types ft, cpp_file_types flt, cpp_aspect_types at,
     r.category_type(p.category_type());
     r.meta_type(p.name().meta_type());
 
+    if (p.pod_type() == sml::pod_types::service)
+        r.aspect_type(cpp_aspect_types::null_aspect);
+
     const auto i(qname_to_class_.find(name));
     if (i == qname_to_class_.end()) {
         BOOST_LOG_SEV(lg, error) << view_model_not_found

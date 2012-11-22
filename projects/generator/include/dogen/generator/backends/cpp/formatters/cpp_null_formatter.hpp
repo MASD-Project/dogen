@@ -18,40 +18,47 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_GENERATOR_BACKENDS_CPP_ASPECT_TYPES_HPP
-#define DOGEN_GENERATOR_BACKENDS_CPP_ASPECT_TYPES_HPP
+#ifndef DOGEN_GENERATOR_BACKENDS_CPP_FORMATTERS_CPP_NULL_FORMATTER_HPP
+#define DOGEN_GENERATOR_BACKENDS_CPP_FORMATTERS_CPP_NULL_FORMATTER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <iosfwd>
+#include "dogen/generator/backends/cpp/view_models/file_view_model.hpp"
+#include "dogen/generator/backends/cpp/formatters/file_formatter.hpp"
 
 namespace dogen {
 namespace generator {
 namespace backends {
 namespace cpp {
+namespace formatters {
 
-/**
- * @brief An aspect in a facet.
- *
- * Facets represent different ways of looking at domain objects.
- * However, not everything in a facet is related to the domain type;
- * some plumbing is required in order to fully implement a facet. This
- * enum allows us to distinguish between the different types of @e
- * components a facet has, which we choose to call @e aspects.
- */
-enum class cpp_aspect_types : unsigned int {
-    invalid = 0,
-    main = 1, ///< The representation of the domain type for this facet
-    includers = 2, ///< Header file with includes for all headers in facet
-    forward_decls = 3, ///< Forward declarations for type
-    registrar = 4, ///< Boost serialisation registration
-    null_aspect = 5 ///< Nothing is to be produced for this type
+class null_formatter : public file_formatter {
+public:
+    typedef view_models::file_view_model file_view_model;
+
+public:
+    null_formatter() = delete;
+    null_formatter(const null_formatter&) = default;
+    null_formatter(null_formatter&&) = default;
+    null_formatter& operator=(const null_formatter&) = default;
+
+public:
+    explicit null_formatter(std::ostream& stream);
+    virtual ~null_formatter() noexcept {}
+
+public:
+    static file_formatter::shared_ptr create(std::ostream& stream);
+
+public:
+    virtual void format(const file_view_model& vm) override;
+
+private:
+    std::ostream& stream_;
 };
 
-std::ostream& operator<<(std::ostream& stream, cpp_aspect_types value);
-
-} } } }
+} } } } }
 
 #endif

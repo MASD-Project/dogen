@@ -79,6 +79,7 @@ public:
     static boost::filesystem::path input_comments_dia();
     static boost::filesystem::path input_enumeration_dia();
     static boost::filesystem::path input_exception_dia();
+    static boost::filesystem::path input_entity_service_value_dia();
 
     static boost::filesystem::path expected();
     static boost::filesystem::path expected_class_in_a_package_dia_xml();

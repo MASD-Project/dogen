@@ -50,6 +50,7 @@ private:
      * @brief Log output to standard output.
      */
     /**@{*/
+    void log_not_writing_file(boost::filesystem::path path) const;
     void log_writing_file(boost::filesystem::path path) const;
     void log_wrote_file(boost::filesystem::path path) const;
     void log_created_directories(bool created,
@@ -59,7 +60,7 @@ private:
     /**@}*/
 
 private:
-    bool writing_needed(outputter::value_entry_type value) const;
+    bool content_changed(outputter::value_entry_type value) const;
 
     /**
      * @brief Outputs the pair passed in to a file.

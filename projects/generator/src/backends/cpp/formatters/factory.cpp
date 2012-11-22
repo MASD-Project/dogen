@@ -38,6 +38,7 @@
 #include "dogen/generator/backends/cpp/formatters/cpp_registrar_header.hpp"
 #include "dogen/generator/backends/cpp/formatters/cpp_registrar_implementation.hpp"
 #include "dogen/generator/backends/cpp/formatters/cpp_forward_declarations_header.hpp"
+#include "dogen/generator/backends/cpp/formatters/cpp_null_formatter.hpp"
 #include "dogen/generator/backends/cpp/formatters/factory.hpp"
 
 using namespace dogen::utility::log;
@@ -59,7 +60,6 @@ namespace generator {
 namespace backends {
 namespace cpp {
 namespace formatters {
-
 
 factory::factory(const config::cpp_settings& settings)
     : settings_(settings),
@@ -139,6 +139,10 @@ factory::result_type factory::create_registrar_formatter(
     } }
 }
 
+factory::result_type factory::create_null_formatter(std::ostream& s) const {
+    return null_formatter::create(s);
+}
+
 factory::result_type
 factory::create(std::ostream& s, cpp_facet_types ft, cpp_file_types flt,
     cpp_aspect_types at) const {
@@ -156,7 +160,9 @@ factory::create(std::ostream& s, cpp_facet_types ft, cpp_file_types flt,
     case cpp_aspect_types::registrar:
         return create_registrar_formatter(s, flt);
         break;
-
+    case cpp_aspect_types::null_aspect:
+        return create_null_formatter(s);
+        break;
     default: {
         std::ostringstream s;
         s << production_failure_msg << ft << ", " << flt << ", " << at;

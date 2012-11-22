@@ -56,6 +56,8 @@ private:
     result_type create_registrar_formatter(
         std::ostream& s, cpp_file_types flt) const;
 
+    result_type create_null_formatter(std::ostream& s) const;
+
 public:
     result_type create(std::ostream& s, cpp_facet_types ft,
         cpp_file_types flt, cpp_aspect_types at) const;
