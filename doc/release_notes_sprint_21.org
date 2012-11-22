@@ -124,6 +124,7 @@ the domain should compile in total isolation from kitanda. This is
 useful for demos, etc.
 
 *** IMPLEMENTATION Use explicit casting for versioned to unversioned conversions :story:
+    CLOCK: [2012-11-22 Thu 08:44]--[2012-11-22 Thu 09:20] =>  0:36
 
 At present we have to_versioned; in reality this would be dealt much
 better using explicit casts:
@@ -131,5 +132,14 @@ better using explicit casts:
 #+begin_example
 explicit operator std::string() { return "explicit"; }
 #+end_example
+
+Actually the real solution for this is to make the versioned key
+contain the unversioned key; then dogen will generate all the
+required code.
+
+At this point in time we do not have enough use cases to make the
+correct design decisions in this area. We need to wait until we start
+using keys in anger in Creris and then design the API around the use
+cases.
 
 ** Deprecated Development Stories
