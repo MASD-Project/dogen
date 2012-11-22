@@ -56,6 +56,7 @@ target_link_libraries(${spec_name}
     enumeration
     std_model
     boost_model
+    entity_service_value
     utility
     ${LIBXML2_LIBRARIES}
     ${Boost_LIBRARIES}

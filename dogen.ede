@@ -41,6 +41,8 @@
    "/projects/boost_model/include"
    "/projects/enumeration/include"
    "/projects/exception/include"
+   "/projects/test_model_sanitizer/include"
+   "/projects/entity_service_value/include"
    )
  :system-include-path
  '("/usr/local/pfh/include"
