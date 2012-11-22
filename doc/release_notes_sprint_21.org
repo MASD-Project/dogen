@@ -9,16 +9,22 @@ This file contains all stories that were closed during sprint 21.
 
 ** Development Stories Implemented
 
-
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2012-11-21 Wed 16:34]
+Clock summary at [2012-11-22 Thu 08:40]
 
-| Headline     | Time   |
-|--------------+--------|
-| *Total time* | *0:00* |
+| Headline                                    | Time   |      |      |
+|---------------------------------------------+--------+------+------|
+| *Total time*                                | *6:39* |      |      |
+|---------------------------------------------+--------+------+------|
+| Development Stories Implemented             |        | 6:39 |      |
+| COMPLETED Refactor type generation in dogen |        |      | 6:39 |
 #+end:
 
-*** Refactor type generation in dogen
+*** COMPLETED Refactor type generation in dogen                       :story:
+    CLOSED: [2012-11-22 Thu 07:20]
+    CLOCK: [2012-11-22 Thu 07:20]--[2012-11-22 Thu 08:37] =>  1:17
+    CLOCK: [2012-11-21 Wed 22:00]--[2012-11-22 Thu 00:15] =>  2:15
+    CLOCK: [2012-11-21 Wed 14:26]--[2012-11-21 Wed 17:33] =>  3:07
 
 After reading [[http://domaindrivendesign.org/books/evans_2003][Domain Driver Design]] more carefully, it seems that we
 are making an incorrect separation between domain types: those which
@@ -82,7 +88,8 @@ The rationale is explained in the above description.
 
 This is the default case; effectively stereotype does nothing.
 
-**** Add stereotype of =service=                                       :task:
+**** COMPLETED Add stereotype of =service=                             :task:
+     CLOSED: [2012-11-22 Thu 08:36]
 
 When present, we generate an empty pod, but we will not actually code
 generate files for this pod; we will just add the file names to the
@@ -115,5 +122,14 @@ The main problem must be related to PNG generation.
 There should be an option to generate a stand alone =CMakeLists.txt= -
 the domain should compile in total isolation from kitanda. This is
 useful for demos, etc.
+
+*** IMPLEMENTATION Use explicit casting for versioned to unversioned conversions :story:
+
+At present we have to_versioned; in reality this would be dealt much
+better using explicit casts:
+
+#+begin_example
+explicit operator std::string() { return "explicit"; }
+#+end_example
 
 ** Deprecated Development Stories

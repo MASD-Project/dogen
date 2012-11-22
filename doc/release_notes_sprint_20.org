@@ -159,12 +159,3 @@ libraries, so that one can write client code without recompiling
 everything.
 
 ** Deprecated Development Stories
-
-*** Use explicit casting for versioned to unversioned conversions
-
-At present we have to_versioned; in reality this would be dealt much
-better using explicit casts:
-
-#+begin_example
-explicit operator std::string() { return "explicit"; }
-#+end_example
