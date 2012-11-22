@@ -114,9 +114,9 @@ set(header_validation_files "")
 set(ignore_file false)
 set(file_counter "0")
 foreach(hpp_file ${all_hpp_files})
-    if (hpp_file MATCHES "entity_service_value")
-        set(ignore_file true)
-    endif()
+    # if (hpp_file MATCHES "REGEX_TO_IGNORE")
+    #     set(ignore_file true)
+    # endif()
 
     if(NOT ignore_file)
         set(input_filename ${CMAKE_SOURCE_DIR}/${header_validation_template})
@@ -179,6 +179,7 @@ include_directories(
     ${CMAKE_SOURCE_DIR}/projects/comments/include
     ${CMAKE_SOURCE_DIR}/projects/enumeration/include
     ${CMAKE_SOURCE_DIR}/projects/exception/include
+    ${CMAKE_SOURCE_DIR}/projects/entity_service_value/include
     )
 
 #
@@ -219,6 +220,7 @@ add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/boost_model)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/comments)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/enumeration)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/exception)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/entity_service_value)
 
 # global targets for codegen
 add_custom_target(rebase_codegen)

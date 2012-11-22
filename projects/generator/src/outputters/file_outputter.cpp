@@ -110,8 +110,13 @@ void file_outputter::to_file(outputter::value_entry_type value) const {
         const boost::filesystem::path path(value.first);
         const std::string contents(value.second);
 
+        using dogen::utility::filesystem::write_file_content;
         if (contents.empty()) {
-            log_not_writing_file(path.string());
+            if (!boost::filesystem::exists(path)) {
+                log_wrote_file(path.string());
+                write_file_content(path, contents);
+            } else
+                log_not_writing_file(path.string());
             return;
         }
 
@@ -124,7 +129,6 @@ void file_outputter::to_file(outputter::value_entry_type value) const {
         log_created_directories(!dir_exists, dir);
 
         if (!dir_exists || content_changed(value)) {
-            using dogen::utility::filesystem::write_file_content;
             write_file_content(path, contents);
             log_wrote_file(path.string());
         }
