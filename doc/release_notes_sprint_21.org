@@ -142,4 +142,24 @@ correct design decisions in this area. We need to wait until we start
 using keys in anger in Creris and then design the API around the use
 cases.
 
+*** COMPLETED External package path for references                    :story:
+    CLOSED: [2012-11-23 Fri 10:54]
+
+At present we are assuming the package path is the same for all
+references. This is not correct. We need to pass in a second argument
+after the reference with the package path for that model:
+
+: --reference ${CMAKE_SOURCE_DIR}/diagrams/creris/credit_risk.dia creris
+
+MC: ended up implementing with a comma, as program options doesn't
+seem to deal too well with multi-token which repeated multiple times.
+
+*** COMPLETED Validate model dependencies                             :story:
+    CLOSED: [2012-11-23 Fri 10:59]
+
+In the past we checked that all types existed, even those who belong
+to separate models. But we didn't do an upfront check to make sure
+that all models that target depends on are present. Add a check for
+this.
+
 ** Deprecated Development Stories

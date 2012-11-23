@@ -67,14 +67,6 @@ As reported by JS for some reason if a test has a null pointer
 de-reference, the next test will log to both files. This means the
 logger is not being switched off properly in the presence of exceptions.
 
-*** External package path for references
-
-At present we are assuming the package path is the same for all
-references. This is not correct. We need to pass in a second argument
-after the reference with the package path for that model:
-
-: --reference ${CMAKE_SOURCE_DIR}/diagrams/creris/credit_risk.dia creris
-
 *** Mix-and-match of manual projects
 
 With the ignore by regex feature its now possible to mix and match
