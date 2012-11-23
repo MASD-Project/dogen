@@ -224,10 +224,10 @@ void director::inject_system_types(sml::model& m) const {
     m.pods(new_pods);
 }
 
-sml::model director::
-to_sml(const dia::diagram& d, const std::string& file_name,
+sml::model director::to_sml(const dia::diagram& d, config::reference ref,
     const bool is_target) const {
-    const std::string epp(settings_.modeling().external_package_path());
+    const std::string file_name(ref.path().stem().string());
+    const std::string epp(ref.external_package_path());
     const std::string name(settings_.modeling().disable_model_package() ?
         empty : file_name);
 
@@ -275,9 +275,9 @@ boost::optional<sml::model> director::create_model() const {
     merger.add(boost_model_factory::create());
 
     using sml::model;
-    const auto lambda([&](config::reference r, bool is_target) -> model {
-            const dia::diagram d(hydrate_diagram(r.path()));
-            return model(to_sml(d, r.path().stem().string(), is_target));
+    const auto lambda([&](config::reference ref, bool is_target) -> model {
+            const dia::diagram d(hydrate_diagram(ref.path()));
+            return model(to_sml(d, ref, is_target));
         });
 
     const bool is_target(true);

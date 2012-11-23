@@ -810,10 +810,10 @@ sml_to_cpp_view_model::transform_registrar() const {
     BOOST_LOG_SEV(lg, debug) << "Added namespaces: " << rvm.namespaces();
 
     std::list<std::string> deps;
-    for (const auto d : model_.dependencies()) {
-        // FIXME: massive hack to filter out system models
-        if (d != "std" && d != "boost")
-            deps.push_back(d);
+    for (const auto& pair : model_.dependencies()) {
+        const auto d(pair.second);
+        if (!d.is_system())
+            deps.push_back(d.model_name());
     }
     rvm.model_dependencies(deps);
     BOOST_LOG_SEV(lg, debug) << "Added dependencies: "
@@ -821,7 +821,7 @@ sml_to_cpp_view_model::transform_registrar() const {
 
     std::list<std::string> leaves;
     using boost::join;
-    for (const auto l : model_.leaves()) {
+    for (const auto& l : model_.leaves()) {
         auto ns(join_namespaces(l));
         ns.push_back(l.type_name());
         leaves.push_back(join(ns, namespace_separator));

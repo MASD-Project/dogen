@@ -30,6 +30,7 @@
 #include "dogen/sml/io/package_io.hpp"
 #include "dogen/sml/io/property_io.hpp"
 #include "dogen/sml/io/qualified_name_io.hpp"
+#include "dogen/sml/io/reference_io.hpp"
 #include "dogen/sml/io/pod_io.hpp"
 
 #endif

@@ -28,6 +28,7 @@
 #include "dogen/sml/io/pod_io.hpp"
 #include "dogen/sml/io/primitive_io.hpp"
 #include "dogen/sml/io/enumeration_io.hpp"
+#include "dogen/sml/io/reference_io.hpp"
 
 namespace dogen {
 namespace sml {

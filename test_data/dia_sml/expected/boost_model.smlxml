@@ -747,10 +747,30 @@
 		<count>2</count>
 		<bucket_count>11</bucket_count>
 		<item_version>0</item_version>
-		<item>std</item>
-		<item>boost</item>
+		<item class_id="19" tracking_level="0" version="0">
+			<first>boost</first>
+			<second class_id="20" tracking_level="0" version="0">
+				<model_name>boost</model_name>
+				<external_package_path>
+					<count>0</count>
+					<item_version>0</item_version>
+				</external_package_path>
+				<is_system>0</is_system>
+			</second>
+		</item>
+		<item>
+			<first>std</first>
+			<second>
+				<model_name>std</model_name>
+				<external_package_path>
+					<count>0</count>
+					<item_version>0</item_version>
+				</external_package_path>
+				<is_system>0</is_system>
+			</second>
+		</item>
 	</dependencies>
-	<leaves class_id="19" tracking_level="0" version="0">
+	<leaves class_id="21" tracking_level="0" version="0">
 		<count>1</count>
 		<bucket_count>11</bucket_count>
 		<item_version>0</item_version>

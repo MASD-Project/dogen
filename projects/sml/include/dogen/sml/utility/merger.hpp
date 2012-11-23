@@ -28,6 +28,7 @@
 #include <list>
 #include <vector>
 #include <string>
+#include <unordered_map>
 #include "dogen/sml/domain/nested_qualified_name.hpp"
 #include "dogen/sml/domain/model.hpp"
 
@@ -51,6 +52,7 @@ private:
     std::vector<property> resolve_properties(const pod& pod);
     void resolve_parent(const pod& pod);
     void resolve();
+    std::unordered_map<std::string, reference> compute_dependencies() const;
     void combine();
 
 public:
@@ -59,7 +61,10 @@ public:
     model merge();
 
 private:
-    std::list<model> models_;
+    typedef std::unordered_map<std::string, model> models_type;
+
+private:
+    models_type models_;
     model merged_model_;
     const bool verbose_;
     bool has_target_;

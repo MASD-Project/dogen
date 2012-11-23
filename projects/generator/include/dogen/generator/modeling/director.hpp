@@ -112,8 +112,7 @@ private:
     /**
      * @brief Converts a Dia diagram to its SML representation.
      */
-    sml::model
-    to_sml(const dia::diagram& d, const std::string& file_name,
+    sml::model to_sml(const dia::diagram& d, config::reference ref,
         const bool is_target) const;
 
     /**

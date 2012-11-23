@@ -27,6 +27,7 @@
 
 #include "dogen/sml/test_data/meta_types_sequence.hpp"
 #include "dogen/sml/test_data/qualified_name_sequence.hpp"
+#include "dogen/sml/test_data/reference_sequence.hpp"
 #include "dogen/sml/test_data/property_sequence.hpp"
 #include "dogen/sml/test_data/pod_sequence.hpp"
 #include "dogen/sml/test_data/package_sequence.hpp"

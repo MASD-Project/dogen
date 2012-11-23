@@ -29,6 +29,7 @@
 #include "dogen/utility/test_data/sequence.hpp"
 #include "dogen/sml/domain/model.hpp"
 #include "dogen/sml/test_data/qualified_name_sequence.hpp"
+#include "dogen/sml/test_data/reference_sequence.hpp"
 #include "dogen/sml/test_data/package_sequence.hpp"
 #include "dogen/sml/test_data/pod_sequence.hpp"
 #include "dogen/sml/test_data/primitive_sequence.hpp"
@@ -130,7 +131,12 @@ public:
         result.pods(pods);
         result.primitives(primitives);
         result.is_system(false);
-        result.dependencies(std::unordered_set<std::string>{ "d1" });
+
+        reference_sequence rs;
+        dogen::sml::reference r(rs());
+        std::unordered_map<std::string, dogen::sml::reference>
+            deps({ { r.model_name(), r } });
+        result.dependencies(deps);
         result.leaves(std::unordered_set<qualified_name>{ qsec() });
 
         return result;

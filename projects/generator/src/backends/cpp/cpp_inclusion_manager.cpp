@@ -585,18 +585,18 @@ includes_for_registrar(cpp_file_types flt) const {
 
     const auto main(cpp_aspect_types::main);
     const auto ft(cpp_facet_types::serialization);
-    for (const auto l : model_.leaves())
+    for (const auto& l : model_.leaves())
         r.user.push_back(header_dependency(l, ft, main));
 
-    for (const auto d : model_.dependencies()) {
-        // FIXME: we need to check this against system models
-        if (d == std_model || d == boost_.model() || d.empty())
+    for (const auto& d : model_.dependencies()) {
+        const auto ref(d.second);
+        if (ref.is_system())
             continue;
 
         sml::qualified_name n;
-        n.model_name(d);
+        n.model_name(ref.model_name());
         n.type_name("registrar");
-        n.external_package_path(model_.external_package_path());
+        n.external_package_path(ref.external_package_path());
         r.user.push_back(header_dependency(n, ft, main));
     }
 

@@ -18,19 +18,26 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_SML_SERIALIZATION_SML_SER_HPP
-#define DOGEN_SML_SERIALIZATION_SML_SER_HPP
+#include <ostream>
+#include "dogen/utility/io/list_io.hpp"
+#include "dogen/sml/domain/reference.hpp"
 
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
+namespace dogen {
+namespace sml {
 
-#include "dogen/sml/serialization/meta_types_ser.hpp"
-#include "dogen/sml/serialization/qualified_name_ser.hpp"
-#include "dogen/sml/serialization/property_ser.hpp"
-#include "dogen/sml/serialization/pod_ser.hpp"
-#include "dogen/sml/serialization/package_ser.hpp"
-#include "dogen/sml/serialization/model_ser.hpp"
-#include "dogen/sml/serialization/reference_ser.hpp"
+bool reference::operator==(const reference& rhs) const {
+    return
+        model_name_ == rhs.model_name_ &&
+        external_package_path_ == rhs.external_package_path_ &&
+        is_system_ == rhs.is_system_;
+}
 
-#endif
+void reference::to_stream(std::ostream& stream) const {
+    stream << "\"reference\": {"
+           << "\"model_name\":\"" << model_name_ << "\", "
+           << "\"external_package_path\":" << external_package_path_ << ", "
+           << "\"is_system\":" << is_system_
+           << " }";
+}
+
+} }

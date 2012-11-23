@@ -97,11 +97,20 @@ merger::resolve_partial_type(nested_qualified_name& n) const {
     if (i != pods.end())
         return lambda();
 
-    // then try setting package path
+    // then try setting package path to the target one
     r.external_package_path(merged_model_.external_package_path());
     i = pods.find(r);
     if (i != pods.end())
         return lambda();
+
+    // now try all available package paths
+    for (const auto& pair : models_) {
+        const auto m(pair.second);
+        r.external_package_path(m.external_package_path());
+        i = pods.find(r);
+        if (i != pods.end())
+            return lambda();
+    }
 
     // reset external package path
     r.external_package_path(std::list<std::string>{});
@@ -176,16 +185,46 @@ void merger::resolve() {
     merged_model_.pods(pods);
 }
 
-void merger::combine() {
-    if (!has_target_)
+std::unordered_map<std::string, reference>
+merger::compute_dependencies() const {
+    if (!has_target_) {
+        BOOST_LOG_SEV(lg, error) << "Combining when has_target is false.";
         BOOST_THROW_EXCEPTION(merging_error(missing_target));
+    }
+
+    const auto i(models_.find(merged_model_.name()));
+    if (i == models_.end()) {
+        BOOST_LOG_SEV(lg, error) << "Combining when target model not in map.";
+        BOOST_THROW_EXCEPTION(merging_error(missing_target));
+    }
+
+    std::unordered_map<std::string, reference> r;
+    for (const auto pair : i->second.dependencies()) {
+        const auto original_dependency(pair.second);
+        const auto i(models_.find(original_dependency.model_name()));
+        if (i == models_.end()) {
+            BOOST_LOG_SEV(lg, error) << "Cannot find target dependency: "
+                                     << original_dependency.model_name();
+            BOOST_THROW_EXCEPTION(merging_error(missing_target));
+        }
+
+        const auto m(i->second);
+        reference ref(m.name(), m.external_package_path(), m.is_system());
+        r.insert(std::make_pair(m.name(), ref));
+    }
+    return r;
+}
+
+void merger::combine() {
+    merged_model_.dependencies(compute_dependencies());
 
     auto pods(merged_model_.pods());
     auto primitives(merged_model_.primitives());
     auto enumerations(merged_model_.enumerations());
     auto exceptions(merged_model_.exceptions());
 
-    for (const auto m : models_) {
+    for (const auto pair : models_) {
+        const auto m(pair.second);
         BOOST_LOG_SEV(lg, info) << "Combining model: '" << m.name()
                                 << "' pods: " << m.pods().size()
                                 << " primitives: " << m.primitives().size()
@@ -252,7 +291,6 @@ void merger::add_target(model model) {
     }
 
     merged_model_.name(model.name());
-    merged_model_.dependencies(model.dependencies());
     merged_model_.leaves(model.leaves());
 
     has_target_ = true;
@@ -265,7 +303,7 @@ void merger::add_target(model model) {
 void merger::add(model model) {
 
     BOOST_LOG_SEV(lg, debug) << "adding model: " << model.name();
-    models_.push_back(model);
+    models_.insert(std::make_pair(model.name(), model));
 }
 
 model merger::merge() {
