@@ -19,6 +19,8 @@
  *
  */
 #include <ostream>
+#include <boost/throw_exception.hpp>
+#include "dogen/utility/log/logger.hpp"
 #include "dogen/generator/generation_failure.hpp"
 #include "dogen/generator/backends/cpp/formatters/cpp_qualified_name.hpp"
 #include "dogen/generator/backends/cpp/formatters/cpp_licence.hpp"
@@ -30,12 +32,15 @@
 #include "dogen/generator/backends/cpp/formatters/cpp_indenter.hpp"
 #include "dogen/generator/backends/cpp/formatters/cpp_hash_implementation.hpp"
 
+using namespace dogen::utility::log;
+
 namespace {
 
+static logger lg(logger_factory("formatters::hash_implementation"));
 const std::string std_ns("std");
 
 const std::string invalid_sequence_container(
-    "Sequence containers have exactly one type argument");
+    "Sequence containers have exactly one type argument: ");
 const std::string invalid_associative_container(
     "Associative containers have one or two type arguments");
 const std::string invalid_smart_pointer(
@@ -89,8 +94,14 @@ void hash_implementation::combine_function(const class_view_model& vm) {
 void hash_implementation::
 sequence_container_helper(const nested_type_view_model& vm) {
     const auto children(vm.children());
-    if (children.size() != 1)
-        throw generation_failure(invalid_sequence_container);
+    if (children.size() != 1) {
+        BOOST_LOG_SEV(lg, error) << "Children container has unexpected size: "
+                                 << children.size() << " in nested type: "
+                                 << vm.name();
+
+        BOOST_THROW_EXCEPTION(generation_failure(invalid_sequence_container
+                + vm.name()));
+    }
 
     const std::string container_identifiable_type_name(
         vm.complete_identifiable_name());
@@ -132,7 +143,7 @@ associative_container_helper(const nested_type_view_model& vm) {
         throw generation_failure(invalid_associative_container);
 
     if (children.size() == 1) {
-        sequence_container_helper(children.front());
+        sequence_container_helper(vm);
         return;
     }
 
@@ -216,6 +227,7 @@ smart_pointer_helper(const nested_type_view_model& vm) {
 void hash_implementation::
 recursive_helper_method_creator(const nested_type_view_model& vm,
     std::unordered_set<std::string>& types_done) {
+    BOOST_LOG_SEV(lg, debug) << "Creating helper methods for " << vm.name();
 
     if (types_done.find(vm.complete_identifiable_name()) != types_done.end())
         return;
@@ -245,6 +257,8 @@ void hash_implementation::create_helper_methods(const class_view_model& vm) {
 }
 
 void hash_implementation::hasher_hash_method(const class_view_model& vm) {
+    BOOST_LOG_SEV(lg, debug) << "Creating hash method for " << vm.name();
+
     const auto props(vm.properties());
     const auto parents(vm.parents());
     stream_ << indenter_ << "std::size_t " << vm.name() << "_hasher::"
