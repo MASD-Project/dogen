@@ -407,6 +407,8 @@ void dia_dfs_visitor::process_dia_object(const dogen::dia::object& o) {
                 pod.pod_type(dogen::sml::pod_types::value);
             else if (st == stereotypes::service)
                 pod.pod_type(dogen::sml::pod_types::service);
+            else
+                pod.pod_type(dogen::sml::pod_types::value);
         } else if (a.name() == dia_documentation) {
             const std::string doc(transform_string_attribute(a));
             pod.documentation(doc);
