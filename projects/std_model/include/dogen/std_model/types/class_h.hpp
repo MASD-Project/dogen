@@ -28,8 +28,10 @@
 #include <algorithm>
 #include <unordered_set>
 #include "dogen/std_model/hash/class_a_hash.hpp"
+#include "dogen/std_model/hash/pkg1/class_c_hash.hpp"
 #include "dogen/std_model/serialization/class_h_fwd_ser.hpp"
 #include "dogen/std_model/types/class_a.hpp"
+#include "dogen/std_model/types/pkg1/class_c.hpp"
 
 namespace dogen {
 namespace std_model {
@@ -42,7 +44,9 @@ public:
     ~class_h() = default;
 
 public:
-    explicit class_h(const std::unordered_set<dogen::std_model::class_a>& prop_0);
+    class_h(
+        const std::unordered_set<dogen::std_model::class_a>& prop_0,
+        const std::unordered_set<dogen::std_model::pkg1::class_c>& prop_1);
 
 private:
     template<typename Archive>
@@ -60,6 +64,14 @@ public:
         prop_0_ = v;
     }
 
+    std::unordered_set<dogen::std_model::pkg1::class_c> prop_1() const {
+        return prop_1_;
+    }
+
+    void prop_1(const std::unordered_set<dogen::std_model::pkg1::class_c>& v) {
+        prop_1_ = v;
+    }
+
 public:
     bool operator==(const class_h& rhs) const;
     bool operator!=(const class_h& rhs) const {
@@ -72,6 +84,7 @@ public:
 
 private:
     std::unordered_set<dogen::std_model::class_a> prop_0_;
+    std::unordered_set<dogen::std_model::pkg1::class_c> prop_1_;
 };
 
 } }

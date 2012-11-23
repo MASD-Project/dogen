@@ -23,16 +23,21 @@
 namespace dogen {
 namespace std_model {
 
-class_h::class_h(const std::unordered_set<dogen::std_model::class_a>& prop_0)
-    : prop_0_(prop_0) { }
+class_h::class_h(
+    const std::unordered_set<dogen::std_model::class_a>& prop_0,
+    const std::unordered_set<dogen::std_model::pkg1::class_c>& prop_1)
+    : prop_0_(prop_0),
+      prop_1_(prop_1) { }
 
 void class_h::swap(class_h& other) noexcept {
     using std::swap;
     swap(prop_0_, other.prop_0_);
+    swap(prop_1_, other.prop_1_);
 }
 
 bool class_h::operator==(const class_h& rhs) const {
-    return prop_0_ == rhs.prop_0_;
+    return prop_0_ == rhs.prop_0_ &&
+        prop_1_ == rhs.prop_1_;
 }
 
 class_h& class_h::operator=(class_h other) {

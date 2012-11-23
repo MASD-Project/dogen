@@ -29,6 +29,7 @@
 #include <boost/serialization/nvp.hpp>
 #include "dogen/std_model/serialization/class_a_ser.hpp"
 #include "dogen/std_model/serialization/class_h_ser.hpp"
+#include "dogen/std_model/serialization/pkg1/class_c_ser.hpp"
 #include "dogen/utility/serialization/unordered_set.hpp"
 
 #ifdef __linux__
@@ -44,6 +45,7 @@ void save(Archive& ar,
     const dogen::std_model::class_h& v,
     const unsigned int /*version*/) {
     ar << make_nvp("prop_0", v.prop_0_);
+    ar << make_nvp("prop_1", v.prop_1_);
 }
 
 template<typename Archive>
@@ -51,6 +53,7 @@ void load(Archive& ar,
     dogen::std_model::class_h& v,
     const unsigned int /*version*/) {
     ar >> make_nvp("prop_0", v.prop_0_);
+    ar >> make_nvp("prop_1", v.prop_1_);
 }
 
 } }

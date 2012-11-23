@@ -20,6 +20,7 @@
  */
 #include "dogen/std_model/test_data/class_a_td.hpp"
 #include "dogen/std_model/test_data/class_h_td.hpp"
+#include "dogen/std_model/test_data/pkg1/class_c_td.hpp"
 
 namespace {
 
@@ -36,6 +37,19 @@ std::unordered_set<dogen::std_model::class_a> create_std_unordered_set_dogen_std
     return r;
 }
 
+dogen::std_model::pkg1::class_c
+create_dogen_std_model_pkg1_class_c(const unsigned int position) {
+    return dogen::std_model::pkg1::class_c_generator::create(position);
+}
+
+std::unordered_set<dogen::std_model::pkg1::class_c> create_std_unordered_set_dogen_std_model_pkg1_class_c(unsigned int position) {
+    std::unordered_set<dogen::std_model::pkg1::class_c> r;
+    for (unsigned int i(0); i < 10; ++i) {
+        r.insert(create_dogen_std_model_pkg1_class_c(position + i));
+    }
+    return r;
+}
+
 }
 
 namespace dogen {
@@ -46,6 +60,7 @@ class_h_generator::class_h_generator() : position_(0) { }
 void class_h_generator::
 populate(const unsigned int position, result_type& v) {
     v.prop_0(create_std_unordered_set_dogen_std_model_class_a(position + 0));
+    v.prop_1(create_std_unordered_set_dogen_std_model_pkg1_class_c(position + 1));
 }
 
 class_h_generator::result_type
