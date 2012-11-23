@@ -18,15 +18,33 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/std_model/types/base.hpp"
-#include "dogen/std_model/types/class_a.hpp"
-#include "dogen/std_model/types/class_a_unversioned_key.hpp"
-#include "dogen/std_model/types/class_a_versioned_key.hpp"
-#include "dogen/std_model/types/class_b.hpp"
-#include "dogen/std_model/types/class_d.hpp"
-#include "dogen/std_model/types/class_e.hpp"
-#include "dogen/std_model/types/class_f.hpp"
-#include "dogen/std_model/types/class_g.hpp"
-#include "dogen/std_model/types/class_h.hpp"
-#include "dogen/std_model/types/derived.hpp"
-#include "dogen/std_model/types/pkg1/class_c.hpp"
+#include <ostream>
+#include "dogen/std_model/io/class_a_io.hpp"
+#include "dogen/std_model/io/class_h_io.hpp"
+
+namespace std {
+
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_set<dogen::std_model::class_a>& v) {
+    s << "[ ";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << *i;
+    }
+    s << "] ";
+    return s;
+}
+
+}
+
+namespace dogen {
+namespace std_model {
+
+std::ostream& operator<<(std::ostream& s, const class_h& v) {
+    s << " { "
+      << "\"__type__\": " << "\"class_h\"" << ", "
+      << "\"prop_0\": " << v.prop_0()
+      << " }";
+    return(s);
+}
+
+} }

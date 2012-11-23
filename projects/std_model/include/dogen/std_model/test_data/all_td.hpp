@@ -27,5 +27,6 @@
 #include "dogen/std_model/test_data/class_e_td.hpp"
 #include "dogen/std_model/test_data/class_f_td.hpp"
 #include "dogen/std_model/test_data/class_g_td.hpp"
+#include "dogen/std_model/test_data/class_h_td.hpp"
 #include "dogen/std_model/test_data/derived_td.hpp"
 #include "dogen/std_model/test_data/pkg1/class_c_td.hpp"

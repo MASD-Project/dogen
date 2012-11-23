@@ -18,15 +18,36 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/std_model/types/base.hpp"
-#include "dogen/std_model/types/class_a.hpp"
-#include "dogen/std_model/types/class_a_unversioned_key.hpp"
-#include "dogen/std_model/types/class_a_versioned_key.hpp"
-#include "dogen/std_model/types/class_b.hpp"
-#include "dogen/std_model/types/class_d.hpp"
-#include "dogen/std_model/types/class_e.hpp"
-#include "dogen/std_model/types/class_f.hpp"
-#include "dogen/std_model/types/class_g.hpp"
-#include "dogen/std_model/types/class_h.hpp"
-#include "dogen/std_model/types/derived.hpp"
-#include "dogen/std_model/types/pkg1/class_c.hpp"
+#include "dogen/std_model/hash/class_a_hash.hpp"
+#include "dogen/std_model/hash/class_h_hash.hpp"
+
+namespace {
+
+template <typename HashableType>
+inline void combine(std::size_t& seed, const HashableType& value)
+{
+    std::hash<HashableType> hasher;
+    seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
+}
+
+inline std::size_t hash_std_unordered_set_dogen_std_model_class_a(const std::unordered_set<dogen::std_model::class_a>& v){
+    std::size_t seed(0);
+    for (const auto i : v) {
+        combine(seed, i);
+    }
+    return seed;
+}
+
+}
+
+namespace dogen {
+namespace std_model {
+
+std::size_t class_h_hasher::hash(const class_h&v) {
+    std::size_t seed(0);
+
+    combine(seed, hash_std_unordered_set_dogen_std_model_class_a(v.prop_0()));
+    return seed;
+}
+
+} }

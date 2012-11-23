@@ -27,5 +27,6 @@
 #include "dogen/std_model/io/class_e_io.hpp"
 #include "dogen/std_model/io/class_f_io.hpp"
 #include "dogen/std_model/io/class_g_io.hpp"
+#include "dogen/std_model/io/class_h_io.hpp"
 #include "dogen/std_model/io/derived_io.hpp"
 #include "dogen/std_model/io/pkg1/class_c_io.hpp"

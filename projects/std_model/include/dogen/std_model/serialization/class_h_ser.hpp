@@ -18,15 +18,26 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/std_model/types/base.hpp"
-#include "dogen/std_model/types/class_a.hpp"
-#include "dogen/std_model/types/class_a_unversioned_key.hpp"
-#include "dogen/std_model/types/class_a_versioned_key.hpp"
-#include "dogen/std_model/types/class_b.hpp"
-#include "dogen/std_model/types/class_d.hpp"
-#include "dogen/std_model/types/class_e.hpp"
-#include "dogen/std_model/types/class_f.hpp"
-#include "dogen/std_model/types/class_g.hpp"
+#ifndef DOGEN_STD_MODEL_SERIALIZATION_CLASS_H_SER_HPP
+#define DOGEN_STD_MODEL_SERIALIZATION_CLASS_H_SER_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include <boost/serialization/split_free.hpp>
 #include "dogen/std_model/types/class_h.hpp"
-#include "dogen/std_model/types/derived.hpp"
-#include "dogen/std_model/types/pkg1/class_c.hpp"
+
+BOOST_SERIALIZATION_SPLIT_FREE(dogen::std_model::class_h)
+namespace boost {
+namespace serialization {
+
+template<typename Archive>
+void save(Archive& ar, const dogen::std_model::class_h& v, unsigned int version);
+
+template<typename Archive>
+void load(Archive& ar, dogen::std_model::class_h& v, unsigned int version);
+
+} }
+
+#endif
