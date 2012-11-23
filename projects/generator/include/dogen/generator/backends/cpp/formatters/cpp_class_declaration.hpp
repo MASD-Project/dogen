@@ -57,6 +57,7 @@ protected:
     void close_class();
     void compiler_generated_constuctors(const class_view_model& vm);
     void default_constructor(const class_view_model& vm);
+    void move_constructor(const class_view_model& vm);
     void complete_constructor(const class_view_model& vm);
     void destructor(const class_view_model& vm);
     void friends(const class_view_model& vm);

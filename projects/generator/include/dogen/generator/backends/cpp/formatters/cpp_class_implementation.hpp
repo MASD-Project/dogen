@@ -54,6 +54,7 @@ public:
 
 protected:
     void default_constructor(const class_view_model& vm);
+    void move_constructor(const class_view_model& vm);
     void complete_constructor(const class_view_model& vm);
     void to_stream(const class_view_model& vm);
     void swap(const class_view_model& vm);

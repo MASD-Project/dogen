@@ -54,6 +54,8 @@ const std::string deque_include("boost/serialization/deque.hpp");
 const std::string list_include("boost/serialization/list.hpp");
 const std::string serialization_shared_ptr_include(
     "boost/serialization/shared_ptr.hpp");
+const std::string serialization_optional_include(
+    "boost/serialization/optional.hpp");
 const std::string shared_ptr_include("boost/shared_ptr.hpp");
 const std::string exception_info_include("boost/exception/info.hpp");
 const std::string state_saver_include("boost/io/ios_state.hpp");
@@ -115,6 +117,8 @@ std::string boost_model_helper::include(const boost_types type) const {
     case boost_types::list: return list_include;
     case boost_types::serialization_shared_ptr:
         return serialization_shared_ptr_include;
+    case boost_types::serialization_optional:
+        return serialization_optional_include;
     case boost_types::exception_info: return exception_info_include;
     case boost_types::io_ios_state: return state_saver_include;
     default: break;

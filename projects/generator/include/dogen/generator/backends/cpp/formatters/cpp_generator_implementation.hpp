@@ -66,6 +66,7 @@ private:
     void associative_container_helper(
         const nested_type_view_model& vm, unsigned int quantity);
     void smart_pointer_helper(const nested_type_view_model& vm);
+    void optional_helper(const nested_type_view_model& vm);
 
     void domain_type_helper(const std::string& identifiable_type_name,
         const std::string& type_name, bool as_pointer);

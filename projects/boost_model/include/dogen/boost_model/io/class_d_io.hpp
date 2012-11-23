@@ -18,9 +18,23 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/boost_model/types/class_a.hpp"
-#include "dogen/boost_model/types/class_b.hpp"
-#include "dogen/boost_model/types/class_base.hpp"
+#ifndef DOGEN_BOOST_MODEL_IO_CLASS_D_IO_HPP
+#define DOGEN_BOOST_MODEL_IO_CLASS_D_IO_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include <iosfwd>
 #include "dogen/boost_model/types/class_d.hpp"
-#include "dogen/boost_model/types/class_derived.hpp"
-#include "dogen/boost_model/types/pkg1/class_c.hpp"
+
+namespace dogen {
+namespace boost_model {
+
+std::ostream&
+operator<<(std::ostream& s,
+     const dogen::boost_model::class_d& v);
+
+} }
+
+#endif

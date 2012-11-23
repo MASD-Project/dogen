@@ -155,6 +155,14 @@ public:
     /**@}*/
 
     /**
+     * @brief If true, the type is an optional like type.
+     */
+    /**@{*/
+    bool is_optional_like() const { return is_optional_like_; }
+    void is_optional_like(bool v) { is_optional_like_ = v; }
+    /**@}*/
+
+    /**
      * @brief If the type is a generic type, returns all the type
      * arguments.
      */
@@ -185,6 +193,7 @@ private:
     bool is_sequence_container_;
     bool is_associative_container_;
     bool is_smart_pointer_;
+    bool is_optional_like_;
     std::list<nested_type_view_model> children_;
     std::list<std::string> namespaces_;
 };

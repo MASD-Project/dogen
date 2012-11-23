@@ -18,9 +18,30 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/boost_model/types/class_a.hpp"
-#include "dogen/boost_model/types/class_b.hpp"
-#include "dogen/boost_model/types/class_base.hpp"
 #include "dogen/boost_model/types/class_d.hpp"
-#include "dogen/boost_model/types/class_derived.hpp"
-#include "dogen/boost_model/types/pkg1/class_c.hpp"
+
+namespace dogen {
+namespace boost_model {
+
+class_d::class_d(class_d&& rhs)
+    : prop_0_(std::move(rhs.prop_0_)) { }
+
+class_d::class_d(const boost::optional<int>& prop_0)
+    : prop_0_(prop_0) { }
+
+void class_d::swap(class_d& other) noexcept {
+    using std::swap;
+    swap(prop_0_, other.prop_0_);
+}
+
+bool class_d::operator==(const class_d& rhs) const {
+    return prop_0_ == rhs.prop_0_;
+}
+
+class_d& class_d::operator=(class_d other) {
+    using std::swap;
+    swap(*this, other);
+    return *this;
+}
+
+} }

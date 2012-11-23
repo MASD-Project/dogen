@@ -70,7 +70,8 @@ bool hash_implementation::is_hashable(const nested_type_view_model& vm) {
     return
         !vm.is_sequence_container() &&
         !vm.is_associative_container() &&
-        !vm.is_smart_pointer();
+        !vm.is_smart_pointer() &&
+        !vm.is_optional_like();
 }
 
 void hash_implementation::combine_function(const class_view_model& vm) {
@@ -87,6 +88,53 @@ void hash_implementation::combine_function(const class_view_model& vm) {
         stream_ << indenter_ << "std::hash<HashableType> hasher;" << std::endl
                 << indenter_ << "seed ^= hasher(value) + 0x9e3779b9 + "
                 << "(seed << 6) + (seed >> 2);" << std::endl;
+    }
+    utility_.close_scope();
+}
+
+void hash_implementation::optional_helper(const nested_type_view_model& vm) {
+    const auto children(vm.children());
+    if (children.size() != 1) {
+        BOOST_LOG_SEV(lg, error) << "Children container has unexpected size: "
+                                 << children.size() << " in nested type: "
+                                 << vm.name();
+
+        BOOST_THROW_EXCEPTION(generation_failure(invalid_sequence_container
+                + vm.name()));
+    }
+
+    const std::string container_identifiable_type_name(
+        vm.complete_identifiable_name());
+    const std::string container_type_name(vm.complete_name());
+
+    utility_.blank_line();
+    stream_ << indenter_ << "inline std::size_t hash_"
+            << container_identifiable_type_name
+            << "(const " << container_type_name << "& v)";
+
+    utility_.open_scope();
+    {
+        cpp_positive_indenter_scope s(indenter_);
+        stream_ << indenter_ << "std::size_t seed(0);"
+                << std::endl;
+
+        utility_.blank_line();
+        stream_ << indenter_ << "if (!v)" << std::endl;
+        {
+            cpp_positive_indenter_scope s(indenter_);
+            stream_ << indenter_ << "return seed;" << std::endl;
+        }
+
+        utility_.blank_line();
+        const auto containee(children.front());
+        if (is_hashable(containee)) {
+            stream_ << indenter_ << "combine(seed, *v);" << std::endl;
+        } else {
+            stream_ << indenter_ << "combine(seed, "
+                    << "hash_" << containee.complete_identifiable_name()
+                    << "(*v));" << std::endl;
+        }
+        stream_ << indenter_ << "return seed;" << std::endl;
     }
     utility_.close_scope();
 }
@@ -144,6 +192,7 @@ associative_container_helper(const nested_type_view_model& vm) {
 
     if (children.size() == 1) {
         sequence_container_helper(vm);
+
         return;
     }
 
@@ -242,6 +291,8 @@ recursive_helper_method_creator(const nested_type_view_model& vm,
         associative_container_helper(vm);
     else if (vm.is_smart_pointer())
         smart_pointer_helper(vm);
+    else if (vm.is_optional_like())
+        optional_helper(vm);
 
     types_done.insert(vm.complete_identifiable_name());
 }

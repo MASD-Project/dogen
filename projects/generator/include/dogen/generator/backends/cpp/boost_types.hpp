@@ -57,6 +57,7 @@ enum class boost_types : unsigned int {
     deque, ///< std::deque support
     list, ///< std::list support
     serialization_shared_ptr, ///< boost::shared_ptr support
+    serialization_optional, ///< boost::optional support
     exception_info, ///< boost exeption base class
     io_ios_state ///< IO state savers
 };

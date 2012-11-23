@@ -45,26 +45,31 @@ BOOST_AUTO_TEST_SUITE(boost_model)
 BOOST_AUTO_TEST_CASE(validate_equality) {
     SETUP_TEST_LOG("validate_equality");
     test_equality<class_b_generator>();
+    test_equality<class_d_generator>();
 }
 
 BOOST_AUTO_TEST_CASE(validate_serialisation) {
     SETUP_TEST_LOG("validate_serialisation");
     rountrip_type<class_b_generator>();
+    rountrip_type<class_d_generator>();
 }
 
 BOOST_AUTO_TEST_CASE(validate_hashing) {
     SETUP_TEST_LOG("validate_hashing");
     test_hashing<class_b_generator>();
+    test_hashing<class_d_generator>();
 }
 
 BOOST_AUTO_TEST_CASE(validate_swap) {
     SETUP_TEST_LOG("validate_hashing");
     test_swap<class_b_generator>();
+    test_swap<class_d_generator>();
 }
 
 BOOST_AUTO_TEST_CASE(validate_io) {
     SETUP_TEST_LOG("validate_io");
     test_io<class_b_generator>();
+    test_io<class_d_generator>();
 }
 
 BOOST_AUTO_TEST_SUITE_END()

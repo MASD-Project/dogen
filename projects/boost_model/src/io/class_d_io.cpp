@@ -18,9 +18,33 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/boost_model/types/class_a.hpp"
-#include "dogen/boost_model/types/class_b.hpp"
-#include "dogen/boost_model/types/class_base.hpp"
-#include "dogen/boost_model/types/class_d.hpp"
-#include "dogen/boost_model/types/class_derived.hpp"
-#include "dogen/boost_model/types/pkg1/class_c.hpp"
+#include <ostream>
+#include "dogen/boost_model/io/class_d_io.hpp"
+
+namespace boost {
+
+inline std::ostream& operator<<(std::ostream& s, const boost::optional<int>& v) {
+    s << "{ " << "\"__type__\": " << "\"boost::optional\"" << ", ";
+
+    if (v)
+        s << "\"data\": " << *v;
+    else
+        s << "\"data\": ""\"<empty>\"";
+    s<< " }";
+    return s;
+}
+
+}
+
+namespace dogen {
+namespace boost_model {
+
+std::ostream& operator<<(std::ostream& s, const class_d& v) {
+    s << " { "
+      << "\"__type__\": " << "\"class_d\"" << ", "
+      << "\"prop_0\": " << v.prop_0()
+      << " }";
+    return(s);
+}
+
+} }

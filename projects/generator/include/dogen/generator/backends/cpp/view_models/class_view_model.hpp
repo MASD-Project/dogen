@@ -54,6 +54,7 @@ public:
         : name_(name),
           has_primitive_properties_(false),
           requires_stream_manipulators_(false),
+          requires_manual_move_constructor_(false),
           is_parent_(false) { }
 
 public:
@@ -126,6 +127,19 @@ public:
     }
     void requires_stream_manipulators(bool value) {
         requires_stream_manipulators_ = value;
+    }
+    /**@}*/
+
+    /**
+     * @brief True if the class requires a manually generated move
+     * constructor, false otherwise.
+     */
+    /**@{*/
+    bool requires_manual_move_constructor() const {
+        return(requires_manual_move_constructor_);
+    }
+    void requires_manual_move_constructor(bool value) {
+        requires_manual_move_constructor_ = value;
     }
     /**@}*/
 
@@ -204,6 +218,7 @@ private:
     std::string name_;
     bool has_primitive_properties_;
     bool requires_stream_manipulators_;
+    bool requires_manual_move_constructor_;
     std::string database_name_;
     std::string schema_name_;
     bool is_parent_;

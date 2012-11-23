@@ -76,6 +76,7 @@ const std::string long_long_type("long long");
 const std::string ulong_long_type("unsigned long long");
 const std::string double_type("double");
 const std::string float_type("float");
+const std::string optional_type("boost::optional");
 
 bool is_char_like(const std::string& type_name) {
     return type_name == char_type || type_name == uchar_type;
@@ -83,6 +84,10 @@ bool is_char_like(const std::string& type_name) {
 
 bool is_string_like(const std::string& type_name) {
     return is_char_like(type_name) || type_name == string_type;
+}
+
+bool is_optional_like(const std::string& type_name) {
+    return type_name == optional_type;
 }
 
 bool is_int_like(const std::string& type_name) {
@@ -231,6 +236,7 @@ void sml_dfs_visitor::transform_nested_qualified_name(
         vm.is_int_like(is_int_like(vm.name()));
     }
     vm.is_string_like(is_string_like(vm.name()));
+    vm.is_optional_like(is_optional_like(vm.name()));
 
     if (qn.meta_type() == meta_types::pod) {
         const auto i(state_->pods_.find(qn));
@@ -320,12 +326,16 @@ void sml_dfs_visitor::process_sml_pod(const dogen::sml::pod& pod) {
     std::list<property_view_model> props_vm;
     bool has_primitive_properties(false);
     bool requires_stream_manipulators(false);
+    bool requires_manual_move_constructor(false);
     for(const auto p : pod.properties()) {
         property_view_model k(p.name());
         k.documentation(p.documentation());
 
         nested_type_view_model type_vm;
         std::string complete_name;
+        if (p.type_name().type().type_name() == "optional")
+            requires_manual_move_constructor = true;
+
         transform_nested_qualified_name(p.type_name(), type_vm, complete_name);
         if (type_vm.is_primitive()) {
             has_primitive_properties = true;
@@ -343,6 +353,7 @@ void sml_dfs_visitor::process_sml_pod(const dogen::sml::pod& pod) {
     cvm.all_properties(all_props_vm);
     cvm.has_primitive_properties(has_primitive_properties);
     cvm.requires_stream_manipulators(requires_stream_manipulators);
+    cvm.requires_manual_move_constructor(requires_manual_move_constructor);
 
     const auto opn(pod.original_parent_name());
     if (opn) {

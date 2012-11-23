@@ -268,6 +268,10 @@ void cpp_inclusion_manager::append_boost_dependencies(
     const bool is_opt(qname.type_name() == boost_.type(boost_types::optional));
     if (is_header && is_domain && is_opt)
         il.system.push_back(boost_.include(boost_types::optional));
+
+    if (is_implementation && is_serialization && is_opt)
+        il.system.push_back(
+            boost_.include(boost_types::serialization_optional));
 }
 
 void cpp_inclusion_manager::append_std_dependencies(

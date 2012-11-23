@@ -67,6 +67,31 @@ void cpp_class_implementation::default_constructor(const class_view_model& vm) {
     utility_.blank_line();
 }
 
+void cpp_class_implementation::move_constructor(const class_view_model& vm) {
+    if (!vm.requires_manual_move_constructor())
+        return;
+
+    stream_ << indenter_ << vm.name() << "::" << vm.name()
+            << "(" << vm.name() << "&& rhs)" << std::endl;
+    {
+        cpp_positive_indenter_scope s(indenter_);
+        bool is_first(true);
+        for (const auto p : vm.properties()) {
+            if (is_first)
+                stream_ << indenter_ << ": ";
+            else
+                stream_ << "," << std::endl << indenter_ << "  ";
+
+            stream_ << utility_.as_member_variable(p.name()) << "("
+                    << "std::move(rhs." << utility_.as_member_variable(p.name())
+                    << "))";
+            is_first = false;
+        }
+        stream_ << " { }" << std::endl;
+    }
+    utility_.blank_line();
+}
+
 void cpp_class_implementation::complete_constructor(const class_view_model& vm) {
     const auto props(vm.all_properties());
     if (props.empty())

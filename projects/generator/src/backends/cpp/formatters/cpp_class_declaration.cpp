@@ -117,6 +117,21 @@ void cpp_class_declaration::complete_constructor(const class_view_model& vm) {
     utility_.blank_line();
 }
 
+void cpp_class_declaration::move_constructor(const class_view_model& vm) {
+    if (!vm.requires_manual_move_constructor())
+        return;
+
+    const auto props(vm.all_properties());
+    if (props.empty())
+        return;
+
+    utility_.public_access_specifier();
+    const auto p(*props.begin());
+    stream_ << indenter_ << vm.name() << "(" << vm.name()
+            << "&& rhs);" << std::endl;
+    utility_.blank_line();
+}
+
 void cpp_class_declaration::destructor(const class_view_model& vm) {
     /*
      * according to MEC++, item 33, base classes should always be
@@ -141,9 +156,12 @@ compiler_generated_constuctors(const class_view_model& vm) {
         stream_ << indenter_ << vm.name() << "() = default;" << std::endl;
 
     stream_ << indenter_ << vm.name() << "(const " << vm.name()
-            << "&) = default;" << std::endl
-            << indenter_ << vm.name() << "(" << vm.name() << "&&) = default;"
-            << std::endl;
+            << "&) = default;" << std::endl;
+
+    if (!vm.requires_manual_move_constructor()) {
+        stream_ << indenter_ << vm.name() << "(" << vm.name() << "&&) = default;"
+                << std::endl;
+    }
 
     if (!vm.is_parent() && vm.parents().empty()) {
         stream_ << indenter_ << "~" << vm.name() << "() = default;"

@@ -21,5 +21,6 @@
 #include "dogen/boost_model/test_data/class_a_td.hpp"
 #include "dogen/boost_model/test_data/class_b_td.hpp"
 #include "dogen/boost_model/test_data/class_base_td.hpp"
+#include "dogen/boost_model/test_data/class_d_td.hpp"
 #include "dogen/boost_model/test_data/class_derived_td.hpp"
 #include "dogen/boost_model/test_data/pkg1/class_c_td.hpp"

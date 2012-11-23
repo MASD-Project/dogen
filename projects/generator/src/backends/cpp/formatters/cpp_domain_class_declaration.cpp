@@ -38,6 +38,7 @@ void cpp_domain_class_declaration::
 hand_crafted_constructors(const class_view_model& vm) {
     default_constructor(vm);
     destructor(vm);
+    move_constructor(vm);
     if (!disable_complete_constructor_)
         complete_constructor(vm);
 }

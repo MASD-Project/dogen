@@ -192,6 +192,46 @@ smart_pointer_helper(const nested_type_view_model& vm) {
 }
 
 void generator_implementation::
+optional_helper(const nested_type_view_model& vm) {
+    const auto container_identifiable_type_name(
+        vm.complete_identifiable_name());
+    const auto container_type_name(vm.complete_name());
+
+    const auto children(vm.children());
+    if (children.size() != 1)
+        throw generation_failure(invalid_smart_pointer);
+
+    const auto containee_vm(children.front());
+    const auto containee_identifiable_type_name(
+        containee_vm.complete_identifiable_name());
+
+    stream_ << indenter_ << container_type_name
+            << std::endl
+            << indenter_ << "create_"
+            << container_identifiable_type_name
+            << "(unsigned int position) ";
+
+    utility_.open_scope();
+    {
+        cpp_positive_indenter_scope s(indenter_);
+        stream_ << indenter_ << container_type_name << " r(";
+        {
+            cpp_positive_indenter_scope s(indenter_);
+            const auto containee_vm(children.front());
+            const auto containee_identifiable_type_name(
+                containee_vm.complete_identifiable_name());
+
+            stream_ << indenter_ << "create_"
+                    << containee_identifiable_type_name
+                    << "(position));" << std::endl;
+        }
+        stream_ << indenter_ << "return r;" << std::endl;
+    }
+    utility_.close_scope();
+    utility_.blank_line();
+}
+
+void generator_implementation::
 domain_type_helper(const std::string& identifiable_type_name,
     const std::string& type_name, bool as_pointer) {
     stream_ << indenter_ << type_name << (as_pointer ? "*" : "")
@@ -310,6 +350,8 @@ recursive_helper_method_creator(const nested_type_view_model& vm,
         associative_container_helper(vm, quantity);
     else if (vm.is_smart_pointer())
         smart_pointer_helper(vm);
+    else if (vm.is_optional_like())
+        optional_helper(vm);
     else {
         if (vm.name() == string_type) {
             string_helper();
