@@ -42,6 +42,7 @@ const std::string std_set("set");
 const std::string std_deque("deque");
 const std::string std_list("list");
 const std::string std_unordered_map("unordered_map");
+const std::string std_unordered_set("unordered_set");
 const std::string iosfwd("iosfwd");
 const std::string algorithm("algorithm");
 const std::string ostream("ostream");
@@ -263,6 +264,10 @@ void cpp_inclusion_manager::append_boost_dependencies(
     if (is_implementation && is_serialization && is_sp)
         il.system.push_back(
             boost_.include(boost_types::serialization_shared_ptr));
+
+    const bool is_opt(qname.type_name() == boost_.type(boost_types::optional));
+    if (is_header && is_domain && is_opt)
+        il.system.push_back(boost_.include(boost_types::optional));
 }
 
 void cpp_inclusion_manager::append_std_dependencies(
@@ -330,6 +335,12 @@ void cpp_inclusion_manager::append_std_dependencies(
      */
     if (is_header && is_domain && qname.type_name() == std_unordered_map)
         il.system.push_back(std_unordered_map);
+
+    /*
+     * std::unordered_set
+     */
+    if (is_header && is_domain && qname.type_name() == std_unordered_set)
+        il.system.push_back(std_unordered_set);
 
     // FIXME: massive hack. boost doesn't have support for
     // serialisation so we are using our own hacked header

@@ -25,6 +25,7 @@ const std::string model_name("boost");
 const std::string shared_ptr_name("shared_ptr");
 const std::string weak_ptr_name("weak_ptr");
 const std::string scoped_ptr_name("scoped_ptr");
+const std::string optional_name("optional");
 
 }
 
@@ -77,6 +78,7 @@ sml::model boost_model_factory::create() {
     pi(shared_ptr_name, sml::pod_types::smart_pointer);
     pi(weak_ptr_name, sml::pod_types::smart_pointer);
     pi(scoped_ptr_name, sml::pod_types::smart_pointer);
+    pi(optional_name, sml::pod_types::value);
 
     model r;
     r.name(model_name);

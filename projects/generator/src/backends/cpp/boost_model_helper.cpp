@@ -26,6 +26,7 @@ namespace {
 const std::string model("boost");
 
 const std::string shared_ptr_type("shared_ptr");
+const std::string optional_type("optional");
 
 const std::string optional_include("boost/optional.hpp");
 const std::string format_include("boost/format.hpp");
@@ -73,6 +74,7 @@ std::string boost_model_helper::model() const {
 std::string boost_model_helper::type(const boost_types t) const {
     switch (t) {
     case boost_types::shared_ptr: return shared_ptr_type;
+    case boost_types::optional: return optional_type;
     default: break;
     }
     throw utility::exception::invalid_enum_value(error_message);
