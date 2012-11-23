@@ -27,6 +27,7 @@
 
 #include <algorithm>
 #include <boost/optional.hpp>
+#include <vector>
 #include "dogen/boost_model/serialization/class_d_fwd_ser.hpp"
 #include "dogen/boost_model/types/class_a.hpp"
 #include "dogen/boost_model/types/pkg1/class_c.hpp"
@@ -47,7 +48,8 @@ public:
     class_d(
         const boost::optional<int>& prop_0,
         const boost::optional<dogen::boost_model::class_a>& prop_1,
-        const boost::optional<dogen::boost_model::pkg1::class_c>& prop_2);
+        const boost::optional<dogen::boost_model::pkg1::class_c>& prop_2,
+        const boost::optional<std::vector<dogen::boost_model::class_a> >& prop_3);
 
 private:
     template<typename Archive>
@@ -81,6 +83,14 @@ public:
         prop_2_ = v;
     }
 
+    boost::optional<std::vector<dogen::boost_model::class_a> > prop_3() const {
+        return prop_3_;
+    }
+
+    void prop_3(const boost::optional<std::vector<dogen::boost_model::class_a> >& v) {
+        prop_3_ = v;
+    }
+
 public:
     bool operator==(const class_d& rhs) const;
     bool operator!=(const class_d& rhs) const {
@@ -95,6 +105,7 @@ private:
     boost::optional<int> prop_0_;
     boost::optional<dogen::boost_model::class_a> prop_1_;
     boost::optional<dogen::boost_model::pkg1::class_c> prop_2_;
+    boost::optional<std::vector<dogen::boost_model::class_a> > prop_3_;
 };
 
 } }

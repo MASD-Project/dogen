@@ -56,6 +56,20 @@ create_boost_optional_dogen_boost_model_pkg1_class_c(unsigned int position) {
     return r;
 }
 
+std::vector<dogen::boost_model::class_a> create_std_vector_dogen_boost_model_class_a(unsigned int position) {
+    std::vector<dogen::boost_model::class_a> r;
+    for (unsigned int i(0); i < 10; ++i) {
+        r.push_back(create_dogen_boost_model_class_a(position + i));
+    }
+    return r;
+}
+
+boost::optional<std::vector<dogen::boost_model::class_a> >
+create_boost_optional_std_vector_dogen_boost_model_class_a_(unsigned int position) {
+    boost::optional<std::vector<dogen::boost_model::class_a> > r(        create_std_vector_dogen_boost_model_class_a(position));
+    return r;
+}
+
 }
 
 namespace dogen {
@@ -68,6 +82,7 @@ populate(const unsigned int position, result_type& v) {
     v.prop_0(create_boost_optional_int(position + 0));
     v.prop_1(create_boost_optional_dogen_boost_model_class_a(position + 1));
     v.prop_2(create_boost_optional_dogen_boost_model_pkg1_class_c(position + 2));
+    v.prop_3(create_boost_optional_std_vector_dogen_boost_model_class_a_(position + 3));
 }
 
 class_d_generator::result_type

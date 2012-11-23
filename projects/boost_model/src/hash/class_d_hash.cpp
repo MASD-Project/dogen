@@ -61,6 +61,24 @@ inline std::size_t hash_boost_optional_dogen_boost_model_pkg1_class_c(const boos
     return seed;
 }
 
+inline std::size_t hash_std_vector_dogen_boost_model_class_a(const std::vector<dogen::boost_model::class_a>& v){
+    std::size_t seed(0);
+    for (const auto i : v) {
+        combine(seed, i);
+    }
+    return seed;
+}
+
+inline std::size_t hash_boost_optional_std_vector_dogen_boost_model_class_a_(const boost::optional<std::vector<dogen::boost_model::class_a> >& v){
+    std::size_t seed(0);
+
+    if (!v)
+        return seed;
+
+    combine(seed, hash_std_vector_dogen_boost_model_class_a(*v));
+    return seed;
+}
+
 }
 
 namespace dogen {
@@ -72,6 +90,7 @@ std::size_t class_d_hasher::hash(const class_d&v) {
     combine(seed, hash_boost_optional_int(v.prop_0()));
     combine(seed, hash_boost_optional_dogen_boost_model_class_a(v.prop_1()));
     combine(seed, hash_boost_optional_dogen_boost_model_pkg1_class_c(v.prop_2()));
+    combine(seed, hash_boost_optional_std_vector_dogen_boost_model_class_a_(v.prop_3()));
 
     return seed;
 }
