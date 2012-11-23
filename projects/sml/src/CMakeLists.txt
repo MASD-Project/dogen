@@ -7,7 +7,7 @@
 # the Free Software Foundation; either version 3 of the License, or
 # (at your option) any later version.
 #
-# This program is distributed in the hope that it will be useful,
+# This program is distributed in the hope that it will be  useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 # GNU General Public License for more details.
@@ -17,14 +17,13 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
 # MA 02110-1301, USA.
 #
-set(sml_files "")
-file(GLOB_RECURSE sml_files RELATIVE
+set(all_files "")
+file(GLOB_RECURSE all_files RELATIVE
     "${CMAKE_CURRENT_SOURCE_DIR}/"
     "${CMAKE_CURRENT_SOURCE_DIR}/*.cpp")
 
-add_library(sml STATIC ${sml_files})
-set_target_properties(sml PROPERTIES OUTPUT_NAME dogen_sml_${DOGEN_VERSION})
-set_target_properties(sml
-    PROPERTIES VERSION ${DOGEN_VERSION} SOVERSION ${DOGEN_MAJOR_VERSION})
+add_library(sml STATIC ${all_files})
+set_target_properties(sml PROPERTIES
+    OUTPUT_NAME dogen_sml_${DOGEN_VERSION})
 
 install(TARGETS sml ARCHIVE DESTINATION lib COMPONENT libraries)

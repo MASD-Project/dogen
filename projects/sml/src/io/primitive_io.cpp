@@ -18,16 +18,25 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/io/ios_state.hpp>
 #include <ostream>
 #include "dogen/sml/io/primitive_io.hpp"
+#include "dogen/sml/io/qualified_name_io.hpp"
 
 namespace dogen {
 namespace sml {
 
-std::ostream&
-operator<<(std::ostream& stream, const dogen::sml::primitive& primitive) {
-    primitive.to_stream(stream);
-    return(stream);
+std::ostream& operator<<(std::ostream& s, const primitive& v) {
+    boost::io::ios_flags_saver ifs(s);
+    s << std::boolalpha;
+
+    s << " { "
+      << "\"__type__\": " << "\"primitive\"" << ", "
+      << "\"name\": " << v.name() << ", "
+      << "\"generate\": " << v.generate() << ", "
+      << "\"documentation\": " << "\"" << v.documentation() << "\""
+      << " }";
+    return(s);
 }
 
 } }

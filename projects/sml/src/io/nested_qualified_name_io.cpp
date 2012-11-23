@@ -18,15 +18,39 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/io/ios_state.hpp>
 #include <ostream>
 #include "dogen/sml/io/nested_qualified_name_io.hpp"
+#include "dogen/sml/io/qualified_name_io.hpp"
+
+namespace std {
+
+inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::sml::nested_qualified_name>& v) {
+    s << "[ ";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << *i;
+    }
+    s << "] ";
+    return s;
+}
+
+}
 
 namespace dogen {
 namespace sml {
 
-std::ostream& operator<<(std::ostream& stream, const nested_qualified_name& v) {
-    v.to_stream(stream);
-    return(stream);
+std::ostream& operator<<(std::ostream& s, const nested_qualified_name& v) {
+    boost::io::ios_flags_saver ifs(s);
+    s << std::boolalpha;
+
+    s << " { "
+      << "\"__type__\": " << "\"nested_qualified_name\"" << ", "
+      << "\"type\": " << v.type() << ", "
+      << "\"children\": " << v.children() << ", "
+      << "\"is_pointer\": " << v.is_pointer()
+      << " }";
+    return(s);
 }
 
 } }

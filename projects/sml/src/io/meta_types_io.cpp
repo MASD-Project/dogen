@@ -18,50 +18,44 @@
  * MA 02110-1301, USA.
  *
  */
-#include <string>
 #include <ostream>
-#include "dogen/utility/exception/invalid_enum_value.hpp"
+#include <stdexcept>
 #include "dogen/sml/io/meta_types_io.hpp"
-
-namespace {
-
-const std::string prefix("meta_types::");
-const std::string invalid("invalid");
-const std::string enumeration("enumeration");
-const std::string pod("pod");
-const std::string primitive("primitive");
-const std::string attribute("attribute");
-const std::string package("package");
-const std::string exception("exception");
-
-const std::string error_message("Invalid enum value");
-
-}
 
 namespace dogen {
 namespace sml {
 
-std::ostream& operator<<(std::ostream& stream, meta_types value) {
-    switch (value) {
+std::ostream& operator<<(std::ostream& s, const meta_types& v) {
+    s << "{ " << "\"__type__\": " << "\"meta_types\", " << "\"value\": ";
+
+    std::string attr;
+    switch (v) {
     case meta_types::invalid:
-        return stream << prefix << invalid;
+        attr = "\"invalid\"";
+        break;
     case meta_types::enumeration:
-        return stream << prefix << enumeration;
+        attr = "\"enumeration\"";
+        break;
     case meta_types::pod:
-        return stream << prefix << pod;
+        attr = "\"pod\"";
+        break;
     case meta_types::attribute:
-        return stream << prefix << attribute;
+        attr = "\"attribute\"";
+        break;
     case meta_types::package:
-        return stream << prefix << package;
+        attr = "\"package\"";
+        break;
     case meta_types::primitive:
-        return stream << prefix << primitive;
+        attr = "\"primitive\"";
+        break;
     case meta_types::exception:
-        return stream << prefix << exception;
+        attr = "\"exception\"";
+        break;
     default:
-        using utility::exception::invalid_enum_value;
-        throw invalid_enum_value(error_message);
+        throw std::invalid_argument("Invalid value for meta_types");
     }
-    return stream << prefix << error_message;
+    s << attr << " }";
+    return s;
 }
 
 } }

@@ -25,9 +25,13 @@
 namespace dogen {
 namespace sml {
 
-std::ostream& operator<<(std::ostream& stream, package value) {
-    value.to_stream(stream);
-    return(stream);
+std::ostream& operator<<(std::ostream& s, const package& v) {
+    s << " { "
+      << "\"__type__\": " << "\"package\"" << ", "
+      << "\"name\": " << v.name() << ", "
+      << "\"documentation\": " << "\"" << v.documentation() << "\""
+      << " }";
+    return(s);
 }
 
 } }

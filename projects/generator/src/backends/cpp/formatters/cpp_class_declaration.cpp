@@ -70,7 +70,7 @@ void cpp_class_declaration::close_class() {
 }
 
 void cpp_class_declaration::default_constructor(const class_view_model& vm) {
-    if (!vm.has_primitive_properties())
+    if (!vm.requires_manual_default_constructor())
         return;
 
     const auto props(vm.properties());
@@ -152,7 +152,7 @@ void cpp_class_declaration::
 compiler_generated_constuctors(const class_view_model& vm) {
     utility_.public_access_specifier();
 
-    if (!vm.has_primitive_properties())
+    if (!vm.requires_manual_default_constructor())
         stream_ << indenter_ << vm.name() << "() = default;" << std::endl;
 
     stream_ << indenter_ << vm.name() << "(const " << vm.name()

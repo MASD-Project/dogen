@@ -144,6 +144,19 @@ public:
     /**@}*/
 
     /**
+     * @brief True if the class requires a manually generated default
+     * constructor, false otherwise.
+     */
+    /**@{*/
+    bool requires_manual_default_constructor() const {
+        return(requires_manual_default_constructor_);
+    }
+    void requires_manual_default_constructor(bool value) {
+        requires_manual_default_constructor_ = value;
+    }
+    /**@}*/
+
+    /**
      * @brief Name to be used in the context of database operations.
      */
     /**@{*/
@@ -219,6 +232,7 @@ private:
     bool has_primitive_properties_;
     bool requires_stream_manipulators_;
     bool requires_manual_move_constructor_;
+    bool requires_manual_default_constructor_;
     std::string database_name_;
     std::string schema_name_;
     bool is_parent_;

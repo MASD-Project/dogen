@@ -18,41 +18,35 @@
  * MA 02110-1301, USA.
  *
  */
-#include <string>
 #include <ostream>
-#include "dogen/utility/exception/invalid_enum_value.hpp"
+#include <stdexcept>
 #include "dogen/sml/io/category_types_io.hpp"
-
-namespace {
-
-const std::string prefix("category_types::");
-const std::string invalid("invalid");
-const std::string user_defined("user_defined");
-const std::string versioned_key("versioned_key");
-const std::string unversioned_key("unversioned_key");
-
-const std::string error_message("Invalid enum value");
-
-}
 
 namespace dogen {
 namespace sml {
 
-std::ostream& operator<<(std::ostream& stream, category_types value) {
-    switch (value) {
+std::ostream& operator<<(std::ostream& s, const category_types& v) {
+    s << "{ " << "\"__type__\": " << "\"category_types\", " << "\"value\": ";
+
+    std::string attr;
+    switch (v) {
     case category_types::invalid:
-        return stream << prefix << invalid;
+        attr = "\"invalid\"";
+        break;
     case category_types::user_defined:
-        return stream << prefix << user_defined;
+        attr = "\"user_defined\"";
+        break;
     case category_types::versioned_key:
-        return stream << prefix << versioned_key;
+        attr = "\"versioned_key\"";
+        break;
     case category_types::unversioned_key:
-        return stream << prefix << unversioned_key;
+        attr = "\"unversioned_key\"";
+        break;
     default:
-        using utility::exception::invalid_enum_value;
-        throw invalid_enum_value(error_message);
+        throw std::invalid_argument("Invalid value for category_types");
     }
-    return stream << prefix << error_message;
+    s << attr << " }";
+    return s;
 }
 
 } }

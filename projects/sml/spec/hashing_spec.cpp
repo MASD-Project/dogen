@@ -21,14 +21,12 @@
 #include <boost/test/unit_test.hpp>
 #include "dogen/utility/test/hash_tester.hpp"
 #include "dogen/utility/test/logging.hpp"
-#include "dogen/sml/domain/sml_domain.hpp"
-#include "dogen/sml/io/sml_io.hpp"
-#include "dogen/sml/test_data/qualified_name_sequence.hpp"
+#include "dogen/sml/types/all.hpp"
+#include "dogen/sml/io/all_io.hpp"
+#include "dogen/sml/test_data/qualified_name_td.hpp"
 #include "dogen/sml/hash/qualified_name_hash.hpp"
-#include "dogen/sml/domain/sml_domain.hpp"
-#include "dogen/sml/io/sml_io.hpp"
-#include "dogen/sml/serialization/sml_ser.hpp"
-#include "dogen/sml/test_data/sml_test_data.hpp"
+#include "dogen/sml/serialization/all_ser.hpp"
+#include "dogen/sml/test_data/all_td.hpp"
 
 namespace {
 
@@ -51,7 +49,7 @@ BOOST_AUTO_TEST_SUITE(hashing)
 
 BOOST_AUTO_TEST_CASE(validate_qualified_name_hashing) {
     SETUP_TEST_LOG("validate_qualified_name_hashing");
-    test_hashing<dogen::sml::test_data::qualified_name_sequence>();
+    test_hashing<dogen::sml::qualified_name_generator>();
 }
 
 BOOST_AUTO_TEST_SUITE_END()

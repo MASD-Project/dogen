@@ -25,39 +25,18 @@
 #pragma once
 #endif
 
-#include <string>
-#include <boost/serialization/nvp.hpp>
-#include <boost/serialization/list.hpp>
-#include "dogen/sml/domain/nested_qualified_name.hpp"
+#include <boost/serialization/split_free.hpp>
+#include "dogen/sml/types/nested_qualified_name.hpp"
 
-namespace dogen {
-namespace sml {
-
-class nested_qualified_name_serializer {
-public:
-    template<typename Archive>
-    void serialize(Archive & ar,
-        dogen::sml::nested_qualified_name& value,
-        const unsigned int /*version*/) {
-        using boost::serialization::make_nvp;
-        ar & make_nvp("type", value.type_);
-        ar & make_nvp("children_", value.children_);
-        ar & make_nvp("is_pointer", value.is_pointer_);
-    }
-};
-
-} }
-
+BOOST_SERIALIZATION_SPLIT_FREE(dogen::sml::nested_qualified_name)
 namespace boost {
 namespace serialization {
 
-template<class Archive>
-inline void serialize(Archive & archive,
-    dogen::sml::nested_qualified_name& value,
-    const unsigned int version) {
-    dogen::sml::nested_qualified_name_serializer serializer;
-    serializer.serialize<Archive>(archive, value, version);
-}
+template<typename Archive>
+void save(Archive& ar, const dogen::sml::nested_qualified_name& v, unsigned int version);
+
+template<typename Archive>
+void load(Archive& ar, dogen::sml::nested_qualified_name& v, unsigned int version);
 
 } }
 

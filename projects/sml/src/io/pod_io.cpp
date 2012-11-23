@@ -18,15 +18,79 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/io/ios_state.hpp>
 #include <ostream>
+#include "dogen/sml/io/category_types_io.hpp"
 #include "dogen/sml/io/pod_io.hpp"
+#include "dogen/sml/io/pod_types_io.hpp"
+#include "dogen/sml/io/property_io.hpp"
+#include "dogen/sml/io/qualified_name_io.hpp"
+
+namespace std {
+
+inline std::ostream& operator<<(std::ostream& s, const std::vector<dogen::sml::property>& v) {
+    s << "[ ";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << *i;
+    }
+    s << "] ";
+    return s;
+}
+
+}
+
+namespace boost {
+
+inline std::ostream& operator<<(std::ostream& s, const boost::optional<dogen::sml::qualified_name>& v) {
+    s << "{ " << "\"__type__\": " << "\"boost::optional\"" << ", ";
+
+    if (v)
+        s << "\"data\": " << *v;
+    else
+        s << "\"data\": ""\"<empty>\"";
+    s<< " }";
+    return s;
+}
+
+}
+
+namespace std {
+
+inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::sml::qualified_name>& v) {
+    s << "[ ";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << *i;
+    }
+    s << "] ";
+    return s;
+}
+
+}
 
 namespace dogen {
 namespace sml {
 
-std::ostream& operator<<(std::ostream& stream, const dogen::sml::pod& pod) {
-    pod.to_stream(stream);
-    return(stream);
+std::ostream& operator<<(std::ostream& s, const pod& v) {
+    boost::io::ios_flags_saver ifs(s);
+    s << std::boolalpha;
+
+    s << " { "
+      << "\"__type__\": " << "\"pod\"" << ", "
+      << "\"name\": " << v.name() << ", "
+      << "\"properties\": " << v.properties() << ", "
+      << "\"parent_name\": " << v.parent_name() << ", "
+      << "\"original_parent_name\": " << v.original_parent_name() << ", "
+      << "\"leaves\": " << v.leaves() << ", "
+      << "\"generate\": " << v.generate() << ", "
+      << "\"is_parent\": " << v.is_parent() << ", "
+      << "\"category_type\": " << v.category_type() << ", "
+      << "\"pod_type\": " << v.pod_type() << ", "
+      << "\"documentation\": " << "\"" << v.documentation() << "\"" << ", "
+      << "\"number_of_type_arguments\": " << v.number_of_type_arguments()
+      << " }";
+    return(s);
 }
 
 } }

@@ -104,6 +104,14 @@ public:
     /**@}*/
 
     /**
+     * @brief If true, the meta type of the top-level type is enumeration.
+     */
+    /**@{*/
+    bool is_enumeration() const { return is_enumeration_; }
+    void is_enumeration(bool value) { is_enumeration_ = value; }
+    /**@}*/
+
+    /**
      * @brief If true, the type of the top-level type is either string,
      * char or unsigned char.
      */
@@ -187,6 +195,7 @@ private:
     std::string complete_name_;
     std::string complete_identifiable_name_;
     bool is_primitive_;
+    bool is_enumeration_;
     bool is_string_like_;
     bool is_char_like_;
     bool is_int_like_;

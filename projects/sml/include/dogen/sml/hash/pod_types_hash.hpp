@@ -18,23 +18,23 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_SML_HASH_META_TYPE_HASH_HPP
-#define DOGEN_SML_HASH_META_TYPE_HASH_HPP
+#ifndef DOGEN_SML_HASH_POD_TYPES_HASH_HPP
+#define DOGEN_SML_HASH_POD_TYPES_HASH_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <functional>
-#include "dogen/sml/domain/pod_types.hpp"
+#include "dogen/sml/types/pod_types.hpp"
 
 namespace std {
 
 template<>
 class hash<dogen::sml::pod_types> {
 public:
-    size_t operator()(dogen::sml::pod_types value) const {
-        return std::hash<unsigned int>()(static_cast<unsigned int>(value));
+    size_t operator()(const dogen::sml::pod_types& v) const {
+        return std::hash<unsigned int>()(static_cast<unsigned int>(v));
     }
 };
 

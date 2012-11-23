@@ -68,6 +68,8 @@ private:
     void smart_pointer_helper(const nested_type_view_model& vm);
     void optional_helper(const nested_type_view_model& vm);
 
+    void composite_domain_type_helper(const std::string& identifiable_type_name,
+        const std::string& type_name, bool as_pointer);
     void domain_type_helper(const std::string& identifiable_type_name,
         const std::string& type_name, bool as_pointer);
     void bool_helper();
@@ -76,7 +78,8 @@ private:
         const std::string& type_name);
     void int_like_helper(const std::string& identifiable_type_name,
         const std::string& type_name);
-    void recursive_helper_method_creator(const nested_type_view_model& vm,
+    void recursive_helper_method_creator(const std::string& owner_name,
+        const nested_type_view_model& vm,
         std::unordered_set<std::string>& types_done, bool as_pointer);
     void create_helper_methods(const class_view_model& vm);
 

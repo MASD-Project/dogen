@@ -26,32 +26,27 @@
 #endif
 
 #include <functional>
-#include "dogen/utility/hash/combine.hpp"
-#include "dogen/sml/hash/meta_types_hash.hpp"
-#include "dogen/sml/domain/qualified_name.hpp"
+#include "dogen/sml/types/qualified_name.hpp"
+
+namespace dogen {
+namespace sml {
+
+class qualified_name_hasher {
+public:
+    static std::size_t hash(const qualified_name& v);
+};
+
+} }
 
 namespace std {
 
 template<>
 class hash<dogen::sml::qualified_name> {
 public:
-    size_t operator()(dogen::sml::qualified_name value) const {
-        std::size_t seed(0);
-
-        dogen::utility::hash::combine(seed, value.model_name());
-        dogen::utility::hash::combine(seed, value.type_name());
-        dogen::utility::hash::combine(seed, value.meta_type());
-
-        for (auto p : value.package_path())
-            dogen::utility::hash::combine(seed, p);
-
-        for (auto p : value.external_package_path())
-            dogen::utility::hash::combine(seed, p);
-
-        return seed;
+    size_t operator()(const dogen::sml::qualified_name& v) const {
+        return dogen::sml::qualified_name_hasher::hash(v);
     }
 };
 
 }
-
 #endif

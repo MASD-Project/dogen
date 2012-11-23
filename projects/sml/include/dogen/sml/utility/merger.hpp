@@ -29,8 +29,8 @@
 #include <vector>
 #include <string>
 #include <unordered_map>
-#include "dogen/sml/domain/nested_qualified_name.hpp"
-#include "dogen/sml/domain/model.hpp"
+#include "dogen/sml/types/nested_qualified_name.hpp"
+#include "dogen/sml/types/model.hpp"
 
 namespace dogen {
 namespace sml {

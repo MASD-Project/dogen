@@ -19,16 +19,21 @@
  *
  */
 #include <ostream>
-#include "dogen/utility/io/vector_io.hpp"
 #include "dogen/sml/io/nested_qualified_name_io.hpp"
 #include "dogen/sml/io/property_io.hpp"
 
 namespace dogen {
 namespace sml {
 
-std::ostream& operator<<(std::ostream& stream, dogen::sml::property property) {
-    property.to_stream(stream);
-    return(stream);
+std::ostream& operator<<(std::ostream& s, const property& v) {
+    s << " { "
+      << "\"__type__\": " << "\"property\"" << ", "
+      << "\"name\": " << "\"" << v.name() << "\"" << ", "
+      << "\"type_name\": " << v.type_name() << ", "
+      << "\"default_value\": " << "\"" << v.default_value() << "\"" << ", "
+      << "\"documentation\": " << "\"" << v.documentation() << "\""
+      << " }";
+    return(s);
 }
 
 } }

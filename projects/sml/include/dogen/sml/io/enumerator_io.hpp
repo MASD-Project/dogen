@@ -25,14 +25,15 @@
 #pragma once
 #endif
 
-#include <ostream>
-#include "dogen/sml/domain/enumerator.hpp"
+#include <iosfwd>
+#include "dogen/sml/types/enumerator.hpp"
 
 namespace dogen {
 namespace sml {
 
 std::ostream&
-operator<<(std::ostream& stream, const dogen::sml::enumerator& enumerator);
+operator<<(std::ostream& s,
+     const dogen::sml::enumerator& v);
 
 } }
 

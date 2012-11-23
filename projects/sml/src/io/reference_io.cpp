@@ -18,15 +18,38 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/io/ios_state.hpp>
 #include <ostream>
 #include "dogen/sml/io/reference_io.hpp"
+
+namespace std {
+
+inline std::ostream& operator<<(std::ostream& s, const std::list<std::string>& v) {
+    s << "[ ";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << "\"" << *i << "\"";
+    }
+    s << "] ";
+    return s;
+}
+
+}
 
 namespace dogen {
 namespace sml {
 
-std::ostream& operator<<(std::ostream& stream, const dogen::sml::reference& reference) {
-    reference.to_stream(stream);
-    return(stream);
+std::ostream& operator<<(std::ostream& s, const reference& v) {
+    boost::io::ios_flags_saver ifs(s);
+    s << std::boolalpha;
+
+    s << " { "
+      << "\"__type__\": " << "\"reference\"" << ", "
+      << "\"model_name\": " << "\"" << v.model_name() << "\"" << ", "
+      << "\"external_package_path\": " << v.external_package_path() << ", "
+      << "\"is_system\": " << v.is_system()
+      << " }";
+    return(s);
 }
 
 } }

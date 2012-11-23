@@ -18,20 +18,20 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_DIA_DOMAIN_CATEGORY_TYPES_IO_HPP
-#define DOGEN_DIA_DOMAIN_CATEGORY_TYPES_IO_HPP
+#ifndef DOGEN_SML_IO_CATEGORY_TYPES_IO_HPP
+#define DOGEN_SML_IO_CATEGORY_TYPES_IO_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <iosfwd>
-#include "dogen/sml/domain/category_types.hpp"
+#include "dogen/sml/types/category_types.hpp"
 
 namespace dogen {
 namespace sml {
 
-std::ostream& operator<<(std::ostream& stream, category_types value);
+std::ostream& operator<<(std::ostream& s, const category_types& v);
 
 } }
 

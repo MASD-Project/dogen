@@ -36,10 +36,12 @@ namespace enumeration {
 
 class a_class final {
 public:
-    a_class() = default;
     a_class(const a_class&) = default;
     a_class(a_class&&) = default;
     ~a_class() = default;
+
+public:
+    a_class();
 
 public:
     a_class(

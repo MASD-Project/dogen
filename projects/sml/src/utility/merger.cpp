@@ -22,7 +22,7 @@
 #include <iostream>
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/sml/domain/merging_error.hpp"
+#include "dogen/sml/types/merging_error.hpp"
 #include "dogen/utility/io/unordered_map_io.hpp"
 #include "dogen/utility/io/vector_io.hpp"
 #include "dogen/utility/io/list_io.hpp"

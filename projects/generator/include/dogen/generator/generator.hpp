@@ -31,7 +31,7 @@
 #include <functional>
 #include <boost/optional.hpp>
 #include <boost/filesystem/path.hpp>
-#include "dogen/sml/domain/model.hpp"
+#include "dogen/sml/types/model.hpp"
 #include "dogen/generator/config/settings.hpp"
 #include "dogen/generator/backends/backend.hpp"
 #include "dogen/generator/outputters/outputter.hpp"

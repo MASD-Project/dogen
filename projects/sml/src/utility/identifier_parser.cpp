@@ -29,7 +29,7 @@
 #include <boost/spirit/include/phoenix_fusion.hpp>
 #include <boost/spirit/include/phoenix_operator.hpp>
 #include <boost/spirit/include/phoenix_object.hpp>
-#include "dogen/sml/domain/parsing_error.hpp"
+#include "dogen/sml/types/parsing_error.hpp"
 #include "dogen/sml/utility/identifier_parser.hpp"
 #include "dogen/sml/utility/nested_qualified_name_builder.hpp"
 

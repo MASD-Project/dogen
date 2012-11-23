@@ -25,13 +25,15 @@
 #pragma once
 #endif
 
-#include <ostream>
-#include "dogen/sml/domain/pod.hpp"
+#include <iosfwd>
+#include "dogen/sml/types/pod.hpp"
 
 namespace dogen {
 namespace sml {
 
-std::ostream& operator<<(std::ostream& stream, const dogen::sml::pod& pod);
+std::ostream&
+operator<<(std::ostream& s,
+     const dogen::sml::pod& v);
 
 } }
 

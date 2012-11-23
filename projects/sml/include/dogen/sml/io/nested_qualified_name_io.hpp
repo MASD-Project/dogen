@@ -25,13 +25,15 @@
 #pragma once
 #endif
 
-#include <ostream>
-#include "dogen/sml/domain/nested_qualified_name.hpp"
+#include <iosfwd>
+#include "dogen/sml/types/nested_qualified_name.hpp"
 
 namespace dogen {
 namespace sml {
 
-std::ostream& operator<<(std::ostream& stream, const nested_qualified_name& v);
+std::ostream&
+operator<<(std::ostream& s,
+     const dogen::sml::nested_qualified_name& v);
 
 } }
 

@@ -25,13 +25,15 @@
 #pragma once
 #endif
 
-#include <ostream>
-#include "dogen/sml/domain/reference.hpp"
+#include <iosfwd>
+#include "dogen/sml/types/reference.hpp"
 
 namespace dogen {
 namespace sml {
 
-std::ostream& operator<<(std::ostream& stream, const dogen::sml::reference& reference);
+std::ostream&
+operator<<(std::ostream& s,
+     const dogen::sml::reference& v);
 
 } }
 

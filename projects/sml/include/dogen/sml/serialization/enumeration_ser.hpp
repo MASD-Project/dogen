@@ -25,42 +25,18 @@
 #pragma once
 #endif
 
-#include <string>
-#include <boost/serialization/nvp.hpp>
-#include <boost/serialization/vector.hpp>
-#include "dogen/sml/domain/enumeration.hpp"
-#include "dogen/sml/serialization/qualified_name_ser.hpp"
-#include "dogen/sml/serialization/enumerator_ser.hpp"
+#include <boost/serialization/split_free.hpp>
+#include "dogen/sml/types/enumeration.hpp"
 
-namespace dogen {
-namespace sml {
-
-class enumeration_serializer {
-public:
-    template<typename Archive>
-    void serialize(Archive & archive,
-        dogen::sml::enumeration& value,
-        const unsigned int /*version*/) {
-        using boost::serialization::make_nvp;
-        archive & make_nvp("name", value.name_);
-        archive & make_nvp("generate", value.generate_);
-        archive & make_nvp("documentation", value.documentation_);
-        archive & make_nvp("enumerators", value.enumerators_);
-    }
-};
-
-} }
-
+BOOST_SERIALIZATION_SPLIT_FREE(dogen::sml::enumeration)
 namespace boost {
 namespace serialization {
 
-template<class Archive>
-inline void serialize(Archive & archive,
-    dogen::sml::enumeration& value,
-    const unsigned int version) {
-    dogen::sml::enumeration_serializer serializer;
-    serializer.serialize<Archive>(archive, value, version);
-}
+template<typename Archive>
+void save(Archive& ar, const dogen::sml::enumeration& v, unsigned int version);
+
+template<typename Archive>
+void load(Archive& ar, dogen::sml::enumeration& v, unsigned int version);
 
 } }
 

@@ -25,13 +25,15 @@
 #pragma once
 #endif
 
-#include <ostream>
-#include "dogen/sml/domain/qualified_name.hpp"
+#include <iosfwd>
+#include "dogen/sml/types/qualified_name.hpp"
 
 namespace dogen {
 namespace sml {
 
-std::ostream& operator<<(std::ostream& stream, const dogen::sml::qualified_name& qualified_name);
+std::ostream&
+operator<<(std::ostream& s,
+     const dogen::sml::qualified_name& v);
 
 } }
 

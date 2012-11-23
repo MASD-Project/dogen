@@ -30,8 +30,8 @@
 #include <utility>
 #include <boost/optional.hpp>
 #include <boost/filesystem/path.hpp>
-#include "dogen/sml/domain/meta_types.hpp"
-#include "dogen/sml/domain/category_types.hpp"
+#include "dogen/sml/types/meta_types.hpp"
+#include "dogen/sml/types/category_types.hpp"
 #include "dogen/generator/backends/cpp/view_models/exception_view_model.hpp"
 #include "dogen/generator/backends/cpp/view_models/enumeration_view_model.hpp"
 #include "dogen/generator/backends/cpp/view_models/class_view_model.hpp"

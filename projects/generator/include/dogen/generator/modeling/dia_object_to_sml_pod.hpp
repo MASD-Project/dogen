@@ -30,9 +30,9 @@
 #include <unordered_set>
 #include <boost/graph/adjacency_list.hpp>
 #include "dogen/dia/domain/object.hpp"
-#include "dogen/sml/domain/qualified_name.hpp"
-#include "dogen/sml/domain/package.hpp"
-#include "dogen/sml/domain/pod.hpp"
+#include "dogen/sml/types/qualified_name.hpp"
+#include "dogen/sml/types/package.hpp"
+#include "dogen/sml/types/pod.hpp"
 
 namespace dogen {
 namespace generator {

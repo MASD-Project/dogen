@@ -18,16 +18,41 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/io/ios_state.hpp>
 #include <ostream>
 #include "dogen/sml/io/enumeration_io.hpp"
+#include "dogen/sml/io/enumerator_io.hpp"
+#include "dogen/sml/io/qualified_name_io.hpp"
+
+namespace std {
+
+inline std::ostream& operator<<(std::ostream& s, const std::vector<dogen::sml::enumerator>& v) {
+    s << "[ ";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << *i;
+    }
+    s << "] ";
+    return s;
+}
+
+}
 
 namespace dogen {
 namespace sml {
 
-std::ostream&
-operator<<(std::ostream& stream, const dogen::sml::enumeration& enumeration) {
-    enumeration.to_stream(stream);
-    return(stream);
+std::ostream& operator<<(std::ostream& s, const enumeration& v) {
+    boost::io::ios_flags_saver ifs(s);
+    s << std::boolalpha;
+
+    s << " { "
+      << "\"__type__\": " << "\"enumeration\"" << ", "
+      << "\"name\": " << v.name() << ", "
+      << "\"generate\": " << v.generate() << ", "
+      << "\"documentation\": " << "\"" << v.documentation() << "\"" << ", "
+      << "\"enumerators\": " << v.enumerators()
+      << " }";
+    return(s);
 }
 
 } }

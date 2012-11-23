@@ -38,11 +38,11 @@
 #include "dogen/generator/backends/cpp/cpp_aspect_types.hpp"
 #include "dogen/generator/backends/cpp/cpp_file_types.hpp"
 #include "dogen/generator/backends/cpp/cpp_facet_types.hpp"
-#include "dogen/sml/domain/meta_types.hpp"
-#include "dogen/sml/domain/package.hpp"
-#include "dogen/sml/domain/pod.hpp"
-#include "dogen/sml/domain/model.hpp"
-#include "dogen/sml/domain/nested_qualified_name.hpp"
+#include "dogen/sml/types/meta_types.hpp"
+#include "dogen/sml/types/package.hpp"
+#include "dogen/sml/types/pod.hpp"
+#include "dogen/sml/types/model.hpp"
+#include "dogen/sml/types/nested_qualified_name.hpp"
 #include "dogen/generator/backends/cpp/view_models/file_view_model.hpp"
 
 namespace dogen {

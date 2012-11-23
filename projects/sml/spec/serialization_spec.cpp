@@ -22,14 +22,12 @@
 #include <boost/archive/xml_oarchive.hpp>
 #include <boost/archive/xml_iarchive.hpp>
 #include "dogen/utility/test/logging.hpp"
-#include "dogen/sml/domain/sml_domain.hpp"
-#include "dogen/sml/io/sml_io.hpp"
+#include "dogen/sml/types/all.hpp"
+#include "dogen/sml/io/all_io.hpp"
 #include "dogen/utility/test/serialization_tester.hpp"
 #include "dogen/sml/serialization/registrar_ser.hpp"
-#include "dogen/sml/domain/sml_domain.hpp"
-#include "dogen/sml/io/sml_io.hpp"
-#include "dogen/sml/serialization/sml_ser.hpp"
-#include "dogen/sml/test_data/sml_test_data.hpp"
+#include "dogen/sml/serialization/all_ser.hpp"
+#include "dogen/sml/test_data/all_td.hpp"
 
 template<typename Archive> void register_types(Archive& ar) {
     dogen::sml::register_types<Archive>(ar);
@@ -58,14 +56,14 @@ BOOST_AUTO_TEST_SUITE(serialization)
 
 BOOST_AUTO_TEST_CASE(roundtrips_of_the_same_type_produce_the_same_entity) {
     SETUP_TEST_LOG("roundtrips_of_the_same_type_produce_the_same_entity");
-    using namespace dogen::sml::test_data;
+    using namespace dogen::sml;
 
-    rountrip_type<meta_types_sequence>();
-    rountrip_type<qualified_name_sequence>();
-    rountrip_type<property_sequence>();
-    rountrip_type<pod_sequence>();
-    rountrip_type<package_sequence>();
-    rountrip_type<model_sequence>();
+    // rountrip_type<meta_types_generator>();
+    // rountrip_type<qualified_name_generator>();
+    // rountrip_type<property_generator>();
+    // rountrip_type<pod_generator>();
+    // rountrip_type<package_generator>();
+    // rountrip_type<model_generator>();
 }
 
 BOOST_AUTO_TEST_SUITE_END()

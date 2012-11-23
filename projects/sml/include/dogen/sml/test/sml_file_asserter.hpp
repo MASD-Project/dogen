@@ -25,7 +25,7 @@
 #pragma once
 #endif
 
-#include "dogen/sml/domain/model.hpp"
+#include "dogen/sml/types/model.hpp"
 #include "dogen/utility/test/file_asserter.hpp"
 
 namespace dogen {

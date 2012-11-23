@@ -26,7 +26,7 @@
 #endif
 
 #include <string>
-#include "dogen/sml/domain/model.hpp"
+#include "dogen/sml/types/model.hpp"
 
 namespace dogen {
 namespace generator {

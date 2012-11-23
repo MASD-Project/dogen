@@ -19,6 +19,7 @@
  *
  */
 #include <ostream>
+#include <boost/algorithm/string/predicate.hpp>
 #include "dogen/generator/generation_failure.hpp"
 #include "dogen/generator/backends/cpp/formatters/cpp_licence.hpp"
 #include "dogen/generator/backends/cpp/formatters/cpp_header_guards.hpp"
@@ -254,6 +255,28 @@ domain_type_helper(const std::string& identifiable_type_name,
     utility_.close_scope();
 }
 
+void generator_implementation::
+composite_domain_type_helper(const std::string& identifiable_type_name,
+    const std::string& type_name, bool as_pointer) {
+    stream_ << indenter_ << type_name << (as_pointer ? "*" : "")
+            << std::endl
+            << "create_" << identifiable_type_name
+            << (as_pointer ? "_ptr" : "")
+            << "(const unsigned int) ";
+
+    utility_.open_scope();
+    {
+        cpp_positive_indenter_scope s(indenter_);
+        if (as_pointer) {
+            stream_ << indenter_ << "return nullptr" << ";"
+                    << std::endl;
+        } else
+            stream_ << indenter_ << "return " << type_name << "();"
+                    << std::endl;
+    }
+    utility_.close_scope();
+}
+
 void generator_implementation::bool_helper() {
     stream_ << indenter_ << "bool create_bool(const unsigned int position) ";
     utility_.open_scope();
@@ -318,7 +341,8 @@ int_like_helper(const std::string& identifiable_type_name,
 }
 
 void generator_implementation::
-recursive_helper_method_creator(const nested_type_view_model& vm,
+recursive_helper_method_creator(const std::string& owner_name,
+    const nested_type_view_model& vm,
     std::unordered_set<std::string>& types_done, bool as_pointer) {
     const unsigned int quantity(10);
 
@@ -331,7 +355,8 @@ recursive_helper_method_creator(const nested_type_view_model& vm,
 
     const auto children(vm.children());
     for (const auto c : children)
-        recursive_helper_method_creator(c, types_done, vm.is_smart_pointer());
+        recursive_helper_method_creator(owner_name, c, types_done,
+            vm.is_smart_pointer());
 
     if (vm.is_primitive()) {
         if (vm.is_char_like()) {
@@ -357,7 +382,13 @@ recursive_helper_method_creator(const nested_type_view_model& vm,
             string_helper();
             utility_.blank_line();
         } else {
-            domain_type_helper(vm.identifiable_name(), vm.name(), as_pointer);
+            if (boost::algorithm::ends_with(vm.name(), "::" + owner_name)) {
+                composite_domain_type_helper(vm.identifiable_name(), vm.name(),
+                    as_pointer);
+            } else {
+                domain_type_helper(vm.identifiable_name(), vm.name(),
+                    as_pointer);
+            }
             utility_.blank_line();
         }
     }
@@ -374,9 +405,10 @@ create_helper_methods(const class_view_model& vm) {
     std::unordered_set<std::string> types_done;
 
     utility_.blank_line();
-    const bool as_pointer(false);
+    const bool as_ptr(false);
+    const auto owner(vm.name());
     for (const auto p : props)
-        recursive_helper_method_creator(p.type(), types_done, as_pointer);
+        recursive_helper_method_creator(owner, p.type(), types_done, as_ptr);
 }
 
 void generator_implementation::populate_method(const class_view_model& vm) {

@@ -29,8 +29,8 @@
 #include <string>
 #include <memory>
 #include <unordered_set>
-#include "dogen/sml/domain/qualified_name.hpp"
-#include "dogen/sml/domain/nested_qualified_name.hpp"
+#include "dogen/sml/types/qualified_name.hpp"
+#include "dogen/sml/types/nested_qualified_name.hpp"
 
 namespace dogen {
 namespace sml {

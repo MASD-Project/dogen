@@ -18,50 +18,44 @@
  * MA 02110-1301, USA.
  *
  */
-#include <string>
 #include <ostream>
-#include "dogen/utility/exception/invalid_enum_value.hpp"
+#include <stdexcept>
 #include "dogen/sml/io/pod_types_io.hpp"
-
-namespace {
-
-const std::string prefix("pod_types::");
-const std::string invalid("invalid");
-const std::string sequence_container("sequence_container");
-const std::string associative_container("associative_container");
-const std::string smart_pointer("smart_pointer");
-const std::string entity("entity");
-const std::string value("value");
-const std::string service("service");
-
-const std::string error_message("Invalid enum value");
-
-}
 
 namespace dogen {
 namespace sml {
 
-std::ostream& operator<<(std::ostream& stream, pod_types v) {
+std::ostream& operator<<(std::ostream& s, const pod_types& v) {
+    s << "{ " << "\"__type__\": " << "\"pod_types\", " << "\"value\": ";
+
+    std::string attr;
     switch (v) {
     case pod_types::invalid:
-        return stream << prefix << invalid;
+        attr = "\"invalid\"";
+        break;
     case pod_types::sequence_container:
-        return stream << prefix << sequence_container;
+        attr = "\"sequence_container\"";
+        break;
     case pod_types::associative_container:
-        return stream << prefix << associative_container;
+        attr = "\"associative_container\"";
+        break;
     case pod_types::smart_pointer:
-        return stream << prefix << smart_pointer;
+        attr = "\"smart_pointer\"";
+        break;
     case pod_types::entity:
-        return stream << prefix << entity;
+        attr = "\"entity\"";
+        break;
     case pod_types::value:
-        return stream << prefix << value;
+        attr = "\"value\"";
+        break;
     case pod_types::service:
-        return stream << prefix << service;
+        attr = "\"service\"";
+        break;
     default:
-        using utility::exception::invalid_enum_value;
-        throw invalid_enum_value(error_message);
+        throw std::invalid_argument("Invalid value for pod_types");
     }
-    return stream << prefix << error_message;
+    s << attr << " }";
+    return s;
 }
 
 } }

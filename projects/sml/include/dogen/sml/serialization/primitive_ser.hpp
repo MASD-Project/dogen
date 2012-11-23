@@ -25,39 +25,18 @@
 #pragma once
 #endif
 
-#include <string>
-#include <boost/serialization/nvp.hpp>
-#include "dogen/sml/domain/primitive.hpp"
-#include "dogen/sml/serialization/qualified_name_ser.hpp"
+#include <boost/serialization/split_free.hpp>
+#include "dogen/sml/types/primitive.hpp"
 
-namespace dogen {
-namespace sml {
-
-class primitive_serializer {
-public:
-    template<typename Archive>
-    void serialize(Archive & archive,
-        dogen::sml::primitive& value,
-        const unsigned int /*version*/) {
-        using boost::serialization::make_nvp;
-        archive & make_nvp("name", value.name_);
-        archive & make_nvp("generate", value.generate_);
-        archive & make_nvp("documentation", value.documentation_);
-    }
-};
-
-} }
-
+BOOST_SERIALIZATION_SPLIT_FREE(dogen::sml::primitive)
 namespace boost {
 namespace serialization {
 
-template<class Archive>
-inline void serialize(Archive & archive,
-    dogen::sml::primitive& value,
-    const unsigned int version) {
-    dogen::sml::primitive_serializer serializer;
-    serializer.serialize<Archive>(archive, value, version);
-}
+template<typename Archive>
+void save(Archive& ar, const dogen::sml::primitive& v, unsigned int version);
+
+template<typename Archive>
+void load(Archive& ar, dogen::sml::primitive& v, unsigned int version);
 
 } }
 

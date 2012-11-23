@@ -25,43 +25,18 @@
 #pragma once
 #endif
 
-#include <string>
-#include <boost/serialization/nvp.hpp>
-#include <boost/serialization/list.hpp>
-#include <boost/serialization/string.hpp>
-#include "dogen/sml/domain/qualified_name.hpp"
-#include "dogen/sml/serialization/meta_types_ser.hpp"
+#include <boost/serialization/split_free.hpp>
+#include "dogen/sml/types/qualified_name.hpp"
 
-namespace dogen {
-namespace sml {
-
-class qualified_name_serializer {
-public:
-    template<typename Archive>
-    void serialize(Archive & ar,
-        dogen::sml::qualified_name& value,
-        const unsigned int /*version*/) {
-        using boost::serialization::make_nvp;
-        ar & make_nvp("model_name", value.model_name_);
-        ar & make_nvp("external_package_path", value.external_package_path_);
-        ar & make_nvp("package_path", value.package_path_);
-        ar & make_nvp("type_name", value.type_name_);
-        ar & make_nvp("meta_type", value.meta_type_);
-    }
-};
-
-} }
-
+BOOST_SERIALIZATION_SPLIT_FREE(dogen::sml::qualified_name)
 namespace boost {
 namespace serialization {
 
-template<class Archive>
-inline void serialize(Archive & archive,
-    dogen::sml::qualified_name& value,
-    const unsigned int version) {
-    dogen::sml::qualified_name_serializer serializer;
-    serializer.serialize<Archive>(archive, value, version);
-}
+template<typename Archive>
+void save(Archive& ar, const dogen::sml::qualified_name& v, unsigned int version);
+
+template<typename Archive>
+void load(Archive& ar, dogen::sml::qualified_name& v, unsigned int version);
 
 } }
 

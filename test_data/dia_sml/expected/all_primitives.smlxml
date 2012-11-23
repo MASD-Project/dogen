@@ -5,12 +5,12 @@
 	<name>all_primitives</name>
 	<packages class_id="1" tracking_level="0" version="0">
 		<count>0</count>
-		<bucket_count>11</bucket_count>
+		<bucket_count>23</bucket_count>
 		<item_version>0</item_version>
 	</packages>
 	<pods class_id="2" tracking_level="0" version="0">
 		<count>1</count>
-		<bucket_count>11</bucket_count>
+		<bucket_count>23</bucket_count>
 		<item_version>0</item_version>
 		<item class_id="3" tracking_level="0" version="0">
 			<first class_id="4" tracking_level="0" version="0">
@@ -59,10 +59,10 @@
 								<type_name>bool</type_name>
 								<meta_type>0</meta_type>
 							</type>
-							<children_ class_id="10" tracking_level="0" version="0">
+							<children class_id="10" tracking_level="0" version="0">
 								<count>0</count>
 								<item_version>0</item_version>
-							</children_>
+							</children>
 							<is_pointer>0</is_pointer>
 						</type_name>
 						<default_value></default_value>
@@ -84,10 +84,10 @@
 								<type_name>char</type_name>
 								<meta_type>0</meta_type>
 							</type>
-							<children_>
+							<children>
 								<count>0</count>
 								<item_version>0</item_version>
-							</children_>
+							</children>
 							<is_pointer>0</is_pointer>
 						</type_name>
 						<default_value></default_value>
@@ -109,10 +109,10 @@
 								<type_name>unsigned char</type_name>
 								<meta_type>0</meta_type>
 							</type>
-							<children_>
+							<children>
 								<count>0</count>
 								<item_version>0</item_version>
-							</children_>
+							</children>
 							<is_pointer>0</is_pointer>
 						</type_name>
 						<default_value></default_value>
@@ -134,10 +134,10 @@
 								<type_name>int</type_name>
 								<meta_type>0</meta_type>
 							</type>
-							<children_>
+							<children>
 								<count>0</count>
 								<item_version>0</item_version>
-							</children_>
+							</children>
 							<is_pointer>0</is_pointer>
 						</type_name>
 						<default_value></default_value>
@@ -159,10 +159,10 @@
 								<type_name>unsigned int</type_name>
 								<meta_type>0</meta_type>
 							</type>
-							<children_>
+							<children>
 								<count>0</count>
 								<item_version>0</item_version>
-							</children_>
+							</children>
 							<is_pointer>0</is_pointer>
 						</type_name>
 						<default_value></default_value>
@@ -184,10 +184,10 @@
 								<type_name>long</type_name>
 								<meta_type>0</meta_type>
 							</type>
-							<children_>
+							<children>
 								<count>0</count>
 								<item_version>0</item_version>
-							</children_>
+							</children>
 							<is_pointer>0</is_pointer>
 						</type_name>
 						<default_value></default_value>
@@ -209,10 +209,10 @@
 								<type_name>unsigned long</type_name>
 								<meta_type>0</meta_type>
 							</type>
-							<children_>
+							<children>
 								<count>0</count>
 								<item_version>0</item_version>
-							</children_>
+							</children>
 							<is_pointer>0</is_pointer>
 						</type_name>
 						<default_value></default_value>
@@ -234,10 +234,10 @@
 								<type_name>long long</type_name>
 								<meta_type>0</meta_type>
 							</type>
-							<children_>
+							<children>
 								<count>0</count>
 								<item_version>0</item_version>
-							</children_>
+							</children>
 							<is_pointer>0</is_pointer>
 						</type_name>
 						<default_value></default_value>
@@ -259,10 +259,10 @@
 								<type_name>unsigned long long</type_name>
 								<meta_type>0</meta_type>
 							</type>
-							<children_>
+							<children>
 								<count>0</count>
 								<item_version>0</item_version>
-							</children_>
+							</children>
 							<is_pointer>0</is_pointer>
 						</type_name>
 						<default_value></default_value>
@@ -284,10 +284,10 @@
 								<type_name>short</type_name>
 								<meta_type>0</meta_type>
 							</type>
-							<children_>
+							<children>
 								<count>0</count>
 								<item_version>0</item_version>
-							</children_>
+							</children>
 							<is_pointer>0</is_pointer>
 						</type_name>
 						<default_value></default_value>
@@ -309,10 +309,10 @@
 								<type_name>unsigned short</type_name>
 								<meta_type>0</meta_type>
 							</type>
-							<children_>
+							<children>
 								<count>0</count>
 								<item_version>0</item_version>
-							</children_>
+							</children>
 							<is_pointer>0</is_pointer>
 						</type_name>
 						<default_value></default_value>
@@ -334,10 +334,10 @@
 								<type_name>double</type_name>
 								<meta_type>0</meta_type>
 							</type>
-							<children_>
+							<children>
 								<count>0</count>
 								<item_version>0</item_version>
-							</children_>
+							</children>
 							<is_pointer>0</is_pointer>
 						</type_name>
 						<default_value></default_value>
@@ -359,10 +359,10 @@
 								<type_name>float</type_name>
 								<meta_type>0</meta_type>
 							</type>
-							<children_>
+							<children>
 								<count>0</count>
 								<item_version>0</item_version>
-							</children_>
+							</children>
 							<is_pointer>0</is_pointer>
 						</type_name>
 						<default_value></default_value>
@@ -390,33 +390,33 @@
 	</pods>
 	<primitives class_id="13" tracking_level="0" version="0">
 		<count>0</count>
-		<bucket_count>11</bucket_count>
+		<bucket_count>23</bucket_count>
 		<item_version>0</item_version>
 	</primitives>
 	<enumerations class_id="14" tracking_level="0" version="0">
 		<count>0</count>
-		<bucket_count>11</bucket_count>
+		<bucket_count>23</bucket_count>
 		<item_version>0</item_version>
 	</enumerations>
 	<exceptions class_id="15" tracking_level="0" version="0">
 		<count>0</count>
-		<bucket_count>11</bucket_count>
+		<bucket_count>23</bucket_count>
 		<item_version>0</item_version>
 	</exceptions>
 	<external_package_path>
 		<count>0</count>
 		<item_version>0</item_version>
 	</external_package_path>
-	<schema_name></schema_name>
+	<schema_name>all_primitives</schema_name>
 	<is_system>0</is_system>
 	<dependencies class_id="16" tracking_level="0" version="0">
 		<count>0</count>
-		<bucket_count>11</bucket_count>
+		<bucket_count>23</bucket_count>
 		<item_version>0</item_version>
 	</dependencies>
 	<leaves class_id="17" tracking_level="0" version="0">
 		<count>0</count>
-		<bucket_count>11</bucket_count>
+		<bucket_count>23</bucket_count>
 		<item_version>0</item_version>
 	</leaves>
 </entity>

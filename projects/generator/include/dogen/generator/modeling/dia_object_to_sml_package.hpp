@@ -29,7 +29,7 @@
 #include <unordered_map>
 #include <boost/graph/adjacency_list.hpp>
 #include "dogen/dia/domain/object.hpp"
-#include "dogen/sml/domain/package.hpp"
+#include "dogen/sml/types/package.hpp"
 
 namespace dogen {
 namespace generator {

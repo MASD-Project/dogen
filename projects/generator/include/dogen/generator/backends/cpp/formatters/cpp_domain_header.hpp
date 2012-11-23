@@ -27,7 +27,7 @@
 
 #include <iosfwd>
 #include <boost/filesystem/path.hpp>
-#include "dogen/sml/domain/category_types.hpp"
+#include "dogen/sml/types/category_types.hpp"
 #include "dogen/generator/backends/cpp/formatters/cpp_indenter.hpp"
 #include "dogen/generator/backends/cpp/formatters/cpp_utility.hpp"
 #include "dogen/generator/backends/cpp/view_models/class_view_model.hpp"

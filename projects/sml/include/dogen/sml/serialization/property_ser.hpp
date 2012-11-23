@@ -25,43 +25,18 @@
 #pragma once
 #endif
 
-#include <string>
-#include <boost/serialization/nvp.hpp>
-#include <boost/serialization/list.hpp>
-#include <boost/serialization/string.hpp>
-#include "dogen/sml/domain/property.hpp"
-#include "dogen/sml/serialization/nested_qualified_name_ser.hpp"
+#include <boost/serialization/split_free.hpp>
+#include "dogen/sml/types/property.hpp"
 
-namespace dogen {
-namespace sml {
-
-class property_serializer {
-public:
-    template<typename Archive>
-    void serialize(Archive & archive,
-        dogen::sml::property& value,
-        const unsigned int /*version*/) {
-        using boost::serialization::make_nvp;
-
-        archive & make_nvp("name", value.name_);
-        archive & make_nvp("type_name", value.type_name_);
-        archive & make_nvp("default_value", value.default_value_);
-        archive & make_nvp("documentation", value.documentation_);
-    }
-};
-
-} }
-
+BOOST_SERIALIZATION_SPLIT_FREE(dogen::sml::property)
 namespace boost {
 namespace serialization {
 
-template<class Archive>
-inline void serialize(Archive & archive,
-    dogen::sml::property& value,
-    const unsigned int version) {
-    dogen::sml::property_serializer serializer;
-    serializer.serialize<Archive>(archive, value, version);
-}
+template<typename Archive>
+void save(Archive& ar, const dogen::sml::property& v, unsigned int version);
+
+template<typename Archive>
+void load(Archive& ar, dogen::sml::property& v, unsigned int version);
 
 } }
 

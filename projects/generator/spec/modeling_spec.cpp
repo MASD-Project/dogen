@@ -30,7 +30,7 @@
 #include "dogen/dia/io/diagram_io.hpp"
 #include "dogen/dia/xml/hydrator.hpp"
 #include "dogen/generator/modeling/dia_to_sml.hpp"
-#include "dogen/sml/domain/model.hpp"
+#include "dogen/sml/types/model.hpp"
 #include "dogen/sml/io/model_io.hpp"
 #include "dogen/sml/io/qualified_name_io.hpp"
 #include "dogen/dia/serialization/diagram_ser.hpp"

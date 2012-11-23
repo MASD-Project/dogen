@@ -19,14 +19,36 @@
  *
  */
 #include <ostream>
+#include "dogen/sml/io/meta_types_io.hpp"
 #include "dogen/sml/io/qualified_name_io.hpp"
+
+namespace std {
+
+inline std::ostream& operator<<(std::ostream& s, const std::list<std::string>& v) {
+    s << "[ ";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << "\"" << *i << "\"";
+    }
+    s << "] ";
+    return s;
+}
+
+}
 
 namespace dogen {
 namespace sml {
 
-std::ostream& operator<<(std::ostream& stream, const dogen::sml::qualified_name& qualified_name) {
-    qualified_name.to_stream(stream);
-    return(stream);
+std::ostream& operator<<(std::ostream& s, const qualified_name& v) {
+    s << " { "
+      << "\"__type__\": " << "\"qualified_name\"" << ", "
+      << "\"model_name\": " << "\"" << v.model_name() << "\"" << ", "
+      << "\"external_package_path\": " << v.external_package_path() << ", "
+      << "\"package_path\": " << v.package_path() << ", "
+      << "\"type_name\": " << "\"" << v.type_name() << "\"" << ", "
+      << "\"meta_type\": " << v.meta_type()
+      << " }";
+    return(s);
 }
 
 } }

@@ -18,16 +18,25 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/io/ios_state.hpp>
 #include <ostream>
 #include "dogen/sml/io/exception_io.hpp"
+#include "dogen/sml/io/qualified_name_io.hpp"
 
 namespace dogen {
 namespace sml {
 
-std::ostream&
-operator<<(std::ostream& stream, const dogen::sml::exception& exception) {
-    exception.to_stream(stream);
-    return(stream);
+std::ostream& operator<<(std::ostream& s, const exception& v) {
+    boost::io::ios_flags_saver ifs(s);
+    s << std::boolalpha;
+
+    s << " { "
+      << "\"__type__\": " << "\"exception\"" << ", "
+      << "\"name\": " << v.name() << ", "
+      << "\"generate\": " << v.generate() << ", "
+      << "\"documentation\": " << "\"" << v.documentation() << "\""
+      << " }";
+    return(s);
 }
 
 } }

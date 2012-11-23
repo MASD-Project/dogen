@@ -41,7 +41,7 @@ cpp_class_implementation::cpp_class_implementation(std::ostream& stream)
     : stream_(stream), utility_(stream_, indenter_) { }
 
 void cpp_class_implementation::default_constructor(const class_view_model& vm) {
-    if (!vm.has_primitive_properties())
+    if (!vm.requires_manual_default_constructor())
         return;
 
     stream_ << indenter_ << vm.name() << "::"
@@ -50,7 +50,7 @@ void cpp_class_implementation::default_constructor(const class_view_model& vm) {
         cpp_positive_indenter_scope s(indenter_);
         bool is_first(true);
         for (const auto p : vm.properties()) {
-            if (!p.type().is_primitive())
+            if (!p.type().is_primitive() && !p.type().is_enumeration())
                 continue;
 
             if (is_first)

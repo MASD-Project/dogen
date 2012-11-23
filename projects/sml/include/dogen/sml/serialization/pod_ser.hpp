@@ -25,55 +25,18 @@
 #pragma once
 #endif
 
-#include <string>
-#include <boost/serialization/nvp.hpp>
-#include <boost/serialization/string.hpp>
-#include <boost/serialization/vector.hpp>
-#include <boost/serialization/optional.hpp>
-#include "dogen/sml/domain/pod.hpp"
-#include "dogen/sml/serialization/property_ser.hpp"
-#include "dogen/sml/serialization/category_types_ser.hpp"
-#include "dogen/sml/serialization/pod_types_ser.hpp"
-#include "dogen/sml/serialization/qualified_name_ser.hpp"
-#include "dogen/sml/serialization/reference_ser.hpp"
+#include <boost/serialization/split_free.hpp>
+#include "dogen/sml/types/pod.hpp"
 
-namespace dogen {
-namespace sml {
-
-class pod_serializer {
-public:
-    template<typename Archive>
-    void serialize(Archive & archive,
-        dogen::sml::pod& value,
-        const unsigned int /*version*/) {
-        using boost::serialization::make_nvp;
-        archive & make_nvp("name", value.name_);
-        archive & make_nvp("properties", value.properties_);
-        archive & make_nvp("parent_name", value.parent_name_);
-        archive & make_nvp("original_parent_name", value.original_parent_name_);
-        archive & make_nvp("leaves", value.leaves_);
-        archive & make_nvp("generate", value.generate_);
-        archive & make_nvp("is_parent", value.is_parent_);
-        archive & make_nvp("category_type", value.category_type_);
-        archive & make_nvp("pod_type", value.pod_type_);
-        archive & make_nvp("documentation", value.documentation_);
-        archive & make_nvp("number_of_type_arguments",
-            value.number_of_type_arguments_);
-    }
-};
-
-} }
-
+BOOST_SERIALIZATION_SPLIT_FREE(dogen::sml::pod)
 namespace boost {
 namespace serialization {
 
-template<class Archive>
-inline void serialize(Archive & archive,
-    dogen::sml::pod& value,
-    const unsigned int version) {
-    dogen::sml::pod_serializer serializer;
-    serializer.serialize<Archive>(archive, value, version);
-}
+template<typename Archive>
+void save(Archive& ar, const dogen::sml::pod& v, unsigned int version);
+
+template<typename Archive>
+void load(Archive& ar, dogen::sml::pod& v, unsigned int version);
 
 } }
 

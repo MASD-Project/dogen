@@ -31,15 +31,15 @@
 #include <utility>
 #include <boost/filesystem/path.hpp>
 #include "dogen/generator/backends/cpp/boost_model_helper.hpp"
-#include "dogen/sml/domain/category_types.hpp"
+#include "dogen/sml/types/category_types.hpp"
 #include "dogen/generator/config/cpp_settings.hpp"
-#include "dogen/sml/domain/meta_types.hpp"
+#include "dogen/sml/types/meta_types.hpp"
 #include "dogen/generator/backends/cpp/cpp_location_manager.hpp"
 #include "dogen/generator/backends/cpp/cpp_aspect_types.hpp"
 #include "dogen/generator/backends/cpp/cpp_facet_types.hpp"
 #include "dogen/generator/backends/cpp/cpp_file_types.hpp"
-#include "dogen/sml/domain/model.hpp"
-#include "dogen/sml/domain/pod.hpp"
+#include "dogen/sml/types/model.hpp"
+#include "dogen/sml/types/pod.hpp"
 
 namespace dogen {
 namespace generator {

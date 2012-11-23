@@ -26,12 +26,14 @@
 #endif
 
 #include <iosfwd>
-#include "dogen/sml/domain/package.hpp"
+#include "dogen/sml/types/package.hpp"
 
 namespace dogen {
 namespace sml {
 
-std::ostream& operator<<(std::ostream& stream, package value);
+std::ostream&
+operator<<(std::ostream& s,
+     const dogen::sml::package& v);
 
 } }
 

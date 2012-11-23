@@ -20,12 +20,10 @@
  */
 #include <boost/test/unit_test.hpp>
 #include "dogen/utility/test/logging.hpp"
-#include "dogen/sml/domain/sml_domain.hpp"
-#include "dogen/sml/io/sml_io.hpp"
+#include "dogen/sml/types/all.hpp"
+#include "dogen/sml/io/all_io.hpp"
 #include "dogen/utility/test/equality_tester.hpp"
-#include "dogen/sml/domain/sml_domain.hpp"
-#include "dogen/sml/io/sml_io.hpp"
-#include "dogen/sml/test_data/sml_test_data.hpp"
+#include "dogen/sml/test_data/all_td.hpp"
 
 namespace {
 
@@ -53,14 +51,14 @@ BOOST_AUTO_TEST_SUITE(equality)
 
 BOOST_AUTO_TEST_CASE(equality_operator_behaves_correctly) {
     SETUP_TEST_LOG("equality_operator_behaves_correctly");
-    using namespace dogen::sml::test_data;
+    using namespace dogen::sml;
 
-    test_equality<meta_types_sequence>();
-    test_equality<qualified_name_sequence>();
-    test_equality<property_sequence>();
-    test_equality<pod_sequence>();
-    test_equality<package_sequence>();
-    test_equality<model_sequence>();
+    test_equality<meta_types_generator>();
+    test_equality<qualified_name_generator>();
+    test_equality<property_generator>();
+    test_equality<pod_generator>();
+    test_equality<package_generator>();
+    test_equality<model_generator>();
 }
 
 BOOST_AUTO_TEST_SUITE_END()

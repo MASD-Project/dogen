@@ -23,6 +23,11 @@
 namespace dogen {
 namespace enumeration {
 
+a_class::a_class()
+    : colour_type_(static_cast<dogen::enumeration::colour_types>(0)),
+      book_type_(static_cast<dogen::enumeration::book_types>(0)),
+      shape_type_(static_cast<dogen::enumeration::pkg1::shape_types>(0)) { }
+
 a_class::a_class(
     const dogen::enumeration::colour_types& colour_type,
     const dogen::enumeration::book_types& book_type,

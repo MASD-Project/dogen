@@ -25,41 +25,18 @@
 #pragma once
 #endif
 
-#include <string>
-#include <boost/serialization/nvp.hpp>
-#include <boost/serialization/list.hpp>
-#include <boost/serialization/string.hpp>
-#include "dogen/sml/domain/reference.hpp"
-#include "dogen/sml/serialization/meta_types_ser.hpp"
+#include <boost/serialization/split_free.hpp>
+#include "dogen/sml/types/reference.hpp"
 
-namespace dogen {
-namespace sml {
-
-class reference_serializer {
-public:
-    template<typename Archive>
-    void serialize(Archive & ar,
-        dogen::sml::reference& value,
-        const unsigned int /*version*/) {
-        using boost::serialization::make_nvp;
-        ar & make_nvp("model_name", value.model_name_);
-        ar & make_nvp("external_package_path", value.external_package_path_);
-        ar & make_nvp("is_system", value.is_system_);
-    }
-};
-
-} }
-
+BOOST_SERIALIZATION_SPLIT_FREE(dogen::sml::reference)
 namespace boost {
 namespace serialization {
 
-template<class Archive>
-inline void serialize(Archive & archive,
-    dogen::sml::reference& value,
-    const unsigned int version) {
-    dogen::sml::reference_serializer serializer;
-    serializer.serialize<Archive>(archive, value, version);
-}
+template<typename Archive>
+void save(Archive& ar, const dogen::sml::reference& v, unsigned int version);
+
+template<typename Archive>
+void load(Archive& ar, dogen::sml::reference& v, unsigned int version);
 
 } }
 

@@ -31,9 +31,9 @@
 #include <unordered_set>
 #include <boost/graph/adjacency_list.hpp>
 #include "dogen/dia/domain/diagram.hpp"
-#include "dogen/sml/domain/package.hpp"
-#include "dogen/sml/domain/pod.hpp"
-#include "dogen/sml/domain/model.hpp"
+#include "dogen/sml/types/package.hpp"
+#include "dogen/sml/types/pod.hpp"
+#include "dogen/sml/types/model.hpp"
 #include "dogen/dia/domain/attribute.hpp"
 #include "dogen/dia/domain/object.hpp"
 #include "dogen/generator/modeling/dia_object_to_sml_pod.hpp"

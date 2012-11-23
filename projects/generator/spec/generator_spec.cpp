@@ -40,7 +40,7 @@
 #include "dogen/generator/modeling/dia_to_sml.hpp"
 #include "dogen/generator/config/settings.hpp"
 #include "dogen/generator/generator.hpp"
-#include "dogen/sml/domain/model.hpp"
+#include "dogen/sml/types/model.hpp"
 #include "dogen/sml/io/model_io.hpp"
 #include "dogen/dia/serialization/diagram_ser.hpp"
 #include "dogen/sml/serialization/model_ser.hpp"

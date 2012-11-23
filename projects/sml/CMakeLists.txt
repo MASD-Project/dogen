@@ -7,7 +7,7 @@
 # the Free Software Foundation; either version 3 of the License, or
 # (at your option) any later version.
 #
-# This program is distributed in the hope that it will be useful,
+# This program is distributed in the hope that it will be  useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 # GNU General Public License for more details.
@@ -18,10 +18,9 @@
 # MA 02110-1301, USA.
 #
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/src)
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/spec)
 
 install(
-    DIRECTORY include/
-    DESTINATION include/${DOGEN_VERSION}/
-    COMPONENT headers
-    FILES_MATCHING PATTERN "*.hpp")
+DIRECTORY include/
+DESTINATION include/_${DOGEN_VERSION}/
+COMPONENT headers
+FILES_MATCHING PATTERN "*.hpp")

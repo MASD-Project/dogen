@@ -25,38 +25,13 @@
 #pragma once
 #endif
 
-#include <string>
-#include <boost/serialization/string.hpp>
 #include <boost/serialization/nvp.hpp>
-#include "dogen/sml/domain/meta_types.hpp"
-
-namespace dogen {
-namespace sml {
-
-class meta_types_serializer {
-public:
-    template<typename Archive>
-    void serialize(Archive & archive,
-        dogen::sml::meta_types& value,
-        const unsigned int /*version*/) {
-        using boost::serialization::make_nvp;
-        archive & make_nvp("meta_types", value);
-    }
-};
-
-} }
-
-namespace boost {
-namespace serialization {
+#include "dogen/sml/types/meta_types.hpp"
 
 template<class Archive>
-inline void serialize(Archive & archive,
-    dogen::sml::meta_types& value,
-    const unsigned int version) {
-    dogen::sml::meta_types_serializer serializer;
-    serializer.serialize<Archive>(archive, value, version);
+void serialize(Archive& ar, dogen::sml::meta_types& v, unsigned int /*version*/){
+    using boost::serialization::make_nvp;
+    ar & make_nvp("meta_types", v);
 }
-
-} }
 
 #endif

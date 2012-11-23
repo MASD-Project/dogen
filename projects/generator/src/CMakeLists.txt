@@ -23,6 +23,13 @@ file(GLOB_RECURSE generator_files RELATIVE
     "${CMAKE_CURRENT_SOURCE_DIR}/*.cpp")
 
 add_library(generator STATIC ${generator_files})
+target_link_libraries(generator
+    sml
+    dia
+    utility
+    ${LIBXML2_LIBRARIES}
+    ${Boost_LIBRARIES})
+
 set_target_properties(generator
     PROPERTIES OUTPUT_NAME dogen_generator_${DOGEN_VERSION})
 set_target_properties(generator

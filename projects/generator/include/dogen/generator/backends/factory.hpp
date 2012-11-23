@@ -27,7 +27,7 @@
 
 #include "dogen/generator/config/settings.hpp"
 #include "dogen/generator/backends/backend.hpp"
-#include "dogen/sml/domain/model.hpp"
+#include "dogen/sml/types/model.hpp"
 
 namespace dogen {
 namespace generator {

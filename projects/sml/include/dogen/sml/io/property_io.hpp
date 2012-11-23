@@ -26,12 +26,14 @@
 #endif
 
 #include <iosfwd>
-#include "dogen/sml/domain/property.hpp"
+#include "dogen/sml/types/property.hpp"
 
 namespace dogen {
 namespace sml {
 
-std::ostream& operator<<(std::ostream& stream, dogen::sml::property property);
+std::ostream&
+operator<<(std::ostream& s,
+     const dogen::sml::property& v);
 
 } }
 

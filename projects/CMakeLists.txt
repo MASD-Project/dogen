@@ -187,6 +187,7 @@ include_directories(
 #
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dia)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/sml)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/sml/spec)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/utility)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/generator)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/driver)

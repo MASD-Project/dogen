@@ -25,14 +25,15 @@
 #pragma once
 #endif
 
-#include <ostream>
-#include "dogen/sml/domain/exception.hpp"
+#include <iosfwd>
+#include "dogen/sml/types/exception.hpp"
 
 namespace dogen {
 namespace sml {
 
 std::ostream&
-operator<<(std::ostream& stream, const dogen::sml::exception& exception);
+operator<<(std::ostream& s,
+     const dogen::sml::exception& v);
 
 } }
 

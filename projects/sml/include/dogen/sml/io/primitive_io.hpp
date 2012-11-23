@@ -25,14 +25,15 @@
 #pragma once
 #endif
 
-#include <ostream>
-#include "dogen/sml/domain/primitive.hpp"
+#include <iosfwd>
+#include "dogen/sml/types/primitive.hpp"
 
 namespace dogen {
 namespace sml {
 
 std::ostream&
-operator<<(std::ostream& stream, const dogen::sml::primitive& primitive);
+operator<<(std::ostream& s,
+     const dogen::sml::primitive& v);
 
 } }
 

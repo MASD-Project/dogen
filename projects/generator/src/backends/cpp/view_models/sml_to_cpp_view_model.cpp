@@ -26,7 +26,7 @@
 #include <boost/algorithm/string/predicate.hpp>
 #include <boost/graph/depth_first_search.hpp>
 #include "dogen/sml/io/meta_types_io.hpp"
-#include "dogen/sml/domain/nested_qualified_name.hpp"
+#include "dogen/sml/types/nested_qualified_name.hpp"
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/io/list_io.hpp"
 #include "dogen/generator/backends/cpp/view_models/registrar_view_model.hpp"
@@ -230,6 +230,7 @@ void sml_dfs_visitor::transform_nested_qualified_name(
     vm.name(ns);
 
     using dogen::sml::meta_types;
+    vm.is_enumeration(qn.meta_type() == meta_types::enumeration);
     vm.is_primitive(qn.meta_type() == meta_types::primitive);
     if (vm.is_primitive()) {
         vm.is_char_like(is_char_like(vm.name()));
@@ -327,6 +328,7 @@ void sml_dfs_visitor::process_sml_pod(const dogen::sml::pod& pod) {
     bool has_primitive_properties(false);
     bool requires_stream_manipulators(false);
     bool requires_manual_move_constructor(false);
+    bool requires_manual_default_constructor(false);
     for(const auto p : pod.properties()) {
         property_view_model k(p.name());
         k.documentation(p.documentation());
@@ -339,9 +341,12 @@ void sml_dfs_visitor::process_sml_pod(const dogen::sml::pod& pod) {
         transform_nested_qualified_name(p.type_name(), type_vm, complete_name);
         if (type_vm.is_primitive()) {
             has_primitive_properties = true;
+            requires_manual_default_constructor = true;
             if (type_vm.name() == bool_type)
                 requires_stream_manipulators = true;
-        }
+        } else if (type_vm.is_enumeration())
+            requires_manual_default_constructor = true;
+
         type_vm.complete_name(complete_name);
         k.type(type_vm);
 
@@ -354,6 +359,7 @@ void sml_dfs_visitor::process_sml_pod(const dogen::sml::pod& pod) {
     cvm.has_primitive_properties(has_primitive_properties);
     cvm.requires_stream_manipulators(requires_stream_manipulators);
     cvm.requires_manual_move_constructor(requires_manual_move_constructor);
+    cvm.requires_manual_default_constructor(requires_manual_default_constructor);
 
     const auto opn(pod.original_parent_name());
     if (opn) {

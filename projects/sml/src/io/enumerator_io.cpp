@@ -24,10 +24,14 @@
 namespace dogen {
 namespace sml {
 
-std::ostream&
-operator<<(std::ostream& stream, const dogen::sml::enumerator& enumerator) {
-    enumerator.to_stream(stream);
-    return(stream);
+std::ostream& operator<<(std::ostream& s, const enumerator& v) {
+    s << " { "
+      << "\"__type__\": " << "\"enumerator\"" << ", "
+      << "\"name\": " << "\"" << v.name() << "\"" << ", "
+      << "\"value\": " << "\"" << v.value() << "\"" << ", "
+      << "\"documentation\": " << "\"" << v.documentation() << "\""
+      << " }";
+    return(s);
 }
 
 } }

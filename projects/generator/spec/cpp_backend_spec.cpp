@@ -24,7 +24,7 @@
 #include "dogen/utility/io/list_io.hpp"
 #include "dogen/utility/test/xml_serialization_helper.hpp"
 #include "dogen/utility/test/logging.hpp"
-#include "dogen/sml/domain/model.hpp"
+#include "dogen/sml/types/model.hpp"
 #include "dogen/sml/io/model_io.hpp"
 #include "dogen/sml/serialization/model_ser.hpp"
 #include "dogen/generator/test/mock_settings_factory.hpp"
