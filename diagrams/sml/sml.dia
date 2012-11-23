@@ -244,7 +244,7 @@ name folders in the file-system.#</dia:string>
             <dia:string>#primitives#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::unordered_map&lt;qualfied_name,primitive&gt;#</dia:string>
+            <dia:string>#std::unordered_map&lt;qualified_name,primitive&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -388,7 +388,7 @@ User models are regular Dogen models, normally made using Dia.#</dia:string>
             <dia:string>#dependencies#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::unordered_map&lt;std::string, reference&gt;#</dia:string>
+            <dia:string>#std::unordered_map&lt;std::string,reference&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -639,7 +639,7 @@ Leaves are types concrete types which have a parent.#</dia:string>
             <dia:string>#meta_type#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#meta_type#</dia:string>
+            <dia:string>#meta_types#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -2081,7 +2081,7 @@ Must only contain characters that can be used for identifiers in the target back
         <dia:real val="7.6000000000000005"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#meta_type#</dia:string>
+        <dia:string>#meta_types#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#enumeration#</dia:string>
@@ -3112,7 +3112,7 @@ categories for them.#</dia:string>
         <dia:point val="2.9237,59.1562"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-5.5129,44.3532;3.6737,60.7562"/>
+        <dia:rectangle val="-5.5129,44.3532;3.6737,59.9562"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -3293,7 +3293,7 @@ categories for them.#</dia:string>
         <dia:point val="28.9296,40.1292"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="28.1796,31.2157;34.9146,41.7292"/>
+        <dia:rectangle val="28.1796,31.2157;34.9146,40.9292"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -3977,7 +3977,7 @@ which make code generation different.#</dia:string>
         <dia:point val="18.2846,40.1292"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="14.5809,33.6938;19.0346,41.7292"/>
+        <dia:rectangle val="14.5809,33.6938;19.0346,40.9292"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
