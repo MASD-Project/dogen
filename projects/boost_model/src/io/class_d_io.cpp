@@ -19,11 +19,43 @@
  *
  */
 #include <ostream>
+#include "dogen/boost_model/io/class_a_io.hpp"
 #include "dogen/boost_model/io/class_d_io.hpp"
+#include "dogen/boost_model/io/pkg1/class_c_io.hpp"
 
 namespace boost {
 
 inline std::ostream& operator<<(std::ostream& s, const boost::optional<int>& v) {
+    s << "{ " << "\"__type__\": " << "\"boost::optional\"" << ", ";
+
+    if (v)
+        s << "\"data\": " << *v;
+    else
+        s << "\"data\": ""\"<empty>\"";
+    s<< " }";
+    return s;
+}
+
+}
+
+namespace boost {
+
+inline std::ostream& operator<<(std::ostream& s, const boost::optional<dogen::boost_model::class_a>& v) {
+    s << "{ " << "\"__type__\": " << "\"boost::optional\"" << ", ";
+
+    if (v)
+        s << "\"data\": " << *v;
+    else
+        s << "\"data\": ""\"<empty>\"";
+    s<< " }";
+    return s;
+}
+
+}
+
+namespace boost {
+
+inline std::ostream& operator<<(std::ostream& s, const boost::optional<dogen::boost_model::pkg1::class_c>& v) {
     s << "{ " << "\"__type__\": " << "\"boost::optional\"" << ", ";
 
     if (v)
@@ -42,7 +74,9 @@ namespace boost_model {
 std::ostream& operator<<(std::ostream& s, const class_d& v) {
     s << " { "
       << "\"__type__\": " << "\"class_d\"" << ", "
-      << "\"prop_0\": " << v.prop_0()
+      << "\"prop_0\": " << v.prop_0() << ", "
+      << "\"prop_1\": " << v.prop_1() << ", "
+      << "\"prop_2\": " << v.prop_2()
       << " }";
     return(s);
 }

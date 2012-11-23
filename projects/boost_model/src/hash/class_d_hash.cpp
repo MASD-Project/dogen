@@ -18,7 +18,9 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen/boost_model/hash/class_a_hash.hpp"
 #include "dogen/boost_model/hash/class_d_hash.hpp"
+#include "dogen/boost_model/hash/pkg1/class_c_hash.hpp"
 
 namespace {
 
@@ -39,6 +41,26 @@ inline std::size_t hash_boost_optional_int(const boost::optional<int>& v){
     return seed;
 }
 
+inline std::size_t hash_boost_optional_dogen_boost_model_class_a(const boost::optional<dogen::boost_model::class_a>& v){
+    std::size_t seed(0);
+
+    if (!v)
+        return seed;
+
+    combine(seed, *v);
+    return seed;
+}
+
+inline std::size_t hash_boost_optional_dogen_boost_model_pkg1_class_c(const boost::optional<dogen::boost_model::pkg1::class_c>& v){
+    std::size_t seed(0);
+
+    if (!v)
+        return seed;
+
+    combine(seed, *v);
+    return seed;
+}
+
 }
 
 namespace dogen {
@@ -48,6 +70,9 @@ std::size_t class_d_hasher::hash(const class_d&v) {
     std::size_t seed(0);
 
     combine(seed, hash_boost_optional_int(v.prop_0()));
+    combine(seed, hash_boost_optional_dogen_boost_model_class_a(v.prop_1()));
+    combine(seed, hash_boost_optional_dogen_boost_model_pkg1_class_c(v.prop_2()));
+
     return seed;
 }
 
