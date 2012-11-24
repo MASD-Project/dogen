@@ -18,10 +18,18 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/algorithm/string.hpp>
 #include <ostream>
 #include "dogen/std_model/io/class_a_io.hpp"
 #include "dogen/std_model/io/class_e_io.hpp"
 #include "dogen/std_model/io/pkg1/class_c_io.hpp"
+
+
+inline std::string tidy_up_string(std::string s) {
+    boost::replace_all(s, "\r\n", "<new_line>");
+    boost::replace_all(s, "\n", "<new_line>");
+    return s;
+}
 
 namespace std {
 
@@ -29,7 +37,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::deque<std::string>& 
     s << "[ ";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
-        s << "\"" << *i << "\"";
+        s << "\"" << tidy_up_string(*i) << "\"";
     }
     s << "] ";
     return s;

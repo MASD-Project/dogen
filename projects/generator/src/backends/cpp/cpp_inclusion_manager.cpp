@@ -173,7 +173,7 @@ cpp_inclusion_manager::pod_to_qualified_names(const sml::pod& pod) const {
 void cpp_inclusion_manager::
 append_implementation_dependencies(const sml::pod& p,
     const cpp_facet_types ft, const cpp_file_types flt, inclusion_lists& il,
-    const bool requires_stream_manipulators) const {
+    const bool requires_stream_manipulators, const bool has_std_string) const {
 
     /*
      * STL
@@ -243,6 +243,11 @@ append_implementation_dependencies(const sml::pod& p,
     if (is_implementation && io_enabled_ && requires_stream_manipulators &&
         (domain_with_io || io_without_iio))
         il.system.push_back(boost_.include(boost_types::io_ios_state));
+
+    // boost string algorithm
+    if (is_implementation && io_enabled_ && (domain_with_io || io_without_iio)
+        && has_std_string)
+        il.system.push_back(boost_.include(boost_types::string_algorithm));
 }
 
 void cpp_inclusion_manager::append_boost_dependencies(
@@ -518,6 +523,16 @@ bool cpp_inclusion_manager::requires_stream_manipulators(
     return false;
 }
 
+bool cpp_inclusion_manager::
+has_std_string(const std::list<dogen::sml::qualified_name>& names) const {
+    using dogen::sml::qualified_name;
+    for (const auto n : names) {
+        if (n.type_name() == std_string)
+            return true;
+    }
+    return false;
+}
+
 bool cpp_inclusion_manager::is_parent_or_child(const dogen::sml::pod& p) const {
     return p.parent_name() || p.is_parent();
 }
@@ -647,9 +662,10 @@ includes_for_pod(const sml::pod& pod, cpp_facet_types ft, cpp_file_types flt,
     const auto names(pod_to_qualified_names(pod));
     const auto keys(pod_to_keys(pod));
     const bool rsm(requires_stream_manipulators(names));
+    const bool has_str(has_std_string(names));
     const bool pc(is_parent_or_child(pod));
 
-    append_implementation_dependencies(pod, ft, flt, r, rsm);
+    append_implementation_dependencies(pod, ft, flt, r, rsm, has_str);
     append_relationship_dependencies(names, keys, pod.leaves(), ft, flt, pc, r);
     append_self_dependencies(n, ft, flt, at, n.meta_type(), r);
 

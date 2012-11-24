@@ -59,7 +59,8 @@ enum class boost_types : unsigned int {
     serialization_shared_ptr, ///< boost::shared_ptr support
     serialization_optional, ///< boost::optional support
     exception_info, ///< boost exeption base class
-    io_ios_state ///< IO state savers
+    io_ios_state, ///< IO state savers
+    string_algorithm ///< string algorithms
 };
 
 } } } }

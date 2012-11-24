@@ -59,7 +59,7 @@ const std::string serialization_optional_include(
 const std::string shared_ptr_include("boost/shared_ptr.hpp");
 const std::string exception_info_include("boost/exception/info.hpp");
 const std::string state_saver_include("boost/io/ios_state.hpp");
-
+const std::string string_algorithm_include("boost/algorithm/string.hpp");
 const std::string error_message("Invalid or unexpected boost type");
 
 }
@@ -121,6 +121,7 @@ std::string boost_model_helper::include(const boost_types type) const {
         return serialization_optional_include;
     case boost_types::exception_info: return exception_info_include;
     case boost_types::io_ios_state: return state_saver_include;
+    case boost_types::string_algorithm: return string_algorithm_include;
     default: break;
     }
     throw utility::exception::invalid_enum_value(error_message);

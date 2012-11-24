@@ -106,8 +106,10 @@ sequence_container_helper(const nested_type_view_model& vm) {
                         << utility_.quote(", ") << ";" << std::endl;
 
                 if (containee.is_string_like()) {
+                    const std::string tus(vm.is_char_like() ? "*i" :
+                        "tidy_up_string(*i)");
                     stream_ << indenter_ << "s" << space_inserter
-                            << utility_.quote_escaped_streamed("*i")
+                            << utility_.quote_escaped_streamed(tus)
                             << ";" << std::endl;
                 } else
                     stream_ << indenter_ << "s << *i;" << std::endl;
@@ -169,8 +171,10 @@ associative_container_helper(const nested_type_view_model& vm) {
 
                 const auto key(children.front());
                 if (key.is_string_like()) {
+                    const std::string tus(vm.is_char_like() ? "i->first" :
+                        "tidy_up_string(i->first)");
                     stream_ << indenter_ << "s" << space_inserter
-                            << utility_.quote_escaped_streamed("i->first")
+                            << utility_.quote_escaped_streamed(tus)
                             << ";" << std::endl;
                 } else
                     stream_ << indenter_ << "s << i->first;" << std::endl;
@@ -187,8 +191,10 @@ associative_container_helper(const nested_type_view_model& vm) {
 
                 const auto value(children.back());
                 if (value.is_string_like()) {
+                    const std::string tus(vm.is_char_like() ? "i->second" :
+                        "tidy_up_string(i->second)");
                     stream_ << indenter_ << "s" << space_inserter
-                            << utility_.quote_escaped_streamed("i->second")
+                            << utility_.quote_escaped_streamed(tus)
                             << ";" << std::endl;
                 } else
                     stream_ << indenter_ << "s << i->second;" << std::endl;
@@ -252,8 +258,11 @@ smart_pointer_helper(const nested_type_view_model& vm) {
                         << utility_.quote(utility_.quote_escaped("data") +
                             colon);
                 if (containee.is_string_like()) {
+                    const std::string tus(vm.is_char_like() ? "*v" :
+                        "tidy_up_string(*v)");
+
                     stream_ << space_inserter
-                            << utility_.quote_escaped_streamed("*v")
+                            << utility_.quote_escaped_streamed(tus)
                             << ";" << std::endl;
                 } else
                     stream_ << space_inserter << "*v;" << std::endl;
@@ -315,8 +324,11 @@ optional_helper(const nested_type_view_model& vm) {
                         << utility_.quote(utility_.quote_escaped("data") +
                             colon);
                 if (containee.is_string_like()) {
+                    const std::string tus(vm.is_char_like() ? "*v" :
+                        "tidy_up_string(*v)");
+
                     stream_ << space_inserter
-                            << utility_.quote_escaped_streamed("*v")
+                            << utility_.quote_escaped_streamed(tus)
                             << ";" << std::endl;
                 } else
                     stream_ << space_inserter << "*v;" << std::endl;
@@ -342,6 +354,27 @@ optional_helper(const nested_type_view_model& vm) {
     utility_.blank_line(2);
 }
 
+void cpp_inserter_implementation::tidy_up_string_method() {
+    utility_.blank_line();
+    stream_ << indenter_ << "inline std::string tidy_up_string"
+            << "(std::string s) ";
+
+    utility_.open_scope();
+    {
+        cpp_positive_indenter_scope s(indenter_);
+        stream_ << indenter_
+                << "boost::replace_all(s, \"\\r\\n\", \"<new_line>\");"
+                << std::endl
+                << indenter_
+                << "boost::replace_all(s, \"\\n\", \"<new_line>\");"
+                << std::endl
+                << indenter_ << "return s;"
+                << std::endl;
+    }
+    utility_.close_scope();
+    utility_.blank_line();
+}
+
 void cpp_inserter_implementation::
 recursive_helper_method_creator(const nested_type_view_model& vm,
     std::unordered_set<std::string>& types_done) {
@@ -361,6 +394,8 @@ recursive_helper_method_creator(const nested_type_view_model& vm,
         smart_pointer_helper(vm);
     else if (vm.is_optional_like())
         optional_helper(vm);
+    else if (vm.is_string_like() && !vm.is_char_like())
+        tidy_up_string_method();
 
     types_done.insert(vm.complete_identifiable_name());
 }
@@ -423,14 +458,20 @@ format_inserter_implementation(const class_view_model& vm) {
                     + colon) << space_inserter;
 
         std::ostringstream ss;
+        if (p.type().is_string_like() && !p.type().is_char_like())
+            ss << "tidy_up_string(";
+
         if (is_inside_class_)
             ss << utility_.as_member_variable(p.name());
         else
             ss << "v." << utility_.as_getter(p.name());
 
-        if (p.type().is_string_like())
+        if (p.type().is_string_like()) {
+            if (!p.type().is_char_like())
+                ss << ")";
+
             stream_ << utility_.quote_escaped_streamed(ss.str());
-        else if (p.type().is_primitive())
+        } else if (p.type().is_primitive())
             stream_ << ss.str();
         else
             stream_ << ss.str();
