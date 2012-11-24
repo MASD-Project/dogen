@@ -274,6 +274,7 @@ a second line#</dia:string>
         <dia:string>#first line
 
 second line
+third line with "quote"
 #</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">

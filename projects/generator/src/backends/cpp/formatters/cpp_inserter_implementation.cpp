@@ -368,6 +368,9 @@ void cpp_inserter_implementation::tidy_up_string_method() {
                 << indenter_
                 << "boost::replace_all(s, \"\\n\", \"<new_line>\");"
                 << std::endl
+                << indenter_
+                << "boost::replace_all(s, \"\\\"\", \"<quote>\");"
+                << std::endl
                 << indenter_ << "return s;"
                 << std::endl;
     }

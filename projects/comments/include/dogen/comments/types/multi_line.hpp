@@ -35,6 +35,7 @@ namespace comments {
  * @brief first line
  *
  * second line
+ * third line with "quote"
  */
 class multi_line final {
 public:
