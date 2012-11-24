@@ -99,14 +99,14 @@ for all facets.
 This means we need to add an additional checking step after writing
 all files that verifies that all files are really on the filesystem.
 
-*** Typedef keys for each type
+*** Typedef keys for each type                                        :story:
 
 We should really have different names for each key. Ideally even
 different types, if its easy. We need to consult modern c++ for
 this. If its not possible for each key to be a different type, we
 should at least provide a typedef on each class.
 
-*** COMPLETED Reduce size of doxygen packages
+*** COMPLETED Reduce size of doxygen packages                         :story:
     CLOSED: [2012-11-21 Wed 16:37]
 
 We need to investigate our doxygen configuration to figure out why our
@@ -162,10 +162,18 @@ to separate models. But we didn't do an upfront check to make sure
 that all models that target depends on are present. Add a check for
 this.
 
-*** COMPLETED Generate the SML model from dogen
+*** COMPLETED Generate the SML model from dogen                       :story:
     CLOSED: [2012-11-24 Sat 01:28]
 
 Now that dogen is functional we should remove all the hand-crafted
 code in the SML model which could be code generated.
+
+*** COMPLETED Multi-line strings on JSON                              :story:
+    CLOSED: [2012-11-24 Sat 14:55]
+
+Our inserters need to remove all newline characters before outputting
+them as JSON. This is a problem for SML documentation for example.
+
+While we were at it, we fixed quotes in strings too.
 
 ** Deprecated Development Stories

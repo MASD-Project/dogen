@@ -76,11 +76,6 @@ CMake backend when that exists.
 Avoid breaking tests every time the exception text changes by creating
 a error code property in kitanda exceptions.
 
-*** Multi-line strings on JSON
-
-Our inserters need to remove all newline characters before outputting
-them as JSON. This is a problem for SML documentation for example.
-
 *** Registrar is not included in serialisation includer
 
 For some reason we are not including the registrar on the includer for
