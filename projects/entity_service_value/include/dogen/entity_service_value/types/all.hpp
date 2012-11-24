@@ -22,4 +22,5 @@
 #include "dogen/entity_service_value/types/entity_unversioned_key.hpp"
 #include "dogen/entity_service_value/types/entity_versioned_key.hpp"
 #include "dogen/entity_service_value/types/service.hpp"
+#include "dogen/entity_service_value/types/some_type.hpp"
 #include "dogen/entity_service_value/types/value.hpp"

@@ -22,4 +22,5 @@
 #include "dogen/entity_service_value/test_data/entity_unversioned_key_td.hpp"
 #include "dogen/entity_service_value/test_data/entity_versioned_key_td.hpp"
 #include "dogen/entity_service_value/test_data/service_td.hpp"
+#include "dogen/entity_service_value/test_data/some_type_td.hpp"
 #include "dogen/entity_service_value/test_data/value_td.hpp"
