@@ -32,6 +32,7 @@
 #include <vector>
 #include "dogen/sml/serialization/pod_fwd_ser.hpp"
 #include "dogen/sml/types/category_types.hpp"
+#include "dogen/sml/types/generation_types.hpp"
 #include "dogen/sml/types/pod_types.hpp"
 #include "dogen/sml/types/property.hpp"
 #include "dogen/sml/types/qualified_name.hpp"
@@ -57,7 +58,7 @@ public:
         const boost::optional<dogen::sml::qualified_name>& parent_name,
         const boost::optional<dogen::sml::qualified_name>& original_parent_name,
         const std::list<dogen::sml::qualified_name>& leaves,
-        const bool generate,
+        const dogen::sml::generation_types& generation_type,
         const bool is_parent,
         const dogen::sml::category_types& category_type,
         const dogen::sml::pod_types& pod_type,
@@ -138,15 +139,15 @@ public:
     /**@}*/
 
     /*
-     * @brief True if this pod is to be code generated, false otherwise.
+     * @brief What to do with this pod in terms of code generation
      */
     /**@{*/
-    bool generate() const {
-        return generate_;
+    dogen::sml::generation_types generation_type() const {
+        return generation_type_;
     }
 
-    void generate(const bool v) {
-        generate_ = v;
+    void generation_type(const dogen::sml::generation_types& v) {
+        generation_type_ = v;
     }
     /**@}*/
 
@@ -231,7 +232,7 @@ private:
     boost::optional<dogen::sml::qualified_name> parent_name_;
     boost::optional<dogen::sml::qualified_name> original_parent_name_;
     std::list<dogen::sml::qualified_name> leaves_;
-    bool generate_;
+    dogen::sml::generation_types generation_type_;
     bool is_parent_;
     dogen::sml::category_types category_type_;
     dogen::sml::pod_types pod_type_;

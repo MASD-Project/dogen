@@ -20,6 +20,7 @@
  */
 #include <sstream>
 #include "dogen/sml/test_data/category_types_td.hpp"
+#include "dogen/sml/test_data/generation_types_td.hpp"
 #include "dogen/sml/test_data/pod_td.hpp"
 #include "dogen/sml/test_data/pod_types_td.hpp"
 #include "dogen/sml/test_data/property_td.hpp"
@@ -57,6 +58,11 @@ std::list<dogen::sml::qualified_name> create_std_list_dogen_sml_qualified_name(u
         r.push_back(create_dogen_sml_qualified_name(position + i));
     }
     return r;
+}
+
+dogen::sml::generation_types
+create_dogen_sml_generation_types(const unsigned int position) {
+    return dogen::sml::generation_types_generator::create(position);
 }
 
 bool create_bool(const unsigned int position) {
@@ -97,7 +103,7 @@ populate(const unsigned int position, result_type& v) {
     v.parent_name(create_boost_optional_dogen_sml_qualified_name(position + 2));
     v.original_parent_name(create_boost_optional_dogen_sml_qualified_name(position + 3));
     v.leaves(create_std_list_dogen_sml_qualified_name(position + 4));
-    v.generate(create_bool(position + 5));
+    v.generation_type(create_dogen_sml_generation_types(position + 5));
     v.is_parent(create_bool(position + 6));
     v.category_type(create_dogen_sml_category_types(position + 7));
     v.pod_type(create_dogen_sml_pod_types(position + 8));

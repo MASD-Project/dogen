@@ -22,6 +22,7 @@
 #include "dogen/sml/test_data/enumeration_td.hpp"
 #include "dogen/sml/test_data/enumerator_td.hpp"
 #include "dogen/sml/test_data/exception_td.hpp"
+#include "dogen/sml/test_data/generation_types_td.hpp"
 #include "dogen/sml/test_data/meta_types_td.hpp"
 #include "dogen/sml/test_data/model_td.hpp"
 #include "dogen/sml/test_data/nested_qualified_name_td.hpp"

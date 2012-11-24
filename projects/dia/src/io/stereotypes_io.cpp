@@ -33,6 +33,7 @@ const std::string versioned("versioned");
 const std::string entity("entity");
 const std::string value("value");
 const std::string service("service");
+const std::string nongeneratable("nongeneratable");
 const std::string error_message("Invalid or unexpected object type");
 
 }
@@ -54,6 +55,8 @@ std::ostream& operator<<(std::ostream& stream, stereotypes value) {
         return stream << prefix << value;
     case stereotypes::service:
         return stream << prefix << service;
+    case stereotypes::nongeneratable:
+        return stream << prefix << nongeneratable;
     default:
         break;
     }

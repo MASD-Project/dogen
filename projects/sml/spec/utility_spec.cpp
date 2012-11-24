@@ -80,7 +80,7 @@ dogen::sml::pod mock_pod(unsigned int i, std::string model_name) {
 
     dogen::sml::pod r;
     r.name(qn);
-    r.generate(true);
+    r.generation_type(dogen::sml::generation_types::full_generation);
     return r;
 }
 

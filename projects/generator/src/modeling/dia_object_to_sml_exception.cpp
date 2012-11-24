@@ -243,8 +243,10 @@ void dia_object_to_sml_exception::add_object(const dia::object& o) {
 sml::exception dia_object_to_sml_exception::
 transform_exception(const dia::object& o) const {
     dogen::sml::exception r;
+    r.generation_type(is_target_ ?
+        sml::generation_types::full_generation :
+        sml::generation_types::no_generation);
 
-    r.generate(is_target_);
     for (auto a : o.attributes()) {
         BOOST_LOG_SEV(lg, debug) << "Found attribute: " << a.name();
         if (a.name() == dia_name) {

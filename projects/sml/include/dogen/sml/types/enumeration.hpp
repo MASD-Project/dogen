@@ -30,6 +30,7 @@
 #include <vector>
 #include "dogen/sml/serialization/enumeration_fwd_ser.hpp"
 #include "dogen/sml/types/enumerator.hpp"
+#include "dogen/sml/types/generation_types.hpp"
 #include "dogen/sml/types/qualified_name.hpp"
 
 namespace dogen {
@@ -51,7 +52,7 @@ public:
 public:
     enumeration(
         const dogen::sml::qualified_name& name,
-        const bool generate,
+        const dogen::sml::generation_types& generation_type,
         const std::string& documentation,
         const std::vector<dogen::sml::enumerator>& enumerators);
 
@@ -77,15 +78,15 @@ public:
     /**@}*/
 
     /*
-     * @brief Returns true if this type is to be code generated.
+     * @brief What to do with this enumeration in terms of code generation.
      */
     /**@{*/
-    bool generate() const {
-        return generate_;
+    dogen::sml::generation_types generation_type() const {
+        return generation_type_;
     }
 
-    void generate(const bool v) {
-        generate_ = v;
+    void generation_type(const dogen::sml::generation_types& v) {
+        generation_type_ = v;
     }
     /**@}*/
 
@@ -127,7 +128,7 @@ public:
 
 private:
     dogen::sml::qualified_name name_;
-    bool generate_;
+    dogen::sml::generation_types generation_type_;
     std::string documentation_;
     std::vector<dogen::sml::enumerator> enumerators_;
 };

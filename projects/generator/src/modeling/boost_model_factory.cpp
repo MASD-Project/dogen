@@ -40,6 +40,7 @@ sml::primitive boost_model_factory::create_primitive(const std::string& name) {
     q.model_name(model_name);
     sml::primitive r;
     r.name(q);
+    r.generation_type(sml::generation_types::no_generation);
     return r;
 }
 
@@ -51,6 +52,7 @@ create_pod(const std::string& name, sml::pod_types pt) {
     q.model_name(model_name);
     sml::pod r;
     r.name(q);
+    r.generation_type(sml::generation_types::no_generation);
     if (pt == sml::pod_types::sequence_container)
         r.number_of_type_arguments(1);
     else if (pt == sml::pod_types::associative_container)

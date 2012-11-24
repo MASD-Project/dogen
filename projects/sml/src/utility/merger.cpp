@@ -176,7 +176,7 @@ void merger::resolve() {
     for (auto i(pods.begin()); i != pods.end(); ++i) {
         const qualified_name qualified_name(i->first);
         pod& pod(i->second);
-        if (!pod.generate())
+        if (pod.generation_type() == generation_types::no_generation)
             continue;
 
         resolve_parent(pod);

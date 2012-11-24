@@ -18,6 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen/sml/hash/generation_types_hash.hpp"
 #include "dogen/sml/hash/primitive_hash.hpp"
 #include "dogen/sml/hash/qualified_name_hash.hpp"
 
@@ -39,7 +40,7 @@ std::size_t primitive_hasher::hash(const primitive&v) {
     std::size_t seed(0);
 
     combine(seed, v.name());
-    combine(seed, v.generate());
+    combine(seed, v.generation_type());
     combine(seed, v.documentation());
 
     return seed;

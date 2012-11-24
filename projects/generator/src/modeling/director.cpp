@@ -143,7 +143,7 @@ create_key_system_pod(const sml::pod& p, const bool is_versioned) const {
 
     sml::pod r;
     r.name(qn);
-    r.generate(p.generate());
+    r.generation_type(p.generation_type());
 
     const auto vtc(sml::category_types::versioned_key);
     const auto uvtc(sml::category_types::unversioned_key);
@@ -244,22 +244,31 @@ sml::model director::to_sml(const dia::diagram& d, config::reference ref,
 bool director::has_generatable_types(const sml::model& m) const {
     bool r(false);
 
-    for (const auto p : m.pods()) {
-        if (p.second.generate()) {
+    auto lambda([](sml::generation_types gt) {
+            return
+                gt == sml::generation_types::full_generation ||
+                gt == sml::generation_types::partial_generation;
+        });
+
+    for (const auto pair : m.pods()) {
+        const auto p(pair.second);
+        if (lambda(p.generation_type())) {
             r = true;
             break;
         }
     }
 
-    for (const auto e : m.enumerations()) {
-        if (e.second.generate()) {
+    for (const auto pair : m.enumerations()) {
+        const auto e(pair.second);
+        if (lambda(e.generation_type())) {
             r = true;
             break;
         }
     }
 
-    for (const auto e : m.exceptions()) {
-        if (e.second.generate()) {
+    for (const auto pair : m.exceptions()) {
+        const auto e(pair.second);
+        if (lambda(e.generation_type())) {
             r = true;
             break;
         }

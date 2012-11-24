@@ -265,15 +265,17 @@ transform_enumerator(const dogen::dia::composite& uml_attribute,
 
 sml::enumeration dia_object_to_sml_enumeration::
 transform_enumeration(const dia::object& o) const {
-    dogen::sml::enumeration r;
+    sml::enumeration r;
 
-    r.generate(is_target_);
+    r.generation_type(is_target_ ?
+        sml::generation_types::full_generation :
+        sml::generation_types::no_generation);
     for (auto a : o.attributes()) {
         BOOST_LOG_SEV(lg, debug) << "Found attribute: " << a.name();
         if (a.name() == dia_name) {
             const std::string pkg_id(o.child_node() ?
                 o.child_node()->parent() : empty);
-            using dogen::sml::meta_types;
+            using sml::meta_types;
             r.name(transform_qualified_name(a, meta_types::enumeration,
                     pkg_id));
         } else if (a.name() == dia_documentation) {

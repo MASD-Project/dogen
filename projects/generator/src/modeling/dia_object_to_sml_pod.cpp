@@ -382,7 +382,10 @@ void dia_dfs_visitor::process_dia_object(const dogen::dia::object& o) {
         return; // root is a dummy object, ignore it.
 
     dogen::sml::pod pod;
-    pod.generate(state_->is_target_);
+    pod.generation_type(state_->is_target_ ?
+        dogen::sml::generation_types::full_generation :
+        dogen::sml::generation_types::no_generation);
+
     pod.category_type(dogen::sml::category_types::user_defined);
     for (auto a : o.attributes()) {
         BOOST_LOG_SEV(lg, debug) << "Found attribute: " << a.name();
@@ -401,13 +404,18 @@ void dia_dfs_visitor::process_dia_object(const dogen::dia::object& o) {
 
             const auto st(parse_stereotype(v));
             using dogen::dia::stereotypes;
+            using dogen::sml::generation_types;
             if (st == stereotypes::entity)
                 pod.pod_type(dogen::sml::pod_types::entity);
             else if (st == stereotypes::value)
                 pod.pod_type(dogen::sml::pod_types::value);
-            else if (st == stereotypes::service)
+            else if (st == stereotypes::nongeneratable) {
+                if (state_->is_target_)
+                    pod.generation_type(generation_types::partial_generation);
+            } else if (st == stereotypes::service) {
                 pod.pod_type(dogen::sml::pod_types::service);
-            else
+                pod.generation_type(generation_types::partial_generation);
+            } else
                 pod.pod_type(dogen::sml::pod_types::value);
         } else if (a.name() == dia_documentation) {
             const std::string doc(transform_string_attribute(a));

@@ -19,9 +19,9 @@
  *
  */
 #include <boost/algorithm/string.hpp>
-#include <boost/io/ios_state.hpp>
 #include <ostream>
 #include "dogen/sml/io/exception_io.hpp"
+#include "dogen/sml/io/generation_types_io.hpp"
 #include "dogen/sml/io/qualified_name_io.hpp"
 
 
@@ -36,13 +36,10 @@ namespace dogen {
 namespace sml {
 
 std::ostream& operator<<(std::ostream& s, const exception& v) {
-    boost::io::ios_flags_saver ifs(s);
-    s << std::boolalpha;
-
     s << " { "
       << "\"__type__\": " << "\"dogen::sml::exception\"" << ", "
       << "\"name\": " << v.name() << ", "
-      << "\"generate\": " << v.generate() << ", "
+      << "\"generation_type\": " << v.generation_type() << ", "
       << "\"documentation\": " << "\"" << tidy_up_string(v.documentation()) << "\""
       << " }";
     return(s);

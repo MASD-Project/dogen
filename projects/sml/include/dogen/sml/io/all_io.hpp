@@ -22,6 +22,7 @@
 #include "dogen/sml/io/enumeration_io.hpp"
 #include "dogen/sml/io/enumerator_io.hpp"
 #include "dogen/sml/io/exception_io.hpp"
+#include "dogen/sml/io/generation_types_io.hpp"
 #include "dogen/sml/io/meta_types_io.hpp"
 #include "dogen/sml/io/model_io.hpp"
 #include "dogen/sml/io/nested_qualified_name_io.hpp"

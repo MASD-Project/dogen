@@ -54,7 +54,7 @@
 					<count>0</count>
 					<item_version>0</item_version>
 				</leaves>
-				<generate>0</generate>
+				<generation_type>3</generation_type>
 				<is_parent>0</is_parent>
 				<category_type>0</category_type>
 				<pod_type>1</pod_type>
@@ -104,7 +104,7 @@
 					<count>0</count>
 					<item_version>0</item_version>
 				</leaves>
-				<generate>0</generate>
+				<generation_type>3</generation_type>
 				<is_parent>0</is_parent>
 				<category_type>0</category_type>
 				<pod_type>2</pod_type>
@@ -154,7 +154,7 @@
 					<count>0</count>
 					<item_version>0</item_version>
 				</leaves>
-				<generate>0</generate>
+				<generation_type>3</generation_type>
 				<is_parent>0</is_parent>
 				<category_type>0</category_type>
 				<pod_type>2</pod_type>
@@ -204,7 +204,7 @@
 					<count>0</count>
 					<item_version>0</item_version>
 				</leaves>
-				<generate>0</generate>
+				<generation_type>3</generation_type>
 				<is_parent>0</is_parent>
 				<category_type>0</category_type>
 				<pod_type>1</pod_type>
@@ -254,7 +254,7 @@
 					<count>0</count>
 					<item_version>0</item_version>
 				</leaves>
-				<generate>0</generate>
+				<generation_type>3</generation_type>
 				<is_parent>0</is_parent>
 				<category_type>0</category_type>
 				<pod_type>1</pod_type>
@@ -304,7 +304,7 @@
 					<count>0</count>
 					<item_version>0</item_version>
 				</leaves>
-				<generate>0</generate>
+				<generation_type>3</generation_type>
 				<is_parent>0</is_parent>
 				<category_type>0</category_type>
 				<pod_type>2</pod_type>
@@ -354,7 +354,7 @@
 					<count>0</count>
 					<item_version>0</item_version>
 				</leaves>
-				<generate>0</generate>
+				<generation_type>3</generation_type>
 				<is_parent>0</is_parent>
 				<category_type>0</category_type>
 				<pod_type>1</pod_type>
@@ -404,7 +404,7 @@
 					<count>0</count>
 					<item_version>0</item_version>
 				</leaves>
-				<generate>0</generate>
+				<generation_type>3</generation_type>
 				<is_parent>0</is_parent>
 				<category_type>0</category_type>
 				<pod_type>2</pod_type>
@@ -454,7 +454,7 @@
 					<count>0</count>
 					<item_version>0</item_version>
 				</leaves>
-				<generate>0</generate>
+				<generation_type>3</generation_type>
 				<is_parent>0</is_parent>
 				<category_type>0</category_type>
 				<pod_type>1</pod_type>
@@ -504,7 +504,7 @@
 					<count>0</count>
 					<item_version>0</item_version>
 				</leaves>
-				<generate>0</generate>
+				<generation_type>3</generation_type>
 				<is_parent>0</is_parent>
 				<category_type>0</category_type>
 				<pod_type>3</pod_type>
@@ -554,7 +554,7 @@
 					<count>0</count>
 					<item_version>0</item_version>
 				</leaves>
-				<generate>0</generate>
+				<generation_type>3</generation_type>
 				<is_parent>0</is_parent>
 				<category_type>0</category_type>
 				<pod_type>3</pod_type>
@@ -604,7 +604,7 @@
 					<count>0</count>
 					<item_version>0</item_version>
 				</leaves>
-				<generate>0</generate>
+				<generation_type>3</generation_type>
 				<is_parent>0</is_parent>
 				<category_type>0</category_type>
 				<pod_type>5</pod_type>
@@ -654,7 +654,7 @@
 					<count>0</count>
 					<item_version>0</item_version>
 				</leaves>
-				<generate>0</generate>
+				<generation_type>3</generation_type>
 				<is_parent>0</is_parent>
 				<category_type>0</category_type>
 				<pod_type>2</pod_type>
@@ -704,7 +704,7 @@
 					<count>0</count>
 					<item_version>0</item_version>
 				</leaves>
-				<generate>0</generate>
+				<generation_type>3</generation_type>
 				<is_parent>0</is_parent>
 				<category_type>0</category_type>
 				<pod_type>3</pod_type>
@@ -754,7 +754,7 @@
 					<count>0</count>
 					<item_version>0</item_version>
 				</leaves>
-				<generate>0</generate>
+				<generation_type>3</generation_type>
 				<is_parent>0</is_parent>
 				<category_type>0</category_type>
 				<pod_type>2</pod_type>
@@ -804,7 +804,7 @@
 					<count>0</count>
 					<item_version>0</item_version>
 				</leaves>
-				<generate>0</generate>
+				<generation_type>3</generation_type>
 				<is_parent>0</is_parent>
 				<category_type>0</category_type>
 				<pod_type>5</pod_type>
@@ -854,7 +854,7 @@
 					<count>0</count>
 					<item_version>0</item_version>
 				</leaves>
-				<generate>0</generate>
+				<generation_type>3</generation_type>
 				<is_parent>0</is_parent>
 				<category_type>0</category_type>
 				<pod_type>2</pod_type>
@@ -909,7 +909,7 @@
 									<item_version>0</item_version>
 								</package_path>
 								<type_name>unsigned int</type_name>
-								<meta_type>5</meta_type>
+								<meta_type>4</meta_type>
 							</type>
 							<children class_id="12" tracking_level="0" version="0">
 								<count>0</count>
@@ -934,7 +934,7 @@
 									<item_version>0</item_version>
 								</package_path>
 								<type_name>unsigned int</type_name>
-								<meta_type>5</meta_type>
+								<meta_type>4</meta_type>
 							</type>
 							<children>
 								<count>0</count>
@@ -956,7 +956,7 @@
 					<count>0</count>
 					<item_version>0</item_version>
 				</leaves>
-				<generate>1</generate>
+				<generation_type>1</generation_type>
 				<is_parent>0</is_parent>
 				<category_type>2</category_type>
 				<pod_type>0</pod_type>
@@ -1011,7 +1011,7 @@
 									<item_version>0</item_version>
 								</package_path>
 								<type_name>unsigned int</type_name>
-								<meta_type>5</meta_type>
+								<meta_type>4</meta_type>
 							</type>
 							<children>
 								<count>0</count>
@@ -1033,7 +1033,7 @@
 					<count>0</count>
 					<item_version>0</item_version>
 				</leaves>
-				<generate>1</generate>
+				<generation_type>1</generation_type>
 				<is_parent>0</is_parent>
 				<category_type>3</category_type>
 				<pod_type>0</pod_type>
@@ -1088,7 +1088,7 @@
 									<item_version>0</item_version>
 								</package_path>
 								<type_name>int</type_name>
-								<meta_type>5</meta_type>
+								<meta_type>4</meta_type>
 							</type>
 							<children>
 								<count>0</count>
@@ -1113,7 +1113,7 @@
 									<item_version>0</item_version>
 								</package_path>
 								<type_name>int</type_name>
-								<meta_type>5</meta_type>
+								<meta_type>4</meta_type>
 							</type>
 							<children>
 								<count>0</count>
@@ -1161,7 +1161,7 @@
 					<count>0</count>
 					<item_version>0</item_version>
 				</leaves>
-				<generate>1</generate>
+				<generation_type>1</generation_type>
 				<is_parent>0</is_parent>
 				<category_type>1</category_type>
 				<pod_type>4</pod_type>
@@ -1186,7 +1186,7 @@
 					<item_version>0</item_version>
 				</package_path>
 				<type_name>bool</type_name>
-				<meta_type>5</meta_type>
+				<meta_type>4</meta_type>
 			</first>
 			<second class_id="15" tracking_level="0" version="0">
 				<name>
@@ -1200,41 +1200,9 @@
 						<item_version>0</item_version>
 					</package_path>
 					<type_name>bool</type_name>
-					<meta_type>5</meta_type>
+					<meta_type>4</meta_type>
 				</name>
-				<generate>0</generate>
-				<documentation></documentation>
-			</second>
-		</item>
-		<item>
-			<first>
-				<model_name></model_name>
-				<external_package_path>
-					<count>0</count>
-					<item_version>0</item_version>
-				</external_package_path>
-				<package_path>
-					<count>0</count>
-					<item_version>0</item_version>
-				</package_path>
-				<type_name>long</type_name>
-				<meta_type>5</meta_type>
-			</first>
-			<second>
-				<name>
-					<model_name></model_name>
-					<external_package_path>
-						<count>0</count>
-						<item_version>0</item_version>
-					</external_package_path>
-					<package_path>
-						<count>0</count>
-						<item_version>0</item_version>
-					</package_path>
-					<type_name>long</type_name>
-					<meta_type>5</meta_type>
-				</name>
-				<generate>0</generate>
+				<generation_type>3</generation_type>
 				<documentation></documentation>
 			</second>
 		</item>
@@ -1250,7 +1218,7 @@
 					<item_version>0</item_version>
 				</package_path>
 				<type_name>unsigned long</type_name>
-				<meta_type>5</meta_type>
+				<meta_type>4</meta_type>
 			</first>
 			<second>
 				<name>
@@ -1264,9 +1232,9 @@
 						<item_version>0</item_version>
 					</package_path>
 					<type_name>unsigned long</type_name>
-					<meta_type>5</meta_type>
+					<meta_type>4</meta_type>
 				</name>
-				<generate>0</generate>
+				<generation_type>3</generation_type>
 				<documentation></documentation>
 			</second>
 		</item>
@@ -1282,7 +1250,7 @@
 					<item_version>0</item_version>
 				</package_path>
 				<type_name>char</type_name>
-				<meta_type>5</meta_type>
+				<meta_type>4</meta_type>
 			</first>
 			<second>
 				<name>
@@ -1296,265 +1264,9 @@
 						<item_version>0</item_version>
 					</package_path>
 					<type_name>char</type_name>
-					<meta_type>5</meta_type>
+					<meta_type>4</meta_type>
 				</name>
-				<generate>0</generate>
-				<documentation></documentation>
-			</second>
-		</item>
-		<item>
-			<first>
-				<model_name></model_name>
-				<external_package_path>
-					<count>0</count>
-					<item_version>0</item_version>
-				</external_package_path>
-				<package_path>
-					<count>0</count>
-					<item_version>0</item_version>
-				</package_path>
-				<type_name>unsigned long long</type_name>
-				<meta_type>5</meta_type>
-			</first>
-			<second>
-				<name>
-					<model_name></model_name>
-					<external_package_path>
-						<count>0</count>
-						<item_version>0</item_version>
-					</external_package_path>
-					<package_path>
-						<count>0</count>
-						<item_version>0</item_version>
-					</package_path>
-					<type_name>unsigned long long</type_name>
-					<meta_type>5</meta_type>
-				</name>
-				<generate>0</generate>
-				<documentation></documentation>
-			</second>
-		</item>
-		<item>
-			<first>
-				<model_name></model_name>
-				<external_package_path>
-					<count>0</count>
-					<item_version>0</item_version>
-				</external_package_path>
-				<package_path>
-					<count>0</count>
-					<item_version>0</item_version>
-				</package_path>
-				<type_name>unsigned char</type_name>
-				<meta_type>5</meta_type>
-			</first>
-			<second>
-				<name>
-					<model_name></model_name>
-					<external_package_path>
-						<count>0</count>
-						<item_version>0</item_version>
-					</external_package_path>
-					<package_path>
-						<count>0</count>
-						<item_version>0</item_version>
-					</package_path>
-					<type_name>unsigned char</type_name>
-					<meta_type>5</meta_type>
-				</name>
-				<generate>0</generate>
-				<documentation></documentation>
-			</second>
-		</item>
-		<item>
-			<first>
-				<model_name></model_name>
-				<external_package_path>
-					<count>0</count>
-					<item_version>0</item_version>
-				</external_package_path>
-				<package_path>
-					<count>0</count>
-					<item_version>0</item_version>
-				</package_path>
-				<type_name>unsigned int</type_name>
-				<meta_type>5</meta_type>
-			</first>
-			<second>
-				<name>
-					<model_name></model_name>
-					<external_package_path>
-						<count>0</count>
-						<item_version>0</item_version>
-					</external_package_path>
-					<package_path>
-						<count>0</count>
-						<item_version>0</item_version>
-					</package_path>
-					<type_name>unsigned int</type_name>
-					<meta_type>5</meta_type>
-				</name>
-				<generate>0</generate>
-				<documentation></documentation>
-			</second>
-		</item>
-		<item>
-			<first>
-				<model_name></model_name>
-				<external_package_path>
-					<count>0</count>
-					<item_version>0</item_version>
-				</external_package_path>
-				<package_path>
-					<count>0</count>
-					<item_version>0</item_version>
-				</package_path>
-				<type_name>int</type_name>
-				<meta_type>5</meta_type>
-			</first>
-			<second>
-				<name>
-					<model_name></model_name>
-					<external_package_path>
-						<count>0</count>
-						<item_version>0</item_version>
-					</external_package_path>
-					<package_path>
-						<count>0</count>
-						<item_version>0</item_version>
-					</package_path>
-					<type_name>int</type_name>
-					<meta_type>5</meta_type>
-				</name>
-				<generate>0</generate>
-				<documentation></documentation>
-			</second>
-		</item>
-		<item>
-			<first>
-				<model_name></model_name>
-				<external_package_path>
-					<count>0</count>
-					<item_version>0</item_version>
-				</external_package_path>
-				<package_path>
-					<count>0</count>
-					<item_version>0</item_version>
-				</package_path>
-				<type_name>long long</type_name>
-				<meta_type>5</meta_type>
-			</first>
-			<second>
-				<name>
-					<model_name></model_name>
-					<external_package_path>
-						<count>0</count>
-						<item_version>0</item_version>
-					</external_package_path>
-					<package_path>
-						<count>0</count>
-						<item_version>0</item_version>
-					</package_path>
-					<type_name>long long</type_name>
-					<meta_type>5</meta_type>
-				</name>
-				<generate>0</generate>
-				<documentation></documentation>
-			</second>
-		</item>
-		<item>
-			<first>
-				<model_name></model_name>
-				<external_package_path>
-					<count>0</count>
-					<item_version>0</item_version>
-				</external_package_path>
-				<package_path>
-					<count>0</count>
-					<item_version>0</item_version>
-				</package_path>
-				<type_name>short</type_name>
-				<meta_type>5</meta_type>
-			</first>
-			<second>
-				<name>
-					<model_name></model_name>
-					<external_package_path>
-						<count>0</count>
-						<item_version>0</item_version>
-					</external_package_path>
-					<package_path>
-						<count>0</count>
-						<item_version>0</item_version>
-					</package_path>
-					<type_name>short</type_name>
-					<meta_type>5</meta_type>
-				</name>
-				<generate>0</generate>
-				<documentation></documentation>
-			</second>
-		</item>
-		<item>
-			<first>
-				<model_name></model_name>
-				<external_package_path>
-					<count>0</count>
-					<item_version>0</item_version>
-				</external_package_path>
-				<package_path>
-					<count>0</count>
-					<item_version>0</item_version>
-				</package_path>
-				<type_name>unsigned short</type_name>
-				<meta_type>5</meta_type>
-			</first>
-			<second>
-				<name>
-					<model_name></model_name>
-					<external_package_path>
-						<count>0</count>
-						<item_version>0</item_version>
-					</external_package_path>
-					<package_path>
-						<count>0</count>
-						<item_version>0</item_version>
-					</package_path>
-					<type_name>unsigned short</type_name>
-					<meta_type>5</meta_type>
-				</name>
-				<generate>0</generate>
-				<documentation></documentation>
-			</second>
-		</item>
-		<item>
-			<first>
-				<model_name></model_name>
-				<external_package_path>
-					<count>0</count>
-					<item_version>0</item_version>
-				</external_package_path>
-				<package_path>
-					<count>0</count>
-					<item_version>0</item_version>
-				</package_path>
-				<type_name>double</type_name>
-				<meta_type>5</meta_type>
-			</first>
-			<second>
-				<name>
-					<model_name></model_name>
-					<external_package_path>
-						<count>0</count>
-						<item_version>0</item_version>
-					</external_package_path>
-					<package_path>
-						<count>0</count>
-						<item_version>0</item_version>
-					</package_path>
-					<type_name>double</type_name>
-					<meta_type>5</meta_type>
-				</name>
-				<generate>0</generate>
+				<generation_type>3</generation_type>
 				<documentation></documentation>
 			</second>
 		</item>
@@ -1570,7 +1282,7 @@
 					<item_version>0</item_version>
 				</package_path>
 				<type_name>float</type_name>
-				<meta_type>5</meta_type>
+				<meta_type>4</meta_type>
 			</first>
 			<second>
 				<name>
@@ -1584,9 +1296,297 @@
 						<item_version>0</item_version>
 					</package_path>
 					<type_name>float</type_name>
-					<meta_type>5</meta_type>
+					<meta_type>4</meta_type>
 				</name>
-				<generate>0</generate>
+				<generation_type>3</generation_type>
+				<documentation></documentation>
+			</second>
+		</item>
+		<item>
+			<first>
+				<model_name></model_name>
+				<external_package_path>
+					<count>0</count>
+					<item_version>0</item_version>
+				</external_package_path>
+				<package_path>
+					<count>0</count>
+					<item_version>0</item_version>
+				</package_path>
+				<type_name>unsigned char</type_name>
+				<meta_type>4</meta_type>
+			</first>
+			<second>
+				<name>
+					<model_name></model_name>
+					<external_package_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</external_package_path>
+					<package_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</package_path>
+					<type_name>unsigned char</type_name>
+					<meta_type>4</meta_type>
+				</name>
+				<generation_type>3</generation_type>
+				<documentation></documentation>
+			</second>
+		</item>
+		<item>
+			<first>
+				<model_name></model_name>
+				<external_package_path>
+					<count>0</count>
+					<item_version>0</item_version>
+				</external_package_path>
+				<package_path>
+					<count>0</count>
+					<item_version>0</item_version>
+				</package_path>
+				<type_name>int</type_name>
+				<meta_type>4</meta_type>
+			</first>
+			<second>
+				<name>
+					<model_name></model_name>
+					<external_package_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</external_package_path>
+					<package_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</package_path>
+					<type_name>int</type_name>
+					<meta_type>4</meta_type>
+				</name>
+				<generation_type>3</generation_type>
+				<documentation></documentation>
+			</second>
+		</item>
+		<item>
+			<first>
+				<model_name></model_name>
+				<external_package_path>
+					<count>0</count>
+					<item_version>0</item_version>
+				</external_package_path>
+				<package_path>
+					<count>0</count>
+					<item_version>0</item_version>
+				</package_path>
+				<type_name>short</type_name>
+				<meta_type>4</meta_type>
+			</first>
+			<second>
+				<name>
+					<model_name></model_name>
+					<external_package_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</external_package_path>
+					<package_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</package_path>
+					<type_name>short</type_name>
+					<meta_type>4</meta_type>
+				</name>
+				<generation_type>3</generation_type>
+				<documentation></documentation>
+			</second>
+		</item>
+		<item>
+			<first>
+				<model_name></model_name>
+				<external_package_path>
+					<count>0</count>
+					<item_version>0</item_version>
+				</external_package_path>
+				<package_path>
+					<count>0</count>
+					<item_version>0</item_version>
+				</package_path>
+				<type_name>unsigned int</type_name>
+				<meta_type>4</meta_type>
+			</first>
+			<second>
+				<name>
+					<model_name></model_name>
+					<external_package_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</external_package_path>
+					<package_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</package_path>
+					<type_name>unsigned int</type_name>
+					<meta_type>4</meta_type>
+				</name>
+				<generation_type>3</generation_type>
+				<documentation></documentation>
+			</second>
+		</item>
+		<item>
+			<first>
+				<model_name></model_name>
+				<external_package_path>
+					<count>0</count>
+					<item_version>0</item_version>
+				</external_package_path>
+				<package_path>
+					<count>0</count>
+					<item_version>0</item_version>
+				</package_path>
+				<type_name>unsigned short</type_name>
+				<meta_type>4</meta_type>
+			</first>
+			<second>
+				<name>
+					<model_name></model_name>
+					<external_package_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</external_package_path>
+					<package_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</package_path>
+					<type_name>unsigned short</type_name>
+					<meta_type>4</meta_type>
+				</name>
+				<generation_type>3</generation_type>
+				<documentation></documentation>
+			</second>
+		</item>
+		<item>
+			<first>
+				<model_name></model_name>
+				<external_package_path>
+					<count>0</count>
+					<item_version>0</item_version>
+				</external_package_path>
+				<package_path>
+					<count>0</count>
+					<item_version>0</item_version>
+				</package_path>
+				<type_name>long</type_name>
+				<meta_type>4</meta_type>
+			</first>
+			<second>
+				<name>
+					<model_name></model_name>
+					<external_package_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</external_package_path>
+					<package_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</package_path>
+					<type_name>long</type_name>
+					<meta_type>4</meta_type>
+				</name>
+				<generation_type>3</generation_type>
+				<documentation></documentation>
+			</second>
+		</item>
+		<item>
+			<first>
+				<model_name></model_name>
+				<external_package_path>
+					<count>0</count>
+					<item_version>0</item_version>
+				</external_package_path>
+				<package_path>
+					<count>0</count>
+					<item_version>0</item_version>
+				</package_path>
+				<type_name>long long</type_name>
+				<meta_type>4</meta_type>
+			</first>
+			<second>
+				<name>
+					<model_name></model_name>
+					<external_package_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</external_package_path>
+					<package_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</package_path>
+					<type_name>long long</type_name>
+					<meta_type>4</meta_type>
+				</name>
+				<generation_type>3</generation_type>
+				<documentation></documentation>
+			</second>
+		</item>
+		<item>
+			<first>
+				<model_name></model_name>
+				<external_package_path>
+					<count>0</count>
+					<item_version>0</item_version>
+				</external_package_path>
+				<package_path>
+					<count>0</count>
+					<item_version>0</item_version>
+				</package_path>
+				<type_name>unsigned long long</type_name>
+				<meta_type>4</meta_type>
+			</first>
+			<second>
+				<name>
+					<model_name></model_name>
+					<external_package_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</external_package_path>
+					<package_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</package_path>
+					<type_name>unsigned long long</type_name>
+					<meta_type>4</meta_type>
+				</name>
+				<generation_type>3</generation_type>
+				<documentation></documentation>
+			</second>
+		</item>
+		<item>
+			<first>
+				<model_name></model_name>
+				<external_package_path>
+					<count>0</count>
+					<item_version>0</item_version>
+				</external_package_path>
+				<package_path>
+					<count>0</count>
+					<item_version>0</item_version>
+				</package_path>
+				<type_name>double</type_name>
+				<meta_type>4</meta_type>
+			</first>
+			<second>
+				<name>
+					<model_name></model_name>
+					<external_package_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</external_package_path>
+					<package_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</package_path>
+					<type_name>double</type_name>
+					<meta_type>4</meta_type>
+				</name>
+				<generation_type>3</generation_type>
 				<documentation></documentation>
 			</second>
 		</item>

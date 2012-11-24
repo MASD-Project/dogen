@@ -18,18 +18,20 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/sml/hash/category_types_hash.hpp"
-#include "dogen/sml/hash/enumeration_hash.hpp"
-#include "dogen/sml/hash/enumerator_hash.hpp"
-#include "dogen/sml/hash/exception_hash.hpp"
-#include "dogen/sml/hash/generation_types_hash.hpp"
-#include "dogen/sml/hash/meta_types_hash.hpp"
-#include "dogen/sml/hash/model_hash.hpp"
-#include "dogen/sml/hash/nested_qualified_name_hash.hpp"
-#include "dogen/sml/hash/package_hash.hpp"
-#include "dogen/sml/hash/pod_hash.hpp"
-#include "dogen/sml/hash/pod_types_hash.hpp"
-#include "dogen/sml/hash/primitive_hash.hpp"
-#include "dogen/sml/hash/property_hash.hpp"
-#include "dogen/sml/hash/qualified_name_hash.hpp"
-#include "dogen/sml/hash/reference_hash.hpp"
+#ifndef DOGEN_SML_SERIALIZATION_GENERATION_TYPES_SER_HPP
+#define DOGEN_SML_SERIALIZATION_GENERATION_TYPES_SER_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include <boost/serialization/nvp.hpp>
+#include "dogen/sml/types/generation_types.hpp"
+
+template<class Archive>
+void serialize(Archive& ar, dogen::sml::generation_types& v, unsigned int /*version*/){
+    using boost::serialization::make_nvp;
+    ar & make_nvp("generation_types", v);
+}
+
+#endif

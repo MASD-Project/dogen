@@ -31,6 +31,7 @@
 #include <boost/serialization/vector.hpp>
 #include "dogen/sml/serialization/enumeration_ser.hpp"
 #include "dogen/sml/serialization/enumerator_ser.hpp"
+#include "dogen/sml/serialization/generation_types_ser.hpp"
 #include "dogen/sml/serialization/qualified_name_ser.hpp"
 
 #ifdef __linux__
@@ -46,7 +47,7 @@ void save(Archive& ar,
     const dogen::sml::enumeration& v,
     const unsigned int /*version*/) {
     ar << make_nvp("name", v.name_);
-    ar << make_nvp("generate", v.generate_);
+    ar << make_nvp("generation_type", v.generation_type_);
     ar << make_nvp("documentation", v.documentation_);
     ar << make_nvp("enumerators", v.enumerators_);
 }
@@ -56,7 +57,7 @@ void load(Archive& ar,
     dogen::sml::enumeration& v,
     const unsigned int /*version*/) {
     ar >> make_nvp("name", v.name_);
-    ar >> make_nvp("generate", v.generate_);
+    ar >> make_nvp("generation_type", v.generation_type_);
     ar >> make_nvp("documentation", v.documentation_);
     ar >> make_nvp("enumerators", v.enumerators_);
 }

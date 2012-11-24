@@ -18,18 +18,26 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/sml/hash/category_types_hash.hpp"
-#include "dogen/sml/hash/enumeration_hash.hpp"
-#include "dogen/sml/hash/enumerator_hash.hpp"
-#include "dogen/sml/hash/exception_hash.hpp"
-#include "dogen/sml/hash/generation_types_hash.hpp"
-#include "dogen/sml/hash/meta_types_hash.hpp"
-#include "dogen/sml/hash/model_hash.hpp"
-#include "dogen/sml/hash/nested_qualified_name_hash.hpp"
-#include "dogen/sml/hash/package_hash.hpp"
-#include "dogen/sml/hash/pod_hash.hpp"
-#include "dogen/sml/hash/pod_types_hash.hpp"
-#include "dogen/sml/hash/primitive_hash.hpp"
-#include "dogen/sml/hash/property_hash.hpp"
-#include "dogen/sml/hash/qualified_name_hash.hpp"
-#include "dogen/sml/hash/reference_hash.hpp"
+#ifndef DOGEN_SML_HASH_GENERATION_TYPES_HASH_HPP
+#define DOGEN_SML_HASH_GENERATION_TYPES_HASH_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include <functional>
+#include "dogen/sml/types/generation_types.hpp"
+
+namespace std {
+
+template<>
+class hash<dogen::sml::generation_types> {
+public:
+    size_t operator()(const dogen::sml::generation_types& v) const {
+        return std::hash<unsigned int>()(static_cast<unsigned int>(v));
+    }
+};
+
+}
+
+#endif

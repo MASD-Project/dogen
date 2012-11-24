@@ -19,6 +19,7 @@
  *
  */
 #include "dogen/sml/hash/category_types_hash.hpp"
+#include "dogen/sml/hash/generation_types_hash.hpp"
 #include "dogen/sml/hash/pod_hash.hpp"
 #include "dogen/sml/hash/pod_types_hash.hpp"
 #include "dogen/sml/hash/property_hash.hpp"
@@ -72,7 +73,7 @@ std::size_t pod_hasher::hash(const pod&v) {
     combine(seed, hash_boost_optional_dogen_sml_qualified_name(v.parent_name()));
     combine(seed, hash_boost_optional_dogen_sml_qualified_name(v.original_parent_name()));
     combine(seed, hash_std_list_dogen_sml_qualified_name(v.leaves()));
-    combine(seed, v.generate());
+    combine(seed, v.generation_type());
     combine(seed, v.is_parent());
     combine(seed, v.category_type());
     combine(seed, v.pod_type());

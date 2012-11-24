@@ -32,6 +32,7 @@
 #include <boost/serialization/string.hpp>
 #include <boost/serialization/vector.hpp>
 #include "dogen/sml/serialization/category_types_ser.hpp"
+#include "dogen/sml/serialization/generation_types_ser.hpp"
 #include "dogen/sml/serialization/pod_ser.hpp"
 #include "dogen/sml/serialization/pod_types_ser.hpp"
 #include "dogen/sml/serialization/property_ser.hpp"
@@ -54,7 +55,7 @@ void save(Archive& ar,
     ar << make_nvp("parent_name", v.parent_name_);
     ar << make_nvp("original_parent_name", v.original_parent_name_);
     ar << make_nvp("leaves", v.leaves_);
-    ar << make_nvp("generate", v.generate_);
+    ar << make_nvp("generation_type", v.generation_type_);
     ar << make_nvp("is_parent", v.is_parent_);
     ar << make_nvp("category_type", v.category_type_);
     ar << make_nvp("pod_type", v.pod_type_);
@@ -71,7 +72,7 @@ void load(Archive& ar,
     ar >> make_nvp("parent_name", v.parent_name_);
     ar >> make_nvp("original_parent_name", v.original_parent_name_);
     ar >> make_nvp("leaves", v.leaves_);
-    ar >> make_nvp("generate", v.generate_);
+    ar >> make_nvp("generation_type", v.generation_type_);
     ar >> make_nvp("is_parent", v.is_parent_);
     ar >> make_nvp("category_type", v.category_type_);
     ar >> make_nvp("pod_type", v.pod_type_);

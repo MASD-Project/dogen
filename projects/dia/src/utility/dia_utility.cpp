@@ -37,6 +37,7 @@ const std::string exception("exception");
 const std::string entity("entity");
 const std::string value("value");
 const std::string service("service");
+const std::string nongeneratable("nongeneratable");
 
 }
 
@@ -81,6 +82,9 @@ stereotypes parse_stereotype(const std::string& st) {
 
     if (st == service)
         return stereotypes::service;
+
+    if (st == nongeneratable)
+        return stereotypes::nongeneratable;
 
     throw dogen::utility::exception::exception(invalid_stereotype + st);
 }

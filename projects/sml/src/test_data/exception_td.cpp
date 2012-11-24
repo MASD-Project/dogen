@@ -20,6 +20,7 @@
  */
 #include <sstream>
 #include "dogen/sml/test_data/exception_td.hpp"
+#include "dogen/sml/test_data/generation_types_td.hpp"
 #include "dogen/sml/test_data/qualified_name_td.hpp"
 
 namespace {
@@ -29,8 +30,9 @@ create_dogen_sml_qualified_name(const unsigned int position) {
     return dogen::sml::qualified_name_generator::create(position);
 }
 
-bool create_bool(const unsigned int position) {
-    return (position % 2) == 0;
+dogen::sml::generation_types
+create_dogen_sml_generation_types(const unsigned int position) {
+    return dogen::sml::generation_types_generator::create(position);
 }
 
 std::string create_std_string(const unsigned int position) {
@@ -49,7 +51,7 @@ exception_generator::exception_generator() : position_(0) { }
 void exception_generator::
 populate(const unsigned int position, result_type& v) {
     v.name(create_dogen_sml_qualified_name(position + 0));
-    v.generate(create_bool(position + 1));
+    v.generation_type(create_dogen_sml_generation_types(position + 1));
     v.documentation(create_std_string(position + 2));
 }
 

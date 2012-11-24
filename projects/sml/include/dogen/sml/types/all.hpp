@@ -22,6 +22,7 @@
 #include "dogen/sml/types/enumeration.hpp"
 #include "dogen/sml/types/enumerator.hpp"
 #include "dogen/sml/types/exception.hpp"
+#include "dogen/sml/types/generation_types.hpp"
 #include "dogen/sml/types/merging_error.hpp"
 #include "dogen/sml/types/meta_types.hpp"
 #include "dogen/sml/types/model.hpp"

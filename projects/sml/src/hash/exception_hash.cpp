@@ -19,6 +19,7 @@
  *
  */
 #include "dogen/sml/hash/exception_hash.hpp"
+#include "dogen/sml/hash/generation_types_hash.hpp"
 #include "dogen/sml/hash/qualified_name_hash.hpp"
 
 namespace {
@@ -39,7 +40,7 @@ std::size_t exception_hasher::hash(const exception&v) {
     std::size_t seed(0);
 
     combine(seed, v.name());
-    combine(seed, v.generate());
+    combine(seed, v.generation_type());
     combine(seed, v.documentation());
 
     return seed;

@@ -28,6 +28,7 @@
 #include <algorithm>
 #include <string>
 #include "dogen/sml/serialization/exception_fwd_ser.hpp"
+#include "dogen/sml/types/generation_types.hpp"
 #include "dogen/sml/types/qualified_name.hpp"
 
 namespace dogen {
@@ -48,7 +49,7 @@ public:
 public:
     exception(
         const dogen::sml::qualified_name& name,
-        const bool generate,
+        const dogen::sml::generation_types& generation_type,
         const std::string& documentation);
 
 private:
@@ -73,15 +74,15 @@ public:
     /**@}*/
 
     /*
-     * @brief If true, this type is to be code generated.
+     * @brief What to do with this exception in terms of code generation.
      */
     /**@{*/
-    bool generate() const {
-        return generate_;
+    dogen::sml::generation_types generation_type() const {
+        return generation_type_;
     }
 
-    void generate(const bool v) {
-        generate_ = v;
+    void generation_type(const dogen::sml::generation_types& v) {
+        generation_type_ = v;
     }
     /**@}*/
 
@@ -110,7 +111,7 @@ public:
 
 private:
     dogen::sml::qualified_name name_;
-    bool generate_;
+    dogen::sml::generation_types generation_type_;
     std::string documentation_;
 };
 

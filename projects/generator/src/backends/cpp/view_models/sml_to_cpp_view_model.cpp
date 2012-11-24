@@ -489,7 +489,7 @@ transform_file(cpp_facet_types ft, cpp_file_types flt, cpp_aspect_types at,
     r.category_type(p.category_type());
     r.meta_type(p.name().meta_type());
 
-    if (p.pod_type() == sml::pod_types::service)
+    if (p.generation_type() == sml::generation_types::partial_generation)
         r.aspect_type(cpp_aspect_types::null_aspect);
 
     const auto i(qname_to_class_.find(name));
@@ -690,10 +690,10 @@ std::vector<file_view_model> sml_to_cpp_view_model::transform_pods() {
         });
 
     const auto pods(model_.pods());
-    for (auto pair : pods) {
+    for (const auto pair : pods) {
         const sml::pod p(pair.second);
 
-        if (!p.generate())
+        if (p.generation_type() == sml::generation_types::no_generation)
             continue;
 
         const auto header(cpp_file_types::header);
@@ -727,7 +727,7 @@ std::vector<file_view_model> sml_to_cpp_view_model::transform_enumerations() {
     for (auto pair : model_.enumerations()) {
         const sml::enumeration e(pair.second);
 
-        if (!e.generate())
+        if (e.generation_type() == sml::generation_types::no_generation)
             continue;
 
         const auto header(cpp_file_types::header);
@@ -759,7 +759,7 @@ std::vector<file_view_model> sml_to_cpp_view_model::transform_exceptions() {
     for (auto pair : model_.exceptions()) {
         const sml::exception e(pair.second);
 
-        if (!e.generate())
+        if (e.generation_type() == sml::generation_types::no_generation)
             continue;
 
         const auto header(cpp_file_types::header);

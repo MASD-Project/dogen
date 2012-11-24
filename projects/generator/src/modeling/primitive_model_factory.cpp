@@ -49,6 +49,7 @@ sml::primitive primitive_model_factory::create(const std::string& name) {
     q.meta_type(sml::meta_types::primitive);
     sml::primitive r;
     r.name(q);
+    r.generation_type(sml::generation_types::no_generation);
     return r;
 }
 

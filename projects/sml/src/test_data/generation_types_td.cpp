@@ -18,41 +18,27 @@
  * MA 02110-1301, USA.
  *
  */
-#include <ostream>
-#include <stdexcept>
-#include "dogen/sml/io/meta_types_io.hpp"
+#include "dogen/sml/test_data/generation_types_td.hpp"
 
 namespace dogen {
 namespace sml {
 
-std::ostream& operator<<(std::ostream& s, const meta_types& v) {
-    s << "{ " << "\"__type__\": " << "\"meta_types\", " << "\"value\": ";
+generation_types_generator::generation_types_generator() : position_(0) { }
+void generation_types_generator::
+populate(const unsigned int position, result_type& v) {
+    v = static_cast<generation_types>(position % 4);
+}
 
-    std::string attr;
-    switch (v) {
-    case meta_types::invalid:
-        attr = "\"invalid\"";
-        break;
-    case meta_types::enumeration:
-        attr = "\"enumeration\"";
-        break;
-    case meta_types::pod:
-        attr = "\"pod\"";
-        break;
-    case meta_types::package:
-        attr = "\"package\"";
-        break;
-    case meta_types::primitive:
-        attr = "\"primitive\"";
-        break;
-    case meta_types::exception:
-        attr = "\"exception\"";
-        break;
-    default:
-        throw std::invalid_argument("Invalid value for meta_types");
-    }
-    s << attr << " }";
-    return s;
+generation_types_generator::result_type
+generation_types_generator::create(const unsigned int  position) {
+    result_type r;
+    generation_types_generator::populate(position, r);
+    return r;
+}
+
+generation_types_generator::result_type
+generation_types_generator::operator()() {
+    return create(position_++);
 }
 
 } }

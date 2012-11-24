@@ -24,29 +24,29 @@ namespace dogen {
 namespace sml {
 
 enumeration::enumeration()
-    : generate_(static_cast<bool>(0)) { }
+    : generation_type_(static_cast<dogen::sml::generation_types>(0)) { }
 
 enumeration::enumeration(
     const dogen::sml::qualified_name& name,
-    const bool generate,
+    const dogen::sml::generation_types& generation_type,
     const std::string& documentation,
     const std::vector<dogen::sml::enumerator>& enumerators)
     : name_(name),
-      generate_(generate),
+      generation_type_(generation_type),
       documentation_(documentation),
       enumerators_(enumerators) { }
 
 void enumeration::swap(enumeration& other) noexcept {
     using std::swap;
     swap(name_, other.name_);
-    swap(generate_, other.generate_);
+    swap(generation_type_, other.generation_type_);
     swap(documentation_, other.documentation_);
     swap(enumerators_, other.enumerators_);
 }
 
 bool enumeration::operator==(const enumeration& rhs) const {
     return name_ == rhs.name_ &&
-        generate_ == rhs.generate_ &&
+        generation_type_ == rhs.generation_type_ &&
         documentation_ == rhs.documentation_ &&
         enumerators_ == rhs.enumerators_;
 }

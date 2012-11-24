@@ -20,36 +20,30 @@
  */
 #include <ostream>
 #include <stdexcept>
-#include "dogen/sml/io/meta_types_io.hpp"
+#include "dogen/sml/io/generation_types_io.hpp"
 
 namespace dogen {
 namespace sml {
 
-std::ostream& operator<<(std::ostream& s, const meta_types& v) {
-    s << "{ " << "\"__type__\": " << "\"meta_types\", " << "\"value\": ";
+std::ostream& operator<<(std::ostream& s, const generation_types& v) {
+    s << "{ " << "\"__type__\": " << "\"generation_types\", " << "\"value\": ";
 
     std::string attr;
     switch (v) {
-    case meta_types::invalid:
+    case generation_types::invalid:
         attr = "\"invalid\"";
         break;
-    case meta_types::enumeration:
-        attr = "\"enumeration\"";
+    case generation_types::full_generation:
+        attr = "\"full_generation\"";
         break;
-    case meta_types::pod:
-        attr = "\"pod\"";
+    case generation_types::partial_generation:
+        attr = "\"partial_generation\"";
         break;
-    case meta_types::package:
-        attr = "\"package\"";
-        break;
-    case meta_types::primitive:
-        attr = "\"primitive\"";
-        break;
-    case meta_types::exception:
-        attr = "\"exception\"";
+    case generation_types::no_generation:
+        attr = "\"no_generation\"";
         break;
     default:
-        throw std::invalid_argument("Invalid value for meta_types");
+        throw std::invalid_argument("Invalid value for generation_types");
     }
     s << attr << " }";
     return s;

@@ -32,10 +32,9 @@ enum class meta_types : unsigned int {
     invalid = 0, ///< Represents an uninitialised enum
     enumeration = 1, ///< Type is an enumeration
     pod = 2, ///< Type is Plain Old Data
-    attribute = 3, ///< Type is an attribute
-    package = 4, ///< Type is a package
-    primitive = 5, ///< Type is a primitive
-    exception = 6 ///< Type is an exception
+    package = 3, ///< Type is a package
+    primitive = 4, ///< Type is a primitive
+    exception = 5 ///< Type is an exception
 };
 
 } }

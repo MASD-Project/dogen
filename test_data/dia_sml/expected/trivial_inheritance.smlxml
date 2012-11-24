@@ -19,7 +19,7 @@
 					<item_version>0</item_version>
 				</package_path>
 				<type_name>pkg1</type_name>
-				<meta_type>4</meta_type>
+				<meta_type>3</meta_type>
 			</first>
 			<second class_id="5" tracking_level="0" version="0">
 				<name>
@@ -33,7 +33,7 @@
 						<item_version>0</item_version>
 					</package_path>
 					<type_name>pkg1</type_name>
-					<meta_type>4</meta_type>
+					<meta_type>3</meta_type>
 				</name>
 				<documentation></documentation>
 			</second>
@@ -50,7 +50,7 @@
 					<item_version>0</item_version>
 				</package_path>
 				<type_name>pkg2</type_name>
-				<meta_type>4</meta_type>
+				<meta_type>3</meta_type>
 			</first>
 			<second>
 				<name>
@@ -64,7 +64,7 @@
 						<item_version>0</item_version>
 					</package_path>
 					<type_name>pkg2</type_name>
-					<meta_type>4</meta_type>
+					<meta_type>3</meta_type>
 				</name>
 				<documentation></documentation>
 			</second>
@@ -81,7 +81,7 @@
 					<item_version>0</item_version>
 				</package_path>
 				<type_name>pkg3</type_name>
-				<meta_type>4</meta_type>
+				<meta_type>3</meta_type>
 			</first>
 			<second>
 				<name>
@@ -95,7 +95,7 @@
 						<item_version>0</item_version>
 					</package_path>
 					<type_name>pkg3</type_name>
-					<meta_type>4</meta_type>
+					<meta_type>3</meta_type>
 				</name>
 				<documentation></documentation>
 			</second>
@@ -112,7 +112,7 @@
 					<item_version>0</item_version>
 				</package_path>
 				<type_name>pkg4</type_name>
-				<meta_type>4</meta_type>
+				<meta_type>3</meta_type>
 			</first>
 			<second>
 				<name>
@@ -126,7 +126,7 @@
 						<item_version>0</item_version>
 					</package_path>
 					<type_name>pkg4</type_name>
-					<meta_type>4</meta_type>
+					<meta_type>3</meta_type>
 				</name>
 				<documentation></documentation>
 			</second>
@@ -206,7 +206,7 @@
 					<count>0</count>
 					<item_version>0</item_version>
 				</leaves>
-				<generate>1</generate>
+				<generation_type>1</generation_type>
 				<is_parent>0</is_parent>
 				<category_type>1</category_type>
 				<pod_type>0</pod_type>
@@ -269,7 +269,7 @@
 						<meta_type>2</meta_type>
 					</item>
 				</leaves>
-				<generate>1</generate>
+				<generation_type>1</generation_type>
 				<is_parent>1</is_parent>
 				<category_type>1</category_type>
 				<pod_type>4</pod_type>
@@ -372,7 +372,7 @@
 					<count>0</count>
 					<item_version>0</item_version>
 				</leaves>
-				<generate>1</generate>
+				<generation_type>1</generation_type>
 				<is_parent>0</is_parent>
 				<category_type>1</category_type>
 				<pod_type>0</pod_type>
@@ -501,7 +501,7 @@
 						<meta_type>2</meta_type>
 					</item>
 				</leaves>
-				<generate>1</generate>
+				<generation_type>1</generation_type>
 				<is_parent>1</is_parent>
 				<category_type>1</category_type>
 				<pod_type>0</pod_type>
@@ -579,7 +579,7 @@
 					<count>0</count>
 					<item_version>0</item_version>
 				</leaves>
-				<generate>1</generate>
+				<generation_type>1</generation_type>
 				<is_parent>0</is_parent>
 				<category_type>1</category_type>
 				<pod_type>0</pod_type>
@@ -693,7 +693,7 @@
 						<meta_type>2</meta_type>
 					</item>
 				</leaves>
-				<generate>1</generate>
+				<generation_type>1</generation_type>
 				<is_parent>1</is_parent>
 				<category_type>1</category_type>
 				<pod_type>0</pod_type>
@@ -771,7 +771,7 @@
 					<count>0</count>
 					<item_version>0</item_version>
 				</leaves>
-				<generate>1</generate>
+				<generation_type>1</generation_type>
 				<is_parent>0</is_parent>
 				<category_type>1</category_type>
 				<pod_type>0</pod_type>
@@ -835,7 +835,7 @@
 						<meta_type>2</meta_type>
 					</item>
 				</leaves>
-				<generate>1</generate>
+				<generation_type>1</generation_type>
 				<is_parent>1</is_parent>
 				<category_type>1</category_type>
 				<pod_type>4</pod_type>
@@ -942,7 +942,7 @@
 					<count>0</count>
 					<item_version>0</item_version>
 				</leaves>
-				<generate>1</generate>
+				<generation_type>1</generation_type>
 				<is_parent>0</is_parent>
 				<category_type>1</category_type>
 				<pod_type>0</pod_type>
@@ -1033,7 +1033,7 @@
 						<meta_type>2</meta_type>
 					</item>
 				</leaves>
-				<generate>1</generate>
+				<generation_type>1</generation_type>
 				<is_parent>1</is_parent>
 				<category_type>1</category_type>
 				<pod_type>0</pod_type>
@@ -1113,7 +1113,7 @@
 					<count>0</count>
 					<item_version>0</item_version>
 				</leaves>
-				<generate>1</generate>
+				<generation_type>1</generation_type>
 				<is_parent>0</is_parent>
 				<category_type>1</category_type>
 				<pod_type>0</pod_type>
@@ -1220,7 +1220,7 @@
 					<count>0</count>
 					<item_version>0</item_version>
 				</leaves>
-				<generate>1</generate>
+				<generation_type>1</generation_type>
 				<is_parent>0</is_parent>
 				<category_type>1</category_type>
 				<pod_type>0</pod_type>
@@ -1311,7 +1311,7 @@
 						<meta_type>2</meta_type>
 					</item>
 				</leaves>
-				<generate>1</generate>
+				<generation_type>1</generation_type>
 				<is_parent>1</is_parent>
 				<category_type>1</category_type>
 				<pod_type>0</pod_type>

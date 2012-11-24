@@ -28,6 +28,7 @@
 #include <boost/archive/xml_oarchive.hpp>
 #include <boost/serialization/nvp.hpp>
 #include <boost/serialization/string.hpp>
+#include "dogen/sml/serialization/generation_types_ser.hpp"
 #include "dogen/sml/serialization/primitive_ser.hpp"
 #include "dogen/sml/serialization/qualified_name_ser.hpp"
 
@@ -44,7 +45,7 @@ void save(Archive& ar,
     const dogen::sml::primitive& v,
     const unsigned int /*version*/) {
     ar << make_nvp("name", v.name_);
-    ar << make_nvp("generate", v.generate_);
+    ar << make_nvp("generation_type", v.generation_type_);
     ar << make_nvp("documentation", v.documentation_);
 }
 
@@ -53,7 +54,7 @@ void load(Archive& ar,
     dogen::sml::primitive& v,
     const unsigned int /*version*/) {
     ar >> make_nvp("name", v.name_);
-    ar >> make_nvp("generate", v.generate_);
+    ar >> make_nvp("generation_type", v.generation_type_);
     ar >> make_nvp("documentation", v.documentation_);
 }
 

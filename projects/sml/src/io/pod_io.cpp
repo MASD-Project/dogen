@@ -22,6 +22,7 @@
 #include <boost/io/ios_state.hpp>
 #include <ostream>
 #include "dogen/sml/io/category_types_io.hpp"
+#include "dogen/sml/io/generation_types_io.hpp"
 #include "dogen/sml/io/pod_io.hpp"
 #include "dogen/sml/io/pod_types_io.hpp"
 #include "dogen/sml/io/property_io.hpp"
@@ -92,7 +93,7 @@ std::ostream& operator<<(std::ostream& s, const pod& v) {
       << "\"parent_name\": " << v.parent_name() << ", "
       << "\"original_parent_name\": " << v.original_parent_name() << ", "
       << "\"leaves\": " << v.leaves() << ", "
-      << "\"generate\": " << v.generate() << ", "
+      << "\"generation_type\": " << v.generation_type() << ", "
       << "\"is_parent\": " << v.is_parent() << ", "
       << "\"category_type\": " << v.category_type() << ", "
       << "\"pod_type\": " << v.pod_type() << ", "

@@ -24,7 +24,7 @@ namespace dogen {
 namespace sml {
 
 pod::pod()
-    : generate_(static_cast<bool>(0)),
+    : generation_type_(static_cast<dogen::sml::generation_types>(0)),
       is_parent_(static_cast<bool>(0)),
       category_type_(static_cast<dogen::sml::category_types>(0)),
       pod_type_(static_cast<dogen::sml::pod_types>(0)),
@@ -36,7 +36,7 @@ pod::pod(pod&& rhs)
       parent_name_(std::move(rhs.parent_name_)),
       original_parent_name_(std::move(rhs.original_parent_name_)),
       leaves_(std::move(rhs.leaves_)),
-      generate_(std::move(rhs.generate_)),
+      generation_type_(std::move(rhs.generation_type_)),
       is_parent_(std::move(rhs.is_parent_)),
       category_type_(std::move(rhs.category_type_)),
       pod_type_(std::move(rhs.pod_type_)),
@@ -49,7 +49,7 @@ pod::pod(
     const boost::optional<dogen::sml::qualified_name>& parent_name,
     const boost::optional<dogen::sml::qualified_name>& original_parent_name,
     const std::list<dogen::sml::qualified_name>& leaves,
-    const bool generate,
+    const dogen::sml::generation_types& generation_type,
     const bool is_parent,
     const dogen::sml::category_types& category_type,
     const dogen::sml::pod_types& pod_type,
@@ -60,7 +60,7 @@ pod::pod(
       parent_name_(parent_name),
       original_parent_name_(original_parent_name),
       leaves_(leaves),
-      generate_(generate),
+      generation_type_(generation_type),
       is_parent_(is_parent),
       category_type_(category_type),
       pod_type_(pod_type),
@@ -74,7 +74,7 @@ void pod::swap(pod& other) noexcept {
     swap(parent_name_, other.parent_name_);
     swap(original_parent_name_, other.original_parent_name_);
     swap(leaves_, other.leaves_);
-    swap(generate_, other.generate_);
+    swap(generation_type_, other.generation_type_);
     swap(is_parent_, other.is_parent_);
     swap(category_type_, other.category_type_);
     swap(pod_type_, other.pod_type_);
@@ -88,7 +88,7 @@ bool pod::operator==(const pod& rhs) const {
         parent_name_ == rhs.parent_name_ &&
         original_parent_name_ == rhs.original_parent_name_ &&
         leaves_ == rhs.leaves_ &&
-        generate_ == rhs.generate_ &&
+        generation_type_ == rhs.generation_type_ &&
         is_parent_ == rhs.is_parent_ &&
         category_type_ == rhs.category_type_ &&
         pod_type_ == rhs.pod_type_ &&

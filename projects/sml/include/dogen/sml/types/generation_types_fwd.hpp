@@ -18,41 +18,18 @@
  * MA 02110-1301, USA.
  *
  */
-#include <ostream>
-#include <stdexcept>
-#include "dogen/sml/io/meta_types_io.hpp"
+#ifndef DOGEN_SML_TYPES_GENERATION_TYPES_FWD_HPP
+#define DOGEN_SML_TYPES_GENERATION_TYPES_FWD_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
 namespace dogen {
 namespace sml {
 
-std::ostream& operator<<(std::ostream& s, const meta_types& v) {
-    s << "{ " << "\"__type__\": " << "\"meta_types\", " << "\"value\": ";
-
-    std::string attr;
-    switch (v) {
-    case meta_types::invalid:
-        attr = "\"invalid\"";
-        break;
-    case meta_types::enumeration:
-        attr = "\"enumeration\"";
-        break;
-    case meta_types::pod:
-        attr = "\"pod\"";
-        break;
-    case meta_types::package:
-        attr = "\"package\"";
-        break;
-    case meta_types::primitive:
-        attr = "\"primitive\"";
-        break;
-    case meta_types::exception:
-        attr = "\"exception\"";
-        break;
-    default:
-        throw std::invalid_argument("Invalid value for meta_types");
-    }
-    s << attr << " }";
-    return s;
-}
+enum class generation_types;
 
 } }
+
+#endif

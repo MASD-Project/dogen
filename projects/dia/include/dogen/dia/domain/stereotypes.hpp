@@ -37,7 +37,8 @@ enum class stereotypes : unsigned int {
     exception = 2,
     entity = 3,
     value = 4,
-    service = 5
+    service = 5,
+    nongeneratable = 6
 };
 
 } }
