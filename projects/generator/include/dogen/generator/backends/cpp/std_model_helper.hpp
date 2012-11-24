@@ -43,7 +43,9 @@ public:
 
 public:
     std::string model() const;
+    std_types string_to_type(const std::string type) const;
     std::string type(const std_types type) const;
+    bool is_primitive(const std::string s) const;
     std::string include(const std_types type) const;
 };
 

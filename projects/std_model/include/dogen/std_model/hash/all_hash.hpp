@@ -30,3 +30,4 @@
 #include "dogen/std_model/hash/class_h_hash.hpp"
 #include "dogen/std_model/hash/derived_hash.hpp"
 #include "dogen/std_model/hash/pkg1/class_c_hash.hpp"
+#include "dogen/std_model/hash/primitives_hash.hpp"

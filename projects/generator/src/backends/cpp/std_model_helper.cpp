@@ -85,6 +85,43 @@ std::string std_model_helper::model() const {
     return ::model;
 }
 
+bool std_model_helper::is_primitive(const std::string s) const {
+    return
+        s == int8_t_type || s == int16_t_type ||
+        s == int32_t_type || s == int64_t_type ||
+        s == uint8_t_type || s == uint16_t_type ||
+        s == uint32_t_type || s == uint64_t_type;
+}
+
+std_types std_model_helper::string_to_type(const std::string type) const {
+
+    if (type == string_type) return std_types::string;
+    if (type == int8_t_type) return std_types::int8_t;
+    if (type == int16_t_type) return std_types::int16_t;
+    if (type == int32_t_type) return std_types::int32_t;
+    if (type == int64_t_type) return std_types::int64_t;
+    if (type == uint8_t_type) return std_types::uint8_t;
+    if (type == uint16_t_type) return std_types::uint16_t;
+    if (type == uint32_t_type) return std_types::uint32_t;
+    if (type == uint64_t_type) return std_types::uint64_t;
+    if (type == array_type) return std_types::array;
+    if (type == forward_list_type) return std_types::forward_list;
+    if (type == vector_type) return std_types::vector;
+    if (type == set_type) return std_types::set;
+    if (type == multiset_type) return std_types::multiset;
+    if (type == map_type) return std_types::map;
+    if (type == multimap_type) return std_types::multimap;
+    if (type == deque_type) return std_types::deque;
+    if (type == list_type) return std_types::list;
+    if (type == unordered_map_type) return std_types::unordered_map;
+    if (type == unordered_set_type) return std_types::unordered_set;
+    if (type == ostream_type) return std_types::ostream;
+    if (type == sstream_type) return std_types::sstream;
+    if (type == stdexcept_type) return std_types::stdexcept;
+    if (type == functional_type) return std_types::functional;
+    throw utility::exception::invalid_enum_value(error_message);
+}
+
 std::string std_model_helper::type(const std_types t) const {
     switch (t) {
     case std_types::string: return string_type;

@@ -356,6 +356,14 @@ void cpp_inclusion_manager::append_std_dependencies(
     if (is_header && is_domain && is_uset)
         il.system.push_back(std_.include(std_types::unordered_set));
     lambda(std_.type(std_types::unordered_set));
+
+    /*
+     * primitives
+     */
+    if (is_header && is_domain && std_.is_primitive(qname.type_name())) {
+        const auto t(std_.string_to_type(qname.type_name()));
+        il.system.push_back(std_.include(t));
+    }
 }
 
 void cpp_inclusion_manager::append_relationship_dependencies(

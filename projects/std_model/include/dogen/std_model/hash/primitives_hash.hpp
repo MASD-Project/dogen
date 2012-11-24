@@ -18,16 +18,35 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/std_model/types/base.hpp"
-#include "dogen/std_model/types/class_a.hpp"
-#include "dogen/std_model/types/class_a_unversioned_key.hpp"
-#include "dogen/std_model/types/class_a_versioned_key.hpp"
-#include "dogen/std_model/types/class_b.hpp"
-#include "dogen/std_model/types/class_d.hpp"
-#include "dogen/std_model/types/class_e.hpp"
-#include "dogen/std_model/types/class_f.hpp"
-#include "dogen/std_model/types/class_g.hpp"
-#include "dogen/std_model/types/class_h.hpp"
-#include "dogen/std_model/types/derived.hpp"
-#include "dogen/std_model/types/pkg1/class_c.hpp"
+#ifndef DOGEN_STD_MODEL_HASH_PRIMITIVES_HASH_HPP
+#define DOGEN_STD_MODEL_HASH_PRIMITIVES_HASH_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include <functional>
 #include "dogen/std_model/types/primitives.hpp"
+
+namespace dogen {
+namespace std_model {
+
+class primitives_hasher {
+public:
+    static std::size_t hash(const primitives& v);
+};
+
+} }
+
+namespace std {
+
+template<>
+class hash<dogen::std_model::primitives> {
+public:
+    size_t operator()(const dogen::std_model::primitives& v) const {
+        return dogen::std_model::primitives_hasher::hash(v);
+    }
+};
+
+}
+#endif

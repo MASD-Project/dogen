@@ -18,16 +18,23 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/std_model/types/base.hpp"
-#include "dogen/std_model/types/class_a.hpp"
-#include "dogen/std_model/types/class_a_unversioned_key.hpp"
-#include "dogen/std_model/types/class_a_versioned_key.hpp"
-#include "dogen/std_model/types/class_b.hpp"
-#include "dogen/std_model/types/class_d.hpp"
-#include "dogen/std_model/types/class_e.hpp"
-#include "dogen/std_model/types/class_f.hpp"
-#include "dogen/std_model/types/class_g.hpp"
-#include "dogen/std_model/types/class_h.hpp"
-#include "dogen/std_model/types/derived.hpp"
-#include "dogen/std_model/types/pkg1/class_c.hpp"
+#ifndef DOGEN_STD_MODEL_IO_PRIMITIVES_IO_HPP
+#define DOGEN_STD_MODEL_IO_PRIMITIVES_IO_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include <iosfwd>
 #include "dogen/std_model/types/primitives.hpp"
+
+namespace dogen {
+namespace std_model {
+
+std::ostream&
+operator<<(std::ostream& s,
+     const dogen::std_model::primitives& v);
+
+} }
+
+#endif

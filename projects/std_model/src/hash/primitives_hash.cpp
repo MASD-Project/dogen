@@ -18,16 +18,35 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/std_model/types/base.hpp"
-#include "dogen/std_model/types/class_a.hpp"
-#include "dogen/std_model/types/class_a_unversioned_key.hpp"
-#include "dogen/std_model/types/class_a_versioned_key.hpp"
-#include "dogen/std_model/types/class_b.hpp"
-#include "dogen/std_model/types/class_d.hpp"
-#include "dogen/std_model/types/class_e.hpp"
-#include "dogen/std_model/types/class_f.hpp"
-#include "dogen/std_model/types/class_g.hpp"
-#include "dogen/std_model/types/class_h.hpp"
-#include "dogen/std_model/types/derived.hpp"
-#include "dogen/std_model/types/pkg1/class_c.hpp"
-#include "dogen/std_model/types/primitives.hpp"
+#include "dogen/std_model/hash/primitives_hash.hpp"
+
+namespace {
+
+template <typename HashableType>
+inline void combine(std::size_t& seed, const HashableType& value)
+{
+    std::hash<HashableType> hasher;
+    seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
+}
+
+}
+
+namespace dogen {
+namespace std_model {
+
+std::size_t primitives_hasher::hash(const primitives&v) {
+    std::size_t seed(0);
+
+    combine(seed, v.prop_0());
+    combine(seed, v.prop_1());
+    combine(seed, v.prop_2());
+    combine(seed, v.prop_3());
+    combine(seed, v.prop_4());
+    combine(seed, v.prop_5());
+    combine(seed, v.prop_6());
+    combine(seed, v.prop_7());
+
+    return seed;
+}
+
+} }

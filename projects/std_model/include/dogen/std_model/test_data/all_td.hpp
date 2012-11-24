@@ -30,3 +30,4 @@
 #include "dogen/std_model/test_data/class_h_td.hpp"
 #include "dogen/std_model/test_data/derived_td.hpp"
 #include "dogen/std_model/test_data/pkg1/class_c_td.hpp"
+#include "dogen/std_model/test_data/primitives_td.hpp"

@@ -78,8 +78,19 @@ const std::string double_type("double");
 const std::string float_type("float");
 const std::string optional_type("boost::optional");
 
+const std::string int8_t_type("std::int8_t");
+const std::string int16_t_type("std::int16_t");
+const std::string int32_t_type("std::int32_t");
+const std::string int64_t_type("std::int64_t");
+const std::string uint8_t_type("std::uint8_t");
+const std::string uint16_t_type("std::uint16_t");
+const std::string uint32_t_type("std::uint32_t");
+const std::string uint64_t_type("std::uint64_t");
+
 bool is_char_like(const std::string& type_name) {
-    return type_name == char_type || type_name == uchar_type;
+    return
+        type_name == char_type || type_name == uchar_type ||
+        type_name == int8_t_type || type_name == uint8_t_type;
 }
 
 bool is_string_like(const std::string& type_name) {
@@ -101,7 +112,13 @@ bool is_int_like(const std::string& type_name) {
         type_name == long_long_type ||
         type_name == ulong_long_type ||
         type_name == double_type ||
-        type_name == float_type;
+        type_name == float_type ||
+        type_name == int16_t_type ||
+        type_name == int32_t_type ||
+        type_name == int64_t_type ||
+        type_name == uint16_t_type ||
+        type_name == uint32_t_type ||
+        type_name == uint64_t_type;
 }
 
 /**
