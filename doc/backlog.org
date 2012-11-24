@@ -366,11 +366,6 @@ We used =cpp_inserter_implementation= to provide all sorts of utility
 methods for IO. This class should really be named IO utility or
 something of the sort.
 
-*** JSON =__type__= should be fully qualified
-
-At present the JSON =__type__= is only the class name. It should
-really be fully qualified.
-
 *** Add support for boost variant
 
 In order to be able to code generate the dia model we need support for
