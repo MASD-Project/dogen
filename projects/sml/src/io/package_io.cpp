@@ -36,7 +36,7 @@ namespace sml {
 
 std::ostream& operator<<(std::ostream& s, const package& v) {
     s << " { "
-      << "\"__type__\": " << "\"package\"" << ", "
+      << "\"__type__\": " << "\"dogen::sml::package\"" << ", "
       << "\"name\": " << v.name() << ", "
       << "\"documentation\": " << "\"" << tidy_up_string(v.documentation()) << "\""
       << " }";

@@ -50,7 +50,7 @@ namespace sml {
 
 std::ostream& operator<<(std::ostream& s, const qualified_name& v) {
     s << " { "
-      << "\"__type__\": " << "\"qualified_name\"" << ", "
+      << "\"__type__\": " << "\"dogen::sml::qualified_name\"" << ", "
       << "\"model_name\": " << "\"" << tidy_up_string(v.model_name()) << "\"" << ", "
       << "\"external_package_path\": " << v.external_package_path() << ", "
       << "\"package_path\": " << v.package_path() << ", "

@@ -53,7 +53,7 @@ std::ostream& operator<<(std::ostream& s, const reference& v) {
     s << std::boolalpha;
 
     s << " { "
-      << "\"__type__\": " << "\"reference\"" << ", "
+      << "\"__type__\": " << "\"dogen::sml::reference\"" << ", "
       << "\"model_name\": " << "\"" << tidy_up_string(v.model_name()) << "\"" << ", "
       << "\"external_package_path\": " << v.external_package_path() << ", "
       << "\"is_system\": " << v.is_system()

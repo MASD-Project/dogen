@@ -182,7 +182,7 @@ std::ostream& operator<<(std::ostream& s, const model& v) {
     s << std::boolalpha;
 
     s << " { "
-      << "\"__type__\": " << "\"model\"" << ", "
+      << "\"__type__\": " << "\"dogen::sml::model\"" << ", "
       << "\"name\": " << "\"" << tidy_up_string(v.name()) << "\"" << ", "
       << "\"packages\": " << v.packages() << ", "
       << "\"pods\": " << v.pods() << ", "

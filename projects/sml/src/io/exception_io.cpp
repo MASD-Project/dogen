@@ -40,7 +40,7 @@ std::ostream& operator<<(std::ostream& s, const exception& v) {
     s << std::boolalpha;
 
     s << " { "
-      << "\"__type__\": " << "\"exception\"" << ", "
+      << "\"__type__\": " << "\"dogen::sml::exception\"" << ", "
       << "\"name\": " << v.name() << ", "
       << "\"generate\": " << v.generate() << ", "
       << "\"documentation\": " << "\"" << tidy_up_string(v.documentation()) << "\""

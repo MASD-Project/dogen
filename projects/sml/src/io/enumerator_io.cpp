@@ -35,7 +35,7 @@ namespace sml {
 
 std::ostream& operator<<(std::ostream& s, const enumerator& v) {
     s << " { "
-      << "\"__type__\": " << "\"enumerator\"" << ", "
+      << "\"__type__\": " << "\"dogen::sml::enumerator\"" << ", "
       << "\"name\": " << "\"" << tidy_up_string(v.name()) << "\"" << ", "
       << "\"value\": " << "\"" << tidy_up_string(v.value()) << "\"" << ", "
       << "\"documentation\": " << "\"" << tidy_up_string(v.documentation()) << "\""

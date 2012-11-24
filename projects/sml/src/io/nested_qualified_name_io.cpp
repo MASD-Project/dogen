@@ -45,7 +45,7 @@ std::ostream& operator<<(std::ostream& s, const nested_qualified_name& v) {
     s << std::boolalpha;
 
     s << " { "
-      << "\"__type__\": " << "\"nested_qualified_name\"" << ", "
+      << "\"__type__\": " << "\"dogen::sml::nested_qualified_name\"" << ", "
       << "\"type\": " << v.type() << ", "
       << "\"children\": " << v.children() << ", "
       << "\"is_pointer\": " << v.is_pointer()

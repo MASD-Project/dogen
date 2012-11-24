@@ -36,7 +36,7 @@ namespace sml {
 
 std::ostream& operator<<(std::ostream& s, const property& v) {
     s << " { "
-      << "\"__type__\": " << "\"property\"" << ", "
+      << "\"__type__\": " << "\"dogen::sml::property\"" << ", "
       << "\"name\": " << "\"" << tidy_up_string(v.name()) << "\"" << ", "
       << "\"type_name\": " << v.type_name() << ", "
       << "\"default_value\": " << "\"" << tidy_up_string(v.default_value()) << "\"" << ", "

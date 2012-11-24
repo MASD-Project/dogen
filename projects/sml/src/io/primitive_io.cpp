@@ -40,7 +40,7 @@ std::ostream& operator<<(std::ostream& s, const primitive& v) {
     s << std::boolalpha;
 
     s << " { "
-      << "\"__type__\": " << "\"primitive\"" << ", "
+      << "\"__type__\": " << "\"dogen::sml::primitive\"" << ", "
       << "\"name\": " << v.name() << ", "
       << "\"generate\": " << v.generate() << ", "
       << "\"documentation\": " << "\"" << tidy_up_string(v.documentation()) << "\""

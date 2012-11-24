@@ -55,7 +55,7 @@ std::ostream& operator<<(std::ostream& s, const enumeration& v) {
     s << std::boolalpha;
 
     s << " { "
-      << "\"__type__\": " << "\"enumeration\"" << ", "
+      << "\"__type__\": " << "\"dogen::sml::enumeration\"" << ", "
       << "\"name\": " << v.name() << ", "
       << "\"generate\": " << v.generate() << ", "
       << "\"documentation\": " << "\"" << tidy_up_string(v.documentation()) << "\"" << ", "

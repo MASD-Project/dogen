@@ -86,7 +86,7 @@ std::ostream& operator<<(std::ostream& s, const pod& v) {
     s << std::boolalpha;
 
     s << " { "
-      << "\"__type__\": " << "\"pod\"" << ", "
+      << "\"__type__\": " << "\"dogen::sml::pod\"" << ", "
       << "\"name\": " << v.name() << ", "
       << "\"properties\": " << v.properties() << ", "
       << "\"parent_name\": " << v.parent_name() << ", "
