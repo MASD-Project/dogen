@@ -123,7 +123,7 @@ namespace boost_model {
 
 std::ostream& operator<<(std::ostream& s, const class_b& v) {
     s << " { "
-      << "\"__type__\": " << "\"class_b\"" << ", "
+      << "\"__type__\": " << "\"dogen::boost_model::class_b\"" << ", "
       << "\"prop_0\": " << v.prop_0() << ", "
       << "\"prop_1\": " << v.prop_1() << ", "
       << "\"prop_2\": " << v.prop_2() << ", "

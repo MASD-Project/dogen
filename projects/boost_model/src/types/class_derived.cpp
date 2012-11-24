@@ -36,7 +36,7 @@ class_derived::class_derived(
 
 void class_derived::to_stream(std::ostream& s) const {
     s << " { "
-      << "\"__type__\": " << "\"class_derived\"" << ", "
+      << "\"__type__\": " << "\"dogen::boost_model::class_derived\"" << ", "
       << "\"__parent_0__\": ";
     class_base::to_stream(s);
     s << ", "

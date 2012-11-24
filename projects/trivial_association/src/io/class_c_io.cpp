@@ -26,7 +26,7 @@ namespace trivial_association {
 
 std::ostream& operator<<(std::ostream& s, const class_c&) {
     s << " { "
-      << "\"__type__\": " << "\"class_c\"" << " }";
+      << "\"__type__\": " << "\"dogen::trivial_association::class_c\"" << " }";
     return(s);
 }
 

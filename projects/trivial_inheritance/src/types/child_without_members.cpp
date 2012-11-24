@@ -30,7 +30,7 @@ child_without_members::child_without_members(const dogen::trivial_inheritance::p
 
 void child_without_members::to_stream(std::ostream& s) const {
     s << " { "
-      << "\"__type__\": " << "\"child_without_members\"" << ", "
+      << "\"__type__\": " << "\"dogen::trivial_inheritance::child_without_members\"" << ", "
       << "\"__parent_0__\": ";
     parent_without_members::to_stream(s);
     s << " }";

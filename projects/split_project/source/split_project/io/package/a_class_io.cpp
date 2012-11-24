@@ -27,7 +27,7 @@ namespace package {
 
 std::ostream& operator<<(std::ostream& s, const a_class& v) {
     s << " { "
-      << "\"__type__\": " << "\"a_class\"" << ", "
+      << "\"__type__\": " << "\"dogen::split_project::package::a_class\"" << ", "
       << "\"prop_0\": " << v.prop_0()
       << " }";
     return(s);

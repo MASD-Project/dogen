@@ -27,7 +27,7 @@ namespace package1 {
 
 std::ostream& operator<<(std::ostream& s, const first_class_unversioned_key& v) {
     s << " { "
-      << "\"__type__\": " << "\"first_class_unversioned_key\"" << ", "
+      << "\"__type__\": " << "\"dogen::class_in_a_package::package1::first_class_unversioned_key\"" << ", "
       << "\"id\": " << v.id()
       << " }";
     return(s);

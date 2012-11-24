@@ -52,7 +52,7 @@ base::base(const std::vector<std::string>& prop_0)
 
 void base::to_stream(std::ostream& s) const {
     s << " { "
-      << "\"__type__\": " << "\"base\"" << ", "
+      << "\"__type__\": " << "\"dogen::std_model::base\"" << ", "
       << "\"prop_0\": " << prop_0_
       << " }";
 }

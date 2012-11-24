@@ -20,6 +20,7 @@
  */
 #include <ostream>
 #include <sstream>
+#include "dogen/generator/backends/cpp/formatters/cpp_qualified_name.hpp"
 #include "dogen/generator/generation_failure.hpp"
 #include "dogen/generator/backends/cpp/formatters/cpp_namespace_helper.hpp"
 #include "dogen/generator/backends/cpp/formatters/cpp_inserter_implementation.hpp"
@@ -428,10 +429,14 @@ format_inserter_implementation(const class_view_model& vm) {
             << utility_.quote(" { ")
             << std::endl;
 
+    std::ostringstream ss;
+    cpp_qualified_name qualified_name(ss);
+    qualified_name.format(vm);
+
     stream_ << indenter_ << special_indent << inserter
             << utility_.quote(utility_.quote_escaped(type) + colon)
             << space_inserter
-            << utility_.quote(utility_.quote_escaped(vm.name()));
+            << utility_.quote(utility_.quote_escaped(ss.str()));
 
     unsigned int i(0);
     const auto parents(vm.parents());

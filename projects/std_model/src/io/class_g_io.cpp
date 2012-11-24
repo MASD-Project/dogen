@@ -130,7 +130,7 @@ namespace std_model {
 
 std::ostream& operator<<(std::ostream& s, const class_g& v) {
     s << " { "
-      << "\"__type__\": " << "\"class_g\"" << ", "
+      << "\"__type__\": " << "\"dogen::std_model::class_g\"" << ", "
       << "\"prop_0\": " << v.prop_0() << ", "
       << "\"prop_1\": " << v.prop_1() << ", "
       << "\"prop_2\": " << v.prop_2() << ", "

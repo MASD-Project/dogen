@@ -26,7 +26,7 @@ namespace entity_service_value {
 
 std::ostream& operator<<(std::ostream& s, const value& v) {
     s << " { "
-      << "\"__type__\": " << "\"value\"" << ", "
+      << "\"__type__\": " << "\"dogen::entity_service_value::value\"" << ", "
       << "\"prop_0\": " << v.prop_0()
       << " }";
     return(s);

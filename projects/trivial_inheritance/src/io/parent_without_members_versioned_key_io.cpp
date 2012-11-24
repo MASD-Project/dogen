@@ -26,7 +26,7 @@ namespace trivial_inheritance {
 
 std::ostream& operator<<(std::ostream& s, const parent_without_members_versioned_key& v) {
     s << " { "
-      << "\"__type__\": " << "\"parent_without_members_versioned_key\"" << ", "
+      << "\"__type__\": " << "\"dogen::trivial_inheritance::parent_without_members_versioned_key\"" << ", "
       << "\"id\": " << v.id() << ", "
       << "\"version\": " << v.version()
       << " }";

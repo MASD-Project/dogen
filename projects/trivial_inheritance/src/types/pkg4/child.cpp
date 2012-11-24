@@ -31,7 +31,7 @@ child::child(const dogen::trivial_inheritance::parent_outside_versioned_key& ver
 
 void child::to_stream(std::ostream& s) const {
     s << " { "
-      << "\"__type__\": " << "\"child\"" << ", "
+      << "\"__type__\": " << "\"dogen::trivial_inheritance::pkg4::child\"" << ", "
       << "\"__parent_0__\": ";
     parent_outside::to_stream(s);
     s << " }";

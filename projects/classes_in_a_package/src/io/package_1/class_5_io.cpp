@@ -27,7 +27,7 @@ namespace package_1 {
 
 std::ostream& operator<<(std::ostream& s, const class_5& v) {
     s << " { "
-      << "\"__type__\": " << "\"class_5\"" << ", "
+      << "\"__type__\": " << "\"dogen::classes_in_a_package::package_1::class_5\"" << ", "
       << "\"prop_0\": " << v.prop_0()
       << " }";
     return(s);

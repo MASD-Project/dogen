@@ -30,7 +30,7 @@ parent_outside::parent_outside(const dogen::trivial_inheritance::parent_outside_
 
 void parent_outside::to_stream(std::ostream& s) const {
     s << " { "
-      << "\"__type__\": " << "\"parent_outside\"" << ", "
+      << "\"__type__\": " << "\"dogen::trivial_inheritance::parent_outside\"" << ", "
       << "\"versioned_key\": " << versioned_key_
       << " }";
 }

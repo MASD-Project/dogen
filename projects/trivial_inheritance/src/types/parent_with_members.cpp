@@ -32,7 +32,7 @@ parent_with_members::parent_with_members(const int prop_0)
 
 void parent_with_members::to_stream(std::ostream& s) const {
     s << " { "
-      << "\"__type__\": " << "\"parent_with_members\"" << ", "
+      << "\"__type__\": " << "\"dogen::trivial_inheritance::parent_with_members\"" << ", "
       << "\"prop_0\": " << prop_0_
       << " }";
 }

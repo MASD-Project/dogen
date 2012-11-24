@@ -37,7 +37,7 @@ child::child(
 
 void child::to_stream(std::ostream& s) const {
     s << " { "
-      << "\"__type__\": " << "\"child\"" << ", "
+      << "\"__type__\": " << "\"dogen::trivial_inheritance::pkg3::child\"" << ", "
       << "\"__parent_0__\": ";
     parent::to_stream(s);
     s << ", "

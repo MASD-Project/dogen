@@ -26,7 +26,7 @@ namespace trivial_inheritance {
 
 std::ostream& operator<<(std::ostream& s, const parent_outside_unversioned_key& v) {
     s << " { "
-      << "\"__type__\": " << "\"parent_outside_unversioned_key\"" << ", "
+      << "\"__type__\": " << "\"dogen::trivial_inheritance::parent_outside_unversioned_key\"" << ", "
       << "\"id\": " << v.id()
       << " }";
     return(s);

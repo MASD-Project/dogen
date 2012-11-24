@@ -36,7 +36,7 @@ third_child_with_members::third_child_with_members(
 
 void third_child_with_members::to_stream(std::ostream& s) const {
     s << " { "
-      << "\"__type__\": " << "\"third_child_with_members\"" << ", "
+      << "\"__type__\": " << "\"dogen::trivial_inheritance::third_child_with_members\"" << ", "
       << "\"__parent_0__\": ";
     parent_with_members::to_stream(s);
     s << ", "

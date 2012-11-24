@@ -38,7 +38,7 @@ child_of_a_child2::child_of_a_child2(
 
 void child_of_a_child2::to_stream(std::ostream& s) const {
     s << " { "
-      << "\"__type__\": " << "\"child_of_a_child2\"" << ", "
+      << "\"__type__\": " << "\"dogen::trivial_inheritance::child_of_a_child2\"" << ", "
       << "\"__parent_0__\": ";
     third_child_with_members::to_stream(s);
     s << ", "

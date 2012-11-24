@@ -48,7 +48,7 @@ derived::derived(
 
 void derived::to_stream(std::ostream& s) const {
     s << " { "
-      << "\"__type__\": " << "\"derived\"" << ", "
+      << "\"__type__\": " << "\"dogen::std_model::derived\"" << ", "
       << "\"__parent_0__\": ";
     base::to_stream(s);
     s << ", "

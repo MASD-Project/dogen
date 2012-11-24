@@ -26,7 +26,7 @@ namespace comments {
 
 std::ostream& operator<<(std::ostream& s, const one_line& v) {
     s << " { "
-      << "\"__type__\": " << "\"one_line\"" << ", "
+      << "\"__type__\": " << "\"dogen::comments::one_line\"" << ", "
       << "\"prop_0\": " << v.prop_0() << ", "
       << "\"prop_1\": " << v.prop_1() << ", "
       << "\"prop_2\": " << v.prop_2()

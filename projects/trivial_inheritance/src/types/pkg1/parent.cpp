@@ -33,7 +33,7 @@ parent::parent(const unsigned int prop_0)
 
 void parent::to_stream(std::ostream& s) const {
     s << " { "
-      << "\"__type__\": " << "\"parent\"" << ", "
+      << "\"__type__\": " << "\"dogen::trivial_inheritance::pkg1::parent\"" << ", "
       << "\"prop_0\": " << prop_0_
       << " }";
 }

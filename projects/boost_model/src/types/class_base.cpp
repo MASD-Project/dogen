@@ -32,7 +32,7 @@ class_base::class_base(const int prop_0)
 
 void class_base::to_stream(std::ostream& s) const {
     s << " { "
-      << "\"__type__\": " << "\"class_base\"" << ", "
+      << "\"__type__\": " << "\"dogen::boost_model::class_base\"" << ", "
       << "\"prop_0\": " << prop_0_
       << " }";
 }

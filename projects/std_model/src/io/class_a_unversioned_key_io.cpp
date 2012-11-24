@@ -26,7 +26,7 @@ namespace std_model {
 
 std::ostream& operator<<(std::ostream& s, const class_a_unversioned_key& v) {
     s << " { "
-      << "\"__type__\": " << "\"class_a_unversioned_key\"" << ", "
+      << "\"__type__\": " << "\"dogen::std_model::class_a_unversioned_key\"" << ", "
       << "\"id\": " << v.id()
       << " }";
     return(s);

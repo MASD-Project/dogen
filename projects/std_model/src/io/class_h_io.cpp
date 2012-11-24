@@ -56,7 +56,7 @@ namespace std_model {
 
 std::ostream& operator<<(std::ostream& s, const class_h& v) {
     s << " { "
-      << "\"__type__\": " << "\"class_h\"" << ", "
+      << "\"__type__\": " << "\"dogen::std_model::class_h\"" << ", "
       << "\"prop_0\": " << v.prop_0() << ", "
       << "\"prop_1\": " << v.prop_1()
       << " }";

@@ -30,7 +30,7 @@ second_child_without_members::second_child_without_members(const int prop_0)
 
 void second_child_without_members::to_stream(std::ostream& s) const {
     s << " { "
-      << "\"__type__\": " << "\"second_child_without_members\"" << ", "
+      << "\"__type__\": " << "\"dogen::trivial_inheritance::second_child_without_members\"" << ", "
       << "\"__parent_0__\": ";
     parent_with_members::to_stream(s);
     s << " }";

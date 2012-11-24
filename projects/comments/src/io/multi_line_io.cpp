@@ -26,7 +26,7 @@ namespace comments {
 
 std::ostream& operator<<(std::ostream& s, const multi_line&) {
     s << " { "
-      << "\"__type__\": " << "\"multi_line\"" << " }";
+      << "\"__type__\": " << "\"dogen::comments::multi_line\"" << " }";
     return(s);
 }
 

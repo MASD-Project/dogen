@@ -31,7 +31,7 @@ std::ostream& operator<<(std::ostream& s, const a_class& v) {
     s << std::boolalpha;
 
     s << " { "
-      << "\"__type__\": " << "\"a_class\"" << ", "
+      << "\"__type__\": " << "\"dogen::all_primitives::a_class\"" << ", "
       << "\"bool_property\": " << v.bool_property() << ", "
       << "\"char_property\": " << "\"" << v.char_property() << "\"" << ", "
       << "\"uchar_property\": " << "\"" << v.uchar_property() << "\"" << ", "

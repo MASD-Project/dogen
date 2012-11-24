@@ -27,7 +27,7 @@ namespace package_1 {
 
 std::ostream& operator<<(std::ostream& s, const class_1&) {
     s << " { "
-      << "\"__type__\": " << "\"class_1\"" << " }";
+      << "\"__type__\": " << "\"dogen::class_without_attributes::package_1::class_1\"" << " }";
     return(s);
 }
 

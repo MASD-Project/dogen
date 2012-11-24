@@ -29,7 +29,7 @@ namespace enumeration {
 
 std::ostream& operator<<(std::ostream& s, const a_class& v) {
     s << " { "
-      << "\"__type__\": " << "\"a_class\"" << ", "
+      << "\"__type__\": " << "\"dogen::enumeration::a_class\"" << ", "
       << "\"colour_type\": " << v.colour_type() << ", "
       << "\"book_type\": " << v.book_type() << ", "
       << "\"shape_type\": " << v.shape_type()

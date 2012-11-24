@@ -26,7 +26,7 @@ namespace entity_service_value {
 
 std::ostream& operator<<(std::ostream& s, const entity_unversioned_key& v) {
     s << " { "
-      << "\"__type__\": " << "\"entity_unversioned_key\"" << ", "
+      << "\"__type__\": " << "\"dogen::entity_service_value::entity_unversioned_key\"" << ", "
       << "\"id\": " << v.id()
       << " }";
     return(s);

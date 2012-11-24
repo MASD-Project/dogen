@@ -26,7 +26,7 @@ namespace classes_without_package {
 
 std::ostream& operator<<(std::ostream& s, const class_5& v) {
     s << " { "
-      << "\"__type__\": " << "\"class_5\"" << ", "
+      << "\"__type__\": " << "\"dogen::classes_without_package::class_5\"" << ", "
       << "\"prop_0\": " << v.prop_0()
       << " }";
     return(s);
