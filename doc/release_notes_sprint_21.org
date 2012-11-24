@@ -162,4 +162,10 @@ to separate models. But we didn't do an upfront check to make sure
 that all models that target depends on are present. Add a check for
 this.
 
+*** COMPLETED Generate the SML model from dogen
+    CLOSED: [2012-11-24 Sat 01:28]
+
+Now that dogen is functional we should remove all the hand-crafted
+code in the SML model which could be code generated.
+
 ** Deprecated Development Stories
