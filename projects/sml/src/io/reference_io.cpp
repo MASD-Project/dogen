@@ -18,9 +18,17 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/algorithm/string.hpp>
 #include <boost/io/ios_state.hpp>
 #include <ostream>
 #include "dogen/sml/io/reference_io.hpp"
+
+
+inline std::string tidy_up_string(std::string s) {
+    boost::replace_all(s, "\r\n", "<new_line>");
+    boost::replace_all(s, "\n", "<new_line>");
+    return s;
+}
 
 namespace std {
 
@@ -28,7 +36,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<std::string>& v
     s << "[ ";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
-        s << "\"" << *i << "\"";
+        s << "\"" << tidy_up_string(*i) << "\"";
     }
     s << "] ";
     return s;
@@ -45,7 +53,7 @@ std::ostream& operator<<(std::ostream& s, const reference& v) {
 
     s << " { "
       << "\"__type__\": " << "\"reference\"" << ", "
-      << "\"model_name\": " << "\"" << v.model_name() << "\"" << ", "
+      << "\"model_name\": " << "\"" << tidy_up_string(v.model_name()) << "\"" << ", "
       << "\"external_package_path\": " << v.external_package_path() << ", "
       << "\"is_system\": " << v.is_system()
       << " }";

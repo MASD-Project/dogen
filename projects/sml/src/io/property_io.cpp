@@ -18,9 +18,17 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/algorithm/string.hpp>
 #include <ostream>
 #include "dogen/sml/io/nested_qualified_name_io.hpp"
 #include "dogen/sml/io/property_io.hpp"
+
+
+inline std::string tidy_up_string(std::string s) {
+    boost::replace_all(s, "\r\n", "<new_line>");
+    boost::replace_all(s, "\n", "<new_line>");
+    return s;
+}
 
 namespace dogen {
 namespace sml {
@@ -28,10 +36,10 @@ namespace sml {
 std::ostream& operator<<(std::ostream& s, const property& v) {
     s << " { "
       << "\"__type__\": " << "\"property\"" << ", "
-      << "\"name\": " << "\"" << v.name() << "\"" << ", "
+      << "\"name\": " << "\"" << tidy_up_string(v.name()) << "\"" << ", "
       << "\"type_name\": " << v.type_name() << ", "
-      << "\"default_value\": " << "\"" << v.default_value() << "\"" << ", "
-      << "\"documentation\": " << "\"" << v.documentation() << "\""
+      << "\"default_value\": " << "\"" << tidy_up_string(v.default_value()) << "\"" << ", "
+      << "\"documentation\": " << "\"" << tidy_up_string(v.documentation()) << "\""
       << " }";
     return(s);
 }

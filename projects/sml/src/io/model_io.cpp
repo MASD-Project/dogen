@@ -18,6 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/algorithm/string.hpp>
 #include <boost/io/ios_state.hpp>
 #include <ostream>
 #include "dogen/sml/io/enumeration_io.hpp"
@@ -28,6 +29,13 @@
 #include "dogen/sml/io/primitive_io.hpp"
 #include "dogen/sml/io/qualified_name_io.hpp"
 #include "dogen/sml/io/reference_io.hpp"
+
+
+inline std::string tidy_up_string(std::string s) {
+    boost::replace_all(s, "\r\n", "<new_line>");
+    boost::replace_all(s, "\n", "<new_line>");
+    return s;
+}
 
 namespace std {
 
@@ -125,7 +133,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<std::string>& v
     s << "[ ";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
-        s << "\"" << *i << "\"";
+        s << "\"" << tidy_up_string(*i) << "\"";
     }
     s << "] ";
     return s;
@@ -140,7 +148,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::s
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
         s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
-        s << "\"" << i->first << "\"";
+        s << "\"" << tidy_up_string(i->first) << "\"";
         s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
         s << i->second;
         s << " } ]";
@@ -174,14 +182,14 @@ std::ostream& operator<<(std::ostream& s, const model& v) {
 
     s << " { "
       << "\"__type__\": " << "\"model\"" << ", "
-      << "\"name\": " << "\"" << v.name() << "\"" << ", "
+      << "\"name\": " << "\"" << tidy_up_string(v.name()) << "\"" << ", "
       << "\"packages\": " << v.packages() << ", "
       << "\"pods\": " << v.pods() << ", "
       << "\"primitives\": " << v.primitives() << ", "
       << "\"enumerations\": " << v.enumerations() << ", "
       << "\"exceptions\": " << v.exceptions() << ", "
       << "\"external_package_path\": " << v.external_package_path() << ", "
-      << "\"schema_name\": " << "\"" << v.schema_name() << "\"" << ", "
+      << "\"schema_name\": " << "\"" << tidy_up_string(v.schema_name()) << "\"" << ", "
       << "\"is_system\": " << v.is_system() << ", "
       << "\"dependencies\": " << v.dependencies() << ", "
       << "\"leaves\": " << v.leaves()

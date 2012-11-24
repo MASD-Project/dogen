@@ -18,9 +18,17 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/algorithm/string.hpp>
 #include <ostream>
 #include "dogen/sml/io/meta_types_io.hpp"
 #include "dogen/sml/io/qualified_name_io.hpp"
+
+
+inline std::string tidy_up_string(std::string s) {
+    boost::replace_all(s, "\r\n", "<new_line>");
+    boost::replace_all(s, "\n", "<new_line>");
+    return s;
+}
 
 namespace std {
 
@@ -28,7 +36,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<std::string>& v
     s << "[ ";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
-        s << "\"" << *i << "\"";
+        s << "\"" << tidy_up_string(*i) << "\"";
     }
     s << "] ";
     return s;
@@ -42,10 +50,10 @@ namespace sml {
 std::ostream& operator<<(std::ostream& s, const qualified_name& v) {
     s << " { "
       << "\"__type__\": " << "\"qualified_name\"" << ", "
-      << "\"model_name\": " << "\"" << v.model_name() << "\"" << ", "
+      << "\"model_name\": " << "\"" << tidy_up_string(v.model_name()) << "\"" << ", "
       << "\"external_package_path\": " << v.external_package_path() << ", "
       << "\"package_path\": " << v.package_path() << ", "
-      << "\"type_name\": " << "\"" << v.type_name() << "\"" << ", "
+      << "\"type_name\": " << "\"" << tidy_up_string(v.type_name()) << "\"" << ", "
       << "\"meta_type\": " << v.meta_type()
       << " }";
     return(s);

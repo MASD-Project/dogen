@@ -18,11 +18,19 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/algorithm/string.hpp>
 #include <boost/io/ios_state.hpp>
 #include <ostream>
 #include "dogen/sml/io/enumeration_io.hpp"
 #include "dogen/sml/io/enumerator_io.hpp"
 #include "dogen/sml/io/qualified_name_io.hpp"
+
+
+inline std::string tidy_up_string(std::string s) {
+    boost::replace_all(s, "\r\n", "<new_line>");
+    boost::replace_all(s, "\n", "<new_line>");
+    return s;
+}
 
 namespace std {
 
@@ -49,7 +57,7 @@ std::ostream& operator<<(std::ostream& s, const enumeration& v) {
       << "\"__type__\": " << "\"enumeration\"" << ", "
       << "\"name\": " << v.name() << ", "
       << "\"generate\": " << v.generate() << ", "
-      << "\"documentation\": " << "\"" << v.documentation() << "\"" << ", "
+      << "\"documentation\": " << "\"" << tidy_up_string(v.documentation()) << "\"" << ", "
       << "\"enumerators\": " << v.enumerators()
       << " }";
     return(s);

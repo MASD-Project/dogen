@@ -18,6 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/algorithm/string.hpp>
 #include <boost/io/ios_state.hpp>
 #include <ostream>
 #include "dogen/sml/io/category_types_io.hpp"
@@ -69,6 +70,13 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::sml::qua
 
 }
 
+
+inline std::string tidy_up_string(std::string s) {
+    boost::replace_all(s, "\r\n", "<new_line>");
+    boost::replace_all(s, "\n", "<new_line>");
+    return s;
+}
+
 namespace dogen {
 namespace sml {
 
@@ -87,7 +95,7 @@ std::ostream& operator<<(std::ostream& s, const pod& v) {
       << "\"is_parent\": " << v.is_parent() << ", "
       << "\"category_type\": " << v.category_type() << ", "
       << "\"pod_type\": " << v.pod_type() << ", "
-      << "\"documentation\": " << "\"" << v.documentation() << "\"" << ", "
+      << "\"documentation\": " << "\"" << tidy_up_string(v.documentation()) << "\"" << ", "
       << "\"number_of_type_arguments\": " << v.number_of_type_arguments()
       << " }";
     return(s);
