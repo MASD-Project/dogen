@@ -29,26 +29,11 @@ using namespace dogen::utility::log;
 static logger lg(logger_factory("inclusion_manager"));
 
 const std::string empty;
-const std::string std_model("std");
 const std::string primitive_model("primitive_model");
 const std::string bool_type("bool");
 const std::string pqxx_connection_include("pqxx/connection.hxx");
 const std::string pqxx_result_include("pqxx/result.hxx");
 const std::string pqxx_transaction_include("pqxx/transaction.hxx");
-const std::string sstream("sstream");
-const std::string std_string("string");
-const std::string std_vector("vector");
-const std::string std_set("set");
-const std::string std_deque("deque");
-const std::string std_list("list");
-const std::string std_unordered_map("unordered_map");
-const std::string std_unordered_set("unordered_set");
-const std::string iosfwd("iosfwd");
-const std::string algorithm("algorithm");
-const std::string ostream("ostream");
-const std::string stdexcept("stdexcept");
-const std::string state_saver("boost/io/ios_state.hpp");
-const std::string functional("functional");
 
 using dogen::generator::backends::cpp::cpp_facet_types;
 bool contains(const std::set<cpp_facet_types>& f, cpp_facet_types ft) {
@@ -70,7 +55,7 @@ cpp_inclusion_manager::cpp_inclusion_manager(const sml::model& model,
       serialization_enabled_(contains(settings_.enabled_facets(),
               cpp_facet_types::serialization)),
       hash_enabled_(contains(settings_.enabled_facets(),
-              cpp_facet_types::hash)), boost_() {
+              cpp_facet_types::hash)), boost_(), std_() {
 
     BOOST_LOG_SEV(lg, debug)
         << "Initial configuration:"
@@ -187,22 +172,22 @@ append_implementation_dependencies(const sml::pod& p,
         (settings_.use_integrated_io() || p.parent_name() || p.is_parent()));
 
     if (is_header && io_enabled_ && (domain_with_io || is_io))
-        il.system.push_back(iosfwd);
+        il.system.push_back(std_.include(std_types::iosfwd));
 
     // algorithm: domain headers need it for the swap function.
     if (is_header && is_domain)
-        il.system.push_back(algorithm);
+        il.system.push_back(std_.include(std_types::algorithm));
 
     // ostream:
     const bool is_implementation(flt == cpp_file_types::implementation);
     const bool io_without_iio(is_io && !settings_.use_integrated_io());
     if (is_implementation && io_enabled_ && (domain_with_io || io_without_iio))
-        il.system.push_back(ostream);
+        il.system.push_back(std_.include(std_types::ostream));
 
     // functional
     const bool is_hash(ft == cpp_facet_types::hash);
     if (is_header && is_hash)
-        il.system.push_back(functional);
+        il.system.push_back(std_.include(std_types::functional));
 
     /*
      * boost
@@ -289,54 +274,58 @@ void cpp_inclusion_manager::append_std_dependencies(
      */
     const bool is_header(flt == cpp_file_types::header);
     const bool is_domain(ft == cpp_facet_types::domain);
-    if (is_header && is_domain && qname.type_name() == std_string)
-        il.system.push_back(std_string);
+    if (is_header && is_domain
+        && qname.type_name() == std_.type(std_types::string))
+        il.system.push_back(std_.include(std_types::string));
 
     const bool is_serialization(ft == cpp_facet_types::serialization);
     const bool is_implementation(flt == cpp_file_types::implementation);
-    const bool is_string(qname.type_name() == std_string);
+    const bool is_string(qname.type_name() == std_.type(std_types::string));
     if (is_implementation && is_serialization && is_string)
         il.system.push_back(boost_.include(boost_types::string));
 
     const bool is_test_data(ft == cpp_facet_types::test_data);
     if (is_implementation && is_test_data && is_string)
-        il.system.push_back(sstream);
+        il.system.push_back(std_.include(std_types::sstream));
 
     /*
      * std::vector
      */
-    if (is_header && is_domain && qname.type_name() == std_vector)
-        il.system.push_back(std_vector);
+    const bool is_vector(qname.type_name() == std_.type(std_types::vector));
+    if (is_header && is_domain && is_vector)
+        il.system.push_back(std_.include(std_types::vector));
 
-    const bool is_vector(qname.type_name() == std_vector);
     if (is_implementation && is_serialization && is_vector)
         il.system.push_back(boost_.include(boost_types::vector));
 
     /*
      * std::list
      */
-    if (is_header && is_domain && qname.type_name() == std_list)
-        il.system.push_back(std_list);
+    const bool is_list(qname.type_name() == std_.type(std_types::list));
+    if (is_header && is_domain && is_list)
+        il.system.push_back(std_.include(std_types::list));
 
-    if (is_implementation && is_serialization && qname.type_name() == std_list)
+    if (is_implementation && is_serialization && is_list)
         il.system.push_back(boost_.include(boost_types::list));
 
     /*
      * std::deque
      */
-    if (is_header && is_domain && qname.type_name() == std_deque)
-        il.system.push_back(std_deque);
+    const bool is_deque(qname.type_name() == std_.type(std_types::deque));
+    if (is_header && is_domain && is_deque)
+        il.system.push_back(std_.include(std_types::deque));
 
-    if (is_implementation && is_serialization && qname.type_name() == std_deque)
+    if (is_implementation && is_serialization && is_deque)
         il.system.push_back(boost_.include(boost_types::deque));
 
     /*
      * std::set
      */
-    if (is_header && is_domain && qname.type_name() == std_set)
-        il.system.push_back(std_set);
+    const bool is_set(qname.type_name() == std_.type(std_types::set));
+    if (is_header && is_domain && is_set)
+        il.system.push_back(std_.include(std_types::set));
 
-    if (is_implementation && is_serialization && qname.type_name() == std_set)
+    if (is_implementation && is_serialization && is_set)
         il.system.push_back(boost_.include(boost_types::set));
 
     // FIXME: massive hack. boost doesn't have support for
@@ -355,16 +344,18 @@ void cpp_inclusion_manager::append_std_dependencies(
     /*
      * std::unordered_map
      */
-    if (is_header && is_domain && qname.type_name() == std_unordered_map)
-        il.system.push_back(std_unordered_map);
-    lambda(std_unordered_map);
+    const bool is_umap(qname.type_name() == std_.type(std_types::unordered_map));
+    if (is_header && is_domain && is_umap)
+        il.system.push_back(std_.include(std_types::unordered_map));
+    lambda(std_.type(std_types::unordered_map));
 
     /*
      * std::unordered_set
      */
-    if (is_header && is_domain && qname.type_name() == std_unordered_set)
-        il.system.push_back(std_unordered_set);
-    lambda(std_unordered_set);
+    const bool is_uset(qname.type_name() == std_.type(std_types::unordered_set));
+    if (is_header && is_domain && is_uset)
+        il.system.push_back(std_.include(std_types::unordered_set));
+    lambda(std_.type(std_types::unordered_set));
 }
 
 void cpp_inclusion_manager::append_relationship_dependencies(
@@ -376,7 +367,7 @@ void cpp_inclusion_manager::append_relationship_dependencies(
 
     for(const auto n : names) {
         // handle all special models first
-        if (n.model_name() == std_model) {
+        if (n.model_name() == std_.model()) {
             append_std_dependencies(ft, flt, n, il);
             continue;
         } else if (n.model_name() == boost_.model()) {
@@ -432,7 +423,7 @@ void cpp_inclusion_manager::append_relationship_dependencies(
 
     for (const auto k : keys) {
         // keys from special models can be ignored
-        if (k.model_name() == std_model ||
+        if (k.model_name() == std_.model() ||
             k.model_name() == boost_.model() ||
             k.model_name() == primitive_model)
             continue;
@@ -527,7 +518,7 @@ bool cpp_inclusion_manager::
 has_std_string(const std::list<dogen::sml::qualified_name>& names) const {
     using dogen::sml::qualified_name;
     for (const auto n : names) {
-        if (n.type_name() == std_string)
+        if (n.type_name() == std_.type(std_types::string))
             return true;
     }
     return false;
@@ -564,7 +555,7 @@ includes_for_enumeration(const sml::enumeration& e, cpp_facet_types ft,
     const bool is_header(flt == cpp_file_types::header);
     const bool is_hash(ft == cpp_facet_types::hash);
     if (is_header && is_hash)
-        r.system.push_back(functional);
+        r.system.push_back(std_.include(std_types::functional));
 
     // nvp serialisation
     const bool is_serialization(ft == cpp_facet_types::serialization);
@@ -574,16 +565,16 @@ includes_for_enumeration(const sml::enumeration& e, cpp_facet_types ft,
     // iosfwd
     const bool is_io(ft == cpp_facet_types::io);
     if (is_header && is_io && io_enabled_)
-        r.system.push_back(iosfwd);
+        r.system.push_back(std_.include(std_types::iosfwd));
 
     // ostream
     const bool is_implementation(flt == cpp_file_types::implementation);
     if (is_implementation && is_io && io_enabled_)
-        r.system.push_back(ostream);
+        r.system.push_back(std_.include(std_types::ostream));
 
     // stdexcept
     if (is_implementation && is_io && io_enabled_)
-        r.system.push_back(stdexcept);
+        r.system.push_back(std_.include(std_types::stdexcept));
 
     remove_duplicates(r);
     return r;
@@ -604,7 +595,7 @@ includes_for_exception(const sml::exception& e, cpp_facet_types ft,
 
     // string
     if (is_header && is_domain)
-        r.system.push_back(std_string);
+        r.system.push_back(std_.include(std_types::string));
 
     remove_duplicates(r);
     return r;

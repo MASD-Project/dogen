@@ -31,6 +31,7 @@
 #include <utility>
 #include <boost/filesystem/path.hpp>
 #include "dogen/generator/backends/cpp/boost_model_helper.hpp"
+#include "dogen/generator/backends/cpp/std_model_helper.hpp"
 #include "dogen/sml/types/category_types.hpp"
 #include "dogen/generator/config/cpp_settings.hpp"
 #include "dogen/sml/types/meta_types.hpp"
@@ -85,7 +86,8 @@ public:
       serialization_enabled_(std::move(rhs.serialization_enabled_)),
       hash_enabled_(std::move(rhs.hash_enabled_)),
       headers_for_facet_(std::move(rhs.headers_for_facet_)),
-      boost_(std::move(rhs.boost_)) { }
+      boost_(std::move(rhs.boost_)),
+      std_(std::move(rhs.std_)) { }
 
     cpp_inclusion_manager(const sml::model& model,
         const cpp_location_manager& location_manager,
@@ -288,6 +290,7 @@ private:
     const bool hash_enabled_;
     std::map<cpp_facet_types, std::list<std::string> > headers_for_facet_;
     const boost_model_helper boost_;
+    const std_model_helper std_;
 };
 
 } } } }

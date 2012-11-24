@@ -37,8 +37,16 @@ const std::string multimap_name("multimap");
 const std::string unordered_map_name("unordered_map");
 const std::string unordered_multimap_name("unordered_multimap");
 
-}
+const std::string int8_t_name("int8_t");
+const std::string int16_t_name("int16_t");
+const std::string int32_t_name("int32_t");
+const std::string int64_t_name("int64_t");
+const std::string uint8_t_name("uint8_t");
+const std::string uint16_t_name("uint16_t");
+const std::string uint32_t_name("uint32_t");
+const std::string uint64_t_name("uint64_t");
 
+}
 
 namespace dogen {
 namespace generator {
@@ -78,15 +86,24 @@ sml::model std_model_factory::create() {
     std::unordered_map<qualified_name, primitive> primitives;
     std::unordered_map<qualified_name, pod> pods;
 
-    // const auto lambda([&](std::string name){
-    //         primitive p(create_primitive(name));
-    //         primitives.insert(std::make_pair(p.name(), p));
-    //     });
+    const auto lambda([&](std::string name){
+            primitive p(create_primitive(name));
+            primitives.insert(std::make_pair(p.name(), p));
+        });
 
     const auto pi([&](std::string name, sml::pod_types pt) {
             pod p(create_pod(name, pt));
             pods.insert(std::make_pair(p.name(), p));
         });
+
+    lambda(int8_t_name);
+    lambda(int16_t_name);
+    lambda(int32_t_name);
+    lambda(int64_t_name);
+    lambda(uint8_t_name);
+    lambda(uint16_t_name);
+    lambda(uint32_t_name);
+    lambda(uint64_t_name);
 
     pi(string_name, sml::pod_types::value);
     pi(vector_name, sml::pod_types::sequence_container);
