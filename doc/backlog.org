@@ -70,6 +70,12 @@ name. This would be a good time to inspect our support for raw
 pointers, it probably suffers from exactly the same problem and
 requires the same solution.
 
+In addition we should also bear in mind moving. Ideally one should be
+able to declare moveable attributes and the end result should be a
+setter that takes the type by =&&=. The question then is should we
+also move on the getter? Sometimes it may not be a copyable type
+(e.g. asio's =socket=).
+
 *** Add support for default values
 
 It would be nice to be able to add a default value in dia and have it
