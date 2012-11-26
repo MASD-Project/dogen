@@ -11,6 +11,35 @@ This file contains all stories that haven't been assigned to a sprint.
 
 Stories that we intend to look at, at some point.
 
+*** Add support for =std::function= in services
+
+At present its not possible to declare an attribute of type
+=std::function= anywhere in a diagram. It won't really be possible to
+do so for entities and values because boost serialisation will always
+be a problem. If this was really a requirement, we could look into
+serialising functions:
+
+- [[https://groups.google.com/forum/?fromgroups%3D#!topic/boost-list/sHWRPlpPsf4][how to serialize boost::function]]
+
+However we don't seem to need this quite just yet. What we do need is
+a way of having attributes in services and that is slightly easier:
+
+- the parser needs to be able to understand the function template
+  syntax (e.g. =void(int)=). It seems this could be hacked easily
+  enough into the parser.
+- Nested qualified names need to be able to remember that in the case
+  of a function, the first argument is a return type (they also need
+  to know they represent a function). MC: is this actually necessary?
+  all we need is to be able to reconstruct this syntax at format time.
+- we need a =void= type in the primitives model. This is a bit more
+  complicated since this type can't have values, only pointers, and we
+  don't really support raw pointers at the moment. Adding the type
+  blindly would open up all sorts of compilation errors.
+
+This should be sufficient for services. At present we have a hack that
+allows functions without any template arguments, e.g. =std::function=,
+in services.
+
 *** Add a code generation marker
 
 Now that we've started to mix-and-match hand-crafted code with
