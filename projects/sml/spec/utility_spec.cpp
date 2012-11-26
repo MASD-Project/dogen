@@ -103,7 +103,7 @@ bool test_primitive(const std::string& s) {
 
 using dogen::utility::test::contains_checker;
 using dogen::sml::merging_error;
-using dogen::sml::utility::merger;
+using dogen::sml::merger;
 using dogen::sml::parsing_error;
 
 BOOST_AUTO_TEST_SUITE(utility)

@@ -278,7 +278,7 @@ bool director::has_generatable_types(const sml::model& m) const {
 }
 
 boost::optional<sml::model> director::create_model() const {
-    sml::utility::merger merger(verbose_, settings_.sql().schema_name());
+    sml::merger merger(verbose_, settings_.sql().schema_name());
     merger.add(sml::primitive_model_factory::create());
     merger.add(sml::std_model_factory::create());
     merger.add(sml::boost_model_factory::create());

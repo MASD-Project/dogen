@@ -34,7 +34,6 @@
 
 namespace dogen {
 namespace sml {
-namespace utility {
 
 class merger {
 public:
@@ -72,6 +71,6 @@ private:
     const std::string schema_name_;
 };
 
-} } }
+} }
 
 #endif

@@ -51,7 +51,6 @@ typedef boost::error_info<struct tag_errmsg, std::string> errmsg_info;
 
 namespace dogen {
 namespace sml {
-namespace utility {
 
 merger::merger(const bool verbose, const std::string& schema_name)
     : verbose_(verbose), has_target_(false), schema_name_(schema_name) { }
@@ -313,4 +312,4 @@ model merger::merge() {
     return merged_model_;
 }
 
-} } }
+} }
