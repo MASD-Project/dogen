@@ -11,6 +11,46 @@ This file contains all stories that haven't been assigned to a sprint.
 
 Stories that we intend to look at, at some point.
 
+*** Stereotypes to disable facets
+
+At present we generate empty files for all facets in a service. This
+quick hack saves some time because otherwise one would have to
+manually generate these by hand (since the includers will include all
+aspects regardless). However, the correct fix is to have stereotypes
+to disable facets:
+
+- =nonhashable=, =hashable=: hashing support
+- =nontestable=, =testable=: test data support
+- =nonserializable=, =serializable=: serialisation support
+- =nonimplementable=, =implementable=: service does not have a CPP file
+- =nonstreamable=, =streamable=: IO support
+
+These stereotypes can then be combined:
+
+: service,nonimplementable,serializable
+
+Results in a service for which there will only be a header file and
+serialization support.
+
+**** Add support for multiple stereotypes to Dia
+
+At present we can only have a single stereotype. We need to return a
+container of stereotypes.
+
+**** Add stereotype validation
+
+We need a validator class that takes a list of stereotypes and ensures
+that they can be combined.
+
+**** Add back-end specific properties to models
+
+We need a way to attach facets to pods, or perhaps we need some
+concept at the SML level which maps to the facet in a language
+agnostic way. This is not very good since its obvious some back-ends
+will not support these concepts (e.g. what does streaming mean to
+SQL?). The better alternative is to have some kind of back-end
+specific properties in SML.
+
 *** Add support for references to types
 
 At present its not possible to create a type that has a reference to
