@@ -27,6 +27,13 @@ const std::string weak_ptr_name("weak_ptr");
 const std::string scoped_ptr_name("scoped_ptr");
 const std::string optional_name("optional");
 
+const std::string asio_name("asio");
+const std::string io_service_name("io_service");
+const std::string ip_name("ip");
+const std::string tcp_name("tcp");
+const std::string socket_name("socket");
+const std::string acceptor_name("acceptor");
+
 }
 
 namespace dogen {
@@ -44,11 +51,13 @@ primitive boost_model_factory::create_primitive(const std::string& name) {
 }
 
 pod boost_model_factory::
-create_pod(const std::string& name, pod_types pt) {
+create_pod(const std::string& name, pod_types pt,
+    std::list<std::string> package_path) {
     qualified_name q;
     q.type_name(name);
     q.meta_type(meta_types::pod);
     q.model_name(model_name);
+    q.package_path(package_path);
     pod r;
     r.name(q);
     r.generation_type(generation_types::no_generation);
@@ -61,30 +70,67 @@ create_pod(const std::string& name, pod_types pt) {
     return r;
 }
 
+package boost_model_factory::
+create_package(const std::string& name, std::list<std::string> package_path) {
+    qualified_name qn;
+    qn.model_name(model_name);
+    qn.type_name(name);
+    qn.package_path(package_path);
+
+    package r;
+    r.name(qn);
+
+    return r;
+}
+
 model boost_model_factory::create() {
     using namespace sml;
     std::unordered_map<qualified_name, primitive> primitives;
     std::unordered_map<qualified_name, pod> pods;
+    std::unordered_map<qualified_name, package> packages;
 
     // const auto lambda([&](std::string name){
     //         primitive p(create_primitive(name));
     //         primitives.insert(std::make_pair(p.name(), p));
     //     });
 
-    const auto pi([&](std::string name, pod_types pt) {
-            pod p(create_pod(name, pt));
+    const auto pi([&](std::string name, pod_types pt,
+            std::list<std::string> package_path) {
+            pod p(create_pod(name, pt, package_path));
             pods.insert(std::make_pair(p.name(), p));
         });
 
-    pi(shared_ptr_name, pod_types::smart_pointer);
-    pi(weak_ptr_name, pod_types::smart_pointer);
-    pi(scoped_ptr_name, pod_types::smart_pointer);
-    pi(optional_name, pod_types::value);
+    const auto gamma([&](std::string name,
+            std::list<std::string> package_path) {
+            package p(create_package(name, package_path));
+            packages.insert(std::make_pair(p.name(), p));
+        });
+
+
+    std::list<std::string> package_path;
+    pi(shared_ptr_name, pod_types::smart_pointer, package_path);
+    pi(weak_ptr_name, pod_types::smart_pointer, package_path);
+    pi(scoped_ptr_name, pod_types::smart_pointer, package_path);
+    pi(optional_name, pod_types::value, package_path);
+
+    gamma(asio_name, package_path);
+    package_path.push_back(asio_name);
+    pi(io_service_name, pod_types::value, package_path);
+
+    gamma(ip_name, package_path);
+    package_path.push_back(ip_name);
+
+    gamma(tcp_name, package_path);
+    package_path.push_back(tcp_name);
+
+    pi(socket_name, pod_types::value, package_path);
+    pi(acceptor_name, pod_types::value, package_path);
 
     model r;
     r.name(model_name);
     r.primitives(primitives);
     r.pods(pods);
+    r.packages(packages);
     r.is_system(true);
     return r;
 }

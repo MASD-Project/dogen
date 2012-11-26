@@ -24,3 +24,4 @@
 #include "dogen/boost_model/hash/class_d_hash.hpp"
 #include "dogen/boost_model/hash/class_derived_hash.hpp"
 #include "dogen/boost_model/hash/pkg1/class_c_hash.hpp"
+#include "dogen/boost_model/hash/some_service_hash.hpp"

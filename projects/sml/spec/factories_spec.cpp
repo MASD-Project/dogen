@@ -20,6 +20,7 @@
  */
 #include <boost/test/unit_test.hpp>
 #include "dogen/utility/test/logging.hpp"
+#include "dogen/utility/io/list_io.hpp"
 #include "dogen/sml/types/all.hpp"
 #include "dogen/sml/io/all_io.hpp"
 
@@ -36,9 +37,10 @@ const std::string std_model("std");
 BOOST_AUTO_TEST_SUITE(factories)
 
 BOOST_AUTO_TEST_CASE(producing_boost_model_generates_expected_types) {
-    SETUP_TEST_LOG("producing_boost_model_generates_expected_types");
+    SETUP_TEST_LOG_SOURCE("producing_boost_model_generates_expected_types");
 
     const auto m(dogen::sml::boost_model_factory::create());
+    BOOST_LOG_SEV(lg, debug) << m;
     BOOST_CHECK(m.name() == boost_model);
     BOOST_CHECK(m.is_system() == true);
 
@@ -49,20 +51,38 @@ BOOST_AUTO_TEST_CASE(producing_boost_model_generates_expected_types) {
         const auto qn(p.name());
         BOOST_CHECK(qn.model_name() == boost_model);
         BOOST_CHECK(qn.external_package_path().empty());
+        if (!qn.package_path().empty()) {
+            bool package_found(false);
+            for (const auto& pair : m.packages()) {
+                const auto pkg(pair.second);
+                auto pp(pkg.name().package_path());
+                pp.push_back(pkg.name().type_name());
+                BOOST_LOG_SEV(lg, info) << "Converted path: " << pp;
+                if (qn.package_path() == pp) {
+                    package_found = true;
+                    break;
+                }
+            }
+
+            if (!package_found)
+                BOOST_LOG_SEV(lg, error) << "Pod has undefined package: " << qn;
+            BOOST_CHECK(package_found);
+        }
     }
     BOOST_CHECK(m.primitives().empty());
     BOOST_CHECK(m.enumerations().empty());
     BOOST_CHECK(m.exceptions().empty());
-    BOOST_CHECK(m.packages().empty());
+    BOOST_CHECK(!m.packages().empty());
     BOOST_CHECK(m.dependencies().empty());
     BOOST_CHECK(m.leaves().empty());
     BOOST_CHECK(m.external_package_path().empty());
 }
 
 BOOST_AUTO_TEST_CASE(producing_std_model_generates_expected_types) {
-    SETUP_TEST_LOG("producing_std_model_generates_expected_types");
+    SETUP_TEST_LOG_SOURCE("producing_std_model_generates_expected_types");
 
     const auto m(dogen::sml::std_model_factory::create());
+    BOOST_LOG_SEV(lg, debug) << m;
     BOOST_CHECK(m.name() == std_model);
     BOOST_CHECK(m.is_system() == true);
 
@@ -94,9 +114,10 @@ BOOST_AUTO_TEST_CASE(producing_std_model_generates_expected_types) {
 }
 
 BOOST_AUTO_TEST_CASE(producing_primitive_model_generates_expected_types) {
-    SETUP_TEST_LOG("producing_primitive_model_generates_expected_types");
+    SETUP_TEST_LOG_SOURCE("producing_primitive_model_generates_expected_types");
 
     const auto m(dogen::sml::primitive_model_factory::create());
+    BOOST_LOG_SEV(lg, debug) << m;
     BOOST_CHECK(m.name() == primitive_model);
     BOOST_CHECK(m.is_system() == true);
 

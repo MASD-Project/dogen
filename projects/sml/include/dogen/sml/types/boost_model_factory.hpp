@@ -40,8 +40,11 @@ public:
     boost_model_factory& operator=(const boost_model_factory&) = delete;
 
 private:
+    static package create_package(const std::string& name,
+        std::list<std::string> package_path);
     static primitive create_primitive(const std::string& name);
-    static pod create_pod(const std::string& name, pod_types pt);
+    static pod create_pod(const std::string& name, pod_types pt,
+        std::list<std::string> package_path);
 
 public:
     static model create();

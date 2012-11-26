@@ -24,3 +24,4 @@
 #include "dogen/boost_model/serialization/class_d_ser.hpp"
 #include "dogen/boost_model/serialization/class_derived_ser.hpp"
 #include "dogen/boost_model/serialization/pkg1/class_c_ser.hpp"
+#include "dogen/boost_model/serialization/some_service_ser.hpp"
