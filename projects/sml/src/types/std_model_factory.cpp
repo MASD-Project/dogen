@@ -18,9 +18,10 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/generator/modeling/std_model_factory.hpp"
+#include "dogen/sml/types/std_model_factory.hpp"
 
 namespace {
+
 const std::string model_name("std");
 const std::string string_name("string");
 const std::string vector_name("vector");
@@ -49,39 +50,38 @@ const std::string uint64_t_name("uint64_t");
 }
 
 namespace dogen {
-namespace generator {
-namespace modeling {
+namespace sml {
 
-sml::primitive std_model_factory::create_primitive(const std::string& name) {
-    sml::qualified_name q;
+primitive std_model_factory::create_primitive(const std::string& name) {
+    qualified_name q;
     q.type_name(name);
-    q.meta_type(sml::meta_types::primitive);
+    q.meta_type(meta_types::primitive);
     q.model_name(model_name);
-    sml::primitive r;
+    primitive r;
     r.name(q);
-    r.generation_type(sml::generation_types::no_generation);
+    r.generation_type(generation_types::no_generation);
     return r;
 }
 
-sml::pod std_model_factory::
-create_pod(const std::string& name, sml::pod_types pt) {
-    sml::qualified_name q;
+pod std_model_factory::
+create_pod(const std::string& name, pod_types pt) {
+    qualified_name q;
     q.type_name(name);
-    q.meta_type(sml::meta_types::pod);
+    q.meta_type(meta_types::pod);
     q.model_name(model_name);
-    sml::pod r;
+    pod r;
     r.name(q);
-    r.generation_type(sml::generation_types::no_generation);
-    if (pt == sml::pod_types::sequence_container)
+    r.generation_type(generation_types::no_generation);
+    if (pt == pod_types::sequence_container)
         r.number_of_type_arguments(1);
-    else if (pt == sml::pod_types::associative_container)
+    else if (pt == pod_types::associative_container)
         r.number_of_type_arguments(2);
 
     r.pod_type(pt);
     return r;
 }
 
-sml::model std_model_factory::create() {
+model std_model_factory::create() {
     using namespace sml;
     std::unordered_map<qualified_name, primitive> primitives;
     std::unordered_map<qualified_name, pod> pods;
@@ -91,7 +91,7 @@ sml::model std_model_factory::create() {
             primitives.insert(std::make_pair(p.name(), p));
         });
 
-    const auto pi([&](std::string name, sml::pod_types pt) {
+    const auto pi([&](std::string name, pod_types pt) {
             pod p(create_pod(name, pt));
             pods.insert(std::make_pair(p.name(), p));
         });
@@ -105,20 +105,20 @@ sml::model std_model_factory::create() {
     lambda(uint32_t_name);
     lambda(uint64_t_name);
 
-    pi(string_name, sml::pod_types::value);
-    pi(vector_name, sml::pod_types::sequence_container);
-    pi(deque_name, sml::pod_types::sequence_container);
-    pi(array_name, sml::pod_types::sequence_container);
-    pi(list_name, sml::pod_types::sequence_container);
-    pi(forward_list_name, sml::pod_types::sequence_container);
+    pi(string_name, pod_types::value);
+    pi(vector_name, pod_types::sequence_container);
+    pi(deque_name, pod_types::sequence_container);
+    pi(array_name, pod_types::sequence_container);
+    pi(list_name, pod_types::sequence_container);
+    pi(forward_list_name, pod_types::sequence_container);
 
-    pi(set_name, sml::pod_types::associative_container);
-    pi(multiset_name, sml::pod_types::associative_container);
-    pi(unordered_set_name, sml::pod_types::associative_container);
-    pi(unordered_multiset_name, sml::pod_types::associative_container);
-    pi(map_name, sml::pod_types::associative_container);
-    pi(multimap_name, sml::pod_types::associative_container);
-    pi(unordered_map_name, sml::pod_types::associative_container);
+    pi(set_name, pod_types::associative_container);
+    pi(multiset_name, pod_types::associative_container);
+    pi(unordered_set_name, pod_types::associative_container);
+    pi(unordered_multiset_name, pod_types::associative_container);
+    pi(map_name, pod_types::associative_container);
+    pi(multimap_name, pod_types::associative_container);
+    pi(unordered_map_name, pod_types::associative_container);
 
     model r;
     r.name(model_name);
@@ -128,4 +128,4 @@ sml::model std_model_factory::create() {
     return r;
 }
 
-} } }
+} }

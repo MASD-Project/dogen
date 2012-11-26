@@ -18,9 +18,10 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/generator/modeling/primitive_model_factory.hpp"
+#include "dogen/sml/types/primitive_model_factory.hpp"
 
 namespace {
+
 const std::string model_name("primitive_model");
 
 const std::string bool_name("bool");
@@ -40,20 +41,19 @@ const std::string float_name("float");
 }
 
 namespace dogen {
-namespace generator {
-namespace modeling {
+namespace sml {
 
-sml::primitive primitive_model_factory::create(const std::string& name) {
-    sml::qualified_name q;
+primitive primitive_model_factory::create(const std::string& name) {
+    qualified_name q;
     q.type_name(name);
-    q.meta_type(sml::meta_types::primitive);
-    sml::primitive r;
+    q.meta_type(meta_types::primitive);
+    primitive r;
     r.name(q);
-    r.generation_type(sml::generation_types::no_generation);
+    r.generation_type(generation_types::no_generation);
     return r;
 }
 
-sml::model primitive_model_factory::create() {
+model primitive_model_factory::create() {
     using namespace sml;
     std::unordered_map<qualified_name, primitive> p;
     const auto lambda([&](const std::string& name){
@@ -82,4 +82,4 @@ sml::model primitive_model_factory::create() {
     return r;
 }
 
-} } }
+} }

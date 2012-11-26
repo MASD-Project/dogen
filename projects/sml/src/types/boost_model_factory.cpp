@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/generator/modeling/boost_model_factory.hpp"
+#include "dogen/sml/types/boost_model_factory.hpp"
 
 namespace {
 const std::string model_name("boost");
@@ -30,39 +30,38 @@ const std::string optional_name("optional");
 }
 
 namespace dogen {
-namespace generator {
-namespace modeling {
+namespace sml {
 
-sml::primitive boost_model_factory::create_primitive(const std::string& name) {
-    sml::qualified_name q;
+primitive boost_model_factory::create_primitive(const std::string& name) {
+    qualified_name q;
     q.type_name(name);
-    q.meta_type(sml::meta_types::primitive);
+    q.meta_type(meta_types::primitive);
     q.model_name(model_name);
-    sml::primitive r;
+    primitive r;
     r.name(q);
-    r.generation_type(sml::generation_types::no_generation);
+    r.generation_type(generation_types::no_generation);
     return r;
 }
 
-sml::pod boost_model_factory::
-create_pod(const std::string& name, sml::pod_types pt) {
-    sml::qualified_name q;
+pod boost_model_factory::
+create_pod(const std::string& name, pod_types pt) {
+    qualified_name q;
     q.type_name(name);
-    q.meta_type(sml::meta_types::pod);
+    q.meta_type(meta_types::pod);
     q.model_name(model_name);
-    sml::pod r;
+    pod r;
     r.name(q);
-    r.generation_type(sml::generation_types::no_generation);
-    if (pt == sml::pod_types::sequence_container)
+    r.generation_type(generation_types::no_generation);
+    if (pt == pod_types::sequence_container)
         r.number_of_type_arguments(1);
-    else if (pt == sml::pod_types::associative_container)
+    else if (pt == pod_types::associative_container)
         r.number_of_type_arguments(2);
 
     r.pod_type(pt);
     return r;
 }
 
-sml::model boost_model_factory::create() {
+model boost_model_factory::create() {
     using namespace sml;
     std::unordered_map<qualified_name, primitive> primitives;
     std::unordered_map<qualified_name, pod> pods;
@@ -72,15 +71,15 @@ sml::model boost_model_factory::create() {
     //         primitives.insert(std::make_pair(p.name(), p));
     //     });
 
-    const auto pi([&](std::string name, sml::pod_types pt) {
+    const auto pi([&](std::string name, pod_types pt) {
             pod p(create_pod(name, pt));
             pods.insert(std::make_pair(p.name(), p));
         });
 
-    pi(shared_ptr_name, sml::pod_types::smart_pointer);
-    pi(weak_ptr_name, sml::pod_types::smart_pointer);
-    pi(scoped_ptr_name, sml::pod_types::smart_pointer);
-    pi(optional_name, sml::pod_types::value);
+    pi(shared_ptr_name, pod_types::smart_pointer);
+    pi(weak_ptr_name, pod_types::smart_pointer);
+    pi(scoped_ptr_name, pod_types::smart_pointer);
+    pi(optional_name, pod_types::value);
 
     model r;
     r.name(model_name);
@@ -90,4 +89,4 @@ sml::model boost_model_factory::create() {
     return r;
 }
 
-} } }
+} }

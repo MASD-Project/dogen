@@ -18,6 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen/sml/serialization/boost_model_factory_ser.hpp"
 #include "dogen/sml/serialization/category_types_ser.hpp"
 #include "dogen/sml/serialization/enumeration_ser.hpp"
 #include "dogen/sml/serialization/enumerator_ser.hpp"
@@ -29,7 +30,9 @@
 #include "dogen/sml/serialization/package_ser.hpp"
 #include "dogen/sml/serialization/pod_ser.hpp"
 #include "dogen/sml/serialization/pod_types_ser.hpp"
+#include "dogen/sml/serialization/primitive_model_factory_ser.hpp"
 #include "dogen/sml/serialization/primitive_ser.hpp"
 #include "dogen/sml/serialization/property_ser.hpp"
 #include "dogen/sml/serialization/qualified_name_ser.hpp"
 #include "dogen/sml/serialization/reference_ser.hpp"
+#include "dogen/sml/serialization/std_model_factory_ser.hpp"

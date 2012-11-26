@@ -26,9 +26,9 @@
 #include "dogen/dia/xml/hydrator.hpp"
 #include "dogen/dia/serialization/diagram_ser.hpp"
 #include "dogen/sml/serialization/model_ser.hpp"
-#include "dogen/generator/modeling/primitive_model_factory.hpp"
-#include "dogen/generator/modeling/std_model_factory.hpp"
-#include "dogen/generator/modeling/boost_model_factory.hpp"
+#include "dogen/sml/types/primitive_model_factory.hpp"
+#include "dogen/sml/types/std_model_factory.hpp"
+#include "dogen/sml/types/boost_model_factory.hpp"
 #include "dogen/sml/io/model_io.hpp"
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/generator/modeling/director.hpp"
@@ -279,9 +279,9 @@ bool director::has_generatable_types(const sml::model& m) const {
 
 boost::optional<sml::model> director::create_model() const {
     sml::utility::merger merger(verbose_, settings_.sql().schema_name());
-    merger.add(primitive_model_factory::create());
-    merger.add(std_model_factory::create());
-    merger.add(boost_model_factory::create());
+    merger.add(sml::primitive_model_factory::create());
+    merger.add(sml::std_model_factory::create());
+    merger.add(sml::boost_model_factory::create());
 
     using sml::model;
     const auto lambda([&](config::reference ref, bool is_target) -> model {

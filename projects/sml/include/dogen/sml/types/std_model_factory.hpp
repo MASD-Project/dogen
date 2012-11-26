@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_GENERATOR_MODELING_BOOST_MODEL_FACTORY_HPP
-#define DOGEN_GENERATOR_MODELING_BOOST_MODEL_FACTORY_HPP
+#ifndef DOGEN_SML_TYPES_STD_MODEL_FACTORY_HPP
+#define DOGEN_SML_TYPES_STD_MODEL_FACTORY_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -29,25 +29,25 @@
 #include "dogen/sml/types/model.hpp"
 
 namespace dogen {
-namespace generator {
-namespace modeling {
+namespace sml {
 
-class boost_model_factory {
+class std_model_factory {
 public:
-    boost_model_factory() = delete;
-    boost_model_factory(const boost_model_factory&) = delete;
-    ~boost_model_factory() = delete;
-    boost_model_factory(boost_model_factory&&) = delete;
-    boost_model_factory& operator=(const boost_model_factory&) = delete;
+    std_model_factory() = delete;
+    std_model_factory(const std_model_factory&) = delete;
+    ~std_model_factory() = delete;
+    std_model_factory(std_model_factory&&) = delete;
+    std_model_factory& operator=(const std_model_factory&) = delete;
 
 private:
-    static sml::primitive create_primitive(const std::string& name);
-    static sml::pod create_pod(const std::string& name, sml::pod_types pt);
+    static primitive create_primitive(const std::string& name);
+    static pod create_pod(const std::string& name, pod_types pt);
+
 
 public:
-    static sml::model create();
+    static model create();
 };
 
-} } }
+} }
 
 #endif

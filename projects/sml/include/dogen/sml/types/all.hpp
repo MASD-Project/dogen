@@ -18,6 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen/sml/types/boost_model_factory.hpp"
 #include "dogen/sml/types/category_types.hpp"
 #include "dogen/sml/types/enumeration.hpp"
 #include "dogen/sml/types/enumerator.hpp"
@@ -32,6 +33,8 @@
 #include "dogen/sml/types/pod.hpp"
 #include "dogen/sml/types/pod_types.hpp"
 #include "dogen/sml/types/primitive.hpp"
+#include "dogen/sml/types/primitive_model_factory.hpp"
 #include "dogen/sml/types/property.hpp"
 #include "dogen/sml/types/qualified_name.hpp"
 #include "dogen/sml/types/reference.hpp"
+#include "dogen/sml/types/std_model_factory.hpp"

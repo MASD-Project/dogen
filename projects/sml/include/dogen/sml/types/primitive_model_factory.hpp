@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_GENERATOR_MODELING_PRIMITIVE_MODEL_FACTORY_HPP
-#define DOGEN_GENERATOR_MODELING_PRIMITIVE_MODEL_FACTORY_HPP
+#ifndef DOGEN_SML_TYPES_PRIMITIVE_MODEL_FACTORY_HPP
+#define DOGEN_SML_TYPES_PRIMITIVE_MODEL_FACTORY_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -29,8 +29,7 @@
 #include "dogen/sml/types/model.hpp"
 
 namespace dogen {
-namespace generator {
-namespace modeling {
+namespace sml {
 
 class primitive_model_factory {
 public:
@@ -41,12 +40,12 @@ public:
     primitive_model_factory& operator=(const primitive_model_factory&) = delete;
 
 private:
-    static sml::primitive create(const std::string& name);
+    static primitive create(const std::string& name);
 
 public:
-    static sml::model create();
+    static model create();
 };
 
-} } }
+} }
 
 #endif

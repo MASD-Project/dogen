@@ -18,21 +18,35 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/sml/io/boost_model_factory_io.hpp"
-#include "dogen/sml/io/category_types_io.hpp"
-#include "dogen/sml/io/enumeration_io.hpp"
-#include "dogen/sml/io/enumerator_io.hpp"
-#include "dogen/sml/io/exception_io.hpp"
-#include "dogen/sml/io/generation_types_io.hpp"
-#include "dogen/sml/io/meta_types_io.hpp"
-#include "dogen/sml/io/model_io.hpp"
-#include "dogen/sml/io/nested_qualified_name_io.hpp"
-#include "dogen/sml/io/package_io.hpp"
-#include "dogen/sml/io/pod_io.hpp"
-#include "dogen/sml/io/pod_types_io.hpp"
-#include "dogen/sml/io/primitive_io.hpp"
-#include "dogen/sml/io/primitive_model_factory_io.hpp"
-#include "dogen/sml/io/property_io.hpp"
-#include "dogen/sml/io/qualified_name_io.hpp"
-#include "dogen/sml/io/reference_io.hpp"
-#include "dogen/sml/io/std_model_factory_io.hpp"
+#ifndef DOGEN_SML_TYPES_BOOST_MODEL_FACTORY_HPP
+#define DOGEN_SML_TYPES_BOOST_MODEL_FACTORY_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include <string>
+#include "dogen/sml/types/model.hpp"
+
+namespace dogen {
+namespace sml {
+
+class boost_model_factory {
+public:
+    boost_model_factory() = delete;
+    boost_model_factory(const boost_model_factory&) = delete;
+    ~boost_model_factory() = delete;
+    boost_model_factory(boost_model_factory&&) = delete;
+    boost_model_factory& operator=(const boost_model_factory&) = delete;
+
+private:
+    static primitive create_primitive(const std::string& name);
+    static pod create_pod(const std::string& name, pod_types pt);
+
+public:
+    static model create();
+};
+
+} }
+
+#endif

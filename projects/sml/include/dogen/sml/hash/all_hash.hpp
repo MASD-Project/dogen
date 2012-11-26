@@ -18,6 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen/sml/hash/boost_model_factory_hash.hpp"
 #include "dogen/sml/hash/category_types_hash.hpp"
 #include "dogen/sml/hash/enumeration_hash.hpp"
 #include "dogen/sml/hash/enumerator_hash.hpp"
@@ -30,6 +31,8 @@
 #include "dogen/sml/hash/pod_hash.hpp"
 #include "dogen/sml/hash/pod_types_hash.hpp"
 #include "dogen/sml/hash/primitive_hash.hpp"
+#include "dogen/sml/hash/primitive_model_factory_hash.hpp"
 #include "dogen/sml/hash/property_hash.hpp"
 #include "dogen/sml/hash/qualified_name_hash.hpp"
 #include "dogen/sml/hash/reference_hash.hpp"
+#include "dogen/sml/hash/std_model_factory_hash.hpp"
