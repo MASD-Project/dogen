@@ -88,14 +88,13 @@ dogen::sml::pod mock_pod(unsigned int i) {
 
 using dogen::utility::test::contains_checker;
 using dogen::sml::merging_error;
-using dogen::sml::merger;
 
-BOOST_AUTO_TEST_SUITE(equality)
+BOOST_AUTO_TEST_SUITE(merger)
 
 BOOST_AUTO_TEST_CASE(merging_n_distinct_models_with_one_pod_each_results_in_n_pods_in_merged_model) {
     SETUP_TEST_LOG("merging_n_distinct_models_with_one_pod_each_results_in_n_pods_in_merged_model");
     const unsigned int n(5);
-    merger mg(verbose, schema_name);
+    dogen::sml::merger mg(verbose, schema_name);
 
     std::list<dogen::sml::qualified_name> names;
     for (unsigned int i(0); i < n; ++i) {
@@ -122,7 +121,7 @@ BOOST_AUTO_TEST_CASE(merging_n_distinct_models_with_one_pod_each_results_in_n_po
 
 BOOST_AUTO_TEST_CASE(merging_empty_model_results_in_empty_merged_model) {
     SETUP_TEST_LOG("merging_empty_model_results_in_empty_merged_model");
-    merger mg(verbose, schema_name);
+    dogen::sml::merger mg(verbose, schema_name);
     dogen::sml::model m;
     mg.add_target(m);
 
@@ -133,7 +132,7 @@ BOOST_AUTO_TEST_CASE(merging_empty_model_results_in_empty_merged_model) {
 
 BOOST_AUTO_TEST_CASE(type_with_incorrect_model_name_throws) {
     SETUP_TEST_LOG("type_with_incorrect_model_name_throws");
-    merger mg(verbose, schema_name);
+    dogen::sml::merger mg(verbose, schema_name);
     using namespace dogen::sml;
     pod p(mock_pod(1));
 
@@ -149,7 +148,7 @@ BOOST_AUTO_TEST_CASE(type_with_incorrect_model_name_throws) {
 
 BOOST_AUTO_TEST_CASE(type_with_inconsistent_key_value_pair_throws) {
     SETUP_TEST_LOG_SOURCE("type_with_inconsistent_key_value_pair_throws");
-    merger mg(verbose, schema_name);
+    dogen::sml::merger mg(verbose, schema_name);
     using namespace dogen::sml;
     pod p(mock_pod(0));
     pod q(mock_pod(1));
@@ -170,7 +169,7 @@ BOOST_AUTO_TEST_CASE(not_adding_a_target_throws) {
     m.name(model_name(0));
 
     const bool verbose(true);
-    merger mg(verbose, schema_name);
+    dogen::sml::merger mg(verbose, schema_name);
     mg.add(m);
 
     contains_checker<merging_error> c(missing_target);
@@ -185,7 +184,7 @@ BOOST_AUTO_TEST_CASE(adding_more_than_one_target_throws) {
     dogen::sml::model m1;
     m1.name(model_name(1));
 
-    merger mg(verbose, schema_name);
+    dogen::sml::merger mg(verbose, schema_name);
     mg.add_target(m0);
 
     contains_checker<merging_error> c(too_many_targets);
@@ -194,7 +193,7 @@ BOOST_AUTO_TEST_CASE(adding_more_than_one_target_throws) {
 
 BOOST_AUTO_TEST_CASE(pod_with_property_type_in_the_same_model_results_in_successful_merge) {
     SETUP_TEST_LOG("pod_with_property_type_in_the_same_model_results_in_successful_merge");
-    merger mg(verbose, schema_name);
+    dogen::sml::merger mg(verbose, schema_name);
 
     using namespace dogen::sml;
     const std::string mn(model_name(0));
@@ -240,7 +239,7 @@ BOOST_AUTO_TEST_CASE(pod_with_property_type_in_the_same_model_results_in_success
 
 BOOST_AUTO_TEST_CASE(pod_with_property_type_in_different_model_results_in_successful_merge) {
     SETUP_TEST_LOG("pod_with_property_type_in_different_model_results_in_successful_merge");
-    merger mg(verbose, schema_name);
+    dogen::sml::merger mg(verbose, schema_name);
 
     using namespace dogen::sml;
     pod pod0(mock_pod(0));
@@ -292,7 +291,7 @@ BOOST_AUTO_TEST_CASE(pod_with_property_type_in_different_model_results_in_succes
 
 BOOST_AUTO_TEST_CASE(pod_with_missing_property_type_throws) {
     SETUP_TEST_LOG("pod_with_missing_property_type_throws");
-    merger mg(verbose, schema_name);
+    dogen::sml::merger mg(verbose, schema_name);
 
     using namespace dogen::sml;
     pod pod0(mock_pod(0));
@@ -326,7 +325,7 @@ BOOST_AUTO_TEST_CASE(pod_with_missing_property_type_throws) {
 
 BOOST_AUTO_TEST_CASE(pod_with_parent_in_the_same_model_merges_successfully) {
     SETUP_TEST_LOG("pod_with_parent_in_the_same_model_merges_successfully");
-    merger mg(verbose, schema_name);
+    dogen::sml::merger mg(verbose, schema_name);
 
     using namespace dogen::sml;
     const std::string mn(model_name(0));
@@ -359,7 +358,7 @@ BOOST_AUTO_TEST_CASE(pod_with_parent_in_the_same_model_merges_successfully) {
 
 BOOST_AUTO_TEST_CASE(pod_with_parent_in_different_models_merges_successfully) {
     SETUP_TEST_LOG("pod_with_parent_in_different_models_merges_successfully");
-    merger mg(verbose, schema_name);
+    dogen::sml::merger mg(verbose, schema_name);
 
     using namespace dogen::sml;
     pod pod0(mock_pod(0));
@@ -398,7 +397,7 @@ BOOST_AUTO_TEST_CASE(pod_with_parent_in_different_models_merges_successfully) {
 
 BOOST_AUTO_TEST_CASE(pod_with_third_degree_parent_in_same_model_merges_successfully) {
     SETUP_TEST_LOG("pod_with_third_degree_parent_in_same_model_merges_successfully");
-    merger mg(verbose, schema_name);
+    dogen::sml::merger mg(verbose, schema_name);
 
     using namespace dogen::sml;
     const std::string mn(model_name(0));
@@ -437,7 +436,7 @@ BOOST_AUTO_TEST_CASE(pod_with_third_degree_parent_in_same_model_merges_successfu
 
 BOOST_AUTO_TEST_CASE(pod_with_third_degree_parent_missing_within_single_model_throws) {
     SETUP_TEST_LOG("pod_with_third_degree_parent_missing_within_single_model_throws");
-    merger mg(verbose, schema_name);
+    dogen::sml::merger mg(verbose, schema_name);
 
     using namespace dogen::sml;
     const std::string mn(model_name(0));
@@ -466,7 +465,7 @@ BOOST_AUTO_TEST_CASE(pod_with_third_degree_parent_missing_within_single_model_th
 
 BOOST_AUTO_TEST_CASE(pod_with_third_degree_parent_in_different_models_merges_successfully) {
     SETUP_TEST_LOG("pod_with_third_degree_parent_in_different_models_merges_successfully");
-    merger mg(verbose, schema_name);
+    dogen::sml::merger mg(verbose, schema_name);
 
     using namespace dogen::sml;
     pod pod0(mock_pod(0));
@@ -525,7 +524,7 @@ BOOST_AUTO_TEST_CASE(pod_with_third_degree_parent_in_different_models_merges_suc
 
 BOOST_AUTO_TEST_CASE(pod_with_missing_third_degree_parent_in_different_models_throws) {
     SETUP_TEST_LOG("pod_with_missing_third_degree_parent_in_different_models_throws");
-    merger mg(verbose, schema_name);
+    dogen::sml::merger mg(verbose, schema_name);
 
     using namespace dogen::sml;
     pod pod0(mock_pod(0));
@@ -568,7 +567,7 @@ BOOST_AUTO_TEST_CASE(pod_with_missing_third_degree_parent_in_different_models_th
 
 BOOST_AUTO_TEST_CASE(pod_incorrect_meta_type_throws) {
     SETUP_TEST_LOG("pod_incorrect_meta_type_throws");
-    merger mg(verbose, schema_name);
+    dogen::sml::merger mg(verbose, schema_name);
 
     using namespace dogen::sml;
     pod p(mock_pod(0));
@@ -594,7 +593,7 @@ BOOST_AUTO_TEST_CASE(pod_incorrect_meta_type_throws) {
 
 BOOST_AUTO_TEST_CASE(setting_merged_schema_name_propagates_to_combined_model) {
     SETUP_TEST_LOG("setting_merged_schema_name_propagates_to_combined_model");
-    merger mg(verbose, schema_name);
+    dogen::sml::merger mg(verbose, schema_name);
     dogen::sml::model m;
     mg.add_target(m);
 
