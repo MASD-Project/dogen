@@ -668,13 +668,13 @@ This is only needed because we don't have a type base class.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O2">
       <dia:attribute name="obj_pos">
-        <dia:point val="-39.9879,71.0686"/>
+        <dia:point val="-40.8629,75.0061"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-40.0379,71.0186;-29.0429,74.7186"/>
+        <dia:rectangle val="-40.9129,74.9561;-29.9179,78.6561"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-39.9879,71.0686"/>
+        <dia:point val="-40.8629,75.0061"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="10.895"/>
@@ -2010,7 +2010,7 @@ Must only contain characters that can be used for identifiers in the target back
         <dia:string>##</dia:string>
       </dia:attribute>
       <dia:attribute name="multipicity_a">
-        <dia:string>##</dia:string>
+        <dia:string>#0..*#</dia:string>
       </dia:attribute>
       <dia:attribute name="visibility_a">
         <dia:enum val="3"/>
@@ -2363,13 +2363,13 @@ Must only contain characters that can be used for identifiers in the target back
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O13">
       <dia:attribute name="obj_pos">
-        <dia:point val="-39.9729,57.9375"/>
+        <dia:point val="-40.8479,53.0625"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-40.0229,57.8875;-26.3329,62.3875"/>
+        <dia:rectangle val="-40.8979,53.0125;-27.2079,57.5125"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-39.9729,57.9375"/>
+        <dia:point val="-40.8479,53.0625"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="13.59"/>
@@ -2579,17 +2579,17 @@ Must only contain characters that can be used for identifiers in the target back
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="-26.3829,60.6375"/>
+        <dia:point val="-34.0529,57.4625"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-26.4329,59.9219;-8.3188,62.2375"/>
+        <dia:rectangle val="-34.1029,57.4125;-8.3188,61.8562"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="-26.3829,60.6375"/>
-        <dia:point val="-26.3829,60.6719"/>
+        <dia:point val="-34.0529,57.4625"/>
+        <dia:point val="-34.0529,60.6719"/>
         <dia:point val="-9.0688,60.6719"/>
         <dia:point val="-9.0688,61.0562"/>
       </dia:attribute>
@@ -2608,7 +2608,7 @@ Must only contain characters that can be used for identifiers in the target back
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:connections>
-        <dia:connection handle="0" to="O13" connection="11"/>
+        <dia:connection handle="0" to="O13" connection="6"/>
         <dia:connection handle="1" to="O0" connection="8"/>
       </dia:connections>
     </dia:object>
@@ -2650,17 +2650,17 @@ Must only contain characters that can be used for identifiers in the target back
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="-29.0929,72.9686"/>
+        <dia:point val="-35.4154,75.0061"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-29.1429,67.2344;-8.3979,73.0186"/>
+        <dia:rectangle val="-35.4654,67.2344;-8.3979,75.0561"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="-29.0929,72.9686"/>
-        <dia:point val="-29.0929,72.0469"/>
+        <dia:point val="-35.4154,75.0061"/>
+        <dia:point val="-35.4154,72.0469"/>
         <dia:point val="-9.1479,72.0469"/>
         <dia:point val="-9.1479,67.9844"/>
       </dia:attribute>
@@ -2679,7 +2679,7 @@ Must only contain characters that can be used for identifiers in the target back
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:connections>
-        <dia:connection handle="0" to="O2" connection="9"/>
+        <dia:connection handle="0" to="O2" connection="1"/>
       </dia:connections>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O16">
@@ -3076,7 +3076,7 @@ categories for them.#</dia:string>
         <dia:string>##</dia:string>
       </dia:attribute>
       <dia:attribute name="multipicity_b">
-        <dia:string>##</dia:string>
+        <dia:string>#0..*#</dia:string>
       </dia:attribute>
       <dia:attribute name="visibility_b">
         <dia:enum val="3"/>
@@ -3985,13 +3985,13 @@ which make code generation different.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O26">
       <dia:attribute name="obj_pos">
-        <dia:point val="-39.9104,64.0813"/>
+        <dia:point val="-40.9729,64.0813"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-39.9604,64.0313;-21.6504,68.5313"/>
+        <dia:rectangle val="-41.0229,64.0313;-22.7129,68.5313"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-39.9104,64.0813"/>
+        <dia:point val="-40.9729,64.0813"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="18.210000000000001"/>
@@ -4204,7 +4204,7 @@ which make code generation different.#</dia:string>
         <dia:point val="-9.0688,65.0562"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-21.7504,64.3062;-8.3188,67.5813"/>
+        <dia:rectangle val="-22.8129,64.3062;-8.3188,67.5813"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -4212,8 +4212,8 @@ which make code generation different.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="-9.0688,65.0562"/>
         <dia:point val="-9.0688,66.0469"/>
-        <dia:point val="-21.7004,66.0469"/>
-        <dia:point val="-21.7004,65.9813"/>
+        <dia:point val="-22.7629,66.0469"/>
+        <dia:point val="-22.7629,65.9813"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -4939,7 +4939,7 @@ which make code generation different.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
-            <dia:enum val="0"/>
+            <dia:enum val="1"/>
           </dia:attribute>
           <dia:attribute name="abstract">
             <dia:boolean val="false"/>
@@ -4962,7 +4962,7 @@ which make code generation different.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
-            <dia:enum val="0"/>
+            <dia:enum val="1"/>
           </dia:attribute>
           <dia:attribute name="abstract">
             <dia:boolean val="false"/>
@@ -4985,7 +4985,7 @@ which make code generation different.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
-            <dia:enum val="0"/>
+            <dia:enum val="1"/>
           </dia:attribute>
           <dia:attribute name="abstract">
             <dia:boolean val="false"/>
@@ -5008,7 +5008,7 @@ which make code generation different.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
-            <dia:enum val="0"/>
+            <dia:enum val="1"/>
           </dia:attribute>
           <dia:attribute name="abstract">
             <dia:boolean val="false"/>
@@ -5031,7 +5031,7 @@ which make code generation different.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
-            <dia:enum val="0"/>
+            <dia:enum val="1"/>
           </dia:attribute>
           <dia:attribute name="abstract">
             <dia:boolean val="false"/>
@@ -5054,7 +5054,7 @@ which make code generation different.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
-            <dia:enum val="0"/>
+            <dia:enum val="1"/>
           </dia:attribute>
           <dia:attribute name="abstract">
             <dia:boolean val="false"/>
