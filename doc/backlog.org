@@ -11,6 +11,16 @@ This file contains all stories that haven't been assigned to a sprint.
 
 Stories that we intend to look at, at some point.
 
+*** Add a code generation marker
+
+Now that we've started to mix-and-match hand-crafted code with
+code-generated code, we should really have an easy way to distinguish
+which files are which. A simple comment at the top for files generated
+by dogen (with the corresponding dogen version) would suffice. This
+could be done in a similar fashion to the licence formatter. It should
+either be after the licence or at the very top and take on the
+responsibilities of emacs/vi headers.
+
 *** Stereotypes to disable facets
 
 At present we generate empty files for all facets in a service. This
