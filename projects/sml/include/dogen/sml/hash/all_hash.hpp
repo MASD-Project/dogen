@@ -24,6 +24,7 @@
 #include "dogen/sml/hash/enumerator_hash.hpp"
 #include "dogen/sml/hash/exception_hash.hpp"
 #include "dogen/sml/hash/generation_types_hash.hpp"
+#include "dogen/sml/hash/merger_hash.hpp"
 #include "dogen/sml/hash/meta_types_hash.hpp"
 #include "dogen/sml/hash/model_hash.hpp"
 #include "dogen/sml/hash/nested_qualified_name_hash.hpp"

@@ -24,6 +24,7 @@
 #include "dogen/sml/serialization/enumerator_ser.hpp"
 #include "dogen/sml/serialization/exception_ser.hpp"
 #include "dogen/sml/serialization/generation_types_ser.hpp"
+#include "dogen/sml/serialization/merger_ser.hpp"
 #include "dogen/sml/serialization/meta_types_ser.hpp"
 #include "dogen/sml/serialization/model_ser.hpp"
 #include "dogen/sml/serialization/nested_qualified_name_ser.hpp"
