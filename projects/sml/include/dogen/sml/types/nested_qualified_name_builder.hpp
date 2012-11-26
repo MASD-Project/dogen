@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_SML_UTILITY_NESTED_QUALIFIED_NAME_BUILDER_HPP
-#define DOGEN_SML_UTILITY_NESTED_QUALIFIED_NAME_BUILDER_HPP
+#ifndef DOGEN_SML_TYPES_NESTED_QUALIFIED_NAME_BUILDER_HPP
+#define DOGEN_SML_TYPES_NESTED_QUALIFIED_NAME_BUILDER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -34,7 +34,6 @@
 
 namespace dogen {
 namespace sml {
-namespace utility {
 
 class nested_qualified_name_builder {
 private:
@@ -79,6 +78,6 @@ private:
     std::shared_ptr<node> current_;
 };
 
-} } }
+} }
 
 #endif

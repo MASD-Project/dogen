@@ -33,7 +33,7 @@
 #include "dogen/utility/test/exception_checkers.hpp"
 
 using dogen::utility::test::asserter;
-using dogen::sml::utility::identifier_parser;
+using dogen::sml::identifier_parser;
 
 namespace  {
 

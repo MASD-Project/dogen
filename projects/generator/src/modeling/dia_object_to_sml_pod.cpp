@@ -146,7 +146,7 @@ private:
         std::unordered_map<dogen::sml::qualified_name,
                            std::list<dogen::sml::qualified_name> > leaves_;
         std::unordered_set<std::string> dependencies_;
-        dogen::sml::utility::identifier_parser parser_;
+        dogen::sml::identifier_parser parser_;
     };
 
 public:

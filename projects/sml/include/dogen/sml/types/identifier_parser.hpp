@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_SML_UTILITY_IDENTIFIER_PARSER_HPP
-#define DOGEN_SML_UTILITY_IDENTIFIER_PARSER_HPP
+#ifndef DOGEN_SML_TYPES_IDENTIFIER_PARSER_HPP
+#define DOGEN_SML_TYPES_IDENTIFIER_PARSER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -32,7 +32,6 @@
 
 namespace dogen {
 namespace sml {
-namespace utility {
 
 class identifier_parser {
 public:
@@ -66,6 +65,6 @@ private:
     const std::string model_name_;
 };
 
-} } }
+} }
 
 #endif

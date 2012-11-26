@@ -34,7 +34,6 @@ auto lg(logger_factory("nested_qualified_name_builder"));
 
 namespace dogen {
 namespace sml {
-namespace utility {
 
 nested_qualified_name_builder::nested_qualified_name_builder(
     const std::unordered_set<std::string>& packages,
@@ -153,4 +152,4 @@ nested_qualified_name nested_qualified_name_builder::build() {
     return r;
 }
 
-} } }
+} }

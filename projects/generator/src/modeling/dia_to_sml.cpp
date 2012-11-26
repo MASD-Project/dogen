@@ -87,8 +87,7 @@ dia_to_sml(const dia::diagram& diagram, const std::string& model_name,
     : diagram_(diagram),
       model_name_(model_name),
       external_package_path_(
-          sml::utility::identifier_parser::parse_scoped_name(
-              external_package_path)),
+          sml::identifier_parser::parse_scoped_name(external_package_path)),
       is_target_(is_target),
       verbose_(verbose),
       package_transformer_(model_name_, external_package_path_, verbose_),

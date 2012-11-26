@@ -39,7 +39,7 @@ const char* delimiter = "::";
 const std::string error_msg("Failed to parse string: ");
 using namespace boost::spirit;
 
-using dogen::sml::utility::nested_qualified_name_builder;
+using dogen::sml::nested_qualified_name_builder;
 
 template<typename Iterator>
 struct grammar : qi::grammar<Iterator> {
@@ -138,7 +138,6 @@ struct grammar : qi::grammar<Iterator> {
 
 namespace dogen {
 namespace sml {
-namespace utility {
 
 identifier_parser::
 identifier_parser(const std::unordered_set<std::string>& packages,
@@ -174,4 +173,4 @@ identifier_parser::parse_scoped_name(const std::string& n) {
     return r;
 }
 
-} } }
+} }
