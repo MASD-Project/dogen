@@ -11,6 +11,15 @@ This file contains all stories that haven't been assigned to a sprint.
 
 Stories that we intend to look at, at some point.
 
+*** Add support for references to types
+
+At present its not possible to create a type that has a reference to
+another type. This should be a case of updating the parser to cope
+with references and adding reference to property or nested type
+name. This would be a good time to inspect our support for raw
+pointers, it probably suffers from exactly the same problem and
+requires the same solution.
+
 *** Add support for default values
 
 It would be nice to be able to add a default value in dia and have it
