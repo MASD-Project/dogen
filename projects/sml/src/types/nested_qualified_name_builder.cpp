@@ -57,14 +57,16 @@ void nested_qualified_name_builder::add_name(const std::string& n) {
 
 void nested_qualified_name_builder::add_primitive(const std::string& n) {
     BOOST_LOG_SEV(lg, debug) << "pushing back primitive :" << n;
-    current_->data.type_name(n);
+    auto qn(current_->data());
+    qn.type_name(n);
+    current_->data(qn);
 }
 
 void nested_qualified_name_builder::finish_current_node() {
     BOOST_LOG_SEV(lg, debug) << "finishing current node. names: "
                              << names_;
 
-    qualified_name& qn(current_->data);
+    qualified_name qn(current_->data());
     if (names_.empty())
         return;
 
@@ -72,6 +74,7 @@ void nested_qualified_name_builder::finish_current_node() {
         qn.type_name(names_.front());
         names_.clear();
         BOOST_LOG_SEV(lg, debug) << "type name: " << qn.type_name();
+        current_->data(qn);
         return;
     }
 
@@ -93,15 +96,18 @@ void nested_qualified_name_builder::finish_current_node() {
     BOOST_LOG_SEV(lg, debug) << "package path: " << qn.package_path();
 
     names_.clear();
+    current_->data(qn);
 }
 
 void nested_qualified_name_builder::start_children() {
     BOOST_LOG_SEV(lg, debug) << "starting children";
 
     finish_current_node();
-    std::shared_ptr<node> tmp(new node);
-    tmp->parent = current_;
-    current_->children.push_back(tmp);
+    boost::shared_ptr<node> tmp(new node);
+    tmp->parent(current_);
+    auto c(current_->children());
+    c.push_back(tmp);
+    current_->children(c);
     current_ = tmp;
 }
 
@@ -109,10 +115,13 @@ void nested_qualified_name_builder::next_child() {
     BOOST_LOG_SEV(lg, debug) << "next child";
 
     finish_current_node();
-    current_ = current_->parent;
-    std::shared_ptr<node> tmp(new node);
-    tmp->parent = current_;
-    current_->children.push_back(tmp);
+    current_ = current_->parent();
+    boost::shared_ptr<node> tmp(new node);
+    tmp->parent(current_);
+
+    auto c(current_->children());
+    c.push_back(tmp);
+    current_->children(c);
     current_ = tmp;
 }
 
@@ -120,19 +129,19 @@ void nested_qualified_name_builder::end_children() {
     BOOST_LOG_SEV(lg, debug) << "ending children";
 
     finish_current_node();
-    current_ = current_->parent;
+    current_ = current_->parent();
 }
 
 void nested_qualified_name_builder::
-build_node(nested_qualified_name& qn, std::shared_ptr<node> node) {
+build_node(nested_qualified_name& qn, boost::shared_ptr<node> node) {
     BOOST_LOG_SEV(lg, debug) << "bulding node: "
-                             << node->data.model_name()
+                             << node->data().model_name()
                              << " "
-                             << node->data.type_name();
+                             << node->data().type_name();
 
-    qn.type(node->data);
+    qn.type(node->data());
     std::list<nested_qualified_name> children;
-    for (const auto c : node->children) {
+    for (const auto c : node->children()) {
         nested_qualified_name cqn;
         build_node(cqn, c);
         children.push_back(cqn);

@@ -27,22 +27,16 @@
 
 #include <list>
 #include <string>
-#include <memory>
 #include <unordered_set>
+#include <boost/shared_ptr.hpp>
 #include "dogen/sml/types/qualified_name.hpp"
 #include "dogen/sml/types/nested_qualified_name.hpp"
+#include "dogen/sml/types/node.hpp"
 
 namespace dogen {
 namespace sml {
 
 class nested_qualified_name_builder {
-private:
-    struct node {
-        std::shared_ptr<node> parent;
-        qualified_name data;
-        std::list<std::shared_ptr<node> > children;
-    };
-
 public:
     nested_qualified_name_builder() = delete;
     nested_qualified_name_builder(
@@ -59,7 +53,7 @@ public:
 
 private:
     void finish_current_node();
-    void build_node(nested_qualified_name& qn, std::shared_ptr<node> node);
+    void build_node(nested_qualified_name& qn, boost::shared_ptr<node> node);
 
 public:
     void add_name(const std::string& n);
@@ -74,8 +68,8 @@ private:
     const std::list<std::string> external_package_path_;
     const std::string model_name_;
     std::list<std::string> names_;
-    std::shared_ptr<node> root_;
-    std::shared_ptr<node> current_;
+    boost::shared_ptr<node> root_;
+    boost::shared_ptr<node> current_;
 };
 
 } }

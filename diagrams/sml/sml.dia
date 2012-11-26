@@ -7654,13 +7654,13 @@ off of them.#</dia:string>
         <dia:point val="80.1251,26.1712"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="80.0751,26.1212;97.6151,30.6212"/>
+        <dia:rectangle val="80.0751,26.1212;98.3851,30.6212"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="80.1251,26.1712"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="17.440000000000001"/>
+        <dia:real val="18.210000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="4.4000000000000004"/>
@@ -7804,7 +7804,7 @@ off of them.#</dia:string>
             <dia:string>#children#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::list&lt;std::shared_ptr&lt;node&gt;&gt; #</dia:string>
+            <dia:string>#std::list&lt;boost::shared_ptr&lt;node&gt;&gt; #</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -7938,17 +7938,17 @@ off of them.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="88.8451,30.5712"/>
+        <dia:point val="89.2301,30.5712"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="78.2138,30.5212;89.0451,41.3657"/>
+        <dia:rectangle val="78.2138,30.5212;89.4301,41.3657"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="88.8451,30.5712"/>
-        <dia:point val="88.8451,36.0931"/>
+        <dia:point val="89.2301,30.5712"/>
+        <dia:point val="89.2301,36.0931"/>
         <dia:point val="78.9638,36.0931"/>
         <dia:point val="78.9638,39.7657"/>
       </dia:attribute>
