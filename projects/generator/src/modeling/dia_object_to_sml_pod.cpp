@@ -45,7 +45,7 @@
 #include "dogen/dia/io/diagram_io.hpp"
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/generator/modeling/transformation_error.hpp"
-#include "dogen/sml/utility/identifier_parser.hpp"
+#include "dogen/sml/types/identifier_parser.hpp"
 #include "dogen/utility/io/unordered_map_io.hpp"
 #include "dogen/utility/io/list_io.hpp"
 #include "dogen/generator/modeling/dia_object_to_sml_pod.hpp"

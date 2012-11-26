@@ -22,7 +22,7 @@
 #include "dogen/utility/io/unordered_set_io.hpp"
 #include "dogen/utility/io/list_io.hpp"
 #include "dogen/sml/io/nested_qualified_name_io.hpp"
-#include "dogen/sml/utility/nested_qualified_name_builder.hpp"
+#include "dogen/sml/types/nested_qualified_name_builder.hpp"
 
 using namespace dogen::utility::log;
 
