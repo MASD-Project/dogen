@@ -33,7 +33,7 @@
 #include "dogen/sml/io/property_io.hpp"
 #include "dogen/sml/io/pod_io.hpp"
 #include "dogen/sml/io/model_io.hpp"
-#include "dogen/sml/utility/merger.hpp"
+#include "dogen/sml/types/merger.hpp"
 
 using namespace dogen::utility::log;
 

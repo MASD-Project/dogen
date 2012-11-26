@@ -19,7 +19,7 @@
  *
  */
 #include <boost/filesystem.hpp>
-#include "dogen/sml/utility/merger.hpp"
+#include "dogen/sml/types/merger.hpp"
 #include "dogen/generator/modeling/dia_to_sml.hpp"
 #include "dogen/utility/exception/invalid_enum_value.hpp"
 #include "dogen/utility/serialization/xml_helper.hpp"

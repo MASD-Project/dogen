@@ -29,7 +29,7 @@
 #include "dogen/sml/io/qualified_name_io.hpp"
 #include "dogen/sml/types/merging_error.hpp"
 #include "dogen/sml/utility/identifier_parser.hpp"
-#include "dogen/sml/utility/merger.hpp"
+#include "dogen/sml/types/merger.hpp"
 #include "dogen/utility/test/exception_checkers.hpp"
 
 using dogen::utility::test::asserter;
