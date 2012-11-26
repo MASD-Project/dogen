@@ -42,6 +42,8 @@ const std::string shared_ptr_name("shared_ptr");
 const std::string unique_ptr_name("unique_ptr");
 const std::string weak_ptr_name("weak_ptr");
 
+const std::string function_name("function");
+
 const std::string int8_t_name("int8_t");
 const std::string int16_t_name("int16_t");
 const std::string int32_t_name("int32_t");
@@ -127,6 +129,8 @@ model std_model_factory::create() {
     pi(shared_ptr_name, pod_types::smart_pointer);
     pi(weak_ptr_name, pod_types::smart_pointer);
     pi(unique_ptr_name, pod_types::smart_pointer);
+
+    pi(function_name, pod_types::value);
 
     model r;
     r.name(model_name);
