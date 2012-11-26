@@ -31,3 +31,4 @@
 #include "dogen/std_model/types/derived.hpp"
 #include "dogen/std_model/types/pkg1/class_c.hpp"
 #include "dogen/std_model/types/primitives.hpp"
+#include "dogen/std_model/types/some_service.hpp"

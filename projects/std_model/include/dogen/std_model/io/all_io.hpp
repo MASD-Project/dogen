@@ -31,3 +31,4 @@
 #include "dogen/std_model/io/derived_io.hpp"
 #include "dogen/std_model/io/pkg1/class_c_io.hpp"
 #include "dogen/std_model/io/primitives_io.hpp"
+#include "dogen/std_model/io/some_service_io.hpp"
