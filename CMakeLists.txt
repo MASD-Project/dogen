@@ -221,21 +221,13 @@ if(DOXYGEN_FOUND)
         WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
         COMMENT "Generating API documentation with Doxygen" VERBATIM)
 
-    set(server "kitanda.linkpc.net")
-    set(remote_site "/Users/git/Repositories/website/org/doxygen/dogen")
-    set(remote_file "git@${server}:${remote_site}")
-
+    set(target_dir "/usr/share/cdash/doxygen/dogen")
     add_custom_target(deploy_doxy
-        COMMAND ${ssh_executable} git@${server} 'rm -rf ${remote_site}.new
-        /tmp/dogen_doxygen.tgz && mkdir ${remote_site}.new'
-        COMMAND tar -C ${stage_doxygen_dir} -zcf ${stage_dir}/dogen_doxygen.tgz .
-        COMMAND ${scp_executable} ${stage_dir}/dogen_doxygen.tgz
-        git@${server}:/tmp/dogen_doxygen.tgz
-        COMMAND ${ssh_executable} git@${server} 'tar -C ${remote_site}.new/
-        -zxf /tmp/dogen_doxygen.tgz'
-        COMMAND ${ssh_executable} git@${server} 'mv ${remote_site} ${remote_site}.old'
-        COMMAND ${ssh_executable} git@${server} 'mv ${remote_site}.new ${remote_site}'
-        COMMAND ${ssh_executable} git@${server} 'rm -rf ${remote_site}.old'
+        COMMAND rm -rf ${target_dir}.new
+        COMMAND mkdir ${target_dir}.new
+        COMMAND cp -r ${stage_dir}/doxygen/html ${target_dir}.new/
+        COMMAND rm -rf ${target_dir}
+        COMMAND mv ${target_dir}.new ${target_dir}
         )
     add_dependencies(deploy_doxy doxy)
 
