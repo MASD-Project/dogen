@@ -1,0 +1,1 @@
+namespace { void dumm_function() { } }

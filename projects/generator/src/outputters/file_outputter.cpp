@@ -21,6 +21,7 @@
 #include <iostream>
 #include <boost/filesystem.hpp>
 #include <boost/filesystem/fstream.hpp>
+#include <boost/algorithm/string/predicate.hpp>
 #include "dogen/utility/filesystem/file.hpp"
 #include "dogen/utility/exception/utility_exception.hpp"
 #include "dogen/utility/log/logger.hpp"
@@ -42,6 +43,8 @@ const std::string created_target_dir_message("Created target directory: ");
 
 const std::string error_generating_files("error generating file: ");
 const std::string path_size_warning("Full path exceeds 255 bytes.");
+
+const std::string hacked_contents("namespace { void dumm_function() { } }");
 
 }
 
@@ -114,7 +117,12 @@ void file_outputter::to_file(outputter::value_entry_type value) const {
         if (contents.empty()) {
             if (!boost::filesystem::exists(path)) {
                 log_wrote_file(path.string());
-                write_file_content(path, contents);
+
+                // FIXME: hack to deal with ranlib warnings on OSX
+                if (boost::ends_with(path.string(), ".cpp"))
+                    write_file_content(path, hacked_contents);
+                else
+                    write_file_content(path, contents);
             } else
                 log_not_writing_file(path.string());
             return;
