@@ -121,8 +121,6 @@ foreach(hpp_file ${all_hpp_files})
     if(NOT ignore_file)
         set(input_filename ${CMAKE_SOURCE_DIR}/${header_validation_template})
         set(output_filename "${CMAKE_BINARY_DIR}/${hpp_file}_hv.cpp")
-        set(DUMMY_FUNCTION "")
-        string(REGEX REPLACE "\\." "_" DUMMY_FUNCTION "dummy_${file_counter}")
         set(header_validation_target ${CMAKE_SOURCE_DIR}/${hpp_file})
         configure_file(${input_filename} ${output_filename})
         set(header_validation_files

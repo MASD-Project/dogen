@@ -26,4 +26,4 @@
 #include "${header_validation_target}"
 
 // dummy function to suppress ranlib warnings
-void ${DUMMY_FUNCTION}() { }
+namespace { void dumm_function() { } }
