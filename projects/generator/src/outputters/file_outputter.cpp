@@ -44,7 +44,25 @@ const std::string created_target_dir_message("Created target directory: ");
 const std::string error_generating_files("error generating file: ");
 const std::string path_size_warning("Full path exceeds 255 bytes.");
 
-const std::string hacked_contents("namespace { void dumm_function() { } }");
+std::string create_hacked_contents() {
+    std::ostringstream ss;
+
+    ss << "// clang pragmas to ignore dummy function" << std::endl
+       << "#if __clang__" << std::endl
+       << "#pragma clang diagnostic push" << std::endl
+       << "#pragma clang diagnostic ignored \"-Wunused-function\"" << std::endl
+       << "#endif" << std::endl
+       << std::endl
+       << "namespace { void dumm_function() { } }" << std::endl
+       << std::endl
+       << "#if __clang__" << std::endl
+       << "#pragma clang diagnostic pop" << std::endl
+       << "#endif" << std::endl;
+
+    return ss.str();
+}
+
+const std::string hacked_contents(create_hacked_contents());
 
 }
 
