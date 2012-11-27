@@ -44,25 +44,15 @@ const std::string created_target_dir_message("Created target directory: ");
 const std::string error_generating_files("error generating file: ");
 const std::string path_size_warning("Full path exceeds 255 bytes.");
 
-std::string create_hacked_contents() {
+std::string create_hacked_contents(const std::string file_name) {
     std::ostringstream ss;
 
-    ss << "// clang pragmas to ignore dummy function" << std::endl
-       << "#if __clang__" << std::endl
-       << "#pragma clang diagnostic push" << std::endl
-       << "#pragma clang diagnostic ignored \"-Wunused-function\"" << std::endl
-       << "#endif" << std::endl
-       << std::endl
-       << "namespace { void dumm_function() { } }" << std::endl
-       << std::endl
-       << "#if __clang__" << std::endl
-       << "#pragma clang diagnostic pop" << std::endl
-       << "#endif" << std::endl;
+    ss << "// dummy function to suppress ranlib warnings" << std::endl
+       << "void " << file_name << "() { }"
+       << std::endl;
 
     return ss.str();
 }
-
-const std::string hacked_contents(create_hacked_contents());
 
 }
 
@@ -133,12 +123,15 @@ void file_outputter::to_file(outputter::value_entry_type value) const {
 
         using dogen::utility::filesystem::write_file_content;
         if (contents.empty()) {
+            // FIXME: massive hack that always regenerates for now
+            // FIXME: until the warnings are fixed
             // if (!boost::filesystem::exists(path)) {
                 log_wrote_file(path.string());
 
-                // FIXME: hack to deal with ranlib warnings on OSX
+                // FIXME: massive hack to deal with ranlib warnings on OSX
+                const auto hc(create_hacked_contents(path.stem().string()));
                 if (boost::ends_with(path.string(), ".cpp"))
-                    write_file_content(path, hacked_contents);
+                    write_file_content(path, hc);
                 else
                     write_file_content(path, contents);
             // } else
