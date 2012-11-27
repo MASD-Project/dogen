@@ -11,6 +11,12 @@ This file contains all stories that haven't been assigned to a sprint.
 
 Stories that we intend to look at, at some point.
 
+*** Remove legacy database code
+
+We still have the old database implementation in dogen, forcing us to
+setup postgres to run tests. It will be superseded by odb so we should
+remove it to make setup easier.
+
 *** Add support for =std::function= in services
 
 At present its not possible to declare an attribute of type
