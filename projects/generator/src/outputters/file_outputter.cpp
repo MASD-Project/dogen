@@ -123,9 +123,7 @@ void file_outputter::to_file(outputter::value_entry_type value) const {
 
         using dogen::utility::filesystem::write_file_content;
         if (contents.empty()) {
-            // FIXME: massive hack that always regenerates for now
-            // FIXME: until the warnings are fixed
-            // if (!boost::filesystem::exists(path)) {
+            if (!boost::filesystem::exists(path)) {
                 log_wrote_file(path.string());
 
                 // FIXME: massive hack to deal with ranlib warnings on OSX
@@ -134,8 +132,8 @@ void file_outputter::to_file(outputter::value_entry_type value) const {
                     write_file_content(path, hc);
                 else
                     write_file_content(path, contents);
-            // } else
-            //     log_not_writing_file(path.string());
+            } else
+                log_not_writing_file(path.string());
             return;
         }
 
