@@ -310,7 +310,7 @@ void cpp_class_declaration::to_stream(const class_view_model& vm) {
 }
 
 void cpp_class_declaration::swap_and_assignment(const class_view_model& vm) {
-    if (vm.all_properties().empty())
+    if (vm.all_properties().empty() && !vm.is_parent())
         return;
 
     // swap is only public in leaf classes - MEC++-33

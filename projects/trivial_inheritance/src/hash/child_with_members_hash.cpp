@@ -18,36 +18,30 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/trivial_inheritance/types/parent_outside_versioned_key.hpp"
+#include "dogen/trivial_inheritance/hash/child_with_members_hash.hpp"
+#include "dogen/trivial_inheritance/hash/parent_without_members_hash.hpp"
+
+namespace {
+
+template <typename HashableType>
+inline void combine(std::size_t& seed, const HashableType& value)
+{
+    std::hash<HashableType> hasher;
+    seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
+}
+
+}
 
 namespace dogen {
 namespace trivial_inheritance {
 
-parent_outside_versioned_key::parent_outside_versioned_key()
-    : id_(static_cast<unsigned int>(0)),
-      version_(static_cast<unsigned int>(0)) { }
+std::size_t child_with_members_hasher::hash(const child_with_members&v) {
+    std::size_t seed(0);
 
-parent_outside_versioned_key::parent_outside_versioned_key(
-    const unsigned int id,
-    const unsigned int version)
-    : id_(id),
-      version_(version) { }
+    combine(seed, dynamic_cast<const dogen::trivial_inheritance::parent_without_members&>(v));
 
-void parent_outside_versioned_key::swap(parent_outside_versioned_key& other) noexcept {
-    using std::swap;
-    swap(id_, other.id_);
-    swap(version_, other.version_);
-}
-
-bool parent_outside_versioned_key::operator==(const parent_outside_versioned_key& rhs) const {
-    return id_ == rhs.id_ &&
-        version_ == rhs.version_;
-}
-
-parent_outside_versioned_key& parent_outside_versioned_key::operator=(parent_outside_versioned_key other) {
-    using std::swap;
-    swap(*this, other);
-    return *this;
+    combine(seed, v.prop_0());
+    return seed;
 }
 
 } }

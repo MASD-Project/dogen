@@ -18,18 +18,16 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_TRIVIAL_INHERITANCE_TYPES_PARENT_WITHOUT_MEMBERS_VERSIONED_KEY_FWD_HPP
-#define DOGEN_TRIVIAL_INHERITANCE_TYPES_PARENT_WITHOUT_MEMBERS_VERSIONED_KEY_FWD_HPP
-
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
+#include <ostream>
+#include "dogen/trivial_inheritance/io/child_with_members_io.hpp"
+#include "dogen/trivial_inheritance/io/parent_without_members_io.hpp"
 
 namespace dogen {
 namespace trivial_inheritance {
 
-class parent_without_members_versioned_key;
+std::ostream& operator<<(std::ostream& s, const child_with_members& v) {
+    v.to_stream(s);
+    return(s);
+}
 
 } }
-
-#endif

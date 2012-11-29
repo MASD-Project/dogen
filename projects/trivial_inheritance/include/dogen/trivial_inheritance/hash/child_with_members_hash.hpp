@@ -18,18 +18,35 @@
  * MA 02110-1301, USA.
  *
  */
-#include <ostream>
-#include "dogen/trivial_inheritance/io/parent_without_members_unversioned_key_io.hpp"
+#ifndef DOGEN_TRIVIAL_INHERITANCE_HASH_CHILD_WITH_MEMBERS_HASH_HPP
+#define DOGEN_TRIVIAL_INHERITANCE_HASH_CHILD_WITH_MEMBERS_HASH_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include <functional>
+#include "dogen/trivial_inheritance/types/child_with_members.hpp"
 
 namespace dogen {
 namespace trivial_inheritance {
 
-std::ostream& operator<<(std::ostream& s, const parent_without_members_unversioned_key& v) {
-    s << " { "
-      << "\"__type__\": " << "\"dogen::trivial_inheritance::parent_without_members_unversioned_key\"" << ", "
-      << "\"id\": " << v.id()
-      << " }";
-    return(s);
-}
+class child_with_members_hasher {
+public:
+    static std::size_t hash(const child_with_members& v);
+};
 
 } }
+
+namespace std {
+
+template<>
+class hash<dogen::trivial_inheritance::child_with_members> {
+public:
+    size_t operator()(const dogen::trivial_inheritance::child_with_members& v) const {
+        return dogen::trivial_inheritance::child_with_members_hasher::hash(v);
+    }
+};
+
+}
+#endif

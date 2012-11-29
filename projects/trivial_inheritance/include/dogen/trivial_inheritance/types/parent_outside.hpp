@@ -28,21 +28,22 @@
 #include <algorithm>
 #include <iosfwd>
 #include "dogen/trivial_inheritance/serialization/parent_outside_fwd_ser.hpp"
-#include "dogen/trivial_inheritance/types/parent_outside_versioned_key.hpp"
 
 namespace dogen {
 namespace trivial_inheritance {
 
 class parent_outside {
 public:
-    parent_outside() = default;
     parent_outside(const parent_outside&) = default;
     parent_outside(parent_outside&&) = default;
+
+public:
+    parent_outside();
 
     virtual ~parent_outside() noexcept = 0;
 
 public:
-    explicit parent_outside(const dogen::trivial_inheritance::parent_outside_versioned_key& versioned_key);
+    explicit parent_outside(const int prop_0);
 
 private:
     template<typename Archive>
@@ -55,12 +56,12 @@ public:
     virtual void to_stream(std::ostream& s) const;
 
 public:
-    dogen::trivial_inheritance::parent_outside_versioned_key versioned_key() const {
-        return versioned_key_;
+    int prop_0() const {
+        return prop_0_;
     }
 
-    void versioned_key(const dogen::trivial_inheritance::parent_outside_versioned_key& v) {
-        versioned_key_ = v;
+    void prop_0(const int v) {
+        prop_0_ = v;
     }
 
 protected:
@@ -72,7 +73,7 @@ protected:
     void swap(parent_outside& other) noexcept;
 
 private:
-    dogen::trivial_inheritance::parent_outside_versioned_key versioned_key_;
+    int prop_0_;
 };
 
 inline parent_outside::~parent_outside() noexcept { }

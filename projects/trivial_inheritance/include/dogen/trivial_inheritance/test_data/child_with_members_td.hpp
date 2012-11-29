@@ -18,17 +18,35 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_TRIVIAL_INHERITANCE_TYPES_PARENT_OUTSIDE_UNVERSIONED_KEY_FWD_HPP
-#define DOGEN_TRIVIAL_INHERITANCE_TYPES_PARENT_OUTSIDE_UNVERSIONED_KEY_FWD_HPP
+#ifndef DOGEN_TRIVIAL_INHERITANCE_TEST_DATA_CHILD_WITH_MEMBERS_TD_HPP
+#define DOGEN_TRIVIAL_INHERITANCE_TEST_DATA_CHILD_WITH_MEMBERS_TD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
+#include "dogen/trivial_inheritance/types/child_with_members.hpp"
+
 namespace dogen {
 namespace trivial_inheritance {
 
-class parent_outside_unversioned_key;
+class child_with_members_generator {
+public:
+    child_with_members_generator();
+
+public:
+    typedef dogen::trivial_inheritance::child_with_members result_type;
+
+public:
+    static void populate(const unsigned int position, result_type& v);
+    static result_type create(const unsigned int position);
+    result_type operator()();
+
+private:
+    unsigned int position_;
+public:
+    static result_type* create_ptr(const unsigned int position);
+};
 
 } }
 

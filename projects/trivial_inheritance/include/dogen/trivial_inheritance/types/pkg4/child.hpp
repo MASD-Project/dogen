@@ -36,12 +36,16 @@ namespace pkg4 {
 
 class child final : public dogen::trivial_inheritance::parent_outside {
 public:
-    child() = default;
     child(const child&) = default;
     child(child&&) = default;
 
 public:
-    explicit child(const dogen::trivial_inheritance::parent_outside_versioned_key& versioned_key);
+    child();
+
+public:
+    child(
+        const int prop_0,
+        const int prop_1);
 
 private:
     template<typename Archive>
@@ -52,6 +56,15 @@ private:
 
 public:
     void to_stream(std::ostream& s) const override;
+
+public:
+    int prop_1() const {
+        return prop_1_;
+    }
+
+    void prop_1(const int v) {
+        prop_1_ = v;
+    }
 
 public:
     bool operator==(const child& rhs) const;
@@ -66,6 +79,8 @@ public:
     void swap(child& other) noexcept;
     child& operator=(child other);
 
+private:
+    int prop_1_;
 };
 
 } } }

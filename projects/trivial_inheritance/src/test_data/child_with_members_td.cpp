@@ -18,7 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/trivial_inheritance/test_data/parent_without_members_unversioned_key_td.hpp"
+#include "dogen/trivial_inheritance/test_data/child_with_members_td.hpp"
+#include "dogen/trivial_inheritance/test_data/parent_without_members_td.hpp"
 
 namespace {
 
@@ -31,28 +32,29 @@ unsigned int create_unsigned_int(const unsigned int position) {
 namespace dogen {
 namespace trivial_inheritance {
 
-parent_without_members_unversioned_key_generator::parent_without_members_unversioned_key_generator() : position_(0) { }
+child_with_members_generator::child_with_members_generator() : position_(0) { }
 
-void parent_without_members_unversioned_key_generator::
+void child_with_members_generator::
 populate(const unsigned int position, result_type& v) {
-    v.id(create_unsigned_int(position + 0));
+    v.prop_0(create_unsigned_int(position + 0));
 }
 
-parent_without_members_unversioned_key_generator::result_type
-parent_without_members_unversioned_key_generator::create(const unsigned int position) {
-    parent_without_members_unversioned_key r;
-    parent_without_members_unversioned_key_generator::populate(position, r);
+child_with_members_generator::result_type
+child_with_members_generator::create(const unsigned int position) {
+    child_with_members r;
+    dogen::trivial_inheritance::parent_without_members_generator::populate(position, r);
+    child_with_members_generator::populate(position, r);
     return r;
 }
-parent_without_members_unversioned_key_generator::result_type*
-parent_without_members_unversioned_key_generator::create_ptr(const unsigned int position) {
-    parent_without_members_unversioned_key* p = new parent_without_members_unversioned_key();
-    parent_without_members_unversioned_key_generator::populate(position, *p);
+child_with_members_generator::result_type*
+child_with_members_generator::create_ptr(const unsigned int position) {
+    child_with_members* p = new child_with_members();
+    child_with_members_generator::populate(position, *p);
     return p;
 }
 
-parent_without_members_unversioned_key_generator::result_type
-parent_without_members_unversioned_key_generator::operator()() {
+child_with_members_generator::result_type
+child_with_members_generator::operator()() {
     return create(position_++);
 }
 

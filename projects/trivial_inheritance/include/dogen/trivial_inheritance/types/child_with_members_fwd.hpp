@@ -18,23 +18,17 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_TRIVIAL_INHERITANCE_SERIALIZATION_PARENT_OUTSIDE_VERSIONED_KEY_FWD_SER_HPP
-#define DOGEN_TRIVIAL_INHERITANCE_SERIALIZATION_PARENT_OUTSIDE_VERSIONED_KEY_FWD_SER_HPP
+#ifndef DOGEN_TRIVIAL_INHERITANCE_TYPES_CHILD_WITH_MEMBERS_FWD_HPP
+#define DOGEN_TRIVIAL_INHERITANCE_TYPES_CHILD_WITH_MEMBERS_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/trivial_inheritance/types/parent_outside_versioned_key_fwd.hpp"
+namespace dogen {
+namespace trivial_inheritance {
 
-namespace boost {
-namespace serialization {
-
-template<class Archive>
-void save(Archive& ar, const dogen::trivial_inheritance::parent_outside_versioned_key& v, unsigned int version);
-
-template<class Archive>
-void load(Archive& ar, dogen::trivial_inheritance::parent_outside_versioned_key& v, unsigned int version);
+class child_with_members;
 
 } }
 

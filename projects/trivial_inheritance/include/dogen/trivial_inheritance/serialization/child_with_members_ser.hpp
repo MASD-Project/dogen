@@ -18,22 +18,36 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_TRIVIAL_INHERITANCE_IO_PARENT_WITHOUT_MEMBERS_UNVERSIONED_KEY_IO_HPP
-#define DOGEN_TRIVIAL_INHERITANCE_IO_PARENT_WITHOUT_MEMBERS_UNVERSIONED_KEY_IO_HPP
+#ifndef DOGEN_TRIVIAL_INHERITANCE_SERIALIZATION_CHILD_WITH_MEMBERS_SER_HPP
+#define DOGEN_TRIVIAL_INHERITANCE_SERIALIZATION_CHILD_WITH_MEMBERS_SER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <iosfwd>
-#include "dogen/trivial_inheritance/types/parent_without_members_unversioned_key.hpp"
+#include <boost/serialization/split_free.hpp>
+#include <boost/type_traits/is_virtual_base_of.hpp>
+#include "dogen/trivial_inheritance/types/child_with_members.hpp"
 
-namespace dogen {
-namespace trivial_inheritance {
+namespace boost {
 
-std::ostream&
-operator<<(std::ostream& s,
-     const dogen::trivial_inheritance::parent_without_members_unversioned_key& v);
+template<>struct
+is_virtual_base_of<
+    dogen::trivial_inheritance::parent_without_members,
+    dogen::trivial_inheritance::child_with_members
+> : public mpl::true_ {};
+
+}
+
+BOOST_SERIALIZATION_SPLIT_FREE(dogen::trivial_inheritance::child_with_members)
+namespace boost {
+namespace serialization {
+
+template<typename Archive>
+void save(Archive& ar, const dogen::trivial_inheritance::child_with_members& v, unsigned int version);
+
+template<typename Archive>
+void load(Archive& ar, dogen::trivial_inheritance::child_with_members& v, unsigned int version);
 
 } }
 

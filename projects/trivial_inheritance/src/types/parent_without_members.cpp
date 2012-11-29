@@ -19,29 +19,21 @@
  *
  */
 #include <ostream>
-#include "dogen/trivial_inheritance/io/parent_without_members_versioned_key_io.hpp"
 #include "dogen/trivial_inheritance/types/parent_without_members.hpp"
 
 namespace dogen {
 namespace trivial_inheritance {
 
-parent_without_members::parent_without_members(const dogen::trivial_inheritance::parent_without_members_versioned_key& versioned_key)
-    : versioned_key_(versioned_key) { }
-
 void parent_without_members::to_stream(std::ostream& s) const {
     s << " { "
-      << "\"__type__\": " << "\"dogen::trivial_inheritance::parent_without_members\"" << ", "
-      << "\"versioned_key\": " << versioned_key_
-      << " }";
+      << "\"__type__\": " << "\"dogen::trivial_inheritance::parent_without_members\"" << " }";
 }
 
-void parent_without_members::swap(parent_without_members& other) noexcept {
-    using std::swap;
-    swap(versioned_key_, other.versioned_key_);
+void parent_without_members::swap(parent_without_members&) noexcept {
 }
 
-bool parent_without_members::compare(const parent_without_members& rhs) const {
-    return versioned_key_ == rhs.versioned_key_;
+bool parent_without_members::compare(const parent_without_members& /*rhs*/) const {
+    return true;
 }
 
 } }

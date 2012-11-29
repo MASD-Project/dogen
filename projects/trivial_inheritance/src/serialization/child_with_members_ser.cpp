@@ -28,7 +28,6 @@
 #include <boost/archive/xml_oarchive.hpp>
 #include <boost/serialization/nvp.hpp>
 #include "dogen/trivial_inheritance/serialization/child_with_members_ser.hpp"
-#include "dogen/trivial_inheritance/serialization/child_without_members_ser.hpp"
 #include "dogen/trivial_inheritance/serialization/parent_without_members_ser.hpp"
 
 #ifdef __linux__
@@ -37,22 +36,28 @@
 #endif
 
 BOOST_CLASS_TRACKING(
-    dogen::trivial_inheritance::parent_without_members,
+    dogen::trivial_inheritance::child_with_members,
     boost::serialization::track_selectively)
 
 namespace boost {
 namespace serialization {
 
 template<typename Archive>
-void save(Archive& /*ar*/,
-    const dogen::trivial_inheritance::parent_without_members& /*v*/,
+void save(Archive& ar,
+    const dogen::trivial_inheritance::child_with_members& v,
     const unsigned int /*version*/) {
+    ar << make_nvp("parent_without_members", base_object<dogen::trivial_inheritance::parent_without_members>(v));
+
+    ar << make_nvp("prop_0", v.prop_0_);
 }
 
 template<typename Archive>
-void load(Archive& /*ar*/,
-    dogen::trivial_inheritance::parent_without_members& /*v*/,
+void load(Archive& ar,
+    dogen::trivial_inheritance::child_with_members& v,
     const unsigned int /*version*/) {
+    ar >> make_nvp("parent_without_members", base_object<dogen::trivial_inheritance::parent_without_members>(v));
+
+    ar >> make_nvp("prop_0", v.prop_0_);
 }
 
 } }
@@ -60,21 +65,21 @@ void load(Archive& /*ar*/,
 namespace boost {
 namespace serialization {
 
-template void save(archive::polymorphic_oarchive& ar, const dogen::trivial_inheritance::parent_without_members& v, unsigned int version);
-template void load(archive::polymorphic_iarchive& ar, dogen::trivial_inheritance::parent_without_members& v, unsigned int version);
+template void save(archive::polymorphic_oarchive& ar, const dogen::trivial_inheritance::child_with_members& v, unsigned int version);
+template void load(archive::polymorphic_iarchive& ar, dogen::trivial_inheritance::child_with_members& v, unsigned int version);
 
-template void save(archive::text_oarchive& ar, const dogen::trivial_inheritance::parent_without_members& v, unsigned int version);
-template void load(archive::text_iarchive& ar, dogen::trivial_inheritance::parent_without_members& v, unsigned int version);
+template void save(archive::text_oarchive& ar, const dogen::trivial_inheritance::child_with_members& v, unsigned int version);
+template void load(archive::text_iarchive& ar, dogen::trivial_inheritance::child_with_members& v, unsigned int version);
 
-template void save(archive::binary_oarchive& ar, const dogen::trivial_inheritance::parent_without_members& v, unsigned int version);
-template void load(archive::binary_iarchive& ar, dogen::trivial_inheritance::parent_without_members& v, unsigned int version);
+template void save(archive::binary_oarchive& ar, const dogen::trivial_inheritance::child_with_members& v, unsigned int version);
+template void load(archive::binary_iarchive& ar, dogen::trivial_inheritance::child_with_members& v, unsigned int version);
 
-template void save(archive::xml_oarchive& ar, const dogen::trivial_inheritance::parent_without_members& v, unsigned int version);
-template void load(archive::xml_iarchive& ar, dogen::trivial_inheritance::parent_without_members& v, unsigned int version);
+template void save(archive::xml_oarchive& ar, const dogen::trivial_inheritance::child_with_members& v, unsigned int version);
+template void load(archive::xml_iarchive& ar, dogen::trivial_inheritance::child_with_members& v, unsigned int version);
 
 #ifdef __linux__
-template void save(eos::portable_oarchive& ar, const dogen::trivial_inheritance::parent_without_members& v, unsigned int version);
-template void load(eos::portable_iarchive& ar, dogen::trivial_inheritance::parent_without_members& v, unsigned int version);
+template void save(eos::portable_oarchive& ar, const dogen::trivial_inheritance::child_with_members& v, unsigned int version);
+template void load(eos::portable_iarchive& ar, dogen::trivial_inheritance::child_with_members& v, unsigned int version);
 #endif
 
 } }

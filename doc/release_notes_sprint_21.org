@@ -176,10 +176,17 @@ them as JSON. This is a problem for SML documentation for example.
 
 While we were at it, we fixed quotes in strings too.
 
-*** COMPLETED JSON =__type__= should be fully qualified
+*** COMPLETED JSON =__type__= should be fully qualified               :story:
     CLOSED: [2012-11-24 Sat 15:21]
 
 At present the JSON =__type__= is only the class name. It should
 really be fully qualified.
+
+*** COMPLETED Empty base class causes compilation errors              :spike:
+    CLOSED: [2012-11-29 Thu 17:14]
+
+For some reason we didn't have tests for the empty base class
+scenario - they were marked as =entity=. It was actually broken, as
+found out in creris.
 
 ** Deprecated Development Stories

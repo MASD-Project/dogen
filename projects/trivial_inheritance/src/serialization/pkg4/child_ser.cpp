@@ -47,6 +47,8 @@ void save(Archive& ar,
     const dogen::trivial_inheritance::pkg4::child& v,
     const unsigned int /*version*/) {
     ar << make_nvp("parent_outside", base_object<dogen::trivial_inheritance::parent_outside>(v));
+
+    ar << make_nvp("prop_1", v.prop_1_);
 }
 
 template<typename Archive>
@@ -54,6 +56,8 @@ void load(Archive& ar,
     dogen::trivial_inheritance::pkg4::child& v,
     const unsigned int /*version*/) {
     ar >> make_nvp("parent_outside", base_object<dogen::trivial_inheritance::parent_outside>(v));
+
+    ar >> make_nvp("prop_1", v.prop_1_);
 }
 
 } }

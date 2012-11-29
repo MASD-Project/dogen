@@ -19,26 +19,17 @@
  *
  */
 #include "dogen/trivial_inheritance/hash/parent_without_members_hash.hpp"
-#include "dogen/trivial_inheritance/hash/parent_without_members_versioned_key_hash.hpp"
 
 namespace {
 
-template <typename HashableType>
-inline void combine(std::size_t& seed, const HashableType& value)
-{
-    std::hash<HashableType> hasher;
-    seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
-}
 
 }
 
 namespace dogen {
 namespace trivial_inheritance {
 
-std::size_t parent_without_members_hasher::hash(const parent_without_members&v) {
+std::size_t parent_without_members_hasher::hash(const parent_without_members&) {
     std::size_t seed(0);
-
-    combine(seed, v.versioned_key());
     return seed;
 }
 

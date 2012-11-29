@@ -44,7 +44,7 @@ BOOST_AUTO_TEST_SUITE(trivial_inheritance)
 
 BOOST_AUTO_TEST_CASE(validate_equality) {
     SETUP_TEST_LOG("validate_equality");
-    test_equality<child_without_members_generator>();
+    test_equality<child_with_members_generator>();
     test_equality<second_child_without_members_generator>();
     test_equality<child_of_a_child1_generator>();
     test_equality<child_of_a_child2_generator>();
@@ -55,7 +55,7 @@ BOOST_AUTO_TEST_CASE(validate_equality) {
 
 BOOST_AUTO_TEST_CASE(validate_serialisation) {
     SETUP_TEST_LOG("validate_serialisation");
-    rountrip_type<child_without_members_generator>();
+    rountrip_type<child_with_members_generator>();
     rountrip_type<second_child_without_members_generator>();
     rountrip_type<child_of_a_child1_generator>();
     rountrip_type<child_of_a_child2_generator>();
@@ -66,7 +66,7 @@ BOOST_AUTO_TEST_CASE(validate_serialisation) {
 
 BOOST_AUTO_TEST_CASE(validate_hashing) {
     SETUP_TEST_LOG("validate_hashing");
-    test_hashing<child_without_members_generator>();
+    test_hashing<child_with_members_generator>();
     test_hashing<second_child_without_members_generator>();
     test_hashing<child_of_a_child1_generator>();
     test_hashing<child_of_a_child2_generator>();
@@ -77,7 +77,7 @@ BOOST_AUTO_TEST_CASE(validate_hashing) {
 
 BOOST_AUTO_TEST_CASE(validate_swap) {
     SETUP_TEST_LOG("validate_hashing");
-    test_swap<child_without_members_generator>();
+    test_swap<child_with_members_generator>();
     test_swap<second_child_without_members_generator>();
     test_swap<child_of_a_child1_generator>();
     test_swap<child_of_a_child2_generator>();
@@ -88,7 +88,7 @@ BOOST_AUTO_TEST_CASE(validate_swap) {
 
 BOOST_AUTO_TEST_CASE(validate_io) {
     SETUP_TEST_LOG("validate_io");
-    test_io<child_without_members_generator>();
+    test_io<child_with_members_generator>();
     test_io<second_child_without_members_generator>();
     test_io<child_of_a_child1_generator>();
     test_io<child_of_a_child2_generator>();

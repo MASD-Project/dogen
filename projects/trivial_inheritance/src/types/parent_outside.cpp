@@ -19,29 +19,31 @@
  *
  */
 #include <ostream>
-#include "dogen/trivial_inheritance/io/parent_outside_versioned_key_io.hpp"
 #include "dogen/trivial_inheritance/types/parent_outside.hpp"
 
 namespace dogen {
 namespace trivial_inheritance {
 
-parent_outside::parent_outside(const dogen::trivial_inheritance::parent_outside_versioned_key& versioned_key)
-    : versioned_key_(versioned_key) { }
+parent_outside::parent_outside()
+    : prop_0_(static_cast<int>(0)) { }
+
+parent_outside::parent_outside(const int prop_0)
+    : prop_0_(prop_0) { }
 
 void parent_outside::to_stream(std::ostream& s) const {
     s << " { "
       << "\"__type__\": " << "\"dogen::trivial_inheritance::parent_outside\"" << ", "
-      << "\"versioned_key\": " << versioned_key_
+      << "\"prop_0\": " << prop_0_
       << " }";
 }
 
 void parent_outside::swap(parent_outside& other) noexcept {
     using std::swap;
-    swap(versioned_key_, other.versioned_key_);
+    swap(prop_0_, other.prop_0_);
 }
 
 bool parent_outside::compare(const parent_outside& rhs) const {
-    return versioned_key_ == rhs.versioned_key_;
+    return prop_0_ == rhs.prop_0_;
 }
 
 } }

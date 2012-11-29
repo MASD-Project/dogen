@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_TRIVIAL_INHERITANCE_TYPES_CHILD_WITHOUT_MEMBERS_HPP
-#define DOGEN_TRIVIAL_INHERITANCE_TYPES_CHILD_WITHOUT_MEMBERS_HPP
+#ifndef DOGEN_TRIVIAL_INHERITANCE_TYPES_CHILD_WITH_MEMBERS_HPP
+#define DOGEN_TRIVIAL_INHERITANCE_TYPES_CHILD_WITH_MEMBERS_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -27,40 +27,70 @@
 
 #include <algorithm>
 #include <iosfwd>
-#include "dogen/trivial_inheritance/serialization/child_without_members_fwd_ser.hpp"
+#include "dogen/trivial_inheritance/serialization/child_with_members_fwd_ser.hpp"
 #include "dogen/trivial_inheritance/types/parent_without_members.hpp"
 
 namespace dogen {
 namespace trivial_inheritance {
 
-class child_without_members final : public dogen::trivial_inheritance::parent_without_members {
+class child_with_members final : public dogen::trivial_inheritance::parent_without_members {
 public:
-    child_without_members() = default;
-    child_without_members(const child_without_members&) = default;
-    child_without_members(child_without_members&&) = default;
-    child_without_members& operator=(const child_without_members&) = default;
+    child_with_members(const child_with_members&) = default;
+    child_with_members(child_with_members&&) = default;
+
+public:
+    child_with_members();
+
+public:
+    explicit child_with_members(const unsigned int prop_0);
 
 private:
     template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const child_without_members& v, unsigned int version);
+    friend void boost::serialization::save(Archive& ar, const child_with_members& v, unsigned int version);
 
     template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, child_without_members& v, unsigned int version);
+    friend void boost::serialization::load(Archive& ar, child_with_members& v, unsigned int version);
 
 public:
     void to_stream(std::ostream& s) const override;
 
 public:
-    bool operator==(const child_without_members& rhs) const;
-    bool operator!=(const child_without_members& rhs) const {
+    unsigned int prop_0() const {
+        return prop_0_;
+    }
+
+    void prop_0(const unsigned int v) {
+        prop_0_ = v;
+    }
+
+public:
+    bool operator==(const child_with_members& rhs) const;
+    bool operator!=(const child_with_members& rhs) const {
         return !this->operator==(rhs);
     }
 
 public:
     bool equals(const dogen::trivial_inheritance::parent_without_members& other) const override;
 
+public:
+    void swap(child_with_members& other) noexcept;
+    child_with_members& operator=(child_with_members other);
+
+private:
+    unsigned int prop_0_;
 };
 
 } }
+
+namespace std {
+
+template<>
+inline void swap(
+    dogen::trivial_inheritance::child_with_members& lhs,
+    dogen::trivial_inheritance::child_with_members& rhs) {
+    lhs.swap(rhs);
+}
+
+}
 
 #endif

@@ -141,6 +141,7 @@ void cpp_class_implementation::complete_constructor(const class_view_model& vm) 
                 is_first = false;
             }
             stream_ << ")";
+            is_first = false;
         }
 
         for (const auto p : vm.properties()) {
@@ -176,11 +177,13 @@ void cpp_class_implementation::to_stream(const class_view_model& vm) {
 }
 
 void cpp_class_implementation::swap(const class_view_model& vm) {
-    if (vm.all_properties().empty())
+    if (vm.all_properties().empty() && !vm.is_parent())
         return;
 
+    const bool empty(vm.all_properties().empty() && vm.parents().empty());
     stream_ << indenter_ << "void " << vm.name() << "::swap("
-            << vm.name() << "& other) noexcept ";
+            << vm.name() << "&" << (empty ? "" : " other")
+            <<") noexcept ";
 
     utility_.open_scope();
     {

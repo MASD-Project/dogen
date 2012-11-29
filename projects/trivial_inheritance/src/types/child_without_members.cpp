@@ -25,9 +25,6 @@
 namespace dogen {
 namespace trivial_inheritance {
 
-child_without_members::child_without_members(const dogen::trivial_inheritance::parent_without_members_versioned_key& versioned_key)
-    : dogen::trivial_inheritance::parent_without_members(versioned_key) { }
-
 void child_without_members::to_stream(std::ostream& s) const {
     s << " { "
       << "\"__type__\": " << "\"dogen::trivial_inheritance::child_without_members\"" << ", "
@@ -36,25 +33,14 @@ void child_without_members::to_stream(std::ostream& s) const {
     s << " }";
 }
 
-void child_without_members::swap(child_without_members& other) noexcept {
-    parent_without_members::swap(other);
-
-}
-
 bool child_without_members::equals(const dogen::trivial_inheritance::parent_without_members& other) const {
     const child_without_members* const p(dynamic_cast<const child_without_members* const>(&other));
     if (!p) return false;
     return *this == *p;
 }
 
-bool child_without_members::operator==(const child_without_members& rhs) const {
-    return parent_without_members::compare(rhs);
-}
-
-child_without_members& child_without_members::operator=(child_without_members other) {
-    using std::swap;
-    swap(*this, other);
-    return *this;
+bool child_without_members::operator==(const child_without_members& /*rhs*/) const {
+    return true;
 }
 
 } }

@@ -26,20 +26,30 @@ namespace dogen {
 namespace trivial_inheritance {
 namespace pkg4 {
 
-child::child(const dogen::trivial_inheritance::parent_outside_versioned_key& versioned_key)
-    : dogen::trivial_inheritance::parent_outside(versioned_key) { }
+child::child()
+    : prop_1_(static_cast<int>(0)) { }
+
+child::child(
+    const int prop_0,
+    const int prop_1)
+    : dogen::trivial_inheritance::parent_outside(prop_0),
+      prop_1_(prop_1) { }
 
 void child::to_stream(std::ostream& s) const {
     s << " { "
       << "\"__type__\": " << "\"dogen::trivial_inheritance::pkg4::child\"" << ", "
       << "\"__parent_0__\": ";
     parent_outside::to_stream(s);
-    s << " }";
+    s << ", "
+      << "\"prop_1\": " << prop_1_
+      << " }";
 }
 
 void child::swap(child& other) noexcept {
     parent_outside::swap(other);
 
+    using std::swap;
+    swap(prop_1_, other.prop_1_);
 }
 
 bool child::equals(const dogen::trivial_inheritance::parent_outside& other) const {
@@ -49,7 +59,8 @@ bool child::equals(const dogen::trivial_inheritance::parent_outside& other) cons
 }
 
 bool child::operator==(const child& rhs) const {
-    return parent_outside::compare(rhs);
+    return parent_outside::compare(rhs) &&
+        prop_1_ == rhs.prop_1_;
 }
 
 child& child::operator=(child other) {

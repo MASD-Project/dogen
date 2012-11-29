@@ -21,7 +21,13 @@
 #include "dogen/trivial_inheritance/test_data/parent_outside_td.hpp"
 #include "dogen/trivial_inheritance/test_data/pkg4/child_td.hpp"
 
+namespace {
 
+int create_int(const unsigned int position) {
+    return position;
+}
+
+}
 
 namespace dogen {
 namespace trivial_inheritance {
@@ -30,13 +36,15 @@ namespace pkg4 {
 child_generator::child_generator() : position_(0) { }
 
 void child_generator::
-populate(const unsigned int /*position*/, result_type& /*v*/) {
+populate(const unsigned int position, result_type& v) {
+    v.prop_1(create_int(position + 0));
 }
 
 child_generator::result_type
 child_generator::create(const unsigned int position) {
     child r;
     dogen::trivial_inheritance::parent_outside_generator::populate(position, r);
+    child_generator::populate(position, r);
     return r;
 }
 child_generator::result_type*

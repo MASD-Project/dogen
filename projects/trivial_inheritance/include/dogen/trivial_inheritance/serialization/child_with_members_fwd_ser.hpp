@@ -18,23 +18,23 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_TRIVIAL_INHERITANCE_SERIALIZATION_PARENT_WITHOUT_MEMBERS_VERSIONED_KEY_FWD_SER_HPP
-#define DOGEN_TRIVIAL_INHERITANCE_SERIALIZATION_PARENT_WITHOUT_MEMBERS_VERSIONED_KEY_FWD_SER_HPP
+#ifndef DOGEN_TRIVIAL_INHERITANCE_SERIALIZATION_CHILD_WITH_MEMBERS_FWD_SER_HPP
+#define DOGEN_TRIVIAL_INHERITANCE_SERIALIZATION_CHILD_WITH_MEMBERS_FWD_SER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/trivial_inheritance/types/parent_without_members_versioned_key_fwd.hpp"
+#include "dogen/trivial_inheritance/types/child_with_members_fwd.hpp"
 
 namespace boost {
 namespace serialization {
 
 template<class Archive>
-void save(Archive& ar, const dogen::trivial_inheritance::parent_without_members_versioned_key& v, unsigned int version);
+void save(Archive& ar, const dogen::trivial_inheritance::child_with_members& v, unsigned int version);
 
 template<class Archive>
-void load(Archive& ar, dogen::trivial_inheritance::parent_without_members_versioned_key& v, unsigned int version);
+void load(Archive& ar, dogen::trivial_inheritance::child_with_members& v, unsigned int version);
 
 } }
 

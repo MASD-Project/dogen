@@ -28,7 +28,6 @@
 #include <algorithm>
 #include <iosfwd>
 #include "dogen/trivial_inheritance/serialization/parent_without_members_fwd_ser.hpp"
-#include "dogen/trivial_inheritance/types/parent_without_members_versioned_key.hpp"
 
 namespace dogen {
 namespace trivial_inheritance {
@@ -38,11 +37,9 @@ public:
     parent_without_members() = default;
     parent_without_members(const parent_without_members&) = default;
     parent_without_members(parent_without_members&&) = default;
+    parent_without_members& operator=(const parent_without_members&) = default;
 
     virtual ~parent_without_members() noexcept = 0;
-
-public:
-    explicit parent_without_members(const dogen::trivial_inheritance::parent_without_members_versioned_key& versioned_key);
 
 private:
     template<typename Archive>
@@ -54,15 +51,6 @@ private:
 public:
     virtual void to_stream(std::ostream& s) const;
 
-public:
-    dogen::trivial_inheritance::parent_without_members_versioned_key versioned_key() const {
-        return versioned_key_;
-    }
-
-    void versioned_key(const dogen::trivial_inheritance::parent_without_members_versioned_key& v) {
-        versioned_key_ = v;
-    }
-
 protected:
     bool compare(const parent_without_members& rhs) const;
 public:
@@ -71,8 +59,6 @@ public:
 protected:
     void swap(parent_without_members& other) noexcept;
 
-private:
-    dogen::trivial_inheritance::parent_without_members_versioned_key versioned_key_;
 };
 
 inline parent_without_members::~parent_without_members() noexcept { }
@@ -82,7 +68,5 @@ inline bool operator==(const parent_without_members& lhs, const parent_without_m
 }
 
 } }
-
-
 
 #endif

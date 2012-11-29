@@ -18,35 +18,23 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_TRIVIAL_INHERITANCE_HASH_PARENT_WITHOUT_MEMBERS_VERSIONED_KEY_HASH_HPP
-#define DOGEN_TRIVIAL_INHERITANCE_HASH_PARENT_WITHOUT_MEMBERS_VERSIONED_KEY_HASH_HPP
+#ifndef DOGEN_TRIVIAL_INHERITANCE_IO_CHILD_WITH_MEMBERS_IO_HPP
+#define DOGEN_TRIVIAL_INHERITANCE_IO_CHILD_WITH_MEMBERS_IO_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <functional>
-#include "dogen/trivial_inheritance/types/parent_without_members_versioned_key.hpp"
+#include <iosfwd>
+#include "dogen/trivial_inheritance/types/child_with_members.hpp"
 
 namespace dogen {
 namespace trivial_inheritance {
 
-class parent_without_members_versioned_key_hasher {
-public:
-    static std::size_t hash(const parent_without_members_versioned_key& v);
-};
+std::ostream&
+operator<<(std::ostream& s,
+     const dogen::trivial_inheritance::child_with_members& v);
 
 } }
 
-namespace std {
-
-template<>
-class hash<dogen::trivial_inheritance::parent_without_members_versioned_key> {
-public:
-    size_t operator()(const dogen::trivial_inheritance::parent_without_members_versioned_key& v) const {
-        return dogen::trivial_inheritance::parent_without_members_versioned_key_hasher::hash(v);
-    }
-};
-
-}
 #endif
