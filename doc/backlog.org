@@ -11,6 +11,11 @@ This file contains all stories that haven't been assigned to a sprint.
 
 Stories that we intend to look at, at some point.
 
+*** Issue error when a property is a value of an abstract class
+
+SML should fail to merge if the user attempts to create a property of
+a base class. It should allow pointers to the base class though.
+
 *** Remove legacy database code
 
 We still have the old database implementation in dogen, forcing us to
