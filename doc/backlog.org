@@ -11,6 +11,14 @@ This file contains all stories that haven't been assigned to a sprint.
 
 Stories that we intend to look at, at some point.
 
+*** Add test to check if we are writing when file contents haven't changed
+
+We broke the code that detected changes and did not notice because we
+don't have any changes around it. A simple test would be to generate
+code for a test model, read the timestamp of a file (or even all
+files), then regenerate the model and compare the timestamps. If there
+are changes, the test would fail.
+
 *** Issue error when a property is a value of an abstract class
 
 SML should fail to merge if the user attempts to create a property of

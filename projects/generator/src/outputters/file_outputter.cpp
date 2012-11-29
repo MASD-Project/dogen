@@ -142,10 +142,10 @@ void file_outputter::to_file(outputter::value_entry_type value) const {
         dir.remove_filename();
 
         using boost::filesystem::create_directories;
-        const bool dir_exists(!create_directories(dir));
-        log_created_directories(!dir_exists, dir);
+        const bool created(create_directories(dir));
+        log_created_directories(created, dir);
 
-        if (!dir_exists || content_changed(value)) {
+        if (created || content_changed(value)) {
             write_file_content(path, contents);
             log_wrote_file(path.string());
         }

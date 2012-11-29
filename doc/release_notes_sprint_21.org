@@ -189,4 +189,9 @@ For some reason we didn't have tests for the empty base class
 scenario - they were marked as =entity=. It was actually broken, as
 found out in creris.
 
+*** COMPLETED Always writing files even without content changes       :spike:
+
+For some reason we are always writing all files in a model even when
+nothing has changed. This is very expensive in terms of build times.
+
 ** Deprecated Development Stories
