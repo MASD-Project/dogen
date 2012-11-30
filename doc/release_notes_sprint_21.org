@@ -99,13 +99,6 @@ for all facets.
 This means we need to add an additional checking step after writing
 all files that verifies that all files are really on the filesystem.
 
-*** Typedef keys for each type                                        :story:
-
-We should really have different names for each key. Ideally even
-different types, if its easy. We need to consult modern c++ for
-this. If its not possible for each key to be a different type, we
-should at least provide a typedef on each class.
-
 *** COMPLETED Reduce size of doxygen packages                         :story:
     CLOSED: [2012-11-21 Wed 16:37]
 
@@ -122,25 +115,6 @@ The main problem must be related to PNG generation.
 There should be an option to generate a stand alone =CMakeLists.txt= -
 the domain should compile in total isolation from kitanda. This is
 useful for demos, etc.
-
-*** IMPLEMENTATION Use explicit casting for versioned to unversioned conversions :story:
-    CLOCK: [2012-11-22 Thu 08:44]--[2012-11-22 Thu 09:20] =>  0:36
-
-At present we have to_versioned; in reality this would be dealt much
-better using explicit casts:
-
-#+begin_example
-explicit operator std::string() { return "explicit"; }
-#+end_example
-
-Actually the real solution for this is to make the versioned key
-contain the unversioned key; then dogen will generate all the
-required code.
-
-At this point in time we do not have enough use cases to make the
-correct design decisions in this area. We need to wait until we start
-using keys in anger in Creris and then design the API around the use
-cases.
 
 *** COMPLETED External package path for references                    :story:
     CLOSED: [2012-11-23 Fri 10:54]

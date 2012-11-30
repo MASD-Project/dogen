@@ -11,6 +11,32 @@ This file contains all stories that haven't been assigned to a sprint.
 
 Stories that we intend to look at, at some point.
 
+*** Typedef keys for each type                                        :story:
+
+We should really have different names for each key. Ideally even
+different types, if its easy. We need to consult modern c++ for
+this. If its not possible for each key to be a different type, we
+should at least provide a typedef on each class.
+
+*** Use explicit casting for versioned to unversioned conversions     :story:
+    CLOCK: [2012-11-22 Thu 08:44]--[2012-11-22 Thu 09:20] =>  0:36
+
+At present we have to_versioned; in reality this would be dealt much
+better using explicit casts:
+
+#+begin_example
+explicit operator std::string() { return "explicit"; }
+#+end_example
+
+Actually the real solution for this is to make the versioned key
+contain the unversioned key; then dogen will generate all the
+required code.
+
+At this point in time we do not have enough use cases to make the
+correct design decisions in this area. We need to wait until we start
+using keys in anger in Creris and then design the API around the use
+cases.
+
 *** Add test to check if we are writing when file contents haven't changed
 
 We broke the code that detected changes and did not notice because we
