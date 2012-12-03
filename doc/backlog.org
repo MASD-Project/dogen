@@ -11,6 +11,17 @@ This file contains all stories that haven't been assigned to a sprint.
 
 Stories that we intend to look at, at some point.
 
+*** Split is floating point like from int like in view model          :story:
+
+At present we only have a single test data generator helper method for
+any numeric type: =is_int_like=. This works ok, but it means we are not
+generating useful test data for doubles, e.g: =1.0= instead of a
+slightly more useful =1.2345= or some such number.
+
+We need a =is_floating_point_like= method to be able to distinguish
+between them, and then the associated changes in the generators to
+create floating point numbers.
+
 *** Typedef keys for each type                                        :story:
 
 We should really have different names for each key. Ideally even
