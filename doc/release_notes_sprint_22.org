@@ -1,0 +1,76 @@
+#+title: Release Notes for Sprint 22
+#+options: date:nil toc:nil author:nil num:nil
+#+todo: ANALYSIS IMPLEMENTATION TESTING | COMPLETED CANCELLED
+#+tags: story(s) epic(e) task(t) note(n) spike(p)
+
+* Release Notes
+
+This file contains all stories that were closed during sprint 22.
+
+** Development Stories Implemented
+
+#+begin: clocktable :maxlevel 3 :scope subtree
+Clock summary at [2012-12-03 Mon 13:20]
+
+| Headline                                                                 | Time   |      |      |
+|--------------------------------------------------------------------------+--------+------+------|
+| *Total time*                                                             | *6:18* |      |      |
+|--------------------------------------------------------------------------+--------+------+------|
+| Development Stories Implemented                                          |        | 6:18 |      |
+| COMPLETED Outputting of floating point numbers is resulting in roundings |        |      | 1:00 |
+| COMPLETED Setup new sound card on lorenz                                 |        |      | 0:17 |
+| COMPLETED Implement mocking of data sources                              |        |      | 1:10 |
+| COMPLETED Implement mocking of data types                                |        |      | 0:45 |
+| IMPLEMENTATION Clocking of agile and build overhead                      |        |      | 3:06 |
+#+end:
+
+*** COMPLETED Outputting of floating point numbers is resulting in roundings :spike:
+    CLOCK: [2012-12-03 Mon 12:07]--[2012-12-03 Mon 13:07] =>  1:00
+
+As reported by JS, numbers coming out of our time series in creris are
+incorrectly rounded. This is to do with the default stream settings we
+are using when dumping time points. Fix dogen such that we have decent
+floating point defaults - if not perfect. This is just a quick hack
+for now.
+
+*** COMPLETED Setup new sound card on lorenz                          :story:
+    CLOCK: [2012-12-03 Mon 07:00]--[2012-12-03 Mon 07:17] =>  0:17
+
+Try a new sound card on lorenz to see if we can improve demo sound quality.
+
+*** COMPLETED Implement mocking of data sources                       :story:
+    CLOCK: [2012-12-03 Mon 09:05]--[2012-12-03 Mon 10:15] =>  1:10
+
+Add support to repository mock to mocks of data sources.
+
+*** COMPLETED Implement mocking of data types                         :story:
+    CLOCK: [2012-12-03 Mon 10:15]--[2012-12-03 Mon 11:00] =>  0:45
+
+*** IMPLEMENTATION Clocking of agile and build overhead               :story:
+
+This story keeps track of the time spent on stand-up meetings, other
+process meetings and the time taken with build checking and fixes, as
+well as any hardware/software spike we may have.
+
+**** COMPLETED Build checking and stand-up on 2012-12-03
+    CLOCK: [2012-12-03 Mon 06:20]--[2012-12-03 Mon 07:00] =>  0:40
+
+Stand up and build checking.
+
+**** COMPLETED Pascal has a corrupted file system                     :spike:
+     CLOCK: [2012-12-03 Mon 11:00]--[2012-12-03 Mon 12:00] =>  1:00
+
+Seems like the forced reboot of pascal over the weekend corrupted the
+=E:\= drive. Run a chkdsk on the drive, reboot the box and restart all agents.
+
+**** COMPLETED Lorenz second monitor became primary                   :spike:
+     CLOCK: [2012-12-03 Mon 07:52]--[2012-12-03 Mon 09:05] =>  1:13
+
+With the setup of =bell=, the new test machine, it seems the monitors
+on lorenz stop behaving. The primary monitor became what was the
+secondary monitor. Get everything back to normal.
+
+**** COMPLETED Grooming of release notes across all products           :task:
+     CLOCK: [2012-12-03 Mon 13:07]--[2012-12-03 Mon 13:20] =>  0:13
+
+** Deprecated Development Stories
