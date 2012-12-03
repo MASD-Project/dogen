@@ -11,6 +11,16 @@ This file contains all stories that haven't been assigned to a sprint.
 
 Stories that we intend to look at, at some point.
 
+*** Split floating point stream settings from double                  :story:
+
+We had a problem where the output of floating point numbers was being
+truncated due to scientific notation being used. A quick fix was to
+just update the properties of all streams which use either doubles,
+floats or _bools_ with precision etc settings. The real fix is to
+distinguish between the two such that we only enable =bool= related
+settings when dealing with bools and floating point settings when
+dealing with =double= or =float=.
+
 *** Split is floating point like from int like in view model          :story:
 
 At present we only have a single test data generator helper method for
