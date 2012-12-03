@@ -31,6 +31,8 @@ static logger lg(logger_factory("inclusion_manager"));
 const std::string empty;
 const std::string primitive_model("primitive_model");
 const std::string bool_type("bool");
+const std::string double_type("double");
+const std::string float_type("float");
 const std::string pqxx_connection_include("pqxx/connection.hxx");
 const std::string pqxx_result_include("pqxx/result.hxx");
 const std::string pqxx_transaction_include("pqxx/transaction.hxx");
@@ -516,7 +518,8 @@ bool cpp_inclusion_manager::requires_stream_manipulators(
     const std::list<dogen::sml::qualified_name>& names) const {
     using dogen::sml::qualified_name;
     for (const auto n : names) {
-        if (n.type_name() == bool_type)
+        if (n.type_name() == bool_type || n.type_name() == double_type ||
+            n.type_name() == float_type)
             return true;
     }
     return false;

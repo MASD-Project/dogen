@@ -192,6 +192,12 @@ public:
 
 private:
     /**
+     * @brief Returns true if the type will require stream
+     * manipulators, false otherwise.
+     */
+    bool requires_stream_manipulators(const std::string type_name) const;
+
+    /**
      * @brief Converts a qualified type name to a name that can be
      * used as an identifier.
      */
@@ -230,6 +236,14 @@ std::string sml_dfs_visitor::to_identifiable_name(const std::string n) const {
     boost::replace_all(r, more_than, empty);
 
     return r;
+}
+
+bool sml_dfs_visitor::
+requires_stream_manipulators(const std::string type_name) const {
+    return
+        type_name == bool_type ||
+        type_name == double_type ||
+        type_name == float_type;
 }
 
 void sml_dfs_visitor::transform_nested_qualified_name(
@@ -359,7 +373,7 @@ void sml_dfs_visitor::process_sml_pod(const dogen::sml::pod& pod) {
         if (type_vm.is_primitive()) {
             has_primitive_properties = true;
             requires_manual_default_constructor = true;
-            if (type_vm.name() == bool_type)
+            if (this->requires_stream_manipulators(type_vm.name()))
                 requires_stream_manipulators = true;
         } else if (type_vm.is_enumeration())
             requires_manual_default_constructor = true;

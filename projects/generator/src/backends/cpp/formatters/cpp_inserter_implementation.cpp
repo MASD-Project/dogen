@@ -419,8 +419,14 @@ void cpp_inserter_implementation::
 format_inserter_implementation(const class_view_model& vm) {
     if (vm.requires_stream_manipulators()) {
         stream_ << indenter_ << "boost::io::ios_flags_saver ifs(s);"
-                << std::endl;
-        stream_ << indenter_ << "s << std::boolalpha;"
+                << std::endl
+                << indenter_ << "s.setf(std::ios_base::boolalpha);"
+                << std::endl
+                << indenter_ << "s.setf(std::ios::fixed, std::ios::floatfield);"
+                << std::endl
+                << indenter_ << "s.precision(6);"
+                << std::endl
+                << indenter_ << "s.setf(std::ios::showpoint);"
                 << std::endl;
         utility_.blank_line();
     }
