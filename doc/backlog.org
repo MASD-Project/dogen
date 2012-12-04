@@ -11,6 +11,16 @@ This file contains all stories that haven't been assigned to a sprint.
 
 Stories that we intend to look at, at some point.
 
+*** Add support for iterable enumerations                             :story:
+
+We should create an additional aspect for each enumerations which
+creates a =std::array= with the enumerators (excluding invalid). This
+would allow plugging the enumerations into for loops, boost ranges,
+etc. The CPP should contain a static array; The HPP contains a method
+which returns it, e.g. =my_enumeration_to_array.hpp=:
+
+: std::array<my_enumeration, 5> my_enumeration_to_array();
+
 *** Add support for user supplied test data sets                      :story:
 
 The correct solution for test data and test data sets is as follows:
