@@ -10,15 +10,15 @@ This file contains all stories that were closed during sprint 22.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2012-12-03 Mon 13:24]
+Clock summary at [2012-12-04 Tue 08:32]
 
 | Headline                                                                 | Time   |      |      |
 |--------------------------------------------------------------------------+--------+------+------|
-| *Total time*                                                             | *4:23* |      |      |
+| *Total time*                                                             | *4:53* |      |      |
 |--------------------------------------------------------------------------+--------+------+------|
-| Development Stories Implemented                                          |        | 4:23 |      |
+| Development Stories Implemented                                          |        | 4:53 |      |
 | COMPLETED Outputting of floating point numbers is resulting in roundings |        |      | 1:00 |
-| IMPLEMENTATION Clocking of agile and build overhead                      |        |      | 3:23 |
+| IMPLEMENTATION Clocking of agile and build overhead                      |        |      | 3:53 |
 #+end:
 
 *** COMPLETED Outputting of floating point numbers is resulting in roundings :spike:
@@ -62,5 +62,9 @@ secondary monitor. Get everything back to normal.
 
 Try a new sound card on lorenz to see if we can improve demo sound quality.
 
+**** COMPLETED Build checking and stand-up on 2012-12-04
+    CLOCK: [2012-12-03 Mon 06:20]--[2012-12-03 Mon 06:50] =>  0:30
+
+Stand up and build checking.
 
 ** Deprecated Development Stories
