@@ -61,6 +61,12 @@ The correct solution for test data and test data sets is as follows:
   formats. The file must exist on either the expected or actual
   directory as per =file_locations= parameter.
 
+Another topic which is also part of test data is the generation of
+data for specific tests. At present we have lots of ad-hoc functions
+scattered around different places. They should all live under test
+data and be part of a test data set. The test data set should probably
+be the spec name.
+
 *** Split floating point stream settings from double                  :story:
 
 We had a problem where the output of floating point numbers was being
