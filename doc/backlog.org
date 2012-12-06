@@ -453,22 +453,18 @@ confusing every other developer. This would require:
 We recently added support for creating multiple packages from a single
 source tree. We need generated models to have a new top-level cmake file:
 
-#+begin_example
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/src)
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/spec)
-
-install(
-    DIRECTORY include/
-    DESTINATION include
-    COMPONENT headers
-    FILES_MATCHING PATTERN "*.hpp")
-#+end_example
+: add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/src)
+: add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/spec)
+:
+: install(
+:     DIRECTORY include/
+:     DESTINATION include
+:     COMPONENT headers
+:     FILES_MATCHING PATTERN "*.hpp")
 
 And the =src= cmake file:
 
-#+begin_example
-install(TARGETS dia ARCHIVE DESTINATION lib COMPONENT libraries)
-#+end_example
+: install(TARGETS dia ARCHIVE DESTINATION lib COMPONENT libraries)
 
 *** Option to diff generated code
 
