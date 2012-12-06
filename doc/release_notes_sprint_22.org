@@ -72,4 +72,9 @@ Stand up and build checking.
 
 Stand up and build checking.
 
+*** COMPLETED Move system model factories into SML
+
+We do not have any generator dependencies in the system model
+factories so they can safely be moved into SML.
+
 ** Deprecated Development Stories

@@ -433,11 +433,6 @@ but our tests expect:
 
 This must be part of a refactoring that wasn't completed properly.
 
-*** Move system model factories into SML
-
-We do not have any generator dependencies in the system model
-factories so they can safely be moved into SML.
-
 *** Consider renaming specs to tests
 
 We started using the terminology specs to mean specifications because
