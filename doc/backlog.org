@@ -101,9 +101,7 @@ should at least provide a typedef on each class.
 At present we have to_versioned; in reality this would be dealt much
 better using explicit casts:
 
-#+begin_example
-explicit operator std::string() { return "explicit"; }
-#+end_example
+: explicit operator std::string() { return "explicit"; }
 
 Actually the real solution for this is to make the versioned key
 contain the unversioned key; then dogen will generate all the
@@ -489,17 +487,15 @@ http://boost.2283326.n4.nabble.com/Serialization-of-boost-shared-ptr-lt-int-gt-t
 We probably need to iterate through all the nested types and find out
 if there is a shared pointer to primitive; if there is, put in:
 
-#+begin_example
-// defined a "special kind of integer"
-BOOST_STRONG_TYPEDEF(int, tracked_int)
-
-// define serialization for a tracked int
-template<class Archive>
-void serialize(Archive &ar, tracked_int & ti, const unsigned int version){
-    // serialize the underlying int
-    ar & static_cast<int &>(ti);
-}
-#+end_example
+: // defined a "special kind of integer"
+: BOOST_STRONG_TYPEDEF(int, tracked_int)
+:
+: // define serialization for a tracked int
+: template<class Archive>
+: void serialize(Archive &ar, tracked_int & ti, const unsigned int version){
+:     // serialize the underlying int
+:     ar & static_cast<int &>(ti);
+: }
 
 *** Create helpers for primitive and std model
 
@@ -922,26 +918,22 @@ STL containers with types of that model.
 
 In the past we were testing for exceptions by doing a try and catch:
 
-#+begin_example
-    try {
-        std::generate_n(std::back_inserter(terms), beyond_end, sequence);
-        BOOST_FAIL("Expected sequence_exhausted exception to be thrown.");
-    } catch (const kitanda::utility::test_data::sequence_exhausted& e) {
-        BOOST_TEST_MESSAGE("Exception thrown as expected: " << e.what());
-        BOOST_CHECK(true);
-    }
-#+end_example
+:     try {
+:         std::generate_n(std::back_inserter(terms), beyond_end, sequence);
+:         BOOST_FAIL("Expected sequence_exhausted exception to be thrown.");
+:     } catch (const kitanda::utility::test_data::sequence_exhausted& e) {
+:         BOOST_TEST_MESSAGE("Exception thrown as expected: " << e.what());
+:         BOOST_CHECK(true);
+:     }
 
 We have now found out about =BOOST_CHECK_EXCEPTION=, so we should
 replace the manual checks on all specs that have them. Example usage:
 
-#+begin_example
-    BOOST_CHECK_EXCEPTION(
-        reader.get_attribute_as_string(label_non_existent_attribute),
-        exception,
-        std::bind(check_exception, _1, message_error_get_attribute)
-        );
-#+end_example
+:     BOOST_CHECK_EXCEPTION(
+:         reader.get_attribute_as_string(label_non_existent_attribute),
+:         exception,
+:         std::bind(check_exception, _1, message_error_get_attribute)
+:         );
 
 *** Licence year is hard-coded to 2012
 
@@ -1126,12 +1118,10 @@ etc won't require documentation).
 We started off by adding a technical specification as a doxygen
 comment for a test but forgot to keep on doing it. Example:
 
-#+begin_example
-/**
- * @brief It shall not be possible to create more terms than those
- * supported by a finite sequence, using std::generate_n.
- */
-#+end_example
+: /**
+:  * @brief It shall not be possible to create more terms than those
+:  * supported by a finite sequence, using std::generate_n.
+:  */
 
 This helps make the purpose of the test clearer when the name is not
 sufficient.
