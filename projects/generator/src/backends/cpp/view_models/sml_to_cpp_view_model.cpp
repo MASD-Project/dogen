@@ -210,7 +210,8 @@ private:
     void transform_nested_qualified_name(
         const dogen::sml::nested_qualified_name& nqn,
         dogen::generator::backends::cpp::view_models::nested_type_view_model&
-        name, std::string& complete_name) const;
+        name, std::string& complete_name,
+        bool& requires_stream_manipulators) const;
 
     /**
      * @brief Transforms an SML pod into a C++ class view.
@@ -249,7 +250,8 @@ requires_stream_manipulators(const std::string type_name) const {
 void sml_dfs_visitor::transform_nested_qualified_name(
     const dogen::sml::nested_qualified_name& nqn,
     dogen::generator::backends::cpp::view_models::nested_type_view_model&
-    vm, std::string& complete_name) const {
+    vm, std::string& complete_name,
+    bool& requires_stream_manipulators) const {
 
     const auto qn(nqn.type());
     std::list<std::string> ns_list(join_namespaces(qn));
@@ -264,6 +266,9 @@ void sml_dfs_visitor::transform_nested_qualified_name(
     vm.is_enumeration(qn.meta_type() == meta_types::enumeration);
     vm.is_primitive(qn.meta_type() == meta_types::primitive);
     if (vm.is_primitive()) {
+        if (this->requires_stream_manipulators(vm.name()))
+            requires_stream_manipulators = true;
+
         vm.is_char_like(is_char_like(vm.name()));
         vm.is_int_like(is_int_like(vm.name()));
     }
@@ -304,7 +309,8 @@ void sml_dfs_visitor::transform_nested_qualified_name(
             my_complete_name += ", ";
 
         nested_type_view_model cvm;
-        transform_nested_qualified_name(c, cvm, my_complete_name);
+        transform_nested_qualified_name(c, cvm, my_complete_name,
+            requires_stream_manipulators);
         children.push_back(cvm);
         is_first = false;
     }
@@ -369,12 +375,11 @@ void sml_dfs_visitor::process_sml_pod(const dogen::sml::pod& pod) {
         if (p.type_name().type().type_name() == "optional")
             requires_manual_move_constructor = true;
 
-        transform_nested_qualified_name(p.type_name(), type_vm, complete_name);
+        transform_nested_qualified_name(p.type_name(), type_vm, complete_name,
+            requires_stream_manipulators);
         if (type_vm.is_primitive()) {
             has_primitive_properties = true;
             requires_manual_default_constructor = true;
-            if (this->requires_stream_manipulators(type_vm.name()))
-                requires_stream_manipulators = true;
         } else if (type_vm.is_enumeration())
             requires_manual_default_constructor = true;
 

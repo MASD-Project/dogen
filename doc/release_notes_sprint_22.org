@@ -10,14 +10,15 @@ This file contains all stories that were closed during sprint 22.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2012-12-05 Wed 07:58]
+Clock summary at [2012-12-06 Thu 14:35]
 
 | Headline                                                                 | Time   |      |      |
 |--------------------------------------------------------------------------+--------+------+------|
-| *Total time*                                                             | *5:31* |      |      |
+| *Total time*                                                             | *5:51* |      |      |
 |--------------------------------------------------------------------------+--------+------+------|
-| Development Stories Implemented                                          |        | 5:31 |      |
+| Development Stories Implemented                                          |        | 5:51 |      |
 | COMPLETED Outputting of floating point numbers is resulting in roundings |        |      | 1:00 |
+| COMPLETED Vector of double still suffers from floating point issues      |        |      | 0:20 |
 | IMPLEMENTATION Clocking of agile and build overhead                      |        |      | 4:31 |
 #+end:
 
@@ -29,6 +30,20 @@ incorrectly rounded. This is to do with the default stream settings we
 are using when dumping time points. Fix dogen such that we have decent
 floating point defaults - if not perfect. This is just a quick hack
 for now.
+
+*** COMPLETED Move system model factories into SML
+
+We do not have any generator dependencies in the system model
+factories so they can safely be moved into SML.
+
+*** COMPLETED Vector of double still suffers from floating point issues :spike:
+    CLOCK: [2012-12-06 Thu 14:15]--[2012-12-06 Thu 14:35] =>  0:20
+
+As reported by JS the previous fix done to time series stopped working
+once we refactored the class. This is because dogen is not handling
+=std::vector<double>= correctly. Fix the handling of nested names such
+that a =bool= or floating point number at any level causes the stream
+to format correctly.
 
 *** IMPLEMENTATION Clocking of agile and build overhead               :story:
 
@@ -71,10 +86,5 @@ Stand up and build checking.
      CLOCK: [2012-12-05 Wed 06:20]--[2012-12-05 Wed 06:58] =>  0:38
 
 Stand up and build checking.
-
-*** COMPLETED Move system model factories into SML
-
-We do not have any generator dependencies in the system model
-factories so they can safely be moved into SML.
 
 ** Deprecated Development Stories
