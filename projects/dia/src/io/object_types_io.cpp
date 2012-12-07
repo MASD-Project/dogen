@@ -20,6 +20,7 @@
  */
 #include <string>
 #include <ostream>
+#include <boost/throw_exception.hpp>
 #include "dogen/utility/exception/invalid_enum_value.hpp"
 #include "dogen/dia/io/object_types_io.hpp"
 
@@ -60,7 +61,7 @@ std::ostream& operator<<(std::ostream& stream, object_types value) {
     default:
         break;
     }
-    throw utility::exception::invalid_enum_value(error_message);
+    BOOST_THROW_EXCEPTION(utility::exception::invalid_enum_value(error_message));
 }
 
 } }

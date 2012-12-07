@@ -18,6 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/serialization/xml_helper.hpp"
 #include "dogen/utility/filesystem/file.hpp"
@@ -51,7 +52,7 @@ bool dia_file_asserter::assert_file(boost::filesystem::path expected,
     boost::filesystem::path actual) const {
 
     if (!is_assertable(expected) || !is_assertable(actual))
-        throw dogen::utility::exception::exception(file_is_not_assertable);
+        BOOST_THROW_EXCEPTION(dogen::utility::exception::exception(file_is_not_assertable));
 
 
     const auto e(read_xml(expected));
