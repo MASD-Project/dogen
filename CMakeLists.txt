@@ -103,12 +103,12 @@ if (WIN32)
 endif()
 
 # database
-find_package(PQXX)
-if(PQXX_FOUND)
-    message(STATUS "Found libpqxx...")
-else()
-    message(FATAL_ERROR "libpqxx not found.")
-endif()
+# find_package(PQXX)
+# if(PQXX_FOUND)
+#     message(STATUS "Found libpqxx...")
+# else()
+#     message(FATAL_ERROR "libpqxx not found.")
+# endif()
 
 #
 # Test models
