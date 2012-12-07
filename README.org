@@ -26,3 +26,4 @@ fitted our requirements - open source or otherwise.
 Note that Dogen is specifically tailored for our needs and as such it
 is not a general purpose domain generator. We are, however, wiling to
 accept any patches for functionality not directly required by us.
+
