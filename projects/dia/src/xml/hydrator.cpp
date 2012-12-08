@@ -18,6 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/xml/node_types_io.hpp"
 #include "dogen/dia/xml/dia_xml_exception.hpp"
@@ -89,12 +90,12 @@ hydrator::hydrator(boost::filesystem::path file_name)
 void hydrator::validate_current_element(std::string name) const {
     if (reader_.name() != name ||
         reader_.node_type() != utility::xml::node_types::element)
-        throw xml::exception(unexpected_element + reader_.name());
+        BOOST_THROW_EXCEPTION(xml::exception(unexpected_element + reader_.name()));
 }
 
 void hydrator::next_element(std::string name) {
     if (!reader_.read())
-        throw xml::exception(unexpected_eod);
+        BOOST_THROW_EXCEPTION(xml::exception(unexpected_eod));
 
     validate_current_element(name);
 }
@@ -119,7 +120,7 @@ void hydrator::validate_self_closing() const {
     const bool is_self_closing(reader_.is_empty());
     if (!is_self_closing) {
         using xml::exception;
-        throw exception(expected_self_closing + reader_.name());
+        BOOST_THROW_EXCEPTION(exception(expected_self_closing + reader_.name()));
     }
 }
 
@@ -149,7 +150,7 @@ child_node hydrator::read_child_node() {
     validate_self_closing();
 
     if (!reader_.read())
-        throw xml::exception(unexpected_eod);
+        BOOST_THROW_EXCEPTION(xml::exception(unexpected_eod));
 
     return child_node;
 }
@@ -215,7 +216,7 @@ composite hydrator::read_attribute_value() {
 
             if (inner_composite) {
                 using xml::exception;
-                throw exception(expected_one_inner_composite);
+                BOOST_THROW_EXCEPTION(exception(expected_one_inner_composite));
             }
 
             inner_composite = composite_ptr(new composite());
@@ -226,7 +227,7 @@ composite hydrator::read_attribute_value() {
             attribute_ptr ptr(new attribute(read_attribute()));
             attributes.push_back(ptr);
         } else {
-            throw xml::exception(unexpected_element);
+            BOOST_THROW_EXCEPTION(xml::exception(unexpected_element));
         }
     } while (!is_end_element(dia_composite));
     result.value(attributes);
@@ -244,7 +245,7 @@ attribute hydrator::read_attribute() {
     const bool is_self_closing(reader_.is_empty());
 
     if (!reader_.read())
-        throw xml::exception(unexpected_eod);
+        BOOST_THROW_EXCEPTION(xml::exception(unexpected_eod));
 
     if (is_self_closing)
         return attribute; // no more content to read related to this attribute
@@ -256,7 +257,7 @@ attribute hydrator::read_attribute() {
         const std::string name(reader_.name());
         if (!is_attribute_value(name)) {
             BOOST_LOG_SEV(lg, error) << unsupported_value << name;
-            throw xml::exception(unsupported_value + name);
+            BOOST_THROW_EXCEPTION(xml::exception(unsupported_value + name));
         }
 
         if (name == dia_color)
@@ -310,8 +311,8 @@ std::vector<connection> hydrator::read_connections() {
         if (!is_start_element(dia_connection)) {
             BOOST_LOG_SEV(lg, error) << unexpected_connection_type
                                      << reader_.name();
-            throw xml::exception(unexpected_connection_type +
-                reader_.name());
+            BOOST_THROW_EXCEPTION(xml::exception(unexpected_connection_type +
+                reader_.name()));
         }
         r.push_back(read_connection());
     } while (!is_end_element(dia_connections));
@@ -332,7 +333,7 @@ object hydrator::read_object() {
                              << "' of type: " << object.type();
 
     if (!reader_.read())
-        throw xml::exception(unexpected_eod);
+        BOOST_THROW_EXCEPTION(xml::exception(unexpected_eod));
 
     std::vector<attribute> attributes;
     do {
@@ -386,7 +387,7 @@ diagram_data hydrator::read_diagram_data() {
     BOOST_LOG_SEV(lg, debug) << "Reading diagram data.";
 
     if (!reader_.read())
-        throw xml::exception(unexpected_eod);
+        BOOST_THROW_EXCEPTION(xml::exception(unexpected_eod));
 
     std::vector<attribute> attributes;
     do {

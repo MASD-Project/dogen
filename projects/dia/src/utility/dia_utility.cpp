@@ -18,6 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/throw_exception.hpp>
 #include "dogen/utility/exception/invalid_enum_value.hpp"
 #include "dogen/dia/utility/dia_utility.hpp"
 
@@ -64,7 +65,7 @@ object_types parse_object_type(const std::string& ot) {
     if (ot == uml_message)
         return object_types::uml_message;
 
-    throw dogen::utility::exception::exception(invalid_object_type + ot);
+    BOOST_THROW_EXCEPTION(dogen::utility::exception::exception(invalid_object_type + ot));
 }
 
 stereotypes parse_stereotype(const std::string& st) {
@@ -86,7 +87,7 @@ stereotypes parse_stereotype(const std::string& st) {
     if (st == nongeneratable)
         return stereotypes::nongeneratable;
 
-    throw dogen::utility::exception::exception(invalid_stereotype + st);
+    BOOST_THROW_EXCEPTION(dogen::utility::exception::exception(invalid_stereotype + st));
 }
 
 } } }
