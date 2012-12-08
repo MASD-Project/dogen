@@ -19,6 +19,7 @@
  *
  */
 #include <ostream>
+#include <boost/throw_exception.hpp>
 #include "dogen/generator/generation_failure.hpp"
 #include "dogen/utility/exception/invalid_enum_value.hpp"
 #include "dogen/generator/backends/cpp/formatters/cpp_inserter_implementation.hpp"
@@ -85,7 +86,7 @@ void domain_implementation::
 smart_pointer_helper(const nested_type_view_model& vm) {
     const auto children(vm.children());
     if (children.size() != 1)
-        throw generation_failure(invalid_smart_pointer);
+        BOOST_THROW_EXCEPTION(generation_failure(invalid_smart_pointer));
 
     const auto container(vm);
     {
@@ -185,15 +186,15 @@ class_implementation(cpp_aspect_types at, const sml::category_types ct,
             f.format(vm);
             return;
         }
-        throw invalid_enum_value(invalid_category_type);
+        BOOST_THROW_EXCEPTION(invalid_enum_value(invalid_category_type));
     }
-    throw invalid_enum_value(invalid_aspect_type);
+    BOOST_THROW_EXCEPTION(invalid_enum_value(invalid_aspect_type));
 }
 
 void domain_implementation::format_class(const file_view_model& vm) {
     boost::optional<view_models::class_view_model> o(vm.class_vm());
     if (!o)
-        throw generation_failure(missing_class_view_model);
+        BOOST_THROW_EXCEPTION(generation_failure(missing_class_view_model));
 
     const view_models::class_view_model& cvm(*o);
     io_helper_methods(cvm);
@@ -210,7 +211,7 @@ void domain_implementation::format_class(const file_view_model& vm) {
 }
 
 void domain_implementation::format_enumeration(const file_view_model&) {
-    throw generation_failure(enumeration_view_model_not_supported);
+    BOOST_THROW_EXCEPTION(generation_failure(enumeration_view_model_not_supported));
 }
 
 void domain_implementation::format(const file_view_model& vm) {

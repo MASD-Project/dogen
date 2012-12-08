@@ -19,6 +19,7 @@
  *
  */
 #include <ostream>
+#include <boost/throw_exception.hpp>
 #include "dogen/utility/exception/invalid_enum_value.hpp"
 #include "dogen/generator/backends/cpp/cpp_file_types.hpp"
 
@@ -47,7 +48,7 @@ std::ostream& operator<<(std::ostream& stream, cpp_file_types value) {
     default:
         break;
     }
-    throw utility::exception::invalid_enum_value(error_message);
+    BOOST_THROW_EXCEPTION(utility::exception::invalid_enum_value(error_message));
 }
 
 } } } }

@@ -19,6 +19,7 @@
  *
  */
 #include <sstream>
+#include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/exception/invalid_enum_value.hpp"
 #include "dogen/generator/backends/cpp/cpp_location_manager.hpp"
@@ -92,7 +93,7 @@ std::string cpp_location_manager::facet_directory(cpp_facet_types facet) const {
         return settings_.test_data_facet_folder();
         break;
     default:
-        throw invalid_enum_value(invalid_facet_types);
+        BOOST_THROW_EXCEPTION(invalid_enum_value(invalid_facet_types));
     }
 }
 
@@ -108,7 +109,7 @@ std::string cpp_location_manager::facet_postfix(cpp_facet_types facet) const {
     case cpp_facet_types::test_data: return test_data_postfix; break;
     default:
         BOOST_LOG_SEV(lg, error) << invalid_facet_types;
-        throw invalid_enum_value(invalid_facet_types);
+        BOOST_THROW_EXCEPTION(invalid_enum_value(invalid_facet_types));
     }
 }
 
@@ -124,7 +125,7 @@ cpp_location_manager::aspect_postfix(cpp_aspect_types aspect) const {
     case cpp_aspect_types::registrar: return empty; break;
     default:
         BOOST_LOG_SEV(lg, error) << invalid_aspect_types;
-        throw invalid_enum_value(invalid_aspect_types);
+        BOOST_THROW_EXCEPTION(invalid_enum_value(invalid_aspect_types));
     }
 }
 
@@ -135,7 +136,7 @@ cpp_location_manager::file_type_directory(cpp_file_types file_type) const {
     case cpp_file_types::implementation: return source_directory_; break;
     default:
         BOOST_LOG_SEV(lg, error) << invalid_file_types;
-        throw invalid_enum_value(invalid_file_types);
+        BOOST_THROW_EXCEPTION(invalid_enum_value(invalid_file_types));
     }
 }
 
@@ -146,7 +147,7 @@ std::string cpp_location_manager::extension(cpp_file_types file_type) const {
         return settings_.source_extension(); break;
     default:
         BOOST_LOG_SEV(lg, error) << invalid_file_types;
-        throw invalid_enum_value(invalid_file_types);
+        BOOST_THROW_EXCEPTION(invalid_enum_value(invalid_file_types));
     }
 }
 
@@ -214,7 +215,7 @@ cpp_location_manager::absolute_path_to_include(const std::string& name) const {
 boost::filesystem::path
 cpp_location_manager::absolute_path(const std::string& name) const {
     if (settings_.split_project())
-        throw utility::exception::exception(absolute_path_with_split);
+        BOOST_THROW_EXCEPTION(utility::exception::exception(absolute_path_with_split));
     return settings_.project_directory() / model_name_ / name;
 }
 

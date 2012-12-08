@@ -19,6 +19,7 @@
  *
  */
 #include <ostream>
+#include <boost/throw_exception.hpp>
 #include "dogen/generator/generation_failure.hpp"
 #include "dogen/generator/backends/cpp/formatters/cpp_qualified_name.hpp"
 #include "dogen/generator/backends/cpp/formatters/cpp_licence.hpp"
@@ -176,14 +177,14 @@ void database_header::format(const file_view_model& vm) {
     if (vm.meta_type() == sml::meta_types::enumeration) {
         const auto o(vm.enumeration_vm());
         if (!o)
-            throw generation_failure(missing_enumeration_view_model);
+            BOOST_THROW_EXCEPTION(generation_failure(missing_enumeration_view_model));
 
         const auto evm(*o);
         stream_ << "// FIXME: " << evm.name() << std::endl;
     } else if (vm.meta_type() == sml::meta_types::pod) {
         boost::optional<view_models::class_view_model> o(vm.class_vm());
         if (!o)
-            throw generation_failure(missing_class_view_model);
+            BOOST_THROW_EXCEPTION(generation_failure(missing_class_view_model));
 
         const view_models::class_view_model& cvm(*o);
         std::list<std::string> namespaces(cvm.namespaces());

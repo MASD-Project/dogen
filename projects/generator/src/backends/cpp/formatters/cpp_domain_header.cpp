@@ -19,6 +19,7 @@
  *
  */
 #include <ostream>
+#include <boost/throw_exception.hpp>
 #include "dogen/generator/generation_failure.hpp"
 #include "dogen/utility/exception/invalid_enum_value.hpp"
 #include "dogen/generator/backends/cpp/formatters/cpp_qualified_name.hpp"
@@ -148,7 +149,7 @@ class_declaration(const sml::category_types ct, const class_view_model& vm) {
         return;
     }
 
-    throw invalid_enum_value(invalid_category_type);
+    BOOST_THROW_EXCEPTION(invalid_enum_value(invalid_category_type));
 }
 
 void domain_header::format_main(const sml::category_types ct,
@@ -178,7 +179,7 @@ void domain_header::format_main(const sml::category_types ct,
 void domain_header::format_class(const file_view_model& vm) {
     boost::optional<view_models::class_view_model> o(vm.class_vm());
     if (!o)
-        throw generation_failure(missing_class_view_model);
+        BOOST_THROW_EXCEPTION(generation_failure(missing_class_view_model));
 
     const auto at(vm.aspect_type());
     const auto ct(vm.category_type());
@@ -187,14 +188,14 @@ void domain_header::format_class(const file_view_model& vm) {
         format_main(ct, cvm);
     else {
         using utility::exception::invalid_enum_value;
-        throw invalid_enum_value(invalid_aspect_type);
+        BOOST_THROW_EXCEPTION(invalid_enum_value(invalid_aspect_type));
     }
 }
 
 void domain_header::format_enumeration(const file_view_model& vm) {
     const auto o(vm.enumeration_vm());
     if (!o)
-        throw generation_failure(missing_enumeration_view_model);
+        BOOST_THROW_EXCEPTION(generation_failure(missing_enumeration_view_model));
 
     {
         const auto evm(*o);
@@ -209,7 +210,7 @@ void domain_header::format_enumeration(const file_view_model& vm) {
 void domain_header::format_exception(const file_view_model& vm) {
     const auto o(vm.exception_vm());
     if (!o)
-        throw generation_failure(missing_exception_view_model);
+        BOOST_THROW_EXCEPTION(generation_failure(missing_exception_view_model));
 
     {
         const auto evm(*o);

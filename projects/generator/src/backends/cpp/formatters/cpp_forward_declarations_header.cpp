@@ -19,6 +19,7 @@
  *
  */
 #include <ostream>
+#include <boost/throw_exception.hpp>
 #include "dogen/generator/generation_failure.hpp"
 #include "dogen/utility/exception/invalid_enum_value.hpp"
 #include "dogen/generator/backends/cpp/formatters/cpp_licence.hpp"
@@ -102,7 +103,7 @@ format_domain_class(const class_view_model& vm) {
 void forward_declarations_header::format_class(const file_view_model& vm) {
     boost::optional<view_models::class_view_model> o(vm.class_vm());
     if (!o)
-        throw generation_failure(missing_class_view_model);
+        BOOST_THROW_EXCEPTION(generation_failure(missing_class_view_model));
 
     const auto ft(vm.facet_type());
     const view_models::class_view_model& cvm(*o);
@@ -112,14 +113,14 @@ void forward_declarations_header::format_class(const file_view_model& vm) {
         format_domain_class(cvm);
     else {
         using dogen::utility::exception::invalid_enum_value;
-        throw invalid_enum_value(invalid_facet_types);
+        BOOST_THROW_EXCEPTION(invalid_enum_value(invalid_facet_types));
     }
 }
 
 void forward_declarations_header::format_enumeration(const file_view_model& vm) {
     const auto o(vm.enumeration_vm());
     if (!o)
-        throw generation_failure(missing_enumeration_view_model);
+        BOOST_THROW_EXCEPTION(generation_failure(missing_enumeration_view_model));
 
     const auto evm(*o);
     {
@@ -135,7 +136,7 @@ void forward_declarations_header::format_enumeration(const file_view_model& vm) 
 void forward_declarations_header::format_exception(const file_view_model& vm) {
     const auto o(vm.exception_vm());
     if (!o)
-        throw generation_failure(missing_exception_view_model);
+        BOOST_THROW_EXCEPTION(generation_failure(missing_exception_view_model));
 
     const auto evm(*o);
     {
@@ -151,7 +152,7 @@ void forward_declarations_header::format_exception(const file_view_model& vm) {
 void forward_declarations_header::format(const file_view_model& vm) {
     if (vm.aspect_type() != cpp_aspect_types::forward_decls) {
         using dogen::utility::exception::invalid_enum_value;
-        throw invalid_enum_value(invalid_facet_types);
+        BOOST_THROW_EXCEPTION(invalid_enum_value(invalid_facet_types));
     }
 
     licence licence(stream_);
