@@ -31,4 +31,6 @@
 #include "dogen/trivial_inheritance/serialization/pkg3/child_ser.hpp"
 #include "dogen/trivial_inheritance/serialization/pkg4/child_ser.hpp"
 #include "dogen/trivial_inheritance/serialization/second_child_without_members_ser.hpp"
+#include "dogen/trivial_inheritance/serialization/service_interface_ser.hpp"
+#include "dogen/trivial_inheritance/serialization/service_ser.hpp"
 #include "dogen/trivial_inheritance/serialization/third_child_with_members_ser.hpp"

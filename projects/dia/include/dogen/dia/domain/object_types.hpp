@@ -39,6 +39,7 @@ enum class object_types : unsigned int {
     uml_association = 4, ///< UML Association
     uml_note = 5, ///< UML Note
     uml_message = 6, ///< UML Message
+    uml_realization = 7 ///< UML Realization
 };
 
 } }

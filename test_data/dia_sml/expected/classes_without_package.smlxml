@@ -23,7 +23,7 @@
 					<count>0</count>
 					<item_version>0</item_version>
 				</package_path>
-				<type_name>class_1</type_name>
+				<type_name>class_3</type_name>
 				<meta_type>2</meta_type>
 			</first>
 			<second class_id="6" tracking_level="0" version="0">
@@ -37,7 +37,7 @@
 						<count>0</count>
 						<item_version>0</item_version>
 					</package_path>
-					<type_name>class_1</type_name>
+					<type_name>class_3</type_name>
 					<meta_type>2</meta_type>
 				</name>
 				<properties class_id="7" tracking_level="0" version="0">
@@ -76,6 +76,81 @@
 					<initialized>0</initialized>
 				</original_parent_name>
 				<leaves class_id="12" tracking_level="0" version="0">
+					<count>0</count>
+					<item_version>0</item_version>
+				</leaves>
+				<generation_type>1</generation_type>
+				<is_parent>0</is_parent>
+				<category_type>1</category_type>
+				<pod_type>0</pod_type>
+				<documentation></documentation>
+				<number_of_type_arguments>0</number_of_type_arguments>
+			</second>
+		</item>
+		<item>
+			<first>
+				<model_name>classes_without_package</model_name>
+				<external_package_path>
+					<count>0</count>
+					<item_version>0</item_version>
+				</external_package_path>
+				<package_path>
+					<count>0</count>
+					<item_version>0</item_version>
+				</package_path>
+				<type_name>class_5</type_name>
+				<meta_type>2</meta_type>
+			</first>
+			<second>
+				<name>
+					<model_name>classes_without_package</model_name>
+					<external_package_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</external_package_path>
+					<package_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</package_path>
+					<type_name>class_5</type_name>
+					<meta_type>2</meta_type>
+				</name>
+				<properties>
+					<count>1</count>
+					<item_version>0</item_version>
+					<item>
+						<name>prop_0</name>
+						<type_name>
+							<type>
+								<model_name></model_name>
+								<external_package_path>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_package_path>
+								<package_path>
+									<count>0</count>
+									<item_version>0</item_version>
+								</package_path>
+								<type_name>int</type_name>
+								<meta_type>0</meta_type>
+							</type>
+							<children>
+								<count>0</count>
+								<item_version>0</item_version>
+							</children>
+							<is_pointer>0</is_pointer>
+						</type_name>
+						<default_value></default_value>
+						<documentation></documentation>
+					</item>
+				</properties>
+				<parent_name>
+					<initialized>0</initialized>
+				</parent_name>
+				<original_parent_name>
+					<initialized>0</initialized>
+				</original_parent_name>
+				<leaves>
 					<count>0</count>
 					<item_version>0</item_version>
 				</leaves>
@@ -173,7 +248,7 @@
 					<count>0</count>
 					<item_version>0</item_version>
 				</package_path>
-				<type_name>class_3</type_name>
+				<type_name>class_1</type_name>
 				<meta_type>2</meta_type>
 			</first>
 			<second>
@@ -187,7 +262,7 @@
 						<count>0</count>
 						<item_version>0</item_version>
 					</package_path>
-					<type_name>class_3</type_name>
+					<type_name>class_1</type_name>
 					<meta_type>2</meta_type>
 				</name>
 				<properties>
@@ -263,81 +338,6 @@
 						<item_version>0</item_version>
 					</package_path>
 					<type_name>class_4</type_name>
-					<meta_type>2</meta_type>
-				</name>
-				<properties>
-					<count>1</count>
-					<item_version>0</item_version>
-					<item>
-						<name>prop_0</name>
-						<type_name>
-							<type>
-								<model_name></model_name>
-								<external_package_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</external_package_path>
-								<package_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</package_path>
-								<type_name>int</type_name>
-								<meta_type>0</meta_type>
-							</type>
-							<children>
-								<count>0</count>
-								<item_version>0</item_version>
-							</children>
-							<is_pointer>0</is_pointer>
-						</type_name>
-						<default_value></default_value>
-						<documentation></documentation>
-					</item>
-				</properties>
-				<parent_name>
-					<initialized>0</initialized>
-				</parent_name>
-				<original_parent_name>
-					<initialized>0</initialized>
-				</original_parent_name>
-				<leaves>
-					<count>0</count>
-					<item_version>0</item_version>
-				</leaves>
-				<generation_type>1</generation_type>
-				<is_parent>0</is_parent>
-				<category_type>1</category_type>
-				<pod_type>0</pod_type>
-				<documentation></documentation>
-				<number_of_type_arguments>0</number_of_type_arguments>
-			</second>
-		</item>
-		<item>
-			<first>
-				<model_name>classes_without_package</model_name>
-				<external_package_path>
-					<count>0</count>
-					<item_version>0</item_version>
-				</external_package_path>
-				<package_path>
-					<count>0</count>
-					<item_version>0</item_version>
-				</package_path>
-				<type_name>class_5</type_name>
-				<meta_type>2</meta_type>
-			</first>
-			<second>
-				<name>
-					<model_name>classes_without_package</model_name>
-					<external_package_path>
-						<count>0</count>
-						<item_version>0</item_version>
-					</external_package_path>
-					<package_path>
-						<count>0</count>
-						<item_version>0</item_version>
-					</package_path>
-					<type_name>class_5</type_name>
 					<meta_type>2</meta_type>
 				</name>
 				<properties>

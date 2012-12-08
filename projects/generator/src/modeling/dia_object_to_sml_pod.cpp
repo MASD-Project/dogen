@@ -621,6 +621,7 @@ bool dia_object_to_sml_pod::is_processable(const dia::object& o) const {
     return
         ot == object_types::uml_generalization ||
         ot == object_types::uml_association ||
+        ot == object_types::uml_realization ||
         ot == object_types::uml_class;
 }
 
