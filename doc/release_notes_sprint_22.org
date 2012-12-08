@@ -10,16 +10,17 @@ This file contains all stories that were closed during sprint 22.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2012-12-06 Thu 14:35]
+Clock summary at [2012-12-08 Sat 18:42]
 
 | Headline                                                                 | Time   |      |      |
 |--------------------------------------------------------------------------+--------+------+------|
-| *Total time*                                                             | *5:51* |      |      |
+| *Total time*                                                             | *7:13* |      |      |
 |--------------------------------------------------------------------------+--------+------+------|
-| Development Stories Implemented                                          |        | 5:51 |      |
+| Development Stories Implemented                                          |        | 7:13 |      |
 | COMPLETED Outputting of floating point numbers is resulting in roundings |        |      | 1:00 |
 | COMPLETED Vector of double still suffers from floating point issues      |        |      | 0:20 |
-| IMPLEMENTATION Clocking of agile and build overhead                      |        |      | 4:31 |
+| COMPLETED Ignore UML realisation relationship in Dia                     |        |      | 0:42 |
+| COMPLETED Clocking of agile and build overhead                           |        |      | 5:11 |
 #+end:
 
 *** COMPLETED Outputting of floating point numbers is resulting in roundings :spike:
@@ -45,7 +46,15 @@ once we refactored the class. This is because dogen is not handling
 that a =bool= or floating point number at any level causes the stream
 to format correctly.
 
-*** IMPLEMENTATION Clocking of agile and build overhead               :story:
+*** COMPLETED Ignore UML realisation relationship in Dia              :spike:
+    CLOSED: [2012-12-08 Sat 18:42]
+    CLOCK: [2012-12-08 Sat 18:00]--[2012-12-08 Sat 18:42] =>  0:42
+
+Treat UML realisation as we treat aggregation - that is allow it to
+exist in the diagram without doing any processing to it.
+
+*** COMPLETED Clocking of agile and build overhead                    :story:
+    CLOSED: [2012-12-08 Sat 18:42]
 
 This story keeps track of the time spent on stand-up meetings, other
 process meetings and the time taken with build checking and fixes, as
@@ -84,6 +93,11 @@ Stand up and build checking.
 
 **** COMPLETED Build checking and stand-up on 2012-12-05
      CLOCK: [2012-12-05 Wed 06:20]--[2012-12-05 Wed 06:58] =>  0:38
+
+Stand up and build checking.
+
+**** COMPLETED Build checking and stand-up on 2012-12-07
+     CLOCK: [2012-12-07 Fri 06:20]--[2012-12-07 Fri 07:00] =>  0:40
 
 Stand up and build checking.
 
