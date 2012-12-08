@@ -18,6 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/throw_exception.hpp>
 #include "dogen/generator/backends/cpp/cpp_inclusion_manager.hpp"
 #include "dogen/generator/generation_failure.hpp"
 #include "dogen/generator/backends/cpp/formatters/factory.hpp"
@@ -53,14 +54,14 @@ cpp_backend(const sml::model& model, const config::cpp_settings& settings) :
         const auto f(settings_.enabled_facets());
         const bool has_io_facet(f.find(cpp_facet_types::io) != f.end());
         if (has_io_facet) {
-            throw generation_failure(
-                integrated_io_incompatible_with_io_facet);
+            BOOST_THROW_EXCEPTION(generation_failure(
+                integrated_io_incompatible_with_io_facet));
         }
     }
 
     const auto f(settings_.enabled_facets());
     if (f.find(cpp_facet_types::domain) == f.end()) {
-        throw generation_failure(domain_facet_must_be_enabled);
+        BOOST_THROW_EXCEPTION(generation_failure(domain_facet_must_be_enabled));
     }
 }
 
