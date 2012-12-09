@@ -170,12 +170,20 @@ public:
         float_property_ = v;
     }
 
-    dogen::all_primitives::a_class_versioned_key versioned_key() const {
+    const dogen::all_primitives::a_class_versioned_key& versioned_key() const {
+        return versioned_key_;
+    }
+
+    dogen::all_primitives::a_class_versioned_key& versioned_key() {
         return versioned_key_;
     }
 
     void versioned_key(const dogen::all_primitives::a_class_versioned_key& v) {
         versioned_key_ = v;
+    }
+
+    void versioned_key(const dogen::all_primitives::a_class_versioned_key&& v) {
+        versioned_key_ = std::move(v);
     }
 
 public:

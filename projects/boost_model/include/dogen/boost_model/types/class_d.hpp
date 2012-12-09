@@ -59,7 +59,11 @@ private:
     friend void boost::serialization::load(Archive& ar, class_d& v, unsigned int version);
 
 public:
-    boost::optional<int> prop_0() const {
+    const boost::optional<int>& prop_0() const {
+        return prop_0_;
+    }
+
+    boost::optional<int>& prop_0() {
         return prop_0_;
     }
 
@@ -67,7 +71,15 @@ public:
         prop_0_ = v;
     }
 
-    boost::optional<dogen::boost_model::class_a> prop_1() const {
+    void prop_0(const boost::optional<int>&& v) {
+        prop_0_ = std::move(v);
+    }
+
+    const boost::optional<dogen::boost_model::class_a>& prop_1() const {
+        return prop_1_;
+    }
+
+    boost::optional<dogen::boost_model::class_a>& prop_1() {
         return prop_1_;
     }
 
@@ -75,7 +87,15 @@ public:
         prop_1_ = v;
     }
 
-    boost::optional<dogen::boost_model::pkg1::class_c> prop_2() const {
+    void prop_1(const boost::optional<dogen::boost_model::class_a>&& v) {
+        prop_1_ = std::move(v);
+    }
+
+    const boost::optional<dogen::boost_model::pkg1::class_c>& prop_2() const {
+        return prop_2_;
+    }
+
+    boost::optional<dogen::boost_model::pkg1::class_c>& prop_2() {
         return prop_2_;
     }
 
@@ -83,12 +103,24 @@ public:
         prop_2_ = v;
     }
 
-    boost::optional<std::vector<dogen::boost_model::class_a> > prop_3() const {
+    void prop_2(const boost::optional<dogen::boost_model::pkg1::class_c>&& v) {
+        prop_2_ = std::move(v);
+    }
+
+    const boost::optional<std::vector<dogen::boost_model::class_a> >& prop_3() const {
+        return prop_3_;
+    }
+
+    boost::optional<std::vector<dogen::boost_model::class_a> >& prop_3() {
         return prop_3_;
     }
 
     void prop_3(const boost::optional<std::vector<dogen::boost_model::class_a> >& v) {
         prop_3_ = v;
+    }
+
+    void prop_3(const boost::optional<std::vector<dogen::boost_model::class_a> >&& v) {
+        prop_3_ = std::move(v);
     }
 
 public:

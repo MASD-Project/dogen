@@ -964,12 +964,20 @@ public:
         private_attribute_ = v;
     }
 
-    class_in_a_package::package1::first_class_versioned_key versioned_key() const {
+    const class_in_a_package::package1::first_class_versioned_key& versioned_key() const {
+        return versioned_key_;
+    }
+
+    class_in_a_package::package1::first_class_versioned_key& versioned_key() {
         return versioned_key_;
     }
 
     void versioned_key(const class_in_a_package::package1::first_class_versioned_key& v) {
         versioned_key_ = v;
+    }
+
+    void versioned_key(const class_in_a_package::package1::first_class_versioned_key&& v) {
+        versioned_key_ = std::move(v);
     }
 
 public:

@@ -62,12 +62,20 @@ public:
         prop_0_ = v;
     }
 
-    dogen::entity_service_value::entity_versioned_key versioned_key() const {
+    const dogen::entity_service_value::entity_versioned_key& versioned_key() const {
+        return versioned_key_;
+    }
+
+    dogen::entity_service_value::entity_versioned_key& versioned_key() {
         return versioned_key_;
     }
 
     void versioned_key(const dogen::entity_service_value::entity_versioned_key& v) {
         versioned_key_ = v;
+    }
+
+    void versioned_key(const dogen::entity_service_value::entity_versioned_key&& v) {
+        versioned_key_ = std::move(v);
     }
 
 public:

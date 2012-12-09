@@ -28,6 +28,7 @@
 #include <iosfwd>
 #include <string>
 #include "dogen/generator/backends/cpp/view_models/class_view_model.hpp"
+#include "dogen/generator/backends/cpp/view_models/property_view_model.hpp"
 #include "dogen/generator/backends/cpp/formatters/cpp_indenter.hpp"
 #include "dogen/generator/backends/cpp/formatters/cpp_utility.hpp"
 
@@ -40,6 +41,7 @@ namespace formatters {
 class cpp_class_declaration {
 public:
     typedef view_models::class_view_model class_view_model;
+    typedef view_models::property_view_model property_view_model;
 
 public:
     cpp_class_declaration() = delete;
@@ -62,6 +64,8 @@ protected:
     void destructor(const class_view_model& vm);
     void friends(const class_view_model& vm);
     void getters_and_setters(const class_view_model& vm);
+    void primitive_getters_and_setters(const property_view_model& vm);
+    void non_primitive_getters_and_setters(const property_view_model& vm);
     void member_variables(const class_view_model& vm);
     void equality(const class_view_model& vm);
     void to_stream(const class_view_model& vm);

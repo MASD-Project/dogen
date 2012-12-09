@@ -193,43 +193,125 @@ void cpp_class_declaration::friends(const class_view_model& vm) {
     utility_.blank_line();
 }
 
+void cpp_class_declaration::
+primitive_getters_and_setters(const property_view_model& vm) {
+    cpp_doxygen_comments dc(stream_, indenter_);
+    dc.format(vm.documentation());
+    dc.format_start_block(vm.documentation());
+    stream_ << indenter_ << vm.type().complete_name() << " " << vm.name()
+            << "() const ";
+
+    utility_.open_scope();
+    {
+        cpp_positive_indenter_scope s(indenter_);
+        stream_ << indenter_ << "return "
+                << utility_.as_member_variable(vm.name()) << ";"
+                << std::endl;
+    }
+    utility_.close_scope();
+    utility_.blank_line();
+
+    stream_ << indenter_ << "void " << vm.name() << "(const "
+            << vm.type().complete_name();
+
+    if (!vm.type().is_primitive())
+        stream_ << "&";
+
+    stream_ << " v) ";
+    utility_.open_scope();
+    {
+        cpp_positive_indenter_scope s(indenter_);
+        stream_ << indenter_ << utility_.as_member_variable(vm.name())
+                << " = v;" << std::endl;
+    }
+    utility_.close_scope();
+    dc.format_end_block(vm.documentation());
+    utility_.blank_line();
+}
+
+void cpp_class_declaration::
+non_primitive_getters_and_setters(const property_view_model& vm) {
+    cpp_doxygen_comments dc(stream_, indenter_);
+    dc.format(vm.documentation());
+    dc.format_start_block(vm.documentation());
+
+    // const getter
+    stream_ << indenter_ << "const " << vm.type().complete_name()
+            << "& " << vm.name()
+            << "() const ";
+    utility_.open_scope();
+    {
+        cpp_positive_indenter_scope s(indenter_);
+        stream_ << indenter_ << "return "
+                << utility_.as_member_variable(vm.name()) << ";"
+                << std::endl;
+    }
+    utility_.close_scope();
+    utility_.blank_line();
+
+    // Popsicle immutability
+    stream_ << indenter_ << "" << vm.type().complete_name()
+            << "& " << vm.name()
+            << "() ";
+    utility_.open_scope();
+    {
+        cpp_positive_indenter_scope s(indenter_);
+        stream_ << indenter_ << "return "
+                << utility_.as_member_variable(vm.name()) << ";"
+                << std::endl;
+    }
+    utility_.close_scope();
+    utility_.blank_line();
+
+    // traditional setter
+    stream_ << indenter_ << "void " << vm.name() << "(const "
+            << vm.type().complete_name();
+
+    if (!vm.type().is_primitive())
+        stream_ << "&";
+
+    stream_ << " v) ";
+    utility_.open_scope();
+    {
+        cpp_positive_indenter_scope s(indenter_);
+        stream_ << indenter_ << utility_.as_member_variable(vm.name())
+                << " = v;" << std::endl;
+    }
+    utility_.close_scope();
+    utility_.blank_line();
+
+    // move setter
+    stream_ << indenter_ << "void " << vm.name() << "(const "
+            << vm.type().complete_name();
+
+    if (!vm.type().is_primitive())
+        stream_ << "&&";
+
+    stream_ << " v) ";
+    utility_.open_scope();
+    {
+        cpp_positive_indenter_scope s(indenter_);
+        stream_ << indenter_ << utility_.as_member_variable(vm.name())
+                << " = std::move(v);" << std::endl;
+    }
+    utility_.close_scope();
+
+    dc.format_end_block(vm.documentation());
+    utility_.blank_line();
+}
+
 void cpp_class_declaration::getters_and_setters(const class_view_model& vm) {
     if (vm.properties().empty())
         return;
 
     utility_.public_access_specifier();
-    cpp_doxygen_comments dc(stream_, indenter_);
     for (const auto p : vm.properties()) {
-        dc.format(p.documentation());
-        dc.format_start_block(p.documentation());
-        stream_ << indenter_ << p.type().complete_name() << " " << p.name()
-                << "() const ";
-        utility_.open_scope();
-        {
-            cpp_positive_indenter_scope s(indenter_);
-            stream_ << indenter_ << "return "
-                    << utility_.as_member_variable(p.name()) << ";"
-                    << std::endl;
+        if (p.type().is_primitive()) {
+            primitive_getters_and_setters(p);
+            continue;
         }
-        utility_.close_scope();
-        utility_.blank_line();
 
-        stream_ << indenter_ << "void " << p.name() << "(const "
-                << p.type().complete_name();
-
-        if (!p.type().is_primitive())
-            stream_ << "&";
-
-        stream_ << " v) ";
-        utility_.open_scope();
-        {
-            cpp_positive_indenter_scope s(indenter_);
-            stream_ << indenter_ << utility_.as_member_variable(p.name())
-                    << " = v;" << std::endl;
-        }
-        utility_.close_scope();
-        dc.format_end_block(p.documentation());
-        utility_.blank_line();
+        non_primitive_getters_and_setters(p);
     }
 }
 

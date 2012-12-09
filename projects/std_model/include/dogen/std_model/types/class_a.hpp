@@ -54,7 +54,11 @@ private:
     friend void boost::serialization::load(Archive& ar, class_a& v, unsigned int version);
 
 public:
-    std::string prop0() const {
+    const std::string& prop0() const {
+        return prop0_;
+    }
+
+    std::string& prop0() {
         return prop0_;
     }
 
@@ -62,25 +66,45 @@ public:
         prop0_ = v;
     }
 
+    void prop0(const std::string&& v) {
+        prop0_ = std::move(v);
+    }
+
     /*
      * @brief test inclusion duplicates
      */
     /**@{*/
-    std::string prop1() const {
+    const std::string& prop1() const {
+        return prop1_;
+    }
+
+    std::string& prop1() {
         return prop1_;
     }
 
     void prop1(const std::string& v) {
         prop1_ = v;
     }
+
+    void prop1(const std::string&& v) {
+        prop1_ = std::move(v);
+    }
     /**@}*/
 
-    dogen::std_model::class_a_versioned_key versioned_key() const {
+    const dogen::std_model::class_a_versioned_key& versioned_key() const {
+        return versioned_key_;
+    }
+
+    dogen::std_model::class_a_versioned_key& versioned_key() {
         return versioned_key_;
     }
 
     void versioned_key(const dogen::std_model::class_a_versioned_key& v) {
         versioned_key_ = v;
+    }
+
+    void versioned_key(const dogen::std_model::class_a_versioned_key&& v) {
+        versioned_key_ = std::move(v);
     }
 
 public:

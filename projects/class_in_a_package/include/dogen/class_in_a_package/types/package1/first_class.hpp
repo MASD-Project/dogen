@@ -72,12 +72,20 @@ public:
         private_attribute_ = v;
     }
 
-    dogen::class_in_a_package::package1::first_class_versioned_key versioned_key() const {
+    const dogen::class_in_a_package::package1::first_class_versioned_key& versioned_key() const {
+        return versioned_key_;
+    }
+
+    dogen::class_in_a_package::package1::first_class_versioned_key& versioned_key() {
         return versioned_key_;
     }
 
     void versioned_key(const dogen::class_in_a_package::package1::first_class_versioned_key& v) {
         versioned_key_ = v;
+    }
+
+    void versioned_key(const dogen::class_in_a_package::package1::first_class_versioned_key&& v) {
+        versioned_key_ = std::move(v);
     }
 
 public:

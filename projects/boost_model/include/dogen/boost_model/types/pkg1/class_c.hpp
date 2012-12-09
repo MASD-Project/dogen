@@ -64,12 +64,20 @@ public:
         prop_0_ = v;
     }
 
-    std::vector<dogen::boost_model::class_a> prop_1() const {
+    const std::vector<dogen::boost_model::class_a>& prop_1() const {
+        return prop_1_;
+    }
+
+    std::vector<dogen::boost_model::class_a>& prop_1() {
         return prop_1_;
     }
 
     void prop_1(const std::vector<dogen::boost_model::class_a>& v) {
         prop_1_ = v;
+    }
+
+    void prop_1(const std::vector<dogen::boost_model::class_a>&& v) {
+        prop_1_ = std::move(v);
     }
 
 public:
