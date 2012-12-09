@@ -18,6 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/throw_exception.hpp>
 #include "dogen/generator/generation_failure.hpp"
 #include "dogen/generator/backends/cpp/formatters/cpp_namespace.hpp"
 #include "dogen/generator/backends/cpp/formatters/cpp_namespace_helper.hpp"
@@ -53,7 +54,7 @@ create(std::ostream& stream) {
 void registrar_header::format(const file_view_model& vm) {
     const auto o(vm.registrar_vm());
     if (!o)
-        throw generation_failure(expected_registrar_view_model);
+        BOOST_THROW_EXCEPTION(generation_failure(expected_registrar_view_model));
 
     licence licence(stream_);
     licence.format();

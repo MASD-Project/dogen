@@ -188,7 +188,7 @@ void hash_implementation::
 associative_container_helper(const nested_type_view_model& vm) {
     const auto children(vm.children());
     if (children.size() != 1 && children.size() != 2)
-        throw generation_failure(invalid_associative_container);
+        BOOST_THROW_EXCEPTION(generation_failure(invalid_associative_container));
 
     if (children.size() == 1) {
         sequence_container_helper(vm);
@@ -243,7 +243,7 @@ void hash_implementation::
 smart_pointer_helper(const nested_type_view_model& vm) {
     const auto children(vm.children());
     if (children.size() != 1)
-        throw generation_failure(invalid_smart_pointer);
+        BOOST_THROW_EXCEPTION(generation_failure(invalid_smart_pointer));
 
     const std::string container_identifiable_type_name(
         vm.complete_identifiable_name());
@@ -360,7 +360,7 @@ void hash_implementation::hasher_hash_method(const class_view_model& vm) {
 void hash_implementation::format_class(const file_view_model& vm) {
     boost::optional<view_models::class_view_model> o(vm.class_vm());
     if (!o)
-        throw generation_failure(missing_class_view_model);
+        BOOST_THROW_EXCEPTION(generation_failure(missing_class_view_model));
 
     const class_view_model& cvm(*o);
     {
@@ -382,7 +382,7 @@ void hash_implementation::format_class(const file_view_model& vm) {
 }
 
 void hash_implementation::format_enumeration(const file_view_model&) {
-    throw generation_failure(enumeration_view_model_not_supported);
+    BOOST_THROW_EXCEPTION(generation_failure(enumeration_view_model_not_supported));
 }
 
 void hash_implementation::format(const file_view_model& vm) {

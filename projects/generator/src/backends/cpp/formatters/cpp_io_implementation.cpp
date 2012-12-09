@@ -19,6 +19,7 @@
  *
  */
 #include <ostream>
+#include <boost/throw_exception.hpp>
 #include "dogen/generator/generation_failure.hpp"
 #include "dogen/generator/backends/cpp/formatters/cpp_inserter_implementation.hpp"
 #include "dogen/generator/backends/cpp/formatters/cpp_qualified_name.hpp"
@@ -74,7 +75,7 @@ void io_implementation::io_helper_methods(const class_view_model& vm) {
 void io_implementation::format_enumeration(const file_view_model& vm) {
     const auto o(vm.enumeration_vm());
     if (!o)
-        throw generation_failure(missing_enumeration_view_model);
+        BOOST_THROW_EXCEPTION(generation_failure(missing_enumeration_view_model));
 
     const auto evm(*o);
     namespace_helper ns_helper(stream_, evm.namespaces());
@@ -136,7 +137,7 @@ void io_implementation::format_enumeration(const file_view_model& vm) {
 void io_implementation::format_class(const file_view_model& vm) {
     const auto o(vm.class_vm());
     if (!o)
-        throw generation_failure(missing_class_view_model);
+        BOOST_THROW_EXCEPTION(generation_failure(missing_class_view_model));
 
     const view_models::class_view_model& cvm(*o);
     io_helper_methods(cvm);

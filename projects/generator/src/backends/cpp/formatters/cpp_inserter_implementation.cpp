@@ -20,6 +20,7 @@
  */
 #include <ostream>
 #include <sstream>
+#include <boost/throw_exception.hpp>
 #include "dogen/generator/backends/cpp/formatters/cpp_qualified_name.hpp"
 #include "dogen/generator/generation_failure.hpp"
 #include "dogen/generator/backends/cpp/formatters/cpp_namespace_helper.hpp"
@@ -80,7 +81,7 @@ void cpp_inserter_implementation::
 sequence_container_helper(const nested_type_view_model& vm) {
     const auto children(vm.children());
     if (children.size() != 1)
-        throw generation_failure(invalid_sequence_container);
+        BOOST_THROW_EXCEPTION(generation_failure(invalid_sequence_container));
 
     const auto container(vm);
     const auto containee(children.front());
@@ -130,7 +131,7 @@ void cpp_inserter_implementation::
 associative_container_helper(const nested_type_view_model& vm) {
     const auto children(vm.children());
     if (children.size() != 1 && children.size() != 2)
-        throw generation_failure(invalid_associative_container);
+        BOOST_THROW_EXCEPTION(generation_failure(invalid_associative_container));
 
     if (children.size() == 1) {
         sequence_container_helper(vm);
@@ -219,7 +220,7 @@ void cpp_inserter_implementation::
 smart_pointer_helper(const nested_type_view_model& vm) {
     const auto children(vm.children());
     if (children.size() != 1)
-        throw generation_failure(invalid_smart_pointer);
+        BOOST_THROW_EXCEPTION(generation_failure(invalid_smart_pointer));
 
     const auto container(vm);
     {
@@ -293,7 +294,7 @@ void cpp_inserter_implementation::
 optional_helper(const nested_type_view_model& vm) {
     const auto children(vm.children());
     if (children.size() != 1)
-        throw generation_failure(invalid_smart_pointer);
+        BOOST_THROW_EXCEPTION(generation_failure(invalid_smart_pointer));
 
     const auto container(vm);
     {
