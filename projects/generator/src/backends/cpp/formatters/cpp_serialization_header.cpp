@@ -21,6 +21,7 @@
 #include <string>
 #include <list>
 #include <ostream>
+#include <boost/throw_exception.hpp>
 #include "dogen/generator/generation_failure.hpp"
 #include "dogen/generator/backends/cpp/formatters/cpp_licence.hpp"
 #include "dogen/generator/backends/cpp/formatters/cpp_header_guards.hpp"
@@ -78,7 +79,7 @@ void serialization_header::load_and_save_functions(const class_view_model& vm) {
 void serialization_header::format_class(const file_view_model& vm) {
     const auto o(vm.class_vm());
     if (!o)
-        throw generation_failure(missing_class_view_model);
+        BOOST_THROW_EXCEPTION(generation_failure(missing_class_view_model));
 
     const view_models::class_view_model& cvm(*o);
     cpp_qualified_name qualified_name(stream_);
@@ -134,7 +135,7 @@ void serialization_header::format_class(const file_view_model& vm) {
 void serialization_header::format_enumeration(const file_view_model& vm) {
     const auto o(vm.enumeration_vm());
     if (!o)
-        throw generation_failure(missing_enumeration_view_model);
+        BOOST_THROW_EXCEPTION(generation_failure(missing_enumeration_view_model));
 
     const auto evm(*o);
     stream_ << indenter_ << "template<class Archive>" << std::endl

@@ -19,6 +19,7 @@
  *
  */
 #include <sstream>
+#include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/generator/backends/cpp/formatters/production_failure.hpp"
 #include "dogen/generator/backends/cpp/formatters/cpp_facet_includer.hpp"
@@ -115,7 +116,7 @@ factory::create_main_formatter(std::ostream& s, cpp_facet_types ft,
     default: {
         std::ostringstream s;
         s << production_failure_msg << ft << ", " << flt;
-        throw production_failure(s.str());
+        BOOST_THROW_EXCEPTION(production_failure(s.str()));
     } }
 }
 
@@ -135,7 +136,7 @@ factory::result_type factory::create_registrar_formatter(
     default: {
         std::ostringstream ss;
         ss << production_failure_msg << flt;
-        throw production_failure(ss.str());
+        BOOST_THROW_EXCEPTION(production_failure(ss.str()));
     } }
 }
 
@@ -167,7 +168,7 @@ factory::create(std::ostream& s, cpp_facet_types ft, cpp_file_types flt,
         std::ostringstream s;
         s << production_failure_msg << ft << ", " << flt << ", " << at;
         BOOST_LOG_SEV(lg, error) << s.str();
-        throw production_failure(s.str());
+        BOOST_THROW_EXCEPTION(production_failure(s.str()));
     } }
 }
 

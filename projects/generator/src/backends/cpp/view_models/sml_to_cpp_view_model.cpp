@@ -25,6 +25,7 @@
 #include <boost/algorithm/string/join.hpp>
 #include <boost/algorithm/string/predicate.hpp>
 #include <boost/graph/depth_first_search.hpp>
+#include <boost/throw_exception.hpp>
 #include "dogen/sml/io/meta_types_io.hpp"
 #include "dogen/sml/types/nested_qualified_name.hpp"
 #include "dogen/utility/log/logger.hpp"
@@ -279,8 +280,8 @@ void sml_dfs_visitor::transform_nested_qualified_name(
         const auto i(state_->pods_.find(qn));
         if (i == state_->pods_.end()) {
             using dogen::generator::backends::cpp::view_models::transformation_error;
-            throw transformation_error("pod not found in pod container: " +
-                qn.type_name());
+            BOOST_THROW_EXCEPTION(transformation_error("pod not found in pod container: " +
+                qn.type_name()));
         }
         const auto pt(i->second.pod_type());
         using dogen::sml::pod_types;
@@ -341,8 +342,8 @@ void sml_dfs_visitor::process_sml_pod(const dogen::sml::pod& pod) {
             BOOST_LOG_SEV(lg, error) << parent_view_model_not_found
                                      << name.type_name();
 
-            throw transformation_error(parent_view_model_not_found +
-                name.type_name());
+            BOOST_THROW_EXCEPTION(transformation_error(parent_view_model_not_found +
+                name.type_name()));
         }
 
         parent_view_model parent(pqn.type_name());
@@ -533,7 +534,7 @@ transform_file(cpp_facet_types ft, cpp_file_types flt, cpp_aspect_types at,
         BOOST_LOG_SEV(lg, error) << view_model_not_found
                                  << name.type_name();
 
-        throw transformation_error(view_model_not_found + name.type_name());
+        BOOST_THROW_EXCEPTION(transformation_error(view_model_not_found + name.type_name()));
     }
     r.class_vm(i->second);
 
@@ -558,7 +559,7 @@ transform_file(cpp_facet_types ft, cpp_file_types flt, cpp_aspect_types at,
         BOOST_LOG_SEV(lg, error) << view_model_not_found
                                  << name.type_name();
 
-        throw transformation_error(view_model_not_found + name.type_name());
+        BOOST_THROW_EXCEPTION(transformation_error(view_model_not_found + name.type_name()));
     }
     r.enumeration_vm(i->second);
 
@@ -583,7 +584,7 @@ transform_file(cpp_facet_types ft, cpp_file_types flt, cpp_aspect_types at,
         BOOST_LOG_SEV(lg, error) << view_model_not_found
                                  << name.type_name();
 
-        throw transformation_error(view_model_not_found + name.type_name());
+        BOOST_THROW_EXCEPTION(transformation_error(view_model_not_found + name.type_name()));
     }
     r.exception_vm(i->second);
 
@@ -613,7 +614,7 @@ bool sml_to_cpp_view_model::has_implementation(const cpp_facet_types ft,
     std::ostringstream s;
     s << unsupported_meta_type << mt;
     BOOST_LOG_SEV(lg, error) << s.str();
-    throw transformation_error(s.str());
+    BOOST_THROW_EXCEPTION(transformation_error(s.str()));
 }
 
 bool sml_to_cpp_view_model::has_forward_decls(const cpp_facet_types ft,
@@ -632,7 +633,7 @@ bool sml_to_cpp_view_model::has_forward_decls(const cpp_facet_types ft,
     std::ostringstream s;
     s << unsupported_meta_type << mt;
     BOOST_LOG_SEV(lg, error) << s.str();
-    throw transformation_error(s.str());
+    BOOST_THROW_EXCEPTION(transformation_error(s.str()));
 }
 
 void sml_to_cpp_view_model::create_class_view_models() {

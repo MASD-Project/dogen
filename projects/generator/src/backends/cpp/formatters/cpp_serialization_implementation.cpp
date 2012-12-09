@@ -21,6 +21,7 @@
 #include <list>
 #include <string>
 #include <ostream>
+#include <boost/throw_exception.hpp>
 #include "dogen/generator/generation_failure.hpp"
 #include "dogen/generator/backends/cpp/formatters/cpp_namespace_helper.hpp"
 #include "dogen/generator/backends/cpp/formatters/cpp_licence.hpp"
@@ -244,7 +245,7 @@ template_instantiations(const class_view_model& vm) {
 void serialization_implementation::format_class(const file_view_model& vm) {
     const auto o(vm.class_vm());
     if (!o)
-        throw generation_failure(missing_class_view_model);
+        BOOST_THROW_EXCEPTION(generation_failure(missing_class_view_model));
 
     const view_models::class_view_model& cvm(*o);
     cpp_qualified_name qualified_name(stream_);
@@ -281,7 +282,7 @@ void serialization_implementation::format_class(const file_view_model& vm) {
 
 void serialization_implementation::
 format_enumeration(const file_view_model&) {
-    throw generation_failure(enumeration_view_model_not_supported);
+    BOOST_THROW_EXCEPTION(generation_failure(enumeration_view_model_not_supported));
 }
 
 void serialization_implementation::format(const file_view_model& vm) {
