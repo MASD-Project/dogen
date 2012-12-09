@@ -18,6 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/throw_exception.hpp>
 #include "dogen/generator/generation_failure.hpp"
 #include "dogen/generator/backends/cpp/formatters/cpp_licence.hpp"
 #include "dogen/generator/backends/cpp/formatters/cpp_includes.hpp"
@@ -51,7 +52,7 @@ create(std::ostream& stream,cpp_facet_types facet_type) {
 
 void facet_includer::format(const file_view_model& vm) {
     if (vm.class_vm())
-        throw generation_failure(unexpected_class_view_model);
+        BOOST_THROW_EXCEPTION(generation_failure(unexpected_class_view_model));
 
     licence licence(stream_);
     licence.format();

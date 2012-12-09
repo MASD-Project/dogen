@@ -19,6 +19,7 @@
  *
  */
 #include <ostream>
+#include <boost/throw_exception.hpp>
 #include <boost/algorithm/string/predicate.hpp>
 #include "dogen/generator/generation_failure.hpp"
 #include "dogen/generator/backends/cpp/formatters/cpp_licence.hpp"
@@ -73,7 +74,7 @@ sequence_container_helper(
 
     const auto children(vm.children());
     if (children.size() != 1)
-        throw generation_failure(invalid_sequence_container);
+        BOOST_THROW_EXCEPTION(generation_failure(invalid_sequence_container));
 
     const auto containee_vm(children.front());
     const auto containee_identifiable_type_name(
@@ -110,7 +111,7 @@ associative_container_helper(
 
     const auto children(vm.children());
     if (children.size() != 1 && children.size() != 2)
-        throw generation_failure(invalid_associative_container);
+        BOOST_THROW_EXCEPTION(generation_failure(invalid_associative_container));
 
     const auto container_identifiable_type_name(vm.complete_identifiable_name());
     const auto container_type_name(vm.complete_name());
@@ -163,7 +164,7 @@ smart_pointer_helper(const nested_type_view_model& vm) {
 
     const auto children(vm.children());
     if (children.size() != 1)
-        throw generation_failure(invalid_smart_pointer);
+        BOOST_THROW_EXCEPTION(generation_failure(invalid_smart_pointer));
 
     const auto containee_vm(children.front());
     const auto containee_identifiable_type_name(
@@ -200,7 +201,7 @@ optional_helper(const nested_type_view_model& vm) {
 
     const auto children(vm.children());
     if (children.size() != 1)
-        throw generation_failure(invalid_smart_pointer);
+        BOOST_THROW_EXCEPTION(generation_failure(invalid_smart_pointer));
 
     const auto containee_vm(children.front());
     const auto containee_identifiable_type_name(
@@ -543,7 +544,7 @@ void generator_implementation::default_constructor(const class_view_model& vm) {
 void generator_implementation::format_class(const file_view_model& vm) {
     boost::optional<view_models::class_view_model> o(vm.class_vm());
     if (!o)
-        throw generation_failure(missing_class_view_model);
+        BOOST_THROW_EXCEPTION(generation_failure(missing_class_view_model));
 
     const class_view_model& cvm(*o);
     create_helper_methods(cvm);
@@ -570,7 +571,7 @@ void generator_implementation::format_class(const file_view_model& vm) {
 void generator_implementation::format_enumeration(const file_view_model& vm) {
     const auto o(vm.enumeration_vm());
     if (!o)
-        throw generation_failure(missing_enumeration_view_model);
+        BOOST_THROW_EXCEPTION(generation_failure(missing_enumeration_view_model));
 
     const auto evm(*o);
     {

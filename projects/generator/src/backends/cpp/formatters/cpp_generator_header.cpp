@@ -19,6 +19,7 @@
  *
  */
 #include <ostream>
+#include <boost/throw_exception.hpp>
 #include "dogen/generator/generation_failure.hpp"
 #include "dogen/generator/backends/cpp/formatters/cpp_licence.hpp"
 #include "dogen/generator/backends/cpp/formatters/cpp_header_guards.hpp"
@@ -147,7 +148,7 @@ void generator_header::generator_class(const class_view_model& vm) {
 void generator_header::format_enumeration(const file_view_model& vm) {
     const auto o(vm.enumeration_vm());
     if (!o)
-        throw generation_failure(missing_enumeration_view_model);
+        BOOST_THROW_EXCEPTION(generation_failure(missing_enumeration_view_model));
 
     const auto evm(*o);
     {
@@ -164,7 +165,7 @@ void generator_header::format_enumeration(const file_view_model& vm) {
 void generator_header::format_class(const file_view_model& vm) {
     boost::optional<view_models::class_view_model> o(vm.class_vm());
     if (!o)
-        throw generation_failure(missing_class_view_model);
+        BOOST_THROW_EXCEPTION(generation_failure(missing_class_view_model));
 
     {
         const view_models::class_view_model& cvm(*o);
