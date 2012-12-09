@@ -24,6 +24,7 @@
 #include <boost/algorithm/string/trim.hpp>
 #include <boost/algorithm/string/erase.hpp>
 #include <boost/graph/depth_first_search.hpp>
+#include <boost/throw_exception.hpp>
 #include "dogen/dia/utility/dia_utility.hpp"
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/generator/modeling/transformation_error.hpp"
@@ -65,7 +66,7 @@ dogen::dia::object_types parse_object_type(const std::string s) {
         stream << error_parsing_object_type << "'" << s
                << "'. Error: " << e.what();
         BOOST_LOG_SEV(lg, error) << stream.str();
-        throw transformation_error(stream.str());
+        BOOST_THROW_EXCEPTION(transformation_error(stream.str()));
     }
     return r;
 }
@@ -173,8 +174,8 @@ transform_string_attribute(const dogen::dia::attribute& a) const {
     if (v.size() != 1) {
         BOOST_LOG_SEV(lg, error) << "Expected attribute to have one"
                                  << " value but found " << v.size();
-        throw transformation_error(unexpected_attribute_value_size +
-            boost::lexical_cast<std::string>(v.size()));
+        BOOST_THROW_EXCEPTION(transformation_error(unexpected_attribute_value_size +
+            boost::lexical_cast<std::string>(v.size())));
     }
 
     dogen::dia::string s;
@@ -188,8 +189,8 @@ transform_string_attribute(const dogen::dia::attribute& a) const {
     } catch (const boost::bad_get&) {
         BOOST_LOG_SEV(lg, error) << unexpected_attribute_value_type
                                  << dia_string;
-        throw transformation_error(unexpected_attribute_value_type +
-            dia_string);
+        BOOST_THROW_EXCEPTION(transformation_error(unexpected_attribute_value_type +
+            dia_string));
     }
 }
 
@@ -198,7 +199,7 @@ transform_qualified_name(const dogen::dia::attribute& a,
     dogen::sml::meta_types meta_type) const {
     if (a.name() != dia_name) {
         BOOST_LOG_SEV(lg, error) << name_attribute_expected;
-        throw transformation_error(name_attribute_expected);
+        BOOST_THROW_EXCEPTION(transformation_error(name_attribute_expected));
     }
 
     dogen::sml::qualified_name name;
@@ -210,7 +211,7 @@ transform_qualified_name(const dogen::dia::attribute& a,
     name.type_name(transform_string_attribute(a));
     if (name.type_name().empty()) {
         BOOST_LOG_SEV(lg, error) << empty_dia_object_name;
-        throw transformation_error(empty_dia_object_name);
+        BOOST_THROW_EXCEPTION(transformation_error(empty_dia_object_name));
     }
     return name;
 }
@@ -227,7 +228,7 @@ dia_dfs_visitor::transform_package(const dogen::dia::object& o) {
     }
 
     if (package.name().type_name().empty()) {
-        throw transformation_error(name_attribute_expected + o.id());
+        BOOST_THROW_EXCEPTION(transformation_error(name_attribute_expected + o.id()));
         BOOST_LOG_SEV(lg, error) << name_attribute_expected + o.id();
     }
 
@@ -258,7 +259,7 @@ void dia_dfs_visitor::push_package_path(const dogen::dia::object& o) {
 
     if (!found_name) {
         BOOST_LOG_SEV(lg, error) << name_attribute_expected + o.id();
-        throw transformation_error(name_attribute_expected + o.id());
+        BOOST_THROW_EXCEPTION(transformation_error(name_attribute_expected + o.id()));
     }
 
 }
@@ -300,7 +301,7 @@ void dia_object_to_sml_package::add_object(const dia::object& o) {
         BOOST_LOG_SEV(lg, error) << "Expected composite type "
                                  << " to be " << dia_uml_attribute
                                  << "but was " << o.type();
-        throw transformation_error(uml_attribute_expected);
+        BOOST_THROW_EXCEPTION(transformation_error(uml_attribute_expected));
 
     }
 

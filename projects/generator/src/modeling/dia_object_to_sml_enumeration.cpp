@@ -31,6 +31,7 @@
 #include <boost/variant/get.hpp>
 #include <boost/algorithm/string/trim.hpp>
 #include <boost/algorithm/string/erase.hpp>
+#include <boost/throw_exception.hpp>
 #include "dogen/dia/domain/composite.hpp"
 #include "dogen/dia/domain/attribute.hpp"
 #include "dogen/dia/domain/object_types.hpp"
@@ -98,7 +99,7 @@ dogen::dia::object_types parse_object_type(const std::string s) {
         stream << error_parsing_object_type << "'" << s
                << "'. Error: " << e.what();
         BOOST_LOG_SEV(lg, error) << stream.str();
-        throw transformation_error(stream.str());
+        BOOST_THROW_EXCEPTION(transformation_error(stream.str()));
     }
     return r;
 }
@@ -118,7 +119,7 @@ dogen::dia::stereotypes parse_stereotype(const std::string s) {
         stream << error_parsing_stereotype << "'" << s
                << "'. Error: " << e.what();
         BOOST_LOG_SEV(lg, error) << stream.str();
-        throw transformation_error(stream.str());
+        BOOST_THROW_EXCEPTION(transformation_error(stream.str()));
     }
     return r;
 }
@@ -134,8 +135,8 @@ attribute_value(const dogen::dia::attribute::attribute_value& v,
     } catch (const boost::bad_get&) {
         BOOST_LOG_SEV(lg, error) << unexpected_attribute_value_type
                                  << description;
-        throw transformation_error(unexpected_attribute_value_type +
-            description);
+        BOOST_THROW_EXCEPTION(transformation_error(unexpected_attribute_value_type +
+            description));
     }
     return r;
 }
@@ -151,7 +152,7 @@ transform_qualified_name(const dogen::dia::attribute& a,
     dogen::sml::meta_types meta_type, const std::string& pkg_id) const {
     if (a.name() != dia_name) {
         BOOST_LOG_SEV(lg, error) << name_attribute_expected;
-        throw transformation_error(name_attribute_expected);
+        BOOST_THROW_EXCEPTION(transformation_error(name_attribute_expected));
     }
 
     dogen::sml::qualified_name name;
@@ -163,7 +164,7 @@ transform_qualified_name(const dogen::dia::attribute& a,
         const auto i(packages_.find(pkg_id));
         if (i == packages_.end()) {
             BOOST_LOG_SEV(lg, error) << missing_package_for_id << pkg_id;
-            throw transformation_error(missing_package_for_id + pkg_id);
+            BOOST_THROW_EXCEPTION(transformation_error(missing_package_for_id + pkg_id));
         }
         auto pp(i->second.name().package_path());
         pp.push_back(i->second.name().type_name());
@@ -173,7 +174,7 @@ transform_qualified_name(const dogen::dia::attribute& a,
     name.type_name(transform_string_attribute(a));
     if (name.type_name().empty()) {
         BOOST_LOG_SEV(lg, error) << empty_dia_object_name;
-        throw transformation_error(empty_dia_object_name);
+        BOOST_THROW_EXCEPTION(transformation_error(empty_dia_object_name));
     }
     return name;
 }
@@ -184,8 +185,8 @@ transform_string_attribute(const dogen::dia::attribute& a) const {
     if (values.size() != 1) {
         BOOST_LOG_SEV(lg, error) << "Expected attribute to have one"
                                  << " value but found " << values.size();
-        throw transformation_error(unexpected_attribute_value_size +
-            boost::lexical_cast<std::string>(values.size()));
+        BOOST_THROW_EXCEPTION(transformation_error(unexpected_attribute_value_size +
+            boost::lexical_cast<std::string>(values.size())));
     }
 
     using dogen::dia::string;
@@ -232,7 +233,7 @@ void dia_object_to_sml_enumeration::add_object(const dia::object& o) {
         BOOST_LOG_SEV(lg, error) << "Expected composite type "
                                  << " to be " << dia_uml_attribute
                                  << "but was " << o.type();
-        throw transformation_error(uml_attribute_expected);
+        BOOST_THROW_EXCEPTION(transformation_error(uml_attribute_expected));
 
     }
 
@@ -257,7 +258,7 @@ transform_enumerator(const dogen::dia::composite& uml_attribute,
     r.value(boost::lexical_cast<std::string>(position));
     if (r.name().empty()) {
         BOOST_LOG_SEV(lg, error) << "Could not find a name attribute.";
-        throw transformation_error(name_attribute_expected);
+        BOOST_THROW_EXCEPTION(transformation_error(name_attribute_expected));
     }
 
     return r;
@@ -307,7 +308,7 @@ transform_enumeration(const dia::object& o) const {
                                              << " to be "
                                              << dia_uml_attribute
                                              << "but was " << c.type();
-                    throw transformation_error(uml_attribute_expected);
+                    BOOST_THROW_EXCEPTION(transformation_error(uml_attribute_expected));
                 }
                 BOOST_LOG_SEV(lg, debug) << "Found composite of type "
                                          << c.type();

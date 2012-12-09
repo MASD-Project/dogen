@@ -18,6 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/throw_exception.hpp>
 #include "dogen/utility/exception/invalid_enum_value.hpp"
 #include "dogen/generator/backends/cpp/std_model_helper.hpp"
 
@@ -119,7 +120,7 @@ std_types std_model_helper::string_to_type(const std::string type) const {
     if (type == sstream_type) return std_types::sstream;
     if (type == stdexcept_type) return std_types::stdexcept;
     if (type == functional_type) return std_types::functional;
-    throw utility::exception::invalid_enum_value(error_message);
+    BOOST_THROW_EXCEPTION(utility::exception::invalid_enum_value(error_message));
 }
 
 std::string std_model_helper::type(const std_types t) const {
@@ -150,7 +151,7 @@ std::string std_model_helper::type(const std_types t) const {
     case std_types::functional: return functional_type;
     default: break;
     }
-    throw utility::exception::invalid_enum_value(error_message);
+    BOOST_THROW_EXCEPTION(utility::exception::invalid_enum_value(error_message));
 }
 
 std::string std_model_helper::include(const std_types type) const {
@@ -183,7 +184,7 @@ std::string std_model_helper::include(const std_types type) const {
     case std_types::functional: return functional_include;
     default: break;
     }
-    throw utility::exception::invalid_enum_value(error_message);
+    BOOST_THROW_EXCEPTION(utility::exception::invalid_enum_value(error_message));
 }
 
 } } } }

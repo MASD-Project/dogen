@@ -26,6 +26,7 @@
 #include <boost/range/algorithm.hpp>
 #include <boost/range/algorithm/set_algorithm.hpp>
 #include <boost/range/algorithm/for_each.hpp>
+#include <boost/throw_exception.hpp>
 #include "dogen/utility/exception/invalid_enum_value.hpp"
 #include "dogen/utility/serialization/xml_helper.hpp"
 #include "dogen/utility/log/logger.hpp"
@@ -60,7 +61,7 @@ generator::generator(const config::settings& s)
     : verbose_(s.troubleshooting().verbose()), settings_(s) {
 
     if (settings_.output().output_to_stdout())
-        throw generation_failure(incorrect_stdout_config);
+        BOOST_THROW_EXCEPTION(generation_failure(incorrect_stdout_config));
 
     config::validator::validate(s);
 }
@@ -70,7 +71,7 @@ generator(const config::settings& s, const output_fn& o)
     : verbose_(s.troubleshooting().verbose()), settings_(s), output_(o) {
 
     if (!settings_.output().output_to_stdout() || !output_)
-        throw generation_failure(incorrect_stdout_config);
+        BOOST_THROW_EXCEPTION(generation_failure(incorrect_stdout_config));
 
     config::validator::validate(s);
 }

@@ -18,6 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/throw_exception.hpp>
 #include "dogen/generator/config/configuration_error.hpp"
 #include "dogen/generator/config/validator.hpp"
 
@@ -41,21 +42,21 @@ namespace config {
 
 void validator::validate(const settings& s) {
     if (s.modeling().target().empty())
-        throw configuration_error(missing_target);
+        BOOST_THROW_EXCEPTION(configuration_error(missing_target));
 
     const auto cpp(s.cpp());
     if (cpp.split_project()) {
         if (cpp.include_directory().empty() || cpp.source_directory().empty())
-            throw configuration_error(missing_source_include);
+            BOOST_THROW_EXCEPTION(configuration_error(missing_source_include));
 
         if (!cpp.project_directory().empty())
-            throw configuration_error(unexpected_project_dir);
+            BOOST_THROW_EXCEPTION(configuration_error(unexpected_project_dir));
     } else {
         if (!cpp.include_directory().empty() || !cpp.source_directory().empty())
-            throw configuration_error(unexpected_source_include);
+            BOOST_THROW_EXCEPTION(configuration_error(unexpected_source_include));
 
         if (cpp.project_directory().empty())
-            throw configuration_error(missing_project_dir);
+            BOOST_THROW_EXCEPTION(configuration_error(missing_project_dir));
     }
 }
 
