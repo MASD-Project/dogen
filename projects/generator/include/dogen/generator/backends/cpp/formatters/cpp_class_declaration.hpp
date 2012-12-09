@@ -64,8 +64,8 @@ protected:
     void destructor(const class_view_model& vm);
     void friends(const class_view_model& vm);
     void getters_and_setters(const class_view_model& vm);
-    void primitive_getters_and_setters(const property_view_model& vm);
-    void non_primitive_getters_and_setters(const property_view_model& vm);
+    void non_pod_getters_and_setters(const property_view_model& vm);
+    void pod_getters_and_setters(const property_view_model& vm);
     void member_variables(const class_view_model& vm);
     void equality(const class_view_model& vm);
     void to_stream(const class_view_model& vm);

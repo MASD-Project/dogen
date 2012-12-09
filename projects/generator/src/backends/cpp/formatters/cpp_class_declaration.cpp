@@ -194,7 +194,7 @@ void cpp_class_declaration::friends(const class_view_model& vm) {
 }
 
 void cpp_class_declaration::
-primitive_getters_and_setters(const property_view_model& vm) {
+non_pod_getters_and_setters(const property_view_model& vm) {
     cpp_doxygen_comments dc(stream_, indenter_);
     dc.format(vm.documentation());
     dc.format_start_block(vm.documentation());
@@ -230,7 +230,7 @@ primitive_getters_and_setters(const property_view_model& vm) {
 }
 
 void cpp_class_declaration::
-non_primitive_getters_and_setters(const property_view_model& vm) {
+pod_getters_and_setters(const property_view_model& vm) {
     cpp_doxygen_comments dc(stream_, indenter_);
     dc.format(vm.documentation());
     dc.format_start_block(vm.documentation());
@@ -306,12 +306,12 @@ void cpp_class_declaration::getters_and_setters(const class_view_model& vm) {
 
     utility_.public_access_specifier();
     for (const auto p : vm.properties()) {
-        if (p.type().is_primitive()) {
-            primitive_getters_and_setters(p);
+        if (p.type().is_primitive() || p.type().is_enumeration()) {
+            non_pod_getters_and_setters(p);
             continue;
         }
 
-        non_primitive_getters_and_setters(p);
+        pod_getters_and_setters(p);
     }
 }
 

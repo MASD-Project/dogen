@@ -57,11 +57,7 @@ private:
     friend void boost::serialization::load(Archive& ar, a_class& v, unsigned int version);
 
 public:
-    const dogen::enumeration::colour_types& colour_type() const {
-        return colour_type_;
-    }
-
-    dogen::enumeration::colour_types& colour_type() {
+    dogen::enumeration::colour_types colour_type() const {
         return colour_type_;
     }
 
@@ -69,15 +65,7 @@ public:
         colour_type_ = v;
     }
 
-    void colour_type(const dogen::enumeration::colour_types&& v) {
-        colour_type_ = std::move(v);
-    }
-
-    const dogen::enumeration::book_types& book_type() const {
-        return book_type_;
-    }
-
-    dogen::enumeration::book_types& book_type() {
+    dogen::enumeration::book_types book_type() const {
         return book_type_;
     }
 
@@ -85,24 +73,12 @@ public:
         book_type_ = v;
     }
 
-    void book_type(const dogen::enumeration::book_types&& v) {
-        book_type_ = std::move(v);
-    }
-
-    const dogen::enumeration::pkg1::shape_types& shape_type() const {
-        return shape_type_;
-    }
-
-    dogen::enumeration::pkg1::shape_types& shape_type() {
+    dogen::enumeration::pkg1::shape_types shape_type() const {
         return shape_type_;
     }
 
     void shape_type(const dogen::enumeration::pkg1::shape_types& v) {
         shape_type_ = v;
-    }
-
-    void shape_type(const dogen::enumeration::pkg1::shape_types&& v) {
-        shape_type_ = std::move(v);
     }
 
 public:
