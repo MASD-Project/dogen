@@ -84,12 +84,20 @@ public:
      * name folders in the file-system.
      */
     /**@{*/
-    std::string name() const {
+    const std::string& name() const {
+        return name_;
+    }
+
+    std::string& name() {
         return name_;
     }
 
     void name(const std::string& v) {
         name_ = v;
+    }
+
+    void name(const std::string&& v) {
+        name_ = std::move(v);
     }
     /**@}*/
 
@@ -97,12 +105,20 @@ public:
      * @brief Packages contained in the model.
      */
     /**@{*/
-    std::unordered_map<dogen::sml::qualified_name, dogen::sml::package> packages() const {
+    const std::unordered_map<dogen::sml::qualified_name, dogen::sml::package>& packages() const {
+        return packages_;
+    }
+
+    std::unordered_map<dogen::sml::qualified_name, dogen::sml::package>& packages() {
         return packages_;
     }
 
     void packages(const std::unordered_map<dogen::sml::qualified_name, dogen::sml::package>& v) {
         packages_ = v;
+    }
+
+    void packages(const std::unordered_map<dogen::sml::qualified_name, dogen::sml::package>&& v) {
+        packages_ = std::move(v);
     }
     /**@}*/
 
@@ -110,12 +126,20 @@ public:
      * @brief Pods contained in the model.
      */
     /**@{*/
-    std::unordered_map<dogen::sml::qualified_name, dogen::sml::pod> pods() const {
+    const std::unordered_map<dogen::sml::qualified_name, dogen::sml::pod>& pods() const {
+        return pods_;
+    }
+
+    std::unordered_map<dogen::sml::qualified_name, dogen::sml::pod>& pods() {
         return pods_;
     }
 
     void pods(const std::unordered_map<dogen::sml::qualified_name, dogen::sml::pod>& v) {
         pods_ = v;
+    }
+
+    void pods(const std::unordered_map<dogen::sml::qualified_name, dogen::sml::pod>&& v) {
+        pods_ = std::move(v);
     }
     /**@}*/
 
@@ -123,12 +147,20 @@ public:
      * @brief Primitives contained in the model.
      */
     /**@{*/
-    std::unordered_map<dogen::sml::qualified_name, dogen::sml::primitive> primitives() const {
+    const std::unordered_map<dogen::sml::qualified_name, dogen::sml::primitive>& primitives() const {
+        return primitives_;
+    }
+
+    std::unordered_map<dogen::sml::qualified_name, dogen::sml::primitive>& primitives() {
         return primitives_;
     }
 
     void primitives(const std::unordered_map<dogen::sml::qualified_name, dogen::sml::primitive>& v) {
         primitives_ = v;
+    }
+
+    void primitives(const std::unordered_map<dogen::sml::qualified_name, dogen::sml::primitive>&& v) {
+        primitives_ = std::move(v);
     }
     /**@}*/
 
@@ -136,12 +168,20 @@ public:
      * @brief Enumerations contained in the model.
      */
     /**@{*/
-    std::unordered_map<dogen::sml::qualified_name, dogen::sml::enumeration> enumerations() const {
+    const std::unordered_map<dogen::sml::qualified_name, dogen::sml::enumeration>& enumerations() const {
+        return enumerations_;
+    }
+
+    std::unordered_map<dogen::sml::qualified_name, dogen::sml::enumeration>& enumerations() {
         return enumerations_;
     }
 
     void enumerations(const std::unordered_map<dogen::sml::qualified_name, dogen::sml::enumeration>& v) {
         enumerations_ = v;
+    }
+
+    void enumerations(const std::unordered_map<dogen::sml::qualified_name, dogen::sml::enumeration>&& v) {
+        enumerations_ = std::move(v);
     }
     /**@}*/
 
@@ -149,12 +189,20 @@ public:
      * @brief Exceptions contained in the model.
      */
     /**@{*/
-    std::unordered_map<dogen::sml::qualified_name, dogen::sml::exception> exceptions() const {
+    const std::unordered_map<dogen::sml::qualified_name, dogen::sml::exception>& exceptions() const {
+        return exceptions_;
+    }
+
+    std::unordered_map<dogen::sml::qualified_name, dogen::sml::exception>& exceptions() {
         return exceptions_;
     }
 
     void exceptions(const std::unordered_map<dogen::sml::qualified_name, dogen::sml::exception>& v) {
         exceptions_ = v;
+    }
+
+    void exceptions(const std::unordered_map<dogen::sml::qualified_name, dogen::sml::exception>&& v) {
+        exceptions_ = std::move(v);
     }
     /**@}*/
 
@@ -162,12 +210,20 @@ public:
      * @brief Path of packages that contain this model.
      */
     /**@{*/
-    std::list<std::string> external_package_path() const {
+    const std::list<std::string>& external_package_path() const {
+        return external_package_path_;
+    }
+
+    std::list<std::string>& external_package_path() {
         return external_package_path_;
     }
 
     void external_package_path(const std::list<std::string>& v) {
         external_package_path_ = v;
+    }
+
+    void external_package_path(const std::list<std::string>&& v) {
+        external_package_path_ = std::move(v);
     }
     /**@}*/
 
@@ -175,12 +231,20 @@ public:
      * @brief Name of the database schema this model belongs to, if any.
      */
     /**@{*/
-    std::string schema_name() const {
+    const std::string& schema_name() const {
+        return schema_name_;
+    }
+
+    std::string& schema_name() {
         return schema_name_;
     }
 
     void schema_name(const std::string& v) {
         schema_name_ = v;
+    }
+
+    void schema_name(const std::string&& v) {
+        schema_name_ = std::move(v);
     }
     /**@}*/
 
@@ -207,12 +271,20 @@ public:
      * @brief All other models that this model depends on - both system and user defined.
      */
     /**@{*/
-    std::unordered_map<std::string, dogen::sml::reference> dependencies() const {
+    const std::unordered_map<std::string, dogen::sml::reference>& dependencies() const {
+        return dependencies_;
+    }
+
+    std::unordered_map<std::string, dogen::sml::reference>& dependencies() {
         return dependencies_;
     }
 
     void dependencies(const std::unordered_map<std::string, dogen::sml::reference>& v) {
         dependencies_ = v;
+    }
+
+    void dependencies(const std::unordered_map<std::string, dogen::sml::reference>&& v) {
+        dependencies_ = std::move(v);
     }
     /**@}*/
 
@@ -222,12 +294,20 @@ public:
      * Leaves are types concrete types which have a parent.
      */
     /**@{*/
-    std::unordered_set<dogen::sml::qualified_name> leaves() const {
+    const std::unordered_set<dogen::sml::qualified_name>& leaves() const {
+        return leaves_;
+    }
+
+    std::unordered_set<dogen::sml::qualified_name>& leaves() {
         return leaves_;
     }
 
     void leaves(const std::unordered_set<dogen::sml::qualified_name>& v) {
         leaves_ = v;
+    }
+
+    void leaves(const std::unordered_set<dogen::sml::qualified_name>&& v) {
+        leaves_ = std::move(v);
     }
     /**@}*/
 

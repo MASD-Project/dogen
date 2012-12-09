@@ -63,12 +63,20 @@ public:
      * @brief Model which we depend on.
      */
     /**@{*/
-    std::string model_name() const {
+    const std::string& model_name() const {
+        return model_name_;
+    }
+
+    std::string& model_name() {
         return model_name_;
     }
 
     void model_name(const std::string& v) {
         model_name_ = v;
+    }
+
+    void model_name(const std::string&& v) {
+        model_name_ = std::move(v);
     }
     /**@}*/
 
@@ -76,12 +84,20 @@ public:
      * @brief Path of packages that contain the dependent model.
      */
     /**@{*/
-    std::list<std::string> external_package_path() const {
+    const std::list<std::string>& external_package_path() const {
+        return external_package_path_;
+    }
+
+    std::list<std::string>& external_package_path() {
         return external_package_path_;
     }
 
     void external_package_path(const std::list<std::string>& v) {
         external_package_path_ = v;
+    }
+
+    void external_package_path(const std::list<std::string>&& v) {
+        external_package_path_ = std::move(v);
     }
     /**@}*/
 

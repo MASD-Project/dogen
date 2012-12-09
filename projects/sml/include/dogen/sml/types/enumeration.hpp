@@ -68,12 +68,20 @@ public:
      * @brief Qualified name for the type.
      */
     /**@{*/
-    dogen::sml::qualified_name name() const {
+    const dogen::sml::qualified_name& name() const {
+        return name_;
+    }
+
+    dogen::sml::qualified_name& name() {
         return name_;
     }
 
     void name(const dogen::sml::qualified_name& v) {
         name_ = v;
+    }
+
+    void name(const dogen::sml::qualified_name&& v) {
+        name_ = std::move(v);
     }
     /**@}*/
 
@@ -94,12 +102,20 @@ public:
      * @brief Doxygen documentation for the type.
      */
     /**@{*/
-    std::string documentation() const {
+    const std::string& documentation() const {
+        return documentation_;
+    }
+
+    std::string& documentation() {
         return documentation_;
     }
 
     void documentation(const std::string& v) {
         documentation_ = v;
+    }
+
+    void documentation(const std::string&& v) {
+        documentation_ = std::move(v);
     }
     /**@}*/
 
@@ -107,12 +123,20 @@ public:
      * @brief Enumerators for this enumeration.
      */
     /**@{*/
-    std::vector<dogen::sml::enumerator> enumerators() const {
+    const std::vector<dogen::sml::enumerator>& enumerators() const {
+        return enumerators_;
+    }
+
+    std::vector<dogen::sml::enumerator>& enumerators() {
         return enumerators_;
     }
 
     void enumerators(const std::vector<dogen::sml::enumerator>& v) {
         enumerators_ = v;
+    }
+
+    void enumerators(const std::vector<dogen::sml::enumerator>&& v) {
+        enumerators_ = std::move(v);
     }
     /**@}*/
 

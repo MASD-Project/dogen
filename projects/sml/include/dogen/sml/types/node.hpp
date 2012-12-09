@@ -56,7 +56,11 @@ private:
     friend void boost::serialization::load(Archive& ar, node& v, unsigned int version);
 
 public:
-    boost::shared_ptr<dogen::sml::node> parent() const {
+    const boost::shared_ptr<dogen::sml::node>& parent() const {
+        return parent_;
+    }
+
+    boost::shared_ptr<dogen::sml::node>& parent() {
         return parent_;
     }
 
@@ -64,7 +68,15 @@ public:
         parent_ = v;
     }
 
-    dogen::sml::qualified_name data() const {
+    void parent(const boost::shared_ptr<dogen::sml::node>&& v) {
+        parent_ = std::move(v);
+    }
+
+    const dogen::sml::qualified_name& data() const {
+        return data_;
+    }
+
+    dogen::sml::qualified_name& data() {
         return data_;
     }
 
@@ -72,12 +84,24 @@ public:
         data_ = v;
     }
 
-    std::list<boost::shared_ptr<dogen::sml::node> > children() const {
+    void data(const dogen::sml::qualified_name&& v) {
+        data_ = std::move(v);
+    }
+
+    const std::list<boost::shared_ptr<dogen::sml::node> >& children() const {
+        return children_;
+    }
+
+    std::list<boost::shared_ptr<dogen::sml::node> >& children() {
         return children_;
     }
 
     void children(const std::list<boost::shared_ptr<dogen::sml::node> >& v) {
         children_ = v;
+    }
+
+    void children(const std::list<boost::shared_ptr<dogen::sml::node> >&& v) {
+        children_ = std::move(v);
     }
 
 public:

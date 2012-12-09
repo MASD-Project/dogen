@@ -62,12 +62,20 @@ public:
      * @brief Qualified name for the type.
      */
     /**@{*/
-    std::string name() const {
+    const std::string& name() const {
+        return name_;
+    }
+
+    std::string& name() {
         return name_;
     }
 
     void name(const std::string& v) {
         name_ = v;
+    }
+
+    void name(const std::string&& v) {
+        name_ = std::move(v);
     }
     /**@}*/
 
@@ -77,12 +85,20 @@ public:
      * It must be castable to instance of the type defined in the enumeration.
      */
     /**@{*/
-    std::string value() const {
+    const std::string& value() const {
+        return value_;
+    }
+
+    std::string& value() {
         return value_;
     }
 
     void value(const std::string& v) {
         value_ = v;
+    }
+
+    void value(const std::string&& v) {
+        value_ = std::move(v);
     }
     /**@}*/
 
@@ -90,12 +106,20 @@ public:
      * @brief Doxygen documentation for the type.
      */
     /**@{*/
-    std::string documentation() const {
+    const std::string& documentation() const {
+        return documentation_;
+    }
+
+    std::string& documentation() {
         return documentation_;
     }
 
     void documentation(const std::string& v) {
         documentation_ = v;
+    }
+
+    void documentation(const std::string&& v) {
+        documentation_ = std::move(v);
     }
     /**@}*/
 

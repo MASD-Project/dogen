@@ -179,7 +179,10 @@ namespace sml {
 
 std::ostream& operator<<(std::ostream& s, const model& v) {
     boost::io::ios_flags_saver ifs(s);
-    s << std::boolalpha;
+    s.setf(std::ios_base::boolalpha);
+    s.setf(std::ios::fixed, std::ios::floatfield);
+    s.precision(6);
+    s.setf(std::ios::showpoint);
 
     s << " { "
       << "\"__type__\": " << "\"dogen::sml::model\"" << ", "

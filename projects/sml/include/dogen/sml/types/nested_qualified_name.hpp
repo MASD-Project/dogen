@@ -64,12 +64,20 @@ public:
      * @brief Top-level, containing type.
      */
     /**@{*/
-    dogen::sml::qualified_name type() const {
+    const dogen::sml::qualified_name& type() const {
+        return type_;
+    }
+
+    dogen::sml::qualified_name& type() {
         return type_;
     }
 
     void type(const dogen::sml::qualified_name& v) {
         type_ = v;
+    }
+
+    void type(const dogen::sml::qualified_name&& v) {
+        type_ = std::move(v);
     }
     /**@}*/
 
@@ -77,12 +85,20 @@ public:
      * @brief Child types.
      */
     /**@{*/
-    std::list<dogen::sml::nested_qualified_name> children() const {
+    const std::list<dogen::sml::nested_qualified_name>& children() const {
+        return children_;
+    }
+
+    std::list<dogen::sml::nested_qualified_name>& children() {
         return children_;
     }
 
     void children(const std::list<dogen::sml::nested_qualified_name>& v) {
         children_ = v;
+    }
+
+    void children(const std::list<dogen::sml::nested_qualified_name>&& v) {
+        children_ = std::move(v);
     }
     /**@}*/
 
