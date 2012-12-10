@@ -11,6 +11,15 @@ This file contains all stories that haven't been assigned to a sprint.
 
 Stories that we intend to look at, at some point.
 
+*** Rename =domain= facet to =types=                                  :story:
+
+When we implemented entity, service, value - inspired on the
+terminology defined by Eric Evans - we renamed the =domain= folder to
+=types=. This was because domain really means domain model - e.g. the
+entirety of the model. As part of that rename we should have also
+renamed the =facet_types= enum for the =domain= facet, but it got
+missed out.
+
 *** Test move constructors in test model                              :story:
 
 At present we are not testing that the generated move constructors are
