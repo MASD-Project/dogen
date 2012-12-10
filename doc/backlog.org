@@ -11,6 +11,14 @@ This file contains all stories that haven't been assigned to a sprint.
 
 Stories that we intend to look at, at some point.
 
+*** Move injection of system types into SML                           :story:
+
+At present the director is responsible for injecting all system types
+once the model has been processed by the merger. However, there is no
+reason why this is not done inside SML as it has no external
+dependencies. We could create a =system_type_injector= or some such
+service to take over the =inject_system_types= method.
+
 *** Improve exception reporting in tests                              :story:
 
 As explained [[http://boost.2283326.n4.nabble.com/Boost-Test-Using-boost-exception-td4447404.html][here]], one can get proper boost exception support in unit
