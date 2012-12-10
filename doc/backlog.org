@@ -19,6 +19,7 @@ project, on every =.cpp= file where we have tests:
 
 - add the following includes if not present:
 
+: #include <sstream>
 : #include <boost/test/unit_test_monitor.hpp>
 : #include <boost/exception/diagnostic_information.hpp>
 
@@ -28,7 +29,9 @@ project, on every =.cpp= file where we have tests:
 : namespace {
 :
 : inline void translate(const boost::exception& e) {
-:     BOOST_FAIL(boost::diagnostic_information(e));
+:    std::ostringstream s;
+:    s << std::endl << boost::diagnostic_information(e);
+:    BOOST_FAIL(s.str());
 : }
 :
 : struct exception_fixture {
