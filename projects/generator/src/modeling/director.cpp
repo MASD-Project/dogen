@@ -19,6 +19,7 @@
  *
  */
 #include <boost/filesystem.hpp>
+#include <boost/throw_exception.hpp>
 #include "dogen/sml/types/merger.hpp"
 #include "dogen/generator/modeling/dia_to_sml.hpp"
 #include "dogen/utility/exception/invalid_enum_value.hpp"
@@ -76,7 +77,7 @@ extension(utility::serialization::archive_types archive_type,
     default:
         break;
     }
-    throw dogen::utility::exception::invalid_enum_value(invalid_archive_type);
+    BOOST_THROW_EXCEPTION(dogen::utility::exception::invalid_enum_value(invalid_archive_type));
 }
 
 bool director::is_save_dia_model_enabled() const {

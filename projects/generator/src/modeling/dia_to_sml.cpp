@@ -32,6 +32,7 @@
 #include <boost/algorithm/string/trim.hpp>
 #include <boost/algorithm/string/erase.hpp>
 #include <boost/graph/depth_first_search.hpp>
+#include <boost/throw_exception.hpp>
 #include "dogen/dia/domain/object_types.hpp"
 #include "dogen/dia/io/object_types_io.hpp"
 #include "dogen/dia/domain/composite.hpp"
@@ -70,7 +71,7 @@ dogen::dia::object_types parse_object_type(const std::string s) {
         stream << error_parsing_object_type << "'" << s
                << "'. Error: " << e.what();
         BOOST_LOG_SEV(lg, error) << stream.str();
-        throw transformation_error(stream.str());
+        BOOST_THROW_EXCEPTION(transformation_error(stream.str()));
     }
     return r;
 }
@@ -141,7 +142,7 @@ setup_data_structures(const std::vector<dia::object>& objects) {
             continue;
         }
 
-        throw transformation_error(unsupported_object_type + o.id());
+        BOOST_THROW_EXCEPTION(transformation_error(unsupported_object_type + o.id()));
     }
 }
 

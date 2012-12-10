@@ -22,6 +22,7 @@
 #include <boost/filesystem.hpp>
 #include <boost/filesystem/fstream.hpp>
 #include <boost/algorithm/string/predicate.hpp>
+#include <boost/throw_exception.hpp>
 #include "dogen/utility/filesystem/file.hpp"
 #include "dogen/utility/exception/utility_exception.hpp"
 #include "dogen/utility/log/logger.hpp"
@@ -151,7 +152,7 @@ void file_outputter::to_file(outputter::value_entry_type value) const {
         }
     } catch(const std::exception& e) {
         const std::string message(error_generating_files);
-        throw dogen::utility::exception::exception(message + e.what());
+        BOOST_THROW_EXCEPTION(dogen::utility::exception::exception(message + e.what()));
     }
 }
 
