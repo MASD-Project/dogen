@@ -13,41 +13,36 @@ Stories that we intend to look at, at some point.
 
 *** Improve exception reporting in tests                              :story:
 
-As explained here, one can get proper boost exception support in unit
-tests. We need to do the following for every =spec= directory on every
-project, on every =.cpp= file where we have tests:
+As explained [[http://boost.2283326.n4.nabble.com/Boost-Test-Using-boost-exception-td4447404.html][here]], one can get proper boost exception support in unit
+tests. This has been done for generator's spec. We need to do the
+following for every =spec= directory on every project:
 
-- add the following includes if not present:
+- create a =main.cpp= in the =spec= directory. In the past we mixed
+  the main with the rest of the code, but this is very messy. Instead,
+  locate the file with the lines =BOOST_TEST_DYN_LINK=. If that file
+  only has 3 or 4 lines, you can safely rename it to =main.cpp=.
 
-: #include <sstream>
-: #include <boost/test/unit_test_monitor.hpp>
-: #include <boost/exception/diagnostic_information.hpp>
+- If the file has lots of lines, delete the following two lines
+  (where =XXXX= is the project you are working on):
 
-- inside an anonymous namespace block - which may already exist; if so
-  use the existing one - declare the exception translation:
+: #define BOOST_TEST_DYN_LINK
+: #define BOOST_TEST_MODULE XXXX_spec
 
-: namespace {
-:
-: inline void translate(const boost::exception& e) {
-:    std::ostringstream s;
-:    s << std::endl << boost::diagnostic_information(e);
-:    BOOST_FAIL(s.str());
-: }
-:
-: struct exception_fixture {
-:     exception_fixture() {
-:         ::boost::unit_test::unit_test_monitor.register_exception_translator<
-:             boost::exception>(&translate);
-:     }
-: };
-:
-: }
+- Then locate the following line:
 
-- finally, declare the global fixture just before the test suite:
+: #include <boost/test/included/unit_test.hpp>
 
-: BOOST_GLOBAL_FIXTURE(exception_fixture);
+and change it to:
 
-For an example, see =generator_spec.cpp=.
+: #include <boost/test/unit_test.hpp>
+
+- finally, create a =main.cpp= and make it look like
+  =generator/spec/main.cpp=, renaming =generator_spec= accordingly.
+
+NOTE: any mistakes with the spec name will result in build errors
+after the push as the build agent will not be able to find the
+tests. So if your local build is green but the agent is red, start by
+checking this.
 
 *** Rename =domain= facet to =types=                                  :story:
 
