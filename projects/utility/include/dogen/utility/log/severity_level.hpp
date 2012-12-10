@@ -26,6 +26,7 @@
 #endif
 
 #include <ostream>
+#include <boost/throw_exception.hpp>
 #include "dogen/utility/exception/invalid_enum_value.hpp"
 
 namespace dogen {
@@ -63,7 +64,7 @@ operator<<(std::basic_ostream<CharT, TraitsT>& stream, severity_level level) {
     case severity_level::fatal: stream << "FATAL"; break;
     default:
         using dogen::utility::exception::invalid_enum_value;
-        throw invalid_enum_value("Invalid or unexpected severity level");
+        BOOST_THROW_EXCEPTION(invalid_enum_value("Invalid or unexpected severity level"));
         break;
     }
     return stream;

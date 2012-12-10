@@ -27,6 +27,7 @@
 
 #include <utility>
 #include <boost/filesystem/path.hpp>
+#include <boost/throw_exception.hpp>
 #include "dogen/utility/xml/exception.hpp"
 #include "dogen/utility/xml/node_types.hpp"
 
@@ -98,7 +99,7 @@ public:
     template<typename Type>
     Type value() const {
         using dogen::utility::xml::exception;
-        throw exception("Value not specialised for this type");
+        BOOST_THROW_EXCEPTION(exception("Value not specialised for this type"));
     }
 
     /**
@@ -128,7 +129,7 @@ public:
     template<typename Type>
     Type get_attribute(std::string) const {
         using dogen::utility::xml::exception;
-        throw exception("Value not specialised for this type");
+        BOOST_THROW_EXCEPTION(exception("Value not specialised for this type"));
     }
 
     /**

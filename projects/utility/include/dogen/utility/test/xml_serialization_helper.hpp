@@ -29,6 +29,7 @@
 #include <boost/filesystem/fstream.hpp>
 #include <boost/archive/xml_oarchive.hpp>
 #include <boost/archive/xml_iarchive.hpp>
+#include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include <boost/filesystem/operations.hpp>
 #include "dogen/utility/filesystem/file_not_found.hpp"
@@ -48,7 +49,7 @@ Entity xml_deserialize(boost::filesystem::path path) {
 
     if (!boost::filesystem::exists(path)) {
         BOOST_LOG_SEV(lg, error) << "Could not find file: " << path.string();
-        throw utility::filesystem::file_not_found(path.string());
+        BOOST_THROW_EXCEPTION(utility::filesystem::file_not_found(path.string()));
     }
 
     boost::filesystem::ifstream input_stream(path);

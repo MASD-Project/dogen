@@ -21,6 +21,7 @@
 #include <boost/filesystem/path.hpp>
 #include <boost/filesystem/fstream.hpp>
 #include <boost/filesystem/operations.hpp>
+#include <boost/throw_exception.hpp>
 #include "dogen/utility/filesystem/file_not_found.hpp"
 #include "dogen/utility/filesystem/file.hpp"
 
@@ -30,7 +31,7 @@ namespace filesystem {
 
 std::string read_file_content(boost::filesystem::path path) {
     if (!boost::filesystem::exists(path)) {
-        throw file_not_found(path.string());
+        BOOST_THROW_EXCEPTION(file_not_found(path.string()));
     }
 
     boost::filesystem::ifstream stream(path);

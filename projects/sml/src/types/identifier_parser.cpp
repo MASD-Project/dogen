@@ -29,6 +29,7 @@
 #include <boost/spirit/include/phoenix_fusion.hpp>
 #include <boost/spirit/include/phoenix_operator.hpp>
 #include <boost/spirit/include/phoenix_object.hpp>
+#include <boost/throw_exception.hpp>
 #include "dogen/sml/types/parsing_error.hpp"
 #include "dogen/sml/types/identifier_parser.hpp"
 #include "dogen/sml/types/nested_qualified_name_builder.hpp"
@@ -158,7 +159,7 @@ parse_qualified_name(const std::string& n) {
     const bool ok(boost::spirit::qi::parse(it, end, g));
 
     if (!ok || it != end)
-        throw parsing_error(error_msg + n);
+        BOOST_THROW_EXCEPTION(parsing_error(error_msg + n));
 
     return builder->build();
 }
