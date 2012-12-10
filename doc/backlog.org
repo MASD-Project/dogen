@@ -11,6 +11,41 @@ This file contains all stories that haven't been assigned to a sprint.
 
 Stories that we intend to look at, at some point.
 
+*** Improve exception reporting in tests                              :story:
+
+As explained here, one can get proper boost exception support in unit
+tests. We need to do the following for every =spec= directory on every
+project, on every =.cpp= file where we have tests:
+
+- add the following includes if not present:
+
+: #include <boost/test/unit_test_monitor.hpp>
+: #include <boost/exception/diagnostic_information.hpp>
+
+- inside an anonymous namespace block - which may already exist; if so
+  use the existing one - declare the exception translation:
+
+: namespace {
+:
+: inline void translate(const boost::exception& e) {
+:     BOOST_FAIL(boost::diagnostic_information(e));
+: }
+:
+: struct exception_fixture {
+:     exception_fixture() {
+:         ::boost::unit_test::unit_test_monitor.register_exception_translator<
+:             boost::exception>(&translate);
+:     }
+: };
+:
+: }
+
+- finally, declare the global fixture just before the test suite:
+
+: BOOST_GLOBAL_FIXTURE(exception_fixture);
+
+For an example, see =generator_spec.cpp=.
+
 *** Rename =domain= facet to =types=                                  :story:
 
 When we implemented entity, service, value - inspired on the
