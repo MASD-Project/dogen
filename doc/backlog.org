@@ -340,6 +340,13 @@ CMake backend when that exists.
 Avoid breaking tests every time the exception text changes by creating
 a error code property in kitanda exceptions.
 
+After some investigation it was found that boost already supports this
+approach in =system=, as per [[http://en.highscore.de/cpp/boost/errorhandling.html][boost book]]. We could define a new
+category per model and then create an enumeration of all error codes
+in dia, for which the values would be the strings to use for the
+error. The user could then create an exception and pass in the error
+code in the constructor.
+
 *** Registrar is not included in serialisation includer
 
 For some reason we are not including the registrar on the includer for
