@@ -21,6 +21,5 @@
 #include "dogen/entity_service_value/serialization/entity_ser.hpp"
 #include "dogen/entity_service_value/serialization/entity_unversioned_key_ser.hpp"
 #include "dogen/entity_service_value/serialization/entity_versioned_key_ser.hpp"
-#include "dogen/entity_service_value/serialization/service_ser.hpp"
 #include "dogen/entity_service_value/serialization/some_type_ser.hpp"
 #include "dogen/entity_service_value/serialization/value_ser.hpp"

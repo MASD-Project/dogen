@@ -31,6 +31,4 @@
 #include "dogen/trivial_inheritance/io/pkg3/child_io.hpp"
 #include "dogen/trivial_inheritance/io/pkg4/child_io.hpp"
 #include "dogen/trivial_inheritance/io/second_child_without_members_io.hpp"
-#include "dogen/trivial_inheritance/io/service_interface_io.hpp"
-#include "dogen/trivial_inheritance/io/service_io.hpp"
 #include "dogen/trivial_inheritance/io/third_child_with_members_io.hpp"

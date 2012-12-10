@@ -18,11 +18,9 @@
  * MA 02110-1301, USA.
  *
  */
-#include <sstream>
-#define BOOST_TEST_DYN_LINK
-#define BOOST_TEST_MODULE generator_spec
 #include <memory>
-#include <boost/test/included/unit_test.hpp>
+#include <boost/test/unit_test.hpp>
+#include <boost/test/unit_test_monitor.hpp>
 #include <boost/algorithm/string/predicate.hpp>
 #include <boost/algorithm/string/replace.hpp>
 #include "dogen/utility/test_data/resolver.hpp"

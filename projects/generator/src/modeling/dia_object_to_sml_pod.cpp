@@ -399,8 +399,10 @@ void dia_dfs_visitor::process_dia_object(const dogen::dia::object& o) {
             using dogen::dia::utility::parse_stereotype;
             const auto v(transform_string_attribute(a));
 
-            if (v.empty())
+            if (v.empty()) {
+                pod.pod_type(dogen::sml::pod_types::value);
                 continue;
+            }
 
             const auto st(parse_stereotype(v));
             using dogen::dia::stereotypes;
@@ -410,6 +412,7 @@ void dia_dfs_visitor::process_dia_object(const dogen::dia::object& o) {
             else if (st == stereotypes::value)
                 pod.pod_type(dogen::sml::pod_types::value);
             else if (st == stereotypes::nongeneratable) {
+                pod.pod_type(dogen::sml::pod_types::value);
                 if (state_->is_target_)
                     pod.generation_type(generation_types::partial_generation);
             } else if (st == stereotypes::service) {

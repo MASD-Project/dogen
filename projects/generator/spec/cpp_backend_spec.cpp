@@ -73,6 +73,7 @@ mock_pod(const std::string& type_name, const std::string& model_name) {
 
     dogen::sml::pod r;
     r.name(qn);
+    r.pod_type(dogen::sml::pod_types::value);
     r.generation_type(dogen::sml::generation_types::full_generation);
     return r;
 }

@@ -21,6 +21,5 @@
 #include "dogen/entity_service_value/hash/entity_hash.hpp"
 #include "dogen/entity_service_value/hash/entity_unversioned_key_hash.hpp"
 #include "dogen/entity_service_value/hash/entity_versioned_key_hash.hpp"
-#include "dogen/entity_service_value/hash/service_hash.hpp"
 #include "dogen/entity_service_value/hash/some_type_hash.hpp"
 #include "dogen/entity_service_value/hash/value_hash.hpp"

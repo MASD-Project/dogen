@@ -31,6 +31,4 @@
 #include "dogen/trivial_inheritance/hash/pkg3/child_hash.hpp"
 #include "dogen/trivial_inheritance/hash/pkg4/child_hash.hpp"
 #include "dogen/trivial_inheritance/hash/second_child_without_members_hash.hpp"
-#include "dogen/trivial_inheritance/hash/service_hash.hpp"
-#include "dogen/trivial_inheritance/hash/service_interface_hash.hpp"
 #include "dogen/trivial_inheritance/hash/third_child_with_members_hash.hpp"

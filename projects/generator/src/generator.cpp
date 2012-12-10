@@ -19,7 +19,6 @@
  *
  */
 #define BOOST_RESULT_OF_USE_DECLTYPE
-#include <iostream>
 #include <boost/filesystem.hpp>
 #include <boost/range/combine.hpp>
 #include <boost/range/adaptors.hpp>
@@ -42,15 +41,16 @@
 
 using namespace dogen::utility::log;
 
+typedef boost::error_info<struct tag_generator, std::string> errmsg_generator;
+
 namespace {
 
 const std::string codegen_error("Error occurred during code generation: ");
 const std::string incorrect_stdout_config(
     "Configuration for output to stdout is incorrect");
+const std::string code_generation_failure("Code generation failure.");
 
 auto lg(logger_factory("generator"));
-
-typedef boost::error_info<struct tag_errmsg, std::string> errmsg_info;
 
 }
 
@@ -149,9 +149,7 @@ void generator::generate() const {
         if (o)
             generate(*o);
     } catch (boost::exception& e) {
-        std::ostringstream s;
-        s << "Code generation failure.";
-        e << errmsg_info(s.str());
+        e << errmsg_generator(code_generation_failure);
         throw;
     }
     BOOST_LOG_SEV(lg, info) << "Code generator finished.";

@@ -177,6 +177,16 @@ private:
     void create_exception_view_models();
 
     /**
+     * @brief Returns the available facets for the given inputs.
+     *
+     * @param mt Meta-type which we want to process.
+     * @param pt Pod type to process; must be set to invalid if the
+     * meta-type is not a pod.
+     */
+    std::set<cpp_facet_types> enabled_facet_types(const sml::meta_types mt,
+        const sml::pod_types pt = sml::pod_types::invalid) const;
+
+    /**
      * @brief Transforms pods into file view models.
      */
     std::vector<file_view_model> transform_pods();

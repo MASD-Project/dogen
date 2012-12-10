@@ -21,6 +21,5 @@
 #include "dogen/entity_service_value/io/entity_io.hpp"
 #include "dogen/entity_service_value/io/entity_unversioned_key_io.hpp"
 #include "dogen/entity_service_value/io/entity_versioned_key_io.hpp"
-#include "dogen/entity_service_value/io/service_io.hpp"
 #include "dogen/entity_service_value/io/some_type_io.hpp"
 #include "dogen/entity_service_value/io/value_io.hpp"

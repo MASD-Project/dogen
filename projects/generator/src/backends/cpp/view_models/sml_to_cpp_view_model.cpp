@@ -21,12 +21,15 @@
 #include <list>
 #include <sstream>
 #include <unordered_set>
+#include <boost/lexical_cast.hpp>
 #include <boost/algorithm/string.hpp>
 #include <boost/algorithm/string/join.hpp>
 #include <boost/algorithm/string/predicate.hpp>
 #include <boost/graph/depth_first_search.hpp>
 #include <boost/throw_exception.hpp>
 #include "dogen/sml/io/meta_types_io.hpp"
+#include "dogen/sml/io/pod_types_io.hpp"
+#include "dogen/sml/io/qualified_name_io.hpp"
 #include "dogen/sml/types/nested_qualified_name.hpp"
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/io/list_io.hpp"
@@ -36,6 +39,9 @@
 #include "dogen/generator/backends/cpp/view_models/sml_to_cpp_view_model.hpp"
 
 using namespace dogen::utility::log;
+
+typedef boost::error_info<struct tag_sml_to_cpp_view_model, std::string>
+errmsg_sml_to_cpp_view_model;
 
 namespace {
 
@@ -56,6 +62,9 @@ const std::string parent_view_model_not_found(
     "Parent view model not found for pod: ");
 const std::string view_model_not_found("View model not found: ");
 const std::string unsupported_meta_type("Meta type not supported: ");
+const std::string invalid_enabled_facets("Invalid enabled facets request: ");
+const std::string failed_to_process_type("Failed to process type: ");
+
 const std::string includer_name("all");
 const std::string registrar_name("registrar");
 const std::string versioned_name("versioned_key");
@@ -717,6 +726,25 @@ void sml_to_cpp_view_model::create_exception_view_models() {
     }
 }
 
+std::set<cpp_facet_types> sml_to_cpp_view_model::
+enabled_facet_types(const sml::meta_types mt, const sml::pod_types pt) const {
+    if (mt == sml::meta_types::pod) {
+        if (pt == sml::pod_types::value || pt == sml::pod_types::entity)
+            return settings_.enabled_facets();
+        else if (pt == sml::pod_types::service)
+            return std::set<cpp_facet_types> { cpp_facet_types::domain };
+    } else if (mt == sml::meta_types::enumeration ||
+        mt == sml::meta_types::primitive) {
+        return settings_.enabled_facets();
+    } else if (mt == sml::meta_types::exception) {
+        return std::set<cpp_facet_types> { cpp_facet_types::domain };
+    }
+
+    BOOST_THROW_EXCEPTION(transformation_error(invalid_enabled_facets +
+            boost::lexical_cast<std::string>(mt) + ", " +
+            boost::lexical_cast<std::string>(pt)));
+}
+
 std::vector<file_view_model> sml_to_cpp_view_model::transform_pods() {
     std::vector<file_view_model> r;
     auto lambda([&](cpp_facet_types ft, cpp_file_types flt, cpp_aspect_types at,
@@ -733,18 +761,27 @@ std::vector<file_view_model> sml_to_cpp_view_model::transform_pods() {
         if (p.generation_type() == sml::generation_types::no_generation)
             continue;
 
-        const auto header(cpp_file_types::header);
-        const auto implementation(cpp_file_types::implementation);
-        const auto main(cpp_aspect_types::main);
-        const auto forward_decls(cpp_aspect_types::forward_decls);
-        for (const auto ft: settings_.enabled_facets()) {
-            lambda(ft, header, main, p);
+        try {
+            const auto header(cpp_file_types::header);
+            const auto implementation(cpp_file_types::implementation);
+            const auto main(cpp_aspect_types::main);
+            const auto forward_decls(cpp_aspect_types::forward_decls);
+            const auto pod_mt(sml::meta_types::pod);
+            const auto facets(enabled_facet_types(pod_mt, p.pod_type()));
 
-            if (has_implementation(ft, sml::meta_types::pod))
-                lambda(ft, implementation, main, p);
+            for (const auto ft: facets) {
+                lambda(ft, header, main, p);
 
-            if (has_forward_decls(ft, sml::meta_types::pod))
-                lambda(ft, header, forward_decls, p);
+                if (has_implementation(ft, pod_mt))
+                    lambda(ft, implementation, main, p);
+
+                if (has_forward_decls(ft, pod_mt))
+                    lambda(ft, header, forward_decls, p);
+            }
+        } catch (boost::exception& e) {
+            e << errmsg_sml_to_cpp_view_model(failed_to_process_type +
+                boost::lexical_cast<std::string>(p.name()));
+            throw;
         }
     }
 
@@ -767,18 +804,27 @@ std::vector<file_view_model> sml_to_cpp_view_model::transform_enumerations() {
         if (e.generation_type() == sml::generation_types::no_generation)
             continue;
 
-        const auto header(cpp_file_types::header);
-        const auto implementation(cpp_file_types::implementation);
-        const auto main(cpp_aspect_types::main);
-        const auto forward_decls(cpp_aspect_types::forward_decls);
-        for (const auto ft: settings_.enabled_facets()) {
-            lambda(ft, header, main, e);
+        try {
+            const auto header(cpp_file_types::header);
+            const auto implementation(cpp_file_types::implementation);
+            const auto main(cpp_aspect_types::main);
+            const auto forward_decls(cpp_aspect_types::forward_decls);
+            const auto enum_mt(sml::meta_types::enumeration);
+            const auto facets(enabled_facet_types(enum_mt));
 
-            if (has_implementation(ft, sml::meta_types::enumeration))
-                lambda(ft, implementation, main, e);
+            for (const auto ft: facets) {
+                lambda(ft, header, main, e);
 
-            if (has_forward_decls(ft, sml::meta_types::enumeration))
-                lambda(ft, header, forward_decls, e);
+                if (has_implementation(ft, enum_mt))
+                    lambda(ft, implementation, main, e);
+
+                if (has_forward_decls(ft, enum_mt))
+                    lambda(ft, header, forward_decls, e);
+            }
+        } catch (boost::exception& ex) {
+            ex << errmsg_sml_to_cpp_view_model(failed_to_process_type +
+                boost::lexical_cast<std::string>(e.name()));
+            throw;
         }
     }
     return r;
@@ -799,14 +845,24 @@ std::vector<file_view_model> sml_to_cpp_view_model::transform_exceptions() {
         if (e.generation_type() == sml::generation_types::no_generation)
             continue;
 
-        const auto header(cpp_file_types::header);
-        const auto domain(cpp_facet_types::domain);
-        const auto main(cpp_aspect_types::main);
-        const auto forward_decls(cpp_aspect_types::forward_decls);
-        lambda(domain, header, main, e);
+        try {
+            const auto header(cpp_file_types::header);
+            const auto main(cpp_aspect_types::main);
+            const auto forward_decls(cpp_aspect_types::forward_decls);
+            const auto exception_mt(sml::meta_types::exception);
+            const auto facets(enabled_facet_types(exception_mt));
 
-        if (has_forward_decls(domain, sml::meta_types::exception))
-            lambda(cpp_facet_types::domain, header, forward_decls, e);
+            for (const auto ft : facets) {
+                lambda(ft, header, main, e);
+
+                if (has_forward_decls(ft, sml::meta_types::exception))
+                    lambda(ft, header, forward_decls, e);
+            }
+        } catch (boost::exception& ex) {
+            ex << errmsg_sml_to_cpp_view_model(failed_to_process_type +
+                boost::lexical_cast<std::string>(e.name()));
+            throw;
+        }
     }
     return r;
 }

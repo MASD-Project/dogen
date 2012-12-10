@@ -31,6 +31,4 @@
 #include "dogen/trivial_inheritance/test_data/pkg3/child_td.hpp"
 #include "dogen/trivial_inheritance/test_data/pkg4/child_td.hpp"
 #include "dogen/trivial_inheritance/test_data/second_child_without_members_td.hpp"
-#include "dogen/trivial_inheritance/test_data/service_interface_td.hpp"
-#include "dogen/trivial_inheritance/test_data/service_td.hpp"
 #include "dogen/trivial_inheritance/test_data/third_child_with_members_td.hpp"

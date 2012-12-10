@@ -5,7 +5,7 @@
 	<name>two_layers_with_objects</name>
 	<packages class_id="1" tracking_level="0" version="0">
 		<count>2</count>
-		<bucket_count>11</bucket_count>
+		<bucket_count>23</bucket_count>
 		<item_version>0</item_version>
 		<item class_id="2" tracking_level="0" version="0">
 			<first class_id="3" tracking_level="0" version="0">
@@ -72,7 +72,7 @@
 	</packages>
 	<pods class_id="6" tracking_level="0" version="0">
 		<count>2</count>
-		<bucket_count>11</bucket_count>
+		<bucket_count>23</bucket_count>
 		<item_version>0</item_version>
 		<item class_id="7" tracking_level="0" version="0">
 			<first>
@@ -84,9 +84,9 @@
 				<package_path>
 					<count>1</count>
 					<item_version>0</item_version>
-					<item>Package_2</item>
+					<item>package_1</item>
 				</package_path>
-				<type_name>class_2</type_name>
+				<type_name>class_1</type_name>
 				<meta_type>2</meta_type>
 			</first>
 			<second class_id="8" tracking_level="0" version="0">
@@ -99,9 +99,9 @@
 					<package_path>
 						<count>1</count>
 						<item_version>0</item_version>
-						<item>Package_2</item>
+						<item>package_1</item>
 					</package_path>
-					<type_name>class_2</type_name>
+					<type_name>class_1</type_name>
 					<meta_type>2</meta_type>
 				</name>
 				<properties class_id="9" tracking_level="0" version="0">
@@ -146,7 +146,7 @@
 				<generation_type>1</generation_type>
 				<is_parent>0</is_parent>
 				<category_type>1</category_type>
-				<pod_type>0</pod_type>
+				<pod_type>5</pod_type>
 				<documentation></documentation>
 				<number_of_type_arguments>0</number_of_type_arguments>
 			</second>
@@ -161,9 +161,9 @@
 				<package_path>
 					<count>1</count>
 					<item_version>0</item_version>
-					<item>package_1</item>
+					<item>Package_2</item>
 				</package_path>
-				<type_name>class_1</type_name>
+				<type_name>class_2</type_name>
 				<meta_type>2</meta_type>
 			</first>
 			<second>
@@ -176,9 +176,9 @@
 					<package_path>
 						<count>1</count>
 						<item_version>0</item_version>
-						<item>package_1</item>
+						<item>Package_2</item>
 					</package_path>
-					<type_name>class_1</type_name>
+					<type_name>class_2</type_name>
 					<meta_type>2</meta_type>
 				</name>
 				<properties>
@@ -223,7 +223,7 @@
 				<generation_type>1</generation_type>
 				<is_parent>0</is_parent>
 				<category_type>1</category_type>
-				<pod_type>0</pod_type>
+				<pod_type>5</pod_type>
 				<documentation></documentation>
 				<number_of_type_arguments>0</number_of_type_arguments>
 			</second>
@@ -231,17 +231,17 @@
 	</pods>
 	<primitives class_id="15" tracking_level="0" version="0">
 		<count>0</count>
-		<bucket_count>11</bucket_count>
+		<bucket_count>23</bucket_count>
 		<item_version>0</item_version>
 	</primitives>
 	<enumerations class_id="16" tracking_level="0" version="0">
 		<count>0</count>
-		<bucket_count>11</bucket_count>
+		<bucket_count>23</bucket_count>
 		<item_version>0</item_version>
 	</enumerations>
 	<exceptions class_id="17" tracking_level="0" version="0">
 		<count>0</count>
-		<bucket_count>11</bucket_count>
+		<bucket_count>23</bucket_count>
 		<item_version>0</item_version>
 	</exceptions>
 	<external_package_path>
@@ -252,12 +252,12 @@
 	<is_system>0</is_system>
 	<dependencies class_id="18" tracking_level="0" version="0">
 		<count>0</count>
-		<bucket_count>11</bucket_count>
+		<bucket_count>23</bucket_count>
 		<item_version>0</item_version>
 	</dependencies>
 	<leaves class_id="19" tracking_level="0" version="0">
 		<count>0</count>
-		<bucket_count>11</bucket_count>
+		<bucket_count>23</bucket_count>
 		<item_version>0</item_version>
 	</leaves>
 </entity>
