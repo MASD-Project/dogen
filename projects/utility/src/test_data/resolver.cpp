@@ -20,6 +20,7 @@
  */
 #include <boost/filesystem.hpp>
 #include <boost/filesystem/operations.hpp>
+#include <boost/throw_exception.hpp>
 #include "dogen/utility/test_data/test_data_exception.hpp"
 #include "dogen/utility/test_data/resolver.hpp"
 
@@ -41,7 +42,7 @@ boost::filesystem::path resolver::test_data_directory() {
     if (!boost::filesystem::exists(abs))
     {
         using dogen::utility::test_data::exception;
-        throw exception(test_data_dir_not_found + abs.string());
+        BOOST_THROW_EXCEPTION(exception(test_data_dir_not_found + abs.string()));
     }
     return abs;
 }

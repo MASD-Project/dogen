@@ -20,6 +20,7 @@
  */
 #include <string>
 #include <ostream>
+#include <boost/throw_exception.hpp>
 #include "dogen/utility/exception/invalid_enum_value.hpp"
 #include "dogen/utility/xml/node_types_io.hpp"
 
@@ -74,7 +75,7 @@ std::ostream& operator<<(std::ostream& stream, node_types value) {
     case node_types::end_entity: return stream << end_entity;
     case node_types::xml_declaration: return stream << xml_declaration;
     }
-    throw dogen::utility::exception::invalid_enum_value(error_message);
+    BOOST_THROW_EXCEPTION(dogen::utility::exception::invalid_enum_value(error_message));
 }
 
 } } }

@@ -23,6 +23,7 @@
 #include <boost/scope_exit.hpp>
 #include <boost/algorithm/string.hpp>
 #include <boost/filesystem/operations.hpp>
+#include <boost/throw_exception.hpp>
 #include "dogen/utility/xml/exception.hpp"
 #include "dogen/utility/xml/text_reader.hpp"
 
@@ -70,7 +71,7 @@ bool string_to_bool(std::string value) {
     if (boost::iequals(value, bool_false) || boost::iequals(value, bool_zero))
         return false;
 
-    throw dogen::utility::xml::exception(error_converting_bool);
+    BOOST_THROW_EXCEPTION(dogen::utility::xml::exception(error_converting_bool));
 }
 
 }
@@ -104,7 +105,7 @@ text_reader::impl::impl(std::string file_name)
     : reader_(xmlNewTextReaderFilename(file_name.c_str())) {
     if (reader_ == NULL) {
         using dogen::utility::xml::exception;
-        throw exception(initialisation_error + file_name);
+        BOOST_THROW_EXCEPTION(exception(initialisation_error + file_name));
     }
 }
 
@@ -118,7 +119,7 @@ text_reader::impl::~impl() {
 bool text_reader::impl::read() {
     const int ret(xmlTextReaderRead(reader_));
     if (ret == libxml_error_code)
-        throw dogen::utility::xml::exception(error_reading_node);
+        BOOST_THROW_EXCEPTION(dogen::utility::xml::exception(error_reading_node));
 
     return ret != 0;
 }
@@ -131,7 +132,7 @@ std::string text_reader::impl::value() const {
 void text_reader::impl::close() {
     const int ret(xmlTextReaderClose(reader_));
     if (ret == libxml_error_code)
-        throw dogen::utility::xml::exception(error_closing);
+        BOOST_THROW_EXCEPTION(dogen::utility::xml::exception(error_closing));
 }
 
 bool text_reader::impl::has_attribute(std::string name) const {
@@ -152,7 +153,7 @@ std::string text_reader::impl::get_attribute(std::string name) const {
     } BOOST_SCOPE_EXIT_END;
 
     if (value == nullptr)
-        throw dogen::utility::xml::exception(error_getting_attribute + name);
+        BOOST_THROW_EXCEPTION(dogen::utility::xml::exception(error_getting_attribute + name));
 
     const std::string ret((const char*)value);
     return ret;
@@ -166,7 +167,7 @@ std::string text_reader::impl::name() const {
 bool text_reader::impl::has_value() const {
     const int ret(xmlTextReaderHasValue(reader_));
     if (ret == libxml_error_code)
-        throw dogen::utility::xml::exception(error_has_value);
+        BOOST_THROW_EXCEPTION(dogen::utility::xml::exception(error_has_value));
 
     return ret != 0;
 }
@@ -174,7 +175,7 @@ bool text_reader::impl::has_value() const {
 bool text_reader::impl::is_empty() const {
     const int ret(xmlTextReaderIsEmptyElement(reader_));
     if (ret == libxml_error_code)
-        throw dogen::utility::xml::exception(error_has_value);
+        BOOST_THROW_EXCEPTION(dogen::utility::xml::exception(error_has_value));
 
     return ret != 0;
 }
@@ -187,7 +188,7 @@ node_types text_reader::impl::node_type() const {
 bool text_reader::impl::skip() const {
     const int ret(xmlTextReaderNext(reader_));
     if (ret == libxml_error_code)
-        throw dogen::utility::xml::exception(error_skipping_children);
+        BOOST_THROW_EXCEPTION(dogen::utility::xml::exception(error_skipping_children));
     return ret != 0;
 }
 
@@ -198,10 +199,10 @@ text_reader::text_reader(boost::filesystem::path file_name,
 
     using dogen::utility::xml::exception;
     if (!boost::filesystem::exists(file_name))
-        throw exception(error_file_not_found + file_name_.string());
+        BOOST_THROW_EXCEPTION(exception(error_file_not_found + file_name_.string()));
 
     if (!boost::filesystem::is_regular_file(file_name))
-        throw exception(error_file_not_regular + file_name_.string());
+        BOOST_THROW_EXCEPTION(exception(error_file_not_regular + file_name_.string()));
 
     impl_ = std::unique_ptr<impl>(new impl(file_name_.string()));
 }
@@ -233,7 +234,7 @@ double text_reader::value_as_double() const {
     try {
         return boost::lexical_cast<double>(value_as_string());
     } catch (boost::bad_lexical_cast) {
-        throw dogen::utility::xml::exception(error_converting_double);
+        BOOST_THROW_EXCEPTION(dogen::utility::xml::exception(error_converting_double));
     }
 }
 
@@ -241,7 +242,7 @@ int text_reader::value_as_int() const {
     try {
         return boost::lexical_cast<int>(value_as_string());
     } catch (boost::bad_lexical_cast) {
-        throw dogen::utility::xml::exception(error_converting_int);
+        BOOST_THROW_EXCEPTION(dogen::utility::xml::exception(error_converting_int));
     }
 }
 
@@ -249,7 +250,7 @@ long text_reader::value_as_long() const {
     try {
         return boost::lexical_cast<long>(value_as_string());
     } catch (boost::bad_lexical_cast) {
-        throw dogen::utility::xml::exception(error_converting_long);
+        BOOST_THROW_EXCEPTION(dogen::utility::xml::exception(error_converting_long));
     }
 }
 
@@ -269,7 +270,7 @@ int text_reader::get_attribute_as_int(std::string name) const {
     try {
         return boost::lexical_cast<int>(get_attribute_as_string(name));
     } catch (boost::bad_lexical_cast) {
-        throw dogen::utility::xml::exception(error_converting_int);
+        BOOST_THROW_EXCEPTION(dogen::utility::xml::exception(error_converting_int));
     }
 }
 
