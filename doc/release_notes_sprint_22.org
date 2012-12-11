@@ -10,19 +10,20 @@ This file contains all stories that were closed during sprint 22.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2012-12-11 Tue 12:57]
+Clock summary at [2012-12-11 Tue 15:45]
 
 | Headline                                                    | Time    |       |      |
 |-------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                | *16:24* |       |      |
+| *Total time*                                                | *18:34* |       |      |
 |-------------------------------------------------------------+---------+-------+------|
-| Development Stories Implemented                             |         | 16:24 |      |
+| Development Stories Implemented                             |         | 18:34 |      |
 | COMPLETED Outputting of floating point numbers rounded      |         |       | 1:00 |
 | COMPLETED Vector of double still has floating point issues  |         |       | 0:20 |
 | COMPLETED Ignore UML realisation relationship in Dia        |         |       | 0:42 |
 | COMPLETED Clocking of agile and build overhead              |         |       | 6:01 |
 | COMPLETED Remove unnecessary translation units for services |         |       | 3:29 |
-| COMPLETED Add PFH libraries to packages                     |         |       | 4:52 |
+| COMPLETED Add PFH libraries to packages                     |         |       | 6:47 |
+| COMPLETED Generate forward declarations for services        |         |       | 0:15 |
 #+end:
 
 *** COMPLETED Outputting of floating point numbers rounded            :spike:
@@ -149,5 +150,14 @@ For windows we need (according to dependency walker):
 - e:\gtkmm\bin\LIBXML2-2.DLL
 - LIBGCC_S_DW2-1.DLL
 - LIBSTDC++-6.DLL
+
+*** COMPLETED Generate forward declarations for services              :story:
+    CLOSED: [2012-12-11 Tue 15:45]
+    CLOCK: [2012-12-11 Tue 15:30]--[2012-12-11 Tue 15:45] =>  0:15
+
+Whilst we cannot generate any code for services, there is no reason
+why the forward declarations are not managed the same way as for other
+types. Look into what changes dogen needs for this as it would be a
+time saver.
 
 ** Deprecated Development Stories

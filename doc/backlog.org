@@ -11,29 +11,6 @@ This file contains all stories that haven't been assigned to a sprint.
 
 Stories that we intend to look at, at some point.
 
-*** Dogen driver errors look scary                                    :story:
-
-At present we are outputting the boost diagnostic information to the
-console for all errors in the driver. This means starting dogen with
-no parameters looks like so:
-
-: /opt/kitanda/dogen-0.0.734/bin$ ./dogen_driver-0.0.734.sh
-: dogen/projects/driver/src/program_options_parser.cpp(364): Throw in function void dogen::driver::program_options_parser::throw_missing_target() const
-: Dynamic exception type: boost::exception_detail::clone_impl<dogen::driver::parser_validation_error>
-: std::exception::what: Mandatory parameter target is missing. Try `dogen --help' for more information.
-:
-: Use --help option to see usage instructions.
-
-The exception information is not useful and will cause confusion to
-new users.
-
-*** Generate forward declarations for services                        :story:
-
-Whilst we cannot generate any code for services, there is no reason
-why the forward declarations are not managed the same way as for other
-types. Look into what changes dogen needs for this as it would be a
-time saver.
-
 *** Move injection of system types into SML                           :story:
 
 At present the director is responsible for injecting all system types

@@ -535,7 +535,8 @@ transform_file(cpp_facet_types ft, cpp_file_types flt, cpp_aspect_types at,
     r.category_type(p.category_type());
     r.meta_type(p.name().meta_type());
 
-    if (p.generation_type() == sml::generation_types::partial_generation)
+    if (at != cpp_aspect_types::forward_decls &&
+        p.generation_type() == sml::generation_types::partial_generation)
         r.aspect_type(cpp_aspect_types::null_aspect);
 
     const auto i(qname_to_class_.find(name));
