@@ -10,19 +10,19 @@ This file contains all stories that were closed during sprint 22.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2012-12-11 Tue 09:18]
+Clock summary at [2012-12-11 Tue 10:41]
 
 | Headline                                                                   | Time    |       |      |
 |----------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                               | *13:20* |       |      |
+| *Total time*                                                               | *14:42* |       |      |
 |----------------------------------------------------------------------------+---------+-------+------|
-| Development Stories Implemented                                            |         | 13:20 |      |
+| Development Stories Implemented                                            |         | 14:42 |      |
 | COMPLETED Outputting of floating point numbers is resulting in roundings   |         |       | 1:00 |
 | COMPLETED Vector of double still suffers from floating point issues        |         |       | 0:20 |
 | COMPLETED Ignore UML realisation relationship in Dia                       |         |       | 0:42 |
 | COMPLETED Clocking of agile and build overhead                             |         |       | 6:01 |
 | COMPLETED Remove empty translation units for services on non domain facets |         |       | 3:29 |
-| IMPLEMENTATION Add PFH libraries to packages                               |         |       | 1:48 |
+| IMPLEMENTATION Add PFH libraries to packages                               |         |       | 3:10 |
 #+end:
 
 *** COMPLETED Outputting of floating point numbers is resulting in roundings :spike:
@@ -120,6 +120,8 @@ build cost of these empty translation units for no reason. For now, do
 not generate any facet other than the domain facet for services.
 
 *** IMPLEMENTATION Add PFH libraries to packages                      :story:
+    CLOCK: [2012-12-11 Tue 09:59]--[2012-12-11 Tue 10:40] =>  0:41
+    CLOCK: [2012-12-11 Tue 09:18]--[2012-12-11 Tue 09:59] =>  0:41
     CLOCK: [2012-12-11 Tue 07:30]--[2012-12-11 Tue 09:18] =>  1:48
 
 At present our packages on windows and OSX don't run because we are
