@@ -577,30 +577,6 @@ factored out into a boost_model_helper, we need to do the same with
 the others and go across the code base and remove all these direct
 references.
 
-*** Add PFH libraries to packages
-
-At present our packages on windows and OSX don't run because we are
-missing all of the boost, etc dependencies which are not present on
-the OS. On linux is luck of the draw, it may or may nor run. We should
-just add the dependencies to our packages.
-
-We can do this by simply reading the =PFH_LOCATION= from the
-environment and then doing an =install= command with files pointing to
-the PFH.
-
-http://www.cmake.org/pipermail/cmake/2009-July/030770.html
-
-For windows we need (according to dependency walker):
-
-- LIBBOOST_PROGRAM_OPTIONS-MGW47-MT-1_49.DLL
-- LIBBOOST_FILESYSTEM-MGW47-MT-1_49.DLL
-- LIBBOOST_THREAD-MGW47-MT-1_49.DLL
-- LIBBOOST_SERIALIZATION-MGW47-MT-1_49.DLL
-- LIBBOOST_SYSTEM-MGW47-MT-1_49.DLL
-- e:\gtkmm\bin\LIBXML2-2.DLL
-- LIBGCC_S_DW2-1.DLL
-- LIBSTDC++-6.DLL
-
 *** Full constructor parameter comments
 
 We could use the comments in properties to populate the comments for

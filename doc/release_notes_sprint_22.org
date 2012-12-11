@@ -10,18 +10,19 @@ This file contains all stories that were closed during sprint 22.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2012-12-10 Mon 12:08]
+Clock summary at [2012-12-11 Tue 09:18]
 
-| Headline                                                                 | Time    |       |      |
-|--------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                             | *11:32* |       |      |
-|--------------------------------------------------------------------------+---------+-------+------|
-| Development Stories Implemented                                          |         | 11:32 |      |
-| COMPLETED Outputting of floating point numbers is resulting in roundings |         |       | 1:00 |
-| COMPLETED Vector of double still suffers from floating point issues      |         |       | 0:20 |
-| COMPLETED Ignore UML realisation relationship in Dia                     |         |       | 0:42 |
-| COMPLETED Clocking of agile and build overhead                           |         |       | 6:01 |
-| Remove empty translation units for services on non domain facets         |         |       | 3:29 |
+| Headline                                                                   | Time    |       |      |
+|----------------------------------------------------------------------------+---------+-------+------|
+| *Total time*                                                               | *13:20* |       |      |
+|----------------------------------------------------------------------------+---------+-------+------|
+| Development Stories Implemented                                            |         | 13:20 |      |
+| COMPLETED Outputting of floating point numbers is resulting in roundings   |         |       | 1:00 |
+| COMPLETED Vector of double still suffers from floating point issues        |         |       | 0:20 |
+| COMPLETED Ignore UML realisation relationship in Dia                       |         |       | 0:42 |
+| COMPLETED Clocking of agile and build overhead                             |         |       | 6:01 |
+| COMPLETED Remove empty translation units for services on non domain facets |         |       | 3:29 |
+| IMPLEMENTATION Add PFH libraries to packages                               |         |       | 1:48 |
 #+end:
 
 *** COMPLETED Outputting of floating point numbers is resulting in roundings :spike:
@@ -117,5 +118,30 @@ conclude that for now there will be no need for hashing,
 serialisation, IO or test data for services. And yet we are paying the
 build cost of these empty translation units for no reason. For now, do
 not generate any facet other than the domain facet for services.
+
+*** IMPLEMENTATION Add PFH libraries to packages                      :story:
+    CLOCK: [2012-12-11 Tue 07:30]--[2012-12-11 Tue 09:18] =>  1:48
+
+At present our packages on windows and OSX don't run because we are
+missing all of the boost, etc dependencies which are not present on
+the OS. On linux is luck of the draw, it may or may nor run. We should
+just add the dependencies to our packages.
+
+We can do this by simply reading the =PFH_LOCATION= from the
+environment and then doing an =install= command with files pointing to
+the PFH.
+
+http://www.cmake.org/pipermail/cmake/2009-July/030770.html
+
+For windows we need (according to dependency walker):
+
+- LIBBOOST_PROGRAM_OPTIONS-MGW47-MT-1_49.DLL
+- LIBBOOST_FILESYSTEM-MGW47-MT-1_49.DLL
+- LIBBOOST_THREAD-MGW47-MT-1_49.DLL
+- LIBBOOST_SERIALIZATION-MGW47-MT-1_49.DLL
+- LIBBOOST_SYSTEM-MGW47-MT-1_49.DLL
+- e:\gtkmm\bin\LIBXML2-2.DLL
+- LIBGCC_S_DW2-1.DLL
+- LIBSTDC++-6.DLL
 
 ** Deprecated Development Stories
