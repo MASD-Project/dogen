@@ -170,7 +170,6 @@ if (WIN32)
 
     # There is a bug in NSI that does not handle full unix paths properly. Make
     # sure there is at least one set of four (4) backslashes.
-    set(CPACK_INSTALL_PREFIX "${CPACK_INSTALL_PREFIX}/kitanda")
     set(CPACK_PACKAGE_INSTALL_DIRECTORY "${PROJECT_NAME}-${DOGEN_VERSION}")
     set(CPACK_PACKAGE_ICON "${CMAKE_SOURCE_DIR}\\\\images\\\\application_dogen.png")
     set(CPACK_NSIS_INSTALLED_ICON_NAME "bin\\\\dogen_driver.exe")
