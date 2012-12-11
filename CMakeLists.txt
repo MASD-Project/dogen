@@ -56,6 +56,7 @@ set(Boost_NO_SYSTEM_PATHS "ON")
 
 find_package(Boost 1.49 REQUIRED COMPONENTS
     system
+    chrono
     serialization
     date_time
     thread
@@ -169,9 +170,10 @@ site_name(DOGEN_SITE)
 
 # staging directory
 set(stage_dir ${CMAKE_BINARY_DIR}/stage)
-set(stage_bin_dir ${CMAKE_BINARY_DIR}/stage/bin)
-set(stage_pkg_dir ${CMAKE_BINARY_DIR}/stage/pkg)
-set(stage_inc_dir ${CMAKE_BINARY_DIR}/stage/include)
+set(stage_bin_dir ${stage_dir}/bin)
+set(stage_pkg_dir ${stage_dir}/pkg)
+set(stage_lib_dir ${stage_dir}/lib)
+set(stage_inc_dir ${stage_dir}/include)
 set(stage_test_data_dir ${stage_dir}/test_data)
 set(stage_doxygen_dir ${stage_dir}/doxygen)
 

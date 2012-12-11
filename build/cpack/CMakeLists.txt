@@ -85,9 +85,85 @@ set(CPACK_COMPONENTS_IGNORE_GROUPS TRUE)
 set(CPACK_ARCHIVE_COMPONENT_INSTALL TRUE)
 
 #
+# add the boost libraries from the PFH
+#
+foreach(library ${Boost_LIBRARIES})
+    if(NOT EXISTS "${stage_lib_dir}")
+        file(MAKE_DIRECTORY "${stage_lib_dir}")
+    endif()
+
+    set(version "")
+    if (WIN32)
+    elseif (APPLE)
+    elseif (UNIX)
+        set(version ".${Boost_MAJOR_VERSION}")
+        set(version "${version}.${Boost_MINOR_VERSION}")
+        set(version "${version}.${Boost_SUBMINOR_VERSION}")
+    endif()
+
+    execute_process(
+        COMMAND cp -L ${library}${version} ${stage_lib_dir}
+        RESULT_VARIABLE ret_var
+        OUTPUT_VARIABLE output_var)
+
+    set(library_name "")
+    get_filename_component(library_name ${library}${version} NAME)
+    install(FILES ${stage_lib_dir}/${library_name}
+        DESTINATION bin COMPONENT applications)
+endforeach()
+
+#
+# add c++ run time DLLs
+#
+set(pfh_location "$ENV{PFH_LOCATION}")
+if(NOT EXISTS "${stage_lib_dir}")
+    file(MAKE_DIRECTORY "${stage_lib_dir}")
+endif()
+
+set(bitness 32)
+if(CMAKE_SIZEOF_VOID_P EQUAL 8)
+    set(bitness 64)
+endif()
+
+set(cpp_runtime_libs "")
+if (WIN32)
+    set (cpp_runtime_libs
+        ${cpp_runtime_libs} ${pfh_location}/lib/LIBGCC_S_DW2-1.DLL)
+    set (cpp_runtime_libs
+        ${cpp_runtime_libs} ${pfh_location}/lib/LIBSTDC++-6.DLL)
+elseif (APPLE)
+    set (cpp_runtime_libs
+        ${cpp_runtime_libs} ${pfh_location}/lib/libstdc++.6.dylib)
+    set (cpp_runtime_libs
+        ${cpp_runtime_libs} ${pfh_location}/lib/libgcc_s.1.dylib)
+elseif (UNIX)
+    set (cpp_runtime_libs
+        ${cpp_runtime_libs} ${pfh_location}/lib${bitness}/libstdc++.so.6)
+    set (cpp_runtime_libs
+        ${cpp_runtime_libs} ${pfh_location}/lib${bitness}/libgcc_s.so.1)
+
+    if (CMAKE_COMPILER_IS_CLANGXX)
+        set (cpp_runtime_libs
+            ${cpp_runtime_libs} /usr/lib/libprofile_rt.so)
+    endif()
+endif()
+
+foreach(library ${cpp_runtime_libs})
+    execute_process(
+        COMMAND cp -L ${library} ${stage_lib_dir}
+        RESULT_VARIABLE ret_var
+        OUTPUT_VARIABLE output_var)
+
+    set(library_name "")
+    get_filename_component(library_name ${library} NAME)
+    install(FILES ${stage_lib_dir}/${library_name}
+        DESTINATION bin COMPONENT applications)
+endforeach()
+
+#
 # platform specific
 #
-if(WIN32)
+if (WIN32)
     set(CPACK_GENERATOR "NSIS")
     set(CPACK_SOURCE_GENERATOR "ZIP")
     set(CPACK_PACKAGE_EXECUTABLES "dogen_driver" "Dogen - domain generator")
@@ -102,7 +178,7 @@ if(WIN32)
     set(CPACK_NSIS_CONTACT "info@kitanda.co.uk")
     set(CPACK_NSIS_MODIFY_PATH ON)
 
-elseif(APPLE)
+elseif (APPLE)
     set(CPACK_SOURCE_GENERATOR "TGZ")
 
     configure_file(${CMAKE_CURRENT_SOURCE_DIR}/Info.plist.in ${stage_dir}/tmp_pkg/macosx/Info.plist)
@@ -119,7 +195,7 @@ elseif(APPLE)
     set(CPACK_COMPONENT_HEADERS_INSTALL_TYPES Developer Full)
     set(CPACK_COMPONENT_APPLICATIONS_INSTALL_TYPES Full)
 
-elseif(UNIX)
+elseif (UNIX)
     set(CPACK_STRIP_FILES "")
     set(CPACK_SOURCE_STRIP_FILES "")
 
