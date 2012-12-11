@@ -1,0 +1,45 @@
+Changes from integration to stash
+	Modified   CMakeLists.txt
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index cf1c534..c49937f 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -169,9 +169,10 @@ site_name(DOGEN_SITE)
+ 
+ # staging directory
+ set(stage_dir ${CMAKE_BINARY_DIR}/stage)
+-set(stage_bin_dir ${CMAKE_BINARY_DIR}/stage/bin)
+-set(stage_pkg_dir ${CMAKE_BINARY_DIR}/stage/pkg)
+-set(stage_inc_dir ${CMAKE_BINARY_DIR}/stage/include)
++set(stage_bin_dir ${stage_dir}/bin)
++set(stage_pkg_dir ${stage_dir}/pkg)
++set(stage_lib_dir ${stage_dir}/lib)
++set(stage_inc_dir ${stage_dir}/include)
+ set(stage_test_data_dir ${stage_dir}/test_data)
+ set(stage_doxygen_dir ${stage_dir}/doxygen)
+ 
+	Modified   build/cpack/CMakeLists.txt
+diff --git a/build/cpack/CMakeLists.txt b/build/cpack/CMakeLists.txt
+index 67a0ff7..6b017e5 100644
+--- a/build/cpack/CMakeLists.txt
++++ b/build/cpack/CMakeLists.txt
+@@ -85,6 +85,18 @@ set(CPACK_COMPONENTS_IGNORE_GROUPS TRUE)
+ set(CPACK_ARCHIVE_COMPONENT_INSTALL TRUE)
+ 
+ #
++# add the boost libraries from the PFH
++#
++foreach(library ${Boost_LIBRARIES})
++    set(library_name "")
++    get_filename_component(library_name library NAME)
++
++    file(COPY ${library} DESTINATION ${stage_lib_dir})
++    install(FILES ${stage_dir}/lib/${library_name}
++        DESTINATION lib COMPONENT applications)
++endforeach()
++
++#
+ # platform specific
+ #
+ if(WIN32)
+
