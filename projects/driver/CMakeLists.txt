@@ -22,6 +22,6 @@ add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/spec)
 
 install(
     DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/include/
-    DESTINATION include/${DOGEN_VERSION}/
+    DESTINATION include/
     COMPONENT headers
     FILES_MATCHING PATTERN "*.hpp")

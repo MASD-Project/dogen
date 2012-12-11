@@ -80,12 +80,6 @@ void cpp_include_cmakelists::format(const cmakelists_view_model& vm) {
             << "DIRECTORY include/" << std::endl
             << "DESTINATION include/";
 
-    if (!vm.product_name().empty()) {
-        stream_ << underscore << "${"
-                << boost::algorithm::to_upper_copy(vm.product_name())
-                << "_VERSION}/";
-    }
-
     stream_ << std::endl
             << "COMPONENT headers" << std::endl
             << "FILES_MATCHING PATTERN \"*.hpp\")" << std::endl;
