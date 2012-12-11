@@ -10,22 +10,22 @@ This file contains all stories that were closed during sprint 22.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2012-12-11 Tue 10:41]
+Clock summary at [2012-12-11 Tue 12:57]
 
-| Headline                                                                   | Time    |       |      |
-|----------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                               | *14:42* |       |      |
-|----------------------------------------------------------------------------+---------+-------+------|
-| Development Stories Implemented                                            |         | 14:42 |      |
-| COMPLETED Outputting of floating point numbers is resulting in roundings   |         |       | 1:00 |
-| COMPLETED Vector of double still suffers from floating point issues        |         |       | 0:20 |
-| COMPLETED Ignore UML realisation relationship in Dia                       |         |       | 0:42 |
-| COMPLETED Clocking of agile and build overhead                             |         |       | 6:01 |
-| COMPLETED Remove empty translation units for services on non domain facets |         |       | 3:29 |
-| IMPLEMENTATION Add PFH libraries to packages                               |         |       | 3:10 |
+| Headline                                                    | Time    |       |      |
+|-------------------------------------------------------------+---------+-------+------|
+| *Total time*                                                | *16:24* |       |      |
+|-------------------------------------------------------------+---------+-------+------|
+| Development Stories Implemented                             |         | 16:24 |      |
+| COMPLETED Outputting of floating point numbers rounded      |         |       | 1:00 |
+| COMPLETED Vector of double still has floating point issues  |         |       | 0:20 |
+| COMPLETED Ignore UML realisation relationship in Dia        |         |       | 0:42 |
+| COMPLETED Clocking of agile and build overhead              |         |       | 6:01 |
+| COMPLETED Remove unnecessary translation units for services |         |       | 3:29 |
+| COMPLETED Add PFH libraries to packages                     |         |       | 4:52 |
 #+end:
 
-*** COMPLETED Outputting of floating point numbers is resulting in roundings :spike:
+*** COMPLETED Outputting of floating point numbers rounded            :spike:
     CLOCK: [2012-12-03 Mon 12:07]--[2012-12-03 Mon 13:07] =>  1:00
 
 As reported by JS, numbers coming out of our time series in creris are
@@ -34,12 +34,12 @@ are using when dumping time points. Fix dogen such that we have decent
 floating point defaults - if not perfect. This is just a quick hack
 for now.
 
-*** COMPLETED Move system model factories into SML
+*** COMPLETED Move system model factories into SML                    :story:
 
 We do not have any generator dependencies in the system model
 factories so they can safely be moved into SML.
 
-*** COMPLETED Vector of double still suffers from floating point issues :spike:
+*** COMPLETED Vector of double still has floating point issues        :spike:
     CLOCK: [2012-12-06 Thu 14:15]--[2012-12-06 Thu 14:35] =>  0:20
 
 As reported by JS the previous fix done to time series stopped working
@@ -108,7 +108,7 @@ Stand up and build checking.
 
 Stand up and build checking.
 
-*** COMPLETED Remove empty translation units for services on non domain facets :spike:
+*** COMPLETED Remove unnecessary translation units for services       :spike:
     CLOSED: [2012-12-10 Mon 12:08]
     CLOCK: [2012-12-10 Mon 08:40]--[2012-12-10 Mon 12:09] =>  3:26
 
@@ -119,7 +119,9 @@ serialisation, IO or test data for services. And yet we are paying the
 build cost of these empty translation units for no reason. For now, do
 not generate any facet other than the domain facet for services.
 
-*** IMPLEMENTATION Add PFH libraries to packages                      :story:
+*** COMPLETED Add PFH libraries to packages                           :story:
+    CLOCK: [2012-12-11 Tue 11:38]--[2012-12-11 Tue 12:55] =>  1:17
+    CLOCK: [2012-12-11 Tue 10:40]--[2012-12-11 Tue 11:05] =>  0:25
     CLOCK: [2012-12-11 Tue 09:59]--[2012-12-11 Tue 10:40] =>  0:41
     CLOCK: [2012-12-11 Tue 09:18]--[2012-12-11 Tue 09:59] =>  0:41
     CLOCK: [2012-12-11 Tue 07:30]--[2012-12-11 Tue 09:18] =>  1:48
