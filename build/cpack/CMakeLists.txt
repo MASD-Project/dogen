@@ -29,7 +29,6 @@ set(CPACK_PACKAGE_CONTACT "http://kitanda.co.uk/html/index.html")
 set(CPACK_PACKAGE_VENDOR "Kitanda")
 set(CPACK_PACKAGE_DESCRIPTION_FILE "${CMAKE_CURRENT_SOURCE_DIR}/ReadMe.txt")
 set(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_CURRENT_SOURCE_DIR}/Copyright.txt")
-set(CPACK_PACKAGE_INSTALL_DIRECTORY "kitanda/${PROJECT_NAME}-${DOGEN_VERSION}")
 
 if(NOT DEFINED CPACK_SYSTEM_NAME)
     set(CPACK_SYSTEM_NAME "${CMAKE_SYSTEM_NAME}-${CMAKE_SYSTEM_PROCESSOR}")
@@ -162,6 +161,7 @@ if (WIN32)
 
     # There is a bug in NSI that does not handle full unix paths properly. Make
     # sure there is at least one set of four (4) backslashes.
+    set(CPACK_PACKAGE_INSTALL_DIRECTORY "kitanda\\\\${PROJECT_NAME}-${DOGEN_VERSION}")
     set(CPACK_PACKAGE_ICON "${CMAKE_SOURCE_DIR}\\\\images\\\\application_dogen.png")
     set(CPACK_NSIS_INSTALLED_ICON_NAME "bin\\\\dogen_driver.exe")
     set(CPACK_NSIS_DISPLAY_NAME "Dogen")
@@ -172,7 +172,7 @@ if (WIN32)
 
 elseif (APPLE)
     set(CPACK_SOURCE_GENERATOR "TGZ")
-
+    set(CPACK_PACKAGE_INSTALL_DIRECTORY "kitanda/${PROJECT_NAME}-${DOGEN_VERSION}")
     configure_file(${CMAKE_CURRENT_SOURCE_DIR}/Info.plist.in ${stage_dir}/tmp_pkg/macosx/Info.plist)
     configure_file(${CMAKE_CURRENT_SOURCE_DIR}/start.in ${stage_dir}/tmp_pkg/macosx/start)
     set(CPACK_GENERATOR "Bundle")
@@ -249,7 +249,7 @@ elseif (UNIX)
     endif()
 
     set(CPACK_SET_DESTDIR true)
-    set(CPACK_INSTALL_PREFIX "/opt/kitanda")
+    set(CPACK_INSTALL_PREFIX "/opt/kitanda/${PROJECT_NAME}-${DOGEN_VERSION}")
     configure_file(${CMAKE_CURRENT_SOURCE_DIR}/dogen_driver.sh.in
         ${stage_dir}/scripts/dogen_driver-${DOGEN_VERSION}.sh)
     execute_process(COMMAND chmod +x ${stage_dir}/scripts/dogen_driver-${DOGEN_VERSION}.sh)
