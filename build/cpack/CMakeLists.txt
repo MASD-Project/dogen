@@ -128,19 +128,28 @@ endif()
 set(cpp_runtime_libs "")
 if (WIN32)
     set (cpp_runtime_libs
-        ${cpp_runtime_libs} ${pfh_location}/lib/LIBGCC_S_DW2-1.DLL)
+        ${cpp_runtime_libs} e:/mingw/bin/LIBGCC_S_DW2-1.DLL)
     set (cpp_runtime_libs
-        ${cpp_runtime_libs} ${pfh_location}/lib/LIBSTDC++-6.DLL)
+        ${cpp_runtime_libs} e:/mingw/bin/LIBSTDC++-6.DLL)
 elseif (APPLE)
     set (cpp_runtime_libs
         ${cpp_runtime_libs} ${pfh_location}/lib/libstdc++.6.dylib)
     set (cpp_runtime_libs
         ${cpp_runtime_libs} ${pfh_location}/lib/libgcc_s.1.dylib)
 elseif (UNIX)
-    set (cpp_runtime_libs
-        ${cpp_runtime_libs} ${pfh_location}/lib${bitness}/libstdc++.so.6)
-    set (cpp_runtime_libs
-        ${cpp_runtime_libs} ${pfh_location}/lib${bitness}/libgcc_s.so.1)
+    if(EXISTS "${pfh_location}/lib${bitness}/libstdc++.so.6")
+        set (cpp_runtime_libs
+            ${cpp_runtime_libs} ${pfh_location}/lib${bitness}/libstdc++.so.6)
+        set (cpp_runtime_libs
+            ${cpp_runtime_libs} ${pfh_location}/lib${bitness}/libgcc_s.so.1)
+    elseif(EXISTS "/usr/lib/i386-linux-gnu/libstdc++.so.6")
+        set (cpp_runtime_libs
+            ${cpp_runtime_libs} /usr/lib/i386-linux-gnu/libstdc++.so.6)
+        set (cpp_runtime_libs
+            ${cpp_runtime_libs} /usr/lib/i386-linux-gnu/libgcc_s.so.1)
+    else()
+        message(FATAL "could not find C++ runtime")
+    endif()
 
     if (CMAKE_COMPILER_IS_CLANGXX)
         set (cpp_runtime_libs
@@ -250,6 +259,11 @@ elseif (UNIX)
 
     set(CPACK_SET_DESTDIR true)
     set(CPACK_INSTALL_PREFIX "/opt/kitanda")
+    configure_file(${CMAKE_CURRENT_SOURCE_DIR}/dogen_driver.sh.in
+        ${stage_dir}/bin/dogen_driver-${DOGEN_VERSION}.sh)
+    execute_process(COMMAND chmod +x ${stage_dir}/bin/dogen_driver-${DOGEN_VERSION}.sh)
+    install(PROGRAMS ${stage_dir}/bin/dogen_driver-${DOGEN_VERSION}.sh
+        DESTINATION bin COMPONENT applications)
 else()
     message(FATAL_ERROR "unknown operating system")
 endif()
