@@ -137,24 +137,7 @@ elseif (APPLE)
     set (cpp_runtime_libs
         ${cpp_runtime_libs} ${pfh_location}/lib/libgcc_s.1.dylib)
 elseif (UNIX)
-    if(EXISTS "${pfh_location}/lib${bitness}/libstdc++.so.6")
-        set (cpp_runtime_libs
-            ${cpp_runtime_libs} ${pfh_location}/lib${bitness}/libstdc++.so.6)
-        set (cpp_runtime_libs
-            ${cpp_runtime_libs} ${pfh_location}/lib${bitness}/libgcc_s.so.1)
-    elseif(EXISTS "/usr/lib/i386-linux-gnu/libstdc++.so.6")
-        set (cpp_runtime_libs
-            ${cpp_runtime_libs} /usr/lib/i386-linux-gnu/libstdc++.so.6)
-        set (cpp_runtime_libs
-            ${cpp_runtime_libs} /usr/lib/i386-linux-gnu/libgcc_s.so.1)
-    else()
-        message(FATAL "could not find C++ runtime")
-    endif()
-
-    if (CMAKE_COMPILER_IS_CLANGXX)
-        set (cpp_runtime_libs
-            ${cpp_runtime_libs} /usr/lib/libprofile_rt.so)
-    endif()
+    # rely on package management for runtime.
 endif()
 
 foreach(library ${cpp_runtime_libs})
@@ -252,7 +235,15 @@ elseif (UNIX)
         if("${CPACK_PACKAGE_ARCHITECTURE}" MATCHES "x86_64")
             set(CPACK_PACKAGE_ARCHITECTURE amd64)
         endif("${CPACK_PACKAGE_ARCHITECTURE}" MATCHES "x86_64")
-        set(CPACK_DEBIAN_PACKAGE_DEPENDS "libxml2")
+
+        set(deps "libxml2")
+        set(deps "${deps}, libc6 (>= 2.1.3)")
+        set(deps "${deps}, libgcc1 (>= 1:4.7.1)")
+        set(deps "${deps}, libstdc++6 (>= 4.7.1)")
+        if (CMAKE_COMPILER_IS_CLANGXX)
+            set(deps "${deps}, llvm-3.1-dev (>= 3.1.0)")
+        endif()
+        set(CPACK_DEBIAN_PACKAGE_DEPENDS ${deps})
         string(TOLOWER
             "${CPACK_PACKAGE_NAME}_${CPACK_PACKAGE_VERSION}_${CPACK_PACKAGE_ARCHITECTURE}" CPACK_PACKAGE_FILE_NAME)
     endif()
@@ -260,9 +251,9 @@ elseif (UNIX)
     set(CPACK_SET_DESTDIR true)
     set(CPACK_INSTALL_PREFIX "/opt/kitanda")
     configure_file(${CMAKE_CURRENT_SOURCE_DIR}/dogen_driver.sh.in
-        ${stage_dir}/bin/dogen_driver-${DOGEN_VERSION}.sh)
-    execute_process(COMMAND chmod +x ${stage_dir}/bin/dogen_driver-${DOGEN_VERSION}.sh)
-    install(PROGRAMS ${stage_dir}/bin/dogen_driver-${DOGEN_VERSION}.sh
+        ${stage_dir}/scripts/dogen_driver-${DOGEN_VERSION}.sh)
+    execute_process(COMMAND chmod +x ${stage_dir}/scripts/dogen_driver-${DOGEN_VERSION}.sh)
+    install(PROGRAMS ${stage_dir}/scripts/dogen_driver-${DOGEN_VERSION}.sh
         DESTINATION bin COMPONENT applications)
 else()
     message(FATAL_ERROR "unknown operating system")
