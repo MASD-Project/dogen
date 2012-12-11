@@ -120,6 +120,8 @@ build cost of these empty translation units for no reason. For now, do
 not generate any facet other than the domain facet for services.
 
 *** COMPLETED Add PFH libraries to packages                           :story:
+    CLOCK: [2012-12-11 Tue 14:53]--[2012-12-11 Tue 15:36] =>  0:43
+    CLOCK: [2012-12-11 Tue 12:55]--[2012-12-11 Tue 14:07] =>  1:12
     CLOCK: [2012-12-11 Tue 11:38]--[2012-12-11 Tue 12:55] =>  1:17
     CLOCK: [2012-12-11 Tue 10:40]--[2012-12-11 Tue 11:05] =>  0:25
     CLOCK: [2012-12-11 Tue 09:59]--[2012-12-11 Tue 10:40] =>  0:41
