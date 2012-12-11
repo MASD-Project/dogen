@@ -131,10 +131,19 @@ if (WIN32)
     set (cpp_runtime_libs
         ${cpp_runtime_libs} e:/mingw/bin/LIBSTDC++-6.DLL)
 elseif (APPLE)
-    set (cpp_runtime_libs
-        ${cpp_runtime_libs} ${pfh_location}/lib/libstdc++.6.dylib)
-    set (cpp_runtime_libs
-        ${cpp_runtime_libs} ${pfh_location}/lib/libgcc_s.1.dylib)
+    if(EXISTS "${pfh_location}/lib/libstdc++.6.dylib")
+        set (cpp_runtime_libs
+            ${cpp_runtime_libs} ${pfh_location}/lib/libstdc++.6.dylib)
+        set (cpp_runtime_libs
+            ${cpp_runtime_libs} ${pfh_location}/lib/libgcc_s.1.dylib)
+    elseif(EXISTS "/usr/local/lib/i386/libstdc++.6.dylib")
+        set (cpp_runtime_libs
+            ${cpp_runtime_libs} "/usr/local/lib/i386/libstdc++.6.dylib")
+        set (cpp_runtime_libs
+            ${cpp_runtime_libs} "/usr/local/lib/i386/libgcc_s.1.dylib")
+    else()
+        message(FATAL "could not find C++ runtime")
+    endif()
 elseif (UNIX)
     # rely on package management for runtime.
 endif()
