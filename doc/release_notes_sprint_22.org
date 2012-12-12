@@ -10,17 +10,17 @@ This file contains all stories that were closed during sprint 22.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2012-12-12 Wed 13:54]
+Clock summary at [2012-12-12 Wed 15:03]
 
 | Headline                                                    | Time    |       |      |
 |-------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                | *21:53* |       |      |
+| *Total time*                                                | *22:33* |       |      |
 |-------------------------------------------------------------+---------+-------+------|
-| Development Stories Implemented                             |         | 21:53 |      |
+| Development Stories Implemented                             |         | 22:33 |      |
 | COMPLETED Outputting of floating point numbers rounded      |         |       | 1:00 |
 | COMPLETED Vector of double still has floating point issues  |         |       | 0:20 |
 | COMPLETED Ignore UML realisation relationship in Dia        |         |       | 0:42 |
-| COMPLETED Clocking of agile and build overhead              |         |       | 6:01 |
+| IMPLEMENTATION Clocking of agile and build overhead         |         |       | 6:41 |
 | COMPLETED Remove unnecessary translation units for services |         |       | 3:29 |
 | COMPLETED Add PFH libraries to packages                     |         |       | 6:47 |
 | COMPLETED Generate forward declarations for services        |         |       | 0:15 |
@@ -57,7 +57,7 @@ to format correctly.
 Treat UML realisation as we treat aggregation - that is allow it to
 exist in the diagram without doing any processing to it.
 
-*** COMPLETED Clocking of agile and build overhead                    :story:
+*** IMPLEMENTATION Clocking of agile and build overhead               :story:
     CLOSED: [2012-12-08 Sat 18:42]
 
 This story keeps track of the time spent on stand-up meetings, other
@@ -109,6 +109,17 @@ Stand up and build checking.
      CLOCK: [2012-12-10 Mon 06:20]--[2012-12-10 Mon 07:10] =>  0:50
 
 Stand up and build checking.
+
+**** COMPLETED Build checking and stand-up on 2012-12-11
+     CLOCK: [2012-12-11 Tue 06:20]--[2012-12-11 Tue 07:00] =>  0:40
+
+Stand up and build checking.
+
+**** COMPLETED Build checking and stand-up on 2012-12-12
+     CLOCK: [2012-12-12 Wed 06:20]--[2012-12-10 Wed 06:50] => -47:30
+
+Stand up and build checking.
+
 
 *** COMPLETED Remove unnecessary translation units for services       :spike:
     CLOSED: [2012-12-10 Mon 12:08]
