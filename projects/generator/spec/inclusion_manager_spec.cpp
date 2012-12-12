@@ -75,7 +75,7 @@ const boost::filesystem::path include_dir("include directory");
 
 const std::vector<cpp_facet_types> facets =
 {
-    cpp_facet_types::domain,
+    cpp_facet_types::types,
     cpp_facet_types::serialization,
     cpp_facet_types::hash,
     cpp_facet_types::io,
@@ -172,7 +172,7 @@ BOOST_AUTO_TEST_CASE(processing_one_pod_model_with_default_configuration_generat
     SETUP_TEST_LOG_SOURCE("processing_one_pod_model_with_default_configuration_generates_expected_domain_includes");
 
     const auto f(default_inclusion_manager);
-    const auto i(includes_for_one_pod_model(cpp_facet_types::domain, f));
+    const auto i(includes_for_one_pod_model(cpp_facet_types::types, f));
     BOOST_REQUIRE(i.size() == 4);
 
     // header

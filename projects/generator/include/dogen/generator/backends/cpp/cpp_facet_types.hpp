@@ -38,7 +38,7 @@ namespace cpp {
  */
 enum class cpp_facet_types : unsigned int {
     invalid = 0,
-    domain = 1, ///< The definition of the domain type itself
+    types = 1, ///< The definition of the domain type itself
     hash = 2, ///< Hashing for the domain type
     serialization = 3, ///< Serialisation for the domain type
     io = 4, ///< IO (streaming) for the domain type

@@ -616,7 +616,7 @@ bool sml_to_cpp_view_model::has_implementation(const cpp_facet_types ft,
     using dogen::sml::meta_types;
     if (mt == meta_types::pod) {
         return
-            ft == cpp_facet_types::domain ||
+            ft == cpp_facet_types::types ||
             ft == cpp_facet_types::hash ||
             ft == cpp_facet_types::io ||
             ft == cpp_facet_types::test_data ||
@@ -639,12 +639,12 @@ bool sml_to_cpp_view_model::has_forward_decls(const cpp_facet_types ft,
     using dogen::sml::meta_types;
     if (mt == meta_types::pod) {
         return
-            ft == cpp_facet_types::domain ||
+            ft == cpp_facet_types::types ||
             ft == cpp_facet_types::serialization;
     } else if (mt == meta_types::enumeration) {
-        return ft == cpp_facet_types::domain;
+        return ft == cpp_facet_types::types;
     } else if (mt == meta_types::exception) {
-        return ft == cpp_facet_types::domain;
+        return ft == cpp_facet_types::types;
     }
 
     std::ostringstream s;
@@ -740,12 +740,12 @@ enabled_facet_types(const sml::meta_types mt, const sml::pod_types pt) const {
         if (pt == sml::pod_types::value || pt == sml::pod_types::entity)
             return settings_.enabled_facets();
         else if (pt == sml::pod_types::service)
-            return std::set<cpp_facet_types> { cpp_facet_types::domain };
+            return std::set<cpp_facet_types> { cpp_facet_types::types };
     } else if (mt == sml::meta_types::enumeration ||
         mt == sml::meta_types::primitive) {
         return settings_.enabled_facets();
     } else if (mt == sml::meta_types::exception) {
-        return std::set<cpp_facet_types> { cpp_facet_types::domain };
+        return std::set<cpp_facet_types> { cpp_facet_types::types };
     }
 
     BOOST_THROW_EXCEPTION(transformation_error(invalid_enabled_facets +

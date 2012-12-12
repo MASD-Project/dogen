@@ -92,7 +92,7 @@ void cpp_inclusion_manager::register_header(cpp_facet_types ft,
 std::string cpp_inclusion_manager::
 domain_header_dependency(const sml::qualified_name& name,
     const cpp_aspect_types at) const {
-    const auto d(cpp_facet_types::domain);
+    const auto d(cpp_facet_types::types);
     const auto h(cpp_file_types::header);
     const auto rq(location_request_factory(d, h, at, name));
     return location_manager_.relative_logical_path(rq).generic_string();
@@ -168,7 +168,7 @@ append_implementation_dependencies(const sml::pod& p,
      */
     // iosfwd:
     const bool is_header(flt == cpp_file_types::header);
-    const bool is_domain(ft == cpp_facet_types::domain);
+    const bool is_domain(ft == cpp_facet_types::types);
     const bool is_io(ft == cpp_facet_types::io);
 
     const bool domain_with_io(is_domain &&
@@ -255,7 +255,7 @@ void cpp_inclusion_manager::append_boost_dependencies(
      * boost::shared_ptr
      */
     const bool is_header(flt == cpp_file_types::header);
-    const bool is_domain(ft == cpp_facet_types::domain);
+    const bool is_domain(ft == cpp_facet_types::types);
     const bool is_sp(qname.type_name() == boost_.type(boost_types::shared_ptr));
     if (is_header && is_domain && is_sp)
         il.system.push_back(boost_.include(boost_types::shared_ptr));
@@ -298,7 +298,7 @@ void cpp_inclusion_manager::append_std_dependencies(
      * std::string
      */
     const bool is_header(flt == cpp_file_types::header);
-    const bool is_domain(ft == cpp_facet_types::domain);
+    const bool is_domain(ft == cpp_facet_types::types);
     if (is_header && is_domain
         && qname.type_name() == std_.type(std_types::string))
         il.system.push_back(std_.include(std_types::string));
@@ -423,7 +423,7 @@ void cpp_inclusion_manager::append_relationship_dependencies(
          * for the dependency
          */
         const bool is_header(flt == cpp_file_types::header);
-        const bool is_domain(ft == cpp_facet_types::domain);
+        const bool is_domain(ft == cpp_facet_types::types);
         const auto main(cpp_aspect_types::main);
 
         if (is_header && !is_primitive && is_domain)
@@ -465,7 +465,7 @@ void cpp_inclusion_manager::append_relationship_dependencies(
          * rule 5: domain headers require hashing for all keys.
          */
         const bool is_header(flt == cpp_file_types::header);
-        const bool is_domain(ft == cpp_facet_types::domain);
+        const bool is_domain(ft == cpp_facet_types::types);
         const bool is_primitive(k.meta_type() == sml::meta_types::primitive);
 
         const auto main(cpp_aspect_types::main);
@@ -500,7 +500,7 @@ append_self_dependencies(dogen::sml::qualified_name name,
     inclusion_lists& il) const {
 
     const bool is_header(flt == cpp_file_types::header);
-    const bool is_domain(ft == cpp_facet_types::domain);
+    const bool is_domain(ft == cpp_facet_types::types);
     const auto fwd(cpp_aspect_types::forward_decls);
     if (at == cpp_aspect_types::forward_decls) {
         /*
@@ -633,7 +633,7 @@ includes_for_exception(const sml::exception& e, cpp_facet_types ft,
 
     // exception info
     const bool is_header(flt == cpp_file_types::header);
-    const bool is_domain(ft == cpp_facet_types::domain);
+    const bool is_domain(ft == cpp_facet_types::types);
     if (is_header && is_domain)
         r.system.push_back(boost_.include(boost_types::exception_info));
 

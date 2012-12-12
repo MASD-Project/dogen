@@ -80,7 +80,7 @@ config::cpp_settings mock_settings_factory::build_cpp_settings(
 
     using backends::cpp::cpp_facet_types;
     std::set<cpp_facet_types> f = {
-        cpp_facet_types::domain,
+        cpp_facet_types::types,
         cpp_facet_types::hash,
         cpp_facet_types::serialization,
         cpp_facet_types::io,

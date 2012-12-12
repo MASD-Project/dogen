@@ -292,7 +292,7 @@ BOOST_AUTO_TEST_CASE(enable_facet_domain_generates_expected_code) {
             auto cs(s.cpp());
             using dogen::generator::backends::cpp::cpp_facet_types;
             std::set<cpp_facet_types> f = {
-                cpp_facet_types::domain
+                cpp_facet_types::types
             };
             cs.enabled_facets(f);
             cs.use_integrated_io(true);
@@ -312,7 +312,7 @@ BOOST_AUTO_TEST_CASE(enable_facet_hash_generates_expected_code) {
             auto cs(s.cpp());
             using dogen::generator::backends::cpp::cpp_facet_types;
             std::set<cpp_facet_types> f = {
-                cpp_facet_types::domain,
+                cpp_facet_types::types,
                 cpp_facet_types::hash
             };
             cs.enabled_facets(f);
@@ -332,7 +332,7 @@ BOOST_AUTO_TEST_CASE(enable_facet_serialization_generates_expected_code) {
             auto cs(s.cpp());
             using dogen::generator::backends::cpp::cpp_facet_types;
             std::set<cpp_facet_types> f = {
-                cpp_facet_types::domain,
+                cpp_facet_types::types,
                 cpp_facet_types::serialization
             };
             cs.enabled_facets(f);
@@ -353,7 +353,7 @@ BOOST_AUTO_TEST_CASE(enable_facet_io_generates_expected_code) {
             auto cs(s.cpp());
             using dogen::generator::backends::cpp::cpp_facet_types;
             std::set<cpp_facet_types> f = {
-                cpp_facet_types::domain,
+                cpp_facet_types::types,
                 cpp_facet_types::io
             };
             cs.enabled_facets(f);

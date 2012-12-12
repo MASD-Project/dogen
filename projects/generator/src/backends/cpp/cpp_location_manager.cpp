@@ -84,7 +84,7 @@ std::string cpp_location_manager::facet_directory(cpp_facet_types facet) const {
 
     switch(facet) {
     case cpp_facet_types::io: return settings_.io_facet_folder(); break;
-    case cpp_facet_types::domain: return settings_.domain_facet_folder(); break;
+    case cpp_facet_types::types: return settings_.domain_facet_folder(); break;
     case cpp_facet_types::hash: return settings_.hash_facet_folder(); break;
     case cpp_facet_types::serialization:
         return settings_.serialization_facet_folder();
@@ -103,7 +103,7 @@ std::string cpp_location_manager::facet_postfix(cpp_facet_types facet) const {
 
     switch(facet) {
     case cpp_facet_types::io: return io_postfix; break;
-    case cpp_facet_types::domain: return domain_postfix; break;
+    case cpp_facet_types::types: return domain_postfix; break;
     case cpp_facet_types::hash: return hash_postfix; break;
     case cpp_facet_types::serialization: return serialization_postfix; break;
     case cpp_facet_types::test_data: return test_data_postfix; break;

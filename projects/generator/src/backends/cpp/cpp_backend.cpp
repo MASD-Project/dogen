@@ -60,7 +60,7 @@ cpp_backend(const sml::model& model, const config::cpp_settings& settings) :
     }
 
     const auto f(settings_.enabled_facets());
-    if (f.find(cpp_facet_types::domain) == f.end()) {
+    if (f.find(cpp_facet_types::types) == f.end()) {
         BOOST_THROW_EXCEPTION(generation_failure(domain_facet_must_be_enabled));
     }
 }

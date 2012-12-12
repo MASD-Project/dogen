@@ -102,7 +102,7 @@ dogen::generator::config::cpp_settings create_settings(
     auto r(mock_settings_factory::build_cpp_settings(empty, empty));
 
     std::set<cpp_facet_types> ft;
-    ft.insert(cpp_facet_types::domain);
+    ft.insert(cpp_facet_types::types);
 
     r.enabled_facets(ft);
     r.use_integrated_io(use_integrated_io);
@@ -154,7 +154,7 @@ BOOST_AUTO_TEST_CASE(view_model_transformer_correctly_transforms_domain_files) {
     BOOST_CHECK(actual.size() == 4);
     for (const auto f : actual) {
         BOOST_LOG_SEV(lg, debug) << "file: " << f.file_path();
-        BOOST_CHECK(f.facet_type() == cpp_facet_types::domain);
+        BOOST_CHECK(f.facet_type() == cpp_facet_types::types);
 
         BOOST_CHECK(f.file_type() == cpp_file_types::header ||
             f.file_type() == cpp_file_types::implementation);
@@ -166,11 +166,11 @@ BOOST_AUTO_TEST_CASE(view_model_transformer_correctly_transforms_domain_files) {
         if (f.aspect_type() == cpp_aspect_types::forward_decls)
             continue;
 
-        if (f.facet_type() == cpp_facet_types::domain &&
+        if (f.facet_type() == cpp_facet_types::types &&
             f.file_type() == cpp_file_types::header &&
             f.aspect_type() != cpp_aspect_types::includers)
             BOOST_CHECK(f.system_includes().size() == 1);
-        else if (f.facet_type() == cpp_facet_types::domain &&
+        else if (f.facet_type() == cpp_facet_types::types &&
             f.file_type() == cpp_file_types::implementation &&
             f.aspect_type() != cpp_aspect_types::includers)
             BOOST_CHECK(f.system_includes().empty());

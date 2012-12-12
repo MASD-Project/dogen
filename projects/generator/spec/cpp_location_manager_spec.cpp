@@ -51,7 +51,7 @@ const std::string source_extension(".cxx");
 
 const std::vector<cpp_facet_types> facets =
 {
-    cpp_facet_types::domain,
+    cpp_facet_types::types,
     cpp_facet_types::serialization,
     cpp_facet_types::hash,
     cpp_facet_types::io,
@@ -124,7 +124,7 @@ BOOST_AUTO_TEST_CASE(split_project_configuration_results_in_expected_locations) 
 
     cpp_location_manager lm(test_model_name, s);
     using dogen::generator::backends::cpp::cpp_location_request;
-    auto rq(request(cpp_facet_types::domain, cpp_file_types::header));
+    auto rq(request(cpp_facet_types::types, cpp_file_types::header));
 
     boost::filesystem::path e("c/d/test/types/a/b/a_type.hpp");
     boost::filesystem::path a(lm.relative_logical_path(rq));
@@ -181,7 +181,7 @@ BOOST_AUTO_TEST_CASE(non_split_project_configuration_results_in_expected_locatio
 
     cpp_location_manager lm(test_model_name, s);
     using dogen::generator::backends::cpp::cpp_location_request;
-    auto rq(request(cpp_facet_types::domain, cpp_file_types::header));
+    auto rq(request(cpp_facet_types::types, cpp_file_types::header));
 
     boost::filesystem::path e("c/d/test/types/a/b/a_type.hpp");
     boost::filesystem::path a(lm.relative_logical_path(rq));

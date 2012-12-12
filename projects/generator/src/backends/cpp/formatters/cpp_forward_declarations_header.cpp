@@ -109,7 +109,7 @@ void forward_declarations_header::format_class(const file_view_model& vm) {
     const view_models::class_view_model& cvm(*o);
     if (ft == cpp_facet_types::serialization)
         format_serialization_class(cvm);
-    else if (ft == cpp_facet_types::domain)
+    else if (ft == cpp_facet_types::types)
         format_domain_class(cvm);
     else {
         using dogen::utility::exception::invalid_enum_value;

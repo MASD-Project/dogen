@@ -427,7 +427,7 @@ BOOST_AUTO_TEST_CASE(supplying_cpp_arguments_results_in_expected_settings) {
     BOOST_REQUIRE(facets.size() == 3);
 
     using dogen::generator::backends::cpp::cpp_facet_types;
-    BOOST_CHECK(facets.find(cpp_facet_types::domain) != facets.end());
+    BOOST_CHECK(facets.find(cpp_facet_types::types) != facets.end());
     BOOST_CHECK(facets.find(cpp_facet_types::hash) != facets.end());
     BOOST_CHECK(facets.find(cpp_facet_types::io) != facets.end());
 }
@@ -491,7 +491,7 @@ BOOST_AUTO_TEST_CASE(not_supplying_cpp_arguments_results_in_expected_settings) {
     BOOST_REQUIRE(facets.size() == 5);
 
     using dogen::generator::backends::cpp::cpp_facet_types;
-    BOOST_CHECK(facets.find(cpp_facet_types::domain) != facets.end());
+    BOOST_CHECK(facets.find(cpp_facet_types::types) != facets.end());
     BOOST_CHECK(facets.find(cpp_facet_types::hash) != facets.end());
     BOOST_CHECK(facets.find(cpp_facet_types::io) != facets.end());
     BOOST_CHECK(facets.find(cpp_facet_types::serialization) != facets.end());

@@ -74,7 +74,7 @@ factory::create_main_formatter(std::ostream& s, cpp_facet_types ft,
     cpp_file_types flt) const {
 
     switch (ft) {
-    case cpp_facet_types::domain:
+    case cpp_facet_types::types:
         if (flt == cpp_file_types::header)
             return domain_header::create(s,
                 settings_.disable_complete_constructor(),

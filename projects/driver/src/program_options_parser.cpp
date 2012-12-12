@@ -383,7 +383,7 @@ program_options_parser::parse_archive_type(const std::string& s) const {
 
 dogen::generator::backends::cpp::cpp_facet_types
 program_options_parser::parse_facet_types(const std::string& s) {
-    if (s == domain_facet_type) return cpp_facet_types::domain;
+    if (s == domain_facet_type) return cpp_facet_types::types;
     if (s == hash_facet_type) return cpp_facet_types::hash;
     if (s == serialization_facet_type) return cpp_facet_types::serialization;
     if (s == io_facet_type) return cpp_facet_types::io;
@@ -453,7 +453,7 @@ transform_cpp_settings(const boost::program_options::variables_map& vm) const {
     std::set<cpp_facet_types> set;
     if (vm.count(cpp_enable_facet_arg)) {
         try {
-            set.insert(cpp_facet_types::domain);
+            set.insert(cpp_facet_types::types);
             typedef std::vector<std::string> vector;
             const auto v(vm[cpp_enable_facet_arg].as<vector>());
             boost::copy(v |
@@ -473,7 +473,7 @@ transform_cpp_settings(const boost::program_options::variables_map& vm) const {
             }
         }
     } else {
-        set.insert(cpp_facet_types::domain);
+        set.insert(cpp_facet_types::types);
         set.insert(cpp_facet_types::hash);
         set.insert(cpp_facet_types::serialization);
         set.insert(cpp_facet_types::test_data);

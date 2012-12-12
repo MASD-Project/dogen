@@ -26,7 +26,7 @@
 namespace {
 
 const std::string invalid("\"cpp_facet_types::invalid\"");
-const std::string domain("\"cpp_facet_types::domain\"");
+const std::string types("\"cpp_facet_types::types\"");
 const std::string hash("\"cpp_facet_types::hash\"");
 const std::string serialization("\"cpp_facet_types::serialization\"");
 const std::string io("\"cpp_facet_types::io\"");
@@ -44,8 +44,8 @@ std::ostream& operator<<(std::ostream& stream, cpp_facet_types value) {
     switch (value) {
     case cpp_facet_types::invalid:
         return stream << invalid;
-    case cpp_facet_types::domain:
-        return stream << domain;
+    case cpp_facet_types::types:
+        return stream << types;
     case cpp_facet_types::hash:
         return stream << hash;
     case cpp_facet_types::serialization:
