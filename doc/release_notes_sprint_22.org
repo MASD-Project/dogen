@@ -10,13 +10,13 @@ This file contains all stories that were closed during sprint 22.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2012-12-11 Tue 15:45]
+Clock summary at [2012-12-12 Wed 13:54]
 
 | Headline                                                    | Time    |       |      |
 |-------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                | *18:34* |       |      |
+| *Total time*                                                | *21:53* |       |      |
 |-------------------------------------------------------------+---------+-------+------|
-| Development Stories Implemented                             |         | 18:34 |      |
+| Development Stories Implemented                             |         | 21:53 |      |
 | COMPLETED Outputting of floating point numbers rounded      |         |       | 1:00 |
 | COMPLETED Vector of double still has floating point issues  |         |       | 0:20 |
 | COMPLETED Ignore UML realisation relationship in Dia        |         |       | 0:42 |
@@ -24,6 +24,7 @@ Clock summary at [2012-12-11 Tue 15:45]
 | COMPLETED Remove unnecessary translation units for services |         |       | 3:29 |
 | COMPLETED Add PFH libraries to packages                     |         |       | 6:47 |
 | COMPLETED Generate forward declarations for services        |         |       | 0:15 |
+| COMPLETED Add support for boost variant                     |         |       | 3:19 |
 #+end:
 
 *** COMPLETED Outputting of floating point numbers rounded            :spike:
@@ -159,5 +160,26 @@ Whilst we cannot generate any code for services, there is no reason
 why the forward declarations are not managed the same way as for other
 types. Look into what changes dogen needs for this as it would be a
 time saver.
+
+*** COMPLETED Using boost macro to throw exception                    :story:
+    CLOSED: [2012-12-12 Wed 13:53]
+
+There were some advantages to using =BOOST_THROW_EXCEPTION=, can't quite
+remember why. We need to figure out if we should replace our usages of
+=throw= with this macro. Implemented by RP.
+
+*** COMPLETED Add support for boost variant                           :spike:
+    CLOSED: [2012-12-12 Wed 13:53]
+    CLOCK: [2012-12-12 Wed 10:34]--[2012-12-12 Wed 13:53] =>  3:19
+
+In order to be able to code generate the dia model we need support for
+boost variant. One possible implementation:
+
+- create a new stereotype: variant. works very much like enumeration,
+  except attributes in class are a list of types
+- create a formatter etc for variants
+- add support for default variant visitor. this could be fairly
+  generic so we could also use it as part of the visitor patter for
+  class hierarchies
 
 ** Deprecated Development Stories
