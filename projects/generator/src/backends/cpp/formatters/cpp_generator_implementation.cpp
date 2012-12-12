@@ -234,6 +234,59 @@ optional_helper(const nested_type_view_model& vm) {
 }
 
 void generator_implementation::
+variant_helper(const nested_type_view_model& vm) {
+    const auto container_identifiable_type_name(
+        vm.complete_identifiable_name());
+    const auto container_type_name(vm.complete_name());
+
+    const auto children(vm.children());
+    if (children.empty())
+        BOOST_THROW_EXCEPTION(generation_failure(invalid_smart_pointer));
+
+    utility_.blank_line();
+    stream_ << indenter_ << container_type_name
+            << std::endl
+            << indenter_ << "create_"
+            << container_identifiable_type_name
+            << "(unsigned int position) ";
+
+    utility_.open_scope();
+    {
+        cpp_positive_indenter_scope s(indenter_);
+        stream_ << indenter_ << container_type_name << " r;" << std::endl;
+        utility_.blank_line();
+
+        unsigned int i(0);
+        for (const auto& c : children) {
+            if (i == 0) {
+                stream_ << indenter_ << "if (position == 0 || ((position % "
+                        << children.size() << ") == 0))" << std::endl;
+            } else if (i == 1) {
+                stream_ << indenter_
+                        << "else if (position == 1 || ((position %"
+                        << children.size() + 1 << ") == 0))" << std::endl;
+            } else {
+                stream_ << indenter_
+                        << "else if ((position % " << i << ") == 0)"
+                        << std::endl;
+            }
+            ++i;
+
+            {
+                cpp_positive_indenter_scope s(indenter_);
+                stream_ << indenter_ << "r = create_"
+                        << c.complete_identifiable_name()
+                        << "(position);" << std::endl;
+            }
+        }
+        utility_.blank_line();
+        stream_ << indenter_ << "return r;" << std::endl;
+    }
+    utility_.close_scope();
+    utility_.blank_line();
+}
+
+void generator_implementation::
 domain_type_helper(const std::string& identifiable_type_name,
     const std::string& type_name, bool as_pointer) {
     stream_ << indenter_ << type_name << (as_pointer ? "*" : "")
@@ -378,6 +431,8 @@ recursive_helper_method_creator(const std::string& owner_name,
         smart_pointer_helper(vm);
     else if (vm.is_optional_like())
         optional_helper(vm);
+    else if (vm.is_variant_like())
+        variant_helper(vm);
     else {
         if (vm.name() == string_type) {
             string_helper();

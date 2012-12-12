@@ -18,10 +18,36 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/boost_model/io/class_a_io.hpp"
-#include "dogen/boost_model/io/class_b_io.hpp"
-#include "dogen/boost_model/io/class_base_io.hpp"
-#include "dogen/boost_model/io/class_d_io.hpp"
-#include "dogen/boost_model/io/class_derived_io.hpp"
-#include "dogen/boost_model/io/class_e_io.hpp"
-#include "dogen/boost_model/io/pkg1/class_c_io.hpp"
+#ifndef DOGEN_BOOST_MODEL_TEST_DATA_CLASS_E_TD_HPP
+#define DOGEN_BOOST_MODEL_TEST_DATA_CLASS_E_TD_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include "dogen/boost_model/types/class_e.hpp"
+
+namespace dogen {
+namespace boost_model {
+
+class class_e_generator {
+public:
+    class_e_generator();
+
+public:
+    typedef dogen::boost_model::class_e result_type;
+
+public:
+    static void populate(const unsigned int position, result_type& v);
+    static result_type create(const unsigned int position);
+    result_type operator()();
+
+private:
+    unsigned int position_;
+public:
+    static result_type* create_ptr(const unsigned int position);
+};
+
+} }
+
+#endif

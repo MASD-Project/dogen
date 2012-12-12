@@ -87,6 +87,7 @@ const std::string ulong_long_type("unsigned long long");
 const std::string double_type("double");
 const std::string float_type("float");
 const std::string optional_type("boost::optional");
+const std::string variant_type("boost::variant");
 
 const std::string int8_t_type("std::int8_t");
 const std::string int16_t_type("std::int16_t");
@@ -109,6 +110,10 @@ bool is_string_like(const std::string& type_name) {
 
 bool is_optional_like(const std::string& type_name) {
     return type_name == optional_type;
+}
+
+bool is_variant_like(const std::string& type_name) {
+    return type_name == variant_type;
 }
 
 bool is_int_like(const std::string& type_name) {
@@ -284,6 +289,7 @@ void sml_dfs_visitor::transform_nested_qualified_name(
     }
     vm.is_string_like(is_string_like(vm.name()));
     vm.is_optional_like(is_optional_like(vm.name()));
+    vm.is_variant_like(is_variant_like(vm.name()));
 
     if (qn.meta_type() == meta_types::pod) {
         const auto i(state_->pods_.find(qn));
@@ -382,7 +388,8 @@ void sml_dfs_visitor::process_sml_pod(const dogen::sml::pod& pod) {
 
         nested_type_view_model type_vm;
         std::string complete_name;
-        if (p.type_name().type().type_name() == "optional")
+        if (p.type_name().type().type_name() == "optional" ||
+            p.type_name().type().type_name() == "variant")
             requires_manual_move_constructor = true;
 
         transform_nested_qualified_name(p.type_name(), type_vm, complete_name,

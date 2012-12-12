@@ -171,6 +171,14 @@ public:
     /**@}*/
 
     /**
+     * @brief If true, the type is a variant like type.
+     */
+    /**@{*/
+    bool is_variant_like() const { return is_variant_like_; }
+    void is_variant_like(bool v) { is_variant_like_ = v; }
+    /**@}*/
+
+    /**
      * @brief If the type is a generic type, returns all the type
      * arguments.
      */
@@ -203,6 +211,7 @@ private:
     bool is_associative_container_;
     bool is_smart_pointer_;
     bool is_optional_like_;
+    bool is_variant_like_;
     std::list<nested_type_view_model> children_;
     std::list<std::string> namespaces_;
 };

@@ -64,6 +64,7 @@ private:
 
 private:
     void optional_helper(const nested_type_view_model& vm);
+    void variant_helper(const nested_type_view_model& vm);
     void sequence_container_helper(const nested_type_view_model& vm);
     void associative_container_helper(const nested_type_view_model& vm);
     void smart_pointer_helper(const nested_type_view_model& vm);

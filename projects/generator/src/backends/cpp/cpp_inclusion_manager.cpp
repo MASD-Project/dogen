@@ -160,7 +160,8 @@ cpp_inclusion_manager::pod_to_qualified_names(const sml::pod& pod) const {
 void cpp_inclusion_manager::
 append_implementation_dependencies(const sml::pod& p,
     const cpp_facet_types ft, const cpp_file_types flt, inclusion_lists& il,
-    const bool requires_stream_manipulators, const bool has_std_string) const {
+    const bool requires_stream_manipulators, const bool has_std_string,
+    const bool has_variant) const {
 
     /*
      * STL
@@ -235,6 +236,14 @@ append_implementation_dependencies(const sml::pod& p,
     if (is_implementation && io_enabled_ && (domain_with_io || io_without_iio)
         && has_std_string)
         il.system.push_back(boost_.include(boost_types::string_algorithm));
+
+    // apply visitor
+    if (is_implementation && io_enabled_ && (domain_with_io || io_without_iio)
+        && has_variant)
+        il.system.push_back(boost_.include(boost_types::apply_visitor));
+
+    if (is_implementation && is_hash && has_variant)
+        il.system.push_back(boost_.include(boost_types::apply_visitor));
 }
 
 void cpp_inclusion_manager::append_boost_dependencies(
@@ -257,6 +266,9 @@ void cpp_inclusion_manager::append_boost_dependencies(
         il.system.push_back(
             boost_.include(boost_types::serialization_shared_ptr));
 
+    /*
+     * boost::optional
+     */
     const bool is_opt(qname.type_name() == boost_.type(boost_types::optional));
     if (is_header && is_domain && is_opt)
         il.system.push_back(boost_.include(boost_types::optional));
@@ -264,6 +276,17 @@ void cpp_inclusion_manager::append_boost_dependencies(
     if (is_implementation && is_serialization && is_opt)
         il.system.push_back(
             boost_.include(boost_types::serialization_optional));
+
+    /*
+     * boost::variant
+     */
+    const bool is_variant(
+        qname.type_name() == boost_.type(boost_types::variant));
+    if (is_header && is_domain && is_variant)
+        il.system.push_back(boost_.include(boost_types::variant));
+
+    if (is_implementation && is_serialization && is_variant)
+        il.system.push_back(boost_.include(boost_types::serialization_variant));
 }
 
 void cpp_inclusion_manager::append_std_dependencies(
@@ -535,6 +558,16 @@ has_std_string(const std::list<dogen::sml::qualified_name>& names) const {
     return false;
 }
 
+bool cpp_inclusion_manager::
+has_variant(const std::list<dogen::sml::qualified_name>& names) const {
+    using dogen::sml::qualified_name;
+    for (const auto n : names) {
+        if (n.type_name() == boost_.type(boost_types::variant))
+            return true;
+    }
+    return false;
+}
+
 bool cpp_inclusion_manager::is_parent_or_child(const dogen::sml::pod& p) const {
     return p.parent_name() || p.is_parent();
 }
@@ -665,9 +698,10 @@ includes_for_pod(const sml::pod& pod, cpp_facet_types ft, cpp_file_types flt,
     const auto keys(pod_to_keys(pod));
     const bool rsm(requires_stream_manipulators(names));
     const bool has_str(has_std_string(names));
+    const bool has_var(has_variant(names));
     const bool pc(is_parent_or_child(pod));
 
-    append_implementation_dependencies(pod, ft, flt, r, rsm, has_str);
+    append_implementation_dependencies(pod, ft, flt, r, rsm, has_str, has_var);
     append_relationship_dependencies(names, keys, pod.leaves(), ft, flt, pc, r);
     append_self_dependencies(n, ft, flt, at, n.meta_type(), r);
 

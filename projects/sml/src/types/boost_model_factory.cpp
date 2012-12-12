@@ -26,6 +26,7 @@ const std::string shared_ptr_name("shared_ptr");
 const std::string weak_ptr_name("weak_ptr");
 const std::string scoped_ptr_name("scoped_ptr");
 const std::string optional_name("optional");
+const std::string variant_name("variant");
 
 const std::string asio_name("asio");
 const std::string io_service_name("io_service");
@@ -89,11 +90,6 @@ model boost_model_factory::create() {
     std::unordered_map<qualified_name, pod> pods;
     std::unordered_map<qualified_name, package> packages;
 
-    // const auto lambda([&](std::string name){
-    //         primitive p(create_primitive(name));
-    //         primitives.insert(std::make_pair(p.name(), p));
-    //     });
-
     const auto pi([&](std::string name, pod_types pt,
             std::list<std::string> package_path) {
             pod p(create_pod(name, pt, package_path));
@@ -112,6 +108,7 @@ model boost_model_factory::create() {
     pi(weak_ptr_name, pod_types::smart_pointer, package_path);
     pi(scoped_ptr_name, pod_types::smart_pointer, package_path);
     pi(optional_name, pod_types::value, package_path);
+    pi(variant_name, pod_types::value, package_path);
 
     gamma(asio_name, package_path);
     package_path.push_back(asio_name);

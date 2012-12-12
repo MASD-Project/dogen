@@ -50,6 +50,7 @@ const std::string invalid_associative_container(
     "Associative containers have one or two type arguments");
 const std::string invalid_smart_pointer(
     "Smart pointers have exactly one type argument");
+const std::string invalid_variant("Variants should have at least one type");
 
 std::string parent_tag(const unsigned int number) {
     std::ostringstream s;
@@ -325,6 +326,7 @@ optional_helper(const nested_type_view_model& vm) {
                 stream_ << indenter_ << "s" << space_inserter
                         << utility_.quote(utility_.quote_escaped("data") +
                             colon);
+
                 if (containee.is_string_like()) {
                     const std::string tus(vm.is_char_like() ? "*v" :
                         "tidy_up_string(*v)");
@@ -348,6 +350,109 @@ optional_helper(const nested_type_view_model& vm) {
             stream_ << indenter_ << "s" << inserter << utility_.quote(" }")
                     << ";";
             utility_.blank_line();
+            stream_ << indenter_ << "return s;" << std::endl;
+        }
+        utility_.close_scope();
+        utility_.blank_line();
+    }
+    utility_.blank_line(2);
+}
+
+void cpp_inserter_implementation::
+variant_helper(const nested_type_view_model& vm) {
+    const auto children(vm.children());
+    if (children.empty())
+        BOOST_THROW_EXCEPTION(generation_failure(invalid_variant));
+
+    const auto container(vm);
+    {
+        namespace_helper ns_helper(stream_, container.namespaces());
+
+        utility_.blank_line();
+        stream_ << indenter_
+                << "struct visitor : public boost::static_visitor<> ";
+
+        utility_.open_scope();
+        {
+            cpp_positive_indenter_scope s(indenter_);
+            stream_ << indenter_ << "visitor(std::ostream& s) : stream_(s) ";
+            utility_.open_scope();
+            {
+                cpp_positive_indenter_scope s(indenter_);
+                stream_ << indenter_ << "s" << space_inserter
+                        << utility_.quote("{ ") << space_inserter
+                        << utility_.quote(utility_.quote_escaped(type) + colon)
+                        << space_inserter
+                        << utility_.quote(utility_.quote_escaped(vm.name()))
+                        << space_inserter << utility_.quote(spaced_comma)
+                        << ";"
+                        << std::endl;
+
+                stream_ << indenter_ << "s" << space_inserter
+                        << utility_.quote(utility_.quote_escaped("data") +
+                            colon) << ";" << std::endl;
+            }
+            utility_.close_scope();
+            utility_.blank_line();
+
+            stream_ << indenter_ << "~visitor() { stream_" << space_inserter
+                    << utility_.quote(" }") << "; }" << std::endl;
+            utility_.blank_line();
+
+            for (const auto& c : children) {
+                stream_ << indenter_
+                        << "void operator()(const " << c.name()
+                        << (c.is_primitive() ? "" : "&")
+                        << " v) const ";
+
+                utility_.open_scope();
+                {
+                    cpp_positive_indenter_scope s(indenter_);
+                    if (c.is_primitive()) {
+                        stream_ << indenter_ << "stream_" << space_inserter
+                                << utility_.quote("{ ") << space_inserter
+                                << utility_.quote(utility_.quote_escaped(type) +
+                                    colon)
+                                << space_inserter
+                                << utility_.quote(utility_.quote_escaped(
+                                        c.name()))
+                                << space_inserter << utility_.quote(
+                                    spaced_comma)
+                                << ";" << std::endl;
+
+                        stream_ << indenter_ << "stream_" << space_inserter
+                                << utility_.quote(utility_.quote_escaped("value")
+                                    + colon)
+                                << ";"
+                                << std::endl;
+
+                        stream_ << indenter_ << "stream_" << space_inserter
+                                << "v;" << std::endl;
+
+                        stream_ << indenter_ << "stream_" << space_inserter
+                                << utility_.quote(" }") << ";"
+                                << std::endl;
+                    } else
+                        stream_ << indenter_ << "stream_ << v;" << std::endl;
+                }
+                utility_.close_scope();
+                utility_.blank_line();
+            }
+            utility_.private_access_specifier();
+            stream_ << indenter_ << "std::ostream& stream_;" << std::endl;
+        }
+        stream_ << indenter_ << "};" << std::endl;
+
+        utility_.blank_line();
+        stream_ << indenter_ << "inline std::ostream& operator<<"
+                << "(std::ostream& s, const "
+                << container.complete_name() << "& v) ";
+
+        utility_.open_scope();
+        {
+            cpp_positive_indenter_scope s(indenter_);
+            stream_ << indenter_
+                    << "boost::apply_visitor(visitor(s), v);" << std::endl;
             stream_ << indenter_ << "return s;" << std::endl;
         }
         utility_.close_scope();
@@ -399,6 +504,8 @@ recursive_helper_method_creator(const nested_type_view_model& vm,
         smart_pointer_helper(vm);
     else if (vm.is_optional_like())
         optional_helper(vm);
+    else if (vm.is_variant_like())
+        variant_helper(vm);
     else if (vm.is_string_like() && !vm.is_char_like())
         tidy_up_string_method();
 

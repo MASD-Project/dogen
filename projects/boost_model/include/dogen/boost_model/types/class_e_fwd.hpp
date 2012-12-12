@@ -18,10 +18,18 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/boost_model/io/class_a_io.hpp"
-#include "dogen/boost_model/io/class_b_io.hpp"
-#include "dogen/boost_model/io/class_base_io.hpp"
-#include "dogen/boost_model/io/class_d_io.hpp"
-#include "dogen/boost_model/io/class_derived_io.hpp"
-#include "dogen/boost_model/io/class_e_io.hpp"
-#include "dogen/boost_model/io/pkg1/class_c_io.hpp"
+#ifndef DOGEN_BOOST_MODEL_TYPES_CLASS_E_FWD_HPP
+#define DOGEN_BOOST_MODEL_TYPES_CLASS_E_FWD_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+namespace dogen {
+namespace boost_model {
+
+class class_e;
+
+} }
+
+#endif

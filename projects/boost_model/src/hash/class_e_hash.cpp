@@ -18,10 +18,47 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/boost_model/hash/class_a_hash.hpp"
-#include "dogen/boost_model/hash/class_b_hash.hpp"
-#include "dogen/boost_model/hash/class_base_hash.hpp"
-#include "dogen/boost_model/hash/class_d_hash.hpp"
-#include "dogen/boost_model/hash/class_derived_hash.hpp"
+#include <boost/variant/apply_visitor.hpp>
 #include "dogen/boost_model/hash/class_e_hash.hpp"
-#include "dogen/boost_model/hash/pkg1/class_c_hash.hpp"
+
+namespace {
+
+template <typename HashableType>
+inline void combine(std::size_t& seed, const HashableType& value)
+{
+    std::hash<HashableType> hasher;
+    seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
+}
+
+struct visitor : public boost::static_visitor<> {
+    visitor() : hash(0) {}
+    void operator()(const int v) const {
+        combine(hash, v);
+    }
+
+    void operator()(const double v) const {
+        combine(hash, v);
+    }
+
+    mutable std::size_t hash;
+};
+
+inline std::size_t hash_boost_variant_int_double(const boost::variant<int, double>& v) {
+    visitor vis;
+    boost::apply_visitor(vis, v);
+    return vis.hash;
+}
+
+}
+
+namespace dogen {
+namespace boost_model {
+
+std::size_t class_e_hasher::hash(const class_e&v) {
+    std::size_t seed(0);
+
+    combine(seed, hash_boost_variant_int_double(v.prop_0()));
+    return seed;
+}
+
+} }

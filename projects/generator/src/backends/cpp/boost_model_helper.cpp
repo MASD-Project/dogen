@@ -28,8 +28,10 @@ const std::string model("boost");
 
 const std::string shared_ptr_type("shared_ptr");
 const std::string optional_type("optional");
+const std::string variant_type("variant");
 
 const std::string optional_include("boost/optional.hpp");
+const std::string variant_include("boost/variant.hpp");
 const std::string format_include("boost/format.hpp");
 const std::string nvp_include("boost/serialization/nvp.hpp");
 const std::string split_free_include("boost/serialization/split_free.hpp");
@@ -57,10 +59,13 @@ const std::string serialization_shared_ptr_include(
     "boost/serialization/shared_ptr.hpp");
 const std::string serialization_optional_include(
     "boost/serialization/optional.hpp");
+const std::string serialization_variant_include(
+    "boost/serialization/variant.hpp");
 const std::string shared_ptr_include("boost/shared_ptr.hpp");
 const std::string exception_info_include("boost/exception/info.hpp");
 const std::string state_saver_include("boost/io/ios_state.hpp");
 const std::string string_algorithm_include("boost/algorithm/string.hpp");
+const std::string apply_visitor_include("boost/variant/apply_visitor.hpp");
 const std::string error_message("Invalid or unexpected boost type");
 
 }
@@ -78,6 +83,7 @@ std::string boost_model_helper::type(const boost_types t) const {
     switch (t) {
     case boost_types::shared_ptr: return shared_ptr_type;
     case boost_types::optional: return optional_type;
+    case boost_types::variant: return variant_type;
     default: break;
     }
     BOOST_THROW_EXCEPTION(utility::exception::invalid_enum_value(error_message));
@@ -123,6 +129,10 @@ std::string boost_model_helper::include(const boost_types type) const {
     case boost_types::exception_info: return exception_info_include;
     case boost_types::io_ios_state: return state_saver_include;
     case boost_types::string_algorithm: return string_algorithm_include;
+    case boost_types::variant: return variant_include;
+    case boost_types::serialization_variant:
+        return serialization_variant_include;
+    case boost_types::apply_visitor: return apply_visitor_include;
     default: break;
     }
     BOOST_THROW_EXCEPTION(utility::exception::invalid_enum_value(error_message));

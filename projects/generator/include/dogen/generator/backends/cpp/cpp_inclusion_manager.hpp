@@ -145,6 +145,11 @@ public:
         const std::list<dogen::sml::qualified_name>& names) const;
 
     /**
+     * @brief Returns true if there is a boost::variant in the type list.
+     */
+    bool has_variant(const std::list<dogen::sml::qualified_name>& names) const;
+
+    /**
      * @brief Returns true if the pod is in a inheritance
      * relationship, as either the parent or the child.
      */
@@ -193,7 +198,8 @@ private:
         const cpp_facet_types ft, const cpp_file_types flt,
         inclusion_lists& il,
         const bool requires_stream_manipulators = false,
-        const bool has_std_string = false) const;
+        const bool has_std_string = false,
+        const bool has_variant = false) const;
 
     /**
      * @brief Handles all dependencies to types in the boost

@@ -71,7 +71,8 @@ bool hash_implementation::is_hashable(const nested_type_view_model& vm) {
         !vm.is_sequence_container() &&
         !vm.is_associative_container() &&
         !vm.is_smart_pointer() &&
-        !vm.is_optional_like();
+        !vm.is_optional_like() &&
+        !vm.is_variant_like();
 }
 
 void hash_implementation::combine_function(const class_view_model& vm) {
@@ -135,6 +136,69 @@ void hash_implementation::optional_helper(const nested_type_view_model& vm) {
                     << "(*v));" << std::endl;
         }
         stream_ << indenter_ << "return seed;" << std::endl;
+    }
+    utility_.close_scope();
+}
+
+void hash_implementation::variant_helper(const nested_type_view_model& vm) {
+    const auto children(vm.children());
+    if (children.empty()) {
+        BOOST_LOG_SEV(lg, error) << "Children container has unexpected size: "
+                                 << children.size() << " in nested type: "
+                                 << vm.name();
+
+        BOOST_THROW_EXCEPTION(generation_failure(invalid_sequence_container
+                + vm.name()));
+    }
+
+    const std::string container_identifiable_type_name(
+        vm.complete_identifiable_name());
+    const std::string container_type_name(vm.complete_name());
+
+    utility_.blank_line();
+    stream_ << indenter_
+            << "struct visitor : public boost::static_visitor<> ";
+
+    utility_.open_scope();
+    {
+        cpp_positive_indenter_scope s(indenter_);
+        stream_ << indenter_ << "visitor() : hash(0) {}" << std::endl;
+
+        for (const auto& c : children) {
+            stream_ << indenter_
+                    << "void operator()(const " << c.name()
+                    << (c.is_primitive() ? "" : "&")
+                    << " v) const ";
+
+            utility_.open_scope();
+            {
+                cpp_positive_indenter_scope s(indenter_);
+                if (is_hashable(c)) {
+                    stream_ << indenter_ << "combine(hash, v);" << std::endl;
+                } else {
+                    stream_ << indenter_ << "combine(hash, "
+                            << "hash_" << c.complete_identifiable_name()
+                            << "(v));" << std::endl;
+                }
+            }
+            utility_.close_scope();
+            utility_.blank_line();
+        }
+        stream_ << indenter_ << "mutable std::size_t hash;" << std::endl;
+    }
+    stream_ << indenter_ << "};" << std::endl;
+
+    utility_.blank_line();
+    stream_ << indenter_ << "inline std::size_t hash_"
+            << container_identifiable_type_name
+            << "(const " << container_type_name << "& v) ";
+
+    utility_.open_scope();
+    {
+        cpp_positive_indenter_scope s(indenter_);
+        stream_ << indenter_ << "visitor vis;" << std::endl
+                << indenter_ << "boost::apply_visitor(vis, v);" << std::endl
+                << indenter_ << "return vis.hash;" << std::endl;
     }
     utility_.close_scope();
 }
@@ -293,6 +357,8 @@ recursive_helper_method_creator(const nested_type_view_model& vm,
         smart_pointer_helper(vm);
     else if (vm.is_optional_like())
         optional_helper(vm);
+    else if (vm.is_variant_like())
+        variant_helper(vm);
 
     types_done.insert(vm.complete_identifiable_name());
 }

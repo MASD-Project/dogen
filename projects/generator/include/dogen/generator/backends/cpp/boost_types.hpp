@@ -60,7 +60,10 @@ enum class boost_types : unsigned int {
     serialization_optional, ///< boost::optional support
     exception_info, ///< boost exeption base class
     io_ios_state, ///< IO state savers
-    string_algorithm ///< string algorithms
+    string_algorithm, ///< string algorithms
+    variant, ///< boost variant
+    serialization_variant, ///< variant support
+    apply_visitor ///< Apply visitor
 };
 
 } } } }
