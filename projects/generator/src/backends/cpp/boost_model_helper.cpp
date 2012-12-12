@@ -18,6 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/throw_exception.hpp>
 #include "dogen/utility/exception/invalid_enum_value.hpp"
 #include "dogen/generator/backends/cpp/boost_model_helper.hpp"
 
@@ -79,7 +80,7 @@ std::string boost_model_helper::type(const boost_types t) const {
     case boost_types::optional: return optional_type;
     default: break;
     }
-    throw utility::exception::invalid_enum_value(error_message);
+    BOOST_THROW_EXCEPTION(utility::exception::invalid_enum_value(error_message));
 }
 
 std::string boost_model_helper::include(const boost_types type) const {
@@ -124,7 +125,7 @@ std::string boost_model_helper::include(const boost_types type) const {
     case boost_types::string_algorithm: return string_algorithm_include;
     default: break;
     }
-    throw utility::exception::invalid_enum_value(error_message);
+    BOOST_THROW_EXCEPTION(utility::exception::invalid_enum_value(error_message));
 }
 
 } } } }
