@@ -28,6 +28,7 @@
 #include <algorithm>
 #include <boost/variant.hpp>
 #include "dogen/boost_model/serialization/class_e_fwd_ser.hpp"
+#include "dogen/boost_model/types/class_derived.hpp"
 
 namespace dogen {
 namespace boost_model {
@@ -42,7 +43,9 @@ public:
     class_e(class_e&& rhs);
 
 public:
-    explicit class_e(const boost::variant<int, double>& prop_0);
+    class_e(
+        const boost::variant<int, double>& prop_0,
+        const boost::variant<int, dogen::boost_model::class_derived, double>& prop_1);
 
 private:
     template<typename Archive>
@@ -68,6 +71,22 @@ public:
         prop_0_ = std::move(v);
     }
 
+    const boost::variant<int, dogen::boost_model::class_derived, double>& prop_1() const {
+        return prop_1_;
+    }
+
+    boost::variant<int, dogen::boost_model::class_derived, double>& prop_1() {
+        return prop_1_;
+    }
+
+    void prop_1(const boost::variant<int, dogen::boost_model::class_derived, double>& v) {
+        prop_1_ = v;
+    }
+
+    void prop_1(const boost::variant<int, dogen::boost_model::class_derived, double>&& v) {
+        prop_1_ = std::move(v);
+    }
+
 public:
     bool operator==(const class_e& rhs) const;
     bool operator!=(const class_e& rhs) const {
@@ -80,6 +99,7 @@ public:
 
 private:
     boost::variant<int, double> prop_0_;
+    boost::variant<int, dogen::boost_model::class_derived, double> prop_1_;
 };
 
 } }

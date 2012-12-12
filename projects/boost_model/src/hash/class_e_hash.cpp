@@ -19,6 +19,7 @@
  *
  */
 #include <boost/variant/apply_visitor.hpp>
+#include "dogen/boost_model/hash/class_derived_hash.hpp"
 #include "dogen/boost_model/hash/class_e_hash.hpp"
 
 namespace {
@@ -30,8 +31,8 @@ inline void combine(std::size_t& seed, const HashableType& value)
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 }
 
-struct visitor : public boost::static_visitor<> {
-    visitor() : hash(0) {}
+struct boost_variant_int_double_visitor : public boost::static_visitor<> {
+    boost_variant_int_double_visitor() : hash(0) {}
     void operator()(const int v) const {
         combine(hash, v);
     }
@@ -44,7 +45,30 @@ struct visitor : public boost::static_visitor<> {
 };
 
 inline std::size_t hash_boost_variant_int_double(const boost::variant<int, double>& v) {
-    visitor vis;
+    boost_variant_int_double_visitor vis;
+    boost::apply_visitor(vis, v);
+    return vis.hash;
+}
+
+struct boost_variant_int_dogen_boost_model_class_derived_double_visitor : public boost::static_visitor<> {
+    boost_variant_int_dogen_boost_model_class_derived_double_visitor() : hash(0) {}
+    void operator()(const int v) const {
+        combine(hash, v);
+    }
+
+    void operator()(const dogen::boost_model::class_derived& v) const {
+        combine(hash, v);
+    }
+
+    void operator()(const double v) const {
+        combine(hash, v);
+    }
+
+    mutable std::size_t hash;
+};
+
+inline std::size_t hash_boost_variant_int_dogen_boost_model_class_derived_double(const boost::variant<int, dogen::boost_model::class_derived, double>& v) {
+    boost_variant_int_dogen_boost_model_class_derived_double_visitor vis;
     boost::apply_visitor(vis, v);
     return vis.hash;
 }
@@ -58,6 +82,8 @@ std::size_t class_e_hasher::hash(const class_e&v) {
     std::size_t seed(0);
 
     combine(seed, hash_boost_variant_int_double(v.prop_0()));
+    combine(seed, hash_boost_variant_int_dogen_boost_model_class_derived_double(v.prop_1()));
+
     return seed;
 }
 

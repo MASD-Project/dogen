@@ -28,6 +28,7 @@
 #include <boost/archive/xml_oarchive.hpp>
 #include <boost/serialization/nvp.hpp>
 #include <boost/serialization/variant.hpp>
+#include "dogen/boost_model/serialization/class_derived_ser.hpp"
 #include "dogen/boost_model/serialization/class_e_ser.hpp"
 
 #ifdef __linux__
@@ -43,6 +44,7 @@ void save(Archive& ar,
     const dogen::boost_model::class_e& v,
     const unsigned int /*version*/) {
     ar << make_nvp("prop_0", v.prop_0_);
+    ar << make_nvp("prop_1", v.prop_1_);
 }
 
 template<typename Archive>
@@ -50,6 +52,7 @@ void load(Archive& ar,
     dogen::boost_model::class_e& v,
     const unsigned int /*version*/) {
     ar >> make_nvp("prop_0", v.prop_0_);
+    ar >> make_nvp("prop_1", v.prop_1_);
 }
 
 } }

@@ -156,13 +156,15 @@ void hash_implementation::variant_helper(const nested_type_view_model& vm) {
     const std::string container_type_name(vm.complete_name());
 
     utility_.blank_line();
-    stream_ << indenter_
-            << "struct visitor : public boost::static_visitor<> ";
+    stream_ << indenter_ << "struct "
+            << vm.complete_identifiable_name()
+            << "_visitor : public boost::static_visitor<> ";
 
     utility_.open_scope();
     {
         cpp_positive_indenter_scope s(indenter_);
-        stream_ << indenter_ << "visitor() : hash(0) {}" << std::endl;
+        stream_ << indenter_ << vm.complete_identifiable_name()
+                << "_visitor() : hash(0) {}" << std::endl;
 
         for (const auto& c : children) {
             stream_ << indenter_
@@ -196,7 +198,8 @@ void hash_implementation::variant_helper(const nested_type_view_model& vm) {
     utility_.open_scope();
     {
         cpp_positive_indenter_scope s(indenter_);
-        stream_ << indenter_ << "visitor vis;" << std::endl
+        stream_ << indenter_ << vm.complete_identifiable_name()
+                << "_visitor vis;" << std::endl
                 << indenter_ << "boost::apply_visitor(vis, v);" << std::endl
                 << indenter_ << "return vis.hash;" << std::endl;
     }

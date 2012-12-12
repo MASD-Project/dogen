@@ -21,17 +21,18 @@
 #include <boost/io/ios_state.hpp>
 #include <boost/variant/apply_visitor.hpp>
 #include <ostream>
+#include "dogen/boost_model/io/class_derived_io.hpp"
 #include "dogen/boost_model/io/class_e_io.hpp"
 
 namespace boost {
 
-struct visitor : public boost::static_visitor<> {
-    visitor(std::ostream& s) : stream_(s) {
+struct boost_variant_int_double_visitor : public boost::static_visitor<> {
+    boost_variant_int_double_visitor(std::ostream& s) : stream_(s) {
         s << "{ " << "\"__type__\": " << "\"boost::variant\"" << ", ";
         s << "\"data\": ";
     }
 
-    ~visitor() { stream_ << " }"; }
+    ~boost_variant_int_double_visitor() { stream_ << " }"; }
 
     void operator()(const int v) const {
         stream_ << "{ " << "\"__type__\": " << "\"int\"" << ", ";
@@ -52,7 +53,46 @@ private:
 };
 
 inline std::ostream& operator<<(std::ostream& s, const boost::variant<int, double>& v) {
-    boost::apply_visitor(visitor(s), v);
+    boost::apply_visitor(boost_variant_int_double_visitor(s), v);
+    return s;
+}
+
+}
+
+namespace boost {
+
+struct boost_variant_int_dogen_boost_model_class_derived_double_visitor : public boost::static_visitor<> {
+    boost_variant_int_dogen_boost_model_class_derived_double_visitor(std::ostream& s) : stream_(s) {
+        s << "{ " << "\"__type__\": " << "\"boost::variant\"" << ", ";
+        s << "\"data\": ";
+    }
+
+    ~boost_variant_int_dogen_boost_model_class_derived_double_visitor() { stream_ << " }"; }
+
+    void operator()(const int v) const {
+        stream_ << "{ " << "\"__type__\": " << "\"int\"" << ", ";
+        stream_ << "\"value\": ";
+        stream_ << v;
+        stream_ << " }";
+    }
+
+    void operator()(const dogen::boost_model::class_derived& v) const {
+        stream_ << v;
+    }
+
+    void operator()(const double v) const {
+        stream_ << "{ " << "\"__type__\": " << "\"double\"" << ", ";
+        stream_ << "\"value\": ";
+        stream_ << v;
+        stream_ << " }";
+    }
+
+private:
+    std::ostream& stream_;
+};
+
+inline std::ostream& operator<<(std::ostream& s, const boost::variant<int, dogen::boost_model::class_derived, double>& v) {
+    boost::apply_visitor(boost_variant_int_dogen_boost_model_class_derived_double_visitor(s), v);
     return s;
 }
 
@@ -70,7 +110,8 @@ std::ostream& operator<<(std::ostream& s, const class_e& v) {
 
     s << " { "
       << "\"__type__\": " << "\"dogen::boost_model::class_e\"" << ", "
-      << "\"prop_0\": " << v.prop_0()
+      << "\"prop_0\": " << v.prop_0() << ", "
+      << "\"prop_1\": " << v.prop_1()
       << " }";
     return(s);
 }

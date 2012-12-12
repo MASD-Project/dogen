@@ -18,6 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen/boost_model/test_data/class_derived_td.hpp"
 #include "dogen/boost_model/test_data/class_e_td.hpp"
 
 namespace {
@@ -43,6 +44,26 @@ create_boost_variant_int_double(unsigned int position) {
     return r;
 }
 
+dogen::boost_model::class_derived
+create_dogen_boost_model_class_derived(const unsigned int position) {
+    return dogen::boost_model::class_derived_generator::create(position);
+}
+
+
+boost::variant<int, dogen::boost_model::class_derived, double>
+create_boost_variant_int_dogen_boost_model_class_derived_double(unsigned int position) {
+    boost::variant<int, dogen::boost_model::class_derived, double> r;
+
+    if (position == 0 || ((position % 3) == 0))
+        r = create_int(position);
+    else if (position == 1 || ((position %4) == 0))
+        r = create_dogen_boost_model_class_derived(position);
+    else if ((position % 2) == 0)
+        r = create_double(position);
+
+    return r;
+}
+
 }
 
 namespace dogen {
@@ -53,6 +74,7 @@ class_e_generator::class_e_generator() : position_(0) { }
 void class_e_generator::
 populate(const unsigned int position, result_type& v) {
     v.prop_0(create_boost_variant_int_double(position + 0));
+    v.prop_1(create_boost_variant_int_dogen_boost_model_class_derived_double(position + 1));
 }
 
 class_e_generator::result_type

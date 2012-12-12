@@ -370,12 +370,14 @@ variant_helper(const nested_type_view_model& vm) {
 
         utility_.blank_line();
         stream_ << indenter_
-                << "struct visitor : public boost::static_visitor<> ";
+                << "struct " << vm.complete_identifiable_name()
+                << "_visitor : public boost::static_visitor<> ";
 
         utility_.open_scope();
         {
             cpp_positive_indenter_scope s(indenter_);
-            stream_ << indenter_ << "visitor(std::ostream& s) : stream_(s) ";
+            stream_ << indenter_ << vm.complete_identifiable_name()
+                    << "_visitor(std::ostream& s) : stream_(s) ";
             utility_.open_scope();
             {
                 cpp_positive_indenter_scope s(indenter_);
@@ -395,7 +397,8 @@ variant_helper(const nested_type_view_model& vm) {
             utility_.close_scope();
             utility_.blank_line();
 
-            stream_ << indenter_ << "~visitor() { stream_" << space_inserter
+            stream_ << indenter_ << "~" << vm.complete_identifiable_name()
+                    << "_visitor() { stream_" << space_inserter
                     << utility_.quote(" }") << "; }" << std::endl;
             utility_.blank_line();
 
@@ -452,7 +455,9 @@ variant_helper(const nested_type_view_model& vm) {
         {
             cpp_positive_indenter_scope s(indenter_);
             stream_ << indenter_
-                    << "boost::apply_visitor(visitor(s), v);" << std::endl;
+                    << "boost::apply_visitor("
+                    << vm.complete_identifiable_name()
+                    << "_visitor(s), v);" << std::endl;
             stream_ << indenter_ << "return s;" << std::endl;
         }
         utility_.close_scope();

@@ -24,18 +24,24 @@ namespace dogen {
 namespace boost_model {
 
 class_e::class_e(class_e&& rhs)
-    : prop_0_(std::move(rhs.prop_0_)) { }
+    : prop_0_(std::move(rhs.prop_0_)),
+      prop_1_(std::move(rhs.prop_1_)) { }
 
-class_e::class_e(const boost::variant<int, double>& prop_0)
-    : prop_0_(prop_0) { }
+class_e::class_e(
+    const boost::variant<int, double>& prop_0,
+    const boost::variant<int, dogen::boost_model::class_derived, double>& prop_1)
+    : prop_0_(prop_0),
+      prop_1_(prop_1) { }
 
 void class_e::swap(class_e& other) noexcept {
     using std::swap;
     swap(prop_0_, other.prop_0_);
+    swap(prop_1_, other.prop_1_);
 }
 
 bool class_e::operator==(const class_e& rhs) const {
-    return prop_0_ == rhs.prop_0_;
+    return prop_0_ == rhs.prop_0_ &&
+        prop_1_ == rhs.prop_1_;
 }
 
 class_e& class_e::operator=(class_e other) {
