@@ -253,8 +253,8 @@ add_dependencies(diff diff_codegen diff_dataset)
 #
 # include all sub directories
 #
-add_subdirectory(${CMAKE_SOURCE_DIR}/build/templates)
-add_subdirectory(${CMAKE_SOURCE_DIR}/build/cpack)
+add_subdirectory(${CMAKE_SOURCE_DIR}/build)
+add_subdirectory(${CMAKE_SOURCE_DIR}/deployment)
 add_subdirectory(${CMAKE_SOURCE_DIR}/test_data)
 add_subdirectory(${CMAKE_SOURCE_DIR}/projects)
 add_subdirectory(${CMAKE_SOURCE_DIR}/diagrams)

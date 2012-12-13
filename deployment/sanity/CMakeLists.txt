@@ -17,24 +17,38 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
 # MA 02110-1301, USA.
 #
-path_to_executable = '../bin/dogen_driver.sh'
-if (!File.exist?(path_to_executable))
-    puts "error: executable not found: #{path_to_executable}"
-    exit 1
-end
 
-options = '--help'
-expected = 'Output directory for C++ include files.'
-output = `#{path_to_executable} #{options}` ; result = $?
-if result != 0
-    puts "error: command returned non-zero status: #{result}"
-    exit 1
-end
+# avoid nonsense warning on cygwin
+set(CMAKE_LEGACY_CYGWIN_WIN32 0) # Remove when CMake >= 2.8.4 is required
 
-if output.index(expected)
-    puts "test executed successfully."
-    exit 0
-end
+cmake_minimum_required(VERSION 2.8 FATAL_ERROR)
 
-puts "error: expected string not found: #{expected}"
-exit 1
+# enable ctest support
+enable_testing()
+
+project(dogen)
+
+# site (for ctest)
+site_name(DOGEN_SITE)
+
+#
+# ruby
+#
+find_program(CTEST_RUBY_COMMAND NAMES ruby)
+if(NOT CTEST_RUBY_COMMAND)
+    message(FATAL_ERROR "ruby not found.")
+endif()
+
+set(scripts "")
+file(GLOB_RECURSE scripts RELATIVE
+    "${CMAKE_CURRENT_SOURCE_DIR}/"
+    "${CMAKE_CURRENT_SOURCE_DIR}/*.rb")
+
+foreach(script ${scripts})
+    get_filename_component(test_name ${script} NAME_WE)
+    message(STATUS "Adding test: ${test_name}")
+    add_test(dogen/${test_name}
+        ${CMAKE_COMMAND} -E chdir ${CMAKE_CURRENT_SOURCE_DIR}
+        ${CTEST_RUBY_COMMAND} ${script})
+
+endforeach()
