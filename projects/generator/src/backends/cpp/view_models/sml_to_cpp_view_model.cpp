@@ -576,7 +576,8 @@ transform_file(cpp_facet_types ft, cpp_file_types flt, cpp_aspect_types at,
         BOOST_LOG_SEV(lg, error) << view_model_not_found
                                  << name.type_name();
 
-        BOOST_THROW_EXCEPTION(transformation_error(view_model_not_found + name.type_name()));
+        BOOST_THROW_EXCEPTION(transformation_error(view_model_not_found +
+                name.type_name()));
     }
     r.enumeration_vm(i->second);
 
