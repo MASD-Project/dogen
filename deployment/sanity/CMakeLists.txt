@@ -39,7 +39,7 @@ if(NOT CTEST_RUBY_COMMAND)
     message(FATAL_ERROR "ruby not found.")
 endif()
 
-message(STATUS "Performing sanity checks in: ${CMAKE_CURRENT_SOURCE_DIR")
+message(STATUS "Performing sanity checks in: ${CMAKE_CURRENT_SOURCE_DIR}")
 
 set(scripts "")
 file(GLOB_RECURSE scripts RELATIVE
