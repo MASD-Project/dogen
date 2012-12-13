@@ -24,6 +24,6 @@ file(GLOB_RECURSE all_files RELATIVE
 
 add_library(disable_full_ctor STATIC ${all_files})
 set_target_properties(disable_full_ctor PROPERTIES
-    OUTPUT_NAME dogen_disable_full_ctor_${DOGEN_VERSION})
+    OUTPUT_NAME dogen_disable_full_ctor)
 
 install(TARGETS disable_full_ctor ARCHIVE DESTINATION lib COMPONENT libraries)

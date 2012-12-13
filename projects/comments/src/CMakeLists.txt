@@ -24,6 +24,6 @@ file(GLOB_RECURSE all_files RELATIVE
 
 add_library(comments STATIC ${all_files})
 set_target_properties(comments PROPERTIES
-    OUTPUT_NAME dogen_comments_${DOGEN_VERSION})
+    OUTPUT_NAME dogen_comments)
 
 install(TARGETS comments ARCHIVE DESTINATION lib COMPONENT libraries)

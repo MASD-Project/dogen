@@ -24,6 +24,6 @@ file(GLOB_RECURSE all_files RELATIVE
 
 add_library(split_project STATIC ${all_files})
 set_target_properties(split_project PROPERTIES
-    OUTPUT_NAME dogen_split_project_${DOGEN_VERSION})
+    OUTPUT_NAME dogen_split_project)
 
 install(TARGETS split_project ARCHIVE DESTINATION lib COMPONENT libraries)

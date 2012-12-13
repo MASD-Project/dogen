@@ -24,6 +24,6 @@ file(GLOB_RECURSE all_files RELATIVE
 
 add_library(trivial_inheritance STATIC ${all_files})
 set_target_properties(trivial_inheritance PROPERTIES
-    OUTPUT_NAME dogen_trivial_inheritance_${DOGEN_VERSION})
+    OUTPUT_NAME dogen_trivial_inheritance)
 
 install(TARGETS trivial_inheritance ARCHIVE DESTINATION lib COMPONENT libraries)

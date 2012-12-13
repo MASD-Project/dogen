@@ -25,7 +25,7 @@ file(GLOB_RECURSE spec_files RELATIVE
     "${CMAKE_CURRENT_SOURCE_DIR}/*.cpp")
 
 add_executable(${spec_name} ${spec_files})
-set(binary_name "dogen_${spec_name}-${DOGEN_VERSION}")
+set(binary_name "dogen_${spec_name}")
 set_target_properties(${spec_name} PROPERTIES OUTPUT_NAME ${binary_name})
 
 target_link_libraries(${spec_name}

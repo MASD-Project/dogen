@@ -83,13 +83,7 @@ void cpp_src_cmakelists::format(const cmakelists_view_model& vm) {
             << std::endl
             << "set_target_properties(" << mn << " PROPERTIES"
             << std::endl << "    OUTPUT_NAME " << vm.product_name()
-            << (vm.product_name().empty() ? empty : underscore) << mn;
-
-    if (!vm.product_name().empty()) {
-        stream_ << underscore << "${"
-                << boost::algorithm::to_upper_copy(vm.product_name())
-                << "_VERSION}" << ")";
-    }
+            << (vm.product_name().empty() ? empty : underscore) << mn << ")";
 
     stream_ << std::endl
             << std::endl

@@ -24,6 +24,6 @@ file(GLOB_RECURSE all_files RELATIVE
 
 add_library(enable_facet_hash STATIC ${all_files})
 set_target_properties(enable_facet_hash PROPERTIES
-    OUTPUT_NAME dogen_enable_facet_hash_${DOGEN_VERSION})
+    OUTPUT_NAME dogen_enable_facet_hash)
 
 install(TARGETS enable_facet_hash ARCHIVE DESTINATION lib COMPONENT libraries)

@@ -24,6 +24,6 @@ file(GLOB_RECURSE all_files RELATIVE
 
 add_library(enable_facet_serialization STATIC ${all_files})
 set_target_properties(enable_facet_serialization PROPERTIES
-    OUTPUT_NAME dogen_enable_facet_serialization_${DOGEN_VERSION})
+    OUTPUT_NAME dogen_enable_facet_serialization)
 
 install(TARGETS enable_facet_serialization ARCHIVE DESTINATION lib COMPONENT libraries)

@@ -37,7 +37,7 @@ macro(add_boost_tests test_module)
             string(REPLACE "spec/" "" test_suite ${test_suite})
 
             set(spec_cmd
-                ${stage_bin_dir}/dogen_${test_module}_spec-${DOGEN_VERSION})
+                ${stage_bin_dir}/dogen_${test_module}_spec)
             add_test(${test_module}/${test_suite}/${test_name}
                 ${CMAKE_COMMAND} -E chdir ${stage_bin_dir}
                 ${spec_cmd} --run_test=${test_suite}/${test_name})
@@ -134,7 +134,7 @@ endforeach()
 
 add_library(header_validation STATIC ${header_validation_files})
 set_target_properties(header_validation
-    PROPERTIES OUTPUT_NAME dogen_header_validation-${DOGEN_VERSION})
+    PROPERTIES OUTPUT_NAME dogen_header_validation)
 set_target_properties(header_validation
     PROPERTIES VERSION ${DOGEN_VERSION} SOVERSION ${DOGEN_MAJOR_VERSION})
 

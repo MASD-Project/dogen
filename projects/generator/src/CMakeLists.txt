@@ -31,7 +31,7 @@ target_link_libraries(generator
     ${Boost_LIBRARIES})
 
 set_target_properties(generator
-    PROPERTIES OUTPUT_NAME dogen_generator_${DOGEN_VERSION})
+    PROPERTIES OUTPUT_NAME dogen_generator)
 set_target_properties(generator
     PROPERTIES VERSION ${DOGEN_VERSION} SOVERSION ${DOGEN_MAJOR_VERSION})
 

@@ -24,6 +24,6 @@ file(GLOB_RECURSE all_files RELATIVE
 
 add_library(entity_service_value STATIC ${all_files})
 set_target_properties(entity_service_value PROPERTIES
-    OUTPUT_NAME dogen_entity_service_value_${DOGEN_VERSION})
+    OUTPUT_NAME dogen_entity_service_value)
 
 install(TARGETS entity_service_value ARCHIVE DESTINATION lib COMPONENT libraries)

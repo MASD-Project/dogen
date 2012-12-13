@@ -20,23 +20,23 @@ add_custom_target(codegen)
 
 # get latest dogen
 set(dogen_dir "${CMAKE_BINARY_DIR}/../dogen/stage/bin/")
+set(dogen_binary "${dogen_dir}/dogen_driver")
+set(dogen_version "")
 execute_process(
-    COMMAND ls -t ${dogen_dir}
-    COMMAND grep dogen_driver-
-    COMMAND sort -r
+    COMMAND ${dogen_binary} --version
     COMMAND head -n1
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
-    OUTPUT_VARIABLE dogen_binary
+    OUTPUT_VARIABLE dogen_version
     RESULT_VARIABLE ret_var
     OUTPUT_STRIP_TRAILING_WHITESPACE)
 
-message(STATUS "Using dogen: ${dogen_binary}")
+message(STATUS "Using: ${dogen_version}")
 
 set(target sml)
 add_custom_target(codegen_${target}
     COMMENT "Generating SML model" VERBATIM
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
-    COMMAND ${dogen_dir}/${dogen_binary}
+    COMMAND ${dogen_binary}
     --target ${CMAKE_SOURCE_DIR}/diagrams/${target}/${target}.dia
     --cpp-project-dir ${CMAKE_SOURCE_DIR}/projects/
     --cpp-enable-facet domain

@@ -24,6 +24,6 @@ file(GLOB_RECURSE all_files RELATIVE
 
 add_library(exception STATIC ${all_files})
 set_target_properties(exception PROPERTIES
-    OUTPUT_NAME dogen_exception_${DOGEN_VERSION})
+    OUTPUT_NAME dogen_exception)
 
 install(TARGETS exception ARCHIVE DESTINATION lib COMPONENT libraries)

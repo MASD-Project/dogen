@@ -24,6 +24,6 @@ file(GLOB_RECURSE all_files RELATIVE
 
 add_library(trivial_association STATIC ${all_files})
 set_target_properties(trivial_association PROPERTIES
-    OUTPUT_NAME dogen_trivial_association_${DOGEN_VERSION})
+    OUTPUT_NAME dogen_trivial_association)
 
 install(TARGETS trivial_association ARCHIVE DESTINATION lib COMPONENT libraries)

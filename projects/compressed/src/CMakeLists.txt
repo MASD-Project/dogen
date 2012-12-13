@@ -24,6 +24,6 @@ file(GLOB_RECURSE all_files RELATIVE
 
 add_library(compressed STATIC ${all_files})
 set_target_properties(compressed PROPERTIES
-    OUTPUT_NAME dogen_compressed_${DOGEN_VERSION})
+    OUTPUT_NAME dogen_compressed)
 
 install(TARGETS compressed ARCHIVE DESTINATION lib COMPONENT libraries)

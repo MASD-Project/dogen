@@ -24,6 +24,6 @@ file(GLOB_RECURSE all_files RELATIVE
 
 add_library(enable_facet_domain STATIC ${all_files})
 set_target_properties(enable_facet_domain PROPERTIES
-    OUTPUT_NAME dogen_enable_facet_domain_${DOGEN_VERSION})
+    OUTPUT_NAME dogen_enable_facet_domain)
 
 install(TARGETS enable_facet_domain ARCHIVE DESTINATION lib COMPONENT libraries)
