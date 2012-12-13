@@ -218,8 +218,9 @@ if(DOXYGEN_FOUND)
 
     # input file
     set(doxy_file ${stage_doxygen_dir}/dogen.doxy)
-    add_custom_target(doxy
-        ALL ${DOXYGEN_EXECUTABLE} ${doxy_file}
+    add_custom_target(doxy ALL
+        COMMAND rm -rf ${stage_doxygen_dir}/html
+        COMMAND ${DOXYGEN_EXECUTABLE} ${doxy_file}
         WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
         COMMENT "Generating API documentation with Doxygen" VERBATIM)
 
