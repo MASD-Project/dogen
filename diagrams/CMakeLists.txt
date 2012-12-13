@@ -18,8 +18,7 @@
 # MA 02110-1301, USA.
 add_custom_target(codegen)
 
-# get latest dogen
-set(dogen_dir "${CMAKE_BINARY_DIR}/../dogen/stage/bin/")
+set(dogen_dir "${CMAKE_BINARY_DIR}/stage/bin/")
 set(dogen_binary "${dogen_dir}/dogen_driver")
 set(dogen_version "")
 execute_process(
