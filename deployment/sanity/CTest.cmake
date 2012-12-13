@@ -93,7 +93,7 @@ if(NOT EXISTS "${tmpdir}")
 endif()
 
 set(CTEST_BINARY_DIRECTORY "${tmpdir}/dogen_sanity_tests")
-
+ctest_empty_binary_directory(${CTEST_BINARY_DIRECTORY})
 set(CTEST_CONFIGURE_COMMAND "${CMAKE_COMMAND} ${CTEST_SOURCE_DIRECTORY}")
 set(CTEST_NIGHTLY_START_TIME "00:30:00 UTC")
 ctest_start(Continuous)
