@@ -23,6 +23,9 @@
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/exception/invalid_enum_value.hpp"
 #include "dogen/dia/io/object_types_io.hpp"
+#include "dogen/utility/log/logger.hpp"
+
+using namespace dogen::utility::log;
 
 namespace {
 
@@ -36,6 +39,8 @@ const std::string uml_note("uml_note");
 const std::string uml_message("uml_message");
 
 const std::string error_message("Invalid or unexpected object type");
+
+auto lg(logger_factory("generator"));
 
 }
 
@@ -61,6 +66,7 @@ std::ostream& operator<<(std::ostream& stream, object_types value) {
     default:
         break;
     }
+    BOOST_LOG_SEV(lg, error) << error_message;
     BOOST_THROW_EXCEPTION(utility::exception::invalid_enum_value(error_message));
 }
 
