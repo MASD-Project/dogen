@@ -10,17 +10,17 @@ This file contains all stories that were closed during sprint 22.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2012-12-12 Wed 15:03]
+Clock summary at [2012-12-13 Thu 08:05]
 
 | Headline                                                    | Time    |       |      |
 |-------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                | *22:33* |       |      |
+| *Total time*                                                | *23:43* |       |      |
 |-------------------------------------------------------------+---------+-------+------|
-| Development Stories Implemented                             |         | 22:33 |      |
+| Development Stories Implemented                             |         | 23:43 |      |
 | COMPLETED Outputting of floating point numbers rounded      |         |       | 1:00 |
 | COMPLETED Vector of double still has floating point issues  |         |       | 0:20 |
 | COMPLETED Ignore UML realisation relationship in Dia        |         |       | 0:42 |
-| IMPLEMENTATION Clocking of agile and build overhead         |         |       | 6:41 |
+| IMPLEMENTATION Clocking of agile and build overhead         |         |       | 7:51 |
 | COMPLETED Remove unnecessary translation units for services |         |       | 3:29 |
 | COMPLETED Add PFH libraries to packages                     |         |       | 6:47 |
 | COMPLETED Generate forward declarations for services        |         |       | 0:15 |
@@ -116,10 +116,14 @@ Stand up and build checking.
 Stand up and build checking.
 
 **** COMPLETED Build checking and stand-up on 2012-12-12
-     CLOCK: [2012-12-12 Wed 06:20]--[2012-12-10 Wed 06:50] => -47:30
+     CLOCK: [2012-12-12 Wed 06:20]--[2012-12-12 Wed 06:50] =>  0:30
 
 Stand up and build checking.
 
+**** COMPLETED Build checking and stand-up on 2012-12-13
+     CLOCK: [2012-12-13 Wed 06:20]--[2012-12-13 Wed 07:00] =>  0:40
+
+Stand up and build checking.
 
 *** COMPLETED Remove unnecessary translation units for services       :spike:
     CLOSED: [2012-12-10 Mon 12:08]
@@ -192,5 +196,17 @@ boost variant. One possible implementation:
 - add support for default variant visitor. this could be fairly
   generic so we could also use it as part of the visitor patter for
   class hierarchies
+
+*** COMPLETED Rename =domain= facet to =types=                        :story:
+    CLOSED: [2012-12-13 Thu 07:56]
+
+When we implemented entity, service, value - inspired on the
+terminology defined by Eric Evans - we renamed the =domain= folder to
+=types=. This was because domain really means domain model - e.g. the
+entirety of the model. As part of that rename we should have also
+renamed the =facet_types= enum for the =domain= facet, but it got
+missed out.
+
+Implemented by RP.
 
 ** Deprecated Development Stories
