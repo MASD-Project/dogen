@@ -1,4 +1,4 @@
-# -*- mode: cmake; tab-width: 4; indent-tabs-mode: nil -*-
+# -*- mode: ruby; tab-width: 4; indent-tabs-mode: nil -*-
 #
 # Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
 #
@@ -17,20 +17,20 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
 # MA 02110-1301, USA.
 #
-path_to_executable = '../bin/dogen_driver.sh'
+path_to_executable = '../../bin/dogen'
 if (!File.exist?(path_to_executable))
     puts "error: executable not found: #{path_to_executable}"
     exit 1
 end
 
 options = '--help'
-expected = 'Output directory for C++ include files.'
 output = `#{path_to_executable} #{options}` ; result = $?
 if result != 0
     puts "error: command returned non-zero status: #{result}"
     exit 1
 end
 
+expected = 'Output directory for C++ include files.'
 if output.index(expected)
     puts "test executed successfully."
     exit 0
