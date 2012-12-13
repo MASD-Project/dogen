@@ -21,8 +21,13 @@
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/exception/invalid_enum_value.hpp"
 #include "dogen/dia/utility/dia_utility.hpp"
+#include "dogen/utility/log/logger.hpp"
+
+using namespace dogen::utility::log;
 
 namespace {
+
+auto lg(logger_factory("generator"));
 
 const std::string uml_large_package("UML - LargePackage");
 const std::string uml_class("UML - Class");
@@ -69,6 +74,7 @@ object_types parse_object_type(const std::string& ot) {
     if (ot == uml_realization)
         return object_types::uml_realization;
 
+    BOOST_LOG_SEV(lg, error) << invalid_object_type << ot;
     BOOST_THROW_EXCEPTION(dogen::utility::exception::exception(invalid_object_type + ot));
 }
 
@@ -91,6 +97,7 @@ stereotypes parse_stereotype(const std::string& st) {
     if (st == nongeneratable)
         return stereotypes::nongeneratable;
 
+    BOOST_LOG_SEV(lg, error) << invalid_stereotype << st;
     BOOST_THROW_EXCEPTION(dogen::utility::exception::exception(invalid_stereotype + st));
 }
 

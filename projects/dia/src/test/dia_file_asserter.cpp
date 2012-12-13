@@ -27,7 +27,11 @@
 #include "dogen/dia/io/diagram_io.hpp"
 #include "dogen/dia/test/dia_file_asserter.hpp"
 
+using namespace dogen::utility::log;
+
 namespace  {
+
+auto lg(logger_factory("generator"));
 
 const std::string dia_xml_extension(".xmldia");
 const std::string file_is_not_assertable(

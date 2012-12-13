@@ -29,6 +29,8 @@ using namespace dogen::utility::log;
 
 namespace {
 
+auto lg(logger_factory("generator"));
+
 const std::string prefix("object_types::");
 const std::string invalid("invalid");
 const std::string uml_large_package("uml_large_package");
@@ -39,9 +41,6 @@ const std::string uml_note("uml_note");
 const std::string uml_message("uml_message");
 
 const std::string error_message("Invalid or unexpected object type");
-
-auto lg(logger_factory("generator"));
-
 }
 
 namespace dogen {
