@@ -24,6 +24,7 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/config/version.hpp"
 #include "dogen/driver/program_options_parser.hpp"
+#include "dogen/driver/parser_validation_error.hpp"
 #include "dogen/generator/config/settings.hpp"
 #include "dogen/generator/generator.hpp"
 
@@ -33,6 +34,7 @@ namespace {
 
 auto lg(logger_factory("dogen"));
 const std::string log_dir("log/dogen");
+const std::string get_help("Use --help option to see usage instructions.");
 
 /**
  * @brief Print the program's help text.
@@ -97,20 +99,20 @@ int main(int argc, char* argv[]) {
             auto cg(code_generator_factory(s));
             cg.generate();
         }
-    } catch(const boost::exception& e) {
-        BOOST_LOG_SEV(lg, error) << "Error: "
-                                 << boost::diagnostic_information(e);
-
-        std::cerr << boost::diagnostic_information(e) << std::endl
-                  << "Use --help option to see usage instructions."
-                  << std::endl;
-
+    } catch (const dogen::driver::parser_validation_error& e) {
+        BOOST_LOG_SEV(lg, error) << boost::diagnostic_information(e);
+        std::cerr << e.what() << std::endl;
         return 1;
     } catch (const std::exception& e) {
-        std::cerr << "Error: " << e.what() << std::endl
-                  << "Use --help option to see usage instructions."
+        const auto be(dynamic_cast<const boost::exception* const>(&e));
+        if (be) {
+            BOOST_LOG_SEV(lg, fatal) << "Error: "
+                                     << boost::diagnostic_information(*be);
+        }
+
+        std::cerr << "Error: " << e.what() << ". See the log file for details."
                   << std::endl;
-        BOOST_LOG_SEV(lg, fatal) << e.what();
+
         return 1;
     }
     return 0;

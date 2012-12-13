@@ -259,10 +259,10 @@ elseif (UNIX)
 
     set(CPACK_SET_DESTDIR true)
     set(CPACK_INSTALL_PREFIX "/opt/kitanda/${PROJECT_NAME}-${DOGEN_VERSION}")
-    configure_file(${CMAKE_CURRENT_SOURCE_DIR}/dogen_driver.sh.in
-        ${stage_dir}/scripts/dogen_driver-${DOGEN_VERSION}.sh)
-    execute_process(COMMAND chmod +x ${stage_dir}/scripts/dogen_driver-${DOGEN_VERSION}.sh)
-    install(PROGRAMS ${stage_dir}/scripts/dogen_driver-${DOGEN_VERSION}.sh
+    configure_file(${CMAKE_CURRENT_SOURCE_DIR}/dogen.in
+        ${stage_dir}/scripts/dogen)
+    execute_process(COMMAND chmod +x ${stage_dir}/scripts/dogen)
+    install(PROGRAMS ${stage_dir}/scripts/dogen
         DESTINATION bin COMPONENT applications)
 else()
     message(FATAL_ERROR "unknown operating system")
