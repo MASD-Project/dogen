@@ -18,6 +18,7 @@
 # MA 02110-1301, USA.
 #
 # avoid nonsense warning on cygwin
+
 set(CMAKE_LEGACY_CYGWIN_WIN32 0) # Remove when CMake >= 2.8.4 is required
 
 cmake_minimum_required(VERSION 2.8 FATAL_ERROR)
