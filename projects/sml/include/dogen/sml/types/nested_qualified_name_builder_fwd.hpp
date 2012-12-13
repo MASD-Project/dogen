@@ -28,7 +28,7 @@
 namespace dogen {
 namespace sml {
 
-enum class nested_qualified_name_builder;
+class nested_qualified_name_builder;
 
 } }
 

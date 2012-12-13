@@ -28,7 +28,7 @@
 namespace dogen {
 namespace sml {
 
-enum class primitive_model_factory;
+class primitive_model_factory;
 
 } }
 

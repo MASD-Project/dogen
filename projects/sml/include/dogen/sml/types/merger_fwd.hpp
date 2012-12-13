@@ -28,7 +28,7 @@
 namespace dogen {
 namespace sml {
 
-enum class merger;
+class merger;
 
 } }
 

@@ -24,6 +24,6 @@ file(GLOB_RECURSE all_files RELATIVE
 
 add_library(sml STATIC ${all_files})
 set_target_properties(sml PROPERTIES
-    OUTPUT_NAME dogen_sml_${DOGEN_VERSION})
+    OUTPUT_NAME dogen_sml)
 
 install(TARGETS sml ARCHIVE DESTINATION lib COMPONENT libraries)

@@ -28,7 +28,7 @@
 namespace dogen {
 namespace sml {
 
-enum class boost_model_factory;
+class boost_model_factory;
 
 } }
 

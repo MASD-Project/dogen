@@ -28,7 +28,7 @@
 namespace dogen {
 namespace sml {
 
-enum class identifier_parser;
+class identifier_parser;
 
 } }
 
