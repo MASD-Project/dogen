@@ -256,6 +256,7 @@ attribute hydrator::read_attribute() {
         // should only appear if we are.
         const std::string name(reader_.name());
         if (!is_attribute_value(name)) {
+            BOOST_LOG_SEV(lg, error) << unsupported_value << name;
             BOOST_THROW_EXCEPTION(xml::exception(unsupported_value + name));
         }
 

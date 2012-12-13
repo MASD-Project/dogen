@@ -29,7 +29,7 @@ using namespace dogen::utility::log;
 
 namespace {
 
-auto lg(logger_factory("generator"));
+auto lg(logger_factory("object_types_io"));
 
 const std::string prefix("object_types::");
 const std::string invalid("invalid");

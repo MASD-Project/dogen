@@ -27,7 +27,7 @@ using namespace dogen::utility::log;
 
 namespace {
 
-auto lg(logger_factory("generator"));
+auto lg(logger_factory("dia_utility"));
 
 const std::string uml_large_package("UML - LargePackage");
 const std::string uml_class("UML - Class");

@@ -31,7 +31,7 @@ using namespace dogen::utility::log;
 
 namespace  {
 
-auto lg(logger_factory("generator"));
+logger lg(logger_factory("dia_file_asserter"));
 
 const std::string dia_xml_extension(".xmldia");
 const std::string file_is_not_assertable(
@@ -61,9 +61,6 @@ bool dia_file_asserter::assert_file(boost::filesystem::path expected,
 
     const auto e(read_xml(expected));
     const auto a(read_xml(actual));
-
-    using namespace dogen::utility::log;
-    logger lg(logger_factory("dia_file_asserter"));
 
     if (e == a) {
         BOOST_LOG_SEV(lg, debug) << "Dia file asserter: contents are equal.";
