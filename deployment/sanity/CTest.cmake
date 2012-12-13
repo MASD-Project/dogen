@@ -59,6 +59,7 @@ endif()
 if(NOT DEFINED package_dir)
     message(FATAL_ERROR "Path to package directory not supplied")
 endif()
+message(STATUS "Performing sanity checks for: ${package_dir}")
 
 # set the site to the hostname. this shows up in the dashboard.
 site_name(CURRENT_SITE)
