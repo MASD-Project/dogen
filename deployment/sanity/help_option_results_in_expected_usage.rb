@@ -17,7 +17,7 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
 # MA 02110-1301, USA.
 #
-path_to_executable = '../../bin/dogen'
+path_to_executable = '../../../MacOS/dogen'
 if (!File.exist?(path_to_executable))
     puts "error: executable not found: #{path_to_executable}"
     exit 1
