@@ -29,8 +29,13 @@
 #include "dogen/generator/backends/cpp/formatters/cpp_namespace_helper.hpp"
 #include "dogen/generator/backends/cpp/formatters/cpp_indenter.hpp"
 #include "dogen/generator/backends/cpp/formatters/cpp_database_header.hpp"
+#include "dogen/utility/log/logger.hpp"
+
+using namespace dogen::utility::log;
 
 namespace {
+
+auto lg(logger_factory("database_header"));
 
 const std::string detail_ns("detail");
 const std::string name_suffix("_data_exchanger");
@@ -176,16 +181,18 @@ void database_header::format(const file_view_model& vm) {
 
     if (vm.meta_type() == sml::meta_types::enumeration) {
         const auto o(vm.enumeration_vm());
-        if (!o)
+        if (!o) {
+            BOOST_LOG_SEV(lg, error) << missing_enumeration_view_model;
             BOOST_THROW_EXCEPTION(generation_failure(missing_enumeration_view_model));
-
+        }
         const auto evm(*o);
         stream_ << "// FIXME: " << evm.name() << std::endl;
     } else if (vm.meta_type() == sml::meta_types::pod) {
         boost::optional<view_models::class_view_model> o(vm.class_vm());
-        if (!o)
+        if (!o) {
+            BOOST_LOG_SEV(lg, error) << missing_class_view_model;
             BOOST_THROW_EXCEPTION(generation_failure(missing_class_view_model));
-
+        }
         const view_models::class_view_model& cvm(*o);
         std::list<std::string> namespaces(cvm.namespaces());
         namespace_helper ns_helper(stream_, namespaces);

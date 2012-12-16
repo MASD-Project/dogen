@@ -29,8 +29,13 @@
 #include "dogen/generator/backends/cpp/formatters/cpp_qualified_name.hpp"
 #include "dogen/generator/backends/cpp/formatters/cpp_namespace_helper.hpp"
 #include "dogen/generator/backends/cpp/formatters/cpp_forward_declarations_header.hpp"
+#include "dogen/utility/log/logger.hpp"
+
+using namespace dogen::utility::log;
 
 namespace {
+
+auto lg(logger_factory("forward_declarations_header"));
 
 const std::string boost_ns("boost");
 const std::string serialization_ns("serialization");
@@ -102,8 +107,10 @@ format_domain_class(const class_view_model& vm) {
 
 void forward_declarations_header::format_class(const file_view_model& vm) {
     boost::optional<view_models::class_view_model> o(vm.class_vm());
-    if (!o)
+    if (!o) {
+        BOOST_LOG_SEV(lg, error) << missing_class_view_model;
         BOOST_THROW_EXCEPTION(generation_failure(missing_class_view_model));
+    }
 
     const auto ft(vm.facet_type());
     const view_models::class_view_model& cvm(*o);
@@ -113,14 +120,17 @@ void forward_declarations_header::format_class(const file_view_model& vm) {
         format_domain_class(cvm);
     else {
         using dogen::utility::exception::invalid_enum_value;
+        BOOST_LOG_SEV(lg, error) << invalid_facet_types;
         BOOST_THROW_EXCEPTION(invalid_enum_value(invalid_facet_types));
     }
 }
 
 void forward_declarations_header::format_enumeration(const file_view_model& vm) {
     const auto o(vm.enumeration_vm());
-    if (!o)
+    if (!o) {
+        BOOST_LOG_SEV(lg, error) << missing_enumeration_view_model;
         BOOST_THROW_EXCEPTION(generation_failure(missing_enumeration_view_model));
+    }
 
     const auto evm(*o);
     {
@@ -135,8 +145,10 @@ void forward_declarations_header::format_enumeration(const file_view_model& vm) 
 
 void forward_declarations_header::format_exception(const file_view_model& vm) {
     const auto o(vm.exception_vm());
-    if (!o)
+    if (!o) {
+        BOOST_LOG_SEV(lg, error) << missing_exception_view_model;
         BOOST_THROW_EXCEPTION(generation_failure(missing_exception_view_model));
+    }
 
     const auto evm(*o);
     {
@@ -152,6 +164,7 @@ void forward_declarations_header::format_exception(const file_view_model& vm) {
 void forward_declarations_header::format(const file_view_model& vm) {
     if (vm.aspect_type() != cpp_aspect_types::forward_decls) {
         using dogen::utility::exception::invalid_enum_value;
+        BOOST_LOG_SEV(lg, error) << invalid_facet_types;
         BOOST_THROW_EXCEPTION(invalid_enum_value(invalid_facet_types));
     }
 

@@ -35,9 +35,16 @@
 #include "dogen/utility/exception/invalid_enum_value.hpp"
 #include "dogen/driver/parser_validation_error.hpp"
 #include "dogen/driver/program_options_parser.hpp"
+#include "dogen/utility/log/logger.hpp"
+
+using namespace dogen::utility::log;
 
 namespace {
 
+auto lg(logger_factory("program_options_parser"));
+
+const std::string at_least_one_argument("Expected at least one argument for reference");
+const std::string at_most_two_arguments("Expected only at most two arguments for reference");
 const std::string empty;
 const std::string help_arg("help");
 const std::string version_arg("version");
@@ -307,7 +314,8 @@ program_options_parser::variables_map_factory() const {
         basic_command_line_parser<char> parser(arguments_);
         store(parser.options(options).run(), r);
         notify(r);
-    } catch (const error& e) {
+    } catch (const boost::program_options::error& e) {
+        BOOST_LOG_SEV(lg, dogen::utility::log::error) << e.what();
         BOOST_THROW_EXCEPTION(parser_validation_error(e.what()));
     }
 
@@ -338,6 +346,7 @@ void program_options_parser::throw_project_dir_with_split() const {
     stream << "Argument project-dir cannot be used in"
            << " conjunction with project splitting. "
            << " Try `dogen --help' for more information.";
+    BOOST_LOG_SEV(lg, error) << stream.str();
     BOOST_THROW_EXCEPTION(parser_validation_error(stream.str()));
 }
 
@@ -346,6 +355,7 @@ void program_options_parser::throw_include_source_without_split() const {
     stream << "Arguments source-dir and include-dir"
            << " require project splitting. "
            << " Try `dogen --help' for more information.";
+    BOOST_LOG_SEV(lg, error) << stream.str();
     BOOST_THROW_EXCEPTION(parser_validation_error(stream.str()));
 }
 
@@ -354,6 +364,7 @@ void program_options_parser::throw_missing_include_source() const {
     stream << "You must supply both source-dir and include-dir"
            << " or not supply either. "
            << " Try `dogen --help' for more information.";
+    BOOST_LOG_SEV(lg, error) << stream.str();
     BOOST_THROW_EXCEPTION(parser_validation_error(stream.str()));
 }
 
@@ -361,6 +372,7 @@ void program_options_parser::throw_missing_target() const {
     std::ostringstream stream;
     stream << "Mandatory parameter target is missing. "
            << "Try `dogen --help' for more information.";
+    BOOST_LOG_SEV(lg, error) << stream.str();
     BOOST_THROW_EXCEPTION(parser_validation_error(stream.str()));
 }
 
@@ -378,6 +390,7 @@ program_options_parser::parse_archive_type(const std::string& s) const {
         return archive_types::binary;
 
     using utility::exception::invalid_enum_value;
+    BOOST_LOG_SEV(lg, error) << invalid_archive_type;
     BOOST_THROW_EXCEPTION(invalid_enum_value(invalid_archive_type));
 }
 
@@ -390,6 +403,7 @@ program_options_parser::parse_facet_types(const std::string& s) {
     if (s == test_data_facet_type) return cpp_facet_types::test_data;
 
     using utility::exception::invalid_enum_value;
+    BOOST_LOG_SEV(lg, error) << invalid_facet_type << s;
     BOOST_THROW_EXCEPTION(invalid_enum_value(invalid_facet_type + s));
 }
 
@@ -461,6 +475,7 @@ transform_cpp_settings(const boost::program_options::variables_map& vm) const {
                     &program_options_parser::parse_facet_types),
                 std::inserter(set, set.end()));
         } catch (const utility::exception::invalid_enum_value& e) {
+            BOOST_LOG_SEV(lg, error) << e.what();
             BOOST_THROW_EXCEPTION(parser_validation_error(e.what()));
         }
 
@@ -468,6 +483,7 @@ transform_cpp_settings(const boost::program_options::variables_map& vm) const {
             const auto f(r.enabled_facets());
             const bool has_io_facet(f.find(cpp_facet_types::io) != f.end());
             if (has_io_facet) {
+                BOOST_LOG_SEV(lg, error) << integrated_io_incompatible_with_io_facet;
                 BOOST_THROW_EXCEPTION(parser_validation_error(
                         integrated_io_incompatible_with_io_facet));
             }
@@ -522,14 +538,16 @@ program_options_parser::transform_modeling_settings(
             strings_type tokens;
             boost::split(tokens, i, boost::is_any_of(","));
 
-            if (tokens.empty())
+            if (tokens.empty()) {
+                BOOST_LOG_SEV(lg, error) << at_least_one_argument;
                 BOOST_THROW_EXCEPTION(parser_validation_error(
-                        "Expected at least one argument for reference"));
-
-            if (tokens.size() > 2)
+                        at_least_one_argument));
+            }
+            if (tokens.size() > 2) {
+                BOOST_LOG_SEV(lg, error) << at_most_two_arguments;
                 BOOST_THROW_EXCEPTION(parser_validation_error(
-                        "Expected only at most two arguments for reference"));
-
+                        at_most_two_arguments));
+            }
             dogen::generator::config::reference ref;
             ref.path(tokens[0]);
             if (tokens.size() > 1)
@@ -560,6 +578,7 @@ transform_troubleshooting_settings(const variables_map& vm) const {
                 try {
                     return parse_archive_type(vm[arg].as<std::string>());
                 } catch (const invalid_enum_value& e) {
+                    BOOST_LOG_SEV(lg, error) << e.what();
                     BOOST_THROW_EXCEPTION(parser_validation_error(e.what()));
                 }
             }

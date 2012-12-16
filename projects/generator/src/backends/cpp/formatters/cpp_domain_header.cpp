@@ -33,8 +33,13 @@
 #include "dogen/generator/backends/cpp/formatters/cpp_enumeration_declaration.hpp"
 #include "dogen/generator/backends/cpp/formatters/cpp_exception_declaration.hpp"
 #include "dogen/generator/backends/cpp/formatters/cpp_domain_header.hpp"
+#include "dogen/utility/log/logger.hpp"
+
+using namespace dogen::utility::log;
 
 namespace {
+
+auto lg(logger_factory("database_header"));
 
 const std::string boost_ns("boost");
 const std::string serialization_ns("serialization");
@@ -148,7 +153,8 @@ class_declaration(const sml::category_types ct, const class_view_model& vm) {
         f.format(vm);
         return;
     }
-
+    
+    BOOST_LOG_SEV(lg, error) << invalid_category_type;
     BOOST_THROW_EXCEPTION(invalid_enum_value(invalid_category_type));
 }
 
@@ -178,9 +184,10 @@ void domain_header::format_main(const sml::category_types ct,
 
 void domain_header::format_class(const file_view_model& vm) {
     boost::optional<view_models::class_view_model> o(vm.class_vm());
-    if (!o)
+    if (!o) {
+        BOOST_LOG_SEV(lg, error) << missing_class_view_model;
         BOOST_THROW_EXCEPTION(generation_failure(missing_class_view_model));
-
+    }
     const auto at(vm.aspect_type());
     const auto ct(vm.category_type());
     const view_models::class_view_model& cvm(*o);
@@ -188,15 +195,17 @@ void domain_header::format_class(const file_view_model& vm) {
         format_main(ct, cvm);
     else {
         using utility::exception::invalid_enum_value;
+        BOOST_LOG_SEV(lg, error) << missing_class_view_model;
         BOOST_THROW_EXCEPTION(invalid_enum_value(invalid_aspect_type));
     }
 }
 
 void domain_header::format_enumeration(const file_view_model& vm) {
     const auto o(vm.enumeration_vm());
-    if (!o)
+    if (!o) {
+        BOOST_LOG_SEV(lg, error) << missing_enumeration_view_model;
         BOOST_THROW_EXCEPTION(generation_failure(missing_enumeration_view_model));
-
+    }
     {
         const auto evm(*o);
         namespace_helper ns(stream_, evm.namespaces());
@@ -209,9 +218,10 @@ void domain_header::format_enumeration(const file_view_model& vm) {
 
 void domain_header::format_exception(const file_view_model& vm) {
     const auto o(vm.exception_vm());
-    if (!o)
+    if (!o) {
+        BOOST_LOG_SEV(lg, error) << missing_enumeration_view_model;
         BOOST_THROW_EXCEPTION(generation_failure(missing_exception_view_model));
-
+    }
     {
         const auto evm(*o);
         namespace_helper ns(stream_, evm.namespaces());

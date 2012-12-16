@@ -30,8 +30,13 @@
 #include "dogen/generator/backends/cpp/formatters/cpp_qualified_name.hpp"
 #include "dogen/generator/backends/cpp/formatters/cpp_indenter.hpp"
 #include "dogen/generator/backends/cpp/formatters/cpp_generator_implementation.hpp"
+#include "dogen/utility/log/logger.hpp"
+
+using namespace dogen::utility::log;
 
 namespace {
+
+auto lg(logger_factory("generator_implementation"));
 
 const std::string int_type("int");
 const std::string bool_type("bool");
@@ -73,8 +78,10 @@ sequence_container_helper(
     const auto container_type_name(vm.complete_name());
 
     const auto children(vm.children());
-    if (children.size() != 1)
+    if (children.size() != 1) {
+        BOOST_LOG_SEV(lg, error) << invalid_sequence_container;
         BOOST_THROW_EXCEPTION(generation_failure(invalid_sequence_container));
+    }
 
     const auto containee_vm(children.front());
     const auto containee_identifiable_type_name(
@@ -110,8 +117,10 @@ associative_container_helper(
     const nested_type_view_model& vm, unsigned int quantity) {
 
     const auto children(vm.children());
-    if (children.size() != 1 && children.size() != 2)
+    if (children.size() != 1 && children.size() != 2) {
+        BOOST_LOG_SEV(lg, error) << invalid_associative_container;
         BOOST_THROW_EXCEPTION(generation_failure(invalid_associative_container));
+    }
 
     const auto container_identifiable_type_name(vm.complete_identifiable_name());
     const auto container_type_name(vm.complete_name());
@@ -163,8 +172,10 @@ smart_pointer_helper(const nested_type_view_model& vm) {
     const auto container_type_name(vm.complete_name());
 
     const auto children(vm.children());
-    if (children.size() != 1)
+    if (children.size() != 1) {
+        BOOST_LOG_SEV(lg, error) << invalid_smart_pointer;
         BOOST_THROW_EXCEPTION(generation_failure(invalid_smart_pointer));
+    }
 
     const auto containee_vm(children.front());
     const auto containee_identifiable_type_name(
@@ -200,8 +211,10 @@ optional_helper(const nested_type_view_model& vm) {
     const auto container_type_name(vm.complete_name());
 
     const auto children(vm.children());
-    if (children.size() != 1)
+    if (children.size() != 1) {
+        BOOST_LOG_SEV(lg, error) << invalid_smart_pointer;
         BOOST_THROW_EXCEPTION(generation_failure(invalid_smart_pointer));
+    }
 
     const auto containee_vm(children.front());
     const auto containee_identifiable_type_name(
@@ -240,8 +253,10 @@ variant_helper(const nested_type_view_model& vm) {
     const auto container_type_name(vm.complete_name());
 
     const auto children(vm.children());
-    if (children.empty())
+    if (children.empty()) {
+        BOOST_LOG_SEV(lg, error) << invalid_smart_pointer;
         BOOST_THROW_EXCEPTION(generation_failure(invalid_smart_pointer));
+    }
 
     utility_.blank_line();
     stream_ << indenter_ << container_type_name
@@ -598,8 +613,10 @@ void generator_implementation::default_constructor(const class_view_model& vm) {
 
 void generator_implementation::format_class(const file_view_model& vm) {
     boost::optional<view_models::class_view_model> o(vm.class_vm());
-    if (!o)
+    if (!o) {
+        BOOST_LOG_SEV(lg, error) << missing_class_view_model;
         BOOST_THROW_EXCEPTION(generation_failure(missing_class_view_model));
+    }
 
     const class_view_model& cvm(*o);
     create_helper_methods(cvm);
@@ -625,8 +642,10 @@ void generator_implementation::format_class(const file_view_model& vm) {
 
 void generator_implementation::format_enumeration(const file_view_model& vm) {
     const auto o(vm.enumeration_vm());
-    if (!o)
+    if (!o) {
+        BOOST_LOG_SEV(lg, error) << missing_enumeration_view_model;
         BOOST_THROW_EXCEPTION(generation_failure(missing_enumeration_view_model));
+    }
 
     const auto evm(*o);
     {

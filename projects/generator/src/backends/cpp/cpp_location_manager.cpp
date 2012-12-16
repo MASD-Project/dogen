@@ -24,10 +24,11 @@
 #include "dogen/utility/exception/invalid_enum_value.hpp"
 #include "dogen/generator/backends/cpp/cpp_location_manager.hpp"
 
+using namespace dogen::utility::log;
+
 namespace {
 
-using namespace dogen::utility::log;
-static logger lg(logger_factory("location_manager"));
+auto lg(logger_factory("location_manager"));
 
 const std::string empty;
 const std::string domain_postfix;
@@ -93,6 +94,7 @@ std::string cpp_location_manager::facet_directory(cpp_facet_types facet) const {
         return settings_.test_data_facet_folder();
         break;
     default:
+        BOOST_LOG_SEV(lg, error) << invalid_facet_types;
         BOOST_THROW_EXCEPTION(invalid_enum_value(invalid_facet_types));
     }
 }
@@ -214,8 +216,10 @@ cpp_location_manager::absolute_path_to_include(const std::string& name) const {
 
 boost::filesystem::path
 cpp_location_manager::absolute_path(const std::string& name) const {
-    if (settings_.split_project())
+    if (settings_.split_project()) {
+        BOOST_LOG_SEV(lg, error) << absolute_path_with_split;
         BOOST_THROW_EXCEPTION(utility::exception::exception(absolute_path_with_split));
+    }
     return settings_.project_directory() / model_name_ / name;
 }
 

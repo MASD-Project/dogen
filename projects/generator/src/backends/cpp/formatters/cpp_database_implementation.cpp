@@ -29,8 +29,13 @@
 #include "dogen/generator/backends/cpp/formatters/cpp_qualified_name.hpp"
 #include "dogen/generator/backends/cpp/formatters/cpp_indenter.hpp"
 #include "dogen/generator/backends/cpp/formatters/cpp_database_implementation.hpp"
+#include "dogen/utility/log/logger.hpp"
+
+using namespace dogen::utility::log;
 
 namespace {
+
+auto lg(logger_factory("database_implementation"));
 
 const std::string empty;
 const std::string underscore("_");
@@ -206,17 +211,19 @@ void database_implementation::format(const file_view_model& vm) {
 
     if (vm.meta_type() == sml::meta_types::enumeration) {
         const auto o(vm.enumeration_vm());
-        if (!o)
+        if (!o) {
+            BOOST_LOG_SEV(lg, error) << missing_enumeration_view_model;
             BOOST_THROW_EXCEPTION(generation_failure(missing_enumeration_view_model));
-
+        }
         const auto evm(*o);
         stream_ << "void dummy_function_" << evm.name()
                 << "() { }" << std::endl;
     } else if (vm.meta_type() == sml::meta_types::pod) {
         boost::optional<view_models::class_view_model> o(vm.class_vm());
-        if (!o)
+        if (!o) {
+            BOOST_LOG_SEV(lg, error) << missing_class_view_model;
             BOOST_THROW_EXCEPTION(generation_failure(missing_class_view_model));
-
+        }
         const view_models::class_view_model& cvm(*o);
         anonymous_namespace(cvm);
         utility_.blank_line(2);

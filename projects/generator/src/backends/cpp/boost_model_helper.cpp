@@ -21,8 +21,13 @@
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/exception/invalid_enum_value.hpp"
 #include "dogen/generator/backends/cpp/boost_model_helper.hpp"
+#include "dogen/utility/log/logger.hpp"
+
+using namespace dogen::utility::log;
 
 namespace {
+
+auto lg(logger_factory("boost_model_helper"));
 
 const std::string model("boost");
 
@@ -86,6 +91,7 @@ std::string boost_model_helper::type(const boost_types t) const {
     case boost_types::variant: return variant_type;
     default: break;
     }
+    BOOST_LOG_SEV(lg, error) << error_message;
     BOOST_THROW_EXCEPTION(utility::exception::invalid_enum_value(error_message));
 }
 
@@ -135,6 +141,7 @@ std::string boost_model_helper::include(const boost_types type) const {
     case boost_types::apply_visitor: return apply_visitor_include;
     default: break;
     }
+    BOOST_LOG_SEV(lg, error) << error_message;
     BOOST_THROW_EXCEPTION(utility::exception::invalid_enum_value(error_message));
 }
 

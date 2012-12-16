@@ -22,8 +22,13 @@
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/exception/invalid_enum_value.hpp"
 #include "dogen/generator/backends/cpp/cpp_aspect_types.hpp"
+#include "dogen/utility/log/logger.hpp"
+
+using namespace dogen::utility::log;
 
 namespace {
+
+auto lg(logger_factory("boost_model_helper"));
 
 const std::string invalid("\"cpp_aspect_types::invalid\"");
 const std::string main("\"cpp_aspect_types::main\"");
@@ -57,6 +62,7 @@ std::ostream& operator<<(std::ostream& stream, cpp_aspect_types value) {
     default:
         break;
     }
+    BOOST_LOG_SEV(lg, error) << error_message;
     BOOST_THROW_EXCEPTION(dogen::utility::exception::invalid_enum_value(error_message));
 }
 

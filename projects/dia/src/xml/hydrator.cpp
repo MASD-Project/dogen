@@ -24,10 +24,11 @@
 #include "dogen/dia/xml/dia_xml_exception.hpp"
 #include "dogen/dia/xml/hydrator.hpp"
 
+using namespace dogen::utility::log;
+
 namespace {
 
-static dogen::utility::log::logger
-lg(dogen::utility::log::logger_factory("hydrator"));
+auto lg(dogen::utility::log::logger_factory("hydrator"));
 
 // exception messages
 const std::string unexpected_element("Unexpected element: ");
@@ -81,23 +82,25 @@ namespace dogen {
 namespace dia {
 namespace xml {
 
-using namespace dogen::utility::log;
-
 hydrator::hydrator(boost::filesystem::path file_name)
     : file_name_(file_name),
       reader_(file_name, skip_whitespace) { }
 
 void hydrator::validate_current_element(std::string name) const {
     if (reader_.name() != name ||
-        reader_.node_type() != utility::xml::node_types::element)
+        reader_.node_type() != utility::xml::node_types::element) {
+        BOOST_LOG_SEV(lg, error) << unexpected_element << reader_.name();
         BOOST_THROW_EXCEPTION(xml::exception(unexpected_element + reader_.name()));
+    }
 }
 
 void hydrator::next_element(std::string name) {
-    if (!reader_.read())
+    if (!reader_.read()) {
+        BOOST_LOG_SEV(lg, error) << unexpected_eod;
         BOOST_THROW_EXCEPTION(xml::exception(unexpected_eod));
 
     validate_current_element(name);
+    }
 }
 
 bool hydrator::is_attribute_value(std::string name) const {
@@ -120,6 +123,7 @@ void hydrator::validate_self_closing() const {
     const bool is_self_closing(reader_.is_empty());
     if (!is_self_closing) {
         using xml::exception;
+        BOOST_LOG_SEV(lg, error) << expected_self_closing << reader_.name();
         BOOST_THROW_EXCEPTION(exception(expected_self_closing + reader_.name()));
     }
 }
@@ -149,9 +153,10 @@ child_node hydrator::read_child_node() {
     child_node.parent(read_xml_string_attribute(dia_parent));
     validate_self_closing();
 
-    if (!reader_.read())
+    if (!reader_.read()) {
+        BOOST_LOG_SEV(lg, error) << unexpected_eod;
         BOOST_THROW_EXCEPTION(xml::exception(unexpected_eod));
-
+    }
     return child_node;
 }
 
@@ -216,6 +221,7 @@ composite hydrator::read_attribute_value() {
 
             if (inner_composite) {
                 using xml::exception;
+                BOOST_LOG_SEV(lg, error) << expected_one_inner_composite;
                 BOOST_THROW_EXCEPTION(exception(expected_one_inner_composite));
             }
 
@@ -227,6 +233,7 @@ composite hydrator::read_attribute_value() {
             attribute_ptr ptr(new attribute(read_attribute()));
             attributes.push_back(ptr);
         } else {
+            BOOST_LOG_SEV(lg, error) << unexpected_element;
             BOOST_THROW_EXCEPTION(xml::exception(unexpected_element));
         }
     } while (!is_end_element(dia_composite));
@@ -244,9 +251,10 @@ attribute hydrator::read_attribute() {
     BOOST_LOG_SEV(lg, debug) << "Reading attribute: " << attribute.name();
     const bool is_self_closing(reader_.is_empty());
 
-    if (!reader_.read())
+    if (!reader_.read()) {
+        BOOST_LOG_SEV(lg, error) << unexpected_eod;
         BOOST_THROW_EXCEPTION(xml::exception(unexpected_eod));
-
+    }
     if (is_self_closing)
         return attribute; // no more content to read related to this attribute
 
@@ -332,9 +340,10 @@ object hydrator::read_object() {
     BOOST_LOG_SEV(lg, debug) << "Reading object: '" << object.id()
                              << "' of type: " << object.type();
 
-    if (!reader_.read())
+    if (!reader_.read()) {
+        BOOST_LOG_SEV(lg, error) << unexpected_eod;
         BOOST_THROW_EXCEPTION(xml::exception(unexpected_eod));
-
+    }
     std::vector<attribute> attributes;
     do {
         if (is_start_element(dia_attribute))
@@ -386,9 +395,10 @@ diagram_data hydrator::read_diagram_data() {
     diagram_data diagram_data;
     BOOST_LOG_SEV(lg, debug) << "Reading diagram data.";
 
-    if (!reader_.read())
+    if (!reader_.read()) {
+        BOOST_LOG_SEV(lg, error) << unexpected_eod;
         BOOST_THROW_EXCEPTION(xml::exception(unexpected_eod));
-
+    }
     std::vector<attribute> attributes;
     do {
         attributes.push_back(read_attribute());
