@@ -153,7 +153,7 @@ class_declaration(const sml::category_types ct, const class_view_model& vm) {
         f.format(vm);
         return;
     }
-    
+
     BOOST_LOG_SEV(lg, error) << invalid_category_type;
     BOOST_THROW_EXCEPTION(invalid_enum_value(invalid_category_type));
 }

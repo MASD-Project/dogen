@@ -459,7 +459,7 @@ void hash_implementation::format_class(const file_view_model& vm) {
 }
 
 void hash_implementation::format_enumeration(const file_view_model&) {
-        BOOST_LOG_SEV(lg, error) << enumeration_view_model_not_supported;
+    BOOST_LOG_SEV(lg, error) << enumeration_view_model_not_supported;
     BOOST_THROW_EXCEPTION(generation_failure(enumeration_view_model_not_supported));
 }
 
