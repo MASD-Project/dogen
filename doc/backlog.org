@@ -11,24 +11,16 @@ This file contains all stories that haven't been assigned to a sprint.
 
 Stories that we intend to look at, at some point.
 
-*** Tidy-up the DAGs for dia objects                                  :story:
+*** Forward declaration of enumerations is incorrect                  :story:
 
-We ended up creating a series of DAGs for the dia objects due to some
-misunderstanding around cycles in directed graphs. It seems that when
-one takes into account direction, there are no cycles in a dia
-diagram. If that is indeed the case:
+When including forward declarations of enums the following error comes
+up:
 
-- move the DAG itself to Dia as it can be made without any references
-  to the outside world.
-- create a single DAG for all dia objects by ID, including all
-  relationships (inheritance, aggregation, etc).
-- make each vertex have the dia object as properties as we have now.
-- external code can create a visitor interface to the DAG to do the
-  SML conversion specific code.
-- we can create a service such as =graph_manager= in the Dia model to
-  expose the graph generation.
-- add cycle detection as per Creris.
-- add sexp support as per Creris
+: relative_position_types_fwd.hpp:31:12: error: different underlying type in enum ‘enum class creris::rating::relative_position_types’
+
+Seems like the compiler is either declaring the enumeration (rather
+than forward declaring it) or the forward declaration requires an
+underlying type.
 
 *** Move injection of system types into SML                           :story:
 
