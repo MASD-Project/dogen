@@ -33,8 +33,13 @@
 #include "dogen/sml/types/parsing_error.hpp"
 #include "dogen/sml/types/identifier_parser.hpp"
 #include "dogen/sml/types/nested_qualified_name_builder.hpp"
+#include "dogen/utility/log/logger.hpp"
+
+using namespace dogen::utility::log;
 
 namespace {
+
+auto lg(logger_factory("identifier_parser"));
 
 const char* delimiter = "::";
 const std::string error_msg("Failed to parse string: ");
@@ -158,8 +163,10 @@ parse_qualified_name(const std::string& n) {
     grammar<std::string::const_iterator> g(builder);
     const bool ok(boost::spirit::qi::parse(it, end, g));
 
-    if (!ok || it != end)
+    if (!ok || it != end) {
+        BOOST_LOG_SEV(lg, error) << error_msg << n;
         BOOST_THROW_EXCEPTION(parsing_error(error_msg + n));
+    }
 
     return builder->build();
 }

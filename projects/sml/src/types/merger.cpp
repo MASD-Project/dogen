@@ -34,12 +34,13 @@
 #include "dogen/sml/io/pod_io.hpp"
 #include "dogen/sml/io/model_io.hpp"
 #include "dogen/sml/types/merger.hpp"
+#include "dogen/utility/log/logger.hpp"
 
 using namespace dogen::utility::log;
 
 namespace {
 
-static logger lg(logger_factory("merger"));
+auto lg(logger_factory("identifier_parser"));
 
 const std::string orphan_pod("Pod's parent could not be located: ");
 const std::string undefined_type("Pod has property with undefined type: ");
@@ -67,6 +68,7 @@ void merger::resolve_parent(const pod& pod) {
             stream << orphan_pod << ". pod: "
                    << pod.name().type_name() << ". parent: "
                    << pqn.type_name();
+            BOOST_LOG_SEV(lg, error) << stream.str();
             BOOST_THROW_EXCEPTION(merging_error(stream.str()));
         }
 

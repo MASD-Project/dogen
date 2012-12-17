@@ -46,7 +46,7 @@ using namespace dogen::utility::log;
 
 namespace {
 
-static logger lg(logger_factory("formatters::factory"));
+auto lg(logger_factory("formatters::factory"));
 const std::string production_failure_msg("Formatter factory not setup for: ");
 
 using dogen::generator::backends::cpp::cpp_facet_types;
@@ -136,6 +136,7 @@ factory::result_type factory::create_registrar_formatter(
     default: {
         std::ostringstream ss;
         ss << production_failure_msg << flt;
+        BOOST_LOG_SEV(lg, error) << ss.str();
         BOOST_THROW_EXCEPTION(production_failure(ss.str()));
     } }
 }

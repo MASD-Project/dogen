@@ -45,7 +45,9 @@ errmsg_sml_to_cpp_view_model;
 
 namespace {
 
-static logger lg(logger_factory("sml_to_view_model"));
+auto lg(logger_factory("sml_to_view_model"));
+
+const std::string pod_not_found("pod not found in pod container: ");
 
 const std::string empty;
 const std::list<std::string> empty_package_path;
@@ -295,7 +297,8 @@ void sml_dfs_visitor::transform_nested_qualified_name(
         const auto i(state_->pods_.find(qn));
         if (i == state_->pods_.end()) {
             using dogen::generator::backends::cpp::view_models::transformation_error;
-            BOOST_THROW_EXCEPTION(transformation_error("pod not found in pod container: " +
+            BOOST_LOG_SEV(lg, error) << pod_not_found << qn.type_name();
+            BOOST_THROW_EXCEPTION(transformation_error(pod_not_found +
                 qn.type_name()));
         }
         const auto pt(i->second.pod_type());
@@ -357,6 +360,7 @@ void sml_dfs_visitor::process_sml_pod(const dogen::sml::pod& pod) {
             BOOST_LOG_SEV(lg, error) << parent_view_model_not_found
                                      << name.type_name();
 
+            BOOST_LOG_SEV(lg, error) << parent_view_model_not_found << name.type_name();
             BOOST_THROW_EXCEPTION(transformation_error(parent_view_model_not_found +
                 name.type_name()));
         }
@@ -551,6 +555,7 @@ transform_file(cpp_facet_types ft, cpp_file_types flt, cpp_aspect_types at,
         BOOST_LOG_SEV(lg, error) << view_model_not_found
                                  << name.type_name();
 
+        BOOST_LOG_SEV(lg, error) << view_model_not_found << name.type_name();
         BOOST_THROW_EXCEPTION(transformation_error(view_model_not_found + name.type_name()));
     }
     r.class_vm(i->second);
@@ -749,6 +754,7 @@ enabled_facet_types(const sml::meta_types mt, const sml::pod_types pt) const {
         return std::set<cpp_facet_types> { cpp_facet_types::types };
     }
 
+    BOOST_LOG_SEV(lg, error) << invalid_enabled_facets << boost::lexical_cast<std::string>(mt) << boost::lexical_cast<std::string>(pt);
     BOOST_THROW_EXCEPTION(transformation_error(invalid_enabled_facets +
             boost::lexical_cast<std::string>(mt) + ", " +
             boost::lexical_cast<std::string>(pt)));

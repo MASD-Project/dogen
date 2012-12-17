@@ -21,6 +21,15 @@
 #include <boost/lexical_cast.hpp>
 #include <boost/throw_exception.hpp>
 #include "dogen/prototype/test_data/currency_td.hpp"
+#include "dogen/utility/log/logger.hpp"
+
+using namespace dogen::utility::log;
+
+namespace {
+
+auto lg(logger_factory("identifier_parser"));
+
+}
 
 namespace dogen {
 namespace prototype {
@@ -213,6 +222,7 @@ complete_currency_generator::next_term(const unsigned int position) {
     case 177: return(currency("Zimbabwe dollar", "ZWL", 2, 932, versioned_key(932, 0)));
     default:
         // keep gcc happy
+        BOOST_LOG_SEV(lg, error) << sequence_exhausted();
         BOOST_THROW_EXCEPTION(
             dogen::utility::test_data::sequence_exhausted());
     }
@@ -234,6 +244,7 @@ majors_currency_generator::next_term(const unsigned int position) {
     case 7: return(currency("Hong Kong dollar", "HKD", 2, 344, versioned_key(344, 0)));
     default:
         // keep gcc happy
+        BOOST_LOG_SEV(lg, error) << sequence_exhausted();
         BOOST_THROW_EXCEPTION(
             dogen::utility::test_data::sequence_exhausted());
     }

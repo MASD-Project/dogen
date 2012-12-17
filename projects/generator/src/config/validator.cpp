@@ -21,8 +21,13 @@
 #include <boost/throw_exception.hpp>
 #include "dogen/generator/config/configuration_error.hpp"
 #include "dogen/generator/config/validator.hpp"
+#include "dogen/utility/log/logger.hpp"
+
+using namespace dogen::utility::log;
 
 namespace {
+
+auto lg(logger_factory("validator"));
 
 const std::string missing_target("Mandatory parameter target is missing");
 const std::string missing_source_include(
@@ -41,22 +46,32 @@ namespace generator {
 namespace config {
 
 void validator::validate(const settings& s) {
-    if (s.modeling().target().empty())
+    if (s.modeling().target().empty()) {
+        BOOST_LOG_SEV(lg, error) << missing_target;
         BOOST_THROW_EXCEPTION(configuration_error(missing_target));
+    }
 
     const auto cpp(s.cpp());
     if (cpp.split_project()) {
-        if (cpp.include_directory().empty() || cpp.source_directory().empty())
+        if (cpp.include_directory().empty() || cpp.source_directory().empty()) {
+            BOOST_LOG_SEV(lg, error) << missing_source_include;
             BOOST_THROW_EXCEPTION(configuration_error(missing_source_include));
+        }
 
-        if (!cpp.project_directory().empty())
+        if (!cpp.project_directory().empty()) {
+            BOOST_LOG_SEV(lg, error) << unexpected_project_dir;
             BOOST_THROW_EXCEPTION(configuration_error(unexpected_project_dir));
+        }
     } else {
-        if (!cpp.include_directory().empty() || !cpp.source_directory().empty())
+        if (!cpp.include_directory().empty() || !cpp.source_directory().empty()) {
+            BOOST_LOG_SEV(lg, error) << unexpected_source_include;
             BOOST_THROW_EXCEPTION(configuration_error(unexpected_source_include));
+        }
 
-        if (cpp.project_directory().empty())
+        if (cpp.project_directory().empty()) {
+            BOOST_LOG_SEV(lg, error) << missing_project_dir;
             BOOST_THROW_EXCEPTION(configuration_error(missing_project_dir));
+        }
     }
 }
 

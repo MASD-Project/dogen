@@ -45,12 +45,12 @@ typedef boost::error_info<struct tag_generator, std::string> errmsg_generator;
 
 namespace {
 
+auto lg(logger_factory("generator"));
+
 const std::string codegen_error("Error occurred during code generation: ");
 const std::string incorrect_stdout_config(
     "Configuration for output to stdout is incorrect");
 const std::string code_generation_failure("Code generation failure.");
-
-auto lg(logger_factory("generator"));
 
 }
 
@@ -60,8 +60,10 @@ namespace generator {
 generator::generator(const config::settings& s)
     : verbose_(s.troubleshooting().verbose()), settings_(s) {
 
-    if (settings_.output().output_to_stdout())
+    if (settings_.output().output_to_stdout()) {
+        BOOST_LOG_SEV(lg, error) << incorrect_stdout_config;
         BOOST_THROW_EXCEPTION(generation_failure(incorrect_stdout_config));
+    }
 
     config::validator::validate(s);
 }
@@ -70,8 +72,10 @@ generator::
 generator(const config::settings& s, const output_fn& o)
     : verbose_(s.troubleshooting().verbose()), settings_(s), output_(o) {
 
-    if (!settings_.output().output_to_stdout() || !output_)
+    if (!settings_.output().output_to_stdout() || !output_) {
+        BOOST_LOG_SEV(lg, error) << incorrect_stdout_config;
         BOOST_THROW_EXCEPTION(generation_failure(incorrect_stdout_config));
+    }
 
     config::validator::validate(s);
 }

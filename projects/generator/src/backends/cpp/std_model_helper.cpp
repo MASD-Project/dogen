@@ -21,8 +21,13 @@
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/exception/invalid_enum_value.hpp"
 #include "dogen/generator/backends/cpp/std_model_helper.hpp"
+#include "dogen/utility/log/logger.hpp"
+
+using namespace dogen::utility::log;
 
 namespace {
+
+auto lg(logger_factory("serialization_implementation"));
 
 const std::string model("std");
 
@@ -120,6 +125,7 @@ std_types std_model_helper::string_to_type(const std::string type) const {
     if (type == sstream_type) return std_types::sstream;
     if (type == stdexcept_type) return std_types::stdexcept;
     if (type == functional_type) return std_types::functional;
+    BOOST_LOG_SEV(lg, error) << error_message;
     BOOST_THROW_EXCEPTION(utility::exception::invalid_enum_value(error_message));
 }
 
@@ -151,6 +157,7 @@ std::string std_model_helper::type(const std_types t) const {
     case std_types::functional: return functional_type;
     default: break;
     }
+    BOOST_LOG_SEV(lg, error) << error_message;
     BOOST_THROW_EXCEPTION(utility::exception::invalid_enum_value(error_message));
 }
 
@@ -184,6 +191,7 @@ std::string std_model_helper::include(const std_types type) const {
     case std_types::functional: return functional_include;
     default: break;
     }
+    BOOST_LOG_SEV(lg, error) << error_message;
     BOOST_THROW_EXCEPTION(utility::exception::invalid_enum_value(error_message));
 }
 

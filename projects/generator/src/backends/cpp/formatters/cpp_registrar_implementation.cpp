@@ -25,8 +25,13 @@
 #include "dogen/generator/backends/cpp/formatters/cpp_licence.hpp"
 #include "dogen/generator/backends/cpp/formatters/cpp_includes.hpp"
 #include "dogen/generator/backends/cpp/formatters/cpp_registrar_implementation.hpp"
+#include "dogen/utility/log/logger.hpp"
+
+using namespace dogen::utility::log;
 
 namespace {
+
+auto lg(logger_factory("registrar_implementation"));
 
 const bool is_system(true);
 const bool is_user(false);
@@ -58,8 +63,10 @@ create(std::ostream& stream, const bool disable_xml_serialization) {
 
 void registrar_implementation::format(const file_view_model& vm) {
     const auto o(vm.registrar_vm());
-    if (!o)
+    if (!o) {
+        BOOST_LOG_SEV(lg, error) << expected_registrar_view_model;
         BOOST_THROW_EXCEPTION(generation_failure(expected_registrar_view_model));
+    }
 
     licence licence(stream_);
     licence.format();

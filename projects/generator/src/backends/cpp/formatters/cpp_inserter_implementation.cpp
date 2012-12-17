@@ -25,8 +25,13 @@
 #include "dogen/generator/generation_failure.hpp"
 #include "dogen/generator/backends/cpp/formatters/cpp_namespace_helper.hpp"
 #include "dogen/generator/backends/cpp/formatters/cpp_inserter_implementation.hpp"
+#include "dogen/utility/log/logger.hpp"
+
+using namespace dogen::utility::log;
 
 namespace {
+
+auto lg(logger_factory("inserter_implementation"));
 
 // FIXME: until we add support to indenter.
 const std::string special_indent("  ");
@@ -81,8 +86,10 @@ is_insertable(const nested_type_view_model& vm) {
 void cpp_inserter_implementation::
 sequence_container_helper(const nested_type_view_model& vm) {
     const auto children(vm.children());
-    if (children.size() != 1)
+    if (children.size() != 1) {
+        BOOST_LOG_SEV(lg, error) << invalid_sequence_container;
         BOOST_THROW_EXCEPTION(generation_failure(invalid_sequence_container));
+    }
 
     const auto container(vm);
     const auto containee(children.front());
@@ -131,8 +138,10 @@ sequence_container_helper(const nested_type_view_model& vm) {
 void cpp_inserter_implementation::
 associative_container_helper(const nested_type_view_model& vm) {
     const auto children(vm.children());
-    if (children.size() != 1 && children.size() != 2)
+    if (children.size() != 1 && children.size() != 2) {
+        BOOST_LOG_SEV(lg, error) << invalid_associative_container;
         BOOST_THROW_EXCEPTION(generation_failure(invalid_associative_container));
+    }
 
     if (children.size() == 1) {
         sequence_container_helper(vm);
@@ -220,8 +229,10 @@ associative_container_helper(const nested_type_view_model& vm) {
 void cpp_inserter_implementation::
 smart_pointer_helper(const nested_type_view_model& vm) {
     const auto children(vm.children());
-    if (children.size() != 1)
+    if (children.size() != 1) {
+        BOOST_LOG_SEV(lg, error) << invalid_smart_pointer;
         BOOST_THROW_EXCEPTION(generation_failure(invalid_smart_pointer));
+    }
 
     const auto container(vm);
     {
@@ -294,8 +305,10 @@ smart_pointer_helper(const nested_type_view_model& vm) {
 void cpp_inserter_implementation::
 optional_helper(const nested_type_view_model& vm) {
     const auto children(vm.children());
-    if (children.size() != 1)
+    if (children.size() != 1) {
+        BOOST_LOG_SEV(lg, error) << invalid_smart_pointer;
         BOOST_THROW_EXCEPTION(generation_failure(invalid_smart_pointer));
+    }
 
     const auto container(vm);
     {
@@ -361,8 +374,10 @@ optional_helper(const nested_type_view_model& vm) {
 void cpp_inserter_implementation::
 variant_helper(const nested_type_view_model& vm) {
     const auto children(vm.children());
-    if (children.empty())
+    if (children.empty()) {
+        BOOST_LOG_SEV(lg, error) << invalid_variant;
         BOOST_THROW_EXCEPTION(generation_failure(invalid_variant));
+    }
 
     const auto container(vm);
     {

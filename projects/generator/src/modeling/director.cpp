@@ -38,7 +38,7 @@ using namespace dogen::utility::log;
 
 namespace {
 
-static logger lg(logger_factory("director"));
+auto lg(logger_factory("director"));
 
 const std::string empty;
 const std::string merged("merged_");
@@ -77,6 +77,7 @@ extension(utility::serialization::archive_types archive_type,
     default:
         break;
     }
+    BOOST_LOG_SEV(lg, error) << invalid_archive_type;
     BOOST_THROW_EXCEPTION(dogen::utility::exception::invalid_enum_value(invalid_archive_type));
 }
 

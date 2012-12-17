@@ -28,8 +28,13 @@
 #include "dogen/generator/backends/cpp/formatters/cpp_namespace.hpp"
 #include "dogen/generator/backends/cpp/formatters/cpp_namespace_helper.hpp"
 #include "dogen/generator/backends/cpp/formatters/cpp_includes.hpp"
+#include "dogen/utility/log/logger.hpp"
+
+using namespace dogen::utility::log;
 
 namespace {
+
+auto lg(logger_factory("io_header"));
 
 const std::string iosfwd("iosfwd");
 
@@ -58,8 +63,11 @@ file_formatter::shared_ptr io_header::create(std::ostream& stream) {
 
 void io_header::format_class(const file_view_model& vm) {
     boost::optional<view_models::class_view_model> o(vm.class_vm());
-    if (!o)
+    if (!o) {
+        BOOST_LOG_SEV(lg, error) << missing_class_view_model;
         BOOST_THROW_EXCEPTION(generation_failure(missing_class_view_model));
+    }
+
     {
         const view_models::class_view_model& cvm(*o);
         namespace_helper helper1(stream_, cvm.namespaces());
@@ -84,8 +92,10 @@ void io_header::format_class(const file_view_model& vm) {
 
 void io_header::format_enumeration(const file_view_model& vm) {
     const auto o(vm.enumeration_vm());
-    if (!o)
+    if (!o) {
+        BOOST_LOG_SEV(lg, error) << missing_enumeration_view_model;
         BOOST_THROW_EXCEPTION(generation_failure(missing_enumeration_view_model));
+    }
 
     const auto evm(*o);
     {

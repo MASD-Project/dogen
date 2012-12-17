@@ -49,7 +49,7 @@
 namespace {
 
 using namespace dogen::utility::log;
-static logger lg(logger_factory("dia_to_sml"));
+auto lg(logger_factory("dia_to_sml"));
 
 const std::string error_parsing_object_type("Fail to parse object type: ");
 const std::string unsupported_object_type("Dia object type is not supported: ");
@@ -142,6 +142,7 @@ setup_data_structures(const std::vector<dia::object>& objects) {
             continue;
         }
 
+        BOOST_LOG_SEV(lg, error) << unsupported_object_type << o.id();
         BOOST_THROW_EXCEPTION(transformation_error(unsupported_object_type + o.id()));
     }
 }
