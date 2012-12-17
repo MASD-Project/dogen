@@ -184,6 +184,12 @@ elseif (APPLE)
     set(CPACK_PACKAGE_INSTALL_DIRECTORY "kitanda/${PROJECT_NAME}-${DOGEN_VERSION}")
     configure_file(${CMAKE_CURRENT_SOURCE_DIR}/Info.plist.in ${stage_dir}/tmp_pkg/macosx/Info.plist)
     configure_file(${CMAKE_CURRENT_SOURCE_DIR}/start.in ${stage_dir}/tmp_pkg/macosx/start)
+    configure_file(${CMAKE_CURRENT_SOURCE_DIR}/dogen.in
+        ${stage_dir}/scripts/dogen)
+    execute_process(COMMAND chmod +x ${stage_dir}/scripts/dogen)
+    install(PROGRAMS ${stage_dir}/scripts/dogen
+        DESTINATION bin COMPONENT applications)
+
     set(CPACK_GENERATOR "Bundle")
     set(CPACK_BUNDLE_PLIST ${stage_dir}/tmp_pkg/macosx/Info.plist)
     set(CPACK_BUNDLE_ICON ${CMAKE_CURRENT_SOURCE_DIR}/application_dogen.icns)
