@@ -11,6 +11,23 @@ This file contains all stories that haven't been assigned to a sprint.
 
 Stories that we intend to look at, at some point.
 
+*** Automatic typedef generation                                      :story:
+
+We should generate typedefs for all smart pointers, containers, etc -
+basically anything that has template arguments. This would make
+generated code much more readable and could also be used by client
+code. In theory all we need is:
+
+1. determine if the property has type arguments;
+2. if so, construct the typedef name by adding =_type= to the property
+   name, e.g. =attribute_value= becomes =attribute_value_type=, etc;
+3. create a typedef section at the top of the class declaring all
+   typedefs;
+4. add a property to the property view model containing the typedef
+   name and use it instead of the fully qualified type name.
+5. we should also generate a typedef for the key if the class is an
+   entity. See Typedef keys for each type.
+
 *** Forward declaration of enumerations is incorrect                  :story:
 
 When including forward declarations of enums the following error comes
