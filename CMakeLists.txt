@@ -260,3 +260,4 @@ add_subdirectory(${CMAKE_SOURCE_DIR}/deployment)
 add_subdirectory(${CMAKE_SOURCE_DIR}/test_data)
 add_subdirectory(${CMAKE_SOURCE_DIR}/projects)
 add_subdirectory(${CMAKE_SOURCE_DIR}/diagrams)
+
