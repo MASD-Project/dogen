@@ -10,7 +10,7 @@ This file contains all stories that were closed during sprint 22.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2012-12-13 Thu 08:05]
+Clock summary at [2012-12-17 Mon 08:05]
 
 | Headline                                                    | Time    |       |      |
 |-------------------------------------------------------------+---------+-------+------|
@@ -57,7 +57,7 @@ to format correctly.
 Treat UML realisation as we treat aggregation - that is allow it to
 exist in the diagram without doing any processing to it.
 
-*** IMPLEMENTATION Clocking of agile and build overhead               :story:
+*** COMPLETED Clocking of agile and build overhead                    :story:
     CLOSED: [2012-12-08 Sat 18:42]
 
 This story keeps track of the time spent on stand-up meetings, other
