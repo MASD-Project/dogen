@@ -12,4 +12,12 @@ This file contains all stories that were closed during sprint 23.
 #+begin: clocktable :maxlevel 3 :scope subtree
 #+end:
 
+*** COMPLETED Before throwing write exception to log file             :story:
+    CLOSED: [2012-12-17 Mon 17:15]
+
+We have cases were an exception is thrown and its impossible to figure
+out where. If we logged before throw we'd have all the context.
+
+Implemented by RP.
+
 ** Deprecated Development Stories

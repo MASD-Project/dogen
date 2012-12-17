@@ -885,11 +885,6 @@ use =boost::filesystem::path= throughout and do a =.string= at the
 very end if boost log does not support boost filesystem (or use the
 path directly if it does).
 
-*** Before throwing write exception to log file                       :story:
-
-We have cases were an exception is thrown and its impossible to figure
-out where. If we logged before throw we'd have all the context.
-
 *** Investigate generation of setters using const ref                 :story:
 
 It seems its possible to overload setters with both by value and by
