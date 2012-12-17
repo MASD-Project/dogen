@@ -17,7 +17,10 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
 # MA 02110-1301, USA.
 #
-path_to_executable = '../../../MacOS/dogen'
+require 'tmpdir'
+require 'pathname'
+
+path_to_executable = Pathname.new("../../bin/dogen").realpath
 if (!File.exist?(path_to_executable))
     puts "error: executable not found: #{path_to_executable}"
     exit 1
