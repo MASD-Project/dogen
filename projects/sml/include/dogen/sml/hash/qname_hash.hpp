@@ -18,23 +18,35 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_SML_IO_QUALIFIED_NAME_IO_HPP
-#define DOGEN_SML_IO_QUALIFIED_NAME_IO_HPP
+#ifndef DOGEN_SML_HASH_QNAME_HASH_HPP
+#define DOGEN_SML_HASH_QNAME_HASH_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <iosfwd>
-#include "dogen/sml/types/qualified_name.hpp"
+#include <functional>
+#include "dogen/sml/types/qname.hpp"
 
 namespace dogen {
 namespace sml {
 
-std::ostream&
-operator<<(std::ostream& s,
-     const dogen::sml::qualified_name& v);
+class qname_hasher {
+public:
+    static std::size_t hash(const qname& v);
+};
 
 } }
 
+namespace std {
+
+template<>
+class hash<dogen::sml::qname> {
+public:
+    size_t operator()(const dogen::sml::qname& v) const {
+        return dogen::sml::qname_hasher::hash(v);
+    }
+};
+
+}
 #endif

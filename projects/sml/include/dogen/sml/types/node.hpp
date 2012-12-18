@@ -30,7 +30,7 @@
 #include <list>
 #include "dogen/sml/serialization/node_fwd_ser.hpp"
 #include "dogen/sml/types/node.hpp"
-#include "dogen/sml/types/qualified_name.hpp"
+#include "dogen/sml/types/qname.hpp"
 
 namespace dogen {
 namespace sml {
@@ -45,7 +45,7 @@ public:
 public:
     node(
         const boost::shared_ptr<dogen::sml::node>& parent,
-        const dogen::sml::qualified_name& data,
+        const dogen::sml::qname& data,
         const std::list<boost::shared_ptr<dogen::sml::node> >& children);
 
 private:
@@ -72,19 +72,19 @@ public:
         parent_ = std::move(v);
     }
 
-    const dogen::sml::qualified_name& data() const {
+    const dogen::sml::qname& data() const {
         return data_;
     }
 
-    dogen::sml::qualified_name& data() {
+    dogen::sml::qname& data() {
         return data_;
     }
 
-    void data(const dogen::sml::qualified_name& v) {
+    void data(const dogen::sml::qname& v) {
         data_ = v;
     }
 
-    void data(const dogen::sml::qualified_name&& v) {
+    void data(const dogen::sml::qname&& v) {
         data_ = std::move(v);
     }
 
@@ -116,7 +116,7 @@ public:
 
 private:
     boost::shared_ptr<dogen::sml::node> parent_;
-    dogen::sml::qualified_name data_;
+    dogen::sml::qname data_;
     std::list<boost::shared_ptr<dogen::sml::node> > children_;
 };
 

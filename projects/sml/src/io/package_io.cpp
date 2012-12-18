@@ -21,7 +21,7 @@
 #include <boost/algorithm/string.hpp>
 #include <ostream>
 #include "dogen/sml/io/package_io.hpp"
-#include "dogen/sml/io/qualified_name_io.hpp"
+#include "dogen/sml/io/qname_io.hpp"
 
 
 inline std::string tidy_up_string(std::string s) {

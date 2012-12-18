@@ -27,7 +27,7 @@ primitive::primitive()
     : generation_type_(static_cast<dogen::sml::generation_types>(0)) { }
 
 primitive::primitive(
-    const dogen::sml::qualified_name& name,
+    const dogen::sml::qname& name,
     const dogen::sml::generation_types& generation_type,
     const std::string& documentation)
     : name_(name),

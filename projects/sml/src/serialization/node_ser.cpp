@@ -30,7 +30,7 @@
 #include <boost/serialization/nvp.hpp>
 #include <boost/serialization/shared_ptr.hpp>
 #include "dogen/sml/serialization/node_ser.hpp"
-#include "dogen/sml/serialization/qualified_name_ser.hpp"
+#include "dogen/sml/serialization/qname_ser.hpp"
 
 #ifdef __linux__
 #include "eos/portable_iarchive.hpp"

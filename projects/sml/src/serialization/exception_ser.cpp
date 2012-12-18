@@ -30,7 +30,7 @@
 #include <boost/serialization/string.hpp>
 #include "dogen/sml/serialization/exception_ser.hpp"
 #include "dogen/sml/serialization/generation_types_ser.hpp"
-#include "dogen/sml/serialization/qualified_name_ser.hpp"
+#include "dogen/sml/serialization/qname_ser.hpp"
 
 #ifdef __linux__
 #include "eos/portable_iarchive.hpp"

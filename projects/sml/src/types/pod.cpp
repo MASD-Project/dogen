@@ -44,11 +44,11 @@ pod::pod(pod&& rhs)
       number_of_type_arguments_(std::move(rhs.number_of_type_arguments_)) { }
 
 pod::pod(
-    const dogen::sml::qualified_name& name,
+    const dogen::sml::qname& name,
     const std::vector<dogen::sml::property>& properties,
-    const boost::optional<dogen::sml::qualified_name>& parent_name,
-    const boost::optional<dogen::sml::qualified_name>& original_parent_name,
-    const std::list<dogen::sml::qualified_name>& leaves,
+    const boost::optional<dogen::sml::qname>& parent_name,
+    const boost::optional<dogen::sml::qname>& original_parent_name,
+    const std::list<dogen::sml::qname>& leaves,
     const dogen::sml::generation_types& generation_type,
     const bool is_parent,
     const dogen::sml::category_types& category_type,

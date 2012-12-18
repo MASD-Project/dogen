@@ -34,7 +34,7 @@ namespace sml {
 
 node::node(
     const boost::shared_ptr<dogen::sml::node>& parent,
-    const dogen::sml::qualified_name& data,
+    const dogen::sml::qname& data,
     const std::list<boost::shared_ptr<dogen::sml::node> >& children)
     : parent_(parent),
       data_(data),

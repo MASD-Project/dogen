@@ -24,7 +24,7 @@
 #include "dogen/sml/hash/package_hash.hpp"
 #include "dogen/sml/hash/pod_hash.hpp"
 #include "dogen/sml/hash/primitive_hash.hpp"
-#include "dogen/sml/hash/qualified_name_hash.hpp"
+#include "dogen/sml/hash/qname_hash.hpp"
 #include "dogen/sml/hash/reference_hash.hpp"
 
 namespace {
@@ -36,7 +36,7 @@ inline void combine(std::size_t& seed, const HashableType& value)
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 }
 
-inline std::size_t hash_std_unordered_map_dogen_sml_qualified_name_dogen_sml_package(const std::unordered_map<dogen::sml::qualified_name, dogen::sml::package>& v){
+inline std::size_t hash_std_unordered_map_dogen_sml_qname_dogen_sml_package(const std::unordered_map<dogen::sml::qname, dogen::sml::package>& v){
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i.first);
@@ -45,7 +45,7 @@ inline std::size_t hash_std_unordered_map_dogen_sml_qualified_name_dogen_sml_pac
     return seed;
 }
 
-inline std::size_t hash_std_unordered_map_dogen_sml_qualified_name_dogen_sml_pod(const std::unordered_map<dogen::sml::qualified_name, dogen::sml::pod>& v){
+inline std::size_t hash_std_unordered_map_dogen_sml_qname_dogen_sml_pod(const std::unordered_map<dogen::sml::qname, dogen::sml::pod>& v){
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i.first);
@@ -54,7 +54,7 @@ inline std::size_t hash_std_unordered_map_dogen_sml_qualified_name_dogen_sml_pod
     return seed;
 }
 
-inline std::size_t hash_std_unordered_map_dogen_sml_qualified_name_dogen_sml_primitive(const std::unordered_map<dogen::sml::qualified_name, dogen::sml::primitive>& v){
+inline std::size_t hash_std_unordered_map_dogen_sml_qname_dogen_sml_primitive(const std::unordered_map<dogen::sml::qname, dogen::sml::primitive>& v){
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i.first);
@@ -63,7 +63,7 @@ inline std::size_t hash_std_unordered_map_dogen_sml_qualified_name_dogen_sml_pri
     return seed;
 }
 
-inline std::size_t hash_std_unordered_map_dogen_sml_qualified_name_dogen_sml_enumeration(const std::unordered_map<dogen::sml::qualified_name, dogen::sml::enumeration>& v){
+inline std::size_t hash_std_unordered_map_dogen_sml_qname_dogen_sml_enumeration(const std::unordered_map<dogen::sml::qname, dogen::sml::enumeration>& v){
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i.first);
@@ -72,7 +72,7 @@ inline std::size_t hash_std_unordered_map_dogen_sml_qualified_name_dogen_sml_enu
     return seed;
 }
 
-inline std::size_t hash_std_unordered_map_dogen_sml_qualified_name_dogen_sml_exception(const std::unordered_map<dogen::sml::qualified_name, dogen::sml::exception>& v){
+inline std::size_t hash_std_unordered_map_dogen_sml_qname_dogen_sml_exception(const std::unordered_map<dogen::sml::qname, dogen::sml::exception>& v){
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i.first);
@@ -98,7 +98,7 @@ inline std::size_t hash_std_unordered_map_std_string_dogen_sml_reference(const s
     return seed;
 }
 
-inline std::size_t hash_std_unordered_set_dogen_sml_qualified_name(const std::unordered_set<dogen::sml::qualified_name>& v){
+inline std::size_t hash_std_unordered_set_dogen_sml_qname(const std::unordered_set<dogen::sml::qname>& v){
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i);
@@ -115,16 +115,16 @@ std::size_t model_hasher::hash(const model&v) {
     std::size_t seed(0);
 
     combine(seed, v.name());
-    combine(seed, hash_std_unordered_map_dogen_sml_qualified_name_dogen_sml_package(v.packages()));
-    combine(seed, hash_std_unordered_map_dogen_sml_qualified_name_dogen_sml_pod(v.pods()));
-    combine(seed, hash_std_unordered_map_dogen_sml_qualified_name_dogen_sml_primitive(v.primitives()));
-    combine(seed, hash_std_unordered_map_dogen_sml_qualified_name_dogen_sml_enumeration(v.enumerations()));
-    combine(seed, hash_std_unordered_map_dogen_sml_qualified_name_dogen_sml_exception(v.exceptions()));
+    combine(seed, hash_std_unordered_map_dogen_sml_qname_dogen_sml_package(v.packages()));
+    combine(seed, hash_std_unordered_map_dogen_sml_qname_dogen_sml_pod(v.pods()));
+    combine(seed, hash_std_unordered_map_dogen_sml_qname_dogen_sml_primitive(v.primitives()));
+    combine(seed, hash_std_unordered_map_dogen_sml_qname_dogen_sml_enumeration(v.enumerations()));
+    combine(seed, hash_std_unordered_map_dogen_sml_qname_dogen_sml_exception(v.exceptions()));
     combine(seed, hash_std_list_std_string(v.external_package_path()));
     combine(seed, v.schema_name());
     combine(seed, v.is_system());
     combine(seed, hash_std_unordered_map_std_string_dogen_sml_reference(v.dependencies()));
-    combine(seed, hash_std_unordered_set_dogen_sml_qualified_name(v.leaves()));
+    combine(seed, hash_std_unordered_set_dogen_sml_qname(v.leaves()));
 
     return seed;
 }

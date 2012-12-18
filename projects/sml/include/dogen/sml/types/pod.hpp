@@ -35,7 +35,7 @@
 #include "dogen/sml/types/generation_types.hpp"
 #include "dogen/sml/types/pod_types.hpp"
 #include "dogen/sml/types/property.hpp"
-#include "dogen/sml/types/qualified_name.hpp"
+#include "dogen/sml/types/qname.hpp"
 
 namespace dogen {
 namespace sml {
@@ -53,11 +53,11 @@ public:
 
 public:
     pod(
-        const dogen::sml::qualified_name& name,
+        const dogen::sml::qname& name,
         const std::vector<dogen::sml::property>& properties,
-        const boost::optional<dogen::sml::qualified_name>& parent_name,
-        const boost::optional<dogen::sml::qualified_name>& original_parent_name,
-        const std::list<dogen::sml::qualified_name>& leaves,
+        const boost::optional<dogen::sml::qname>& parent_name,
+        const boost::optional<dogen::sml::qname>& original_parent_name,
+        const std::list<dogen::sml::qname>& leaves,
         const dogen::sml::generation_types& generation_type,
         const bool is_parent,
         const dogen::sml::category_types& category_type,
@@ -77,19 +77,19 @@ public:
      * @brief Qualified name for the type.
      */
     /**@{*/
-    const dogen::sml::qualified_name& name() const {
+    const dogen::sml::qname& name() const {
         return name_;
     }
 
-    dogen::sml::qualified_name& name() {
+    dogen::sml::qname& name() {
         return name_;
     }
 
-    void name(const dogen::sml::qualified_name& v) {
+    void name(const dogen::sml::qname& v) {
         name_ = v;
     }
 
-    void name(const dogen::sml::qualified_name&& v) {
+    void name(const dogen::sml::qname&& v) {
         name_ = std::move(v);
     }
     /**@}*/
@@ -119,19 +119,19 @@ public:
      * @brief Qualified name for the pod's parent, if the pod has one.
      */
     /**@{*/
-    const boost::optional<dogen::sml::qualified_name>& parent_name() const {
+    const boost::optional<dogen::sml::qname>& parent_name() const {
         return parent_name_;
     }
 
-    boost::optional<dogen::sml::qualified_name>& parent_name() {
+    boost::optional<dogen::sml::qname>& parent_name() {
         return parent_name_;
     }
 
-    void parent_name(const boost::optional<dogen::sml::qualified_name>& v) {
+    void parent_name(const boost::optional<dogen::sml::qname>& v) {
         parent_name_ = v;
     }
 
-    void parent_name(const boost::optional<dogen::sml::qualified_name>&& v) {
+    void parent_name(const boost::optional<dogen::sml::qname>&& v) {
         parent_name_ = std::move(v);
     }
     /**@}*/
@@ -140,19 +140,19 @@ public:
      * @brief Qualified name for the root of the inheritance hierarchy, if the pod is part of one.
      */
     /**@{*/
-    const boost::optional<dogen::sml::qualified_name>& original_parent_name() const {
+    const boost::optional<dogen::sml::qname>& original_parent_name() const {
         return original_parent_name_;
     }
 
-    boost::optional<dogen::sml::qualified_name>& original_parent_name() {
+    boost::optional<dogen::sml::qname>& original_parent_name() {
         return original_parent_name_;
     }
 
-    void original_parent_name(const boost::optional<dogen::sml::qualified_name>& v) {
+    void original_parent_name(const boost::optional<dogen::sml::qname>& v) {
         original_parent_name_ = v;
     }
 
-    void original_parent_name(const boost::optional<dogen::sml::qualified_name>&& v) {
+    void original_parent_name(const boost::optional<dogen::sml::qname>&& v) {
         original_parent_name_ = std::move(v);
     }
     /**@}*/
@@ -161,19 +161,19 @@ public:
      * @brief All concrete types which are indirectly or directly derived from this type.
      */
     /**@{*/
-    const std::list<dogen::sml::qualified_name>& leaves() const {
+    const std::list<dogen::sml::qname>& leaves() const {
         return leaves_;
     }
 
-    std::list<dogen::sml::qualified_name>& leaves() {
+    std::list<dogen::sml::qname>& leaves() {
         return leaves_;
     }
 
-    void leaves(const std::list<dogen::sml::qualified_name>& v) {
+    void leaves(const std::list<dogen::sml::qname>& v) {
         leaves_ = v;
     }
 
-    void leaves(const std::list<dogen::sml::qualified_name>&& v) {
+    void leaves(const std::list<dogen::sml::qname>&& v) {
         leaves_ = std::move(v);
     }
     /**@}*/
@@ -275,11 +275,11 @@ public:
     pod& operator=(pod other);
 
 private:
-    dogen::sml::qualified_name name_;
+    dogen::sml::qname name_;
     std::vector<dogen::sml::property> properties_;
-    boost::optional<dogen::sml::qualified_name> parent_name_;
-    boost::optional<dogen::sml::qualified_name> original_parent_name_;
-    std::list<dogen::sml::qualified_name> leaves_;
+    boost::optional<dogen::sml::qname> parent_name_;
+    boost::optional<dogen::sml::qname> original_parent_name_;
+    std::list<dogen::sml::qname> leaves_;
     dogen::sml::generation_types generation_type_;
     bool is_parent_;
     dogen::sml::category_types category_type_;

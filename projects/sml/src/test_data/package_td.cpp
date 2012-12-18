@@ -20,13 +20,13 @@
  */
 #include <sstream>
 #include "dogen/sml/test_data/package_td.hpp"
-#include "dogen/sml/test_data/qualified_name_td.hpp"
+#include "dogen/sml/test_data/qname_td.hpp"
 
 namespace {
 
-dogen::sml::qualified_name
-create_dogen_sml_qualified_name(const unsigned int position) {
-    return dogen::sml::qualified_name_generator::create(position);
+dogen::sml::qname
+create_dogen_sml_qname(const unsigned int position) {
+    return dogen::sml::qname_generator::create(position);
 }
 
 std::string create_std_string(const unsigned int position) {
@@ -44,7 +44,7 @@ package_generator::package_generator() : position_(0) { }
 
 void package_generator::
 populate(const unsigned int position, result_type& v) {
-    v.name(create_dogen_sml_qualified_name(position + 0));
+    v.name(create_dogen_sml_qname(position + 0));
     v.documentation(create_std_string(position + 1));
 }
 

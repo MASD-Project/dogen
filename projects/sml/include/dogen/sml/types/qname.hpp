@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_SML_TYPES_QUALIFIED_NAME_HPP
-#define DOGEN_SML_TYPES_QUALIFIED_NAME_HPP
+#ifndef DOGEN_SML_TYPES_QNAME_HPP
+#define DOGEN_SML_TYPES_QNAME_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -28,7 +28,7 @@
 #include <algorithm>
 #include <list>
 #include <string>
-#include "dogen/sml/serialization/qualified_name_fwd_ser.hpp"
+#include "dogen/sml/serialization/qname_fwd_ser.hpp"
 #include "dogen/sml/types/meta_types.hpp"
 
 namespace dogen {
@@ -37,17 +37,17 @@ namespace sml {
 /*
  * @brief Represents a "URL" to a type within SML.
  */
-class qualified_name final {
+class qname final {
 public:
-    qualified_name(const qualified_name&) = default;
-    qualified_name(qualified_name&&) = default;
-    ~qualified_name() = default;
+    qname(const qname&) = default;
+    qname(qname&&) = default;
+    ~qname() = default;
 
 public:
-    qualified_name();
+    qname();
 
 public:
-    qualified_name(
+    qname(
         const std::string& model_name,
         const std::list<std::string>& external_package_path,
         const std::list<std::string>& package_path,
@@ -56,10 +56,10 @@ public:
 
 private:
     template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const qualified_name& v, unsigned int version);
+    friend void boost::serialization::save(Archive& ar, const qname& v, unsigned int version);
 
     template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, qualified_name& v, unsigned int version);
+    friend void boost::serialization::load(Archive& ar, qname& v, unsigned int version);
 
 public:
     /*
@@ -162,14 +162,14 @@ public:
     /**@}*/
 
 public:
-    bool operator==(const qualified_name& rhs) const;
-    bool operator!=(const qualified_name& rhs) const {
+    bool operator==(const qname& rhs) const;
+    bool operator!=(const qname& rhs) const {
         return !this->operator==(rhs);
     }
 
 public:
-    void swap(qualified_name& other) noexcept;
-    qualified_name& operator=(qualified_name other);
+    void swap(qname& other) noexcept;
+    qname& operator=(qname other);
 
 private:
     std::string model_name_;
@@ -185,8 +185,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::sml::qualified_name& lhs,
-    dogen::sml::qualified_name& rhs) {
+    dogen::sml::qname& lhs,
+    dogen::sml::qname& rhs) {
     lhs.swap(rhs);
 }
 

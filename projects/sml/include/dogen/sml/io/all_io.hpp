@@ -32,5 +32,5 @@
 #include "dogen/sml/io/pod_types_io.hpp"
 #include "dogen/sml/io/primitive_io.hpp"
 #include "dogen/sml/io/property_io.hpp"
-#include "dogen/sml/io/qualified_name_io.hpp"
+#include "dogen/sml/io/qname_io.hpp"
 #include "dogen/sml/io/reference_io.hpp"

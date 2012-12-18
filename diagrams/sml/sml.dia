@@ -455,7 +455,7 @@ Leaves are types concrete types which have a parent.#</dia:string>
         <dia:real val="6"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#qualified_name#</dia:string>
+        <dia:string>#qname#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>##</dia:string>
@@ -509,19 +509,19 @@ Leaves are types concrete types which have a parent.#</dia:string>
         <dia:font family="monospace" style="0" name="Courier"/>
       </dia:attribute>
       <dia:attribute name="abstract_font">
-        <dia:font family="monospace" style="88" name="Courier-BoldOblique"/>
+        <dia:font family="monospace" style="0" name="Courier"/>
       </dia:attribute>
       <dia:attribute name="polymorphic_font">
-        <dia:font family="monospace" style="8" name="Courier-Oblique"/>
+        <dia:font family="monospace" style="0" name="Courier"/>
       </dia:attribute>
       <dia:attribute name="classname_font">
         <dia:font family="sans" style="80" name="Helvetica-Bold"/>
       </dia:attribute>
       <dia:attribute name="abstract_classname_font">
-        <dia:font family="sans" style="88" name="Helvetica-BoldOblique"/>
+        <dia:font family="sans" style="0" name="Helvetica"/>
       </dia:attribute>
       <dia:attribute name="comment_font">
-        <dia:font family="sans" style="8" name="Helvetica-Oblique"/>
+        <dia:font family="sans" style="0" name="Helvetica"/>
       </dia:attribute>
       <dia:attribute name="normal_font_height">
         <dia:real val="0.80000000000000004"/>

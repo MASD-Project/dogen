@@ -19,7 +19,7 @@
  *
  */
 #include "dogen/sml/test_data/node_td.hpp"
-#include "dogen/sml/test_data/qualified_name_td.hpp"
+#include "dogen/sml/test_data/qname_td.hpp"
 
 namespace {
 
@@ -35,9 +35,9 @@ create_boost_shared_ptr_dogen_sml_node(unsigned int position) {
     return r;
 }
 
-dogen::sml::qualified_name
-create_dogen_sml_qualified_name(const unsigned int position) {
-    return dogen::sml::qualified_name_generator::create(position);
+dogen::sml::qname
+create_dogen_sml_qname(const unsigned int position) {
+    return dogen::sml::qname_generator::create(position);
 }
 
 std::list<boost::shared_ptr<dogen::sml::node> > create_std_list_boost_shared_ptr_dogen_sml_node_(unsigned int position) {
@@ -58,7 +58,7 @@ node_generator::node_generator() : position_(0) { }
 void node_generator::
 populate(const unsigned int position, result_type& v) {
     v.parent(create_boost_shared_ptr_dogen_sml_node(position + 0));
-    v.data(create_dogen_sml_qualified_name(position + 1));
+    v.data(create_dogen_sml_qname(position + 1));
     v.children(create_std_list_boost_shared_ptr_dogen_sml_node_(position + 2));
 }
 

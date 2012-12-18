@@ -21,7 +21,7 @@
 #include "dogen/sml/hash/enumeration_hash.hpp"
 #include "dogen/sml/hash/enumerator_hash.hpp"
 #include "dogen/sml/hash/generation_types_hash.hpp"
-#include "dogen/sml/hash/qualified_name_hash.hpp"
+#include "dogen/sml/hash/qname_hash.hpp"
 
 namespace {
 

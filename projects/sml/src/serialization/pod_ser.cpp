@@ -36,7 +36,7 @@
 #include "dogen/sml/serialization/pod_ser.hpp"
 #include "dogen/sml/serialization/pod_types_ser.hpp"
 #include "dogen/sml/serialization/property_ser.hpp"
-#include "dogen/sml/serialization/qualified_name_ser.hpp"
+#include "dogen/sml/serialization/qname_ser.hpp"
 
 #ifdef __linux__
 #include "eos/portable_iarchive.hpp"

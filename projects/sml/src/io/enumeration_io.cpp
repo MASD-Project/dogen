@@ -23,7 +23,7 @@
 #include "dogen/sml/io/enumeration_io.hpp"
 #include "dogen/sml/io/enumerator_io.hpp"
 #include "dogen/sml/io/generation_types_io.hpp"
-#include "dogen/sml/io/qualified_name_io.hpp"
+#include "dogen/sml/io/qname_io.hpp"
 
 
 inline std::string tidy_up_string(std::string s) {

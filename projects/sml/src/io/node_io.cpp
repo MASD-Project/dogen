@@ -20,7 +20,7 @@
  */
 #include <ostream>
 #include "dogen/sml/io/node_io.hpp"
-#include "dogen/sml/io/qualified_name_io.hpp"
+#include "dogen/sml/io/qname_io.hpp"
 
 namespace boost {
 

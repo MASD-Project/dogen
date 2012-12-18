@@ -21,7 +21,7 @@
 #include <boost/algorithm/string.hpp>
 #include <ostream>
 #include "dogen/sml/io/meta_types_io.hpp"
-#include "dogen/sml/io/qualified_name_io.hpp"
+#include "dogen/sml/io/qname_io.hpp"
 
 
 inline std::string tidy_up_string(std::string s) {
@@ -48,9 +48,9 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<std::string>& v
 namespace dogen {
 namespace sml {
 
-std::ostream& operator<<(std::ostream& s, const qualified_name& v) {
+std::ostream& operator<<(std::ostream& s, const qname& v) {
     s << " { "
-      << "\"__type__\": " << "\"dogen::sml::qualified_name\"" << ", "
+      << "\"__type__\": " << "\"dogen::sml::qname\"" << ", "
       << "\"model_name\": " << "\"" << tidy_up_string(v.model_name()) << "\"" << ", "
       << "\"external_package_path\": " << v.external_package_path() << ", "
       << "\"package_path\": " << v.package_path() << ", "

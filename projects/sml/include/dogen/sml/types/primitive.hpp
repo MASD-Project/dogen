@@ -29,7 +29,7 @@
 #include <string>
 #include "dogen/sml/serialization/primitive_fwd_ser.hpp"
 #include "dogen/sml/types/generation_types.hpp"
-#include "dogen/sml/types/qualified_name.hpp"
+#include "dogen/sml/types/qname.hpp"
 
 namespace dogen {
 namespace sml {
@@ -48,7 +48,7 @@ public:
 
 public:
     primitive(
-        const dogen::sml::qualified_name& name,
+        const dogen::sml::qname& name,
         const dogen::sml::generation_types& generation_type,
         const std::string& documentation);
 
@@ -64,19 +64,19 @@ public:
      * @brief Qualified name for the type.
      */
     /**@{*/
-    const dogen::sml::qualified_name& name() const {
+    const dogen::sml::qname& name() const {
         return name_;
     }
 
-    dogen::sml::qualified_name& name() {
+    dogen::sml::qname& name() {
         return name_;
     }
 
-    void name(const dogen::sml::qualified_name& v) {
+    void name(const dogen::sml::qname& v) {
         name_ = v;
     }
 
-    void name(const dogen::sml::qualified_name&& v) {
+    void name(const dogen::sml::qname&& v) {
         name_ = std::move(v);
     }
     /**@}*/
@@ -126,7 +126,7 @@ public:
     primitive& operator=(primitive other);
 
 private:
-    dogen::sml::qualified_name name_;
+    dogen::sml::qname name_;
     dogen::sml::generation_types generation_type_;
     std::string documentation_;
 };

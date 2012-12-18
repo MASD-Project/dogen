@@ -24,13 +24,13 @@
 #include "dogen/sml/test_data/pod_td.hpp"
 #include "dogen/sml/test_data/pod_types_td.hpp"
 #include "dogen/sml/test_data/property_td.hpp"
-#include "dogen/sml/test_data/qualified_name_td.hpp"
+#include "dogen/sml/test_data/qname_td.hpp"
 
 namespace {
 
-dogen::sml::qualified_name
-create_dogen_sml_qualified_name(const unsigned int position) {
-    return dogen::sml::qualified_name_generator::create(position);
+dogen::sml::qname
+create_dogen_sml_qname(const unsigned int position) {
+    return dogen::sml::qname_generator::create(position);
 }
 
 dogen::sml::property
@@ -46,16 +46,16 @@ std::vector<dogen::sml::property> create_std_vector_dogen_sml_property(unsigned 
     return r;
 }
 
-boost::optional<dogen::sml::qualified_name>
-create_boost_optional_dogen_sml_qualified_name(unsigned int position) {
-    boost::optional<dogen::sml::qualified_name> r(        create_dogen_sml_qualified_name(position));
+boost::optional<dogen::sml::qname>
+create_boost_optional_dogen_sml_qname(unsigned int position) {
+    boost::optional<dogen::sml::qname> r(        create_dogen_sml_qname(position));
     return r;
 }
 
-std::list<dogen::sml::qualified_name> create_std_list_dogen_sml_qualified_name(unsigned int position) {
-    std::list<dogen::sml::qualified_name> r;
+std::list<dogen::sml::qname> create_std_list_dogen_sml_qname(unsigned int position) {
+    std::list<dogen::sml::qname> r;
     for (unsigned int i(0); i < 10; ++i) {
-        r.push_back(create_dogen_sml_qualified_name(position + i));
+        r.push_back(create_dogen_sml_qname(position + i));
     }
     return r;
 }
@@ -98,11 +98,11 @@ pod_generator::pod_generator() : position_(0) { }
 
 void pod_generator::
 populate(const unsigned int position, result_type& v) {
-    v.name(create_dogen_sml_qualified_name(position + 0));
+    v.name(create_dogen_sml_qname(position + 0));
     v.properties(create_std_vector_dogen_sml_property(position + 1));
-    v.parent_name(create_boost_optional_dogen_sml_qualified_name(position + 2));
-    v.original_parent_name(create_boost_optional_dogen_sml_qualified_name(position + 3));
-    v.leaves(create_std_list_dogen_sml_qualified_name(position + 4));
+    v.parent_name(create_boost_optional_dogen_sml_qname(position + 2));
+    v.original_parent_name(create_boost_optional_dogen_sml_qname(position + 3));
+    v.leaves(create_std_list_dogen_sml_qname(position + 4));
     v.generation_type(create_dogen_sml_generation_types(position + 5));
     v.is_parent(create_bool(position + 6));
     v.category_type(create_dogen_sml_category_types(position + 7));

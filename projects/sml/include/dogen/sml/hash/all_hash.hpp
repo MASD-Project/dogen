@@ -32,5 +32,5 @@
 #include "dogen/sml/hash/pod_types_hash.hpp"
 #include "dogen/sml/hash/primitive_hash.hpp"
 #include "dogen/sml/hash/property_hash.hpp"
-#include "dogen/sml/hash/qualified_name_hash.hpp"
+#include "dogen/sml/hash/qname_hash.hpp"
 #include "dogen/sml/hash/reference_hash.hpp"

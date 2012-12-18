@@ -35,7 +35,7 @@
 #include "dogen/sml/serialization/package_ser.hpp"
 #include "dogen/sml/serialization/pod_ser.hpp"
 #include "dogen/sml/serialization/primitive_ser.hpp"
-#include "dogen/sml/serialization/qualified_name_ser.hpp"
+#include "dogen/sml/serialization/qname_ser.hpp"
 #include "dogen/sml/serialization/reference_ser.hpp"
 #include "dogen/utility/serialization/unordered_map.hpp"
 #include "dogen/utility/serialization/unordered_set.hpp"

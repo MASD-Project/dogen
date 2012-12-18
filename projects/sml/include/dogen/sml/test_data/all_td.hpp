@@ -32,5 +32,5 @@
 #include "dogen/sml/test_data/pod_types_td.hpp"
 #include "dogen/sml/test_data/primitive_td.hpp"
 #include "dogen/sml/test_data/property_td.hpp"
-#include "dogen/sml/test_data/qualified_name_td.hpp"
+#include "dogen/sml/test_data/qname_td.hpp"
 #include "dogen/sml/test_data/reference_td.hpp"

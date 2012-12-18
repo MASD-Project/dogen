@@ -18,41 +18,36 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/sml/hash/meta_types_hash.hpp"
-#include "dogen/sml/hash/qualified_name_hash.hpp"
+#ifndef DOGEN_SML_TEST_DATA_QNAME_TD_HPP
+#define DOGEN_SML_TEST_DATA_QNAME_TD_HPP
 
-namespace {
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
-template <typename HashableType>
-inline void combine(std::size_t& seed, const HashableType& value)
-{
-    std::hash<HashableType> hasher;
-    seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
-}
-
-inline std::size_t hash_std_list_std_string(const std::list<std::string>& v){
-    std::size_t seed(0);
-    for (const auto i : v) {
-        combine(seed, i);
-    }
-    return seed;
-}
-
-}
+#include "dogen/sml/types/qname.hpp"
 
 namespace dogen {
 namespace sml {
 
-std::size_t qualified_name_hasher::hash(const qualified_name&v) {
-    std::size_t seed(0);
+class qname_generator {
+public:
+    qname_generator();
 
-    combine(seed, v.model_name());
-    combine(seed, hash_std_list_std_string(v.external_package_path()));
-    combine(seed, hash_std_list_std_string(v.package_path()));
-    combine(seed, v.type_name());
-    combine(seed, v.meta_type());
+public:
+    typedef dogen::sml::qname result_type;
 
-    return seed;
-}
+public:
+    static void populate(const unsigned int position, result_type& v);
+    static result_type create(const unsigned int position);
+    result_type operator()();
+
+private:
+    unsigned int position_;
+public:
+    static result_type* create_ptr(const unsigned int position);
+};
 
 } }
+
+#endif

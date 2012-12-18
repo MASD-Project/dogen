@@ -18,15 +18,15 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/sml/types/qualified_name.hpp"
+#include "dogen/sml/types/qname.hpp"
 
 namespace dogen {
 namespace sml {
 
-qualified_name::qualified_name()
+qname::qname()
     : meta_type_(static_cast<dogen::sml::meta_types>(0)) { }
 
-qualified_name::qualified_name(
+qname::qname(
     const std::string& model_name,
     const std::list<std::string>& external_package_path,
     const std::list<std::string>& package_path,
@@ -38,7 +38,7 @@ qualified_name::qualified_name(
       type_name_(type_name),
       meta_type_(meta_type) { }
 
-void qualified_name::swap(qualified_name& other) noexcept {
+void qname::swap(qname& other) noexcept {
     using std::swap;
     swap(model_name_, other.model_name_);
     swap(external_package_path_, other.external_package_path_);
@@ -47,7 +47,7 @@ void qualified_name::swap(qualified_name& other) noexcept {
     swap(meta_type_, other.meta_type_);
 }
 
-bool qualified_name::operator==(const qualified_name& rhs) const {
+bool qname::operator==(const qname& rhs) const {
     return model_name_ == rhs.model_name_ &&
         external_package_path_ == rhs.external_package_path_ &&
         package_path_ == rhs.package_path_ &&
@@ -55,7 +55,7 @@ bool qualified_name::operator==(const qualified_name& rhs) const {
         meta_type_ == rhs.meta_type_;
 }
 
-qualified_name& qualified_name::operator=(qualified_name other) {
+qname& qname::operator=(qname other) {
     using std::swap;
     swap(*this, other);
     return *this;

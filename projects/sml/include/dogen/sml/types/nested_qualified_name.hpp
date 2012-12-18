@@ -29,7 +29,7 @@
 #include <list>
 #include "dogen/sml/serialization/nested_qualified_name_fwd_ser.hpp"
 #include "dogen/sml/types/nested_qualified_name.hpp"
-#include "dogen/sml/types/qualified_name.hpp"
+#include "dogen/sml/types/qname.hpp"
 
 namespace dogen {
 namespace sml {
@@ -48,7 +48,7 @@ public:
 
 public:
     nested_qualified_name(
-        const dogen::sml::qualified_name& type,
+        const dogen::sml::qname& type,
         const std::list<dogen::sml::nested_qualified_name>& children,
         const bool is_pointer);
 
@@ -64,19 +64,19 @@ public:
      * @brief Top-level, containing type.
      */
     /**@{*/
-    const dogen::sml::qualified_name& type() const {
+    const dogen::sml::qname& type() const {
         return type_;
     }
 
-    dogen::sml::qualified_name& type() {
+    dogen::sml::qname& type() {
         return type_;
     }
 
-    void type(const dogen::sml::qualified_name& v) {
+    void type(const dogen::sml::qname& v) {
         type_ = v;
     }
 
-    void type(const dogen::sml::qualified_name&& v) {
+    void type(const dogen::sml::qname&& v) {
         type_ = std::move(v);
     }
     /**@}*/
@@ -126,7 +126,7 @@ public:
     nested_qualified_name& operator=(nested_qualified_name other);
 
 private:
-    dogen::sml::qualified_name type_;
+    dogen::sml::qname type_;
     std::list<dogen::sml::nested_qualified_name> children_;
     bool is_pointer_;
 };

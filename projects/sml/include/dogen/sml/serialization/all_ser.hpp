@@ -32,5 +32,5 @@
 #include "dogen/sml/serialization/pod_types_ser.hpp"
 #include "dogen/sml/serialization/primitive_ser.hpp"
 #include "dogen/sml/serialization/property_ser.hpp"
-#include "dogen/sml/serialization/qualified_name_ser.hpp"
+#include "dogen/sml/serialization/qname_ser.hpp"
 #include "dogen/sml/serialization/reference_ser.hpp"

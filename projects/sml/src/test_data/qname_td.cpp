@@ -20,7 +20,7 @@
  */
 #include <sstream>
 #include "dogen/sml/test_data/meta_types_td.hpp"
-#include "dogen/sml/test_data/qualified_name_td.hpp"
+#include "dogen/sml/test_data/qname_td.hpp"
 
 namespace {
 
@@ -48,9 +48,9 @@ create_dogen_sml_meta_types(const unsigned int position) {
 namespace dogen {
 namespace sml {
 
-qualified_name_generator::qualified_name_generator() : position_(0) { }
+qname_generator::qname_generator() : position_(0) { }
 
-void qualified_name_generator::
+void qname_generator::
 populate(const unsigned int position, result_type& v) {
     v.model_name(create_std_string(position + 0));
     v.external_package_path(create_std_list_std_string(position + 1));
@@ -59,21 +59,21 @@ populate(const unsigned int position, result_type& v) {
     v.meta_type(create_dogen_sml_meta_types(position + 4));
 }
 
-qualified_name_generator::result_type
-qualified_name_generator::create(const unsigned int position) {
-    qualified_name r;
-    qualified_name_generator::populate(position, r);
+qname_generator::result_type
+qname_generator::create(const unsigned int position) {
+    qname r;
+    qname_generator::populate(position, r);
     return r;
 }
-qualified_name_generator::result_type*
-qualified_name_generator::create_ptr(const unsigned int position) {
-    qualified_name* p = new qualified_name();
-    qualified_name_generator::populate(position, *p);
+qname_generator::result_type*
+qname_generator::create_ptr(const unsigned int position) {
+    qname* p = new qname();
+    qname_generator::populate(position, *p);
     return p;
 }
 
-qualified_name_generator::result_type
-qualified_name_generator::operator()() {
+qname_generator::result_type
+qname_generator::operator()() {
     return create(position_++);
 }
 

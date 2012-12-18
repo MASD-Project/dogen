@@ -26,7 +26,7 @@
 #include "dogen/sml/io/pod_io.hpp"
 #include "dogen/sml/io/pod_types_io.hpp"
 #include "dogen/sml/io/property_io.hpp"
-#include "dogen/sml/io/qualified_name_io.hpp"
+#include "dogen/sml/io/qname_io.hpp"
 
 namespace std {
 
@@ -44,7 +44,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::vector<dogen::sml::p
 
 namespace boost {
 
-inline std::ostream& operator<<(std::ostream& s, const boost::optional<dogen::sml::qualified_name>& v) {
+inline std::ostream& operator<<(std::ostream& s, const boost::optional<dogen::sml::qname>& v) {
     s << "{ " << "\"__type__\": " << "\"boost::optional\"" << ", ";
 
     if (v)
@@ -59,7 +59,7 @@ inline std::ostream& operator<<(std::ostream& s, const boost::optional<dogen::sm
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::sml::qualified_name>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::sml::qname>& v) {
     s << "[ ";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";

@@ -28,7 +28,7 @@
 #include <algorithm>
 #include <string>
 #include "dogen/sml/serialization/package_fwd_ser.hpp"
-#include "dogen/sml/types/qualified_name.hpp"
+#include "dogen/sml/types/qname.hpp"
 
 namespace dogen {
 namespace sml {
@@ -45,7 +45,7 @@ public:
 
 public:
     package(
-        const dogen::sml::qualified_name& name,
+        const dogen::sml::qname& name,
         const std::string& documentation);
 
 private:
@@ -60,19 +60,19 @@ public:
      * @brief Qualified name for the package.
      */
     /**@{*/
-    const dogen::sml::qualified_name& name() const {
+    const dogen::sml::qname& name() const {
         return name_;
     }
 
-    dogen::sml::qualified_name& name() {
+    dogen::sml::qname& name() {
         return name_;
     }
 
-    void name(const dogen::sml::qualified_name& v) {
+    void name(const dogen::sml::qname& v) {
         name_ = v;
     }
 
-    void name(const dogen::sml::qualified_name&& v) {
+    void name(const dogen::sml::qname&& v) {
         name_ = std::move(v);
     }
     /**@}*/
@@ -109,7 +109,7 @@ public:
     package& operator=(package other);
 
 private:
-    dogen::sml::qualified_name name_;
+    dogen::sml::qname name_;
     std::string documentation_;
 };
 

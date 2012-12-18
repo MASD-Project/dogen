@@ -19,7 +19,7 @@
  *
  */
 #include "dogen/sml/hash/nested_qualified_name_hash.hpp"
-#include "dogen/sml/hash/qualified_name_hash.hpp"
+#include "dogen/sml/hash/qname_hash.hpp"
 
 namespace {
 

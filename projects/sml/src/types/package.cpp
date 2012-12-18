@@ -24,7 +24,7 @@ namespace dogen {
 namespace sml {
 
 package::package(
-    const dogen::sml::qualified_name& name,
+    const dogen::sml::qname& name,
     const std::string& documentation)
     : name_(name),
       documentation_(documentation) { }

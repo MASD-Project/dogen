@@ -32,7 +32,7 @@
 #include "dogen/sml/serialization/enumeration_ser.hpp"
 #include "dogen/sml/serialization/enumerator_ser.hpp"
 #include "dogen/sml/serialization/generation_types_ser.hpp"
-#include "dogen/sml/serialization/qualified_name_ser.hpp"
+#include "dogen/sml/serialization/qname_ser.hpp"
 
 #ifdef __linux__
 #include "eos/portable_iarchive.hpp"

@@ -30,14 +30,14 @@
 #include <string>
 #include <unordered_map>
 #include <unordered_set>
-#include "dogen/sml/hash/qualified_name_hash.hpp"
+#include "dogen/sml/hash/qname_hash.hpp"
 #include "dogen/sml/serialization/model_fwd_ser.hpp"
 #include "dogen/sml/types/enumeration.hpp"
 #include "dogen/sml/types/exception.hpp"
 #include "dogen/sml/types/package.hpp"
 #include "dogen/sml/types/pod.hpp"
 #include "dogen/sml/types/primitive.hpp"
-#include "dogen/sml/types/qualified_name.hpp"
+#include "dogen/sml/types/qname.hpp"
 #include "dogen/sml/types/reference.hpp"
 
 namespace dogen {
@@ -58,16 +58,16 @@ public:
 public:
     model(
         const std::string& name,
-        const std::unordered_map<dogen::sml::qualified_name, dogen::sml::package>& packages,
-        const std::unordered_map<dogen::sml::qualified_name, dogen::sml::pod>& pods,
-        const std::unordered_map<dogen::sml::qualified_name, dogen::sml::primitive>& primitives,
-        const std::unordered_map<dogen::sml::qualified_name, dogen::sml::enumeration>& enumerations,
-        const std::unordered_map<dogen::sml::qualified_name, dogen::sml::exception>& exceptions,
+        const std::unordered_map<dogen::sml::qname, dogen::sml::package>& packages,
+        const std::unordered_map<dogen::sml::qname, dogen::sml::pod>& pods,
+        const std::unordered_map<dogen::sml::qname, dogen::sml::primitive>& primitives,
+        const std::unordered_map<dogen::sml::qname, dogen::sml::enumeration>& enumerations,
+        const std::unordered_map<dogen::sml::qname, dogen::sml::exception>& exceptions,
         const std::list<std::string>& external_package_path,
         const std::string& schema_name,
         const bool is_system,
         const std::unordered_map<std::string, dogen::sml::reference>& dependencies,
-        const std::unordered_set<dogen::sml::qualified_name>& leaves);
+        const std::unordered_set<dogen::sml::qname>& leaves);
 
 private:
     template<typename Archive>
@@ -105,19 +105,19 @@ public:
      * @brief Packages contained in the model.
      */
     /**@{*/
-    const std::unordered_map<dogen::sml::qualified_name, dogen::sml::package>& packages() const {
+    const std::unordered_map<dogen::sml::qname, dogen::sml::package>& packages() const {
         return packages_;
     }
 
-    std::unordered_map<dogen::sml::qualified_name, dogen::sml::package>& packages() {
+    std::unordered_map<dogen::sml::qname, dogen::sml::package>& packages() {
         return packages_;
     }
 
-    void packages(const std::unordered_map<dogen::sml::qualified_name, dogen::sml::package>& v) {
+    void packages(const std::unordered_map<dogen::sml::qname, dogen::sml::package>& v) {
         packages_ = v;
     }
 
-    void packages(const std::unordered_map<dogen::sml::qualified_name, dogen::sml::package>&& v) {
+    void packages(const std::unordered_map<dogen::sml::qname, dogen::sml::package>&& v) {
         packages_ = std::move(v);
     }
     /**@}*/
@@ -126,19 +126,19 @@ public:
      * @brief Pods contained in the model.
      */
     /**@{*/
-    const std::unordered_map<dogen::sml::qualified_name, dogen::sml::pod>& pods() const {
+    const std::unordered_map<dogen::sml::qname, dogen::sml::pod>& pods() const {
         return pods_;
     }
 
-    std::unordered_map<dogen::sml::qualified_name, dogen::sml::pod>& pods() {
+    std::unordered_map<dogen::sml::qname, dogen::sml::pod>& pods() {
         return pods_;
     }
 
-    void pods(const std::unordered_map<dogen::sml::qualified_name, dogen::sml::pod>& v) {
+    void pods(const std::unordered_map<dogen::sml::qname, dogen::sml::pod>& v) {
         pods_ = v;
     }
 
-    void pods(const std::unordered_map<dogen::sml::qualified_name, dogen::sml::pod>&& v) {
+    void pods(const std::unordered_map<dogen::sml::qname, dogen::sml::pod>&& v) {
         pods_ = std::move(v);
     }
     /**@}*/
@@ -147,19 +147,19 @@ public:
      * @brief Primitives contained in the model.
      */
     /**@{*/
-    const std::unordered_map<dogen::sml::qualified_name, dogen::sml::primitive>& primitives() const {
+    const std::unordered_map<dogen::sml::qname, dogen::sml::primitive>& primitives() const {
         return primitives_;
     }
 
-    std::unordered_map<dogen::sml::qualified_name, dogen::sml::primitive>& primitives() {
+    std::unordered_map<dogen::sml::qname, dogen::sml::primitive>& primitives() {
         return primitives_;
     }
 
-    void primitives(const std::unordered_map<dogen::sml::qualified_name, dogen::sml::primitive>& v) {
+    void primitives(const std::unordered_map<dogen::sml::qname, dogen::sml::primitive>& v) {
         primitives_ = v;
     }
 
-    void primitives(const std::unordered_map<dogen::sml::qualified_name, dogen::sml::primitive>&& v) {
+    void primitives(const std::unordered_map<dogen::sml::qname, dogen::sml::primitive>&& v) {
         primitives_ = std::move(v);
     }
     /**@}*/
@@ -168,19 +168,19 @@ public:
      * @brief Enumerations contained in the model.
      */
     /**@{*/
-    const std::unordered_map<dogen::sml::qualified_name, dogen::sml::enumeration>& enumerations() const {
+    const std::unordered_map<dogen::sml::qname, dogen::sml::enumeration>& enumerations() const {
         return enumerations_;
     }
 
-    std::unordered_map<dogen::sml::qualified_name, dogen::sml::enumeration>& enumerations() {
+    std::unordered_map<dogen::sml::qname, dogen::sml::enumeration>& enumerations() {
         return enumerations_;
     }
 
-    void enumerations(const std::unordered_map<dogen::sml::qualified_name, dogen::sml::enumeration>& v) {
+    void enumerations(const std::unordered_map<dogen::sml::qname, dogen::sml::enumeration>& v) {
         enumerations_ = v;
     }
 
-    void enumerations(const std::unordered_map<dogen::sml::qualified_name, dogen::sml::enumeration>&& v) {
+    void enumerations(const std::unordered_map<dogen::sml::qname, dogen::sml::enumeration>&& v) {
         enumerations_ = std::move(v);
     }
     /**@}*/
@@ -189,19 +189,19 @@ public:
      * @brief Exceptions contained in the model.
      */
     /**@{*/
-    const std::unordered_map<dogen::sml::qualified_name, dogen::sml::exception>& exceptions() const {
+    const std::unordered_map<dogen::sml::qname, dogen::sml::exception>& exceptions() const {
         return exceptions_;
     }
 
-    std::unordered_map<dogen::sml::qualified_name, dogen::sml::exception>& exceptions() {
+    std::unordered_map<dogen::sml::qname, dogen::sml::exception>& exceptions() {
         return exceptions_;
     }
 
-    void exceptions(const std::unordered_map<dogen::sml::qualified_name, dogen::sml::exception>& v) {
+    void exceptions(const std::unordered_map<dogen::sml::qname, dogen::sml::exception>& v) {
         exceptions_ = v;
     }
 
-    void exceptions(const std::unordered_map<dogen::sml::qualified_name, dogen::sml::exception>&& v) {
+    void exceptions(const std::unordered_map<dogen::sml::qname, dogen::sml::exception>&& v) {
         exceptions_ = std::move(v);
     }
     /**@}*/
@@ -294,19 +294,19 @@ public:
      * Leaves are types concrete types which have a parent.
      */
     /**@{*/
-    const std::unordered_set<dogen::sml::qualified_name>& leaves() const {
+    const std::unordered_set<dogen::sml::qname>& leaves() const {
         return leaves_;
     }
 
-    std::unordered_set<dogen::sml::qualified_name>& leaves() {
+    std::unordered_set<dogen::sml::qname>& leaves() {
         return leaves_;
     }
 
-    void leaves(const std::unordered_set<dogen::sml::qualified_name>& v) {
+    void leaves(const std::unordered_set<dogen::sml::qname>& v) {
         leaves_ = v;
     }
 
-    void leaves(const std::unordered_set<dogen::sml::qualified_name>&& v) {
+    void leaves(const std::unordered_set<dogen::sml::qname>&& v) {
         leaves_ = std::move(v);
     }
     /**@}*/
@@ -323,16 +323,16 @@ public:
 
 private:
     std::string name_;
-    std::unordered_map<dogen::sml::qualified_name, dogen::sml::package> packages_;
-    std::unordered_map<dogen::sml::qualified_name, dogen::sml::pod> pods_;
-    std::unordered_map<dogen::sml::qualified_name, dogen::sml::primitive> primitives_;
-    std::unordered_map<dogen::sml::qualified_name, dogen::sml::enumeration> enumerations_;
-    std::unordered_map<dogen::sml::qualified_name, dogen::sml::exception> exceptions_;
+    std::unordered_map<dogen::sml::qname, dogen::sml::package> packages_;
+    std::unordered_map<dogen::sml::qname, dogen::sml::pod> pods_;
+    std::unordered_map<dogen::sml::qname, dogen::sml::primitive> primitives_;
+    std::unordered_map<dogen::sml::qname, dogen::sml::enumeration> enumerations_;
+    std::unordered_map<dogen::sml::qname, dogen::sml::exception> exceptions_;
     std::list<std::string> external_package_path_;
     std::string schema_name_;
     bool is_system_;
     std::unordered_map<std::string, dogen::sml::reference> dependencies_;
-    std::unordered_set<dogen::sml::qualified_name> leaves_;
+    std::unordered_set<dogen::sml::qname> leaves_;
 };
 
 } }

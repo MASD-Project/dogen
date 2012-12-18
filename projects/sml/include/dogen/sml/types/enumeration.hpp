@@ -31,7 +31,7 @@
 #include "dogen/sml/serialization/enumeration_fwd_ser.hpp"
 #include "dogen/sml/types/enumerator.hpp"
 #include "dogen/sml/types/generation_types.hpp"
-#include "dogen/sml/types/qualified_name.hpp"
+#include "dogen/sml/types/qname.hpp"
 
 namespace dogen {
 namespace sml {
@@ -51,7 +51,7 @@ public:
 
 public:
     enumeration(
-        const dogen::sml::qualified_name& name,
+        const dogen::sml::qname& name,
         const dogen::sml::generation_types& generation_type,
         const std::string& documentation,
         const std::vector<dogen::sml::enumerator>& enumerators);
@@ -68,19 +68,19 @@ public:
      * @brief Qualified name for the type.
      */
     /**@{*/
-    const dogen::sml::qualified_name& name() const {
+    const dogen::sml::qname& name() const {
         return name_;
     }
 
-    dogen::sml::qualified_name& name() {
+    dogen::sml::qname& name() {
         return name_;
     }
 
-    void name(const dogen::sml::qualified_name& v) {
+    void name(const dogen::sml::qname& v) {
         name_ = v;
     }
 
-    void name(const dogen::sml::qualified_name&& v) {
+    void name(const dogen::sml::qname&& v) {
         name_ = std::move(v);
     }
     /**@}*/
@@ -151,7 +151,7 @@ public:
     enumeration& operator=(enumeration other);
 
 private:
-    dogen::sml::qualified_name name_;
+    dogen::sml::qname name_;
     dogen::sml::generation_types generation_type_;
     std::string documentation_;
     std::vector<dogen::sml::enumerator> enumerators_;

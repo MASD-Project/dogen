@@ -27,7 +27,7 @@
 #include "dogen/sml/io/package_io.hpp"
 #include "dogen/sml/io/pod_io.hpp"
 #include "dogen/sml/io/primitive_io.hpp"
-#include "dogen/sml/io/qualified_name_io.hpp"
+#include "dogen/sml/io/qname_io.hpp"
 #include "dogen/sml/io/reference_io.hpp"
 
 
@@ -40,7 +40,7 @@ inline std::string tidy_up_string(std::string s) {
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen::sml::qualified_name, dogen::sml::package>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen::sml::qname, dogen::sml::package>& v) {
     s << "[";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -58,7 +58,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen:
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen::sml::qualified_name, dogen::sml::pod>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen::sml::qname, dogen::sml::pod>& v) {
     s << "[";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -76,7 +76,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen:
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen::sml::qualified_name, dogen::sml::primitive>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen::sml::qname, dogen::sml::primitive>& v) {
     s << "[";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -94,7 +94,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen:
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen::sml::qualified_name, dogen::sml::enumeration>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen::sml::qname, dogen::sml::enumeration>& v) {
     s << "[";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -112,7 +112,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen:
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen::sml::qualified_name, dogen::sml::exception>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen::sml::qname, dogen::sml::exception>& v) {
     s << "[";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -162,7 +162,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::s
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_set<dogen::sml::qualified_name>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_set<dogen::sml::qname>& v) {
     s << "[ ";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";

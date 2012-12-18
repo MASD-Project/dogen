@@ -21,7 +21,7 @@
 #include <boost/io/ios_state.hpp>
 #include <ostream>
 #include "dogen/sml/io/nested_qualified_name_io.hpp"
-#include "dogen/sml/io/qualified_name_io.hpp"
+#include "dogen/sml/io/qname_io.hpp"
 
 namespace std {
 

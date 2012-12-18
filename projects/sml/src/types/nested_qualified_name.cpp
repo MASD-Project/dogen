@@ -27,7 +27,7 @@ nested_qualified_name::nested_qualified_name()
     : is_pointer_(static_cast<bool>(0)) { }
 
 nested_qualified_name::nested_qualified_name(
-    const dogen::sml::qualified_name& type,
+    const dogen::sml::qname& type,
     const std::list<dogen::sml::nested_qualified_name>& children,
     const bool is_pointer)
     : type_(type),

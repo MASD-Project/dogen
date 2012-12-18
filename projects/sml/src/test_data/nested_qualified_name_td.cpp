@@ -19,13 +19,13 @@
  *
  */
 #include "dogen/sml/test_data/nested_qualified_name_td.hpp"
-#include "dogen/sml/test_data/qualified_name_td.hpp"
+#include "dogen/sml/test_data/qname_td.hpp"
 
 namespace {
 
-dogen::sml::qualified_name
-create_dogen_sml_qualified_name(const unsigned int position) {
-    return dogen::sml::qualified_name_generator::create(position);
+dogen::sml::qname
+create_dogen_sml_qname(const unsigned int position) {
+    return dogen::sml::qname_generator::create(position);
 }
 
 dogen::sml::nested_qualified_name
@@ -54,7 +54,7 @@ nested_qualified_name_generator::nested_qualified_name_generator() : position_(0
 
 void nested_qualified_name_generator::
 populate(const unsigned int position, result_type& v) {
-    v.type(create_dogen_sml_qualified_name(position + 0));
+    v.type(create_dogen_sml_qname(position + 0));
     v.children(create_std_list_dogen_sml_nested_qualified_name(position + 1));
     v.is_pointer(create_bool(position + 2));
 }

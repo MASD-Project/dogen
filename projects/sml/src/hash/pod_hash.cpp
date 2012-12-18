@@ -23,7 +23,7 @@
 #include "dogen/sml/hash/pod_hash.hpp"
 #include "dogen/sml/hash/pod_types_hash.hpp"
 #include "dogen/sml/hash/property_hash.hpp"
-#include "dogen/sml/hash/qualified_name_hash.hpp"
+#include "dogen/sml/hash/qname_hash.hpp"
 
 namespace {
 
@@ -42,7 +42,7 @@ inline std::size_t hash_std_vector_dogen_sml_property(const std::vector<dogen::s
     return seed;
 }
 
-inline std::size_t hash_boost_optional_dogen_sml_qualified_name(const boost::optional<dogen::sml::qualified_name>& v){
+inline std::size_t hash_boost_optional_dogen_sml_qname(const boost::optional<dogen::sml::qname>& v){
     std::size_t seed(0);
 
     if (!v)
@@ -52,7 +52,7 @@ inline std::size_t hash_boost_optional_dogen_sml_qualified_name(const boost::opt
     return seed;
 }
 
-inline std::size_t hash_std_list_dogen_sml_qualified_name(const std::list<dogen::sml::qualified_name>& v){
+inline std::size_t hash_std_list_dogen_sml_qname(const std::list<dogen::sml::qname>& v){
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i);
@@ -70,9 +70,9 @@ std::size_t pod_hasher::hash(const pod&v) {
 
     combine(seed, v.name());
     combine(seed, hash_std_vector_dogen_sml_property(v.properties()));
-    combine(seed, hash_boost_optional_dogen_sml_qualified_name(v.parent_name()));
-    combine(seed, hash_boost_optional_dogen_sml_qualified_name(v.original_parent_name()));
-    combine(seed, hash_std_list_dogen_sml_qualified_name(v.leaves()));
+    combine(seed, hash_boost_optional_dogen_sml_qname(v.parent_name()));
+    combine(seed, hash_boost_optional_dogen_sml_qname(v.original_parent_name()));
+    combine(seed, hash_std_list_dogen_sml_qname(v.leaves()));
     combine(seed, v.generation_type());
     combine(seed, v.is_parent());
     combine(seed, v.category_type());

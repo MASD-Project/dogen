@@ -18,23 +18,22 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_SML_SERIALIZATION_QUALIFIED_NAME_FWD_SER_HPP
-#define DOGEN_SML_SERIALIZATION_QUALIFIED_NAME_FWD_SER_HPP
+#ifndef DOGEN_SML_IO_QNAME_IO_HPP
+#define DOGEN_SML_IO_QNAME_IO_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/sml/types/qualified_name_fwd.hpp"
+#include <iosfwd>
+#include "dogen/sml/types/qname.hpp"
 
-namespace boost {
-namespace serialization {
+namespace dogen {
+namespace sml {
 
-template<class Archive>
-void save(Archive& ar, const dogen::sml::qualified_name& v, unsigned int version);
-
-template<class Archive>
-void load(Archive& ar, dogen::sml::qualified_name& v, unsigned int version);
+std::ostream&
+operator<<(std::ostream& s,
+     const dogen::sml::qname& v);
 
 } }
 

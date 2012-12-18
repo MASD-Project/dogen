@@ -28,16 +28,16 @@ model::model()
 
 model::model(
     const std::string& name,
-    const std::unordered_map<dogen::sml::qualified_name, dogen::sml::package>& packages,
-    const std::unordered_map<dogen::sml::qualified_name, dogen::sml::pod>& pods,
-    const std::unordered_map<dogen::sml::qualified_name, dogen::sml::primitive>& primitives,
-    const std::unordered_map<dogen::sml::qualified_name, dogen::sml::enumeration>& enumerations,
-    const std::unordered_map<dogen::sml::qualified_name, dogen::sml::exception>& exceptions,
+    const std::unordered_map<dogen::sml::qname, dogen::sml::package>& packages,
+    const std::unordered_map<dogen::sml::qname, dogen::sml::pod>& pods,
+    const std::unordered_map<dogen::sml::qname, dogen::sml::primitive>& primitives,
+    const std::unordered_map<dogen::sml::qname, dogen::sml::enumeration>& enumerations,
+    const std::unordered_map<dogen::sml::qname, dogen::sml::exception>& exceptions,
     const std::list<std::string>& external_package_path,
     const std::string& schema_name,
     const bool is_system,
     const std::unordered_map<std::string, dogen::sml::reference>& dependencies,
-    const std::unordered_set<dogen::sml::qualified_name>& leaves)
+    const std::unordered_set<dogen::sml::qname>& leaves)
     : name_(name),
       packages_(packages),
       pods_(pods),

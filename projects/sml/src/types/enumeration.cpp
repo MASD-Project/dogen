@@ -27,7 +27,7 @@ enumeration::enumeration()
     : generation_type_(static_cast<dogen::sml::generation_types>(0)) { }
 
 enumeration::enumeration(
-    const dogen::sml::qualified_name& name,
+    const dogen::sml::qname& name,
     const dogen::sml::generation_types& generation_type,
     const std::string& documentation,
     const std::vector<dogen::sml::enumerator>& enumerators)
