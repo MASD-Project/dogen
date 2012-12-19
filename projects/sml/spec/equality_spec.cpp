@@ -54,7 +54,7 @@ BOOST_AUTO_TEST_CASE(equality_operator_behaves_correctly) {
     using namespace dogen::sml;
 
     test_equality<meta_types_generator>();
-    test_equality<qualified_name_generator>();
+    test_equality<qname_generator>();
     test_equality<property_generator>();
     test_equality<pod_generator>();
     test_equality<package_generator>();

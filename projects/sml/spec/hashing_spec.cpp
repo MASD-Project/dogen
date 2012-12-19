@@ -23,8 +23,8 @@
 #include "dogen/utility/test/logging.hpp"
 #include "dogen/sml/types/all.hpp"
 #include "dogen/sml/io/all_io.hpp"
-#include "dogen/sml/test_data/qualified_name_td.hpp"
-#include "dogen/sml/hash/qualified_name_hash.hpp"
+#include "dogen/sml/test_data/qname_td.hpp"
+#include "dogen/sml/hash/qname_hash.hpp"
 #include "dogen/sml/serialization/all_ser.hpp"
 #include "dogen/sml/test_data/all_td.hpp"
 
@@ -47,9 +47,9 @@ void test_hashing() {
 
 BOOST_AUTO_TEST_SUITE(hashing)
 
-BOOST_AUTO_TEST_CASE(validate_qualified_name_hashing) {
-    SETUP_TEST_LOG("validate_qualified_name_hashing");
-    test_hashing<dogen::sml::qualified_name_generator>();
+BOOST_AUTO_TEST_CASE(validate_qname_hashing) {
+    SETUP_TEST_LOG("validate_qname_hashing");
+    test_hashing<dogen::sml::qname_generator>();
 }
 
 BOOST_AUTO_TEST_SUITE_END()

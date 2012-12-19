@@ -27,7 +27,7 @@
 #include "dogen/utility/io/vector_io.hpp"
 #include "dogen/utility/io/list_io.hpp"
 #include "dogen/sml/io/enumeration_io.hpp"
-#include "dogen/sml/io/qualified_name_io.hpp"
+#include "dogen/sml/io/qname_io.hpp"
 #include "dogen/sml/io/nested_qualified_name_io.hpp"
 #include "dogen/sml/io/primitive_io.hpp"
 #include "dogen/sml/io/property_io.hpp"
@@ -61,7 +61,7 @@ void merger::resolve_parent(const pod& pod) {
     auto parent(pod.parent_name());
 
     while (parent) {
-        qualified_name pqn(*parent);
+        qname pqn(*parent);
         const auto i(pods.find(pqn));
         if (i == pods.end()) {
             std::ostringstream stream;
@@ -84,7 +84,7 @@ merger::resolve_partial_type(nested_qualified_name& n) const {
     n.children(children);
 
     const auto pods(merged_model_.pods());
-    qualified_name r(n.type());
+    qname r(n.type());
 
     auto lambda([&]() {
             BOOST_LOG_SEV(lg, debug) << "Resolved type " << n.type()
@@ -175,7 +175,7 @@ void merger::resolve() {
     auto pods(merged_model_.pods());
 
     for (auto i(pods.begin()); i != pods.end(); ++i) {
-        const qualified_name qualified_name(i->first);
+        const qname qname(i->first);
         pod& pod(i->second);
         if (pod.generation_type() == generation_types::no_generation)
             continue;

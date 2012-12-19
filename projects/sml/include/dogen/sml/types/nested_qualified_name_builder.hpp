@@ -29,7 +29,7 @@
 #include <string>
 #include <unordered_set>
 #include <boost/shared_ptr.hpp>
-#include "dogen/sml/types/qualified_name.hpp"
+#include "dogen/sml/types/qname.hpp"
 #include "dogen/sml/types/nested_qualified_name.hpp"
 #include "dogen/sml/types/node.hpp"
 

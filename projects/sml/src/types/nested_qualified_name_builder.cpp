@@ -66,7 +66,7 @@ void nested_qualified_name_builder::finish_current_node() {
     BOOST_LOG_SEV(lg, debug) << "finishing current node. names: "
                              << names_;
 
-    qualified_name qn(current_->data());
+    qname qn(current_->data());
     if (names_.empty())
         return;
 

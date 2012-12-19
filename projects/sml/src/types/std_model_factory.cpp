@@ -59,7 +59,7 @@ namespace dogen {
 namespace sml {
 
 primitive std_model_factory::create_primitive(const std::string& name) {
-    qualified_name q;
+    qname q;
     q.type_name(name);
     q.meta_type(meta_types::primitive);
     q.model_name(model_name);
@@ -71,7 +71,7 @@ primitive std_model_factory::create_primitive(const std::string& name) {
 
 pod std_model_factory::
 create_pod(const std::string& name, pod_types pt) {
-    qualified_name q;
+    qname q;
     q.type_name(name);
     q.meta_type(meta_types::pod);
     q.model_name(model_name);
@@ -89,8 +89,8 @@ create_pod(const std::string& name, pod_types pt) {
 
 model std_model_factory::create() {
     using namespace sml;
-    std::unordered_map<qualified_name, primitive> primitives;
-    std::unordered_map<qualified_name, pod> pods;
+    std::unordered_map<qname, primitive> primitives;
+    std::unordered_map<qname, pod> pods;
 
     const auto lambda([&](std::string name){
             primitive p(create_primitive(name));

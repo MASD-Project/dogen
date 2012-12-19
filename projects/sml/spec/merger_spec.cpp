@@ -27,7 +27,7 @@
 #include "dogen/sml/types/model.hpp"
 #include "dogen/sml/types/parsing_error.hpp"
 #include "dogen/sml/io/nested_qualified_name_io.hpp"
-#include "dogen/sml/io/qualified_name_io.hpp"
+#include "dogen/sml/io/qname_io.hpp"
 #include "dogen/sml/types/merging_error.hpp"
 #include "dogen/sml/types/identifier_parser.hpp"
 #include "dogen/sml/types/merger.hpp"
@@ -69,7 +69,7 @@ std::string property_name(unsigned int i) {
 }
 
 dogen::sml::pod mock_pod(unsigned int i, std::string model_name) {
-    dogen::sml::qualified_name qn;
+    dogen::sml::qname qn;
     qn.model_name(model_name);
     qn.type_name(type_name(i));
     qn.meta_type(dogen::sml::meta_types::pod);
@@ -96,13 +96,13 @@ BOOST_AUTO_TEST_CASE(merging_n_distinct_models_with_one_pod_each_results_in_n_po
     const unsigned int n(5);
     dogen::sml::merger mg(verbose, schema_name);
 
-    std::list<dogen::sml::qualified_name> names;
+    std::list<dogen::sml::qname> names;
     for (unsigned int i(0); i < n; ++i) {
         using namespace dogen::sml;
         pod p(mock_pod(i));
         names.push_back(p.name());
 
-        std::unordered_map<qualified_name, pod> pods { { p.name(), p } };
+        std::unordered_map<qname, pod> pods { { p.name(), p } };
         model m;
         m.name(model_name(i));
         m.pods(pods);
@@ -138,7 +138,7 @@ BOOST_AUTO_TEST_CASE(type_with_incorrect_model_name_throws) {
 
     model m;
     m.name(model_name(0));
-    std::unordered_map<qualified_name, pod> pods { { p.name(), p } };
+    std::unordered_map<qname, pod> pods { { p.name(), p } };
     m.pods(pods);
     mg.add_target(m);
 
@@ -155,7 +155,7 @@ BOOST_AUTO_TEST_CASE(type_with_inconsistent_key_value_pair_throws) {
 
     model m;
     m.name(model_name(0));
-    std::unordered_map<qualified_name, pod> pods { { p.name(), q } };
+    std::unordered_map<qname, pod> pods { { p.name(), q } };
     m.pods(pods);
     mg.add_target(m);
 
@@ -204,7 +204,7 @@ BOOST_AUTO_TEST_CASE(pod_with_property_type_in_the_same_model_results_in_success
     property p;
     p.name(property_name(0));
 
-    dogen::sml::qualified_name qn;
+    dogen::sml::qname qn;
     qn.type_name(pod1.name().type_name());
     qn.model_name(pod1.name().model_name());
 
@@ -216,7 +216,7 @@ BOOST_AUTO_TEST_CASE(pod_with_property_type_in_the_same_model_results_in_success
 
     model m;
     m.pods(
-        std::unordered_map<qualified_name, pod> {
+        std::unordered_map<qname, pod> {
             { pod0.name(), pod0 },
             { pod1.name(), pod1 }
         });
@@ -249,7 +249,7 @@ BOOST_AUTO_TEST_CASE(pod_with_property_type_in_different_model_results_in_succes
     property p;
     p.name(property_name(0));
 
-    dogen::sml::qualified_name qn;
+    dogen::sml::qname qn;
     qn.type_name(pod1.name().type_name());
     qn.model_name(pod1.name().model_name());
 
@@ -261,14 +261,14 @@ BOOST_AUTO_TEST_CASE(pod_with_property_type_in_different_model_results_in_succes
 
     model m0;
     m0.pods(
-        std::unordered_map<qualified_name, pod> {
+        std::unordered_map<qname, pod> {
             { pod0.name(), pod0 }
         });
     m0.name(model_name(0));
 
     model m1;
     m1.pods(
-        std::unordered_map<qualified_name, pod> {
+        std::unordered_map<qname, pod> {
             { pod1.name(), pod1 }
         });
     m1.name(model_name(1));
@@ -301,7 +301,7 @@ BOOST_AUTO_TEST_CASE(pod_with_missing_property_type_throws) {
     property p;
     p.name(property_name(0));
 
-    dogen::sml::qualified_name qn;
+    dogen::sml::qname qn;
     qn.type_name(pod1.name().type_name());
     qn.model_name(pod1.name().model_name());
 
@@ -313,7 +313,7 @@ BOOST_AUTO_TEST_CASE(pod_with_missing_property_type_throws) {
 
     model m0;
     m0.pods(
-        std::unordered_map<qualified_name, pod> {
+        std::unordered_map<qname, pod> {
             { pod0.name(), pod0 }
         });
     m0.name(model_name(0));
@@ -335,7 +335,7 @@ BOOST_AUTO_TEST_CASE(pod_with_parent_in_the_same_model_merges_successfully) {
 
     model m;
     m.pods(
-        std::unordered_map<qualified_name, pod> {
+        std::unordered_map<qname, pod> {
             { pod0.name(), pod0 },
             { pod1.name(), pod1 }
         });
@@ -367,14 +367,14 @@ BOOST_AUTO_TEST_CASE(pod_with_parent_in_different_models_merges_successfully) {
 
     model m0;
     m0.pods(
-        std::unordered_map<qualified_name, pod> {
+        std::unordered_map<qname, pod> {
             { pod0.name(), pod0 }
         });
     m0.name(model_name(0));
 
     model m1;
     m1.pods(
-        std::unordered_map<qualified_name, pod> {
+        std::unordered_map<qname, pod> {
             { pod1.name(), pod1 }
         });
     m1.name(model_name(1));
@@ -412,7 +412,7 @@ BOOST_AUTO_TEST_CASE(pod_with_third_degree_parent_in_same_model_merges_successfu
 
     model m;
     m.pods(
-        std::unordered_map<qualified_name, pod> {
+        std::unordered_map<qname, pod> {
             { pod0.name(), pod0 },
             { pod1.name(), pod1 },
             { pod2.name(), pod2 },
@@ -451,7 +451,7 @@ BOOST_AUTO_TEST_CASE(pod_with_third_degree_parent_missing_within_single_model_th
 
     model m;
     m.pods(
-        std::unordered_map<qualified_name, pod> {
+        std::unordered_map<qname, pod> {
             { pod0.name(), pod0 },
             { pod1.name(), pod1 },
             { pod2.name(), pod2 }
@@ -479,28 +479,28 @@ BOOST_AUTO_TEST_CASE(pod_with_third_degree_parent_in_different_models_merges_suc
 
     model m0;
     m0.pods(
-        std::unordered_map<qualified_name, pod> {
+        std::unordered_map<qname, pod> {
             { pod0.name(), pod0 }
         });
     m0.name(model_name(0));
 
     model m1;
     m1.pods(
-        std::unordered_map<qualified_name, pod> {
+        std::unordered_map<qname, pod> {
             { pod1.name(), pod1 }
         });
     m1.name(model_name(1));
 
     model m2;
     m2.pods(
-        std::unordered_map<qualified_name, pod> {
+        std::unordered_map<qname, pod> {
             { pod2.name(), pod2 }
         });
     m2.name(model_name(2));
 
     model m3;
     m3.pods(
-        std::unordered_map<qualified_name, pod> {
+        std::unordered_map<qname, pod> {
             { pod3.name(), pod3 }
         });
     m3.name(model_name(3));
@@ -538,21 +538,21 @@ BOOST_AUTO_TEST_CASE(pod_with_missing_third_degree_parent_in_different_models_th
 
     model m0;
     m0.pods(
-        std::unordered_map<qualified_name, pod> {
+        std::unordered_map<qname, pod> {
             { pod0.name(), pod0 }
         });
     m0.name(model_name(0));
 
     model m1;
     m1.pods(
-        std::unordered_map<qualified_name, pod> {
+        std::unordered_map<qname, pod> {
             { pod1.name(), pod1 }
         });
     m1.name(model_name(1));
 
     model m2;
     m2.pods(
-        std::unordered_map<qualified_name, pod> {
+        std::unordered_map<qname, pod> {
             { pod2.name(), pod2 }
         });
     m2.name(model_name(2));
@@ -572,7 +572,7 @@ BOOST_AUTO_TEST_CASE(pod_incorrect_meta_type_throws) {
     using namespace dogen::sml;
     pod p(mock_pod(0));
 
-    dogen::sml::qualified_name qn;
+    dogen::sml::qname qn;
     qn.type_name(p.name().type_name());
     qn.model_name(p.name().model_name());
     qn.meta_type(meta_types::primitive);
@@ -580,7 +580,7 @@ BOOST_AUTO_TEST_CASE(pod_incorrect_meta_type_throws) {
 
     model m;
     m.pods(
-        std::unordered_map<qualified_name, pod> {
+        std::unordered_map<qname, pod> {
             { p.name(), p }
         });
     m.name(model_name(0));
