@@ -100,7 +100,7 @@ private:
 
     cpp_location_request location_request_factory(cpp_facet_types ft,
         cpp_file_types flt, cpp_aspect_types at,
-        const sml::qualified_name& n) const;
+        const sml::qname& n) const;
 
     /**
      * @brief Generate a class view model for a given key type.
@@ -124,7 +124,7 @@ private:
      * @brief Performs the initial setup of the file view model.
      */
     file_view_model create_file(cpp_facet_types ft, cpp_file_types flt,
-        cpp_aspect_types at, const sml::qualified_name& name);
+        cpp_aspect_types at, const sml::qname& name);
 
     /**
      * @brief Transforms a SML pod into a C++ file view.
@@ -221,7 +221,7 @@ private:
     vertex_descriptor_type;
 
     // map of qname to vertex
-    typedef std::unordered_map<sml::qualified_name, vertex_descriptor_type>
+    typedef std::unordered_map<sml::qname, vertex_descriptor_type>
     qname_to_vertex_type;
 
 private:
@@ -229,10 +229,10 @@ private:
     cpp_inclusion_manager inclusion_manager_;
     const config::cpp_settings settings_;
     const sml::model model_;
-    std::unordered_map<sml::qualified_name, class_view_model> qname_to_class_;
-    std::unordered_map<sml::qualified_name, enumeration_view_model>
+    std::unordered_map<sml::qname, class_view_model> qname_to_class_;
+    std::unordered_map<sml::qname, enumeration_view_model>
     qname_to_enumeration_;
-    std::unordered_map<sml::qualified_name, exception_view_model>
+    std::unordered_map<sml::qname, exception_view_model>
     qname_to_exception_;
     graph_type graph_;
     qname_to_vertex_type qname_to_vertex_;

@@ -96,7 +96,7 @@ public:
 private:
     cpp_location_request location_request_factory(cpp_facet_types ft,
         cpp_file_types flt, cpp_aspect_types at,
-        const sml::qualified_name& name) const;
+        const sml::qname& name) const;
 
     /**
      * @brief Returns the include path to the domain header.
@@ -105,14 +105,14 @@ private:
      * domain header.
      */
     std::string
-    domain_header_dependency(const sml::qualified_name& name,
+    domain_header_dependency(const sml::qname& name,
         const cpp_aspect_types at) const;
 
     /**
      * @brief Returns the include path to the header file, for the
      * given facet.
      */
-    std::string header_dependency(const sml::qualified_name& name,
+    std::string header_dependency(const sml::qname& name,
         cpp_facet_types ft, const cpp_aspect_types at) const;
 
 public:
@@ -136,18 +136,18 @@ public:
      * so state saving is required.
      */
     bool requires_stream_manipulators(
-        const std::list<dogen::sml::qualified_name>& names) const;
+        const std::list<dogen::sml::qname>& names) const;
 
     /**
      * @brief Returns true if there is a std::string in the type list.
      */
     bool has_std_string(
-        const std::list<dogen::sml::qualified_name>& names) const;
+        const std::list<dogen::sml::qname>& names) const;
 
     /**
      * @brief Returns true if there is a boost::variant in the type list.
      */
-    bool has_variant(const std::list<dogen::sml::qualified_name>& names) const;
+    bool has_variant(const std::list<dogen::sml::qname>& names) const;
 
     /**
      * @brief Returns true if the pod is in a inheritance
@@ -161,14 +161,14 @@ public:
     void remove_duplicates(inclusion_lists& il) const;
 
 private:
-    void recurse_nested_qnames_keys(const dogen::sml::nested_qualified_name&
-        nested_qname, std::list<dogen::sml::qualified_name>& keys) const;
+    void recurse_nested_qualified_names_keys(const dogen::sml::nested_qualified_name&
+        nested_qualified_name, std::list<dogen::sml::qname>& keys) const;
 
-    std::list<dogen::sml::qualified_name>
+    std::list<dogen::sml::qname>
     pod_to_keys(const sml::pod& pod) const;
 
-    void recurse_nested_qnames(const dogen::sml::nested_qualified_name&
-        nested_qname, std::list<dogen::sml::qualified_name>& qnames) const;
+    void recurse_nested_qualified_names(const dogen::sml::nested_qualified_name&
+        nested_qualified_name, std::list<dogen::sml::qname>& qnames) const;
 
     /**
      * @brief Flattens the given pod into a list containing all
@@ -177,7 +177,7 @@ private:
      * The qualified names list includes all types used by the
      * properties of the pod, as well as its parent, if any.
      */
-    std::list<dogen::sml::qualified_name>
+    std::list<dogen::sml::qname>
     pod_to_qualified_names(const sml::pod& pod) const;
 
     /**
@@ -207,7 +207,7 @@ private:
      */
     void append_boost_dependencies(
         const cpp_facet_types ft, const cpp_file_types flt,
-        const dogen::sml::qualified_name& qname,
+        const dogen::sml::qname& qname,
         inclusion_lists& il) const;
 
     /**
@@ -216,7 +216,7 @@ private:
      */
     void append_std_dependencies(
         const cpp_facet_types ft, const cpp_file_types flt,
-        const dogen::sml::qualified_name& qname,
+        const dogen::sml::qname& qname,
         inclusion_lists& il) const;
 
     /**
@@ -228,9 +228,9 @@ private:
      * of the type and all types of all properties it may have.
      */
     void append_relationship_dependencies(
-        const std::list<dogen::sml::qualified_name>& names,
-        const std::list<dogen::sml::qualified_name>& keys,
-        const std::list<dogen::sml::qualified_name>& leaves,
+        const std::list<dogen::sml::qname>& names,
+        const std::list<dogen::sml::qname>& keys,
+        const std::list<dogen::sml::qname>& leaves,
         const cpp_facet_types ft, const cpp_file_types flt,
         const bool is_parent_or_child, inclusion_lists& il) const;
 
@@ -241,7 +241,7 @@ private:
      * For instance, this is the case of the implementation file
      * including the header file.
      */
-    void append_self_dependencies(dogen::sml::qualified_name name,
+    void append_self_dependencies(dogen::sml::qname name,
         const cpp_facet_types ft, const cpp_file_types flt,
         const cpp_aspect_types at, const sml::meta_types mt,
         inclusion_lists& il) const;

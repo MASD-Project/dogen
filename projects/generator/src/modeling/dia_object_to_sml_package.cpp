@@ -138,7 +138,7 @@ private:
      *
      * @param attribute Name Dia attribute.
      */
-    dogen::sml::qualified_name
+    dogen::sml::qname
     transform_qualified_name(const dogen::dia::attribute& attribute,
         dogen::sml::meta_types meta_type) const;
 
@@ -194,7 +194,7 @@ transform_string_attribute(const dogen::dia::attribute& a) const {
     }
 }
 
-dogen::sml::qualified_name dia_dfs_visitor::
+dogen::sml::qname dia_dfs_visitor::
 transform_qualified_name(const dogen::dia::attribute& a,
     dogen::sml::meta_types meta_type) const {
     if (a.name() != dia_name) {
@@ -202,7 +202,7 @@ transform_qualified_name(const dogen::dia::attribute& a,
         BOOST_THROW_EXCEPTION(transformation_error(name_attribute_expected));
     }
 
-    dogen::sml::qualified_name name;
+    dogen::sml::qname name;
     name.model_name(state_->model_name_);
     name.meta_type(meta_type);
     name.external_package_path(state_->external_package_path_);

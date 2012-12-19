@@ -156,7 +156,7 @@ sml::model dia_to_sml::transform() {
     packages_ = package_transformer_.transform();
 
     std::unordered_set<std::string> deps;
-    std::unordered_set<dogen::sml::qualified_name> leaves;
+    std::unordered_set<dogen::sml::qname> leaves;
     const auto pods(pod_transformer_.transform(packages_, deps, leaves));
 
     std::unordered_map<std::string, sml::reference> dependencies;
@@ -169,12 +169,12 @@ sml::model dia_to_sml::transform() {
     const auto enumerations(enumeration_transformer_.transform(packages_));
     const auto exceptions(exception_transformer_.transform(packages_));
 
-    std::unordered_map<sml::qualified_name, sml::package>
+    std::unordered_map<sml::qname, sml::package>
         packages;
     for (const auto p : packages_)
         packages.insert(std::make_pair(p.second.name(), p.second));
 
-    std::unordered_map<sml::qualified_name, sml::primitive> primitives;
+    std::unordered_map<sml::qname, sml::primitive> primitives;
 
     const bool is_system(false);
     using sml::model;

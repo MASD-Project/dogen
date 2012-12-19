@@ -30,7 +30,7 @@
 #include <unordered_set>
 #include <boost/graph/adjacency_list.hpp>
 #include "dogen/dia/domain/object.hpp"
-#include "dogen/sml/types/qualified_name.hpp"
+#include "dogen/sml/types/qname.hpp"
 #include "dogen/sml/types/package.hpp"
 #include "dogen/sml/types/pod.hpp"
 
@@ -60,10 +60,10 @@ public:
     bool is_processable(const dia::object& o) const;
     void add_object(const dia::object& o);
 
-    std::unordered_map<sml::qualified_name, sml::pod>
+    std::unordered_map<sml::qname, sml::pod>
     transform(std::unordered_map<std::string, sml::package> packages,
         std::unordered_set<std::string>& dependencies,
-        std::unordered_set<dogen::sml::qualified_name>& leaves);
+        std::unordered_set<dogen::sml::qname>& leaves);
 
 private:
     // graph of dependencies

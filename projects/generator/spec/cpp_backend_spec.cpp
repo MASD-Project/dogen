@@ -66,7 +66,7 @@ const boost::filesystem::path include_dir("include directory");
 
 dogen::sml::pod
 mock_pod(const std::string& type_name, const std::string& model_name) {
-    dogen::sml::qualified_name qn;
+    dogen::sml::qname qn;
     qn.model_name(model_name);
     qn.type_name(type_name);
     qn.meta_type(dogen::sml::meta_types::pod);
@@ -85,7 +85,7 @@ dogen::sml::model pod_with_parent_model() {
     auto c(mock_pod(pod_child_name, pod_with_parent_model_name));
     c.parent_name(p.name());
 
-    const std::unordered_map<dogen::sml::qualified_name, dogen::sml::pod> pods {
+    const std::unordered_map<dogen::sml::qname, dogen::sml::pod> pods {
         { p.name(), p }, { c.name(), c }
     };
     dogen::sml::model r;

@@ -135,7 +135,7 @@ save_model(const sml::model& m, const std::string& prefix) const {
 
 sml::pod director::
 create_key_system_pod(const sml::pod& p, const bool is_versioned) const {
-    sml::qualified_name qn;
+    sml::qname qn;
     qn.type_name(p.name().type_name() + "_" +
         (is_versioned ? versioned_name : unversioned_name));
     qn.model_name(p.name().model_name());
@@ -154,7 +154,7 @@ create_key_system_pod(const sml::pod& p, const bool is_versioned) const {
 
     auto props(r.properties());
 
-    sml::qualified_name uint_qn;
+    sml::qname uint_qn;
     uint_qn.type_name(uint_name);
     uint_qn.meta_type(sml::meta_types::primitive);
 
@@ -193,7 +193,7 @@ void director::inject_system_types(sml::model& m) const {
     if (old_pods.empty())
         return;
 
-    std::unordered_map<sml::qualified_name, sml::pod> new_pods;
+    std::unordered_map<sml::qname, sml::pod> new_pods;
     const bool is_versioned(true);
     for (auto i(std::begin(old_pods)); i != std::end(old_pods); ++i) {
         auto pod(i->second);

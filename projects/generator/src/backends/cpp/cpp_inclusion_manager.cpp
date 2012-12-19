@@ -71,7 +71,7 @@ cpp_inclusion_manager::cpp_inclusion_manager(const sml::model& model,
 
 cpp_location_request cpp_inclusion_manager::
 location_request_factory(cpp_facet_types ft, cpp_file_types flt,
-    cpp_aspect_types at, const sml::qualified_name& name) const {
+    cpp_aspect_types at, const sml::qname& name) const {
 
     cpp_location_request r;
     r.facet_type(ft);
@@ -90,7 +90,7 @@ void cpp_inclusion_manager::register_header(cpp_facet_types ft,
 }
 
 std::string cpp_inclusion_manager::
-domain_header_dependency(const sml::qualified_name& name,
+domain_header_dependency(const sml::qname& name,
     const cpp_aspect_types at) const {
     const auto d(cpp_facet_types::types);
     const auto h(cpp_file_types::header);
@@ -99,7 +99,7 @@ domain_header_dependency(const sml::qualified_name& name,
 }
 
 std::string cpp_inclusion_manager::header_dependency(
-    const sml::qualified_name& name, cpp_facet_types facet_type,
+    const sml::qname& name, cpp_facet_types facet_type,
     const cpp_aspect_types at) const {
     const auto h(cpp_file_types::header);
     const auto main(at);
@@ -108,51 +108,51 @@ std::string cpp_inclusion_manager::header_dependency(
 }
 
 void cpp_inclusion_manager::
-recurse_nested_qnames_keys(const dogen::sml::nested_qualified_name& nested_qname,
-    std::list<dogen::sml::qualified_name>& keys) const {
+recurse_nested_qualified_names_keys(const dogen::sml::nested_qualified_name& nested_qualified_name,
+    std::list<dogen::sml::qname>& keys) const {
 
-    if (nested_qname.type().meta_type() == sml::meta_types::pod) {
+    if (nested_qualified_name.type().meta_type() == sml::meta_types::pod) {
         const auto pods(model_.pods());
-        const auto i(pods.find(nested_qname.type()));
+        const auto i(pods.find(nested_qualified_name.type()));
         const auto ac(sml::pod_types::associative_container);
         if (i != pods.end() && i->second.pod_type() == ac) {
-            if (nested_qname.children().size() >= 1)
-                keys.push_back(nested_qname.children().front().type());
+            if (nested_qualified_name.children().size() >= 1)
+                keys.push_back(nested_qualified_name.children().front().type());
         } else {
-            for (const auto nqn : nested_qname.children())
-                recurse_nested_qnames_keys(nqn, keys);
+            for (const auto nqn : nested_qualified_name.children())
+                recurse_nested_qualified_names_keys(nqn, keys);
         }
     }
 }
 
-std::list<dogen::sml::qualified_name>
+std::list<dogen::sml::qname>
 cpp_inclusion_manager::pod_to_keys(const sml::pod& pod) const {
-    std::list<dogen::sml::qualified_name> r;
+    std::list<dogen::sml::qname> r;
 
     for (const auto p : pod.properties())
-        recurse_nested_qnames_keys(p.type_name(), r);
+        recurse_nested_qualified_names_keys(p.type_name(), r);
 
     return r;
 }
 
 void cpp_inclusion_manager::
-recurse_nested_qnames(const dogen::sml::nested_qualified_name& nested_qname,
-    std::list<dogen::sml::qualified_name>& qnames) const {
+recurse_nested_qualified_names(const dogen::sml::nested_qualified_name& nested_qualified_name,
+    std::list<dogen::sml::qname>& qnames) const {
 
-    qnames.push_back(nested_qname.type());
-    for (const auto nqn : nested_qname.children())
-        recurse_nested_qnames(nqn, qnames);
+    qnames.push_back(nested_qualified_name.type());
+    for (const auto nqn : nested_qualified_name.children())
+        recurse_nested_qualified_names(nqn, qnames);
 }
 
-std::list<dogen::sml::qualified_name>
+std::list<dogen::sml::qname>
 cpp_inclusion_manager::pod_to_qualified_names(const sml::pod& pod) const {
-    std::list<dogen::sml::qualified_name> r;
+    std::list<dogen::sml::qname> r;
 
     if (pod.parent_name())
         r.push_back(*pod.parent_name());
 
     for (const auto p : pod.properties())
-        recurse_nested_qnames(p.type_name(), r);
+        recurse_nested_qualified_names(p.type_name(), r);
 
     return r;
 }
@@ -248,7 +248,7 @@ append_implementation_dependencies(const sml::pod& p,
 
 void cpp_inclusion_manager::append_boost_dependencies(
     const cpp_facet_types ft, const cpp_file_types flt,
-    const dogen::sml::qualified_name& qname,
+    const dogen::sml::qname& qname,
     inclusion_lists& il) const {
 
     /*
@@ -291,7 +291,7 @@ void cpp_inclusion_manager::append_boost_dependencies(
 
 void cpp_inclusion_manager::append_std_dependencies(
     const cpp_facet_types ft, const cpp_file_types flt,
-    const dogen::sml::qualified_name& qname,
+    const dogen::sml::qname& qname,
     inclusion_lists& il) const {
 
     /*
@@ -392,9 +392,9 @@ void cpp_inclusion_manager::append_std_dependencies(
 }
 
 void cpp_inclusion_manager::append_relationship_dependencies(
-    const std::list<dogen::sml::qualified_name>& names,
-    const std::list<dogen::sml::qualified_name>& keys,
-    const std::list<dogen::sml::qualified_name>& leaves,
+    const std::list<dogen::sml::qname>& names,
+    const std::list<dogen::sml::qname>& keys,
+    const std::list<dogen::sml::qname>& leaves,
     const cpp_facet_types ft, const cpp_file_types flt,
     const bool is_parent_or_child, inclusion_lists& il) const {
 
@@ -494,7 +494,7 @@ void cpp_inclusion_manager::append_relationship_dependencies(
 }
 
 void cpp_inclusion_manager::
-append_self_dependencies(dogen::sml::qualified_name name,
+append_self_dependencies(dogen::sml::qname name,
     const cpp_facet_types ft, const cpp_file_types flt,
     const cpp_aspect_types at, const sml::meta_types mt,
     inclusion_lists& il) const {
@@ -538,8 +538,8 @@ append_self_dependencies(dogen::sml::qualified_name name,
 }
 
 bool cpp_inclusion_manager::requires_stream_manipulators(
-    const std::list<dogen::sml::qualified_name>& names) const {
-    using dogen::sml::qualified_name;
+    const std::list<dogen::sml::qname>& names) const {
+    using dogen::sml::qname;
     for (const auto n : names) {
         if (n.type_name() == bool_type || n.type_name() == double_type ||
             n.type_name() == float_type)
@@ -549,8 +549,8 @@ bool cpp_inclusion_manager::requires_stream_manipulators(
 }
 
 bool cpp_inclusion_manager::
-has_std_string(const std::list<dogen::sml::qualified_name>& names) const {
-    using dogen::sml::qualified_name;
+has_std_string(const std::list<dogen::sml::qname>& names) const {
+    using dogen::sml::qname;
     for (const auto n : names) {
         if (n.type_name() == std_.type(std_types::string))
             return true;
@@ -559,8 +559,8 @@ has_std_string(const std::list<dogen::sml::qualified_name>& names) const {
 }
 
 bool cpp_inclusion_manager::
-has_variant(const std::list<dogen::sml::qualified_name>& names) const {
-    using dogen::sml::qualified_name;
+has_variant(const std::list<dogen::sml::qname>& names) const {
+    using dogen::sml::qname;
     for (const auto n : names) {
         if (n.type_name() == boost_.type(boost_types::variant))
             return true;
@@ -662,7 +662,7 @@ includes_for_registrar(cpp_file_types flt) const {
         if (ref.is_system())
             continue;
 
-        sml::qualified_name n;
+        sml::qname n;
         n.model_name(ref.model_name());
         n.type_name("registrar");
         n.external_package_path(ref.external_package_path());

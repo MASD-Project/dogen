@@ -29,7 +29,7 @@
 #include <boost/throw_exception.hpp>
 #include "dogen/sml/io/meta_types_io.hpp"
 #include "dogen/sml/io/pod_types_io.hpp"
-#include "dogen/sml/io/qualified_name_io.hpp"
+#include "dogen/sml/io/qname_io.hpp"
 #include "dogen/sml/types/nested_qualified_name.hpp"
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/io/list_io.hpp"
@@ -142,7 +142,7 @@ bool is_int_like(const std::string& type_name) {
  * @brief Flattens all the SML namespace information stored in
  * qualified name into a list of strings with C++ namespaces.
  */
-std::list<std::string> join_namespaces(const dogen::sml::qualified_name& name) {
+std::list<std::string> join_namespaces(const dogen::sml::qname& name) {
     std::list<std::string> result(name.external_package_path());
 
     if (!name.model_name().empty())
@@ -157,7 +157,7 @@ std::list<std::string> join_namespaces(const dogen::sml::qualified_name& name) {
  * @brief Returns the identifier to be used for this name on a
  * database context.
  */
-std::string database_name(const dogen::sml::qualified_name& name) {
+std::string database_name(const dogen::sml::qname& name) {
     std::ostringstream stream;
 
     if (!name.model_name().empty())
@@ -174,10 +174,10 @@ std::string database_name(const dogen::sml::qualified_name& name) {
 class sml_dfs_visitor : public boost::default_dfs_visitor {
 private:
     typedef std::unordered_map<
-    dogen::sml::qualified_name,
+    dogen::sml::qname,
     dogen::generator::backends::cpp::view_models::class_view_model>
     qname_to_class_view_model_type;
-    typedef std::unordered_map<dogen::sml::qualified_name, dogen::sml::pod>
+    typedef std::unordered_map<dogen::sml::qname, dogen::sml::pod>
     pod_map_type;
 
     struct visit_state {
@@ -343,7 +343,7 @@ void sml_dfs_visitor::transform_nested_qualified_name(
 }
 
 void sml_dfs_visitor::process_sml_pod(const dogen::sml::pod& pod) {
-    const dogen::sml::qualified_name name(pod.name());
+    const dogen::sml::qname name(pod.name());
     const std::list<std::string> ns(join_namespaces(name));
 
     using namespace dogen::generator::backends::cpp::view_models;
@@ -501,7 +501,7 @@ to_header_guard_name(const boost::filesystem::path& relative_path) const {
 
 cpp_location_request sml_to_cpp_view_model::
 location_request_factory(cpp_facet_types ft, cpp_file_types flt,
-    cpp_aspect_types at, const sml::qualified_name& n) const {
+    cpp_aspect_types at, const sml::qname& n) const {
 
     cpp_location_request r;
     r.facet_type(ft);
@@ -516,7 +516,7 @@ location_request_factory(cpp_facet_types ft, cpp_file_types flt,
 
 file_view_model sml_to_cpp_view_model::
 create_file(cpp_facet_types ft, cpp_file_types flt, cpp_aspect_types at,
-    const sml::qualified_name& name) {
+    const sml::qname& name) {
     file_view_model r;
     r.facet_type(ft);
     r.file_type(flt);
@@ -539,7 +539,7 @@ create_file(cpp_facet_types ft, cpp_file_types flt, cpp_aspect_types at,
 file_view_model sml_to_cpp_view_model::
 transform_file(cpp_facet_types ft, cpp_file_types flt, cpp_aspect_types at,
     const sml::pod& p) {
-    const sml::qualified_name name(p.name());
+    const sml::qname name(p.name());
     const std::list<std::string> ns(join_namespaces(name));
 
     file_view_model r(create_file(ft, flt, at, name));
@@ -569,7 +569,7 @@ transform_file(cpp_facet_types ft, cpp_file_types flt, cpp_aspect_types at,
 file_view_model sml_to_cpp_view_model::
 transform_file(cpp_facet_types ft, cpp_file_types flt, cpp_aspect_types at,
     const sml::enumeration& e) {
-    const sml::qualified_name name(e.name());
+    const sml::qname name(e.name());
     const std::list<std::string> ns(join_namespaces(name));
 
     file_view_model r(create_file(ft, flt, at, name));
@@ -595,7 +595,7 @@ transform_file(cpp_facet_types ft, cpp_file_types flt, cpp_aspect_types at,
 file_view_model sml_to_cpp_view_model::
 transform_file(cpp_facet_types ft, cpp_file_types flt, cpp_aspect_types at,
     const sml::exception& e) {
-    const sml::qualified_name name(e.name());
+    const sml::qname name(e.name());
     const std::list<std::string> ns(join_namespaces(name));
 
     file_view_model r(create_file(ft, flt, at, name));
@@ -663,7 +663,7 @@ void sml_to_cpp_view_model::create_class_view_models() {
     const auto pods(model_.pods());
     BOOST_LOG_SEV(lg, debug) << "Transforming pods: " << pods.size();
 
-    auto lambda([&](const sml::qualified_name& n) -> vertex_descriptor_type {
+    auto lambda([&](const sml::qname& n) -> vertex_descriptor_type {
             const auto i(qname_to_vertex_.find(n));
             if (i != qname_to_vertex_.end())
                 return i->second;
@@ -698,7 +698,7 @@ void sml_to_cpp_view_model::create_enumeration_view_models() {
 
     for (const auto pair : enumerations) {
         const auto e(pair.second);
-        const dogen::sml::qualified_name name(e.name());
+        const dogen::sml::qname name(e.name());
         const std::list<std::string> ns(join_namespaces(name));
 
         enumeration_view_model vm;
@@ -727,7 +727,7 @@ void sml_to_cpp_view_model::create_exception_view_models() {
 
     for (const auto pair : exceptions) {
         const auto e(pair.second);
-        const dogen::sml::qualified_name name(e.name());
+        const dogen::sml::qname name(e.name());
         const std::list<std::string> ns(join_namespaces(name));
 
         exception_view_model vm;
@@ -889,7 +889,7 @@ sml_to_cpp_view_model::transform_facet_includers() const {
     const auto at(cpp_aspect_types::includers);
 
     for (cpp_facet_types ft : settings_.enabled_facets()) {
-        sml::qualified_name qn;
+        sml::qname qn;
         const auto n(includer_name);
         log_generating_file(ft, at, file_type, n, sml::meta_types::invalid);
         qn.type_name(n);
@@ -926,7 +926,7 @@ sml_to_cpp_view_model::transform_registrar() const {
 
     BOOST_LOG_SEV(lg, debug) << "Transforming serialisaton registrar";
 
-    sml::qualified_name qn;
+    sml::qname qn;
     qn.model_name(model_.name());
     qn.external_package_path(model_.external_package_path());
 

@@ -147,7 +147,7 @@ namespace dogen {
 namespace generator {
 namespace modeling {
 
-dogen::sml::qualified_name dia_object_to_sml_enumeration::
+dogen::sml::qname dia_object_to_sml_enumeration::
 transform_qualified_name(const dogen::dia::attribute& a,
     dogen::sml::meta_types meta_type, const std::string& pkg_id) const {
     if (a.name() != dia_name) {
@@ -155,7 +155,7 @@ transform_qualified_name(const dogen::dia::attribute& a,
         BOOST_THROW_EXCEPTION(transformation_error(name_attribute_expected));
     }
 
-    dogen::sml::qualified_name name;
+    dogen::sml::qname name;
     name.model_name(model_name_);
     name.meta_type(meta_type);
     name.external_package_path(external_package_path_);
@@ -321,11 +321,11 @@ transform_enumeration(const dia::object& o) const {
     return r;
 }
 
-std::unordered_map<sml::qualified_name, sml::enumeration>
+std::unordered_map<sml::qname, sml::enumeration>
 dia_object_to_sml_enumeration::
 transform(std::unordered_map<std::string, sml::package> packages) {
     packages_ = packages;
-    std::unordered_map<sml::qualified_name, sml::enumeration> r;
+    std::unordered_map<sml::qname, sml::enumeration> r;
     for (const auto o : objects_) {
         auto e(transform_enumeration(o));
         r.insert(std::make_pair(e.name(), e));

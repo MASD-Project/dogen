@@ -33,7 +33,7 @@
 #include <boost/algorithm/string/trim.hpp>
 #include <boost/algorithm/string/erase.hpp>
 #include <boost/graph/depth_first_search.hpp>
-#include "dogen/sml/hash/qualified_name_hash.hpp"
+#include "dogen/sml/hash/qname_hash.hpp"
 #include "dogen/dia/utility/dia_utility.hpp"
 #include "dogen/dia/domain/composite.hpp"
 #include "dogen/dia/domain/attribute.hpp"
@@ -131,7 +131,7 @@ private:
               parser_(top_level_packages, external_package_path, model_name) { }
 
         const std::string model_name_;
-        std::unordered_map<dogen::sml::qualified_name, dogen::sml::pod> pods_;
+        std::unordered_map<dogen::sml::qname, dogen::sml::pod> pods_;
         const std::list<std::string> external_package_path_;
         const bool verbose_;
         const bool is_target_;
@@ -139,12 +139,12 @@ private:
         const std::unordered_set<std::string> parent_ids_;
         const std::unordered_map<std::string, dogen::sml::package>
         packages_by_id_;
-        std::unordered_map<std::string, dogen::sml::qualified_name>
+        std::unordered_map<std::string, dogen::sml::qname>
         dia_id_to_qname_;
-        std::unordered_map<dogen::sml::qualified_name,
-                           dogen::sml::qualified_name> original_parent_;
-        std::unordered_map<dogen::sml::qualified_name,
-                           std::list<dogen::sml::qualified_name> > leaves_;
+        std::unordered_map<dogen::sml::qname,
+                           dogen::sml::qname> original_parent_;
+        std::unordered_map<dogen::sml::qname,
+                           std::list<dogen::sml::qname> > leaves_;
         std::unordered_set<std::string> dependencies_;
         dogen::sml::identifier_parser parser_;
     };
@@ -181,13 +181,13 @@ public:
     }
 
 public:
-    std::unordered_map<dogen::sml::qualified_name, dogen::sml::pod>
+    std::unordered_map<dogen::sml::qname, dogen::sml::pod>
     pods() const {
         return state_->pods_;
     }
 
-    std::unordered_map<dogen::sml::qualified_name,
-                       std::list<dogen::sml::qualified_name> >
+    std::unordered_map<dogen::sml::qname,
+                       std::list<dogen::sml::qname> >
     leaves() const {
         return state_->leaves_;
     }
@@ -232,7 +232,7 @@ private:
      *
      * @param attribute Name Dia attribute.
      */
-    dogen::sml::qualified_name
+    dogen::sml::qname
     transform_qualified_name(const dogen::dia::attribute& attribute,
         dogen::sml::meta_types meta_type, const std::string& pkg_id) const;
 
@@ -304,7 +304,7 @@ void dia_dfs_visitor::model_dependencies_for_nested_qualified_name(
         model_dependencies_for_nested_qualified_name(c);
 }
 
-dogen::sml::qualified_name dia_dfs_visitor::
+dogen::sml::qname dia_dfs_visitor::
 transform_qualified_name(const dogen::dia::attribute& a,
     dogen::sml::meta_types meta_type, const std::string& pkg_id) const {
     if (a.name() != dia_name) {
@@ -312,7 +312,7 @@ transform_qualified_name(const dogen::dia::attribute& a,
         BOOST_THROW_EXCEPTION(transformation_error(name_attribute_expected));
     }
 
-    dogen::sml::qualified_name name;
+    dogen::sml::qname name;
     name.model_name(state_->model_name_);
     name.meta_type(meta_type);
     name.external_package_path(state_->external_package_path_);
@@ -495,7 +495,7 @@ void dia_dfs_visitor::process_dia_object(const dogen::dia::object& o) {
         while (parent) {
             auto k(state_->leaves_.find(*parent));
             if (k == state_->leaves_.end()) {
-                std::list<dogen::sml::qualified_name> l { pod.name() };
+                std::list<dogen::sml::qname> l { pod.name() };
                 state_->leaves_.insert(std::make_pair(*parent, l));
             } else {
                 k->second.push_back(pod.name());
@@ -657,11 +657,11 @@ void dia_object_to_sml_pod::add_object(const dia::object& o) {
     orphans_.insert(std::make_pair(o.id(), vertex));
 }
 
-std::unordered_map<sml::qualified_name, sml::pod>
+std::unordered_map<sml::qname, sml::pod>
 dia_object_to_sml_pod::
 transform(std::unordered_map<std::string, sml::package> packages,
     std::unordered_set<std::string>& dependencies,
-    std::unordered_set<dogen::sml::qualified_name>& leaves) {
+    std::unordered_set<dogen::sml::qname>& leaves) {
     BOOST_LOG_SEV(lg, info) << "Transforming pods for diagram: " << model_name_;
     setup_graph();
     dia_dfs_visitor v(model_name_, external_package_path_, verbose_, is_target_,

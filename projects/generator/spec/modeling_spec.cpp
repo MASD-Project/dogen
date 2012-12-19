@@ -32,7 +32,7 @@
 #include "dogen/generator/modeling/dia_to_sml.hpp"
 #include "dogen/sml/types/model.hpp"
 #include "dogen/sml/io/model_io.hpp"
-#include "dogen/sml/io/qualified_name_io.hpp"
+#include "dogen/sml/io/qname_io.hpp"
 #include "dogen/dia/serialization/diagram_ser.hpp"
 #include "dogen/sml/serialization/model_ser.hpp"
 #include "dogen/utility/test/exception_checkers.hpp"

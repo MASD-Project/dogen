@@ -89,7 +89,7 @@ dogen::generator::config::cpp_settings mock_settings() {
 
 dogen::sml::pod
 mock_pod(const std::string& type_name, const std::string& model_name) {
-    dogen::sml::qualified_name qn;
+    dogen::sml::qname qn;
     qn.model_name(model_name);
     qn.type_name(type_name);
     qn.meta_type(dogen::sml::meta_types::pod);
@@ -102,7 +102,7 @@ mock_pod(const std::string& type_name, const std::string& model_name) {
 
 dogen::sml::model one_pod_model() {
     const auto p(mock_pod(pod_name, one_pod_model_name));
-    const std::unordered_map<dogen::sml::qualified_name, dogen::sml::pod> pods {
+    const std::unordered_map<dogen::sml::qname, dogen::sml::pod> pods {
         { p.name(), p }
     };
     dogen::sml::model r;
