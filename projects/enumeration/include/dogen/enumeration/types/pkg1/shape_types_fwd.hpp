@@ -29,8 +29,7 @@ namespace dogen {
 namespace enumeration {
 namespace pkg1 {
 
-enum class shape_types;
-
+enum class shape_types : unsigned int;
 } } }
 
 #endif

@@ -28,8 +28,7 @@
 namespace dogen {
 namespace enumeration {
 
-enum class colour_types;
-
+enum class colour_types : unsigned int;
 } }
 
 #endif

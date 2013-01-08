@@ -28,8 +28,7 @@
 namespace dogen {
 namespace enumeration {
 
-enum class book_types;
-
+enum class book_types : unsigned int;
 } }
 
 #endif

@@ -137,7 +137,8 @@ void forward_declarations_header::format_enumeration(const file_view_model& vm) 
         namespace_helper nsh(stream_, evm.namespaces());
         utility_.blank_line();
 
-        stream_ << indenter_ << "enum class " << evm.name() << ";" << std::endl;
+        stream_ << indenter_ << "enum class " << evm.name()
+                << " : unsigned int;";
         utility_.blank_line();
     }
     utility_.blank_line(2);

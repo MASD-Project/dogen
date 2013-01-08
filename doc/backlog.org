@@ -44,24 +44,6 @@ code. In theory all we need is:
 5. we should also generate a typedef for the key if the class is an
    entity. See Typedef keys for each type.
 
-*** Forward declaration of enumerations is incorrect                  :story:
-
-When including forward declarations of enums the following error comes
-up:
-
-: relative_position_types_fwd.hpp:31:12: error: different underlying type in enum ‘enum class creris::rating::relative_position_types’
-
-Seems like the compiler is either declaring the enumeration (rather
-than forward declaring it) or the forward declaration requires an
-underlying type.
-
-MC: According to wikipedia, the default type of a C++-11 enumeration
-is =int=:
-
-http://en.wikipedia.org/wiki/C%2B%2B11#Strongly_typed_enumerations
-
-We need to specify the type when we forward declare.
-
 *** Move injection of system types into SML                           :story:
 
 At present the director is responsible for injecting all system types
