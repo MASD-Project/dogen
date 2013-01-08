@@ -54,21 +54,11 @@ private:
     friend void boost::serialization::load(Archive& ar, first_class& v, unsigned int version);
 
 public:
-    int public_attribute() const {
-        return public_attribute_;
-    }
+    int public_attribute() const;
+    void public_attribute(const int v);
 
-    void public_attribute(const int v) {
-        public_attribute_ = v;
-    }
-
-    int private_attribute() const {
-        return private_attribute_;
-    }
-
-    void private_attribute(const int v) {
-        private_attribute_ = v;
-    }
+    int private_attribute() const;
+    void private_attribute(const int v);
 
 public:
     bool operator==(const first_class& rhs) const;

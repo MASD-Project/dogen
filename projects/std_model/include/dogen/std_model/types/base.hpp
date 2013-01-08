@@ -56,21 +56,11 @@ public:
     virtual void to_stream(std::ostream& s) const;
 
 public:
-    const std::vector<std::string>& prop_0() const {
-        return prop_0_;
-    }
+    const std::vector<std::string>& prop_0() const;
+    std::vector<std::string>& prop_0();
+    void prop_0(const std::vector<std::string>& v);
 
-    std::vector<std::string>& prop_0() {
-        return prop_0_;
-    }
-
-    void prop_0(const std::vector<std::string>& v) {
-        prop_0_ = v;
-    }
-
-    void prop_0(const std::vector<std::string>&& v) {
-        prop_0_ = std::move(v);
-    }
+    void prop_0(const std::vector<std::string>&& v);
 
 protected:
     bool compare(const base& rhs) const;

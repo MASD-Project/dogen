@@ -66,4 +66,20 @@ bool base::compare(const base& rhs) const {
     return prop_0_ == rhs.prop_0_;
 }
 
+const std::vector<std::string>& base::prop_0() const {
+    return prop_0_;
+}
+
+std::vector<std::string>& base::prop_0() {
+    return prop_0_;
+}
+
+void base::prop_0(const std::vector<std::string>& v) {
+    prop_0_ = v;
+}
+
+void base::prop_0(const std::vector<std::string>&& v) {
+    prop_0_ = std::move(v);
+}
+
 } }

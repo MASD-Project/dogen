@@ -50,6 +50,7 @@ void cpp_domain_class_implementation::format(const class_view_model& vm) {
     equals_method(vm);
     equals_operator(vm);
     assignment_operator(vm);
+    getters_and_setters(vm);
 }
 
 } } } } }

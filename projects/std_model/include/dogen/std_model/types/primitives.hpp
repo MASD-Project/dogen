@@ -60,69 +60,29 @@ private:
     friend void boost::serialization::load(Archive& ar, primitives& v, unsigned int version);
 
 public:
-    std::int8_t prop_0() const {
-        return prop_0_;
-    }
+    std::int8_t prop_0() const;
+    void prop_0(const std::int8_t v);
 
-    void prop_0(const std::int8_t v) {
-        prop_0_ = v;
-    }
+    std::int16_t prop_1() const;
+    void prop_1(const std::int16_t v);
 
-    std::int16_t prop_1() const {
-        return prop_1_;
-    }
+    std::int32_t prop_2() const;
+    void prop_2(const std::int32_t v);
 
-    void prop_1(const std::int16_t v) {
-        prop_1_ = v;
-    }
+    std::int64_t prop_3() const;
+    void prop_3(const std::int64_t v);
 
-    std::int32_t prop_2() const {
-        return prop_2_;
-    }
+    std::uint8_t prop_4() const;
+    void prop_4(const std::uint8_t v);
 
-    void prop_2(const std::int32_t v) {
-        prop_2_ = v;
-    }
+    std::uint16_t prop_5() const;
+    void prop_5(const std::uint16_t v);
 
-    std::int64_t prop_3() const {
-        return prop_3_;
-    }
+    std::uint32_t prop_6() const;
+    void prop_6(const std::uint32_t v);
 
-    void prop_3(const std::int64_t v) {
-        prop_3_ = v;
-    }
-
-    std::uint8_t prop_4() const {
-        return prop_4_;
-    }
-
-    void prop_4(const std::uint8_t v) {
-        prop_4_ = v;
-    }
-
-    std::uint16_t prop_5() const {
-        return prop_5_;
-    }
-
-    void prop_5(const std::uint16_t v) {
-        prop_5_ = v;
-    }
-
-    std::uint32_t prop_6() const {
-        return prop_6_;
-    }
-
-    void prop_6(const std::uint32_t v) {
-        prop_6_ = v;
-    }
-
-    std::uint64_t prop_7() const {
-        return prop_7_;
-    }
-
-    void prop_7(const std::uint64_t v) {
-        prop_7_ = v;
-    }
+    std::uint64_t prop_7() const;
+    void prop_7(const std::uint64_t v);
 
 public:
     bool operator==(const primitives& rhs) const;

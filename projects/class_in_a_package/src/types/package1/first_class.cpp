@@ -55,4 +55,36 @@ first_class& first_class::operator=(first_class other) {
     return *this;
 }
 
+int first_class::public_attribute() const {
+    return public_attribute_;
+}
+
+void first_class::public_attribute(const int v) {
+    public_attribute_ = v;
+}
+
+int first_class::private_attribute() const {
+    return private_attribute_;
+}
+
+void first_class::private_attribute(const int v) {
+    private_attribute_ = v;
+}
+
+const dogen::class_in_a_package::package1::first_class_versioned_key& first_class::versioned_key() const {
+    return versioned_key_;
+}
+
+dogen::class_in_a_package::package1::first_class_versioned_key& first_class::versioned_key() {
+    return versioned_key_;
+}
+
+void first_class::versioned_key(const dogen::class_in_a_package::package1::first_class_versioned_key& v) {
+    versioned_key_ = v;
+}
+
+void first_class::versioned_key(const dogen::class_in_a_package::package1::first_class_versioned_key&& v) {
+    versioned_key_ = std::move(v);
+}
+
 } } }

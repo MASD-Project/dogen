@@ -44,4 +44,12 @@ class_1& class_1::operator=(class_1 other) {
     return *this;
 }
 
+int class_1::an_attribute() const {
+    return an_attribute_;
+}
+
+void class_1::an_attribute(const int v) {
+    an_attribute_ = v;
+}
+
 } }

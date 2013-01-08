@@ -70,4 +70,12 @@ child_of_a_child2& child_of_a_child2::operator=(child_of_a_child2 other) {
     return *this;
 }
 
+unsigned int child_of_a_child2::prop_2() const {
+    return prop_2_;
+}
+
+void child_of_a_child2::prop_2(const unsigned int v) {
+    prop_2_ = v;
+}
+
 } }

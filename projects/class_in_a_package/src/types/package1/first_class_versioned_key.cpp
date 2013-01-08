@@ -51,4 +51,20 @@ first_class_versioned_key& first_class_versioned_key::operator=(first_class_vers
     return *this;
 }
 
+unsigned int first_class_versioned_key::id() const {
+    return id_;
+}
+
+void first_class_versioned_key::id(const unsigned int v) {
+    id_ = v;
+}
+
+unsigned int first_class_versioned_key::version() const {
+    return version_;
+}
+
+void first_class_versioned_key::version(const unsigned int v) {
+    version_ = v;
+}
+
 } } }

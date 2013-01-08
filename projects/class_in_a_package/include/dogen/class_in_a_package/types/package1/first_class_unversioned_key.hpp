@@ -52,13 +52,8 @@ private:
     friend void boost::serialization::load(Archive& ar, first_class_unversioned_key& v, unsigned int version);
 
 public:
-    unsigned int id() const {
-        return id_;
-    }
-
-    void id(const unsigned int v) {
-        id_ = v;
-    }
+    unsigned int id() const;
+    void id(const unsigned int v);
 
 public:
     bool operator==(const first_class_unversioned_key& rhs) const;

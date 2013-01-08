@@ -56,4 +56,12 @@ bool third_child_with_members::compare(const third_child_with_members& rhs) cons
         prop_1_ == rhs.prop_1_;
 }
 
+unsigned int third_child_with_members::prop_1() const {
+    return prop_1_;
+}
+
+void third_child_with_members::prop_1(const unsigned int v) {
+    prop_1_ = v;
+}
+
 } }

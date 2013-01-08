@@ -54,58 +54,28 @@ private:
     friend void boost::serialization::load(Archive& ar, class_a& v, unsigned int version);
 
 public:
-    const std::string& prop0() const {
-        return prop0_;
-    }
+    const std::string& prop0() const;
+    std::string& prop0();
+    void prop0(const std::string& v);
 
-    std::string& prop0() {
-        return prop0_;
-    }
-
-    void prop0(const std::string& v) {
-        prop0_ = v;
-    }
-
-    void prop0(const std::string&& v) {
-        prop0_ = std::move(v);
-    }
+    void prop0(const std::string&& v);
 
     /*
      * @brief test inclusion duplicates
      */
     /**@{*/
-    const std::string& prop1() const {
-        return prop1_;
-    }
+    const std::string& prop1() const;
+    std::string& prop1();
+    void prop1(const std::string& v);
 
-    std::string& prop1() {
-        return prop1_;
-    }
-
-    void prop1(const std::string& v) {
-        prop1_ = v;
-    }
-
-    void prop1(const std::string&& v) {
-        prop1_ = std::move(v);
-    }
+    void prop1(const std::string&& v);
     /**@}*/
 
-    const dogen::std_model::class_a_versioned_key& versioned_key() const {
-        return versioned_key_;
-    }
+    const dogen::std_model::class_a_versioned_key& versioned_key() const;
+    dogen::std_model::class_a_versioned_key& versioned_key();
+    void versioned_key(const dogen::std_model::class_a_versioned_key& v);
 
-    dogen::std_model::class_a_versioned_key& versioned_key() {
-        return versioned_key_;
-    }
-
-    void versioned_key(const dogen::std_model::class_a_versioned_key& v) {
-        versioned_key_ = v;
-    }
-
-    void versioned_key(const dogen::std_model::class_a_versioned_key&& v) {
-        versioned_key_ = std::move(v);
-    }
+    void versioned_key(const dogen::std_model::class_a_versioned_key&& v);
 
 public:
     bool operator==(const class_a& rhs) const;

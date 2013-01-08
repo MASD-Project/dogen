@@ -58,4 +58,60 @@ class_c& class_c::operator=(class_c other) {
     return *this;
 }
 
+int class_c::prop_0() const {
+    return prop_0_;
+}
+
+void class_c::prop_0(const int v) {
+    prop_0_ = v;
+}
+
+const std::vector<dogen::std_model::class_a>& class_c::prop_1() const {
+    return prop_1_;
+}
+
+std::vector<dogen::std_model::class_a>& class_c::prop_1() {
+    return prop_1_;
+}
+
+void class_c::prop_1(const std::vector<dogen::std_model::class_a>& v) {
+    prop_1_ = v;
+}
+
+void class_c::prop_1(const std::vector<dogen::std_model::class_a>&& v) {
+    prop_1_ = std::move(v);
+}
+
+const std::vector<dogen::std_model::class_a_unversioned_key>& class_c::prop_2() const {
+    return prop_2_;
+}
+
+std::vector<dogen::std_model::class_a_unversioned_key>& class_c::prop_2() {
+    return prop_2_;
+}
+
+void class_c::prop_2(const std::vector<dogen::std_model::class_a_unversioned_key>& v) {
+    prop_2_ = v;
+}
+
+void class_c::prop_2(const std::vector<dogen::std_model::class_a_unversioned_key>&& v) {
+    prop_2_ = std::move(v);
+}
+
+const std::vector<dogen::std_model::class_a_versioned_key>& class_c::prop_3() const {
+    return prop_3_;
+}
+
+std::vector<dogen::std_model::class_a_versioned_key>& class_c::prop_3() {
+    return prop_3_;
+}
+
+void class_c::prop_3(const std::vector<dogen::std_model::class_a_versioned_key>& v) {
+    prop_3_ = v;
+}
+
+void class_c::prop_3(const std::vector<dogen::std_model::class_a_versioned_key>&& v) {
+    prop_3_ = std::move(v);
+}
+
 } } }

@@ -57,53 +57,23 @@ private:
     friend void boost::serialization::load(Archive& ar, class_e& v, unsigned int version);
 
 public:
-    const boost::variant<int, double>& prop_0() const {
-        return prop_0_;
-    }
+    const boost::variant<int, double>& prop_0() const;
+    boost::variant<int, double>& prop_0();
+    void prop_0(const boost::variant<int, double>& v);
 
-    boost::variant<int, double>& prop_0() {
-        return prop_0_;
-    }
+    void prop_0(const boost::variant<int, double>&& v);
 
-    void prop_0(const boost::variant<int, double>& v) {
-        prop_0_ = v;
-    }
+    const boost::variant<int, dogen::boost_model::class_derived, double>& prop_1() const;
+    boost::variant<int, dogen::boost_model::class_derived, double>& prop_1();
+    void prop_1(const boost::variant<int, dogen::boost_model::class_derived, double>& v);
 
-    void prop_0(const boost::variant<int, double>&& v) {
-        prop_0_ = std::move(v);
-    }
+    void prop_1(const boost::variant<int, dogen::boost_model::class_derived, double>&& v);
 
-    const boost::variant<int, dogen::boost_model::class_derived, double>& prop_1() const {
-        return prop_1_;
-    }
+    const std::vector<boost::variant<int, dogen::boost_model::class_derived, double> >& prop_2() const;
+    std::vector<boost::variant<int, dogen::boost_model::class_derived, double> >& prop_2();
+    void prop_2(const std::vector<boost::variant<int, dogen::boost_model::class_derived, double> >& v);
 
-    boost::variant<int, dogen::boost_model::class_derived, double>& prop_1() {
-        return prop_1_;
-    }
-
-    void prop_1(const boost::variant<int, dogen::boost_model::class_derived, double>& v) {
-        prop_1_ = v;
-    }
-
-    void prop_1(const boost::variant<int, dogen::boost_model::class_derived, double>&& v) {
-        prop_1_ = std::move(v);
-    }
-
-    const std::vector<boost::variant<int, dogen::boost_model::class_derived, double> >& prop_2() const {
-        return prop_2_;
-    }
-
-    std::vector<boost::variant<int, dogen::boost_model::class_derived, double> >& prop_2() {
-        return prop_2_;
-    }
-
-    void prop_2(const std::vector<boost::variant<int, dogen::boost_model::class_derived, double> >& v) {
-        prop_2_ = v;
-    }
-
-    void prop_2(const std::vector<boost::variant<int, dogen::boost_model::class_derived, double> >&& v) {
-        prop_2_ = std::move(v);
-    }
+    void prop_2(const std::vector<boost::variant<int, dogen::boost_model::class_derived, double> >&& v);
 
 public:
     bool operator==(const class_e& rhs) const;

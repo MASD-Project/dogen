@@ -69,4 +69,12 @@ child& child::operator=(child other) {
     return *this;
 }
 
+int child::prop_1() const {
+    return prop_1_;
+}
+
+void child::prop_1(const int v) {
+    prop_1_ = v;
+}
+
 } } }

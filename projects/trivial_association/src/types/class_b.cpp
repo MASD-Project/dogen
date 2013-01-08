@@ -41,4 +41,20 @@ class_b& class_b::operator=(class_b other) {
     return *this;
 }
 
+const dogen::trivial_association::class_a& class_b::prop_0() const {
+    return prop_0_;
+}
+
+dogen::trivial_association::class_a& class_b::prop_0() {
+    return prop_0_;
+}
+
+void class_b::prop_0(const dogen::trivial_association::class_a& v) {
+    prop_0_ = v;
+}
+
+void class_b::prop_0(const dogen::trivial_association::class_a&& v) {
+    prop_0_ = std::move(v);
+}
+
 } }

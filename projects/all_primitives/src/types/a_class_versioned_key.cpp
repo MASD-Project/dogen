@@ -50,4 +50,20 @@ a_class_versioned_key& a_class_versioned_key::operator=(a_class_versioned_key ot
     return *this;
 }
 
+unsigned int a_class_versioned_key::id() const {
+    return id_;
+}
+
+void a_class_versioned_key::id(const unsigned int v) {
+    id_ = v;
+}
+
+unsigned int a_class_versioned_key::version() const {
+    return version_;
+}
+
+void a_class_versioned_key::version(const unsigned int v) {
+    version_ = v;
+}
+
 } }

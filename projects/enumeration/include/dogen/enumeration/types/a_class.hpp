@@ -57,29 +57,14 @@ private:
     friend void boost::serialization::load(Archive& ar, a_class& v, unsigned int version);
 
 public:
-    dogen::enumeration::colour_types colour_type() const {
-        return colour_type_;
-    }
+    dogen::enumeration::colour_types colour_type() const;
+    void colour_type(const dogen::enumeration::colour_types& v);
 
-    void colour_type(const dogen::enumeration::colour_types& v) {
-        colour_type_ = v;
-    }
+    dogen::enumeration::book_types book_type() const;
+    void book_type(const dogen::enumeration::book_types& v);
 
-    dogen::enumeration::book_types book_type() const {
-        return book_type_;
-    }
-
-    void book_type(const dogen::enumeration::book_types& v) {
-        book_type_ = v;
-    }
-
-    dogen::enumeration::pkg1::shape_types shape_type() const {
-        return shape_type_;
-    }
-
-    void shape_type(const dogen::enumeration::pkg1::shape_types& v) {
-        shape_type_ = v;
-    }
+    dogen::enumeration::pkg1::shape_types shape_type() const;
+    void shape_type(const dogen::enumeration::pkg1::shape_types& v);
 
 public:
     bool operator==(const a_class& rhs) const;

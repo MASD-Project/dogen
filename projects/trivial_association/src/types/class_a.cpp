@@ -44,4 +44,12 @@ class_a& class_a::operator=(class_a other) {
     return *this;
 }
 
+int class_a::prop_0() const {
+    return prop_0_;
+}
+
+void class_a::prop_0(const int v) {
+    prop_0_ = v;
+}
+
 } }

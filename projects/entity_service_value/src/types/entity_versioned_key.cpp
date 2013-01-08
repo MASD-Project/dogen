@@ -50,4 +50,20 @@ entity_versioned_key& entity_versioned_key::operator=(entity_versioned_key other
     return *this;
 }
 
+unsigned int entity_versioned_key::id() const {
+    return id_;
+}
+
+void entity_versioned_key::id(const unsigned int v) {
+    id_ = v;
+}
+
+unsigned int entity_versioned_key::version() const {
+    return version_;
+}
+
+void entity_versioned_key::version(const unsigned int v) {
+    version_ = v;
+}
+
 } }

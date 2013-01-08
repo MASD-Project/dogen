@@ -62,4 +62,100 @@ class_d& class_d::operator=(class_d other) {
     return *this;
 }
 
+const std::list<std::string>& class_d::prop_0() const {
+    return prop_0_;
+}
+
+std::list<std::string>& class_d::prop_0() {
+    return prop_0_;
+}
+
+void class_d::prop_0(const std::list<std::string>& v) {
+    prop_0_ = v;
+}
+
+void class_d::prop_0(const std::list<std::string>&& v) {
+    prop_0_ = std::move(v);
+}
+
+const std::list<dogen::std_model::class_a>& class_d::prop_1() const {
+    return prop_1_;
+}
+
+std::list<dogen::std_model::class_a>& class_d::prop_1() {
+    return prop_1_;
+}
+
+void class_d::prop_1(const std::list<dogen::std_model::class_a>& v) {
+    prop_1_ = v;
+}
+
+void class_d::prop_1(const std::list<dogen::std_model::class_a>&& v) {
+    prop_1_ = std::move(v);
+}
+
+const std::list<dogen::std_model::pkg1::class_c>& class_d::prop_2() const {
+    return prop_2_;
+}
+
+std::list<dogen::std_model::pkg1::class_c>& class_d::prop_2() {
+    return prop_2_;
+}
+
+void class_d::prop_2(const std::list<dogen::std_model::pkg1::class_c>& v) {
+    prop_2_ = v;
+}
+
+void class_d::prop_2(const std::list<dogen::std_model::pkg1::class_c>&& v) {
+    prop_2_ = std::move(v);
+}
+
+const std::list<unsigned int>& class_d::prop_3() const {
+    return prop_3_;
+}
+
+std::list<unsigned int>& class_d::prop_3() {
+    return prop_3_;
+}
+
+void class_d::prop_3(const std::list<unsigned int>& v) {
+    prop_3_ = v;
+}
+
+void class_d::prop_3(const std::list<unsigned int>&& v) {
+    prop_3_ = std::move(v);
+}
+
+const std::list<dogen::std_model::class_a>& class_d::prop_4() const {
+    return prop_4_;
+}
+
+std::list<dogen::std_model::class_a>& class_d::prop_4() {
+    return prop_4_;
+}
+
+void class_d::prop_4(const std::list<dogen::std_model::class_a>& v) {
+    prop_4_ = v;
+}
+
+void class_d::prop_4(const std::list<dogen::std_model::class_a>&& v) {
+    prop_4_ = std::move(v);
+}
+
+const std::list<std::list<unsigned int> >& class_d::prop_5() const {
+    return prop_5_;
+}
+
+std::list<std::list<unsigned int> >& class_d::prop_5() {
+    return prop_5_;
+}
+
+void class_d::prop_5(const std::list<std::list<unsigned int> >& v) {
+    prop_5_ = v;
+}
+
+void class_d::prop_5(const std::list<std::list<unsigned int> >&& v) {
+    prop_5_ = std::move(v);
+}
+
 } }

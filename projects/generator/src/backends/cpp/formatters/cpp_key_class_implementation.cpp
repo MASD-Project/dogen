@@ -49,6 +49,7 @@ void cpp_key_class_implementation::format(const class_view_model& vm) {
     swap(vm);
     equals_operator(vm);
     assignment_operator(vm);
+    getters_and_setters(vm);
 }
 
 } } } } }

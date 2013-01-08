@@ -68,4 +68,12 @@ class_derived& class_derived::operator=(class_derived other) {
     return *this;
 }
 
+int class_derived::prop_1() const {
+    return prop_1_;
+}
+
+void class_derived::prop_1(const int v) {
+    prop_1_ = v;
+}
+
 } }

@@ -50,4 +50,28 @@ class_c& class_c::operator=(class_c other) {
     return *this;
 }
 
+int class_c::prop_0() const {
+    return prop_0_;
+}
+
+void class_c::prop_0(const int v) {
+    prop_0_ = v;
+}
+
+const std::vector<dogen::boost_model::class_a>& class_c::prop_1() const {
+    return prop_1_;
+}
+
+std::vector<dogen::boost_model::class_a>& class_c::prop_1() {
+    return prop_1_;
+}
+
+void class_c::prop_1(const std::vector<dogen::boost_model::class_a>& v) {
+    prop_1_ = v;
+}
+
+void class_c::prop_1(const std::vector<dogen::boost_model::class_a>&& v) {
+    prop_1_ = std::move(v);
+}
+
 } } }

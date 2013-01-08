@@ -47,4 +47,12 @@ bool parent::compare(const parent& rhs) const {
     return prop_0_ == rhs.prop_0_;
 }
 
+unsigned int parent::prop_0() const {
+    return prop_0_;
+}
+
+void parent::prop_0(const unsigned int v) {
+    prop_0_ = v;
+}
+
 } } }

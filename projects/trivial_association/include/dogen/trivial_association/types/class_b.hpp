@@ -50,21 +50,11 @@ private:
     friend void boost::serialization::load(Archive& ar, class_b& v, unsigned int version);
 
 public:
-    const dogen::trivial_association::class_a& prop_0() const {
-        return prop_0_;
-    }
+    const dogen::trivial_association::class_a& prop_0() const;
+    dogen::trivial_association::class_a& prop_0();
+    void prop_0(const dogen::trivial_association::class_a& v);
 
-    dogen::trivial_association::class_a& prop_0() {
-        return prop_0_;
-    }
-
-    void prop_0(const dogen::trivial_association::class_a& v) {
-        prop_0_ = v;
-    }
-
-    void prop_0(const dogen::trivial_association::class_a&& v) {
-        prop_0_ = std::move(v);
-    }
+    void prop_0(const dogen::trivial_association::class_a&& v);
 
 public:
     bool operator==(const class_b& rhs) const;

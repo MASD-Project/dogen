@@ -66,125 +66,50 @@ private:
     friend void boost::serialization::load(Archive& ar, a_class& v, unsigned int version);
 
 public:
-    bool bool_property() const {
-        return bool_property_;
-    }
+    bool bool_property() const;
+    void bool_property(const bool v);
 
-    void bool_property(const bool v) {
-        bool_property_ = v;
-    }
+    char char_property() const;
+    void char_property(const char v);
 
-    char char_property() const {
-        return char_property_;
-    }
+    unsigned char uchar_property() const;
+    void uchar_property(const unsigned char v);
 
-    void char_property(const char v) {
-        char_property_ = v;
-    }
+    int int_property() const;
+    void int_property(const int v);
 
-    unsigned char uchar_property() const {
-        return uchar_property_;
-    }
+    unsigned int uint_property() const;
+    void uint_property(const unsigned int v);
 
-    void uchar_property(const unsigned char v) {
-        uchar_property_ = v;
-    }
+    long long_property() const;
+    void long_property(const long v);
 
-    int int_property() const {
-        return int_property_;
-    }
+    unsigned long ulong_property() const;
+    void ulong_property(const unsigned long v);
 
-    void int_property(const int v) {
-        int_property_ = v;
-    }
+    long long long_long_property() const;
+    void long_long_property(const long long v);
 
-    unsigned int uint_property() const {
-        return uint_property_;
-    }
+    unsigned long long ulong_long_property() const;
+    void ulong_long_property(const unsigned long long v);
 
-    void uint_property(const unsigned int v) {
-        uint_property_ = v;
-    }
+    short short_property() const;
+    void short_property(const short v);
 
-    long long_property() const {
-        return long_property_;
-    }
+    unsigned short ushort_property() const;
+    void ushort_property(const unsigned short v);
 
-    void long_property(const long v) {
-        long_property_ = v;
-    }
+    double double_property() const;
+    void double_property(const double v);
 
-    unsigned long ulong_property() const {
-        return ulong_property_;
-    }
+    float float_property() const;
+    void float_property(const float v);
 
-    void ulong_property(const unsigned long v) {
-        ulong_property_ = v;
-    }
+    const dogen::all_primitives::a_class_versioned_key& versioned_key() const;
+    dogen::all_primitives::a_class_versioned_key& versioned_key();
+    void versioned_key(const dogen::all_primitives::a_class_versioned_key& v);
 
-    long long long_long_property() const {
-        return long_long_property_;
-    }
-
-    void long_long_property(const long long v) {
-        long_long_property_ = v;
-    }
-
-    unsigned long long ulong_long_property() const {
-        return ulong_long_property_;
-    }
-
-    void ulong_long_property(const unsigned long long v) {
-        ulong_long_property_ = v;
-    }
-
-    short short_property() const {
-        return short_property_;
-    }
-
-    void short_property(const short v) {
-        short_property_ = v;
-    }
-
-    unsigned short ushort_property() const {
-        return ushort_property_;
-    }
-
-    void ushort_property(const unsigned short v) {
-        ushort_property_ = v;
-    }
-
-    double double_property() const {
-        return double_property_;
-    }
-
-    void double_property(const double v) {
-        double_property_ = v;
-    }
-
-    float float_property() const {
-        return float_property_;
-    }
-
-    void float_property(const float v) {
-        float_property_ = v;
-    }
-
-    const dogen::all_primitives::a_class_versioned_key& versioned_key() const {
-        return versioned_key_;
-    }
-
-    dogen::all_primitives::a_class_versioned_key& versioned_key() {
-        return versioned_key_;
-    }
-
-    void versioned_key(const dogen::all_primitives::a_class_versioned_key& v) {
-        versioned_key_ = v;
-    }
-
-    void versioned_key(const dogen::all_primitives::a_class_versioned_key&& v) {
-        versioned_key_ = std::move(v);
-    }
+    void versioned_key(const dogen::all_primitives::a_class_versioned_key&& v);
 
 public:
     bool operator==(const a_class& rhs) const;

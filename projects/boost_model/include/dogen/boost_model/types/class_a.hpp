@@ -51,13 +51,8 @@ private:
     friend void boost::serialization::load(Archive& ar, class_a& v, unsigned int version);
 
 public:
-    unsigned int prop_0() const {
-        return prop_0_;
-    }
-
-    void prop_0(const unsigned int v) {
-        prop_0_ = v;
-    }
+    unsigned int prop_0() const;
+    void prop_0(const unsigned int v);
 
 public:
     bool operator==(const class_a& rhs) const;

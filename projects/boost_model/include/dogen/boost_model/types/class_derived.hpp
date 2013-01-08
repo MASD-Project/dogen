@@ -57,13 +57,8 @@ public:
     void to_stream(std::ostream& s) const override;
 
 public:
-    int prop_1() const {
-        return prop_1_;
-    }
-
-    void prop_1(const int v) {
-        prop_1_ = v;
-    }
+    int prop_1() const;
+    void prop_1(const int v);
 
 public:
     bool operator==(const class_derived& rhs) const;

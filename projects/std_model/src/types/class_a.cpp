@@ -50,4 +50,52 @@ class_a& class_a::operator=(class_a other) {
     return *this;
 }
 
+const std::string& class_a::prop0() const {
+    return prop0_;
+}
+
+std::string& class_a::prop0() {
+    return prop0_;
+}
+
+void class_a::prop0(const std::string& v) {
+    prop0_ = v;
+}
+
+void class_a::prop0(const std::string&& v) {
+    prop0_ = std::move(v);
+}
+
+const std::string& class_a::prop1() const {
+    return prop1_;
+}
+
+std::string& class_a::prop1() {
+    return prop1_;
+}
+
+void class_a::prop1(const std::string& v) {
+    prop1_ = v;
+}
+
+void class_a::prop1(const std::string&& v) {
+    prop1_ = std::move(v);
+}
+
+const dogen::std_model::class_a_versioned_key& class_a::versioned_key() const {
+    return versioned_key_;
+}
+
+dogen::std_model::class_a_versioned_key& class_a::versioned_key() {
+    return versioned_key_;
+}
+
+void class_a::versioned_key(const dogen::std_model::class_a_versioned_key& v) {
+    versioned_key_ = v;
+}
+
+void class_a::versioned_key(const dogen::std_model::class_a_versioned_key&& v) {
+    versioned_key_ = std::move(v);
+}
+
 } }

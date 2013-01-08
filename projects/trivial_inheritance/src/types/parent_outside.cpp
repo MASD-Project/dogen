@@ -46,4 +46,12 @@ bool parent_outside::compare(const parent_outside& rhs) const {
     return prop_0_ == rhs.prop_0_;
 }
 
+int parent_outside::prop_0() const {
+    return prop_0_;
+}
+
+void parent_outside::prop_0(const int v) {
+    prop_0_ = v;
+}
+
 } }

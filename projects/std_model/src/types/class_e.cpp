@@ -62,4 +62,100 @@ class_e& class_e::operator=(class_e other) {
     return *this;
 }
 
+const std::deque<std::string>& class_e::prop_0() const {
+    return prop_0_;
+}
+
+std::deque<std::string>& class_e::prop_0() {
+    return prop_0_;
+}
+
+void class_e::prop_0(const std::deque<std::string>& v) {
+    prop_0_ = v;
+}
+
+void class_e::prop_0(const std::deque<std::string>&& v) {
+    prop_0_ = std::move(v);
+}
+
+const std::deque<dogen::std_model::class_a>& class_e::prop_1() const {
+    return prop_1_;
+}
+
+std::deque<dogen::std_model::class_a>& class_e::prop_1() {
+    return prop_1_;
+}
+
+void class_e::prop_1(const std::deque<dogen::std_model::class_a>& v) {
+    prop_1_ = v;
+}
+
+void class_e::prop_1(const std::deque<dogen::std_model::class_a>&& v) {
+    prop_1_ = std::move(v);
+}
+
+const std::deque<dogen::std_model::pkg1::class_c>& class_e::prop_2() const {
+    return prop_2_;
+}
+
+std::deque<dogen::std_model::pkg1::class_c>& class_e::prop_2() {
+    return prop_2_;
+}
+
+void class_e::prop_2(const std::deque<dogen::std_model::pkg1::class_c>& v) {
+    prop_2_ = v;
+}
+
+void class_e::prop_2(const std::deque<dogen::std_model::pkg1::class_c>&& v) {
+    prop_2_ = std::move(v);
+}
+
+const std::deque<unsigned int>& class_e::prop_3() const {
+    return prop_3_;
+}
+
+std::deque<unsigned int>& class_e::prop_3() {
+    return prop_3_;
+}
+
+void class_e::prop_3(const std::deque<unsigned int>& v) {
+    prop_3_ = v;
+}
+
+void class_e::prop_3(const std::deque<unsigned int>&& v) {
+    prop_3_ = std::move(v);
+}
+
+const std::deque<dogen::std_model::class_a>& class_e::prop_4() const {
+    return prop_4_;
+}
+
+std::deque<dogen::std_model::class_a>& class_e::prop_4() {
+    return prop_4_;
+}
+
+void class_e::prop_4(const std::deque<dogen::std_model::class_a>& v) {
+    prop_4_ = v;
+}
+
+void class_e::prop_4(const std::deque<dogen::std_model::class_a>&& v) {
+    prop_4_ = std::move(v);
+}
+
+const std::deque<std::deque<unsigned int> >& class_e::prop_5() const {
+    return prop_5_;
+}
+
+std::deque<std::deque<unsigned int> >& class_e::prop_5() {
+    return prop_5_;
+}
+
+void class_e::prop_5(const std::deque<std::deque<unsigned int> >& v) {
+    prop_5_ = v;
+}
+
+void class_e::prop_5(const std::deque<std::deque<unsigned int> >&& v) {
+    prop_5_ = std::move(v);
+}
+
 } }

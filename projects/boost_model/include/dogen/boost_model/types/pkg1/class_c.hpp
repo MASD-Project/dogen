@@ -56,29 +56,14 @@ private:
     friend void boost::serialization::load(Archive& ar, class_c& v, unsigned int version);
 
 public:
-    int prop_0() const {
-        return prop_0_;
-    }
+    int prop_0() const;
+    void prop_0(const int v);
 
-    void prop_0(const int v) {
-        prop_0_ = v;
-    }
+    const std::vector<dogen::boost_model::class_a>& prop_1() const;
+    std::vector<dogen::boost_model::class_a>& prop_1();
+    void prop_1(const std::vector<dogen::boost_model::class_a>& v);
 
-    const std::vector<dogen::boost_model::class_a>& prop_1() const {
-        return prop_1_;
-    }
-
-    std::vector<dogen::boost_model::class_a>& prop_1() {
-        return prop_1_;
-    }
-
-    void prop_1(const std::vector<dogen::boost_model::class_a>& v) {
-        prop_1_ = v;
-    }
-
-    void prop_1(const std::vector<dogen::boost_model::class_a>&& v) {
-        prop_1_ = std::move(v);
-    }
+    void prop_1(const std::vector<dogen::boost_model::class_a>&& v);
 
 public:
     bool operator==(const class_c& rhs) const;

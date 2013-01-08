@@ -50,4 +50,52 @@ class_f& class_f::operator=(class_f other) {
     return *this;
 }
 
+const std::unordered_map<std::string, std::string>& class_f::prop_0() const {
+    return prop_0_;
+}
+
+std::unordered_map<std::string, std::string>& class_f::prop_0() {
+    return prop_0_;
+}
+
+void class_f::prop_0(const std::unordered_map<std::string, std::string>& v) {
+    prop_0_ = v;
+}
+
+void class_f::prop_0(const std::unordered_map<std::string, std::string>&& v) {
+    prop_0_ = std::move(v);
+}
+
+const std::unordered_map<std::string, dogen::std_model::class_a>& class_f::prop_1() const {
+    return prop_1_;
+}
+
+std::unordered_map<std::string, dogen::std_model::class_a>& class_f::prop_1() {
+    return prop_1_;
+}
+
+void class_f::prop_1(const std::unordered_map<std::string, dogen::std_model::class_a>& v) {
+    prop_1_ = v;
+}
+
+void class_f::prop_1(const std::unordered_map<std::string, dogen::std_model::class_a>&& v) {
+    prop_1_ = std::move(v);
+}
+
+const std::unordered_map<dogen::std_model::class_a, dogen::std_model::pkg1::class_c>& class_f::prop_2() const {
+    return prop_2_;
+}
+
+std::unordered_map<dogen::std_model::class_a, dogen::std_model::pkg1::class_c>& class_f::prop_2() {
+    return prop_2_;
+}
+
+void class_f::prop_2(const std::unordered_map<dogen::std_model::class_a, dogen::std_model::pkg1::class_c>& v) {
+    prop_2_ = v;
+}
+
+void class_f::prop_2(const std::unordered_map<dogen::std_model::class_a, dogen::std_model::pkg1::class_c>&& v) {
+    prop_2_ = std::move(v);
+}
+
 } }

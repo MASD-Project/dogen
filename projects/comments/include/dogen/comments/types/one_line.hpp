@@ -61,13 +61,8 @@ public:
      * @brief another brief comment
      */
     /**@{*/
-    int prop_0() const {
-        return prop_0_;
-    }
-
-    void prop_0(const int v) {
-        prop_0_ = v;
-    }
+    int prop_0() const;
+    void prop_0(const int v);
     /**@}*/
 
     /*
@@ -76,22 +71,12 @@ public:
      * a second line
      */
     /**@{*/
-    int prop_1() const {
-        return prop_1_;
-    }
-
-    void prop_1(const int v) {
-        prop_1_ = v;
-    }
+    int prop_1() const;
+    void prop_1(const int v);
     /**@}*/
 
-    int prop_2() const {
-        return prop_2_;
-    }
-
-    void prop_2(const int v) {
-        prop_2_ = v;
-    }
+    int prop_2() const;
+    void prop_2(const int v);
 
 public:
     bool operator==(const one_line& rhs) const;

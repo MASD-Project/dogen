@@ -55,4 +55,28 @@ one_line& one_line::operator=(one_line other) {
     return *this;
 }
 
+int one_line::prop_0() const {
+    return prop_0_;
+}
+
+void one_line::prop_0(const int v) {
+    prop_0_ = v;
+}
+
+int one_line::prop_1() const {
+    return prop_1_;
+}
+
+void one_line::prop_1(const int v) {
+    prop_1_ = v;
+}
+
+int one_line::prop_2() const {
+    return prop_2_;
+}
+
+void one_line::prop_2(const int v) {
+    prop_2_ = v;
+}
+
 } }

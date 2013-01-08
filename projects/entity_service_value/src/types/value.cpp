@@ -44,4 +44,12 @@ value& value::operator=(value other) {
     return *this;
 }
 
+int value::prop_0() const {
+    return prop_0_;
+}
+
+void value::prop_0(const int v) {
+    prop_0_ = v;
+}
+
 } }

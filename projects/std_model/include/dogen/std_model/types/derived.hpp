@@ -57,21 +57,11 @@ public:
     void to_stream(std::ostream& s) const override;
 
 public:
-    const std::list<dogen::std_model::pkg1::class_c>& prop_1() const {
-        return prop_1_;
-    }
+    const std::list<dogen::std_model::pkg1::class_c>& prop_1() const;
+    std::list<dogen::std_model::pkg1::class_c>& prop_1();
+    void prop_1(const std::list<dogen::std_model::pkg1::class_c>& v);
 
-    std::list<dogen::std_model::pkg1::class_c>& prop_1() {
-        return prop_1_;
-    }
-
-    void prop_1(const std::list<dogen::std_model::pkg1::class_c>& v) {
-        prop_1_ = v;
-    }
-
-    void prop_1(const std::list<dogen::std_model::pkg1::class_c>&& v) {
-        prop_1_ = std::move(v);
-    }
+    void prop_1(const std::list<dogen::std_model::pkg1::class_c>&& v);
 
 public:
     bool operator==(const derived& rhs) const;

@@ -56,37 +56,17 @@ private:
     friend void boost::serialization::load(Archive& ar, class_h& v, unsigned int version);
 
 public:
-    const std::unordered_set<dogen::std_model::class_a>& prop_0() const {
-        return prop_0_;
-    }
+    const std::unordered_set<dogen::std_model::class_a>& prop_0() const;
+    std::unordered_set<dogen::std_model::class_a>& prop_0();
+    void prop_0(const std::unordered_set<dogen::std_model::class_a>& v);
 
-    std::unordered_set<dogen::std_model::class_a>& prop_0() {
-        return prop_0_;
-    }
+    void prop_0(const std::unordered_set<dogen::std_model::class_a>&& v);
 
-    void prop_0(const std::unordered_set<dogen::std_model::class_a>& v) {
-        prop_0_ = v;
-    }
+    const std::unordered_set<dogen::std_model::pkg1::class_c>& prop_1() const;
+    std::unordered_set<dogen::std_model::pkg1::class_c>& prop_1();
+    void prop_1(const std::unordered_set<dogen::std_model::pkg1::class_c>& v);
 
-    void prop_0(const std::unordered_set<dogen::std_model::class_a>&& v) {
-        prop_0_ = std::move(v);
-    }
-
-    const std::unordered_set<dogen::std_model::pkg1::class_c>& prop_1() const {
-        return prop_1_;
-    }
-
-    std::unordered_set<dogen::std_model::pkg1::class_c>& prop_1() {
-        return prop_1_;
-    }
-
-    void prop_1(const std::unordered_set<dogen::std_model::pkg1::class_c>& v) {
-        prop_1_ = v;
-    }
-
-    void prop_1(const std::unordered_set<dogen::std_model::pkg1::class_c>&& v) {
-        prop_1_ = std::move(v);
-    }
+    void prop_1(const std::unordered_set<dogen::std_model::pkg1::class_c>&& v);
 
 public:
     bool operator==(const class_h& rhs) const;

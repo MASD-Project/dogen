@@ -45,4 +45,12 @@ first_class_unversioned_key& first_class_unversioned_key::operator=(first_class_
     return *this;
 }
 
+unsigned int first_class_unversioned_key::id() const {
+    return id_;
+}
+
+void first_class_unversioned_key::id(const unsigned int v) {
+    id_ = v;
+}
+
 } } }

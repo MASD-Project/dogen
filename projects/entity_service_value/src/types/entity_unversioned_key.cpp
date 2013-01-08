@@ -44,4 +44,12 @@ entity_unversioned_key& entity_unversioned_key::operator=(entity_unversioned_key
     return *this;
 }
 
+unsigned int entity_unversioned_key::id() const {
+    return id_;
+}
+
+void entity_unversioned_key::id(const unsigned int v) {
+    id_ = v;
+}
+
 } }

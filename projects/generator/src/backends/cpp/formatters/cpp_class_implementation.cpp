@@ -290,6 +290,117 @@ void cpp_class_implementation::equals_operator(const class_view_model& vm) {
 }
 
 void cpp_class_implementation::
+non_pod_getters_and_setters(const std::string class_name,
+    const property_view_model& vm) {
+    stream_ << indenter_ << vm.type().complete_name() << " " << class_name
+            << "::" << vm.name() << "() const ";
+
+    utility_.open_scope();
+    {
+        cpp_positive_indenter_scope s(indenter_);
+        stream_ << indenter_ << "return "
+                << utility_.as_member_variable(vm.name()) << ";"
+                << std::endl;
+    }
+    utility_.close_scope();
+    utility_.blank_line();
+
+    stream_ << indenter_ << "void " << class_name << "::" << vm.name()
+            << "(const " << vm.type().complete_name();
+
+    if (!vm.type().is_primitive())
+        stream_ << "&";
+
+    stream_ << " v) ";
+    utility_.open_scope();
+    {
+        cpp_positive_indenter_scope s(indenter_);
+        stream_ << indenter_ << utility_.as_member_variable(vm.name())
+                << " = v;" << std::endl;
+    }
+    utility_.close_scope();
+    utility_.blank_line();
+}
+
+void cpp_class_implementation::
+pod_getters_and_setters(const std::string class_name,
+    const property_view_model& vm) {
+    // const getter
+    stream_ << indenter_ << "const " << vm.type().complete_name()
+            << "& " << class_name << "::" << vm.name()
+            << "() const ";
+    utility_.open_scope();
+    {
+        cpp_positive_indenter_scope s(indenter_);
+        stream_ << indenter_ << "return "
+                << utility_.as_member_variable(vm.name()) << ";"
+                << std::endl;
+    }
+    utility_.close_scope();
+    utility_.blank_line();
+
+    // Popsicle immutability
+    stream_ << indenter_ << vm.type().complete_name()
+            << "& " << class_name << "::" << vm.name()
+            << "() ";
+    utility_.open_scope();
+    {
+        cpp_positive_indenter_scope s(indenter_);
+        stream_ << indenter_ << "return "
+                << utility_.as_member_variable(vm.name()) << ";"
+                << std::endl;
+    }
+    utility_.close_scope();
+    utility_.blank_line();
+
+    // traditional setter
+    stream_ << indenter_ << "void " << class_name << "::" << vm.name()
+            << "(const " << vm.type().complete_name();
+
+    if (!vm.type().is_primitive())
+        stream_ << "&";
+
+    stream_ << " v) ";
+    utility_.open_scope();
+    {
+        cpp_positive_indenter_scope s(indenter_);
+        stream_ << indenter_ << utility_.as_member_variable(vm.name())
+                << " = v;" << std::endl;
+    }
+    utility_.close_scope();
+    utility_.blank_line();
+
+    // move setter
+    stream_ << indenter_ << "void " << class_name << "::" << vm.name()
+            << "(const " << vm.type().complete_name();
+
+    if (!vm.type().is_primitive())
+        stream_ << "&&";
+
+    stream_ << " v) ";
+    utility_.open_scope();
+    {
+        cpp_positive_indenter_scope s(indenter_);
+        stream_ << indenter_ << utility_.as_member_variable(vm.name())
+                << " = std::move(v);" << std::endl;
+    }
+    utility_.close_scope();
+    utility_.blank_line();
+}
+
+void cpp_class_implementation::getters_and_setters(const class_view_model& vm) {
+    if (vm.properties().empty())
+        return;
+
+    for (const auto p : vm.properties()) {
+        if (p.type().is_primitive() || p.type().is_enumeration())
+            non_pod_getters_and_setters(vm.name(), p);
+        else
+            pod_getters_and_setters(vm.name(), p);
+    }
+}
+
+void cpp_class_implementation::
 assignment_operator(const class_view_model& vm) {
     // assignment is only available in leaf classes - MEC++-33
     if (vm.all_properties().empty() || vm.is_parent())

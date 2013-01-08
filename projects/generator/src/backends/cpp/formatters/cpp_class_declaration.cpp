@@ -199,17 +199,7 @@ non_pod_getters_and_setters(const property_view_model& vm) {
     dc.format(vm.documentation());
     dc.format_start_block(vm.documentation());
     stream_ << indenter_ << vm.type().complete_name() << " " << vm.name()
-            << "() const ";
-
-    utility_.open_scope();
-    {
-        cpp_positive_indenter_scope s(indenter_);
-        stream_ << indenter_ << "return "
-                << utility_.as_member_variable(vm.name()) << ";"
-                << std::endl;
-    }
-    utility_.close_scope();
-    utility_.blank_line();
+            << "() const;" << std::endl;
 
     stream_ << indenter_ << "void " << vm.name() << "(const "
             << vm.type().complete_name();
@@ -217,14 +207,7 @@ non_pod_getters_and_setters(const property_view_model& vm) {
     if (!vm.type().is_primitive())
         stream_ << "&";
 
-    stream_ << " v) ";
-    utility_.open_scope();
-    {
-        cpp_positive_indenter_scope s(indenter_);
-        stream_ << indenter_ << utility_.as_member_variable(vm.name())
-                << " = v;" << std::endl;
-    }
-    utility_.close_scope();
+    stream_ << " v);" << std::endl;
     dc.format_end_block(vm.documentation());
     utility_.blank_line();
 }
@@ -238,30 +221,12 @@ pod_getters_and_setters(const property_view_model& vm) {
     // const getter
     stream_ << indenter_ << "const " << vm.type().complete_name()
             << "& " << vm.name()
-            << "() const ";
-    utility_.open_scope();
-    {
-        cpp_positive_indenter_scope s(indenter_);
-        stream_ << indenter_ << "return "
-                << utility_.as_member_variable(vm.name()) << ";"
-                << std::endl;
-    }
-    utility_.close_scope();
-    utility_.blank_line();
+            << "() const;" << std::endl;
 
     // Popsicle immutability
     stream_ << indenter_ << "" << vm.type().complete_name()
             << "& " << vm.name()
-            << "() ";
-    utility_.open_scope();
-    {
-        cpp_positive_indenter_scope s(indenter_);
-        stream_ << indenter_ << "return "
-                << utility_.as_member_variable(vm.name()) << ";"
-                << std::endl;
-    }
-    utility_.close_scope();
-    utility_.blank_line();
+            << "();" << std::endl;
 
     // traditional setter
     stream_ << indenter_ << "void " << vm.name() << "(const "
@@ -270,14 +235,7 @@ pod_getters_and_setters(const property_view_model& vm) {
     if (!vm.type().is_primitive())
         stream_ << "&";
 
-    stream_ << " v) ";
-    utility_.open_scope();
-    {
-        cpp_positive_indenter_scope s(indenter_);
-        stream_ << indenter_ << utility_.as_member_variable(vm.name())
-                << " = v;" << std::endl;
-    }
-    utility_.close_scope();
+    stream_ << " v);" << std::endl;
     utility_.blank_line();
 
     // move setter
@@ -287,14 +245,7 @@ pod_getters_and_setters(const property_view_model& vm) {
     if (!vm.type().is_primitive())
         stream_ << "&&";
 
-    stream_ << " v) ";
-    utility_.open_scope();
-    {
-        cpp_positive_indenter_scope s(indenter_);
-        stream_ << indenter_ << utility_.as_member_variable(vm.name())
-                << " = std::move(v);" << std::endl;
-    }
-    utility_.close_scope();
+    stream_ << " v);" << std::endl;
 
     dc.format_end_block(vm.documentation());
     utility_.blank_line();

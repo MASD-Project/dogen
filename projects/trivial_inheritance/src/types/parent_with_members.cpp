@@ -46,4 +46,12 @@ bool parent_with_members::compare(const parent_with_members& rhs) const {
     return prop_0_ == rhs.prop_0_;
 }
 
+int parent_with_members::prop_0() const {
+    return prop_0_;
+}
+
+void parent_with_members::prop_0(const int v) {
+    prop_0_ = v;
+}
+
 } }

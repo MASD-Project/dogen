@@ -49,4 +49,28 @@ entity& entity::operator=(entity other) {
     return *this;
 }
 
+int entity::prop_0() const {
+    return prop_0_;
+}
+
+void entity::prop_0(const int v) {
+    prop_0_ = v;
+}
+
+const dogen::entity_service_value::entity_versioned_key& entity::versioned_key() const {
+    return versioned_key_;
+}
+
+dogen::entity_service_value::entity_versioned_key& entity::versioned_key() {
+    return versioned_key_;
+}
+
+void entity::versioned_key(const dogen::entity_service_value::entity_versioned_key& v) {
+    versioned_key_ = v;
+}
+
+void entity::versioned_key(const dogen::entity_service_value::entity_versioned_key&& v) {
+    versioned_key_ = std::move(v);
+}
+
 } }

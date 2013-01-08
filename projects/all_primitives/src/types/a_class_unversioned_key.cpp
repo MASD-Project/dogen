@@ -44,4 +44,12 @@ a_class_unversioned_key& a_class_unversioned_key::operator=(a_class_unversioned_
     return *this;
 }
 
+unsigned int a_class_unversioned_key::id() const {
+    return id_;
+}
+
+void a_class_unversioned_key::id(const unsigned int v) {
+    id_ = v;
+}
+
 } }

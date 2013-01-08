@@ -30,6 +30,7 @@
 #include "dogen/generator/backends/cpp/view_models/class_view_model.hpp"
 #include "dogen/generator/backends/cpp/formatters/cpp_indenter.hpp"
 #include "dogen/generator/backends/cpp/formatters/cpp_utility.hpp"
+#include "dogen/generator/backends/cpp/view_models/property_view_model.hpp"
 
 namespace dogen {
 namespace generator {
@@ -40,6 +41,7 @@ namespace formatters {
 class cpp_class_implementation {
 public:
     typedef view_models::class_view_model class_view_model;
+    typedef view_models::property_view_model property_view_model;
 
 public:
     cpp_class_implementation() = default;
@@ -61,6 +63,11 @@ protected:
     void equals_method(const class_view_model& vm);
     void equals_operator(const class_view_model& vm);
     void assignment_operator(const class_view_model& vm);
+    void getters_and_setters(const class_view_model& vm);
+    void non_pod_getters_and_setters(const std::string class_name,
+        const property_view_model& vm);
+    void pod_getters_and_setters(const std::string class_name,
+        const property_view_model& vm);
 
 public:
     virtual void format(const class_view_model& vm) = 0;

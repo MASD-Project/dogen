@@ -59,13 +59,8 @@ public:
     virtual void to_stream(std::ostream& s) const;
 
 public:
-    unsigned int prop_1() const {
-        return prop_1_;
-    }
-
-    void prop_1(const unsigned int v) {
-        prop_1_ = v;
-    }
+    unsigned int prop_1() const;
+    void prop_1(const unsigned int v);
 
 protected:
     bool compare(const third_child_with_members& rhs) const;

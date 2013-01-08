@@ -109,4 +109,124 @@ a_class& a_class::operator=(a_class other) {
     return *this;
 }
 
+bool a_class::bool_property() const {
+    return bool_property_;
+}
+
+void a_class::bool_property(const bool v) {
+    bool_property_ = v;
+}
+
+char a_class::char_property() const {
+    return char_property_;
+}
+
+void a_class::char_property(const char v) {
+    char_property_ = v;
+}
+
+unsigned char a_class::uchar_property() const {
+    return uchar_property_;
+}
+
+void a_class::uchar_property(const unsigned char v) {
+    uchar_property_ = v;
+}
+
+int a_class::int_property() const {
+    return int_property_;
+}
+
+void a_class::int_property(const int v) {
+    int_property_ = v;
+}
+
+unsigned int a_class::uint_property() const {
+    return uint_property_;
+}
+
+void a_class::uint_property(const unsigned int v) {
+    uint_property_ = v;
+}
+
+long a_class::long_property() const {
+    return long_property_;
+}
+
+void a_class::long_property(const long v) {
+    long_property_ = v;
+}
+
+unsigned long a_class::ulong_property() const {
+    return ulong_property_;
+}
+
+void a_class::ulong_property(const unsigned long v) {
+    ulong_property_ = v;
+}
+
+long long a_class::long_long_property() const {
+    return long_long_property_;
+}
+
+void a_class::long_long_property(const long long v) {
+    long_long_property_ = v;
+}
+
+unsigned long long a_class::ulong_long_property() const {
+    return ulong_long_property_;
+}
+
+void a_class::ulong_long_property(const unsigned long long v) {
+    ulong_long_property_ = v;
+}
+
+short a_class::short_property() const {
+    return short_property_;
+}
+
+void a_class::short_property(const short v) {
+    short_property_ = v;
+}
+
+unsigned short a_class::ushort_property() const {
+    return ushort_property_;
+}
+
+void a_class::ushort_property(const unsigned short v) {
+    ushort_property_ = v;
+}
+
+double a_class::double_property() const {
+    return double_property_;
+}
+
+void a_class::double_property(const double v) {
+    double_property_ = v;
+}
+
+float a_class::float_property() const {
+    return float_property_;
+}
+
+void a_class::float_property(const float v) {
+    float_property_ = v;
+}
+
+const dogen::all_primitives::a_class_versioned_key& a_class::versioned_key() const {
+    return versioned_key_;
+}
+
+dogen::all_primitives::a_class_versioned_key& a_class::versioned_key() {
+    return versioned_key_;
+}
+
+void a_class::versioned_key(const dogen::all_primitives::a_class_versioned_key& v) {
+    versioned_key_ = v;
+}
+
+void a_class::versioned_key(const dogen::all_primitives::a_class_versioned_key&& v) {
+    versioned_key_ = std::move(v);
+}
+
 } }

@@ -60,61 +60,26 @@ private:
     friend void boost::serialization::load(Archive& ar, class_c& v, unsigned int version);
 
 public:
-    int prop_0() const {
-        return prop_0_;
-    }
+    int prop_0() const;
+    void prop_0(const int v);
 
-    void prop_0(const int v) {
-        prop_0_ = v;
-    }
+    const std::vector<dogen::std_model::class_a>& prop_1() const;
+    std::vector<dogen::std_model::class_a>& prop_1();
+    void prop_1(const std::vector<dogen::std_model::class_a>& v);
 
-    const std::vector<dogen::std_model::class_a>& prop_1() const {
-        return prop_1_;
-    }
+    void prop_1(const std::vector<dogen::std_model::class_a>&& v);
 
-    std::vector<dogen::std_model::class_a>& prop_1() {
-        return prop_1_;
-    }
+    const std::vector<dogen::std_model::class_a_unversioned_key>& prop_2() const;
+    std::vector<dogen::std_model::class_a_unversioned_key>& prop_2();
+    void prop_2(const std::vector<dogen::std_model::class_a_unversioned_key>& v);
 
-    void prop_1(const std::vector<dogen::std_model::class_a>& v) {
-        prop_1_ = v;
-    }
+    void prop_2(const std::vector<dogen::std_model::class_a_unversioned_key>&& v);
 
-    void prop_1(const std::vector<dogen::std_model::class_a>&& v) {
-        prop_1_ = std::move(v);
-    }
+    const std::vector<dogen::std_model::class_a_versioned_key>& prop_3() const;
+    std::vector<dogen::std_model::class_a_versioned_key>& prop_3();
+    void prop_3(const std::vector<dogen::std_model::class_a_versioned_key>& v);
 
-    const std::vector<dogen::std_model::class_a_unversioned_key>& prop_2() const {
-        return prop_2_;
-    }
-
-    std::vector<dogen::std_model::class_a_unversioned_key>& prop_2() {
-        return prop_2_;
-    }
-
-    void prop_2(const std::vector<dogen::std_model::class_a_unversioned_key>& v) {
-        prop_2_ = v;
-    }
-
-    void prop_2(const std::vector<dogen::std_model::class_a_unversioned_key>&& v) {
-        prop_2_ = std::move(v);
-    }
-
-    const std::vector<dogen::std_model::class_a_versioned_key>& prop_3() const {
-        return prop_3_;
-    }
-
-    std::vector<dogen::std_model::class_a_versioned_key>& prop_3() {
-        return prop_3_;
-    }
-
-    void prop_3(const std::vector<dogen::std_model::class_a_versioned_key>& v) {
-        prop_3_ = v;
-    }
-
-    void prop_3(const std::vector<dogen::std_model::class_a_versioned_key>&& v) {
-        prop_3_ = std::move(v);
-    }
+    void prop_3(const std::vector<dogen::std_model::class_a_versioned_key>&& v);
 
 public:
     bool operator==(const class_c& rhs) const;

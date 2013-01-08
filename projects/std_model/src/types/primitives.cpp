@@ -80,4 +80,68 @@ primitives& primitives::operator=(primitives other) {
     return *this;
 }
 
+std::int8_t primitives::prop_0() const {
+    return prop_0_;
+}
+
+void primitives::prop_0(const std::int8_t v) {
+    prop_0_ = v;
+}
+
+std::int16_t primitives::prop_1() const {
+    return prop_1_;
+}
+
+void primitives::prop_1(const std::int16_t v) {
+    prop_1_ = v;
+}
+
+std::int32_t primitives::prop_2() const {
+    return prop_2_;
+}
+
+void primitives::prop_2(const std::int32_t v) {
+    prop_2_ = v;
+}
+
+std::int64_t primitives::prop_3() const {
+    return prop_3_;
+}
+
+void primitives::prop_3(const std::int64_t v) {
+    prop_3_ = v;
+}
+
+std::uint8_t primitives::prop_4() const {
+    return prop_4_;
+}
+
+void primitives::prop_4(const std::uint8_t v) {
+    prop_4_ = v;
+}
+
+std::uint16_t primitives::prop_5() const {
+    return prop_5_;
+}
+
+void primitives::prop_5(const std::uint16_t v) {
+    prop_5_ = v;
+}
+
+std::uint32_t primitives::prop_6() const {
+    return prop_6_;
+}
+
+void primitives::prop_6(const std::uint32_t v) {
+    prop_6_ = v;
+}
+
+std::uint64_t primitives::prop_7() const {
+    return prop_7_;
+}
+
+void primitives::prop_7(const std::uint64_t v) {
+    prop_7_ = v;
+}
+
 } }

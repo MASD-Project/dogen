@@ -59,101 +59,41 @@ private:
     friend void boost::serialization::load(Archive& ar, class_d& v, unsigned int version);
 
 public:
-    const std::list<std::string>& prop_0() const {
-        return prop_0_;
-    }
+    const std::list<std::string>& prop_0() const;
+    std::list<std::string>& prop_0();
+    void prop_0(const std::list<std::string>& v);
 
-    std::list<std::string>& prop_0() {
-        return prop_0_;
-    }
+    void prop_0(const std::list<std::string>&& v);
 
-    void prop_0(const std::list<std::string>& v) {
-        prop_0_ = v;
-    }
+    const std::list<dogen::std_model::class_a>& prop_1() const;
+    std::list<dogen::std_model::class_a>& prop_1();
+    void prop_1(const std::list<dogen::std_model::class_a>& v);
 
-    void prop_0(const std::list<std::string>&& v) {
-        prop_0_ = std::move(v);
-    }
+    void prop_1(const std::list<dogen::std_model::class_a>&& v);
 
-    const std::list<dogen::std_model::class_a>& prop_1() const {
-        return prop_1_;
-    }
+    const std::list<dogen::std_model::pkg1::class_c>& prop_2() const;
+    std::list<dogen::std_model::pkg1::class_c>& prop_2();
+    void prop_2(const std::list<dogen::std_model::pkg1::class_c>& v);
 
-    std::list<dogen::std_model::class_a>& prop_1() {
-        return prop_1_;
-    }
+    void prop_2(const std::list<dogen::std_model::pkg1::class_c>&& v);
 
-    void prop_1(const std::list<dogen::std_model::class_a>& v) {
-        prop_1_ = v;
-    }
+    const std::list<unsigned int>& prop_3() const;
+    std::list<unsigned int>& prop_3();
+    void prop_3(const std::list<unsigned int>& v);
 
-    void prop_1(const std::list<dogen::std_model::class_a>&& v) {
-        prop_1_ = std::move(v);
-    }
+    void prop_3(const std::list<unsigned int>&& v);
 
-    const std::list<dogen::std_model::pkg1::class_c>& prop_2() const {
-        return prop_2_;
-    }
+    const std::list<dogen::std_model::class_a>& prop_4() const;
+    std::list<dogen::std_model::class_a>& prop_4();
+    void prop_4(const std::list<dogen::std_model::class_a>& v);
 
-    std::list<dogen::std_model::pkg1::class_c>& prop_2() {
-        return prop_2_;
-    }
+    void prop_4(const std::list<dogen::std_model::class_a>&& v);
 
-    void prop_2(const std::list<dogen::std_model::pkg1::class_c>& v) {
-        prop_2_ = v;
-    }
+    const std::list<std::list<unsigned int> >& prop_5() const;
+    std::list<std::list<unsigned int> >& prop_5();
+    void prop_5(const std::list<std::list<unsigned int> >& v);
 
-    void prop_2(const std::list<dogen::std_model::pkg1::class_c>&& v) {
-        prop_2_ = std::move(v);
-    }
-
-    const std::list<unsigned int>& prop_3() const {
-        return prop_3_;
-    }
-
-    std::list<unsigned int>& prop_3() {
-        return prop_3_;
-    }
-
-    void prop_3(const std::list<unsigned int>& v) {
-        prop_3_ = v;
-    }
-
-    void prop_3(const std::list<unsigned int>&& v) {
-        prop_3_ = std::move(v);
-    }
-
-    const std::list<dogen::std_model::class_a>& prop_4() const {
-        return prop_4_;
-    }
-
-    std::list<dogen::std_model::class_a>& prop_4() {
-        return prop_4_;
-    }
-
-    void prop_4(const std::list<dogen::std_model::class_a>& v) {
-        prop_4_ = v;
-    }
-
-    void prop_4(const std::list<dogen::std_model::class_a>&& v) {
-        prop_4_ = std::move(v);
-    }
-
-    const std::list<std::list<unsigned int> >& prop_5() const {
-        return prop_5_;
-    }
-
-    std::list<std::list<unsigned int> >& prop_5() {
-        return prop_5_;
-    }
-
-    void prop_5(const std::list<std::list<unsigned int> >& v) {
-        prop_5_ = v;
-    }
-
-    void prop_5(const std::list<std::list<unsigned int> >&& v) {
-        prop_5_ = std::move(v);
-    }
+    void prop_5(const std::list<std::list<unsigned int> >&& v);
 
 public:
     bool operator==(const class_d& rhs) const;

@@ -80,4 +80,20 @@ derived& derived::operator=(derived other) {
     return *this;
 }
 
+const std::list<dogen::std_model::pkg1::class_c>& derived::prop_1() const {
+    return prop_1_;
+}
+
+std::list<dogen::std_model::pkg1::class_c>& derived::prop_1() {
+    return prop_1_;
+}
+
+void derived::prop_1(const std::list<dogen::std_model::pkg1::class_c>& v) {
+    prop_1_ = v;
+}
+
+void derived::prop_1(const std::list<dogen::std_model::pkg1::class_c>&& v) {
+    prop_1_ = std::move(v);
+}
+
 } }

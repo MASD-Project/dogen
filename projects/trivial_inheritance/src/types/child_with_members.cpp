@@ -66,4 +66,12 @@ child_with_members& child_with_members::operator=(child_with_members other) {
     return *this;
 }
 
+unsigned int child_with_members::prop_0() const {
+    return prop_0_;
+}
+
+void child_with_members::prop_0(const unsigned int v) {
+    prop_0_ = v;
+}
+
 } }

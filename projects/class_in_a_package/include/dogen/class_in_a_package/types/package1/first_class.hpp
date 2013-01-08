@@ -56,37 +56,17 @@ private:
     friend void boost::serialization::load(Archive& ar, first_class& v, unsigned int version);
 
 public:
-    int public_attribute() const {
-        return public_attribute_;
-    }
+    int public_attribute() const;
+    void public_attribute(const int v);
 
-    void public_attribute(const int v) {
-        public_attribute_ = v;
-    }
+    int private_attribute() const;
+    void private_attribute(const int v);
 
-    int private_attribute() const {
-        return private_attribute_;
-    }
+    const dogen::class_in_a_package::package1::first_class_versioned_key& versioned_key() const;
+    dogen::class_in_a_package::package1::first_class_versioned_key& versioned_key();
+    void versioned_key(const dogen::class_in_a_package::package1::first_class_versioned_key& v);
 
-    void private_attribute(const int v) {
-        private_attribute_ = v;
-    }
-
-    const dogen::class_in_a_package::package1::first_class_versioned_key& versioned_key() const {
-        return versioned_key_;
-    }
-
-    dogen::class_in_a_package::package1::first_class_versioned_key& versioned_key() {
-        return versioned_key_;
-    }
-
-    void versioned_key(const dogen::class_in_a_package::package1::first_class_versioned_key& v) {
-        versioned_key_ = v;
-    }
-
-    void versioned_key(const dogen::class_in_a_package::package1::first_class_versioned_key&& v) {
-        versioned_key_ = std::move(v);
-    }
+    void versioned_key(const dogen::class_in_a_package::package1::first_class_versioned_key&& v);
 
 public:
     bool operator==(const first_class& rhs) const;

@@ -55,4 +55,28 @@ a_class& a_class::operator=(a_class other) {
     return *this;
 }
 
+dogen::enumeration::colour_types a_class::colour_type() const {
+    return colour_type_;
+}
+
+void a_class::colour_type(const dogen::enumeration::colour_types& v) {
+    colour_type_ = v;
+}
+
+dogen::enumeration::book_types a_class::book_type() const {
+    return book_type_;
+}
+
+void a_class::book_type(const dogen::enumeration::book_types& v) {
+    book_type_ = v;
+}
+
+dogen::enumeration::pkg1::shape_types a_class::shape_type() const {
+    return shape_type_;
+}
+
+void a_class::shape_type(const dogen::enumeration::pkg1::shape_types& v) {
+    shape_type_ = v;
+}
+
 } }

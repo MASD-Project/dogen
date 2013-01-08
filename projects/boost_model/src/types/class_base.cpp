@@ -46,4 +46,12 @@ bool class_base::compare(const class_base& rhs) const {
     return prop_0_ == rhs.prop_0_;
 }
 
+int class_base::prop_0() const {
+    return prop_0_;
+}
+
+void class_base::prop_0(const int v) {
+    prop_0_ = v;
+}
+
 } }

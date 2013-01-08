@@ -61,101 +61,41 @@ private:
     friend void boost::serialization::load(Archive& ar, class_b& v, unsigned int version);
 
 public:
-    const boost::shared_ptr<dogen::boost_model::class_a>& prop_0() const {
-        return prop_0_;
-    }
+    const boost::shared_ptr<dogen::boost_model::class_a>& prop_0() const;
+    boost::shared_ptr<dogen::boost_model::class_a>& prop_0();
+    void prop_0(const boost::shared_ptr<dogen::boost_model::class_a>& v);
 
-    boost::shared_ptr<dogen::boost_model::class_a>& prop_0() {
-        return prop_0_;
-    }
+    void prop_0(const boost::shared_ptr<dogen::boost_model::class_a>&& v);
 
-    void prop_0(const boost::shared_ptr<dogen::boost_model::class_a>& v) {
-        prop_0_ = v;
-    }
+    const std::vector<boost::shared_ptr<dogen::boost_model::class_a> >& prop_1() const;
+    std::vector<boost::shared_ptr<dogen::boost_model::class_a> >& prop_1();
+    void prop_1(const std::vector<boost::shared_ptr<dogen::boost_model::class_a> >& v);
 
-    void prop_0(const boost::shared_ptr<dogen::boost_model::class_a>&& v) {
-        prop_0_ = std::move(v);
-    }
+    void prop_1(const std::vector<boost::shared_ptr<dogen::boost_model::class_a> >&& v);
 
-    const std::vector<boost::shared_ptr<dogen::boost_model::class_a> >& prop_1() const {
-        return prop_1_;
-    }
+    const std::unordered_map<int, boost::shared_ptr<dogen::boost_model::class_a> >& prop_2() const;
+    std::unordered_map<int, boost::shared_ptr<dogen::boost_model::class_a> >& prop_2();
+    void prop_2(const std::unordered_map<int, boost::shared_ptr<dogen::boost_model::class_a> >& v);
 
-    std::vector<boost::shared_ptr<dogen::boost_model::class_a> >& prop_1() {
-        return prop_1_;
-    }
+    void prop_2(const std::unordered_map<int, boost::shared_ptr<dogen::boost_model::class_a> >&& v);
 
-    void prop_1(const std::vector<boost::shared_ptr<dogen::boost_model::class_a> >& v) {
-        prop_1_ = v;
-    }
+    const boost::shared_ptr<dogen::boost_model::pkg1::class_c>& prop_3() const;
+    boost::shared_ptr<dogen::boost_model::pkg1::class_c>& prop_3();
+    void prop_3(const boost::shared_ptr<dogen::boost_model::pkg1::class_c>& v);
 
-    void prop_1(const std::vector<boost::shared_ptr<dogen::boost_model::class_a> >&& v) {
-        prop_1_ = std::move(v);
-    }
+    void prop_3(const boost::shared_ptr<dogen::boost_model::pkg1::class_c>&& v);
 
-    const std::unordered_map<int, boost::shared_ptr<dogen::boost_model::class_a> >& prop_2() const {
-        return prop_2_;
-    }
+    const boost::shared_ptr<dogen::boost_model::class_base>& prop_4() const;
+    boost::shared_ptr<dogen::boost_model::class_base>& prop_4();
+    void prop_4(const boost::shared_ptr<dogen::boost_model::class_base>& v);
 
-    std::unordered_map<int, boost::shared_ptr<dogen::boost_model::class_a> >& prop_2() {
-        return prop_2_;
-    }
+    void prop_4(const boost::shared_ptr<dogen::boost_model::class_base>&& v);
 
-    void prop_2(const std::unordered_map<int, boost::shared_ptr<dogen::boost_model::class_a> >& v) {
-        prop_2_ = v;
-    }
+    const std::vector<boost::shared_ptr<dogen::boost_model::class_base> >& prop_5() const;
+    std::vector<boost::shared_ptr<dogen::boost_model::class_base> >& prop_5();
+    void prop_5(const std::vector<boost::shared_ptr<dogen::boost_model::class_base> >& v);
 
-    void prop_2(const std::unordered_map<int, boost::shared_ptr<dogen::boost_model::class_a> >&& v) {
-        prop_2_ = std::move(v);
-    }
-
-    const boost::shared_ptr<dogen::boost_model::pkg1::class_c>& prop_3() const {
-        return prop_3_;
-    }
-
-    boost::shared_ptr<dogen::boost_model::pkg1::class_c>& prop_3() {
-        return prop_3_;
-    }
-
-    void prop_3(const boost::shared_ptr<dogen::boost_model::pkg1::class_c>& v) {
-        prop_3_ = v;
-    }
-
-    void prop_3(const boost::shared_ptr<dogen::boost_model::pkg1::class_c>&& v) {
-        prop_3_ = std::move(v);
-    }
-
-    const boost::shared_ptr<dogen::boost_model::class_base>& prop_4() const {
-        return prop_4_;
-    }
-
-    boost::shared_ptr<dogen::boost_model::class_base>& prop_4() {
-        return prop_4_;
-    }
-
-    void prop_4(const boost::shared_ptr<dogen::boost_model::class_base>& v) {
-        prop_4_ = v;
-    }
-
-    void prop_4(const boost::shared_ptr<dogen::boost_model::class_base>&& v) {
-        prop_4_ = std::move(v);
-    }
-
-    const std::vector<boost::shared_ptr<dogen::boost_model::class_base> >& prop_5() const {
-        return prop_5_;
-    }
-
-    std::vector<boost::shared_ptr<dogen::boost_model::class_base> >& prop_5() {
-        return prop_5_;
-    }
-
-    void prop_5(const std::vector<boost::shared_ptr<dogen::boost_model::class_base> >& v) {
-        prop_5_ = v;
-    }
-
-    void prop_5(const std::vector<boost::shared_ptr<dogen::boost_model::class_base> >&& v) {
-        prop_5_ = std::move(v);
-    }
+    void prop_5(const std::vector<boost::shared_ptr<dogen::boost_model::class_base> >&& v);
 
 public:
     bool operator==(const class_b& rhs) const;

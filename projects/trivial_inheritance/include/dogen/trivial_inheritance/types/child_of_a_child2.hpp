@@ -58,13 +58,8 @@ public:
     void to_stream(std::ostream& s) const override;
 
 public:
-    unsigned int prop_2() const {
-        return prop_2_;
-    }
-
-    void prop_2(const unsigned int v) {
-        prop_2_ = v;
-    }
+    unsigned int prop_2() const;
+    void prop_2(const unsigned int v);
 
 public:
     bool operator==(const child_of_a_child2& rhs) const;
