@@ -55,6 +55,13 @@ Seems like the compiler is either declaring the enumeration (rather
 than forward declaring it) or the forward declaration requires an
 underlying type.
 
+MC: According to wikipedia, the default type of a C++-11 enumeration
+is =int=:
+
+http://en.wikipedia.org/wiki/C%2B%2B11#Strongly_typed_enumerations
+
+We need to specify the type when we forward declare.
+
 *** Move injection of system types into SML                           :story:
 
 At present the director is responsible for injecting all system types
