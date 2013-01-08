@@ -122,6 +122,7 @@ BOOST_AUTO_TEST_CASE(scope_operator_followed_by_scope_operator_fails_to_parse) {
 
 BOOST_AUTO_TEST_CASE(all_primitive_types_are_valid) {
     SETUP_TEST_LOG("all_primitive_types_are_valid");
+
     BOOST_CHECK(test_primitive("char"));
     BOOST_CHECK(test_primitive("unsigned char"));
     BOOST_CHECK(test_primitive("wchar_t"));
@@ -286,6 +287,27 @@ BOOST_AUTO_TEST_CASE(parsing_vector_of_shared_ptr_produces_expected_nested_quali
 
     const auto a(ip.parse_qualified_name("std::vector<std::shared_ptr<std::string>>"));
     BOOST_CHECK(asserter::assert_equals(nqn, a));
+}
+
+BOOST_AUTO_TEST_CASE(names_that_partially_match_primitives_produce_expected_nested_qualified_name) {
+    SETUP_TEST_LOG("names_that_partially_match_primitives_produce_expected_nested_qualified_name");
+
+    BOOST_CHECK(test_primitive("character"));
+    BOOST_CHECK(test_primitive("cha"));
+    BOOST_CHECK(test_primitive("wchar_test"));
+    BOOST_CHECK(test_primitive("wcha"));
+    BOOST_CHECK(test_primitive("boolean"));
+    BOOST_CHECK(test_primitive("boo"));
+    BOOST_CHECK(test_primitive("shorter"));
+    BOOST_CHECK(test_primitive("shor"));
+    BOOST_CHECK(test_primitive("integer"));
+    BOOST_CHECK(test_primitive("in"));
+    BOOST_CHECK(test_primitive("voidest"));
+    BOOST_CHECK(test_primitive("voi"));
+    BOOST_CHECK(test_primitive("floating"));
+    BOOST_CHECK(test_primitive("floa"));
+    BOOST_CHECK(test_primitive("doubler"));
+    BOOST_CHECK(test_primitive("doubl"));
 }
 
 BOOST_AUTO_TEST_SUITE_END()

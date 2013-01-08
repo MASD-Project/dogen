@@ -29,6 +29,7 @@
 #include <boost/spirit/include/phoenix_fusion.hpp>
 #include <boost/spirit/include/phoenix_operator.hpp>
 #include <boost/spirit/include/phoenix_object.hpp>
+#include <boost/spirit/repository/include/qi_distinct.hpp>
 #include <boost/throw_exception.hpp>
 #include "dogen/sml/types/parsing_error.hpp"
 #include "dogen/sml/types/identifier_parser.hpp"
@@ -47,6 +48,40 @@ using namespace boost::spirit;
 
 using dogen::sml::nested_qualified_name_builder;
 
+namespace distinct {
+
+namespace spirit = boost::spirit;
+namespace ascii = boost::spirit::ascii;
+namespace repo = boost::spirit::repository;
+
+namespace traits {
+
+template <typename Tail>
+struct distinct_spec
+    : spirit::result_of::terminal<repo::tag::distinct(Tail)> {};
+
+template <typename String>
+struct char_spec
+    : spirit::result_of::terminal<spirit::tag::ascii::char_(String)> {};
+
+}
+
+template <typename Tail>
+inline typename traits::distinct_spec<Tail>::type
+distinct_spec(Tail const& tail) { return repo::distinct(tail); }
+
+template <typename String>
+inline typename traits::char_spec<String>::type
+char_spec(String const& str) { return ascii::char_(str); }
+
+typedef traits::char_spec<std::string>::type charset_tag_type;
+typedef traits::distinct_spec<charset_tag_type>::type keyword_tag_type;
+
+std::string const keyword_spec("0-9a-zA-Z_");
+keyword_tag_type const keyword = distinct_spec(char_spec(keyword_spec));
+
+}
+
 template<typename Iterator>
 struct grammar : qi::grammar<Iterator> {
     std::shared_ptr<nested_qualified_name_builder> builder;
@@ -58,25 +93,11 @@ struct grammar : qi::grammar<Iterator> {
     std::function<void()> start_template_, next_type_argument_, end_template_;
     std::function<void(const std::string&)> add_nested_name_, add_primitive_;
 
-    void add_nested_name(const std::string& s) {
-        builder->add_name(s);
-    }
-
-    void add_primitive(const std::string& s) {
-        builder->add_primitive(s);
-    }
-
-    void start_template() {
-        builder->start_children();
-    }
-
-    void next_type_argument() {
-        builder->next_child();
-    }
-
-    void end_template() {
-        builder->end_children();
-    }
+    void add_nested_name(const std::string& s) { builder->add_name(s); }
+    void add_primitive(const std::string& s) { builder->add_primitive(s); }
+    void start_template() { builder->start_children(); }
+    void next_type_argument() { builder->next_child(); }
+    void end_template() { builder->end_children(); }
 
     void setup_functors() {
         add_nested_name_ = std::bind(&grammar::add_nested_name, this,
@@ -111,14 +132,18 @@ struct grammar : qi::grammar<Iterator> {
         signable_primitive =
             -(string("unsigned") >> string(" ")) >>
             (
-                string("short") | string("wchar_t") | string("char") |
-                string("int") |
+                distinct::keyword[string("short")] |
+                distinct::keyword[string("wchar_t")] |
+                distinct::keyword[string("char")] |
+                distinct::keyword[string("int")] |
                 (
                     string("long") >> -(string(" ") >> string("long"))));
         primitive =
-            string("bool") |
+            distinct::keyword[string("bool")] |
             signable_primitive |
-            string("float") | string("double") | string("void");
+            distinct::keyword[string("float")] |
+            distinct::keyword[string("double")] |
+            distinct::keyword[string("void")];
         type_name %= primitive[add_primitive_] |
             (nested_name >> -(templated_name));
 
