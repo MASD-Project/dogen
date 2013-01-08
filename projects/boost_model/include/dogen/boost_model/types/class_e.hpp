@@ -27,6 +27,7 @@
 
 #include <algorithm>
 #include <boost/variant.hpp>
+#include <vector>
 #include "dogen/boost_model/serialization/class_e_fwd_ser.hpp"
 #include "dogen/boost_model/types/class_derived.hpp"
 
@@ -45,7 +46,8 @@ public:
 public:
     class_e(
         const boost::variant<int, double>& prop_0,
-        const boost::variant<int, dogen::boost_model::class_derived, double>& prop_1);
+        const boost::variant<int, dogen::boost_model::class_derived, double>& prop_1,
+        const std::vector<boost::variant<int, dogen::boost_model::class_derived, double> >& prop_2);
 
 private:
     template<typename Archive>
@@ -87,6 +89,22 @@ public:
         prop_1_ = std::move(v);
     }
 
+    const std::vector<boost::variant<int, dogen::boost_model::class_derived, double> >& prop_2() const {
+        return prop_2_;
+    }
+
+    std::vector<boost::variant<int, dogen::boost_model::class_derived, double> >& prop_2() {
+        return prop_2_;
+    }
+
+    void prop_2(const std::vector<boost::variant<int, dogen::boost_model::class_derived, double> >& v) {
+        prop_2_ = v;
+    }
+
+    void prop_2(const std::vector<boost::variant<int, dogen::boost_model::class_derived, double> >&& v) {
+        prop_2_ = std::move(v);
+    }
+
 public:
     bool operator==(const class_e& rhs) const;
     bool operator!=(const class_e& rhs) const {
@@ -100,6 +118,7 @@ public:
 private:
     boost::variant<int, double> prop_0_;
     boost::variant<int, dogen::boost_model::class_derived, double> prop_1_;
+    std::vector<boost::variant<int, dogen::boost_model::class_derived, double> > prop_2_;
 };
 
 } }

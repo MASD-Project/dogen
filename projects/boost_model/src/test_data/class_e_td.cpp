@@ -64,6 +64,14 @@ create_boost_variant_int_dogen_boost_model_class_derived_double(unsigned int pos
     return r;
 }
 
+std::vector<boost::variant<int, dogen::boost_model::class_derived, double> > create_std_vector_boost_variant_int_dogen_boost_model_class_derived_double_(unsigned int position) {
+    std::vector<boost::variant<int, dogen::boost_model::class_derived, double> > r;
+    for (unsigned int i(0); i < 10; ++i) {
+        r.push_back(create_boost_variant_int_dogen_boost_model_class_derived_double(position + i));
+    }
+    return r;
+}
+
 }
 
 namespace dogen {
@@ -75,6 +83,7 @@ void class_e_generator::
 populate(const unsigned int position, result_type& v) {
     v.prop_0(create_boost_variant_int_double(position + 0));
     v.prop_1(create_boost_variant_int_dogen_boost_model_class_derived_double(position + 1));
+    v.prop_2(create_std_vector_boost_variant_int_dogen_boost_model_class_derived_double_(position + 2));
 }
 
 class_e_generator::result_type

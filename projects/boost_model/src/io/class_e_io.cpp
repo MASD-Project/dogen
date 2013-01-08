@@ -98,6 +98,20 @@ inline std::ostream& operator<<(std::ostream& s, const boost::variant<int, dogen
 
 }
 
+namespace std {
+
+inline std::ostream& operator<<(std::ostream& s, const std::vector<boost::variant<int, dogen::boost_model::class_derived, double> >& v) {
+    s << "[ ";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << *i;
+    }
+    s << "] ";
+    return s;
+}
+
+}
+
 namespace dogen {
 namespace boost_model {
 
@@ -111,7 +125,8 @@ std::ostream& operator<<(std::ostream& s, const class_e& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::boost_model::class_e\"" << ", "
       << "\"prop_0\": " << v.prop_0() << ", "
-      << "\"prop_1\": " << v.prop_1()
+      << "\"prop_1\": " << v.prop_1() << ", "
+      << "\"prop_2\": " << v.prop_2()
       << " }";
     return(s);
 }
