@@ -11,6 +11,22 @@ This file contains all stories that haven't been assigned to a sprint.
 
 Stories that we intend to look at, at some point.
 
+*** Partial matching of primitives doesn't work for certain types     :story:
+
+We introduced a fix that allows users to create types that partially
+match primitive types such as =in= or =integer=. The fix was copied
+from the spirit documentation:
+
+[[http://www.boost.org/doc/libs/1_52_0/libs/spirit/repository/doc/html/spirit_repository/qi_components/directives/distinct.html][- Qi Distinct Parser Directive]]
+- [[http://www.boost.org/doc/libs/1_52_0/libs/spirit/repository/test/qi/distinct.cpp][distinct.cpp]]
+
+However, we still haven't solved the following cases:
+
+: BOOST_CHECK(test_primitive("longer"));
+: BOOST_CHECK(test_primitive("unsigneder"));
+
+As these are not so common they have been left for later.
+
 *** Automatic typedef generation                                      :story:
 
 We should generate typedefs for all smart pointers, containers, etc -
