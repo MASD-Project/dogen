@@ -948,37 +948,17 @@ private:
     friend void boost::serialization::load(Archive& ar, first_class& v, unsigned int version);
 
 public:
-    int public_attribute() const {
-        return public_attribute_;
-    }
+    int public_attribute() const;
+    void public_attribute(const int v);
 
-    void public_attribute(const int v) {
-        public_attribute_ = v;
-    }
+    int private_attribute() const;
+    void private_attribute(const int v);
 
-    int private_attribute() const {
-        return private_attribute_;
-    }
+    const class_in_a_package::package1::first_class_versioned_key& versioned_key() const;
+    class_in_a_package::package1::first_class_versioned_key& versioned_key();
+    void versioned_key(const class_in_a_package::package1::first_class_versioned_key& v);
 
-    void private_attribute(const int v) {
-        private_attribute_ = v;
-    }
-
-    const class_in_a_package::package1::first_class_versioned_key& versioned_key() const {
-        return versioned_key_;
-    }
-
-    class_in_a_package::package1::first_class_versioned_key& versioned_key() {
-        return versioned_key_;
-    }
-
-    void versioned_key(const class_in_a_package::package1::first_class_versioned_key& v) {
-        versioned_key_ = v;
-    }
-
-    void versioned_key(const class_in_a_package::package1::first_class_versioned_key&& v) {
-        versioned_key_ = std::move(v);
-    }
+    void versioned_key(const class_in_a_package::package1::first_class_versioned_key&& v);
 
 public:
     bool operator==(const first_class& rhs) const;
@@ -1104,13 +1084,8 @@ private:
     friend void boost::serialization::load(Archive& ar, first_class_unversioned_key& v, unsigned int version);
 
 public:
-    unsigned int id() const {
-        return id_;
-    }
-
-    void id(const unsigned int v) {
-        id_ = v;
-    }
+    unsigned int id() const;
+    void id(const unsigned int v);
 
 public:
     bool operator==(const first_class_unversioned_key& rhs) const;
@@ -1236,21 +1211,11 @@ private:
     friend void boost::serialization::load(Archive& ar, first_class_versioned_key& v, unsigned int version);
 
 public:
-    unsigned int id() const {
-        return id_;
-    }
+    unsigned int id() const;
+    void id(const unsigned int v);
 
-    void id(const unsigned int v) {
-        id_ = v;
-    }
-
-    unsigned int version() const {
-        return version_;
-    }
-
-    void version(const unsigned int v) {
-        version_ = v;
-    }
+    unsigned int version() const;
+    void version(const unsigned int v);
 
 public:
     bool operator==(const first_class_versioned_key& rhs) const;
@@ -2167,6 +2132,38 @@ first_class& first_class::operator=(first_class other) {
     return *this;
 }
 
+int first_class::public_attribute() const {
+    return public_attribute_;
+}
+
+void first_class::public_attribute(const int v) {
+    public_attribute_ = v;
+}
+
+int first_class::private_attribute() const {
+    return private_attribute_;
+}
+
+void first_class::private_attribute(const int v) {
+    private_attribute_ = v;
+}
+
+const class_in_a_package::package1::first_class_versioned_key& first_class::versioned_key() const {
+    return versioned_key_;
+}
+
+class_in_a_package::package1::first_class_versioned_key& first_class::versioned_key() {
+    return versioned_key_;
+}
+
+void first_class::versioned_key(const class_in_a_package::package1::first_class_versioned_key& v) {
+    versioned_key_ = v;
+}
+
+void first_class::versioned_key(const class_in_a_package::package1::first_class_versioned_key&& v) {
+    versioned_key_ = std::move(v);
+}
+
 } }
 Filename: /empty_tds/actual/src/class_in_a_package/types/package1/first_class_unversioned_key.cpp
 Contents: 
@@ -2214,6 +2211,14 @@ first_class_unversioned_key& first_class_unversioned_key::operator=(first_class_
     using std::swap;
     swap(*this, other);
     return *this;
+}
+
+unsigned int first_class_unversioned_key::id() const {
+    return id_;
+}
+
+void first_class_unversioned_key::id(const unsigned int v) {
+    id_ = v;
 }
 
 } }
@@ -2269,6 +2274,22 @@ first_class_versioned_key& first_class_versioned_key::operator=(first_class_vers
     using std::swap;
     swap(*this, other);
     return *this;
+}
+
+unsigned int first_class_versioned_key::id() const {
+    return id_;
+}
+
+void first_class_versioned_key::id(const unsigned int v) {
+    id_ = v;
+}
+
+unsigned int first_class_versioned_key::version() const {
+    return version_;
+}
+
+void first_class_versioned_key::version(const unsigned int v) {
+    version_ = v;
 }
 
 } }
