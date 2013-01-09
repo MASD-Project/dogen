@@ -35,6 +35,8 @@
 #include "dogen/sml/types/category_types.hpp"
 #include "dogen/generator/config/cpp_settings.hpp"
 #include "dogen/sml/types/meta_types.hpp"
+#include "dogen/generator/backends/cpp/dependency_details.hpp"
+#include "dogen/generator/backends/cpp/dependency_extractor.hpp"
 #include "dogen/generator/backends/cpp/cpp_location_manager.hpp"
 #include "dogen/generator/backends/cpp/cpp_aspect_types.hpp"
 #include "dogen/generator/backends/cpp/cpp_facet_types.hpp"
@@ -87,7 +89,8 @@ public:
       hash_enabled_(std::move(rhs.hash_enabled_)),
       headers_for_facet_(std::move(rhs.headers_for_facet_)),
       boost_(std::move(rhs.boost_)),
-      std_(std::move(rhs.std_)) { }
+      std_(std::move(rhs.std_)),
+      dependency_extractor_(std::move(rhs.dependency_extractor_)) { }
 
     cpp_inclusion_manager(const sml::model& model,
         const cpp_location_manager& location_manager,
@@ -127,59 +130,11 @@ public:
         const boost::filesystem::path& relative_path);
 
     /**
-     * @brief Returns true if there is a type in the list of qualified
-     * names which requires special formatting.
-     *
-     * The objective of this function is to determine if one is
-     * required to use ios stream state saving or not. For types such
-     * as bool, etc we are expected to change the state of the stream
-     * so state saving is required.
-     */
-    bool requires_stream_manipulators(
-        const std::list<dogen::sml::qname>& names) const;
-
-    /**
-     * @brief Returns true if there is a std::string in the type list.
-     */
-    bool has_std_string(
-        const std::list<dogen::sml::qname>& names) const;
-
-    /**
-     * @brief Returns true if there is a boost::variant in the type list.
-     */
-    bool has_variant(const std::list<dogen::sml::qname>& names) const;
-
-    /**
-     * @brief Returns true if the pod is in a inheritance
-     * relationship, as either the parent or the child.
-     */
-    bool is_parent_or_child(const dogen::sml::pod& p) const;
-
-    /**
      * @brief Remove duplicates from inclusion lists
      */
     void remove_duplicates(inclusion_lists& il) const;
 
 private:
-    void recurse_nested_qualified_names_keys(const dogen::sml::nested_qualified_name&
-        nested_qualified_name, std::list<dogen::sml::qname>& keys) const;
-
-    std::list<dogen::sml::qname>
-    pod_to_keys(const sml::pod& pod) const;
-
-    void recurse_nested_qualified_names(const dogen::sml::nested_qualified_name&
-        nested_qualified_name, std::list<dogen::sml::qname>& qnames) const;
-
-    /**
-     * @brief Flattens the given pod into a list containing all
-     * qualified names it is related to, except itself.
-     *
-     * The qualified names list includes all types used by the
-     * properties of the pod, as well as its parent, if any.
-     */
-    std::list<dogen::sml::qname>
-    pod_to_qualified_names(const sml::pod& pod) const;
-
     /**
      * @brief Appends to the inclusion lists all dependencies related
      * to the formatter implementation.
@@ -228,11 +183,8 @@ private:
      * of the type and all types of all properties it may have.
      */
     void append_relationship_dependencies(
-        const std::list<dogen::sml::qname>& names,
-        const std::list<dogen::sml::qname>& keys,
-        const std::list<dogen::sml::qname>& leaves,
-        const cpp_facet_types ft, const cpp_file_types flt,
-        const bool is_parent_or_child, inclusion_lists& il) const;
+        const dependency_details& dd, const cpp_facet_types ft,
+        const cpp_file_types flt, inclusion_lists& il) const;
 
     /**
      * @brief Appends to the inclusion lists dependencies related to
@@ -297,6 +249,7 @@ private:
     std::map<cpp_facet_types, std::list<std::string> > headers_for_facet_;
     const boost_model_helper boost_;
     const std_model_helper std_;
+    const dependency_extractor dependency_extractor_;
 };
 
 } } } }

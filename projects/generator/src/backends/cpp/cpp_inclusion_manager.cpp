@@ -33,9 +33,6 @@ const std::string primitive_model("primitive_model");
 const std::string bool_type("bool");
 const std::string double_type("double");
 const std::string float_type("float");
-const std::string pqxx_connection_include("pqxx/connection.hxx");
-const std::string pqxx_result_include("pqxx/result.hxx");
-const std::string pqxx_transaction_include("pqxx/transaction.hxx");
 
 using dogen::generator::backends::cpp::cpp_facet_types;
 bool contains(const std::set<cpp_facet_types>& f, cpp_facet_types ft) {
@@ -57,7 +54,8 @@ cpp_inclusion_manager::cpp_inclusion_manager(const sml::model& model,
       serialization_enabled_(contains(settings_.enabled_facets(),
               cpp_facet_types::serialization)),
       hash_enabled_(contains(settings_.enabled_facets(),
-              cpp_facet_types::hash)), boost_(), std_() {
+              cpp_facet_types::hash)), boost_(), std_(),
+      dependency_extractor_(model_.pods(), boost_, std_) {
 
     BOOST_LOG_SEV(lg, debug)
         << "Initial configuration:"
@@ -105,56 +103,6 @@ std::string cpp_inclusion_manager::header_dependency(
     const auto main(at);
     const auto rq(location_request_factory(facet_type, h, main, name));
     return location_manager_.relative_logical_path(rq).generic_string();
-}
-
-void cpp_inclusion_manager::
-recurse_nested_qualified_names_keys(const dogen::sml::nested_qualified_name& nested_qualified_name,
-    std::list<dogen::sml::qname>& keys) const {
-
-    if (nested_qualified_name.type().meta_type() == sml::meta_types::pod) {
-        const auto pods(model_.pods());
-        const auto i(pods.find(nested_qualified_name.type()));
-        const auto ac(sml::pod_types::associative_container);
-        if (i != pods.end() && i->second.pod_type() == ac) {
-            if (nested_qualified_name.children().size() >= 1)
-                keys.push_back(nested_qualified_name.children().front().type());
-        } else {
-            for (const auto nqn : nested_qualified_name.children())
-                recurse_nested_qualified_names_keys(nqn, keys);
-        }
-    }
-}
-
-std::list<dogen::sml::qname>
-cpp_inclusion_manager::pod_to_keys(const sml::pod& pod) const {
-    std::list<dogen::sml::qname> r;
-
-    for (const auto p : pod.properties())
-        recurse_nested_qualified_names_keys(p.type_name(), r);
-
-    return r;
-}
-
-void cpp_inclusion_manager::
-recurse_nested_qualified_names(const dogen::sml::nested_qualified_name& nested_qualified_name,
-    std::list<dogen::sml::qname>& qnames) const {
-
-    qnames.push_back(nested_qualified_name.type());
-    for (const auto nqn : nested_qualified_name.children())
-        recurse_nested_qualified_names(nqn, qnames);
-}
-
-std::list<dogen::sml::qname>
-cpp_inclusion_manager::pod_to_qualified_names(const sml::pod& pod) const {
-    std::list<dogen::sml::qname> r;
-
-    if (pod.parent_name())
-        r.push_back(*pod.parent_name());
-
-    for (const auto p : pod.properties())
-        recurse_nested_qualified_names(p.type_name(), r);
-
-    return r;
 }
 
 void cpp_inclusion_manager::
@@ -392,11 +340,30 @@ void cpp_inclusion_manager::append_std_dependencies(
 }
 
 void cpp_inclusion_manager::append_relationship_dependencies(
-    const std::list<dogen::sml::qname>& names,
-    const std::list<dogen::sml::qname>& keys,
-    const std::list<dogen::sml::qname>& leaves,
-    const cpp_facet_types ft, const cpp_file_types flt,
-    const bool is_parent_or_child, inclusion_lists& il) const {
+    const dependency_details& dd, const cpp_facet_types ft,
+    const cpp_file_types flt, inclusion_lists& il) const {
+
+    auto names(dd.names());
+    const bool is_header(flt == cpp_file_types::header);
+    const bool is_domain(ft == cpp_facet_types::types);
+    for(const auto n : dd.forward_decls()) {
+        const bool is_primitive(n.meta_type() == sml::meta_types::primitive);
+        const bool header_and_domain(is_header && is_domain);
+
+        if (n.model_name() == std_.model() ||
+            n.model_name() == boost_.model() || !header_and_domain) {
+            names.insert(n);
+            continue;
+        } else if (n.model_name() == primitive_model || is_primitive)
+            continue;
+
+        /*
+         * rule 0: domain headers that depend on a domain type
+         * which can be forward declared will forward declare it.
+         */
+        const auto fwd(cpp_aspect_types::forward_decls);
+        il.user.push_back(header_dependency(n, ft, fwd));
+    }
 
     for(const auto n : names) {
         // handle all special models first
@@ -422,10 +389,7 @@ void cpp_inclusion_manager::append_relationship_dependencies(
          * rule 2: domain headers need the corresponding header file
          * for the dependency
          */
-        const bool is_header(flt == cpp_file_types::header);
-        const bool is_domain(ft == cpp_facet_types::types);
         const auto main(cpp_aspect_types::main);
-
         if (is_header && !is_primitive && is_domain)
             il.user.push_back(header_dependency(n, ft, main));
 
@@ -448,13 +412,13 @@ void cpp_inclusion_manager::append_relationship_dependencies(
          * headers in domain implementation.
          */
         const bool domain_with_io(is_domain &&
-            (settings_.use_integrated_io() || is_parent_or_child));
+            (settings_.use_integrated_io() || dd.is_parent_or_child()));
 
         if (is_implementation && io_enabled_ && domain_with_io)
             il.user.push_back(header_dependency(n, cpp_facet_types::io, main));
     }
 
-    for (const auto k : keys) {
+    for (const auto k : dd.keys()) {
         // keys from special models can be ignored
         if (k.model_name() == std_.model() ||
             k.model_name() == boost_.model() ||
@@ -473,7 +437,7 @@ void cpp_inclusion_manager::append_relationship_dependencies(
             il.user.push_back(header_dependency(k, cpp_facet_types::hash, main));
     }
 
-    for (const auto l : leaves) {
+    for (const auto l : dd.leaves() ) {
         /*
          * rule 6: leaves require generators in test data.
          */
@@ -535,41 +499,6 @@ append_self_dependencies(dogen::sml::qname name,
     const bool is_implementation(flt == cpp_file_types::implementation);
     if (is_implementation)
         il.user.push_back(header_dependency(name, ft, main));
-}
-
-bool cpp_inclusion_manager::requires_stream_manipulators(
-    const std::list<dogen::sml::qname>& names) const {
-    using dogen::sml::qname;
-    for (const auto n : names) {
-        if (n.type_name() == bool_type || n.type_name() == double_type ||
-            n.type_name() == float_type)
-            return true;
-    }
-    return false;
-}
-
-bool cpp_inclusion_manager::
-has_std_string(const std::list<dogen::sml::qname>& names) const {
-    using dogen::sml::qname;
-    for (const auto n : names) {
-        if (n.type_name() == std_.type(std_types::string))
-            return true;
-    }
-    return false;
-}
-
-bool cpp_inclusion_manager::
-has_variant(const std::list<dogen::sml::qname>& names) const {
-    using dogen::sml::qname;
-    for (const auto n : names) {
-        if (n.type_name() == boost_.type(boost_types::variant))
-            return true;
-    }
-    return false;
-}
-
-bool cpp_inclusion_manager::is_parent_or_child(const dogen::sml::pod& p) const {
-    return p.parent_name() || p.is_parent();
 }
 
 void cpp_inclusion_manager::remove_duplicates(inclusion_lists& il) const {
@@ -694,15 +623,13 @@ includes_for_pod(const sml::pod& pod, cpp_facet_types ft, cpp_file_types flt,
         return r;
     }
 
-    const auto names(pod_to_qualified_names(pod));
-    const auto keys(pod_to_keys(pod));
-    const bool rsm(requires_stream_manipulators(names));
-    const bool has_str(has_std_string(names));
-    const bool has_var(has_variant(names));
-    const bool pc(is_parent_or_child(pod));
+    const auto details(dependency_extractor_.extract(pod));
+    const bool rsm(details.requires_stream_manipulators());
+    const bool has_str(details.has_std_string());
+    const bool has_var(details.has_variant());
 
     append_implementation_dependencies(pod, ft, flt, r, rsm, has_str, has_var);
-    append_relationship_dependencies(names, keys, pod.leaves(), ft, flt, pc, r);
+    append_relationship_dependencies(details, ft, flt, r);
     append_self_dependencies(n, ft, flt, at, n.meta_type(), r);
 
     remove_duplicates(r);
