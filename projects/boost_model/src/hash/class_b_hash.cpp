@@ -89,6 +89,7 @@ std::size_t class_b_hasher::hash(const class_b&v) {
     combine(seed, hash_boost_shared_ptr_dogen_boost_model_pkg1_class_c(v.prop_3()));
     combine(seed, hash_boost_shared_ptr_dogen_boost_model_class_base(v.prop_4()));
     combine(seed, hash_std_vector_boost_shared_ptr_dogen_boost_model_class_base_(v.prop_5()));
+    combine(seed, v.prop_6());
 
     return seed;
 }

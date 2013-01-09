@@ -358,7 +358,7 @@ void cpp_inclusion_manager::append_relationship_dependencies(
             continue;
 
         /*
-         * rule 0: domain headers that depend on a domain type
+         * rule 1: domain headers that depend on a domain type
          * which can be forward declared will forward declare it.
          */
         const auto fwd(cpp_aspect_types::forward_decls);
@@ -377,7 +377,7 @@ void cpp_inclusion_manager::append_relationship_dependencies(
             continue;
 
         /*
-         * rule 1: primitives never require header files. Not quite
+         * rule 2: primitives never require header files. Not quite
          * sure when this could happen, as they should be part of a
          * special model.
          */
@@ -386,7 +386,7 @@ void cpp_inclusion_manager::append_relationship_dependencies(
             continue; // primitve on non-primitives model
 
         /*
-         * rule 2: domain headers need the corresponding header file
+         * rule 3: domain headers need the corresponding header file
          * for the dependency
          */
         const auto main(cpp_aspect_types::main);
@@ -394,7 +394,7 @@ void cpp_inclusion_manager::append_relationship_dependencies(
             il.user.push_back(header_dependency(n, ft, main));
 
         /*
-         * rule 3: hash, IO, serialisation and test data
+         * rule 4: hash, IO, serialisation and test data
          * implementations need the corresponding header file for the
          * dependency
          */
@@ -408,7 +408,16 @@ void cpp_inclusion_manager::append_relationship_dependencies(
             il.user.push_back(header_dependency(n, ft, main));
 
         /*
-         * rule 4: parents and children with integrated IO require IO
+         * rule 5: Domain implementation needs to include any files
+         * that the domain header forwarded.
+         */
+        const bool forwarded(dd.forward_decls().find(n) !=
+            dd.forward_decls().end());
+        if (is_implementation && is_domain && forwarded)
+            il.user.push_back(header_dependency(n, ft, main));
+
+        /*
+         * rule 6: parents and children with integrated IO require IO
          * headers in domain implementation.
          */
         const bool domain_with_io(is_domain &&
@@ -426,7 +435,7 @@ void cpp_inclusion_manager::append_relationship_dependencies(
             continue;
 
         /*
-         * rule 5: domain headers require hashing for all keys.
+         * rule 7: domain headers require hashing for all keys.
          */
         const bool is_header(flt == cpp_file_types::header);
         const bool is_domain(ft == cpp_facet_types::types);
@@ -439,7 +448,7 @@ void cpp_inclusion_manager::append_relationship_dependencies(
 
     for (const auto l : dd.leaves() ) {
         /*
-         * rule 6: leaves require generators in test data.
+         * rule 8: leaves require generators in test data.
          */
         const bool is_implementation(flt == cpp_file_types::implementation);
         const bool is_td(ft == cpp_facet_types::test_data);
@@ -448,7 +457,7 @@ void cpp_inclusion_manager::append_relationship_dependencies(
             il.user.push_back(header_dependency(l, ft, main));
 
         /*
-         * rule 7: base classes require registering all leaves in
+         * rule 9: base classes require registering all leaves in
          * serialisation implementation.
          */
         const bool is_ser(ft == cpp_facet_types::serialization);

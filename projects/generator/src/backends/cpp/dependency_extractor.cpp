@@ -40,17 +40,20 @@ recurse_nested_qualified_names(const sml::nested_qualified_name& nqn,
     dependency_details& dd, bool& is_pointer) const {
 
     const auto qn(nqn.type());
-    // if (is_pointer)
-    //     dd.forward_decls().insert(qn);
-    // else
+    if (is_pointer)
+        dd.forward_decls().insert(qn);
+    else
         dd.names().insert(qn);
 
+    is_pointer = false;
     if (qn.meta_type() == sml::meta_types::pod) {
         const auto i(pods_.find(qn));
-        const auto ac(sml::pod_types::associative_container);
-        if (i != pods_.end() && i->second.pod_type() == ac) {
-            if (nqn.children().size() >= 1)
+        if (i != pods_.end()) {
+            const auto pt(i->second.pod_type());
+            const auto is_ac(pt == sml::pod_types::associative_container);
+            if (is_ac && nqn.children().size() >= 1)
                 dd.keys().insert(nqn.children().front().type());
+            is_pointer = pt == sml::pod_types::smart_pointer;
         }
     }
 
@@ -75,9 +78,11 @@ dependency_details dependency_extractor::extract(const sml::pod& p) const {
     r.is_parent_or_child(p.parent_name() || p.is_parent());
     r.leaves().insert(p.leaves().begin(), p.leaves().end());
 
-    bool is_pointer(false);
-    for (const auto prop : p.properties())
-        recurse_nested_qualified_names(prop.type_name(), r, is_pointer);
+    for (const auto prop : p.properties()) {
+        const auto nqn(prop.type_name());
+        bool is_pointer(nqn.is_pointer());
+        recurse_nested_qualified_names(nqn, r, is_pointer);
+    }
 
     for (const auto& n : r.names()) {
         if (r.forward_decls().find(n) != r.forward_decls().end())

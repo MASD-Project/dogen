@@ -129,7 +129,8 @@ std::ostream& operator<<(std::ostream& s, const class_b& v) {
       << "\"prop_2\": " << v.prop_2() << ", "
       << "\"prop_3\": " << v.prop_3() << ", "
       << "\"prop_4\": " << v.prop_4() << ", "
-      << "\"prop_5\": " << v.prop_5()
+      << "\"prop_5\": " << v.prop_5() << ", "
+      << "\"prop_6\": " << v.prop_6()
       << " }";
     return(s);
 }

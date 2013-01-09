@@ -30,8 +30,8 @@
 #include <unordered_map>
 #include <vector>
 #include "dogen/boost_model/serialization/class_b_fwd_ser.hpp"
-#include "dogen/boost_model/types/class_a.hpp"
-#include "dogen/boost_model/types/class_base.hpp"
+#include "dogen/boost_model/types/class_a_fwd.hpp"
+#include "dogen/boost_model/types/class_base_fwd.hpp"
 #include "dogen/boost_model/types/pkg1/class_c.hpp"
 
 namespace dogen {
@@ -51,7 +51,8 @@ public:
         const std::unordered_map<int, boost::shared_ptr<dogen::boost_model::class_a> >& prop_2,
         const boost::shared_ptr<dogen::boost_model::pkg1::class_c>& prop_3,
         const boost::shared_ptr<dogen::boost_model::class_base>& prop_4,
-        const std::vector<boost::shared_ptr<dogen::boost_model::class_base> >& prop_5);
+        const std::vector<boost::shared_ptr<dogen::boost_model::class_base> >& prop_5,
+        const dogen::boost_model::pkg1::class_c& prop_6);
 
 private:
     template<typename Archive>
@@ -91,6 +92,11 @@ public:
     void prop_5(const std::vector<boost::shared_ptr<dogen::boost_model::class_base> >& v);
     void prop_5(const std::vector<boost::shared_ptr<dogen::boost_model::class_base> >&& v);
 
+    const dogen::boost_model::pkg1::class_c& prop_6() const;
+    dogen::boost_model::pkg1::class_c& prop_6();
+    void prop_6(const dogen::boost_model::pkg1::class_c& v);
+    void prop_6(const dogen::boost_model::pkg1::class_c&& v);
+
 public:
     bool operator==(const class_b& rhs) const;
     bool operator!=(const class_b& rhs) const {
@@ -108,6 +114,7 @@ private:
     boost::shared_ptr<dogen::boost_model::pkg1::class_c> prop_3_;
     boost::shared_ptr<dogen::boost_model::class_base> prop_4_;
     std::vector<boost::shared_ptr<dogen::boost_model::class_base> > prop_5_;
+    dogen::boost_model::pkg1::class_c prop_6_;
 };
 
 } }

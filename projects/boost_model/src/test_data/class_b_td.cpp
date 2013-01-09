@@ -89,6 +89,11 @@ std::vector<boost::shared_ptr<dogen::boost_model::class_base> > create_std_vecto
     return r;
 }
 
+dogen::boost_model::pkg1::class_c
+create_dogen_boost_model_pkg1_class_c(const unsigned int position) {
+    return dogen::boost_model::pkg1::class_c_generator::create(position);
+}
+
 }
 
 namespace dogen {
@@ -104,6 +109,7 @@ populate(const unsigned int position, result_type& v) {
     v.prop_3(create_boost_shared_ptr_dogen_boost_model_pkg1_class_c(position + 3));
     v.prop_4(create_boost_shared_ptr_dogen_boost_model_class_base(position + 4));
     v.prop_5(create_std_vector_boost_shared_ptr_dogen_boost_model_class_base_(position + 5));
+    v.prop_6(create_dogen_boost_model_pkg1_class_c(position + 6));
 }
 
 class_b_generator::result_type

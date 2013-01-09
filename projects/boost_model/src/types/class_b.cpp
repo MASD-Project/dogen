@@ -18,7 +18,9 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen/boost_model/types/class_a.hpp"
 #include "dogen/boost_model/types/class_b.hpp"
+#include "dogen/boost_model/types/class_base.hpp"
 
 namespace boost {
 
@@ -56,13 +58,15 @@ class_b::class_b(
     const std::unordered_map<int, boost::shared_ptr<dogen::boost_model::class_a> >& prop_2,
     const boost::shared_ptr<dogen::boost_model::pkg1::class_c>& prop_3,
     const boost::shared_ptr<dogen::boost_model::class_base>& prop_4,
-    const std::vector<boost::shared_ptr<dogen::boost_model::class_base> >& prop_5)
+    const std::vector<boost::shared_ptr<dogen::boost_model::class_base> >& prop_5,
+    const dogen::boost_model::pkg1::class_c& prop_6)
     : prop_0_(prop_0),
       prop_1_(prop_1),
       prop_2_(prop_2),
       prop_3_(prop_3),
       prop_4_(prop_4),
-      prop_5_(prop_5) { }
+      prop_5_(prop_5),
+      prop_6_(prop_6) { }
 
 void class_b::swap(class_b& other) noexcept {
     using std::swap;
@@ -72,6 +76,7 @@ void class_b::swap(class_b& other) noexcept {
     swap(prop_3_, other.prop_3_);
     swap(prop_4_, other.prop_4_);
     swap(prop_5_, other.prop_5_);
+    swap(prop_6_, other.prop_6_);
 }
 
 bool class_b::operator==(const class_b& rhs) const {
@@ -80,7 +85,8 @@ bool class_b::operator==(const class_b& rhs) const {
         prop_2_ == rhs.prop_2_ &&
         prop_3_ == rhs.prop_3_ &&
         prop_4_ == rhs.prop_4_ &&
-        prop_5_ == rhs.prop_5_;
+        prop_5_ == rhs.prop_5_ &&
+        prop_6_ == rhs.prop_6_;
 }
 
 class_b& class_b::operator=(class_b other) {
@@ -183,6 +189,22 @@ void class_b::prop_5(const std::vector<boost::shared_ptr<dogen::boost_model::cla
 
 void class_b::prop_5(const std::vector<boost::shared_ptr<dogen::boost_model::class_base> >&& v) {
     prop_5_ = std::move(v);
+}
+
+const dogen::boost_model::pkg1::class_c& class_b::prop_6() const {
+    return prop_6_;
+}
+
+dogen::boost_model::pkg1::class_c& class_b::prop_6() {
+    return prop_6_;
+}
+
+void class_b::prop_6(const dogen::boost_model::pkg1::class_c& v) {
+    prop_6_ = v;
+}
+
+void class_b::prop_6(const dogen::boost_model::pkg1::class_c&& v) {
+    prop_6_ = std::move(v);
 }
 
 } }
