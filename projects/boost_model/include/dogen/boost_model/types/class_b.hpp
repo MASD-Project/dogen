@@ -64,37 +64,31 @@ public:
     const boost::shared_ptr<dogen::boost_model::class_a>& prop_0() const;
     boost::shared_ptr<dogen::boost_model::class_a>& prop_0();
     void prop_0(const boost::shared_ptr<dogen::boost_model::class_a>& v);
-
     void prop_0(const boost::shared_ptr<dogen::boost_model::class_a>&& v);
 
     const std::vector<boost::shared_ptr<dogen::boost_model::class_a> >& prop_1() const;
     std::vector<boost::shared_ptr<dogen::boost_model::class_a> >& prop_1();
     void prop_1(const std::vector<boost::shared_ptr<dogen::boost_model::class_a> >& v);
-
     void prop_1(const std::vector<boost::shared_ptr<dogen::boost_model::class_a> >&& v);
 
     const std::unordered_map<int, boost::shared_ptr<dogen::boost_model::class_a> >& prop_2() const;
     std::unordered_map<int, boost::shared_ptr<dogen::boost_model::class_a> >& prop_2();
     void prop_2(const std::unordered_map<int, boost::shared_ptr<dogen::boost_model::class_a> >& v);
-
     void prop_2(const std::unordered_map<int, boost::shared_ptr<dogen::boost_model::class_a> >&& v);
 
     const boost::shared_ptr<dogen::boost_model::pkg1::class_c>& prop_3() const;
     boost::shared_ptr<dogen::boost_model::pkg1::class_c>& prop_3();
     void prop_3(const boost::shared_ptr<dogen::boost_model::pkg1::class_c>& v);
-
     void prop_3(const boost::shared_ptr<dogen::boost_model::pkg1::class_c>&& v);
 
     const boost::shared_ptr<dogen::boost_model::class_base>& prop_4() const;
     boost::shared_ptr<dogen::boost_model::class_base>& prop_4();
     void prop_4(const boost::shared_ptr<dogen::boost_model::class_base>& v);
-
     void prop_4(const boost::shared_ptr<dogen::boost_model::class_base>&& v);
 
     const std::vector<boost::shared_ptr<dogen::boost_model::class_base> >& prop_5() const;
     std::vector<boost::shared_ptr<dogen::boost_model::class_base> >& prop_5();
     void prop_5(const std::vector<boost::shared_ptr<dogen::boost_model::class_base> >& v);
-
     void prop_5(const std::vector<boost::shared_ptr<dogen::boost_model::class_base> >&& v);
 
 public:

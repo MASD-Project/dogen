@@ -65,7 +65,6 @@ public:
     const dogen::class_in_a_package::package1::first_class_versioned_key& versioned_key() const;
     dogen::class_in_a_package::package1::first_class_versioned_key& versioned_key();
     void versioned_key(const dogen::class_in_a_package::package1::first_class_versioned_key& v);
-
     void versioned_key(const dogen::class_in_a_package::package1::first_class_versioned_key&& v);
 
 public:

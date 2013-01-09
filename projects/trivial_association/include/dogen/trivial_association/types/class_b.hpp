@@ -53,7 +53,6 @@ public:
     const dogen::trivial_association::class_a& prop_0() const;
     dogen::trivial_association::class_a& prop_0();
     void prop_0(const dogen::trivial_association::class_a& v);
-
     void prop_0(const dogen::trivial_association::class_a&& v);
 
 public:

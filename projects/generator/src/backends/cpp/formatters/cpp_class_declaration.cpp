@@ -236,7 +236,6 @@ pod_getters_and_setters(const property_view_model& vm) {
         stream_ << "&";
 
     stream_ << " v);" << std::endl;
-    utility_.blank_line();
 
     // move setter
     stream_ << indenter_ << "void " << vm.name() << "(const "

@@ -62,7 +62,6 @@ public:
     const std::vector<dogen::boost_model::class_a>& prop_1() const;
     std::vector<dogen::boost_model::class_a>& prop_1();
     void prop_1(const std::vector<dogen::boost_model::class_a>& v);
-
     void prop_1(const std::vector<dogen::boost_model::class_a>&& v);
 
 public:

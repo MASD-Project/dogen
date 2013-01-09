@@ -60,7 +60,6 @@ public:
     const dogen::entity_service_value::entity_versioned_key& versioned_key() const;
     dogen::entity_service_value::entity_versioned_key& versioned_key();
     void versioned_key(const dogen::entity_service_value::entity_versioned_key& v);
-
     void versioned_key(const dogen::entity_service_value::entity_versioned_key&& v);
 
 public:

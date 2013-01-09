@@ -60,7 +60,6 @@ public:
     const std::list<dogen::std_model::pkg1::class_c>& prop_1() const;
     std::list<dogen::std_model::pkg1::class_c>& prop_1();
     void prop_1(const std::list<dogen::std_model::pkg1::class_c>& v);
-
     void prop_1(const std::list<dogen::std_model::pkg1::class_c>&& v);
 
 public:

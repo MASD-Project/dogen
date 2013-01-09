@@ -60,19 +60,16 @@ public:
     const std::unordered_map<std::string, std::string>& prop_0() const;
     std::unordered_map<std::string, std::string>& prop_0();
     void prop_0(const std::unordered_map<std::string, std::string>& v);
-
     void prop_0(const std::unordered_map<std::string, std::string>&& v);
 
     const std::unordered_map<std::string, dogen::std_model::class_a>& prop_1() const;
     std::unordered_map<std::string, dogen::std_model::class_a>& prop_1();
     void prop_1(const std::unordered_map<std::string, dogen::std_model::class_a>& v);
-
     void prop_1(const std::unordered_map<std::string, dogen::std_model::class_a>&& v);
 
     const std::unordered_map<dogen::std_model::class_a, dogen::std_model::pkg1::class_c>& prop_2() const;
     std::unordered_map<dogen::std_model::class_a, dogen::std_model::pkg1::class_c>& prop_2();
     void prop_2(const std::unordered_map<dogen::std_model::class_a, dogen::std_model::pkg1::class_c>& v);
-
     void prop_2(const std::unordered_map<dogen::std_model::class_a, dogen::std_model::pkg1::class_c>&& v);
 
 public:

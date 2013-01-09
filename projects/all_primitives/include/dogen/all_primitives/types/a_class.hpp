@@ -108,7 +108,6 @@ public:
     const dogen::all_primitives::a_class_versioned_key& versioned_key() const;
     dogen::all_primitives::a_class_versioned_key& versioned_key();
     void versioned_key(const dogen::all_primitives::a_class_versioned_key& v);
-
     void versioned_key(const dogen::all_primitives::a_class_versioned_key&& v);
 
 public:

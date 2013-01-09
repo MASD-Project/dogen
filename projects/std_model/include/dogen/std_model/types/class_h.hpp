@@ -59,13 +59,11 @@ public:
     const std::unordered_set<dogen::std_model::class_a>& prop_0() const;
     std::unordered_set<dogen::std_model::class_a>& prop_0();
     void prop_0(const std::unordered_set<dogen::std_model::class_a>& v);
-
     void prop_0(const std::unordered_set<dogen::std_model::class_a>&& v);
 
     const std::unordered_set<dogen::std_model::pkg1::class_c>& prop_1() const;
     std::unordered_set<dogen::std_model::pkg1::class_c>& prop_1();
     void prop_1(const std::unordered_set<dogen::std_model::pkg1::class_c>& v);
-
     void prop_1(const std::unordered_set<dogen::std_model::pkg1::class_c>&& v);
 
 public:

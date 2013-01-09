@@ -59,7 +59,6 @@ public:
     const std::vector<std::string>& prop_0() const;
     std::vector<std::string>& prop_0();
     void prop_0(const std::vector<std::string>& v);
-
     void prop_0(const std::vector<std::string>&& v);
 
 protected:

@@ -62,25 +62,21 @@ public:
     const boost::optional<int>& prop_0() const;
     boost::optional<int>& prop_0();
     void prop_0(const boost::optional<int>& v);
-
     void prop_0(const boost::optional<int>&& v);
 
     const boost::optional<dogen::boost_model::class_a>& prop_1() const;
     boost::optional<dogen::boost_model::class_a>& prop_1();
     void prop_1(const boost::optional<dogen::boost_model::class_a>& v);
-
     void prop_1(const boost::optional<dogen::boost_model::class_a>&& v);
 
     const boost::optional<dogen::boost_model::pkg1::class_c>& prop_2() const;
     boost::optional<dogen::boost_model::pkg1::class_c>& prop_2();
     void prop_2(const boost::optional<dogen::boost_model::pkg1::class_c>& v);
-
     void prop_2(const boost::optional<dogen::boost_model::pkg1::class_c>&& v);
 
     const boost::optional<std::vector<dogen::boost_model::class_a> >& prop_3() const;
     boost::optional<std::vector<dogen::boost_model::class_a> >& prop_3();
     void prop_3(const boost::optional<std::vector<dogen::boost_model::class_a> >& v);
-
     void prop_3(const boost::optional<std::vector<dogen::boost_model::class_a> >&& v);
 
 public:

@@ -60,19 +60,16 @@ public:
     const boost::variant<int, double>& prop_0() const;
     boost::variant<int, double>& prop_0();
     void prop_0(const boost::variant<int, double>& v);
-
     void prop_0(const boost::variant<int, double>&& v);
 
     const boost::variant<int, dogen::boost_model::class_derived, double>& prop_1() const;
     boost::variant<int, dogen::boost_model::class_derived, double>& prop_1();
     void prop_1(const boost::variant<int, dogen::boost_model::class_derived, double>& v);
-
     void prop_1(const boost::variant<int, dogen::boost_model::class_derived, double>&& v);
 
     const std::vector<boost::variant<int, dogen::boost_model::class_derived, double> >& prop_2() const;
     std::vector<boost::variant<int, dogen::boost_model::class_derived, double> >& prop_2();
     void prop_2(const std::vector<boost::variant<int, dogen::boost_model::class_derived, double> >& v);
-
     void prop_2(const std::vector<boost::variant<int, dogen::boost_model::class_derived, double> >&& v);
 
 public:

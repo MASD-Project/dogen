@@ -66,19 +66,16 @@ public:
     const std::vector<dogen::std_model::class_a>& prop_1() const;
     std::vector<dogen::std_model::class_a>& prop_1();
     void prop_1(const std::vector<dogen::std_model::class_a>& v);
-
     void prop_1(const std::vector<dogen::std_model::class_a>&& v);
 
     const std::vector<dogen::std_model::class_a_unversioned_key>& prop_2() const;
     std::vector<dogen::std_model::class_a_unversioned_key>& prop_2();
     void prop_2(const std::vector<dogen::std_model::class_a_unversioned_key>& v);
-
     void prop_2(const std::vector<dogen::std_model::class_a_unversioned_key>&& v);
 
     const std::vector<dogen::std_model::class_a_versioned_key>& prop_3() const;
     std::vector<dogen::std_model::class_a_versioned_key>& prop_3();
     void prop_3(const std::vector<dogen::std_model::class_a_versioned_key>& v);
-
     void prop_3(const std::vector<dogen::std_model::class_a_versioned_key>&& v);
 
 public:

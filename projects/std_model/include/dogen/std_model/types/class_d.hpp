@@ -62,37 +62,31 @@ public:
     const std::list<std::string>& prop_0() const;
     std::list<std::string>& prop_0();
     void prop_0(const std::list<std::string>& v);
-
     void prop_0(const std::list<std::string>&& v);
 
     const std::list<dogen::std_model::class_a>& prop_1() const;
     std::list<dogen::std_model::class_a>& prop_1();
     void prop_1(const std::list<dogen::std_model::class_a>& v);
-
     void prop_1(const std::list<dogen::std_model::class_a>&& v);
 
     const std::list<dogen::std_model::pkg1::class_c>& prop_2() const;
     std::list<dogen::std_model::pkg1::class_c>& prop_2();
     void prop_2(const std::list<dogen::std_model::pkg1::class_c>& v);
-
     void prop_2(const std::list<dogen::std_model::pkg1::class_c>&& v);
 
     const std::list<unsigned int>& prop_3() const;
     std::list<unsigned int>& prop_3();
     void prop_3(const std::list<unsigned int>& v);
-
     void prop_3(const std::list<unsigned int>&& v);
 
     const std::list<dogen::std_model::class_a>& prop_4() const;
     std::list<dogen::std_model::class_a>& prop_4();
     void prop_4(const std::list<dogen::std_model::class_a>& v);
-
     void prop_4(const std::list<dogen::std_model::class_a>&& v);
 
     const std::list<std::list<unsigned int> >& prop_5() const;
     std::list<std::list<unsigned int> >& prop_5();
     void prop_5(const std::list<std::list<unsigned int> >& v);
-
     void prop_5(const std::list<std::list<unsigned int> >&& v);
 
 public:
