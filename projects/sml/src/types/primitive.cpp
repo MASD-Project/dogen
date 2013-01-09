@@ -53,4 +53,44 @@ primitive& primitive::operator=(primitive other) {
     return *this;
 }
 
+const dogen::sml::qname& primitive::name() const {
+    return name_;
+}
+
+dogen::sml::qname& primitive::name() {
+    return name_;
+}
+
+void primitive::name(const dogen::sml::qname& v) {
+    name_ = v;
+}
+
+void primitive::name(const dogen::sml::qname&& v) {
+    name_ = std::move(v);
+}
+
+dogen::sml::generation_types primitive::generation_type() const {
+    return generation_type_;
+}
+
+void primitive::generation_type(const dogen::sml::generation_types& v) {
+    generation_type_ = v;
+}
+
+const std::string& primitive::documentation() const {
+    return documentation_;
+}
+
+std::string& primitive::documentation() {
+    return documentation_;
+}
+
+void primitive::documentation(const std::string& v) {
+    documentation_ = v;
+}
+
+void primitive::documentation(const std::string&& v) {
+    documentation_ = std::move(v);
+}
+
 } }

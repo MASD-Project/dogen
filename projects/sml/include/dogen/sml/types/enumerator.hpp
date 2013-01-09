@@ -62,21 +62,10 @@ public:
      * @brief Qualified name for the type.
      */
     /**@{*/
-    const std::string& name() const {
-        return name_;
-    }
-
-    std::string& name() {
-        return name_;
-    }
-
-    void name(const std::string& v) {
-        name_ = v;
-    }
-
-    void name(const std::string&& v) {
-        name_ = std::move(v);
-    }
+    const std::string& name() const;
+    std::string& name();
+    void name(const std::string& v);
+    void name(const std::string&& v);
     /**@}*/
 
     /*
@@ -85,42 +74,20 @@ public:
      * It must be castable to instance of the type defined in the enumeration.
      */
     /**@{*/
-    const std::string& value() const {
-        return value_;
-    }
-
-    std::string& value() {
-        return value_;
-    }
-
-    void value(const std::string& v) {
-        value_ = v;
-    }
-
-    void value(const std::string&& v) {
-        value_ = std::move(v);
-    }
+    const std::string& value() const;
+    std::string& value();
+    void value(const std::string& v);
+    void value(const std::string&& v);
     /**@}*/
 
     /*
      * @brief Doxygen documentation for the type.
      */
     /**@{*/
-    const std::string& documentation() const {
-        return documentation_;
-    }
-
-    std::string& documentation() {
-        return documentation_;
-    }
-
-    void documentation(const std::string& v) {
-        documentation_ = v;
-    }
-
-    void documentation(const std::string&& v) {
-        documentation_ = std::move(v);
-    }
+    const std::string& documentation() const;
+    std::string& documentation();
+    void documentation(const std::string& v);
+    void documentation(const std::string&& v);
     /**@}*/
 
 public:

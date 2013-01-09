@@ -66,84 +66,40 @@ public:
      * @brief Model to which the type belongs to.
      */
     /**@{*/
-    const std::string& model_name() const {
-        return model_name_;
-    }
-
-    std::string& model_name() {
-        return model_name_;
-    }
-
-    void model_name(const std::string& v) {
-        model_name_ = v;
-    }
-
-    void model_name(const std::string&& v) {
-        model_name_ = std::move(v);
-    }
+    const std::string& model_name() const;
+    std::string& model_name();
+    void model_name(const std::string& v);
+    void model_name(const std::string&& v);
     /**@}*/
 
     /*
      * @brief Path of packages that contain the model from where the type came from.
      */
     /**@{*/
-    const std::list<std::string>& external_package_path() const {
-        return external_package_path_;
-    }
-
-    std::list<std::string>& external_package_path() {
-        return external_package_path_;
-    }
-
-    void external_package_path(const std::list<std::string>& v) {
-        external_package_path_ = v;
-    }
-
-    void external_package_path(const std::list<std::string>&& v) {
-        external_package_path_ = std::move(v);
-    }
+    const std::list<std::string>& external_package_path() const;
+    std::list<std::string>& external_package_path();
+    void external_package_path(const std::list<std::string>& v);
+    void external_package_path(const std::list<std::string>&& v);
     /**@}*/
 
     /*
      * @brief Path of packages that contain this type.
      */
     /**@{*/
-    const std::list<std::string>& package_path() const {
-        return package_path_;
-    }
-
-    std::list<std::string>& package_path() {
-        return package_path_;
-    }
-
-    void package_path(const std::list<std::string>& v) {
-        package_path_ = v;
-    }
-
-    void package_path(const std::list<std::string>&& v) {
-        package_path_ = std::move(v);
-    }
+    const std::list<std::string>& package_path() const;
+    std::list<std::string>& package_path();
+    void package_path(const std::list<std::string>& v);
+    void package_path(const std::list<std::string>&& v);
     /**@}*/
 
     /*
      * @brief Non-qualified type name.
      */
     /**@{*/
-    const std::string& type_name() const {
-        return type_name_;
-    }
-
-    std::string& type_name() {
-        return type_name_;
-    }
-
-    void type_name(const std::string& v) {
-        type_name_ = v;
-    }
-
-    void type_name(const std::string&& v) {
-        type_name_ = std::move(v);
-    }
+    const std::string& type_name() const;
+    std::string& type_name();
+    void type_name(const std::string& v);
+    void type_name(const std::string&& v);
     /**@}*/
 
     /*
@@ -152,13 +108,8 @@ public:
      * This is only needed because we don't have a type base class.
      */
     /**@{*/
-    dogen::sml::meta_types meta_type() const {
-        return meta_type_;
-    }
-
-    void meta_type(const dogen::sml::meta_types& v) {
-        meta_type_ = v;
-    }
+    dogen::sml::meta_types meta_type() const;
+    void meta_type(const dogen::sml::meta_types& v);
     /**@}*/
 
 public:

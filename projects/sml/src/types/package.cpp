@@ -46,4 +46,36 @@ package& package::operator=(package other) {
     return *this;
 }
 
+const dogen::sml::qname& package::name() const {
+    return name_;
+}
+
+dogen::sml::qname& package::name() {
+    return name_;
+}
+
+void package::name(const dogen::sml::qname& v) {
+    name_ = v;
+}
+
+void package::name(const dogen::sml::qname&& v) {
+    name_ = std::move(v);
+}
+
+const std::string& package::documentation() const {
+    return documentation_;
+}
+
+std::string& package::documentation() {
+    return documentation_;
+}
+
+void package::documentation(const std::string& v) {
+    documentation_ = v;
+}
+
+void package::documentation(const std::string&& v) {
+    documentation_ = std::move(v);
+}
+
 } }

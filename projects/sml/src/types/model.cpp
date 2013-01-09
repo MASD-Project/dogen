@@ -85,4 +85,172 @@ model& model::operator=(model other) {
     return *this;
 }
 
+const std::string& model::name() const {
+    return name_;
+}
+
+std::string& model::name() {
+    return name_;
+}
+
+void model::name(const std::string& v) {
+    name_ = v;
+}
+
+void model::name(const std::string&& v) {
+    name_ = std::move(v);
+}
+
+const std::unordered_map<dogen::sml::qname, dogen::sml::package>& model::packages() const {
+    return packages_;
+}
+
+std::unordered_map<dogen::sml::qname, dogen::sml::package>& model::packages() {
+    return packages_;
+}
+
+void model::packages(const std::unordered_map<dogen::sml::qname, dogen::sml::package>& v) {
+    packages_ = v;
+}
+
+void model::packages(const std::unordered_map<dogen::sml::qname, dogen::sml::package>&& v) {
+    packages_ = std::move(v);
+}
+
+const std::unordered_map<dogen::sml::qname, dogen::sml::pod>& model::pods() const {
+    return pods_;
+}
+
+std::unordered_map<dogen::sml::qname, dogen::sml::pod>& model::pods() {
+    return pods_;
+}
+
+void model::pods(const std::unordered_map<dogen::sml::qname, dogen::sml::pod>& v) {
+    pods_ = v;
+}
+
+void model::pods(const std::unordered_map<dogen::sml::qname, dogen::sml::pod>&& v) {
+    pods_ = std::move(v);
+}
+
+const std::unordered_map<dogen::sml::qname, dogen::sml::primitive>& model::primitives() const {
+    return primitives_;
+}
+
+std::unordered_map<dogen::sml::qname, dogen::sml::primitive>& model::primitives() {
+    return primitives_;
+}
+
+void model::primitives(const std::unordered_map<dogen::sml::qname, dogen::sml::primitive>& v) {
+    primitives_ = v;
+}
+
+void model::primitives(const std::unordered_map<dogen::sml::qname, dogen::sml::primitive>&& v) {
+    primitives_ = std::move(v);
+}
+
+const std::unordered_map<dogen::sml::qname, dogen::sml::enumeration>& model::enumerations() const {
+    return enumerations_;
+}
+
+std::unordered_map<dogen::sml::qname, dogen::sml::enumeration>& model::enumerations() {
+    return enumerations_;
+}
+
+void model::enumerations(const std::unordered_map<dogen::sml::qname, dogen::sml::enumeration>& v) {
+    enumerations_ = v;
+}
+
+void model::enumerations(const std::unordered_map<dogen::sml::qname, dogen::sml::enumeration>&& v) {
+    enumerations_ = std::move(v);
+}
+
+const std::unordered_map<dogen::sml::qname, dogen::sml::exception>& model::exceptions() const {
+    return exceptions_;
+}
+
+std::unordered_map<dogen::sml::qname, dogen::sml::exception>& model::exceptions() {
+    return exceptions_;
+}
+
+void model::exceptions(const std::unordered_map<dogen::sml::qname, dogen::sml::exception>& v) {
+    exceptions_ = v;
+}
+
+void model::exceptions(const std::unordered_map<dogen::sml::qname, dogen::sml::exception>&& v) {
+    exceptions_ = std::move(v);
+}
+
+const std::list<std::string>& model::external_package_path() const {
+    return external_package_path_;
+}
+
+std::list<std::string>& model::external_package_path() {
+    return external_package_path_;
+}
+
+void model::external_package_path(const std::list<std::string>& v) {
+    external_package_path_ = v;
+}
+
+void model::external_package_path(const std::list<std::string>&& v) {
+    external_package_path_ = std::move(v);
+}
+
+const std::string& model::schema_name() const {
+    return schema_name_;
+}
+
+std::string& model::schema_name() {
+    return schema_name_;
+}
+
+void model::schema_name(const std::string& v) {
+    schema_name_ = v;
+}
+
+void model::schema_name(const std::string&& v) {
+    schema_name_ = std::move(v);
+}
+
+bool model::is_system() const {
+    return is_system_;
+}
+
+void model::is_system(const bool v) {
+    is_system_ = v;
+}
+
+const std::unordered_map<std::string, dogen::sml::reference>& model::dependencies() const {
+    return dependencies_;
+}
+
+std::unordered_map<std::string, dogen::sml::reference>& model::dependencies() {
+    return dependencies_;
+}
+
+void model::dependencies(const std::unordered_map<std::string, dogen::sml::reference>& v) {
+    dependencies_ = v;
+}
+
+void model::dependencies(const std::unordered_map<std::string, dogen::sml::reference>&& v) {
+    dependencies_ = std::move(v);
+}
+
+const std::unordered_set<dogen::sml::qname>& model::leaves() const {
+    return leaves_;
+}
+
+std::unordered_set<dogen::sml::qname>& model::leaves() {
+    return leaves_;
+}
+
+void model::leaves(const std::unordered_set<dogen::sml::qname>& v) {
+    leaves_ = v;
+}
+
+void model::leaves(const std::unordered_set<dogen::sml::qname>&& v) {
+    leaves_ = std::move(v);
+}
+
 } }

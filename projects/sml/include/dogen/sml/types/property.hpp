@@ -64,84 +64,40 @@ public:
      * Must only contain characters that can be used for identifiers in the target backend.
      */
     /**@{*/
-    const std::string& name() const {
-        return name_;
-    }
-
-    std::string& name() {
-        return name_;
-    }
-
-    void name(const std::string& v) {
-        name_ = v;
-    }
-
-    void name(const std::string&& v) {
-        name_ = std::move(v);
-    }
+    const std::string& name() const;
+    std::string& name();
+    void name(const std::string& v);
+    void name(const std::string&& v);
     /**@}*/
 
     /*
      * @brief Type name for the property.
      */
     /**@{*/
-    const dogen::sml::nested_qualified_name& type_name() const {
-        return type_name_;
-    }
-
-    dogen::sml::nested_qualified_name& type_name() {
-        return type_name_;
-    }
-
-    void type_name(const dogen::sml::nested_qualified_name& v) {
-        type_name_ = v;
-    }
-
-    void type_name(const dogen::sml::nested_qualified_name&& v) {
-        type_name_ = std::move(v);
-    }
+    const dogen::sml::nested_qualified_name& type_name() const;
+    dogen::sml::nested_qualified_name& type_name();
+    void type_name(const dogen::sml::nested_qualified_name& v);
+    void type_name(const dogen::sml::nested_qualified_name&& v);
     /**@}*/
 
     /*
      * @brief Default value of the property.
      */
     /**@{*/
-    const std::string& default_value() const {
-        return default_value_;
-    }
-
-    std::string& default_value() {
-        return default_value_;
-    }
-
-    void default_value(const std::string& v) {
-        default_value_ = v;
-    }
-
-    void default_value(const std::string&& v) {
-        default_value_ = std::move(v);
-    }
+    const std::string& default_value() const;
+    std::string& default_value();
+    void default_value(const std::string& v);
+    void default_value(const std::string&& v);
     /**@}*/
 
     /*
      * @brief Doxygen documentation for the type.
      */
     /**@{*/
-    const std::string& documentation() const {
-        return documentation_;
-    }
-
-    std::string& documentation() {
-        return documentation_;
-    }
-
-    void documentation(const std::string& v) {
-        documentation_ = v;
-    }
-
-    void documentation(const std::string&& v) {
-        documentation_ = std::move(v);
-    }
+    const std::string& documentation() const;
+    std::string& documentation();
+    void documentation(const std::string& v);
+    void documentation(const std::string&& v);
     /**@}*/
 
 public:

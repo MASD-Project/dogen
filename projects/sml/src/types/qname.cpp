@@ -61,4 +61,76 @@ qname& qname::operator=(qname other) {
     return *this;
 }
 
+const std::string& qname::model_name() const {
+    return model_name_;
+}
+
+std::string& qname::model_name() {
+    return model_name_;
+}
+
+void qname::model_name(const std::string& v) {
+    model_name_ = v;
+}
+
+void qname::model_name(const std::string&& v) {
+    model_name_ = std::move(v);
+}
+
+const std::list<std::string>& qname::external_package_path() const {
+    return external_package_path_;
+}
+
+std::list<std::string>& qname::external_package_path() {
+    return external_package_path_;
+}
+
+void qname::external_package_path(const std::list<std::string>& v) {
+    external_package_path_ = v;
+}
+
+void qname::external_package_path(const std::list<std::string>&& v) {
+    external_package_path_ = std::move(v);
+}
+
+const std::list<std::string>& qname::package_path() const {
+    return package_path_;
+}
+
+std::list<std::string>& qname::package_path() {
+    return package_path_;
+}
+
+void qname::package_path(const std::list<std::string>& v) {
+    package_path_ = v;
+}
+
+void qname::package_path(const std::list<std::string>&& v) {
+    package_path_ = std::move(v);
+}
+
+const std::string& qname::type_name() const {
+    return type_name_;
+}
+
+std::string& qname::type_name() {
+    return type_name_;
+}
+
+void qname::type_name(const std::string& v) {
+    type_name_ = v;
+}
+
+void qname::type_name(const std::string&& v) {
+    type_name_ = std::move(v);
+}
+
+dogen::sml::meta_types qname::meta_type() const {
+    return meta_type_;
+}
+
+void qname::meta_type(const dogen::sml::meta_types& v) {
+    meta_type_ = v;
+}
+
 } }

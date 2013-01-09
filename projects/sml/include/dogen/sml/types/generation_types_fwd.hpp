@@ -28,8 +28,7 @@
 namespace dogen {
 namespace sml {
 
-enum class generation_types;
-
+enum class generation_types : unsigned int;
 } }
 
 #endif

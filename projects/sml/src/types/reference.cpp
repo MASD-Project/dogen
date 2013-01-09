@@ -53,4 +53,44 @@ reference& reference::operator=(reference other) {
     return *this;
 }
 
+const std::string& reference::model_name() const {
+    return model_name_;
+}
+
+std::string& reference::model_name() {
+    return model_name_;
+}
+
+void reference::model_name(const std::string& v) {
+    model_name_ = v;
+}
+
+void reference::model_name(const std::string&& v) {
+    model_name_ = std::move(v);
+}
+
+const std::list<std::string>& reference::external_package_path() const {
+    return external_package_path_;
+}
+
+std::list<std::string>& reference::external_package_path() {
+    return external_package_path_;
+}
+
+void reference::external_package_path(const std::list<std::string>& v) {
+    external_package_path_ = v;
+}
+
+void reference::external_package_path(const std::list<std::string>&& v) {
+    external_package_path_ = std::move(v);
+}
+
+bool reference::is_system() const {
+    return is_system_;
+}
+
+void reference::is_system(const bool v) {
+    is_system_ = v;
+}
+
 } }

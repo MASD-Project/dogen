@@ -57,4 +57,60 @@ enumeration& enumeration::operator=(enumeration other) {
     return *this;
 }
 
+const dogen::sml::qname& enumeration::name() const {
+    return name_;
+}
+
+dogen::sml::qname& enumeration::name() {
+    return name_;
+}
+
+void enumeration::name(const dogen::sml::qname& v) {
+    name_ = v;
+}
+
+void enumeration::name(const dogen::sml::qname&& v) {
+    name_ = std::move(v);
+}
+
+dogen::sml::generation_types enumeration::generation_type() const {
+    return generation_type_;
+}
+
+void enumeration::generation_type(const dogen::sml::generation_types& v) {
+    generation_type_ = v;
+}
+
+const std::string& enumeration::documentation() const {
+    return documentation_;
+}
+
+std::string& enumeration::documentation() {
+    return documentation_;
+}
+
+void enumeration::documentation(const std::string& v) {
+    documentation_ = v;
+}
+
+void enumeration::documentation(const std::string&& v) {
+    documentation_ = std::move(v);
+}
+
+const std::vector<dogen::sml::enumerator>& enumeration::enumerators() const {
+    return enumerators_;
+}
+
+std::vector<dogen::sml::enumerator>& enumeration::enumerators() {
+    return enumerators_;
+}
+
+void enumeration::enumerators(const std::vector<dogen::sml::enumerator>& v) {
+    enumerators_ = v;
+}
+
+void enumeration::enumerators(const std::vector<dogen::sml::enumerator>&& v) {
+    enumerators_ = std::move(v);
+}
+
 } }

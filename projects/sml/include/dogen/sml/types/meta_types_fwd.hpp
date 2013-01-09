@@ -28,8 +28,7 @@
 namespace dogen {
 namespace sml {
 
-enum class meta_types;
-
+enum class meta_types : unsigned int;
 } }
 
 #endif

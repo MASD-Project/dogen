@@ -59,4 +59,52 @@ node& node::operator=(node other) {
     return *this;
 }
 
+const boost::shared_ptr<dogen::sml::node>& node::parent() const {
+    return parent_;
+}
+
+boost::shared_ptr<dogen::sml::node>& node::parent() {
+    return parent_;
+}
+
+void node::parent(const boost::shared_ptr<dogen::sml::node>& v) {
+    parent_ = v;
+}
+
+void node::parent(const boost::shared_ptr<dogen::sml::node>&& v) {
+    parent_ = std::move(v);
+}
+
+const dogen::sml::qname& node::data() const {
+    return data_;
+}
+
+dogen::sml::qname& node::data() {
+    return data_;
+}
+
+void node::data(const dogen::sml::qname& v) {
+    data_ = v;
+}
+
+void node::data(const dogen::sml::qname&& v) {
+    data_ = std::move(v);
+}
+
+const std::list<boost::shared_ptr<dogen::sml::node> >& node::children() const {
+    return children_;
+}
+
+std::list<boost::shared_ptr<dogen::sml::node> >& node::children() {
+    return children_;
+}
+
+void node::children(const std::list<boost::shared_ptr<dogen::sml::node> >& v) {
+    children_ = v;
+}
+
+void node::children(const std::list<boost::shared_ptr<dogen::sml::node> >&& v) {
+    children_ = std::move(v);
+}
+
 } }

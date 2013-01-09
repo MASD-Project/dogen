@@ -54,4 +54,68 @@ property& property::operator=(property other) {
     return *this;
 }
 
+const std::string& property::name() const {
+    return name_;
+}
+
+std::string& property::name() {
+    return name_;
+}
+
+void property::name(const std::string& v) {
+    name_ = v;
+}
+
+void property::name(const std::string&& v) {
+    name_ = std::move(v);
+}
+
+const dogen::sml::nested_qualified_name& property::type_name() const {
+    return type_name_;
+}
+
+dogen::sml::nested_qualified_name& property::type_name() {
+    return type_name_;
+}
+
+void property::type_name(const dogen::sml::nested_qualified_name& v) {
+    type_name_ = v;
+}
+
+void property::type_name(const dogen::sml::nested_qualified_name&& v) {
+    type_name_ = std::move(v);
+}
+
+const std::string& property::default_value() const {
+    return default_value_;
+}
+
+std::string& property::default_value() {
+    return default_value_;
+}
+
+void property::default_value(const std::string& v) {
+    default_value_ = v;
+}
+
+void property::default_value(const std::string&& v) {
+    default_value_ = std::move(v);
+}
+
+const std::string& property::documentation() const {
+    return documentation_;
+}
+
+std::string& property::documentation() {
+    return documentation_;
+}
+
+void property::documentation(const std::string& v) {
+    documentation_ = v;
+}
+
+void property::documentation(const std::string&& v) {
+    documentation_ = std::move(v);
+}
+
 } }

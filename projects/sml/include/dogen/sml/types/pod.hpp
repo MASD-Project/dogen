@@ -77,191 +77,100 @@ public:
      * @brief Qualified name for the type.
      */
     /**@{*/
-    const dogen::sml::qname& name() const {
-        return name_;
-    }
-
-    dogen::sml::qname& name() {
-        return name_;
-    }
-
-    void name(const dogen::sml::qname& v) {
-        name_ = v;
-    }
-
-    void name(const dogen::sml::qname&& v) {
-        name_ = std::move(v);
-    }
+    const dogen::sml::qname& name() const;
+    dogen::sml::qname& name();
+    void name(const dogen::sml::qname& v);
+    void name(const dogen::sml::qname&& v);
     /**@}*/
 
     /*
      * @brief All the properties this pod owns.
      */
     /**@{*/
-    const std::vector<dogen::sml::property>& properties() const {
-        return properties_;
-    }
-
-    std::vector<dogen::sml::property>& properties() {
-        return properties_;
-    }
-
-    void properties(const std::vector<dogen::sml::property>& v) {
-        properties_ = v;
-    }
-
-    void properties(const std::vector<dogen::sml::property>&& v) {
-        properties_ = std::move(v);
-    }
+    const std::vector<dogen::sml::property>& properties() const;
+    std::vector<dogen::sml::property>& properties();
+    void properties(const std::vector<dogen::sml::property>& v);
+    void properties(const std::vector<dogen::sml::property>&& v);
     /**@}*/
 
     /*
      * @brief Qualified name for the pod's parent, if the pod has one.
      */
     /**@{*/
-    const boost::optional<dogen::sml::qname>& parent_name() const {
-        return parent_name_;
-    }
-
-    boost::optional<dogen::sml::qname>& parent_name() {
-        return parent_name_;
-    }
-
-    void parent_name(const boost::optional<dogen::sml::qname>& v) {
-        parent_name_ = v;
-    }
-
-    void parent_name(const boost::optional<dogen::sml::qname>&& v) {
-        parent_name_ = std::move(v);
-    }
+    const boost::optional<dogen::sml::qname>& parent_name() const;
+    boost::optional<dogen::sml::qname>& parent_name();
+    void parent_name(const boost::optional<dogen::sml::qname>& v);
+    void parent_name(const boost::optional<dogen::sml::qname>&& v);
     /**@}*/
 
     /*
      * @brief Qualified name for the root of the inheritance hierarchy, if the pod is part of one.
      */
     /**@{*/
-    const boost::optional<dogen::sml::qname>& original_parent_name() const {
-        return original_parent_name_;
-    }
-
-    boost::optional<dogen::sml::qname>& original_parent_name() {
-        return original_parent_name_;
-    }
-
-    void original_parent_name(const boost::optional<dogen::sml::qname>& v) {
-        original_parent_name_ = v;
-    }
-
-    void original_parent_name(const boost::optional<dogen::sml::qname>&& v) {
-        original_parent_name_ = std::move(v);
-    }
+    const boost::optional<dogen::sml::qname>& original_parent_name() const;
+    boost::optional<dogen::sml::qname>& original_parent_name();
+    void original_parent_name(const boost::optional<dogen::sml::qname>& v);
+    void original_parent_name(const boost::optional<dogen::sml::qname>&& v);
     /**@}*/
 
     /*
      * @brief All concrete types which are indirectly or directly derived from this type.
      */
     /**@{*/
-    const std::list<dogen::sml::qname>& leaves() const {
-        return leaves_;
-    }
-
-    std::list<dogen::sml::qname>& leaves() {
-        return leaves_;
-    }
-
-    void leaves(const std::list<dogen::sml::qname>& v) {
-        leaves_ = v;
-    }
-
-    void leaves(const std::list<dogen::sml::qname>&& v) {
-        leaves_ = std::move(v);
-    }
+    const std::list<dogen::sml::qname>& leaves() const;
+    std::list<dogen::sml::qname>& leaves();
+    void leaves(const std::list<dogen::sml::qname>& v);
+    void leaves(const std::list<dogen::sml::qname>&& v);
     /**@}*/
 
     /*
      * @brief What to do with this pod in terms of code generation
      */
     /**@{*/
-    dogen::sml::generation_types generation_type() const {
-        return generation_type_;
-    }
-
-    void generation_type(const dogen::sml::generation_types& v) {
-        generation_type_ = v;
-    }
+    dogen::sml::generation_types generation_type() const;
+    void generation_type(const dogen::sml::generation_types& v);
     /**@}*/
 
     /*
      * @brief True if this class is the parent of one or more classes, false otherwise.
      */
     /**@{*/
-    bool is_parent() const {
-        return is_parent_;
-    }
-
-    void is_parent(const bool v) {
-        is_parent_ = v;
-    }
+    bool is_parent() const;
+    void is_parent(const bool v);
     /**@}*/
 
     /*
      * @brief Category of this type - whether its system or user defined.
      */
     /**@{*/
-    dogen::sml::category_types category_type() const {
-        return category_type_;
-    }
-
-    void category_type(const dogen::sml::category_types& v) {
-        category_type_ = v;
-    }
+    dogen::sml::category_types category_type() const;
+    void category_type(const dogen::sml::category_types& v);
     /**@}*/
 
     /*
      * @brief What kind of pod is this.
      */
     /**@{*/
-    dogen::sml::pod_types pod_type() const {
-        return pod_type_;
-    }
-
-    void pod_type(const dogen::sml::pod_types& v) {
-        pod_type_ = v;
-    }
+    dogen::sml::pod_types pod_type() const;
+    void pod_type(const dogen::sml::pod_types& v);
     /**@}*/
 
     /*
      * @brief Doxygen documentation for the type.
      */
     /**@{*/
-    const std::string& documentation() const {
-        return documentation_;
-    }
-
-    std::string& documentation() {
-        return documentation_;
-    }
-
-    void documentation(const std::string& v) {
-        documentation_ = v;
-    }
-
-    void documentation(const std::string&& v) {
-        documentation_ = std::move(v);
-    }
+    const std::string& documentation() const;
+    std::string& documentation();
+    void documentation(const std::string& v);
+    void documentation(const std::string&& v);
     /**@}*/
 
     /*
      * @brief How many type arguments does this type have
      */
     /**@{*/
-    unsigned int number_of_type_arguments() const {
-        return number_of_type_arguments_;
-    }
-
-    void number_of_type_arguments(const unsigned int v) {
-        number_of_type_arguments_ = v;
-    }
+    unsigned int number_of_type_arguments() const;
+    void number_of_type_arguments(const unsigned int v);
     /**@}*/
 
 public:

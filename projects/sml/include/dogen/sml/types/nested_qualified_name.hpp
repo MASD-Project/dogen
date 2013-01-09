@@ -64,55 +64,28 @@ public:
      * @brief Top-level, containing type.
      */
     /**@{*/
-    const dogen::sml::qname& type() const {
-        return type_;
-    }
-
-    dogen::sml::qname& type() {
-        return type_;
-    }
-
-    void type(const dogen::sml::qname& v) {
-        type_ = v;
-    }
-
-    void type(const dogen::sml::qname&& v) {
-        type_ = std::move(v);
-    }
+    const dogen::sml::qname& type() const;
+    dogen::sml::qname& type();
+    void type(const dogen::sml::qname& v);
+    void type(const dogen::sml::qname&& v);
     /**@}*/
 
     /*
      * @brief Child types.
      */
     /**@{*/
-    const std::list<dogen::sml::nested_qualified_name>& children() const {
-        return children_;
-    }
-
-    std::list<dogen::sml::nested_qualified_name>& children() {
-        return children_;
-    }
-
-    void children(const std::list<dogen::sml::nested_qualified_name>& v) {
-        children_ = v;
-    }
-
-    void children(const std::list<dogen::sml::nested_qualified_name>&& v) {
-        children_ = std::move(v);
-    }
+    const std::list<dogen::sml::nested_qualified_name>& children() const;
+    std::list<dogen::sml::nested_qualified_name>& children();
+    void children(const std::list<dogen::sml::nested_qualified_name>& v);
+    void children(const std::list<dogen::sml::nested_qualified_name>&& v);
     /**@}*/
 
     /*
      * @brief If true, the top-level type is a pointer. If false, its a stack variable.
      */
     /**@{*/
-    bool is_pointer() const {
-        return is_pointer_;
-    }
-
-    void is_pointer(const bool v) {
-        is_pointer_ = v;
-    }
+    bool is_pointer() const;
+    void is_pointer(const bool v);
     /**@}*/
 
 public:

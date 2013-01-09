@@ -28,8 +28,7 @@
 namespace dogen {
 namespace sml {
 
-enum class pod_types;
-
+enum class pod_types : unsigned int;
 } }
 
 #endif

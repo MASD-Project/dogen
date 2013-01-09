@@ -53,4 +53,44 @@ exception& exception::operator=(exception other) {
     return *this;
 }
 
+const dogen::sml::qname& exception::name() const {
+    return name_;
+}
+
+dogen::sml::qname& exception::name() {
+    return name_;
+}
+
+void exception::name(const dogen::sml::qname& v) {
+    name_ = v;
+}
+
+void exception::name(const dogen::sml::qname&& v) {
+    name_ = std::move(v);
+}
+
+dogen::sml::generation_types exception::generation_type() const {
+    return generation_type_;
+}
+
+void exception::generation_type(const dogen::sml::generation_types& v) {
+    generation_type_ = v;
+}
+
+const std::string& exception::documentation() const {
+    return documentation_;
+}
+
+std::string& exception::documentation() {
+    return documentation_;
+}
+
+void exception::documentation(const std::string& v) {
+    documentation_ = v;
+}
+
+void exception::documentation(const std::string&& v) {
+    documentation_ = std::move(v);
+}
+
 } }

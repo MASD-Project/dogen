@@ -68,76 +68,38 @@ public:
      * @brief Qualified name for the type.
      */
     /**@{*/
-    const dogen::sml::qname& name() const {
-        return name_;
-    }
-
-    dogen::sml::qname& name() {
-        return name_;
-    }
-
-    void name(const dogen::sml::qname& v) {
-        name_ = v;
-    }
-
-    void name(const dogen::sml::qname&& v) {
-        name_ = std::move(v);
-    }
+    const dogen::sml::qname& name() const;
+    dogen::sml::qname& name();
+    void name(const dogen::sml::qname& v);
+    void name(const dogen::sml::qname&& v);
     /**@}*/
 
     /*
      * @brief What to do with this enumeration in terms of code generation.
      */
     /**@{*/
-    dogen::sml::generation_types generation_type() const {
-        return generation_type_;
-    }
-
-    void generation_type(const dogen::sml::generation_types& v) {
-        generation_type_ = v;
-    }
+    dogen::sml::generation_types generation_type() const;
+    void generation_type(const dogen::sml::generation_types& v);
     /**@}*/
 
     /*
      * @brief Doxygen documentation for the type.
      */
     /**@{*/
-    const std::string& documentation() const {
-        return documentation_;
-    }
-
-    std::string& documentation() {
-        return documentation_;
-    }
-
-    void documentation(const std::string& v) {
-        documentation_ = v;
-    }
-
-    void documentation(const std::string&& v) {
-        documentation_ = std::move(v);
-    }
+    const std::string& documentation() const;
+    std::string& documentation();
+    void documentation(const std::string& v);
+    void documentation(const std::string&& v);
     /**@}*/
 
     /*
      * @brief Enumerators for this enumeration.
      */
     /**@{*/
-    const std::vector<dogen::sml::enumerator>& enumerators() const {
-        return enumerators_;
-    }
-
-    std::vector<dogen::sml::enumerator>& enumerators() {
-        return enumerators_;
-    }
-
-    void enumerators(const std::vector<dogen::sml::enumerator>& v) {
-        enumerators_ = v;
-    }
-
-    void enumerators(const std::vector<dogen::sml::enumerator>&& v) {
-        enumerators_ = std::move(v);
-    }
+    const std::vector<dogen::sml::enumerator>& enumerators() const;
+    std::vector<dogen::sml::enumerator>& enumerators();
+    void enumerators(const std::vector<dogen::sml::enumerator>& v);
+    void enumerators(const std::vector<dogen::sml::enumerator>&& v);
     /**@}*/
 
 public:

@@ -28,8 +28,7 @@
 namespace dogen {
 namespace sml {
 
-enum class category_types;
-
+enum class category_types : unsigned int;
 } }
 
 #endif

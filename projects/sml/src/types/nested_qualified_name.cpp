@@ -53,4 +53,44 @@ nested_qualified_name& nested_qualified_name::operator=(nested_qualified_name ot
     return *this;
 }
 
+const dogen::sml::qname& nested_qualified_name::type() const {
+    return type_;
+}
+
+dogen::sml::qname& nested_qualified_name::type() {
+    return type_;
+}
+
+void nested_qualified_name::type(const dogen::sml::qname& v) {
+    type_ = v;
+}
+
+void nested_qualified_name::type(const dogen::sml::qname&& v) {
+    type_ = std::move(v);
+}
+
+const std::list<dogen::sml::nested_qualified_name>& nested_qualified_name::children() const {
+    return children_;
+}
+
+std::list<dogen::sml::nested_qualified_name>& nested_qualified_name::children() {
+    return children_;
+}
+
+void nested_qualified_name::children(const std::list<dogen::sml::nested_qualified_name>& v) {
+    children_ = v;
+}
+
+void nested_qualified_name::children(const std::list<dogen::sml::nested_qualified_name>&& v) {
+    children_ = std::move(v);
+}
+
+bool nested_qualified_name::is_pointer() const {
+    return is_pointer_;
+}
+
+void nested_qualified_name::is_pointer(const bool v) {
+    is_pointer_ = v;
+}
+
 } }

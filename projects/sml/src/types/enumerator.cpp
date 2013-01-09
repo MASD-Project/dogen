@@ -50,4 +50,52 @@ enumerator& enumerator::operator=(enumerator other) {
     return *this;
 }
 
+const std::string& enumerator::name() const {
+    return name_;
+}
+
+std::string& enumerator::name() {
+    return name_;
+}
+
+void enumerator::name(const std::string& v) {
+    name_ = v;
+}
+
+void enumerator::name(const std::string&& v) {
+    name_ = std::move(v);
+}
+
+const std::string& enumerator::value() const {
+    return value_;
+}
+
+std::string& enumerator::value() {
+    return value_;
+}
+
+void enumerator::value(const std::string& v) {
+    value_ = v;
+}
+
+void enumerator::value(const std::string&& v) {
+    value_ = std::move(v);
+}
+
+const std::string& enumerator::documentation() const {
+    return documentation_;
+}
+
+std::string& enumerator::documentation() {
+    return documentation_;
+}
+
+void enumerator::documentation(const std::string& v) {
+    documentation_ = v;
+}
+
+void enumerator::documentation(const std::string&& v) {
+    documentation_ = std::move(v);
+}
+
 } }
