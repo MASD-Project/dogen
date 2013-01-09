@@ -26,7 +26,7 @@ namespace boost {
 
 inline bool operator==(const boost::shared_ptr<dogen::boost_model::class_a>& lhs,
 const boost::shared_ptr<dogen::boost_model::class_a>& rhs) {
-    return lhs && rhs && (*lhs == *rhs);
+    return (!lhs && !rhs) ||(lhs && rhs && (*lhs == *rhs));
 }
 
 }
@@ -35,7 +35,7 @@ namespace boost {
 
 inline bool operator==(const boost::shared_ptr<dogen::boost_model::pkg1::class_c>& lhs,
 const boost::shared_ptr<dogen::boost_model::pkg1::class_c>& rhs) {
-    return lhs && rhs && (*lhs == *rhs);
+    return (!lhs && !rhs) ||(lhs && rhs && (*lhs == *rhs));
 }
 
 }
@@ -44,7 +44,7 @@ namespace boost {
 
 inline bool operator==(const boost::shared_ptr<dogen::boost_model::class_base>& lhs,
 const boost::shared_ptr<dogen::boost_model::class_base>& rhs) {
-    return lhs && rhs && (*lhs == *rhs);
+    return (!lhs && !rhs) ||(lhs && rhs && (*lhs == *rhs));
 }
 
 }

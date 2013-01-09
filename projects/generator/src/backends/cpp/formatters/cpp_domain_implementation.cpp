@@ -108,7 +108,8 @@ smart_pointer_helper(const nested_type_view_model& vm) {
         utility_.open_scope();
         {
             cpp_positive_indenter_scope s(indenter_);
-            stream_ << indenter_ << "return lhs && rhs && (*lhs == *rhs);"
+            stream_ << indenter_ << "return (!lhs && !rhs) ||"
+                    << "(lhs && rhs && (*lhs == *rhs));"
                     << std::endl;
         }
         utility_.close_scope();
