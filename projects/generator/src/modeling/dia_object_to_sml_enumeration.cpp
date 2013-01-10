@@ -38,7 +38,7 @@
 #include "dogen/dia/types/stereotypes.hpp"
 #include "dogen/dia/io/object_types_io.hpp"
 #include "dogen/dia/io/stereotypes_io.hpp"
-#include "dogen/dia/utility/dia_utility.hpp"
+#include "dogen/dia/types/enum_parser.hpp"
 #include "dogen/dia/io/object_io.hpp"
 #include "dogen/dia/io/diagram_io.hpp"
 #include "dogen/utility/log/logger.hpp"
@@ -92,8 +92,8 @@ const std::string unexpected_child_node(
 dogen::dia::object_types parse_object_type(const std::string s) {
     dogen::dia::object_types r;
     try {
-        using dogen::dia::utility::parse_object_type;
-        r = parse_object_type(s);
+        using dogen::dia::enum_parser;
+        r = enum_parser::parse_object_type(s);
     } catch(const std::exception& e) {
         std::ostringstream stream;
         stream << error_parsing_object_type << "'" << s
@@ -112,8 +112,8 @@ dogen::dia::object_types parse_object_type(const std::string s) {
 dogen::dia::stereotypes parse_stereotype(const std::string s) {
     dogen::dia::stereotypes r;
     try {
-        using dogen::dia::utility::parse_stereotype;
-        r = parse_stereotype(s);
+        using dogen::dia::enum_parser;
+        r = enum_parser::parse_stereotype(s);
     } catch(const std::exception& e) {
         std::ostringstream stream;
         stream << error_parsing_stereotype << "'" << s

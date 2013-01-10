@@ -20,8 +20,8 @@
  */
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/exception/invalid_enum_value.hpp"
-#include "dogen/dia/utility/dia_utility.hpp"
 #include "dogen/utility/log/logger.hpp"
+#include "dogen/dia/types/enum_parser.hpp"
 
 using namespace dogen::utility::log;
 
@@ -50,9 +50,8 @@ const std::string nongeneratable("nongeneratable");
 
 namespace dogen {
 namespace dia {
-namespace utility {
 
-object_types parse_object_type(const std::string& ot) {
+object_types enum_parser::parse_object_type(const std::string& ot) {
     if (ot == uml_large_package)
         return object_types::uml_large_package;
 
@@ -75,10 +74,11 @@ object_types parse_object_type(const std::string& ot) {
         return object_types::uml_realization;
 
     BOOST_LOG_SEV(lg, error) << invalid_object_type << ot;
-    BOOST_THROW_EXCEPTION(dogen::utility::exception::exception(invalid_object_type + ot));
+    BOOST_THROW_EXCEPTION(
+        dogen::utility::exception::exception(invalid_object_type + ot));
 }
 
-stereotypes parse_stereotype(const std::string& st) {
+stereotypes enum_parser::parse_stereotype(const std::string& st) {
     if (st == enumeration)
         return stereotypes::enumeration;
 
@@ -98,7 +98,8 @@ stereotypes parse_stereotype(const std::string& st) {
         return stereotypes::nongeneratable;
 
     BOOST_LOG_SEV(lg, error) << invalid_stereotype << st;
-    BOOST_THROW_EXCEPTION(dogen::utility::exception::exception(invalid_stereotype + st));
+    BOOST_THROW_EXCEPTION(
+        dogen::utility::exception::exception(invalid_stereotype + st));
 }
 
-} } }
+} }

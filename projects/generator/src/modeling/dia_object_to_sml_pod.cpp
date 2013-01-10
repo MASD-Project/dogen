@@ -34,7 +34,7 @@
 #include <boost/algorithm/string/erase.hpp>
 #include <boost/graph/depth_first_search.hpp>
 #include "dogen/sml/hash/qname_hash.hpp"
-#include "dogen/dia/utility/dia_utility.hpp"
+#include "dogen/dia/types/enum_parser.hpp"
 #include "dogen/dia/types/composite.hpp"
 #include "dogen/dia/types/attribute.hpp"
 #include "dogen/dia/types/object_types.hpp"
@@ -99,8 +99,8 @@ const std::string unexpected_child_node(
 dogen::dia::object_types parse_object_type(const std::string s) {
     dogen::dia::object_types r;
     try {
-        using dogen::dia::utility::parse_object_type;
-        r = parse_object_type(s);
+        using dogen::dia::enum_parser;
+        r = enum_parser::parse_object_type(s);
     } catch(const std::exception& e) {
         std::ostringstream stream;
         stream << error_parsing_object_type << "'" << s
@@ -395,7 +395,6 @@ void dia_dfs_visitor::process_dia_object(const dogen::dia::object& o) {
             using dogen::sml::meta_types;
             pod.name(transform_qualified_name(a, meta_types::pod, pkg_id));
         } else if (a.name() == dia_stereotype) {
-            using dogen::dia::utility::parse_stereotype;
             const auto v(transform_string_attribute(a));
 
             if (v.empty()) {
@@ -403,7 +402,8 @@ void dia_dfs_visitor::process_dia_object(const dogen::dia::object& o) {
                 continue;
             }
 
-            const auto st(parse_stereotype(v));
+            using dogen::dia::enum_parser;
+            const auto st(enum_parser::parse_stereotype(v));
             using dogen::dia::stereotypes;
             using dogen::sml::generation_types;
             if (st == stereotypes::entity)

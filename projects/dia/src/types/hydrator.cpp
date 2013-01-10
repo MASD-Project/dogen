@@ -21,7 +21,7 @@
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/xml/node_types_io.hpp"
-#include "dogen/dia/xml/dia_xml_exception.hpp"
+#include "dogen/dia/types/hydration_error.hpp"
 #include "dogen/dia/types/composite.hpp"
 #include "dogen/dia/types/rectangle.hpp"
 #include "dogen/dia/types/boolean.hpp"
@@ -33,7 +33,7 @@
 #include "dogen/dia/types/real.hpp"
 #include "dogen/dia/types/string.hpp"
 #include "dogen/dia/types/attribute.hpp"
-#include "dogen/dia/xml/hydrator.hpp"
+#include "dogen/dia/types/hydrator.hpp"
 
 using namespace dogen::utility::log;
 
@@ -91,7 +91,6 @@ const bool skip_whitespace(true);
 
 namespace dogen {
 namespace dia {
-namespace xml {
 
 hydrator::hydrator(boost::filesystem::path file_name)
     : file_name_(file_name),
@@ -101,17 +100,17 @@ void hydrator::validate_current_element(std::string name) const {
     if (reader_.name() != name ||
         reader_.node_type() != utility::xml::node_types::element) {
         BOOST_LOG_SEV(lg, error) << unexpected_element << reader_.name();
-        BOOST_THROW_EXCEPTION(xml::exception(unexpected_element + reader_.name()));
+        BOOST_THROW_EXCEPTION(
+            hydration_error(unexpected_element + reader_.name()));
     }
 }
 
 void hydrator::next_element(std::string name) {
     if (!reader_.read()) {
         BOOST_LOG_SEV(lg, error) << unexpected_eod;
-        BOOST_THROW_EXCEPTION(xml::exception(unexpected_eod));
-
-    validate_current_element(name);
+        BOOST_THROW_EXCEPTION(hydration_error(unexpected_eod));
     }
+    validate_current_element(name);
 }
 
 bool hydrator::is_attribute_value(std::string name) const {
@@ -133,9 +132,9 @@ bool hydrator::is_end_element(std::string element_name) const {
 void hydrator::validate_self_closing() const {
     const bool is_self_closing(reader_.is_empty());
     if (!is_self_closing) {
-        using xml::exception;
         BOOST_LOG_SEV(lg, error) << expected_self_closing << reader_.name();
-        BOOST_THROW_EXCEPTION(exception(expected_self_closing + reader_.name()));
+        BOOST_THROW_EXCEPTION(
+            hydration_error(expected_self_closing + reader_.name()));
     }
 }
 
@@ -166,7 +165,7 @@ child_node hydrator::read_child_node() {
 
     if (!reader_.read()) {
         BOOST_LOG_SEV(lg, error) << unexpected_eod;
-        BOOST_THROW_EXCEPTION(xml::exception(unexpected_eod));
+        BOOST_THROW_EXCEPTION(hydration_error(unexpected_eod));
     }
     return child_node;
 }
@@ -231,9 +230,9 @@ composite hydrator::read_attribute_value() {
             validate_self_closing();
 
             if (inner_composite) {
-                using xml::exception;
                 BOOST_LOG_SEV(lg, error) << expected_one_inner_composite;
-                BOOST_THROW_EXCEPTION(exception(expected_one_inner_composite));
+                BOOST_THROW_EXCEPTION(
+                    hydration_error(expected_one_inner_composite));
             }
 
             inner_composite = composite_ptr(new composite());
@@ -245,7 +244,7 @@ composite hydrator::read_attribute_value() {
             attributes.push_back(ptr);
         } else {
             BOOST_LOG_SEV(lg, error) << unexpected_element;
-            BOOST_THROW_EXCEPTION(xml::exception(unexpected_element));
+            BOOST_THROW_EXCEPTION(hydration_error(unexpected_element));
         }
     } while (!is_end_element(dia_composite));
     result.value(attributes);
@@ -264,7 +263,7 @@ attribute hydrator::read_attribute() {
 
     if (!reader_.read()) {
         BOOST_LOG_SEV(lg, error) << unexpected_eod;
-        BOOST_THROW_EXCEPTION(xml::exception(unexpected_eod));
+        BOOST_THROW_EXCEPTION(hydration_error(unexpected_eod));
     }
     if (is_self_closing)
         return attribute; // no more content to read related to this attribute
@@ -275,7 +274,7 @@ attribute hydrator::read_attribute() {
         const std::string name(reader_.name());
         if (!is_attribute_value(name)) {
             BOOST_LOG_SEV(lg, error) << unsupported_value << name;
-            BOOST_THROW_EXCEPTION(xml::exception(unsupported_value + name));
+            BOOST_THROW_EXCEPTION(hydration_error(unsupported_value + name));
         }
 
         if (name == dia_color)
@@ -328,7 +327,7 @@ std::vector<connection> hydrator::read_connections() {
         if (!is_start_element(dia_connection)) {
             BOOST_LOG_SEV(lg, error) << unexpected_connection_type
                                      << reader_.name();
-            BOOST_THROW_EXCEPTION(xml::exception(unexpected_connection_type +
+            BOOST_THROW_EXCEPTION(hydration_error(unexpected_connection_type +
                 reader_.name()));
         }
         r.push_back(read_connection());
@@ -351,8 +350,9 @@ object hydrator::read_object() {
 
     if (!reader_.read()) {
         BOOST_LOG_SEV(lg, error) << unexpected_eod;
-        BOOST_THROW_EXCEPTION(xml::exception(unexpected_eod));
+        BOOST_THROW_EXCEPTION(hydration_error(unexpected_eod));
     }
+
     std::vector<attribute> attributes;
     do {
         if (is_start_element(dia_attribute))
@@ -406,8 +406,9 @@ diagram_data hydrator::read_diagram_data() {
 
     if (!reader_.read()) {
         BOOST_LOG_SEV(lg, error) << unexpected_eod;
-        BOOST_THROW_EXCEPTION(xml::exception(unexpected_eod));
+        BOOST_THROW_EXCEPTION(hydration_error(unexpected_eod));
     }
+
     std::vector<attribute> attributes;
     do {
         attributes.push_back(read_attribute());
@@ -442,4 +443,4 @@ diagram hydrator::hydrate() {
     return read_diagram();
 }
 
-} } }
+} }

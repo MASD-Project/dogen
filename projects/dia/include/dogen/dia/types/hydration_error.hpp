@@ -18,29 +18,37 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_DIA_UTILITY_UTILITY_HPP
-#define DOGEN_DIA_UTILITY_UTILITY_HPP
+#ifndef DOGEN_DIA_TYPES_HYDRATION_ERROR_HPP
+#define DOGEN_DIA_TYPES_HYDRATION_ERROR_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
+#include <boost/exception/info.hpp>
 #include <string>
-#include "dogen/dia/types/object_types.hpp"
-#include "dogen/dia/types/stereotypes.hpp"
 
 namespace dogen {
 namespace dia {
 
-/**
- * @brief Helper functions and classes for the Dia domain object.
+/*
+ * @brief An error occurred while reading a diagram.
  */
+class hydration_error : public virtual std::exception, public virtual boost::exception {
+public:
+    hydration_error() = default;
+    ~hydration_error() noexcept = default;
 
-namespace utility {
+public:
+    hydration_error(const std::string& message) : message_(message) { }
 
-object_types parse_object_type(const std::string& ot);
-stereotypes parse_stereotype(const std::string& st);
+public:
+    const char* what() const noexcept { return(message_.c_str()); }
 
-} } }
+private:
+    const std::string message_;
+};
+
+} }
 
 #endif

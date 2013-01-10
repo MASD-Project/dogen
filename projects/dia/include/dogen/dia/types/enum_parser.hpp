@@ -18,31 +18,29 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_DIA_XML_EXCEPTION_HPP
-#define DOGEN_DIA_XML_EXCEPTION_HPP
+#ifndef DOGEN_DIA_TYPES_ENUM_PARSER_HPP
+#define DOGEN_DIA_TYPES_ENUM_PARSER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/utility/exception/utility_exception.hpp"
+#include <string>
+#include "dogen/dia/types/object_types.hpp"
+#include "dogen/dia/types/stereotypes.hpp"
 
 namespace dogen {
 namespace dia {
-namespace xml {
 
 /**
- * @brief Exception thrown when there is a failure in serialisation or
- * deserialisation of dia domain types.
+ * @brief Helper class that converts strings into Dia enums.
  */
-class exception : public utility::exception::exception {
+class enum_parser {
 public:
-    exception(std::string message) : utility::exception::exception(message) { }
-    exception() { }
-
-    virtual ~exception() throw() {}
+    static object_types parse_object_type(const std::string& ot);
+    static stereotypes parse_stereotype(const std::string& st);
 };
 
-} } }
+} }
 
 #endif

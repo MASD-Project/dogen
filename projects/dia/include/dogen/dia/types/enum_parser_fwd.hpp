@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_XML_XML_HPP
-#define DOGEN_XML_XML_HPP
+#ifndef DOGEN_DIA_TYPES_ENUM_PARSER_FWD_HPP
+#define DOGEN_DIA_TYPES_ENUM_PARSER_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -28,12 +28,8 @@
 namespace dogen {
 namespace dia {
 
-/**
- * @brief Contains all classes required to read XML documents in dia
- * format.
- */
-namespace xml {
+class enum_parser;
 
-} } }
+} }
 
 #endif

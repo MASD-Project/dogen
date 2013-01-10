@@ -24,7 +24,7 @@
 #include "dogen/generator/modeling/dia_to_sml.hpp"
 #include "dogen/utility/exception/invalid_enum_value.hpp"
 #include "dogen/utility/serialization/xml_helper.hpp"
-#include "dogen/dia/xml/hydrator.hpp"
+#include "dogen/dia/types/hydrator.hpp"
 #include "dogen/dia/serialization/diagram_ser.hpp"
 #include "dogen/sml/serialization/model_ser.hpp"
 #include "dogen/sml/types/primitive_model_factory.hpp"
@@ -105,7 +105,7 @@ save_diagram(const dia::diagram& d, const std::string& name) const {
 
 dia::diagram
 director::hydrate_diagram(const boost::filesystem::path& path) const {
-    dia::xml::hydrator h(path);
+    dia::hydrator h(path);
     dia::diagram r(h.hydrate());
     save_diagram(r, path.stem().string());
     return r;

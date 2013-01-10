@@ -25,7 +25,7 @@
 #include <boost/algorithm/string/erase.hpp>
 #include <boost/graph/depth_first_search.hpp>
 #include <boost/throw_exception.hpp>
-#include "dogen/dia/utility/dia_utility.hpp"
+#include "dogen/dia/types/enum_parser.hpp"
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/generator/modeling/transformation_error.hpp"
 #include "dogen/generator/modeling/dia_object_to_sml_package.hpp"
@@ -59,8 +59,8 @@ const std::string unexpected_attribute_value_type(
 dogen::dia::object_types parse_object_type(const std::string s) {
     dogen::dia::object_types r;
     try {
-        using dogen::dia::utility::parse_object_type;
-        r = parse_object_type(s);
+        using dogen::dia::enum_parser;
+        r = enum_parser::parse_object_type(s);
     } catch(const std::exception& e) {
         std::ostringstream stream;
         stream << error_parsing_object_type << "'" << s

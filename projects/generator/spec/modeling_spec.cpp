@@ -28,7 +28,7 @@
 #include "dogen/utility/test_data/codegen_tds.hpp"
 #include "dogen/utility/test/logging.hpp"
 #include "dogen/dia/io/diagram_io.hpp"
-#include "dogen/dia/xml/hydrator.hpp"
+#include "dogen/dia/types/hydrator.hpp"
 #include "dogen/generator/modeling/dia_to_sml.hpp"
 #include "dogen/sml/types/model.hpp"
 #include "dogen/sml/io/model_io.hpp"

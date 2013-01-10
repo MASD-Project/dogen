@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_DIA_XML_SERIALISER_HPP
-#define DOGEN_DIA_XML_SERIALISER_HPP
+#ifndef DOGEN_DIA_TYPES_HYDRATOR_HPP
+#define DOGEN_DIA_TYPES_HYDRATOR_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -35,7 +35,6 @@
 
 namespace dogen {
 namespace dia {
-namespace xml {
 
 class hydrator {
 public:
@@ -88,6 +87,6 @@ private:
     ::dogen::utility::xml::text_reader reader_;
 };
 
-} } }
+} }
 
 #endif

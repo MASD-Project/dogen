@@ -28,7 +28,7 @@
 #include "dogen/dia/types/all.hpp"
 #include "dogen/dia/io/all_io.hpp"
 #include "dogen/dia/serialization/all_ser.hpp"
-#include "dogen/dia/xml/hydrator.hpp"
+#include "dogen/dia/types/hydrator.hpp"
 
 namespace {
 
@@ -40,7 +40,7 @@ bool test_hydrator(
     boost::filesystem::path expected_path,
     boost::filesystem::path actual_path) {
 
-    dogen::dia::xml::hydrator hydrator(input_path);
+    dogen::dia::hydrator hydrator(input_path);
     dogen::dia::diagram actual(hydrator.hydrate());
 
     using dogen::utility::test::asserter;
