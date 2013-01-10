@@ -312,12 +312,6 @@ also move on the getter? Sometimes it may not be a copyable type
 It would be nice to be able to add a default value in dia and have it
 set on the default constructor, if the type is a primitive or a =std::string=.
 
-*** Generate the Dia model from dogen
-
-Now that dogen is functional we should remove all the hand-crafted
-code in the Dia model which could be code generated. We need to have
-support for boost variant for this to work.
-
 *** Add support for interfaces
 
 This is a very blue-skies story. When dogen starts supporting service

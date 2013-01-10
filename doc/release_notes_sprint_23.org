@@ -38,4 +38,10 @@ http://en.wikipedia.org/wiki/C%2B%2B11#Strongly_typed_enumerations
 
 We need to specify the type when we forward declare.
 
+*** COMPLETED Generate the Dia model from dogen
+
+Now that dogen is functional we should remove all the hand-crafted
+code in the Dia model which could be code generated. We need to have
+support for boost variant for this to work.
+
 ** Deprecated Development Stories
