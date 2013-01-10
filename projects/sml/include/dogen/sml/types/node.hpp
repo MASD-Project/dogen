@@ -29,7 +29,7 @@
 #include <boost/shared_ptr.hpp>
 #include <list>
 #include "dogen/sml/serialization/node_fwd_ser.hpp"
-#include "dogen/sml/types/node.hpp"
+#include "dogen/sml/types/node_fwd.hpp"
 #include "dogen/sml/types/qname.hpp"
 
 namespace dogen {

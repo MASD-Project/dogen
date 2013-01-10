@@ -24,7 +24,7 @@ namespace boost {
 
 inline bool operator==(const boost::shared_ptr<dogen::sml::node>& lhs,
 const boost::shared_ptr<dogen::sml::node>& rhs) {
-    return lhs && rhs && (*lhs == *rhs);
+    return (!lhs && !rhs) ||(lhs && rhs && (*lhs == *rhs));
 }
 
 }
