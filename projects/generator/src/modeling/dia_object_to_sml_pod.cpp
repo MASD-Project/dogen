@@ -35,10 +35,10 @@
 #include <boost/graph/depth_first_search.hpp>
 #include "dogen/sml/hash/qname_hash.hpp"
 #include "dogen/dia/utility/dia_utility.hpp"
-#include "dogen/dia/domain/composite.hpp"
-#include "dogen/dia/domain/attribute.hpp"
-#include "dogen/dia/domain/object_types.hpp"
-#include "dogen/dia/domain/stereotypes.hpp"
+#include "dogen/dia/types/composite.hpp"
+#include "dogen/dia/types/attribute.hpp"
+#include "dogen/dia/types/object_types.hpp"
+#include "dogen/dia/types/stereotypes.hpp"
 #include "dogen/dia/io/object_types_io.hpp"
 #include "dogen/dia/io/stereotypes_io.hpp"
 #include "dogen/dia/io/object_io.hpp"
@@ -197,10 +197,9 @@ public:
     }
 
 private:
-    template<typename AttributeValue>
+    template<typename AttributeValue, typename Variant>
     AttributeValue
-    attribute_value(const dogen::dia::attribute::attribute_value& v,
-        const std::string& description) const {
+    attribute_value(const Variant& v, const std::string& description) const {
 
         AttributeValue r;
         try {

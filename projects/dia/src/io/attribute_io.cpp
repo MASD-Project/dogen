@@ -18,102 +18,114 @@
  * MA 02110-1301, USA.
  *
  */
-#include <ostream>
+#include <boost/algorithm/string.hpp>
 #include <boost/variant/apply_visitor.hpp>
-#include "dogen/utility/io/vector_io.hpp"
-#include "dogen/utility/io/jsonify_io.hpp"
+#include <ostream>
+#include "dogen/dia/io/attribute_io.hpp"
+#include "dogen/dia/io/boolean_io.hpp"
 #include "dogen/dia/io/color_io.hpp"
+#include "dogen/dia/io/composite_io.hpp"
+#include "dogen/dia/io/enumeration_io.hpp"
+#include "dogen/dia/io/font_io.hpp"
+#include "dogen/dia/io/integer_io.hpp"
 #include "dogen/dia/io/point_io.hpp"
 #include "dogen/dia/io/real_io.hpp"
-#include "dogen/dia/io/integer_io.hpp"
-#include "dogen/dia/io/boolean_io.hpp"
-#include "dogen/dia/io/string_io.hpp"
-#include "dogen/dia/io/composite_io.hpp"
-#include "dogen/dia/io/attribute_io.hpp"
 #include "dogen/dia/io/rectangle_io.hpp"
-#include "dogen/dia/io/font_io.hpp"
-#include "dogen/dia/io/enumeration_io.hpp"
+#include "dogen/dia/io/string_io.hpp"
 
-namespace {
 
-/**
- * @brief Writes all possible attribute value types into the stream.
- */
-class attribute_value_visitor : public boost::static_visitor<> {
-public:
-    attribute_value_visitor(std::ostream& stream) : stream_(stream) {}
+inline std::string tidy_up_string(std::string s) {
+    boost::replace_all(s, "\r\n", "<new_line>");
+    boost::replace_all(s, "\n", "<new_line>");
+    boost::replace_all(s, "\"", "<quote>");
+    return s;
+}
 
-public:
-    void operator()(const dogen::dia::color& value) const {
-        stream_ << value;
+namespace boost {
+
+struct boost_variant_dogen_dia_color_dogen_dia_real_dogen_dia_integer_dogen_dia_font_dogen_dia_boolean_dogen_dia_point_dogen_dia_string_dogen_dia_enumeration_dogen_dia_rectangle_dogen_dia_composite_visitor : public boost::static_visitor<> {
+    boost_variant_dogen_dia_color_dogen_dia_real_dogen_dia_integer_dogen_dia_font_dogen_dia_boolean_dogen_dia_point_dogen_dia_string_dogen_dia_enumeration_dogen_dia_rectangle_dogen_dia_composite_visitor(std::ostream& s) : stream_(s) {
+        s << "{ " << "\"__type__\": " << "\"boost::variant\"" << ", ";
+        s << "\"data\": ";
     }
 
-    void operator()(const dogen::dia::point& value) const {
-        stream_ << value;
+    ~boost_variant_dogen_dia_color_dogen_dia_real_dogen_dia_integer_dogen_dia_font_dogen_dia_boolean_dogen_dia_point_dogen_dia_string_dogen_dia_enumeration_dogen_dia_rectangle_dogen_dia_composite_visitor() { stream_ << " }"; }
+
+    void operator()(const dogen::dia::color& v) const {
+        stream_ << v;
     }
 
-    void operator()(const dogen::dia::real& value) const {
-        stream_ << value;
+    void operator()(const dogen::dia::real& v) const {
+        stream_ << v;
     }
 
-    void operator()(const dogen::dia::integer& value) const {
-        stream_ << value;
+    void operator()(const dogen::dia::integer& v) const {
+        stream_ << v;
     }
 
-    void operator()(const dogen::dia::boolean& value) const {
-        stream_ << value;
+    void operator()(const dogen::dia::font& v) const {
+        stream_ << v;
     }
 
-    void operator()(const dogen::dia::string& value) const {
-        stream_ << value;
+    void operator()(const dogen::dia::boolean& v) const {
+        stream_ << v;
     }
 
-    void operator()(const dogen::dia::rectangle& value) const {
-        stream_ << value;
+    void operator()(const dogen::dia::point& v) const {
+        stream_ << v;
     }
 
-    void operator()(const dogen::dia::font& value) const {
-        stream_ << value;
+    void operator()(const dogen::dia::string& v) const {
+        stream_ << v;
     }
 
-    void operator()(const dogen::dia::enumeration& value) const {
-        stream_ << value;
+    void operator()(const dogen::dia::enumeration& v) const {
+        stream_ << v;
     }
 
-    void operator()(const dogen::dia::composite& value) const {
-        stream_ << value;
+    void operator()(const dogen::dia::rectangle& v) const {
+        stream_ << v;
+    }
+
+    void operator()(const dogen::dia::composite& v) const {
+        stream_ << v;
     }
 
 private:
     std::ostream& stream_;
 };
 
+inline std::ostream& operator<<(std::ostream& s, const boost::variant<dogen::dia::color, dogen::dia::real, dogen::dia::integer, dogen::dia::font, dogen::dia::boolean, dogen::dia::point, dogen::dia::string, dogen::dia::enumeration, dogen::dia::rectangle, dogen::dia::composite>& v) {
+    boost::apply_visitor(boost_variant_dogen_dia_color_dogen_dia_real_dogen_dia_integer_dogen_dia_font_dogen_dia_boolean_dogen_dia_point_dogen_dia_string_dogen_dia_enumeration_dogen_dia_rectangle_dogen_dia_composite_visitor(s), v);
+    return s;
+}
+
+}
+
+namespace std {
+
+inline std::ostream& operator<<(std::ostream& s, const std::vector<boost::variant<dogen::dia::color, dogen::dia::real, dogen::dia::integer, dogen::dia::font, dogen::dia::boolean, dogen::dia::point, dogen::dia::string, dogen::dia::enumeration, dogen::dia::rectangle, dogen::dia::composite> >& v) {
+    s << "[ ";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << *i;
+    }
+    s << "] ";
+    return s;
+}
+
 }
 
 namespace dogen {
 namespace dia {
 
-std::ostream&
-operator<<(std::ostream& stream, const dogen::dia::attribute& attribute) {
-    stream << "\"attribute\": {"
-           << " \"name\": \"" << attribute.name() << "\",";
-
-    stream << " \"values\": [ ";
-    const auto& values(attribute.values());
-    for(auto i(values.cbegin()); i != values.cend(); ++i) {
-        if (i != values.cbegin()) stream << ", ";
-
-        stream << "{ ";
-        // we need to create a local variable here because the visitor
-        // uses a non-const reference to the value and we cannot have
-        // non-const references to temporaries.
-        dogen::dia::attribute::attribute_value v(*i);
-        boost::apply_visitor(attribute_value_visitor(stream), v);
-        stream << " }";
-    }
-    stream << " ]";
-    stream << " }";
-    return(stream);
+std::ostream& operator<<(std::ostream& s, const attribute& v) {
+    s << " { "
+      << "\"__type__\": " << "\"dogen::dia::attribute\"" << ", "
+      << "\"name\": " << "\"" << tidy_up_string(v.name()) << "\"" << ", "
+      << "\"values\": " << v.values()
+      << " }";
+    return(s);
 }
 
 } }

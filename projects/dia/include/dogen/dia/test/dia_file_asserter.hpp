@@ -25,7 +25,7 @@
 #pragma once
 #endif
 
-#include "dogen/dia/domain/diagram.hpp"
+#include "dogen/dia/types/diagram.hpp"
 #include "dogen/utility/test/file_asserter.hpp"
 
 namespace dogen {

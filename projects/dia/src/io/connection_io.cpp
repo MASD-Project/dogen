@@ -18,20 +18,29 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/algorithm/string.hpp>
 #include <ostream>
 #include "dogen/dia/io/connection_io.hpp"
+
+
+inline std::string tidy_up_string(std::string s) {
+    boost::replace_all(s, "\r\n", "<new_line>");
+    boost::replace_all(s, "\n", "<new_line>");
+    boost::replace_all(s, "\"", "<quote>");
+    return s;
+}
 
 namespace dogen {
 namespace dia {
 
-std::ostream&
-operator<<(std::ostream& stream, const dogen::dia::connection& connection) {
-    stream << "\"connection\": {"
-           << " \"handle\": \"" << connection.handle() << "\","
-           << " \"to\": \"" << connection.to() << "\","
-           << " \"connection_slot\": \"" << connection.connection_slot() << "\""
-           << " }";
-    return(stream);
+std::ostream& operator<<(std::ostream& s, const connection& v) {
+    s << " { "
+      << "\"__type__\": " << "\"dogen::dia::connection\"" << ", "
+      << "\"handle\": " << "\"" << tidy_up_string(v.handle()) << "\"" << ", "
+      << "\"to\": " << "\"" << tidy_up_string(v.to()) << "\"" << ", "
+      << "\"connection_slot\": " << "\"" << tidy_up_string(v.connection_slot()) << "\""
+      << " }";
+    return(s);
 }
 
 } }

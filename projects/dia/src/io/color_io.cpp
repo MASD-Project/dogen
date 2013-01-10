@@ -18,18 +18,27 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/algorithm/string.hpp>
 #include <ostream>
 #include "dogen/dia/io/color_io.hpp"
+
+
+inline std::string tidy_up_string(std::string s) {
+    boost::replace_all(s, "\r\n", "<new_line>");
+    boost::replace_all(s, "\n", "<new_line>");
+    boost::replace_all(s, "\"", "<quote>");
+    return s;
+}
 
 namespace dogen {
 namespace dia {
 
-std::ostream&
-operator<<(std::ostream& stream, dogen::dia::color color) {
-    stream << "\"color\": {"
-           << " \"value\": \"" << color.value() << "\""
-           << " }";
-    return(stream);
+std::ostream& operator<<(std::ostream& s, const color& v) {
+    s << " { "
+      << "\"__type__\": " << "\"dogen::dia::color\"" << ", "
+      << "\"value\": " << "\"" << tidy_up_string(v.value()) << "\""
+      << " }";
+    return(s);
 }
 
 } }

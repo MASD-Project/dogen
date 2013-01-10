@@ -26,8 +26,8 @@
 #endif
 
 #include <string>
-#include "dogen/dia/domain/object_types.hpp"
-#include "dogen/dia/domain/stereotypes.hpp"
+#include "dogen/dia/types/object_types.hpp"
+#include "dogen/dia/types/stereotypes.hpp"
 
 namespace dogen {
 namespace dia {

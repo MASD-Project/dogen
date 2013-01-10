@@ -26,12 +26,14 @@
 #endif
 
 #include <iosfwd>
-#include "dogen/dia/domain/real.hpp"
+#include "dogen/dia/types/real.hpp"
 
 namespace dogen {
 namespace dia {
 
-std::ostream& operator<<(std::ostream& stream, dogen::dia::real real);
+std::ostream&
+operator<<(std::ostream& s,
+     const dogen::dia::real& v);
 
 } }
 

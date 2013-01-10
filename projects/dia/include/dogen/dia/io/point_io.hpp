@@ -26,12 +26,14 @@
 #endif
 
 #include <iosfwd>
-#include "dogen/dia/domain/point.hpp"
+#include "dogen/dia/types/point.hpp"
 
 namespace dogen {
 namespace dia {
 
-std::ostream& operator<<(std::ostream& stream, dogen::dia::point point);
+std::ostream&
+operator<<(std::ostream& s,
+     const dogen::dia::point& v);
 
 } }
 

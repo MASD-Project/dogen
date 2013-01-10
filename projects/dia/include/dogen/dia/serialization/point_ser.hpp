@@ -18,46 +18,25 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_DIA_SERIALIZATION_POINT_HPP
-#define DOGEN_DIA_SERIALIZATION_POINT_HPP
+#ifndef DOGEN_DIA_SERIALIZATION_POINT_SER_HPP
+#define DOGEN_DIA_SERIALIZATION_POINT_SER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <string>
-#include <boost/serialization/string.hpp>
-#include <boost/serialization/nvp.hpp>
-#include "dogen/dia/domain/point.hpp"
+#include <boost/serialization/split_free.hpp>
+#include "dogen/dia/types/point.hpp"
 
-namespace dogen {
-namespace dia {
-namespace serialization {
-namespace detail {
-
-class point_serializer {
-public:
-    template<typename Archive>
-    void serialize(Archive & archive,
-        dogen::dia::point& value,
-        const unsigned int /*version*/) {
-        using boost::serialization::make_nvp;
-        archive & make_nvp("value", value.value_);
-    }
-};
-
-} } } }
-
+BOOST_SERIALIZATION_SPLIT_FREE(dogen::dia::point)
 namespace boost {
 namespace serialization {
 
-template<class Archive>
-inline void serialize(Archive & archive,
-    dogen::dia::point& value,
-    const unsigned int version) {
-    dogen::dia::serialization::detail::point_serializer serializer;
-    serializer.serialize<Archive>(archive, value, version);
-}
+template<typename Archive>
+void save(Archive& ar, const dogen::dia::point& v, unsigned int version);
+
+template<typename Archive>
+void load(Archive& ar, dogen::dia::point& v, unsigned int version);
 
 } }
 

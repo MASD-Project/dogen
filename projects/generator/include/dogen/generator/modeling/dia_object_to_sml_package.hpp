@@ -28,7 +28,7 @@
 #include <string>
 #include <unordered_map>
 #include <boost/graph/adjacency_list.hpp>
-#include "dogen/dia/domain/object.hpp"
+#include "dogen/dia/types/object.hpp"
 #include "dogen/sml/types/package.hpp"
 
 namespace dogen {

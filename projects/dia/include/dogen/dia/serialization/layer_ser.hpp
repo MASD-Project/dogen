@@ -18,49 +18,25 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_DIA_SERIALIZATION_LAYER_HPP
-#define DOGEN_DIA_SERIALIZATION_LAYER_HPP
+#ifndef DOGEN_DIA_SERIALIZATION_LAYER_SER_HPP
+#define DOGEN_DIA_SERIALIZATION_LAYER_SER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <boost/serialization/string.hpp>
-#include <boost/serialization/nvp.hpp>
-#include <boost/serialization/vector.hpp>
-#include "dogen/dia/domain/layer.hpp"
+#include <boost/serialization/split_free.hpp>
+#include "dogen/dia/types/layer.hpp"
 
-namespace dogen {
-namespace dia {
-namespace serialization {
-namespace detail {
-
-class layer_serializer {
-public:
-    template<typename Archive>
-    void serialize(Archive & archive,
-        dogen::dia::layer& value,
-        const unsigned int /*version*/) {
-        using boost::serialization::make_nvp;
-        archive & make_nvp("name", value.name_);
-        archive & make_nvp("visible", value.visible_);
-        archive & make_nvp("active", value.active_);
-        archive & make_nvp("objects", value.objects_);
-    }
-};
-
-} } } }
-
+BOOST_SERIALIZATION_SPLIT_FREE(dogen::dia::layer)
 namespace boost {
 namespace serialization {
 
-template<class Archive>
-inline void serialize(Archive & archive,
-    dogen::dia::layer& value,
-    const unsigned int version) {
-    dogen::dia::serialization::detail::layer_serializer serializer;
-    serializer.serialize<Archive>(archive, value, version);
-}
+template<typename Archive>
+void save(Archive& ar, const dogen::dia::layer& v, unsigned int version);
+
+template<typename Archive>
+void load(Archive& ar, dogen::dia::layer& v, unsigned int version);
 
 } }
 

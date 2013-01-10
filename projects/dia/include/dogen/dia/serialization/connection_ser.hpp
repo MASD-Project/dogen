@@ -18,48 +18,25 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_DIA_SERIALIZATION_CONNECTION_HPP
-#define DOGEN_DIA_SERIALIZATION_CONNECTION_HPP
+#ifndef DOGEN_DIA_SERIALIZATION_CONNECTION_SER_HPP
+#define DOGEN_DIA_SERIALIZATION_CONNECTION_SER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <string>
-#include <boost/serialization/string.hpp>
-#include <boost/serialization/nvp.hpp>
-#include "dogen/dia/domain/connection.hpp"
+#include <boost/serialization/split_free.hpp>
+#include "dogen/dia/types/connection.hpp"
 
-namespace dogen {
-namespace dia {
-namespace serialization {
-namespace detail {
-
-class connection_serializer {
-public:
-    template<typename Archive>
-    void serialize(Archive & archive,
-        dogen::dia::connection& value,
-        const unsigned int /*version*/) {
-        using boost::serialization::make_nvp;
-        archive & make_nvp("handle", value.handle_);
-        archive & make_nvp("to", value.to_);
-        archive & make_nvp("connection_slot", value.connection_slot_);
-    }
-};
-
-} } } }
-
+BOOST_SERIALIZATION_SPLIT_FREE(dogen::dia::connection)
 namespace boost {
 namespace serialization {
 
-template<class Archive>
-inline void serialize(Archive & archive,
-    dogen::dia::connection& value,
-    const unsigned int version) {
-    dogen::dia::serialization::detail::connection_serializer serializer;
-    serializer.serialize<Archive>(archive, value, version);
-}
+template<typename Archive>
+void save(Archive& ar, const dogen::dia::connection& v, unsigned int version);
+
+template<typename Archive>
+void load(Archive& ar, dogen::dia::connection& v, unsigned int version);
 
 } }
 

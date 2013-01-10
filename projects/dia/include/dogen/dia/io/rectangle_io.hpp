@@ -26,13 +26,14 @@
 #endif
 
 #include <iosfwd>
-#include "dogen/dia/domain/rectangle.hpp"
+#include "dogen/dia/types/rectangle.hpp"
 
 namespace dogen {
 namespace dia {
 
 std::ostream&
-operator<<(std::ostream& stream, dogen::dia::rectangle rectangle);
+operator<<(std::ostream& s,
+     const dogen::dia::rectangle& v);
 
 } }
 

@@ -688,7 +688,7 @@ path dia_sml::actual_all_primitives_sml_xml() {
 }
 
 path dia_sml::actual_comments_dia_xml() {
-    return resolver::resolve(::actual_comments_sml_xml);
+    return resolver::resolve(::actual_comments_dia_xml);
 }
 
 path dia_sml::actual_comments_sml_xml() {
@@ -696,7 +696,7 @@ path dia_sml::actual_comments_sml_xml() {
 }
 
 path dia_sml::actual_enumeration_dia_xml() {
-    return resolver::resolve(::actual_enumeration_sml_xml);
+    return resolver::resolve(::actual_enumeration_dia_xml);
 }
 
 path dia_sml::actual_enumeration_sml_xml() {
@@ -704,7 +704,7 @@ path dia_sml::actual_enumeration_sml_xml() {
 }
 
 path dia_sml::actual_exception_dia_xml() {
-    return resolver::resolve(::actual_exception_sml_xml);
+    return resolver::resolve(::actual_exception_dia_xml);
 }
 
 path dia_sml::actual_exception_sml_xml() {
@@ -712,7 +712,7 @@ path dia_sml::actual_exception_sml_xml() {
 }
 
 path dia_sml::actual_std_model_dia_xml() {
-    return resolver::resolve(::actual_std_model_sml_xml);
+    return resolver::resolve(::actual_std_model_dia_xml);
 }
 
 path dia_sml::actual_std_model_sml_xml() {
@@ -720,7 +720,7 @@ path dia_sml::actual_std_model_sml_xml() {
 }
 
 path dia_sml::actual_boost_model_dia_xml() {
-    return resolver::resolve(::actual_boost_model_sml_xml);
+    return resolver::resolve(::actual_boost_model_dia_xml);
 }
 
 path dia_sml::actual_boost_model_sml_xml() {

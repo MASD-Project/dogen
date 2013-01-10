@@ -18,20 +18,29 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/algorithm/string.hpp>
 #include <ostream>
 #include "dogen/dia/io/font_io.hpp"
+
+
+inline std::string tidy_up_string(std::string s) {
+    boost::replace_all(s, "\r\n", "<new_line>");
+    boost::replace_all(s, "\n", "<new_line>");
+    boost::replace_all(s, "\"", "<quote>");
+    return s;
+}
 
 namespace dogen {
 namespace dia {
 
-std::ostream&
-operator<<(std::ostream& stream, dogen::dia::font font) {
-    stream << "\"font\": {"
-           << " \"family\": \"" << font.family() << "\","
-           << " \"style\": \"" << font.style() << "\","
-           << " \"name\": \"" << font.name() << "\""
-           << " }";
-    return(stream);
+std::ostream& operator<<(std::ostream& s, const font& v) {
+    s << " { "
+      << "\"__type__\": " << "\"dogen::dia::font\"" << ", "
+      << "\"family\": " << "\"" << tidy_up_string(v.family()) << "\"" << ", "
+      << "\"style\": " << "\"" << tidy_up_string(v.style()) << "\"" << ", "
+      << "\"name\": " << "\"" << tidy_up_string(v.name()) << "\""
+      << " }";
+    return(s);
 }
 
 } }

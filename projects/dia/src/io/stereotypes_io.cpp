@@ -18,56 +18,44 @@
  * MA 02110-1301, USA.
  *
  */
-#include <string>
 #include <ostream>
-#include <boost/throw_exception.hpp>
-#include "dogen/utility/exception/invalid_enum_value.hpp"
+#include <stdexcept>
 #include "dogen/dia/io/stereotypes_io.hpp"
-#include "dogen/utility/log/logger.hpp"
-
-using namespace dogen::utility::log;
-
-namespace {
-
-auto lg(logger_factory("stereotypes_io"));
-
-const std::string prefix("stereotypes::");
-const std::string invalid("invalid");
-const std::string enumeration("enumeration");
-const std::string exception("exception");
-const std::string versioned("versioned");
-const std::string entity("entity");
-const std::string value("value");
-const std::string service("service");
-const std::string nongeneratable("nongeneratable");
-const std::string error_message("Invalid or unexpected object type");
-
-}
 
 namespace dogen {
 namespace dia {
 
-std::ostream& operator<<(std::ostream& stream, stereotypes value) {
-    switch (value) {
+std::ostream& operator<<(std::ostream& s, const stereotypes& v) {
+    s << "{ " << "\"__type__\": " << "\"stereotypes\", " << "\"value\": ";
+
+    std::string attr;
+    switch (v) {
     case stereotypes::invalid:
-        return stream << prefix << invalid;
-    case stereotypes::enumeration:
-        return stream << prefix << enumeration;
-    case stereotypes::exception:
-        return stream << prefix << exception;
-    case stereotypes::entity:
-        return stream << prefix << entity;
-    case stereotypes::value:
-        return stream << prefix << value;
-    case stereotypes::service:
-        return stream << prefix << service;
-    case stereotypes::nongeneratable:
-        return stream << prefix << nongeneratable;
-    default:
+        attr = "\"invalid\"";
         break;
+    case stereotypes::enumeration:
+        attr = "\"enumeration\"";
+        break;
+    case stereotypes::exception:
+        attr = "\"exception\"";
+        break;
+    case stereotypes::entity:
+        attr = "\"entity\"";
+        break;
+    case stereotypes::value:
+        attr = "\"value\"";
+        break;
+    case stereotypes::service:
+        attr = "\"service\"";
+        break;
+    case stereotypes::nongeneratable:
+        attr = "\"nongeneratable\"";
+        break;
+    default:
+        throw std::invalid_argument("Invalid value for stereotypes");
     }
-    BOOST_LOG_SEV(lg, error) << error_message;
-    BOOST_THROW_EXCEPTION(utility::exception::invalid_enum_value(error_message));
+    s << attr << " }";
+    return s;
 }
 
 } }

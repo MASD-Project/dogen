@@ -18,18 +18,27 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/algorithm/string.hpp>
 #include <ostream>
 #include "dogen/dia/io/child_node_io.hpp"
+
+
+inline std::string tidy_up_string(std::string s) {
+    boost::replace_all(s, "\r\n", "<new_line>");
+    boost::replace_all(s, "\n", "<new_line>");
+    boost::replace_all(s, "\"", "<quote>");
+    return s;
+}
 
 namespace dogen {
 namespace dia {
 
-std::ostream&
-operator<<(std::ostream& stream, dogen::dia::child_node child_node) {
-    stream << "\"child_node\": {"
-           << " \"parent\": \"" << child_node.parent() << "\""
-           << " }";
-    return(stream);
+std::ostream& operator<<(std::ostream& s, const child_node& v) {
+    s << " { "
+      << "\"__type__\": " << "\"dogen::dia::child_node\"" << ", "
+      << "\"parent\": " << "\"" << tidy_up_string(v.parent()) << "\""
+      << " }";
+    return(s);
 }
 
 } }

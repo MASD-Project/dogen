@@ -26,13 +26,14 @@
 #endif
 
 #include <iosfwd>
-#include "dogen/dia/domain/composite.hpp"
+#include "dogen/dia/types/composite.hpp"
 
 namespace dogen {
 namespace dia {
 
 std::ostream&
-operator<<(std::ostream& stream, dogen::dia::composite composite);
+operator<<(std::ostream& s,
+     const dogen::dia::composite& v);
 
 } }
 

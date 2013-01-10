@@ -23,10 +23,10 @@
 #include "dogen/utility/test/asserter.hpp"
 #include "dogen/utility/test/serialization_tester.hpp"
 #include "dogen/dia/serialization/registrar_ser.hpp"
-#include "dogen/dia/domain/dia_domain.hpp"
-#include "dogen/dia/io/dia_io.hpp"
-#include "dogen/dia/serialization/dia_ser.hpp"
-#include "dogen/dia/test_data/dia_test_data.hpp"
+#include "dogen/dia/types/all.hpp"
+#include "dogen/dia/io/all_io.hpp"
+#include "dogen/dia/serialization/all_ser.hpp"
+#include "dogen/dia/test_data/all_td.hpp"
 
 template<typename Archive> void register_types(Archive& ar) {
     dogen::dia::register_types<Archive>(ar);
@@ -56,25 +56,23 @@ BOOST_AUTO_TEST_SUITE(serialization)
 
 BOOST_AUTO_TEST_CASE(roundtrips_of_the_same_type_produce_the_same_entity) {
     SETUP_TEST_LOG_SOURCE("roundtrips_of_the_same_type_produce_the_same_entity");
-    using namespace dogen::dia::test_data;
+    using namespace dogen::dia;
 
-    rountrip_type<string_sequence>();
-    rountrip_type<rectangle_sequence>();
-    rountrip_type<real_sequence>();
-    rountrip_type<integer_sequence>();
-    rountrip_type<color_sequence>();
-    rountrip_type<font_sequence>();
-    rountrip_type<point_sequence>();
-    rountrip_type<boolean_sequence>();
-    rountrip_type<simple_attribute_sequence>();
-    rountrip_type<composite_attribute_sequence>();
-    rountrip_type<simple_composite_sequence>();
-    rountrip_type<composite_composite_sequence>();
-    rountrip_type<child_node_sequence>();
-    rountrip_type<object_sequence>();
-    rountrip_type<layer_sequence>();
-    rountrip_type<diagram_data_sequence>();
-    rountrip_type<diagram_sequence>();
+    rountrip_type<string_generator>();
+    rountrip_type<rectangle_generator>();
+    rountrip_type<real_generator>();
+    rountrip_type<integer_generator>();
+    rountrip_type<color_generator>();
+    rountrip_type<font_generator>();
+    rountrip_type<point_generator>();
+    rountrip_type<boolean_generator>();
+    rountrip_type<attribute_generator>();
+    rountrip_type<composite_generator>();
+    rountrip_type<child_node_generator>();
+    rountrip_type<object_generator>();
+    rountrip_type<layer_generator>();
+    rountrip_type<diagram_data_generator>();
+    rountrip_type<diagram_generator>();
 }
 
 BOOST_AUTO_TEST_SUITE_END()

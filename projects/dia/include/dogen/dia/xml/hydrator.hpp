@@ -28,7 +28,10 @@
 #include <string>
 #include <boost/filesystem/path.hpp>
 #include "dogen/utility/xml/text_reader.hpp"
-#include "dogen/dia/domain/diagram.hpp"
+#include "dogen/dia/types/diagram.hpp"
+#include "dogen/dia/types/child_node.hpp"
+#include "dogen/dia/types/connection.hpp"
+#include "dogen/dia/types/object.hpp"
 
 namespace dogen {
 namespace dia {

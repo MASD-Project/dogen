@@ -18,28 +18,78 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/algorithm/string.hpp>
 #include <ostream>
-#include "dogen/utility/io/optional_io.hpp"
-#include "dogen/utility/io/vector_io.hpp"
-#include "dogen/dia/io/object_io.hpp"
 #include "dogen/dia/io/attribute_io.hpp"
 #include "dogen/dia/io/child_node_io.hpp"
 #include "dogen/dia/io/connection_io.hpp"
+#include "dogen/dia/io/object_io.hpp"
+
+
+inline std::string tidy_up_string(std::string s) {
+    boost::replace_all(s, "\r\n", "<new_line>");
+    boost::replace_all(s, "\n", "<new_line>");
+    boost::replace_all(s, "\"", "<quote>");
+    return s;
+}
+
+namespace std {
+
+inline std::ostream& operator<<(std::ostream& s, const std::vector<dogen::dia::connection>& v) {
+    s << "[ ";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << *i;
+    }
+    s << "] ";
+    return s;
+}
+
+}
+
+namespace boost {
+
+inline std::ostream& operator<<(std::ostream& s, const boost::optional<dogen::dia::child_node>& v) {
+    s << "{ " << "\"__type__\": " << "\"boost::optional\"" << ", ";
+
+    if (v)
+        s << "\"data\": " << *v;
+    else
+        s << "\"data\": ""\"<empty>\"";
+    s<< " }";
+    return s;
+}
+
+}
+
+namespace std {
+
+inline std::ostream& operator<<(std::ostream& s, const std::vector<dogen::dia::attribute>& v) {
+    s << "[ ";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << *i;
+    }
+    s << "] ";
+    return s;
+}
+
+}
 
 namespace dogen {
 namespace dia {
 
-std::ostream&
-operator<<(std::ostream& stream, dogen::dia::object object) {
-    stream << "\"object\": {"
-           << " \"type\": \"" << object.type() << "\","
-           << " \"version\": \"" << object.version() << "\","
-           << " \"id\": \"" << object.id() << "\","
-           << " \"attributes\": " << object.attributes() << ","
-           << object.child_node() << ","
-           << " \"connections\": " << object.connections()
-           << " }";
-    return(stream);
+std::ostream& operator<<(std::ostream& s, const object& v) {
+    s << " { "
+      << "\"__type__\": " << "\"dogen::dia::object\"" << ", "
+      << "\"type\": " << "\"" << tidy_up_string(v.type()) << "\"" << ", "
+      << "\"version\": " << v.version() << ", "
+      << "\"id\": " << "\"" << tidy_up_string(v.id()) << "\"" << ", "
+      << "\"connections\": " << v.connections() << ", "
+      << "\"child_node\": " << v.child_node() << ", "
+      << "\"attributes\": " << v.attributes()
+      << " }";
+    return(s);
 }
 
 } }

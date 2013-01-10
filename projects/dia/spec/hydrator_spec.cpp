@@ -25,9 +25,9 @@
 #include "dogen/utility/test/asserter.hpp"
 #include "dogen/utility/test_data/dia_sml.hpp"
 #include "dogen/utility/io/vector_io.hpp"
-#include "dogen/dia/domain/dia_domain.hpp"
-#include "dogen/dia/io/dia_io.hpp"
-#include "dogen/dia/serialization/dia_ser.hpp"
+#include "dogen/dia/types/all.hpp"
+#include "dogen/dia/io/all_io.hpp"
+#include "dogen/dia/serialization/all_ser.hpp"
 #include "dogen/dia/xml/hydrator.hpp"
 
 namespace {
@@ -192,6 +192,24 @@ BOOST_AUTO_TEST_CASE(trivial_inheritance_results_in_expected_objects) {
     const auto input(dia_sml::input_trivial_inheritance_dia());
     const auto actual(dia_sml::actual_trivial_inheritance_dia_xml());
     const auto expected(dia_sml::expected_trivial_inheritance_dia_xml());
+    BOOST_CHECK(test_hydrator(input, expected, actual));
+}
+
+BOOST_AUTO_TEST_CASE(boost_model_results_in_expected_objects) {
+    SETUP_TEST_LOG_SOURCE("boost_model_results_in_expected_objects");
+    using dogen::utility::test_data::dia_sml;
+    const auto input(dia_sml::input_boost_model_dia());
+    const auto actual(dia_sml::actual_boost_model_dia_xml());
+    const auto expected(dia_sml::expected_boost_model_dia_xml());
+    BOOST_CHECK(test_hydrator(input, expected, actual));
+}
+
+BOOST_AUTO_TEST_CASE(std_model_results_in_expected_objects) {
+    SETUP_TEST_LOG_SOURCE("std_model_results_in_expected_objects");
+    using dogen::utility::test_data::dia_sml;
+    const auto input(dia_sml::input_std_model_dia());
+    const auto actual(dia_sml::actual_std_model_dia_xml());
+    const auto expected(dia_sml::expected_std_model_dia_xml());
     BOOST_CHECK(test_hydrator(input, expected, actual));
 }
 

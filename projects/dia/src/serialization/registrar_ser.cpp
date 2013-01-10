@@ -35,7 +35,8 @@ namespace dogen {
 namespace dia {
 
 template<typename Archive>
-void register_types(Archive&) { }
+void register_types(Archive&) {
+}
 
 template void register_types(boost::archive::polymorphic_oarchive&);
 template void register_types(boost::archive::polymorphic_iarchive&);

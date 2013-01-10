@@ -34,9 +34,9 @@
 #include "dogen/utility/filesystem/file.hpp"
 #include "dogen/utility/io/set_io.hpp"
 #include "dogen/utility/io/vector_io.hpp"
-#include "dogen/utility/test/asserter.hpp"
 #include "dogen/utility/serialization/xml_helper.hpp"
 #include "dogen/utility/test/bytewise_file_asserter.hpp"
+#include "dogen/utility/test/asserter.hpp"
 
 using boost::filesystem::path;
 

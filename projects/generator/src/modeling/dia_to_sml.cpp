@@ -33,10 +33,10 @@
 #include <boost/algorithm/string/erase.hpp>
 #include <boost/graph/depth_first_search.hpp>
 #include <boost/throw_exception.hpp>
-#include "dogen/dia/domain/object_types.hpp"
+#include "dogen/dia/types/object_types.hpp"
 #include "dogen/dia/io/object_types_io.hpp"
-#include "dogen/dia/domain/composite.hpp"
-#include "dogen/dia/domain/attribute.hpp"
+#include "dogen/dia/types/composite.hpp"
+#include "dogen/dia/types/attribute.hpp"
 #include "dogen/dia/utility/dia_utility.hpp"
 #include "dogen/dia/io/object_io.hpp"
 #include "dogen/dia/io/diagram_io.hpp"

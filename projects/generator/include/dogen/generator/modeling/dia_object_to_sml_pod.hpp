@@ -29,7 +29,7 @@
 #include <unordered_map>
 #include <unordered_set>
 #include <boost/graph/adjacency_list.hpp>
-#include "dogen/dia/domain/object.hpp"
+#include "dogen/dia/types/object.hpp"
 #include "dogen/sml/types/qname.hpp"
 #include "dogen/sml/types/package.hpp"
 #include "dogen/sml/types/pod.hpp"

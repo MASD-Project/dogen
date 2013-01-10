@@ -26,13 +26,14 @@
 #endif
 
 #include <iosfwd>
-#include "dogen/dia/domain/connection.hpp"
+#include "dogen/dia/types/connection.hpp"
 
 namespace dogen {
 namespace dia {
 
 std::ostream&
-operator<<(std::ostream& stream, const dogen::dia::connection& connection);
+operator<<(std::ostream& s,
+     const dogen::dia::connection& v);
 
 } }
 

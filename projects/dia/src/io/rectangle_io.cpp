@@ -18,18 +18,27 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/algorithm/string.hpp>
 #include <ostream>
 #include "dogen/dia/io/rectangle_io.hpp"
+
+
+inline std::string tidy_up_string(std::string s) {
+    boost::replace_all(s, "\r\n", "<new_line>");
+    boost::replace_all(s, "\n", "<new_line>");
+    boost::replace_all(s, "\"", "<quote>");
+    return s;
+}
 
 namespace dogen {
 namespace dia {
 
-std::ostream&
-operator<<(std::ostream& stream, dogen::dia::rectangle rectangle) {
-    stream << "\"rectangle\": {"
-           << " \"value\": \"" << rectangle.value() << "\""
-           << " }";
-    return(stream);
+std::ostream& operator<<(std::ostream& s, const rectangle& v) {
+    s << " { "
+      << "\"__type__\": " << "\"dogen::dia::rectangle\"" << ", "
+      << "\"value\": " << "\"" << tidy_up_string(v.value()) << "\""
+      << " }";
+    return(s);
 }
 
 } }

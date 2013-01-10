@@ -26,13 +26,14 @@
 #endif
 
 #include <iosfwd>
-#include "dogen/dia/domain/object.hpp"
+#include "dogen/dia/types/object.hpp"
 
 namespace dogen {
 namespace dia {
 
 std::ostream&
-operator<<(std::ostream& stream, dogen::dia::object object);
+operator<<(std::ostream& s,
+     const dogen::dia::object& v);
 
 } }
 

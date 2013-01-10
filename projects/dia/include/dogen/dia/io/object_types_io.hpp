@@ -18,20 +18,20 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_DIA_DOMAIN_OBJECT_TYPES_IO_HPP
-#define DOGEN_DIA_DOMAIN_OBJECT_TYPES_IO_HPP
+#ifndef DOGEN_DIA_IO_OBJECT_TYPES_IO_HPP
+#define DOGEN_DIA_IO_OBJECT_TYPES_IO_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <iosfwd>
-#include "dogen/dia/domain/object_types.hpp"
+#include "dogen/dia/types/object_types.hpp"
 
 namespace dogen {
 namespace dia {
 
-std::ostream& operator<<(std::ostream& stream, object_types value);
+std::ostream& operator<<(std::ostream& s, const object_types& v);
 
 } }
 

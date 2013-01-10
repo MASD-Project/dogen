@@ -26,12 +26,14 @@
 #endif
 
 #include <iosfwd>
-#include "dogen/dia/domain/font.hpp"
+#include "dogen/dia/types/font.hpp"
 
 namespace dogen {
 namespace dia {
 
-std::ostream& operator<<(std::ostream& stream, dogen::dia::font font);
+std::ostream&
+operator<<(std::ostream& s,
+     const dogen::dia::font& v);
 
 } }
 

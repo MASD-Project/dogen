@@ -26,13 +26,14 @@
 #endif
 
 #include <iosfwd>
-#include "dogen/dia/domain/attribute.hpp"
+#include "dogen/dia/types/attribute.hpp"
 
 namespace dogen {
 namespace dia {
 
 std::ostream&
-operator<<(std::ostream& stream, const dogen::dia::attribute& attribute);
+operator<<(std::ostream& s,
+     const dogen::dia::attribute& v);
 
 } }
 

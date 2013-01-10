@@ -26,12 +26,14 @@
 #endif
 
 #include <iosfwd>
-#include "dogen/dia/domain/integer.hpp"
+#include "dogen/dia/types/integer.hpp"
 
 namespace dogen {
 namespace dia {
 
-std::ostream& operator<<(std::ostream& stream, dogen::dia::integer integer);
+std::ostream&
+operator<<(std::ostream& s,
+     const dogen::dia::integer& v);
 
 } }
 

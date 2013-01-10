@@ -18,23 +18,76 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/algorithm/string.hpp>
 #include <ostream>
-#include "dogen/utility/io/shared_ptr_io.hpp"
-#include "dogen/utility/io/vector_io.hpp"
 #include "dogen/dia/io/attribute_io.hpp"
 #include "dogen/dia/io/composite_io.hpp"
+
+
+inline std::string tidy_up_string(std::string s) {
+    boost::replace_all(s, "\r\n", "<new_line>");
+    boost::replace_all(s, "\n", "<new_line>");
+    boost::replace_all(s, "\"", "<quote>");
+    return s;
+}
+
+namespace boost {
+
+inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<dogen::dia::attribute>& v) {
+    s << "{ " << "\"__type__\": " << "\"boost::shared_ptr\"" << ", "
+      << "\"memory\": " << "\"" << static_cast<void*>(v.get()) << "\"" << ", ";
+
+    if (v)
+        s << "\"data\": " << *v;
+    else
+        s << "\"data\": ""\"<empty>\"";
+    s<< " }";
+    return s;
+}
+
+}
+
+namespace std {
+
+inline std::ostream& operator<<(std::ostream& s, const std::vector<boost::shared_ptr<dogen::dia::attribute> >& v) {
+    s << "[ ";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << *i;
+    }
+    s << "] ";
+    return s;
+}
+
+}
+
+namespace boost {
+
+inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<dogen::dia::composite>& v) {
+    s << "{ " << "\"__type__\": " << "\"boost::shared_ptr\"" << ", "
+      << "\"memory\": " << "\"" << static_cast<void*>(v.get()) << "\"" << ", ";
+
+    if (v)
+        s << "\"data\": " << *v;
+    else
+        s << "\"data\": ""\"<empty>\"";
+    s<< " }";
+    return s;
+}
+
+}
 
 namespace dogen {
 namespace dia {
 
-std::ostream&
-operator<<(std::ostream& stream, dogen::dia::composite composite) {
-    stream << "\"composite\": {"
-           << " \"type\": \"" << composite.type() << "\", "
-           << "\"value\":" << composite.value() << ", "
-           << composite.inner_composite()
-           << " }";
-    return(stream);
+std::ostream& operator<<(std::ostream& s, const composite& v) {
+    s << " { "
+      << "\"__type__\": " << "\"dogen::dia::composite\"" << ", "
+      << "\"type\": " << "\"" << tidy_up_string(v.type()) << "\"" << ", "
+      << "\"value\": " << v.value() << ", "
+      << "\"inner_composite\": " << v.inner_composite()
+      << " }";
+    return(s);
 }
 
 } }

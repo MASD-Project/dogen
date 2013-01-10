@@ -18,48 +18,25 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_DIA_SERIALIZATION_FONT_HPP
-#define DOGEN_DIA_SERIALIZATION_FONT_HPP
+#ifndef DOGEN_DIA_SERIALIZATION_FONT_SER_HPP
+#define DOGEN_DIA_SERIALIZATION_FONT_SER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <string>
-#include <boost/serialization/string.hpp>
-#include <boost/serialization/nvp.hpp>
-#include "dogen/dia/domain/font.hpp"
+#include <boost/serialization/split_free.hpp>
+#include "dogen/dia/types/font.hpp"
 
-namespace dogen {
-namespace dia {
-namespace serialization {
-namespace detail {
-
-class font_serializer {
-public:
-    template<typename Archive>
-    void serialize(Archive & archive,
-        dogen::dia::font& value,
-        const unsigned int /*version*/) {
-        using boost::serialization::make_nvp;
-        archive & make_nvp("family", value.family_);
-        archive & make_nvp("style", value.style_);
-        archive & make_nvp("name", value.name_);
-    }
-};
-
-} } } }
-
+BOOST_SERIALIZATION_SPLIT_FREE(dogen::dia::font)
 namespace boost {
 namespace serialization {
 
-template<class Archive>
-inline void serialize(Archive & archive,
-    dogen::dia::font& value,
-    const unsigned int version) {
-    dogen::dia::serialization::detail::font_serializer serializer;
-    serializer.serialize<Archive>(archive, value, version);
-}
+template<typename Archive>
+void save(Archive& ar, const dogen::dia::font& v, unsigned int version);
+
+template<typename Archive>
+void load(Archive& ar, dogen::dia::font& v, unsigned int version);
 
 } }
 

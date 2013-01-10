@@ -18,27 +18,52 @@
  * MA 02110-1301, USA.
  *
  */
-#include <ostream>
-#include <iomanip>
+#include <boost/algorithm/string.hpp>
 #include <boost/io/ios_state.hpp>
-#include "dogen/utility/io/vector_io.hpp"
-#include "dogen/dia/io/object_io.hpp"
+#include <ostream>
 #include "dogen/dia/io/layer_io.hpp"
+#include "dogen/dia/io/object_io.hpp"
+
+
+inline std::string tidy_up_string(std::string s) {
+    boost::replace_all(s, "\r\n", "<new_line>");
+    boost::replace_all(s, "\n", "<new_line>");
+    boost::replace_all(s, "\"", "<quote>");
+    return s;
+}
+
+namespace std {
+
+inline std::ostream& operator<<(std::ostream& s, const std::vector<dogen::dia::object>& v) {
+    s << "[ ";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << *i;
+    }
+    s << "] ";
+    return s;
+}
+
+}
 
 namespace dogen {
 namespace dia {
 
-std::ostream& operator<<(std::ostream& stream, dogen::dia::layer layer) {
-    boost::io::ios_flags_saver ifs(stream);
+std::ostream& operator<<(std::ostream& s, const layer& v) {
+    boost::io::ios_flags_saver ifs(s);
+    s.setf(std::ios_base::boolalpha);
+    s.setf(std::ios::fixed, std::ios::floatfield);
+    s.precision(6);
+    s.setf(std::ios::showpoint);
 
-    stream << std::boolalpha;
-    stream << "\"layer\": {"
-           << " \"name\": \"" << layer.name() << "\","
-           << " \"visible\": "  << layer.visible() << ","
-           << " \"active\": " << layer.active() << ","
-           << " \"objects\":" << layer.objects()
-           << " }";
-    return(stream);
+    s << " { "
+      << "\"__type__\": " << "\"dogen::dia::layer\"" << ", "
+      << "\"name\": " << "\"" << tidy_up_string(v.name()) << "\"" << ", "
+      << "\"visible\": " << v.visible() << ", "
+      << "\"active\": " << v.active() << ", "
+      << "\"objects\": " << v.objects()
+      << " }";
+    return(s);
 }
 
 } }

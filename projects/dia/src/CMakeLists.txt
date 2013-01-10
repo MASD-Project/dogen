@@ -7,7 +7,7 @@
 # the Free Software Foundation; either version 3 of the License, or
 # (at your option) any later version.
 #
-# This program is distributed in the hope that it will be useful,
+# This program is distributed in the hope that it will be  useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 # GNU General Public License for more details.
@@ -17,14 +17,13 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
 # MA 02110-1301, USA.
 #
-set(dia_files "")
-file(GLOB_RECURSE dia_files RELATIVE
+set(all_files "")
+file(GLOB_RECURSE all_files RELATIVE
     "${CMAKE_CURRENT_SOURCE_DIR}/"
     "${CMAKE_CURRENT_SOURCE_DIR}/*.cpp")
 
-add_library(dia STATIC ${dia_files})
-set_target_properties(dia PROPERTIES OUTPUT_NAME dogen_dia)
-set_target_properties(dia
-    PROPERTIES VERSION ${DOGEN_VERSION} SOVERSION ${DOGEN_MAJOR_VERSION})
+add_library(dia STATIC ${all_files})
+set_target_properties(dia PROPERTIES
+    OUTPUT_NAME dogen_dia)
 
 install(TARGETS dia ARCHIVE DESTINATION lib COMPONENT libraries)

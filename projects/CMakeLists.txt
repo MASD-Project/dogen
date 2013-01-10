@@ -186,6 +186,7 @@ include_directories(
 # add all projects
 #
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dia)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dia/spec)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/sml)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/sml/spec)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/utility)

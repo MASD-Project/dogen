@@ -26,13 +26,14 @@
 #endif
 
 #include <iosfwd>
-#include "dogen/dia/domain/enumeration.hpp"
+#include "dogen/dia/types/enumeration.hpp"
 
 namespace dogen {
 namespace dia {
 
 std::ostream&
-operator<<(std::ostream& stream, dogen::dia::enumeration enumeration);
+operator<<(std::ostream& s,
+     const dogen::dia::enumeration& v);
 
 } }
 

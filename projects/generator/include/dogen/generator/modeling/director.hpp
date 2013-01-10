@@ -28,7 +28,7 @@
 #include <boost/optional.hpp>
 #include "dogen/generator/config/settings.hpp"
 #include "dogen/sml/types/model.hpp"
-#include "dogen/dia/domain/diagram.hpp"
+#include "dogen/dia/types/diagram.hpp"
 
 namespace dogen {
 namespace generator {

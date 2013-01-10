@@ -22,6 +22,17 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/xml/node_types_io.hpp"
 #include "dogen/dia/xml/dia_xml_exception.hpp"
+#include "dogen/dia/types/composite.hpp"
+#include "dogen/dia/types/rectangle.hpp"
+#include "dogen/dia/types/boolean.hpp"
+#include "dogen/dia/types/color.hpp"
+#include "dogen/dia/types/enumeration.hpp"
+#include "dogen/dia/types/font.hpp"
+#include "dogen/dia/types/integer.hpp"
+#include "dogen/dia/types/point.hpp"
+#include "dogen/dia/types/real.hpp"
+#include "dogen/dia/types/string.hpp"
+#include "dogen/dia/types/attribute.hpp"
 #include "dogen/dia/xml/hydrator.hpp"
 
 using namespace dogen::utility::log;
@@ -258,7 +269,6 @@ attribute hydrator::read_attribute() {
     if (is_self_closing)
         return attribute; // no more content to read related to this attribute
 
-    std::vector<attribute::attribute_value> values;
     while (reader_.is_start_element()) {
         // are we inside an attribute? the attribute values below
         // should only appear if we are.
@@ -269,27 +279,26 @@ attribute hydrator::read_attribute() {
         }
 
         if (name == dia_color)
-            values.push_back(read_attribute_value<color>());
+            attribute.values().push_back(read_attribute_value<color>());
         else if (name == dia_integer)
-            values.push_back(read_attribute_value<integer>());
+            attribute.values().push_back(read_attribute_value<integer>());
         else if (name == dia_real)
-            values.push_back(read_attribute_value<real>());
+            attribute.values().push_back(read_attribute_value<real>());
         else if (name == dia_point)
-            values.push_back(read_attribute_value<point>());
+            attribute.values().push_back(read_attribute_value<point>());
         else if (name == dia_boolean)
-            values.push_back(read_attribute_value<boolean>());
+            attribute.values().push_back(read_attribute_value<boolean>());
         else if (name == dia_string)
-            values.push_back(read_attribute_value<string>());
+            attribute.values().push_back(read_attribute_value<string>());
         else if (name == dia_rectangle)
-            values.push_back(read_attribute_value<rectangle>());
+            attribute.values().push_back(read_attribute_value<rectangle>());
         else if (name == dia_font)
-            values.push_back(read_attribute_value<font>());
+            attribute.values().push_back(read_attribute_value<font>());
         else if (name == dia_enum)
-            values.push_back(read_attribute_value<enumeration>());
+            attribute.values().push_back(read_attribute_value<enumeration>());
         else if (name == dia_composite)
-            values.push_back(read_attribute_value<composite>());
+            attribute.values().push_back(read_attribute_value<composite>());
     }
-    attribute.values(values);
 
     // if we were not on a self-closing attribute tag, then we need to
     // consume the attribute end element.

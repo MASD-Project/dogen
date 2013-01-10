@@ -51,7 +51,7 @@
 											<count>1</count>
 											<item_version>0</item_version>
 											<item>
-												<which>5</which>
+												<which>6</which>
 												<value class_id="10" tracking_level="0" version="0">
 													<value>#A4#</value>
 												</value>
@@ -66,7 +66,7 @@
 											<count>1</count>
 											<item_version>0</item_version>
 											<item>
-												<which>2</which>
+												<which>1</which>
 												<value class_id="11" tracking_level="0" version="0">
 													<value>2.8222000598907471</value>
 												</value>
@@ -81,7 +81,7 @@
 											<count>1</count>
 											<item_version>0</item_version>
 											<item>
-												<which>2</which>
+												<which>1</which>
 												<value>
 													<value>2.8222000598907471</value>
 												</value>
@@ -96,7 +96,7 @@
 											<count>1</count>
 											<item_version>0</item_version>
 											<item>
-												<which>2</which>
+												<which>1</which>
 												<value>
 													<value>2.8222000598907471</value>
 												</value>
@@ -111,7 +111,7 @@
 											<count>1</count>
 											<item_version>0</item_version>
 											<item>
-												<which>2</which>
+												<which>1</which>
 												<value>
 													<value>2.8222000598907471</value>
 												</value>
@@ -141,7 +141,7 @@
 											<count>1</count>
 											<item_version>0</item_version>
 											<item>
-												<which>2</which>
+												<which>1</which>
 												<value>
 													<value>1</value>
 												</value>
@@ -191,7 +191,7 @@
 											<count>1</count>
 											<item_version>0</item_version>
 											<item>
-												<which>2</which>
+												<which>1</which>
 												<value>
 													<value>1</value>
 												</value>
@@ -206,7 +206,7 @@
 											<count>1</count>
 											<item_version>0</item_version>
 											<item>
-												<which>2</which>
+												<which>1</which>
 												<value>
 													<value>1</value>
 												</value>
@@ -221,7 +221,7 @@
 											<count>1</count>
 											<item_version>0</item_version>
 											<item>
-												<which>3</which>
+												<which>2</which>
 												<value class_id="14" tracking_level="0" version="0">
 													<value>1</value>
 												</value>
@@ -236,7 +236,7 @@
 											<count>1</count>
 											<item_version>0</item_version>
 											<item>
-												<which>3</which>
+												<which>2</which>
 												<value>
 													<value>1</value>
 												</value>
@@ -328,6 +328,13 @@
 					<type>UML - LargePackage</type>
 					<version>0</version>
 					<id>O0</id>
+					<connections class_id="19" tracking_level="0" version="0">
+						<count>0</count>
+						<item_version>0</item_version>
+					</connections>
+					<child_node class_id="20" tracking_level="0" version="0">
+						<initialized>0</initialized>
+					</child_node>
 					<attributes>
 						<count>12</count>
 						<item_version>0</item_version>
@@ -337,8 +344,8 @@
 								<count>1</count>
 								<item_version>0</item_version>
 								<item>
-									<which>1</which>
-									<value class_id="19" tracking_level="0" version="0">
+									<which>5</which>
+									<value class_id="21" tracking_level="0" version="0">
 										<value>7.625,11.375</value>
 									</value>
 								</item>
@@ -350,8 +357,8 @@
 								<count>1</count>
 								<item_version>0</item_version>
 								<item>
-									<which>6</which>
-									<value class_id="20" tracking_level="0" version="0">
+									<which>8</which>
+									<value class_id="22" tracking_level="0" version="0">
 										<value>7.575,10.325;34.4875,29.6125</value>
 									</value>
 								</item>
@@ -383,7 +390,7 @@
 								<count>1</count>
 								<item_version>0</item_version>
 								<item>
-									<which>1</which>
+									<which>5</which>
 									<value>
 										<value>7.625,11.375</value>
 									</value>
@@ -396,7 +403,7 @@
 								<count>1</count>
 								<item_version>0</item_version>
 								<item>
-									<which>2</which>
+									<which>1</which>
 									<value>
 										<value>26.8125</value>
 									</value>
@@ -409,7 +416,7 @@
 								<count>1</count>
 								<item_version>0</item_version>
 								<item>
-									<which>2</which>
+									<which>1</which>
 									<value>
 										<value>18.1875</value>
 									</value>
@@ -422,7 +429,7 @@
 								<count>1</count>
 								<item_version>0</item_version>
 								<item>
-									<which>2</which>
+									<which>1</which>
 									<value>
 										<value>0.10000000149011612</value>
 									</value>
@@ -474,7 +481,7 @@
 								<count>1</count>
 								<item_version>0</item_version>
 								<item>
-									<which>5</which>
+									<which>6</which>
 									<value>
 										<value>##</value>
 									</value>
@@ -487,7 +494,7 @@
 								<count>1</count>
 								<item_version>0</item_version>
 								<item>
-									<which>5</which>
+									<which>6</which>
 									<value>
 										<value>#package_1#</value>
 									</value>
@@ -495,18 +502,22 @@
 							</values>
 						</item>
 					</attributes>
-					<child_node class_id="21" tracking_level="0" version="0">
-						<initialized>0</initialized>
-					</child_node>
-					<connections class_id="22" tracking_level="0" version="0">
-						<count>0</count>
-						<item_version>0</item_version>
-					</connections>
 				</item>
 				<item>
 					<type>UML - Class</type>
 					<version>0</version>
 					<id>O1</id>
+					<connections>
+						<count>0</count>
+						<item_version>0</item_version>
+					</connections>
+					<child_node>
+						<initialized>1</initialized>
+						<item_version>0</item_version>
+						<value class_id="23" tracking_level="0" version="0">
+							<parent>O0</parent>
+						</value>
+					</child_node>
 					<attributes>
 						<count>38</count>
 						<item_version>0</item_version>
@@ -516,7 +527,7 @@
 								<count>1</count>
 								<item_version>0</item_version>
 								<item>
-									<which>1</which>
+									<which>5</which>
 									<value>
 										<value>11.625,15</value>
 									</value>
@@ -529,7 +540,7 @@
 								<count>1</count>
 								<item_version>0</item_version>
 								<item>
-									<which>6</which>
+									<which>8</which>
 									<value>
 										<value>11.575,14.95;16.795,17.85</value>
 									</value>
@@ -542,7 +553,7 @@
 								<count>1</count>
 								<item_version>0</item_version>
 								<item>
-									<which>1</which>
+									<which>5</which>
 									<value>
 										<value>11.625,15</value>
 									</value>
@@ -555,7 +566,7 @@
 								<count>1</count>
 								<item_version>0</item_version>
 								<item>
-									<which>2</which>
+									<which>1</which>
 									<value>
 										<value>5.1200000000000001</value>
 									</value>
@@ -568,7 +579,7 @@
 								<count>1</count>
 								<item_version>0</item_version>
 								<item>
-									<which>2</which>
+									<which>1</which>
 									<value>
 										<value>2.7999999999999998</value>
 									</value>
@@ -581,7 +592,7 @@
 								<count>1</count>
 								<item_version>0</item_version>
 								<item>
-									<which>5</which>
+									<which>6</which>
 									<value>
 										<value>#class_1#</value>
 									</value>
@@ -594,7 +605,7 @@
 								<count>1</count>
 								<item_version>0</item_version>
 								<item>
-									<which>5</which>
+									<which>6</which>
 									<value>
 										<value>##</value>
 									</value>
@@ -607,7 +618,7 @@
 								<count>1</count>
 								<item_version>0</item_version>
 								<item>
-									<which>5</which>
+									<which>6</which>
 									<value>
 										<value>##</value>
 									</value>
@@ -711,7 +722,7 @@
 								<count>1</count>
 								<item_version>0</item_version>
 								<item>
-									<which>3</which>
+									<which>2</which>
 									<value>
 										<value>40</value>
 									</value>
@@ -724,7 +735,7 @@
 								<count>1</count>
 								<item_version>0</item_version>
 								<item>
-									<which>3</which>
+									<which>2</which>
 									<value>
 										<value>17</value>
 									</value>
@@ -750,7 +761,7 @@
 								<count>1</count>
 								<item_version>0</item_version>
 								<item>
-									<which>2</which>
+									<which>1</which>
 									<value>
 										<value>0.10000000000000001</value>
 									</value>
@@ -802,8 +813,8 @@
 								<count>1</count>
 								<item_version>0</item_version>
 								<item>
-									<which>7</which>
-									<value class_id="23" tracking_level="0" version="0">
+									<which>3</which>
+									<value class_id="24" tracking_level="0" version="0">
 										<family>monospace</family>
 										<style>0</style>
 										<name>Courier</name>
@@ -817,7 +828,7 @@
 								<count>1</count>
 								<item_version>0</item_version>
 								<item>
-									<which>7</which>
+									<which>3</which>
 									<value>
 										<family>monospace</family>
 										<style>88</style>
@@ -832,7 +843,7 @@
 								<count>1</count>
 								<item_version>0</item_version>
 								<item>
-									<which>7</which>
+									<which>3</which>
 									<value>
 										<family>monospace</family>
 										<style>8</style>
@@ -847,7 +858,7 @@
 								<count>1</count>
 								<item_version>0</item_version>
 								<item>
-									<which>7</which>
+									<which>3</which>
 									<value>
 										<family>sans</family>
 										<style>80</style>
@@ -862,7 +873,7 @@
 								<count>1</count>
 								<item_version>0</item_version>
 								<item>
-									<which>7</which>
+									<which>3</which>
 									<value>
 										<family>sans</family>
 										<style>88</style>
@@ -877,7 +888,7 @@
 								<count>1</count>
 								<item_version>0</item_version>
 								<item>
-									<which>7</which>
+									<which>3</which>
 									<value>
 										<family>sans</family>
 										<style>8</style>
@@ -892,7 +903,7 @@
 								<count>1</count>
 								<item_version>0</item_version>
 								<item>
-									<which>2</which>
+									<which>1</which>
 									<value>
 										<value>0.80000000000000004</value>
 									</value>
@@ -905,7 +916,7 @@
 								<count>1</count>
 								<item_version>0</item_version>
 								<item>
-									<which>2</which>
+									<which>1</which>
 									<value>
 										<value>0.80000000000000004</value>
 									</value>
@@ -918,7 +929,7 @@
 								<count>1</count>
 								<item_version>0</item_version>
 								<item>
-									<which>2</which>
+									<which>1</which>
 									<value>
 										<value>0.80000000000000004</value>
 									</value>
@@ -931,7 +942,7 @@
 								<count>1</count>
 								<item_version>0</item_version>
 								<item>
-									<which>2</which>
+									<which>1</which>
 									<value>
 										<value>1</value>
 									</value>
@@ -944,7 +955,7 @@
 								<count>1</count>
 								<item_version>0</item_version>
 								<item>
-									<which>2</which>
+									<which>1</which>
 									<value>
 										<value>1</value>
 									</value>
@@ -957,7 +968,7 @@
 								<count>1</count>
 								<item_version>0</item_version>
 								<item>
-									<which>2</which>
+									<which>1</which>
 									<value>
 										<value>0.69999999999999996</value>
 									</value>
@@ -983,7 +994,7 @@
 														<count>1</count>
 														<item_version>0</item_version>
 														<item>
-															<which>5</which>
+															<which>6</which>
 															<value>
 																<value>#prop_0#</value>
 															</value>
@@ -998,7 +1009,7 @@
 														<count>1</count>
 														<item_version>0</item_version>
 														<item>
-															<which>5</which>
+															<which>6</which>
 															<value>
 																<value>#int#</value>
 															</value>
@@ -1013,7 +1024,7 @@
 														<count>1</count>
 														<item_version>0</item_version>
 														<item>
-															<which>5</which>
+															<which>6</which>
 															<value>
 																<value>##</value>
 															</value>
@@ -1028,7 +1039,7 @@
 														<count>1</count>
 														<item_version>0</item_version>
 														<item>
-															<which>5</which>
+															<which>6</which>
 															<value>
 																<value>##</value>
 															</value>
@@ -1043,8 +1054,8 @@
 														<count>1</count>
 														<item_version>0</item_version>
 														<item>
-															<which>8</which>
-															<value class_id="24" tracking_level="0" version="0">
+															<which>7</which>
+															<value class_id="25" tracking_level="0" version="0">
 																<value>0</value>
 															</value>
 														</item>
@@ -1117,22 +1128,18 @@
 							</values>
 						</item>
 					</attributes>
-					<child_node>
-						<initialized>1</initialized>
-						<item_version>0</item_version>
-						<value class_id="25" tracking_level="0" version="0">
-							<parent>O0</parent>
-						</value>
-					</child_node>
-					<connections>
-						<count>0</count>
-						<item_version>0</item_version>
-					</connections>
 				</item>
 				<item>
 					<type>UML - Class</type>
 					<version>0</version>
 					<id>O2</id>
+					<connections>
+						<count>0</count>
+						<item_version>0</item_version>
+					</connections>
+					<child_node>
+						<initialized>0</initialized>
+					</child_node>
 					<attributes>
 						<count>38</count>
 						<item_version>0</item_version>
@@ -1142,7 +1149,7 @@
 								<count>1</count>
 								<item_version>0</item_version>
 								<item>
-									<which>1</which>
+									<which>5</which>
 									<value>
 										<value>39.8125,17.0625</value>
 									</value>
@@ -1155,7 +1162,7 @@
 								<count>1</count>
 								<item_version>0</item_version>
 								<item>
-									<which>6</which>
+									<which>8</which>
 									<value>
 										<value>39.7625,17.0125;44.9825,19.9125</value>
 									</value>
@@ -1168,7 +1175,7 @@
 								<count>1</count>
 								<item_version>0</item_version>
 								<item>
-									<which>1</which>
+									<which>5</which>
 									<value>
 										<value>39.8125,17.0625</value>
 									</value>
@@ -1181,7 +1188,7 @@
 								<count>1</count>
 								<item_version>0</item_version>
 								<item>
-									<which>2</which>
+									<which>1</which>
 									<value>
 										<value>5.1200000000000001</value>
 									</value>
@@ -1194,7 +1201,7 @@
 								<count>1</count>
 								<item_version>0</item_version>
 								<item>
-									<which>2</which>
+									<which>1</which>
 									<value>
 										<value>2.7999999999999998</value>
 									</value>
@@ -1207,7 +1214,7 @@
 								<count>1</count>
 								<item_version>0</item_version>
 								<item>
-									<which>5</which>
+									<which>6</which>
 									<value>
 										<value>#class_2#</value>
 									</value>
@@ -1220,7 +1227,7 @@
 								<count>1</count>
 								<item_version>0</item_version>
 								<item>
-									<which>5</which>
+									<which>6</which>
 									<value>
 										<value>##</value>
 									</value>
@@ -1233,7 +1240,7 @@
 								<count>1</count>
 								<item_version>0</item_version>
 								<item>
-									<which>5</which>
+									<which>6</which>
 									<value>
 										<value>##</value>
 									</value>
@@ -1337,7 +1344,7 @@
 								<count>1</count>
 								<item_version>0</item_version>
 								<item>
-									<which>3</which>
+									<which>2</which>
 									<value>
 										<value>40</value>
 									</value>
@@ -1350,7 +1357,7 @@
 								<count>1</count>
 								<item_version>0</item_version>
 								<item>
-									<which>3</which>
+									<which>2</which>
 									<value>
 										<value>17</value>
 									</value>
@@ -1376,7 +1383,7 @@
 								<count>1</count>
 								<item_version>0</item_version>
 								<item>
-									<which>2</which>
+									<which>1</which>
 									<value>
 										<value>0.10000000000000001</value>
 									</value>
@@ -1428,7 +1435,7 @@
 								<count>1</count>
 								<item_version>0</item_version>
 								<item>
-									<which>7</which>
+									<which>3</which>
 									<value>
 										<family>monospace</family>
 										<style>0</style>
@@ -1443,7 +1450,7 @@
 								<count>1</count>
 								<item_version>0</item_version>
 								<item>
-									<which>7</which>
+									<which>3</which>
 									<value>
 										<family>monospace</family>
 										<style>88</style>
@@ -1458,7 +1465,7 @@
 								<count>1</count>
 								<item_version>0</item_version>
 								<item>
-									<which>7</which>
+									<which>3</which>
 									<value>
 										<family>monospace</family>
 										<style>8</style>
@@ -1473,7 +1480,7 @@
 								<count>1</count>
 								<item_version>0</item_version>
 								<item>
-									<which>7</which>
+									<which>3</which>
 									<value>
 										<family>sans</family>
 										<style>80</style>
@@ -1488,7 +1495,7 @@
 								<count>1</count>
 								<item_version>0</item_version>
 								<item>
-									<which>7</which>
+									<which>3</which>
 									<value>
 										<family>sans</family>
 										<style>88</style>
@@ -1503,7 +1510,7 @@
 								<count>1</count>
 								<item_version>0</item_version>
 								<item>
-									<which>7</which>
+									<which>3</which>
 									<value>
 										<family>sans</family>
 										<style>8</style>
@@ -1518,7 +1525,7 @@
 								<count>1</count>
 								<item_version>0</item_version>
 								<item>
-									<which>2</which>
+									<which>1</which>
 									<value>
 										<value>0.80000000000000004</value>
 									</value>
@@ -1531,7 +1538,7 @@
 								<count>1</count>
 								<item_version>0</item_version>
 								<item>
-									<which>2</which>
+									<which>1</which>
 									<value>
 										<value>0.80000000000000004</value>
 									</value>
@@ -1544,7 +1551,7 @@
 								<count>1</count>
 								<item_version>0</item_version>
 								<item>
-									<which>2</which>
+									<which>1</which>
 									<value>
 										<value>0.80000000000000004</value>
 									</value>
@@ -1557,7 +1564,7 @@
 								<count>1</count>
 								<item_version>0</item_version>
 								<item>
-									<which>2</which>
+									<which>1</which>
 									<value>
 										<value>1</value>
 									</value>
@@ -1570,7 +1577,7 @@
 								<count>1</count>
 								<item_version>0</item_version>
 								<item>
-									<which>2</which>
+									<which>1</which>
 									<value>
 										<value>1</value>
 									</value>
@@ -1583,7 +1590,7 @@
 								<count>1</count>
 								<item_version>0</item_version>
 								<item>
-									<which>2</which>
+									<which>1</which>
 									<value>
 										<value>0.69999999999999996</value>
 									</value>
@@ -1609,7 +1616,7 @@
 														<count>1</count>
 														<item_version>0</item_version>
 														<item>
-															<which>5</which>
+															<which>6</which>
 															<value>
 																<value>#prop_0#</value>
 															</value>
@@ -1624,7 +1631,7 @@
 														<count>1</count>
 														<item_version>0</item_version>
 														<item>
-															<which>5</which>
+															<which>6</which>
 															<value>
 																<value>#int#</value>
 															</value>
@@ -1639,7 +1646,7 @@
 														<count>1</count>
 														<item_version>0</item_version>
 														<item>
-															<which>5</which>
+															<which>6</which>
 															<value>
 																<value>##</value>
 															</value>
@@ -1654,7 +1661,7 @@
 														<count>1</count>
 														<item_version>0</item_version>
 														<item>
-															<which>5</which>
+															<which>6</which>
 															<value>
 																<value>##</value>
 															</value>
@@ -1669,7 +1676,7 @@
 														<count>1</count>
 														<item_version>0</item_version>
 														<item>
-															<which>8</which>
+															<which>7</which>
 															<value>
 																<value>0</value>
 															</value>
@@ -1743,13 +1750,6 @@
 							</values>
 						</item>
 					</attributes>
-					<child_node>
-						<initialized>0</initialized>
-					</child_node>
-					<connections>
-						<count>0</count>
-						<item_version>0</item_version>
-					</connections>
 				</item>
 			</objects>
 		</item>

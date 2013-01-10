@@ -26,12 +26,14 @@
 #endif
 
 #include <iosfwd>
-#include "dogen/dia/domain/boolean.hpp"
+#include "dogen/dia/types/boolean.hpp"
 
 namespace dogen {
 namespace dia {
 
-std::ostream& operator<<(std::ostream& stream, dogen::dia::boolean boolean);
+std::ostream&
+operator<<(std::ostream& s,
+     const dogen::dia::boolean& v);
 
 } }
 

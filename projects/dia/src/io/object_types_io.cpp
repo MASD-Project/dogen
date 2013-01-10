@@ -18,55 +18,47 @@
  * MA 02110-1301, USA.
  *
  */
-#include <string>
 #include <ostream>
-#include <boost/throw_exception.hpp>
-#include "dogen/utility/exception/invalid_enum_value.hpp"
+#include <stdexcept>
 #include "dogen/dia/io/object_types_io.hpp"
-#include "dogen/utility/log/logger.hpp"
-
-using namespace dogen::utility::log;
-
-namespace {
-
-auto lg(logger_factory("object_types_io"));
-
-const std::string prefix("object_types::");
-const std::string invalid("invalid");
-const std::string uml_large_package("uml_large_package");
-const std::string uml_class("uml_class");
-const std::string uml_generalization("uml_generalization");
-const std::string uml_association("uml_association");
-const std::string uml_note("uml_note");
-const std::string uml_message("uml_message");
-
-const std::string error_message("Invalid or unexpected object type");
-}
 
 namespace dogen {
 namespace dia {
 
-std::ostream& operator<<(std::ostream& stream, object_types value) {
-    switch (value) {
+std::ostream& operator<<(std::ostream& s, const object_types& v) {
+    s << "{ " << "\"__type__\": " << "\"object_types\", " << "\"value\": ";
+
+    std::string attr;
+    switch (v) {
     case object_types::invalid:
-        return stream << prefix << invalid;
-    case object_types::uml_large_package:
-        return stream << prefix << uml_large_package;
-    case object_types::uml_class:
-        return stream << prefix << uml_class;
-    case object_types::uml_generalization:
-        return stream << prefix << uml_generalization;
-    case object_types::uml_association:
-        return stream << prefix << uml_association;
-    case object_types::uml_note:
-        return stream << prefix << uml_note;
-    case object_types::uml_message:
-        return stream << prefix << uml_message;
-    default:
+        attr = "\"invalid\"";
         break;
+    case object_types::uml_large_package:
+        attr = "\"uml_large_package\"";
+        break;
+    case object_types::uml_class:
+        attr = "\"uml_class\"";
+        break;
+    case object_types::uml_generalization:
+        attr = "\"uml_generalization\"";
+        break;
+    case object_types::uml_association:
+        attr = "\"uml_association\"";
+        break;
+    case object_types::uml_note:
+        attr = "\"uml_note\"";
+        break;
+    case object_types::uml_message:
+        attr = "\"uml_message\"";
+        break;
+    case object_types::uml_realization:
+        attr = "\"uml_realization\"";
+        break;
+    default:
+        throw std::invalid_argument("Invalid value for object_types");
     }
-    BOOST_LOG_SEV(lg, error) << error_message;
-    BOOST_THROW_EXCEPTION(utility::exception::invalid_enum_value(error_message));
+    s << attr << " }";
+    return s;
 }
 
 } }

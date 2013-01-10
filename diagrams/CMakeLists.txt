@@ -64,6 +64,7 @@ add_custom_target(codegen_${target}
     --cpp-enable-facet test_data
     --ignore-files-matching-regex .*/utility/.*
     --ignore-files-matching-regex .*/xml/.*
+    --ignore-files-matching-regex .*/test/.*
     --ignore-files-matching-regex .*/spec/.*
     -v -d -p dogen)
 add_dependencies(codegen_${target} driver)

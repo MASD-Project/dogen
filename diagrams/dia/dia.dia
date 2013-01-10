@@ -202,13 +202,13 @@
         <dia:point val="24.8125,20.125"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="24.7625,20.075;65.4025,23.775"/>
+        <dia:rectangle val="24.7625,20.075;69.2525,23.775"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="24.8125,20.125"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="40.539999999999999"/>
+        <dia:real val="44.390000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3.6000000000000001"/>
@@ -329,7 +329,7 @@
             <dia:string>#values#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::vector&lt;boost::variant&lt;color,real,integer,font,boolean,point,string,enumeration,rectangle&gt;&gt;#</dia:string>
+            <dia:string>#std::vector&lt;boost::variant&lt;color,real,integer,font,boolean,point,string,enumeration,rectangle,composite&gt;&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -777,17 +777,17 @@
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="65.3525,23.725"/>
+        <dia:point val="69.2025,23.725"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="34.9825,22.975;66.1025,32.8625"/>
+        <dia:rectangle val="34.9825,22.975;69.9525,32.8625"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="65.3525,23.725"/>
-        <dia:point val="65.3525,27.9844"/>
+        <dia:point val="69.2025,23.725"/>
+        <dia:point val="69.2025,27.9844"/>
         <dia:point val="35.0325,27.9844"/>
         <dia:point val="35.0325,32.0625"/>
       </dia:attribute>
@@ -1484,17 +1484,17 @@
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="65.3525,23.725"/>
+        <dia:point val="69.2025,23.725"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="41.92,22.975;66.1025,38.925"/>
+        <dia:rectangle val="41.92,22.975;69.9525,38.925"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="65.3525,23.725"/>
-        <dia:point val="65.3525,27.9844"/>
+        <dia:point val="69.2025,23.725"/>
+        <dia:point val="69.2025,27.9844"/>
         <dia:point val="41.97,27.9844"/>
         <dia:point val="41.97,38.125"/>
       </dia:attribute>
@@ -1689,17 +1689,17 @@
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="65.3525,23.725"/>
+        <dia:point val="69.2025,23.725"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="47.8208,22.975;66.1025,32.8937"/>
+        <dia:rectangle val="47.8208,22.975;69.9525,32.8937"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="65.3525,23.725"/>
-        <dia:point val="65.3525,27.9844"/>
+        <dia:point val="69.2025,23.725"/>
+        <dia:point val="69.2025,27.9844"/>
         <dia:point val="47.8708,27.9844"/>
         <dia:point val="47.8708,32.0937"/>
       </dia:attribute>
@@ -2012,7 +2012,7 @@
         <dia:point val="57.0625,11.8625"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="56.3125,11.1125;65.5525,20.925"/>
+        <dia:rectangle val="56.3125,11.1125;69.4025,20.925"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -2020,8 +2020,8 @@
       <dia:attribute name="orth_points">
         <dia:point val="57.0625,11.8625"/>
         <dia:point val="57.0625,16.1406"/>
-        <dia:point val="65.3525,16.1406"/>
-        <dia:point val="65.3525,20.125"/>
+        <dia:point val="69.2025,16.1406"/>
+        <dia:point val="69.2025,20.125"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -2151,17 +2151,17 @@
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="65.3525,23.725"/>
+        <dia:point val="69.2025,23.725"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="64.6025,22.975;66.2262,38.9688"/>
+        <dia:rectangle val="65.9762,22.975;69.9525,38.9688"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="65.3525,23.725"/>
-        <dia:point val="65.3525,27.9844"/>
+        <dia:point val="69.2025,23.725"/>
+        <dia:point val="69.2025,27.9844"/>
         <dia:point val="66.0262,27.9844"/>
         <dia:point val="66.0262,38.1688"/>
       </dia:attribute>
@@ -2356,17 +2356,17 @@
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="65.3525,23.725"/>
+        <dia:point val="69.2025,23.725"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="59.8512,22.975;66.1025,32.9063"/>
+        <dia:rectangle val="59.8512,22.975;69.9525,32.9063"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="65.3525,23.725"/>
-        <dia:point val="65.3525,27.9844"/>
+        <dia:point val="69.2025,23.725"/>
+        <dia:point val="69.2025,27.9844"/>
         <dia:point val="59.9012,27.9844"/>
         <dia:point val="59.9012,32.1063"/>
       </dia:attribute>
@@ -2905,17 +2905,17 @@ a parent pointing to O0.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="65.3525,23.725"/>
+        <dia:point val="69.2025,23.725"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="64.6025,22.975;79.1637,38.9688"/>
+        <dia:rectangle val="68.4525,22.975;79.1637,38.9688"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="65.3525,23.725"/>
-        <dia:point val="65.3525,28"/>
+        <dia:point val="69.2025,23.725"/>
+        <dia:point val="69.2025,28"/>
         <dia:point val="78.9637,28"/>
         <dia:point val="78.9637,38.1688"/>
       </dia:attribute>
@@ -3156,17 +3156,17 @@ a parent pointing to O0.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="65.3525,23.725"/>
+        <dia:point val="69.2025,23.725"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="54.1687,22.975;66.1025,38.9187"/>
+        <dia:rectangle val="54.1687,22.975;69.9525,38.9187"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="65.3525,23.725"/>
-        <dia:point val="65.3525,27.9844"/>
+        <dia:point val="69.2025,23.725"/>
+        <dia:point val="69.2025,27.9844"/>
         <dia:point val="54.2187,27.9844"/>
         <dia:point val="54.2187,38.1187"/>
       </dia:attribute>
@@ -3361,17 +3361,17 @@ a parent pointing to O0.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="65.3525,23.725"/>
+        <dia:point val="69.2025,23.725"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="64.6025,22.975;73.3025,32.925"/>
+        <dia:rectangle val="68.4525,22.975;73.3025,32.925"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="65.3525,23.725"/>
-        <dia:point val="65.3525,28"/>
+        <dia:point val="69.2025,23.725"/>
+        <dia:point val="69.2025,28"/>
         <dia:point val="73.1025,28"/>
         <dia:point val="73.1025,32.125"/>
       </dia:attribute>
@@ -4163,17 +4163,17 @@ between the class and the slot concepts, we renamed it.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="65.3525,23.725"/>
+        <dia:point val="69.2025,23.725"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="64.6025,22.975;86.1638,32.8469"/>
+        <dia:rectangle val="68.4525,22.975;86.1638,32.8469"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="65.3525,23.725"/>
-        <dia:point val="65.3525,28.0219"/>
+        <dia:point val="69.2025,23.725"/>
+        <dia:point val="69.2025,28.0219"/>
         <dia:point val="85.9638,28.0219"/>
         <dia:point val="85.9638,32.0469"/>
       </dia:attribute>
