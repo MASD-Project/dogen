@@ -207,12 +207,6 @@ are changes, the test would fail.
 SML should fail to merge if the user attempts to create a property of
 a base class. It should allow pointers to the base class though.
 
-*** Remove legacy database code
-
-We still have the old database implementation in dogen, forcing us to
-setup postgres to run tests. It will be superseded by odb so we should
-remove it to make setup easier.
-
 *** Add support for =std::function= in services
 
 At present its not possible to declare an attribute of type
@@ -384,7 +378,7 @@ Some thought on adding caching to dogen:
 
 - we could have "modes" in dogen; instead of the
   relational/procedural/etc approach, it would be more task based:
-  domain, cache, database.
+  domain, cache.
 - in cache mode we do not need to a target. we load up all diagrams in
   references and we find all types which have a stereotype of
   versioned. we mark them as generatable.
@@ -785,25 +779,6 @@ The correct solution for this is to have a flag (or flags) at the SML
 level which state whether to use the model name for folders, packages,
 etc. The view model generation will then take this into account.
 
-*** Update prototype model to reflect latest database API              :epic:
-**** Add versioned and unversioned key to prototype model             :story:
-**** Refactor setup of SQL from load/erase methods                    :story:
-**** Create new range based SQL methods                               :story:
-**** Remove transaction setup from exchanger                          :story:
-**** Modify tables and stored procedures to match the new API structure :story:
-**** Modify test data generator and test procs to match the new API structure :story:
-**** Deploy new SQL on all environments                               :story:
-***** Newton                                                            :task:
-***** Pascal                                                            :task:
-***** iMac                                                              :task:
-***** Lorenz                                                            :task:
-***** Euler                                                             :task:
-***** Ronin                                                             :task:
-***** Oppenheimer                                                       :task:
-***** Erdos                                                             :task:
-*** Update C++ code generator to latest database API                  :story:
-**** Update data exchanger header                                      :task:
-**** Update data exchanger implementation                              :task:
 *** Add SQL support to Dogen                                           :epic:
 **** Note on formatters                                                :note:
 
@@ -870,10 +845,41 @@ Ideally, get a state of affairs that resebles something like this:
 
 ***** Add support for multiple databases                               :task:
 
-*** Add database tests for generated code                             :story:
+**** Add database tests for generated code                            :story:
+**** Test database deployment
+
+We need to setup a build that deploys all the SQL (tables, procs, etc)
+to a clean database, runs all SQL tests and un-deploys all the SQL.
+
+**** Setup a postgres url in cmake file                               :story:
+
+The database password is set to trust. We should really have user
+passwords. To make things more secure we should also pass in the
+database credentials to the unit tests. One potential approach is to
+do so in cmake. Example from VTK:
+
+#+begin_src cmake
+IF ( BUILD_TESTING )
+   SET ( VTK_PSQL_TEST_URL "" CACHE STRING "A URL for a PostgreSQL server
+         of the form psql://[[username[:password]@]hostname[:port]]/[dbname]" )
+ENDIF ( BUILD_TESTING )
+#+end_src
+
+Suggestion: maybe there's a possibility of using an environment
+variable for all the used parameters (username, hostname, etc)
+
+**** Add multiple database support to makefiles
+
+Our makefiles don't cope very well with the test/development database
+separation. There is a massive hack required to populate both
+databases (changing makefile manually and then reverting the change).
+
+There should be a way of passing in the database name as an
+environment variable into the makefile (not into the cmake as we want
+to be able to change databases without having to rebuild makefiles).
+
 *** Missing =enable_facet_XYZ= tests                                  :story:
 
-- database
 - test data
 
 *** Log should use path for file names                                :story:
@@ -975,16 +981,6 @@ replace the manual checks on all specs that have them. Example usage:
 At present the licence formatter has an hard-coded year of 2012. It
 should really be a parameter passed in.
 
-*** Add multiple database support to makefiles
-
-Our makefiles don't cope very well with the test/development database
-separation. There is a massive hack required to populate both
-databases (changing makefile manually and then reverting the change).
-
-There should be a way of passing in the database name as an
-environment variable into the makefile (not into the cmake as we want
-to be able to change databases without having to rebuild makefiles).
-
 *** Generator usage in template tests needs to be cleaned
 
 At present some template tests in =utility/test= ask for a
@@ -1074,28 +1070,6 @@ build. There should be a FindWinSock somewhere. If not create one.
 
 At present the modeling director always outputs in XML. it should
 respect the archive type requested by the user.
-
-*** Test database deployment
-
-We need to setup a build that deploys all the SQL (tables, procs, etc)
-to a clean database, runs all SQL tests and un-deploys all the SQL.
-
-*** Setup a postgres url in cmake file                                :story:
-
-The database password is set to trust. We should really have user
-passwords. To make things more secure we should also pass in the
-database credentials to the unit tests. One potential approach is to
-do so in cmake. Example from VTK:
-
-#+begin_src cmake
-IF ( BUILD_TESTING )
-   SET ( VTK_PSQL_TEST_URL "" CACHE STRING "A URL for a PostgreSQL server
-         of the form psql://[[username[:password]@]hostname[:port]]/[dbname]" )
-ENDIF ( BUILD_TESTING )
-#+end_src
-
-Suggestion: maybe there's a possibility of using an environment
-variable for all the used parameters (username, hostname, etc)
 
 *** Add unit test benchmarking
 
@@ -1189,6 +1163,3 @@ platform conventions.
 There are some known limitations in package naming:
 
 - http://public.kitware.com/Bug/view.php?id=12997
-*** Test database deployment
-
-We need to setup a build that deploys all the SQL (tables, procs, etc)

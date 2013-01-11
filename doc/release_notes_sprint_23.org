@@ -44,4 +44,10 @@ Now that dogen is functional we should remove all the hand-crafted
 code in the Dia model which could be code generated. We need to have
 support for boost variant for this to work.
 
+*** COMPLETED Remove legacy database code
+
+We still have the old database implementation in dogen, forcing us to
+setup postgres to run tests. It will be superseded by odb so we should
+remove it to make setup easier.
+
 ** Deprecated Development Stories
