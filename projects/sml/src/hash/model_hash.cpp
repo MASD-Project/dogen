@@ -121,7 +121,6 @@ std::size_t model_hasher::hash(const model&v) {
     combine(seed, hash_std_unordered_map_dogen_sml_qname_dogen_sml_enumeration(v.enumerations()));
     combine(seed, hash_std_unordered_map_dogen_sml_qname_dogen_sml_exception(v.exceptions()));
     combine(seed, hash_std_list_std_string(v.external_package_path()));
-    combine(seed, v.schema_name());
     combine(seed, v.is_system());
     combine(seed, hash_std_unordered_map_std_string_dogen_sml_reference(v.dependencies()));
     combine(seed, hash_std_unordered_set_dogen_sml_qname(v.leaves()));

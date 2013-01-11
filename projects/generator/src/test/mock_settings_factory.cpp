@@ -30,7 +30,6 @@ const std::string hash_facet_folder("hash");
 const std::string io_facet_folder("io");
 const std::string serialization_facet_folder("serialization");
 const std::string test_data_facet_folder("test_data");
-const std::string database_facet_folder("database");
 
 }
 
@@ -94,7 +93,6 @@ config::cpp_settings mock_settings_factory::build_cpp_settings(
     r.io_facet_folder(io_facet_folder);
     r.serialization_facet_folder(serialization_facet_folder);
     r.test_data_facet_folder(test_data_facet_folder);
-    r.database_facet_folder(database_facet_folder);
     return r;
 }
 

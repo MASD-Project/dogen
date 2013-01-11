@@ -97,7 +97,6 @@ const std::string cpp_disable_versioning_arg("cpp-disable-versioning");
 
 const std::string sql_disable_backend_arg("sql-disable-backend");
 const std::string sql_create_schema_arg("sql-create-schema");
-const std::string sql_schema_name_arg("sql-schema-name");
 
 const std::string target_arg("target");
 const std::string external_package_path_arg("external-package-path");
@@ -507,9 +506,6 @@ transform_sql_settings(const boost::program_options::variables_map& vm) const {
 
     r.verbose(verbose_);
     r.disable_backend(vm.count(sql_disable_backend_arg));
-
-    if (vm.count(sql_schema_name_arg))
-        r.schema_name(vm[sql_schema_name_arg].as<std::string>());
     r.create_schema(vm.count(sql_create_schema_arg));
 
     return r;

@@ -155,10 +155,9 @@ populate(const unsigned int position, result_type& v) {
     v.enumerations(create_std_unordered_map_dogen_sml_qname_dogen_sml_enumeration(position + 4));
     v.exceptions(create_std_unordered_map_dogen_sml_qname_dogen_sml_exception(position + 5));
     v.external_package_path(create_std_list_std_string(position + 6));
-    v.schema_name(create_std_string(position + 7));
-    v.is_system(create_bool(position + 8));
-    v.dependencies(create_std_unordered_map_std_string_dogen_sml_reference(position + 9));
-    v.leaves(create_std_unordered_set_dogen_sml_qname(position + 10));
+    v.is_system(create_bool(position + 7));
+    v.dependencies(create_std_unordered_map_std_string_dogen_sml_reference(position + 8));
+    v.leaves(create_std_unordered_set_dogen_sml_qname(position + 9));
 }
 
 model_generator::result_type

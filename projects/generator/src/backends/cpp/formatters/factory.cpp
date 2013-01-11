@@ -34,8 +34,6 @@
 #include "dogen/generator/backends/cpp/formatters/cpp_generator_implementation.hpp"
 #include "dogen/generator/backends/cpp/formatters/cpp_serialization_header.hpp"
 #include "dogen/generator/backends/cpp/formatters/cpp_serialization_implementation.hpp"
-#include "dogen/generator/backends/cpp/formatters/cpp_database_header.hpp"
-#include "dogen/generator/backends/cpp/formatters/cpp_database_implementation.hpp"
 #include "dogen/generator/backends/cpp/formatters/cpp_registrar_header.hpp"
 #include "dogen/generator/backends/cpp/formatters/cpp_registrar_implementation.hpp"
 #include "dogen/generator/backends/cpp/formatters/cpp_forward_declarations_header.hpp"

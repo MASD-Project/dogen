@@ -407,7 +407,6 @@
 		<count>0</count>
 		<item_version>0</item_version>
 	</external_package_path>
-	<schema_name>classes_without_package</schema_name>
 	<is_system>0</is_system>
 	<dependencies class_id="16" tracking_level="0" version="0">
 		<count>0</count>

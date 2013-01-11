@@ -34,7 +34,6 @@ model::model(
     const std::unordered_map<dogen::sml::qname, dogen::sml::enumeration>& enumerations,
     const std::unordered_map<dogen::sml::qname, dogen::sml::exception>& exceptions,
     const std::list<std::string>& external_package_path,
-    const std::string& schema_name,
     const bool is_system,
     const std::unordered_map<std::string, dogen::sml::reference>& dependencies,
     const std::unordered_set<dogen::sml::qname>& leaves)
@@ -45,7 +44,6 @@ model::model(
       enumerations_(enumerations),
       exceptions_(exceptions),
       external_package_path_(external_package_path),
-      schema_name_(schema_name),
       is_system_(is_system),
       dependencies_(dependencies),
       leaves_(leaves) { }
@@ -59,7 +57,6 @@ void model::swap(model& other) noexcept {
     swap(enumerations_, other.enumerations_);
     swap(exceptions_, other.exceptions_);
     swap(external_package_path_, other.external_package_path_);
-    swap(schema_name_, other.schema_name_);
     swap(is_system_, other.is_system_);
     swap(dependencies_, other.dependencies_);
     swap(leaves_, other.leaves_);
@@ -73,7 +70,6 @@ bool model::operator==(const model& rhs) const {
         enumerations_ == rhs.enumerations_ &&
         exceptions_ == rhs.exceptions_ &&
         external_package_path_ == rhs.external_package_path_ &&
-        schema_name_ == rhs.schema_name_ &&
         is_system_ == rhs.is_system_ &&
         dependencies_ == rhs.dependencies_ &&
         leaves_ == rhs.leaves_;
@@ -195,22 +191,6 @@ void model::external_package_path(const std::list<std::string>& v) {
 
 void model::external_package_path(const std::list<std::string>&& v) {
     external_package_path_ = std::move(v);
-}
-
-const std::string& model::schema_name() const {
-    return schema_name_;
-}
-
-std::string& model::schema_name() {
-    return schema_name_;
-}
-
-void model::schema_name(const std::string& v) {
-    schema_name_ = v;
-}
-
-void model::schema_name(const std::string&& v) {
-    schema_name_ = std::move(v);
 }
 
 bool model::is_system() const {

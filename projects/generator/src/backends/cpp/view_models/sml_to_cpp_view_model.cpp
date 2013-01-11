@@ -153,24 +153,6 @@ std::list<std::string> join_namespaces(const dogen::sml::qname& name) {
     return result;
 }
 
-/**
- * @brief Returns the identifier to be used for this name on a
- * database context.
- */
-std::string database_name(const dogen::sml::qname& name) {
-    std::ostringstream stream;
-
-    if (!name.model_name().empty())
-        stream << name.model_name() << "_";
-
-    for (const auto p : name.package_path())
-        stream << p << "_";
-
-    stream << name.type_name();
-
-    return stream.str();
-}
-
 class sml_dfs_visitor : public boost::default_dfs_visitor {
 private:
     typedef std::unordered_map<
@@ -181,12 +163,10 @@ private:
     pod_map_type;
 
     struct visit_state {
-        visit_state(const std::string& schema_name, pod_map_type pods)
-            : pods_(pods), schema_name_(schema_name) { }
+        visit_state(pod_map_type pods) : pods_(pods) { }
 
         qname_to_class_view_model_type class_view_models_;
         pod_map_type pods_;
-        const std::string schema_name_;
     };
 
 public:
@@ -195,8 +175,8 @@ public:
     sml_dfs_visitor(sml_dfs_visitor&&) = default;
 
 public:
-    explicit sml_dfs_visitor(const std::string& schema_name, pod_map_type pods)
-        : state_(new visit_state(schema_name, pods)) { }
+    explicit sml_dfs_visitor(pod_map_type pods)
+    : state_(new visit_state(pods)) { }
 
 public:
     template<typename Vertex, typename Graph>
@@ -376,8 +356,6 @@ void sml_dfs_visitor::process_sml_pod(const dogen::sml::pod& pod) {
     }
 
     cvm.namespaces(ns);
-    cvm.database_name(database_name(name));
-    cvm.schema_name(state_->schema_name_);
     cvm.is_parent(pod.is_parent());
     cvm.documentation(pod.documentation());
 
@@ -685,7 +663,7 @@ void sml_to_cpp_view_model::create_class_view_models() {
             boost::add_edge(root_vertex_, vertex, graph_);
     }
 
-    sml_dfs_visitor v(model_.schema_name(), pods);
+    sml_dfs_visitor v(pods);
     boost::depth_first_search(graph_, boost::visitor(v));
     qname_to_class_ = v.class_view_models();
 }
@@ -714,8 +692,6 @@ void sml_to_cpp_view_model::create_enumeration_view_models() {
             enumerators.push_back(evm);
         }
         vm.enumerators(enumerators);
-        // vm.database_name(database_name(name));
-        // vm.schema_name(schema_name_);
         qname_to_enumeration_.insert(std::make_pair(e.name(), vm));
     }
 }
@@ -734,8 +710,6 @@ void sml_to_cpp_view_model::create_exception_view_models() {
         vm.name(e.name().type_name());
         vm.namespaces(ns);
         vm.documentation(e.documentation());
-        // vm.database_name(database_name(name));
-        // vm.schema_name(schema_name_);
         qname_to_exception_.insert(std::make_pair(e.name(), vm));
     }
 }

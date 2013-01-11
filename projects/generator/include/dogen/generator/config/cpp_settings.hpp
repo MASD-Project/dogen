@@ -75,7 +75,6 @@ public:
       io_facet_folder_(std::move(rhs.io_facet_folder_)),
       serialization_facet_folder_(std::move(rhs.serialization_facet_folder_)),
       test_data_facet_folder_(std::move(rhs.test_data_facet_folder_)),
-      database_facet_folder_(std::move(rhs.database_facet_folder_)),
       disable_xml_serialization_(std::move(rhs.disable_xml_serialization_)),
       use_integrated_io_(std::move(rhs.use_integrated_io_)),
       disable_versioning_(std::move(rhs.disable_versioning_)) { }
@@ -326,19 +325,6 @@ public:
     /**@*/
 
     /**
-     * @brief Name of the folder to house database code.
-     */
-    /**@{*/
-    std::string database_facet_folder() const {
-        return database_facet_folder_;
-    }
-    cpp_settings& database_facet_folder(std::string value) {
-        database_facet_folder_ = value;
-        return *this;
-    }
-    /**@*/
-
-    /**
      * @brief Do not use NVP macros in serialisation code.
      *
      * This has the effect of disabling support for boost XML archives.
@@ -398,7 +384,6 @@ private:
     std::string io_facet_folder_;
     std::string serialization_facet_folder_;
     std::string test_data_facet_folder_;
-    std::string database_facet_folder_;
     bool disable_xml_serialization_;
     bool use_integrated_io_;
     bool disable_versioning_;

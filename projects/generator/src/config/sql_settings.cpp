@@ -34,7 +34,6 @@ operator<<(std::ostream& stream, sql_settings value) {
            << "\"verbose\":" << value.verbose() << ", "
            << "\"disable_backend\": " << value.disable_backend() << ", "
            << "\"create_schema\": " << value.create_schema() << ", "
-           << "\"schema_name\": \"" << value.schema_name() << "\""
            << " }";
 
     return stream;

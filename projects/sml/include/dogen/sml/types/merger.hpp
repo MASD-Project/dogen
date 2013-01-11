@@ -44,7 +44,7 @@ public:
     merger& operator=(const merger&) = default;
 
 public:
-    merger(const bool verbose, const std::string& schema_name);
+    explicit merger(const bool verbose);
 
 private:
     void resolve_partial_type(nested_qualified_name& t) const;
@@ -68,7 +68,6 @@ private:
     const bool verbose_;
     bool has_target_;
     std::list<std::string> external_package_path_;
-    const std::string schema_name_;
 };
 
 } }

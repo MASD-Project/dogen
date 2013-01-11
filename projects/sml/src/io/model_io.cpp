@@ -193,7 +193,6 @@ std::ostream& operator<<(std::ostream& s, const model& v) {
       << "\"enumerations\": " << v.enumerations() << ", "
       << "\"exceptions\": " << v.exceptions() << ", "
       << "\"external_package_path\": " << v.external_package_path() << ", "
-      << "\"schema_name\": " << "\"" << tidy_up_string(v.schema_name()) << "\"" << ", "
       << "\"is_system\": " << v.is_system() << ", "
       << "\"dependencies\": " << v.dependencies() << ", "
       << "\"leaves\": " << v.leaves()

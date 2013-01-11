@@ -64,7 +64,6 @@ public:
         const std::unordered_map<dogen::sml::qname, dogen::sml::enumeration>& enumerations,
         const std::unordered_map<dogen::sml::qname, dogen::sml::exception>& exceptions,
         const std::list<std::string>& external_package_path,
-        const std::string& schema_name,
         const bool is_system,
         const std::unordered_map<std::string, dogen::sml::reference>& dependencies,
         const std::unordered_set<dogen::sml::qname>& leaves);
@@ -151,16 +150,6 @@ public:
     /**@}*/
 
     /*
-     * @brief Name of the database schema this model belongs to, if any.
-     */
-    /**@{*/
-    const std::string& schema_name() const;
-    std::string& schema_name();
-    void schema_name(const std::string& v);
-    void schema_name(const std::string&& v);
-    /**@}*/
-
-    /*
      * @brief If true, the model is a system model such as STL, boost, etc. If false, it is a user generated model.
      *
      * System models are a way to expose third party code into Dogen
@@ -214,7 +203,6 @@ private:
     std::unordered_map<dogen::sml::qname, dogen::sml::enumeration> enumerations_;
     std::unordered_map<dogen::sml::qname, dogen::sml::exception> exceptions_;
     std::list<std::string> external_package_path_;
-    std::string schema_name_;
     bool is_system_;
     std::unordered_map<std::string, dogen::sml::reference> dependencies_;
     std::unordered_set<dogen::sml::qname> leaves_;

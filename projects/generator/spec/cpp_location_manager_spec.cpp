@@ -322,8 +322,7 @@ BOOST_AUTO_TEST_CASE(changing_facet_folder_names_results_in_new_folder_names_in_
     s.hash_facet_folder(unique_name + "_2");
     s.io_facet_folder(unique_name + "_3");
     s.serialization_facet_folder(unique_name + "_4");
-    s.database_facet_folder(unique_name + "_5");
-    s.test_data_facet_folder(unique_name + "_6");
+    s.test_data_facet_folder(unique_name + "_5");
     BOOST_LOG_SEV(lg, debug) << "settings: " << s;
 
     using dogen::generator::backends::cpp::cpp_location_manager;

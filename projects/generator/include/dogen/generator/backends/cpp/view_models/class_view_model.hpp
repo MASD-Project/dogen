@@ -157,23 +157,6 @@ public:
     /**@}*/
 
     /**
-     * @brief Name to be used in the context of database operations.
-     */
-    /**@{*/
-    std::string database_name() const { return database_name_; }
-    void database_name(std::string value) { database_name_ = value; }
-    /**@}*/
-
-    /**
-     * @brief Name of the database schema to which database entities
-     * belong to.
-     */
-    /**@{*/
-    std::string schema_name() const { return schema_name_; }
-    void schema_name(std::string value) { schema_name_ = value; }
-    /**@}*/
-
-    /**
      * @brief Parents for this class.
      */
     /**@{*/
@@ -233,7 +216,6 @@ private:
     bool requires_stream_manipulators_;
     bool requires_manual_move_constructor_;
     bool requires_manual_default_constructor_;
-    std::string database_name_;
     std::string schema_name_;
     bool is_parent_;
     std::string documentation_;

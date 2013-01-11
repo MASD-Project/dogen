@@ -59,7 +59,6 @@ void save(Archive& ar,
     ar << make_nvp("enumerations", v.enumerations_);
     ar << make_nvp("exceptions", v.exceptions_);
     ar << make_nvp("external_package_path", v.external_package_path_);
-    ar << make_nvp("schema_name", v.schema_name_);
     ar << make_nvp("is_system", v.is_system_);
     ar << make_nvp("dependencies", v.dependencies_);
     ar << make_nvp("leaves", v.leaves_);
@@ -76,7 +75,6 @@ void load(Archive& ar,
     ar >> make_nvp("enumerations", v.enumerations_);
     ar >> make_nvp("exceptions", v.exceptions_);
     ar >> make_nvp("external_package_path", v.external_package_path_);
-    ar >> make_nvp("schema_name", v.schema_name_);
     ar >> make_nvp("is_system", v.is_system_);
     ar >> make_nvp("dependencies", v.dependencies_);
     ar >> make_nvp("leaves", v.leaves_);
