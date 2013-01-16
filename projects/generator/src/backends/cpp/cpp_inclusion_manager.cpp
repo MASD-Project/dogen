@@ -199,12 +199,14 @@ void cpp_inclusion_manager::append_boost_dependencies(
     const dogen::sml::qname& qname,
     inclusion_lists& il) const {
 
+    const std::string type_name(qname.type_name());
+
     /*
      * boost::shared_ptr
      */
     const bool is_header(flt == cpp_file_types::header);
     const bool is_domain(ft == cpp_facet_types::types);
-    const bool is_sp(qname.type_name() == boost_.type(boost_types::shared_ptr));
+    const bool is_sp(type_name == boost_.type(boost_types::shared_ptr));
     if (is_header && is_domain && is_sp)
         il.system.push_back(boost_.include(boost_types::shared_ptr));
 
@@ -217,7 +219,7 @@ void cpp_inclusion_manager::append_boost_dependencies(
     /*
      * boost::optional
      */
-    const bool is_opt(qname.type_name() == boost_.type(boost_types::optional));
+    const bool is_opt(type_name == boost_.type(boost_types::optional));
     if (is_header && is_domain && is_opt)
         il.system.push_back(boost_.include(boost_types::optional));
 
@@ -228,13 +230,23 @@ void cpp_inclusion_manager::append_boost_dependencies(
     /*
      * boost::variant
      */
-    const bool is_variant(
-        qname.type_name() == boost_.type(boost_types::variant));
+    const bool is_variant(type_name == boost_.type(boost_types::variant));
     if (is_header && is_domain && is_variant)
         il.system.push_back(boost_.include(boost_types::variant));
 
     if (is_implementation && is_serialization && is_variant)
         il.system.push_back(boost_.include(boost_types::serialization_variant));
+
+    /*
+     * boost::filesystem::path
+     */
+    const bool is_path(type_name == boost_.type(boost_types::filesystem_path));
+    if (is_header && is_domain && is_path)
+        il.system.push_back(boost_.include(boost_types::filesystem_path));
+
+    const bool is_test_data(ft == cpp_facet_types::test_data);
+    if (is_implementation && is_test_data && is_path)
+        il.system.push_back(std_.include(std_types::sstream));
 }
 
 void cpp_inclusion_manager::append_std_dependencies(
@@ -242,18 +254,19 @@ void cpp_inclusion_manager::append_std_dependencies(
     const dogen::sml::qname& qname,
     inclusion_lists& il) const {
 
+    const std::string type_name(qname.type_name());
+
     /*
      * std::string
      */
     const bool is_header(flt == cpp_file_types::header);
     const bool is_domain(ft == cpp_facet_types::types);
-    if (is_header && is_domain
-        && qname.type_name() == std_.type(std_types::string))
+    const bool is_string(type_name == std_.type(std_types::string));
+    if (is_header && is_domain && is_string)
         il.system.push_back(std_.include(std_types::string));
 
     const bool is_serialization(ft == cpp_facet_types::serialization);
     const bool is_implementation(flt == cpp_file_types::implementation);
-    const bool is_string(qname.type_name() == std_.type(std_types::string));
     if (is_implementation && is_serialization && is_string)
         il.system.push_back(boost_.include(boost_types::string));
 
@@ -264,7 +277,7 @@ void cpp_inclusion_manager::append_std_dependencies(
     /*
      * std::vector
      */
-    const bool is_vector(qname.type_name() == std_.type(std_types::vector));
+    const bool is_vector(type_name == std_.type(std_types::vector));
     if (is_header && is_domain && is_vector)
         il.system.push_back(std_.include(std_types::vector));
 
@@ -274,7 +287,7 @@ void cpp_inclusion_manager::append_std_dependencies(
     /*
      * std::list
      */
-    const bool is_list(qname.type_name() == std_.type(std_types::list));
+    const bool is_list(type_name == std_.type(std_types::list));
     if (is_header && is_domain && is_list)
         il.system.push_back(std_.include(std_types::list));
 
@@ -284,7 +297,7 @@ void cpp_inclusion_manager::append_std_dependencies(
     /*
      * std::deque
      */
-    const bool is_deque(qname.type_name() == std_.type(std_types::deque));
+    const bool is_deque(type_name == std_.type(std_types::deque));
     if (is_header && is_domain && is_deque)
         il.system.push_back(std_.include(std_types::deque));
 
@@ -294,7 +307,7 @@ void cpp_inclusion_manager::append_std_dependencies(
     /*
      * std::set
      */
-    const bool is_set(qname.type_name() == std_.type(std_types::set));
+    const bool is_set(type_name == std_.type(std_types::set));
     if (is_header && is_domain && is_set)
         il.system.push_back(std_.include(std_types::set));
 
@@ -317,7 +330,7 @@ void cpp_inclusion_manager::append_std_dependencies(
     /*
      * std::unordered_map
      */
-    const bool is_umap(qname.type_name() == std_.type(std_types::unordered_map));
+    const bool is_umap(type_name == std_.type(std_types::unordered_map));
     if (is_header && is_domain && is_umap)
         il.system.push_back(std_.include(std_types::unordered_map));
     lambda(std_.type(std_types::unordered_map));
@@ -325,7 +338,7 @@ void cpp_inclusion_manager::append_std_dependencies(
     /*
      * std::unordered_set
      */
-    const bool is_uset(qname.type_name() == std_.type(std_types::unordered_set));
+    const bool is_uset(type_name == std_.type(std_types::unordered_set));
     if (is_header && is_domain && is_uset)
         il.system.push_back(std_.include(std_types::unordered_set));
     lambda(std_.type(std_types::unordered_set));
@@ -334,7 +347,7 @@ void cpp_inclusion_manager::append_std_dependencies(
      * primitives
      */
     if (is_header && is_domain && std_.is_primitive(qname.type_name())) {
-        const auto t(std_.string_to_type(qname.type_name()));
+        const auto t(std_.string_to_type(type_name));
         il.system.push_back(std_.include(t));
     }
 }

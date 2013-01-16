@@ -27,8 +27,10 @@ const std::string weak_ptr_name("weak_ptr");
 const std::string scoped_ptr_name("scoped_ptr");
 const std::string optional_name("optional");
 const std::string variant_name("variant");
+const std::string path_name("path");
 
 const std::string asio_name("asio");
+const std::string filesystem_name("filesystem");
 const std::string io_service_name("io_service");
 const std::string ip_name("ip");
 const std::string tcp_name("tcp");
@@ -122,6 +124,11 @@ model boost_model_factory::create() {
 
     pi(socket_name, pod_types::value, package_path);
     pi(acceptor_name, pod_types::value, package_path);
+
+    package_path.clear();
+    gamma(filesystem_name, package_path);
+    package_path.push_back(filesystem_name);
+    pi(path_name, pod_types::value, package_path);
 
     model r;
     r.name(model_name);

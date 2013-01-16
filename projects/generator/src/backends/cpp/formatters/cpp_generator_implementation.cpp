@@ -21,6 +21,7 @@
 #include <ostream>
 #include <boost/throw_exception.hpp>
 #include <boost/algorithm/string/predicate.hpp>
+#include "dogen/utility/log/logger.hpp"
 #include "dogen/generator/generation_failure.hpp"
 #include "dogen/generator/backends/cpp/formatters/cpp_licence.hpp"
 #include "dogen/generator/backends/cpp/formatters/cpp_header_guards.hpp"
@@ -30,7 +31,6 @@
 #include "dogen/generator/backends/cpp/formatters/cpp_qualified_name.hpp"
 #include "dogen/generator/backends/cpp/formatters/cpp_indenter.hpp"
 #include "dogen/generator/backends/cpp/formatters/cpp_generator_implementation.hpp"
-#include "dogen/utility/log/logger.hpp"
 
 using namespace dogen::utility::log;
 
@@ -247,6 +247,28 @@ optional_helper(const nested_type_view_model& vm) {
 }
 
 void generator_implementation::
+filesystem_path_helper(const nested_type_view_model& vm) {
+    const auto type_name(vm.identifiable_name());
+    const auto identifiable_type_name(vm.complete_identifiable_name());
+
+    stream_ << indenter_ << vm.name() << std::endl
+            << "create_" << identifiable_type_name
+            << "(const unsigned int position) ";
+
+    utility_.open_scope();
+    {
+        cpp_positive_indenter_scope s(indenter_);
+        stream_ << indenter_ << "std::ostringstream s;" << std::endl
+                << indenter_ << "s << " << utility_.quote("/a/path/number_")
+                << " << position;" << std::endl;
+        stream_ << indenter_ << "return " << vm.name() << "(s.str());"
+                << std::endl;
+    }
+    utility_.close_scope();
+    utility_.blank_line();
+}
+
+void generator_implementation::
 variant_helper(const nested_type_view_model& vm) {
     const auto container_identifiable_type_name(
         vm.complete_identifiable_name());
@@ -448,6 +470,8 @@ recursive_helper_method_creator(const std::string& owner_name,
         optional_helper(vm);
     else if (vm.is_variant_like())
         variant_helper(vm);
+    else if (vm.is_filesystem_path())
+        filesystem_path_helper(vm);
     else {
         if (vm.name() == string_type) {
             string_helper();

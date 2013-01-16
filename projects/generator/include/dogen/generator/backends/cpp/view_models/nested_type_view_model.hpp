@@ -46,13 +46,14 @@ public:
                                is_char_like_(false), is_int_like_(false),
                                is_sequence_container_(false),
                                is_associative_container_(false),
-                               is_smart_pointer_(false) {}
+                               is_smart_pointer_(false),
+                               is_filesystem_path_(false) {}
 
     explicit nested_type_view_model(const std::string& name)
         : name_(name), is_primitive_(false), is_string_like_(false),
           is_char_like_(false), is_int_like_(false),
           is_sequence_container_(false), is_associative_container_(false),
-          is_smart_pointer_(false) {}
+          is_smart_pointer_(false), is_filesystem_path_(false) {}
 
 public:
     /**
@@ -197,6 +198,16 @@ public:
     }
     /**@}*/
 
+    /**
+     * @brief If true, type is boost filesystem path
+     */
+    /**@{*/
+    bool is_filesystem_path() const { return is_filesystem_path_; }
+    void is_filesystem_path(const bool value) {
+        is_filesystem_path_ = value;
+    }
+    /**@}*/
+
 private:
     std::string name_;
     std::string identifiable_name_;
@@ -214,6 +225,7 @@ private:
     bool is_variant_like_;
     std::list<nested_type_view_model> children_;
     std::list<std::string> namespaces_;
+    bool is_filesystem_path_;
 };
 
 } } } } }

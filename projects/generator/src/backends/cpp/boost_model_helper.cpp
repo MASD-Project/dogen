@@ -34,6 +34,7 @@ const std::string model("boost");
 const std::string shared_ptr_type("shared_ptr");
 const std::string optional_type("optional");
 const std::string variant_type("variant");
+const std::string filesystem_path_type("path");
 
 const std::string optional_include("boost/optional.hpp");
 const std::string variant_include("boost/variant.hpp");
@@ -71,6 +72,7 @@ const std::string exception_info_include("boost/exception/info.hpp");
 const std::string state_saver_include("boost/io/ios_state.hpp");
 const std::string string_algorithm_include("boost/algorithm/string.hpp");
 const std::string apply_visitor_include("boost/variant/apply_visitor.hpp");
+const std::string filesystem_path_include("boost/filesystem/path.hpp");
 const std::string error_message("Invalid or unexpected boost type");
 
 }
@@ -89,6 +91,7 @@ std::string boost_model_helper::type(const boost_types t) const {
     case boost_types::shared_ptr: return shared_ptr_type;
     case boost_types::optional: return optional_type;
     case boost_types::variant: return variant_type;
+    case boost_types::filesystem_path: return filesystem_path_type;
     default: break;
     }
     BOOST_LOG_SEV(lg, error) << error_message;
@@ -139,10 +142,13 @@ std::string boost_model_helper::include(const boost_types type) const {
     case boost_types::serialization_variant:
         return serialization_variant_include;
     case boost_types::apply_visitor: return apply_visitor_include;
+    case boost_types::filesystem_path: return filesystem_path_include;
     default: break;
     }
+
     BOOST_LOG_SEV(lg, error) << error_message;
-    BOOST_THROW_EXCEPTION(utility::exception::invalid_enum_value(error_message));
+    BOOST_THROW_EXCEPTION(
+        utility::exception::invalid_enum_value(error_message));
 }
 
 } } } }

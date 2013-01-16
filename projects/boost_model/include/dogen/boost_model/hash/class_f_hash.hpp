@@ -18,12 +18,35 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/boost_model/types/class_a.hpp"
-#include "dogen/boost_model/types/class_b.hpp"
-#include "dogen/boost_model/types/class_base.hpp"
-#include "dogen/boost_model/types/class_d.hpp"
-#include "dogen/boost_model/types/class_derived.hpp"
-#include "dogen/boost_model/types/class_e.hpp"
+#ifndef DOGEN_BOOST_MODEL_HASH_CLASS_F_HASH_HPP
+#define DOGEN_BOOST_MODEL_HASH_CLASS_F_HASH_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include <functional>
 #include "dogen/boost_model/types/class_f.hpp"
-#include "dogen/boost_model/types/pkg1/class_c.hpp"
-#include "dogen/boost_model/types/some_service.hpp"
+
+namespace dogen {
+namespace boost_model {
+
+class class_f_hasher {
+public:
+    static std::size_t hash(const class_f& v);
+};
+
+} }
+
+namespace std {
+
+template<>
+class hash<dogen::boost_model::class_f> {
+public:
+    size_t operator()(const dogen::boost_model::class_f& v) const {
+        return dogen::boost_model::class_f_hasher::hash(v);
+    }
+};
+
+}
+#endif

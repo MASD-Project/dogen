@@ -63,7 +63,8 @@ enum class boost_types : unsigned int {
     string_algorithm, ///< string algorithms
     variant, ///< boost variant
     serialization_variant, ///< variant support
-    apply_visitor ///< Apply visitor
+    apply_visitor, ///< Apply visitor
+    filesystem_path ///< filesystem path
 };
 
 } } } }

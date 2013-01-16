@@ -413,7 +413,10 @@ void hash_implementation::hasher_hash_method(const class_view_model& vm) {
             utility_.blank_line();
 
         for (const auto p : props) {
-            if (is_hashable(p.type())) {
+            if (p.type().is_filesystem_path()) {
+                stream_ << indenter_ << "combine(seed, v." << p.name()
+                        << "().generic_string());" << std::endl;
+            } else if (is_hashable(p.type())) {
                 stream_ << indenter_ << "combine(seed, v." << p.name()
                         << "());" << std::endl;
             } else {

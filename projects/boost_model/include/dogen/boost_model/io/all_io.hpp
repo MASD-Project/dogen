@@ -24,4 +24,5 @@
 #include "dogen/boost_model/io/class_d_io.hpp"
 #include "dogen/boost_model/io/class_derived_io.hpp"
 #include "dogen/boost_model/io/class_e_io.hpp"
+#include "dogen/boost_model/io/class_f_io.hpp"
 #include "dogen/boost_model/io/pkg1/class_c_io.hpp"

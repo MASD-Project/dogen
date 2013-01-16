@@ -90,6 +90,7 @@ const std::string double_type("double");
 const std::string float_type("float");
 const std::string optional_type("boost::optional");
 const std::string variant_type("boost::variant");
+const std::string filesystem_path_type("boost::filesystem::path");
 
 const std::string int8_t_type("std::int8_t");
 const std::string int16_t_type("std::int16_t");
@@ -112,6 +113,10 @@ bool is_string_like(const std::string& type_name) {
 
 bool is_optional_like(const std::string& type_name) {
     return type_name == optional_type;
+}
+
+bool is_filesystem_path(const std::string& type_name) {
+    return type_name == filesystem_path_type;
 }
 
 bool is_variant_like(const std::string& type_name) {
@@ -272,6 +277,7 @@ void sml_dfs_visitor::transform_nested_qualified_name(
     vm.is_string_like(is_string_like(vm.name()));
     vm.is_optional_like(is_optional_like(vm.name()));
     vm.is_variant_like(is_variant_like(vm.name()));
+    vm.is_filesystem_path(is_filesystem_path(vm.name()));
 
     if (qn.meta_type() == meta_types::pod) {
         const auto i(state_->pods_.find(qn));
@@ -371,6 +377,7 @@ void sml_dfs_visitor::process_sml_pod(const dogen::sml::pod& pod) {
         nested_type_view_model type_vm;
         std::string complete_name;
         if (p.type_name().type().type_name() == "optional" ||
+            p.type_name().type().type_name() == "path" ||
             p.type_name().type().type_name() == "variant")
             requires_manual_move_constructor = true;
 

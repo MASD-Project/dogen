@@ -24,4 +24,5 @@
 #include "dogen/boost_model/test_data/class_d_td.hpp"
 #include "dogen/boost_model/test_data/class_derived_td.hpp"
 #include "dogen/boost_model/test_data/class_e_td.hpp"
+#include "dogen/boost_model/test_data/class_f_td.hpp"
 #include "dogen/boost_model/test_data/pkg1/class_c_td.hpp"

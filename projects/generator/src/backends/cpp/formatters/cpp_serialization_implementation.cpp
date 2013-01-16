@@ -107,17 +107,18 @@ void serialization_implementation::save_function(const class_view_model& vm) {
                 utility_.blank_line();
 
             for (const auto p : props) {
+                std::ostringstream s;
+                s << "v." << utility_.as_member_variable(p.name());
+                if (p.type().is_filesystem_path())
+                    s << ".generic_string()";
+
                 if (disable_xml_serialization_) {
-                    stream_ << indenter_ << "ar << v."
-                            << utility_.as_member_variable(p.name())
-                            << ";"
+                    stream_ << indenter_ << "ar << " << s.str() << ";"
                             << std::endl;
                 } else {
                     stream_ << indenter_ << "ar << make_nvp("
                             << utility_.quote(p.name())
-                            << ", v."
-                            << utility_.as_member_variable(p.name())
-                            << ");"
+                            << ", " << s.str() << ");"
                             << std::endl;
                 }
             }
@@ -173,17 +174,28 @@ void serialization_implementation::load_function(const class_view_model& vm) {
                 utility_.blank_line();
 
             for (const auto p : props) {
+                std::ostringstream s;
+                if (p.type().is_filesystem_path()) {
+                    s << p.name() + "_tmp";
+                    stream_ << indenter_ << "std::string " << s.str() << ";"
+                            << std::endl;
+                } else
+                    s << "v." << utility_.as_member_variable(p.name());
+
                 if (disable_xml_serialization_) {
-                    stream_ << indenter_ << "ar >> v."
-                            << utility_.as_member_variable(p.name())
-                            << ";"
+                    stream_ << indenter_ << "ar >> " << s.str() << ";"
                             << std::endl;
                 } else {
                     stream_ << indenter_ << "ar >> make_nvp("
                             << utility_.quote(p.name())
-                            << ", v."
+                            << ", " << s.str() << ");"
+                            << std::endl;
+                }
+
+                if (p.type().is_filesystem_path()) {
+                    stream_ << indenter_ << "v."
                             << utility_.as_member_variable(p.name())
-                            << ");"
+                            << " = " << s.str() << ";"
                             << std::endl;
                 }
             }
