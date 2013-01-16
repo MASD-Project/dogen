@@ -25,6 +25,7 @@
 #include <boost/algorithm/string/predicate.hpp>
 #include "dogen/utility/test/logging.hpp"
 #include "dogen/utility/io/vector_io.hpp"
+#include "dogen/config/io/settings_io.hpp"
 #include "dogen/driver/program_options_parser.hpp"
 #include "dogen/driver/parser_validation_error.hpp"
 
@@ -197,7 +198,7 @@ void check_exception(std::vector<std::string> options, std::string expected) {
     BOOST_CHECK(!version);
 }
 
-dogen::generator::config::settings
+dogen::config::settings
 check_valid_arguments(std::vector<std::string> options) {
     bool help(false);
     bool version(false);
@@ -424,7 +425,7 @@ BOOST_AUTO_TEST_CASE(supplying_cpp_arguments_results_in_expected_settings) {
     const auto facets(cs.enabled_facets());
     BOOST_REQUIRE(facets.size() == 3);
 
-    using dogen::generator::backends::cpp::cpp_facet_types;
+    using dogen::config::cpp_facet_types;
     BOOST_CHECK(facets.find(cpp_facet_types::types) != facets.end());
     BOOST_CHECK(facets.find(cpp_facet_types::hash) != facets.end());
     BOOST_CHECK(facets.find(cpp_facet_types::io) != facets.end());
@@ -488,7 +489,7 @@ BOOST_AUTO_TEST_CASE(not_supplying_cpp_arguments_results_in_expected_settings) {
     const auto facets(cs.enabled_facets());
     BOOST_REQUIRE(facets.size() == 5);
 
-    using dogen::generator::backends::cpp::cpp_facet_types;
+    using dogen::config::cpp_facet_types;
     BOOST_CHECK(facets.find(cpp_facet_types::types) != facets.end());
     BOOST_CHECK(facets.find(cpp_facet_types::hash) != facets.end());
     BOOST_CHECK(facets.find(cpp_facet_types::io) != facets.end());
@@ -649,7 +650,7 @@ BOOST_AUTO_TEST_CASE(not_supplying_troubleshooting_options_results_in_expected_s
     BOOST_CHECK(!ts.verbose());
     BOOST_CHECK(ts.debug_dir().empty());
 
-    using dogen::utility::serialization::archive_types;
+    using dogen::config::archive_types;
     BOOST_CHECK(ts.save_dia_model() == archive_types::invalid);
     BOOST_CHECK(ts.save_dia_model() == archive_types::invalid);
 
@@ -674,7 +675,7 @@ BOOST_AUTO_TEST_CASE(supplying_troubleshooting_options_results_in_expected_setti
     BOOST_CHECK(ts.verbose());
     BOOST_CHECK(ts.debug_dir().string() == debug_dir_value_arg);
 
-    using dogen::utility::serialization::archive_types;
+    using dogen::config::archive_types;
     BOOST_CHECK(ts.save_dia_model() == archive_types::xml);
     BOOST_CHECK(ts.save_sml_model() == archive_types::text);
 

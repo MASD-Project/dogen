@@ -26,6 +26,7 @@ add_library(generator STATIC ${generator_files})
 target_link_libraries(generator
     sml
     dia
+    config
     utility
     ${LIBXML2_LIBRARIES}
     ${Boost_LIBRARIES})

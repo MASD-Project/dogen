@@ -64,9 +64,9 @@ director::director(const config::settings& settings)
     : settings_(settings), verbose_(settings_.troubleshooting().verbose()) { }
 
 std::string director::
-extension(utility::serialization::archive_types archive_type,
+extension(config::archive_types archive_type,
     const std::string& model) const {
-    using utility::serialization::archive_types;
+    using config::archive_types;
     switch (archive_type) {
     case archive_types::xml:
         return xml_extension + model;
@@ -78,12 +78,13 @@ extension(utility::serialization::archive_types archive_type,
         break;
     }
     BOOST_LOG_SEV(lg, error) << invalid_archive_type;
-    BOOST_THROW_EXCEPTION(dogen::utility::exception::invalid_enum_value(invalid_archive_type));
+    BOOST_THROW_EXCEPTION(
+        dogen::utility::exception::invalid_enum_value(invalid_archive_type));
 }
 
 bool director::is_save_dia_model_enabled() const {
     return settings_.troubleshooting().save_dia_model() !=
-        utility::serialization::archive_types::invalid;
+        config::archive_types::invalid;
 }
 
 void director::
@@ -94,7 +95,7 @@ save_diagram(const dia::diagram& d, const std::string& name) const {
     boost::filesystem::path p(settings_.troubleshooting().debug_dir());
     p /= name;
 
-    using utility::serialization::archive_types;
+    using config::archive_types;
     archive_types at(settings_.troubleshooting().save_dia_model());
     p.replace_extension(extension(at, dia_model));
     BOOST_LOG_SEV(lg, info) << "Saving Dia model to path: " << p;
@@ -113,7 +114,7 @@ director::hydrate_diagram(const boost::filesystem::path& path) const {
 
 bool director::is_save_sml_model_enabled() const {
     return settings_.troubleshooting().save_sml_model() !=
-        utility::serialization::archive_types::invalid;
+        config::archive_types::invalid;
 }
 
 void director::
@@ -124,7 +125,7 @@ save_model(const sml::model& m, const std::string& prefix) const {
     boost::filesystem::path p(settings_.troubleshooting().debug_dir());
     p /= prefix + m.name();
 
-    using utility::serialization::archive_types;
+    using config::archive_types;
     archive_types at(settings_.troubleshooting().save_sml_model());
     p.replace_extension(extension(at, sml_model));
     BOOST_LOG_SEV(lg, info) << "Saving SML model to path: " << p;

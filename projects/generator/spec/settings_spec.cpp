@@ -22,9 +22,9 @@
 #include <boost/test/unit_test.hpp>
 #include <boost/algorithm/string/predicate.hpp>
 #include "dogen/utility/test/logging.hpp"
-#include "dogen/generator/config/settings.hpp"
-#include "dogen/generator/config/validator.hpp"
-#include "dogen/generator/config/configuration_error.hpp"
+#include "dogen/config/types/settings.hpp"
+#include "dogen/config/types/validator.hpp"
+#include "dogen/config/types/configuration_error.hpp"
 #include "dogen/generator/test/mock_settings_factory.hpp"
 #include "dogen/utility/test/exception_checkers.hpp"
 
@@ -47,17 +47,17 @@ const std::string missing_project_dir("You must supply the project directory");
 const std::string unexpected_source_include("Source and include directories");
 const std::string unexpected_project_dir("Project directories cannot be");
 
-dogen::generator::config::settings defaults() {
+dogen::config::settings defaults() {
     return dogen::generator::test::mock_settings_factory::
         build_settings(target, src_dir, include_dir, epp);
 }
 
-dogen::generator::config::settings target_only() {
+dogen::config::settings target_only() {
     return dogen::generator::test::mock_settings_factory::
         build_settings(target, empty_dir, empty_dir, empty);
 }
 
-dogen::generator::config::settings split_project(const bool split) {
+dogen::config::settings split_project(const bool split) {
     auto s(target_only());
     auto cpp(s.cpp());
     cpp.split_project(split);
@@ -65,7 +65,7 @@ dogen::generator::config::settings split_project(const bool split) {
     return s;
 }
 
-dogen::generator::config::settings
+dogen::config::settings
 split_project(const bool split, const boost::filesystem::path& include,
     const boost::filesystem::path& src) {
     auto s(target_only());
@@ -80,7 +80,7 @@ split_project(const bool split, const boost::filesystem::path& include,
     return s;
 }
 
-dogen::generator::config::settings
+dogen::config::settings
 split_project(const bool split, const boost::filesystem::path& proj) {
     auto s(target_only());
     auto cpp(s.cpp());
@@ -98,15 +98,15 @@ split_project(const bool split, const boost::filesystem::path& proj) {
 }
 
 using dogen::utility::test::contains_checker;
-using dogen::generator::config::configuration_error;
-using dogen::generator::config::validator;
+using dogen::config::configuration_error;
+using dogen::config::validator;
 
 BOOST_AUTO_TEST_SUITE(settings)
 
 BOOST_AUTO_TEST_CASE(modeling_target_must_be_supplied) {
     SETUP_TEST_LOG_SOURCE("modeling_target_must_be_supplied");
 
-    dogen::generator::config::settings s;
+    dogen::config::settings s;
     BOOST_CHECK(s.modeling().target().empty());
     contains_checker<configuration_error> c(missing_target);
     BOOST_CHECK_EXCEPTION(validator::validate(s), configuration_error, c);

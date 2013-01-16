@@ -27,7 +27,7 @@
 
 #include <string>
 #include <boost/filesystem/path.hpp>
-#include "dogen/generator/config/settings.hpp"
+#include "dogen/config/types/settings.hpp"
 
 namespace dogen {
 namespace generator {

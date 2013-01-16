@@ -25,7 +25,7 @@
 #pragma once
 #endif
 
-#include "dogen/generator/config/settings.hpp"
+#include "dogen/config/types/settings.hpp"
 #include "dogen/generator/backends/backend.hpp"
 #include "dogen/sml/types/model.hpp"
 

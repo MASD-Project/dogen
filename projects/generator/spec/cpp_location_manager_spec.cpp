@@ -25,12 +25,15 @@
 #include "dogen/utility/test/logging.hpp"
 #include "dogen/utility/io/list_io.hpp"
 #include "dogen/utility/test/asserter.hpp"
-#include "dogen/generator/config/cpp_settings.hpp"
+#include "dogen/config/types/cpp_facet_types.hpp"
+#include "dogen/config/types/cpp_settings.hpp"
+#include "dogen/config/io/cpp_settings_io.hpp"
 #include "dogen/generator/backends/cpp/cpp_location_manager.hpp"
 #include "dogen/generator/backends/cpp/cpp_location_request.hpp"
 #include "dogen/generator/test/mock_settings_factory.hpp"
 
 using namespace dogen::generator::backends::cpp;
+using dogen::config::cpp_facet_types;
 
 namespace {
 
@@ -58,12 +61,12 @@ const std::vector<cpp_facet_types> facets =
     cpp_facet_types::test_data
 };
 
-dogen::generator::config::cpp_settings non_split_project_settings() {
+dogen::config::cpp_settings non_split_project_settings() {
     return dogen::generator::test::mock_settings_factory::
         build_cpp_settings(project_dir);
 }
 
-dogen::generator::config::cpp_settings split_project_settings() {
+dogen::config::cpp_settings split_project_settings() {
     return dogen::generator::test::mock_settings_factory::
         build_cpp_settings(src_dir, include_dir);
 }
@@ -90,7 +93,7 @@ cpp_location_request request(cpp_facet_types ft, cpp_file_types flt) {
 }
 
 std::list<std::string>
-generate_all_filenames(dogen::generator::config::cpp_settings s, bool with_path) {
+generate_all_filenames(dogen::config::cpp_settings s, bool with_path) {
     using dogen::generator::backends::cpp::cpp_location_manager;
     cpp_location_manager lm(test_model_name, s);
 

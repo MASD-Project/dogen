@@ -50,19 +50,19 @@ public:
     facet_includer& operator=(const facet_includer&) = default;
 
 public:
-    facet_includer(std::ostream& stream, cpp_facet_types facet_type);
+    facet_includer(std::ostream& stream, config::cpp_facet_types facet_type);
     virtual ~facet_includer() noexcept {}
 
 public:
     static file_formatter::shared_ptr create(std::ostream& stream,
-        cpp_facet_types facet_type);
+        config::cpp_facet_types facet_type);
 
 public:
     virtual void format(const file_view_model& vm) override;
 
 private:
     std::ostream& stream_;
-    const cpp_facet_types facet_type_;
+    const config::cpp_facet_types facet_type_;
     cpp_indenter indenter_;
     cpp_utility utility_;
 };

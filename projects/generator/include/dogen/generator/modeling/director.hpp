@@ -26,7 +26,7 @@
 #endif
 
 #include <boost/optional.hpp>
-#include "dogen/generator/config/settings.hpp"
+#include "dogen/config/types/settings.hpp"
 #include "dogen/sml/types/model.hpp"
 #include "dogen/dia/types/diagram.hpp"
 
@@ -59,7 +59,7 @@ private:
      * @param archive_type one of the supported boost archive types.
      * @param model a textual representation for either SML or Dia.
      */
-    std::string extension(utility::serialization::archive_types archive_type,
+    std::string extension(config::archive_types archive_type,
         const std::string& model) const;
 
     /**

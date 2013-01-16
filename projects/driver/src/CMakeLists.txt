@@ -30,6 +30,7 @@ target_link_libraries(driver
     generator
     dia
     sml
+    config
     utility
     ${LIBXML2_LIBRARIES}
     ${Boost_LIBRARIES})

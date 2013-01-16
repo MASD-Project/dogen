@@ -29,6 +29,7 @@
 #include "dogen/sml/serialization/model_ser.hpp"
 #include "dogen/generator/test/mock_settings_factory.hpp"
 
+using dogen::config::cpp_facet_types;
 using namespace dogen::generator::backends::cpp;
 using namespace dogen::generator::backends::cpp::view_models;
 
@@ -94,7 +95,7 @@ dogen::sml::model pod_with_parent_model() {
     return r;
 }
 
-dogen::generator::config::cpp_settings create_settings(
+dogen::config::cpp_settings create_settings(
     bool disable_facet_includers = false, bool disable_versioning = false,
     bool use_integrated_io = false) {
 

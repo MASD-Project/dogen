@@ -21,6 +21,7 @@
 #include <sstream>
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
+#include "dogen/config/io/cpp_settings_io.hpp"
 #include "dogen/utility/exception/invalid_enum_value.hpp"
 #include "dogen/generator/backends/cpp/cpp_location_manager.hpp"
 
@@ -79,10 +80,11 @@ cpp_location_manager::cpp_location_manager(const std::string& model_name,
         << " model name: " << model_name;
 }
 
-std::string cpp_location_manager::facet_directory(cpp_facet_types facet) const {
+std::string cpp_location_manager::facet_directory(config::cpp_facet_types facet) const {
     if (settings_.disable_facet_folders())
         return empty;
 
+    using config::cpp_facet_types;
     switch(facet) {
     case cpp_facet_types::io: return settings_.io_facet_folder(); break;
     case cpp_facet_types::types: return settings_.domain_facet_folder(); break;
@@ -99,10 +101,12 @@ std::string cpp_location_manager::facet_directory(cpp_facet_types facet) const {
     }
 }
 
-std::string cpp_location_manager::facet_postfix(cpp_facet_types facet) const {
+std::string cpp_location_manager::
+facet_postfix(config::cpp_facet_types facet) const {
     if (settings_.disable_unique_file_names())
         return empty;
 
+    using config::cpp_facet_types;
     switch(facet) {
     case cpp_facet_types::io: return io_postfix; break;
     case cpp_facet_types::types: return domain_postfix; break;

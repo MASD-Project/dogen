@@ -36,7 +36,7 @@
 #include "dogen/generator/backends/cpp/view_models/enumeration_view_model.hpp"
 #include "dogen/generator/backends/cpp/view_models/class_view_model.hpp"
 #include "dogen/generator/backends/cpp/view_models/registrar_view_model.hpp"
-#include "dogen/generator/backends/cpp/cpp_facet_types.hpp"
+#include "dogen/config/types/cpp_facet_types.hpp"
 #include "dogen/generator/backends/cpp/cpp_file_types.hpp"
 #include "dogen/generator/backends/cpp/cpp_aspect_types.hpp"
 #include "dogen/generator/backends/cpp/cpp_aspect_types.hpp"
@@ -55,7 +55,7 @@ public:
 
 public:
     file_view_model() :
-        facet_type_(cpp_facet_types::invalid),
+        facet_type_(config::cpp_facet_types::invalid),
         file_type_(cpp_file_types::invalid),
         aspect_type_(cpp_aspect_types::invalid),
         category_type_(sml::category_types::invalid) { }
@@ -76,8 +76,8 @@ public:
     file_path_(std::move(o.file_path_)) {}
 
 public:
-    void facet_type(cpp_facet_types value) { facet_type_ = value; }
-    cpp_facet_types facet_type() const { return facet_type_; }
+    void facet_type(config::cpp_facet_types value) { facet_type_ = value; }
+    config::cpp_facet_types facet_type() const { return facet_type_; }
 
     void file_type(cpp_file_types value) { file_type_ = value; }
     cpp_file_types file_type() const { return file_type_; }
@@ -138,7 +138,7 @@ public:
     boost::filesystem::path file_path() const { return file_path_; }
 
 private:
-    cpp_facet_types facet_type_;
+    config::cpp_facet_types facet_type_;
     cpp_file_types file_type_;
     cpp_aspect_types aspect_type_;
     sml::category_types category_type_;

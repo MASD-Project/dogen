@@ -36,7 +36,7 @@
 #include "dogen/generator/generation_failure.hpp"
 #include "dogen/generator/test/mock_settings_factory.hpp"
 #include "dogen/generator/modeling/dia_to_sml.hpp"
-#include "dogen/generator/config/settings.hpp"
+#include "dogen/config/types/settings.hpp"
 #include "dogen/generator/generator.hpp"
 #include "dogen/sml/types/model.hpp"
 #include "dogen/sml/io/model_io.hpp"
@@ -76,14 +76,14 @@ file_asserters() {
     return r;
 }
 
-dogen::generator::config::settings
+dogen::config::settings
 default_mock_settings(dogen::utility::test_data::codegen_tds tds) {
     using dogen::generator::test::mock_settings_factory;
     return mock_settings_factory::build_settings(
         tds.target(), tds.actual(), package_path);
 }
 
-dogen::generator::config::settings debug_dogen_mock_settings() {
+dogen::config::settings debug_dogen_mock_settings() {
     typedef dogen::utility::test_data::debug_dogen tds;
     using dogen::generator::test::mock_settings_factory;
     return mock_settings_factory::build_settings(
@@ -93,7 +93,7 @@ dogen::generator::config::settings debug_dogen_mock_settings() {
         empty_package_path);
 }
 
-dogen::generator::config::settings empty_tds_mock_settings() {
+dogen::config::settings empty_tds_mock_settings() {
     typedef dogen::utility::test_data::empty_tds tds;
     using dogen::generator::test::mock_settings_factory;
     return mock_settings_factory::build_settings(
@@ -134,7 +134,7 @@ BOOST_AUTO_TEST_CASE(debug_options_generate_expected_debug_info) {
     typedef dogen::utility::test_data::debug_dogen tds;
     ts.debug_dir(tds::actual());
 
-    using dogen::utility::serialization::archive_types;
+    using dogen::config::archive_types;
     ts.save_dia_model(archive_types::xml);
     ts.save_sml_model(archive_types::xml);
     ts.stop_after_formatting(true);
@@ -201,7 +201,7 @@ BOOST_AUTO_TEST_CASE(disabling_cpp_backend_results_in_no_cpp_output) {
 
 BOOST_AUTO_TEST_CASE(disable_full_ctor_generates_expected_code) {
     SETUP_TEST_LOG("disable_full_ctor_generates_expected_code");
-    using dogen::generator::config::settings;
+    using dogen::config::settings;
     auto lambda([](dogen::utility::test_data::codegen_tds tds) -> settings {
             auto s(default_mock_settings(tds));
             auto cs(s.cpp());
@@ -217,7 +217,7 @@ BOOST_AUTO_TEST_CASE(disable_full_ctor_generates_expected_code) {
 
 BOOST_AUTO_TEST_CASE(disable_facet_folders_generates_expected_code) {
     SETUP_TEST_LOG("disable_facet_folders_generates_expected_code");
-    using dogen::generator::config::settings;
+    using dogen::config::settings;
     auto lambda([](dogen::utility::test_data::codegen_tds tds) -> settings {
             auto s(default_mock_settings(tds));
             auto cs(s.cpp());
@@ -232,7 +232,7 @@ BOOST_AUTO_TEST_CASE(disable_facet_folders_generates_expected_code) {
 
 BOOST_AUTO_TEST_CASE(disable_model_package_generates_expected_code) {
     SETUP_TEST_LOG("disable_model_package_generates_expected_code");
-    using dogen::generator::config::settings;
+    using dogen::config::settings;
     auto lambda([](dogen::utility::test_data::codegen_tds tds) -> settings {
             auto s(default_mock_settings(tds));
             auto cs(s.cpp());
@@ -252,7 +252,7 @@ BOOST_AUTO_TEST_CASE(disable_model_package_generates_expected_code) {
 
 BOOST_AUTO_TEST_CASE(disable_cmakelists_generates_expected_code) {
     SETUP_TEST_LOG("disable_cmakelists_generates_expected_code");
-    using dogen::generator::config::settings;
+    using dogen::config::settings;
     auto lambda([](dogen::utility::test_data::codegen_tds tds) -> settings {
             auto s(default_mock_settings(tds));
             auto cs(s.cpp());
@@ -274,7 +274,7 @@ BOOST_AUTO_TEST_CASE(not_enabling_facet_domain_throws) {
 
     auto s(default_mock_settings(tds));
     auto cs(s.cpp());
-    using dogen::generator::backends::cpp::cpp_facet_types;
+    using dogen::config::cpp_facet_types;
     std::set<cpp_facet_types> f = { cpp_facet_types::hash };
     cs.enabled_facets(f);
     s.cpp(cs);
@@ -286,11 +286,11 @@ BOOST_AUTO_TEST_CASE(not_enabling_facet_domain_throws) {
 
 BOOST_AUTO_TEST_CASE(enable_facet_domain_generates_expected_code) {
     SETUP_TEST_LOG("enable_facet_domain_generates_expected_code");
-    using dogen::generator::config::settings;
+    using dogen::config::settings;
     auto lambda([](dogen::utility::test_data::codegen_tds tds) -> settings {
             auto s(default_mock_settings(tds));
             auto cs(s.cpp());
-            using dogen::generator::backends::cpp::cpp_facet_types;
+            using dogen::config::cpp_facet_types;
             std::set<cpp_facet_types> f = {
                 cpp_facet_types::types
             };
@@ -306,11 +306,11 @@ BOOST_AUTO_TEST_CASE(enable_facet_domain_generates_expected_code) {
 
 BOOST_AUTO_TEST_CASE(enable_facet_hash_generates_expected_code) {
     SETUP_TEST_LOG("enable_facet_hash_generates_expected_code");
-    using dogen::generator::config::settings;
+    using dogen::config::settings;
     auto lambda([](dogen::utility::test_data::codegen_tds tds) ->  settings {
             auto s(default_mock_settings(tds));
             auto cs(s.cpp());
-            using dogen::generator::backends::cpp::cpp_facet_types;
+            using dogen::config::cpp_facet_types;
             std::set<cpp_facet_types> f = {
                 cpp_facet_types::types,
                 cpp_facet_types::hash
@@ -326,11 +326,11 @@ BOOST_AUTO_TEST_CASE(enable_facet_hash_generates_expected_code) {
 
 BOOST_AUTO_TEST_CASE(enable_facet_serialization_generates_expected_code) {
     SETUP_TEST_LOG("enable_facet_serialization_generates_expected_code");
-    using dogen::generator::config::settings;
+    using dogen::config::settings;
     auto lambda([](dogen::utility::test_data::codegen_tds tds) -> settings {
             auto s(default_mock_settings(tds));
             auto cs(s.cpp());
-            using dogen::generator::backends::cpp::cpp_facet_types;
+            using dogen::config::cpp_facet_types;
             std::set<cpp_facet_types> f = {
                 cpp_facet_types::types,
                 cpp_facet_types::serialization
@@ -347,11 +347,11 @@ BOOST_AUTO_TEST_CASE(enable_facet_serialization_generates_expected_code) {
 
 BOOST_AUTO_TEST_CASE(enable_facet_io_generates_expected_code) {
     SETUP_TEST_LOG("enable_facet_io_generates_expected_code");
-    using dogen::generator::config::settings;
+    using dogen::config::settings;
     auto lambda([](dogen::utility::test_data::codegen_tds tds) -> settings {
             auto s(default_mock_settings(tds));
             auto cs(s.cpp());
-            using dogen::generator::backends::cpp::cpp_facet_types;
+            using dogen::config::cpp_facet_types;
             std::set<cpp_facet_types> f = {
                 cpp_facet_types::types,
                 cpp_facet_types::io
@@ -374,7 +374,7 @@ BOOST_AUTO_TEST_CASE(enabling_facet_io_and_using_integrated_io_throws) {
 
     auto s(default_mock_settings(tds));
     auto cs(s.cpp());
-    using dogen::generator::backends::cpp::cpp_facet_types;
+    using dogen::config::cpp_facet_types;
     std::set<cpp_facet_types> f = {
         cpp_facet_types::hash,
         cpp_facet_types::io
@@ -544,7 +544,7 @@ BOOST_AUTO_TEST_CASE(split_project_model_generates_expected_code) {
 
     // note that we keep the project name just to make the life easier
     // for the rebaselining scripts.
-    using dogen::generator::config::settings;
+    using dogen::config::settings;
     auto lambda([](dogen::utility::test_data::codegen_tds tds) -> settings {
             using dogen::generator::test::mock_settings_factory;
             return mock_settings_factory::build_settings(

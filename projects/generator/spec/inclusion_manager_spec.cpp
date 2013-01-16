@@ -26,12 +26,14 @@
 #include "dogen/utility/test_data/validating_resolver.hpp"
 #include "dogen/utility/test_data/tds_test_good.hpp"
 #include "dogen/utility/test/logging.hpp"
+#include "dogen/config/io/cpp_facet_types_io.hpp"
 #include "dogen/generator/backends/cpp/cpp_location_manager.hpp"
 #include "dogen/generator/backends/cpp/cpp_location_request.hpp"
 #include "dogen/generator/test/mock_settings_factory.hpp"
 #include "dogen/generator/backends/cpp/cpp_inclusion_manager.hpp"
 
 using namespace dogen::generator::backends::cpp;
+using dogen::config::cpp_facet_types;
 
 namespace  {
 
@@ -77,7 +79,7 @@ const std::vector<cpp_facet_types> facets =
     cpp_facet_types::test_data
 };
 
-dogen::generator::config::cpp_settings mock_settings() {
+dogen::config::cpp_settings mock_settings() {
     return dogen::generator::test::mock_settings_factory::
         build_cpp_settings(project_dir);
 }

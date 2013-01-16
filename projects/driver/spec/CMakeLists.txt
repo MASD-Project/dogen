@@ -50,6 +50,7 @@ target_link_libraries(driver_spec
     utility
     dia
     sml
+    config
     ${LIBXML2_LIBRARIES}
     ${Boost_LIBRARIES}
     ${PQXX_LIBRARIES}

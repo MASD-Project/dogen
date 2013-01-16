@@ -25,7 +25,7 @@
 #include "dogen/config/version.hpp"
 #include "dogen/driver/program_options_parser.hpp"
 #include "dogen/driver/parser_validation_error.hpp"
-#include "dogen/generator/config/settings.hpp"
+#include "dogen/config/types/settings.hpp"
 #include "dogen/generator/generator.hpp"
 
 using namespace dogen::utility::log;
@@ -59,7 +59,7 @@ void version() {
 /**
  * @brief Given the main arguments, generates the Dogen settings.
  */
-boost::optional<dogen::generator::config::settings>
+boost::optional<dogen::config::settings>
 settings_factory(int argc, char* argv[]) {
     dogen::driver::program_options_parser p(argc, argv);
     p.help_function(help);
@@ -71,7 +71,7 @@ settings_factory(int argc, char* argv[]) {
  * @brief Given Dogen's settings, creates a code generator.
  */
 dogen::generator::generator
-code_generator_factory(const dogen::generator::config::settings& s) {
+code_generator_factory(const dogen::config::settings& s) {
     if (!s.output().output_to_stdout())
         return dogen::generator::generator(s);
 
@@ -82,7 +82,7 @@ code_generator_factory(const dogen::generator::config::settings& s) {
 /**
  * @brief Performs the initialisation of logging system.
  */
-void initialise_logging(const dogen::generator::config::settings& s) {
+void initialise_logging(const dogen::config::settings& s) {
     life_cycle_manager lcm;
     const bool v(s.troubleshooting().verbose());
     lcm.initialise(log_dir, v ? severity_level::debug : severity_level::info);

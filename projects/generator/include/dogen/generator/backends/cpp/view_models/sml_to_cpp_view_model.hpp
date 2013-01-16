@@ -32,12 +32,12 @@
 #include <vector>
 #include <unordered_map>
 #include <boost/graph/adjacency_list.hpp>
-#include "dogen/generator/config/cpp_settings.hpp"
+#include "dogen/config/types/cpp_settings.hpp"
 #include "dogen/generator/backends/cpp/cpp_location_manager.hpp"
 #include "dogen/generator/backends/cpp/cpp_inclusion_manager.hpp"
 #include "dogen/generator/backends/cpp/cpp_aspect_types.hpp"
 #include "dogen/generator/backends/cpp/cpp_file_types.hpp"
-#include "dogen/generator/backends/cpp/cpp_facet_types.hpp"
+#include "dogen/config/types/cpp_facet_types.hpp"
 #include "dogen/sml/types/meta_types.hpp"
 #include "dogen/sml/types/package.hpp"
 #include "dogen/sml/types/pod.hpp"
@@ -74,21 +74,22 @@ private:
     void log_finished(unsigned int count) const;
     void log_keys() const;
     void log_includers() const;
-    void log_generating_file(cpp_facet_types facet, cpp_aspect_types aspect,
-        cpp_file_types file, std::string name, sml::meta_types mt) const;
+    void log_generating_file(config::cpp_facet_types facet,
+        cpp_aspect_types aspect, cpp_file_types file, std::string name,
+        sml::meta_types mt) const;
 
 private:
     /**
      * @brief Returns true if the facet requires a C++ source file,
      * false otherwise.
      */
-    bool has_implementation(const cpp_facet_types ft,
+    bool has_implementation(const config::cpp_facet_types ft,
         const dogen::sml::meta_types mt) const;
 
     /**
      * @brief Returns true if facet has forward declarations, false otherwise.
      */
-    bool has_forward_decls(const cpp_facet_types ft,
+    bool has_forward_decls(const config::cpp_facet_types ft,
         const dogen::sml::meta_types mt) const;
 
     /**
@@ -98,7 +99,7 @@ private:
     std::string
     to_header_guard_name(const boost::filesystem::path& relative_path) const;
 
-    cpp_location_request location_request_factory(cpp_facet_types ft,
+    cpp_location_request location_request_factory(config::cpp_facet_types ft,
         cpp_file_types flt, cpp_aspect_types at,
         const sml::qname& n) const;
 
@@ -116,35 +117,36 @@ private:
      * @param is_versioned if true, generates the versioned key view
      * model, if false the unversioned key.
      */
-    file_view_model create_key_file_view_model(cpp_facet_types facet_type,
-        cpp_file_types file_type, cpp_aspect_types aspect_type);
+    file_view_model create_key_file_view_model(
+        config::cpp_facet_types facet_type, cpp_file_types file_type,
+        cpp_aspect_types aspect_type);
 
 private:
     /**
      * @brief Performs the initial setup of the file view model.
      */
-    file_view_model create_file(cpp_facet_types ft, cpp_file_types flt,
+    file_view_model create_file(config::cpp_facet_types ft, cpp_file_types flt,
         cpp_aspect_types at, const sml::qname& name);
 
     /**
      * @brief Transforms a SML pod into a C++ file view.
      */
-    file_view_model transform_file(cpp_facet_types ft, cpp_file_types flt,
-        cpp_aspect_types at, const sml::pod& p);
+    file_view_model transform_file(config::cpp_facet_types ft,
+        cpp_file_types flt, cpp_aspect_types at, const sml::pod& p);
 
     /**
      * @brief Transforms a SML enumeration into a C++ file view.
      */
     file_view_model
-    transform_file(cpp_facet_types ft, cpp_file_types flt, cpp_aspect_types at,
-        const sml::enumeration& e);
+    transform_file(config::cpp_facet_types ft, cpp_file_types flt,
+        cpp_aspect_types at, const sml::enumeration& e);
 
     /**
      * @brief Transforms a SML exception into a C++ file view.
      */
     file_view_model
-    transform_file(cpp_facet_types ft, cpp_file_types flt, cpp_aspect_types at,
-        const sml::exception& e);
+    transform_file(config::cpp_facet_types ft, cpp_file_types flt,
+        cpp_aspect_types at, const sml::exception& e);
 
     /**
      * @brief Transforms all versioned and unversioned keys.
@@ -183,7 +185,8 @@ private:
      * @param pt Pod type to process; must be set to invalid if the
      * meta-type is not a pod.
      */
-    std::set<cpp_facet_types> enabled_facet_types(const sml::meta_types mt,
+    std::set<config::cpp_facet_types> enabled_facet_types(
+        const sml::meta_types mt,
         const sml::pod_types pt = sml::pod_types::invalid) const;
 
     /**

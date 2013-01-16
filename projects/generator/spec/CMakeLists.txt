@@ -31,6 +31,7 @@ target_link_libraries(generator_spec
     utility
     dia
     sml
+    config
     ${LIBXML2_LIBRARIES}
     ${Boost_LIBRARIES}
     ${PQXX_LIBRARIES}

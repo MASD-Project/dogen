@@ -27,7 +27,7 @@
 
 #include <vector>
 #include <functional>
-#include "dogen/generator/config/output_settings.hpp"
+#include "dogen/config/types/output_settings.hpp"
 #include "dogen/generator/outputters/outputter.hpp"
 
 namespace dogen {

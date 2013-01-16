@@ -114,9 +114,9 @@ void forward_declarations_header::format_class(const file_view_model& vm) {
 
     const auto ft(vm.facet_type());
     const view_models::class_view_model& cvm(*o);
-    if (ft == cpp_facet_types::serialization)
+    if (ft == config::cpp_facet_types::serialization)
         format_serialization_class(cvm);
-    else if (ft == cpp_facet_types::types)
+    else if (ft == config::cpp_facet_types::types)
         format_domain_class(cvm);
     else {
         using dogen::utility::exception::invalid_enum_value;
@@ -125,11 +125,13 @@ void forward_declarations_header::format_class(const file_view_model& vm) {
     }
 }
 
-void forward_declarations_header::format_enumeration(const file_view_model& vm) {
+void forward_declarations_header::
+format_enumeration(const file_view_model& vm) {
     const auto o(vm.enumeration_vm());
     if (!o) {
         BOOST_LOG_SEV(lg, error) << missing_enumeration_view_model;
-        BOOST_THROW_EXCEPTION(generation_failure(missing_enumeration_view_model));
+        BOOST_THROW_EXCEPTION(
+            generation_failure(missing_enumeration_view_model));
     }
 
     const auto evm(*o);

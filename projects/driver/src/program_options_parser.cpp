@@ -379,8 +379,9 @@ void program_options_parser::version_function(std::function<void()> value) {
     version_function_ = value;
 }
 
-dogen::utility::serialization::archive_types
-program_options_parser::parse_archive_type(const std::string& s) const {
+dogen::config::archive_types
+program_options_parser::parse_archive_type(const std::string& s) {
+    using dogen::config::archive_types;
     if (s == xml_archive_type)
         return archive_types::xml;
     if (s == text_archive_type)
@@ -393,8 +394,9 @@ program_options_parser::parse_archive_type(const std::string& s) const {
     BOOST_THROW_EXCEPTION(invalid_enum_value(invalid_archive_type));
 }
 
-dogen::generator::backends::cpp::cpp_facet_types
+config::cpp_facet_types
 program_options_parser::parse_facet_types(const std::string& s) {
+    using config::cpp_facet_types;
     if (s == domain_facet_type) return cpp_facet_types::types;
     if (s == hash_facet_type) return cpp_facet_types::hash;
     if (s == serialization_facet_type) return cpp_facet_types::serialization;
@@ -406,9 +408,9 @@ program_options_parser::parse_facet_types(const std::string& s) {
     BOOST_THROW_EXCEPTION(invalid_enum_value(invalid_facet_type + s));
 }
 
-generator::config::cpp_settings program_options_parser::
+config::cpp_settings program_options_parser::
 transform_cpp_settings(const boost::program_options::variables_map& vm) const {
-    generator::config::cpp_settings r;
+    config::cpp_settings r;
 
     r.verbose(verbose_);
     r.split_project(vm.count(cpp_split_project_arg));
@@ -463,6 +465,7 @@ transform_cpp_settings(const boost::program_options::variables_map& vm) const {
     r.test_data_facet_folder(
         vm[cpp_test_data_facet_folder_arg].as<std::string>());
 
+    using config::cpp_facet_types;
     std::set<cpp_facet_types> set;
     if (vm.count(cpp_enable_facet_arg)) {
         try {
@@ -500,9 +503,9 @@ transform_cpp_settings(const boost::program_options::variables_map& vm) const {
     return r;
 }
 
-generator::config::sql_settings program_options_parser::
+config::sql_settings program_options_parser::
 transform_sql_settings(const boost::program_options::variables_map& vm) const {
-    generator::config::sql_settings r;
+    config::sql_settings r;
 
     r.verbose(verbose_);
     r.disable_backend(vm.count(sql_disable_backend_arg));
@@ -511,10 +514,10 @@ transform_sql_settings(const boost::program_options::variables_map& vm) const {
     return r;
 }
 
-generator::config::modeling_settings
+config::modeling_settings
 program_options_parser::transform_modeling_settings(
     const boost::program_options::variables_map& vm) const {
-    generator::config::modeling_settings r;
+    config::modeling_settings r;
 
     r.verbose(verbose_);
     if (!vm.count(target_arg))
@@ -527,7 +530,7 @@ program_options_parser::transform_modeling_settings(
     }
 
     if (vm.count(reference_arg)) {
-        std::vector<generator::config::reference> references;
+        std::vector<config::reference> references;
         typedef std::vector<std::string> strings_type;
         const auto ra(vm[reference_arg].as<strings_type>());
         for (const auto i : ra) {
@@ -544,7 +547,7 @@ program_options_parser::transform_modeling_settings(
                 BOOST_THROW_EXCEPTION(parser_validation_error(
                         at_most_two_arguments));
             }
-            dogen::generator::config::reference ref;
+            dogen::config::reference ref;
             ref.path(tokens[0]);
             if (tokens.size() > 1)
                 ref.external_package_path(tokens[1]);
@@ -557,16 +560,16 @@ program_options_parser::transform_modeling_settings(
     return r;
 }
 
-generator::config::troubleshooting_settings program_options_parser::
+config::troubleshooting_settings program_options_parser::
 transform_troubleshooting_settings(const variables_map& vm) const {
-    generator::config::troubleshooting_settings r;
+    config::troubleshooting_settings r;
 
     r.verbose(verbose_);
     r.stop_after_merging(vm.count(stop_after_merging_arg));
     r.stop_after_formatting(vm.count(stop_after_formatting_arg));
 
     bool need_debug_dir(false);
-    using utility::serialization::archive_types;
+    using config::archive_types;
     auto lambda([&](std::string arg) -> archive_types {
             if (vm.count(arg)) {
                 need_debug_dir = true;
@@ -592,9 +595,9 @@ transform_troubleshooting_settings(const variables_map& vm) const {
     return r;
 }
 
-generator::config::output_settings program_options_parser::
+config::output_settings program_options_parser::
 transform_output_settings(const variables_map& vm) const {
-    generator::config::output_settings r;
+    config::output_settings r;
     r.verbose(verbose_);
     r.output_to_stdout(vm.count(output_to_stdout_arg));
     r.output_to_file(vm.count(output_to_file_arg) || !r.output_to_stdout());
@@ -607,11 +610,11 @@ transform_output_settings(const variables_map& vm) const {
     return r;
 }
 
-boost::optional<generator::config::settings> program_options_parser::parse() {
+boost::optional<config::settings> program_options_parser::parse() {
     auto optional_vm(variables_map_factory());
 
     if (!optional_vm)
-        return boost::optional<generator::config::settings>();
+        return boost::optional<config::settings>();
 
     const boost::program_options::variables_map vm(*optional_vm);
     verbose_ = vm.count(verbose_arg);
@@ -622,7 +625,7 @@ boost::optional<generator::config::settings> program_options_parser::parse() {
     settings_.troubleshooting(transform_troubleshooting_settings(vm));
     settings_.output(transform_output_settings(vm));
 
-    return boost::optional<generator::config::settings>(settings_);
+    return boost::optional<config::settings>(settings_);
 }
 
 } }

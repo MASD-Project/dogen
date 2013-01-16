@@ -31,7 +31,7 @@
 #include <sstream>
 #include <boost/filesystem/path.hpp>
 #include "dogen/sml/types/model.hpp"
-#include "dogen/generator/config/cpp_settings.hpp"
+#include "dogen/config/types/cpp_settings.hpp"
 #include "dogen/generator/backends/cpp/cpp_location_manager.hpp"
 #include "dogen/generator/backends/cpp/view_models/cmakelists_view_model.hpp"
 #include "dogen/generator/backends/cpp/view_models/file_view_model.hpp"

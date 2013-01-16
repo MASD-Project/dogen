@@ -33,13 +33,13 @@
 #include "dogen/generator/backends/cpp/boost_model_helper.hpp"
 #include "dogen/generator/backends/cpp/std_model_helper.hpp"
 #include "dogen/sml/types/category_types.hpp"
-#include "dogen/generator/config/cpp_settings.hpp"
+#include "dogen/config/types/cpp_settings.hpp"
 #include "dogen/sml/types/meta_types.hpp"
 #include "dogen/generator/backends/cpp/dependency_details.hpp"
 #include "dogen/generator/backends/cpp/dependency_extractor.hpp"
 #include "dogen/generator/backends/cpp/cpp_location_manager.hpp"
 #include "dogen/generator/backends/cpp/cpp_aspect_types.hpp"
-#include "dogen/generator/backends/cpp/cpp_facet_types.hpp"
+#include "dogen/config/types/cpp_facet_types.hpp"
 #include "dogen/generator/backends/cpp/cpp_file_types.hpp"
 #include "dogen/sml/types/model.hpp"
 #include "dogen/sml/types/pod.hpp"
@@ -97,7 +97,7 @@ public:
         const config::cpp_settings& settings);
 
 private:
-    cpp_location_request location_request_factory(cpp_facet_types ft,
+    cpp_location_request location_request_factory(config::cpp_facet_types ft,
         cpp_file_types flt, cpp_aspect_types at,
         const sml::qname& name) const;
 
@@ -116,7 +116,7 @@ private:
      * given facet.
      */
     std::string header_dependency(const sml::qname& name,
-        cpp_facet_types ft, const cpp_aspect_types at) const;
+        config::cpp_facet_types ft, const cpp_aspect_types at) const;
 
 public:
     /**
@@ -126,7 +126,7 @@ public:
      * query for aspects which require all header files such as the
      * includers.
      */
-    void register_header(cpp_facet_types ft,
+    void register_header(config::cpp_facet_types ft,
         const boost::filesystem::path& relative_path);
 
     /**
@@ -150,7 +150,7 @@ private:
      * kept in one place.
      */
     void append_implementation_dependencies(const sml::pod& pod,
-        const cpp_facet_types ft, const cpp_file_types flt,
+        const config::cpp_facet_types ft, const cpp_file_types flt,
         inclusion_lists& il,
         const bool requires_stream_manipulators = false,
         const bool has_std_string = false,
@@ -161,7 +161,7 @@ private:
      * libraries.
      */
     void append_boost_dependencies(
-        const cpp_facet_types ft, const cpp_file_types flt,
+        const config::cpp_facet_types ft, const cpp_file_types flt,
         const dogen::sml::qname& qname,
         inclusion_lists& il) const;
 
@@ -170,7 +170,7 @@ private:
      * library.
      */
     void append_std_dependencies(
-        const cpp_facet_types ft, const cpp_file_types flt,
+        const config::cpp_facet_types ft, const cpp_file_types flt,
         const dogen::sml::qname& qname,
         inclusion_lists& il) const;
 
@@ -183,7 +183,7 @@ private:
      * of the type and all types of all properties it may have.
      */
     void append_relationship_dependencies(
-        const dependency_details& dd, const cpp_facet_types ft,
+        const dependency_details& dd, const config::cpp_facet_types ft,
         const cpp_file_types flt, inclusion_lists& il) const;
 
     /**
@@ -194,7 +194,7 @@ private:
      * including the header file.
      */
     void append_self_dependencies(dogen::sml::qname name,
-        const cpp_facet_types ft, const cpp_file_types flt,
+        const config::cpp_facet_types ft, const cpp_file_types flt,
         const cpp_aspect_types at, const sml::meta_types mt,
         inclusion_lists& il) const;
 
@@ -211,27 +211,31 @@ public:
      *
      * @param ft Facet for which we want the inclusion lists.
      */
-    inclusion_lists includes_for_includer_files(cpp_facet_types ft) const;
+    inclusion_lists
+    includes_for_includer_files(config::cpp_facet_types ft) const;
 
     /**
      * @brief Returns all the includes required for the given pod.
      */
-    inclusion_lists includes_for_pod(const sml::pod& pod, cpp_facet_types ft,
-        cpp_file_types flt, cpp_aspect_types at) const;
+    inclusion_lists includes_for_pod(const sml::pod& pod,
+        config::cpp_facet_types ft, cpp_file_types flt,
+        cpp_aspect_types at) const;
 
     /**
      * @brief Returns all the includes required for the given
      * enumeration.
      */
     inclusion_lists includes_for_enumeration(const sml::enumeration& e,
-        cpp_facet_types ft, cpp_file_types flt, cpp_aspect_types at) const;
+        config::cpp_facet_types ft, cpp_file_types flt,
+        cpp_aspect_types at) const;
 
     /**
      * @brief Returns all the includes required for the given
      * exception.
      */
     inclusion_lists includes_for_exception(const sml::exception& e,
-        cpp_facet_types ft, cpp_file_types flt, cpp_aspect_types at) const;
+        config::cpp_facet_types ft, cpp_file_types flt,
+        cpp_aspect_types at) const;
 
     /**
      * @brief Returns all the includes required for the serialisation
@@ -246,7 +250,8 @@ private:
     const bool io_enabled_;
     const bool serialization_enabled_;
     const bool hash_enabled_;
-    std::map<cpp_facet_types, std::list<std::string> > headers_for_facet_;
+    std::map<config::cpp_facet_types, std::list<std::string> >
+    headers_for_facet_;
     const boost_model_helper boost_;
     const std_model_helper std_;
     const dependency_extractor dependency_extractor_;

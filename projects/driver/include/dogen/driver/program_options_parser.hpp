@@ -31,7 +31,8 @@
 #include <boost/optional.hpp>
 #include <boost/tuple/tuple.hpp>
 #include <boost/program_options.hpp>
-#include "dogen/generator/config/settings.hpp"
+#include "dogen/config/types/archive_types.hpp"
+#include "dogen/config/types/settings.hpp"
 
 namespace dogen {
 namespace driver {
@@ -80,33 +81,27 @@ private:
     boost::optional<variables_map> variables_map_factory() const;
 
 public:
-    typedef dogen::utility::serialization::archive_types archive_types;
-    archive_types parse_archive_type(const std::string& s) const;
-
-    typedef dogen::generator::backends::cpp::cpp_facet_types cpp_facet_types;
-    static cpp_facet_types parse_facet_types(const std::string& s);
+    static config::archive_types parse_archive_type(const std::string& s);
+    static config::cpp_facet_types parse_facet_types(const std::string& s);
 
 private:
-    generator::config::modeling_settings
+    config::modeling_settings
     transform_modeling_settings(const variables_map& vm) const;
-    generator::config::cpp_settings
-    transform_cpp_settings(const variables_map& vm) const;
-    generator::config::sql_settings
-    transform_sql_settings(const variables_map& vm) const;
-    generator::config::troubleshooting_settings
+    config::cpp_settings transform_cpp_settings(const variables_map& vm) const;
+    config::sql_settings transform_sql_settings(const variables_map& vm) const;
+    config::troubleshooting_settings
     transform_troubleshooting_settings(const variables_map& vm) const;
-    generator::config::output_settings
-    transform_output_settings(const variables_map& vm) const;
+    config::output_settings transform_output_settings(const variables_map& vm) const;
 
 public:
     void help_function(std::function<void(std::string)> value);
     void version_function(std::function<void()> value);
 
 public:
-    boost::optional<generator::config::settings> parse();
+    boost::optional<config::settings> parse();
 
 private:
-    generator::config::settings settings_;
+    config::settings settings_;
     bool verbose_;
     const std::vector<std::string> arguments_;
     std::function<void(const std::string&)> help_function_;

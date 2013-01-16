@@ -52,16 +52,17 @@ cpp_backend(const sml::model& model, const config::cpp_settings& settings) :
 
     if (settings_.use_integrated_io()) {
         const auto f(settings_.enabled_facets());
-        const bool has_io_facet(f.find(cpp_facet_types::io) != f.end());
+        const bool has_io_facet(f.find(config::cpp_facet_types::io) != f.end());
         if (has_io_facet) {
-            BOOST_LOG_SEV(lg, error) << integrated_io_incompatible_with_io_facet;
+            BOOST_LOG_SEV(lg, error)
+                << integrated_io_incompatible_with_io_facet;
             BOOST_THROW_EXCEPTION(generation_failure(
                 integrated_io_incompatible_with_io_facet));
         }
     }
 
     const auto f(settings_.enabled_facets());
-    if (f.find(cpp_facet_types::types) == f.end()) {
+    if (f.find(config::cpp_facet_types::types) == f.end()) {
         BOOST_LOG_SEV(lg, error) << domain_facet_must_be_enabled;
         BOOST_THROW_EXCEPTION(generation_failure(domain_facet_must_be_enabled));
     }

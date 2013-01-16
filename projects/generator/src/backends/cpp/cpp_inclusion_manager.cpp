@@ -34,8 +34,8 @@ const std::string bool_type("bool");
 const std::string double_type("double");
 const std::string float_type("float");
 
-using dogen::generator::backends::cpp::cpp_facet_types;
-bool contains(const std::set<cpp_facet_types>& f, cpp_facet_types ft) {
+bool contains(const std::set<dogen::config::cpp_facet_types>& f,
+    dogen::config::cpp_facet_types ft) {
     return f.find(ft) != f.end();
 }
 
@@ -50,11 +50,12 @@ cpp_inclusion_manager::cpp_inclusion_manager(const sml::model& model,
     const cpp_location_manager& location_manager,
     const config::cpp_settings& settings)
     : model_(model), location_manager_(location_manager), settings_(settings),
-      io_enabled_(contains(settings_.enabled_facets(), cpp_facet_types::io)),
+      io_enabled_(contains(settings_.enabled_facets(),
+              config::cpp_facet_types::io)),
       serialization_enabled_(contains(settings_.enabled_facets(),
-              cpp_facet_types::serialization)),
+              config::cpp_facet_types::serialization)),
       hash_enabled_(contains(settings_.enabled_facets(),
-              cpp_facet_types::hash)), boost_(), std_(),
+              config::cpp_facet_types::hash)), boost_(), std_(),
       dependency_extractor_(model_.pods(), boost_, std_) {
 
     BOOST_LOG_SEV(lg, debug)
@@ -68,7 +69,7 @@ cpp_inclusion_manager::cpp_inclusion_manager(const sml::model& model,
 }
 
 cpp_location_request cpp_inclusion_manager::
-location_request_factory(cpp_facet_types ft, cpp_file_types flt,
+location_request_factory(config::cpp_facet_types ft, cpp_file_types flt,
     cpp_aspect_types at, const sml::qname& name) const {
 
     cpp_location_request r;
@@ -82,7 +83,7 @@ location_request_factory(cpp_facet_types ft, cpp_file_types flt,
     return r;
 }
 
-void cpp_inclusion_manager::register_header(cpp_facet_types ft,
+void cpp_inclusion_manager::register_header(config::cpp_facet_types ft,
     const boost::filesystem::path& relative_path) {
     headers_for_facet_[ft].push_back(relative_path.generic_string());
 }
@@ -90,14 +91,14 @@ void cpp_inclusion_manager::register_header(cpp_facet_types ft,
 std::string cpp_inclusion_manager::
 domain_header_dependency(const sml::qname& name,
     const cpp_aspect_types at) const {
-    const auto d(cpp_facet_types::types);
+    const auto d(config::cpp_facet_types::types);
     const auto h(cpp_file_types::header);
     const auto rq(location_request_factory(d, h, at, name));
     return location_manager_.relative_logical_path(rq).generic_string();
 }
 
 std::string cpp_inclusion_manager::header_dependency(
-    const sml::qname& name, cpp_facet_types facet_type,
+    const sml::qname& name, config::cpp_facet_types facet_type,
     const cpp_aspect_types at) const {
     const auto h(cpp_file_types::header);
     const auto main(at);
@@ -107,9 +108,11 @@ std::string cpp_inclusion_manager::header_dependency(
 
 void cpp_inclusion_manager::
 append_implementation_dependencies(const sml::pod& p,
-    const cpp_facet_types ft, const cpp_file_types flt, inclusion_lists& il,
-    const bool requires_stream_manipulators, const bool has_std_string,
-    const bool has_variant) const {
+    const config::cpp_facet_types ft, const cpp_file_types flt,
+    inclusion_lists& il, const bool requires_stream_manipulators,
+    const bool has_std_string, const bool has_variant) const {
+
+    using config::cpp_facet_types;
 
     /*
      * STL
@@ -195,11 +198,12 @@ append_implementation_dependencies(const sml::pod& p,
 }
 
 void cpp_inclusion_manager::append_boost_dependencies(
-    const cpp_facet_types ft, const cpp_file_types flt,
+    const config::cpp_facet_types ft, const cpp_file_types flt,
     const dogen::sml::qname& qname,
     inclusion_lists& il) const {
 
     const std::string type_name(qname.type_name());
+    using config::cpp_facet_types;
 
     /*
      * boost::shared_ptr
@@ -250,11 +254,12 @@ void cpp_inclusion_manager::append_boost_dependencies(
 }
 
 void cpp_inclusion_manager::append_std_dependencies(
-    const cpp_facet_types ft, const cpp_file_types flt,
+    const config::cpp_facet_types ft, const cpp_file_types flt,
     const dogen::sml::qname& qname,
     inclusion_lists& il) const {
 
     const std::string type_name(qname.type_name());
+    using config::cpp_facet_types;
 
     /*
      * std::string
@@ -353,10 +358,11 @@ void cpp_inclusion_manager::append_std_dependencies(
 }
 
 void cpp_inclusion_manager::append_relationship_dependencies(
-    const dependency_details& dd, const cpp_facet_types ft,
+    const dependency_details& dd, const config::cpp_facet_types ft,
     const cpp_file_types flt, inclusion_lists& il) const {
 
     auto names(dd.names());
+    using config::cpp_facet_types;
     const bool is_header(flt == cpp_file_types::header);
     const bool is_domain(ft == cpp_facet_types::types);
     for(const auto n : dd.forward_decls()) {
@@ -481,10 +487,11 @@ void cpp_inclusion_manager::append_relationship_dependencies(
 
 void cpp_inclusion_manager::
 append_self_dependencies(dogen::sml::qname name,
-    const cpp_facet_types ft, const cpp_file_types flt,
+    const config::cpp_facet_types ft, const cpp_file_types flt,
     const cpp_aspect_types at, const sml::meta_types mt,
     inclusion_lists& il) const {
 
+    using config::cpp_facet_types;
     const bool is_header(flt == cpp_file_types::header);
     const bool is_domain(ft == cpp_facet_types::types);
     const auto fwd(cpp_aspect_types::forward_decls);
@@ -530,8 +537,8 @@ void cpp_inclusion_manager::remove_duplicates(inclusion_lists& il) const {
     il.user.unique();
 }
 
-inclusion_lists
-cpp_inclusion_manager::includes_for_includer_files(cpp_facet_types ft) const {
+inclusion_lists cpp_inclusion_manager::
+includes_for_includer_files(config::cpp_facet_types ft) const {
     inclusion_lists r;
     const auto i(headers_for_facet_.find(ft));
     if (i != headers_for_facet_.end())
@@ -540,10 +547,11 @@ cpp_inclusion_manager::includes_for_includer_files(cpp_facet_types ft) const {
 }
 
 inclusion_lists cpp_inclusion_manager::
-includes_for_enumeration(const sml::enumeration& e, cpp_facet_types ft,
+includes_for_enumeration(const sml::enumeration& e, config::cpp_facet_types ft,
     cpp_file_types flt, cpp_aspect_types at) const {
     inclusion_lists r;
 
+    using config::cpp_facet_types;
     append_self_dependencies(e.name(), ft, flt, at, e.name().meta_type(), r);
 
     // functional
@@ -576,10 +584,11 @@ includes_for_enumeration(const sml::enumeration& e, cpp_facet_types ft,
 }
 
 inclusion_lists cpp_inclusion_manager::
-includes_for_exception(const sml::exception& e, cpp_facet_types ft,
+includes_for_exception(const sml::exception& e, config::cpp_facet_types ft,
     cpp_file_types flt, cpp_aspect_types at) const {
     inclusion_lists r;
 
+    using config::cpp_facet_types;
     append_self_dependencies(e.name(), ft, flt, at, e.name().meta_type(), r);
 
     // exception info
@@ -603,6 +612,7 @@ includes_for_registrar(cpp_file_types flt) const {
     if (flt == cpp_file_types::header)
         return r;
 
+    using config::cpp_facet_types;
     const auto main(cpp_aspect_types::main);
     const auto ft(cpp_facet_types::serialization);
     for (const auto& l : model_.leaves())
@@ -635,8 +645,8 @@ includes_for_registrar(cpp_file_types flt) const {
 }
 
 inclusion_lists cpp_inclusion_manager::
-includes_for_pod(const sml::pod& pod, cpp_facet_types ft, cpp_file_types flt,
-    cpp_aspect_types at) const {
+includes_for_pod(const sml::pod& pod, config::cpp_facet_types ft,
+    cpp_file_types flt, cpp_aspect_types at) const {
 
     inclusion_lists r;
     const auto n(pod.name());

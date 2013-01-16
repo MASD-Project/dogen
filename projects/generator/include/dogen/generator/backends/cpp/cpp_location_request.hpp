@@ -28,7 +28,7 @@
 #include <list>
 #include <string>
 #include <boost/filesystem/path.hpp>
-#include "dogen/generator/backends/cpp/cpp_facet_types.hpp"
+#include "dogen/config/types/cpp_facet_types.hpp"
 #include "dogen/generator/backends/cpp/cpp_file_types.hpp"
 #include "dogen/generator/backends/cpp/cpp_aspect_types.hpp"
 
@@ -45,13 +45,13 @@ public:
     cpp_location_request& operator=(const cpp_location_request&) = default;
 
     cpp_location_request() :
-        facet_type_(cpp_facet_types::invalid),
+        facet_type_(config::cpp_facet_types::invalid),
         file_type_(cpp_file_types::invalid),
         aspect_type_(cpp_aspect_types::invalid) { }
 
 public:
-    void facet_type(cpp_facet_types value) { facet_type_ = value; }
-    cpp_facet_types facet_type() const { return facet_type_; }
+    void facet_type(config::cpp_facet_types value) { facet_type_ = value; }
+    config::cpp_facet_types facet_type() const { return facet_type_; }
 
     void file_type(cpp_file_types value) { file_type_ = value; }
     cpp_file_types file_type() const { return file_type_; }
@@ -77,7 +77,7 @@ public:
 
 
 private:
-    cpp_facet_types facet_type_;
+    config::cpp_facet_types facet_type_;
     cpp_file_types file_type_;
     cpp_aspect_types aspect_type_;
     std::string model_name_;

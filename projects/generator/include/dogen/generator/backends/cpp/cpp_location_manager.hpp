@@ -28,9 +28,9 @@
 #include <list>
 #include <string>
 #include <boost/filesystem/path.hpp>
-#include "dogen/generator/config/cpp_settings.hpp"
+#include "dogen/config/types/cpp_settings.hpp"
 #include "dogen/generator/backends/cpp/cpp_location_request.hpp"
-#include "dogen/generator/backends/cpp/cpp_facet_types.hpp"
+#include "dogen/config/types/cpp_facet_types.hpp"
 #include "dogen/generator/backends/cpp/cpp_file_types.hpp"
 #include "dogen/generator/backends/cpp/cpp_aspect_types.hpp"
 
@@ -61,8 +61,8 @@ public:
         const config::cpp_settings& settings);
 
 private:
-    std::string facet_directory(cpp_facet_types facet) const;
-    std::string facet_postfix(cpp_facet_types facet) const;
+    std::string facet_directory(config::cpp_facet_types facet) const;
+    std::string facet_postfix(config::cpp_facet_types facet) const;
     std::string aspect_postfix(cpp_aspect_types aspect) const;
     boost::filesystem::path file_type_directory(cpp_file_types file_type) const;
     std::string extension(cpp_file_types file_type) const;

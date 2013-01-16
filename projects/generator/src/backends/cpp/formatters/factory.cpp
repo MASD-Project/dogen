@@ -21,6 +21,8 @@
 #include <sstream>
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
+#include "dogen/config/types/cpp_facet_types.hpp"
+#include "dogen/config/io/cpp_facet_types_io.hpp"
 #include "dogen/generator/backends/cpp/formatters/production_failure.hpp"
 #include "dogen/generator/backends/cpp/formatters/cpp_facet_includer.hpp"
 #include "dogen/generator/backends/cpp/formatters/cpp_domain_header.hpp"
@@ -47,8 +49,8 @@ namespace {
 auto lg(logger_factory("formatters::factory"));
 const std::string production_failure_msg("Formatter factory not setup for: ");
 
-using dogen::generator::backends::cpp::cpp_facet_types;
-bool contains(const std::set<cpp_facet_types>& f, cpp_facet_types ft) {
+bool contains(const std::set<dogen::config::cpp_facet_types>& f,
+    dogen::config::cpp_facet_types ft) {
     return f.find(ft) != f.end();
 }
 
@@ -63,14 +65,15 @@ namespace formatters {
 factory::factory(const config::cpp_settings& settings)
     : settings_(settings),
       disable_io_(!contains(settings_.enabled_facets(),
-              cpp_facet_types::io)),
+              config::cpp_facet_types::io)),
       disable_serialization_(!contains(settings_.enabled_facets(),
-              cpp_facet_types::serialization)) { }
+              config::cpp_facet_types::serialization)) { }
 
 factory::result_type
-factory::create_main_formatter(std::ostream& s, cpp_facet_types ft,
+factory::create_main_formatter(std::ostream& s, config::cpp_facet_types ft,
     cpp_file_types flt) const {
 
+    using config::cpp_facet_types;
     switch (ft) {
     case cpp_facet_types::types:
         if (flt == cpp_file_types::header)
@@ -144,7 +147,7 @@ factory::result_type factory::create_null_formatter(std::ostream& s) const {
 }
 
 factory::result_type
-factory::create(std::ostream& s, cpp_facet_types ft, cpp_file_types flt,
+factory::create(std::ostream& s, config::cpp_facet_types ft, cpp_file_types flt,
     cpp_aspect_types at) const {
 
     switch (at) {

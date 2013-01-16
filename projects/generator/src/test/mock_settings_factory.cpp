@@ -77,7 +77,7 @@ config::cpp_settings mock_settings_factory::build_cpp_settings(
     r.source_directory(src_dir);
     r.include_directory(include_dir);
 
-    using backends::cpp::cpp_facet_types;
+    using config::cpp_facet_types;
     std::set<cpp_facet_types> f = {
         cpp_facet_types::types,
         cpp_facet_types::hash,

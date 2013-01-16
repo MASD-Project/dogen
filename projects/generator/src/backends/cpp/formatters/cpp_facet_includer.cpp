@@ -41,12 +41,12 @@ namespace cpp {
 namespace formatters {
 
 facet_includer::
-facet_includer(std::ostream& stream, cpp_facet_types facet_type) :
+facet_includer(std::ostream& stream, config::cpp_facet_types facet_type) :
     stream_(stream), facet_type_(facet_type),
     utility_(stream_, indenter_) { }
 
 file_formatter::shared_ptr facet_includer::
-create(std::ostream& stream,cpp_facet_types facet_type) {
+create(std::ostream& stream, config::cpp_facet_types facet_type) {
     return file_formatter::shared_ptr(new facet_includer(stream, facet_type));
 }
 
