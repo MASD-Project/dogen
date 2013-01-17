@@ -683,7 +683,6 @@ void sml_to_cpp_view_model::create_class_view_models() {
     qname_to_class_ = v.class_view_models();
 }
 
-
 void sml_to_cpp_view_model::create_enumeration_view_models() {
     const auto enumerations(model_.enumerations());
     BOOST_LOG_SEV(lg, debug) << "Transforming enumerations: "

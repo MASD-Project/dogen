@@ -30,6 +30,7 @@ const std::string hash_facet_folder("hash");
 const std::string io_facet_folder("io");
 const std::string serialization_facet_folder("serialization");
 const std::string test_data_facet_folder("test_data");
+const std::string odb_facet_folder("odb");
 
 }
 
@@ -83,7 +84,8 @@ config::cpp_settings mock_settings_factory::build_cpp_settings(
         cpp_facet_types::hash,
         cpp_facet_types::serialization,
         cpp_facet_types::io,
-        cpp_facet_types::test_data
+        cpp_facet_types::test_data,
+        cpp_facet_types::odb
     };
     r.enabled_facets(f);
     r.header_extension(header_extension);
@@ -93,6 +95,7 @@ config::cpp_settings mock_settings_factory::build_cpp_settings(
     r.io_facet_folder(io_facet_folder);
     r.serialization_facet_folder(serialization_facet_folder);
     r.test_data_facet_folder(test_data_facet_folder);
+    r.odb_facet_folder(odb_facet_folder);
     return r;
 }
 

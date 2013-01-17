@@ -83,5 +83,5 @@ add_custom_target(codegen_${target}
     --ignore-files-matching-regex .*/test/.*
     --ignore-files-matching-regex .*/spec/.*
     -v -d -p dogen)
-add_dependencies(codegen_${target} driver)
+# add_dependencies(codegen_${target} driver)
 add_dependencies(codegen codegen_${target})

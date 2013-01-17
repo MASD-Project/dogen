@@ -40,6 +40,7 @@
 #include "dogen/generator/backends/cpp/formatters/cpp_registrar_implementation.hpp"
 #include "dogen/generator/backends/cpp/formatters/cpp_forward_declarations_header.hpp"
 #include "dogen/generator/backends/cpp/formatters/cpp_null_formatter.hpp"
+#include "dogen/generator/backends/cpp/formatters/cpp_odb_header.hpp"
 #include "dogen/generator/backends/cpp/formatters/factory.hpp"
 
 using namespace dogen::utility::log;
@@ -113,6 +114,9 @@ factory::create_main_formatter(std::ostream& s, config::cpp_facet_types ft,
         else
             return generator_implementation::create(s);
         break;
+    case cpp_facet_types::odb:
+        if (flt == cpp_file_types::header)
+            return odb_header::create(s);
 
     default: {
         std::ostringstream s;

@@ -60,6 +60,7 @@ const std::string io_facet_type("io");
 const std::string hash_facet_type("hash");
 const std::string serialization_facet_type("serialization");
 const std::string test_data_facet_type("test_data");
+const std::string odb_facet_type("odb");
 
 const std::string invalid_archive_type("Invalid archive type");
 const std::string xml_archive_type("xml");
@@ -90,6 +91,7 @@ const std::string cpp_io_facet_folder_arg("cpp-io-facet-folder");
 const std::string cpp_serialization_facet_folder_arg(
     "cpp-serialization-facet-folder");
 const std::string cpp_test_data_facet_folder_arg("cpp-test-data-facet-folder");
+const std::string cpp_odb_facet_folder_arg("cpp-odb-facet-folder");
 const std::string cpp_disable_xml_serialization_arg(
     "cpp-disable-xml-serialization");
 const std::string cpp_use_integrated_io_arg("cpp-use-integrated-io");
@@ -233,7 +235,7 @@ program_options_parser::cpp_options_factory() const {
             value<std::vector<std::string> >(),
             "If set, only domain and enabled facets are generated. "
             "By default all facets are generated. Valid values: "
-            "[io | hash | serialization | test_data].")
+            "[io | hash | serialization | test_data | odb].")
         ("cpp-header-extension",
             value<std::string>()->default_value(".hpp"),
             "Extension for C++ header files, including leading '.'.")
@@ -260,6 +262,9 @@ program_options_parser::cpp_options_factory() const {
         ("cpp-test-data-facet-folder",
             value<std::string>()->default_value("test_data"),
             "Name for the test data facet folder.")
+        ("cpp-odb-facet-folder",
+            value<std::string>()->default_value("odb"),
+            "Name for the ODB facet folder.")
         ("cpp-disable-xml-serialization", "Do not add NVP macros to boost"
             " serialization code. This is used to support boost XML archives.")
         ("cpp-use-integrated-io", "Add inserters directly to domain facet "
@@ -382,6 +387,7 @@ program_options_parser::parse_facet_types(const std::string& s) {
     if (s == serialization_facet_type) return cpp_facet_types::serialization;
     if (s == io_facet_type) return cpp_facet_types::io;
     if (s == test_data_facet_type) return cpp_facet_types::test_data;
+    if (s == odb_facet_type) return cpp_facet_types::odb;
 
     using utility::exception::invalid_enum_value;
     BOOST_LOG_SEV(lg, error) << invalid_facet_type << s;
@@ -444,6 +450,7 @@ transform_cpp_settings(const boost::program_options::variables_map& vm) const {
         vm[cpp_serialization_facet_folder_arg].as<std::string>());
     r.test_data_facet_folder(
         vm[cpp_test_data_facet_folder_arg].as<std::string>());
+    r.odb_facet_folder(vm[cpp_odb_facet_folder_arg].as<std::string>());
 
     using config::cpp_facet_types;
     std::set<cpp_facet_types> set;
@@ -465,7 +472,8 @@ transform_cpp_settings(const boost::program_options::variables_map& vm) const {
             const auto f(r.enabled_facets());
             const bool has_io_facet(f.find(cpp_facet_types::io) != f.end());
             if (has_io_facet) {
-                BOOST_LOG_SEV(lg, error) << integrated_io_incompatible_with_io_facet;
+                BOOST_LOG_SEV(lg, error)
+                    << integrated_io_incompatible_with_io_facet;
                 BOOST_THROW_EXCEPTION(parser_validation_error(
                         integrated_io_incompatible_with_io_facet));
             }
@@ -475,6 +483,7 @@ transform_cpp_settings(const boost::program_options::variables_map& vm) const {
         set.insert(cpp_facet_types::hash);
         set.insert(cpp_facet_types::serialization);
         set.insert(cpp_facet_types::test_data);
+        set.insert(cpp_facet_types::odb);
         if (!r.use_integrated_io())
             set.insert(cpp_facet_types::io);
     }

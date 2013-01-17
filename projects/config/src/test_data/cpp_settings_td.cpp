@@ -82,9 +82,10 @@ populate(const unsigned int position, result_type& v) {
     v.io_facet_folder(create_std_string(position + 16));
     v.serialization_facet_folder(create_std_string(position + 17));
     v.test_data_facet_folder(create_std_string(position + 18));
-    v.disable_xml_serialization(create_bool(position + 19));
-    v.use_integrated_io(create_bool(position + 20));
-    v.disable_versioning(create_bool(position + 21));
+    v.odb_facet_folder(create_std_string(position + 19));
+    v.disable_xml_serialization(create_bool(position + 20));
+    v.use_integrated_io(create_bool(position + 21));
+    v.disable_versioning(create_bool(position + 22));
 }
 
 cpp_settings_generator::result_type

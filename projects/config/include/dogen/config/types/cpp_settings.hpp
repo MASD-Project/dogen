@@ -71,6 +71,7 @@ public:
         const std::string& io_facet_folder,
         const std::string& serialization_facet_folder,
         const std::string& test_data_facet_folder,
+        const std::string& odb_facet_folder,
         const bool disable_xml_serialization,
         const bool use_integrated_io,
         const bool disable_versioning);
@@ -274,6 +275,11 @@ public:
     void test_data_facet_folder(const std::string&& v);
     /**@}*/
 
+    const std::string& odb_facet_folder() const;
+    std::string& odb_facet_folder();
+    void odb_facet_folder(const std::string& v);
+    void odb_facet_folder(const std::string&& v);
+
     /*
      * @brief Do not use NVP macros in serialisation code.
      *
@@ -331,6 +337,7 @@ private:
     std::string io_facet_folder_;
     std::string serialization_facet_folder_;
     std::string test_data_facet_folder_;
+    std::string odb_facet_folder_;
     bool disable_xml_serialization_;
     bool use_integrated_io_;
     bool disable_versioning_;

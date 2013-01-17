@@ -484,7 +484,7 @@ BOOST_AUTO_TEST_CASE(not_supplying_cpp_arguments_results_in_expected_settings) {
     BOOST_CHECK(!cs.serialization_facet_folder().empty());
 
     const auto facets(cs.enabled_facets());
-    BOOST_REQUIRE(facets.size() == 5);
+    BOOST_REQUIRE(facets.size() == 6);
 
     using dogen::config::cpp_facet_types;
     BOOST_CHECK(facets.find(cpp_facet_types::types) != facets.end());
@@ -492,6 +492,7 @@ BOOST_AUTO_TEST_CASE(not_supplying_cpp_arguments_results_in_expected_settings) {
     BOOST_CHECK(facets.find(cpp_facet_types::io) != facets.end());
     BOOST_CHECK(facets.find(cpp_facet_types::serialization) != facets.end());
     BOOST_CHECK(facets.find(cpp_facet_types::test_data) != facets.end());
+    BOOST_CHECK(facets.find(cpp_facet_types::odb) != facets.end());
 }
 
 BOOST_AUTO_TEST_CASE(supplying_an_invalid_argument_throws) {

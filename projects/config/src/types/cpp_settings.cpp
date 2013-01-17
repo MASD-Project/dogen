@@ -56,6 +56,7 @@ cpp_settings::cpp_settings(cpp_settings&& rhs)
       io_facet_folder_(std::move(rhs.io_facet_folder_)),
       serialization_facet_folder_(std::move(rhs.serialization_facet_folder_)),
       test_data_facet_folder_(std::move(rhs.test_data_facet_folder_)),
+      odb_facet_folder_(std::move(rhs.odb_facet_folder_)),
       disable_xml_serialization_(std::move(rhs.disable_xml_serialization_)),
       use_integrated_io_(std::move(rhs.use_integrated_io_)),
       disable_versioning_(std::move(rhs.disable_versioning_)) { }
@@ -80,6 +81,7 @@ cpp_settings::cpp_settings(
     const std::string& io_facet_folder,
     const std::string& serialization_facet_folder,
     const std::string& test_data_facet_folder,
+    const std::string& odb_facet_folder,
     const bool disable_xml_serialization,
     const bool use_integrated_io,
     const bool disable_versioning)
@@ -102,6 +104,7 @@ cpp_settings::cpp_settings(
       io_facet_folder_(io_facet_folder),
       serialization_facet_folder_(serialization_facet_folder),
       test_data_facet_folder_(test_data_facet_folder),
+      odb_facet_folder_(odb_facet_folder),
       disable_xml_serialization_(disable_xml_serialization),
       use_integrated_io_(use_integrated_io),
       disable_versioning_(disable_versioning) { }
@@ -127,6 +130,7 @@ void cpp_settings::swap(cpp_settings& other) noexcept {
     swap(io_facet_folder_, other.io_facet_folder_);
     swap(serialization_facet_folder_, other.serialization_facet_folder_);
     swap(test_data_facet_folder_, other.test_data_facet_folder_);
+    swap(odb_facet_folder_, other.odb_facet_folder_);
     swap(disable_xml_serialization_, other.disable_xml_serialization_);
     swap(use_integrated_io_, other.use_integrated_io_);
     swap(disable_versioning_, other.disable_versioning_);
@@ -152,6 +156,7 @@ bool cpp_settings::operator==(const cpp_settings& rhs) const {
         io_facet_folder_ == rhs.io_facet_folder_ &&
         serialization_facet_folder_ == rhs.serialization_facet_folder_ &&
         test_data_facet_folder_ == rhs.test_data_facet_folder_ &&
+        odb_facet_folder_ == rhs.odb_facet_folder_ &&
         disable_xml_serialization_ == rhs.disable_xml_serialization_ &&
         use_integrated_io_ == rhs.use_integrated_io_ &&
         disable_versioning_ == rhs.disable_versioning_;
@@ -401,6 +406,22 @@ void cpp_settings::test_data_facet_folder(const std::string& v) {
 
 void cpp_settings::test_data_facet_folder(const std::string&& v) {
     test_data_facet_folder_ = std::move(v);
+}
+
+const std::string& cpp_settings::odb_facet_folder() const {
+    return odb_facet_folder_;
+}
+
+std::string& cpp_settings::odb_facet_folder() {
+    return odb_facet_folder_;
+}
+
+void cpp_settings::odb_facet_folder(const std::string& v) {
+    odb_facet_folder_ = v;
+}
+
+void cpp_settings::odb_facet_folder(const std::string&& v) {
+    odb_facet_folder_ = std::move(v);
 }
 
 bool cpp_settings::disable_xml_serialization() const {
