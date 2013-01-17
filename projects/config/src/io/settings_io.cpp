@@ -23,7 +23,6 @@
 #include "dogen/config/io/modeling_settings_io.hpp"
 #include "dogen/config/io/output_settings_io.hpp"
 #include "dogen/config/io/settings_io.hpp"
-#include "dogen/config/io/sql_settings_io.hpp"
 #include "dogen/config/io/troubleshooting_settings_io.hpp"
 
 namespace dogen {
@@ -34,7 +33,6 @@ std::ostream& operator<<(std::ostream& s, const settings& v) {
       << "\"__type__\": " << "\"dogen::config::settings\"" << ", "
       << "\"modeling\": " << v.modeling() << ", "
       << "\"cpp\": " << v.cpp() << ", "
-      << "\"sql\": " << v.sql() << ", "
       << "\"troubleshooting\": " << v.troubleshooting() << ", "
       << "\"output\": " << v.output()
       << " }";

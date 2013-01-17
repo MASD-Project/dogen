@@ -73,7 +73,6 @@ private:
     options_description modeling_options_factory() const;
     options_description output_options_factory() const;
     options_description cpp_options_factory() const;
-    options_description sql_options_factory() const;
     options_description options_factory() const;
 
 private:
@@ -88,7 +87,6 @@ private:
     config::modeling_settings
     transform_modeling_settings(const variables_map& vm) const;
     config::cpp_settings transform_cpp_settings(const variables_map& vm) const;
-    config::sql_settings transform_sql_settings(const variables_map& vm) const;
     config::troubleshooting_settings
     transform_troubleshooting_settings(const variables_map& vm) const;
     config::output_settings transform_output_settings(const variables_map& vm) const;

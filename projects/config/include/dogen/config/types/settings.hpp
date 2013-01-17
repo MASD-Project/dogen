@@ -30,7 +30,6 @@
 #include "dogen/config/types/cpp_settings.hpp"
 #include "dogen/config/types/modeling_settings.hpp"
 #include "dogen/config/types/output_settings.hpp"
-#include "dogen/config/types/sql_settings.hpp"
 #include "dogen/config/types/troubleshooting_settings.hpp"
 
 namespace dogen {
@@ -47,7 +46,6 @@ public:
     settings(
         const dogen::config::modeling_settings& modeling,
         const dogen::config::cpp_settings& cpp,
-        const dogen::config::sql_settings& sql,
         const dogen::config::troubleshooting_settings& troubleshooting,
         const dogen::config::output_settings& output);
 
@@ -77,16 +75,6 @@ public:
     dogen::config::cpp_settings& cpp();
     void cpp(const dogen::config::cpp_settings& v);
     void cpp(const dogen::config::cpp_settings&& v);
-    /**@}*/
-
-    /*
-     * @brief All settings related to SQL.
-     */
-    /**@{*/
-    const dogen::config::sql_settings& sql() const;
-    dogen::config::sql_settings& sql();
-    void sql(const dogen::config::sql_settings& v);
-    void sql(const dogen::config::sql_settings&& v);
     /**@}*/
 
     /*
@@ -122,7 +110,6 @@ public:
 private:
     dogen::config::modeling_settings modeling_;
     dogen::config::cpp_settings cpp_;
-    dogen::config::sql_settings sql_;
     dogen::config::troubleshooting_settings troubleshooting_;
     dogen::config::output_settings output_;
 };

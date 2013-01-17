@@ -26,6 +26,5 @@
 #include "dogen/config/types/output_settings.hpp"
 #include "dogen/config/types/reference.hpp"
 #include "dogen/config/types/settings.hpp"
-#include "dogen/config/types/sql_settings.hpp"
 #include "dogen/config/types/troubleshooting_settings.hpp"
 #include "dogen/config/types/validator.hpp"

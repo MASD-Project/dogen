@@ -95,9 +95,6 @@ const std::string cpp_disable_xml_serialization_arg(
 const std::string cpp_use_integrated_io_arg("cpp-use-integrated-io");
 const std::string cpp_disable_versioning_arg("cpp-disable-versioning");
 
-const std::string sql_disable_backend_arg("sql-disable-backend");
-const std::string sql_create_schema_arg("sql-create-schema");
-
 const std::string target_arg("target");
 const std::string external_package_path_arg("external-package-path");
 const std::string reference_arg("reference");
@@ -276,22 +273,6 @@ program_options_parser::cpp_options_factory() const {
 }
 
 boost::program_options::options_description
-program_options_parser::sql_options_factory() const {
-    using boost::program_options::value;
-    boost::program_options::options_description r("SQL backend options");
-    r.add_options()
-        ("sql-disable-backend", "Do not generate SQL code. "
-            "Incompatible with disabling versioning in C++.")
-        ("sql-create-schema", "Generate DDL for creating a schema")
-        ("sql-schema-name",
-            value<std::string>(),
-            "Which SQL schema to place all SQL code in."
-            " Defaults to the top-level package name if external package path "
-            " is supplied; if not, it defaults to the model name.");
-    return r;
-}
-
-boost::program_options::options_description
 program_options_parser::options_factory() const {
     boost::program_options::options_description r;
     r.add(general_options_factory());
@@ -299,7 +280,6 @@ program_options_parser::options_factory() const {
     r.add(modeling_options_factory());
     r.add(output_options_factory());
     r.add(cpp_options_factory());
-    r.add(sql_options_factory());
     return r;
 }
 
@@ -503,17 +483,6 @@ transform_cpp_settings(const boost::program_options::variables_map& vm) const {
     return r;
 }
 
-config::sql_settings program_options_parser::
-transform_sql_settings(const boost::program_options::variables_map& vm) const {
-    config::sql_settings r;
-
-    r.verbose(verbose_);
-    r.disable_backend(vm.count(sql_disable_backend_arg));
-    r.create_schema(vm.count(sql_create_schema_arg));
-
-    return r;
-}
-
 config::modeling_settings
 program_options_parser::transform_modeling_settings(
     const boost::program_options::variables_map& vm) const {
@@ -621,7 +590,6 @@ boost::optional<config::settings> program_options_parser::parse() {
 
     settings_.modeling(transform_modeling_settings(vm));
     settings_.cpp(transform_cpp_settings(vm));
-    settings_.sql(transform_sql_settings(vm));
     settings_.troubleshooting(transform_troubleshooting_settings(vm));
     settings_.output(transform_output_settings(vm));
 

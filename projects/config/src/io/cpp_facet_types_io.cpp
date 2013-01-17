@@ -48,6 +48,9 @@ std::ostream& operator<<(std::ostream& s, const cpp_facet_types& v) {
     case cpp_facet_types::test_data:
         attr = "\"test_data\"";
         break;
+    case cpp_facet_types::odb:
+        attr = "\"odb\"";
+        break;
     default:
         throw std::invalid_argument("Invalid value for cpp_facet_types");
     }

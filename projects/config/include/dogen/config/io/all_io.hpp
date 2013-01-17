@@ -25,5 +25,4 @@
 #include "dogen/config/io/output_settings_io.hpp"
 #include "dogen/config/io/reference_io.hpp"
 #include "dogen/config/io/settings_io.hpp"
-#include "dogen/config/io/sql_settings_io.hpp"
 #include "dogen/config/io/troubleshooting_settings_io.hpp"

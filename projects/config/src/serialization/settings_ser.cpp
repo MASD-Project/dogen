@@ -31,7 +31,6 @@
 #include "dogen/config/serialization/modeling_settings_ser.hpp"
 #include "dogen/config/serialization/output_settings_ser.hpp"
 #include "dogen/config/serialization/settings_ser.hpp"
-#include "dogen/config/serialization/sql_settings_ser.hpp"
 #include "dogen/config/serialization/troubleshooting_settings_ser.hpp"
 
 #ifdef __linux__
@@ -48,7 +47,6 @@ void save(Archive& ar,
     const unsigned int /*version*/) {
     ar << make_nvp("modeling", v.modeling_);
     ar << make_nvp("cpp", v.cpp_);
-    ar << make_nvp("sql", v.sql_);
     ar << make_nvp("troubleshooting", v.troubleshooting_);
     ar << make_nvp("output", v.output_);
 }
@@ -59,7 +57,6 @@ void load(Archive& ar,
     const unsigned int /*version*/) {
     ar >> make_nvp("modeling", v.modeling_);
     ar >> make_nvp("cpp", v.cpp_);
-    ar >> make_nvp("sql", v.sql_);
     ar >> make_nvp("troubleshooting", v.troubleshooting_);
     ar >> make_nvp("output", v.output_);
 }

@@ -25,5 +25,4 @@
 #include "dogen/config/hash/output_settings_hash.hpp"
 #include "dogen/config/hash/reference_hash.hpp"
 #include "dogen/config/hash/settings_hash.hpp"
-#include "dogen/config/hash/sql_settings_hash.hpp"
 #include "dogen/config/hash/troubleshooting_settings_hash.hpp"

@@ -22,7 +22,6 @@
 #include "dogen/config/hash/modeling_settings_hash.hpp"
 #include "dogen/config/hash/output_settings_hash.hpp"
 #include "dogen/config/hash/settings_hash.hpp"
-#include "dogen/config/hash/sql_settings_hash.hpp"
 #include "dogen/config/hash/troubleshooting_settings_hash.hpp"
 
 namespace {
@@ -44,7 +43,6 @@ std::size_t settings_hasher::hash(const settings&v) {
 
     combine(seed, v.modeling());
     combine(seed, v.cpp());
-    combine(seed, v.sql());
     combine(seed, v.troubleshooting());
     combine(seed, v.output());
 

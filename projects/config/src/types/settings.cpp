@@ -26,12 +26,10 @@ namespace config {
 settings::settings(
     const dogen::config::modeling_settings& modeling,
     const dogen::config::cpp_settings& cpp,
-    const dogen::config::sql_settings& sql,
     const dogen::config::troubleshooting_settings& troubleshooting,
     const dogen::config::output_settings& output)
     : modeling_(modeling),
       cpp_(cpp),
-      sql_(sql),
       troubleshooting_(troubleshooting),
       output_(output) { }
 
@@ -39,7 +37,6 @@ void settings::swap(settings& other) noexcept {
     using std::swap;
     swap(modeling_, other.modeling_);
     swap(cpp_, other.cpp_);
-    swap(sql_, other.sql_);
     swap(troubleshooting_, other.troubleshooting_);
     swap(output_, other.output_);
 }
@@ -47,7 +44,6 @@ void settings::swap(settings& other) noexcept {
 bool settings::operator==(const settings& rhs) const {
     return modeling_ == rhs.modeling_ &&
         cpp_ == rhs.cpp_ &&
-        sql_ == rhs.sql_ &&
         troubleshooting_ == rhs.troubleshooting_ &&
         output_ == rhs.output_;
 }
@@ -88,22 +84,6 @@ void settings::cpp(const dogen::config::cpp_settings& v) {
 
 void settings::cpp(const dogen::config::cpp_settings&& v) {
     cpp_ = std::move(v);
-}
-
-const dogen::config::sql_settings& settings::sql() const {
-    return sql_;
-}
-
-dogen::config::sql_settings& settings::sql() {
-    return sql_;
-}
-
-void settings::sql(const dogen::config::sql_settings& v) {
-    sql_ = v;
-}
-
-void settings::sql(const dogen::config::sql_settings&& v) {
-    sql_ = std::move(v);
 }
 
 const dogen::config::troubleshooting_settings& settings::troubleshooting() const {

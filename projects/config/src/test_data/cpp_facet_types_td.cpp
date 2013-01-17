@@ -26,7 +26,7 @@ namespace config {
 cpp_facet_types_generator::cpp_facet_types_generator() : position_(0) { }
 void cpp_facet_types_generator::
 populate(const unsigned int position, result_type& v) {
-    v = static_cast<cpp_facet_types>(position % 6);
+    v = static_cast<cpp_facet_types>(position % 7);
 }
 
 cpp_facet_types_generator::result_type

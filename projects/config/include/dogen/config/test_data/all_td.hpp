@@ -25,5 +25,4 @@
 #include "dogen/config/test_data/output_settings_td.hpp"
 #include "dogen/config/test_data/reference_td.hpp"
 #include "dogen/config/test_data/settings_td.hpp"
-#include "dogen/config/test_data/sql_settings_td.hpp"
 #include "dogen/config/test_data/troubleshooting_settings_td.hpp"

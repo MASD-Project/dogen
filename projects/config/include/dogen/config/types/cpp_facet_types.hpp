@@ -38,7 +38,8 @@ enum class cpp_facet_types : unsigned int {
     hash = 2, ///< Hashing for the domain type
     serialization = 3, ///< Serialisation for the domain type
     io = 4, ///< IO (streaming) for the domain type
-    test_data = 5 ///< Test data generators for all domain types
+    test_data = 5, ///< Test data generators for all domain types
+    odb = 6
 };
 
 } }

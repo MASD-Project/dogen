@@ -22,7 +22,6 @@
 #include "dogen/config/test_data/modeling_settings_td.hpp"
 #include "dogen/config/test_data/output_settings_td.hpp"
 #include "dogen/config/test_data/settings_td.hpp"
-#include "dogen/config/test_data/sql_settings_td.hpp"
 #include "dogen/config/test_data/troubleshooting_settings_td.hpp"
 
 namespace {
@@ -35,11 +34,6 @@ create_dogen_config_modeling_settings(const unsigned int position) {
 dogen::config::cpp_settings
 create_dogen_config_cpp_settings(const unsigned int position) {
     return dogen::config::cpp_settings_generator::create(position);
-}
-
-dogen::config::sql_settings
-create_dogen_config_sql_settings(const unsigned int position) {
-    return dogen::config::sql_settings_generator::create(position);
 }
 
 dogen::config::troubleshooting_settings
@@ -63,9 +57,8 @@ void settings_generator::
 populate(const unsigned int position, result_type& v) {
     v.modeling(create_dogen_config_modeling_settings(position + 0));
     v.cpp(create_dogen_config_cpp_settings(position + 1));
-    v.sql(create_dogen_config_sql_settings(position + 2));
-    v.troubleshooting(create_dogen_config_troubleshooting_settings(position + 3));
-    v.output(create_dogen_config_output_settings(position + 4));
+    v.troubleshooting(create_dogen_config_troubleshooting_settings(position + 2));
+    v.output(create_dogen_config_output_settings(position + 3));
 }
 
 settings_generator::result_type

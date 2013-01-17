@@ -122,9 +122,6 @@ const std::string cpp_use_integrated_io_arg(
     "--cpp-use-integrated-io");
 const std::string cpp_disable_versioning_arg("--cpp-disable-versioning");
 
-const std::string sql_disable_backend_arg("--sql-disable-backend");
-const std::string sql_create_schema_arg("--sql-create-schema");
-
 const std::string output_to_stdout_arg("--output-to-stdout");
 const std::string output_to_file_arg("--output-to-file");
 const std::string delete_extra_files_arg("--delete-extra-files");
@@ -606,36 +603,6 @@ BOOST_AUTO_TEST_CASE(supplying_include_and_no_source_throws) {
         cpp_include_arg, cpp_include_value_arg
     };
     check_exception(o, source_include_error);
-}
-
-BOOST_AUTO_TEST_CASE(supplying_sql_arguments_results_in_expected_settings) {
-    SETUP_TEST_LOG_SOURCE("supplying_sql_arguments_results_in_expected_settings");
-    const std::vector<std::string> o = {
-        target_arg, target_value_arg,
-        sql_disable_backend_arg,
-        sql_create_schema_arg
-    };
-
-    const auto s(check_valid_arguments(o));
-    BOOST_LOG_SEV(lg, debug) << "settings: " << s;
-
-    const auto ss(s.sql());
-    BOOST_CHECK(ss.disable_backend());
-    BOOST_CHECK(ss.create_schema());
-}
-
-BOOST_AUTO_TEST_CASE(not_supplying_sql_arguments_results_in_expected_settings) {
-    SETUP_TEST_LOG_SOURCE("not_supplying_sql_arguments_results_in_expected_settings");
-    const std::vector<std::string> o = {
-        target_arg, target_value_arg
-    };
-
-    const auto s(check_valid_arguments(o));
-    BOOST_LOG_SEV(lg, debug) << "settings: " << s;
-
-    const auto ss(s.sql());
-    BOOST_CHECK(!ss.disable_backend());
-    BOOST_CHECK(!ss.create_schema());
 }
 
 BOOST_AUTO_TEST_CASE(not_supplying_troubleshooting_options_results_in_expected_settings) {
