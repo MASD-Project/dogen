@@ -43,8 +43,10 @@ namespace {
 
 auto lg(logger_factory("program_options_parser"));
 
-const std::string at_least_one_argument("Expected at least one argument for reference");
-const std::string at_most_two_arguments("Expected only at most two arguments for reference");
+const std::string at_least_one_argument(
+    "Expected at least one argument for reference");
+const std::string at_most_two_arguments(
+    "Expected only at most two arguments for reference");
 const std::string empty;
 const std::string help_arg("help");
 const std::string version_arg("version");
@@ -105,7 +107,8 @@ const std::string disable_model_package("disable-model-package");
 const std::string output_to_stdout_arg("output-to-stdout");
 const std::string output_to_file_arg("output-to-file");
 const std::string delete_extra_files_arg("delete-extra-files");
-const std::string ignore_files_matching_regex_arg("ignore-files-matching-regex");
+const std::string ignore_files_matching_regex_arg(
+    "ignore-files-matching-regex");
 const std::string force_write_arg("force-write");
 
 const std::string integrated_io_incompatible_with_io_facet(
@@ -269,8 +272,6 @@ program_options_parser::cpp_options_factory() const {
             " serialization code. This is used to support boost XML archives.")
         ("cpp-use-integrated-io", "Add inserters directly to domain facet "
             "rather than using IO facet.")
-        ("cpp-use-const-ref",
-            "Use constant references for complex types. **NOT IMPLEMENTED**")
         ("cpp-disable-versioning",
             "Do not generate entity versioning code for domain types.");
 
