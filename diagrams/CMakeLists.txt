@@ -83,5 +83,26 @@ add_custom_target(codegen_${target}
     --ignore-files-matching-regex .*/test/.*
     --ignore-files-matching-regex .*/spec/.*
     -v -d -p dogen)
-# add_dependencies(codegen_${target} driver)
+add_dependencies(codegen_${target} driver)
 add_dependencies(codegen codegen_${target})
+
+set(target cpp)
+add_custom_target(codegen_${target}
+    COMMENT "Generating C++ model" VERBATIM
+    WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
+    COMMAND ${dogen_binary}
+    --target ${CMAKE_SOURCE_DIR}/diagrams/${target}/${target}.dia
+    --reference ${CMAKE_SOURCE_DIR}/diagrams/config/config.dia,dogen
+    --reference ${CMAKE_SOURCE_DIR}/diagrams/dia/dia.dia,dogen
+    --reference ${CMAKE_SOURCE_DIR}/diagrams/sml/sml.dia,dogen
+    --cpp-project-dir ${CMAKE_SOURCE_DIR}/projects/
+    --cpp-enable-facet domain
+    --cpp-enable-facet io
+    --cpp-enable-facet hash
+    --cpp-enable-facet serialization
+    --cpp-enable-facet test_data
+    --ignore-files-matching-regex .*/test/.*
+    --ignore-files-matching-regex .*/spec/.*
+    -v -d -p dogen)
+add_dependencies(codegen_${target} driver)
+# add_dependencies(codegen codegen_${target})
