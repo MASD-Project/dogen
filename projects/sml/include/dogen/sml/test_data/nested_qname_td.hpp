@@ -18,25 +18,35 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_SML_SERIALIZATION_NESTED_QUALIFIED_NAME_SER_HPP
-#define DOGEN_SML_SERIALIZATION_NESTED_QUALIFIED_NAME_SER_HPP
+#ifndef DOGEN_SML_TEST_DATA_NESTED_QNAME_TD_HPP
+#define DOGEN_SML_TEST_DATA_NESTED_QNAME_TD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <boost/serialization/split_free.hpp>
-#include "dogen/sml/types/nested_qualified_name.hpp"
+#include "dogen/sml/types/nested_qname.hpp"
 
-BOOST_SERIALIZATION_SPLIT_FREE(dogen::sml::nested_qualified_name)
-namespace boost {
-namespace serialization {
+namespace dogen {
+namespace sml {
 
-template<typename Archive>
-void save(Archive& ar, const dogen::sml::nested_qualified_name& v, unsigned int version);
+class nested_qname_generator {
+public:
+    nested_qname_generator();
 
-template<typename Archive>
-void load(Archive& ar, dogen::sml::nested_qualified_name& v, unsigned int version);
+public:
+    typedef dogen::sml::nested_qname result_type;
+
+public:
+    static void populate(const unsigned int position, result_type& v);
+    static result_type create(const unsigned int position);
+    result_type operator()();
+
+private:
+    unsigned int position_;
+public:
+    static result_type* create_ptr(const unsigned int position);
+};
 
 } }
 

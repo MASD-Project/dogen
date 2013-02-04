@@ -25,7 +25,7 @@
 #include "dogen/sml/serialization/generation_types_ser.hpp"
 #include "dogen/sml/serialization/meta_types_ser.hpp"
 #include "dogen/sml/serialization/model_ser.hpp"
-#include "dogen/sml/serialization/nested_qualified_name_ser.hpp"
+#include "dogen/sml/serialization/nested_qname_ser.hpp"
 #include "dogen/sml/serialization/node_ser.hpp"
 #include "dogen/sml/serialization/package_ser.hpp"
 #include "dogen/sml/serialization/pod_ser.hpp"

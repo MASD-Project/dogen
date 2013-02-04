@@ -18,35 +18,39 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_SML_HASH_NESTED_QUALIFIED_NAME_HASH_HPP
-#define DOGEN_SML_HASH_NESTED_QUALIFIED_NAME_HASH_HPP
+#include "dogen/sml/hash/nested_qname_hash.hpp"
+#include "dogen/sml/hash/qname_hash.hpp"
 
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
+namespace {
 
-#include <functional>
-#include "dogen/sml/types/nested_qualified_name.hpp"
+template <typename HashableType>
+inline void combine(std::size_t& seed, const HashableType& value)
+{
+    std::hash<HashableType> hasher;
+    seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
+}
+
+inline std::size_t hash_std_list_dogen_sml_nested_qname(const std::list<dogen::sml::nested_qname>& v){
+    std::size_t seed(0);
+    for (const auto i : v) {
+        combine(seed, i);
+    }
+    return seed;
+}
+
+}
 
 namespace dogen {
 namespace sml {
 
-class nested_qualified_name_hasher {
-public:
-    static std::size_t hash(const nested_qualified_name& v);
-};
+std::size_t nested_qname_hasher::hash(const nested_qname&v) {
+    std::size_t seed(0);
+
+    combine(seed, v.type());
+    combine(seed, hash_std_list_dogen_sml_nested_qname(v.children()));
+    combine(seed, v.is_pointer());
+
+    return seed;
+}
 
 } }
-
-namespace std {
-
-template<>
-class hash<dogen::sml::nested_qualified_name> {
-public:
-    size_t operator()(const dogen::sml::nested_qualified_name& v) const {
-        return dogen::sml::nested_qualified_name_hasher::hash(v);
-    }
-};
-
-}
-#endif

@@ -25,7 +25,7 @@ namespace sml {
 
 property::property(
     const std::string& name,
-    const dogen::sml::nested_qualified_name& type_name,
+    const dogen::sml::nested_qname& type_name,
     const std::string& default_value,
     const std::string& documentation)
     : name_(name),
@@ -70,19 +70,19 @@ void property::name(const std::string&& v) {
     name_ = std::move(v);
 }
 
-const dogen::sml::nested_qualified_name& property::type_name() const {
+const dogen::sml::nested_qname& property::type_name() const {
     return type_name_;
 }
 
-dogen::sml::nested_qualified_name& property::type_name() {
+dogen::sml::nested_qname& property::type_name() {
     return type_name_;
 }
 
-void property::type_name(const dogen::sml::nested_qualified_name& v) {
+void property::type_name(const dogen::sml::nested_qname& v) {
     type_name_ = v;
 }
 
-void property::type_name(const dogen::sml::nested_qualified_name&& v) {
+void property::type_name(const dogen::sml::nested_qname&& v) {
     type_name_ = std::move(v);
 }
 

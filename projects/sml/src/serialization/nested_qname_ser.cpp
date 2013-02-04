@@ -28,7 +28,7 @@
 #include <boost/archive/xml_oarchive.hpp>
 #include <boost/serialization/list.hpp>
 #include <boost/serialization/nvp.hpp>
-#include "dogen/sml/serialization/nested_qualified_name_ser.hpp"
+#include "dogen/sml/serialization/nested_qname_ser.hpp"
 #include "dogen/sml/serialization/qname_ser.hpp"
 
 #ifdef __linux__
@@ -41,7 +41,7 @@ namespace serialization {
 
 template<typename Archive>
 void save(Archive& ar,
-    const dogen::sml::nested_qualified_name& v,
+    const dogen::sml::nested_qname& v,
     const unsigned int /*version*/) {
     ar << make_nvp("type", v.type_);
     ar << make_nvp("children", v.children_);
@@ -50,7 +50,7 @@ void save(Archive& ar,
 
 template<typename Archive>
 void load(Archive& ar,
-    dogen::sml::nested_qualified_name& v,
+    dogen::sml::nested_qname& v,
     const unsigned int /*version*/) {
     ar >> make_nvp("type", v.type_);
     ar >> make_nvp("children", v.children_);
@@ -62,21 +62,21 @@ void load(Archive& ar,
 namespace boost {
 namespace serialization {
 
-template void save(archive::polymorphic_oarchive& ar, const dogen::sml::nested_qualified_name& v, unsigned int version);
-template void load(archive::polymorphic_iarchive& ar, dogen::sml::nested_qualified_name& v, unsigned int version);
+template void save(archive::polymorphic_oarchive& ar, const dogen::sml::nested_qname& v, unsigned int version);
+template void load(archive::polymorphic_iarchive& ar, dogen::sml::nested_qname& v, unsigned int version);
 
-template void save(archive::text_oarchive& ar, const dogen::sml::nested_qualified_name& v, unsigned int version);
-template void load(archive::text_iarchive& ar, dogen::sml::nested_qualified_name& v, unsigned int version);
+template void save(archive::text_oarchive& ar, const dogen::sml::nested_qname& v, unsigned int version);
+template void load(archive::text_iarchive& ar, dogen::sml::nested_qname& v, unsigned int version);
 
-template void save(archive::binary_oarchive& ar, const dogen::sml::nested_qualified_name& v, unsigned int version);
-template void load(archive::binary_iarchive& ar, dogen::sml::nested_qualified_name& v, unsigned int version);
+template void save(archive::binary_oarchive& ar, const dogen::sml::nested_qname& v, unsigned int version);
+template void load(archive::binary_iarchive& ar, dogen::sml::nested_qname& v, unsigned int version);
 
-template void save(archive::xml_oarchive& ar, const dogen::sml::nested_qualified_name& v, unsigned int version);
-template void load(archive::xml_iarchive& ar, dogen::sml::nested_qualified_name& v, unsigned int version);
+template void save(archive::xml_oarchive& ar, const dogen::sml::nested_qname& v, unsigned int version);
+template void load(archive::xml_iarchive& ar, dogen::sml::nested_qname& v, unsigned int version);
 
 #ifdef __linux__
-template void save(eos::portable_oarchive& ar, const dogen::sml::nested_qualified_name& v, unsigned int version);
-template void load(eos::portable_iarchive& ar, dogen::sml::nested_qualified_name& v, unsigned int version);
+template void save(eos::portable_oarchive& ar, const dogen::sml::nested_qname& v, unsigned int version);
+template void load(eos::portable_iarchive& ar, dogen::sml::nested_qname& v, unsigned int version);
 #endif
 
 } }

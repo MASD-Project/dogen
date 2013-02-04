@@ -29,7 +29,7 @@
 #include "dogen/sml/types/merging_error.hpp"
 #include "dogen/sml/types/meta_types.hpp"
 #include "dogen/sml/types/model.hpp"
-#include "dogen/sml/types/nested_qualified_name.hpp"
+#include "dogen/sml/types/nested_qname.hpp"
 #include "dogen/sml/types/nested_qualified_name_builder.hpp"
 #include "dogen/sml/types/node.hpp"
 #include "dogen/sml/types/package.hpp"

@@ -28,7 +28,7 @@
 #include <algorithm>
 #include <string>
 #include "dogen/sml/serialization/property_fwd_ser.hpp"
-#include "dogen/sml/types/nested_qualified_name.hpp"
+#include "dogen/sml/types/nested_qname.hpp"
 
 namespace dogen {
 namespace sml {
@@ -46,7 +46,7 @@ public:
 public:
     property(
         const std::string& name,
-        const dogen::sml::nested_qualified_name& type_name,
+        const dogen::sml::nested_qname& type_name,
         const std::string& default_value,
         const std::string& documentation);
 
@@ -74,10 +74,10 @@ public:
      * @brief Type name for the property.
      */
     /**@{*/
-    const dogen::sml::nested_qualified_name& type_name() const;
-    dogen::sml::nested_qualified_name& type_name();
-    void type_name(const dogen::sml::nested_qualified_name& v);
-    void type_name(const dogen::sml::nested_qualified_name&& v);
+    const dogen::sml::nested_qname& type_name() const;
+    dogen::sml::nested_qname& type_name();
+    void type_name(const dogen::sml::nested_qname& v);
+    void type_name(const dogen::sml::nested_qname&& v);
     /**@}*/
 
     /*
@@ -112,7 +112,7 @@ public:
 
 private:
     std::string name_;
-    dogen::sml::nested_qualified_name type_name_;
+    dogen::sml::nested_qname type_name_;
     std::string default_value_;
     std::string documentation_;
 };

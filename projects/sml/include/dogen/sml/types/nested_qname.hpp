@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_SML_TYPES_NESTED_QUALIFIED_NAME_HPP
-#define DOGEN_SML_TYPES_NESTED_QUALIFIED_NAME_HPP
+#ifndef DOGEN_SML_TYPES_NESTED_QNAME_HPP
+#define DOGEN_SML_TYPES_NESTED_QNAME_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -27,8 +27,8 @@
 
 #include <algorithm>
 #include <list>
-#include "dogen/sml/serialization/nested_qualified_name_fwd_ser.hpp"
-#include "dogen/sml/types/nested_qualified_name.hpp"
+#include "dogen/sml/serialization/nested_qname_fwd_ser.hpp"
+#include "dogen/sml/types/nested_qname.hpp"
 #include "dogen/sml/types/qname.hpp"
 
 namespace dogen {
@@ -37,27 +37,27 @@ namespace sml {
 /*
  * @brief A composite qualified name.
  */
-class nested_qualified_name final {
+class nested_qname final {
 public:
-    nested_qualified_name(const nested_qualified_name&) = default;
-    nested_qualified_name(nested_qualified_name&&) = default;
-    ~nested_qualified_name() = default;
+    nested_qname(const nested_qname&) = default;
+    nested_qname(nested_qname&&) = default;
+    ~nested_qname() = default;
 
 public:
-    nested_qualified_name();
+    nested_qname();
 
 public:
-    nested_qualified_name(
+    nested_qname(
         const dogen::sml::qname& type,
-        const std::list<dogen::sml::nested_qualified_name>& children,
+        const std::list<dogen::sml::nested_qname>& children,
         const bool is_pointer);
 
 private:
     template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const nested_qualified_name& v, unsigned int version);
+    friend void boost::serialization::save(Archive& ar, const nested_qname& v, unsigned int version);
 
     template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, nested_qualified_name& v, unsigned int version);
+    friend void boost::serialization::load(Archive& ar, nested_qname& v, unsigned int version);
 
 public:
     /*
@@ -74,10 +74,10 @@ public:
      * @brief Child types.
      */
     /**@{*/
-    const std::list<dogen::sml::nested_qualified_name>& children() const;
-    std::list<dogen::sml::nested_qualified_name>& children();
-    void children(const std::list<dogen::sml::nested_qualified_name>& v);
-    void children(const std::list<dogen::sml::nested_qualified_name>&& v);
+    const std::list<dogen::sml::nested_qname>& children() const;
+    std::list<dogen::sml::nested_qname>& children();
+    void children(const std::list<dogen::sml::nested_qname>& v);
+    void children(const std::list<dogen::sml::nested_qname>&& v);
     /**@}*/
 
     /*
@@ -89,18 +89,18 @@ public:
     /**@}*/
 
 public:
-    bool operator==(const nested_qualified_name& rhs) const;
-    bool operator!=(const nested_qualified_name& rhs) const {
+    bool operator==(const nested_qname& rhs) const;
+    bool operator!=(const nested_qname& rhs) const {
         return !this->operator==(rhs);
     }
 
 public:
-    void swap(nested_qualified_name& other) noexcept;
-    nested_qualified_name& operator=(nested_qualified_name other);
+    void swap(nested_qname& other) noexcept;
+    nested_qname& operator=(nested_qname other);
 
 private:
     dogen::sml::qname type_;
-    std::list<dogen::sml::nested_qualified_name> children_;
+    std::list<dogen::sml::nested_qname> children_;
     bool is_pointer_;
 };
 
@@ -110,8 +110,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::sml::nested_qualified_name& lhs,
-    dogen::sml::nested_qualified_name& rhs) {
+    dogen::sml::nested_qname& lhs,
+    dogen::sml::nested_qname& rhs) {
     lhs.swap(rhs);
 }
 

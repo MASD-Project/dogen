@@ -28,7 +28,7 @@
 #include <boost/archive/xml_oarchive.hpp>
 #include <boost/serialization/nvp.hpp>
 #include <boost/serialization/string.hpp>
-#include "dogen/sml/serialization/nested_qualified_name_ser.hpp"
+#include "dogen/sml/serialization/nested_qname_ser.hpp"
 #include "dogen/sml/serialization/property_ser.hpp"
 
 #ifdef __linux__

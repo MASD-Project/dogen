@@ -18,23 +18,25 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_SML_SERIALIZATION_NESTED_QUALIFIED_NAME_FWD_SER_HPP
-#define DOGEN_SML_SERIALIZATION_NESTED_QUALIFIED_NAME_FWD_SER_HPP
+#ifndef DOGEN_SML_SERIALIZATION_NESTED_QNAME_SER_HPP
+#define DOGEN_SML_SERIALIZATION_NESTED_QNAME_SER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/sml/types/nested_qualified_name_fwd.hpp"
+#include <boost/serialization/split_free.hpp>
+#include "dogen/sml/types/nested_qname.hpp"
 
+BOOST_SERIALIZATION_SPLIT_FREE(dogen::sml::nested_qname)
 namespace boost {
 namespace serialization {
 
-template<class Archive>
-void save(Archive& ar, const dogen::sml::nested_qualified_name& v, unsigned int version);
+template<typename Archive>
+void save(Archive& ar, const dogen::sml::nested_qname& v, unsigned int version);
 
-template<class Archive>
-void load(Archive& ar, dogen::sml::nested_qualified_name& v, unsigned int version);
+template<typename Archive>
+void load(Archive& ar, dogen::sml::nested_qname& v, unsigned int version);
 
 } }
 

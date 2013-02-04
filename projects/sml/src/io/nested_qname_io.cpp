@@ -18,24 +18,21 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/sml/hash/nested_qualified_name_hash.hpp"
-#include "dogen/sml/hash/qname_hash.hpp"
+#include <boost/io/ios_state.hpp>
+#include <ostream>
+#include "dogen/sml/io/nested_qname_io.hpp"
+#include "dogen/sml/io/qname_io.hpp"
 
-namespace {
+namespace std {
 
-template <typename HashableType>
-inline void combine(std::size_t& seed, const HashableType& value)
-{
-    std::hash<HashableType> hasher;
-    seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
-}
-
-inline std::size_t hash_std_list_dogen_sml_nested_qualified_name(const std::list<dogen::sml::nested_qualified_name>& v){
-    std::size_t seed(0);
-    for (const auto i : v) {
-        combine(seed, i);
+inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::sml::nested_qname>& v) {
+    s << "[ ";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << *i;
     }
-    return seed;
+    s << "] ";
+    return s;
 }
 
 }
@@ -43,14 +40,20 @@ inline std::size_t hash_std_list_dogen_sml_nested_qualified_name(const std::list
 namespace dogen {
 namespace sml {
 
-std::size_t nested_qualified_name_hasher::hash(const nested_qualified_name&v) {
-    std::size_t seed(0);
+std::ostream& operator<<(std::ostream& s, const nested_qname& v) {
+    boost::io::ios_flags_saver ifs(s);
+    s.setf(std::ios_base::boolalpha);
+    s.setf(std::ios::fixed, std::ios::floatfield);
+    s.precision(6);
+    s.setf(std::ios::showpoint);
 
-    combine(seed, v.type());
-    combine(seed, hash_std_list_dogen_sml_nested_qualified_name(v.children()));
-    combine(seed, v.is_pointer());
-
-    return seed;
+    s << " { "
+      << "\"__type__\": " << "\"dogen::sml::nested_qname\"" << ", "
+      << "\"type\": " << v.type() << ", "
+      << "\"children\": " << v.children() << ", "
+      << "\"is_pointer\": " << v.is_pointer()
+      << " }";
+    return(s);
 }
 
 } }

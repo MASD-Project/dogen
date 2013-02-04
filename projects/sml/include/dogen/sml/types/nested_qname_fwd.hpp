@@ -18,22 +18,17 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_SML_IO_NESTED_QUALIFIED_NAME_IO_HPP
-#define DOGEN_SML_IO_NESTED_QUALIFIED_NAME_IO_HPP
+#ifndef DOGEN_SML_TYPES_NESTED_QNAME_FWD_HPP
+#define DOGEN_SML_TYPES_NESTED_QNAME_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <iosfwd>
-#include "dogen/sml/types/nested_qualified_name.hpp"
-
 namespace dogen {
 namespace sml {
 
-std::ostream&
-operator<<(std::ostream& s,
-     const dogen::sml::nested_qualified_name& v);
+class nested_qname;
 
 } }
 

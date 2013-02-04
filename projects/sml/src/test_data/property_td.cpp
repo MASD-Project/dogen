@@ -19,7 +19,7 @@
  *
  */
 #include <sstream>
-#include "dogen/sml/test_data/nested_qualified_name_td.hpp"
+#include "dogen/sml/test_data/nested_qname_td.hpp"
 #include "dogen/sml/test_data/property_td.hpp"
 
 namespace {
@@ -30,9 +30,9 @@ std::string create_std_string(const unsigned int position) {
     return s.str();
 }
 
-dogen::sml::nested_qualified_name
-create_dogen_sml_nested_qualified_name(const unsigned int position) {
-    return dogen::sml::nested_qualified_name_generator::create(position);
+dogen::sml::nested_qname
+create_dogen_sml_nested_qname(const unsigned int position) {
+    return dogen::sml::nested_qname_generator::create(position);
 }
 
 }
@@ -45,7 +45,7 @@ property_generator::property_generator() : position_(0) { }
 void property_generator::
 populate(const unsigned int position, result_type& v) {
     v.name(create_std_string(position + 0));
-    v.type_name(create_dogen_sml_nested_qualified_name(position + 1));
+    v.type_name(create_dogen_sml_nested_qname(position + 1));
     v.default_value(create_std_string(position + 2));
     v.documentation(create_std_string(position + 3));
 }
