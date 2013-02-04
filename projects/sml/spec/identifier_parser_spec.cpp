@@ -25,7 +25,7 @@
 #include "dogen/utility/io/list_io.hpp"
 #include "dogen/sml/types/model.hpp"
 #include "dogen/sml/types/parsing_error.hpp"
-#include "dogen/sml/io/nested_qualified_name_io.hpp"
+#include "dogen/sml/io/nested_qname_io.hpp"
 #include "dogen/sml/io/qname_io.hpp"
 #include "dogen/sml/types/merging_error.hpp"
 #include "dogen/sml/types/identifier_parser.hpp"
@@ -44,7 +44,7 @@ bool test_primitive(const std::string& s) {
     dogen::sml::identifier_parser ip;
     const auto a(ip.parse_qualified_name(s));
 
-    dogen::sml::nested_qualified_name nqn;
+    dogen::sml::nested_qname nqn;
     dogen::sml::qname e;
     e.type_name(s);
     nqn.type(e);
@@ -63,7 +63,7 @@ BOOST_AUTO_TEST_CASE(parsing_string_with_inner_namespaces_produces_expected_qual
     dogen::sml::identifier_parser ip;
     const auto a(ip.parse_qualified_name(s));
 
-    dogen::sml::nested_qualified_name nqn;
+    dogen::sml::nested_qname nqn;
     dogen::sml::qname e;
     e.type_name("z");
     e.package_path(std::list<std::string> { "b", "c"});
@@ -78,7 +78,7 @@ BOOST_AUTO_TEST_CASE(parsing_string_with_scope_operator_produces_expected_qualif
     dogen::sml::identifier_parser ip;
     const auto a(ip.parse_qualified_name(s));
 
-    dogen::sml::nested_qualified_name nqn;
+    dogen::sml::nested_qname nqn;
     dogen::sml::qname e;
     e.type_name("zeta");
     nqn.type(e);
@@ -91,7 +91,7 @@ BOOST_AUTO_TEST_CASE(parsing_string_with_one_colon_produces_expected_qualified_n
     dogen::sml::identifier_parser ip;
     const auto a(ip.parse_qualified_name(s));
 
-    dogen::sml::nested_qualified_name nqn;
+    dogen::sml::nested_qname nqn;
     dogen::sml::qname e;
     e.model_name("a");
     e.type_name("z");
@@ -153,16 +153,16 @@ BOOST_AUTO_TEST_CASE(unsignable_types_cannot_be_unsigned) {
 BOOST_AUTO_TEST_CASE(parsing_string_with_single_template_argument_produces_expected_nested_qualified_names) {
     SETUP_TEST_LOG("parsing_string_with_single_template_argument_produces_expected_nested_qualified_names");
     dogen::sml::identifier_parser ip;
-    dogen::sml::nested_qualified_name nqn;
+    dogen::sml::nested_qname nqn;
     dogen::sml::qname e;
     e.type_name("type");
     nqn.type(e);
 
     dogen::sml::qname f;
     f.type_name("abc");
-    dogen::sml::nested_qualified_name c;
+    dogen::sml::nested_qname c;
     c.type(f);
-    nqn.children(std::list<dogen::sml::nested_qualified_name> { c });
+    nqn.children(std::list<dogen::sml::nested_qname> { c });
 
     const auto a(ip.parse_qualified_name("type<abc>"));
     BOOST_CHECK(asserter::assert_equals(nqn, a));
@@ -177,21 +177,21 @@ BOOST_AUTO_TEST_CASE(parsing_string_with_single_template_argument_produces_expec
 BOOST_AUTO_TEST_CASE(parsing_string_with_two_template_argument_produces_expected_nested_qualified_names) {
     SETUP_TEST_LOG("parsing_string_with_two_template_argument_produces_expected_nested_qualified_names");
     dogen::sml::identifier_parser ip;
-    dogen::sml::nested_qualified_name nqn;
+    dogen::sml::nested_qname nqn;
     dogen::sml::qname e;
     e.type_name("type");
     nqn.type(e);
 
     dogen::sml::qname f;
     f.type_name("abc");
-    dogen::sml::nested_qualified_name c;
+    dogen::sml::nested_qname c;
     c.type(f);
 
     dogen::sml::qname g;
     g.type_name("cde");
-    dogen::sml::nested_qualified_name d;
+    dogen::sml::nested_qname d;
     d.type(g);
-    nqn.children(std::list<dogen::sml::nested_qualified_name> { c, d });
+    nqn.children(std::list<dogen::sml::nested_qname> { c, d });
 
     const auto a(ip.parse_qualified_name("type<abc,cde>"));
     BOOST_CHECK(asserter::assert_equals(nqn, a));
@@ -200,7 +200,7 @@ BOOST_AUTO_TEST_CASE(parsing_string_with_two_template_argument_produces_expected
 BOOST_AUTO_TEST_CASE(parsing_vector_of_string_produces_expected_nested_qualified_names) {
     SETUP_TEST_LOG("parsing_vector_of_string_produces_expected_nested_qualified_names");
     dogen::sml::identifier_parser ip;
-    dogen::sml::nested_qualified_name nqn;
+    dogen::sml::nested_qname nqn;
     dogen::sml::qname e;
     e.type_name("vector");
     e.model_name("std");
@@ -209,9 +209,9 @@ BOOST_AUTO_TEST_CASE(parsing_vector_of_string_produces_expected_nested_qualified
     dogen::sml::qname f;
     f.type_name("string");
     f.model_name("std");
-    dogen::sml::nested_qualified_name c;
+    dogen::sml::nested_qname c;
     c.type(f);
-    nqn.children(std::list<dogen::sml::nested_qualified_name> { c });
+    nqn.children(std::list<dogen::sml::nested_qname> { c });
 
     const auto a(ip.parse_qualified_name("std::vector<std::string>"));
     BOOST_CHECK(asserter::assert_equals(nqn, a));
@@ -220,7 +220,7 @@ BOOST_AUTO_TEST_CASE(parsing_vector_of_string_produces_expected_nested_qualified
 BOOST_AUTO_TEST_CASE(parsing_vector_of_primitive_produces_expected_nested_qualified_names) {
     SETUP_TEST_LOG("parsing_vector_of_primitive_produces_expected_nested_qualified_names");
     dogen::sml::identifier_parser ip;
-    dogen::sml::nested_qualified_name nqn;
+    dogen::sml::nested_qname nqn;
     dogen::sml::qname e;
     e.type_name("vector");
     e.model_name("std");
@@ -228,9 +228,9 @@ BOOST_AUTO_TEST_CASE(parsing_vector_of_primitive_produces_expected_nested_qualif
 
     dogen::sml::qname f;
     f.type_name("unsigned int");
-    dogen::sml::nested_qualified_name c;
+    dogen::sml::nested_qname c;
     c.type(f);
-    nqn.children(std::list<dogen::sml::nested_qualified_name> { c });
+    nqn.children(std::list<dogen::sml::nested_qname> { c });
 
     const auto a(ip.parse_qualified_name("std::vector<unsigned int>"));
     BOOST_CHECK(asserter::assert_equals(nqn, a));
@@ -239,7 +239,7 @@ BOOST_AUTO_TEST_CASE(parsing_vector_of_primitive_produces_expected_nested_qualif
 BOOST_AUTO_TEST_CASE(parsing_unordered_map_produces_expected_nested_qualified_names) {
     SETUP_TEST_LOG("parsing_unordered_map_produces_expected_nested_qualified_names");
     dogen::sml::identifier_parser ip;
-    dogen::sml::nested_qualified_name nqn;
+    dogen::sml::nested_qname nqn;
     dogen::sml::qname e;
     e.type_name("unordered_map");
     e.model_name("std");
@@ -248,15 +248,15 @@ BOOST_AUTO_TEST_CASE(parsing_unordered_map_produces_expected_nested_qualified_na
     dogen::sml::qname f;
     f.type_name("string");
     f.model_name("std");
-    dogen::sml::nested_qualified_name c;
+    dogen::sml::nested_qname c;
     c.type(f);
     dogen::sml::qname g;
     g.type_name("type");
     g.model_name("my");
-    dogen::sml::nested_qualified_name d;
+    dogen::sml::nested_qname d;
     d.type(g);
 
-    nqn.children(std::list<dogen::sml::nested_qualified_name> { c, d });
+    nqn.children(std::list<dogen::sml::nested_qname> { c, d });
 
     const auto a(ip.parse_qualified_name("std::unordered_map<std::string,my::type>"));
     BOOST_CHECK(asserter::assert_equals(nqn, a));
@@ -265,7 +265,7 @@ BOOST_AUTO_TEST_CASE(parsing_unordered_map_produces_expected_nested_qualified_na
 BOOST_AUTO_TEST_CASE(parsing_vector_of_shared_ptr_produces_expected_nested_qualified_names) {
     SETUP_TEST_LOG("parsing_vector_of_shared_ptr_produces_expected_nested_qualified_names");
     dogen::sml::identifier_parser ip;
-    dogen::sml::nested_qualified_name nqn;
+    dogen::sml::nested_qname nqn;
     dogen::sml::qname e;
     e.type_name("vector");
     e.model_name("std");
@@ -274,16 +274,16 @@ BOOST_AUTO_TEST_CASE(parsing_vector_of_shared_ptr_produces_expected_nested_quali
     dogen::sml::qname f;
     f.type_name("shared_ptr");
     f.model_name("std");
-    dogen::sml::nested_qualified_name c;
+    dogen::sml::nested_qname c;
     c.type(f);
 
     dogen::sml::qname g;
     g.type_name("string");
     g.model_name("std");
-    dogen::sml::nested_qualified_name d;
+    dogen::sml::nested_qname d;
     d.type(g);
-    c.children(std::list<dogen::sml::nested_qualified_name> { d });
-    nqn.children(std::list<dogen::sml::nested_qualified_name> { c });
+    c.children(std::list<dogen::sml::nested_qname> { d });
+    nqn.children(std::list<dogen::sml::nested_qname> { c });
 
     const auto a(ip.parse_qualified_name("std::vector<std::shared_ptr<std::string>>"));
     BOOST_CHECK(asserter::assert_equals(nqn, a));

@@ -29,7 +29,7 @@
 #include <vector>
 #include <string>
 #include <unordered_map>
-#include "dogen/sml/types/nested_qualified_name.hpp"
+#include "dogen/sml/types/nested_qname.hpp"
 #include "dogen/sml/types/model.hpp"
 
 namespace dogen {
@@ -47,7 +47,7 @@ public:
     explicit merger(const bool verbose);
 
 private:
-    void resolve_partial_type(nested_qualified_name& t) const;
+    void resolve_partial_type(nested_qname& t) const;
     std::vector<property> resolve_properties(const pod& pod);
     void resolve_parent(const pod& pod);
     void resolve();

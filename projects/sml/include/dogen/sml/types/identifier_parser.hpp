@@ -28,7 +28,7 @@
 #include <list>
 #include <string>
 #include <unordered_set>
-#include "dogen/sml/types/nested_qualified_name.hpp"
+#include "dogen/sml/types/nested_qname.hpp"
 
 namespace dogen {
 namespace sml {
@@ -56,7 +56,7 @@ public:
         const std::string model_name);
 
 public:
-    nested_qualified_name parse_qualified_name(const std::string& n);
+    nested_qname parse_qualified_name(const std::string& n);
     static std::list<std::string> parse_scoped_name(const std::string& n);
 
 private:

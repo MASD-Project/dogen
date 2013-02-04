@@ -28,7 +28,7 @@
 #include "dogen/utility/io/list_io.hpp"
 #include "dogen/sml/io/enumeration_io.hpp"
 #include "dogen/sml/io/qname_io.hpp"
-#include "dogen/sml/io/nested_qualified_name_io.hpp"
+#include "dogen/sml/io/nested_qname_io.hpp"
 #include "dogen/sml/io/primitive_io.hpp"
 #include "dogen/sml/io/property_io.hpp"
 #include "dogen/sml/io/pod_io.hpp"
@@ -76,7 +76,7 @@ void merger::resolve_parent(const pod& pod) {
 }
 
 void
-merger::resolve_partial_type(nested_qualified_name& n) const {
+merger::resolve_partial_type(nested_qname& n) const {
     auto children(n.children());
     for (auto i(children.begin()); i != children.end(); ++i)
         resolve_partial_type(*i);

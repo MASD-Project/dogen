@@ -21,7 +21,7 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/io/unordered_set_io.hpp"
 #include "dogen/utility/io/list_io.hpp"
-#include "dogen/sml/io/nested_qualified_name_io.hpp"
+#include "dogen/sml/io/nested_qname_io.hpp"
 #include "dogen/sml/types/nested_qualified_name_builder.hpp"
 
 using namespace dogen::utility::log;
@@ -133,27 +133,27 @@ void nested_qualified_name_builder::end_children() {
 }
 
 void nested_qualified_name_builder::
-build_node(nested_qualified_name& qn, boost::shared_ptr<node> node) {
+build_node(nested_qname& qn, boost::shared_ptr<node> node) {
     BOOST_LOG_SEV(lg, debug) << "bulding node: "
                              << node->data().model_name()
                              << " "
                              << node->data().type_name();
 
     qn.type(node->data());
-    std::list<nested_qualified_name> children;
+    std::list<nested_qname> children;
     for (const auto c : node->children()) {
-        nested_qualified_name cqn;
+        nested_qname cqn;
         build_node(cqn, c);
         children.push_back(cqn);
     }
     qn.children(children);
 }
 
-nested_qualified_name nested_qualified_name_builder::build() {
+nested_qname nested_qualified_name_builder::build() {
     BOOST_LOG_SEV(lg, debug) << "started build";
 
     finish_current_node();
-    nested_qualified_name r;
+    nested_qname r;
     build_node(r, root_);
 
     BOOST_LOG_SEV(lg, debug) << "finished build. Final name: " << r;

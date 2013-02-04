@@ -30,7 +30,7 @@
 #include <unordered_set>
 #include <boost/shared_ptr.hpp>
 #include "dogen/sml/types/qname.hpp"
-#include "dogen/sml/types/nested_qualified_name.hpp"
+#include "dogen/sml/types/nested_qname.hpp"
 #include "dogen/sml/types/node.hpp"
 
 namespace dogen {
@@ -53,7 +53,7 @@ public:
 
 private:
     void finish_current_node();
-    void build_node(nested_qualified_name& qn, boost::shared_ptr<node> node);
+    void build_node(nested_qname& qn, boost::shared_ptr<node> node);
 
 public:
     void add_name(const std::string& n);
@@ -61,7 +61,7 @@ public:
     void start_children();
     void next_child();
     void end_children();
-    nested_qualified_name build();
+    nested_qname build();
 
 private:
     const std::unordered_set<std::string> packages_;

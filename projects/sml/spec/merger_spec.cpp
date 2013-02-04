@@ -26,7 +26,7 @@
 #include "dogen/sml/test_data/all_td.hpp"
 #include "dogen/sml/types/model.hpp"
 #include "dogen/sml/types/parsing_error.hpp"
-#include "dogen/sml/io/nested_qualified_name_io.hpp"
+#include "dogen/sml/io/nested_qname_io.hpp"
 #include "dogen/sml/io/qname_io.hpp"
 #include "dogen/sml/types/merging_error.hpp"
 #include "dogen/sml/types/identifier_parser.hpp"
@@ -207,7 +207,7 @@ BOOST_AUTO_TEST_CASE(pod_with_property_type_in_the_same_model_results_in_success
     qn.type_name(pod1.name().type_name());
     qn.model_name(pod1.name().model_name());
 
-    dogen::sml::nested_qualified_name nqn;
+    dogen::sml::nested_qname nqn;
     nqn.type(qn);
     p.type_name(nqn);
     props.push_back(p);
@@ -252,7 +252,7 @@ BOOST_AUTO_TEST_CASE(pod_with_property_type_in_different_model_results_in_succes
     qn.type_name(pod1.name().type_name());
     qn.model_name(pod1.name().model_name());
 
-    dogen::sml::nested_qualified_name nqn;
+    dogen::sml::nested_qname nqn;
     nqn.type(qn);
     p.type_name(nqn);
     props.push_back(p);
@@ -304,7 +304,7 @@ BOOST_AUTO_TEST_CASE(pod_with_missing_property_type_throws) {
     qn.type_name(pod1.name().type_name());
     qn.model_name(pod1.name().model_name());
 
-    dogen::sml::nested_qualified_name nqn;
+    dogen::sml::nested_qname nqn;
     nqn.type(qn);
     p.type_name(nqn);
     props.push_back(p);
