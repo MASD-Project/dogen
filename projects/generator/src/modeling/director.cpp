@@ -162,7 +162,7 @@ create_key_system_pod(const sml::pod& p, const bool is_versioned) const {
     sml::property id;
     id.name(id_name);
 
-    sml::nested_qualified_name nqn;
+    sml::nested_qname nqn;
     nqn.type(uint_qn);
     id.type_name(nqn);
     props.push_back(id);
@@ -171,7 +171,7 @@ create_key_system_pod(const sml::pod& p, const bool is_versioned) const {
         sml::property version;
         version.name(version_name);
 
-        sml::nested_qualified_name nqn2;
+        sml::nested_qname nqn2;
         nqn2.type(uint_qn);
         version.type_name(nqn2);
         props.push_back(version);
@@ -212,7 +212,7 @@ void director::inject_system_types(sml::model& m) const {
             sml::property vk_prop;
             vk_prop.name(versioned_name);
 
-            sml::nested_qualified_name nqn;
+            sml::nested_qname nqn;
             nqn.type(versioned_pod.name());
             vk_prop.type_name(nqn);
 

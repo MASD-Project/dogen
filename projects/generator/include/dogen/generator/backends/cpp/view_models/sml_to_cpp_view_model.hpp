@@ -42,7 +42,7 @@
 #include "dogen/sml/types/package.hpp"
 #include "dogen/sml/types/pod.hpp"
 #include "dogen/sml/types/model.hpp"
-#include "dogen/sml/types/nested_qualified_name.hpp"
+#include "dogen/sml/types/nested_qname.hpp"
 #include "dogen/generator/backends/cpp/view_models/file_view_model.hpp"
 
 namespace dogen {

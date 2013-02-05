@@ -224,7 +224,7 @@ private:
      * @brief Converts a nested qualified name into model dependencies
      */
     void model_dependencies_for_nested_qualified_name(
-        const dogen::sml::nested_qualified_name& nqn);
+        const dogen::sml::nested_qname& nqn);
 
     /**
      * @brief Converts the Dia attribute into a qualified name.
@@ -292,7 +292,7 @@ transform_string_attribute(const dogen::dia::attribute& a) const {
 }
 
 void dia_dfs_visitor::model_dependencies_for_nested_qualified_name(
-    const dogen::sml::nested_qualified_name& nqn) {
+    const dogen::sml::nested_qname& nqn) {
 
     // primitives model is empty
     const auto mn(nqn.type().model_name());

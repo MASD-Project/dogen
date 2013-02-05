@@ -30,7 +30,7 @@
 #include "dogen/sml/io/meta_types_io.hpp"
 #include "dogen/sml/io/pod_types_io.hpp"
 #include "dogen/sml/io/qname_io.hpp"
-#include "dogen/sml/types/nested_qualified_name.hpp"
+#include "dogen/sml/types/nested_qname.hpp"
 #include "dogen/config/io/cpp_facet_types_io.hpp"
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/io/list_io.hpp"
@@ -211,7 +211,7 @@ private:
      * type name.
      */
     void transform_nested_qualified_name(
-        const dogen::sml::nested_qualified_name& nqn,
+        const dogen::sml::nested_qname& nqn,
         dogen::generator::backends::cpp::view_models::nested_type_view_model&
         name, std::string& complete_name,
         bool& requires_stream_manipulators) const;
@@ -251,7 +251,7 @@ requires_stream_manipulators(const std::string type_name) const {
 }
 
 void sml_dfs_visitor::transform_nested_qualified_name(
-    const dogen::sml::nested_qualified_name& nqn,
+    const dogen::sml::nested_qname& nqn,
     dogen::generator::backends::cpp::view_models::nested_type_view_model&
     vm, std::string& complete_name,
     bool& requires_stream_manipulators) const {

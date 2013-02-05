@@ -36,7 +36,7 @@ namespace backends {
 namespace cpp {
 
 void dependency_extractor::
-recurse_nested_qualified_names(const sml::nested_qualified_name& nqn,
+recurse_nested_qualified_names(const sml::nested_qname& nqn,
     dependency_details& dd, bool& is_pointer) const {
 
     const auto qn(nqn.type());

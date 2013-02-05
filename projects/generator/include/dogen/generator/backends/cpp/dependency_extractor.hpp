@@ -57,7 +57,7 @@ private:
      * @brief Iterates through the nested qualified name recursively,
      * picking up dependencies as it goes along.
      */
-    void recurse_nested_qualified_names(const dogen::sml::nested_qualified_name&
+    void recurse_nested_qualified_names(const dogen::sml::nested_qname&
         nqn, dependency_details& dd, bool& is_pointer) const;
 
 public:
