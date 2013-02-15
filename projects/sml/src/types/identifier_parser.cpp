@@ -33,7 +33,7 @@
 #include <boost/throw_exception.hpp>
 #include "dogen/sml/types/parsing_error.hpp"
 #include "dogen/sml/types/identifier_parser.hpp"
-#include "dogen/sml/types/nested_qualified_name_builder.hpp"
+#include "dogen/sml/types/nested_qname_builder.hpp"
 #include "dogen/utility/log/logger.hpp"
 
 using namespace dogen::utility::log;

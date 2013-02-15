@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_SML_TYPES_NESTED_QUALIFIED_NAME_BUILDER_FWD_HPP
-#define DOGEN_SML_TYPES_NESTED_QUALIFIED_NAME_BUILDER_FWD_HPP
+#ifndef DOGEN_SML_TYPES_NESTED_QNAME_BUILDER_FWD_HPP
+#define DOGEN_SML_TYPES_NESTED_QNAME_BUILDER_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -28,7 +28,7 @@
 namespace dogen {
 namespace sml {
 
-class nested_qualified_name_builder;
+class nested_qname_builder;
 
 } }
 

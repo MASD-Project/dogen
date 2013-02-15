@@ -6920,19 +6920,19 @@ all types in the combined model.#</dia:string>
         <dia:point val="64.0838,39.7657"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="64.0338,39.7157;93.8938,53.6157"/>
+        <dia:rectangle val="64.0338,39.7157;90.4288,53.6157"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="64.0838,39.7657"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="29.760000000000002"/>
+        <dia:real val="26.294999999999998"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="13.800000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#nested_qualified_name_builder#</dia:string>
+        <dia:string>#nested_qname_builder#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#service#</dia:string>
@@ -6986,19 +6986,19 @@ all types in the combined model.#</dia:string>
         <dia:font family="monospace" style="0" name="Courier"/>
       </dia:attribute>
       <dia:attribute name="abstract_font">
-        <dia:font family="monospace" style="88" name="Courier-BoldOblique"/>
+        <dia:font family="monospace" style="0" name="Courier"/>
       </dia:attribute>
       <dia:attribute name="polymorphic_font">
-        <dia:font family="monospace" style="8" name="Courier-Oblique"/>
+        <dia:font family="monospace" style="0" name="Courier"/>
       </dia:attribute>
       <dia:attribute name="classname_font">
         <dia:font family="sans" style="80" name="Helvetica-Bold"/>
       </dia:attribute>
       <dia:attribute name="abstract_classname_font">
-        <dia:font family="sans" style="88" name="Helvetica-BoldOblique"/>
+        <dia:font family="sans" style="0" name="Helvetica"/>
       </dia:attribute>
       <dia:attribute name="comment_font">
-        <dia:font family="sans" style="8" name="Helvetica-Oblique"/>
+        <dia:font family="sans" style="0" name="Helvetica"/>
       </dia:attribute>
       <dia:attribute name="normal_font_height">
         <dia:real val="0.80000000000000004"/>
@@ -7161,7 +7161,7 @@ all types in the combined model.#</dia:string>
       <dia:attribute name="operations">
         <dia:composite type="umloperation">
           <dia:attribute name="name">
-            <dia:string>#nested_qualified_name_builder#</dia:string>
+            <dia:string>#nested_qname_builder#</dia:string>
           </dia:attribute>
           <dia:attribute name="stereotype">
             <dia:string>##</dia:string>
@@ -7305,7 +7305,7 @@ all types in the combined model.#</dia:string>
                 <dia:string>#qn#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#nested_qualified_name#</dia:string>
+                <dia:string>#nested_qname#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -7509,7 +7509,7 @@ all types in the combined model.#</dia:string>
         <dia:point val="53.2837,58.8906"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="52.5337,53.5157;79.1638,59.6906"/>
+        <dia:rectangle val="52.5337,53.5157;77.4313,59.6906"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -7517,8 +7517,8 @@ all types in the combined model.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="53.2837,58.8906"/>
         <dia:point val="53.2837,55.9212"/>
-        <dia:point val="78.9638,55.9212"/>
-        <dia:point val="78.9638,53.5657"/>
+        <dia:point val="77.2313,55.9212"/>
+        <dia:point val="77.2313,53.5657"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -7918,7 +7918,7 @@ off of them.#</dia:string>
         <dia:point val="89.2301,30.5712"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="78.2138,30.5212;89.4301,40.5657"/>
+        <dia:rectangle val="76.4813,30.5212;89.4301,40.5657"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -7926,8 +7926,8 @@ off of them.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="89.2301,30.5712"/>
         <dia:point val="89.2301,36.0931"/>
-        <dia:point val="78.9638,36.0931"/>
-        <dia:point val="78.9638,39.7657"/>
+        <dia:point val="77.2313,36.0931"/>
+        <dia:point val="77.2313,39.7657"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
