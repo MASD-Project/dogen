@@ -36,17 +36,17 @@
 namespace dogen {
 namespace sml {
 
-class nested_qualified_name_builder {
+class nested_qname_builder {
 public:
-    nested_qualified_name_builder() = delete;
-    nested_qualified_name_builder(
-        const nested_qualified_name_builder&) = delete;
-    ~nested_qualified_name_builder() = default;
-    nested_qualified_name_builder(nested_qualified_name_builder&&) = delete;
-    nested_qualified_name_builder& operator=(const nested_qualified_name_builder&) = delete;
+    nested_qname_builder() = delete;
+    nested_qname_builder(
+        const nested_qname_builder&) = delete;
+    ~nested_qname_builder() = default;
+    nested_qname_builder(nested_qname_builder&&) = delete;
+    nested_qname_builder& operator=(const nested_qname_builder&) = delete;
 
 public:
-    nested_qualified_name_builder(
+    nested_qname_builder(
         const std::unordered_set<std::string>& packages,
         const std::list<std::string>& external_package_path,
         const std::string& model_name);

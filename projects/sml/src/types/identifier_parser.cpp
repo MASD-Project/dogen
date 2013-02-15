@@ -46,7 +46,7 @@ const char* delimiter = "::";
 const std::string error_msg("Failed to parse string: ");
 using namespace boost::spirit;
 
-using dogen::sml::nested_qualified_name_builder;
+using dogen::sml::nested_qname_builder;
 
 namespace distinct {
 
@@ -84,7 +84,7 @@ keyword_tag_type const keyword = distinct_spec(char_spec(keyword_spec));
 
 template<typename Iterator>
 struct grammar : qi::grammar<Iterator> {
-    std::shared_ptr<nested_qualified_name_builder> builder;
+    std::shared_ptr<nested_qname_builder> builder;
     qi::rule<Iterator, std::string()> nested_name, name, nondigit, alphanum,
         primitive, signable_primitive;
     qi::rule<Iterator> identifier, scope_operator, type_name, template_id,
@@ -109,7 +109,7 @@ struct grammar : qi::grammar<Iterator> {
         end_template_ = std::bind(&grammar::end_template, this);
     }
 
-    grammar(std::shared_ptr<nested_qualified_name_builder> b)
+    grammar(std::shared_ptr<nested_qname_builder> b)
         : grammar::base_type(type_name), builder(b) {
         setup_functors();
         using qi::on_error;
@@ -182,8 +182,8 @@ parse_qualified_name(const std::string& n) {
     std::string::const_iterator it(n.begin());
     std::string::const_iterator end(n.end());
 
-    std::shared_ptr<nested_qualified_name_builder>
-        builder(new nested_qualified_name_builder(packages_,
+    std::shared_ptr<nested_qname_builder>
+        builder(new nested_qname_builder(packages_,
                 external_package_path_, model_name_));
     grammar<std::string::const_iterator> g(builder);
     const bool ok(boost::spirit::qi::parse(it, end, g));
