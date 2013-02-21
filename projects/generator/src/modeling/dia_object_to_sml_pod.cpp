@@ -346,7 +346,7 @@ transform_property(const dogen::dia::composite& uml_attribute) {
             property.name(transform_string_attribute(*a));
         else if (a->name() == dia_type) {
             const std::string s(transform_string_attribute(*a));
-            auto nested_name(state_->parser_.parse_qualified_name(s));
+            auto nested_name(state_->parser_.parse_qname(s));
             if (nested_name.type().type_name().empty()) {
                 BOOST_LOG_SEV(lg, error) << invalid_type_string << s;
                 BOOST_THROW_EXCEPTION(

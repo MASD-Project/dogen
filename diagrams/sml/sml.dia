@@ -6602,7 +6602,7 @@ all types in the combined model.#</dia:string>
         </dia:composite>
         <dia:composite type="umloperation">
           <dia:attribute name="name">
-            <dia:string>#parse_qualified_name#</dia:string>
+            <dia:string>#parse_qname#</dia:string>
           </dia:attribute>
           <dia:attribute name="stereotype">
             <dia:string>##</dia:string>

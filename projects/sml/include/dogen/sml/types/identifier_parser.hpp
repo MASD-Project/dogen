@@ -56,7 +56,7 @@ public:
         const std::string model_name);
 
 public:
-    nested_qname parse_qualified_name(const std::string& n);
+    nested_qname parse_qname(const std::string& n);
     static std::list<std::string> parse_scoped_name(const std::string& n);
 
 private:

@@ -178,7 +178,7 @@ identifier_parser(const std::unordered_set<std::string>& packages,
       model_name_(model_name) { }
 
 nested_qname identifier_parser::
-parse_qualified_name(const std::string& n) {
+parse_qname(const std::string& n) {
     std::string::const_iterator it(n.begin());
     std::string::const_iterator end(n.end());
 

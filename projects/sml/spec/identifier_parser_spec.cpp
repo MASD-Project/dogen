@@ -42,7 +42,7 @@ const std::string test_suite("identifier_parser_spec");
 
 bool test_primitive(const std::string& s) {
     dogen::sml::identifier_parser ip;
-    const auto a(ip.parse_qualified_name(s));
+    const auto a(ip.parse_qname(s));
 
     dogen::sml::nested_qname nqn;
     dogen::sml::qname e;
@@ -61,7 +61,7 @@ BOOST_AUTO_TEST_CASE(parsing_string_with_inner_namespaces_produces_expected_qual
     SETUP_TEST_LOG("parsing_string_with_inner_namespaces_produces_expected_qualified_name");
     const std::string s("a::b::c::z");
     dogen::sml::identifier_parser ip;
-    const auto a(ip.parse_qualified_name(s));
+    const auto a(ip.parse_qname(s));
 
     dogen::sml::nested_qname nqn;
     dogen::sml::qname e;
@@ -76,7 +76,7 @@ BOOST_AUTO_TEST_CASE(parsing_string_with_scope_operator_produces_expected_qualif
     SETUP_TEST_LOG("parsing_string_with_scope_operator_produces_expected_qualified_name");
     const std::string s("zeta");
     dogen::sml::identifier_parser ip;
-    const auto a(ip.parse_qualified_name(s));
+    const auto a(ip.parse_qname(s));
 
     dogen::sml::nested_qname nqn;
     dogen::sml::qname e;
@@ -89,7 +89,7 @@ BOOST_AUTO_TEST_CASE(parsing_string_with_one_colon_produces_expected_qualified_n
     SETUP_TEST_LOG("parsing_string_with_one_colon_produces_expected_qualified_name");
     const std::string s("a::z");
     dogen::sml::identifier_parser ip;
-    const auto a(ip.parse_qualified_name(s));
+    const auto a(ip.parse_qname(s));
 
     dogen::sml::nested_qname nqn;
     dogen::sml::qname e;
@@ -103,21 +103,21 @@ BOOST_AUTO_TEST_CASE(string_starting_with_digit_fails_to_parse) {
     SETUP_TEST_LOG("string_starting_with_digit_fails_to_parse");
     const std::string s("0a");
     dogen::sml::identifier_parser ip;
-    BOOST_CHECK_THROW(ip.parse_qualified_name(s), parsing_error);
+    BOOST_CHECK_THROW(ip.parse_qname(s), parsing_error);
 }
 
 BOOST_AUTO_TEST_CASE(string_ending_with_scope_operator_fails_to_parse) {
     SETUP_TEST_LOG("string_ending_with_scope_operator_fails_to_parse");
     const std::string s("a::");
     dogen::sml::identifier_parser ip;
-    BOOST_CHECK_THROW(ip.parse_qualified_name(s), parsing_error);
+    BOOST_CHECK_THROW(ip.parse_qname(s), parsing_error);
 }
 
 BOOST_AUTO_TEST_CASE(scope_operator_followed_by_scope_operator_fails_to_parse) {
     SETUP_TEST_LOG("scope_operator_followed_by_scope_operator_fails_to_parse");
     const std::string s("A::::");
     dogen::sml::identifier_parser ip;
-    BOOST_CHECK_THROW(ip.parse_qualified_name(s), parsing_error);
+    BOOST_CHECK_THROW(ip.parse_qname(s), parsing_error);
 }
 
 BOOST_AUTO_TEST_CASE(all_primitive_types_are_valid) {
@@ -144,10 +144,10 @@ BOOST_AUTO_TEST_CASE(all_primitive_types_are_valid) {
 BOOST_AUTO_TEST_CASE(unsignable_types_cannot_be_unsigned) {
     SETUP_TEST_LOG("unsignable_types_cannot_be_unsigned");
     dogen::sml::identifier_parser ip;
-    BOOST_CHECK_THROW(ip.parse_qualified_name("unsigned bool"), parsing_error);
-    BOOST_CHECK_THROW(ip.parse_qualified_name("unsigned x"), parsing_error);
-    BOOST_CHECK_THROW(ip.parse_qualified_name("unsigned float"), parsing_error);
-    BOOST_CHECK_THROW(ip.parse_qualified_name("unsigned double"), parsing_error);
+    BOOST_CHECK_THROW(ip.parse_qname("unsigned bool"), parsing_error);
+    BOOST_CHECK_THROW(ip.parse_qname("unsigned x"), parsing_error);
+    BOOST_CHECK_THROW(ip.parse_qname("unsigned float"), parsing_error);
+    BOOST_CHECK_THROW(ip.parse_qname("unsigned double"), parsing_error);
 }
 
 BOOST_AUTO_TEST_CASE(parsing_string_with_single_template_argument_produces_expected_nested_qualified_names) {
@@ -164,14 +164,14 @@ BOOST_AUTO_TEST_CASE(parsing_string_with_single_template_argument_produces_expec
     c.type(f);
     nqn.children(std::list<dogen::sml::nested_qname> { c });
 
-    const auto a(ip.parse_qualified_name("type<abc>"));
+    const auto a(ip.parse_qname("type<abc>"));
     BOOST_CHECK(asserter::assert_equals(nqn, a));
 
-    ip.parse_qualified_name("type<abc,cde>");
-    ip.parse_qualified_name("std::vector<std::string>");
-    ip.parse_qualified_name("std::vector<unsigned int>");
-    ip.parse_qualified_name("std::unordered_map<std::string,my::type>");
-    ip.parse_qualified_name("std::vector<std::shared_ptr<std::string>>");
+    ip.parse_qname("type<abc,cde>");
+    ip.parse_qname("std::vector<std::string>");
+    ip.parse_qname("std::vector<unsigned int>");
+    ip.parse_qname("std::unordered_map<std::string,my::type>");
+    ip.parse_qname("std::vector<std::shared_ptr<std::string>>");
 }
 
 BOOST_AUTO_TEST_CASE(parsing_string_with_two_template_argument_produces_expected_nested_qualified_names) {
@@ -193,7 +193,7 @@ BOOST_AUTO_TEST_CASE(parsing_string_with_two_template_argument_produces_expected
     d.type(g);
     nqn.children(std::list<dogen::sml::nested_qname> { c, d });
 
-    const auto a(ip.parse_qualified_name("type<abc,cde>"));
+    const auto a(ip.parse_qname("type<abc,cde>"));
     BOOST_CHECK(asserter::assert_equals(nqn, a));
 }
 
@@ -213,7 +213,7 @@ BOOST_AUTO_TEST_CASE(parsing_vector_of_string_produces_expected_nested_qualified
     c.type(f);
     nqn.children(std::list<dogen::sml::nested_qname> { c });
 
-    const auto a(ip.parse_qualified_name("std::vector<std::string>"));
+    const auto a(ip.parse_qname("std::vector<std::string>"));
     BOOST_CHECK(asserter::assert_equals(nqn, a));
 }
 
@@ -232,7 +232,7 @@ BOOST_AUTO_TEST_CASE(parsing_vector_of_primitive_produces_expected_nested_qualif
     c.type(f);
     nqn.children(std::list<dogen::sml::nested_qname> { c });
 
-    const auto a(ip.parse_qualified_name("std::vector<unsigned int>"));
+    const auto a(ip.parse_qname("std::vector<unsigned int>"));
     BOOST_CHECK(asserter::assert_equals(nqn, a));
 }
 
@@ -258,7 +258,7 @@ BOOST_AUTO_TEST_CASE(parsing_unordered_map_produces_expected_nested_qualified_na
 
     nqn.children(std::list<dogen::sml::nested_qname> { c, d });
 
-    const auto a(ip.parse_qualified_name("std::unordered_map<std::string,my::type>"));
+    const auto a(ip.parse_qname("std::unordered_map<std::string,my::type>"));
     BOOST_CHECK(asserter::assert_equals(nqn, a));
 }
 
@@ -285,7 +285,7 @@ BOOST_AUTO_TEST_CASE(parsing_vector_of_shared_ptr_produces_expected_nested_quali
     c.children(std::list<dogen::sml::nested_qname> { d });
     nqn.children(std::list<dogen::sml::nested_qname> { c });
 
-    const auto a(ip.parse_qualified_name("std::vector<std::shared_ptr<std::string>>"));
+    const auto a(ip.parse_qname("std::vector<std::shared_ptr<std::string>>"));
     BOOST_CHECK(asserter::assert_equals(nqn, a));
 }
 
