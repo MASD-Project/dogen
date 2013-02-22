@@ -57,8 +57,8 @@ using dogen::sml::parsing_error;
 
 BOOST_AUTO_TEST_SUITE(identifier_parser)
 
-BOOST_AUTO_TEST_CASE(parsing_string_with_inner_namespaces_produces_expected_qualified_name) {
-    SETUP_TEST_LOG("parsing_string_with_inner_namespaces_produces_expected_qualified_name");
+BOOST_AUTO_TEST_CASE(parsing_string_with_inner_namespaces_produces_expected_qname) {
+    SETUP_TEST_LOG("parsing_string_with_inner_namespaces_produces_expected_qname");
     const std::string s("a::b::c::z");
     dogen::sml::identifier_parser ip;
     const auto a(ip.parse_qname(s));
@@ -72,8 +72,8 @@ BOOST_AUTO_TEST_CASE(parsing_string_with_inner_namespaces_produces_expected_qual
     BOOST_CHECK(asserter::assert_equals(nqn, a));
 }
 
-BOOST_AUTO_TEST_CASE(parsing_string_with_scope_operator_produces_expected_qualified_name) {
-    SETUP_TEST_LOG("parsing_string_with_scope_operator_produces_expected_qualified_name");
+BOOST_AUTO_TEST_CASE(parsing_string_with_scope_operator_produces_expected_qname) {
+    SETUP_TEST_LOG("parsing_string_with_scope_operator_produces_expected_qname");
     const std::string s("zeta");
     dogen::sml::identifier_parser ip;
     const auto a(ip.parse_qname(s));
@@ -85,8 +85,8 @@ BOOST_AUTO_TEST_CASE(parsing_string_with_scope_operator_produces_expected_qualif
     BOOST_CHECK(asserter::assert_equals(nqn, a));
 }
 
-BOOST_AUTO_TEST_CASE(parsing_string_with_one_colon_produces_expected_qualified_name) {
-    SETUP_TEST_LOG("parsing_string_with_one_colon_produces_expected_qualified_name");
+BOOST_AUTO_TEST_CASE(parsing_string_with_one_colon_produces_expected_qname) {
+    SETUP_TEST_LOG("parsing_string_with_one_colon_produces_expected_qname");
     const std::string s("a::z");
     dogen::sml::identifier_parser ip;
     const auto a(ip.parse_qname(s));
@@ -150,8 +150,8 @@ BOOST_AUTO_TEST_CASE(unsignable_types_cannot_be_unsigned) {
     BOOST_CHECK_THROW(ip.parse_qname("unsigned double"), parsing_error);
 }
 
-BOOST_AUTO_TEST_CASE(parsing_string_with_single_template_argument_produces_expected_nested_qualified_names) {
-    SETUP_TEST_LOG("parsing_string_with_single_template_argument_produces_expected_nested_qualified_names");
+BOOST_AUTO_TEST_CASE(parsing_string_with_single_template_argument_produces_expected_nested_qnames) {
+    SETUP_TEST_LOG("parsing_string_with_single_template_argument_produces_expected_nested_qnames");
     dogen::sml::identifier_parser ip;
     dogen::sml::nested_qname nqn;
     dogen::sml::qname e;
@@ -174,8 +174,8 @@ BOOST_AUTO_TEST_CASE(parsing_string_with_single_template_argument_produces_expec
     ip.parse_qname("std::vector<std::shared_ptr<std::string>>");
 }
 
-BOOST_AUTO_TEST_CASE(parsing_string_with_two_template_argument_produces_expected_nested_qualified_names) {
-    SETUP_TEST_LOG("parsing_string_with_two_template_argument_produces_expected_nested_qualified_names");
+BOOST_AUTO_TEST_CASE(parsing_string_with_two_template_argument_produces_expected_nested_qnames) {
+    SETUP_TEST_LOG("parsing_string_with_two_template_argument_produces_expected_nested_qnames");
     dogen::sml::identifier_parser ip;
     dogen::sml::nested_qname nqn;
     dogen::sml::qname e;
@@ -197,8 +197,8 @@ BOOST_AUTO_TEST_CASE(parsing_string_with_two_template_argument_produces_expected
     BOOST_CHECK(asserter::assert_equals(nqn, a));
 }
 
-BOOST_AUTO_TEST_CASE(parsing_vector_of_string_produces_expected_nested_qualified_names) {
-    SETUP_TEST_LOG("parsing_vector_of_string_produces_expected_nested_qualified_names");
+BOOST_AUTO_TEST_CASE(parsing_vector_of_string_produces_expected_nested_qnames) {
+    SETUP_TEST_LOG("parsing_vector_of_string_produces_expected_nested_qnames");
     dogen::sml::identifier_parser ip;
     dogen::sml::nested_qname nqn;
     dogen::sml::qname e;
@@ -217,8 +217,8 @@ BOOST_AUTO_TEST_CASE(parsing_vector_of_string_produces_expected_nested_qualified
     BOOST_CHECK(asserter::assert_equals(nqn, a));
 }
 
-BOOST_AUTO_TEST_CASE(parsing_vector_of_primitive_produces_expected_nested_qualified_names) {
-    SETUP_TEST_LOG("parsing_vector_of_primitive_produces_expected_nested_qualified_names");
+BOOST_AUTO_TEST_CASE(parsing_vector_of_primitive_produces_expected_nested_qnames) {
+    SETUP_TEST_LOG("parsing_vector_of_primitive_produces_expected_nested_qnames");
     dogen::sml::identifier_parser ip;
     dogen::sml::nested_qname nqn;
     dogen::sml::qname e;
@@ -236,8 +236,8 @@ BOOST_AUTO_TEST_CASE(parsing_vector_of_primitive_produces_expected_nested_qualif
     BOOST_CHECK(asserter::assert_equals(nqn, a));
 }
 
-BOOST_AUTO_TEST_CASE(parsing_unordered_map_produces_expected_nested_qualified_names) {
-    SETUP_TEST_LOG("parsing_unordered_map_produces_expected_nested_qualified_names");
+BOOST_AUTO_TEST_CASE(parsing_unordered_map_produces_expected_nested_qnames) {
+    SETUP_TEST_LOG("parsing_unordered_map_produces_expected_nested_qnames");
     dogen::sml::identifier_parser ip;
     dogen::sml::nested_qname nqn;
     dogen::sml::qname e;
@@ -262,8 +262,8 @@ BOOST_AUTO_TEST_CASE(parsing_unordered_map_produces_expected_nested_qualified_na
     BOOST_CHECK(asserter::assert_equals(nqn, a));
 }
 
-BOOST_AUTO_TEST_CASE(parsing_vector_of_shared_ptr_produces_expected_nested_qualified_names) {
-    SETUP_TEST_LOG("parsing_vector_of_shared_ptr_produces_expected_nested_qualified_names");
+BOOST_AUTO_TEST_CASE(parsing_vector_of_shared_ptr_produces_expected_nested_qnames) {
+    SETUP_TEST_LOG("parsing_vector_of_shared_ptr_produces_expected_nested_qnames");
     dogen::sml::identifier_parser ip;
     dogen::sml::nested_qname nqn;
     dogen::sml::qname e;
@@ -289,8 +289,8 @@ BOOST_AUTO_TEST_CASE(parsing_vector_of_shared_ptr_produces_expected_nested_quali
     BOOST_CHECK(asserter::assert_equals(nqn, a));
 }
 
-BOOST_AUTO_TEST_CASE(names_that_partially_match_primitives_produce_expected_nested_qualified_name) {
-    SETUP_TEST_LOG("names_that_partially_match_primitives_produce_expected_nested_qualified_name");
+BOOST_AUTO_TEST_CASE(names_that_partially_match_primitives_produce_expected_nested_qname) {
+    SETUP_TEST_LOG("names_that_partially_match_primitives_produce_expected_nested_qname");
 
     BOOST_CHECK(test_primitive("character"));
     BOOST_CHECK(test_primitive("cha"));

@@ -1,0 +1,214 @@
+From 1aa5cf7a7092b2e3741dbee731b55a0f572bd24c Mon Sep 17 00:00:00 2001
+From: Rui AB Prado <ruiabprado@kitanda.co.uk>
+Date: Thu, 21 Feb 2013 21:00:24 +0000
+Subject: [PATCH] sml: rename parse_qualified_name to parse_qname
+
+---
+ diagrams/sml/sml.dia                               |  2 +-
+ .../src/modeling/dia_object_to_sml_pod.cpp         |  2 +-
+ .../include/dogen/sml/types/identifier_parser.hpp  |  2 +-
+ projects/sml/spec/identifier_parser_spec.cpp       | 44 +++++++++++-----------
+ projects/sml/src/types/identifier_parser.cpp       |  2 +-
+ 5 files changed, 26 insertions(+), 26 deletions(-)
+
+diff --git a/diagrams/sml/sml.dia b/diagrams/sml/sml.dia
+index dc7b090..2895f40 100644
+--- a/diagrams/sml/sml.dia
++++ b/diagrams/sml/sml.dia
+@@ -6602,7 +6602,7 @@ all types in the combined model.#</dia:string>
+         </dia:composite>
+         <dia:composite type="umloperation">
+           <dia:attribute name="name">
+-            <dia:string>#parse_qualified_name#</dia:string>
++            <dia:string>#parse_qname#</dia:string>
+           </dia:attribute>
+           <dia:attribute name="stereotype">
+             <dia:string>##</dia:string>
+diff --git a/projects/generator/src/modeling/dia_object_to_sml_pod.cpp b/projects/generator/src/modeling/dia_object_to_sml_pod.cpp
+index 000164a..0c2bbd3 100644
+--- a/projects/generator/src/modeling/dia_object_to_sml_pod.cpp
++++ b/projects/generator/src/modeling/dia_object_to_sml_pod.cpp
+@@ -346,7 +346,7 @@ transform_property(const dogen::dia::composite& uml_attribute) {
+             property.name(transform_string_attribute(*a));
+         else if (a->name() == dia_type) {
+             const std::string s(transform_string_attribute(*a));
+-            auto nested_name(state_->parser_.parse_qualified_name(s));
++            auto nested_name(state_->parser_.parse_qname(s));
+             if (nested_name.type().type_name().empty()) {
+                 BOOST_LOG_SEV(lg, error) << invalid_type_string << s;
+                 BOOST_THROW_EXCEPTION(
+diff --git a/projects/sml/include/dogen/sml/types/identifier_parser.hpp b/projects/sml/include/dogen/sml/types/identifier_parser.hpp
+index 9753112..bda30d7 100644
+--- a/projects/sml/include/dogen/sml/types/identifier_parser.hpp
++++ b/projects/sml/include/dogen/sml/types/identifier_parser.hpp
+@@ -56,7 +56,7 @@ public:
+         const std::string model_name);
+ 
+ public:
+-    nested_qname parse_qualified_name(const std::string& n);
++    nested_qname parse_qname(const std::string& n);
+     static std::list<std::string> parse_scoped_name(const std::string& n);
+ 
+ private:
+diff --git a/projects/sml/spec/identifier_parser_spec.cpp b/projects/sml/spec/identifier_parser_spec.cpp
+index 159908f..b4e6b4f 100644
+--- a/projects/sml/spec/identifier_parser_spec.cpp
++++ b/projects/sml/spec/identifier_parser_spec.cpp
+@@ -42,7 +42,7 @@ const std::string test_suite("identifier_parser_spec");
+ 
+ bool test_primitive(const std::string& s) {
+     dogen::sml::identifier_parser ip;
+-    const auto a(ip.parse_qualified_name(s));
++    const auto a(ip.parse_qname(s));
+ 
+     dogen::sml::nested_qname nqn;
+     dogen::sml::qname e;
+@@ -61,7 +61,7 @@ BOOST_AUTO_TEST_CASE(parsing_string_with_inner_namespaces_produces_expected_qual
+     SETUP_TEST_LOG("parsing_string_with_inner_namespaces_produces_expected_qualified_name");
+     const std::string s("a::b::c::z");
+     dogen::sml::identifier_parser ip;
+-    const auto a(ip.parse_qualified_name(s));
++    const auto a(ip.parse_qname(s));
+ 
+     dogen::sml::nested_qname nqn;
+     dogen::sml::qname e;
+@@ -76,7 +76,7 @@ BOOST_AUTO_TEST_CASE(parsing_string_with_scope_operator_produces_expected_qualif
+     SETUP_TEST_LOG("parsing_string_with_scope_operator_produces_expected_qualified_name");
+     const std::string s("zeta");
+     dogen::sml::identifier_parser ip;
+-    const auto a(ip.parse_qualified_name(s));
++    const auto a(ip.parse_qname(s));
+ 
+     dogen::sml::nested_qname nqn;
+     dogen::sml::qname e;
+@@ -89,7 +89,7 @@ BOOST_AUTO_TEST_CASE(parsing_string_with_one_colon_produces_expected_qualified_n
+     SETUP_TEST_LOG("parsing_string_with_one_colon_produces_expected_qualified_name");
+     const std::string s("a::z");
+     dogen::sml::identifier_parser ip;
+-    const auto a(ip.parse_qualified_name(s));
++    const auto a(ip.parse_qname(s));
+ 
+     dogen::sml::nested_qname nqn;
+     dogen::sml::qname e;
+@@ -103,21 +103,21 @@ BOOST_AUTO_TEST_CASE(string_starting_with_digit_fails_to_parse) {
+     SETUP_TEST_LOG("string_starting_with_digit_fails_to_parse");
+     const std::string s("0a");
+     dogen::sml::identifier_parser ip;
+-    BOOST_CHECK_THROW(ip.parse_qualified_name(s), parsing_error);
++    BOOST_CHECK_THROW(ip.parse_qname(s), parsing_error);
+ }
+ 
+ BOOST_AUTO_TEST_CASE(string_ending_with_scope_operator_fails_to_parse) {
+     SETUP_TEST_LOG("string_ending_with_scope_operator_fails_to_parse");
+     const std::string s("a::");
+     dogen::sml::identifier_parser ip;
+-    BOOST_CHECK_THROW(ip.parse_qualified_name(s), parsing_error);
++    BOOST_CHECK_THROW(ip.parse_qname(s), parsing_error);
+ }
+ 
+ BOOST_AUTO_TEST_CASE(scope_operator_followed_by_scope_operator_fails_to_parse) {
+     SETUP_TEST_LOG("scope_operator_followed_by_scope_operator_fails_to_parse");
+     const std::string s("A::::");
+     dogen::sml::identifier_parser ip;
+-    BOOST_CHECK_THROW(ip.parse_qualified_name(s), parsing_error);
++    BOOST_CHECK_THROW(ip.parse_qname(s), parsing_error);
+ }
+ 
+ BOOST_AUTO_TEST_CASE(all_primitive_types_are_valid) {
+@@ -144,10 +144,10 @@ BOOST_AUTO_TEST_CASE(all_primitive_types_are_valid) {
+ BOOST_AUTO_TEST_CASE(unsignable_types_cannot_be_unsigned) {
+     SETUP_TEST_LOG("unsignable_types_cannot_be_unsigned");
+     dogen::sml::identifier_parser ip;
+-    BOOST_CHECK_THROW(ip.parse_qualified_name("unsigned bool"), parsing_error);
+-    BOOST_CHECK_THROW(ip.parse_qualified_name("unsigned x"), parsing_error);
+-    BOOST_CHECK_THROW(ip.parse_qualified_name("unsigned float"), parsing_error);
+-    BOOST_CHECK_THROW(ip.parse_qualified_name("unsigned double"), parsing_error);
++    BOOST_CHECK_THROW(ip.parse_qname("unsigned bool"), parsing_error);
++    BOOST_CHECK_THROW(ip.parse_qname("unsigned x"), parsing_error);
++    BOOST_CHECK_THROW(ip.parse_qname("unsigned float"), parsing_error);
++    BOOST_CHECK_THROW(ip.parse_qname("unsigned double"), parsing_error);
+ }
+ 
+ BOOST_AUTO_TEST_CASE(parsing_string_with_single_template_argument_produces_expected_nested_qualified_names) {
+@@ -164,14 +164,14 @@ BOOST_AUTO_TEST_CASE(parsing_string_with_single_template_argument_produces_expec
+     c.type(f);
+     nqn.children(std::list<dogen::sml::nested_qname> { c });
+ 
+-    const auto a(ip.parse_qualified_name("type<abc>"));
++    const auto a(ip.parse_qname("type<abc>"));
+     BOOST_CHECK(asserter::assert_equals(nqn, a));
+ 
+-    ip.parse_qualified_name("type<abc,cde>");
+-    ip.parse_qualified_name("std::vector<std::string>");
+-    ip.parse_qualified_name("std::vector<unsigned int>");
+-    ip.parse_qualified_name("std::unordered_map<std::string,my::type>");
+-    ip.parse_qualified_name("std::vector<std::shared_ptr<std::string>>");
++    ip.parse_qname("type<abc,cde>");
++    ip.parse_qname("std::vector<std::string>");
++    ip.parse_qname("std::vector<unsigned int>");
++    ip.parse_qname("std::unordered_map<std::string,my::type>");
++    ip.parse_qname("std::vector<std::shared_ptr<std::string>>");
+ }
+ 
+ BOOST_AUTO_TEST_CASE(parsing_string_with_two_template_argument_produces_expected_nested_qualified_names) {
+@@ -193,7 +193,7 @@ BOOST_AUTO_TEST_CASE(parsing_string_with_two_template_argument_produces_expected
+     d.type(g);
+     nqn.children(std::list<dogen::sml::nested_qname> { c, d });
+ 
+-    const auto a(ip.parse_qualified_name("type<abc,cde>"));
++    const auto a(ip.parse_qname("type<abc,cde>"));
+     BOOST_CHECK(asserter::assert_equals(nqn, a));
+ }
+ 
+@@ -213,7 +213,7 @@ BOOST_AUTO_TEST_CASE(parsing_vector_of_string_produces_expected_nested_qualified
+     c.type(f);
+     nqn.children(std::list<dogen::sml::nested_qname> { c });
+ 
+-    const auto a(ip.parse_qualified_name("std::vector<std::string>"));
++    const auto a(ip.parse_qname("std::vector<std::string>"));
+     BOOST_CHECK(asserter::assert_equals(nqn, a));
+ }
+ 
+@@ -232,7 +232,7 @@ BOOST_AUTO_TEST_CASE(parsing_vector_of_primitive_produces_expected_nested_qualif
+     c.type(f);
+     nqn.children(std::list<dogen::sml::nested_qname> { c });
+ 
+-    const auto a(ip.parse_qualified_name("std::vector<unsigned int>"));
++    const auto a(ip.parse_qname("std::vector<unsigned int>"));
+     BOOST_CHECK(asserter::assert_equals(nqn, a));
+ }
+ 
+@@ -258,7 +258,7 @@ BOOST_AUTO_TEST_CASE(parsing_unordered_map_produces_expected_nested_qualified_na
+ 
+     nqn.children(std::list<dogen::sml::nested_qname> { c, d });
+ 
+-    const auto a(ip.parse_qualified_name("std::unordered_map<std::string,my::type>"));
++    const auto a(ip.parse_qname("std::unordered_map<std::string,my::type>"));
+     BOOST_CHECK(asserter::assert_equals(nqn, a));
+ }
+ 
+@@ -285,7 +285,7 @@ BOOST_AUTO_TEST_CASE(parsing_vector_of_shared_ptr_produces_expected_nested_quali
+     c.children(std::list<dogen::sml::nested_qname> { d });
+     nqn.children(std::list<dogen::sml::nested_qname> { c });
+ 
+-    const auto a(ip.parse_qualified_name("std::vector<std::shared_ptr<std::string>>"));
++    const auto a(ip.parse_qname("std::vector<std::shared_ptr<std::string>>"));
+     BOOST_CHECK(asserter::assert_equals(nqn, a));
+ }
+ 
+diff --git a/projects/sml/src/types/identifier_parser.cpp b/projects/sml/src/types/identifier_parser.cpp
+index e6fd47d..4b66fee 100644
+--- a/projects/sml/src/types/identifier_parser.cpp
++++ b/projects/sml/src/types/identifier_parser.cpp
+@@ -178,7 +178,7 @@ identifier_parser(const std::unordered_set<std::string>& packages,
+       model_name_(model_name) { }
+ 
+ nested_qname identifier_parser::
+-parse_qualified_name(const std::string& n) {
++parse_qname(const std::string& n) {
+     std::string::const_iterator it(n.begin());
+     std::string::const_iterator end(n.end());
+ 
+-- 
+1.7.11.msysgit.0
+
