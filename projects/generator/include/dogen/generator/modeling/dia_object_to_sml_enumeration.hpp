@@ -52,7 +52,7 @@ public:
         bool is_target, bool verbose);
 
 private:
-    sml::qname transform_qualified_name(const dia::attribute& a,
+    sml::qname transform_qname(const dia::attribute& a,
         sml::meta_types meta_type, const std::string& pkg_id) const;
 
     std::string transform_string_attribute(const dia::attribute& a) const;

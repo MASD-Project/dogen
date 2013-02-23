@@ -148,7 +148,7 @@ namespace generator {
 namespace modeling {
 
 dogen::sml::qname dia_object_to_sml_exception::
-transform_qualified_name(const dogen::dia::attribute& a,
+transform_qname(const dogen::dia::attribute& a,
     dogen::sml::meta_types meta_type, const std::string& pkg_id) const {
     if (a.name() != dia_name) {
         BOOST_LOG_SEV(lg, error) << name_attribute_expected;
@@ -253,7 +253,7 @@ transform_exception(const dia::object& o) const {
             const std::string pkg_id(o.child_node() ?
                 o.child_node()->parent() : empty);
             using dogen::sml::meta_types;
-            r.name(transform_qualified_name(a, meta_types::exception,
+            r.name(transform_qname(a, meta_types::exception,
                     pkg_id));
         } else if (a.name() == dia_documentation) {
             const std::string doc(transform_string_attribute(a));

@@ -139,7 +139,7 @@ private:
      * @param attribute Name Dia attribute.
      */
     dogen::sml::qname
-    transform_qualified_name(const dogen::dia::attribute& attribute,
+    transform_qname(const dogen::dia::attribute& attribute,
         dogen::sml::meta_types meta_type) const;
 
     /**
@@ -195,7 +195,7 @@ transform_string_attribute(const dogen::dia::attribute& a) const {
 }
 
 dogen::sml::qname dia_dfs_visitor::
-transform_qualified_name(const dogen::dia::attribute& a,
+transform_qname(const dogen::dia::attribute& a,
     dogen::sml::meta_types meta_type) const {
     if (a.name() != dia_name) {
         BOOST_LOG_SEV(lg, error) << name_attribute_expected;
@@ -223,7 +223,7 @@ dia_dfs_visitor::transform_package(const dogen::dia::object& o) {
     for (auto a : o.attributes()) {
         if (a.name() == dia_name) {
             using dogen::sml::meta_types;
-            package.name(transform_qualified_name(a, meta_types::package));
+            package.name(transform_qname(a, meta_types::package));
         }
     }
 
@@ -248,7 +248,7 @@ void dia_dfs_visitor::push_package_path(const dogen::dia::object& o) {
 
             dogen::sml::package p;
             using dogen::sml::meta_types;
-            p.name(transform_qualified_name(a, meta_types::package));
+            p.name(transform_qname(a, meta_types::package));
             state_->packages_.insert(std::make_pair(o.id(), p));
 
             BOOST_LOG_SEV(lg, debug) << "Updating package_path: " << o.id();

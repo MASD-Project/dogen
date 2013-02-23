@@ -223,7 +223,7 @@ private:
     /**
      * @brief Converts a nested qualified name into model dependencies
      */
-    void model_dependencies_for_nested_qualified_name(
+    void model_dependencies_for_nested_qname(
         const dogen::sml::nested_qname& nqn);
 
     /**
@@ -232,7 +232,7 @@ private:
      * @param attribute Name Dia attribute.
      */
     dogen::sml::qname
-    transform_qualified_name(const dogen::dia::attribute& attribute,
+    transform_qname(const dogen::dia::attribute& attribute,
         dogen::sml::meta_types meta_type, const std::string& pkg_id) const;
 
     /**
@@ -291,7 +291,7 @@ transform_string_attribute(const dogen::dia::attribute& a) const {
     return name;
 }
 
-void dia_dfs_visitor::model_dependencies_for_nested_qualified_name(
+void dia_dfs_visitor::model_dependencies_for_nested_qname(
     const dogen::sml::nested_qname& nqn) {
 
     // primitives model is empty
@@ -300,11 +300,11 @@ void dia_dfs_visitor::model_dependencies_for_nested_qualified_name(
         state_->dependencies_.insert(mn);
 
     for (const auto c : nqn.children())
-        model_dependencies_for_nested_qualified_name(c);
+        model_dependencies_for_nested_qname(c);
 }
 
 dogen::sml::qname dia_dfs_visitor::
-transform_qualified_name(const dogen::dia::attribute& a,
+transform_qname(const dogen::dia::attribute& a,
     dogen::sml::meta_types meta_type, const std::string& pkg_id) const {
     if (a.name() != dia_name) {
         BOOST_LOG_SEV(lg, error) << name_attribute_expected;
@@ -353,7 +353,7 @@ transform_property(const dogen::dia::composite& uml_attribute) {
                     transformation_error(invalid_type_string + s));
             }
             property.type_name(nested_name);
-            model_dependencies_for_nested_qualified_name(nested_name);
+            model_dependencies_for_nested_qname(nested_name);
         } else if (a->name() == dia_documentation) {
             const std::string doc(transform_string_attribute(*a));
             property.documentation(doc);
@@ -393,7 +393,7 @@ void dia_dfs_visitor::process_dia_object(const dogen::dia::object& o) {
             const std::string pkg_id(o.child_node() ?
                 o.child_node()->parent() : empty);
             using dogen::sml::meta_types;
-            pod.name(transform_qualified_name(a, meta_types::pod, pkg_id));
+            pod.name(transform_qname(a, meta_types::pod, pkg_id));
         } else if (a.name() == dia_stereotype) {
             const auto v(transform_string_attribute(a));
 

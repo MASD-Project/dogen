@@ -147,7 +147,7 @@ namespace generator {
 namespace modeling {
 
 dogen::sml::qname dia_object_to_sml_enumeration::
-transform_qualified_name(const dogen::dia::attribute& a,
+transform_qname(const dogen::dia::attribute& a,
     dogen::sml::meta_types meta_type, const std::string& pkg_id) const {
     if (a.name() != dia_name) {
         BOOST_LOG_SEV(lg, error) << name_attribute_expected;
@@ -276,7 +276,7 @@ transform_enumeration(const dia::object& o) const {
             const std::string pkg_id(o.child_node() ?
                 o.child_node()->parent() : empty);
             using sml::meta_types;
-            r.name(transform_qualified_name(a, meta_types::enumeration,
+            r.name(transform_qname(a, meta_types::enumeration,
                     pkg_id));
         } else if (a.name() == dia_documentation) {
             const std::string doc(transform_string_attribute(a));
