@@ -26,27 +26,32 @@ namespace boost_model {
 class_f::class_f(class_f&& rhs)
     : prop_0_(std::move(rhs.prop_0_)),
       prop_1_(std::move(rhs.prop_1_)),
-      prop_2_(std::move(rhs.prop_2_)) { }
+      prop_2_(std::move(rhs.prop_2_)),
+      prop_3_(std::move(rhs.prop_3_)) { }
 
 class_f::class_f(
     const boost::filesystem::path& prop_0,
     const boost::gregorian::date& prop_1,
-    const boost::posix_time::ptime& prop_2)
+    const boost::posix_time::ptime& prop_2,
+    const boost::posix_time::time_duration& prop_3)
     : prop_0_(prop_0),
       prop_1_(prop_1),
-      prop_2_(prop_2) { }
+      prop_2_(prop_2),
+      prop_3_(prop_3) { }
 
 void class_f::swap(class_f& other) noexcept {
     using std::swap;
     swap(prop_0_, other.prop_0_);
     swap(prop_1_, other.prop_1_);
     swap(prop_2_, other.prop_2_);
+    swap(prop_3_, other.prop_3_);
 }
 
 bool class_f::operator==(const class_f& rhs) const {
     return prop_0_ == rhs.prop_0_ &&
         prop_1_ == rhs.prop_1_ &&
-        prop_2_ == rhs.prop_2_;
+        prop_2_ == rhs.prop_2_ &&
+        prop_3_ == rhs.prop_3_;
 }
 
 class_f& class_f::operator=(class_f other) {
@@ -101,6 +106,22 @@ void class_f::prop_2(const boost::posix_time::ptime& v) {
 
 void class_f::prop_2(const boost::posix_time::ptime&& v) {
     prop_2_ = std::move(v);
+}
+
+const boost::posix_time::time_duration& class_f::prop_3() const {
+    return prop_3_;
+}
+
+boost::posix_time::time_duration& class_f::prop_3() {
+    return prop_3_;
+}
+
+void class_f::prop_3(const boost::posix_time::time_duration& v) {
+    prop_3_ = v;
+}
+
+void class_f::prop_3(const boost::posix_time::time_duration&& v) {
+    prop_3_ = std::move(v);
 }
 
 } }

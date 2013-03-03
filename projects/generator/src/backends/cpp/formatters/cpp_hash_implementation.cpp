@@ -75,7 +75,8 @@ bool hash_implementation::is_hashable(const nested_type_view_model& vm) {
         !vm.is_smart_pointer() &&
         !vm.is_optional_like() &&
         !vm.is_variant_like() &&
-        !vm.is_ptime();
+        !vm.is_ptime() &&
+        !vm.is_time_duration();
 }
 
 void hash_implementation::combine_function(const class_view_model& vm) {
@@ -377,6 +378,30 @@ void hash_implementation::ptime_helper(const nested_type_view_model& vm) {
 }
 
 void hash_implementation::
+time_duration_helper(const nested_type_view_model& vm) {
+    const std::string identifiable_type_name(
+        vm.complete_identifiable_name());
+    const std::string type_name(vm.complete_name());
+
+    utility_.blank_line();
+    stream_ << indenter_ << "inline std::size_t hash_" << identifiable_type_name
+            << "(const " << type_name << "& v) ";
+
+    utility_.open_scope();
+    {
+        cpp_positive_indenter_scope s(indenter_);
+        stream_ << indenter_ << "std::size_t seed(0);"
+                << std::endl;
+
+        stream_ << indenter_
+                << "seed = static_cast<std::size_t>(v.total_seconds());"
+                << std::endl;
+        stream_ << indenter_ << "return seed;" << std::endl;
+    }
+    utility_.close_scope();
+}
+
+void hash_implementation::
 recursive_helper_method_creator(const nested_type_view_model& vm,
     std::unordered_set<std::string>& types_done) {
     BOOST_LOG_SEV(lg, debug) << "Creating helper methods for " << vm.name();
@@ -400,6 +425,8 @@ recursive_helper_method_creator(const nested_type_view_model& vm,
         variant_helper(vm);
     else if (vm.is_ptime())
         ptime_helper(vm);
+    else if (vm.is_time_duration())
+        time_duration_helper(vm);
 
     types_done.insert(vm.complete_identifiable_name());
 }

@@ -611,7 +611,8 @@ format_inserter_implementation(const class_view_model& vm) {
         if (p.type().is_filesystem_path()) {
             ss << ".generic_string()";
             stream_ << utility_.quote_escaped_streamed(ss.str());
-        } else if (p.type().is_date() || p.type().is_ptime()) {
+        } else if (p.type().is_date() || p.type().is_ptime() ||
+            p.type().is_time_duration()) {
             stream_ << utility_.quote_escaped_streamed(ss.str());
         } else if (p.type().is_string_like()) {
 

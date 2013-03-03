@@ -47,7 +47,8 @@ public:
     class_f(
         const boost::filesystem::path& prop_0,
         const boost::gregorian::date& prop_1,
-        const boost::posix_time::ptime& prop_2);
+        const boost::posix_time::ptime& prop_2,
+        const boost::posix_time::time_duration& prop_3);
 
 private:
     template<typename Archive>
@@ -72,6 +73,11 @@ public:
     void prop_2(const boost::posix_time::ptime& v);
     void prop_2(const boost::posix_time::ptime&& v);
 
+    const boost::posix_time::time_duration& prop_3() const;
+    boost::posix_time::time_duration& prop_3();
+    void prop_3(const boost::posix_time::time_duration& v);
+    void prop_3(const boost::posix_time::time_duration&& v);
+
 public:
     bool operator==(const class_f& rhs) const;
     bool operator!=(const class_f& rhs) const {
@@ -86,6 +92,7 @@ private:
     boost::filesystem::path prop_0_;
     boost::gregorian::date prop_1_;
     boost::posix_time::ptime prop_2_;
+    boost::posix_time::time_duration prop_3_;
 };
 
 } }

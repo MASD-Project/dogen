@@ -37,6 +37,12 @@ inline std::size_t hash_boost_posix_time_ptime(const boost::posix_time::ptime& v
     return seed;
 }
 
+inline std::size_t hash_boost_posix_time_time_duration(const boost::posix_time::time_duration& v) {
+    std::size_t seed(0);
+    seed = static_cast<std::size_t>(v.total_seconds());
+    return seed;
+}
+
 }
 
 namespace dogen {
@@ -48,6 +54,7 @@ std::size_t class_f_hasher::hash(const class_f&v) {
     combine(seed, v.prop_0().generic_string());
     combine(seed, v.prop_1().modjulian_day());
     combine(seed, hash_boost_posix_time_ptime(v.prop_2()));
+    combine(seed, hash_boost_posix_time_time_duration(v.prop_3()));
 
     return seed;
 }

@@ -48,6 +48,7 @@ void save(Archive& ar,
     ar << make_nvp("prop_0", v.prop_0_.generic_string());
     ar << make_nvp("prop_1", v.prop_1_);
     ar << make_nvp("prop_2", v.prop_2_);
+    ar << make_nvp("prop_3", v.prop_3_);
 }
 
 template<typename Archive>
@@ -59,6 +60,7 @@ void load(Archive& ar,
     v.prop_0_ = prop_0_tmp;
     ar >> make_nvp("prop_1", v.prop_1_);
     ar >> make_nvp("prop_2", v.prop_2_);
+    ar >> make_nvp("prop_3", v.prop_3_);
 }
 
 } }

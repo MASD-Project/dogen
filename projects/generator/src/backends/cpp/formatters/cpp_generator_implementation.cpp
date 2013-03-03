@@ -329,7 +329,7 @@ time_duration_helper(const nested_type_view_model& vm) {
         stream_ << indenter_ << "unsigned int hour(position % 55);" << std::endl
                 << indenter_ << "using boost::posix_time::time_duration;"
                 << std::endl
-                << "time_duration r(hour, 2, 3));" << std::endl
+                << indenter_ << "time_duration r(hour, 2, 3);" << std::endl
                 << indenter_ << "return r;" << std::endl;
     }
     utility_.close_scope();
