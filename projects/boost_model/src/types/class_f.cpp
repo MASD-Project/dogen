@@ -25,23 +25,28 @@ namespace boost_model {
 
 class_f::class_f(class_f&& rhs)
     : prop_0_(std::move(rhs.prop_0_)),
-      prop_1_(std::move(rhs.prop_1_)) { }
+      prop_1_(std::move(rhs.prop_1_)),
+      prop_2_(std::move(rhs.prop_2_)) { }
 
 class_f::class_f(
     const boost::filesystem::path& prop_0,
-    const boost::gregorian::date& prop_1)
+    const boost::gregorian::date& prop_1,
+    const boost::posix_time::ptime& prop_2)
     : prop_0_(prop_0),
-      prop_1_(prop_1) { }
+      prop_1_(prop_1),
+      prop_2_(prop_2) { }
 
 void class_f::swap(class_f& other) noexcept {
     using std::swap;
     swap(prop_0_, other.prop_0_);
     swap(prop_1_, other.prop_1_);
+    swap(prop_2_, other.prop_2_);
 }
 
 bool class_f::operator==(const class_f& rhs) const {
     return prop_0_ == rhs.prop_0_ &&
-        prop_1_ == rhs.prop_1_;
+        prop_1_ == rhs.prop_1_ &&
+        prop_2_ == rhs.prop_2_;
 }
 
 class_f& class_f::operator=(class_f other) {
@@ -80,6 +85,22 @@ void class_f::prop_1(const boost::gregorian::date& v) {
 
 void class_f::prop_1(const boost::gregorian::date&& v) {
     prop_1_ = std::move(v);
+}
+
+const boost::posix_time::ptime& class_f::prop_2() const {
+    return prop_2_;
+}
+
+boost::posix_time::ptime& class_f::prop_2() {
+    return prop_2_;
+}
+
+void class_f::prop_2(const boost::posix_time::ptime& v) {
+    prop_2_ = v;
+}
+
+void class_f::prop_2(const boost::posix_time::ptime&& v) {
+    prop_2_ = std::move(v);
 }
 
 } }

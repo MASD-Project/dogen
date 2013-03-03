@@ -1575,7 +1575,7 @@
 					<meta_type>2</meta_type>
 				</name>
 				<properties>
-					<count>2</count>
+					<count>3</count>
 					<item_version>0</item_version>
 					<item>
 						<name>prop_0</name>
@@ -1618,6 +1618,32 @@
 									<item>gregorian</item>
 								</package_path>
 								<type_name>date</type_name>
+								<meta_type>0</meta_type>
+							</type>
+							<children>
+								<count>0</count>
+								<item_version>0</item_version>
+							</children>
+							<is_pointer>0</is_pointer>
+						</type_name>
+						<default_value></default_value>
+						<documentation></documentation>
+					</item>
+					<item>
+						<name>prop_2</name>
+						<type_name>
+							<type>
+								<model_name>boost</model_name>
+								<external_package_path>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_package_path>
+								<package_path>
+									<count>1</count>
+									<item_version>0</item_version>
+									<item>posix_time</item>
+								</package_path>
+								<type_name>ptime</type_name>
 								<meta_type>0</meta_type>
 							</type>
 							<children>

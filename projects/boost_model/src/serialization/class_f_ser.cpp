@@ -27,6 +27,8 @@
 #include <boost/archive/xml_iarchive.hpp>
 #include <boost/archive/xml_oarchive.hpp>
 #include <boost/date_time/gregorian/gregorian.hpp>
+#include <boost/date_time/posix_time/posix_time.hpp>
+#include <boost/date_time/posix_time/time_serialize.hpp>
 #include <boost/serialization/nvp.hpp>
 #include <boost/date_time/gregorian/greg_serialize.hpp>
 #include "dogen/boost_model/serialization/class_f_ser.hpp"
@@ -45,6 +47,7 @@ void save(Archive& ar,
     const unsigned int /*version*/) {
     ar << make_nvp("prop_0", v.prop_0_.generic_string());
     ar << make_nvp("prop_1", v.prop_1_);
+    ar << make_nvp("prop_2", v.prop_2_);
 }
 
 template<typename Archive>
@@ -55,6 +58,7 @@ void load(Archive& ar,
     ar >> make_nvp("prop_0", prop_0_tmp);
     v.prop_0_ = prop_0_tmp;
     ar >> make_nvp("prop_1", v.prop_1_);
+    ar >> make_nvp("prop_2", v.prop_2_);
 }
 
 } }

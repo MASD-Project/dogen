@@ -19,6 +19,7 @@
  *
  */
 #include <boost/date_time/gregorian/gregorian.hpp>
+#include <boost/date_time/posix_time/posix_time.hpp>
 #include <ostream>
 #include "dogen/boost_model/io/class_f_io.hpp"
 
@@ -29,7 +30,8 @@ std::ostream& operator<<(std::ostream& s, const class_f& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::boost_model::class_f\"" << ", "
       << "\"prop_0\": " << "\"" << v.prop_0().generic_string() << "\"" << ", "
-      << "\"prop_1\": " << "\"" << v.prop_1() << "\""
+      << "\"prop_1\": " << "\"" << v.prop_1() << "\"" << ", "
+      << "\"prop_2\": " << "\"" << v.prop_2() << "\""
       << " }";
     return(s);
 }

@@ -74,7 +74,8 @@ bool hash_implementation::is_hashable(const nested_type_view_model& vm) {
         !vm.is_associative_container() &&
         !vm.is_smart_pointer() &&
         !vm.is_optional_like() &&
-        !vm.is_variant_like();
+        !vm.is_variant_like() &&
+        !vm.is_ptime();
 }
 
 void hash_implementation::combine_function(const class_view_model& vm) {
@@ -346,6 +347,35 @@ smart_pointer_helper(const nested_type_view_model& vm) {
     utility_.close_scope();
 }
 
+void hash_implementation::ptime_helper(const nested_type_view_model& vm) {
+    const std::string identifiable_type_name(
+        vm.complete_identifiable_name());
+    const std::string type_name(vm.complete_name());
+
+    utility_.blank_line();
+    stream_ << indenter_ << "inline std::size_t hash_" << identifiable_type_name
+            << "(const " << type_name << "& v) ";
+
+    utility_.open_scope();
+    {
+        cpp_positive_indenter_scope s(indenter_);
+        stream_ << indenter_ << "std::size_t seed(0);"
+                << std::endl;
+
+        stream_ << indenter_
+                << "const boost::posix_time::ptime"
+                << " epoch(boost::gregorian::date(1970, 1, 1));"
+                << std::endl
+                << indenter_ << "boost::posix_time::time_duration d(v - epoch);"
+                << std::endl
+                << indenter_
+                << "seed = static_cast<std::size_t>(d.total_seconds());"
+                << std::endl;
+        stream_ << indenter_ << "return seed;" << std::endl;
+    }
+    utility_.close_scope();
+}
+
 void hash_implementation::
 recursive_helper_method_creator(const nested_type_view_model& vm,
     std::unordered_set<std::string>& types_done) {
@@ -368,6 +398,8 @@ recursive_helper_method_creator(const nested_type_view_model& vm,
         optional_helper(vm);
     else if (vm.is_variant_like())
         variant_helper(vm);
+    else if (vm.is_ptime())
+        ptime_helper(vm);
 
     types_done.insert(vm.complete_identifiable_name());
 }
