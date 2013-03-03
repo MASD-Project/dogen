@@ -251,6 +251,62 @@ void cpp_inclusion_manager::append_boost_dependencies(
     const bool is_test_data(ft == cpp_facet_types::test_data);
     if (is_implementation && is_test_data && is_path)
         il.system.push_back(std_.include(std_types::sstream));
+
+    const bool is_io(ft == cpp_facet_types::io);
+    // FIXME: removed  || p.parent_name() || p.is_parent()
+    const bool domain_with_io(is_domain && (settings_.use_integrated_io()));
+    const bool io_without_iio(is_io && !settings_.use_integrated_io());
+
+    /*
+     * boost::gregorian::date
+     */
+    const bool is_date(type_name == boost_.type(boost_types::gregorian_date));
+    if (is_header && is_domain && is_date)
+        il.system.push_back(boost_.include(boost_types::gregorian_date));
+
+    if (is_date && is_implementation && io_enabled_ &&
+        (domain_with_io || io_without_iio))
+        il.system.push_back(boost_.include(boost_types::io_gregorian_date));
+
+    if (is_implementation && is_serialization && is_date) {
+        il.system.push_back(boost_.include(boost_types::io_gregorian_date));
+        il.system.push_back(
+            boost_.include(boost_types::serialization_gregorian_date));
+    }
+
+    /*
+     * boost::posix_time::ptime
+     */
+    const bool is_time(type_name == boost_.type(boost_types::ptime));
+    if (is_header && is_domain && is_time)
+        il.system.push_back(boost_.include(boost_types::ptime));
+
+    if (is_time && is_implementation && io_enabled_ &&
+        (domain_with_io || io_without_iio))
+        il.system.push_back(boost_.include(boost_types::io_time));
+
+    if (is_implementation && is_serialization && is_time) {
+        il.system.push_back(boost_.include(boost_types::io_time));
+        il.system.push_back(boost_.include(boost_types::serialization_ptime));
+    }
+
+    /*
+     * boost::posix_time::time_duration
+     */
+    const bool is_duration(
+        type_name == boost_.type(boost_types::time_duration));
+    if (is_header && is_domain && is_duration)
+        il.system.push_back(boost_.include(boost_types::time_duration));
+
+    if (is_duration && is_implementation && io_enabled_ &&
+        (domain_with_io || io_without_iio))
+        il.system.push_back(boost_.include(boost_types::io_time));
+
+    if (is_implementation && is_serialization && is_duration) {
+        il.system.push_back(boost_.include(boost_types::io_time));
+        il.system.push_back(
+            boost_.include(boost_types::serialization_time_duration));
+    }
 }
 
 void cpp_inclusion_manager::append_std_dependencies(

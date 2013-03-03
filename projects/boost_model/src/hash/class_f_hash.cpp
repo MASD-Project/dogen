@@ -38,6 +38,8 @@ std::size_t class_f_hasher::hash(const class_f&v) {
     std::size_t seed(0);
 
     combine(seed, v.prop_0().generic_string());
+    combine(seed, v.prop_1().modjulian_day());
+
     return seed;
 }
 

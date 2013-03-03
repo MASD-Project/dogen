@@ -47,13 +47,16 @@ public:
                                is_sequence_container_(false),
                                is_associative_container_(false),
                                is_smart_pointer_(false),
-                               is_filesystem_path_(false) {}
+                               is_filesystem_path_(false),
+                               is_date_(false), is_ptime_(false),
+                               is_time_duration_(false) {}
 
     explicit nested_type_view_model(const std::string& name)
         : name_(name), is_primitive_(false), is_string_like_(false),
           is_char_like_(false), is_int_like_(false),
           is_sequence_container_(false), is_associative_container_(false),
-          is_smart_pointer_(false), is_filesystem_path_(false) {}
+          is_smart_pointer_(false), is_filesystem_path_(false),
+          is_date_(false), is_ptime_(false), is_time_duration_(false) {}
 
 public:
     /**
@@ -208,6 +211,31 @@ public:
     }
     /**@}*/
 
+    /**
+     * @brief If true, type is date
+     */
+    /**@{*/
+    bool is_date() const { return is_date_; }
+    void is_date(const bool value) { is_date_ = value;
+    }
+    /**@}*/
+
+    /**
+     * @brief If true, type is boost ptime
+     */
+    /**@{*/
+    bool is_ptime() const { return is_ptime_; }
+    void is_ptime(const bool value) { is_ptime_ = value; }
+    /**@}*/
+
+    /**
+     * @brief If true, type is time duration
+     */
+    /**@{*/
+    bool is_time_duration() const { return is_time_duration_; }
+    void is_time_duration(const bool value) { is_time_duration_ = value; }
+    /**@}*/
+
 private:
     std::string name_;
     std::string identifiable_name_;
@@ -226,6 +254,9 @@ private:
     std::list<nested_type_view_model> children_;
     std::list<std::string> namespaces_;
     bool is_filesystem_path_;
+    bool is_date_;
+    bool is_ptime_;
+    bool is_time_duration_;
 };
 
 } } } } }

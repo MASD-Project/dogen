@@ -26,6 +26,7 @@
 #endif
 
 #include <algorithm>
+#include <boost/date_time/gregorian/gregorian_types.hpp>
 #include <boost/filesystem/path.hpp>
 #include "dogen/boost_model/serialization/class_f_fwd_ser.hpp"
 
@@ -42,7 +43,9 @@ public:
     class_f(class_f&& rhs);
 
 public:
-    explicit class_f(const boost::filesystem::path& prop_0);
+    class_f(
+        const boost::filesystem::path& prop_0,
+        const boost::gregorian::date& prop_1);
 
 private:
     template<typename Archive>
@@ -57,6 +60,11 @@ public:
     void prop_0(const boost::filesystem::path& v);
     void prop_0(const boost::filesystem::path&& v);
 
+    const boost::gregorian::date& prop_1() const;
+    boost::gregorian::date& prop_1();
+    void prop_1(const boost::gregorian::date& v);
+    void prop_1(const boost::gregorian::date&& v);
+
 public:
     bool operator==(const class_f& rhs) const;
     bool operator!=(const class_f& rhs) const {
@@ -69,6 +77,7 @@ public:
 
 private:
     boost::filesystem::path prop_0_;
+    boost::gregorian::date prop_1_;
 };
 
 } }

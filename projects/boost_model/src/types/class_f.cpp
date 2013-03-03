@@ -24,18 +24,24 @@ namespace dogen {
 namespace boost_model {
 
 class_f::class_f(class_f&& rhs)
-    : prop_0_(std::move(rhs.prop_0_)) { }
+    : prop_0_(std::move(rhs.prop_0_)),
+      prop_1_(std::move(rhs.prop_1_)) { }
 
-class_f::class_f(const boost::filesystem::path& prop_0)
-    : prop_0_(prop_0) { }
+class_f::class_f(
+    const boost::filesystem::path& prop_0,
+    const boost::gregorian::date& prop_1)
+    : prop_0_(prop_0),
+      prop_1_(prop_1) { }
 
 void class_f::swap(class_f& other) noexcept {
     using std::swap;
     swap(prop_0_, other.prop_0_);
+    swap(prop_1_, other.prop_1_);
 }
 
 bool class_f::operator==(const class_f& rhs) const {
-    return prop_0_ == rhs.prop_0_;
+    return prop_0_ == rhs.prop_0_ &&
+        prop_1_ == rhs.prop_1_;
 }
 
 class_f& class_f::operator=(class_f other) {
@@ -58,6 +64,22 @@ void class_f::prop_0(const boost::filesystem::path& v) {
 
 void class_f::prop_0(const boost::filesystem::path&& v) {
     prop_0_ = std::move(v);
+}
+
+const boost::gregorian::date& class_f::prop_1() const {
+    return prop_1_;
+}
+
+boost::gregorian::date& class_f::prop_1() {
+    return prop_1_;
+}
+
+void class_f::prop_1(const boost::gregorian::date& v) {
+    prop_1_ = v;
+}
+
+void class_f::prop_1(const boost::gregorian::date&& v) {
+    prop_1_ = std::move(v);
 }
 
 } }

@@ -608,7 +608,13 @@ format_inserter_implementation(const class_view_model& vm) {
         else
             ss << "v." << utility_.as_getter(p.name());
 
-        if (p.type().is_string_like()) {
+        if (p.type().is_filesystem_path()) {
+            ss << ".generic_string()";
+            stream_ << utility_.quote_escaped_streamed(ss.str());
+        } else if (p.type().is_date()) {
+            stream_ << utility_.quote_escaped_streamed(ss.str());
+        } else if (p.type().is_string_like()) {
+
             if (!p.type().is_char_like())
                 ss << ")";
 

@@ -69,6 +69,9 @@ private:
     void optional_helper(const nested_type_view_model& vm);
     void variant_helper(const nested_type_view_model& vm);
     void filesystem_path_helper(const nested_type_view_model& vm);
+    void date_helper(const nested_type_view_model& vm);
+    void ptime_helper(const nested_type_view_model& vm);
+    void time_duration_helper(const nested_type_view_model& vm);
 
     void composite_domain_type_helper(const std::string& identifiable_type_name,
         const std::string& type_name, bool as_pointer);

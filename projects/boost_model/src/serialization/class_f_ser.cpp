@@ -26,7 +26,9 @@
 #include <boost/archive/text_oarchive.hpp>
 #include <boost/archive/xml_iarchive.hpp>
 #include <boost/archive/xml_oarchive.hpp>
+#include <boost/date_time/gregorian/gregorian.hpp>
 #include <boost/serialization/nvp.hpp>
+#include <boost/date_time/gregorian/greg_serialize.hpp>
 #include "dogen/boost_model/serialization/class_f_ser.hpp"
 
 #ifdef __linux__
@@ -42,6 +44,7 @@ void save(Archive& ar,
     const dogen::boost_model::class_f& v,
     const unsigned int /*version*/) {
     ar << make_nvp("prop_0", v.prop_0_.generic_string());
+    ar << make_nvp("prop_1", v.prop_1_);
 }
 
 template<typename Archive>
@@ -51,6 +54,7 @@ void load(Archive& ar,
     std::string prop_0_tmp;
     ar >> make_nvp("prop_0", prop_0_tmp);
     v.prop_0_ = prop_0_tmp;
+    ar >> make_nvp("prop_1", v.prop_1_);
 }
 
 } }

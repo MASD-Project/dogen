@@ -19,6 +19,7 @@
  *
  */
 #include <ostream>
+#include "dogen/generator/backends/cpp/boost_model_helper.hpp"
 #include "dogen/generator/backends/cpp/formatters/cpp_includes.hpp"
 
 namespace {
@@ -45,6 +46,14 @@ cpp_includes::cpp_includes(std::ostream& stream, const bool blank_line)
 
 void cpp_includes::format(std::list<std::string> v, bool is_system) {
     v.sort();
+
+    // FIXME: hacks for headers that must be last
+    const boost_model_helper boost_;
+    const auto gd(boost_.include(boost_types::serialization_gregorian_date));
+    const auto i(std::find(v.begin(), v.end(), gd));
+    if (i != v.end())
+        v.splice(v.end(), v, i);
+
     for (auto i : v) {
         stream_ << include << (is_system ? open_system : open_user)
                 << i

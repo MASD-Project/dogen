@@ -64,7 +64,15 @@ enum class boost_types : unsigned int {
     variant, ///< boost variant
     serialization_variant, ///< variant support
     apply_visitor, ///< Apply visitor
-    filesystem_path ///< filesystem path
+    filesystem_path, ///< filesystem path
+    gregorian_date, ///< Boost date time gregorian date
+    ptime, ///< Boost date time posix time
+    time_duration, ///< Boost date time durantion
+    serialization_gregorian_date, ///< Serialisation support forgregorian date
+    serialization_ptime, ///< Serialisation support for posix time
+    serialization_time_duration, ///< Serialisation support for time durantion
+    io_gregorian_date, ///< IO support for date
+    io_time ///< IO support for time and time_duration
 };
 
 } } } }

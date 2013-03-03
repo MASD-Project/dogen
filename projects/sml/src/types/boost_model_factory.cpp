@@ -37,6 +37,12 @@ const std::string tcp_name("tcp");
 const std::string socket_name("socket");
 const std::string acceptor_name("acceptor");
 
+const std::string gregorian_name("gregorian");
+const std::string date_name("date");
+const std::string posix_time_name("posix_time");
+const std::string ptime_name("ptime");
+const std::string time_duration_name("time_duration");
+
 }
 
 namespace dogen {
@@ -53,8 +59,7 @@ primitive boost_model_factory::create_primitive(const std::string& name) {
     return r;
 }
 
-pod boost_model_factory::
-create_pod(const std::string& name, pod_types pt,
+pod boost_model_factory::create_pod(const std::string& name, pod_types pt,
     std::list<std::string> package_path) {
     qname q;
     q.type_name(name);
@@ -104,7 +109,6 @@ model boost_model_factory::create() {
             packages.insert(std::make_pair(p.name(), p));
         });
 
-
     std::list<std::string> package_path;
     pi(shared_ptr_name, pod_types::smart_pointer, package_path);
     pi(weak_ptr_name, pod_types::smart_pointer, package_path);
@@ -129,6 +133,19 @@ model boost_model_factory::create() {
     gamma(filesystem_name, package_path);
     package_path.push_back(filesystem_name);
     pi(path_name, pod_types::value, package_path);
+
+    package_path.clear();
+    gamma(gregorian_name, package_path);
+
+    package_path.push_back(gregorian_name);
+    pi(date_name, pod_types::value, package_path);
+
+    package_path.clear();
+    gamma(posix_time_name, package_path);
+
+    package_path.push_back(posix_time_name);
+    pi(ptime_name, pod_types::value, package_path);
+    pi(time_duration_name, pod_types::value, package_path);
 
     model r;
     r.name(model_name);

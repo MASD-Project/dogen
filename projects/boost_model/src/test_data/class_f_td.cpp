@@ -30,6 +30,13 @@ create_boost_filesystem_path(const unsigned int position) {
     return boost::filesystem::path(s.str());
 }
 
+boost::gregorian::date
+create_boost_gregorian_date(const unsigned int position) {
+    unsigned int day(position % 28);
+    boost::gregorian::date r(2002, 2, day);
+    return r;
+}
+
 }
 
 namespace dogen {
@@ -40,6 +47,7 @@ class_f_generator::class_f_generator() : position_(0) { }
 void class_f_generator::
 populate(const unsigned int position, result_type& v) {
     v.prop_0(create_boost_filesystem_path(position + 0));
+    v.prop_1(create_boost_gregorian_date(position + 1));
 }
 
 class_f_generator::result_type

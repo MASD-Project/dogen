@@ -18,6 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/date_time/gregorian/gregorian.hpp>
 #include <ostream>
 #include "dogen/boost_model/io/class_f_io.hpp"
 
@@ -27,7 +28,8 @@ namespace boost_model {
 std::ostream& operator<<(std::ostream& s, const class_f& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::boost_model::class_f\"" << ", "
-      << "\"prop_0\": " << v.prop_0()
+      << "\"prop_0\": " << "\"" << v.prop_0().generic_string() << "\"" << ", "
+      << "\"prop_1\": " << "\"" << v.prop_1() << "\""
       << " }";
     return(s);
 }

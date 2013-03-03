@@ -35,6 +35,7 @@ namespace boost_model {
 #pragma db object(class_f)
 
 #pragma db member(class_f::prop_0_) prop_0
+#pragma db member(class_f::prop_1_) prop_1
 
 #endif
 

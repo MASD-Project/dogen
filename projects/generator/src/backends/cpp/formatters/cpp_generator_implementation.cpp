@@ -268,6 +268,74 @@ filesystem_path_helper(const nested_type_view_model& vm) {
     utility_.blank_line();
 }
 
+void generator_implementation::date_helper(const nested_type_view_model& vm) {
+    const auto type_name(vm.identifiable_name());
+    const auto identifiable_type_name(vm.complete_identifiable_name());
+
+    stream_ << indenter_ << vm.name() << std::endl
+            << "create_" << identifiable_type_name
+            << "(const unsigned int position) ";
+
+    utility_.open_scope();
+    {
+        cpp_positive_indenter_scope s(indenter_);
+        stream_ << indenter_ << "unsigned int day(position % 28);" << std::endl
+                << indenter_ << "boost::gregorian::date r(2002, 2, day);"
+                << std::endl
+                << indenter_ << "return r;" << std::endl;
+    }
+    utility_.close_scope();
+    utility_.blank_line();
+}
+
+void generator_implementation::ptime_helper(const nested_type_view_model& vm) {
+    const auto type_name(vm.identifiable_name());
+    const auto identifiable_type_name(vm.complete_identifiable_name());
+
+    stream_ << indenter_ << vm.name() << std::endl
+            << "create_" << identifiable_type_name
+            << "(const unsigned int position) ";
+
+    utility_.open_scope();
+    {
+        cpp_positive_indenter_scope s(indenter_);
+        stream_ << indenter_ << "unsigned int day(position % 28);" << std::endl
+                << indenter_ << "using boost::gregorian::date;" << std::endl
+                << indenter_ << "using boost::posix_time::ptime;"
+                << std::endl
+                << indenter_ << "using boost::posix_time::time_duration;"
+                << std::endl
+                << indenter_ << "date d(2002, 2, day);"
+                << indenter_
+                << "ptime r(d, time_duration(1,2,3));" << std::endl
+                << indenter_ << "return r;" << std::endl;
+    }
+    utility_.close_scope();
+    utility_.blank_line();
+}
+
+void generator_implementation::
+time_duration_helper(const nested_type_view_model& vm) {
+    const auto type_name(vm.identifiable_name());
+    const auto identifiable_type_name(vm.complete_identifiable_name());
+
+    stream_ << indenter_ << vm.name() << std::endl
+            << "create_" << identifiable_type_name
+            << "(const unsigned int position) ";
+
+    utility_.open_scope();
+    {
+        cpp_positive_indenter_scope s(indenter_);
+        stream_ << indenter_ << "unsigned int hour(position % 55);" << std::endl
+                << indenter_ << "using boost::posix_time::time_duration;"
+                << std::endl
+                << "time_duration r(hour, 2, 3));" << std::endl
+                << indenter_ << "return r;" << std::endl;
+    }
+    utility_.close_scope();
+    utility_.blank_line();
+}
+
 void generator_implementation::
 variant_helper(const nested_type_view_model& vm) {
     const auto container_identifiable_type_name(
@@ -472,6 +540,12 @@ recursive_helper_method_creator(const std::string& owner_name,
         variant_helper(vm);
     else if (vm.is_filesystem_path())
         filesystem_path_helper(vm);
+    else if (vm.is_date())
+        date_helper(vm);
+    else if (vm.is_ptime())
+        ptime_helper(vm);
+    else if (vm.is_time_duration())
+        time_duration_helper(vm);
     else {
         if (vm.name() == string_type) {
             string_helper();
