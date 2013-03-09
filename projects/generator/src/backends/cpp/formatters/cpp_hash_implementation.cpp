@@ -30,8 +30,8 @@
 #include "dogen/generator/backends/cpp/formatters/cpp_namespace_helper.hpp"
 #include "dogen/generator/backends/cpp/formatters/cpp_qualified_name.hpp"
 #include "dogen/generator/backends/cpp/formatters/cpp_indenter.hpp"
-#include "dogen/generator/backends/cpp/formatters/cpp_hash_implementation.hpp"
 #include "dogen/utility/log/logger.hpp"
+#include "dogen/generator/backends/cpp/formatters/cpp_hash_implementation.hpp"
 
 using namespace dogen::utility::log;
 
@@ -60,8 +60,7 @@ namespace backends {
 namespace cpp {
 namespace formatters {
 
-hash_implementation::
-hash_implementation(std::ostream& stream) :
+hash_implementation::hash_implementation(std::ostream& stream) :
     stream_(stream), utility_(stream_, indenter_) { }
 
 file_formatter::shared_ptr hash_implementation::create(std::ostream& stream) {
@@ -73,6 +72,7 @@ bool hash_implementation::is_hashable(const nested_type_view_model& vm) {
         !vm.is_sequence_container() &&
         !vm.is_associative_container() &&
         !vm.is_smart_pointer() &&
+        !vm.is_pair() &&
         !vm.is_optional_like() &&
         !vm.is_variant_like() &&
         !vm.is_ptime() &&
@@ -93,6 +93,56 @@ void hash_implementation::combine_function(const class_view_model& vm) {
         stream_ << indenter_ << "std::hash<HashableType> hasher;" << std::endl
                 << indenter_ << "seed ^= hasher(value) + 0x9e3779b9 + "
                 << "(seed << 6) + (seed >> 2);" << std::endl;
+    }
+    utility_.close_scope();
+}
+
+void hash_implementation::pair_helper(const nested_type_view_model& vm) {
+    const auto children(vm.children());
+    if (children.size() != 2) {
+        BOOST_LOG_SEV(lg, error) << "Children container has unexpected size: "
+                                 << children.size() << " in nested type: "
+                                 << vm.name();
+
+        BOOST_THROW_EXCEPTION(generation_failure(invalid_sequence_container
+                + vm.name()));
+    }
+
+    const std::string container_identifiable_type_name(
+        vm.complete_identifiable_name());
+    const std::string container_type_name(vm.complete_name());
+
+    utility_.blank_line();
+    stream_ << indenter_ << "inline std::size_t hash_"
+            << container_identifiable_type_name
+            << "(const " << container_type_name << "& v)";
+
+    utility_.open_scope();
+    {
+        cpp_positive_indenter_scope s(indenter_);
+        stream_ << indenter_ << "std::size_t seed(0);"
+                << std::endl;
+
+        utility_.blank_line();
+        const auto first(children.front());
+        if (is_hashable(first)) {
+            stream_ << indenter_ << "combine(seed, v.first);" << std::endl;
+        } else {
+            stream_ << indenter_ << "combine(seed, "
+                    << "hash_" << first.complete_identifiable_name()
+                    << "(v.first));" << std::endl;
+        }
+
+        const auto second(children.front());
+        if (is_hashable(second)) {
+            stream_ << indenter_ << "combine(seed, v.second);" << std::endl;
+        } else {
+            stream_ << indenter_ << "combine(seed, "
+                    << "hash_" << second.complete_identifiable_name()
+                    << "(v.second));" << std::endl;
+        }
+
+        stream_ << indenter_ << "return seed;" << std::endl;
     }
     utility_.close_scope();
 }
@@ -419,6 +469,8 @@ recursive_helper_method_creator(const nested_type_view_model& vm,
         associative_container_helper(vm);
     else if (vm.is_smart_pointer())
         smart_pointer_helper(vm);
+    else if (vm.is_pair())
+        pair_helper(vm);
     else if (vm.is_optional_like())
         optional_helper(vm);
     else if (vm.is_variant_like())

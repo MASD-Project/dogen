@@ -60,7 +60,8 @@ enum class std_types : unsigned int {
     iosfwd,
     sstream,
     stdexcept,
-    functional
+    functional,
+    pair
 };
 
 } } } }

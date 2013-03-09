@@ -24,8 +24,8 @@
 #include "dogen/generator/backends/cpp/formatters/cpp_qualified_name.hpp"
 #include "dogen/generator/generation_failure.hpp"
 #include "dogen/generator/backends/cpp/formatters/cpp_namespace_helper.hpp"
-#include "dogen/generator/backends/cpp/formatters/cpp_inserter_implementation.hpp"
 #include "dogen/utility/log/logger.hpp"
+#include "dogen/generator/backends/cpp/formatters/cpp_inserter_implementation.hpp"
 
 using namespace dogen::utility::log;
 
@@ -56,6 +56,8 @@ const std::string invalid_associative_container(
 const std::string invalid_smart_pointer(
     "Smart pointers have exactly one type argument");
 const std::string invalid_variant("Variants should have at least one type");
+const std::string invalid_pair_type(
+    "Pair types have exactly two type arguments");
 
 std::string parent_tag(const unsigned int number) {
     std::ostringstream s;
@@ -306,8 +308,8 @@ void cpp_inserter_implementation::
 optional_helper(const nested_type_view_model& vm) {
     const auto children(vm.children());
     if (children.size() != 1) {
-        BOOST_LOG_SEV(lg, error) << invalid_smart_pointer;
-        BOOST_THROW_EXCEPTION(generation_failure(invalid_smart_pointer));
+        BOOST_LOG_SEV(lg, error) << invalid_optional_type;
+        BOOST_THROW_EXCEPTION(generation_failure(invalid_optional_type));
     }
 
     const auto container(vm);
@@ -361,6 +363,79 @@ optional_helper(const nested_type_view_model& vm) {
                         << ";" << std::endl;
             }
             stream_ << indenter_ << "s" << inserter << utility_.quote(" }")
+                    << ";";
+            utility_.blank_line();
+            stream_ << indenter_ << "return s;" << std::endl;
+        }
+        utility_.close_scope();
+        utility_.blank_line();
+    }
+    utility_.blank_line(2);
+}
+
+void cpp_inserter_implementation::
+pair_helper(const nested_type_view_model& vm) {
+    const auto children(vm.children());
+    if (children.size() != 2) {
+        BOOST_LOG_SEV(lg, error) << invalid_pair_type;
+        BOOST_THROW_EXCEPTION(generation_failure(invalid_pair_type));
+    }
+
+    const auto container(vm);
+    {
+        namespace_helper ns_helper(stream_, container.namespaces());
+
+        utility_.blank_line();
+        stream_ << indenter_ << "inline std::ostream& operator<<"
+                << "(std::ostream& s, const "
+                << container.complete_name() << "& v) ";
+
+        utility_.open_scope();
+        {
+            cpp_positive_indenter_scope s(indenter_);
+            stream_ << indenter_ << "s" << space_inserter
+                    << utility_.quote("{ ") << space_inserter
+                    << utility_.quote(utility_.quote_escaped(type) + colon)
+                    << space_inserter
+                    << utility_.quote(utility_.quote_escaped(vm.name()))
+                    << space_inserter << utility_.quote(spaced_comma)
+                    << ";"
+                    << std::endl;
+
+            utility_.blank_line();
+            const auto first(children.front());
+            stream_ << indenter_ << "s" << space_inserter
+                    << utility_.quote(utility_.quote_escaped("first") + colon);
+
+            if (first.is_string_like()) {
+                const std::string tus(vm.is_char_like() ? "v.first" :
+                    "tidy_up_string(v.first)");
+
+                stream_ << space_inserter
+                        << utility_.quote_escaped_streamed(tus)
+                        << space_inserter << utility_.quote(spaced_comma)
+                        << ";" << std::endl;
+            } else
+                stream_ << space_inserter << "v.first"
+                        << space_inserter << utility_.quote(spaced_comma) << ";"
+                        << std::endl;
+
+            const auto second(children.front());
+            stream_ << indenter_ << "s" << space_inserter
+                    << utility_.quote(utility_.quote_escaped("second") + colon);
+
+            if (second.is_string_like()) {
+                const std::string tus(vm.is_char_like() ? "v.second" :
+                    "tidy_up_string(v.second)");
+
+                stream_ << space_inserter
+                        << utility_.quote_escaped_streamed(tus)
+                        << ";" << std::endl;
+            } else
+                stream_ << space_inserter << "v.second;" << std::endl;
+
+            stream_ << indenter_ << "s" << space_inserter
+                    << utility_.quote(" }")
                     << ";";
             utility_.blank_line();
             stream_ << indenter_ << "return s;" << std::endl;
@@ -524,6 +599,8 @@ recursive_helper_method_creator(const nested_type_view_model& vm,
         smart_pointer_helper(vm);
     else if (vm.is_optional_like())
         optional_helper(vm);
+    else if (vm.is_pair())
+        pair_helper(vm);
     else if (vm.is_variant_like())
         variant_helper(vm);
     else if (vm.is_string_like() && !vm.is_char_like())

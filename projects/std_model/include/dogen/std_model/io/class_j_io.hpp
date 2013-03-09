@@ -18,17 +18,23 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/std_model/odb/base_odb.hpp"
-#include "dogen/std_model/odb/class_a_odb.hpp"
-#include "dogen/std_model/odb/class_a_unversioned_key_odb.hpp"
-#include "dogen/std_model/odb/class_a_versioned_key_odb.hpp"
-#include "dogen/std_model/odb/class_b_odb.hpp"
-#include "dogen/std_model/odb/class_d_odb.hpp"
-#include "dogen/std_model/odb/class_e_odb.hpp"
-#include "dogen/std_model/odb/class_f_odb.hpp"
-#include "dogen/std_model/odb/class_g_odb.hpp"
-#include "dogen/std_model/odb/class_h_odb.hpp"
-#include "dogen/std_model/odb/class_j_odb.hpp"
-#include "dogen/std_model/odb/derived_odb.hpp"
-#include "dogen/std_model/odb/pkg1/class_c_odb.hpp"
-#include "dogen/std_model/odb/primitives_odb.hpp"
+#ifndef DOGEN_STD_MODEL_IO_CLASS_J_IO_HPP
+#define DOGEN_STD_MODEL_IO_CLASS_J_IO_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include <iosfwd>
+#include "dogen/std_model/types/class_j.hpp"
+
+namespace dogen {
+namespace std_model {
+
+std::ostream&
+operator<<(std::ostream& s,
+     const dogen::std_model::class_j& v);
+
+} }
+
+#endif

@@ -51,6 +51,7 @@ BOOST_AUTO_TEST_CASE(validate_equality) {
     test_equality<class_f_generator>();
     test_equality<class_g_generator>();
     test_equality<class_h_generator>();
+    test_equality<class_j_generator>();
     test_equality<primitives_generator>();
 }
 
@@ -63,6 +64,7 @@ BOOST_AUTO_TEST_CASE(validate_serialisation) {
     rountrip_type<class_f_generator>();
     rountrip_type<class_g_generator>();
     rountrip_type<class_h_generator>();
+    rountrip_type<class_j_generator>();
     rountrip_type<primitives_generator>();
 }
 
@@ -75,6 +77,7 @@ BOOST_AUTO_TEST_CASE(validate_hashing) {
     test_hashing<class_f_generator>();
     test_hashing<class_g_generator>();
     test_hashing<class_h_generator>();
+    test_hashing<class_j_generator>();
     test_hashing<primitives_generator>();
 }
 
@@ -87,6 +90,7 @@ BOOST_AUTO_TEST_CASE(validate_swap) {
     test_swap<class_f_generator>();
     test_swap<class_g_generator>();
     test_swap<class_h_generator>();
+    test_swap<class_j_generator>();
     test_swap<primitives_generator>();
 }
 
@@ -99,6 +103,7 @@ BOOST_AUTO_TEST_CASE(validate_io) {
     test_io<class_f_generator>();
     test_io<class_g_generator>();
     test_io<class_h_generator>();
+    test_io<class_j_generator>();
     test_io<primitives_generator>();
 }
 

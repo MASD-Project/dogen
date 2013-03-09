@@ -57,6 +57,7 @@ const std::string sstream_type("sstream");
 
 const std::string stdexcept_type("stdexcept");
 const std::string functional_type("functional");
+const std::string pair_type("pair");
 
 const std::string string_include("string");
 const std::string cstdint_include("cstdint");
@@ -77,6 +78,7 @@ const std::string iosfwd_include("iosfwd");
 const std::string sstream_include("sstream");
 const std::string stdexcept_include("stdexcept");
 const std::string functional_include("functional");
+const std::string pair_include("utility");
 
 const std::string error_message("Invalid or unexpected std type");
 
@@ -125,8 +127,11 @@ std_types std_model_helper::string_to_type(const std::string type) const {
     if (type == sstream_type) return std_types::sstream;
     if (type == stdexcept_type) return std_types::stdexcept;
     if (type == functional_type) return std_types::functional;
+    if (type == pair_type) return std_types::pair;
+
     BOOST_LOG_SEV(lg, error) << error_message;
-    BOOST_THROW_EXCEPTION(utility::exception::invalid_enum_value(error_message));
+    BOOST_THROW_EXCEPTION(
+        utility::exception::invalid_enum_value(error_message));
 }
 
 std::string std_model_helper::type(const std_types t) const {
@@ -155,10 +160,13 @@ std::string std_model_helper::type(const std_types t) const {
     case std_types::sstream: return sstream_type;
     case std_types::stdexcept: return stdexcept_type;
     case std_types::functional: return functional_type;
+    case std_types::pair: return pair_type;
     default: break;
     }
+
     BOOST_LOG_SEV(lg, error) << error_message;
-    BOOST_THROW_EXCEPTION(utility::exception::invalid_enum_value(error_message));
+    BOOST_THROW_EXCEPTION(
+        utility::exception::invalid_enum_value(error_message));
 }
 
 std::string std_model_helper::include(const std_types type) const {
@@ -189,10 +197,13 @@ std::string std_model_helper::include(const std_types type) const {
     case std_types::sstream: return sstream_include;
     case std_types::stdexcept: return stdexcept_include;
     case std_types::functional: return functional_include;
+    case std_types::pair: return pair_include;
     default: break;
     }
+
     BOOST_LOG_SEV(lg, error) << error_message;
-    BOOST_THROW_EXCEPTION(utility::exception::invalid_enum_value(error_message));
+    BOOST_THROW_EXCEPTION(
+        utility::exception::invalid_enum_value(error_message));
 }
 
 } } } }

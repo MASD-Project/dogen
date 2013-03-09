@@ -45,9 +45,7 @@ public:
     dependency_details& operator=(const dependency_details&) = default;
 
 public:
-    dependency_details() : has_std_string_(false), has_variant_(false),
-                           is_parent_(false), is_child_(false),
-                           requires_stream_manipulators_(false) { }
+    dependency_details();
 
 public:
     /**
@@ -126,6 +124,12 @@ public:
     bool requires_stream_manipulators() const;
     void requires_stream_manipulators(const bool v);
 
+    /**
+     * @brief Returns true if there is a std::pair in the type list.
+     */
+    bool has_std_pair() const;
+    void has_std_pair(const bool v);
+
 private:
     std::unordered_set<sml::qname> names_;
     std::unordered_set<sml::qname> forward_decls_;
@@ -136,6 +140,7 @@ private:
     bool is_parent_;
     bool is_child_;
     bool requires_stream_manipulators_;
+    bool has_std_pair_;
 };
 
 } } } }

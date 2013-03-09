@@ -1,0 +1,85 @@
+/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+ *
+ * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+ * MA 02110-1301, USA.
+ *
+ */
+#ifndef DOGEN_STD_MODEL_TYPES_CLASS_J_HPP
+#define DOGEN_STD_MODEL_TYPES_CLASS_J_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include <algorithm>
+#include <utility>
+#include "dogen/std_model/serialization/class_j_fwd_ser.hpp"
+
+namespace dogen {
+namespace std_model {
+
+class class_j final {
+public:
+    class_j() = default;
+    class_j(const class_j&) = default;
+    class_j(class_j&&) = default;
+    ~class_j() = default;
+
+public:
+    explicit class_j(const std::pair<int, int>& prop_0);
+
+private:
+    template<typename Archive>
+    friend void boost::serialization::save(Archive& ar, const class_j& v, unsigned int version);
+
+    template<typename Archive>
+    friend void boost::serialization::load(Archive& ar, class_j& v, unsigned int version);
+
+public:
+    const std::pair<int, int>& prop_0() const;
+    std::pair<int, int>& prop_0();
+    void prop_0(const std::pair<int, int>& v);
+    void prop_0(const std::pair<int, int>&& v);
+
+public:
+    bool operator==(const class_j& rhs) const;
+    bool operator!=(const class_j& rhs) const {
+        return !this->operator==(rhs);
+    }
+
+public:
+    void swap(class_j& other) noexcept;
+    class_j& operator=(class_j other);
+
+private:
+    std::pair<int, int> prop_0_;
+};
+
+} }
+
+namespace std {
+
+template<>
+inline void swap(
+    dogen::std_model::class_j& lhs,
+    dogen::std_model::class_j& rhs) {
+    lhs.swap(rhs);
+}
+
+}
+
+#endif

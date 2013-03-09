@@ -37,6 +37,7 @@ const std::string map_name("map");
 const std::string multimap_name("multimap");
 const std::string unordered_map_name("unordered_map");
 const std::string unordered_multimap_name("unordered_multimap");
+const std::string pair_name("pair");
 
 const std::string shared_ptr_name("shared_ptr");
 const std::string unique_ptr_name("unique_ptr");
@@ -125,6 +126,7 @@ model std_model_factory::create() {
     pi(map_name, pod_types::associative_container);
     pi(multimap_name, pod_types::associative_container);
     pi(unordered_map_name, pod_types::associative_container);
+    pi(pair_name, pod_types::value);
 
     pi(shared_ptr_name, pod_types::smart_pointer);
     pi(weak_ptr_name, pod_types::smart_pointer);

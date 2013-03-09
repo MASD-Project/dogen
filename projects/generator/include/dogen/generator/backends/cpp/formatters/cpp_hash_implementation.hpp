@@ -63,6 +63,7 @@ private:
     bool is_hashable(const nested_type_view_model& vm);
 
 private:
+    void pair_helper(const nested_type_view_model& vm);
     void optional_helper(const nested_type_view_model& vm);
     void variant_helper(const nested_type_view_model& vm);
     void sequence_container_helper(const nested_type_view_model& vm);

@@ -18,17 +18,35 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/std_model/odb/base_odb.hpp"
-#include "dogen/std_model/odb/class_a_odb.hpp"
-#include "dogen/std_model/odb/class_a_unversioned_key_odb.hpp"
-#include "dogen/std_model/odb/class_a_versioned_key_odb.hpp"
-#include "dogen/std_model/odb/class_b_odb.hpp"
-#include "dogen/std_model/odb/class_d_odb.hpp"
-#include "dogen/std_model/odb/class_e_odb.hpp"
-#include "dogen/std_model/odb/class_f_odb.hpp"
-#include "dogen/std_model/odb/class_g_odb.hpp"
-#include "dogen/std_model/odb/class_h_odb.hpp"
-#include "dogen/std_model/odb/class_j_odb.hpp"
-#include "dogen/std_model/odb/derived_odb.hpp"
-#include "dogen/std_model/odb/pkg1/class_c_odb.hpp"
-#include "dogen/std_model/odb/primitives_odb.hpp"
+#include "dogen/std_model/hash/class_j_hash.hpp"
+
+namespace {
+
+template <typename HashableType>
+inline void combine(std::size_t& seed, const HashableType& value)
+{
+    std::hash<HashableType> hasher;
+    seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
+}
+
+inline std::size_t hash_std_pair_int_int(const std::pair<int, int>& v){
+    std::size_t seed(0);
+
+    combine(seed, v.first);
+    combine(seed, v.second);
+    return seed;
+}
+
+}
+
+namespace dogen {
+namespace std_model {
+
+std::size_t class_j_hasher::hash(const class_j&v) {
+    std::size_t seed(0);
+
+    combine(seed, hash_std_pair_int_int(v.prop_0()));
+    return seed;
+}
+
+} }

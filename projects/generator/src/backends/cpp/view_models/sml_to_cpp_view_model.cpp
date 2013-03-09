@@ -95,6 +95,7 @@ const std::string filesystem_path_type("boost::filesystem::path");
 const std::string gregorian_date_type("boost::gregorian::date");
 const std::string ptime_type("boost::posix_time::ptime");
 const std::string time_duration_type("boost::posix_time::time_duration");
+const std::string pair_type("std::pair");
 
 const std::string int8_t_type("std::int8_t");
 const std::string int16_t_type("std::int16_t");
@@ -117,6 +118,10 @@ bool is_string_like(const std::string& type_name) {
 
 bool is_optional_like(const std::string& type_name) {
     return type_name == optional_type;
+}
+
+bool is_pair(const std::string& type_name) {
+    return type_name == pair_type;
 }
 
 bool is_filesystem_path(const std::string& type_name) {
@@ -292,6 +297,7 @@ void sml_dfs_visitor::transform_nested_qualified_name(
     }
     vm.is_string_like(is_string_like(vm.name()));
     vm.is_optional_like(is_optional_like(vm.name()));
+    vm.is_pair(is_pair(vm.name()));
     vm.is_variant_like(is_variant_like(vm.name()));
     vm.is_filesystem_path(is_filesystem_path(vm.name()));
     vm.is_date(is_gregorian_date(vm.name()));

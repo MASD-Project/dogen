@@ -194,6 +194,10 @@ append_implementation_dependencies( const dependency_details& dd,
 
     if (is_implementation && is_hash && dd.has_variant())
         il.system.push_back(boost_.include(boost_types::apply_visitor));
+
+    // pair dependencies
+    if (is_implementation && is_serialization && dd.has_std_pair())
+        il.system.push_back(boost_.include(boost_types::serialization_pair));
 }
 
 void cpp_inclusion_manager::append_boost_dependencies(
@@ -410,6 +414,13 @@ void cpp_inclusion_manager::append_std_dependencies(
         const auto t(std_.string_to_type(type_name));
         il.system.push_back(std_.include(t));
     }
+
+    /*
+     * std::pair
+     */
+    const bool is_pair(type_name == std_.type(std_types::pair));
+    if (is_header && is_domain && is_pair)
+        il.system.push_back(std_.include(std_types::pair));
 }
 
 void cpp_inclusion_manager::append_relationship_dependencies(

@@ -47,6 +47,8 @@ const std::string invalid_associative_container(
     "Associative containers have one or two type arguments");
 const std::string invalid_smart_pointer(
     "Smart pointers have exactly one type argument");
+const std::string invalid_pair(
+    "Pairs  have exactly two type arguments");
 const std::string missing_class_view_model(
     "Meta type is pod but class view model is empty");
 const std::string missing_enumeration_view_model(
@@ -216,10 +218,6 @@ optional_helper(const nested_type_view_model& vm) {
         BOOST_THROW_EXCEPTION(generation_failure(invalid_smart_pointer));
     }
 
-    const auto containee_vm(children.front());
-    const auto containee_identifiable_type_name(
-        containee_vm.complete_identifiable_name());
-
     stream_ << indenter_ << container_type_name
             << std::endl
             << indenter_ << "create_"
@@ -238,6 +236,52 @@ optional_helper(const nested_type_view_model& vm) {
 
             stream_ << indenter_ << "create_"
                     << containee_identifiable_type_name
+                    << "(position));" << std::endl;
+        }
+        stream_ << indenter_ << "return r;" << std::endl;
+    }
+    utility_.close_scope();
+    utility_.blank_line();
+}
+
+void generator_implementation::
+pair_helper(const nested_type_view_model& vm) {
+    const auto container_identifiable_type_name(
+        vm.complete_identifiable_name());
+    const auto container_type_name(vm.complete_name());
+
+    const auto children(vm.children());
+    if (children.size() != 2) {
+        BOOST_LOG_SEV(lg, error) << invalid_pair;
+        BOOST_THROW_EXCEPTION(generation_failure(invalid_pair));
+    }
+
+    stream_ << indenter_ << container_type_name
+            << std::endl
+            << indenter_ << "create_"
+            << container_identifiable_type_name
+            << "(unsigned int position) ";
+
+    utility_.open_scope();
+    {
+        cpp_positive_indenter_scope s(indenter_);
+        stream_ << indenter_ << container_type_name << " r(" << std::endl;
+        {
+            cpp_positive_indenter_scope s(indenter_);
+            const auto first(children.front());
+            const auto first_identifiable_type_name(
+                first.complete_identifiable_name());
+
+            stream_ << indenter_ << "create_"
+                    << first_identifiable_type_name
+                    << "(position)," << std::endl;
+
+            const auto second(children.front());
+            const auto second_identifiable_type_name(
+                second.complete_identifiable_name());
+
+            stream_ << indenter_ << "create_"
+                    << second_identifiable_type_name
                     << "(position));" << std::endl;
         }
         stream_ << indenter_ << "return r;" << std::endl;
@@ -536,6 +580,8 @@ recursive_helper_method_creator(const std::string& owner_name,
         smart_pointer_helper(vm);
     else if (vm.is_optional_like())
         optional_helper(vm);
+    else if (vm.is_pair())
+        pair_helper(vm);
     else if (vm.is_variant_like())
         variant_helper(vm);
     else if (vm.is_filesystem_path())

@@ -18,17 +18,43 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/std_model/odb/base_odb.hpp"
-#include "dogen/std_model/odb/class_a_odb.hpp"
-#include "dogen/std_model/odb/class_a_unversioned_key_odb.hpp"
-#include "dogen/std_model/odb/class_a_versioned_key_odb.hpp"
-#include "dogen/std_model/odb/class_b_odb.hpp"
-#include "dogen/std_model/odb/class_d_odb.hpp"
-#include "dogen/std_model/odb/class_e_odb.hpp"
-#include "dogen/std_model/odb/class_f_odb.hpp"
-#include "dogen/std_model/odb/class_g_odb.hpp"
-#include "dogen/std_model/odb/class_h_odb.hpp"
-#include "dogen/std_model/odb/class_j_odb.hpp"
-#include "dogen/std_model/odb/derived_odb.hpp"
-#include "dogen/std_model/odb/pkg1/class_c_odb.hpp"
-#include "dogen/std_model/odb/primitives_odb.hpp"
+#include "dogen/std_model/types/class_j.hpp"
+
+namespace dogen {
+namespace std_model {
+
+class_j::class_j(const std::pair<int, int>& prop_0)
+    : prop_0_(prop_0) { }
+
+void class_j::swap(class_j& other) noexcept {
+    using std::swap;
+    swap(prop_0_, other.prop_0_);
+}
+
+bool class_j::operator==(const class_j& rhs) const {
+    return prop_0_ == rhs.prop_0_;
+}
+
+class_j& class_j::operator=(class_j other) {
+    using std::swap;
+    swap(*this, other);
+    return *this;
+}
+
+const std::pair<int, int>& class_j::prop_0() const {
+    return prop_0_;
+}
+
+std::pair<int, int>& class_j::prop_0() {
+    return prop_0_;
+}
+
+void class_j::prop_0(const std::pair<int, int>& v) {
+    prop_0_ = v;
+}
+
+void class_j::prop_0(const std::pair<int, int>&& v) {
+    prop_0_ = std::move(v);
+}
+
+} }

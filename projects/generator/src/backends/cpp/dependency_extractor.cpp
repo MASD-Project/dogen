@@ -64,6 +64,8 @@ recurse_nested_qualified_names(const sml::nested_qname& nqn,
         dd.has_std_string(true);
     else if (qn.type_name() == boost_.type(boost_types::variant))
         dd.has_variant(true);
+    else if (qn.type_name() == std_.type(std_types::pair))
+        dd.has_std_pair(true);
 
     for (const auto c : nqn.children())
         recurse_nested_qualified_names(c, dd, is_pointer);

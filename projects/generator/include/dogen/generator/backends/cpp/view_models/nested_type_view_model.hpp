@@ -49,14 +49,15 @@ public:
                                is_smart_pointer_(false),
                                is_filesystem_path_(false),
                                is_date_(false), is_ptime_(false),
-                               is_time_duration_(false) {}
+                               is_time_duration_(false), is_pair_(false) {}
 
     explicit nested_type_view_model(const std::string& name)
         : name_(name), is_primitive_(false), is_string_like_(false),
           is_char_like_(false), is_int_like_(false),
           is_sequence_container_(false), is_associative_container_(false),
           is_smart_pointer_(false), is_filesystem_path_(false),
-          is_date_(false), is_ptime_(false), is_time_duration_(false) {}
+          is_date_(false), is_ptime_(false), is_time_duration_(false),
+          is_pair_(false) {}
 
 public:
     /**
@@ -236,6 +237,14 @@ public:
     void is_time_duration(const bool value) { is_time_duration_ = value; }
     /**@}*/
 
+    /**
+     * @brief If true, the type is an optional like type.
+     */
+    /**@{*/
+    bool is_pair() const { return is_pair_; }
+    void is_pair(bool v) { is_pair_ = v; }
+    /**@}*/
+
 private:
     std::string name_;
     std::string identifiable_name_;
@@ -257,6 +266,7 @@ private:
     bool is_date_;
     bool is_ptime_;
     bool is_time_duration_;
+    bool is_pair_;
 };
 
 } } } } }

@@ -64,6 +64,7 @@ private:
     void associative_container_helper(const nested_type_view_model& vm);
     void smart_pointer_helper(const nested_type_view_model& vm);
     void optional_helper(const nested_type_view_model& vm);
+    void pair_helper(const nested_type_view_model& vm);
     void variant_helper(const nested_type_view_model& vm);
     void recursive_helper_method_creator(const nested_type_view_model& vm,
         std::unordered_set<std::string>& types_done);

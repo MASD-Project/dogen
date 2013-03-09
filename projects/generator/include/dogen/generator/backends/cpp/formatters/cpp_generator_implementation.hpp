@@ -67,6 +67,7 @@ private:
         const nested_type_view_model& vm, unsigned int quantity);
     void smart_pointer_helper(const nested_type_view_model& vm);
     void optional_helper(const nested_type_view_model& vm);
+    void pair_helper(const nested_type_view_model& vm);
     void variant_helper(const nested_type_view_model& vm);
     void filesystem_path_helper(const nested_type_view_model& vm);
     void date_helper(const nested_type_view_model& vm);

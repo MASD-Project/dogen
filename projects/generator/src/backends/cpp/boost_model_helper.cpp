@@ -90,6 +90,7 @@ const std::string serialization_time_duration_include(
     "boost/date_time/posix_time/time_serialize.hpp");
 const std::string io_date_include("boost/date_time/gregorian/gregorian.hpp");
 const std::string io_time_include("boost/date_time/posix_time/posix_time.hpp");
+const std::string serialization_pair_include("boost/serialization/utility.hpp");
 
 const std::string error_message("Invalid or unexpected boost type");
 
@@ -175,6 +176,7 @@ std::string boost_model_helper::include(const boost_types type) const {
         return serialization_time_duration_include;
     case boost_types::io_gregorian_date: return io_date_include;
     case boost_types::io_time: return io_time_include;
+    case boost_types::serialization_pair: return serialization_pair_include;
     default: break;
     }
 

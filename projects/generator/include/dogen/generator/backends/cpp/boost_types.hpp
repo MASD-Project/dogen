@@ -72,7 +72,8 @@ enum class boost_types : unsigned int {
     serialization_ptime, ///< Serialisation support for posix time
     serialization_time_duration, ///< Serialisation support for time durantion
     io_gregorian_date, ///< IO support for date
-    io_time ///< IO support for time and time_duration
+    io_time, ///< IO support for time and time_duration
+    serialization_pair ///< Serialisation support for std::pair
 };
 
 } } } }

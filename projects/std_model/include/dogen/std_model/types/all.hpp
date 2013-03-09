@@ -28,6 +28,7 @@
 #include "dogen/std_model/types/class_f.hpp"
 #include "dogen/std_model/types/class_g.hpp"
 #include "dogen/std_model/types/class_h.hpp"
+#include "dogen/std_model/types/class_j.hpp"
 #include "dogen/std_model/types/derived.hpp"
 #include "dogen/std_model/types/pkg1/class_c.hpp"
 #include "dogen/std_model/types/primitives.hpp"

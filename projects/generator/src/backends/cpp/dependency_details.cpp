@@ -24,6 +24,11 @@ namespace dogen {
 namespace generator {
 namespace backends {
 namespace cpp {
+dependency_details::dependency_details() : has_std_string_(false),
+                                           has_variant_(false),
+                                           is_parent_(false), is_child_(false),
+                                           requires_stream_manipulators_(false),
+                                           has_std_pair_(false) { }
 
 const std::unordered_set<sml::qname>& dependency_details::names() const {
     return names_;
@@ -134,6 +139,14 @@ bool dependency_details::requires_stream_manipulators() const {
 
 void dependency_details::requires_stream_manipulators(const bool v) {
     requires_stream_manipulators_ = v;
+}
+
+bool dependency_details::has_std_pair() const {
+    return has_std_pair_;
+}
+
+void dependency_details::has_std_pair(const bool v) {
+    has_std_pair_ = v;
 }
 
 } } } }
