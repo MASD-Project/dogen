@@ -18,6 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/algorithm/string.hpp>
 #include <ostream>
 #include "dogen/std_model/io/class_j_io.hpp"
 
@@ -34,13 +35,35 @@ inline std::ostream& operator<<(std::ostream& s, const std::pair<int, int>& v) {
 
 }
 
+
+inline std::string tidy_up_string(std::string s) {
+    boost::replace_all(s, "\r\n", "<new_line>");
+    boost::replace_all(s, "\n", "<new_line>");
+    boost::replace_all(s, "\"", "<quote>");
+    return s;
+}
+
+namespace std {
+
+inline std::ostream& operator<<(std::ostream& s, const std::pair<std::string, std::string>& v) {
+    s << "{ " << "\"__type__\": " << "\"std::pair\"" << ", ";
+
+    s << "\"first\": " << "\"" << tidy_up_string(v.first) << "\"" << ", ";
+    s << "\"second\": " << "\"" << tidy_up_string(v.second) << "\"";
+    s << " }";
+    return s;
+}
+
+}
+
 namespace dogen {
 namespace std_model {
 
 std::ostream& operator<<(std::ostream& s, const class_j& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::std_model::class_j\"" << ", "
-      << "\"prop_0\": " << v.prop_0()
+      << "\"prop_0\": " << v.prop_0() << ", "
+      << "\"prop_1\": " << v.prop_1()
       << " }";
     return(s);
 }

@@ -18,6 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#include <sstream>
 #include "dogen/std_model/test_data/class_j_td.hpp"
 
 namespace {
@@ -34,6 +35,20 @@ create_std_pair_int_int(unsigned int position) {
     return r;
 }
 
+std::string create_std_string(const unsigned int position) {
+    std::ostringstream s;
+    s << "a_string_" << position;
+    return s.str();
+}
+
+std::pair<std::string, std::string>
+create_std_pair_std_string_std_string(unsigned int position) {
+    std::pair<std::string, std::string> r(
+        create_std_string(position),
+        create_std_string(position));
+    return r;
+}
+
 }
 
 namespace dogen {
@@ -44,6 +59,7 @@ class_j_generator::class_j_generator() : position_(0) { }
 void class_j_generator::
 populate(const unsigned int position, result_type& v) {
     v.prop_0(create_std_pair_int_int(position + 0));
+    v.prop_1(create_std_pair_std_string_std_string(position + 1));
 }
 
 class_j_generator::result_type

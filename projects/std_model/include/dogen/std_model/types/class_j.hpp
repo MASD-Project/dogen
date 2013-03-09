@@ -26,6 +26,7 @@
 #endif
 
 #include <algorithm>
+#include <string>
 #include <utility>
 #include "dogen/std_model/serialization/class_j_fwd_ser.hpp"
 
@@ -40,7 +41,9 @@ public:
     ~class_j() = default;
 
 public:
-    explicit class_j(const std::pair<int, int>& prop_0);
+    class_j(
+        const std::pair<int, int>& prop_0,
+        const std::pair<std::string, std::string>& prop_1);
 
 private:
     template<typename Archive>
@@ -55,6 +58,11 @@ public:
     void prop_0(const std::pair<int, int>& v);
     void prop_0(const std::pair<int, int>&& v);
 
+    const std::pair<std::string, std::string>& prop_1() const;
+    std::pair<std::string, std::string>& prop_1();
+    void prop_1(const std::pair<std::string, std::string>& v);
+    void prop_1(const std::pair<std::string, std::string>&& v);
+
 public:
     bool operator==(const class_j& rhs) const;
     bool operator!=(const class_j& rhs) const {
@@ -67,6 +75,7 @@ public:
 
 private:
     std::pair<int, int> prop_0_;
+    std::pair<std::string, std::string> prop_1_;
 };
 
 } }

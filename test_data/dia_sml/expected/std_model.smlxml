@@ -1774,7 +1774,7 @@
 					<meta_type>2</meta_type>
 				</name>
 				<properties>
-					<count>1</count>
+					<count>2</count>
 					<item_version>0</item_version>
 					<item>
 						<name>prop_0</name>
@@ -1827,6 +1827,71 @@
 											<item_version>0</item_version>
 										</package_path>
 										<type_name>int</type_name>
+										<meta_type>0</meta_type>
+									</type>
+									<children>
+										<count>0</count>
+										<item_version>0</item_version>
+									</children>
+									<is_pointer>0</is_pointer>
+								</item>
+							</children>
+							<is_pointer>0</is_pointer>
+						</type_name>
+						<default_value></default_value>
+						<documentation></documentation>
+					</item>
+					<item>
+						<name>prop_1</name>
+						<type_name>
+							<type>
+								<model_name>std</model_name>
+								<external_package_path>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_package_path>
+								<package_path>
+									<count>0</count>
+									<item_version>0</item_version>
+								</package_path>
+								<type_name>pair</type_name>
+								<meta_type>0</meta_type>
+							</type>
+							<children>
+								<count>2</count>
+								<item_version>0</item_version>
+								<item>
+									<type>
+										<model_name>std</model_name>
+										<external_package_path>
+											<count>0</count>
+											<item_version>0</item_version>
+										</external_package_path>
+										<package_path>
+											<count>0</count>
+											<item_version>0</item_version>
+										</package_path>
+										<type_name>string</type_name>
+										<meta_type>0</meta_type>
+									</type>
+									<children>
+										<count>0</count>
+										<item_version>0</item_version>
+									</children>
+									<is_pointer>0</is_pointer>
+								</item>
+								<item>
+									<type>
+										<model_name>std</model_name>
+										<external_package_path>
+											<count>0</count>
+											<item_version>0</item_version>
+										</external_package_path>
+										<package_path>
+											<count>0</count>
+											<item_version>0</item_version>
+										</package_path>
+										<type_name>string</type_name>
 										<meta_type>0</meta_type>
 									</type>
 									<children>

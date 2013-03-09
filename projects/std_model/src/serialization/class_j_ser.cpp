@@ -27,6 +27,7 @@
 #include <boost/archive/xml_iarchive.hpp>
 #include <boost/archive/xml_oarchive.hpp>
 #include <boost/serialization/nvp.hpp>
+#include <boost/serialization/string.hpp>
 #include <boost/serialization/utility.hpp>
 #include "dogen/std_model/serialization/class_j_ser.hpp"
 
@@ -43,6 +44,7 @@ void save(Archive& ar,
     const dogen::std_model::class_j& v,
     const unsigned int /*version*/) {
     ar << make_nvp("prop_0", v.prop_0_);
+    ar << make_nvp("prop_1", v.prop_1_);
 }
 
 template<typename Archive>
@@ -50,6 +52,7 @@ void load(Archive& ar,
     dogen::std_model::class_j& v,
     const unsigned int /*version*/) {
     ar >> make_nvp("prop_0", v.prop_0_);
+    ar >> make_nvp("prop_1", v.prop_1_);
 }
 
 } }

@@ -37,6 +37,14 @@ inline std::size_t hash_std_pair_int_int(const std::pair<int, int>& v){
     return seed;
 }
 
+inline std::size_t hash_std_pair_std_string_std_string(const std::pair<std::string, std::string>& v){
+    std::size_t seed(0);
+
+    combine(seed, v.first);
+    combine(seed, v.second);
+    return seed;
+}
+
 }
 
 namespace dogen {
@@ -46,6 +54,8 @@ std::size_t class_j_hasher::hash(const class_j&v) {
     std::size_t seed(0);
 
     combine(seed, hash_std_pair_int_int(v.prop_0()));
+    combine(seed, hash_std_pair_std_string_std_string(v.prop_1()));
+
     return seed;
 }
 
