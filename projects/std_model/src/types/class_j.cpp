@@ -25,19 +25,23 @@ namespace std_model {
 
 class_j::class_j(
     const std::pair<int, int>& prop_0,
-    const std::pair<std::string, std::string>& prop_1)
+    const std::pair<std::string, std::string>& prop_1,
+    const std::vector<std::pair<std::string, int> >& prop_2)
     : prop_0_(prop_0),
-      prop_1_(prop_1) { }
+      prop_1_(prop_1),
+      prop_2_(prop_2) { }
 
 void class_j::swap(class_j& other) noexcept {
     using std::swap;
     swap(prop_0_, other.prop_0_);
     swap(prop_1_, other.prop_1_);
+    swap(prop_2_, other.prop_2_);
 }
 
 bool class_j::operator==(const class_j& rhs) const {
     return prop_0_ == rhs.prop_0_ &&
-        prop_1_ == rhs.prop_1_;
+        prop_1_ == rhs.prop_1_ &&
+        prop_2_ == rhs.prop_2_;
 }
 
 class_j& class_j::operator=(class_j other) {
@@ -76,6 +80,22 @@ void class_j::prop_1(const std::pair<std::string, std::string>& v) {
 
 void class_j::prop_1(const std::pair<std::string, std::string>&& v) {
     prop_1_ = std::move(v);
+}
+
+const std::vector<std::pair<std::string, int> >& class_j::prop_2() const {
+    return prop_2_;
+}
+
+std::vector<std::pair<std::string, int> >& class_j::prop_2() {
+    return prop_2_;
+}
+
+void class_j::prop_2(const std::vector<std::pair<std::string, int> >& v) {
+    prop_2_ = v;
+}
+
+void class_j::prop_2(const std::vector<std::pair<std::string, int> >&& v) {
+    prop_2_ = std::move(v);
 }
 
 } }

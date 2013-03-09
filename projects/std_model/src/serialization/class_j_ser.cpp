@@ -29,6 +29,7 @@
 #include <boost/serialization/nvp.hpp>
 #include <boost/serialization/string.hpp>
 #include <boost/serialization/utility.hpp>
+#include <boost/serialization/vector.hpp>
 #include "dogen/std_model/serialization/class_j_ser.hpp"
 
 #ifdef __linux__
@@ -45,6 +46,7 @@ void save(Archive& ar,
     const unsigned int /*version*/) {
     ar << make_nvp("prop_0", v.prop_0_);
     ar << make_nvp("prop_1", v.prop_1_);
+    ar << make_nvp("prop_2", v.prop_2_);
 }
 
 template<typename Archive>
@@ -53,6 +55,7 @@ void load(Archive& ar,
     const unsigned int /*version*/) {
     ar >> make_nvp("prop_0", v.prop_0_);
     ar >> make_nvp("prop_1", v.prop_1_);
+    ar >> make_nvp("prop_2", v.prop_2_);
 }
 
 } }

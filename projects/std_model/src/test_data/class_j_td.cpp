@@ -49,6 +49,22 @@ create_std_pair_std_string_std_string(unsigned int position) {
     return r;
 }
 
+std::pair<std::string, int>
+create_std_pair_std_string_int(unsigned int position) {
+    std::pair<std::string, int> r(
+        create_std_string(position),
+        create_int(position));
+    return r;
+}
+
+std::vector<std::pair<std::string, int> > create_std_vector_std_pair_std_string_int_(unsigned int position) {
+    std::vector<std::pair<std::string, int> > r;
+    for (unsigned int i(0); i < 10; ++i) {
+        r.push_back(create_std_pair_std_string_int(position + i));
+    }
+    return r;
+}
+
 }
 
 namespace dogen {
@@ -60,6 +76,7 @@ void class_j_generator::
 populate(const unsigned int position, result_type& v) {
     v.prop_0(create_std_pair_int_int(position + 0));
     v.prop_1(create_std_pair_std_string_std_string(position + 1));
+    v.prop_2(create_std_vector_std_pair_std_string_int_(position + 2));
 }
 
 class_j_generator::result_type

@@ -276,7 +276,7 @@ pair_helper(const nested_type_view_model& vm) {
                     << first_identifiable_type_name
                     << "(position)," << std::endl;
 
-            const auto second(children.front());
+            const auto second(children.back());
             const auto second_identifiable_type_name(
                 second.complete_identifiable_name());
 

@@ -36,6 +36,7 @@ namespace std_model {
 
 #pragma db member(class_j::prop_0_) prop_0
 #pragma db member(class_j::prop_1_) prop_1
+#pragma db member(class_j::prop_2_) prop_2
 
 #endif
 

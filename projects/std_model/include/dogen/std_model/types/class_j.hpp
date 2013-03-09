@@ -28,6 +28,7 @@
 #include <algorithm>
 #include <string>
 #include <utility>
+#include <vector>
 #include "dogen/std_model/serialization/class_j_fwd_ser.hpp"
 
 namespace dogen {
@@ -43,7 +44,8 @@ public:
 public:
     class_j(
         const std::pair<int, int>& prop_0,
-        const std::pair<std::string, std::string>& prop_1);
+        const std::pair<std::string, std::string>& prop_1,
+        const std::vector<std::pair<std::string, int> >& prop_2);
 
 private:
     template<typename Archive>
@@ -63,6 +65,11 @@ public:
     void prop_1(const std::pair<std::string, std::string>& v);
     void prop_1(const std::pair<std::string, std::string>&& v);
 
+    const std::vector<std::pair<std::string, int> >& prop_2() const;
+    std::vector<std::pair<std::string, int> >& prop_2();
+    void prop_2(const std::vector<std::pair<std::string, int> >& v);
+    void prop_2(const std::vector<std::pair<std::string, int> >&& v);
+
 public:
     bool operator==(const class_j& rhs) const;
     bool operator!=(const class_j& rhs) const {
@@ -76,6 +83,7 @@ public:
 private:
     std::pair<int, int> prop_0_;
     std::pair<std::string, std::string> prop_1_;
+    std::vector<std::pair<std::string, int> > prop_2_;
 };
 
 } }

@@ -420,7 +420,7 @@ pair_helper(const nested_type_view_model& vm) {
                         << space_inserter << utility_.quote(spaced_comma) << ";"
                         << std::endl;
 
-            const auto second(children.front());
+            const auto second(children.back());
             stream_ << indenter_ << "s" << space_inserter
                     << utility_.quote(utility_.quote_escaped("second") + colon);
 

@@ -56,6 +56,33 @@ inline std::ostream& operator<<(std::ostream& s, const std::pair<std::string, st
 
 }
 
+namespace std {
+
+inline std::ostream& operator<<(std::ostream& s, const std::pair<std::string, int>& v) {
+    s << "{ " << "\"__type__\": " << "\"std::pair\"" << ", ";
+
+    s << "\"first\": " << "\"" << tidy_up_string(v.first) << "\"" << ", ";
+    s << "\"second\": " << v.second;
+    s << " }";
+    return s;
+}
+
+}
+
+namespace std {
+
+inline std::ostream& operator<<(std::ostream& s, const std::vector<std::pair<std::string, int> >& v) {
+    s << "[ ";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << *i;
+    }
+    s << "] ";
+    return s;
+}
+
+}
+
 namespace dogen {
 namespace std_model {
 
@@ -63,7 +90,8 @@ std::ostream& operator<<(std::ostream& s, const class_j& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::std_model::class_j\"" << ", "
       << "\"prop_0\": " << v.prop_0() << ", "
-      << "\"prop_1\": " << v.prop_1()
+      << "\"prop_1\": " << v.prop_1() << ", "
+      << "\"prop_2\": " << v.prop_2()
       << " }";
     return(s);
 }
