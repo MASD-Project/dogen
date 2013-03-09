@@ -107,10 +107,9 @@ std::string cpp_inclusion_manager::header_dependency(
 }
 
 void cpp_inclusion_manager::
-append_implementation_dependencies(const sml::pod& p,
+append_implementation_dependencies( const dependency_details& dd,
     const config::cpp_facet_types ft, const cpp_file_types flt,
-    inclusion_lists& il, const bool requires_stream_manipulators,
-    const bool has_std_string, const bool has_variant) const {
+    inclusion_lists& il) const {
 
     using config::cpp_facet_types;
 
@@ -123,7 +122,7 @@ append_implementation_dependencies(const sml::pod& p,
     const bool is_io(ft == cpp_facet_types::io);
 
     const bool domain_with_io(is_domain &&
-        (settings_.use_integrated_io() || p.parent_name() || p.is_parent()));
+        (settings_.use_integrated_io() || dd.is_parent_or_child()));
 
     if (is_header && io_enabled_ && (domain_with_io || is_io))
         il.system.push_back(std_.include(std_types::iosfwd));
@@ -157,11 +156,11 @@ append_implementation_dependencies(const sml::pod& p,
         il.system.push_back(boost_.include(boost_types::split_free));
 
     // assume abstract
-    if (is_header && is_serialization && p.is_parent())
+    if (is_header && is_serialization && dd.is_parent())
         il.system.push_back(boost_.include(boost_types::assume_abstract));
 
     // boost virtual base of
-    if (is_header && is_serialization && !p.is_parent() && p.parent_name())
+    if (is_header && is_serialization && !dd.is_parent() && dd.is_child())
         il.system.push_back(boost_.include(boost_types::is_virtual_base_of));
 
     // boost archive types
@@ -179,21 +178,21 @@ append_implementation_dependencies(const sml::pod& p,
     }
 
     // state saver
-    if (is_implementation && io_enabled_ && requires_stream_manipulators &&
+    if (is_implementation && io_enabled_ && dd.requires_stream_manipulators() &&
         (domain_with_io || io_without_iio))
         il.system.push_back(boost_.include(boost_types::io_ios_state));
 
     // boost string algorithm
     if (is_implementation && io_enabled_ && (domain_with_io || io_without_iio)
-        && has_std_string)
+        && dd.has_std_string())
         il.system.push_back(boost_.include(boost_types::string_algorithm));
 
     // apply visitor
     if (is_implementation && io_enabled_ && (domain_with_io || io_without_iio)
-        && has_variant)
+        && dd.has_variant())
         il.system.push_back(boost_.include(boost_types::apply_visitor));
 
-    if (is_implementation && is_hash && has_variant)
+    if (is_implementation && is_hash && dd.has_variant())
         il.system.push_back(boost_.include(boost_types::apply_visitor));
 }
 
@@ -712,11 +711,8 @@ includes_for_pod(const sml::pod& pod, config::cpp_facet_types ft,
     }
 
     const auto details(dependency_extractor_.extract(pod));
-    const bool rsm(details.requires_stream_manipulators());
-    const bool has_str(details.has_std_string());
-    const bool has_var(details.has_variant());
 
-    append_implementation_dependencies(pod, ft, flt, r, rsm, has_str, has_var);
+    append_implementation_dependencies(details, ft, flt, r);
     append_relationship_dependencies(details, ft, flt, r);
     append_self_dependencies(n, ft, flt, at, n.meta_type(), r);
 

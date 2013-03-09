@@ -149,12 +149,9 @@ private:
      * compile, but on the flip side, all inclusion related code is
      * kept in one place.
      */
-    void append_implementation_dependencies(const sml::pod& pod,
-        const config::cpp_facet_types ft, const cpp_file_types flt,
-        inclusion_lists& il,
-        const bool requires_stream_manipulators = false,
-        const bool has_std_string = false,
-        const bool has_variant = false) const;
+    void append_implementation_dependencies(
+        const dependency_details& dd, const config::cpp_facet_types ft,
+        const cpp_file_types flt, inclusion_lists& il) const;
 
     /**
      * @brief Handles all dependencies to types in the boost

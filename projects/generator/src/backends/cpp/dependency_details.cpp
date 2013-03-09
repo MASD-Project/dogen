@@ -108,12 +108,24 @@ void dependency_details::has_variant(const bool v) {
     has_variant_ = v;
 }
 
-bool dependency_details::is_parent_or_child() const {
-    return is_parent_or_child_;
+bool dependency_details::is_parent() const {
+    return is_parent_;
 }
 
-void dependency_details::is_parent_or_child(const bool v) {
-    is_parent_or_child_ = v;
+void dependency_details::is_parent(const bool v) {
+    is_parent_ = v;
+}
+
+bool dependency_details::is_child() const {
+    return is_child_;
+}
+
+void dependency_details::is_child(const bool v) {
+    is_child_ = v;
+}
+
+bool dependency_details::is_parent_or_child() const {
+    return is_parent_ || is_child_;
 }
 
 bool dependency_details::requires_stream_manipulators() const {

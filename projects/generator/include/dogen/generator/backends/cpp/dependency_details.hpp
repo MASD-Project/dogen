@@ -46,7 +46,7 @@ public:
 
 public:
     dependency_details() : has_std_string_(false), has_variant_(false),
-                           is_parent_or_child_(false),
+                           is_parent_(false), is_child_(false),
                            requires_stream_manipulators_(false) { }
 
 public:
@@ -97,11 +97,22 @@ public:
     void has_variant(const bool v);
 
     /**
+     * @brief Returns true if the pod is a parent of another pod.
+     */
+    bool is_parent() const;
+    void is_parent(const bool v);
+
+    /**
+     * @brief Returns true if the pod is a descendant of another pod.
+     */
+    bool is_child() const;
+    void is_child(const bool v);
+
+    /**
      * @brief Returns true if the pod is in a inheritance
      * relationship, as either the parent or the child.
      */
     bool is_parent_or_child() const;
-    void is_parent_or_child(const bool v);
 
     /**
      * @brief Returns true if there is a type in the list of qualified
@@ -122,7 +133,8 @@ private:
     std::unordered_set<sml::qname> leaves_;
     bool has_std_string_;
     bool has_variant_;
-    bool is_parent_or_child_;
+    bool is_parent_;
+    bool is_child_;
     bool requires_stream_manipulators_;
 };
 

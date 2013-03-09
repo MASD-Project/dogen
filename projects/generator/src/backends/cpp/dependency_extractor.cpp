@@ -75,7 +75,8 @@ dependency_details dependency_extractor::extract(const sml::pod& p) const {
     if (p.parent_name())
         r.names().insert(*p.parent_name());
 
-    r.is_parent_or_child(p.parent_name() || p.is_parent());
+    r.is_parent(p.is_parent());
+    r.is_child(p.parent_name());
     r.leaves().insert(p.leaves().begin(), p.leaves().end());
 
     for (const auto prop : p.properties()) {
