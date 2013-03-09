@@ -58,7 +58,7 @@ std::ostream& operator<<(std::ostream& s, const modeling_settings& v) {
 
     s << " { "
       << "\"__type__\": " << "\"dogen::config::modeling_settings\"" << ", "
-      << "\"target\": " << v.target() << ", "
+      << "\"target\": " << "\"" << v.target().generic_string() << "\"" << ", "
       << "\"external_package_path\": " << "\"" << tidy_up_string(v.external_package_path()) << "\"" << ", "
       << "\"references\": " << v.references() << ", "
       << "\"verbose\": " << v.verbose() << ", "

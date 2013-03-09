@@ -36,7 +36,7 @@ namespace config {
 std::ostream& operator<<(std::ostream& s, const reference& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::config::reference\"" << ", "
-      << "\"path\": " << v.path() << ", "
+      << "\"path\": " << "\"" << v.path().generic_string() << "\"" << ", "
       << "\"external_package_path\": " << "\"" << tidy_up_string(v.external_package_path()) << "\""
       << " }";
     return(s);
