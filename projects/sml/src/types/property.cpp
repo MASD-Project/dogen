@@ -27,11 +27,13 @@ property::property(
     const std::string& name,
     const dogen::sml::nested_qname& type_name,
     const std::string& default_value,
-    const std::string& documentation)
+    const std::string& documentation,
+    const std::vector<std::pair<std::string, std::string> >& implementation_specific_parameters)
     : name_(name),
       type_name_(type_name),
       default_value_(default_value),
-      documentation_(documentation) { }
+      documentation_(documentation),
+      implementation_specific_parameters_(implementation_specific_parameters) { }
 
 void property::swap(property& other) noexcept {
     using std::swap;
@@ -39,13 +41,15 @@ void property::swap(property& other) noexcept {
     swap(type_name_, other.type_name_);
     swap(default_value_, other.default_value_);
     swap(documentation_, other.documentation_);
+    swap(implementation_specific_parameters_, other.implementation_specific_parameters_);
 }
 
 bool property::operator==(const property& rhs) const {
     return name_ == rhs.name_ &&
         type_name_ == rhs.type_name_ &&
         default_value_ == rhs.default_value_ &&
-        documentation_ == rhs.documentation_;
+        documentation_ == rhs.documentation_ &&
+        implementation_specific_parameters_ == rhs.implementation_specific_parameters_;
 }
 
 property& property::operator=(property other) {
@@ -116,6 +120,22 @@ void property::documentation(const std::string& v) {
 
 void property::documentation(const std::string&& v) {
     documentation_ = std::move(v);
+}
+
+const std::vector<std::pair<std::string, std::string> >& property::implementation_specific_parameters() const {
+    return implementation_specific_parameters_;
+}
+
+std::vector<std::pair<std::string, std::string> >& property::implementation_specific_parameters() {
+    return implementation_specific_parameters_;
+}
+
+void property::implementation_specific_parameters(const std::vector<std::pair<std::string, std::string> >& v) {
+    implementation_specific_parameters_ = v;
+}
+
+void property::implementation_specific_parameters(const std::vector<std::pair<std::string, std::string> >&& v) {
+    implementation_specific_parameters_ = std::move(v);
 }
 
 } }

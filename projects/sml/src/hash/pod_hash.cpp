@@ -60,6 +60,22 @@ inline std::size_t hash_std_list_dogen_sml_qname(const std::list<dogen::sml::qna
     return seed;
 }
 
+inline std::size_t hash_std_pair_std_string_std_string(const std::pair<std::string, std::string>& v){
+    std::size_t seed(0);
+
+    combine(seed, v.first);
+    combine(seed, v.second);
+    return seed;
+}
+
+inline std::size_t hash_std_vector_std_pair_std_string_std_string_(const std::vector<std::pair<std::string, std::string> >& v){
+    std::size_t seed(0);
+    for (const auto i : v) {
+        combine(seed, hash_std_pair_std_string_std_string(i));
+    }
+    return seed;
+}
+
 }
 
 namespace dogen {
@@ -79,6 +95,7 @@ std::size_t pod_hasher::hash(const pod&v) {
     combine(seed, v.pod_type());
     combine(seed, v.documentation());
     combine(seed, v.number_of_type_arguments());
+    combine(seed, hash_std_vector_std_pair_std_string_std_string_(v.implementation_specific_parameters()));
 
     return seed;
 }

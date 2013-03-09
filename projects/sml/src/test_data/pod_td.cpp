@@ -89,6 +89,22 @@ unsigned int create_unsigned_int(const unsigned int position) {
     return static_cast<unsigned int>(position);
 }
 
+std::pair<std::string, std::string>
+create_std_pair_std_string_std_string(unsigned int position) {
+    std::pair<std::string, std::string> r(
+        create_std_string(position),
+        create_std_string(position));
+    return r;
+}
+
+std::vector<std::pair<std::string, std::string> > create_std_vector_std_pair_std_string_std_string_(unsigned int position) {
+    std::vector<std::pair<std::string, std::string> > r;
+    for (unsigned int i(0); i < 10; ++i) {
+        r.push_back(create_std_pair_std_string_std_string(position + i));
+    }
+    return r;
+}
+
 }
 
 namespace dogen {
@@ -109,6 +125,7 @@ populate(const unsigned int position, result_type& v) {
     v.pod_type(create_dogen_sml_pod_types(position + 8));
     v.documentation(create_std_string(position + 9));
     v.number_of_type_arguments(create_unsigned_int(position + 10));
+    v.implementation_specific_parameters(create_std_vector_std_pair_std_string_std_string_(position + 11));
 }
 
 pod_generator::result_type

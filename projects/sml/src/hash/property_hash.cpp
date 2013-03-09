@@ -30,6 +30,22 @@ inline void combine(std::size_t& seed, const HashableType& value)
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 }
 
+inline std::size_t hash_std_pair_std_string_std_string(const std::pair<std::string, std::string>& v){
+    std::size_t seed(0);
+
+    combine(seed, v.first);
+    combine(seed, v.second);
+    return seed;
+}
+
+inline std::size_t hash_std_vector_std_pair_std_string_std_string_(const std::vector<std::pair<std::string, std::string> >& v){
+    std::size_t seed(0);
+    for (const auto i : v) {
+        combine(seed, hash_std_pair_std_string_std_string(i));
+    }
+    return seed;
+}
+
 }
 
 namespace dogen {
@@ -42,6 +58,7 @@ std::size_t property_hasher::hash(const property&v) {
     combine(seed, v.type_name());
     combine(seed, v.default_value());
     combine(seed, v.documentation());
+    combine(seed, hash_std_vector_std_pair_std_string_std_string_(v.implementation_specific_parameters()));
 
     return seed;
 }

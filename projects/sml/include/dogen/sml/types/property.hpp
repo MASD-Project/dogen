@@ -27,6 +27,8 @@
 
 #include <algorithm>
 #include <string>
+#include <utility>
+#include <vector>
 #include "dogen/sml/serialization/property_fwd_ser.hpp"
 #include "dogen/sml/types/nested_qname.hpp"
 
@@ -48,7 +50,8 @@ public:
         const std::string& name,
         const dogen::sml::nested_qname& type_name,
         const std::string& default_value,
-        const std::string& documentation);
+        const std::string& documentation,
+        const std::vector<std::pair<std::string, std::string> >& implementation_specific_parameters);
 
 private:
     template<typename Archive>
@@ -100,6 +103,16 @@ public:
     void documentation(const std::string&& v);
     /**@}*/
 
+    /*
+     * @brief Parameters associated with the property which are opaque to SML.
+     */
+    /**@{*/
+    const std::vector<std::pair<std::string, std::string> >& implementation_specific_parameters() const;
+    std::vector<std::pair<std::string, std::string> >& implementation_specific_parameters();
+    void implementation_specific_parameters(const std::vector<std::pair<std::string, std::string> >& v);
+    void implementation_specific_parameters(const std::vector<std::pair<std::string, std::string> >&& v);
+    /**@}*/
+
 public:
     bool operator==(const property& rhs) const;
     bool operator!=(const property& rhs) const {
@@ -115,6 +128,7 @@ private:
     dogen::sml::nested_qname type_name_;
     std::string default_value_;
     std::string documentation_;
+    std::vector<std::pair<std::string, std::string> > implementation_specific_parameters_;
 };
 
 } }

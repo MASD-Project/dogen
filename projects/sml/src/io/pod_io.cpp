@@ -79,6 +79,33 @@ inline std::string tidy_up_string(std::string s) {
     return s;
 }
 
+namespace std {
+
+inline std::ostream& operator<<(std::ostream& s, const std::pair<std::string, std::string>& v) {
+    s << "{ " << "\"__type__\": " << "\"std::pair\"" << ", ";
+
+    s << "\"first\": " << "\"" << tidy_up_string(v.first) << "\"" << ", ";
+    s << "\"second\": " << "\"" << tidy_up_string(v.second) << "\"";
+    s << " }";
+    return s;
+}
+
+}
+
+namespace std {
+
+inline std::ostream& operator<<(std::ostream& s, const std::vector<std::pair<std::string, std::string> >& v) {
+    s << "[ ";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << *i;
+    }
+    s << "] ";
+    return s;
+}
+
+}
+
 namespace dogen {
 namespace sml {
 
@@ -101,7 +128,8 @@ std::ostream& operator<<(std::ostream& s, const pod& v) {
       << "\"category_type\": " << v.category_type() << ", "
       << "\"pod_type\": " << v.pod_type() << ", "
       << "\"documentation\": " << "\"" << tidy_up_string(v.documentation()) << "\"" << ", "
-      << "\"number_of_type_arguments\": " << v.number_of_type_arguments()
+      << "\"number_of_type_arguments\": " << v.number_of_type_arguments() << ", "
+      << "\"implementation_specific_parameters\": " << v.implementation_specific_parameters()
       << " }";
     return(s);
 }

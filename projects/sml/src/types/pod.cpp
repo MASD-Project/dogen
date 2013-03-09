@@ -41,7 +41,8 @@ pod::pod(pod&& rhs)
       category_type_(std::move(rhs.category_type_)),
       pod_type_(std::move(rhs.pod_type_)),
       documentation_(std::move(rhs.documentation_)),
-      number_of_type_arguments_(std::move(rhs.number_of_type_arguments_)) { }
+      number_of_type_arguments_(std::move(rhs.number_of_type_arguments_)),
+      implementation_specific_parameters_(std::move(rhs.implementation_specific_parameters_)) { }
 
 pod::pod(
     const dogen::sml::qname& name,
@@ -54,7 +55,8 @@ pod::pod(
     const dogen::sml::category_types& category_type,
     const dogen::sml::pod_types& pod_type,
     const std::string& documentation,
-    const unsigned int number_of_type_arguments)
+    const unsigned int number_of_type_arguments,
+    const std::vector<std::pair<std::string, std::string> >& implementation_specific_parameters)
     : name_(name),
       properties_(properties),
       parent_name_(parent_name),
@@ -65,7 +67,8 @@ pod::pod(
       category_type_(category_type),
       pod_type_(pod_type),
       documentation_(documentation),
-      number_of_type_arguments_(number_of_type_arguments) { }
+      number_of_type_arguments_(number_of_type_arguments),
+      implementation_specific_parameters_(implementation_specific_parameters) { }
 
 void pod::swap(pod& other) noexcept {
     using std::swap;
@@ -80,6 +83,7 @@ void pod::swap(pod& other) noexcept {
     swap(pod_type_, other.pod_type_);
     swap(documentation_, other.documentation_);
     swap(number_of_type_arguments_, other.number_of_type_arguments_);
+    swap(implementation_specific_parameters_, other.implementation_specific_parameters_);
 }
 
 bool pod::operator==(const pod& rhs) const {
@@ -93,7 +97,8 @@ bool pod::operator==(const pod& rhs) const {
         category_type_ == rhs.category_type_ &&
         pod_type_ == rhs.pod_type_ &&
         documentation_ == rhs.documentation_ &&
-        number_of_type_arguments_ == rhs.number_of_type_arguments_;
+        number_of_type_arguments_ == rhs.number_of_type_arguments_ &&
+        implementation_specific_parameters_ == rhs.implementation_specific_parameters_;
 }
 
 pod& pod::operator=(pod other) {
@@ -236,6 +241,22 @@ unsigned int pod::number_of_type_arguments() const {
 
 void pod::number_of_type_arguments(const unsigned int v) {
     number_of_type_arguments_ = v;
+}
+
+const std::vector<std::pair<std::string, std::string> >& pod::implementation_specific_parameters() const {
+    return implementation_specific_parameters_;
+}
+
+std::vector<std::pair<std::string, std::string> >& pod::implementation_specific_parameters() {
+    return implementation_specific_parameters_;
+}
+
+void pod::implementation_specific_parameters(const std::vector<std::pair<std::string, std::string> >& v) {
+    implementation_specific_parameters_ = v;
+}
+
+void pod::implementation_specific_parameters(const std::vector<std::pair<std::string, std::string> >&& v) {
+    implementation_specific_parameters_ = std::move(v);
 }
 
 } }

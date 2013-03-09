@@ -67,15 +67,19 @@
 						</type_name>
 						<default_value></default_value>
 						<documentation></documentation>
+						<implementation_specific_parameters class_id="11" tracking_level="0" version="0">
+							<count>0</count>
+							<item_version>0</item_version>
+						</implementation_specific_parameters>
 					</item>
 				</properties>
-				<parent_name class_id="11" tracking_level="0" version="0">
+				<parent_name class_id="12" tracking_level="0" version="0">
 					<initialized>0</initialized>
 				</parent_name>
 				<original_parent_name>
 					<initialized>0</initialized>
 				</original_parent_name>
-				<leaves class_id="12" tracking_level="0" version="0">
+				<leaves class_id="13" tracking_level="0" version="0">
 					<count>0</count>
 					<item_version>0</item_version>
 				</leaves>
@@ -85,6 +89,10 @@
 				<pod_type>5</pod_type>
 				<documentation></documentation>
 				<number_of_type_arguments>0</number_of_type_arguments>
+				<implementation_specific_parameters>
+					<count>0</count>
+					<item_version>0</item_version>
+				</implementation_specific_parameters>
 			</second>
 		</item>
 		<item>
@@ -142,6 +150,10 @@
 						</type_name>
 						<default_value></default_value>
 						<documentation></documentation>
+						<implementation_specific_parameters>
+							<count>0</count>
+							<item_version>0</item_version>
+						</implementation_specific_parameters>
 					</item>
 				</properties>
 				<parent_name>
@@ -160,6 +172,10 @@
 				<pod_type>5</pod_type>
 				<documentation></documentation>
 				<number_of_type_arguments>0</number_of_type_arguments>
+				<implementation_specific_parameters>
+					<count>0</count>
+					<item_version>0</item_version>
+				</implementation_specific_parameters>
 			</second>
 		</item>
 		<item>
@@ -217,6 +233,10 @@
 						</type_name>
 						<default_value></default_value>
 						<documentation></documentation>
+						<implementation_specific_parameters>
+							<count>0</count>
+							<item_version>0</item_version>
+						</implementation_specific_parameters>
 					</item>
 				</properties>
 				<parent_name>
@@ -235,6 +255,10 @@
 				<pod_type>5</pod_type>
 				<documentation></documentation>
 				<number_of_type_arguments>0</number_of_type_arguments>
+				<implementation_specific_parameters>
+					<count>0</count>
+					<item_version>0</item_version>
+				</implementation_specific_parameters>
 			</second>
 		</item>
 		<item>
@@ -292,6 +316,10 @@
 						</type_name>
 						<default_value></default_value>
 						<documentation></documentation>
+						<implementation_specific_parameters>
+							<count>0</count>
+							<item_version>0</item_version>
+						</implementation_specific_parameters>
 					</item>
 				</properties>
 				<parent_name>
@@ -310,6 +338,10 @@
 				<pod_type>5</pod_type>
 				<documentation></documentation>
 				<number_of_type_arguments>0</number_of_type_arguments>
+				<implementation_specific_parameters>
+					<count>0</count>
+					<item_version>0</item_version>
+				</implementation_specific_parameters>
 			</second>
 		</item>
 		<item>
@@ -367,6 +399,10 @@
 						</type_name>
 						<default_value></default_value>
 						<documentation></documentation>
+						<implementation_specific_parameters>
+							<count>0</count>
+							<item_version>0</item_version>
+						</implementation_specific_parameters>
 					</item>
 				</properties>
 				<parent_name>
@@ -385,20 +421,24 @@
 				<pod_type>5</pod_type>
 				<documentation></documentation>
 				<number_of_type_arguments>0</number_of_type_arguments>
+				<implementation_specific_parameters>
+					<count>0</count>
+					<item_version>0</item_version>
+				</implementation_specific_parameters>
 			</second>
 		</item>
 	</pods>
-	<primitives class_id="13" tracking_level="0" version="0">
+	<primitives class_id="14" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>11</bucket_count>
 		<item_version>0</item_version>
 	</primitives>
-	<enumerations class_id="14" tracking_level="0" version="0">
+	<enumerations class_id="15" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>11</bucket_count>
 		<item_version>0</item_version>
 	</enumerations>
-	<exceptions class_id="15" tracking_level="0" version="0">
+	<exceptions class_id="16" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>11</bucket_count>
 		<item_version>0</item_version>
@@ -408,12 +448,12 @@
 		<item_version>0</item_version>
 	</external_package_path>
 	<is_system>0</is_system>
-	<dependencies class_id="16" tracking_level="0" version="0">
+	<dependencies class_id="17" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>11</bucket_count>
 		<item_version>0</item_version>
 	</dependencies>
-	<leaves class_id="17" tracking_level="0" version="0">
+	<leaves class_id="18" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>11</bucket_count>
 		<item_version>0</item_version>

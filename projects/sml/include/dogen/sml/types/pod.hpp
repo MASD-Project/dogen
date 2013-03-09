@@ -29,6 +29,7 @@
 #include <boost/optional.hpp>
 #include <list>
 #include <string>
+#include <utility>
 #include <vector>
 #include "dogen/sml/serialization/pod_fwd_ser.hpp"
 #include "dogen/sml/types/category_types.hpp"
@@ -63,7 +64,8 @@ public:
         const dogen::sml::category_types& category_type,
         const dogen::sml::pod_types& pod_type,
         const std::string& documentation,
-        const unsigned int number_of_type_arguments);
+        const unsigned int number_of_type_arguments,
+        const std::vector<std::pair<std::string, std::string> >& implementation_specific_parameters);
 
 private:
     template<typename Archive>
@@ -173,6 +175,16 @@ public:
     void number_of_type_arguments(const unsigned int v);
     /**@}*/
 
+    /*
+     * @brief Parameters associated with the pod which are opaque to SML.
+     */
+    /**@{*/
+    const std::vector<std::pair<std::string, std::string> >& implementation_specific_parameters() const;
+    std::vector<std::pair<std::string, std::string> >& implementation_specific_parameters();
+    void implementation_specific_parameters(const std::vector<std::pair<std::string, std::string> >& v);
+    void implementation_specific_parameters(const std::vector<std::pair<std::string, std::string> >&& v);
+    /**@}*/
+
 public:
     bool operator==(const pod& rhs) const;
     bool operator!=(const pod& rhs) const {
@@ -195,6 +207,7 @@ private:
     dogen::sml::pod_types pod_type_;
     std::string documentation_;
     unsigned int number_of_type_arguments_;
+    std::vector<std::pair<std::string, std::string> > implementation_specific_parameters_;
 };
 
 } }
