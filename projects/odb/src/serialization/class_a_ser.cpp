@@ -38,15 +38,17 @@ namespace boost {
 namespace serialization {
 
 template<typename Archive>
-void save(Archive& /*ar*/,
-    const dogen::odb::class_a& /*v*/,
+void save(Archive& ar,
+    const dogen::odb::class_a& v,
     const unsigned int /*version*/) {
+    ar << make_nvp("prop_0", v.prop_0_);
 }
 
 template<typename Archive>
-void load(Archive& /*ar*/,
-    dogen::odb::class_a& /*v*/,
+void load(Archive& ar,
+    dogen::odb::class_a& v,
     const unsigned int /*version*/) {
+    ar >> make_nvp("prop_0", v.prop_0_);
 }
 
 } }

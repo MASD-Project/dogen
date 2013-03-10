@@ -25,7 +25,9 @@
 #pragma once
 #endif
 
+#include <vector>
 #include <string>
+#include <utility>
 #include "dogen/generator/backends/cpp/view_models/nested_type_view_model.hpp"
 
 namespace dogen {
@@ -70,10 +72,26 @@ public:
     void documentation(const std::string& v) { documentation_ = v; }
     /**@}*/
 
+    /*
+     * @brief Parameters associated with the pod.
+     */
+    /**@{*/
+    std::vector<std::pair<std::string, std::string> >
+    implementation_specific_parameters() const {
+        return implementation_specific_parameters_;
+    }
+    void implementation_specific_parameters(
+        const std::vector<std::pair<std::string, std::string> >& v) {
+        implementation_specific_parameters_ = v;
+    }
+    /**@}*/
+
 private:
     std::string name_;
     nested_type_view_model type_;
     std::string documentation_;
+    std::vector<std::pair<std::string, std::string> >
+    implementation_specific_parameters_;
 };
 
 } } } } }

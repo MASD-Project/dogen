@@ -33,11 +33,15 @@ namespace odb {
 
 class class_a final {
 public:
-    class_a() = default;
     class_a(const class_a&) = default;
     class_a(class_a&&) = default;
     ~class_a() = default;
-    class_a& operator=(const class_a&) = default;
+
+public:
+    class_a();
+
+public:
+    explicit class_a(const unsigned int prop_0);
 
 private:
     template<typename Archive>
@@ -47,13 +51,34 @@ private:
     friend void boost::serialization::load(Archive& ar, class_a& v, unsigned int version);
 
 public:
+    unsigned int prop_0() const;
+    void prop_0(const unsigned int v);
+
+public:
     bool operator==(const class_a& rhs) const;
     bool operator!=(const class_a& rhs) const {
         return !this->operator==(rhs);
     }
 
+public:
+    void swap(class_a& other) noexcept;
+    class_a& operator=(class_a other);
+
+private:
+    unsigned int prop_0_;
 };
 
 } }
+
+namespace std {
+
+template<>
+inline void swap(
+    dogen::odb::class_a& lhs,
+    dogen::odb::class_a& rhs) {
+    lhs.swap(rhs);
+}
+
+}
 
 #endif

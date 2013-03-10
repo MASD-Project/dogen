@@ -26,7 +26,9 @@
 #endif
 
 #include <list>
+#include <vector>
 #include <string>
+#include <utility>
 #include <unordered_map>
 #include <boost/tuple/tuple.hpp>
 #include "dogen/generator/backends/cpp/view_models/property_view_model.hpp"
@@ -204,6 +206,20 @@ public:
     void leaves(const std::list<std::string>& v) { leaves_ = v; }
     /**@}*/
 
+    /*
+     * @brief Parameters associated with the pod.
+     */
+    /**@{*/
+    std::vector<std::pair<std::string, std::string> >
+    implementation_specific_parameters() const {
+        return implementation_specific_parameters_;
+    }
+    void implementation_specific_parameters(
+        const std::vector<std::pair<std::string, std::string> >& v) {
+        implementation_specific_parameters_ = v;
+    }
+    /**@}*/
+
 private:
     std::list<std::string> namespaces_;
     std::list<property_view_model> properties_;
@@ -219,6 +235,8 @@ private:
     std::string schema_name_;
     bool is_parent_;
     std::string documentation_;
+    std::vector<std::pair<std::string, std::string> >
+    implementation_specific_parameters_;
 };
 
 } } } } }

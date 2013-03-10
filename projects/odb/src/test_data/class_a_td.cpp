@@ -20,7 +20,13 @@
  */
 #include "dogen/odb/test_data/class_a_td.hpp"
 
+namespace {
 
+unsigned int create_unsigned_int(const unsigned int position) {
+    return static_cast<unsigned int>(position);
+}
+
+}
 
 namespace dogen {
 namespace odb {
@@ -28,12 +34,14 @@ namespace odb {
 class_a_generator::class_a_generator() : position_(0) { }
 
 void class_a_generator::
-populate(const unsigned int /*position*/, result_type& /*v*/) {
+populate(const unsigned int position, result_type& v) {
+    v.prop_0(create_unsigned_int(position + 0));
 }
 
 class_a_generator::result_type
-class_a_generator::create(const unsigned int/*position*/) {
+class_a_generator::create(const unsigned int position) {
     class_a r;
+    class_a_generator::populate(position, r);
     return r;
 }
 class_a_generator::result_type*

@@ -418,6 +418,8 @@ void sml_dfs_visitor::process_sml_pod(const dogen::sml::pod& pod) {
 
         type_vm.complete_name(complete_name);
         k.type(type_vm);
+        k.implementation_specific_parameters(
+            p.implementation_specific_parameters());
 
         props_vm.push_back(k);
     }
@@ -429,6 +431,9 @@ void sml_dfs_visitor::process_sml_pod(const dogen::sml::pod& pod) {
     cvm.requires_stream_manipulators(requires_stream_manipulators);
     cvm.requires_manual_move_constructor(requires_manual_move_constructor);
     cvm.requires_manual_default_constructor(requires_manual_default_constructor);
+    cvm.implementation_specific_parameters(
+        pod.implementation_specific_parameters());
+
 
     const auto opn(pod.original_parent_name());
     if (opn) {

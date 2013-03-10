@@ -24,9 +24,11 @@
 namespace dogen {
 namespace odb {
 
-std::ostream& operator<<(std::ostream& s, const class_a&) {
+std::ostream& operator<<(std::ostream& s, const class_a& v) {
     s << " { "
-      << "\"__type__\": " << "\"dogen::odb::class_a\"" << " }";
+      << "\"__type__\": " << "\"dogen::odb::class_a\"" << ", "
+      << "\"prop_0\": " << v.prop_0()
+      << " }";
     return(s);
 }
 

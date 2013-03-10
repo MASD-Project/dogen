@@ -38,6 +38,8 @@ namespace {
 auto lg(logger_factory("odb_header"));
 
 const std::string std_ns("std");
+const std::string odb_pragma("#pragma db");
+const std::string odb_key("ODB_PRAGMA");
 
 const std::string missing_class_view_model(
     "Meta type is pod but class view model is empty");
@@ -98,17 +100,31 @@ void odb_header::format_class(const file_view_model& vm) {
         stream_ << indenter_ << "#ifdef ODB_COMPILER" << std::endl;
 
         utility_.blank_line();
-        stream_ << indenter_ << "#pragma db object(" << evm.name()
+        stream_ << indenter_ << odb_pragma << " object(" << evm.name()
                 << ")" << std::endl;
+
+        for (const auto kvp : evm.implementation_specific_parameters()) {
+            if (kvp.first == odb_key) {
+                stream_ << indenter_ << odb_pragma << " " << kvp.second
+                        << std::endl;
+            }
+        }
 
         utility_.blank_line();
         for (const auto p : evm.properties()) {
-            stream_ << indenter_ << "#pragma db member("
+            stream_ << indenter_ << odb_pragma << " member("
                     << evm.name() << "::"
                     << utility_.as_member_variable(p.name())
                     << ") "
                     << p.name()
                     << std::endl;
+
+            for (const auto kvp : p.implementation_specific_parameters()) {
+                if (kvp.first == odb_key) {
+                    stream_ << indenter_ << odb_pragma << " " << kvp.second
+                            << std::endl;
+                }
+            }
         }
         utility_.blank_line();
         stream_ << indenter_ << "#endif" << std::endl;

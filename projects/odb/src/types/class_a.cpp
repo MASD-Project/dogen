@@ -23,8 +23,33 @@
 namespace dogen {
 namespace odb {
 
-bool class_a::operator==(const class_a& /*rhs*/) const {
-    return true;
+class_a::class_a()
+    : prop_0_(static_cast<unsigned int>(0)) { }
+
+class_a::class_a(const unsigned int prop_0)
+    : prop_0_(prop_0) { }
+
+void class_a::swap(class_a& other) noexcept {
+    using std::swap;
+    swap(prop_0_, other.prop_0_);
+}
+
+bool class_a::operator==(const class_a& rhs) const {
+    return prop_0_ == rhs.prop_0_;
+}
+
+class_a& class_a::operator=(class_a other) {
+    using std::swap;
+    swap(*this, other);
+    return *this;
+}
+
+unsigned int class_a::prop_0() const {
+    return prop_0_;
+}
+
+void class_a::prop_0(const unsigned int v) {
+    prop_0_ = v;
 }
 
 } }

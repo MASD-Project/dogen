@@ -33,7 +33,10 @@ namespace odb {
 #ifdef ODB_COMPILER
 
 #pragma db object(class_a)
+#pragma db object table("another_name")
 
+#pragma db member(class_a::prop_0_) prop_0
+#pragma db id
 
 #endif
 
