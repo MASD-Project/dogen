@@ -11,6 +11,10 @@ This file contains all stories that haven't been assigned to a sprint.
 
 Stories that we intend to look at, at some point.
 
+*** Optional io formatter has no space between stream and inserter    :story:
+
+Minor typo on formatter, should have used spaced inserter.
+
 *** Refactor =transform_string_attribute=                             :story:
 
 At present we have a copy and paste job in modeling for
