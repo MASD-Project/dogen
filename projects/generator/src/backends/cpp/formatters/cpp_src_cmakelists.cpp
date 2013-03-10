@@ -85,6 +85,14 @@ void cpp_src_cmakelists::format(const cmakelists_view_model& vm) {
             << std::endl << "    OUTPUT_NAME " << vm.product_name()
             << (vm.product_name().empty() ? empty : underscore) << mn << ")";
 
+    /*
+
+      FIXME: add target for ODB
+
+      odb --std c++11 -d pgsql --generate-query --generate-schema -I /home/marco/Development/kitanda/dogen/projects/class_without_package/include/ -I /usr/local/pfh/include class_without_package/include/dogen/class_without_package/odb/class_1_odb.hpp
+
+     */
+
     stream_ << std::endl
             << std::endl
             << "install(TARGETS " << mn << " ARCHIVE DESTINATION lib "
