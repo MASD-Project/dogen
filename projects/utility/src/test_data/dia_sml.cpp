@@ -78,6 +78,7 @@ path input_comments_dia("dia_sml/input/comments.dia");
 path input_enumeration_dia("dia_sml/input/enumeration.dia");
 path input_exception_dia("dia_sml/input/exception.dia");
 path input_entity_service_value_dia("dia_sml/input/entity_service_value.dia");
+path input_odb_dia("dia_sml/input/odb.dia");
 
 path expected(
     "dia_sml/expected");
@@ -161,6 +162,8 @@ path expected_boost_model_dia_xml(
     "dia_sml/expected/boost_model.diaxml");
 path expected_boost_model_sml_xml(
     "dia_sml/expected/boost_model.smlxml");
+path expected_odb_dia_xml("dia_sml/expected/odb.diaxml");
+path expected_odb_sml_xml("dia_sml/expected/odb.smlxml");
 
 path actual(
     "dia_sml/actual");
@@ -242,6 +245,8 @@ path actual_boost_model_dia_xml(
     "dia_sml/actual/boost_model.diaxml");
 path actual_boost_model_sml_xml(
     "dia_sml/actual/boost_model.smlxml");
+path actual_odb_dia_xml("dia_sml/actual/odb.diaxml");
+path actual_odb_sml_xml("dia_sml/actual/odb.smlxml");
 
 }
 
@@ -407,6 +412,10 @@ path dia_sml::input_entity_service_value_dia() {
     return validating_resolver::resolve(::input_entity_service_value_dia);
 }
 
+path dia_sml::input_odb_dia() {
+    return validating_resolver::resolve(::input_odb_dia);
+}
+
 path dia_sml::expected() {
     return validating_resolver::resolve(::expected);
 }
@@ -559,19 +568,27 @@ path dia_sml::expected_exception_sml_xml() {
 }
 
 path dia_sml::expected_std_model_dia_xml() {
-    return resolver::resolve(::expected_std_model_dia_xml);
+    return validating_resolver::resolve(::expected_std_model_dia_xml);
 }
 
 path dia_sml::expected_std_model_sml_xml() {
-    return resolver::resolve(::expected_std_model_sml_xml);
+    return validating_resolver::resolve(::expected_std_model_sml_xml);
 }
 
 path dia_sml::expected_boost_model_dia_xml() {
-    return resolver::resolve(::expected_boost_model_dia_xml);
+    return validating_resolver::resolve(::expected_boost_model_dia_xml);
 }
 
 path dia_sml::expected_boost_model_sml_xml() {
-    return resolver::resolve(::expected_boost_model_sml_xml);
+    return validating_resolver::resolve(::expected_boost_model_sml_xml);
+}
+
+path dia_sml::expected_odb_dia_xml() {
+    return validating_resolver::resolve(::expected_odb_dia_xml);
+}
+
+path dia_sml::expected_odb_sml_xml() {
+    return validating_resolver::resolve(::expected_odb_sml_xml);
 }
 
 path dia_sml::actual() {
@@ -725,6 +742,14 @@ path dia_sml::actual_boost_model_dia_xml() {
 
 path dia_sml::actual_boost_model_sml_xml() {
     return resolver::resolve(::actual_boost_model_sml_xml);
+}
+
+path dia_sml::actual_odb_dia_xml() {
+    return resolver::resolve(::actual_odb_dia_xml);
+}
+
+path dia_sml::actual_odb_sml_xml() {
+    return resolver::resolve(::actual_odb_sml_xml);
 }
 
 } } }
