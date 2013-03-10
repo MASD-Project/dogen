@@ -24,18 +24,32 @@ namespace dogen {
 namespace odb {
 
 class_a::class_a()
-    : prop_0_(static_cast<unsigned int>(0)) { }
+    : prop_0_(static_cast<int>(0)),
+      prop_1_(static_cast<unsigned int>(0)) { }
 
-class_a::class_a(const unsigned int prop_0)
-    : prop_0_(prop_0) { }
+class_a::class_a(
+    const int prop_0,
+    const unsigned int prop_1,
+    const std::string& prop_2,
+    const boost::posix_time::ptime& prop_3)
+    : prop_0_(prop_0),
+      prop_1_(prop_1),
+      prop_2_(prop_2),
+      prop_3_(prop_3) { }
 
 void class_a::swap(class_a& other) noexcept {
     using std::swap;
     swap(prop_0_, other.prop_0_);
+    swap(prop_1_, other.prop_1_);
+    swap(prop_2_, other.prop_2_);
+    swap(prop_3_, other.prop_3_);
 }
 
 bool class_a::operator==(const class_a& rhs) const {
-    return prop_0_ == rhs.prop_0_;
+    return prop_0_ == rhs.prop_0_ &&
+        prop_1_ == rhs.prop_1_ &&
+        prop_2_ == rhs.prop_2_ &&
+        prop_3_ == rhs.prop_3_;
 }
 
 class_a& class_a::operator=(class_a other) {
@@ -44,12 +58,52 @@ class_a& class_a::operator=(class_a other) {
     return *this;
 }
 
-unsigned int class_a::prop_0() const {
+int class_a::prop_0() const {
     return prop_0_;
 }
 
-void class_a::prop_0(const unsigned int v) {
+void class_a::prop_0(const int v) {
     prop_0_ = v;
+}
+
+unsigned int class_a::prop_1() const {
+    return prop_1_;
+}
+
+void class_a::prop_1(const unsigned int v) {
+    prop_1_ = v;
+}
+
+const std::string& class_a::prop_2() const {
+    return prop_2_;
+}
+
+std::string& class_a::prop_2() {
+    return prop_2_;
+}
+
+void class_a::prop_2(const std::string& v) {
+    prop_2_ = v;
+}
+
+void class_a::prop_2(const std::string&& v) {
+    prop_2_ = std::move(v);
+}
+
+const boost::posix_time::ptime& class_a::prop_3() const {
+    return prop_3_;
+}
+
+boost::posix_time::ptime& class_a::prop_3() {
+    return prop_3_;
+}
+
+void class_a::prop_3(const boost::posix_time::ptime& v) {
+    prop_3_ = v;
+}
+
+void class_a::prop_3(const boost::posix_time::ptime&& v) {
+    prop_3_ = std::move(v);
 }
 
 } }

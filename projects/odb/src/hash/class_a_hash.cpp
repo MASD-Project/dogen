@@ -29,6 +29,14 @@ inline void combine(std::size_t& seed, const HashableType& value)
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 }
 
+inline std::size_t hash_boost_posix_time_ptime(const boost::posix_time::ptime& v) {
+    std::size_t seed(0);
+    const boost::posix_time::ptime epoch(boost::gregorian::date(1970, 1, 1));
+    boost::posix_time::time_duration d(v - epoch);
+    seed = static_cast<std::size_t>(d.total_seconds());
+    return seed;
+}
+
 }
 
 namespace dogen {
@@ -38,6 +46,10 @@ std::size_t class_a_hasher::hash(const class_a&v) {
     std::size_t seed(0);
 
     combine(seed, v.prop_0());
+    combine(seed, v.prop_1());
+    combine(seed, v.prop_2());
+    combine(seed, hash_boost_posix_time_ptime(v.prop_3()));
+
     return seed;
 }
 

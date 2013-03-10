@@ -18,8 +18,18 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/algorithm/string.hpp>
+#include <boost/date_time/posix_time/posix_time.hpp>
 #include <ostream>
 #include "dogen/odb/io/class_a_io.hpp"
+
+
+inline std::string tidy_up_string(std::string s) {
+    boost::replace_all(s, "\r\n", "<new_line>");
+    boost::replace_all(s, "\n", "<new_line>");
+    boost::replace_all(s, "\"", "<quote>");
+    return s;
+}
 
 namespace dogen {
 namespace odb {
@@ -27,7 +37,10 @@ namespace odb {
 std::ostream& operator<<(std::ostream& s, const class_a& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::odb::class_a\"" << ", "
-      << "\"prop_0\": " << v.prop_0()
+      << "\"prop_0\": " << v.prop_0() << ", "
+      << "\"prop_1\": " << v.prop_1() << ", "
+      << "\"prop_2\": " << "\"" << tidy_up_string(v.prop_2()) << "\"" << ", "
+      << "\"prop_3\": " << "\"" << v.prop_3() << "\""
       << " }";
     return(s);
 }

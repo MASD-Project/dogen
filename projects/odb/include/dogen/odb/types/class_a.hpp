@@ -26,11 +26,16 @@
 #endif
 
 #include <algorithm>
+#include <boost/date_time/posix_time/posix_time_types.hpp>
+#include <string>
 #include "dogen/odb/serialization/class_a_fwd_ser.hpp"
 
 namespace dogen {
 namespace odb {
 
+/*
+ * @brief Simple value class with no primary keys, etc.
+ */
 class class_a final {
 public:
     class_a(const class_a&) = default;
@@ -41,7 +46,11 @@ public:
     class_a();
 
 public:
-    explicit class_a(const unsigned int prop_0);
+    class_a(
+        const int prop_0,
+        const unsigned int prop_1,
+        const std::string& prop_2,
+        const boost::posix_time::ptime& prop_3);
 
 private:
     template<typename Archive>
@@ -51,8 +60,21 @@ private:
     friend void boost::serialization::load(Archive& ar, class_a& v, unsigned int version);
 
 public:
-    unsigned int prop_0() const;
-    void prop_0(const unsigned int v);
+    int prop_0() const;
+    void prop_0(const int v);
+
+    unsigned int prop_1() const;
+    void prop_1(const unsigned int v);
+
+    const std::string& prop_2() const;
+    std::string& prop_2();
+    void prop_2(const std::string& v);
+    void prop_2(const std::string&& v);
+
+    const boost::posix_time::ptime& prop_3() const;
+    boost::posix_time::ptime& prop_3();
+    void prop_3(const boost::posix_time::ptime& v);
+    void prop_3(const boost::posix_time::ptime&& v);
 
 public:
     bool operator==(const class_a& rhs) const;
@@ -65,7 +87,10 @@ public:
     class_a& operator=(class_a other);
 
 private:
-    unsigned int prop_0_;
+    int prop_0_;
+    unsigned int prop_1_;
+    std::string prop_2_;
+    boost::posix_time::ptime prop_3_;
 };
 
 } }

@@ -26,7 +26,10 @@
 #include <boost/archive/text_oarchive.hpp>
 #include <boost/archive/xml_iarchive.hpp>
 #include <boost/archive/xml_oarchive.hpp>
+#include <boost/date_time/posix_time/posix_time.hpp>
+#include <boost/date_time/posix_time/time_serialize.hpp>
 #include <boost/serialization/nvp.hpp>
+#include <boost/serialization/string.hpp>
 #include "dogen/odb/serialization/class_a_ser.hpp"
 
 #ifdef __linux__
@@ -42,6 +45,9 @@ void save(Archive& ar,
     const dogen::odb::class_a& v,
     const unsigned int /*version*/) {
     ar << make_nvp("prop_0", v.prop_0_);
+    ar << make_nvp("prop_1", v.prop_1_);
+    ar << make_nvp("prop_2", v.prop_2_);
+    ar << make_nvp("prop_3", v.prop_3_);
 }
 
 template<typename Archive>
@@ -49,6 +55,9 @@ void load(Archive& ar,
     dogen::odb::class_a& v,
     const unsigned int /*version*/) {
     ar >> make_nvp("prop_0", v.prop_0_);
+    ar >> make_nvp("prop_1", v.prop_1_);
+    ar >> make_nvp("prop_2", v.prop_2_);
+    ar >> make_nvp("prop_3", v.prop_3_);
 }
 
 } }
