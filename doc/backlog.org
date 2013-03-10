@@ -11,6 +11,13 @@ This file contains all stories that haven't been assigned to a sprint.
 
 Stories that we intend to look at, at some point.
 
+*** Refactor =transform_string_attribute=                             :story:
+
+At present we have a copy and paste job in modeling for
+=transform_string_attribute=. We should add a service to the dia
+model: =string_parser= or something along this lines, copy all the
+duplicated code into it and add tests.
+
 *** Partial matching of primitives doesn't work for certain types     :story:
 
 We introduced a fix that allows users to create types that partially
