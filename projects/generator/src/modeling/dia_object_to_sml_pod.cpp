@@ -46,6 +46,7 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/generator/modeling/transformation_error.hpp"
 #include "dogen/sml/types/identifier_parser.hpp"
+#include "dogen/sml/types/comments_parser.hpp"
 #include "dogen/utility/io/unordered_map_io.hpp"
 #include "dogen/utility/io/list_io.hpp"
 #include "dogen/generator/modeling/dia_object_to_sml_pod.hpp"
@@ -65,7 +66,7 @@ const std::string dia_uml_attribute("umlattribute");
 const std::string dia_string("string");
 const std::string dia_composite("composite");
 const std::string dia_stereotype("stereotype");
-const std::string dia_documentation("comment");
+const std::string dia_comment("comment");
 
 const std::string hash_character("#");
 const std::string unexpected_number_of_connections(
@@ -128,7 +129,8 @@ private:
               child_to_parent_(child_to_parent),
               parent_ids_(parent_ids),
               packages_by_id_(packages_by_id),
-              parser_(top_level_packages, external_package_path, model_name) { }
+              identifier_parser_(
+                  top_level_packages, external_package_path, model_name) { }
 
         const std::string model_name_;
         std::unordered_map<dogen::sml::qname, dogen::sml::pod> pods_;
@@ -146,7 +148,8 @@ private:
         std::unordered_map<dogen::sml::qname,
                            std::list<dogen::sml::qname> > leaves_;
         std::unordered_set<std::string> dependencies_;
-        dogen::sml::identifier_parser parser_;
+        dogen::sml::identifier_parser identifier_parser_;
+        dogen::sml::comments_parser comments_parser_;
     };
 
 public:
@@ -346,7 +349,7 @@ transform_property(const dogen::dia::composite& uml_attribute) {
             property.name(transform_string_attribute(*a));
         else if (a->name() == dia_type) {
             const std::string s(transform_string_attribute(*a));
-            auto nested_name(state_->parser_.parse_qname(s));
+            auto nested_name(state_->identifier_parser_.parse_qname(s));
             if (nested_name.type().type_name().empty()) {
                 BOOST_LOG_SEV(lg, error) << invalid_type_string << s;
                 BOOST_THROW_EXCEPTION(
@@ -354,9 +357,11 @@ transform_property(const dogen::dia::composite& uml_attribute) {
             }
             property.type_name(nested_name);
             model_dependencies_for_nested_qname(nested_name);
-        } else if (a->name() == dia_documentation) {
-            const std::string doc(transform_string_attribute(*a));
-            property.documentation(doc);
+        } else if (a->name() == dia_comment) {
+            const std::string comment(transform_string_attribute(*a));
+            const auto r(state_->comments_parser_.parse(comment));
+            property.documentation(r.first);
+            property.implementation_specific_parameters(r.second);
         } else {
             BOOST_LOG_SEV(lg, warn) << "Ignoring unexpected attribute: "
                                     << a->name();
@@ -419,9 +424,11 @@ void dia_dfs_visitor::process_dia_object(const dogen::dia::object& o) {
                 pod.generation_type(generation_types::partial_generation);
             } else
                 pod.pod_type(dogen::sml::pod_types::value);
-        } else if (a.name() == dia_documentation) {
-            const std::string doc(transform_string_attribute(a));
-            pod.documentation(doc);
+        } else if (a.name() == dia_comment) {
+            const std::string comment(transform_string_attribute(a));
+            const auto r(state_->comments_parser_.parse(comment));
+            pod.documentation(r.first);
+            pod.implementation_specific_parameters(r.second);
         } else if (a.name() == dia_attributes) {
             const auto values(a.values());
 
