@@ -18,7 +18,6 @@
  * MA 02110-1301, USA.
  *
  */
-#include <iostream>
 #include <functional>
 #include <boost/tokenizer.hpp>
 #include <boost/range/algorithm.hpp>
@@ -32,9 +31,9 @@
 #include <boost/spirit/repository/include/qi_distinct.hpp>
 #include <boost/throw_exception.hpp>
 #include "dogen/sml/types/parsing_error.hpp"
-#include "dogen/sml/types/identifier_parser.hpp"
 #include "dogen/sml/types/nested_qname_builder.hpp"
 #include "dogen/utility/log/logger.hpp"
+#include "dogen/sml/types/identifier_parser.hpp"
 
 using namespace dogen::utility::log;
 
