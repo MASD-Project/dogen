@@ -31,9 +31,6 @@
 namespace dogen {
 namespace odb {
 
-/*
- * @brief DOGEN ODB_PRAGMA=test
- */
 class class_a final {
 public:
     class_a() = default;

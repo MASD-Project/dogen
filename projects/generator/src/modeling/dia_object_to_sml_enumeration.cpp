@@ -191,7 +191,8 @@ transform_string_attribute(const dogen::dia::attribute& a) const {
     using dogen::dia::string;
     const auto v(attribute_value<string>(values.front(), dia_string));
     std::string name(v.value());
-    boost::erase_all(name, hash_character);
+    boost::erase_first(name, hash_character);
+    boost::erase_last(name, hash_character);
     boost::trim(name);
     return name;
 }
