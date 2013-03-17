@@ -45,7 +45,7 @@ const std::string test_module("database");
 BOOST_AUTO_TEST_SUITE(database)
 
 BOOST_AUTO_TEST_CASE(inserting_no_keys_instances_results_in_expected_rows_in_table) {
-    SETUP_TEST_LOG("inserting_no_keys_instances_results_in_expected_rows_in_table");
+    SETUP_TEST_LOG_SOURCE("inserting_no_keys_instances_results_in_expected_rows_in_table");
 
     std::unique_ptr<odb::database> db (
         new odb::pgsql::database (
@@ -58,13 +58,30 @@ BOOST_AUTO_TEST_CASE(inserting_no_keys_instances_results_in_expected_rows_in_tab
     {
         odb::transaction t(db->begin());
         odb::schema_catalog::create_schema(*db);
+        BOOST_LOG_SEV(lg, debug) << "Generating schema.";
+
     }
 
     {
         odb::transaction t(db->begin());
+        const auto deleted_rows(db->erase_query<dogen::database::no_keys>());
+        BOOST_LOG_SEV(lg, debug) << "Deleted existing rows. Total: "
+                                 << deleted_rows;
+        t.commit();
+    }
+
+    std::vector<dogen::database::no_keys> v;
+    const unsigned int how_many(5);
+    v.resize(how_many);
+    {
+        odb::transaction t(db->begin());
         dogen::database::no_keys_generator sequence;
-        dogen::database::no_keys a(sequence());
-        db->persist(a);
+        for (unsigned int i(0); i < how_many; ++i) {
+            v.push_back(sequence());
+            BOOST_LOG_SEV(lg, debug) << "Created: " << v.back();
+            db->persist(v.back());
+            BOOST_LOG_SEV(lg, debug) << "Object has been persisted";
+        }
         t.commit();
     }
 
@@ -74,8 +91,18 @@ BOOST_AUTO_TEST_CASE(inserting_no_keys_instances_results_in_expected_rows_in_tab
         typedef odb::result<dogen::database::no_keys> result;
 
         result r(db->query<dogen::database::no_keys>());
-        for (auto i(r.begin ()); i != r.end (); ++i)
-            std::cout << *i << std::endl;
+        for (auto i(r.begin ()); i != r.end (); ++i) {
+            BOOST_LOG_SEV(lg, debug) << "Actual: " << *i;
+            bool found(false);
+            for (const auto e : v) {
+                if (e == *i) {
+                    found = true;
+                    BOOST_LOG_SEV(lg, debug) << "Found actual.";
+                    continue;
+                }
+            }
+            BOOST_CHECK(found);
+        }
     }
 }
 
