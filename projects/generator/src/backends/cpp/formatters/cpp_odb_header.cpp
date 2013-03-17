@@ -24,7 +24,6 @@
 #include "dogen/generator/backends/cpp/formatters/cpp_licence.hpp"
 #include "dogen/generator/backends/cpp/formatters/cpp_header_guards.hpp"
 #include "dogen/generator/backends/cpp/formatters/cpp_namespace.hpp"
-#include "dogen/generator/backends/cpp/formatters/cpp_includes.hpp"
 #include "dogen/generator/backends/cpp/formatters/cpp_namespace_helper.hpp"
 #include "dogen/generator/backends/cpp/formatters/cpp_qualified_name.hpp"
 #include "dogen/generator/backends/cpp/formatters/cpp_indenter.hpp"
@@ -94,35 +93,35 @@ void odb_header::format_class(const file_view_model& vm) {
 
     const auto evm(*o);
     {
+        if (evm.implementation_specific_parameters().empty()) {
+            stream_ << indenter_ << "// class has no ODB parameters defined."
+                    << std::endl;
+            utility_.blank_line();
+            return;
+        }
+
         namespace_helper ns(stream_, evm.namespaces());
         utility_.blank_line();
 
         stream_ << indenter_ << "#ifdef ODB_COMPILER" << std::endl;
 
         utility_.blank_line();
-        stream_ << indenter_ << odb_pragma << " object(" << evm.name()
-                << ")" << std::endl;
-
         for (const auto kvp : evm.implementation_specific_parameters()) {
             if (kvp.first == odb_key) {
-                stream_ << indenter_ << odb_pragma << " " << kvp.second
-                        << std::endl;
+                stream_ << indenter_
+                        << odb_pragma << " object(" << evm.name() << ") "
+                        << kvp.second << std::endl;
             }
         }
 
         utility_.blank_line();
         for (const auto p : evm.properties()) {
-            stream_ << indenter_ << odb_pragma << " member("
-                    << evm.name() << "::"
-                    << utility_.as_member_variable(p.name())
-                    << ") "
-                    << p.name()
-                    << std::endl;
-
             for (const auto kvp : p.implementation_specific_parameters()) {
                 if (kvp.first == odb_key) {
-                    stream_ << indenter_ << odb_pragma << " " << kvp.second
-                            << std::endl;
+                    stream_ << indenter_
+                            << odb_pragma << " member(" << evm.name() << "::"
+                            << utility_.as_member_variable(p.name()) << ") "
+                            << kvp.second << std::endl;
                 }
             }
         }
@@ -140,9 +139,6 @@ void odb_header::format(const file_view_model& vm) {
     header_guards guards(stream_);
     guards.format_start(vm.header_guard());
     stream_ << std::endl;
-
-    cpp_includes includes(stream_);
-    includes.format(vm);
 
     if (vm.meta_type() == sml::meta_types::pod)
         format_class(vm);

@@ -25,19 +25,6 @@
 #pragma once
 #endif
 
-#include "dogen/all_primitives/types/a_class_unversioned_key.hpp"
-
-namespace dogen {
-namespace all_primitives {
-
-#ifdef ODB_COMPILER
-
-#pragma db object(a_class_unversioned_key)
-
-#pragma db member(a_class_unversioned_key::id_) id
-
-#endif
-
-} }
+// class has no ODB parameters defined.
 
 #endif

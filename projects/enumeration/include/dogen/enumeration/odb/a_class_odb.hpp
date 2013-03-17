@@ -25,21 +25,6 @@
 #pragma once
 #endif
 
-#include "dogen/enumeration/types/a_class.hpp"
-
-namespace dogen {
-namespace enumeration {
-
-#ifdef ODB_COMPILER
-
-#pragma db object(a_class)
-
-#pragma db member(a_class::colour_type_) colour_type
-#pragma db member(a_class::book_type_) book_type
-#pragma db member(a_class::shape_type_) shape_type
-
-#endif
-
-} }
+// class has no ODB parameters defined.
 
 #endif

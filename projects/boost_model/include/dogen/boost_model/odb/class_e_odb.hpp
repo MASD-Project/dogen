@@ -25,21 +25,6 @@
 #pragma once
 #endif
 
-#include "dogen/boost_model/types/class_e.hpp"
-
-namespace dogen {
-namespace boost_model {
-
-#ifdef ODB_COMPILER
-
-#pragma db object(class_e)
-
-#pragma db member(class_e::prop_0_) prop_0
-#pragma db member(class_e::prop_1_) prop_1
-#pragma db member(class_e::prop_2_) prop_2
-
-#endif
-
-} }
+// class has no ODB parameters defined.
 
 #endif

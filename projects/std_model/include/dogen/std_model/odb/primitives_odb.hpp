@@ -25,26 +25,6 @@
 #pragma once
 #endif
 
-#include "dogen/std_model/types/primitives.hpp"
-
-namespace dogen {
-namespace std_model {
-
-#ifdef ODB_COMPILER
-
-#pragma db object(primitives)
-
-#pragma db member(primitives::prop_0_) prop_0
-#pragma db member(primitives::prop_1_) prop_1
-#pragma db member(primitives::prop_2_) prop_2
-#pragma db member(primitives::prop_3_) prop_3
-#pragma db member(primitives::prop_4_) prop_4
-#pragma db member(primitives::prop_5_) prop_5
-#pragma db member(primitives::prop_6_) prop_6
-#pragma db member(primitives::prop_7_) prop_7
-
-#endif
-
-} }
+// class has no ODB parameters defined.
 
 #endif

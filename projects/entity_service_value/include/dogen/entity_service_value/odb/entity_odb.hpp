@@ -25,20 +25,6 @@
 #pragma once
 #endif
 
-#include "dogen/entity_service_value/types/entity.hpp"
-
-namespace dogen {
-namespace entity_service_value {
-
-#ifdef ODB_COMPILER
-
-#pragma db object(entity)
-
-#pragma db member(entity::prop_0_) prop_0
-#pragma db member(entity::versioned_key_) versioned_key
-
-#endif
-
-} }
+// class has no ODB parameters defined.
 
 #endif

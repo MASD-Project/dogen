@@ -25,19 +25,6 @@
 #pragma once
 #endif
 
-#include "dogen/exception/types/a_class.hpp"
-
-namespace dogen {
-namespace exception {
-
-#ifdef ODB_COMPILER
-
-#pragma db object(a_class)
-
-#pragma db member(a_class::prop_0_) prop_0
-
-#endif
-
-} }
+// class has no ODB parameters defined.
 
 #endif

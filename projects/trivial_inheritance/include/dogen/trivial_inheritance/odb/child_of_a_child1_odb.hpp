@@ -25,18 +25,6 @@
 #pragma once
 #endif
 
-#include "dogen/trivial_inheritance/types/child_of_a_child1.hpp"
-
-namespace dogen {
-namespace trivial_inheritance {
-
-#ifdef ODB_COMPILER
-
-#pragma db object(child_of_a_child1)
-
-
-#endif
-
-} }
+// class has no ODB parameters defined.
 
 #endif

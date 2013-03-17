@@ -25,19 +25,6 @@
 #pragma once
 #endif
 
-#include "dogen/class_without_package/types/class_1.hpp"
-
-namespace dogen {
-namespace class_without_package {
-
-#ifdef ODB_COMPILER
-
-#pragma db object(class_1)
-
-#pragma db member(class_1::an_attribute_) an_attribute
-
-#endif
-
-} }
+// class has no ODB parameters defined.
 
 #endif

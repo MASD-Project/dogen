@@ -25,20 +25,6 @@
 #pragma once
 #endif
 
-#include "dogen/two_layers_with_objects/types/Package_2/class_2.hpp"
-
-namespace dogen {
-namespace two_layers_with_objects {
-namespace Package_2 {
-
-#ifdef ODB_COMPILER
-
-#pragma db object(class_2)
-
-#pragma db member(class_2::prop_0_) prop_0
-
-#endif
-
-} } }
+// class has no ODB parameters defined.
 
 #endif

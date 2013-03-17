@@ -25,20 +25,6 @@
 #pragma once
 #endif
 
-#include "dogen/class_in_a_package/types/package1/first_class_unversioned_key.hpp"
-
-namespace dogen {
-namespace class_in_a_package {
-namespace package1 {
-
-#ifdef ODB_COMPILER
-
-#pragma db object(first_class_unversioned_key)
-
-#pragma db member(first_class_unversioned_key::id_) id
-
-#endif
-
-} } }
+// class has no ODB parameters defined.
 
 #endif

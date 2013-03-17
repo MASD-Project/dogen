@@ -25,20 +25,6 @@
 #pragma once
 #endif
 
-#include "dogen/split_project/types/package/a_class.hpp"
-
-namespace dogen {
-namespace split_project {
-namespace package {
-
-#ifdef ODB_COMPILER
-
-#pragma db object(a_class)
-
-#pragma db member(a_class::prop_0_) prop_0
-
-#endif
-
-} } }
+// class has no ODB parameters defined.
 
 #endif

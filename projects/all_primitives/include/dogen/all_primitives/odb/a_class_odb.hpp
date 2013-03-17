@@ -25,32 +25,6 @@
 #pragma once
 #endif
 
-#include "dogen/all_primitives/types/a_class.hpp"
-
-namespace dogen {
-namespace all_primitives {
-
-#ifdef ODB_COMPILER
-
-#pragma db object(a_class)
-
-#pragma db member(a_class::bool_property_) bool_property
-#pragma db member(a_class::char_property_) char_property
-#pragma db member(a_class::uchar_property_) uchar_property
-#pragma db member(a_class::int_property_) int_property
-#pragma db member(a_class::uint_property_) uint_property
-#pragma db member(a_class::long_property_) long_property
-#pragma db member(a_class::ulong_property_) ulong_property
-#pragma db member(a_class::long_long_property_) long_long_property
-#pragma db member(a_class::ulong_long_property_) ulong_long_property
-#pragma db member(a_class::short_property_) short_property
-#pragma db member(a_class::ushort_property_) ushort_property
-#pragma db member(a_class::double_property_) double_property
-#pragma db member(a_class::float_property_) float_property
-#pragma db member(a_class::versioned_key_) versioned_key
-
-#endif
-
-} }
+// class has no ODB parameters defined.
 
 #endif

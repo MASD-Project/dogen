@@ -25,19 +25,6 @@
 #pragma once
 #endif
 
-#include "dogen/entity_service_value/types/entity_unversioned_key.hpp"
-
-namespace dogen {
-namespace entity_service_value {
-
-#ifdef ODB_COMPILER
-
-#pragma db object(entity_unversioned_key)
-
-#pragma db member(entity_unversioned_key::id_) id
-
-#endif
-
-} }
+// class has no ODB parameters defined.
 
 #endif

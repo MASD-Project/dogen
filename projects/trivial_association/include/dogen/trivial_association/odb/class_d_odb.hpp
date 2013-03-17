@@ -25,18 +25,6 @@
 #pragma once
 #endif
 
-#include "dogen/trivial_association/types/class_d.hpp"
-
-namespace dogen {
-namespace trivial_association {
-
-#ifdef ODB_COMPILER
-
-#pragma db object(class_d)
-
-
-#endif
-
-} }
+// class has no ODB parameters defined.
 
 #endif

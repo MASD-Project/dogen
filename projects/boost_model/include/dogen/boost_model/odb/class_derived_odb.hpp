@@ -25,19 +25,6 @@
 #pragma once
 #endif
 
-#include "dogen/boost_model/types/class_derived.hpp"
-
-namespace dogen {
-namespace boost_model {
-
-#ifdef ODB_COMPILER
-
-#pragma db object(class_derived)
-
-#pragma db member(class_derived::prop_1_) prop_1
-
-#endif
-
-} }
+// class has no ODB parameters defined.
 
 #endif

@@ -25,22 +25,6 @@
 #pragma once
 #endif
 
-#include "dogen/std_model/types/class_g.hpp"
-
-namespace dogen {
-namespace std_model {
-
-#ifdef ODB_COMPILER
-
-#pragma db object(class_g)
-
-#pragma db member(class_g::prop_0_) prop_0
-#pragma db member(class_g::prop_1_) prop_1
-#pragma db member(class_g::prop_2_) prop_2
-#pragma db member(class_g::prop_3_) prop_3
-
-#endif
-
-} }
+// class has no ODB parameters defined.
 
 #endif

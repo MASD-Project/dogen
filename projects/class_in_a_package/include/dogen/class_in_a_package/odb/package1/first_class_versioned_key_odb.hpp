@@ -25,21 +25,6 @@
 #pragma once
 #endif
 
-#include "dogen/class_in_a_package/types/package1/first_class_versioned_key.hpp"
-
-namespace dogen {
-namespace class_in_a_package {
-namespace package1 {
-
-#ifdef ODB_COMPILER
-
-#pragma db object(first_class_versioned_key)
-
-#pragma db member(first_class_versioned_key::id_) id
-#pragma db member(first_class_versioned_key::version_) version
-
-#endif
-
-} } }
+// class has no ODB parameters defined.
 
 #endif

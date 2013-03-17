@@ -25,18 +25,6 @@
 #pragma once
 #endif
 
-#include "dogen/comments/types/multi_line.hpp"
-
-namespace dogen {
-namespace comments {
-
-#ifdef ODB_COMPILER
-
-#pragma db object(multi_line)
-
-
-#endif
-
-} }
+// class has no ODB parameters defined.
 
 #endif

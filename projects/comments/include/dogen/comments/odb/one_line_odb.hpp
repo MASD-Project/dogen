@@ -25,21 +25,6 @@
 #pragma once
 #endif
 
-#include "dogen/comments/types/one_line.hpp"
-
-namespace dogen {
-namespace comments {
-
-#ifdef ODB_COMPILER
-
-#pragma db object(one_line)
-
-#pragma db member(one_line::prop_0_) prop_0
-#pragma db member(one_line::prop_1_) prop_1
-#pragma db member(one_line::prop_2_) prop_2
-
-#endif
-
-} }
+// class has no ODB parameters defined.
 
 #endif

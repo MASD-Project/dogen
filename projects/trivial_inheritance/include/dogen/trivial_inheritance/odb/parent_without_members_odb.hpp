@@ -25,18 +25,6 @@
 #pragma once
 #endif
 
-#include "dogen/trivial_inheritance/types/parent_without_members.hpp"
-
-namespace dogen {
-namespace trivial_inheritance {
-
-#ifdef ODB_COMPILER
-
-#pragma db object(parent_without_members)
-
-
-#endif
-
-} }
+// class has no ODB parameters defined.
 
 #endif

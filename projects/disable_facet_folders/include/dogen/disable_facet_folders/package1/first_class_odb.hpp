@@ -25,21 +25,6 @@
 #pragma once
 #endif
 
-#include "dogen/disable_facet_folders/package1/first_class.hpp"
-
-namespace dogen {
-namespace disable_facet_folders {
-namespace package1 {
-
-#ifdef ODB_COMPILER
-
-#pragma db object(first_class)
-
-#pragma db member(first_class::public_attribute_) public_attribute
-#pragma db member(first_class::private_attribute_) private_attribute
-
-#endif
-
-} } }
+// class has no ODB parameters defined.
 
 #endif
