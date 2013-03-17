@@ -86,7 +86,8 @@
         <dia:string>##</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>#Simple value class with no primary keys, etc.#</dia:string>
+        <dia:string>#Simple value class with no primary keys, etc.
+#DOGEN ODB_PRAGMA=no_id#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>

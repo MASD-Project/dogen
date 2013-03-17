@@ -43,7 +43,6 @@ add_custom_target(codegen_${target}
     --cpp-enable-facet hash
     --cpp-enable-facet serialization
     --cpp-enable-facet test_data
-    --ignore-files-matching-regex .*/utility/.*
     --ignore-files-matching-regex .*/test/.*
     --ignore-files-matching-regex .*/spec/.*
     -v -d -p dogen)
@@ -120,8 +119,12 @@ add_custom_target(codegen_${target}
     --cpp-enable-facet serialization
     --cpp-enable-facet test_data
     --cpp-enable-facet odb
+    --cpp-disable-cmakelists
+    --ignore-files-matching-regex .*/CMakeLists.txt
     --ignore-files-matching-regex .*/test/.*
     --ignore-files-matching-regex .*/spec/.*
+    --ignore-files-matching-regex .*sql
+    --ignore-files-matching-regex .*-odb.*
     -v -d -p dogen)
 add_dependencies(codegen_${target} driver)
 add_dependencies(codegen codegen_${target})

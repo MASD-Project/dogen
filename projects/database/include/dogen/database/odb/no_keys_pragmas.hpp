@@ -18,13 +18,23 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_DATABASE_ODB_NO_KEYS_ODB_HPP
-#define DOGEN_DATABASE_ODB_NO_KEYS_ODB_HPP
+#ifndef DOGEN_DATABASE_ODB_NO_KEYS_PRAGMAS_HPP
+#define DOGEN_DATABASE_ODB_NO_KEYS_PRAGMAS_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-// class has no ODB parameters defined.
+namespace dogen {
+namespace database {
+
+#ifdef ODB_COMPILER
+
+#pragma db object(no_keys) no_id
+
+
+#endif
+
+} }
 
 #endif
