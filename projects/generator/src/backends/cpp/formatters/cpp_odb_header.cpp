@@ -94,7 +94,7 @@ void odb_header::format_class(const file_view_model& vm) {
     const auto evm(*o);
     {
         if (evm.implementation_specific_parameters().empty()) {
-            stream_ << indenter_ << "// class has no ODB parameters defined."
+            stream_ << indenter_ << "// class has no ODB pragmas defined."
                     << std::endl;
             utility_.blank_line();
             return;
@@ -131,7 +131,7 @@ void odb_header::format_class(const file_view_model& vm) {
                    << std::endl;
 
         if (!has_odb_parms) {
-            stream_ << indenter_ << "// class has no ODB parameters defined."
+            stream_ << indenter_ << "// class has no ODB pragmas defined."
                     << std::endl;
             utility_.blank_line();
             return;

@@ -344,7 +344,7 @@ operator<<(std::ostream& s,
 
 #endif
 
-Filename: /empty_tds/actual/include/class_in_a_package/odb/all_odb.hpp
+Filename: /empty_tds/actual/include/class_in_a_package/odb/all_pragmas.hpp
 Contents: 
 /* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
  *
@@ -366,11 +366,11 @@ Contents:
  * MA 02110-1301, USA.
  *
  */
-#include "class_in_a_package/odb/package1/first_class_odb.hpp"
-#include "class_in_a_package/odb/package1/first_class_unversioned_key_odb.hpp"
-#include "class_in_a_package/odb/package1/first_class_versioned_key_odb.hpp"
+#include "class_in_a_package/odb/package1/first_class_pragmas.hpp"
+#include "class_in_a_package/odb/package1/first_class_unversioned_key_pragmas.hpp"
+#include "class_in_a_package/odb/package1/first_class_versioned_key_pragmas.hpp"
 
-Filename: /empty_tds/actual/include/class_in_a_package/odb/package1/first_class_odb.hpp
+Filename: /empty_tds/actual/include/class_in_a_package/odb/package1/first_class_pragmas.hpp
 Contents: 
 /* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
  *
@@ -392,18 +392,18 @@ Contents:
  * MA 02110-1301, USA.
  *
  */
-#ifndef CLASS_IN_A_PACKAGE_ODB_PACKAGE1_FIRST_CLASS_ODB_HPP
-#define CLASS_IN_A_PACKAGE_ODB_PACKAGE1_FIRST_CLASS_ODB_HPP
+#ifndef CLASS_IN_A_PACKAGE_ODB_PACKAGE1_FIRST_CLASS_PRAGMAS_HPP
+#define CLASS_IN_A_PACKAGE_ODB_PACKAGE1_FIRST_CLASS_PRAGMAS_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-// class has no ODB parameters defined.
+// class has no ODB pragmas defined.
 
 #endif
 
-Filename: /empty_tds/actual/include/class_in_a_package/odb/package1/first_class_unversioned_key_odb.hpp
+Filename: /empty_tds/actual/include/class_in_a_package/odb/package1/first_class_unversioned_key_pragmas.hpp
 Contents: 
 /* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
  *
@@ -425,18 +425,18 @@ Contents:
  * MA 02110-1301, USA.
  *
  */
-#ifndef CLASS_IN_A_PACKAGE_ODB_PACKAGE1_FIRST_CLASS_UNVERSIONED_KEY_ODB_HPP
-#define CLASS_IN_A_PACKAGE_ODB_PACKAGE1_FIRST_CLASS_UNVERSIONED_KEY_ODB_HPP
+#ifndef CLASS_IN_A_PACKAGE_ODB_PACKAGE1_FIRST_CLASS_UNVERSIONED_KEY_PRAGMAS_HPP
+#define CLASS_IN_A_PACKAGE_ODB_PACKAGE1_FIRST_CLASS_UNVERSIONED_KEY_PRAGMAS_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-// class has no ODB parameters defined.
+// class has no ODB pragmas defined.
 
 #endif
 
-Filename: /empty_tds/actual/include/class_in_a_package/odb/package1/first_class_versioned_key_odb.hpp
+Filename: /empty_tds/actual/include/class_in_a_package/odb/package1/first_class_versioned_key_pragmas.hpp
 Contents: 
 /* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
  *
@@ -458,14 +458,14 @@ Contents:
  * MA 02110-1301, USA.
  *
  */
-#ifndef CLASS_IN_A_PACKAGE_ODB_PACKAGE1_FIRST_CLASS_VERSIONED_KEY_ODB_HPP
-#define CLASS_IN_A_PACKAGE_ODB_PACKAGE1_FIRST_CLASS_VERSIONED_KEY_ODB_HPP
+#ifndef CLASS_IN_A_PACKAGE_ODB_PACKAGE1_FIRST_CLASS_VERSIONED_KEY_PRAGMAS_HPP
+#define CLASS_IN_A_PACKAGE_ODB_PACKAGE1_FIRST_CLASS_VERSIONED_KEY_PRAGMAS_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-// class has no ODB parameters defined.
+// class has no ODB pragmas defined.
 
 #endif
 
