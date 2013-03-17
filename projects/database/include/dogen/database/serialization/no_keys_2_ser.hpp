@@ -18,5 +18,26 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/database/io/no_keys_2_io.hpp"
-#include "dogen/database/io/no_keys_io.hpp"
+#ifndef DOGEN_DATABASE_SERIALIZATION_NO_KEYS_2_SER_HPP
+#define DOGEN_DATABASE_SERIALIZATION_NO_KEYS_2_SER_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include <boost/serialization/split_free.hpp>
+#include "dogen/database/types/no_keys_2.hpp"
+
+BOOST_SERIALIZATION_SPLIT_FREE(dogen::database::no_keys_2)
+namespace boost {
+namespace serialization {
+
+template<typename Archive>
+void save(Archive& ar, const dogen::database::no_keys_2& v, unsigned int version);
+
+template<typename Archive>
+void load(Archive& ar, dogen::database::no_keys_2& v, unsigned int version);
+
+} }
+
+#endif

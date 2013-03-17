@@ -18,5 +18,35 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/database/io/no_keys_2_io.hpp"
-#include "dogen/database/io/no_keys_io.hpp"
+#ifndef DOGEN_DATABASE_HASH_NO_KEYS_2_HASH_HPP
+#define DOGEN_DATABASE_HASH_NO_KEYS_2_HASH_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include <functional>
+#include "dogen/database/types/no_keys_2.hpp"
+
+namespace dogen {
+namespace database {
+
+class no_keys_2_hasher {
+public:
+    static std::size_t hash(const no_keys_2& v);
+};
+
+} }
+
+namespace std {
+
+template<>
+class hash<dogen::database::no_keys_2> {
+public:
+    size_t operator()(const dogen::database::no_keys_2& v) const {
+        return dogen::database::no_keys_2_hasher::hash(v);
+    }
+};
+
+}
+#endif

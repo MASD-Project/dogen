@@ -19,3 +19,4 @@
  *
  */
 #include "dogen/database/types/no_keys.hpp"
+#include "dogen/database/types/no_keys_2.hpp"

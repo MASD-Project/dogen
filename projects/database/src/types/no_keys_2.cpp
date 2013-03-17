@@ -18,5 +18,38 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/database/io/no_keys_2_io.hpp"
-#include "dogen/database/io/no_keys_io.hpp"
+#include "dogen/database/types/no_keys_2.hpp"
+
+namespace dogen {
+namespace database {
+
+no_keys_2::no_keys_2()
+    : prop_0_(static_cast<int>(0)) { }
+
+no_keys_2::no_keys_2(const int prop_0)
+    : prop_0_(prop_0) { }
+
+void no_keys_2::swap(no_keys_2& other) noexcept {
+    using std::swap;
+    swap(prop_0_, other.prop_0_);
+}
+
+bool no_keys_2::operator==(const no_keys_2& rhs) const {
+    return prop_0_ == rhs.prop_0_;
+}
+
+no_keys_2& no_keys_2::operator=(no_keys_2 other) {
+    using std::swap;
+    swap(*this, other);
+    return *this;
+}
+
+int no_keys_2::prop_0() const {
+    return prop_0_;
+}
+
+void no_keys_2::prop_0(const int v) {
+    prop_0_ = v;
+}
+
+} }

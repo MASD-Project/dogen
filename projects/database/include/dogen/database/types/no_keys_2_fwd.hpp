@@ -18,5 +18,18 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/database/io/no_keys_2_io.hpp"
-#include "dogen/database/io/no_keys_io.hpp"
+#ifndef DOGEN_DATABASE_TYPES_NO_KEYS_2_FWD_HPP
+#define DOGEN_DATABASE_TYPES_NO_KEYS_2_FWD_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+namespace dogen {
+namespace database {
+
+class no_keys_2;
+
+} }
+
+#endif

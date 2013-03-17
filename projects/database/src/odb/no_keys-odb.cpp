@@ -263,7 +263,7 @@ namespace odb
   }
 
   const char access::object_traits< ::dogen::database::no_keys >::persist_statement[] =
-  "INSERT INTO \"no_keys\" ("
+  "INSERT INTO \"kitanda\".\"no_keys\" ("
   "\"prop_0\","
   "\"prop_1\","
   "\"prop_2\","
@@ -272,19 +272,19 @@ namespace odb
 
   const char access::object_traits< ::dogen::database::no_keys >::query_statement[] =
   "SELECT "
-  "\"no_keys\".\"prop_0\","
-  "\"no_keys\".\"prop_1\","
-  "\"no_keys\".\"prop_2\","
-  "\"no_keys\".\"prop_3\""
-  " FROM \"no_keys\""
+  "\"kitanda\".\"no_keys\".\"prop_0\","
+  "\"kitanda\".\"no_keys\".\"prop_1\","
+  "\"kitanda\".\"no_keys\".\"prop_2\","
+  "\"kitanda\".\"no_keys\".\"prop_3\""
+  " FROM \"kitanda\".\"no_keys\""
   " ";
 
   const char access::object_traits< ::dogen::database::no_keys >::erase_query_statement[] =
-  "DELETE FROM \"no_keys\""
+  "DELETE FROM \"kitanda\".\"no_keys\""
   " ";
 
   const char access::object_traits< ::dogen::database::no_keys >::table_name[] =
-  "\"no_keys\"";
+  "\"kitanda\".\"no_keys\"";
 
   void access::object_traits< ::dogen::database::no_keys >::
   persist (database& db, const object_type& obj)

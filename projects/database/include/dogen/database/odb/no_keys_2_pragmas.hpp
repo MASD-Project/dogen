@@ -18,5 +18,23 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/database/io/no_keys_2_io.hpp"
-#include "dogen/database/io/no_keys_io.hpp"
+#ifndef DOGEN_DATABASE_ODB_NO_KEYS_2_PRAGMAS_HPP
+#define DOGEN_DATABASE_ODB_NO_KEYS_2_PRAGMAS_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+namespace dogen {
+namespace database {
+
+#ifdef ODB_COMPILER
+
+#pragma db object(no_keys_2) no_id
+
+
+#endif
+
+} }
+
+#endif

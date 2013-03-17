@@ -2,9 +2,9 @@
  * compiler for C++.
  */
 
-DROP TABLE IF EXISTS "no_keys" CASCADE;
+DROP TABLE IF EXISTS "kitanda"."no_keys" CASCADE;
 
-CREATE TABLE "no_keys" (
+CREATE TABLE "kitanda"."no_keys" (
   "prop_0" INTEGER NOT NULL,
   "prop_1" INTEGER NOT NULL,
   "prop_2" TEXT NOT NULL,

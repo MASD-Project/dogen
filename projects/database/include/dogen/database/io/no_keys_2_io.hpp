@@ -18,5 +18,23 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/database/io/no_keys_2_io.hpp"
-#include "dogen/database/io/no_keys_io.hpp"
+#ifndef DOGEN_DATABASE_IO_NO_KEYS_2_IO_HPP
+#define DOGEN_DATABASE_IO_NO_KEYS_2_IO_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include <iosfwd>
+#include "dogen/database/types/no_keys_2.hpp"
+
+namespace dogen {
+namespace database {
+
+std::ostream&
+operator<<(std::ostream& s,
+     const dogen::database::no_keys_2& v);
+
+} }
+
+#endif

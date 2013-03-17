@@ -18,4 +18,5 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen/database/hash/no_keys_2_hash.hpp"
 #include "dogen/database/hash/no_keys_hash.hpp"

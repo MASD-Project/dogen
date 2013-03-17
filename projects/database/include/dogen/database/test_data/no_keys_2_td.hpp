@@ -18,5 +18,36 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/database/io/no_keys_2_io.hpp"
-#include "dogen/database/io/no_keys_io.hpp"
+#ifndef DOGEN_DATABASE_TEST_DATA_NO_KEYS_2_TD_HPP
+#define DOGEN_DATABASE_TEST_DATA_NO_KEYS_2_TD_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include "dogen/database/types/no_keys_2.hpp"
+
+namespace dogen {
+namespace database {
+
+class no_keys_2_generator {
+public:
+    no_keys_2_generator();
+
+public:
+    typedef dogen::database::no_keys_2 result_type;
+
+public:
+    static void populate(const unsigned int position, result_type& v);
+    static result_type create(const unsigned int position);
+    result_type operator()();
+
+private:
+    unsigned int position_;
+public:
+    static result_type* create_ptr(const unsigned int position);
+};
+
+} }
+
+#endif

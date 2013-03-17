@@ -18,5 +18,42 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/database/io/no_keys_2_io.hpp"
-#include "dogen/database/io/no_keys_io.hpp"
+#include "dogen/database/test_data/no_keys_2_td.hpp"
+
+namespace {
+
+int create_int(const unsigned int position) {
+    return position;
+}
+
+}
+
+namespace dogen {
+namespace database {
+
+no_keys_2_generator::no_keys_2_generator() : position_(0) { }
+
+void no_keys_2_generator::
+populate(const unsigned int position, result_type& v) {
+    v.prop_0(create_int(position + 0));
+}
+
+no_keys_2_generator::result_type
+no_keys_2_generator::create(const unsigned int position) {
+    no_keys_2 r;
+    no_keys_2_generator::populate(position, r);
+    return r;
+}
+no_keys_2_generator::result_type*
+no_keys_2_generator::create_ptr(const unsigned int position) {
+    no_keys_2* p = new no_keys_2();
+    no_keys_2_generator::populate(position, *p);
+    return p;
+}
+
+no_keys_2_generator::result_type
+no_keys_2_generator::operator()() {
+    return create(position_++);
+}
+
+} }

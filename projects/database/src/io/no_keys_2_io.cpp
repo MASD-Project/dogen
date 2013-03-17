@@ -18,5 +18,18 @@
  * MA 02110-1301, USA.
  *
  */
+#include <ostream>
 #include "dogen/database/io/no_keys_2_io.hpp"
-#include "dogen/database/io/no_keys_io.hpp"
+
+namespace dogen {
+namespace database {
+
+std::ostream& operator<<(std::ostream& s, const no_keys_2& v) {
+    s << " { "
+      << "\"__type__\": " << "\"dogen::database::no_keys_2\"" << ", "
+      << "\"prop_0\": " << v.prop_0()
+      << " }";
+    return(s);
+}
+
+} }

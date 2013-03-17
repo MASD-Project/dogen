@@ -18,5 +18,24 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/database/io/no_keys_2_io.hpp"
-#include "dogen/database/io/no_keys_io.hpp"
+#ifndef DOGEN_DATABASE_SERIALIZATION_NO_KEYS_2_FWD_SER_HPP
+#define DOGEN_DATABASE_SERIALIZATION_NO_KEYS_2_FWD_SER_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include "dogen/database/types/no_keys_2_fwd.hpp"
+
+namespace boost {
+namespace serialization {
+
+template<class Archive>
+void save(Archive& ar, const dogen::database::no_keys_2& v, unsigned int version);
+
+template<class Archive>
+void load(Archive& ar, dogen::database::no_keys_2& v, unsigned int version);
+
+} }
+
+#endif
