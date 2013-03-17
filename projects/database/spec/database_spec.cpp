@@ -47,21 +47,36 @@ BOOST_AUTO_TEST_SUITE(database)
 BOOST_AUTO_TEST_CASE(inserting_no_keys_instances_results_in_expected_rows_in_table) {
     SETUP_TEST_LOG("inserting_no_keys_instances_results_in_expected_rows_in_table");
 
-    // std::unique_ptr<odb::database> db (
-    //     new odb::pgsql::database (
-    //         "build",
-    //         "build",
-    //         "sanzala",
-    //         "lorenz"
-    //         ));
+    std::unique_ptr<odb::database> db (
+        new odb::pgsql::database (
+            "build",
+            "build",
+            "sanzala",
+            "localhost"
+            ));
 
-    // odb::transaction t(db->begin());
-    // odb::schema_catalog::create_schema(*db, "kitanda");
+    {
+        odb::transaction t(db->begin());
+        odb::schema_catalog::create_schema(*db);
+    }
 
-    // dogen::database::no_keys_generator sequence;
-    // dogen::database::no_keys a(sequence());
-    // db->persist(a);
-    // t.commit();
+    {
+        odb::transaction t(db->begin());
+        dogen::database::no_keys_generator sequence;
+        dogen::database::no_keys a(sequence());
+        db->persist(a);
+        t.commit();
+    }
+
+    {
+        transaction t(db->begin());
+        typedef odb::query<dogen::database::no_keys> query;
+        typedef odb::result<dogen::database::no_keys> result;
+
+        result r(db->query<dogen::database::no_keys>());
+        for (auto i(r.begin ()); i != r.end (); ++i)
+            std::cout << *i << std::endl;
+    }
 }
 
 BOOST_AUTO_TEST_SUITE_END()

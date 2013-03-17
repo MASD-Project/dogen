@@ -9,6 +9,7 @@
 #include <cassert>
 #include <cstring>  // std::memcpy
 
+#include <odb/schema-catalog-impl.hxx>
 #include <odb/details/shared-ptr.hxx>
 
 #include <odb/pgsql/traits.hxx>
@@ -388,6 +389,48 @@ namespace odb
 
     return st.execute ();
   }
+
+  bool access::object_traits< ::dogen::database::no_keys >::
+  create_schema (database& db, unsigned short pass, bool drop)
+  {
+    ODB_POTENTIALLY_UNUSED (db);
+    ODB_POTENTIALLY_UNUSED (pass);
+    ODB_POTENTIALLY_UNUSED (drop);
+
+    if (drop)
+    {
+      switch (pass)
+      {
+        case 1:
+        {
+          db.execute ("DROP TABLE IF EXISTS \"kitanda\".\"no_keys\" CASCADE");
+          return false;
+        }
+      }
+    }
+    else
+    {
+      switch (pass)
+      {
+        case 1:
+        {
+          db.execute ("CREATE TABLE \"kitanda\".\"no_keys\" (\n"
+                      "  \"prop_0\" INTEGER NOT NULL,\n"
+                      "  \"prop_1\" INTEGER NOT NULL,\n"
+                      "  \"prop_2\" TEXT NOT NULL,\n"
+                      "  \"prop_3\" TIMESTAMP)");
+          return false;
+        }
+      }
+    }
+
+    return false;
+  }
+
+  static const schema_catalog_entry
+  schema_catalog_entry_dogen_database_no_keys_ (
+    "",
+    &access::object_traits< ::dogen::database::no_keys >::create_schema);
 }
 
 #include <odb/post.hxx>

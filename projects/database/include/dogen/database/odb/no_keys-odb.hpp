@@ -243,6 +243,9 @@ namespace odb
     static unsigned long long
     erase_query (database&, const query_base_type&);
 
+    static bool
+    create_schema (database&, unsigned short pass, bool drop);
+
     static const char persist_statement_name[];
     static const char query_statement_name[];
     static const char erase_query_statement_name[];
