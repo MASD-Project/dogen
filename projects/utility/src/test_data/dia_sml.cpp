@@ -535,11 +535,11 @@ path dia_sml::expected_trivial_inheritance_sml_xml() {
 }
 
 path dia_sml::expected_comments_dia_xml() {
-    return validating_resolver::resolve(::expected_comments_dia_xml);
+    return resolver::resolve(::expected_comments_dia_xml);
 }
 
 path dia_sml::expected_comments_sml_xml() {
-    return validating_resolver::resolve(::expected_comments_sml_xml);
+    return resolver::resolve(::expected_comments_sml_xml);
 }
 
 path dia_sml::expected_enumeration_dia_xml() {

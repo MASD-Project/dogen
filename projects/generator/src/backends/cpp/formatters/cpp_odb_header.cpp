@@ -100,36 +100,50 @@ void odb_header::format_class(const file_view_model& vm) {
             return;
         }
 
-        namespace_helper ns(stream_, evm.namespaces());
-        utility_.blank_line();
+        std::ostringstream odb_stream;
+        bool has_odb_parms(false);
+        odb_stream << indenter_ << "#ifdef ODB_COMPILER" << std::endl
+                   << std::endl;
 
-        stream_ << indenter_ << "#ifdef ODB_COMPILER" << std::endl;
-
-        utility_.blank_line();
         for (const auto kvp : evm.implementation_specific_parameters()) {
             if (kvp.first == odb_key) {
-                stream_ << indenter_
-                        << odb_pragma << " object(" << evm.name() << ") "
-                        << kvp.second << std::endl;
+                has_odb_parms = true;
+                odb_stream << indenter_
+                           << odb_pragma << " object(" << evm.name() << ") "
+                           << kvp.second << std::endl;
             }
         }
 
-        utility_.blank_line();
+        odb_stream << std::endl;
         for (const auto p : evm.properties()) {
             for (const auto kvp : p.implementation_specific_parameters()) {
                 if (kvp.first == odb_key) {
-                    stream_ << indenter_
-                            << odb_pragma << " member(" << evm.name() << "::"
-                            << utility_.as_member_variable(p.name()) << ") "
-                            << kvp.second << std::endl;
+                    has_odb_parms = true;
+                    odb_stream << indenter_
+                               << odb_pragma << " member(" << evm.name() << "::"
+                               << utility_.as_member_variable(p.name()) << ") "
+                               << kvp.second << std::endl;
                 }
             }
         }
-        utility_.blank_line();
-        stream_ << indenter_ << "#endif" << std::endl;
-        utility_.blank_line();
+        odb_stream << std::endl
+                   << indenter_ << "#endif" << std::endl
+                   << std::endl;
+
+        if (!has_odb_parms) {
+            stream_ << indenter_ << "// class has no ODB parameters defined."
+                    << std::endl;
+            utility_.blank_line();
+            return;
+        }
+
+        {
+            namespace_helper ns(stream_, evm.namespaces());
+            utility_.blank_line();
+            stream_ << odb_stream.str();
+        }
+        utility_.blank_line(2);
     }
-    utility_.blank_line(2);
 }
 
 void odb_header::format(const file_view_model& vm) {
