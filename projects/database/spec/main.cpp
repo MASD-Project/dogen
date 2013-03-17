@@ -28,6 +28,11 @@
 #include <odb/transaction.hxx>
 #include <odb/pgsql/database.hxx>
 #include <odb/schema-catalog.hxx>
+#include "dogen/database/odb/no_keys-odb.hxx"
+#include "dogen/database/odb/no_keys_2-odb.hxx"
+#include "dogen/database/odb/primary_key-odb.hxx"
+#include "dogen/database/odb/primary_key_2-odb.hxx"
+#include "dogen/database/odb/foreign_key-odb.hxx"
 
 namespace  {
 

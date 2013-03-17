@@ -18,8 +18,38 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/database/test_data/foreign_key_td.hpp"
-#include "dogen/database/test_data/no_keys_2_td.hpp"
-#include "dogen/database/test_data/no_keys_td.hpp"
-#include "dogen/database/test_data/primary_key_2_td.hpp"
-#include "dogen/database/test_data/primary_key_td.hpp"
+#include "dogen/database/types/primary_key_2.hpp"
+
+namespace dogen {
+namespace database {
+
+primary_key_2::primary_key_2()
+    : prop_0_(static_cast<unsigned int>(0)) { }
+
+primary_key_2::primary_key_2(const unsigned int prop_0)
+    : prop_0_(prop_0) { }
+
+void primary_key_2::swap(primary_key_2& other) noexcept {
+    using std::swap;
+    swap(prop_0_, other.prop_0_);
+}
+
+bool primary_key_2::operator==(const primary_key_2& rhs) const {
+    return prop_0_ == rhs.prop_0_;
+}
+
+primary_key_2& primary_key_2::operator=(primary_key_2 other) {
+    using std::swap;
+    swap(*this, other);
+    return *this;
+}
+
+unsigned int primary_key_2::prop_0() const {
+    return prop_0_;
+}
+
+void primary_key_2::prop_0(const unsigned int v) {
+    prop_0_ = v;
+}
+
+} }

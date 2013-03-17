@@ -18,8 +18,18 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/database/test_data/foreign_key_td.hpp"
-#include "dogen/database/test_data/no_keys_2_td.hpp"
-#include "dogen/database/test_data/no_keys_td.hpp"
-#include "dogen/database/test_data/primary_key_2_td.hpp"
-#include "dogen/database/test_data/primary_key_td.hpp"
+#include <ostream>
+#include "dogen/database/io/primary_key_2_io.hpp"
+
+namespace dogen {
+namespace database {
+
+std::ostream& operator<<(std::ostream& s, const primary_key_2& v) {
+    s << " { "
+      << "\"__type__\": " << "\"dogen::database::primary_key_2\"" << ", "
+      << "\"prop_0\": " << v.prop_0()
+      << " }";
+    return(s);
+}
+
+} }

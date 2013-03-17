@@ -18,8 +18,29 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/database/test_data/foreign_key_td.hpp"
-#include "dogen/database/test_data/no_keys_2_td.hpp"
-#include "dogen/database/test_data/no_keys_td.hpp"
-#include "dogen/database/test_data/primary_key_2_td.hpp"
-#include "dogen/database/test_data/primary_key_td.hpp"
+#include "dogen/database/hash/primary_key_hash.hpp"
+
+namespace {
+
+template <typename HashableType>
+inline void combine(std::size_t& seed, const HashableType& value)
+{
+    std::hash<HashableType> hasher;
+    seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
+}
+
+}
+
+namespace dogen {
+namespace database {
+
+std::size_t primary_key_hasher::hash(const primary_key&v) {
+    std::size_t seed(0);
+
+    combine(seed, v.prop_0());
+    combine(seed, v.prop_1());
+
+    return seed;
+}
+
+} }

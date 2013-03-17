@@ -4,7 +4,9 @@
 
 #include <odb/pre.hxx>
 
-#include "dogen/database/odb/no_keys_2-odb.hxx"
+#include "dogen/database/odb/foreign_key-odb.hxx"
+
+#include "dogen/database/odb/primary_key_2-odb.hxx"
 
 #include <cassert>
 #include <cstring>  // std::memcpy
@@ -25,25 +27,26 @@
 
 namespace odb
 {
-  // no_keys_2
+  // foreign_key
   //
 
-  const char access::object_traits< ::dogen::database::no_keys_2 >::
-  persist_statement_name[] = "dogen_database_no_keys_2_persist";
+  const char access::object_traits< ::dogen::database::foreign_key >::
+  persist_statement_name[] = "dogen_database_foreign_key_persist";
 
-  const char access::object_traits< ::dogen::database::no_keys_2 >::
-  query_statement_name[] = "dogen_database_no_keys_2_query";
+  const char access::object_traits< ::dogen::database::foreign_key >::
+  query_statement_name[] = "dogen_database_foreign_key_query";
 
-  const char access::object_traits< ::dogen::database::no_keys_2 >::
-  erase_query_statement_name[] = "dogen_database_no_keys_2_erase_query";
+  const char access::object_traits< ::dogen::database::foreign_key >::
+  erase_query_statement_name[] = "dogen_database_foreign_key_erase_query";
 
-  const unsigned int access::object_traits< ::dogen::database::no_keys_2 >::
+  const unsigned int access::object_traits< ::dogen::database::foreign_key >::
   persist_statement_types[] =
   {
+    pgsql::int4_oid,
     pgsql::int4_oid
   };
 
-  bool access::object_traits< ::dogen::database::no_keys_2 >::
+  bool access::object_traits< ::dogen::database::foreign_key >::
   grow (image_type& i, bool* t)
   {
     ODB_POTENTIALLY_UNUSED (i);
@@ -55,10 +58,14 @@ namespace odb
     //
     t[0UL] = 0;
 
+    // prop_1_
+    //
+    t[1UL] = 0;
+
     return grew;
   }
 
-  void access::object_traits< ::dogen::database::no_keys_2 >::
+  void access::object_traits< ::dogen::database::foreign_key >::
   bind (pgsql::bind* b,
         image_type& i,
         pgsql::statement_kind sk)
@@ -75,9 +82,16 @@ namespace odb
     b[n].buffer = &i.prop_0_value;
     b[n].is_null = &i.prop_0_null;
     n++;
+
+    // prop_1_
+    //
+    b[n].type = pgsql::bind::integer;
+    b[n].buffer = &i.prop_1_value;
+    b[n].is_null = &i.prop_1_null;
+    n++;
   }
 
-  bool access::object_traits< ::dogen::database::no_keys_2 >::
+  bool access::object_traits< ::dogen::database::foreign_key >::
   init (image_type& i, const object_type& o, pgsql::statement_kind sk)
   {
     ODB_POTENTIALLY_UNUSED (i);
@@ -91,21 +105,46 @@ namespace odb
     // prop_0_
     //
     {
-      int const& v =
+      unsigned int const& v =
         o.prop_0 ();
 
       bool is_null (false);
       pgsql::value_traits<
-          int,
+          unsigned int,
           pgsql::id_integer >::set_image (
         i.prop_0_value, is_null, v);
       i.prop_0_null = is_null;
     }
 
+    // prop_1_
+    //
+    {
+      ::boost::shared_ptr< ::dogen::database::primary_key_2 > const& v =
+        o.prop_1 ();
+
+      typedef object_traits< ::dogen::database::primary_key_2 > obj_traits;
+      typedef odb::pointer_traits< ::boost::shared_ptr< ::dogen::database::primary_key_2 > > ptr_traits;
+
+      bool is_null (ptr_traits::null_ptr (v));
+      if (!is_null)
+      {
+        const obj_traits::id_type& id (
+          obj_traits::id (ptr_traits::get_ref (v)));
+
+        pgsql::value_traits<
+            obj_traits::id_type,
+            pgsql::id_integer >::set_image (
+          i.prop_1_value, is_null, id);
+        i.prop_1_null = is_null;
+      }
+      else
+        i.prop_1_null = true;
+    }
+
     return grew;
   }
 
-  void access::object_traits< ::dogen::database::no_keys_2 >::
+  void access::object_traits< ::dogen::database::foreign_key >::
   init (object_type& o, const image_type& i, database* db)
   {
     ODB_POTENTIALLY_UNUSED (o);
@@ -115,10 +154,10 @@ namespace odb
     // prop_0_
     //
     {
-      int v;
+      unsigned int v;
 
       pgsql::value_traits<
-          int,
+          unsigned int,
           pgsql::id_integer >::set_value (
         v,
         i.prop_0_value,
@@ -126,27 +165,59 @@ namespace odb
 
       o.prop_0 (v);
     }
+
+    // prop_1_
+    //
+    {
+      ::boost::shared_ptr< ::dogen::database::primary_key_2 >& v =
+        o.prop_1 ();
+
+      typedef object_traits< ::dogen::database::primary_key_2 > obj_traits;
+      typedef odb::pointer_traits< ::boost::shared_ptr< ::dogen::database::primary_key_2 > > ptr_traits;
+
+      if (i.prop_1_null)
+        v = ptr_traits::pointer_type ();
+      else
+      {
+        obj_traits::id_type id;
+        pgsql::value_traits<
+            obj_traits::id_type,
+            pgsql::id_integer >::set_value (
+          id,
+          i.prop_1_value,
+          i.prop_1_null);
+
+        // If a compiler error points to the line below, then
+        // it most likely means that a pointer used in a member
+        // cannot be initialized from an object pointer.
+        //
+        v = ptr_traits::pointer_type (
+          db->load< obj_traits::object_type > (id));
+      }
+    }
   }
 
-  const char access::object_traits< ::dogen::database::no_keys_2 >::persist_statement[] =
-  "INSERT INTO \"kitanda\".\"no_keys_2\" ("
-  "\"prop_0\")"
-  " VALUES ($1)";
+  const char access::object_traits< ::dogen::database::foreign_key >::persist_statement[] =
+  "INSERT INTO \"kitanda\".\"foreign_key\" ("
+  "\"prop_0\","
+  "\"prop_1\")"
+  " VALUES ($1,$2)";
 
-  const char access::object_traits< ::dogen::database::no_keys_2 >::query_statement[] =
+  const char access::object_traits< ::dogen::database::foreign_key >::query_statement[] =
   "SELECT "
-  "\"kitanda\".\"no_keys_2\".\"prop_0\""
-  " FROM \"kitanda\".\"no_keys_2\""
+  "\"kitanda\".\"foreign_key\".\"prop_0\","
+  "\"kitanda\".\"foreign_key\".\"prop_1\""
+  " FROM \"kitanda\".\"foreign_key\""
   " ";
 
-  const char access::object_traits< ::dogen::database::no_keys_2 >::erase_query_statement[] =
-  "DELETE FROM \"kitanda\".\"no_keys_2\""
+  const char access::object_traits< ::dogen::database::foreign_key >::erase_query_statement[] =
+  "DELETE FROM \"kitanda\".\"foreign_key\""
   " ";
 
-  const char access::object_traits< ::dogen::database::no_keys_2 >::table_name[] =
-  "\"kitanda\".\"no_keys_2\"";
+  const char access::object_traits< ::dogen::database::foreign_key >::table_name[] =
+  "\"kitanda\".\"foreign_key\"";
 
-  void access::object_traits< ::dogen::database::no_keys_2 >::
+  void access::object_traits< ::dogen::database::foreign_key >::
   persist (database& db, const object_type& obj)
   {
     ODB_POTENTIALLY_UNUSED (db);
@@ -185,8 +256,8 @@ namespace odb
               callback_event::post_persist);
   }
 
-  result< access::object_traits< ::dogen::database::no_keys_2 >::object_type >
-  access::object_traits< ::dogen::database::no_keys_2 >::
+  result< access::object_traits< ::dogen::database::foreign_key >::object_type >
+  access::object_traits< ::dogen::database::foreign_key >::
   query (database&, const query_base_type& q)
   {
     using namespace pgsql;
@@ -230,7 +301,7 @@ namespace odb
     return result<object_type> (r);
   }
 
-  unsigned long long access::object_traits< ::dogen::database::no_keys_2 >::
+  unsigned long long access::object_traits< ::dogen::database::foreign_key >::
   erase_query (database&, const query_base_type& q)
   {
     using namespace pgsql;
@@ -249,7 +320,7 @@ namespace odb
     return st.execute ();
   }
 
-  bool access::object_traits< ::dogen::database::no_keys_2 >::
+  bool access::object_traits< ::dogen::database::foreign_key >::
   create_schema (database& db, unsigned short pass, bool drop)
   {
     ODB_POTENTIALLY_UNUSED (db);
@@ -262,7 +333,7 @@ namespace odb
       {
         case 1:
         {
-          db.execute ("DROP TABLE IF EXISTS \"kitanda\".\"no_keys_2\" CASCADE");
+          db.execute ("DROP TABLE IF EXISTS \"kitanda\".\"foreign_key\" CASCADE");
           return false;
         }
       }
@@ -273,8 +344,18 @@ namespace odb
       {
         case 1:
         {
-          db.execute ("CREATE TABLE \"kitanda\".\"no_keys_2\" (\n"
-                      "  \"prop_0\" INTEGER NOT NULL)");
+          db.execute ("CREATE TABLE \"kitanda\".\"foreign_key\" (\n"
+                      "  \"prop_0\" INTEGER NOT NULL,\n"
+                      "  \"prop_1\" INTEGER)");
+          return true;
+        }
+        case 2:
+        {
+          db.execute ("ALTER TABLE \"kitanda\".\"foreign_key\" ADD\n"
+                      "  CONSTRAINT \"prop_1_fk\"\n"
+                      "    FOREIGN KEY (\"prop_1\")\n"
+                      "    REFERENCES \"kitanda\".\"primary_key_2\" (\"prop_0\")\n"
+                      "    INITIALLY DEFERRED");
           return false;
         }
       }
@@ -284,9 +365,9 @@ namespace odb
   }
 
   static const schema_catalog_entry
-  schema_catalog_entry_dogen_database_no_keys_2_ (
+  schema_catalog_entry_dogen_database_foreign_key_ (
     "",
-    &access::object_traits< ::dogen::database::no_keys_2 >::create_schema);
+    &access::object_traits< ::dogen::database::foreign_key >::create_schema);
 }
 
 #include <odb/post.hxx>

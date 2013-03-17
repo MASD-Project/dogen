@@ -18,8 +18,26 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/database/test_data/foreign_key_td.hpp"
-#include "dogen/database/test_data/no_keys_2_td.hpp"
-#include "dogen/database/test_data/no_keys_td.hpp"
-#include "dogen/database/test_data/primary_key_2_td.hpp"
-#include "dogen/database/test_data/primary_key_td.hpp"
+#ifndef DOGEN_DATABASE_SERIALIZATION_FOREIGN_KEY_SER_HPP
+#define DOGEN_DATABASE_SERIALIZATION_FOREIGN_KEY_SER_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include <boost/serialization/split_free.hpp>
+#include "dogen/database/types/foreign_key.hpp"
+
+BOOST_SERIALIZATION_SPLIT_FREE(dogen::database::foreign_key)
+namespace boost {
+namespace serialization {
+
+template<typename Archive>
+void save(Archive& ar, const dogen::database::foreign_key& v, unsigned int version);
+
+template<typename Archive>
+void load(Archive& ar, dogen::database::foreign_key& v, unsigned int version);
+
+} }
+
+#endif

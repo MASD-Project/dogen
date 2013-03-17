@@ -479,7 +479,15 @@ void cpp_inclusion_manager::append_relationship_dependencies(
             il.user.push_back(header_dependency(n, ft, main));
 
         /*
-         * rule 4: hash, IO, serialisation and test data
+         * rule 4: odb headers need the corresponding header file
+         * for the dependency
+         */
+        const bool is_odb(ft == cpp_facet_types::odb);
+        if (is_header && !is_primitive && is_odb)
+            il.user.push_back(header_dependency(n, ft, main));
+
+        /*
+         * rule 5: hash, IO, serialisation, and test data
          * implementations need the corresponding header file for the
          * dependency
          */
@@ -488,12 +496,13 @@ void cpp_inclusion_manager::append_relationship_dependencies(
         const bool is_io(ft == cpp_facet_types::io);
         const bool is_ser(ft == cpp_facet_types::serialization);
         const bool is_td(ft == cpp_facet_types::test_data);
+        const bool is_non_domain(is_hash || is_io || is_td || is_ser);
 
-        if (is_implementation && (is_hash || is_io || is_td || is_ser))
+        if (is_implementation && is_non_domain)
             il.user.push_back(header_dependency(n, ft, main));
 
         /*
-         * rule 5: Domain implementation needs to include any files
+         * rule 6: Domain implementation needs to include any files
          * that the domain header forwarded.
          */
         const bool forwarded(dd.forward_decls().find(n) !=
@@ -502,7 +511,7 @@ void cpp_inclusion_manager::append_relationship_dependencies(
             il.user.push_back(header_dependency(n, ft, main));
 
         /*
-         * rule 6: parents and children with integrated IO require IO
+         * rule 7: parents and children with integrated IO require IO
          * headers in domain implementation.
          */
         const bool domain_with_io(is_domain &&
@@ -520,7 +529,7 @@ void cpp_inclusion_manager::append_relationship_dependencies(
             continue;
 
         /*
-         * rule 7: domain headers require hashing for all keys.
+         * rule 8: domain headers require hashing for all keys.
          */
         const bool is_header(flt == cpp_file_types::header);
         const bool is_domain(ft == cpp_facet_types::types);
@@ -533,7 +542,7 @@ void cpp_inclusion_manager::append_relationship_dependencies(
 
     for (const auto l : dd.leaves() ) {
         /*
-         * rule 8: leaves require generators in test data.
+         * rule 9: leaves require generators in test data.
          */
         const bool is_implementation(flt == cpp_file_types::implementation);
         const bool is_td(ft == cpp_facet_types::test_data);
@@ -542,7 +551,7 @@ void cpp_inclusion_manager::append_relationship_dependencies(
             il.user.push_back(header_dependency(l, ft, main));
 
         /*
-         * rule 9: base classes require registering all leaves in
+         * rule 10: base classes require registering all leaves in
          * serialisation implementation.
          */
         const bool is_ser(ft == cpp_facet_types::serialization);

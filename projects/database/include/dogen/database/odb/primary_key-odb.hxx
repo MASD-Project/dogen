@@ -2,8 +2,8 @@
 // compiler for C++.
 //
 
-#ifndef DOGEN_DATABASE_ODB_NO_KEYS_2_ODB_HPP
-#define DOGEN_DATABASE_ODB_NO_KEYS_2_ODB_HPP
+#ifndef DOGEN_DATABASE_ODB_PRIMARY_KEY_ODB_HXX
+#define DOGEN_DATABASE_ODB_PRIMARY_KEY_ODB_HXX
 
 #include <odb/version.hxx>
 
@@ -31,7 +31,7 @@
 //
 // End prologue.
 
-#include "dogen/database/types/no_keys_2.hpp"
+#include "dogen/database/types/primary_key.hpp"
 
 #include <memory>
 #include <cstddef>
@@ -48,7 +48,7 @@
 #include <odb/container-traits.hxx>
 #include <odb/no-op-cache-traits.hxx>
 #include <odb/result.hxx>
-#include <odb/no-id-object-result.hxx>
+#include <odb/simple-object-result.hxx>
 
 #include <odb/details/buffer.hxx>
 #include <odb/details/unused.hxx>
@@ -61,53 +61,78 @@
 
 namespace odb
 {
-  // no_keys_2
+  // primary_key
   //
   template <>
-  struct class_traits< ::dogen::database::no_keys_2 >
+  struct class_traits< ::dogen::database::primary_key >
   {
     static const class_kind kind = class_object;
   };
 
   template <typename A>
-  struct query_columns< ::dogen::database::no_keys_2, A >
+  struct query_columns< ::dogen::database::primary_key, A >
   {
     // prop_0
     //
     typedef
     pgsql::query_column<
       pgsql::value_traits<
-        int,
+        unsigned int,
         pgsql::id_integer >::query_type,
       pgsql::id_integer >
     prop_0_type_;
 
     static const prop_0_type_ prop_0;
+
+    // prop_1
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        ::std::string,
+        pgsql::id_string >::query_type,
+      pgsql::id_string >
+    prop_1_type_;
+
+    static const prop_1_type_ prop_1;
   };
 
   template <typename A>
-  const typename query_columns< ::dogen::database::no_keys_2, A >::prop_0_type_
-  query_columns< ::dogen::database::no_keys_2, A >::
+  const typename query_columns< ::dogen::database::primary_key, A >::prop_0_type_
+  query_columns< ::dogen::database::primary_key, A >::
   prop_0 (A::table_name, "\"prop_0\"", 0);
 
   template <typename A>
-  struct pointer_query_columns< ::dogen::database::no_keys_2, A >:
-    query_columns< ::dogen::database::no_keys_2, A >
+  const typename query_columns< ::dogen::database::primary_key, A >::prop_1_type_
+  query_columns< ::dogen::database::primary_key, A >::
+  prop_1 (A::table_name, "\"prop_1\"", 0);
+
+  template <typename A>
+  struct pointer_query_columns< ::dogen::database::primary_key, A >:
+    query_columns< ::dogen::database::primary_key, A >
   {
   };
 
   template <>
-  class access::object_traits< ::dogen::database::no_keys_2 >
+  class access::object_traits< ::dogen::database::primary_key >
   {
     public:
-    typedef ::dogen::database::no_keys_2 object_type;
-    typedef ::boost::shared_ptr< ::dogen::database::no_keys_2 > pointer_type;
+    typedef ::dogen::database::primary_key object_type;
+    typedef ::boost::shared_ptr< ::dogen::database::primary_key > pointer_type;
     typedef odb::pointer_traits<pointer_type> pointer_traits;
 
     static const bool polymorphic = false;
 
-    typedef void id_type;
+    typedef unsigned int id_type;
     static const bool auto_id = false;
+
+    struct id_image_type
+    {
+      int id_value;
+      bool id_null;
+
+      std::size_t version;
+    };
 
     static const bool abstract = false;
 
@@ -118,11 +143,20 @@ namespace odb
       int prop_0_value;
       bool prop_0_null;
 
+      // prop_1_
+      //
+      details::buffer prop_1_value;
+      std::size_t prop_1_size;
+      bool prop_1_null;
+
       std::size_t version;
     };
 
     static id_type
     id (const object_type&);
+
+    static id_type
+    id (const image_type&);
 
     static bool
     grow (image_type&, bool*);
@@ -132,30 +166,41 @@ namespace odb
           image_type&,
           pgsql::statement_kind);
 
+    static void
+    bind (pgsql::bind*, id_image_type&);
+
     static bool
     init (image_type&, const object_type&, pgsql::statement_kind);
 
     static void
     init (object_type&, const image_type&, database*);
 
+    static void
+    init (id_image_type&, const id_type&);
+
     typedef
-    odb::no_id_pointer_cache_traits<pointer_type>
+    odb::no_op_pointer_cache_traits<pointer_type>
     pointer_cache_traits;
     typedef
-    odb::no_id_reference_cache_traits<object_type>
+    odb::no_op_reference_cache_traits<object_type>
     reference_cache_traits;
 
-    typedef pgsql::no_id_object_statements<object_type> statements_type;
+    typedef pgsql::object_statements<object_type> statements_type;
 
     typedef pgsql::query query_base_type;
 
-    static const std::size_t column_count = 1UL;
-    static const std::size_t id_column_count = 0UL;
+    struct container_statement_cache_type;
+
+    static const std::size_t column_count = 2UL;
+    static const std::size_t id_column_count = 1UL;
     static const std::size_t inverse_column_count = 0UL;
     static const std::size_t readonly_column_count = 0UL;
     static const std::size_t managed_optimistic_column_count = 0UL;
 
     static const char persist_statement[];
+    static const char find_statement[];
+    static const char update_statement[];
+    static const char erase_statement[];
     static const char query_statement[];
     static const char erase_query_statement[];
 
@@ -170,6 +215,24 @@ namespace odb
     static void
     persist (database&, const object_type&);
 
+    static pointer_type
+    find (database&, const id_type&);
+
+    static bool
+    find (database&, const id_type&, object_type&);
+
+    static bool
+    reload (database&, object_type&);
+
+    static void
+    update (database&, const object_type&);
+
+    static void
+    erase (database&, const id_type&);
+
+    static void
+    erase (database&, const object_type&);
+
     static result<object_type>
     query (database&, const query_base_type&);
 
@@ -180,17 +243,27 @@ namespace odb
     create_schema (database&, unsigned short pass, bool drop);
 
     static const char persist_statement_name[];
+    static const char find_statement_name[];
+    static const char update_statement_name[];
+    static const char erase_statement_name[];
     static const char query_statement_name[];
     static const char erase_query_statement_name[];
 
     static const unsigned int persist_statement_types[];
+    static const unsigned int find_statement_types[];
+    static const unsigned int update_statement_types[];
 
     public:
+    static bool
+    find_ (statements_type&, const id_type*);
+
+    static void
+    load_ (statements_type&, object_type&);
   };
 }
 
-#include "dogen/database/odb/no_keys_2-odb.ipp"
+#include "dogen/database/odb/primary_key-odb.ixx"
 
 #include <odb/post.hxx>
 
-#endif // DOGEN_DATABASE_ODB_NO_KEYS_2_ODB_HPP
+#endif // DOGEN_DATABASE_ODB_PRIMARY_KEY_ODB_HXX

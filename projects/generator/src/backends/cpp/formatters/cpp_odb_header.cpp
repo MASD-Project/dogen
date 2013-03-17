@@ -21,6 +21,7 @@
 #include <ostream>
 #include <boost/throw_exception.hpp>
 #include "dogen/generator/generation_failure.hpp"
+#include "dogen/generator/backends/cpp/formatters/cpp_includes.hpp"
 #include "dogen/generator/backends/cpp/formatters/cpp_licence.hpp"
 #include "dogen/generator/backends/cpp/formatters/cpp_header_guards.hpp"
 #include "dogen/generator/backends/cpp/formatters/cpp_namespace.hpp"
@@ -153,6 +154,9 @@ void odb_header::format(const file_view_model& vm) {
     header_guards guards(stream_);
     guards.format_start(vm.header_guard());
     stream_ << std::endl;
+
+    cpp_includes includes(stream_);
+    includes.format(vm);
 
     if (vm.meta_type() == sml::meta_types::pod)
         format_class(vm);

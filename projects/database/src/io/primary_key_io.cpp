@@ -18,8 +18,28 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/database/test_data/foreign_key_td.hpp"
-#include "dogen/database/test_data/no_keys_2_td.hpp"
-#include "dogen/database/test_data/no_keys_td.hpp"
-#include "dogen/database/test_data/primary_key_2_td.hpp"
-#include "dogen/database/test_data/primary_key_td.hpp"
+#include <boost/algorithm/string.hpp>
+#include <ostream>
+#include "dogen/database/io/primary_key_io.hpp"
+
+
+inline std::string tidy_up_string(std::string s) {
+    boost::replace_all(s, "\r\n", "<new_line>");
+    boost::replace_all(s, "\n", "<new_line>");
+    boost::replace_all(s, "\"", "<quote>");
+    return s;
+}
+
+namespace dogen {
+namespace database {
+
+std::ostream& operator<<(std::ostream& s, const primary_key& v) {
+    s << " { "
+      << "\"__type__\": " << "\"dogen::database::primary_key\"" << ", "
+      << "\"prop_0\": " << v.prop_0() << ", "
+      << "\"prop_1\": " << "\"" << tidy_up_string(v.prop_1()) << "\""
+      << " }";
+    return(s);
+}
+
+} }

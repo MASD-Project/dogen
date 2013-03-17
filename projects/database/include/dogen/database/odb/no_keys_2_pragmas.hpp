@@ -25,6 +25,8 @@
 #pragma once
 #endif
 
+#include "dogen/database/types/no_keys_2.hpp"
+
 namespace dogen {
 namespace database {
 

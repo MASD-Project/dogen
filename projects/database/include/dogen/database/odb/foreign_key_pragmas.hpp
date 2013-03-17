@@ -18,8 +18,27 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/database/test_data/foreign_key_td.hpp"
-#include "dogen/database/test_data/no_keys_2_td.hpp"
-#include "dogen/database/test_data/no_keys_td.hpp"
-#include "dogen/database/test_data/primary_key_2_td.hpp"
-#include "dogen/database/test_data/primary_key_td.hpp"
+#ifndef DOGEN_DATABASE_ODB_FOREIGN_KEY_PRAGMAS_HPP
+#define DOGEN_DATABASE_ODB_FOREIGN_KEY_PRAGMAS_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include "dogen/database/odb/primary_key_2_pragmas.hpp"
+#include "dogen/database/types/foreign_key.hpp"
+
+namespace dogen {
+namespace database {
+
+#ifdef ODB_COMPILER
+
+#pragma db object(foreign_key) schema("kitanda")
+#pragma db object(foreign_key) no_id
+
+
+#endif
+
+} }
+
+#endif

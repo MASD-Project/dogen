@@ -18,8 +18,35 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/database/test_data/foreign_key_td.hpp"
-#include "dogen/database/test_data/no_keys_2_td.hpp"
-#include "dogen/database/test_data/no_keys_td.hpp"
-#include "dogen/database/test_data/primary_key_2_td.hpp"
-#include "dogen/database/test_data/primary_key_td.hpp"
+#ifndef DOGEN_DATABASE_HASH_FOREIGN_KEY_HASH_HPP
+#define DOGEN_DATABASE_HASH_FOREIGN_KEY_HASH_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include <functional>
+#include "dogen/database/types/foreign_key.hpp"
+
+namespace dogen {
+namespace database {
+
+class foreign_key_hasher {
+public:
+    static std::size_t hash(const foreign_key& v);
+};
+
+} }
+
+namespace std {
+
+template<>
+class hash<dogen::database::foreign_key> {
+public:
+    size_t operator()(const dogen::database::foreign_key& v) const {
+        return dogen::database::foreign_key_hasher::hash(v);
+    }
+};
+
+}
+#endif

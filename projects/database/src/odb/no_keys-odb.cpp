@@ -4,7 +4,7 @@
 
 #include <odb/pre.hxx>
 
-#include "dogen/database/odb/no_keys-odb.hpp"
+#include "dogen/database/odb/no_keys-odb.hxx"
 
 #include <cassert>
 #include <cstring>  // std::memcpy

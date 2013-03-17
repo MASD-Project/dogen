@@ -18,8 +18,36 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/database/test_data/foreign_key_td.hpp"
-#include "dogen/database/test_data/no_keys_2_td.hpp"
-#include "dogen/database/test_data/no_keys_td.hpp"
-#include "dogen/database/test_data/primary_key_2_td.hpp"
-#include "dogen/database/test_data/primary_key_td.hpp"
+#include <ostream>
+#include "dogen/database/io/foreign_key_io.hpp"
+#include "dogen/database/io/primary_key_2_io.hpp"
+
+namespace boost {
+
+inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<dogen::database::primary_key_2>& v) {
+    s << "{ " << "\"__type__\": " << "\"boost::shared_ptr\"" << ", "
+      << "\"memory\": " << "\"" << static_cast<void*>(v.get()) << "\"" << ", ";
+
+    if (v)
+        s << "\"data\": " << *v;
+    else
+        s << "\"data\": ""\"<empty>\"";
+    s<< " }";
+    return s;
+}
+
+}
+
+namespace dogen {
+namespace database {
+
+std::ostream& operator<<(std::ostream& s, const foreign_key& v) {
+    s << " { "
+      << "\"__type__\": " << "\"dogen::database::foreign_key\"" << ", "
+      << "\"prop_0\": " << v.prop_0() << ", "
+      << "\"prop_1\": " << v.prop_1()
+      << " }";
+    return(s);
+}
+
+} }

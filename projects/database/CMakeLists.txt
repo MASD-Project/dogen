@@ -59,14 +59,8 @@ foreach(odb_file ${all_odb_files})
         add_custom_target(${target_name}
             WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
             COMMAND odb
-            --std c++11 -d pgsql --profile boost --generate-query --generate-schema
-            --schema-format embedded
-            --ixx-suffix .ipp --hxx-suffix .hpp --cxx-suffix .cpp
-            --include-regex '%${type_name}.hpp%dogen/database/types/${type_name}.hpp%'
-            --include-regex '%${type_name}-odb.hpp%dogen/database/odb/${type_name}-odb.hpp%'
-            --include-regex '%${type_name}-odb.cpp%dogen/database/odb/${type_name}-odb.cpp%'
-            --include-regex '%${type_name}-odb.ipp%dogen/database/odb/${type_name}-odb.ipp%'
-            --guard-prefix DOGEN_DATABASE_ODB
+            --options-file ${CMAKE_CURRENT_SOURCE_DIR}/options.odb
+            --std c++11
             --output-dir ${CMAKE_CURRENT_SOURCE_DIR}/include/dogen/database/odb/
             --odb-epilogue '\#include \"dogen/database/odb/${odb_file}\"'
             -I ${pfh_dir}/include -I ${CMAKE_CURRENT_SOURCE_DIR}/include
@@ -74,5 +68,6 @@ foreach(odb_file ${all_odb_files})
 
         add_dependencies(codegen_database_odb ${target_name})
     endif()
+    add_dependencies(codegen_database_odb codegen_database)
     set(ignore_file false)
 endforeach()

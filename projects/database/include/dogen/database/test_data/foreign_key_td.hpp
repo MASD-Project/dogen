@@ -18,8 +18,36 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/database/test_data/foreign_key_td.hpp"
-#include "dogen/database/test_data/no_keys_2_td.hpp"
-#include "dogen/database/test_data/no_keys_td.hpp"
-#include "dogen/database/test_data/primary_key_2_td.hpp"
-#include "dogen/database/test_data/primary_key_td.hpp"
+#ifndef DOGEN_DATABASE_TEST_DATA_FOREIGN_KEY_TD_HPP
+#define DOGEN_DATABASE_TEST_DATA_FOREIGN_KEY_TD_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include "dogen/database/types/foreign_key.hpp"
+
+namespace dogen {
+namespace database {
+
+class foreign_key_generator {
+public:
+    foreign_key_generator();
+
+public:
+    typedef dogen::database::foreign_key result_type;
+
+public:
+    static void populate(const unsigned int position, result_type& v);
+    static result_type create(const unsigned int position);
+    result_type operator()();
+
+private:
+    unsigned int position_;
+public:
+    static result_type* create_ptr(const unsigned int position);
+};
+
+} }
+
+#endif

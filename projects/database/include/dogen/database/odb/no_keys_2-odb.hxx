@@ -2,8 +2,8 @@
 // compiler for C++.
 //
 
-#ifndef DOGEN_DATABASE_ODB_NO_KEYS_ODB_HPP
-#define DOGEN_DATABASE_ODB_NO_KEYS_ODB_HPP
+#ifndef DOGEN_DATABASE_ODB_NO_KEYS_2_ODB_HXX
+#define DOGEN_DATABASE_ODB_NO_KEYS_2_ODB_HXX
 
 #include <odb/version.hxx>
 
@@ -31,7 +31,7 @@
 //
 // End prologue.
 
-#include "dogen/database/types/no_keys.hpp"
+#include "dogen/database/types/no_keys_2.hpp"
 
 #include <memory>
 #include <cstddef>
@@ -61,16 +61,16 @@
 
 namespace odb
 {
-  // no_keys
+  // no_keys_2
   //
   template <>
-  struct class_traits< ::dogen::database::no_keys >
+  struct class_traits< ::dogen::database::no_keys_2 >
   {
     static const class_kind kind = class_object;
   };
 
   template <typename A>
-  struct query_columns< ::dogen::database::no_keys, A >
+  struct query_columns< ::dogen::database::no_keys_2, A >
   {
     // prop_0
     //
@@ -83,76 +83,25 @@ namespace odb
     prop_0_type_;
 
     static const prop_0_type_ prop_0;
-
-    // prop_1
-    //
-    typedef
-    pgsql::query_column<
-      pgsql::value_traits<
-        unsigned int,
-        pgsql::id_integer >::query_type,
-      pgsql::id_integer >
-    prop_1_type_;
-
-    static const prop_1_type_ prop_1;
-
-    // prop_2
-    //
-    typedef
-    pgsql::query_column<
-      pgsql::value_traits<
-        ::std::string,
-        pgsql::id_string >::query_type,
-      pgsql::id_string >
-    prop_2_type_;
-
-    static const prop_2_type_ prop_2;
-
-    // prop_3
-    //
-    typedef
-    pgsql::query_column<
-      pgsql::value_traits<
-        ::boost::posix_time::ptime,
-        pgsql::id_timestamp >::query_type,
-      pgsql::id_timestamp >
-    prop_3_type_;
-
-    static const prop_3_type_ prop_3;
   };
 
   template <typename A>
-  const typename query_columns< ::dogen::database::no_keys, A >::prop_0_type_
-  query_columns< ::dogen::database::no_keys, A >::
+  const typename query_columns< ::dogen::database::no_keys_2, A >::prop_0_type_
+  query_columns< ::dogen::database::no_keys_2, A >::
   prop_0 (A::table_name, "\"prop_0\"", 0);
 
   template <typename A>
-  const typename query_columns< ::dogen::database::no_keys, A >::prop_1_type_
-  query_columns< ::dogen::database::no_keys, A >::
-  prop_1 (A::table_name, "\"prop_1\"", 0);
-
-  template <typename A>
-  const typename query_columns< ::dogen::database::no_keys, A >::prop_2_type_
-  query_columns< ::dogen::database::no_keys, A >::
-  prop_2 (A::table_name, "\"prop_2\"", 0);
-
-  template <typename A>
-  const typename query_columns< ::dogen::database::no_keys, A >::prop_3_type_
-  query_columns< ::dogen::database::no_keys, A >::
-  prop_3 (A::table_name, "\"prop_3\"", 0);
-
-  template <typename A>
-  struct pointer_query_columns< ::dogen::database::no_keys, A >:
-    query_columns< ::dogen::database::no_keys, A >
+  struct pointer_query_columns< ::dogen::database::no_keys_2, A >:
+    query_columns< ::dogen::database::no_keys_2, A >
   {
   };
 
   template <>
-  class access::object_traits< ::dogen::database::no_keys >
+  class access::object_traits< ::dogen::database::no_keys_2 >
   {
     public:
-    typedef ::dogen::database::no_keys object_type;
-    typedef ::boost::shared_ptr< ::dogen::database::no_keys > pointer_type;
+    typedef ::dogen::database::no_keys_2 object_type;
+    typedef ::boost::shared_ptr< ::dogen::database::no_keys_2 > pointer_type;
     typedef odb::pointer_traits<pointer_type> pointer_traits;
 
     static const bool polymorphic = false;
@@ -168,22 +117,6 @@ namespace odb
       //
       int prop_0_value;
       bool prop_0_null;
-
-      // prop_1_
-      //
-      int prop_1_value;
-      bool prop_1_null;
-
-      // prop_2_
-      //
-      details::buffer prop_2_value;
-      std::size_t prop_2_size;
-      bool prop_2_null;
-
-      // prop_3_
-      //
-      long long prop_3_value;
-      bool prop_3_null;
 
       std::size_t version;
     };
@@ -216,7 +149,7 @@ namespace odb
 
     typedef pgsql::query query_base_type;
 
-    static const std::size_t column_count = 4UL;
+    static const std::size_t column_count = 1UL;
     static const std::size_t id_column_count = 0UL;
     static const std::size_t inverse_column_count = 0UL;
     static const std::size_t readonly_column_count = 0UL;
@@ -256,8 +189,8 @@ namespace odb
   };
 }
 
-#include "dogen/database/odb/no_keys-odb.ipp"
+#include "dogen/database/odb/no_keys_2-odb.ixx"
 
 #include <odb/post.hxx>
 
-#endif // DOGEN_DATABASE_ODB_NO_KEYS_ODB_HPP
+#endif // DOGEN_DATABASE_ODB_NO_KEYS_2_ODB_HXX
