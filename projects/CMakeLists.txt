@@ -181,7 +181,6 @@ include_directories(
     ${CMAKE_SOURCE_DIR}/projects/enumeration/include
     ${CMAKE_SOURCE_DIR}/projects/exception/include
     ${CMAKE_SOURCE_DIR}/projects/entity_service_value/include
-    ${CMAKE_SOURCE_DIR}/projects/odb/include
     )
 
 #
@@ -226,7 +225,6 @@ add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/comments)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/enumeration)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/exception)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/entity_service_value)
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/odb)
 
 # global targets for codegen
 add_custom_target(rebase_codegen)

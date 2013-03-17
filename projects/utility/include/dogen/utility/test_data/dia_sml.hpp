@@ -80,7 +80,6 @@ public:
     static boost::filesystem::path input_enumeration_dia();
     static boost::filesystem::path input_exception_dia();
     static boost::filesystem::path input_entity_service_value_dia();
-    static boost::filesystem::path input_odb_dia();
 
     static boost::filesystem::path expected();
     static boost::filesystem::path expected_class_in_a_package_dia_xml();
@@ -120,8 +119,6 @@ public:
     static boost::filesystem::path expected_std_model_sml_xml();
     static boost::filesystem::path expected_boost_model_dia_xml();
     static boost::filesystem::path expected_boost_model_sml_xml();
-    static boost::filesystem::path expected_odb_dia_xml();
-    static boost::filesystem::path expected_odb_sml_xml();
 
     static boost::filesystem::path actual();
     static boost::filesystem::path actual_class_in_a_package_dia_xml();
@@ -161,8 +158,6 @@ public:
     static boost::filesystem::path actual_std_model_sml_xml();
     static boost::filesystem::path actual_boost_model_dia_xml();
     static boost::filesystem::path actual_boost_model_sml_xml();
-    static boost::filesystem::path actual_odb_dia_xml();
-    static boost::filesystem::path actual_odb_sml_xml();
 };
 
 } } }

@@ -520,12 +520,6 @@ BOOST_AUTO_TEST_CASE(entity_service_value_model_generates_expected_code) {
     BOOST_CHECK(check_code_generation(t));
 }
 
-BOOST_AUTO_TEST_CASE(odb_generates_expected_code) {
-    SETUP_TEST_LOG("odb_generates_expected_code");
-    const auto t(dia_sml::input_odb_dia());
-    BOOST_CHECK(check_code_generation(t));
-}
-
 BOOST_AUTO_TEST_CASE(package_without_name_model_throws) {
     SETUP_TEST_LOG("package_without_name_model_throws");
     const auto t(dia_sml::input_package_without_name_dia());

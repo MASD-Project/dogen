@@ -166,12 +166,4 @@ BOOST_AUTO_TEST_CASE(boost_model_dia_transforms_into_expected_sml) {
     BOOST_CHECK(test_dia_to_sml(input_path, expected_path, actual_path));
 }
 
-BOOST_AUTO_TEST_CASE(odb_dia_transforms_into_expected_sml) {
-    SETUP_TEST_LOG("odb_dia_transforms_into_expected_sml");
-    const auto input_path(dia_sml::expected_odb_dia_xml());
-    const auto actual_path(dia_sml::actual_odb_sml_xml());
-    const auto expected_path(dia_sml::expected_odb_sml_xml());
-    BOOST_CHECK(test_dia_to_sml(input_path, expected_path, actual_path));
-}
-
 BOOST_AUTO_TEST_SUITE_END()
