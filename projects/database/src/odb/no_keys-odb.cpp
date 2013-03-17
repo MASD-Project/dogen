@@ -10,7 +10,6 @@
 #include <cstring>  // std::memcpy
 
 #include <odb/schema-catalog-impl.hxx>
-#include <odb/details/shared-ptr.hxx>
 
 #include <odb/pgsql/traits.hxx>
 #include <odb/pgsql/database.hxx>
@@ -28,16 +27,16 @@ namespace odb
   // no_keys
   //
 
-  const char access::object_traits< ::dogen::database::no_keys >::
+  const char access::object_traits_impl< ::dogen::database::no_keys, id_pgsql >::
   persist_statement_name[] = "dogen_database_no_keys_persist";
 
-  const char access::object_traits< ::dogen::database::no_keys >::
+  const char access::object_traits_impl< ::dogen::database::no_keys, id_pgsql >::
   query_statement_name[] = "dogen_database_no_keys_query";
 
-  const char access::object_traits< ::dogen::database::no_keys >::
+  const char access::object_traits_impl< ::dogen::database::no_keys, id_pgsql >::
   erase_query_statement_name[] = "dogen_database_no_keys_erase_query";
 
-  const unsigned int access::object_traits< ::dogen::database::no_keys >::
+  const unsigned int access::object_traits_impl< ::dogen::database::no_keys, id_pgsql >::
   persist_statement_types[] =
   {
     pgsql::int4_oid,
@@ -46,7 +45,7 @@ namespace odb
     pgsql::timestamp_oid
   };
 
-  bool access::object_traits< ::dogen::database::no_keys >::
+  bool access::object_traits_impl< ::dogen::database::no_keys, id_pgsql >::
   grow (image_type& i, bool* t)
   {
     ODB_POTENTIALLY_UNUSED (i);
@@ -77,7 +76,7 @@ namespace odb
     return grew;
   }
 
-  void access::object_traits< ::dogen::database::no_keys >::
+  void access::object_traits_impl< ::dogen::database::no_keys, id_pgsql >::
   bind (pgsql::bind* b,
         image_type& i,
         pgsql::statement_kind sk)
@@ -119,7 +118,7 @@ namespace odb
     n++;
   }
 
-  bool access::object_traits< ::dogen::database::no_keys >::
+  bool access::object_traits_impl< ::dogen::database::no_keys, id_pgsql >::
   init (image_type& i, const object_type& o, pgsql::statement_kind sk)
   {
     ODB_POTENTIALLY_UNUSED (i);
@@ -196,7 +195,7 @@ namespace odb
     return grew;
   }
 
-  void access::object_traits< ::dogen::database::no_keys >::
+  void access::object_traits_impl< ::dogen::database::no_keys, id_pgsql >::
   init (object_type& o, const image_type& i, database* db)
   {
     ODB_POTENTIALLY_UNUSED (o);
@@ -263,7 +262,7 @@ namespace odb
     }
   }
 
-  const char access::object_traits< ::dogen::database::no_keys >::persist_statement[] =
+  const char access::object_traits_impl< ::dogen::database::no_keys, id_pgsql >::persist_statement[] =
   "INSERT INTO \"kitanda\".\"no_keys\" ("
   "\"prop_0\","
   "\"prop_1\","
@@ -271,7 +270,7 @@ namespace odb
   "\"prop_3\")"
   " VALUES ($1,$2,$3,$4)";
 
-  const char access::object_traits< ::dogen::database::no_keys >::query_statement[] =
+  const char access::object_traits_impl< ::dogen::database::no_keys, id_pgsql >::query_statement[] =
   "SELECT "
   "\"kitanda\".\"no_keys\".\"prop_0\","
   "\"kitanda\".\"no_keys\".\"prop_1\","
@@ -280,14 +279,14 @@ namespace odb
   " FROM \"kitanda\".\"no_keys\""
   " ";
 
-  const char access::object_traits< ::dogen::database::no_keys >::erase_query_statement[] =
+  const char access::object_traits_impl< ::dogen::database::no_keys, id_pgsql >::erase_query_statement[] =
   "DELETE FROM \"kitanda\".\"no_keys\""
   " ";
 
-  const char access::object_traits< ::dogen::database::no_keys >::table_name[] =
+  const char access::object_traits_impl< ::dogen::database::no_keys, id_pgsql >::table_name[] =
   "\"kitanda\".\"no_keys\"";
 
-  void access::object_traits< ::dogen::database::no_keys >::
+  void access::object_traits_impl< ::dogen::database::no_keys, id_pgsql >::
   persist (database& db, const object_type& obj)
   {
     ODB_POTENTIALLY_UNUSED (db);
@@ -326,8 +325,8 @@ namespace odb
               callback_event::post_persist);
   }
 
-  result< access::object_traits< ::dogen::database::no_keys >::object_type >
-  access::object_traits< ::dogen::database::no_keys >::
+  result< access::object_traits_impl< ::dogen::database::no_keys, id_pgsql >::object_type >
+  access::object_traits_impl< ::dogen::database::no_keys, id_pgsql >::
   query (database&, const query_base_type& q)
   {
     using namespace pgsql;
@@ -351,6 +350,7 @@ namespace odb
       imb.version++;
     }
 
+    q.init_parameters ();
     shared_ptr<select_statement> st (
       new (shared) select_statement (
         sts.connection (),
@@ -371,7 +371,7 @@ namespace odb
     return result<object_type> (r);
   }
 
-  unsigned long long access::object_traits< ::dogen::database::no_keys >::
+  unsigned long long access::object_traits_impl< ::dogen::database::no_keys, id_pgsql >::
   erase_query (database&, const query_base_type& q)
   {
     using namespace pgsql;
@@ -379,6 +379,7 @@ namespace odb
     pgsql::connection& conn (
       pgsql::transaction::current ().connection ());
 
+    q.init_parameters ();
     delete_statement st (
       conn,
       erase_query_statement_name,
@@ -390,7 +391,7 @@ namespace odb
     return st.execute ();
   }
 
-  bool access::object_traits< ::dogen::database::no_keys >::
+  bool access::object_traits_impl< ::dogen::database::no_keys, id_pgsql >::
   create_schema (database& db, unsigned short pass, bool drop)
   {
     ODB_POTENTIALLY_UNUSED (db);
@@ -429,8 +430,9 @@ namespace odb
 
   static const schema_catalog_entry
   schema_catalog_entry_dogen_database_no_keys_ (
+    id_pgsql,
     "",
-    &access::object_traits< ::dogen::database::no_keys >::create_schema);
+    &access::object_traits_impl< ::dogen::database::no_keys, id_pgsql >::create_schema);
 }
 
 #include <odb/post.hxx>

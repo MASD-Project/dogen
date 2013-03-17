@@ -10,7 +10,6 @@
 #include <cstring>  // std::memcpy
 
 #include <odb/schema-catalog-impl.hxx>
-#include <odb/details/shared-ptr.hxx>
 
 #include <odb/pgsql/traits.hxx>
 #include <odb/pgsql/database.hxx>
@@ -28,35 +27,35 @@ namespace odb
   // primary_key_2
   //
 
-  const char access::object_traits< ::dogen::database::primary_key_2 >::
+  const char access::object_traits_impl< ::dogen::database::primary_key_2, id_pgsql >::
   persist_statement_name[] = "dogen_database_primary_key_2_persist";
 
-  const char access::object_traits< ::dogen::database::primary_key_2 >::
+  const char access::object_traits_impl< ::dogen::database::primary_key_2, id_pgsql >::
   find_statement_name[] = "dogen_database_primary_key_2_find";
 
-  const char access::object_traits< ::dogen::database::primary_key_2 >::
+  const char access::object_traits_impl< ::dogen::database::primary_key_2, id_pgsql >::
   erase_statement_name[] = "dogen_database_primary_key_2_erase";
 
-  const char access::object_traits< ::dogen::database::primary_key_2 >::
+  const char access::object_traits_impl< ::dogen::database::primary_key_2, id_pgsql >::
   query_statement_name[] = "dogen_database_primary_key_2_query";
 
-  const char access::object_traits< ::dogen::database::primary_key_2 >::
+  const char access::object_traits_impl< ::dogen::database::primary_key_2, id_pgsql >::
   erase_query_statement_name[] = "dogen_database_primary_key_2_erase_query";
 
-  const unsigned int access::object_traits< ::dogen::database::primary_key_2 >::
+  const unsigned int access::object_traits_impl< ::dogen::database::primary_key_2, id_pgsql >::
   persist_statement_types[] =
   {
     pgsql::int4_oid
   };
 
-  const unsigned int access::object_traits< ::dogen::database::primary_key_2 >::
+  const unsigned int access::object_traits_impl< ::dogen::database::primary_key_2, id_pgsql >::
   find_statement_types[] =
   {
     pgsql::int4_oid
   };
 
-  access::object_traits< ::dogen::database::primary_key_2 >::id_type
-  access::object_traits< ::dogen::database::primary_key_2 >::
+  access::object_traits_impl< ::dogen::database::primary_key_2, id_pgsql >::id_type
+  access::object_traits_impl< ::dogen::database::primary_key_2, id_pgsql >::
   id (const image_type& i)
   {
     pgsql::database* db (0);
@@ -75,7 +74,7 @@ namespace odb
     return id;
   }
 
-  bool access::object_traits< ::dogen::database::primary_key_2 >::
+  bool access::object_traits_impl< ::dogen::database::primary_key_2, id_pgsql >::
   grow (image_type& i, bool* t)
   {
     ODB_POTENTIALLY_UNUSED (i);
@@ -90,7 +89,7 @@ namespace odb
     return grew;
   }
 
-  void access::object_traits< ::dogen::database::primary_key_2 >::
+  void access::object_traits_impl< ::dogen::database::primary_key_2, id_pgsql >::
   bind (pgsql::bind* b,
         image_type& i,
         pgsql::statement_kind sk)
@@ -112,7 +111,7 @@ namespace odb
     }
   }
 
-  void access::object_traits< ::dogen::database::primary_key_2 >::
+  void access::object_traits_impl< ::dogen::database::primary_key_2, id_pgsql >::
   bind (pgsql::bind* b, id_image_type& i)
   {
     std::size_t n (0);
@@ -121,7 +120,7 @@ namespace odb
     b[n].is_null = &i.id_null;
   }
 
-  bool access::object_traits< ::dogen::database::primary_key_2 >::
+  bool access::object_traits_impl< ::dogen::database::primary_key_2, id_pgsql >::
   init (image_type& i, const object_type& o, pgsql::statement_kind sk)
   {
     ODB_POTENTIALLY_UNUSED (i);
@@ -150,7 +149,7 @@ namespace odb
     return grew;
   }
 
-  void access::object_traits< ::dogen::database::primary_key_2 >::
+  void access::object_traits_impl< ::dogen::database::primary_key_2, id_pgsql >::
   init (object_type& o, const image_type& i, database* db)
   {
     ODB_POTENTIALLY_UNUSED (o);
@@ -173,7 +172,7 @@ namespace odb
     }
   }
 
-  void access::object_traits< ::dogen::database::primary_key_2 >::
+  void access::object_traits_impl< ::dogen::database::primary_key_2, id_pgsql >::
   init (id_image_type& i, const id_type& id)
   {
     {
@@ -186,42 +185,46 @@ namespace odb
     }
   }
 
-  struct access::object_traits< ::dogen::database::primary_key_2 >::container_statement_cache_type
+  struct access::object_traits_impl< ::dogen::database::primary_key_2, id_pgsql >::container_statement_cache_type
   {
-    container_statement_cache_type (pgsql::connection&)
+    container_statement_cache_type (
+      pgsql::connection&,
+      pgsql::binding&,
+      pgsql::native_binding&,
+      const unsigned int*)
     {
     }
   };
 
-  const char access::object_traits< ::dogen::database::primary_key_2 >::persist_statement[] =
+  const char access::object_traits_impl< ::dogen::database::primary_key_2, id_pgsql >::persist_statement[] =
   "INSERT INTO \"kitanda\".\"primary_key_2\" ("
   "\"prop_0\")"
   " VALUES ($1)";
 
-  const char access::object_traits< ::dogen::database::primary_key_2 >::find_statement[] =
+  const char access::object_traits_impl< ::dogen::database::primary_key_2, id_pgsql >::find_statement[] =
   "SELECT "
   "\"kitanda\".\"primary_key_2\".\"prop_0\""
   " FROM \"kitanda\".\"primary_key_2\""
   " WHERE \"kitanda\".\"primary_key_2\".\"prop_0\"=$1";
 
-  const char access::object_traits< ::dogen::database::primary_key_2 >::erase_statement[] =
+  const char access::object_traits_impl< ::dogen::database::primary_key_2, id_pgsql >::erase_statement[] =
   "DELETE FROM \"kitanda\".\"primary_key_2\""
   " WHERE \"prop_0\"=$1";
 
-  const char access::object_traits< ::dogen::database::primary_key_2 >::query_statement[] =
+  const char access::object_traits_impl< ::dogen::database::primary_key_2, id_pgsql >::query_statement[] =
   "SELECT "
   "\"kitanda\".\"primary_key_2\".\"prop_0\""
   " FROM \"kitanda\".\"primary_key_2\""
   " ";
 
-  const char access::object_traits< ::dogen::database::primary_key_2 >::erase_query_statement[] =
+  const char access::object_traits_impl< ::dogen::database::primary_key_2, id_pgsql >::erase_query_statement[] =
   "DELETE FROM \"kitanda\".\"primary_key_2\""
   " ";
 
-  const char access::object_traits< ::dogen::database::primary_key_2 >::table_name[] =
+  const char access::object_traits_impl< ::dogen::database::primary_key_2, id_pgsql >::table_name[] =
   "\"kitanda\".\"primary_key_2\"";
 
-  void access::object_traits< ::dogen::database::primary_key_2 >::
+  void access::object_traits_impl< ::dogen::database::primary_key_2, id_pgsql >::
   persist (database& db, const object_type& obj)
   {
     ODB_POTENTIALLY_UNUSED (db);
@@ -260,7 +263,7 @@ namespace odb
               callback_event::post_persist);
   }
 
-  void access::object_traits< ::dogen::database::primary_key_2 >::
+  void access::object_traits_impl< ::dogen::database::primary_key_2, id_pgsql >::
   update (database& db, const object_type& obj)
   {
     ODB_POTENTIALLY_UNUSED (db);
@@ -281,9 +284,10 @@ namespace odb
       throw object_not_persistent ();
 
     callback (db, obj, callback_event::post_update);
+    pointer_cache_traits::update (db, obj);
   }
 
-  void access::object_traits< ::dogen::database::primary_key_2 >::
+  void access::object_traits_impl< ::dogen::database::primary_key_2, id_pgsql >::
   erase (database& db, const id_type& id)
   {
     using namespace pgsql;
@@ -312,8 +316,8 @@ namespace odb
     pointer_cache_traits::erase (db, id);
   }
 
-  access::object_traits< ::dogen::database::primary_key_2 >::pointer_type
-  access::object_traits< ::dogen::database::primary_key_2 >::
+  access::object_traits_impl< ::dogen::database::primary_key_2, id_pgsql >::pointer_type
+  access::object_traits_impl< ::dogen::database::primary_key_2, id_pgsql >::
   find (database& db, const id_type& id)
   {
     using namespace pgsql;
@@ -358,6 +362,7 @@ namespace odb
       sts.load_delayed ();
       l.unlock ();
       callback (db, obj, callback_event::post_load);
+      pointer_cache_traits::load (ig.position ());
     }
     else
       sts.delay_load (id, obj, ig.position ());
@@ -367,7 +372,7 @@ namespace odb
     return p;
   }
 
-  bool access::object_traits< ::dogen::database::primary_key_2 >::
+  bool access::object_traits_impl< ::dogen::database::primary_key_2, id_pgsql >::
   find (database& db, const id_type& id, object_type& obj)
   {
     using namespace pgsql;
@@ -385,8 +390,9 @@ namespace odb
     select_statement& st (sts.find_statement ());
     ODB_POTENTIALLY_UNUSED (st);
 
-    reference_cache_traits::insert_guard ig (
+    reference_cache_traits::position_type pos (
       reference_cache_traits::insert (db, id, obj));
+    reference_cache_traits::insert_guard ig (pos);
 
     callback (db, obj, callback_event::pre_load);
     init (obj, sts.image (), &db);
@@ -394,11 +400,12 @@ namespace odb
     sts.load_delayed ();
     l.unlock ();
     callback (db, obj, callback_event::post_load);
+    reference_cache_traits::load (pos);
     ig.release ();
     return true;
   }
 
-  bool access::object_traits< ::dogen::database::primary_key_2 >::
+  bool access::object_traits_impl< ::dogen::database::primary_key_2, id_pgsql >::
   reload (database& db, object_type& obj)
   {
     using namespace pgsql;
@@ -428,7 +435,7 @@ namespace odb
     return true;
   }
 
-  bool access::object_traits< ::dogen::database::primary_key_2 >::
+  bool access::object_traits_impl< ::dogen::database::primary_key_2, id_pgsql >::
   find_ (statements_type& sts, const id_type* id)
   {
     using namespace pgsql;
@@ -463,8 +470,8 @@ namespace odb
     return r != select_statement::no_data;
   }
 
-  result< access::object_traits< ::dogen::database::primary_key_2 >::object_type >
-  access::object_traits< ::dogen::database::primary_key_2 >::
+  result< access::object_traits_impl< ::dogen::database::primary_key_2, id_pgsql >::object_type >
+  access::object_traits_impl< ::dogen::database::primary_key_2, id_pgsql >::
   query (database&, const query_base_type& q)
   {
     using namespace pgsql;
@@ -488,6 +495,7 @@ namespace odb
       imb.version++;
     }
 
+    q.init_parameters ();
     shared_ptr<select_statement> st (
       new (shared) select_statement (
         sts.connection (),
@@ -508,7 +516,7 @@ namespace odb
     return result<object_type> (r);
   }
 
-  unsigned long long access::object_traits< ::dogen::database::primary_key_2 >::
+  unsigned long long access::object_traits_impl< ::dogen::database::primary_key_2, id_pgsql >::
   erase_query (database&, const query_base_type& q)
   {
     using namespace pgsql;
@@ -516,6 +524,7 @@ namespace odb
     pgsql::connection& conn (
       pgsql::transaction::current ().connection ());
 
+    q.init_parameters ();
     delete_statement st (
       conn,
       erase_query_statement_name,
@@ -527,7 +536,7 @@ namespace odb
     return st.execute ();
   }
 
-  bool access::object_traits< ::dogen::database::primary_key_2 >::
+  bool access::object_traits_impl< ::dogen::database::primary_key_2, id_pgsql >::
   create_schema (database& db, unsigned short pass, bool drop)
   {
     ODB_POTENTIALLY_UNUSED (db);
@@ -563,8 +572,9 @@ namespace odb
 
   static const schema_catalog_entry
   schema_catalog_entry_dogen_database_primary_key_2_ (
+    id_pgsql,
     "",
-    &access::object_traits< ::dogen::database::primary_key_2 >::create_schema);
+    &access::object_traits_impl< ::dogen::database::primary_key_2, id_pgsql >::create_schema);
 }
 
 #include <odb/post.hxx>

@@ -33,3 +33,9 @@ namespace odb
   }
 }
 
+namespace odb
+{
+  // no_keys
+  //
+}
+

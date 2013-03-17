@@ -17,15 +17,6 @@ namespace odb
 
   inline
   void access::object_traits< ::dogen::database::primary_key_2 >::
-  erase (database& db, const object_type& obj)
-  {
-    callback (db, obj, callback_event::pre_erase);
-    erase (db, id (obj));
-    callback (db, obj, callback_event::post_erase);
-  }
-
-  inline
-  void access::object_traits< ::dogen::database::primary_key_2 >::
   callback (database& db, object_type& x, callback_event e)
   {
     ODB_POTENTIALLY_UNUSED (db);
@@ -41,9 +32,24 @@ namespace odb
     ODB_POTENTIALLY_UNUSED (x);
     ODB_POTENTIALLY_UNUSED (e);
   }
+}
+
+namespace odb
+{
+  // primary_key_2
+  //
 
   inline
-  void access::object_traits< ::dogen::database::primary_key_2 >::
+  void access::object_traits_impl< ::dogen::database::primary_key_2, id_pgsql >::
+  erase (database& db, const object_type& obj)
+  {
+    callback (db, obj, callback_event::pre_erase);
+    erase (db, id (obj));
+    callback (db, obj, callback_event::post_erase);
+  }
+
+  inline
+  void access::object_traits_impl< ::dogen::database::primary_key_2, id_pgsql >::
   load_ (statements_type&, object_type&)
   {
   }

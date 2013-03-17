@@ -7,7 +7,7 @@
 
 #include <odb/version.hxx>
 
-#if (ODB_VERSION != 20100UL)
+#if (ODB_VERSION != 20200UL)
 #error ODB runtime version mismatch
 #endif
 
@@ -16,7 +16,7 @@
 // Begin prologue.
 //
 #include <odb/boost/version.hxx>
-#if ODB_BOOST_VERSION != 2010000 // 2.1.0
+#if ODB_BOOST_VERSION != 2020000 // 2.2.0
 #  error ODB and C++ compilers see different libodb-boost interface versions
 #endif
 #include <boost/shared_ptr.hpp>
@@ -50,14 +50,8 @@
 #include <odb/result.hxx>
 #include <odb/simple-object-result.hxx>
 
-#include <odb/details/buffer.hxx>
 #include <odb/details/unused.hxx>
-
-#include <odb/pgsql/version.hxx>
-#include <odb/pgsql/forward.hxx>
-#include <odb/pgsql/binding.hxx>
-#include <odb/pgsql/pgsql-types.hxx>
-#include <odb/pgsql/query.hxx>
+#include <odb/details/shared-ptr.hxx>
 
 namespace odb
 {
@@ -69,8 +63,55 @@ namespace odb
     static const class_kind kind = class_object;
   };
 
+  template <>
+  class access::object_traits< ::dogen::database::primary_key >
+  {
+    public:
+    typedef ::dogen::database::primary_key object_type;
+    typedef ::boost::shared_ptr< ::dogen::database::primary_key > pointer_type;
+    typedef odb::pointer_traits<pointer_type> pointer_traits;
+
+    static const bool polymorphic = false;
+
+    typedef unsigned int id_type;
+
+    static const bool auto_id = false;
+
+    static const bool abstract = false;
+
+    static id_type
+    id (const object_type&);
+
+    typedef
+    no_op_pointer_cache_traits<pointer_type>
+    pointer_cache_traits;
+
+    typedef
+    no_op_reference_cache_traits<object_type>
+    reference_cache_traits;
+
+    static void
+    callback (database&, object_type&, callback_event);
+
+    static void
+    callback (database&, const object_type&, callback_event);
+  };
+}
+
+#include <odb/details/buffer.hxx>
+
+#include <odb/pgsql/version.hxx>
+#include <odb/pgsql/forward.hxx>
+#include <odb/pgsql/binding.hxx>
+#include <odb/pgsql/pgsql-types.hxx>
+#include <odb/pgsql/query.hxx>
+
+namespace odb
+{
+  // primary_key
+  //
   template <typename A>
-  struct query_columns< ::dogen::database::primary_key, A >
+  struct query_columns< ::dogen::database::primary_key, id_pgsql, A >
   {
     // prop_0
     //
@@ -98,34 +139,26 @@ namespace odb
   };
 
   template <typename A>
-  const typename query_columns< ::dogen::database::primary_key, A >::prop_0_type_
-  query_columns< ::dogen::database::primary_key, A >::
+  const typename query_columns< ::dogen::database::primary_key, id_pgsql, A >::prop_0_type_
+  query_columns< ::dogen::database::primary_key, id_pgsql, A >::
   prop_0 (A::table_name, "\"prop_0\"", 0);
 
   template <typename A>
-  const typename query_columns< ::dogen::database::primary_key, A >::prop_1_type_
-  query_columns< ::dogen::database::primary_key, A >::
+  const typename query_columns< ::dogen::database::primary_key, id_pgsql, A >::prop_1_type_
+  query_columns< ::dogen::database::primary_key, id_pgsql, A >::
   prop_1 (A::table_name, "\"prop_1\"", 0);
 
   template <typename A>
-  struct pointer_query_columns< ::dogen::database::primary_key, A >:
-    query_columns< ::dogen::database::primary_key, A >
+  struct pointer_query_columns< ::dogen::database::primary_key, id_pgsql, A >:
+    query_columns< ::dogen::database::primary_key, id_pgsql, A >
   {
   };
 
   template <>
-  class access::object_traits< ::dogen::database::primary_key >
+  class access::object_traits_impl< ::dogen::database::primary_key, id_pgsql >:
+    public access::object_traits< ::dogen::database::primary_key >
   {
     public:
-    typedef ::dogen::database::primary_key object_type;
-    typedef ::boost::shared_ptr< ::dogen::database::primary_key > pointer_type;
-    typedef odb::pointer_traits<pointer_type> pointer_traits;
-
-    static const bool polymorphic = false;
-
-    typedef unsigned int id_type;
-    static const bool auto_id = false;
-
     struct id_image_type
     {
       int id_value;
@@ -133,8 +166,6 @@ namespace odb
 
       std::size_t version;
     };
-
-    static const bool abstract = false;
 
     struct image_type
     {
@@ -152,8 +183,7 @@ namespace odb
       std::size_t version;
     };
 
-    static id_type
-    id (const object_type&);
+    using object_traits<object_type>::id;
 
     static id_type
     id (const image_type&);
@@ -178,16 +208,9 @@ namespace odb
     static void
     init (id_image_type&, const id_type&);
 
-    typedef
-    odb::no_op_pointer_cache_traits<pointer_type>
-    pointer_cache_traits;
-    typedef
-    odb::no_op_reference_cache_traits<object_type>
-    reference_cache_traits;
-
     typedef pgsql::object_statements<object_type> statements_type;
 
-    typedef pgsql::query query_base_type;
+    typedef pgsql::query_base query_base_type;
 
     struct container_statement_cache_type;
 
@@ -205,12 +228,6 @@ namespace odb
     static const char erase_query_statement[];
 
     static const char table_name[];
-
-    static void
-    callback (database&, object_type&, callback_event);
-
-    static void
-    callback (database&, const object_type&, callback_event);
 
     static void
     persist (database&, const object_type&);
@@ -260,6 +277,15 @@ namespace odb
     static void
     load_ (statements_type&, object_type&);
   };
+
+  template <>
+  class access::object_traits_impl< ::dogen::database::primary_key, id_common >:
+    public access::object_traits_impl< ::dogen::database::primary_key, id_pgsql >
+  {
+  };
+
+  // primary_key
+  //
 }
 
 #include "dogen/database/odb/primary_key-odb.ixx"
