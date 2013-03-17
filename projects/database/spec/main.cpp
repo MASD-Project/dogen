@@ -24,6 +24,10 @@
 #include <boost/test/included/unit_test.hpp>
 #include <boost/test/unit_test_monitor.hpp>
 #include <boost/exception/diagnostic_information.hpp>
+#include <odb/database.hxx>
+#include <odb/transaction.hxx>
+#include <odb/pgsql/database.hxx>
+#include <odb/schema-catalog.hxx>
 
 namespace  {
 
@@ -41,6 +45,17 @@ struct exception_fixture {
     }
 };
 
+struct create_db_fixture {
+    create_db_fixture() {
+        std::unique_ptr<odb::database> db(
+            new odb::pgsql::database("build", "build", "sanzala", "localhost"));
+        odb::transaction t(db->begin());
+        odb::schema_catalog::create_schema(*db);
+        t.commit();
+    }
+};
+
 }
 
 BOOST_GLOBAL_FIXTURE(exception_fixture)
+BOOST_GLOBAL_FIXTURE(create_db_fixture)

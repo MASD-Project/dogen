@@ -31,6 +31,7 @@
 #include "dogen/database/types/all.hpp"
 #include "dogen/database/io/all_io.hpp"
 #include "dogen/database/test_data/all_td.hpp"
+#include "dogen/database/odb/no_keys_2-odb.hpp"
 #include "dogen/database/odb/no_keys-odb.hpp"
 
 using namespace odb::core;
@@ -54,13 +55,6 @@ BOOST_AUTO_TEST_CASE(inserting_no_keys_instances_results_in_expected_rows_in_tab
             "sanzala",
             "localhost"
             ));
-
-    {
-        odb::transaction t(db->begin());
-        odb::schema_catalog::create_schema(*db);
-        BOOST_LOG_SEV(lg, debug) << "Generating schema.";
-
-    }
 
     {
         odb::transaction t(db->begin());
@@ -91,6 +85,61 @@ BOOST_AUTO_TEST_CASE(inserting_no_keys_instances_results_in_expected_rows_in_tab
         typedef odb::result<dogen::database::no_keys> result;
 
         result r(db->query<dogen::database::no_keys>());
+        for (auto i(r.begin ()); i != r.end (); ++i) {
+            BOOST_LOG_SEV(lg, debug) << "Actual: " << *i;
+            bool found(false);
+            for (const auto e : v) {
+                if (e == *i) {
+                    found = true;
+                    BOOST_LOG_SEV(lg, debug) << "Found actual.";
+                    continue;
+                }
+            }
+            BOOST_CHECK(found);
+        }
+    }
+}
+
+BOOST_AUTO_TEST_CASE(inserting_no_keys_2_instances_results_in_expected_rows_in_table) {
+    SETUP_TEST_LOG_SOURCE("inserting_no_keys_2_instances_results_in_expected_rows_in_table");
+
+    std::unique_ptr<odb::database> db (
+        new odb::pgsql::database (
+            "build",
+            "build",
+            "sanzala",
+            "localhost"
+            ));
+
+    {
+        odb::transaction t(db->begin());
+        const auto deleted_rows(db->erase_query<dogen::database::no_keys_2>());
+        BOOST_LOG_SEV(lg, debug) << "Deleted existing rows. Total: "
+                                 << deleted_rows;
+        t.commit();
+    }
+
+    std::vector<dogen::database::no_keys_2> v;
+    const unsigned int how_many(5);
+    v.resize(how_many);
+    {
+        odb::transaction t(db->begin());
+        dogen::database::no_keys_2_generator sequence;
+        for (unsigned int i(0); i < how_many; ++i) {
+            v.push_back(sequence());
+            BOOST_LOG_SEV(lg, debug) << "Created: " << v.back();
+            db->persist(v.back());
+            BOOST_LOG_SEV(lg, debug) << "Object has been persisted";
+        }
+        t.commit();
+    }
+
+    {
+        transaction t(db->begin());
+        typedef odb::query<dogen::database::no_keys_2> query;
+        typedef odb::result<dogen::database::no_keys_2> result;
+
+        result r(db->query<dogen::database::no_keys_2>());
         for (auto i(r.begin ()); i != r.end (); ++i) {
             BOOST_LOG_SEV(lg, debug) << "Actual: " << *i;
             bool found(false);

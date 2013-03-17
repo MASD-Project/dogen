@@ -291,7 +291,8 @@
         <dia:string>##</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##DOGEN ODB_PRAGMA=no_id#</dia:string>
+        <dia:string>##DOGEN ODB_PRAGMA=no_id
+#DOGEN ODB_PRAGMA=schema("kitanda")#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
