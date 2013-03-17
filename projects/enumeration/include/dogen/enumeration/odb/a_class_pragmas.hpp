@@ -25,6 +25,11 @@
 #pragma once
 #endif
 
+#include "dogen/enumeration/odb/book_types_pragmas.hpp"
+#include "dogen/enumeration/odb/colour_types_pragmas.hpp"
+#include "dogen/enumeration/odb/pkg1/shape_types_pragmas.hpp"
+#include "dogen/enumeration/types/a_class.hpp"
+
 // class has no ODB pragmas defined.
 
 #endif

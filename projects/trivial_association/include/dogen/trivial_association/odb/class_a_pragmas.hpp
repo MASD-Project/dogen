@@ -25,6 +25,8 @@
 #pragma once
 #endif
 
+#include "dogen/trivial_association/types/class_a.hpp"
+
 // class has no ODB pragmas defined.
 
 #endif

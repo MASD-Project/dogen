@@ -25,6 +25,9 @@
 #pragma once
 #endif
 
+#include "dogen/trivial_inheritance/odb/third_child_with_members_pragmas.hpp"
+#include "dogen/trivial_inheritance/types/child_of_a_child2.hpp"
+
 // class has no ODB pragmas defined.
 
 #endif

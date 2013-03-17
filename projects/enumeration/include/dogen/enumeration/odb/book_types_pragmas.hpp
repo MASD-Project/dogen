@@ -25,6 +25,8 @@
 #pragma once
 #endif
 
+#include "dogen/enumeration/types/book_types.hpp"
+
 namespace dogen {
 namespace enumeration {
 

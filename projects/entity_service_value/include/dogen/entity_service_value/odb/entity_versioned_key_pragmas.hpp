@@ -25,6 +25,8 @@
 #pragma once
 #endif
 
+#include "dogen/entity_service_value/types/entity_versioned_key.hpp"
+
 // class has no ODB pragmas defined.
 
 #endif

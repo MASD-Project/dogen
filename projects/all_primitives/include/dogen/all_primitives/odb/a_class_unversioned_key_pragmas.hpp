@@ -25,6 +25,8 @@
 #pragma once
 #endif
 
+#include "dogen/all_primitives/types/a_class_unversioned_key.hpp"
+
 // class has no ODB pragmas defined.
 
 #endif

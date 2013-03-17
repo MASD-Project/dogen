@@ -25,6 +25,8 @@
 #pragma once
 #endif
 
+#include "dogen/comments/types/multi_line.hpp"
+
 // class has no ODB pragmas defined.
 
 #endif

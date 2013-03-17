@@ -25,6 +25,8 @@
 #pragma once
 #endif
 
+#include "dogen/enumeration/types/pkg1/shape_types.hpp"
+
 namespace dogen {
 namespace enumeration {
 namespace pkg1 {

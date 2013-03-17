@@ -25,6 +25,8 @@
 #pragma once
 #endif
 
+#include "dogen/trivial_inheritance/types/pkg2/parent.hpp"
+
 // class has no ODB pragmas defined.
 
 #endif

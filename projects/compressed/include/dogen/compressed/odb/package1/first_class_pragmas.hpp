@@ -25,6 +25,8 @@
 #pragma once
 #endif
 
+#include "dogen/compressed/types/package1/first_class.hpp"
+
 // class has no ODB pragmas defined.
 
 #endif

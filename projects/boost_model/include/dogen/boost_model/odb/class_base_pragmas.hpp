@@ -25,6 +25,8 @@
 #pragma once
 #endif
 
+#include "dogen/boost_model/types/class_base.hpp"
+
 // class has no ODB pragmas defined.
 
 #endif
