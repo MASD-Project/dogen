@@ -55,7 +55,7 @@ BOOST_AUTO_TEST_CASE(inserting_no_keys_instances_results_in_expected_rows_in_tab
         new odb::pgsql::database (
             "build",
             "build",
-            "sanzala",
+            "musseque",
             "localhost"
             ));
 
@@ -110,7 +110,7 @@ BOOST_AUTO_TEST_CASE(inserting_no_keys_2_instances_results_in_expected_rows_in_t
         new odb::pgsql::database (
             "build",
             "build",
-            "sanzala",
+            "musseque",
             "localhost"
             ));
 
@@ -165,7 +165,7 @@ BOOST_AUTO_TEST_CASE(inserting_primary_key_objects_results_in_unique_rows) {
         new odb::pgsql::database (
             "build",
             "build",
-            "sanzala",
+            "musseque",
             "localhost"
             ));
 
@@ -230,7 +230,7 @@ BOOST_AUTO_TEST_CASE(inserting_foreign_key_objects_requires_other_side_to_exist)
         new odb::pgsql::database (
             "build",
             "build",
-            "sanzala",
+            "musseque",
             "localhost"
             ));
 
