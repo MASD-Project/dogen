@@ -140,10 +140,9 @@ class_declaration(const sml::category_types ct, const class_view_model& vm) {
     using utility::exception::invalid_enum_value;
     if (ct == sml::category_types::versioned_key ||
         ct == sml::category_types::unversioned_key) {
-        const bool is_versioned(ct == sml::category_types::versioned_key);
         cpp_key_class_declaration
-            f(stream_, disable_complete_constructor_, is_versioned,
-                disable_io_, disable_serialization_);
+            f(stream_, disable_complete_constructor_, disable_io_,
+                disable_serialization_);
         f.format(vm);
         return;
     } else if (ct == sml::category_types::user_defined) {

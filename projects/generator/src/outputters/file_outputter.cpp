@@ -61,8 +61,8 @@ namespace dogen {
 namespace generator {
 namespace outputters {
 
-file_outputter::file_outputter(bool verbose, bool force_write)
-    : verbose_(verbose), force_write_(force_write) {}
+file_outputter::file_outputter(bool force_write)
+    : force_write_(force_write) {}
 
 void file_outputter::
 log_not_writing_file(boost::filesystem::path path) const {

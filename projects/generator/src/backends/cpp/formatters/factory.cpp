@@ -159,7 +159,7 @@ factory::create(std::ostream& s, config::cpp_facet_types ft, cpp_file_types flt,
         return create_main_formatter(s, ft, flt);
         break;
     case cpp_aspect_types::includers:
-        return facet_includer::create(s, ft);
+        return facet_includer::create(s);
         break;
     case cpp_aspect_types::forward_decls:
         return forward_declarations_header::create(s);

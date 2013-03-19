@@ -48,7 +48,7 @@ void cpp_includes::format(std::list<std::string> v, bool is_system) {
     v.sort();
 
     // FIXME: hacks for headers that must be last
-    const boost_model_helper boost_;
+    boost_model_helper boost_;
     const auto gd(boost_.include(boost_types::serialization_gregorian_date));
     const auto i(std::find(v.begin(), v.end(), gd));
     if (i != v.end())

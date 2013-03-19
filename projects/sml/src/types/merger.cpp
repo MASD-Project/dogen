@@ -53,7 +53,7 @@ typedef boost::error_info<struct tag_errmsg, std::string> errmsg_info;
 namespace dogen {
 namespace sml {
 
-merger::merger(const bool verbose) : verbose_(verbose), has_target_(false) { }
+merger::merger() : has_target_(false) { }
 
 void merger::resolve_parent(const pod& pod) {
     const auto pods(merged_model_.pods());

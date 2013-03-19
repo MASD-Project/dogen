@@ -94,10 +94,8 @@ dia_to_sml(const dia::diagram& diagram, const std::string& model_name,
       package_transformer_(model_name_, external_package_path_, verbose_),
       pod_transformer_(model_name_, external_package_path_, is_target_,
           verbose_),
-      enumeration_transformer_(model_name_, external_package_path_, is_target_,
-          verbose_),
-      exception_transformer_(model_name_, external_package_path_, is_target_,
-          verbose_) {
+      enumeration_transformer_(model_name_, external_package_path_, is_target_),
+      exception_transformer_(model_name_, external_package_path_, is_target_) {
 
     BOOST_LOG_SEV(lg, debug) << "Initialised with configuration:"
                              << " model_name: " << model_name_

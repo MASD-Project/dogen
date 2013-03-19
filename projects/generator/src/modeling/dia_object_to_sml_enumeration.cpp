@@ -200,9 +200,9 @@ transform_string_attribute(const dogen::dia::attribute& a) const {
 dia_object_to_sml_enumeration::
 dia_object_to_sml_enumeration(const std::string& model_name,
     const std::list<std::string>& external_package_path,
-    bool is_target, bool verbose)
+    bool is_target)
     : model_name_(model_name), external_package_path_(external_package_path),
-      is_target_(is_target), verbose_(verbose) { }
+      is_target_(is_target) { }
 
 bool dia_object_to_sml_enumeration::is_processable(const dia::object& o) const {
     using dogen::dia::object_types;

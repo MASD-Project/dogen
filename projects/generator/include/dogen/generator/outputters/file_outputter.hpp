@@ -42,7 +42,7 @@ public:
     file_outputter& operator=(const file_outputter&) = default;
 
 public:
-    file_outputter(bool verbose, bool force_write);
+    explicit file_outputter(bool force_write);
     virtual ~file_outputter() noexcept {}
 
 private:
@@ -79,7 +79,6 @@ public:
     void output(outputter::value_type value) const override;
 
 private:
-    const bool verbose_;
     const bool force_write_;
 };
 

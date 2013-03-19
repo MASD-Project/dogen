@@ -49,7 +49,7 @@ public:
 public:
     dia_object_to_sml_exception(const std::string& model_name,
         const std::list<std::string>& external_package_path,
-        bool is_target, bool verbose);
+        bool is_target);
 
 private:
     sml::qname transform_qname(const dia::attribute& a,
@@ -69,7 +69,6 @@ private:
     const std::string model_name_;
     const std::list<std::string> external_package_path_;
     const bool is_target_;
-    const bool verbose_;
     std::list<dia::object> objects_;
     std::unordered_map<std::string, sml::package> packages_;
 };

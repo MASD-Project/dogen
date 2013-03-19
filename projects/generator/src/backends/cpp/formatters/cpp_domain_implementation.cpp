@@ -181,10 +181,8 @@ class_implementation(cpp_aspect_types at, const sml::category_types ct,
     if (at == cpp_aspect_types::main) {
         if (ct == sml::category_types::versioned_key ||
             ct == sml::category_types::unversioned_key) {
-            const bool is_versioned(ct == sml::category_types::versioned_key);
             cpp_key_class_implementation
-                f(stream_, is_versioned, disable_complete_constructor_,
-                    disable_io_);
+                f(stream_, disable_complete_constructor_, disable_io_);
             f.format(vm);
             return;
         } else if (ct == sml::category_types::user_defined) {

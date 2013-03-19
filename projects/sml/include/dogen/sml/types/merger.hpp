@@ -37,14 +37,13 @@ namespace sml {
 
 class merger {
 public:
-    merger() = delete;
     merger(const merger&) = default;
     ~merger() = default;
     merger(merger&&) = default;
     merger& operator=(const merger&) = default;
 
 public:
-    explicit merger(const bool verbose);
+    merger();
 
 private:
     void resolve_partial_type(nested_qname& t) const;
@@ -65,7 +64,6 @@ private:
 private:
     models_type models_;
     model merged_model_;
-    const bool verbose_;
     bool has_target_;
     std::list<std::string> external_package_path_;
 };

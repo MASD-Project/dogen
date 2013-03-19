@@ -40,13 +40,12 @@ public:
     typedef view_models::file_view_model file_view_model;
 
 public:
-    null_formatter() = delete;
+    null_formatter() = default;
     null_formatter(const null_formatter&) = default;
     null_formatter(null_formatter&&) = default;
     null_formatter& operator=(const null_formatter&) = default;
 
 public:
-    explicit null_formatter(std::ostream& stream);
     virtual ~null_formatter() noexcept {}
 
 public:
@@ -54,9 +53,6 @@ public:
 
 public:
     virtual void format(const file_view_model& vm) override;
-
-private:
-    std::ostream& stream_;
 };
 
 } } } } }

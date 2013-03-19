@@ -47,7 +47,7 @@ public:
 
 public:
     cpp_key_class_implementation(std::ostream& stream,
-        bool is_versioned, bool disable_complete_constructor, bool disable_io);
+        bool disable_complete_constructor, bool disable_io);
     virtual ~cpp_key_class_implementation() noexcept {}
 
 private:
@@ -57,7 +57,6 @@ public:
     virtual void format(const class_view_model& vm) override;
 
 private:
-    const bool is_versioned_;
     const bool disable_complete_constructor_;
     const bool disable_io_;
 };

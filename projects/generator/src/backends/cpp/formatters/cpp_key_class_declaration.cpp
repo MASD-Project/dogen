@@ -29,11 +29,11 @@ namespace formatters {
 
 cpp_key_class_declaration::
 cpp_key_class_declaration(std::ostream& stream,
-    const bool disable_complete_constructor, const bool is_versioned,
-    const bool disable_io, const bool disable_serialization)
+    const bool disable_complete_constructor, const bool disable_io,
+    const bool disable_serialization)
     : cpp_class_declaration(stream, disable_serialization),
       disable_complete_constructor_(disable_complete_constructor),
-      is_versioned_(is_versioned), disable_io_(disable_io) {}
+      disable_io_(disable_io) {}
 
 void cpp_key_class_declaration::
 hand_crafted_constructors(const class_view_model& vm) {

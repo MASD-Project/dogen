@@ -43,9 +43,7 @@ factory::production_type factory::create() const {
     production_type r;
 
     if (settings_.output_to_file()) {
-        outputter::ptr o(new file_outputter(
-                settings_.verbose(),
-                settings_.force_write()));
+        outputter::ptr o(new file_outputter(settings_.force_write()));
         r.push_back(o);
     } else
         log_output_disabled(file_outputter::outputter_name());

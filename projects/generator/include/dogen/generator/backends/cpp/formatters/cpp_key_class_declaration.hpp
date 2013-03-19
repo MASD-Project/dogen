@@ -48,7 +48,7 @@ public:
 
 public:
     cpp_key_class_declaration(std::ostream& stream,
-        const bool disable_complete_constructor, const bool is_versioned,
+        const bool disable_complete_constructor,
         const bool disable_io, const bool disable_serialization);
     virtual ~cpp_key_class_declaration() noexcept {}
 
@@ -60,7 +60,6 @@ public:
 
 private:
     const bool disable_complete_constructor_;
-    const bool is_versioned_;
     const bool disable_io_;
 };
 
