@@ -76,3 +76,13 @@
    fun:_ZN5boost12_GLOBAL__N_125make_external_thread_dataEv
    ...
 }
+
+{
+   postgres_ssl
+   Memcheck:Leak
+   ...
+   PQconnectPoll
+   ...
+   PQconnectdb
+   ...
+}
