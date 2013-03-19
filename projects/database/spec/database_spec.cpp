@@ -18,13 +18,14 @@
  * MA 02110-1301, USA.
  *
  */
+#include <algorithm>
 #include <boost/test/unit_test.hpp>
 #include <odb/database.hxx>
 #include <odb/transaction.hxx>
 #include <odb/pgsql/database.hxx>
 #include <odb/schema-catalog.hxx>
 #include "dogen/utility/test/asserter.hpp"
-#include "dogen/utility/io/list_io.hpp"
+#include "dogen/utility/io/vector_io.hpp"
 #include "dogen/utility/test_data/validating_resolver.hpp"
 #include "dogen/utility/test_data/tds_test_good.hpp"
 #include "dogen/utility/test/logging.hpp"
@@ -44,6 +45,36 @@ namespace  {
 const std::string test_suite("database_spec");
 const std::string test_module("database");
 
+odb::database* create_db() {
+    return new odb::pgsql::database ("build", "build", "musseque","localhost");
+}
+
+template<typename T>
+long long delete_rows(odb::database& db) {
+    odb::transaction t(db.begin());
+    const auto r(db.erase_query<T>());
+    t.commit();
+    return r;
+}
+
+template<typename Sequence>
+std::vector<typename Sequence::result_type>
+generate(const unsigned int how_many) {
+    std::vector<typename Sequence::result_type> r;
+    r.reserve(how_many);
+    Sequence sequence;
+    std::generate_n(std::back_inserter(r), how_many, sequence);
+    return r;
+}
+
+template<typename T>
+void persist(odb::database& db, const std::vector<T>& v) {
+    odb::transaction t(db.begin());
+    for (const auto e : v)
+        db.persist(e);
+    t.commit();
+}
+
 }
 
 BOOST_AUTO_TEST_SUITE(database)
@@ -51,36 +82,14 @@ BOOST_AUTO_TEST_SUITE(database)
 BOOST_AUTO_TEST_CASE(inserting_no_keys_instances_results_in_expected_rows_in_table) {
     SETUP_TEST_LOG_SOURCE("inserting_no_keys_instances_results_in_expected_rows_in_table");
 
-    std::unique_ptr<odb::database> db (
-        new odb::pgsql::database (
-            "build",
-            "build",
-            "musseque",
-            "localhost"
-            ));
+    std::unique_ptr<odb::database> db(create_db());
+    const auto del_rows(delete_rows<dogen::database::no_keys>(*db));
+    BOOST_LOG_SEV(lg, debug) << "Deleted existing rows. Total: " << del_rows;
 
-    {
-        odb::transaction t(db->begin());
-        const auto deleted_rows(db->erase_query<dogen::database::no_keys>());
-        BOOST_LOG_SEV(lg, debug) << "Deleted existing rows. Total: "
-                                 << deleted_rows;
-        t.commit();
-    }
-
-    std::vector<dogen::database::no_keys> v;
     const unsigned int how_many(5);
-    v.reserve(how_many);
-    {
-        odb::transaction t(db->begin());
-        dogen::database::no_keys_generator sequence;
-        for (unsigned int i(0); i < how_many; ++i) {
-            v.push_back(sequence());
-            BOOST_LOG_SEV(lg, debug) << "Created: " << v.back();
-            db->persist(v.back());
-            BOOST_LOG_SEV(lg, debug) << "Object has been persisted";
-        }
-        t.commit();
-    }
+    const auto v(generate<dogen::database::no_keys_generator>(how_many));
+    persist(*db, v);
+    BOOST_LOG_SEV(lg, debug) << "Persisted: " << v;
 
     {
         transaction t(db->begin());
@@ -106,36 +115,14 @@ BOOST_AUTO_TEST_CASE(inserting_no_keys_instances_results_in_expected_rows_in_tab
 BOOST_AUTO_TEST_CASE(inserting_no_keys_2_instances_results_in_expected_rows_in_table) {
     SETUP_TEST_LOG_SOURCE("inserting_no_keys_2_instances_results_in_expected_rows_in_table");
 
-    std::unique_ptr<odb::database> db (
-        new odb::pgsql::database (
-            "build",
-            "build",
-            "musseque",
-            "localhost"
-            ));
+    std::unique_ptr<odb::database> db(create_db());
+    const auto del_rows(delete_rows<dogen::database::no_keys_2>(*db));
+    BOOST_LOG_SEV(lg, debug) << "Deleted existing rows. Total: " << del_rows;
 
-    {
-        odb::transaction t(db->begin());
-        const auto deleted_rows(db->erase_query<dogen::database::no_keys_2>());
-        BOOST_LOG_SEV(lg, debug) << "Deleted existing rows. Total: "
-                                 << deleted_rows;
-        t.commit();
-    }
-
-    std::vector<dogen::database::no_keys_2> v;
     const unsigned int how_many(5);
-    v.reserve(how_many);
-    {
-        odb::transaction t(db->begin());
-        dogen::database::no_keys_2_generator sequence;
-        for (unsigned int i(0); i < how_many; ++i) {
-            v.push_back(sequence());
-            BOOST_LOG_SEV(lg, debug) << "Created: " << v.back();
-            db->persist(v.back());
-            BOOST_LOG_SEV(lg, debug) << "Object has been persisted";
-        }
-        t.commit();
-    }
+    const auto v(generate<dogen::database::no_keys_2_generator>(how_many));
+    persist(*db, v);
+    BOOST_LOG_SEV(lg, debug) << "Persisted: " << v;
 
     {
         transaction t(db->begin());
@@ -161,36 +148,14 @@ BOOST_AUTO_TEST_CASE(inserting_no_keys_2_instances_results_in_expected_rows_in_t
 BOOST_AUTO_TEST_CASE(inserting_primary_key_objects_results_in_unique_rows) {
     SETUP_TEST_LOG_SOURCE("inserting_primary_key_objects_results_in_unique_rows");
 
-    std::unique_ptr<odb::database> db (
-        new odb::pgsql::database (
-            "build",
-            "build",
-            "musseque",
-            "localhost"
-            ));
+    std::unique_ptr<odb::database> db(create_db());
+    const auto del_rows(delete_rows<dogen::database::primary_key>(*db));
+    BOOST_LOG_SEV(lg, debug) << "Deleted existing rows. Total: " << del_rows;
 
-    {
-        odb::transaction t(db->begin());
-        const auto deleted_rows(db->erase_query<dogen::database::primary_key>());
-        BOOST_LOG_SEV(lg, debug) << "Deleted existing rows. Total: "
-                                 << deleted_rows;
-        t.commit();
-    }
-
-    std::vector<dogen::database::primary_key> v;
     const unsigned int how_many(5);
-    v.reserve(how_many);
-    {
-        odb::transaction t(db->begin());
-        dogen::database::primary_key_generator sequence;
-        for (unsigned int i(0); i < how_many; ++i) {
-            v.push_back(sequence());
-            BOOST_LOG_SEV(lg, debug) << "Created: " << v.back();
-            db->persist(v.back());
-            BOOST_LOG_SEV(lg, debug) << "Object has been persisted";
-        }
-        t.commit();
-    }
+    const auto v(generate<dogen::database::primary_key_generator>(how_many));
+    persist(*db, v);
+    BOOST_LOG_SEV(lg, debug) << "Persisted: " << v;
 
     {
         transaction t(db->begin());
@@ -226,36 +191,14 @@ BOOST_AUTO_TEST_CASE(inserting_primary_key_objects_results_in_unique_rows) {
 BOOST_AUTO_TEST_CASE(inserting_foreign_key_objects_requires_other_side_to_exist) {
     SETUP_TEST_LOG_SOURCE("inserting_foreign_key_objects_requires_other_side_to_exist");
 
-    std::unique_ptr<odb::database> db (
-        new odb::pgsql::database (
-            "build",
-            "build",
-            "musseque",
-            "localhost"
-            ));
+    std::unique_ptr<odb::database> db(create_db());
+    const auto del_rows(delete_rows<dogen::database::primary_key_2>(*db));
+    BOOST_LOG_SEV(lg, debug) << "Deleted existing rows. Total: " << del_rows;
 
-    {
-        odb::transaction t(db->begin());
-        const auto deleted_rows(db->erase_query<dogen::database::primary_key_2>());
-        BOOST_LOG_SEV(lg, debug) << "Deleted existing rows. Total: "
-                                 << deleted_rows;
-        t.commit();
-    }
-
-    std::vector<dogen::database::primary_key_2> v;
     const unsigned int how_many(5);
-    v.reserve(how_many);
-    {
-        odb::transaction t(db->begin());
-        dogen::database::primary_key_2_generator sequence;
-        for (unsigned int i(0); i < how_many; ++i) {
-            v.push_back(sequence());
-            BOOST_LOG_SEV(lg, debug) << "Created: " << v.back();
-            db->persist(v.back());
-            BOOST_LOG_SEV(lg, debug) << "Object has been persisted";
-        }
-        t.commit();
-    }
+    const auto v(generate<dogen::database::primary_key_2_generator>(how_many));
+    persist(*db, v);
+    BOOST_LOG_SEV(lg, debug) << "Persisted: " << v;
 
     {
         odb::transaction t(db->begin());
