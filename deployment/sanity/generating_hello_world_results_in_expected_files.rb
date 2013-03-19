@@ -65,7 +65,7 @@ Dir.chdir("#{Dir.tmpdir}") do
         end
     end
 
-    expected_hpp_files = 15
+    expected_hpp_files = 17
     found_hpp_files = Dir[expected_project_dir + '/**/*.hpp'].length
     if found_hpp_files != expected_hpp_files
         puts "error: expected to find #{expected_hpp_files} but found #{found_hpp_files} hpp files"
