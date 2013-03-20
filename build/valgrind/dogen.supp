@@ -81,8 +81,8 @@
    postgres_ssl
    Memcheck:Leak
    ...
-   PQconnectPoll
+   fun:PQconnectPoll
    ...
-   PQconnectdb
+   fun:PQconnectdb
    ...
 }
