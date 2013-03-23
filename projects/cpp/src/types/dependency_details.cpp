@@ -26,8 +26,10 @@ namespace cpp {
 dependency_details::dependency_details()
     : has_std_string_(static_cast<bool>(0)),
       has_variant_(static_cast<bool>(0)),
-      is_parent_or_child_(static_cast<bool>(0)),
-      requires_stream_manipulators_(static_cast<bool>(0)) { }
+      is_parent_(static_cast<bool>(0)),
+      is_child_(static_cast<bool>(0)),
+      requires_stream_manipulators_(static_cast<bool>(0)),
+      has_std_pair_(static_cast<bool>(0)) { }
 
 dependency_details::dependency_details(
     const std::unordered_set<dogen::sml::qname>& names,
@@ -36,16 +38,20 @@ dependency_details::dependency_details(
     const std::unordered_set<dogen::sml::qname>& leaves,
     const bool has_std_string,
     const bool has_variant,
-    const bool is_parent_or_child,
-    const bool requires_stream_manipulators)
+    const bool is_parent,
+    const bool is_child,
+    const bool requires_stream_manipulators,
+    const bool has_std_pair)
     : names_(names),
       forward_decls_(forward_decls),
       keys_(keys),
       leaves_(leaves),
       has_std_string_(has_std_string),
       has_variant_(has_variant),
-      is_parent_or_child_(is_parent_or_child),
-      requires_stream_manipulators_(requires_stream_manipulators) { }
+      is_parent_(is_parent),
+      is_child_(is_child),
+      requires_stream_manipulators_(requires_stream_manipulators),
+      has_std_pair_(has_std_pair) { }
 
 void dependency_details::swap(dependency_details& other) noexcept {
     using std::swap;
@@ -55,8 +61,10 @@ void dependency_details::swap(dependency_details& other) noexcept {
     swap(leaves_, other.leaves_);
     swap(has_std_string_, other.has_std_string_);
     swap(has_variant_, other.has_variant_);
-    swap(is_parent_or_child_, other.is_parent_or_child_);
+    swap(is_parent_, other.is_parent_);
+    swap(is_child_, other.is_child_);
     swap(requires_stream_manipulators_, other.requires_stream_manipulators_);
+    swap(has_std_pair_, other.has_std_pair_);
 }
 
 bool dependency_details::operator==(const dependency_details& rhs) const {
@@ -66,8 +74,10 @@ bool dependency_details::operator==(const dependency_details& rhs) const {
         leaves_ == rhs.leaves_ &&
         has_std_string_ == rhs.has_std_string_ &&
         has_variant_ == rhs.has_variant_ &&
-        is_parent_or_child_ == rhs.is_parent_or_child_ &&
-        requires_stream_manipulators_ == rhs.requires_stream_manipulators_;
+        is_parent_ == rhs.is_parent_ &&
+        is_child_ == rhs.is_child_ &&
+        requires_stream_manipulators_ == rhs.requires_stream_manipulators_ &&
+        has_std_pair_ == rhs.has_std_pair_;
 }
 
 dependency_details& dependency_details::operator=(dependency_details other) {
@@ -156,12 +166,20 @@ void dependency_details::has_variant(const bool v) {
     has_variant_ = v;
 }
 
-bool dependency_details::is_parent_or_child() const {
-    return is_parent_or_child_;
+bool dependency_details::is_parent() const {
+    return is_parent_;
 }
 
-void dependency_details::is_parent_or_child(const bool v) {
-    is_parent_or_child_ = v;
+void dependency_details::is_parent(const bool v) {
+    is_parent_ = v;
+}
+
+bool dependency_details::is_child() const {
+    return is_child_;
+}
+
+void dependency_details::is_child(const bool v) {
+    is_child_ = v;
 }
 
 bool dependency_details::requires_stream_manipulators() const {
@@ -170,6 +188,14 @@ bool dependency_details::requires_stream_manipulators() const {
 
 void dependency_details::requires_stream_manipulators(const bool v) {
     requires_stream_manipulators_ = v;
+}
+
+bool dependency_details::has_std_pair() const {
+    return has_std_pair_;
+}
+
+void dependency_details::has_std_pair(const bool v) {
+    has_std_pair_ = v;
 }
 
 } }

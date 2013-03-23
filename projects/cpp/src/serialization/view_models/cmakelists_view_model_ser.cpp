@@ -45,6 +45,7 @@ void save(Archive& ar,
     ar << make_nvp("file_path", v.file_path_.generic_string());
     ar << make_nvp("model_name", v.model_name_);
     ar << make_nvp("product_name", v.product_name_);
+    ar << make_nvp("file_name", v.file_name_);
 }
 
 template<typename Archive>
@@ -56,6 +57,7 @@ void load(Archive& ar,
     v.file_path_ = file_path_tmp;
     ar >> make_nvp("model_name", v.model_name_);
     ar >> make_nvp("product_name", v.product_name_);
+    ar >> make_nvp("file_name", v.file_name_);
 }
 
 } }

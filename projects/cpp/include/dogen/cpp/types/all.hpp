@@ -67,6 +67,7 @@
 #include "dogen/cpp/types/formatters/factory.hpp"
 #include "dogen/cpp/types/formatters/file_formatter.hpp"
 #include "dogen/cpp/types/formatters/production_failure.hpp"
+#include "dogen/cpp/types/generation_failure.hpp"
 #include "dogen/cpp/types/std_model_helper.hpp"
 #include "dogen/cpp/types/std_types.hpp"
 #include "dogen/cpp/types/view_models/class_view_model.hpp"

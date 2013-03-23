@@ -52,8 +52,10 @@ std::size_t dependency_details_hasher::hash(const dependency_details&v) {
     combine(seed, hash_std_unordered_set_dogen_sml_qname(v.leaves()));
     combine(seed, v.has_std_string());
     combine(seed, v.has_variant());
-    combine(seed, v.is_parent_or_child());
+    combine(seed, v.is_parent());
+    combine(seed, v.is_child());
     combine(seed, v.requires_stream_manipulators());
+    combine(seed, v.has_std_pair());
 
     return seed;
 }

@@ -49,8 +49,10 @@ void save(Archive& ar,
     ar << make_nvp("leaves", v.leaves_);
     ar << make_nvp("has_std_string", v.has_std_string_);
     ar << make_nvp("has_variant", v.has_variant_);
-    ar << make_nvp("is_parent_or_child", v.is_parent_or_child_);
+    ar << make_nvp("is_parent", v.is_parent_);
+    ar << make_nvp("is_child", v.is_child_);
     ar << make_nvp("requires_stream_manipulators", v.requires_stream_manipulators_);
+    ar << make_nvp("has_std_pair", v.has_std_pair_);
 }
 
 template<typename Archive>
@@ -63,8 +65,10 @@ void load(Archive& ar,
     ar >> make_nvp("leaves", v.leaves_);
     ar >> make_nvp("has_std_string", v.has_std_string_);
     ar >> make_nvp("has_variant", v.has_variant_);
-    ar >> make_nvp("is_parent_or_child", v.is_parent_or_child_);
+    ar >> make_nvp("is_parent", v.is_parent_);
+    ar >> make_nvp("is_child", v.is_child_);
     ar >> make_nvp("requires_stream_manipulators", v.requires_stream_manipulators_);
+    ar >> make_nvp("has_std_pair", v.has_std_pair_);
 }
 
 } }

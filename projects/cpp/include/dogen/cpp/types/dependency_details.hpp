@@ -51,8 +51,10 @@ public:
         const std::unordered_set<dogen::sml::qname>& leaves,
         const bool has_std_string,
         const bool has_variant,
-        const bool is_parent_or_child,
-        const bool requires_stream_manipulators);
+        const bool is_parent,
+        const bool is_child,
+        const bool requires_stream_manipulators,
+        const bool has_std_pair);
 
 private:
     template<typename Archive>
@@ -88,11 +90,17 @@ public:
     bool has_variant() const;
     void has_variant(const bool v);
 
-    bool is_parent_or_child() const;
-    void is_parent_or_child(const bool v);
+    bool is_parent() const;
+    void is_parent(const bool v);
+
+    bool is_child() const;
+    void is_child(const bool v);
 
     bool requires_stream_manipulators() const;
     void requires_stream_manipulators(const bool v);
+
+    bool has_std_pair() const;
+    void has_std_pair(const bool v);
 
 public:
     bool operator==(const dependency_details& rhs) const;
@@ -111,8 +119,10 @@ private:
     std::unordered_set<dogen::sml::qname> leaves_;
     bool has_std_string_;
     bool has_variant_;
-    bool is_parent_or_child_;
+    bool is_parent_;
+    bool is_child_;
     bool requires_stream_manipulators_;
+    bool has_std_pair_;
 };
 
 } }

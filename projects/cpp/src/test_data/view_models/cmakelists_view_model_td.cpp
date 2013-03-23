@@ -49,6 +49,7 @@ populate(const unsigned int position, result_type& v) {
     v.file_path(create_boost_filesystem_path(position + 0));
     v.model_name(create_std_string(position + 1));
     v.product_name(create_std_string(position + 2));
+    v.file_name(create_std_string(position + 3));
 }
 
 cmakelists_view_model_generator::result_type

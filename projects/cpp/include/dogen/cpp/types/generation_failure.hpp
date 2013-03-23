@@ -18,32 +18,37 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/cpp/hash/view_models/cmakelists_view_model_hash.hpp"
+#ifndef DOGEN_CPP_TYPES_GENERATION_FAILURE_HPP
+#define DOGEN_CPP_TYPES_GENERATION_FAILURE_HPP
 
-namespace {
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
-template <typename HashableType>
-inline void combine(std::size_t& seed, const HashableType& value)
-{
-    std::hash<HashableType> hasher;
-    seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
-}
-
-}
+#include <boost/exception/info.hpp>
+#include <string>
 
 namespace dogen {
 namespace cpp {
-namespace view_models {
 
-std::size_t cmakelists_view_model_hasher::hash(const cmakelists_view_model&v) {
-    std::size_t seed(0);
+/**
+ * @brief An error occured during code generation.
+ */
+class generation_failure : public virtual std::exception, public virtual boost::exception {
+public:
+    generation_failure() = default;
+    ~generation_failure() noexcept = default;
 
-    combine(seed, v.file_path().generic_string());
-    combine(seed, v.model_name());
-    combine(seed, v.product_name());
-    combine(seed, v.file_name());
+public:
+    generation_failure(const std::string& message) : message_(message) { }
 
-    return seed;
-}
+public:
+    const char* what() const noexcept { return(message_.c_str()); }
 
-} } }
+private:
+    const std::string message_;
+};
+
+} }
+
+#endif

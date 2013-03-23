@@ -27,27 +27,32 @@ namespace view_models {
 cmakelists_view_model::cmakelists_view_model(cmakelists_view_model&& rhs)
     : file_path_(std::move(rhs.file_path_)),
       model_name_(std::move(rhs.model_name_)),
-      product_name_(std::move(rhs.product_name_)) { }
+      product_name_(std::move(rhs.product_name_)),
+      file_name_(std::move(rhs.file_name_)) { }
 
 cmakelists_view_model::cmakelists_view_model(
     const boost::filesystem::path& file_path,
     const std::string& model_name,
-    const std::string& product_name)
+    const std::string& product_name,
+    const std::string& file_name)
     : file_path_(file_path),
       model_name_(model_name),
-      product_name_(product_name) { }
+      product_name_(product_name),
+      file_name_(file_name) { }
 
 void cmakelists_view_model::swap(cmakelists_view_model& other) noexcept {
     using std::swap;
     swap(file_path_, other.file_path_);
     swap(model_name_, other.model_name_);
     swap(product_name_, other.product_name_);
+    swap(file_name_, other.file_name_);
 }
 
 bool cmakelists_view_model::operator==(const cmakelists_view_model& rhs) const {
     return file_path_ == rhs.file_path_ &&
         model_name_ == rhs.model_name_ &&
-        product_name_ == rhs.product_name_;
+        product_name_ == rhs.product_name_ &&
+        file_name_ == rhs.file_name_;
 }
 
 cmakelists_view_model& cmakelists_view_model::operator=(cmakelists_view_model other) {
@@ -102,6 +107,22 @@ void cmakelists_view_model::product_name(const std::string& v) {
 
 void cmakelists_view_model::product_name(const std::string&& v) {
     product_name_ = std::move(v);
+}
+
+const std::string& cmakelists_view_model::file_name() const {
+    return file_name_;
+}
+
+std::string& cmakelists_view_model::file_name() {
+    return file_name_;
+}
+
+void cmakelists_view_model::file_name(const std::string& v) {
+    file_name_ = v;
+}
+
+void cmakelists_view_model::file_name(const std::string&& v) {
+    file_name_ = std::move(v);
 }
 
 } } }

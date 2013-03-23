@@ -55,8 +55,10 @@ std::ostream& operator<<(std::ostream& s, const dependency_details& v) {
       << "\"leaves\": " << v.leaves() << ", "
       << "\"has_std_string\": " << v.has_std_string() << ", "
       << "\"has_variant\": " << v.has_variant() << ", "
-      << "\"is_parent_or_child\": " << v.is_parent_or_child() << ", "
-      << "\"requires_stream_manipulators\": " << v.requires_stream_manipulators()
+      << "\"is_parent\": " << v.is_parent() << ", "
+      << "\"is_child\": " << v.is_child() << ", "
+      << "\"requires_stream_manipulators\": " << v.requires_stream_manipulators() << ", "
+      << "\"has_std_pair\": " << v.has_std_pair()
       << " }";
     return(s);
 }

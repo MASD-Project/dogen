@@ -55,8 +55,10 @@ populate(const unsigned int position, result_type& v) {
     v.leaves(create_std_unordered_set_dogen_sml_qname(position + 3));
     v.has_std_string(create_bool(position + 4));
     v.has_variant(create_bool(position + 5));
-    v.is_parent_or_child(create_bool(position + 6));
-    v.requires_stream_manipulators(create_bool(position + 7));
+    v.is_parent(create_bool(position + 6));
+    v.is_child(create_bool(position + 7));
+    v.requires_stream_manipulators(create_bool(position + 8));
+    v.has_std_pair(create_bool(position + 9));
 }
 
 dependency_details_generator::result_type

@@ -39,7 +39,8 @@ std::ostream& operator<<(std::ostream& s, const cmakelists_view_model& v) {
       << "\"__type__\": " << "\"dogen::cpp::view_models::cmakelists_view_model\"" << ", "
       << "\"file_path\": " << "\"" << v.file_path().generic_string() << "\"" << ", "
       << "\"model_name\": " << "\"" << tidy_up_string(v.model_name()) << "\"" << ", "
-      << "\"product_name\": " << "\"" << tidy_up_string(v.product_name()) << "\""
+      << "\"product_name\": " << "\"" << tidy_up_string(v.product_name()) << "\"" << ", "
+      << "\"file_name\": " << "\"" << tidy_up_string(v.file_name()) << "\""
       << " }";
     return(s);
 }

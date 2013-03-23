@@ -47,7 +47,8 @@ public:
     cmakelists_view_model(
         const boost::filesystem::path& file_path,
         const std::string& model_name,
-        const std::string& product_name);
+        const std::string& product_name,
+        const std::string& file_name);
 
 private:
     template<typename Archive>
@@ -72,6 +73,11 @@ public:
     void product_name(const std::string& v);
     void product_name(const std::string&& v);
 
+    const std::string& file_name() const;
+    std::string& file_name();
+    void file_name(const std::string& v);
+    void file_name(const std::string&& v);
+
 public:
     bool operator==(const cmakelists_view_model& rhs) const;
     bool operator!=(const cmakelists_view_model& rhs) const {
@@ -86,6 +92,7 @@ private:
     boost::filesystem::path file_path_;
     std::string model_name_;
     std::string product_name_;
+    std::string file_name_;
 };
 
 } } }
