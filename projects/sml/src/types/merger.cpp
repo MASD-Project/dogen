@@ -62,7 +62,7 @@ void merger::check_qname(const std::string& model_name,
     if (key.model_name() != model_name) {
         std::ostringstream stream;
         stream << "Pod does not belong to this model. Model name: '"
-               << model_name << "'. Pod qualified name: "
+               << model_name << "'. Pod qname: "
                << key;
         BOOST_LOG_SEV(lg, error) << stream.str();
         BOOST_THROW_EXCEPTION(merging_error(stream.str()));
@@ -77,7 +77,7 @@ void merger::check_qname(const std::string& model_name,
 
     if (key != value) {
         std::ostringstream stream;
-        stream << "Inconsistency between key and value qualified names: "
+        stream << "Inconsistency between key and value qnames: "
                << " key: " << key << " value: " << value;
         BOOST_LOG_SEV(lg, error) << stream.str();
         BOOST_THROW_EXCEPTION(merging_error(stream.str()));
