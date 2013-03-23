@@ -294,9 +294,10 @@ transform_enumeration(const dia::object& o) const {
             invalid.name("invalid");
             invalid.documentation("Represents an uninitialised enum");
             invalid.value("0");
+            r.enumerators().push_back(invalid);
 
-            std::vector<dogen::sml::enumerator> enumerators;
-            enumerators.push_back(invalid);
+            std::set<std::string> enumerator_names;
+            enumerator_names.insert(invalid.name());
 
             unsigned int pos(1);
             for (auto v : values) {
@@ -304,17 +305,25 @@ transform_enumeration(const dia::object& o) const {
                 const auto c(attribute_value<composite>(v, dia_composite));
 
                 if (c.type() != dia_uml_attribute) {
-                    BOOST_LOG_SEV(lg, error) << "Expected composite type "
-                                             << " to be "
+                    BOOST_LOG_SEV(lg, error) << "Expected composite type to be "
                                              << dia_uml_attribute
                                              << "but was " << c.type();
-                    BOOST_THROW_EXCEPTION(transformation_error(uml_attribute_expected));
+                    BOOST_THROW_EXCEPTION(
+                        transformation_error(uml_attribute_expected));
                 }
                 BOOST_LOG_SEV(lg, debug) << "Found composite of type "
                                          << c.type();
-                enumerators.push_back(transform_enumerator(c, pos++));
+                const auto enumerator(transform_enumerator(c, pos++));
+                const auto i(enumerator_names.find(enumerator.name()));
+                if (i != enumerator_names.end()) {
+                    BOOST_LOG_SEV(lg, error) << "Duplicate enumerator name: "
+                                             << enumerator.name();
+                    BOOST_THROW_EXCEPTION(transformation_error(
+                            "Duplicate enumerator name: " + enumerator.name()));
+                }
+                r.enumerators().push_back(enumerator);
+                enumerator_names.insert(enumerator.name());
             }
-            r.enumerators(enumerators);
         }
 
     }
