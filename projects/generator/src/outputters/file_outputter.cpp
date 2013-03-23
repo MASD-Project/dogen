@@ -122,10 +122,17 @@ void file_outputter::to_file(outputter::value_entry_type value) const {
         const boost::filesystem::path path(value.first);
         const std::string contents(value.second);
 
+        boost::filesystem::path dir(path);
+        dir.remove_filename();
+
+        using boost::filesystem::create_directories;
+        const bool created(create_directories(dir));
+        log_created_directories(created, dir);
+
         using dogen::utility::filesystem::write_file_content;
         if (contents.empty()) {
             if (!boost::filesystem::exists(path)) {
-                log_wrote_file(path.string());
+                log_writing_file(path.string());
 
                 // FIXME: massive hack to deal with ranlib warnings on OSX
                 const auto hc(create_hacked_contents(path.stem().string()));
@@ -138,21 +145,15 @@ void file_outputter::to_file(outputter::value_entry_type value) const {
             return;
         }
 
-        log_writing_file(path.string());
-        boost::filesystem::path dir(path);
-        dir.remove_filename();
-
-        using boost::filesystem::create_directories;
-        const bool created(create_directories(dir));
-        log_created_directories(created, dir);
-
         if (created || content_changed(value)) {
+            log_writing_file(path.string());
             write_file_content(path, contents);
             log_wrote_file(path.string());
         }
     } catch(const std::exception& e) {
         const std::string message(error_generating_files);
-        BOOST_THROW_EXCEPTION(dogen::utility::exception::exception(message + e.what()));
+        using dogen::utility::exception::exception;
+        BOOST_THROW_EXCEPTION(exception(message + e.what()));
     }
 }
 
