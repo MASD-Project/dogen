@@ -386,10 +386,11 @@ void dia_dfs_visitor::process_dia_object(const dogen::dia::object& o) {
     if (o.id() == root_vertex_id)
         return; // root is a dummy object, ignore it.
 
+    using dogen::sml::generation_types;
     dogen::sml::pod pod;
     pod.generation_type(state_->is_target_ ?
-        dogen::sml::generation_types::full_generation :
-        dogen::sml::generation_types::no_generation);
+        generation_types::full_generation :
+        generation_types::no_generation);
 
     pod.category_type(dogen::sml::category_types::user_defined);
     for (auto a : o.attributes()) {
@@ -411,7 +412,6 @@ void dia_dfs_visitor::process_dia_object(const dogen::dia::object& o) {
             using dogen::dia::enum_parser;
             const auto st(enum_parser::parse_stereotype(v));
             using dogen::dia::stereotypes;
-            using dogen::sml::generation_types;
             if (st == stereotypes::entity)
                 pod.pod_type(dogen::sml::pod_types::entity);
             else if (st == stereotypes::value)
@@ -498,7 +498,8 @@ void dia_dfs_visitor::process_dia_object(const dogen::dia::object& o) {
         state_->original_parent_.insert(std::make_pair(pod.name(), k->second));
     }
 
-    if (!pod.is_parent() && pod.parent_name()) {
+    if (!pod.is_parent() && pod.parent_name() &&
+        pod.generation_type() == generation_types::full_generation) {
         auto parent(pod.parent_name());
         while (parent) {
             auto k(state_->leaves_.find(*parent));
