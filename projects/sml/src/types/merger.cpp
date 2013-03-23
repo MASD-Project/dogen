@@ -40,7 +40,7 @@ using namespace dogen::utility::log;
 
 namespace {
 
-auto lg(logger_factory("identifier_parser"));
+auto lg(logger_factory("merger"));
 
 const std::string orphan_pod("Pod's parent could not be located: ");
 const std::string undefined_type("Pod has property with undefined type: ");
@@ -140,6 +140,21 @@ merger::resolve_partial_type(nested_qname& n) const {
         auto k(enumerations.find(r));
         if (k != enumerations.end())
             return lambda();
+
+        // then try setting package path to the target one
+        r.external_package_path(merged_model_.external_package_path());
+        k = enumerations.find(r);
+        if (k != enumerations.end())
+            return lambda();
+
+        // now try all available package paths
+        for (const auto& pair : models_) {
+            const auto m(pair.second);
+            r.external_package_path(m.external_package_path());
+            k = enumerations.find(r);
+            if (k != enumerations.end())
+                return lambda();
+        }
     }
 
     BOOST_LOG_SEV(lg, error) << undefined_type << n;
@@ -218,11 +233,6 @@ merger::compute_dependencies() const {
 void merger::combine() {
     merged_model_.dependencies(compute_dependencies());
 
-    auto pods(merged_model_.pods());
-    auto primitives(merged_model_.primitives());
-    auto enumerations(merged_model_.enumerations());
-    auto exceptions(merged_model_.exceptions());
-
     for (const auto pair : models_) {
         const auto m(pair.second);
         BOOST_LOG_SEV(lg, info) << "Combining model: '" << m.name()
@@ -230,7 +240,6 @@ void merger::combine() {
                                 << " primitives: " << m.primitives().size()
                                 << " enumerations: " << m.enumerations().size()
                                 << " exceptions: " << m.exceptions().size();
-
 
         for (const auto p : m.pods()) {
             if (p.first.model_name() != m.name()) {
@@ -257,25 +266,18 @@ void merger::combine() {
                 BOOST_THROW_EXCEPTION(merging_error(stream.str()));
             }
 
-            pods.insert(p);
+            merged_model_.pods().insert(p);
         }
 
-        for (const auto p : m.primitives()) {
-            primitives.insert(p);
-        }
+        for (const auto p : m.primitives())
+            merged_model_.primitives().insert(p);
 
-        for (const auto p : m.enumerations()) {
-            enumerations.insert(p);
-        }
+        for (const auto p : m.enumerations())
+            merged_model_.enumerations().insert(p);
 
-        for (const auto p : m.exceptions()) {
-            exceptions.insert(p);
-        }
+        for (const auto p : m.exceptions())
+            merged_model_.exceptions().insert(p);
     }
-    merged_model_.pods(pods);
-    merged_model_.primitives(primitives);
-    merged_model_.enumerations(enumerations);
-    merged_model_.exceptions(exceptions);
     merged_model_.external_package_path(external_package_path_);
 }
 
@@ -297,11 +299,13 @@ void merger::add_target(model model) {
 
     add(model);
     BOOST_LOG_SEV(lg, debug) << "added target model: " << model.name();
+    BOOST_LOG_SEV(lg, debug) << "contents: " << model;
 }
 
 void merger::add(model model) {
 
     BOOST_LOG_SEV(lg, debug) << "adding model: " << model.name();
+    BOOST_LOG_SEV(lg, debug) << "contents: " << model;
     models_.insert(std::make_pair(model.name(), model));
 }
 
