@@ -28,7 +28,7 @@
 namespace dogen {
 namespace config {
 
-/*
+/**
  * @brief Boost serialisation archive types.
  */
 enum class archive_types : unsigned int {

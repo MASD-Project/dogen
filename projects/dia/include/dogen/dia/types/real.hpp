@@ -32,7 +32,7 @@
 namespace dogen {
 namespace dia {
 
-/*
+/**
  * @brief Represents a real value.
  */
 class real final {
@@ -53,7 +53,7 @@ private:
     friend void boost::serialization::load(Archive& ar, real& v, unsigned int version);
 
 public:
-    /*
+    /**
      * @brief Text representation of a real value.
      */
     /**@{*/

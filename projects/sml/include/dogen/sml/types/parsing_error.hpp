@@ -31,7 +31,7 @@
 namespace dogen {
 namespace sml {
 
-/*
+/**
  * @brief A fatal error has occurred while parsing.
  */
 class parsing_error : public virtual std::exception, public virtual boost::exception {

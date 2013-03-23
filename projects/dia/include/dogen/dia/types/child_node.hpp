@@ -32,7 +32,7 @@
 namespace dogen {
 namespace dia {
 
-/*
+/**
  * @brief Represents a child_node in a diagram.
  *
  * Child nodes are used in Dia to represent the relationship between a
@@ -58,7 +58,7 @@ private:
     friend void boost::serialization::load(Archive& ar, child_node& v, unsigned int version);
 
 public:
-    /*
+    /**
      * @brief Parent for this object.
      */
     /**@{*/

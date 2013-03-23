@@ -32,7 +32,7 @@
 namespace dogen {
 namespace dia {
 
-/*
+/**
  * @brief Represents a color in a diagram.
  */
 class color final {
@@ -53,7 +53,7 @@ private:
     friend void boost::serialization::load(Archive& ar, color& v, unsigned int version);
 
 public:
-    /*
+    /**
      * @brief Text representation of an RGB value in hex.
      */
     /**@{*/

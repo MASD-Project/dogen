@@ -36,7 +36,7 @@
 namespace dogen {
 namespace config {
 
-/*
+/**
  * @brief Settings for C++ code generation.
  */
 class cpp_settings final {
@@ -84,7 +84,7 @@ private:
     friend void boost::serialization::load(Archive& ar, cpp_settings& v, unsigned int version);
 
 public:
-    /*
+    /**
      * @brief Print additional diagnostic information to standard output.
      */
     /**@{*/
@@ -92,7 +92,7 @@ public:
     void verbose(const bool v);
     /**@}*/
 
-    /*
+    /**
      * @brief If true, project is split into source and include
      * directories, both configurable.
      *
@@ -105,7 +105,7 @@ public:
     void split_project(const bool v);
     /**@}*/
 
-    /*
+    /**
      * @brief Directory in which to place all of the C++ code.
      *
      * Implies project splitting is off.
@@ -117,7 +117,7 @@ public:
     void project_directory(const boost::filesystem::path&& v);
     /**@}*/
 
-    /*
+    /**
      * @brief Directory in which to place the C++ implementation files.
      *
      * Can only be supplied if split project is set to true.
@@ -129,7 +129,7 @@ public:
     void source_directory(const boost::filesystem::path&& v);
     /**@}*/
 
-    /*
+    /**
      * @brief Directory in which to place the C++ header files.
      *
      * Can only be supplied if split project is set to true.
@@ -141,7 +141,7 @@ public:
     void include_directory(const boost::filesystem::path&& v);
     /**@}*/
 
-    /*
+    /**
      * @brief Disable the C++ backend entirely.
      */
     /**@{*/
@@ -149,7 +149,7 @@ public:
     void disable_backend(const bool v);
     /**@}*/
 
-    /*
+    /**
      * @brief Do not generate CMakeLists.txt for C++ projects.
      */
     /**@{*/
@@ -157,7 +157,7 @@ public:
     void disable_cmakelists(const bool v);
     /**@}*/
 
-    /*
+    /**
      * @brief C++ facets for which to generate code.
      */
     /**@{*/
@@ -167,7 +167,7 @@ public:
     void enabled_facets(const std::set<dogen::config::cpp_facet_types>&& v);
     /**@}*/
 
-    /*
+    /**
      * @brief Extension to use for C++ header files.
      */
     /**@{*/
@@ -177,7 +177,7 @@ public:
     void header_extension(const std::string&& v);
     /**@}*/
 
-    /*
+    /**
      * @brief Extension to use for C++ source files.
      */
     /**@{*/
@@ -187,7 +187,7 @@ public:
     void source_extension(const std::string&& v);
     /**@}*/
 
-    /*
+    /**
      * @brief Do not generate a constructor that takes as arguments as
      * member variables.
      */
@@ -196,7 +196,7 @@ public:
     void disable_complete_constructor(const bool v);
     /**@}*/
 
-    /*
+    /**
      * @brief Do not create a global header file that includes all
      * header files in that facet.
      */
@@ -205,7 +205,7 @@ public:
     void disable_facet_includers(const bool v);
     /**@}*/
 
-    /*
+    /**
      * @brief Do not create individual folders for each facet.
      *
      * Instead put all the files in one folder.
@@ -215,7 +215,7 @@ public:
     void disable_facet_folders(const bool v);
     /**@}*/
 
-    /*
+    /**
      * @brief Do not generate unique file names for each facet.
      *
      * All file names will use the domain object name.
@@ -225,7 +225,7 @@ public:
     void disable_unique_file_names(const bool v);
     /**@}*/
 
-    /*
+    /**
      * @brief Name of the folder to house domain object code.
      */
     /**@{*/
@@ -235,7 +235,7 @@ public:
     void domain_facet_folder(const std::string&& v);
     /**@}*/
 
-    /*
+    /**
      * @brief Name of the folder to house hashing code.
      */
     /**@{*/
@@ -245,7 +245,7 @@ public:
     void hash_facet_folder(const std::string&& v);
     /**@}*/
 
-    /*
+    /**
      * @brief Name of the folder to house IO (streaming) code.
      */
     /**@{*/
@@ -255,7 +255,7 @@ public:
     void io_facet_folder(const std::string&& v);
     /**@}*/
 
-    /*
+    /**
      * @brief Name of the folder to house boost serialisation code.
      */
     /**@{*/
@@ -265,7 +265,7 @@ public:
     void serialization_facet_folder(const std::string&& v);
     /**@}*/
 
-    /*
+    /**
      * @brief Name of the folder to house test data generators.
      */
     /**@{*/
@@ -280,7 +280,7 @@ public:
     void odb_facet_folder(const std::string& v);
     void odb_facet_folder(const std::string&& v);
 
-    /*
+    /**
      * @brief Do not use NVP macros in serialisation code.
      *
      * This has the effect of disabling support for boost XML archives.
@@ -290,7 +290,7 @@ public:
     void disable_xml_serialization(const bool v);
     /**@}*/
 
-    /*
+    /**
      * @brief Generate the streaming operators directly in the domain class.
      */
     /**@{*/
@@ -298,7 +298,7 @@ public:
     void use_integrated_io(const bool v);
     /**@}*/
 
-    /*
+    /**
      * @brief If false, add versioning code to domain entities; if
      * true, no versioning code is added.
      */

@@ -28,7 +28,7 @@
 namespace dogen {
 namespace sml {
 
-/*
+/**
  * @brief Types of pods.
  *
  * We need to classify pods with regards to distinguishing properties

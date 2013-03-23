@@ -28,7 +28,7 @@
 namespace dogen {
 namespace config {
 
-/*
+/**
  * @brief Facets are different aspects of the domain objects we're
  * interested in.
  */

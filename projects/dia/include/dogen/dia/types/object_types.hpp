@@ -28,7 +28,7 @@
 namespace dogen {
 namespace dia {
 
-/*
+/**
  * @brief Identifier for the type of Dia object.
  */
 enum class object_types : unsigned int {

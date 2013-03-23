@@ -37,7 +37,7 @@
 namespace dogen {
 namespace dia {
 
-/*
+/**
  * @brief Represents a Dia object.
  */
 class object final {
@@ -68,7 +68,7 @@ private:
     friend void boost::serialization::load(Archive& ar, object& v, unsigned int version);
 
 public:
-    /*
+    /**
      * @brief Type of the object.
      */
     /**@{*/
@@ -78,7 +78,7 @@ public:
     void type(const std::string&& v);
     /**@}*/
 
-    /*
+    /**
      * @brief Version of the object.
      */
     /**@{*/
@@ -86,7 +86,7 @@ public:
     void version(const int v);
     /**@}*/
 
-    /*
+    /**
      * @brief Unique identifier for the object in this diagram.
      */
     /**@{*/
@@ -96,7 +96,7 @@ public:
     void id(const std::string&& v);
     /**@}*/
 
-    /*
+    /**
      * @brief Connection details for this object.
      */
     /**@{*/
@@ -106,7 +106,7 @@ public:
     void connections(const std::vector<dogen::dia::connection>&& v);
     /**@}*/
 
-    /*
+    /**
      * @brief Parenting information for this object.
      */
     /**@{*/
@@ -116,7 +116,7 @@ public:
     void child_node(const boost::optional<dogen::dia::child_node>&& v);
     /**@}*/
 
-    /*
+    /**
      * @brief All attributes associated with the object.
      */
     /**@{*/

@@ -33,7 +33,7 @@
 namespace dogen {
 namespace sml {
 
-/*
+/**
  * @brief Represents a reference to a model.
  */
 class reference final {
@@ -59,7 +59,7 @@ private:
     friend void boost::serialization::load(Archive& ar, reference& v, unsigned int version);
 
 public:
-    /*
+    /**
      * @brief Model which we depend on.
      */
     /**@{*/
@@ -69,7 +69,7 @@ public:
     void model_name(const std::string&& v);
     /**@}*/
 
-    /*
+    /**
      * @brief Path of packages that contain the dependent model.
      */
     /**@{*/
@@ -79,7 +79,7 @@ public:
     void external_package_path(const std::list<std::string>&& v);
     /**@}*/
 
-    /*
+    /**
      * @brief If true, the dependent model is a system model.
      */
     /**@{*/

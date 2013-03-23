@@ -44,7 +44,7 @@
 namespace dogen {
 namespace dia {
 
-/*
+/**
  * @brief Attribute in a Dia diagram.
  */
 class attribute final {
@@ -67,7 +67,7 @@ private:
     friend void boost::serialization::load(Archive& ar, attribute& v, unsigned int version);
 
 public:
-    /*
+    /**
      * @brief Name of the attribute.
      */
     /**@{*/
@@ -77,7 +77,7 @@ public:
     void name(const std::string&& v);
     /**@}*/
 
-    /*
+    /**
      * @brief Values for the attribute.
      */
     /**@{*/

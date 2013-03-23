@@ -32,7 +32,7 @@
 namespace dogen {
 namespace dia {
 
-/*
+/**
  * @brief Represents an integer value.
  */
 class integer final {
@@ -53,7 +53,7 @@ private:
     friend void boost::serialization::load(Archive& ar, integer& v, unsigned int version);
 
 public:
-    /*
+    /**
      * @brief Text representation of an integer value.
      */
     /**@{*/

@@ -33,7 +33,7 @@
 namespace dogen {
 namespace sml {
 
-/*
+/**
  * @brief Groups types, and provides a namespace for the grouped types.
  */
 class package final {
@@ -56,7 +56,7 @@ private:
     friend void boost::serialization::load(Archive& ar, package& v, unsigned int version);
 
 public:
-    /*
+    /**
      * @brief Qualified name for the package.
      */
     /**@{*/
@@ -66,7 +66,7 @@ public:
     void name(const dogen::sml::qname&& v);
     /**@}*/
 
-    /*
+    /**
      * @brief Doxygen documentation for the package.
      */
     /**@{*/

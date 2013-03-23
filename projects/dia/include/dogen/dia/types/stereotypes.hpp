@@ -28,7 +28,7 @@
 namespace dogen {
 namespace dia {
 
-/*
+/**
  * @brief Valid UML stereotypes for dogen.
  */
 enum class stereotypes : unsigned int {

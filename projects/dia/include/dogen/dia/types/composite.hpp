@@ -36,7 +36,7 @@
 namespace dogen {
 namespace dia {
 
-/*
+/**
  * @brief Attribute value which is made up of other attributes.
  */
 class composite final {
@@ -60,7 +60,7 @@ private:
     friend void boost::serialization::load(Archive& ar, composite& v, unsigned int version);
 
 public:
-    /*
+    /**
      * @brief Type of the composite node
      */
     /**@{*/
@@ -70,7 +70,7 @@ public:
     void type(const std::string&& v);
     /**@}*/
 
-    /*
+    /**
      * @brief Underlying Dia attributes.
      */
     /**@{*/
@@ -80,7 +80,7 @@ public:
     void value(const std::vector<boost::shared_ptr<dogen::dia::attribute> >&& v);
     /**@}*/
 
-    /*
+    /**
      * @brief Some composites contain an inner composite field.
      */
     /**@{*/

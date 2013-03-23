@@ -33,7 +33,7 @@
 namespace dogen {
 namespace dia {
 
-/*
+/**
  * @brief Represents a all the data associated with a diagram.
  */
 class diagram_data final {
@@ -54,7 +54,7 @@ private:
     friend void boost::serialization::load(Archive& ar, diagram_data& v, unsigned int version);
 
 public:
-    /*
+    /**
      * @brief All attributes associated with the diagram data.
      */
     /**@{*/

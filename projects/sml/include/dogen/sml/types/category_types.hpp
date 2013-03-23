@@ -28,7 +28,7 @@
 namespace dogen {
 namespace sml {
 
-/*
+/**
  * @brief Categories of types.
  *
  * Broadly speaking there are two categories of types: user defined

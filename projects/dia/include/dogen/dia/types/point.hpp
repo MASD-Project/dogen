@@ -32,7 +32,7 @@
 namespace dogen {
 namespace dia {
 
-/*
+/**
  * @brief Represents a point in a diagram.
  */
 class point final {
@@ -53,7 +53,7 @@ private:
     friend void boost::serialization::load(Archive& ar, point& v, unsigned int version);
 
 public:
-    /*
+    /**
      * @brief Text representation of a point with X/Y coordinates.
      */
     /**@{*/

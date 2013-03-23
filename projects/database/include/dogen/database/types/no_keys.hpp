@@ -33,7 +33,7 @@
 namespace dogen {
 namespace database {
 
-/*
+/**
  * @brief Simple value class with no primary keys, etc.
  */
 class no_keys final {

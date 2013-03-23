@@ -32,7 +32,7 @@
 namespace dogen {
 namespace dia {
 
-/*
+/**
  * @brief Represents a string value.
  */
 class string final {
@@ -53,7 +53,7 @@ private:
     friend void boost::serialization::load(Archive& ar, string& v, unsigned int version);
 
 public:
-    /*
+    /**
      * @brief Text representation of a string value.
      */
     /**@{*/

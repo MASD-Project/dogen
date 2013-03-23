@@ -55,7 +55,7 @@ private:
     friend void boost::serialization::load(Archive& ar, reference& v, unsigned int version);
 
 public:
-    /*
+    /**
      * @brief Path to the model we're referring to.
      */
     /**@{*/
@@ -65,7 +65,7 @@ public:
     void path(const boost::filesystem::path&& v);
     /**@}*/
 
-    /*
+    /**
      * @brief External package path to dependent model.
      */
     /**@{*/

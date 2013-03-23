@@ -32,7 +32,7 @@
 namespace dogen {
 namespace dia {
 
-/*
+/**
  * @brief Represents a enumeration in a diagram.
  */
 class enumeration final {
@@ -53,7 +53,7 @@ private:
     friend void boost::serialization::load(Archive& ar, enumeration& v, unsigned int version);
 
 public:
-    /*
+    /**
      * @brief Text representation of a enumeration.
      */
     /**@{*/

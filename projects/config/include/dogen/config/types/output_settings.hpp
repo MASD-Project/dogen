@@ -59,7 +59,7 @@ private:
     friend void boost::serialization::load(Archive& ar, output_settings& v, unsigned int version);
 
 public:
-    /*
+    /**
      * @brief Output generated code to standard output.
      */
     /**@{*/
@@ -67,7 +67,7 @@ public:
     void output_to_stdout(const bool v);
     /**@}*/
 
-    /*
+    /**
      * @brief Output generated code to files.
      */
     /**@{*/
@@ -75,7 +75,7 @@ public:
     void output_to_file(const bool v);
     /**@}*/
 
-    /*
+    /**
      * @brief Delete any extra files found in managed directories.
      */
     /**@{*/
@@ -83,7 +83,7 @@ public:
     void delete_extra_files(const bool v);
     /**@}*/
 
-    /*
+    /**
      * @brief Always generate files even if there are no differences
      * with existing file.
      */
@@ -92,7 +92,7 @@ public:
     void force_write(const bool v);
     /**@}*/
 
-    /*
+    /**
      * @brief Print additional diagnostic information to standard output.
      */
     /**@{*/
@@ -100,7 +100,7 @@ public:
     void verbose(const bool v);
     /**@}*/
 
-    /*
+    /**
      * @brief List of regular expressions to filter out files to ignore.
      */
     /**@{*/

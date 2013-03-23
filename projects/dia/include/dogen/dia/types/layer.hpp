@@ -34,7 +34,7 @@
 namespace dogen {
 namespace dia {
 
-/*
+/**
  * @brief Represents a layer in a Dia diagram.
  */
 class layer final {
@@ -61,7 +61,7 @@ private:
     friend void boost::serialization::load(Archive& ar, layer& v, unsigned int version);
 
 public:
-    /*
+    /**
      * @brief Name of the layer.
      */
     /**@{*/
@@ -71,7 +71,7 @@ public:
     void name(const std::string&& v);
     /**@}*/
 
-    /*
+    /**
      * @brief Whether the layer is visible on screen or not.
      */
     /**@{*/
@@ -79,7 +79,7 @@ public:
     void visible(const bool v);
     /**@}*/
 
-    /*
+    /**
      * @brief Whether the layer is active or not.
      */
     /**@{*/
@@ -87,7 +87,7 @@ public:
     void active(const bool v);
     /**@}*/
 
-    /*
+    /**
      * @brief Dia objects contained in layer.
      */
     /**@{*/

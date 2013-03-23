@@ -32,7 +32,7 @@
 namespace dogen {
 namespace dia {
 
-/*
+/**
  * @brief Connection between entities in a Dia diagram.
  */
 class connection final {
@@ -56,7 +56,7 @@ private:
     friend void boost::serialization::load(Archive& ar, connection& v, unsigned int version);
 
 public:
-    /*
+    /**
      * @brief Internal handle for the connection.
      */
     /**@{*/
@@ -66,7 +66,7 @@ public:
     void handle(const std::string&& v);
     /**@}*/
 
-    /*
+    /**
      * @brief Object we're connected to.
      */
     /**@{*/
@@ -76,7 +76,7 @@ public:
     void to(const std::string&& v);
     /**@}*/
 
-    /*
+    /**
      * @brief Number of the connection slot we're connected to.
      *
      * This is known in Dia as a connection but to avoid confusion

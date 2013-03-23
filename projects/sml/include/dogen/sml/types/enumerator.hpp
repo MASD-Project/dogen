@@ -32,7 +32,7 @@
 namespace dogen {
 namespace sml {
 
-/*
+/**
  * @brief One of a set of valid values that an enumeration can assume.
  *
  * The enumerator defines an element in the domain of the enumeration.
@@ -58,7 +58,7 @@ private:
     friend void boost::serialization::load(Archive& ar, enumerator& v, unsigned int version);
 
 public:
-    /*
+    /**
      * @brief Qualified name for the type.
      */
     /**@{*/
@@ -68,7 +68,7 @@ public:
     void name(const std::string&& v);
     /**@}*/
 
-    /*
+    /**
      * @brief Value for the enumerator.
      *
      * It must be castable to instance of the type defined in the enumeration.
@@ -80,7 +80,7 @@ public:
     void value(const std::string&& v);
     /**@}*/
 
-    /*
+    /**
      * @brief Doxygen documentation for the type.
      */
     /**@{*/

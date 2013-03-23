@@ -32,7 +32,7 @@
 namespace dogen {
 namespace dia {
 
-/*
+/**
  * @brief Represents a rectangle in a diagram.
  */
 class rectangle final {
@@ -53,7 +53,7 @@ private:
     friend void boost::serialization::load(Archive& ar, rectangle& v, unsigned int version);
 
 public:
-    /*
+    /**
      * @brief Text representation of a rectangle with a pair of X/Y coordinates.
      */
     /**@{*/

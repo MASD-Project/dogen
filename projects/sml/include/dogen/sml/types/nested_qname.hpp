@@ -34,7 +34,7 @@
 namespace dogen {
 namespace sml {
 
-/*
+/**
  * @brief A composite qualified name.
  */
 class nested_qname final {
@@ -60,7 +60,7 @@ private:
     friend void boost::serialization::load(Archive& ar, nested_qname& v, unsigned int version);
 
 public:
-    /*
+    /**
      * @brief Top-level, containing type.
      */
     /**@{*/
@@ -70,7 +70,7 @@ public:
     void type(const dogen::sml::qname&& v);
     /**@}*/
 
-    /*
+    /**
      * @brief Child types.
      */
     /**@{*/
@@ -80,7 +80,7 @@ public:
     void children(const std::list<dogen::sml::nested_qname>&& v);
     /**@}*/
 
-    /*
+    /**
      * @brief If true, the top-level type is a pointer. If false, its a stack variable.
      */
     /**@{*/

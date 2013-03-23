@@ -32,7 +32,7 @@
 namespace dogen {
 namespace dia {
 
-/*
+/**
  * @brief Represents a boolean value.
  */
 class boolean final {
@@ -53,7 +53,7 @@ private:
     friend void boost::serialization::load(Archive& ar, boolean& v, unsigned int version);
 
 public:
-    /*
+    /**
      * @brief Text representation of a boolean value.
      */
     /**@{*/

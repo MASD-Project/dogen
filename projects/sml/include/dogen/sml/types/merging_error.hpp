@@ -31,7 +31,7 @@
 namespace dogen {
 namespace sml {
 
-/*
+/**
  * @brief A fatal error has occurred while merging.
  */
 class merging_error : public virtual std::exception, public virtual boost::exception {

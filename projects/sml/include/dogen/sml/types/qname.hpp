@@ -34,7 +34,7 @@
 namespace dogen {
 namespace sml {
 
-/*
+/**
  * @brief Represents a "URL" to a type within SML.
  */
 class qname final {
@@ -62,7 +62,7 @@ private:
     friend void boost::serialization::load(Archive& ar, qname& v, unsigned int version);
 
 public:
-    /*
+    /**
      * @brief Model to which the type belongs to.
      */
     /**@{*/
@@ -72,7 +72,7 @@ public:
     void model_name(const std::string&& v);
     /**@}*/
 
-    /*
+    /**
      * @brief Path of packages that contain the model from where the type came from.
      */
     /**@{*/
@@ -82,7 +82,7 @@ public:
     void external_package_path(const std::list<std::string>&& v);
     /**@}*/
 
-    /*
+    /**
      * @brief Path of packages that contain this type.
      */
     /**@{*/
@@ -92,7 +92,7 @@ public:
     void package_path(const std::list<std::string>&& v);
     /**@}*/
 
-    /*
+    /**
      * @brief Non-qualified type name.
      */
     /**@{*/
@@ -102,7 +102,7 @@ public:
     void type_name(const std::string&& v);
     /**@}*/
 
-    /*
+    /**
      * @brief Type of the type (e.g. its meta-type).
      *
      * This is only needed because we don't have a type base class.

@@ -61,7 +61,7 @@ private:
     friend void boost::serialization::load(Archive& ar, troubleshooting_settings& v, unsigned int version);
 
 public:
-    /*
+    /**
      * @brief Print additional diagnostic information to standard output.
      */
     /**@{*/
@@ -69,7 +69,7 @@ public:
     void verbose(const bool v);
     /**@}*/
 
-    /*
+    /**
      * @brief Directory for debug files.
      */
     /**@{*/
@@ -79,7 +79,7 @@ public:
     void debug_dir(const boost::filesystem::path&& v);
     /**@}*/
 
-    /*
+    /**
      * @brief If not invalid, serialise dia model to file using the
      * specified archive type.
      */
@@ -88,7 +88,7 @@ public:
     void save_dia_model(const dogen::config::archive_types& v);
     /**@}*/
 
-    /*
+    /**
      * @brief If not invalid, serialise sml model to file using the
      * specified archive type.
      */
@@ -97,7 +97,7 @@ public:
     void save_sml_model(const dogen::config::archive_types& v);
     /**@}*/
 
-    /*
+    /**
      * @brief Stop dogen after code generating into memory but before
      * writing to output.
      */
@@ -106,7 +106,7 @@ public:
     void stop_after_formatting(const bool v);
     /**@}*/
 
-    /*
+    /**
      * @brief Stop dogen after code generating into memory but before
      * writing to output.
      */

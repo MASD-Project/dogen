@@ -62,7 +62,7 @@ private:
     friend void boost::serialization::load(Archive& ar, modeling_settings& v, unsigned int version);
 
 public:
-    /*
+    /**
      * @brief Path to the Dia diagram that contains the model to
      *  generate.
      */
@@ -73,7 +73,7 @@ public:
     void target(const boost::filesystem::path&& v);
     /**@}*/
 
-    /*
+    /**
      * @brief External packages which contain the model to generate,
      * delimited by "::".
      */
@@ -84,7 +84,7 @@ public:
     void external_package_path(const std::string&& v);
     /**@}*/
 
-    /*
+    /**
      * @brief All external models in which this model depends.
      */
     /**@{*/
@@ -94,7 +94,7 @@ public:
     void references(const std::vector<dogen::config::reference>&& v);
     /**@}*/
 
-    /*
+    /**
      * @brief Print additional diagnostic information to standard output.
      */
     /**@{*/
@@ -102,7 +102,7 @@ public:
     void verbose(const bool v);
     /**@}*/
 
-    /*
+    /**
      * @brief Do not generate a top-level package with the model
      * name.
      */

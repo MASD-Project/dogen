@@ -31,7 +31,7 @@
 namespace dogen {
 namespace dia {
 
-/*
+/**
  * @brief An error occurred while reading a diagram.
  */
 class hydration_error : public virtual std::exception, public virtual boost::exception {

@@ -35,7 +35,7 @@
 namespace dogen {
 namespace sml {
 
-/*
+/**
  * @brief Memberof a pod that provides a mechanism to read and write values of a type.
  */
 class property final {
@@ -61,7 +61,7 @@ private:
     friend void boost::serialization::load(Archive& ar, property& v, unsigned int version);
 
 public:
-    /*
+    /**
      * @brief Name of the property.
      *
      * Must only contain characters that can be used for identifiers in the target backend.
@@ -73,7 +73,7 @@ public:
     void name(const std::string&& v);
     /**@}*/
 
-    /*
+    /**
      * @brief Type name for the property.
      */
     /**@{*/
@@ -83,7 +83,7 @@ public:
     void type_name(const dogen::sml::nested_qname&& v);
     /**@}*/
 
-    /*
+    /**
      * @brief Default value of the property.
      */
     /**@{*/
@@ -93,7 +93,7 @@ public:
     void default_value(const std::string&& v);
     /**@}*/
 
-    /*
+    /**
      * @brief Doxygen documentation for the type.
      */
     /**@{*/
@@ -103,7 +103,7 @@ public:
     void documentation(const std::string&& v);
     /**@}*/
 
-    /*
+    /**
      * @brief Parameters associated with the property which are opaque to SML.
      */
     /**@{*/

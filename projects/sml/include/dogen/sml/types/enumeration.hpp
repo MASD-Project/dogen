@@ -36,7 +36,7 @@
 namespace dogen {
 namespace sml {
 
-/*
+/**
  * @brief An enumeration type provides an efficient way to define
  * a set of named integral constants that may be assigned to a variable.
  */
@@ -64,7 +64,7 @@ private:
     friend void boost::serialization::load(Archive& ar, enumeration& v, unsigned int version);
 
 public:
-    /*
+    /**
      * @brief Qualified name for the type.
      */
     /**@{*/
@@ -74,7 +74,7 @@ public:
     void name(const dogen::sml::qname&& v);
     /**@}*/
 
-    /*
+    /**
      * @brief What to do with this enumeration in terms of code generation.
      */
     /**@{*/
@@ -82,7 +82,7 @@ public:
     void generation_type(const dogen::sml::generation_types& v);
     /**@}*/
 
-    /*
+    /**
      * @brief Doxygen documentation for the type.
      */
     /**@{*/
@@ -92,7 +92,7 @@ public:
     void documentation(const std::string&& v);
     /**@}*/
 
-    /*
+    /**
      * @brief Enumerators for this enumeration.
      */
     /**@{*/

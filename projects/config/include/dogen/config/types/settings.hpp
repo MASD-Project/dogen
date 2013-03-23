@@ -57,7 +57,7 @@ private:
     friend void boost::serialization::load(Archive& ar, settings& v, unsigned int version);
 
 public:
-    /*
+    /**
      * @brief All settings related to modeling.
      */
     /**@{*/
@@ -67,7 +67,7 @@ public:
     void modeling(const dogen::config::modeling_settings&& v);
     /**@}*/
 
-    /*
+    /**
      * @brief All settings related to C++.
      */
     /**@{*/
@@ -77,7 +77,7 @@ public:
     void cpp(const dogen::config::cpp_settings&& v);
     /**@}*/
 
-    /*
+    /**
      * @brief All settings related to troubleshooting.
      */
     /**@{*/
@@ -87,7 +87,7 @@ public:
     void troubleshooting(const dogen::config::troubleshooting_settings&& v);
     /**@}*/
 
-    /*
+    /**
      * @brief All settings related to outputting.
      */
     /**@{*/

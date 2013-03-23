@@ -75,7 +75,7 @@ private:
     friend void boost::serialization::load(Archive& ar, pod& v, unsigned int version);
 
 public:
-    /*
+    /**
      * @brief Qualified name for the type.
      */
     /**@{*/
@@ -85,7 +85,7 @@ public:
     void name(const dogen::sml::qname&& v);
     /**@}*/
 
-    /*
+    /**
      * @brief All the properties this pod owns.
      */
     /**@{*/
@@ -95,7 +95,7 @@ public:
     void properties(const std::vector<dogen::sml::property>&& v);
     /**@}*/
 
-    /*
+    /**
      * @brief Qualified name for the pod's parent, if the pod has one.
      */
     /**@{*/
@@ -105,7 +105,7 @@ public:
     void parent_name(const boost::optional<dogen::sml::qname>&& v);
     /**@}*/
 
-    /*
+    /**
      * @brief Qualified name for the root of the inheritance hierarchy, if the pod is part of one.
      */
     /**@{*/
@@ -115,7 +115,7 @@ public:
     void original_parent_name(const boost::optional<dogen::sml::qname>&& v);
     /**@}*/
 
-    /*
+    /**
      * @brief All concrete types which are indirectly or directly derived from this type.
      */
     /**@{*/
@@ -125,7 +125,7 @@ public:
     void leaves(const std::list<dogen::sml::qname>&& v);
     /**@}*/
 
-    /*
+    /**
      * @brief What to do with this pod in terms of code generation
      */
     /**@{*/
@@ -133,7 +133,7 @@ public:
     void generation_type(const dogen::sml::generation_types& v);
     /**@}*/
 
-    /*
+    /**
      * @brief True if this class is the parent of one or more classes, false otherwise.
      */
     /**@{*/
@@ -141,7 +141,7 @@ public:
     void is_parent(const bool v);
     /**@}*/
 
-    /*
+    /**
      * @brief Category of this type - whether its system or user defined.
      */
     /**@{*/
@@ -149,7 +149,7 @@ public:
     void category_type(const dogen::sml::category_types& v);
     /**@}*/
 
-    /*
+    /**
      * @brief What kind of pod is this.
      */
     /**@{*/
@@ -157,7 +157,7 @@ public:
     void pod_type(const dogen::sml::pod_types& v);
     /**@}*/
 
-    /*
+    /**
      * @brief Doxygen documentation for the type.
      */
     /**@{*/
@@ -167,7 +167,7 @@ public:
     void documentation(const std::string&& v);
     /**@}*/
 
-    /*
+    /**
      * @brief How many type arguments does this type have
      */
     /**@{*/
@@ -175,7 +175,7 @@ public:
     void number_of_type_arguments(const unsigned int v);
     /**@}*/
 
-    /*
+    /**
      * @brief Parameters associated with the pod which are opaque to SML.
      */
     /**@{*/

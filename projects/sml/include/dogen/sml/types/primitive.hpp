@@ -34,7 +34,7 @@
 namespace dogen {
 namespace sml {
 
-/*
+/**
  * @brief Represents a type that is built-in to the language.
  */
 class primitive final {
@@ -60,7 +60,7 @@ private:
     friend void boost::serialization::load(Archive& ar, primitive& v, unsigned int version);
 
 public:
-    /*
+    /**
      * @brief Qualified name for the type.
      */
     /**@{*/
@@ -70,7 +70,7 @@ public:
     void name(const dogen::sml::qname&& v);
     /**@}*/
 
-    /*
+    /**
      * @brief What to do with this primitive in terms of code generation.
      */
     /**@{*/
@@ -78,7 +78,7 @@ public:
     void generation_type(const dogen::sml::generation_types& v);
     /**@}*/
 
-    /*
+    /**
      * @brief Doxygen documentation for the type.
      */
     /**@{*/

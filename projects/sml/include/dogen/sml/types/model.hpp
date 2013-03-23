@@ -43,7 +43,7 @@
 namespace dogen {
 namespace sml {
 
-/*
+/**
  * @brief Represents a domain model.
  */
 class model final {
@@ -76,7 +76,7 @@ private:
     friend void boost::serialization::load(Archive& ar, model& v, unsigned int version);
 
 public:
-    /*
+    /**
      * @brief Name of the domain model.
      *
      * Must not contain spaces or any special character as its used to
@@ -89,7 +89,7 @@ public:
     void name(const std::string&& v);
     /**@}*/
 
-    /*
+    /**
      * @brief Packages contained in the model.
      */
     /**@{*/
@@ -99,7 +99,7 @@ public:
     void packages(const std::unordered_map<dogen::sml::qname, dogen::sml::package>&& v);
     /**@}*/
 
-    /*
+    /**
      * @brief Pods contained in the model.
      */
     /**@{*/
@@ -109,7 +109,7 @@ public:
     void pods(const std::unordered_map<dogen::sml::qname, dogen::sml::pod>&& v);
     /**@}*/
 
-    /*
+    /**
      * @brief Primitives contained in the model.
      */
     /**@{*/
@@ -119,7 +119,7 @@ public:
     void primitives(const std::unordered_map<dogen::sml::qname, dogen::sml::primitive>&& v);
     /**@}*/
 
-    /*
+    /**
      * @brief Enumerations contained in the model.
      */
     /**@{*/
@@ -129,7 +129,7 @@ public:
     void enumerations(const std::unordered_map<dogen::sml::qname, dogen::sml::enumeration>&& v);
     /**@}*/
 
-    /*
+    /**
      * @brief Exceptions contained in the model.
      */
     /**@{*/
@@ -139,7 +139,7 @@ public:
     void exceptions(const std::unordered_map<dogen::sml::qname, dogen::sml::exception>&& v);
     /**@}*/
 
-    /*
+    /**
      * @brief Path of packages that contain this model.
      */
     /**@{*/
@@ -149,7 +149,7 @@ public:
     void external_package_path(const std::list<std::string>&& v);
     /**@}*/
 
-    /*
+    /**
      * @brief If true, the model is a system model such as STL, boost, etc. If false, it is a user generated model.
      *
      * System models are a way to expose third party code into Dogen
@@ -163,7 +163,7 @@ public:
     void is_system(const bool v);
     /**@}*/
 
-    /*
+    /**
      * @brief All other models that this model depends on - both system and user defined.
      */
     /**@{*/
@@ -173,7 +173,7 @@ public:
     void dependencies(const std::unordered_map<std::string, dogen::sml::reference>&& v);
     /**@}*/
 
-    /*
+    /**
      * @brief All leaf types in this model.
      *
      * Leaves are types concrete types which have a parent.

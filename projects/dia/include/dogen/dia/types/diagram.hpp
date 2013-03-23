@@ -34,7 +34,7 @@
 namespace dogen {
 namespace dia {
 
-/*
+/**
  * @brief Represents a diagram in Dia.
  */
 class diagram final {
@@ -57,7 +57,7 @@ private:
     friend void boost::serialization::load(Archive& ar, diagram& v, unsigned int version);
 
 public:
-    /*
+    /**
      * @brief Basic diagram definitions.
      */
     /**@{*/
@@ -67,7 +67,7 @@ public:
     void diagram_data(const dogen::dia::diagram_data&& v);
     /**@}*/
 
-    /*
+    /**
      * @brief Visual layers on the diagram.
      */
     /**@{*/
