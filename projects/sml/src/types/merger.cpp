@@ -42,6 +42,8 @@ namespace {
 
 auto lg(logger_factory("merger"));
 
+const std::string empty;
+const std::string primitive_model_name("primitive_model");
 const std::string orphan_pod("Pod's parent could not be located: ");
 const std::string undefined_type("Pod has property with undefined type: ");
 const std::string missing_target("No target model found");
@@ -259,6 +261,7 @@ void merger::combine() {
 
     for (const auto& pair : models_) {
         const auto& m(pair.second);
+        const auto n(m.name());
         BOOST_LOG_SEV(lg, info) << "Combining model: '" << m.name()
                                 << "' pods: " << m.pods().size()
                                 << " primitives: " << m.primitives().size()
@@ -266,18 +269,27 @@ void merger::combine() {
                                 << " exceptions: " << m.exceptions().size();
 
         for (const auto& p : m.pods()) {
-            check_qname(m.name(), meta_types::pod, p.first, p.second.name());
+            check_qname(n, meta_types::pod, p.first, p.second.name());
             merged_model_.pods().insert(p);
         }
 
-        for (const auto& p : m.primitives())
+        for (const auto& p : m.primitives()) {
+            // FIXME: mega hack to handle primitive model.
+            check_qname(
+                (n == primitive_model_name ? empty : n),
+                meta_types::primitive, p.first, p.second.name());
             merged_model_.primitives().insert(p);
+        }
 
-        for (const auto& p : m.enumerations())
+        for (const auto& p : m.enumerations()) {
+            check_qname(n, meta_types::enumeration, p.first, p.second.name());
             merged_model_.enumerations().insert(p);
+        }
 
-        for (const auto& p : m.exceptions())
+        for (const auto& p : m.exceptions()) {
+            check_qname(n, meta_types::exception, p.first, p.second.name());
             merged_model_.exceptions().insert(p);
+        }
     }
     merged_model_.external_package_path(external_package_path_);
 }
