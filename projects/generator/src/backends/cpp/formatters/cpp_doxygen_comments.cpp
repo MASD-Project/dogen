@@ -42,7 +42,7 @@ void cpp_doxygen_comments::format(const std::string& documentation) {
     std::stringstream s(documentation);
     std::string line;
     bool is_first(true);
-    stream_ << indenter_ << "/*" << std::endl;
+    stream_ << indenter_ << "/**" << std::endl;
     while(std::getline(s, line)) {
         boost::algorithm::trim_right(line);
         if (is_first)

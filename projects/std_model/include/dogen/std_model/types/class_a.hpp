@@ -59,7 +59,7 @@ public:
     void prop0(const std::string& v);
     void prop0(const std::string&& v);
 
-    /*
+    /**
      * @brief test inclusion duplicates
      */
     /**@{*/

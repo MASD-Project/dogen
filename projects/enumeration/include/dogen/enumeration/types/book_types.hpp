@@ -28,7 +28,7 @@
 namespace dogen {
 namespace enumeration {
 
-/*
+/**
  * @brief this is a brief comment
  *
  * this is a long comment

@@ -31,7 +31,7 @@
 namespace dogen {
 namespace comments {
 
-/*
+/**
  * @brief first line
  *
  * second line

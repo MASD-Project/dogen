@@ -31,7 +31,7 @@
 namespace dogen {
 namespace comments {
 
-/*
+/**
  * @brief this is the brief comment
  */
 class one_line final {
@@ -57,7 +57,7 @@ private:
     friend void boost::serialization::load(Archive& ar, one_line& v, unsigned int version);
 
 public:
-    /*
+    /**
      * @brief another brief comment
      */
     /**@{*/
@@ -65,7 +65,7 @@ public:
     void prop_0(const int v);
     /**@}*/
 
-    /*
+    /**
      * @brief the brief comment
      *
      * a second line

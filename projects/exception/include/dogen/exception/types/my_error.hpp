@@ -31,7 +31,7 @@
 namespace dogen {
 namespace exception {
 
-/*
+/**
  * @brief this is an exception
  */
 class my_error : public virtual std::exception, public virtual boost::exception {
