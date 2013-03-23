@@ -4140,7 +4140,7 @@ descend from it. Names are in identifiable name format.#</dia:string>
         <dia:point val="67.875,2.75"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="67.825,2.7;79.59,36"/>
+        <dia:rectangle val="67.825,2.7;79.59,36.8"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="67.875,2.75"/>
@@ -4149,7 +4149,7 @@ descend from it. Names are in identifiable name format.#</dia:string>
         <dia:real val="11.665000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="33.200000000000017"/>
+        <dia:real val="34.000000000000021"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#boost_types#</dia:string>
@@ -4849,6 +4849,29 @@ descend from it. Names are in identifiable name format.#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
             <dia:string>#boost variant#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#serialization_variant#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>#variant support#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>

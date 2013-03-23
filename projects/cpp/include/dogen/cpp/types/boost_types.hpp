@@ -60,17 +60,18 @@ enum class boost_types : unsigned int {
     io_ios_state = 25, ///< IO state savers
     string_algorithm = 26, ///< string algorithms
     variant = 27, ///< boost variant
-    apply_visitor = 28, ///< Apply visitor
-    filesystem_path = 29, ///< filesystem path
-    gregorian_date = 30, ///< Boost date time gregorian date
-    ptime = 31, ///< Boost date time posix time
-    time_duration = 32, ///< Boost date time durantion
-    serialization_gregorian_date = 33, ///< Serialisation support forgregorian date
-    serialization_ptime = 34, ///< Serialisation support for posix time
-    serialization_time_duration = 35, ///< Serialisation support for time durantion
-    io_gregorian_date = 36, ///< IO support for date
-    io_time = 37, ///< IO support for time and time_duration
-    serialization_pair = 38 ///< Serialisation support for std::pair
+    serialization_variant = 28, ///< variant support
+    apply_visitor = 29, ///< Apply visitor
+    filesystem_path = 30, ///< filesystem path
+    gregorian_date = 31, ///< Boost date time gregorian date
+    ptime = 32, ///< Boost date time posix time
+    time_duration = 33, ///< Boost date time durantion
+    serialization_gregorian_date = 34, ///< Serialisation support forgregorian date
+    serialization_ptime = 35, ///< Serialisation support for posix time
+    serialization_time_duration = 36, ///< Serialisation support for time durantion
+    io_gregorian_date = 37, ///< IO support for date
+    io_time = 38, ///< IO support for time and time_duration
+    serialization_pair = 39 ///< Serialisation support for std::pair
 };
 
 } }

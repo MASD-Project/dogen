@@ -26,7 +26,7 @@ namespace cpp {
 boost_types_generator::boost_types_generator() : position_(0) { }
 void boost_types_generator::
 populate(const unsigned int position, result_type& v) {
-    v = static_cast<boost_types>(position % 39);
+    v = static_cast<boost_types>(position % 40);
 }
 
 boost_types_generator::result_type

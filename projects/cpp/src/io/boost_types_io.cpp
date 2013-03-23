@@ -114,6 +114,9 @@ std::ostream& operator<<(std::ostream& s, const boost_types& v) {
     case boost_types::variant:
         attr = "\"variant\"";
         break;
+    case boost_types::serialization_variant:
+        attr = "\"serialization_variant\"";
+        break;
     case boost_types::apply_visitor:
         attr = "\"apply_visitor\"";
         break;
