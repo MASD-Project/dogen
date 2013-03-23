@@ -85,7 +85,7 @@ void merger::check_qname(const std::string& model_name,
 }
 
 void merger::resolve_parent(const pod& pod) {
-    const auto pods(merged_model_.pods());
+    const auto& pods(merged_model_.pods());
     auto parent(pod.parent_name());
 
     while (parent) {
@@ -104,33 +104,21 @@ void merger::resolve_parent(const pod& pod) {
     }
 }
 
-void
-merger::resolve_partial_type(nested_qname& n) const {
-    auto children(n.children());
-    for (auto i(children.begin()); i != children.end(); ++i)
-        resolve_partial_type(*i);
-    n.children(children);
-
-    const auto pods(merged_model_.pods());
-    qname r(n.type());
-
-    auto lambda([&]() {
-            BOOST_LOG_SEV(lg, debug) << "Resolved type " << n.type()
-                                     << ". Result: " << r;
-            n.type(r);
-        });
+qname merger::resolve_partial_type(const qname& n) const {
+    qname r(n);
 
     // first try the type as it was read originally.
+    const auto& pods(merged_model_.pods());
     r.meta_type(meta_types::pod);
     auto i(pods.find(r));
     if (i != pods.end())
-        return lambda();
+        return r;
 
     // then try setting package path to the target one
     r.external_package_path(merged_model_.external_package_path());
     i = pods.find(r);
     if (i != pods.end())
-        return lambda();
+        return r;
 
     // now try all available package paths
     for (const auto& pair : models_) {
@@ -138,18 +126,18 @@ merger::resolve_partial_type(nested_qname& n) const {
         r.external_package_path(m.external_package_path());
         i = pods.find(r);
         if (i != pods.end())
-            return lambda();
+            return r;
     }
 
     // reset external package path
     r.external_package_path(std::list<std::string>{});
 
     // its not a pod, could it be a primitive?
-    const auto primitives(merged_model_.primitives());
+    const auto& primitives(merged_model_.primitives());
     r.meta_type(meta_types::primitive);
     auto j(primitives.find(r));
     if (j != primitives.end())
-        return lambda();
+        return r;
 
     if (r.model_name().empty() || r.model_name() == merged_model_.name()) {
         // it could be a type defined in this model
@@ -158,23 +146,23 @@ merger::resolve_partial_type(nested_qname& n) const {
         r.external_package_path(merged_model_.external_package_path());
         i = pods.find(r);
         if (i != pods.end())
-            return lambda();
+            return r;
 
         // try enumerations
-        const auto enumerations(merged_model_.enumerations());
+        const auto& enumerations(merged_model_.enumerations());
         BOOST_LOG_SEV(lg, debug) << enumerations;
 
         r.meta_type(meta_types::enumeration);
         BOOST_LOG_SEV(lg, debug) << r;
         auto k(enumerations.find(r));
         if (k != enumerations.end())
-            return lambda();
+            return r;
 
         // then try setting package path to the target one
         r.external_package_path(merged_model_.external_package_path());
         k = enumerations.find(r);
         if (k != enumerations.end())
-            return lambda();
+            return r;
 
         // now try all available package paths
         for (const auto& pair : models_) {
@@ -182,12 +170,25 @@ merger::resolve_partial_type(nested_qname& n) const {
             r.external_package_path(m.external_package_path());
             k = enumerations.find(r);
             if (k != enumerations.end())
-                return lambda();
+                return r;
         }
     }
 
     BOOST_LOG_SEV(lg, error) << undefined_type << n;
-    BOOST_THROW_EXCEPTION(merging_error(undefined_type + n.type().type_name()));
+    BOOST_THROW_EXCEPTION(merging_error(undefined_type + n.type_name()));
+}
+
+void
+merger::resolve_partial_type(nested_qname& n) const {
+    auto children(n.children());
+    for (auto i(children.begin()); i != children.end(); ++i)
+        resolve_partial_type(*i);
+    n.children(children);
+
+    qname qn(resolve_partial_type(n.type()));
+    BOOST_LOG_SEV(lg, debug) << "Resolved type " << n.type()
+                             << ". Result: " << qn;
+    n.type(qn);
 }
 
 std::vector<property>
