@@ -62,7 +62,11 @@ public:
         const bool is_variant_like,
         const std::list<dogen::cpp::view_models::nested_type_view_model>& children,
         const std::list<std::string>& namespaces,
-        const bool is_filesystem_path);
+        const bool is_filesystem_path,
+        const bool is_date,
+        const bool is_ptime,
+        const bool is_time_duration,
+        const bool is_pair);
 
 private:
     template<typename Archive>
@@ -135,6 +139,18 @@ public:
     bool is_filesystem_path() const;
     void is_filesystem_path(const bool v);
 
+    bool is_date() const;
+    void is_date(const bool v);
+
+    bool is_ptime() const;
+    void is_ptime(const bool v);
+
+    bool is_time_duration() const;
+    void is_time_duration(const bool v);
+
+    bool is_pair() const;
+    void is_pair(const bool v);
+
 public:
     bool operator==(const nested_type_view_model& rhs) const;
     bool operator!=(const nested_type_view_model& rhs) const {
@@ -163,6 +179,10 @@ private:
     std::list<dogen::cpp::view_models::nested_type_view_model> children_;
     std::list<std::string> namespaces_;
     bool is_filesystem_path_;
+    bool is_date_;
+    bool is_ptime_;
+    bool is_time_duration_;
+    bool is_pair_;
 };
 
 } } }

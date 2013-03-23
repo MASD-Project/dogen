@@ -81,6 +81,10 @@ populate(const unsigned int position, result_type& v) {
     v.children(create_std_list_dogen_cpp_view_models_nested_type_view_model(position + 14));
     v.namespaces(create_std_list_std_string(position + 15));
     v.is_filesystem_path(create_bool(position + 16));
+    v.is_date(create_bool(position + 17));
+    v.is_ptime(create_bool(position + 18));
+    v.is_time_duration(create_bool(position + 19));
+    v.is_pair(create_bool(position + 20));
 }
 
 nested_type_view_model_generator::result_type

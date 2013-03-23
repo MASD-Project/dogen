@@ -35,7 +35,11 @@ nested_type_view_model::nested_type_view_model()
       is_smart_pointer_(static_cast<bool>(0)),
       is_optional_like_(static_cast<bool>(0)),
       is_variant_like_(static_cast<bool>(0)),
-      is_filesystem_path_(static_cast<bool>(0)) { }
+      is_filesystem_path_(static_cast<bool>(0)),
+      is_date_(static_cast<bool>(0)),
+      is_ptime_(static_cast<bool>(0)),
+      is_time_duration_(static_cast<bool>(0)),
+      is_pair_(static_cast<bool>(0)) { }
 
 nested_type_view_model::nested_type_view_model(
     const std::string& name,
@@ -54,7 +58,11 @@ nested_type_view_model::nested_type_view_model(
     const bool is_variant_like,
     const std::list<dogen::cpp::view_models::nested_type_view_model>& children,
     const std::list<std::string>& namespaces,
-    const bool is_filesystem_path)
+    const bool is_filesystem_path,
+    const bool is_date,
+    const bool is_ptime,
+    const bool is_time_duration,
+    const bool is_pair)
     : name_(name),
       identifiable_name_(identifiable_name),
       complete_name_(complete_name),
@@ -71,7 +79,11 @@ nested_type_view_model::nested_type_view_model(
       is_variant_like_(is_variant_like),
       children_(children),
       namespaces_(namespaces),
-      is_filesystem_path_(is_filesystem_path) { }
+      is_filesystem_path_(is_filesystem_path),
+      is_date_(is_date),
+      is_ptime_(is_ptime),
+      is_time_duration_(is_time_duration),
+      is_pair_(is_pair) { }
 
 void nested_type_view_model::swap(nested_type_view_model& other) noexcept {
     using std::swap;
@@ -92,6 +104,10 @@ void nested_type_view_model::swap(nested_type_view_model& other) noexcept {
     swap(children_, other.children_);
     swap(namespaces_, other.namespaces_);
     swap(is_filesystem_path_, other.is_filesystem_path_);
+    swap(is_date_, other.is_date_);
+    swap(is_ptime_, other.is_ptime_);
+    swap(is_time_duration_, other.is_time_duration_);
+    swap(is_pair_, other.is_pair_);
 }
 
 bool nested_type_view_model::operator==(const nested_type_view_model& rhs) const {
@@ -111,7 +127,11 @@ bool nested_type_view_model::operator==(const nested_type_view_model& rhs) const
         is_variant_like_ == rhs.is_variant_like_ &&
         children_ == rhs.children_ &&
         namespaces_ == rhs.namespaces_ &&
-        is_filesystem_path_ == rhs.is_filesystem_path_;
+        is_filesystem_path_ == rhs.is_filesystem_path_ &&
+        is_date_ == rhs.is_date_ &&
+        is_ptime_ == rhs.is_ptime_ &&
+        is_time_duration_ == rhs.is_time_duration_ &&
+        is_pair_ == rhs.is_pair_;
 }
 
 nested_type_view_model& nested_type_view_model::operator=(nested_type_view_model other) {
@@ -302,6 +322,38 @@ bool nested_type_view_model::is_filesystem_path() const {
 
 void nested_type_view_model::is_filesystem_path(const bool v) {
     is_filesystem_path_ = v;
+}
+
+bool nested_type_view_model::is_date() const {
+    return is_date_;
+}
+
+void nested_type_view_model::is_date(const bool v) {
+    is_date_ = v;
+}
+
+bool nested_type_view_model::is_ptime() const {
+    return is_ptime_;
+}
+
+void nested_type_view_model::is_ptime(const bool v) {
+    is_ptime_ = v;
+}
+
+bool nested_type_view_model::is_time_duration() const {
+    return is_time_duration_;
+}
+
+void nested_type_view_model::is_time_duration(const bool v) {
+    is_time_duration_ = v;
+}
+
+bool nested_type_view_model::is_pair() const {
+    return is_pair_;
+}
+
+void nested_type_view_model::is_pair(const bool v) {
+    is_pair_ = v;
 }
 
 } } }

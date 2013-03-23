@@ -88,7 +88,11 @@ std::ostream& operator<<(std::ostream& s, const nested_type_view_model& v) {
       << "\"is_variant_like\": " << v.is_variant_like() << ", "
       << "\"children\": " << v.children() << ", "
       << "\"namespaces\": " << v.namespaces() << ", "
-      << "\"is_filesystem_path\": " << v.is_filesystem_path()
+      << "\"is_filesystem_path\": " << v.is_filesystem_path() << ", "
+      << "\"is_date\": " << v.is_date() << ", "
+      << "\"is_ptime\": " << v.is_ptime() << ", "
+      << "\"is_time_duration\": " << v.is_time_duration() << ", "
+      << "\"is_pair\": " << v.is_pair()
       << " }";
     return(s);
 }

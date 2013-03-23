@@ -71,6 +71,10 @@ std::size_t nested_type_view_model_hasher::hash(const nested_type_view_model&v) 
     combine(seed, hash_std_list_dogen_cpp_view_models_nested_type_view_model(v.children()));
     combine(seed, hash_std_list_std_string(v.namespaces()));
     combine(seed, v.is_filesystem_path());
+    combine(seed, v.is_date());
+    combine(seed, v.is_ptime());
+    combine(seed, v.is_time_duration());
+    combine(seed, v.is_pair());
 
     return seed;
 }
