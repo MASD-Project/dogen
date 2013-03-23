@@ -422,7 +422,8 @@ void dia_dfs_visitor::process_dia_object(const dogen::dia::object& o) {
                     pod.generation_type(generation_types::partial_generation);
             } else if (st == stereotypes::service) {
                 pod.pod_type(dogen::sml::pod_types::service);
-                pod.generation_type(generation_types::partial_generation);
+                if (state_->is_target_)
+                    pod.generation_type(generation_types::partial_generation);
             } else
                 pod.pod_type(dogen::sml::pod_types::value);
         } else if (a.name() == dia_comment) {
