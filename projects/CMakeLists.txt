@@ -147,6 +147,7 @@ include_directories(
     ${CMAKE_SOURCE_DIR}/projects/dia/include
     ${CMAKE_SOURCE_DIR}/projects/sml/include
     ${CMAKE_SOURCE_DIR}/projects/config/include
+    ${CMAKE_SOURCE_DIR}/projects/cpp/include
     ${CMAKE_SOURCE_DIR}/projects/utility/include
     ${CMAKE_SOURCE_DIR}/projects/generator/include
     ${CMAKE_SOURCE_DIR}/projects/driver/include
@@ -192,6 +193,7 @@ add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dia/spec)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/sml)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/sml/spec)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/config)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/cpp)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/utility)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/generator)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/driver)
