@@ -5196,7 +5196,7 @@ descend from it. Names are in identifiable name format.#</dia:string>
         <dia:point val="-49,-15.125"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-49.05,-15.175;-40.5475,-7.475"/>
+        <dia:rectangle val="-49.05,-15.175;-40.5475,-8.275"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-49,-15.125"/>
@@ -5205,7 +5205,7 @@ descend from it. Names are in identifiable name format.#</dia:string>
         <dia:real val="8.4024999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="7.6000000000000005"/>
+        <dia:real val="6.8000000000000007"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#cpp_aspect_types#</dia:string>
@@ -5313,29 +5313,6 @@ components a facet has, which we choose to call @e aspects.#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
             <dia:string>#The representation of the domain type for this facet#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#includers#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>#Header file with includes for all headers in facet#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -6135,16 +6112,16 @@ pre-processor includes.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="-44.7987,-7.525"/>
+        <dia:point val="-44.7987,-8.325"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-57.05,-8.275;-44.0487,2.8"/>
+        <dia:rectangle val="-57.05,-9.075;-44.0487,2.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="-44.7987,-7.525"/>
+        <dia:point val="-44.7987,-8.325"/>
         <dia:point val="-44.7987,-2.1875"/>
         <dia:point val="-57,-2.1875"/>
         <dia:point val="-57,2"/>
