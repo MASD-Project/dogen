@@ -28,7 +28,7 @@
 namespace dogen {
 namespace cpp {
 
-/*
+/**
  * @brief An aspect in a facet.
  *
  * Facets represent different ways of looking at domain objects.

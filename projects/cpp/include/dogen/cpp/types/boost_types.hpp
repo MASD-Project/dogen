@@ -28,7 +28,7 @@
 namespace dogen {
 namespace cpp {
 
-/*
+/**
  * @brief Available types in the boost model
  */
 enum class boost_types : unsigned int {

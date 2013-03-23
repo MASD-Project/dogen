@@ -28,7 +28,7 @@
 namespace dogen {
 namespace cpp {
 
-/*
+/**
  * @brief Available types in the standard library
  */
 enum class std_types : unsigned int {

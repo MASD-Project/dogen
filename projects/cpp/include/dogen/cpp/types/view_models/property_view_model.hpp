@@ -58,7 +58,7 @@ private:
     friend void boost::serialization::load(Archive& ar, property_view_model& v, unsigned int version);
 
 public:
-    /*
+    /**
      * @brief Name of the property.
      */
     /**@{*/
@@ -68,7 +68,7 @@ public:
     void name(const std::string&& v);
     /**@}*/
 
-    /*
+    /**
      * @brief Type of the property.
      */
     /**@{*/
@@ -78,7 +78,7 @@ public:
     void type(const dogen::cpp::view_models::nested_type_view_model&& v);
     /**@}*/
 
-    /*
+    /**
      * @brief Documentation for the property
      */
     /**@{*/

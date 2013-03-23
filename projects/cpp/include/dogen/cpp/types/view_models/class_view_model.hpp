@@ -72,7 +72,7 @@ private:
     friend void boost::serialization::load(Archive& ar, class_view_model& v, unsigned int version);
 
 public:
-    /*
+    /**
      * @brief List of all namespaces containing the class.
      */
     /**@{*/
@@ -82,7 +82,7 @@ public:
     void namespaces(const std::list<std::string>&& v);
     /**@}*/
 
-    /*
+    /**
      * @brief Name of the class.
      */
     /**@{*/
@@ -92,7 +92,7 @@ public:
     void name(const std::string&& v);
     /**@}*/
 
-    /*
+    /**
      * @brief Properties of the class itself (e.g. excludes inherited
      * properties).
      */
@@ -103,7 +103,7 @@ public:
     void properties(const std::list<dogen::cpp::view_models::property_view_model>&& v);
     /**@}*/
 
-    /*
+    /**
      * @brief All properties of the class including inherited.
      */
     /**@{*/
@@ -113,7 +113,7 @@ public:
     void all_properties(const std::list<dogen::cpp::view_models::property_view_model>&& v);
     /**@}*/
 
-    /*
+    /**
      * @brief True if the class has at least one property which is a
      * primitive, false otherwise.
      */
@@ -122,7 +122,7 @@ public:
     void has_primitive_properties(const bool v);
     /**@}*/
 
-    /*
+    /**
      * @brief True if the class has member variables which require
      * changing the stream with manipulators, false otherwise.
      *
@@ -134,7 +134,7 @@ public:
     void requires_stream_manipulators(const bool v);
     /**@}*/
 
-    /*
+    /**
      * @brief True if the class requires a manually generated move
      * constructor, false otherwise.
      */
@@ -143,7 +143,7 @@ public:
     void requires_manual_move_constructor(const bool v);
     /**@}*/
 
-    /*
+    /**
      * @brief True if the class requires a manually generated default
      * constructor, false otherwise.
      */
@@ -152,7 +152,7 @@ public:
     void requires_manual_default_constructor(const bool v);
     /**@}*/
 
-    /*
+    /**
      * @brief Parents for this class.
      */
     /**@{*/
@@ -162,7 +162,7 @@ public:
     void parents(const std::list<dogen::cpp::view_models::parent_view_model>&& v);
     /**@}*/
 
-    /*
+    /**
      * @brief True if this class is the parent of one or more classes,
      * false otherwise.
      */
@@ -171,7 +171,7 @@ public:
     void is_parent(const bool v);
     /**@}*/
 
-    /*
+    /**
      * @brief Documentation for the property
      */
     /**@{*/
@@ -181,7 +181,7 @@ public:
     void documentation(const std::string&& v);
     /**@}*/
 
-    /*
+    /**
      * @brief Parent at the root of a class hierarchy, if any.
      */
     /**@{*/
@@ -191,7 +191,7 @@ public:
     void original_parent_name(const std::string&& v);
     /**@}*/
 
-    /*
+    /**
      * @brief If the class is abstract, list of concrete types that
      * descend from it. Names are in identifiable name format.
      */

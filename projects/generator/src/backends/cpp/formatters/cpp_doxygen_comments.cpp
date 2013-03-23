@@ -86,5 +86,4 @@ format_end_block(const std::string& documentation) {
     stream_ << indenter_ << "/**@}*/" << std::endl;
 }
 
-
 } } } } }

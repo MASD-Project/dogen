@@ -56,7 +56,7 @@ private:
     friend void boost::serialization::load(Archive& ar, parent_view_model& v, unsigned int version);
 
 public:
-    /*
+    /**
      * @brief List of all namespaces containing the class.
      */
     /**@{*/
@@ -66,7 +66,7 @@ public:
     void namespaces(const std::list<std::string>&& v);
     /**@}*/
 
-    /*
+    /**
      * @brief Name of the class.
      */
     /**@{*/
@@ -76,7 +76,7 @@ public:
     void name(const std::string&& v);
     /**@}*/
 
-    /*
+    /**
      * @brief Properties of the class.
      */
     /**@{*/

@@ -28,7 +28,7 @@
 namespace dogen {
 namespace cpp {
 
-/*
+/**
  * @brief Types of files used by the C++ backend.
  */
 enum class cpp_file_types : unsigned int {

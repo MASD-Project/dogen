@@ -21,7 +21,6 @@
 #include <ostream>
 #include <sstream>
 #include "dogen/generator/backends/cpp/formatters/cpp_doxygen_comments.hpp"
-#include "dogen/generator/backends/cpp/formatters/cpp_doxygen_comments.hpp"
 #include "dogen/generator/backends/cpp/formatters/cpp_qualified_name.hpp"
 #include "dogen/generator/backends/cpp/formatters/cpp_enumeration_declaration.hpp"
 
