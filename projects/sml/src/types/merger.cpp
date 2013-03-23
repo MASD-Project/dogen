@@ -122,7 +122,7 @@ qname merger::resolve_partial_type(const qname& n) const {
 
     // now try all available package paths
     for (const auto& pair : models_) {
-        const auto m(pair.second);
+        const auto& m(pair.second);
         r.external_package_path(m.external_package_path());
         i = pods.find(r);
         if (i != pods.end())
@@ -139,7 +139,29 @@ qname merger::resolve_partial_type(const qname& n) const {
     if (j != primitives.end())
         return r;
 
-    if (r.model_name().empty() || r.model_name() == merged_model_.name()) {
+    // try enumerations
+    const auto& enumerations(merged_model_.enumerations());
+    r.meta_type(meta_types::enumeration);
+    auto k(enumerations.find(r));
+    if (k != enumerations.end())
+        return r;
+
+    // then try setting package path to the target one
+    r.external_package_path(merged_model_.external_package_path());
+    k = enumerations.find(r);
+    if (k != enumerations.end())
+        return r;
+
+    // now try all available package paths
+    for (const auto& pair : models_) {
+        const auto m(pair.second);
+        r.external_package_path(m.external_package_path());
+        k = enumerations.find(r);
+        if (k != enumerations.end())
+            return r;
+    }
+
+    if (r.model_name().empty()) {
         // it could be a type defined in this model
         r.meta_type(meta_types::pod);
         r.model_name(merged_model_.name());
@@ -148,38 +170,18 @@ qname merger::resolve_partial_type(const qname& n) const {
         if (i != pods.end())
             return r;
 
-        // try enumerations
         const auto& enumerations(merged_model_.enumerations());
-        BOOST_LOG_SEV(lg, debug) << enumerations;
-
         r.meta_type(meta_types::enumeration);
-        BOOST_LOG_SEV(lg, debug) << r;
         auto k(enumerations.find(r));
         if (k != enumerations.end())
             return r;
-
-        // then try setting package path to the target one
-        r.external_package_path(merged_model_.external_package_path());
-        k = enumerations.find(r);
-        if (k != enumerations.end())
-            return r;
-
-        // now try all available package paths
-        for (const auto& pair : models_) {
-            const auto m(pair.second);
-            r.external_package_path(m.external_package_path());
-            k = enumerations.find(r);
-            if (k != enumerations.end())
-                return r;
-        }
     }
 
     BOOST_LOG_SEV(lg, error) << undefined_type << n;
     BOOST_THROW_EXCEPTION(merging_error(undefined_type + n.type_name()));
 }
 
-void
-merger::resolve_partial_type(nested_qname& n) const {
+void merger::resolve_partial_type(nested_qname& n) const {
     auto children(n.children());
     for (auto i(children.begin()); i != children.end(); ++i)
         resolve_partial_type(*i);
