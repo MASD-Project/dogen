@@ -46,6 +46,9 @@ public:
     merger();
 
 private:
+    void check_qname(const std::string& model_name,
+        const meta_types meta_type, const qname& key,
+        const qname& value) const;
     void resolve_partial_type(nested_qname& t) const;
     std::vector<property> resolve_properties(const pod& pod);
     void resolve_parent(const pod& pod);
