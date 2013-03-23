@@ -186,18 +186,15 @@ merger::resolve_properties(const pod& pod) {
 }
 
 void merger::resolve() {
-    auto pods(merged_model_.pods());
-
-    for (auto i(pods.begin()); i != pods.end(); ++i) {
-        const qname qname(i->first);
-        pod& pod(i->second);
+    for (auto& pair : merged_model_.pods()) {
+        const qname qname(pair.first);
+        pod& pod(pair.second);
         if (pod.generation_type() == generation_types::no_generation)
             continue;
 
         resolve_parent(pod);
         pod.properties(resolve_properties(pod));
     }
-    merged_model_.pods(pods);
 }
 
 std::unordered_map<std::string, reference>
