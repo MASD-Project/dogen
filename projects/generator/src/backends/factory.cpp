@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/generator/backends/cpp/cpp_backend.hpp"
+#include "dogen/generator/backends/cpp_backend.hpp"
 #include "dogen/generator/backends/factory.hpp"
 #include "dogen/utility/log/logger.hpp"
 
@@ -40,7 +40,7 @@ factory::result_type factory::create() const {
     if (settings_.cpp().disable_backend())
         log_cpp_backend_disabled();
     else
-        r.push_back(cpp::cpp_backend::create(model_, settings_.cpp())) ;
+        r.push_back(cpp_backend::create(model_, settings_.cpp())) ;
 
     return r;
 }

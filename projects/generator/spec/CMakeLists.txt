@@ -29,6 +29,7 @@ set_target_properties(generator_spec PROPERTIES OUTPUT_NAME ${binary_name})
 target_link_libraries(generator_spec
     generator
     utility
+    cpp
     dia
     sml
     config

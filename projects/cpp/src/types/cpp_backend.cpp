@@ -35,6 +35,7 @@ namespace {
 
 auto lg(logger_factory("cpp_backend"));
 
+const std::string cmakelists_file_name("CMakeLists.txt");
 const std::string domain_facet_must_be_enabled("Domain facet must be enabled");
 const std::string integrated_io_incompatible_with_io_facet(
     "Integrated IO cannot be used with the IO facet");
@@ -79,7 +80,7 @@ void cpp_backend::log_finished() const {
 }
 
 void cpp_backend::log_cmakelists_disabled() const {
-    BOOST_LOG_SEV(lg, info) << "CMakeLists.txt generation disabled.";
+    BOOST_LOG_SEV(lg, info) << "CMakeLists generation disabled.";
 }
 
 void cpp_backend::log_file_views(unsigned int how_many) const {
@@ -89,6 +90,7 @@ void cpp_backend::log_file_views(unsigned int how_many) const {
 
 cpp_backend::value_type cpp_backend::generate_cmakelists() const {
     view_models::cmakelists_view_model vm;
+    vm.file_name(cmakelists_file_name);
     vm.file_path(location_manager_.absolute_path_to_src(vm.file_name()));
     vm.model_name(model_.name());
 

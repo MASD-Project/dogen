@@ -32,6 +32,7 @@
 #include "dogen/config/types/validator.hpp"
 #include "dogen/config/io/settings_io.hpp"
 #include "dogen/generator/housekeeper.hpp"
+#include "dogen/cpp/types/generation_failure.hpp"
 #include "dogen/generator/generation_failure.hpp"
 #include "dogen/generator/modeling/dia_to_sml.hpp"
 #include "dogen/generator/outputters/factory.hpp"
@@ -127,9 +128,13 @@ void generator::generate(backends::backend& b) const {
 }
 
 void generator::generate(const sml::model& m) const {
-    const auto lambda([&](backends::backend::ptr p) { generate(*p); });
-    backends::factory f(m, settings_);
-    boost::for_each(f.create(), lambda);
+    try {
+        const auto lambda([&](backends::backend::ptr p) { generate(*p); });
+        backends::factory f(m, settings_);
+        boost::for_each(f.create(), lambda);
+    } catch(const dogen::cpp::generation_failure& e) {
+        BOOST_THROW_EXCEPTION(dogen::generator::generation_failure(e.what()));
+    }
 }
 
 boost::optional<sml::model> generator::merge_models() const {

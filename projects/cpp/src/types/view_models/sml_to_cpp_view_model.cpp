@@ -39,6 +39,7 @@
 #include "dogen/cpp/types/view_models/transformation_error.hpp"
 #include "dogen/cpp/io/cpp_aspect_types_io.hpp"
 #include "dogen/cpp/io/cpp_file_types_io.hpp"
+#include "dogen/cpp/io/view_models/file_view_model_io.hpp"
 #include "dogen/cpp/types/view_models/sml_to_cpp_view_model.hpp"
 
 using namespace dogen::utility::log;
@@ -384,7 +385,9 @@ void sml_dfs_visitor::process_sml_pod(const dogen::sml::pod& pod) {
         parent_view_model parent;
         parent.name(pqn.type_name());
         parent.properties(i->second.all_properties());
-        all_props_vm.splice(all_props_vm.end(), i->second.all_properties());
+        // FIXME
+        auto tmp(i->second.all_properties());
+        all_props_vm.splice(all_props_vm.end(), tmp);
         parent.namespaces(i->second.namespaces());
 
         std::list<parent_view_model> parents;
@@ -435,10 +438,10 @@ void sml_dfs_visitor::process_sml_pod(const dogen::sml::pod& pod) {
     cvm.has_primitive_properties(has_primitive_properties);
     cvm.requires_stream_manipulators(requires_stream_manipulators);
     cvm.requires_manual_move_constructor(requires_manual_move_constructor);
-    cvm.requires_manual_default_constructor(requires_manual_default_constructor);
+    cvm.requires_manual_default_constructor(
+        requires_manual_default_constructor);
     cvm.implementation_specific_parameters(
         pod.implementation_specific_parameters());
-
 
     const auto opn(pod.original_parent_name());
     if (opn) {

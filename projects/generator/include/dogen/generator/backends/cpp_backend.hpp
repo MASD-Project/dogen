@@ -18,41 +18,49 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_GENERATOR_BACKENDS_CPP_FORMATTERS_CPP_HEADER_GUARDS_HPP
-#define DOGEN_GENERATOR_BACKENDS_CPP_FORMATTERS_CPP_HEADER_GUARDS_HPP
+#ifndef DOGEN_GENERATOR_BACKENDS_CPP_BACKEND_HPP
+#define DOGEN_GENERATOR_BACKENDS_CPP_BACKEND_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <iosfwd>
+#include <map>
+#include <utility>
 #include <string>
+#include <sstream>
+#include <boost/filesystem/path.hpp>
+#include "dogen/sml/types/model.hpp"
+#include "dogen/config/types/cpp_settings.hpp"
+#include "dogen/cpp/types/cpp_backend.hpp"
+#include "dogen/generator/backends/backend.hpp"
 
 namespace dogen {
 namespace generator {
 namespace backends {
-namespace cpp {
-namespace formatters {
 
-class header_guards {
+class cpp_backend : public backend {
 public:
-    header_guards() = delete;
-    header_guards(const header_guards&) = default;
-    ~header_guards() = default;
-    header_guards(header_guards&&) = default;
-    header_guards& operator=(const header_guards&) = default;
+    cpp_backend() = delete;
+    cpp_backend(const cpp_backend&) = default;
+    cpp_backend(cpp_backend&&) = default;
+    cpp_backend& operator=(const cpp_backend&) = default;
 
 public:
-    explicit header_guards(std::ostream& stream);
+    cpp_backend(const sml::model& model, const config::cpp_settings& settings);
+    virtual ~cpp_backend() noexcept {}
 
 public:
-    void format_start(const std::string& guard_name);
-    void format_end();
+    static backend::ptr
+    create(const sml::model& model, const config::cpp_settings& settings);
 
+public:
+    backend::value_type generate() override;
+    std::vector<boost::filesystem::path> managed_directories() const override;
 private:
-    std::ostream& stream_;
+    cpp::cpp_backend impl_;
 };
 
-} } } } }
+} } }
 
 #endif

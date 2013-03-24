@@ -40,7 +40,7 @@ project(dogen)
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/build/cmake)
 
 # options
-option(WITH_DEBUG "Build the project with debug symbols" off)
+option(WITH_DEBUG "Build the project with debug symbols" on)
 option(WITH_PROFILING "Build the project with profiling support" off)
 
 #
@@ -189,11 +189,12 @@ set(DOGEN_PATCH_VERSION ${GIT_COMMIT_COUNT})
 set(DOGEN_VERSION "${DOGEN_MAJOR_VERSION}")
 set(DOGEN_VERSION "${DOGEN_VERSION}.${DOGEN_MINOR_VERSION}")
 set(DOGEN_VERSION "${DOGEN_VERSION}.${DOGEN_PATCH_VERSION}")
-message(STATUS "Product version: ${DOGEN_VERSION}")
 
 if(WITH_DEBUG)
+    message(STATUS "Building with DEBUG symbols...")
     set(DOGEN_VERSION "${DOGEN_VERSION}d")
 endif()
+message(STATUS "Product version: ${DOGEN_VERSION}")
 
 # system includes
 include_directories(SYSTEM

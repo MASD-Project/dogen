@@ -18,39 +18,29 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/generator/backends/cpp/formatters/cpp_domain_class_implementation.hpp"
+#include <boost/throw_exception.hpp>
+#include "dogen/cpp/types/cpp_backend.hpp"
+#include "dogen/generator/backends/cpp_backend.hpp"
 
 namespace dogen {
 namespace generator {
 namespace backends {
-namespace cpp {
-namespace formatters {
 
-cpp_domain_class_implementation::
-cpp_domain_class_implementation(std::ostream& stream,
-    bool disable_complete_constructor, bool disable_io) :
-    cpp_class_implementation(stream),
-    disable_complete_constructor_(disable_complete_constructor),
-    disable_io_(disable_io) { }
+cpp_backend::
+cpp_backend(const sml::model& model, const config::cpp_settings& settings) :
+    impl_(model, settings) { }
 
-void cpp_domain_class_implementation::
-hand_crafted_constructors(const class_view_model& vm) {
-    default_constructor(vm);
-    move_constructor(vm);
-    if (!disable_complete_constructor_)
-        complete_constructor(vm);
+backend::ptr cpp_backend::
+create(const sml::model& model, const config::cpp_settings& settings) {
+    return backend::ptr(new cpp_backend(model, settings));
 }
 
-
-void cpp_domain_class_implementation::format(const class_view_model& vm) {
-    hand_crafted_constructors(vm);
-    if (!disable_io_)
-        to_stream(vm);
-    swap(vm);
-    equals_method(vm);
-    equals_operator(vm);
-    assignment_operator(vm);
-    getters_and_setters(vm);
+backend::value_type cpp_backend::generate() {
+    return impl_.generate();
 }
 
-} } } } }
+std::vector<boost::filesystem::path> cpp_backend::managed_directories() const {
+    return impl_.managed_directories();
+}
+
+} } }
