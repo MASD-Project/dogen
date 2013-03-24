@@ -35,8 +35,8 @@ namespace dogen {
 namespace cpp {
 namespace formatters {
 
-cpp_include_cmakelists::cpp_include_cmakelists(std::ostream& stream) : stream_(stream) {
-}
+cpp_include_cmakelists::
+cpp_include_cmakelists(std::ostream& stream) : stream_(stream) { }
 
 void cpp_include_cmakelists::format(const cmakelists_view_model& vm) {
     const std::string mn(vm.model_name().empty() ?
@@ -73,13 +73,16 @@ void cpp_include_cmakelists::format(const cmakelists_view_model& vm) {
             << "#" << std::endl
             << "add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/src)" << std::endl
             << std::endl
-            << "install(" << std::endl
-            << "DIRECTORY include/" << std::endl
-            << "DESTINATION include/";
+            << "install(" << std::endl;
 
-    stream_ << std::endl
-            << "COMPONENT headers" << std::endl
-            << "FILES_MATCHING PATTERN \"*.hpp\")" << std::endl;
+    {
+        cpp_positive_indenter_scope s(indenter_);
+        stream_ << indenter_ << "DIRECTORY include/" << std::endl
+                << indenter_ << "DESTINATION include/" << std::endl
+                << indenter_ << "COMPONENT headers" << std::endl
+                << indenter_ << "FILES_MATCHING PATTERN \"*.hpp\")"
+                << std::endl;
+    }
 }
 
 } } }

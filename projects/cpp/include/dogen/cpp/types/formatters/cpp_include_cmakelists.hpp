@@ -28,6 +28,7 @@
 #include <iosfwd>
 #include <string>
 #include <boost/filesystem/path.hpp>
+#include "dogen/cpp/types/formatters/cpp_indenter.hpp"
 #include "dogen/cpp/types/view_models/cmakelists_view_model.hpp"
 
 namespace dogen {
@@ -46,13 +47,14 @@ public:
     cpp_include_cmakelists& operator=(const cpp_include_cmakelists&) = default;
 
 public:
-    explicit cpp_include_cmakelists(std::ostream& stream);
+    cpp_include_cmakelists(std::ostream& stream);
 
 public:
     void format(const cmakelists_view_model& vm);
 
 private:
     std::ostream& stream_;
+    cpp_indenter indenter_;
 };
 
 } } }
