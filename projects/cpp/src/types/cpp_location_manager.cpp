@@ -159,7 +159,7 @@ std::string cpp_location_manager::extension(file_types file_type) const {
 }
 
 boost::filesystem::path cpp_location_manager::relative_logical_path(
-    const cpp_location_request& request) const {
+    const location_request& request) const {
     boost::filesystem::path r;
 
     if (settings_.split_project()) {
@@ -172,7 +172,7 @@ boost::filesystem::path cpp_location_manager::relative_logical_path(
 }
 
 boost::filesystem::path cpp_location_manager::relative_physical_path(
-    const cpp_location_request& request) const {
+    const location_request& request) const {
     boost::filesystem::path r;
 
     if (settings_.split_project())
@@ -198,7 +198,7 @@ boost::filesystem::path cpp_location_manager::relative_physical_path(
 }
 
 boost::filesystem::path
-cpp_location_manager::absolute_path(const cpp_location_request& request) const {
+cpp_location_manager::absolute_path(const location_request& request) const {
 
     auto r(file_type_directory(request.file_type()));
     r /= relative_physical_path(request);

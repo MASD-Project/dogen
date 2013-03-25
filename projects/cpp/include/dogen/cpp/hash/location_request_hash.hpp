@@ -18,26 +18,35 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_SERIALIZATION_CPP_LOCATION_REQUEST_SER_HPP
-#define DOGEN_CPP_SERIALIZATION_CPP_LOCATION_REQUEST_SER_HPP
+#ifndef DOGEN_CPP_HASH_LOCATION_REQUEST_HASH_HPP
+#define DOGEN_CPP_HASH_LOCATION_REQUEST_HASH_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <boost/serialization/split_free.hpp>
-#include "dogen/cpp/types/cpp_location_request.hpp"
+#include <functional>
+#include "dogen/cpp/types/location_request.hpp"
 
-BOOST_SERIALIZATION_SPLIT_FREE(dogen::cpp::cpp_location_request)
-namespace boost {
-namespace serialization {
+namespace dogen {
+namespace cpp {
 
-template<typename Archive>
-void save(Archive& ar, const dogen::cpp::cpp_location_request& v, unsigned int version);
-
-template<typename Archive>
-void load(Archive& ar, dogen::cpp::cpp_location_request& v, unsigned int version);
+class location_request_hasher {
+public:
+    static std::size_t hash(const location_request& v);
+};
 
 } }
 
+namespace std {
+
+template<>
+class hash<dogen::cpp::location_request> {
+public:
+    size_t operator()(const dogen::cpp::location_request& v) const {
+        return dogen::cpp::location_request_hasher::hash(v);
+    }
+};
+
+}
 #endif

@@ -18,17 +18,17 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/cpp/types/cpp_location_request.hpp"
+#include "dogen/cpp/types/location_request.hpp"
 
 namespace dogen {
 namespace cpp {
 
-cpp_location_request::cpp_location_request()
+location_request::location_request()
     : facet_type_(static_cast<dogen::config::cpp_facet_types>(0)),
       file_type_(static_cast<dogen::cpp::file_types>(0)),
       aspect_type_(static_cast<dogen::cpp::aspect_types>(0)) { }
 
-cpp_location_request::cpp_location_request(
+location_request::location_request(
     const dogen::config::cpp_facet_types& facet_type,
     const dogen::cpp::file_types& file_type,
     const dogen::cpp::aspect_types& aspect_type,
@@ -44,7 +44,7 @@ cpp_location_request::cpp_location_request(
       package_path_(package_path),
       file_name_(file_name) { }
 
-void cpp_location_request::swap(cpp_location_request& other) noexcept {
+void location_request::swap(location_request& other) noexcept {
     using std::swap;
     swap(facet_type_, other.facet_type_);
     swap(file_type_, other.file_type_);
@@ -55,7 +55,7 @@ void cpp_location_request::swap(cpp_location_request& other) noexcept {
     swap(file_name_, other.file_name_);
 }
 
-bool cpp_location_request::operator==(const cpp_location_request& rhs) const {
+bool location_request::operator==(const location_request& rhs) const {
     return facet_type_ == rhs.facet_type_ &&
         file_type_ == rhs.file_type_ &&
         aspect_type_ == rhs.aspect_type_ &&
@@ -65,97 +65,97 @@ bool cpp_location_request::operator==(const cpp_location_request& rhs) const {
         file_name_ == rhs.file_name_;
 }
 
-cpp_location_request& cpp_location_request::operator=(cpp_location_request other) {
+location_request& location_request::operator=(location_request other) {
     using std::swap;
     swap(*this, other);
     return *this;
 }
 
-dogen::config::cpp_facet_types cpp_location_request::facet_type() const {
+dogen::config::cpp_facet_types location_request::facet_type() const {
     return facet_type_;
 }
 
-void cpp_location_request::facet_type(const dogen::config::cpp_facet_types& v) {
+void location_request::facet_type(const dogen::config::cpp_facet_types& v) {
     facet_type_ = v;
 }
 
-dogen::cpp::file_types cpp_location_request::file_type() const {
+dogen::cpp::file_types location_request::file_type() const {
     return file_type_;
 }
 
-void cpp_location_request::file_type(const dogen::cpp::file_types& v) {
+void location_request::file_type(const dogen::cpp::file_types& v) {
     file_type_ = v;
 }
 
-dogen::cpp::aspect_types cpp_location_request::aspect_type() const {
+dogen::cpp::aspect_types location_request::aspect_type() const {
     return aspect_type_;
 }
 
-void cpp_location_request::aspect_type(const dogen::cpp::aspect_types& v) {
+void location_request::aspect_type(const dogen::cpp::aspect_types& v) {
     aspect_type_ = v;
 }
 
-const std::string& cpp_location_request::model_name() const {
+const std::string& location_request::model_name() const {
     return model_name_;
 }
 
-std::string& cpp_location_request::model_name() {
+std::string& location_request::model_name() {
     return model_name_;
 }
 
-void cpp_location_request::model_name(const std::string& v) {
+void location_request::model_name(const std::string& v) {
     model_name_ = v;
 }
 
-void cpp_location_request::model_name(const std::string&& v) {
+void location_request::model_name(const std::string&& v) {
     model_name_ = std::move(v);
 }
 
-const std::list<std::string>& cpp_location_request::external_package_path() const {
+const std::list<std::string>& location_request::external_package_path() const {
     return external_package_path_;
 }
 
-std::list<std::string>& cpp_location_request::external_package_path() {
+std::list<std::string>& location_request::external_package_path() {
     return external_package_path_;
 }
 
-void cpp_location_request::external_package_path(const std::list<std::string>& v) {
+void location_request::external_package_path(const std::list<std::string>& v) {
     external_package_path_ = v;
 }
 
-void cpp_location_request::external_package_path(const std::list<std::string>&& v) {
+void location_request::external_package_path(const std::list<std::string>&& v) {
     external_package_path_ = std::move(v);
 }
 
-const std::list<std::string>& cpp_location_request::package_path() const {
+const std::list<std::string>& location_request::package_path() const {
     return package_path_;
 }
 
-std::list<std::string>& cpp_location_request::package_path() {
+std::list<std::string>& location_request::package_path() {
     return package_path_;
 }
 
-void cpp_location_request::package_path(const std::list<std::string>& v) {
+void location_request::package_path(const std::list<std::string>& v) {
     package_path_ = v;
 }
 
-void cpp_location_request::package_path(const std::list<std::string>&& v) {
+void location_request::package_path(const std::list<std::string>&& v) {
     package_path_ = std::move(v);
 }
 
-const std::string& cpp_location_request::file_name() const {
+const std::string& location_request::file_name() const {
     return file_name_;
 }
 
-std::string& cpp_location_request::file_name() {
+std::string& location_request::file_name() {
     return file_name_;
 }
 
-void cpp_location_request::file_name(const std::string& v) {
+void location_request::file_name(const std::string& v) {
     file_name_ = v;
 }
 
-void cpp_location_request::file_name(const std::string&& v) {
+void location_request::file_name(const std::string&& v) {
     file_name_ = std::move(v);
 }
 

@@ -20,8 +20,8 @@
  */
 #include "dogen/config/hash/cpp_facet_types_hash.hpp"
 #include "dogen/cpp/hash/aspect_types_hash.hpp"
-#include "dogen/cpp/hash/cpp_location_request_hash.hpp"
 #include "dogen/cpp/hash/file_types_hash.hpp"
+#include "dogen/cpp/hash/location_request_hash.hpp"
 
 namespace {
 
@@ -45,7 +45,7 @@ inline std::size_t hash_std_list_std_string(const std::list<std::string>& v){
 namespace dogen {
 namespace cpp {
 
-std::size_t cpp_location_request_hasher::hash(const cpp_location_request&v) {
+std::size_t location_request_hasher::hash(const location_request&v) {
     std::size_t seed(0);
 
     combine(seed, v.facet_type());

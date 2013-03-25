@@ -29,7 +29,7 @@
 #include <string>
 #include <boost/filesystem/path.hpp>
 #include "dogen/config/types/cpp_settings.hpp"
-#include "dogen/cpp/types/cpp_location_request.hpp"
+#include "dogen/cpp/types/location_request.hpp"
 #include "dogen/config/types/cpp_facet_types.hpp"
 #include "dogen/cpp/types/file_types.hpp"
 #include "dogen/cpp/types/aspect_types.hpp"
@@ -76,7 +76,7 @@ public:
      * take into account existing namespaces the user may have already
      * defined.
      */
-    path relative_logical_path(const cpp_location_request& request) const;
+    path relative_logical_path(const location_request& request) const;
 
     /**
      * @brief Returns the path to the requested location, excluding
@@ -86,13 +86,13 @@ public:
      * physical path matches the location on the hard drive for the
      * artefact in question.
      */
-    path relative_physical_path(const cpp_location_request& request) const;
+    path relative_physical_path(const location_request& request) const;
 
     /**
      * @brief Returns the absolute path for the request, taking into
      * account source and include directories, etc.
      */
-    path absolute_path(const cpp_location_request& request) const;
+    path absolute_path(const location_request& request) const;
 
     /**
      * @brief Returns an absolute path into the source directory for

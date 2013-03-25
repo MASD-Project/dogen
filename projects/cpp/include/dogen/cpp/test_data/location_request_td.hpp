@@ -18,24 +18,24 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_TEST_DATA_CPP_LOCATION_REQUEST_TD_HPP
-#define DOGEN_CPP_TEST_DATA_CPP_LOCATION_REQUEST_TD_HPP
+#ifndef DOGEN_CPP_TEST_DATA_LOCATION_REQUEST_TD_HPP
+#define DOGEN_CPP_TEST_DATA_LOCATION_REQUEST_TD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/cpp/types/cpp_location_request.hpp"
+#include "dogen/cpp/types/location_request.hpp"
 
 namespace dogen {
 namespace cpp {
 
-class cpp_location_request_generator {
+class location_request_generator {
 public:
-    cpp_location_request_generator();
+    location_request_generator();
 
 public:
-    typedef dogen::cpp::cpp_location_request result_type;
+    typedef dogen::cpp::location_request result_type;
 
 public:
     static void populate(const unsigned int position, result_type& v);

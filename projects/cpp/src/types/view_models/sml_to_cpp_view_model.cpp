@@ -522,11 +522,11 @@ to_header_guard_name(const boost::filesystem::path& relative_path) const {
     return stream.str();
 }
 
-cpp_location_request sml_to_cpp_view_model::
+location_request sml_to_cpp_view_model::
 location_request_factory(config::cpp_facet_types ft, file_types flt,
     aspect_types at, const sml::qname& n) const {
 
-    cpp_location_request r;
+    location_request r;
     r.facet_type(ft);
     r.file_type(flt);
     r.aspect_type(at);

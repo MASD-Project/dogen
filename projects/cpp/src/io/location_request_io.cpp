@@ -22,8 +22,8 @@
 #include <ostream>
 #include "dogen/config/io/cpp_facet_types_io.hpp"
 #include "dogen/cpp/io/aspect_types_io.hpp"
-#include "dogen/cpp/io/cpp_location_request_io.hpp"
 #include "dogen/cpp/io/file_types_io.hpp"
+#include "dogen/cpp/io/location_request_io.hpp"
 
 
 inline std::string tidy_up_string(std::string s) {
@@ -50,9 +50,9 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<std::string>& v
 namespace dogen {
 namespace cpp {
 
-std::ostream& operator<<(std::ostream& s, const cpp_location_request& v) {
+std::ostream& operator<<(std::ostream& s, const location_request& v) {
     s << " { "
-      << "\"__type__\": " << "\"dogen::cpp::cpp_location_request\"" << ", "
+      << "\"__type__\": " << "\"dogen::cpp::location_request\"" << ", "
       << "\"facet_type\": " << v.facet_type() << ", "
       << "\"file_type\": " << v.file_type() << ", "
       << "\"aspect_type\": " << v.aspect_type() << ", "

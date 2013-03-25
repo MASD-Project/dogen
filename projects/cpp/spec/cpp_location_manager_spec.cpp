@@ -29,7 +29,7 @@
 #include "dogen/config/types/cpp_settings.hpp"
 #include "dogen/config/io/cpp_settings_io.hpp"
 #include "dogen/cpp/types/cpp_location_manager.hpp"
-#include "dogen/cpp/types/cpp_location_request.hpp"
+#include "dogen/cpp/types/location_request.hpp"
 #include "dogen/cpp/test/mock_settings_factory.hpp"
 
 using namespace dogen::cpp;
@@ -71,11 +71,11 @@ dogen::config::cpp_settings split_project_settings() {
         build_cpp_settings(src_dir, include_dir);
 }
 
-cpp_location_request request(cpp_facet_types ft, file_types flt,
+location_request request(cpp_facet_types ft, file_types flt,
     std::string type_name, std::list<std::string> package_path,
     std::list<std::string> external_package_path) {
 
-    cpp_location_request r;
+    location_request r;
 
     r.facet_type(ft);
     r.file_type(flt);
@@ -88,7 +88,7 @@ cpp_location_request request(cpp_facet_types ft, file_types flt,
     return r;
 }
 
-cpp_location_request request(cpp_facet_types ft, file_types flt) {
+location_request request(cpp_facet_types ft, file_types flt) {
     return request(ft, flt, type_name, package_path_1, external_package_path_1);
 }
 
@@ -126,7 +126,7 @@ BOOST_AUTO_TEST_CASE(split_project_configuration_results_in_expected_locations) 
     BOOST_CHECK(s.split_project());
 
     cpp_location_manager lm(test_model_name, s);
-    using dogen::cpp::cpp_location_request;
+    using dogen::cpp::location_request;
     auto rq(request(cpp_facet_types::types, file_types::header));
 
     boost::filesystem::path e("c/d/test/types/a/b/a_type.hpp");
@@ -183,7 +183,7 @@ BOOST_AUTO_TEST_CASE(non_split_project_configuration_results_in_expected_locatio
     BOOST_CHECK(!s.split_project());
 
     cpp_location_manager lm(test_model_name, s);
-    using dogen::cpp::cpp_location_request;
+    using dogen::cpp::location_request;
     auto rq(request(cpp_facet_types::types, file_types::header));
 
     boost::filesystem::path e("c/d/test/types/a/b/a_type.hpp");

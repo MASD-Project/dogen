@@ -97,7 +97,7 @@ private:
     std::string
     to_header_guard_name(const boost::filesystem::path& relative_path) const;
 
-    cpp_location_request location_request_factory(config::cpp_facet_types ft,
+    location_request location_request_factory(config::cpp_facet_types ft,
         file_types flt, aspect_types at, const sml::qname& n) const;
 
     /**

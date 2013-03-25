@@ -95,7 +95,7 @@ public:
         const config::cpp_settings& settings);
 
 private:
-    cpp_location_request location_request_factory(config::cpp_facet_types ft,
+    location_request location_request_factory(config::cpp_facet_types ft,
         file_types flt, aspect_types at, const sml::qname& name) const;
 
     /**

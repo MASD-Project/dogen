@@ -66,11 +66,11 @@ inclusion_manager::inclusion_manager(const sml::model& model,
         << " model name: " << model_.name();
 }
 
-cpp_location_request inclusion_manager::
+location_request inclusion_manager::
 location_request_factory(config::cpp_facet_types ft, file_types flt,
     aspect_types at, const sml::qname& name) const {
 
-    cpp_location_request r;
+    location_request r;
     r.facet_type(ft);
     r.file_type(flt);
     r.aspect_type(at);

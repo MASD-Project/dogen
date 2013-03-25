@@ -21,8 +21,8 @@
 #include <sstream>
 #include "dogen/config/test_data/cpp_facet_types_td.hpp"
 #include "dogen/cpp/test_data/aspect_types_td.hpp"
-#include "dogen/cpp/test_data/cpp_location_request_td.hpp"
 #include "dogen/cpp/test_data/file_types_td.hpp"
+#include "dogen/cpp/test_data/location_request_td.hpp"
 
 namespace {
 
@@ -60,9 +60,9 @@ std::list<std::string> create_std_list_std_string(unsigned int position) {
 namespace dogen {
 namespace cpp {
 
-cpp_location_request_generator::cpp_location_request_generator() : position_(0) { }
+location_request_generator::location_request_generator() : position_(0) { }
 
-void cpp_location_request_generator::
+void location_request_generator::
 populate(const unsigned int position, result_type& v) {
     v.facet_type(create_dogen_config_cpp_facet_types(position + 0));
     v.file_type(create_dogen_cpp_file_types(position + 1));
@@ -73,21 +73,21 @@ populate(const unsigned int position, result_type& v) {
     v.file_name(create_std_string(position + 6));
 }
 
-cpp_location_request_generator::result_type
-cpp_location_request_generator::create(const unsigned int position) {
-    cpp_location_request r;
-    cpp_location_request_generator::populate(position, r);
+location_request_generator::result_type
+location_request_generator::create(const unsigned int position) {
+    location_request r;
+    location_request_generator::populate(position, r);
     return r;
 }
-cpp_location_request_generator::result_type*
-cpp_location_request_generator::create_ptr(const unsigned int position) {
-    cpp_location_request* p = new cpp_location_request();
-    cpp_location_request_generator::populate(position, *p);
+location_request_generator::result_type*
+location_request_generator::create_ptr(const unsigned int position) {
+    location_request* p = new location_request();
+    location_request_generator::populate(position, *p);
     return p;
 }
 
-cpp_location_request_generator::result_type
-cpp_location_request_generator::operator()() {
+location_request_generator::result_type
+location_request_generator::operator()() {
     return create(position_++);
 }
 

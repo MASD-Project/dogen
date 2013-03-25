@@ -18,23 +18,25 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_SERIALIZATION_CPP_LOCATION_REQUEST_FWD_SER_HPP
-#define DOGEN_CPP_SERIALIZATION_CPP_LOCATION_REQUEST_FWD_SER_HPP
+#ifndef DOGEN_CPP_SERIALIZATION_LOCATION_REQUEST_SER_HPP
+#define DOGEN_CPP_SERIALIZATION_LOCATION_REQUEST_SER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/cpp/types/cpp_location_request_fwd.hpp"
+#include <boost/serialization/split_free.hpp>
+#include "dogen/cpp/types/location_request.hpp"
 
+BOOST_SERIALIZATION_SPLIT_FREE(dogen::cpp::location_request)
 namespace boost {
 namespace serialization {
 
-template<class Archive>
-void save(Archive& ar, const dogen::cpp::cpp_location_request& v, unsigned int version);
+template<typename Archive>
+void save(Archive& ar, const dogen::cpp::location_request& v, unsigned int version);
 
-template<class Archive>
-void load(Archive& ar, dogen::cpp::cpp_location_request& v, unsigned int version);
+template<typename Archive>
+void load(Archive& ar, dogen::cpp::location_request& v, unsigned int version);
 
 } }
 

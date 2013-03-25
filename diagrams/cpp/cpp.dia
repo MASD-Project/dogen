@@ -5563,13 +5563,13 @@ components a facet has, which we choose to call @e aspects.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O30">
       <dia:attribute name="obj_pos">
-        <dia:point val="-31.0625,-15.0625"/>
+        <dia:point val="-33.875,-14.9375"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-31.1125,-15.1125;-24.7375,-10.6125"/>
+        <dia:rectangle val="-33.925,-14.9875;-27.55,-10.4875"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-31.0625,-15.0625"/>
+        <dia:point val="-33.875,-14.9375"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="6.2750000000000004"/>
@@ -5957,7 +5957,7 @@ pre-processor includes.#</dia:string>
         <dia:real val="7.5999999999999996"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#cpp_location_request#</dia:string>
+        <dia:string>#location_request#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>##</dia:string>
@@ -6321,17 +6321,17 @@ pre-processor includes.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="-27.925,-10.6625"/>
+        <dia:point val="-30.7375,-10.5375"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-38.84,-11.4125;-27.175,2.8"/>
+        <dia:rectangle val="-38.84,-11.2875;-29.9875,2.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="-27.925,-10.6625"/>
-        <dia:point val="-27.925,-2.125"/>
+        <dia:point val="-30.7375,-10.5375"/>
+        <dia:point val="-30.7375,-2.125"/>
         <dia:point val="-38.79,-2.125"/>
         <dia:point val="-38.79,2"/>
       </dia:attribute>

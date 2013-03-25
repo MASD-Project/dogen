@@ -18,22 +18,17 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_IO_CPP_LOCATION_REQUEST_IO_HPP
-#define DOGEN_CPP_IO_CPP_LOCATION_REQUEST_IO_HPP
+#ifndef DOGEN_CPP_TYPES_LOCATION_REQUEST_FWD_HPP
+#define DOGEN_CPP_TYPES_LOCATION_REQUEST_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <iosfwd>
-#include "dogen/cpp/types/cpp_location_request.hpp"
-
 namespace dogen {
 namespace cpp {
 
-std::ostream&
-operator<<(std::ostream& s,
-     const dogen::cpp::cpp_location_request& v);
+class location_request;
 
 } }
 
