@@ -19,7 +19,7 @@
  *
  */
 #include <boost/throw_exception.hpp>
-#include "dogen/cpp/types/cpp_inclusion_manager.hpp"
+#include "dogen/cpp/types/inclusion_manager.hpp"
 #include "dogen/cpp/types/generation_failure.hpp"
 #include "dogen/cpp/types/formatters/factory.hpp"
 #include "dogen/cpp/types/formatters/file_formatter.hpp"

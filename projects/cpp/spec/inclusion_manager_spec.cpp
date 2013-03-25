@@ -30,7 +30,7 @@
 #include "dogen/cpp/types/cpp_location_manager.hpp"
 #include "dogen/cpp/types/cpp_location_request.hpp"
 #include "dogen/cpp/test/mock_settings_factory.hpp"
-#include "dogen/cpp/types/cpp_inclusion_manager.hpp"
+#include "dogen/cpp/types/inclusion_manager.hpp"
 
 using namespace dogen::cpp;
 using dogen::config::cpp_facet_types;

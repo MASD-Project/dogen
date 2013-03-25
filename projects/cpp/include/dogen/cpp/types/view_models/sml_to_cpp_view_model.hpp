@@ -34,7 +34,7 @@
 #include <boost/graph/adjacency_list.hpp>
 #include "dogen/config/types/cpp_settings.hpp"
 #include "dogen/cpp/types/cpp_location_manager.hpp"
-#include "dogen//cpp/types/cpp_inclusion_manager.hpp"
+#include "dogen//cpp/types/inclusion_manager.hpp"
 #include "dogen/cpp/types/aspect_types.hpp"
 #include "dogen/cpp/types/file_types.hpp"
 #include "dogen/config/types/cpp_facet_types.hpp"

@@ -21,7 +21,7 @@
 #include <boost/range/algorithm.hpp>
 #include <boost/range/algorithm/find_first_of.hpp>
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/cpp/types/cpp_inclusion_manager.hpp"
+#include "dogen/cpp/types/inclusion_manager.hpp"
 
 namespace {
 
