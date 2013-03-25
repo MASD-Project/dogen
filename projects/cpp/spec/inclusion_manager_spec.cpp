@@ -143,7 +143,7 @@ includes_for_one_pod_model(cpp_facet_types ft,
     std::vector<std::list<std::string> > r;
     r.reserve(4);
 
-    const cpp_aspect_types main(cpp_aspect_types::main);
+    const auto main(aspect_types::main);
     const auto i0(im.includes_for_pod(p, ft,  file_types::header, main));
     r.push_back(i0.system);
     r.push_back(i0.user);

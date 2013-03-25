@@ -64,7 +64,7 @@ private:
 
     void io_helper_methods(const class_view_model& vm);
     void inserter_operator(const class_view_model& vm);
-    void class_implementation(const cpp_aspect_types at,
+    void class_implementation(const aspect_types at,
         const sml::category_types ct, const class_view_model& vm);
 
 public:

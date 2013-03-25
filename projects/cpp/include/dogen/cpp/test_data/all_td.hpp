@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen/cpp/test_data/aspect_types_td.hpp"
 #include "dogen/cpp/test_data/boost_types_td.hpp"
-#include "dogen/cpp/test_data/cpp_aspect_types_td.hpp"
 #include "dogen/cpp/test_data/cpp_location_request_td.hpp"
 #include "dogen/cpp/test_data/dependency_details_td.hpp"
 #include "dogen/cpp/test_data/file_types_td.hpp"

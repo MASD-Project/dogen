@@ -79,7 +79,7 @@ cpp_location_request request(cpp_facet_types ft, file_types flt,
 
     r.facet_type(ft);
     r.file_type(flt);
-    r.aspect_type(cpp_aspect_types::main);
+    r.aspect_type(aspect_types::main);
     r.model_name(test_model_name);
     r.package_path(package_path);
     r.file_name(type_name);

@@ -43,7 +43,7 @@ auto lg(logger_factory("domain_header"));
 
 const std::string boost_ns("boost");
 const std::string serialization_ns("serialization");
-const std::string invalid_aspect_type("Invalid value for cpp_aspect_types");
+const std::string invalid_aspect_type("Invalid value for aspect_types");
 const std::string invalid_category_type("Invalid value for category_types");
 const std::string missing_class_view_model(
     "Meta type is pod but class view model is empty");
@@ -188,7 +188,7 @@ void domain_header::format_class(const file_view_model& vm) {
     const auto at(vm.aspect_type());
     const auto ct(vm.category_type());
     const view_models::class_view_model& cvm(*o);
-    if (at == cpp_aspect_types::main)
+    if (at == aspect_types::main)
         format_main(ct, cvm);
     else {
         using utility::exception::invalid_enum_value;

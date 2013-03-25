@@ -18,17 +18,21 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_TYPES_CPP_ASPECT_TYPES_FWD_HPP
-#define DOGEN_CPP_TYPES_CPP_ASPECT_TYPES_FWD_HPP
+#ifndef DOGEN_CPP_IO_ASPECT_TYPES_IO_HPP
+#define DOGEN_CPP_IO_ASPECT_TYPES_IO_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
+#include <iosfwd>
+#include "dogen/cpp/types/aspect_types.hpp"
+
 namespace dogen {
 namespace cpp {
 
-enum class cpp_aspect_types : unsigned int;
+std::ostream& operator<<(std::ostream& s, const aspect_types& v);
+
 } }
 
 #endif

@@ -58,7 +58,7 @@ private:
 
 public:
     result_type create(std::ostream& s, config::cpp_facet_types ft,
-        file_types flt, cpp_aspect_types at) const;
+        file_types flt, aspect_types at) const;
 
 private:
     const config::cpp_settings settings_;

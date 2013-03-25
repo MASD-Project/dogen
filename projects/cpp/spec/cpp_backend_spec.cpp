@@ -164,16 +164,16 @@ BOOST_AUTO_TEST_CASE(view_model_transformer_correctly_transforms_domain_files) {
         BOOST_LOG_SEV(lg, debug) << "user deps: " << f.user_includes();
         BOOST_LOG_SEV(lg, debug) << "header guard:" << f.header_guard();
 
-        if (f.aspect_type() == cpp_aspect_types::forward_decls)
+        if (f.aspect_type() == aspect_types::forward_decls)
             continue;
 
         if (f.facet_type() == cpp_facet_types::types &&
             f.file_type() == file_types::header &&
-            f.aspect_type() != cpp_aspect_types::includers)
+            f.aspect_type() != aspect_types::includers)
             BOOST_CHECK(f.system_includes().size() == 1);
         else if (f.facet_type() == cpp_facet_types::types &&
             f.file_type() == file_types::implementation &&
-            f.aspect_type() != cpp_aspect_types::includers)
+            f.aspect_type() != aspect_types::includers)
             BOOST_CHECK(f.system_includes().empty());
         else
             BOOST_CHECK(f.system_includes().empty());
@@ -181,14 +181,14 @@ BOOST_AUTO_TEST_CASE(view_model_transformer_correctly_transforms_domain_files) {
         const auto o(f.class_vm());
         if (!o) {
             BOOST_CHECK(f.file_type() == file_types::header);
-            BOOST_CHECK(f.aspect_type() == cpp_aspect_types::includers);
+            BOOST_CHECK(f.aspect_type() == aspect_types::includers);
             BOOST_CHECK(f.header_guard().empty());
             BOOST_CHECK(f.user_includes().size() == 1);
             BOOST_CHECK(f.user_includes().front() == user_dependency);
             continue;
         }
 
-        BOOST_CHECK(f.aspect_type() == cpp_aspect_types::main);
+        BOOST_CHECK(f.aspect_type() == aspect_types::main);
         if (f.file_type() == file_types::header) {
             BOOST_CHECK(f.header_guard() == header_guard_name);
         } else {
@@ -233,7 +233,7 @@ BOOST_AUTO_TEST_CASE(disabling_facet_includers_results_in_no_facet_includers) {
 
     BOOST_CHECK(actual.size() == 3);
     for (const auto f : actual) {
-        BOOST_CHECK(f.aspect_type() != cpp_aspect_types::includers);
+        BOOST_CHECK(f.aspect_type() != aspect_types::includers);
         const auto o(f.class_vm());
         BOOST_CHECK(o);
     }
@@ -274,8 +274,8 @@ BOOST_AUTO_TEST_CASE(is_parent_flag_is_correctly_set_on_view_models) {
     for (const auto fvm : actual) {
         BOOST_LOG_SEV(lg, debug) << "file: " << fvm.file_path();
         BOOST_CHECK(
-            fvm.aspect_type() == cpp_aspect_types::main ||
-            fvm.aspect_type() == cpp_aspect_types::forward_decls
+            fvm.aspect_type() == aspect_types::main ||
+            fvm.aspect_type() == aspect_types::forward_decls
             );
         const auto o(fvm.class_vm());
         BOOST_REQUIRE(o);

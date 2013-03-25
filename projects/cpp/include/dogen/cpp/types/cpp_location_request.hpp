@@ -30,7 +30,7 @@
 #include <string>
 #include "dogen/config/types/cpp_facet_types.hpp"
 #include "dogen/cpp/serialization/cpp_location_request_fwd_ser.hpp"
-#include "dogen/cpp/types/cpp_aspect_types.hpp"
+#include "dogen/cpp/types/aspect_types.hpp"
 #include "dogen/cpp/types/file_types.hpp"
 
 namespace dogen {
@@ -49,7 +49,7 @@ public:
     cpp_location_request(
         const dogen::config::cpp_facet_types& facet_type,
         const dogen::cpp::file_types& file_type,
-        const dogen::cpp::cpp_aspect_types& aspect_type,
+        const dogen::cpp::aspect_types& aspect_type,
         const std::string& model_name,
         const std::list<std::string>& external_package_path,
         const std::list<std::string>& package_path,
@@ -69,8 +69,8 @@ public:
     dogen::cpp::file_types file_type() const;
     void file_type(const dogen::cpp::file_types& v);
 
-    dogen::cpp::cpp_aspect_types aspect_type() const;
-    void aspect_type(const dogen::cpp::cpp_aspect_types& v);
+    dogen::cpp::aspect_types aspect_type() const;
+    void aspect_type(const dogen::cpp::aspect_types& v);
 
     const std::string& model_name() const;
     std::string& model_name();
@@ -105,7 +105,7 @@ public:
 private:
     dogen::config::cpp_facet_types facet_type_;
     dogen::cpp::file_types file_type_;
-    dogen::cpp::cpp_aspect_types aspect_type_;
+    dogen::cpp::aspect_types aspect_type_;
     std::string model_name_;
     std::list<std::string> external_package_path_;
     std::list<std::string> package_path_;

@@ -1581,7 +1581,7 @@ descend from it. Names are in identifiable name format.#</dia:string>
             <dia:string>#aspect_type#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#cpp_aspect_types#</dia:string>
+            <dia:string>#aspect_types#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -5334,19 +5334,19 @@ descend from it. Names are in identifiable name format.#</dia:string>
         <dia:point val="-49,-15.125"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-49.05,-15.175;-40.5475,-8.275"/>
+        <dia:rectangle val="-49.05,-15.175;-42.5675,-8.275"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-49,-15.125"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="8.4024999999999999"/>
+        <dia:real val="6.3825000000000003"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="6.8000000000000007"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#cpp_aspect_types#</dia:string>
+        <dia:string>#aspect_types#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#enumeration#</dia:string>
@@ -6095,7 +6095,7 @@ pre-processor includes.#</dia:string>
             <dia:string>#aspect_type#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#cpp_aspect_types#</dia:string>
+            <dia:string>#aspect_types#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -6250,17 +6250,17 @@ pre-processor includes.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="-44.7987,-8.325"/>
+        <dia:point val="-45.8088,-8.325"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-57.05,-9.075;-44.0487,2.8"/>
+        <dia:rectangle val="-57.05,-9.075;-45.0588,2.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="-44.7987,-8.325"/>
-        <dia:point val="-44.7987,-2.1875"/>
+        <dia:point val="-45.8088,-8.325"/>
+        <dia:point val="-45.8088,-2.1875"/>
         <dia:point val="-57,-2.1875"/>
         <dia:point val="-57,2"/>
       </dia:attribute>

@@ -18,21 +18,20 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_IO_CPP_ASPECT_TYPES_IO_HPP
-#define DOGEN_CPP_IO_CPP_ASPECT_TYPES_IO_HPP
+#ifndef DOGEN_CPP_SERIALIZATION_ASPECT_TYPES_SER_HPP
+#define DOGEN_CPP_SERIALIZATION_ASPECT_TYPES_SER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <iosfwd>
-#include "dogen/cpp/types/cpp_aspect_types.hpp"
+#include <boost/serialization/nvp.hpp>
+#include "dogen/cpp/types/aspect_types.hpp"
 
-namespace dogen {
-namespace cpp {
-
-std::ostream& operator<<(std::ostream& s, const cpp_aspect_types& v);
-
-} }
+template<class Archive>
+void serialize(Archive& ar, dogen::cpp::aspect_types& v, unsigned int /*version*/){
+    using boost::serialization::make_nvp;
+    ar & make_nvp("aspect_types", v);
+}
 
 #endif

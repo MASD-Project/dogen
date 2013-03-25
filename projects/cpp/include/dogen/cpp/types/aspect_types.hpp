@@ -18,32 +18,32 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_TEST_DATA_CPP_ASPECT_TYPES_TD_HPP
-#define DOGEN_CPP_TEST_DATA_CPP_ASPECT_TYPES_TD_HPP
+#ifndef DOGEN_CPP_TYPES_ASPECT_TYPES_HPP
+#define DOGEN_CPP_TYPES_ASPECT_TYPES_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/cpp/types/cpp_aspect_types.hpp"
-
 namespace dogen {
 namespace cpp {
 
-class cpp_aspect_types_generator {
-public:
-    cpp_aspect_types_generator();
-
-public:
-    typedef dogen::cpp::cpp_aspect_types result_type;
-
-public:
-    static void populate(const unsigned int position, result_type& v);
-    static result_type create(const unsigned int position);
-    result_type operator()();
-
-private:
-    unsigned int position_;
+/**
+ * @brief An aspect in a facet.
+ *
+ * Facets represent different ways of looking at domain objects.
+ * However, not everything in a facet is related to the domain type;
+ * some plumbing is required in order to fully implement a facet. This
+ * enum allows us to distinguish between the different types of @e
+ * components a facet has, which we choose to call @e aspects.
+ */
+enum class aspect_types : unsigned int {
+    invalid = 0, ///< Represents an uninitialised enum
+    main = 1, ///< The representation of the domain type for this facet
+    includers = 2, ///< Header file with includes for all headers in facet
+    forward_decls = 3, ///< Forward declarations for type
+    registrar = 4, ///< Boost serialisation registration
+    null_aspect = 5 ///< Nothing is to be produced for this type
 };
 
 } }

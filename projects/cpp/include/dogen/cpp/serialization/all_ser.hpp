@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen/cpp/serialization/aspect_types_ser.hpp"
 #include "dogen/cpp/serialization/boost_types_ser.hpp"
-#include "dogen/cpp/serialization/cpp_aspect_types_ser.hpp"
 #include "dogen/cpp/serialization/cpp_location_request_ser.hpp"
 #include "dogen/cpp/serialization/dependency_details_ser.hpp"
 #include "dogen/cpp/serialization/file_types_ser.hpp"

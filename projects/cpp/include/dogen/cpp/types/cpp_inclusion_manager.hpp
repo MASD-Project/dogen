@@ -38,7 +38,7 @@
 #include "dogen/cpp/types/dependency_details.hpp"
 #include "dogen/cpp/types/dependency_extractor.hpp"
 #include "dogen/cpp/types/cpp_location_manager.hpp"
-#include "dogen/cpp/types/cpp_aspect_types.hpp"
+#include "dogen/cpp/types/aspect_types.hpp"
 #include "dogen/config/types/cpp_facet_types.hpp"
 #include "dogen/cpp/types/file_types.hpp"
 #include "dogen/sml/types/model.hpp"
@@ -96,8 +96,7 @@ public:
 
 private:
     cpp_location_request location_request_factory(config::cpp_facet_types ft,
-        file_types flt, cpp_aspect_types at,
-        const sml::qname& name) const;
+        file_types flt, aspect_types at, const sml::qname& name) const;
 
     /**
      * @brief Returns the include path to the domain header.
@@ -107,14 +106,14 @@ private:
      */
     std::string
     domain_header_dependency(const sml::qname& name,
-        const cpp_aspect_types at) const;
+        const aspect_types at) const;
 
     /**
      * @brief Returns the include path to the header file, for the
      * given facet.
      */
     std::string header_dependency(const sml::qname& name,
-        config::cpp_facet_types ft, const cpp_aspect_types at) const;
+        config::cpp_facet_types ft, const aspect_types at) const;
 
 public:
     /**
@@ -190,7 +189,7 @@ private:
      */
     void append_self_dependencies(dogen::sml::qname name,
         const config::cpp_facet_types ft, const file_types flt,
-        const cpp_aspect_types at, const sml::meta_types mt,
+        const aspect_types at, const sml::meta_types mt,
         inclusion_lists& il) const;
 
 public:
@@ -214,7 +213,7 @@ public:
      */
     inclusion_lists includes_for_pod(const sml::pod& pod,
         config::cpp_facet_types ft, file_types flt,
-        cpp_aspect_types at) const;
+        aspect_types at) const;
 
     /**
      * @brief Returns all the includes required for the given
@@ -222,7 +221,7 @@ public:
      */
     inclusion_lists includes_for_enumeration(const sml::enumeration& e,
         config::cpp_facet_types ft, file_types flt,
-        cpp_aspect_types at) const;
+        aspect_types at) const;
 
     /**
      * @brief Returns all the includes required for the given
@@ -230,7 +229,7 @@ public:
      */
     inclusion_lists includes_for_exception(const sml::exception& e,
         config::cpp_facet_types ft, file_types flt,
-        cpp_aspect_types at) const;
+        aspect_types at) const;
 
     /**
      * @brief Returns all the includes required for the serialisation

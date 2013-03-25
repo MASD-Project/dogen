@@ -20,7 +20,7 @@
  */
 #include <sstream>
 #include "dogen/config/test_data/cpp_facet_types_td.hpp"
-#include "dogen/cpp/test_data/cpp_aspect_types_td.hpp"
+#include "dogen/cpp/test_data/aspect_types_td.hpp"
 #include "dogen/cpp/test_data/file_types_td.hpp"
 #include "dogen/cpp/test_data/view_models/class_view_model_td.hpp"
 #include "dogen/cpp/test_data/view_models/enumeration_view_model_td.hpp"
@@ -42,9 +42,9 @@ create_dogen_cpp_file_types(const unsigned int position) {
     return dogen::cpp::file_types_generator::create(position);
 }
 
-dogen::cpp::cpp_aspect_types
-create_dogen_cpp_cpp_aspect_types(const unsigned int position) {
-    return dogen::cpp::cpp_aspect_types_generator::create(position);
+dogen::cpp::aspect_types
+create_dogen_cpp_aspect_types(const unsigned int position) {
+    return dogen::cpp::aspect_types_generator::create(position);
 }
 
 dogen::sml::category_types
@@ -134,7 +134,7 @@ void file_view_model_generator::
 populate(const unsigned int position, result_type& v) {
     v.facet_type(create_dogen_config_cpp_facet_types(position + 0));
     v.file_type(create_dogen_cpp_file_types(position + 1));
-    v.aspect_type(create_dogen_cpp_cpp_aspect_types(position + 2));
+    v.aspect_type(create_dogen_cpp_aspect_types(position + 2));
     v.category_type(create_dogen_sml_category_types(position + 3));
     v.meta_type(create_dogen_sml_meta_types(position + 4));
     v.class_vm(create_boost_optional_dogen_cpp_view_models_class_view_model(position + 5));

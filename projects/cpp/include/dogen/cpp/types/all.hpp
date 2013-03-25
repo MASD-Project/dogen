@@ -18,9 +18,9 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen/cpp/types/aspect_types.hpp"
 #include "dogen/cpp/types/boost_model_helper.hpp"
 #include "dogen/cpp/types/boost_types.hpp"
-#include "dogen/cpp/types/cpp_aspect_types.hpp"
 #include "dogen/cpp/types/cpp_backend.hpp"
 #include "dogen/cpp/types/cpp_inclusion_manager.hpp"
 #include "dogen/cpp/types/cpp_location_manager.hpp"

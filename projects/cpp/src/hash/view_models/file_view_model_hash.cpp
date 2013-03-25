@@ -19,7 +19,7 @@
  *
  */
 #include "dogen/config/hash/cpp_facet_types_hash.hpp"
-#include "dogen/cpp/hash/cpp_aspect_types_hash.hpp"
+#include "dogen/cpp/hash/aspect_types_hash.hpp"
 #include "dogen/cpp/hash/file_types_hash.hpp"
 #include "dogen/cpp/hash/view_models/class_view_model_hash.hpp"
 #include "dogen/cpp/hash/view_models/enumeration_view_model_hash.hpp"

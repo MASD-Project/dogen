@@ -20,7 +20,7 @@
  */
 #include <sstream>
 #include "dogen/config/test_data/cpp_facet_types_td.hpp"
-#include "dogen/cpp/test_data/cpp_aspect_types_td.hpp"
+#include "dogen/cpp/test_data/aspect_types_td.hpp"
 #include "dogen/cpp/test_data/cpp_location_request_td.hpp"
 #include "dogen/cpp/test_data/file_types_td.hpp"
 
@@ -36,9 +36,9 @@ create_dogen_cpp_file_types(const unsigned int position) {
     return dogen::cpp::file_types_generator::create(position);
 }
 
-dogen::cpp::cpp_aspect_types
-create_dogen_cpp_cpp_aspect_types(const unsigned int position) {
-    return dogen::cpp::cpp_aspect_types_generator::create(position);
+dogen::cpp::aspect_types
+create_dogen_cpp_aspect_types(const unsigned int position) {
+    return dogen::cpp::aspect_types_generator::create(position);
 }
 
 std::string create_std_string(const unsigned int position) {
@@ -66,7 +66,7 @@ void cpp_location_request_generator::
 populate(const unsigned int position, result_type& v) {
     v.facet_type(create_dogen_config_cpp_facet_types(position + 0));
     v.file_type(create_dogen_cpp_file_types(position + 1));
-    v.aspect_type(create_dogen_cpp_cpp_aspect_types(position + 2));
+    v.aspect_type(create_dogen_cpp_aspect_types(position + 2));
     v.model_name(create_std_string(position + 3));
     v.external_package_path(create_std_list_std_string(position + 4));
     v.package_path(create_std_list_std_string(position + 5));

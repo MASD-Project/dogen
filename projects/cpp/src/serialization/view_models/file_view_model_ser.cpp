@@ -31,7 +31,7 @@
 #include <boost/serialization/optional.hpp>
 #include <boost/serialization/string.hpp>
 #include "dogen/config/serialization/cpp_facet_types_ser.hpp"
-#include "dogen/cpp/serialization/cpp_aspect_types_ser.hpp"
+#include "dogen/cpp/serialization/aspect_types_ser.hpp"
 #include "dogen/cpp/serialization/file_types_ser.hpp"
 #include "dogen/cpp/serialization/view_models/class_view_model_ser.hpp"
 #include "dogen/cpp/serialization/view_models/enumeration_view_model_ser.hpp"

@@ -21,7 +21,7 @@
 #include <boost/algorithm/string.hpp>
 #include <ostream>
 #include "dogen/config/io/cpp_facet_types_io.hpp"
-#include "dogen/cpp/io/cpp_aspect_types_io.hpp"
+#include "dogen/cpp/io/aspect_types_io.hpp"
 #include "dogen/cpp/io/cpp_location_request_io.hpp"
 #include "dogen/cpp/io/file_types_io.hpp"
 

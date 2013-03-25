@@ -68,7 +68,7 @@ cpp_inclusion_manager::cpp_inclusion_manager(const sml::model& model,
 
 cpp_location_request cpp_inclusion_manager::
 location_request_factory(config::cpp_facet_types ft, file_types flt,
-    cpp_aspect_types at, const sml::qname& name) const {
+    aspect_types at, const sml::qname& name) const {
 
     cpp_location_request r;
     r.facet_type(ft);
@@ -87,8 +87,7 @@ void cpp_inclusion_manager::register_header(config::cpp_facet_types ft,
 }
 
 std::string cpp_inclusion_manager::
-domain_header_dependency(const sml::qname& name,
-    const cpp_aspect_types at) const {
+domain_header_dependency(const sml::qname& name, const aspect_types at) const {
     const auto d(config::cpp_facet_types::types);
     const auto h(file_types::header);
     const auto rq(location_request_factory(d, h, at, name));
@@ -97,7 +96,7 @@ domain_header_dependency(const sml::qname& name,
 
 std::string cpp_inclusion_manager::header_dependency(
     const sml::qname& name, config::cpp_facet_types facet_type,
-    const cpp_aspect_types at) const {
+    const aspect_types at) const {
     const auto h(file_types::header);
     const auto main(at);
     const auto rq(location_request_factory(facet_type, h, main, name));
@@ -444,7 +443,7 @@ void cpp_inclusion_manager::append_relationship_dependencies(
          * rule 1: domain headers that depend on a domain type
          * which can be forward declared will forward declare it.
          */
-        const auto fwd(cpp_aspect_types::forward_decls);
+        const auto fwd(aspect_types::forward_decls);
         il.user.push_back(header_dependency(n, ft, fwd));
     }
 
@@ -472,7 +471,7 @@ void cpp_inclusion_manager::append_relationship_dependencies(
          * rule 3: domain headers need the corresponding header file
          * for the dependency
          */
-        const auto main(cpp_aspect_types::main);
+        const auto main(aspect_types::main);
         if (is_header && !is_primitive && is_domain)
             il.user.push_back(header_dependency(n, ft, main));
 
@@ -533,7 +532,7 @@ void cpp_inclusion_manager::append_relationship_dependencies(
         const bool is_domain(ft == cpp_facet_types::types);
         const bool is_primitive(k.meta_type() == sml::meta_types::primitive);
 
-        const auto main(cpp_aspect_types::main);
+        const auto main(aspect_types::main);
         if (!is_primitive && is_header && hash_enabled_ && is_domain)
             il.user.push_back(header_dependency(k, cpp_facet_types::hash, main));
     }
@@ -544,7 +543,7 @@ void cpp_inclusion_manager::append_relationship_dependencies(
          */
         const bool is_implementation(flt == file_types::implementation);
         const bool is_td(ft == cpp_facet_types::test_data);
-        const auto main(cpp_aspect_types::main);
+        const auto main(aspect_types::main);
         if (is_implementation && is_td)
             il.user.push_back(header_dependency(l, ft, main));
 
@@ -561,14 +560,14 @@ void cpp_inclusion_manager::append_relationship_dependencies(
 void cpp_inclusion_manager::
 append_self_dependencies(dogen::sml::qname name,
     const config::cpp_facet_types ft, const file_types flt,
-    const cpp_aspect_types at, const sml::meta_types mt,
+    const aspect_types at, const sml::meta_types mt,
     inclusion_lists& il) const {
 
     using config::cpp_facet_types;
     const bool is_header(flt == file_types::header);
     const bool is_domain(ft == cpp_facet_types::types);
-    const auto fwd(cpp_aspect_types::forward_decls);
-    if (at == cpp_aspect_types::forward_decls) {
+    const auto fwd(aspect_types::forward_decls);
+    if (at == aspect_types::forward_decls) {
         /*
          * rule 1: non-domain forward declarations depend on the
          * domain header.
@@ -591,7 +590,7 @@ append_self_dependencies(dogen::sml::qname name,
      * rule 3: all header files depend on the domain header file,
      * except for the domain header file itself.
      */
-    const auto main(cpp_aspect_types::main);
+    const auto main(aspect_types::main);
     if (is_header && !is_domain)
         il.user.push_back(domain_header_dependency(name, main));
 
@@ -621,7 +620,7 @@ includes_for_includer_files(config::cpp_facet_types ft) const {
 
 inclusion_lists cpp_inclusion_manager::
 includes_for_enumeration(const sml::enumeration& e, config::cpp_facet_types ft,
-    file_types flt, cpp_aspect_types at) const {
+    file_types flt, aspect_types at) const {
     inclusion_lists r;
 
     using config::cpp_facet_types;
@@ -658,7 +657,7 @@ includes_for_enumeration(const sml::enumeration& e, config::cpp_facet_types ft,
 
 inclusion_lists cpp_inclusion_manager::
 includes_for_exception(const sml::exception& e, config::cpp_facet_types ft,
-    file_types flt, cpp_aspect_types at) const {
+    file_types flt, aspect_types at) const {
     inclusion_lists r;
 
     using config::cpp_facet_types;
@@ -686,7 +685,7 @@ includes_for_registrar(file_types flt) const {
         return r;
 
     using config::cpp_facet_types;
-    const auto main(cpp_aspect_types::main);
+    const auto main(aspect_types::main);
     const auto ft(cpp_facet_types::serialization);
     for (const auto& l : model_.leaves())
         r.user.push_back(header_dependency(l, ft, main));
@@ -719,11 +718,11 @@ includes_for_registrar(file_types flt) const {
 
 inclusion_lists cpp_inclusion_manager::
 includes_for_pod(const sml::pod& pod, config::cpp_facet_types ft,
-    file_types flt, cpp_aspect_types at) const {
+    file_types flt, aspect_types at) const {
 
     inclusion_lists r;
     const auto n(pod.name());
-    if (at == cpp_aspect_types::forward_decls) {
+    if (at == aspect_types::forward_decls) {
         append_self_dependencies(n, ft, flt, at, n.meta_type(), r);
         return r;
     }

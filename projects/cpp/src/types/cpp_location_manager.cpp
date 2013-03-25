@@ -47,7 +47,7 @@ const std::string absolute_path_with_split(
     "Absolute path cannot be used with split projects");
 const std::string invalid_facet_types("Invalid value for cpp_facet_types");
 const std::string invalid_file_types("Invalid value for file_types");
-const std::string invalid_aspect_types("Invalid value for cpp_aspect_types");
+const std::string invalid_aspect_types("Invalid value for aspect_types");
 
 }
 
@@ -121,15 +121,15 @@ facet_postfix(config::cpp_facet_types facet) const {
 }
 
 std::string
-cpp_location_manager::aspect_postfix(cpp_aspect_types aspect) const {
+cpp_location_manager::aspect_postfix(aspect_types aspect) const {
     if (settings_.disable_unique_file_names())
         return empty;
 
     switch(aspect) {
-    case cpp_aspect_types::main: return empty; break;
-    case cpp_aspect_types::includers: return empty; break;
-    case cpp_aspect_types::forward_decls: return forward_decls_postfix; break;
-    case cpp_aspect_types::registrar: return empty; break;
+    case aspect_types::main: return empty; break;
+    case aspect_types::includers: return empty; break;
+    case aspect_types::forward_decls: return forward_decls_postfix; break;
+    case aspect_types::registrar: return empty; break;
     default:
         BOOST_LOG_SEV(lg, error) << invalid_aspect_types;
         BOOST_THROW_EXCEPTION(invalid_enum_value(invalid_aspect_types));

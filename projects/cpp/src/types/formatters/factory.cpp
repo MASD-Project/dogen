@@ -24,7 +24,7 @@
 #include "dogen/config/types/cpp_facet_types.hpp"
 #include "dogen/config/io/cpp_facet_types_io.hpp"
 #include "dogen/cpp/io/file_types_io.hpp"
-#include "dogen/cpp/io/cpp_aspect_types_io.hpp"
+#include "dogen/cpp/io/aspect_types_io.hpp"
 #include "dogen/cpp/types/formatters/production_failure.hpp"
 #include "dogen/cpp/types/formatters/cpp_facet_includer.hpp"
 #include "dogen/cpp/types/formatters/cpp_domain_header.hpp"
@@ -152,22 +152,22 @@ factory::result_type factory::create_null_formatter(std::ostream& s) const {
 
 factory::result_type
 factory::create(std::ostream& s, config::cpp_facet_types ft, file_types flt,
-    cpp_aspect_types at) const {
+    aspect_types at) const {
 
     switch (at) {
-    case cpp_aspect_types::main:
+    case aspect_types::main:
         return create_main_formatter(s, ft, flt);
         break;
-    case cpp_aspect_types::includers:
+    case aspect_types::includers:
         return facet_includer::create(s);
         break;
-    case cpp_aspect_types::forward_decls:
+    case aspect_types::forward_decls:
         return forward_declarations_header::create(s);
         break;
-    case cpp_aspect_types::registrar:
+    case aspect_types::registrar:
         return create_registrar_formatter(s, flt);
         break;
-    case cpp_aspect_types::null_aspect:
+    case aspect_types::null_aspect:
         return create_null_formatter(s);
         break;
     default: {

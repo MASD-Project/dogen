@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen/cpp/hash/aspect_types_hash.hpp"
 #include "dogen/cpp/hash/boost_types_hash.hpp"
-#include "dogen/cpp/hash/cpp_aspect_types_hash.hpp"
 #include "dogen/cpp/hash/cpp_location_request_hash.hpp"
 #include "dogen/cpp/hash/dependency_details_hash.hpp"
 #include "dogen/cpp/hash/file_types_hash.hpp"

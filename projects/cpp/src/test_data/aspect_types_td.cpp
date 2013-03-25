@@ -18,26 +18,27 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_HASH_CPP_ASPECT_TYPES_HASH_HPP
-#define DOGEN_CPP_HASH_CPP_ASPECT_TYPES_HASH_HPP
+#include "dogen/cpp/test_data/aspect_types_td.hpp"
 
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
+namespace dogen {
+namespace cpp {
 
-#include <functional>
-#include "dogen/cpp/types/cpp_aspect_types.hpp"
-
-namespace std {
-
-template<>
-class hash<dogen::cpp::cpp_aspect_types> {
-public:
-    size_t operator()(const dogen::cpp::cpp_aspect_types& v) const {
-        return std::hash<unsigned int>()(static_cast<unsigned int>(v));
-    }
-};
-
+aspect_types_generator::aspect_types_generator() : position_(0) { }
+void aspect_types_generator::
+populate(const unsigned int position, result_type& v) {
+    v = static_cast<aspect_types>(position % 6);
 }
 
-#endif
+aspect_types_generator::result_type
+aspect_types_generator::create(const unsigned int  position) {
+    result_type r;
+    aspect_types_generator::populate(position, r);
+    return r;
+}
+
+aspect_types_generator::result_type
+aspect_types_generator::operator()() {
+    return create(position_++);
+}
+
+} }

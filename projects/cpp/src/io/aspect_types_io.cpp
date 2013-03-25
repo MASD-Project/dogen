@@ -20,36 +20,36 @@
  */
 #include <ostream>
 #include <stdexcept>
-#include "dogen/cpp/io/cpp_aspect_types_io.hpp"
+#include "dogen/cpp/io/aspect_types_io.hpp"
 
 namespace dogen {
 namespace cpp {
 
-std::ostream& operator<<(std::ostream& s, const cpp_aspect_types& v) {
-    s << "{ " << "\"__type__\": " << "\"cpp_aspect_types\", " << "\"value\": ";
+std::ostream& operator<<(std::ostream& s, const aspect_types& v) {
+    s << "{ " << "\"__type__\": " << "\"aspect_types\", " << "\"value\": ";
 
     std::string attr;
     switch (v) {
-    case cpp_aspect_types::invalid:
+    case aspect_types::invalid:
         attr = "\"invalid\"";
         break;
-    case cpp_aspect_types::main:
+    case aspect_types::main:
         attr = "\"main\"";
         break;
-    case cpp_aspect_types::includers:
+    case aspect_types::includers:
         attr = "\"includers\"";
         break;
-    case cpp_aspect_types::forward_decls:
+    case aspect_types::forward_decls:
         attr = "\"forward_decls\"";
         break;
-    case cpp_aspect_types::registrar:
+    case aspect_types::registrar:
         attr = "\"registrar\"";
         break;
-    case cpp_aspect_types::null_aspect:
+    case aspect_types::null_aspect:
         attr = "\"null_aspect\"";
         break;
     default:
-        throw std::invalid_argument("Invalid value for cpp_aspect_types");
+        throw std::invalid_argument("Invalid value for aspect_types");
     }
     s << attr << " }";
     return s;

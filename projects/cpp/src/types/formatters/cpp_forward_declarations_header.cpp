@@ -39,7 +39,7 @@ auto lg(logger_factory("forward_declarations_header"));
 
 const std::string boost_ns("boost");
 const std::string serialization_ns("serialization");
-const std::string invalid_aspect_type("Invalid value for cpp_aspect_types");
+const std::string invalid_aspect_type("Invalid value for aspect_types");
 const std::string invalid_category_type("Invalid value for category_types");
 
 const std::string invalid_facet_types("Invalid value for cpp_facet_types");
@@ -163,7 +163,7 @@ void forward_declarations_header::format_exception(const file_view_model& vm) {
 }
 
 void forward_declarations_header::format(const file_view_model& vm) {
-    if (vm.aspect_type() != cpp_aspect_types::forward_decls) {
+    if (vm.aspect_type() != aspect_types::forward_decls) {
         using dogen::utility::exception::invalid_enum_value;
         BOOST_LOG_SEV(lg, error) << invalid_facet_types;
         BOOST_THROW_EXCEPTION(invalid_enum_value(invalid_facet_types));

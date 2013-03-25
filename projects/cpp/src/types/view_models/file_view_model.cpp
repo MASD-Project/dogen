@@ -27,7 +27,7 @@ namespace view_models {
 file_view_model::file_view_model()
     : facet_type_(static_cast<dogen::config::cpp_facet_types>(0)),
       file_type_(static_cast<dogen::cpp::file_types>(0)),
-      aspect_type_(static_cast<dogen::cpp::cpp_aspect_types>(0)),
+      aspect_type_(static_cast<dogen::cpp::aspect_types>(0)),
       category_type_(static_cast<dogen::sml::category_types>(0)),
       meta_type_(static_cast<dogen::sml::meta_types>(0)) { }
 
@@ -49,7 +49,7 @@ file_view_model::file_view_model(file_view_model&& rhs)
 file_view_model::file_view_model(
     const dogen::config::cpp_facet_types& facet_type,
     const dogen::cpp::file_types& file_type,
-    const dogen::cpp::cpp_aspect_types& aspect_type,
+    const dogen::cpp::aspect_types& aspect_type,
     const dogen::sml::category_types& category_type,
     const dogen::sml::meta_types& meta_type,
     const boost::optional<dogen::cpp::view_models::class_view_model>& class_vm,
@@ -129,11 +129,11 @@ void file_view_model::file_type(const dogen::cpp::file_types& v) {
     file_type_ = v;
 }
 
-dogen::cpp::cpp_aspect_types file_view_model::aspect_type() const {
+dogen::cpp::aspect_types file_view_model::aspect_type() const {
     return aspect_type_;
 }
 
-void file_view_model::aspect_type(const dogen::cpp::cpp_aspect_types& v) {
+void file_view_model::aspect_type(const dogen::cpp::aspect_types& v) {
     aspect_type_ = v;
 }
 

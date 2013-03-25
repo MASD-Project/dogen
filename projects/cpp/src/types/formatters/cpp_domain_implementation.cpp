@@ -57,7 +57,7 @@ const std::string enumeration_view_model_not_supported(
 const std::string invalid_smart_pointer(
     "Smart pointers have exactly one type argument");
 
-const std::string invalid_aspect_type("Invalid value for cpp_aspect_types");
+const std::string invalid_aspect_type("Invalid value for aspect_types");
 const std::string invalid_category_type("Invalid value for category_types");
 
 // FIXME: until we add support to indenter.
@@ -172,11 +172,11 @@ inserter_operator(const class_view_model& vm) {
 }
 
 void domain_implementation::
-class_implementation(cpp_aspect_types at, const sml::category_types ct,
+class_implementation(aspect_types at, const sml::category_types ct,
     const class_view_model& vm) {
 
     using utility::exception::invalid_enum_value;
-    if (at == cpp_aspect_types::main) {
+    if (at == aspect_types::main) {
         if (ct == sml::category_types::versioned_key ||
             ct == sml::category_types::unversioned_key) {
             cpp_key_class_implementation
