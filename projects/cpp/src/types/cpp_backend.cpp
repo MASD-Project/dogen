@@ -129,7 +129,7 @@ generate_file_view_model(const view_models::file_view_model& vm) const {
 }
 
 cpp_backend::value_type cpp_backend::generate_file_view_models() const {
-    cpp_inclusion_manager im(model_, location_manager_, settings_);
+    inclusion_manager im(model_, location_manager_, settings_);
 
     using view_models::sml_to_cpp_view_model;
     sml_to_cpp_view_model t(location_manager_, im, settings_, model_);

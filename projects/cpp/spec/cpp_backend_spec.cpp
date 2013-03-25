@@ -123,7 +123,7 @@ std::vector<file_view_model> execute_transformer(
     s.disable_facet_includers(disable_facet_includers);
 
     cpp_location_manager lm(test_model_name, s);
-    cpp_inclusion_manager im(m, lm, s);
+    inclusion_manager im(m, lm, s);
     sml_to_cpp_view_model t(lm, im, s, m);
     return t.transform();
 }
@@ -137,7 +137,7 @@ std::vector<file_view_model> execute_transformer(
     s.disable_facet_includers(disable_facet_includers);
 
     cpp_location_manager lm(test_model_name, s);
-    cpp_inclusion_manager im(model, lm, s);
+    inclusion_manager im(model, lm, s);
     sml_to_cpp_view_model t(lm, im, s, model);
     return t.transform();
 }

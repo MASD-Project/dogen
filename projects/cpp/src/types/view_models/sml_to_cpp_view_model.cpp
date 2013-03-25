@@ -470,7 +470,7 @@ namespace view_models {
 
 sml_to_cpp_view_model::
 sml_to_cpp_view_model(const cpp_location_manager& location_manager,
-    const cpp_inclusion_manager& inclusion_manager,
+    const inclusion_manager& inclusion_manager,
     const config::cpp_settings& settings,
     const sml::model& model) :
     location_manager_(location_manager),

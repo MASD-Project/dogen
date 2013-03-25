@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_TYPES_CPP_INCLUSION_MANAGER_FWD_HPP
-#define DOGEN_CPP_TYPES_CPP_INCLUSION_MANAGER_FWD_HPP
+#ifndef DOGEN_CPP_TYPES_INCLUSION_MANAGER_FWD_HPP
+#define DOGEN_CPP_TYPES_INCLUSION_MANAGER_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -28,7 +28,7 @@
 namespace dogen {
 namespace cpp {
 
-class cpp_inclusion_manager;
+class inclusion_manager;
 
 } }
 

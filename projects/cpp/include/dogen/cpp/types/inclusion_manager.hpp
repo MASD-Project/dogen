@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_CPP_INCLUSION_MANAGER_HPP
-#define DOGEN_CPP_CPP_INCLUSION_MANAGER_HPP
+#ifndef DOGEN_CPP_INCLUSION_MANAGER_HPP
+#define DOGEN_CPP_INCLUSION_MANAGER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -70,15 +70,15 @@ struct inclusion_lists {
  * and are expected to be included using double-quotes.
  *
  */
-class cpp_inclusion_manager {
+class inclusion_manager {
 public:
-    cpp_inclusion_manager() = delete;
-    cpp_inclusion_manager(const cpp_inclusion_manager&) = default;
-    ~cpp_inclusion_manager() = default;
-    cpp_inclusion_manager& operator=(const cpp_inclusion_manager&) = delete;
+    inclusion_manager() = delete;
+    inclusion_manager(const inclusion_manager&) = default;
+    ~inclusion_manager() = default;
+    inclusion_manager& operator=(const inclusion_manager&) = delete;
 
 public:
-    cpp_inclusion_manager(cpp_inclusion_manager&& rhs)
+    inclusion_manager(inclusion_manager&& rhs)
     : model_(std::move(rhs.model_)),
       location_manager_(std::move(rhs.location_manager_)),
       settings_(std::move(rhs.settings_)),
@@ -90,7 +90,7 @@ public:
       std_(std::move(rhs.std_)),
       dependency_extractor_(std::move(rhs.dependency_extractor_)) { }
 
-    cpp_inclusion_manager(const sml::model& model,
+    inclusion_manager(const sml::model& model,
         const cpp_location_manager& location_manager,
         const config::cpp_settings& settings);
 

@@ -63,7 +63,7 @@ public:
 
 public:
     sml_to_cpp_view_model(const cpp_location_manager& location_manager,
-        const cpp_inclusion_manager& inclusion_manager,
+        const inclusion_manager& inclusion_manager,
         const config::cpp_settings& settings,
         const sml::model& model);
 
@@ -226,7 +226,7 @@ private:
 
 private:
     const cpp_location_manager location_manager_;
-    cpp_inclusion_manager inclusion_manager_;
+    inclusion_manager inclusion_manager_;
     const config::cpp_settings settings_;
     const sml::model model_;
     std::unordered_map<sml::qname, class_view_model> qname_to_class_;
