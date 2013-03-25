@@ -41,21 +41,21 @@ namespace cpp {
  * @brief Manages the file names for all generated files and all the
  * pre-processor includes.
  */
-class cpp_location_manager {
+class location_manager {
 public:
-    cpp_location_manager() = delete;
-    cpp_location_manager(const cpp_location_manager&) = default;
-    ~cpp_location_manager() = default;
-    cpp_location_manager& operator=(const cpp_location_manager&) = delete;
+    location_manager() = delete;
+    location_manager(const location_manager&) = default;
+    ~location_manager() = default;
+    location_manager& operator=(const location_manager&) = delete;
 
 public:
-    cpp_location_manager(cpp_location_manager&& rhs)
+    location_manager(location_manager&& rhs)
     : model_name_(std::move(rhs.model_name_)),
       settings_(std::move(rhs.settings_)),
       source_directory_(std::move(rhs.source_directory_)),
       include_directory_(std::move(rhs.include_directory_)) { }
 
-    cpp_location_manager(const std::string& model_name,
+    location_manager(const std::string& model_name,
         const config::cpp_settings& settings);
 
 private:

@@ -469,7 +469,7 @@ namespace cpp {
 namespace view_models {
 
 sml_to_cpp_view_model::
-sml_to_cpp_view_model(const cpp_location_manager& location_manager,
+sml_to_cpp_view_model(const location_manager& location_manager,
     const inclusion_manager& inclusion_manager,
     const config::cpp_settings& settings,
     const sml::model& model) :

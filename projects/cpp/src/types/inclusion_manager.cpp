@@ -45,7 +45,7 @@ namespace dogen {
 namespace cpp {
 
 inclusion_manager::inclusion_manager(const sml::model& model,
-    const cpp_location_manager& location_manager,
+    const location_manager& location_manager,
     const config::cpp_settings& settings)
     : model_(model), location_manager_(location_manager), settings_(settings),
       io_enabled_(contains(settings_.enabled_facets(),

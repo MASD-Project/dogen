@@ -74,7 +74,7 @@ public:
 private:
     const sml::model model_;
     const config::cpp_settings settings_;
-    const cpp_location_manager location_manager_;
+    const location_manager location_manager_;
 };
 
 } }

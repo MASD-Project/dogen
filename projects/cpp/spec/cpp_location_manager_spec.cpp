@@ -39,7 +39,7 @@ namespace {
 
 const std::string empty;
 const std::string test_module("generator");
-const std::string test_suite("cpp_location_manager_spec");
+const std::string test_suite("location_manager_spec");
 
 const std::string test_model_name("test");
 const boost::filesystem::path src_dir("source directory");
@@ -94,8 +94,8 @@ location_request request(cpp_facet_types ft, file_types flt) {
 
 std::list<std::string>
 generate_all_filenames(dogen::config::cpp_settings s, bool with_path) {
-    using dogen::cpp::cpp_location_manager;
-    cpp_location_manager lm(test_model_name, s);
+    using dogen::cpp::location_manager;
+    location_manager lm(test_model_name, s);
 
     std::list<std::string> r;
     auto lambda([&](cpp_facet_types ft, file_types flt) {
@@ -117,15 +117,15 @@ generate_all_filenames(dogen::config::cpp_settings s, bool with_path) {
 
 }
 
-BOOST_AUTO_TEST_SUITE(cpp_location_manager)
+BOOST_AUTO_TEST_SUITE(location_manager)
 
 BOOST_AUTO_TEST_CASE(split_project_configuration_results_in_expected_locations) {
     SETUP_TEST_LOG_SOURCE("split_project_configuration_results_in_expected_locations");
-    using dogen::cpp::cpp_location_manager;
+    using dogen::cpp::location_manager;
     const auto s(split_project_settings());
     BOOST_CHECK(s.split_project());
 
-    cpp_location_manager lm(test_model_name, s);
+    location_manager lm(test_model_name, s);
     using dogen::cpp::location_request;
     auto rq(request(cpp_facet_types::types, file_types::header));
 
@@ -178,11 +178,11 @@ BOOST_AUTO_TEST_CASE(split_project_configuration_results_in_expected_locations) 
 
 BOOST_AUTO_TEST_CASE(non_split_project_configuration_results_in_expected_locations) {
     SETUP_TEST_LOG_SOURCE("non_split_project_configuration_results_in_expected_locations");
-    using dogen::cpp::cpp_location_manager;
+    using dogen::cpp::location_manager;
     const auto s(non_split_project_settings());
     BOOST_CHECK(!s.split_project());
 
-    cpp_location_manager lm(test_model_name, s);
+    location_manager lm(test_model_name, s);
     using dogen::cpp::location_request;
     auto rq(request(cpp_facet_types::types, file_types::header));
 
@@ -237,8 +237,8 @@ BOOST_AUTO_TEST_CASE(disabling_facet_folders_removes_facet_folders_from_location
     BOOST_LOG_SEV(lg, debug) << "settings: " << s;
     BOOST_CHECK(s.split_project());
 
-    using dogen::cpp::cpp_location_manager;
-    cpp_location_manager lm(test_model_name, s);
+    using dogen::cpp::location_manager;
+    location_manager lm(test_model_name, s);
 
     auto lambda([&](cpp_facet_types ft, file_types flt) {
             const auto rq(request(ft, flt));
@@ -277,8 +277,8 @@ BOOST_AUTO_TEST_CASE(enabling_unique_file_names_results_in_different_names_acros
     s.disable_unique_file_names(true);
     BOOST_LOG_SEV(lg, debug) << "settings: " << s;
 
-    using dogen::cpp::cpp_location_manager;
-    cpp_location_manager lm(test_model_name, s);
+    using dogen::cpp::location_manager;
+    location_manager lm(test_model_name, s);
 
     const bool with_path(false);
     std::list<std::string> files(generate_all_filenames(s, with_path));
@@ -301,8 +301,8 @@ BOOST_AUTO_TEST_CASE(disabling_unique_file_names_results_in_the_same_names_acros
     s.disable_unique_file_names(false);
     BOOST_LOG_SEV(lg, debug) << "settings: " << s;
 
-    using dogen::cpp::cpp_location_manager;
-    cpp_location_manager lm(test_model_name, s);
+    using dogen::cpp::location_manager;
+    location_manager lm(test_model_name, s);
 
     const bool with_path(false);
     std::list<std::string> files(generate_all_filenames(s, with_path));
@@ -328,8 +328,8 @@ BOOST_AUTO_TEST_CASE(changing_facet_folder_names_results_in_new_folder_names_in_
     s.test_data_facet_folder(unique_name + "_5");
     BOOST_LOG_SEV(lg, debug) << "settings: " << s;
 
-    using dogen::cpp::cpp_location_manager;
-    cpp_location_manager lm(test_model_name, s);
+    using dogen::cpp::location_manager;
+    location_manager lm(test_model_name, s);
 
     const bool with_path(true);
     std::list<std::string> files(generate_all_filenames(s, with_path));
@@ -353,8 +353,8 @@ BOOST_AUTO_TEST_CASE(changing_file_extensions_results_expected_file_names) {
     s.source_extension(source_extension);
     BOOST_LOG_SEV(lg, debug) << "settings: " << s;
 
-    using dogen::cpp::cpp_location_manager;
-    cpp_location_manager lm(test_model_name, s);
+    using dogen::cpp::location_manager;
+    location_manager lm(test_model_name, s);
 
     const bool with_path(false);
     std::list<std::string> files(generate_all_filenames(s, with_path));

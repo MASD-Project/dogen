@@ -62,7 +62,7 @@ public:
     sml_to_cpp_view_model& operator=(const sml_to_cpp_view_model&) = delete;
 
 public:
-    sml_to_cpp_view_model(const cpp_location_manager& location_manager,
+    sml_to_cpp_view_model(const location_manager& location_manager,
         const inclusion_manager& inclusion_manager,
         const config::cpp_settings& settings,
         const sml::model& model);
@@ -225,7 +225,7 @@ private:
     qname_to_vertex_type;
 
 private:
-    const cpp_location_manager location_manager_;
+    const location_manager location_manager_;
     inclusion_manager inclusion_manager_;
     const config::cpp_settings settings_;
     const sml::model model_;

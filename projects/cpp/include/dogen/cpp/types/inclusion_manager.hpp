@@ -91,7 +91,7 @@ public:
       dependency_extractor_(std::move(rhs.dependency_extractor_)) { }
 
     inclusion_manager(const sml::model& model,
-        const cpp_location_manager& location_manager,
+        const location_manager& location_manager,
         const config::cpp_settings& settings);
 
 private:
@@ -239,7 +239,7 @@ public:
 
 private:
     const sml::model model_;
-    const cpp_location_manager location_manager_;
+    const location_manager location_manager_;
     const config::cpp_settings settings_;
     const bool io_enabled_;
     const bool serialization_enabled_;
