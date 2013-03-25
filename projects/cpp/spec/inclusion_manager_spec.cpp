@@ -27,7 +27,7 @@
 #include "dogen/utility/test_data/tds_test_good.hpp"
 #include "dogen/utility/test/logging.hpp"
 #include "dogen/config/io/cpp_facet_types_io.hpp"
-#include "dogen/cpp/types/cpp_location_manager.hpp"
+#include "dogen/cpp/types/location_manager.hpp"
 #include "dogen/cpp/types/location_request.hpp"
 #include "dogen/cpp/test/mock_settings_factory.hpp"
 #include "dogen/cpp/types/inclusion_manager.hpp"

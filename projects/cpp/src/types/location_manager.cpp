@@ -23,7 +23,7 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/config/io/cpp_settings_io.hpp"
 #include "dogen/utility/exception/invalid_enum_value.hpp"
-#include "dogen/cpp/types/cpp_location_manager.hpp"
+#include "dogen/cpp/types/location_manager.hpp"
 
 using namespace dogen::utility::log;
 

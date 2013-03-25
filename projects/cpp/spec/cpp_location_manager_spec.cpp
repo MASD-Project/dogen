@@ -28,7 +28,7 @@
 #include "dogen/config/types/cpp_facet_types.hpp"
 #include "dogen/config/types/cpp_settings.hpp"
 #include "dogen/config/io/cpp_settings_io.hpp"
-#include "dogen/cpp/types/cpp_location_manager.hpp"
+#include "dogen/cpp/types/location_manager.hpp"
 #include "dogen/cpp/types/location_request.hpp"
 #include "dogen/cpp/test/mock_settings_factory.hpp"
 

@@ -37,7 +37,7 @@
 #include "dogen/sml/types/meta_types.hpp"
 #include "dogen/cpp/types/dependency_details.hpp"
 #include "dogen/cpp/types/dependency_extractor.hpp"
-#include "dogen/cpp/types/cpp_location_manager.hpp"
+#include "dogen/cpp/types/location_manager.hpp"
 #include "dogen/cpp/types/aspect_types.hpp"
 #include "dogen/config/types/cpp_facet_types.hpp"
 #include "dogen/cpp/types/file_types.hpp"
