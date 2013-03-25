@@ -157,8 +157,8 @@ BOOST_AUTO_TEST_CASE(view_model_transformer_correctly_transforms_domain_files) {
         BOOST_LOG_SEV(lg, debug) << "file: " << f.file_path();
         BOOST_CHECK(f.facet_type() == cpp_facet_types::types);
 
-        BOOST_CHECK(f.file_type() == cpp_file_types::header ||
-            f.file_type() == cpp_file_types::implementation);
+        BOOST_CHECK(f.file_type() == file_types::header ||
+            f.file_type() == file_types::implementation);
 
         BOOST_LOG_SEV(lg, debug) << "sys deps: " << f.system_includes();
         BOOST_LOG_SEV(lg, debug) << "user deps: " << f.user_includes();
@@ -168,11 +168,11 @@ BOOST_AUTO_TEST_CASE(view_model_transformer_correctly_transforms_domain_files) {
             continue;
 
         if (f.facet_type() == cpp_facet_types::types &&
-            f.file_type() == cpp_file_types::header &&
+            f.file_type() == file_types::header &&
             f.aspect_type() != cpp_aspect_types::includers)
             BOOST_CHECK(f.system_includes().size() == 1);
         else if (f.facet_type() == cpp_facet_types::types &&
-            f.file_type() == cpp_file_types::implementation &&
+            f.file_type() == file_types::implementation &&
             f.aspect_type() != cpp_aspect_types::includers)
             BOOST_CHECK(f.system_includes().empty());
         else
@@ -180,7 +180,7 @@ BOOST_AUTO_TEST_CASE(view_model_transformer_correctly_transforms_domain_files) {
 
         const auto o(f.class_vm());
         if (!o) {
-            BOOST_CHECK(f.file_type() == cpp_file_types::header);
+            BOOST_CHECK(f.file_type() == file_types::header);
             BOOST_CHECK(f.aspect_type() == cpp_aspect_types::includers);
             BOOST_CHECK(f.header_guard().empty());
             BOOST_CHECK(f.user_includes().size() == 1);
@@ -189,7 +189,7 @@ BOOST_AUTO_TEST_CASE(view_model_transformer_correctly_transforms_domain_files) {
         }
 
         BOOST_CHECK(f.aspect_type() == cpp_aspect_types::main);
-        if (f.file_type() == cpp_file_types::header) {
+        if (f.file_type() == file_types::header) {
             BOOST_CHECK(f.header_guard() == header_guard_name);
         } else {
             BOOST_CHECK(f.header_guard() == empty);

@@ -40,7 +40,7 @@
 #include "dogen/cpp/types/cpp_location_manager.hpp"
 #include "dogen/cpp/types/cpp_aspect_types.hpp"
 #include "dogen/config/types/cpp_facet_types.hpp"
-#include "dogen/cpp/types/cpp_file_types.hpp"
+#include "dogen/cpp/types/file_types.hpp"
 #include "dogen/sml/types/model.hpp"
 #include "dogen/sml/types/pod.hpp"
 
@@ -96,7 +96,7 @@ public:
 
 private:
     cpp_location_request location_request_factory(config::cpp_facet_types ft,
-        cpp_file_types flt, cpp_aspect_types at,
+        file_types flt, cpp_aspect_types at,
         const sml::qname& name) const;
 
     /**
@@ -149,14 +149,14 @@ private:
      */
     void append_implementation_dependencies(
         const dependency_details& dd, const config::cpp_facet_types ft,
-        const cpp_file_types flt, inclusion_lists& il) const;
+        const file_types flt, inclusion_lists& il) const;
 
     /**
      * @brief Handles all dependencies to types in the boost
      * libraries.
      */
     void append_boost_dependencies(
-        const config::cpp_facet_types ft, const cpp_file_types flt,
+        const config::cpp_facet_types ft, const file_types flt,
         const dogen::sml::qname& qname,
         inclusion_lists& il) const;
 
@@ -165,7 +165,7 @@ private:
      * library.
      */
     void append_std_dependencies(
-        const config::cpp_facet_types ft, const cpp_file_types flt,
+        const config::cpp_facet_types ft, const file_types flt,
         const dogen::sml::qname& qname,
         inclusion_lists& il) const;
 
@@ -179,7 +179,7 @@ private:
      */
     void append_relationship_dependencies(
         const dependency_details& dd, const config::cpp_facet_types ft,
-        const cpp_file_types flt, inclusion_lists& il) const;
+        const file_types flt, inclusion_lists& il) const;
 
     /**
      * @brief Appends to the inclusion lists dependencies related to
@@ -189,7 +189,7 @@ private:
      * including the header file.
      */
     void append_self_dependencies(dogen::sml::qname name,
-        const config::cpp_facet_types ft, const cpp_file_types flt,
+        const config::cpp_facet_types ft, const file_types flt,
         const cpp_aspect_types at, const sml::meta_types mt,
         inclusion_lists& il) const;
 
@@ -213,7 +213,7 @@ public:
      * @brief Returns all the includes required for the given pod.
      */
     inclusion_lists includes_for_pod(const sml::pod& pod,
-        config::cpp_facet_types ft, cpp_file_types flt,
+        config::cpp_facet_types ft, file_types flt,
         cpp_aspect_types at) const;
 
     /**
@@ -221,7 +221,7 @@ public:
      * enumeration.
      */
     inclusion_lists includes_for_enumeration(const sml::enumeration& e,
-        config::cpp_facet_types ft, cpp_file_types flt,
+        config::cpp_facet_types ft, file_types flt,
         cpp_aspect_types at) const;
 
     /**
@@ -229,14 +229,14 @@ public:
      * exception.
      */
     inclusion_lists includes_for_exception(const sml::exception& e,
-        config::cpp_facet_types ft, cpp_file_types flt,
+        config::cpp_facet_types ft, file_types flt,
         cpp_aspect_types at) const;
 
     /**
      * @brief Returns all the includes required for the serialisation
      * registrar.
      */
-    inclusion_lists includes_for_registrar(cpp_file_types flt) const;
+    inclusion_lists includes_for_registrar(file_types flt) const;
 
 private:
     const sml::model model_;

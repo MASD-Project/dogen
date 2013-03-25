@@ -20,9 +20,9 @@
  */
 #include "dogen/cpp/hash/boost_types_hash.hpp"
 #include "dogen/cpp/hash/cpp_aspect_types_hash.hpp"
-#include "dogen/cpp/hash/cpp_file_types_hash.hpp"
 #include "dogen/cpp/hash/cpp_location_request_hash.hpp"
 #include "dogen/cpp/hash/dependency_details_hash.hpp"
+#include "dogen/cpp/hash/file_types_hash.hpp"
 #include "dogen/cpp/hash/std_types_hash.hpp"
 #include "dogen/cpp/hash/view_models/class_view_model_hash.hpp"
 #include "dogen/cpp/hash/view_models/cmakelists_view_model_hash.hpp"

@@ -18,25 +18,27 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_TYPES_CPP_FILE_TYPES_HPP
-#define DOGEN_CPP_TYPES_CPP_FILE_TYPES_HPP
-
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
+#include "dogen/cpp/test_data/file_types_td.hpp"
 
 namespace dogen {
 namespace cpp {
 
-/**
- * @brief Types of files used by the C++ backend.
- */
-enum class cpp_file_types : unsigned int {
-    invalid = 0, ///< Represents an uninitialised enum
-    header = 1, ///< A C++ header file.
-    implementation = 2 ///< A C++ implementation file.
-};
+file_types_generator::file_types_generator() : position_(0) { }
+void file_types_generator::
+populate(const unsigned int position, result_type& v) {
+    v = static_cast<file_types>(position % 3);
+}
+
+file_types_generator::result_type
+file_types_generator::create(const unsigned int  position) {
+    result_type r;
+    file_types_generator::populate(position, r);
+    return r;
+}
+
+file_types_generator::result_type
+file_types_generator::operator()() {
+    return create(position_++);
+}
 
 } }
-
-#endif

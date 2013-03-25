@@ -18,22 +18,22 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_HASH_CPP_FILE_TYPES_HASH_HPP
-#define DOGEN_CPP_HASH_CPP_FILE_TYPES_HASH_HPP
+#ifndef DOGEN_CPP_HASH_FILE_TYPES_HASH_HPP
+#define DOGEN_CPP_HASH_FILE_TYPES_HASH_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <functional>
-#include "dogen/cpp/types/cpp_file_types.hpp"
+#include "dogen/cpp/types/file_types.hpp"
 
 namespace std {
 
 template<>
-class hash<dogen::cpp::cpp_file_types> {
+class hash<dogen::cpp::file_types> {
 public:
-    size_t operator()(const dogen::cpp::cpp_file_types& v) const {
+    size_t operator()(const dogen::cpp::file_types& v) const {
         return std::hash<unsigned int>()(static_cast<unsigned int>(v));
     }
 };

@@ -18,32 +18,25 @@
  * MA 02110-1301, USA.
  *
  */
-#include <ostream>
-#include <stdexcept>
-#include "dogen/cpp/io/cpp_file_types_io.hpp"
+#ifndef DOGEN_CPP_TYPES_FILE_TYPES_HPP
+#define DOGEN_CPP_TYPES_FILE_TYPES_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
 namespace dogen {
 namespace cpp {
 
-std::ostream& operator<<(std::ostream& s, const cpp_file_types& v) {
-    s << "{ " << "\"__type__\": " << "\"cpp_file_types\", " << "\"value\": ";
-
-    std::string attr;
-    switch (v) {
-    case cpp_file_types::invalid:
-        attr = "\"invalid\"";
-        break;
-    case cpp_file_types::header:
-        attr = "\"header\"";
-        break;
-    case cpp_file_types::implementation:
-        attr = "\"implementation\"";
-        break;
-    default:
-        throw std::invalid_argument("Invalid value for cpp_file_types");
-    }
-    s << attr << " }";
-    return s;
-}
+/**
+ * @brief Types of files used by the C++ backend.
+ */
+enum class file_types : unsigned int {
+    invalid = 0, ///< Represents an uninitialised enum
+    header = 1, ///< A C++ header file.
+    implementation = 2 ///< A C++ implementation file.
+};
 
 } }
+
+#endif

@@ -144,11 +144,11 @@ includes_for_one_pod_model(cpp_facet_types ft,
     r.reserve(4);
 
     const cpp_aspect_types main(cpp_aspect_types::main);
-    const auto i0(im.includes_for_pod(p, ft,  cpp_file_types::header, main));
+    const auto i0(im.includes_for_pod(p, ft,  file_types::header, main));
     r.push_back(i0.system);
     r.push_back(i0.user);
 
-    const auto i1(im.includes_for_pod(p, ft,  cpp_file_types::implementation, main));
+    const auto i1(im.includes_for_pod(p, ft,  file_types::implementation, main));
     r.push_back(i1.system);
     r.push_back(i1.user);
     return r;

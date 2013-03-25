@@ -71,7 +71,7 @@ dogen::config::cpp_settings split_project_settings() {
         build_cpp_settings(src_dir, include_dir);
 }
 
-cpp_location_request request(cpp_facet_types ft, cpp_file_types flt,
+cpp_location_request request(cpp_facet_types ft, file_types flt,
     std::string type_name, std::list<std::string> package_path,
     std::list<std::string> external_package_path) {
 
@@ -88,7 +88,7 @@ cpp_location_request request(cpp_facet_types ft, cpp_file_types flt,
     return r;
 }
 
-cpp_location_request request(cpp_facet_types ft, cpp_file_types flt) {
+cpp_location_request request(cpp_facet_types ft, file_types flt) {
     return request(ft, flt, type_name, package_path_1, external_package_path_1);
 }
 
@@ -98,7 +98,7 @@ generate_all_filenames(dogen::config::cpp_settings s, bool with_path) {
     cpp_location_manager lm(test_model_name, s);
 
     std::list<std::string> r;
-    auto lambda([&](cpp_facet_types ft, cpp_file_types flt) {
+    auto lambda([&](cpp_facet_types ft, file_types flt) {
             const auto rq(request(ft, flt));
             const auto p(lm.relative_logical_path(rq));
             r.push_back(with_path ?
@@ -107,8 +107,8 @@ generate_all_filenames(dogen::config::cpp_settings s, bool with_path) {
         });
 
     auto pi([&](cpp_facet_types ft) {
-            lambda(ft, cpp_file_types::header);
-            lambda(ft, cpp_file_types::implementation);
+            lambda(ft, file_types::header);
+            lambda(ft, file_types::implementation);
         });
 
     boost::for_each(facets, pi);
@@ -127,7 +127,7 @@ BOOST_AUTO_TEST_CASE(split_project_configuration_results_in_expected_locations) 
 
     cpp_location_manager lm(test_model_name, s);
     using dogen::cpp::cpp_location_request;
-    auto rq(request(cpp_facet_types::types, cpp_file_types::header));
+    auto rq(request(cpp_facet_types::types, file_types::header));
 
     boost::filesystem::path e("c/d/test/types/a/b/a_type.hpp");
     boost::filesystem::path a(lm.relative_logical_path(rq));
@@ -158,7 +158,7 @@ BOOST_AUTO_TEST_CASE(split_project_configuration_results_in_expected_locations) 
     a = md[1];
     BOOST_CHECK(asserter::assert_equals(e, a));
 
-    rq = request(cpp_facet_types::io, cpp_file_types::implementation);
+    rq = request(cpp_facet_types::io, file_types::implementation);
     e = "c/d/test/io/a/b/a_type_io.cpp";
     a = lm.relative_logical_path(rq);
     BOOST_CHECK(asserter::assert_equals(e, a));
@@ -184,7 +184,7 @@ BOOST_AUTO_TEST_CASE(non_split_project_configuration_results_in_expected_locatio
 
     cpp_location_manager lm(test_model_name, s);
     using dogen::cpp::cpp_location_request;
-    auto rq(request(cpp_facet_types::types, cpp_file_types::header));
+    auto rq(request(cpp_facet_types::types, file_types::header));
 
     boost::filesystem::path e("c/d/test/types/a/b/a_type.hpp");
     boost::filesystem::path a(lm.relative_logical_path(rq));
@@ -211,7 +211,7 @@ BOOST_AUTO_TEST_CASE(non_split_project_configuration_results_in_expected_locatio
     a = md[0];
     BOOST_CHECK(asserter::assert_equals(e, a));
 
-    rq = request(cpp_facet_types::io, cpp_file_types::implementation);
+    rq = request(cpp_facet_types::io, file_types::implementation);
     e = "io/a/b/a_type_io.cpp";
     a = lm.relative_logical_path(rq);
     BOOST_CHECK(asserter::assert_equals(e, a));
@@ -240,7 +240,7 @@ BOOST_AUTO_TEST_CASE(disabling_facet_folders_removes_facet_folders_from_location
     using dogen::cpp::cpp_location_manager;
     cpp_location_manager lm(test_model_name, s);
 
-    auto lambda([&](cpp_facet_types ft, cpp_file_types flt) {
+    auto lambda([&](cpp_facet_types ft, file_types flt) {
             const auto rq(request(ft, flt));
             boost::filesystem::path e("c/d/test/a/b/a_type");
             boost::filesystem::path a(lm.relative_logical_path(rq));
@@ -254,7 +254,7 @@ BOOST_AUTO_TEST_CASE(disabling_facet_folders_removes_facet_folders_from_location
             BOOST_CHECK(asserter::assert_starts_with(
                     e.generic_string(), a.generic_string()));
 
-            if (flt == cpp_file_types::header)
+            if (flt == file_types::header)
                 e = "include directory/test/a/b/a_type";
             else
                 e = "source directory/test/a/b/a_type";
@@ -264,8 +264,8 @@ BOOST_AUTO_TEST_CASE(disabling_facet_folders_removes_facet_folders_from_location
         });
 
     auto pi([&](cpp_facet_types ft) {
-        lambda(ft, cpp_file_types::header);
-        lambda(ft, cpp_file_types::implementation);
+        lambda(ft, file_types::header);
+        lambda(ft, file_types::implementation);
     });
     boost::for_each(facets, pi);
 }

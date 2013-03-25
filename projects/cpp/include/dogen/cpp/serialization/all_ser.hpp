@@ -20,9 +20,9 @@
  */
 #include "dogen/cpp/serialization/boost_types_ser.hpp"
 #include "dogen/cpp/serialization/cpp_aspect_types_ser.hpp"
-#include "dogen/cpp/serialization/cpp_file_types_ser.hpp"
 #include "dogen/cpp/serialization/cpp_location_request_ser.hpp"
 #include "dogen/cpp/serialization/dependency_details_ser.hpp"
+#include "dogen/cpp/serialization/file_types_ser.hpp"
 #include "dogen/cpp/serialization/std_types_ser.hpp"
 #include "dogen/cpp/serialization/view_models/class_view_model_ser.hpp"
 #include "dogen/cpp/serialization/view_models/cmakelists_view_model_ser.hpp"

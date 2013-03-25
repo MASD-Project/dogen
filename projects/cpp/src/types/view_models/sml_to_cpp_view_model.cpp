@@ -38,7 +38,7 @@
 #include "dogen/cpp/types/view_models/nested_type_view_model.hpp"
 #include "dogen/cpp/types/view_models/transformation_error.hpp"
 #include "dogen/cpp/io/cpp_aspect_types_io.hpp"
-#include "dogen/cpp/io/cpp_file_types_io.hpp"
+#include "dogen/cpp/io/file_types_io.hpp"
 #include "dogen/cpp/io/view_models/file_view_model_io.hpp"
 #include "dogen/cpp/types/view_models/sml_to_cpp_view_model.hpp"
 
@@ -490,7 +490,7 @@ void sml_to_cpp_view_model::log_includers() const {
 
 void sml_to_cpp_view_model::
 log_generating_file(config::cpp_facet_types facet, cpp_aspect_types aspect,
-    cpp_file_types ft, std::string name, sml::meta_types mt) const {
+    file_types ft, std::string name, sml::meta_types mt) const {
     BOOST_LOG_SEV(lg, debug) << "Generating file view model. "
                              << "facet type: " << facet
                              << " aspect type: " << aspect
@@ -523,7 +523,7 @@ to_header_guard_name(const boost::filesystem::path& relative_path) const {
 }
 
 cpp_location_request sml_to_cpp_view_model::
-location_request_factory(config::cpp_facet_types ft, cpp_file_types flt,
+location_request_factory(config::cpp_facet_types ft, file_types flt,
     cpp_aspect_types at, const sml::qname& n) const {
 
     cpp_location_request r;
@@ -538,7 +538,7 @@ location_request_factory(config::cpp_facet_types ft, cpp_file_types flt,
 }
 
 file_view_model sml_to_cpp_view_model::
-create_file(config::cpp_facet_types ft, cpp_file_types flt, cpp_aspect_types at,
+create_file(config::cpp_facet_types ft, file_types flt, cpp_aspect_types at,
     const sml::qname& name) {
     file_view_model r;
     r.facet_type(ft);
@@ -548,7 +548,7 @@ create_file(config::cpp_facet_types ft, cpp_file_types flt, cpp_aspect_types at,
     auto rq(location_request_factory(ft, flt, at, name));
     r.file_path(location_manager_.absolute_path(rq));
 
-    if (flt == cpp_file_types::header) {
+    if (flt == file_types::header) {
         rq = location_request_factory(ft, flt, at, name);
         const auto rp(location_manager_.relative_logical_path(rq));
         r.header_guard(to_header_guard_name(rp));
@@ -560,7 +560,7 @@ create_file(config::cpp_facet_types ft, cpp_file_types flt, cpp_aspect_types at,
 }
 
 file_view_model sml_to_cpp_view_model::
-transform_file(config::cpp_facet_types ft, cpp_file_types flt,
+transform_file(config::cpp_facet_types ft, file_types flt,
     cpp_aspect_types at, const sml::pod& p) {
     const sml::qname name(p.name());
     const std::list<std::string> ns(join_namespaces(name));
@@ -591,7 +591,7 @@ transform_file(config::cpp_facet_types ft, cpp_file_types flt,
 }
 
 file_view_model sml_to_cpp_view_model::
-transform_file(config::cpp_facet_types ft, cpp_file_types flt,
+transform_file(config::cpp_facet_types ft, file_types flt,
     cpp_aspect_types at, const sml::enumeration& e) {
     const sml::qname name(e.name());
     const std::list<std::string> ns(join_namespaces(name));
@@ -617,7 +617,7 @@ transform_file(config::cpp_facet_types ft, cpp_file_types flt,
 }
 
 file_view_model sml_to_cpp_view_model::
-transform_file(config::cpp_facet_types ft, cpp_file_types flt,
+transform_file(config::cpp_facet_types ft, file_types flt,
     cpp_aspect_types at, const sml::exception& e) {
     const sml::qname name(e.name());
     const std::list<std::string> ns(join_namespaces(name));
@@ -789,7 +789,7 @@ enabled_facet_types(const sml::meta_types mt, const sml::pod_types pt) const {
 std::vector<file_view_model> sml_to_cpp_view_model::transform_pods() {
     std::vector<file_view_model> r;
     using config::cpp_facet_types;
-    auto lambda([&](cpp_facet_types ft, cpp_file_types flt, cpp_aspect_types at,
+    auto lambda([&](cpp_facet_types ft, file_types flt, cpp_aspect_types at,
             const sml::pod& p) {
             const std::string n(p.name().type_name());
             log_generating_file(ft, at, flt, n, p.name().meta_type());
@@ -804,8 +804,8 @@ std::vector<file_view_model> sml_to_cpp_view_model::transform_pods() {
             continue;
 
         try {
-            const auto header(cpp_file_types::header);
-            const auto implementation(cpp_file_types::implementation);
+            const auto header(file_types::header);
+            const auto implementation(file_types::implementation);
             const auto main(cpp_aspect_types::main);
             const auto forward_decls(cpp_aspect_types::forward_decls);
             const auto pod_mt(sml::meta_types::pod);
@@ -834,7 +834,7 @@ std::vector<file_view_model> sml_to_cpp_view_model::transform_pods() {
 std::vector<file_view_model> sml_to_cpp_view_model::transform_enumerations() {
     std::vector<file_view_model> r;
     using config::cpp_facet_types;
-    auto lambda([&](cpp_facet_types ft, cpp_file_types flt, cpp_aspect_types at,
+    auto lambda([&](cpp_facet_types ft, file_types flt, cpp_aspect_types at,
             const sml::enumeration& e) {
             const std::string n(e.name().type_name());
             log_generating_file(ft, at, flt, n, e.name().meta_type());
@@ -848,8 +848,8 @@ std::vector<file_view_model> sml_to_cpp_view_model::transform_enumerations() {
             continue;
 
         try {
-            const auto header(cpp_file_types::header);
-            const auto implementation(cpp_file_types::implementation);
+            const auto header(file_types::header);
+            const auto implementation(file_types::implementation);
             const auto main(cpp_aspect_types::main);
             const auto forward_decls(cpp_aspect_types::forward_decls);
             const auto enum_mt(sml::meta_types::enumeration);
@@ -876,7 +876,7 @@ std::vector<file_view_model> sml_to_cpp_view_model::transform_enumerations() {
 std::vector<file_view_model> sml_to_cpp_view_model::transform_exceptions() {
     std::vector<file_view_model> r;
     using config::cpp_facet_types;
-    auto lambda([&](cpp_facet_types ft, cpp_file_types flt, cpp_aspect_types at,
+    auto lambda([&](cpp_facet_types ft, file_types flt, cpp_aspect_types at,
             const sml::exception& e) {
             const std::string n(e.name().type_name());
             log_generating_file(ft, at, flt, n, e.name().meta_type());
@@ -890,7 +890,7 @@ std::vector<file_view_model> sml_to_cpp_view_model::transform_exceptions() {
             continue;
 
         try {
-            const auto header(cpp_file_types::header);
+            const auto header(file_types::header);
             const auto main(cpp_aspect_types::main);
             const auto forward_decls(cpp_aspect_types::forward_decls);
             const auto exception_mt(sml::meta_types::exception);
@@ -914,7 +914,7 @@ std::vector<file_view_model> sml_to_cpp_view_model::transform_exceptions() {
 std::vector<file_view_model>
 sml_to_cpp_view_model::transform_facet_includers() const {
     std::vector<file_view_model> r;
-    const cpp_file_types file_type(cpp_file_types::header);
+    const file_types file_type(file_types::header);
     const auto at(cpp_aspect_types::includers);
 
     using config::cpp_facet_types;
@@ -987,7 +987,7 @@ sml_to_cpp_view_model::transform_registrar() const {
     BOOST_LOG_SEV(lg, debug) << "Added leaves: " << rvm.leaves();
 
     using config::cpp_facet_types;
-    auto lambda([&](const cpp_file_types flt) ->  file_view_model {
+    auto lambda([&](const file_types flt) ->  file_view_model {
             file_view_model fvm;
             const auto ft(cpp_facet_types::serialization);
             const auto at(cpp_aspect_types::registrar);
@@ -1010,8 +1010,8 @@ sml_to_cpp_view_model::transform_registrar() const {
             return fvm;
         });
 
-    r.push_back(lambda(cpp_file_types::header));
-    r.push_back(lambda(cpp_file_types::implementation));
+    r.push_back(lambda(file_types::header));
+    r.push_back(lambda(file_types::implementation));
     return r;
 }
 

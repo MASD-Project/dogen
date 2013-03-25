@@ -22,7 +22,7 @@
 #include <ostream>
 #include "dogen/config/io/cpp_facet_types_io.hpp"
 #include "dogen/cpp/io/cpp_aspect_types_io.hpp"
-#include "dogen/cpp/io/cpp_file_types_io.hpp"
+#include "dogen/cpp/io/file_types_io.hpp"
 #include "dogen/cpp/io/view_models/class_view_model_io.hpp"
 #include "dogen/cpp/io/view_models/enumeration_view_model_io.hpp"
 #include "dogen/cpp/io/view_models/exception_view_model_io.hpp"

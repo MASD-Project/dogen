@@ -46,7 +46,7 @@ const std::string include_dir("include");
 const std::string absolute_path_with_split(
     "Absolute path cannot be used with split projects");
 const std::string invalid_facet_types("Invalid value for cpp_facet_types");
-const std::string invalid_file_types("Invalid value for cpp_file_types");
+const std::string invalid_file_types("Invalid value for file_types");
 const std::string invalid_aspect_types("Invalid value for cpp_aspect_types");
 
 }
@@ -137,20 +137,20 @@ cpp_location_manager::aspect_postfix(cpp_aspect_types aspect) const {
 }
 
 boost::filesystem::path
-cpp_location_manager::file_type_directory(cpp_file_types file_type) const {
+cpp_location_manager::file_type_directory(file_types file_type) const {
     switch(file_type) {
-    case cpp_file_types::header: return include_directory_; break;
-    case cpp_file_types::implementation: return source_directory_; break;
+    case file_types::header: return include_directory_; break;
+    case file_types::implementation: return source_directory_; break;
     default:
         BOOST_LOG_SEV(lg, error) << invalid_file_types;
         BOOST_THROW_EXCEPTION(invalid_enum_value(invalid_file_types));
     }
 }
 
-std::string cpp_location_manager::extension(cpp_file_types file_type) const {
+std::string cpp_location_manager::extension(file_types file_type) const {
     switch(file_type) {
-    case cpp_file_types::header: return settings_.header_extension(); break;
-    case cpp_file_types::implementation:
+    case file_types::header: return settings_.header_extension(); break;
+    case file_types::implementation:
         return settings_.source_extension(); break;
     default:
         BOOST_LOG_SEV(lg, error) << invalid_file_types;
@@ -177,7 +177,7 @@ boost::filesystem::path cpp_location_manager::relative_physical_path(
 
     if (settings_.split_project())
         r /= request.model_name();
-    else if (request.file_type() == cpp_file_types::header) {
+    else if (request.file_type() == file_types::header) {
         for(auto n : request.external_package_path())
             r /= n;
         r /= request.model_name();

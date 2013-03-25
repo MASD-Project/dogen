@@ -150,7 +150,7 @@
         <dia:point val="-2,78"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="32.840000000000003"/>
+        <dia:real val="32.839999999999996"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="13.200000000000003"/>
@@ -1214,7 +1214,7 @@ descend from it. Names are in identifiable name format.#</dia:string>
         <dia:point val="45.1075,83.2"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="44.3575,82.45;52.9363,95.8"/>
+        <dia:rectangle val="44.3575,82.45;52.9362,95.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -1437,7 +1437,7 @@ descend from it. Names are in identifiable name format.#</dia:string>
         <dia:point val="17,54"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="27.065000000000001"/>
+        <dia:real val="27.064999999999998"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="12.400000000000002"/>
@@ -1558,7 +1558,7 @@ descend from it. Names are in identifiable name format.#</dia:string>
             <dia:string>#file_type#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#cpp_file_types#</dia:string>
+            <dia:string>#file_types#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -2624,7 +2624,7 @@ descend from it. Names are in identifiable name format.#</dia:string>
         <dia:point val="-9.925,103.51"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="32.840000000000003"/>
+        <dia:real val="32.839999999999996"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="5.2000000000000011"/>
@@ -3982,7 +3982,7 @@ descend from it. Names are in identifiable name format.#</dia:string>
         <dia:point val="52,54"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="44.015,48.6687;52.75,54.8"/>
+        <dia:rectangle val="44.015,48.7187;52.75,54.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -4261,7 +4261,7 @@ descend from it. Names are in identifiable name format.#</dia:string>
         <dia:point val="67.875,2.75"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="11.664999999999999"/>
+        <dia:real val="11.665000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="34.000000000000021"/>
@@ -5566,19 +5566,19 @@ components a facet has, which we choose to call @e aspects.#</dia:string>
         <dia:point val="-31.0625,-15.0625"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-31.1125,-15.1125;-24.1875,-10.6125"/>
+        <dia:rectangle val="-31.1125,-15.1125;-24.7375,-10.6125"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-31.0625,-15.0625"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="6.8250000000000002"/>
+        <dia:real val="6.2750000000000004"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="4.4000000000000004"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#cpp_file_types#</dia:string>
+        <dia:string>#file_types#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#enumeration#</dia:string>
@@ -6072,7 +6072,7 @@ pre-processor includes.#</dia:string>
             <dia:string>#file_type#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#cpp_file_types#</dia:string>
+            <dia:string>#file_types#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -6321,17 +6321,17 @@ pre-processor includes.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="-27.65,-10.6625"/>
+        <dia:point val="-27.925,-10.6625"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-38.84,-11.4125;-26.9,2.8"/>
+        <dia:rectangle val="-38.84,-11.4125;-27.175,2.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="-27.65,-10.6625"/>
-        <dia:point val="-27.65,-2.125"/>
+        <dia:point val="-27.925,-10.6625"/>
+        <dia:point val="-27.925,-2.125"/>
         <dia:point val="-38.79,-2.125"/>
         <dia:point val="-38.79,2"/>
       </dia:attribute>
@@ -6777,7 +6777,7 @@ pre-processor includes.#</dia:string>
         <dia:point val="-5.4375,1.875"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="10.56"/>
+        <dia:real val="10.559999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -8710,7 +8710,7 @@ pre-processor includes.#</dia:string>
         <dia:point val="-126,96"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="14.0175"/>
+        <dia:real val="14.017500000000002"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -10765,7 +10765,7 @@ pre-processor includes.#</dia:string>
         <dia:point val="-116,65"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="6.9074999999999998"/>
+        <dia:real val="6.9075000000000006"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -10987,7 +10987,7 @@ pre-processor includes.#</dia:string>
         <dia:point val="-106,96"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="12.2525"/>
+        <dia:real val="12.252500000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -11461,7 +11461,7 @@ pre-processor includes.#</dia:string>
         <dia:point val="-103.323,52"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-104.073,35.2;17.2,54.8"/>
+        <dia:rectangle val="-104.073,35.25;17.2,54.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -11502,7 +11502,7 @@ pre-processor includes.#</dia:string>
         <dia:point val="-180,94"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="7.6100000000000003"/>
+        <dia:real val="7.6099999999999994"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -11613,7 +11613,7 @@ pre-processor includes.#</dia:string>
         <dia:point val="-149,65"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="8.9774999999999991"/>
+        <dia:real val="8.9775000000000009"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -12168,7 +12168,7 @@ pre-processor includes.#</dia:string>
         <dia:point val="-160,73"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="15.6225"/>
+        <dia:real val="15.622499999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -12807,7 +12807,7 @@ pre-processor includes.#</dia:string>
         <dia:point val="-179,65"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="7.7774999999999999"/>
+        <dia:real val="7.7775000000000007"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -13479,7 +13479,7 @@ pre-processor includes.#</dia:string>
         <dia:point val="-138.265,52"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-139.015,46.2;-109.8,52.8"/>
+        <dia:rectangle val="-139.015,46.25;-109.8,52.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -13551,7 +13551,7 @@ pre-processor includes.#</dia:string>
         <dia:point val="-143,52"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-160.671,46.2;-142.25,52.8"/>
+        <dia:rectangle val="-160.671,46.25;-142.25,52.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -14588,7 +14588,7 @@ pre-processor includes.#</dia:string>
         <dia:point val="-29.1136,26.9158"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-29.8636,4.975;-24.5891,28.5158"/>
+        <dia:rectangle val="-29.8636,4.975;-24.5891,27.7158"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>

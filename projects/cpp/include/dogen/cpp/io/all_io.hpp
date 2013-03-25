@@ -20,9 +20,9 @@
  */
 #include "dogen/cpp/io/boost_types_io.hpp"
 #include "dogen/cpp/io/cpp_aspect_types_io.hpp"
-#include "dogen/cpp/io/cpp_file_types_io.hpp"
 #include "dogen/cpp/io/cpp_location_request_io.hpp"
 #include "dogen/cpp/io/dependency_details_io.hpp"
+#include "dogen/cpp/io/file_types_io.hpp"
 #include "dogen/cpp/io/std_types_io.hpp"
 #include "dogen/cpp/io/view_models/class_view_model_io.hpp"
 #include "dogen/cpp/io/view_models/cmakelists_view_model_io.hpp"

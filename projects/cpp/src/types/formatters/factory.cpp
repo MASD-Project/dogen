@@ -23,7 +23,7 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/config/types/cpp_facet_types.hpp"
 #include "dogen/config/io/cpp_facet_types_io.hpp"
-#include "dogen/cpp/io/cpp_file_types_io.hpp"
+#include "dogen/cpp/io/file_types_io.hpp"
 #include "dogen/cpp/io/cpp_aspect_types_io.hpp"
 #include "dogen/cpp/types/formatters/production_failure.hpp"
 #include "dogen/cpp/types/formatters/cpp_facet_includer.hpp"
@@ -72,12 +72,12 @@ factory::factory(const config::cpp_settings& settings)
 
 factory::result_type
 factory::create_main_formatter(std::ostream& s, config::cpp_facet_types ft,
-    cpp_file_types flt) const {
+    file_types flt) const {
 
     using config::cpp_facet_types;
     switch (ft) {
     case cpp_facet_types::types:
-        if (flt == cpp_file_types::header)
+        if (flt == file_types::header)
             return domain_header::create(s,
                 settings_.disable_complete_constructor(),
                 settings_.use_integrated_io(),
@@ -89,19 +89,19 @@ factory::create_main_formatter(std::ostream& s, config::cpp_facet_types ft,
                 disable_io_);
         break;
     case cpp_facet_types::io:
-        if (flt == cpp_file_types::header)
+        if (flt == file_types::header)
             return io_header::create(s);
         else
             return io_implementation::create(s);
         break;
     case cpp_facet_types::hash:
-        if (flt == cpp_file_types::header)
+        if (flt == file_types::header)
             return hash_header::create(s);
         else
             return hash_implementation::create(s);
         break;
     case cpp_facet_types::serialization:
-        if (flt == cpp_file_types::header)
+        if (flt == file_types::header)
             return serialization_header::create(s,
                 settings_.disable_xml_serialization());
         else
@@ -109,13 +109,13 @@ factory::create_main_formatter(std::ostream& s, config::cpp_facet_types ft,
                 settings_.disable_xml_serialization());
         break;
     case cpp_facet_types::test_data:
-        if (flt == cpp_file_types::header)
+        if (flt == file_types::header)
             return generator_header::create(s);
         else
             return generator_implementation::create(s);
         break;
     case cpp_facet_types::odb:
-        if (flt == cpp_file_types::header)
+        if (flt == file_types::header)
             return odb_header::create(s);
 
     default: {
@@ -126,14 +126,14 @@ factory::create_main_formatter(std::ostream& s, config::cpp_facet_types ft,
 }
 
 factory::result_type factory::create_registrar_formatter(
-    std::ostream& s, cpp_file_types flt) const {
+    std::ostream& s, file_types flt) const {
 
     switch (flt) {
-    case cpp_file_types::header:
+    case file_types::header:
         return registrar_header::create(s);
         break;
 
-    case cpp_file_types::implementation:
+    case file_types::implementation:
         return registrar_implementation::create(s,
             settings_.disable_xml_serialization());
         break;
@@ -151,7 +151,7 @@ factory::result_type factory::create_null_formatter(std::ostream& s) const {
 }
 
 factory::result_type
-factory::create(std::ostream& s, config::cpp_facet_types ft, cpp_file_types flt,
+factory::create(std::ostream& s, config::cpp_facet_types ft, file_types flt,
     cpp_aspect_types at) const {
 
     switch (at) {

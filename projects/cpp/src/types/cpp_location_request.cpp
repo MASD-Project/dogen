@@ -25,12 +25,12 @@ namespace cpp {
 
 cpp_location_request::cpp_location_request()
     : facet_type_(static_cast<dogen::config::cpp_facet_types>(0)),
-      file_type_(static_cast<dogen::cpp::cpp_file_types>(0)),
+      file_type_(static_cast<dogen::cpp::file_types>(0)),
       aspect_type_(static_cast<dogen::cpp::cpp_aspect_types>(0)) { }
 
 cpp_location_request::cpp_location_request(
     const dogen::config::cpp_facet_types& facet_type,
-    const dogen::cpp::cpp_file_types& file_type,
+    const dogen::cpp::file_types& file_type,
     const dogen::cpp::cpp_aspect_types& aspect_type,
     const std::string& model_name,
     const std::list<std::string>& external_package_path,
@@ -79,11 +79,11 @@ void cpp_location_request::facet_type(const dogen::config::cpp_facet_types& v) {
     facet_type_ = v;
 }
 
-dogen::cpp::cpp_file_types cpp_location_request::file_type() const {
+dogen::cpp::file_types cpp_location_request::file_type() const {
     return file_type_;
 }
 
-void cpp_location_request::file_type(const dogen::cpp::cpp_file_types& v) {
+void cpp_location_request::file_type(const dogen::cpp::file_types& v) {
     file_type_ = v;
 }
 

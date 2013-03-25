@@ -31,7 +31,7 @@
 #include "dogen/config/types/cpp_settings.hpp"
 #include "dogen/cpp/types/cpp_location_request.hpp"
 #include "dogen/config/types/cpp_facet_types.hpp"
-#include "dogen/cpp/types/cpp_file_types.hpp"
+#include "dogen/cpp/types/file_types.hpp"
 #include "dogen/cpp/types/cpp_aspect_types.hpp"
 
 namespace dogen {
@@ -62,8 +62,8 @@ private:
     std::string facet_directory(config::cpp_facet_types facet) const;
     std::string facet_postfix(config::cpp_facet_types facet) const;
     std::string aspect_postfix(cpp_aspect_types aspect) const;
-    boost::filesystem::path file_type_directory(cpp_file_types file_type) const;
-    std::string extension(cpp_file_types file_type) const;
+    boost::filesystem::path file_type_directory(file_types file_type) const;
+    std::string extension(file_types file_type) const;
 
 public:
     typedef boost::filesystem::path path;

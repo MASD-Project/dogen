@@ -36,7 +36,7 @@
 #include "dogen/cpp/types/cpp_location_manager.hpp"
 #include "dogen//cpp/types/cpp_inclusion_manager.hpp"
 #include "dogen/cpp/types/cpp_aspect_types.hpp"
-#include "dogen/cpp/types/cpp_file_types.hpp"
+#include "dogen/cpp/types/file_types.hpp"
 #include "dogen/config/types/cpp_facet_types.hpp"
 #include "dogen/sml/types/meta_types.hpp"
 #include "dogen/sml/types/package.hpp"
@@ -73,7 +73,7 @@ private:
     void log_keys() const;
     void log_includers() const;
     void log_generating_file(config::cpp_facet_types facet,
-        cpp_aspect_types aspect, cpp_file_types file, std::string name,
+        cpp_aspect_types aspect, file_types file, std::string name,
         sml::meta_types mt) const;
 
 private:
@@ -98,7 +98,7 @@ private:
     to_header_guard_name(const boost::filesystem::path& relative_path) const;
 
     cpp_location_request location_request_factory(config::cpp_facet_types ft,
-        cpp_file_types flt, cpp_aspect_types at,
+        file_types flt, cpp_aspect_types at,
         const sml::qname& n) const;
 
     /**
@@ -116,34 +116,34 @@ private:
      * model, if false the unversioned key.
      */
     file_view_model create_key_file_view_model(
-        config::cpp_facet_types facet_type, cpp_file_types file_type,
+        config::cpp_facet_types facet_type, file_types file_type,
         cpp_aspect_types aspect_type);
 
 private:
     /**
      * @brief Performs the initial setup of the file view model.
      */
-    file_view_model create_file(config::cpp_facet_types ft, cpp_file_types flt,
+    file_view_model create_file(config::cpp_facet_types ft, file_types flt,
         cpp_aspect_types at, const sml::qname& name);
 
     /**
      * @brief Transforms a SML pod into a C++ file view.
      */
     file_view_model transform_file(config::cpp_facet_types ft,
-        cpp_file_types flt, cpp_aspect_types at, const sml::pod& p);
+        file_types flt, cpp_aspect_types at, const sml::pod& p);
 
     /**
      * @brief Transforms a SML enumeration into a C++ file view.
      */
     file_view_model
-    transform_file(config::cpp_facet_types ft, cpp_file_types flt,
+    transform_file(config::cpp_facet_types ft, file_types flt,
         cpp_aspect_types at, const sml::enumeration& e);
 
     /**
      * @brief Transforms a SML exception into a C++ file view.
      */
     file_view_model
-    transform_file(config::cpp_facet_types ft, cpp_file_types flt,
+    transform_file(config::cpp_facet_types ft, file_types flt,
         cpp_aspect_types at, const sml::exception& e);
 
     /**

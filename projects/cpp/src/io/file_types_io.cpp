@@ -18,27 +18,32 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/cpp/test_data/cpp_file_types_td.hpp"
+#include <ostream>
+#include <stdexcept>
+#include "dogen/cpp/io/file_types_io.hpp"
 
 namespace dogen {
 namespace cpp {
 
-cpp_file_types_generator::cpp_file_types_generator() : position_(0) { }
-void cpp_file_types_generator::
-populate(const unsigned int position, result_type& v) {
-    v = static_cast<cpp_file_types>(position % 3);
-}
+std::ostream& operator<<(std::ostream& s, const file_types& v) {
+    s << "{ " << "\"__type__\": " << "\"file_types\", " << "\"value\": ";
 
-cpp_file_types_generator::result_type
-cpp_file_types_generator::create(const unsigned int  position) {
-    result_type r;
-    cpp_file_types_generator::populate(position, r);
-    return r;
-}
-
-cpp_file_types_generator::result_type
-cpp_file_types_generator::operator()() {
-    return create(position_++);
+    std::string attr;
+    switch (v) {
+    case file_types::invalid:
+        attr = "\"invalid\"";
+        break;
+    case file_types::header:
+        attr = "\"header\"";
+        break;
+    case file_types::implementation:
+        attr = "\"implementation\"";
+        break;
+    default:
+        throw std::invalid_argument("Invalid value for file_types");
+    }
+    s << attr << " }";
+    return s;
 }
 
 } }

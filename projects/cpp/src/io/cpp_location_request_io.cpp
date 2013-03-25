@@ -22,8 +22,8 @@
 #include <ostream>
 #include "dogen/config/io/cpp_facet_types_io.hpp"
 #include "dogen/cpp/io/cpp_aspect_types_io.hpp"
-#include "dogen/cpp/io/cpp_file_types_io.hpp"
 #include "dogen/cpp/io/cpp_location_request_io.hpp"
+#include "dogen/cpp/io/file_types_io.hpp"
 
 
 inline std::string tidy_up_string(std::string s) {
