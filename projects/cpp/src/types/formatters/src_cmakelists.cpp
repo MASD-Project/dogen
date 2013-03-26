@@ -36,10 +36,10 @@ namespace dogen {
 namespace cpp {
 namespace formatters {
 
-cpp_src_cmakelists::cpp_src_cmakelists(std::ostream& stream) : stream_(stream) {
+src_cmakelists::src_cmakelists(std::ostream& stream) : stream_(stream) {
 }
 
-void cpp_src_cmakelists::format(const cmakelists_view_model& vm) {
+void src_cmakelists::format(const cmakelists_view_model& vm) {
     const std::string mn(vm.model_name().empty() ?
         unnamed_model :
         vm.model_name());

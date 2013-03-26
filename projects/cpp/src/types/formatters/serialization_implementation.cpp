@@ -77,9 +77,9 @@ void serialization_implementation::save_function(const class_view_model& vm) {
             << std::endl;
 
     {
-        cpp_positive_indenter_scope s(indenter_);
+        positive_indenter_scope s(indenter_);
         stream_ << indenter_ << "const ";
-        cpp_qualified_name qualified_name(stream_);
+        qualified_name qualified_name(stream_);
         qualified_name.format(vm);
 
         stream_ << (has_properties_or_parents ? "& v," : "& /*v*/,")
@@ -139,9 +139,9 @@ void serialization_implementation::load_function(const class_view_model& vm) {
             << std::endl;
 
     {
-        cpp_positive_indenter_scope s(indenter_);
+        positive_indenter_scope s(indenter_);
         stream_ << indenter_;
-        cpp_qualified_name qualified_name(stream_);
+        qualified_name qualified_name(stream_);
         qualified_name.format(vm);
 
         stream_ << (has_properties_or_parents ? "& v," : "& /*v*/,")
@@ -207,7 +207,7 @@ void serialization_implementation::
 template_instantiations(const class_view_model& vm) {
     stream_ << indenter_ << "template void save("
             << "archive::polymorphic_oarchive& ar, const ";
-    cpp_qualified_name qualified_name(stream_);
+    qualified_name qualified_name(stream_);
     qualified_name.format(vm);
     stream_ << "& v, unsigned int version);" << std::endl;
     stream_ << indenter_ << "template void load("
@@ -265,11 +265,11 @@ void serialization_implementation::format_class(const file_view_model& vm) {
     }
 
     const view_models::class_view_model& cvm(*o);
-    cpp_qualified_name qualified_name(stream_);
+    qualified_name qualified_name(stream_);
     if (cvm.is_parent() || !cvm.parents().empty()) {
         stream_ << indenter_ << "BOOST_CLASS_TRACKING(" << std::endl;
         {
-            cpp_positive_indenter_scope s(indenter_);
+            positive_indenter_scope s(indenter_);
             stream_ << indenter_;
             qualified_name.format(cvm);
             stream_ << "," << std::endl;
@@ -307,7 +307,7 @@ void serialization_implementation::format(const file_view_model& vm) {
     licence licence(stream_);
     licence.format();
 
-    cpp_includes includes(stream_);
+    includes includes(stream_);
     includes.format(vm);
 
     // FIXME: massive hack for EOS workaround

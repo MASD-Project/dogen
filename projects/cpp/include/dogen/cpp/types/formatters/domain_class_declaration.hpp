@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_TYPES_FORMATTERS_CPP_DOMAIN_CLASS_DECLARATION_HPP
-#define DOGEN_CPP_TYPES_FORMATTERS_CPP_DOMAIN_CLASS_DECLARATION_HPP
+#ifndef DOGEN_CPP_TYPES_FORMATTERS_DOMAIN_CLASS_DECLARATION_HPP
+#define DOGEN_CPP_TYPES_FORMATTERS_DOMAIN_CLASS_DECLARATION_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -33,22 +33,22 @@ namespace dogen {
 namespace cpp {
 namespace formatters {
 
-class cpp_domain_class_declaration : public cpp_class_declaration {
+class domain_class_declaration : public class_declaration {
 public:
     typedef view_models::class_view_model class_view_model;
 
 public:
-    cpp_domain_class_declaration() = delete;
-    cpp_domain_class_declaration(const cpp_domain_class_declaration&) = default;
-    cpp_domain_class_declaration(cpp_domain_class_declaration&&) = default;
-    cpp_domain_class_declaration&
-    operator=(const cpp_domain_class_declaration&) = default;
+    domain_class_declaration() = delete;
+    domain_class_declaration(const domain_class_declaration&) = default;
+    domain_class_declaration(domain_class_declaration&&) = default;
+    domain_class_declaration&
+    operator=(const domain_class_declaration&) = default;
 
 public:
-    cpp_domain_class_declaration(std::ostream& stream,
+    domain_class_declaration(std::ostream& stream,
         const bool disable_complete_constructor, const bool disable_io_,
         const bool serialization_enabled);
-    virtual ~cpp_domain_class_declaration() noexcept {}
+    virtual ~domain_class_declaration() noexcept {}
 
 private:
     void hand_crafted_constructors(const class_view_model& vm);

@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_TYPES_FORMATTERS_CPP_KEY_CLASS_IMPLEMENTATION_HPP
-#define DOGEN_CPP_TYPES_FORMATTERS_CPP_KEY_CLASS_IMPLEMENTATION_HPP
+#ifndef DOGEN_CPP_TYPES_FORMATTERS_KEY_CLASS_IMPLEMENTATION_HPP
+#define DOGEN_CPP_TYPES_FORMATTERS_KEY_CLASS_IMPLEMENTATION_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -32,21 +32,21 @@ namespace dogen {
 namespace cpp {
 namespace formatters {
 
-class cpp_key_class_implementation : public cpp_class_implementation {
+class key_class_implementation : public class_implementation {
 public:
     typedef view_models::class_view_model class_view_model;
 
 public:
-    cpp_key_class_implementation() = delete;
-    cpp_key_class_implementation(const cpp_key_class_implementation&) = default;
-    cpp_key_class_implementation(cpp_key_class_implementation&&) = default;
-    cpp_key_class_implementation&
-    operator=(const cpp_key_class_implementation&) = default;
+    key_class_implementation() = delete;
+    key_class_implementation(const key_class_implementation&) = default;
+    key_class_implementation(key_class_implementation&&) = default;
+    key_class_implementation&
+    operator=(const key_class_implementation&) = default;
 
 public:
-    cpp_key_class_implementation(std::ostream& stream,
+    key_class_implementation(std::ostream& stream,
         bool disable_complete_constructor, bool disable_io);
-    virtual ~cpp_key_class_implementation() noexcept {}
+    virtual ~key_class_implementation() noexcept {}
 
 private:
     void hand_crafted_constructors(const class_view_model& vm);

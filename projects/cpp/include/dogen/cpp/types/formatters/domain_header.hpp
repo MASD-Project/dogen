@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_FORMATTERS_CPP_DOMAIN_HEADER_HPP
-#define DOGEN_CPP_FORMATTERS_CPP_DOMAIN_HEADER_HPP
+#ifndef DOGEN_CPP_FORMATTERS_DOMAIN_HEADER_HPP
+#define DOGEN_CPP_FORMATTERS_DOMAIN_HEADER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -83,8 +83,8 @@ public:
 
 private:
     std::ostream& stream_;
-    cpp_indenter indenter_;
-    cpp_utility utility_;
+    indenter indenter_;
+    utility utility_;
     const bool disable_complete_constructor_;
     const bool use_integrated_io_;
     const bool disable_io_;

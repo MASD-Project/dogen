@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_TYPES_FORMATTERS_CPP_UTILITY_HPP
-#define DOGEN_CPP_TYPES_FORMATTERS_CPP_UTILITY_HPP
+#ifndef DOGEN_CPP_TYPES_FORMATTERS_UTILITY_HPP
+#define DOGEN_CPP_TYPES_FORMATTERS_UTILITY_HPP
 
 #include <iosfwd>
 #include <string>
@@ -29,16 +29,16 @@ namespace dogen {
 namespace cpp {
 namespace formatters {
 
-class cpp_utility {
+class utility {
 public:
-    cpp_utility() = delete;
-    cpp_utility(const cpp_utility&) = delete;
-    ~cpp_utility() = default;
-    cpp_utility(cpp_utility&&) = default;
-    cpp_utility& operator=(const cpp_utility&) = delete;
+    utility() = delete;
+    utility(const utility&) = delete;
+    ~utility() = default;
+    utility(utility&&) = default;
+    utility& operator=(const utility&) = delete;
 
 public:
-    cpp_utility(std::ostream& stream, cpp_indenter& indenter) :
+    utility(std::ostream& stream, indenter& indenter) :
         stream_(stream), indenter_(indenter) { }
 
 public:
@@ -87,7 +87,7 @@ public:
 
 private:
     std::ostream& stream_;
-    cpp_indenter& indenter_;
+    indenter& indenter_;
 };
 
 } } }

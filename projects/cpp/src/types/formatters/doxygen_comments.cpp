@@ -28,11 +28,11 @@ namespace dogen {
 namespace cpp {
 namespace formatters {
 
-cpp_doxygen_comments::
-cpp_doxygen_comments(std::ostream& stream, cpp_indenter& indenter)
+doxygen_comments::
+doxygen_comments(std::ostream& stream, indenter& indenter)
     : stream_(stream), indenter_(indenter) { }
 
-void cpp_doxygen_comments::format(const std::string& documentation) {
+void doxygen_comments::format(const std::string& documentation) {
     std::string trimmed(boost::algorithm::trim_copy(documentation));
     if (trimmed.empty())
         return;
@@ -57,7 +57,7 @@ void cpp_doxygen_comments::format(const std::string& documentation) {
     stream_ << indenter_ << " */" << std::endl;
 }
 
-void cpp_doxygen_comments::format_inline(const std::string& documentation) {
+void doxygen_comments::format_inline(const std::string& documentation) {
     std::string trimmed(boost::algorithm::trim_copy(documentation));
     if (trimmed.empty())
         return;
@@ -66,7 +66,7 @@ void cpp_doxygen_comments::format_inline(const std::string& documentation) {
     stream_ << " ///< " << s;
 }
 
-void cpp_doxygen_comments::
+void doxygen_comments::
 format_start_block(const std::string& documentation) {
     std::string trimmed(boost::algorithm::trim_copy(documentation));
     if (trimmed.empty())
@@ -75,7 +75,7 @@ format_start_block(const std::string& documentation) {
     stream_ << indenter_ << "/**@{*/" << std::endl;
 }
 
-void cpp_doxygen_comments::
+void doxygen_comments::
 format_end_block(const std::string& documentation) {
     std::string trimmed(boost::algorithm::trim_copy(documentation));
     if (trimmed.empty())

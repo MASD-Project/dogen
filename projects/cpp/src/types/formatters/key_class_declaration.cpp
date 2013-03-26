@@ -25,15 +25,15 @@ namespace dogen {
 namespace cpp {
 namespace formatters {
 
-cpp_key_class_declaration::
-cpp_key_class_declaration(std::ostream& stream,
+key_class_declaration::
+key_class_declaration(std::ostream& stream,
     const bool disable_complete_constructor, const bool disable_io,
     const bool disable_serialization)
-    : cpp_class_declaration(stream, disable_serialization),
+    : class_declaration(stream, disable_serialization),
       disable_complete_constructor_(disable_complete_constructor),
       disable_io_(disable_io) {}
 
-void cpp_key_class_declaration::
+void key_class_declaration::
 hand_crafted_constructors(const class_view_model& vm) {
     default_constructor(vm);
     destructor(vm);
@@ -41,10 +41,10 @@ hand_crafted_constructors(const class_view_model& vm) {
         complete_constructor(vm);
 }
 
-void cpp_key_class_declaration::format(const class_view_model& vm) {
+void key_class_declaration::format(const class_view_model& vm) {
     open_class(vm);
     {
-        cpp_positive_indenter_scope s(indenter_);
+        positive_indenter_scope s(indenter_);
         compiler_generated_constuctors(vm);
         hand_crafted_constructors(vm);
         friends(vm);

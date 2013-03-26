@@ -64,7 +64,7 @@ void generator_header::generator_class(const enumeration_view_model& vm) {
     stream_ << indenter_ << "class " << class_name << " ";
     utility_.open_scope();
     {
-        cpp_positive_indenter_scope s(indenter_);
+        positive_indenter_scope s(indenter_);
 
         utility_.public_access_specifier();
         stream_ << indenter_ << class_name << "();" << std::endl;
@@ -73,7 +73,7 @@ void generator_header::generator_class(const enumeration_view_model& vm) {
         utility_.public_access_specifier();
 
         stream_ << indenter_ << "typedef ";
-        cpp_qualified_name qualified_name(stream_);
+        qualified_name qualified_name(stream_);
         qualified_name.format(vm);
         stream_ << " result_type;" << std::endl;
         utility_.blank_line();
@@ -105,7 +105,7 @@ void generator_header::generator_class(const class_view_model& vm) {
     stream_ << indenter_ << "class " << class_name << " ";
     utility_.open_scope();
     {
-        cpp_positive_indenter_scope s(indenter_);
+        positive_indenter_scope s(indenter_);
 
         utility_.public_access_specifier();
         stream_ << indenter_ << class_name << "();" << std::endl;
@@ -114,7 +114,7 @@ void generator_header::generator_class(const class_view_model& vm) {
         utility_.public_access_specifier();
 
         stream_ << indenter_ << "typedef ";
-        cpp_qualified_name qualified_name(stream_);
+        qualified_name qualified_name(stream_);
         qualified_name.format(vm);
         stream_ << " result_type;" << std::endl;
         utility_.blank_line();
@@ -194,7 +194,7 @@ void generator_header::format(const file_view_model& vm) {
     guards.format_start(vm.header_guard());
     utility_.blank_line();
 
-    cpp_includes includes(stream_);
+    includes includes(stream_);
     includes.format(vm);
 
     if (vm.meta_type() == sml::meta_types::enumeration)

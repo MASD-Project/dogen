@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_TYPES_FORMATTERS_CPP_DOMAIN_CLASS_IMPLEMENTATION_HPP
-#define DOGEN_CPP_TYPES_FORMATTERS_CPP_DOMAIN_CLASS_IMPLEMENTATION_HPP
+#ifndef DOGEN_CPP_TYPES_FORMATTERS_DOMAIN_CLASS_IMPLEMENTATION_HPP
+#define DOGEN_CPP_TYPES_FORMATTERS_DOMAIN_CLASS_IMPLEMENTATION_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -31,26 +31,26 @@ namespace dogen {
 namespace cpp {
 namespace formatters {
 
-class cpp_domain_class_implementation : public cpp_class_implementation {
+class domain_class_implementation : public class_implementation {
 public:
     typedef view_models::class_view_model class_view_model;
 
 public:
-    cpp_domain_class_implementation() = delete;
-    cpp_domain_class_implementation(
-        const cpp_domain_class_implementation&) = default;
-    cpp_domain_class_implementation(
-        cpp_domain_class_implementation&&) = default;
-    cpp_domain_class_implementation&
-    operator=(const cpp_domain_class_implementation&) = default;
+    domain_class_implementation() = delete;
+    domain_class_implementation(
+        const domain_class_implementation&) = default;
+    domain_class_implementation(
+        domain_class_implementation&&) = default;
+    domain_class_implementation&
+    operator=(const domain_class_implementation&) = default;
 
 private:
     void hand_crafted_constructors(const class_view_model& vm);
 
 public:
-    cpp_domain_class_implementation(std::ostream& stream,
+    domain_class_implementation(std::ostream& stream,
         bool disable_complete_constructor, bool disable_io);
-    virtual ~cpp_domain_class_implementation() noexcept {}
+    virtual ~domain_class_implementation() noexcept {}
 
 public:
     virtual void format(const class_view_model& vm) override;

@@ -31,12 +31,12 @@ namespace dogen {
 namespace cpp {
 namespace formatters {
 
-void cpp_indenter::to_stream(std::ostream& stream) const {
+void indenter::to_stream(std::ostream& stream) const {
     for (unsigned int i(0); i < indent_level_; ++i)
         stream << one_indent;
 }
 
-std::ostream& operator<<(std::ostream& stream, cpp_indenter indenter) {
+std::ostream& operator<<(std::ostream& stream, indenter indenter) {
     indenter.to_stream(stream);
     return stream;
 }

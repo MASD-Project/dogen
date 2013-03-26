@@ -71,19 +71,19 @@ namespace dogen {
 namespace cpp {
 namespace formatters {
 
-cpp_inserter_implementation::
-cpp_inserter_implementation(std::ostream& stream, cpp_indenter& indenter,
+inserter_implementation::
+inserter_implementation(std::ostream& stream, indenter& indenter,
     const bool is_inside_class)
     : is_inside_class_(is_inside_class), stream_(stream), indenter_(indenter),
       utility_(stream_, indenter_) {
 }
 
-bool cpp_inserter_implementation::
+bool inserter_implementation::
 is_insertable(const nested_type_view_model& vm) {
     return !vm.is_sequence_container() && !vm.is_associative_container();
 }
 
-void cpp_inserter_implementation::
+void inserter_implementation::
 sequence_container_helper(const nested_type_view_model& vm) {
     const auto children(vm.children());
     if (children.size() != 1) {
@@ -104,14 +104,14 @@ sequence_container_helper(const nested_type_view_model& vm) {
 
         utility_.open_scope();
         {
-            cpp_positive_indenter_scope s(indenter_);
+            positive_indenter_scope s(indenter_);
             stream_ << indenter_ << "s" << space_inserter
                     << utility_.quote("[ ") << ";" << std::endl;
             stream_ << indenter_
                     << "for (auto i(v.begin()); i != v.end(); ++i) ";
             utility_.open_scope();
             {
-                cpp_positive_indenter_scope s(indenter_);
+                positive_indenter_scope s(indenter_);
                 stream_ << indenter_ << "if (i != v.begin()) s" << space_inserter
                         << utility_.quote(", ") << ";" << std::endl;
 
@@ -135,7 +135,7 @@ sequence_container_helper(const nested_type_view_model& vm) {
     utility_.blank_line(2);
 }
 
-void cpp_inserter_implementation::
+void inserter_implementation::
 associative_container_helper(const nested_type_view_model& vm) {
     const auto children(vm.children());
     if (children.size() != 1 && children.size() != 2) {
@@ -159,14 +159,14 @@ associative_container_helper(const nested_type_view_model& vm) {
 
         utility_.open_scope();
         {
-            cpp_positive_indenter_scope s(indenter_);
+            positive_indenter_scope s(indenter_);
             stream_ << indenter_ << "s" << space_inserter
                     << utility_.quote("[") << ";" << std::endl;
             stream_ << indenter_
                     << "for (auto i(v.begin()); i != v.end(); ++i) ";
             utility_.open_scope();
             {
-                cpp_positive_indenter_scope s(indenter_);
+                positive_indenter_scope s(indenter_);
                 stream_ << indenter_ << "if (i != v.begin()) s" << space_inserter
                         << utility_.quote(", ") << ";" << std::endl;
 
@@ -226,7 +226,7 @@ associative_container_helper(const nested_type_view_model& vm) {
     utility_.blank_line(2);
 }
 
-void cpp_inserter_implementation::
+void inserter_implementation::
 smart_pointer_helper(const nested_type_view_model& vm) {
     const auto children(vm.children());
     if (children.size() != 1) {
@@ -245,7 +245,7 @@ smart_pointer_helper(const nested_type_view_model& vm) {
 
         utility_.open_scope();
         {
-            cpp_positive_indenter_scope s(indenter_);
+            positive_indenter_scope s(indenter_);
             stream_ << indenter_ << "s" << space_inserter
                     << utility_.quote("{ ") << space_inserter
                     << utility_.quote(utility_.quote_escaped(type) + colon)
@@ -266,7 +266,7 @@ smart_pointer_helper(const nested_type_view_model& vm) {
             utility_.blank_line();
             stream_ << indenter_ << "if (v)" << std::endl;
             {
-                cpp_positive_indenter_scope s(indenter_);
+                positive_indenter_scope s(indenter_);
                 const auto containee(children.front());
                 stream_ << indenter_ << "s" << space_inserter
                         << utility_.quote(utility_.quote_escaped("data") +
@@ -283,7 +283,7 @@ smart_pointer_helper(const nested_type_view_model& vm) {
             }
             stream_ << indenter_ << "else" << std::endl;
             {
-                cpp_positive_indenter_scope s(indenter_);
+                positive_indenter_scope s(indenter_);
 
                 stream_ << indenter_ << "s" << space_inserter
                         << utility_.quote(utility_.quote_escaped("data") +
@@ -302,7 +302,7 @@ smart_pointer_helper(const nested_type_view_model& vm) {
     utility_.blank_line(2);
 }
 
-void cpp_inserter_implementation::
+void inserter_implementation::
 optional_helper(const nested_type_view_model& vm) {
     const auto children(vm.children());
     if (children.size() != 1) {
@@ -321,7 +321,7 @@ optional_helper(const nested_type_view_model& vm) {
 
         utility_.open_scope();
         {
-            cpp_positive_indenter_scope s(indenter_);
+            positive_indenter_scope s(indenter_);
             stream_ << indenter_ << "s" << space_inserter
                     << utility_.quote("{ ") << space_inserter
                     << utility_.quote(utility_.quote_escaped(type) + colon)
@@ -334,7 +334,7 @@ optional_helper(const nested_type_view_model& vm) {
             utility_.blank_line();
             stream_ << indenter_ << "if (v)" << std::endl;
             {
-                cpp_positive_indenter_scope s(indenter_);
+                positive_indenter_scope s(indenter_);
                 const auto containee(children.front());
                 stream_ << indenter_ << "s" << space_inserter
                         << utility_.quote(utility_.quote_escaped("data") +
@@ -352,7 +352,7 @@ optional_helper(const nested_type_view_model& vm) {
             }
             stream_ << indenter_ << "else" << std::endl;
             {
-                cpp_positive_indenter_scope s(indenter_);
+                positive_indenter_scope s(indenter_);
 
                 stream_ << indenter_ << "s" << space_inserter
                         << utility_.quote(utility_.quote_escaped("data") +
@@ -371,7 +371,7 @@ optional_helper(const nested_type_view_model& vm) {
     utility_.blank_line(2);
 }
 
-void cpp_inserter_implementation::
+void inserter_implementation::
 pair_helper(const nested_type_view_model& vm) {
     const auto children(vm.children());
     if (children.size() != 2) {
@@ -390,7 +390,7 @@ pair_helper(const nested_type_view_model& vm) {
 
         utility_.open_scope();
         {
-            cpp_positive_indenter_scope s(indenter_);
+            positive_indenter_scope s(indenter_);
             stream_ << indenter_ << "s" << space_inserter
                     << utility_.quote("{ ") << space_inserter
                     << utility_.quote(utility_.quote_escaped(type) + colon)
@@ -444,7 +444,7 @@ pair_helper(const nested_type_view_model& vm) {
     utility_.blank_line(2);
 }
 
-void cpp_inserter_implementation::
+void inserter_implementation::
 variant_helper(const nested_type_view_model& vm) {
     const auto children(vm.children());
     if (children.empty()) {
@@ -463,12 +463,12 @@ variant_helper(const nested_type_view_model& vm) {
 
         utility_.open_scope();
         {
-            cpp_positive_indenter_scope s(indenter_);
+            positive_indenter_scope s(indenter_);
             stream_ << indenter_ << vm.complete_identifiable_name()
                     << "_visitor(std::ostream& s) : stream_(s) ";
             utility_.open_scope();
             {
-                cpp_positive_indenter_scope s(indenter_);
+                positive_indenter_scope s(indenter_);
                 stream_ << indenter_ << "s" << space_inserter
                         << utility_.quote("{ ") << space_inserter
                         << utility_.quote(utility_.quote_escaped(type) + colon)
@@ -498,7 +498,7 @@ variant_helper(const nested_type_view_model& vm) {
 
                 utility_.open_scope();
                 {
-                    cpp_positive_indenter_scope s(indenter_);
+                    positive_indenter_scope s(indenter_);
                     if (c.is_primitive()) {
                         stream_ << indenter_ << "stream_" << space_inserter
                                 << utility_.quote("{ ") << space_inserter
@@ -541,7 +541,7 @@ variant_helper(const nested_type_view_model& vm) {
 
         utility_.open_scope();
         {
-            cpp_positive_indenter_scope s(indenter_);
+            positive_indenter_scope s(indenter_);
             stream_ << indenter_
                     << "boost::apply_visitor("
                     << vm.complete_identifiable_name()
@@ -554,14 +554,14 @@ variant_helper(const nested_type_view_model& vm) {
     utility_.blank_line(2);
 }
 
-void cpp_inserter_implementation::tidy_up_string_method() {
+void inserter_implementation::tidy_up_string_method() {
     utility_.blank_line();
     stream_ << indenter_ << "inline std::string tidy_up_string"
             << "(std::string s) ";
 
     utility_.open_scope();
     {
-        cpp_positive_indenter_scope s(indenter_);
+        positive_indenter_scope s(indenter_);
         stream_ << indenter_
                 << "boost::replace_all(s, \"\\r\\n\", \"<new_line>\");"
                 << std::endl
@@ -578,7 +578,7 @@ void cpp_inserter_implementation::tidy_up_string_method() {
     utility_.blank_line();
 }
 
-void cpp_inserter_implementation::
+void inserter_implementation::
 recursive_helper_method_creator(const nested_type_view_model& vm,
     std::unordered_set<std::string>& types_done) {
 
@@ -607,7 +607,7 @@ recursive_helper_method_creator(const nested_type_view_model& vm,
     types_done.insert(vm.complete_identifiable_name());
 }
 
-void cpp_inserter_implementation::
+void inserter_implementation::
 format_helper_methods(const class_view_model& vm) {
     const auto props(vm.properties());
     if (props.empty())
@@ -618,7 +618,7 @@ format_helper_methods(const class_view_model& vm) {
         recursive_helper_method_creator(p.type(), types_done);
 }
 
-void cpp_inserter_implementation::
+void inserter_implementation::
 format_inserter_implementation(const class_view_model& vm) {
     if (vm.requires_stream_manipulators()) {
         stream_ << indenter_ << "boost::io::ios_flags_saver ifs(s);"
@@ -639,7 +639,7 @@ format_inserter_implementation(const class_view_model& vm) {
             << std::endl;
 
     std::ostringstream ss;
-    cpp_qualified_name qualified_name(ss);
+    qualified_name qualified_name(ss);
     qualified_name.format(vm);
 
     stream_ << indenter_ << special_indent << inserter

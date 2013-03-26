@@ -70,7 +70,7 @@ void registrar_implementation::format(const file_view_model& vm) {
     licence.format();
 
     const bool blank_line(false);
-    cpp_includes includes(stream_, blank_line);
+    includes includes(stream_, blank_line);
     includes.format(vm);
 
     // FIXME: massive hack for EOS workaround
@@ -95,7 +95,7 @@ void registrar_implementation::format(const file_view_model& vm) {
                 << ") ";
         utility_.open_scope();
         {
-            cpp_positive_indenter_scope s(indenter_);
+            positive_indenter_scope s(indenter_);
             for (const auto d : deps) {
                 stream_ << indenter_ << d << "::register_types(ar);"
                         << std::endl;

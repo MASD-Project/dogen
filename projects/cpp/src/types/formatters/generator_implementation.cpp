@@ -93,14 +93,14 @@ sequence_container_helper(
 
     utility_.open_scope();
     {
-        cpp_positive_indenter_scope s(indenter_);
+        positive_indenter_scope s(indenter_);
         stream_ << indenter_ << container_type_name << " r;"
                 << std::endl;
         stream_ << indenter_ << "for (unsigned int i(0); i < " << quantity
                 << "; ++i) ";
         utility_.open_scope();
         {
-            cpp_positive_indenter_scope s(indenter_);
+            positive_indenter_scope s(indenter_);
             stream_ << indenter_ << "r.push_back(create_"
                     << containee_identifiable_type_name
                     << "(position + i));" << std::endl;
@@ -131,14 +131,14 @@ associative_container_helper(
 
     utility_.open_scope();
     {
-        cpp_positive_indenter_scope s(indenter_);
+        positive_indenter_scope s(indenter_);
         stream_ << indenter_ << container_type_name << " r;"
                 << std::endl;
         stream_ << indenter_ << "for (unsigned int i(0); i < " << quantity
                 << "; ++i) ";
         utility_.open_scope();
         {
-            cpp_positive_indenter_scope s(indenter_);
+            positive_indenter_scope s(indenter_);
             if (children.size() == 1) {
                 const auto containee_vm(children.front());
                 const auto containee_identifiable_type_name(
@@ -189,11 +189,11 @@ smart_pointer_helper(const nested_type_view_model& vm) {
 
     utility_.open_scope();
     {
-        cpp_positive_indenter_scope s(indenter_);
+        positive_indenter_scope s(indenter_);
         stream_ << indenter_ << container_type_name << " r("
                 << std::endl;
         {
-            cpp_positive_indenter_scope s(indenter_);
+            positive_indenter_scope s(indenter_);
             stream_ << indenter_ << "create_"
                     << containee_identifiable_type_name
                     << "_ptr(position));" << std::endl;
@@ -224,10 +224,10 @@ optional_helper(const nested_type_view_model& vm) {
 
     utility_.open_scope();
     {
-        cpp_positive_indenter_scope s(indenter_);
+        positive_indenter_scope s(indenter_);
         stream_ << indenter_ << container_type_name << " r(";
         {
-            cpp_positive_indenter_scope s(indenter_);
+            positive_indenter_scope s(indenter_);
             const auto containee_vm(children.front());
             const auto containee_identifiable_type_name(
                 containee_vm.complete_identifiable_name());
@@ -262,10 +262,10 @@ pair_helper(const nested_type_view_model& vm) {
 
     utility_.open_scope();
     {
-        cpp_positive_indenter_scope s(indenter_);
+        positive_indenter_scope s(indenter_);
         stream_ << indenter_ << container_type_name << " r(" << std::endl;
         {
-            cpp_positive_indenter_scope s(indenter_);
+            positive_indenter_scope s(indenter_);
             const auto first(children.front());
             const auto first_identifiable_type_name(
                 first.complete_identifiable_name());
@@ -299,7 +299,7 @@ filesystem_path_helper(const nested_type_view_model& vm) {
 
     utility_.open_scope();
     {
-        cpp_positive_indenter_scope s(indenter_);
+        positive_indenter_scope s(indenter_);
         stream_ << indenter_ << "std::ostringstream s;" << std::endl
                 << indenter_ << "s << " << utility_.quote("/a/path/number_")
                 << " << position;" << std::endl;
@@ -320,7 +320,7 @@ void generator_implementation::date_helper(const nested_type_view_model& vm) {
 
     utility_.open_scope();
     {
-        cpp_positive_indenter_scope s(indenter_);
+        positive_indenter_scope s(indenter_);
         stream_ << indenter_ << "unsigned int day(position % 28);" << std::endl
                 << indenter_ << "boost::gregorian::date r(2002, 2, day);"
                 << std::endl
@@ -340,7 +340,7 @@ void generator_implementation::ptime_helper(const nested_type_view_model& vm) {
 
     utility_.open_scope();
     {
-        cpp_positive_indenter_scope s(indenter_);
+        positive_indenter_scope s(indenter_);
         stream_ << indenter_ << "unsigned int day(position % 28);" << std::endl
                 << indenter_ << "using boost::gregorian::date;" << std::endl
                 << indenter_ << "using boost::posix_time::ptime;"
@@ -367,7 +367,7 @@ time_duration_helper(const nested_type_view_model& vm) {
 
     utility_.open_scope();
     {
-        cpp_positive_indenter_scope s(indenter_);
+        positive_indenter_scope s(indenter_);
         stream_ << indenter_ << "unsigned int hour(position % 55);" << std::endl
                 << indenter_ << "using boost::posix_time::time_duration;"
                 << std::endl
@@ -399,7 +399,7 @@ variant_helper(const nested_type_view_model& vm) {
 
     utility_.open_scope();
     {
-        cpp_positive_indenter_scope s(indenter_);
+        positive_indenter_scope s(indenter_);
         stream_ << indenter_ << container_type_name << " r;" << std::endl;
         utility_.blank_line();
 
@@ -420,7 +420,7 @@ variant_helper(const nested_type_view_model& vm) {
             ++i;
 
             {
-                cpp_positive_indenter_scope s(indenter_);
+                positive_indenter_scope s(indenter_);
                 stream_ << indenter_ << "r = create_"
                         << c.complete_identifiable_name()
                         << "(position);" << std::endl;
@@ -444,7 +444,7 @@ domain_type_helper(const std::string& identifiable_type_name,
 
     utility_.open_scope();
     {
-        cpp_positive_indenter_scope s(indenter_);
+        positive_indenter_scope s(indenter_);
         if (as_pointer) {
             stream_ << indenter_ << "return " << type_name
                     << "_generator::create_ptr(position);" << std::endl;
@@ -467,7 +467,7 @@ composite_domain_type_helper(const std::string& identifiable_type_name,
 
     utility_.open_scope();
     {
-        cpp_positive_indenter_scope s(indenter_);
+        positive_indenter_scope s(indenter_);
         if (as_pointer) {
             stream_ << indenter_ << "return nullptr" << ";"
                     << std::endl;
@@ -482,7 +482,7 @@ void generator_implementation::bool_helper() {
     stream_ << indenter_ << "bool create_bool(const unsigned int position) ";
     utility_.open_scope();
     {
-        cpp_positive_indenter_scope s(indenter_);
+        positive_indenter_scope s(indenter_);
         stream_ << indenter_ << "return (position % 2) == 0;" << std::endl;
     }
     utility_.close_scope();
@@ -494,7 +494,7 @@ void generator_implementation::string_helper() {
 
     utility_.open_scope();
     {
-        cpp_positive_indenter_scope s(indenter_);
+        positive_indenter_scope s(indenter_);
         stream_ << indenter_ << "std::ostringstream s;" << std::endl
                 << indenter_ << "s << " << utility_.quote("a_string_")
                 << " << position;" << std::endl;
@@ -511,7 +511,7 @@ char_like_helper(const std::string& identifiable_type_name,
 
     utility_.open_scope();
     {
-        cpp_positive_indenter_scope s(indenter_);
+        positive_indenter_scope s(indenter_);
         stream_ << indenter_
                 << "return static_cast<" << type_name
                 << ">(((position % 95) + 32) == 34) ? 35 :"
@@ -529,7 +529,7 @@ int_like_helper(const std::string& identifiable_type_name,
 
     utility_.open_scope();
     {
-        cpp_positive_indenter_scope s(indenter_);
+        positive_indenter_scope s(indenter_);
         if (type_name == int_type)
             stream_ << indenter_ << "return position;";
         else
@@ -637,7 +637,7 @@ void generator_implementation::populate_method(const class_view_model& vm) {
     }
     utility_.open_scope();
     {
-        cpp_positive_indenter_scope s(indenter_);
+        positive_indenter_scope s(indenter_);
         unsigned int j(0);
         for (const auto p : props) {
             stream_ << indenter_ << "v." << p.name() << "("
@@ -666,12 +666,12 @@ void generator_implementation::create_method(const class_view_model& vm) {
 
     utility_.open_scope();
     {
-        cpp_positive_indenter_scope s(indenter_);
+        positive_indenter_scope s(indenter_);
         stream_ << indenter_ << vm.name() << " r;" << std::endl;
 
         for (const auto p : parents) {
             stream_ << indenter_;
-            cpp_qualified_name qualified_name(stream_);
+            qualified_name qualified_name(stream_);
             qualified_name.format(p);
             stream_ << "_generator::populate(position, r);"
                     << std::endl;
@@ -694,7 +694,7 @@ void generator_implementation::create_method_ptr(const class_view_model& vm) {
 
     utility_.open_scope();
     {
-        cpp_positive_indenter_scope s(indenter_);
+        positive_indenter_scope s(indenter_);
 
         if (leaves.empty()) {
             stream_ << indenter_ << vm.name() << "* p = new " << vm.name()
@@ -712,7 +712,7 @@ void generator_implementation::create_method_ptr(const class_view_model& vm) {
                         << i++ << ")"
                         << std::endl;
                 {
-                    cpp_positive_indenter_scope s(indenter_);
+                    positive_indenter_scope s(indenter_);
                     stream_ << indenter_ << "return " << l
                             << "_generator::create_ptr(position);"
                             << std::endl;
@@ -736,7 +736,7 @@ void generator_implementation::function_operator(const class_view_model& vm) {
 
     utility_.open_scope();
     {
-        cpp_positive_indenter_scope s(indenter_);
+        positive_indenter_scope s(indenter_);
         stream_ << indenter_ << "return create("
                 << utility_.as_member_variable("position") << "++);"
                 << std::endl;
@@ -804,7 +804,7 @@ void generator_implementation::format_enumeration(const file_view_model& vm) {
 
         utility_.open_scope();
         {
-            cpp_positive_indenter_scope s(indenter_);
+            positive_indenter_scope s(indenter_);
             stream_ << indenter_ << "v = static_cast<" << evm.name() << ">"
                     << "(position % " << evm.enumerators().size() << ");"
                     << std::endl;
@@ -817,7 +817,7 @@ void generator_implementation::format_enumeration(const file_view_model& vm) {
         utility_.open_scope();
         {
             {
-                cpp_positive_indenter_scope s(indenter_);
+                positive_indenter_scope s(indenter_);
                 stream_ << indenter_ << "result_type r;" << std::endl;
                 stream_ << indenter_ << name << "::populate(position, r);"
                         << std::endl;
@@ -832,7 +832,7 @@ void generator_implementation::format_enumeration(const file_view_model& vm) {
 
         utility_.open_scope();
         {
-            cpp_positive_indenter_scope s(indenter_);
+            positive_indenter_scope s(indenter_);
             stream_ << indenter_ << "return create("
                     << utility_.as_member_variable("position") << "++);"
                     << std::endl;
@@ -846,7 +846,7 @@ void generator_implementation::format(const file_view_model& vm) {
     licence licence(stream_);
     licence.format();
 
-    cpp_includes includes(stream_);
+    includes includes(stream_);
     includes.format(vm);
 
     if (vm.meta_type() == sml::meta_types::enumeration)

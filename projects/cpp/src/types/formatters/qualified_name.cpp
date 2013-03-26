@@ -38,18 +38,18 @@ namespace dogen {
 namespace cpp {
 namespace formatters {
 
-cpp_qualified_name::cpp_qualified_name(std::ostream& stream)
+qualified_name::qualified_name(std::ostream& stream)
     : stream_(stream) { }
 
-void cpp_qualified_name::format(const parent_view_model& vm) {
+void qualified_name::format(const parent_view_model& vm) {
     ::format<parent_view_model>(stream_, vm);
 }
 
-void cpp_qualified_name::format(const class_view_model& vm) {
+void qualified_name::format(const class_view_model& vm) {
     ::format<class_view_model>(stream_, vm);
 }
 
-void cpp_qualified_name::format(const enumeration_view_model& vm) {
+void qualified_name::format(const enumeration_view_model& vm) {
     ::format<enumeration_view_model>(stream_, vm);
 }
 

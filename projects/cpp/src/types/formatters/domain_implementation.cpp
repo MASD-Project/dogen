@@ -105,7 +105,7 @@ smart_pointer_helper(const nested_type_view_model& vm) {
 
         utility_.open_scope();
         {
-            cpp_positive_indenter_scope s(indenter_);
+            positive_indenter_scope s(indenter_);
             stream_ << indenter_ << "return (!lhs && !rhs) ||"
                     << "(lhs && rhs && (*lhs == *rhs));"
                     << std::endl;
@@ -140,7 +140,7 @@ void domain_implementation::io_helper_methods(const class_view_model& vm) {
         return;
 
     const bool inside_class(false);
-    cpp_inserter_implementation i(stream_, indenter_, inside_class);
+    inserter_implementation i(stream_, indenter_, inside_class);
     i.format_helper_methods(vm);
 }
 
@@ -156,14 +156,14 @@ inserter_operator(const class_view_model& vm) {
 
     utility_.open_scope();
     {
-        cpp_positive_indenter_scope s(indenter_);
+        positive_indenter_scope s(indenter_);
 
         if (vm.is_parent() || !vm.parents().empty()) {
             stream_ << indenter_ << "v.to_stream(s);" << std::endl
                     << indenter_ << "return(s);" << std::endl;
         } else {
             const bool inside_class(false);
-            cpp_inserter_implementation i(stream_, indenter_, inside_class);
+            inserter_implementation i(stream_, indenter_, inside_class);
             i.format_inserter_implementation(vm);
         }
     }
@@ -175,16 +175,16 @@ void domain_implementation::
 class_implementation(aspect_types at, const sml::category_types ct,
     const class_view_model& vm) {
 
-    using utility::exception::invalid_enum_value;
+    using dogen::utility::exception::invalid_enum_value;
     if (at == aspect_types::main) {
         if (ct == sml::category_types::versioned_key ||
             ct == sml::category_types::unversioned_key) {
-            cpp_key_class_implementation
+            key_class_implementation
                 f(stream_, disable_complete_constructor_, disable_io_);
             f.format(vm);
             return;
         } else if (ct == sml::category_types::user_defined) {
-            cpp_domain_class_implementation
+            domain_class_implementation
                 f(stream_, disable_complete_constructor_, disable_io_);
             f.format(vm);
             return;
@@ -218,14 +218,15 @@ void domain_implementation::format_class(const file_view_model& vm) {
 
 void domain_implementation::format_enumeration(const file_view_model&) {
     BOOST_LOG_SEV(lg, error) << missing_class_view_model;
-    BOOST_THROW_EXCEPTION(generation_failure(enumeration_view_model_not_supported));
+    BOOST_THROW_EXCEPTION(
+        generation_failure(enumeration_view_model_not_supported));
 }
 
 void domain_implementation::format(const file_view_model& vm) {
     licence licence(stream_);
     licence.format();
 
-    cpp_includes includes(stream_);
+    includes includes(stream_);
     includes.format(vm);
 
     if (vm.meta_type() == sml::meta_types::enumeration)

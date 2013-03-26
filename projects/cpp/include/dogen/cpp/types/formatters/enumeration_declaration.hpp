@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_TYPES_FORMATTERS_CPP_ENUMERATION_DECLARATION_HPP
-#define DOGEN_CPP_TYPES_FORMATTERS_CPP_ENUMERATION_DECLARATION_HPP
+#ifndef DOGEN_CPP_TYPES_FORMATTERS_ENUMERATION_DECLARATION_HPP
+#define DOGEN_CPP_TYPES_FORMATTERS_ENUMERATION_DECLARATION_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -35,28 +35,28 @@ namespace dogen {
 namespace cpp {
 namespace formatters {
 
-class cpp_enumeration_declaration {
+class enumeration_declaration {
 public:
     typedef view_models::enumeration_view_model enumeration_view_model;
 
 public:
-    cpp_enumeration_declaration() = default;
-    ~cpp_enumeration_declaration() = default;
-    cpp_enumeration_declaration(const cpp_enumeration_declaration&) = default;
-    cpp_enumeration_declaration(cpp_enumeration_declaration&&) = default;
-    cpp_enumeration_declaration& operator=(
-        const cpp_enumeration_declaration&) = default;
+    enumeration_declaration() = default;
+    ~enumeration_declaration() = default;
+    enumeration_declaration(const enumeration_declaration&) = default;
+    enumeration_declaration(enumeration_declaration&&) = default;
+    enumeration_declaration& operator=(
+        const enumeration_declaration&) = default;
 
 public:
-    cpp_enumeration_declaration(std::ostream& stream);
+    enumeration_declaration(std::ostream& stream);
 
 public:
     void format(const enumeration_view_model& vm);
 
 protected:
     std::ostream& stream_;
-    cpp_indenter indenter_;
-    cpp_utility utility_;
+    indenter indenter_;
+    utility utility_;
 };
 
 } } }

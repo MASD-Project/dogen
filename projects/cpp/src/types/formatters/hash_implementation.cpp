@@ -87,7 +87,7 @@ void hash_implementation::combine_function(const class_view_model& vm) {
 
     utility_.open_scope();
     {
-        cpp_positive_indenter_scope s(indenter_);
+        positive_indenter_scope s(indenter_);
         stream_ << indenter_ << "std::hash<HashableType> hasher;" << std::endl
                 << indenter_ << "seed ^= hasher(value) + 0x9e3779b9 + "
                 << "(seed << 6) + (seed >> 2);" << std::endl;
@@ -117,7 +117,7 @@ void hash_implementation::pair_helper(const nested_type_view_model& vm) {
 
     utility_.open_scope();
     {
-        cpp_positive_indenter_scope s(indenter_);
+        positive_indenter_scope s(indenter_);
         stream_ << indenter_ << "std::size_t seed(0);"
                 << std::endl;
 
@@ -167,14 +167,14 @@ void hash_implementation::optional_helper(const nested_type_view_model& vm) {
 
     utility_.open_scope();
     {
-        cpp_positive_indenter_scope s(indenter_);
+        positive_indenter_scope s(indenter_);
         stream_ << indenter_ << "std::size_t seed(0);"
                 << std::endl;
 
         utility_.blank_line();
         stream_ << indenter_ << "if (!v)" << std::endl;
         {
-            cpp_positive_indenter_scope s(indenter_);
+            positive_indenter_scope s(indenter_);
             stream_ << indenter_ << "return seed;" << std::endl;
         }
 
@@ -214,7 +214,7 @@ void hash_implementation::variant_helper(const nested_type_view_model& vm) {
 
     utility_.open_scope();
     {
-        cpp_positive_indenter_scope s(indenter_);
+        positive_indenter_scope s(indenter_);
         stream_ << indenter_ << vm.complete_identifiable_name()
                 << "_visitor() : hash(0) {}" << std::endl;
 
@@ -226,7 +226,7 @@ void hash_implementation::variant_helper(const nested_type_view_model& vm) {
 
             utility_.open_scope();
             {
-                cpp_positive_indenter_scope s(indenter_);
+                positive_indenter_scope s(indenter_);
                 if (is_hashable(c)) {
                     stream_ << indenter_ << "combine(hash, v);" << std::endl;
                 } else {
@@ -249,7 +249,7 @@ void hash_implementation::variant_helper(const nested_type_view_model& vm) {
 
     utility_.open_scope();
     {
-        cpp_positive_indenter_scope s(indenter_);
+        positive_indenter_scope s(indenter_);
         stream_ << indenter_ << vm.complete_identifiable_name()
                 << "_visitor vis;" << std::endl
                 << indenter_ << "boost::apply_visitor(vis, v);" << std::endl
@@ -281,13 +281,13 @@ sequence_container_helper(const nested_type_view_model& vm) {
 
     utility_.open_scope();
     {
-        cpp_positive_indenter_scope s(indenter_);
+        positive_indenter_scope s(indenter_);
         stream_ << indenter_ << "std::size_t seed(0);"
                 << std::endl;
         stream_ << indenter_ << "for (const auto i : v) ";
         utility_.open_scope();
         {
-            cpp_positive_indenter_scope s(indenter_);
+            positive_indenter_scope s(indenter_);
             const auto containee(children.front());
             if (is_hashable(containee)) {
                 stream_ << indenter_ << "combine(seed, i);" << std::endl;
@@ -328,13 +328,13 @@ associative_container_helper(const nested_type_view_model& vm) {
 
     utility_.open_scope();
     {
-        cpp_positive_indenter_scope s(indenter_);
+        positive_indenter_scope s(indenter_);
         stream_ << indenter_ << "std::size_t seed(0);"
                 << std::endl;
         stream_ << indenter_ << "for (const auto i : v) ";
         utility_.open_scope();
         {
-            cpp_positive_indenter_scope s(indenter_);
+            positive_indenter_scope s(indenter_);
             const auto key(children.front());
             const auto value(children.back());
 
@@ -379,7 +379,7 @@ smart_pointer_helper(const nested_type_view_model& vm) {
 
     utility_.open_scope();
     {
-        cpp_positive_indenter_scope s(indenter_);
+        positive_indenter_scope s(indenter_);
         stream_ << indenter_ << "std::size_t seed(0);"
                 << std::endl;
 
@@ -407,7 +407,7 @@ void hash_implementation::ptime_helper(const nested_type_view_model& vm) {
 
     utility_.open_scope();
     {
-        cpp_positive_indenter_scope s(indenter_);
+        positive_indenter_scope s(indenter_);
         stream_ << indenter_ << "std::size_t seed(0);"
                 << std::endl;
 
@@ -437,7 +437,7 @@ time_duration_helper(const nested_type_view_model& vm) {
 
     utility_.open_scope();
     {
-        cpp_positive_indenter_scope s(indenter_);
+        positive_indenter_scope s(indenter_);
         stream_ << indenter_ << "std::size_t seed(0);"
                 << std::endl;
 
@@ -503,7 +503,7 @@ void hash_implementation::hasher_hash_method(const class_view_model& vm) {
 
     utility_.open_scope();
     {
-        cpp_positive_indenter_scope s(indenter_);
+        positive_indenter_scope s(indenter_);
 
         stream_ << indenter_ << "std::size_t seed(0);" << std::endl;
 
@@ -513,7 +513,7 @@ void hash_implementation::hasher_hash_method(const class_view_model& vm) {
 
         for (const auto p : parents) {
             stream_ << indenter_ << "combine(seed, dynamic_cast<const ";
-            cpp_qualified_name qualified_name(stream_);
+            qualified_name qualified_name(stream_);
             qualified_name.format(p);
             stream_ << "&>(v));" << std::endl;
         }
@@ -582,7 +582,7 @@ void hash_implementation::format(const file_view_model& vm) {
     licence licence(stream_);
     licence.format();
 
-    cpp_includes includes(stream_);
+    includes includes(stream_);
     includes.format(vm);
 
     if (vm.meta_type() == sml::meta_types::enumeration)

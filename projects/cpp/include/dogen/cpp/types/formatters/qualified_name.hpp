@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_TYPES_FORMATTERS_CPP_QUALIFIED_NAME_HPP
-#define DOGEN_CPP_TYPES_FORMATTERS_CPP_QUALIFIED_NAME_HPP
+#ifndef DOGEN_CPP_TYPES_FORMATTERS_QUALIFIED_NAME_HPP
+#define DOGEN_CPP_TYPES_FORMATTERS_QUALIFIED_NAME_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -35,21 +35,21 @@ namespace dogen {
 namespace cpp {
 namespace formatters {
 
-class cpp_qualified_name {
+class qualified_name {
 public:
     typedef view_models::class_view_model class_view_model;
     typedef view_models::enumeration_view_model enumeration_view_model;
     typedef view_models::parent_view_model parent_view_model;
 
 public:
-    cpp_qualified_name() = delete;
-    cpp_qualified_name(const cpp_qualified_name&) = default;
-    ~cpp_qualified_name() = default;
-    cpp_qualified_name(cpp_qualified_name&&) = default;
-    cpp_qualified_name& operator=(const cpp_qualified_name&) = default;
+    qualified_name() = delete;
+    qualified_name(const qualified_name&) = default;
+    ~qualified_name() = default;
+    qualified_name(qualified_name&&) = default;
+    qualified_name& operator=(const qualified_name&) = default;
 
 public:
-    explicit cpp_qualified_name(std::ostream& stream);
+    explicit qualified_name(std::ostream& stream);
 
 public:
     void format(const class_view_model& vm);

@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_FORMATTERS_CPP_NAMESPACE_HPP
-#define DOGEN_CPP_FORMATTERS_CPP_NAMESPACE_HPP
+#ifndef DOGEN_CPP_FORMATTERS_NAMESPACE_FORMATTER_HPP
+#define DOGEN_CPP_FORMATTERS_NAMESPACE_FORMATTER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -32,16 +32,16 @@ namespace dogen {
 namespace cpp {
 namespace formatters {
 
-class cpp_namespace {
+class namespace_formatter {
 public:
-    cpp_namespace() = delete;
-    cpp_namespace(const cpp_namespace&) = default;
-    ~cpp_namespace() = default;
-    cpp_namespace(cpp_namespace&&) = default;
-    cpp_namespace& operator=(const cpp_namespace&) = default;
+    namespace_formatter() = delete;
+    namespace_formatter(const namespace_formatter&) = default;
+    ~namespace_formatter() = default;
+    namespace_formatter(namespace_formatter&&) = default;
+    namespace_formatter& operator=(const namespace_formatter&) = default;
 
 public:
-    explicit cpp_namespace(std::ostream& stream);
+    explicit namespace_formatter(std::ostream& stream);
 
 public:
     void format_start(const std::string& name);

@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_TYPES_FORMATTERS_CPP_CLASS_DECLARATION_HPP
-#define DOGEN_CPP_TYPES_FORMATTERS_CPP_CLASS_DECLARATION_HPP
+#ifndef DOGEN_CPP_TYPES_FORMATTERS_CLASS_DECLARATION_HPP
+#define DOGEN_CPP_TYPES_FORMATTERS_CLASS_DECLARATION_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -36,21 +36,21 @@ namespace dogen {
 namespace cpp {
 namespace formatters {
 
-class cpp_class_declaration {
+class class_declaration {
 public:
     typedef view_models::class_view_model class_view_model;
     typedef view_models::property_view_model property_view_model;
 
 public:
-    cpp_class_declaration() = delete;
-    cpp_class_declaration(const cpp_class_declaration&) = default;
-    cpp_class_declaration(cpp_class_declaration&&) = default;
-    cpp_class_declaration& operator=(const cpp_class_declaration&) = default;
+    class_declaration() = delete;
+    class_declaration(const class_declaration&) = default;
+    class_declaration(class_declaration&&) = default;
+    class_declaration& operator=(const class_declaration&) = default;
 
 public:
-    cpp_class_declaration(std::ostream& stream,
+    class_declaration(std::ostream& stream,
         const bool disable_serialization);
-    virtual ~cpp_class_declaration() noexcept {}
+    virtual ~class_declaration() noexcept {}
 
 protected:
     void open_class(const class_view_model& vm);
@@ -74,8 +74,8 @@ public:
 
 protected:
     std::ostream& stream_;
-    cpp_indenter indenter_;
-    cpp_utility utility_;
+    indenter indenter_;
+    utility utility_;
     const bool disable_serialization_;
 };
 

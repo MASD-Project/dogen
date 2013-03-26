@@ -35,12 +35,12 @@ namespace dogen {
 namespace cpp {
 namespace formatters {
 
-cpp_exception_declaration::
-cpp_exception_declaration(std::ostream& stream)
+exception_declaration::
+exception_declaration(std::ostream& stream)
     : stream_(stream), utility_(stream_, indenter_) { }
 
-void cpp_exception_declaration::format(const exception_view_model& vm) {
-    cpp_doxygen_comments dc1(stream_, indenter_);
+void exception_declaration::format(const exception_view_model& vm) {
+    doxygen_comments dc1(stream_, indenter_);
     dc1.format(vm.documentation());
 
     stream_ << indenter_ << "class " << vm.name()
@@ -48,7 +48,7 @@ void cpp_exception_declaration::format(const exception_view_model& vm) {
             << "public virtual boost::exception ";
     utility_.open_scope();
     {
-        cpp_positive_indenter_scope s(indenter_);
+        positive_indenter_scope s(indenter_);
         utility_.public_access_specifier();
         stream_ << indenter_ << vm.name() << "() = default;"
                 << std::endl;

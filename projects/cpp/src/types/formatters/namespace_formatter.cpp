@@ -26,10 +26,10 @@ namespace dogen {
 namespace cpp {
 namespace formatters {
 
-cpp_namespace::cpp_namespace(std::ostream& stream)
+namespace_formatter::namespace_formatter(std::ostream& stream)
     : stream_(stream) { }
 
-void cpp_namespace::format_start(const std::string& name) {
+void namespace_formatter::format_start(const std::string& name) {
     stream_ << "namespace";
     if (name.empty())
         stream_ << " {";
@@ -38,7 +38,7 @@ void cpp_namespace::format_start(const std::string& name) {
     stream_ << std::endl;
 }
 
-void cpp_namespace::format_end() {
+void namespace_formatter::format_end() {
     stream_ << "}"; // no std::endl by design
 }
 

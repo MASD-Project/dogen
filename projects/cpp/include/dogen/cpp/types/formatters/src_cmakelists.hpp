@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_TYPES_FORMATTERS_CPP_SRC_CMAKELISTS_HPP
-#define DOGEN_CPP_TYPES_FORMATTERS_CPP_SRC_CMAKELISTS_HPP
+#ifndef DOGEN_CPP_TYPES_FORMATTERS_SRC_CMAKELISTS_HPP
+#define DOGEN_CPP_TYPES_FORMATTERS_SRC_CMAKELISTS_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -34,19 +34,19 @@ namespace dogen {
 namespace cpp {
 namespace formatters {
 
-class cpp_src_cmakelists {
+class src_cmakelists {
 public:
     typedef view_models::cmakelists_view_model cmakelists_view_model;
 
 public:
-    cpp_src_cmakelists() = delete;
-    cpp_src_cmakelists(const cpp_src_cmakelists&) = default;
-    ~cpp_src_cmakelists() noexcept = default;
-    cpp_src_cmakelists(cpp_src_cmakelists&&) = default;
-    cpp_src_cmakelists& operator=(const cpp_src_cmakelists&) = default;
+    src_cmakelists() = delete;
+    src_cmakelists(const src_cmakelists&) = default;
+    ~src_cmakelists() noexcept = default;
+    src_cmakelists(src_cmakelists&&) = default;
+    src_cmakelists& operator=(const src_cmakelists&) = default;
 
 public:
-    explicit cpp_src_cmakelists(std::ostream& stream);
+    explicit src_cmakelists(std::ostream& stream);
 
 public:
     void format(const cmakelists_view_model& vm);

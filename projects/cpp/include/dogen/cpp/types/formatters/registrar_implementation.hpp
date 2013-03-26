@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_TYPES_FORMATTERS_CPP_REGISTRAR_IMPLEMENTATION_HPP
-#define DOGEN_CPP_TYPES_FORMATTERS_CPP_REGISTRAR_IMPLEMENTATION_HPP
+#ifndef DOGEN_CPP_TYPES_FORMATTERS_REGISTRAR_IMPLEMENTATION_HPP
+#define DOGEN_CPP_TYPES_FORMATTERS_REGISTRAR_IMPLEMENTATION_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -61,8 +61,8 @@ public:
 
 private:
     std::ostream& stream_;
-    cpp_indenter indenter_;
-    cpp_utility utility_;
+    indenter indenter_;
+    utility utility_;
     const bool disable_xml_serialization_;
 };
 

@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_TYPES_FORMATTERS_CPP_NAMEPSACE_HELPER_HPP
-#define DOGEN_CPP_TYPES_FORMATTERS_CPP_NAMEPSACE_HELPER_HPP
+#ifndef DOGEN_CPP_TYPES_FORMATTERS_NAMEPSACE_HELPER_HPP
+#define DOGEN_CPP_TYPES_FORMATTERS_NAMEPSACE_HELPER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -49,7 +49,7 @@ public:
 
 private:
     std::ostream& stream_;
-    cpp_namespace namespace_formatter_;
+    namespace_formatter namespace_formatter_;
     std::list<std::string> namespaces_;
 };
 

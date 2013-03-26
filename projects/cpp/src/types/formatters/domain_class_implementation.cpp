@@ -24,14 +24,14 @@ namespace dogen {
 namespace cpp {
 namespace formatters {
 
-cpp_domain_class_implementation::
-cpp_domain_class_implementation(std::ostream& stream,
+domain_class_implementation::
+domain_class_implementation(std::ostream& stream,
     bool disable_complete_constructor, bool disable_io) :
-    cpp_class_implementation(stream),
+    class_implementation(stream),
     disable_complete_constructor_(disable_complete_constructor),
     disable_io_(disable_io) { }
 
-void cpp_domain_class_implementation::
+void domain_class_implementation::
 hand_crafted_constructors(const class_view_model& vm) {
     default_constructor(vm);
     move_constructor(vm);
@@ -40,7 +40,7 @@ hand_crafted_constructors(const class_view_model& vm) {
 }
 
 
-void cpp_domain_class_implementation::format(const class_view_model& vm) {
+void domain_class_implementation::format(const class_view_model& vm) {
     hand_crafted_constructors(vm);
     if (!disable_io_)
         to_stream(vm);

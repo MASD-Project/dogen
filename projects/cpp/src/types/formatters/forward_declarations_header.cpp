@@ -42,7 +42,7 @@ const std::string serialization_ns("serialization");
 const std::string invalid_aspect_type("Invalid value for aspect_types");
 const std::string invalid_category_type("Invalid value for category_types");
 
-const std::string invalid_facet_types("Invalid value for cpp_facet_types");
+const std::string invalid_facet_types("Invalid value for facet_types");
 const std::string missing_class_view_model(
     "Meta type is pod but class view model is empty");
 const std::string missing_enumeration_view_model(
@@ -75,7 +75,7 @@ format_serialization_class(const class_view_model& vm) {
         stream_ << indenter_ << "template<class Archive>" << std::endl
             << indenter_ << "void save(Archive& ar, const ";
 
-        cpp_qualified_name qualified_name(stream_);
+        qualified_name qualified_name(stream_);
         qualified_name.format(vm);
 
         stream_ << indenter_ << "& v, unsigned int version);" << std::endl;
@@ -176,7 +176,7 @@ void forward_declarations_header::format(const file_view_model& vm) {
     guards.format_start(vm.header_guard());
     utility_.blank_line();
 
-    cpp_includes includes(stream_);
+    includes includes(stream_);
     includes.format(vm);
 
     if (vm.meta_type() == sml::meta_types::enumeration)

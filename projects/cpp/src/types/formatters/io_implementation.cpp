@@ -71,7 +71,7 @@ void io_implementation::io_helper_methods(const class_view_model& vm) {
         return;
 
     const bool inside_class(false);
-    cpp_inserter_implementation i(stream_, indenter_, inside_class);
+    inserter_implementation i(stream_, indenter_, inside_class);
     i.format_helper_methods(vm);
 }
 
@@ -90,7 +90,7 @@ void io_implementation::format_enumeration(const file_view_model& vm) {
             << "const " << evm.name() << "& v) ";
     utility_.open_scope();
     {
-        cpp_positive_indenter_scope s(indenter_);
+        positive_indenter_scope s(indenter_);
         stream_ << indenter_ << "s" << spaced_inserter
                 << utility_.quote("{ ") << spaced_inserter
                 << utility_.quote(utility_.quote_escaped(type) + colon);
@@ -111,7 +111,7 @@ void io_implementation::format_enumeration(const file_view_model& vm) {
                         << "::" << e.name() << ":"
                         << std::endl;
                 {
-                    cpp_positive_indenter_scope s(indenter_);
+                    positive_indenter_scope s(indenter_);
                     stream_ << indenter_ << "attr = "
                             << utility_.quote(utility_.quote_escaped(e.name()))
                             << semi_colon
@@ -121,7 +121,7 @@ void io_implementation::format_enumeration(const file_view_model& vm) {
             }
             stream_ << indenter_ << "default:" << std::endl;
             {
-                cpp_positive_indenter_scope s(indenter_);
+                positive_indenter_scope s(indenter_);
                 stream_ << indenter_ << "throw std::invalid_argument("
                         << "\"Invalid value for " << evm.name() << "\");"
                         << std::endl;
@@ -154,7 +154,7 @@ void io_implementation::format_class(const file_view_model& vm) {
 
     stream_ << "std::ostream& operator<<(std::ostream& s, ";
     {
-        cpp_positive_indenter_scope s(indenter_);
+        positive_indenter_scope s(indenter_);
         const auto parents(cvm.parents());
         const bool no_arg(!cvm.is_parent() && parents.empty() &&
             cvm.properties().empty());
@@ -166,7 +166,7 @@ void io_implementation::format_class(const file_view_model& vm) {
                     << indenter_ << "return(s);" << std::endl;
         } else {
             const bool inside_class(false);
-            cpp_inserter_implementation i(stream_, indenter_, inside_class);
+            inserter_implementation i(stream_, indenter_, inside_class);
             i.format_inserter_implementation(cvm);
         }
     }
@@ -178,7 +178,7 @@ void io_implementation::format(const file_view_model& vm) {
     licence licence(stream_);
     licence.format();
 
-    cpp_includes includes(stream_);
+    includes includes(stream_);
     includes.format(vm);
 
     if (vm.meta_type() == sml::meta_types::enumeration)

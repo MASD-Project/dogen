@@ -35,17 +35,17 @@ namespace dogen {
 namespace cpp {
 namespace formatters {
 
-cpp_class_implementation::cpp_class_implementation(std::ostream& stream)
+class_implementation::class_implementation(std::ostream& stream)
     : stream_(stream), utility_(stream_, indenter_) { }
 
-void cpp_class_implementation::default_constructor(const class_view_model& vm) {
+void class_implementation::default_constructor(const class_view_model& vm) {
     if (!vm.requires_manual_default_constructor())
         return;
 
     stream_ << indenter_ << vm.name() << "::"
             << vm.name() << "()" << std::endl;
     {
-        cpp_positive_indenter_scope s(indenter_);
+        positive_indenter_scope s(indenter_);
         bool is_first(true);
         for (const auto p : vm.properties()) {
             if (!p.type().is_primitive() && !p.type().is_enumeration())
@@ -65,14 +65,14 @@ void cpp_class_implementation::default_constructor(const class_view_model& vm) {
     utility_.blank_line();
 }
 
-void cpp_class_implementation::move_constructor(const class_view_model& vm) {
+void class_implementation::move_constructor(const class_view_model& vm) {
     if (!vm.requires_manual_move_constructor())
         return;
 
     stream_ << indenter_ << vm.name() << "::" << vm.name()
             << "(" << vm.name() << "&& rhs)" << std::endl;
     {
-        cpp_positive_indenter_scope s(indenter_);
+        positive_indenter_scope s(indenter_);
         bool is_first(true);
         for (const auto p : vm.properties()) {
             if (is_first)
@@ -90,7 +90,7 @@ void cpp_class_implementation::move_constructor(const class_view_model& vm) {
     utility_.blank_line();
 }
 
-void cpp_class_implementation::complete_constructor(const class_view_model& vm) {
+void class_implementation::complete_constructor(const class_view_model& vm) {
     const auto props(vm.all_properties());
     if (props.empty())
         return;
@@ -106,7 +106,7 @@ void cpp_class_implementation::complete_constructor(const class_view_model& vm) 
 
         stream_ << " " << p.name() << ")" << std::endl;
     } else {
-        cpp_positive_indenter_scope s(indenter_);
+        positive_indenter_scope s(indenter_);
         bool is_first(true);
         for (const auto p : props) {
             stream_ << (is_first ? "" : ",") << std::endl;
@@ -122,12 +122,12 @@ void cpp_class_implementation::complete_constructor(const class_view_model& vm) 
     }
 
     {
-        cpp_positive_indenter_scope s(indenter_);
+        positive_indenter_scope s(indenter_);
         bool is_first(true);
         stream_ << indenter_ << ": ";
 
         for (const auto p : vm.parents()) {
-            cpp_qualified_name qualified_name(stream_);
+            qualified_name qualified_name(stream_);
             qualified_name.format(p);
 
             stream_ << "(";
@@ -155,7 +155,7 @@ void cpp_class_implementation::complete_constructor(const class_view_model& vm) 
     utility_.blank_line();
 }
 
-void cpp_class_implementation::to_stream(const class_view_model& vm) {
+void class_implementation::to_stream(const class_view_model& vm) {
     if (!vm.is_parent() && vm.parents().empty())
         return;
 
@@ -164,17 +164,17 @@ void cpp_class_implementation::to_stream(const class_view_model& vm) {
 
     utility_.open_scope();
     {
-        cpp_positive_indenter_scope s(indenter_);
+        positive_indenter_scope s(indenter_);
 
         const bool inside_class(true);
-        cpp_inserter_implementation inserter(stream_, indenter_, inside_class);
+        inserter_implementation inserter(stream_, indenter_, inside_class);
         inserter.format_inserter_implementation(vm);
     }
     utility_.close_scope();
     utility_.blank_line();
 }
 
-void cpp_class_implementation::swap(const class_view_model& vm) {
+void class_implementation::swap(const class_view_model& vm) {
     if (vm.all_properties().empty() && !vm.is_parent())
         return;
 
@@ -185,7 +185,7 @@ void cpp_class_implementation::swap(const class_view_model& vm) {
 
     utility_.open_scope();
     {
-        cpp_positive_indenter_scope s(indenter_);
+        positive_indenter_scope s(indenter_);
         const auto parents(vm.parents());
         for (const auto p : parents)
             stream_ << indenter_ << p.name() << "::swap(other);" << std::endl;
@@ -209,7 +209,7 @@ void cpp_class_implementation::swap(const class_view_model& vm) {
     utility_.blank_line();
 }
 
-void cpp_class_implementation::equals_method(const class_view_model& vm) {
+void class_implementation::equals_method(const class_view_model& vm) {
     if (vm.is_parent() || vm.parents().empty())
         return;
 
@@ -217,7 +217,7 @@ void cpp_class_implementation::equals_method(const class_view_model& vm) {
             << vm.original_parent_name() << "& other) const ";
     utility_.open_scope();
     {
-        cpp_positive_indenter_scope s(indenter_);
+        positive_indenter_scope s(indenter_);
         stream_ << indenter_ << "const " << vm.name()
                 << "* const p(dynamic_cast<const " << vm.name()
                 << "* const>(&other));"
@@ -231,7 +231,7 @@ void cpp_class_implementation::equals_method(const class_view_model& vm) {
     utility_.blank_line();
 }
 
-void cpp_class_implementation::equals_operator(const class_view_model& vm) {
+void class_implementation::equals_operator(const class_view_model& vm) {
     if (vm.is_parent()) {
         stream_ << indenter_ << "bool " << vm.name() << "::compare(const "
                 << vm.name() <<  "& ";
@@ -249,20 +249,20 @@ void cpp_class_implementation::equals_operator(const class_view_model& vm) {
 
     utility_.open_scope();
     {
-        cpp_positive_indenter_scope s(indenter_);
+        positive_indenter_scope s(indenter_);
         if (vm.all_properties().empty())
             stream_ << indenter_ << "return true";
         else {
             stream_ << indenter_ << "return ";
             bool is_first(true);
             {
-                cpp_positive_indenter_scope s(indenter_);
+                positive_indenter_scope s(indenter_);
                 const auto parents(vm.parents());
                 for (const auto p : parents) {
                     if (!is_first)
                         stream_ << " &&" << std::endl << indenter_;
                     {
-                        cpp_positive_indenter_scope s(indenter_);
+                        positive_indenter_scope s(indenter_);
                         stream_ << p.name() << "::compare(rhs)";
                     }
                     is_first = false;
@@ -272,7 +272,7 @@ void cpp_class_implementation::equals_operator(const class_view_model& vm) {
                     if (!is_first)
                         stream_ << " &&" << std::endl << indenter_;
                     {
-                        cpp_positive_indenter_scope s(indenter_);
+                        positive_indenter_scope s(indenter_);
                         stream_ << utility_.as_member_variable(p.name())
                                 << " == rhs."
                                 << utility_.as_member_variable(p.name());
@@ -287,7 +287,7 @@ void cpp_class_implementation::equals_operator(const class_view_model& vm) {
     utility_.blank_line();
 }
 
-void cpp_class_implementation::
+void class_implementation::
 non_pod_getters_and_setters(const std::string class_name,
     const property_view_model& vm) {
     stream_ << indenter_ << vm.type().complete_name() << " " << class_name
@@ -295,7 +295,7 @@ non_pod_getters_and_setters(const std::string class_name,
 
     utility_.open_scope();
     {
-        cpp_positive_indenter_scope s(indenter_);
+        positive_indenter_scope s(indenter_);
         stream_ << indenter_ << "return "
                 << utility_.as_member_variable(vm.name()) << ";"
                 << std::endl;
@@ -312,7 +312,7 @@ non_pod_getters_and_setters(const std::string class_name,
     stream_ << " v) ";
     utility_.open_scope();
     {
-        cpp_positive_indenter_scope s(indenter_);
+        positive_indenter_scope s(indenter_);
         stream_ << indenter_ << utility_.as_member_variable(vm.name())
                 << " = v;" << std::endl;
     }
@@ -320,7 +320,7 @@ non_pod_getters_and_setters(const std::string class_name,
     utility_.blank_line();
 }
 
-void cpp_class_implementation::
+void class_implementation::
 pod_getters_and_setters(const std::string class_name,
     const property_view_model& vm) {
     // const getter
@@ -329,7 +329,7 @@ pod_getters_and_setters(const std::string class_name,
             << "() const ";
     utility_.open_scope();
     {
-        cpp_positive_indenter_scope s(indenter_);
+        positive_indenter_scope s(indenter_);
         stream_ << indenter_ << "return "
                 << utility_.as_member_variable(vm.name()) << ";"
                 << std::endl;
@@ -343,7 +343,7 @@ pod_getters_and_setters(const std::string class_name,
             << "() ";
     utility_.open_scope();
     {
-        cpp_positive_indenter_scope s(indenter_);
+        positive_indenter_scope s(indenter_);
         stream_ << indenter_ << "return "
                 << utility_.as_member_variable(vm.name()) << ";"
                 << std::endl;
@@ -361,7 +361,7 @@ pod_getters_and_setters(const std::string class_name,
     stream_ << " v) ";
     utility_.open_scope();
     {
-        cpp_positive_indenter_scope s(indenter_);
+        positive_indenter_scope s(indenter_);
         stream_ << indenter_ << utility_.as_member_variable(vm.name())
                 << " = v;" << std::endl;
     }
@@ -378,7 +378,7 @@ pod_getters_and_setters(const std::string class_name,
     stream_ << " v) ";
     utility_.open_scope();
     {
-        cpp_positive_indenter_scope s(indenter_);
+        positive_indenter_scope s(indenter_);
         stream_ << indenter_ << utility_.as_member_variable(vm.name())
                 << " = std::move(v);" << std::endl;
     }
@@ -386,7 +386,7 @@ pod_getters_and_setters(const std::string class_name,
     utility_.blank_line();
 }
 
-void cpp_class_implementation::getters_and_setters(const class_view_model& vm) {
+void class_implementation::getters_and_setters(const class_view_model& vm) {
     if (vm.properties().empty())
         return;
 
@@ -398,7 +398,7 @@ void cpp_class_implementation::getters_and_setters(const class_view_model& vm) {
     }
 }
 
-void cpp_class_implementation::
+void class_implementation::
 assignment_operator(const class_view_model& vm) {
     // assignment is only available in leaf classes - MEC++-33
     if (vm.all_properties().empty() || vm.is_parent())
@@ -410,7 +410,7 @@ assignment_operator(const class_view_model& vm) {
 
     utility_.open_scope();
     {
-        cpp_positive_indenter_scope s(indenter_);
+        positive_indenter_scope s(indenter_);
         stream_ << indenter_ << "using std::swap;" << std::endl;
         stream_ << indenter_ << "swap(*this, other);"
                 << std::endl

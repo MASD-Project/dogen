@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_TYPES_FORMATTERS_CPP_EXCEPTION_DECLARATION_HPP
-#define DOGEN_CPP_TYPES_FORMATTERS_CPP_EXCEPTION_DECLARATION_HPP
+#ifndef DOGEN_CPP_TYPES_FORMATTERS_EXCEPTION_DECLARATION_HPP
+#define DOGEN_CPP_TYPES_FORMATTERS_EXCEPTION_DECLARATION_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -35,28 +35,28 @@ namespace dogen {
 namespace cpp {
 namespace formatters {
 
-class cpp_exception_declaration {
+class exception_declaration {
 public:
     typedef view_models::exception_view_model exception_view_model;
 
 public:
-    cpp_exception_declaration() = default;
-    ~cpp_exception_declaration() = default;
-    cpp_exception_declaration(const cpp_exception_declaration&) = default;
-    cpp_exception_declaration(cpp_exception_declaration&&) = default;
-    cpp_exception_declaration& operator=(
-        const cpp_exception_declaration&) = default;
+    exception_declaration() = default;
+    ~exception_declaration() = default;
+    exception_declaration(const exception_declaration&) = default;
+    exception_declaration(exception_declaration&&) = default;
+    exception_declaration& operator=(
+        const exception_declaration&) = default;
 
 public:
-    cpp_exception_declaration(std::ostream& stream);
+    exception_declaration(std::ostream& stream);
 
 public:
     void format(const exception_view_model& vm);
 
 protected:
     std::ostream& stream_;
-    cpp_indenter indenter_;
-    cpp_utility utility_;
+    indenter indenter_;
+    utility utility_;
 };
 
 } } }

@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_TYPES_FORMATTERS_CPP_INSERTER_IMPLEMENTATION_HPP
-#define DOGEN_CPP_TYPES_FORMATTERS_CPP_INSERTER_IMPLEMENTATION_HPP
+#ifndef DOGEN_CPP_TYPES_FORMATTERS_INSERTER_IMPLEMENTATION_HPP
+#define DOGEN_CPP_TYPES_FORMATTERS_INSERTER_IMPLEMENTATION_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -37,21 +37,21 @@ namespace dogen {
 namespace cpp {
 namespace formatters {
 
-class cpp_inserter_implementation {
+class inserter_implementation {
 public:
     typedef view_models::class_view_model class_view_model;
     typedef view_models::nested_type_view_model nested_type_view_model;
 
 public:
-    cpp_inserter_implementation() = delete;
-    cpp_inserter_implementation(const cpp_inserter_implementation&) = default;
-    cpp_inserter_implementation(cpp_inserter_implementation&&) = default;
-    cpp_inserter_implementation& operator=(const cpp_inserter_implementation&) = default;
+    inserter_implementation() = delete;
+    inserter_implementation(const inserter_implementation&) = default;
+    inserter_implementation(inserter_implementation&&) = default;
+    inserter_implementation& operator=(const inserter_implementation&) = default;
 
 public:
-    cpp_inserter_implementation(std::ostream& stream, cpp_indenter& indenter,
+    inserter_implementation(std::ostream& stream, indenter& indenter,
         const bool is_inside_class);
-    virtual ~cpp_inserter_implementation() noexcept {}
+    virtual ~inserter_implementation() noexcept {}
 
 private:
     bool is_insertable(const nested_type_view_model& vm);
@@ -74,8 +74,8 @@ public:
 protected:
     const bool is_inside_class_;
     std::ostream& stream_;
-    cpp_indenter& indenter_;
-    cpp_utility utility_;
+    indenter& indenter_;
+    utility utility_;
 };
 
 } } }

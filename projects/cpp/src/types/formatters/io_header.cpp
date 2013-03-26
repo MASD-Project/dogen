@@ -76,10 +76,10 @@ void io_header::format_class(const file_view_model& vm) {
                 << std::endl;
 
         {
-            cpp_positive_indenter_scope s(indenter_);
+            positive_indenter_scope s(indenter_);
             stream_ << indenter_ << " const ";
 
-            cpp_qualified_name qualified_name(stream_);
+            qualified_name qualified_name(stream_);
             qualified_name.format(cvm);
             stream_ << "& v);" << std::endl;
             utility_.blank_line();
@@ -115,7 +115,7 @@ void io_header::format(const file_view_model& vm) {
     guards.format_start(vm.header_guard());
     utility_.blank_line();
 
-    cpp_includes includes(stream_);
+    includes includes(stream_);
     includes.format(vm);
 
     if (vm.meta_type() == sml::meta_types::enumeration)

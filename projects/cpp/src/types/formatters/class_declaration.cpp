@@ -28,13 +28,13 @@ namespace dogen {
 namespace cpp {
 namespace formatters {
 
-cpp_class_declaration::
-cpp_class_declaration(std::ostream& stream, const bool disable_serialization)
+class_declaration::
+class_declaration(std::ostream& stream, const bool disable_serialization)
     : stream_(stream), utility_(stream_, indenter_),
       disable_serialization_(disable_serialization) { }
 
-void cpp_class_declaration::open_class(const class_view_model& vm) {
-    cpp_doxygen_comments dc(stream_, indenter_);
+void class_declaration::open_class(const class_view_model& vm) {
+    doxygen_comments dc(stream_, indenter_);
     dc.format(vm.documentation());
     stream_ << indenter_ << "class " << vm.name();
 
@@ -45,13 +45,13 @@ void cpp_class_declaration::open_class(const class_view_model& vm) {
     if (!parents.empty()) {
         stream_ << " :";
 
-        cpp_qualified_name qualified_name(stream_);
+        qualified_name qualified_name(stream_);
         if (parents.size() == 1) {
             stream_ << " public ";
             qualified_name.format(parents.front());
         } else {
             bool is_first(true);
-            cpp_positive_indenter_scope s(indenter_);
+            positive_indenter_scope s(indenter_);
             for (const auto p : vm.parents()) {
                 stream_ << (is_first ? "" : ",") << std::endl << indenter_;
                 stream_ << " public " << p.name();
@@ -62,12 +62,12 @@ void cpp_class_declaration::open_class(const class_view_model& vm) {
     stream_ << " {" << std::endl;
 }
 
-void cpp_class_declaration::close_class() {
+void class_declaration::close_class() {
     stream_ << indenter_ << "};" << std::endl;
     utility_.blank_line();
 }
 
-void cpp_class_declaration::default_constructor(const class_view_model& vm) {
+void class_declaration::default_constructor(const class_view_model& vm) {
     if (!vm.requires_manual_default_constructor())
         return;
 
@@ -77,7 +77,7 @@ void cpp_class_declaration::default_constructor(const class_view_model& vm) {
     utility_.blank_line();
 }
 
-void cpp_class_declaration::complete_constructor(const class_view_model& vm) {
+void class_declaration::complete_constructor(const class_view_model& vm) {
     const auto props(vm.all_properties());
     if (props.empty())
         return;
@@ -98,7 +98,7 @@ void cpp_class_declaration::complete_constructor(const class_view_model& vm) {
 
     stream_ << indenter_ << vm.name() << "(";
     {
-        cpp_positive_indenter_scope s(indenter_);
+        positive_indenter_scope s(indenter_);
         bool is_first(true);
         for (const auto p : props) {
             stream_ << (is_first ? "" : ",") << std::endl;
@@ -115,7 +115,7 @@ void cpp_class_declaration::complete_constructor(const class_view_model& vm) {
     utility_.blank_line();
 }
 
-void cpp_class_declaration::move_constructor(const class_view_model& vm) {
+void class_declaration::move_constructor(const class_view_model& vm) {
     if (!vm.requires_manual_move_constructor())
         return;
 
@@ -130,7 +130,7 @@ void cpp_class_declaration::move_constructor(const class_view_model& vm) {
     utility_.blank_line();
 }
 
-void cpp_class_declaration::destructor(const class_view_model& vm) {
+void class_declaration::destructor(const class_view_model& vm) {
     /*
      * according to MEC++, item 33, base classes should always be
      * abstract. this avoids all sorts of tricky problems with
@@ -146,7 +146,7 @@ void cpp_class_declaration::destructor(const class_view_model& vm) {
     }
 }
 
-void cpp_class_declaration::
+void class_declaration::
 compiler_generated_constuctors(const class_view_model& vm) {
     utility_.public_access_specifier();
 
@@ -173,7 +173,7 @@ compiler_generated_constuctors(const class_view_model& vm) {
     utility_.blank_line();
 }
 
-void cpp_class_declaration::friends(const class_view_model& vm) {
+void class_declaration::friends(const class_view_model& vm) {
     if (disable_serialization_)
         return;
 
@@ -191,9 +191,9 @@ void cpp_class_declaration::friends(const class_view_model& vm) {
     utility_.blank_line();
 }
 
-void cpp_class_declaration::
+void class_declaration::
 non_pod_getters_and_setters(const property_view_model& vm) {
-    cpp_doxygen_comments dc(stream_, indenter_);
+    doxygen_comments dc(stream_, indenter_);
     dc.format(vm.documentation());
     dc.format_start_block(vm.documentation());
     stream_ << indenter_ << vm.type().complete_name() << " " << vm.name()
@@ -210,9 +210,9 @@ non_pod_getters_and_setters(const property_view_model& vm) {
     utility_.blank_line();
 }
 
-void cpp_class_declaration::
+void class_declaration::
 pod_getters_and_setters(const property_view_model& vm) {
-    cpp_doxygen_comments dc(stream_, indenter_);
+    doxygen_comments dc(stream_, indenter_);
     dc.format(vm.documentation());
     dc.format_start_block(vm.documentation());
 
@@ -248,7 +248,7 @@ pod_getters_and_setters(const property_view_model& vm) {
     utility_.blank_line();
 }
 
-void cpp_class_declaration::getters_and_setters(const class_view_model& vm) {
+void class_declaration::getters_and_setters(const class_view_model& vm) {
     if (vm.properties().empty())
         return;
 
@@ -263,7 +263,7 @@ void cpp_class_declaration::getters_and_setters(const class_view_model& vm) {
     }
 }
 
-void cpp_class_declaration::member_variables(const class_view_model& vm) {
+void class_declaration::member_variables(const class_view_model& vm) {
     if (vm.properties().empty())
         return;
 
@@ -275,7 +275,7 @@ void cpp_class_declaration::member_variables(const class_view_model& vm) {
     }
 }
 
-void cpp_class_declaration::equality(const class_view_model& vm) {
+void class_declaration::equality(const class_view_model& vm) {
     // equality is only public in leaf classes - MEC++-33
     if (vm.is_parent()) {
         utility_.protected_access_specifier();
@@ -290,7 +290,7 @@ void cpp_class_declaration::equality(const class_view_model& vm) {
                 << "& rhs) const ";
         utility_.open_scope();
         {
-            cpp_positive_indenter_scope s(indenter_);
+            positive_indenter_scope s(indenter_);
             stream_ << indenter_ << "return !this->operator==(rhs);" << std::endl;
         }
         utility_.close_scope();
@@ -320,7 +320,7 @@ void cpp_class_declaration::equality(const class_view_model& vm) {
     utility_.blank_line();
 }
 
-void cpp_class_declaration::to_stream(const class_view_model& vm) {
+void class_declaration::to_stream(const class_view_model& vm) {
     if (!vm.is_parent() && vm.parents().empty())
         return;
 
@@ -339,7 +339,7 @@ void cpp_class_declaration::to_stream(const class_view_model& vm) {
     utility_.blank_line();
 }
 
-void cpp_class_declaration::swap_and_assignment(const class_view_model& vm) {
+void class_declaration::swap_and_assignment(const class_view_model& vm) {
     if (vm.all_properties().empty() && !vm.is_parent())
         return;
 

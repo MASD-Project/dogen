@@ -63,14 +63,14 @@ file_formatter::shared_ptr hash_header::create(std::ostream& stream) {
 void hash_header::operator_bracket_method(const class_view_model& vm) {
     stream_ << indenter_ << "size_t operator()(const ";
 
-    cpp_qualified_name qualified_name(stream_);
+    qualified_name qualified_name(stream_);
     qualified_name.format(vm);
 
     stream_ << "& v) const ";
 
     utility_.open_scope();
     {
-        cpp_positive_indenter_scope s(indenter_);
+        positive_indenter_scope s(indenter_);
 
         stream_ << indenter_ << "return ";
         qualified_name.format(vm);
@@ -85,7 +85,7 @@ void hash_header::hash_helper_class(const class_view_model& vm) {
 
     utility_.open_scope();
     {
-        cpp_positive_indenter_scope s(indenter_);
+        positive_indenter_scope s(indenter_);
         utility_.public_access_specifier();
         stream_ << indenter_ << "static std::size_t hash(const "
                 << vm.name() << "& v);" << std::endl;
@@ -97,13 +97,13 @@ void hash_header::hash_class(const class_view_model& vm) {
     stream_ << indenter_ << "template<>" << std::endl
             << indenter_ << "class hash<";
 
-    cpp_qualified_name qualified_name(stream_);
+    qualified_name qualified_name(stream_);
     qualified_name.format(vm);
 
     stream_ << "> ";
     utility_.open_scope();
     {
-        cpp_positive_indenter_scope s(indenter_);
+        positive_indenter_scope s(indenter_);
         utility_.public_access_specifier();
         operator_bracket_method(vm);
     }
@@ -126,20 +126,20 @@ void hash_header::format_class(const file_view_model& vm) {
         stream_ << indenter_ << "template<>" << std::endl
                 << indenter_ << "class hash<";
 
-        cpp_qualified_name qnf(stream_);
+        qualified_name qnf(stream_);
         qnf.format(evm);
 
         stream_ << "> ";
         utility_.open_scope();
         utility_.public_access_specifier();
         {
-            cpp_positive_indenter_scope s(indenter_);
+            positive_indenter_scope s(indenter_);
             stream_ << indenter_ << "size_t operator()(const ";
             qnf.format(evm);
             stream_ << "& v) const ";
             utility_.open_scope();
             {
-                cpp_positive_indenter_scope s(indenter_);
+                positive_indenter_scope s(indenter_);
                 stream_ << indenter_ << "return std::hash<unsigned int>()("
                         << "static_cast<unsigned int>(v));" << std::endl;
             }
@@ -188,7 +188,7 @@ void hash_header::format(const file_view_model& vm) {
     guards.format_start(vm.header_guard());
     stream_ << std::endl;
 
-    cpp_includes includes(stream_);
+    includes includes(stream_);
     includes.format(vm);
 
     if (vm.meta_type() == sml::meta_types::enumeration)

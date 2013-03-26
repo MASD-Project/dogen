@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_TYPES_FORMATTERS_CPP_INCLUDES_HPP
-#define DOGEN_CPP_TYPES_FORMATTERS_CPP_INCLUDES_HPP
+#ifndef DOGEN_CPP_TYPES_FORMATTERS_INCLUDES_HPP
+#define DOGEN_CPP_TYPES_FORMATTERS_INCLUDES_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -36,19 +36,19 @@ namespace dogen {
 namespace cpp {
 namespace formatters {
 
-class cpp_includes {
+class includes {
 public:
     typedef view_models::file_view_model file_view_model;
 
 public:
-    cpp_includes() = delete;
-    cpp_includes(const cpp_includes&) = default;
-    ~cpp_includes() = default;
-    cpp_includes(cpp_includes&&) = default;
-    cpp_includes& operator=(const cpp_includes&) = default;
+    includes() = delete;
+    includes(const includes&) = default;
+    ~includes() = default;
+    includes(includes&&) = default;
+    includes& operator=(const includes&) = default;
 
 public:
-    explicit cpp_includes(std::ostream& stream, const bool blank_line = true);
+    explicit includes(std::ostream& stream, const bool blank_line = true);
 
 private:
     void format(std::list<std::string> v, bool is_system);
@@ -58,8 +58,8 @@ public:
 
 private:
     std::ostream& stream_;
-    cpp_indenter indenter_;
-    cpp_utility utility_;
+    indenter indenter_;
+    utility utility_;
     const bool blank_line_;
 };
 

@@ -66,7 +66,7 @@ serialization_header::create(std::ostream& stream,
 }
 
 void serialization_header::load_and_save_functions(const class_view_model& vm) {
-    cpp_qualified_name qualified_name(stream_);
+    qualified_name qualified_name(stream_);
     stream_ << indenter_ << "template<typename Archive>" << std::endl
             << indenter_ << "void save(Archive& ar, const ";
     qualified_name.format(vm);
@@ -87,7 +87,7 @@ void serialization_header::format_class(const file_view_model& vm) {
     }
 
     const view_models::class_view_model& cvm(*o);
-    cpp_qualified_name qualified_name(stream_);
+    qualified_name qualified_name(stream_);
     const auto parents(cvm.parents());
     if (!cvm.is_parent() && !parents.empty())
     {
@@ -100,7 +100,7 @@ void serialization_header::format_class(const file_view_model& vm) {
                 stream_ << indenter_ << "template<>struct" << std::endl
                         << indenter_ << "is_virtual_base_of<" << std::endl;
                 {
-                    cpp_positive_indenter_scope s(indenter_);
+                    positive_indenter_scope s(indenter_);
                     stream_ << indenter_;
                     qualified_name.format(p);
                     stream_ << "," << std::endl
@@ -148,13 +148,13 @@ void serialization_header::format_enumeration(const file_view_model& vm) {
     stream_ << indenter_ << "template<class Archive>" << std::endl
             << "void serialize(Archive& ar, ";
 
-    cpp_qualified_name qnf(stream_);
+    qualified_name qnf(stream_);
     qnf.format(evm);
 
     stream_ << "& v, unsigned int /*version*/)";
     utility_.open_scope();
     {
-        cpp_positive_indenter_scope s(indenter_);
+        positive_indenter_scope s(indenter_);
         if (disable_xml_serialization_) {
             stream_ << indenter_ << "ar & v;" << std::endl;
         } else {
@@ -176,7 +176,7 @@ void serialization_header::format(const file_view_model& vm) {
     guards.format_start(vm.header_guard());
     utility_.blank_line();
 
-    cpp_includes includes(stream_);
+    includes includes(stream_);
     includes.format(vm);
 
     if (vm.meta_type() == sml::meta_types::enumeration)

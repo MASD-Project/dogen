@@ -85,7 +85,7 @@ equality_operator(const class_view_model& vm) {
             << vm.name() << "& lhs, const " << vm.name() << "& rhs) ";
     utility_.open_scope();
     {
-        cpp_positive_indenter_scope s(indenter_);
+        positive_indenter_scope s(indenter_);
         stream_ << indenter_ << "return lhs.equals(rhs);" << std::endl;
     }
     utility_.close_scope();
@@ -115,9 +115,9 @@ swap_method(const class_view_model& vm) {
             << indenter_ << "inline void swap(" << std::endl;
 
     {
-        cpp_positive_indenter_scope s(indenter_);
+        positive_indenter_scope s(indenter_);
         stream_ << indenter_;
-        cpp_qualified_name qualified_name(stream_);
+        qualified_name qualified_name(stream_);
         qualified_name.format(vm);
         stream_ << "& lhs," << std::endl;
 
@@ -134,17 +134,16 @@ swap_method(const class_view_model& vm) {
 
 void domain_header::
 class_declaration(const sml::category_types ct, const class_view_model& vm) {
-
-    using utility::exception::invalid_enum_value;
+    using dogen::utility::exception::invalid_enum_value;
     if (ct == sml::category_types::versioned_key ||
         ct == sml::category_types::unversioned_key) {
-        cpp_key_class_declaration
+        key_class_declaration
             f(stream_, disable_complete_constructor_, disable_io_,
                 disable_serialization_);
         f.format(vm);
         return;
     } else if (ct == sml::category_types::user_defined) {
-        cpp_domain_class_declaration
+        domain_class_declaration
             f(stream_, disable_complete_constructor_, disable_io_,
                 disable_serialization_);
         f.format(vm);
@@ -191,7 +190,7 @@ void domain_header::format_class(const file_view_model& vm) {
     if (at == aspect_types::main)
         format_main(ct, cvm);
     else {
-        using utility::exception::invalid_enum_value;
+        using dogen::utility::exception::invalid_enum_value;
         BOOST_LOG_SEV(lg, error) << missing_class_view_model;
         BOOST_THROW_EXCEPTION(invalid_enum_value(invalid_aspect_type));
     }
@@ -207,7 +206,7 @@ void domain_header::format_enumeration(const file_view_model& vm) {
         const auto evm(*o);
         namespace_helper ns(stream_, evm.namespaces());
         utility_.blank_line();
-        cpp_enumeration_declaration f(stream_);
+        enumeration_declaration f(stream_);
         f.format(evm);
     }
     utility_.blank_line(2);
@@ -223,7 +222,7 @@ void domain_header::format_exception(const file_view_model& vm) {
         const auto evm(*o);
         namespace_helper ns(stream_, evm.namespaces());
         utility_.blank_line();
-        cpp_exception_declaration f(stream_);
+        exception_declaration f(stream_);
         f.format(evm);
     }
     utility_.blank_line(2);
@@ -237,7 +236,7 @@ void domain_header::format(const file_view_model& vm) {
     guards.format_start(vm.header_guard());
     utility_.blank_line();
 
-    cpp_includes includes(stream_);
+    includes includes(stream_);
     includes.format(vm);
 
     if (vm.meta_type() == sml::meta_types::enumeration)

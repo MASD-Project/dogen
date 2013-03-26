@@ -153,7 +153,7 @@ void odb_header::format(const file_view_model& vm) {
     guards.format_start(vm.header_guard());
     stream_ << std::endl;
 
-    cpp_includes includes(stream_);
+    includes includes(stream_);
     includes.format(vm);
 
     if (vm.meta_type() == sml::meta_types::pod)

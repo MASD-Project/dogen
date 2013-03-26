@@ -43,54 +43,54 @@ namespace dogen {
 namespace cpp {
 namespace formatters {
 
-void cpp_utility::public_access_specifier() {
-    cpp_negative_indenter_scope s(indenter_);
+void utility::public_access_specifier() {
+    negative_indenter_scope s(indenter_);
     stream_ << ::public_access_specifier << std::endl;
 }
 
-void cpp_utility::protected_access_specifier() {
-    cpp_negative_indenter_scope s(indenter_);
+void utility::protected_access_specifier() {
+    negative_indenter_scope s(indenter_);
     stream_ << ::protected_access_specifier << std::endl;
 }
 
-void cpp_utility::private_access_specifier() {
-    cpp_negative_indenter_scope s(indenter_);
+void utility::private_access_specifier() {
+    negative_indenter_scope s(indenter_);
     stream_ << ::private_access_specifier << std::endl;
 }
 
-void cpp_utility::open_scope() {
+void utility::open_scope() {
     stream_ << open_bracket << std::endl;
 }
 
-void cpp_utility::close_scope() {
+void utility::close_scope() {
     stream_ << indenter_ << close_bracket << std::endl;
 }
 
-void cpp_utility::blank_line(unsigned int how_many) {
+void utility::blank_line(unsigned int how_many) {
     for (unsigned int i(0); i < how_many; ++i)
         stream_ << std::endl;
 }
 
 std::string
-cpp_utility::as_member_variable(const std::string& property_name) const {
+utility::as_member_variable(const std::string& property_name) const {
     return property_name + member_variable_postfix;
 }
 
 std::string
-cpp_utility::as_getter(const std::string& property_name) const {
+utility::as_getter(const std::string& property_name) const {
     return property_name + function_brackets;
 }
 
-std::string cpp_utility::quote(const std::string& original) const {
+std::string utility::quote(const std::string& original) const {
     return ::quote + original + ::quote;
 }
 
-std::string cpp_utility::quote_escaped(const std::string& original) const {
+std::string utility::quote_escaped(const std::string& original) const {
     return ::quote_escaped + original + ::quote_escaped;
 }
 
 std::string
-cpp_utility::quote_escaped_streamed(const std::string& original) const {
+utility::quote_escaped_streamed(const std::string& original) const {
     std::ostringstream s;
     s << ::quote << ::quote_escaped << ::quote << space
       << inserter << original << space

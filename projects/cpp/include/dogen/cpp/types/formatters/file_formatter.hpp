@@ -43,7 +43,7 @@ public:
     file_formatter& operator=(const file_formatter&) = default;
 
 protected:
-    file_formatter() = default;
+    file_formatter();
 
 public:
     typedef std::shared_ptr<file_formatter> shared_ptr;

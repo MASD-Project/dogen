@@ -54,7 +54,7 @@ void facet_includer::format(const file_view_model& vm) {
     licence.format();
 
     const bool blank_line(false);
-    cpp_includes includes(stream_, blank_line);
+    includes includes(stream_, blank_line);
     includes.format(vm);
 }
 

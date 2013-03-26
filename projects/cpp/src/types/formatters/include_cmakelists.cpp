@@ -35,10 +35,10 @@ namespace dogen {
 namespace cpp {
 namespace formatters {
 
-cpp_include_cmakelists::
-cpp_include_cmakelists(std::ostream& stream) : stream_(stream) { }
+include_cmakelists::
+include_cmakelists(std::ostream& stream) : stream_(stream) { }
 
-void cpp_include_cmakelists::format(const cmakelists_view_model& vm) {
+void include_cmakelists::format(const cmakelists_view_model& vm) {
     const std::string mn(vm.model_name().empty() ?
         unnamed_model :
         vm.model_name());
@@ -76,7 +76,7 @@ void cpp_include_cmakelists::format(const cmakelists_view_model& vm) {
             << "install(" << std::endl;
 
     {
-        cpp_positive_indenter_scope s(indenter_);
+        positive_indenter_scope s(indenter_);
         stream_ << indenter_ << "DIRECTORY include/" << std::endl
                 << indenter_ << "DESTINATION include/" << std::endl
                 << indenter_ << "COMPONENT headers" << std::endl

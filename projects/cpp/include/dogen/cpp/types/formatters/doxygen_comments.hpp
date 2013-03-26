@@ -32,16 +32,16 @@ namespace dogen {
 namespace cpp {
 namespace formatters {
 
-class cpp_doxygen_comments {
+class doxygen_comments {
 public:
-    cpp_doxygen_comments() = delete;
-    cpp_doxygen_comments(const cpp_doxygen_comments&) = default;
-    ~cpp_doxygen_comments() = default;
-    cpp_doxygen_comments(cpp_doxygen_comments&&) = default;
-    cpp_doxygen_comments& operator=(const cpp_doxygen_comments&) = default;
+    doxygen_comments() = delete;
+    doxygen_comments(const doxygen_comments&) = default;
+    ~doxygen_comments() = default;
+    doxygen_comments(doxygen_comments&&) = default;
+    doxygen_comments& operator=(const doxygen_comments&) = default;
 
 public:
-    cpp_doxygen_comments(std::ostream& stream, cpp_indenter& indenter);
+    doxygen_comments(std::ostream& stream, indenter& indenter);
 
 public:
     void format(const std::string& documentation);
@@ -51,7 +51,7 @@ public:
 
 private:
     std::ostream& stream_;
-    cpp_indenter& indenter_;
+    indenter& indenter_;
 };
 
 } } }

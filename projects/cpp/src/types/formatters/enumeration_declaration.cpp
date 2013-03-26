@@ -34,18 +34,18 @@ namespace dogen {
 namespace cpp {
 namespace formatters {
 
-cpp_enumeration_declaration::
-cpp_enumeration_declaration(std::ostream& stream)
+enumeration_declaration::
+enumeration_declaration(std::ostream& stream)
     : stream_(stream), utility_(stream_, indenter_) { }
 
-void cpp_enumeration_declaration::format(const enumeration_view_model& vm) {
-    cpp_doxygen_comments dc1(stream_, indenter_);
+void enumeration_declaration::format(const enumeration_view_model& vm) {
+    doxygen_comments dc1(stream_, indenter_);
     dc1.format(vm.documentation());
 
     stream_ << indenter_ << "enum class " << vm.name() << " : unsigned int ";
     utility_.open_scope();
     {
-        cpp_positive_indenter_scope s(indenter_);
+        positive_indenter_scope s(indenter_);
         bool is_first(true);
         const auto enumerators(vm.enumerators());
         std::ostringstream assignment;
@@ -60,7 +60,7 @@ void cpp_enumeration_declaration::format(const enumeration_view_model& vm) {
 
             const auto e(*i);
             assignment << indenter_ << e.name() << " = " << e.value();
-            cpp_doxygen_comments dc2(comment, indenter_);
+            doxygen_comments dc2(comment, indenter_);
             dc2.format_inline(e.documentation());
             is_first = false;
         }

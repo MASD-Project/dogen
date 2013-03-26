@@ -99,7 +99,7 @@ cpp_backend::value_type cpp_backend::generate_cmakelists() const {
 
     log_formating_view(vm.file_path().string());
     std::ostringstream stream;
-    formatters::cpp_src_cmakelists src(stream);
+    formatters::src_cmakelists src(stream);
     src.format(vm);
 
     cpp_backend::value_type r;
@@ -109,7 +109,7 @@ cpp_backend::value_type cpp_backend::generate_cmakelists() const {
         stream.str("");
         vm.file_path(location_manager_.absolute_path(vm.file_name()));
         log_formating_view(vm.file_path().string());
-        formatters::cpp_include_cmakelists inc(stream);
+        formatters::include_cmakelists inc(stream);
         inc.format(vm);
         r.insert(std::make_pair(vm.file_path(), stream.str()));
     }

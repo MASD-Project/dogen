@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_TYPES_FORMATTERS_CPP_CLASS_IMPLEMENTATION_HPP
-#define DOGEN_CPP_TYPES_FORMATTERS_CPP_CLASS_IMPLEMENTATION_HPP
+#ifndef DOGEN_CPP_TYPES_FORMATTERS_CLASS_IMPLEMENTATION_HPP
+#define DOGEN_CPP_TYPES_FORMATTERS_CLASS_IMPLEMENTATION_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 types/#pragma once
@@ -36,21 +36,21 @@ namespace dogen {
 namespace cpp {
 namespace formatters {
 
-class cpp_class_implementation {
+class class_implementation {
 public:
     typedef view_models::class_view_model class_view_model;
     typedef view_models::property_view_model property_view_model;
 
 public:
-    cpp_class_implementation() = default;
-    cpp_class_implementation(const cpp_class_implementation&) = default;
-    ~cpp_class_implementation() = default;
-    cpp_class_implementation(cpp_class_implementation&&) = default;
-    cpp_class_implementation&
-    operator=(const cpp_class_implementation&) = default;
+    class_implementation() = default;
+    class_implementation(const class_implementation&) = default;
+    ~class_implementation() = default;
+    class_implementation(class_implementation&&) = default;
+    class_implementation&
+    operator=(const class_implementation&) = default;
 
 public:
-    explicit cpp_class_implementation(std::ostream& stream);
+    explicit class_implementation(std::ostream& stream);
 
 protected:
     void default_constructor(const class_view_model& vm);
@@ -72,8 +72,8 @@ public:
 
 protected:
     std::ostream& stream_;
-    cpp_indenter indenter_;
-    cpp_utility utility_;
+    indenter indenter_;
+    utility utility_;
 };
 
 } } }

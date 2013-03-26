@@ -35,161 +35,158 @@ BOOST_AUTO_TEST_SUITE(indenter)
 
 BOOST_AUTO_TEST_CASE(default_indenter_does_not_indent) {
     SETUP_TEST_LOG_SOURCE("default_indenter_does_not_indent");
-    dogen::cpp::formatters::cpp_indenter indenter;
+    dogen::cpp::formatters::indenter i;
     std::ostringstream stream;
-    stream << indenter;
+    stream << i;
     BOOST_CHECK(stream.str().empty());
-    BOOST_CHECK(indenter.empty());
-    BOOST_LOG_SEV(lg, debug) << "zero indent: '" << indenter << "'";
+    BOOST_CHECK(i.empty());
+    BOOST_LOG_SEV(lg, debug) << "zero indent: '" << i << "'";
 }
 
 BOOST_AUTO_TEST_CASE(indenting_increases_indentation_level) {
     SETUP_TEST_LOG_SOURCE("indenting_increases_indentation_level");
-    dogen::cpp::formatters::cpp_indenter indenter;
+    dogen::cpp::formatters::indenter i;
     std::ostringstream stream;
-    stream << (++indenter);
+    stream << (++i);
     BOOST_CHECK(!stream.str().empty());
-    BOOST_CHECK(!indenter.empty());
-    BOOST_LOG_SEV(lg, debug) << "one indent: '" << indenter << "'";
+    BOOST_CHECK(!i.empty());
+    BOOST_LOG_SEV(lg, debug) << "one indent: '" << i << "'";
 
     unsigned int one_indent_size(stream.str().length());
     stream.str(empty);
-    stream << (++indenter);
-    BOOST_CHECK(!indenter.empty());
+    stream << (++i);
+    BOOST_CHECK(!i.empty());
     BOOST_CHECK(stream.str().length() == 2 * one_indent_size);
-    BOOST_LOG_SEV(lg, debug) << "two indent: '" << indenter << "'";
+    BOOST_LOG_SEV(lg, debug) << "two indent: '" << i << "'";
 
     stream.str(empty);
-    stream << (++indenter);
-    BOOST_CHECK(!indenter.empty());
+    stream << (++i);
+    BOOST_CHECK(!i.empty());
     BOOST_CHECK(stream.str().length() == 3 * one_indent_size);
-    BOOST_LOG_SEV(lg, debug)  << "three indent: '" << indenter << "'";
+    BOOST_LOG_SEV(lg, debug)  << "three indent: '" << i << "'";
 }
 
 BOOST_AUTO_TEST_CASE(unindenting_decreases_indentation_level) {
     SETUP_TEST_LOG_SOURCE("unindenting_decreases_indentation_level");
-    dogen::cpp::formatters::cpp_indenter indenter;
-    BOOST_CHECK(indenter.empty());
+    dogen::cpp::formatters::indenter i;
+    BOOST_CHECK(i.empty());
 
     std::ostringstream stream;
-    stream << (++indenter);
+    stream << (++i);
     BOOST_CHECK(!stream.str().empty());
-    BOOST_CHECK(!indenter.empty());
+    BOOST_CHECK(!i.empty());
 
     unsigned int one_indent_size(stream.str().length());
-    ++indenter;
+    ++i;
 
     stream.str(empty);
-    stream << (++indenter);
+    stream << (++i);
     BOOST_CHECK(stream.str().length() == 3 * one_indent_size);
-    BOOST_LOG_SEV(lg, debug) << "three indent: '" << indenter << "'";
+    BOOST_LOG_SEV(lg, debug) << "three indent: '" << i << "'";
 
     stream.str(empty);
-    stream << (--indenter);
+    stream << (--i);
     BOOST_CHECK(stream.str().length() == 2 * one_indent_size);
-    BOOST_LOG_SEV(lg, debug) << "two indent: '" << indenter << "'";
+    BOOST_LOG_SEV(lg, debug) << "two indent: '" << i << "'";
 
     stream.str(empty);
-    stream << (--indenter);
+    stream << (--i);
     BOOST_CHECK(stream.str().length() == one_indent_size);
-    BOOST_LOG_SEV(lg, debug) << "one indent: '" << indenter << "'";
+    BOOST_LOG_SEV(lg, debug) << "one indent: '" << i << "'";
 
     stream.str(empty);
-    stream << (--indenter);
+    stream << (--i);
     BOOST_CHECK(stream.str().empty());
-    BOOST_CHECK(indenter.empty());
-    BOOST_LOG_SEV(lg, debug) << "zero indent: '" << indenter << "'";
+    BOOST_CHECK(i.empty());
+    BOOST_LOG_SEV(lg, debug) << "zero indent: '" << i << "'";
 }
 
 BOOST_AUTO_TEST_CASE(unindenting_at_zero_indentation_level_does_nothing) {
     SETUP_TEST_LOG("unindenting_at_zero_indentation_level_does_nothing");
-    dogen::cpp::formatters::cpp_indenter indenter;
+    dogen::cpp::formatters::indenter i;
 
     std::ostringstream stream;
-    stream << (--indenter);
+    stream << (--i);
     BOOST_CHECK(stream.str().empty());
 
-    stream << (++indenter);
+    stream << (++i);
     BOOST_CHECK(!stream.str().empty());
 }
 
-BOOST_AUTO_TEST_CASE(cpp_positive_indenter_scope_correctly_increases_and_decreases_indentation_level) {
-    SETUP_TEST_LOG("cpp_positive_indenter_scope_correctly_increases_and_decreases_indentation_level");
-    using namespace dogen::cpp::formatters;
-    cpp_indenter indenter;
+BOOST_AUTO_TEST_CASE(positive_indenter_scope_correctly_increases_and_decreases_indentation_level) {
+    SETUP_TEST_LOG("positive_indenter_scope_correctly_increases_and_decreases_indentation_level");
+    dogen::cpp::formatters::indenter i;
 
     std::ostringstream stream;
-    stream << indenter;
+    stream << i;
     BOOST_CHECK(stream.str().empty());
     {
-        cpp_positive_indenter_scope s(indenter);
-        stream << indenter;
+        dogen::cpp::formatters::positive_indenter_scope s(i);
+        stream << i;
         BOOST_CHECK(!stream.str().empty());
         unsigned int one_indent_size(stream.str().length());
         {
-            cpp_positive_indenter_scope s(indenter);
+            dogen::cpp::formatters::positive_indenter_scope s(i);
             stream.str(empty);
-            stream << indenter;
+            stream << i;
             BOOST_CHECK(stream.str().length() == 2 * one_indent_size);
         }
         stream.str(empty);
-        stream << indenter;
+        stream << i;
         BOOST_CHECK(stream.str().length() == one_indent_size);
     }
     stream.str(empty);
-    stream << indenter;
+    stream << i;
     BOOST_CHECK(stream.str().empty());
 }
 
-BOOST_AUTO_TEST_CASE(cpp_negative_indenter_scope_correctly_decreases_and_increases_indentation_level) {
-    SETUP_TEST_LOG_SOURCE("cpp_negative_indenter_scope_correctly_decreases_and_increases_indentation_level");
-    using namespace dogen::cpp::formatters;
-    cpp_indenter indenter;
+BOOST_AUTO_TEST_CASE(negative_indenter_scope_correctly_decreases_and_increases_indentation_level) {
+    SETUP_TEST_LOG_SOURCE("negative_indenter_scope_correctly_decreases_and_increases_indentation_level");
+    dogen::cpp::formatters::indenter i;
 
     std::ostringstream stream;
-    stream << indenter;
+    stream << i;
     BOOST_CHECK(stream.str().empty());
 
-    stream << (++indenter);
+    stream << (++i);
     BOOST_CHECK(!stream.str().empty());
     unsigned int one_indent_size(stream.str().length());
-    ++indenter;
+    ++i;
     {
-        cpp_negative_indenter_scope s(indenter);
+        dogen::cpp::formatters::negative_indenter_scope s(i);
         stream.str(empty);
-        stream << indenter;
+        stream << i;
         BOOST_CHECK(stream.str().length() == one_indent_size);
         {
-            cpp_negative_indenter_scope s(indenter);
+            dogen::cpp::formatters::negative_indenter_scope s(i);
             stream.str(empty);
-            stream << indenter;
+            stream << i;
             BOOST_CHECK(stream.str().empty());
         }
         stream.str(empty);
-        stream << indenter;
+        stream << i;
         BOOST_CHECK(stream.str().length() == one_indent_size);
     }
     stream.str(empty);
-    stream << indenter;
+    stream << i;
     BOOST_CHECK(stream.str().length() == 2 * one_indent_size);
 }
 
-BOOST_AUTO_TEST_CASE(cpp_negative_indenter_scope_correctly_handles_zero_indentation_level) {
-    SETUP_TEST_LOG("cpp_negative_indenter_scope_correctly_handles_zero_indentation_level");
-    using namespace dogen::cpp::formatters;
-    cpp_indenter indenter;
+BOOST_AUTO_TEST_CASE(negative_indenter_scope_correctly_handles_zero_indentation_level) {
+    SETUP_TEST_LOG("negative_indenter_scope_correctly_handles_zero_indentation_level");
+    dogen::cpp::formatters::indenter i;
 
     std::ostringstream stream;
-    stream << indenter;
+    stream << i;
     BOOST_CHECK(stream.str().empty());
     {
-        cpp_negative_indenter_scope s(indenter);
+        dogen::cpp::formatters::negative_indenter_scope s(i);
         stream.str(empty);
-        stream << indenter;
+        stream << i;
         BOOST_CHECK(stream.str().empty());
     }
     stream.str(empty);
-    stream << indenter;
+    stream << i;
     BOOST_CHECK(stream.str().empty());
 }
 

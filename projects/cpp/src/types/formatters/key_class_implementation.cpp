@@ -25,21 +25,21 @@ namespace dogen {
 namespace cpp {
 namespace formatters {
 
-cpp_key_class_implementation::
-cpp_key_class_implementation(std::ostream& stream,
+key_class_implementation::
+key_class_implementation(std::ostream& stream,
     bool disable_complete_constructor, bool disable_io) :
-    cpp_class_implementation(stream),
+    class_implementation(stream),
     disable_complete_constructor_(disable_complete_constructor),
     disable_io_(disable_io) { }
 
-void cpp_key_class_implementation::
+void key_class_implementation::
 hand_crafted_constructors(const class_view_model& vm) {
     default_constructor(vm);
     if (!disable_complete_constructor_)
         complete_constructor(vm);
 }
 
-void cpp_key_class_implementation::format(const class_view_model& vm) {
+void key_class_implementation::format(const class_view_model& vm) {
     hand_crafted_constructors(vm);
     if (!disable_io_)
         to_stream(vm);
