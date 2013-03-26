@@ -21,7 +21,7 @@
 #include <sstream>
 #include <boost/test/unit_test.hpp>
 #include "dogen/utility/test/logging.hpp"
-#include "dogen/cpp/types/formatters/cpp_indenter.hpp"
+#include "dogen/cpp/types/formatters/indenter.hpp"
 
 namespace {
 
