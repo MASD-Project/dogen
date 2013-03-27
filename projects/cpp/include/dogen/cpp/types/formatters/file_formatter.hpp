@@ -38,12 +38,12 @@ public:
 
 public:
     file_formatter(const file_formatter&) = default;
-    virtual ~file_formatter() noexcept = default;
     file_formatter(file_formatter&&) = default;
     file_formatter& operator=(const file_formatter&) = default;
 
 protected:
     file_formatter();
+    virtual ~file_formatter() noexcept {}
 
 public:
     typedef std::shared_ptr<file_formatter> shared_ptr;
