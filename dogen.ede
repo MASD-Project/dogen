@@ -45,6 +45,7 @@
    "/projects/entity_service_value/include"
    "/projects/database/include"
    "/projects/cpp/include"
+   "/projects/dia_to_sml/include"
    )
  :system-include-path
  '("/usr/local/pfh/include"

@@ -183,6 +183,7 @@ include_directories(
     ${CMAKE_SOURCE_DIR}/projects/exception/include
     ${CMAKE_SOURCE_DIR}/projects/entity_service_value/include
     ${CMAKE_SOURCE_DIR}/projects/database/include
+    ${CMAKE_SOURCE_DIR}/projects/dia_to_sml/include
     )
 
 #
@@ -230,6 +231,8 @@ add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/enumeration)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/exception)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/entity_service_value)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/database)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dia_to_sml/src)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dia_to_sml/spec)
 
 # global targets for codegen
 add_custom_target(rebase_codegen)
