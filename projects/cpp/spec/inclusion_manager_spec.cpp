@@ -29,7 +29,7 @@
 #include "dogen/config/io/cpp_facet_types_io.hpp"
 #include "dogen/cpp/types/location_manager.hpp"
 #include "dogen/cpp/types/location_request.hpp"
-#include "dogen/cpp/test/mock_settings_factory.hpp"
+#include "dogen/config/test/mock_settings_factory.hpp"
 #include "dogen/cpp/types/inclusion_manager.hpp"
 
 using namespace dogen::cpp;
@@ -80,7 +80,7 @@ const std::vector<cpp_facet_types> facets =
 };
 
 dogen::config::cpp_settings mock_settings() {
-    return dogen::cpp::mock_settings_factory::
+    return dogen::config::test::mock_settings_factory::
         build_cpp_settings(project_dir);
 }
 

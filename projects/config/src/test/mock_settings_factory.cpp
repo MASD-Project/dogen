@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/generator/test/mock_settings_factory.hpp"
+#include "dogen/config/test/mock_settings_factory.hpp"
 
 namespace {
 
@@ -35,7 +35,7 @@ const std::string odb_facet_folder("odb");
 }
 
 namespace dogen {
-namespace generator {
+namespace config {
 namespace test {
 
 config::modeling_settings mock_settings_factory::

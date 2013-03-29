@@ -27,7 +27,7 @@
 #include "dogen/sml/types/model.hpp"
 #include "dogen/sml/io/model_io.hpp"
 #include "dogen/sml/serialization/model_ser.hpp"
-#include "dogen/cpp/test/mock_settings_factory.hpp"
+#include "dogen/config/test/mock_settings_factory.hpp"
 
 using dogen::config::cpp_facet_types;
 using namespace dogen::cpp;
@@ -99,7 +99,7 @@ dogen::config::cpp_settings create_settings(
     bool disable_facet_includers = false, bool disable_versioning = false,
     bool use_integrated_io = false) {
 
-    using dogen::cpp::mock_settings_factory;
+    using dogen::config::test::mock_settings_factory;
     auto r(mock_settings_factory::build_cpp_settings(empty, empty));
 
     std::set<cpp_facet_types> ft;

@@ -25,7 +25,7 @@
 #include "dogen/config/types/settings.hpp"
 #include "dogen/config/types/validator.hpp"
 #include "dogen/config/types/configuration_error.hpp"
-#include "dogen/generator/test/mock_settings_factory.hpp"
+#include "dogen/config/test/mock_settings_factory.hpp"
 #include "dogen/utility/test/exception_checkers.hpp"
 
 namespace {
@@ -48,12 +48,12 @@ const std::string unexpected_source_include("Source and include directories");
 const std::string unexpected_project_dir("Project directories cannot be");
 
 dogen::config::settings defaults() {
-    return dogen::generator::test::mock_settings_factory::
+    return dogen::config::test::mock_settings_factory::
         build_settings(target, src_dir, include_dir, epp);
 }
 
 dogen::config::settings target_only() {
-    return dogen::generator::test::mock_settings_factory::
+    return dogen::config::test::mock_settings_factory::
         build_settings(target, empty_dir, empty_dir, empty);
 }
 

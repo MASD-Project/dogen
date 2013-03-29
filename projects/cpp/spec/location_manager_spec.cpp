@@ -30,7 +30,7 @@
 #include "dogen/config/io/cpp_settings_io.hpp"
 #include "dogen/cpp/types/location_manager.hpp"
 #include "dogen/cpp/types/location_request.hpp"
-#include "dogen/cpp/test/mock_settings_factory.hpp"
+#include "dogen/config/test/mock_settings_factory.hpp"
 
 using namespace dogen::cpp;
 using dogen::config::cpp_facet_types;
@@ -62,12 +62,12 @@ const std::vector<cpp_facet_types> facets =
 };
 
 dogen::config::cpp_settings non_split_project_settings() {
-    return dogen::cpp::mock_settings_factory::
+    return dogen::config::test::mock_settings_factory::
         build_cpp_settings(project_dir);
 }
 
 dogen::config::cpp_settings split_project_settings() {
-    return dogen::cpp::mock_settings_factory::
+    return dogen::config::test::mock_settings_factory::
         build_cpp_settings(src_dir, include_dir);
 }
 

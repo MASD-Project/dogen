@@ -34,7 +34,7 @@
 #include "dogen/utility/test/logging.hpp"
 #include "dogen/dia/io/diagram_io.hpp"
 #include "dogen/generator/generation_failure.hpp"
-#include "dogen/generator/test/mock_settings_factory.hpp"
+#include "dogen/config/test/mock_settings_factory.hpp"
 #include "dogen/config/types/settings.hpp"
 #include "dogen/generator/generator.hpp"
 #include "dogen/sml/types/model.hpp"
@@ -77,14 +77,14 @@ file_asserters() {
 
 dogen::config::settings
 default_mock_settings(dogen::utility::test_data::codegen_tds tds) {
-    using dogen::generator::test::mock_settings_factory;
+    using dogen::config::test::mock_settings_factory;
     return mock_settings_factory::build_settings(
         tds.target(), tds.actual(), package_path);
 }
 
 dogen::config::settings debug_dogen_mock_settings() {
     typedef dogen::utility::test_data::debug_dogen tds;
-    using dogen::generator::test::mock_settings_factory;
+    using dogen::config::test::mock_settings_factory;
     return mock_settings_factory::build_settings(
         tds::target(),
         tds::actual_src(),
@@ -94,7 +94,7 @@ dogen::config::settings debug_dogen_mock_settings() {
 
 dogen::config::settings empty_tds_mock_settings() {
     typedef dogen::utility::test_data::empty_tds tds;
-    using dogen::generator::test::mock_settings_factory;
+    using dogen::config::test::mock_settings_factory;
     return mock_settings_factory::build_settings(
         tds::target(),
         tds::actual_src(),
@@ -545,7 +545,7 @@ BOOST_AUTO_TEST_CASE(split_project_model_generates_expected_code) {
     // for the rebaselining scripts.
     using dogen::config::settings;
     auto lambda([](dogen::utility::test_data::codegen_tds tds) -> settings {
-            using dogen::generator::test::mock_settings_factory;
+            using dogen::config::test::mock_settings_factory;
             return mock_settings_factory::build_settings(
                 tds.target(),
                 tds.actual() / "split_project/source",

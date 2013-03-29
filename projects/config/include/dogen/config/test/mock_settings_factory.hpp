@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_TEST_MOCK_SETTINGS_FACTORY_HPP
-#define DOGEN_CPP_TEST_MOCK_SETTINGS_FACTORY_HPP
+#ifndef DOGEN_CONFIG_TEST_MOCK_SETTINGS_FACTORY_HPP
+#define DOGEN_CONFIG_TEST_MOCK_SETTINGS_FACTORY_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -30,7 +30,8 @@
 #include "dogen/config/types/settings.hpp"
 
 namespace dogen {
-namespace cpp {
+namespace config {
+namespace test {
 
 class mock_settings_factory {
 public:
@@ -72,6 +73,6 @@ public:
         bool verbose = true);
 };
 
-} }
+} } }
 
 #endif
