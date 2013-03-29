@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_ENGINE_TYPES_GENERATION_FAILURE_HPP
-#define DOGEN_ENGINE_TYPES_GENERATION_FAILURE_HPP
+#ifndef DOGEN_ENGINE_TYPES_GENERATION_FAILURE_FWD_HPP
+#define DOGEN_ENGINE_TYPES_GENERATION_FAILURE_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -31,20 +31,7 @@
 namespace dogen {
 namespace engine {
 
-class generation_failure : public virtual std::exception, public virtual boost::exception {
-public:
-    generation_failure() = default;
-    ~generation_failure() noexcept = default;
-
-public:
-    generation_failure(const std::string& message) : message_(message) { }
-
-public:
-    const char* what() const noexcept { return(message_.c_str()); }
-
-private:
-    const std::string message_;
-};
+class generation_failure;
 
 } }
 

@@ -18,34 +18,14 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_ENGINE_TYPES_GENERATION_FAILURE_HPP
-#define DOGEN_ENGINE_TYPES_GENERATION_FAILURE_HPP
-
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
-
-#include <boost/exception/info.hpp>
-#include <string>
-
-namespace dogen {
-namespace engine {
-
-class generation_failure : public virtual std::exception, public virtual boost::exception {
-public:
-    generation_failure() = default;
-    ~generation_failure() noexcept = default;
-
-public:
-    generation_failure(const std::string& message) : message_(message) { }
-
-public:
-    const char* what() const noexcept { return(message_.c_str()); }
-
-private:
-    const std::string message_;
-};
-
-} }
-
-#endif
+#include "dogen/engine/types/backends/backend.hpp"
+#include "dogen/engine/types/backends/cpp_backend.hpp"
+#include "dogen/engine/types/backends/factory.hpp"
+#include "dogen/engine/types/director.hpp"
+#include "dogen/engine/types/generation_failure.hpp"
+#include "dogen/engine/types/generator.hpp"
+#include "dogen/engine/types/housekeeper.hpp"
+#include "dogen/engine/types/outputters/factory.hpp"
+#include "dogen/engine/types/outputters/file_outputter.hpp"
+#include "dogen/engine/types/outputters/outputter.hpp"
+#include "dogen/engine/types/outputters/stream_outputter.hpp"
