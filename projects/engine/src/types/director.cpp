@@ -22,15 +22,13 @@
 #include <boost/throw_exception.hpp>
 #include "dogen/sml/types/merger.hpp"
 #include "dogen/sml/types/system_types_injector.hpp"
+#include "dogen/sml/types/workflow.hpp"
 #include "dogen/dia_to_sml/dia_to_sml.hpp"
 #include "dogen/utility/exception/invalid_enum_value.hpp"
 #include "dogen/utility/serialization/xml_helper.hpp"
 #include "dogen/dia/types/hydrator.hpp"
 #include "dogen/dia/serialization/diagram_ser.hpp"
 #include "dogen/sml/serialization/model_ser.hpp"
-#include "dogen/sml/types/primitive_model_factory.hpp"
-#include "dogen/sml/types/std_model_factory.hpp"
-#include "dogen/sml/types/boost_model_factory.hpp"
 #include "dogen/sml/io/model_io.hpp"
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/engine/types/director.hpp"
@@ -152,48 +150,7 @@ sml::model director::to_sml(const dia::diagram& d, config::reference ref,
     return std::move(m);
 }
 
-bool director::has_generatable_types(const sml::model& m) const {
-    bool r(false);
-
-    auto lambda([](sml::generation_types gt) {
-            return
-                gt == sml::generation_types::full_generation ||
-                gt == sml::generation_types::partial_generation;
-        });
-
-    for (const auto pair : m.pods()) {
-        const auto p(pair.second);
-        if (lambda(p.generation_type())) {
-            r = true;
-            break;
-        }
-    }
-
-    for (const auto pair : m.enumerations()) {
-        const auto e(pair.second);
-        if (lambda(e.generation_type())) {
-            r = true;
-            break;
-        }
-    }
-
-    for (const auto pair : m.exceptions()) {
-        const auto e(pair.second);
-        if (lambda(e.generation_type())) {
-            r = true;
-            break;
-        }
-    }
-
-    return r;
-}
-
 boost::optional<sml::model> director::create_model() const {
-    sml::merger merger;
-    merger.add(sml::primitive_model_factory::create());
-    merger.add(sml::std_model_factory::create());
-    merger.add(sml::boost_model_factory::create());
-
     using sml::model;
     const auto lambda([&](config::reference ref, bool is_target) -> model {
             const dia::diagram d(hydrate_diagram(ref.path()));
@@ -201,14 +158,18 @@ boost::optional<sml::model> director::create_model() const {
         });
 
     const bool is_target(true);
+    std::list<model> references;
     for (const auto r : settings_.modeling().references())
-        merger.add(lambda(r, !is_target));
+        references.push_back(lambda(r, !is_target));
 
     config::reference tr;
     tr.path(settings_.modeling().target());
     tr.external_package_path(settings_.modeling().external_package_path());
-    merger.add_target(lambda(tr, is_target));
-    model m(merger.merge());
+    const auto target(lambda(tr, is_target));
+
+    sml::workflow workflow;
+    const auto pair(workflow.execute(references, target));
+    const auto& m(pair.second);
 
     BOOST_LOG_SEV(lg, debug) << "Merged model: " << m;
     save_model(m, merged);
@@ -218,11 +179,11 @@ boost::optional<sml::model> director::create_model() const {
                              << " exceptions: " << m.exceptions().size()
                              << " primitives: " << m.primitives().size();
 
-    if (has_generatable_types(m))
+    const auto has_generatable_types(pair.first);
+    if ((has_generatable_types))
         return boost::optional<model>(m);
 
     BOOST_LOG_SEV(lg, warn) << "No generatable types found.";
-
     return boost::optional<model>();
 }
 

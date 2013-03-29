@@ -101,12 +101,6 @@ private:
     sml::model to_sml(const dia::diagram& d, config::reference ref,
         const bool is_target) const;
 
-    /**
-     * @brief Returns true if there are any types that require code
-     * generation, false otherwise.
-     */
-    bool has_generatable_types(const sml::model& m) const;
-
 public:
     /**
      * @brief Creates the combined SML model given the configuration

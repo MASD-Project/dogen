@@ -40,7 +40,7 @@ public:
 
 public:
     system_types_injector();
-    explicit system_types_injector(const bool add_versioning);
+    explicit system_types_injector(const bool add_versioning_types);
 
 private:
     /**
@@ -62,7 +62,7 @@ public:
     void inject(model& m) const;
 
 private:
-    bool add_versioning_;
+    const bool add_versioning_types_;
 };
 
 } }
