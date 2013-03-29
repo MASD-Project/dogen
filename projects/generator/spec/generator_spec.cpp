@@ -35,7 +35,6 @@
 #include "dogen/dia/io/diagram_io.hpp"
 #include "dogen/generator/generation_failure.hpp"
 #include "dogen/generator/test/mock_settings_factory.hpp"
-#include "dogen/generator/modeling/dia_to_sml.hpp"
 #include "dogen/config/types/settings.hpp"
 #include "dogen/generator/generator.hpp"
 #include "dogen/sml/types/model.hpp"

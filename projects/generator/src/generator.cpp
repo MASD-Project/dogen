@@ -34,7 +34,6 @@
 #include "dogen/generator/housekeeper.hpp"
 #include "dogen/cpp/types/generation_failure.hpp"
 #include "dogen/generator/generation_failure.hpp"
-#include "dogen/generator/modeling/dia_to_sml.hpp"
 #include "dogen/generator/outputters/factory.hpp"
 #include "dogen/sml/serialization/model_ser.hpp"
 #include "dogen/generator/modeling/director.hpp"

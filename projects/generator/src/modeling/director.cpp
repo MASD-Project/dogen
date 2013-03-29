@@ -21,7 +21,7 @@
 #include <boost/filesystem.hpp>
 #include <boost/throw_exception.hpp>
 #include "dogen/sml/types/merger.hpp"
-#include "dogen/generator/modeling/dia_to_sml.hpp"
+#include "dogen/dia_to_sml/dia_to_sml.hpp"
 #include "dogen/utility/exception/invalid_enum_value.hpp"
 #include "dogen/utility/serialization/xml_helper.hpp"
 #include "dogen/dia/types/hydrator.hpp"
@@ -235,7 +235,7 @@ sml::model director::to_sml(const dia::diagram& d, config::reference ref,
     const std::string name(settings_.modeling().disable_model_package() ?
         empty : file_name);
 
-    using dogen::generator::modeling::dia_to_sml;
+    using dogen::dia_to_sml::dia_to_sml;
     dia_to_sml dia_to_sml(d, name, epp, is_target, verbose_);
 
     sml::model m(dia_to_sml.transform());

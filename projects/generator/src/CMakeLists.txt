@@ -28,6 +28,7 @@ target_link_libraries(generator
     dia
     cpp
     config
+    dia_to_sml
     utility
     ${LIBXML2_LIBRARIES}
     ${Boost_LIBRARIES})
