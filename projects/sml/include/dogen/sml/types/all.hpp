@@ -43,3 +43,5 @@
 #include "dogen/sml/types/qname.hpp"
 #include "dogen/sml/types/reference.hpp"
 #include "dogen/sml/types/std_model_factory.hpp"
+#include "dogen/sml/types/system_types_injector.hpp"
+#include "dogen/sml/types/workflow.hpp"

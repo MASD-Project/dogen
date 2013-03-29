@@ -96,19 +96,6 @@ private:
     void save_model(const sml::model& m, const std::string& prefix) const;
 
     /**
-     * @brief Creates a versioned or unversioned key system pod.
-     */
-    sml::pod create_key_system_pod(const sml::pod& p,
-        const bool is_versioned) const;
-
-    /**
-     * @brief Inject system defined types into the model.
-     *
-     * @param m SML model to operate on.
-     */
-    void inject_system_types(sml::model& m) const;
-
-    /**
      * @brief Converts a Dia diagram to its SML representation.
      */
     sml::model to_sml(const dia::diagram& d, config::reference ref,
