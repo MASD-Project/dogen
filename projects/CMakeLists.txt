@@ -149,7 +149,7 @@ include_directories(
     ${CMAKE_SOURCE_DIR}/projects/config/include
     ${CMAKE_SOURCE_DIR}/projects/cpp/include
     ${CMAKE_SOURCE_DIR}/projects/utility/include
-    ${CMAKE_SOURCE_DIR}/projects/generator/include
+    ${CMAKE_SOURCE_DIR}/projects/engine/include
     ${CMAKE_SOURCE_DIR}/projects/driver/include
     ${CMAKE_SOURCE_DIR}/projects/test_model_sanitizer/include
 
@@ -197,7 +197,7 @@ add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/config)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/cpp)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/cpp/spec)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/utility)
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/generator)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/engine)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/driver)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/test_model_sanitizer/spec)
 # add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/prototype/src)

@@ -31,14 +31,14 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/config/types/validator.hpp"
 #include "dogen/config/io/settings_io.hpp"
-#include "dogen/generator/housekeeper.hpp"
+#include "dogen/engine/housekeeper.hpp"
 #include "dogen/cpp/types/generation_failure.hpp"
-#include "dogen/generator/generation_failure.hpp"
-#include "dogen/generator/outputters/factory.hpp"
+#include "dogen/engine/generation_failure.hpp"
+#include "dogen/engine/outputters/factory.hpp"
 #include "dogen/sml/serialization/model_ser.hpp"
-#include "dogen/generator/modeling/director.hpp"
-#include "dogen/generator/backends/factory.hpp"
-#include "dogen/generator/generator.hpp"
+#include "dogen/engine/modeling/director.hpp"
+#include "dogen/engine/backends/factory.hpp"
+#include "dogen/engine/generator.hpp"
 
 using namespace dogen::utility::log;
 

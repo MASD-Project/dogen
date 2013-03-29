@@ -26,7 +26,7 @@
 #include "dogen/driver/program_options_parser.hpp"
 #include "dogen/driver/parser_validation_error.hpp"
 #include "dogen/config/types/settings.hpp"
-#include "dogen/generator/generator.hpp"
+#include "dogen/engine/generator.hpp"
 
 using namespace dogen::utility::log;
 

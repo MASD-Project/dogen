@@ -33,7 +33,7 @@
 #include "dogen/sml/types/model.hpp"
 #include "dogen/config/types/cpp_settings.hpp"
 #include "dogen/cpp/types/cpp_backend.hpp"
-#include "dogen/generator/backends/backend.hpp"
+#include "dogen/engine/backends/backend.hpp"
 
 namespace dogen {
 namespace generator {

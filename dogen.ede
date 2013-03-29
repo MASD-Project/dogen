@@ -10,7 +10,7 @@
    "/projects/dia/include"
    "/projects/sml/include"
    "/projects/utility/include"
-   "/projects/generator/include"
+   "/projects/engine/include"
    "/projects/driver/include"
    "/projects/all_primitives/include"
    "/projects/class_in_a_package/include"

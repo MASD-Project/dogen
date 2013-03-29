@@ -18,31 +18,47 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/generator/backends/cpp_backend.hpp"
-#include "dogen/generator/backends/factory.hpp"
-#include "dogen/utility/log/logger.hpp"
+#ifndef DOGEN_GENERATOR_BACKENDS_FACTORY_HPP
+#define DOGEN_GENERATOR_BACKENDS_FACTORY_HPP
 
-static dogen::utility::log::logger
-lg(dogen::utility::log::logger_factory("backends::factory"));
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include "dogen/config/types/settings.hpp"
+#include "dogen/engine/backends/backend.hpp"
+#include "dogen/sml/types/model.hpp"
 
 namespace dogen {
 namespace generator {
 namespace backends {
 
-void factory::log_cpp_backend_disabled() const {
-    using namespace dogen::utility::log;
-    BOOST_LOG_SEV(lg, info) << "C++ backend is disabled, skipping it.";
-}
+class factory {
+public:
+    factory() = delete;
+    factory(const factory&) = default;
+    ~factory() = default;
+    factory(factory&&) = default;
+    factory& operator=(const factory&) = default;
 
-factory::result_type factory::create() const {
-    result_type r;
+public:
+    typedef std::vector<backend::ptr> result_type;
 
-    if (settings_.cpp().disable_backend())
-        log_cpp_backend_disabled();
-    else
-        r.push_back(cpp_backend::create(model_, settings_.cpp())) ;
+public:
+    factory(sml::model model, config::settings settings)
+        : settings_(settings), model_(model) { }
 
-    return r;
-}
+private:
+    void log_cpp_backend_disabled() const;
+
+public:
+    result_type create() const;
+
+private:
+    const config::settings settings_;
+    const sml::model model_;
+};
 
 } } }
+
+#endif

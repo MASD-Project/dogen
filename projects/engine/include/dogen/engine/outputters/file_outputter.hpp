@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_GENERATOR_OUTPUTTERS_STREAM_OUTPUTTER_HPP
-#define DOGEN_GENERATOR_OUTPUTTERS_STREAM_OUTPUTTER_HPP
+#ifndef DOGEN_GENERATOR_OUTPUTTERS_FILE_OUTPUTTER_HPP
+#define DOGEN_GENERATOR_OUTPUTTERS_FILE_OUTPUTTER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -27,24 +27,45 @@
 
 #include <map>
 #include <string>
-#include <ostream>
 #include <boost/filesystem/path.hpp>
-#include "dogen/generator/outputters/outputter.hpp"
+#include "dogen/engine/outputters/outputter.hpp"
 
 namespace dogen {
 namespace generator {
 namespace outputters {
 
-class stream_outputter : public outputter {
+class file_outputter : public outputter {
 public:
-    stream_outputter() = default;
-    stream_outputter(const stream_outputter&) = default;
-    stream_outputter(stream_outputter&&) = default;
-    stream_outputter& operator=(const stream_outputter&) = default;
+    file_outputter() = default;
+    file_outputter(const file_outputter&) = default;
+    file_outputter(file_outputter&&) = default;
+    file_outputter& operator=(const file_outputter&) = default;
 
 public:
-    stream_outputter(std::ostream& stream);
-    virtual ~stream_outputter() noexcept {}
+    explicit file_outputter(bool force_write);
+    virtual ~file_outputter() noexcept {}
+
+private:
+    /**
+     * @brief Log output to standard output.
+     */
+    /**@{*/
+    void log_not_writing_file(boost::filesystem::path path) const;
+    void log_writing_file(boost::filesystem::path path) const;
+    void log_wrote_file(boost::filesystem::path path) const;
+    void log_created_directories(bool created,
+        boost::filesystem::path directory) const;
+    void log_no_content_changes() const;
+    void log_content_changes() const;
+    /**@}*/
+
+private:
+    bool content_changed(outputter::value_entry_type value) const;
+
+    /**
+     * @brief Outputs the pair passed in to a file.
+     */
+    void to_file(outputter::value_entry_type value) const;
 
 public:
     /**
@@ -52,10 +73,13 @@ public:
      */
     static std::string outputter_name();
 
+    /**
+     * @brief Outputs all of the generated code to files.
+     */
     void output(outputter::value_type value) const override;
 
 private:
-    std::ostream& stream_;
+    const bool force_write_;
 };
 
 } } }

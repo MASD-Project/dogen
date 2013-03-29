@@ -18,33 +18,31 @@
  * MA 02110-1301, USA.
  *
  */
-#include <iostream>
-#include "dogen/generator/outputters/stream_outputter.hpp"
+#include "dogen/engine/backends/cpp_backend.hpp"
+#include "dogen/engine/backends/factory.hpp"
+#include "dogen/utility/log/logger.hpp"
 
-namespace {
-
-const std::string outputter_name("Stream outputter");
-const std::string file_name("Filename: ");
-const std::string contents("Contents: ");
-
-}
+static dogen::utility::log::logger
+lg(dogen::utility::log::logger_factory("backends::factory"));
 
 namespace dogen {
 namespace generator {
-namespace outputters {
+namespace backends {
 
-stream_outputter::stream_outputter(std::ostream& stream) : stream_(stream) { }
-
-std::string stream_outputter::outputter_name() {
-    return ::outputter_name;
+void factory::log_cpp_backend_disabled() const {
+    using namespace dogen::utility::log;
+    BOOST_LOG_SEV(lg, info) << "C++ backend is disabled, skipping it.";
 }
 
-void stream_outputter::
-output(outputter::value_type value) const {
-    for (auto pair : value) {
-        stream_ << file_name << pair.first.generic_string() << std::endl
-                << contents << std::endl << pair.second << std::endl;
-    }
+factory::result_type factory::create() const {
+    result_type r;
+
+    if (settings_.cpp().disable_backend())
+        log_cpp_backend_disabled();
+    else
+        r.push_back(cpp_backend::create(model_, settings_.cpp())) ;
+
+    return r;
 }
 
 } } }

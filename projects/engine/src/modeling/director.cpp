@@ -32,7 +32,7 @@
 #include "dogen/sml/types/boost_model_factory.hpp"
 #include "dogen/sml/io/model_io.hpp"
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/generator/modeling/director.hpp"
+#include "dogen/engine/modeling/director.hpp"
 
 using namespace dogen::utility::log;
 

@@ -18,9 +18,9 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/generator/outputters/stream_outputter.hpp"
-#include "dogen/generator/outputters/file_outputter.hpp"
-#include "dogen/generator/outputters/factory.hpp"
+#include "dogen/engine/outputters/stream_outputter.hpp"
+#include "dogen/engine/outputters/file_outputter.hpp"
+#include "dogen/engine/outputters/factory.hpp"
 #include "dogen/utility/log/logger.hpp"
 
 namespace {

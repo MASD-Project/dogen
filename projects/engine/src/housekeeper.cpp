@@ -29,7 +29,7 @@
 #include "dogen/utility/io/set_io.hpp"
 #include "dogen/utility/io/vector_io.hpp"
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/generator/housekeeper.hpp"
+#include "dogen/engine/housekeeper.hpp"
 
 namespace {
 

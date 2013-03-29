@@ -20,7 +20,7 @@
  */
 #include <boost/throw_exception.hpp>
 #include "dogen/cpp/types/cpp_backend.hpp"
-#include "dogen/generator/backends/cpp_backend.hpp"
+#include "dogen/engine/backends/cpp_backend.hpp"
 
 namespace dogen {
 namespace generator {
