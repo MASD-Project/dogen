@@ -36,7 +36,7 @@ add_custom_target(codegen_${target}
     COMMENT "Generating SML model" VERBATIM
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
     COMMAND ${dogen_binary}
-    --target ${CMAKE_SOURCE_DIR}/diagrams/${target}/${target}.dia
+    --target ${CMAKE_SOURCE_DIR}/diagrams/${target}.dia
     --cpp-project-dir ${CMAKE_SOURCE_DIR}/projects/
     --cpp-enable-facet domain
     --cpp-enable-facet io
@@ -54,7 +54,7 @@ add_custom_target(codegen_${target}
     COMMENT "Generating Dia model" VERBATIM
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
     COMMAND ${dogen_binary}
-    --target ${CMAKE_SOURCE_DIR}/diagrams/${target}/${target}.dia
+    --target ${CMAKE_SOURCE_DIR}/diagrams/${target}.dia
     --cpp-project-dir ${CMAKE_SOURCE_DIR}/projects/
     --cpp-enable-facet domain
     --cpp-enable-facet io
@@ -72,7 +72,7 @@ add_custom_target(codegen_${target}
     COMMENT "Generating Config model" VERBATIM
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
     COMMAND ${dogen_binary}
-    --target ${CMAKE_SOURCE_DIR}/diagrams/${target}/${target}.dia
+    --target ${CMAKE_SOURCE_DIR}/diagrams/${target}.dia
     --cpp-project-dir ${CMAKE_SOURCE_DIR}/projects/
     --cpp-enable-facet domain
     --cpp-enable-facet io
@@ -90,9 +90,9 @@ add_custom_target(codegen_${target}
     COMMENT "Generating C++ model" VERBATIM
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
     COMMAND ${dogen_binary}
-    --target ${CMAKE_SOURCE_DIR}/diagrams/${target}/${target}.dia
-    --reference ${CMAKE_SOURCE_DIR}/diagrams/config/config.dia,dogen
-    --reference ${CMAKE_SOURCE_DIR}/diagrams/sml/sml.dia,dogen
+    --target ${CMAKE_SOURCE_DIR}/diagrams/${target}.dia
+    --reference ${CMAKE_SOURCE_DIR}/diagrams/config.dia,dogen
+    --reference ${CMAKE_SOURCE_DIR}/diagrams/sml.dia,dogen
     --cpp-project-dir ${CMAKE_SOURCE_DIR}/projects/
     --cpp-enable-facet domain
     --cpp-enable-facet io
@@ -110,7 +110,7 @@ add_custom_target(codegen_${target}
     COMMENT "Generating database model" VERBATIM
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
     COMMAND ${dogen_binary}
-    --target ${CMAKE_SOURCE_DIR}/diagrams/${target}/${target}.dia
+    --target ${CMAKE_SOURCE_DIR}/diagrams/${target}.dia
     --cpp-project-dir ${CMAKE_SOURCE_DIR}/projects/
     --cpp-enable-facet domain
     --cpp-enable-facet io
