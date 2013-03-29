@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_GENERATOR_HOUSEKEEPER_HPP
-#define DOGEN_GENERATOR_HOUSEKEEPER_HPP
+#ifndef DOGEN_ENGINE_TYPES_HOUSEKEEPER_HPP
+#define DOGEN_ENGINE_TYPES_HOUSEKEEPER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -31,7 +31,7 @@
 #include <boost/filesystem/path.hpp>
 
 namespace dogen {
-namespace generator {
+namespace engine {
 
 class housekeeper {
 public:

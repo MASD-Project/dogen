@@ -18,50 +18,30 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_GENERATOR_BACKENDS_BACKEND_HPP
-#define DOGEN_GENERATOR_BACKENDS_BACKEND_HPP
+#ifndef DOGEN_ENGINE_TYPES_GENERATION_FAILURE_HPP
+#define DOGEN_ENGINE_TYPES_GENERATION_FAILURE_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <map>
-#include <string>
-#include <ostream>
-#include <memory>
-#include <boost/filesystem/path.hpp>
+#include "dogen/utility/exception/utility_exception.hpp"
 
 namespace dogen {
-namespace generator {
-namespace backends {
+namespace engine {
 
-class backend {
+/**
+ * @brief A fatal error has occurred during code generation.
+ */
+class generation_failure : public utility::exception::exception {
 public:
-    backend(const backend&) = default;
-    virtual ~backend() noexcept = default;
-    backend(backend&&) = default;
-    backend& operator=(const backend&) = default;
+    generation_failure(std::string message)
+        : utility::exception::exception(message) { }
+    generation_failure() { }
 
-protected:
-    backend() = default;
-
-public:
-    typedef std::shared_ptr<backend> ptr;
-    typedef std::map<boost::filesystem::path, std::string> value_type;
-    typedef std::pair<boost::filesystem::path, std::string> value_entry_type;
-
-public:
-    /**
-     * @brief Generate code for this backend.
-     */
-    virtual value_type generate() = 0;
-
-    /**
-     * @brief Get all directories managed by this backend.
-     */
-    virtual std::vector<boost::filesystem::path> managed_directories() const = 0;
+    virtual ~generation_failure() throw() {}
 };
 
-} } }
+} }
 
 #endif

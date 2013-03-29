@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_GENERATOR_OUTPUTTERS_FILE_OUTPUTTER_HPP
-#define DOGEN_GENERATOR_OUTPUTTERS_FILE_OUTPUTTER_HPP
+#ifndef DOGEN_ENGINE_TYPES_OUTPUTTERS_FILE_OUTPUTTER_HPP
+#define DOGEN_ENGINE_TYPES_OUTPUTTERS_FILE_OUTPUTTER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -28,10 +28,10 @@
 #include <map>
 #include <string>
 #include <boost/filesystem/path.hpp>
-#include "dogen/engine/outputters/outputter.hpp"
+#include "dogen/engine/types/outputters/outputter.hpp"
 
 namespace dogen {
-namespace generator {
+namespace engine {
 namespace outputters {
 
 class file_outputter : public outputter {

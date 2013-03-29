@@ -32,7 +32,7 @@
 #include "dogen/sml/types/boost_model_factory.hpp"
 #include "dogen/sml/io/model_io.hpp"
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/engine/modeling/director.hpp"
+#include "dogen/engine/types/director.hpp"
 
 using namespace dogen::utility::log;
 
@@ -57,8 +57,7 @@ const std::string invalid_archive_type("Invalid or unexpected archive type");
 }
 
 namespace dogen {
-namespace generator {
-namespace modeling {
+namespace engine {
 
 director::director(const config::settings& settings)
     : settings_(settings), verbose_(settings_.troubleshooting().verbose()) { }
@@ -319,4 +318,4 @@ boost::optional<sml::model> director::create_model() const {
     return boost::optional<model>();
 }
 
-} } }
+} }

@@ -29,7 +29,7 @@
 #include "dogen/utility/io/set_io.hpp"
 #include "dogen/utility/io/vector_io.hpp"
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/engine/housekeeper.hpp"
+#include "dogen/engine/types/housekeeper.hpp"
 
 namespace {
 
@@ -61,7 +61,7 @@ inline void log_extra_files(std::list<path> delta) {
 }
 
 namespace dogen {
-namespace generator {
+namespace engine {
 
 housekeeper::housekeeper(
     const std::vector<std::string>& ignore_patterns,

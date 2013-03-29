@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_GENERATOR_GENERATOR_HPP
-#define DOGEN_GENERATOR_GENERATOR_HPP
+#ifndef DOGEN_ENGINE_TYPES_GENERATOR_HPP
+#define DOGEN_ENGINE_TYPES_GENERATOR_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -33,12 +33,12 @@
 #include <boost/filesystem/path.hpp>
 #include "dogen/sml/types/model.hpp"
 #include "dogen/config/types/settings.hpp"
-#include "dogen/engine/backends/backend.hpp"
-#include "dogen/engine/outputters/outputter.hpp"
+#include "dogen/engine/types/backends/backend.hpp"
+#include "dogen/engine/types/outputters/outputter.hpp"
 #include "dogen/utility/serialization/archive_types.hpp"
 
 namespace dogen {
-namespace generator {
+namespace engine {
 
 /**
  * @brief Core of Dogen. Implements the code generation workflow.

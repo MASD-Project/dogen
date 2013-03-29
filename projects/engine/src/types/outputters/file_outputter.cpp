@@ -26,7 +26,7 @@
 #include "dogen/utility/filesystem/file.hpp"
 #include "dogen/utility/exception/utility_exception.hpp"
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/engine/outputters/file_outputter.hpp"
+#include "dogen/engine/types/outputters/file_outputter.hpp"
 
 using namespace dogen::utility::log;
 
@@ -58,7 +58,7 @@ std::string create_hacked_contents(const std::string file_name) {
 }
 
 namespace dogen {
-namespace generator {
+namespace engine {
 namespace outputters {
 
 file_outputter::file_outputter(bool force_write)

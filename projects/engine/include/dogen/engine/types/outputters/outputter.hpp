@@ -18,29 +18,45 @@
  * MA 02110-1301, USA.
  *
  */
-#include <boost/throw_exception.hpp>
-#include "dogen/cpp/types/cpp_backend.hpp"
-#include "dogen/engine/backends/cpp_backend.hpp"
+#ifndef DOGEN_ENGINE_TYPES_OUTPUTTERS_OUTPUTTER_HPP
+#define DOGEN_ENGINE_TYPES_OUTPUTTERS_OUTPUTTER_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include <map>
+#include <string>
+#include <ostream>
+#include <memory>
+#include <boost/filesystem/path.hpp>
 
 namespace dogen {
-namespace generator {
-namespace backends {
+namespace engine {
+namespace outputters {
 
-cpp_backend::
-cpp_backend(const sml::model& model, const config::cpp_settings& settings) :
-    impl_(model, settings) { }
+class outputter {
+public:
+    outputter(const outputter&) = default;
+    outputter(outputter&&) = default;
+    outputter& operator=(const outputter&) = default;
+    virtual ~outputter() = default;
 
-backend::ptr cpp_backend::
-create(const sml::model& model, const config::cpp_settings& settings) {
-    return backend::ptr(new cpp_backend(model, settings));
-}
+protected:
+    outputter() = default;
 
-backend::value_type cpp_backend::generate() {
-    return impl_.generate();
-}
+public:
+    typedef std::shared_ptr<outputter> ptr;
+    typedef std::map<boost::filesystem::path, std::string> value_type;
+    typedef std::pair<boost::filesystem::path, std::string> value_entry_type;
 
-std::vector<boost::filesystem::path> cpp_backend::managed_directories() const {
-    return impl_.managed_directories();
-}
+public:
+    /**
+     * @brief Write input to output medium.
+     */
+    virtual void output(value_type value) const = 0;
+};
 
 } } }
+
+#endif

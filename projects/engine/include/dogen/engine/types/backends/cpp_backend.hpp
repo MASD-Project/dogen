@@ -18,45 +18,47 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_GENERATOR_BACKENDS_FACTORY_HPP
-#define DOGEN_GENERATOR_BACKENDS_FACTORY_HPP
+#ifndef DOGEN_ENGINE_TYPES_BACKENDS_CPP_BACKEND_HPP
+#define DOGEN_ENGINE_TYPES_BACKENDS_CPP_BACKEND_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/config/types/settings.hpp"
-#include "dogen/engine/backends/backend.hpp"
+#include <map>
+#include <utility>
+#include <string>
+#include <sstream>
+#include <boost/filesystem/path.hpp>
 #include "dogen/sml/types/model.hpp"
+#include "dogen/config/types/cpp_settings.hpp"
+#include "dogen/cpp/types/cpp_backend.hpp"
+#include "dogen/engine/types/backends/backend.hpp"
 
 namespace dogen {
-namespace generator {
+namespace engine {
 namespace backends {
 
-class factory {
+class cpp_backend : public backend {
 public:
-    factory() = delete;
-    factory(const factory&) = default;
-    ~factory() = default;
-    factory(factory&&) = default;
-    factory& operator=(const factory&) = default;
+    cpp_backend() = delete;
+    cpp_backend(const cpp_backend&) = default;
+    cpp_backend(cpp_backend&&) = default;
+    cpp_backend& operator=(const cpp_backend&) = default;
 
 public:
-    typedef std::vector<backend::ptr> result_type;
+    cpp_backend(const sml::model& model, const config::cpp_settings& settings);
+    virtual ~cpp_backend() noexcept {}
 
 public:
-    factory(sml::model model, config::settings settings)
-        : settings_(settings), model_(model) { }
+    static backend::ptr
+    create(const sml::model& model, const config::cpp_settings& settings);
 
+public:
+    backend::value_type generate() override;
+    std::vector<boost::filesystem::path> managed_directories() const override;
 private:
-    void log_cpp_backend_disabled() const;
-
-public:
-    result_type create() const;
-
-private:
-    const config::settings settings_;
-    const sml::model model_;
+    cpp::cpp_backend impl_;
 };
 
 } } }

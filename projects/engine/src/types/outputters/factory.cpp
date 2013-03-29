@@ -18,9 +18,9 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/engine/outputters/stream_outputter.hpp"
-#include "dogen/engine/outputters/file_outputter.hpp"
-#include "dogen/engine/outputters/factory.hpp"
+#include "dogen/engine/types/outputters/stream_outputter.hpp"
+#include "dogen/engine/types/outputters/file_outputter.hpp"
+#include "dogen/engine/types/outputters/factory.hpp"
 #include "dogen/utility/log/logger.hpp"
 
 namespace {
@@ -30,7 +30,7 @@ dogen::utility::log::logger lg(
 }
 
 namespace dogen {
-namespace generator {
+namespace engine {
 namespace outputters {
 
 void factory::log_output_disabled(std::string name) const {

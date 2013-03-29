@@ -18,47 +18,47 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_GENERATOR_BACKENDS_CPP_BACKEND_HPP
-#define DOGEN_GENERATOR_BACKENDS_CPP_BACKEND_HPP
+#ifndef DOGEN_ENGINE_TYPES_OUTPUTTERS_OUTPUTTER_FACTORY_HPP
+#define DOGEN_ENGINE_TYPES_OUTPUTTERS_OUTPUTTER_FACTORY_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <map>
-#include <utility>
-#include <string>
-#include <sstream>
-#include <boost/filesystem/path.hpp>
-#include "dogen/sml/types/model.hpp"
-#include "dogen/config/types/cpp_settings.hpp"
-#include "dogen/cpp/types/cpp_backend.hpp"
-#include "dogen/engine/backends/backend.hpp"
+#include <vector>
+#include <functional>
+#include "dogen/config/types/output_settings.hpp"
+#include "dogen/engine/types/outputters/outputter.hpp"
 
 namespace dogen {
-namespace generator {
-namespace backends {
+namespace engine {
+namespace outputters {
 
-class cpp_backend : public backend {
+class factory {
 public:
-    cpp_backend() = delete;
-    cpp_backend(const cpp_backend&) = default;
-    cpp_backend(cpp_backend&&) = default;
-    cpp_backend& operator=(const cpp_backend&) = default;
-
-public:
-    cpp_backend(const sml::model& model, const config::cpp_settings& settings);
-    virtual ~cpp_backend() noexcept {}
+    factory() = delete;
+    factory(const factory&) = default;
+    ~factory() = default;
+    factory(factory&&) = default;
+    factory& operator=(const factory&) = default;
 
 public:
-    static backend::ptr
-    create(const sml::model& model, const config::cpp_settings& settings);
+    typedef std::function<std::ostream& ()> function_type;
+    typedef std::vector<outputter::ptr> production_type;
 
-public:
-    backend::value_type generate() override;
-    std::vector<boost::filesystem::path> managed_directories() const override;
 private:
-    cpp::cpp_backend impl_;
+    void log_output_disabled(std::string name) const;
+
+public:
+    factory(config::output_settings settings, function_type stream_fn)
+        : settings_(settings), stream_fn_(stream_fn) { }
+
+public:
+    production_type create() const;
+
+private:
+    const config::output_settings settings_;
+    const function_type stream_fn_;
 };
 
 } } }

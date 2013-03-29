@@ -27,7 +27,7 @@ set(binary_name "dogen_driver")
 set_target_properties(driver PROPERTIES OUTPUT_NAME ${binary_name})
 
 target_link_libraries(driver
-    generator
+    engine
     dia
     sml
     config

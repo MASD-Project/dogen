@@ -17,13 +17,13 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
 # MA 02110-1301, USA.
 #
-set(generator_files "")
-file(GLOB_RECURSE generator_files RELATIVE
+set(engine_files "")
+file(GLOB_RECURSE engine_files RELATIVE
     "${CMAKE_CURRENT_SOURCE_DIR}/"
     "${CMAKE_CURRENT_SOURCE_DIR}/*.cpp")
 
-add_library(generator STATIC ${generator_files})
-target_link_libraries(generator
+add_library(engine STATIC ${engine_files})
+target_link_libraries(engine
     sml
     dia
     cpp
@@ -33,9 +33,9 @@ target_link_libraries(generator
     ${LIBXML2_LIBRARIES}
     ${Boost_LIBRARIES})
 
-set_target_properties(generator
-    PROPERTIES OUTPUT_NAME dogen_generator)
-set_target_properties(generator
+set_target_properties(engine
+    PROPERTIES OUTPUT_NAME dogen_engine)
+set_target_properties(engine
     PROPERTIES VERSION ${DOGEN_VERSION} SOVERSION ${DOGEN_MAJOR_VERSION})
 
-install(TARGETS generator ARCHIVE DESTINATION lib COMPONENT libraries)
+install(TARGETS engine ARCHIVE DESTINATION lib COMPONENT libraries)

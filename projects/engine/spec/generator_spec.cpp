@@ -33,10 +33,10 @@
 #include "dogen/utility/test_data/debug_dogen.hpp"
 #include "dogen/utility/test/logging.hpp"
 #include "dogen/dia/io/diagram_io.hpp"
-#include "dogen/engine/generation_failure.hpp"
+#include "dogen/engine/types/generation_failure.hpp"
 #include "dogen/config/test/mock_settings_factory.hpp"
 #include "dogen/config/types/settings.hpp"
-#include "dogen/engine/generator.hpp"
+#include "dogen/engine/types/generator.hpp"
 #include "dogen/sml/types/model.hpp"
 #include "dogen/sml/io/model_io.hpp"
 #include "dogen/dia/serialization/diagram_ser.hpp"
@@ -108,7 +108,7 @@ bool check_code_generation(boost::filesystem::path target,
     using dogen::utility::test_data::codegen_tds;
     codegen_tds tds(target);
 
-    dogen::generator::generator cg(sff(tds));
+    dogen::engine::generator cg(sff(tds));
     cg.generate();
 
     using dogen::utility::test::asserter;
@@ -122,7 +122,7 @@ bool check_code_generation(boost::filesystem::path target) {
 }
 
 using dogen::utility::test::contains_checker;
-using dogen::generator::generation_failure;
+using dogen::engine::generation_failure;
 
 BOOST_AUTO_TEST_SUITE(generator)
 
@@ -139,7 +139,7 @@ BOOST_AUTO_TEST_CASE(debug_options_generate_expected_debug_info) {
     ts.stop_after_formatting(true);
     s.troubleshooting(ts);
 
-    dogen::generator::generator cg(s);
+    dogen::engine::generator cg(s);
     cg.generate();
 
     using dogen::utility::test::asserter;
@@ -160,7 +160,7 @@ BOOST_AUTO_TEST_CASE(stdout_option_generates_expected_output) {
     std::unique_ptr<std::ostringstream> stream(new std::ostringstream());
     auto lambda([&]() -> std::ostream& {return *stream;});
 
-    dogen::generator::generator cg(s, lambda);
+    dogen::engine::generator cg(s, lambda);
     cg.generate();
 
     const auto expected(dia_sml::expected_class_in_a_package_stdout_txt());
@@ -190,7 +190,7 @@ BOOST_AUTO_TEST_CASE(disabling_cpp_backend_results_in_no_cpp_output) {
     cs.disable_backend(true);
     s.cpp(cs);
 
-    dogen::generator::generator cg(s);
+    dogen::engine::generator cg(s);
     cg.generate();
 
     using dogen::utility::test::asserter;
@@ -278,7 +278,7 @@ BOOST_AUTO_TEST_CASE(not_enabling_facet_domain_throws) {
     cs.enabled_facets(f);
     s.cpp(cs);
 
-    dogen::generator::generator cg(s);
+    dogen::engine::generator cg(s);
     contains_checker<generation_failure> c(domain_facet_must_be_enabled);
     BOOST_CHECK_EXCEPTION(cg.generate(), generation_failure, c);
 }
@@ -382,7 +382,7 @@ BOOST_AUTO_TEST_CASE(enabling_facet_io_and_using_integrated_io_throws) {
     cs.use_integrated_io(true);
     s.cpp(cs);
 
-    dogen::generator::generator cg(s);
+    dogen::engine::generator cg(s);
     contains_checker<generation_failure> c(io_facet_and_integrated_io_error);
     BOOST_CHECK_EXCEPTION(cg.generate(), generation_failure, c);
 }
@@ -406,7 +406,7 @@ BOOST_AUTO_TEST_CASE(class_without_name_model_throws) {
     codegen_tds tds(t);
 
     auto s(default_mock_settings(tds));
-    dogen::generator::generator cg(s);
+    dogen::engine::generator cg(s);
     contains_checker<std::exception> c(dia_invalid_name);
     BOOST_CHECK_EXCEPTION(cg.generate(), std::exception, c);
 }
@@ -527,7 +527,7 @@ BOOST_AUTO_TEST_CASE(package_without_name_model_throws) {
     codegen_tds tds(t);
 
     auto s(default_mock_settings(tds));
-    dogen::generator::generator cg(s);
+    dogen::engine::generator cg(s);
     contains_checker<std::exception> c(dia_invalid_name);
     BOOST_CHECK_EXCEPTION(cg.generate(), std::exception, c);
 }
@@ -564,14 +564,14 @@ BOOST_AUTO_TEST_CASE(housekeeping_is_not_triggered_when_we_are_not_generating_fi
     ts.stop_after_merging(true);
     s.troubleshooting(ts);
 
-    dogen::generator::generator cg1(s);
+    dogen::engine::generator cg1(s);
     BOOST_CHECK(!cg1.housekeeping_required());
 
     s = empty_tds_mock_settings();
     ts = s.troubleshooting();
     ts.stop_after_formatting(true);
     s.troubleshooting(ts);
-    dogen::generator::generator cg2(s);
+    dogen::engine::generator cg2(s);
     BOOST_CHECK(!cg2.housekeeping_required());
 
     s = empty_tds_mock_settings();
@@ -581,14 +581,14 @@ BOOST_AUTO_TEST_CASE(housekeeping_is_not_triggered_when_we_are_not_generating_fi
     s.output(os);
     std::unique_ptr<std::ostringstream> stream(new std::ostringstream());
     auto lambda([&]() -> std::ostream& {return *stream;});
-    dogen::generator::generator cg3(s, lambda);
+    dogen::engine::generator cg3(s, lambda);
     BOOST_CHECK(!cg3.housekeeping_required());
 
     s = empty_tds_mock_settings();
     os = s.output();
     os.delete_extra_files(false);
     s.output(os);
-    dogen::generator::generator cg4(s);
+    dogen::engine::generator cg4(s);
     BOOST_CHECK(!cg4.housekeeping_required());
 }
 
@@ -598,7 +598,7 @@ BOOST_AUTO_TEST_CASE(housekeeping_is_not_triggered_when_delete_extra_files_is_re
     auto os = s.output();
     os.delete_extra_files(true);
     s.output(os);
-    dogen::generator::generator cg(s);
+    dogen::engine::generator cg(s);
     BOOST_CHECK(cg.housekeeping_required());
 }
 

@@ -17,17 +17,17 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
 # MA 02110-1301, USA.
 #
-set(generator_spec_files "")
-file(GLOB_RECURSE generator_spec_files RELATIVE
+set(engine_spec_files "")
+file(GLOB_RECURSE engine_spec_files RELATIVE
     "${CMAKE_CURRENT_SOURCE_DIR}/"
     "${CMAKE_CURRENT_SOURCE_DIR}/*.cpp")
 
-add_executable(generator_spec ${generator_spec_files})
-set(binary_name "dogen_generator_spec")
-set_target_properties(generator_spec PROPERTIES OUTPUT_NAME ${binary_name})
+add_executable(engine_spec ${engine_spec_files})
+set(binary_name "dogen_engine_spec")
+set_target_properties(engine_spec PROPERTIES OUTPUT_NAME ${binary_name})
 
-target_link_libraries(generator_spec
-    generator
+target_link_libraries(engine_spec
+    engine
     utility
     cpp
     dia
@@ -38,13 +38,13 @@ target_link_libraries(generator_spec
     ${PQXX_LIBRARIES}
     ${CMAKE_THREAD_LIBS_INIT})
 
-set(generator_spec_cmd ${stage_bin_dir}/${binary_name} ${boost_test_parameters})
+set(engine_spec_cmd ${stage_bin_dir}/${binary_name} ${boost_test_parameters})
 
-add_custom_target(run_generator_spec
-    COMMAND ${generator_spec_cmd}
+add_custom_target(run_engine_spec
+    COMMAND ${engine_spec_cmd}
     WORKING_DIRECTORY ${stage_bin_dir}
-    DEPENDS generator_spec)
-add_dependencies(run_all_specs run_generator_spec)
+    DEPENDS engine_spec)
+add_dependencies(run_all_specs run_engine_spec)
 
-add_boost_tests(generator ${generator_spec_files})
-install(TARGETS generator_spec RUNTIME DESTINATION bin COMPONENT tests)
+add_boost_tests(engine ${engine_spec_files})
+install(TARGETS engine_spec RUNTIME DESTINATION bin COMPONENT tests)

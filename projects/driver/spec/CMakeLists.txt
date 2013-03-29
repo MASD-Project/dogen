@@ -46,10 +46,7 @@ set(binary_name "dogen_driver_spec")
 set_target_properties(driver_spec PROPERTIES OUTPUT_NAME ${binary_name})
 
 target_link_libraries(driver_spec
-    generator
     utility
-    dia
-    sml
     config
     ${LIBXML2_LIBRARIES}
     ${Boost_LIBRARIES}

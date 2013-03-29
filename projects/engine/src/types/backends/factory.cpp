@@ -18,45 +18,31 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_GENERATOR_OUTPUTTERS_OUTPUTTER_HPP
-#define DOGEN_GENERATOR_OUTPUTTERS_OUTPUTTER_HPP
+#include "dogen/engine/types/backends/cpp_backend.hpp"
+#include "dogen/engine/types/backends/factory.hpp"
+#include "dogen/utility/log/logger.hpp"
 
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
-
-#include <map>
-#include <string>
-#include <ostream>
-#include <memory>
-#include <boost/filesystem/path.hpp>
+static dogen::utility::log::logger
+lg(dogen::utility::log::logger_factory("backends::factory"));
 
 namespace dogen {
-namespace generator {
-namespace outputters {
+namespace engine {
+namespace backends {
 
-class outputter {
-public:
-    outputter(const outputter&) = default;
-    outputter(outputter&&) = default;
-    outputter& operator=(const outputter&) = default;
-    virtual ~outputter() = default;
+void factory::log_cpp_backend_disabled() const {
+    using namespace dogen::utility::log;
+    BOOST_LOG_SEV(lg, info) << "C++ backend is disabled, skipping it.";
+}
 
-protected:
-    outputter() = default;
+factory::result_type factory::create() const {
+    result_type r;
 
-public:
-    typedef std::shared_ptr<outputter> ptr;
-    typedef std::map<boost::filesystem::path, std::string> value_type;
-    typedef std::pair<boost::filesystem::path, std::string> value_entry_type;
+    if (settings_.cpp().disable_backend())
+        log_cpp_backend_disabled();
+    else
+        r.push_back(cpp_backend::create(model_, settings_.cpp())) ;
 
-public:
-    /**
-     * @brief Write input to output medium.
-     */
-    virtual void output(value_type value) const = 0;
-};
+    return r;
+}
 
 } } }
-
-#endif

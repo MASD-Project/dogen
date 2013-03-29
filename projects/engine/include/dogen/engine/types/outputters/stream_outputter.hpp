@@ -18,47 +18,44 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_GENERATOR_OUTPUTTERS_OUTPUTTER_FACTORY_HPP
-#define DOGEN_GENERATOR_OUTPUTTERS_OUTPUTTER_FACTORY_HPP
+#ifndef DOGEN_ENGINE_TYPES_OUTPUTTERS_STREAM_OUTPUTTER_HPP
+#define DOGEN_ENGINE_TYPES_OUTPUTTERS_STREAM_OUTPUTTER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <vector>
-#include <functional>
-#include "dogen/config/types/output_settings.hpp"
-#include "dogen/engine/outputters/outputter.hpp"
+#include <map>
+#include <string>
+#include <ostream>
+#include <boost/filesystem/path.hpp>
+#include "dogen/engine/types/outputters/outputter.hpp"
 
 namespace dogen {
-namespace generator {
+namespace engine {
 namespace outputters {
 
-class factory {
+class stream_outputter : public outputter {
 public:
-    factory() = delete;
-    factory(const factory&) = default;
-    ~factory() = default;
-    factory(factory&&) = default;
-    factory& operator=(const factory&) = default;
+    stream_outputter() = default;
+    stream_outputter(const stream_outputter&) = default;
+    stream_outputter(stream_outputter&&) = default;
+    stream_outputter& operator=(const stream_outputter&) = default;
 
 public:
-    typedef std::function<std::ostream& ()> function_type;
-    typedef std::vector<outputter::ptr> production_type;
+    stream_outputter(std::ostream& stream);
+    virtual ~stream_outputter() noexcept {}
+
+public:
+    /**
+     * @brief Name of the outputter for logging purposes
+     */
+    static std::string outputter_name();
+
+    void output(outputter::value_type value) const override;
 
 private:
-    void log_output_disabled(std::string name) const;
-
-public:
-    factory(config::output_settings settings, function_type stream_fn)
-        : settings_(settings), stream_fn_(stream_fn) { }
-
-public:
-    production_type create() const;
-
-private:
-    const config::output_settings settings_;
-    const function_type stream_fn_;
+    std::ostream& stream_;
 };
 
 } } }

@@ -26,7 +26,7 @@
 #include "dogen/driver/program_options_parser.hpp"
 #include "dogen/driver/parser_validation_error.hpp"
 #include "dogen/config/types/settings.hpp"
-#include "dogen/engine/generator.hpp"
+#include "dogen/engine/types/generator.hpp"
 
 using namespace dogen::utility::log;
 
@@ -70,13 +70,13 @@ settings_factory(int argc, char* argv[]) {
 /**
  * @brief Given Dogen's settings, creates a code generator.
  */
-dogen::generator::generator
+dogen::engine::generator
 code_generator_factory(const dogen::config::settings& s) {
     if (!s.output().output_to_stdout())
-        return dogen::generator::generator(s);
+        return dogen::engine::generator(s);
 
     auto lambda([]() -> std::ostream& {return std::cout;});
-    return dogen::generator::generator(s, lambda);
+    return dogen::engine::generator(s, lambda);
 }
 
 /**

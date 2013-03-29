@@ -18,21 +18,20 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_GENERATOR_MODELING_DIRECTOR_HPP
-#define DOGEN_GENERATOR_MODELING_DIRECTOR_HPP
+#ifndef DOGEN_ENGINE_TYPES_MODELING_DIRECTOR_HPP
+#define DOGEN_ENGINE_TYPES_MODELING_DIRECTOR_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <boost/optional.hpp>
+#include "dogen/dia/types/diagram.hpp"
 #include "dogen/config/types/settings.hpp"
 #include "dogen/sml/types/model.hpp"
-#include "dogen/dia/types/diagram.hpp"
 
 namespace dogen {
-namespace generator {
-namespace modeling {
+namespace engine {
 
 /**
  * @brief Responsible for enacting the modeling workflow.
@@ -133,6 +132,6 @@ private:
     const bool verbose_;
 };
 
-} } }
+} }
 
 #endif

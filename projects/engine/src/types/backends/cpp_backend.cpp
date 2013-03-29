@@ -18,31 +18,29 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/engine/backends/cpp_backend.hpp"
-#include "dogen/engine/backends/factory.hpp"
-#include "dogen/utility/log/logger.hpp"
-
-static dogen::utility::log::logger
-lg(dogen::utility::log::logger_factory("backends::factory"));
+#include <boost/throw_exception.hpp>
+#include "dogen/cpp/types/cpp_backend.hpp"
+#include "dogen/engine/types/backends/cpp_backend.hpp"
 
 namespace dogen {
-namespace generator {
+namespace engine {
 namespace backends {
 
-void factory::log_cpp_backend_disabled() const {
-    using namespace dogen::utility::log;
-    BOOST_LOG_SEV(lg, info) << "C++ backend is disabled, skipping it.";
+cpp_backend::
+cpp_backend(const sml::model& model, const config::cpp_settings& settings) :
+    impl_(model, settings) { }
+
+backend::ptr cpp_backend::
+create(const sml::model& model, const config::cpp_settings& settings) {
+    return backend::ptr(new cpp_backend(model, settings));
 }
 
-factory::result_type factory::create() const {
-    result_type r;
+backend::value_type cpp_backend::generate() {
+    return impl_.generate();
+}
 
-    if (settings_.cpp().disable_backend())
-        log_cpp_backend_disabled();
-    else
-        r.push_back(cpp_backend::create(model_, settings_.cpp())) ;
-
-    return r;
+std::vector<boost::filesystem::path> cpp_backend::managed_directories() const {
+    return impl_.managed_directories();
 }
 
 } } }

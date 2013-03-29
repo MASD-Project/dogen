@@ -24,7 +24,7 @@
 #include "dogen/utility/test_data/validating_resolver.hpp"
 #include "dogen/utility/test_data/tds_test_good.hpp"
 #include "dogen/utility/test/logging.hpp"
-#include "dogen/engine/housekeeper.hpp"
+#include "dogen/engine/types/housekeeper.hpp"
 
 namespace  {
 
@@ -57,7 +57,7 @@ BOOST_AUTO_TEST_CASE(when_all_files_are_present_housekeeper_does_not_find_extra_
     bool called(false);
     const auto lambda([&](std::list<boost::filesystem::path>) {called = true;});
 
-    using dogen::generator::housekeeper;
+    using dogen::engine::housekeeper;
     housekeeper hk(ignored_files, v, e, verbose, lambda);
     hk.tidy_up();
     BOOST_CHECK(!called);
@@ -85,7 +85,7 @@ BOOST_AUTO_TEST_CASE(when_extra_files_are_present_housekeeper_finds_the_extra_fi
             called = true;
         });
 
-    using dogen::generator::housekeeper;
+    using dogen::engine::housekeeper;
     housekeeper hk(ignored_files, v, e, verbose, lambda);
     hk.tidy_up();
     BOOST_CHECK(called);
@@ -103,7 +103,7 @@ BOOST_AUTO_TEST_CASE(housekeeper_deletes_extra_files_and_only_extra_files) {
 
     const bool verbose(true);
 
-    using dogen::generator::housekeeper;
+    using dogen::engine::housekeeper;
     housekeeper hk(ignored_files, v, f, verbose);
     hk.tidy_up();
 
@@ -133,7 +133,7 @@ BOOST_AUTO_TEST_CASE(ignored_files_are_not_deleted) {
                     called = true;
         });
 
-    using dogen::generator::housekeeper;
+    using dogen::engine::housekeeper;
     housekeeper hk(ignores, v, e, verbose, lambda);
     hk.tidy_up();
     BOOST_CHECK(!called);

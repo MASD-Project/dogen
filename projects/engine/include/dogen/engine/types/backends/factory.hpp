@@ -18,33 +18,47 @@
  * MA 02110-1301, USA.
  *
  */
-#include <iostream>
-#include "dogen/engine/outputters/stream_outputter.hpp"
+#ifndef DOGEN_ENGINE_TYPES_BACKENDS_FACTORY_HPP
+#define DOGEN_ENGINE_TYPES_BACKENDS_FACTORY_HPP
 
-namespace {
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
-const std::string outputter_name("Stream outputter");
-const std::string file_name("Filename: ");
-const std::string contents("Contents: ");
-
-}
+#include "dogen/config/types/settings.hpp"
+#include "dogen/sml/types/model.hpp"
+#include "dogen/engine/types/backends/backend.hpp"
 
 namespace dogen {
-namespace generator {
-namespace outputters {
+namespace engine {
+namespace backends {
 
-stream_outputter::stream_outputter(std::ostream& stream) : stream_(stream) { }
+class factory {
+public:
+    factory() = delete;
+    factory(const factory&) = default;
+    ~factory() = default;
+    factory(factory&&) = default;
+    factory& operator=(const factory&) = default;
 
-std::string stream_outputter::outputter_name() {
-    return ::outputter_name;
-}
+public:
+    typedef std::vector<backend::ptr> result_type;
 
-void stream_outputter::
-output(outputter::value_type value) const {
-    for (auto pair : value) {
-        stream_ << file_name << pair.first.generic_string() << std::endl
-                << contents << std::endl << pair.second << std::endl;
-    }
-}
+public:
+    factory(sml::model model, config::settings settings)
+        : settings_(settings), model_(model) { }
+
+private:
+    void log_cpp_backend_disabled() const;
+
+public:
+    result_type create() const;
+
+private:
+    const config::settings settings_;
+    const sml::model model_;
+};
 
 } } }
+
+#endif

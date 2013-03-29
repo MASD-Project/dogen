@@ -31,14 +31,14 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/config/types/validator.hpp"
 #include "dogen/config/io/settings_io.hpp"
-#include "dogen/engine/housekeeper.hpp"
 #include "dogen/cpp/types/generation_failure.hpp"
-#include "dogen/engine/generation_failure.hpp"
-#include "dogen/engine/outputters/factory.hpp"
+#include "dogen/engine/types/housekeeper.hpp"
+#include "dogen/engine/types/generation_failure.hpp"
+#include "dogen/engine/types/outputters/factory.hpp"
 #include "dogen/sml/serialization/model_ser.hpp"
-#include "dogen/engine/modeling/director.hpp"
-#include "dogen/engine/backends/factory.hpp"
-#include "dogen/engine/generator.hpp"
+#include "dogen/engine/types/director.hpp"
+#include "dogen/engine/types/backends/factory.hpp"
+#include "dogen/engine/types/generator.hpp"
 
 using namespace dogen::utility::log;
 
@@ -56,7 +56,7 @@ const std::string code_generation_failure("Code generation failure.");
 }
 
 namespace dogen {
-namespace generator {
+namespace engine {
 
 generator::generator(const config::settings& s)
     : verbose_(s.troubleshooting().verbose()), settings_(s) {
@@ -132,12 +132,12 @@ void generator::generate(const sml::model& m) const {
         backends::factory f(m, settings_);
         boost::for_each(f.create(), lambda);
     } catch(const dogen::cpp::generation_failure& e) {
-        BOOST_THROW_EXCEPTION(dogen::generator::generation_failure(e.what()));
+        BOOST_THROW_EXCEPTION(dogen::engine::generation_failure(e.what()));
     }
 }
 
 boost::optional<sml::model> generator::merge_models() const {
-    modeling::director d(settings_);
+    director d(settings_);
     const auto r(d.create_model());
 
     if (settings_.troubleshooting().stop_after_merging()) {
