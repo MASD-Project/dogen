@@ -18,6 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen/sml/types/system_types_injector.hpp"
 #include "dogen/sml/types/primitive_model_factory.hpp"
 #include "dogen/sml/types/std_model_factory.hpp"
 #include "dogen/sml/types/boost_model_factory.hpp"
@@ -58,18 +59,36 @@ bool workflow::has_generatable_types(const sml::model& m) const {
     return false;
 }
 
-std::pair<bool, model> workflow::
-execute(const std::list<model>& references, const model& target) {
-    if (add_system_models_) {
-        merger_.add(sml::primitive_model_factory::create());
-        merger_.add(sml::std_model_factory::create());
-        merger_.add(sml::boost_model_factory::create());
-    }
+void workflow::add_system_models() {
+    if (!add_system_models_)
+        return;
 
-    for (const auto& r : references)
+    merger_.add(sml::primitive_model_factory::create());
+    merger_.add(sml::std_model_factory::create());
+    merger_.add(sml::boost_model_factory::create());
+}
+
+void workflow::add_references(const model_source_interface& source) {
+    system_types_injector sti(add_versioning_types_);
+    for (auto& r : source.references()) {
+        sti.inject(r);
         merger_.add(r);
+    }
+}
 
-    merger_.add_target(target);
+void workflow::add_target(const model_source_interface& source) {
+    system_types_injector sti(add_versioning_types_);
+    auto t(source.target());
+    sti.inject(t);
+    merger_.add_target(t);
+}
+
+std::pair<bool, model> workflow::
+execute(const model_source_interface& source) {
+    add_system_models();
+    add_references(source);
+    add_target(source);
+
     const auto r(merger_.merge());
     return std::pair<bool, model> { has_generatable_types(r), r };
 }

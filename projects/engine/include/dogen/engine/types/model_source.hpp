@@ -18,49 +18,54 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_ENGINE_TYPES_MODELING_DIRECTOR_HPP
-#define DOGEN_ENGINE_TYPES_MODELING_DIRECTOR_HPP
+#ifndef DOGEN_ENGINE_TYPES_MODEL_SOURCE_FWD_HPP
+#define DOGEN_ENGINE_TYPES_MODEL_SOURCE_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <boost/optional.hpp>
+#include "dogen/sml/types/model.hpp"
 #include "dogen/dia/types/diagram.hpp"
 #include "dogen/config/types/settings.hpp"
-#include "dogen/sml/types/model.hpp"
+#include "dogen/config/types/archive_types.hpp"
 #include "dogen/engine/types/persister.hpp"
+#include "dogen/sml/types/model_source_interface.hpp"
 
 namespace dogen {
 namespace engine {
 
-/**
- * @brief Responsible for enacting the modeling workflow.
- *
- * Reads a set of Dia diagrams and combines them into a single SML
- * model for code generation.
- */
-class director {
+class model_source : public dogen::sml::model_source_interface {
 public:
-    director() = default;
-    director(const director&) = default;
-    ~director() = default;
-    director(director&&) = default;
-    director& operator=(const director&) = default;
+    model_source() = delete;
+    model_source(const model_source&) = delete;
+    model_source(model_source&&) = default;
+    model_source& operator=(const model_source&) = delete;
 
 public:
-    explicit director(const config::settings& settings);
+    explicit model_source(const config::settings& settings);
+    virtual ~model_source() noexcept {}
 
-public:
+private:
     /**
-     * @brief Creates the combined SML model given the configuration
-     * the director was initialised with.
+     * @brief Reads a Dia diagram from the filesystem.
+     *
+     * @param path location of the diagram to read.
      */
-    boost::optional<sml::model> create_model() const;
+    dia::diagram hydrate_diagram(const boost::filesystem::path& path) const;
+
+    /**
+     * @brief Converts a Dia diagram to its SML representation.
+     */
+    sml::model to_sml(const dia::diagram& d, config::reference ref,
+        const bool is_target) const;
+
+public:
+    virtual std::list<sml::model> references() const override;
+    virtual sml::model target() const override;
 
 private:
     const config::settings settings_;
-    const bool verbose_;
     const persister persister_;
 };
 

@@ -18,16 +18,18 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/engine/types/backends/backend.hpp"
-#include "dogen/engine/types/backends/cpp_backend.hpp"
-#include "dogen/engine/types/backends/factory.hpp"
-#include "dogen/engine/types/director.hpp"
-#include "dogen/engine/types/generation_failure.hpp"
-#include "dogen/engine/types/generator.hpp"
-#include "dogen/engine/types/housekeeper.hpp"
-#include "dogen/engine/types/model_source.hpp"
-#include "dogen/engine/types/outputters/factory.hpp"
-#include "dogen/engine/types/outputters/file_outputter.hpp"
-#include "dogen/engine/types/outputters/outputter.hpp"
-#include "dogen/engine/types/outputters/stream_outputter.hpp"
-#include "dogen/engine/types/persister.hpp"
+#ifndef DOGEN_SML_TYPES_MODEL_SOURCE_INTERFACE_FWD_HPP
+#define DOGEN_SML_TYPES_MODEL_SOURCE_INTERFACE_FWD_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+namespace dogen {
+namespace sml {
+
+class model_source_interface;
+
+} }
+
+#endif

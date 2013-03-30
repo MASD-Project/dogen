@@ -40,7 +40,7 @@
 		</item>
 	</packages>
 	<pods class_id="6" tracking_level="0" version="0">
-		<count>3</count>
+		<count>1</count>
 		<bucket_count>11</bucket_count>
 		<item_version>0</item_version>
 		<item class_id="7" tracking_level="0" version="0">
@@ -74,7 +74,7 @@
 					<meta_type>2</meta_type>
 				</name>
 				<properties class_id="9" tracking_level="0" version="0">
-					<count>3</count>
+					<count>2</count>
 					<item_version>0</item_version>
 					<item class_id="10" tracking_level="0" version="0">
 						<name>public_attribute</name>
@@ -134,36 +134,6 @@
 							<item_version>0</item_version>
 						</implementation_specific_parameters>
 					</item>
-					<item>
-						<name>versioned_key</name>
-						<type_name>
-							<type>
-								<model_name>class_in_a_package</model_name>
-								<external_package_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</external_package_path>
-								<package_path>
-									<count>1</count>
-									<item_version>0</item_version>
-									<item>package1</item>
-								</package_path>
-								<type_name>first_class_versioned_key</type_name>
-								<meta_type>2</meta_type>
-							</type>
-							<children>
-								<count>0</count>
-								<item_version>0</item_version>
-							</children>
-							<is_pointer>0</is_pointer>
-						</type_name>
-						<default_value></default_value>
-						<documentation></documentation>
-						<implementation_specific_parameters>
-							<count>0</count>
-							<item_version>0</item_version>
-						</implementation_specific_parameters>
-					</item>
 				</properties>
 				<parent_name class_id="14" tracking_level="0" version="0">
 					<initialized>0</initialized>
@@ -179,205 +149,6 @@
 				<is_parent>0</is_parent>
 				<category_type>1</category_type>
 				<pod_type>4</pod_type>
-				<documentation></documentation>
-				<number_of_type_arguments>0</number_of_type_arguments>
-				<implementation_specific_parameters>
-					<count>0</count>
-					<item_version>0</item_version>
-				</implementation_specific_parameters>
-			</second>
-		</item>
-		<item>
-			<first>
-				<model_name>class_in_a_package</model_name>
-				<external_package_path>
-					<count>0</count>
-					<item_version>0</item_version>
-				</external_package_path>
-				<package_path>
-					<count>1</count>
-					<item_version>0</item_version>
-					<item>package1</item>
-				</package_path>
-				<type_name>first_class_unversioned_key</type_name>
-				<meta_type>2</meta_type>
-			</first>
-			<second>
-				<name>
-					<model_name>class_in_a_package</model_name>
-					<external_package_path>
-						<count>0</count>
-						<item_version>0</item_version>
-					</external_package_path>
-					<package_path>
-						<count>1</count>
-						<item_version>0</item_version>
-						<item>package1</item>
-					</package_path>
-					<type_name>first_class_unversioned_key</type_name>
-					<meta_type>2</meta_type>
-				</name>
-				<properties>
-					<count>1</count>
-					<item_version>0</item_version>
-					<item>
-						<name>id</name>
-						<type_name>
-							<type>
-								<model_name></model_name>
-								<external_package_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</external_package_path>
-								<package_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</package_path>
-								<type_name>unsigned int</type_name>
-								<meta_type>4</meta_type>
-							</type>
-							<children>
-								<count>0</count>
-								<item_version>0</item_version>
-							</children>
-							<is_pointer>0</is_pointer>
-						</type_name>
-						<default_value></default_value>
-						<documentation></documentation>
-						<implementation_specific_parameters>
-							<count>0</count>
-							<item_version>0</item_version>
-						</implementation_specific_parameters>
-					</item>
-				</properties>
-				<parent_name>
-					<initialized>0</initialized>
-				</parent_name>
-				<original_parent_name>
-					<initialized>0</initialized>
-				</original_parent_name>
-				<leaves>
-					<count>0</count>
-					<item_version>0</item_version>
-				</leaves>
-				<generation_type>1</generation_type>
-				<is_parent>0</is_parent>
-				<category_type>3</category_type>
-				<pod_type>5</pod_type>
-				<documentation></documentation>
-				<number_of_type_arguments>0</number_of_type_arguments>
-				<implementation_specific_parameters>
-					<count>0</count>
-					<item_version>0</item_version>
-				</implementation_specific_parameters>
-			</second>
-		</item>
-		<item>
-			<first>
-				<model_name>class_in_a_package</model_name>
-				<external_package_path>
-					<count>0</count>
-					<item_version>0</item_version>
-				</external_package_path>
-				<package_path>
-					<count>1</count>
-					<item_version>0</item_version>
-					<item>package1</item>
-				</package_path>
-				<type_name>first_class_versioned_key</type_name>
-				<meta_type>2</meta_type>
-			</first>
-			<second>
-				<name>
-					<model_name>class_in_a_package</model_name>
-					<external_package_path>
-						<count>0</count>
-						<item_version>0</item_version>
-					</external_package_path>
-					<package_path>
-						<count>1</count>
-						<item_version>0</item_version>
-						<item>package1</item>
-					</package_path>
-					<type_name>first_class_versioned_key</type_name>
-					<meta_type>2</meta_type>
-				</name>
-				<properties>
-					<count>2</count>
-					<item_version>0</item_version>
-					<item>
-						<name>id</name>
-						<type_name>
-							<type>
-								<model_name></model_name>
-								<external_package_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</external_package_path>
-								<package_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</package_path>
-								<type_name>unsigned int</type_name>
-								<meta_type>4</meta_type>
-							</type>
-							<children>
-								<count>0</count>
-								<item_version>0</item_version>
-							</children>
-							<is_pointer>0</is_pointer>
-						</type_name>
-						<default_value></default_value>
-						<documentation></documentation>
-						<implementation_specific_parameters>
-							<count>0</count>
-							<item_version>0</item_version>
-						</implementation_specific_parameters>
-					</item>
-					<item>
-						<name>version</name>
-						<type_name>
-							<type>
-								<model_name></model_name>
-								<external_package_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</external_package_path>
-								<package_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</package_path>
-								<type_name>unsigned int</type_name>
-								<meta_type>4</meta_type>
-							</type>
-							<children>
-								<count>0</count>
-								<item_version>0</item_version>
-							</children>
-							<is_pointer>0</is_pointer>
-						</type_name>
-						<default_value></default_value>
-						<documentation></documentation>
-						<implementation_specific_parameters>
-							<count>0</count>
-							<item_version>0</item_version>
-						</implementation_specific_parameters>
-					</item>
-				</properties>
-				<parent_name>
-					<initialized>0</initialized>
-				</parent_name>
-				<original_parent_name>
-					<initialized>0</initialized>
-				</original_parent_name>
-				<leaves>
-					<count>0</count>
-					<item_version>0</item_version>
-				</leaves>
-				<generation_type>1</generation_type>
-				<is_parent>0</is_parent>
-				<category_type>2</category_type>
-				<pod_type>5</pod_type>
 				<documentation></documentation>
 				<number_of_type_arguments>0</number_of_type_arguments>
 				<implementation_specific_parameters>

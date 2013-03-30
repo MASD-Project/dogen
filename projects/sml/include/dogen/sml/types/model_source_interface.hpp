@@ -18,51 +18,29 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_SML_TYPES_WORKFLOW_HPP
-#define DOGEN_SML_TYPES_WORKFLOW_HPP
+#ifndef DOGEN_SML_TYPES_MODEL_SOURCE_INTERFACE_HPP
+#define DOGEN_SML_TYPES_MODEL_SOURCE_INTERFACE_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <list>
-#include <utility>
 #include "dogen/sml/types/model.hpp"
-#include "dogen/sml/types/merger.hpp"
-#include "dogen/sml/types/model_source_interface.hpp"
 
 namespace dogen {
 namespace sml {
 
-class workflow {
+class model_source_interface {
 public:
-    workflow(const workflow&) = default;
-    ~workflow() = default;
-    workflow(workflow&&) = default;
-    workflow& operator=(const workflow&) = default;
-
-public:
-    workflow();
-    workflow(const bool add_system_models, const bool add_versioning_types);
-
-private:
-    void add_system_models();
-    void add_references(const model_source_interface& source);
-    void add_target(const model_source_interface& source);
-
-    /**
-     * @brief Returns true if there are any types that require code
-     * generation, false otherwise.
-     */
-    bool has_generatable_types(const sml::model& m) const;
+    model_source_interface() = default;
+    model_source_interface(const model_source_interface&) = delete;
+    model_source_interface(model_source_interface&&) = default;
+    virtual ~model_source_interface() noexcept = 0;
 
 public:
-    std::pair<bool, model> execute(const model_source_interface& source);
-
-private:
-    const bool add_system_models_;
-    const bool add_versioning_types_;
-    merger merger_;
+    virtual std::list<model> references() const = 0;
+    virtual model target() const = 0;
 };
 
 } }

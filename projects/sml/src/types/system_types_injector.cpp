@@ -46,7 +46,7 @@ const std::string invalid_archive_type("Invalid or unexpected archive type");
 namespace dogen {
 namespace sml {
 
-system_types_injector::system_types_injector() : add_versioning_types_(false) {}
+system_types_injector::system_types_injector() : add_versioning_types_(true) {}
 
 system_types_injector::system_types_injector(const bool add_versioning_types)
     : add_versioning_types_(add_versioning_types) { }
@@ -98,14 +98,14 @@ create_key_system_pod(const sml::pod& p, const bool is_versioned) const {
 }
 
 void system_types_injector::inject(model& m) const {
-    if (add_versioning_types_) {
+    if (!add_versioning_types_) {
         BOOST_LOG_SEV(lg, warn) << "Keys are NOT enabled, "
                                 << "NOT injecting them into model.";
         return;
-    } else {
-        BOOST_LOG_SEV(lg, info) << "Keys are enabled, "
-                                << "so injecting them into model.";
     }
+
+    BOOST_LOG_SEV(lg, info) << "Keys are enabled, "
+                            << "so injecting them into model.";
 
     const auto old_pods(m.pods());
     if (old_pods.empty())
