@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_ENGINE_TYPES_GENERATOR_HPP
-#define DOGEN_ENGINE_TYPES_GENERATOR_HPP
+#ifndef DOGEN_ENGINE_TYPES_WORKFLOW_HPP
+#define DOGEN_ENGINE_TYPES_WORKFLOW_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -65,21 +65,21 @@ namespace engine {
  * code into a string. This is then outputted to the desired output
  * destination.
  */
-class generator {
+class workflow {
 public:
-    generator() = delete;
-    generator& operator=(const generator&) = default;
-    generator(const generator&) = default;
+    workflow() = delete;
+    workflow& operator=(const workflow&) = default;
+    workflow(const workflow&) = default;
 
 public:
     typedef std::function<std::ostream& ()> output_fn;
 
 public:
-    generator(generator&& rhs)
+    workflow(workflow&& rhs)
     : verbose_(std::move(rhs.verbose_)), settings_(std::move(rhs.settings_)) { }
 
-    generator(const config::settings& s);
-    generator(const config::settings& s, const output_fn& o);
+    workflow(const config::settings& s);
+    workflow(const config::settings& s, const output_fn& o);
 
 private:
     /**
@@ -96,9 +96,10 @@ public: // public section for testing purposes only
     bool housekeeping_required() const;
 
     /**
-     * @brief Merges all of the input models into the merged model.
+     * @brief Execute the SML sub-workflow and return a generatable
+     * model - or nothing, if no such model exists.
      */
-    boost::optional<sml::model> merge_models() const;
+    boost::optional<sml::model> make_generatable_model() const;
 
     /**
      * @brief Transforms the model into generated code, according to
@@ -116,7 +117,7 @@ public:
     /**
      * @brief Perform the entire code generation workflow.
      */
-    void generate() const;
+    void execute() const;
 
 private:
     const bool verbose_;

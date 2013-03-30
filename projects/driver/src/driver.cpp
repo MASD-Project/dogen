@@ -26,7 +26,7 @@
 #include "dogen/driver/program_options_parser.hpp"
 #include "dogen/driver/parser_validation_error.hpp"
 #include "dogen/config/types/settings.hpp"
-#include "dogen/engine/types/generator.hpp"
+#include "dogen/engine/types/workflow.hpp"
 
 using namespace dogen::utility::log;
 
@@ -68,15 +68,14 @@ settings_factory(int argc, char* argv[]) {
 }
 
 /**
- * @brief Given Dogen's settings, creates a code generator.
+ * @brief Given Dogen's settings, creates a code generation workflow.
  */
-dogen::engine::generator
-code_generator_factory(const dogen::config::settings& s) {
+dogen::engine::workflow workflow_factory(const dogen::config::settings& s) {
     if (!s.output().output_to_stdout())
-        return dogen::engine::generator(s);
+        return dogen::engine::workflow(s);
 
     auto lambda([]() -> std::ostream& {return std::cout;});
-    return dogen::engine::generator(s, lambda);
+    return dogen::engine::workflow(s, lambda);
 }
 
 /**
@@ -96,14 +95,15 @@ int main(int argc, char* argv[]) {
         if (o) {
             const auto& s(*o);
             initialise_logging(s);
-            auto cg(code_generator_factory(s));
-            cg.generate();
+            auto w(workflow_factory(s));
+            w.execute();
         }
     } catch (const dogen::driver::parser_validation_error& e) {
         BOOST_LOG_SEV(lg, error) << boost::diagnostic_information(e);
         std::cerr << e.what() << std::endl;
         return 1;
     } catch (const std::exception& e) {
+        // FIXME: why don't we just catch boost exception first?
         const auto be(dynamic_cast<const boost::exception* const>(&e));
         if (be) {
             BOOST_LOG_SEV(lg, fatal) << "Error: "

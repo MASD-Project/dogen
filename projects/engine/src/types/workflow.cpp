@@ -36,18 +36,22 @@
 #include "dogen/engine/types/generation_failure.hpp"
 #include "dogen/engine/types/outputters/factory.hpp"
 #include "dogen/sml/serialization/model_ser.hpp"
-#include "dogen/engine/types/director.hpp"
 #include "dogen/engine/types/backends/factory.hpp"
-#include "dogen/engine/types/generator.hpp"
+#include "dogen/sml/types/workflow.hpp"
+#include "dogen/sml/io/model_io.hpp"
+#include "dogen/engine/types/model_source.hpp"
+#include "dogen/engine/types/persister.hpp"
+#include "dogen/engine/types/workflow.hpp"
 
 using namespace dogen::utility::log;
 
-typedef boost::error_info<struct tag_generator, std::string> errmsg_generator;
+typedef boost::error_info<struct tag_workflow, std::string> errmsg_workflow;
 
 namespace {
 
-auto lg(logger_factory("generator"));
+auto lg(logger_factory("engine.workflow"));
 
+const std::string merged("merged_");
 const std::string codegen_error("Error occurred during code generation: ");
 const std::string incorrect_stdout_config(
     "Configuration for output to stdout is incorrect");
@@ -58,7 +62,7 @@ const std::string code_generation_failure("Code generation failure.");
 namespace dogen {
 namespace engine {
 
-generator::generator(const config::settings& s)
+workflow::workflow(const config::settings& s)
     : verbose_(s.troubleshooting().verbose()), settings_(s) {
 
     if (settings_.output().output_to_stdout()) {
@@ -69,8 +73,8 @@ generator::generator(const config::settings& s)
     config::validator::validate(s);
 }
 
-generator::
-generator(const config::settings& s, const output_fn& o)
+workflow::
+workflow(const config::settings& s, const output_fn& o)
     : verbose_(s.troubleshooting().verbose()), settings_(s), output_(o) {
 
     if (!settings_.output().output_to_stdout() || !output_) {
@@ -81,7 +85,7 @@ generator(const config::settings& s, const output_fn& o)
     config::validator::validate(s);
 }
 
-bool generator::housekeeping_required() const {
+bool workflow::housekeeping_required() const {
     return
         !settings_.troubleshooting().stop_after_merging() &&
         !settings_.troubleshooting().stop_after_formatting() &&
@@ -89,7 +93,7 @@ bool generator::housekeeping_required() const {
         settings_.output().output_to_file();
 }
 
-void generator::output(const outputters::outputter::value_type& o) const {
+void workflow::output(const outputters::outputter::value_type& o) const {
     if (settings_.troubleshooting().stop_after_formatting()) {
         BOOST_LOG_SEV(lg, warn) << "Stopping after formatting so not outputting";
         return;
@@ -106,7 +110,7 @@ void generator::output(const outputters::outputter::value_type& o) const {
     boost::for_each(f.create(), lambda);
 }
 
-void generator::generate(backends::backend& b) const {
+void workflow::generate(backends::backend& b) const {
     const auto r(b.generate());
     output(r);
 
@@ -126,7 +130,7 @@ void generator::generate(backends::backend& b) const {
     hk.tidy_up();
 }
 
-void generator::generate(const sml::model& m) const {
+void workflow::generate(const sml::model& m) const {
     try {
         const auto lambda([&](backends::backend::ptr p) { generate(*p); });
         backends::factory f(m, settings_);
@@ -136,32 +140,50 @@ void generator::generate(const sml::model& m) const {
     }
 }
 
-boost::optional<sml::model> generator::merge_models() const {
-    director d(settings_);
-    const auto r(d.create_model());
+boost::optional<sml::model> workflow::make_generatable_model() const {
+    const bool add_system_models(true);
+    const bool add_versioning_types(!settings_.cpp().disable_versioning());
+    sml::workflow w(add_system_models, add_versioning_types);
 
-    if (settings_.troubleshooting().stop_after_merging()) {
-        BOOST_LOG_SEV(lg, info) << "Stopping after merging so not returning"
-                                << " merged model";
+    model_source source(settings_);
+    const auto pair(w.execute(source));
+    const auto& m(pair.second);
 
-        return boost::optional<sml::model>();
-    }
-    return r;
+    BOOST_LOG_SEV(lg, debug) << "Merged model: " << m;
+    persister persister_(settings_);
+    persister_.save_model(m, merged);
+
+    BOOST_LOG_SEV(lg, debug) << "Totals: pods: " << m.pods().size()
+                             << " enumerations: " << m.enumerations().size()
+                             << " exceptions: " << m.exceptions().size()
+                             << " primitives: " << m.primitives().size();
+
+    const auto has_generatable_types(pair.first);
+    if ((has_generatable_types))
+        return boost::optional<sml::model>(m);
+
+    BOOST_LOG_SEV(lg, warn) << "No generatable types found.";
+    return boost::optional<sml::model>();
 }
 
-void generator::generate() const {
-    BOOST_LOG_SEV(lg, info) << "Code generator started.";
+void workflow::execute() const {
+    BOOST_LOG_SEV(lg, info) << "Workflow started.";
     BOOST_LOG_SEV(lg, debug) << "Settings: " << settings_;
 
     try {
-        const auto o(merge_models());
+        const auto o(make_generatable_model());
+        if (settings_.troubleshooting().stop_after_merging()) {
+            BOOST_LOG_SEV(lg, info) << "Stopping after merging.";
+            return;
+        }
+
         if (o)
             generate(*o);
     } catch (boost::exception& e) {
-        e << errmsg_generator(code_generation_failure);
+        e << errmsg_workflow(code_generation_failure);
         throw;
     }
-    BOOST_LOG_SEV(lg, info) << "Code generator finished.";
+    BOOST_LOG_SEV(lg, info) << "Workflow finished.";
 }
 
 } }
