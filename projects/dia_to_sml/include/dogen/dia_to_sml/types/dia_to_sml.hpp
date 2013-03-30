@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_DIA_TO_SML_DIA_TO_SML_HPP
-#define DOGEN_DIA_TO_SML_DIA_TO_SML_HPP
+#ifndef DOGEN_DIA_TO_SML_TYPES_DIA_TO_SML_HPP
+#define DOGEN_DIA_TO_SML_TYPES_DIA_TO_SML_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -36,10 +36,10 @@
 #include "dogen/sml/types/model.hpp"
 #include "dogen/dia/types/attribute.hpp"
 #include "dogen/dia/types/object.hpp"
-#include "dogen/dia_to_sml/dia_object_to_sml_pod.hpp"
-#include "dogen/dia_to_sml/dia_object_to_sml_package.hpp"
-#include "dogen/dia_to_sml/dia_object_to_sml_enumeration.hpp"
-#include "dogen/dia_to_sml/dia_object_to_sml_exception.hpp"
+#include "dogen/dia_to_sml/types/dia_object_to_sml_pod.hpp"
+#include "dogen/dia_to_sml/types/dia_object_to_sml_package.hpp"
+#include "dogen/dia_to_sml/types/dia_object_to_sml_enumeration.hpp"
+#include "dogen/dia_to_sml/types/dia_object_to_sml_exception.hpp"
 
 namespace dogen {
 namespace dia_to_sml {

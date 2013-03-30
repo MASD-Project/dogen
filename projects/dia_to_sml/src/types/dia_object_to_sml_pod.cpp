@@ -48,8 +48,8 @@
 #include "dogen/sml/types/comments_parser.hpp"
 #include "dogen/utility/io/unordered_map_io.hpp"
 #include "dogen/utility/io/list_io.hpp"
-#include "dogen/dia_to_sml/transformation_error.hpp"
-#include "dogen/dia_to_sml/dia_object_to_sml_pod.hpp"
+#include "dogen/dia_to_sml/types/transformation_error.hpp"
+#include "dogen/dia_to_sml/types/dia_object_to_sml_pod.hpp"
 
 namespace {
 

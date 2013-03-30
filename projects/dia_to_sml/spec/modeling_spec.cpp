@@ -21,7 +21,7 @@
 #include <sstream>
 #include <boost/test/unit_test.hpp>
 #include <boost/algorithm/string/predicate.hpp>
-#include "dogen/dia_to_sml/validation_error.hpp"
+#include "dogen/dia_to_sml/types/validation_error.hpp"
 #include "dogen/utility/test/xml_serialization_helper.hpp"
 #include "dogen/utility/test/asserter.hpp"
 #include "dogen/utility/test_data/dia_sml.hpp"
@@ -29,7 +29,7 @@
 #include "dogen/utility/test/logging.hpp"
 #include "dogen/dia/io/diagram_io.hpp"
 #include "dogen/dia/types/hydrator.hpp"
-#include "dogen/dia_to_sml/dia_to_sml.hpp"
+#include "dogen/dia_to_sml/types/dia_to_sml.hpp"
 #include "dogen/sml/types/model.hpp"
 #include "dogen/sml/io/model_io.hpp"
 #include "dogen/sml/io/qname_io.hpp"

@@ -27,8 +27,8 @@
 #include <boost/throw_exception.hpp>
 #include "dogen/dia/types/enum_parser.hpp"
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/dia_to_sml/transformation_error.hpp"
-#include "dogen/dia_to_sml/dia_object_to_sml_package.hpp"
+#include "dogen/dia_to_sml/types/transformation_error.hpp"
+#include "dogen/dia_to_sml/types/dia_object_to_sml_package.hpp"
 
 namespace {
 

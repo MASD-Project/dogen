@@ -18,30 +18,17 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_DIA_TO_SML_TRANSFORMATION_ERROR_HPP
-#define DOGEN_DIA_TO_SML_TRANSFORMATION_ERROR_HPP
+#ifndef DOGEN_DIA_TO_SML_TYPES_DIA_OBJECT_TO_SML_ENUMERATION_FWD_HPP
+#define DOGEN_DIA_TO_SML_TYPES_DIA_OBJECT_TO_SML_ENUMERATION_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/utility/exception/utility_exception.hpp"
-
 namespace dogen {
 namespace dia_to_sml {
 
-/**
- * @brief A fatal error has occurred while transforming a Dia model
- * into its SML representation.
- */
-class transformation_error : public utility::exception::exception {
-public:
-    transformation_error(std::string message)
-        : utility::exception::exception(message) { }
-    transformation_error() { }
-
-    virtual ~transformation_error() throw() {}
-};
+class dia_object_to_sml_enumeration;
 
 } }
 

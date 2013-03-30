@@ -18,29 +18,17 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_DIA_TO_SML_VALIDATION_ERROR_HPP
-#define DOGEN_DIA_TO_SML_VALIDATION_ERROR_HPP
+#ifndef DOGEN_DIA_TO_SML_TYPES_DIA_TO_SML_FWD_HPP
+#define DOGEN_DIA_TO_SML_TYPES_DIA_TO_SML_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/utility/exception/utility_exception.hpp"
-
 namespace dogen {
 namespace dia_to_sml {
 
-/**
- * @brief A fatal error has occurred during code generation.
- */
-class validation_error : public utility::exception::exception {
-public:
-    validation_error(std::string message)
-        : utility::exception::exception(message) { }
-    validation_error() { }
-
-    virtual ~validation_error() throw() {}
-};
+class dia_to_sml;
 
 } }
 

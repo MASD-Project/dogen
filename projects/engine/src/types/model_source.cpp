@@ -21,7 +21,7 @@
 #include <boost/filesystem.hpp>
 #include "dogen/dia/types/hydrator.hpp"
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/dia_to_sml/dia_to_sml.hpp"
+#include "dogen/dia_to_sml/types/dia_to_sml.hpp"
 #include "dogen/engine/types/model_source.hpp"
 
 using namespace dogen::utility::log;
