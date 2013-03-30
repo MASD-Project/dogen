@@ -32,7 +32,7 @@
 #include <boost/filesystem/path.hpp>
 #include "dogen/sml/types/model.hpp"
 #include "dogen/config/types/cpp_settings.hpp"
-#include "dogen/cpp/types/cpp_backend.hpp"
+#include "dogen/cpp/types/generator.hpp"
 #include "dogen/engine/types/backends/backend.hpp"
 
 namespace dogen {
@@ -58,7 +58,7 @@ public:
     backend::value_type generate() override;
     std::vector<boost::filesystem::path> managed_directories() const override;
 private:
-    cpp::cpp_backend impl_;
+    cpp::generator impl_;
 };
 
 } } }

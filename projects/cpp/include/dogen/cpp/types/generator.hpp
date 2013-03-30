@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_BACKEND_HPP
-#define DOGEN_CPP_BACKEND_HPP
+#ifndef DOGEN_CPP_TYPES_GENERATOR_HPP
+#define DOGEN_CPP_TYPES_GENERATOR_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -39,16 +39,16 @@
 namespace dogen {
 namespace cpp {
 
-class cpp_backend final {
+class generator final {
 public:
-    cpp_backend() = delete;
-    cpp_backend(const cpp_backend&) = default;
-    cpp_backend(cpp_backend&&) = default;
-    cpp_backend& operator=(const cpp_backend&) = default;
+    generator() = delete;
+    generator(const generator&) = default;
+    generator(generator&&) = default;
+    generator& operator=(const generator&) = default;
 
 public:
-    cpp_backend(const sml::model& model, const config::cpp_settings& settings);
-    virtual ~cpp_backend() noexcept {}
+    generator(const sml::model& model, const config::cpp_settings& settings);
+    virtual ~generator() noexcept {}
 
 public:
     typedef std::map<boost::filesystem::path, std::string> value_type;

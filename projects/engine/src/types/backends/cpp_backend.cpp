@@ -19,7 +19,6 @@
  *
  */
 #include <boost/throw_exception.hpp>
-#include "dogen/cpp/types/cpp_backend.hpp"
 #include "dogen/engine/types/backends/cpp_backend.hpp"
 
 namespace dogen {

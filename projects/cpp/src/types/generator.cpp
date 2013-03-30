@@ -27,13 +27,13 @@
 #include "dogen/cpp/types/formatters/include_cmakelists.hpp"
 #include "dogen/cpp/types/view_models/sml_to_cpp_view_model.hpp"
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/cpp/types/cpp_backend.hpp"
+#include "dogen/cpp/types/generator.hpp"
 
 using namespace dogen::utility::log;
 
 namespace {
 
-auto lg(logger_factory("cpp_backend"));
+auto lg(logger_factory("generator"));
 
 const std::string cmakelists_file_name("CMakeLists.txt");
 const std::string domain_facet_must_be_enabled("Domain facet must be enabled");
@@ -44,8 +44,8 @@ const std::string integrated_io_incompatible_with_io_facet(
 namespace dogen {
 namespace cpp {
 
-cpp_backend::
-cpp_backend(const sml::model& model, const config::cpp_settings& settings) :
+generator::
+generator(const sml::model& model, const config::cpp_settings& settings) :
     model_(model), settings_(settings),
     location_manager_(model.name(), settings_) {
 
@@ -67,28 +67,28 @@ cpp_backend(const sml::model& model, const config::cpp_settings& settings) :
     }
 }
 
-void cpp_backend::log_formating_view(const std::string& view_name) const {
+void generator::log_formating_view(const std::string& view_name) const {
     BOOST_LOG_SEV(lg, debug) << "Formatting file view: " << view_name;
 }
 
-void cpp_backend::log_started() const {
+void generator::log_started() const {
     BOOST_LOG_SEV(lg, info) << "C++ backend started.";
 }
 
-void cpp_backend::log_finished() const {
+void generator::log_finished() const {
     BOOST_LOG_SEV(lg, info) << "C++ backend finished.";
 }
 
-void cpp_backend::log_cmakelists_disabled() const {
+void generator::log_cmakelists_disabled() const {
     BOOST_LOG_SEV(lg, info) << "CMakeLists generation disabled.";
 }
 
-void cpp_backend::log_file_views(unsigned int how_many) const {
+void generator::log_file_views(unsigned int how_many) const {
     BOOST_LOG_SEV(lg, debug) << "File views returned by SML to C++ view model"
                              << " transformer: " << how_many;
 }
 
-cpp_backend::value_type cpp_backend::generate_cmakelists() const {
+generator::value_type generator::generate_cmakelists() const {
     view_models::cmakelists_view_model vm;
     vm.file_name(cmakelists_file_name);
     vm.file_path(location_manager_.absolute_path_to_src(vm.file_name()));
@@ -102,7 +102,7 @@ cpp_backend::value_type cpp_backend::generate_cmakelists() const {
     formatters::src_cmakelists src(stream);
     src.format(vm);
 
-    cpp_backend::value_type r;
+    generator::value_type r;
     r.insert(std::make_pair(vm.file_path(), stream.str()));
 
     if (!settings_.split_project()) {
@@ -117,7 +117,7 @@ cpp_backend::value_type cpp_backend::generate_cmakelists() const {
     return r;
 }
 
-cpp_backend::value_entry_type cpp_backend::
+generator::value_entry_type generator::
 generate_file_view_model(const view_models::file_view_model& vm) const {
     log_formating_view(vm.file_path().string());
     formatters::factory factory(settings_);
@@ -128,7 +128,7 @@ generate_file_view_model(const view_models::file_view_model& vm) const {
     return std::make_pair(vm.file_path(), s.str());
 }
 
-cpp_backend::value_type cpp_backend::generate_file_view_models() const {
+generator::value_type generator::generate_file_view_models() const {
     inclusion_manager im(model_, location_manager_, settings_);
 
     using view_models::sml_to_cpp_view_model;
@@ -136,16 +136,16 @@ cpp_backend::value_type cpp_backend::generate_file_view_models() const {
     std::vector<view_models::file_view_model> fvms(t.transform());
     log_file_views(fvms.size());
 
-    cpp_backend::value_type r;
+    generator::value_type r;
     for (auto fvm : fvms)
         r.insert(generate_file_view_model(fvm));
     return r;
 }
 
-cpp_backend::value_type cpp_backend::generate() {
+generator::value_type generator::generate() {
     log_started();
 
-    cpp_backend::value_type r(generate_file_view_models());
+    generator::value_type r(generate_file_view_models());
     if (settings_.disable_cmakelists())
         log_cmakelists_disabled();
     else {
@@ -157,7 +157,7 @@ cpp_backend::value_type cpp_backend::generate() {
     return r;
 }
 
-std::vector<boost::filesystem::path> cpp_backend::managed_directories() const {
+std::vector<boost::filesystem::path> generator::managed_directories() const {
     return location_manager_.managed_directories();
 }
 
