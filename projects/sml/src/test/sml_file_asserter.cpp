@@ -59,7 +59,7 @@ bool sml_file_asserter::assert_file(boost::filesystem::path expected,
     const auto a(read_xml(actual));
 
     using namespace utility::log;
-    logger lg(logger_factory("sml_file_asserter"));
+    logger lg(logger_factory("sml.sml_file_asserter"));
 
     if (e == a) {
         BOOST_LOG_SEV(lg, debug) << "SML file asserter: contents are equal.";

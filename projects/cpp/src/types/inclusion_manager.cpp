@@ -26,7 +26,7 @@
 namespace {
 
 using namespace dogen::utility::log;
-static logger lg(logger_factory("inclusion_manager"));
+static logger lg(logger_factory("cpp.inclusion_manager"));
 
 const std::string empty;
 const std::string primitive_model("primitive_model");

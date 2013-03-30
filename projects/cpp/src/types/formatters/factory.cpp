@@ -49,7 +49,7 @@ using namespace dogen::utility::log;
 
 namespace {
 
-auto lg(logger_factory("formatters::factory"));
+auto lg(logger_factory("cpp.formatters.factory"));
 const std::string production_failure_msg("Formatter factory not setup for: ");
 
 bool contains(const std::set<dogen::config::cpp_facet_types>& f,

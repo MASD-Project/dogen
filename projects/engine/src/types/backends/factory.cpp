@@ -23,7 +23,7 @@
 #include "dogen/utility/log/logger.hpp"
 
 static dogen::utility::log::logger
-lg(dogen::utility::log::logger_factory("backends::factory"));
+lg(dogen::utility::log::logger_factory("engine.backends.factory"));
 
 namespace dogen {
 namespace engine {

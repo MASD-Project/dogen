@@ -26,7 +26,7 @@
 namespace {
 
 dogen::utility::log::logger lg(
-    dogen::utility::log::logger_factory("outputters::factory"));
+    dogen::utility::log::logger_factory("engine.outputters.factory"));
 }
 
 namespace dogen {

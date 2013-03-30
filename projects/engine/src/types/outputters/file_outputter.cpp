@@ -32,7 +32,7 @@ using namespace dogen::utility::log;
 
 namespace {
 
-static logger lg(logger_factory("file_outputter"));
+static logger lg(logger_factory("engine.outputters.file_outputter"));
 
 const std::string outputter_name("file output");
 const std::string writing_file_message("Writing file: ");

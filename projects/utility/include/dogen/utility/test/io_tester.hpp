@@ -45,7 +45,7 @@ public:
 public:
     static void inserter_operator_produces_valid_json(const Entity& a) {
         using namespace dogen::utility::log;
-        logger lg(logger_factory("io_tester"));
+        logger lg(logger_factory("utility.test.io_tester"));
         BOOST_LOG_SEV(lg, debug) << "json: " << a;
 
         std::stringstream s;

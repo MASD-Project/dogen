@@ -35,7 +35,7 @@ using namespace dogen::utility::log;
 
 namespace {
 
-auto lg(logger_factory("serialization_implementation"));
+auto lg(logger_factory("cpp.formatters.serialization_implementation"));
 
 const std::string boost_ns("boost");
 const std::string serialization_ns("serialization");

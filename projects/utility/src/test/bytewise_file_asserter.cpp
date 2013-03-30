@@ -38,7 +38,7 @@ assert_file(boost::filesystem::path expected,
     const std::string actual_content(read_file_content(actual));
 
     using namespace dogen::utility::log;
-    logger lg(logger_factory("bytewise_file_asserter"));
+    logger lg(logger_factory("utility.test.bytewise_file_asserter"));
 
 
     if (expected_content == actual_content) {

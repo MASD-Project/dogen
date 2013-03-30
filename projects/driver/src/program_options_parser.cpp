@@ -41,7 +41,7 @@ using namespace dogen::utility::log;
 
 namespace {
 
-auto lg(logger_factory("program_options_parser"));
+auto lg(logger_factory("driver.program_options_parser"));
 
 const std::string at_least_one_argument(
     "Expected at least one argument for reference");

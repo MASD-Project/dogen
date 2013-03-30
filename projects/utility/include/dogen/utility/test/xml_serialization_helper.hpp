@@ -44,7 +44,7 @@ namespace test {
 template<typename Entity>
 Entity xml_deserialize(boost::filesystem::path path) {
     using namespace dogen::utility::log;
-    logger lg(logger_factory("xml_deserialize"));
+    logger lg(logger_factory("utility.test.xml_deserialize"));
     BOOST_LOG_SEV(lg, debug) << "Reading file: " << path.string();
 
     if (!boost::filesystem::exists(path)) {
@@ -69,7 +69,7 @@ Entity xml_deserialize(boost::filesystem::path path) {
 template<typename Entity>
 void xml_serialize(boost::filesystem::path path, Entity entity) {
     using namespace dogen::utility::log;
-    logger lg(logger_factory("xml_serialize"));
+    logger lg(logger_factory("utility.test.xml_serialize"));
     BOOST_LOG_SEV(lg, debug) << "Creating file: " << path.string();
 
     boost::filesystem::ofstream output_stream(path);

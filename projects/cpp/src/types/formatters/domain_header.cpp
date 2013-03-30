@@ -39,7 +39,7 @@ using namespace dogen::utility::log;
 
 namespace {
 
-auto lg(logger_factory("domain_header"));
+auto lg(logger_factory("cpp.formatters.domain_header"));
 
 const std::string boost_ns("boost");
 const std::string serialization_ns("serialization");

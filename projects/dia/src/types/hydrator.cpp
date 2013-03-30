@@ -39,7 +39,7 @@ using namespace dogen::utility::log;
 
 namespace {
 
-auto lg(dogen::utility::log::logger_factory("hydrator"));
+auto lg(dogen::utility::log::logger_factory("dia.hydrator"));
 
 // exception messages
 const std::string unexpected_element("Unexpected element: ");

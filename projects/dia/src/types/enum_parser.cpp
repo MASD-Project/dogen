@@ -27,7 +27,7 @@ using namespace dogen::utility::log;
 
 namespace {
 
-auto lg(logger_factory("dia_utility"));
+auto lg(logger_factory("dia.enum_parser"));
 
 const std::string uml_large_package("UML - LargePackage");
 const std::string uml_class("UML - Class");

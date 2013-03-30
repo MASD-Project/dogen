@@ -29,7 +29,7 @@ using namespace dogen::utility::log;
 
 namespace {
 
-auto lg(logger_factory("location_manager"));
+auto lg(logger_factory("cpp.location_manager"));
 
 const std::string empty;
 const std::string domain_postfix;

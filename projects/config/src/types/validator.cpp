@@ -27,7 +27,7 @@ using namespace dogen::utility::log;
 
 namespace {
 
-auto lg(logger_factory("validator"));
+auto lg(logger_factory("config.validator"));
 
 const std::string missing_target("Mandatory parameter target is missing");
 const std::string missing_source_include(

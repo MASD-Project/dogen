@@ -40,7 +40,7 @@ using namespace dogen::utility::log;
 
 namespace {
 
-auto lg(logger_factory("merger"));
+auto lg(logger_factory("sml.merger"));
 
 const std::string empty;
 const std::string primitive_model_name("primitive_model");

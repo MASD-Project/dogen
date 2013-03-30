@@ -31,7 +31,7 @@ using namespace dogen::utility::log;
 
 namespace  {
 
-logger lg(logger_factory("dia_file_asserter"));
+logger lg(logger_factory("dia.dia_file_asserter"));
 
 const std::string dia_xml_extension(".xmldia");
 const std::string file_is_not_assertable(

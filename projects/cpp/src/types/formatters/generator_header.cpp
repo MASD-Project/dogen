@@ -35,7 +35,7 @@ using namespace dogen::utility::log;
 
 namespace {
 
-auto lg(logger_factory("generator_header"));
+auto lg(logger_factory("cpp.formatters.generator_header"));
 
 const std::string missing_class_view_model(
     "Meta type is pod but class view model is empty");

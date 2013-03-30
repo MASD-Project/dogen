@@ -28,7 +28,7 @@ using namespace dogen::utility::log;
 
 namespace {
 
-auto lg(logger_factory("nested_qualified_name_builder"));
+auto lg(logger_factory("sml.nested_qualified_name_builder"));
 
 }
 

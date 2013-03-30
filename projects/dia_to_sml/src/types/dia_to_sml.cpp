@@ -49,7 +49,7 @@
 namespace {
 
 using namespace dogen::utility::log;
-auto lg(logger_factory("dia_to_sml"));
+auto lg(logger_factory("dia_to_sml.dia_to_sml"));
 
 const std::string error_parsing_object_type("Fail to parse object type: ");
 const std::string unsupported_object_type("Dia object type is not supported: ");

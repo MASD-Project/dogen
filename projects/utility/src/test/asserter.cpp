@@ -111,7 +111,7 @@ namespace utility {
 namespace test {
 
 dogen::utility::log::logger asserter::lg_(
-    dogen::utility::log::logger_factory("asserter"));
+    dogen::utility::log::logger_factory("utility.test.asserter"));
 
 bool asserter::handle_assert(const bool result, const std::string assertion) {
     using namespace dogen::utility::log;

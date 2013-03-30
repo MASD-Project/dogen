@@ -69,7 +69,7 @@ private:
     static void roundtrip_produces_the_same_entity(const entity_type& a) {
         using dogen::utility::streaming::jsonify;
         using namespace dogen::utility::log;
-        logger lg(logger_factory("serialization_tester"));
+        logger lg(logger_factory("utility.test.serialization_tester"));
         BOOST_LOG_SEV(lg, debug) << "original: " << jsonify(a);
         std::ostringstream output_stream;
         {
@@ -97,7 +97,7 @@ public:
     static void xml_roundtrip_produces_the_same_entity(const entity_type& a) {
         using namespace boost::archive;
         using namespace dogen::utility::log;
-        logger lg(logger_factory("serialization_tester"));
+        logger lg(logger_factory("utility.test.serialization_tester"));
         BOOST_LOG_SEV(lg, debug) << "XML serialization: ";
         roundtrip_produces_the_same_entity<xml_iarchive, xml_oarchive>(a);
     }
@@ -108,7 +108,7 @@ public:
     static void text_roundtrip_produces_the_same_entity(const entity_type& a) {
         using namespace boost::archive;
         using namespace dogen::utility::log;
-        logger lg(logger_factory("serialization_tester"));
+        logger lg(logger_factory("utility.test.serialization_tester"));
         BOOST_LOG_SEV(lg, debug) << "text serialization: ";
         roundtrip_produces_the_same_entity<text_iarchive, text_oarchive>(a);
     }
@@ -119,7 +119,7 @@ public:
     static void binary_roundtrip_produces_the_same_entity(const entity_type& a) {
         using namespace boost::archive;
         using namespace dogen::utility::log;
-        logger lg(logger_factory("serialization_tester"));
+        logger lg(logger_factory("utility.test.serialization_tester"));
         BOOST_LOG_SEV(lg, debug) << "binary serialization: ";
         roundtrip_produces_the_same_entity<binary_iarchive, binary_oarchive>(a);
     }
@@ -131,7 +131,7 @@ public:
     // FIXME: EOS is only supported on linux for now
     static void eos_roundtrip_produces_the_same_entity(const entity_type& a) {
         using namespace dogen::utility::log;
-        logger lg(logger_factory("serialization_tester"));
+        logger lg(logger_factory("utility.test.serialization_tester"));
         BOOST_LOG_SEV(lg, debug) << "Portable binary serialization: ";
         roundtrip_produces_the_same_entity<eos::portable_iarchive,
                                            eos::portable_oarchive>(a);

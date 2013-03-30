@@ -33,7 +33,7 @@ using namespace dogen::utility::log;
 
 namespace {
 
-auto lg(logger_factory("generator"));
+auto lg(logger_factory("cpp.generator"));
 
 const std::string cmakelists_file_name("CMakeLists.txt");
 const std::string domain_facet_must_be_enabled("Domain facet must be enabled");

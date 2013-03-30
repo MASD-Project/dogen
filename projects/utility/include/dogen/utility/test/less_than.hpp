@@ -47,7 +47,7 @@ public:
 
         using dogen::utility::streaming::jsonify;
         using namespace dogen::utility::log;
-        logger lg(logger_factory("less_than"));
+        logger lg(logger_factory("utility.test.less_than"));
         BOOST_LOG_SEV(lg, debug) << "a: " << jsonify(a);
         BOOST_LOG_SEV(lg, debug) << "b: " << jsonify(b);
         BOOST_CHECK(!(a < b));
@@ -61,7 +61,7 @@ public:
 
         using dogen::utility::streaming::jsonify;
         using namespace dogen::utility::log;
-        logger lg(logger_factory("less_than"));
+        logger lg(logger_factory("utility.test.less_than"));
         BOOST_LOG_SEV(lg, debug) << "a: " << jsonify(a);
         BOOST_LOG_SEV(lg, debug) << "b: " << jsonify(b);
         BOOST_CHECK(a != b);

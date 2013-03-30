@@ -27,7 +27,7 @@ using namespace dogen::utility::log;
 
 namespace {
 
-auto lg(logger_factory("boost_model_helper"));
+auto lg(logger_factory("cpp.boost_model_helper"));
 
 const std::string model("boost");
 

@@ -34,7 +34,7 @@
 namespace {
 
 using namespace dogen::utility::log;
-auto lg(logger_factory("housekeeper"));
+auto lg(logger_factory("engine.housekeeper"));
 
 using boost::filesystem::path;
 inline void log_ignoring_file(path p) {

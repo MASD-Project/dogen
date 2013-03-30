@@ -37,7 +37,7 @@ using namespace dogen::utility::log;
 
 namespace {
 
-auto lg(logger_factory("formatters::hash_implementation"));
+auto lg(logger_factory("cpp.formatters.hash_implementation"));
 
 const std::string std_ns("std");
 

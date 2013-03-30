@@ -34,7 +34,7 @@ using namespace dogen::utility::log;
 
 namespace {
 
-auto lg(logger_factory("io_header"));
+auto lg(logger_factory("cpp.formatters.io_header"));
 
 const std::string iosfwd("iosfwd");
 

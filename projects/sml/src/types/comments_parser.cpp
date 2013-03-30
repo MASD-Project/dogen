@@ -30,7 +30,7 @@ using namespace dogen::utility::log;
 
 namespace {
 
-auto lg(logger_factory("comments_parser"));
+auto lg(logger_factory("sml.comments_parser"));
 
 const std::string empty;
 const std::string prefix("#DOGEN ");

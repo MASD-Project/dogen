@@ -39,7 +39,7 @@ using namespace dogen::utility::log;
 
 namespace {
 
-auto lg(logger_factory("identifier_parser"));
+auto lg(logger_factory("sml.identifier_parser"));
 
 const char* delimiter = "::";
 const std::string error_msg("Failed to parse string: ");

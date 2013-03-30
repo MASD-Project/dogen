@@ -49,7 +49,7 @@ errmsg_sml_to_cpp_view_model;
 
 namespace {
 
-auto lg(logger_factory("sml_to_view_model"));
+auto lg(logger_factory("cpp.view_models.sml_to_view_model"));
 
 const std::string pod_not_found("pod not found in pod container: ");
 

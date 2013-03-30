@@ -33,7 +33,7 @@
 namespace {
 
 using namespace dogen::utility::log;
-static logger lg(logger_factory("dia_object_to_sml_package"));
+static logger lg(logger_factory("dia_to_sml.dia_object_to_sml_package"));
 
 using dogen::dia_to_sml::transformation_error;
 

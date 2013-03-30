@@ -48,7 +48,7 @@ public:
 
         using dogen::utility::streaming::jsonify;
         using namespace dogen::utility::log;
-        logger lg(logger_factory("hash_tester"));
+        logger lg(logger_factory("utility.test.hash_tester"));
         BOOST_LOG_SEV(lg, debug) << "a: " << jsonify(a);
         BOOST_LOG_SEV(lg, debug) << "b: " << jsonify(b);
         BOOST_CHECK(a == b);
@@ -66,7 +66,7 @@ public:
 
         using dogen::utility::streaming::jsonify;
         using namespace dogen::utility::log;
-        logger lg(logger_factory("hash_tester"));
+        logger lg(logger_factory("utility.test.hash_tester"));
         BOOST_LOG_SEV(lg, debug) << "a: " << jsonify(a);
         BOOST_LOG_SEV(lg, debug) << "b: " << jsonify(b);
         BOOST_CHECK(a != b);

@@ -39,7 +39,7 @@ using namespace dogen::utility::log;
 
 namespace {
 
-auto lg(logger_factory("domain_implementation"));
+auto lg(logger_factory("cpp.formatters.domain_implementation"));
 
 const std::string inserter("<< ");
 const std::string space_inserter(" << ");

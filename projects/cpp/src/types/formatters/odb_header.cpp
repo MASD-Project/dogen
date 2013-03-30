@@ -35,7 +35,7 @@ using namespace dogen::utility::log;
 
 namespace {
 
-auto lg(logger_factory("odb_header"));
+auto lg(logger_factory("cpp.formatters.odb_header"));
 
 const std::string std_ns("std");
 const std::string odb_pragma("#pragma db");

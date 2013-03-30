@@ -27,7 +27,7 @@ using namespace dogen::utility::log;
 
 namespace {
 
-auto lg(logger_factory("serialization_implementation"));
+auto lg(logger_factory("cpp.std_model_helper"));
 
 const std::string model("std");
 

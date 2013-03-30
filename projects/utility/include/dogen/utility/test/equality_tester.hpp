@@ -47,7 +47,7 @@ public:
     identical_objects_are_equal(const entity_type& a, const entity_type& b) {
         using dogen::utility::streaming::jsonify;
         using namespace dogen::utility::log;
-        logger lg(logger_factory("equality_tester"));
+        logger lg(logger_factory("utility.test.equality_tester"));
         BOOST_LOG_SEV(lg, debug) << "a: " << jsonify(a);
         BOOST_LOG_SEV(lg, debug) << "b: " << jsonify(b);
 
@@ -59,7 +59,7 @@ public:
     static void an_object_is_equal_to_itself(const entity_type& a) {
         using dogen::utility::streaming::jsonify;
         using namespace dogen::utility::log;
-        logger lg(logger_factory("equality_tester"));
+        logger lg(logger_factory("utility.test.equality_tester"));
         BOOST_LOG_SEV(lg, debug) << "a: " << jsonify(a);
 
         BOOST_CHECK(a == a);
@@ -76,7 +76,7 @@ public:
     distinct_objects_are_unequal(const entity_type& a, const entity_type& b) {
         using dogen::utility::streaming::jsonify;
         using namespace dogen::utility::log;
-        logger lg(logger_factory("equality_tester"));
+        logger lg(logger_factory("utility.test.equality_tester"));
         BOOST_LOG_SEV(lg, debug) << "a: " << jsonify(a);
         BOOST_LOG_SEV(lg, debug) << "b: " << jsonify(b);
 
