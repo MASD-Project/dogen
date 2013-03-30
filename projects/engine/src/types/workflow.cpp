@@ -150,8 +150,8 @@ boost::optional<sml::model> workflow::make_generatable_model() const {
     const auto& m(pair.second);
 
     BOOST_LOG_SEV(lg, debug) << "Merged model: " << m;
-    persister persister_(settings_);
-    persister_.save_model(m, merged);
+    persister p(settings_);
+    p.persist(m, merged);
 
     BOOST_LOG_SEV(lg, debug) << "Totals: pods: " << m.pods().size()
                              << " enumerations: " << m.enumerations().size()

@@ -80,8 +80,7 @@ bool persister::is_save_sml_model_enabled() const {
         config::archive_types::invalid;
 }
 
-void persister::
-save_diagram(const dia::diagram& d, const std::string& name) const {
+void persister::persist(const dia::diagram& d, const std::string& name) const {
     if (!is_save_dia_model_enabled())
         return;
 
@@ -97,8 +96,7 @@ save_diagram(const dia::diagram& d, const std::string& name) const {
     xml_serialize<dia::diagram>(p, d);
 }
 
-void persister::
-save_model(const sml::model& m, const std::string& prefix) const {
+void persister::persist(const sml::model& m, const std::string& prefix) const {
     if (!is_save_sml_model_enabled())
         return;
 

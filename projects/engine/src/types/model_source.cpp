@@ -43,7 +43,7 @@ dia::diagram model_source::
 hydrate_diagram(const boost::filesystem::path& path) const {
     dia::hydrator h(path);
     dia::diagram r(h.hydrate());
-    persister_.save_diagram(r, path.stem().string());
+    persister_.persist(r, path.stem().string());
     return r;
 }
 
@@ -60,7 +60,7 @@ sml::model model_source::to_sml(const dia::diagram& d, config::reference ref,
     dia_to_sml dia_to_sml(d, name, epp, is_target, verbose);
 
     sml::model m(dia_to_sml.transform());
-    persister_.save_model(m, empty);
+    persister_.persist(m, empty);
     return std::move(m);
 }
 

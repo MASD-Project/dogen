@@ -73,14 +73,14 @@ public:
      * @param d Dia model to save.
      * @param file_name name of the file to save.
      */
-    void save_diagram(const dia::diagram& d, const std::string& name) const;
+    void persist(const dia::diagram& d, const std::string& name) const;
 
     /**
      * @brief Saves an SML model to the filesystem.
      *
      * @param m SML model to save.
      */
-    void save_model(const sml::model& m, const std::string& prefix) const;
+    void persist(const sml::model& m, const std::string& prefix) const;
 
 private:
     const config::settings settings_;
