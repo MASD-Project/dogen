@@ -65,7 +65,7 @@ sml::model model_source::to_sml(const dia::diagram& d, config::reference ref,
 }
 
 std::list<sml::model> model_source::references() const {
-    const bool is_target(true);
+    const bool is_target(false);
     std::list<sml::model> r;
     for (const auto ref : settings_.modeling().references()) {
         const dia::diagram d(hydrate_diagram(ref.path()));
