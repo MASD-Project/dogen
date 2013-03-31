@@ -1,0 +1,142 @@
+#+title: Release Notes for Sprint 24
+#+options: date:nil toc:nil author:nil num:nil
+#+todo: ANALYSIS IMPLEMENTATION TESTING | COMPLETED CANCELLED
+#+tags: story(s) epic(e) task(t) note(n) spike(p)
+
+* Release Notes
+
+This file contains all stories that were closed during sprint 24.
+
+** Development Stories Implemented
+
+#+begin: clocktable :maxlevel 3 :scope subtree
+#+end:
+
+*** COMPLETED Move injection of system types into SML                 :story:
+    CLOSED: [2013-03-31 Sun 12:44]
+
+At present the director is responsible for injecting all system types
+once the model has been processed by the merger. However, there is no
+reason why this is not done inside SML as it has no external
+dependencies. We could create a =system_type_injector= or some such
+service to take over the =inject_system_types= method.
+
+*** COMPLETED Improve exception reporting in tests                    :story:
+    CLOSED: [2013-03-31 Sun 13:37]
+
+As explained [[http://boost.2283326.n4.nabble.com/Boost-Test-Using-boost-exception-td4447404.html][here]], one can get proper boost exception support in unit
+tests. This has been done for generator's spec. We need to do the
+following for every =spec= directory on every project:
+
+- create a =main.cpp= in the =spec= directory. In the past we mixed
+  the main with the rest of the code, but this is very messy. Instead,
+  locate the file with the lines =BOOST_TEST_DYN_LINK=. If that file
+  only has 3 or 4 lines, you can safely rename it to =main.cpp=.
+
+- If the file has lots of lines, delete the following two lines
+  (where =XXXX= is the project you are working on):
+
+: #define BOOST_TEST_DYN_LINK
+: #define BOOST_TEST_MODULE XXXX_spec
+
+- Then locate the following line:
+
+: #include <boost/test/included/unit_test.hpp>
+
+and change it to:
+
+: #include <boost/test/unit_test.hpp>
+
+- finally, create a =main.cpp= and make it look like
+  =generator/spec/main.cpp=, renaming =generator_spec= accordingly.
+
+NOTE: any mistakes with the spec name will result in build errors
+after the push as the build agent will not be able to find the
+tests. So if your local build is green but the agent is red, start by
+checking this.
+
+**** COMPLETED config
+     CLOSED: [2013-03-31 Sun 12:46]
+
+**** COMPLETED cpp
+     CLOSED: [2013-03-31 Sun 12:46]
+
+**** COMPLETED database
+     CLOSED: [2013-03-31 Sun 12:47]
+
+**** COMPLETED dia
+     CLOSED: [2013-03-31 Sun 12:47]
+
+**** COMPLETED dia_to_sml
+     CLOSED: [2013-03-31 Sun 12:49]
+
+**** COMPLETED driver
+     CLOSED: [2013-03-31 Sun 13:36]
+
+**** COMPLETED engine
+     CLOSED: [2013-03-31 Sun 13:36]
+
+**** COMPLETED sml
+     CLOSED: [2013-03-31 Sun 13:36]
+
+**** COMPLETED utility
+     CLOSED: [2013-03-31 Sun 13:36]
+
+*** COMPLETED Code generate C++ model                                 :story:
+    CLOSED: [2013-03-31 Sun 14:10]
+
+The C++ back end is at present part of the generator (now called
+engine) but it could be a model on its on. We can take the opportunity
+to make paths smaller and remove the =cpp_= prefix on file names,
+class names, etc. Instead of creating a back end interface at the C++
+model level, the engine will be responsible for adapting the C++
+model into a back end. This also means the view model will all be code
+generator (minus the transformer).
+
+*** COMPLETED Remove manager post-fix
+    CLOSED: [2013-03-31 Sun 14:58]
+
+We should rename location manager to locator and inclusion manager to
+includer. The word manager does not add any more meaning to their
+responsibilities. We need to find a clearer word to describe what we
+call includer at the moment; a header that includes a set of other
+headers - for example all headers for facet X or all headers for
+domain model Y. Header aggregator, etc.
+
+*** COMPLETED Investigate generation of setters using const ref       :story:
+    CLOSED: [2013-03-31 Sun 14:10]
+
+It seems its possible to overload setters with both by value and by
+const ref. We need to figure out how this works.
+
+http://www.codesynthesis.com/~boris/blog/2012/06/19/efficient-argument-passing-cxx11-part1/
+
+***** Update class template                                            :task:
+***** Update tests                                                     :task:
+
+*** COMPLETED Rename qualified_name to qname                          :story:
+    CLOSED: [2013-03-31 Sun 14:19]
+
+QName is well known. It also allows for better method names such as
+=type_qname= instead of =type_name= where its not obvious that its a
+qualified name rather than a string.
+
+This task is waiting for SML to be code generated.
+
+** Deprecated Development Stories
+*** Formatters are actually just view model IO
+
+In reality, the formatters are nothing but glorified inserters. When
+we start generating the view model, we should not generate the
+traditional =io= and re-implement the formatters as inserters so that
+one can simply take a file view model and stream it and it should
+result in a compilable file. The end result will be a domain model
+with:
+
+- domain: code generated view model
+- io: formatters refactored as inserters
+- utility: view model transformer
+
+NOTE: this story is now deprecated as we are using dogen to generate
+the C++ model and its not possible to overload the streaming
+operators. It was always a bad idea anyway.

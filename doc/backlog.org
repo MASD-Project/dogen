@@ -11,6 +11,12 @@ This file contains all stories that haven't been assigned to a sprint.
 
 Stories that we intend to look at, at some point.
 
+*** Rename C++ model into something more generic
+
+The C++ model should by rights be called something like c-like model
+or something of the kind because it can be extended to generate C,
+COM, GObject, etc.
+
 *** Optional io formatter has no space between stream and inserter    :story:
 
 Minor typo on formatter, should have used spaced inserter.
@@ -54,47 +60,6 @@ code. In theory all we need is:
    name and use it instead of the fully qualified type name.
 5. we should also generate a typedef for the key if the class is an
    entity. See Typedef keys for each type.
-
-*** Move injection of system types into SML                           :story:
-
-At present the director is responsible for injecting all system types
-once the model has been processed by the merger. However, there is no
-reason why this is not done inside SML as it has no external
-dependencies. We could create a =system_type_injector= or some such
-service to take over the =inject_system_types= method.
-
-*** Improve exception reporting in tests                              :story:
-
-As explained [[http://boost.2283326.n4.nabble.com/Boost-Test-Using-boost-exception-td4447404.html][here]], one can get proper boost exception support in unit
-tests. This has been done for generator's spec. We need to do the
-following for every =spec= directory on every project:
-
-- create a =main.cpp= in the =spec= directory. In the past we mixed
-  the main with the rest of the code, but this is very messy. Instead,
-  locate the file with the lines =BOOST_TEST_DYN_LINK=. If that file
-  only has 3 or 4 lines, you can safely rename it to =main.cpp=.
-
-- If the file has lots of lines, delete the following two lines
-  (where =XXXX= is the project you are working on):
-
-: #define BOOST_TEST_DYN_LINK
-: #define BOOST_TEST_MODULE XXXX_spec
-
-- Then locate the following line:
-
-: #include <boost/test/included/unit_test.hpp>
-
-and change it to:
-
-: #include <boost/test/unit_test.hpp>
-
-- finally, create a =main.cpp= and make it look like
-  =generator/spec/main.cpp=, renaming =generator_spec= accordingly.
-
-NOTE: any mistakes with the spec name will result in build errors
-after the push as the build agent will not be able to find the
-tests. So if your local build is green but the agent is red, start by
-checking this.
 
 *** Test move constructors in test model                              :story:
 
@@ -451,22 +416,6 @@ been captured in the backlog.
   allows primitives plus model types. we will need pointer support for
   this. object oriented is the current mode. the modes are validated
   in the middle end.
-- create a backend project that defines the back end interface and
-  provides a factory that takes an enum (c, c++, COM, etc) and returns
-  a backend. it also provides a mock backend.
-- split c++ backend from generator into backend. make it
-  implement the backend interface. fix all the naming issues. we need
-  to rename this backend as c-like or something of the kind because it
-  can be extended to generate C, COM, GObject, etc.
-- remove the cpp prefix on c++ files.
-- create model wrappers for std and primitives includes
-- make the c++ view model a dogen model.
-- implement formatters as part of the view model. leave them as
-  formatters, not as IO, so we can still IO the view model.
-- formatters are now c++ formatters.
-- create interfaces for the location and inclusion managers.
-- create a dogen model settings at top level, shared by all the dogen
-  components (driver, backend, etc).
 - create a front end component that defines the front end inteface,
   has a factory that returns a front end based on an enum.
 - create the dia front end which contains the dia to SML code from
@@ -476,10 +425,8 @@ been captured in the backlog.
   end instance. create a mock.
 - middle end component will eventually be responsible for the
   intermediate model.
-- generator is now a shell that interconnects front, middle and back
+- engine is now a shell that interconnects front, middle and back
   end based on configuration options.
-- code generate dia model
-- code generate SML model
 - use inheritance in SML model
 - refactor middle end to take advantage of inheritance
 - we need to split cmake generation from C++. We can't have backends
@@ -494,15 +441,16 @@ been captured in the backlog.
 
 Something is not quite right on the resolution logic
 
-*** Adding new modeling spec tests is hard
+*** Adding new engine spec tests is hard
 
-In order to test models at the modeling level one needs to first
+In order to test models at the engine level one needs to first
 generate the dia input. This can be done as follows:
 
 : ./dogen_driver-0.0.507 --save-dia-model xml
 : --stop-after-merging -t ../../../../dogen/test_data/dia_sml/input/boost_model.dia
 
-From the bin directory. We need to make these steps a bit more obvious.
+From the bin directory. We need to make these steps a bit more
+obvious. Why do we even need this?
 
 *** Naming of saved SML/Dia files is incorrect
 
@@ -619,9 +567,9 @@ assumption. The alternatives are:
 
 Either approach requires [[Ignore%20files%20and%20folders%20based%20on%20regex][Ignore files and folders based on regex]].
 
-*** Rename =cpp_inserter_implementation=
+*** Rename =inserter_implementation=
 
-We used =cpp_inserter_implementation= to provide all sorts of utility
+We used =inserter_implementation= to provide all sorts of utility
 methods for IO. This class should really be named IO utility or
 something of the sort.
 
@@ -640,19 +588,6 @@ See: http://en.wikipedia.org/wiki/Fluent_interface
 This could also be a stereotype so that a model could have both fluent
 and non-fluent classes. This story is dependent on support for
 multiple stereotypes.
-
-*** Formatters are actually just view model IO
-
-In reality, the formatters are nothing but glorified inserters. When
-we start generating the view model, we should not generate the
-traditional =io= and re-implement the formatters as inserters so that
-one can simply take a file view model and stream it and it should
-result in a compilable file. The end result will be a domain model
-with:
-
-- domain: code generated view model
-- io: formatters refactored as inserters
-- utility: view model transformer
 
 *** Cross model referencing tests
 
@@ -750,7 +685,7 @@ times. Should throw an exception.
 
 *** Create a class with file information
 
-In C++ backend we use four parameters that get passed all over the
+In C++ model we use four parameters that get passed all over the
 place: facet, aspect, file type and category. We should:
 
 - rename file type to file kind (interface, implementation)
@@ -760,15 +695,6 @@ place: facet, aspect, file type and category. We should:
 - change the view model to take a file type
 
 The class could be called =context= or something of the like.
-
-*** Remove manager post-fix
-
-We should rename location manager to locator and inclusion manager to
-includer. The word manager does not add any more meaning to their
-responsibilities. We need to find a clearer word to describe what we
-call includer at the moment; a header that includes a set of other
-headers - for example all headers for facet X or all headers for
-domain model Y. Header aggregator, etc.
 
 *** Test model sanity checks fail for enable facet serialisation
 
@@ -901,16 +827,6 @@ use =boost::filesystem::path= throughout and do a =.string= at the
 very end if boost log does not support boost filesystem (or use the
 path directly if it does).
 
-*** Investigate generation of setters using const ref                 :story:
-
-It seems its possible to overload setters with both by value and by
-const ref. We need to figure out how this works.
-
-http://www.codesynthesis.com/~boris/blog/2012/06/19/efficient-argument-passing-cxx11-part1/
-
-***** Update class template                                            :task:
-***** Update tests                                                     :task:
-
 *** Create model with invalid primitive type                          :story:
 
 At present we are validating that all primitive types work but we
@@ -1006,14 +922,6 @@ At present we are still doing C++-03 iterations in the STL IO files
 such as =vector_io=, =list_io=, etc. We should be using the new =for=
 syntax for C++-11.
 
-*** Rename qualified_name to qname                                    :story:
-
-QName is well known. It also allows for better method names such as
-=type_qname= instead of =type_name= where its not obvious that its a
-qualified name rather than a string.
-
-This task is waiting for SML to be code generated.
-
 *** Rename pod in SML
 
 We mistakingly called complex types =pod= because of a lack of
@@ -1077,9 +985,9 @@ name and test suite.
 We did a crud implementation of finding WinSock just to get windows to
 build. There should be a FindWinSock somewhere. If not create one.
 
-*** Modeling director does not support all archive types
+*** =persister= does not support all archive types
 
-At present the modeling director always outputs in XML. it should
+At present the =persister= in engine always outputs in XML. it should
 respect the archive type requested by the user.
 
 *** Add unit test benchmarking
