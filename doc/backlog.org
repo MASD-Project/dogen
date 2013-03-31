@@ -11,6 +11,13 @@ This file contains all stories that haven't been assigned to a sprint.
 
 Stories that we intend to look at, at some point.
 
+*** Handling of include cmakelists in split projects is not correct   :story:
+
+At present we are only generating a cmakelists file for include
+folders on non-split projects. This means that the header files for
+split projects won't be packaged up. It also means that for ODB
+projects we won't get the ODB targets.
+
 *** Rename C++ model into something more generic
 
 The C++ model should by rights be called something like c-like model
