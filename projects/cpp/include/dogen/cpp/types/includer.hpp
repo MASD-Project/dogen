@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_INCLUSION_MANAGER_HPP
-#define DOGEN_CPP_INCLUSION_MANAGER_HPP
+#ifndef DOGEN_CPP_INCLUDER_HPP
+#define DOGEN_CPP_INCLUDER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -37,7 +37,7 @@
 #include "dogen/sml/types/meta_types.hpp"
 #include "dogen/cpp/types/dependency_details.hpp"
 #include "dogen/cpp/types/dependency_extractor.hpp"
-#include "dogen/cpp/types/location_manager.hpp"
+#include "dogen/cpp/types/locator.hpp"
 #include "dogen/cpp/types/aspect_types.hpp"
 #include "dogen/config/types/cpp_facet_types.hpp"
 #include "dogen/cpp/types/file_types.hpp"
@@ -70,17 +70,17 @@ struct inclusion_lists {
  * and are expected to be included using double-quotes.
  *
  */
-class inclusion_manager {
+class includer {
 public:
-    inclusion_manager() = delete;
-    inclusion_manager(const inclusion_manager&) = default;
-    ~inclusion_manager() = default;
-    inclusion_manager& operator=(const inclusion_manager&) = delete;
+    includer() = delete;
+    includer(const includer&) = default;
+    ~includer() = default;
+    includer& operator=(const includer&) = delete;
 
 public:
-    inclusion_manager(inclusion_manager&& rhs)
+    includer(includer&& rhs)
     : model_(std::move(rhs.model_)),
-      location_manager_(std::move(rhs.location_manager_)),
+      locator_(std::move(rhs.locator_)),
       settings_(std::move(rhs.settings_)),
       io_enabled_(std::move(rhs.io_enabled_)),
       serialization_enabled_(std::move(rhs.serialization_enabled_)),
@@ -90,8 +90,8 @@ public:
       std_(std::move(rhs.std_)),
       dependency_extractor_(std::move(rhs.dependency_extractor_)) { }
 
-    inclusion_manager(const sml::model& model,
-        const location_manager& location_manager,
+    includer(const sml::model& model,
+        const locator& locator,
         const config::cpp_settings& settings);
 
 private:
@@ -239,7 +239,7 @@ public:
 
 private:
     const sml::model model_;
-    const location_manager location_manager_;
+    const locator locator_;
     const config::cpp_settings settings_;
     const bool io_enabled_;
     const bool serialization_enabled_;

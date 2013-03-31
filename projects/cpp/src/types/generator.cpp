@@ -19,7 +19,7 @@
  *
  */
 #include <boost/throw_exception.hpp>
-#include "dogen/cpp/types/inclusion_manager.hpp"
+#include "dogen/cpp/types/includer.hpp"
 #include "dogen/cpp/types/generation_failure.hpp"
 #include "dogen/cpp/types/formatters/factory.hpp"
 #include "dogen/cpp/types/formatters/file_formatter.hpp"
@@ -47,7 +47,7 @@ namespace cpp {
 generator::
 generator(const sml::model& model, const config::cpp_settings& settings) :
     model_(model), settings_(settings),
-    location_manager_(model.name(), settings_) {
+    locator_(model.name(), settings_) {
 
     if (settings_.use_integrated_io()) {
         const auto f(settings_.enabled_facets());
@@ -91,7 +91,7 @@ void generator::log_file_views(unsigned int how_many) const {
 generator::value_type generator::generate_cmakelists() const {
     view_models::cmakelists_view_model vm;
     vm.file_name(cmakelists_file_name);
-    vm.file_path(location_manager_.absolute_path_to_src(vm.file_name()));
+    vm.file_path(locator_.absolute_path_to_src(vm.file_name()));
     vm.model_name(model_.name());
 
     if (!model_.external_package_path().empty())
@@ -107,7 +107,7 @@ generator::value_type generator::generate_cmakelists() const {
 
     if (!settings_.split_project()) {
         stream.str("");
-        vm.file_path(location_manager_.absolute_path(vm.file_name()));
+        vm.file_path(locator_.absolute_path(vm.file_name()));
         log_formating_view(vm.file_path().string());
         formatters::include_cmakelists inc(stream);
         inc.format(vm);
@@ -129,10 +129,10 @@ generate_file_view_model(const view_models::file_view_model& vm) const {
 }
 
 generator::value_type generator::generate_file_view_models() const {
-    inclusion_manager im(model_, location_manager_, settings_);
+    includer im(model_, locator_, settings_);
 
     using view_models::sml_to_cpp_view_model;
-    sml_to_cpp_view_model t(location_manager_, im, settings_, model_);
+    sml_to_cpp_view_model t(locator_, im, settings_, model_);
     std::vector<view_models::file_view_model> fvms(t.transform());
     log_file_views(fvms.size());
 
@@ -158,7 +158,7 @@ generator::value_type generator::generate() {
 }
 
 std::vector<boost::filesystem::path> generator::managed_directories() const {
-    return location_manager_.managed_directories();
+    return locator_.managed_directories();
 }
 
 } }

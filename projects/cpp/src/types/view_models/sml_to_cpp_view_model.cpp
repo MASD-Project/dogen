@@ -468,12 +468,12 @@ namespace cpp {
 namespace view_models {
 
 sml_to_cpp_view_model::
-sml_to_cpp_view_model(const location_manager& location_manager,
-    const inclusion_manager& inclusion_manager,
+sml_to_cpp_view_model(const locator& locator,
+    const includer& includer,
     const config::cpp_settings& settings,
     const sml::model& model) :
-    location_manager_(location_manager),
-    inclusion_manager_(inclusion_manager),
+    locator_(locator),
+    includer_(includer),
     settings_(settings),
     model_(model),
     root_vertex_(boost::add_vertex(graph_)) { }
@@ -545,14 +545,14 @@ create_file(config::cpp_facet_types ft, file_types flt, aspect_types at,
     r.aspect_type(at);
 
     auto rq(location_request_factory(ft, flt, at, name));
-    r.file_path(location_manager_.absolute_path(rq));
+    r.file_path(locator_.absolute_path(rq));
 
     if (flt == file_types::header) {
         rq = location_request_factory(ft, flt, at, name);
-        const auto rp(location_manager_.relative_logical_path(rq));
+        const auto rp(locator_.relative_logical_path(rq));
         r.header_guard(to_header_guard_name(rp));
         if (at == aspect_types::main)
-            inclusion_manager_.register_header(ft, rp);
+            includer_.register_header(ft, rp);
     }
 
     return r;
@@ -583,7 +583,7 @@ transform_file(config::cpp_facet_types ft, file_types flt,
     }
     r.class_vm(i->second);
 
-    const auto includes(inclusion_manager_.includes_for_pod(p, ft, flt, at));
+    const auto includes(includer_.includes_for_pod(p, ft, flt, at));
     r.system_includes(includes.system);
     r.user_includes(includes.user);
     return r;
@@ -609,7 +609,7 @@ transform_file(config::cpp_facet_types ft, file_types flt,
     }
     r.enumeration_vm(i->second);
 
-    const auto in(inclusion_manager_.includes_for_enumeration(e, ft, flt, at));
+    const auto in(includer_.includes_for_enumeration(e, ft, flt, at));
     r.system_includes(in.system);
     r.user_includes(in.user);
     return r;
@@ -635,7 +635,7 @@ transform_file(config::cpp_facet_types ft, file_types flt,
     }
     r.exception_vm(i->second);
 
-    const auto in(inclusion_manager_.includes_for_exception(e, ft, flt, at));
+    const auto in(includer_.includes_for_exception(e, ft, flt, at));
     r.system_includes(in.system);
     r.user_includes(in.user);
     return r;
@@ -927,11 +927,11 @@ sml_to_cpp_view_model::transform_facet_includers() const {
 
         file_view_model vm;
         vm.facet_type(ft);
-        vm.file_path(location_manager_.absolute_path(rq));
+        vm.file_path(locator_.absolute_path(rq));
         vm.file_type(file_type);
         vm.aspect_type(at);
 
-        const auto includes(inclusion_manager_.includes_for_includer_files(ft));
+        const auto includes(includer_.includes_for_includer_files(ft));
         vm.system_includes(includes.system);
         vm.user_includes(includes.user);
 
@@ -997,12 +997,12 @@ sml_to_cpp_view_model::transform_registrar() const {
             const auto rq(location_request_factory(ft, flt, at, qn));
 
             fvm.facet_type(ft);
-            fvm.file_path(location_manager_.absolute_path(rq));
+            fvm.file_path(locator_.absolute_path(rq));
             fvm.file_type(flt);
             fvm.aspect_type(at);
             fvm.registrar_vm(rvm);
 
-            const auto includes(inclusion_manager_.includes_for_registrar(flt));
+            const auto includes(includer_.includes_for_registrar(flt));
             fvm.system_includes(includes.system);
             fvm.user_includes(includes.user);
 

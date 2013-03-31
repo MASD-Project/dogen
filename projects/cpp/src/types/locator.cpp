@@ -23,13 +23,13 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/config/io/cpp_settings_io.hpp"
 #include "dogen/utility/exception/invalid_enum_value.hpp"
-#include "dogen/cpp/types/location_manager.hpp"
+#include "dogen/cpp/types/locator.hpp"
 
 using namespace dogen::utility::log;
 
 namespace {
 
-auto lg(logger_factory("cpp.location_manager"));
+auto lg(logger_factory("cpp.locator"));
 
 const std::string empty;
 const std::string domain_postfix;
@@ -56,7 +56,7 @@ namespace cpp {
 
 using utility::exception::invalid_enum_value;
 
-location_manager::location_manager(const std::string& model_name,
+locator::locator(const std::string& model_name,
     const config::cpp_settings& settings) :
     model_name_(model_name), settings_(settings) {
 
@@ -79,7 +79,7 @@ location_manager::location_manager(const std::string& model_name,
         << " model name: " << model_name;
 }
 
-std::string location_manager::facet_directory(config::cpp_facet_types facet) const {
+std::string locator::facet_directory(config::cpp_facet_types facet) const {
     if (settings_.disable_facet_folders())
         return empty;
 
@@ -101,7 +101,7 @@ std::string location_manager::facet_directory(config::cpp_facet_types facet) con
     }
 }
 
-std::string location_manager::
+std::string locator::
 facet_postfix(config::cpp_facet_types facet) const {
     if (settings_.disable_unique_file_names())
         return empty;
@@ -121,7 +121,7 @@ facet_postfix(config::cpp_facet_types facet) const {
 }
 
 std::string
-location_manager::aspect_postfix(aspect_types aspect) const {
+locator::aspect_postfix(aspect_types aspect) const {
     if (settings_.disable_unique_file_names())
         return empty;
 
@@ -137,7 +137,7 @@ location_manager::aspect_postfix(aspect_types aspect) const {
 }
 
 boost::filesystem::path
-location_manager::file_type_directory(file_types file_type) const {
+locator::file_type_directory(file_types file_type) const {
     switch(file_type) {
     case file_types::header: return include_directory_; break;
     case file_types::implementation: return source_directory_; break;
@@ -147,7 +147,7 @@ location_manager::file_type_directory(file_types file_type) const {
     }
 }
 
-std::string location_manager::extension(file_types file_type) const {
+std::string locator::extension(file_types file_type) const {
     switch(file_type) {
     case file_types::header: return settings_.header_extension(); break;
     case file_types::implementation:
@@ -158,7 +158,7 @@ std::string location_manager::extension(file_types file_type) const {
     }
 }
 
-boost::filesystem::path location_manager::relative_logical_path(
+boost::filesystem::path locator::relative_logical_path(
     const location_request& request) const {
     boost::filesystem::path r;
 
@@ -171,7 +171,7 @@ boost::filesystem::path location_manager::relative_logical_path(
     return relative_physical_path(request);
 }
 
-boost::filesystem::path location_manager::relative_physical_path(
+boost::filesystem::path locator::relative_physical_path(
     const location_request& request) const {
     boost::filesystem::path r;
 
@@ -198,7 +198,7 @@ boost::filesystem::path location_manager::relative_physical_path(
 }
 
 boost::filesystem::path
-location_manager::absolute_path(const location_request& request) const {
+locator::absolute_path(const location_request& request) const {
 
     auto r(file_type_directory(request.file_type()));
     r /= relative_physical_path(request);
@@ -206,21 +206,21 @@ location_manager::absolute_path(const location_request& request) const {
 }
 
 boost::filesystem::path
-location_manager::absolute_path_to_src(const std::string& name) const {
+locator::absolute_path_to_src(const std::string& name) const {
     if (settings_.split_project())
         return source_directory_ / model_name_ / name;
     return source_directory_ / name;
 }
 
 boost::filesystem::path
-location_manager::absolute_path_to_include(const std::string& name) const {
+locator::absolute_path_to_include(const std::string& name) const {
     if (settings_.split_project())
         return include_directory_ / model_name_ / name;
     return include_directory_ / name;
 }
 
 boost::filesystem::path
-location_manager::absolute_path(const std::string& name) const {
+locator::absolute_path(const std::string& name) const {
     if (settings_.split_project()) {
         BOOST_LOG_SEV(lg, error) << absolute_path_with_split;
         BOOST_THROW_EXCEPTION(
@@ -230,7 +230,7 @@ location_manager::absolute_path(const std::string& name) const {
 }
 
 std::vector<boost::filesystem::path>
-location_manager::managed_directories() const {
+locator::managed_directories() const {
     std::vector<boost::filesystem::path> r;
 
     if (settings_.split_project()) {

@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_VIEW_MODELS_SML_TO_CPP_VIEW_MODEL_HPP
-#define DOGEN_CPP_VIEW_MODELS_SML_TO_CPP_VIEW_MODEL_HPP
+#ifndef DOGEN_CPP_TYPES_VIEW_MODELS_SML_TO_CPP_VIEW_MODEL_HPP
+#define DOGEN_CPP_TYPES_VIEW_MODELS_SML_TO_CPP_VIEW_MODEL_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -33,8 +33,8 @@
 #include <unordered_map>
 #include <boost/graph/adjacency_list.hpp>
 #include "dogen/config/types/cpp_settings.hpp"
-#include "dogen/cpp/types/location_manager.hpp"
-#include "dogen//cpp/types/inclusion_manager.hpp"
+#include "dogen/cpp/types/locator.hpp"
+#include "dogen//cpp/types/includer.hpp"
 #include "dogen/cpp/types/aspect_types.hpp"
 #include "dogen/cpp/types/file_types.hpp"
 #include "dogen/config/types/cpp_facet_types.hpp"
@@ -62,8 +62,8 @@ public:
     sml_to_cpp_view_model& operator=(const sml_to_cpp_view_model&) = delete;
 
 public:
-    sml_to_cpp_view_model(const location_manager& location_manager,
-        const inclusion_manager& inclusion_manager,
+    sml_to_cpp_view_model(const locator& locator,
+        const includer& includer,
         const config::cpp_settings& settings,
         const sml::model& model);
 
@@ -225,8 +225,8 @@ private:
     qname_to_vertex_type;
 
 private:
-    const location_manager location_manager_;
-    inclusion_manager inclusion_manager_;
+    const locator locator_;
+    includer includer_;
     const config::cpp_settings settings_;
     const sml::model model_;
     std::unordered_map<sml::qname, class_view_model> qname_to_class_;

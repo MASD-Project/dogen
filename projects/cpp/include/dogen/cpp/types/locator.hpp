@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_LOCATION_MANAGER_HPP
-#define DOGEN_CPP_LOCATION_MANAGER_HPP
+#ifndef DOGEN_CPP_TYPES_LOCATOR_HPP
+#define DOGEN_CPP_TYPES_LOCATOR_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -41,21 +41,21 @@ namespace cpp {
  * @brief Manages the file names for all generated files and all the
  * pre-processor includes.
  */
-class location_manager {
+class locator {
 public:
-    location_manager() = delete;
-    location_manager(const location_manager&) = default;
-    ~location_manager() = default;
-    location_manager& operator=(const location_manager&) = delete;
+    locator() = delete;
+    locator(const locator&) = default;
+    ~locator() = default;
+    locator& operator=(const locator&) = delete;
 
 public:
-    location_manager(location_manager&& rhs)
+    locator(locator&& rhs)
     : model_name_(std::move(rhs.model_name_)),
       settings_(std::move(rhs.settings_)),
       source_directory_(std::move(rhs.source_directory_)),
       include_directory_(std::move(rhs.include_directory_)) { }
 
-    location_manager(const std::string& model_name,
+    locator(const std::string& model_name,
         const config::cpp_settings& settings);
 
 private:

@@ -32,7 +32,7 @@
 #include <boost/filesystem/path.hpp>
 #include "dogen/sml/types/model.hpp"
 #include "dogen/config/types/cpp_settings.hpp"
-#include "dogen/cpp/types/location_manager.hpp"
+#include "dogen/cpp/types/locator.hpp"
 #include "dogen/cpp/types/view_models/cmakelists_view_model.hpp"
 #include "dogen/cpp/types/view_models/file_view_model.hpp"
 
@@ -74,7 +74,7 @@ public:
 private:
     const sml::model model_;
     const config::cpp_settings settings_;
-    const location_manager location_manager_;
+    const locator locator_;
 };
 
 } }

@@ -27,17 +27,17 @@
 #include "dogen/utility/test_data/tds_test_good.hpp"
 #include "dogen/utility/test/logging.hpp"
 #include "dogen/config/io/cpp_facet_types_io.hpp"
-#include "dogen/cpp/types/location_manager.hpp"
+#include "dogen/cpp/types/locator.hpp"
 #include "dogen/cpp/types/location_request.hpp"
 #include "dogen/config/test/mock_settings_factory.hpp"
-#include "dogen/cpp/types/inclusion_manager.hpp"
+#include "dogen/cpp/types/includer.hpp"
 
 using namespace dogen::cpp;
 using dogen::config::cpp_facet_types;
 
 namespace  {
 
-const std::string test_suite("inclusion_manager_spec");
+const std::string test_suite("includer_spec");
 const std::string test_module("generator");
 const std::string types("types");
 const std::string hash("hash");
@@ -108,31 +108,31 @@ dogen::sml::model one_pod_model() {
     return r;
 }
 
-inclusion_manager default_inclusion_manager(const dogen::sml::model& m) {
+includer default_includer(const dogen::sml::model& m) {
     auto s(mock_settings());
     s.use_integrated_io(false);
     s.disable_versioning(false);
 
-    location_manager lm(m.name(), s);
-    return inclusion_manager(m, lm, s);
+    locator lm(m.name(), s);
+    return includer(m, lm, s);
 }
 
-inclusion_manager inclusion_manager_with_no_keys(const dogen::sml::model& m) {
+includer includer_with_no_keys(const dogen::sml::model& m) {
     auto s(mock_settings());
     s.use_integrated_io(false);
     s.disable_versioning(true);
-    location_manager lm(m.name(), s);
-    return inclusion_manager(m, lm, s);
+    locator lm(m.name(), s);
+    return includer(m, lm, s);
 }
 
 typedef std::function<
-    inclusion_manager
+    includer
     (const dogen::sml::model&)
-    > inclusion_manager_factory;
+    > includer_factory;
 
 std::vector<std::list<std::string> >
 includes_for_one_pod_model(cpp_facet_types ft,
-    const inclusion_manager_factory& factory) {
+    const includer_factory& factory) {
     const auto m(one_pod_model());
     const auto pods(m.pods());
     BOOST_REQUIRE(pods.size() == 1);
@@ -162,12 +162,12 @@ const unsigned int implementation_user(3);
 
 using dogen::utility::test::asserter;
 
-BOOST_AUTO_TEST_SUITE(inclusion_manager)
+BOOST_AUTO_TEST_SUITE(includer)
 
 BOOST_AUTO_TEST_CASE(processing_one_pod_model_with_default_configuration_generates_expected_domain_includes) {
     SETUP_TEST_LOG_SOURCE("processing_one_pod_model_with_default_configuration_generates_expected_domain_includes");
 
-    const auto f(default_inclusion_manager);
+    const auto f(default_includer);
     const auto i(includes_for_one_pod_model(cpp_facet_types::types, f));
     BOOST_REQUIRE(i.size() == 4);
 
@@ -197,7 +197,7 @@ BOOST_AUTO_TEST_CASE(processing_one_pod_model_with_default_configuration_generat
 BOOST_AUTO_TEST_CASE(processing_one_pod_model_with_default_configuration_generates_expected_io_includes) {
     SETUP_TEST_LOG_SOURCE("processing_one_pod_model_with_default_configuration_generates_expected_io_includes");
 
-    const auto f(default_inclusion_manager);
+    const auto f(default_includer);
     const auto i(includes_for_one_pod_model(cpp_facet_types::io, f));
     BOOST_REQUIRE(i.size() == 4);
 
@@ -229,7 +229,7 @@ BOOST_AUTO_TEST_CASE(processing_one_pod_model_with_default_configuration_generat
 BOOST_AUTO_TEST_CASE(processing_one_pod_model_with_default_configuration_generates_expected_serialisation_includes) {
     SETUP_TEST_LOG_SOURCE("processing_one_pod_model_with_default_configuration_generates_expected_serialisation_includes");
 
-    const auto f(default_inclusion_manager);
+    const auto f(default_includer);
     const auto i(includes_for_one_pod_model(cpp_facet_types::serialization, f));
     BOOST_REQUIRE(i.size() == 4);
 
@@ -261,7 +261,7 @@ BOOST_AUTO_TEST_CASE(processing_one_pod_model_with_default_configuration_generat
 BOOST_AUTO_TEST_CASE(processing_one_pod_model_with_default_configuration_generates_expected_hash_includes) {
     SETUP_TEST_LOG_SOURCE("processing_one_pod_model_with_default_configuration_generates_expected_hash_includes");
 
-    const auto f(default_inclusion_manager);
+    const auto f(default_includer);
     const auto i(includes_for_one_pod_model(cpp_facet_types::hash, f));
     BOOST_REQUIRE(i.size() == 4);
 
@@ -292,7 +292,7 @@ BOOST_AUTO_TEST_CASE(processing_one_pod_model_with_default_configuration_generat
 BOOST_AUTO_TEST_CASE(processing_one_pod_model_with_default_configuration_generates_expected_test_data_includes) {
     SETUP_TEST_LOG_SOURCE("processing_one_pod_model_with_default_configuration_generates_expected_test_data_includes");
 
-    const auto f(default_inclusion_manager);
+    const auto f(default_includer);
     const auto i(includes_for_one_pod_model(cpp_facet_types::test_data, f));
     BOOST_REQUIRE(i.size() == 4);
 
@@ -322,7 +322,7 @@ BOOST_AUTO_TEST_CASE(processing_one_pod_model_with_default_configuration_generat
 BOOST_AUTO_TEST_CASE(processing_one_pod_model_with_no_keys_configuration_generates_no_key_includes) {
     SETUP_TEST_LOG_SOURCE("processing_one_pod_model_with_no_keys_configuration_generates_no_key_includes");
 
-    const auto f(inclusion_manager_with_no_keys);
+    const auto f(includer_with_no_keys);
     for (const auto facet : facets) {
         auto i(includes_for_one_pod_model(facet, f));
         BOOST_REQUIRE(i.size() == 4);
