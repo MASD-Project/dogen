@@ -11,6 +11,13 @@ This file contains all stories that haven't been assigned to a sprint.
 
 Stories that we intend to look at, at some point.
 
+*** Refactor Licence formatter
+
+- year is hard-coded to 2012: At present the licence formatter has an
+  hard-coded year of 2012. It should really be a parameter passed in.
+- we should really only have one formatter that understands different
+  commenting syntaxes (e.g. cmake comments, c++ comments).
+
 *** Handling of include cmakelists in split projects is not correct   :story:
 
 At present we are only generating a cmakelists file for include
@@ -909,11 +916,6 @@ replace the manual checks on all specs that have them. Example usage:
 :         exception,
 :         std::bind(check_exception, _1, message_error_get_attribute)
 :         );
-
-*** Licence year is hard-coded to 2012
-
-At present the licence formatter has an hard-coded year of 2012. It
-should really be a parameter passed in.
 
 *** Generator usage in template tests needs to be cleaned
 
