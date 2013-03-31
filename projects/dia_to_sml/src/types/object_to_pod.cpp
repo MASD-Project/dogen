@@ -49,12 +49,12 @@
 #include "dogen/utility/io/unordered_map_io.hpp"
 #include "dogen/utility/io/list_io.hpp"
 #include "dogen/dia_to_sml/types/transformation_error.hpp"
-#include "dogen/dia_to_sml/types/dia_object_to_sml_pod.hpp"
+#include "dogen/dia_to_sml/types/object_to_pod.hpp"
 
 namespace {
 
 using namespace dogen::utility::log;
-static logger lg(logger_factory("dia_to_sml.dia_object_to_sml_pod"));
+static logger lg(logger_factory("dia_to_sml.object_to_pod"));
 
 using dogen::dia_to_sml::transformation_error;
 
@@ -528,7 +528,7 @@ void dia_dfs_visitor::process_dia_object(const dogen::dia::object& o) {
 namespace dogen {
 namespace dia_to_sml {
 
-dia_object_to_sml_pod::dia_object_to_sml_pod(const std::string& model_name,
+object_to_pod::object_to_pod(const std::string& model_name,
     const std::list<std::string>& external_package_path,
     bool is_target, bool verbose)
     : model_name_(model_name), external_package_path_(external_package_path),
@@ -541,14 +541,14 @@ dia_object_to_sml_pod::dia_object_to_sml_pod(const std::string& model_name,
     id_to_vertex_.insert(std::make_pair(root_vertex_id, root_vertex_));
 }
 
-bool dia_object_to_sml_pod::
+bool object_to_pod::
 is_relationship_processable(const dia::object& o) const {
     using dia::object_types;
     const auto ot(parse_object_type(o.type()));
     return ot == object_types::uml_generalization;
 }
 
-void dia_object_to_sml_pod::process_relationship(const dia::object& o) {
+void object_to_pod::process_relationship(const dia::object& o) {
     const auto connections(o.connections());
     const auto parent(connections.front());
     const auto child(connections.back());
@@ -614,7 +614,7 @@ void dia_object_to_sml_pod::process_relationship(const dia::object& o) {
     }
 }
 
-void dia_object_to_sml_pod::setup_graph() {
+void object_to_pod::setup_graph() {
     BOOST_LOG_SEV(lg, info) << "Setting up pod graph.";
 
     for (const auto r : relationships_)
@@ -626,7 +626,7 @@ void dia_object_to_sml_pod::setup_graph() {
     }
 }
 
-bool dia_object_to_sml_pod::is_processable(const dia::object& o) const {
+bool object_to_pod::is_processable(const dia::object& o) const {
     using dia::object_types;
     const auto ot(parse_object_type(o.type()));
     return
@@ -636,7 +636,7 @@ bool dia_object_to_sml_pod::is_processable(const dia::object& o) const {
         ot == object_types::uml_class;
 }
 
-void dia_object_to_sml_pod::add_object(const dia::object& o) {
+void object_to_pod::add_object(const dia::object& o) {
     BOOST_LOG_SEV(lg, debug) << "Adding object: " << o.id();
 
     if (!is_processable(o)) {
@@ -666,7 +666,7 @@ void dia_object_to_sml_pod::add_object(const dia::object& o) {
 }
 
 std::unordered_map<sml::qname, sml::pod>
-dia_object_to_sml_pod::
+object_to_pod::
 transform(std::unordered_map<std::string, sml::package> packages,
     std::unordered_set<std::string>& dependencies,
     std::unordered_set<dogen::sml::qname>& leaves) {

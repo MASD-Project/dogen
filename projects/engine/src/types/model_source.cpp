@@ -21,7 +21,7 @@
 #include <boost/filesystem.hpp>
 #include "dogen/dia/types/hydrator.hpp"
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/dia_to_sml/types/dia_to_sml.hpp"
+#include "dogen/dia_to_sml/types/transformer.hpp"
 #include "dogen/engine/types/model_source.hpp"
 
 using namespace dogen::utility::log;
@@ -52,14 +52,12 @@ sml::model model_source::to_sml(const dia::diagram& d, config::reference ref,
 
     const std::string file_name(ref.path().stem().string());
     const std::string epp(ref.external_package_path());
-    const std::string name(settings_.modeling().disable_model_package() ?
-        empty : file_name);
+    const bool dmp(settings_.modeling().disable_model_package());
+    const std::string name(dmp ? empty : file_name);
     const bool verbose(settings_.troubleshooting().verbose());
 
-    using dogen::dia_to_sml::dia_to_sml;
-    dia_to_sml dia_to_sml(d, name, epp, is_target, verbose);
-
-    sml::model m(dia_to_sml.transform());
+    dogen::dia_to_sml::transformer t(d, name, epp, is_target, verbose);
+    sml::model m(t.transform());
     persister_.persist(m, empty);
     return std::move(m);
 }

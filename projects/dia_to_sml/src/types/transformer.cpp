@@ -42,14 +42,14 @@
 #include "dogen/dia/io/diagram_io.hpp"
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/dia_to_sml/types/transformation_error.hpp"
-#include "dogen/dia_to_sml/types/dia_object_to_sml_package.hpp"
+#include "dogen/dia_to_sml/types/object_to_package.hpp"
 #include "dogen/sml/types/identifier_parser.hpp"
-#include "dogen/dia_to_sml/types/dia_to_sml.hpp"
+#include "dogen/dia_to_sml/types/transformer.hpp"
 
 namespace {
 
 using namespace dogen::utility::log;
-auto lg(logger_factory("dia_to_sml.dia_to_sml"));
+auto lg(logger_factory("dia_to_sml.transformer"));
 
 const std::string error_parsing_object_type("Fail to parse object type: ");
 const std::string unsupported_object_type("Dia object type is not supported: ");
@@ -81,8 +81,8 @@ dogen::dia::object_types parse_object_type(const std::string s) {
 namespace dogen {
 namespace dia_to_sml {
 
-dia_to_sml::
-dia_to_sml(const dia::diagram& diagram, const std::string& model_name,
+transformer::
+transformer(const dia::diagram& diagram, const std::string& model_name,
     const std::string& external_package_path, bool is_target, bool verbose)
     : diagram_(diagram),
       model_name_(model_name),
@@ -105,13 +105,13 @@ dia_to_sml(const dia::diagram& diagram, const std::string& model_name,
 }
 
 
-bool dia_to_sml::is_ignorable_object(const dia::object& o) {
+bool transformer::is_ignorable_object(const dia::object& o) {
     using dia::object_types;
     const auto ot(parse_object_type(o.type()));
     return ot == object_types::uml_note || ot == object_types::uml_message;
 }
 
-void dia_to_sml::
+void transformer::
 setup_data_structures(const std::vector<dia::object>& objects) {
     BOOST_LOG_SEV(lg, debug) << "Setting up data structures";
 
@@ -140,11 +140,12 @@ setup_data_structures(const std::vector<dia::object>& objects) {
         }
 
         BOOST_LOG_SEV(lg, error) << unsupported_object_type << o.id();
-        BOOST_THROW_EXCEPTION(transformation_error(unsupported_object_type + o.id()));
+        BOOST_THROW_EXCEPTION(
+            transformation_error(unsupported_object_type + o.id()));
     }
 }
 
-sml::model dia_to_sml::transform() {
+sml::model transformer::transform() {
     BOOST_LOG_SEV(lg, info) << "Transforming diagram: " << model_name_;
     BOOST_LOG_SEV(lg, debug) << "Contents: " << diagram_;
 

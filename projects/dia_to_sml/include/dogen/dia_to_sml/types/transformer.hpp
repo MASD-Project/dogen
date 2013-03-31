@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_DIA_TO_SML_TYPES_DIA_TO_SML_HPP
-#define DOGEN_DIA_TO_SML_TYPES_DIA_TO_SML_HPP
+#ifndef DOGEN_DIA_TO_SML_TYPES_TRANSFORMER_HPP
+#define DOGEN_DIA_TO_SML_TYPES_TRANSFORMER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -36,10 +36,10 @@
 #include "dogen/sml/types/model.hpp"
 #include "dogen/dia/types/attribute.hpp"
 #include "dogen/dia/types/object.hpp"
-#include "dogen/dia_to_sml/types/dia_object_to_sml_pod.hpp"
-#include "dogen/dia_to_sml/types/dia_object_to_sml_package.hpp"
-#include "dogen/dia_to_sml/types/dia_object_to_sml_enumeration.hpp"
-#include "dogen/dia_to_sml/types/dia_object_to_sml_exception.hpp"
+#include "dogen/dia_to_sml/types/object_to_pod.hpp"
+#include "dogen/dia_to_sml/types/object_to_package.hpp"
+#include "dogen/dia_to_sml/types/object_to_enumeration.hpp"
+#include "dogen/dia_to_sml/types/object_to_exception.hpp"
 
 namespace dogen {
 namespace dia_to_sml {
@@ -47,12 +47,12 @@ namespace dia_to_sml {
 /**
  * @brief Transforms a Dia diagram from its object model into SML.
  */
-class dia_to_sml {
+class transformer {
 public:
-    dia_to_sml() = delete;
-    dia_to_sml& operator=(const dia_to_sml&) = delete;
-    dia_to_sml(const dia_to_sml&) = delete;
-    dia_to_sml(dia_to_sml&&) = default;
+    transformer() = delete;
+    transformer& operator=(const transformer&) = delete;
+    transformer(const transformer&) = delete;
+    transformer(transformer&&) = default;
 
 public:
     /**
@@ -66,7 +66,7 @@ public:
      * target, false otherwise.
      * @param verbose output debugging information for troubleshooting
      */
-    dia_to_sml(const dia::diagram& diagram, const std::string& model_name,
+    transformer(const dia::diagram& diagram, const std::string& model_name,
         const std::string& external_package_path, bool is_target, bool verbose);
 
 private:
@@ -95,10 +95,10 @@ private:
     const bool is_target_;
     const bool verbose_;
     std::unordered_map<std::string, sml::package> packages_;
-    dia_object_to_sml_package package_transformer_;
-    dia_object_to_sml_pod pod_transformer_;
-    dia_object_to_sml_enumeration enumeration_transformer_;
-    dia_object_to_sml_exception exception_transformer_;
+    object_to_package package_transformer_;
+    object_to_pod pod_transformer_;
+    object_to_enumeration enumeration_transformer_;
+    object_to_exception exception_transformer_;
 };
 
 } }

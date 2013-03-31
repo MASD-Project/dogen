@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_DIA_TO_SML_TYPES_DIA_OBJECT_TO_SML_ENUMERATION_HPP
-#define DOGEN_DIA_TO_SML_TYPES_DIA_OBJECT_TO_SML_ENUMERATION_HPP
+#ifndef DOGEN_DIA_TO_SML_TYPES_OBJECT_TO_ENUMERATION_HPP
+#define DOGEN_DIA_TO_SML_TYPES_OBJECT_TO_ENUMERATION_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -37,16 +37,16 @@
 namespace dogen {
 namespace dia_to_sml {
 
-class dia_object_to_sml_enumeration {
+class object_to_enumeration {
 public:
-    dia_object_to_sml_enumeration() = delete;
-    dia_object_to_sml_enumeration(const dia_object_to_sml_enumeration&) = default;
-    ~dia_object_to_sml_enumeration() = default;
-    dia_object_to_sml_enumeration(dia_object_to_sml_enumeration&&) = default;
-    dia_object_to_sml_enumeration& operator=(const dia_object_to_sml_enumeration&) = default;
+    object_to_enumeration() = delete;
+    object_to_enumeration(const object_to_enumeration&) = default;
+    ~object_to_enumeration() = default;
+    object_to_enumeration(object_to_enumeration&&) = default;
+    object_to_enumeration& operator=(const object_to_enumeration&) = default;
 
 public:
-    dia_object_to_sml_enumeration(const std::string& model_name,
+    object_to_enumeration(const std::string& model_name,
         const std::list<std::string>& external_package_path, bool is_target);
 
 private:

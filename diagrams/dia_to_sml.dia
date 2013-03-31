@@ -65,22 +65,22 @@
   <dia:layer name="Background" visible="true" active="true">
     <dia:object type="UML - Class" version="0" id="O0">
       <dia:attribute name="obj_pos">
-        <dia:point val="13.9375,7.25"/>
+        <dia:point val="14.0708,7.11667"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="13.8875,7.2;28.5575,10.3"/>
+        <dia:rectangle val="14.0208,7.06667;24.9208,10.1667"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="13.9375,7.25"/>
+        <dia:point val="14.0708,7.11667"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="14.569999999999999"/>
+        <dia:real val="10.800000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#dia_object_to_sml_enumeration#</dia:string>
+        <dia:string>#object_to_enumeration#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#service#</dia:string>
@@ -175,22 +175,22 @@
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O1">
       <dia:attribute name="obj_pos">
-        <dia:point val="45.625,7.6875"/>
+        <dia:point val="13.8917,1.02083"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="45.575,7.6375;58.9,10.7375"/>
+        <dia:rectangle val="13.8417,0.970833;23.3967,4.07083"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="45.625,7.6875"/>
+        <dia:point val="13.8917,1.02083"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="13.225"/>
+        <dia:real val="9.4550000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#dia_object_to_sml_exception#</dia:string>
+        <dia:string>#object_to_exception#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#service#</dia:string>
@@ -285,22 +285,22 @@
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O2">
       <dia:attribute name="obj_pos">
-        <dia:point val="13.8125,14.75"/>
+        <dia:point val="13.8792,12.95"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="13.7625,14.7;26.4375,17.8"/>
+        <dia:rectangle val="13.8292,12.9;22.7342,16"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="13.8125,14.75"/>
+        <dia:point val="13.8792,12.95"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="12.574999999999999"/>
+        <dia:real val="8.8049999999999997"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#dia_object_to_sml_package#</dia:string>
+        <dia:string>#object_to_package#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#service#</dia:string>
@@ -395,22 +395,22 @@
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O3">
       <dia:attribute name="obj_pos">
-        <dia:point val="13.9375,21.5"/>
+        <dia:point val="14.0708,19.0333"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="13.8875,21.45;24.4825,24.55"/>
+        <dia:rectangle val="14.0208,18.9833;20.8458,22.0833"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="13.9375,21.5"/>
+        <dia:point val="14.0708,19.0333"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="10.495000000000001"/>
+        <dia:real val="6.7249999999999996"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#dia_object_to_sml_pod#</dia:string>
+        <dia:string>#object_to_pod#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#service#</dia:string>
@@ -505,22 +505,22 @@
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O4">
       <dia:attribute name="obj_pos">
-        <dia:point val="39.375,18.75"/>
+        <dia:point val="14.175,24.0833"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="39.325,18.7;44.6275,21.8"/>
+        <dia:rectangle val="14.125,24.0333;20.15,27.1333"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="39.375,18.75"/>
+        <dia:point val="14.175,24.0833"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="5.2024999999999997"/>
+        <dia:real val="5.9249999999999998"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#dia_to_sml#</dia:string>
+        <dia:string>#transformer#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#service#</dia:string>
@@ -615,13 +615,13 @@
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O5">
       <dia:attribute name="obj_pos">
-        <dia:point val="13.875,31.6875"/>
+        <dia:point val="30.9417,1.0875"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="13.825,31.6375;23.9075,34.7375"/>
+        <dia:rectangle val="30.8917,1.0375;40.9742,4.1375"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="13.875,31.6875"/>
+        <dia:point val="30.9417,1.0875"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="9.9824999999999999"/>
@@ -726,13 +726,13 @@ into its SML representation.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O6">
       <dia:attribute name="obj_pos">
-        <dia:point val="14.0625,38.0625"/>
+        <dia:point val="30.9292,6.99583"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="14.0125,38.0125;21.7925,41.1125"/>
+        <dia:rectangle val="30.8792,6.94583;38.6592,10.0458"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="14.0625,38.0625"/>
+        <dia:point val="30.9292,6.99583"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="7.6799999999999997"/>

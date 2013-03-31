@@ -93,8 +93,8 @@ model level, the engine will be responsible for adapting the C++
 model into a back end. This also means the view model will all be code
 generator (minus the transformer).
 
-*** COMPLETED Remove manager post-fix
-    CLOSED: [2013-03-31 Sun 14:58]
+*** COMPLETED Remove manager post-fix                                 :story:
+    CLOSED: [2013-03-31 Sun 16:24]
 
 We should rename location manager to locator and inclusion manager to
 includer. The word manager does not add any more meaning to their
@@ -122,6 +122,23 @@ QName is well known. It also allows for better method names such as
 qualified name rather than a string.
 
 This task is waiting for SML to be code generated.
+
+*** COMPLETED Move dia to SML transformation code into its own model  :story:
+    CLOSED: [2013-03-31 Sun 16:23]
+
+At present we have a folder in engine called =modeling= with all the
+transformation code. It is responsible for converting dia diagrams
+into SML models. This is totally self-contained so it makes sense to
+separate this code. We should also take the opportunity to rename the
+classes etc to shorter names.
+
+*** COMPLETED Rename generator to engine                              :story:
+    CLOSED: [2013-03-31 Sun 16:24]
+
+Its confusing to call the main library =generator= because its
+actually not responsible for the code generation. What it does it to
+contain the entire code generation workflow. Rename it to =engine= as
+its a slightly less confusing name.
 
 ** Deprecated Development Stories
 *** Formatters are actually just view model IO

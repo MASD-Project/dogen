@@ -28,12 +28,12 @@
 #include "dogen/dia/types/enum_parser.hpp"
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/dia_to_sml/types/transformation_error.hpp"
-#include "dogen/dia_to_sml/types/dia_object_to_sml_package.hpp"
+#include "dogen/dia_to_sml/types/object_to_package.hpp"
 
 namespace {
 
 using namespace dogen::utility::log;
-static logger lg(logger_factory("dia_to_sml.dia_object_to_sml_package"));
+static logger lg(logger_factory("dia_to_sml.object_to_package"));
 
 using dogen::dia_to_sml::transformation_error;
 
@@ -277,7 +277,7 @@ void dia_dfs_visitor::pop_package_path(const dogen::dia::object& o) {
 namespace dogen {
 namespace dia_to_sml {
 
-dia_object_to_sml_package::dia_object_to_sml_package(
+object_to_package::object_to_package(
     const std::string& model_name,
     const std::list<std::string>& external_package_path, bool verbose)
     : model_name_(model_name), external_package_path_(external_package_path),
@@ -288,13 +288,13 @@ dia_object_to_sml_package::dia_object_to_sml_package(
     graph_[root_vertex_] = root;
 }
 
-bool dia_object_to_sml_package::is_processable(const dia::object& o) const {
+bool object_to_package::is_processable(const dia::object& o) const {
     using dogen::dia::object_types;
     object_types ot(parse_object_type(o.type()));
     return ot == object_types::uml_large_package;
 }
 
-void dia_object_to_sml_package::add_object(const dia::object& o) {
+void object_to_package::add_object(const dia::object& o) {
     BOOST_LOG_SEV(lg, debug) << "Adding package object: " << o.id();
 
     if (!is_processable(o)) {
@@ -331,7 +331,7 @@ void dia_object_to_sml_package::add_object(const dia::object& o) {
 }
 
 std::unordered_map<std::string, sml::package>
-dia_object_to_sml_package::transform() {
+object_to_package::transform() {
     BOOST_LOG_SEV(lg, info) << "Transforming packages for diagram: "
                             << model_name_;
 

@@ -18,10 +18,10 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/dia_to_sml/types/dia_object_to_sml_enumeration.hpp"
-#include "dogen/dia_to_sml/types/dia_object_to_sml_exception.hpp"
-#include "dogen/dia_to_sml/types/dia_object_to_sml_package.hpp"
-#include "dogen/dia_to_sml/types/dia_object_to_sml_pod.hpp"
-#include "dogen/dia_to_sml/types/dia_to_sml.hpp"
+#include "dogen/dia_to_sml/types/object_to_enumeration.hpp"
+#include "dogen/dia_to_sml/types/object_to_exception.hpp"
+#include "dogen/dia_to_sml/types/object_to_package.hpp"
+#include "dogen/dia_to_sml/types/object_to_pod.hpp"
 #include "dogen/dia_to_sml/types/transformation_error.hpp"
+#include "dogen/dia_to_sml/types/transformer.hpp"
 #include "dogen/dia_to_sml/types/validation_error.hpp"

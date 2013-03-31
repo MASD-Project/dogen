@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_DIA_TO_SML_TYPES_DIA_OBJECT_TO_SML_EXCEPTION_HPP
-#define DOGEN_DIA_TO_SML_TYPES_DIA_OBJECT_TO_SML_EXCEPTION_HPP
+#ifndef DOGEN_DIA_TO_SML_TYPES_OBJECT_TO_EXCEPTION_HPP
+#define DOGEN_DIA_TO_SML_TYPES_OBJECT_TO_EXCEPTION_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -37,16 +37,16 @@
 namespace dogen {
 namespace dia_to_sml {
 
-class dia_object_to_sml_exception {
+class object_to_exception {
 public:
-    dia_object_to_sml_exception() = delete;
-    dia_object_to_sml_exception(const dia_object_to_sml_exception&) = default;
-    ~dia_object_to_sml_exception() = default;
-    dia_object_to_sml_exception(dia_object_to_sml_exception&&) = default;
-    dia_object_to_sml_exception& operator=(const dia_object_to_sml_exception&) = default;
+    object_to_exception() = delete;
+    object_to_exception(const object_to_exception&) = default;
+    ~object_to_exception() = default;
+    object_to_exception(object_to_exception&&) = default;
+    object_to_exception& operator=(const object_to_exception&) = default;
 
 public:
-    dia_object_to_sml_exception(const std::string& model_name,
+    object_to_exception(const std::string& model_name,
         const std::list<std::string>& external_package_path,
         bool is_target);
 
