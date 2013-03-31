@@ -22,13 +22,13 @@
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/cpp/types/generation_failure.hpp"
-#include "dogen/cpp/types/formatters/qualified_name.hpp"
+#include "dogen/cpp/types/formatters/qname.hpp"
 #include "dogen/cpp/types/formatters/licence.hpp"
 #include "dogen/cpp/types/formatters/header_guards.hpp"
 #include "dogen/cpp/types/formatters/namespace_formatter.hpp"
 #include "dogen/cpp/types/formatters/includes.hpp"
 #include "dogen/cpp/types/formatters/namespace_helper.hpp"
-#include "dogen/cpp/types/formatters/qualified_name.hpp"
+#include "dogen/cpp/types/formatters/qname.hpp"
 #include "dogen/cpp/types/formatters/indenter.hpp"
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/cpp/types/formatters/hash_implementation.hpp"
@@ -513,8 +513,8 @@ void hash_implementation::hasher_hash_method(const class_view_model& vm) {
 
         for (const auto p : parents) {
             stream_ << indenter_ << "combine(seed, dynamic_cast<const ";
-            qualified_name qualified_name(stream_);
-            qualified_name.format(p);
+            qname qname(stream_);
+            qname.format(p);
             stream_ << "&>(v));" << std::endl;
         }
 

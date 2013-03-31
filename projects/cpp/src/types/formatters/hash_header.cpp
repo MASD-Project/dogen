@@ -26,7 +26,7 @@
 #include "dogen/cpp/types/formatters/namespace_formatter.hpp"
 #include "dogen/cpp/types/formatters/includes.hpp"
 #include "dogen/cpp/types/formatters/namespace_helper.hpp"
-#include "dogen/cpp/types/formatters/qualified_name.hpp"
+#include "dogen/cpp/types/formatters/qname.hpp"
 #include "dogen/cpp/types/formatters/indenter.hpp"
 #include "dogen/cpp/types/formatters/hash_header.hpp"
 #include "dogen/utility/log/logger.hpp"
@@ -63,8 +63,8 @@ file_formatter::shared_ptr hash_header::create(std::ostream& stream) {
 void hash_header::operator_bracket_method(const class_view_model& vm) {
     stream_ << indenter_ << "size_t operator()(const ";
 
-    qualified_name qualified_name(stream_);
-    qualified_name.format(vm);
+    qname qname(stream_);
+    qname.format(vm);
 
     stream_ << "& v) const ";
 
@@ -73,7 +73,7 @@ void hash_header::operator_bracket_method(const class_view_model& vm) {
         positive_indenter_scope s(indenter_);
 
         stream_ << indenter_ << "return ";
-        qualified_name.format(vm);
+        qname.format(vm);
         stream_ << "_hasher::hash(v);" << std::endl;
     }
     utility_.close_scope();
@@ -97,8 +97,8 @@ void hash_header::hash_class(const class_view_model& vm) {
     stream_ << indenter_ << "template<>" << std::endl
             << indenter_ << "class hash<";
 
-    qualified_name qualified_name(stream_);
-    qualified_name.format(vm);
+    qname qname(stream_);
+    qname.format(vm);
 
     stream_ << "> ";
     utility_.open_scope();
@@ -126,7 +126,7 @@ void hash_header::format_class(const file_view_model& vm) {
         stream_ << indenter_ << "template<>" << std::endl
                 << indenter_ << "class hash<";
 
-        qualified_name qnf(stream_);
+        qname qnf(stream_);
         qnf.format(evm);
 
         stream_ << "> ";

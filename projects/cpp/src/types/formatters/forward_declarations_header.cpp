@@ -26,7 +26,7 @@
 #include "dogen/cpp/types/formatters/includes.hpp"
 #include "dogen/cpp/types/formatters/namespace_formatter.hpp"
 #include "dogen/cpp/types/formatters/header_guards.hpp"
-#include "dogen/cpp/types/formatters/qualified_name.hpp"
+#include "dogen/cpp/types/formatters/qname.hpp"
 #include "dogen/cpp/types/formatters/namespace_helper.hpp"
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/cpp/types/formatters/forward_declarations_header.hpp"
@@ -75,15 +75,15 @@ format_serialization_class(const class_view_model& vm) {
         stream_ << indenter_ << "template<class Archive>" << std::endl
             << indenter_ << "void save(Archive& ar, const ";
 
-        qualified_name qualified_name(stream_);
-        qualified_name.format(vm);
+        qname qname(stream_);
+        qname.format(vm);
 
         stream_ << indenter_ << "& v, unsigned int version);" << std::endl;
         utility_.blank_line();
 
         stream_ << indenter_ << "template<class Archive>" << std::endl
                 << indenter_ << "void load(Archive& ar, ";
-        qualified_name.format(vm);
+        qname.format(vm);
 
         stream_ << indenter_ << "& v, unsigned int version);" << std::endl;
         utility_.blank_line();

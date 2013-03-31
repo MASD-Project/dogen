@@ -35,7 +35,7 @@ namespace dogen {
 namespace sml {
 
 /**
- * @brief A composite qualified name.
+ * @brief A composite qname.
  */
 class nested_qname final {
 public:

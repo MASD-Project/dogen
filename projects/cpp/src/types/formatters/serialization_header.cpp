@@ -28,7 +28,7 @@
 #include "dogen/cpp/types/formatters/namespace_formatter.hpp"
 #include "dogen/cpp/types/formatters/includes.hpp"
 #include "dogen/cpp/types/formatters/namespace_helper.hpp"
-#include "dogen/cpp/types/formatters/qualified_name.hpp"
+#include "dogen/cpp/types/formatters/qname.hpp"
 #include "dogen/cpp/types/formatters/indenter.hpp"
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/cpp/types/formatters/serialization_header.hpp"
@@ -66,16 +66,16 @@ serialization_header::create(std::ostream& stream,
 }
 
 void serialization_header::load_and_save_functions(const class_view_model& vm) {
-    qualified_name qualified_name(stream_);
+    qname qname(stream_);
     stream_ << indenter_ << "template<typename Archive>" << std::endl
             << indenter_ << "void save(Archive& ar, const ";
-    qualified_name.format(vm);
+    qname.format(vm);
     stream_ << "& v, unsigned int version);" << std::endl;
     utility_.blank_line();
 
     stream_ << indenter_ << "template<typename Archive>" << std::endl
             << indenter_ << "void load(Archive& ar" << ", ";
-    qualified_name.format(vm);
+    qname.format(vm);
     stream_ << "& v, unsigned int version);" << std::endl;
 }
 
@@ -87,7 +87,7 @@ void serialization_header::format_class(const file_view_model& vm) {
     }
 
     const view_models::class_view_model& cvm(*o);
-    qualified_name qualified_name(stream_);
+    qname qname(stream_);
     const auto parents(cvm.parents());
     if (!cvm.is_parent() && !parents.empty())
     {
@@ -102,10 +102,10 @@ void serialization_header::format_class(const file_view_model& vm) {
                 {
                     positive_indenter_scope s(indenter_);
                     stream_ << indenter_;
-                    qualified_name.format(p);
+                    qname.format(p);
                     stream_ << "," << std::endl
                             << indenter_;
-                    qualified_name.format(cvm);
+                    qname.format(cvm);
                     stream_ << std::endl;
                 }
                 stream_ << indenter_ << "> : public mpl::true_ {};"
@@ -117,12 +117,12 @@ void serialization_header::format_class(const file_view_model& vm) {
     }
 
     stream_ << indenter_ << "BOOST_SERIALIZATION_SPLIT_FREE(";
-    qualified_name.format(cvm);
+    qname.format(cvm);
     stream_ << ")" << std::endl;
 
     if (cvm.is_parent()) {
         stream_ << indenter_ << "BOOST_SERIALIZATION_ASSUME_ABSTRACT(";
-        qualified_name.format(cvm);
+        qname.format(cvm);
         stream_ << ")" << std::endl;
         utility_.blank_line();
     }
@@ -148,7 +148,7 @@ void serialization_header::format_enumeration(const file_view_model& vm) {
     stream_ << indenter_ << "template<class Archive>" << std::endl
             << "void serialize(Archive& ar, ";
 
-    qualified_name qnf(stream_);
+    qname qnf(stream_);
     qnf.format(evm);
 
     stream_ << "& v, unsigned int /*version*/)";

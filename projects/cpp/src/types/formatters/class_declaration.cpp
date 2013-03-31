@@ -21,7 +21,7 @@
 #include <iostream>
 #include <ostream>
 #include "dogen/cpp/types/formatters/doxygen_comments.hpp"
-#include "dogen/cpp/types/formatters/qualified_name.hpp"
+#include "dogen/cpp/types/formatters/qname.hpp"
 #include "dogen/cpp/types/formatters/class_declaration.hpp"
 
 namespace dogen {
@@ -45,10 +45,10 @@ void class_declaration::open_class(const class_view_model& vm) {
     if (!parents.empty()) {
         stream_ << " :";
 
-        qualified_name qualified_name(stream_);
+        qname qname(stream_);
         if (parents.size() == 1) {
             stream_ << " public ";
-            qualified_name.format(parents.front());
+            qname.format(parents.front());
         } else {
             bool is_first(true);
             positive_indenter_scope s(indenter_);

@@ -28,7 +28,7 @@
 #include "dogen/cpp/types/formatters/namespace_formatter.hpp"
 #include "dogen/cpp/types/formatters/includes.hpp"
 #include "dogen/cpp/types/formatters/namespace_helper.hpp"
-#include "dogen/cpp/types/formatters/qualified_name.hpp"
+#include "dogen/cpp/types/formatters/qname.hpp"
 #include "dogen/cpp/types/formatters/indenter.hpp"
 #include "dogen/cpp/types/formatters/generator_implementation.hpp"
 
@@ -671,8 +671,8 @@ void generator_implementation::create_method(const class_view_model& vm) {
 
         for (const auto p : parents) {
             stream_ << indenter_;
-            qualified_name qualified_name(stream_);
-            qualified_name.format(p);
+            qname qname(stream_);
+            qname.format(p);
             stream_ << "_generator::populate(position, r);"
                     << std::endl;
         }

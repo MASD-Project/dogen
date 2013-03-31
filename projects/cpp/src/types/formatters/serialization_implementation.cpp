@@ -26,7 +26,7 @@
 #include "dogen/cpp/types/formatters/namespace_helper.hpp"
 #include "dogen/cpp/types/formatters/licence.hpp"
 #include "dogen/cpp/types/formatters/includes.hpp"
-#include "dogen/cpp/types/formatters/qualified_name.hpp"
+#include "dogen/cpp/types/formatters/qname.hpp"
 #include "dogen/cpp/types/formatters/indenter.hpp"
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/cpp/types/formatters/serialization_implementation.hpp"
@@ -79,8 +79,8 @@ void serialization_implementation::save_function(const class_view_model& vm) {
     {
         positive_indenter_scope s(indenter_);
         stream_ << indenter_ << "const ";
-        qualified_name qualified_name(stream_);
-        qualified_name.format(vm);
+        qname qname(stream_);
+        qname.format(vm);
 
         stream_ << (has_properties_or_parents ? "& v," : "& /*v*/,")
                 << std::endl
@@ -91,12 +91,12 @@ void serialization_implementation::save_function(const class_view_model& vm) {
             for (const auto p : parents) {
                 if (disable_xml_serialization_) {
                     stream_ << indenter_ << "ar << base_object<";
-                    qualified_name.format(p);
+                    qname.format(p);
                     stream_ << ">(v);" << std::endl;
                 } else {
                     stream_ << indenter_ << "ar << make_nvp("
                             << utility_.quote(p.name()) << ", base_object<";
-                    qualified_name.format(p);
+                    qname.format(p);
                     stream_ << ">(v));" << std::endl;
                 }
             }
@@ -141,8 +141,8 @@ void serialization_implementation::load_function(const class_view_model& vm) {
     {
         positive_indenter_scope s(indenter_);
         stream_ << indenter_;
-        qualified_name qualified_name(stream_);
-        qualified_name.format(vm);
+        qname qname(stream_);
+        qname.format(vm);
 
         stream_ << (has_properties_or_parents ? "& v," : "& /*v*/,")
                 << std::endl
@@ -156,14 +156,14 @@ void serialization_implementation::load_function(const class_view_model& vm) {
                             << "ar >> "
                             << utility_.quote(p.name())
                             << ", base_object<";
-                    qualified_name.format(p);
+                    qname.format(p);
                     stream_ << ">(v);" << std::endl;
                 } else {
                     stream_ << indenter_
                             << "ar >> make_nvp("
                             << utility_.quote(p.name())
                             << ", base_object<";
-                    qualified_name.format(p);
+                    qname.format(p);
                     stream_ << ">(v));" << std::endl;
                 }
             }
@@ -207,40 +207,40 @@ void serialization_implementation::
 template_instantiations(const class_view_model& vm) {
     stream_ << indenter_ << "template void save("
             << "archive::polymorphic_oarchive& ar, const ";
-    qualified_name qualified_name(stream_);
-    qualified_name.format(vm);
+    qname qname(stream_);
+    qname.format(vm);
     stream_ << "& v, unsigned int version);" << std::endl;
     stream_ << indenter_ << "template void load("
             << "archive::polymorphic_iarchive& ar, ";
-    qualified_name.format(vm);
+    qname.format(vm);
     stream_ << "& v, unsigned int version);" << std::endl;
     utility_.blank_line();
 
     stream_ << indenter_ << "template void save(archive::text_oarchive& ar, "
             << "const ";
-    qualified_name.format(vm);
+    qname.format(vm);
     stream_ << "& v, unsigned int version);" << std::endl;
     stream_ << indenter_ << "template void load(archive::text_iarchive& ar, ";
-    qualified_name.format(vm);
+    qname.format(vm);
     stream_ << "& v, unsigned int version);" << std::endl;
     utility_.blank_line();
 
     stream_ << indenter_ << "template void save(archive::binary_oarchive& ar, "
             << "const ";
-    qualified_name.format(vm);
+    qname.format(vm);
     stream_ << "& v, unsigned int version);" << std::endl;
     stream_ << indenter_ << "template void load(archive::binary_iarchive& ar, ";
-    qualified_name.format(vm);
+    qname.format(vm);
     stream_ << "& v, unsigned int version);" << std::endl;
     utility_.blank_line();
 
     if (!disable_xml_serialization_) {
         stream_ << indenter_ << "template void save(archive::xml_oarchive& ar, "
                 << "const ";
-        qualified_name.format(vm);
+        qname.format(vm);
         stream_ << "& v, unsigned int version);" << std::endl;
         stream_ << indenter_ << "template void load(archive::xml_iarchive& ar, ";
-        qualified_name.format(vm);
+        qname.format(vm);
         stream_ << "& v, unsigned int version);" << std::endl;
         utility_.blank_line();
     }
@@ -248,10 +248,10 @@ template_instantiations(const class_view_model& vm) {
     stream_ << "#ifdef __linux__" << std::endl
             << indenter_ << "template void save(eos::portable_oarchive& ar, "
             << "const ";
-    qualified_name.format(vm);
+    qname.format(vm);
     stream_ << "& v, unsigned int version);" << std::endl;
     stream_ << indenter_ << "template void load(eos::portable_iarchive& ar, ";
-    qualified_name.format(vm);
+    qname.format(vm);
     stream_ << "& v, unsigned int version);" << std::endl
             << "#endif" << std::endl;
     utility_.blank_line();
@@ -265,13 +265,13 @@ void serialization_implementation::format_class(const file_view_model& vm) {
     }
 
     const view_models::class_view_model& cvm(*o);
-    qualified_name qualified_name(stream_);
+    qname qname(stream_);
     if (cvm.is_parent() || !cvm.parents().empty()) {
         stream_ << indenter_ << "BOOST_CLASS_TRACKING(" << std::endl;
         {
             positive_indenter_scope s(indenter_);
             stream_ << indenter_;
-            qualified_name.format(cvm);
+            qname.format(cvm);
             stream_ << "," << std::endl;
             stream_ << indenter_ << "boost::serialization"
                     << "::track_selectively)"

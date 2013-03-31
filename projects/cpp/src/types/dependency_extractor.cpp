@@ -34,7 +34,7 @@ namespace dogen {
 namespace cpp {
 
 void dependency_extractor::
-recurse_nested_qualified_names(const sml::nested_qname& nqn,
+recurse_nested_qnames(const sml::nested_qname& nqn,
     dependency_details& dd, bool& is_pointer) const {
 
     const auto qn(nqn.type());
@@ -66,7 +66,7 @@ recurse_nested_qualified_names(const sml::nested_qname& nqn,
         dd.has_std_pair(true);
 
     for (const auto c : nqn.children())
-        recurse_nested_qualified_names(c, dd, is_pointer);
+        recurse_nested_qnames(c, dd, is_pointer);
 }
 
 dependency_details dependency_extractor::extract(const sml::pod& p) const {
@@ -82,7 +82,7 @@ dependency_details dependency_extractor::extract(const sml::pod& p) const {
     for (const auto prop : p.properties()) {
         const auto nqn(prop.type_name());
         bool is_pointer(nqn.is_pointer());
-        recurse_nested_qualified_names(nqn, r, is_pointer);
+        recurse_nested_qnames(nqn, r, is_pointer);
     }
 
     for (const auto& n : r.names()) {

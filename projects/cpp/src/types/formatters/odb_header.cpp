@@ -26,7 +26,6 @@
 #include "dogen/cpp/types/formatters/header_guards.hpp"
 #include "dogen/cpp/types/formatters/namespace_formatter.hpp"
 #include "dogen/cpp/types/formatters/namespace_helper.hpp"
-#include "dogen/cpp/types/formatters/qualified_name.hpp"
 #include "dogen/cpp/types/formatters/indenter.hpp"
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/cpp/types/formatters/odb_header.hpp"

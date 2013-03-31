@@ -22,7 +22,6 @@
 #include <sstream>
 #include "dogen/cpp/types/formatters/doxygen_comments.hpp"
 #include "dogen/cpp/types/formatters/doxygen_comments.hpp"
-#include "dogen/cpp/types/formatters/qualified_name.hpp"
 #include "dogen/cpp/types/formatters/exception_declaration.hpp"
 
 namespace {

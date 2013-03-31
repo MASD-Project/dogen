@@ -56,7 +56,7 @@
 #include "dogen/cpp/types/formatters/null_formatter.hpp"
 #include "dogen/cpp/types/formatters/odb_header.hpp"
 #include "dogen/cpp/types/formatters/production_failure.hpp"
-#include "dogen/cpp/types/formatters/qualified_name.hpp"
+#include "dogen/cpp/types/formatters/qname.hpp"
 #include "dogen/cpp/types/formatters/registrar_header.hpp"
 #include "dogen/cpp/types/formatters/registrar_implementation.hpp"
 #include "dogen/cpp/types/formatters/serialization_header.hpp"

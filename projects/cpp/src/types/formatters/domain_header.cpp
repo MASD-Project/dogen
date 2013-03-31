@@ -22,7 +22,7 @@
 #include <boost/throw_exception.hpp>
 #include "dogen/cpp/types/generation_failure.hpp"
 #include "dogen/utility/exception/invalid_enum_value.hpp"
-#include "dogen/cpp/types/formatters/qualified_name.hpp"
+#include "dogen/cpp/types/formatters/qname.hpp"
 #include "dogen/cpp/types/formatters/licence.hpp"
 #include "dogen/cpp/types/formatters/header_guards.hpp"
 #include "dogen/cpp/types/formatters/namespace_formatter.hpp"
@@ -117,12 +117,12 @@ swap_method(const class_view_model& vm) {
     {
         positive_indenter_scope s(indenter_);
         stream_ << indenter_;
-        qualified_name qualified_name(stream_);
-        qualified_name.format(vm);
+        qname qname(stream_);
+        qname.format(vm);
         stream_ << "& lhs," << std::endl;
 
         stream_ << indenter_;
-        qualified_name.format(vm);
+        qname.format(vm);
         stream_ << "& rhs) ";
 
         utility_.open_scope();

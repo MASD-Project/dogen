@@ -134,7 +134,7 @@ private:
     transform_string_attribute(const dogen::dia::attribute& attribute) const;
 
     /**
-     * @brief Converts the Dia attribute into a qualified name.
+     * @brief Converts the Dia attribute into a qname.
      *
      * @param attribute Name Dia attribute.
      */

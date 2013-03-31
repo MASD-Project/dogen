@@ -22,7 +22,6 @@
 #include <boost/throw_exception.hpp>
 #include "dogen/cpp/types/generation_failure.hpp"
 #include "dogen/cpp/types/formatters/inserter_implementation.hpp"
-#include "dogen/cpp/types/formatters/qualified_name.hpp"
 #include "dogen/cpp/types/formatters/header_guards.hpp"
 #include "dogen/cpp/types/formatters/licence.hpp"
 #include "dogen/cpp/types/formatters/namespace_formatter.hpp"

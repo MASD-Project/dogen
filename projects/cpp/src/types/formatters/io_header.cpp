@@ -21,7 +21,7 @@
 #include <ostream>
 #include <boost/throw_exception.hpp>
 #include "dogen/cpp/types/generation_failure.hpp"
-#include "dogen/cpp/types/formatters/qualified_name.hpp"
+#include "dogen/cpp/types/formatters/qname.hpp"
 #include "dogen/cpp/types/formatters/licence.hpp"
 #include "dogen/cpp/types/formatters/io_header.hpp"
 #include "dogen/cpp/types/formatters/header_guards.hpp"
@@ -79,8 +79,8 @@ void io_header::format_class(const file_view_model& vm) {
             positive_indenter_scope s(indenter_);
             stream_ << indenter_ << " const ";
 
-            qualified_name qualified_name(stream_);
-            qualified_name.format(cvm);
+            qname qname(stream_);
+            qname.format(cvm);
             stream_ << "& v);" << std::endl;
             utility_.blank_line();
         }

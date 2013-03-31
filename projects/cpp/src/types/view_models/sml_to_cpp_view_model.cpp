@@ -168,8 +168,8 @@ bool is_int_like(const std::string& type_name) {
 }
 
 /**
- * @brief Flattens all the SML namespace information stored in
- * qualified name into a list of strings with C++ namespaces.
+ * @brief Flattens all the SML namespace information stored in qname
+ * into a list of strings with C++ namespaces.
  */
 std::list<std::string> join_namespaces(const dogen::sml::qname& name) {
     std::list<std::string> result(name.external_package_path());
@@ -230,10 +230,9 @@ private:
     std::string to_identifiable_name(const std::string n) const;
 
     /**
-     * @brief Transforms a nested qualified name into a view model
-     * type name.
+     * @brief Transforms a nested qname into a view model type name.
      */
-    void transform_nested_qualified_name(
+    void transform_nested_qname(
         const dogen::sml::nested_qname& nqn,
         dogen::cpp::view_models::nested_type_view_model&
         name, std::string& complete_name,
@@ -273,7 +272,7 @@ requires_stream_manipulators(const std::string type_name) const {
         type_name == float_type;
 }
 
-void sml_dfs_visitor::transform_nested_qualified_name(
+void sml_dfs_visitor::transform_nested_qname(
     const dogen::sml::nested_qname& nqn,
     dogen::cpp::view_models::nested_type_view_model&
     vm, std::string& complete_name,
@@ -342,7 +341,7 @@ void sml_dfs_visitor::transform_nested_qualified_name(
             my_complete_name += ", ";
 
         nested_type_view_model cvm;
-        transform_nested_qualified_name(c, cvm, my_complete_name,
+        transform_nested_qname(c, cvm, my_complete_name,
             requires_stream_manipulators);
         children.push_back(cvm);
         is_first = false;
@@ -416,7 +415,7 @@ void sml_dfs_visitor::process_sml_pod(const dogen::sml::pod& pod) {
             p.type_name().type().type_name() == "variant")
             requires_manual_move_constructor = true;
 
-        transform_nested_qualified_name(p.type_name(), type_vm, complete_name,
+        transform_nested_qname(p.type_name(), type_vm, complete_name,
             requires_stream_manipulators);
         if (type_vm.is_primitive()) {
             has_primitive_properties = true;

@@ -19,7 +19,7 @@
  *
  */
 #include <ostream>
-#include "dogen/cpp/types/formatters/qualified_name.hpp"
+#include "dogen/cpp/types/formatters/qname.hpp"
 
 namespace {
 
@@ -38,18 +38,18 @@ namespace dogen {
 namespace cpp {
 namespace formatters {
 
-qualified_name::qualified_name(std::ostream& stream)
+qname::qname(std::ostream& stream)
     : stream_(stream) { }
 
-void qualified_name::format(const parent_view_model& vm) {
+void qname::format(const parent_view_model& vm) {
     ::format<parent_view_model>(stream_, vm);
 }
 
-void qualified_name::format(const class_view_model& vm) {
+void qname::format(const class_view_model& vm) {
     ::format<class_view_model>(stream_, vm);
 }
 
-void qualified_name::format(const enumeration_view_model& vm) {
+void qname::format(const enumeration_view_model& vm) {
     ::format<enumeration_view_model>(stream_, vm);
 }
 

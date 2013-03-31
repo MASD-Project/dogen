@@ -18,18 +18,47 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_TYPES_FORMATTERS_QUALIFIED_NAME_FWD_HPP
-#define DOGEN_CPP_TYPES_FORMATTERS_QUALIFIED_NAME_FWD_HPP
+#ifndef DOGEN_CPP_TYPES_FORMATTERS_QNAME_HPP
+#define DOGEN_CPP_TYPES_FORMATTERS_QNAME_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
+#include <iosfwd>
+#include <string>
+#include "dogen/cpp/types/view_models/class_view_model.hpp"
+#include "dogen/cpp/types/view_models/parent_view_model.hpp"
+#include "dogen/cpp/types/view_models/enumeration_view_model.hpp"
+
 namespace dogen {
 namespace cpp {
 namespace formatters {
 
-class qualified_name;
+class qname {
+public:
+    typedef view_models::class_view_model class_view_model;
+    typedef view_models::enumeration_view_model enumeration_view_model;
+    typedef view_models::parent_view_model parent_view_model;
+
+public:
+    qname() = delete;
+    qname(const qname&) = default;
+    ~qname() = default;
+    qname(qname&&) = default;
+    qname& operator=(const qname&) = default;
+
+public:
+    explicit qname(std::ostream& stream);
+
+public:
+    void format(const class_view_model& vm);
+    void format(const enumeration_view_model& vm);
+    void format(const parent_view_model& vm);
+
+private:
+    std::ostream& stream_;
+};
 
 } } }
 

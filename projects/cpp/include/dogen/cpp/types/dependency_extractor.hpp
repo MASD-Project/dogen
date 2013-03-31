@@ -52,19 +52,19 @@ public:
 
 private:
     /**
-     * @brief Iterates through the nested qualified name recursively,
-     * picking up dependencies as it goes along.
+     * @brief Iterates through the nested qname recursively, picking
+     * up dependencies as it goes along.
      */
-    void recurse_nested_qualified_names(const dogen::sml::nested_qname&
-        nqn, dependency_details& dd, bool& is_pointer) const;
+    void recurse_nested_qnames(const dogen::sml::nested_qname& nqn,
+        dependency_details& dd, bool& is_pointer) const;
 
 public:
     /**
-     * @brief Flattens the given pod into all qualified names it is
-     * related to, except itself.
+     * @brief Flattens the given pod into all qnames it is related to,
+     * except itself.
      *
-     * The qualified names includes all types used by the properties
-     * of the pod, as well as its parent, if any.
+     * The qnames include all types used by the properties of the pod,
+     * as well as its parent, if any.
      */
     dependency_details extract(const sml::pod& p) const;
 

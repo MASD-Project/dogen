@@ -59,7 +59,7 @@ BOOST_AUTO_TEST_CASE(roundtrips_of_the_same_type_produce_the_same_entity) {
     using namespace dogen::sml;
 
     // rountrip_type<meta_types_generator>();
-    // rountrip_type<qualified_name_generator>();
+    // rountrip_type<qname_generator>();
     // rountrip_type<property_generator>();
     // rountrip_type<pod_generator>();
     // rountrip_type<package_generator>();

@@ -74,7 +74,7 @@ const std::string unexpected_number_of_connections(
 const std::string relationship_target_not_found(
     "Relationship points to object with non-existent ID: ");
 const std::string invalid_type_string(
-    "String provided with type did not parse into SML qualified names: ");
+    "String provided with type did not parse into SML qnames: ");
 const std::string invalid_object("Object not processable by pod transformer: ");
 const std::string uml_attribute_expected("UML atttribute expected");
 const std::string name_attribute_expected("Could not find name attribute");
@@ -224,13 +224,13 @@ private:
     transform_string_attribute(const dogen::dia::attribute& attribute) const;
 
     /**
-     * @brief Converts a nested qualified name into model dependencies
+     * @brief Converts a nested qname into model dependencies
      */
     void model_dependencies_for_nested_qname(
         const dogen::sml::nested_qname& nqn);
 
     /**
-     * @brief Converts the Dia attribute into a qualified name.
+     * @brief Converts the Dia attribute into a qname.
      *
      * @param attribute Name Dia attribute.
      */

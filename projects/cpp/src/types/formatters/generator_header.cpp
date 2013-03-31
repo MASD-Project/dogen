@@ -26,7 +26,7 @@
 #include "dogen/cpp/types/formatters/namespace_formatter.hpp"
 #include "dogen/cpp/types/formatters/includes.hpp"
 #include "dogen/cpp/types/formatters/namespace_helper.hpp"
-#include "dogen/cpp/types/formatters/qualified_name.hpp"
+#include "dogen/cpp/types/formatters/qname.hpp"
 #include "dogen/cpp/types/formatters/indenter.hpp"
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/cpp/types/formatters/generator_header.hpp"
@@ -73,8 +73,8 @@ void generator_header::generator_class(const enumeration_view_model& vm) {
         utility_.public_access_specifier();
 
         stream_ << indenter_ << "typedef ";
-        qualified_name qualified_name(stream_);
-        qualified_name.format(vm);
+        qname qname(stream_);
+        qname.format(vm);
         stream_ << " result_type;" << std::endl;
         utility_.blank_line();
 
@@ -114,8 +114,8 @@ void generator_header::generator_class(const class_view_model& vm) {
         utility_.public_access_specifier();
 
         stream_ << indenter_ << "typedef ";
-        qualified_name qualified_name(stream_);
-        qualified_name.format(vm);
+        qname qname(stream_);
+        qname.format(vm);
         stream_ << " result_type;" << std::endl;
         utility_.blank_line();
 

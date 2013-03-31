@@ -21,7 +21,7 @@
 #include <ostream>
 #include <sstream>
 #include <boost/throw_exception.hpp>
-#include "dogen/cpp/types/formatters/qualified_name.hpp"
+#include "dogen/cpp/types/formatters/qname.hpp"
 #include "dogen/cpp/types/generation_failure.hpp"
 #include "dogen/cpp/types/formatters/namespace_helper.hpp"
 #include "dogen/utility/log/logger.hpp"
@@ -639,8 +639,8 @@ format_inserter_implementation(const class_view_model& vm) {
             << std::endl;
 
     std::ostringstream ss;
-    qualified_name qualified_name(ss);
-    qualified_name.format(vm);
+    qname qname(ss);
+    qname.format(vm);
 
     stream_ << indenter_ << special_indent << inserter
             << utility_.quote(utility_.quote_escaped(type) + colon)
