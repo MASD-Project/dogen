@@ -26,12 +26,12 @@
 
 namespace {
 
-const std::string test_module("object_types");
+const std::string test_module("dia");
 const std::string test_suite("object_types_spec");
 
 }
 
-BOOST_AUTO_TEST_SUITE(dia)
+BOOST_AUTO_TEST_SUITE(object_types)
 
 BOOST_AUTO_TEST_CASE(valid_dia_object_types_are_converted_to_the_correct_enum) {
     SETUP_TEST_LOG_SOURCE("valid_dia_object_types_are_converted_to_the_correct_enum");
