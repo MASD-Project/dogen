@@ -18,9 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#define BOOST_TEST_DYN_LINK
-#define BOOST_TEST_MODULE dia_spec
-#include <boost/test/included/unit_test.hpp>
+#include <boost/test/unit_test.hpp>
 #include "dogen/utility/test/logging.hpp"
 #include "dogen/dia/types/enum_parser.hpp"
 #include "dogen/dia/types/all.hpp"
@@ -28,8 +26,8 @@
 
 namespace {
 
-const std::string test_module("dia");
-const std::string test_suite("dia_spec");
+const std::string test_module("object_types");
+const std::string test_suite("object_types_spec");
 
 }
 

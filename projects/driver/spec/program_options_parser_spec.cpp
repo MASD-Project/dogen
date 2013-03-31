@@ -19,9 +19,7 @@
  *
  */
 #include <vector>
-#define BOOST_TEST_DYN_LINK
-#define BOOST_TEST_MODULE driver_spec
-#include <boost/test/included/unit_test.hpp>
+#include <boost/test/unit_test.hpp>
 #include <boost/algorithm/string/predicate.hpp>
 #include "dogen/utility/test/logging.hpp"
 #include "dogen/utility/io/vector_io.hpp"
