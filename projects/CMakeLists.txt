@@ -232,6 +232,7 @@ add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/enumeration)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/exception)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/entity_service_value)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/database)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/database/spec)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dia_to_sml/src)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dia_to_sml/spec)
 

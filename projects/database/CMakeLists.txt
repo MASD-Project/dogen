@@ -18,7 +18,6 @@
 # MA 02110-1301, USA.
 #
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/src)
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/spec)
 
 install(
     DIRECTORY include/
@@ -51,6 +50,8 @@ foreach(odb_file ${all_odb_files})
     if(NOT ignore_file)
         set(type_name "")
         string(REPLACE "_pragmas.hpp" "" type_name ${odb_file})
+        string(REPLACE "\\" "_" type_name ${type_name})
+        string(REPLACE "/" "_" type_name ${type_name})
 
         set(pfh_dir "$ENV{PFH_LOCATION}")
         set(target_name "codegen_database_odb_${type_name}")

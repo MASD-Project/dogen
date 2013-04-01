@@ -47,7 +47,8 @@ public:
     include_cmakelists& operator=(const include_cmakelists&) = default;
 
 public:
-    include_cmakelists(std::ostream& stream);
+    include_cmakelists(std::ostream& stream, const bool odb_enabled,
+        const std::string odb_folder);
 
 public:
     void format(const cmakelists_view_model& vm);
@@ -55,6 +56,8 @@ public:
 private:
     std::ostream& stream_;
     indenter indenter_;
+    const bool odb_enabled_;
+    const std::string odb_folder_;
 };
 
 } } }

@@ -106,10 +106,13 @@ generator::value_type generator::generate_cmakelists() const {
     r.insert(std::make_pair(vm.file_path(), stream.str()));
 
     if (!settings_.split_project()) {
+        const auto f(settings_.enabled_facets());
+        const bool odb_enabled(f.find(config::cpp_facet_types::odb) != f.end());
         stream.str("");
         vm.file_path(locator_.absolute_path(vm.file_name()));
         log_formating_view(vm.file_path().string());
-        formatters::include_cmakelists inc(stream);
+        formatters::include_cmakelists inc(stream, odb_enabled,
+            settings_.odb_facet_folder());
         inc.format(vm);
         r.insert(std::make_pair(vm.file_path(), stream.str()));
     }
