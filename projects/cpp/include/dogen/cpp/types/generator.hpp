@@ -66,6 +66,7 @@ private:
     generate_file_view_model(const view_models::file_view_model& vm) const;
     value_type generate_file_view_models() const;
     value_type generate_cmakelists() const;
+    value_entry_type generate_odb_options() const;
 
 public:
     value_type generate();

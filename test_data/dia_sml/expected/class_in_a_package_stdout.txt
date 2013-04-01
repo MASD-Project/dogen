@@ -1710,6 +1710,42 @@ std::ostream& operator<<(std::ostream& s, const first_class_versioned_key& v) {
 }
 
 } }
+Filename: /empty_tds/actual/src/class_in_a_package/options.odb
+Contents: 
+# -*- mode: sh; tab-width: 4; indent-tabs-mode: nil -*-
+
+# enable C++11. FIXME: causes ODB crash in options file.
+# --std c++11
+
+# target postgres
+--database pgsql
+
+# use the boost profile
+--profile boost
+
+# generate queries and embedded schemas
+--generate-query
+--generate-schema
+--schema-format embedded
+
+# use extensions similar to the dogen ones
+# --ixx-suffix .ipp
+# --hxx-suffix .hpp
+--cxx-suffix .cpp
+
+# fix domain includes
+--include-regex '%(.*).hpp%/class_in_a_package/types/$1.hpp%'
+
+# fix odb generated includes
+--include-regex '%(^[a-zA-Z0-9_]+)-odb.(.*)%/class_in_a_package/odb/$1-odb.$2%'
+--include-regex '%/class_in_a_package/types/(.*)-odb.(.*)%/class_in_a_package/odb/$1-odb.$2%'
+
+# debug regexes
+# --include-regex-trace
+
+# make the header guards similar to dogen ones
+--guard-prefix _CLASS_IN_A_PACKAGE_ODB
+
 Filename: /empty_tds/actual/src/class_in_a_package/serialization/package1/first_class_ser.cpp
 Contents: 
 /* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-

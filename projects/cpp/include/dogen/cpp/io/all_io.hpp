@@ -31,6 +31,7 @@
 #include "dogen/cpp/io/view_models/exception_view_model_io.hpp"
 #include "dogen/cpp/io/view_models/file_view_model_io.hpp"
 #include "dogen/cpp/io/view_models/nested_type_view_model_io.hpp"
+#include "dogen/cpp/io/view_models/odb_options_view_model_io.hpp"
 #include "dogen/cpp/io/view_models/parent_view_model_io.hpp"
 #include "dogen/cpp/io/view_models/property_view_model_io.hpp"
 #include "dogen/cpp/io/view_models/registrar_view_model_io.hpp"

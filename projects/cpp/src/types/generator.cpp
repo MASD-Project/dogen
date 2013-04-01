@@ -25,6 +25,7 @@
 #include "dogen/cpp/types/formatters/file_formatter.hpp"
 #include "dogen/cpp/types/formatters/src_cmakelists.hpp"
 #include "dogen/cpp/types/formatters/include_cmakelists.hpp"
+#include "dogen/cpp/types/formatters/odb_options.hpp"
 #include "dogen/cpp/types/view_models/sml_to_cpp_view_model.hpp"
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/cpp/types/generator.hpp"
@@ -36,6 +37,7 @@ namespace {
 auto lg(logger_factory("cpp.generator"));
 
 const std::string cmakelists_file_name("CMakeLists.txt");
+const std::string odb_options_file_name("options.odb");
 const std::string domain_facet_must_be_enabled("Domain facet must be enabled");
 const std::string integrated_io_incompatible_with_io_facet(
     "Integrated IO cannot be used with the IO facet");
@@ -120,6 +122,26 @@ generator::value_type generator::generate_cmakelists() const {
     return r;
 }
 
+generator::value_entry_type generator::generate_odb_options() const {
+    BOOST_LOG_SEV(lg, info) << "Generating ODB options file.";
+
+    view_models::odb_options_view_model vm;
+    vm.file_name(odb_options_file_name);
+    vm.file_path(locator_.absolute_path_to_src(vm.file_name()));
+    vm.model_name(model_.name());
+    vm.odb_folder(settings_.odb_facet_folder());
+
+    if (!model_.external_package_path().empty())
+        vm.product_name(model_.external_package_path().front());
+
+    log_formating_view(vm.file_path().string());
+    std::ostringstream stream;
+    formatters::odb_options f(stream);
+    f.format(vm);
+
+    return std::make_pair(vm.file_path(), stream.str());
+}
+
 generator::value_entry_type generator::
 generate_file_view_model(const view_models::file_view_model& vm) const {
     log_formating_view(vm.file_path().string());
@@ -155,6 +177,13 @@ generator::value_type generator::generate() {
         const auto cm(generate_cmakelists());
         r.insert(cm.begin(), cm.end());
     }
+
+    const auto f(settings_.enabled_facets());
+    const bool odb_enabled(f.find(config::cpp_facet_types::odb) != f.end());
+    if (odb_enabled)
+        r.insert(generate_odb_options());
+    else
+        BOOST_LOG_SEV(lg, info) << "ODB options file generation disabled.";
 
     log_finished();
     return r;

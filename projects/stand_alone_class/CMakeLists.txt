@@ -58,7 +58,7 @@ foreach(odb_file ${all_odb_files})
         add_custom_target(${target_name}
             WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
             COMMAND odb
-            --options-file ${CMAKE_CURRENT_SOURCE_DIR}/options.odb
+            --options-file ${CMAKE_CURRENT_SOURCE_DIR}/src/options.odb
             --std c++11
             --output-dir ${CMAKE_CURRENT_SOURCE_DIR}/include/dogen/stand_alone_class/odb/
             --odb-epilogue '\#include \"dogen/stand_alone_class/odb/${odb_file}\"'

@@ -27,7 +27,6 @@
 
 #include <iosfwd>
 #include <string>
-#include <boost/filesystem/path.hpp>
 #include "dogen/cpp/types/formatters/indenter.hpp"
 #include "dogen/cpp/types/view_models/cmakelists_view_model.hpp"
 

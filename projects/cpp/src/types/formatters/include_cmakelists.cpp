@@ -155,7 +155,7 @@ void include_cmakelists::format(const cmakelists_view_model& vm) {
                     << std::endl
                     << indenter_ << "COMMAND odb" << std::endl
                     << indenter_
-                    << "--options-file ${CMAKE_CURRENT_SOURCE_DIR}/"
+                    << "--options-file ${CMAKE_CURRENT_SOURCE_DIR}/src/"
                     << "options.odb"
                     << std::endl
                     << indenter_ << "--std c++11" << std::endl

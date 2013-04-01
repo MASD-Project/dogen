@@ -1,6 +1,6 @@
 # -*- mode: sh; tab-width: 4; indent-tabs-mode: nil -*-
 
-# enable C++11
+# enable C++11. FIXME: causes ODB crash in options file.
 # --std c++11
 
 # target postgres
@@ -20,15 +20,14 @@
 --cxx-suffix .cpp
 
 # fix domain includes
---include-regex '%(.*).hpp%dogen/database/types/$1.hpp%'
+--include-regex '%(.*).hpp%dogen/disable_full_ctor/types/$1.hpp%'
 
 # fix odb generated includes
-
---include-regex '%(^[a-zA-Z0-9_]+)-odb.(.*)%dogen/database/odb/$1-odb.$2%'
---include-regex '%dogen/database/types/(.*)-odb.(.*)%dogen/database/odb/$1-odb.$2%'
+--include-regex '%(^[a-zA-Z0-9_]+)-odb.(.*)%dogen/disable_full_ctor/odb/$1-odb.$2%'
+--include-regex '%dogen/disable_full_ctor/types/(.*)-odb.(.*)%dogen/disable_full_ctor/odb/$1-odb.$2%'
 
 # debug regexes
 # --include-regex-trace
 
 # make the header guards similar to dogen ones
---guard-prefix DOGEN_DATABASE_ODB
+--guard-prefix DOGEN_DISABLE_FULL_CTOR_ODB
