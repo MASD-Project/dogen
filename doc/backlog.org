@@ -11,6 +11,19 @@ This file contains all stories that haven't been assigned to a sprint.
 
 Stories that we intend to look at, at some point.
 
+*** Enumeration string conversion could be configurable
+
+It should be possible to pass in one or more string values as implementation
+specific parameters that tells dogen what valid values an enumerator
+can have. We can then generate a from string method that does the
+appropriate conversions.
+
+*** Enumeration string dumps could be configurable
+
+It should be possible to pass in a string value as an implementation
+specific parameter that tells dogen what string to use for debug
+dumping.
+
 *** Refactor Licence formatter
 
 - year is hard-coded to 2012: At present the licence formatter has an
