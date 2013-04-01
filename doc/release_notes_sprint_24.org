@@ -140,6 +140,8 @@ actually not responsible for the code generation. What it does it to
 contain the entire code generation workflow. Rename it to =engine= as
 its a slightly less confusing name.
 
+*** COMPLETED Implement basic ODB support                             :story:
+    CLOSED: [2013-04-01 Mon 23:19]
 ** Deprecated Development Stories
 *** Formatters are actually just view model IO
 
