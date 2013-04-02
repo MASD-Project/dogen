@@ -34,6 +34,13 @@ implemented by the user.
 
 - versioned: add version property to class.
 
+*** Add is comparable to SML                                          :story:
+
+- add a property to SML types: is comparable. if all attributes are
+  comparable, generate =operator<= for the keys.
+- perhaps we should also have a =comparable= stereotype. if not set,
+  ignore this.
+
 *** Re-implement key support                                          :story:
 
 - create a new stereotype of keyed. when set, it results in the
@@ -44,8 +51,8 @@ implemented by the user.
   the same file as the key.
 - if versioned, also create unversioned key class. add typedefs in
   class for versioned key.
-- add a property to SML types: is comparable. if all types in a key
-  are comparable, generate =operator<= for the keys.
+- keys are comparable if all properties are of comparable types. add
+  =operator<= automatically.
 
 *** Fix entity stereotype                                             :story:
 
@@ -93,5 +100,10 @@ At this point in time we do not have enough use cases to make the
 correct design decisions in this area. We need to wait until we start
 using keys in anger in Creris and then design the API around the use
 cases.
+
+*** Create a model specific to versioning                             :story:
+
+- remove versioning from all other models such as std::model, etc.
+- add tests for =std::unordered=, maps etc.
 
 ** Deprecated Development Stories
