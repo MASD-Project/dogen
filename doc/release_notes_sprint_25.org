@@ -106,4 +106,15 @@ cases.
 - remove versioning from all other models such as std::model, etc.
 - add tests for =std::unordered=, maps etc.
 
+*** Add commenting of namespaces                                      :story:
+
+- if one creates a "comment box" with a well-known dogen
+  implementation specific parameter, that box is used as a comment for
+  the namespace.
+- if the comment box is inside of a package, it will be used for the
+  comments in the package.
+- comments are placed in a file with the name of the namespace,
+  e.g. =model_name.hpp=.
+- file does not get created if there are no comments.
+
 ** Deprecated Development Stories
