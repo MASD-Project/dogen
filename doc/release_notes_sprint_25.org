@@ -12,4 +12,86 @@ This file contains all stories that were closed during sprint 25.
 #+begin: clocktable :maxlevel 3 :scope subtree
 #+end:
 
+*** Add support for multiple stereotypes to Dia                       :story:
+
+At present we can only have a single stereotype. We need to return a
+container of stereotypes.
+
+**** Add stereotype validation
+
+We need a validator class that takes a list of stereotypes and ensures
+that they can be combined.
+
+*** Add aggregate root stereotype                                     :story:
+
+We need to re-read DDD to see if there is anything dogen can do for us
+other than marking the type as aggregate root. Evans states that its
+the job of the aggregate root to perform validation; perhaps we could
+automatically generate a =validator= for the root that has to be
+implemented by the user.
+
+*** Add new stereotype for versioning                                 :story:
+
+- versioned: add version property to class.
+
+*** Re-implement key support                                          :story:
+
+- create a new stereotype of keyed. when set, it results in the
+  creation of a new class containing all properties marked as
+  identity. if none are found, throw.
+- create new stand alone function =extract_key=. given an instance of
+  a class, it returns the corresponding key. it should be defined in
+  the same file as the key.
+- if versioned, also create unversioned key class. add typedefs in
+  class for versioned key.
+- add a property to SML types: is comparable. if all types in a key
+  are comparable, generate =operator<= for the keys.
+
+*** Fix entity stereotype                                             :story:
+
+Instead of generating versioned/unversioned keys, it should just force
+the user to define at least one attribute with  property of
+identity.
+
+*** Rename implementation specific parameters                         :story:
+
+These should really be called back end specific parameters at the SM
+level. At the dia level, if a parameter is passed in which has a
+representation at the SML level it should simply be converted to this
+representation instead of being added to the KVP.
+
+*** Enumeration string conversion could be configurable               :story:
+
+It should be possible to pass in one or more string values as implementation
+specific parameters that tells dogen what valid values an enumerator
+can have. We can then generate a from string method that does the
+appropriate conversions.
+
+*** Enumeration string dumps could be configurable                    :story:
+
+It should be possible to pass in a string value as an implementation
+specific parameter that tells dogen what string to use for debug
+dumping.
+
+*** Optional io formatter has no space between stream and inserter    :story:
+
+Minor typo on formatter, should have used spaced inserter.
+
+*** Use explicit casting for versioned to unversioned conversions     :story:
+    CLOCK: [2012-11-22 Thu 08:44]--[2012-11-22 Thu 09:20] =>  0:36
+
+At present we have to_versioned; in reality this would be dealt much
+better using explicit casts:
+
+: explicit operator std::string() { return "explicit"; }
+
+Actually the real solution for this is to make the versioned key
+contain the unversioned key; then dogen will generate all the
+required code.
+
+At this point in time we do not have enough use cases to make the
+correct design decisions in this area. We need to wait until we start
+using keys in anger in Creris and then design the API around the use
+cases.
+
 ** Deprecated Development Stories

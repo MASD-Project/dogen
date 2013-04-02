@@ -11,19 +11,6 @@ This file contains all stories that haven't been assigned to a sprint.
 
 Stories that we intend to look at, at some point.
 
-*** Enumeration string conversion could be configurable
-
-It should be possible to pass in one or more string values as implementation
-specific parameters that tells dogen what valid values an enumerator
-can have. We can then generate a from string method that does the
-appropriate conversions.
-
-*** Enumeration string dumps could be configurable
-
-It should be possible to pass in a string value as an implementation
-specific parameter that tells dogen what string to use for debug
-dumping.
-
 *** Refactor Licence formatter
 
 - year is hard-coded to 2012: At present the licence formatter has an
@@ -43,10 +30,6 @@ projects we won't get the ODB targets.
 The C++ model should by rights be called something like c-like model
 or something of the kind because it can be extended to generate C,
 COM, GObject, etc.
-
-*** Optional io formatter has no space between stream and inserter    :story:
-
-Minor typo on formatter, should have used spaced inserter.
 
 *** Refactor =transform_string_attribute=                             :story:
 
@@ -173,30 +156,6 @@ We need a =is_floating_point_like= method to be able to distinguish
 between them, and then the associated changes in the generators to
 create floating point numbers.
 
-*** Typedef keys for each type                                        :story:
-
-We should really have different names for each key. Ideally even
-different types, if its easy. We need to consult modern c++ for
-this. If its not possible for each key to be a different type, we
-should at least provide a typedef on each class.
-
-*** Use explicit casting for versioned to unversioned conversions     :story:
-    CLOCK: [2012-11-22 Thu 08:44]--[2012-11-22 Thu 09:20] =>  0:36
-
-At present we have to_versioned; in reality this would be dealt much
-better using explicit casts:
-
-: explicit operator std::string() { return "explicit"; }
-
-Actually the real solution for this is to make the versioned key
-contain the unversioned key; then dogen will generate all the
-required code.
-
-At this point in time we do not have enough use cases to make the
-correct design decisions in this area. We need to wait until we start
-using keys in anger in Creris and then design the API around the use
-cases.
-
 *** Add test to check if we are writing when file contents haven't changed
 
 We broke the code that detected changes and did not notice because we
@@ -269,25 +228,6 @@ These stereotypes can then be combined:
 
 Results in a service for which there will only be a header file and
 serialization support.
-
-**** Add support for multiple stereotypes to Dia
-
-At present we can only have a single stereotype. We need to return a
-container of stereotypes.
-
-**** Add stereotype validation
-
-We need a validator class that takes a list of stereotypes and ensures
-that they can be combined.
-
-**** Add back-end specific properties to models
-
-We need a way to attach facets to pods, or perhaps we need some
-concept at the SML level which maps to the facet in a language
-agnostic way. This is not very good since its obvious some back-ends
-will not support these concepts (e.g. what does streaming mean to
-SQL?). The better alternative is to have some kind of back-end
-specific properties in SML.
 
 *** Add support for references to types
 
