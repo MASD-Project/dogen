@@ -12,6 +12,12 @@ This file contains all stories that were closed during sprint 25.
 #+begin: clocktable :maxlevel 3 :scope subtree
 #+end:
 
+*** IMPLEMENTATION Clean up dia to SML transformer                    :story:
+    CLOCK: [2013-04-03 Wed 22:34]--[2013-04-03 Wed 22:54] =>  0:20
+
+**** IMPLEMENTATION Create a new graph class
+     CLOCK: [2013-04-03 Wed 22:54]--[2013-04-03 Wed 23:59] =>  1:05
+
 *** Add support for multiple stereotypes to Dia                       :story:
 
 At present we can only have a single stereotype. We need to return a

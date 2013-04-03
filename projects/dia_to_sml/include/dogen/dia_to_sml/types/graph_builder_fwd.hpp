@@ -18,11 +18,18 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/dia_to_sml/types/graph_builder.hpp"
-#include "dogen/dia_to_sml/types/object_to_enumeration.hpp"
-#include "dogen/dia_to_sml/types/object_to_exception.hpp"
-#include "dogen/dia_to_sml/types/object_to_package.hpp"
-#include "dogen/dia_to_sml/types/object_to_pod.hpp"
-#include "dogen/dia_to_sml/types/transformation_error.hpp"
-#include "dogen/dia_to_sml/types/transformer.hpp"
-#include "dogen/dia_to_sml/types/validation_error.hpp"
+#ifndef DOGEN_DIA_TO_SML_TYPES_GRAPH_BUILDER_FWD_HPP
+#define DOGEN_DIA_TO_SML_TYPES_GRAPH_BUILDER_FWD_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+namespace dogen {
+namespace dia_to_sml {
+
+class graph_builder;
+
+} }
+
+#endif
