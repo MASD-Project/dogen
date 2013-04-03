@@ -10,6 +10,15 @@ This file contains all stories that were closed during sprint 25.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
+Clock summary at [2013-04-04 Thu 00:00]
+
+| Headline                                                      | Time   |      |      |
+|---------------------------------------------------------------+--------+------+------|
+| *Total time*                                                  | *2:01* |      |      |
+|---------------------------------------------------------------+--------+------+------|
+| Development Stories Implemented                               |        | 2:01 |      |
+| IMPLEMENTATION Clean up dia to SML transformer                |        |      | 1:25 |
+| Use explicit casting for versioned to unversioned conversions |        |      | 0:36 |
 #+end:
 
 *** IMPLEMENTATION Clean up dia to SML transformer                    :story:
