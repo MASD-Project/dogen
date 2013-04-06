@@ -18,6 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen/dia_to_sml/types/building_error.hpp"
 #include "dogen/dia_to_sml/types/graph_builder.hpp"
 
 namespace {
@@ -26,13 +27,15 @@ namespace {
  * @brief String representation of the root vertex ID graph.
  */
 const std::string root_id("__root__");
+const std::string error_add_after_build("Cannot add object after building");
 
 }
 
 namespace dogen {
 namespace dia_to_sml {
 
-graph_builder::graph_builder() : root_vertex_(boost::add_vertex(graph_)) {
+graph_builder::graph_builder()
+    : built_(false), root_vertex_(boost::add_vertex(graph_)) {
     dia::object root;
     root.id(::root_id);
     graph_[root_vertex_] = root;
@@ -54,16 +57,20 @@ graph_builder::vertex_for_id(const std::string& id) {
     return r;
 }
 
-const graph_type& graph_builder::graph() const {
+const graph_type& graph_builder::build() {
+    built_ = true;
     return graph_;
 }
 
-void graph_builder::add(const dia::object o) {
-    const auto v(vertex_for_id(o.id()));
-    graph_[v] = o;
+void graph_builder::ensure_not_built() const {
+    if (built_)
+        throw building_error(error_add_after_build);
 }
 
-void graph_builder::finish() {
+void graph_builder::add(const dia::object& o) {
+    ensure_not_built();
+    const auto v(vertex_for_id(o.id()));
+    graph_[v] = o;
 }
 
 } }

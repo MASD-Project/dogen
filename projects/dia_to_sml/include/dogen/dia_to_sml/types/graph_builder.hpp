@@ -63,27 +63,29 @@ private:
      */
     vertex_descriptor_type vertex_for_id(const std::string& id);
 
+    /**
+     * @brief Ensures the graph has not yet been built.
+     */
+    void ensure_not_built() const;
+
 public: // only for testing purposes
     static std::string root_id();
 
 public:
     /**
-     * @brief The graph being built.
-     */
-    const graph_type& graph() const;
-
-    /**
      * @brief Adds an object to the graph.
+     *
+     * @pre The graph must not yet have been built.
      */
-    void add(const dia::object o);
+    void add(const dia::object& o);
 
     /**
-     * @brief No more dependencies will be added to the graph; perform
-     * any required post-processing.
+     * @brief Generate a DAG of all objects that have been added.
      */
-    void finish();
+    const graph_type& build();
 
 private:
+    bool built_;
     graph_type graph_;
     id_to_vertex_type id_to_vertex_;
     vertex_descriptor_type root_vertex_;

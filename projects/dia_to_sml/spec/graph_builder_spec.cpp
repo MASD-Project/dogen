@@ -23,17 +23,19 @@
 #include "dogen/utility/test/asserter.hpp"
 #include "dogen/utility/test/logging.hpp"
 #include "dogen/dia/io/object_io.hpp"
-#include "dogen/dia_to_sml/types/transformation_error.hpp"
+#include "dogen/dia_to_sml/types/building_error.hpp"
 #include "dogen/dia_to_sml/types/graph_builder.hpp"
 #include "dogen/utility/test/exception_checkers.hpp"
 
 using namespace dogen::dia_to_sml;
 using dogen::utility::test::asserter;
+using dogen::utility::test::contains_checker;
 
 namespace  {
 
 const std::string test_module("dia_to_sml");
 const std::string test_suite("graph_builder_spec");
+const std::string adding_after_build("Cannot add object after building");
 
 class empty_graph_visitor : public boost::default_dfs_visitor {
 public:
@@ -46,19 +48,12 @@ public:
 public:
     template<typename Vertex, typename Graph>
     void discover_vertex(const Vertex& u, const Graph& g) {
-        using dogen::dia_to_sml::transformation_error;
-        if (found_root_)
-            throw transformation_error("Expected only one root");
-
-        ++count_;
-        if (count_ != 1)
-            throw transformation_error("Expected only one node");
+        BOOST_REQUIRE_MESSAGE(!found_root_, "Expected only one root");
+        BOOST_REQUIRE_MESSAGE(++count_ == 1, "Expected only one node");
 
         const dogen::dia::object o(g[u]);
         found_root_ = o.id() == dogen::dia_to_sml::graph_builder::root_id();
-
-        if (!found_root_)
-            throw transformation_error("Unexpected vertex");
+        BOOST_REQUIRE_MESSAGE(found_root_, "Unexpected vertex");
     }
 
 private:
@@ -69,6 +64,7 @@ private:
 }
 
 using dogen::utility::test::contains_checker;
+using dogen::dia_to_sml::building_error;
 
 BOOST_AUTO_TEST_SUITE(graph_builder)
 
@@ -79,10 +75,25 @@ BOOST_AUTO_TEST_CASE(building_a_graph_with_no_objects_results_in_just_root_visit
     unsigned int count(0);
     empty_graph_visitor v(found_root, count);
 
-    dogen::dia_to_sml::graph_builder gb;
-    boost::depth_first_search(gb.graph(), boost::visitor(v));
+    dogen::dia_to_sml::graph_builder b;
+    boost::depth_first_search(b.build(), boost::visitor(v));
     BOOST_CHECK(found_root);
     BOOST_CHECK(count == 1);
+}
+
+BOOST_AUTO_TEST_CASE(adding_object_after_graph_has_been_built_throws) {
+    SETUP_TEST_LOG("adding_object_after_graph_has_been_built_throws");
+
+    dogen::dia_to_sml::graph_builder b1;
+    b1.build();
+    dogen::dia::object o;
+    contains_checker<building_error> c(adding_after_build);
+    BOOST_CHECK_EXCEPTION(b1.add(o), building_error, c);
+
+    dogen::dia_to_sml::graph_builder b2;
+    b2.add(o);
+    b2.build();
+    BOOST_CHECK_EXCEPTION(b2.add(o), building_error, c);
 }
 
 BOOST_AUTO_TEST_SUITE_END()
