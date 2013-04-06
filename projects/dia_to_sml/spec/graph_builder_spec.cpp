@@ -37,7 +37,11 @@ const std::string test_suite("graph_builder_spec");
 
 class empty_graph_visitor : public boost::default_dfs_visitor {
 public:
-    empty_graph_visitor() : found_root_(false), count_(0) {}
+    empty_graph_visitor(bool& found_root, unsigned int& count)
+        : found_root_(found_root), count_(count) {
+        found_root_ = false;
+        count_ = 0;
+    }
 
 public:
     template<typename Vertex, typename Graph>
@@ -52,19 +56,14 @@ public:
 
         const dogen::dia::object o(g[u]);
         found_root_ = o.id() == dogen::dia_to_sml::graph_builder::root_id();
-        // std::cout << o.id() << std::endl << found_root_ << std::endl;
 
         if (!found_root_)
             throw transformation_error("Unexpected vertex");
     }
 
-public:
-    bool found_root() const { return found_root_; }
-    unsigned int count() const { return count_; }
-
 private:
-    bool found_root_;
-    unsigned int count_;
+    bool& found_root_;
+    unsigned int& count_;
 };
 
 }
@@ -73,14 +72,17 @@ using dogen::utility::test::contains_checker;
 
 BOOST_AUTO_TEST_SUITE(graph_builder)
 
-BOOST_AUTO_TEST_CASE(building_a_graph_with_no_objects_results_in_no_visits) {
-    SETUP_TEST_LOG("building_a_graph_with_no_objects_results_in_no_visits");
+BOOST_AUTO_TEST_CASE(building_a_graph_with_no_objects_results_in_just_root_visit) {
+    SETUP_TEST_LOG("building_a_graph_with_no_objects_results_in_just_root_visit");
+
+    bool found_root(false);
+    unsigned int count(0);
+    empty_graph_visitor v(found_root, count);
 
     dogen::dia_to_sml::graph_builder gb;
-    empty_graph_visitor v;
     boost::depth_first_search(gb.graph(), boost::visitor(v));
-    // BOOST_CHECK(v.found_root());
-    // BOOST_CHECK(v.count() == 1);
+    BOOST_CHECK(found_root);
+    BOOST_CHECK(count == 1);
 }
 
 BOOST_AUTO_TEST_SUITE_END()
