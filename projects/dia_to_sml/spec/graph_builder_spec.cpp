@@ -61,6 +61,28 @@ private:
     unsigned int& count_;
 };
 
+class n_objects_graph_visitor : public boost::default_dfs_visitor {
+public:
+    n_objects_graph_visitor(bool& found_root, unsigned int& count)
+        : found_root_(found_root), count_(count) {
+        found_root_ = false;
+        count_ = 0;
+    }
+
+public:
+    template<typename Vertex, typename Graph>
+    void discover_vertex(const Vertex& u, const Graph& g) {
+        ++count_;
+        const dogen::dia::object o(g[u]);
+        if (!found_root_)
+            found_root_ = o.id() == dogen::dia_to_sml::graph_builder::root_id();
+    }
+
+private:
+    bool& found_root_;
+    unsigned int& count_;
+};
+
 }
 
 using dogen::utility::test::contains_checker;
@@ -79,6 +101,28 @@ BOOST_AUTO_TEST_CASE(building_a_graph_with_no_objects_results_in_just_root_visit
     boost::depth_first_search(b.build(), boost::visitor(v));
     BOOST_CHECK(found_root);
     BOOST_CHECK(count == 1);
+}
+
+BOOST_AUTO_TEST_CASE(building_a_graph_with_n_objects_results_in_n_plus_one_visits) {
+    SETUP_TEST_LOG("building_a_graph_with_n_objects_results_in_n_plus_one_visits");
+
+    dogen::dia::object o1, o2, o3;
+    o1.id("1");
+    o2.id("2");
+    o3.id("3");
+
+    dogen::dia_to_sml::graph_builder b;
+    b.add(o1);
+    b.add(o2);
+    b.add(o3);
+
+    bool found_root(false);
+    unsigned int count(0);
+    n_objects_graph_visitor v(found_root, count);
+    boost::depth_first_search(b.build(), boost::visitor(v));
+
+    BOOST_CHECK(found_root);
+    BOOST_CHECK(count == 4);
 }
 
 BOOST_AUTO_TEST_CASE(adding_object_after_graph_has_been_built_throws) {
