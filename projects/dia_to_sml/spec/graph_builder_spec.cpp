@@ -73,7 +73,7 @@ public:
 
 public:
     template<typename Vertex, typename Graph>
-    void discover_vertex(const Vertex& u, const Graph& g) {
+    void finish_vertex(const Vertex& u, const Graph& g) {
         ++count_;
         const dogen::dia::object o(g[u]);
         if (!found_root_)
@@ -122,8 +122,8 @@ BOOST_AUTO_TEST_CASE(building_a_graph_with_n_relevant_objects_results_in_n_plus_
     BOOST_CHECK(count == 5);
 }
 
-BOOST_AUTO_TEST_CASE(irrelevant_objects_are_ignored_by_the_builder) {
-    SETUP_TEST_LOG("irrelevant_objects_are_ignored_by_the_builder");
+BOOST_AUTO_TEST_CASE(irrelevant_objects_are_ignored_by_builder) {
+    SETUP_TEST_LOG("irrelevant_objects_are_ignored_by_builder");
 
     dogen::dia_to_sml::graph_builder b;
     unsigned int id(0);
