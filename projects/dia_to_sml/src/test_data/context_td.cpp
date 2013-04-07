@@ -19,7 +19,8 @@
  *
  */
 #include <sstream>
-#include "dogen/dia_to_sml/test_data/visit_state_td.hpp"
+#include "dogen/dia_to_sml/test_data/context_td.hpp"
+#include "dogen/sml/test_data/enumeration_td.hpp"
 #include "dogen/sml/test_data/package_td.hpp"
 #include "dogen/sml/test_data/pod_td.hpp"
 #include "dogen/sml/test_data/qname_td.hpp"
@@ -123,14 +124,27 @@ std::unordered_map<dogen::sml::qname, std::list<dogen::sml::qname> > create_std_
     return r;
 }
 
+dogen::sml::enumeration
+create_dogen_sml_enumeration(const unsigned int position) {
+    return dogen::sml::enumeration_generator::create(position);
+}
+
+std::unordered_map<dogen::sml::qname, dogen::sml::enumeration> create_std_unordered_map_dogen_sml_qname_dogen_sml_enumeration(unsigned int position) {
+    std::unordered_map<dogen::sml::qname, dogen::sml::enumeration> r;
+    for (unsigned int i(0); i < 10; ++i) {
+        r.insert(std::make_pair(create_dogen_sml_qname(position + i), create_dogen_sml_enumeration(position + i)));
+    }
+    return r;
+}
+
 }
 
 namespace dogen {
 namespace dia_to_sml {
 
-visit_state_generator::visit_state_generator() : position_(0) { }
+context_generator::context_generator() : position_(0) { }
 
-void visit_state_generator::
+void context_generator::
 populate(const unsigned int position, result_type& v) {
     v.model_name(create_std_string(position + 0));
     v.pods(create_std_unordered_map_dogen_sml_qname_dogen_sml_pod(position + 1));
@@ -145,23 +159,24 @@ populate(const unsigned int position, result_type& v) {
     v.leaves(create_std_unordered_map_dogen_sml_qname_std_list_dogen_sml_qname_(position + 10));
     v.dependencies(create_std_unordered_set_std_string(position + 11));
     v.top_level_packages(create_std_unordered_set_std_string(position + 12));
+    v.enumerations(create_std_unordered_map_dogen_sml_qname_dogen_sml_enumeration(position + 13));
 }
 
-visit_state_generator::result_type
-visit_state_generator::create(const unsigned int position) {
-    visit_state r;
-    visit_state_generator::populate(position, r);
+context_generator::result_type
+context_generator::create(const unsigned int position) {
+    context r;
+    context_generator::populate(position, r);
     return r;
 }
-visit_state_generator::result_type*
-visit_state_generator::create_ptr(const unsigned int position) {
-    visit_state* p = new visit_state();
-    visit_state_generator::populate(position, *p);
+context_generator::result_type*
+context_generator::create_ptr(const unsigned int position) {
+    context* p = new context();
+    context_generator::populate(position, *p);
     return p;
 }
 
-visit_state_generator::result_type
-visit_state_generator::operator()() {
+context_generator::result_type
+context_generator::operator()() {
     return create(position_++);
 }
 

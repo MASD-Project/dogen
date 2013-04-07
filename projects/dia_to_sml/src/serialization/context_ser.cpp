@@ -29,7 +29,8 @@
 #include <boost/serialization/list.hpp>
 #include <boost/serialization/nvp.hpp>
 #include <boost/serialization/string.hpp>
-#include "dogen/dia_to_sml/serialization/visit_state_ser.hpp"
+#include "dogen/dia_to_sml/serialization/context_ser.hpp"
+#include "dogen/sml/serialization/enumeration_ser.hpp"
 #include "dogen/sml/serialization/package_ser.hpp"
 #include "dogen/sml/serialization/pod_ser.hpp"
 #include "dogen/sml/serialization/qname_ser.hpp"
@@ -46,7 +47,7 @@ namespace serialization {
 
 template<typename Archive>
 void save(Archive& ar,
-    const dogen::dia_to_sml::visit_state& v,
+    const dogen::dia_to_sml::context& v,
     const unsigned int /*version*/) {
     ar << make_nvp("model_name", v.model_name_);
     ar << make_nvp("pods", v.pods_);
@@ -61,11 +62,12 @@ void save(Archive& ar,
     ar << make_nvp("leaves", v.leaves_);
     ar << make_nvp("dependencies", v.dependencies_);
     ar << make_nvp("top_level_packages", v.top_level_packages_);
+    ar << make_nvp("enumerations", v.enumerations_);
 }
 
 template<typename Archive>
 void load(Archive& ar,
-    dogen::dia_to_sml::visit_state& v,
+    dogen::dia_to_sml::context& v,
     const unsigned int /*version*/) {
     ar >> make_nvp("model_name", v.model_name_);
     ar >> make_nvp("pods", v.pods_);
@@ -80,6 +82,7 @@ void load(Archive& ar,
     ar >> make_nvp("leaves", v.leaves_);
     ar >> make_nvp("dependencies", v.dependencies_);
     ar >> make_nvp("top_level_packages", v.top_level_packages_);
+    ar >> make_nvp("enumerations", v.enumerations_);
 }
 
 } }
@@ -87,21 +90,21 @@ void load(Archive& ar,
 namespace boost {
 namespace serialization {
 
-template void save(archive::polymorphic_oarchive& ar, const dogen::dia_to_sml::visit_state& v, unsigned int version);
-template void load(archive::polymorphic_iarchive& ar, dogen::dia_to_sml::visit_state& v, unsigned int version);
+template void save(archive::polymorphic_oarchive& ar, const dogen::dia_to_sml::context& v, unsigned int version);
+template void load(archive::polymorphic_iarchive& ar, dogen::dia_to_sml::context& v, unsigned int version);
 
-template void save(archive::text_oarchive& ar, const dogen::dia_to_sml::visit_state& v, unsigned int version);
-template void load(archive::text_iarchive& ar, dogen::dia_to_sml::visit_state& v, unsigned int version);
+template void save(archive::text_oarchive& ar, const dogen::dia_to_sml::context& v, unsigned int version);
+template void load(archive::text_iarchive& ar, dogen::dia_to_sml::context& v, unsigned int version);
 
-template void save(archive::binary_oarchive& ar, const dogen::dia_to_sml::visit_state& v, unsigned int version);
-template void load(archive::binary_iarchive& ar, dogen::dia_to_sml::visit_state& v, unsigned int version);
+template void save(archive::binary_oarchive& ar, const dogen::dia_to_sml::context& v, unsigned int version);
+template void load(archive::binary_iarchive& ar, dogen::dia_to_sml::context& v, unsigned int version);
 
-template void save(archive::xml_oarchive& ar, const dogen::dia_to_sml::visit_state& v, unsigned int version);
-template void load(archive::xml_iarchive& ar, dogen::dia_to_sml::visit_state& v, unsigned int version);
+template void save(archive::xml_oarchive& ar, const dogen::dia_to_sml::context& v, unsigned int version);
+template void load(archive::xml_iarchive& ar, dogen::dia_to_sml::context& v, unsigned int version);
 
 #ifdef __linux__
-template void save(eos::portable_oarchive& ar, const dogen::dia_to_sml::visit_state& v, unsigned int version);
-template void load(eos::portable_iarchive& ar, dogen::dia_to_sml::visit_state& v, unsigned int version);
+template void save(eos::portable_oarchive& ar, const dogen::dia_to_sml::context& v, unsigned int version);
+template void load(eos::portable_iarchive& ar, dogen::dia_to_sml::context& v, unsigned int version);
 #endif
 
 } }

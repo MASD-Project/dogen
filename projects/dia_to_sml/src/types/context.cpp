@@ -18,16 +18,16 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/dia_to_sml/types/visit_state.hpp"
+#include "dogen/dia_to_sml/types/context.hpp"
 
 namespace dogen {
 namespace dia_to_sml {
 
-visit_state::visit_state()
+context::context()
     : verbose_(static_cast<bool>(0)),
       is_target_(static_cast<bool>(0)) { }
 
-visit_state::visit_state(
+context::context(
     const std::string& model_name,
     const std::unordered_map<dogen::sml::qname, dogen::sml::pod>& pods,
     const std::list<std::string>& external_package_path,
@@ -40,7 +40,8 @@ visit_state::visit_state(
     const std::unordered_map<dogen::sml::qname, dogen::sml::qname>& original_parent,
     const std::unordered_map<dogen::sml::qname, std::list<dogen::sml::qname> >& leaves,
     const std::unordered_set<std::string>& dependencies,
-    const std::unordered_set<std::string>& top_level_packages)
+    const std::unordered_set<std::string>& top_level_packages,
+    const std::unordered_map<dogen::sml::qname, dogen::sml::enumeration>& enumerations)
     : model_name_(model_name),
       pods_(pods),
       external_package_path_(external_package_path),
@@ -53,9 +54,10 @@ visit_state::visit_state(
       original_parent_(original_parent),
       leaves_(leaves),
       dependencies_(dependencies),
-      top_level_packages_(top_level_packages) { }
+      top_level_packages_(top_level_packages),
+      enumerations_(enumerations) { }
 
-void visit_state::swap(visit_state& other) noexcept {
+void context::swap(context& other) noexcept {
     using std::swap;
     swap(model_name_, other.model_name_);
     swap(pods_, other.pods_);
@@ -70,9 +72,10 @@ void visit_state::swap(visit_state& other) noexcept {
     swap(leaves_, other.leaves_);
     swap(dependencies_, other.dependencies_);
     swap(top_level_packages_, other.top_level_packages_);
+    swap(enumerations_, other.enumerations_);
 }
 
-bool visit_state::operator==(const visit_state& rhs) const {
+bool context::operator==(const context& rhs) const {
     return model_name_ == rhs.model_name_ &&
         pods_ == rhs.pods_ &&
         external_package_path_ == rhs.external_package_path_ &&
@@ -85,205 +88,222 @@ bool visit_state::operator==(const visit_state& rhs) const {
         original_parent_ == rhs.original_parent_ &&
         leaves_ == rhs.leaves_ &&
         dependencies_ == rhs.dependencies_ &&
-        top_level_packages_ == rhs.top_level_packages_;
+        top_level_packages_ == rhs.top_level_packages_ &&
+        enumerations_ == rhs.enumerations_;
 }
 
-visit_state& visit_state::operator=(visit_state other) {
+context& context::operator=(context other) {
     using std::swap;
     swap(*this, other);
     return *this;
 }
 
-const std::string& visit_state::model_name() const {
+const std::string& context::model_name() const {
     return model_name_;
 }
 
-std::string& visit_state::model_name() {
+std::string& context::model_name() {
     return model_name_;
 }
 
-void visit_state::model_name(const std::string& v) {
+void context::model_name(const std::string& v) {
     model_name_ = v;
 }
 
-void visit_state::model_name(const std::string&& v) {
+void context::model_name(const std::string&& v) {
     model_name_ = std::move(v);
 }
 
-const std::unordered_map<dogen::sml::qname, dogen::sml::pod>& visit_state::pods() const {
+const std::unordered_map<dogen::sml::qname, dogen::sml::pod>& context::pods() const {
     return pods_;
 }
 
-std::unordered_map<dogen::sml::qname, dogen::sml::pod>& visit_state::pods() {
+std::unordered_map<dogen::sml::qname, dogen::sml::pod>& context::pods() {
     return pods_;
 }
 
-void visit_state::pods(const std::unordered_map<dogen::sml::qname, dogen::sml::pod>& v) {
+void context::pods(const std::unordered_map<dogen::sml::qname, dogen::sml::pod>& v) {
     pods_ = v;
 }
 
-void visit_state::pods(const std::unordered_map<dogen::sml::qname, dogen::sml::pod>&& v) {
+void context::pods(const std::unordered_map<dogen::sml::qname, dogen::sml::pod>&& v) {
     pods_ = std::move(v);
 }
 
-const std::list<std::string>& visit_state::external_package_path() const {
+const std::list<std::string>& context::external_package_path() const {
     return external_package_path_;
 }
 
-std::list<std::string>& visit_state::external_package_path() {
+std::list<std::string>& context::external_package_path() {
     return external_package_path_;
 }
 
-void visit_state::external_package_path(const std::list<std::string>& v) {
+void context::external_package_path(const std::list<std::string>& v) {
     external_package_path_ = v;
 }
 
-void visit_state::external_package_path(const std::list<std::string>&& v) {
+void context::external_package_path(const std::list<std::string>&& v) {
     external_package_path_ = std::move(v);
 }
 
-bool visit_state::verbose() const {
+bool context::verbose() const {
     return verbose_;
 }
 
-void visit_state::verbose(const bool v) {
+void context::verbose(const bool v) {
     verbose_ = v;
 }
 
-bool visit_state::is_target() const {
+bool context::is_target() const {
     return is_target_;
 }
 
-void visit_state::is_target(const bool v) {
+void context::is_target(const bool v) {
     is_target_ = v;
 }
 
-const std::unordered_map<std::string, std::string>& visit_state::child_to_parent() const {
+const std::unordered_map<std::string, std::string>& context::child_to_parent() const {
     return child_to_parent_;
 }
 
-std::unordered_map<std::string, std::string>& visit_state::child_to_parent() {
+std::unordered_map<std::string, std::string>& context::child_to_parent() {
     return child_to_parent_;
 }
 
-void visit_state::child_to_parent(const std::unordered_map<std::string, std::string>& v) {
+void context::child_to_parent(const std::unordered_map<std::string, std::string>& v) {
     child_to_parent_ = v;
 }
 
-void visit_state::child_to_parent(const std::unordered_map<std::string, std::string>&& v) {
+void context::child_to_parent(const std::unordered_map<std::string, std::string>&& v) {
     child_to_parent_ = std::move(v);
 }
 
-const std::unordered_set<std::string>& visit_state::parent_ids() const {
+const std::unordered_set<std::string>& context::parent_ids() const {
     return parent_ids_;
 }
 
-std::unordered_set<std::string>& visit_state::parent_ids() {
+std::unordered_set<std::string>& context::parent_ids() {
     return parent_ids_;
 }
 
-void visit_state::parent_ids(const std::unordered_set<std::string>& v) {
+void context::parent_ids(const std::unordered_set<std::string>& v) {
     parent_ids_ = v;
 }
 
-void visit_state::parent_ids(const std::unordered_set<std::string>&& v) {
+void context::parent_ids(const std::unordered_set<std::string>&& v) {
     parent_ids_ = std::move(v);
 }
 
-const std::unordered_map<std::string, dogen::sml::package>& visit_state::packages_by_id() const {
+const std::unordered_map<std::string, dogen::sml::package>& context::packages_by_id() const {
     return packages_by_id_;
 }
 
-std::unordered_map<std::string, dogen::sml::package>& visit_state::packages_by_id() {
+std::unordered_map<std::string, dogen::sml::package>& context::packages_by_id() {
     return packages_by_id_;
 }
 
-void visit_state::packages_by_id(const std::unordered_map<std::string, dogen::sml::package>& v) {
+void context::packages_by_id(const std::unordered_map<std::string, dogen::sml::package>& v) {
     packages_by_id_ = v;
 }
 
-void visit_state::packages_by_id(const std::unordered_map<std::string, dogen::sml::package>&& v) {
+void context::packages_by_id(const std::unordered_map<std::string, dogen::sml::package>&& v) {
     packages_by_id_ = std::move(v);
 }
 
-const std::unordered_map<std::string, dogen::sml::qname>& visit_state::dia_id_to_qname() const {
+const std::unordered_map<std::string, dogen::sml::qname>& context::dia_id_to_qname() const {
     return dia_id_to_qname_;
 }
 
-std::unordered_map<std::string, dogen::sml::qname>& visit_state::dia_id_to_qname() {
+std::unordered_map<std::string, dogen::sml::qname>& context::dia_id_to_qname() {
     return dia_id_to_qname_;
 }
 
-void visit_state::dia_id_to_qname(const std::unordered_map<std::string, dogen::sml::qname>& v) {
+void context::dia_id_to_qname(const std::unordered_map<std::string, dogen::sml::qname>& v) {
     dia_id_to_qname_ = v;
 }
 
-void visit_state::dia_id_to_qname(const std::unordered_map<std::string, dogen::sml::qname>&& v) {
+void context::dia_id_to_qname(const std::unordered_map<std::string, dogen::sml::qname>&& v) {
     dia_id_to_qname_ = std::move(v);
 }
 
-const std::unordered_map<dogen::sml::qname, dogen::sml::qname>& visit_state::original_parent() const {
+const std::unordered_map<dogen::sml::qname, dogen::sml::qname>& context::original_parent() const {
     return original_parent_;
 }
 
-std::unordered_map<dogen::sml::qname, dogen::sml::qname>& visit_state::original_parent() {
+std::unordered_map<dogen::sml::qname, dogen::sml::qname>& context::original_parent() {
     return original_parent_;
 }
 
-void visit_state::original_parent(const std::unordered_map<dogen::sml::qname, dogen::sml::qname>& v) {
+void context::original_parent(const std::unordered_map<dogen::sml::qname, dogen::sml::qname>& v) {
     original_parent_ = v;
 }
 
-void visit_state::original_parent(const std::unordered_map<dogen::sml::qname, dogen::sml::qname>&& v) {
+void context::original_parent(const std::unordered_map<dogen::sml::qname, dogen::sml::qname>&& v) {
     original_parent_ = std::move(v);
 }
 
-const std::unordered_map<dogen::sml::qname, std::list<dogen::sml::qname> >& visit_state::leaves() const {
+const std::unordered_map<dogen::sml::qname, std::list<dogen::sml::qname> >& context::leaves() const {
     return leaves_;
 }
 
-std::unordered_map<dogen::sml::qname, std::list<dogen::sml::qname> >& visit_state::leaves() {
+std::unordered_map<dogen::sml::qname, std::list<dogen::sml::qname> >& context::leaves() {
     return leaves_;
 }
 
-void visit_state::leaves(const std::unordered_map<dogen::sml::qname, std::list<dogen::sml::qname> >& v) {
+void context::leaves(const std::unordered_map<dogen::sml::qname, std::list<dogen::sml::qname> >& v) {
     leaves_ = v;
 }
 
-void visit_state::leaves(const std::unordered_map<dogen::sml::qname, std::list<dogen::sml::qname> >&& v) {
+void context::leaves(const std::unordered_map<dogen::sml::qname, std::list<dogen::sml::qname> >&& v) {
     leaves_ = std::move(v);
 }
 
-const std::unordered_set<std::string>& visit_state::dependencies() const {
+const std::unordered_set<std::string>& context::dependencies() const {
     return dependencies_;
 }
 
-std::unordered_set<std::string>& visit_state::dependencies() {
+std::unordered_set<std::string>& context::dependencies() {
     return dependencies_;
 }
 
-void visit_state::dependencies(const std::unordered_set<std::string>& v) {
+void context::dependencies(const std::unordered_set<std::string>& v) {
     dependencies_ = v;
 }
 
-void visit_state::dependencies(const std::unordered_set<std::string>&& v) {
+void context::dependencies(const std::unordered_set<std::string>&& v) {
     dependencies_ = std::move(v);
 }
 
-const std::unordered_set<std::string>& visit_state::top_level_packages() const {
+const std::unordered_set<std::string>& context::top_level_packages() const {
     return top_level_packages_;
 }
 
-std::unordered_set<std::string>& visit_state::top_level_packages() {
+std::unordered_set<std::string>& context::top_level_packages() {
     return top_level_packages_;
 }
 
-void visit_state::top_level_packages(const std::unordered_set<std::string>& v) {
+void context::top_level_packages(const std::unordered_set<std::string>& v) {
     top_level_packages_ = v;
 }
 
-void visit_state::top_level_packages(const std::unordered_set<std::string>&& v) {
+void context::top_level_packages(const std::unordered_set<std::string>&& v) {
     top_level_packages_ = std::move(v);
+}
+
+const std::unordered_map<dogen::sml::qname, dogen::sml::enumeration>& context::enumerations() const {
+    return enumerations_;
+}
+
+std::unordered_map<dogen::sml::qname, dogen::sml::enumeration>& context::enumerations() {
+    return enumerations_;
+}
+
+void context::enumerations(const std::unordered_map<dogen::sml::qname, dogen::sml::enumeration>& v) {
+    enumerations_ = v;
+}
+
+void context::enumerations(const std::unordered_map<dogen::sml::qname, dogen::sml::enumeration>&& v) {
+    enumerations_ = std::move(v);
 }
 
 } }

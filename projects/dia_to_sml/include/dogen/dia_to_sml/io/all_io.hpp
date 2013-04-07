@@ -18,4 +18,4 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/dia_to_sml/io/visit_state_io.hpp"
+#include "dogen/dia_to_sml/io/context_io.hpp"

@@ -19,13 +19,15 @@
  *
  */
 #include "dogen/dia_to_sml/types/building_error.hpp"
+#include "dogen/dia_to_sml/types/context.hpp"
 #include "dogen/dia_to_sml/types/graph_builder.hpp"
 #include "dogen/dia_to_sml/types/object_to_enumeration.hpp"
 #include "dogen/dia_to_sml/types/object_to_exception.hpp"
 #include "dogen/dia_to_sml/types/object_to_package.hpp"
 #include "dogen/dia_to_sml/types/object_to_pod.hpp"
+#include "dogen/dia_to_sml/types/object_transformer.hpp"
+#include "dogen/dia_to_sml/types/object_transformer_interface.hpp"
 #include "dogen/dia_to_sml/types/transformation_error.hpp"
 #include "dogen/dia_to_sml/types/transformer.hpp"
 #include "dogen/dia_to_sml/types/validation_error.hpp"
-#include "dogen/dia_to_sml/types/visit_state.hpp"
 #include "dogen/dia_to_sml/types/visitor.hpp"

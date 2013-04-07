@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_DIA_TO_SML_TYPES_VISIT_STATE_HPP
-#define DOGEN_DIA_TO_SML_TYPES_VISIT_STATE_HPP
+#ifndef DOGEN_DIA_TO_SML_TYPES_CONTEXT_HPP
+#define DOGEN_DIA_TO_SML_TYPES_CONTEXT_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -30,8 +30,9 @@
 #include <string>
 #include <unordered_map>
 #include <unordered_set>
-#include "dogen/dia_to_sml/serialization/visit_state_fwd_ser.hpp"
+#include "dogen/dia_to_sml/serialization/context_fwd_ser.hpp"
 #include "dogen/sml/hash/qname_hash.hpp"
+#include "dogen/sml/types/enumeration.hpp"
 #include "dogen/sml/types/package.hpp"
 #include "dogen/sml/types/pod.hpp"
 #include "dogen/sml/types/qname.hpp"
@@ -42,17 +43,17 @@ namespace dia_to_sml {
 /**
  * @brief Collects all the information required by the visitor as it traverses the graph.
  */
-class visit_state final {
+class context final {
 public:
-    visit_state(const visit_state&) = default;
-    visit_state(visit_state&&) = default;
-    ~visit_state() = default;
+    context(const context&) = default;
+    context(context&&) = default;
+    ~context() = default;
 
 public:
-    visit_state();
+    context();
 
 public:
-    visit_state(
+    context(
         const std::string& model_name,
         const std::unordered_map<dogen::sml::qname, dogen::sml::pod>& pods,
         const std::list<std::string>& external_package_path,
@@ -65,14 +66,15 @@ public:
         const std::unordered_map<dogen::sml::qname, dogen::sml::qname>& original_parent,
         const std::unordered_map<dogen::sml::qname, std::list<dogen::sml::qname> >& leaves,
         const std::unordered_set<std::string>& dependencies,
-        const std::unordered_set<std::string>& top_level_packages);
+        const std::unordered_set<std::string>& top_level_packages,
+        const std::unordered_map<dogen::sml::qname, dogen::sml::enumeration>& enumerations);
 
 private:
     template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const visit_state& v, unsigned int version);
+    friend void boost::serialization::save(Archive& ar, const context& v, unsigned int version);
 
     template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, visit_state& v, unsigned int version);
+    friend void boost::serialization::load(Archive& ar, context& v, unsigned int version);
 
 public:
     const std::string& model_name() const;
@@ -136,15 +138,20 @@ public:
     void top_level_packages(const std::unordered_set<std::string>& v);
     void top_level_packages(const std::unordered_set<std::string>&& v);
 
+    const std::unordered_map<dogen::sml::qname, dogen::sml::enumeration>& enumerations() const;
+    std::unordered_map<dogen::sml::qname, dogen::sml::enumeration>& enumerations();
+    void enumerations(const std::unordered_map<dogen::sml::qname, dogen::sml::enumeration>& v);
+    void enumerations(const std::unordered_map<dogen::sml::qname, dogen::sml::enumeration>&& v);
+
 public:
-    bool operator==(const visit_state& rhs) const;
-    bool operator!=(const visit_state& rhs) const {
+    bool operator==(const context& rhs) const;
+    bool operator!=(const context& rhs) const {
         return !this->operator==(rhs);
     }
 
 public:
-    void swap(visit_state& other) noexcept;
-    visit_state& operator=(visit_state other);
+    void swap(context& other) noexcept;
+    context& operator=(context other);
 
 private:
     std::string model_name_;
@@ -160,6 +167,7 @@ private:
     std::unordered_map<dogen::sml::qname, std::list<dogen::sml::qname> > leaves_;
     std::unordered_set<std::string> dependencies_;
     std::unordered_set<std::string> top_level_packages_;
+    std::unordered_map<dogen::sml::qname, dogen::sml::enumeration> enumerations_;
 };
 
 } }
@@ -168,8 +176,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::dia_to_sml::visit_state& lhs,
-    dogen::dia_to_sml::visit_state& rhs) {
+    dogen::dia_to_sml::context& lhs,
+    dogen::dia_to_sml::context& rhs) {
     lhs.swap(rhs);
 }
 

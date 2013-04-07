@@ -18,26 +18,35 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_DIA_TO_SML_SERIALIZATION_VISIT_STATE_SER_HPP
-#define DOGEN_DIA_TO_SML_SERIALIZATION_VISIT_STATE_SER_HPP
+#ifndef DOGEN_DIA_TO_SML_HASH_CONTEXT_HASH_HPP
+#define DOGEN_DIA_TO_SML_HASH_CONTEXT_HASH_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <boost/serialization/split_free.hpp>
-#include "dogen/dia_to_sml/types/visit_state.hpp"
+#include <functional>
+#include "dogen/dia_to_sml/types/context.hpp"
 
-BOOST_SERIALIZATION_SPLIT_FREE(dogen::dia_to_sml::visit_state)
-namespace boost {
-namespace serialization {
+namespace dogen {
+namespace dia_to_sml {
 
-template<typename Archive>
-void save(Archive& ar, const dogen::dia_to_sml::visit_state& v, unsigned int version);
-
-template<typename Archive>
-void load(Archive& ar, dogen::dia_to_sml::visit_state& v, unsigned int version);
+class context_hasher {
+public:
+    static std::size_t hash(const context& v);
+};
 
 } }
 
+namespace std {
+
+template<>
+class hash<dogen::dia_to_sml::context> {
+public:
+    size_t operator()(const dogen::dia_to_sml::context& v) const {
+        return dogen::dia_to_sml::context_hasher::hash(v);
+    }
+};
+
+}
 #endif

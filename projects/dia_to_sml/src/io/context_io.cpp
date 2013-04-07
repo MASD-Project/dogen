@@ -21,7 +21,8 @@
 #include <boost/algorithm/string.hpp>
 #include <boost/io/ios_state.hpp>
 #include <ostream>
-#include "dogen/dia_to_sml/io/visit_state_io.hpp"
+#include "dogen/dia_to_sml/io/context_io.hpp"
+#include "dogen/sml/io/enumeration_io.hpp"
 #include "dogen/sml/io/package_io.hpp"
 #include "dogen/sml/io/pod_io.hpp"
 #include "dogen/sml/io/qname_io.hpp"
@@ -184,10 +185,28 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen:
 
 }
 
+namespace std {
+
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen::sml::qname, dogen::sml::enumeration>& v) {
+    s << "[";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
+        s << i->first;
+        s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
+        s << i->second;
+        s << " } ]";
+    }
+    s << " ] ";
+    return s;
+}
+
+}
+
 namespace dogen {
 namespace dia_to_sml {
 
-std::ostream& operator<<(std::ostream& s, const visit_state& v) {
+std::ostream& operator<<(std::ostream& s, const context& v) {
     boost::io::ios_flags_saver ifs(s);
     s.setf(std::ios_base::boolalpha);
     s.setf(std::ios::fixed, std::ios::floatfield);
@@ -195,7 +214,7 @@ std::ostream& operator<<(std::ostream& s, const visit_state& v) {
     s.setf(std::ios::showpoint);
 
     s << " { "
-      << "\"__type__\": " << "\"dogen::dia_to_sml::visit_state\"" << ", "
+      << "\"__type__\": " << "\"dogen::dia_to_sml::context\"" << ", "
       << "\"model_name\": " << "\"" << tidy_up_string(v.model_name()) << "\"" << ", "
       << "\"pods\": " << v.pods() << ", "
       << "\"external_package_path\": " << v.external_package_path() << ", "
@@ -208,7 +227,8 @@ std::ostream& operator<<(std::ostream& s, const visit_state& v) {
       << "\"original_parent\": " << v.original_parent() << ", "
       << "\"leaves\": " << v.leaves() << ", "
       << "\"dependencies\": " << v.dependencies() << ", "
-      << "\"top_level_packages\": " << v.top_level_packages()
+      << "\"top_level_packages\": " << v.top_level_packages() << ", "
+      << "\"enumerations\": " << v.enumerations()
       << " }";
     return(s);
 }

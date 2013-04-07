@@ -18,12 +18,24 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/dia_to_sml/types/visitor.hpp"
+#ifndef DOGEN_DIA_TO_SML_SERIALIZATION_CONTEXT_FWD_SER_HPP
+#define DOGEN_DIA_TO_SML_SERIALIZATION_CONTEXT_FWD_SER_HPP
 
-namespace dogen {
-namespace dia_to_sml {
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
-visitor::visitor(object_transformer_interface& transformer)
-  : transformer_(transformer) { }
+#include "dogen/dia_to_sml/types/context_fwd.hpp"
+
+namespace boost {
+namespace serialization {
+
+template<class Archive>
+void save(Archive& ar, const dogen::dia_to_sml::context& v, unsigned int version);
+
+template<class Archive>
+void load(Archive& ar, dogen::dia_to_sml::context& v, unsigned int version);
 
 } }
+
+#endif

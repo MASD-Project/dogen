@@ -18,7 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/dia_to_sml/hash/visit_state_hash.hpp"
+#include "dogen/dia_to_sml/hash/context_hash.hpp"
+#include "dogen/sml/hash/enumeration_hash.hpp"
 #include "dogen/sml/hash/package_hash.hpp"
 #include "dogen/sml/hash/pod_hash.hpp"
 #include "dogen/sml/hash/qname_hash.hpp"
@@ -110,12 +111,21 @@ inline std::size_t hash_std_unordered_map_dogen_sml_qname_std_list_dogen_sml_qna
     return seed;
 }
 
+inline std::size_t hash_std_unordered_map_dogen_sml_qname_dogen_sml_enumeration(const std::unordered_map<dogen::sml::qname, dogen::sml::enumeration>& v){
+    std::size_t seed(0);
+    for (const auto i : v) {
+        combine(seed, i.first);
+        combine(seed, i.second);
+    }
+    return seed;
+}
+
 }
 
 namespace dogen {
 namespace dia_to_sml {
 
-std::size_t visit_state_hasher::hash(const visit_state&v) {
+std::size_t context_hasher::hash(const context&v) {
     std::size_t seed(0);
 
     combine(seed, v.model_name());
@@ -131,6 +141,7 @@ std::size_t visit_state_hasher::hash(const visit_state&v) {
     combine(seed, hash_std_unordered_map_dogen_sml_qname_std_list_dogen_sml_qname_(v.leaves()));
     combine(seed, hash_std_unordered_set_std_string(v.dependencies()));
     combine(seed, hash_std_unordered_set_std_string(v.top_level_packages()));
+    combine(seed, hash_std_unordered_map_dogen_sml_qname_dogen_sml_enumeration(v.enumerations()));
 
     return seed;
 }
