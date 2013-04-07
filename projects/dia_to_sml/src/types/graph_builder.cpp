@@ -18,17 +18,26 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen/utility/log/logger.hpp"
+#include "dogen/dia/types/enum_parser.hpp"
+#include "dogen/dia/types/object_types.hpp"
+#include "dogen/dia/io/object_types_io.hpp"
 #include "dogen/dia_to_sml/types/building_error.hpp"
 #include "dogen/dia_to_sml/types/graph_builder.hpp"
 
 namespace {
 
+using namespace dogen::utility::log;
+static logger lg(logger_factory("dia_to_sml.graph_builder"));
+
 /**
  * @brief String representation of the root vertex ID graph.
  */
 const std::string root_id("__root__");
-const std::string error_add_after_build("Cannot add object after building");
 
+// error messages
+const std::string error_add_after_build("Cannot add object after building");
+const std::string error_parsing_object_type("Fail to parse object type: ");
 }
 
 namespace dogen {
@@ -67,8 +76,34 @@ void graph_builder::ensure_not_built() const {
         throw building_error(error_add_after_build);
 }
 
+bool graph_builder::is_relevant(const dia::object& o) const {
+    using dia::object_types;
+    object_types ot(object_types::invalid);
+
+    try {
+        using dogen::dia::enum_parser;
+        ot = enum_parser::parse_object_type(o.type());
+    } catch(const std::exception& e) {
+        std::ostringstream stream;
+        stream << error_parsing_object_type << "'" << o.type()
+               << "'. Error: " << e.what();
+
+        BOOST_LOG_SEV(lg, error) << stream.str();
+        BOOST_THROW_EXCEPTION(building_error(stream.str()));
+    }
+
+    return
+        ot == object_types::uml_large_package ||
+        ot == object_types::uml_generalization ||
+        ot == object_types::uml_class;
+}
+
 void graph_builder::add(const dia::object& o) {
     ensure_not_built();
+
+    if (!is_relevant(o))
+        return;
+
     const auto v(vertex_for_id(o.id()));
     graph_[v] = o;
 }

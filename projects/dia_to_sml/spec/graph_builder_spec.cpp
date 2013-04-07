@@ -23,6 +23,7 @@
 #include "dogen/utility/test/asserter.hpp"
 #include "dogen/utility/test/logging.hpp"
 #include "dogen/dia/io/object_io.hpp"
+#include "dogen/dia/test/mock_object_factory.hpp"
 #include "dogen/dia_to_sml/types/building_error.hpp"
 #include "dogen/dia_to_sml/types/graph_builder.hpp"
 #include "dogen/utility/test/exception_checkers.hpp"
@@ -30,6 +31,7 @@
 using namespace dogen::dia_to_sml;
 using dogen::utility::test::asserter;
 using dogen::utility::test::contains_checker;
+using dogen::dia::test::mock_object_factory;
 
 namespace  {
 
@@ -103,18 +105,14 @@ BOOST_AUTO_TEST_CASE(building_a_graph_with_no_objects_results_in_just_root_visit
     BOOST_CHECK(count == 1);
 }
 
-BOOST_AUTO_TEST_CASE(building_a_graph_with_n_objects_results_in_n_plus_one_visits) {
-    SETUP_TEST_LOG("building_a_graph_with_n_objects_results_in_n_plus_one_visits");
-
-    dogen::dia::object o1, o2, o3;
-    o1.id("1");
-    o2.id("2");
-    o3.id("3");
+BOOST_AUTO_TEST_CASE(building_a_graph_with_n_relevant_objects_results_in_n_plus_one_visits) {
+    SETUP_TEST_LOG("building_a_graph_with_n_relevant_objects_results_in_n_plus_one_visits");
 
     dogen::dia_to_sml::graph_builder b;
-    b.add(o1);
-    b.add(o2);
-    b.add(o3);
+    unsigned int id(0);
+    b.add(mock_object_factory::build_large_package(id++));
+    b.add(mock_object_factory::build_class(id++));
+    b.add(mock_object_factory::build_class(id));
 
     bool found_root(false);
     unsigned int count(0);
@@ -130,7 +128,7 @@ BOOST_AUTO_TEST_CASE(adding_object_after_graph_has_been_built_throws) {
 
     dogen::dia_to_sml::graph_builder b1;
     b1.build();
-    dogen::dia::object o;
+    const dogen::dia::object o(mock_object_factory::build_class(0));
     contains_checker<building_error> c(adding_after_build);
     BOOST_CHECK_EXCEPTION(b1.add(o), building_error, c);
 

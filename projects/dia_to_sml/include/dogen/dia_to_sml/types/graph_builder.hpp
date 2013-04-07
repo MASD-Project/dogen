@@ -68,6 +68,12 @@ private:
      */
     void ensure_not_built() const;
 
+    /**
+     * @brief Returns true if the object is relevant to the object
+     * graph, false otherwise.
+     */
+    bool is_relevant(const dia::object& o) const;
+
 public: // only for testing purposes
     static std::string root_id();
 
