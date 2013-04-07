@@ -122,6 +122,23 @@ BOOST_AUTO_TEST_CASE(building_a_graph_with_n_relevant_objects_results_in_n_plus_
     BOOST_CHECK(count == 5);
 }
 
+BOOST_AUTO_TEST_CASE(irrelevant_objects_are_ignored_by_the_builder) {
+    SETUP_TEST_LOG("irrelevant_objects_are_ignored_by_the_builder");
+
+    dogen::dia_to_sml::graph_builder b;
+    unsigned int id(0);
+    b.add(mock_object_factory::build_class(id++));
+    b.add(mock_object_factory::build_association(id));
+
+    bool found_root(false);
+    unsigned int count(0);
+    n_objects_graph_visitor v(found_root, count);
+    boost::depth_first_search(b.build(), boost::visitor(v));
+
+    BOOST_CHECK(found_root);
+    BOOST_CHECK(count == 4);
+}
+
 BOOST_AUTO_TEST_CASE(adding_object_after_graph_has_been_built_throws) {
     SETUP_TEST_LOG("adding_object_after_graph_has_been_built_throws");
 

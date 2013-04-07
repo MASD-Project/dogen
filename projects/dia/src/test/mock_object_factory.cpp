@@ -77,4 +77,19 @@ mock_object_factory::build_generalization(unsigned int number) {
     return r;
 }
 
+std::array<object, 3>
+mock_object_factory::build_association(unsigned int number) {
+    std::array<object, 3> r = {{
+            create_object(uml_class, number),
+            create_object(uml_class, ++number),
+            create_object(uml_association, ++number)
+        }};
+
+    r[2].connections(
+        std::vector<connection> {
+            create_connection(r[0].id()), create_connection(r[1].id())});
+
+    return r;
+}
+
 } } }

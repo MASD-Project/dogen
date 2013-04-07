@@ -58,8 +58,16 @@ public:
      *
      * @param number identifier used for object ID generation.
      */
-    static std::array<object, 3>
-    build_generalization(unsigned int number = 0);
+    static std::array<object, 3> build_generalization(unsigned int number = 0);
+
+    /**
+     * @brief Generates two UML classes and an association between
+     * the two.
+     *
+     * @param number identifier used for object ID generation.
+     */
+    static std::array<object, 3> build_association(unsigned int number = 0);
+
 };
 
 } } }
