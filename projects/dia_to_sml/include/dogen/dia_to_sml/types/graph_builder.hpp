@@ -26,6 +26,7 @@
 #endif
 
 #include <unordered_map>
+#include <unordered_set>
 #include <boost/graph/adjacency_list.hpp>
 #include "dogen/dia/types/object.hpp"
 
@@ -69,10 +70,26 @@ private:
     void ensure_not_built() const;
 
     /**
+     * @brief Ensures the graph has been built.
+     */
+    void ensure_built() const;
+
+    /**
      * @brief Returns true if the object is relevant to the object
      * graph, false otherwise.
      */
     bool is_relevant(const dia::object& o) const;
+
+    /**
+     * @brief Handle relationships derived from child node.
+     */
+    void process_child_node(const vertex_descriptor_type& v,
+        const dia::object& o);
+
+    /**
+     * @brief Handle relationships derived from connections.
+     */
+    void process_connections(const dia::object& o);
 
 public: // only for testing purposes
     static std::string root_id();
@@ -104,13 +121,38 @@ public:
     /**
      * @brief Generate a DAG of all objects that have been added.
      */
-    const graph_type& build();
+    void build();
+
+public:
+    /**
+     * @brief Returns the generated graph.
+     *
+     * @pre The graph must have already been built.
+     */
+    const graph_type& graph() const;
+
+    /**
+     * @brief Returns the child to parent relationships.
+     *
+     * @pre The graph must have already been built.
+     */
+    const std::unordered_map<std::string, std::string>& child_to_parent() const;
+
+    /**
+     * @brief Returns the child to parent relationships.
+     *
+     * @pre The graph must have already been built.
+     */
+    const std::unordered_set<std::string>& parent_ids() const;
 
 private:
     bool built_;
     graph_type graph_;
     id_to_vertex_type id_to_vertex_;
+    id_to_vertex_type orphanage_;
     vertex_descriptor_type root_vertex_;
+    std::unordered_map<std::string, std::string> child_to_parent_;
+    std::unordered_set<std::string> parent_ids_;
 };
 
 } }

@@ -18,6 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#include <list>
 #include <boost/test/unit_test.hpp>
 #include <boost/graph/depth_first_search.hpp>
 #include "dogen/utility/test/asserter.hpp"
@@ -26,6 +27,7 @@
 #include "dogen/dia/test/mock_object_factory.hpp"
 #include "dogen/dia_to_sml/types/building_error.hpp"
 #include "dogen/dia_to_sml/types/graph_builder.hpp"
+#include "dogen/utility/io/list_io.hpp"
 #include "dogen/utility/test/exception_checkers.hpp"
 
 using namespace dogen::dia_to_sml;
@@ -39,50 +41,22 @@ const std::string test_module("dia_to_sml");
 const std::string test_suite("graph_builder_spec");
 const std::string adding_after_build("Cannot add object after building");
 
-class empty_graph_visitor : public boost::default_dfs_visitor {
+bool is_root_id(const std::string id) {
+    return id == dogen::dia_to_sml::graph_builder::root_id();
+}
+
+class visitor : public boost::default_dfs_visitor {
 public:
-    empty_graph_visitor(bool& found_root, unsigned int& count)
-        : found_root_(found_root), count_(count) {
-        found_root_ = false;
-        count_ = 0;
-    }
-
-public:
-    template<typename Vertex, typename Graph>
-    void discover_vertex(const Vertex& u, const Graph& g) {
-        BOOST_REQUIRE_MESSAGE(!found_root_, "Expected only one root");
-        BOOST_REQUIRE_MESSAGE(++count_ == 1, "Expected only one node");
-
-        const dogen::dia::object o(g[u]);
-        found_root_ = o.id() == dogen::dia_to_sml::graph_builder::root_id();
-        BOOST_REQUIRE_MESSAGE(found_root_, "Unexpected vertex");
-    }
-
-private:
-    bool& found_root_;
-    unsigned int& count_;
-};
-
-class n_objects_graph_visitor : public boost::default_dfs_visitor {
-public:
-    n_objects_graph_visitor(bool& found_root, unsigned int& count)
-        : found_root_(found_root), count_(count) {
-        found_root_ = false;
-        count_ = 0;
-    }
+    explicit visitor(std::list<dogen::dia::object>& o) : objects_(o) {}
 
 public:
     template<typename Vertex, typename Graph>
     void finish_vertex(const Vertex& u, const Graph& g) {
-        ++count_;
-        const dogen::dia::object o(g[u]);
-        if (!found_root_)
-            found_root_ = o.id() == dogen::dia_to_sml::graph_builder::root_id();
+        objects_.push_back(g[u]);
     }
 
 private:
-    bool& found_root_;
-    unsigned int& count_;
+    std::list<dogen::dia::object>& objects_;
 };
 
 }
@@ -92,51 +66,82 @@ using dogen::dia_to_sml::building_error;
 
 BOOST_AUTO_TEST_SUITE(graph_builder)
 
-BOOST_AUTO_TEST_CASE(building_a_graph_with_no_objects_results_in_just_root_visit) {
-    SETUP_TEST_LOG("building_a_graph_with_no_objects_results_in_just_root_visit");
+BOOST_AUTO_TEST_CASE(not_adding_objects_to_graph_produces_only_root_object) {
+    SETUP_TEST_LOG_SOURCE("not_adding_objects_to_graph_produces_only_root_object");
 
-    bool found_root(false);
-    unsigned int count(0);
-    empty_graph_visitor v(found_root, count);
+    std::list<dogen::dia::object> o;
+    visitor v(o);
 
     dogen::dia_to_sml::graph_builder b;
-    boost::depth_first_search(b.build(), boost::visitor(v));
-    BOOST_CHECK(found_root);
-    BOOST_CHECK(count == 1);
+    b.build();
+    boost::depth_first_search(b.graph(), boost::visitor(v));
+    BOOST_LOG_SEV(lg, debug) << o;
+
+    BOOST_REQUIRE(o.size() == 1);
+    BOOST_CHECK(is_root_id(o.back().id()));
 }
 
-BOOST_AUTO_TEST_CASE(building_a_graph_with_n_relevant_objects_results_in_n_plus_one_visits) {
-    SETUP_TEST_LOG("building_a_graph_with_n_relevant_objects_results_in_n_plus_one_visits");
-
+BOOST_AUTO_TEST_CASE(adding_unrelated_objects_produces_expected_order) {
+    SETUP_TEST_LOG_SOURCE("adding_unrelated_objects_produces_expected_order");
     dogen::dia_to_sml::graph_builder b;
-    unsigned int id(0);
-    b.add(mock_object_factory::build_large_package(id++));
-    b.add(mock_object_factory::build_generalization(id));
+    b.add(mock_object_factory::build_large_package(0));
+    b.add(mock_object_factory::build_class(1));
+    b.add(mock_object_factory::build_class(2));
 
-    bool found_root(false);
-    unsigned int count(0);
-    n_objects_graph_visitor v(found_root, count);
-    boost::depth_first_search(b.build(), boost::visitor(v));
+    std::list<dogen::dia::object> o;
+    visitor v(o);
+    b.build();
+    boost::depth_first_search(b.graph(), boost::visitor(v));
+    BOOST_LOG_SEV(lg, debug) << o;
 
-    BOOST_CHECK(found_root);
-    BOOST_CHECK(count == 5);
+    BOOST_REQUIRE(o.size() == 4);
+
+    auto i(o.begin());
+    BOOST_CHECK(i->id() == mock_object_factory::to_oject_id(0));
+    BOOST_CHECK((++i)->id() == mock_object_factory::to_oject_id(1));
+    BOOST_CHECK((++i)->id() == mock_object_factory::to_oject_id(2));
+    BOOST_CHECK(is_root_id((++i)->id()));
 }
 
-BOOST_AUTO_TEST_CASE(irrelevant_objects_are_ignored_by_builder) {
-    SETUP_TEST_LOG("irrelevant_objects_are_ignored_by_builder");
+BOOST_AUTO_TEST_CASE(adding_generalization_produces_expected_order) {
+    SETUP_TEST_LOG_SOURCE("adding_generalization_produces_expected_order");
 
     dogen::dia_to_sml::graph_builder b;
-    unsigned int id(0);
-    b.add(mock_object_factory::build_class(id++));
-    b.add(mock_object_factory::build_association(id));
+    b.add(mock_object_factory::build_generalization(0));
 
-    bool found_root(false);
-    unsigned int count(0);
-    n_objects_graph_visitor v(found_root, count);
-    boost::depth_first_search(b.build(), boost::visitor(v));
+    std::list<dogen::dia::object> o;
+    visitor v(o);
+    b.build();
+    boost::depth_first_search(b.graph(), boost::visitor(v));
+    BOOST_LOG_SEV(lg, debug) << o;
 
-    BOOST_CHECK(found_root);
-    BOOST_CHECK(count == 4);
+    BOOST_REQUIRE(o.size() == 3);
+
+    auto i(o.begin());
+    BOOST_CHECK(i->id() == mock_object_factory::to_oject_id(1));
+    BOOST_CHECK((++i)->id() == mock_object_factory::to_oject_id(0));
+    BOOST_CHECK(is_root_id((++i)->id()));
+}
+
+BOOST_AUTO_TEST_CASE(adding_generalization_inside_package_produces_expected_order) {
+    SETUP_TEST_LOG_SOURCE("adding_generalization_inside_package_produces_expected_order");
+
+    dogen::dia_to_sml::graph_builder b;
+    b.add(mock_object_factory::build_generalization_inside_large_package(0));
+
+    std::list<dogen::dia::object> o;
+    visitor v(o);
+    b.build();
+    boost::depth_first_search(b.graph(), boost::visitor(v));
+    BOOST_LOG_SEV(lg, debug) << o;
+
+    BOOST_REQUIRE(o.size() == 4);
+
+    auto i(o.begin());
+    BOOST_CHECK(i->id() == mock_object_factory::to_oject_id(2));
+    BOOST_CHECK((++i)->id() == mock_object_factory::to_oject_id(1));
+    BOOST_CHECK((++i)->id() == mock_object_factory::to_oject_id(0));
+    BOOST_CHECK(is_root_id((++i)->id()));
 }
 
 BOOST_AUTO_TEST_CASE(adding_object_after_graph_has_been_built_throws) {

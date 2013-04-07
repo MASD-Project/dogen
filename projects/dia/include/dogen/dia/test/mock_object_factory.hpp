@@ -39,6 +39,11 @@ namespace test {
 class mock_object_factory {
 public:
     /**
+     * @brief Given a number, returns a dia object ID.
+     */
+    static std::string to_oject_id(const unsigned int number);
+
+    /**
      * @brief Generates a new UML class.
      *
      * @param number identifier used for object ID generation.
@@ -59,6 +64,15 @@ public:
      * @param number identifier used for object ID generation.
      */
     static std::array<object, 3> build_generalization(unsigned int number = 0);
+
+    /**
+     * @brief Generates two UML classes and a generalisation between
+     * the two, and places all objects inside a package.
+     *
+     * @param number identifier used for object ID generation.
+     */
+    static std::array<object, 4>
+    build_generalization_inside_large_package(unsigned int number = 0);
 
     /**
      * @brief Generates two UML classes and an association between
