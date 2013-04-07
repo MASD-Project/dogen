@@ -181,7 +181,7 @@ operator<<(std::ostream& stream, const json_char_type<Target>& target) {
 template<typename Target>
 inline std::ostream&
 operator<<(std::ostream& stream, const json_complex_type<Target>& target) {
-    stream << "{ " << target.get() << " }";
+    stream << target.get();
     return(stream);
 }
 
