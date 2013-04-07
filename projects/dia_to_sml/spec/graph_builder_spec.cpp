@@ -111,8 +111,7 @@ BOOST_AUTO_TEST_CASE(building_a_graph_with_n_relevant_objects_results_in_n_plus_
     dogen::dia_to_sml::graph_builder b;
     unsigned int id(0);
     b.add(mock_object_factory::build_large_package(id++));
-    b.add(mock_object_factory::build_class(id++));
-    b.add(mock_object_factory::build_class(id));
+    b.add(mock_object_factory::build_generalization(id));
 
     bool found_root(false);
     unsigned int count(0);
@@ -120,7 +119,7 @@ BOOST_AUTO_TEST_CASE(building_a_graph_with_n_relevant_objects_results_in_n_plus_
     boost::depth_first_search(b.build(), boost::visitor(v));
 
     BOOST_CHECK(found_root);
-    BOOST_CHECK(count == 4);
+    BOOST_CHECK(count == 5);
 }
 
 BOOST_AUTO_TEST_CASE(adding_object_after_graph_has_been_built_throws) {

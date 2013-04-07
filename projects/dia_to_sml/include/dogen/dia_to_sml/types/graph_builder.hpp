@@ -86,6 +86,22 @@ public:
     void add(const dia::object& o);
 
     /**
+     * @brief Adds a container of objects to the graph.
+     *
+     * @pre The graph must not yet have been built.
+     *
+     * @note Couldn't find a way to constrain the container to
+     * non-associative containers of dia::object. On the plus side, if
+     * you try to pass in some weird container (or a non-container),
+     * you should get a suitably puzzling error message.
+     */
+    template<typename Container>
+    void add(const Container& c) {
+        for (const auto& o : c)
+            add(o);
+    }
+
+    /**
      * @brief Generate a DAG of all objects that have been added.
      */
     const graph_type& build();
