@@ -26,6 +26,7 @@
 #include <boost/archive/text_oarchive.hpp>
 #include <boost/archive/xml_iarchive.hpp>
 #include <boost/archive/xml_oarchive.hpp>
+#include "dogen/sml/serialization/registrar_ser.hpp"
 #ifdef __linux__
 #include "eos/portable_iarchive.hpp"
 #include "eos/portable_oarchive.hpp"
@@ -35,20 +36,21 @@ namespace dogen {
 namespace dia_to_sml {
 
 template<typename Archive>
-void register_types(Archive&) {
+void register_types(Archive& ar) {
+    sml::register_types(ar);
 }
 
-template void register_types(boost::archive::polymorphic_oarchive&);
-template void register_types(boost::archive::polymorphic_iarchive&);
+template void register_types(boost::archive::polymorphic_oarchive& ar);
+template void register_types(boost::archive::polymorphic_iarchive& ar);
 
-template void register_types(boost::archive::text_oarchive&);
-template void register_types(boost::archive::text_iarchive&);
+template void register_types(boost::archive::text_oarchive& ar);
+template void register_types(boost::archive::text_iarchive& ar);
 
-template void register_types(boost::archive::binary_oarchive&);
-template void register_types(boost::archive::binary_iarchive&);
+template void register_types(boost::archive::binary_oarchive& ar);
+template void register_types(boost::archive::binary_iarchive& ar);
 
-template void register_types(boost::archive::xml_oarchive&);
-template void register_types(boost::archive::xml_iarchive&);
+template void register_types(boost::archive::xml_oarchive& ar);
+template void register_types(boost::archive::xml_iarchive& ar);
 
 #ifdef __linux__
 template void register_types(eos::portable_oarchive& ar);

@@ -18,4 +18,23 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/dia_to_sml/serialization/visit_state_ser.hpp"
+#ifndef DOGEN_DIA_TO_SML_IO_VISIT_STATE_IO_HPP
+#define DOGEN_DIA_TO_SML_IO_VISIT_STATE_IO_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include <iosfwd>
+#include "dogen/dia_to_sml/types/visit_state.hpp"
+
+namespace dogen {
+namespace dia_to_sml {
+
+std::ostream&
+operator<<(std::ostream& s,
+     const dogen::dia_to_sml::visit_state& v);
+
+} }
+
+#endif
