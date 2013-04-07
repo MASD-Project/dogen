@@ -120,6 +120,15 @@ inline std::size_t hash_std_unordered_map_dogen_sml_qname_dogen_sml_enumeration(
     return seed;
 }
 
+inline std::size_t hash_std_unordered_map_dogen_sml_qname_dogen_sml_package(const std::unordered_map<dogen::sml::qname, dogen::sml::package>& v){
+    std::size_t seed(0);
+    for (const auto i : v) {
+        combine(seed, i.first);
+        combine(seed, i.second);
+    }
+    return seed;
+}
+
 }
 
 namespace dogen {
@@ -142,6 +151,7 @@ std::size_t context_hasher::hash(const context&v) {
     combine(seed, hash_std_unordered_set_std_string(v.dependencies()));
     combine(seed, hash_std_unordered_set_std_string(v.top_level_packages()));
     combine(seed, hash_std_unordered_map_dogen_sml_qname_dogen_sml_enumeration(v.enumerations()));
+    combine(seed, hash_std_unordered_map_dogen_sml_qname_dogen_sml_package(v.packages()));
 
     return seed;
 }

@@ -45,7 +45,7 @@ public:
 
 public:
     template<typename Vertex, typename Graph>
-    void discover_vertex(const Vertex& u, const Graph& g) {
+    void finish_vertex(const Vertex& u, const Graph& g) {
         transformer_.transform(g[u]);
     }
 

@@ -67,7 +67,8 @@ public:
         const std::unordered_map<dogen::sml::qname, std::list<dogen::sml::qname> >& leaves,
         const std::unordered_set<std::string>& dependencies,
         const std::unordered_set<std::string>& top_level_packages,
-        const std::unordered_map<dogen::sml::qname, dogen::sml::enumeration>& enumerations);
+        const std::unordered_map<dogen::sml::qname, dogen::sml::enumeration>& enumerations,
+        const std::unordered_map<dogen::sml::qname, dogen::sml::package>& packages);
 
 private:
     template<typename Archive>
@@ -143,6 +144,11 @@ public:
     void enumerations(const std::unordered_map<dogen::sml::qname, dogen::sml::enumeration>& v);
     void enumerations(const std::unordered_map<dogen::sml::qname, dogen::sml::enumeration>&& v);
 
+    const std::unordered_map<dogen::sml::qname, dogen::sml::package>& packages() const;
+    std::unordered_map<dogen::sml::qname, dogen::sml::package>& packages();
+    void packages(const std::unordered_map<dogen::sml::qname, dogen::sml::package>& v);
+    void packages(const std::unordered_map<dogen::sml::qname, dogen::sml::package>&& v);
+
 public:
     bool operator==(const context& rhs) const;
     bool operator!=(const context& rhs) const {
@@ -168,6 +174,7 @@ private:
     std::unordered_set<std::string> dependencies_;
     std::unordered_set<std::string> top_level_packages_;
     std::unordered_map<dogen::sml::qname, dogen::sml::enumeration> enumerations_;
+    std::unordered_map<dogen::sml::qname, dogen::sml::package> packages_;
 };
 
 } }

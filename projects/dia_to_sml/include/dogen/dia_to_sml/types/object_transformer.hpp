@@ -39,6 +39,7 @@
 #include "dogen/sml/types/identifier_parser.hpp"
 #include "dogen/sml/types/comments_parser.hpp"
 #include "dogen/dia/types/object_fwd.hpp"
+#include "dogen/dia/types/object_types.hpp"
 #include "dogen/dia_to_sml/types/context.hpp"
 #include "dogen/dia_to_sml/types/object_transformer_interface.hpp"
 
@@ -58,6 +59,12 @@ public:
     explicit object_transformer(context* c);
 
 private:
+    /**
+     * @brief Given a dia object type as a string, returns the
+     * appropriate enumeration for it.
+     */
+    dia::object_types parse_object_types(const std::string type) const;
+
     /**
      * @brief Compute all the model dependencies implied by a given
      * nested qname
@@ -95,7 +102,7 @@ private:
     /**
      * @brief Ensure the type of the object is a dia UML class.
      */
-    void ensure_object_is_uml_class(const dia::object& o) const;
+    void ensure_object_is_uml_class(const dia::object_types ot) const;
 
     /**
      * @brief Returns the stereotype for the object.
@@ -115,6 +122,14 @@ private:
      * @param o the Dia UML class
      */
     void transform_enumeration(const dia::object& o);
+
+    /**
+     * @brief Converts a package in Dia format into a package in SML
+     * format.
+     *
+     * @param o Dia object which contains a UML package.
+     */
+    void transform_package(const dogen::dia::object& o);
 
 public:
     virtual void transform(const dia::object& o) override;

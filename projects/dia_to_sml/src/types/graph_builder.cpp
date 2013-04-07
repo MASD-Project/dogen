@@ -20,6 +20,7 @@
  */
 #include <sstream>
 #include <boost/lexical_cast.hpp>
+#include <boost/throw_exception.hpp>
 #include <boost/graph/depth_first_search.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/dia/types/enum_parser.hpp"

@@ -63,6 +63,7 @@ void save(Archive& ar,
     ar << make_nvp("dependencies", v.dependencies_);
     ar << make_nvp("top_level_packages", v.top_level_packages_);
     ar << make_nvp("enumerations", v.enumerations_);
+    ar << make_nvp("packages", v.packages_);
 }
 
 template<typename Archive>
@@ -83,6 +84,7 @@ void load(Archive& ar,
     ar >> make_nvp("dependencies", v.dependencies_);
     ar >> make_nvp("top_level_packages", v.top_level_packages_);
     ar >> make_nvp("enumerations", v.enumerations_);
+    ar >> make_nvp("packages", v.packages_);
 }
 
 } }

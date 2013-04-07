@@ -137,6 +137,14 @@ std::unordered_map<dogen::sml::qname, dogen::sml::enumeration> create_std_unorde
     return r;
 }
 
+std::unordered_map<dogen::sml::qname, dogen::sml::package> create_std_unordered_map_dogen_sml_qname_dogen_sml_package(unsigned int position) {
+    std::unordered_map<dogen::sml::qname, dogen::sml::package> r;
+    for (unsigned int i(0); i < 10; ++i) {
+        r.insert(std::make_pair(create_dogen_sml_qname(position + i), create_dogen_sml_package(position + i)));
+    }
+    return r;
+}
+
 }
 
 namespace dogen {
@@ -160,6 +168,7 @@ populate(const unsigned int position, result_type& v) {
     v.dependencies(create_std_unordered_set_std_string(position + 11));
     v.top_level_packages(create_std_unordered_set_std_string(position + 12));
     v.enumerations(create_std_unordered_map_dogen_sml_qname_dogen_sml_enumeration(position + 13));
+    v.packages(create_std_unordered_map_dogen_sml_qname_dogen_sml_package(position + 14));
 }
 
 context_generator::result_type

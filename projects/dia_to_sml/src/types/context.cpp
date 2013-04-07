@@ -41,7 +41,8 @@ context::context(
     const std::unordered_map<dogen::sml::qname, std::list<dogen::sml::qname> >& leaves,
     const std::unordered_set<std::string>& dependencies,
     const std::unordered_set<std::string>& top_level_packages,
-    const std::unordered_map<dogen::sml::qname, dogen::sml::enumeration>& enumerations)
+    const std::unordered_map<dogen::sml::qname, dogen::sml::enumeration>& enumerations,
+    const std::unordered_map<dogen::sml::qname, dogen::sml::package>& packages)
     : model_name_(model_name),
       pods_(pods),
       external_package_path_(external_package_path),
@@ -55,7 +56,8 @@ context::context(
       leaves_(leaves),
       dependencies_(dependencies),
       top_level_packages_(top_level_packages),
-      enumerations_(enumerations) { }
+      enumerations_(enumerations),
+      packages_(packages) { }
 
 void context::swap(context& other) noexcept {
     using std::swap;
@@ -73,6 +75,7 @@ void context::swap(context& other) noexcept {
     swap(dependencies_, other.dependencies_);
     swap(top_level_packages_, other.top_level_packages_);
     swap(enumerations_, other.enumerations_);
+    swap(packages_, other.packages_);
 }
 
 bool context::operator==(const context& rhs) const {
@@ -89,7 +92,8 @@ bool context::operator==(const context& rhs) const {
         leaves_ == rhs.leaves_ &&
         dependencies_ == rhs.dependencies_ &&
         top_level_packages_ == rhs.top_level_packages_ &&
-        enumerations_ == rhs.enumerations_;
+        enumerations_ == rhs.enumerations_ &&
+        packages_ == rhs.packages_;
 }
 
 context& context::operator=(context other) {
@@ -304,6 +308,22 @@ void context::enumerations(const std::unordered_map<dogen::sml::qname, dogen::sm
 
 void context::enumerations(const std::unordered_map<dogen::sml::qname, dogen::sml::enumeration>&& v) {
     enumerations_ = std::move(v);
+}
+
+const std::unordered_map<dogen::sml::qname, dogen::sml::package>& context::packages() const {
+    return packages_;
+}
+
+std::unordered_map<dogen::sml::qname, dogen::sml::package>& context::packages() {
+    return packages_;
+}
+
+void context::packages(const std::unordered_map<dogen::sml::qname, dogen::sml::package>& v) {
+    packages_ = v;
+}
+
+void context::packages(const std::unordered_map<dogen::sml::qname, dogen::sml::package>&& v) {
+    packages_ = std::move(v);
 }
 
 } }
