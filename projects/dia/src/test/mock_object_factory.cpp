@@ -118,4 +118,25 @@ build_generalization_inside_large_package(unsigned int number)  {
     return r;
 }
 
+std::array<object, 4> mock_object_factory::
+build_first_degree_cycle(unsigned int number) {
+    std::array<object, 4> r = {{
+            create_object(uml_class, ++number),
+            create_object(uml_class, ++number),
+            create_object(uml_generalization, ++number),
+            create_object(uml_generalization, ++number)
+        }};
+
+    r[2].connections(
+        std::vector<connection> {
+            create_connection(r[0].id()), create_connection(r[1].id())});
+
+    r[3].connections(
+        std::vector<connection> {
+            create_connection(r[1].id()), create_connection(r[0].id())});
+
+    return r;
+}
+
+
 } } }

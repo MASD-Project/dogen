@@ -82,6 +82,14 @@ public:
      */
     static std::array<object, 3> build_association(unsigned int number = 0);
 
+    /**
+     * @brief Generates objects directly connected in a cycle.
+     *
+     * @param number identifier used for object ID generation.
+     */
+    static std::array<object, 4>
+    build_first_degree_cycle(unsigned int number = 0);
+
 };
 
 } } }

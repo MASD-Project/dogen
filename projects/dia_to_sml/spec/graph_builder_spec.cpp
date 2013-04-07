@@ -40,6 +40,7 @@ namespace  {
 const std::string test_module("dia_to_sml");
 const std::string test_suite("graph_builder_spec");
 const std::string adding_after_build("Cannot add object after building");
+const std::string graph_has_cycle("Graph has a cycle");
 
 bool is_root_id(const std::string id) {
     return id == dogen::dia_to_sml::graph_builder::root_id();
@@ -157,6 +158,15 @@ BOOST_AUTO_TEST_CASE(adding_object_after_graph_has_been_built_throws) {
     b2.add(o);
     b2.build();
     BOOST_CHECK_EXCEPTION(b2.add(o), building_error, c);
+}
+
+BOOST_AUTO_TEST_CASE(building_graph_with_first_degree_cycle_throws) {
+    SETUP_TEST_LOG("building_graph_with_first_degree_cycle_throws");
+
+    dogen::dia_to_sml::graph_builder b;
+    b.add(mock_object_factory::build_first_degree_cycle(0));
+    contains_checker<building_error> c(graph_has_cycle);
+    BOOST_CHECK_EXCEPTION(b.build(), building_error, c);
 }
 
 BOOST_AUTO_TEST_SUITE_END()
