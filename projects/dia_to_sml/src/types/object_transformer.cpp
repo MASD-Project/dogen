@@ -30,6 +30,7 @@
 #include "dogen/dia/io/stereotypes_io.hpp"
 #include "dogen/dia/io/object_types_io.hpp"
 #include "dogen/sml/types/enumeration.hpp"
+#include "dogen/sml/types/exception.hpp"
 #include "dogen/dia_to_sml/types/object_transformer.hpp"
 
 namespace {
@@ -508,6 +509,27 @@ void object_transformer::transform_package(const dogen::dia::object& o) {
     context_->packages().insert(std::make_pair(p.name(), p));
 }
 
+void object_transformer::transform_exception(const dogen::dia::object& o) {
+    sml::exception e;
+    e.generation_type(context_->is_target() ?
+        sml::generation_types::full_generation :
+        sml::generation_types::no_generation);
+
+    for (auto a : o.attributes()) {
+        BOOST_LOG_SEV(lg, debug) << "Found attribute: " << a.name();
+        if (a.name() == dia_name) {
+            const std::string pkg_id(o.child_node() ?
+                o.child_node()->parent() : empty);
+            using dogen::sml::meta_types;
+            e.name(transform_qname(a, meta_types::exception, pkg_id));
+        } else if (a.name() == dia_comment) {
+            const std::string doc(transform_string_attribute(a));
+            e.documentation(doc);
+        }
+    }
+    context_->exceptions().insert(std::make_pair(e.name(), e));
+}
+
 void object_transformer::transform(const dia::object& o) {
     const auto ot(parse_object_types(o.type()));
     if (ot == dia::object_types::uml_large_package) {
@@ -523,6 +545,10 @@ void object_transformer::transform(const dia::object& o) {
     case stereotypes::entity:
     case stereotypes::service:
         transform_pod(o); break;
+    case stereotypes::enumeration:
+        transform_enumeration(o); break;
+    case stereotypes::exception:
+        transform_exception(o); break;
     default:
         BOOST_LOG_SEV(lg, error) << invalid_stereotype_in_graph << st;
         BOOST_THROW_EXCEPTION(

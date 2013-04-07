@@ -31,6 +31,7 @@
 #include <boost/serialization/string.hpp>
 #include "dogen/dia_to_sml/serialization/context_ser.hpp"
 #include "dogen/sml/serialization/enumeration_ser.hpp"
+#include "dogen/sml/serialization/exception_ser.hpp"
 #include "dogen/sml/serialization/package_ser.hpp"
 #include "dogen/sml/serialization/pod_ser.hpp"
 #include "dogen/sml/serialization/qname_ser.hpp"
@@ -64,6 +65,7 @@ void save(Archive& ar,
     ar << make_nvp("top_level_packages", v.top_level_packages_);
     ar << make_nvp("enumerations", v.enumerations_);
     ar << make_nvp("packages", v.packages_);
+    ar << make_nvp("exceptions", v.exceptions_);
 }
 
 template<typename Archive>
@@ -85,6 +87,7 @@ void load(Archive& ar,
     ar >> make_nvp("top_level_packages", v.top_level_packages_);
     ar >> make_nvp("enumerations", v.enumerations_);
     ar >> make_nvp("packages", v.packages_);
+    ar >> make_nvp("exceptions", v.exceptions_);
 }
 
 } }

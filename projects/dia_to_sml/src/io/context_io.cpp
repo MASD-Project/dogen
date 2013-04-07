@@ -23,6 +23,7 @@
 #include <ostream>
 #include "dogen/dia_to_sml/io/context_io.hpp"
 #include "dogen/sml/io/enumeration_io.hpp"
+#include "dogen/sml/io/exception_io.hpp"
 #include "dogen/sml/io/package_io.hpp"
 #include "dogen/sml/io/pod_io.hpp"
 #include "dogen/sml/io/qname_io.hpp"
@@ -221,6 +222,24 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen:
 
 }
 
+namespace std {
+
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen::sml::qname, dogen::sml::exception>& v) {
+    s << "[";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
+        s << i->first;
+        s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
+        s << i->second;
+        s << " } ]";
+    }
+    s << " ] ";
+    return s;
+}
+
+}
+
 namespace dogen {
 namespace dia_to_sml {
 
@@ -247,7 +266,8 @@ std::ostream& operator<<(std::ostream& s, const context& v) {
       << "\"dependencies\": " << v.dependencies() << ", "
       << "\"top_level_packages\": " << v.top_level_packages() << ", "
       << "\"enumerations\": " << v.enumerations() << ", "
-      << "\"packages\": " << v.packages()
+      << "\"packages\": " << v.packages() << ", "
+      << "\"exceptions\": " << v.exceptions()
       << " }";
     return(s);
 }

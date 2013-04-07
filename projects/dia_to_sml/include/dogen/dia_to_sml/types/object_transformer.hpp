@@ -124,12 +124,20 @@ private:
     void transform_enumeration(const dia::object& o);
 
     /**
-     * @brief Converts a package in Dia format into a package in SML
-     * format.
+     * @brief Converts a dia object of type large UML package into a
+     * package in SML.
      *
      * @param o Dia object which contains a UML package.
      */
     void transform_package(const dogen::dia::object& o);
+
+    /**
+     * @brief Converts a dia object with a stereotype of exception
+     * into a SML exception.
+     *
+     * @param o Dia object which contains an exception.
+     */
+    void transform_exception(const dogen::dia::object& o);
 
 public:
     virtual void transform(const dia::object& o) override;

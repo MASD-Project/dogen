@@ -42,7 +42,8 @@ context::context(
     const std::unordered_set<std::string>& dependencies,
     const std::unordered_set<std::string>& top_level_packages,
     const std::unordered_map<dogen::sml::qname, dogen::sml::enumeration>& enumerations,
-    const std::unordered_map<dogen::sml::qname, dogen::sml::package>& packages)
+    const std::unordered_map<dogen::sml::qname, dogen::sml::package>& packages,
+    const std::unordered_map<dogen::sml::qname, dogen::sml::exception>& exceptions)
     : model_name_(model_name),
       pods_(pods),
       external_package_path_(external_package_path),
@@ -57,7 +58,8 @@ context::context(
       dependencies_(dependencies),
       top_level_packages_(top_level_packages),
       enumerations_(enumerations),
-      packages_(packages) { }
+      packages_(packages),
+      exceptions_(exceptions) { }
 
 void context::swap(context& other) noexcept {
     using std::swap;
@@ -76,6 +78,7 @@ void context::swap(context& other) noexcept {
     swap(top_level_packages_, other.top_level_packages_);
     swap(enumerations_, other.enumerations_);
     swap(packages_, other.packages_);
+    swap(exceptions_, other.exceptions_);
 }
 
 bool context::operator==(const context& rhs) const {
@@ -93,7 +96,8 @@ bool context::operator==(const context& rhs) const {
         dependencies_ == rhs.dependencies_ &&
         top_level_packages_ == rhs.top_level_packages_ &&
         enumerations_ == rhs.enumerations_ &&
-        packages_ == rhs.packages_;
+        packages_ == rhs.packages_ &&
+        exceptions_ == rhs.exceptions_;
 }
 
 context& context::operator=(context other) {
@@ -324,6 +328,22 @@ void context::packages(const std::unordered_map<dogen::sml::qname, dogen::sml::p
 
 void context::packages(const std::unordered_map<dogen::sml::qname, dogen::sml::package>&& v) {
     packages_ = std::move(v);
+}
+
+const std::unordered_map<dogen::sml::qname, dogen::sml::exception>& context::exceptions() const {
+    return exceptions_;
+}
+
+std::unordered_map<dogen::sml::qname, dogen::sml::exception>& context::exceptions() {
+    return exceptions_;
+}
+
+void context::exceptions(const std::unordered_map<dogen::sml::qname, dogen::sml::exception>& v) {
+    exceptions_ = v;
+}
+
+void context::exceptions(const std::unordered_map<dogen::sml::qname, dogen::sml::exception>&& v) {
+    exceptions_ = std::move(v);
 }
 
 } }

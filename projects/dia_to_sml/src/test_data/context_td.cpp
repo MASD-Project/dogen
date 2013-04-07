@@ -21,6 +21,7 @@
 #include <sstream>
 #include "dogen/dia_to_sml/test_data/context_td.hpp"
 #include "dogen/sml/test_data/enumeration_td.hpp"
+#include "dogen/sml/test_data/exception_td.hpp"
 #include "dogen/sml/test_data/package_td.hpp"
 #include "dogen/sml/test_data/pod_td.hpp"
 #include "dogen/sml/test_data/qname_td.hpp"
@@ -145,6 +146,19 @@ std::unordered_map<dogen::sml::qname, dogen::sml::package> create_std_unordered_
     return r;
 }
 
+dogen::sml::exception
+create_dogen_sml_exception(const unsigned int position) {
+    return dogen::sml::exception_generator::create(position);
+}
+
+std::unordered_map<dogen::sml::qname, dogen::sml::exception> create_std_unordered_map_dogen_sml_qname_dogen_sml_exception(unsigned int position) {
+    std::unordered_map<dogen::sml::qname, dogen::sml::exception> r;
+    for (unsigned int i(0); i < 10; ++i) {
+        r.insert(std::make_pair(create_dogen_sml_qname(position + i), create_dogen_sml_exception(position + i)));
+    }
+    return r;
+}
+
 }
 
 namespace dogen {
@@ -169,6 +183,7 @@ populate(const unsigned int position, result_type& v) {
     v.top_level_packages(create_std_unordered_set_std_string(position + 12));
     v.enumerations(create_std_unordered_map_dogen_sml_qname_dogen_sml_enumeration(position + 13));
     v.packages(create_std_unordered_map_dogen_sml_qname_dogen_sml_package(position + 14));
+    v.exceptions(create_std_unordered_map_dogen_sml_qname_dogen_sml_exception(position + 15));
 }
 
 context_generator::result_type

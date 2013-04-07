@@ -20,6 +20,7 @@
  */
 #include "dogen/dia_to_sml/hash/context_hash.hpp"
 #include "dogen/sml/hash/enumeration_hash.hpp"
+#include "dogen/sml/hash/exception_hash.hpp"
 #include "dogen/sml/hash/package_hash.hpp"
 #include "dogen/sml/hash/pod_hash.hpp"
 #include "dogen/sml/hash/qname_hash.hpp"
@@ -129,6 +130,15 @@ inline std::size_t hash_std_unordered_map_dogen_sml_qname_dogen_sml_package(cons
     return seed;
 }
 
+inline std::size_t hash_std_unordered_map_dogen_sml_qname_dogen_sml_exception(const std::unordered_map<dogen::sml::qname, dogen::sml::exception>& v){
+    std::size_t seed(0);
+    for (const auto i : v) {
+        combine(seed, i.first);
+        combine(seed, i.second);
+    }
+    return seed;
+}
+
 }
 
 namespace dogen {
@@ -152,6 +162,7 @@ std::size_t context_hasher::hash(const context&v) {
     combine(seed, hash_std_unordered_set_std_string(v.top_level_packages()));
     combine(seed, hash_std_unordered_map_dogen_sml_qname_dogen_sml_enumeration(v.enumerations()));
     combine(seed, hash_std_unordered_map_dogen_sml_qname_dogen_sml_package(v.packages()));
+    combine(seed, hash_std_unordered_map_dogen_sml_qname_dogen_sml_exception(v.exceptions()));
 
     return seed;
 }

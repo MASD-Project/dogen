@@ -33,6 +33,7 @@
 #include "dogen/dia_to_sml/serialization/context_fwd_ser.hpp"
 #include "dogen/sml/hash/qname_hash.hpp"
 #include "dogen/sml/types/enumeration.hpp"
+#include "dogen/sml/types/exception.hpp"
 #include "dogen/sml/types/package.hpp"
 #include "dogen/sml/types/pod.hpp"
 #include "dogen/sml/types/qname.hpp"
@@ -68,7 +69,8 @@ public:
         const std::unordered_set<std::string>& dependencies,
         const std::unordered_set<std::string>& top_level_packages,
         const std::unordered_map<dogen::sml::qname, dogen::sml::enumeration>& enumerations,
-        const std::unordered_map<dogen::sml::qname, dogen::sml::package>& packages);
+        const std::unordered_map<dogen::sml::qname, dogen::sml::package>& packages,
+        const std::unordered_map<dogen::sml::qname, dogen::sml::exception>& exceptions);
 
 private:
     template<typename Archive>
@@ -149,6 +151,11 @@ public:
     void packages(const std::unordered_map<dogen::sml::qname, dogen::sml::package>& v);
     void packages(const std::unordered_map<dogen::sml::qname, dogen::sml::package>&& v);
 
+    const std::unordered_map<dogen::sml::qname, dogen::sml::exception>& exceptions() const;
+    std::unordered_map<dogen::sml::qname, dogen::sml::exception>& exceptions();
+    void exceptions(const std::unordered_map<dogen::sml::qname, dogen::sml::exception>& v);
+    void exceptions(const std::unordered_map<dogen::sml::qname, dogen::sml::exception>&& v);
+
 public:
     bool operator==(const context& rhs) const;
     bool operator!=(const context& rhs) const {
@@ -175,6 +182,7 @@ private:
     std::unordered_set<std::string> top_level_packages_;
     std::unordered_map<dogen::sml::qname, dogen::sml::enumeration> enumerations_;
     std::unordered_map<dogen::sml::qname, dogen::sml::package> packages_;
+    std::unordered_map<dogen::sml::qname, dogen::sml::exception> exceptions_;
 };
 
 } }
