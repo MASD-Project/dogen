@@ -89,12 +89,14 @@ attribute_value(const Variant& v, const std::string& desc) {
 namespace dogen {
 namespace dia_to_sml {
 
-object_transformer::object_transformer(context* c)
+object_transformer::object_transformer(context& c)
     : context_(c),
       identifier_parser_(
-          new sml::identifier_parser(c->top_level_packages(),
-              c->external_package_path(), c->model_name())),
+          new sml::identifier_parser(c.top_level_packages(),
+              c.external_package_path(), c.model_name())),
       comments_parser_(new sml::comments_parser()) { }
+
+object_transformer::~object_transformer() noexcept { }
 
 dia::object_types
 object_transformer::parse_object_types(const std::string type) const {
@@ -119,8 +121,8 @@ void object_transformer::
 compute_model_dependencies(const sml::nested_qname& nqn) {
     // primitives model is empty
     const auto mn(nqn.type().model_name());
-    if (!mn.empty() && mn != context_->model_name())
-        context_->dependencies().insert(mn);
+    if (!mn.empty() && mn != context_.model_name())
+        context_.dependencies().insert(mn);
 
     for (const auto c : nqn.children())
         compute_model_dependencies(c);
@@ -155,13 +157,13 @@ sml::qname object_transformer::transform_qname(const dogen::dia::attribute& a,
     }
 
     sml::qname name;
-    name.model_name(context_->model_name());
+    name.model_name(context_.model_name());
     name.meta_type(meta_type);
-    name.external_package_path(context_->external_package_path());
+    name.external_package_path(context_.external_package_path());
 
     if (!pkg_id.empty()) {
-        const auto i(context_->packages_by_id().find(pkg_id));
-        if (i == context_->packages_by_id().end()) {
+        const auto i(context_.packages_by_id().find(pkg_id));
+        if (i == context_.packages_by_id().end()) {
             BOOST_LOG_SEV(lg, error) << missing_package_for_id << pkg_id;
             BOOST_THROW_EXCEPTION(
                 transformation_error(missing_package_for_id + pkg_id));
@@ -224,7 +226,7 @@ void object_transformer::transform_pod(const dia::object& o) {
     using sml::generation_types;
 
     sml::pod pod;
-    pod.generation_type(context_->is_target() ?
+    pod.generation_type(context_.is_target() ?
         generation_types::full_generation :
         generation_types::no_generation);
 
@@ -254,11 +256,11 @@ void object_transformer::transform_pod(const dia::object& o) {
                 pod.pod_type(sml::pod_types::value);
             else if (st == stereotypes::nongeneratable) {
                 pod.pod_type(sml::pod_types::value);
-                if (context_->is_target())
+                if (context_.is_target())
                     pod.generation_type(generation_types::partial_generation);
             } else if (st == stereotypes::service) {
                 pod.pod_type(sml::pod_types::service);
-                if (context_->is_target())
+                if (context_.is_target())
                     pod.generation_type(generation_types::partial_generation);
             } else
                 pod.pod_type(sml::pod_types::value);
@@ -301,10 +303,10 @@ void object_transformer::transform_pod(const dia::object& o) {
             transformation_error(name_attribute_expected + o.id()));
     }
 
-    const auto i(context_->child_to_parent().find(o.id()));
-    if (i != context_->child_to_parent().end()) {
-        const auto j(context_->dia_id_to_qname().find(i->second));
-        if (j == context_->dia_id_to_qname().end()) {
+    const auto i(context_.child_to_parent().find(o.id()));
+    if (i != context_.child_to_parent().end()) {
+        const auto j(context_.dia_id_to_qname().find(i->second));
+        if (j == context_.dia_id_to_qname().end()) {
             BOOST_LOG_SEV(lg, error) << "Object has a parent but "
                                      << " there is no QName mapping defined."
                                      << " Child ID: '" << o.id()
@@ -316,16 +318,16 @@ void object_transformer::transform_pod(const dia::object& o) {
         pod.parent_name(j->second);
     }
 
-    const auto j(context_->parent_ids().find(o.id()));
-    pod.is_parent(j != context_->parent_ids().end());
-    context_->dia_id_to_qname().insert(std::make_pair(o.id(), pod.name()));
+    const auto j(context_.parent_ids().find(o.id()));
+    pod.is_parent(j != context_.parent_ids().end());
+    context_.dia_id_to_qname().insert(std::make_pair(o.id(), pod.name()));
 
     if (!pod.parent_name()) {
-        context_->original_parent().insert(
+        context_.original_parent().insert(
             std::make_pair(pod.name(), pod.name()));
     } else {
-        const auto k(context_->original_parent().find(*pod.parent_name()));
-        if (k == context_->original_parent().end()) {
+        const auto k(context_.original_parent().find(*pod.parent_name()));
+        if (k == context_.original_parent().end()) {
             BOOST_LOG_SEV(lg, error) << "Could not find the original parent of "
                                      << pod.name().type_name();
 
@@ -334,7 +336,7 @@ void object_transformer::transform_pod(const dia::object& o) {
                     pod.name().type_name()));
         }
         pod.original_parent_name(k->second);
-        context_->original_parent().insert(
+        context_.original_parent().insert(
             std::make_pair(pod.name(), k->second));
     }
 
@@ -342,16 +344,16 @@ void object_transformer::transform_pod(const dia::object& o) {
         pod.generation_type() == generation_types::full_generation) {
         auto parent(pod.parent_name());
         while (parent) {
-            auto k(context_->leaves().find(*parent));
-            if (k == context_->leaves().end()) {
+            auto k(context_.leaves().find(*parent));
+            if (k == context_.leaves().end()) {
                 std::list<sml::qname> l { pod.name() };
-                context_->leaves().insert(std::make_pair(*parent, l));
+                context_.leaves().insert(std::make_pair(*parent, l));
             } else {
                 k->second.push_back(pod.name());
             }
 
-            auto j(context_->pods().find(*parent));
-            if (j == context_->pods().end()) {
+            auto j(context_.pods().find(*parent));
+            if (j == context_.pods().end()) {
                 BOOST_LOG_SEV(lg, error) << "Could not find the parent of "
                                          << parent->type_name();
                 BOOST_THROW_EXCEPTION(transformation_error(parent_not_found +
@@ -360,7 +362,7 @@ void object_transformer::transform_pod(const dia::object& o) {
             parent = j->second.parent_name();
         }
     }
-    context_->pods().insert(std::make_pair(pod.name(), pod));
+    context_.pods().insert(std::make_pair(pod.name(), pod));
 }
 
 void object_transformer::
@@ -429,7 +431,7 @@ transform_enumerator(const dogen::dia::composite& uml_attribute,
 void object_transformer::transform_enumeration(const dia::object& o) {
     sml::enumeration e;
 
-    e.generation_type(context_->is_target() ?
+    e.generation_type(context_.is_target() ?
         sml::generation_types::full_generation :
         sml::generation_types::no_generation);
 
@@ -487,7 +489,7 @@ void object_transformer::transform_enumeration(const dia::object& o) {
             }
         }
     }
-    context_->enumerations().insert(std::make_pair(e.name(), e));
+    context_.enumerations().insert(std::make_pair(e.name(), e));
 }
 
 void object_transformer::transform_package(const dogen::dia::object& o) {
@@ -506,12 +508,12 @@ void object_transformer::transform_package(const dogen::dia::object& o) {
             transformation_error(name_attribute_expected + o.id()));
         BOOST_LOG_SEV(lg, error) << name_attribute_expected + o.id();
     }
-    context_->packages().insert(std::make_pair(p.name(), p));
+    context_.packages().insert(std::make_pair(p.name(), p));
 }
 
 void object_transformer::transform_exception(const dogen::dia::object& o) {
     sml::exception e;
-    e.generation_type(context_->is_target() ?
+    e.generation_type(context_.is_target() ?
         sml::generation_types::full_generation :
         sml::generation_types::no_generation);
 
@@ -527,7 +529,7 @@ void object_transformer::transform_exception(const dogen::dia::object& o) {
             e.documentation(doc);
         }
     }
-    context_->exceptions().insert(std::make_pair(e.name(), e));
+    context_.exceptions().insert(std::make_pair(e.name(), e));
 }
 
 void object_transformer::transform(const dia::object& o) {

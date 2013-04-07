@@ -53,10 +53,10 @@ class object_transformer : public object_transformer_interface {
 public:
     object_transformer(const object_transformer&) = delete;
     object_transformer(object_transformer&&) = default;
-    virtual ~object_transformer() noexcept = 0;
 
 public:
-    explicit object_transformer(context* c);
+    explicit object_transformer(context& c);
+    virtual ~object_transformer() noexcept;
 
 private:
     /**
@@ -143,7 +143,7 @@ public:
     virtual void transform(const dia::object& o) override;
 
 private:
-    std::shared_ptr<context> context_;
+    context& context_;
     std::shared_ptr<sml::identifier_parser> identifier_parser_;
     std::shared_ptr<sml::comments_parser> comments_parser_;
 };
