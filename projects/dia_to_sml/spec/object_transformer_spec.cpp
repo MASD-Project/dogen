@@ -40,7 +40,7 @@ const std::string test_suite("object_transformer_spec");
 using dogen::utility::test::contains_checker;
 using dogen::dia::test::mock_object_factory;
 
-BOOST_AUTO_TEST_SUITE(transformer)
+BOOST_AUTO_TEST_SUITE(object_transformer)
 
 BOOST_AUTO_TEST_CASE(transforming_uml_class_with_no_stereotype_results_in_expected_pod) {
     SETUP_TEST_LOG("transforming_uml_class_with_no_stereotype_results_in_expected_pod");
