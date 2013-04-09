@@ -51,6 +51,20 @@ public:
     static object build_class(const unsigned int number = 0);
 
     /**
+     * @brief Generates a new UML class without a name attribute.
+     *
+     * @param number identifier used for object ID generation.
+     */
+    static object build_no_name_class(const unsigned int number = 0);
+
+    /**
+     * @brief Generates a new UML class with a blank name attribute.
+     *
+     * @param number identifier used for object ID generation.
+     */
+    static object build_blank_name_class(const unsigned int number = 0);
+
+    /**
      * @brief Generates a new UML large package.
      *
      * @param number identifier used for object ID generation.

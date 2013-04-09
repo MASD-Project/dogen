@@ -56,8 +56,10 @@ const std::string uml_attribute_expected("UML atttribute expected");
 const std::string parent_not_found("Object has a parent but its not defined: ");
 const std::string missing_package_for_id("Missing package for dia object ID: ");
 const std::string error_parsing_stereotype("Fail to parse stereotype: ");
-const std::string name_attribute_expected("Could not find name attribute");
-const std::string type_attribute_expected("Could not find type attribute");
+const std::string name_attribute_expected(
+    "Could not find name attribute. ID: ");
+const std::string type_attribute_expected(
+    "Could not find type attribute. ID: ");
 const std::string unexpected_attribute_value_type(
     "Did not find expected attribute value type: ");
 const std::string unexpected_attribute_value_size(

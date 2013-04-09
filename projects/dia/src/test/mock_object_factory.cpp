@@ -27,6 +27,7 @@
 
 namespace {
 
+const std::string empty;
 const std::string object_prefix("O");
 const std::string uml_large_package("UML - LargePackage");
 const std::string uml_class("UML - Class");
@@ -36,8 +37,21 @@ const std::string uml_note("UML - Note");
 const std::string uml_message("UML - Message");
 const std::string uml_realization("UML - Realizes");
 const std::string dia_stereotype("stereotype");
+const std::string dia_name("name");
 const std::string enumeration_stereotype("#enumeration#");
 const std::string value_stereotype("#value#");
+
+dogen::dia::attribute
+create_string_attribute(const std::string& name, const std::string& value) {
+    dogen::dia::attribute r;
+    r.name(name);
+
+    dogen::dia::string v;
+    v.value(value);
+    r.values().push_back(v);
+
+    return r;
+}
 
 dogen::dia::object
 create_object(const std::string& type, const unsigned int number) {
@@ -47,18 +61,30 @@ create_object(const std::string& type, const unsigned int number) {
     return r;
 }
 
-dogen::dia::object
-create_object(const std::string& type, const unsigned int number,
-    const dogen::dia::stereotypes st) {
-    dogen::dia::object r(create_object(type, number));
-    dogen::dia::attribute a;
-    a.name(dia_stereotype);
+void create_name_attribute(dogen::dia::object& o, const std::string& value) {
+    std::ostringstream s;
+    s << "#" << value << "#";
+    o.attributes().push_back(create_string_attribute(dia_name, s.str()));
+}
 
-    dogen::dia::string v;
+void create_name_attribute(dogen::dia::object& o, const unsigned int number) {
+    std::ostringstream s;
+    s << "name_" << number;
+    create_name_attribute(o, s.str());
+}
+
+void create_stereotype_attribute(dogen::dia::object& o,
+    const dogen::dia::stereotypes st) {
+
     if (st == dogen::dia::stereotypes::value)
-        v.value(value_stereotype);
-    a.values().push_back(v);
-    r.attributes().push_back(a);
+        o.attributes().push_back(
+            create_string_attribute(dia_stereotype, value_stereotype));
+}
+
+dogen::dia::object
+create_named_object(const std::string& type, const unsigned int number) {
+    dogen::dia::object r(create_object(type, number));
+    create_name_attribute(r, number);
     return r;
 }
 
@@ -79,7 +105,22 @@ std::string mock_object_factory::to_oject_id(const unsigned int number) {
 }
 
 object mock_object_factory::build_class(const unsigned int number) {
-    return create_object(uml_class, number, stereotypes::value);
+    object r(create_named_object(uml_class, number));
+    create_stereotype_attribute(r, stereotypes::value);
+    return r;
+}
+
+object mock_object_factory::build_no_name_class(const unsigned int number) {
+    object r(create_object(uml_class, number));
+    create_stereotype_attribute(r, stereotypes::value);
+    return r;
+}
+
+object mock_object_factory::build_blank_name_class(const unsigned int number) {
+    object r(create_object(uml_class, number));
+    create_stereotype_attribute(r, stereotypes::value);
+    create_name_attribute(r, empty);
+    return r;
 }
 
 object mock_object_factory::build_large_package(const unsigned int number) {
@@ -90,7 +131,7 @@ std::array<object, 3>
 mock_object_factory::build_generalization(unsigned int number) {
     std::array<object, 3> r = {{
         create_object(uml_class, number),
-        create_object(uml_class, ++number),
+        build_class(++number),
         create_object(uml_generalization, ++number)
         }};
 
@@ -104,8 +145,8 @@ mock_object_factory::build_generalization(unsigned int number) {
 std::array<object, 3>
 mock_object_factory::build_association(unsigned int number) {
     std::array<object, 3> r = {{
-            create_object(uml_class, number, stereotypes::value),
-            create_object(uml_class, ++number, stereotypes::value),
+            build_class(number),
+            build_class(++number),
             create_object(uml_association, ++number)
         }};
 
@@ -120,8 +161,8 @@ std::array<object, 4> mock_object_factory::
 build_generalization_inside_large_package(unsigned int number)  {
     std::array<object, 4> r = {{
             create_object(uml_large_package, number),
-            create_object(uml_class, ++number, stereotypes::value),
-            create_object(uml_class, ++number, stereotypes::value),
+            build_class(++number),
+            build_class(++number),
             create_object(uml_generalization, ++number)
         }};
 
@@ -140,8 +181,8 @@ build_generalization_inside_large_package(unsigned int number)  {
 std::array<object, 4> mock_object_factory::
 build_first_degree_cycle(unsigned int number) {
     std::array<object, 4> r = {{
-            create_object(uml_class, ++number, stereotypes::value),
-            create_object(uml_class, ++number, stereotypes::value),
+            build_class(++number),
+            build_class(++number),
             create_object(uml_generalization, ++number),
             create_object(uml_generalization, ++number)
         }};
