@@ -60,6 +60,7 @@ BOOST_AUTO_TEST_CASE(uml_class_with_no_stereotype_transforms_into_expected_pod) 
 
     const auto p(c.pods().begin()->second);
     BOOST_CHECK(p.name().model_name() == model_name);
+    BOOST_CHECK(!p.name().type_name().empty());
     BOOST_CHECK(p.properties().empty());
     BOOST_CHECK(p.pod_type() == dogen::sml::pod_types::value);
 }
@@ -84,6 +85,24 @@ BOOST_AUTO_TEST_CASE(uml_class_with_blank_name_attribute_throws) {
     const auto o(mock_object_factory::build_blank_name_class(0));
     contains_checker<transformation_error> cc(empty_name);
     BOOST_CHECK_EXCEPTION(t.transform(o), transformation_error, cc);
+}
+
+BOOST_AUTO_TEST_CASE(uml_class_with_enumeration_stereotype_transforms_into_expected_enumeration) {
+    SETUP_TEST_LOG_SOURCE("uml_class_with_enumeration_stereotype_transforms_into_expected_enumeration");
+    dogen::dia_to_sml::context c;
+    c.model_name(model_name);
+
+    dogen::dia_to_sml::object_transformer t(c);
+    const dogen::dia::stereotypes st(dogen::dia::stereotypes::enumeration);
+    t.transform(mock_object_factory::build_stereotyped_class(st, 0));
+
+    BOOST_LOG_SEV(lg, debug) << "context: " << c;
+    BOOST_CHECK(c.pods().empty());
+    BOOST_REQUIRE(c.enumerations().size() == 1);
+
+    const auto e(c.enumerations().begin()->second);
+    BOOST_CHECK(e.name().model_name() == model_name);
+    BOOST_CHECK(!e.name().type_name().empty());
 }
 
 BOOST_AUTO_TEST_SUITE_END()
