@@ -21,7 +21,6 @@
 #include <sstream>
 #include <boost/test/unit_test.hpp>
 #include <boost/algorithm/string/predicate.hpp>
-#include "dogen/dia_to_sml/types/validation_error.hpp"
 #include "dogen/utility/test/xml_serialization_helper.hpp"
 #include "dogen/utility/test/asserter.hpp"
 #include "dogen/utility/test_data/dia_sml.hpp"
