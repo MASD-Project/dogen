@@ -105,4 +105,22 @@ BOOST_AUTO_TEST_CASE(uml_class_with_enumeration_stereotype_transforms_into_expec
     BOOST_CHECK(!e.name().type_name().empty());
 }
 
+BOOST_AUTO_TEST_CASE(uml_class_with_exception_stereotype_transforms_into_expected_exception) {
+    SETUP_TEST_LOG_SOURCE("uml_class_with_exception_stereotype_transforms_into_expected_exception");
+    dogen::dia_to_sml::context c;
+    c.model_name(model_name);
+
+    dogen::dia_to_sml::object_transformer t(c);
+    const dogen::dia::stereotypes st(dogen::dia::stereotypes::exception);
+    t.transform(mock_object_factory::build_stereotyped_class(st, 0));
+
+    BOOST_LOG_SEV(lg, debug) << "context: " << c;
+    BOOST_CHECK(c.pods().empty());
+    BOOST_REQUIRE(c.exceptions().size() == 1);
+
+    const auto e(c.exceptions().begin()->second);
+    BOOST_CHECK(e.name().model_name() == model_name);
+    BOOST_CHECK(!e.name().type_name().empty());
+}
+
 BOOST_AUTO_TEST_SUITE_END()
