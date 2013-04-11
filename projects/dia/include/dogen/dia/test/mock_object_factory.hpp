@@ -81,6 +81,24 @@ public:
     static object build_large_package(const unsigned int number = 0);
 
     /**
+     * @brief Generates a UML class inside a large package, plus the
+     * large package itself.
+     *
+     * @param number identifier used for object ID generation.
+     */
+    static std::array<object, 3>
+    build_class_inside_two_large_packages(unsigned int number = 0);
+
+    /**
+     * @brief Generates a UML class inside a large package, itself
+     * inside a large package.
+     *
+     * @param number identifier used for object ID generation.
+     */
+    static std::array<object, 2>
+    build_class_inside_large_package(unsigned int number = 0);
+
+    /**
      * @brief Generates two UML classes and a generalisation between
      * the two.
      *
@@ -112,7 +130,6 @@ public:
      */
     static std::array<object, 4>
     build_first_degree_cycle(unsigned int number = 0);
-
 };
 
 } } }

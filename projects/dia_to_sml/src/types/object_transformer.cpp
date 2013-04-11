@@ -510,6 +510,7 @@ void object_transformer::transform_package(const dogen::dia::object& o) {
             transformation_error(name_attribute_expected + o.id()));
         BOOST_LOG_SEV(lg, error) << name_attribute_expected + o.id();
     }
+    context_.packages_by_id().insert(std::make_pair(o.id(), p));
     context_.packages().insert(std::make_pair(p.name(), p));
 }
 

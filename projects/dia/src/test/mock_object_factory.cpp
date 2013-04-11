@@ -142,7 +142,36 @@ object mock_object_factory::build_blank_name_class(const unsigned int number) {
 }
 
 object mock_object_factory::build_large_package(const unsigned int number) {
-    return create_object(uml_large_package, number);
+    return create_named_object(uml_large_package, number);
+}
+
+std::array<object, 2> mock_object_factory::
+build_class_inside_large_package(unsigned int number)  {
+    std::array<object, 2> r = {{
+            build_large_package(number),
+            build_class(++number),
+        }};
+
+    const child_node cn(r[0].id());
+    r[1].child_node(cn);
+    return r;
+}
+
+std::array<object, 3> mock_object_factory::
+build_class_inside_two_large_packages(unsigned int number)  {
+    std::array<object, 3> r = {{
+            build_large_package(number),
+            build_large_package(++number),
+            build_class(++number),
+        }};
+
+    const child_node cn(r[0].id());
+    r[1].child_node(cn);
+
+    const child_node cn2(r[1].id());
+    r[2].child_node(cn2);
+
+    return r;
 }
 
 object mock_object_factory::build_stereotyped_class(
@@ -185,7 +214,7 @@ mock_object_factory::build_association(unsigned int number) {
 std::array<object, 4> mock_object_factory::
 build_generalization_inside_large_package(unsigned int number)  {
     std::array<object, 4> r = {{
-            create_object(uml_large_package, number),
+            build_large_package(number),
             build_class(++number),
             build_class(++number),
             create_object(uml_generalization, ++number)
