@@ -30,16 +30,16 @@
 #include <boost/spirit/include/phoenix_object.hpp>
 #include <boost/spirit/repository/include/qi_distinct.hpp>
 #include <boost/throw_exception.hpp>
-#include "dogen/sml/types/parsing_error.hpp"
+#include "dogen/dia_to_sml/types/parsing_error.hpp"
 #include "dogen/sml/types/nested_qname_builder.hpp"
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/sml/types/identifier_parser.hpp"
+#include "dogen/dia_to_sml/types/identifier_parser.hpp"
 
 using namespace dogen::utility::log;
 
 namespace {
 
-auto lg(logger_factory("sml.identifier_parser"));
+auto lg(logger_factory("dia_to_sml.identifier_parser"));
 
 const char* delimiter = "::";
 const std::string error_msg("Failed to parse string: ");
@@ -167,7 +167,7 @@ struct grammar : qi::grammar<Iterator> {
 }
 
 namespace dogen {
-namespace sml {
+namespace dia_to_sml {
 
 identifier_parser::
 identifier_parser(const std::unordered_set<std::string>& packages,
@@ -176,7 +176,7 @@ identifier_parser(const std::unordered_set<std::string>& packages,
     : packages_(packages), external_package_path_(external_package_path),
       model_name_(model_name) { }
 
-nested_qname identifier_parser::
+sml::nested_qname identifier_parser::
 parse_qname(const std::string& n) {
     std::string::const_iterator it(n.begin());
     std::string::const_iterator end(n.end());

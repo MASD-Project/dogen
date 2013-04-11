@@ -18,36 +18,17 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_SML_TYPES_PARSING_ERROR_HPP
-#define DOGEN_SML_TYPES_PARSING_ERROR_HPP
+#ifndef DOGEN_DIA_TO_SML_TYPES_IDENTIFIER_PARSER_FWD_HPP
+#define DOGEN_DIA_TO_SML_TYPES_IDENTIFIER_PARSER_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <boost/exception/info.hpp>
-#include <string>
-
 namespace dogen {
-namespace sml {
+namespace dia_to_sml {
 
-/**
- * @brief A fatal error has occurred while parsing.
- */
-class parsing_error : public virtual std::exception, public virtual boost::exception {
-public:
-    parsing_error() = default;
-    ~parsing_error() noexcept = default;
-
-public:
-    parsing_error(const std::string& message) : message_(message) { }
-
-public:
-    const char* what() const noexcept { return(message_.c_str()); }
-
-private:
-    const std::string message_;
-};
+class identifier_parser;
 
 } }
 

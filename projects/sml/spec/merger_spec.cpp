@@ -25,11 +25,9 @@
 #include "dogen/utility/test/equality_tester.hpp"
 #include "dogen/sml/test_data/all_td.hpp"
 #include "dogen/sml/types/model.hpp"
-#include "dogen/sml/types/parsing_error.hpp"
 #include "dogen/sml/io/nested_qname_io.hpp"
 #include "dogen/sml/io/qname_io.hpp"
 #include "dogen/sml/types/merging_error.hpp"
-#include "dogen/sml/types/identifier_parser.hpp"
 #include "dogen/sml/types/merger.hpp"
 #include "dogen/utility/test/exception_checkers.hpp"
 

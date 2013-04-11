@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_SML_TYPES_PARSING_ERROR_FWD_HPP
-#define DOGEN_SML_TYPES_PARSING_ERROR_FWD_HPP
+#ifndef DOGEN_DIA_TO_SML_TYPES_PARSING_ERROR_FWD_HPP
+#define DOGEN_DIA_TO_SML_TYPES_PARSING_ERROR_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -29,7 +29,7 @@
 #include <string>
 
 namespace dogen {
-namespace sml {
+namespace dia_to_sml {
 
 class parsing_error;
 

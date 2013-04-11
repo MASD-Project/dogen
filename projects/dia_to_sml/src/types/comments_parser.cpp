@@ -23,8 +23,8 @@
 #include <boost/algorithm/string.hpp>
 #include <boost/algorithm/string/predicate.hpp>
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/sml/types/parsing_error.hpp"
-#include "dogen/sml/types/comments_parser.hpp"
+#include "dogen/dia_to_sml/types/parsing_error.hpp"
+#include "dogen/dia_to_sml/types/comments_parser.hpp"
 
 using namespace dogen::utility::log;
 
@@ -40,7 +40,7 @@ const std::string separator_not_found("Expected separator on KVP.");
 }
 
 namespace dogen {
-namespace sml {
+namespace dia_to_sml {
 
 std::pair<std::string, comments_parser::kvp_vector_type>
 comments_parser::parse(const std::string& c) const {

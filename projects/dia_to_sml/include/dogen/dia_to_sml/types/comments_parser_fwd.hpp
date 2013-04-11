@@ -18,34 +18,17 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_SML_TYPES_COMMENTS_PARSER_HPP
-#define DOGEN_SML_TYPES_COMMENTS_PARSER_HPP
+#ifndef DOGEN_DIA_TO_SML_TYPES_COMMENTS_PARSER_FWD_HPP
+#define DOGEN_DIA_TO_SML_TYPES_COMMENTS_PARSER_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <vector>
-#include <string>
-#include <utility>
-
 namespace dogen {
-namespace sml {
+namespace dia_to_sml {
 
-class comments_parser {
-public:
-    comments_parser() = default;
-    comments_parser(const comments_parser&) = default;
-    ~comments_parser() = default;
-    comments_parser(comments_parser&&) = default;
-    comments_parser& operator=(const comments_parser&) = default;
-
-public:
-    typedef std::vector<std::pair<std::string, std::string> > kvp_vector_type;
-
-public:
-    std::pair<std::string, kvp_vector_type> parse(const std::string& c) const;
-};
+class comments_parser;
 
 } }
 

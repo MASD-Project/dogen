@@ -44,8 +44,8 @@
 #include "dogen/dia/io/object_io.hpp"
 #include "dogen/dia/io/diagram_io.hpp"
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/sml/types/identifier_parser.hpp"
-#include "dogen/sml/types/comments_parser.hpp"
+#include "dogen/dia_to_sml/types/identifier_parser.hpp"
+#include "dogen/dia_to_sml/types/comments_parser.hpp"
 #include "dogen/utility/io/unordered_map_io.hpp"
 #include "dogen/utility/io/list_io.hpp"
 #include "dogen/dia_to_sml/types/transformation_error.hpp"
@@ -148,8 +148,8 @@ private:
         std::unordered_map<dogen::sml::qname,
                            std::list<dogen::sml::qname> > leaves_;
         std::unordered_set<std::string> dependencies_;
-        dogen::sml::identifier_parser identifier_parser_;
-        dogen::sml::comments_parser comments_parser_;
+        dogen::dia_to_sml::identifier_parser identifier_parser_;
+        dogen::dia_to_sml::comments_parser comments_parser_;
     };
 
 public:

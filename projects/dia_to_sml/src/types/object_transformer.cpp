@@ -94,9 +94,9 @@ namespace dia_to_sml {
 object_transformer::object_transformer(context& c)
     : context_(c),
       identifier_parser_(
-          new sml::identifier_parser(c.top_level_packages(),
+          new identifier_parser(c.top_level_packages(),
               c.external_package_path(), c.model_name())),
-      comments_parser_(new sml::comments_parser()) { }
+      comments_parser_(new comments_parser()) { }
 
 object_transformer::~object_transformer() noexcept { }
 

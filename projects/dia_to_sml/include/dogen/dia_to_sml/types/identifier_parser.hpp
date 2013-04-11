@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_SML_TYPES_IDENTIFIER_PARSER_HPP
-#define DOGEN_SML_TYPES_IDENTIFIER_PARSER_HPP
+#ifndef DOGEN_DIA_TO_SML_TYPES_IDENTIFIER_PARSER_HPP
+#define DOGEN_DIA_TO_SML_TYPES_IDENTIFIER_PARSER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -31,7 +31,7 @@
 #include "dogen/sml/types/nested_qname.hpp"
 
 namespace dogen {
-namespace sml {
+namespace dia_to_sml {
 
 class identifier_parser {
 public:
@@ -56,7 +56,7 @@ public:
         const std::string model_name);
 
 public:
-    nested_qname parse_qname(const std::string& n);
+    sml::nested_qname parse_qname(const std::string& n);
     static std::list<std::string> parse_scoped_name(const std::string& n);
 
 private:

@@ -36,8 +36,8 @@
 #include "dogen/dia/types/stereotypes.hpp"
 #include "dogen/sml/types/meta_types.hpp"
 #include "dogen/sml/types/enumerator.hpp"
-#include "dogen/sml/types/identifier_parser.hpp"
-#include "dogen/sml/types/comments_parser.hpp"
+#include "dogen/dia_to_sml/types/identifier_parser.hpp"
+#include "dogen/dia_to_sml/types/comments_parser.hpp"
 #include "dogen/dia/types/object_fwd.hpp"
 #include "dogen/dia/types/object_types.hpp"
 #include "dogen/dia_to_sml/types/context.hpp"
@@ -144,8 +144,8 @@ public:
 
 private:
     context& context_;
-    std::shared_ptr<sml::identifier_parser> identifier_parser_;
-    std::shared_ptr<sml::comments_parser> comments_parser_;
+    std::shared_ptr<identifier_parser> identifier_parser_;
+    std::shared_ptr<comments_parser> comments_parser_;
 };
 
 } }
