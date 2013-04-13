@@ -155,15 +155,24 @@ process_child_node(const vertex_descriptor_type& v, const dia::object& o) {
     if (o.child_node()) {
         const std::string id(o.child_node()->parent());
         const vertex_descriptor_type cv(vertex_for_id(id));
-        boost::add_edge(cv, v, graph_);
-        BOOST_LOG_SEV(lg, debug) << "Creating containing relationship for: "
-                                 << o.id() << ". Container ID: " << id;
-        return;
+        boost::add_edge(v, cv, graph_);
+        BOOST_LOG_SEV(lg, debug) << "Creating edge between '"
+                                 << o.id() << "' and '" << id << "'";
+
+        const auto k(orphanage_.find(id));
+        if (k != orphanage_.end()) {
+            BOOST_LOG_SEV(lg, debug) << "Object is no longer orphan: "
+                                     << id << "'";
+            orphanage_.erase(k);
+        }
+        connected_ids_.insert(id);
     }
 
-    orphanage_.insert(std::make_pair(o.id(), v));
-    BOOST_LOG_SEV(lg, debug) << "Vertex for object joined orphanage: "
-                             << o.id();
+    if (connected_ids_.find(o.id()) == connected_ids_.end()) {
+        orphanage_.insert(std::make_pair(o.id(), v));
+        BOOST_LOG_SEV(lg, debug) << "Vertex for object joined orphanage: "
+                                 << o.id();
+    }
 }
 
 void graph_builder::process_connections(const dia::object& o) {
@@ -183,12 +192,11 @@ void graph_builder::process_connections(const dia::object& o) {
     const auto parent_vertex(vertex_for_id(parent.to()));
     const auto child_vertex(vertex_for_id(child.to()));
     parent_ids_.insert(parent.to());
-    BOOST_LOG_SEV(lg, debug) << "Connecting parent '"
-                             << parent.to() << "' to child: '"
-                             << child.to()
-                             << "'";
+    connected_ids_.insert(parent.to());
+    boost::add_edge(child_vertex, parent_vertex, graph_);
+    BOOST_LOG_SEV(lg, debug) << "Created edge between '" << child.to()
+                             << "' and: '" << parent.to() << "'";
 
-    boost::add_edge(parent_vertex, child_vertex, graph_);
     const auto pair(std::make_pair(child.to(), parent.to()));
     const bool key_exists(!child_to_parent_.insert(pair).second);
 
@@ -202,7 +210,13 @@ void graph_builder::process_connections(const dia::object& o) {
         BOOST_THROW_EXCEPTION(building_error(ss.str()));
     }
 
-    const auto k(orphanage_.find(child.to()));
+    if (connected_ids_.find(child.to()) == connected_ids_.end()) {
+        orphanage_.insert(std::make_pair(child.to(), parent_vertex));
+        BOOST_LOG_SEV(lg, debug) << "Vertex for object joined orphanage: "
+                                 << o.id();
+    }
+
+    const auto k(orphanage_.find(parent.to()));
     if (k != orphanage_.end()) {
         BOOST_LOG_SEV(lg, debug) << "Object is no longer orphan: "
                                  << k->first << "'";

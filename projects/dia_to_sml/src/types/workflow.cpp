@@ -33,7 +33,8 @@ namespace dia_to_sml {
 
 workflow::~workflow() noexcept { }
 
-graph_type workflow::build_graph(const dia::diagram& diagram) const {
+graph_type workflow::
+build_graph(const dia::diagram& diagram, context& c) const {
     graph_builder b;
     for (const auto& l : diagram.layers()) {
         for (const auto& o : l.objects()) {
@@ -41,6 +42,8 @@ graph_type workflow::build_graph(const dia::diagram& diagram) const {
         }
     }
     b.build();
+    c.child_to_parent(b.child_to_parent());
+    c.parent_ids(b.parent_ids());
     return b.graph();
 }
 
@@ -73,6 +76,15 @@ void workflow::context_to_model(const context& c, sml::model& m) const {
     m.exceptions(c.exceptions());
     m.is_system(false);
     m.name(c.model_name());
+
+    for (auto& pair : m.pods()) {
+        auto j(c.leaves().find(pair.first));
+        if (j != c.leaves().end()) {
+            pair.second.leaves(j->second);
+            for (const auto k : j->second)
+                m.leaves().insert(k);
+        }
+    }
 }
 
 sml::model workflow::execute(const dia::diagram& diagram,
@@ -83,7 +95,7 @@ sml::model workflow::execute(const dia::diagram& diagram,
     context c;
     initialise_context(model_name, external_package_path, is_target, c);
 
-    auto g(build_graph(diagram));
+    auto g(build_graph(diagram, c));
     graph_to_context(g, c);
 
     sml::model r;

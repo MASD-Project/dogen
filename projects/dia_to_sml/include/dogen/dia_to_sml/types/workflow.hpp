@@ -41,7 +41,7 @@ public:
     virtual ~workflow() noexcept;
 
 private:
-    graph_type build_graph(const dia::diagram& diagram) const;
+    graph_type build_graph(const dia::diagram& diagram, context& c) const;
     void initialise_context(const std::string& model_name,
         const std::string& external_package_path,
         bool is_target, context& c) const;

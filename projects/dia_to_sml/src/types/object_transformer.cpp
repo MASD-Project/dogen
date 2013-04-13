@@ -314,7 +314,14 @@ void object_transformer::transform_pod(const dia::object& o) {
             BOOST_THROW_EXCEPTION(
                 transformation_error(parent_not_found + o.id()));
         }
+
+        BOOST_LOG_SEV(lg, debug) << "Setting parent for: "
+                                 << pod.name().type_name() << " as "
+                                 << j->second.type_name();
         pod.parent_name(j->second);
+    } else {
+        BOOST_LOG_SEV(lg, debug) << "Pod has no parent: "
+                                 << pod.name().type_name();
     }
 
     const auto j(context_.parent_ids().find(o.id()));

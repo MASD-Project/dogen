@@ -46,7 +46,7 @@ public:
 
 public:
     template<typename Vertex, typename Graph>
-    void discover_vertex(const Vertex& u, const Graph& g) {
+    void finish_vertex(const Vertex& u, const Graph& g) {
         const auto o(g[u]);
         if (o.id() != graph_builder::root_id())
             transformer_.transform(o);

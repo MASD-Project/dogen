@@ -165,9 +165,9 @@ object mock_object_factory::build_stereotyped_class(
 std::array<object, 3>
 mock_object_factory::build_generalization(unsigned int number) {
     std::array<object, 3> r = {{
-        create_object(uml_class, number),
-        build_class(++number),
-        create_object(uml_generalization, ++number)
+            create_object(uml_generalization, number),
+            build_class(++number),
+            build_class(++number),
         }};
 
     r[2].connections(

@@ -139,12 +139,12 @@ BOOST_AUTO_TEST_CASE(all_primitives_dia_transforms_into_expected_sml) {
     BOOST_CHECK(test_transformer(input_path, expected_path, actual_path));
 }
 
-// BOOST_AUTO_TEST_CASE(trivial_inheritance_dia_transforms_into_expected_sml) {
-//     SETUP_TEST_LOG("trivial_inheritance_dia_transforms_into_expected_sml");
-//     const auto input_path(dia_sml::expected_trivial_inheritance_dia_xml());
-//     const auto actual_path(dia_sml::actual_trivial_inheritance_sml_xml());
-//     const auto expected_path(dia_sml::expected_trivial_inheritance_sml_xml());
-//     BOOST_CHECK(test_transformer(input_path, expected_path, actual_path));
-// }
+BOOST_AUTO_TEST_CASE(trivial_inheritance_dia_transforms_into_expected_sml) {
+    SETUP_TEST_LOG("trivial_inheritance_dia_transforms_into_expected_sml");
+    const auto input_path(dia_sml::expected_trivial_inheritance_dia_xml());
+    const auto actual_path(dia_sml::actual_trivial_inheritance_sml_xml());
+    const auto expected_path(dia_sml::expected_trivial_inheritance_sml_xml());
+    BOOST_CHECK(test_transformer(input_path, expected_path, actual_path));
+}
 
 BOOST_AUTO_TEST_SUITE_END()

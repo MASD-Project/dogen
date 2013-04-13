@@ -153,6 +153,7 @@ private:
     vertex_descriptor_type root_vertex_;
     std::unordered_map<std::string, std::string> child_to_parent_;
     std::unordered_set<std::string> parent_ids_;
+    std::unordered_set<std::string> connected_ids_;
 };
 
 } }
