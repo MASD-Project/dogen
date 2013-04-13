@@ -18,32 +18,27 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_DIA_TEST_DATA_OBJECT_TYPES_TD_HPP
-#define DOGEN_DIA_TEST_DATA_OBJECT_TYPES_TD_HPP
+#ifndef DOGEN_DIA_TO_SML_TYPES_ENUM_PARSER_HPP
+#define DOGEN_DIA_TO_SML_TYPES_ENUM_PARSER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/dia/types/object_types.hpp"
+#include <string>
+#include "dogen/dia_to_sml/types/object_types.hpp"
+#include "dogen/dia_to_sml/types/stereotypes.hpp"
 
 namespace dogen {
-namespace dia {
+namespace dia_to_sml {
 
-class object_types_generator {
+/**
+ * @brief Helper class that converts strings into Dia enums.
+ */
+class enum_parser {
 public:
-    object_types_generator();
-
-public:
-    typedef dogen::dia::object_types result_type;
-
-public:
-    static void populate(const unsigned int position, result_type& v);
-    static result_type create(const unsigned int position);
-    result_type operator()();
-
-private:
-    unsigned int position_;
+    static object_types parse_object_type(const std::string& ot);
+    static stereotypes parse_stereotype(const std::string& st);
 };
 
 } }

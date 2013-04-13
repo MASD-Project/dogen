@@ -18,20 +18,17 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_DIA_SERIALIZATION_STEREOTYPES_SER_HPP
-#define DOGEN_DIA_SERIALIZATION_STEREOTYPES_SER_HPP
+#ifndef DOGEN_DIA_TO_SML_TYPES_STEREOTYPES_FWD_HPP
+#define DOGEN_DIA_TO_SML_TYPES_STEREOTYPES_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <boost/serialization/nvp.hpp>
-#include "dogen/dia/types/stereotypes.hpp"
+namespace dogen {
+namespace dia_to_sml {
 
-template<class Archive>
-void serialize(Archive& ar, dogen::dia::stereotypes& v, unsigned int /*version*/){
-    using boost::serialization::make_nvp;
-    ar & make_nvp("stereotypes", v);
-}
+enum class stereotypes : unsigned int;
+} }
 
 #endif

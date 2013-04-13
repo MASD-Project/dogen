@@ -20,13 +20,14 @@
  */
 #include <boost/test/unit_test.hpp>
 #include "dogen/utility/test/logging.hpp"
-#include "dogen/dia/types/enum_parser.hpp"
+#include "dogen/dia_to_sml/types/enum_parser.hpp"
 #include "dogen/dia/types/all.hpp"
 #include "dogen/dia/io/all_io.hpp"
+#include "dogen/dia_to_sml/io/all_io.hpp"
 
 namespace {
 
-const std::string test_module("dia");
+const std::string test_module("dia_to_sml");
 const std::string test_suite("object_types_spec");
 
 }
@@ -35,9 +36,9 @@ BOOST_AUTO_TEST_SUITE(object_types)
 
 BOOST_AUTO_TEST_CASE(valid_dia_object_types_are_converted_to_the_correct_enum) {
     SETUP_TEST_LOG_SOURCE("valid_dia_object_types_are_converted_to_the_correct_enum");
-    using dogen::dia::object_types;
+    using dogen::dia_to_sml::object_types;
     auto check_types([&](std::string dia_type, object_types expected) {
-            using dogen::dia::enum_parser;
+            using dogen::dia_to_sml::enum_parser;
             object_types actual(enum_parser::parse_object_type(dia_type));
 
             BOOST_LOG_SEV(lg, fine_debug) << "expected:" << expected

@@ -34,11 +34,11 @@
 #include <boost/throw_exception.hpp>
 #include "dogen/dia/types/composite.hpp"
 #include "dogen/dia/types/attribute.hpp"
-#include "dogen/dia/types/object_types.hpp"
-#include "dogen/dia/types/stereotypes.hpp"
-#include "dogen/dia/io/object_types_io.hpp"
-#include "dogen/dia/io/stereotypes_io.hpp"
-#include "dogen/dia/types/enum_parser.hpp"
+#include "dogen/dia_to_sml/types/object_types.hpp"
+#include "dogen/dia_to_sml/types/stereotypes.hpp"
+#include "dogen/dia_to_sml/io/object_types_io.hpp"
+#include "dogen/dia_to_sml/io/stereotypes_io.hpp"
+#include "dogen/dia_to_sml/types/enum_parser.hpp"
 #include "dogen/dia/io/object_io.hpp"
 #include "dogen/dia/io/diagram_io.hpp"
 #include "dogen/utility/log/logger.hpp"
@@ -89,10 +89,10 @@ const std::string unexpected_child_node(
  *
  * @param s string with an object type
  */
-dogen::dia::object_types parse_object_type(const std::string s) {
-    dogen::dia::object_types r;
+dogen::dia_to_sml::object_types parse_object_type(const std::string s) {
+    dogen::dia_to_sml::object_types r;
     try {
-        using dogen::dia::enum_parser;
+        using dogen::dia_to_sml::enum_parser;
         r = enum_parser::parse_object_type(s);
     } catch(const std::exception& e) {
         std::ostringstream stream;
@@ -109,10 +109,10 @@ dogen::dia::object_types parse_object_type(const std::string s) {
  *
  * @param s string with a stereotype
  */
-dogen::dia::stereotypes parse_stereotype(const std::string s) {
-    dogen::dia::stereotypes r;
+dogen::dia_to_sml::stereotypes parse_stereotype(const std::string s) {
+    dogen::dia_to_sml::stereotypes r;
     try {
-        using dogen::dia::enum_parser;
+        using dogen::dia_to_sml::enum_parser;
         r = enum_parser::parse_stereotype(s);
     } catch(const std::exception& e) {
         std::ostringstream stream;
@@ -204,7 +204,7 @@ object_to_enumeration(const std::string& model_name,
       is_target_(is_target) { }
 
 bool object_to_enumeration::is_processable(const dia::object& o) const {
-    using dogen::dia::object_types;
+    using dogen::dia_to_sml::object_types;
     object_types ot(parse_object_type(o.type()));
     if (ot != object_types::uml_class)
         return false;
@@ -213,7 +213,7 @@ bool object_to_enumeration::is_processable(const dia::object& o) const {
         if (a.name() != dia_stereotype)
             continue;
 
-        using dogen::dia::stereotypes;
+        using dogen::dia_to_sml::stereotypes;
         const std::string v(transform_string_attribute(a));
         if (v.empty())
             return false;

@@ -33,13 +33,13 @@
 #include "dogen/sml/types/qname.hpp"
 #include "dogen/sml/types/package.hpp"
 #include "dogen/sml/types/pod.hpp"
-#include "dogen/dia/types/stereotypes.hpp"
+#include "dogen/dia_to_sml/types/stereotypes.hpp"
 #include "dogen/sml/types/meta_types.hpp"
 #include "dogen/sml/types/enumerator.hpp"
 #include "dogen/dia_to_sml/types/identifier_parser.hpp"
 #include "dogen/dia_to_sml/types/comments_parser.hpp"
 #include "dogen/dia/types/object_fwd.hpp"
-#include "dogen/dia/types/object_types.hpp"
+#include "dogen/dia_to_sml/types/object_types.hpp"
 #include "dogen/dia_to_sml/types/context.hpp"
 #include "dogen/dia_to_sml/types/object_transformer_interface.hpp"
 
@@ -63,7 +63,7 @@ private:
      * @brief Given a dia object type as a string, returns the
      * appropriate enumeration for it.
      */
-    dia::object_types parse_object_types(const std::string type) const;
+    object_types parse_object_types(const std::string type) const;
 
     /**
      * @brief Compute all the model dependencies implied by a given
@@ -102,12 +102,19 @@ private:
     /**
      * @brief Ensure the type of the object is a dia UML class.
      */
-    void ensure_object_is_uml_class(const dia::object_types ot) const;
+    void ensure_object_is_uml_class(const object_types ot) const;
 
     /**
-     * @brief Returns the stereotype for the object.
+     * @brief Returns true if the object has a stereotype, false
+     * otherwise.
      */
-    dia::stereotypes stereotype_for_object(const dia::object& o) const;
+    bool has_stereotype(const dia::object& o) const;
+
+    /**
+     * @brief Returns the stereotype for the object, if one
+     * exists. Otherwise returns the invalid stereotype.
+     */
+    stereotypes stereotype_for_object(const dia::object& o) const;
 
     /**
      * @brief Converts a object containing a class into an pod.

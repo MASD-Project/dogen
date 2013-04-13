@@ -33,11 +33,11 @@
 #include <boost/algorithm/string/erase.hpp>
 #include <boost/graph/depth_first_search.hpp>
 #include <boost/throw_exception.hpp>
-#include "dogen/dia/types/object_types.hpp"
-#include "dogen/dia/io/object_types_io.hpp"
+#include "dogen/dia_to_sml/types/object_types.hpp"
+#include "dogen/dia_to_sml/io/object_types_io.hpp"
 #include "dogen/dia/types/composite.hpp"
 #include "dogen/dia/types/attribute.hpp"
-#include "dogen/dia/types/enum_parser.hpp"
+#include "dogen/dia_to_sml/types/enum_parser.hpp"
 #include "dogen/dia/io/object_io.hpp"
 #include "dogen/dia/io/diagram_io.hpp"
 #include "dogen/utility/log/logger.hpp"
@@ -61,10 +61,10 @@ using dogen::dia_to_sml::transformation_error;
  *
  * @param s string with an object type
  */
-dogen::dia::object_types parse_object_type(const std::string s) {
-    dogen::dia::object_types r;
+dogen::dia_to_sml::object_types parse_object_type(const std::string s) {
+    dogen::dia_to_sml::object_types r;
     try {
-        using dogen::dia::enum_parser;
+        using dogen::dia_to_sml::enum_parser;
         r = enum_parser::parse_object_type(s);
     } catch(const std::exception& e) {
         std::ostringstream stream;
@@ -106,7 +106,7 @@ transformer(const dia::diagram& diagram, const std::string& model_name,
 
 
 bool transformer::is_ignorable_object(const dia::object& o) {
-    using dia::object_types;
+    using dia_to_sml::object_types;
     const auto ot(parse_object_type(o.type()));
     return ot == object_types::uml_note || ot == object_types::uml_message;
 }

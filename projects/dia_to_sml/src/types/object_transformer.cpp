@@ -25,10 +25,10 @@
 #include <boost/algorithm/string/trim.hpp>
 #include <boost/algorithm/string/erase.hpp>
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/dia/types/enum_parser.hpp"
+#include "dogen/dia_to_sml/types/enum_parser.hpp"
 #include "dogen/dia_to_sml/types/transformation_error.hpp"
-#include "dogen/dia/io/stereotypes_io.hpp"
-#include "dogen/dia/io/object_types_io.hpp"
+#include "dogen/dia_to_sml/io/stereotypes_io.hpp"
+#include "dogen/dia_to_sml/io/object_types_io.hpp"
 #include "dogen/sml/types/enumeration.hpp"
 #include "dogen/sml/types/exception.hpp"
 #include "dogen/dia_to_sml/types/object_transformer.hpp"
@@ -100,13 +100,11 @@ object_transformer::object_transformer(context& c)
 
 object_transformer::~object_transformer() noexcept { }
 
-dia::object_types
+object_types
 object_transformer::parse_object_types(const std::string type) const {
-    using dia::object_types;
-    object_types r(object_types::invalid);
+   object_types r(object_types::invalid);
 
     try {
-        using dogen::dia::enum_parser;
         r = enum_parser::parse_object_type(type);
     } catch(const std::exception& e) {
         std::ostringstream s;
@@ -249,9 +247,7 @@ void object_transformer::transform_pod(const dia::object& o) {
                 continue;
             }
 
-            using dia::enum_parser;
             const auto st(enum_parser::parse_stereotype(v));
-            using dia::stereotypes;
             if (st == stereotypes::entity)
                 pod.pod_type(sml::pod_types::entity);
             else if (st == stereotypes::value)
@@ -368,8 +364,8 @@ void object_transformer::transform_pod(const dia::object& o) {
 }
 
 void object_transformer::
-ensure_object_is_uml_class(const dia::object_types ot) const {
-    if (ot == dia::object_types::uml_class)
+ensure_object_is_uml_class(const object_types ot) const {
+    if (ot == object_types::uml_class)
         return;
 
     BOOST_LOG_SEV(lg, error) << object_has_invalid_type << ot;
@@ -378,21 +374,28 @@ ensure_object_is_uml_class(const dia::object_types ot) const {
             boost::lexical_cast<std::string>(ot)));
 }
 
-dia::stereotypes
+bool object_transformer::has_stereotype(const dia::object& o) const {
+    for (const auto& a : o.attributes()) {
+        if (a.name() == dia_stereotype) {
+            const std::string s(transform_string_attribute(a));
+            return !s.empty();
+        }
+    }
+    return false;
+}
+
+stereotypes
 object_transformer::stereotype_for_object(const dia::object& o) const {
-    using dia::stereotypes;
     stereotypes r(stereotypes::invalid);
     for (const auto& a : o.attributes()) {
         if (a.name() != dia_stereotype)
             continue;
 
-        using dia::stereotypes;
         const std::string s(transform_string_attribute(a));
         if (s.empty())
             return r;
 
         try {
-            using dogen::dia::enum_parser;
             r = enum_parser::parse_stereotype(s);
         } catch(const std::exception& e) {
             std::ostringstream stream;
@@ -537,13 +540,17 @@ void object_transformer::transform_exception(const dogen::dia::object& o) {
 
 void object_transformer::transform(const dia::object& o) {
     const auto ot(parse_object_types(o.type()));
-    if (ot == dia::object_types::uml_large_package) {
+    if (ot == object_types::uml_large_package) {
         transform_package(o);
         return;
     }
 
     ensure_object_is_uml_class(ot);
-    using dia::stereotypes;
+    if (!has_stereotype(o)) {
+        transform_pod(o);
+        return;
+    }
+
     const auto st(stereotype_for_object(o));
     switch(st) {
     case stereotypes::value:

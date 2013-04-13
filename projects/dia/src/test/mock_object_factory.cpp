@@ -20,11 +20,9 @@
  */
 #include <string>
 #include <boost/lexical_cast.hpp>
-#include "dogen/dia/io/stereotypes_io.hpp"
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/dia/types/connection.hpp"
 #include "dogen/dia/types/child_node.hpp"
-#include "dogen/dia/types/stereotypes.hpp"
 #include "dogen/dia/test/mock_object_factory.hpp"
 
 namespace {
@@ -44,10 +42,6 @@ const std::string uml_realization("UML - Realizes");
 const std::string dia_stereotype("stereotype");
 const std::string dia_name("name");
 const std::string enumeration_stereotype("#enumeration#");
-const std::string value_stereotype("#value#");
-const std::string entity_stereotype("#entity#");
-const std::string service_stereotype("#service#");
-const std::string exception_stereotype("#exception#");
 const std::string invalid_stereotype("Invalid stereotype: ");
 
 dogen::dia::attribute
@@ -82,21 +76,8 @@ void create_name_attribute(dogen::dia::object& o, const unsigned int number) {
     create_name_attribute(o, s.str());
 }
 
-void create_stereotype_attribute(dogen::dia::object& o,
-    const dogen::dia::stereotypes st) {
-
-    std::string st_str;
-    switch(st) {
-    case dogen::dia::stereotypes::value: st_str = value_stereotype; break;
-    case dogen::dia::stereotypes::entity: st_str = entity_stereotype; break;
-    case dogen::dia::stereotypes::service: st_str = service_stereotype; break;
-    case dogen::dia::stereotypes::enumeration:
-        st_str = enumeration_stereotype;  break;
-    case dogen::dia::stereotypes::exception:
-        st_str = exception_stereotype; break;
-    default: break;
-    }
-    o.attributes().push_back(create_string_attribute(dia_stereotype, st_str));
+void create_stereotype_attribute(dogen::dia::object& o, const std::string st) {
+    o.attributes().push_back(create_string_attribute(dia_stereotype, st));
 }
 
 dogen::dia::object
@@ -124,19 +105,19 @@ std::string mock_object_factory::to_oject_id(const unsigned int number) {
 
 object mock_object_factory::build_class(const unsigned int number) {
     object r(create_named_object(uml_class, number));
-    create_stereotype_attribute(r, stereotypes::value);
+    create_stereotype_attribute(r, empty);
     return r;
 }
 
 object mock_object_factory::build_no_name_class(const unsigned int number) {
     object r(create_object(uml_class, number));
-    create_stereotype_attribute(r, stereotypes::value);
+    create_stereotype_attribute(r, empty);
     return r;
 }
 
 object mock_object_factory::build_blank_name_class(const unsigned int number) {
     object r(create_object(uml_class, number));
-    create_stereotype_attribute(r, stereotypes::value);
+    create_stereotype_attribute(r, empty);
     create_name_attribute(r, empty);
     return r;
 }
@@ -175,7 +156,7 @@ build_class_inside_two_large_packages(unsigned int number)  {
 }
 
 object mock_object_factory::build_stereotyped_class(
-    const stereotypes st, const unsigned int number) {
+    const std::string& st, const unsigned int number) {
     object r(create_named_object(uml_class, number));
     create_stereotype_attribute(r, st);
     return r;

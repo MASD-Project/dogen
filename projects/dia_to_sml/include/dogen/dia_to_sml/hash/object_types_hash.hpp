@@ -18,29 +18,26 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_DIA_TYPES_STEREOTYPES_HPP
-#define DOGEN_DIA_TYPES_STEREOTYPES_HPP
+#ifndef DOGEN_DIA_TO_SML_HASH_OBJECT_TYPES_HASH_HPP
+#define DOGEN_DIA_TO_SML_HASH_OBJECT_TYPES_HASH_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-namespace dogen {
-namespace dia {
+#include <functional>
+#include "dogen/dia_to_sml/types/object_types.hpp"
 
-/**
- * @brief Valid UML stereotypes for dogen.
- */
-enum class stereotypes : unsigned int {
-    invalid = 0, ///< Represents an uninitialised enum
-    enumeration = 1,
-    exception = 2,
-    entity = 3,
-    value = 4,
-    service = 5,
-    nongeneratable = 6
+namespace std {
+
+template<>
+class hash<dogen::dia_to_sml::object_types> {
+public:
+    size_t operator()(const dogen::dia_to_sml::object_types& v) const {
+        return std::hash<unsigned int>()(static_cast<unsigned int>(v));
+    }
 };
 
-} }
+}
 
 #endif

@@ -41,6 +41,12 @@ const std::string missing_name("Could not find name");
 const std::string empty_name("Dia object name is empty");
 const std::string missing_package("Missing package for dia object");
 
+const std::string enumeration_stereotype("#enumeration#");
+const std::string value_stereotype("#value#");
+const std::string entity_stereotype("#entity#");
+const std::string service_stereotype("#service#");
+const std::string exception_stereotype("#exception#");
+
 }
 
 using dogen::utility::test::contains_checker;
@@ -94,7 +100,7 @@ BOOST_AUTO_TEST_CASE(uml_class_with_enumeration_stereotype_transforms_into_expec
     c.model_name(model_name);
 
     dogen::dia_to_sml::object_transformer t(c);
-    const dogen::dia::stereotypes st(dogen::dia::stereotypes::enumeration);
+    const std::string st(enumeration_stereotype);
     t.transform(mock_object_factory::build_stereotyped_class(st, 0));
 
     BOOST_LOG_SEV(lg, debug) << "context: " << c;
@@ -112,7 +118,7 @@ BOOST_AUTO_TEST_CASE(uml_class_with_exception_stereotype_transforms_into_expecte
     c.model_name(model_name);
 
     dogen::dia_to_sml::object_transformer t(c);
-    const dogen::dia::stereotypes st(dogen::dia::stereotypes::exception);
+    const std::string st(exception_stereotype);
     t.transform(mock_object_factory::build_stereotyped_class(st, 0));
 
     BOOST_LOG_SEV(lg, debug) << "context: " << c;

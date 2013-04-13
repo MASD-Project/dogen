@@ -18,27 +18,20 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/dia/test_data/stereotypes_td.hpp"
+#ifndef DOGEN_DIA_TO_SML_SERIALIZATION_STEREOTYPES_SER_HPP
+#define DOGEN_DIA_TO_SML_SERIALIZATION_STEREOTYPES_SER_HPP
 
-namespace dogen {
-namespace dia {
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
-stereotypes_generator::stereotypes_generator() : position_(0) { }
-void stereotypes_generator::
-populate(const unsigned int position, result_type& v) {
-    v = static_cast<stereotypes>(position % 7);
+#include <boost/serialization/nvp.hpp>
+#include "dogen/dia_to_sml/types/stereotypes.hpp"
+
+template<class Archive>
+void serialize(Archive& ar, dogen::dia_to_sml::stereotypes& v, unsigned int /*version*/){
+    using boost::serialization::make_nvp;
+    ar & make_nvp("stereotypes", v);
 }
 
-stereotypes_generator::result_type
-stereotypes_generator::create(const unsigned int  position) {
-    result_type r;
-    stereotypes_generator::populate(position, r);
-    return r;
-}
-
-stereotypes_generator::result_type
-stereotypes_generator::operator()() {
-    return create(position_++);
-}
-
-} }
+#endif

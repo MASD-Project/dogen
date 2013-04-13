@@ -18,27 +18,17 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/dia/test_data/object_types_td.hpp"
+#ifndef DOGEN_DIA_TO_SML_TYPES_OBJECT_TYPES_FWD_HPP
+#define DOGEN_DIA_TO_SML_TYPES_OBJECT_TYPES_FWD_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
 namespace dogen {
-namespace dia {
+namespace dia_to_sml {
 
-object_types_generator::object_types_generator() : position_(0) { }
-void object_types_generator::
-populate(const unsigned int position, result_type& v) {
-    v = static_cast<object_types>(position % 8);
-}
-
-object_types_generator::result_type
-object_types_generator::create(const unsigned int  position) {
-    result_type r;
-    object_types_generator::populate(position, r);
-    return r;
-}
-
-object_types_generator::result_type
-object_types_generator::operator()() {
-    return create(position_++);
-}
-
+enum class object_types : unsigned int;
 } }
+
+#endif

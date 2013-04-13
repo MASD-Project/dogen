@@ -18,20 +18,29 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_DIA_SERIALIZATION_OBJECT_TYPES_SER_HPP
-#define DOGEN_DIA_SERIALIZATION_OBJECT_TYPES_SER_HPP
+#ifndef DOGEN_DIA_TO_SML_TYPES_STEREOTYPES_HPP
+#define DOGEN_DIA_TO_SML_TYPES_STEREOTYPES_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <boost/serialization/nvp.hpp>
-#include "dogen/dia/types/object_types.hpp"
+namespace dogen {
+namespace dia_to_sml {
 
-template<class Archive>
-void serialize(Archive& ar, dogen::dia::object_types& v, unsigned int /*version*/){
-    using boost::serialization::make_nvp;
-    ar & make_nvp("object_types", v);
-}
+/**
+ * @brief Valid UML stereotypes for dogen.
+ */
+enum class stereotypes : unsigned int {
+    invalid = 0, ///< Represents an uninitialised enum
+    enumeration = 1,
+    exception = 2,
+    entity = 3,
+    value = 4,
+    service = 5,
+    nongeneratable = 6
+};
+
+} }
 
 #endif

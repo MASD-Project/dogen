@@ -20,39 +20,42 @@
  */
 #include <ostream>
 #include <stdexcept>
-#include "dogen/dia/io/stereotypes_io.hpp"
+#include "dogen/dia_to_sml/io/object_types_io.hpp"
 
 namespace dogen {
-namespace dia {
+namespace dia_to_sml {
 
-std::ostream& operator<<(std::ostream& s, const stereotypes& v) {
-    s << "{ " << "\"__type__\": " << "\"stereotypes\", " << "\"value\": ";
+std::ostream& operator<<(std::ostream& s, const object_types& v) {
+    s << "{ " << "\"__type__\": " << "\"object_types\", " << "\"value\": ";
 
     std::string attr;
     switch (v) {
-    case stereotypes::invalid:
+    case object_types::invalid:
         attr = "\"invalid\"";
         break;
-    case stereotypes::enumeration:
-        attr = "\"enumeration\"";
+    case object_types::uml_large_package:
+        attr = "\"uml_large_package\"";
         break;
-    case stereotypes::exception:
-        attr = "\"exception\"";
+    case object_types::uml_class:
+        attr = "\"uml_class\"";
         break;
-    case stereotypes::entity:
-        attr = "\"entity\"";
+    case object_types::uml_generalization:
+        attr = "\"uml_generalization\"";
         break;
-    case stereotypes::value:
-        attr = "\"value\"";
+    case object_types::uml_association:
+        attr = "\"uml_association\"";
         break;
-    case stereotypes::service:
-        attr = "\"service\"";
+    case object_types::uml_note:
+        attr = "\"uml_note\"";
         break;
-    case stereotypes::nongeneratable:
-        attr = "\"nongeneratable\"";
+    case object_types::uml_message:
+        attr = "\"uml_message\"";
+        break;
+    case object_types::uml_realization:
+        attr = "\"uml_realization\"";
         break;
     default:
-        throw std::invalid_argument("Invalid value for stereotypes");
+        throw std::invalid_argument("Invalid value for object_types");
     }
     s << attr << " }";
     return s;

@@ -18,17 +18,27 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_DIA_TYPES_STEREOTYPES_FWD_HPP
-#define DOGEN_DIA_TYPES_STEREOTYPES_FWD_HPP
-
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
+#include "dogen/dia_to_sml/test_data/object_types_td.hpp"
 
 namespace dogen {
-namespace dia {
+namespace dia_to_sml {
 
-enum class stereotypes : unsigned int;
+object_types_generator::object_types_generator() : position_(0) { }
+void object_types_generator::
+populate(const unsigned int position, result_type& v) {
+    v = static_cast<object_types>(position % 8);
+}
+
+object_types_generator::result_type
+object_types_generator::create(const unsigned int  position) {
+    result_type r;
+    object_types_generator::populate(position, r);
+    return r;
+}
+
+object_types_generator::result_type
+object_types_generator::operator()() {
+    return create(position_++);
+}
+
 } }
-
-#endif

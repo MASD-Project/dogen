@@ -23,9 +23,9 @@
 #include <boost/throw_exception.hpp>
 #include <boost/graph/depth_first_search.hpp>
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/dia/types/enum_parser.hpp"
-#include "dogen/dia/types/object_types.hpp"
-#include "dogen/dia/io/object_types_io.hpp"
+#include "dogen/dia_to_sml/types/enum_parser.hpp"
+#include "dogen/dia_to_sml/types/object_types.hpp"
+#include "dogen/dia_to_sml/io/object_types_io.hpp"
 #include "dogen/dia_to_sml/types/building_error.hpp"
 #include "dogen/dia_to_sml/types/graph_builder.hpp"
 
@@ -131,11 +131,11 @@ void graph_builder::ensure_built() const {
 }
 
 bool graph_builder::is_relevant(const dia::object& o) const {
-    using dia::object_types;
+    using dia_to_sml::object_types;
     object_types ot(object_types::invalid);
 
     try {
-        using dogen::dia::enum_parser;
+        using dogen::dia_to_sml::enum_parser;
         ot = enum_parser::parse_object_type(o.type());
     } catch(const std::exception& e) {
         std::ostringstream stream;

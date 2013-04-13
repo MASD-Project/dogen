@@ -18,24 +18,24 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_DIA_TEST_DATA_STEREOTYPES_TD_HPP
-#define DOGEN_DIA_TEST_DATA_STEREOTYPES_TD_HPP
+#ifndef DOGEN_DIA_TO_SML_TEST_DATA_OBJECT_TYPES_TD_HPP
+#define DOGEN_DIA_TO_SML_TEST_DATA_OBJECT_TYPES_TD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/dia/types/stereotypes.hpp"
+#include "dogen/dia_to_sml/types/object_types.hpp"
 
 namespace dogen {
-namespace dia {
+namespace dia_to_sml {
 
-class stereotypes_generator {
+class object_types_generator {
 public:
-    stereotypes_generator();
+    object_types_generator();
 
 public:
-    typedef dogen::dia::stereotypes result_type;
+    typedef dogen::dia_to_sml::object_types result_type;
 
 public:
     static void populate(const unsigned int position, result_type& v);

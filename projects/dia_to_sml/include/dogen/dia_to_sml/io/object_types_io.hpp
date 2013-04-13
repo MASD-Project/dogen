@@ -18,26 +18,21 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_DIA_HASH_STEREOTYPES_HASH_HPP
-#define DOGEN_DIA_HASH_STEREOTYPES_HASH_HPP
+#ifndef DOGEN_DIA_TO_SML_IO_OBJECT_TYPES_IO_HPP
+#define DOGEN_DIA_TO_SML_IO_OBJECT_TYPES_IO_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <functional>
-#include "dogen/dia/types/stereotypes.hpp"
+#include <iosfwd>
+#include "dogen/dia_to_sml/types/object_types.hpp"
 
-namespace std {
+namespace dogen {
+namespace dia_to_sml {
 
-template<>
-class hash<dogen::dia::stereotypes> {
-public:
-    size_t operator()(const dogen::dia::stereotypes& v) const {
-        return std::hash<unsigned int>()(static_cast<unsigned int>(v));
-    }
-};
+std::ostream& operator<<(std::ostream& s, const object_types& v);
 
-}
+} }
 
 #endif

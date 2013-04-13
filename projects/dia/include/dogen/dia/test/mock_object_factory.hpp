@@ -27,7 +27,6 @@
 
 #include <array>
 #include "dogen/dia/types/object.hpp"
-#include "dogen/dia/types/stereotypes.hpp"
 
 namespace dogen {
 namespace dia {
@@ -71,7 +70,7 @@ public:
      * @param number identifier used for object ID generation.
      */
     static object build_stereotyped_class(
-        const stereotypes st, const unsigned int number = 0);
+        const std::string& st, const unsigned int number = 0);
 
     /**
      * @brief Generates a new UML large package.

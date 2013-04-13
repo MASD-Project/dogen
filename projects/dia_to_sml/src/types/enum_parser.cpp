@@ -21,7 +21,7 @@
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/exception/invalid_enum_value.hpp"
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/dia/types/enum_parser.hpp"
+#include "dogen/dia_to_sml/types/enum_parser.hpp"
 
 using namespace dogen::utility::log;
 
@@ -49,7 +49,7 @@ const std::string nongeneratable("nongeneratable");
 }
 
 namespace dogen {
-namespace dia {
+namespace dia_to_sml {
 
 object_types enum_parser::parse_object_type(const std::string& ot) {
     if (ot == uml_large_package)

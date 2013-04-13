@@ -18,29 +18,27 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_DIA_TYPES_ENUM_PARSER_HPP
-#define DOGEN_DIA_TYPES_ENUM_PARSER_HPP
-
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
-
-#include <string>
-#include "dogen/dia/types/object_types.hpp"
-#include "dogen/dia/types/stereotypes.hpp"
+#include "dogen/dia_to_sml/test_data/stereotypes_td.hpp"
 
 namespace dogen {
-namespace dia {
+namespace dia_to_sml {
 
-/**
- * @brief Helper class that converts strings into Dia enums.
- */
-class enum_parser {
-public:
-    static object_types parse_object_type(const std::string& ot);
-    static stereotypes parse_stereotype(const std::string& st);
-};
+stereotypes_generator::stereotypes_generator() : position_(0) { }
+void stereotypes_generator::
+populate(const unsigned int position, result_type& v) {
+    v = static_cast<stereotypes>(position % 7);
+}
+
+stereotypes_generator::result_type
+stereotypes_generator::create(const unsigned int  position) {
+    result_type r;
+    stereotypes_generator::populate(position, r);
+    return r;
+}
+
+stereotypes_generator::result_type
+stereotypes_generator::operator()() {
+    return create(position_++);
+}
 
 } }
-
-#endif

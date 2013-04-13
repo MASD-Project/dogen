@@ -25,7 +25,7 @@
 #include <boost/algorithm/string/erase.hpp>
 #include <boost/graph/depth_first_search.hpp>
 #include <boost/throw_exception.hpp>
-#include "dogen/dia/types/enum_parser.hpp"
+#include "dogen/dia_to_sml/types/enum_parser.hpp"
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/dia_to_sml/types/transformation_error.hpp"
 #include "dogen/dia_to_sml/types/object_to_package.hpp"
@@ -56,10 +56,10 @@ const std::string unexpected_attribute_value_type(
  *
  * @param s string with an object type
  */
-dogen::dia::object_types parse_object_type(const std::string s) {
-    dogen::dia::object_types r;
+dogen::dia_to_sml::object_types parse_object_type(const std::string s) {
+    dogen::dia_to_sml::object_types r;
     try {
-        using dogen::dia::enum_parser;
+        using dogen::dia_to_sml::enum_parser;
         r = enum_parser::parse_object_type(s);
     } catch(const std::exception& e) {
         std::ostringstream stream;
@@ -289,7 +289,7 @@ object_to_package::object_to_package(
 }
 
 bool object_to_package::is_processable(const dia::object& o) const {
-    using dogen::dia::object_types;
+    using dogen::dia_to_sml::object_types;
     object_types ot(parse_object_type(o.type()));
     return ot == object_types::uml_large_package;
 }

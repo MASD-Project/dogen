@@ -18,15 +18,15 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_DIA_TYPES_OBJECT_TYPES_HPP
-#define DOGEN_DIA_TYPES_OBJECT_TYPES_HPP
+#ifndef DOGEN_DIA_TO_SML_TYPES_OBJECT_TYPES_HPP
+#define DOGEN_DIA_TO_SML_TYPES_OBJECT_TYPES_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 namespace dogen {
-namespace dia {
+namespace dia_to_sml {
 
 /**
  * @brief Identifier for the type of Dia object.

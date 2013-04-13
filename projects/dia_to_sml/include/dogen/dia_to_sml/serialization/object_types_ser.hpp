@@ -18,26 +18,20 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_DIA_HASH_OBJECT_TYPES_HASH_HPP
-#define DOGEN_DIA_HASH_OBJECT_TYPES_HASH_HPP
+#ifndef DOGEN_DIA_TO_SML_SERIALIZATION_OBJECT_TYPES_SER_HPP
+#define DOGEN_DIA_TO_SML_SERIALIZATION_OBJECT_TYPES_SER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <functional>
-#include "dogen/dia/types/object_types.hpp"
+#include <boost/serialization/nvp.hpp>
+#include "dogen/dia_to_sml/types/object_types.hpp"
 
-namespace std {
-
-template<>
-class hash<dogen::dia::object_types> {
-public:
-    size_t operator()(const dogen::dia::object_types& v) const {
-        return std::hash<unsigned int>()(static_cast<unsigned int>(v));
-    }
-};
-
+template<class Archive>
+void serialize(Archive& ar, dogen::dia_to_sml::object_types& v, unsigned int /*version*/){
+    using boost::serialization::make_nvp;
+    ar & make_nvp("object_types", v);
 }
 
 #endif

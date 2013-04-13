@@ -34,13 +34,13 @@
 #include <boost/algorithm/string/erase.hpp>
 #include <boost/graph/depth_first_search.hpp>
 #include "dogen/sml/hash/qname_hash.hpp"
-#include "dogen/dia/types/enum_parser.hpp"
+#include "dogen/dia_to_sml/types/enum_parser.hpp"
 #include "dogen/dia/types/composite.hpp"
 #include "dogen/dia/types/attribute.hpp"
-#include "dogen/dia/types/object_types.hpp"
-#include "dogen/dia/types/stereotypes.hpp"
-#include "dogen/dia/io/object_types_io.hpp"
-#include "dogen/dia/io/stereotypes_io.hpp"
+#include "dogen/dia_to_sml/types/object_types.hpp"
+#include "dogen/dia_to_sml/types/stereotypes.hpp"
+#include "dogen/dia_to_sml/io/object_types_io.hpp"
+#include "dogen/dia_to_sml/io/stereotypes_io.hpp"
 #include "dogen/dia/io/object_io.hpp"
 #include "dogen/dia/io/diagram_io.hpp"
 #include "dogen/utility/log/logger.hpp"
@@ -97,10 +97,10 @@ const std::string unexpected_child_node(
  *
  * @param s string with an object type
  */
-dogen::dia::object_types parse_object_type(const std::string s) {
-    dogen::dia::object_types r;
+dogen::dia_to_sml::object_types parse_object_type(const std::string s) {
+    dogen::dia_to_sml::object_types r;
     try {
-        using dogen::dia::enum_parser;
+        using dogen::dia_to_sml::enum_parser;
         r = enum_parser::parse_object_type(s);
     } catch(const std::exception& e) {
         std::ostringstream stream;
@@ -409,9 +409,9 @@ void dia_dfs_visitor::process_dia_object(const dogen::dia::object& o) {
                 continue;
             }
 
-            using dogen::dia::enum_parser;
+            using dogen::dia_to_sml::enum_parser;
             const auto st(enum_parser::parse_stereotype(v));
-            using dogen::dia::stereotypes;
+            using dogen::dia_to_sml::stereotypes;
             if (st == stereotypes::entity)
                 pod.pod_type(dogen::sml::pod_types::entity);
             else if (st == stereotypes::value)
@@ -543,7 +543,7 @@ object_to_pod::object_to_pod(const std::string& model_name,
 
 bool object_to_pod::
 is_relationship_processable(const dia::object& o) const {
-    using dia::object_types;
+    using dia_to_sml::object_types;
     const auto ot(parse_object_type(o.type()));
     return ot == object_types::uml_generalization;
 }
@@ -627,7 +627,7 @@ void object_to_pod::setup_graph() {
 }
 
 bool object_to_pod::is_processable(const dia::object& o) const {
-    using dia::object_types;
+    using dia_to_sml::object_types;
     const auto ot(parse_object_type(o.type()));
     return
         ot == object_types::uml_generalization ||
