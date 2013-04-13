@@ -28,6 +28,7 @@
 #include <memory>
 #include <boost/graph/depth_first_search.hpp>
 #include "dogen/dia/types/object.hpp"
+#include "dogen/dia_to_sml/types/graph_builder.hpp"
 #include "dogen/dia_to_sml/types/object_transformer_interface.hpp"
 
 namespace dogen {
@@ -45,8 +46,10 @@ public:
 
 public:
     template<typename Vertex, typename Graph>
-    void finish_vertex(const Vertex& u, const Graph& g) {
-        transformer_.transform(g[u]);
+    void discover_vertex(const Vertex& u, const Graph& g) {
+        const auto o(g[u]);
+        if (o.id() != graph_builder::root_id())
+            transformer_.transform(o);
     }
 
 private:

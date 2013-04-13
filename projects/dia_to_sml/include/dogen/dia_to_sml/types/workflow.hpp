@@ -26,6 +26,8 @@
 #endif
 
 #include <string>
+#include "dogen/dia_to_sml/types/graph_builder.hpp"
+#include "dogen/dia_to_sml/types/context_fwd.hpp"
 #include "dogen/dia_to_sml/types/workflow_interface.hpp"
 
 namespace dogen {
@@ -38,11 +40,19 @@ public:
     workflow(workflow&&) = default;
     virtual ~workflow() noexcept;
 
+private:
+    graph_type build_graph(const dia::diagram& diagram) const;
+    void initialise_context(const std::string& model_name,
+        const std::string& external_package_path,
+        bool is_target, context& c) const;
+    void graph_to_context(const graph_type& g, context& c) const;
+    void context_to_model(const context& c, sml::model& m) const;
+
 public:
     virtual sml::model execute(const dia::diagram& diagram,
         const std::string& model_name,
         const std::string& external_package_path,
-        bool is_target, bool verbose) override;
+        bool is_target) override;
 };
 
 } }

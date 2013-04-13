@@ -49,7 +49,7 @@ public:
     virtual sml::model execute(const dia::diagram& diagram,
         const std::string& model_name,
         const std::string& external_package_path,
-        bool is_target, bool verbose) = 0;
+        bool is_target) = 0;
 };
 
 } }

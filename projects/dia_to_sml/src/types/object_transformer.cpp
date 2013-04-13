@@ -223,8 +223,9 @@ transform_property(const dia::composite& uml_attribute) {
 }
 
 void object_transformer::transform_pod(const dia::object& o) {
-    using sml::generation_types;
+    BOOST_LOG_SEV(lg, debug) << "Object is a pod: " << o.id();
 
+    using sml::generation_types;
     sml::pod pod;
     pod.generation_type(context_.is_target() ?
         generation_types::full_generation :
@@ -434,6 +435,7 @@ transform_enumerator(const dogen::dia::composite& uml_attribute,
 }
 
 void object_transformer::transform_enumeration(const dia::object& o) {
+    BOOST_LOG_SEV(lg, debug) << "Object is an enumeration: " << o.id();
     sml::enumeration e;
 
     e.generation_type(context_.is_target() ?
@@ -498,8 +500,9 @@ void object_transformer::transform_enumeration(const dia::object& o) {
 }
 
 void object_transformer::transform_package(const dogen::dia::object& o) {
-    sml::package p;
+    BOOST_LOG_SEV(lg, debug) << "Object is a package: " << o.id();
 
+    sml::package p;
     const std::string pkg_id(o.child_node() ? o.child_node()->parent() : empty);
     for (auto a : o.attributes()) {
         if (a.name() == dia_name) {
@@ -518,6 +521,7 @@ void object_transformer::transform_package(const dogen::dia::object& o) {
 }
 
 void object_transformer::transform_exception(const dogen::dia::object& o) {
+    BOOST_LOG_SEV(lg, debug) << "Object is an exception: " << o.id();
     sml::exception e;
     e.generation_type(context_.is_target() ?
         sml::generation_types::full_generation :
@@ -539,6 +543,8 @@ void object_transformer::transform_exception(const dogen::dia::object& o) {
 }
 
 void object_transformer::transform(const dia::object& o) {
+    BOOST_LOG_SEV(lg, debug) << "Starting to transform: " << o.id();
+
     const auto ot(parse_object_types(o.type()));
     if (ot == object_types::uml_large_package) {
         transform_package(o);
@@ -548,6 +554,7 @@ void object_transformer::transform(const dia::object& o) {
     ensure_object_is_uml_class(ot);
     if (!has_stereotype(o)) {
         transform_pod(o);
+        BOOST_LOG_SEV(lg, debug) << "Transformed: " << o.id();
         return;
     }
 
@@ -567,6 +574,7 @@ void object_transformer::transform(const dia::object& o) {
             transformation_error(invalid_stereotype_in_graph +
                 boost::lexical_cast<std::string>(st)));
     }
+    BOOST_LOG_SEV(lg, debug) << "Transformed: " << o.id();
 }
 
 } }
