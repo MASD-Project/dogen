@@ -36,3 +36,5 @@
 #include "dogen/dia_to_sml/types/transformation_error.hpp"
 #include "dogen/dia_to_sml/types/transformer.hpp"
 #include "dogen/dia_to_sml/types/visitor.hpp"
+#include "dogen/dia_to_sml/types/workflow.hpp"
+#include "dogen/dia_to_sml/types/workflow_interface.hpp"
