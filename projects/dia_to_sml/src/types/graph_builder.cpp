@@ -45,8 +45,6 @@ const std::string error_not_built("Graph has not yet been built");
 const std::string error_parsing_object_type("Fail to parse object type: ");
 const std::string unexpected_number_of_connections(
     "Expected 2 connections but found: ");
-const std::string relationship_target_not_found(
-    "Relationship points to object with non-existent ID: ");
 const std::string found_cycle_in_graph("Graph has a cycle: ");
 
 }
@@ -182,20 +180,8 @@ void graph_builder::process_connections(const dia::object& o) {
     BOOST_LOG_SEV(lg, debug) << "Processing connections for object: '"
                              << o.id() << "' of type: '" << o.type() << "'";
 
-    auto lambda([&](const std::string& id) -> vertex_descriptor_type {
-            const auto i(id_to_vertex_.find(id));
-            if (i == id_to_vertex_.end()) {
-                BOOST_LOG_SEV(lg, error) << relationship_target_not_found << id;
-
-                BOOST_THROW_EXCEPTION(
-                    building_error(relationship_target_not_found + id));
-            }
-            return i->second;
-        });
-
-
-    const auto parent_vertex(lambda(parent.to()));
-    const auto child_vertex(lambda(child.to()));
+    const auto parent_vertex(vertex_for_id(parent.to()));
+    const auto child_vertex(vertex_for_id(child.to()));
     parent_ids_.insert(parent.to());
     BOOST_LOG_SEV(lg, debug) << "Connecting parent '"
                              << parent.to() << "' to child: '"
