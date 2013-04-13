@@ -11,6 +11,11 @@ This file contains all stories that haven't been assigned to a sprint.
 
 Stories that we intend to look at, at some point.
 
+*** Container details in JSON dump
+
+It would be nice to have the container type and size in the JSON
+output.
+
 *** Refactor Licence formatter
 
 - year is hard-coded to 2012: At present the licence formatter has an
