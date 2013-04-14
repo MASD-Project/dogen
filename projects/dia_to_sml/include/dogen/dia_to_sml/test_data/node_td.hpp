@@ -18,17 +18,35 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_SML_TYPES_NODE_FWD_HPP
-#define DOGEN_SML_TYPES_NODE_FWD_HPP
+#ifndef DOGEN_DIA_TO_SML_TEST_DATA_NODE_TD_HPP
+#define DOGEN_DIA_TO_SML_TEST_DATA_NODE_TD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-namespace dogen {
-namespace sml {
+#include "dogen/dia_to_sml/types/node.hpp"
 
-class node;
+namespace dogen {
+namespace dia_to_sml {
+
+class node_generator {
+public:
+    node_generator();
+
+public:
+    typedef dogen::dia_to_sml::node result_type;
+
+public:
+    static void populate(const unsigned int position, result_type& v);
+    static result_type create(const unsigned int position);
+    result_type operator()();
+
+private:
+    unsigned int position_;
+public:
+    static result_type* create_ptr(const unsigned int position);
+};
 
 } }
 

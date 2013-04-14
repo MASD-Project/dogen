@@ -26,7 +26,6 @@
 #include "dogen/sml/test_data/meta_types_td.hpp"
 #include "dogen/sml/test_data/model_td.hpp"
 #include "dogen/sml/test_data/nested_qname_td.hpp"
-#include "dogen/sml/test_data/node_td.hpp"
 #include "dogen/sml/test_data/package_td.hpp"
 #include "dogen/sml/test_data/pod_td.hpp"
 #include "dogen/sml/test_data/pod_types_td.hpp"

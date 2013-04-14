@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_SML_TYPES_NESTED_QUALIFIED_NAME_BUILDER_HPP
-#define DOGEN_SML_TYPES_NESTED_QUALIFIED_NAME_BUILDER_HPP
+#ifndef DOGEN_DIA_TO_SML_TYPES_NESTED_QUALIFIED_NAME_BUILDER_HPP
+#define DOGEN_DIA_TO_SML_TYPES_NESTED_QUALIFIED_NAME_BUILDER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -31,10 +31,10 @@
 #include <boost/shared_ptr.hpp>
 #include "dogen/sml/types/qname.hpp"
 #include "dogen/sml/types/nested_qname.hpp"
-#include "dogen/sml/types/node.hpp"
+#include "dogen/dia_to_sml/types/node.hpp"
 
 namespace dogen {
-namespace sml {
+namespace dia_to_sml {
 
 class nested_qname_builder {
 public:
@@ -53,7 +53,7 @@ public:
 
 private:
     void finish_current_node();
-    void build_node(nested_qname& qn, boost::shared_ptr<node> node);
+    void build_node(sml::nested_qname& qn, boost::shared_ptr<node> node);
 
 public:
     void add_name(const std::string& n);
@@ -61,7 +61,7 @@ public:
     void start_children();
     void next_child();
     void end_children();
-    nested_qname build();
+    sml::nested_qname build();
 
 private:
     const std::unordered_set<std::string> packages_;

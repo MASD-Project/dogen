@@ -18,22 +18,25 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_SML_IO_NODE_IO_HPP
-#define DOGEN_SML_IO_NODE_IO_HPP
+#ifndef DOGEN_DIA_TO_SML_SERIALIZATION_NODE_SER_HPP
+#define DOGEN_DIA_TO_SML_SERIALIZATION_NODE_SER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <iosfwd>
-#include "dogen/sml/types/node.hpp"
+#include <boost/serialization/split_free.hpp>
+#include "dogen/dia_to_sml/types/node.hpp"
 
-namespace dogen {
-namespace sml {
+BOOST_SERIALIZATION_SPLIT_FREE(dogen::dia_to_sml::node)
+namespace boost {
+namespace serialization {
 
-std::ostream&
-operator<<(std::ostream& s,
-     const dogen::sml::node& v);
+template<typename Archive>
+void save(Archive& ar, const dogen::dia_to_sml::node& v, unsigned int version);
+
+template<typename Archive>
+void load(Archive& ar, dogen::dia_to_sml::node& v, unsigned int version);
 
 } }
 

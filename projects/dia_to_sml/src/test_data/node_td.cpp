@@ -18,20 +18,20 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/sml/test_data/node_td.hpp"
+#include "dogen/dia_to_sml/test_data/node_td.hpp"
 #include "dogen/sml/test_data/qname_td.hpp"
 
 namespace {
 
-dogen::sml::node*
-create_dogen_sml_node_ptr(const unsigned int) {
+dogen::dia_to_sml::node*
+create_dogen_dia_to_sml_node_ptr(const unsigned int) {
     return nullptr;
 }
 
-boost::shared_ptr<dogen::sml::node>
-create_boost_shared_ptr_dogen_sml_node(unsigned int position) {
-    boost::shared_ptr<dogen::sml::node> r(
-        create_dogen_sml_node_ptr(position));
+boost::shared_ptr<dogen::dia_to_sml::node>
+create_boost_shared_ptr_dogen_dia_to_sml_node(unsigned int position) {
+    boost::shared_ptr<dogen::dia_to_sml::node> r(
+        create_dogen_dia_to_sml_node_ptr(position));
     return r;
 }
 
@@ -40,10 +40,10 @@ create_dogen_sml_qname(const unsigned int position) {
     return dogen::sml::qname_generator::create(position);
 }
 
-std::list<boost::shared_ptr<dogen::sml::node> > create_std_list_boost_shared_ptr_dogen_sml_node_(unsigned int position) {
-    std::list<boost::shared_ptr<dogen::sml::node> > r;
+std::list<boost::shared_ptr<dogen::dia_to_sml::node> > create_std_list_boost_shared_ptr_dogen_dia_to_sml_node_(unsigned int position) {
+    std::list<boost::shared_ptr<dogen::dia_to_sml::node> > r;
     for (unsigned int i(0); i < 10; ++i) {
-        r.push_back(create_boost_shared_ptr_dogen_sml_node(position + i));
+        r.push_back(create_boost_shared_ptr_dogen_dia_to_sml_node(position + i));
     }
     return r;
 }
@@ -51,15 +51,15 @@ std::list<boost::shared_ptr<dogen::sml::node> > create_std_list_boost_shared_ptr
 }
 
 namespace dogen {
-namespace sml {
+namespace dia_to_sml {
 
 node_generator::node_generator() : position_(0) { }
 
 void node_generator::
 populate(const unsigned int position, result_type& v) {
-    v.parent(create_boost_shared_ptr_dogen_sml_node(position + 0));
+    v.parent(create_boost_shared_ptr_dogen_dia_to_sml_node(position + 0));
     v.data(create_dogen_sml_qname(position + 1));
-    v.children(create_std_list_boost_shared_ptr_dogen_sml_node_(position + 2));
+    v.children(create_std_list_boost_shared_ptr_dogen_dia_to_sml_node_(position + 2));
 }
 
 node_generator::result_type

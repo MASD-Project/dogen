@@ -19,5 +19,6 @@
  *
  */
 #include "dogen/dia_to_sml/hash/context_hash.hpp"
+#include "dogen/dia_to_sml/hash/node_hash.hpp"
 #include "dogen/dia_to_sml/hash/object_types_hash.hpp"
 #include "dogen/dia_to_sml/hash/stereotypes_hash.hpp"

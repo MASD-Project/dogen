@@ -30,8 +30,6 @@
 #include "dogen/sml/types/model.hpp"
 #include "dogen/sml/types/model_source_interface.hpp"
 #include "dogen/sml/types/nested_qname.hpp"
-#include "dogen/sml/types/nested_qname_builder.hpp"
-#include "dogen/sml/types/node.hpp"
 #include "dogen/sml/types/package.hpp"
 #include "dogen/sml/types/pod.hpp"
 #include "dogen/sml/types/pod_types.hpp"

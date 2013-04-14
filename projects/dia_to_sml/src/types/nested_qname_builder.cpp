@@ -22,18 +22,18 @@
 #include "dogen/utility/io/unordered_set_io.hpp"
 #include "dogen/utility/io/list_io.hpp"
 #include "dogen/sml/io/nested_qname_io.hpp"
-#include "dogen/sml/types/nested_qname_builder.hpp"
+#include "dogen/dia_to_sml/types/nested_qname_builder.hpp"
 
 using namespace dogen::utility::log;
 
 namespace {
 
-auto lg(logger_factory("sml.nested_qname_builder"));
+auto lg(logger_factory("dia_to_sml.nested_qname_builder"));
 
 }
 
 namespace dogen {
-namespace sml {
+namespace dia_to_sml {
 
 nested_qname_builder::nested_qname_builder(
     const std::unordered_set<std::string>& packages,
@@ -66,7 +66,7 @@ void nested_qname_builder::finish_current_node() {
     BOOST_LOG_SEV(lg, debug) << "finishing current node. names: "
                              << names_;
 
-    qname qn(current_->data());
+    sml::qname qn(current_->data());
     if (names_.empty())
         return;
 
@@ -133,27 +133,27 @@ void nested_qname_builder::end_children() {
 }
 
 void nested_qname_builder::
-build_node(nested_qname& qn, boost::shared_ptr<node> node) {
+build_node(sml::nested_qname& qn, boost::shared_ptr<node> node) {
     BOOST_LOG_SEV(lg, debug) << "bulding node: "
                              << node->data().model_name()
                              << " "
                              << node->data().type_name();
 
     qn.type(node->data());
-    std::list<nested_qname> children;
+    std::list<sml::nested_qname> children;
     for (const auto c : node->children()) {
-        nested_qname cqn;
+        sml::nested_qname cqn;
         build_node(cqn, c);
         children.push_back(cqn);
     }
     qn.children(children);
 }
 
-nested_qname nested_qname_builder::build() {
+sml::nested_qname nested_qname_builder::build() {
     BOOST_LOG_SEV(lg, debug) << "started build";
 
     finish_current_node();
-    nested_qname r;
+    sml::nested_qname r;
     build_node(r, root_);
 
     BOOST_LOG_SEV(lg, debug) << "finished build. Final name: " << r;

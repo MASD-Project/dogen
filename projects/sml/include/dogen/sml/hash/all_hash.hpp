@@ -26,7 +26,6 @@
 #include "dogen/sml/hash/meta_types_hash.hpp"
 #include "dogen/sml/hash/model_hash.hpp"
 #include "dogen/sml/hash/nested_qname_hash.hpp"
-#include "dogen/sml/hash/node_hash.hpp"
 #include "dogen/sml/hash/package_hash.hpp"
 #include "dogen/sml/hash/pod_hash.hpp"
 #include "dogen/sml/hash/pod_types_hash.hpp"

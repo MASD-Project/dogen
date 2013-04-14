@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/sml/hash/node_hash.hpp"
+#include "dogen/dia_to_sml/hash/node_hash.hpp"
 #include "dogen/sml/hash/qname_hash.hpp"
 
 namespace {
@@ -30,16 +30,16 @@ inline void combine(std::size_t& seed, const HashableType& value)
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 }
 
-inline std::size_t hash_boost_shared_ptr_dogen_sml_node(const boost::shared_ptr<dogen::sml::node>& v){
+inline std::size_t hash_boost_shared_ptr_dogen_dia_to_sml_node(const boost::shared_ptr<dogen::dia_to_sml::node>& v){
     std::size_t seed(0);
     combine(seed, *v);
     return seed;
 }
 
-inline std::size_t hash_std_list_boost_shared_ptr_dogen_sml_node_(const std::list<boost::shared_ptr<dogen::sml::node> >& v){
+inline std::size_t hash_std_list_boost_shared_ptr_dogen_dia_to_sml_node_(const std::list<boost::shared_ptr<dogen::dia_to_sml::node> >& v){
     std::size_t seed(0);
     for (const auto i : v) {
-        combine(seed, hash_boost_shared_ptr_dogen_sml_node(i));
+        combine(seed, hash_boost_shared_ptr_dogen_dia_to_sml_node(i));
     }
     return seed;
 }
@@ -47,14 +47,14 @@ inline std::size_t hash_std_list_boost_shared_ptr_dogen_sml_node_(const std::lis
 }
 
 namespace dogen {
-namespace sml {
+namespace dia_to_sml {
 
 std::size_t node_hasher::hash(const node&v) {
     std::size_t seed(0);
 
-    combine(seed, hash_boost_shared_ptr_dogen_sml_node(v.parent()));
+    combine(seed, hash_boost_shared_ptr_dogen_dia_to_sml_node(v.parent()));
     combine(seed, v.data());
-    combine(seed, hash_std_list_boost_shared_ptr_dogen_sml_node_(v.children()));
+    combine(seed, hash_std_list_boost_shared_ptr_dogen_dia_to_sml_node_(v.children()));
 
     return seed;
 }

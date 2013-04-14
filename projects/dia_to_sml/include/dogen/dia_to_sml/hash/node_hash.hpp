@@ -18,18 +18,18 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_SML_HASH_NODE_HASH_HPP
-#define DOGEN_SML_HASH_NODE_HASH_HPP
+#ifndef DOGEN_DIA_TO_SML_HASH_NODE_HASH_HPP
+#define DOGEN_DIA_TO_SML_HASH_NODE_HASH_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <functional>
-#include "dogen/sml/types/node.hpp"
+#include "dogen/dia_to_sml/types/node.hpp"
 
 namespace dogen {
-namespace sml {
+namespace dia_to_sml {
 
 class node_hasher {
 public:
@@ -41,10 +41,10 @@ public:
 namespace std {
 
 template<>
-class hash<dogen::sml::node> {
+class hash<dogen::dia_to_sml::node> {
 public:
-    size_t operator()(const dogen::sml::node& v) const {
-        return dogen::sml::node_hasher::hash(v);
+    size_t operator()(const dogen::dia_to_sml::node& v) const {
+        return dogen::dia_to_sml::node_hasher::hash(v);
     }
 };
 

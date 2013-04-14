@@ -18,24 +18,24 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/sml/types/node.hpp"
+#include "dogen/dia_to_sml/types/node.hpp"
 
 namespace boost {
 
-inline bool operator==(const boost::shared_ptr<dogen::sml::node>& lhs,
-const boost::shared_ptr<dogen::sml::node>& rhs) {
+inline bool operator==(const boost::shared_ptr<dogen::dia_to_sml::node>& lhs,
+const boost::shared_ptr<dogen::dia_to_sml::node>& rhs) {
     return (!lhs && !rhs) ||(lhs && rhs && (*lhs == *rhs));
 }
 
 }
 
 namespace dogen {
-namespace sml {
+namespace dia_to_sml {
 
 node::node(
-    const boost::shared_ptr<dogen::sml::node>& parent,
+    const boost::shared_ptr<dogen::dia_to_sml::node>& parent,
     const dogen::sml::qname& data,
-    const std::list<boost::shared_ptr<dogen::sml::node> >& children)
+    const std::list<boost::shared_ptr<dogen::dia_to_sml::node> >& children)
     : parent_(parent),
       data_(data),
       children_(children) { }
@@ -59,19 +59,19 @@ node& node::operator=(node other) {
     return *this;
 }
 
-const boost::shared_ptr<dogen::sml::node>& node::parent() const {
+const boost::shared_ptr<dogen::dia_to_sml::node>& node::parent() const {
     return parent_;
 }
 
-boost::shared_ptr<dogen::sml::node>& node::parent() {
+boost::shared_ptr<dogen::dia_to_sml::node>& node::parent() {
     return parent_;
 }
 
-void node::parent(const boost::shared_ptr<dogen::sml::node>& v) {
+void node::parent(const boost::shared_ptr<dogen::dia_to_sml::node>& v) {
     parent_ = v;
 }
 
-void node::parent(const boost::shared_ptr<dogen::sml::node>&& v) {
+void node::parent(const boost::shared_ptr<dogen::dia_to_sml::node>&& v) {
     parent_ = std::move(v);
 }
 
@@ -91,19 +91,19 @@ void node::data(const dogen::sml::qname&& v) {
     data_ = std::move(v);
 }
 
-const std::list<boost::shared_ptr<dogen::sml::node> >& node::children() const {
+const std::list<boost::shared_ptr<dogen::dia_to_sml::node> >& node::children() const {
     return children_;
 }
 
-std::list<boost::shared_ptr<dogen::sml::node> >& node::children() {
+std::list<boost::shared_ptr<dogen::dia_to_sml::node> >& node::children() {
     return children_;
 }
 
-void node::children(const std::list<boost::shared_ptr<dogen::sml::node> >& v) {
+void node::children(const std::list<boost::shared_ptr<dogen::dia_to_sml::node> >& v) {
     children_ = v;
 }
 
-void node::children(const std::list<boost::shared_ptr<dogen::sml::node> >&& v) {
+void node::children(const std::list<boost::shared_ptr<dogen::dia_to_sml::node> >&& v) {
     children_ = std::move(v);
 }
 

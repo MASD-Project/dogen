@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_SML_TYPES_NODE_HPP
-#define DOGEN_SML_TYPES_NODE_HPP
+#ifndef DOGEN_DIA_TO_SML_TYPES_NODE_HPP
+#define DOGEN_DIA_TO_SML_TYPES_NODE_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -28,12 +28,12 @@
 #include <algorithm>
 #include <boost/shared_ptr.hpp>
 #include <list>
-#include "dogen/sml/serialization/node_fwd_ser.hpp"
-#include "dogen/sml/types/node_fwd.hpp"
+#include "dogen/dia_to_sml/serialization/node_fwd_ser.hpp"
+#include "dogen/dia_to_sml/types/node_fwd.hpp"
 #include "dogen/sml/types/qname.hpp"
 
 namespace dogen {
-namespace sml {
+namespace dia_to_sml {
 
 class node final {
 public:
@@ -44,9 +44,9 @@ public:
 
 public:
     node(
-        const boost::shared_ptr<dogen::sml::node>& parent,
+        const boost::shared_ptr<dogen::dia_to_sml::node>& parent,
         const dogen::sml::qname& data,
-        const std::list<boost::shared_ptr<dogen::sml::node> >& children);
+        const std::list<boost::shared_ptr<dogen::dia_to_sml::node> >& children);
 
 private:
     template<typename Archive>
@@ -56,20 +56,20 @@ private:
     friend void boost::serialization::load(Archive& ar, node& v, unsigned int version);
 
 public:
-    const boost::shared_ptr<dogen::sml::node>& parent() const;
-    boost::shared_ptr<dogen::sml::node>& parent();
-    void parent(const boost::shared_ptr<dogen::sml::node>& v);
-    void parent(const boost::shared_ptr<dogen::sml::node>&& v);
+    const boost::shared_ptr<dogen::dia_to_sml::node>& parent() const;
+    boost::shared_ptr<dogen::dia_to_sml::node>& parent();
+    void parent(const boost::shared_ptr<dogen::dia_to_sml::node>& v);
+    void parent(const boost::shared_ptr<dogen::dia_to_sml::node>&& v);
 
     const dogen::sml::qname& data() const;
     dogen::sml::qname& data();
     void data(const dogen::sml::qname& v);
     void data(const dogen::sml::qname&& v);
 
-    const std::list<boost::shared_ptr<dogen::sml::node> >& children() const;
-    std::list<boost::shared_ptr<dogen::sml::node> >& children();
-    void children(const std::list<boost::shared_ptr<dogen::sml::node> >& v);
-    void children(const std::list<boost::shared_ptr<dogen::sml::node> >&& v);
+    const std::list<boost::shared_ptr<dogen::dia_to_sml::node> >& children() const;
+    std::list<boost::shared_ptr<dogen::dia_to_sml::node> >& children();
+    void children(const std::list<boost::shared_ptr<dogen::dia_to_sml::node> >& v);
+    void children(const std::list<boost::shared_ptr<dogen::dia_to_sml::node> >&& v);
 
 public:
     bool operator==(const node& rhs) const;
@@ -82,9 +82,9 @@ public:
     node& operator=(node other);
 
 private:
-    boost::shared_ptr<dogen::sml::node> parent_;
+    boost::shared_ptr<dogen::dia_to_sml::node> parent_;
     dogen::sml::qname data_;
-    std::list<boost::shared_ptr<dogen::sml::node> > children_;
+    std::list<boost::shared_ptr<dogen::dia_to_sml::node> > children_;
 };
 
 } }
@@ -93,8 +93,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::sml::node& lhs,
-    dogen::sml::node& rhs) {
+    dogen::dia_to_sml::node& lhs,
+    dogen::dia_to_sml::node& rhs) {
     lhs.swap(rhs);
 }
 

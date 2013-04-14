@@ -26,7 +26,6 @@
 #include "dogen/sml/io/meta_types_io.hpp"
 #include "dogen/sml/io/model_io.hpp"
 #include "dogen/sml/io/nested_qname_io.hpp"
-#include "dogen/sml/io/node_io.hpp"
 #include "dogen/sml/io/package_io.hpp"
 #include "dogen/sml/io/pod_io.hpp"
 #include "dogen/sml/io/pod_types_io.hpp"

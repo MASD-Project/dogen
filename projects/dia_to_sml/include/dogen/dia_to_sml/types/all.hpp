@@ -24,6 +24,8 @@
 #include "dogen/dia_to_sml/types/enum_parser.hpp"
 #include "dogen/dia_to_sml/types/graph_builder.hpp"
 #include "dogen/dia_to_sml/types/identifier_parser.hpp"
+#include "dogen/dia_to_sml/types/nested_qname_builder.hpp"
+#include "dogen/dia_to_sml/types/node.hpp"
 #include "dogen/dia_to_sml/types/object_to_enumeration.hpp"
 #include "dogen/dia_to_sml/types/object_to_exception.hpp"
 #include "dogen/dia_to_sml/types/object_to_package.hpp"

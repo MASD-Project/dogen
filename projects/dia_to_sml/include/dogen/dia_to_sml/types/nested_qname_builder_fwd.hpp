@@ -18,23 +18,17 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_SML_SERIALIZATION_NODE_FWD_SER_HPP
-#define DOGEN_SML_SERIALIZATION_NODE_FWD_SER_HPP
+#ifndef DOGEN_DIA_TO_SML_TYPES_NESTED_QNAME_BUILDER_FWD_HPP
+#define DOGEN_DIA_TO_SML_TYPES_NESTED_QNAME_BUILDER_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/sml/types/node_fwd.hpp"
+namespace dogen {
+namespace dia_to_sml {
 
-namespace boost {
-namespace serialization {
-
-template<class Archive>
-void save(Archive& ar, const dogen::sml::node& v, unsigned int version);
-
-template<class Archive>
-void load(Archive& ar, dogen::sml::node& v, unsigned int version);
+class nested_qname_builder;
 
 } }
 

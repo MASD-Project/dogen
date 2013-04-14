@@ -29,7 +29,7 @@
 #include <boost/serialization/list.hpp>
 #include <boost/serialization/nvp.hpp>
 #include <boost/serialization/shared_ptr.hpp>
-#include "dogen/sml/serialization/node_ser.hpp"
+#include "dogen/dia_to_sml/serialization/node_ser.hpp"
 #include "dogen/sml/serialization/qname_ser.hpp"
 
 #ifdef __linux__
@@ -42,7 +42,7 @@ namespace serialization {
 
 template<typename Archive>
 void save(Archive& ar,
-    const dogen::sml::node& v,
+    const dogen::dia_to_sml::node& v,
     const unsigned int /*version*/) {
     ar << make_nvp("parent", v.parent_);
     ar << make_nvp("data", v.data_);
@@ -51,7 +51,7 @@ void save(Archive& ar,
 
 template<typename Archive>
 void load(Archive& ar,
-    dogen::sml::node& v,
+    dogen::dia_to_sml::node& v,
     const unsigned int /*version*/) {
     ar >> make_nvp("parent", v.parent_);
     ar >> make_nvp("data", v.data_);
@@ -63,21 +63,21 @@ void load(Archive& ar,
 namespace boost {
 namespace serialization {
 
-template void save(archive::polymorphic_oarchive& ar, const dogen::sml::node& v, unsigned int version);
-template void load(archive::polymorphic_iarchive& ar, dogen::sml::node& v, unsigned int version);
+template void save(archive::polymorphic_oarchive& ar, const dogen::dia_to_sml::node& v, unsigned int version);
+template void load(archive::polymorphic_iarchive& ar, dogen::dia_to_sml::node& v, unsigned int version);
 
-template void save(archive::text_oarchive& ar, const dogen::sml::node& v, unsigned int version);
-template void load(archive::text_iarchive& ar, dogen::sml::node& v, unsigned int version);
+template void save(archive::text_oarchive& ar, const dogen::dia_to_sml::node& v, unsigned int version);
+template void load(archive::text_iarchive& ar, dogen::dia_to_sml::node& v, unsigned int version);
 
-template void save(archive::binary_oarchive& ar, const dogen::sml::node& v, unsigned int version);
-template void load(archive::binary_iarchive& ar, dogen::sml::node& v, unsigned int version);
+template void save(archive::binary_oarchive& ar, const dogen::dia_to_sml::node& v, unsigned int version);
+template void load(archive::binary_iarchive& ar, dogen::dia_to_sml::node& v, unsigned int version);
 
-template void save(archive::xml_oarchive& ar, const dogen::sml::node& v, unsigned int version);
-template void load(archive::xml_iarchive& ar, dogen::sml::node& v, unsigned int version);
+template void save(archive::xml_oarchive& ar, const dogen::dia_to_sml::node& v, unsigned int version);
+template void load(archive::xml_iarchive& ar, dogen::dia_to_sml::node& v, unsigned int version);
 
 #ifdef __linux__
-template void save(eos::portable_oarchive& ar, const dogen::sml::node& v, unsigned int version);
-template void load(eos::portable_iarchive& ar, dogen::sml::node& v, unsigned int version);
+template void save(eos::portable_oarchive& ar, const dogen::dia_to_sml::node& v, unsigned int version);
+template void load(eos::portable_iarchive& ar, dogen::dia_to_sml::node& v, unsigned int version);
 #endif
 
 } }

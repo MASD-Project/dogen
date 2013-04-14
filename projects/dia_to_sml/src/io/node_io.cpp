@@ -19,12 +19,12 @@
  *
  */
 #include <ostream>
-#include "dogen/sml/io/node_io.hpp"
+#include "dogen/dia_to_sml/io/node_io.hpp"
 #include "dogen/sml/io/qname_io.hpp"
 
 namespace boost {
 
-inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<dogen::sml::node>& v) {
+inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<dogen::dia_to_sml::node>& v) {
     s << "{ " << "\"__type__\": " << "\"boost::shared_ptr\"" << ", "
       << "\"memory\": " << "\"" << static_cast<void*>(v.get()) << "\"" << ", ";
 
@@ -40,7 +40,7 @@ inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<dogen::
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::list<boost::shared_ptr<dogen::sml::node> >& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::list<boost::shared_ptr<dogen::dia_to_sml::node> >& v) {
     s << "[ ";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -53,11 +53,11 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<boost::shared_p
 }
 
 namespace dogen {
-namespace sml {
+namespace dia_to_sml {
 
 std::ostream& operator<<(std::ostream& s, const node& v) {
     s << " { "
-      << "\"__type__\": " << "\"dogen::sml::node\"" << ", "
+      << "\"__type__\": " << "\"dogen::dia_to_sml::node\"" << ", "
       << "\"parent\": " << v.parent() << ", "
       << "\"data\": " << v.data() << ", "
       << "\"children\": " << v.children()

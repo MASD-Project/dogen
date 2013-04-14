@@ -31,7 +31,7 @@
 #include <boost/spirit/repository/include/qi_distinct.hpp>
 #include <boost/throw_exception.hpp>
 #include "dogen/dia_to_sml/types/parsing_error.hpp"
-#include "dogen/sml/types/nested_qname_builder.hpp"
+#include "dogen/dia_to_sml/types/nested_qname_builder.hpp"
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/dia_to_sml/types/identifier_parser.hpp"
 
@@ -45,7 +45,7 @@ const char* delimiter = "::";
 const std::string error_msg("Failed to parse string: ");
 using namespace boost::spirit;
 
-using dogen::sml::nested_qname_builder;
+using dogen::dia_to_sml::nested_qname_builder;
 
 namespace distinct {
 
