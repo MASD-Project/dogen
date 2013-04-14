@@ -19,7 +19,7 @@
  *
  */
 #define BOOST_TEST_DYN_LINK
-#define BOOST_TEST_MODULE generator_spec
+#define BOOST_TEST_MODULE engine_spec
 #include <iostream>
 #include <boost/test/included/unit_test.hpp>
 #include <boost/test/unit_test_monitor.hpp>

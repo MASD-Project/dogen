@@ -155,4 +155,20 @@ BOOST_AUTO_TEST_CASE(std_model_dia_transforms_into_expected_sml) {
     BOOST_CHECK(test_transformer(input_path, expected_path, actual_path));
 }
 
+BOOST_AUTO_TEST_CASE(boost_model_dia_transforms_into_expected_sml) {
+    SETUP_TEST_LOG("boost_model_dia_transforms_into_expected_sml");
+    const auto input_path(dia_sml::expected_boost_model_dia_xml());
+    const auto actual_path(dia_sml::actual_boost_model_sml_xml());
+    const auto expected_path(dia_sml::expected_boost_model_sml_xml());
+    BOOST_CHECK(test_transformer(input_path, expected_path, actual_path));
+}
+
+BOOST_AUTO_TEST_CASE(comments_dia_transforms_into_expected_sml) {
+    SETUP_TEST_LOG("comments_dia_transforms_into_expected_sml");
+    const auto input_path(dia_sml::expected_comments_dia_xml());
+    const auto actual_path(dia_sml::actual_comments_sml_xml());
+    const auto expected_path(dia_sml::expected_comments_sml_xml());
+    BOOST_CHECK(test_transformer(input_path, expected_path, actual_path));
+}
+
 BOOST_AUTO_TEST_SUITE_END()

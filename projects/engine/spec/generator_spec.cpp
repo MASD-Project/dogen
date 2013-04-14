@@ -51,7 +51,7 @@ namespace  {
 
 const std::string empty;
 const std::string empty_package_path;
-const std::string test_module("generator");
+const std::string test_module("engine");
 const std::string test_suite("generator_spec");
 const std::string package_path("dogen");
 const std::string package_path_disabled_model_package("dogen::dmp");

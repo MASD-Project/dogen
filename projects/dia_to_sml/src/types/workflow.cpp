@@ -80,6 +80,7 @@ void workflow::context_to_model(const context& c, sml::model& m) const {
     m.exceptions(c.exceptions());
     m.is_system(false);
     m.name(c.model_name());
+    m.external_package_path(c.external_package_path());
 
     for (auto& pair : m.pods()) {
         auto j(c.leaves().find(pair.first));

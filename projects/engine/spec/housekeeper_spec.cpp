@@ -29,7 +29,7 @@
 namespace  {
 
 const std::string test_suite("housekeeper_spec");
-const std::string test_module("generator");
+const std::string test_module("engine");
 const std::string hk_tds_expected("housekeeper/expected");
 const std::string hk_tds_actual_f1("housekeeper/actual/file_1.txt");
 const std::string hk_tds_actual_f2("housekeeper/actual/file_2.txt");

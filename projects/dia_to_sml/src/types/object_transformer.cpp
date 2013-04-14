@@ -375,6 +375,7 @@ void object_transformer::transform(const processed_object& o) {
     case stereotypes::value:
     case stereotypes::entity:
     case stereotypes::service:
+    case stereotypes::nongeneratable:
         transform_pod(o); break;
     case stereotypes::enumeration:
         transform_enumeration(o); break;
