@@ -38,8 +38,8 @@ namespace dia_to_sml {
 
 template<typename Archive>
 void register_types(Archive& ar) {
-    sml::register_types(ar);
     dia::register_types(ar);
+    sml::register_types(ar);
 }
 
 template void register_types(boost::archive::polymorphic_oarchive& ar);

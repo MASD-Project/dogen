@@ -164,6 +164,7 @@ add_custom_target(codegen_${target}
     --cpp-disable-cmakelists
     --ignore-files-matching-regex .*/CMakeLists.txt
     --ignore-files-matching-regex .*/spec/.*
+    --ignore-files-matching-regex .*/test/.*
     -v -d -p dogen)
-#add_dependencies(codegen_${target} driver)
+add_dependencies(codegen_${target} driver)
 add_dependencies(codegen codegen_${target})

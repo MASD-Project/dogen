@@ -25,7 +25,6 @@
 #include <boost/algorithm/string/trim.hpp>
 #include <boost/algorithm/string/erase.hpp>
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/dia_to_sml/types/enum_parser.hpp"
 #include "dogen/dia_to_sml/types/transformation_error.hpp"
 #include "dogen/dia_to_sml/io/stereotypes_io.hpp"
 #include "dogen/dia_to_sml/io/object_types_io.hpp"
