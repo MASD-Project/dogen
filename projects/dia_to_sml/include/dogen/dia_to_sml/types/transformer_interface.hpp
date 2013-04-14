@@ -18,11 +18,35 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/dia_to_sml/types/object_transformer_interface.hpp"
+#ifndef DOGEN_DIA_TO_SML_TYPES_TRANSFORMER_INTERFACE_HPP
+#define DOGEN_DIA_TO_SML_TYPES_TRANSFORMER_INTERFACE_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include "dogen/dia_to_sml/types/processed_object_fwd.hpp"
 
 namespace dogen {
 namespace dia_to_sml {
 
-object_transformer_interface::~object_transformer_interface() noexcept { }
+/**
+ * @brief Transforms dia objects
+ */
+class transformer_interface {
+public:
+    transformer_interface() = default;
+    transformer_interface(const transformer_interface&) = delete;
+    transformer_interface(transformer_interface&&) = default;
+    virtual ~transformer_interface() noexcept = 0;
+
+public:
+    /**
+     * @brief Transform a dia object.
+     */
+    virtual void transform(const processed_object& o) = 0;
+};
 
 } }
+
+#endif

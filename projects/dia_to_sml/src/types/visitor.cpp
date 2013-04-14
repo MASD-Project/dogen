@@ -23,7 +23,7 @@
 namespace dogen {
 namespace dia_to_sml {
 
-visitor::visitor(object_transformer_interface& transformer)
+visitor::visitor(transformer_interface& transformer)
   : transformer_(transformer) { }
 
 } }

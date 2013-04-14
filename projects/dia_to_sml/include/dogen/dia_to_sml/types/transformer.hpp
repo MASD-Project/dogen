@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_DIA_TO_SML_TYPES_OBJECT_TRANSFORMER_HPP
-#define DOGEN_DIA_TO_SML_TYPES_OBJECT_TRANSFORMER_HPP
+#ifndef DOGEN_DIA_TO_SML_TYPES_TRANSFORMER_HPP
+#define DOGEN_DIA_TO_SML_TYPES_TRANSFORMER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -42,7 +42,7 @@
 #include "dogen/dia_to_sml/types/comments_parser.hpp"
 #include "dogen/dia_to_sml/types/object_types.hpp"
 #include "dogen/dia_to_sml/types/context.hpp"
-#include "dogen/dia_to_sml/types/object_transformer_interface.hpp"
+#include "dogen/dia_to_sml/types/transformer_interface.hpp"
 
 namespace dogen {
 namespace dia_to_sml {
@@ -50,14 +50,14 @@ namespace dia_to_sml {
 /**
  * @brief Transforms dia objects
  */
-class object_transformer : public object_transformer_interface {
+class transformer : public transformer_interface {
 public:
-    object_transformer(const object_transformer&) = delete;
-    object_transformer(object_transformer&&) = default;
+    transformer(const transformer&) = delete;
+    transformer(transformer&&) = default;
 
 public:
-    explicit object_transformer(context& c);
-    virtual ~object_transformer() noexcept;
+    explicit transformer(context& c);
+    virtual ~transformer() noexcept;
 
 private:
     /**

@@ -18,18 +18,11 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_DIA_TO_SML_TYPES_OBJECT_TRANSFORMER_FWD_HPP
-#define DOGEN_DIA_TO_SML_TYPES_OBJECT_TRANSFORMER_FWD_HPP
-
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
+#include "dogen/dia_to_sml/types/transformer_interface.hpp"
 
 namespace dogen {
 namespace dia_to_sml {
 
-class object_transformer;
+transformer_interface::~transformer_interface() noexcept { }
 
 } }
-
-#endif

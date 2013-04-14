@@ -29,7 +29,7 @@
 #include <boost/graph/depth_first_search.hpp>
 #include "dogen/dia/types/object.hpp"
 #include "dogen/dia_to_sml/types/graph_builder.hpp"
-#include "dogen/dia_to_sml/types/object_transformer_interface.hpp"
+#include "dogen/dia_to_sml/types/transformer_interface.hpp"
 
 namespace dogen {
 namespace dia_to_sml {
@@ -42,7 +42,7 @@ public:
     visitor(visitor&&) = default;
 
 public:
-    explicit visitor(object_transformer_interface& transformer);
+    explicit visitor(transformer_interface& transformer);
 
 public:
     template<typename Vertex, typename Graph>
@@ -53,7 +53,7 @@ public:
     }
 
 private:
-    object_transformer_interface& transformer_;
+    transformer_interface& transformer_;
 };
 
 } }

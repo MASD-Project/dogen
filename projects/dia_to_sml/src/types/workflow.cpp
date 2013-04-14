@@ -24,9 +24,9 @@
 #include "dogen/dia_to_sml/types/graph_builder.hpp"
 #include "dogen/dia_to_sml/types/context.hpp"
 #include "dogen/dia_to_sml/types/visitor.hpp"
-#include "dogen/dia_to_sml/types/object_transformer.hpp"
+#include "dogen/dia_to_sml/types/transformer.hpp"
 #include "dogen/dia_to_sml/types/identifier_parser.hpp"
-#include "dogen/dia_to_sml/types/object_processor.hpp"
+#include "dogen/dia_to_sml/types/processor.hpp"
 #include "dogen/dia_to_sml/types/workflow.hpp"
 
 namespace dogen {
@@ -37,7 +37,7 @@ workflow::~workflow() noexcept { }
 graph_type workflow::
 build_graph(const dia::diagram& diagram, context& c) const {
     graph_builder b;
-    object_processor p;
+    processor p;
     for (const auto& l : diagram.layers()) {
         for (const auto& o : l.objects()) {
             const auto po(p.process(o));
@@ -62,7 +62,7 @@ void workflow::initialise_context(const std::string& model_name,
 }
 
 void workflow::graph_to_context(const graph_type& g, context& c) const {
-    object_transformer t(c);
+    transformer t(c);
     visitor v(t);
     boost::depth_first_search(g, boost::visitor(v));
 }

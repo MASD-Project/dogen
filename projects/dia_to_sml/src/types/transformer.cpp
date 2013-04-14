@@ -31,12 +31,12 @@
 #include "dogen/sml/types/enumeration.hpp"
 #include "dogen/sml/types/exception.hpp"
 #include "dogen/dia_to_sml/types/processed_object.hpp"
-#include "dogen/dia_to_sml/types/object_transformer.hpp"
+#include "dogen/dia_to_sml/types/transformer.hpp"
 
 namespace {
 
 using namespace dogen::utility::log;
-static logger lg(logger_factory("dia_to_sml.object_transformer"));
+static logger lg(logger_factory("dia_to_sml.transformer"));
 
 const std::string empty;
 const std::string empty_dia_object_name("Dia object name is empty");
@@ -55,16 +55,16 @@ const std::string invalid_stereotype_in_graph("Invalid stereotype: ");
 namespace dogen {
 namespace dia_to_sml {
 
-object_transformer::object_transformer(context& c)
+transformer::transformer(context& c)
     : context_(c),
       identifier_parser_(
           new identifier_parser(c.top_level_package_names(),
               c.external_package_path(), c.model_name())),
       comments_parser_(new comments_parser()) { }
 
-object_transformer::~object_transformer() noexcept { }
+transformer::~transformer() noexcept { }
 
-void object_transformer::
+void transformer::
 compute_model_dependencies(const sml::nested_qname& nqn) {
     // primitives model is empty
     const auto mn(nqn.type().model_name());
@@ -75,7 +75,7 @@ compute_model_dependencies(const sml::nested_qname& nqn) {
         compute_model_dependencies(c);
 }
 
-sml::qname object_transformer::transform_qname(const std::string& n,
+sml::qname transformer::transform_qname(const std::string& n,
     sml::meta_types meta_type, const std::string& pkg_id) const {
 
     if (n.empty()) {
@@ -108,7 +108,7 @@ sml::qname object_transformer::transform_qname(const std::string& n,
     return name;
 }
 
-sml::property object_transformer::
+sml::property transformer::
 transform_property(const processed_property& p) {
     sml::property r;
     typedef boost::shared_ptr<dia::attribute> attribute_ptr;
@@ -139,7 +139,7 @@ transform_property(const processed_property& p) {
     return r;
 }
 
-void object_transformer::transform_pod(const processed_object& o) {
+void transformer::transform_pod(const processed_object& o) {
     BOOST_LOG_SEV(lg, debug) << "Object is a pod: " << o.id();
 
     using sml::generation_types;
@@ -262,7 +262,7 @@ void object_transformer::transform_pod(const processed_object& o) {
     context_.pods().insert(std::make_pair(pod.name(), pod));
 }
 
-void object_transformer::
+void transformer::
 ensure_object_is_uml_class(const object_types ot) const {
     if (ot == object_types::uml_class)
         return;
@@ -273,7 +273,7 @@ ensure_object_is_uml_class(const object_types ot) const {
             boost::lexical_cast<std::string>(ot)));
 }
 
-sml::enumerator object_transformer::
+sml::enumerator transformer::
 transform_enumerator(const processed_property& p,
     const unsigned int position) const {
 
@@ -289,7 +289,7 @@ transform_enumerator(const processed_property& p,
     return r;
 }
 
-void object_transformer::transform_enumeration(const processed_object& o) {
+void transformer::transform_enumeration(const processed_object& o) {
     BOOST_LOG_SEV(lg, debug) << "Object is an enumeration: " << o.id();
     sml::enumeration e;
 
@@ -327,7 +327,7 @@ void object_transformer::transform_enumeration(const processed_object& o) {
     context_.enumerations().insert(std::make_pair(e.name(), e));
 }
 
-void object_transformer::transform_package(const processed_object& o) {
+void transformer::transform_package(const processed_object& o) {
     BOOST_LOG_SEV(lg, debug) << "Object is a package: " << o.id();
 
     sml::package p;
@@ -345,7 +345,7 @@ void object_transformer::transform_package(const processed_object& o) {
     context_.packages().insert(std::make_pair(p.name(), p));
 }
 
-void object_transformer::transform_exception(const processed_object& o) {
+void transformer::transform_exception(const processed_object& o) {
     BOOST_LOG_SEV(lg, debug) << "Object is an exception: " << o.id();
 
     sml::exception e;
@@ -360,7 +360,7 @@ void object_transformer::transform_exception(const processed_object& o) {
     context_.exceptions().insert(std::make_pair(e.name(), e));
 }
 
-void object_transformer::transform(const processed_object& o) {
+void transformer::transform(const processed_object& o) {
     BOOST_LOG_SEV(lg, debug) << "Starting to transform: " << o.id();
 
     if (o.object_type() == object_types::uml_large_package) {

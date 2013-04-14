@@ -27,13 +27,13 @@
 #include "dogen/dia/types/attribute.hpp"
 #include "dogen/dia/types/composite.hpp"
 #include "dogen/dia_to_sml/types/processing_error.hpp"
-#include "dogen/dia_to_sml/types/object_processor.hpp"
+#include "dogen/dia_to_sml/types/processor.hpp"
 #include "dogen/dia_to_sml/types/processed_object.hpp"
 
 namespace {
 
 using namespace dogen::utility::log;
-static logger lg(logger_factory("dia_to_sml.object_processor"));
+static logger lg(logger_factory("dia_to_sml.processor"));
 
 const std::string dia_string("string");
 const std::string dia_name("name");
@@ -104,7 +104,7 @@ namespace dogen {
 namespace dia_to_sml {
 
 object_types
-object_processor::parse_object_type(const std::string& ot) const {
+processor::parse_object_type(const std::string& ot) const {
     if (ot == uml_large_package)
         return object_types::uml_large_package;
 
@@ -130,7 +130,7 @@ object_processor::parse_object_type(const std::string& ot) const {
     BOOST_THROW_EXCEPTION(processing_error(invalid_object_type + ot));
 }
 
-stereotypes object_processor::
+stereotypes processor::
 parse_stereotype(const std::string& st) const {
     if (st.empty())
         return stereotypes::no_stereotype;
@@ -157,7 +157,7 @@ parse_stereotype(const std::string& st) const {
     BOOST_THROW_EXCEPTION(processing_error(invalid_stereotype + st));
 }
 
-std::string object_processor::
+std::string processor::
 parse_string_attribute(const dia::attribute& a) const {
     const auto values(a.values());
     if (values.size() != 1) {
@@ -177,7 +177,7 @@ parse_string_attribute(const dia::attribute& a) const {
     return name;
 }
 
-processed_object object_processor::process(const dia::object& o) {
+processed_object processor::process(const dia::object& o) {
     processed_object r;
     r.id(o.id());
     r.object_type(parse_object_type(o.type()));

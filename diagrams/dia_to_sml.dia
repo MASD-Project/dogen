@@ -1463,7 +1463,7 @@ into its SML representation.#</dia:string>
             <dia:string>#transformer_#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#object_transformer_interface#</dia:string>
+            <dia:string>#transformer_interface#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -1690,7 +1690,7 @@ into its SML representation.#</dia:string>
         <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#object_transformer_interface#</dia:string>
+        <dia:string>#transformer_interface#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#service#</dia:string>
@@ -1849,7 +1849,7 @@ into its SML representation.#</dia:string>
         <dia:real val="13"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#object_transformer#</dia:string>
+        <dia:string>#transformer#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#service#</dia:string>
@@ -6714,7 +6714,7 @@ finds.#</dia:string>
         <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#object_processor#</dia:string>
+        <dia:string>#processor#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#service#</dia:string>
