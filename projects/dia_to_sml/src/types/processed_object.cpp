@@ -27,43 +27,82 @@ processed_object::processed_object()
     : object_type_(static_cast<dogen::dia_to_sml::object_types>(0)),
       stereotype_(static_cast<dogen::dia_to_sml::stereotypes>(0)) { }
 
+processed_object::processed_object(processed_object&& rhs)
+    : id_(std::move(rhs.id_)),
+      name_(std::move(rhs.name_)),
+      object_type_(std::move(rhs.object_type_)),
+      stereotype_(std::move(rhs.stereotype_)),
+      comment_(std::move(rhs.comment_)),
+      uml_attributes_(std::move(rhs.uml_attributes_)),
+      child_node_id_(std::move(rhs.child_node_id_)),
+      connection_(std::move(rhs.connection_)),
+      properties_(std::move(rhs.properties_)) { }
+
 processed_object::processed_object(
+    const std::string& id,
     const std::string& name,
     const dogen::dia_to_sml::object_types& object_type,
     const dogen::dia_to_sml::stereotypes& stereotype,
     const std::string& comment,
     const std::vector<dogen::dia::composite>& uml_attributes,
-    const std::string& parent_id)
-    : name_(name),
+    const std::string& child_node_id,
+    const boost::optional<std::pair<std::string, std::string> >& connection,
+    const std::vector<dogen::dia_to_sml::processed_property>& properties)
+    : id_(id),
+      name_(name),
       object_type_(object_type),
       stereotype_(stereotype),
       comment_(comment),
       uml_attributes_(uml_attributes),
-      parent_id_(parent_id) { }
+      child_node_id_(child_node_id),
+      connection_(connection),
+      properties_(properties) { }
 
 void processed_object::swap(processed_object& other) noexcept {
     using std::swap;
+    swap(id_, other.id_);
     swap(name_, other.name_);
     swap(object_type_, other.object_type_);
     swap(stereotype_, other.stereotype_);
     swap(comment_, other.comment_);
     swap(uml_attributes_, other.uml_attributes_);
-    swap(parent_id_, other.parent_id_);
+    swap(child_node_id_, other.child_node_id_);
+    swap(connection_, other.connection_);
+    swap(properties_, other.properties_);
 }
 
 bool processed_object::operator==(const processed_object& rhs) const {
-    return name_ == rhs.name_ &&
+    return id_ == rhs.id_ &&
+        name_ == rhs.name_ &&
         object_type_ == rhs.object_type_ &&
         stereotype_ == rhs.stereotype_ &&
         comment_ == rhs.comment_ &&
         uml_attributes_ == rhs.uml_attributes_ &&
-        parent_id_ == rhs.parent_id_;
+        child_node_id_ == rhs.child_node_id_ &&
+        connection_ == rhs.connection_ &&
+        properties_ == rhs.properties_;
 }
 
 processed_object& processed_object::operator=(processed_object other) {
     using std::swap;
     swap(*this, other);
     return *this;
+}
+
+const std::string& processed_object::id() const {
+    return id_;
+}
+
+std::string& processed_object::id() {
+    return id_;
+}
+
+void processed_object::id(const std::string& v) {
+    id_ = v;
+}
+
+void processed_object::id(const std::string&& v) {
+    id_ = std::move(v);
 }
 
 const std::string& processed_object::name() const {
@@ -130,20 +169,52 @@ void processed_object::uml_attributes(const std::vector<dogen::dia::composite>&&
     uml_attributes_ = std::move(v);
 }
 
-const std::string& processed_object::parent_id() const {
-    return parent_id_;
+const std::string& processed_object::child_node_id() const {
+    return child_node_id_;
 }
 
-std::string& processed_object::parent_id() {
-    return parent_id_;
+std::string& processed_object::child_node_id() {
+    return child_node_id_;
 }
 
-void processed_object::parent_id(const std::string& v) {
-    parent_id_ = v;
+void processed_object::child_node_id(const std::string& v) {
+    child_node_id_ = v;
 }
 
-void processed_object::parent_id(const std::string&& v) {
-    parent_id_ = std::move(v);
+void processed_object::child_node_id(const std::string&& v) {
+    child_node_id_ = std::move(v);
+}
+
+const boost::optional<std::pair<std::string, std::string> >& processed_object::connection() const {
+    return connection_;
+}
+
+boost::optional<std::pair<std::string, std::string> >& processed_object::connection() {
+    return connection_;
+}
+
+void processed_object::connection(const boost::optional<std::pair<std::string, std::string> >& v) {
+    connection_ = v;
+}
+
+void processed_object::connection(const boost::optional<std::pair<std::string, std::string> >&& v) {
+    connection_ = std::move(v);
+}
+
+const std::vector<dogen::dia_to_sml::processed_property>& processed_object::properties() const {
+    return properties_;
+}
+
+std::vector<dogen::dia_to_sml::processed_property>& processed_object::properties() {
+    return properties_;
+}
+
+void processed_object::properties(const std::vector<dogen::dia_to_sml::processed_property>& v) {
+    properties_ = v;
+}
+
+void processed_object::properties(const std::vector<dogen::dia_to_sml::processed_property>&& v) {
+    properties_ = std::move(v);
 }
 
 } }

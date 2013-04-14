@@ -21,6 +21,7 @@
 #include "dogen/dia/hash/composite_hash.hpp"
 #include "dogen/dia_to_sml/hash/object_types_hash.hpp"
 #include "dogen/dia_to_sml/hash/processed_object_hash.hpp"
+#include "dogen/dia_to_sml/hash/processed_property_hash.hpp"
 #include "dogen/dia_to_sml/hash/stereotypes_hash.hpp"
 
 namespace {
@@ -40,6 +41,32 @@ inline std::size_t hash_std_vector_dogen_dia_composite(const std::vector<dogen::
     return seed;
 }
 
+inline std::size_t hash_std_pair_std_string_std_string(const std::pair<std::string, std::string>& v){
+    std::size_t seed(0);
+
+    combine(seed, v.first);
+    combine(seed, v.second);
+    return seed;
+}
+
+inline std::size_t hash_boost_optional_std_pair_std_string_std_string_(const boost::optional<std::pair<std::string, std::string> >& v){
+    std::size_t seed(0);
+
+    if (!v)
+        return seed;
+
+    combine(seed, hash_std_pair_std_string_std_string(*v));
+    return seed;
+}
+
+inline std::size_t hash_std_vector_dogen_dia_to_sml_processed_property(const std::vector<dogen::dia_to_sml::processed_property>& v){
+    std::size_t seed(0);
+    for (const auto i : v) {
+        combine(seed, i);
+    }
+    return seed;
+}
+
 }
 
 namespace dogen {
@@ -48,12 +75,15 @@ namespace dia_to_sml {
 std::size_t processed_object_hasher::hash(const processed_object&v) {
     std::size_t seed(0);
 
+    combine(seed, v.id());
     combine(seed, v.name());
     combine(seed, v.object_type());
     combine(seed, v.stereotype());
     combine(seed, v.comment());
     combine(seed, hash_std_vector_dogen_dia_composite(v.uml_attributes()));
-    combine(seed, v.parent_id());
+    combine(seed, v.child_node_id());
+    combine(seed, hash_boost_optional_std_pair_std_string_std_string_(v.connection()));
+    combine(seed, hash_std_vector_dogen_dia_to_sml_processed_property(v.properties()));
 
     return seed;
 }

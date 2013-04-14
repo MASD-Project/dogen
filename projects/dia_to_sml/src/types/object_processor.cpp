@@ -78,6 +78,8 @@ const std::string invalid_type_string(
     "String provided with type did not parse into SML qnames: ");
 const std::string object_has_invalid_type("Invalid dia type: ");
 const std::string invalid_stereotype_in_graph("Invalid stereotype: ");
+const std::string unexpected_number_of_connections(
+    "Expected 2 connections but found: ");
 
 template<typename AttributeValue, typename Variant>
 AttributeValue
@@ -130,6 +132,9 @@ object_processor::parse_object_type(const std::string& ot) const {
 
 stereotypes object_processor::
 parse_stereotype(const std::string& st) const {
+    if (st.empty())
+        return stereotypes::no_stereotype;
+
     if (st == enumeration)
         return stereotypes::enumeration;
 
@@ -174,8 +179,30 @@ parse_string_attribute(const dia::attribute& a) const {
 
 processed_object object_processor::process(const dia::object& o) {
     processed_object r;
+    r.id(o.id());
     r.object_type(parse_object_type(o.type()));
 
+    if (o.child_node())
+        r.child_node_id(o.child_node()->parent());
+
+    if (!o.connections().empty()) {
+        const auto s(o.connections().size());
+        if (s != 2) {
+            const auto size(boost::lexical_cast<std::string>(s));
+            BOOST_LOG_SEV(lg, error) << unexpected_number_of_connections << s;
+            BOOST_THROW_EXCEPTION(
+                processing_error(unexpected_number_of_connections + size));
+        }
+
+        BOOST_LOG_SEV(lg, debug) << "Processing connections for object: '"
+                                 << o.id() << "' of type: '" << o.type() << "'";
+
+        const auto parent(o.connections().front());
+        const auto child(o.connections().back());
+        r.connection(std::make_pair(parent.to(), child.to()));
+    }
+
+    r.stereotype(stereotypes::no_stereotype);
     for (auto a : o.attributes()) {
         if (a.name() == dia_name)
             r.name(parse_string_attribute(a));
@@ -186,7 +213,8 @@ processed_object object_processor::process(const dia::object& o) {
         else if (a.name() == dia_attributes) {
             const auto& values(a.values());
             if (values.empty()) {
-                BOOST_LOG_SEV(lg, debug) << "Attribute is empty.";
+                BOOST_LOG_SEV(lg, debug) << "Object " << o.id()
+                                         << " has no UML attributes.";
                 continue;
             }
 
@@ -204,11 +232,23 @@ processed_object object_processor::process(const dia::object& o) {
                 BOOST_LOG_SEV(lg, debug) << "Found composite of type "
                                          << c.type();
 
-                r.uml_attributes().push_back(c);
+                processed_property p;
+                typedef boost::shared_ptr<dia::attribute> attribute_ptr;
+                for (const auto a : c.value()) {
+                    if (a->name() == dia_name)
+                        p.name(parse_string_attribute(*a));
+                    else if (a->name() == dia_type)
+                        p.type(parse_string_attribute(*a));
+                    else if (a->name() == dia_comment)
+                        p.comment(parse_string_attribute(*a));
+                    else
+                        BOOST_LOG_SEV(lg, warn) << "Ignoring attribute: "
+                                                << a->name();
+                }
+                r.properties().push_back(p);
             }
         }
     }
-
     return r;
 }
 

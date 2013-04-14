@@ -26,11 +26,14 @@
 #endif
 
 #include <algorithm>
+#include <boost/optional.hpp>
 #include <string>
+#include <utility>
 #include <vector>
 #include "dogen/dia/types/composite.hpp"
 #include "dogen/dia_to_sml/serialization/processed_object_fwd_ser.hpp"
 #include "dogen/dia_to_sml/types/object_types.hpp"
+#include "dogen/dia_to_sml/types/processed_property.hpp"
 #include "dogen/dia_to_sml/types/stereotypes.hpp"
 
 namespace dogen {
@@ -39,20 +42,25 @@ namespace dia_to_sml {
 class processed_object final {
 public:
     processed_object(const processed_object&) = default;
-    processed_object(processed_object&&) = default;
     ~processed_object() = default;
 
 public:
     processed_object();
 
 public:
+    processed_object(processed_object&& rhs);
+
+public:
     processed_object(
+        const std::string& id,
         const std::string& name,
         const dogen::dia_to_sml::object_types& object_type,
         const dogen::dia_to_sml::stereotypes& stereotype,
         const std::string& comment,
         const std::vector<dogen::dia::composite>& uml_attributes,
-        const std::string& parent_id);
+        const std::string& child_node_id,
+        const boost::optional<std::pair<std::string, std::string> >& connection,
+        const std::vector<dogen::dia_to_sml::processed_property>& properties);
 
 private:
     template<typename Archive>
@@ -62,6 +70,11 @@ private:
     friend void boost::serialization::load(Archive& ar, processed_object& v, unsigned int version);
 
 public:
+    const std::string& id() const;
+    std::string& id();
+    void id(const std::string& v);
+    void id(const std::string&& v);
+
     const std::string& name() const;
     std::string& name();
     void name(const std::string& v);
@@ -83,10 +96,20 @@ public:
     void uml_attributes(const std::vector<dogen::dia::composite>& v);
     void uml_attributes(const std::vector<dogen::dia::composite>&& v);
 
-    const std::string& parent_id() const;
-    std::string& parent_id();
-    void parent_id(const std::string& v);
-    void parent_id(const std::string&& v);
+    const std::string& child_node_id() const;
+    std::string& child_node_id();
+    void child_node_id(const std::string& v);
+    void child_node_id(const std::string&& v);
+
+    const boost::optional<std::pair<std::string, std::string> >& connection() const;
+    boost::optional<std::pair<std::string, std::string> >& connection();
+    void connection(const boost::optional<std::pair<std::string, std::string> >& v);
+    void connection(const boost::optional<std::pair<std::string, std::string> >&& v);
+
+    const std::vector<dogen::dia_to_sml::processed_property>& properties() const;
+    std::vector<dogen::dia_to_sml::processed_property>& properties();
+    void properties(const std::vector<dogen::dia_to_sml::processed_property>& v);
+    void properties(const std::vector<dogen::dia_to_sml::processed_property>&& v);
 
 public:
     bool operator==(const processed_object& rhs) const;
@@ -99,12 +122,15 @@ public:
     processed_object& operator=(processed_object other);
 
 private:
+    std::string id_;
     std::string name_;
     dogen::dia_to_sml::object_types object_type_;
     dogen::dia_to_sml::stereotypes stereotype_;
     std::string comment_;
     std::vector<dogen::dia::composite> uml_attributes_;
-    std::string parent_id_;
+    std::string child_node_id_;
+    boost::optional<std::pair<std::string, std::string> > connection_;
+    std::vector<dogen::dia_to_sml::processed_property> properties_;
 };
 
 } }

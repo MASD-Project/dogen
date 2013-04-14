@@ -23,6 +23,7 @@
 #include "dogen/dia/io/composite_io.hpp"
 #include "dogen/dia_to_sml/io/object_types_io.hpp"
 #include "dogen/dia_to_sml/io/processed_object_io.hpp"
+#include "dogen/dia_to_sml/io/processed_property_io.hpp"
 #include "dogen/dia_to_sml/io/stereotypes_io.hpp"
 
 
@@ -47,18 +48,63 @@ inline std::ostream& operator<<(std::ostream& s, const std::vector<dogen::dia::c
 
 }
 
+namespace std {
+
+inline std::ostream& operator<<(std::ostream& s, const std::pair<std::string, std::string>& v) {
+    s << "{ " << "\"__type__\": " << "\"std::pair\"" << ", ";
+
+    s << "\"first\": " << "\"" << tidy_up_string(v.first) << "\"" << ", ";
+    s << "\"second\": " << "\"" << tidy_up_string(v.second) << "\"";
+    s << " }";
+    return s;
+}
+
+}
+
+namespace boost {
+
+inline std::ostream& operator<<(std::ostream& s, const boost::optional<std::pair<std::string, std::string> >& v) {
+    s << "{ " << "\"__type__\": " << "\"boost::optional\"" << ", ";
+
+    if (v)
+        s << "\"data\": " << *v;
+    else
+        s << "\"data\": ""\"<empty>\"";
+    s<< " }";
+    return s;
+}
+
+}
+
+namespace std {
+
+inline std::ostream& operator<<(std::ostream& s, const std::vector<dogen::dia_to_sml::processed_property>& v) {
+    s << "[ ";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << *i;
+    }
+    s << "] ";
+    return s;
+}
+
+}
+
 namespace dogen {
 namespace dia_to_sml {
 
 std::ostream& operator<<(std::ostream& s, const processed_object& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::dia_to_sml::processed_object\"" << ", "
+      << "\"id\": " << "\"" << tidy_up_string(v.id()) << "\"" << ", "
       << "\"name\": " << "\"" << tidy_up_string(v.name()) << "\"" << ", "
       << "\"object_type\": " << v.object_type() << ", "
       << "\"stereotype\": " << v.stereotype() << ", "
       << "\"comment\": " << "\"" << tidy_up_string(v.comment()) << "\"" << ", "
       << "\"uml_attributes\": " << v.uml_attributes() << ", "
-      << "\"parent_id\": " << "\"" << tidy_up_string(v.parent_id()) << "\""
+      << "\"child_node_id\": " << "\"" << tidy_up_string(v.child_node_id()) << "\"" << ", "
+      << "\"connection\": " << v.connection() << ", "
+      << "\"properties\": " << v.properties()
       << " }";
     return(s);
 }

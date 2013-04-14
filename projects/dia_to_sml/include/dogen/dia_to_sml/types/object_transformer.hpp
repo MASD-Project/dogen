@@ -36,9 +36,10 @@
 #include "dogen/dia_to_sml/types/stereotypes.hpp"
 #include "dogen/sml/types/meta_types.hpp"
 #include "dogen/sml/types/enumerator.hpp"
+#include "dogen/dia_to_sml/types/processed_object.hpp"
+#include "dogen/dia_to_sml/types/processed_property.hpp"
 #include "dogen/dia_to_sml/types/identifier_parser.hpp"
 #include "dogen/dia_to_sml/types/comments_parser.hpp"
-#include "dogen/dia/types/object_fwd.hpp"
 #include "dogen/dia_to_sml/types/object_types.hpp"
 #include "dogen/dia_to_sml/types/context.hpp"
 #include "dogen/dia_to_sml/types/object_transformer_interface.hpp"
@@ -60,29 +61,15 @@ public:
 
 private:
     /**
-     * @brief Given a dia object type as a string, returns the
-     * appropriate enumeration for it.
-     */
-    object_types parse_object_types(const std::string type) const;
-
-    /**
      * @brief Compute all the model dependencies implied by a given
      * nested qname
      */
     void compute_model_dependencies(const sml::nested_qname& nqn);
 
     /**
-     * @brief Parses a Dia string attribute, removing any invalid formatting.
-     */
-    std::string
-    transform_string_attribute(const dia::attribute& attribute) const;
-
-    /**
      * @brief Converts the Dia attribute into a qname.
-     *
-     * @param attribute Name Dia attribute.
      */
-    sml::qname transform_qname(const dia::attribute& attribute,
+    sml::qname transform_qname(const std::string& n,
         sml::meta_types meta_type, const std::string& pkg_id) const;
 
     /**
@@ -91,12 +78,12 @@ private:
      *
      * @param uml_attribute the Dia UML attribute
      */
-    sml::property transform_property(const dia::composite& uml_attribute);
+    sml::property transform_property(const processed_property& p);
 
     /**
      * @brief Transforms the attribute into a SML enumerator.
      */
-    sml::enumerator transform_enumerator(const dia::composite& uml_attribute,
+    sml::enumerator transform_enumerator(const processed_property& p,
         const unsigned int position) const;
 
     /**
@@ -105,30 +92,18 @@ private:
     void ensure_object_is_uml_class(const object_types ot) const;
 
     /**
-     * @brief Returns true if the object has a stereotype, false
-     * otherwise.
-     */
-    bool has_stereotype(const dia::object& o) const;
-
-    /**
-     * @brief Returns the stereotype for the object, if one
-     * exists. Otherwise returns the invalid stereotype.
-     */
-    stereotypes stereotype_for_object(const dia::object& o) const;
-
-    /**
      * @brief Converts a object containing a class into an pod.
      *
      * @param o the Dia UML class
      */
-    void transform_pod(const dia::object& o);
+    void transform_pod(const processed_object& o);
 
     /**
      * @brief Converts a object containing a class into an enumeration.
      *
      * @param o the Dia UML class
      */
-    void transform_enumeration(const dia::object& o);
+    void transform_enumeration(const processed_object& o);
 
     /**
      * @brief Converts a dia object of type large UML package into a
@@ -136,7 +111,7 @@ private:
      *
      * @param o Dia object which contains a UML package.
      */
-    void transform_package(const dogen::dia::object& o);
+    void transform_package(const processed_object& o);
 
     /**
      * @brief Converts a dia object with a stereotype of exception
@@ -144,10 +119,10 @@ private:
      *
      * @param o Dia object which contains an exception.
      */
-    void transform_exception(const dogen::dia::object& o);
+    void transform_exception(const processed_object& o);
 
 public:
-    virtual void transform(const dia::object& o) override;
+    virtual void transform(const processed_object& o) override;
 
 private:
     context& context_;

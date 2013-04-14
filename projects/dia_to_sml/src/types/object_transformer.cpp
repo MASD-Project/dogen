@@ -31,6 +31,7 @@
 #include "dogen/dia_to_sml/io/object_types_io.hpp"
 #include "dogen/sml/types/enumeration.hpp"
 #include "dogen/sml/types/exception.hpp"
+#include "dogen/dia_to_sml/types/processed_object.hpp"
 #include "dogen/dia_to_sml/types/object_transformer.hpp"
 
 namespace {
@@ -39,52 +40,16 @@ using namespace dogen::utility::log;
 static logger lg(logger_factory("dia_to_sml.object_transformer"));
 
 const std::string empty;
-const std::string dia_string("string");
-const std::string dia_name("name");
-const std::string dia_type("type");
-const std::string dia_comment("comment");
-const std::string dia_stereotype("stereotype");
-const std::string dia_attributes("attributes");
-const std::string dia_composite("composite");
-const std::string dia_uml_attribute("umlattribute");
-const std::string hash_character("#");
-
-const std::string error_parsing_object_type("Fail to parse object type: ");
 const std::string empty_dia_object_name("Dia object name is empty");
 const std::string original_parent_not_found("Pod has no original parent: ");
-const std::string uml_attribute_expected("UML atttribute expected");
 const std::string parent_not_found("Object has a parent but its not defined: ");
 const std::string missing_package_for_id("Missing package for dia object ID: ");
-const std::string error_parsing_stereotype("Fail to parse stereotype: ");
-const std::string name_attribute_expected(
-    "Could not find name attribute. ID: ");
 const std::string type_attribute_expected(
     "Could not find type attribute. ID: ");
-const std::string unexpected_attribute_value_type(
-    "Did not find expected attribute value type: ");
-const std::string unexpected_attribute_value_size(
-    "Unexpected attribute value size: ");
 const std::string invalid_type_string(
     "String provided with type did not parse into SML qnames: ");
 const std::string object_has_invalid_type("Invalid dia type: ");
 const std::string invalid_stereotype_in_graph("Invalid stereotype: ");
-
-template<typename AttributeValue, typename Variant>
-AttributeValue
-attribute_value(const Variant& v, const std::string& desc) {
-
-    AttributeValue r;
-    try {
-        r = boost::get<AttributeValue>(v);
-    } catch (const boost::bad_get&) {
-        BOOST_LOG_SEV(lg, error) << unexpected_attribute_value_type << desc;
-
-        using dogen::dia_to_sml::transformation_error;
-        BOOST_THROW_EXCEPTION(
-            transformation_error(unexpected_attribute_value_type + desc));
-    }
-    return r;
-}
 
 }
 
@@ -100,23 +65,6 @@ object_transformer::object_transformer(context& c)
 
 object_transformer::~object_transformer() noexcept { }
 
-object_types
-object_transformer::parse_object_types(const std::string type) const {
-   object_types r(object_types::invalid);
-
-    try {
-        r = enum_parser::parse_object_type(type);
-    } catch(const std::exception& e) {
-        std::ostringstream s;
-        s << error_parsing_object_type << "'" << type
-          << "'. Error: " << e.what();
-
-        BOOST_LOG_SEV(lg, error) << s.str();
-        BOOST_THROW_EXCEPTION(transformation_error(s.str()));
-    }
-    return r;
-}
-
 void object_transformer::
 compute_model_dependencies(const sml::nested_qname& nqn) {
     // primitives model is empty
@@ -128,32 +76,12 @@ compute_model_dependencies(const sml::nested_qname& nqn) {
         compute_model_dependencies(c);
 }
 
-std::string object_transformer::
-transform_string_attribute(const dia::attribute& a) const {
-    const auto values(a.values());
-    if (values.size() != 1) {
-        BOOST_LOG_SEV(lg, error) << "Expected attribute to have one"
-                                 << " value but found " << values.size();
-        BOOST_THROW_EXCEPTION(
-            transformation_error(unexpected_attribute_value_size +
-                boost::lexical_cast<std::string>(values.size())));
-    }
-
-    using dia::string;
-    const auto v(attribute_value<string>(values.front(), dia_string));
-    std::string name(v.value());
-    boost::erase_first(name, hash_character);
-    boost::erase_last(name, hash_character);
-    boost::trim(name);
-    return name;
-}
-
-sml::qname object_transformer::transform_qname(const dogen::dia::attribute& a,
+sml::qname object_transformer::transform_qname(const std::string& n,
     sml::meta_types meta_type, const std::string& pkg_id) const {
 
-    if (a.name() != dia_name) {
-        BOOST_LOG_SEV(lg, error) << name_attribute_expected;
-        BOOST_THROW_EXCEPTION(transformation_error(name_attribute_expected));
+    if (n.empty()) {
+        BOOST_LOG_SEV(lg, error) << empty_dia_object_name;
+        BOOST_THROW_EXCEPTION(transformation_error(empty_dia_object_name));
     }
 
     sml::qname name;
@@ -173,7 +101,7 @@ sml::qname object_transformer::transform_qname(const dogen::dia::attribute& a,
         name.package_path(pp);
     }
 
-    name.type_name(transform_string_attribute(a));
+    name.type_name(n);
     if (name.type_name().empty()) {
         BOOST_LOG_SEV(lg, error) << empty_dia_object_name;
         BOOST_THROW_EXCEPTION(transformation_error(empty_dia_object_name));
@@ -182,47 +110,37 @@ sml::qname object_transformer::transform_qname(const dogen::dia::attribute& a,
 }
 
 sml::property object_transformer::
-transform_property(const dia::composite& uml_attribute) {
-    sml::property property;
+transform_property(const processed_property& p) {
+    sml::property r;
     typedef boost::shared_ptr<dia::attribute> attribute_ptr;
 
-    for (const attribute_ptr a : uml_attribute.value()) {
-        if (a->name() == dia_name)
-            property.name(transform_string_attribute(*a));
-        else if (a->name() == dia_type) {
-            const std::string s(transform_string_attribute(*a));
-            auto nested_name(identifier_parser_->parse_qname(s));
-            if (nested_name.type().type_name().empty()) {
-                BOOST_LOG_SEV(lg, error) << invalid_type_string << s;
-                BOOST_THROW_EXCEPTION(
-                    transformation_error(invalid_type_string + s));
-            }
-            property.type_name(nested_name);
-            compute_model_dependencies(nested_name);
-        } else if (a->name() == dia_comment) {
-            const std::string comment(transform_string_attribute(*a));
-            const auto r(comments_parser_->parse(comment));
-            property.documentation(r.first);
-            property.implementation_specific_parameters(r.second);
-        } else {
-            BOOST_LOG_SEV(lg, warn) << "Ignoring unexpected attribute: "
-                                    << a->name();
-        }
+    r.name(p.name());
+    auto nested_name(identifier_parser_->parse_qname(p.type()));
+    if (nested_name.type().type_name().empty()) {
+        BOOST_LOG_SEV(lg, error) << invalid_type_string << p.type();
+        BOOST_THROW_EXCEPTION(
+            transformation_error(invalid_type_string + p.type()));
+    }
+    r.type_name(nested_name);
+    compute_model_dependencies(nested_name);
+
+    const auto pair(comments_parser_->parse(p.comment()));
+    r.documentation(pair.first);
+    r.implementation_specific_parameters(pair.second);
+
+    if (r.name().empty()) {
+        BOOST_LOG_SEV(lg, error) << empty_dia_object_name;
+        BOOST_THROW_EXCEPTION(transformation_error(empty_dia_object_name));
     }
 
-    if (property.name().empty()) {
-        BOOST_LOG_SEV(lg, error) << "Could not find a name attribute.";
-        BOOST_THROW_EXCEPTION(transformation_error(name_attribute_expected));
-    }
-
-    if (property.type_name().type().type_name().empty()) {
+    if (r.type_name().type().type_name().empty()) {
         BOOST_LOG_SEV(lg, error) << "Could not find a type attribute.";
         BOOST_THROW_EXCEPTION(transformation_error(type_attribute_expected));
     }
-    return property;
+    return r;
 }
 
-void object_transformer::transform_pod(const dia::object& o) {
+void object_transformer::transform_pod(const processed_object& o) {
     BOOST_LOG_SEV(lg, debug) << "Object is a pod: " << o.id();
 
     using sml::generation_types;
@@ -232,74 +150,48 @@ void object_transformer::transform_pod(const dia::object& o) {
         generation_types::no_generation);
 
     pod.category_type(sml::category_types::user_defined);
-    for (auto a : o.attributes()) {
-        BOOST_LOG_SEV(lg, debug) << "Found attribute: " << a.name();
 
-        if (a.name() == dia_name) {
-            const std::string pkg_id(o.child_node() ?
-                o.child_node()->parent() : empty);
-            using sml::meta_types;
-            pod.name(transform_qname(a, meta_types::pod, pkg_id));
-        } else if (a.name() == dia_stereotype) {
-            const auto v(transform_string_attribute(a));
+    const std::string pkg_id(o.child_node_id());
+    using sml::meta_types;
+    pod.name(transform_qname(o.name(), meta_types::pod, pkg_id));
 
-            if (v.empty()) {
-                pod.pod_type(sml::pod_types::value);
-                continue;
-            }
-
-            const auto st(enum_parser::parse_stereotype(v));
-            if (st == stereotypes::entity)
-                pod.pod_type(sml::pod_types::entity);
-            else if (st == stereotypes::value)
-                pod.pod_type(sml::pod_types::value);
-            else if (st == stereotypes::nongeneratable) {
-                pod.pod_type(sml::pod_types::value);
-                if (context_.is_target())
-                    pod.generation_type(generation_types::partial_generation);
-            } else if (st == stereotypes::service) {
-                pod.pod_type(sml::pod_types::service);
-                if (context_.is_target())
-                    pod.generation_type(generation_types::partial_generation);
-            } else
-                pod.pod_type(sml::pod_types::value);
-        } else if (a.name() == dia_comment) {
-            const std::string comment(transform_string_attribute(a));
-            const auto r(comments_parser_->parse(comment));
-            pod.documentation(r.first);
-            pod.implementation_specific_parameters(r.second);
-        } else if (a.name() == dia_attributes) {
-            const auto values(a.values());
-
-            if (values.empty()) {
-                BOOST_LOG_SEV(lg, debug) << "Attribute is empty.";
-                continue;
-            }
-
-            std::vector<sml::property> properties;
-            for (auto v : values) {
-                using dia::composite;
-                const auto c(attribute_value<composite>(v, dia_composite));
-
-                if (c.type() != dia_uml_attribute) {
-                    BOOST_LOG_SEV(lg, error) << "Expected composite type "
-                                             << " to be " << dia_uml_attribute
-                                             << "but was " << c.type();
-                    BOOST_THROW_EXCEPTION(
-                        transformation_error(uml_attribute_expected));
-                }
-                BOOST_LOG_SEV(lg, debug) << "Found composite of type "
-                                         << c.type();
-                properties.push_back(transform_property(c));
-            }
-            pod.properties(properties);
-        }
+    switch(o.stereotype()) {
+        case stereotypes::no_stereotype:
+            pod.pod_type(sml::pod_types::value);
+            break;
+    case stereotypes::entity:
+        pod.pod_type(sml::pod_types::entity);
+        break;
+    case stereotypes::value:
+        pod.pod_type(sml::pod_types::value);
+        break;
+    case stereotypes::nongeneratable:
+        pod.pod_type(sml::pod_types::value);
+        if (context_.is_target())
+            pod.generation_type(generation_types::partial_generation);
+        break;
+    case stereotypes::service:
+        pod.pod_type(sml::pod_types::service);
+        if (context_.is_target())
+            pod.generation_type(generation_types::partial_generation);
+        break;
+    default:
+        // FIXME
+        pod.pod_type(sml::pod_types::value);
+        break;
     }
 
+    const auto pair(comments_parser_->parse(o.comment()));
+    pod.documentation(pair.first);
+    pod.implementation_specific_parameters(pair.second);
+
+    for (const auto& p : o.properties())
+        pod.properties().push_back(transform_property(p));
+
     if (pod.name().type_name().empty()) {
-        BOOST_LOG_SEV(lg, error) << name_attribute_expected + o.id();
+        BOOST_LOG_SEV(lg, error) << empty_dia_object_name + o.id();
         BOOST_THROW_EXCEPTION(
-            transformation_error(name_attribute_expected + o.id()));
+            transformation_error(empty_dia_object_name + o.id()));
     }
 
     const auto i(context_.child_to_parent().find(o.id()));
@@ -382,66 +274,23 @@ ensure_object_is_uml_class(const object_types ot) const {
             boost::lexical_cast<std::string>(ot)));
 }
 
-bool object_transformer::has_stereotype(const dia::object& o) const {
-    for (const auto& a : o.attributes()) {
-        if (a.name() == dia_stereotype) {
-            const std::string s(transform_string_attribute(a));
-            return !s.empty();
-        }
-    }
-    return false;
-}
-
-stereotypes
-object_transformer::stereotype_for_object(const dia::object& o) const {
-    stereotypes r(stereotypes::invalid);
-    for (const auto& a : o.attributes()) {
-        if (a.name() != dia_stereotype)
-            continue;
-
-        const std::string s(transform_string_attribute(a));
-        if (s.empty())
-            return r;
-
-        try {
-            r = enum_parser::parse_stereotype(s);
-        } catch(const std::exception& e) {
-            std::ostringstream stream;
-            stream << error_parsing_stereotype << "'" << s
-                   << "'. Error: " << e.what();
-            BOOST_LOG_SEV(lg, error) << stream.str();
-            BOOST_THROW_EXCEPTION(transformation_error(stream.str()));
-        }
-        break;
-    }
-    return r;
-}
-
 sml::enumerator object_transformer::
-transform_enumerator(const dogen::dia::composite& uml_attribute,
+transform_enumerator(const processed_property& p,
     const unsigned int position) const {
-    dogen::sml::enumerator r;
-    for (const auto a : uml_attribute.value()) {
-        if (a->name() == dia_name) {
-            r.name(transform_string_attribute(*a));
-        } else if (a->name() == dia_comment) {
-            const std::string doc(transform_string_attribute(*a));
-            r.documentation(doc);
-        } else {
-            BOOST_LOG_SEV(lg, warn) << "Ignoring unexpected attribute: "
-                                    << a->name();
-        }
-    }
-    r.value(boost::lexical_cast<std::string>(position));
-    if (r.name().empty()) {
-        BOOST_LOG_SEV(lg, error) << "Could not find a name attribute.";
-        BOOST_THROW_EXCEPTION(transformation_error(name_attribute_expected));
-    }
 
+    dogen::sml::enumerator r;
+    r.name(p.name());
+    r.documentation(p.comment());
+    r.value(boost::lexical_cast<std::string>(position));
+
+    if (r.name().empty()) {
+        BOOST_LOG_SEV(lg, error) << empty_dia_object_name;
+        BOOST_THROW_EXCEPTION(transformation_error(empty_dia_object_name));
+    }
     return r;
 }
 
-void object_transformer::transform_enumeration(const dia::object& o) {
+void object_transformer::transform_enumeration(const processed_object& o) {
     BOOST_LOG_SEV(lg, debug) << "Object is an enumeration: " << o.id();
     sml::enumeration e;
 
@@ -449,124 +298,80 @@ void object_transformer::transform_enumeration(const dia::object& o) {
         sml::generation_types::full_generation :
         sml::generation_types::no_generation);
 
-    for (auto a : o.attributes()) {
-        BOOST_LOG_SEV(lg, debug) << "Found attribute: " << a.name();
-        if (a.name() == dia_name) {
-            const std::string pkg_id(o.child_node() ?
-                o.child_node()->parent() : empty);
-            using sml::meta_types;
-            e.name(transform_qname(a, meta_types::enumeration, pkg_id));
-        } else if (a.name() == dia_comment) {
-            const std::string doc(transform_string_attribute(a));
-            e.documentation(doc);
-        } if (a.name() == dia_attributes) {
-            const auto values(a.values());
+    const std::string pkg_id(o.child_node_id());
+    using sml::meta_types;
+    e.name(transform_qname(o.name(), meta_types::enumeration, pkg_id));
+    e.documentation(o.comment());
 
-            if (values.empty()) {
-                BOOST_LOG_SEV(lg, debug) << "Attribute is empty.";
-                continue;
-            }
+    dogen::sml::enumerator invalid;
+    invalid.name("invalid");
+    invalid.documentation("Represents an uninitialised enum");
+    invalid.value("0");
+    e.enumerators().push_back(invalid);
 
-            dogen::sml::enumerator invalid;
-            invalid.name("invalid");
-            invalid.documentation("Represents an uninitialised enum");
-            invalid.value("0");
-            e.enumerators().push_back(invalid);
+    std::set<std::string> enumerator_names;
+    enumerator_names.insert(invalid.name());
 
-            std::set<std::string> enumerator_names;
-            enumerator_names.insert(invalid.name());
-
-            unsigned int pos(1);
-            for (auto v : values) {
-                using dogen::dia::composite;
-                const auto c(attribute_value<composite>(v, dia_composite));
-
-                if (c.type() != dia_uml_attribute) {
-                    BOOST_LOG_SEV(lg, error) << "Expected composite type to be "
-                                             << dia_uml_attribute
-                                             << "but was " << c.type();
-                    BOOST_THROW_EXCEPTION(
-                        transformation_error(uml_attribute_expected));
-                }
-                BOOST_LOG_SEV(lg, debug) << "Found composite of type "
-                                         << c.type();
-                const auto enumerator(transform_enumerator(c, pos++));
-                const auto i(enumerator_names.find(enumerator.name()));
-                if (i != enumerator_names.end()) {
-                    BOOST_LOG_SEV(lg, error) << "Duplicate enumerator name: "
-                                             << enumerator.name();
-                    BOOST_THROW_EXCEPTION(transformation_error(
-                            "Duplicate enumerator name: " + enumerator.name()));
-                }
-                e.enumerators().push_back(enumerator);
-                enumerator_names.insert(enumerator.name());
-            }
+    unsigned int pos(1);
+    for (const auto& p : o.properties()) {
+        const auto enumerator(transform_enumerator(p, pos++));
+        const auto i(enumerator_names.find(enumerator.name()));
+        if (i != enumerator_names.end()) {
+            BOOST_LOG_SEV(lg, error) << "Duplicate enumerator name: "
+                                     << enumerator.name();
+            BOOST_THROW_EXCEPTION(transformation_error(
+                    "Duplicate enumerator name: " + enumerator.name()));
         }
+        e.enumerators().push_back(enumerator);
+        enumerator_names.insert(enumerator.name());
     }
     context_.enumerations().insert(std::make_pair(e.name(), e));
 }
 
-void object_transformer::transform_package(const dogen::dia::object& o) {
+void object_transformer::transform_package(const processed_object& o) {
     BOOST_LOG_SEV(lg, debug) << "Object is a package: " << o.id();
 
     sml::package p;
-    const std::string pkg_id(o.child_node() ? o.child_node()->parent() : empty);
-    for (auto a : o.attributes()) {
-        if (a.name() == dia_name) {
-            p.name(transform_qname(a, sml::meta_types::package, pkg_id));
-            break;
-        }
-    }
+    const std::string pkg_id(o.child_node_id());
+    using sml::meta_types;
+    p.name(transform_qname(o.name(), meta_types::package, pkg_id));
+    p.documentation(o.comment());
 
     if (p.name().type_name().empty()) {
         BOOST_THROW_EXCEPTION(
-            transformation_error(name_attribute_expected + o.id()));
-        BOOST_LOG_SEV(lg, error) << name_attribute_expected + o.id();
+            transformation_error(empty_dia_object_name + o.id()));
+        BOOST_LOG_SEV(lg, error) << empty_dia_object_name + o.id();
     }
     context_.packages_by_id().insert(std::make_pair(o.id(), p));
     context_.packages().insert(std::make_pair(p.name(), p));
 }
 
-void object_transformer::transform_exception(const dogen::dia::object& o) {
+void object_transformer::transform_exception(const processed_object& o) {
     BOOST_LOG_SEV(lg, debug) << "Object is an exception: " << o.id();
+
     sml::exception e;
     e.generation_type(context_.is_target() ?
         sml::generation_types::full_generation :
         sml::generation_types::no_generation);
 
-    for (auto a : o.attributes()) {
-        BOOST_LOG_SEV(lg, debug) << "Found attribute: " << a.name();
-        if (a.name() == dia_name) {
-            const std::string pkg_id(o.child_node() ?
-                o.child_node()->parent() : empty);
-            using dogen::sml::meta_types;
-            e.name(transform_qname(a, meta_types::exception, pkg_id));
-        } else if (a.name() == dia_comment) {
-            const std::string doc(transform_string_attribute(a));
-            e.documentation(doc);
-        }
-    }
+    const std::string pkg_id(o.child_node_id());
+    using sml::meta_types;
+    e.name(transform_qname(o.name(), meta_types::exception, pkg_id));
+    e.documentation(o.comment());
     context_.exceptions().insert(std::make_pair(e.name(), e));
 }
 
-void object_transformer::transform(const dia::object& o) {
+void object_transformer::transform(const processed_object& o) {
     BOOST_LOG_SEV(lg, debug) << "Starting to transform: " << o.id();
 
-    const auto ot(parse_object_types(o.type()));
-    if (ot == object_types::uml_large_package) {
+    if (o.object_type() == object_types::uml_large_package) {
         transform_package(o);
         return;
     }
 
-    ensure_object_is_uml_class(ot);
-    if (!has_stereotype(o)) {
-        transform_pod(o);
-        BOOST_LOG_SEV(lg, debug) << "Transformed: " << o.id();
-        return;
-    }
-
-    const auto st(stereotype_for_object(o));
-    switch(st) {
+    ensure_object_is_uml_class(o.object_type());
+    switch(o.stereotype()) {
+    case stereotypes::no_stereotype:
     case stereotypes::value:
     case stereotypes::entity:
     case stereotypes::service:
@@ -576,10 +381,11 @@ void object_transformer::transform(const dia::object& o) {
     case stereotypes::exception:
         transform_exception(o); break;
     default:
-        BOOST_LOG_SEV(lg, error) << invalid_stereotype_in_graph << st;
+        BOOST_LOG_SEV(lg, error) << invalid_stereotype_in_graph
+                                 << o.stereotype();
         BOOST_THROW_EXCEPTION(
             transformation_error(invalid_stereotype_in_graph +
-                boost::lexical_cast<std::string>(st)));
+                boost::lexical_cast<std::string>(o.stereotype())));
     }
     BOOST_LOG_SEV(lg, debug) << "Transformed: " << o.id();
 }

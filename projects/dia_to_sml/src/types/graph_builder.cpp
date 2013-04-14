@@ -37,42 +37,9 @@ static logger lg(logger_factory("dia_to_sml.graph_builder"));
 
 const std::string empty;
 const std::string root_id("__root__");
-
-// FIXME: hacks just to read the package name
-const std::string hash_character("#");
-const std::string dia_name("name");
-const std::string dia_string("string");
-
-const std::string unexpected_attribute_value_type(
-    "Did not find expected attribute value type: ");
-
-template<typename AttributeValue, typename Variant>
-AttributeValue
-attribute_value(const Variant& v, const std::string& desc) {
-
-    AttributeValue r;
-    try {
-        r = boost::get<AttributeValue>(v);
-    } catch (const boost::bad_get&) {
-        BOOST_LOG_SEV(lg, error) << unexpected_attribute_value_type << desc;
-
-        BOOST_THROW_EXCEPTION(
-            dogen::dia_to_sml::building_error(
-                unexpected_attribute_value_type + desc));
-    }
-    return r;
-}
-// FIXME: end hacks just to read the package name
-
-// error messages
 const std::string error_add_after_build("Cannot add object after building");
 const std::string error_not_built("Graph has not yet been built");
-const std::string error_parsing_object_type("Fail to parse object type: ");
-const std::string unexpected_number_of_connections(
-    "Expected 2 connections but found: ");
 const std::string found_cycle_in_graph("Graph has a cycle: ");
-const std::string unexpected_attribute_value_size(
-    "Unexpected attribute value size: ");
 
 }
 
@@ -120,7 +87,7 @@ private:
 
 graph_builder::graph_builder()
     : built_(false), root_vertex_(boost::add_vertex(graph_)) {
-    dia::object root;
+    processed_object root;
     root.id(::root_id);
     graph_[root_vertex_] = root;
     id_to_vertex_.insert(std::make_pair(::root_id, root_vertex_));
@@ -155,51 +122,6 @@ void graph_builder::ensure_built() const {
         throw building_error(error_not_built);
 }
 
-object_types graph_builder::object_type(const dia::object& o) const {
-    object_types r(object_types::invalid);
-
-    try {
-        r = enum_parser::parse_object_type(o.type());
-    } catch(const std::exception& e) {
-        std::ostringstream stream;
-        stream << error_parsing_object_type << "'" << o.type()
-               << "'. Error: " << e.what();
-
-        BOOST_LOG_SEV(lg, error) << stream.str();
-        BOOST_THROW_EXCEPTION(building_error(stream.str()));
-    }
-    return r;
-}
-
-std::string graph_builder::object_name(const dia::object& o) const {
-    for (auto a : o.attributes()) {
-        BOOST_LOG_SEV(lg, debug) << "Found attribute: " << a.name();
-
-        // FIXME: Quick hack just to be able to build package list.
-        if (a.name() == dia_name) {
-            const auto values(a.values());
-            if (values.size() != 1) {
-                BOOST_LOG_SEV(lg, error) << "Expected attribute to have one"
-                                         << " value but found "
-                                         << values.size();
-
-                BOOST_THROW_EXCEPTION(
-                    building_error(unexpected_attribute_value_size +
-                        boost::lexical_cast<std::string>(values.size())));
-            }
-
-            using dia::string;
-            const auto v(attribute_value<string>(values.front(), dia_string));
-            std::string name(v.value());
-            boost::erase_first(name, hash_character);
-            boost::erase_last(name, hash_character);
-            boost::trim(name);
-            return name;
-        }
-    }
-    return empty;
-}
-
 bool graph_builder::is_relevant(const object_types ot) const {
     return
         ot == object_types::uml_large_package ||
@@ -208,9 +130,9 @@ bool graph_builder::is_relevant(const object_types ot) const {
 }
 
 void graph_builder::
-process_child_node(const vertex_descriptor_type& v, const dia::object& o) {
-    if (o.child_node()) {
-        const std::string id(o.child_node()->parent());
+process_child_node(const vertex_descriptor_type& v, const processed_object& o) {
+    if (!o.child_node_id().empty()) {
+        const std::string id(o.child_node_id());
         const vertex_descriptor_type cv(vertex_for_id(id));
         boost::add_edge(v, cv, graph_);
         BOOST_LOG_SEV(lg, debug) << "Creating edge between '"
@@ -232,48 +154,40 @@ process_child_node(const vertex_descriptor_type& v, const dia::object& o) {
     }
 }
 
-void graph_builder::process_connections(const dia::object& o) {
-    const auto connections(o.connections());
-    if (connections.size() != 2) {
-        const auto size(boost::lexical_cast<std::string>(connections.size()));
-        BOOST_LOG_SEV(lg, error) << unexpected_number_of_connections << size;
-        BOOST_THROW_EXCEPTION(
-            building_error(unexpected_number_of_connections + size));
-    }
-
-    const auto parent(connections.front());
-    const auto child(connections.back());
+void graph_builder::process_connections(const processed_object& o) {
     BOOST_LOG_SEV(lg, debug) << "Processing connections for object: '"
-                             << o.id() << "' of type: '" << o.type() << "'";
+                             << o.id() << "' of type: '"
+                             << o.object_type() << "'";
 
-    const auto parent_vertex(vertex_for_id(parent.to()));
-    const auto child_vertex(vertex_for_id(child.to()));
-    parent_ids_.insert(parent.to());
-    connected_ids_.insert(parent.to());
+    const auto parent_id(o.connection()->first);
+    const auto child_id(o.connection()->second);
+
+    const auto parent_vertex(vertex_for_id(parent_id));
+    const auto child_vertex(vertex_for_id(child_id));
+    parent_ids_.insert(parent_id);
+    connected_ids_.insert(parent_id);
     boost::add_edge(child_vertex, parent_vertex, graph_);
-    BOOST_LOG_SEV(lg, debug) << "Created edge between '" << child.to()
-                             << "' and: '" << parent.to() << "'";
+    BOOST_LOG_SEV(lg, debug) << "Created edge between '" << child_id
+                             << "' and: '" << parent_id << "'";
 
-    const auto pair(std::make_pair(child.to(), parent.to()));
+    const auto pair(std::make_pair(child_id, parent_id));
     const bool key_exists(!child_to_parent_.insert(pair).second);
-
     if (key_exists) {
         std::ostringstream ss;
         ss << "Child has more than one parent: '"
-           << child.to() << "'. Multiple inheritance "
-           << "is not supported.";
+           << child_id << "'. Multiple inheritance is not supported.";
 
         BOOST_LOG_SEV(lg, error) << ss.str();
         BOOST_THROW_EXCEPTION(building_error(ss.str()));
     }
 
-    if (connected_ids_.find(child.to()) == connected_ids_.end()) {
-        orphanage_.insert(std::make_pair(child.to(), parent_vertex));
+    if (connected_ids_.find(child_id) == connected_ids_.end()) {
+        orphanage_.insert(std::make_pair(child_id, parent_vertex));
         BOOST_LOG_SEV(lg, debug) << "Vertex for object joined orphanage: "
                                  << o.id();
     }
 
-    const auto k(orphanage_.find(parent.to()));
+    const auto k(orphanage_.find(parent_id));
     if (k != orphanage_.end()) {
         BOOST_LOG_SEV(lg, debug) << "Object is no longer orphan: "
                                  << k->first << "'";
@@ -281,23 +195,24 @@ void graph_builder::process_connections(const dia::object& o) {
     }
 }
 
-void graph_builder::add(const dia::object& o) {
+void graph_builder::add(const processed_object& o) {
     ensure_not_built();
 
-    const auto ot(object_type(o));
-    if (!is_relevant(ot))
+    if (!is_relevant(o.object_type()))
         return;
 
-    if (ot == object_types::uml_large_package && !o.child_node())
-        top_level_package_names_.insert(object_name(o));
+    const bool is_package(o.object_type() == object_types::uml_large_package);
+    if (is_package && o.child_node_id().empty())
+        top_level_package_names_.insert(o.name());
 
-    if (o.connections().empty()) {
-        const auto v(vertex_for_id(o.id()));
-        graph_[v] = o;
-        process_child_node(v, o);
+    if (o.connection()) {
+        process_connections(o);
         return;
     }
-    process_connections(o);
+
+    const auto v(vertex_for_id(o.id()));
+    graph_[v] = o;
+    process_child_node(v, o);
 }
 
 const graph_type& graph_builder::graph() const {

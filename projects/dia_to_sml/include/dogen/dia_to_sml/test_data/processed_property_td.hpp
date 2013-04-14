@@ -18,9 +18,36 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/dia_to_sml/hash/context_hash.hpp"
-#include "dogen/dia_to_sml/hash/node_hash.hpp"
-#include "dogen/dia_to_sml/hash/object_types_hash.hpp"
-#include "dogen/dia_to_sml/hash/processed_object_hash.hpp"
-#include "dogen/dia_to_sml/hash/processed_property_hash.hpp"
-#include "dogen/dia_to_sml/hash/stereotypes_hash.hpp"
+#ifndef DOGEN_DIA_TO_SML_TEST_DATA_PROCESSED_PROPERTY_TD_HPP
+#define DOGEN_DIA_TO_SML_TEST_DATA_PROCESSED_PROPERTY_TD_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include "dogen/dia_to_sml/types/processed_property.hpp"
+
+namespace dogen {
+namespace dia_to_sml {
+
+class processed_property_generator {
+public:
+    processed_property_generator();
+
+public:
+    typedef dogen::dia_to_sml::processed_property result_type;
+
+public:
+    static void populate(const unsigned int position, result_type& v);
+    static result_type create(const unsigned int position);
+    result_type operator()();
+
+private:
+    unsigned int position_;
+public:
+    static result_type* create_ptr(const unsigned int position);
+};
+
+} }
+
+#endif

@@ -27,11 +27,14 @@
 #include <boost/archive/xml_iarchive.hpp>
 #include <boost/archive/xml_oarchive.hpp>
 #include <boost/serialization/nvp.hpp>
+#include <boost/serialization/optional.hpp>
 #include <boost/serialization/string.hpp>
+#include <boost/serialization/utility.hpp>
 #include <boost/serialization/vector.hpp>
 #include "dogen/dia/serialization/composite_ser.hpp"
 #include "dogen/dia_to_sml/serialization/object_types_ser.hpp"
 #include "dogen/dia_to_sml/serialization/processed_object_ser.hpp"
+#include "dogen/dia_to_sml/serialization/processed_property_ser.hpp"
 #include "dogen/dia_to_sml/serialization/stereotypes_ser.hpp"
 
 #ifdef __linux__
@@ -46,24 +49,30 @@ template<typename Archive>
 void save(Archive& ar,
     const dogen::dia_to_sml::processed_object& v,
     const unsigned int /*version*/) {
+    ar << make_nvp("id", v.id_);
     ar << make_nvp("name", v.name_);
     ar << make_nvp("object_type", v.object_type_);
     ar << make_nvp("stereotype", v.stereotype_);
     ar << make_nvp("comment", v.comment_);
     ar << make_nvp("uml_attributes", v.uml_attributes_);
-    ar << make_nvp("parent_id", v.parent_id_);
+    ar << make_nvp("child_node_id", v.child_node_id_);
+    ar << make_nvp("connection", v.connection_);
+    ar << make_nvp("properties", v.properties_);
 }
 
 template<typename Archive>
 void load(Archive& ar,
     dogen::dia_to_sml::processed_object& v,
     const unsigned int /*version*/) {
+    ar >> make_nvp("id", v.id_);
     ar >> make_nvp("name", v.name_);
     ar >> make_nvp("object_type", v.object_type_);
     ar >> make_nvp("stereotype", v.stereotype_);
     ar >> make_nvp("comment", v.comment_);
     ar >> make_nvp("uml_attributes", v.uml_attributes_);
-    ar >> make_nvp("parent_id", v.parent_id_);
+    ar >> make_nvp("child_node_id", v.child_node_id_);
+    ar >> make_nvp("connection", v.connection_);
+    ar >> make_nvp("properties", v.properties_);
 }
 
 } }

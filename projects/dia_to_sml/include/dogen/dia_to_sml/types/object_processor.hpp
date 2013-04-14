@@ -45,7 +45,6 @@ public:
     object_processor() = default;
     object_processor(const object_processor&) = delete;
     object_processor(object_processor&&) = default;
-    virtual ~object_processor() noexcept = 0;
 
 private:
     /**

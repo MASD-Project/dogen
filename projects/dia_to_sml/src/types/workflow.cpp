@@ -26,6 +26,7 @@
 #include "dogen/dia_to_sml/types/visitor.hpp"
 #include "dogen/dia_to_sml/types/object_transformer.hpp"
 #include "dogen/dia_to_sml/types/identifier_parser.hpp"
+#include "dogen/dia_to_sml/types/object_processor.hpp"
 #include "dogen/dia_to_sml/types/workflow.hpp"
 
 namespace dogen {
@@ -36,9 +37,11 @@ workflow::~workflow() noexcept { }
 graph_type workflow::
 build_graph(const dia::diagram& diagram, context& c) const {
     graph_builder b;
+    object_processor p;
     for (const auto& l : diagram.layers()) {
         for (const auto& o : l.objects()) {
-            b.add(o);
+            const auto po(p.process(o));
+            b.add(po);
         }
     }
     b.build();

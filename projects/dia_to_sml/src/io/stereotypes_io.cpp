@@ -51,6 +51,9 @@ std::ostream& operator<<(std::ostream& s, const stereotypes& v) {
     case stereotypes::nongeneratable:
         attr = "\"nongeneratable\"";
         break;
+    case stereotypes::no_stereotype:
+        attr = "\"no_stereotype\"";
+        break;
     default:
         throw std::invalid_argument("Invalid value for stereotypes");
     }

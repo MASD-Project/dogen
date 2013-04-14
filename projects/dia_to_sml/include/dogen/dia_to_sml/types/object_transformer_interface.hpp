@@ -25,7 +25,7 @@
 #pragma once
 #endif
 
-#include "dogen/dia/types/object_fwd.hpp"
+#include "dogen/dia_to_sml/types/processed_object_fwd.hpp"
 
 namespace dogen {
 namespace dia_to_sml {
@@ -44,7 +44,7 @@ public:
     /**
      * @brief Transform a dia object.
      */
-    virtual void transform(const dia::object& o) = 0;
+    virtual void transform(const processed_object& o) = 0;
 };
 
 } }

@@ -29,7 +29,7 @@
 #include <unordered_set>
 #include <boost/graph/adjacency_list.hpp>
 #include "dogen/dia_to_sml/types/object_types.hpp"
-#include "dogen/dia/types/object.hpp"
+#include "dogen/dia_to_sml/types/processed_object.hpp"
 
 namespace dogen {
 namespace dia_to_sml {
@@ -38,7 +38,7 @@ namespace dia_to_sml {
  * @brief Graph of dependencies between dia objects.
  */
 typedef boost::adjacency_list<
-    boost::setS, boost::vecS, boost::directedS, dia::object
+    boost::setS, boost::vecS, boost::directedS, processed_object
     > graph_type;
 
 /**
@@ -56,16 +56,6 @@ public:
     graph_builder();
 
 private:
-    /**
-     * @brief Returns the object type of the given object.
-     */
-    object_types object_type(const dia::object& o) const;
-
-    /**
-     * @brief Returns the name of the given object.
-     */
-    std::string object_name(const dia::object& o) const;
-
     /**
      * @brief Given a dia object ID, return its associated vertex.
      *
@@ -95,12 +85,12 @@ private:
      * @brief Handle relationships derived from child node.
      */
     void process_child_node(const vertex_descriptor_type& v,
-        const dia::object& o);
+        const processed_object& po);
 
     /**
      * @brief Handle relationships derived from connections.
      */
-    void process_connections(const dia::object& o);
+    void process_connections(const processed_object& po);
 
 public: // only for testing purposes
     static std::string root_id();
@@ -111,7 +101,7 @@ public:
      *
      * @pre The graph must not yet have been built.
      */
-    void add(const dia::object& o);
+    void add(const processed_object& o);
 
     /**
      * @brief Adds a container of objects to the graph.

@@ -26,7 +26,7 @@ namespace dia_to_sml {
 stereotypes_generator::stereotypes_generator() : position_(0) { }
 void stereotypes_generator::
 populate(const unsigned int position, result_type& v) {
-    v = static_cast<stereotypes>(position % 7);
+    v = static_cast<stereotypes>(position % 8);
 }
 
 stereotypes_generator::result_type

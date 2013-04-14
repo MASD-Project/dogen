@@ -36,6 +36,7 @@
 #include "dogen/dia_to_sml/types/object_types.hpp"
 #include "dogen/dia_to_sml/types/parsing_error.hpp"
 #include "dogen/dia_to_sml/types/processed_object.hpp"
+#include "dogen/dia_to_sml/types/processed_property.hpp"
 #include "dogen/dia_to_sml/types/processing_error.hpp"
 #include "dogen/dia_to_sml/types/stereotypes.hpp"
 #include "dogen/dia_to_sml/types/transformation_error.hpp"

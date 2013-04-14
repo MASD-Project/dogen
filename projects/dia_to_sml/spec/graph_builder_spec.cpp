@@ -23,8 +23,8 @@
 #include <boost/graph/depth_first_search.hpp>
 #include "dogen/utility/test/asserter.hpp"
 #include "dogen/utility/test/logging.hpp"
-#include "dogen/dia/io/object_io.hpp"
-#include "dogen/dia/test/mock_object_factory.hpp"
+#include "dogen/dia_to_sml/io/processed_object_io.hpp"
+#include "dogen/dia_to_sml/test/mock_processed_object_factory.hpp"
 #include "dogen/dia_to_sml/types/building_error.hpp"
 #include "dogen/dia_to_sml/types/graph_builder.hpp"
 #include "dogen/utility/io/list_io.hpp"
@@ -33,7 +33,7 @@
 using namespace dogen::dia_to_sml;
 using dogen::utility::test::asserter;
 using dogen::utility::test::contains_checker;
-using dogen::dia::test::mock_object_factory;
+using dogen::dia_to_sml::test::mock_processed_object_factory;
 
 namespace  {
 
@@ -48,7 +48,8 @@ bool is_root_id(const std::string id) {
 
 class visitor : public boost::default_dfs_visitor {
 public:
-    explicit visitor(std::list<dogen::dia::object>& o) : objects_(o) {}
+    explicit visitor(std::list<dogen::dia_to_sml::processed_object>& o)
+        : objects_(o) {}
 
 public:
     template<typename Vertex, typename Graph>
@@ -57,7 +58,7 @@ public:
     }
 
 private:
-    std::list<dogen::dia::object>& objects_;
+    std::list<dogen::dia_to_sml::processed_object>& objects_;
 };
 
 }
@@ -70,7 +71,7 @@ BOOST_AUTO_TEST_SUITE(graph_builder)
 BOOST_AUTO_TEST_CASE(not_adding_objects_to_graph_produces_only_root_object) {
     SETUP_TEST_LOG_SOURCE("not_adding_objects_to_graph_produces_only_root_object");
 
-    std::list<dogen::dia::object> o;
+    std::list<dogen::dia_to_sml::processed_object> o;
     visitor v(o);
 
     dogen::dia_to_sml::graph_builder b;
@@ -85,11 +86,11 @@ BOOST_AUTO_TEST_CASE(not_adding_objects_to_graph_produces_only_root_object) {
 BOOST_AUTO_TEST_CASE(adding_unrelated_objects_produces_expected_order) {
     SETUP_TEST_LOG_SOURCE("adding_unrelated_objects_produces_expected_order");
     dogen::dia_to_sml::graph_builder b;
-    b.add(mock_object_factory::build_large_package(0));
-    b.add(mock_object_factory::build_class(1));
-    b.add(mock_object_factory::build_class(2));
+    b.add(mock_processed_object_factory::build_large_package(0));
+    b.add(mock_processed_object_factory::build_class(1));
+    b.add(mock_processed_object_factory::build_class(2));
 
-    std::list<dogen::dia::object> o;
+    std::list<dogen::dia_to_sml::processed_object> o;
     visitor v(o);
     b.build();
     boost::depth_first_search(b.graph(), boost::visitor(v));
@@ -98,9 +99,9 @@ BOOST_AUTO_TEST_CASE(adding_unrelated_objects_produces_expected_order) {
     BOOST_REQUIRE(o.size() == 4);
 
     auto i(o.begin());
-    BOOST_CHECK(i->id() == mock_object_factory::to_oject_id(0));
-    BOOST_CHECK((++i)->id() == mock_object_factory::to_oject_id(1));
-    BOOST_CHECK((++i)->id() == mock_object_factory::to_oject_id(2));
+    BOOST_CHECK(i->id() == mock_processed_object_factory::to_oject_id(0));
+    BOOST_CHECK((++i)->id() == mock_processed_object_factory::to_oject_id(1));
+    BOOST_CHECK((++i)->id() == mock_processed_object_factory::to_oject_id(2));
     BOOST_CHECK(is_root_id((++i)->id()));
 }
 
@@ -108,9 +109,9 @@ BOOST_AUTO_TEST_CASE(adding_generalization_produces_expected_order) {
     SETUP_TEST_LOG_SOURCE("adding_generalization_produces_expected_order");
 
     dogen::dia_to_sml::graph_builder b;
-    b.add(mock_object_factory::build_generalization(0));
+    b.add(mock_processed_object_factory::build_generalization(0));
 
-    std::list<dogen::dia::object> o;
+    std::list<dogen::dia_to_sml::processed_object> o;
     visitor v(o);
     b.build();
     boost::depth_first_search(b.graph(), boost::visitor(v));
@@ -119,8 +120,8 @@ BOOST_AUTO_TEST_CASE(adding_generalization_produces_expected_order) {
     BOOST_REQUIRE(o.size() == 3);
 
     auto i(o.begin());
-    BOOST_CHECK(i->id() == mock_object_factory::to_oject_id(0));
-    BOOST_CHECK((++i)->id() == mock_object_factory::to_oject_id(1));
+    BOOST_CHECK(i->id() == mock_processed_object_factory::to_oject_id(0));
+    BOOST_CHECK((++i)->id() == mock_processed_object_factory::to_oject_id(1));
     BOOST_CHECK(is_root_id((++i)->id()));
 }
 
@@ -128,9 +129,10 @@ BOOST_AUTO_TEST_CASE(adding_generalization_inside_package_produces_expected_orde
     SETUP_TEST_LOG_SOURCE("adding_generalization_inside_package_produces_expected_order");
 
     dogen::dia_to_sml::graph_builder b;
-    b.add(mock_object_factory::build_generalization_inside_large_package(0));
+    b.add(mock_processed_object_factory::
+        build_generalization_inside_large_package(0));
 
-    std::list<dogen::dia::object> o;
+    std::list<dogen::dia_to_sml::processed_object> o;
     visitor v(o);
     b.build();
     boost::depth_first_search(b.graph(), boost::visitor(v));
@@ -139,9 +141,9 @@ BOOST_AUTO_TEST_CASE(adding_generalization_inside_package_produces_expected_orde
     BOOST_REQUIRE(o.size() == 4);
 
     auto i(o.begin());
-    BOOST_CHECK(i->id() == mock_object_factory::to_oject_id(0));
-    BOOST_CHECK((++i)->id() == mock_object_factory::to_oject_id(1));
-    BOOST_CHECK((++i)->id() == mock_object_factory::to_oject_id(2));
+    BOOST_CHECK(i->id() == mock_processed_object_factory::to_oject_id(0));
+    BOOST_CHECK((++i)->id() == mock_processed_object_factory::to_oject_id(1));
+    BOOST_CHECK((++i)->id() == mock_processed_object_factory::to_oject_id(2));
     BOOST_CHECK(is_root_id((++i)->id()));
 }
 
@@ -150,7 +152,7 @@ BOOST_AUTO_TEST_CASE(adding_object_after_graph_has_been_built_throws) {
 
     dogen::dia_to_sml::graph_builder b1;
     b1.build();
-    const dogen::dia::object o(mock_object_factory::build_class(0));
+    const auto o(mock_processed_object_factory::build_class(0));
     contains_checker<building_error> c(adding_after_build);
     BOOST_CHECK_EXCEPTION(b1.add(o), building_error, c);
 
@@ -164,7 +166,7 @@ BOOST_AUTO_TEST_CASE(building_graph_with_first_degree_cycle_throws) {
     SETUP_TEST_LOG("building_graph_with_first_degree_cycle_throws");
 
     dogen::dia_to_sml::graph_builder b;
-    b.add(mock_object_factory::build_first_degree_cycle(0));
+    b.add(mock_processed_object_factory::build_first_degree_cycle(0));
     contains_checker<building_error> c(graph_has_cycle);
     BOOST_CHECK_EXCEPTION(b.build(), building_error, c);
 }

@@ -18,9 +18,26 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/dia_to_sml/hash/context_hash.hpp"
-#include "dogen/dia_to_sml/hash/node_hash.hpp"
-#include "dogen/dia_to_sml/hash/object_types_hash.hpp"
-#include "dogen/dia_to_sml/hash/processed_object_hash.hpp"
-#include "dogen/dia_to_sml/hash/processed_property_hash.hpp"
-#include "dogen/dia_to_sml/hash/stereotypes_hash.hpp"
+#ifndef DOGEN_DIA_TO_SML_SERIALIZATION_PROCESSED_PROPERTY_SER_HPP
+#define DOGEN_DIA_TO_SML_SERIALIZATION_PROCESSED_PROPERTY_SER_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include <boost/serialization/split_free.hpp>
+#include "dogen/dia_to_sml/types/processed_property.hpp"
+
+BOOST_SERIALIZATION_SPLIT_FREE(dogen::dia_to_sml::processed_property)
+namespace boost {
+namespace serialization {
+
+template<typename Archive>
+void save(Archive& ar, const dogen::dia_to_sml::processed_property& v, unsigned int version);
+
+template<typename Archive>
+void load(Archive& ar, dogen::dia_to_sml::processed_property& v, unsigned int version);
+
+} }
+
+#endif

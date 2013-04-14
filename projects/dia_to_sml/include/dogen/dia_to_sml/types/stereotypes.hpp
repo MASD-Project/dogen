@@ -38,7 +38,8 @@ enum class stereotypes : unsigned int {
     entity = 3,
     value = 4,
     service = 5,
-    nongeneratable = 6
+    nongeneratable = 6,
+    no_stereotype = 7
 };
 
 } }
