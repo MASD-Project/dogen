@@ -40,7 +40,7 @@ context::context(
     const std::unordered_map<dogen::sml::qname, dogen::sml::qname>& original_parent,
     const std::unordered_map<dogen::sml::qname, std::list<dogen::sml::qname> >& leaves,
     const std::unordered_set<std::string>& dependencies,
-    const std::unordered_set<std::string>& top_level_packages,
+    const std::unordered_set<std::string>& top_level_package_names,
     const std::unordered_map<dogen::sml::qname, dogen::sml::enumeration>& enumerations,
     const std::unordered_map<dogen::sml::qname, dogen::sml::package>& packages,
     const std::unordered_map<dogen::sml::qname, dogen::sml::exception>& exceptions)
@@ -56,7 +56,7 @@ context::context(
       original_parent_(original_parent),
       leaves_(leaves),
       dependencies_(dependencies),
-      top_level_packages_(top_level_packages),
+      top_level_package_names_(top_level_package_names),
       enumerations_(enumerations),
       packages_(packages),
       exceptions_(exceptions) { }
@@ -75,7 +75,7 @@ void context::swap(context& other) noexcept {
     swap(original_parent_, other.original_parent_);
     swap(leaves_, other.leaves_);
     swap(dependencies_, other.dependencies_);
-    swap(top_level_packages_, other.top_level_packages_);
+    swap(top_level_package_names_, other.top_level_package_names_);
     swap(enumerations_, other.enumerations_);
     swap(packages_, other.packages_);
     swap(exceptions_, other.exceptions_);
@@ -94,7 +94,7 @@ bool context::operator==(const context& rhs) const {
         original_parent_ == rhs.original_parent_ &&
         leaves_ == rhs.leaves_ &&
         dependencies_ == rhs.dependencies_ &&
-        top_level_packages_ == rhs.top_level_packages_ &&
+        top_level_package_names_ == rhs.top_level_package_names_ &&
         enumerations_ == rhs.enumerations_ &&
         packages_ == rhs.packages_ &&
         exceptions_ == rhs.exceptions_;
@@ -282,20 +282,20 @@ void context::dependencies(const std::unordered_set<std::string>&& v) {
     dependencies_ = std::move(v);
 }
 
-const std::unordered_set<std::string>& context::top_level_packages() const {
-    return top_level_packages_;
+const std::unordered_set<std::string>& context::top_level_package_names() const {
+    return top_level_package_names_;
 }
 
-std::unordered_set<std::string>& context::top_level_packages() {
-    return top_level_packages_;
+std::unordered_set<std::string>& context::top_level_package_names() {
+    return top_level_package_names_;
 }
 
-void context::top_level_packages(const std::unordered_set<std::string>& v) {
-    top_level_packages_ = v;
+void context::top_level_package_names(const std::unordered_set<std::string>& v) {
+    top_level_package_names_ = v;
 }
 
-void context::top_level_packages(const std::unordered_set<std::string>&& v) {
-    top_level_packages_ = std::move(v);
+void context::top_level_package_names(const std::unordered_set<std::string>&& v) {
+    top_level_package_names_ = std::move(v);
 }
 
 const std::unordered_map<dogen::sml::qname, dogen::sml::enumeration>& context::enumerations() const {

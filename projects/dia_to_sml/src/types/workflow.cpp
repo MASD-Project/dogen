@@ -44,6 +44,7 @@ build_graph(const dia::diagram& diagram, context& c) const {
     b.build();
     c.child_to_parent(b.child_to_parent());
     c.parent_ids(b.parent_ids());
+    c.top_level_package_names(b.top_level_package_names());
     return b.graph();
 }
 

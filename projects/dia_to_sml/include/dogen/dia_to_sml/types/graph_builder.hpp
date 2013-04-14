@@ -28,6 +28,7 @@
 #include <unordered_map>
 #include <unordered_set>
 #include <boost/graph/adjacency_list.hpp>
+#include "dogen/dia_to_sml/types/object_types.hpp"
 #include "dogen/dia/types/object.hpp"
 
 namespace dogen {
@@ -56,6 +57,16 @@ public:
 
 private:
     /**
+     * @brief Returns the object type of the given object.
+     */
+    object_types object_type(const dia::object& o) const;
+
+    /**
+     * @brief Returns the name of the given object.
+     */
+    std::string object_name(const dia::object& o) const;
+
+    /**
      * @brief Given a dia object ID, return its associated vertex.
      *
      * If the vertex does not yet exist, creates it.
@@ -78,7 +89,7 @@ private:
      * @brief Returns true if the object is relevant to the object
      * graph, false otherwise.
      */
-    bool is_relevant(const dia::object& o) const;
+    bool is_relevant(const object_types ot) const;
 
     /**
      * @brief Handle relationships derived from child node.
@@ -145,6 +156,13 @@ public:
      */
     const std::unordered_set<std::string>& parent_ids() const;
 
+    /**
+     * @brief Returns the list of top-level package names.
+     *
+     * @pre The graph must have already been built.
+     */
+    const std::unordered_set<std::string>& top_level_package_names() const;
+
 private:
     bool built_;
     graph_type graph_;
@@ -154,6 +172,7 @@ private:
     std::unordered_map<std::string, std::string> child_to_parent_;
     std::unordered_set<std::string> parent_ids_;
     std::unordered_set<std::string> connected_ids_;
+    std::unordered_set<std::string> top_level_package_names_;
 };
 
 } }

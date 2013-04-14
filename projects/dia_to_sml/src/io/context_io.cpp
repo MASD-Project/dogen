@@ -264,7 +264,7 @@ std::ostream& operator<<(std::ostream& s, const context& v) {
       << "\"original_parent\": " << v.original_parent() << ", "
       << "\"leaves\": " << v.leaves() << ", "
       << "\"dependencies\": " << v.dependencies() << ", "
-      << "\"top_level_packages\": " << v.top_level_packages() << ", "
+      << "\"top_level_package_names\": " << v.top_level_package_names() << ", "
       << "\"enumerations\": " << v.enumerations() << ", "
       << "\"packages\": " << v.packages() << ", "
       << "\"exceptions\": " << v.exceptions()

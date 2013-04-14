@@ -180,7 +180,7 @@ populate(const unsigned int position, result_type& v) {
     v.original_parent(create_std_unordered_map_dogen_sml_qname_dogen_sml_qname(position + 9));
     v.leaves(create_std_unordered_map_dogen_sml_qname_std_list_dogen_sml_qname_(position + 10));
     v.dependencies(create_std_unordered_set_std_string(position + 11));
-    v.top_level_packages(create_std_unordered_set_std_string(position + 12));
+    v.top_level_package_names(create_std_unordered_set_std_string(position + 12));
     v.enumerations(create_std_unordered_map_dogen_sml_qname_dogen_sml_enumeration(position + 13));
     v.packages(create_std_unordered_map_dogen_sml_qname_dogen_sml_package(position + 14));
     v.exceptions(create_std_unordered_map_dogen_sml_qname_dogen_sml_exception(position + 15));

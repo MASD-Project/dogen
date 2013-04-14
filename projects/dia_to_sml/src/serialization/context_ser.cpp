@@ -62,7 +62,7 @@ void save(Archive& ar,
     ar << make_nvp("original_parent", v.original_parent_);
     ar << make_nvp("leaves", v.leaves_);
     ar << make_nvp("dependencies", v.dependencies_);
-    ar << make_nvp("top_level_packages", v.top_level_packages_);
+    ar << make_nvp("top_level_package_names", v.top_level_package_names_);
     ar << make_nvp("enumerations", v.enumerations_);
     ar << make_nvp("packages", v.packages_);
     ar << make_nvp("exceptions", v.exceptions_);
@@ -84,7 +84,7 @@ void load(Archive& ar,
     ar >> make_nvp("original_parent", v.original_parent_);
     ar >> make_nvp("leaves", v.leaves_);
     ar >> make_nvp("dependencies", v.dependencies_);
-    ar >> make_nvp("top_level_packages", v.top_level_packages_);
+    ar >> make_nvp("top_level_package_names", v.top_level_package_names_);
     ar >> make_nvp("enumerations", v.enumerations_);
     ar >> make_nvp("packages", v.packages_);
     ar >> make_nvp("exceptions", v.exceptions_);

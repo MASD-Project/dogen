@@ -21,10 +21,11 @@
 #include <sstream>
 #include <boost/lexical_cast.hpp>
 #include <boost/throw_exception.hpp>
+#include <boost/algorithm/string/trim.hpp>
+#include <boost/algorithm/string/erase.hpp>
 #include <boost/graph/depth_first_search.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/dia_to_sml/types/enum_parser.hpp"
-#include "dogen/dia_to_sml/types/object_types.hpp"
 #include "dogen/dia_to_sml/io/object_types_io.hpp"
 #include "dogen/dia_to_sml/types/building_error.hpp"
 #include "dogen/dia_to_sml/types/graph_builder.hpp"
@@ -34,10 +35,34 @@ namespace {
 using namespace dogen::utility::log;
 static logger lg(logger_factory("dia_to_sml.graph_builder"));
 
-/**
- * @brief String representation of the root vertex ID graph.
- */
+const std::string empty;
 const std::string root_id("__root__");
+
+// FIXME: hacks just to read the package name
+const std::string hash_character("#");
+const std::string dia_name("name");
+const std::string dia_string("string");
+
+const std::string unexpected_attribute_value_type(
+    "Did not find expected attribute value type: ");
+
+template<typename AttributeValue, typename Variant>
+AttributeValue
+attribute_value(const Variant& v, const std::string& desc) {
+
+    AttributeValue r;
+    try {
+        r = boost::get<AttributeValue>(v);
+    } catch (const boost::bad_get&) {
+        BOOST_LOG_SEV(lg, error) << unexpected_attribute_value_type << desc;
+
+        BOOST_THROW_EXCEPTION(
+            dogen::dia_to_sml::building_error(
+                unexpected_attribute_value_type + desc));
+    }
+    return r;
+}
+// FIXME: end hacks just to read the package name
 
 // error messages
 const std::string error_add_after_build("Cannot add object after building");
@@ -46,6 +71,8 @@ const std::string error_parsing_object_type("Fail to parse object type: ");
 const std::string unexpected_number_of_connections(
     "Expected 2 connections but found: ");
 const std::string found_cycle_in_graph("Graph has a cycle: ");
+const std::string unexpected_attribute_value_size(
+    "Unexpected attribute value size: ");
 
 }
 
@@ -128,13 +155,11 @@ void graph_builder::ensure_built() const {
         throw building_error(error_not_built);
 }
 
-bool graph_builder::is_relevant(const dia::object& o) const {
-    using dia_to_sml::object_types;
-    object_types ot(object_types::invalid);
+object_types graph_builder::object_type(const dia::object& o) const {
+    object_types r(object_types::invalid);
 
     try {
-        using dogen::dia_to_sml::enum_parser;
-        ot = enum_parser::parse_object_type(o.type());
+        r = enum_parser::parse_object_type(o.type());
     } catch(const std::exception& e) {
         std::ostringstream stream;
         stream << error_parsing_object_type << "'" << o.type()
@@ -143,7 +168,39 @@ bool graph_builder::is_relevant(const dia::object& o) const {
         BOOST_LOG_SEV(lg, error) << stream.str();
         BOOST_THROW_EXCEPTION(building_error(stream.str()));
     }
+    return r;
+}
 
+std::string graph_builder::object_name(const dia::object& o) const {
+    for (auto a : o.attributes()) {
+        BOOST_LOG_SEV(lg, debug) << "Found attribute: " << a.name();
+
+        // FIXME: Quick hack just to be able to build package list.
+        if (a.name() == dia_name) {
+            const auto values(a.values());
+            if (values.size() != 1) {
+                BOOST_LOG_SEV(lg, error) << "Expected attribute to have one"
+                                         << " value but found "
+                                         << values.size();
+
+                BOOST_THROW_EXCEPTION(
+                    building_error(unexpected_attribute_value_size +
+                        boost::lexical_cast<std::string>(values.size())));
+            }
+
+            using dia::string;
+            const auto v(attribute_value<string>(values.front(), dia_string));
+            std::string name(v.value());
+            boost::erase_first(name, hash_character);
+            boost::erase_last(name, hash_character);
+            boost::trim(name);
+            return name;
+        }
+    }
+    return empty;
+}
+
+bool graph_builder::is_relevant(const object_types ot) const {
     return
         ot == object_types::uml_large_package ||
         ot == object_types::uml_generalization ||
@@ -227,8 +284,12 @@ void graph_builder::process_connections(const dia::object& o) {
 void graph_builder::add(const dia::object& o) {
     ensure_not_built();
 
-    if (!is_relevant(o))
+    const auto ot(object_type(o));
+    if (!is_relevant(ot))
         return;
+
+    if (ot == object_types::uml_large_package && !o.child_node())
+        top_level_package_names_.insert(object_name(o));
 
     if (o.connections().empty()) {
         const auto v(vertex_for_id(o.id()));
@@ -253,6 +314,12 @@ child_to_parent() const {
 const std::unordered_set<std::string>& graph_builder::parent_ids() const {
     ensure_built();
     return parent_ids_;
+}
+
+const std::unordered_set<std::string>& graph_builder::
+top_level_package_names() const {
+    ensure_built();
+    return top_level_package_names_;
 }
 
 void graph_builder::build() {

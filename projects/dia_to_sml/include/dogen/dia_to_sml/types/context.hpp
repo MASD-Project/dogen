@@ -67,7 +67,7 @@ public:
         const std::unordered_map<dogen::sml::qname, dogen::sml::qname>& original_parent,
         const std::unordered_map<dogen::sml::qname, std::list<dogen::sml::qname> >& leaves,
         const std::unordered_set<std::string>& dependencies,
-        const std::unordered_set<std::string>& top_level_packages,
+        const std::unordered_set<std::string>& top_level_package_names,
         const std::unordered_map<dogen::sml::qname, dogen::sml::enumeration>& enumerations,
         const std::unordered_map<dogen::sml::qname, dogen::sml::package>& packages,
         const std::unordered_map<dogen::sml::qname, dogen::sml::exception>& exceptions);
@@ -136,10 +136,10 @@ public:
     void dependencies(const std::unordered_set<std::string>& v);
     void dependencies(const std::unordered_set<std::string>&& v);
 
-    const std::unordered_set<std::string>& top_level_packages() const;
-    std::unordered_set<std::string>& top_level_packages();
-    void top_level_packages(const std::unordered_set<std::string>& v);
-    void top_level_packages(const std::unordered_set<std::string>&& v);
+    const std::unordered_set<std::string>& top_level_package_names() const;
+    std::unordered_set<std::string>& top_level_package_names();
+    void top_level_package_names(const std::unordered_set<std::string>& v);
+    void top_level_package_names(const std::unordered_set<std::string>&& v);
 
     const std::unordered_map<dogen::sml::qname, dogen::sml::enumeration>& enumerations() const;
     std::unordered_map<dogen::sml::qname, dogen::sml::enumeration>& enumerations();
@@ -179,7 +179,7 @@ private:
     std::unordered_map<dogen::sml::qname, dogen::sml::qname> original_parent_;
     std::unordered_map<dogen::sml::qname, std::list<dogen::sml::qname> > leaves_;
     std::unordered_set<std::string> dependencies_;
-    std::unordered_set<std::string> top_level_packages_;
+    std::unordered_set<std::string> top_level_package_names_;
     std::unordered_map<dogen::sml::qname, dogen::sml::enumeration> enumerations_;
     std::unordered_map<dogen::sml::qname, dogen::sml::package> packages_;
     std::unordered_map<dogen::sml::qname, dogen::sml::exception> exceptions_;

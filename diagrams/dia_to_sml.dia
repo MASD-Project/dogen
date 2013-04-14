@@ -1807,7 +1807,7 @@ into its SML representation.#</dia:string>
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#top_level_packages#</dia:string>
+            <dia:string>#top_level_package_names#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#std::unordered_set&lt;std::string&gt;#</dia:string>
