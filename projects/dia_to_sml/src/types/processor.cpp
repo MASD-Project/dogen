@@ -185,7 +185,12 @@ processed_object processor::process(const dia::object& o) {
     if (o.child_node())
         r.child_node_id(o.child_node()->parent());
 
-    if (!o.connections().empty()) {
+    // FIXME: we should issue warnings here
+    if (!o.connections().empty() && (
+            r.object_type() == object_types::uml_generalization/* ||
+            r.object_type() == object_types::uml_association ||
+            r.object_type() == object_types::uml_realization*/)) {
+
         const auto s(o.connections().size());
         if (s != 2) {
             const auto size(boost::lexical_cast<std::string>(s));
