@@ -18,36 +18,22 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_DIA_TO_SML_TYPES_VISITATION_ERROR_HPP
-#define DOGEN_DIA_TO_SML_TYPES_VISITATION_ERROR_HPP
+#ifndef DOGEN_DIA_TO_SML_IO_PROCESSED_OBJECT_IO_HPP
+#define DOGEN_DIA_TO_SML_IO_PROCESSED_OBJECT_IO_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <boost/exception/info.hpp>
-#include <string>
+#include <iosfwd>
+#include "dogen/dia_to_sml/types/processed_object.hpp"
 
 namespace dogen {
 namespace dia_to_sml {
 
-/**
- * @brief An error has occurred while visiting a dia object.
- */
-class visitation_error : public virtual std::exception, public virtual boost::exception {
-public:
-    visitation_error() = default;
-    ~visitation_error() noexcept = default;
-
-public:
-    visitation_error(const std::string& message) : message_(message) { }
-
-public:
-    const char* what() const noexcept { return(message_.c_str()); }
-
-private:
-    const std::string message_;
-};
+std::ostream&
+operator<<(std::ostream& s,
+     const dogen::dia_to_sml::processed_object& v);
 
 } }
 

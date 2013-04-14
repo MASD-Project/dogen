@@ -153,8 +153,8 @@ add_custom_target(codegen_${target}
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
     COMMAND ${dogen_binary}
     --target ${CMAKE_SOURCE_DIR}/diagrams/${target}.dia
+    --reference ${CMAKE_SOURCE_DIR}/diagrams/dia.dia,dogen
     --reference ${CMAKE_SOURCE_DIR}/diagrams/sml.dia,dogen
-    --reference ${CMAKE_SOURCE_DIR}/diagrams/cpp.dia,dogen
     --cpp-project-dir ${CMAKE_SOURCE_DIR}/projects/
     --cpp-enable-facet domain
     --cpp-enable-facet io
@@ -165,5 +165,5 @@ add_custom_target(codegen_${target}
     --ignore-files-matching-regex .*/CMakeLists.txt
     --ignore-files-matching-regex .*/spec/.*
     -v -d -p dogen)
-add_dependencies(codegen_${target} driver)
+#add_dependencies(codegen_${target} driver)
 add_dependencies(codegen codegen_${target})

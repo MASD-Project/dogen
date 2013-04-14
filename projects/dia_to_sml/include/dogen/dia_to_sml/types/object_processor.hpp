@@ -18,31 +18,34 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_DIA_TO_SML_TYPES_DIA_VISITABLE_ADAPTOR_HPP
-#define DOGEN_DIA_TO_SML_TYPES_DIA_VISITABLE_ADAPTOR_HPP
+#ifndef DOGEN_DIA_TO_SML_TYPES_OBJECT_PROCESSOR_HPP
+#define DOGEN_DIA_TO_SML_TYPES_OBJECT_PROCESSOR_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <string>
-#include "dogen/dia/types/object.hpp"
-#include "dogen/dia/types/attribute.hpp"
-#include "dogen/dia/types/composite.hpp"
+#include "dogen/dia/types/attribute_fwd.hpp"
+#include "dogen/dia/types/object_fwd.hpp"
+#include "dogen/dia/types/attribute_fwd.hpp"
+#include "dogen/dia/types/composite_fwd.hpp"
 #include "dogen/dia_to_sml/types/object_types.hpp"
 #include "dogen/dia_to_sml/types/stereotypes.hpp"
-#include "dogen/dia_to_sml/types/dia_visitor.hpp"
+#include "dogen/dia_to_sml/types/processed_object_fwd.hpp"
 
 namespace dogen {
 namespace dia_to_sml {
 
-class dia_visitable_adaptor {
+/**
+ * @brief Processes dia objects into an intermediate format.
+ */
+class object_processor {
 public:
-    dia_visitable_adaptor() = default;
-    dia_visitable_adaptor(const dia_visitable_adaptor&) = default;
-    ~dia_visitable_adaptor() = default;
-    dia_visitable_adaptor(dia_visitable_adaptor&&) = default;
-    dia_visitable_adaptor& operator=(const dia_visitable_adaptor&) = default;
+    object_processor() = default;
+    object_processor(const object_processor&) = delete;
+    object_processor(object_processor&&) = default;
+    virtual ~object_processor() noexcept = 0;
 
 private:
     /**
@@ -64,20 +67,9 @@ private:
 
 public:
     /**
-     * @brief Visits a dia object.
+     * @brief Process the object.
      */
-    /**@{*/
-    void accept(const dia::object& o, const dia_visitor& v);
-    void accept(const dia::object& o, dia_visitor& v);
-    /**@}*/
-
-    /**
-     * @brief Visits a dia composite attribute.
-     */
-    /**@{*/
-    void accept(const dia::composite& c, const dia_visitor& v);
-    void accept(const dia::composite& c, dia_visitor& v);
-    /**@}*/
+    processed_object process(const dia::object& o);
 };
 
 } }

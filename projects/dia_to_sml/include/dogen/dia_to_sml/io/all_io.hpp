@@ -21,4 +21,5 @@
 #include "dogen/dia_to_sml/io/context_io.hpp"
 #include "dogen/dia_to_sml/io/node_io.hpp"
 #include "dogen/dia_to_sml/io/object_types_io.hpp"
+#include "dogen/dia_to_sml/io/processed_object_io.hpp"
 #include "dogen/dia_to_sml/io/stereotypes_io.hpp"

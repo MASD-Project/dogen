@@ -18,8 +18,44 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/dia_to_sml/hash/context_hash.hpp"
-#include "dogen/dia_to_sml/hash/node_hash.hpp"
+#include "dogen/dia/hash/composite_hash.hpp"
 #include "dogen/dia_to_sml/hash/object_types_hash.hpp"
 #include "dogen/dia_to_sml/hash/processed_object_hash.hpp"
 #include "dogen/dia_to_sml/hash/stereotypes_hash.hpp"
+
+namespace {
+
+template <typename HashableType>
+inline void combine(std::size_t& seed, const HashableType& value)
+{
+    std::hash<HashableType> hasher;
+    seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
+}
+
+inline std::size_t hash_std_vector_dogen_dia_composite(const std::vector<dogen::dia::composite>& v){
+    std::size_t seed(0);
+    for (const auto i : v) {
+        combine(seed, i);
+    }
+    return seed;
+}
+
+}
+
+namespace dogen {
+namespace dia_to_sml {
+
+std::size_t processed_object_hasher::hash(const processed_object&v) {
+    std::size_t seed(0);
+
+    combine(seed, v.name());
+    combine(seed, v.object_type());
+    combine(seed, v.stereotype());
+    combine(seed, v.comment());
+    combine(seed, hash_std_vector_dogen_dia_composite(v.uml_attributes()));
+    combine(seed, v.parent_id());
+
+    return seed;
+}
+
+} }

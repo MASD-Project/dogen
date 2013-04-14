@@ -18,17 +18,23 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_DIA_TO_SML_TYPES_DIA_VISITABLE_ADAPTOR_FWD_HPP
-#define DOGEN_DIA_TO_SML_TYPES_DIA_VISITABLE_ADAPTOR_FWD_HPP
+#ifndef DOGEN_DIA_TO_SML_SERIALIZATION_PROCESSED_OBJECT_FWD_SER_HPP
+#define DOGEN_DIA_TO_SML_SERIALIZATION_PROCESSED_OBJECT_FWD_SER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-namespace dogen {
-namespace dia_to_sml {
+#include "dogen/dia_to_sml/types/processed_object_fwd.hpp"
 
-class dia_visitable_adaptor;
+namespace boost {
+namespace serialization {
+
+template<class Archive>
+void save(Archive& ar, const dogen::dia_to_sml::processed_object& v, unsigned int version);
+
+template<class Archive>
+void load(Archive& ar, dogen::dia_to_sml::processed_object& v, unsigned int version);
 
 } }
 

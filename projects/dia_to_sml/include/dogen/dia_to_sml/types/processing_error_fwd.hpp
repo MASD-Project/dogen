@@ -18,42 +18,20 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_DIA_TO_SML_TYPES_DIA_VISITOR_HPP
-#define DOGEN_DIA_TO_SML_TYPES_DIA_VISITOR_HPP
+#ifndef DOGEN_DIA_TO_SML_TYPES_PROCESSING_ERROR_FWD_HPP
+#define DOGEN_DIA_TO_SML_TYPES_PROCESSING_ERROR_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
+#include <boost/exception/info.hpp>
 #include <string>
-#include "dogen/dia/types/composite.hpp"
-#include "dogen/dia_to_sml/types/object_types.hpp"
-#include "dogen/dia_to_sml/types/stereotypes.hpp"
 
 namespace dogen {
 namespace dia_to_sml {
 
-class dia_visitor {
-public:
-    dia_visitor() = default;
-    dia_visitor(const dia_visitor&) = delete;
-    dia_visitor(dia_visitor&&) = default;
-    virtual ~dia_visitor() noexcept = 0;
-
-public:
-    virtual void name(const std::string&) { }
-    virtual void object_type(const object_types) { }
-    virtual void stereotype(const stereotypes) { }
-    virtual void comment(const std::string&) { }
-    virtual void composite(const dia::composite&) { }
-
-public:
-    virtual void name(const std::string&) const { }
-    virtual void object_type(const object_types) const { }
-    virtual void stereotype(const stereotypes) const { }
-    virtual void comment(const std::string&) const { }
-    virtual void composite(const dia::composite&) const { }
-};
+class processing_error;
 
 } }
 

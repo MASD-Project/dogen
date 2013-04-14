@@ -23,13 +23,17 @@
 #include <boost/algorithm/string/trim.hpp>
 #include <boost/algorithm/string/erase.hpp>
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/dia_to_sml/types/visitation_error.hpp"
-#include "dogen/dia_to_sml/types/dia_visitable_adaptor.hpp"
+#include "dogen/dia/types/object.hpp"
+#include "dogen/dia/types/attribute.hpp"
+#include "dogen/dia/types/composite.hpp"
+#include "dogen/dia_to_sml/types/processing_error.hpp"
+#include "dogen/dia_to_sml/types/object_processor.hpp"
+#include "dogen/dia_to_sml/types/processed_object.hpp"
 
 namespace {
 
 using namespace dogen::utility::log;
-static logger lg(logger_factory("dia_to_sml.dia_visitable_adaptor"));
+static logger lg(logger_factory("dia_to_sml.object_processor"));
 
 const std::string dia_string("string");
 const std::string dia_name("name");
@@ -85,9 +89,9 @@ attribute_value(const Variant& v, const std::string& desc) {
     } catch (const boost::bad_get&) {
         BOOST_LOG_SEV(lg, error) << unexpected_attribute_value_type << desc;
 
-        using dogen::dia_to_sml::visitation_error;
+        using dogen::dia_to_sml::processing_error;
         BOOST_THROW_EXCEPTION(
-            visitation_error(unexpected_attribute_value_type + desc));
+            processing_error(unexpected_attribute_value_type + desc));
     }
     return r;
 }
@@ -98,7 +102,7 @@ namespace dogen {
 namespace dia_to_sml {
 
 object_types
-dia_visitable_adaptor::parse_object_type(const std::string& ot) const {
+object_processor::parse_object_type(const std::string& ot) const {
     if (ot == uml_large_package)
         return object_types::uml_large_package;
 
@@ -121,10 +125,10 @@ dia_visitable_adaptor::parse_object_type(const std::string& ot) const {
         return object_types::uml_realization;
 
     BOOST_LOG_SEV(lg, error) << invalid_object_type << ot;
-    BOOST_THROW_EXCEPTION(visitation_error(invalid_object_type + ot));
+    BOOST_THROW_EXCEPTION(processing_error(invalid_object_type + ot));
 }
 
-stereotypes dia_visitable_adaptor::
+stereotypes object_processor::
 parse_stereotype(const std::string& st) const {
     if (st == enumeration)
         return stereotypes::enumeration;
@@ -145,17 +149,17 @@ parse_stereotype(const std::string& st) const {
         return stereotypes::nongeneratable;
 
     BOOST_LOG_SEV(lg, error) << invalid_stereotype << st;
-    BOOST_THROW_EXCEPTION(visitation_error(invalid_stereotype + st));
+    BOOST_THROW_EXCEPTION(processing_error(invalid_stereotype + st));
 }
 
-std::string dia_visitable_adaptor::
+std::string object_processor::
 parse_string_attribute(const dia::attribute& a) const {
     const auto values(a.values());
     if (values.size() != 1) {
         BOOST_LOG_SEV(lg, error) << "Expected attribute to have one"
                                  << " value but found " << values.size();
         BOOST_THROW_EXCEPTION(
-            visitation_error(unexpected_attribute_value_size +
+            processing_error(unexpected_attribute_value_size +
                 boost::lexical_cast<std::string>(values.size())));
     }
 
@@ -168,17 +172,17 @@ parse_string_attribute(const dia::attribute& a) const {
     return name;
 }
 
-void dia_visitable_adaptor::accept(const dia::object& o, dia_visitor& v) {
-    v.object_type(parse_object_type(o.type()));
-    for (auto a : o.attributes()) {
-        BOOST_LOG_SEV(lg, debug) << "Found attribute: " << a.name();
+processed_object object_processor::process(const dia::object& o) {
+    processed_object r;
+    r.object_type(parse_object_type(o.type()));
 
+    for (auto a : o.attributes()) {
         if (a.name() == dia_name)
-            v.name(parse_string_attribute(a));
+            r.name(parse_string_attribute(a));
         else if (a.name() == dia_stereotype)
-            v.stereotype(parse_stereotype(parse_string_attribute(a)));
+            r.stereotype(parse_stereotype(parse_string_attribute(a)));
         else if (a.name() == dia_comment)
-            v.comment(parse_string_attribute(a));
+            r.comment(parse_string_attribute(a));
         else if (a.name() == dia_attributes) {
             const auto& values(a.values());
             if (values.empty()) {
@@ -186,62 +190,26 @@ void dia_visitable_adaptor::accept(const dia::object& o, dia_visitor& v) {
                 continue;
             }
 
-            for (const auto& val : values) {
+            r.uml_attributes().reserve(values.size());
+            for (const auto& v : values) {
                 using dia::composite;
-                v.composite(attribute_value<composite>(val, dia_composite));
+                const auto& c(attribute_value<composite>(v, dia_composite));
+                if (c.type() != dia_uml_attribute) {
+                    BOOST_LOG_SEV(lg, error) << "Expected composite type "
+                                             << " to be " << dia_uml_attribute
+                                             << "but was " << c.type();
+                    BOOST_THROW_EXCEPTION(
+                        processing_error(uml_attribute_expected));
+                }
+                BOOST_LOG_SEV(lg, debug) << "Found composite of type "
+                                         << c.type();
+
+                r.uml_attributes().push_back(c);
             }
         }
     }
-}
 
-void dia_visitable_adaptor::accept(const dia::object& o, const dia_visitor& v) {
-    v.object_type(parse_object_type(o.type()));
-    for (auto a : o.attributes()) {
-        BOOST_LOG_SEV(lg, debug) << "Found attribute: " << a.name();
-
-        if (a.name() == dia_name)
-            v.name(parse_string_attribute(a));
-        else if (a.name() == dia_stereotype)
-            v.stereotype(parse_stereotype(parse_string_attribute(a)));
-        else if (a.name() == dia_comment)
-            v.comment(parse_string_attribute(a));
-        else if (a.name() == dia_attributes) {
-            const auto& values(a.values());
-            if (values.empty()) {
-                BOOST_LOG_SEV(lg, debug) << "Attribute is empty.";
-                continue;
-            }
-
-            for (const auto& val : values) {
-                using dia::composite;
-                v.composite(attribute_value<composite>(val, dia_composite));
-            }
-        }
-    }
-}
-
-void dia_visitable_adaptor::
-accept(const dia::composite& c, const dia_visitor& v) {
-    for (const auto a : c.value()) {
-        if (a->name() == dia_name)
-            v.name(parse_string_attribute(*a));
-        else if (a->name() == dia_stereotype)
-            v.stereotype(parse_stereotype(parse_string_attribute(*a)));
-        else if (a->name() == dia_comment)
-            v.comment(parse_string_attribute(*a));
-    }
-}
-
-void dia_visitable_adaptor::
-accept(const dia::composite& c, dia_visitor& v) {
-    for (const auto a : c.value()) {
-        if (a->name() == dia_name)
-            v.name(parse_string_attribute(*a));
-        else if (a->name() == dia_stereotype)
-            v.stereotype(parse_stereotype(parse_string_attribute(*a)));
-        else if (a->name() == dia_comment)
-            v.comment(parse_string_attribute(*a));
-    }
+    return r;
 }
 
 } }

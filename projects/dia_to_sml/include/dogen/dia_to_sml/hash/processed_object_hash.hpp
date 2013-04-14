@@ -18,11 +18,35 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/dia_to_sml/types/dia_visitor.hpp"
+#ifndef DOGEN_DIA_TO_SML_HASH_PROCESSED_OBJECT_HASH_HPP
+#define DOGEN_DIA_TO_SML_HASH_PROCESSED_OBJECT_HASH_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include <functional>
+#include "dogen/dia_to_sml/types/processed_object.hpp"
 
 namespace dogen {
 namespace dia_to_sml {
 
-dia_visitor::~dia_visitor() noexcept { }
+class processed_object_hasher {
+public:
+    static std::size_t hash(const processed_object& v);
+};
 
 } }
+
+namespace std {
+
+template<>
+class hash<dogen::dia_to_sml::processed_object> {
+public:
+    size_t operator()(const dogen::dia_to_sml::processed_object& v) const {
+        return dogen::dia_to_sml::processed_object_hasher::hash(v);
+    }
+};
+
+}
+#endif
