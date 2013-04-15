@@ -23,7 +23,7 @@
 					<count>0</count>
 					<item_version>0</item_version>
 				</package_path>
-				<type_name>class_1</type_name>
+				<type_name>class_5</type_name>
 				<meta_type>2</meta_type>
 			</first>
 			<second class_id="6" tracking_level="0" version="0">
@@ -37,7 +37,7 @@
 						<count>0</count>
 						<item_version>0</item_version>
 					</package_path>
-					<type_name>class_1</type_name>
+					<type_name>class_5</type_name>
 					<meta_type>2</meta_type>
 				</name>
 				<properties class_id="7" tracking_level="0" version="0">
@@ -106,7 +106,7 @@
 					<count>0</count>
 					<item_version>0</item_version>
 				</package_path>
-				<type_name>class_2</type_name>
+				<type_name>class_4</type_name>
 				<meta_type>2</meta_type>
 			</first>
 			<second>
@@ -120,7 +120,7 @@
 						<count>0</count>
 						<item_version>0</item_version>
 					</package_path>
-					<type_name>class_2</type_name>
+					<type_name>class_4</type_name>
 					<meta_type>2</meta_type>
 				</name>
 				<properties>
@@ -272,7 +272,7 @@
 					<count>0</count>
 					<item_version>0</item_version>
 				</package_path>
-				<type_name>class_4</type_name>
+				<type_name>class_2</type_name>
 				<meta_type>2</meta_type>
 			</first>
 			<second>
@@ -286,7 +286,7 @@
 						<count>0</count>
 						<item_version>0</item_version>
 					</package_path>
-					<type_name>class_4</type_name>
+					<type_name>class_2</type_name>
 					<meta_type>2</meta_type>
 				</name>
 				<properties>
@@ -355,7 +355,7 @@
 					<count>0</count>
 					<item_version>0</item_version>
 				</package_path>
-				<type_name>class_5</type_name>
+				<type_name>class_1</type_name>
 				<meta_type>2</meta_type>
 			</first>
 			<second>
@@ -369,7 +369,7 @@
 						<count>0</count>
 						<item_version>0</item_version>
 					</package_path>
-					<type_name>class_5</type_name>
+					<type_name>class_1</type_name>
 					<meta_type>2</meta_type>
 				</name>
 				<properties>

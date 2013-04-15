@@ -38,6 +38,7 @@ static logger lg(logger_factory("dia_to_sml.processor"));
 const std::string dia_string("string");
 const std::string dia_name("name");
 const std::string dia_type("type");
+const std::string dia_text("text");
 const std::string dia_comment("comment");
 const std::string dia_stereotype("stereotype");
 const std::string dia_attributes("attributes");
@@ -65,6 +66,9 @@ const std::string nongeneratable("nongeneratable");
 const std::string error_parsing_object_type("Fail to parse object type: ");
 const std::string empty_dia_object_name("Dia object name is empty");
 const std::string uml_attribute_expected("UML atttribute expected");
+const std::string text_attribute_expected("Text attribute expected");
+const std::string one_value_expected(
+    "Attribute should have exactly one value");
 const std::string error_parsing_stereotype("Fail to parse stereotype: ");
 const std::string name_attribute_expected(
     "Could not find name attribute. ID: ");
@@ -215,7 +219,40 @@ processed_object processor::process(const dia::object& o) {
             r.stereotype(parse_stereotype(parse_string_attribute(a)));
         else if (a.name() == dia_comment)
             r.comment(parse_string_attribute(a));
-        else if (a.name() == dia_attributes) {
+        else if (a.name() ==  dia_text) {
+            if (a.values().size() != 1) {
+                BOOST_LOG_SEV(lg, error) << "Expected text attribute to "
+                                         << "have a single value but found "
+                                         << a.values().size();
+                BOOST_THROW_EXCEPTION(processing_error(one_value_expected));
+            }
+
+            using dia::composite;
+            composite c;
+            try {
+                c = attribute_value<composite>(a.values().front(),
+                    dia_composite);
+            } catch (const processing_error& e) {
+                continue;
+            }
+
+            if (c.type() != dia_text) {
+                BOOST_LOG_SEV(lg, error) << "Expected composite type "
+                                         << "to be " << dia_text
+                                         << "but was " << c.type();
+                BOOST_THROW_EXCEPTION(processing_error(text_attribute_expected));
+            }
+            BOOST_LOG_SEV(lg, debug) << "Found composite of type " << c.type();
+
+            processed_property p;
+            for (const auto a : c.value()) {
+                if (a->name() == dia_string)
+                    r.text(parse_string_attribute(*a));
+                else
+                    BOOST_LOG_SEV(lg, warn) << "Ignoring attribute: "
+                                            << a->name();
+            }
+        } else if (a.name() == dia_attributes) {
             const auto& values(a.values());
             if (values.empty()) {
                 BOOST_LOG_SEV(lg, debug) << "Object " << o.id()
@@ -223,7 +260,6 @@ processed_object processor::process(const dia::object& o) {
                 continue;
             }
 
-            r.uml_attributes().reserve(values.size());
             for (const auto& v : values) {
                 using dia::composite;
                 const auto& c(attribute_value<composite>(v, dia_composite));
@@ -238,7 +274,7 @@ processed_object processor::process(const dia::object& o) {
                                          << c.type();
 
                 processed_property p;
-                typedef boost::shared_ptr<dia::attribute> attribute_ptr;
+                r.properties().reserve(c.value().size());
                 for (const auto a : c.value()) {
                     if (a->name() == dia_name)
                         p.name(parse_string_attribute(*a));

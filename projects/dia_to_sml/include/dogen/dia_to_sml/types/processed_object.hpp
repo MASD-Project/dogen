@@ -60,7 +60,8 @@ public:
         const std::vector<dogen::dia::composite>& uml_attributes,
         const std::string& child_node_id,
         const boost::optional<std::pair<std::string, std::string> >& connection,
-        const std::vector<dogen::dia_to_sml::processed_property>& properties);
+        const std::vector<dogen::dia_to_sml::processed_property>& properties,
+        const std::string& text);
 
 private:
     template<typename Archive>
@@ -111,6 +112,16 @@ public:
     void properties(const std::vector<dogen::dia_to_sml::processed_property>& v);
     void properties(const std::vector<dogen::dia_to_sml::processed_property>&& v);
 
+    /**
+     * @brief Text contents of a UML note.
+     */
+    /**@{*/
+    const std::string& text() const;
+    std::string& text();
+    void text(const std::string& v);
+    void text(const std::string&& v);
+    /**@}*/
+
 public:
     bool operator==(const processed_object& rhs) const;
     bool operator!=(const processed_object& rhs) const {
@@ -131,6 +142,7 @@ private:
     std::string child_node_id_;
     boost::optional<std::pair<std::string, std::string> > connection_;
     std::vector<dogen::dia_to_sml::processed_property> properties_;
+    std::string text_;
 };
 
 } }

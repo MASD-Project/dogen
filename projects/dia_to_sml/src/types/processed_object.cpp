@@ -36,7 +36,8 @@ processed_object::processed_object(processed_object&& rhs)
       uml_attributes_(std::move(rhs.uml_attributes_)),
       child_node_id_(std::move(rhs.child_node_id_)),
       connection_(std::move(rhs.connection_)),
-      properties_(std::move(rhs.properties_)) { }
+      properties_(std::move(rhs.properties_)),
+      text_(std::move(rhs.text_)) { }
 
 processed_object::processed_object(
     const std::string& id,
@@ -47,7 +48,8 @@ processed_object::processed_object(
     const std::vector<dogen::dia::composite>& uml_attributes,
     const std::string& child_node_id,
     const boost::optional<std::pair<std::string, std::string> >& connection,
-    const std::vector<dogen::dia_to_sml::processed_property>& properties)
+    const std::vector<dogen::dia_to_sml::processed_property>& properties,
+    const std::string& text)
     : id_(id),
       name_(name),
       object_type_(object_type),
@@ -56,7 +58,8 @@ processed_object::processed_object(
       uml_attributes_(uml_attributes),
       child_node_id_(child_node_id),
       connection_(connection),
-      properties_(properties) { }
+      properties_(properties),
+      text_(text) { }
 
 void processed_object::swap(processed_object& other) noexcept {
     using std::swap;
@@ -69,6 +72,7 @@ void processed_object::swap(processed_object& other) noexcept {
     swap(child_node_id_, other.child_node_id_);
     swap(connection_, other.connection_);
     swap(properties_, other.properties_);
+    swap(text_, other.text_);
 }
 
 bool processed_object::operator==(const processed_object& rhs) const {
@@ -80,7 +84,8 @@ bool processed_object::operator==(const processed_object& rhs) const {
         uml_attributes_ == rhs.uml_attributes_ &&
         child_node_id_ == rhs.child_node_id_ &&
         connection_ == rhs.connection_ &&
-        properties_ == rhs.properties_;
+        properties_ == rhs.properties_ &&
+        text_ == rhs.text_;
 }
 
 processed_object& processed_object::operator=(processed_object other) {
@@ -215,6 +220,22 @@ void processed_object::properties(const std::vector<dogen::dia_to_sml::processed
 
 void processed_object::properties(const std::vector<dogen::dia_to_sml::processed_property>&& v) {
     properties_ = std::move(v);
+}
+
+const std::string& processed_object::text() const {
+    return text_;
+}
+
+std::string& processed_object::text() {
+    return text_;
+}
+
+void processed_object::text(const std::string& v) {
+    text_ = v;
+}
+
+void processed_object::text(const std::string&& v) {
+    text_ = std::move(v);
 }
 
 } }

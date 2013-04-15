@@ -101,6 +101,7 @@ populate(const unsigned int position, result_type& v) {
     v.child_node_id(create_std_string(position + 6));
     v.connection(create_boost_optional_std_pair_std_string_std_string_(position + 7));
     v.properties(create_std_vector_dogen_dia_to_sml_processed_property(position + 8));
+    v.text(create_std_string(position + 9));
 }
 
 processed_object_generator::result_type

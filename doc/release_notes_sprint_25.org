@@ -21,11 +21,25 @@ Clock summary at [2013-04-04 Thu 00:00]
 | Use explicit casting for versioned to unversioned conversions |        |      | 0:36 |
 #+end:
 
-*** IMPLEMENTATION Clean up dia to SML transformer                    :story:
+*** COMPLETED Clean up dia to SML transformer                         :story:
+    CLOSED: [2013-04-15 Mon 23:12]
     CLOCK: [2013-04-03 Wed 22:34]--[2013-04-03 Wed 22:54] =>  0:20
 
 **** IMPLEMENTATION Create a new graph class
      CLOCK: [2013-04-03 Wed 22:54]--[2013-04-03 Wed 23:59] =>  1:05
+
+*** IMPLEMENTATION Add commenting of namespaces                       :story:
+
+- if one creates a "comment box" with a well-known dogen
+  implementation specific parameter, that box is used as a comment for
+  the namespace.
+- if the comment box is inside of a package, it will be used for the
+  comments in the package.
+- comments are placed in a file with the name of the namespace,
+  e.g. =model_name.hpp=.
+- file does not get created if there are no comments.
+
+**** IMPLEMENTATION Add support for parsing UML notes
 
 *** Add support for multiple stereotypes to Dia                       :story:
 
@@ -36,6 +50,19 @@ container of stereotypes.
 
 We need a validator class that takes a list of stereotypes and ensures
 that they can be combined.
+
+*** Re-implement key support                                          :story:
+
+- create a new stereotype of keyed. when set, it results in the
+  creation of a new class containing all properties marked as
+  identity. if none are found, throw.
+- create new stand alone function =extract_key=. given an instance of
+  a class, it returns the corresponding key. it should be defined in
+  the same file as the key.
+- if versioned, also create unversioned key class. add typedefs in
+  class for versioned key.
+- keys are comparable if all properties are of comparable types. add
+  =operator<= automatically.
 
 *** Add aggregate root stereotype                                     :story:
 
@@ -55,19 +82,6 @@ implemented by the user.
   comparable, generate =operator<= for the keys.
 - perhaps we should also have a =comparable= stereotype. if not set,
   ignore this.
-
-*** Re-implement key support                                          :story:
-
-- create a new stereotype of keyed. when set, it results in the
-  creation of a new class containing all properties marked as
-  identity. if none are found, throw.
-- create new stand alone function =extract_key=. given an instance of
-  a class, it returns the corresponding key. it should be defined in
-  the same file as the key.
-- if versioned, also create unversioned key class. add typedefs in
-  class for versioned key.
-- keys are comparable if all properties are of comparable types. add
-  =operator<= automatically.
 
 *** Fix entity stereotype                                             :story:
 
@@ -120,16 +134,5 @@ cases.
 
 - remove versioning from all other models such as std::model, etc.
 - add tests for =std::unordered=, maps etc.
-
-*** Add commenting of namespaces                                      :story:
-
-- if one creates a "comment box" with a well-known dogen
-  implementation specific parameter, that box is used as a comment for
-  the namespace.
-- if the comment box is inside of a package, it will be used for the
-  comments in the package.
-- comments are placed in a file with the name of the namespace,
-  e.g. =model_name.hpp=.
-- file does not get created if there are no comments.
 
 ** Deprecated Development Stories

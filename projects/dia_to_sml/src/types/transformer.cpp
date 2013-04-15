@@ -368,6 +368,10 @@ void transformer::transform(const processed_object& o) {
         return;
     }
 
+    if (o.object_type() == object_types::uml_note) {
+        return;
+    }
+
     ensure_object_is_uml_class(o.object_type());
     switch(o.stereotype()) {
     case stereotypes::no_stereotype:

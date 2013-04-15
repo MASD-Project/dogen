@@ -58,6 +58,7 @@ void save(Archive& ar,
     ar << make_nvp("child_node_id", v.child_node_id_);
     ar << make_nvp("connection", v.connection_);
     ar << make_nvp("properties", v.properties_);
+    ar << make_nvp("text", v.text_);
 }
 
 template<typename Archive>
@@ -73,6 +74,7 @@ void load(Archive& ar,
     ar >> make_nvp("child_node_id", v.child_node_id_);
     ar >> make_nvp("connection", v.connection_);
     ar >> make_nvp("properties", v.properties_);
+    ar >> make_nvp("text", v.text_);
 }
 
 } }

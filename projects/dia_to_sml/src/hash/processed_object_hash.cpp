@@ -84,6 +84,7 @@ std::size_t processed_object_hasher::hash(const processed_object&v) {
     combine(seed, v.child_node_id());
     combine(seed, hash_boost_optional_std_pair_std_string_std_string_(v.connection()));
     combine(seed, hash_std_vector_dogen_dia_to_sml_processed_property(v.properties()));
+    combine(seed, v.text());
 
     return seed;
 }

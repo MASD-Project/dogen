@@ -104,7 +104,8 @@ std::ostream& operator<<(std::ostream& s, const processed_object& v) {
       << "\"uml_attributes\": " << v.uml_attributes() << ", "
       << "\"child_node_id\": " << "\"" << tidy_up_string(v.child_node_id()) << "\"" << ", "
       << "\"connection\": " << v.connection() << ", "
-      << "\"properties\": " << v.properties()
+      << "\"properties\": " << v.properties() << ", "
+      << "\"text\": " << "\"" << tidy_up_string(v.text()) << "\""
       << " }";
     return(s);
 }

@@ -125,7 +125,8 @@ bool graph_builder::is_relevant(const object_types ot) const {
     return
         ot == object_types::uml_large_package ||
         ot == object_types::uml_generalization ||
-        ot == object_types::uml_class;
+        ot == object_types::uml_class ||
+        ot == object_types::uml_note;
 }
 
 void graph_builder::
