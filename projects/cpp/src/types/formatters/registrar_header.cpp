@@ -19,7 +19,7 @@
  *
  */
 #include <boost/throw_exception.hpp>
-#include "dogen/cpp/types/generation_failure.hpp"
+#include "dogen/cpp/types/formatters/formatting_error.hpp"
 #include "dogen/cpp/types/formatters/namespace_formatter.hpp"
 #include "dogen/cpp/types/formatters/namespace_helper.hpp"
 #include "dogen/cpp/types/formatters/licence.hpp"
@@ -58,7 +58,7 @@ void registrar_header::format(const file_view_model& vm) {
     const auto o(vm.registrar_vm());
     if (!o) {
         BOOST_LOG_SEV(lg, error) << expected_registrar_view_model;
-        BOOST_THROW_EXCEPTION(generation_failure(expected_registrar_view_model));
+        BOOST_THROW_EXCEPTION(formatting_error(expected_registrar_view_model));
     }
 
     licence licence(stream_);

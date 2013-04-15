@@ -38,7 +38,7 @@ using dogen::config::cpp_facet_types;
 namespace  {
 
 const std::string test_suite("includer_spec");
-const std::string test_module("generator");
+const std::string test_module("cpp");
 const std::string types("types");
 const std::string hash("hash");
 const std::string test_data("test_data");

@@ -26,7 +26,7 @@
 namespace {
 
 const std::string empty;
-const std::string test_module("generator");
+const std::string test_module("cpp");
 const std::string test_suite("indenter_spec");
 
 }

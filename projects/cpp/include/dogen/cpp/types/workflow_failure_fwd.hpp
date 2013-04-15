@@ -18,28 +18,21 @@
  * MA 02110-1301, USA.
  *
  */
-#include <boost/throw_exception.hpp>
-#include "dogen/engine/types/backends/cpp_backend.hpp"
+#ifndef DOGEN_CPP_TYPES_WORKFLOW_FAILURE_FWD_HPP
+#define DOGEN_CPP_TYPES_WORKFLOW_FAILURE_FWD_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include <boost/exception/info.hpp>
+#include <string>
 
 namespace dogen {
-namespace engine {
-namespace backends {
+namespace cpp {
 
-cpp_backend::
-cpp_backend(const sml::model& model, const config::cpp_settings& settings) :
-    impl_(model, settings) { }
+class workflow_failure;
 
-backend::ptr cpp_backend::
-create(const sml::model& model, const config::cpp_settings& settings) {
-    return backend::ptr(new cpp_backend(model, settings));
-}
+} }
 
-backend::value_type cpp_backend::generate() {
-    return impl_.execute();
-}
-
-std::vector<boost::filesystem::path> cpp_backend::managed_directories() const {
-    return impl_.managed_directories();
-}
-
-} } }
+#endif

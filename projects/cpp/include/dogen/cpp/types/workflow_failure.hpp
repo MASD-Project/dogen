@@ -18,17 +18,36 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_TYPES_GENERATOR_FWD_HPP
-#define DOGEN_CPP_TYPES_GENERATOR_FWD_HPP
+#ifndef DOGEN_CPP_TYPES_WORKFLOW_FAILURE_HPP
+#define DOGEN_CPP_TYPES_WORKFLOW_FAILURE_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
+#include <boost/exception/info.hpp>
+#include <string>
+
 namespace dogen {
 namespace cpp {
 
-class generator;
+/**
+ * @brief An error occured during code generation.
+ */
+class workflow_failure : public virtual std::exception, public virtual boost::exception {
+public:
+    workflow_failure() = default;
+    ~workflow_failure() noexcept = default;
+
+public:
+    workflow_failure(const std::string& message) : message_(message) { }
+
+public:
+    const char* what() const noexcept { return(message_.c_str()); }
+
+private:
+    const std::string message_;
+};
 
 } }
 

@@ -18,47 +18,36 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_ENGINE_TYPES_BACKENDS_CPP_BACKEND_HPP
-#define DOGEN_ENGINE_TYPES_BACKENDS_CPP_BACKEND_HPP
+#ifndef DOGEN_CPP_TYPES_FORMATTERS_FORMATTING_ERROR_HPP
+#define DOGEN_CPP_TYPES_FORMATTERS_FORMATTING_ERROR_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <map>
-#include <utility>
+#include <boost/exception/info.hpp>
 #include <string>
-#include <sstream>
-#include <boost/filesystem/path.hpp>
-#include "dogen/sml/types/model.hpp"
-#include "dogen/config/types/cpp_settings.hpp"
-#include "dogen/cpp/types/workflow.hpp"
-#include "dogen/engine/types/backends/backend.hpp"
 
 namespace dogen {
-namespace engine {
-namespace backends {
+namespace cpp {
+namespace formatters {
 
-class cpp_backend : public backend {
+/**
+ * @brief An error occurred while formatting.
+ */
+class formatting_error : public virtual std::exception, public virtual boost::exception {
 public:
-    cpp_backend() = delete;
-    cpp_backend(const cpp_backend&) = default;
-    cpp_backend(cpp_backend&&) = default;
-    cpp_backend& operator=(const cpp_backend&) = default;
-
-public:
-    cpp_backend(const sml::model& model, const config::cpp_settings& settings);
-    virtual ~cpp_backend() noexcept {}
+    formatting_error() = default;
+    ~formatting_error() noexcept = default;
 
 public:
-    static backend::ptr
-    create(const sml::model& model, const config::cpp_settings& settings);
+    formatting_error(const std::string& message) : message_(message) { }
 
 public:
-    backend::value_type generate() override;
-    std::vector<boost::filesystem::path> managed_directories() const override;
+    const char* what() const noexcept { return(message_.c_str()); }
+
 private:
-    cpp::workflow impl_;
+    const std::string message_;
 };
 
 } } }

@@ -19,7 +19,7 @@
  *
  */
 #include <boost/throw_exception.hpp>
-#include "dogen/cpp/types/generation_failure.hpp"
+#include "dogen/cpp/types/formatters/formatting_error.hpp"
 #include "dogen/cpp/types/formatters/licence.hpp"
 #include "dogen/cpp/types/formatters/includes.hpp"
 #include "dogen/cpp/types/formatters/facet_includer.hpp"
@@ -48,7 +48,7 @@ create(std::ostream& stream) {
 
 void facet_includer::format(const file_view_model& vm) {
     if (vm.class_vm())
-        BOOST_THROW_EXCEPTION(generation_failure(unexpected_class_view_model));
+        BOOST_THROW_EXCEPTION(formatting_error(unexpected_class_view_model));
 
     licence licence(stream_);
     licence.format();

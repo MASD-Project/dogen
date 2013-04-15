@@ -22,7 +22,7 @@
 #include <string>
 #include <ostream>
 #include <boost/throw_exception.hpp>
-#include "dogen/cpp/types/generation_failure.hpp"
+#include "dogen/cpp/types/formatters/formatting_error.hpp"
 #include "dogen/cpp/types/formatters/namespace_helper.hpp"
 #include "dogen/cpp/types/formatters/licence.hpp"
 #include "dogen/cpp/types/formatters/includes.hpp"
@@ -261,7 +261,7 @@ void serialization_implementation::format_class(const file_view_model& vm) {
     const auto o(vm.class_vm());
     if (!o) {
         BOOST_LOG_SEV(lg, error) << missing_class_view_model;
-        BOOST_THROW_EXCEPTION(generation_failure(missing_class_view_model));
+        BOOST_THROW_EXCEPTION(formatting_error(missing_class_view_model));
     }
 
     const view_models::class_view_model& cvm(*o);
@@ -300,7 +300,8 @@ void serialization_implementation::format_class(const file_view_model& vm) {
 void serialization_implementation::
 format_enumeration(const file_view_model&) {
     BOOST_LOG_SEV(lg, error) << enumeration_view_model_not_supported;
-    BOOST_THROW_EXCEPTION(generation_failure(enumeration_view_model_not_supported));
+    BOOST_THROW_EXCEPTION(
+        formatting_error(enumeration_view_model_not_supported));
 }
 
 void serialization_implementation::format(const file_view_model& vm) {

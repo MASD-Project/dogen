@@ -20,7 +20,7 @@
  */
 #include <ostream>
 #include <boost/throw_exception.hpp>
-#include "dogen/cpp/types/generation_failure.hpp"
+#include "dogen/cpp/types/formatters/formatting_error.hpp"
 #include "dogen/cpp/types/formatters/inserter_implementation.hpp"
 #include "dogen/cpp/types/formatters/header_guards.hpp"
 #include "dogen/cpp/types/formatters/licence.hpp"
@@ -78,7 +78,7 @@ void io_implementation::format_enumeration(const file_view_model& vm) {
     const auto o(vm.enumeration_vm());
     if (!o) {
         BOOST_LOG_SEV(lg, error) << missing_enumeration_view_model;
-        BOOST_THROW_EXCEPTION(generation_failure(missing_enumeration_view_model));
+        BOOST_THROW_EXCEPTION(formatting_error(missing_enumeration_view_model));
     }
 
     const auto evm(*o);
@@ -142,7 +142,7 @@ void io_implementation::format_class(const file_view_model& vm) {
     const auto o(vm.class_vm());
     if (!o) {
         BOOST_LOG_SEV(lg, error) << missing_class_view_model;
-        BOOST_THROW_EXCEPTION(generation_failure(missing_class_view_model));
+        BOOST_THROW_EXCEPTION(formatting_error(missing_class_view_model));
     }
 
     const view_models::class_view_model& cvm(*o);

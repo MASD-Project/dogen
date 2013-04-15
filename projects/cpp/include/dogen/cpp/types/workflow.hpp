@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_TYPES_GENERATOR_HPP
-#define DOGEN_CPP_TYPES_GENERATOR_HPP
+#ifndef DOGEN_CPP_TYPES_WORKFLOW_HPP
+#define DOGEN_CPP_TYPES_WORKFLOW_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -39,16 +39,16 @@
 namespace dogen {
 namespace cpp {
 
-class generator final {
+class workflow final {
 public:
-    generator() = delete;
-    generator(const generator&) = default;
-    generator(generator&&) = default;
-    generator& operator=(const generator&) = default;
+    workflow() = delete;
+    workflow(const workflow&) = default;
+    workflow(workflow&&) = default;
+    workflow& operator=(const workflow&) = default;
 
 public:
-    generator(const sml::model& model, const config::cpp_settings& settings);
-    virtual ~generator() noexcept {}
+    workflow(const sml::model& model, const config::cpp_settings& settings);
+    virtual ~workflow() noexcept {}
 
 public:
     typedef std::map<boost::filesystem::path, std::string> value_type;
@@ -69,7 +69,7 @@ private:
     value_entry_type generate_odb_options() const;
 
 public:
-    value_type generate();
+    value_type execute();
     std::vector<boost::filesystem::path> managed_directories() const;
 
 private:

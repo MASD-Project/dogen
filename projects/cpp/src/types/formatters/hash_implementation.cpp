@@ -21,7 +21,7 @@
 #include <ostream>
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/cpp/types/generation_failure.hpp"
+#include "dogen/cpp/types/formatters/formatting_error.hpp"
 #include "dogen/cpp/types/formatters/qname.hpp"
 #include "dogen/cpp/types/formatters/licence.hpp"
 #include "dogen/cpp/types/formatters/header_guards.hpp"
@@ -102,7 +102,7 @@ void hash_implementation::pair_helper(const nested_type_view_model& vm) {
                                  << children.size() << " in nested type: "
                                  << vm.name();
 
-        BOOST_THROW_EXCEPTION(generation_failure(invalid_sequence_container
+        BOOST_THROW_EXCEPTION(formatting_error(invalid_sequence_container
                 + vm.name()));
     }
 
@@ -152,7 +152,7 @@ void hash_implementation::optional_helper(const nested_type_view_model& vm) {
                                  << children.size() << " in nested type: "
                                  << vm.name();
 
-        BOOST_THROW_EXCEPTION(generation_failure(invalid_sequence_container
+        BOOST_THROW_EXCEPTION(formatting_error(invalid_sequence_container
                 + vm.name()));
     }
 
@@ -199,7 +199,7 @@ void hash_implementation::variant_helper(const nested_type_view_model& vm) {
                                  << children.size() << " in nested type: "
                                  << vm.name();
 
-        BOOST_THROW_EXCEPTION(generation_failure(invalid_sequence_container
+        BOOST_THROW_EXCEPTION(formatting_error(invalid_sequence_container
                 + vm.name()));
     }
 
@@ -266,7 +266,7 @@ sequence_container_helper(const nested_type_view_model& vm) {
                                  << children.size() << " in nested type: "
                                  << vm.name();
 
-        BOOST_THROW_EXCEPTION(generation_failure(invalid_sequence_container
+        BOOST_THROW_EXCEPTION(formatting_error(invalid_sequence_container
                 + vm.name()));
     }
 
@@ -308,7 +308,7 @@ associative_container_helper(const nested_type_view_model& vm) {
     const auto children(vm.children());
     if (children.size() != 1 && children.size() != 2) {
         BOOST_LOG_SEV(lg, error) << invalid_associative_container;
-        BOOST_THROW_EXCEPTION(generation_failure(invalid_associative_container));
+        BOOST_THROW_EXCEPTION(formatting_error(invalid_associative_container));
     }
 
     if (children.size() == 1) {
@@ -365,7 +365,7 @@ smart_pointer_helper(const nested_type_view_model& vm) {
     const auto children(vm.children());
     if (children.size() != 1) {
         BOOST_LOG_SEV(lg, error) << invalid_smart_pointer;
-        BOOST_THROW_EXCEPTION(generation_failure(invalid_smart_pointer));
+        BOOST_THROW_EXCEPTION(formatting_error(invalid_smart_pointer));
     }
 
     const std::string container_identifiable_type_name(
@@ -551,7 +551,7 @@ void hash_implementation::format_class(const file_view_model& vm) {
     boost::optional<view_models::class_view_model> o(vm.class_vm());
     if (!o) {
         BOOST_LOG_SEV(lg, error) << missing_class_view_model;
-        BOOST_THROW_EXCEPTION(generation_failure(missing_class_view_model));
+        BOOST_THROW_EXCEPTION(formatting_error(missing_class_view_model));
     }
 
     const class_view_model& cvm(*o);
@@ -575,7 +575,7 @@ void hash_implementation::format_class(const file_view_model& vm) {
 
 void hash_implementation::format_enumeration(const file_view_model&) {
     BOOST_LOG_SEV(lg, error) << enumeration_view_model_not_supported;
-    BOOST_THROW_EXCEPTION(generation_failure(enumeration_view_model_not_supported));
+    BOOST_THROW_EXCEPTION(formatting_error(enumeration_view_model_not_supported));
 }
 
 void hash_implementation::format(const file_view_model& vm) {

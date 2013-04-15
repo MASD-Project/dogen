@@ -22,7 +22,7 @@
 #include <boost/throw_exception.hpp>
 #include <boost/algorithm/string/predicate.hpp>
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/cpp/types/generation_failure.hpp"
+#include "dogen/cpp/types/formatters/formatting_error.hpp"
 #include "dogen/cpp/types/formatters/licence.hpp"
 #include "dogen/cpp/types/formatters/header_guards.hpp"
 #include "dogen/cpp/types/formatters/namespace_formatter.hpp"
@@ -80,7 +80,7 @@ sequence_container_helper(
     const auto children(vm.children());
     if (children.size() != 1) {
         BOOST_LOG_SEV(lg, error) << invalid_sequence_container;
-        BOOST_THROW_EXCEPTION(generation_failure(invalid_sequence_container));
+        BOOST_THROW_EXCEPTION(formatting_error(invalid_sequence_container));
     }
 
     const auto containee_vm(children.front());
@@ -119,7 +119,7 @@ associative_container_helper(
     const auto children(vm.children());
     if (children.size() != 1 && children.size() != 2) {
         BOOST_LOG_SEV(lg, error) << invalid_associative_container;
-        BOOST_THROW_EXCEPTION(generation_failure(invalid_associative_container));
+        BOOST_THROW_EXCEPTION(formatting_error(invalid_associative_container));
     }
 
     const auto container_identifiable_type_name(vm.complete_identifiable_name());
@@ -174,7 +174,7 @@ smart_pointer_helper(const nested_type_view_model& vm) {
     const auto children(vm.children());
     if (children.size() != 1) {
         BOOST_LOG_SEV(lg, error) << invalid_smart_pointer;
-        BOOST_THROW_EXCEPTION(generation_failure(invalid_smart_pointer));
+        BOOST_THROW_EXCEPTION(formatting_error(invalid_smart_pointer));
     }
 
     const auto containee_vm(children.front());
@@ -213,7 +213,7 @@ optional_helper(const nested_type_view_model& vm) {
     const auto children(vm.children());
     if (children.size() != 1) {
         BOOST_LOG_SEV(lg, error) << invalid_smart_pointer;
-        BOOST_THROW_EXCEPTION(generation_failure(invalid_smart_pointer));
+        BOOST_THROW_EXCEPTION(formatting_error(invalid_smart_pointer));
     }
 
     stream_ << indenter_ << container_type_name
@@ -251,7 +251,7 @@ pair_helper(const nested_type_view_model& vm) {
     const auto children(vm.children());
     if (children.size() != 2) {
         BOOST_LOG_SEV(lg, error) << invalid_pair;
-        BOOST_THROW_EXCEPTION(generation_failure(invalid_pair));
+        BOOST_THROW_EXCEPTION(formatting_error(invalid_pair));
     }
 
     stream_ << indenter_ << container_type_name
@@ -387,7 +387,7 @@ variant_helper(const nested_type_view_model& vm) {
     const auto children(vm.children());
     if (children.empty()) {
         BOOST_LOG_SEV(lg, error) << invalid_smart_pointer;
-        BOOST_THROW_EXCEPTION(generation_failure(invalid_smart_pointer));
+        BOOST_THROW_EXCEPTION(formatting_error(invalid_smart_pointer));
     }
 
     utility_.blank_line();
@@ -757,7 +757,7 @@ void generator_implementation::format_class(const file_view_model& vm) {
     boost::optional<view_models::class_view_model> o(vm.class_vm());
     if (!o) {
         BOOST_LOG_SEV(lg, error) << missing_class_view_model;
-        BOOST_THROW_EXCEPTION(generation_failure(missing_class_view_model));
+        BOOST_THROW_EXCEPTION(formatting_error(missing_class_view_model));
     }
 
     const class_view_model& cvm(*o);
@@ -786,7 +786,7 @@ void generator_implementation::format_enumeration(const file_view_model& vm) {
     const auto o(vm.enumeration_vm());
     if (!o) {
         BOOST_LOG_SEV(lg, error) << missing_enumeration_view_model;
-        BOOST_THROW_EXCEPTION(generation_failure(missing_enumeration_view_model));
+        BOOST_THROW_EXCEPTION(formatting_error(missing_enumeration_view_model));
     }
 
     const auto evm(*o);

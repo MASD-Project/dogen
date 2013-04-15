@@ -18,20 +18,17 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_TYPES_GENERATION_FAILURE_FWD_HPP
-#define DOGEN_CPP_TYPES_GENERATION_FAILURE_FWD_HPP
+#ifndef DOGEN_CPP_TYPES_WORKFLOW_FWD_HPP
+#define DOGEN_CPP_TYPES_WORKFLOW_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <boost/exception/info.hpp>
-#include <string>
-
 namespace dogen {
 namespace cpp {
 
-class generation_failure;
+class workflow;
 
 } }
 

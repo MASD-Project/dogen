@@ -20,7 +20,7 @@
  */
 #include <boost/throw_exception.hpp>
 #include "dogen/cpp/types/includer.hpp"
-#include "dogen/cpp/types/generation_failure.hpp"
+#include "dogen/cpp/types/workflow_failure.hpp"
 #include "dogen/cpp/types/formatters/factory.hpp"
 #include "dogen/cpp/types/formatters/file_formatter.hpp"
 #include "dogen/cpp/types/formatters/src_cmakelists.hpp"
@@ -28,13 +28,13 @@
 #include "dogen/cpp/types/formatters/odb_options.hpp"
 #include "dogen/cpp/types/view_models/sml_to_cpp_view_model.hpp"
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/cpp/types/generator.hpp"
+#include "dogen/cpp/types/workflow.hpp"
 
 using namespace dogen::utility::log;
 
 namespace {
 
-auto lg(logger_factory("cpp.generator"));
+auto lg(logger_factory("cpp.workflow"));
 
 const std::string cmakelists_file_name("CMakeLists.txt");
 const std::string odb_options_file_name("options.odb");
@@ -46,8 +46,8 @@ const std::string integrated_io_incompatible_with_io_facet(
 namespace dogen {
 namespace cpp {
 
-generator::
-generator(const sml::model& model, const config::cpp_settings& settings) :
+workflow::
+workflow(const sml::model& model, const config::cpp_settings& settings) :
     model_(model), settings_(settings),
     locator_(model.name(), settings_) {
 
@@ -57,7 +57,7 @@ generator(const sml::model& model, const config::cpp_settings& settings) :
         if (has_io_facet) {
             BOOST_LOG_SEV(lg, error)
                 << integrated_io_incompatible_with_io_facet;
-            BOOST_THROW_EXCEPTION(generation_failure(
+            BOOST_THROW_EXCEPTION(workflow_failure(
                 integrated_io_incompatible_with_io_facet));
         }
     }
@@ -65,32 +65,32 @@ generator(const sml::model& model, const config::cpp_settings& settings) :
     const auto f(settings_.enabled_facets());
     if (f.find(config::cpp_facet_types::types) == f.end()) {
         BOOST_LOG_SEV(lg, error) << domain_facet_must_be_enabled;
-        BOOST_THROW_EXCEPTION(generation_failure(domain_facet_must_be_enabled));
+        BOOST_THROW_EXCEPTION(workflow_failure(domain_facet_must_be_enabled));
     }
 }
 
-void generator::log_formating_view(const std::string& view_name) const {
+void workflow::log_formating_view(const std::string& view_name) const {
     BOOST_LOG_SEV(lg, debug) << "Formatting file view: " << view_name;
 }
 
-void generator::log_started() const {
+void workflow::log_started() const {
     BOOST_LOG_SEV(lg, info) << "C++ backend started.";
 }
 
-void generator::log_finished() const {
+void workflow::log_finished() const {
     BOOST_LOG_SEV(lg, info) << "C++ backend finished.";
 }
 
-void generator::log_cmakelists_disabled() const {
+void workflow::log_cmakelists_disabled() const {
     BOOST_LOG_SEV(lg, info) << "CMakeLists generation disabled.";
 }
 
-void generator::log_file_views(unsigned int how_many) const {
+void workflow::log_file_views(unsigned int how_many) const {
     BOOST_LOG_SEV(lg, debug) << "File views returned by SML to C++ view model"
                              << " transformer: " << how_many;
 }
 
-generator::value_type generator::generate_cmakelists() const {
+workflow::value_type workflow::generate_cmakelists() const {
     view_models::cmakelists_view_model vm;
     vm.file_name(cmakelists_file_name);
     vm.file_path(locator_.absolute_path_to_src(vm.file_name()));
@@ -104,7 +104,7 @@ generator::value_type generator::generate_cmakelists() const {
     formatters::src_cmakelists src(stream);
     src.format(vm);
 
-    generator::value_type r;
+    workflow::value_type r;
     r.insert(std::make_pair(vm.file_path(), stream.str()));
 
     if (!settings_.split_project()) {
@@ -122,7 +122,7 @@ generator::value_type generator::generate_cmakelists() const {
     return r;
 }
 
-generator::value_entry_type generator::generate_odb_options() const {
+workflow::value_entry_type workflow::generate_odb_options() const {
     BOOST_LOG_SEV(lg, info) << "Generating ODB options file.";
 
     view_models::odb_options_view_model vm;
@@ -142,7 +142,7 @@ generator::value_entry_type generator::generate_odb_options() const {
     return std::make_pair(vm.file_path(), stream.str());
 }
 
-generator::value_entry_type generator::
+workflow::value_entry_type workflow::
 generate_file_view_model(const view_models::file_view_model& vm) const {
     log_formating_view(vm.file_path().string());
     formatters::factory factory(settings_);
@@ -153,7 +153,7 @@ generate_file_view_model(const view_models::file_view_model& vm) const {
     return std::make_pair(vm.file_path(), s.str());
 }
 
-generator::value_type generator::generate_file_view_models() const {
+workflow::value_type workflow::generate_file_view_models() const {
     includer im(model_, locator_, settings_);
 
     using view_models::sml_to_cpp_view_model;
@@ -161,16 +161,16 @@ generator::value_type generator::generate_file_view_models() const {
     std::vector<view_models::file_view_model> fvms(t.transform());
     log_file_views(fvms.size());
 
-    generator::value_type r;
+    workflow::value_type r;
     for (auto fvm : fvms)
         r.insert(generate_file_view_model(fvm));
     return r;
 }
 
-generator::value_type generator::generate() {
+workflow::value_type workflow::execute() {
     log_started();
 
-    generator::value_type r(generate_file_view_models());
+    workflow::value_type r(generate_file_view_models());
     if (settings_.disable_cmakelists())
         log_cmakelists_disabled();
     else {
@@ -189,7 +189,7 @@ generator::value_type generator::generate() {
     return r;
 }
 
-std::vector<boost::filesystem::path> generator::managed_directories() const {
+std::vector<boost::filesystem::path> workflow::managed_directories() const {
     return locator_.managed_directories();
 }
 

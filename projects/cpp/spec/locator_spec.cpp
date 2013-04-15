@@ -38,7 +38,7 @@ using dogen::config::cpp_facet_types;
 namespace {
 
 const std::string empty;
-const std::string test_module("generator");
+const std::string test_module("cpp");
 const std::string test_suite("locator_spec");
 
 const std::string test_model_name("test");

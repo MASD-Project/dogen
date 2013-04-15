@@ -36,8 +36,8 @@ using namespace dogen::cpp::view_models;
 namespace {
 
 const std::string empty;
-const std::string test_module("generator");
-const std::string test_suite("cpp_backend_spec");
+const std::string test_module("cpp");
+const std::string test_suite("sml_to_cpp_view_model_spec");
 const std::string test_model_name("test");
 const std::string class_name("first_class");
 const std::string header_guard_name(

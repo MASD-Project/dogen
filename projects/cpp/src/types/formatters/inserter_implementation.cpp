@@ -22,7 +22,7 @@
 #include <sstream>
 #include <boost/throw_exception.hpp>
 #include "dogen/cpp/types/formatters/qname.hpp"
-#include "dogen/cpp/types/generation_failure.hpp"
+#include "dogen/cpp/types/formatters/formatting_error.hpp"
 #include "dogen/cpp/types/formatters/namespace_helper.hpp"
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/cpp/types/formatters/inserter_implementation.hpp"
@@ -88,7 +88,7 @@ sequence_container_helper(const nested_type_view_model& vm) {
     const auto children(vm.children());
     if (children.size() != 1) {
         BOOST_LOG_SEV(lg, error) << invalid_sequence_container;
-        BOOST_THROW_EXCEPTION(generation_failure(invalid_sequence_container));
+        BOOST_THROW_EXCEPTION(formatting_error(invalid_sequence_container));
     }
 
     const auto container(vm);
@@ -140,7 +140,7 @@ associative_container_helper(const nested_type_view_model& vm) {
     const auto children(vm.children());
     if (children.size() != 1 && children.size() != 2) {
         BOOST_LOG_SEV(lg, error) << invalid_associative_container;
-        BOOST_THROW_EXCEPTION(generation_failure(invalid_associative_container));
+        BOOST_THROW_EXCEPTION(formatting_error(invalid_associative_container));
     }
 
     if (children.size() == 1) {
@@ -231,7 +231,7 @@ smart_pointer_helper(const nested_type_view_model& vm) {
     const auto children(vm.children());
     if (children.size() != 1) {
         BOOST_LOG_SEV(lg, error) << invalid_smart_pointer;
-        BOOST_THROW_EXCEPTION(generation_failure(invalid_smart_pointer));
+        BOOST_THROW_EXCEPTION(formatting_error(invalid_smart_pointer));
     }
 
     const auto container(vm);
@@ -307,7 +307,7 @@ optional_helper(const nested_type_view_model& vm) {
     const auto children(vm.children());
     if (children.size() != 1) {
         BOOST_LOG_SEV(lg, error) << invalid_optional_type;
-        BOOST_THROW_EXCEPTION(generation_failure(invalid_optional_type));
+        BOOST_THROW_EXCEPTION(formatting_error(invalid_optional_type));
     }
 
     const auto container(vm);
@@ -376,7 +376,7 @@ pair_helper(const nested_type_view_model& vm) {
     const auto children(vm.children());
     if (children.size() != 2) {
         BOOST_LOG_SEV(lg, error) << invalid_pair_type;
-        BOOST_THROW_EXCEPTION(generation_failure(invalid_pair_type));
+        BOOST_THROW_EXCEPTION(formatting_error(invalid_pair_type));
     }
 
     const auto container(vm);
@@ -449,7 +449,7 @@ variant_helper(const nested_type_view_model& vm) {
     const auto children(vm.children());
     if (children.empty()) {
         BOOST_LOG_SEV(lg, error) << invalid_variant;
-        BOOST_THROW_EXCEPTION(generation_failure(invalid_variant));
+        BOOST_THROW_EXCEPTION(formatting_error(invalid_variant));
     }
 
     const auto container(vm);
