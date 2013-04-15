@@ -144,7 +144,7 @@ std::vector<file_view_model> execute_transformer(
 
 }
 
-BOOST_AUTO_TEST_SUITE(cpp_backend)
+BOOST_AUTO_TEST_SUITE(sml_to_cpp_view_model)
 
 BOOST_AUTO_TEST_CASE(view_model_transformer_correctly_transforms_domain_files) {
     SETUP_TEST_LOG_SOURCE("view_model_transformer_correctly_transforms_domain_files");
