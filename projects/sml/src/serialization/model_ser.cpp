@@ -29,6 +29,8 @@
 #include <boost/serialization/list.hpp>
 #include <boost/serialization/nvp.hpp>
 #include <boost/serialization/string.hpp>
+#include <boost/serialization/utility.hpp>
+#include <boost/serialization/vector.hpp>
 #include "dogen/sml/serialization/enumeration_ser.hpp"
 #include "dogen/sml/serialization/exception_ser.hpp"
 #include "dogen/sml/serialization/model_ser.hpp"
@@ -62,6 +64,8 @@ void save(Archive& ar,
     ar << make_nvp("is_system", v.is_system_);
     ar << make_nvp("dependencies", v.dependencies_);
     ar << make_nvp("leaves", v.leaves_);
+    ar << make_nvp("documentation", v.documentation_);
+    ar << make_nvp("implementation_specific_parameters", v.implementation_specific_parameters_);
 }
 
 template<typename Archive>
@@ -78,6 +82,8 @@ void load(Archive& ar,
     ar >> make_nvp("is_system", v.is_system_);
     ar >> make_nvp("dependencies", v.dependencies_);
     ar >> make_nvp("leaves", v.leaves_);
+    ar >> make_nvp("documentation", v.documentation_);
+    ar >> make_nvp("implementation_specific_parameters", v.implementation_specific_parameters_);
 }
 
 } }

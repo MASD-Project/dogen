@@ -59,7 +59,7 @@ transformer::transformer(context& c)
     : context_(c),
       identifier_parser_(
           new identifier_parser(c.top_level_package_names(),
-              c.external_package_path(), c.model_name())),
+              c.model().external_package_path(), c.model().name())),
       comments_parser_(new comments_parser()) { }
 
 transformer::~transformer() noexcept { }
@@ -68,8 +68,11 @@ void transformer::
 compute_model_dependencies(const sml::nested_qname& nqn) {
     // primitives model is empty
     const auto mn(nqn.type().model_name());
-    if (!mn.empty() && mn != context_.model_name())
-        context_.dependencies().insert(mn);
+    if (!mn.empty() && mn != context_.model().name()) {
+        sml::reference ref;
+        ref.model_name(mn);
+        context_.model().dependencies().insert(std::make_pair(mn, ref));
+    }
 
     for (const auto c : nqn.children())
         compute_model_dependencies(c);
@@ -84,9 +87,9 @@ sml::qname transformer::transform_qname(const std::string& n,
     }
 
     sml::qname name;
-    name.model_name(context_.model_name());
+    name.model_name(context_.model().name());
     name.meta_type(meta_type);
-    name.external_package_path(context_.external_package_path());
+    name.external_package_path(context_.model().external_package_path());
 
     if (!pkg_id.empty()) {
         const auto i(context_.packages_by_id().find(pkg_id));
@@ -249,8 +252,8 @@ void transformer::transform_pod(const processed_object& o) {
                 k->second.push_back(pod.name());
             }
 
-            auto j(context_.pods().find(*parent));
-            if (j == context_.pods().end()) {
+            auto j(context_.model().pods().find(*parent));
+            if (j == context_.model().pods().end()) {
                 BOOST_LOG_SEV(lg, error) << "Could not find the parent of "
                                          << parent->type_name();
                 BOOST_THROW_EXCEPTION(transformation_error(parent_not_found +
@@ -259,7 +262,7 @@ void transformer::transform_pod(const processed_object& o) {
             parent = j->second.parent_name();
         }
     }
-    context_.pods().insert(std::make_pair(pod.name(), pod));
+    context_.model().pods().insert(std::make_pair(pod.name(), pod));
 }
 
 void transformer::
@@ -324,7 +327,7 @@ void transformer::transform_enumeration(const processed_object& o) {
         e.enumerators().push_back(enumerator);
         enumerator_names.insert(enumerator.name());
     }
-    context_.enumerations().insert(std::make_pair(e.name(), e));
+    context_.model().enumerations().insert(std::make_pair(e.name(), e));
 }
 
 void transformer::transform_package(const processed_object& o) {
@@ -342,7 +345,22 @@ void transformer::transform_package(const processed_object& o) {
         BOOST_LOG_SEV(lg, error) << empty_dia_object_name + o.id();
     }
     context_.packages_by_id().insert(std::make_pair(o.id(), p));
-    context_.packages().insert(std::make_pair(p.name(), p));
+    context_.model().packages().insert(std::make_pair(p.name(), p));
+}
+
+void transformer::transform_note(const processed_object& o) {
+    BOOST_LOG_SEV(lg, debug) << "Object is a note: " << o.id()
+                             << ". Note text: '" << o.text() << "'";
+
+    if (o.text().empty())
+        return;
+
+    const auto pair(comments_parser_->parse(o.text()));
+    if (o.child_node_id().empty()) {
+        // FIXME add these to context.
+        context_.model().documentation(pair.first);
+        context_.model().implementation_specific_parameters(pair.second);
+    }
 }
 
 void transformer::transform_exception(const processed_object& o) {
@@ -357,7 +375,7 @@ void transformer::transform_exception(const processed_object& o) {
     using sml::meta_types;
     e.name(transform_qname(o.name(), meta_types::exception, pkg_id));
     e.documentation(o.comment());
-    context_.exceptions().insert(std::make_pair(e.name(), e));
+    context_.model().exceptions().insert(std::make_pair(e.name(), e));
 }
 
 void transformer::transform(const processed_object& o) {

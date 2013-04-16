@@ -46,7 +46,7 @@ private:
         const std::string& external_package_path,
         bool is_target, context& c) const;
     void graph_to_context(const graph_type& g, context& c) const;
-    void context_to_model(const context& c, sml::model& m) const;
+    void post_process_model(context& c) const;
 
 public:
     virtual sml::model execute(const dia::diagram& diagram,

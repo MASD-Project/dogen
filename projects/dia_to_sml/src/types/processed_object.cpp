@@ -33,7 +33,6 @@ processed_object::processed_object(processed_object&& rhs)
       object_type_(std::move(rhs.object_type_)),
       stereotype_(std::move(rhs.stereotype_)),
       comment_(std::move(rhs.comment_)),
-      uml_attributes_(std::move(rhs.uml_attributes_)),
       child_node_id_(std::move(rhs.child_node_id_)),
       connection_(std::move(rhs.connection_)),
       properties_(std::move(rhs.properties_)),
@@ -45,7 +44,6 @@ processed_object::processed_object(
     const dogen::dia_to_sml::object_types& object_type,
     const dogen::dia_to_sml::stereotypes& stereotype,
     const std::string& comment,
-    const std::vector<dogen::dia::composite>& uml_attributes,
     const std::string& child_node_id,
     const boost::optional<std::pair<std::string, std::string> >& connection,
     const std::vector<dogen::dia_to_sml::processed_property>& properties,
@@ -55,7 +53,6 @@ processed_object::processed_object(
       object_type_(object_type),
       stereotype_(stereotype),
       comment_(comment),
-      uml_attributes_(uml_attributes),
       child_node_id_(child_node_id),
       connection_(connection),
       properties_(properties),
@@ -68,7 +65,6 @@ void processed_object::swap(processed_object& other) noexcept {
     swap(object_type_, other.object_type_);
     swap(stereotype_, other.stereotype_);
     swap(comment_, other.comment_);
-    swap(uml_attributes_, other.uml_attributes_);
     swap(child_node_id_, other.child_node_id_);
     swap(connection_, other.connection_);
     swap(properties_, other.properties_);
@@ -81,7 +77,6 @@ bool processed_object::operator==(const processed_object& rhs) const {
         object_type_ == rhs.object_type_ &&
         stereotype_ == rhs.stereotype_ &&
         comment_ == rhs.comment_ &&
-        uml_attributes_ == rhs.uml_attributes_ &&
         child_node_id_ == rhs.child_node_id_ &&
         connection_ == rhs.connection_ &&
         properties_ == rhs.properties_ &&
@@ -156,22 +151,6 @@ void processed_object::comment(const std::string& v) {
 
 void processed_object::comment(const std::string&& v) {
     comment_ = std::move(v);
-}
-
-const std::vector<dogen::dia::composite>& processed_object::uml_attributes() const {
-    return uml_attributes_;
-}
-
-std::vector<dogen::dia::composite>& processed_object::uml_attributes() {
-    return uml_attributes_;
-}
-
-void processed_object::uml_attributes(const std::vector<dogen::dia::composite>& v) {
-    uml_attributes_ = v;
-}
-
-void processed_object::uml_attributes(const std::vector<dogen::dia::composite>&& v) {
-    uml_attributes_ = std::move(v);
 }
 
 const std::string& processed_object::child_node_id() const {

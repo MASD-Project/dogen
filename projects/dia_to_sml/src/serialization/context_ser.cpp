@@ -30,10 +30,8 @@
 #include <boost/serialization/nvp.hpp>
 #include <boost/serialization/string.hpp>
 #include "dogen/dia_to_sml/serialization/context_ser.hpp"
-#include "dogen/sml/serialization/enumeration_ser.hpp"
-#include "dogen/sml/serialization/exception_ser.hpp"
+#include "dogen/sml/serialization/model_ser.hpp"
 #include "dogen/sml/serialization/package_ser.hpp"
-#include "dogen/sml/serialization/pod_ser.hpp"
 #include "dogen/sml/serialization/qname_ser.hpp"
 #include "dogen/utility/serialization/unordered_map.hpp"
 #include "dogen/utility/serialization/unordered_set.hpp"
@@ -50,10 +48,6 @@ template<typename Archive>
 void save(Archive& ar,
     const dogen::dia_to_sml::context& v,
     const unsigned int /*version*/) {
-    ar << make_nvp("model_name", v.model_name_);
-    ar << make_nvp("pods", v.pods_);
-    ar << make_nvp("external_package_path", v.external_package_path_);
-    ar << make_nvp("verbose", v.verbose_);
     ar << make_nvp("is_target", v.is_target_);
     ar << make_nvp("child_to_parent", v.child_to_parent_);
     ar << make_nvp("parent_ids", v.parent_ids_);
@@ -61,21 +55,14 @@ void save(Archive& ar,
     ar << make_nvp("dia_id_to_qname", v.dia_id_to_qname_);
     ar << make_nvp("original_parent", v.original_parent_);
     ar << make_nvp("leaves", v.leaves_);
-    ar << make_nvp("dependencies", v.dependencies_);
     ar << make_nvp("top_level_package_names", v.top_level_package_names_);
-    ar << make_nvp("enumerations", v.enumerations_);
-    ar << make_nvp("packages", v.packages_);
-    ar << make_nvp("exceptions", v.exceptions_);
+    ar << make_nvp("model", v.model_);
 }
 
 template<typename Archive>
 void load(Archive& ar,
     dogen::dia_to_sml::context& v,
     const unsigned int /*version*/) {
-    ar >> make_nvp("model_name", v.model_name_);
-    ar >> make_nvp("pods", v.pods_);
-    ar >> make_nvp("external_package_path", v.external_package_path_);
-    ar >> make_nvp("verbose", v.verbose_);
     ar >> make_nvp("is_target", v.is_target_);
     ar >> make_nvp("child_to_parent", v.child_to_parent_);
     ar >> make_nvp("parent_ids", v.parent_ids_);
@@ -83,11 +70,8 @@ void load(Archive& ar,
     ar >> make_nvp("dia_id_to_qname", v.dia_id_to_qname_);
     ar >> make_nvp("original_parent", v.original_parent_);
     ar >> make_nvp("leaves", v.leaves_);
-    ar >> make_nvp("dependencies", v.dependencies_);
     ar >> make_nvp("top_level_package_names", v.top_level_package_names_);
-    ar >> make_nvp("enumerations", v.enumerations_);
-    ar >> make_nvp("packages", v.packages_);
-    ar >> make_nvp("exceptions", v.exceptions_);
+    ar >> make_nvp("model", v.model_);
 }
 
 } }

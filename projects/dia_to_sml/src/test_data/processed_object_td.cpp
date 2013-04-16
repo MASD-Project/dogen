@@ -19,7 +19,6 @@
  *
  */
 #include <sstream>
-#include "dogen/dia/test_data/composite_td.hpp"
 #include "dogen/dia_to_sml/test_data/object_types_td.hpp"
 #include "dogen/dia_to_sml/test_data/processed_object_td.hpp"
 #include "dogen/dia_to_sml/test_data/processed_property_td.hpp"
@@ -41,19 +40,6 @@ create_dogen_dia_to_sml_object_types(const unsigned int position) {
 dogen::dia_to_sml::stereotypes
 create_dogen_dia_to_sml_stereotypes(const unsigned int position) {
     return dogen::dia_to_sml::stereotypes_generator::create(position);
-}
-
-dogen::dia::composite
-create_dogen_dia_composite(const unsigned int position) {
-    return dogen::dia::composite_generator::create(position);
-}
-
-std::vector<dogen::dia::composite> create_std_vector_dogen_dia_composite(unsigned int position) {
-    std::vector<dogen::dia::composite> r;
-    for (unsigned int i(0); i < 10; ++i) {
-        r.push_back(create_dogen_dia_composite(position + i));
-    }
-    return r;
 }
 
 std::pair<std::string, std::string>
@@ -97,11 +83,10 @@ populate(const unsigned int position, result_type& v) {
     v.object_type(create_dogen_dia_to_sml_object_types(position + 2));
     v.stereotype(create_dogen_dia_to_sml_stereotypes(position + 3));
     v.comment(create_std_string(position + 4));
-    v.uml_attributes(create_std_vector_dogen_dia_composite(position + 5));
-    v.child_node_id(create_std_string(position + 6));
-    v.connection(create_boost_optional_std_pair_std_string_std_string_(position + 7));
-    v.properties(create_std_vector_dogen_dia_to_sml_processed_property(position + 8));
-    v.text(create_std_string(position + 9));
+    v.child_node_id(create_std_string(position + 5));
+    v.connection(create_boost_optional_std_pair_std_string_std_string_(position + 6));
+    v.properties(create_std_vector_dogen_dia_to_sml_processed_property(position + 7));
+    v.text(create_std_string(position + 8));
 }
 
 processed_object_generator::result_type

@@ -19,10 +19,8 @@
  *
  */
 #include "dogen/dia_to_sml/hash/context_hash.hpp"
-#include "dogen/sml/hash/enumeration_hash.hpp"
-#include "dogen/sml/hash/exception_hash.hpp"
+#include "dogen/sml/hash/model_hash.hpp"
 #include "dogen/sml/hash/package_hash.hpp"
-#include "dogen/sml/hash/pod_hash.hpp"
 #include "dogen/sml/hash/qname_hash.hpp"
 
 namespace {
@@ -32,23 +30,6 @@ inline void combine(std::size_t& seed, const HashableType& value)
 {
     std::hash<HashableType> hasher;
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
-}
-
-inline std::size_t hash_std_unordered_map_dogen_sml_qname_dogen_sml_pod(const std::unordered_map<dogen::sml::qname, dogen::sml::pod>& v){
-    std::size_t seed(0);
-    for (const auto i : v) {
-        combine(seed, i.first);
-        combine(seed, i.second);
-    }
-    return seed;
-}
-
-inline std::size_t hash_std_list_std_string(const std::list<std::string>& v){
-    std::size_t seed(0);
-    for (const auto i : v) {
-        combine(seed, i);
-    }
-    return seed;
 }
 
 inline std::size_t hash_std_unordered_map_std_string_std_string(const std::unordered_map<std::string, std::string>& v){
@@ -112,33 +93,6 @@ inline std::size_t hash_std_unordered_map_dogen_sml_qname_std_list_dogen_sml_qna
     return seed;
 }
 
-inline std::size_t hash_std_unordered_map_dogen_sml_qname_dogen_sml_enumeration(const std::unordered_map<dogen::sml::qname, dogen::sml::enumeration>& v){
-    std::size_t seed(0);
-    for (const auto i : v) {
-        combine(seed, i.first);
-        combine(seed, i.second);
-    }
-    return seed;
-}
-
-inline std::size_t hash_std_unordered_map_dogen_sml_qname_dogen_sml_package(const std::unordered_map<dogen::sml::qname, dogen::sml::package>& v){
-    std::size_t seed(0);
-    for (const auto i : v) {
-        combine(seed, i.first);
-        combine(seed, i.second);
-    }
-    return seed;
-}
-
-inline std::size_t hash_std_unordered_map_dogen_sml_qname_dogen_sml_exception(const std::unordered_map<dogen::sml::qname, dogen::sml::exception>& v){
-    std::size_t seed(0);
-    for (const auto i : v) {
-        combine(seed, i.first);
-        combine(seed, i.second);
-    }
-    return seed;
-}
-
 }
 
 namespace dogen {
@@ -147,10 +101,6 @@ namespace dia_to_sml {
 std::size_t context_hasher::hash(const context&v) {
     std::size_t seed(0);
 
-    combine(seed, v.model_name());
-    combine(seed, hash_std_unordered_map_dogen_sml_qname_dogen_sml_pod(v.pods()));
-    combine(seed, hash_std_list_std_string(v.external_package_path()));
-    combine(seed, v.verbose());
     combine(seed, v.is_target());
     combine(seed, hash_std_unordered_map_std_string_std_string(v.child_to_parent()));
     combine(seed, hash_std_unordered_set_std_string(v.parent_ids()));
@@ -158,11 +108,8 @@ std::size_t context_hasher::hash(const context&v) {
     combine(seed, hash_std_unordered_map_std_string_dogen_sml_qname(v.dia_id_to_qname()));
     combine(seed, hash_std_unordered_map_dogen_sml_qname_dogen_sml_qname(v.original_parent()));
     combine(seed, hash_std_unordered_map_dogen_sml_qname_std_list_dogen_sml_qname_(v.leaves()));
-    combine(seed, hash_std_unordered_set_std_string(v.dependencies()));
     combine(seed, hash_std_unordered_set_std_string(v.top_level_package_names()));
-    combine(seed, hash_std_unordered_map_dogen_sml_qname_dogen_sml_enumeration(v.enumerations()));
-    combine(seed, hash_std_unordered_map_dogen_sml_qname_dogen_sml_package(v.packages()));
-    combine(seed, hash_std_unordered_map_dogen_sml_qname_dogen_sml_exception(v.exceptions()));
+    combine(seed, v.model());
 
     return seed;
 }

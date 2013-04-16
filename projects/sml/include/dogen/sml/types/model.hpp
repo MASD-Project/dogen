@@ -30,6 +30,8 @@
 #include <string>
 #include <unordered_map>
 #include <unordered_set>
+#include <utility>
+#include <vector>
 #include "dogen/sml/hash/qname_hash.hpp"
 #include "dogen/sml/serialization/model_fwd_ser.hpp"
 #include "dogen/sml/types/enumeration.hpp"
@@ -66,7 +68,9 @@ public:
         const std::list<std::string>& external_package_path,
         const bool is_system,
         const std::unordered_map<std::string, dogen::sml::reference>& dependencies,
-        const std::unordered_set<dogen::sml::qname>& leaves);
+        const std::unordered_set<dogen::sml::qname>& leaves,
+        const std::string& documentation,
+        const std::vector<std::pair<std::string, std::string> >& implementation_specific_parameters);
 
 private:
     template<typename Archive>
@@ -185,6 +189,26 @@ public:
     void leaves(const std::unordered_set<dogen::sml::qname>&& v);
     /**@}*/
 
+    /**
+     * @brief Doxygen documentation for the model itself.
+     */
+    /**@{*/
+    const std::string& documentation() const;
+    std::string& documentation();
+    void documentation(const std::string& v);
+    void documentation(const std::string&& v);
+    /**@}*/
+
+    /**
+     * @brief Parameters associated with the model which are opaque to SML.
+     */
+    /**@{*/
+    const std::vector<std::pair<std::string, std::string> >& implementation_specific_parameters() const;
+    std::vector<std::pair<std::string, std::string> >& implementation_specific_parameters();
+    void implementation_specific_parameters(const std::vector<std::pair<std::string, std::string> >& v);
+    void implementation_specific_parameters(const std::vector<std::pair<std::string, std::string> >&& v);
+    /**@}*/
+
 public:
     bool operator==(const model& rhs) const;
     bool operator!=(const model& rhs) const {
@@ -206,6 +230,8 @@ private:
     bool is_system_;
     std::unordered_map<std::string, dogen::sml::reference> dependencies_;
     std::unordered_set<dogen::sml::qname> leaves_;
+    std::string documentation_;
+    std::vector<std::pair<std::string, std::string> > implementation_specific_parameters_;
 };
 
 } }

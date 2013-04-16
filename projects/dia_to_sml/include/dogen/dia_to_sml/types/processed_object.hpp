@@ -30,7 +30,6 @@
 #include <string>
 #include <utility>
 #include <vector>
-#include "dogen/dia/types/composite.hpp"
 #include "dogen/dia_to_sml/serialization/processed_object_fwd_ser.hpp"
 #include "dogen/dia_to_sml/types/object_types.hpp"
 #include "dogen/dia_to_sml/types/processed_property.hpp"
@@ -57,7 +56,6 @@ public:
         const dogen::dia_to_sml::object_types& object_type,
         const dogen::dia_to_sml::stereotypes& stereotype,
         const std::string& comment,
-        const std::vector<dogen::dia::composite>& uml_attributes,
         const std::string& child_node_id,
         const boost::optional<std::pair<std::string, std::string> >& connection,
         const std::vector<dogen::dia_to_sml::processed_property>& properties,
@@ -91,11 +89,6 @@ public:
     std::string& comment();
     void comment(const std::string& v);
     void comment(const std::string&& v);
-
-    const std::vector<dogen::dia::composite>& uml_attributes() const;
-    std::vector<dogen::dia::composite>& uml_attributes();
-    void uml_attributes(const std::vector<dogen::dia::composite>& v);
-    void uml_attributes(const std::vector<dogen::dia::composite>&& v);
 
     const std::string& child_node_id() const;
     std::string& child_node_id();
@@ -138,7 +131,6 @@ private:
     dogen::dia_to_sml::object_types object_type_;
     dogen::dia_to_sml::stereotypes stereotype_;
     std::string comment_;
-    std::vector<dogen::dia::composite> uml_attributes_;
     std::string child_node_id_;
     boost::optional<std::pair<std::string, std::string> > connection_;
     std::vector<dogen::dia_to_sml::processed_property> properties_;

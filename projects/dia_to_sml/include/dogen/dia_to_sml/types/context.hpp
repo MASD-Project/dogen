@@ -32,10 +32,8 @@
 #include <unordered_set>
 #include "dogen/dia_to_sml/serialization/context_fwd_ser.hpp"
 #include "dogen/sml/hash/qname_hash.hpp"
-#include "dogen/sml/types/enumeration.hpp"
-#include "dogen/sml/types/exception.hpp"
+#include "dogen/sml/types/model.hpp"
 #include "dogen/sml/types/package.hpp"
-#include "dogen/sml/types/pod.hpp"
 #include "dogen/sml/types/qname.hpp"
 
 namespace dogen {
@@ -55,10 +53,6 @@ public:
 
 public:
     context(
-        const std::string& model_name,
-        const std::unordered_map<dogen::sml::qname, dogen::sml::pod>& pods,
-        const std::list<std::string>& external_package_path,
-        const bool verbose,
         const bool is_target,
         const std::unordered_map<std::string, std::string>& child_to_parent,
         const std::unordered_set<std::string>& parent_ids,
@@ -66,11 +60,8 @@ public:
         const std::unordered_map<std::string, dogen::sml::qname>& dia_id_to_qname,
         const std::unordered_map<dogen::sml::qname, dogen::sml::qname>& original_parent,
         const std::unordered_map<dogen::sml::qname, std::list<dogen::sml::qname> >& leaves,
-        const std::unordered_set<std::string>& dependencies,
         const std::unordered_set<std::string>& top_level_package_names,
-        const std::unordered_map<dogen::sml::qname, dogen::sml::enumeration>& enumerations,
-        const std::unordered_map<dogen::sml::qname, dogen::sml::package>& packages,
-        const std::unordered_map<dogen::sml::qname, dogen::sml::exception>& exceptions);
+        const dogen::sml::model& model);
 
 private:
     template<typename Archive>
@@ -80,24 +71,6 @@ private:
     friend void boost::serialization::load(Archive& ar, context& v, unsigned int version);
 
 public:
-    const std::string& model_name() const;
-    std::string& model_name();
-    void model_name(const std::string& v);
-    void model_name(const std::string&& v);
-
-    const std::unordered_map<dogen::sml::qname, dogen::sml::pod>& pods() const;
-    std::unordered_map<dogen::sml::qname, dogen::sml::pod>& pods();
-    void pods(const std::unordered_map<dogen::sml::qname, dogen::sml::pod>& v);
-    void pods(const std::unordered_map<dogen::sml::qname, dogen::sml::pod>&& v);
-
-    const std::list<std::string>& external_package_path() const;
-    std::list<std::string>& external_package_path();
-    void external_package_path(const std::list<std::string>& v);
-    void external_package_path(const std::list<std::string>&& v);
-
-    bool verbose() const;
-    void verbose(const bool v);
-
     bool is_target() const;
     void is_target(const bool v);
 
@@ -131,30 +104,15 @@ public:
     void leaves(const std::unordered_map<dogen::sml::qname, std::list<dogen::sml::qname> >& v);
     void leaves(const std::unordered_map<dogen::sml::qname, std::list<dogen::sml::qname> >&& v);
 
-    const std::unordered_set<std::string>& dependencies() const;
-    std::unordered_set<std::string>& dependencies();
-    void dependencies(const std::unordered_set<std::string>& v);
-    void dependencies(const std::unordered_set<std::string>&& v);
-
     const std::unordered_set<std::string>& top_level_package_names() const;
     std::unordered_set<std::string>& top_level_package_names();
     void top_level_package_names(const std::unordered_set<std::string>& v);
     void top_level_package_names(const std::unordered_set<std::string>&& v);
 
-    const std::unordered_map<dogen::sml::qname, dogen::sml::enumeration>& enumerations() const;
-    std::unordered_map<dogen::sml::qname, dogen::sml::enumeration>& enumerations();
-    void enumerations(const std::unordered_map<dogen::sml::qname, dogen::sml::enumeration>& v);
-    void enumerations(const std::unordered_map<dogen::sml::qname, dogen::sml::enumeration>&& v);
-
-    const std::unordered_map<dogen::sml::qname, dogen::sml::package>& packages() const;
-    std::unordered_map<dogen::sml::qname, dogen::sml::package>& packages();
-    void packages(const std::unordered_map<dogen::sml::qname, dogen::sml::package>& v);
-    void packages(const std::unordered_map<dogen::sml::qname, dogen::sml::package>&& v);
-
-    const std::unordered_map<dogen::sml::qname, dogen::sml::exception>& exceptions() const;
-    std::unordered_map<dogen::sml::qname, dogen::sml::exception>& exceptions();
-    void exceptions(const std::unordered_map<dogen::sml::qname, dogen::sml::exception>& v);
-    void exceptions(const std::unordered_map<dogen::sml::qname, dogen::sml::exception>&& v);
+    const dogen::sml::model& model() const;
+    dogen::sml::model& model();
+    void model(const dogen::sml::model& v);
+    void model(const dogen::sml::model&& v);
 
 public:
     bool operator==(const context& rhs) const;
@@ -167,10 +125,6 @@ public:
     context& operator=(context other);
 
 private:
-    std::string model_name_;
-    std::unordered_map<dogen::sml::qname, dogen::sml::pod> pods_;
-    std::list<std::string> external_package_path_;
-    bool verbose_;
     bool is_target_;
     std::unordered_map<std::string, std::string> child_to_parent_;
     std::unordered_set<std::string> parent_ids_;
@@ -178,11 +132,8 @@ private:
     std::unordered_map<std::string, dogen::sml::qname> dia_id_to_qname_;
     std::unordered_map<dogen::sml::qname, dogen::sml::qname> original_parent_;
     std::unordered_map<dogen::sml::qname, std::list<dogen::sml::qname> > leaves_;
-    std::unordered_set<std::string> dependencies_;
     std::unordered_set<std::string> top_level_package_names_;
-    std::unordered_map<dogen::sml::qname, dogen::sml::enumeration> enumerations_;
-    std::unordered_map<dogen::sml::qname, dogen::sml::package> packages_;
-    std::unordered_map<dogen::sml::qname, dogen::sml::exception> exceptions_;
+    dogen::sml::model model_;
 };
 
 } }

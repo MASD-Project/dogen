@@ -22,10 +22,8 @@
 #include <boost/io/ios_state.hpp>
 #include <ostream>
 #include "dogen/dia_to_sml/io/context_io.hpp"
-#include "dogen/sml/io/enumeration_io.hpp"
-#include "dogen/sml/io/exception_io.hpp"
+#include "dogen/sml/io/model_io.hpp"
 #include "dogen/sml/io/package_io.hpp"
-#include "dogen/sml/io/pod_io.hpp"
 #include "dogen/sml/io/qname_io.hpp"
 
 
@@ -34,38 +32,6 @@ inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\n", "<new_line>");
     boost::replace_all(s, "\"", "<quote>");
     return s;
-}
-
-namespace std {
-
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen::sml::qname, dogen::sml::pod>& v) {
-    s << "[";
-    for (auto i(v.begin()); i != v.end(); ++i) {
-        if (i != v.begin()) s << ", ";
-        s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
-        s << i->first;
-        s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
-        s << i->second;
-        s << " } ]";
-    }
-    s << " ] ";
-    return s;
-}
-
-}
-
-namespace std {
-
-inline std::ostream& operator<<(std::ostream& s, const std::list<std::string>& v) {
-    s << "[ ";
-    for (auto i(v.begin()); i != v.end(); ++i) {
-        if (i != v.begin()) s << ", ";
-        s << "\"" << tidy_up_string(*i) << "\"";
-    }
-    s << "] ";
-    return s;
-}
-
 }
 
 namespace std {
@@ -186,60 +152,6 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen:
 
 }
 
-namespace std {
-
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen::sml::qname, dogen::sml::enumeration>& v) {
-    s << "[";
-    for (auto i(v.begin()); i != v.end(); ++i) {
-        if (i != v.begin()) s << ", ";
-        s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
-        s << i->first;
-        s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
-        s << i->second;
-        s << " } ]";
-    }
-    s << " ] ";
-    return s;
-}
-
-}
-
-namespace std {
-
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen::sml::qname, dogen::sml::package>& v) {
-    s << "[";
-    for (auto i(v.begin()); i != v.end(); ++i) {
-        if (i != v.begin()) s << ", ";
-        s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
-        s << i->first;
-        s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
-        s << i->second;
-        s << " } ]";
-    }
-    s << " ] ";
-    return s;
-}
-
-}
-
-namespace std {
-
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen::sml::qname, dogen::sml::exception>& v) {
-    s << "[";
-    for (auto i(v.begin()); i != v.end(); ++i) {
-        if (i != v.begin()) s << ", ";
-        s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
-        s << i->first;
-        s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
-        s << i->second;
-        s << " } ]";
-    }
-    s << " ] ";
-    return s;
-}
-
-}
-
 namespace dogen {
 namespace dia_to_sml {
 
@@ -252,10 +164,6 @@ std::ostream& operator<<(std::ostream& s, const context& v) {
 
     s << " { "
       << "\"__type__\": " << "\"dogen::dia_to_sml::context\"" << ", "
-      << "\"model_name\": " << "\"" << tidy_up_string(v.model_name()) << "\"" << ", "
-      << "\"pods\": " << v.pods() << ", "
-      << "\"external_package_path\": " << v.external_package_path() << ", "
-      << "\"verbose\": " << v.verbose() << ", "
       << "\"is_target\": " << v.is_target() << ", "
       << "\"child_to_parent\": " << v.child_to_parent() << ", "
       << "\"parent_ids\": " << v.parent_ids() << ", "
@@ -263,11 +171,8 @@ std::ostream& operator<<(std::ostream& s, const context& v) {
       << "\"dia_id_to_qname\": " << v.dia_id_to_qname() << ", "
       << "\"original_parent\": " << v.original_parent() << ", "
       << "\"leaves\": " << v.leaves() << ", "
-      << "\"dependencies\": " << v.dependencies() << ", "
       << "\"top_level_package_names\": " << v.top_level_package_names() << ", "
-      << "\"enumerations\": " << v.enumerations() << ", "
-      << "\"packages\": " << v.packages() << ", "
-      << "\"exceptions\": " << v.exceptions()
+      << "\"model\": " << v.model()
       << " }";
     return(s);
 }

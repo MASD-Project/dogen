@@ -68,16 +68,16 @@
         <dia:point val="-9.0688,59.0312"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-9.1188,58.9812;13.0412,69.0812"/>
+        <dia:rectangle val="-9.1188,58.9812;23.8212,70.6812"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-9.0688,59.0312"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="22.059999999999999"/>
+        <dia:real val="32.840000000000003"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="10"/>
+        <dia:real val="11.600000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#model#</dia:string>
@@ -397,6 +397,52 @@ User models are regular Dogen models, normally made using Dia.#</dia:string>
             <dia:string>#All leaf types in this model.
 
 Leaves are types concrete types which have a parent.#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#documentation#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>#std::string#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>#Doxygen documentation for the model itself.#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#implementation_specific_parameters#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>#std::vector&lt;std::pair&lt;std::string,std::string&gt;&gt;#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>#Parameters associated with the model which are opaque to SML.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -1199,7 +1245,7 @@ It must be castable to instance of the type defined in the enumeration.#</dia:st
         <dia:point val="8.0771,39.9417"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="32.839999999999996"/>
+        <dia:real val="32.840000000000003"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="11.600000000000001"/>
@@ -1586,7 +1632,7 @@ It must be castable to instance of the type defined in the enumeration.#</dia:st
         <dia:point val="26.9853,59.1365"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="32.839999999999996"/>
+        <dia:real val="32.840000000000003"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="6"/>
@@ -1986,7 +2032,7 @@ Must only contain characters that can be used for identifiers in the target back
         <dia:point val="24.4971,51.5417"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="12.2412,51.4917;26.2371,59.8312"/>
+        <dia:rectangle val="23.0212,51.4917;26.2371,59.8312"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -1994,8 +2040,8 @@ Must only contain characters that can be used for identifiers in the target back
       <dia:attribute name="orth_points">
         <dia:point val="24.4971,51.5417"/>
         <dia:point val="24.4971,55.0156"/>
-        <dia:point val="12.9912,55.0156"/>
-        <dia:point val="12.9912,59.0312"/>
+        <dia:point val="23.7712,55.0156"/>
+        <dia:point val="23.7712,59.0312"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -3108,17 +3154,17 @@ categories for them.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="1.9612,59.0312"/>
+        <dia:point val="7.3512,59.0312"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-4.1654,44.3532;2.7112,59.8312"/>
+        <dia:rectangle val="-4.1654,44.3532;8.1012,59.8312"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="1.9612,59.0312"/>
-        <dia:point val="1.9612,55.1406"/>
+        <dia:point val="7.3512,59.0312"/>
+        <dia:point val="7.3512,55.1406"/>
         <dia:point val="-4.1154,55.1406"/>
         <dia:point val="-4.1154,44.4032"/>
       </dia:attribute>
@@ -4117,7 +4163,7 @@ which make code generation different.#</dia:string>
         <dia:point val="43.4053,65.1365"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="42.6553,63.3949;75.9804,70.1437"/>
+        <dia:rectangle val="42.6553,63.3949;75.9804,70.1438"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -4158,7 +4204,7 @@ which make code generation different.#</dia:string>
         <dia:point val="-18.8479,26.0782"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="8.3349999999999991"/>
+        <dia:real val="8.3350000000000009"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="5.2000000000000011"/>
@@ -5328,17 +5374,17 @@ which make code generation different.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="12.9912,69.0312"/>
+        <dia:point val="23.7712,70.6312"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="12.9412,68.9812;34.7773,84.8625"/>
+        <dia:rectangle val="23.7212,70.5812;34.7773,84.8625"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="12.9912,69.0312"/>
-        <dia:point val="12.9912,75.9463"/>
+        <dia:point val="23.7712,70.6312"/>
+        <dia:point val="23.7712,75.9463"/>
         <dia:point val="34.0273,75.9463"/>
         <dia:point val="34.0273,84.0625"/>
       </dia:attribute>
@@ -5399,17 +5445,17 @@ which make code generation different.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="1.9612,69.0312"/>
+        <dia:point val="7.3512,70.6312"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-12.8203,68.2812;2.7112,84.7531"/>
+        <dia:rectangle val="-12.8203,69.8812;8.1012,84.7531"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="1.9612,69.0312"/>
-        <dia:point val="1.9612,80.0625"/>
+        <dia:point val="7.3512,70.6312"/>
+        <dia:point val="7.3512,80.0625"/>
         <dia:point val="-12.7703,80.0625"/>
         <dia:point val="-12.7703,83.9531"/>
       </dia:attribute>
@@ -5470,17 +5516,17 @@ which make code generation different.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="1.9612,69.0312"/>
+        <dia:point val="7.3512,70.6312"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="1.2112,68.2812;21.3336,84.6875"/>
+        <dia:rectangle val="6.6012,69.8812;21.3336,84.6875"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="1.9612,69.0312"/>
-        <dia:point val="1.9612,80.0625"/>
+        <dia:point val="7.3512,70.6312"/>
+        <dia:point val="7.3512,80.0625"/>
         <dia:point val="21.1336,80.0625"/>
         <dia:point val="21.1336,83.8875"/>
       </dia:attribute>
@@ -5541,17 +5587,17 @@ which make code generation different.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="1.9612,69.0312"/>
+        <dia:point val="7.3512,70.6312"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="1.2112,68.2812;7.73235,93.7687"/>
+        <dia:rectangle val="5.70928,69.8812;9.17428,93.7687"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="1.9612,69.0312"/>
-        <dia:point val="1.9612,80.0625"/>
+        <dia:point val="7.3512,70.6312"/>
+        <dia:point val="7.3512,80.0625"/>
         <dia:point val="7.53235,80.0625"/>
         <dia:point val="7.53235,92.9687"/>
       </dia:attribute>
@@ -6091,14 +6137,14 @@ and all of the supported types within those models.#</dia:string>
         <dia:point val="-16.7089,75.9375"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-16.7731,68.6387;2.14687,76.0017"/>
+        <dia:rectangle val="-16.7685,70.2298;7.48617,75.9971"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="conn_endpoints">
         <dia:point val="-16.7089,75.9375"/>
-        <dia:point val="1.9612,69.0312"/>
+        <dia:point val="7.3512,70.6312"/>
       </dia:attribute>
       <dia:attribute name="text_colour">
         <dia:color val="#000000"/>
@@ -6113,7 +6159,7 @@ and all of the supported types within those models.#</dia:string>
         <dia:enum val="0"/>
       </dia:attribute>
       <dia:attribute name="text_pos">
-        <dia:point val="-7.3738,72.9843"/>
+        <dia:point val="-4.6788,73.7843"/>
       </dia:attribute>
       <dia:connections>
         <dia:connection handle="0" to="O36" connection="1"/>
@@ -6171,7 +6217,7 @@ and all of the supported types within those models.#</dia:string>
         <dia:real val="24.77"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="4.0999999999999996"/>
+        <dia:real val="4.1000000000000005"/>
       </dia:attribute>
       <dia:attribute name="line_width">
         <dia:real val="0.10000000000000001"/>
@@ -6290,7 +6336,7 @@ all types in the combined model.#</dia:string>
         <dia:point val="17.137,130.062"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="19.365000000000002"/>
+        <dia:real val="19.364999999999998"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="5.2000000000000002"/>
@@ -7007,7 +7053,7 @@ all types in the combined model.#</dia:string>
         <dia:point val="16.887,103.125"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="12.434999999999999"/>
+        <dia:real val="12.435"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="4.4000000000000004"/>
@@ -7279,15 +7325,15 @@ all types in the combined model.#</dia:string>
         <dia:point val="75.7804,59.0449"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="64.18,46.0542;76.5304,60.6449"/>
+        <dia:rectangle val="64.18,46.0542;76.5304,59.8449"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
         <dia:point val="75.7804,59.0449"/>
-        <dia:point val="75.7804,52.2245"/>
-        <dia:point val="64.23,52.2245"/>
+        <dia:point val="75.7804,52.2246"/>
+        <dia:point val="64.23,52.2246"/>
         <dia:point val="64.23,46.1042"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">

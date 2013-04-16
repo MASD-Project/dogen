@@ -20,7 +20,6 @@
  */
 #include <boost/algorithm/string.hpp>
 #include <ostream>
-#include "dogen/dia/io/composite_io.hpp"
 #include "dogen/dia_to_sml/io/object_types_io.hpp"
 #include "dogen/dia_to_sml/io/processed_object_io.hpp"
 #include "dogen/dia_to_sml/io/processed_property_io.hpp"
@@ -32,20 +31,6 @@ inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\n", "<new_line>");
     boost::replace_all(s, "\"", "<quote>");
     return s;
-}
-
-namespace std {
-
-inline std::ostream& operator<<(std::ostream& s, const std::vector<dogen::dia::composite>& v) {
-    s << "[ ";
-    for (auto i(v.begin()); i != v.end(); ++i) {
-        if (i != v.begin()) s << ", ";
-        s << *i;
-    }
-    s << "] ";
-    return s;
-}
-
 }
 
 namespace std {
@@ -101,7 +86,6 @@ std::ostream& operator<<(std::ostream& s, const processed_object& v) {
       << "\"object_type\": " << v.object_type() << ", "
       << "\"stereotype\": " << v.stereotype() << ", "
       << "\"comment\": " << "\"" << tidy_up_string(v.comment()) << "\"" << ", "
-      << "\"uml_attributes\": " << v.uml_attributes() << ", "
       << "\"child_node_id\": " << "\"" << tidy_up_string(v.child_node_id()) << "\"" << ", "
       << "\"connection\": " << v.connection() << ", "
       << "\"properties\": " << v.properties() << ", "

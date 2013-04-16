@@ -26,7 +26,6 @@
 #include <boost/archive/text_oarchive.hpp>
 #include <boost/archive/xml_iarchive.hpp>
 #include <boost/archive/xml_oarchive.hpp>
-#include "dogen/dia/serialization/registrar_ser.hpp"
 #include "dogen/sml/serialization/registrar_ser.hpp"
 #ifdef __linux__
 #include "eos/portable_iarchive.hpp"
@@ -38,7 +37,6 @@ namespace dia_to_sml {
 
 template<typename Archive>
 void register_types(Archive& ar) {
-    dia::register_types(ar);
     sml::register_types(ar);
 }
 

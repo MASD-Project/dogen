@@ -36,7 +36,9 @@ model::model(
     const std::list<std::string>& external_package_path,
     const bool is_system,
     const std::unordered_map<std::string, dogen::sml::reference>& dependencies,
-    const std::unordered_set<dogen::sml::qname>& leaves)
+    const std::unordered_set<dogen::sml::qname>& leaves,
+    const std::string& documentation,
+    const std::vector<std::pair<std::string, std::string> >& implementation_specific_parameters)
     : name_(name),
       packages_(packages),
       pods_(pods),
@@ -46,7 +48,9 @@ model::model(
       external_package_path_(external_package_path),
       is_system_(is_system),
       dependencies_(dependencies),
-      leaves_(leaves) { }
+      leaves_(leaves),
+      documentation_(documentation),
+      implementation_specific_parameters_(implementation_specific_parameters) { }
 
 void model::swap(model& other) noexcept {
     using std::swap;
@@ -60,6 +64,8 @@ void model::swap(model& other) noexcept {
     swap(is_system_, other.is_system_);
     swap(dependencies_, other.dependencies_);
     swap(leaves_, other.leaves_);
+    swap(documentation_, other.documentation_);
+    swap(implementation_specific_parameters_, other.implementation_specific_parameters_);
 }
 
 bool model::operator==(const model& rhs) const {
@@ -72,7 +78,9 @@ bool model::operator==(const model& rhs) const {
         external_package_path_ == rhs.external_package_path_ &&
         is_system_ == rhs.is_system_ &&
         dependencies_ == rhs.dependencies_ &&
-        leaves_ == rhs.leaves_;
+        leaves_ == rhs.leaves_ &&
+        documentation_ == rhs.documentation_ &&
+        implementation_specific_parameters_ == rhs.implementation_specific_parameters_;
 }
 
 model& model::operator=(model other) {
@@ -231,6 +239,38 @@ void model::leaves(const std::unordered_set<dogen::sml::qname>& v) {
 
 void model::leaves(const std::unordered_set<dogen::sml::qname>&& v) {
     leaves_ = std::move(v);
+}
+
+const std::string& model::documentation() const {
+    return documentation_;
+}
+
+std::string& model::documentation() {
+    return documentation_;
+}
+
+void model::documentation(const std::string& v) {
+    documentation_ = v;
+}
+
+void model::documentation(const std::string&& v) {
+    documentation_ = std::move(v);
+}
+
+const std::vector<std::pair<std::string, std::string> >& model::implementation_specific_parameters() const {
+    return implementation_specific_parameters_;
+}
+
+std::vector<std::pair<std::string, std::string> >& model::implementation_specific_parameters() {
+    return implementation_specific_parameters_;
+}
+
+void model::implementation_specific_parameters(const std::vector<std::pair<std::string, std::string> >& v) {
+    implementation_specific_parameters_ = v;
+}
+
+void model::implementation_specific_parameters(const std::vector<std::pair<std::string, std::string> >&& v) {
+    implementation_specific_parameters_ = std::move(v);
 }
 
 } }

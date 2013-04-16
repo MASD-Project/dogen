@@ -56,8 +56,8 @@ void workflow::initialise_context(const std::string& model_name,
     bool is_target, context& c) const {
 
     const auto epp(identifier_parser::parse_scoped_name(external_package_path));
-    c.external_package_path(epp);
-    c.model_name(model_name);
+    c.model().external_package_path(epp);
+    c.model().name(model_name);
     c.is_target(is_target);
 }
 
@@ -67,27 +67,14 @@ void workflow::graph_to_context(const graph_type& g, context& c) const {
     boost::depth_first_search(g, boost::visitor(v));
 }
 
-void workflow::context_to_model(const context& c, sml::model& m) const {
-
-    for (const auto d : c.dependencies()) {
-        sml::reference ref;
-        ref.model_name(d);
-        m.dependencies().insert(std::make_pair(d, ref));
-    }
-    m.packages(c.packages());
-    m.enumerations(c.enumerations());
-    m.pods(c.pods());
-    m.exceptions(c.exceptions());
-    m.is_system(false);
-    m.name(c.model_name());
-    m.external_package_path(c.external_package_path());
-
-    for (auto& pair : m.pods()) {
+void workflow::post_process_model(context& c) const {
+    c.model().is_system(false);
+    for (auto& pair : c.model().pods()) {
         auto j(c.leaves().find(pair.first));
         if (j != c.leaves().end()) {
             pair.second.leaves(j->second);
             for (const auto k : j->second)
-                m.leaves().insert(k);
+                c.model().leaves().insert(k);
         }
     }
 }
@@ -103,9 +90,8 @@ sml::model workflow::execute(const dia::diagram& diagram,
     auto g(build_graph(diagram, c));
     graph_to_context(g, c);
 
-    sml::model r;
-    context_to_model(c, r);
-    return r;
+    post_process_model(c);
+    return c.model();
 }
 
 } }

@@ -18,7 +18,6 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/dia/hash/composite_hash.hpp"
 #include "dogen/dia_to_sml/hash/object_types_hash.hpp"
 #include "dogen/dia_to_sml/hash/processed_object_hash.hpp"
 #include "dogen/dia_to_sml/hash/processed_property_hash.hpp"
@@ -31,14 +30,6 @@ inline void combine(std::size_t& seed, const HashableType& value)
 {
     std::hash<HashableType> hasher;
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
-}
-
-inline std::size_t hash_std_vector_dogen_dia_composite(const std::vector<dogen::dia::composite>& v){
-    std::size_t seed(0);
-    for (const auto i : v) {
-        combine(seed, i);
-    }
-    return seed;
 }
 
 inline std::size_t hash_std_pair_std_string_std_string(const std::pair<std::string, std::string>& v){
@@ -80,7 +71,6 @@ std::size_t processed_object_hasher::hash(const processed_object&v) {
     combine(seed, v.object_type());
     combine(seed, v.stereotype());
     combine(seed, v.comment());
-    combine(seed, hash_std_vector_dogen_dia_composite(v.uml_attributes()));
     combine(seed, v.child_node_id());
     combine(seed, hash_boost_optional_std_pair_std_string_std_string_(v.connection()));
     combine(seed, hash_std_vector_dogen_dia_to_sml_processed_property(v.properties()));

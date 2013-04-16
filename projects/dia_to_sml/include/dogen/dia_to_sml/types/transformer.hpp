@@ -114,6 +114,14 @@ private:
     void transform_package(const processed_object& o);
 
     /**
+     * @brief Converts a dia object of type UML note into
+     * documentation, if the appropriate dogen tags are found.
+     *
+     * @param o Dia object which contains a UML note.
+     */
+    void transform_note(const processed_object& o);
+
+    /**
      * @brief Converts a dia object with a stereotype of exception
      * into a SML exception.
      *
