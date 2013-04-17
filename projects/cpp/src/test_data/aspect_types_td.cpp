@@ -26,7 +26,7 @@ namespace cpp {
 aspect_types_generator::aspect_types_generator() : position_(0) { }
 void aspect_types_generator::
 populate(const unsigned int position, result_type& v) {
-    v = static_cast<aspect_types>(position % 6);
+    v = static_cast<aspect_types>(position % 7);
 }
 
 aspect_types_generator::result_type

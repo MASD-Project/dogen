@@ -43,7 +43,8 @@ enum class aspect_types : unsigned int {
     includers = 2, ///< Header file with includes for all headers in facet
     forward_decls = 3, ///< Forward declarations for type
     registrar = 4, ///< Boost serialisation registration
-    null_aspect = 5 ///< Nothing is to be produced for this type
+    null_aspect = 5, ///< Nothing is to be produced for this type
+    namespace_doc = 6 ///< Documentation for the namespace.
 };
 
 } }
