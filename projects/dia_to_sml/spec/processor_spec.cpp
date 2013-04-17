@@ -136,5 +136,16 @@ BOOST_AUTO_TEST_CASE(uml_generalization_transforms_into_expected_processed_objec
     BOOST_REQUIRE(po.connection()->second == o[2].id());
 }
 
+BOOST_AUTO_TEST_CASE(uml_note_transforms_into_expected_processed_object) {
+    SETUP_TEST_LOG_SOURCE("uml_note_transforms_into_expected_processed_object");
+    dogen::dia_to_sml::processor p;
+    const auto o(mock_object_factory::build_uml_note(0));
+    const auto po(p.process(o));
+    BOOST_LOG_SEV(lg, debug) << "actual:" << po;
+    BOOST_CHECK(po.id() == mock_object_factory::to_oject_id(0));
+    BOOST_CHECK(po.name().empty());
+    BOOST_CHECK(po.object_type() == object_types::uml_note);
+    BOOST_CHECK(po.stereotype() == stereotypes::no_stereotype);
+}
 
 BOOST_AUTO_TEST_SUITE_END()

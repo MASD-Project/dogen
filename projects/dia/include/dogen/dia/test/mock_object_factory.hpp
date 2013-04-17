@@ -44,6 +44,20 @@ public:
     static std::string to_oject_id(const unsigned int number);
 
     /**
+     * @brief Generates a UML note without a dogen marker.
+     *
+     * @param number identifier used for object ID generation.
+     */
+    static object build_uml_note(const unsigned int number = 0);
+
+    /**
+     * @brief Generates a UML note with a dogen comment marker.
+     *
+     * @param number identifier used for object ID generation.
+     */
+    static object build_uml_note_wit_marker(const unsigned int number = 0);
+
+    /**
      * @brief Generates a new UML class.
      *
      * @param number identifier used for object ID generation.
