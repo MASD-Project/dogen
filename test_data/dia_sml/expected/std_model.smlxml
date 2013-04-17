@@ -5,7 +5,7 @@
 	<name>std_model</name>
 	<packages class_id="1" tracking_level="0" version="0">
 		<count>1</count>
-		<bucket_count>23</bucket_count>
+		<bucket_count>11</bucket_count>
 		<item_version>0</item_version>
 		<item class_id="2" tracking_level="0" version="0">
 			<first class_id="3" tracking_level="0" version="0">
@@ -284,7 +284,7 @@
 					<count>0</count>
 					<item_version>0</item_version>
 				</package_path>
-				<type_name>derived</type_name>
+				<type_name>primitives</type_name>
 				<meta_type>2</meta_type>
 			</first>
 			<second>
@@ -298,143 +298,11 @@
 						<count>0</count>
 						<item_version>0</item_version>
 					</package_path>
-					<type_name>derived</type_name>
+					<type_name>primitives</type_name>
 					<meta_type>2</meta_type>
 				</name>
 				<properties>
-					<count>1</count>
-					<item_version>0</item_version>
-					<item>
-						<name>prop_1</name>
-						<type_name>
-							<type>
-								<model_name>std</model_name>
-								<external_package_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</external_package_path>
-								<package_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</package_path>
-								<type_name>list</type_name>
-								<meta_type>0</meta_type>
-							</type>
-							<children>
-								<count>1</count>
-								<item_version>0</item_version>
-								<item>
-									<type>
-										<model_name>std_model</model_name>
-										<external_package_path>
-											<count>0</count>
-											<item_version>0</item_version>
-										</external_package_path>
-										<package_path>
-											<count>1</count>
-											<item_version>0</item_version>
-											<item>pkg1</item>
-										</package_path>
-										<type_name>class_c</type_name>
-										<meta_type>0</meta_type>
-									</type>
-									<children>
-										<count>0</count>
-										<item_version>0</item_version>
-									</children>
-									<is_pointer>0</is_pointer>
-								</item>
-							</children>
-							<is_pointer>0</is_pointer>
-						</type_name>
-						<default_value></default_value>
-						<documentation></documentation>
-						<implementation_specific_parameters>
-							<count>0</count>
-							<item_version>0</item_version>
-						</implementation_specific_parameters>
-					</item>
-				</properties>
-				<parent_name>
-					<initialized>1</initialized>
-					<item_version>0</item_version>
-					<value>
-						<model_name>std_model</model_name>
-						<external_package_path>
-							<count>0</count>
-							<item_version>0</item_version>
-						</external_package_path>
-						<package_path>
-							<count>0</count>
-							<item_version>0</item_version>
-						</package_path>
-						<type_name>base</type_name>
-						<meta_type>2</meta_type>
-					</value>
-				</parent_name>
-				<original_parent_name>
-					<initialized>1</initialized>
-					<item_version>0</item_version>
-					<value>
-						<model_name>std_model</model_name>
-						<external_package_path>
-							<count>0</count>
-							<item_version>0</item_version>
-						</external_package_path>
-						<package_path>
-							<count>0</count>
-							<item_version>0</item_version>
-						</package_path>
-						<type_name>base</type_name>
-						<meta_type>2</meta_type>
-					</value>
-				</original_parent_name>
-				<leaves>
-					<count>0</count>
-					<item_version>0</item_version>
-				</leaves>
-				<generation_type>1</generation_type>
-				<is_parent>0</is_parent>
-				<category_type>1</category_type>
-				<pod_type>5</pod_type>
-				<documentation></documentation>
-				<number_of_type_arguments>0</number_of_type_arguments>
-				<implementation_specific_parameters>
-					<count>0</count>
-					<item_version>0</item_version>
-				</implementation_specific_parameters>
-			</second>
-		</item>
-		<item>
-			<first>
-				<model_name>std_model</model_name>
-				<external_package_path>
-					<count>0</count>
-					<item_version>0</item_version>
-				</external_package_path>
-				<package_path>
-					<count>0</count>
-					<item_version>0</item_version>
-				</package_path>
-				<type_name>class_g</type_name>
-				<meta_type>2</meta_type>
-			</first>
-			<second>
-				<name>
-					<model_name>std_model</model_name>
-					<external_package_path>
-						<count>0</count>
-						<item_version>0</item_version>
-					</external_package_path>
-					<package_path>
-						<count>0</count>
-						<item_version>0</item_version>
-					</package_path>
-					<type_name>class_g</type_name>
-					<meta_type>2</meta_type>
-				</name>
-				<properties>
-					<count>4</count>
+					<count>8</count>
 					<item_version>0</item_version>
 					<item>
 						<name>prop_0</name>
@@ -449,73 +317,12 @@
 									<count>0</count>
 									<item_version>0</item_version>
 								</package_path>
-								<type_name>unordered_map</type_name>
+								<type_name>int8_t</type_name>
 								<meta_type>0</meta_type>
 							</type>
 							<children>
-								<count>2</count>
+								<count>0</count>
 								<item_version>0</item_version>
-								<item>
-									<type>
-										<model_name></model_name>
-										<external_package_path>
-											<count>0</count>
-											<item_version>0</item_version>
-										</external_package_path>
-										<package_path>
-											<count>0</count>
-											<item_version>0</item_version>
-										</package_path>
-										<type_name>class_a</type_name>
-										<meta_type>0</meta_type>
-									</type>
-									<children>
-										<count>0</count>
-										<item_version>0</item_version>
-									</children>
-									<is_pointer>0</is_pointer>
-								</item>
-								<item>
-									<type>
-										<model_name>std</model_name>
-										<external_package_path>
-											<count>0</count>
-											<item_version>0</item_version>
-										</external_package_path>
-										<package_path>
-											<count>0</count>
-											<item_version>0</item_version>
-										</package_path>
-										<type_name>vector</type_name>
-										<meta_type>0</meta_type>
-									</type>
-									<children>
-										<count>1</count>
-										<item_version>0</item_version>
-										<item>
-											<type>
-												<model_name>std_model</model_name>
-												<external_package_path>
-													<count>0</count>
-													<item_version>0</item_version>
-												</external_package_path>
-												<package_path>
-													<count>1</count>
-													<item_version>0</item_version>
-													<item>pkg1</item>
-												</package_path>
-												<type_name>class_c</type_name>
-												<meta_type>0</meta_type>
-											</type>
-											<children>
-												<count>0</count>
-												<item_version>0</item_version>
-											</children>
-											<is_pointer>0</is_pointer>
-										</item>
-									</children>
-									<is_pointer>0</is_pointer>
-								</item>
 							</children>
 							<is_pointer>0</is_pointer>
 						</type_name>
@@ -539,73 +346,12 @@
 									<count>0</count>
 									<item_version>0</item_version>
 								</package_path>
-								<type_name>unordered_map</type_name>
+								<type_name>int16_t</type_name>
 								<meta_type>0</meta_type>
 							</type>
 							<children>
-								<count>2</count>
+								<count>0</count>
 								<item_version>0</item_version>
-								<item>
-									<type>
-										<model_name>std_model</model_name>
-										<external_package_path>
-											<count>0</count>
-											<item_version>0</item_version>
-										</external_package_path>
-										<package_path>
-											<count>1</count>
-											<item_version>0</item_version>
-											<item>pkg1</item>
-										</package_path>
-										<type_name>class_c</type_name>
-										<meta_type>0</meta_type>
-									</type>
-									<children>
-										<count>0</count>
-										<item_version>0</item_version>
-									</children>
-									<is_pointer>0</is_pointer>
-								</item>
-								<item>
-									<type>
-										<model_name>std</model_name>
-										<external_package_path>
-											<count>0</count>
-											<item_version>0</item_version>
-										</external_package_path>
-										<package_path>
-											<count>0</count>
-											<item_version>0</item_version>
-										</package_path>
-										<type_name>list</type_name>
-										<meta_type>0</meta_type>
-									</type>
-									<children>
-										<count>1</count>
-										<item_version>0</item_version>
-										<item>
-											<type>
-												<model_name></model_name>
-												<external_package_path>
-													<count>0</count>
-													<item_version>0</item_version>
-												</external_package_path>
-												<package_path>
-													<count>0</count>
-													<item_version>0</item_version>
-												</package_path>
-												<type_name>class_a</type_name>
-												<meta_type>0</meta_type>
-											</type>
-											<children>
-												<count>0</count>
-												<item_version>0</item_version>
-											</children>
-											<is_pointer>0</is_pointer>
-										</item>
-									</children>
-									<is_pointer>0</is_pointer>
-								</item>
 							</children>
 							<is_pointer>0</is_pointer>
 						</type_name>
@@ -629,52 +375,12 @@
 									<count>0</count>
 									<item_version>0</item_version>
 								</package_path>
-								<type_name>unordered_map</type_name>
+								<type_name>int32_t</type_name>
 								<meta_type>0</meta_type>
 							</type>
 							<children>
-								<count>2</count>
+								<count>0</count>
 								<item_version>0</item_version>
-								<item>
-									<type>
-										<model_name></model_name>
-										<external_package_path>
-											<count>0</count>
-											<item_version>0</item_version>
-										</external_package_path>
-										<package_path>
-											<count>0</count>
-											<item_version>0</item_version>
-										</package_path>
-										<type_name>class_a_unversioned_key</type_name>
-										<meta_type>0</meta_type>
-									</type>
-									<children>
-										<count>0</count>
-										<item_version>0</item_version>
-									</children>
-									<is_pointer>0</is_pointer>
-								</item>
-								<item>
-									<type>
-										<model_name></model_name>
-										<external_package_path>
-											<count>0</count>
-											<item_version>0</item_version>
-										</external_package_path>
-										<package_path>
-											<count>0</count>
-											<item_version>0</item_version>
-										</package_path>
-										<type_name>class_a</type_name>
-										<meta_type>0</meta_type>
-									</type>
-									<children>
-										<count>0</count>
-										<item_version>0</item_version>
-									</children>
-									<is_pointer>0</is_pointer>
-								</item>
 							</children>
 							<is_pointer>0</is_pointer>
 						</type_name>
@@ -698,175 +404,12 @@
 									<count>0</count>
 									<item_version>0</item_version>
 								</package_path>
-								<type_name>unordered_map</type_name>
+								<type_name>int64_t</type_name>
 								<meta_type>0</meta_type>
 							</type>
 							<children>
-								<count>2</count>
+								<count>0</count>
 								<item_version>0</item_version>
-								<item>
-									<type>
-										<model_name></model_name>
-										<external_package_path>
-											<count>0</count>
-											<item_version>0</item_version>
-										</external_package_path>
-										<package_path>
-											<count>0</count>
-											<item_version>0</item_version>
-										</package_path>
-										<type_name>class_a_versioned_key</type_name>
-										<meta_type>0</meta_type>
-									</type>
-									<children>
-										<count>0</count>
-										<item_version>0</item_version>
-									</children>
-									<is_pointer>0</is_pointer>
-								</item>
-								<item>
-									<type>
-										<model_name></model_name>
-										<external_package_path>
-											<count>0</count>
-											<item_version>0</item_version>
-										</external_package_path>
-										<package_path>
-											<count>0</count>
-											<item_version>0</item_version>
-										</package_path>
-										<type_name>class_a</type_name>
-										<meta_type>0</meta_type>
-									</type>
-									<children>
-										<count>0</count>
-										<item_version>0</item_version>
-									</children>
-									<is_pointer>0</is_pointer>
-								</item>
-							</children>
-							<is_pointer>0</is_pointer>
-						</type_name>
-						<default_value></default_value>
-						<documentation></documentation>
-						<implementation_specific_parameters>
-							<count>0</count>
-							<item_version>0</item_version>
-						</implementation_specific_parameters>
-					</item>
-				</properties>
-				<parent_name>
-					<initialized>0</initialized>
-				</parent_name>
-				<original_parent_name>
-					<initialized>0</initialized>
-				</original_parent_name>
-				<leaves>
-					<count>0</count>
-					<item_version>0</item_version>
-				</leaves>
-				<generation_type>1</generation_type>
-				<is_parent>0</is_parent>
-				<category_type>1</category_type>
-				<pod_type>5</pod_type>
-				<documentation></documentation>
-				<number_of_type_arguments>0</number_of_type_arguments>
-				<implementation_specific_parameters>
-					<count>0</count>
-					<item_version>0</item_version>
-				</implementation_specific_parameters>
-			</second>
-		</item>
-		<item>
-			<first>
-				<model_name>std_model</model_name>
-				<external_package_path>
-					<count>0</count>
-					<item_version>0</item_version>
-				</external_package_path>
-				<package_path>
-					<count>0</count>
-					<item_version>0</item_version>
-				</package_path>
-				<type_name>class_f</type_name>
-				<meta_type>2</meta_type>
-			</first>
-			<second>
-				<name>
-					<model_name>std_model</model_name>
-					<external_package_path>
-						<count>0</count>
-						<item_version>0</item_version>
-					</external_package_path>
-					<package_path>
-						<count>0</count>
-						<item_version>0</item_version>
-					</package_path>
-					<type_name>class_f</type_name>
-					<meta_type>2</meta_type>
-				</name>
-				<properties>
-					<count>3</count>
-					<item_version>0</item_version>
-					<item>
-						<name>prop_0</name>
-						<type_name>
-							<type>
-								<model_name>std</model_name>
-								<external_package_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</external_package_path>
-								<package_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</package_path>
-								<type_name>unordered_map</type_name>
-								<meta_type>0</meta_type>
-							</type>
-							<children>
-								<count>2</count>
-								<item_version>0</item_version>
-								<item>
-									<type>
-										<model_name>std</model_name>
-										<external_package_path>
-											<count>0</count>
-											<item_version>0</item_version>
-										</external_package_path>
-										<package_path>
-											<count>0</count>
-											<item_version>0</item_version>
-										</package_path>
-										<type_name>string</type_name>
-										<meta_type>0</meta_type>
-									</type>
-									<children>
-										<count>0</count>
-										<item_version>0</item_version>
-									</children>
-									<is_pointer>0</is_pointer>
-								</item>
-								<item>
-									<type>
-										<model_name>std</model_name>
-										<external_package_path>
-											<count>0</count>
-											<item_version>0</item_version>
-										</external_package_path>
-										<package_path>
-											<count>0</count>
-											<item_version>0</item_version>
-										</package_path>
-										<type_name>string</type_name>
-										<meta_type>0</meta_type>
-									</type>
-									<children>
-										<count>0</count>
-										<item_version>0</item_version>
-									</children>
-									<is_pointer>0</is_pointer>
-								</item>
 							</children>
 							<is_pointer>0</is_pointer>
 						</type_name>
@@ -878,7 +421,7 @@
 						</implementation_specific_parameters>
 					</item>
 					<item>
-						<name>prop_1</name>
+						<name>prop_4</name>
 						<type_name>
 							<type>
 								<model_name>std</model_name>
@@ -890,52 +433,12 @@
 									<count>0</count>
 									<item_version>0</item_version>
 								</package_path>
-								<type_name>unordered_map</type_name>
+								<type_name>uint8_t</type_name>
 								<meta_type>0</meta_type>
 							</type>
 							<children>
-								<count>2</count>
+								<count>0</count>
 								<item_version>0</item_version>
-								<item>
-									<type>
-										<model_name>std</model_name>
-										<external_package_path>
-											<count>0</count>
-											<item_version>0</item_version>
-										</external_package_path>
-										<package_path>
-											<count>0</count>
-											<item_version>0</item_version>
-										</package_path>
-										<type_name>string</type_name>
-										<meta_type>0</meta_type>
-									</type>
-									<children>
-										<count>0</count>
-										<item_version>0</item_version>
-									</children>
-									<is_pointer>0</is_pointer>
-								</item>
-								<item>
-									<type>
-										<model_name></model_name>
-										<external_package_path>
-											<count>0</count>
-											<item_version>0</item_version>
-										</external_package_path>
-										<package_path>
-											<count>0</count>
-											<item_version>0</item_version>
-										</package_path>
-										<type_name>class_a</type_name>
-										<meta_type>0</meta_type>
-									</type>
-									<children>
-										<count>0</count>
-										<item_version>0</item_version>
-									</children>
-									<is_pointer>0</is_pointer>
-								</item>
 							</children>
 							<is_pointer>0</is_pointer>
 						</type_name>
@@ -947,7 +450,7 @@
 						</implementation_specific_parameters>
 					</item>
 					<item>
-						<name>prop_2</name>
+						<name>prop_5</name>
 						<type_name>
 							<type>
 								<model_name>std</model_name>
@@ -959,53 +462,70 @@
 									<count>0</count>
 									<item_version>0</item_version>
 								</package_path>
-								<type_name>unordered_map</type_name>
+								<type_name>uint16_t</type_name>
 								<meta_type>0</meta_type>
 							</type>
 							<children>
-								<count>2</count>
+								<count>0</count>
 								<item_version>0</item_version>
-								<item>
-									<type>
-										<model_name></model_name>
-										<external_package_path>
-											<count>0</count>
-											<item_version>0</item_version>
-										</external_package_path>
-										<package_path>
-											<count>0</count>
-											<item_version>0</item_version>
-										</package_path>
-										<type_name>class_a</type_name>
-										<meta_type>0</meta_type>
-									</type>
-									<children>
-										<count>0</count>
-										<item_version>0</item_version>
-									</children>
-									<is_pointer>0</is_pointer>
-								</item>
-								<item>
-									<type>
-										<model_name>std_model</model_name>
-										<external_package_path>
-											<count>0</count>
-											<item_version>0</item_version>
-										</external_package_path>
-										<package_path>
-											<count>1</count>
-											<item_version>0</item_version>
-											<item>pkg1</item>
-										</package_path>
-										<type_name>class_c</type_name>
-										<meta_type>0</meta_type>
-									</type>
-									<children>
-										<count>0</count>
-										<item_version>0</item_version>
-									</children>
-									<is_pointer>0</is_pointer>
-								</item>
+							</children>
+							<is_pointer>0</is_pointer>
+						</type_name>
+						<default_value></default_value>
+						<documentation></documentation>
+						<implementation_specific_parameters>
+							<count>0</count>
+							<item_version>0</item_version>
+						</implementation_specific_parameters>
+					</item>
+					<item>
+						<name>prop_6</name>
+						<type_name>
+							<type>
+								<model_name>std</model_name>
+								<external_package_path>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_package_path>
+								<package_path>
+									<count>0</count>
+									<item_version>0</item_version>
+								</package_path>
+								<type_name>uint32_t</type_name>
+								<meta_type>0</meta_type>
+							</type>
+							<children>
+								<count>0</count>
+								<item_version>0</item_version>
+							</children>
+							<is_pointer>0</is_pointer>
+						</type_name>
+						<default_value></default_value>
+						<documentation></documentation>
+						<implementation_specific_parameters>
+							<count>0</count>
+							<item_version>0</item_version>
+						</implementation_specific_parameters>
+					</item>
+					<item>
+						<name>prop_7</name>
+						<type_name>
+							<type>
+								<model_name>std</model_name>
+								<external_package_path>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_package_path>
+								<package_path>
+									<count>0</count>
+									<item_version>0</item_version>
+								</package_path>
+								<type_name>uint64_t</type_name>
+								<meta_type>0</meta_type>
+							</type>
+							<children>
+								<count>0</count>
+								<item_version>0</item_version>
 							</children>
 							<is_pointer>0</is_pointer>
 						</type_name>
@@ -1331,7 +851,7 @@
 					<count>0</count>
 					<item_version>0</item_version>
 				</package_path>
-				<type_name>primitives</type_name>
+				<type_name>class_a</type_name>
 				<meta_type>2</meta_type>
 			</first>
 			<second>
@@ -1345,11 +865,124 @@
 						<count>0</count>
 						<item_version>0</item_version>
 					</package_path>
-					<type_name>primitives</type_name>
+					<type_name>class_a</type_name>
 					<meta_type>2</meta_type>
 				</name>
 				<properties>
-					<count>8</count>
+					<count>2</count>
+					<item_version>0</item_version>
+					<item>
+						<name>prop0</name>
+						<type_name>
+							<type>
+								<model_name>std</model_name>
+								<external_package_path>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_package_path>
+								<package_path>
+									<count>0</count>
+									<item_version>0</item_version>
+								</package_path>
+								<type_name>string</type_name>
+								<meta_type>0</meta_type>
+							</type>
+							<children>
+								<count>0</count>
+								<item_version>0</item_version>
+							</children>
+							<is_pointer>0</is_pointer>
+						</type_name>
+						<default_value></default_value>
+						<documentation></documentation>
+						<implementation_specific_parameters>
+							<count>0</count>
+							<item_version>0</item_version>
+						</implementation_specific_parameters>
+					</item>
+					<item>
+						<name>prop1</name>
+						<type_name>
+							<type>
+								<model_name>std</model_name>
+								<external_package_path>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_package_path>
+								<package_path>
+									<count>0</count>
+									<item_version>0</item_version>
+								</package_path>
+								<type_name>string</type_name>
+								<meta_type>0</meta_type>
+							</type>
+							<children>
+								<count>0</count>
+								<item_version>0</item_version>
+							</children>
+							<is_pointer>0</is_pointer>
+						</type_name>
+						<default_value></default_value>
+						<documentation>test inclusion duplicates
+</documentation>
+						<implementation_specific_parameters>
+							<count>0</count>
+							<item_version>0</item_version>
+						</implementation_specific_parameters>
+					</item>
+				</properties>
+				<parent_name>
+					<initialized>0</initialized>
+				</parent_name>
+				<original_parent_name>
+					<initialized>0</initialized>
+				</original_parent_name>
+				<leaves>
+					<count>0</count>
+					<item_version>0</item_version>
+				</leaves>
+				<generation_type>1</generation_type>
+				<is_parent>0</is_parent>
+				<category_type>1</category_type>
+				<pod_type>4</pod_type>
+				<documentation></documentation>
+				<number_of_type_arguments>0</number_of_type_arguments>
+				<implementation_specific_parameters>
+					<count>0</count>
+					<item_version>0</item_version>
+				</implementation_specific_parameters>
+			</second>
+		</item>
+		<item>
+			<first>
+				<model_name>std_model</model_name>
+				<external_package_path>
+					<count>0</count>
+					<item_version>0</item_version>
+				</external_package_path>
+				<package_path>
+					<count>0</count>
+					<item_version>0</item_version>
+				</package_path>
+				<type_name>base</type_name>
+				<meta_type>2</meta_type>
+			</first>
+			<second>
+				<name>
+					<model_name>std_model</model_name>
+					<external_package_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</external_package_path>
+					<package_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</package_path>
+					<type_name>base</type_name>
+					<meta_type>2</meta_type>
+				</name>
+				<properties>
+					<count>1</count>
 					<item_version>0</item_version>
 					<item>
 						<name>prop_0</name>
@@ -1364,12 +997,148 @@
 									<count>0</count>
 									<item_version>0</item_version>
 								</package_path>
-								<type_name>int8_t</type_name>
+								<type_name>vector</type_name>
 								<meta_type>0</meta_type>
 							</type>
 							<children>
-								<count>0</count>
+								<count>1</count>
 								<item_version>0</item_version>
+								<item>
+									<type>
+										<model_name>std</model_name>
+										<external_package_path>
+											<count>0</count>
+											<item_version>0</item_version>
+										</external_package_path>
+										<package_path>
+											<count>0</count>
+											<item_version>0</item_version>
+										</package_path>
+										<type_name>string</type_name>
+										<meta_type>0</meta_type>
+									</type>
+									<children>
+										<count>0</count>
+										<item_version>0</item_version>
+									</children>
+									<is_pointer>0</is_pointer>
+								</item>
+							</children>
+							<is_pointer>0</is_pointer>
+						</type_name>
+						<default_value></default_value>
+						<documentation></documentation>
+						<implementation_specific_parameters>
+							<count>0</count>
+							<item_version>0</item_version>
+						</implementation_specific_parameters>
+					</item>
+				</properties>
+				<parent_name>
+					<initialized>0</initialized>
+				</parent_name>
+				<original_parent_name>
+					<initialized>0</initialized>
+				</original_parent_name>
+				<leaves>
+					<count>1</count>
+					<item_version>0</item_version>
+					<item>
+						<model_name>std_model</model_name>
+						<external_package_path>
+							<count>0</count>
+							<item_version>0</item_version>
+						</external_package_path>
+						<package_path>
+							<count>0</count>
+							<item_version>0</item_version>
+						</package_path>
+						<type_name>derived</type_name>
+						<meta_type>2</meta_type>
+					</item>
+				</leaves>
+				<generation_type>1</generation_type>
+				<is_parent>1</is_parent>
+				<category_type>1</category_type>
+				<pod_type>5</pod_type>
+				<documentation></documentation>
+				<number_of_type_arguments>0</number_of_type_arguments>
+				<implementation_specific_parameters>
+					<count>0</count>
+					<item_version>0</item_version>
+				</implementation_specific_parameters>
+			</second>
+		</item>
+		<item>
+			<first>
+				<model_name>std_model</model_name>
+				<external_package_path>
+					<count>0</count>
+					<item_version>0</item_version>
+				</external_package_path>
+				<package_path>
+					<count>0</count>
+					<item_version>0</item_version>
+				</package_path>
+				<type_name>class_h</type_name>
+				<meta_type>2</meta_type>
+			</first>
+			<second>
+				<name>
+					<model_name>std_model</model_name>
+					<external_package_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</external_package_path>
+					<package_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</package_path>
+					<type_name>class_h</type_name>
+					<meta_type>2</meta_type>
+				</name>
+				<properties>
+					<count>2</count>
+					<item_version>0</item_version>
+					<item>
+						<name>prop_0</name>
+						<type_name>
+							<type>
+								<model_name>std</model_name>
+								<external_package_path>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_package_path>
+								<package_path>
+									<count>0</count>
+									<item_version>0</item_version>
+								</package_path>
+								<type_name>unordered_set</type_name>
+								<meta_type>0</meta_type>
+							</type>
+							<children>
+								<count>1</count>
+								<item_version>0</item_version>
+								<item>
+									<type>
+										<model_name></model_name>
+										<external_package_path>
+											<count>0</count>
+											<item_version>0</item_version>
+										</external_package_path>
+										<package_path>
+											<count>0</count>
+											<item_version>0</item_version>
+										</package_path>
+										<type_name>class_a</type_name>
+										<meta_type>0</meta_type>
+									</type>
+									<children>
+										<count>0</count>
+										<item_version>0</item_version>
+									</children>
+									<is_pointer>0</is_pointer>
+								</item>
 							</children>
 							<is_pointer>0</is_pointer>
 						</type_name>
@@ -1393,12 +1162,185 @@
 									<count>0</count>
 									<item_version>0</item_version>
 								</package_path>
-								<type_name>int16_t</type_name>
+								<type_name>unordered_set</type_name>
 								<meta_type>0</meta_type>
 							</type>
 							<children>
-								<count>0</count>
+								<count>1</count>
 								<item_version>0</item_version>
+								<item>
+									<type>
+										<model_name>std_model</model_name>
+										<external_package_path>
+											<count>0</count>
+											<item_version>0</item_version>
+										</external_package_path>
+										<package_path>
+											<count>1</count>
+											<item_version>0</item_version>
+											<item>pkg1</item>
+										</package_path>
+										<type_name>class_c</type_name>
+										<meta_type>0</meta_type>
+									</type>
+									<children>
+										<count>0</count>
+										<item_version>0</item_version>
+									</children>
+									<is_pointer>0</is_pointer>
+								</item>
+							</children>
+							<is_pointer>0</is_pointer>
+						</type_name>
+						<default_value></default_value>
+						<documentation></documentation>
+						<implementation_specific_parameters>
+							<count>0</count>
+							<item_version>0</item_version>
+						</implementation_specific_parameters>
+					</item>
+				</properties>
+				<parent_name>
+					<initialized>0</initialized>
+				</parent_name>
+				<original_parent_name>
+					<initialized>0</initialized>
+				</original_parent_name>
+				<leaves>
+					<count>0</count>
+					<item_version>0</item_version>
+				</leaves>
+				<generation_type>1</generation_type>
+				<is_parent>0</is_parent>
+				<category_type>1</category_type>
+				<pod_type>5</pod_type>
+				<documentation></documentation>
+				<number_of_type_arguments>0</number_of_type_arguments>
+				<implementation_specific_parameters>
+					<count>0</count>
+					<item_version>0</item_version>
+				</implementation_specific_parameters>
+			</second>
+		</item>
+		<item>
+			<first>
+				<model_name>std_model</model_name>
+				<external_package_path>
+					<count>0</count>
+					<item_version>0</item_version>
+				</external_package_path>
+				<package_path>
+					<count>0</count>
+					<item_version>0</item_version>
+				</package_path>
+				<type_name>class_b</type_name>
+				<meta_type>2</meta_type>
+			</first>
+			<second>
+				<name>
+					<model_name>std_model</model_name>
+					<external_package_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</external_package_path>
+					<package_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</package_path>
+					<type_name>class_b</type_name>
+					<meta_type>2</meta_type>
+				</name>
+				<properties>
+					<count>6</count>
+					<item_version>0</item_version>
+					<item>
+						<name>prop_0</name>
+						<type_name>
+							<type>
+								<model_name>std</model_name>
+								<external_package_path>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_package_path>
+								<package_path>
+									<count>0</count>
+									<item_version>0</item_version>
+								</package_path>
+								<type_name>vector</type_name>
+								<meta_type>0</meta_type>
+							</type>
+							<children>
+								<count>1</count>
+								<item_version>0</item_version>
+								<item>
+									<type>
+										<model_name>std</model_name>
+										<external_package_path>
+											<count>0</count>
+											<item_version>0</item_version>
+										</external_package_path>
+										<package_path>
+											<count>0</count>
+											<item_version>0</item_version>
+										</package_path>
+										<type_name>string</type_name>
+										<meta_type>0</meta_type>
+									</type>
+									<children>
+										<count>0</count>
+										<item_version>0</item_version>
+									</children>
+									<is_pointer>0</is_pointer>
+								</item>
+							</children>
+							<is_pointer>0</is_pointer>
+						</type_name>
+						<default_value></default_value>
+						<documentation></documentation>
+						<implementation_specific_parameters>
+							<count>0</count>
+							<item_version>0</item_version>
+						</implementation_specific_parameters>
+					</item>
+					<item>
+						<name>prop_1</name>
+						<type_name>
+							<type>
+								<model_name>std</model_name>
+								<external_package_path>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_package_path>
+								<package_path>
+									<count>0</count>
+									<item_version>0</item_version>
+								</package_path>
+								<type_name>vector</type_name>
+								<meta_type>0</meta_type>
+							</type>
+							<children>
+								<count>1</count>
+								<item_version>0</item_version>
+								<item>
+									<type>
+										<model_name></model_name>
+										<external_package_path>
+											<count>0</count>
+											<item_version>0</item_version>
+										</external_package_path>
+										<package_path>
+											<count>0</count>
+											<item_version>0</item_version>
+										</package_path>
+										<type_name>class_a</type_name>
+										<meta_type>0</meta_type>
+									</type>
+									<children>
+										<count>0</count>
+										<item_version>0</item_version>
+									</children>
+									<is_pointer>0</is_pointer>
+								</item>
 							</children>
 							<is_pointer>0</is_pointer>
 						</type_name>
@@ -1422,12 +1364,33 @@
 									<count>0</count>
 									<item_version>0</item_version>
 								</package_path>
-								<type_name>int32_t</type_name>
+								<type_name>vector</type_name>
 								<meta_type>0</meta_type>
 							</type>
 							<children>
-								<count>0</count>
+								<count>1</count>
 								<item_version>0</item_version>
+								<item>
+									<type>
+										<model_name>std_model</model_name>
+										<external_package_path>
+											<count>0</count>
+											<item_version>0</item_version>
+										</external_package_path>
+										<package_path>
+											<count>1</count>
+											<item_version>0</item_version>
+											<item>pkg1</item>
+										</package_path>
+										<type_name>class_c</type_name>
+										<meta_type>0</meta_type>
+									</type>
+									<children>
+										<count>0</count>
+										<item_version>0</item_version>
+									</children>
+									<is_pointer>0</is_pointer>
+								</item>
 							</children>
 							<is_pointer>0</is_pointer>
 						</type_name>
@@ -1451,12 +1414,32 @@
 									<count>0</count>
 									<item_version>0</item_version>
 								</package_path>
-								<type_name>int64_t</type_name>
+								<type_name>vector</type_name>
 								<meta_type>0</meta_type>
 							</type>
 							<children>
-								<count>0</count>
+								<count>1</count>
 								<item_version>0</item_version>
+								<item>
+									<type>
+										<model_name></model_name>
+										<external_package_path>
+											<count>0</count>
+											<item_version>0</item_version>
+										</external_package_path>
+										<package_path>
+											<count>0</count>
+											<item_version>0</item_version>
+										</package_path>
+										<type_name>unsigned int</type_name>
+										<meta_type>0</meta_type>
+									</type>
+									<children>
+										<count>0</count>
+										<item_version>0</item_version>
+									</children>
+									<is_pointer>0</is_pointer>
+								</item>
 							</children>
 							<is_pointer>0</is_pointer>
 						</type_name>
@@ -1480,12 +1463,32 @@
 									<count>0</count>
 									<item_version>0</item_version>
 								</package_path>
-								<type_name>uint8_t</type_name>
+								<type_name>vector</type_name>
 								<meta_type>0</meta_type>
 							</type>
 							<children>
-								<count>0</count>
+								<count>1</count>
 								<item_version>0</item_version>
+								<item>
+									<type>
+										<model_name></model_name>
+										<external_package_path>
+											<count>0</count>
+											<item_version>0</item_version>
+										</external_package_path>
+										<package_path>
+											<count>0</count>
+											<item_version>0</item_version>
+										</package_path>
+										<type_name>class_a</type_name>
+										<meta_type>0</meta_type>
+									</type>
+									<children>
+										<count>0</count>
+										<item_version>0</item_version>
+									</children>
+									<is_pointer>0</is_pointer>
+								</item>
 							</children>
 							<is_pointer>0</is_pointer>
 						</type_name>
@@ -1509,70 +1512,52 @@
 									<count>0</count>
 									<item_version>0</item_version>
 								</package_path>
-								<type_name>uint16_t</type_name>
+								<type_name>vector</type_name>
 								<meta_type>0</meta_type>
 							</type>
 							<children>
-								<count>0</count>
+								<count>1</count>
 								<item_version>0</item_version>
-							</children>
-							<is_pointer>0</is_pointer>
-						</type_name>
-						<default_value></default_value>
-						<documentation></documentation>
-						<implementation_specific_parameters>
-							<count>0</count>
-							<item_version>0</item_version>
-						</implementation_specific_parameters>
-					</item>
-					<item>
-						<name>prop_6</name>
-						<type_name>
-							<type>
-								<model_name>std</model_name>
-								<external_package_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</external_package_path>
-								<package_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</package_path>
-								<type_name>uint32_t</type_name>
-								<meta_type>0</meta_type>
-							</type>
-							<children>
-								<count>0</count>
-								<item_version>0</item_version>
-							</children>
-							<is_pointer>0</is_pointer>
-						</type_name>
-						<default_value></default_value>
-						<documentation></documentation>
-						<implementation_specific_parameters>
-							<count>0</count>
-							<item_version>0</item_version>
-						</implementation_specific_parameters>
-					</item>
-					<item>
-						<name>prop_7</name>
-						<type_name>
-							<type>
-								<model_name>std</model_name>
-								<external_package_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</external_package_path>
-								<package_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</package_path>
-								<type_name>uint64_t</type_name>
-								<meta_type>0</meta_type>
-							</type>
-							<children>
-								<count>0</count>
-								<item_version>0</item_version>
+								<item>
+									<type>
+										<model_name>std</model_name>
+										<external_package_path>
+											<count>0</count>
+											<item_version>0</item_version>
+										</external_package_path>
+										<package_path>
+											<count>0</count>
+											<item_version>0</item_version>
+										</package_path>
+										<type_name>vector</type_name>
+										<meta_type>0</meta_type>
+									</type>
+									<children>
+										<count>1</count>
+										<item_version>0</item_version>
+										<item>
+											<type>
+												<model_name></model_name>
+												<external_package_path>
+													<count>0</count>
+													<item_version>0</item_version>
+												</external_package_path>
+												<package_path>
+													<count>0</count>
+													<item_version>0</item_version>
+												</package_path>
+												<type_name>unsigned int</type_name>
+												<meta_type>0</meta_type>
+											</type>
+											<children>
+												<count>0</count>
+												<item_version>0</item_version>
+											</children>
+											<is_pointer>0</is_pointer>
+										</item>
+									</children>
+									<is_pointer>0</is_pointer>
+								</item>
 							</children>
 							<is_pointer>0</is_pointer>
 						</type_name>
@@ -1939,6 +1924,500 @@
 											</children>
 											<is_pointer>0</is_pointer>
 										</item>
+									</children>
+									<is_pointer>0</is_pointer>
+								</item>
+							</children>
+							<is_pointer>0</is_pointer>
+						</type_name>
+						<default_value></default_value>
+						<documentation></documentation>
+						<implementation_specific_parameters>
+							<count>0</count>
+							<item_version>0</item_version>
+						</implementation_specific_parameters>
+					</item>
+				</properties>
+				<parent_name>
+					<initialized>0</initialized>
+				</parent_name>
+				<original_parent_name>
+					<initialized>0</initialized>
+				</original_parent_name>
+				<leaves>
+					<count>0</count>
+					<item_version>0</item_version>
+				</leaves>
+				<generation_type>1</generation_type>
+				<is_parent>0</is_parent>
+				<category_type>1</category_type>
+				<pod_type>5</pod_type>
+				<documentation></documentation>
+				<number_of_type_arguments>0</number_of_type_arguments>
+				<implementation_specific_parameters>
+					<count>0</count>
+					<item_version>0</item_version>
+				</implementation_specific_parameters>
+			</second>
+		</item>
+		<item>
+			<first>
+				<model_name>std_model</model_name>
+				<external_package_path>
+					<count>0</count>
+					<item_version>0</item_version>
+				</external_package_path>
+				<package_path>
+					<count>1</count>
+					<item_version>0</item_version>
+					<item>pkg1</item>
+				</package_path>
+				<type_name>class_c</type_name>
+				<meta_type>2</meta_type>
+			</first>
+			<second>
+				<name>
+					<model_name>std_model</model_name>
+					<external_package_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</external_package_path>
+					<package_path>
+						<count>1</count>
+						<item_version>0</item_version>
+						<item>pkg1</item>
+					</package_path>
+					<type_name>class_c</type_name>
+					<meta_type>2</meta_type>
+				</name>
+				<properties>
+					<count>4</count>
+					<item_version>0</item_version>
+					<item>
+						<name>prop_0</name>
+						<type_name>
+							<type>
+								<model_name></model_name>
+								<external_package_path>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_package_path>
+								<package_path>
+									<count>0</count>
+									<item_version>0</item_version>
+								</package_path>
+								<type_name>int</type_name>
+								<meta_type>0</meta_type>
+							</type>
+							<children>
+								<count>0</count>
+								<item_version>0</item_version>
+							</children>
+							<is_pointer>0</is_pointer>
+						</type_name>
+						<default_value></default_value>
+						<documentation></documentation>
+						<implementation_specific_parameters>
+							<count>0</count>
+							<item_version>0</item_version>
+						</implementation_specific_parameters>
+					</item>
+					<item>
+						<name>prop_1</name>
+						<type_name>
+							<type>
+								<model_name>std</model_name>
+								<external_package_path>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_package_path>
+								<package_path>
+									<count>0</count>
+									<item_version>0</item_version>
+								</package_path>
+								<type_name>vector</type_name>
+								<meta_type>0</meta_type>
+							</type>
+							<children>
+								<count>1</count>
+								<item_version>0</item_version>
+								<item>
+									<type>
+										<model_name></model_name>
+										<external_package_path>
+											<count>0</count>
+											<item_version>0</item_version>
+										</external_package_path>
+										<package_path>
+											<count>0</count>
+											<item_version>0</item_version>
+										</package_path>
+										<type_name>class_a</type_name>
+										<meta_type>0</meta_type>
+									</type>
+									<children>
+										<count>0</count>
+										<item_version>0</item_version>
+									</children>
+									<is_pointer>0</is_pointer>
+								</item>
+							</children>
+							<is_pointer>0</is_pointer>
+						</type_name>
+						<default_value></default_value>
+						<documentation></documentation>
+						<implementation_specific_parameters>
+							<count>0</count>
+							<item_version>0</item_version>
+						</implementation_specific_parameters>
+					</item>
+					<item>
+						<name>prop_2</name>
+						<type_name>
+							<type>
+								<model_name>std</model_name>
+								<external_package_path>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_package_path>
+								<package_path>
+									<count>0</count>
+									<item_version>0</item_version>
+								</package_path>
+								<type_name>vector</type_name>
+								<meta_type>0</meta_type>
+							</type>
+							<children>
+								<count>1</count>
+								<item_version>0</item_version>
+								<item>
+									<type>
+										<model_name></model_name>
+										<external_package_path>
+											<count>0</count>
+											<item_version>0</item_version>
+										</external_package_path>
+										<package_path>
+											<count>0</count>
+											<item_version>0</item_version>
+										</package_path>
+										<type_name>class_a_unversioned_key</type_name>
+										<meta_type>0</meta_type>
+									</type>
+									<children>
+										<count>0</count>
+										<item_version>0</item_version>
+									</children>
+									<is_pointer>0</is_pointer>
+								</item>
+							</children>
+							<is_pointer>0</is_pointer>
+						</type_name>
+						<default_value></default_value>
+						<documentation></documentation>
+						<implementation_specific_parameters>
+							<count>0</count>
+							<item_version>0</item_version>
+						</implementation_specific_parameters>
+					</item>
+					<item>
+						<name>prop_3</name>
+						<type_name>
+							<type>
+								<model_name>std</model_name>
+								<external_package_path>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_package_path>
+								<package_path>
+									<count>0</count>
+									<item_version>0</item_version>
+								</package_path>
+								<type_name>vector</type_name>
+								<meta_type>0</meta_type>
+							</type>
+							<children>
+								<count>1</count>
+								<item_version>0</item_version>
+								<item>
+									<type>
+										<model_name></model_name>
+										<external_package_path>
+											<count>0</count>
+											<item_version>0</item_version>
+										</external_package_path>
+										<package_path>
+											<count>0</count>
+											<item_version>0</item_version>
+										</package_path>
+										<type_name>class_a_versioned_key</type_name>
+										<meta_type>0</meta_type>
+									</type>
+									<children>
+										<count>0</count>
+										<item_version>0</item_version>
+									</children>
+									<is_pointer>0</is_pointer>
+								</item>
+							</children>
+							<is_pointer>0</is_pointer>
+						</type_name>
+						<default_value></default_value>
+						<documentation></documentation>
+						<implementation_specific_parameters>
+							<count>0</count>
+							<item_version>0</item_version>
+						</implementation_specific_parameters>
+					</item>
+				</properties>
+				<parent_name>
+					<initialized>0</initialized>
+				</parent_name>
+				<original_parent_name>
+					<initialized>0</initialized>
+				</original_parent_name>
+				<leaves>
+					<count>0</count>
+					<item_version>0</item_version>
+				</leaves>
+				<generation_type>1</generation_type>
+				<is_parent>0</is_parent>
+				<category_type>1</category_type>
+				<pod_type>5</pod_type>
+				<documentation></documentation>
+				<number_of_type_arguments>0</number_of_type_arguments>
+				<implementation_specific_parameters>
+					<count>0</count>
+					<item_version>0</item_version>
+				</implementation_specific_parameters>
+			</second>
+		</item>
+		<item>
+			<first>
+				<model_name>std_model</model_name>
+				<external_package_path>
+					<count>0</count>
+					<item_version>0</item_version>
+				</external_package_path>
+				<package_path>
+					<count>0</count>
+					<item_version>0</item_version>
+				</package_path>
+				<type_name>class_f</type_name>
+				<meta_type>2</meta_type>
+			</first>
+			<second>
+				<name>
+					<model_name>std_model</model_name>
+					<external_package_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</external_package_path>
+					<package_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</package_path>
+					<type_name>class_f</type_name>
+					<meta_type>2</meta_type>
+				</name>
+				<properties>
+					<count>3</count>
+					<item_version>0</item_version>
+					<item>
+						<name>prop_0</name>
+						<type_name>
+							<type>
+								<model_name>std</model_name>
+								<external_package_path>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_package_path>
+								<package_path>
+									<count>0</count>
+									<item_version>0</item_version>
+								</package_path>
+								<type_name>unordered_map</type_name>
+								<meta_type>0</meta_type>
+							</type>
+							<children>
+								<count>2</count>
+								<item_version>0</item_version>
+								<item>
+									<type>
+										<model_name>std</model_name>
+										<external_package_path>
+											<count>0</count>
+											<item_version>0</item_version>
+										</external_package_path>
+										<package_path>
+											<count>0</count>
+											<item_version>0</item_version>
+										</package_path>
+										<type_name>string</type_name>
+										<meta_type>0</meta_type>
+									</type>
+									<children>
+										<count>0</count>
+										<item_version>0</item_version>
+									</children>
+									<is_pointer>0</is_pointer>
+								</item>
+								<item>
+									<type>
+										<model_name>std</model_name>
+										<external_package_path>
+											<count>0</count>
+											<item_version>0</item_version>
+										</external_package_path>
+										<package_path>
+											<count>0</count>
+											<item_version>0</item_version>
+										</package_path>
+										<type_name>string</type_name>
+										<meta_type>0</meta_type>
+									</type>
+									<children>
+										<count>0</count>
+										<item_version>0</item_version>
+									</children>
+									<is_pointer>0</is_pointer>
+								</item>
+							</children>
+							<is_pointer>0</is_pointer>
+						</type_name>
+						<default_value></default_value>
+						<documentation></documentation>
+						<implementation_specific_parameters>
+							<count>0</count>
+							<item_version>0</item_version>
+						</implementation_specific_parameters>
+					</item>
+					<item>
+						<name>prop_1</name>
+						<type_name>
+							<type>
+								<model_name>std</model_name>
+								<external_package_path>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_package_path>
+								<package_path>
+									<count>0</count>
+									<item_version>0</item_version>
+								</package_path>
+								<type_name>unordered_map</type_name>
+								<meta_type>0</meta_type>
+							</type>
+							<children>
+								<count>2</count>
+								<item_version>0</item_version>
+								<item>
+									<type>
+										<model_name>std</model_name>
+										<external_package_path>
+											<count>0</count>
+											<item_version>0</item_version>
+										</external_package_path>
+										<package_path>
+											<count>0</count>
+											<item_version>0</item_version>
+										</package_path>
+										<type_name>string</type_name>
+										<meta_type>0</meta_type>
+									</type>
+									<children>
+										<count>0</count>
+										<item_version>0</item_version>
+									</children>
+									<is_pointer>0</is_pointer>
+								</item>
+								<item>
+									<type>
+										<model_name></model_name>
+										<external_package_path>
+											<count>0</count>
+											<item_version>0</item_version>
+										</external_package_path>
+										<package_path>
+											<count>0</count>
+											<item_version>0</item_version>
+										</package_path>
+										<type_name>class_a</type_name>
+										<meta_type>0</meta_type>
+									</type>
+									<children>
+										<count>0</count>
+										<item_version>0</item_version>
+									</children>
+									<is_pointer>0</is_pointer>
+								</item>
+							</children>
+							<is_pointer>0</is_pointer>
+						</type_name>
+						<default_value></default_value>
+						<documentation></documentation>
+						<implementation_specific_parameters>
+							<count>0</count>
+							<item_version>0</item_version>
+						</implementation_specific_parameters>
+					</item>
+					<item>
+						<name>prop_2</name>
+						<type_name>
+							<type>
+								<model_name>std</model_name>
+								<external_package_path>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_package_path>
+								<package_path>
+									<count>0</count>
+									<item_version>0</item_version>
+								</package_path>
+								<type_name>unordered_map</type_name>
+								<meta_type>0</meta_type>
+							</type>
+							<children>
+								<count>2</count>
+								<item_version>0</item_version>
+								<item>
+									<type>
+										<model_name></model_name>
+										<external_package_path>
+											<count>0</count>
+											<item_version>0</item_version>
+										</external_package_path>
+										<package_path>
+											<count>0</count>
+											<item_version>0</item_version>
+										</package_path>
+										<type_name>class_a</type_name>
+										<meta_type>0</meta_type>
+									</type>
+									<children>
+										<count>0</count>
+										<item_version>0</item_version>
+									</children>
+									<is_pointer>0</is_pointer>
+								</item>
+								<item>
+									<type>
+										<model_name>std_model</model_name>
+										<external_package_path>
+											<count>0</count>
+											<item_version>0</item_version>
+										</external_package_path>
+										<package_path>
+											<count>1</count>
+											<item_version>0</item_version>
+											<item>pkg1</item>
+										</package_path>
+										<type_name>class_c</type_name>
+										<meta_type>0</meta_type>
+									</type>
+									<children>
+										<count>0</count>
+										<item_version>0</item_version>
 									</children>
 									<is_pointer>0</is_pointer>
 								</item>
@@ -2352,11 +2831,10 @@
 					<item_version>0</item_version>
 				</external_package_path>
 				<package_path>
-					<count>1</count>
+					<count>0</count>
 					<item_version>0</item_version>
-					<item>pkg1</item>
 				</package_path>
-				<type_name>class_c</type_name>
+				<type_name>class_g</type_name>
 				<meta_type>2</meta_type>
 			</first>
 			<second>
@@ -2367,11 +2845,10 @@
 						<item_version>0</item_version>
 					</external_package_path>
 					<package_path>
-						<count>1</count>
+						<count>0</count>
 						<item_version>0</item_version>
-						<item>pkg1</item>
 					</package_path>
-					<type_name>class_c</type_name>
+					<type_name>class_g</type_name>
 					<meta_type>2</meta_type>
 				</name>
 				<properties>
@@ -2381,35 +2858,6 @@
 						<name>prop_0</name>
 						<type_name>
 							<type>
-								<model_name></model_name>
-								<external_package_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</external_package_path>
-								<package_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</package_path>
-								<type_name>int</type_name>
-								<meta_type>0</meta_type>
-							</type>
-							<children>
-								<count>0</count>
-								<item_version>0</item_version>
-							</children>
-							<is_pointer>0</is_pointer>
-						</type_name>
-						<default_value></default_value>
-						<documentation></documentation>
-						<implementation_specific_parameters>
-							<count>0</count>
-							<item_version>0</item_version>
-						</implementation_specific_parameters>
-					</item>
-					<item>
-						<name>prop_1</name>
-						<type_name>
-							<type>
 								<model_name>std</model_name>
 								<external_package_path>
 									<count>0</count>
@@ -2419,11 +2867,11 @@
 									<count>0</count>
 									<item_version>0</item_version>
 								</package_path>
-								<type_name>vector</type_name>
+								<type_name>unordered_map</type_name>
 								<meta_type>0</meta_type>
 							</type>
 							<children>
-								<count>1</count>
+								<count>2</count>
 								<item_version>0</item_version>
 								<item>
 									<type>
@@ -2445,549 +2893,6 @@
 									</children>
 									<is_pointer>0</is_pointer>
 								</item>
-							</children>
-							<is_pointer>0</is_pointer>
-						</type_name>
-						<default_value></default_value>
-						<documentation></documentation>
-						<implementation_specific_parameters>
-							<count>0</count>
-							<item_version>0</item_version>
-						</implementation_specific_parameters>
-					</item>
-					<item>
-						<name>prop_2</name>
-						<type_name>
-							<type>
-								<model_name>std</model_name>
-								<external_package_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</external_package_path>
-								<package_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</package_path>
-								<type_name>vector</type_name>
-								<meta_type>0</meta_type>
-							</type>
-							<children>
-								<count>1</count>
-								<item_version>0</item_version>
-								<item>
-									<type>
-										<model_name></model_name>
-										<external_package_path>
-											<count>0</count>
-											<item_version>0</item_version>
-										</external_package_path>
-										<package_path>
-											<count>0</count>
-											<item_version>0</item_version>
-										</package_path>
-										<type_name>class_a_unversioned_key</type_name>
-										<meta_type>0</meta_type>
-									</type>
-									<children>
-										<count>0</count>
-										<item_version>0</item_version>
-									</children>
-									<is_pointer>0</is_pointer>
-								</item>
-							</children>
-							<is_pointer>0</is_pointer>
-						</type_name>
-						<default_value></default_value>
-						<documentation></documentation>
-						<implementation_specific_parameters>
-							<count>0</count>
-							<item_version>0</item_version>
-						</implementation_specific_parameters>
-					</item>
-					<item>
-						<name>prop_3</name>
-						<type_name>
-							<type>
-								<model_name>std</model_name>
-								<external_package_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</external_package_path>
-								<package_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</package_path>
-								<type_name>vector</type_name>
-								<meta_type>0</meta_type>
-							</type>
-							<children>
-								<count>1</count>
-								<item_version>0</item_version>
-								<item>
-									<type>
-										<model_name></model_name>
-										<external_package_path>
-											<count>0</count>
-											<item_version>0</item_version>
-										</external_package_path>
-										<package_path>
-											<count>0</count>
-											<item_version>0</item_version>
-										</package_path>
-										<type_name>class_a_versioned_key</type_name>
-										<meta_type>0</meta_type>
-									</type>
-									<children>
-										<count>0</count>
-										<item_version>0</item_version>
-									</children>
-									<is_pointer>0</is_pointer>
-								</item>
-							</children>
-							<is_pointer>0</is_pointer>
-						</type_name>
-						<default_value></default_value>
-						<documentation></documentation>
-						<implementation_specific_parameters>
-							<count>0</count>
-							<item_version>0</item_version>
-						</implementation_specific_parameters>
-					</item>
-				</properties>
-				<parent_name>
-					<initialized>0</initialized>
-				</parent_name>
-				<original_parent_name>
-					<initialized>0</initialized>
-				</original_parent_name>
-				<leaves>
-					<count>0</count>
-					<item_version>0</item_version>
-				</leaves>
-				<generation_type>1</generation_type>
-				<is_parent>0</is_parent>
-				<category_type>1</category_type>
-				<pod_type>5</pod_type>
-				<documentation></documentation>
-				<number_of_type_arguments>0</number_of_type_arguments>
-				<implementation_specific_parameters>
-					<count>0</count>
-					<item_version>0</item_version>
-				</implementation_specific_parameters>
-			</second>
-		</item>
-		<item>
-			<first>
-				<model_name>std_model</model_name>
-				<external_package_path>
-					<count>0</count>
-					<item_version>0</item_version>
-				</external_package_path>
-				<package_path>
-					<count>0</count>
-					<item_version>0</item_version>
-				</package_path>
-				<type_name>base</type_name>
-				<meta_type>2</meta_type>
-			</first>
-			<second>
-				<name>
-					<model_name>std_model</model_name>
-					<external_package_path>
-						<count>0</count>
-						<item_version>0</item_version>
-					</external_package_path>
-					<package_path>
-						<count>0</count>
-						<item_version>0</item_version>
-					</package_path>
-					<type_name>base</type_name>
-					<meta_type>2</meta_type>
-				</name>
-				<properties>
-					<count>1</count>
-					<item_version>0</item_version>
-					<item>
-						<name>prop_0</name>
-						<type_name>
-							<type>
-								<model_name>std</model_name>
-								<external_package_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</external_package_path>
-								<package_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</package_path>
-								<type_name>vector</type_name>
-								<meta_type>0</meta_type>
-							</type>
-							<children>
-								<count>1</count>
-								<item_version>0</item_version>
-								<item>
-									<type>
-										<model_name>std</model_name>
-										<external_package_path>
-											<count>0</count>
-											<item_version>0</item_version>
-										</external_package_path>
-										<package_path>
-											<count>0</count>
-											<item_version>0</item_version>
-										</package_path>
-										<type_name>string</type_name>
-										<meta_type>0</meta_type>
-									</type>
-									<children>
-										<count>0</count>
-										<item_version>0</item_version>
-									</children>
-									<is_pointer>0</is_pointer>
-								</item>
-							</children>
-							<is_pointer>0</is_pointer>
-						</type_name>
-						<default_value></default_value>
-						<documentation></documentation>
-						<implementation_specific_parameters>
-							<count>0</count>
-							<item_version>0</item_version>
-						</implementation_specific_parameters>
-					</item>
-				</properties>
-				<parent_name>
-					<initialized>0</initialized>
-				</parent_name>
-				<original_parent_name>
-					<initialized>0</initialized>
-				</original_parent_name>
-				<leaves>
-					<count>1</count>
-					<item_version>0</item_version>
-					<item>
-						<model_name>std_model</model_name>
-						<external_package_path>
-							<count>0</count>
-							<item_version>0</item_version>
-						</external_package_path>
-						<package_path>
-							<count>0</count>
-							<item_version>0</item_version>
-						</package_path>
-						<type_name>derived</type_name>
-						<meta_type>2</meta_type>
-					</item>
-				</leaves>
-				<generation_type>1</generation_type>
-				<is_parent>1</is_parent>
-				<category_type>1</category_type>
-				<pod_type>5</pod_type>
-				<documentation></documentation>
-				<number_of_type_arguments>0</number_of_type_arguments>
-				<implementation_specific_parameters>
-					<count>0</count>
-					<item_version>0</item_version>
-				</implementation_specific_parameters>
-			</second>
-		</item>
-		<item>
-			<first>
-				<model_name>std_model</model_name>
-				<external_package_path>
-					<count>0</count>
-					<item_version>0</item_version>
-				</external_package_path>
-				<package_path>
-					<count>0</count>
-					<item_version>0</item_version>
-				</package_path>
-				<type_name>class_b</type_name>
-				<meta_type>2</meta_type>
-			</first>
-			<second>
-				<name>
-					<model_name>std_model</model_name>
-					<external_package_path>
-						<count>0</count>
-						<item_version>0</item_version>
-					</external_package_path>
-					<package_path>
-						<count>0</count>
-						<item_version>0</item_version>
-					</package_path>
-					<type_name>class_b</type_name>
-					<meta_type>2</meta_type>
-				</name>
-				<properties>
-					<count>6</count>
-					<item_version>0</item_version>
-					<item>
-						<name>prop_0</name>
-						<type_name>
-							<type>
-								<model_name>std</model_name>
-								<external_package_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</external_package_path>
-								<package_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</package_path>
-								<type_name>vector</type_name>
-								<meta_type>0</meta_type>
-							</type>
-							<children>
-								<count>1</count>
-								<item_version>0</item_version>
-								<item>
-									<type>
-										<model_name>std</model_name>
-										<external_package_path>
-											<count>0</count>
-											<item_version>0</item_version>
-										</external_package_path>
-										<package_path>
-											<count>0</count>
-											<item_version>0</item_version>
-										</package_path>
-										<type_name>string</type_name>
-										<meta_type>0</meta_type>
-									</type>
-									<children>
-										<count>0</count>
-										<item_version>0</item_version>
-									</children>
-									<is_pointer>0</is_pointer>
-								</item>
-							</children>
-							<is_pointer>0</is_pointer>
-						</type_name>
-						<default_value></default_value>
-						<documentation></documentation>
-						<implementation_specific_parameters>
-							<count>0</count>
-							<item_version>0</item_version>
-						</implementation_specific_parameters>
-					</item>
-					<item>
-						<name>prop_1</name>
-						<type_name>
-							<type>
-								<model_name>std</model_name>
-								<external_package_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</external_package_path>
-								<package_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</package_path>
-								<type_name>vector</type_name>
-								<meta_type>0</meta_type>
-							</type>
-							<children>
-								<count>1</count>
-								<item_version>0</item_version>
-								<item>
-									<type>
-										<model_name></model_name>
-										<external_package_path>
-											<count>0</count>
-											<item_version>0</item_version>
-										</external_package_path>
-										<package_path>
-											<count>0</count>
-											<item_version>0</item_version>
-										</package_path>
-										<type_name>class_a</type_name>
-										<meta_type>0</meta_type>
-									</type>
-									<children>
-										<count>0</count>
-										<item_version>0</item_version>
-									</children>
-									<is_pointer>0</is_pointer>
-								</item>
-							</children>
-							<is_pointer>0</is_pointer>
-						</type_name>
-						<default_value></default_value>
-						<documentation></documentation>
-						<implementation_specific_parameters>
-							<count>0</count>
-							<item_version>0</item_version>
-						</implementation_specific_parameters>
-					</item>
-					<item>
-						<name>prop_2</name>
-						<type_name>
-							<type>
-								<model_name>std</model_name>
-								<external_package_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</external_package_path>
-								<package_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</package_path>
-								<type_name>vector</type_name>
-								<meta_type>0</meta_type>
-							</type>
-							<children>
-								<count>1</count>
-								<item_version>0</item_version>
-								<item>
-									<type>
-										<model_name>std_model</model_name>
-										<external_package_path>
-											<count>0</count>
-											<item_version>0</item_version>
-										</external_package_path>
-										<package_path>
-											<count>1</count>
-											<item_version>0</item_version>
-											<item>pkg1</item>
-										</package_path>
-										<type_name>class_c</type_name>
-										<meta_type>0</meta_type>
-									</type>
-									<children>
-										<count>0</count>
-										<item_version>0</item_version>
-									</children>
-									<is_pointer>0</is_pointer>
-								</item>
-							</children>
-							<is_pointer>0</is_pointer>
-						</type_name>
-						<default_value></default_value>
-						<documentation></documentation>
-						<implementation_specific_parameters>
-							<count>0</count>
-							<item_version>0</item_version>
-						</implementation_specific_parameters>
-					</item>
-					<item>
-						<name>prop_3</name>
-						<type_name>
-							<type>
-								<model_name>std</model_name>
-								<external_package_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</external_package_path>
-								<package_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</package_path>
-								<type_name>vector</type_name>
-								<meta_type>0</meta_type>
-							</type>
-							<children>
-								<count>1</count>
-								<item_version>0</item_version>
-								<item>
-									<type>
-										<model_name></model_name>
-										<external_package_path>
-											<count>0</count>
-											<item_version>0</item_version>
-										</external_package_path>
-										<package_path>
-											<count>0</count>
-											<item_version>0</item_version>
-										</package_path>
-										<type_name>unsigned int</type_name>
-										<meta_type>0</meta_type>
-									</type>
-									<children>
-										<count>0</count>
-										<item_version>0</item_version>
-									</children>
-									<is_pointer>0</is_pointer>
-								</item>
-							</children>
-							<is_pointer>0</is_pointer>
-						</type_name>
-						<default_value></default_value>
-						<documentation></documentation>
-						<implementation_specific_parameters>
-							<count>0</count>
-							<item_version>0</item_version>
-						</implementation_specific_parameters>
-					</item>
-					<item>
-						<name>prop_4</name>
-						<type_name>
-							<type>
-								<model_name>std</model_name>
-								<external_package_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</external_package_path>
-								<package_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</package_path>
-								<type_name>vector</type_name>
-								<meta_type>0</meta_type>
-							</type>
-							<children>
-								<count>1</count>
-								<item_version>0</item_version>
-								<item>
-									<type>
-										<model_name></model_name>
-										<external_package_path>
-											<count>0</count>
-											<item_version>0</item_version>
-										</external_package_path>
-										<package_path>
-											<count>0</count>
-											<item_version>0</item_version>
-										</package_path>
-										<type_name>class_a</type_name>
-										<meta_type>0</meta_type>
-									</type>
-									<children>
-										<count>0</count>
-										<item_version>0</item_version>
-									</children>
-									<is_pointer>0</is_pointer>
-								</item>
-							</children>
-							<is_pointer>0</is_pointer>
-						</type_name>
-						<default_value></default_value>
-						<documentation></documentation>
-						<implementation_specific_parameters>
-							<count>0</count>
-							<item_version>0</item_version>
-						</implementation_specific_parameters>
-					</item>
-					<item>
-						<name>prop_5</name>
-						<type_name>
-							<type>
-								<model_name>std</model_name>
-								<external_package_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</external_package_path>
-								<package_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</package_path>
-								<type_name>vector</type_name>
-								<meta_type>0</meta_type>
-							</type>
-							<children>
-								<count>1</count>
-								<item_version>0</item_version>
 								<item>
 									<type>
 										<model_name>std</model_name>
@@ -3007,16 +2912,17 @@
 										<item_version>0</item_version>
 										<item>
 											<type>
-												<model_name></model_name>
+												<model_name>std_model</model_name>
 												<external_package_path>
 													<count>0</count>
 													<item_version>0</item_version>
 												</external_package_path>
 												<package_path>
-													<count>0</count>
+													<count>1</count>
 													<item_version>0</item_version>
+													<item>pkg1</item>
 												</package_path>
-												<type_name>unsigned int</type_name>
+												<type_name>class_c</type_name>
 												<meta_type>0</meta_type>
 											</type>
 											<children>
@@ -3038,6 +2944,234 @@
 							<item_version>0</item_version>
 						</implementation_specific_parameters>
 					</item>
+					<item>
+						<name>prop_1</name>
+						<type_name>
+							<type>
+								<model_name>std</model_name>
+								<external_package_path>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_package_path>
+								<package_path>
+									<count>0</count>
+									<item_version>0</item_version>
+								</package_path>
+								<type_name>unordered_map</type_name>
+								<meta_type>0</meta_type>
+							</type>
+							<children>
+								<count>2</count>
+								<item_version>0</item_version>
+								<item>
+									<type>
+										<model_name>std_model</model_name>
+										<external_package_path>
+											<count>0</count>
+											<item_version>0</item_version>
+										</external_package_path>
+										<package_path>
+											<count>1</count>
+											<item_version>0</item_version>
+											<item>pkg1</item>
+										</package_path>
+										<type_name>class_c</type_name>
+										<meta_type>0</meta_type>
+									</type>
+									<children>
+										<count>0</count>
+										<item_version>0</item_version>
+									</children>
+									<is_pointer>0</is_pointer>
+								</item>
+								<item>
+									<type>
+										<model_name>std</model_name>
+										<external_package_path>
+											<count>0</count>
+											<item_version>0</item_version>
+										</external_package_path>
+										<package_path>
+											<count>0</count>
+											<item_version>0</item_version>
+										</package_path>
+										<type_name>list</type_name>
+										<meta_type>0</meta_type>
+									</type>
+									<children>
+										<count>1</count>
+										<item_version>0</item_version>
+										<item>
+											<type>
+												<model_name></model_name>
+												<external_package_path>
+													<count>0</count>
+													<item_version>0</item_version>
+												</external_package_path>
+												<package_path>
+													<count>0</count>
+													<item_version>0</item_version>
+												</package_path>
+												<type_name>class_a</type_name>
+												<meta_type>0</meta_type>
+											</type>
+											<children>
+												<count>0</count>
+												<item_version>0</item_version>
+											</children>
+											<is_pointer>0</is_pointer>
+										</item>
+									</children>
+									<is_pointer>0</is_pointer>
+								</item>
+							</children>
+							<is_pointer>0</is_pointer>
+						</type_name>
+						<default_value></default_value>
+						<documentation></documentation>
+						<implementation_specific_parameters>
+							<count>0</count>
+							<item_version>0</item_version>
+						</implementation_specific_parameters>
+					</item>
+					<item>
+						<name>prop_2</name>
+						<type_name>
+							<type>
+								<model_name>std</model_name>
+								<external_package_path>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_package_path>
+								<package_path>
+									<count>0</count>
+									<item_version>0</item_version>
+								</package_path>
+								<type_name>unordered_map</type_name>
+								<meta_type>0</meta_type>
+							</type>
+							<children>
+								<count>2</count>
+								<item_version>0</item_version>
+								<item>
+									<type>
+										<model_name></model_name>
+										<external_package_path>
+											<count>0</count>
+											<item_version>0</item_version>
+										</external_package_path>
+										<package_path>
+											<count>0</count>
+											<item_version>0</item_version>
+										</package_path>
+										<type_name>class_a_unversioned_key</type_name>
+										<meta_type>0</meta_type>
+									</type>
+									<children>
+										<count>0</count>
+										<item_version>0</item_version>
+									</children>
+									<is_pointer>0</is_pointer>
+								</item>
+								<item>
+									<type>
+										<model_name></model_name>
+										<external_package_path>
+											<count>0</count>
+											<item_version>0</item_version>
+										</external_package_path>
+										<package_path>
+											<count>0</count>
+											<item_version>0</item_version>
+										</package_path>
+										<type_name>class_a</type_name>
+										<meta_type>0</meta_type>
+									</type>
+									<children>
+										<count>0</count>
+										<item_version>0</item_version>
+									</children>
+									<is_pointer>0</is_pointer>
+								</item>
+							</children>
+							<is_pointer>0</is_pointer>
+						</type_name>
+						<default_value></default_value>
+						<documentation></documentation>
+						<implementation_specific_parameters>
+							<count>0</count>
+							<item_version>0</item_version>
+						</implementation_specific_parameters>
+					</item>
+					<item>
+						<name>prop_3</name>
+						<type_name>
+							<type>
+								<model_name>std</model_name>
+								<external_package_path>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_package_path>
+								<package_path>
+									<count>0</count>
+									<item_version>0</item_version>
+								</package_path>
+								<type_name>unordered_map</type_name>
+								<meta_type>0</meta_type>
+							</type>
+							<children>
+								<count>2</count>
+								<item_version>0</item_version>
+								<item>
+									<type>
+										<model_name></model_name>
+										<external_package_path>
+											<count>0</count>
+											<item_version>0</item_version>
+										</external_package_path>
+										<package_path>
+											<count>0</count>
+											<item_version>0</item_version>
+										</package_path>
+										<type_name>class_a_versioned_key</type_name>
+										<meta_type>0</meta_type>
+									</type>
+									<children>
+										<count>0</count>
+										<item_version>0</item_version>
+									</children>
+									<is_pointer>0</is_pointer>
+								</item>
+								<item>
+									<type>
+										<model_name></model_name>
+										<external_package_path>
+											<count>0</count>
+											<item_version>0</item_version>
+										</external_package_path>
+										<package_path>
+											<count>0</count>
+											<item_version>0</item_version>
+										</package_path>
+										<type_name>class_a</type_name>
+										<meta_type>0</meta_type>
+									</type>
+									<children>
+										<count>0</count>
+										<item_version>0</item_version>
+									</children>
+									<is_pointer>0</is_pointer>
+								</item>
+							</children>
+							<is_pointer>0</is_pointer>
+						</type_name>
+						<default_value></default_value>
+						<documentation></documentation>
+						<implementation_specific_parameters>
+							<count>0</count>
+							<item_version>0</item_version>
+						</implementation_specific_parameters>
+					</item>
 				</properties>
 				<parent_name>
 					<initialized>0</initialized>
@@ -3072,7 +3206,7 @@
 					<count>0</count>
 					<item_version>0</item_version>
 				</package_path>
-				<type_name>class_h</type_name>
+				<type_name>derived</type_name>
 				<meta_type>2</meta_type>
 			</first>
 			<second>
@@ -3086,61 +3220,12 @@
 						<count>0</count>
 						<item_version>0</item_version>
 					</package_path>
-					<type_name>class_h</type_name>
+					<type_name>derived</type_name>
 					<meta_type>2</meta_type>
 				</name>
 				<properties>
-					<count>2</count>
+					<count>1</count>
 					<item_version>0</item_version>
-					<item>
-						<name>prop_0</name>
-						<type_name>
-							<type>
-								<model_name>std</model_name>
-								<external_package_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</external_package_path>
-								<package_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</package_path>
-								<type_name>unordered_set</type_name>
-								<meta_type>0</meta_type>
-							</type>
-							<children>
-								<count>1</count>
-								<item_version>0</item_version>
-								<item>
-									<type>
-										<model_name></model_name>
-										<external_package_path>
-											<count>0</count>
-											<item_version>0</item_version>
-										</external_package_path>
-										<package_path>
-											<count>0</count>
-											<item_version>0</item_version>
-										</package_path>
-										<type_name>class_a</type_name>
-										<meta_type>0</meta_type>
-									</type>
-									<children>
-										<count>0</count>
-										<item_version>0</item_version>
-									</children>
-									<is_pointer>0</is_pointer>
-								</item>
-							</children>
-							<is_pointer>0</is_pointer>
-						</type_name>
-						<default_value></default_value>
-						<documentation></documentation>
-						<implementation_specific_parameters>
-							<count>0</count>
-							<item_version>0</item_version>
-						</implementation_specific_parameters>
-					</item>
 					<item>
 						<name>prop_1</name>
 						<type_name>
@@ -3154,7 +3239,7 @@
 									<count>0</count>
 									<item_version>0</item_version>
 								</package_path>
-								<type_name>unordered_set</type_name>
+								<type_name>list</type_name>
 								<meta_type>0</meta_type>
 							</type>
 							<children>
@@ -3193,10 +3278,38 @@
 					</item>
 				</properties>
 				<parent_name>
-					<initialized>0</initialized>
+					<initialized>1</initialized>
+					<item_version>0</item_version>
+					<value>
+						<model_name>std_model</model_name>
+						<external_package_path>
+							<count>0</count>
+							<item_version>0</item_version>
+						</external_package_path>
+						<package_path>
+							<count>0</count>
+							<item_version>0</item_version>
+						</package_path>
+						<type_name>base</type_name>
+						<meta_type>2</meta_type>
+					</value>
 				</parent_name>
 				<original_parent_name>
-					<initialized>0</initialized>
+					<initialized>1</initialized>
+					<item_version>0</item_version>
+					<value>
+						<model_name>std_model</model_name>
+						<external_package_path>
+							<count>0</count>
+							<item_version>0</item_version>
+						</external_package_path>
+						<package_path>
+							<count>0</count>
+							<item_version>0</item_version>
+						</package_path>
+						<type_name>base</type_name>
+						<meta_type>2</meta_type>
+					</value>
 				</original_parent_name>
 				<leaves>
 					<count>0</count>
@@ -3214,133 +3327,20 @@
 				</implementation_specific_parameters>
 			</second>
 		</item>
-		<item>
-			<first>
-				<model_name>std_model</model_name>
-				<external_package_path>
-					<count>0</count>
-					<item_version>0</item_version>
-				</external_package_path>
-				<package_path>
-					<count>0</count>
-					<item_version>0</item_version>
-				</package_path>
-				<type_name>class_a</type_name>
-				<meta_type>2</meta_type>
-			</first>
-			<second>
-				<name>
-					<model_name>std_model</model_name>
-					<external_package_path>
-						<count>0</count>
-						<item_version>0</item_version>
-					</external_package_path>
-					<package_path>
-						<count>0</count>
-						<item_version>0</item_version>
-					</package_path>
-					<type_name>class_a</type_name>
-					<meta_type>2</meta_type>
-				</name>
-				<properties>
-					<count>2</count>
-					<item_version>0</item_version>
-					<item>
-						<name>prop0</name>
-						<type_name>
-							<type>
-								<model_name>std</model_name>
-								<external_package_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</external_package_path>
-								<package_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</package_path>
-								<type_name>string</type_name>
-								<meta_type>0</meta_type>
-							</type>
-							<children>
-								<count>0</count>
-								<item_version>0</item_version>
-							</children>
-							<is_pointer>0</is_pointer>
-						</type_name>
-						<default_value></default_value>
-						<documentation></documentation>
-						<implementation_specific_parameters>
-							<count>0</count>
-							<item_version>0</item_version>
-						</implementation_specific_parameters>
-					</item>
-					<item>
-						<name>prop1</name>
-						<type_name>
-							<type>
-								<model_name>std</model_name>
-								<external_package_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</external_package_path>
-								<package_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</package_path>
-								<type_name>string</type_name>
-								<meta_type>0</meta_type>
-							</type>
-							<children>
-								<count>0</count>
-								<item_version>0</item_version>
-							</children>
-							<is_pointer>0</is_pointer>
-						</type_name>
-						<default_value></default_value>
-						<documentation>test inclusion duplicates
-</documentation>
-						<implementation_specific_parameters>
-							<count>0</count>
-							<item_version>0</item_version>
-						</implementation_specific_parameters>
-					</item>
-				</properties>
-				<parent_name>
-					<initialized>0</initialized>
-				</parent_name>
-				<original_parent_name>
-					<initialized>0</initialized>
-				</original_parent_name>
-				<leaves>
-					<count>0</count>
-					<item_version>0</item_version>
-				</leaves>
-				<generation_type>1</generation_type>
-				<is_parent>0</is_parent>
-				<category_type>1</category_type>
-				<pod_type>4</pod_type>
-				<documentation></documentation>
-				<number_of_type_arguments>0</number_of_type_arguments>
-				<implementation_specific_parameters>
-					<count>0</count>
-					<item_version>0</item_version>
-				</implementation_specific_parameters>
-			</second>
-		</item>
 	</pods>
 	<primitives class_id="16" tracking_level="0" version="0">
 		<count>0</count>
-		<bucket_count>23</bucket_count>
+		<bucket_count>11</bucket_count>
 		<item_version>0</item_version>
 	</primitives>
 	<enumerations class_id="17" tracking_level="0" version="0">
 		<count>0</count>
-		<bucket_count>23</bucket_count>
+		<bucket_count>11</bucket_count>
 		<item_version>0</item_version>
 	</enumerations>
 	<exceptions class_id="18" tracking_level="0" version="0">
 		<count>0</count>
-		<bucket_count>23</bucket_count>
+		<bucket_count>11</bucket_count>
 		<item_version>0</item_version>
 	</exceptions>
 	<external_package_path>
@@ -3350,7 +3350,7 @@
 	<is_system>0</is_system>
 	<dependencies class_id="19" tracking_level="0" version="0">
 		<count>1</count>
-		<bucket_count>23</bucket_count>
+		<bucket_count>11</bucket_count>
 		<item_version>0</item_version>
 		<item class_id="20" tracking_level="0" version="0">
 			<first>std</first>
@@ -3366,7 +3366,7 @@
 	</dependencies>
 	<leaves class_id="22" tracking_level="0" version="0">
 		<count>1</count>
-		<bucket_count>23</bucket_count>
+		<bucket_count>11</bucket_count>
 		<item_version>0</item_version>
 		<item>
 			<model_name>std_model</model_name>

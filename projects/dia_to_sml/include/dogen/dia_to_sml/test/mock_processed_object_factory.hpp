@@ -68,6 +68,30 @@ public:
     static processed_object build_empty_uml_note(const unsigned int n = 0);
 
     /**
+     * @brief Generates a UML note inside a large package.
+     *
+     * @param n identifier used for object ID generation.
+     */
+    static std::array<processed_object, 2>
+    build_uml_note_inside_large_package(unsigned int n = 0);
+
+    /**
+     * @brief Generates an empty UML note inside a large package.
+     *
+     * @param n identifier used for object ID generation.
+     */
+    static std::array<processed_object, 2>
+    build_empty_uml_note_inside_large_package(unsigned int n = 0);
+
+    /**
+     * @brief Generates an empty UML note inside a large package.
+     *
+     * @param n identifier used for object ID generation.
+     */
+    static std::array<processed_object, 2>
+    build_uml_note_with_marker_inside_large_package(unsigned int n = 0);
+
+    /**
      * @brief Generates a new UML class.
      *
      * @param n identifier used for object ID generation.

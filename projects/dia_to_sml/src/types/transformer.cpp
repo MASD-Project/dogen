@@ -39,6 +39,7 @@ using namespace dogen::utility::log;
 static logger lg(logger_factory("dia_to_sml.transformer"));
 
 const std::string empty;
+const std::string comment_marker("COMMENT");
 const std::string empty_dia_object_name("Dia object name is empty");
 const std::string original_parent_not_found("Pod has no original parent: ");
 const std::string parent_not_found("Object has a parent but its not defined: ");
@@ -356,8 +357,17 @@ void transformer::transform_note(const processed_object& o) {
         return;
 
     const auto pair(comments_parser_->parse(o.text()));
+    bool has_marker(false);
+    for (const auto& p : pair.second) {
+        has_marker = p.first == comment_marker;
+        if (has_marker)
+            break;
+    }
+
+    if (!has_marker)
+        return;
+
     if (o.child_node_id().empty()) {
-        // FIXME add these to context.
         context_.model().documentation(pair.first);
         context_.model().implementation_specific_parameters(pair.second);
     }
@@ -387,6 +397,7 @@ void transformer::transform(const processed_object& o) {
     }
 
     if (o.object_type() == object_types::uml_note) {
+        transform_note(o);
         return;
     }
 

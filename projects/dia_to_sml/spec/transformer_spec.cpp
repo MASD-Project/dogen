@@ -232,4 +232,43 @@ BOOST_AUTO_TEST_CASE(uml_class_in_two_packages_transforms_into_expected_pod) {
     BOOST_CHECK(p.name().package_path().back() == second);
 }
 
+BOOST_AUTO_TEST_CASE(uml_note_with_marker_transforms_into_model_comments) {
+    SETUP_TEST_LOG_SOURCE("uml_class_in_two_packages_transforms_into_expected_pod");
+
+    dogen::dia_to_sml::context c;
+    c.model().name(model_name);
+    dogen::dia_to_sml::transformer t(c);
+    t.transform(mock_processed_object_factory::build_uml_note_with_marker(0));
+
+    BOOST_LOG_SEV(lg, debug) << "context: " << c;
+    BOOST_CHECK(!c.model().documentation().empty());
+    BOOST_CHECK(c.model().implementation_specific_parameters().size() == 1);
+}
+
+BOOST_AUTO_TEST_CASE(uml_note_with_text_but_no_marker_does_nothing) {
+    SETUP_TEST_LOG_SOURCE("uml_note_with_text_but_no_marker_does_nothing");
+
+    dogen::dia_to_sml::context c;
+    c.model().name(model_name);
+    dogen::dia_to_sml::transformer t(c);
+    t.transform(mock_processed_object_factory::build_uml_note(0));
+
+    BOOST_LOG_SEV(lg, debug) << "context: " << c;
+    BOOST_CHECK(c.model().documentation().empty());
+    BOOST_CHECK(c.model().implementation_specific_parameters().empty());
+}
+
+BOOST_AUTO_TEST_CASE(empty_uml_note_does_nothing) {
+    SETUP_TEST_LOG_SOURCE("empty_uml_note_does_nothing");
+
+    dogen::dia_to_sml::context c;
+    c.model().name(model_name);
+    dogen::dia_to_sml::transformer t(c);
+    t.transform(mock_processed_object_factory::build_empty_uml_note(0));
+
+    BOOST_LOG_SEV(lg, debug) << "context: " << c;
+    BOOST_CHECK(c.model().documentation().empty());
+    BOOST_CHECK(c.model().implementation_specific_parameters().empty());
+}
+
 BOOST_AUTO_TEST_SUITE_END()

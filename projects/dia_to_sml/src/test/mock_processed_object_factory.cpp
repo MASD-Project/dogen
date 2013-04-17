@@ -105,6 +105,40 @@ build_empty_uml_note(const unsigned int n) {
     return r;
 }
 
+
+std::array<processed_object, 2> mock_processed_object_factory::
+build_uml_note_inside_large_package(unsigned int n) {
+    std::array<processed_object, 2> r = {{
+            build_large_package(n),
+            build_uml_note(++n),
+        }};
+
+    r[1].child_node_id(r[0].id());
+    return r;
+}
+
+std::array<processed_object, 2> mock_processed_object_factory::
+build_empty_uml_note_inside_large_package(unsigned int n) {
+    std::array<processed_object, 2> r = {{
+            build_large_package(n),
+            build_empty_uml_note(++n)
+        }};
+
+    r[1].child_node_id(r[0].id());
+    return r;
+}
+
+std::array<processed_object, 2> mock_processed_object_factory::
+build_uml_note_with_marker_inside_large_package(unsigned int n) {
+    std::array<processed_object, 2> r = {{
+            build_large_package(n),
+            build_uml_note_with_marker(++n)
+        }};
+
+    r[1].child_node_id(r[0].id());
+    return r;
+}
+
 processed_object mock_processed_object_factory::
 build_class(const unsigned int n) {
     processed_object r(create_named_object(object_types::uml_class, n));
