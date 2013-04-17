@@ -146,6 +146,7 @@ BOOST_AUTO_TEST_CASE(uml_note_transforms_into_expected_processed_object) {
     BOOST_CHECK(po.name().empty());
     BOOST_CHECK(po.object_type() == object_types::uml_note);
     BOOST_CHECK(po.stereotype() == stereotypes::no_stereotype);
+    BOOST_CHECK(!po.text().empty());
 }
 
 BOOST_AUTO_TEST_SUITE_END()

@@ -244,7 +244,6 @@ processed_object processor::process(const dia::object& o) {
             }
             BOOST_LOG_SEV(lg, debug) << "Found composite of type " << c.type();
 
-            processed_property p;
             for (const auto a : c.value()) {
                 if (a->name() == dia_string)
                     r.text(parse_string_attribute(*a));

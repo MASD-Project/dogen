@@ -42,6 +42,7 @@ const std::string uml_realization("UML - Realizes");
 const std::string dia_stereotype("stereotype");
 const std::string dia_name("name");
 const std::string dia_text("text");
+const std::string dia_string("string");
 const std::string enumeration_stereotype("#enumeration#");
 const std::string invalid_stereotype("Invalid stereotype: ");
 
@@ -96,28 +97,6 @@ dogen::dia::connection create_connection(const std::string& id) {
     return r;
 }
 
-std::vector<dogen::dia::attribute>
-build_uml_note_attributes(const bool with_marker = false) {
-    std::ostringstream ss;
-    if (with_marker)
-        ss << "#DOGEN COMMENT=true" << std::endl << std::endl;
-
-    ss << "this is a comment." << std::endl;
-
-    dogen::dia::string s(ss.str());
-    boost::shared_ptr<dogen::dia::attribute> ap(new dogen::dia::attribute);
-    ap->values().push_back(s);
-
-    dogen::dia::composite c;
-    c.type(dia_text);
-    c.value().push_back(ap);
-
-    dogen::dia::attribute a;
-    a.name(dia_text);
-    a.values().push_back(c);
-    return std::vector<dogen::dia::attribute> { a };
-}
-
 }
 
 namespace dogen {
@@ -129,16 +108,26 @@ std::string mock_object_factory::to_oject_id(const unsigned int number) {
 }
 
 object mock_object_factory::build_uml_note(const unsigned int number) {
-    dogen::dia::object r(create_named_object(uml_note, number));
-    r.attributes(build_uml_note_attributes());
-    create_stereotype_attribute(r, empty);
-    return r;
-}
+    std::ostringstream ss;
+    ss << "#DOGEN COMMENT=true" << std::endl << std::endl
+       << "this is a comment." << std::endl;
 
-object mock_object_factory::build_uml_note_wit_marker(const unsigned int number) {
-    object r(create_named_object(uml_note, number));
+    dogen::dia::string s(ss.str());
+    boost::shared_ptr<dogen::dia::attribute> ap(new dogen::dia::attribute);
+    ap->values().push_back(s);
+    ap->name(dia_string);
+
+    dogen::dia::composite c;
+    c.type(dia_text);
+    c.value().push_back(ap);
+
+    dogen::dia::attribute a;
+    a.name(dia_text);
+    a.values().push_back(c);
+
+    dogen::dia::object r(create_object(uml_note, number));
+    r.attributes().push_back(a);
     create_stereotype_attribute(r, empty);
-    r.attributes(build_uml_note_attributes(add_comment_marker));
     return r;
 }
 

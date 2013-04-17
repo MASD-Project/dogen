@@ -51,13 +51,6 @@ public:
     static object build_uml_note(const unsigned int number = 0);
 
     /**
-     * @brief Generates a UML note with a dogen comment marker.
-     *
-     * @param number identifier used for object ID generation.
-     */
-    static object build_uml_note_wit_marker(const unsigned int number = 0);
-
-    /**
      * @brief Generates a new UML class.
      *
      * @param number identifier used for object ID generation.
