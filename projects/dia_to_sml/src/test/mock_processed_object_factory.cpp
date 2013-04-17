@@ -77,6 +77,35 @@ std::string mock_processed_object_factory::to_oject_id(const unsigned int n) {
 }
 
 processed_object mock_processed_object_factory::
+build_uml_note(const unsigned int n) {
+    processed_object r(create_object(object_types::uml_note, n));
+    r.stereotype(stereotypes::no_stereotype);
+
+    std::ostringstream s;
+    s << "this is a comment";
+    r.text(s.str());
+    return r;
+}
+
+processed_object mock_processed_object_factory::
+build_uml_note_with_marker(const unsigned int n) {
+    processed_object r(create_object(object_types::uml_note, n));
+    r.stereotype(stereotypes::no_stereotype);
+    std::ostringstream s;
+    s << "#DOGEN COMMENT=true" << std::endl << std::endl
+      << "this is a doxygen brief";
+    r.text(s.str());
+    return r;
+}
+
+processed_object mock_processed_object_factory::
+build_empty_uml_note(const unsigned int n) {
+    processed_object r(create_object(object_types::uml_note, n));
+    r.stereotype(stereotypes::no_stereotype);
+    return r;
+}
+
+processed_object mock_processed_object_factory::
 build_class(const unsigned int n) {
     processed_object r(create_named_object(object_types::uml_class, n));
     r.stereotype(stereotypes::no_stereotype);
