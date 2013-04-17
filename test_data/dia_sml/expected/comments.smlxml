@@ -4,7 +4,7 @@
 <entity class_id="0" tracking_level="0" version="0">
 	<name>comments</name>
 	<packages class_id="1" tracking_level="0" version="0">
-		<count>1</count>
+		<count>2</count>
 		<bucket_count>11</bucket_count>
 		<item_version>0</item_version>
 		<item class_id="2" tracking_level="0" version="0">
@@ -15,13 +15,55 @@
 					<item_version>0</item_version>
 				</external_package_path>
 				<package_path>
+					<count>1</count>
+					<item_version>0</item_version>
+					<item>package</item>
+				</package_path>
+				<type_name>package2</type_name>
+				<meta_type>3</meta_type>
+			</first>
+			<second class_id="5" tracking_level="0" version="0">
+				<name>
+					<model_name>comments</model_name>
+					<external_package_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</external_package_path>
+					<package_path>
+						<count>1</count>
+						<item_version>0</item_version>
+						<item>package</item>
+					</package_path>
+					<type_name>package2</type_name>
+					<meta_type>3</meta_type>
+				</name>
+				<documentation>package2
+</documentation>
+				<implementation_specific_parameters class_id="6" tracking_level="0" version="0">
+					<count>1</count>
+					<item_version>0</item_version>
+					<item class_id="7" tracking_level="0" version="0">
+						<first>COMMENT</first>
+						<second>true</second>
+					</item>
+				</implementation_specific_parameters>
+			</second>
+		</item>
+		<item>
+			<first>
+				<model_name>comments</model_name>
+				<external_package_path>
+					<count>0</count>
+					<item_version>0</item_version>
+				</external_package_path>
+				<package_path>
 					<count>0</count>
 					<item_version>0</item_version>
 				</package_path>
 				<type_name>package</type_name>
 				<meta_type>3</meta_type>
 			</first>
-			<second class_id="5" tracking_level="0" version="0">
+			<second>
 				<name>
 					<model_name>comments</model_name>
 					<external_package_path>
@@ -35,19 +77,24 @@
 					<type_name>package</type_name>
 					<meta_type>3</meta_type>
 				</name>
-				<documentation></documentation>
-				<implementation_specific_parameters class_id="6" tracking_level="0" version="0">
-					<count>0</count>
+				<documentation>package
+</documentation>
+				<implementation_specific_parameters>
+					<count>1</count>
 					<item_version>0</item_version>
+					<item>
+						<first>COMMENT</first>
+						<second>true</second>
+					</item>
 				</implementation_specific_parameters>
 			</second>
 		</item>
 	</packages>
-	<pods class_id="7" tracking_level="0" version="0">
+	<pods class_id="8" tracking_level="0" version="0">
 		<count>2</count>
 		<bucket_count>11</bucket_count>
 		<item_version>0</item_version>
-		<item class_id="8" tracking_level="0" version="0">
+		<item class_id="9" tracking_level="0" version="0">
 			<first>
 				<model_name>comments</model_name>
 				<external_package_path>
@@ -61,7 +108,7 @@
 				<type_name>multi_line</type_name>
 				<meta_type>2</meta_type>
 			</first>
-			<second class_id="9" tracking_level="0" version="0">
+			<second class_id="10" tracking_level="0" version="0">
 				<name>
 					<model_name>comments</model_name>
 					<external_package_path>
@@ -75,17 +122,17 @@
 					<type_name>multi_line</type_name>
 					<meta_type>2</meta_type>
 				</name>
-				<properties class_id="10" tracking_level="0" version="0">
+				<properties class_id="11" tracking_level="0" version="0">
 					<count>0</count>
 					<item_version>0</item_version>
 				</properties>
-				<parent_name class_id="11" tracking_level="0" version="0">
+				<parent_name class_id="12" tracking_level="0" version="0">
 					<initialized>0</initialized>
 				</parent_name>
 				<original_parent_name>
 					<initialized>0</initialized>
 				</original_parent_name>
-				<leaves class_id="12" tracking_level="0" version="0">
+				<leaves class_id="13" tracking_level="0" version="0">
 					<count>0</count>
 					<item_version>0</item_version>
 				</leaves>
@@ -102,7 +149,7 @@ third line with &quot;quote&quot;
 				<implementation_specific_parameters>
 					<count>1</count>
 					<item_version>0</item_version>
-					<item class_id="13" tracking_level="0" version="0">
+					<item>
 						<first>key</first>
 						<second>value</second>
 					</item>

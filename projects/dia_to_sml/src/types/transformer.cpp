@@ -384,7 +384,27 @@ void transformer::transform_note(const processed_object& o) {
     if (o.child_node_id().empty()) {
         context_.model().documentation(pair.first);
         context_.model().implementation_specific_parameters(pair.second);
+        return;
     }
+
+    const auto i(context_.dia_id_to_qname().find(o.child_node_id()));
+    if (i == context_.dia_id_to_qname().end()) {
+        BOOST_LOG_SEV(lg, error) << missing_package_for_id << o.child_node_id();
+        BOOST_THROW_EXCEPTION(
+            transformation_error(missing_package_for_id + o.child_node_id()));
+    }
+
+    auto j(context_.model().packages().find(i->second));
+    if (j == context_.model().packages().end()) {
+        BOOST_LOG_SEV(lg, error) << missing_package_for_qname
+                                 << i->second.type_name();
+
+        BOOST_THROW_EXCEPTION(
+            transformation_error(missing_package_for_qname +
+                i->second.type_name()));
+    }
+    j->second.documentation(pair.first);
+    j->second.implementation_specific_parameters(pair.second);
 }
 
 void transformer::transform_exception(const processed_object& o) {

@@ -271,4 +271,64 @@ BOOST_AUTO_TEST_CASE(empty_uml_note_does_nothing) {
     BOOST_CHECK(c.model().implementation_specific_parameters().empty());
 }
 
+BOOST_AUTO_TEST_CASE(uml_note_with_marker_inside_package_transforms_into_package_comments) {
+    SETUP_TEST_LOG_SOURCE("uml_note_with_marker_inside_package_transforms_into_package_comments");
+    dogen::dia_to_sml::context c;
+    c.model().name(model_name);
+    dogen::dia_to_sml::transformer t(c);
+    const auto a(mock_processed_object_factory::
+        build_uml_note_with_marker_inside_large_package(0));
+    t.transform(a[0]);
+    t.transform(a[1]);
+
+    BOOST_LOG_SEV(lg, debug) << "context: " << c;
+    BOOST_CHECK(c.model().documentation().empty());
+    BOOST_CHECK(c.model().implementation_specific_parameters().empty());
+    BOOST_REQUIRE(c.model().packages().size() == 1);
+
+    const auto p(c.model().packages().begin()->second);
+    BOOST_CHECK(!p.documentation().empty());
+    BOOST_CHECK(!p.implementation_specific_parameters().empty());
+}
+
+BOOST_AUTO_TEST_CASE(uml_note_with_text_but_no_marker_inside_package_does_nothing) {
+    SETUP_TEST_LOG_SOURCE("uml_note_with_text_but_no_marker_inside_package_does_nothing");
+    dogen::dia_to_sml::context c;
+    c.model().name(model_name);
+    dogen::dia_to_sml::transformer t(c);
+    const auto a(mock_processed_object_factory::
+        build_uml_note_inside_large_package(0));
+    t.transform(a[0]);
+    t.transform(a[1]);
+
+    BOOST_LOG_SEV(lg, debug) << "context: " << c;
+    BOOST_CHECK(c.model().documentation().empty());
+    BOOST_CHECK(c.model().implementation_specific_parameters().empty());
+    BOOST_REQUIRE(c.model().packages().size() == 1);
+
+    const auto p(c.model().packages().begin()->second);
+    BOOST_CHECK(p.documentation().empty());
+    BOOST_CHECK(p.implementation_specific_parameters().empty());
+}
+
+BOOST_AUTO_TEST_CASE(empty_uml_note_inside_package_does_nothing) {
+    SETUP_TEST_LOG_SOURCE("empty_uml_note_inside_package_does_nothing");
+    dogen::dia_to_sml::context c;
+    c.model().name(model_name);
+    dogen::dia_to_sml::transformer t(c);
+    const auto a(mock_processed_object_factory::
+        build_empty_uml_note_inside_large_package(0));
+    t.transform(a[0]);
+    t.transform(a[1]);
+
+    BOOST_LOG_SEV(lg, debug) << "context: " << c;
+    BOOST_CHECK(c.model().documentation().empty());
+    BOOST_CHECK(c.model().implementation_specific_parameters().empty());
+    BOOST_REQUIRE(c.model().packages().size() == 1);
+
+    const auto p(c.model().packages().begin()->second);
+    BOOST_CHECK(p.documentation().empty());
+    BOOST_CHECK(p.implementation_specific_parameters().empty());
+}
+
 BOOST_AUTO_TEST_SUITE_END()
