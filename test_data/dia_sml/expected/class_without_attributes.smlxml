@@ -36,14 +36,18 @@
 					<meta_type>3</meta_type>
 				</name>
 				<documentation></documentation>
+				<implementation_specific_parameters class_id="6" tracking_level="0" version="0">
+					<count>0</count>
+					<item_version>0</item_version>
+				</implementation_specific_parameters>
 			</second>
 		</item>
 	</packages>
-	<pods class_id="6" tracking_level="0" version="0">
+	<pods class_id="7" tracking_level="0" version="0">
 		<count>1</count>
 		<bucket_count>11</bucket_count>
 		<item_version>0</item_version>
-		<item class_id="7" tracking_level="0" version="0">
+		<item class_id="8" tracking_level="0" version="0">
 			<first>
 				<model_name>class_without_attributes</model_name>
 				<external_package_path>
@@ -58,7 +62,7 @@
 				<type_name>class_1</type_name>
 				<meta_type>2</meta_type>
 			</first>
-			<second class_id="8" tracking_level="0" version="0">
+			<second class_id="9" tracking_level="0" version="0">
 				<name>
 					<model_name>class_without_attributes</model_name>
 					<external_package_path>
@@ -73,17 +77,17 @@
 					<type_name>class_1</type_name>
 					<meta_type>2</meta_type>
 				</name>
-				<properties class_id="9" tracking_level="0" version="0">
+				<properties class_id="10" tracking_level="0" version="0">
 					<count>0</count>
 					<item_version>0</item_version>
 				</properties>
-				<parent_name class_id="10" tracking_level="0" version="0">
+				<parent_name class_id="11" tracking_level="0" version="0">
 					<initialized>0</initialized>
 				</parent_name>
 				<original_parent_name>
 					<initialized>0</initialized>
 				</original_parent_name>
-				<leaves class_id="11" tracking_level="0" version="0">
+				<leaves class_id="12" tracking_level="0" version="0">
 					<count>0</count>
 					<item_version>0</item_version>
 				</leaves>
@@ -93,7 +97,7 @@
 				<pod_type>5</pod_type>
 				<documentation></documentation>
 				<number_of_type_arguments>0</number_of_type_arguments>
-				<implementation_specific_parameters class_id="12" tracking_level="0" version="0">
+				<implementation_specific_parameters>
 					<count>0</count>
 					<item_version>0</item_version>
 				</implementation_specific_parameters>

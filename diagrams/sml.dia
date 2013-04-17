@@ -74,7 +74,7 @@
         <dia:point val="-9.0688,59.0312"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="32.840000000000003"/>
+        <dia:real val="32.839999999999996"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="11.600000000000001"/>
@@ -691,19 +691,19 @@ This is only needed because we don't have a type base class.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O2">
       <dia:attribute name="obj_pos">
-        <dia:point val="-41.4254,75.9436"/>
+        <dia:point val="-63.8629,76.0686"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-41.4754,75.8936;-30.4804,79.5936"/>
+        <dia:rectangle val="-63.9129,76.0186;-30.9729,80.5186"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-41.4254,75.9436"/>
+        <dia:point val="-63.8629,76.0686"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="10.895"/>
+        <dia:real val="32.839999999999996"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="3.6000000000000001"/>
+        <dia:real val="4.4000000000000004"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#package#</dia:string>
@@ -828,6 +828,29 @@ This is only needed because we don't have a type base class.#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
             <dia:string>#Doxygen documentation for the package.#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#implementation_specific_parameters#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>#std::vector&lt;std::pair&lt;std::string,std::string&gt;&gt;#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>#Parameters associated with the package which are opaque to SML.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -1245,7 +1268,7 @@ It must be castable to instance of the type defined in the enumeration.#</dia:st
         <dia:point val="8.0771,39.9417"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="32.840000000000003"/>
+        <dia:real val="32.839999999999996"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="11.600000000000001"/>
@@ -1632,7 +1655,7 @@ It must be castable to instance of the type defined in the enumeration.#</dia:st
         <dia:point val="26.9853,59.1365"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="32.840000000000003"/>
+        <dia:real val="32.839999999999996"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="6"/>
@@ -2719,17 +2742,17 @@ Must only contain characters that can be used for identifiers in the target back
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="-35.9779,75.9436"/>
+        <dia:point val="-47.4429,76.0686"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-36.0279,67.2344;-8.3979,75.9936"/>
+        <dia:rectangle val="-47.4929,67.2344;-8.3979,76.1186"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="-35.9779,75.9436"/>
-        <dia:point val="-35.9779,72.0469"/>
+        <dia:point val="-47.4429,76.0686"/>
+        <dia:point val="-47.4429,72.0469"/>
         <dia:point val="-9.1479,72.0469"/>
         <dia:point val="-9.1479,67.9844"/>
       </dia:attribute>
@@ -4204,7 +4227,7 @@ which make code generation different.#</dia:string>
         <dia:point val="-18.8479,26.0782"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="8.3350000000000009"/>
+        <dia:real val="8.3349999999999991"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="5.2000000000000011"/>
@@ -5590,7 +5613,7 @@ which make code generation different.#</dia:string>
         <dia:point val="7.3512,70.6312"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="5.70928,69.8812;9.17428,93.7687"/>
+        <dia:rectangle val="5.70927,69.8812;9.17427,93.7687"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -6217,7 +6240,7 @@ and all of the supported types within those models.#</dia:string>
         <dia:real val="24.77"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="4.1000000000000005"/>
+        <dia:real val="4.0999999999999996"/>
       </dia:attribute>
       <dia:attribute name="line_width">
         <dia:real val="0.10000000000000001"/>
@@ -6336,7 +6359,7 @@ all types in the combined model.#</dia:string>
         <dia:point val="17.137,130.062"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="19.364999999999998"/>
+        <dia:real val="19.365000000000002"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="5.2000000000000002"/>
@@ -7053,7 +7076,7 @@ all types in the combined model.#</dia:string>
         <dia:point val="16.887,103.125"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="12.435"/>
+        <dia:real val="12.434999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="4.4000000000000004"/>
@@ -7332,8 +7355,8 @@ all types in the combined model.#</dia:string>
       </dia:attribute>
       <dia:attribute name="orth_points">
         <dia:point val="75.7804,59.0449"/>
-        <dia:point val="75.7804,52.2246"/>
-        <dia:point val="64.23,52.2246"/>
+        <dia:point val="75.7804,52.2245"/>
+        <dia:point val="64.23,52.2245"/>
         <dia:point val="64.23,46.1042"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">

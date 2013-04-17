@@ -36,6 +36,10 @@
 					<meta_type>3</meta_type>
 				</name>
 				<documentation></documentation>
+				<implementation_specific_parameters class_id="6" tracking_level="0" version="0">
+					<count>0</count>
+					<item_version>0</item_version>
+				</implementation_specific_parameters>
 			</second>
 		</item>
 		<item>
@@ -67,14 +71,18 @@
 					<meta_type>3</meta_type>
 				</name>
 				<documentation></documentation>
+				<implementation_specific_parameters>
+					<count>0</count>
+					<item_version>0</item_version>
+				</implementation_specific_parameters>
 			</second>
 		</item>
 	</packages>
-	<pods class_id="6" tracking_level="0" version="0">
+	<pods class_id="7" tracking_level="0" version="0">
 		<count>2</count>
 		<bucket_count>11</bucket_count>
 		<item_version>0</item_version>
-		<item class_id="7" tracking_level="0" version="0">
+		<item class_id="8" tracking_level="0" version="0">
 			<first>
 				<model_name>two_layers_with_objects</model_name>
 				<external_package_path>
@@ -89,7 +97,7 @@
 				<type_name>class_2</type_name>
 				<meta_type>2</meta_type>
 			</first>
-			<second class_id="8" tracking_level="0" version="0">
+			<second class_id="9" tracking_level="0" version="0">
 				<name>
 					<model_name>two_layers_with_objects</model_name>
 					<external_package_path>
@@ -104,12 +112,12 @@
 					<type_name>class_2</type_name>
 					<meta_type>2</meta_type>
 				</name>
-				<properties class_id="9" tracking_level="0" version="0">
+				<properties class_id="10" tracking_level="0" version="0">
 					<count>1</count>
 					<item_version>0</item_version>
-					<item class_id="10" tracking_level="0" version="0">
+					<item class_id="11" tracking_level="0" version="0">
 						<name>prop_0</name>
-						<type_name class_id="11" tracking_level="0" version="0">
+						<type_name class_id="12" tracking_level="0" version="0">
 							<type>
 								<model_name></model_name>
 								<external_package_path>
@@ -123,7 +131,7 @@
 								<type_name>int</type_name>
 								<meta_type>0</meta_type>
 							</type>
-							<children class_id="12" tracking_level="0" version="0">
+							<children class_id="13" tracking_level="0" version="0">
 								<count>0</count>
 								<item_version>0</item_version>
 							</children>
@@ -131,7 +139,7 @@
 						</type_name>
 						<default_value></default_value>
 						<documentation></documentation>
-						<implementation_specific_parameters class_id="13" tracking_level="0" version="0">
+						<implementation_specific_parameters>
 							<count>0</count>
 							<item_version>0</item_version>
 						</implementation_specific_parameters>

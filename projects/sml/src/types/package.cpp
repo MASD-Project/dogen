@@ -25,19 +25,23 @@ namespace sml {
 
 package::package(
     const dogen::sml::qname& name,
-    const std::string& documentation)
+    const std::string& documentation,
+    const std::vector<std::pair<std::string, std::string> >& implementation_specific_parameters)
     : name_(name),
-      documentation_(documentation) { }
+      documentation_(documentation),
+      implementation_specific_parameters_(implementation_specific_parameters) { }
 
 void package::swap(package& other) noexcept {
     using std::swap;
     swap(name_, other.name_);
     swap(documentation_, other.documentation_);
+    swap(implementation_specific_parameters_, other.implementation_specific_parameters_);
 }
 
 bool package::operator==(const package& rhs) const {
     return name_ == rhs.name_ &&
-        documentation_ == rhs.documentation_;
+        documentation_ == rhs.documentation_ &&
+        implementation_specific_parameters_ == rhs.implementation_specific_parameters_;
 }
 
 package& package::operator=(package other) {
@@ -76,6 +80,22 @@ void package::documentation(const std::string& v) {
 
 void package::documentation(const std::string&& v) {
     documentation_ = std::move(v);
+}
+
+const std::vector<std::pair<std::string, std::string> >& package::implementation_specific_parameters() const {
+    return implementation_specific_parameters_;
+}
+
+std::vector<std::pair<std::string, std::string> >& package::implementation_specific_parameters() {
+    return implementation_specific_parameters_;
+}
+
+void package::implementation_specific_parameters(const std::vector<std::pair<std::string, std::string> >& v) {
+    implementation_specific_parameters_ = v;
+}
+
+void package::implementation_specific_parameters(const std::vector<std::pair<std::string, std::string> >&& v) {
+    implementation_specific_parameters_ = std::move(v);
 }
 
 } }

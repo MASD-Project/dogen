@@ -36,25 +36,29 @@
 					<meta_type>3</meta_type>
 				</name>
 				<documentation></documentation>
+				<implementation_specific_parameters class_id="6" tracking_level="0" version="0">
+					<count>0</count>
+					<item_version>0</item_version>
+				</implementation_specific_parameters>
 			</second>
 		</item>
 	</packages>
-	<pods class_id="6" tracking_level="0" version="0">
+	<pods class_id="7" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>11</bucket_count>
 		<item_version>0</item_version>
 	</pods>
-	<primitives class_id="7" tracking_level="0" version="0">
+	<primitives class_id="8" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>11</bucket_count>
 		<item_version>0</item_version>
 	</primitives>
-	<enumerations class_id="8" tracking_level="0" version="0">
+	<enumerations class_id="9" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>11</bucket_count>
 		<item_version>0</item_version>
 	</enumerations>
-	<exceptions class_id="9" tracking_level="0" version="0">
+	<exceptions class_id="10" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>11</bucket_count>
 		<item_version>0</item_version>
@@ -64,18 +68,18 @@
 		<item_version>0</item_version>
 	</external_package_path>
 	<is_system>0</is_system>
-	<dependencies class_id="10" tracking_level="0" version="0">
+	<dependencies class_id="11" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>11</bucket_count>
 		<item_version>0</item_version>
 	</dependencies>
-	<leaves class_id="11" tracking_level="0" version="0">
+	<leaves class_id="12" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>11</bucket_count>
 		<item_version>0</item_version>
 	</leaves>
 	<documentation></documentation>
-	<implementation_specific_parameters class_id="12" tracking_level="0" version="0">
+	<implementation_specific_parameters>
 		<count>0</count>
 		<item_version>0</item_version>
 	</implementation_specific_parameters>
