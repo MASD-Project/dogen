@@ -30,6 +30,7 @@
 #include "dogen/cpp/hash/view_models/enumerator_view_model_hash.hpp"
 #include "dogen/cpp/hash/view_models/exception_view_model_hash.hpp"
 #include "dogen/cpp/hash/view_models/file_view_model_hash.hpp"
+#include "dogen/cpp/hash/view_models/namespace_view_model_hash.hpp"
 #include "dogen/cpp/hash/view_models/nested_type_view_model_hash.hpp"
 #include "dogen/cpp/hash/view_models/odb_options_view_model_hash.hpp"
 #include "dogen/cpp/hash/view_models/parent_view_model_hash.hpp"

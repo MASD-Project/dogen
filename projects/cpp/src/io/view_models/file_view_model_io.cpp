@@ -27,6 +27,7 @@
 #include "dogen/cpp/io/view_models/enumeration_view_model_io.hpp"
 #include "dogen/cpp/io/view_models/exception_view_model_io.hpp"
 #include "dogen/cpp/io/view_models/file_view_model_io.hpp"
+#include "dogen/cpp/io/view_models/namespace_view_model_io.hpp"
 #include "dogen/cpp/io/view_models/registrar_view_model_io.hpp"
 #include "dogen/sml/io/category_types_io.hpp"
 #include "dogen/sml/io/meta_types_io.hpp"
@@ -113,6 +114,21 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<std::string>& v
 
 }
 
+namespace boost {
+
+inline std::ostream& operator<<(std::ostream& s, const boost::optional<dogen::cpp::view_models::namespace_view_model>& v) {
+    s << "{ " << "\"__type__\": " << "\"boost::optional\"" << ", ";
+
+    if (v)
+        s << "\"data\": " << *v;
+    else
+        s << "\"data\": ""\"<empty>\"";
+    s<< " }";
+    return s;
+}
+
+}
+
 namespace dogen {
 namespace cpp {
 namespace view_models {
@@ -132,7 +148,8 @@ std::ostream& operator<<(std::ostream& s, const file_view_model& v) {
       << "\"header_guard\": " << "\"" << tidy_up_string(v.header_guard()) << "\"" << ", "
       << "\"system_includes\": " << v.system_includes() << ", "
       << "\"user_includes\": " << v.user_includes() << ", "
-      << "\"file_path\": " << "\"" << v.file_path().generic_string() << "\""
+      << "\"file_path\": " << "\"" << v.file_path().generic_string() << "\"" << ", "
+      << "\"namespace_vm\": " << v.namespace_vm()
       << " }";
     return(s);
 }

@@ -36,8 +36,6 @@ namespace {
 
 auto lg(logger_factory("cpp.formatters.io_header"));
 
-const std::string iosfwd("iosfwd");
-
 const std::string missing_class_view_model(
     "Meta type is pod but class view model is empty");
 const std::string missing_enumeration_view_model(

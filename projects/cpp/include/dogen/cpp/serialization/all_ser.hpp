@@ -30,6 +30,7 @@
 #include "dogen/cpp/serialization/view_models/enumerator_view_model_ser.hpp"
 #include "dogen/cpp/serialization/view_models/exception_view_model_ser.hpp"
 #include "dogen/cpp/serialization/view_models/file_view_model_ser.hpp"
+#include "dogen/cpp/serialization/view_models/namespace_view_model_ser.hpp"
 #include "dogen/cpp/serialization/view_models/nested_type_view_model_ser.hpp"
 #include "dogen/cpp/serialization/view_models/odb_options_view_model_ser.hpp"
 #include "dogen/cpp/serialization/view_models/parent_view_model_ser.hpp"

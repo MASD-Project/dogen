@@ -25,6 +25,7 @@
 #include "dogen/cpp/hash/view_models/enumeration_view_model_hash.hpp"
 #include "dogen/cpp/hash/view_models/exception_view_model_hash.hpp"
 #include "dogen/cpp/hash/view_models/file_view_model_hash.hpp"
+#include "dogen/cpp/hash/view_models/namespace_view_model_hash.hpp"
 #include "dogen/cpp/hash/view_models/registrar_view_model_hash.hpp"
 #include "dogen/sml/hash/category_types_hash.hpp"
 #include "dogen/sml/hash/meta_types_hash.hpp"
@@ -86,6 +87,16 @@ inline std::size_t hash_std_list_std_string(const std::list<std::string>& v){
     return seed;
 }
 
+inline std::size_t hash_boost_optional_dogen_cpp_view_models_namespace_view_model(const boost::optional<dogen::cpp::view_models::namespace_view_model>& v){
+    std::size_t seed(0);
+
+    if (!v)
+        return seed;
+
+    combine(seed, *v);
+    return seed;
+}
+
 }
 
 namespace dogen {
@@ -108,6 +119,7 @@ std::size_t file_view_model_hasher::hash(const file_view_model&v) {
     combine(seed, hash_std_list_std_string(v.system_includes()));
     combine(seed, hash_std_list_std_string(v.user_includes()));
     combine(seed, v.file_path().generic_string());
+    combine(seed, hash_boost_optional_dogen_cpp_view_models_namespace_view_model(v.namespace_vm()));
 
     return seed;
 }
