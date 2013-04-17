@@ -130,6 +130,7 @@ locator::aspect_postfix(aspect_types aspect) const {
     case aspect_types::includers: return empty; break;
     case aspect_types::forward_decls: return forward_decls_postfix; break;
     case aspect_types::registrar: return empty; break;
+    case aspect_types::namespace_doc: return empty; break;
     default:
         BOOST_LOG_SEV(lg, error) << invalid_aspect_types;
         BOOST_THROW_EXCEPTION(invalid_enum_value(invalid_aspect_types));

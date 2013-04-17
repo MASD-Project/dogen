@@ -872,6 +872,40 @@ std::vector<file_view_model> sml_to_cpp_view_model::transform_enumerations() {
     return r;
 }
 
+std::vector<file_view_model> sml_to_cpp_view_model::transform_packages() {
+    std::vector<file_view_model> r;
+    if (!model_.documentation().empty()) {
+        sml::qname qn;
+        qn.type_name(model_.name());
+        qn.external_package_path(model_.external_package_path());
+
+        using config::cpp_facet_types;
+        const auto ft(cpp_facet_types::types);
+        const auto at(aspect_types::namespace_doc);
+        const file_types file_type(file_types::header);
+
+        log_generating_file(ft, at, file_type, qn.type_name(),
+            sml::meta_types::package);
+        const std::list<std::string> ns(join_namespaces(qn));
+
+        const auto rq(location_request_factory(ft, file_type, at, qn));
+
+        file_view_model vm;
+        vm.facet_type(ft);
+        vm.file_path(locator_.absolute_path(rq));
+        vm.file_type(file_type);
+        vm.aspect_type(at);
+
+        namespace_view_model nvm;
+        nvm.documentation(model_.documentation());
+        nvm.namespaces(ns);
+        vm.namespace_vm(nvm);
+
+        r.push_back(vm);
+    }
+    return r;
+}
+
 std::vector<file_view_model> sml_to_cpp_view_model::transform_exceptions() {
     std::vector<file_view_model> r;
     using config::cpp_facet_types;
@@ -940,9 +974,6 @@ sml_to_cpp_view_model::transform_facet_includers() const {
     return r;
 }
 
-/**
- * @brief Transforms the serialisation registrar
- */
 std::vector<file_view_model>
 sml_to_cpp_view_model::transform_registrar() const {
     std::vector<file_view_model> r;
@@ -1025,12 +1056,14 @@ std::vector<file_view_model> sml_to_cpp_view_model::transform() {
     auto e(transform_enumerations());
     auto ex(transform_exceptions());
     auto reg(transform_registrar());
+    // auto pkg(transform_packages());
 
-    r.reserve(p.size() + e.size() + ex.size() + reg.size());
+    r.reserve(p.size() + e.size() + ex.size() + reg.size()/* + pkg.size()*/);
     r.insert(r.end(), p.begin(), p.end());
     r.insert(r.end(), e.begin(), e.end());
     r.insert(r.end(), ex.begin(), ex.end());
     r.insert(r.end(), reg.begin(), reg.end());
+    // r.insert(r.end(), pkg.begin(), pkg.end());
 
     log_includers();
     if (settings_.disable_facet_includers())

@@ -201,6 +201,11 @@ private:
      */
     std::vector<file_view_model> transform_exceptions();
 
+    /**
+     * @brief Transforms packages into view models.
+     */
+    std::vector<file_view_model> transform_packages();
+
 public:
     /**
      * @brief Transforms the SML model instance into the corresponding

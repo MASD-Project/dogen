@@ -308,6 +308,7 @@ void merger::add_target(model model) {
     }
 
     merged_model_.name(model.name());
+    merged_model_.documentation(model.documentation());
     merged_model_.leaves(model.leaves());
 
     has_target_ = true;

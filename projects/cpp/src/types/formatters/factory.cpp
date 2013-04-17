@@ -42,6 +42,7 @@
 #include "dogen/cpp/types/formatters/registrar_implementation.hpp"
 #include "dogen/cpp/types/formatters/forward_declarations_header.hpp"
 #include "dogen/cpp/types/formatters/null_formatter.hpp"
+#include "dogen/cpp/types/formatters/namespace_documentation.hpp"
 #include "dogen/cpp/types/formatters/odb_header.hpp"
 #include "dogen/cpp/types/formatters/factory.hpp"
 
@@ -166,6 +167,9 @@ factory::create(std::ostream& s, config::cpp_facet_types ft, file_types flt,
         break;
     case aspect_types::registrar:
         return create_registrar_formatter(s, flt);
+        break;
+    case aspect_types::namespace_doc:
+        return namespace_documentation::create(s);
         break;
     case aspect_types::null_aspect:
         return create_null_formatter(s);
