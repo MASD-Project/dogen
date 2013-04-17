@@ -33,7 +33,6 @@
 #include "dogen/dia_to_sml/serialization/context_fwd_ser.hpp"
 #include "dogen/sml/hash/qname_hash.hpp"
 #include "dogen/sml/types/model.hpp"
-#include "dogen/sml/types/package.hpp"
 #include "dogen/sml/types/qname.hpp"
 
 namespace dogen {
@@ -56,7 +55,6 @@ public:
         const bool is_target,
         const std::unordered_map<std::string, std::string>& child_to_parent,
         const std::unordered_set<std::string>& parent_ids,
-        const std::unordered_map<std::string, dogen::sml::package>& packages_by_id,
         const std::unordered_map<std::string, dogen::sml::qname>& dia_id_to_qname,
         const std::unordered_map<dogen::sml::qname, dogen::sml::qname>& original_parent,
         const std::unordered_map<dogen::sml::qname, std::list<dogen::sml::qname> >& leaves,
@@ -83,11 +81,6 @@ public:
     std::unordered_set<std::string>& parent_ids();
     void parent_ids(const std::unordered_set<std::string>& v);
     void parent_ids(const std::unordered_set<std::string>&& v);
-
-    const std::unordered_map<std::string, dogen::sml::package>& packages_by_id() const;
-    std::unordered_map<std::string, dogen::sml::package>& packages_by_id();
-    void packages_by_id(const std::unordered_map<std::string, dogen::sml::package>& v);
-    void packages_by_id(const std::unordered_map<std::string, dogen::sml::package>&& v);
 
     const std::unordered_map<std::string, dogen::sml::qname>& dia_id_to_qname() const;
     std::unordered_map<std::string, dogen::sml::qname>& dia_id_to_qname();
@@ -128,7 +121,6 @@ private:
     bool is_target_;
     std::unordered_map<std::string, std::string> child_to_parent_;
     std::unordered_set<std::string> parent_ids_;
-    std::unordered_map<std::string, dogen::sml::package> packages_by_id_;
     std::unordered_map<std::string, dogen::sml::qname> dia_id_to_qname_;
     std::unordered_map<dogen::sml::qname, dogen::sml::qname> original_parent_;
     std::unordered_map<dogen::sml::qname, std::list<dogen::sml::qname> > leaves_;

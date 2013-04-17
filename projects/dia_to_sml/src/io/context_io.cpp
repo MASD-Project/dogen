@@ -23,7 +23,6 @@
 #include <ostream>
 #include "dogen/dia_to_sml/io/context_io.hpp"
 #include "dogen/sml/io/model_io.hpp"
-#include "dogen/sml/io/package_io.hpp"
 #include "dogen/sml/io/qname_io.hpp"
 
 
@@ -61,24 +60,6 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_set<std::s
         s << "\"" << tidy_up_string(*i) << "\"";
     }
     s << "] ";
-    return s;
-}
-
-}
-
-namespace std {
-
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, dogen::sml::package>& v) {
-    s << "[";
-    for (auto i(v.begin()); i != v.end(); ++i) {
-        if (i != v.begin()) s << ", ";
-        s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
-        s << "\"" << tidy_up_string(i->first) << "\"";
-        s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
-        s << i->second;
-        s << " } ]";
-    }
-    s << " ] ";
     return s;
 }
 
@@ -167,7 +148,6 @@ std::ostream& operator<<(std::ostream& s, const context& v) {
       << "\"is_target\": " << v.is_target() << ", "
       << "\"child_to_parent\": " << v.child_to_parent() << ", "
       << "\"parent_ids\": " << v.parent_ids() << ", "
-      << "\"packages_by_id\": " << v.packages_by_id() << ", "
       << "\"dia_id_to_qname\": " << v.dia_id_to_qname() << ", "
       << "\"original_parent\": " << v.original_parent() << ", "
       << "\"leaves\": " << v.leaves() << ", "

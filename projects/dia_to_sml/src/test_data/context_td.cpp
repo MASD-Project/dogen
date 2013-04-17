@@ -21,7 +21,6 @@
 #include <sstream>
 #include "dogen/dia_to_sml/test_data/context_td.hpp"
 #include "dogen/sml/test_data/model_td.hpp"
-#include "dogen/sml/test_data/package_td.hpp"
 #include "dogen/sml/test_data/qname_td.hpp"
 
 namespace {
@@ -48,19 +47,6 @@ std::unordered_set<std::string> create_std_unordered_set_std_string(unsigned int
     std::unordered_set<std::string> r;
     for (unsigned int i(0); i < 10; ++i) {
         r.insert(create_std_string(position + i));
-    }
-    return r;
-}
-
-dogen::sml::package
-create_dogen_sml_package(const unsigned int position) {
-    return dogen::sml::package_generator::create(position);
-}
-
-std::unordered_map<std::string, dogen::sml::package> create_std_unordered_map_std_string_dogen_sml_package(unsigned int position) {
-    std::unordered_map<std::string, dogen::sml::package> r;
-    for (unsigned int i(0); i < 10; ++i) {
-        r.insert(std::make_pair(create_std_string(position + i), create_dogen_sml_package(position + i)));
     }
     return r;
 }
@@ -119,12 +105,11 @@ populate(const unsigned int position, result_type& v) {
     v.is_target(create_bool(position + 0));
     v.child_to_parent(create_std_unordered_map_std_string_std_string(position + 1));
     v.parent_ids(create_std_unordered_set_std_string(position + 2));
-    v.packages_by_id(create_std_unordered_map_std_string_dogen_sml_package(position + 3));
-    v.dia_id_to_qname(create_std_unordered_map_std_string_dogen_sml_qname(position + 4));
-    v.original_parent(create_std_unordered_map_dogen_sml_qname_dogen_sml_qname(position + 5));
-    v.leaves(create_std_unordered_map_dogen_sml_qname_std_list_dogen_sml_qname_(position + 6));
-    v.top_level_package_names(create_std_unordered_set_std_string(position + 7));
-    v.model(create_dogen_sml_model(position + 8));
+    v.dia_id_to_qname(create_std_unordered_map_std_string_dogen_sml_qname(position + 3));
+    v.original_parent(create_std_unordered_map_dogen_sml_qname_dogen_sml_qname(position + 4));
+    v.leaves(create_std_unordered_map_dogen_sml_qname_std_list_dogen_sml_qname_(position + 5));
+    v.top_level_package_names(create_std_unordered_set_std_string(position + 6));
+    v.model(create_dogen_sml_model(position + 7));
 }
 
 context_generator::result_type

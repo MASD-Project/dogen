@@ -44,6 +44,8 @@ const std::string empty_dia_object_name("Dia object name is empty");
 const std::string original_parent_not_found("Pod has no original parent: ");
 const std::string parent_not_found("Object has a parent but its not defined: ");
 const std::string missing_package_for_id("Missing package for dia object ID: ");
+const std::string missing_package_for_qname("Missing package for qname: ");
+const std::string missing_qname_for_id("Missing QName for dia object ID: ");
 const std::string type_attribute_expected(
     "Could not find type attribute. ID: ");
 const std::string invalid_type_string(
@@ -93,14 +95,25 @@ sml::qname transformer::transform_qname(const std::string& n,
     name.external_package_path(context_.model().external_package_path());
 
     if (!pkg_id.empty()) {
-        const auto i(context_.packages_by_id().find(pkg_id));
-        if (i == context_.packages_by_id().end()) {
-            BOOST_LOG_SEV(lg, error) << missing_package_for_id << pkg_id;
-            BOOST_THROW_EXCEPTION(
-                transformation_error(missing_package_for_id + pkg_id));
+        const auto i(context_.dia_id_to_qname().find(pkg_id));
+        if (i == context_.dia_id_to_qname().end()) {
+            BOOST_LOG_SEV(lg, error) << missing_qname_for_id << pkg_id;
+            BOOST_THROW_EXCEPTION(transformation_error(
+                    missing_qname_for_id + pkg_id));
         }
-        auto pp(i->second.name().package_path());
-        pp.push_back(i->second.name().type_name());
+
+        auto j(context_.model().packages().find(i->second));
+        if (j == context_.model().packages().end()) {
+            BOOST_LOG_SEV(lg, error) << missing_package_for_qname
+                                     << i->second.type_name();
+
+            BOOST_THROW_EXCEPTION(
+                transformation_error(missing_package_for_qname +
+                    i->second.type_name()));
+        }
+
+        auto pp(j->second.name().package_path());
+        pp.push_back(j->second.name().type_name());
         name.package_path(pp);
     }
 
@@ -345,7 +358,8 @@ void transformer::transform_package(const processed_object& o) {
             transformation_error(empty_dia_object_name + o.id()));
         BOOST_LOG_SEV(lg, error) << empty_dia_object_name + o.id();
     }
-    context_.packages_by_id().insert(std::make_pair(o.id(), p));
+
+    context_.dia_id_to_qname().insert(std::make_pair(o.id(), p.name()));
     context_.model().packages().insert(std::make_pair(p.name(), p));
 }
 

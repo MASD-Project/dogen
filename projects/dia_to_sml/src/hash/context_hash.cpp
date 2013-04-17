@@ -20,7 +20,6 @@
  */
 #include "dogen/dia_to_sml/hash/context_hash.hpp"
 #include "dogen/sml/hash/model_hash.hpp"
-#include "dogen/sml/hash/package_hash.hpp"
 #include "dogen/sml/hash/qname_hash.hpp"
 
 namespace {
@@ -45,15 +44,6 @@ inline std::size_t hash_std_unordered_set_std_string(const std::unordered_set<st
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i);
-    }
-    return seed;
-}
-
-inline std::size_t hash_std_unordered_map_std_string_dogen_sml_package(const std::unordered_map<std::string, dogen::sml::package>& v){
-    std::size_t seed(0);
-    for (const auto i : v) {
-        combine(seed, i.first);
-        combine(seed, i.second);
     }
     return seed;
 }
@@ -104,7 +94,6 @@ std::size_t context_hasher::hash(const context&v) {
     combine(seed, v.is_target());
     combine(seed, hash_std_unordered_map_std_string_std_string(v.child_to_parent()));
     combine(seed, hash_std_unordered_set_std_string(v.parent_ids()));
-    combine(seed, hash_std_unordered_map_std_string_dogen_sml_package(v.packages_by_id()));
     combine(seed, hash_std_unordered_map_std_string_dogen_sml_qname(v.dia_id_to_qname()));
     combine(seed, hash_std_unordered_map_dogen_sml_qname_dogen_sml_qname(v.original_parent()));
     combine(seed, hash_std_unordered_map_dogen_sml_qname_std_list_dogen_sml_qname_(v.leaves()));

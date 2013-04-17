@@ -39,7 +39,7 @@ const std::string test_suite("transformer_spec");
 const std::string model_name("test");
 const std::string missing_name("Could not find name");
 const std::string empty_name("Dia object name is empty");
-const std::string missing_package("Missing package for dia object");
+const std::string missing_qname("Missing QName for dia object ID");
 
 const std::string enumeration_stereotype("#enumeration#");
 const std::string value_stereotype("#value#");
@@ -173,7 +173,7 @@ BOOST_AUTO_TEST_CASE(uml_class_in_non_existing_package_throws) {
     dogen::dia_to_sml::transformer t(c);
     const auto a(
         mock_processed_object_factory::build_class_inside_large_package(0));
-    contains_checker<transformation_error> cc(missing_package);
+    contains_checker<transformation_error> cc(missing_qname);
     BOOST_CHECK_EXCEPTION(t.transform(a[1]), transformation_error, cc);
 }
 

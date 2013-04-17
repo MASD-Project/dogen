@@ -30,7 +30,6 @@ context::context(
     const bool is_target,
     const std::unordered_map<std::string, std::string>& child_to_parent,
     const std::unordered_set<std::string>& parent_ids,
-    const std::unordered_map<std::string, dogen::sml::package>& packages_by_id,
     const std::unordered_map<std::string, dogen::sml::qname>& dia_id_to_qname,
     const std::unordered_map<dogen::sml::qname, dogen::sml::qname>& original_parent,
     const std::unordered_map<dogen::sml::qname, std::list<dogen::sml::qname> >& leaves,
@@ -39,7 +38,6 @@ context::context(
     : is_target_(is_target),
       child_to_parent_(child_to_parent),
       parent_ids_(parent_ids),
-      packages_by_id_(packages_by_id),
       dia_id_to_qname_(dia_id_to_qname),
       original_parent_(original_parent),
       leaves_(leaves),
@@ -51,7 +49,6 @@ void context::swap(context& other) noexcept {
     swap(is_target_, other.is_target_);
     swap(child_to_parent_, other.child_to_parent_);
     swap(parent_ids_, other.parent_ids_);
-    swap(packages_by_id_, other.packages_by_id_);
     swap(dia_id_to_qname_, other.dia_id_to_qname_);
     swap(original_parent_, other.original_parent_);
     swap(leaves_, other.leaves_);
@@ -63,7 +60,6 @@ bool context::operator==(const context& rhs) const {
     return is_target_ == rhs.is_target_ &&
         child_to_parent_ == rhs.child_to_parent_ &&
         parent_ids_ == rhs.parent_ids_ &&
-        packages_by_id_ == rhs.packages_by_id_ &&
         dia_id_to_qname_ == rhs.dia_id_to_qname_ &&
         original_parent_ == rhs.original_parent_ &&
         leaves_ == rhs.leaves_ &&
@@ -115,22 +111,6 @@ void context::parent_ids(const std::unordered_set<std::string>& v) {
 
 void context::parent_ids(const std::unordered_set<std::string>&& v) {
     parent_ids_ = std::move(v);
-}
-
-const std::unordered_map<std::string, dogen::sml::package>& context::packages_by_id() const {
-    return packages_by_id_;
-}
-
-std::unordered_map<std::string, dogen::sml::package>& context::packages_by_id() {
-    return packages_by_id_;
-}
-
-void context::packages_by_id(const std::unordered_map<std::string, dogen::sml::package>& v) {
-    packages_by_id_ = v;
-}
-
-void context::packages_by_id(const std::unordered_map<std::string, dogen::sml::package>&& v) {
-    packages_by_id_ = std::move(v);
 }
 
 const std::unordered_map<std::string, dogen::sml::qname>& context::dia_id_to_qname() const {

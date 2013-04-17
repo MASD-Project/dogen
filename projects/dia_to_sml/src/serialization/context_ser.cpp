@@ -31,7 +31,6 @@
 #include <boost/serialization/string.hpp>
 #include "dogen/dia_to_sml/serialization/context_ser.hpp"
 #include "dogen/sml/serialization/model_ser.hpp"
-#include "dogen/sml/serialization/package_ser.hpp"
 #include "dogen/sml/serialization/qname_ser.hpp"
 #include "dogen/utility/serialization/unordered_map.hpp"
 #include "dogen/utility/serialization/unordered_set.hpp"
@@ -51,7 +50,6 @@ void save(Archive& ar,
     ar << make_nvp("is_target", v.is_target_);
     ar << make_nvp("child_to_parent", v.child_to_parent_);
     ar << make_nvp("parent_ids", v.parent_ids_);
-    ar << make_nvp("packages_by_id", v.packages_by_id_);
     ar << make_nvp("dia_id_to_qname", v.dia_id_to_qname_);
     ar << make_nvp("original_parent", v.original_parent_);
     ar << make_nvp("leaves", v.leaves_);
@@ -66,7 +64,6 @@ void load(Archive& ar,
     ar >> make_nvp("is_target", v.is_target_);
     ar >> make_nvp("child_to_parent", v.child_to_parent_);
     ar >> make_nvp("parent_ids", v.parent_ids_);
-    ar >> make_nvp("packages_by_id", v.packages_by_id_);
     ar >> make_nvp("dia_id_to_qname", v.dia_id_to_qname_);
     ar >> make_nvp("original_parent", v.original_parent_);
     ar >> make_nvp("leaves", v.leaves_);
