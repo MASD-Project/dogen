@@ -52,7 +52,7 @@ namespace  {
 const std::string empty;
 const std::string empty_package_path;
 const std::string test_module("engine");
-const std::string test_suite("generator_spec");
+const std::string test_suite("workflow_spec");
 const std::string package_path("dogen");
 const std::string package_path_disabled_model_package("dogen::dmp");
 const std::string extra_folder("dmp");
@@ -124,7 +124,7 @@ bool check_code_generation(boost::filesystem::path target) {
 using dogen::utility::test::contains_checker;
 using dogen::engine::generation_failure;
 
-BOOST_AUTO_TEST_SUITE(generator)
+BOOST_AUTO_TEST_SUITE(workflow)
 
 BOOST_AUTO_TEST_CASE(debug_options_generate_expected_debug_info) {
     SETUP_TEST_LOG("debug_options_generate_expected_debug_info");
