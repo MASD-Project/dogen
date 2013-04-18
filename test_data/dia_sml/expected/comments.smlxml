@@ -4,55 +4,13 @@
 <entity class_id="0" tracking_level="0" version="0">
 	<name>comments</name>
 	<packages class_id="1" tracking_level="0" version="0">
-		<count>2</count>
-		<bucket_count>11</bucket_count>
+		<count>1</count>
+		<bucket_count>23</bucket_count>
 		<item_version>0</item_version>
 		<item class_id="2" tracking_level="0" version="0">
 			<first class_id="3" tracking_level="0" version="0">
 				<model_name>comments</model_name>
 				<external_package_path class_id="4" tracking_level="0" version="0">
-					<count>0</count>
-					<item_version>0</item_version>
-				</external_package_path>
-				<package_path>
-					<count>1</count>
-					<item_version>0</item_version>
-					<item>package</item>
-				</package_path>
-				<type_name>package2</type_name>
-				<meta_type>3</meta_type>
-			</first>
-			<second class_id="5" tracking_level="0" version="0">
-				<name>
-					<model_name>comments</model_name>
-					<external_package_path>
-						<count>0</count>
-						<item_version>0</item_version>
-					</external_package_path>
-					<package_path>
-						<count>1</count>
-						<item_version>0</item_version>
-						<item>package</item>
-					</package_path>
-					<type_name>package2</type_name>
-					<meta_type>3</meta_type>
-				</name>
-				<documentation>package2
-</documentation>
-				<implementation_specific_parameters class_id="6" tracking_level="0" version="0">
-					<count>1</count>
-					<item_version>0</item_version>
-					<item class_id="7" tracking_level="0" version="0">
-						<first>COMMENT</first>
-						<second>true</second>
-					</item>
-				</implementation_specific_parameters>
-			</second>
-		</item>
-		<item>
-			<first>
-				<model_name>comments</model_name>
-				<external_package_path>
 					<count>0</count>
 					<item_version>0</item_version>
 				</external_package_path>
@@ -63,7 +21,7 @@
 				<type_name>package</type_name>
 				<meta_type>3</meta_type>
 			</first>
-			<second>
+			<second class_id="5" tracking_level="0" version="0">
 				<name>
 					<model_name>comments</model_name>
 					<external_package_path>
@@ -77,12 +35,13 @@
 					<type_name>package</type_name>
 					<meta_type>3</meta_type>
 				</name>
-				<documentation>package
+				<documentation>This is a package level comment.
+
 </documentation>
-				<implementation_specific_parameters>
+				<implementation_specific_parameters class_id="6" tracking_level="0" version="0">
 					<count>1</count>
 					<item_version>0</item_version>
-					<item>
+					<item class_id="7" tracking_level="0" version="0">
 						<first>COMMENT</first>
 						<second>true</second>
 					</item>
@@ -92,7 +51,7 @@
 	</packages>
 	<pods class_id="8" tracking_level="0" version="0">
 		<count>2</count>
-		<bucket_count>11</bucket_count>
+		<bucket_count>23</bucket_count>
 		<item_version>0</item_version>
 		<item class_id="9" tracking_level="0" version="0">
 			<first>
@@ -305,17 +264,17 @@ a second line
 	</pods>
 	<primitives class_id="17" tracking_level="0" version="0">
 		<count>0</count>
-		<bucket_count>11</bucket_count>
+		<bucket_count>23</bucket_count>
 		<item_version>0</item_version>
 	</primitives>
 	<enumerations class_id="18" tracking_level="0" version="0">
 		<count>0</count>
-		<bucket_count>11</bucket_count>
+		<bucket_count>23</bucket_count>
 		<item_version>0</item_version>
 	</enumerations>
 	<exceptions class_id="19" tracking_level="0" version="0">
 		<count>0</count>
-		<bucket_count>11</bucket_count>
+		<bucket_count>23</bucket_count>
 		<item_version>0</item_version>
 	</exceptions>
 	<external_package_path>
@@ -325,18 +284,18 @@ a second line
 	<is_system>0</is_system>
 	<dependencies class_id="20" tracking_level="0" version="0">
 		<count>0</count>
-		<bucket_count>11</bucket_count>
+		<bucket_count>23</bucket_count>
 		<item_version>0</item_version>
 	</dependencies>
 	<leaves class_id="21" tracking_level="0" version="0">
 		<count>0</count>
-		<bucket_count>11</bucket_count>
+		<bucket_count>23</bucket_count>
 		<item_version>0</item_version>
 	</leaves>
-	<documentation>
-This model demonstrates the use of comments in dogen.
+	<documentation>This model demonstrates the use of comments in dogen.
 
 This comment will be applied to the model namespace itself.
+
 </documentation>
 	<implementation_specific_parameters>
 		<count>1</count>
