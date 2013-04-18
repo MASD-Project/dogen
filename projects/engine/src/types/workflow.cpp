@@ -157,6 +157,7 @@ boost::optional<sml::model> workflow::make_generatable_model() const {
     p.persist(m, merged);
 
     BOOST_LOG_SEV(lg, debug) << "Totals: pods: " << m.pods().size()
+                             << " packages: " << m.packages().size()
                              << " enumerations: " << m.enumerations().size()
                              << " exceptions: " << m.exceptions().size()
                              << " primitives: " << m.primitives().size();

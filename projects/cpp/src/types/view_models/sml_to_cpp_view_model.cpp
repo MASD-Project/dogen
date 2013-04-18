@@ -907,9 +907,43 @@ std::vector<file_view_model> sml_to_cpp_view_model::transform_packages() {
         nvm.documentation(model_.documentation());
         nvm.namespaces(ns);
         vm.namespace_vm(nvm);
+        r.push_back(vm);
+    }
+
+    for (const auto& p : model_.packages()) {
+        if (p.second.documentation().empty())
+            continue;
+
+        using config::cpp_facet_types;
+        const auto ft(cpp_facet_types::types);
+        const auto at(aspect_types::namespace_doc);
+        const file_types file_type(file_types::header);
+        sml::qname qn(p.second.name());
+        log_generating_file(ft, at, file_type, qn.type_name(), qn.meta_type());
+        const std::list<std::string> ns(join_namespaces(qn));
+
+        const auto rq(location_request_factory(ft, file_type, at, qn));
+        const auto rp(locator_.relative_logical_path(rq));
+
+        file_view_model vm;
+        vm.header_guard(to_header_guard_name(rp));
+        vm.facet_type(ft);
+        vm.file_path(locator_.absolute_path(rq));
+        vm.file_type(file_type);
+        vm.aspect_type(at);
+        vm.meta_type(qn.meta_type());
+
+        namespace_view_model nvm;
+        nvm.documentation(p.second.documentation());
+        nvm.namespaces(ns);
+        vm.namespace_vm(nvm);
 
         r.push_back(vm);
     }
+
+    BOOST_LOG_SEV(lg, debug) << "Transformed packages: "
+                             << model_.packages().size();
+
     return r;
 }
 

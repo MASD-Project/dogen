@@ -227,6 +227,7 @@ processed_object processor::process(const dia::object& o) {
                 BOOST_THROW_EXCEPTION(processing_error(one_value_expected));
             }
 
+            // FIXME: do not use exceptions for flow control.
             using dia::composite;
             composite c;
             try {

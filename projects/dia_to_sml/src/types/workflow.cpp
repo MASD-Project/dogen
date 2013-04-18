@@ -21,6 +21,8 @@
 #include <boost/graph/depth_first_search.hpp>
 #include "dogen/dia/types/diagram.hpp"
 #include "dogen/sml/types/model.hpp"
+#include "dogen/sml/io/model_io.hpp"
+#include "dogen/utility/log/logger.hpp"
 #include "dogen/dia_to_sml/types/graph_builder.hpp"
 #include "dogen/dia_to_sml/types/context.hpp"
 #include "dogen/dia_to_sml/types/visitor.hpp"
@@ -28,6 +30,13 @@
 #include "dogen/dia_to_sml/types/identifier_parser.hpp"
 #include "dogen/dia_to_sml/types/processor.hpp"
 #include "dogen/dia_to_sml/types/workflow.hpp"
+
+namespace {
+
+using namespace dogen::utility::log;
+static logger lg(logger_factory("dia_to_sml.workflow"));
+
+}
 
 namespace dogen {
 namespace dia_to_sml {
@@ -91,6 +100,7 @@ sml::model workflow::execute(const dia::diagram& diagram,
     graph_to_context(g, c);
 
     post_process_model(c);
+    BOOST_LOG_SEV(lg, debug) << "Final workflow model: " << c.model();
     return c.model();
 }
 

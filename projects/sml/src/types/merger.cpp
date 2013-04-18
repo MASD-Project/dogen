@@ -310,6 +310,7 @@ void merger::add_target(model model) {
     merged_model_.name(model.name());
     merged_model_.documentation(model.documentation());
     merged_model_.leaves(model.leaves());
+    // merged_model_.packages(model.packages());
 
     has_target_ = true;
     external_package_path_ = model.external_package_path();
