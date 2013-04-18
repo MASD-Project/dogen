@@ -69,7 +69,6 @@ private:
     models_type models_;
     model merged_model_;
     bool has_target_;
-    std::list<std::string> external_package_path_;
 };
 
 } }

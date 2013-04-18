@@ -294,7 +294,6 @@ void merger::combine() {
             merged_model_.exceptions().insert(p);
         }
     }
-    merged_model_.external_package_path(external_package_path_);
 }
 
 void merger::add_target(model model) {
@@ -313,7 +312,7 @@ void merger::add_target(model model) {
     // merged_model_.packages(model.packages());
 
     has_target_ = true;
-    external_package_path_ = model.external_package_path();
+    merged_model_.external_package_path(model.external_package_path());
 
     add(model);
     BOOST_LOG_SEV(lg, debug) << "added target model: " << model.name();
