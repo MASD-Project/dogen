@@ -31,7 +31,6 @@ namespace dogen {
  * @brief This model demonstrates the use of comments in dogen.
  *
  * This comment will be applied to the model namespace itself.
- *
  */
 namespace comments {
 } }
