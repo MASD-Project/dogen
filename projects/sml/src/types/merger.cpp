@@ -306,12 +306,11 @@ void merger::add_target(model model) {
         BOOST_THROW_EXCEPTION(merging_error(stream.str()));
     }
 
+    has_target_ = true;
     merged_model_.name(model.name());
     merged_model_.documentation(model.documentation());
     merged_model_.leaves(model.leaves());
-    // merged_model_.packages(model.packages());
-
-    has_target_ = true;
+    merged_model_.packages(model.packages());
     merged_model_.external_package_path(model.external_package_path());
 
     add(model);

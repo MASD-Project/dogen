@@ -919,6 +919,7 @@ std::vector<file_view_model> sml_to_cpp_view_model::transform_packages() {
         const auto at(aspect_types::namespace_doc);
         const file_types file_type(file_types::header);
         sml::qname qn(p.second.name());
+        qn.package_path().push_back(p.second.name().type_name());
         log_generating_file(ft, at, file_type, qn.type_name(), qn.meta_type());
         const std::list<std::string> ns(join_namespaces(qn));
 

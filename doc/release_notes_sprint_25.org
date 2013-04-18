@@ -28,7 +28,8 @@ Clock summary at [2013-04-04 Thu 00:00]
 **** IMPLEMENTATION Create a new graph class
      CLOCK: [2013-04-03 Wed 22:54]--[2013-04-03 Wed 23:59] =>  1:05
 
-*** IMPLEMENTATION Add commenting of namespaces                       :story:
+*** COMPLETED Add commenting of namespaces                            :story:
+    CLOSED: [2013-04-18 Thu 23:35]
 
 - if one creates a "comment box" with a well-known dogen
   implementation specific parameter, that box is used as a comment for
