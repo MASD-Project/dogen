@@ -921,10 +921,11 @@ std::vector<file_view_model> sml_to_cpp_view_model::transform_packages() {
         sml::qname qn(p.second.name());
         qn.package_path().push_back(p.second.name().type_name());
         log_generating_file(ft, at, file_type, qn.type_name(), qn.meta_type());
-        const std::list<std::string> ns(join_namespaces(qn));
-
         const auto rq(location_request_factory(ft, file_type, at, qn));
         const auto rp(locator_.relative_logical_path(rq));
+
+        qn = p.second.name();
+        const std::list<std::string> ns(join_namespaces(qn));
 
         file_view_model vm;
         vm.header_guard(to_header_guard_name(rp));

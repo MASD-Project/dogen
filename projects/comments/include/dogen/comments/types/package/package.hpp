@@ -27,12 +27,11 @@
 
 namespace dogen {
 namespace comments {
-namespace package {
 
 /**
  * @brief package
  */
 namespace package {
-} } } }
+} } }
 
 #endif
