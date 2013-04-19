@@ -42,7 +42,7 @@ namespace {
 auto lg(logger_factory("dia_to_sml.identifier_parser"));
 
 const char* scope_delimiter = "::";
-const char* comma_delimiter = "::";
+const char* comma_delimiter = ",";
 const std::string error_msg("Failed to parse string: ");
 using namespace boost::spirit;
 

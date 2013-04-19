@@ -65,7 +65,6 @@ BOOST_AUTO_TEST_CASE(parsing_string_with_many_nested_scopes_produces_expected_qn
 
     dogen::dia_to_sml::identifier_parser ip;
     const auto a(ip.parse_qname(s));
-    BOOST_LOG_SEV(lg, info) << "actual: " << a;
 
     dogen::sml::nested_qname nqn;
     dogen::sml::qname e;
@@ -83,7 +82,6 @@ BOOST_AUTO_TEST_CASE(parsing_string_without_scope_operator_produces_expected_qna
 
     dogen::dia_to_sml::identifier_parser ip;
     const auto a(ip.parse_qname(s));
-    BOOST_LOG_SEV(lg, info) << "actual: " << a;
 
     dogen::sml::nested_qname nqn;
     dogen::sml::qname e;
@@ -99,7 +97,6 @@ BOOST_AUTO_TEST_CASE(parsing_string_with_one_scope_operator_produces_expected_qn
 
     dogen::dia_to_sml::identifier_parser ip;
     const auto a(ip.parse_qname(s));
-    BOOST_LOG_SEV(lg, info) << "actual: " << a;
 
     dogen::sml::nested_qname nqn;
     dogen::sml::qname e;
@@ -208,10 +205,11 @@ BOOST_AUTO_TEST_CASE(parsing_string_with_two_template_argument_produces_expected
     dogen::sml::nested_qname d;
     d.type(g);
     nqn.children(std::list<dogen::sml::nested_qname> { c, d });
-    BOOST_LOG_SEV(lg, info) << "input: " << nqn;
 
-    const auto a(ip.parse_qname("type<abc,cde>"));
-    BOOST_LOG_SEV(lg, info) << "actual: " << a;
+    const std::string s("type<abc,cde>");
+    BOOST_LOG_SEV(lg, info) << "input: " << s;
+
+    const auto a(ip.parse_qname(s));
     BOOST_CHECK(asserter::assert_equals(nqn, a));
 }
 
@@ -231,8 +229,10 @@ BOOST_AUTO_TEST_CASE(parsing_vector_of_string_produces_expected_nested_qnames) {
     c.type(f);
     nqn.children(std::list<dogen::sml::nested_qname> { c });
 
-    const auto a(ip.parse_qname("std::vector<std::string>"));
-    BOOST_LOG_SEV(lg, info) << "actual: " << a;
+    const std::string s("std::vector<std::string>");
+    BOOST_LOG_SEV(lg, info) << "input: " << s;
+
+    const auto a(ip.parse_qname(s));
     BOOST_CHECK(asserter::assert_equals(nqn, a));
 }
 
@@ -251,8 +251,10 @@ BOOST_AUTO_TEST_CASE(parsing_vector_of_primitive_produces_expected_nested_qnames
     c.type(f);
     nqn.children(std::list<dogen::sml::nested_qname> { c });
 
-    const auto a(ip.parse_qname("std::vector<unsigned int>"));
-    BOOST_LOG_SEV(lg, info) << "actual: " << a;
+    const std::string s("std::vector<unsigned int>");
+    BOOST_LOG_SEV(lg, info) << "input: " << s;
+
+    const auto a(ip.parse_qname(s));
     BOOST_CHECK(asserter::assert_equals(nqn, a));
 }
 
@@ -278,8 +280,9 @@ BOOST_AUTO_TEST_CASE(parsing_unordered_map_produces_expected_nested_qnames) {
 
     nqn.children(std::list<dogen::sml::nested_qname> { c, d });
 
-    const auto a(ip.parse_qname("std::unordered_map<std::string,my::type>"));
-    BOOST_LOG_SEV(lg, info) << "actual: " << a;
+    const std::string s("std::unordered_map<std::string,my::type>");
+    BOOST_LOG_SEV(lg, info) << "input: " << s;
+    const auto a(ip.parse_qname(s));
     BOOST_CHECK(asserter::assert_equals(nqn, a));
 }
 
@@ -306,8 +309,10 @@ BOOST_AUTO_TEST_CASE(parsing_vector_of_shared_ptr_produces_expected_nested_qname
     c.children(std::list<dogen::sml::nested_qname> { d });
     nqn.children(std::list<dogen::sml::nested_qname> { c });
 
-    const auto a(ip.parse_qname("std::vector<std::shared_ptr<std::string>>"));
-    BOOST_LOG_SEV(lg, info) << "actual: " << a;
+    const std::string s("std::vector<std::shared_ptr<std::string>>");
+    BOOST_LOG_SEV(lg, info) << "input: " << s;
+
+    const auto a(ip.parse_qname(s));
     BOOST_CHECK(asserter::assert_equals(nqn, a));
 }
 
@@ -336,8 +341,9 @@ BOOST_AUTO_TEST_CASE(parsing_scoped_string_with_no_scope_operators_produces_expe
     SETUP_TEST_LOG_SOURCE("parsing_scoped_string_with_no_scope_operators_produces_expected_result");
 
     const std::string i("value");
-    using dogen::dia_to_sml::identifier_parser;
+    BOOST_LOG_SEV(lg, info) << "input: " << i;
 
+    using dogen::dia_to_sml::identifier_parser;
     const auto a(identifier_parser::parse_scoped_name(i));
     BOOST_REQUIRE(a.size() == 1);
     BOOST_CHECK(a.front() == i);
@@ -347,6 +353,8 @@ BOOST_AUTO_TEST_CASE(parsing_scoped_string_with_many_scope_operators_produces_ex
     SETUP_TEST_LOG_SOURCE("parsing_scoped_string_with_many_scope_operators_produces_expected_result");
 
     const std::string i("a::b::c::d");
+    BOOST_LOG_SEV(lg, info) << "input: " << i;
+
     using dogen::dia_to_sml::identifier_parser;
     auto a(identifier_parser::parse_scoped_name(i));
     BOOST_LOG_SEV(lg, info) << "actual: " << a;
@@ -367,6 +375,8 @@ BOOST_AUTO_TEST_CASE(parsing_scoped_string_with_many_scope_operators_produces_ex
 BOOST_AUTO_TEST_CASE(parsing_empty_scoped_string_produces_expected_result) {
     SETUP_TEST_LOG_SOURCE("parsing_empty_scoped_string_produces_expected_result");
 
+    BOOST_LOG_SEV(lg, info) << "input: " << empty;
+
     using dogen::dia_to_sml::identifier_parser;
     const auto a(identifier_parser::parse_scoped_name(empty));
     BOOST_LOG_SEV(lg, info) << "actual: " << a;
@@ -377,8 +387,9 @@ BOOST_AUTO_TEST_CASE(parsing_scoped_string_with_only_scope_operators_produces_ex
     SETUP_TEST_LOG_SOURCE("parsing_scoped_string_with_only_scope_operators_produces_expected_result");
 
     const std::string i("::::");
-    using dogen::dia_to_sml::identifier_parser;
+    BOOST_LOG_SEV(lg, info) << "input: " << i;
 
+    using dogen::dia_to_sml::identifier_parser;
     auto a(identifier_parser::parse_scoped_name(i));
     BOOST_LOG_SEV(lg, info) << "actual: " << a;
     BOOST_REQUIRE(a.empty());
@@ -396,29 +407,33 @@ BOOST_AUTO_TEST_CASE(parsing_csv_string_with_no_commas_produces_expected_result)
     BOOST_CHECK(a.front() == i);
 }
 
-// BOOST_AUTO_TEST_CASE(parsing_csv_string_with_many_commas_produces_expected_result) {
-//     SETUP_TEST_LOG_SOURCE("parsing_csv_string_with_many_commas_produces_expected_result");
+BOOST_AUTO_TEST_CASE(parsing_csv_string_with_many_commas_produces_expected_result) {
+    SETUP_TEST_LOG_SOURCE("parsing_csv_string_with_many_commas_produces_expected_result");
 
-//     const std::string i("a,b,c,d");
-//     using dogen::dia_to_sml::identifier_parser;
-//     auto a(identifier_parser::parse_csv_string(i));
-//     BOOST_LOG_SEV(lg, info) << "actual: " << a;
+    const std::string i("a,b,c,d");
+    BOOST_LOG_SEV(lg, info) << "input: " << i;
 
-//     BOOST_REQUIRE(a.size() == 4);
-//     BOOST_CHECK(a.front() == "a");
-//     a.pop_front();
+    using dogen::dia_to_sml::identifier_parser;
+    auto a(identifier_parser::parse_csv_string(i));
+    BOOST_LOG_SEV(lg, info) << "actual: " << a;
 
-//     BOOST_CHECK(a.front() == "b");
-//     a.pop_front();
+    BOOST_REQUIRE(a.size() == 4);
+    BOOST_CHECK(a.front() == "a");
+    a.pop_front();
 
-//     BOOST_CHECK(a.front() == "c");
-//     a.pop_front();
+    BOOST_CHECK(a.front() == "b");
+    a.pop_front();
 
-//     BOOST_CHECK(a.front() == "d");
-// }
+    BOOST_CHECK(a.front() == "c");
+    a.pop_front();
+
+    BOOST_CHECK(a.front() == "d");
+}
 
 BOOST_AUTO_TEST_CASE(parsing_empty_csv_string_produces_expected_result) {
     SETUP_TEST_LOG_SOURCE("parsing_empty_csv_string_produces_expected_result");
+
+    BOOST_LOG_SEV(lg, info) << "input: " << empty;
 
     using dogen::dia_to_sml::identifier_parser;
     const auto a(identifier_parser::parse_csv_string(empty));
@@ -426,15 +441,16 @@ BOOST_AUTO_TEST_CASE(parsing_empty_csv_string_produces_expected_result) {
     BOOST_REQUIRE(a.empty());
 }
 
-// BOOST_AUTO_TEST_CASE(parsing_csv_string_with_only_commas_produces_expected_result) {
-//     SETUP_TEST_LOG_SOURCE("parsing_csv_string_with_only_commas_produces_expected_result");
+BOOST_AUTO_TEST_CASE(parsing_csv_string_with_only_commas_produces_expected_result) {
+    SETUP_TEST_LOG_SOURCE("parsing_csv_string_with_only_commas_produces_expected_result");
 
-//     const std::string i(",,");
-//     using dogen::dia_to_sml::identifier_parser;
+    const std::string i(",,");
+    BOOST_LOG_SEV(lg, info) << "input: " << i;
 
-//     auto a(identifier_parser::parse_csv_string(i));
-//     BOOST_LOG_SEV(lg, info) << "actual: " << a;
-//     BOOST_REQUIRE(a.empty());
-// }
+    using dogen::dia_to_sml::identifier_parser;
+    auto a(identifier_parser::parse_csv_string(i));
+    BOOST_LOG_SEV(lg, info) << "actual: " << a;
+    BOOST_REQUIRE(a.empty());
+}
 
 BOOST_AUTO_TEST_SUITE_END()
