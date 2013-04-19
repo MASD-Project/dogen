@@ -26,12 +26,37 @@ support like any other model type. The generated classes are:
   it uses the changeset for that type rather than the type itself; for
   all other cases, including containers, it uses the type itself.
 
-In addition, we need a new facet: =reflection=. To start off with all
-it contains is a list of classes in the model and a list of fields in
-each class.
+In addition, we need set of enumerations in =reflection=. To start off
+with all it contains is a list of classes in the model and a list of
+fields in each class.
 
 The =changeset= then has a container of =changeset_types= against a
 reflection class and field.
+
+Diff support is injected into the model just like keys. It also
+requires that reflection support gets injected too.
+
+*** Injection framework
+
+We need a more generic way of handling system types injection into
+models. This is because there is a number of things that can be
+derived from the existing model types:
+
+- keys
+- diff support
+- reflection
+- cache code
+- etc.
+
+So we need to:
+
+- rename =system_types_injector= to =injector=.
+- make it a composite of injectors that do the real work such as
+  =key_injector=. internally =injector= just delegates the work to
+  these classes.
+- injector decides which internal injectors to use based on options
+  passed in.
+- in the IoC spirit, we should probably create a =injector_interface=.
 
 *** Add visitor support
 
