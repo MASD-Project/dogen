@@ -52,50 +52,6 @@ bool test_primitive(const std::string& s) {
     return asserter::assert_equals(nqn, a);
 }
 
-std::pair<std::string, dogen::sml::nested_qname>
-single_template_parameter() {
-    dogen::sml::nested_qname nqn1;
-    dogen::sml::qname qn1;
-    qn1.type_name("type");
-    nqn1.type(qn1);
-
-    dogen::sml::qname qn2;
-    qn2.type_name("abc");
-    dogen::sml::nested_qname nqn2;
-    nqn2.type(qn2);
-    nqn1.children(std::list<dogen::sml::nested_qname> { nqn2 });
-
-    const std::string s("type<abc>");
-    return std::make_pair(s, nqn1);
-}
-
-std::pair<std::string, dogen::sml::nested_qname>
-two_template_parameters() {
-    dogen::sml::nested_qname nqn1;
-    dogen::sml::qname qn1;
-    qn1.type_name("type");
-    nqn1.type(qn1);
-
-    dogen::sml::qname qn2;
-    qn2.type_name("abc");
-    dogen::sml::nested_qname nqn2;
-    nqn2.type(qn2);
-
-    dogen::sml::qname qn3;
-    qn3.type_name("abc");
-    dogen::sml::nested_qname nqn3;
-    nqn2.type(qn3);
-    nqn1.children(std::list<dogen::sml::nested_qname> { nqn2, nqn3 });
-
-    const std::string s("type<abc,cde>");
-    return std::make_pair(s, nqn1);
-}
-
-// "std::vector<std::string>";
-// "std::vector<unsigned int>";
-// "std::unordered_map<std::string,my::type>";
-// "std::vector<std::shared_ptr<std::string>>";
-
 }
 
 using dogen::dia_to_sml::parsing_error;
@@ -219,45 +175,19 @@ BOOST_AUTO_TEST_CASE(parsing_string_with_single_template_argument_produces_expec
     SETUP_TEST_LOG_SOURCE("parsing_string_with_single_template_argument_produces_expected_nested_qnames");
 
     dogen::dia_to_sml::identifier_parser ip;
+    dogen::sml::nested_qname nqn;
+    dogen::sml::qname e;
+    e.type_name("type");
+    nqn.type(e);
 
-    auto i(single_template_parameter());
-    BOOST_LOG_SEV(lg, info) << "input: " << i.first;
-    BOOST_LOG_SEV(lg, info) << "expected: " << i.second;
-    auto a(ip.parse_qname(i.first));
-    BOOST_LOG_SEV(lg, info) << "actual: " << a;
-    BOOST_CHECK(asserter::assert_equals(i.second, a));
+    dogen::sml::qname f;
+    f.type_name("abc");
+    dogen::sml::nested_qname c;
+    c.type(f);
+    nqn.children(std::list<dogen::sml::nested_qname> { c });
 
-    // i = two_template_parameters();
-    // BOOST_LOG_SEV(lg, info) << "input: " << i.first;
-    // BOOST_LOG_SEV(lg, info) << "expected: " << i.second;
-    // a = ip.parse_qname(i.first);
-    // BOOST_LOG_SEV(lg, info) << "actual: " << a;
-    // BOOST_CHECK(asserter::assert_equals(i.second, a));
-
-    // s = "type<abc,cde>";
-    // BOOST_LOG_SEV(lg, info) << "input: " << s;
-    // a = ip.parse_qname(s);
-    // BOOST_LOG_SEV(lg, info) << "actual: " << a;
-
-    // s = "std::vector<std::string>";
-    // BOOST_LOG_SEV(lg, info) << "input: " << s;
-    // a = ip.parse_qname(s);
-    // BOOST_LOG_SEV(lg, info) << "actual: " << a;
-
-    // s = "std::vector<unsigned int>";
-    // BOOST_LOG_SEV(lg, info) << "input: " << s;
-    // a = ip.parse_qname(s);
-    // BOOST_LOG_SEV(lg, info) << "actual: " << a;
-
-    // s = "std::unordered_map<std::string,my::type>";
-    // BOOST_LOG_SEV(lg, info) << "input: " << s;
-    // a = ip.parse_qname(s);
-    // BOOST_LOG_SEV(lg, info) << "actual: " << a;
-
-    // s = "std::vector<std::shared_ptr<std::string>>";
-    // BOOST_LOG_SEV(lg, info) << "input: " << s;
-    // ip.parse_qname(s);
-    // BOOST_LOG_SEV(lg, info) << "actual: " << a;
+    const auto a(ip.parse_qname("type<abc>"));
+    BOOST_CHECK(asserter::assert_equals(nqn, a));
 }
 
 BOOST_AUTO_TEST_CASE(parsing_string_with_two_template_argument_produces_expected_nested_qnames) {
