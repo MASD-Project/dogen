@@ -11,6 +11,28 @@ This file contains all stories that haven't been assigned to a sprint.
 
 Stories that we intend to look at, at some point.
 
+*** Add diff support
+
+Dogen should have a =diff= option. When switched on, it would generate
+=diff= classes. These are system types like keys and live in a
+sub-folder of =types=. They have full serialisation, hashing etc
+support like any other model type. The generated classes are:
+
+- =differ=: for each model type a differ gets generated. this is a
+  top-level class that diffs two objects of the same type.
+- =changeset=: for each model type a changeset gets generated. it has
+  a variant called =changeset_types=, made up of all the types of all
+  properties in the model. if a model property has a model type then
+  it uses the changeset for that type rather than the type itself; for
+  all other cases, including containers, it uses the type itself.
+
+In addition, we need a new facet: =reflection=. To start off with all
+it contains is a list of classes in the model and a list of fields in
+each class.
+
+The =changeset= then has a container of =changeset_types= against a
+reflection class and field.
+
 *** Add visitor support
 
 The base class of an inheritance hierarchy should be markable with the
