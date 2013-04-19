@@ -57,8 +57,8 @@ using dogen::dia_to_sml::parsing_error;
 
 BOOST_AUTO_TEST_SUITE(identifier_parser)
 
-BOOST_AUTO_TEST_CASE(parsing_string_with_inner_namespaces_produces_expected_qname) {
-    SETUP_TEST_LOG("parsing_string_with_inner_namespaces_produces_expected_qname");
+BOOST_AUTO_TEST_CASE(parsing_string_with_many_nested_scopes_produces_expected_qname) {
+    SETUP_TEST_LOG("parsing_string_with_many_nested_scopes_produces_expected_qname");
     const std::string s("a::b::c::z");
     dogen::dia_to_sml::identifier_parser ip;
     const auto a(ip.parse_qname(s));
@@ -72,8 +72,8 @@ BOOST_AUTO_TEST_CASE(parsing_string_with_inner_namespaces_produces_expected_qnam
     BOOST_CHECK(asserter::assert_equals(nqn, a));
 }
 
-BOOST_AUTO_TEST_CASE(parsing_string_with_scope_operator_produces_expected_qname) {
-    SETUP_TEST_LOG("parsing_string_with_scope_operator_produces_expected_qname");
+BOOST_AUTO_TEST_CASE(parsing_string_without_scope_operator_produces_expected_qname) {
+    SETUP_TEST_LOG("parsing_string_without_scope_operator_produces_expected_qname");
     const std::string s("zeta");
     dogen::dia_to_sml::identifier_parser ip;
     const auto a(ip.parse_qname(s));
@@ -85,8 +85,8 @@ BOOST_AUTO_TEST_CASE(parsing_string_with_scope_operator_produces_expected_qname)
     BOOST_CHECK(asserter::assert_equals(nqn, a));
 }
 
-BOOST_AUTO_TEST_CASE(parsing_string_with_one_colon_produces_expected_qname) {
-    SETUP_TEST_LOG("parsing_string_with_one_colon_produces_expected_qname");
+BOOST_AUTO_TEST_CASE(parsing_string_with_one_scope_operator_produces_expected_qname) {
+    SETUP_TEST_LOG("parsing_string_with_one_scope_operator_produces_expected_qname");
     const std::string s("a::z");
     dogen::dia_to_sml::identifier_parser ip;
     const auto a(ip.parse_qname(s));
@@ -97,6 +97,13 @@ BOOST_AUTO_TEST_CASE(parsing_string_with_one_colon_produces_expected_qname) {
     e.type_name("z");
     nqn.type(e);
     BOOST_CHECK(asserter::assert_equals(nqn, a));
+}
+
+BOOST_AUTO_TEST_CASE(parsing_string_with_single_colon_fails_to_parse) {
+    SETUP_TEST_LOG("parsing_string_with_single_colon_fails_to_parse");
+    const std::string s("a:z");
+    dogen::dia_to_sml::identifier_parser ip;
+    BOOST_CHECK_THROW(ip.parse_qname(s), parsing_error);
 }
 
 BOOST_AUTO_TEST_CASE(string_starting_with_digit_fails_to_parse) {
@@ -308,6 +315,55 @@ BOOST_AUTO_TEST_CASE(names_that_partially_match_primitives_produce_expected_nest
     BOOST_CHECK(test_primitive("floa"));
     BOOST_CHECK(test_primitive("doubler"));
     BOOST_CHECK(test_primitive("doubl"));
+}
+
+BOOST_AUTO_TEST_CASE(parsing_scoped_string_with_no_scope_operators_produces_expected_result) {
+    SETUP_TEST_LOG("parsing_scoped_string_with_no_scope_operators_produces_expected_result");
+
+    const std::string i("value");
+    using dogen::dia_to_sml::identifier_parser;
+
+    const auto a(identifier_parser::parse_scoped_name(i));
+    BOOST_REQUIRE(a.size() == 1);
+    BOOST_CHECK(a.front() == i);
+}
+
+BOOST_AUTO_TEST_CASE(parsing_scoped_string_with_many_scope_operators_produces_expected_result) {
+    SETUP_TEST_LOG("parsing_scoped_string_with_many_scope_operators_produces_expected_result");
+
+    const std::string i("a::b::c::d");
+    using dogen::dia_to_sml::identifier_parser;
+    auto a(identifier_parser::parse_scoped_name(i));
+
+    BOOST_REQUIRE(a.size() == 4);
+    BOOST_CHECK(a.front() == "a");
+    a.pop_front();
+
+    BOOST_CHECK(a.front() == "b");
+    a.pop_front();
+
+    BOOST_CHECK(a.front() == "c");
+    a.pop_front();
+
+    BOOST_CHECK(a.front() == "d");
+}
+
+BOOST_AUTO_TEST_CASE(parsing_empty_scoped_string_produces_expected_result) {
+    SETUP_TEST_LOG("parsing_empty_scoped_string_produces_expected_result");
+
+    using dogen::dia_to_sml::identifier_parser;
+    const auto a(identifier_parser::parse_scoped_name(empty));
+    BOOST_REQUIRE(a.empty());
+}
+
+BOOST_AUTO_TEST_CASE(parsing_scoped_string_with_only_scope_operators_produces_expected_result) {
+    SETUP_TEST_LOG("parsing_scoped_string_with_only_scope_operators_produces_expected_result");
+
+    const std::string i("::::");
+    using dogen::dia_to_sml::identifier_parser;
+
+    auto a(identifier_parser::parse_scoped_name(i));
+    BOOST_REQUIRE(a.empty());
 }
 
 BOOST_AUTO_TEST_SUITE_END()

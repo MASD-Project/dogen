@@ -42,7 +42,7 @@ Clock summary at [2013-04-04 Thu 00:00]
 
 **** IMPLEMENTATION Add support for parsing UML notes
 
-*** Add support for multiple stereotypes to Dia                       :story:
+*** IMPLEMENTATION Add support for multiple stereotypes to Dia        :story:
 
 At present we can only have a single stereotype. We need to return a
 container of stereotypes.

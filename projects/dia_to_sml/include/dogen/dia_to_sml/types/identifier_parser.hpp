@@ -58,6 +58,7 @@ public:
 public:
     sml::nested_qname parse_qname(const std::string& n);
     static std::list<std::string> parse_scoped_name(const std::string& n);
+    static std::list<std::string> parse_csv_string(const std::string& n);
 
 private:
     const std::unordered_set<std::string> packages_;

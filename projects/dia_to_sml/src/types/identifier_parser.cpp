@@ -41,7 +41,8 @@ namespace {
 
 auto lg(logger_factory("dia_to_sml.identifier_parser"));
 
-const char* delimiter = "::";
+const char* scope_delimiter = "::";
+const char* comma_delimiter = "::";
 const std::string error_msg("Failed to parse string: ");
 using namespace boost::spirit;
 
@@ -197,7 +198,17 @@ parse_qname(const std::string& n) {
 
 std::list<std::string>
 identifier_parser::parse_scoped_name(const std::string& n) {
-    const boost::char_separator<char> sep(delimiter);
+    const boost::char_separator<char> sep(scope_delimiter);
+    boost::tokenizer<boost::char_separator<char> > tokens(n, sep);
+
+    std::list<std::string> r;
+    boost::copy(tokens, std::inserter(r, r.end()));
+    return r;
+}
+
+std::list<std::string>
+identifier_parser::parse_csv_string(const std::string& n) {
+    const boost::char_separator<char> sep(comma_delimiter);
     boost::tokenizer<boost::char_separator<char> > tokens(n, sep);
 
     std::list<std::string> r;
