@@ -33,7 +33,6 @@
 #include "dogen/sml/types/qname.hpp"
 #include "dogen/sml/types/package.hpp"
 #include "dogen/sml/types/pod.hpp"
-#include "dogen/dia_to_sml/types/stereotypes.hpp"
 #include "dogen/sml/types/meta_types.hpp"
 #include "dogen/sml/types/enumerator.hpp"
 #include "dogen/dia_to_sml/types/processed_object.hpp"
@@ -43,6 +42,7 @@
 #include "dogen/dia_to_sml/types/object_types.hpp"
 #include "dogen/dia_to_sml/types/context.hpp"
 #include "dogen/dia_to_sml/types/transformer_interface.hpp"
+#include "dogen/dia_to_sml/types/object_profile.hpp"
 
 namespace dogen {
 namespace dia_to_sml {
@@ -87,16 +87,11 @@ private:
         const unsigned int position) const;
 
     /**
-     * @brief Ensure the type of the object is a dia UML class.
-     */
-    void ensure_object_is_uml_class(const object_types ot) const;
-
-    /**
      * @brief Converts a object containing a class into an pod.
      *
      * @param o the Dia UML class
      */
-    void transform_pod(const processed_object& o);
+    void transform_pod(const object_profile& op, const processed_object& po);
 
     /**
      * @brief Converts a object containing a class into an enumeration.

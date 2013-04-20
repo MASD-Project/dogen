@@ -18,9 +18,24 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/dia_to_sml/serialization/context_ser.hpp"
-#include "dogen/dia_to_sml/serialization/node_ser.hpp"
-#include "dogen/dia_to_sml/serialization/object_profile_ser.hpp"
-#include "dogen/dia_to_sml/serialization/object_types_ser.hpp"
-#include "dogen/dia_to_sml/serialization/processed_object_ser.hpp"
-#include "dogen/dia_to_sml/serialization/processed_property_ser.hpp"
+#include <boost/throw_exception.hpp>
+#include "dogen/utility/log/logger.hpp"
+#include "dogen/dia_to_sml/types/profiling_error.hpp"
+#include "dogen/dia_to_sml/types/identifier_parser.hpp"
+#include "dogen/dia_to_sml/types/processed_object.hpp"
+#include "dogen/dia_to_sml/types/validator.hpp"
+
+namespace {
+
+using namespace dogen::utility::log;
+static logger lg(logger_factory("dia_to_sml.validator"));
+
+}
+
+namespace dogen {
+namespace dia_to_sml {
+
+void validator::validate(const object_profile&) {
+}
+
+} }

@@ -43,11 +43,11 @@ const std::string missing_name("Could not find name");
 const std::string empty_name("Dia object name is empty");
 const std::string missing_package("Missing package for dia object");
 
-const std::string enumeration_stereotype("#enumeration#");
-const std::string value_stereotype("#value#");
-const std::string entity_stereotype("#entity#");
-const std::string service_stereotype("#service#");
-const std::string exception_stereotype("#exception#");
+const std::string dia_enumeration_stereotype("#enumeration#");
+const std::string dia_exception_stereotype("#exception#");
+
+const std::string enumeration_stereotype("enumeration");
+const std::string exception_stereotype("exception");
 
 }
 
@@ -65,33 +65,33 @@ BOOST_AUTO_TEST_CASE(uml_class_with_no_stereotype_transforms_into_expected_proce
     BOOST_CHECK(o.id() == mock_object_factory::to_oject_id(0));
     BOOST_CHECK(!o.name().empty());
     BOOST_CHECK(o.object_type() == object_types::uml_class);
-    BOOST_CHECK(o.stereotype() == stereotypes::no_stereotype);
+    BOOST_CHECK(o.stereotype().empty());
 }
 
 BOOST_AUTO_TEST_CASE(uml_class_with_enumeration_stereotype_transforms_into_expected_processed_object) {
     SETUP_TEST_LOG_SOURCE("uml_class_with_enumeration_stereotype_transforms_into_processed_object");
     dogen::dia_to_sml::processor p;
-    const std::string st(enumeration_stereotype);
+    const std::string st(dia_enumeration_stereotype);
     const auto o(mock_object_factory::build_stereotyped_class(st, 0));
     const auto po(p.process(o));
     BOOST_LOG_SEV(lg, debug) << "actual:" << po;
     BOOST_CHECK(po.id() == mock_object_factory::to_oject_id(0));
     BOOST_CHECK(!po.name().empty());
     BOOST_CHECK(po.object_type() == object_types::uml_class);
-    BOOST_CHECK(po.stereotype() == stereotypes::enumeration);
+    BOOST_CHECK(po.stereotype() == enumeration_stereotype);
 }
 
 BOOST_AUTO_TEST_CASE(uml_class_with_exception_stereotype_transforms_into_expected_processed_object) {
     SETUP_TEST_LOG_SOURCE("uml_class_with_exception_stereotype_transforms_into_processed_object");
     dogen::dia_to_sml::processor p;
-    const std::string st(exception_stereotype);
+    const std::string st(dia_exception_stereotype);
     const auto o(mock_object_factory::build_stereotyped_class(st, 0));
     const auto po(p.process(o));
     BOOST_LOG_SEV(lg, debug) << "actual:" << po;
     BOOST_CHECK(po.id() == mock_object_factory::to_oject_id(0));
     BOOST_CHECK(!po.name().empty());
     BOOST_CHECK(po.object_type() == object_types::uml_class);
-    BOOST_CHECK(po.stereotype() == stereotypes::exception);
+    BOOST_CHECK(po.stereotype() == exception_stereotype);
 }
 
 BOOST_AUTO_TEST_CASE(uml_large_package_transforms_into_expected_package) {
@@ -104,7 +104,7 @@ BOOST_AUTO_TEST_CASE(uml_large_package_transforms_into_expected_package) {
     BOOST_CHECK(po.id() == mock_object_factory::to_oject_id(0));
     BOOST_CHECK(!po.name().empty());
     BOOST_CHECK(po.object_type() == object_types::uml_large_package);
-    BOOST_CHECK(po.stereotype() == stereotypes::no_stereotype);
+    BOOST_CHECK(po.stereotype().empty());
 }
 
 BOOST_AUTO_TEST_CASE(uml_class_in_package_transforms_into_expected_processed_object) {
@@ -117,7 +117,7 @@ BOOST_AUTO_TEST_CASE(uml_class_in_package_transforms_into_expected_processed_obj
     BOOST_CHECK(po.id() == mock_object_factory::to_oject_id(1));
     BOOST_CHECK(!po.name().empty());
     BOOST_CHECK(po.object_type() == object_types::uml_class);
-    BOOST_CHECK(po.stereotype() == stereotypes::no_stereotype);
+    BOOST_CHECK(po.stereotype().empty());
     BOOST_CHECK(po.child_node_id() == o[0].id());
 }
 
@@ -130,7 +130,7 @@ BOOST_AUTO_TEST_CASE(uml_generalization_transforms_into_expected_processed_objec
     BOOST_CHECK(po.id() == mock_object_factory::to_oject_id(0));
     BOOST_CHECK(po.name().empty());
     BOOST_CHECK(po.object_type() == object_types::uml_generalization);
-    BOOST_CHECK(po.stereotype() == stereotypes::no_stereotype);
+    BOOST_CHECK(po.stereotype().empty());
     BOOST_REQUIRE(po.connection());
     BOOST_REQUIRE(po.connection()->first == o[1].id());
     BOOST_REQUIRE(po.connection()->second == o[2].id());
@@ -145,7 +145,7 @@ BOOST_AUTO_TEST_CASE(uml_note_transforms_into_expected_processed_object) {
     BOOST_CHECK(po.id() == mock_object_factory::to_oject_id(0));
     BOOST_CHECK(po.name().empty());
     BOOST_CHECK(po.object_type() == object_types::uml_note);
-    BOOST_CHECK(po.stereotype() == stereotypes::no_stereotype);
+    BOOST_CHECK(po.stereotype().empty());
     BOOST_CHECK(!po.text().empty());
 }
 

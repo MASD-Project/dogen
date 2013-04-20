@@ -26,11 +26,12 @@
 #include <boost/algorithm/string/erase.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/dia_to_sml/types/transformation_error.hpp"
-#include "dogen/dia_to_sml/io/stereotypes_io.hpp"
 #include "dogen/dia_to_sml/io/object_types_io.hpp"
 #include "dogen/sml/types/enumeration.hpp"
 #include "dogen/sml/types/exception.hpp"
 #include "dogen/dia_to_sml/types/processed_object.hpp"
+#include "dogen/dia_to_sml/types/profiler.hpp"
+#include "dogen/dia_to_sml/types/validator.hpp"
 #include "dogen/dia_to_sml/types/transformer.hpp"
 
 namespace {
@@ -156,71 +157,57 @@ transform_property(const processed_property& p) {
     return r;
 }
 
-void transformer::transform_pod(const processed_object& o) {
-    BOOST_LOG_SEV(lg, debug) << "Object is a pod: " << o.id();
+void transformer::
+transform_pod(const object_profile& op, const processed_object& po) {
+    BOOST_LOG_SEV(lg, debug) << "Object is a pod: " << po.id();
+
+    sml::pod pod;
+    pod.category_type(sml::category_types::user_defined);
+
+    const std::string pkg_id(po.child_node_id());
+    using sml::meta_types;
+    pod.name(transform_qname(po.name(), meta_types::pod, pkg_id));
+
+    using sml::pod_types;
+    pod.pod_type(pod_types::value);
+    if (op.is_entity())
+        pod.pod_type(pod_types::entity);
+    else if (op.is_service())
+        pod.pod_type(pod_types::service);
+
 
     using sml::generation_types;
-    sml::pod pod;
     pod.generation_type(context_.is_target() ?
         generation_types::full_generation :
         generation_types::no_generation);
 
-    pod.category_type(sml::category_types::user_defined);
+    if (op.is_non_generatable() || op.is_service())
+        pod.generation_type(generation_types::partial_generation);
 
-    const std::string pkg_id(o.child_node_id());
-    using sml::meta_types;
-    pod.name(transform_qname(o.name(), meta_types::pod, pkg_id));
-
-    switch(o.stereotype()) {
-        case stereotypes::no_stereotype:
-            pod.pod_type(sml::pod_types::value);
-            break;
-    case stereotypes::entity:
-        pod.pod_type(sml::pod_types::entity);
-        break;
-    case stereotypes::value:
-        pod.pod_type(sml::pod_types::value);
-        break;
-    case stereotypes::nongeneratable:
-        pod.pod_type(sml::pod_types::value);
-        if (context_.is_target())
-            pod.generation_type(generation_types::partial_generation);
-        break;
-    case stereotypes::service:
-        pod.pod_type(sml::pod_types::service);
-        if (context_.is_target())
-            pod.generation_type(generation_types::partial_generation);
-        break;
-    default:
-        // FIXME
-        pod.pod_type(sml::pod_types::value);
-        break;
-    }
-
-    const auto pair(comments_parser_->parse(o.comment()));
+    const auto pair(comments_parser_->parse(po.comment()));
     pod.documentation(pair.first);
     pod.implementation_specific_parameters(pair.second);
 
-    for (const auto& p : o.properties())
+    for (const auto& p : po.properties())
         pod.properties().push_back(transform_property(p));
 
     if (pod.name().type_name().empty()) {
-        BOOST_LOG_SEV(lg, error) << empty_dia_object_name + o.id();
+        BOOST_LOG_SEV(lg, error) << empty_dia_object_name + po.id();
         BOOST_THROW_EXCEPTION(
-            transformation_error(empty_dia_object_name + o.id()));
+            transformation_error(empty_dia_object_name + po.id()));
     }
 
-    const auto i(context_.child_to_parent().find(o.id()));
+    const auto i(context_.child_to_parent().find(po.id()));
     if (i != context_.child_to_parent().end()) {
         const auto j(context_.dia_id_to_qname().find(i->second));
         if (j == context_.dia_id_to_qname().end()) {
             BOOST_LOG_SEV(lg, error) << "Object has a parent but "
                                      << " there is no QName mapping defined."
-                                     << " Child ID: '" << o.id()
+                                     << " Child ID: '" << po.id()
                                      << "' Parent ID: '" << i->second << "'";
 
             BOOST_THROW_EXCEPTION(
-                transformation_error(parent_not_found + o.id()));
+                transformation_error(parent_not_found + po.id()));
         }
 
         BOOST_LOG_SEV(lg, debug) << "Setting parent for: "
@@ -232,9 +219,9 @@ void transformer::transform_pod(const processed_object& o) {
                                  << pod.name().type_name();
     }
 
-    const auto j(context_.parent_ids().find(o.id()));
+    const auto j(context_.parent_ids().find(po.id()));
     pod.is_parent(j != context_.parent_ids().end());
-    context_.dia_id_to_qname().insert(std::make_pair(o.id(), pod.name()));
+    context_.dia_id_to_qname().insert(std::make_pair(po.id(), pod.name()));
 
     if (!pod.parent_name()) {
         context_.original_parent().insert(
@@ -277,17 +264,6 @@ void transformer::transform_pod(const processed_object& o) {
         }
     }
     context_.model().pods().insert(std::make_pair(pod.name(), pod));
-}
-
-void transformer::
-ensure_object_is_uml_class(const object_types ot) const {
-    if (ot == object_types::uml_class)
-        return;
-
-    BOOST_LOG_SEV(lg, error) << object_has_invalid_type << ot;
-    BOOST_THROW_EXCEPTION(
-        transformation_error(object_has_invalid_type +
-            boost::lexical_cast<std::string>(ot)));
 }
 
 sml::enumerator transformer::
@@ -425,35 +401,23 @@ void transformer::transform_exception(const processed_object& o) {
 void transformer::transform(const processed_object& o) {
     BOOST_LOG_SEV(lg, debug) << "Starting to transform: " << o.id();
 
-    if (o.object_type() == object_types::uml_large_package) {
+    profiler p;
+    const auto op(p.profile(o));
+
+    validator v;
+    v.validate(op);
+
+    if (op.is_uml_large_package())
         transform_package(o);
-        return;
-    }
-
-    if (o.object_type() == object_types::uml_note) {
+    else if (op.is_uml_note())
         transform_note(o);
-        return;
-    }
+    else if (op.is_enumeration())
+        transform_enumeration(o);
+    else if (op.is_exception())
+        transform_exception(o);
+    else
+        transform_pod(op, o);
 
-    ensure_object_is_uml_class(o.object_type());
-    switch(o.stereotype()) {
-    case stereotypes::no_stereotype:
-    case stereotypes::value:
-    case stereotypes::entity:
-    case stereotypes::service:
-    case stereotypes::nongeneratable:
-        transform_pod(o); break;
-    case stereotypes::enumeration:
-        transform_enumeration(o); break;
-    case stereotypes::exception:
-        transform_exception(o); break;
-    default:
-        BOOST_LOG_SEV(lg, error) << invalid_stereotype_in_graph
-                                 << o.stereotype();
-        BOOST_THROW_EXCEPTION(
-            transformation_error(invalid_stereotype_in_graph +
-                boost::lexical_cast<std::string>(o.stereotype())));
-    }
     BOOST_LOG_SEV(lg, debug) << "Transformed: " << o.id();
 }
 

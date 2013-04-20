@@ -18,9 +18,24 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/dia_to_sml/serialization/context_ser.hpp"
-#include "dogen/dia_to_sml/serialization/node_ser.hpp"
-#include "dogen/dia_to_sml/serialization/object_profile_ser.hpp"
-#include "dogen/dia_to_sml/serialization/object_types_ser.hpp"
-#include "dogen/dia_to_sml/serialization/processed_object_ser.hpp"
-#include "dogen/dia_to_sml/serialization/processed_property_ser.hpp"
+#ifndef DOGEN_DIA_TO_SML_SERIALIZATION_OBJECT_PROFILE_FWD_SER_HPP
+#define DOGEN_DIA_TO_SML_SERIALIZATION_OBJECT_PROFILE_FWD_SER_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include "dogen/dia_to_sml/types/object_profile_fwd.hpp"
+
+namespace boost {
+namespace serialization {
+
+template<class Archive>
+void save(Archive& ar, const dogen::dia_to_sml::object_profile& v, unsigned int version);
+
+template<class Archive>
+void load(Archive& ar, dogen::dia_to_sml::object_profile& v, unsigned int version);
+
+} }
+
+#endif

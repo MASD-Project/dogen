@@ -34,7 +34,6 @@
 #include "dogen/dia_to_sml/serialization/object_types_ser.hpp"
 #include "dogen/dia_to_sml/serialization/processed_object_ser.hpp"
 #include "dogen/dia_to_sml/serialization/processed_property_ser.hpp"
-#include "dogen/dia_to_sml/serialization/stereotypes_ser.hpp"
 
 #ifdef __linux__
 #include "eos/portable_iarchive.hpp"

@@ -18,32 +18,48 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_DIA_TO_SML_TEST_DATA_STEREOTYPES_TD_HPP
-#define DOGEN_DIA_TO_SML_TEST_DATA_STEREOTYPES_TD_HPP
+#ifndef DOGEN_DIA_TO_SML_TYPES_PROFILER_HPP
+#define DOGEN_DIA_TO_SML_TYPES_PROFILER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/dia_to_sml/types/stereotypes.hpp"
+#include <string>
+#include "dogen/dia_to_sml/types/object_types.hpp"
+#include "dogen/dia_to_sml/types/object_profile.hpp"
+#include "dogen/dia_to_sml/types/processed_object_fwd.hpp"
 
 namespace dogen {
 namespace dia_to_sml {
 
-class stereotypes_generator {
+/**
+ * @brief Generates a type profile for the processed object.
+ */
+class profiler {
 public:
-    stereotypes_generator();
-
-public:
-    typedef dogen::dia_to_sml::stereotypes result_type;
-
-public:
-    static void populate(const unsigned int position, result_type& v);
-    static result_type create(const unsigned int position);
-    result_type operator()();
+    profiler() = default;
+    profiler(const profiler&) = delete;
+    profiler(profiler&&) = default;
 
 private:
-    unsigned int position_;
+    /**
+     * @brief Given a string with a valid dia object type, updates the
+     * processed object type flags.
+     */
+    void process_object_type(object_profile& o, const object_types ot) const;
+
+    /**
+     * @brief Given a string with a valid stereotype, updates the
+     * profile's stereotype flags.
+     */
+    void process_stereotype(object_profile& o, const std::string& s) const;
+
+public:
+    /**
+     * @brief Perform the profiling.
+     */
+    object_profile profile(const processed_object& o);
 };
 
 } }

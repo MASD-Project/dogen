@@ -23,7 +23,6 @@
 #include "dogen/dia_to_sml/io/object_types_io.hpp"
 #include "dogen/dia_to_sml/io/processed_object_io.hpp"
 #include "dogen/dia_to_sml/io/processed_property_io.hpp"
-#include "dogen/dia_to_sml/io/stereotypes_io.hpp"
 
 
 inline std::string tidy_up_string(std::string s) {
@@ -84,7 +83,7 @@ std::ostream& operator<<(std::ostream& s, const processed_object& v) {
       << "\"id\": " << "\"" << tidy_up_string(v.id()) << "\"" << ", "
       << "\"name\": " << "\"" << tidy_up_string(v.name()) << "\"" << ", "
       << "\"object_type\": " << v.object_type() << ", "
-      << "\"stereotype\": " << v.stereotype() << ", "
+      << "\"stereotype\": " << "\"" << tidy_up_string(v.stereotype()) << "\"" << ", "
       << "\"comment\": " << "\"" << tidy_up_string(v.comment()) << "\"" << ", "
       << "\"child_node_id\": " << "\"" << tidy_up_string(v.child_node_id()) << "\"" << ", "
       << "\"connection\": " << v.connection() << ", "

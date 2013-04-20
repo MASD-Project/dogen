@@ -18,27 +18,18 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/dia_to_sml/test_data/stereotypes_td.hpp"
+#ifndef DOGEN_DIA_TO_SML_TYPES_VALIDATOR_FWD_HPP
+#define DOGEN_DIA_TO_SML_TYPES_VALIDATOR_FWD_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
 namespace dogen {
 namespace dia_to_sml {
 
-stereotypes_generator::stereotypes_generator() : position_(0) { }
-void stereotypes_generator::
-populate(const unsigned int position, result_type& v) {
-    v = static_cast<stereotypes>(position % 8);
-}
-
-stereotypes_generator::result_type
-stereotypes_generator::create(const unsigned int  position) {
-    result_type r;
-    stereotypes_generator::populate(position, r);
-    return r;
-}
-
-stereotypes_generator::result_type
-stereotypes_generator::operator()() {
-    return create(position_++);
-}
+class validator;
 
 } }
+
+#endif

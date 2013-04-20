@@ -18,20 +18,36 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_DIA_TO_SML_SERIALIZATION_STEREOTYPES_SER_HPP
-#define DOGEN_DIA_TO_SML_SERIALIZATION_STEREOTYPES_SER_HPP
+#ifndef DOGEN_DIA_TO_SML_TEST_DATA_OBJECT_PROFILE_TD_HPP
+#define DOGEN_DIA_TO_SML_TEST_DATA_OBJECT_PROFILE_TD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <boost/serialization/nvp.hpp>
-#include "dogen/dia_to_sml/types/stereotypes.hpp"
+#include "dogen/dia_to_sml/types/object_profile.hpp"
 
-template<class Archive>
-void serialize(Archive& ar, dogen::dia_to_sml::stereotypes& v, unsigned int /*version*/){
-    using boost::serialization::make_nvp;
-    ar & make_nvp("stereotypes", v);
-}
+namespace dogen {
+namespace dia_to_sml {
+
+class object_profile_generator {
+public:
+    object_profile_generator();
+
+public:
+    typedef dogen::dia_to_sml::object_profile result_type;
+
+public:
+    static void populate(const unsigned int position, result_type& v);
+    static result_type create(const unsigned int position);
+    result_type operator()();
+
+private:
+    unsigned int position_;
+public:
+    static result_type* create_ptr(const unsigned int position);
+};
+
+} }
 
 #endif

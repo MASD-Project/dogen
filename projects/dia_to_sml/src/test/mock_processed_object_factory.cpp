@@ -39,7 +39,6 @@ const std::string uml_message("UML - Message");
 const std::string uml_realization("UML - Realizes");
 const std::string dia_stereotype("stereotype");
 const std::string dia_name("name");
-const std::string enumeration_stereotype("#enumeration#");
 const std::string invalid_stereotype("Invalid stereotype: ");
 
 using dogen::dia_to_sml::processed_object;
@@ -79,7 +78,6 @@ std::string mock_processed_object_factory::to_oject_id(const unsigned int n) {
 processed_object mock_processed_object_factory::
 build_uml_note(const unsigned int n) {
     processed_object r(create_object(object_types::uml_note, n));
-    r.stereotype(stereotypes::no_stereotype);
 
     std::ostringstream s;
     s << "this is a comment";
@@ -90,7 +88,6 @@ build_uml_note(const unsigned int n) {
 processed_object mock_processed_object_factory::
 build_uml_note_with_marker(const unsigned int n) {
     processed_object r(create_object(object_types::uml_note, n));
-    r.stereotype(stereotypes::no_stereotype);
     std::ostringstream s;
     s << "#DOGEN COMMENT=true" << std::endl << std::endl
       << "this is a doxygen brief";
@@ -101,7 +98,6 @@ build_uml_note_with_marker(const unsigned int n) {
 processed_object mock_processed_object_factory::
 build_empty_uml_note(const unsigned int n) {
     processed_object r(create_object(object_types::uml_note, n));
-    r.stereotype(stereotypes::no_stereotype);
     return r;
 }
 
@@ -142,14 +138,12 @@ build_uml_note_with_marker_inside_large_package(unsigned int n) {
 processed_object mock_processed_object_factory::
 build_class(const unsigned int n) {
     processed_object r(create_named_object(object_types::uml_class, n));
-    r.stereotype(stereotypes::no_stereotype);
     return r;
 }
 
 processed_object mock_processed_object_factory::
 build_empty_named_class(const unsigned int n) {
     processed_object r(create_object(object_types::uml_class, n));
-    r.stereotype(stereotypes::no_stereotype);
     return r;
 }
 
@@ -183,7 +177,7 @@ build_class_inside_two_large_packages(unsigned int n)  {
 }
 
 processed_object mock_processed_object_factory::build_stereotyped_class(
-    const stereotypes st, const unsigned int n) {
+    const std::string& st, const unsigned int n) {
     processed_object r(create_named_object(object_types::uml_class, n));
     r.stereotype(st);
     return r;

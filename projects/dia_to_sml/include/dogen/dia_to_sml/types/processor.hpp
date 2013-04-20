@@ -31,7 +31,6 @@
 #include "dogen/dia/types/attribute_fwd.hpp"
 #include "dogen/dia/types/composite_fwd.hpp"
 #include "dogen/dia_to_sml/types/object_types.hpp"
-#include "dogen/dia_to_sml/types/stereotypes.hpp"
 #include "dogen/dia_to_sml/types/processed_object_fwd.hpp"
 
 namespace dogen {
@@ -57,12 +56,6 @@ private:
      * appropriate enum.
      */
     object_types parse_object_type(const std::string& ot) const;
-
-    /**
-     * @brief Given a string with a dia stereotype, returns the
-     * appropriate enum.
-     */
-    stereotypes parse_stereotype(const std::string& st) const;
 
 public:
     /**

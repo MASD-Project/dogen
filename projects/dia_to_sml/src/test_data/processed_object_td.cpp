@@ -22,7 +22,6 @@
 #include "dogen/dia_to_sml/test_data/object_types_td.hpp"
 #include "dogen/dia_to_sml/test_data/processed_object_td.hpp"
 #include "dogen/dia_to_sml/test_data/processed_property_td.hpp"
-#include "dogen/dia_to_sml/test_data/stereotypes_td.hpp"
 
 namespace {
 
@@ -35,11 +34,6 @@ std::string create_std_string(const unsigned int position) {
 dogen::dia_to_sml::object_types
 create_dogen_dia_to_sml_object_types(const unsigned int position) {
     return dogen::dia_to_sml::object_types_generator::create(position);
-}
-
-dogen::dia_to_sml::stereotypes
-create_dogen_dia_to_sml_stereotypes(const unsigned int position) {
-    return dogen::dia_to_sml::stereotypes_generator::create(position);
 }
 
 std::pair<std::string, std::string>
@@ -81,7 +75,7 @@ populate(const unsigned int position, result_type& v) {
     v.id(create_std_string(position + 0));
     v.name(create_std_string(position + 1));
     v.object_type(create_dogen_dia_to_sml_object_types(position + 2));
-    v.stereotype(create_dogen_dia_to_sml_stereotypes(position + 3));
+    v.stereotype(create_std_string(position + 3));
     v.comment(create_std_string(position + 4));
     v.child_node_id(create_std_string(position + 5));
     v.connection(create_boost_optional_std_pair_std_string_std_string_(position + 6));

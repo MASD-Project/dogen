@@ -18,9 +18,23 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/dia_to_sml/serialization/context_ser.hpp"
-#include "dogen/dia_to_sml/serialization/node_ser.hpp"
-#include "dogen/dia_to_sml/serialization/object_profile_ser.hpp"
-#include "dogen/dia_to_sml/serialization/object_types_ser.hpp"
-#include "dogen/dia_to_sml/serialization/processed_object_ser.hpp"
-#include "dogen/dia_to_sml/serialization/processed_property_ser.hpp"
+#ifndef DOGEN_DIA_TO_SML_IO_OBJECT_PROFILE_IO_HPP
+#define DOGEN_DIA_TO_SML_IO_OBJECT_PROFILE_IO_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include <iosfwd>
+#include "dogen/dia_to_sml/types/object_profile.hpp"
+
+namespace dogen {
+namespace dia_to_sml {
+
+std::ostream&
+operator<<(std::ostream& s,
+     const dogen::dia_to_sml::object_profile& v);
+
+} }
+
+#endif

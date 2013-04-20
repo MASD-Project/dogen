@@ -20,7 +20,7 @@
  */
 #include "dogen/dia_to_sml/hash/context_hash.hpp"
 #include "dogen/dia_to_sml/hash/node_hash.hpp"
+#include "dogen/dia_to_sml/hash/object_profile_hash.hpp"
 #include "dogen/dia_to_sml/hash/object_types_hash.hpp"
 #include "dogen/dia_to_sml/hash/processed_object_hash.hpp"
 #include "dogen/dia_to_sml/hash/processed_property_hash.hpp"
-#include "dogen/dia_to_sml/hash/stereotypes_hash.hpp"

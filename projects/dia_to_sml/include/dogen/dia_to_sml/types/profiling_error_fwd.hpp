@@ -18,9 +18,21 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/dia_to_sml/serialization/context_ser.hpp"
-#include "dogen/dia_to_sml/serialization/node_ser.hpp"
-#include "dogen/dia_to_sml/serialization/object_profile_ser.hpp"
-#include "dogen/dia_to_sml/serialization/object_types_ser.hpp"
-#include "dogen/dia_to_sml/serialization/processed_object_ser.hpp"
-#include "dogen/dia_to_sml/serialization/processed_property_ser.hpp"
+#ifndef DOGEN_DIA_TO_SML_TYPES_PROFILING_ERROR_FWD_HPP
+#define DOGEN_DIA_TO_SML_TYPES_PROFILING_ERROR_FWD_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include <boost/exception/info.hpp>
+#include <string>
+
+namespace dogen {
+namespace dia_to_sml {
+
+class profiling_error;
+
+} }
+
+#endif

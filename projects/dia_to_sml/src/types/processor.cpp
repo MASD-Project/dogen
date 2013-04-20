@@ -54,14 +54,6 @@ const std::string uml_note("UML - Note");
 const std::string uml_message("UML - Message");
 const std::string uml_realization("UML - Realizes");
 const std::string invalid_object_type("Invalid value for object type: ");
-const std::string invalid_stereotype("Invalid value for stereotype: ");
-
-const std::string enumeration("enumeration");
-const std::string exception("exception");
-const std::string entity("entity");
-const std::string value("value");
-const std::string service("service");
-const std::string nongeneratable("nongeneratable");
 
 const std::string error_parsing_object_type("Fail to parse object type: ");
 const std::string empty_dia_object_name("Dia object name is empty");
@@ -69,7 +61,6 @@ const std::string uml_attribute_expected("UML atttribute expected");
 const std::string text_attribute_expected("Text attribute expected");
 const std::string one_value_expected(
     "Attribute should have exactly one value");
-const std::string error_parsing_stereotype("Fail to parse stereotype: ");
 const std::string name_attribute_expected(
     "Could not find name attribute. ID: ");
 const std::string type_attribute_expected(
@@ -81,7 +72,6 @@ const std::string unexpected_attribute_value_size(
 const std::string invalid_type_string(
     "String provided with type did not parse into SML qnames: ");
 const std::string object_has_invalid_type("Invalid dia type: ");
-const std::string invalid_stereotype_in_graph("Invalid stereotype: ");
 const std::string unexpected_number_of_connections(
     "Expected 2 connections but found: ");
 
@@ -134,33 +124,6 @@ processor::parse_object_type(const std::string& ot) const {
     BOOST_THROW_EXCEPTION(processing_error(invalid_object_type + ot));
 }
 
-stereotypes processor::
-parse_stereotype(const std::string& st) const {
-    if (st.empty())
-        return stereotypes::no_stereotype;
-
-    if (st == enumeration)
-        return stereotypes::enumeration;
-
-    if (st == exception)
-        return stereotypes::exception;
-
-    if (st == entity)
-        return stereotypes::entity;
-
-    if (st == value)
-        return stereotypes::value;
-
-    if (st == service)
-        return stereotypes::service;
-
-    if (st == nongeneratable)
-        return stereotypes::nongeneratable;
-
-    BOOST_LOG_SEV(lg, error) << invalid_stereotype << st;
-    BOOST_THROW_EXCEPTION(processing_error(invalid_stereotype + st));
-}
-
 std::string processor::
 parse_string_attribute(const dia::attribute& a) const {
     const auto values(a.values());
@@ -211,12 +174,11 @@ processed_object processor::process(const dia::object& o) {
         r.connection(std::make_pair(parent.to(), child.to()));
     }
 
-    r.stereotype(stereotypes::no_stereotype);
     for (auto a : o.attributes()) {
         if (a.name() == dia_name)
             r.name(parse_string_attribute(a));
         else if (a.name() == dia_stereotype)
-            r.stereotype(parse_stereotype(parse_string_attribute(a)));
+            r.stereotype(parse_string_attribute(a));
         else if (a.name() == dia_comment)
             r.comment(parse_string_attribute(a));
         else if (a.name() ==  dia_text) {

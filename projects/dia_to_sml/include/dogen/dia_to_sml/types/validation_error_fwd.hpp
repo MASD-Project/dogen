@@ -18,17 +18,21 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_DIA_TO_SML_TYPES_STEREOTYPES_FWD_HPP
-#define DOGEN_DIA_TO_SML_TYPES_STEREOTYPES_FWD_HPP
+#ifndef DOGEN_DIA_TO_SML_TYPES_VALIDATION_ERROR_FWD_HPP
+#define DOGEN_DIA_TO_SML_TYPES_VALIDATION_ERROR_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
+#include <boost/exception/info.hpp>
+#include <string>
+
 namespace dogen {
 namespace dia_to_sml {
 
-enum class stereotypes : unsigned int;
+class validation_error;
+
 } }
 
 #endif

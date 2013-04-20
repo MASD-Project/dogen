@@ -27,7 +27,6 @@
 
 #include <array>
 #include "dogen/dia_to_sml/types/object_types.hpp"
-#include "dogen/dia_to_sml/types/stereotypes.hpp"
 #include "dogen/dia_to_sml/types/processed_object.hpp"
 
 namespace dogen {
@@ -111,7 +110,7 @@ public:
      * @param n identifier used for object ID generation.
      */
     static processed_object build_stereotyped_class(
-        const stereotypes st, const unsigned int n = 0);
+        const std::string& st, const unsigned int n = 0);
 
     /**
      * @brief Generates a new UML large package.

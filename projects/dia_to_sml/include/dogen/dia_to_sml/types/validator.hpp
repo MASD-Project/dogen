@@ -18,28 +18,34 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_DIA_TO_SML_TYPES_STEREOTYPES_HPP
-#define DOGEN_DIA_TO_SML_TYPES_STEREOTYPES_HPP
+#ifndef DOGEN_DIA_TO_SML_TYPES_VALIDATOR_HPP
+#define DOGEN_DIA_TO_SML_TYPES_VALIDATOR_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
+#include <string>
+#include "dogen/dia_to_sml/types/object_profile.hpp"
+
 namespace dogen {
 namespace dia_to_sml {
 
 /**
- * @brief Valid UML stereotypes for dogen.
+ * @brief Checks the profile for consistency.
  */
-enum class stereotypes : unsigned int {
-    invalid = 0, ///< Represents an uninitialised enum
-    enumeration = 1,
-    exception = 2,
-    entity = 3,
-    value = 4,
-    service = 5,
-    nongeneratable = 6,
-    no_stereotype = 7
+class validator {
+public:
+    validator() = default;
+    validator(const validator&) = delete;
+    validator(validator&&) = default;
+
+public:
+    /**
+     * @brief Throws an exception of the object profile is not
+     * considered to be valid.
+     */
+    void validate(const object_profile& op);
 };
 
 } }

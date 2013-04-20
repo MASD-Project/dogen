@@ -24,8 +24,7 @@ namespace dogen {
 namespace dia_to_sml {
 
 processed_object::processed_object()
-    : object_type_(static_cast<dogen::dia_to_sml::object_types>(0)),
-      stereotype_(static_cast<dogen::dia_to_sml::stereotypes>(0)) { }
+    : object_type_(static_cast<dogen::dia_to_sml::object_types>(0)) { }
 
 processed_object::processed_object(processed_object&& rhs)
     : id_(std::move(rhs.id_)),
@@ -42,7 +41,7 @@ processed_object::processed_object(
     const std::string& id,
     const std::string& name,
     const dogen::dia_to_sml::object_types& object_type,
-    const dogen::dia_to_sml::stereotypes& stereotype,
+    const std::string& stereotype,
     const std::string& comment,
     const std::string& child_node_id,
     const boost::optional<std::pair<std::string, std::string> >& connection,
@@ -129,12 +128,20 @@ void processed_object::object_type(const dogen::dia_to_sml::object_types& v) {
     object_type_ = v;
 }
 
-dogen::dia_to_sml::stereotypes processed_object::stereotype() const {
+const std::string& processed_object::stereotype() const {
     return stereotype_;
 }
 
-void processed_object::stereotype(const dogen::dia_to_sml::stereotypes& v) {
+std::string& processed_object::stereotype() {
+    return stereotype_;
+}
+
+void processed_object::stereotype(const std::string& v) {
     stereotype_ = v;
+}
+
+void processed_object::stereotype(const std::string&& v) {
+    stereotype_ = std::move(v);
 }
 
 const std::string& processed_object::comment() const {

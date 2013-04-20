@@ -18,9 +18,37 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/dia_to_sml/serialization/context_ser.hpp"
-#include "dogen/dia_to_sml/serialization/node_ser.hpp"
-#include "dogen/dia_to_sml/serialization/object_profile_ser.hpp"
-#include "dogen/dia_to_sml/serialization/object_types_ser.hpp"
-#include "dogen/dia_to_sml/serialization/processed_object_ser.hpp"
-#include "dogen/dia_to_sml/serialization/processed_property_ser.hpp"
+#ifndef DOGEN_DIA_TO_SML_TYPES_VALIDATION_ERROR_HPP
+#define DOGEN_DIA_TO_SML_TYPES_VALIDATION_ERROR_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include <boost/exception/info.hpp>
+#include <string>
+
+namespace dogen {
+namespace dia_to_sml {
+
+/**
+ * @brief The object profile is not valid.
+ */
+class validation_error : public virtual std::exception, public virtual boost::exception {
+public:
+    validation_error() = default;
+    ~validation_error() noexcept = default;
+
+public:
+    validation_error(const std::string& message) : message_(message) { }
+
+public:
+    const char* what() const noexcept { return(message_.c_str()); }
+
+private:
+    const std::string message_;
+};
+
+} }
+
+#endif

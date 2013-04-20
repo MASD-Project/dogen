@@ -33,7 +33,6 @@
 #include "dogen/dia_to_sml/serialization/processed_object_fwd_ser.hpp"
 #include "dogen/dia_to_sml/types/object_types.hpp"
 #include "dogen/dia_to_sml/types/processed_property.hpp"
-#include "dogen/dia_to_sml/types/stereotypes.hpp"
 
 namespace dogen {
 namespace dia_to_sml {
@@ -54,7 +53,7 @@ public:
         const std::string& id,
         const std::string& name,
         const dogen::dia_to_sml::object_types& object_type,
-        const dogen::dia_to_sml::stereotypes& stereotype,
+        const std::string& stereotype,
         const std::string& comment,
         const std::string& child_node_id,
         const boost::optional<std::pair<std::string, std::string> >& connection,
@@ -82,8 +81,10 @@ public:
     dogen::dia_to_sml::object_types object_type() const;
     void object_type(const dogen::dia_to_sml::object_types& v);
 
-    dogen::dia_to_sml::stereotypes stereotype() const;
-    void stereotype(const dogen::dia_to_sml::stereotypes& v);
+    const std::string& stereotype() const;
+    std::string& stereotype();
+    void stereotype(const std::string& v);
+    void stereotype(const std::string&& v);
 
     const std::string& comment() const;
     std::string& comment();
@@ -129,7 +130,7 @@ private:
     std::string id_;
     std::string name_;
     dogen::dia_to_sml::object_types object_type_;
-    dogen::dia_to_sml::stereotypes stereotype_;
+    std::string stereotype_;
     std::string comment_;
     std::string child_node_id_;
     boost::optional<std::pair<std::string, std::string> > connection_;
