@@ -181,7 +181,7 @@ transform_pod(const object_profile& op, const processed_object& po) {
         generation_types::full_generation :
         generation_types::no_generation);
 
-    if (op.is_non_generatable() || op.is_service())
+    if (context_.is_target() && (op.is_non_generatable() || op.is_service()))
         pod.generation_type(generation_types::partial_generation);
 
     const auto pair(comments_parser_->parse(po.comment()));

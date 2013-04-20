@@ -39,9 +39,9 @@ namespace engine {
 
 template<typename Archive>
 void register_types(Archive& ar) {
-    sml::register_types(ar);
-    config::register_types(ar);
     cpp::register_types(ar);
+    config::register_types(ar);
+    sml::register_types(ar);
 }
 
 template void register_types(boost::archive::polymorphic_oarchive& ar);

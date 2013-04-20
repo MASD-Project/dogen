@@ -492,7 +492,7 @@
             <dia:string>#impl_#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#cpp::generator#</dia:string>
+            <dia:string>#cpp::workflow#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -633,7 +633,7 @@
         <dia:point val="57.1875,75.625"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="20.135000000000002"/>
+        <dia:real val="20.134999999999998"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="6.5999999999999996"/>
@@ -887,7 +887,7 @@
         <dia:point val="59,92.8125"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="24.754999999999999"/>
+        <dia:real val="24.755000000000003"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="9"/>
@@ -1867,7 +1867,7 @@
         <dia:point val="-6,19"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="39.384999999999998"/>
+        <dia:real val="39.385000000000005"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="13.800000000000001"/>
@@ -3925,7 +3925,7 @@
         <dia:point val="46.3875,47.0625"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="45.6375,42.1531;51.1375,47.9875"/>
+        <dia:rectangle val="45.6375,42.2031;51.1375,47.9875"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
