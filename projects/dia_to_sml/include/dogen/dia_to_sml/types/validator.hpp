@@ -40,6 +40,33 @@ public:
     validator(const validator&) = delete;
     validator(validator&&) = default;
 
+private:
+    /**
+     * @brief Returns the number of stereotypes flags set that are not
+     * type related.
+     */
+    unsigned int count_stereotypes_non_types(const object_profile& op) const;
+
+    /**
+     * @brief Returns the number of type related stereotypes flags set.
+     */
+    unsigned int count_stereotypes_types(const object_profile& op) const;
+
+    /**
+     * @brief Checks the stereotype flags.
+     */
+    void validate_stereotypes(const object_profile& op) const;
+
+    /**
+     * @brief Returns the number of type flags set.
+     */
+    unsigned int count_types(const object_profile& op) const;
+
+    /**
+     * @brief Check the object type flags.
+     */
+    void validate_type(const object_profile& op);
+
 public:
     /**
      * @brief Throws an exception of the object profile is not

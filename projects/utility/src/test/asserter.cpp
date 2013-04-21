@@ -197,6 +197,10 @@ assert_contains(const std::string expected, const std::string actual) {
     using namespace dogen::utility::log;
     BOOST_LOG_SEV(lg_, debug) << "expected: " << expected;
     BOOST_LOG_SEV(lg_, debug) << "actual: " << actual;
+
+    if (actual.empty() && !expected.empty())
+        return false;
+
     return handle_assert(boost::contains(actual, expected), contains);
 }
 
