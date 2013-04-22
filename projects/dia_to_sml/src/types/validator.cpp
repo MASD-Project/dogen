@@ -71,20 +71,33 @@ void validator::validate_stereotypes(const object_profile& op) const {
     const auto types(count_stereotypes_types(op));
     const auto non_types(count_stereotypes_non_types(op));
 
-    if (!op.is_uml_class() && (types != 0 || non_types != 0))
-        throw validation_error(stereotypes_require_uml_class);
+    if (!op.is_uml_class() && (types != 0 || non_types != 0)) {
+        BOOST_LOG_SEV(lg, error) << stereotypes_require_uml_class;
+        BOOST_THROW_EXCEPTION(validation_error(stereotypes_require_uml_class));
+    }
 
-    if (types > 1)
-        throw validation_error(too_many_type_related_stereotypes);
+    if (types > 1) {
+        BOOST_LOG_SEV(lg, error) << too_many_type_related_stereotypes;
+        BOOST_THROW_EXCEPTION(validation_error(too_many_type_related_stereotypes));
+    }
 
     if ((op.is_enumeration() || op.is_exception()) &&
-        (op.is_versioned() || op.is_keyed()))
-        throw validation_error(
-            enumeration_and_exception_cant_have_further_stereotypes);
+        (op.is_versioned() || op.is_keyed())) {
+        BOOST_LOG_SEV(lg, error)
+            << enumeration_and_exception_cant_have_further_stereotypes;
+
+        BOOST_THROW_EXCEPTION(validation_error(
+                enumeration_and_exception_cant_have_further_stereotypes));
+    }
 
     if ((op.is_value() || op.is_service()) &&
-        (op.is_versioned() || op.is_keyed()))
-        throw validation_error(value_and_service_cant_have_further_stereotypes);
+        (op.is_versioned() || op.is_keyed())) {
+        BOOST_LOG_SEV(lg, error)
+            << value_and_service_cant_have_further_stereotypes;
+
+        BOOST_THROW_EXCEPTION(validation_error(
+                value_and_service_cant_have_further_stereotypes));
+    }
 }
 
 unsigned int validator::count_types(const object_profile& op) const {
@@ -104,11 +117,15 @@ unsigned int validator::count_types(const object_profile& op) const {
 void validator::validate_type(const object_profile& op) {
     const auto types(count_types(op));
 
-    if (types == 0)
-        throw validation_error(no_type_flags_set);
+    if (types == 0) {
+        BOOST_LOG_SEV(lg, error) << no_type_flags_set;
+        BOOST_THROW_EXCEPTION(validation_error(no_type_flags_set));
+    }
 
-    if (types > 1)
-        throw validation_error(too_many_type_flags_set);
+    if (types > 1) {
+        BOOST_LOG_SEV(lg, error) << too_many_type_flags_set;
+        BOOST_THROW_EXCEPTION(validation_error(too_many_type_flags_set));
+    }
 }
 
 void validator::validate(const object_profile& op) {

@@ -111,13 +111,17 @@ graph_builder::vertex_for_id(const std::string& id) {
 }
 
 void graph_builder::ensure_not_built() const {
-    if (built_)
-        throw building_error(error_add_after_build);
+    if (built_) {
+        BOOST_LOG_SEV(lg, error) << error_add_after_build;
+        BOOST_THROW_EXCEPTION(building_error(error_add_after_build));
+    }
 }
 
 void graph_builder::ensure_built() const {
-    if (!built_)
-        throw building_error(error_not_built);
+    if (!built_) {
+        BOOST_LOG_SEV(lg, error) << error_not_built;
+        BOOST_THROW_EXCEPTION(building_error(error_not_built));
+    }
 }
 
 bool graph_builder::is_relevant(const object_types ot) const {
