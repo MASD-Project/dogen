@@ -60,6 +60,11 @@ container of stereotypes.
 We need a validator class that takes a list of stereotypes and ensures
 that they can be combined.
 
+*** COMPLETED Optional io formatter has no space between stream and inserter :story:
+    CLOSED: [2013-04-22 Mon 23:06]
+
+Minor typo on formatter, should have used spaced inserter.
+
 *** Re-implement key support                                          :story:
 
 - create a new stereotype of keyed. when set, it results in the
@@ -117,10 +122,6 @@ appropriate conversions.
 It should be possible to pass in a string value as an implementation
 specific parameter that tells dogen what string to use for debug
 dumping.
-
-*** Optional io formatter has no space between stream and inserter    :story:
-
-Minor typo on formatter, should have used spaced inserter.
 
 *** Use explicit casting for versioned to unversioned conversions     :story:
     CLOCK: [2012-11-22 Thu 08:44]--[2012-11-22 Thu 09:20] =>  0:36
