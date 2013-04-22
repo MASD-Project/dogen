@@ -21,7 +21,6 @@
 #include <sstream>
 #include <boost/lexical_cast.hpp>
 #include <boost/throw_exception.hpp>
-#include <boost/algorithm/string/trim.hpp>
 #include <boost/algorithm/string/erase.hpp>
 #include <boost/graph/depth_first_search.hpp>
 #include "dogen/utility/log/logger.hpp"

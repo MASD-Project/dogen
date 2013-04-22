@@ -22,6 +22,7 @@
 #include <boost/tokenizer.hpp>
 #include <boost/range/algorithm.hpp>
 #include <boost/spirit/include/qi.hpp>
+#include <boost/algorithm/string/trim.hpp>
 #include <boost/spirit/include/phoenix_function.hpp>
 #include <boost/spirit/include/phoenix_stl.hpp>
 #include <boost/spirit/include/phoenix_core.hpp>
@@ -212,7 +213,10 @@ identifier_parser::parse_csv_string(const std::string& n) {
     boost::tokenizer<boost::char_separator<char> > tokens(n, sep);
 
     std::list<std::string> r;
-    boost::copy(tokens, std::inserter(r, r.end()));
+    for (auto t : tokens) {
+        boost::trim(t);
+        r.push_back(t);
+    }
     return r;
 }
 

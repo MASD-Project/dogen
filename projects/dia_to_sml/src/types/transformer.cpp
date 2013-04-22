@@ -22,8 +22,6 @@
 #include <boost/variant/get.hpp>
 #include <boost/lexical_cast.hpp>
 #include <boost/throw_exception.hpp>
-#include <boost/algorithm/string/trim.hpp>
-#include <boost/algorithm/string/erase.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/dia_to_sml/types/transformation_error.hpp"
 #include "dogen/dia_to_sml/io/object_types_io.hpp"

@@ -453,4 +453,34 @@ BOOST_AUTO_TEST_CASE(parsing_csv_string_with_only_commas_produces_expected_resul
     BOOST_REQUIRE(a.empty());
 }
 
+BOOST_AUTO_TEST_CASE(parsing_csv_string_with_spaces_produces_expected_result) {
+    SETUP_TEST_LOG_SOURCE("parsing_csv_string_with_spaces_produces_expected_result");
+
+    const std::string i(" a, b, c ,d,   e,f   ");
+    BOOST_LOG_SEV(lg, info) << "input: " << i;
+
+    using dogen::dia_to_sml::identifier_parser;
+    auto a(identifier_parser::parse_csv_string(i));
+    BOOST_LOG_SEV(lg, info) << "actual: " << a;
+
+    BOOST_REQUIRE(a.size() == 6);
+    BOOST_CHECK(a.front() == "a");
+    a.pop_front();
+
+    BOOST_CHECK(a.front() == "b");
+    a.pop_front();
+
+    BOOST_CHECK(a.front() == "c");
+    a.pop_front();
+
+    BOOST_CHECK(a.front() == "d");
+    a.pop_front();
+
+    BOOST_CHECK(a.front() == "e");
+    a.pop_front();
+
+    BOOST_CHECK(a.front() == "f");
+    a.pop_front();
+}
+
 BOOST_AUTO_TEST_SUITE_END()
