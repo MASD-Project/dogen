@@ -40,7 +40,7 @@
 #include "dogen/engine/types/backends/factory.hpp"
 #include "dogen/sml/types/workflow.hpp"
 #include "dogen/sml/io/model_io.hpp"
-#include "dogen/engine/types/model_source.hpp"
+#include "dogen/engine/types/provider.hpp"
 #include "dogen/engine/types/persister.hpp"
 #include "dogen/engine/types/workflow.hpp"
 
@@ -144,17 +144,29 @@ void workflow::generate(const sml::model& m) const {
 }
 
 boost::optional<sml::model> workflow::make_generatable_model() const {
+    bool is_target(false);
+    provider pro(settings_);
+    std::list<sml::model> references;
+    for (const auto ref : settings_.modeling().references()) {
+        const auto path(ref.path());
+        const auto epp(ref.external_package_path());
+        references.push_back(pro.provide(path, epp, is_target));
+    }
+
+    is_target = true;
+    const auto path(settings_.modeling().target());
+    const auto epp(settings_.modeling().external_package_path());
+    const sml::model target(pro.provide(path, epp, is_target));
+
     const bool add_system_models(true);
     const bool add_versioning_types(!settings_.cpp().disable_versioning());
     sml::workflow w(add_system_models, add_versioning_types);
-
-    model_source source(settings_);
-    const auto pair(w.execute(source));
+    const auto pair(w.execute(target, references));
     const auto& m(pair.second);
 
     BOOST_LOG_SEV(lg, debug) << "Merged model: " << m;
-    persister p(settings_);
-    p.persist(m, merged);
+    persister per(settings_);
+    per.persist(m, merged);
 
     BOOST_LOG_SEV(lg, debug) << "Totals: pods: " << m.pods().size()
                              << " packages: " << m.packages().size()

@@ -18,51 +18,37 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_SML_TYPES_WORKFLOW_HPP
-#define DOGEN_SML_TYPES_WORKFLOW_HPP
+#ifndef DOGEN_DIA_TO_SML_TYPES_PROVIDER_INTERFACE_HPP
+#define DOGEN_DIA_TO_SML_TYPES_PROVIDER_INTERFACE_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <list>
-#include <utility>
+#include <boost/filesystem/path.hpp>
 #include "dogen/sml/types/model.hpp"
-#include "dogen/sml/types/merger.hpp"
 
 namespace dogen {
-namespace sml {
+namespace engine {
 
-class workflow {
+/**
+ * @brief Given a path to a dia diagram, provides the corresponding
+ * SML model.
+ */
+class provider_interface {
 public:
-    workflow(const workflow&) = default;
-    ~workflow() = default;
-    workflow(workflow&&) = default;
-    workflow& operator=(const workflow&) = default;
+    provider_interface() = default;
+    provider_interface(const provider_interface&) = delete;
+    provider_interface(provider_interface&&) = default;
+    virtual ~provider_interface() noexcept = 0;
 
 public:
-    workflow();
-    workflow(const bool add_system_models, const bool add_versioning_types);
-
-private:
-    void add_system_models();
-    void add_references(const std::list<model>& references);
-    void add_target(const model& target);
-
     /**
-     * @brief Returns true if there are any types that require code
-     * generation, false otherwise.
+     * @brief Provide the model.
      */
-    bool has_generatable_types(const sml::model& m) const;
-
-public:
-    std::pair<bool, model>
-    execute(const model& target, const std::list<model>& references);
-
-private:
-    const bool add_system_models_;
-    const bool add_versioning_types_;
-    merger merger_;
+    virtual sml::model provide(const boost::filesystem::path& p,
+        const std::string& external_package_path,
+        const bool is_target = false) = 0;
 };
 
 } }

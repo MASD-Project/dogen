@@ -68,26 +68,26 @@ void workflow::add_system_models() {
     merger_.add(sml::boost_model_factory::create());
 }
 
-void workflow::add_references(const model_source_interface& source) {
-    system_types_injector sti(add_versioning_types_);
-    for (auto& r : source.references()) {
-        sti.inject(r);
+void workflow::add_references(const std::list<model>& references) {
+    system_types_injector i(add_versioning_types_);
+    for (auto r : references) {
+        i.inject(r);
         merger_.add(r);
     }
 }
 
-void workflow::add_target(const model_source_interface& source) {
-    system_types_injector sti(add_versioning_types_);
-    auto t(source.target());
-    sti.inject(t);
+void workflow::add_target(const model& target) {
+    system_types_injector i(add_versioning_types_);
+    auto t(target);
+    i.inject(t);
     merger_.add_target(t);
 }
 
 std::pair<bool, model> workflow::
-execute(const model_source_interface& source) {
+execute(const model& target, const std::list<model>& references) {
     add_system_models();
-    add_references(source);
-    add_target(source);
+    add_target(target);
+    add_references(references);
 
     const auto r(merger_.merge());
     return std::pair<bool, model> { has_generatable_types(r), r };
