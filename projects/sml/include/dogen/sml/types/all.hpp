@@ -28,7 +28,6 @@
 #include "dogen/sml/types/merging_error.hpp"
 #include "dogen/sml/types/meta_types.hpp"
 #include "dogen/sml/types/model.hpp"
-#include "dogen/sml/types/model_source_interface.hpp"
 #include "dogen/sml/types/nested_qname.hpp"
 #include "dogen/sml/types/package.hpp"
 #include "dogen/sml/types/pod.hpp"

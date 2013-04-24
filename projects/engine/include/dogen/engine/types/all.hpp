@@ -23,7 +23,6 @@
 #include "dogen/engine/types/backends/factory.hpp"
 #include "dogen/engine/types/generation_failure.hpp"
 #include "dogen/engine/types/housekeeper.hpp"
-#include "dogen/engine/types/model_source.hpp"
 #include "dogen/engine/types/outputters/factory.hpp"
 #include "dogen/engine/types/outputters/file_outputter.hpp"
 #include "dogen/engine/types/outputters/outputter.hpp"
