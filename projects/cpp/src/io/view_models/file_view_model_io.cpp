@@ -41,7 +41,7 @@ inline std::ostream& operator<<(std::ostream& s, const boost::optional<dogen::cp
         s << "\"data\": " << *v;
     else
         s << "\"data\": ""\"<empty>\"";
-    s<< " }";
+    s << " }";
     return s;
 }
 
@@ -56,7 +56,7 @@ inline std::ostream& operator<<(std::ostream& s, const boost::optional<dogen::cp
         s << "\"data\": " << *v;
     else
         s << "\"data\": ""\"<empty>\"";
-    s<< " }";
+    s << " }";
     return s;
 }
 
@@ -71,7 +71,7 @@ inline std::ostream& operator<<(std::ostream& s, const boost::optional<dogen::cp
         s << "\"data\": " << *v;
     else
         s << "\"data\": ""\"<empty>\"";
-    s<< " }";
+    s << " }";
     return s;
 }
 
@@ -86,7 +86,7 @@ inline std::ostream& operator<<(std::ostream& s, const boost::optional<dogen::cp
         s << "\"data\": " << *v;
     else
         s << "\"data\": ""\"<empty>\"";
-    s<< " }";
+    s << " }";
     return s;
 }
 
@@ -123,7 +123,7 @@ inline std::ostream& operator<<(std::ostream& s, const boost::optional<dogen::cp
         s << "\"data\": " << *v;
     else
         s << "\"data\": ""\"<empty>\"";
-    s<< " }";
+    s << " }";
     return s;
 }
 
