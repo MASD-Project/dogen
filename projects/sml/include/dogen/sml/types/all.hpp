@@ -24,6 +24,7 @@
 #include "dogen/sml/types/enumerator.hpp"
 #include "dogen/sml/types/exception.hpp"
 #include "dogen/sml/types/generation_types.hpp"
+#include "dogen/sml/types/injector.hpp"
 #include "dogen/sml/types/merger.hpp"
 #include "dogen/sml/types/merging_error.hpp"
 #include "dogen/sml/types/meta_types.hpp"
@@ -38,5 +39,4 @@
 #include "dogen/sml/types/qname.hpp"
 #include "dogen/sml/types/reference.hpp"
 #include "dogen/sml/types/std_model_factory.hpp"
-#include "dogen/sml/types/system_types_injector.hpp"
 #include "dogen/sml/types/workflow.hpp"

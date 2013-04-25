@@ -19,13 +19,13 @@
  *
  */
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/sml/types/system_types_injector.hpp"
+#include "dogen/sml/types/injector.hpp"
 
 using namespace dogen::utility::log;
 
 namespace {
 
-auto lg(logger_factory("sml.system_types_injector"));
+auto lg(logger_factory("sml.injector"));
 
 const std::string empty;
 const std::string merged("merged_");
@@ -46,12 +46,12 @@ const std::string invalid_archive_type("Invalid or unexpected archive type");
 namespace dogen {
 namespace sml {
 
-system_types_injector::system_types_injector() : add_versioning_types_(true) {}
+injector::injector() : add_versioning_types_(true) {}
 
-system_types_injector::system_types_injector(const bool add_versioning_types)
+injector::injector(const bool add_versioning_types)
     : add_versioning_types_(add_versioning_types) { }
 
-pod system_types_injector::
+pod injector::
 create_key_system_pod(const sml::pod& p, const bool is_versioned) const {
     sml::qname qn;
     qn.type_name(p.name().type_name() + "_" +
@@ -97,7 +97,7 @@ create_key_system_pod(const sml::pod& p, const bool is_versioned) const {
     return r;
 }
 
-void system_types_injector::inject(model& m) const {
+void injector::inject(model& m) const {
     if (!add_versioning_types_) {
         BOOST_LOG_SEV(lg, warn) << "Keys are NOT enabled, "
                                 << "NOT injecting them into model.";

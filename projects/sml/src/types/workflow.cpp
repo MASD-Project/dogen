@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/sml/types/system_types_injector.hpp"
+#include "dogen/sml/types/injector.hpp"
 #include "dogen/sml/types/primitive_model_factory.hpp"
 #include "dogen/sml/types/std_model_factory.hpp"
 #include "dogen/sml/types/boost_model_factory.hpp"
@@ -69,7 +69,7 @@ void workflow::add_system_models() {
 }
 
 void workflow::add_references(const std::list<model>& references) {
-    system_types_injector i(add_versioning_types_);
+    injector i(add_versioning_types_);
     for (auto r : references) {
         i.inject(r);
         merger_.add(r);
@@ -77,7 +77,7 @@ void workflow::add_references(const std::list<model>& references) {
 }
 
 void workflow::add_target(const model& target) {
-    system_types_injector i(add_versioning_types_);
+    injector i(add_versioning_types_);
     auto t(target);
     i.inject(t);
     merger_.add_target(t);
