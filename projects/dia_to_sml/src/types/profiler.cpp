@@ -66,22 +66,24 @@ void profiler::
 process_stereotype(object_profile& o, const std::string& s) const {
     const auto stereotypes(identifier_parser::parse_csv_string(s));
 
-    for (const auto stereotype : stereotypes) {
-        if (s == enumeration)
+    for (const auto& stereotype : stereotypes) {
+        if (stereotype == enumeration)
             o.is_enumeration(true);
-        else if (s == exception)
+        else if (stereotype == exception)
             o.is_exception(true);
-        else if (s == entity)
+        else if (stereotype == entity)
             o.is_entity(true);
-        else if (s == value)
+        else if (stereotype == value)
             o.is_value(true);
-        else if (s == service)
+        else if (stereotype == service)
             o.is_service(true);
-        else if (s == nongeneratable)
+        else if (stereotype == nongeneratable)
             o.is_non_generatable(true);
         else {
-            BOOST_LOG_SEV(lg, error) << invalid_stereotype << s;
-            BOOST_THROW_EXCEPTION(profiling_error(invalid_stereotype + s));
+            BOOST_LOG_SEV(lg, error) << invalid_stereotype << "'"
+                                     << stereotype << "'";
+            BOOST_THROW_EXCEPTION(
+                profiling_error(invalid_stereotype + stereotype));
         }
     }
 }

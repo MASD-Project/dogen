@@ -20,6 +20,7 @@
  */
 #include <functional>
 #include <boost/tokenizer.hpp>
+#include <boost/throw_exception.hpp>
 #include <boost/range/algorithm.hpp>
 #include <boost/spirit/include/qi.hpp>
 #include <boost/algorithm/string/trim.hpp>
@@ -30,9 +31,10 @@
 #include <boost/spirit/include/phoenix_operator.hpp>
 #include <boost/spirit/include/phoenix_object.hpp>
 #include <boost/spirit/repository/include/qi_distinct.hpp>
-#include <boost/throw_exception.hpp>
+#include "dogen/sml/io/nested_qname_io.hpp"
 #include "dogen/dia_to_sml/types/parsing_error.hpp"
 #include "dogen/dia_to_sml/types/nested_qname_builder.hpp"
+#include "dogen/utility/io/list_io.hpp"
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/dia_to_sml/types/identifier_parser.hpp"
 
@@ -183,6 +185,8 @@ parse_qname(const std::string& n) {
     std::string::const_iterator it(n.begin());
     std::string::const_iterator end(n.end());
 
+    BOOST_LOG_SEV(lg, debug) << "parsing qname: " << n;
+
     std::shared_ptr<nested_qname_builder>
         builder(new nested_qname_builder(packages_,
                 external_package_path_, model_name_));
@@ -194,21 +198,28 @@ parse_qname(const std::string& n) {
         BOOST_THROW_EXCEPTION(parsing_error(error_msg + n));
     }
 
-    return builder->build();
+    const auto r(builder->build());
+    BOOST_LOG_SEV(lg, debug) << "result: " << r;
+    return r;
 }
 
 std::list<std::string>
 identifier_parser::parse_scoped_name(const std::string& n) {
+    BOOST_LOG_SEV(lg, debug) << "parsing scoped name: " << n;
+
     const boost::char_separator<char> sep(scope_delimiter);
     boost::tokenizer<boost::char_separator<char> > tokens(n, sep);
 
     std::list<std::string> r;
     boost::copy(tokens, std::inserter(r, r.end()));
+    BOOST_LOG_SEV(lg, debug) << "result: " << r;
     return r;
 }
 
 std::list<std::string>
 identifier_parser::parse_csv_string(const std::string& n) {
+    BOOST_LOG_SEV(lg, debug) << "parsing csv string: " << n;
+
     const boost::char_separator<char> sep(comma_delimiter);
     boost::tokenizer<boost::char_separator<char> > tokens(n, sep);
 
@@ -217,6 +228,8 @@ identifier_parser::parse_csv_string(const std::string& n) {
         boost::trim(t);
         r.push_back(t);
     }
+
+    BOOST_LOG_SEV(lg, debug) << "result: " << r;
     return r;
 }
 

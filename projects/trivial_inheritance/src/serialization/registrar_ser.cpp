@@ -30,6 +30,8 @@
 #include "dogen/trivial_inheritance/serialization/child_of_a_child2_ser.hpp"
 #include "dogen/trivial_inheritance/serialization/child_with_members_ser.hpp"
 #include "dogen/trivial_inheritance/serialization/child_without_members_ser.hpp"
+#include "dogen/trivial_inheritance/serialization/descendant1_ser.hpp"
+#include "dogen/trivial_inheritance/serialization/descendant2_ser.hpp"
 #include "dogen/trivial_inheritance/serialization/pkg1/child_ser.hpp"
 #include "dogen/trivial_inheritance/serialization/pkg3/child_ser.hpp"
 #include "dogen/trivial_inheritance/serialization/pkg4/child_ser.hpp"
@@ -48,6 +50,8 @@ void register_types(Archive& ar) {
     ar.template register_type<dogen::trivial_inheritance::child_of_a_child2>();
     ar.template register_type<dogen::trivial_inheritance::child_with_members>();
     ar.template register_type<dogen::trivial_inheritance::child_without_members>();
+    ar.template register_type<dogen::trivial_inheritance::descendant1>();
+    ar.template register_type<dogen::trivial_inheritance::descendant2>();
     ar.template register_type<dogen::trivial_inheritance::pkg1::child>();
     ar.template register_type<dogen::trivial_inheritance::pkg3::child>();
     ar.template register_type<dogen::trivial_inheritance::pkg4::child>();
