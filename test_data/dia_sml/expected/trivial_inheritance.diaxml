@@ -12269,7 +12269,7 @@
 								<item>
 									<which>8</which>
 									<value>
-										<value>-13.0219,-4.91667;-8.95688,-1.81667</value>
+										<value>-13.0219,-4.91667;-4.72188,-1.81667</value>
 									</value>
 								</item>
 							</values>
@@ -12295,7 +12295,7 @@
 								<item>
 									<which>1</which>
 									<value>
-										<value>3.9649999999999999</value>
+										<value>8.1999999999999993</value>
 									</value>
 								</item>
 							</values>
@@ -12334,7 +12334,7 @@
 								<item>
 									<which>6</which>
 									<value>
-										<value>#value#</value>
+										<value>#value, visitable#</value>
 									</value>
 								</item>
 							</values>
@@ -13274,7 +13274,7 @@
 								<item>
 									<which>5</which>
 									<value>
-										<value>-10.9894,-1.86667</value>
+										<value>-8.87188,-1.86667</value>
 									</value>
 								</item>
 							</values>
@@ -13287,7 +13287,7 @@
 								<item>
 									<which>8</which>
 									<value>
-										<value>-11.8394,-1.91667;-1.43854,6.18333</value>
+										<value>-9.72188,-1.91667;-1.43854,6.18333</value>
 									</value>
 								</item>
 							</values>
@@ -13320,13 +13320,13 @@
 								<item>
 									<which>5</which>
 									<value>
-										<value>-10.9894,-1.86667</value>
+										<value>-8.87188,-1.86667</value>
 									</value>
 								</item>
 								<item>
 									<which>5</which>
 									<value>
-										<value>-10.9894,1.8</value>
+										<value>-8.87188,1.8</value>
 									</value>
 								</item>
 								<item>
@@ -13971,7 +13971,7 @@
 								<item>
 									<which>5</which>
 									<value>
-										<value>-10.9894,-1.86667</value>
+										<value>-8.87188,-1.86667</value>
 									</value>
 								</item>
 							</values>
@@ -13984,7 +13984,7 @@
 								<item>
 									<which>8</which>
 									<value>
-										<value>-14.2802,-1.91667;-10.1394,6.45833</value>
+										<value>-14.2802,-1.91667;-8.02188,6.45833</value>
 									</value>
 								</item>
 							</values>
@@ -14017,13 +14017,13 @@
 								<item>
 									<which>5</which>
 									<value>
-										<value>-10.9894,-1.86667</value>
+										<value>-8.87188,-1.86667</value>
 									</value>
 								</item>
 								<item>
 									<which>5</which>
 									<value>
-										<value>-10.9894,1.8</value>
+										<value>-8.87188,1.8</value>
 									</value>
 								</item>
 								<item>

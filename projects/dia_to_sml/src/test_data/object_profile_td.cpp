@@ -50,6 +50,7 @@ populate(const unsigned int position, result_type& v) {
     v.is_non_generatable(create_bool(position + 12));
     v.is_versioned(create_bool(position + 13));
     v.is_keyed(create_bool(position + 14));
+    v.is_visitable(create_bool(position + 15));
 }
 
 object_profile_generator::result_type

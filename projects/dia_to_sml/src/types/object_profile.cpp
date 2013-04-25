@@ -38,7 +38,8 @@ object_profile::object_profile()
       is_service_(static_cast<bool>(0)),
       is_non_generatable_(static_cast<bool>(0)),
       is_versioned_(static_cast<bool>(0)),
-      is_keyed_(static_cast<bool>(0)) { }
+      is_keyed_(static_cast<bool>(0)),
+      is_visitable_(static_cast<bool>(0)) { }
 
 object_profile::object_profile(
     const bool is_uml_large_package,
@@ -55,7 +56,8 @@ object_profile::object_profile(
     const bool is_service,
     const bool is_non_generatable,
     const bool is_versioned,
-    const bool is_keyed)
+    const bool is_keyed,
+    const bool is_visitable)
     : is_uml_large_package_(is_uml_large_package),
       is_uml_class_(is_uml_class),
       is_uml_generalization_(is_uml_generalization),
@@ -70,7 +72,8 @@ object_profile::object_profile(
       is_service_(is_service),
       is_non_generatable_(is_non_generatable),
       is_versioned_(is_versioned),
-      is_keyed_(is_keyed) { }
+      is_keyed_(is_keyed),
+      is_visitable_(is_visitable) { }
 
 void object_profile::swap(object_profile& other) noexcept {
     using std::swap;
@@ -89,6 +92,7 @@ void object_profile::swap(object_profile& other) noexcept {
     swap(is_non_generatable_, other.is_non_generatable_);
     swap(is_versioned_, other.is_versioned_);
     swap(is_keyed_, other.is_keyed_);
+    swap(is_visitable_, other.is_visitable_);
 }
 
 bool object_profile::operator==(const object_profile& rhs) const {
@@ -106,7 +110,8 @@ bool object_profile::operator==(const object_profile& rhs) const {
         is_service_ == rhs.is_service_ &&
         is_non_generatable_ == rhs.is_non_generatable_ &&
         is_versioned_ == rhs.is_versioned_ &&
-        is_keyed_ == rhs.is_keyed_;
+        is_keyed_ == rhs.is_keyed_ &&
+        is_visitable_ == rhs.is_visitable_;
 }
 
 object_profile& object_profile::operator=(object_profile other) {
@@ -233,6 +238,14 @@ bool object_profile::is_keyed() const {
 
 void object_profile::is_keyed(const bool v) {
     is_keyed_ = v;
+}
+
+bool object_profile::is_visitable() const {
+    return is_visitable_;
+}
+
+void object_profile::is_visitable(const bool v) {
+    is_visitable_ = v;
 }
 
 } }

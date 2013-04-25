@@ -52,6 +52,7 @@ std::size_t object_profile_hasher::hash(const object_profile&v) {
     combine(seed, v.is_non_generatable());
     combine(seed, v.is_versioned());
     combine(seed, v.is_keyed());
+    combine(seed, v.is_visitable());
 
     return seed;
 }

@@ -38,6 +38,7 @@ const std::string entity("entity");
 const std::string value("value");
 const std::string service("service");
 const std::string nongeneratable("nongeneratable");
+const std::string visitable("visitable");
 
 }
 
@@ -79,6 +80,8 @@ process_stereotype(object_profile& o, const std::string& s) const {
             o.is_service(true);
         else if (stereotype == nongeneratable)
             o.is_non_generatable(true);
+        else if (stereotype == visitable)
+            o.is_visitable(true);
         else {
             BOOST_LOG_SEV(lg, error) << invalid_stereotype << "'"
                                      << stereotype << "'";

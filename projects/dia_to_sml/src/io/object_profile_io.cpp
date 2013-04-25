@@ -48,7 +48,8 @@ std::ostream& operator<<(std::ostream& s, const object_profile& v) {
       << "\"is_service\": " << v.is_service() << ", "
       << "\"is_non_generatable\": " << v.is_non_generatable() << ", "
       << "\"is_versioned\": " << v.is_versioned() << ", "
-      << "\"is_keyed\": " << v.is_keyed()
+      << "\"is_keyed\": " << v.is_keyed() << ", "
+      << "\"is_visitable\": " << v.is_visitable()
       << " }";
     return(s);
 }

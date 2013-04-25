@@ -6255,7 +6255,7 @@ finds.#</dia:string>
         <dia:point val="62.9579,114.041"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="62.9079,113.991;74.2879,128.091"/>
+        <dia:rectangle val="62.9079,113.991;74.2879,128.891"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="62.9579,114.041"/>
@@ -6264,7 +6264,7 @@ finds.#</dia:string>
         <dia:real val="11.279999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="14.000000000000004"/>
+        <dia:real val="14.800000000000004"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#object_profile#</dia:string>
@@ -6679,6 +6679,29 @@ finds.#</dia:string>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
             <dia:string>#is_keyed#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>#bool#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#is_visitable#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#bool#</dia:string>
@@ -7939,7 +7962,7 @@ finds.#</dia:string>
         <dia:point val="40.451,135.908"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="39.701,127.991;68.7979,136.708"/>
+        <dia:rectangle val="39.701,128.791;68.7979,136.708"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -7948,7 +7971,7 @@ finds.#</dia:string>
         <dia:point val="40.451,135.908"/>
         <dia:point val="40.451,132.091"/>
         <dia:point val="68.5979,132.091"/>
-        <dia:point val="68.5979,128.041"/>
+        <dia:point val="68.5979,128.841"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
