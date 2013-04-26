@@ -18,35 +18,18 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_STEREOTYPES_HASH_IMMUTABLE_HASH_HPP
-#define DOGEN_STEREOTYPES_HASH_IMMUTABLE_HASH_HPP
+#ifndef DOGEN_STEREOTYPES_TYPES_IMMUTABLE_TWO_FWD_HPP
+#define DOGEN_STEREOTYPES_TYPES_IMMUTABLE_TWO_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <functional>
-#include "dogen/stereotypes/types/immutable.hpp"
-
 namespace dogen {
 namespace stereotypes {
 
-class immutable_hasher {
-public:
-    static std::size_t hash(const immutable& v);
-};
+class immutable_two;
 
 } }
 
-namespace std {
-
-template<>
-class hash<dogen::stereotypes::immutable> {
-public:
-    size_t operator()(const dogen::stereotypes::immutable& v) const {
-        return dogen::stereotypes::immutable_hasher::hash(v);
-    }
-};
-
-}
 #endif

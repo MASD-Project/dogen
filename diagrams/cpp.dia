@@ -144,7 +144,7 @@
         <dia:point val="-2,78"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-2.05,77.95;30.89,92.85"/>
+        <dia:rectangle val="-2.05,77.95;30.89,93.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-2,78"/>
@@ -153,7 +153,7 @@
         <dia:real val="32.839999999999996"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="14.800000000000004"/>
+        <dia:real val="15.600000000000005"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#class_view_model#</dia:string>
@@ -602,6 +602,29 @@ descend from it. Names are in identifiable name format.#</dia:string>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
             <dia:string>#is_visitable#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>#bool#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#is_immutable#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#bool#</dia:string>
@@ -2971,16 +2994,16 @@ descend from it. Names are in identifiable name format.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="-2,92.8"/>
+        <dia:point val="-2,93.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-9.975,92.05;-1.25,104.31"/>
+        <dia:rectangle val="-9.975,92.85;-1.25,104.31"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="-2,92.8"/>
+        <dia:point val="-2,93.6"/>
         <dia:point val="-2,98.2514"/>
         <dia:point val="-9.925,98.2514"/>
         <dia:point val="-9.925,103.51"/>
@@ -3043,16 +3066,16 @@ descend from it. Names are in identifiable name format.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="30.84,92.8"/>
+        <dia:point val="30.84,93.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="30.09,92.05;35.8625,117.629"/>
+        <dia:rectangle val="30.09,92.85;35.8625,117.629"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="30.84,92.8"/>
+        <dia:point val="30.84,93.6"/>
         <dia:point val="30.84,98.668"/>
         <dia:point val="34.1225,98.668"/>
         <dia:point val="34.1225,117.579"/>

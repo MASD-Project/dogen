@@ -120,10 +120,12 @@ void generator_header::generator_class(const class_view_model& vm) {
         utility_.blank_line();
 
         utility_.public_access_specifier();
-        stream_ << indenter_
-                << "static void populate(const unsigned int position,"
-                <<" result_type& v);"
-                << std::endl;
+        if (!vm.is_immutable()) {
+            stream_ << indenter_
+                    << "static void populate(const unsigned int position,"
+                    <<" result_type& v);"
+                    << std::endl;
+        }
 
         if (!vm.is_parent()) {
             stream_ << indenter_

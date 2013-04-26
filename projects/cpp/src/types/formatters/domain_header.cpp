@@ -105,7 +105,7 @@ inserter_operator(const class_view_model& vm) {
 void domain_header::
 swap_method(const class_view_model& vm) {
     // swap overload is only available in leaf classes - MEC++-33
-    if (vm.all_properties().empty() || vm.is_parent())
+    if (vm.all_properties().empty() || vm.is_parent() || vm.is_immutable())
         return;
 
     namespace_helper ns(stream_, std::list<std::string> { "std" });

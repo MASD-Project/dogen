@@ -18,15 +18,13 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_STEREOTYPES_ODB_IMMUTABLE_PRAGMAS_HPP
-#define DOGEN_STEREOTYPES_ODB_IMMUTABLE_PRAGMAS_HPP
+#include "dogen/stereotypes/types/immutable_zero.hpp"
 
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
+namespace dogen {
+namespace stereotypes {
 
-#include "dogen/stereotypes/types/immutable.hpp"
+bool immutable_zero::operator==(const immutable_zero& /*rhs*/) const {
+    return true;
+}
 
-// class has no ODB pragmas defined.
-
-#endif
+} }

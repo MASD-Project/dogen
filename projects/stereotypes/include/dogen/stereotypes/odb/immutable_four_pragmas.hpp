@@ -18,23 +18,17 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_STEREOTYPES_IO_IMMUTABLE_IO_HPP
-#define DOGEN_STEREOTYPES_IO_IMMUTABLE_IO_HPP
+#ifndef DOGEN_STEREOTYPES_ODB_IMMUTABLE_FOUR_PRAGMAS_HPP
+#define DOGEN_STEREOTYPES_ODB_IMMUTABLE_FOUR_PRAGMAS_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <iosfwd>
-#include "dogen/stereotypes/types/immutable.hpp"
+#include "dogen/stereotypes/odb/entity_pragmas.hpp"
+#include "dogen/stereotypes/odb/immutable_one_primitive_pragmas.hpp"
+#include "dogen/stereotypes/types/immutable_four.hpp"
 
-namespace dogen {
-namespace stereotypes {
-
-std::ostream&
-operator<<(std::ostream& s,
-     const dogen::stereotypes::immutable& v);
-
-} }
+// class has no ODB pragmas defined.
 
 #endif

@@ -18,23 +18,34 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_STEREOTYPES_SERIALIZATION_IMMUTABLE_FWD_SER_HPP
-#define DOGEN_STEREOTYPES_SERIALIZATION_IMMUTABLE_FWD_SER_HPP
+#ifndef DOGEN_STEREOTYPES_TEST_DATA_IMMUTABLE_FOUR_TD_HPP
+#define DOGEN_STEREOTYPES_TEST_DATA_IMMUTABLE_FOUR_TD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/stereotypes/types/immutable_fwd.hpp"
+#include "dogen/stereotypes/types/immutable_four.hpp"
 
-namespace boost {
-namespace serialization {
+namespace dogen {
+namespace stereotypes {
 
-template<class Archive>
-void save(Archive& ar, const dogen::stereotypes::immutable& v, unsigned int version);
+class immutable_four_generator {
+public:
+    immutable_four_generator();
 
-template<class Archive>
-void load(Archive& ar, dogen::stereotypes::immutable& v, unsigned int version);
+public:
+    typedef dogen::stereotypes::immutable_four result_type;
+
+public:
+    static result_type create(const unsigned int position);
+    result_type operator()();
+
+private:
+    unsigned int position_;
+public:
+    static result_type* create_ptr(const unsigned int position);
+};
 
 } }
 

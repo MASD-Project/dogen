@@ -64,7 +64,8 @@ public:
         const std::list<std::string>& leaves,
         const std::vector<std::pair<std::string, std::string> >& implementation_specific_parameters,
         const bool is_comparable,
-        const bool is_visitable);
+        const bool is_visitable,
+        const bool is_immutable);
 
 private:
     template<typename Archive>
@@ -215,6 +216,9 @@ public:
     bool is_visitable() const;
     void is_visitable(const bool v);
 
+    bool is_immutable() const;
+    void is_immutable(const bool v);
+
 public:
     bool operator==(const class_view_model& rhs) const;
     bool operator!=(const class_view_model& rhs) const {
@@ -242,6 +246,7 @@ private:
     std::vector<std::pair<std::string, std::string> > implementation_specific_parameters_;
     bool is_comparable_;
     bool is_visitable_;
+    bool is_immutable_;
 };
 
 } } }

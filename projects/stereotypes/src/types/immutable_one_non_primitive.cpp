@@ -18,16 +18,20 @@
  * MA 02110-1301, USA.
  *
  */
-#include <ostream>
-#include "dogen/stereotypes/io/immutable_io.hpp"
+#include "dogen/stereotypes/types/immutable_one_non_primitive.hpp"
 
 namespace dogen {
 namespace stereotypes {
 
-std::ostream& operator<<(std::ostream& s, const immutable&) {
-    s << " { "
-      << "\"__type__\": " << "\"dogen::stereotypes::immutable\"" << " }";
-    return(s);
+immutable_one_non_primitive::immutable_one_non_primitive(const std::string& prop_0)
+    : prop_0_(prop_0) { }
+
+bool immutable_one_non_primitive::operator==(const immutable_one_non_primitive& rhs) const {
+    return prop_0_ == rhs.prop_0_;
+}
+
+const std::string& immutable_one_non_primitive::prop_0() const {
+    return prop_0_;
 }
 
 } }

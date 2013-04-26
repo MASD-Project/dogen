@@ -18,36 +18,19 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_STEREOTYPES_TEST_DATA_IMMUTABLE_TD_HPP
-#define DOGEN_STEREOTYPES_TEST_DATA_IMMUTABLE_TD_HPP
+#include "dogen/stereotypes/hash/immutable_zero_hash.hpp"
 
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
+namespace {
 
-#include "dogen/stereotypes/types/immutable.hpp"
+
+}
 
 namespace dogen {
 namespace stereotypes {
 
-class immutable_generator {
-public:
-    immutable_generator();
-
-public:
-    typedef dogen::stereotypes::immutable result_type;
-
-public:
-    static void populate(const unsigned int position, result_type& v);
-    static result_type create(const unsigned int position);
-    result_type operator()();
-
-private:
-    unsigned int position_;
-public:
-    static result_type* create_ptr(const unsigned int position);
-};
+std::size_t immutable_zero_hasher::hash(const immutable_zero&) {
+    std::size_t seed(0);
+    return seed;
+}
 
 } }
-
-#endif

@@ -18,34 +18,24 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/stereotypes/test_data/immutable_td.hpp"
+#ifndef DOGEN_STEREOTYPES_SERIALIZATION_IMMUTABLE_ONE_NON_PRIMITIVE_FWD_SER_HPP
+#define DOGEN_STEREOTYPES_SERIALIZATION_IMMUTABLE_ONE_NON_PRIMITIVE_FWD_SER_HPP
 
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
+#include "dogen/stereotypes/types/immutable_one_non_primitive_fwd.hpp"
 
-namespace dogen {
-namespace stereotypes {
+namespace boost {
+namespace serialization {
 
-immutable_generator::immutable_generator() : position_(0) { }
+template<class Archive>
+void save(Archive& ar, const dogen::stereotypes::immutable_one_non_primitive& v, unsigned int version);
 
-void immutable_generator::
-populate(const unsigned int /*position*/, result_type& /*v*/) {
-}
-
-immutable_generator::result_type
-immutable_generator::create(const unsigned int/*position*/) {
-    immutable r;
-    return r;
-}
-immutable_generator::result_type*
-immutable_generator::create_ptr(const unsigned int position) {
-    immutable* p = new immutable();
-    immutable_generator::populate(position, *p);
-    return p;
-}
-
-immutable_generator::result_type
-immutable_generator::operator()() {
-    return create(position_++);
-}
+template<class Archive>
+void load(Archive& ar, dogen::stereotypes::immutable_one_non_primitive& v, unsigned int version);
 
 } }
+
+#endif

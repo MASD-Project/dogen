@@ -388,7 +388,7 @@ void sml_dfs_visitor::process_sml_pod(const dogen::sml::pod& pod) {
         parent_view_model parent;
         parent.name(pqn.type_name());
         parent.properties(i->second.all_properties());
-        // FIXME
+        // FIXME: quick hack to avoid modifying source.
         auto tmp(i->second.all_properties());
         all_props_vm.splice(all_props_vm.end(), tmp);
         parent.namespaces(i->second.namespaces());
@@ -401,6 +401,7 @@ void sml_dfs_visitor::process_sml_pod(const dogen::sml::pod& pod) {
     cvm.namespaces(ns);
     cvm.is_parent(pod.is_parent());
     cvm.documentation(pod.documentation());
+    cvm.is_immutable(pod.is_immutable());
 
     std::list<property_view_model> props_vm;
     bool has_primitive_properties(false);
@@ -411,6 +412,8 @@ void sml_dfs_visitor::process_sml_pod(const dogen::sml::pod& pod) {
         property_view_model k;
         k.name(p.name());
         k.documentation(p.documentation());
+        k.is_immutable(pod.is_immutable());
+        k.is_fluent(pod.is_fluent());
 
         nested_type_view_model type_vm;
         std::string complete_name;

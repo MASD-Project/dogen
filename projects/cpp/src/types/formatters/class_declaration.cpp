@@ -195,18 +195,24 @@ void class_declaration::
 non_pod_getters_and_setters(const property_view_model& vm) {
     doxygen_comments dc(stream_, indenter_);
     dc.format(vm.documentation());
-    dc.format_start_block(vm.documentation());
+    if (!vm.is_immutable())
+        dc.format_start_block(vm.documentation());
+
     stream_ << indenter_ << vm.type().complete_name() << " " << vm.name()
             << "() const;" << std::endl;
 
-    stream_ << indenter_ << "void " << vm.name() << "(const "
-            << vm.type().complete_name();
+    if (!vm.is_immutable()) {
+        stream_ << indenter_ << "void " << vm.name() << "(const "
+                << vm.type().complete_name();
 
-    if (!vm.type().is_primitive())
-        stream_ << "&";
+        if (!vm.type().is_primitive())
+            stream_ << "&";
 
-    stream_ << " v);" << std::endl;
-    dc.format_end_block(vm.documentation());
+        stream_ << " v);" << std::endl;
+    }
+
+    if (!vm.is_immutable())
+        dc.format_end_block(vm.documentation());
     utility_.blank_line();
 }
 
@@ -214,37 +220,41 @@ void class_declaration::
 pod_getters_and_setters(const property_view_model& vm) {
     doxygen_comments dc(stream_, indenter_);
     dc.format(vm.documentation());
-    dc.format_start_block(vm.documentation());
+    if (!vm.is_immutable())
+        dc.format_start_block(vm.documentation());
 
     // const getter
     stream_ << indenter_ << "const " << vm.type().complete_name()
             << "& " << vm.name()
             << "() const;" << std::endl;
 
-    // Popsicle immutability
-    stream_ << indenter_ << "" << vm.type().complete_name()
-            << "& " << vm.name()
-            << "();" << std::endl;
+    if (!vm.is_immutable()) {
+        // Popsicle immutability
+        stream_ << indenter_ << "" << vm.type().complete_name()
+                << "& " << vm.name()
+                << "();" << std::endl;
 
-    // traditional setter
-    stream_ << indenter_ << "void " << vm.name() << "(const "
-            << vm.type().complete_name();
+        // traditional setter
+        stream_ << indenter_ << "void " << vm.name() << "(const "
+                << vm.type().complete_name();
 
-    if (!vm.type().is_primitive())
-        stream_ << "&";
+        if (!vm.type().is_primitive())
+            stream_ << "&";
 
-    stream_ << " v);" << std::endl;
+        stream_ << " v);" << std::endl;
 
-    // move setter
-    stream_ << indenter_ << "void " << vm.name() << "(const "
-            << vm.type().complete_name();
+        // move setter
+        stream_ << indenter_ << "void " << vm.name() << "(const "
+                << vm.type().complete_name();
 
-    if (!vm.type().is_primitive())
-        stream_ << "&&";
+        if (!vm.type().is_primitive())
+            stream_ << "&&";
 
-    stream_ << " v);" << std::endl;
+        stream_ << " v);" << std::endl;
+    }
 
-    dc.format_end_block(vm.documentation());
+    if (!vm.is_immutable())
+        dc.format_end_block(vm.documentation());
     utility_.blank_line();
 }
 
@@ -340,7 +350,7 @@ void class_declaration::to_stream(const class_view_model& vm) {
 }
 
 void class_declaration::swap_and_assignment(const class_view_model& vm) {
-    if (vm.all_properties().empty() && !vm.is_parent())
+    if ((vm.all_properties().empty() && !vm.is_parent()) || vm.is_immutable())
         return;
 
     // swap is only public in leaf classes - MEC++-33

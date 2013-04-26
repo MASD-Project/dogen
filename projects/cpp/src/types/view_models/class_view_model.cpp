@@ -31,7 +31,8 @@ class_view_model::class_view_model()
       requires_manual_default_constructor_(static_cast<bool>(0)),
       is_parent_(static_cast<bool>(0)),
       is_comparable_(static_cast<bool>(0)),
-      is_visitable_(static_cast<bool>(0)) { }
+      is_visitable_(static_cast<bool>(0)),
+      is_immutable_(static_cast<bool>(0)) { }
 
 class_view_model::class_view_model(
     const std::list<std::string>& namespaces,
@@ -49,7 +50,8 @@ class_view_model::class_view_model(
     const std::list<std::string>& leaves,
     const std::vector<std::pair<std::string, std::string> >& implementation_specific_parameters,
     const bool is_comparable,
-    const bool is_visitable)
+    const bool is_visitable,
+    const bool is_immutable)
     : namespaces_(namespaces),
       name_(name),
       properties_(properties),
@@ -65,7 +67,8 @@ class_view_model::class_view_model(
       leaves_(leaves),
       implementation_specific_parameters_(implementation_specific_parameters),
       is_comparable_(is_comparable),
-      is_visitable_(is_visitable) { }
+      is_visitable_(is_visitable),
+      is_immutable_(is_immutable) { }
 
 void class_view_model::swap(class_view_model& other) noexcept {
     using std::swap;
@@ -85,6 +88,7 @@ void class_view_model::swap(class_view_model& other) noexcept {
     swap(implementation_specific_parameters_, other.implementation_specific_parameters_);
     swap(is_comparable_, other.is_comparable_);
     swap(is_visitable_, other.is_visitable_);
+    swap(is_immutable_, other.is_immutable_);
 }
 
 bool class_view_model::operator==(const class_view_model& rhs) const {
@@ -103,7 +107,8 @@ bool class_view_model::operator==(const class_view_model& rhs) const {
         leaves_ == rhs.leaves_ &&
         implementation_specific_parameters_ == rhs.implementation_specific_parameters_ &&
         is_comparable_ == rhs.is_comparable_ &&
-        is_visitable_ == rhs.is_visitable_;
+        is_visitable_ == rhs.is_visitable_ &&
+        is_immutable_ == rhs.is_immutable_;
 }
 
 class_view_model& class_view_model::operator=(class_view_model other) {
@@ -310,6 +315,14 @@ bool class_view_model::is_visitable() const {
 
 void class_view_model::is_visitable(const bool v) {
     is_visitable_ = v;
+}
+
+bool class_view_model::is_immutable() const {
+    return is_immutable_;
+}
+
+void class_view_model::is_immutable(const bool v) {
+    is_immutable_ = v;
 }
 
 } } }

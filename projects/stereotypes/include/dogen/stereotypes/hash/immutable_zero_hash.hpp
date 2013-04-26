@@ -18,19 +18,35 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/stereotypes/hash/immutable_hash.hpp"
+#ifndef DOGEN_STEREOTYPES_HASH_IMMUTABLE_ZERO_HASH_HPP
+#define DOGEN_STEREOTYPES_HASH_IMMUTABLE_ZERO_HASH_HPP
 
-namespace {
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
-
-}
+#include <functional>
+#include "dogen/stereotypes/types/immutable_zero.hpp"
 
 namespace dogen {
 namespace stereotypes {
 
-std::size_t immutable_hasher::hash(const immutable&) {
-    std::size_t seed(0);
-    return seed;
-}
+class immutable_zero_hasher {
+public:
+    static std::size_t hash(const immutable_zero& v);
+};
 
 } }
+
+namespace std {
+
+template<>
+class hash<dogen::stereotypes::immutable_zero> {
+public:
+    size_t operator()(const dogen::stereotypes::immutable_zero& v) const {
+        return dogen::stereotypes::immutable_zero_hasher::hash(v);
+    }
+};
+
+}
+#endif

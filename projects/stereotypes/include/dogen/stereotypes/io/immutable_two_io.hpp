@@ -18,25 +18,22 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_STEREOTYPES_SERIALIZATION_IMMUTABLE_SER_HPP
-#define DOGEN_STEREOTYPES_SERIALIZATION_IMMUTABLE_SER_HPP
+#ifndef DOGEN_STEREOTYPES_IO_IMMUTABLE_TWO_IO_HPP
+#define DOGEN_STEREOTYPES_IO_IMMUTABLE_TWO_IO_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <boost/serialization/split_free.hpp>
-#include "dogen/stereotypes/types/immutable.hpp"
+#include <iosfwd>
+#include "dogen/stereotypes/types/immutable_two.hpp"
 
-BOOST_SERIALIZATION_SPLIT_FREE(dogen::stereotypes::immutable)
-namespace boost {
-namespace serialization {
+namespace dogen {
+namespace stereotypes {
 
-template<typename Archive>
-void save(Archive& ar, const dogen::stereotypes::immutable& v, unsigned int version);
-
-template<typename Archive>
-void load(Archive& ar, dogen::stereotypes::immutable& v, unsigned int version);
+std::ostream&
+operator<<(std::ostream& s,
+     const dogen::stereotypes::immutable_two& v);
 
 } }
 

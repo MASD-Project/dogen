@@ -625,6 +625,9 @@ create_helper_methods(const class_view_model& vm) {
 }
 
 void generator_implementation::populate_method(const class_view_model& vm) {
+    if (vm.is_immutable())
+        return;
+
     const auto props(vm.properties());
     const std::string name(vm.name() + "_generator");
 
@@ -638,12 +641,12 @@ void generator_implementation::populate_method(const class_view_model& vm) {
     utility_.open_scope();
     {
         positive_indenter_scope s(indenter_);
-        unsigned int j(0);
+        unsigned int i(0);
         for (const auto p : props) {
             stream_ << indenter_ << "v." << p.name() << "("
                     << "create_" << p.type().complete_identifiable_name()
-                    << "(position + " << j << "));" << std::endl;
-            ++j;
+                    << "(position + " << i << "));" << std::endl;
+            ++i;
         }
     }
     utility_.close_scope();
@@ -667,21 +670,41 @@ void generator_implementation::create_method(const class_view_model& vm) {
     utility_.open_scope();
     {
         positive_indenter_scope s(indenter_);
-        stream_ << indenter_ << vm.name() << " r;" << std::endl;
 
-        for (const auto p : parents) {
-            stream_ << indenter_;
-            qname qname(stream_);
-            qname.format(p);
-            stream_ << "_generator::populate(position, r);"
-                    << std::endl;
-        }
+        if (vm.is_immutable()) {
+            stream_ << indenter_ << "return " << vm.name() << "(" << std::endl;
+            positive_indenter_scope s(indenter_);
+            {
+                unsigned int i(0);
+                for (const auto p : vm.properties()) {
+                    if (i != 0)
+                        stream_ << "," << std::endl;
 
-        if (has_properties) {
-            stream_ << indenter_ << name << "::populate(position, r);"
-                    << std::endl;
+                    stream_ << indenter_ << "create_"
+                            << p.type().complete_identifiable_name()
+                            << "(position + " << i << ")";
+                    ++i;
+                }
+                stream_ << std::endl;
+            }
+            stream_ << indenter_ << ");" << std::endl;
+        } else {
+            stream_ << indenter_ << vm.name() << " r;" << std::endl;
+
+            for (const auto p : parents) {
+                stream_ << indenter_;
+                qname qname(stream_);
+                qname.format(p);
+                stream_ << "_generator::populate(position, r);"
+                        << std::endl;
+            }
+
+            if (has_properties) {
+                stream_ << indenter_ << name << "::populate(position, r);"
+                        << std::endl;
+            }
+            stream_ << indenter_ << "return r;" << std::endl;
         }
-        stream_ << indenter_ << "return r;" << std::endl;
     }
     utility_.close_scope();
 }
@@ -697,11 +720,16 @@ void generator_implementation::create_method_ptr(const class_view_model& vm) {
         positive_indenter_scope s(indenter_);
 
         if (leaves.empty()) {
-            stream_ << indenter_ << vm.name() << "* p = new " << vm.name()
-                    << "();" << std::endl
-                    << indenter_ << name << "::populate(position, *p);"
-                    << std::endl
-                    << indenter_ << "return p;" << std::endl;
+            if (vm.is_immutable()) {
+                stream_ << indenter_ << "return new " << vm.name()
+                        << "(create(position));" << std::endl;
+            } else {
+                stream_ << indenter_ << vm.name() << "* p = new " << vm.name()
+                        << "();" << std::endl
+                        << indenter_ << name << "::populate(position, *p);"
+                        << std::endl
+                        << indenter_ << "return p;" << std::endl;
+            }
         } else {
             const auto front(leaves.front());
             leaves.pop_front();
@@ -772,7 +800,8 @@ void generator_implementation::format_class(const file_view_model& vm) {
         default_constructor(cvm);
         utility_.blank_line();
         populate_method(cvm);
-        utility_.blank_line();
+        if (!cvm.is_immutable())
+            utility_.blank_line();
         create_method(cvm);
         create_method_ptr(cvm);
         utility_.blank_line();

@@ -18,40 +18,33 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_STEREOTYPES_TYPES_IMMUTABLE_HPP
-#define DOGEN_STEREOTYPES_TYPES_IMMUTABLE_HPP
+#ifndef DOGEN_STEREOTYPES_TEST_DATA_IMMUTABLE_TWO_TD_HPP
+#define DOGEN_STEREOTYPES_TEST_DATA_IMMUTABLE_TWO_TD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <algorithm>
-#include "dogen/stereotypes/serialization/immutable_fwd_ser.hpp"
+#include "dogen/stereotypes/types/immutable_two.hpp"
 
 namespace dogen {
 namespace stereotypes {
 
-class immutable final {
+class immutable_two_generator {
 public:
-    immutable() = default;
-    immutable(const immutable&) = default;
-    immutable(immutable&&) = default;
-    ~immutable() = default;
-    immutable& operator=(const immutable&) = default;
+    immutable_two_generator();
+
+public:
+    typedef dogen::stereotypes::immutable_two result_type;
+
+public:
+    static result_type create(const unsigned int position);
+    result_type operator()();
 
 private:
-    template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const immutable& v, unsigned int version);
-
-    template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, immutable& v, unsigned int version);
-
+    unsigned int position_;
 public:
-    bool operator==(const immutable& rhs) const;
-    bool operator!=(const immutable& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    static result_type* create_ptr(const unsigned int position);
 };
 
 } }

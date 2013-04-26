@@ -27,7 +27,7 @@
 #include <boost/archive/xml_iarchive.hpp>
 #include <boost/archive/xml_oarchive.hpp>
 #include <boost/serialization/nvp.hpp>
-#include "dogen/stereotypes/serialization/immutable_ser.hpp"
+#include "dogen/stereotypes/serialization/immutable_zero_ser.hpp"
 
 #ifdef __linux__
 #include "eos/portable_iarchive.hpp"
@@ -39,13 +39,13 @@ namespace serialization {
 
 template<typename Archive>
 void save(Archive& /*ar*/,
-    const dogen::stereotypes::immutable& /*v*/,
+    const dogen::stereotypes::immutable_zero& /*v*/,
     const unsigned int /*version*/) {
 }
 
 template<typename Archive>
 void load(Archive& /*ar*/,
-    dogen::stereotypes::immutable& /*v*/,
+    dogen::stereotypes::immutable_zero& /*v*/,
     const unsigned int /*version*/) {
 }
 
@@ -54,21 +54,21 @@ void load(Archive& /*ar*/,
 namespace boost {
 namespace serialization {
 
-template void save(archive::polymorphic_oarchive& ar, const dogen::stereotypes::immutable& v, unsigned int version);
-template void load(archive::polymorphic_iarchive& ar, dogen::stereotypes::immutable& v, unsigned int version);
+template void save(archive::polymorphic_oarchive& ar, const dogen::stereotypes::immutable_zero& v, unsigned int version);
+template void load(archive::polymorphic_iarchive& ar, dogen::stereotypes::immutable_zero& v, unsigned int version);
 
-template void save(archive::text_oarchive& ar, const dogen::stereotypes::immutable& v, unsigned int version);
-template void load(archive::text_iarchive& ar, dogen::stereotypes::immutable& v, unsigned int version);
+template void save(archive::text_oarchive& ar, const dogen::stereotypes::immutable_zero& v, unsigned int version);
+template void load(archive::text_iarchive& ar, dogen::stereotypes::immutable_zero& v, unsigned int version);
 
-template void save(archive::binary_oarchive& ar, const dogen::stereotypes::immutable& v, unsigned int version);
-template void load(archive::binary_iarchive& ar, dogen::stereotypes::immutable& v, unsigned int version);
+template void save(archive::binary_oarchive& ar, const dogen::stereotypes::immutable_zero& v, unsigned int version);
+template void load(archive::binary_iarchive& ar, dogen::stereotypes::immutable_zero& v, unsigned int version);
 
-template void save(archive::xml_oarchive& ar, const dogen::stereotypes::immutable& v, unsigned int version);
-template void load(archive::xml_iarchive& ar, dogen::stereotypes::immutable& v, unsigned int version);
+template void save(archive::xml_oarchive& ar, const dogen::stereotypes::immutable_zero& v, unsigned int version);
+template void load(archive::xml_iarchive& ar, dogen::stereotypes::immutable_zero& v, unsigned int version);
 
 #ifdef __linux__
-template void save(eos::portable_oarchive& ar, const dogen::stereotypes::immutable& v, unsigned int version);
-template void load(eos::portable_iarchive& ar, dogen::stereotypes::immutable& v, unsigned int version);
+template void save(eos::portable_oarchive& ar, const dogen::stereotypes::immutable_zero& v, unsigned int version);
+template void load(eos::portable_iarchive& ar, dogen::stereotypes::immutable_zero& v, unsigned int version);
 #endif
 
 } }

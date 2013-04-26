@@ -18,13 +18,26 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/stereotypes/types/immutable.hpp"
+#ifndef DOGEN_STEREOTYPES_SERIALIZATION_IMMUTABLE_ONE_PRIMITIVE_SER_HPP
+#define DOGEN_STEREOTYPES_SERIALIZATION_IMMUTABLE_ONE_PRIMITIVE_SER_HPP
 
-namespace dogen {
-namespace stereotypes {
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
-bool immutable::operator==(const immutable& /*rhs*/) const {
-    return true;
-}
+#include <boost/serialization/split_free.hpp>
+#include "dogen/stereotypes/types/immutable_one_primitive.hpp"
+
+BOOST_SERIALIZATION_SPLIT_FREE(dogen::stereotypes::immutable_one_primitive)
+namespace boost {
+namespace serialization {
+
+template<typename Archive>
+void save(Archive& ar, const dogen::stereotypes::immutable_one_primitive& v, unsigned int version);
+
+template<typename Archive>
+void load(Archive& ar, dogen::stereotypes::immutable_one_primitive& v, unsigned int version);
 
 } }
+
+#endif
