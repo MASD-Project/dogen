@@ -36,3 +36,4 @@
 #include "dogen/cpp/hash/view_models/parent_view_model_hash.hpp"
 #include "dogen/cpp/hash/view_models/property_view_model_hash.hpp"
 #include "dogen/cpp/hash/view_models/registrar_view_model_hash.hpp"
+#include "dogen/cpp/hash/view_models/visitor_view_model_hash.hpp"

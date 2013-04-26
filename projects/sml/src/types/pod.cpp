@@ -28,7 +28,13 @@ pod::pod()
       is_parent_(static_cast<bool>(0)),
       category_type_(static_cast<dogen::sml::category_types>(0)),
       pod_type_(static_cast<dogen::sml::pod_types>(0)),
-      number_of_type_arguments_(static_cast<unsigned int>(0)) { }
+      number_of_type_arguments_(static_cast<unsigned int>(0)),
+      is_visitable_(static_cast<bool>(0)),
+      is_immutable_(static_cast<bool>(0)),
+      is_versioned_(static_cast<bool>(0)),
+      is_keyed_(static_cast<bool>(0)),
+      is_comparable_(static_cast<bool>(0)),
+      is_fluent_(static_cast<bool>(0)) { }
 
 pod::pod(pod&& rhs)
     : name_(std::move(rhs.name_)),
@@ -42,7 +48,13 @@ pod::pod(pod&& rhs)
       pod_type_(std::move(rhs.pod_type_)),
       documentation_(std::move(rhs.documentation_)),
       number_of_type_arguments_(std::move(rhs.number_of_type_arguments_)),
-      implementation_specific_parameters_(std::move(rhs.implementation_specific_parameters_)) { }
+      implementation_specific_parameters_(std::move(rhs.implementation_specific_parameters_)),
+      is_visitable_(std::move(rhs.is_visitable_)),
+      is_immutable_(std::move(rhs.is_immutable_)),
+      is_versioned_(std::move(rhs.is_versioned_)),
+      is_keyed_(std::move(rhs.is_keyed_)),
+      is_comparable_(std::move(rhs.is_comparable_)),
+      is_fluent_(std::move(rhs.is_fluent_)) { }
 
 pod::pod(
     const dogen::sml::qname& name,
@@ -56,7 +68,13 @@ pod::pod(
     const dogen::sml::pod_types& pod_type,
     const std::string& documentation,
     const unsigned int number_of_type_arguments,
-    const std::vector<std::pair<std::string, std::string> >& implementation_specific_parameters)
+    const std::vector<std::pair<std::string, std::string> >& implementation_specific_parameters,
+    const bool is_visitable,
+    const bool is_immutable,
+    const bool is_versioned,
+    const bool is_keyed,
+    const bool is_comparable,
+    const bool is_fluent)
     : name_(name),
       properties_(properties),
       parent_name_(parent_name),
@@ -68,7 +86,13 @@ pod::pod(
       pod_type_(pod_type),
       documentation_(documentation),
       number_of_type_arguments_(number_of_type_arguments),
-      implementation_specific_parameters_(implementation_specific_parameters) { }
+      implementation_specific_parameters_(implementation_specific_parameters),
+      is_visitable_(is_visitable),
+      is_immutable_(is_immutable),
+      is_versioned_(is_versioned),
+      is_keyed_(is_keyed),
+      is_comparable_(is_comparable),
+      is_fluent_(is_fluent) { }
 
 void pod::swap(pod& other) noexcept {
     using std::swap;
@@ -84,6 +108,12 @@ void pod::swap(pod& other) noexcept {
     swap(documentation_, other.documentation_);
     swap(number_of_type_arguments_, other.number_of_type_arguments_);
     swap(implementation_specific_parameters_, other.implementation_specific_parameters_);
+    swap(is_visitable_, other.is_visitable_);
+    swap(is_immutable_, other.is_immutable_);
+    swap(is_versioned_, other.is_versioned_);
+    swap(is_keyed_, other.is_keyed_);
+    swap(is_comparable_, other.is_comparable_);
+    swap(is_fluent_, other.is_fluent_);
 }
 
 bool pod::operator==(const pod& rhs) const {
@@ -98,7 +128,13 @@ bool pod::operator==(const pod& rhs) const {
         pod_type_ == rhs.pod_type_ &&
         documentation_ == rhs.documentation_ &&
         number_of_type_arguments_ == rhs.number_of_type_arguments_ &&
-        implementation_specific_parameters_ == rhs.implementation_specific_parameters_;
+        implementation_specific_parameters_ == rhs.implementation_specific_parameters_ &&
+        is_visitable_ == rhs.is_visitable_ &&
+        is_immutable_ == rhs.is_immutable_ &&
+        is_versioned_ == rhs.is_versioned_ &&
+        is_keyed_ == rhs.is_keyed_ &&
+        is_comparable_ == rhs.is_comparable_ &&
+        is_fluent_ == rhs.is_fluent_;
 }
 
 pod& pod::operator=(pod other) {
@@ -257,6 +293,54 @@ void pod::implementation_specific_parameters(const std::vector<std::pair<std::st
 
 void pod::implementation_specific_parameters(const std::vector<std::pair<std::string, std::string> >&& v) {
     implementation_specific_parameters_ = std::move(v);
+}
+
+bool pod::is_visitable() const {
+    return is_visitable_;
+}
+
+void pod::is_visitable(const bool v) {
+    is_visitable_ = v;
+}
+
+bool pod::is_immutable() const {
+    return is_immutable_;
+}
+
+void pod::is_immutable(const bool v) {
+    is_immutable_ = v;
+}
+
+bool pod::is_versioned() const {
+    return is_versioned_;
+}
+
+void pod::is_versioned(const bool v) {
+    is_versioned_ = v;
+}
+
+bool pod::is_keyed() const {
+    return is_keyed_;
+}
+
+void pod::is_keyed(const bool v) {
+    is_keyed_ = v;
+}
+
+bool pod::is_comparable() const {
+    return is_comparable_;
+}
+
+void pod::is_comparable(const bool v) {
+    is_comparable_ = v;
+}
+
+bool pod::is_fluent() const {
+    return is_fluent_;
+}
+
+void pod::is_fluent(const bool v) {
+    is_fluent_ = v;
 }
 
 } }

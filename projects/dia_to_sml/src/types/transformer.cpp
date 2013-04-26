@@ -173,7 +173,6 @@ transform_pod(const object_profile& op, const processed_object& po) {
     else if (op.is_service())
         pod.pod_type(pod_types::service);
 
-
     using sml::generation_types;
     pod.generation_type(context_.is_target() ?
         generation_types::full_generation :

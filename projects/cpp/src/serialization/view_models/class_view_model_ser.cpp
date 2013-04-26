@@ -61,6 +61,9 @@ void save(Archive& ar,
     ar << make_nvp("original_parent_name", v.original_parent_name_);
     ar << make_nvp("leaves", v.leaves_);
     ar << make_nvp("implementation_specific_parameters", v.implementation_specific_parameters_);
+    ar << make_nvp("is_comparable", v.is_comparable_);
+    ar << make_nvp("is_visitable", v.is_visitable_);
+    ar << make_nvp("is_fluent", v.is_fluent_);
 }
 
 template<typename Archive>
@@ -81,6 +84,9 @@ void load(Archive& ar,
     ar >> make_nvp("original_parent_name", v.original_parent_name_);
     ar >> make_nvp("leaves", v.leaves_);
     ar >> make_nvp("implementation_specific_parameters", v.implementation_specific_parameters_);
+    ar >> make_nvp("is_comparable", v.is_comparable_);
+    ar >> make_nvp("is_visitable", v.is_visitable_);
+    ar >> make_nvp("is_fluent", v.is_fluent_);
 }
 
 } }

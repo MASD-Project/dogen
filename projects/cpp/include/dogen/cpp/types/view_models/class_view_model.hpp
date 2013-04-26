@@ -62,7 +62,10 @@ public:
         const std::string& documentation,
         const std::string& original_parent_name,
         const std::list<std::string>& leaves,
-        const std::vector<std::pair<std::string, std::string> >& implementation_specific_parameters);
+        const std::vector<std::pair<std::string, std::string> >& implementation_specific_parameters,
+        const bool is_comparable,
+        const bool is_visitable,
+        const bool is_fluent);
 
 private:
     template<typename Archive>
@@ -207,6 +210,15 @@ public:
     void implementation_specific_parameters(const std::vector<std::pair<std::string, std::string> >& v);
     void implementation_specific_parameters(const std::vector<std::pair<std::string, std::string> >&& v);
 
+    bool is_comparable() const;
+    void is_comparable(const bool v);
+
+    bool is_visitable() const;
+    void is_visitable(const bool v);
+
+    bool is_fluent() const;
+    void is_fluent(const bool v);
+
 public:
     bool operator==(const class_view_model& rhs) const;
     bool operator!=(const class_view_model& rhs) const {
@@ -232,6 +244,9 @@ private:
     std::string original_parent_name_;
     std::list<std::string> leaves_;
     std::vector<std::pair<std::string, std::string> > implementation_specific_parameters_;
+    bool is_comparable_;
+    bool is_visitable_;
+    bool is_fluent_;
 };
 
 } } }

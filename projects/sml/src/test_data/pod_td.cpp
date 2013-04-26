@@ -126,6 +126,12 @@ populate(const unsigned int position, result_type& v) {
     v.documentation(create_std_string(position + 9));
     v.number_of_type_arguments(create_unsigned_int(position + 10));
     v.implementation_specific_parameters(create_std_vector_std_pair_std_string_std_string_(position + 11));
+    v.is_visitable(create_bool(position + 12));
+    v.is_immutable(create_bool(position + 13));
+    v.is_versioned(create_bool(position + 14));
+    v.is_keyed(create_bool(position + 15));
+    v.is_comparable(create_bool(position + 16));
+    v.is_fluent(create_bool(position + 17));
 }
 
 pod_generator::result_type

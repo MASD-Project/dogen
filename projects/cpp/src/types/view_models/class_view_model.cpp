@@ -29,7 +29,10 @@ class_view_model::class_view_model()
       requires_stream_manipulators_(static_cast<bool>(0)),
       requires_manual_move_constructor_(static_cast<bool>(0)),
       requires_manual_default_constructor_(static_cast<bool>(0)),
-      is_parent_(static_cast<bool>(0)) { }
+      is_parent_(static_cast<bool>(0)),
+      is_comparable_(static_cast<bool>(0)),
+      is_visitable_(static_cast<bool>(0)),
+      is_fluent_(static_cast<bool>(0)) { }
 
 class_view_model::class_view_model(
     const std::list<std::string>& namespaces,
@@ -45,7 +48,10 @@ class_view_model::class_view_model(
     const std::string& documentation,
     const std::string& original_parent_name,
     const std::list<std::string>& leaves,
-    const std::vector<std::pair<std::string, std::string> >& implementation_specific_parameters)
+    const std::vector<std::pair<std::string, std::string> >& implementation_specific_parameters,
+    const bool is_comparable,
+    const bool is_visitable,
+    const bool is_fluent)
     : namespaces_(namespaces),
       name_(name),
       properties_(properties),
@@ -59,7 +65,10 @@ class_view_model::class_view_model(
       documentation_(documentation),
       original_parent_name_(original_parent_name),
       leaves_(leaves),
-      implementation_specific_parameters_(implementation_specific_parameters) { }
+      implementation_specific_parameters_(implementation_specific_parameters),
+      is_comparable_(is_comparable),
+      is_visitable_(is_visitable),
+      is_fluent_(is_fluent) { }
 
 void class_view_model::swap(class_view_model& other) noexcept {
     using std::swap;
@@ -77,6 +86,9 @@ void class_view_model::swap(class_view_model& other) noexcept {
     swap(original_parent_name_, other.original_parent_name_);
     swap(leaves_, other.leaves_);
     swap(implementation_specific_parameters_, other.implementation_specific_parameters_);
+    swap(is_comparable_, other.is_comparable_);
+    swap(is_visitable_, other.is_visitable_);
+    swap(is_fluent_, other.is_fluent_);
 }
 
 bool class_view_model::operator==(const class_view_model& rhs) const {
@@ -93,7 +105,10 @@ bool class_view_model::operator==(const class_view_model& rhs) const {
         documentation_ == rhs.documentation_ &&
         original_parent_name_ == rhs.original_parent_name_ &&
         leaves_ == rhs.leaves_ &&
-        implementation_specific_parameters_ == rhs.implementation_specific_parameters_;
+        implementation_specific_parameters_ == rhs.implementation_specific_parameters_ &&
+        is_comparable_ == rhs.is_comparable_ &&
+        is_visitable_ == rhs.is_visitable_ &&
+        is_fluent_ == rhs.is_fluent_;
 }
 
 class_view_model& class_view_model::operator=(class_view_model other) {
@@ -284,6 +299,30 @@ void class_view_model::implementation_specific_parameters(const std::vector<std:
 
 void class_view_model::implementation_specific_parameters(const std::vector<std::pair<std::string, std::string> >&& v) {
     implementation_specific_parameters_ = std::move(v);
+}
+
+bool class_view_model::is_comparable() const {
+    return is_comparable_;
+}
+
+void class_view_model::is_comparable(const bool v) {
+    is_comparable_ = v;
+}
+
+bool class_view_model::is_visitable() const {
+    return is_visitable_;
+}
+
+void class_view_model::is_visitable(const bool v) {
+    is_visitable_ = v;
+}
+
+bool class_view_model::is_fluent() const {
+    return is_fluent_;
+}
+
+void class_view_model::is_fluent(const bool v) {
+    is_fluent_ = v;
 }
 
 } } }

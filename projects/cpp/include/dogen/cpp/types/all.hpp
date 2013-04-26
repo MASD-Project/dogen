@@ -85,5 +85,6 @@
 #include "dogen/cpp/types/view_models/registrar_view_model.hpp"
 #include "dogen/cpp/types/view_models/sml_to_cpp_view_model.hpp"
 #include "dogen/cpp/types/view_models/transformation_error.hpp"
+#include "dogen/cpp/types/view_models/visitor_view_model.hpp"
 #include "dogen/cpp/types/workflow.hpp"
 #include "dogen/cpp/types/workflow_failure.hpp"

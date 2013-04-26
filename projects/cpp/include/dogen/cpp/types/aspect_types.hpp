@@ -44,7 +44,8 @@ enum class aspect_types : unsigned int {
     forward_decls = 3, ///< Forward declarations for type
     registrar = 4, ///< Boost serialisation registration
     null_aspect = 5, ///< Nothing is to be produced for this type
-    namespace_doc = 6 ///< Documentation for the namespace.
+    namespace_doc = 6, ///< Documentation for the namespace.
+    visitor = 7
 };
 
 } }

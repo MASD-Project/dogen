@@ -36,3 +36,4 @@
 #include "dogen/cpp/serialization/view_models/parent_view_model_ser.hpp"
 #include "dogen/cpp/serialization/view_models/property_view_model_ser.hpp"
 #include "dogen/cpp/serialization/view_models/registrar_view_model_ser.hpp"
+#include "dogen/cpp/serialization/view_models/visitor_view_model_ser.hpp"

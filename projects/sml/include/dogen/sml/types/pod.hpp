@@ -65,7 +65,13 @@ public:
         const dogen::sml::pod_types& pod_type,
         const std::string& documentation,
         const unsigned int number_of_type_arguments,
-        const std::vector<std::pair<std::string, std::string> >& implementation_specific_parameters);
+        const std::vector<std::pair<std::string, std::string> >& implementation_specific_parameters,
+        const bool is_visitable,
+        const bool is_immutable,
+        const bool is_versioned,
+        const bool is_keyed,
+        const bool is_comparable,
+        const bool is_fluent);
 
 private:
     template<typename Archive>
@@ -185,6 +191,59 @@ public:
     void implementation_specific_parameters(const std::vector<std::pair<std::string, std::string> >&& v);
     /**@}*/
 
+    /**
+     * @brief If true, a visitor is to be generated for this type and its descendants.
+     *
+     * Only applicable if is_parent is true.
+     */
+    /**@{*/
+    bool is_visitable() const;
+    void is_visitable(const bool v);
+    /**@}*/
+
+    /**
+     * @brief If true, do not generate setters for the type's properties.
+     */
+    /**@{*/
+    bool is_immutable() const;
+    void is_immutable(const bool v);
+    /**@}*/
+
+    /**
+     * @brief If true, add a version property to the type.
+     */
+    /**@{*/
+    bool is_versioned() const;
+    void is_versioned(const bool v);
+    /**@}*/
+
+    /**
+     * @brief If true, add key support for the type.
+     */
+    /**@{*/
+    bool is_keyed() const;
+    void is_keyed(const bool v);
+    /**@}*/
+
+    /**
+     * @brief If true, generates the less than operator.
+     *
+     * A type is only comparable if all of its properties are primitives or strings,
+     * or other comparable model types.
+     */
+    /**@{*/
+    bool is_comparable() const;
+    void is_comparable(const bool v);
+    /**@}*/
+
+    /**
+     * @brief If true, generate fluent setters.
+     */
+    /**@{*/
+    bool is_fluent() const;
+    void is_fluent(const bool v);
+    /**@}*/
+
 public:
     bool operator==(const pod& rhs) const;
     bool operator!=(const pod& rhs) const {
@@ -208,6 +267,12 @@ private:
     std::string documentation_;
     unsigned int number_of_type_arguments_;
     std::vector<std::pair<std::string, std::string> > implementation_specific_parameters_;
+    bool is_visitable_;
+    bool is_immutable_;
+    bool is_versioned_;
+    bool is_keyed_;
+    bool is_comparable_;
+    bool is_fluent_;
 };
 
 } }

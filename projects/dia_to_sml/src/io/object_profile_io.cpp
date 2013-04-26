@@ -49,7 +49,8 @@ std::ostream& operator<<(std::ostream& s, const object_profile& v) {
       << "\"is_non_generatable\": " << v.is_non_generatable() << ", "
       << "\"is_versioned\": " << v.is_versioned() << ", "
       << "\"is_keyed\": " << v.is_keyed() << ", "
-      << "\"is_visitable\": " << v.is_visitable()
+      << "\"is_visitable\": " << v.is_visitable() << ", "
+      << "\"is_immutable\": " << v.is_immutable()
       << " }";
     return(s);
 }

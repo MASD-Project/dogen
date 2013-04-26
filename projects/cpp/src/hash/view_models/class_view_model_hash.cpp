@@ -94,6 +94,9 @@ std::size_t class_view_model_hasher::hash(const class_view_model&v) {
     combine(seed, v.original_parent_name());
     combine(seed, hash_std_list_std_string(v.leaves()));
     combine(seed, hash_std_vector_std_pair_std_string_std_string_(v.implementation_specific_parameters()));
+    combine(seed, v.is_comparable());
+    combine(seed, v.is_visitable());
+    combine(seed, v.is_fluent());
 
     return seed;
 }

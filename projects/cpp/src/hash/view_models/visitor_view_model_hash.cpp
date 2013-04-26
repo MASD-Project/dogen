@@ -18,27 +18,38 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/cpp/test_data/aspect_types_td.hpp"
+#include "dogen/cpp/hash/view_models/visitor_view_model_hash.hpp"
+
+namespace {
+
+template <typename HashableType>
+inline void combine(std::size_t& seed, const HashableType& value)
+{
+    std::hash<HashableType> hasher;
+    seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
+}
+
+inline std::size_t hash_std_list_std_string(const std::list<std::string>& v){
+    std::size_t seed(0);
+    for (const auto i : v) {
+        combine(seed, i);
+    }
+    return seed;
+}
+
+}
 
 namespace dogen {
 namespace cpp {
+namespace view_models {
 
-aspect_types_generator::aspect_types_generator() : position_(0) { }
-void aspect_types_generator::
-populate(const unsigned int position, result_type& v) {
-    v = static_cast<aspect_types>(position % 8);
+std::size_t visitor_view_model_hasher::hash(const visitor_view_model&v) {
+    std::size_t seed(0);
+
+    combine(seed, v.name());
+    combine(seed, hash_std_list_std_string(v.types()));
+
+    return seed;
 }
 
-aspect_types_generator::result_type
-aspect_types_generator::create(const unsigned int  position) {
-    result_type r;
-    aspect_types_generator::populate(position, r);
-    return r;
-}
-
-aspect_types_generator::result_type
-aspect_types_generator::operator()() {
-    return create(position_++);
-}
-
-} }
+} } }

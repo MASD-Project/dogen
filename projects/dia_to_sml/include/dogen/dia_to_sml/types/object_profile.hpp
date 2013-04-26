@@ -57,7 +57,8 @@ public:
         const bool is_non_generatable,
         const bool is_versioned,
         const bool is_keyed,
-        const bool is_visitable);
+        const bool is_visitable,
+        const bool is_immutable);
 
 private:
     template<typename Archive>
@@ -115,6 +116,9 @@ public:
     bool is_visitable() const;
     void is_visitable(const bool v);
 
+    bool is_immutable() const;
+    void is_immutable(const bool v);
+
 public:
     bool operator==(const object_profile& rhs) const;
     bool operator!=(const object_profile& rhs) const {
@@ -142,6 +146,7 @@ private:
     bool is_versioned_;
     bool is_keyed_;
     bool is_visitable_;
+    bool is_immutable_;
 };
 
 } }

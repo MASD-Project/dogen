@@ -57,6 +57,7 @@ void save(Archive& ar,
     ar << make_nvp("is_versioned", v.is_versioned_);
     ar << make_nvp("is_keyed", v.is_keyed_);
     ar << make_nvp("is_visitable", v.is_visitable_);
+    ar << make_nvp("is_immutable", v.is_immutable_);
 }
 
 template<typename Archive>
@@ -79,6 +80,7 @@ void load(Archive& ar,
     ar >> make_nvp("is_versioned", v.is_versioned_);
     ar >> make_nvp("is_keyed", v.is_keyed_);
     ar >> make_nvp("is_visitable", v.is_visitable_);
+    ar >> make_nvp("is_immutable", v.is_immutable_);
 }
 
 } }

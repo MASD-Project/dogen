@@ -36,3 +36,4 @@
 #include "dogen/cpp/io/view_models/parent_view_model_io.hpp"
 #include "dogen/cpp/io/view_models/property_view_model_io.hpp"
 #include "dogen/cpp/io/view_models/registrar_view_model_io.hpp"
+#include "dogen/cpp/io/view_models/visitor_view_model_io.hpp"

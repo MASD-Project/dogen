@@ -18,27 +18,19 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/cpp/test_data/aspect_types_td.hpp"
+#ifndef DOGEN_CPP_TYPES_VIEW_MODELS_VISITOR_VIEW_MODEL_FWD_HPP
+#define DOGEN_CPP_TYPES_VIEW_MODELS_VISITOR_VIEW_MODEL_FWD_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
 namespace dogen {
 namespace cpp {
+namespace view_models {
 
-aspect_types_generator::aspect_types_generator() : position_(0) { }
-void aspect_types_generator::
-populate(const unsigned int position, result_type& v) {
-    v = static_cast<aspect_types>(position % 8);
-}
+class visitor_view_model;
 
-aspect_types_generator::result_type
-aspect_types_generator::create(const unsigned int  position) {
-    result_type r;
-    aspect_types_generator::populate(position, r);
-    return r;
-}
+} } }
 
-aspect_types_generator::result_type
-aspect_types_generator::operator()() {
-    return create(position_++);
-}
-
-} }
+#endif

@@ -96,6 +96,12 @@ std::size_t pod_hasher::hash(const pod&v) {
     combine(seed, v.documentation());
     combine(seed, v.number_of_type_arguments());
     combine(seed, hash_std_vector_std_pair_std_string_std_string_(v.implementation_specific_parameters()));
+    combine(seed, v.is_visitable());
+    combine(seed, v.is_immutable());
+    combine(seed, v.is_versioned());
+    combine(seed, v.is_keyed());
+    combine(seed, v.is_comparable());
+    combine(seed, v.is_fluent());
 
     return seed;
 }

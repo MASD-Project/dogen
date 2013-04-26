@@ -39,7 +39,8 @@ object_profile::object_profile()
       is_non_generatable_(static_cast<bool>(0)),
       is_versioned_(static_cast<bool>(0)),
       is_keyed_(static_cast<bool>(0)),
-      is_visitable_(static_cast<bool>(0)) { }
+      is_visitable_(static_cast<bool>(0)),
+      is_immutable_(static_cast<bool>(0)) { }
 
 object_profile::object_profile(
     const bool is_uml_large_package,
@@ -57,7 +58,8 @@ object_profile::object_profile(
     const bool is_non_generatable,
     const bool is_versioned,
     const bool is_keyed,
-    const bool is_visitable)
+    const bool is_visitable,
+    const bool is_immutable)
     : is_uml_large_package_(is_uml_large_package),
       is_uml_class_(is_uml_class),
       is_uml_generalization_(is_uml_generalization),
@@ -73,7 +75,8 @@ object_profile::object_profile(
       is_non_generatable_(is_non_generatable),
       is_versioned_(is_versioned),
       is_keyed_(is_keyed),
-      is_visitable_(is_visitable) { }
+      is_visitable_(is_visitable),
+      is_immutable_(is_immutable) { }
 
 void object_profile::swap(object_profile& other) noexcept {
     using std::swap;
@@ -93,6 +96,7 @@ void object_profile::swap(object_profile& other) noexcept {
     swap(is_versioned_, other.is_versioned_);
     swap(is_keyed_, other.is_keyed_);
     swap(is_visitable_, other.is_visitable_);
+    swap(is_immutable_, other.is_immutable_);
 }
 
 bool object_profile::operator==(const object_profile& rhs) const {
@@ -111,7 +115,8 @@ bool object_profile::operator==(const object_profile& rhs) const {
         is_non_generatable_ == rhs.is_non_generatable_ &&
         is_versioned_ == rhs.is_versioned_ &&
         is_keyed_ == rhs.is_keyed_ &&
-        is_visitable_ == rhs.is_visitable_;
+        is_visitable_ == rhs.is_visitable_ &&
+        is_immutable_ == rhs.is_immutable_;
 }
 
 object_profile& object_profile::operator=(object_profile other) {
@@ -246,6 +251,14 @@ bool object_profile::is_visitable() const {
 
 void object_profile::is_visitable(const bool v) {
     is_visitable_ = v;
+}
+
+bool object_profile::is_immutable() const {
+    return is_immutable_;
+}
+
+void object_profile::is_immutable(const bool v) {
+    is_immutable_ = v;
 }
 
 } }

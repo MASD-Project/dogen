@@ -129,7 +129,13 @@ std::ostream& operator<<(std::ostream& s, const pod& v) {
       << "\"pod_type\": " << v.pod_type() << ", "
       << "\"documentation\": " << "\"" << tidy_up_string(v.documentation()) << "\"" << ", "
       << "\"number_of_type_arguments\": " << v.number_of_type_arguments() << ", "
-      << "\"implementation_specific_parameters\": " << v.implementation_specific_parameters()
+      << "\"implementation_specific_parameters\": " << v.implementation_specific_parameters() << ", "
+      << "\"is_visitable\": " << v.is_visitable() << ", "
+      << "\"is_immutable\": " << v.is_immutable() << ", "
+      << "\"is_versioned\": " << v.is_versioned() << ", "
+      << "\"is_keyed\": " << v.is_keyed() << ", "
+      << "\"is_comparable\": " << v.is_comparable() << ", "
+      << "\"is_fluent\": " << v.is_fluent()
       << " }";
     return(s);
 }

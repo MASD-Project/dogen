@@ -51,6 +51,9 @@ std::ostream& operator<<(std::ostream& s, const aspect_types& v) {
     case aspect_types::namespace_doc:
         attr = "\"namespace_doc\"";
         break;
+    case aspect_types::visitor:
+        attr = "\"visitor\"";
+        break;
     default:
         throw std::invalid_argument("Invalid value for aspect_types");
     }
