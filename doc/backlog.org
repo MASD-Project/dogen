@@ -11,6 +11,11 @@ This file contains all stories that haven't been assigned to a sprint.
 
 Stories that we intend to look at, at some point.
 
+*** Warn if value or entity has methods
+
+We should issue a warning if a user defines methods in value or entity
+pods as its most likely by mistake.
+
 *** Add diff support
 
 Dogen should have a =diff= option. When switched on, it would generate
