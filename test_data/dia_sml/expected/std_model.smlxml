@@ -275,6 +275,13 @@
 					<count>0</count>
 					<item_version>0</item_version>
 				</implementation_specific_parameters>
+				<is_visitable>0</is_visitable>
+				<is_immutable>0</is_immutable>
+				<is_versioned>0</is_versioned>
+				<is_keyed>0</is_keyed>
+				<is_comparable>0</is_comparable>
+				<is_fluent>0</is_fluent>
+				<is_aggregate_root>0</is_aggregate_root>
 			</second>
 		</item>
 		<item>
@@ -407,6 +414,13 @@
 					<count>0</count>
 					<item_version>0</item_version>
 				</implementation_specific_parameters>
+				<is_visitable>0</is_visitable>
+				<is_immutable>0</is_immutable>
+				<is_versioned>0</is_versioned>
+				<is_keyed>0</is_keyed>
+				<is_comparable>0</is_comparable>
+				<is_fluent>0</is_fluent>
+				<is_aggregate_root>0</is_aggregate_root>
 			</second>
 		</item>
 		<item>
@@ -779,6 +793,13 @@
 					<count>0</count>
 					<item_version>0</item_version>
 				</implementation_specific_parameters>
+				<is_visitable>0</is_visitable>
+				<is_immutable>0</is_immutable>
+				<is_versioned>0</is_versioned>
+				<is_keyed>0</is_keyed>
+				<is_comparable>0</is_comparable>
+				<is_fluent>0</is_fluent>
+				<is_aggregate_root>0</is_aggregate_root>
 			</second>
 		</item>
 		<item>
@@ -1041,6 +1062,13 @@
 					<count>0</count>
 					<item_version>0</item_version>
 				</implementation_specific_parameters>
+				<is_visitable>0</is_visitable>
+				<is_immutable>0</is_immutable>
+				<is_versioned>0</is_versioned>
+				<is_keyed>0</is_keyed>
+				<is_comparable>0</is_comparable>
+				<is_fluent>0</is_fluent>
+				<is_aggregate_root>0</is_aggregate_root>
 			</second>
 		</item>
 		<item>
@@ -1322,6 +1350,13 @@
 					<count>0</count>
 					<item_version>0</item_version>
 				</implementation_specific_parameters>
+				<is_visitable>0</is_visitable>
+				<is_immutable>0</is_immutable>
+				<is_versioned>0</is_versioned>
+				<is_keyed>0</is_keyed>
+				<is_comparable>0</is_comparable>
+				<is_fluent>0</is_fluent>
+				<is_aggregate_root>0</is_aggregate_root>
 			</second>
 		</item>
 		<item>
@@ -1608,6 +1643,13 @@
 					<count>0</count>
 					<item_version>0</item_version>
 				</implementation_specific_parameters>
+				<is_visitable>0</is_visitable>
+				<is_immutable>0</is_immutable>
+				<is_versioned>0</is_versioned>
+				<is_keyed>0</is_keyed>
+				<is_comparable>0</is_comparable>
+				<is_fluent>0</is_fluent>
+				<is_aggregate_root>0</is_aggregate_root>
 			</second>
 		</item>
 		<item>
@@ -1977,6 +2019,13 @@
 					<count>0</count>
 					<item_version>0</item_version>
 				</implementation_specific_parameters>
+				<is_visitable>0</is_visitable>
+				<is_immutable>0</is_immutable>
+				<is_versioned>0</is_versioned>
+				<is_keyed>0</is_keyed>
+				<is_comparable>0</is_comparable>
+				<is_fluent>0</is_fluent>
+				<is_aggregate_root>0</is_aggregate_root>
 			</second>
 		</item>
 		<item>
@@ -2346,6 +2395,13 @@
 					<count>0</count>
 					<item_version>0</item_version>
 				</implementation_specific_parameters>
+				<is_visitable>0</is_visitable>
+				<is_immutable>0</is_immutable>
+				<is_versioned>0</is_versioned>
+				<is_keyed>0</is_keyed>
+				<is_comparable>0</is_comparable>
+				<is_fluent>0</is_fluent>
+				<is_aggregate_root>0</is_aggregate_root>
 			</second>
 		</item>
 		<item>
@@ -2578,6 +2634,13 @@
 					<count>0</count>
 					<item_version>0</item_version>
 				</implementation_specific_parameters>
+				<is_visitable>0</is_visitable>
+				<is_immutable>0</is_immutable>
+				<is_versioned>0</is_versioned>
+				<is_keyed>0</is_keyed>
+				<is_comparable>0</is_comparable>
+				<is_fluent>0</is_fluent>
+				<is_aggregate_root>0</is_aggregate_root>
 			</second>
 		</item>
 		<item>
@@ -2694,6 +2757,13 @@
 					<count>0</count>
 					<item_version>0</item_version>
 				</implementation_specific_parameters>
+				<is_visitable>0</is_visitable>
+				<is_immutable>0</is_immutable>
+				<is_versioned>0</is_versioned>
+				<is_keyed>0</is_keyed>
+				<is_comparable>0</is_comparable>
+				<is_fluent>0</is_fluent>
+				<is_aggregate_root>0</is_aggregate_root>
 			</second>
 		</item>
 		<item>
@@ -3063,6 +3133,13 @@
 					<count>0</count>
 					<item_version>0</item_version>
 				</implementation_specific_parameters>
+				<is_visitable>0</is_visitable>
+				<is_immutable>0</is_immutable>
+				<is_versioned>0</is_versioned>
+				<is_keyed>0</is_keyed>
+				<is_comparable>0</is_comparable>
+				<is_fluent>0</is_fluent>
+				<is_aggregate_root>0</is_aggregate_root>
 			</second>
 		</item>
 		<item>
@@ -3216,6 +3293,13 @@
 					<count>0</count>
 					<item_version>0</item_version>
 				</implementation_specific_parameters>
+				<is_visitable>0</is_visitable>
+				<is_immutable>0</is_immutable>
+				<is_versioned>0</is_versioned>
+				<is_keyed>0</is_keyed>
+				<is_comparable>0</is_comparable>
+				<is_fluent>0</is_fluent>
+				<is_aggregate_root>0</is_aggregate_root>
 			</second>
 		</item>
 		<item>
@@ -3329,6 +3413,13 @@
 					<count>0</count>
 					<item_version>0</item_version>
 				</implementation_specific_parameters>
+				<is_visitable>0</is_visitable>
+				<is_immutable>0</is_immutable>
+				<is_versioned>0</is_versioned>
+				<is_keyed>0</is_keyed>
+				<is_comparable>0</is_comparable>
+				<is_fluent>0</is_fluent>
+				<is_aggregate_root>0</is_aggregate_root>
 			</second>
 		</item>
 	</pods>

@@ -102,6 +102,7 @@ std::size_t pod_hasher::hash(const pod&v) {
     combine(seed, v.is_keyed());
     combine(seed, v.is_comparable());
     combine(seed, v.is_fluent());
+    combine(seed, v.is_aggregate_root());
 
     return seed;
 }

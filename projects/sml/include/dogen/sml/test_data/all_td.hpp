@@ -19,6 +19,7 @@
  *
  */
 #include "dogen/sml/test_data/category_types_td.hpp"
+#include "dogen/sml/test_data/entry_td.hpp"
 #include "dogen/sml/test_data/enumeration_td.hpp"
 #include "dogen/sml/test_data/enumerator_td.hpp"
 #include "dogen/sml/test_data/exception_td.hpp"
@@ -33,3 +34,4 @@
 #include "dogen/sml/test_data/property_td.hpp"
 #include "dogen/sml/test_data/qname_td.hpp"
 #include "dogen/sml/test_data/reference_td.hpp"
+#include "dogen/sml/test_data/string_table_td.hpp"

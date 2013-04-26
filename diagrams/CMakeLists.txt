@@ -21,6 +21,7 @@ add_custom_target(codegen)
 set(dogen_dir "${CMAKE_BINARY_DIR}/stage/bin/")
 set(dogen_binary "${dogen_dir}/dogen_driver")
 set(dogen_version "")
+set(use_latest_driver TRUE)
 execute_process(
     COMMAND ${dogen_binary} --version
     COMMAND head -n1
@@ -46,7 +47,9 @@ add_custom_target(codegen_${target}
     --ignore-files-matching-regex .*/test/.*
     --ignore-files-matching-regex .*/spec/.*
     -v -d -p dogen)
-add_dependencies(codegen_${target} driver)
+if(use_latest_driver)
+    add_dependencies(codegen_${target} driver)
+endif()
 add_dependencies(codegen codegen_${target})
 
 set(target dia)
@@ -64,7 +67,9 @@ add_custom_target(codegen_${target}
     --ignore-files-matching-regex .*/test/.*
     --ignore-files-matching-regex .*/spec/.*
     -v -d -p dogen)
-add_dependencies(codegen_${target} driver)
+if(use_latest_driver)
+    add_dependencies(codegen_${target} driver)
+endif()
 add_dependencies(codegen codegen_${target})
 
 set(target config)
@@ -82,7 +87,9 @@ add_custom_target(codegen_${target}
     --ignore-files-matching-regex .*/test/.*
     --ignore-files-matching-regex .*/spec/.*
     -v -d -p dogen)
-add_dependencies(codegen_${target} driver)
+if(use_latest_driver)
+    add_dependencies(codegen_${target} driver)
+endif()
 add_dependencies(codegen codegen_${target})
 
 set(target cpp)
@@ -101,7 +108,9 @@ add_custom_target(codegen_${target}
     --cpp-enable-facet test_data
     --ignore-files-matching-regex .*/spec/.*
     -v -d -p dogen)
-add_dependencies(codegen_${target} driver)
+if(use_latest_driver)
+    add_dependencies(codegen_${target} driver)
+endif()
 add_dependencies(codegen codegen_${target})
 
 set(target database)
@@ -122,7 +131,9 @@ add_custom_target(codegen_${target}
     --ignore-files-matching-regex .*sql
     --ignore-files-matching-regex .*-odb.*
     -v -d -p dogen)
-add_dependencies(codegen_${target} driver)
+if(use_latest_driver)
+    add_dependencies(codegen_${target} driver)
+endif()
 add_dependencies(codegen codegen_${target})
 
 set(target engine)
@@ -144,7 +155,9 @@ add_custom_target(codegen_${target}
     --ignore-files-matching-regex .*/CMakeLists.txt
     --ignore-files-matching-regex .*/spec/.*
     -v -d -p dogen)
-add_dependencies(codegen_${target} driver)
+if(use_latest_driver)
+    add_dependencies(codegen_${target} driver)
+endif()
 add_dependencies(codegen codegen_${target})
 
 set(target dia_to_sml)
@@ -166,5 +179,7 @@ add_custom_target(codegen_${target}
     --ignore-files-matching-regex .*/spec/.*
     --ignore-files-matching-regex .*/test/.*
     -v -d -p dogen)
-add_dependencies(codegen_${target} driver)
+if(use_latest_driver)
+    add_dependencies(codegen_${target} driver)
+endif()
 add_dependencies(codegen codegen_${target})

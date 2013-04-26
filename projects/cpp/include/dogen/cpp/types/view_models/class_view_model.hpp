@@ -65,7 +65,8 @@ public:
         const std::vector<std::pair<std::string, std::string> >& implementation_specific_parameters,
         const bool is_comparable,
         const bool is_visitable,
-        const bool is_fluent);
+        const bool is_fluent,
+        const bool is_immutable);
 
 private:
     template<typename Archive>
@@ -219,6 +220,9 @@ public:
     bool is_fluent() const;
     void is_fluent(const bool v);
 
+    bool is_immutable() const;
+    void is_immutable(const bool v);
+
 public:
     bool operator==(const class_view_model& rhs) const;
     bool operator!=(const class_view_model& rhs) const {
@@ -247,6 +251,7 @@ private:
     bool is_comparable_;
     bool is_visitable_;
     bool is_fluent_;
+    bool is_immutable_;
 };
 
 } } }

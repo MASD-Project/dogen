@@ -50,7 +50,10 @@ std::ostream& operator<<(std::ostream& s, const object_profile& v) {
       << "\"is_versioned\": " << v.is_versioned() << ", "
       << "\"is_keyed\": " << v.is_keyed() << ", "
       << "\"is_visitable\": " << v.is_visitable() << ", "
-      << "\"is_immutable\": " << v.is_immutable()
+      << "\"is_immutable\": " << v.is_immutable() << ", "
+      << "\"is_fluent\": " << v.is_fluent() << ", "
+      << "\"is_aggregate_root\": " << v.is_aggregate_root() << ", "
+      << "\"is_string_table\": " << v.is_string_table()
       << " }";
     return(s);
 }

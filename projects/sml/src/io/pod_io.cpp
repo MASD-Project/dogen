@@ -135,7 +135,8 @@ std::ostream& operator<<(std::ostream& s, const pod& v) {
       << "\"is_versioned\": " << v.is_versioned() << ", "
       << "\"is_keyed\": " << v.is_keyed() << ", "
       << "\"is_comparable\": " << v.is_comparable() << ", "
-      << "\"is_fluent\": " << v.is_fluent()
+      << "\"is_fluent\": " << v.is_fluent() << ", "
+      << "\"is_aggregate_root\": " << v.is_aggregate_root()
       << " }";
     return(s);
 }

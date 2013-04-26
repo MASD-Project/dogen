@@ -40,7 +40,10 @@ object_profile::object_profile()
       is_versioned_(static_cast<bool>(0)),
       is_keyed_(static_cast<bool>(0)),
       is_visitable_(static_cast<bool>(0)),
-      is_immutable_(static_cast<bool>(0)) { }
+      is_immutable_(static_cast<bool>(0)),
+      is_fluent_(static_cast<bool>(0)),
+      is_aggregate_root_(static_cast<bool>(0)),
+      is_string_table_(static_cast<bool>(0)) { }
 
 object_profile::object_profile(
     const bool is_uml_large_package,
@@ -59,7 +62,10 @@ object_profile::object_profile(
     const bool is_versioned,
     const bool is_keyed,
     const bool is_visitable,
-    const bool is_immutable)
+    const bool is_immutable,
+    const bool is_fluent,
+    const bool is_aggregate_root,
+    const bool is_string_table)
     : is_uml_large_package_(is_uml_large_package),
       is_uml_class_(is_uml_class),
       is_uml_generalization_(is_uml_generalization),
@@ -76,7 +82,10 @@ object_profile::object_profile(
       is_versioned_(is_versioned),
       is_keyed_(is_keyed),
       is_visitable_(is_visitable),
-      is_immutable_(is_immutable) { }
+      is_immutable_(is_immutable),
+      is_fluent_(is_fluent),
+      is_aggregate_root_(is_aggregate_root),
+      is_string_table_(is_string_table) { }
 
 void object_profile::swap(object_profile& other) noexcept {
     using std::swap;
@@ -97,6 +106,9 @@ void object_profile::swap(object_profile& other) noexcept {
     swap(is_keyed_, other.is_keyed_);
     swap(is_visitable_, other.is_visitable_);
     swap(is_immutable_, other.is_immutable_);
+    swap(is_fluent_, other.is_fluent_);
+    swap(is_aggregate_root_, other.is_aggregate_root_);
+    swap(is_string_table_, other.is_string_table_);
 }
 
 bool object_profile::operator==(const object_profile& rhs) const {
@@ -116,7 +128,10 @@ bool object_profile::operator==(const object_profile& rhs) const {
         is_versioned_ == rhs.is_versioned_ &&
         is_keyed_ == rhs.is_keyed_ &&
         is_visitable_ == rhs.is_visitable_ &&
-        is_immutable_ == rhs.is_immutable_;
+        is_immutable_ == rhs.is_immutable_ &&
+        is_fluent_ == rhs.is_fluent_ &&
+        is_aggregate_root_ == rhs.is_aggregate_root_ &&
+        is_string_table_ == rhs.is_string_table_;
 }
 
 object_profile& object_profile::operator=(object_profile other) {
@@ -259,6 +274,30 @@ bool object_profile::is_immutable() const {
 
 void object_profile::is_immutable(const bool v) {
     is_immutable_ = v;
+}
+
+bool object_profile::is_fluent() const {
+    return is_fluent_;
+}
+
+void object_profile::is_fluent(const bool v) {
+    is_fluent_ = v;
+}
+
+bool object_profile::is_aggregate_root() const {
+    return is_aggregate_root_;
+}
+
+void object_profile::is_aggregate_root(const bool v) {
+    is_aggregate_root_ = v;
+}
+
+bool object_profile::is_string_table() const {
+    return is_string_table_;
+}
+
+void object_profile::is_string_table(const bool v) {
+    is_string_table_ = v;
 }
 
 } }

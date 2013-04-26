@@ -39,6 +39,10 @@ const std::string value("value");
 const std::string service("service");
 const std::string nongeneratable("nongeneratable");
 const std::string visitable("visitable");
+const std::string immutable("immutable");
+const std::string keyed("keyed");
+const std::string fluent("fluent");
+const std::string versioned("versioned");
 
 }
 
@@ -82,6 +86,14 @@ process_stereotype(object_profile& o, const std::string& s) const {
             o.is_non_generatable(true);
         else if (stereotype == visitable)
             o.is_visitable(true);
+        else if (stereotype == immutable)
+            o.is_immutable(true);
+        else if (stereotype == keyed)
+            o.is_keyed(true);
+        else if (stereotype == fluent)
+            o.is_fluent(true);
+        else if (stereotype == versioned)
+            o.is_versioned(true);
         else {
             BOOST_LOG_SEV(lg, error) << invalid_stereotype << "'"
                                      << stereotype << "'";

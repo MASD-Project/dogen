@@ -71,7 +71,8 @@ public:
         const bool is_versioned,
         const bool is_keyed,
         const bool is_comparable,
-        const bool is_fluent);
+        const bool is_fluent,
+        const bool is_aggregate_root);
 
 private:
     template<typename Archive>
@@ -244,6 +245,14 @@ public:
     void is_fluent(const bool v);
     /**@}*/
 
+    /**
+     * @brief If true, this pod is a root of an aggregate.
+     */
+    /**@{*/
+    bool is_aggregate_root() const;
+    void is_aggregate_root(const bool v);
+    /**@}*/
+
 public:
     bool operator==(const pod& rhs) const;
     bool operator!=(const pod& rhs) const {
@@ -273,6 +282,7 @@ private:
     bool is_keyed_;
     bool is_comparable_;
     bool is_fluent_;
+    bool is_aggregate_root_;
 };
 
 } }

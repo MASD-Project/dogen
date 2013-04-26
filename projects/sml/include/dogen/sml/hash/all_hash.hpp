@@ -19,6 +19,7 @@
  *
  */
 #include "dogen/sml/hash/category_types_hash.hpp"
+#include "dogen/sml/hash/entry_hash.hpp"
 #include "dogen/sml/hash/enumeration_hash.hpp"
 #include "dogen/sml/hash/enumerator_hash.hpp"
 #include "dogen/sml/hash/exception_hash.hpp"
@@ -33,3 +34,4 @@
 #include "dogen/sml/hash/property_hash.hpp"
 #include "dogen/sml/hash/qname_hash.hpp"
 #include "dogen/sml/hash/reference_hash.hpp"
+#include "dogen/sml/hash/string_table_hash.hpp"

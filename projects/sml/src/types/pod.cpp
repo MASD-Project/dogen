@@ -34,7 +34,8 @@ pod::pod()
       is_versioned_(static_cast<bool>(0)),
       is_keyed_(static_cast<bool>(0)),
       is_comparable_(static_cast<bool>(0)),
-      is_fluent_(static_cast<bool>(0)) { }
+      is_fluent_(static_cast<bool>(0)),
+      is_aggregate_root_(static_cast<bool>(0)) { }
 
 pod::pod(pod&& rhs)
     : name_(std::move(rhs.name_)),
@@ -54,7 +55,8 @@ pod::pod(pod&& rhs)
       is_versioned_(std::move(rhs.is_versioned_)),
       is_keyed_(std::move(rhs.is_keyed_)),
       is_comparable_(std::move(rhs.is_comparable_)),
-      is_fluent_(std::move(rhs.is_fluent_)) { }
+      is_fluent_(std::move(rhs.is_fluent_)),
+      is_aggregate_root_(std::move(rhs.is_aggregate_root_)) { }
 
 pod::pod(
     const dogen::sml::qname& name,
@@ -74,7 +76,8 @@ pod::pod(
     const bool is_versioned,
     const bool is_keyed,
     const bool is_comparable,
-    const bool is_fluent)
+    const bool is_fluent,
+    const bool is_aggregate_root)
     : name_(name),
       properties_(properties),
       parent_name_(parent_name),
@@ -92,7 +95,8 @@ pod::pod(
       is_versioned_(is_versioned),
       is_keyed_(is_keyed),
       is_comparable_(is_comparable),
-      is_fluent_(is_fluent) { }
+      is_fluent_(is_fluent),
+      is_aggregate_root_(is_aggregate_root) { }
 
 void pod::swap(pod& other) noexcept {
     using std::swap;
@@ -114,6 +118,7 @@ void pod::swap(pod& other) noexcept {
     swap(is_keyed_, other.is_keyed_);
     swap(is_comparable_, other.is_comparable_);
     swap(is_fluent_, other.is_fluent_);
+    swap(is_aggregate_root_, other.is_aggregate_root_);
 }
 
 bool pod::operator==(const pod& rhs) const {
@@ -134,7 +139,8 @@ bool pod::operator==(const pod& rhs) const {
         is_versioned_ == rhs.is_versioned_ &&
         is_keyed_ == rhs.is_keyed_ &&
         is_comparable_ == rhs.is_comparable_ &&
-        is_fluent_ == rhs.is_fluent_;
+        is_fluent_ == rhs.is_fluent_ &&
+        is_aggregate_root_ == rhs.is_aggregate_root_;
 }
 
 pod& pod::operator=(pod other) {
@@ -341,6 +347,14 @@ bool pod::is_fluent() const {
 
 void pod::is_fluent(const bool v) {
     is_fluent_ = v;
+}
+
+bool pod::is_aggregate_root() const {
+    return is_aggregate_root_;
+}
+
+void pod::is_aggregate_root(const bool v) {
+    is_aggregate_root_ = v;
 }
 
 } }

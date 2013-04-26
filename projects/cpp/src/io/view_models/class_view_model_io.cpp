@@ -131,7 +131,8 @@ std::ostream& operator<<(std::ostream& s, const class_view_model& v) {
       << "\"implementation_specific_parameters\": " << v.implementation_specific_parameters() << ", "
       << "\"is_comparable\": " << v.is_comparable() << ", "
       << "\"is_visitable\": " << v.is_visitable() << ", "
-      << "\"is_fluent\": " << v.is_fluent()
+      << "\"is_fluent\": " << v.is_fluent() << ", "
+      << "\"is_immutable\": " << v.is_immutable()
       << " }";
     return(s);
 }

@@ -36,4 +36,5 @@
 #include "dogen/cpp/test_data/view_models/parent_view_model_td.hpp"
 #include "dogen/cpp/test_data/view_models/property_view_model_td.hpp"
 #include "dogen/cpp/test_data/view_models/registrar_view_model_td.hpp"
+#include "dogen/cpp/test_data/view_models/string_table_view_model_td.hpp"
 #include "dogen/cpp/test_data/view_models/visitor_view_model_td.hpp"

@@ -132,6 +132,7 @@ populate(const unsigned int position, result_type& v) {
     v.is_keyed(create_bool(position + 15));
     v.is_comparable(create_bool(position + 16));
     v.is_fluent(create_bool(position + 17));
+    v.is_aggregate_root(create_bool(position + 18));
 }
 
 pod_generator::result_type

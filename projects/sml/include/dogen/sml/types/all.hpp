@@ -20,6 +20,7 @@
  */
 #include "dogen/sml/types/boost_model_factory.hpp"
 #include "dogen/sml/types/category_types.hpp"
+#include "dogen/sml/types/entry.hpp"
 #include "dogen/sml/types/enumeration.hpp"
 #include "dogen/sml/types/enumerator.hpp"
 #include "dogen/sml/types/exception.hpp"
@@ -39,4 +40,5 @@
 #include "dogen/sml/types/qname.hpp"
 #include "dogen/sml/types/reference.hpp"
 #include "dogen/sml/types/std_model_factory.hpp"
+#include "dogen/sml/types/string_table.hpp"
 #include "dogen/sml/types/workflow.hpp"

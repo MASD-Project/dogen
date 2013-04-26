@@ -69,6 +69,7 @@ void save(Archive& ar,
     ar << make_nvp("is_keyed", v.is_keyed_);
     ar << make_nvp("is_comparable", v.is_comparable_);
     ar << make_nvp("is_fluent", v.is_fluent_);
+    ar << make_nvp("is_aggregate_root", v.is_aggregate_root_);
 }
 
 template<typename Archive>
@@ -93,6 +94,7 @@ void load(Archive& ar,
     ar >> make_nvp("is_keyed", v.is_keyed_);
     ar >> make_nvp("is_comparable", v.is_comparable_);
     ar >> make_nvp("is_fluent", v.is_fluent_);
+    ar >> make_nvp("is_aggregate_root", v.is_aggregate_root_);
 }
 
 } }

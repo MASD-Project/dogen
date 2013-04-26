@@ -40,10 +40,7 @@ const std::string no_type_flags_set("A type must be");
 const std::string stereotypes_require_uml_class("Only UML classes can");
 const std::string type_related_stereotype(
     "Can only have one type related stereotype");
-const std::string enum_and_exceptions_no_stereotypes(
-    "Enumerations and exceptions do not support");
-const std::string value_and_service_no_stereotypes(
-    "Values and Services do not support");
+const std::string type_does_not_support_stereotypes("Type does not support");
 
 }
 
@@ -187,8 +184,8 @@ BOOST_AUTO_TEST_CASE(setting_only_one_type_flag_does_not_throw) {
     v.validate(op);
 }
 
-BOOST_AUTO_TEST_CASE(setting_non_type_stereotypes_on_types_other_than_entity_throws) {
-    SETUP_TEST_LOG_SOURCE("setting_non_type_stereotypes_on_types_other_than_entity_throws");
+BOOST_AUTO_TEST_CASE(setting_non_type_stereotypes_on_types_other_than_entity_or_value_throws) {
+    SETUP_TEST_LOG_SOURCE("setting_non_type_stereotypes_on_types_other_than_entity_or_value_throws");
 
     dogen::dia_to_sml::validator v;
     dogen::dia_to_sml::object_profile op1;
@@ -197,7 +194,7 @@ BOOST_AUTO_TEST_CASE(setting_non_type_stereotypes_on_types_other_than_entity_thr
     op1.is_versioned(true);
     BOOST_LOG_SEV(lg, debug) << "input op1: " << op1;
 
-    contains_checker<validation_error> cc1(enum_and_exceptions_no_stereotypes);
+    contains_checker<validation_error> cc1(type_does_not_support_stereotypes);
     BOOST_CHECK_EXCEPTION(v.validate(op1), validation_error, cc1);
 
     dogen::dia_to_sml::object_profile op2;
@@ -220,22 +217,12 @@ BOOST_AUTO_TEST_CASE(setting_non_type_stereotypes_on_types_other_than_entity_thr
 
     dogen::dia_to_sml::object_profile op4;
     op4.is_uml_class(true);
-    op4.is_value(true);
+    op4.is_service(true);
     op4.is_versioned(true);
     op4.is_keyed(true);
 
-    contains_checker<validation_error> cc2(value_and_service_no_stereotypes);
     BOOST_LOG_SEV(lg, debug) << "input op4: " << op4;
-    BOOST_CHECK_EXCEPTION(v.validate(op4), validation_error, cc2);
-
-    dogen::dia_to_sml::object_profile op5;
-    op5.is_uml_class(true);
-    op5.is_service(true);
-    op5.is_versioned(true);
-    op5.is_keyed(true);
-
-    BOOST_LOG_SEV(lg, debug) << "input op5: " << op5;
-    BOOST_CHECK_EXCEPTION(v.validate(op4), validation_error, cc2);
+    BOOST_CHECK_EXCEPTION(v.validate(op4), validation_error, cc1);
 }
 
 BOOST_AUTO_TEST_CASE(setting_non_type_stereotypes_on_entities_does_not_throw) {

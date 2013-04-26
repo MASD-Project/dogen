@@ -19,6 +19,7 @@
  *
  */
 #include "dogen/sml/io/category_types_io.hpp"
+#include "dogen/sml/io/entry_io.hpp"
 #include "dogen/sml/io/enumeration_io.hpp"
 #include "dogen/sml/io/enumerator_io.hpp"
 #include "dogen/sml/io/exception_io.hpp"
@@ -33,3 +34,4 @@
 #include "dogen/sml/io/property_io.hpp"
 #include "dogen/sml/io/qname_io.hpp"
 #include "dogen/sml/io/reference_io.hpp"
+#include "dogen/sml/io/string_table_io.hpp"

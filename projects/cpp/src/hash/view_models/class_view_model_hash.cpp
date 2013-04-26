@@ -97,6 +97,7 @@ std::size_t class_view_model_hasher::hash(const class_view_model&v) {
     combine(seed, v.is_comparable());
     combine(seed, v.is_visitable());
     combine(seed, v.is_fluent());
+    combine(seed, v.is_immutable());
 
     return seed;
 }

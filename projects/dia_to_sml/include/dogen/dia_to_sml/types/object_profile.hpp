@@ -58,7 +58,10 @@ public:
         const bool is_versioned,
         const bool is_keyed,
         const bool is_visitable,
-        const bool is_immutable);
+        const bool is_immutable,
+        const bool is_fluent,
+        const bool is_aggregate_root,
+        const bool is_string_table);
 
 private:
     template<typename Archive>
@@ -119,6 +122,15 @@ public:
     bool is_immutable() const;
     void is_immutable(const bool v);
 
+    bool is_fluent() const;
+    void is_fluent(const bool v);
+
+    bool is_aggregate_root() const;
+    void is_aggregate_root(const bool v);
+
+    bool is_string_table() const;
+    void is_string_table(const bool v);
+
 public:
     bool operator==(const object_profile& rhs) const;
     bool operator!=(const object_profile& rhs) const {
@@ -147,6 +159,9 @@ private:
     bool is_keyed_;
     bool is_visitable_;
     bool is_immutable_;
+    bool is_fluent_;
+    bool is_aggregate_root_;
+    bool is_string_table_;
 };
 
 } }

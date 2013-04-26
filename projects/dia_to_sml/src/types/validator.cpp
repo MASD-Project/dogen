@@ -34,10 +34,8 @@ const std::string stereotypes_require_uml_class(
     "Only UML classes can have stereotypes.");
 const std::string too_many_type_related_stereotypes(
     "Can only have one type related stereotype set.");
-const std::string enumeration_and_exception_cant_have_further_stereotypes(
-    "Enumerations and exceptions do not support further stereotypes.");
-const std::string value_and_service_cant_have_further_stereotypes(
-    "Values and Services do not support further stereotypes.");
+const std::string type_does_not_support_further_stereotypes(
+    "Type does not support further stereotypes.");
 
 }
 
@@ -78,25 +76,16 @@ void validator::validate_stereotypes(const object_profile& op) const {
 
     if (types > 1) {
         BOOST_LOG_SEV(lg, error) << too_many_type_related_stereotypes;
-        BOOST_THROW_EXCEPTION(validation_error(too_many_type_related_stereotypes));
+        BOOST_THROW_EXCEPTION(
+            validation_error(too_many_type_related_stereotypes));
     }
 
-    if ((op.is_enumeration() || op.is_exception()) &&
-        (op.is_versioned() || op.is_keyed())) {
-        BOOST_LOG_SEV(lg, error)
-            << enumeration_and_exception_cant_have_further_stereotypes;
+    if ((op.is_enumeration() || op.is_exception() || op.is_service()) &&
+        non_types > 0) {
+        BOOST_LOG_SEV(lg, error) << type_does_not_support_further_stereotypes;
 
-        BOOST_THROW_EXCEPTION(validation_error(
-                enumeration_and_exception_cant_have_further_stereotypes));
-    }
-
-    if ((op.is_value() || op.is_service()) &&
-        (op.is_versioned() || op.is_keyed())) {
-        BOOST_LOG_SEV(lg, error)
-            << value_and_service_cant_have_further_stereotypes;
-
-        BOOST_THROW_EXCEPTION(validation_error(
-                value_and_service_cant_have_further_stereotypes));
+        BOOST_THROW_EXCEPTION(
+            validation_error(type_does_not_support_further_stereotypes));
     }
 }
 
