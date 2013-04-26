@@ -111,8 +111,6 @@ populate(const unsigned int position, result_type& v) {
     v.implementation_specific_parameters(create_std_vector_std_pair_std_string_std_string_(position + 13));
     v.is_comparable(create_bool(position + 14));
     v.is_visitable(create_bool(position + 15));
-    v.is_fluent(create_bool(position + 16));
-    v.is_immutable(create_bool(position + 17));
 }
 
 class_view_model_generator::result_type

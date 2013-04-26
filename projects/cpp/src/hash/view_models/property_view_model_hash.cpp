@@ -59,6 +59,8 @@ std::size_t property_view_model_hasher::hash(const property_view_model&v) {
     combine(seed, v.type());
     combine(seed, v.documentation());
     combine(seed, hash_std_vector_std_pair_std_string_std_string_(v.implementation_specific_parameters()));
+    combine(seed, v.is_immutable());
+    combine(seed, v.is_fluent());
 
     return seed;
 }

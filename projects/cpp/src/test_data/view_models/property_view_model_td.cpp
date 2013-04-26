@@ -51,6 +51,10 @@ std::vector<std::pair<std::string, std::string> > create_std_vector_std_pair_std
     return r;
 }
 
+bool create_bool(const unsigned int position) {
+    return (position % 2) == 0;
+}
+
 }
 
 namespace dogen {
@@ -65,6 +69,8 @@ populate(const unsigned int position, result_type& v) {
     v.type(create_dogen_cpp_view_models_nested_type_view_model(position + 1));
     v.documentation(create_std_string(position + 2));
     v.implementation_specific_parameters(create_std_vector_std_pair_std_string_std_string_(position + 3));
+    v.is_immutable(create_bool(position + 4));
+    v.is_fluent(create_bool(position + 5));
 }
 
 property_view_model_generator::result_type

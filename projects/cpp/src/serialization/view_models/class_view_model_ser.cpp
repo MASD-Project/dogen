@@ -63,8 +63,6 @@ void save(Archive& ar,
     ar << make_nvp("implementation_specific_parameters", v.implementation_specific_parameters_);
     ar << make_nvp("is_comparable", v.is_comparable_);
     ar << make_nvp("is_visitable", v.is_visitable_);
-    ar << make_nvp("is_fluent", v.is_fluent_);
-    ar << make_nvp("is_immutable", v.is_immutable_);
 }
 
 template<typename Archive>
@@ -87,8 +85,6 @@ void load(Archive& ar,
     ar >> make_nvp("implementation_specific_parameters", v.implementation_specific_parameters_);
     ar >> make_nvp("is_comparable", v.is_comparable_);
     ar >> make_nvp("is_visitable", v.is_visitable_);
-    ar >> make_nvp("is_fluent", v.is_fluent_);
-    ar >> make_nvp("is_immutable", v.is_immutable_);
 }
 
 } }

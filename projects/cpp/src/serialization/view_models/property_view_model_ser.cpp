@@ -49,6 +49,8 @@ void save(Archive& ar,
     ar << make_nvp("type", v.type_);
     ar << make_nvp("documentation", v.documentation_);
     ar << make_nvp("implementation_specific_parameters", v.implementation_specific_parameters_);
+    ar << make_nvp("is_immutable", v.is_immutable_);
+    ar << make_nvp("is_fluent", v.is_fluent_);
 }
 
 template<typename Archive>
@@ -59,6 +61,8 @@ void load(Archive& ar,
     ar >> make_nvp("type", v.type_);
     ar >> make_nvp("documentation", v.documentation_);
     ar >> make_nvp("implementation_specific_parameters", v.implementation_specific_parameters_);
+    ar >> make_nvp("is_immutable", v.is_immutable_);
+    ar >> make_nvp("is_fluent", v.is_fluent_);
 }
 
 } }

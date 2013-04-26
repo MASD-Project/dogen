@@ -19,6 +19,7 @@
  *
  */
 #include <boost/algorithm/string.hpp>
+#include <boost/io/ios_state.hpp>
 #include <ostream>
 #include "dogen/cpp/io/view_models/nested_type_view_model_io.hpp"
 #include "dogen/cpp/io/view_models/property_view_model_io.hpp"
@@ -63,12 +64,20 @@ namespace cpp {
 namespace view_models {
 
 std::ostream& operator<<(std::ostream& s, const property_view_model& v) {
+    boost::io::ios_flags_saver ifs(s);
+    s.setf(std::ios_base::boolalpha);
+    s.setf(std::ios::fixed, std::ios::floatfield);
+    s.precision(6);
+    s.setf(std::ios::showpoint);
+
     s << " { "
       << "\"__type__\": " << "\"dogen::cpp::view_models::property_view_model\"" << ", "
       << "\"name\": " << "\"" << tidy_up_string(v.name()) << "\"" << ", "
       << "\"type\": " << v.type() << ", "
       << "\"documentation\": " << "\"" << tidy_up_string(v.documentation()) << "\"" << ", "
-      << "\"implementation_specific_parameters\": " << v.implementation_specific_parameters()
+      << "\"implementation_specific_parameters\": " << v.implementation_specific_parameters() << ", "
+      << "\"is_immutable\": " << v.is_immutable() << ", "
+      << "\"is_fluent\": " << v.is_fluent()
       << " }";
     return(s);
 }

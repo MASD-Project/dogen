@@ -38,17 +38,21 @@ namespace view_models {
 
 class property_view_model final {
 public:
-    property_view_model() = default;
     property_view_model(const property_view_model&) = default;
     property_view_model(property_view_model&&) = default;
     ~property_view_model() = default;
+
+public:
+    property_view_model();
 
 public:
     property_view_model(
         const std::string& name,
         const dogen::cpp::view_models::nested_type_view_model& type,
         const std::string& documentation,
-        const std::vector<std::pair<std::string, std::string> >& implementation_specific_parameters);
+        const std::vector<std::pair<std::string, std::string> >& implementation_specific_parameters,
+        const bool is_immutable,
+        const bool is_fluent);
 
 private:
     template<typename Archive>
@@ -93,6 +97,12 @@ public:
     void implementation_specific_parameters(const std::vector<std::pair<std::string, std::string> >& v);
     void implementation_specific_parameters(const std::vector<std::pair<std::string, std::string> >&& v);
 
+    bool is_immutable() const;
+    void is_immutable(const bool v);
+
+    bool is_fluent() const;
+    void is_fluent(const bool v);
+
 public:
     bool operator==(const property_view_model& rhs) const;
     bool operator!=(const property_view_model& rhs) const {
@@ -108,6 +118,8 @@ private:
     dogen::cpp::view_models::nested_type_view_model type_;
     std::string documentation_;
     std::vector<std::pair<std::string, std::string> > implementation_specific_parameters_;
+    bool is_immutable_;
+    bool is_fluent_;
 };
 
 } } }
