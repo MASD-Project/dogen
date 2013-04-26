@@ -513,9 +513,9 @@ BOOST_AUTO_TEST_CASE(boost_model_generates_expected_code) {
     BOOST_CHECK(check_code_generation(t));
 }
 
-BOOST_AUTO_TEST_CASE(entity_service_value_model_generates_expected_code) {
-    SETUP_TEST_LOG("entity_service_value_model_generates_expected_code");
-    const auto t(dia_sml::input_entity_service_value_dia());
+BOOST_AUTO_TEST_CASE(stereotypes_model_generates_expected_code) {
+    SETUP_TEST_LOG("stereotypes_model_generates_expected_code");
+    const auto t(dia_sml::input_stereotypes_dia());
     BOOST_CHECK(check_code_generation(t));
 }
 

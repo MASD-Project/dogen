@@ -77,7 +77,7 @@ path input_trivial_association_dia("dia_sml/input/trivial_association.dia");
 path input_comments_dia("dia_sml/input/comments.dia");
 path input_enumeration_dia("dia_sml/input/enumeration.dia");
 path input_exception_dia("dia_sml/input/exception.dia");
-path input_entity_service_value_dia("dia_sml/input/entity_service_value.dia");
+path input_stereotypes_dia("dia_sml/input/stereotypes.dia");
 
 path expected(
     "dia_sml/expected");
@@ -403,8 +403,8 @@ path dia_sml::input_split_project_dia() {
     return validating_resolver::resolve(::input_split_project_dia);
 }
 
-path dia_sml::input_entity_service_value_dia() {
-    return validating_resolver::resolve(::input_entity_service_value_dia);
+path dia_sml::input_stereotypes_dia() {
+    return validating_resolver::resolve(::input_stereotypes_dia);
 }
 
 path dia_sml::expected() {

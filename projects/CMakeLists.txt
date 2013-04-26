@@ -181,7 +181,7 @@ include_directories(
     ${CMAKE_SOURCE_DIR}/projects/comments/include
     ${CMAKE_SOURCE_DIR}/projects/enumeration/include
     ${CMAKE_SOURCE_DIR}/projects/exception/include
-    ${CMAKE_SOURCE_DIR}/projects/entity_service_value/include
+    ${CMAKE_SOURCE_DIR}/projects/stereotypes/include
     ${CMAKE_SOURCE_DIR}/projects/database/include
     ${CMAKE_SOURCE_DIR}/projects/dia_to_sml/include
     )
@@ -230,7 +230,7 @@ add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/boost_model)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/comments)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/enumeration)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/exception)
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/entity_service_value)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/stereotypes)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/database)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/database/spec)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dia_to_sml/src)

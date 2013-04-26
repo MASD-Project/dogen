@@ -42,7 +42,7 @@
    "/projects/enumeration/include"
    "/projects/exception/include"
    "/projects/test_model_sanitizer/include"
-   "/projects/entity_service_value/include"
+   "/projects/stereotypes/include"
    "/projects/database/include"
    "/projects/cpp/include"
    "/projects/dia_to_sml/include"
