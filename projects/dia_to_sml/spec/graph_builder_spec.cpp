@@ -120,8 +120,8 @@ BOOST_AUTO_TEST_CASE(adding_generalization_produces_expected_order) {
     BOOST_REQUIRE(o.size() == 3);
 
     auto i(o.begin());
-    BOOST_CHECK(i->id() == mock_processed_object_factory::to_oject_id(0));
-    BOOST_CHECK((++i)->id() == mock_processed_object_factory::to_oject_id(1));
+    BOOST_CHECK(i->id() == mock_processed_object_factory::to_oject_id(1));
+    BOOST_CHECK((++i)->id() == mock_processed_object_factory::to_oject_id(2));
     BOOST_CHECK(is_root_id((++i)->id()));
 }
 

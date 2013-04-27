@@ -28,6 +28,7 @@
 #include "dogen/sml/types/enumeration.hpp"
 #include "dogen/sml/types/exception.hpp"
 #include "dogen/dia_to_sml/types/processed_object.hpp"
+#include "dogen/dia_to_sml/io/processed_object_io.hpp"
 #include "dogen/dia_to_sml/types/profiler.hpp"
 #include "dogen/dia_to_sml/types/validator.hpp"
 #include "dogen/dia_to_sml/types/transformer.hpp"
@@ -51,6 +52,8 @@ const std::string invalid_type_string(
     "String provided with type did not parse into SML qnames: ");
 const std::string object_has_invalid_type("Invalid dia type: ");
 const std::string invalid_stereotype_in_graph("Invalid stereotype: ");
+const std::string immutabilty_with_inheritance(
+    "Immutability not supported with inheritance: ");
 
 }
 
@@ -78,6 +81,18 @@ compute_model_dependencies(const sml::nested_qname& nqn) {
 
     for (const auto c : nqn.children())
         compute_model_dependencies(c);
+}
+
+void transformer::ensure_type_is_processable(const object_profile& op,
+    const processed_object& po) const {
+    if (op.is_uml_generalization() ||
+        op.is_uml_association() ||
+        op.is_uml_message()) {
+        const auto type(boost::lexical_cast<std::string>(po.object_type()));
+        BOOST_LOG_SEV(lg, error) << object_has_invalid_type << type;
+        BOOST_THROW_EXCEPTION(
+            transformation_error(object_has_invalid_type + type));
+    }
 }
 
 sml::qname transformer::transform_qname(const std::string& n,
@@ -173,7 +188,6 @@ transform_pod(const object_profile& op, const processed_object& po) {
     else if (op.is_service())
         pod.pod_type(pod_types::service);
 
-    pod.is_immutable(op.is_immutable());
     pod.is_fluent(op.is_fluent());
 
     using sml::generation_types;
@@ -263,6 +277,17 @@ transform_pod(const object_profile& op, const processed_object& po) {
             parent = j->second.parent_name();
         }
     }
+
+    pod.is_immutable(op.is_immutable());
+    if ((pod.is_parent() || pod.parent_name()) && op.is_immutable())  {
+        BOOST_LOG_SEV(lg, error) << immutabilty_with_inheritance
+                                 << pod.name().type_name();
+
+        BOOST_THROW_EXCEPTION(
+            transformation_error(immutabilty_with_inheritance +
+                pod.name().type_name()));
+    }
+
     context_.model().pods().insert(std::make_pair(pod.name(), pod));
 }
 
@@ -400,12 +425,14 @@ void transformer::transform_exception(const processed_object& o) {
 
 void transformer::transform(const processed_object& o) {
     BOOST_LOG_SEV(lg, debug) << "Starting to transform: " << o.id();
+    BOOST_LOG_SEV(lg, debug) << "Object contents: " << o;
 
     profiler p;
     const auto op(p.profile(o));
 
     validator v;
     v.validate(op);
+    ensure_type_is_processable(op, o);
 
     if (op.is_uml_large_package())
         transform_package(o);

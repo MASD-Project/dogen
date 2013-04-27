@@ -190,7 +190,7 @@ mock_processed_object_factory::build_generalization(unsigned int n) {
             build_class(++n),
             build_class(++n),
         }};
-    r[2].connection(std::make_pair(r[0].id(), r[1].id()));
+    r[0].connection(std::make_pair(r[1].id(), r[2].id()));
     return r;
 }
 

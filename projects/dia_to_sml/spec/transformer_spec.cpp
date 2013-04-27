@@ -40,9 +40,12 @@ const std::string model_name("test");
 const std::string missing_name("Could not find name");
 const std::string empty_name("Dia object name is empty");
 const std::string missing_qname("Missing QName for dia object ID");
+const std::string immutability_inheritance(
+    "Immutability not supported with inheritance");
 
 const std::string enumeration_stereotype("enumeration");
 const std::string exception_stereotype("exception");
+const std::string immutable_stereotype("immutable");
 
 }
 
@@ -326,6 +329,31 @@ BOOST_AUTO_TEST_CASE(empty_uml_note_inside_package_does_nothing) {
     const auto p(c.model().packages().begin()->second);
     BOOST_CHECK(p.documentation().empty());
     BOOST_CHECK(p.implementation_specific_parameters().empty());
+}
+
+BOOST_AUTO_TEST_CASE(inheritance_with_immutability_throws) {
+    SETUP_TEST_LOG_SOURCE("inheritance_with_immutability_throws");
+    dogen::dia_to_sml::context c;
+    c.model().name(model_name);
+
+    const auto a(mock_processed_object_factory::build_generalization(0));
+    const auto con(a[0].connection());
+    BOOST_REQUIRE(con);
+    c.child_to_parent().insert(std::make_pair(con->second, con->first));
+
+    dogen::dia_to_sml::transformer t1(c);
+    t1.transform(a[1]);
+    auto po1(a[2]);
+    po1.stereotype(immutable_stereotype);
+    contains_checker<transformation_error> cc(immutability_inheritance);
+    BOOST_CHECK_EXCEPTION(t1.transform(po1), transformation_error, cc);
+
+    c.child_to_parent().clear();
+    c.parent_ids().insert(con->first);
+    dogen::dia_to_sml::transformer t2(c);
+    auto po2(a[1]);
+    po2.stereotype(immutable_stereotype);
+    BOOST_CHECK_EXCEPTION(t1.transform(po2), transformation_error, cc);
 }
 
 BOOST_AUTO_TEST_SUITE_END()

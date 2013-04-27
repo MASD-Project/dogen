@@ -67,6 +67,14 @@ private:
     void compute_model_dependencies(const sml::nested_qname& nqn);
 
     /**
+     * @brief Checks that the type of the object is a processable
+     * type.
+     */
+    void ensure_type_is_processable(const object_profile& op,
+        const processed_object& po) const;
+
+private:
+    /**
      * @brief Converts the Dia attribute into a qname.
      */
     sml::qname transform_qname(const std::string& n,

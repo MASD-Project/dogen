@@ -185,9 +185,9 @@ void graph_builder::process_connections(const processed_object& o) {
     }
 
     if (connected_ids_.find(child_id) == connected_ids_.end()) {
-        orphanage_.insert(std::make_pair(child_id, parent_vertex));
+        orphanage_.insert(std::make_pair(child_id, child_vertex));
         BOOST_LOG_SEV(lg, debug) << "Vertex for object joined orphanage: "
-                                 << o.id();
+                                 << child_id;
     }
 
     const auto k(orphanage_.find(parent_id));
