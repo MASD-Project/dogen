@@ -98,14 +98,21 @@ BOOST_AUTO_TEST_CASE(validate_io) {
 
 
 BOOST_AUTO_TEST_CASE(setting_properties_using_the_fluent_interface_produces_expected_result) {
-    SETUP_TEST_LOG_SOURCE("setting_properties_using_the_fluent_interface_produces_expected_result");
+    SETUP_TEST_LOG("setting_properties_using_the_fluent_interface_produces_expected_result");
 
-    const dogen::stereotypes::value z(15);
+    const value z(15);
     const std::string s("a string");
     const fluent e(1234, s, z);
     fluent a;
     a.prop_0(1234).prop_1(s).prop_2(z);
     BOOST_CHECK(asserter::assert_equals(e, a));
+}
+
+BOOST_AUTO_TEST_CASE(versioned_stereotype_results_in_new_property_named_version) {
+    SETUP_TEST_LOG("versioned_stereotype_results_in_new_property_named_version");
+
+    versioned v;
+    v.version(10);
 }
 
 BOOST_AUTO_TEST_SUITE_END()

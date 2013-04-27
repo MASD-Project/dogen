@@ -38,15 +38,17 @@ namespace boost {
 namespace serialization {
 
 template<typename Archive>
-void save(Archive& /*ar*/,
-    const dogen::stereotypes::versioned& /*v*/,
+void save(Archive& ar,
+    const dogen::stereotypes::versioned& v,
     const unsigned int /*version*/) {
+    ar << make_nvp("version", v.version_);
 }
 
 template<typename Archive>
-void load(Archive& /*ar*/,
-    dogen::stereotypes::versioned& /*v*/,
+void load(Archive& ar,
+    dogen::stereotypes::versioned& v,
     const unsigned int /*version*/) {
+    ar >> make_nvp("version", v.version_);
 }
 
 } }

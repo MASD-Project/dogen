@@ -23,8 +23,33 @@
 namespace dogen {
 namespace stereotypes {
 
-bool versioned::operator==(const versioned& /*rhs*/) const {
-    return true;
+versioned::versioned()
+    : version_(static_cast<unsigned int>(0)) { }
+
+versioned::versioned(const unsigned int version)
+    : version_(version) { }
+
+void versioned::swap(versioned& other) noexcept {
+    using std::swap;
+    swap(version_, other.version_);
+}
+
+bool versioned::operator==(const versioned& rhs) const {
+    return version_ == rhs.version_;
+}
+
+versioned& versioned::operator=(versioned other) {
+    using std::swap;
+    swap(*this, other);
+    return *this;
+}
+
+unsigned int versioned::version() const {
+    return version_;
+}
+
+void versioned::version(const unsigned int v) {
+    version_ = v;
 }
 
 } }

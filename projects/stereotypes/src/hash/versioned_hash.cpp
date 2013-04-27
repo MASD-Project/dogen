@@ -22,14 +22,22 @@
 
 namespace {
 
+template <typename HashableType>
+inline void combine(std::size_t& seed, const HashableType& value)
+{
+    std::hash<HashableType> hasher;
+    seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
+}
 
 }
 
 namespace dogen {
 namespace stereotypes {
 
-std::size_t versioned_hasher::hash(const versioned&) {
+std::size_t versioned_hasher::hash(const versioned&v) {
     std::size_t seed(0);
+
+    combine(seed, v.version());
     return seed;
 }
 

@@ -20,7 +20,13 @@
  */
 #include "dogen/stereotypes/test_data/versioned_td.hpp"
 
+namespace {
 
+unsigned int create_unsigned_int(const unsigned int position) {
+    return static_cast<unsigned int>(position);
+}
+
+}
 
 namespace dogen {
 namespace stereotypes {
@@ -28,12 +34,14 @@ namespace stereotypes {
 versioned_generator::versioned_generator() : position_(0) { }
 
 void versioned_generator::
-populate(const unsigned int /*position*/, result_type& /*v*/) {
+populate(const unsigned int position, result_type& v) {
+    v.version(create_unsigned_int(position + 0));
 }
 
 versioned_generator::result_type
-versioned_generator::create(const unsigned int/*position*/) {
+versioned_generator::create(const unsigned int position) {
     versioned r;
+    versioned_generator::populate(position, r);
     return r;
 }
 versioned_generator::result_type*

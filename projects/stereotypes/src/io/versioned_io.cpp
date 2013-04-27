@@ -24,9 +24,11 @@
 namespace dogen {
 namespace stereotypes {
 
-std::ostream& operator<<(std::ostream& s, const versioned&) {
+std::ostream& operator<<(std::ostream& s, const versioned& v) {
     s << " { "
-      << "\"__type__\": " << "\"dogen::stereotypes::versioned\"" << " }";
+      << "\"__type__\": " << "\"dogen::stereotypes::versioned\"" << ", "
+      << "\"version\": " << v.version()
+      << " }";
     return(s);
 }
 

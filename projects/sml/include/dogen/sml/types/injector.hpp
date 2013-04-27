@@ -52,6 +52,17 @@ private:
      */
     pod create_key_system_pod(const sml::pod& p, const bool is_versioned) const;
 
+    /**
+     * @brief Performs the deprecated behaviour for key management.
+     */
+    void inject_legacy_keys(model& m) const;
+
+    /**
+     * @brief Injects the version property on any types marked as
+     * versioned.
+     */
+    void inject_versioning(model& m) const;
+
 public:
 
     /**

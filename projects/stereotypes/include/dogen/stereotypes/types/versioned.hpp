@@ -33,11 +33,15 @@ namespace stereotypes {
 
 class versioned final {
 public:
-    versioned() = default;
     versioned(const versioned&) = default;
     versioned(versioned&&) = default;
     ~versioned() = default;
-    versioned& operator=(const versioned&) = default;
+
+public:
+    versioned();
+
+public:
+    explicit versioned(const unsigned int version);
 
 private:
     template<typename Archive>
@@ -47,13 +51,34 @@ private:
     friend void boost::serialization::load(Archive& ar, versioned& v, unsigned int version);
 
 public:
+    unsigned int version() const;
+    void version(const unsigned int v);
+
+public:
     bool operator==(const versioned& rhs) const;
     bool operator!=(const versioned& rhs) const {
         return !this->operator==(rhs);
     }
 
+public:
+    void swap(versioned& other) noexcept;
+    versioned& operator=(versioned other);
+
+private:
+    unsigned int version_;
 };
 
 } }
+
+namespace std {
+
+template<>
+inline void swap(
+    dogen::stereotypes::versioned& lhs,
+    dogen::stereotypes::versioned& rhs) {
+    lhs.swap(rhs);
+}
+
+}
 
 #endif

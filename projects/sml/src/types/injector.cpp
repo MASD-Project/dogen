@@ -97,7 +97,7 @@ create_key_system_pod(const sml::pod& p, const bool is_versioned) const {
     return r;
 }
 
-void injector::inject(model& m) const {
+void injector::inject_legacy_keys(model& m) const {
     if (!add_versioning_types_) {
         BOOST_LOG_SEV(lg, warn) << "Keys are NOT enabled, "
                                 << "NOT injecting them into model.";
@@ -143,6 +143,38 @@ void injector::inject(model& m) const {
         new_pods.insert(std::make_pair(pod.name(), pod));
     }
     m.pods(new_pods);
+}
+
+void injector::inject_versioning(model& m) const {
+    BOOST_LOG_SEV(lg, debug) << "Injecting version property.";
+
+    if (m.pods().empty())
+        return;
+
+    for (auto& pair : m.pods()) {
+        auto& pod(pair.second);
+
+        if (!pod.is_versioned())
+            continue;
+
+        sml::qname qn;
+        qn.type_name(uint_name);
+        qn.meta_type(sml::meta_types::primitive);
+
+        sml::nested_qname nqn;
+        nqn.type(qn);
+
+        sml::property v;
+        v.name(version_name);
+        v.type_name(nqn);
+
+        pod.properties().push_back(v);
+    }
+}
+
+void injector::inject(model& m) const {
+    inject_legacy_keys(m);
+    inject_versioning(m);
 }
 
 } }
