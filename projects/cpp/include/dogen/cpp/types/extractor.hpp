@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_TYPES_DEPENDENCY_EXTRACTOR_HPP
-#define DOGEN_CPP_TYPES_DEPENDENCY_EXTRACTOR_HPP
+#ifndef DOGEN_CPP_TYPES_EXTRACTOR_HPP
+#define DOGEN_CPP_TYPES_EXTRACTOR_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -29,24 +29,24 @@
 #include "dogen/sml/types/pod.hpp"
 #include "dogen/cpp/types/boost_model_helper.hpp"
 #include "dogen/cpp/types/std_model_helper.hpp"
-#include "dogen/cpp/types/dependency_details.hpp"
+#include "dogen/cpp/types/relationships.hpp"
 
 namespace dogen {
 namespace cpp {
 
-class dependency_extractor {
+class extractor {
 public:
-    dependency_extractor() = delete;
-    dependency_extractor(const dependency_extractor&) = default;
-    ~dependency_extractor() = default;
-    dependency_extractor(dependency_extractor&&) = default;
-    dependency_extractor& operator=(const dependency_extractor&) = delete;
+    extractor() = delete;
+    extractor(const extractor&) = default;
+    ~extractor() = default;
+    extractor(extractor&&) = default;
+    extractor& operator=(const extractor&) = delete;
 
 public:
     typedef const std::unordered_map<sml::qname, sml::pod> pod_map;
 
 public:
-    dependency_extractor(const pod_map& pods,
+    extractor(const pod_map& pods,
         const boost_model_helper& boost,
         const std_model_helper& std) : pods_(pods), boost_(boost), std_(std) { }
 
@@ -56,7 +56,7 @@ private:
      * up dependencies as it goes along.
      */
     void recurse_nested_qnames(const dogen::sml::nested_qname& nqn,
-        dependency_details& dd, bool& is_pointer) const;
+        relationships& rel, bool& is_pointer) const;
 
 public:
     /**
@@ -66,7 +66,16 @@ public:
      * The qnames include all types used by the properties of the pod,
      * as well as its parent, if any.
      */
-    dependency_details extract(const sml::pod& p) const;
+    relationships extract_dependency_graph(const sml::pod& p) const;
+
+    /**
+     * @brief Flattens the given qname into a object inheritance
+     * graph, with the qname as the root.
+     *
+     * The qnames include all descendants of the originally supplied
+     * type.
+     */
+    relationships extract_inheritance_graph(const sml::qname& qn) const;
 
 private:
     const pod_map& pods_;

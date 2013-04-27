@@ -20,7 +20,7 @@
  */
 #include <boost/io/ios_state.hpp>
 #include <ostream>
-#include "dogen/cpp/io/dependency_details_io.hpp"
+#include "dogen/cpp/io/relationships_io.hpp"
 #include "dogen/sml/io/qname_io.hpp"
 
 namespace std {
@@ -40,7 +40,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_set<dogen:
 namespace dogen {
 namespace cpp {
 
-std::ostream& operator<<(std::ostream& s, const dependency_details& v) {
+std::ostream& operator<<(std::ostream& s, const relationships& v) {
     boost::io::ios_flags_saver ifs(s);
     s.setf(std::ios_base::boolalpha);
     s.setf(std::ios::fixed, std::ios::floatfield);
@@ -48,7 +48,7 @@ std::ostream& operator<<(std::ostream& s, const dependency_details& v) {
     s.setf(std::ios::showpoint);
 
     s << " { "
-      << "\"__type__\": " << "\"dogen::cpp::dependency_details\"" << ", "
+      << "\"__type__\": " << "\"dogen::cpp::relationships\"" << ", "
       << "\"names\": " << v.names() << ", "
       << "\"forward_decls\": " << v.forward_decls() << ", "
       << "\"keys\": " << v.keys() << ", "

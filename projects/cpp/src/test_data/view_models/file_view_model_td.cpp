@@ -28,6 +28,7 @@
 #include "dogen/cpp/test_data/view_models/file_view_model_td.hpp"
 #include "dogen/cpp/test_data/view_models/namespace_view_model_td.hpp"
 #include "dogen/cpp/test_data/view_models/registrar_view_model_td.hpp"
+#include "dogen/cpp/test_data/view_models/visitor_view_model_td.hpp"
 #include "dogen/sml/test_data/category_types_td.hpp"
 #include "dogen/sml/test_data/meta_types_td.hpp"
 
@@ -134,6 +135,17 @@ create_boost_optional_dogen_cpp_view_models_namespace_view_model(unsigned int po
     return r;
 }
 
+dogen::cpp::view_models::visitor_view_model
+create_dogen_cpp_view_models_visitor_view_model(const unsigned int position) {
+    return dogen::cpp::view_models::visitor_view_model_generator::create(position);
+}
+
+boost::optional<dogen::cpp::view_models::visitor_view_model>
+create_boost_optional_dogen_cpp_view_models_visitor_view_model(unsigned int position) {
+    boost::optional<dogen::cpp::view_models::visitor_view_model> r(        create_dogen_cpp_view_models_visitor_view_model(position));
+    return r;
+}
+
 }
 
 namespace dogen {
@@ -158,6 +170,7 @@ populate(const unsigned int position, result_type& v) {
     v.user_includes(create_std_list_std_string(position + 11));
     v.file_path(create_boost_filesystem_path(position + 12));
     v.namespace_vm(create_boost_optional_dogen_cpp_view_models_namespace_view_model(position + 13));
+    v.visitor_vm(create_boost_optional_dogen_cpp_view_models_visitor_view_model(position + 14));
 }
 
 file_view_model_generator::result_type

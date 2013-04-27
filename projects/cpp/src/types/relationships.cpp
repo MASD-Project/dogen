@@ -18,12 +18,12 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/cpp/types/dependency_details.hpp"
+#include "dogen/cpp/types/relationships.hpp"
 
 namespace dogen {
 namespace cpp {
 
-dependency_details::dependency_details()
+relationships::relationships()
     : has_std_string_(static_cast<bool>(0)),
       has_variant_(static_cast<bool>(0)),
       is_parent_(static_cast<bool>(0)),
@@ -31,7 +31,7 @@ dependency_details::dependency_details()
       requires_stream_manipulators_(static_cast<bool>(0)),
       has_std_pair_(static_cast<bool>(0)) { }
 
-dependency_details::dependency_details(
+relationships::relationships(
     const std::unordered_set<dogen::sml::qname>& names,
     const std::unordered_set<dogen::sml::qname>& forward_decls,
     const std::unordered_set<dogen::sml::qname>& keys,
@@ -53,7 +53,7 @@ dependency_details::dependency_details(
       requires_stream_manipulators_(requires_stream_manipulators),
       has_std_pair_(has_std_pair) { }
 
-void dependency_details::swap(dependency_details& other) noexcept {
+void relationships::swap(relationships& other) noexcept {
     using std::swap;
     swap(names_, other.names_);
     swap(forward_decls_, other.forward_decls_);
@@ -67,7 +67,7 @@ void dependency_details::swap(dependency_details& other) noexcept {
     swap(has_std_pair_, other.has_std_pair_);
 }
 
-bool dependency_details::operator==(const dependency_details& rhs) const {
+bool relationships::operator==(const relationships& rhs) const {
     return names_ == rhs.names_ &&
         forward_decls_ == rhs.forward_decls_ &&
         keys_ == rhs.keys_ &&
@@ -80,121 +80,121 @@ bool dependency_details::operator==(const dependency_details& rhs) const {
         has_std_pair_ == rhs.has_std_pair_;
 }
 
-dependency_details& dependency_details::operator=(dependency_details other) {
+relationships& relationships::operator=(relationships other) {
     using std::swap;
     swap(*this, other);
     return *this;
 }
 
-const std::unordered_set<dogen::sml::qname>& dependency_details::names() const {
+const std::unordered_set<dogen::sml::qname>& relationships::names() const {
     return names_;
 }
 
-std::unordered_set<dogen::sml::qname>& dependency_details::names() {
+std::unordered_set<dogen::sml::qname>& relationships::names() {
     return names_;
 }
 
-void dependency_details::names(const std::unordered_set<dogen::sml::qname>& v) {
+void relationships::names(const std::unordered_set<dogen::sml::qname>& v) {
     names_ = v;
 }
 
-void dependency_details::names(const std::unordered_set<dogen::sml::qname>&& v) {
+void relationships::names(const std::unordered_set<dogen::sml::qname>&& v) {
     names_ = std::move(v);
 }
 
-const std::unordered_set<dogen::sml::qname>& dependency_details::forward_decls() const {
+const std::unordered_set<dogen::sml::qname>& relationships::forward_decls() const {
     return forward_decls_;
 }
 
-std::unordered_set<dogen::sml::qname>& dependency_details::forward_decls() {
+std::unordered_set<dogen::sml::qname>& relationships::forward_decls() {
     return forward_decls_;
 }
 
-void dependency_details::forward_decls(const std::unordered_set<dogen::sml::qname>& v) {
+void relationships::forward_decls(const std::unordered_set<dogen::sml::qname>& v) {
     forward_decls_ = v;
 }
 
-void dependency_details::forward_decls(const std::unordered_set<dogen::sml::qname>&& v) {
+void relationships::forward_decls(const std::unordered_set<dogen::sml::qname>&& v) {
     forward_decls_ = std::move(v);
 }
 
-const std::unordered_set<dogen::sml::qname>& dependency_details::keys() const {
+const std::unordered_set<dogen::sml::qname>& relationships::keys() const {
     return keys_;
 }
 
-std::unordered_set<dogen::sml::qname>& dependency_details::keys() {
+std::unordered_set<dogen::sml::qname>& relationships::keys() {
     return keys_;
 }
 
-void dependency_details::keys(const std::unordered_set<dogen::sml::qname>& v) {
+void relationships::keys(const std::unordered_set<dogen::sml::qname>& v) {
     keys_ = v;
 }
 
-void dependency_details::keys(const std::unordered_set<dogen::sml::qname>&& v) {
+void relationships::keys(const std::unordered_set<dogen::sml::qname>&& v) {
     keys_ = std::move(v);
 }
 
-const std::unordered_set<dogen::sml::qname>& dependency_details::leaves() const {
+const std::unordered_set<dogen::sml::qname>& relationships::leaves() const {
     return leaves_;
 }
 
-std::unordered_set<dogen::sml::qname>& dependency_details::leaves() {
+std::unordered_set<dogen::sml::qname>& relationships::leaves() {
     return leaves_;
 }
 
-void dependency_details::leaves(const std::unordered_set<dogen::sml::qname>& v) {
+void relationships::leaves(const std::unordered_set<dogen::sml::qname>& v) {
     leaves_ = v;
 }
 
-void dependency_details::leaves(const std::unordered_set<dogen::sml::qname>&& v) {
+void relationships::leaves(const std::unordered_set<dogen::sml::qname>&& v) {
     leaves_ = std::move(v);
 }
 
-bool dependency_details::has_std_string() const {
+bool relationships::has_std_string() const {
     return has_std_string_;
 }
 
-void dependency_details::has_std_string(const bool v) {
+void relationships::has_std_string(const bool v) {
     has_std_string_ = v;
 }
 
-bool dependency_details::has_variant() const {
+bool relationships::has_variant() const {
     return has_variant_;
 }
 
-void dependency_details::has_variant(const bool v) {
+void relationships::has_variant(const bool v) {
     has_variant_ = v;
 }
 
-bool dependency_details::is_parent() const {
+bool relationships::is_parent() const {
     return is_parent_;
 }
 
-void dependency_details::is_parent(const bool v) {
+void relationships::is_parent(const bool v) {
     is_parent_ = v;
 }
 
-bool dependency_details::is_child() const {
+bool relationships::is_child() const {
     return is_child_;
 }
 
-void dependency_details::is_child(const bool v) {
+void relationships::is_child(const bool v) {
     is_child_ = v;
 }
 
-bool dependency_details::requires_stream_manipulators() const {
+bool relationships::requires_stream_manipulators() const {
     return requires_stream_manipulators_;
 }
 
-void dependency_details::requires_stream_manipulators(const bool v) {
+void relationships::requires_stream_manipulators(const bool v) {
     requires_stream_manipulators_ = v;
 }
 
-bool dependency_details::has_std_pair() const {
+bool relationships::has_std_pair() const {
     return has_std_pair_;
 }
 
-void dependency_details::has_std_pair(const bool v) {
+void relationships::has_std_pair(const bool v) {
     has_std_pair_ = v;
 }
 

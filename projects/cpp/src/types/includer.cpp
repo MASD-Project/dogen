@@ -54,7 +54,7 @@ includer::includer(const sml::model& model,
               config::cpp_facet_types::serialization)),
       hash_enabled_(contains(settings_.enabled_facets(),
               config::cpp_facet_types::hash)), boost_(), std_(),
-      dependency_extractor_(model_.pods(), boost_, std_) {
+      extractor_(model_.pods(), boost_, std_) {
 
     BOOST_LOG_SEV(lg, debug)
         << "Initial configuration:"
@@ -104,7 +104,7 @@ std::string includer::header_dependency(
 }
 
 void includer::
-append_implementation_dependencies( const dependency_details& dd,
+append_implementation_dependencies(const relationships& rel,
     const config::cpp_facet_types ft, const file_types flt,
     inclusion_lists& il) const {
 
@@ -119,7 +119,7 @@ append_implementation_dependencies( const dependency_details& dd,
     const bool is_io(ft == cpp_facet_types::io);
 
     const bool domain_with_io(is_domain &&
-        (settings_.use_integrated_io() || dd.is_parent() || dd.is_child()));
+        (settings_.use_integrated_io() || rel.is_parent() || rel.is_child()));
 
     if (is_header && io_enabled_ && (domain_with_io || is_io))
         il.system.push_back(std_.include(std_types::iosfwd));
@@ -153,11 +153,11 @@ append_implementation_dependencies( const dependency_details& dd,
         il.system.push_back(boost_.include(boost_types::split_free));
 
     // assume abstract
-    if (is_header && is_serialization && dd.is_parent())
+    if (is_header && is_serialization && rel.is_parent())
         il.system.push_back(boost_.include(boost_types::assume_abstract));
 
     // boost virtual base of
-    if (is_header && is_serialization && !dd.is_parent() && dd.is_child())
+    if (is_header && is_serialization && !rel.is_parent() && rel.is_child())
         il.system.push_back(boost_.include(boost_types::is_virtual_base_of));
 
     // boost archive types
@@ -175,25 +175,25 @@ append_implementation_dependencies( const dependency_details& dd,
     }
 
     // state saver
-    if (is_implementation && io_enabled_ && dd.requires_stream_manipulators() &&
-        (domain_with_io || io_without_iio))
+    if (is_implementation && io_enabled_ &&
+        rel.requires_stream_manipulators() && (domain_with_io || io_without_iio))
         il.system.push_back(boost_.include(boost_types::io_ios_state));
 
     // boost string algorithm
     if (is_implementation && io_enabled_ && (domain_with_io || io_without_iio)
-        && dd.has_std_string())
+        && rel.has_std_string())
         il.system.push_back(boost_.include(boost_types::string_algorithm));
 
     // apply visitor
     if (is_implementation && io_enabled_ && (domain_with_io || io_without_iio)
-        && dd.has_variant())
+        && rel.has_variant())
         il.system.push_back(boost_.include(boost_types::apply_visitor));
 
-    if (is_implementation && is_hash && dd.has_variant())
+    if (is_implementation && is_hash && rel.has_variant())
         il.system.push_back(boost_.include(boost_types::apply_visitor));
 
     // pair dependencies
-    if (is_implementation && is_serialization && dd.has_std_pair())
+    if (is_implementation && is_serialization && rel.has_std_pair())
         il.system.push_back(boost_.include(boost_types::serialization_pair));
 }
 
@@ -421,14 +421,14 @@ void includer::append_std_dependencies(
 }
 
 void includer::append_relationship_dependencies(
-    const dependency_details& dd, const config::cpp_facet_types ft,
+    const relationships& rel, const config::cpp_facet_types ft,
     const file_types flt, inclusion_lists& il) const {
 
-    auto names(dd.names());
+    auto names(rel.names());
     using config::cpp_facet_types;
     const bool is_header(flt == file_types::header);
     const bool is_domain(ft == cpp_facet_types::types);
-    for(const auto n : dd.forward_decls()) {
+    for(const auto n : rel.forward_decls()) {
         const bool is_primitive(n.meta_type() == sml::meta_types::primitive);
         const bool header_and_domain(is_header && is_domain);
 
@@ -502,8 +502,8 @@ void includer::append_relationship_dependencies(
          * rule 6: Domain implementation needs to include any files
          * that the domain header forwarded.
          */
-        const bool forwarded(dd.forward_decls().find(n) !=
-            dd.forward_decls().end());
+        const bool forwarded(rel.forward_decls().find(n) !=
+            rel.forward_decls().end());
         if (is_implementation && is_domain && forwarded)
             il.user.push_back(header_dependency(n, ft, main));
 
@@ -512,13 +512,14 @@ void includer::append_relationship_dependencies(
          * headers in domain implementation.
          */
         const bool domain_with_io(is_domain &&
-            (settings_.use_integrated_io() || dd.is_parent() || dd.is_child()));
+            (settings_.use_integrated_io() || rel.is_parent() ||
+                rel.is_child()));
 
         if (is_implementation && io_enabled_ && domain_with_io)
             il.user.push_back(header_dependency(n, cpp_facet_types::io, main));
     }
 
-    for (const auto k : dd.keys()) {
+    for (const auto k : rel.keys()) {
         // keys from special models can be ignored
         if (k.model_name() == std_.model() ||
             k.model_name() == boost_.model() ||
@@ -537,7 +538,7 @@ void includer::append_relationship_dependencies(
             il.user.push_back(header_dependency(k, cpp_facet_types::hash, main));
     }
 
-    for (const auto l : dd.leaves() ) {
+    for (const auto l : rel.leaves() ) {
         /*
          * rule 9: leaves require generators in test data.
          */
@@ -717,6 +718,20 @@ includes_for_registrar(file_types flt) const {
 }
 
 inclusion_lists includer::
+includes_for_visitor(const dogen::sml::qname& qname) const {
+    inclusion_lists r;
+    const auto rel(extractor_.extract_inheritance_graph(qname));
+    auto names(rel.names());
+    using config::cpp_facet_types;
+    const auto ft(cpp_facet_types::types);
+    for(const auto n : rel.names()) {
+        const auto fwd(aspect_types::forward_decls);
+        r.user.push_back(header_dependency(n, ft, fwd));
+    }
+    return r;
+}
+
+inclusion_lists includer::
 includes_for_pod(const sml::pod& pod, config::cpp_facet_types ft,
     file_types flt, aspect_types at) const {
 
@@ -727,10 +742,9 @@ includes_for_pod(const sml::pod& pod, config::cpp_facet_types ft,
         return r;
     }
 
-    const auto details(dependency_extractor_.extract(pod));
-
-    append_implementation_dependencies(details, ft, flt, r);
-    append_relationship_dependencies(details, ft, flt, r);
+    const auto rel(extractor_.extract_dependency_graph(pod));
+    append_implementation_dependencies(rel, ft, flt, r);
+    append_relationship_dependencies(rel, ft, flt, r);
     append_self_dependencies(n, ft, flt, at, n.meta_type(), r);
 
     remove_duplicates(r);

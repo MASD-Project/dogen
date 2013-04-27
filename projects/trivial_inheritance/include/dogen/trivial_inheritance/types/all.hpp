@@ -25,6 +25,7 @@
 #include "dogen/trivial_inheritance/types/child_without_members.hpp"
 #include "dogen/trivial_inheritance/types/descendant1.hpp"
 #include "dogen/trivial_inheritance/types/descendant2.hpp"
+#include "dogen/trivial_inheritance/types/descendant3.hpp"
 #include "dogen/trivial_inheritance/types/parent_outside.hpp"
 #include "dogen/trivial_inheritance/types/parent_with_members.hpp"
 #include "dogen/trivial_inheritance/types/parent_without_members.hpp"

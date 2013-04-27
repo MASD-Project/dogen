@@ -20,34 +20,22 @@
  */
 #include "dogen/trivial_inheritance/test_data/base_td.hpp"
 #include "dogen/trivial_inheritance/test_data/descendant1_td.hpp"
+#include "dogen/trivial_inheritance/test_data/descendant3_td.hpp"
 
 
 
 namespace dogen {
 namespace trivial_inheritance {
 
-descendant1_generator::descendant1_generator() : position_(0) { }
 
 void descendant1_generator::
 populate(const unsigned int /*position*/, result_type& /*v*/) {
 }
 
-descendant1_generator::result_type
-descendant1_generator::create(const unsigned int position) {
-    descendant1 r;
-    dogen::trivial_inheritance::base_generator::populate(position, r);
-    return r;
-}
 descendant1_generator::result_type*
 descendant1_generator::create_ptr(const unsigned int position) {
-    descendant1* p = new descendant1();
-    descendant1_generator::populate(position, *p);
-    return p;
+    return dogen::trivial_inheritance::descendant3_generator::create_ptr(position);
 }
 
-descendant1_generator::result_type
-descendant1_generator::operator()() {
-    return create(position_++);
-}
 
 } }

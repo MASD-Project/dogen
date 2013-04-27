@@ -21,7 +21,7 @@ add_custom_target(codegen)
 set(dogen_dir "${CMAKE_BINARY_DIR}/stage/bin/")
 set(dogen_binary "${dogen_dir}/dogen_driver")
 set(dogen_version "")
-set(use_latest_driver TRUE)
+set(use_latest_driver FALSE)
 execute_process(
     COMMAND ${dogen_binary} --version
     COMMAND head -n1

@@ -33,12 +33,14 @@
 namespace dogen {
 namespace trivial_inheritance {
 
-class descendant1 final : public dogen::trivial_inheritance::base {
+class descendant1 : public dogen::trivial_inheritance::base {
 public:
     descendant1() = default;
     descendant1(const descendant1&) = default;
     descendant1(descendant1&&) = default;
     descendant1& operator=(const descendant1&) = default;
+
+    virtual ~descendant1() noexcept = 0;
 
 private:
     template<typename Archive>
@@ -48,18 +50,23 @@ private:
     friend void boost::serialization::load(Archive& ar, descendant1& v, unsigned int version);
 
 public:
-    void to_stream(std::ostream& s) const override;
+    virtual void to_stream(std::ostream& s) const;
 
+protected:
+    bool compare(const descendant1& rhs) const;
 public:
-    bool operator==(const descendant1& rhs) const;
-    bool operator!=(const descendant1& rhs) const {
-        return !this->operator==(rhs);
-    }
+    virtual bool equals(const dogen::trivial_inheritance::base& other) const = 0;
 
-public:
-    bool equals(const dogen::trivial_inheritance::base& other) const override;
+protected:
+    void swap(descendant1& other) noexcept;
 
 };
+
+inline descendant1::~descendant1() noexcept { }
+
+inline bool operator==(const descendant1& lhs, const descendant1& rhs) {
+    return lhs.equals(rhs);
+}
 
 } }
 

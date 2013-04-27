@@ -39,6 +39,7 @@
 #include "dogen/cpp/serialization/view_models/file_view_model_ser.hpp"
 #include "dogen/cpp/serialization/view_models/namespace_view_model_ser.hpp"
 #include "dogen/cpp/serialization/view_models/registrar_view_model_ser.hpp"
+#include "dogen/cpp/serialization/view_models/visitor_view_model_ser.hpp"
 #include "dogen/sml/serialization/category_types_ser.hpp"
 #include "dogen/sml/serialization/meta_types_ser.hpp"
 
@@ -68,6 +69,7 @@ void save(Archive& ar,
     ar << make_nvp("user_includes", v.user_includes_);
     ar << make_nvp("file_path", v.file_path_.generic_string());
     ar << make_nvp("namespace_vm", v.namespace_vm_);
+    ar << make_nvp("visitor_vm", v.visitor_vm_);
 }
 
 template<typename Archive>
@@ -90,6 +92,7 @@ void load(Archive& ar,
     ar >> make_nvp("file_path", file_path_tmp);
     v.file_path_ = file_path_tmp;
     ar >> make_nvp("namespace_vm", v.namespace_vm_);
+    ar >> make_nvp("visitor_vm", v.visitor_vm_);
 }
 
 } }

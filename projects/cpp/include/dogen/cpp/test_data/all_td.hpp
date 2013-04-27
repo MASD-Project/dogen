@@ -20,9 +20,9 @@
  */
 #include "dogen/cpp/test_data/aspect_types_td.hpp"
 #include "dogen/cpp/test_data/boost_types_td.hpp"
-#include "dogen/cpp/test_data/dependency_details_td.hpp"
 #include "dogen/cpp/test_data/file_types_td.hpp"
 #include "dogen/cpp/test_data/location_request_td.hpp"
+#include "dogen/cpp/test_data/relationships_td.hpp"
 #include "dogen/cpp/test_data/std_types_td.hpp"
 #include "dogen/cpp/test_data/view_models/class_view_model_td.hpp"
 #include "dogen/cpp/test_data/view_models/cmakelists_view_model_td.hpp"

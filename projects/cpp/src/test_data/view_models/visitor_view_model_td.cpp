@@ -49,6 +49,7 @@ void visitor_view_model_generator::
 populate(const unsigned int position, result_type& v) {
     v.name(create_std_string(position + 0));
     v.types(create_std_list_std_string(position + 1));
+    v.documentation(create_std_string(position + 2));
 }
 
 visitor_view_model_generator::result_type

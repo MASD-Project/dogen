@@ -18,17 +18,23 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_TYPES_DEPENDENCY_DETAILS_FWD_HPP
-#define DOGEN_CPP_TYPES_DEPENDENCY_DETAILS_FWD_HPP
+#ifndef DOGEN_TRIVIAL_INHERITANCE_SERIALIZATION_DESCENDANT3_FWD_SER_HPP
+#define DOGEN_TRIVIAL_INHERITANCE_SERIALIZATION_DESCENDANT3_FWD_SER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-namespace dogen {
-namespace cpp {
+#include "dogen/trivial_inheritance/types/descendant3_fwd.hpp"
 
-class dependency_details;
+namespace boost {
+namespace serialization {
+
+template<class Archive>
+void save(Archive& ar, const dogen::trivial_inheritance::descendant3& v, unsigned int version);
+
+template<class Archive>
+void load(Archive& ar, dogen::trivial_inheritance::descendant3& v, unsigned int version);
 
 } }
 

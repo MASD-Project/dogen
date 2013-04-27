@@ -39,6 +39,7 @@
 #include "dogen/cpp/types/view_models/exception_view_model.hpp"
 #include "dogen/cpp/types/view_models/namespace_view_model.hpp"
 #include "dogen/cpp/types/view_models/registrar_view_model.hpp"
+#include "dogen/cpp/types/view_models/visitor_view_model.hpp"
 #include "dogen/sml/types/category_types.hpp"
 #include "dogen/sml/types/meta_types.hpp"
 
@@ -72,7 +73,8 @@ public:
         const std::list<std::string>& system_includes,
         const std::list<std::string>& user_includes,
         const boost::filesystem::path& file_path,
-        const boost::optional<dogen::cpp::view_models::namespace_view_model>& namespace_vm);
+        const boost::optional<dogen::cpp::view_models::namespace_view_model>& namespace_vm,
+        const boost::optional<dogen::cpp::view_models::visitor_view_model>& visitor_vm);
 
 private:
     template<typename Archive>
@@ -142,6 +144,11 @@ public:
     void namespace_vm(const boost::optional<dogen::cpp::view_models::namespace_view_model>& v);
     void namespace_vm(const boost::optional<dogen::cpp::view_models::namespace_view_model>&& v);
 
+    const boost::optional<dogen::cpp::view_models::visitor_view_model>& visitor_vm() const;
+    boost::optional<dogen::cpp::view_models::visitor_view_model>& visitor_vm();
+    void visitor_vm(const boost::optional<dogen::cpp::view_models::visitor_view_model>& v);
+    void visitor_vm(const boost::optional<dogen::cpp::view_models::visitor_view_model>&& v);
+
 public:
     bool operator==(const file_view_model& rhs) const;
     bool operator!=(const file_view_model& rhs) const {
@@ -167,6 +174,7 @@ private:
     std::list<std::string> user_includes_;
     boost::filesystem::path file_path_;
     boost::optional<dogen::cpp::view_models::namespace_view_model> namespace_vm_;
+    boost::optional<dogen::cpp::view_models::visitor_view_model> visitor_vm_;
 };
 
 } } }

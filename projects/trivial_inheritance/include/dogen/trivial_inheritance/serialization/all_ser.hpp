@@ -25,6 +25,7 @@
 #include "dogen/trivial_inheritance/serialization/child_without_members_ser.hpp"
 #include "dogen/trivial_inheritance/serialization/descendant1_ser.hpp"
 #include "dogen/trivial_inheritance/serialization/descendant2_ser.hpp"
+#include "dogen/trivial_inheritance/serialization/descendant3_ser.hpp"
 #include "dogen/trivial_inheritance/serialization/parent_outside_ser.hpp"
 #include "dogen/trivial_inheritance/serialization/parent_with_members_ser.hpp"
 #include "dogen/trivial_inheritance/serialization/parent_without_members_ser.hpp"

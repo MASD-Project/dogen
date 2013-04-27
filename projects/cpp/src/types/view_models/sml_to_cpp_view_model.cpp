@@ -194,12 +194,17 @@ private:
     qname_to_class_view_model_type;
     typedef std::unordered_map<dogen::sml::qname, dogen::sml::pod>
     pod_map_type;
+    typedef std::unordered_map<
+        dogen::sml::qname,
+        dogen::cpp::view_models::visitor_view_model>
+    qname_to_visitor_view_model_type;
 
     struct visit_state {
         visit_state(pod_map_type pods) : pods_(pods) { }
 
         qname_to_class_view_model_type class_view_models_;
         pod_map_type pods_;
+        qname_to_visitor_view_model_type visitor_view_models_;
     };
 
 public:
@@ -250,6 +255,10 @@ private:
 public:
     qname_to_class_view_model_type class_view_models() {
         return state_->class_view_models_;
+    }
+
+    qname_to_visitor_view_model_type visitor_view_models() {
+        return state_->visitor_view_models_;
     }
 
 private:
@@ -403,6 +412,17 @@ void sml_dfs_visitor::process_sml_pod(const dogen::sml::pod& pod) {
     cvm.documentation(pod.documentation());
     cvm.is_immutable(pod.is_immutable());
 
+    if (pod.is_visitable()) {
+        visitor_view_model vvm;
+        vvm.name("visitor_" + cvm.name());
+
+        std::list<std::string> fqn(ns);
+        fqn.push_back(cvm.name());
+        using boost::join;
+        vvm.types().push_back(join(fqn, namespace_separator));
+        state_->visitor_view_models_.insert(std::make_pair(pod.name(), vvm));
+    }
+
     std::list<property_view_model> props_vm;
     bool has_primitive_properties(false);
     bool requires_stream_manipulators(false);
@@ -455,6 +475,13 @@ void sml_dfs_visitor::process_sml_pod(const dogen::sml::pod& pod) {
         opn_name.push_back(opn->type_name());
         using boost::join;
         cvm.original_parent_name(join(opn_name, namespace_separator));
+
+        const auto i(state_->visitor_view_models_.find(*opn));
+        if (i != state_->visitor_view_models_.end()) {
+            std::list<std::string> fqn(ns);
+            fqn.push_back(cvm.name());
+            i->second.types().push_back(join(fqn, namespace_separator));
+        }
     }
 
     std::list<std::string> leaves;
@@ -722,6 +749,7 @@ void sml_to_cpp_view_model::create_class_view_models() {
     sml_dfs_visitor v(pods);
     boost::depth_first_search(graph_, boost::visitor(v));
     qname_to_class_ = v.class_view_models();
+    qname_to_visitor_ = v.visitor_view_models();
 }
 
 void sml_to_cpp_view_model::create_enumeration_view_models() {
@@ -1021,6 +1049,35 @@ sml_to_cpp_view_model::transform_facet_includers() const {
     return r;
 }
 
+std::vector<file_view_model> sml_to_cpp_view_model::transform_visitors() {
+    std::vector<file_view_model> r;
+    const file_types file_type(file_types::header);
+    const auto at(aspect_types::visitor);
+    const auto ft(config::cpp_facet_types::types);
+
+    for (const auto& v : qname_to_visitor_) {
+        const auto n(v.first.type_name());
+        log_generating_file(ft, at, file_type, n, sml::meta_types::invalid);
+        sml::qname qn;
+        qn.type_name(n);
+        qn.external_package_path(v.first.external_package_path());
+        const auto rq(location_request_factory(ft, file_type, at, qn));
+
+        file_view_model vm;
+        vm.facet_type(ft);
+        vm.file_path(locator_.absolute_path(rq));
+        vm.file_type(file_type);
+        vm.aspect_type(at);
+
+        const auto includes(includer_.includes_for_visitor(qn));
+        vm.system_includes(includes.system);
+        vm.user_includes(includes.user);
+
+        r.push_back(vm);
+    }
+    return r;
+}
+
 std::vector<file_view_model>
 sml_to_cpp_view_model::transform_registrar() const {
     std::vector<file_view_model> r;
@@ -1104,6 +1161,7 @@ std::vector<file_view_model> sml_to_cpp_view_model::transform() {
     auto ex(transform_exceptions());
     auto reg(transform_registrar());
     auto pkg(transform_packages());
+    auto vis(transform_visitors());
 
     r.reserve(p.size() + e.size() + ex.size() + reg.size() + pkg.size());
     r.insert(r.end(), p.begin(), p.end());
@@ -1111,6 +1169,7 @@ std::vector<file_view_model> sml_to_cpp_view_model::transform() {
     r.insert(r.end(), ex.begin(), ex.end());
     r.insert(r.end(), reg.begin(), reg.end());
     r.insert(r.end(), pkg.begin(), pkg.end());
+    r.insert(r.end(), vis.begin(), vis.end());
 
     log_includers();
     if (settings_.disable_facet_includers())

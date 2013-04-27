@@ -26,19 +26,23 @@ namespace view_models {
 
 visitor_view_model::visitor_view_model(
     const std::string& name,
-    const std::list<std::string>& types)
+    const std::list<std::string>& types,
+    const std::string& documentation)
     : name_(name),
-      types_(types) { }
+      types_(types),
+      documentation_(documentation) { }
 
 void visitor_view_model::swap(visitor_view_model& other) noexcept {
     using std::swap;
     swap(name_, other.name_);
     swap(types_, other.types_);
+    swap(documentation_, other.documentation_);
 }
 
 bool visitor_view_model::operator==(const visitor_view_model& rhs) const {
     return name_ == rhs.name_ &&
-        types_ == rhs.types_;
+        types_ == rhs.types_ &&
+        documentation_ == rhs.documentation_;
 }
 
 visitor_view_model& visitor_view_model::operator=(visitor_view_model other) {
@@ -77,6 +81,22 @@ void visitor_view_model::types(const std::list<std::string>& v) {
 
 void visitor_view_model::types(const std::list<std::string>&& v) {
     types_ = std::move(v);
+}
+
+const std::string& visitor_view_model::documentation() const {
+    return documentation_;
+}
+
+std::string& visitor_view_model::documentation() {
+    return documentation_;
+}
+
+void visitor_view_model::documentation(const std::string& v) {
+    documentation_ = v;
+}
+
+void visitor_view_model::documentation(const std::string&& v) {
+    documentation_ = std::move(v);
 }
 
 } } }

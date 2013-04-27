@@ -33,13 +33,12 @@ void descendant1::to_stream(std::ostream& s) const {
     s << " }";
 }
 
-bool descendant1::equals(const dogen::trivial_inheritance::base& other) const {
-    const descendant1* const p(dynamic_cast<const descendant1* const>(&other));
-    if (!p) return false;
-    return *this == *p;
+void descendant1::swap(descendant1& other) noexcept {
+    base::swap(other);
+
 }
 
-bool descendant1::operator==(const descendant1& /*rhs*/) const {
+bool descendant1::compare(const descendant1& /*rhs*/) const {
     return true;
 }
 

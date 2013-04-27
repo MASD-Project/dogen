@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/cpp/hash/dependency_details_hash.hpp"
-#include "dogen/sml/hash/qname_hash.hpp"
+#include "dogen/trivial_inheritance/hash/descendant1_hash.hpp"
+#include "dogen/trivial_inheritance/hash/descendant3_hash.hpp"
 
 namespace {
 
@@ -30,33 +30,15 @@ inline void combine(std::size_t& seed, const HashableType& value)
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 }
 
-inline std::size_t hash_std_unordered_set_dogen_sml_qname(const std::unordered_set<dogen::sml::qname>& v){
-    std::size_t seed(0);
-    for (const auto i : v) {
-        combine(seed, i);
-    }
-    return seed;
-}
-
 }
 
 namespace dogen {
-namespace cpp {
+namespace trivial_inheritance {
 
-std::size_t dependency_details_hasher::hash(const dependency_details&v) {
+std::size_t descendant3_hasher::hash(const descendant3&v) {
     std::size_t seed(0);
 
-    combine(seed, hash_std_unordered_set_dogen_sml_qname(v.names()));
-    combine(seed, hash_std_unordered_set_dogen_sml_qname(v.forward_decls()));
-    combine(seed, hash_std_unordered_set_dogen_sml_qname(v.keys()));
-    combine(seed, hash_std_unordered_set_dogen_sml_qname(v.leaves()));
-    combine(seed, v.has_std_string());
-    combine(seed, v.has_variant());
-    combine(seed, v.is_parent());
-    combine(seed, v.is_child());
-    combine(seed, v.requires_stream_manipulators());
-    combine(seed, v.has_std_pair());
-
+    combine(seed, dynamic_cast<const dogen::trivial_inheritance::descendant1&>(v));
     return seed;
 }
 

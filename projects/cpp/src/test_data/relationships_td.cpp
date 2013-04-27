@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/cpp/test_data/dependency_details_td.hpp"
+#include "dogen/cpp/test_data/relationships_td.hpp"
 #include "dogen/sml/test_data/qname_td.hpp"
 
 namespace {
@@ -45,9 +45,9 @@ bool create_bool(const unsigned int position) {
 namespace dogen {
 namespace cpp {
 
-dependency_details_generator::dependency_details_generator() : position_(0) { }
+relationships_generator::relationships_generator() : position_(0) { }
 
-void dependency_details_generator::
+void relationships_generator::
 populate(const unsigned int position, result_type& v) {
     v.names(create_std_unordered_set_dogen_sml_qname(position + 0));
     v.forward_decls(create_std_unordered_set_dogen_sml_qname(position + 1));
@@ -61,21 +61,21 @@ populate(const unsigned int position, result_type& v) {
     v.has_std_pair(create_bool(position + 9));
 }
 
-dependency_details_generator::result_type
-dependency_details_generator::create(const unsigned int position) {
-    dependency_details r;
-    dependency_details_generator::populate(position, r);
+relationships_generator::result_type
+relationships_generator::create(const unsigned int position) {
+    relationships r;
+    relationships_generator::populate(position, r);
     return r;
 }
-dependency_details_generator::result_type*
-dependency_details_generator::create_ptr(const unsigned int position) {
-    dependency_details* p = new dependency_details();
-    dependency_details_generator::populate(position, *p);
+relationships_generator::result_type*
+relationships_generator::create_ptr(const unsigned int position) {
+    relationships* p = new relationships();
+    relationships_generator::populate(position, *p);
     return p;
 }
 
-dependency_details_generator::result_type
-dependency_details_generator::operator()() {
+relationships_generator::result_type
+relationships_generator::operator()() {
     return create(position_++);
 }
 

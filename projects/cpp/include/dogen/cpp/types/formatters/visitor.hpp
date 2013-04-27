@@ -18,35 +18,50 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_HASH_DEPENDENCY_DETAILS_HASH_HPP
-#define DOGEN_CPP_HASH_DEPENDENCY_DETAILS_HASH_HPP
+#ifndef DOGEN_CPP_TYPES_FORMATTERS_VISITOR_HPP
+#define DOGEN_CPP_TYPES_FORMATTERS_VISITOR_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <functional>
-#include "dogen/cpp/types/dependency_details.hpp"
+#include <iosfwd>
+#include "dogen/cpp/types/formatters/utility.hpp"
+#include "dogen/cpp/types/formatters/indenter.hpp"
+#include "dogen/cpp/types/view_models/visitor_view_model.hpp"
+#include "dogen/cpp/types/formatters/file_formatter.hpp"
 
 namespace dogen {
 namespace cpp {
+namespace formatters {
 
-class dependency_details_hasher {
+class visitor : public file_formatter {
 public:
-    static std::size_t hash(const dependency_details& v);
+    typedef view_models::visitor_view_model visitor_view_model;
+    typedef view_models::file_view_model file_view_model;
+
+public:
+    visitor() = delete;
+    visitor(const visitor&) = default;
+    visitor(visitor&&) = default;
+    visitor& operator=(const visitor&) = default;
+
+public:
+    explicit visitor(std::ostream& stream);
+    virtual ~visitor() noexcept {}
+
+private:
+    void format(const visitor_view_model& vm);
+
+public:
+    virtual void format(const file_view_model& vm) override;
+
+private:
+    std::ostream& stream_;
+    indenter indenter_;
+    utility utility_;
 };
 
-} }
+} } }
 
-namespace std {
-
-template<>
-class hash<dogen::cpp::dependency_details> {
-public:
-    size_t operator()(const dogen::cpp::dependency_details& v) const {
-        return dogen::cpp::dependency_details_hasher::hash(v);
-    }
-};
-
-}
 #endif

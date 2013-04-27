@@ -25,21 +25,13 @@
 #pragma once
 #endif
 
+#include <boost/serialization/assume_abstract.hpp>
 #include <boost/serialization/split_free.hpp>
-#include <boost/type_traits/is_virtual_base_of.hpp>
 #include "dogen/trivial_inheritance/types/descendant1.hpp"
 
-namespace boost {
-
-template<>struct
-is_virtual_base_of<
-    dogen::trivial_inheritance::base,
-    dogen::trivial_inheritance::descendant1
-> : public mpl::true_ {};
-
-}
-
 BOOST_SERIALIZATION_SPLIT_FREE(dogen::trivial_inheritance::descendant1)
+BOOST_SERIALIZATION_ASSUME_ABSTRACT(dogen::trivial_inheritance::descendant1)
+
 namespace boost {
 namespace serialization {
 

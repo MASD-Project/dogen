@@ -45,7 +45,8 @@ file_view_model::file_view_model(file_view_model&& rhs)
       system_includes_(std::move(rhs.system_includes_)),
       user_includes_(std::move(rhs.user_includes_)),
       file_path_(std::move(rhs.file_path_)),
-      namespace_vm_(std::move(rhs.namespace_vm_)) { }
+      namespace_vm_(std::move(rhs.namespace_vm_)),
+      visitor_vm_(std::move(rhs.visitor_vm_)) { }
 
 file_view_model::file_view_model(
     const dogen::config::cpp_facet_types& facet_type,
@@ -61,7 +62,8 @@ file_view_model::file_view_model(
     const std::list<std::string>& system_includes,
     const std::list<std::string>& user_includes,
     const boost::filesystem::path& file_path,
-    const boost::optional<dogen::cpp::view_models::namespace_view_model>& namespace_vm)
+    const boost::optional<dogen::cpp::view_models::namespace_view_model>& namespace_vm,
+    const boost::optional<dogen::cpp::view_models::visitor_view_model>& visitor_vm)
     : facet_type_(facet_type),
       file_type_(file_type),
       aspect_type_(aspect_type),
@@ -75,7 +77,8 @@ file_view_model::file_view_model(
       system_includes_(system_includes),
       user_includes_(user_includes),
       file_path_(file_path),
-      namespace_vm_(namespace_vm) { }
+      namespace_vm_(namespace_vm),
+      visitor_vm_(visitor_vm) { }
 
 void file_view_model::swap(file_view_model& other) noexcept {
     using std::swap;
@@ -93,6 +96,7 @@ void file_view_model::swap(file_view_model& other) noexcept {
     swap(user_includes_, other.user_includes_);
     swap(file_path_, other.file_path_);
     swap(namespace_vm_, other.namespace_vm_);
+    swap(visitor_vm_, other.visitor_vm_);
 }
 
 bool file_view_model::operator==(const file_view_model& rhs) const {
@@ -109,7 +113,8 @@ bool file_view_model::operator==(const file_view_model& rhs) const {
         system_includes_ == rhs.system_includes_ &&
         user_includes_ == rhs.user_includes_ &&
         file_path_ == rhs.file_path_ &&
-        namespace_vm_ == rhs.namespace_vm_;
+        namespace_vm_ == rhs.namespace_vm_ &&
+        visitor_vm_ == rhs.visitor_vm_;
 }
 
 file_view_model& file_view_model::operator=(file_view_model other) {
@@ -300,6 +305,22 @@ void file_view_model::namespace_vm(const boost::optional<dogen::cpp::view_models
 
 void file_view_model::namespace_vm(const boost::optional<dogen::cpp::view_models::namespace_view_model>&& v) {
     namespace_vm_ = std::move(v);
+}
+
+const boost::optional<dogen::cpp::view_models::visitor_view_model>& file_view_model::visitor_vm() const {
+    return visitor_vm_;
+}
+
+boost::optional<dogen::cpp::view_models::visitor_view_model>& file_view_model::visitor_vm() {
+    return visitor_vm_;
+}
+
+void file_view_model::visitor_vm(const boost::optional<dogen::cpp::view_models::visitor_view_model>& v) {
+    visitor_vm_ = v;
+}
+
+void file_view_model::visitor_vm(const boost::optional<dogen::cpp::view_models::visitor_view_model>&& v) {
+    visitor_vm_ = std::move(v);
 }
 
 } } }

@@ -35,8 +35,8 @@
 #include "dogen/sml/types/category_types.hpp"
 #include "dogen/config/types/cpp_settings.hpp"
 #include "dogen/sml/types/meta_types.hpp"
-#include "dogen/cpp/types/dependency_details.hpp"
-#include "dogen/cpp/types/dependency_extractor.hpp"
+#include "dogen/cpp/types/relationships.hpp"
+#include "dogen/cpp/types/extractor.hpp"
 #include "dogen/cpp/types/locator.hpp"
 #include "dogen/cpp/types/aspect_types.hpp"
 #include "dogen/config/types/cpp_facet_types.hpp"
@@ -88,7 +88,7 @@ public:
       headers_for_facet_(std::move(rhs.headers_for_facet_)),
       boost_(std::move(rhs.boost_)),
       std_(std::move(rhs.std_)),
-      dependency_extractor_(std::move(rhs.dependency_extractor_)) { }
+      extractor_(std::move(rhs.extractor_)) { }
 
     includer(const sml::model& model,
         const locator& locator,
@@ -104,8 +104,7 @@ private:
      * @param name Qualified name of the type for which we require the
      * domain header.
      */
-    std::string
-    domain_header_dependency(const sml::qname& name,
+    std::string domain_header_dependency(const sml::qname& name,
         const aspect_types at) const;
 
     /**
@@ -147,7 +146,7 @@ private:
      * kept in one place.
      */
     void append_implementation_dependencies(
-        const dependency_details& dd, const config::cpp_facet_types ft,
+        const relationships& rel, const config::cpp_facet_types ft,
         const file_types flt, inclusion_lists& il) const;
 
     /**
@@ -177,7 +176,7 @@ private:
      * of the type and all types of all properties it may have.
      */
     void append_relationship_dependencies(
-        const dependency_details& dd, const config::cpp_facet_types ft,
+        const relationships& rel, const config::cpp_facet_types ft,
         const file_types flt, inclusion_lists& il) const;
 
     /**
@@ -237,6 +236,11 @@ public:
      */
     inclusion_lists includes_for_registrar(file_types flt) const;
 
+    /**
+     * @brief Returns all the includes for a visitor based on qname.
+     */
+    inclusion_lists includes_for_visitor(const dogen::sml::qname& qname) const;
+
 private:
     const sml::model model_;
     const locator locator_;
@@ -248,7 +252,7 @@ private:
     headers_for_facet_;
     const boost_model_helper boost_;
     const std_model_helper std_;
-    const dependency_extractor dependency_extractor_;
+    const extractor extractor_;
 };
 
 } }

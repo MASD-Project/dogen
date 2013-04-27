@@ -18,26 +18,35 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_SERIALIZATION_DEPENDENCY_DETAILS_SER_HPP
-#define DOGEN_CPP_SERIALIZATION_DEPENDENCY_DETAILS_SER_HPP
+#ifndef DOGEN_CPP_HASH_RELATIONSHIPS_HASH_HPP
+#define DOGEN_CPP_HASH_RELATIONSHIPS_HASH_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <boost/serialization/split_free.hpp>
-#include "dogen/cpp/types/dependency_details.hpp"
+#include <functional>
+#include "dogen/cpp/types/relationships.hpp"
 
-BOOST_SERIALIZATION_SPLIT_FREE(dogen::cpp::dependency_details)
-namespace boost {
-namespace serialization {
+namespace dogen {
+namespace cpp {
 
-template<typename Archive>
-void save(Archive& ar, const dogen::cpp::dependency_details& v, unsigned int version);
-
-template<typename Archive>
-void load(Archive& ar, dogen::cpp::dependency_details& v, unsigned int version);
+class relationships_hasher {
+public:
+    static std::size_t hash(const relationships& v);
+};
 
 } }
 
+namespace std {
+
+template<>
+class hash<dogen::cpp::relationships> {
+public:
+    size_t operator()(const dogen::cpp::relationships& v) const {
+        return dogen::cpp::relationships_hasher::hash(v);
+    }
+};
+
+}
 #endif

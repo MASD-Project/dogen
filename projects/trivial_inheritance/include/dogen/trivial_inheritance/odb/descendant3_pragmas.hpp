@@ -18,36 +18,16 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_TEST_DATA_DEPENDENCY_DETAILS_TD_HPP
-#define DOGEN_CPP_TEST_DATA_DEPENDENCY_DETAILS_TD_HPP
+#ifndef DOGEN_TRIVIAL_INHERITANCE_ODB_DESCENDANT3_PRAGMAS_HPP
+#define DOGEN_TRIVIAL_INHERITANCE_ODB_DESCENDANT3_PRAGMAS_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/cpp/types/dependency_details.hpp"
+#include "dogen/trivial_inheritance/odb/descendant1_pragmas.hpp"
+#include "dogen/trivial_inheritance/types/descendant3.hpp"
 
-namespace dogen {
-namespace cpp {
-
-class dependency_details_generator {
-public:
-    dependency_details_generator();
-
-public:
-    typedef dogen::cpp::dependency_details result_type;
-
-public:
-    static void populate(const unsigned int position, result_type& v);
-    static result_type create(const unsigned int position);
-    result_type operator()();
-
-private:
-    unsigned int position_;
-public:
-    static result_type* create_ptr(const unsigned int position);
-};
-
-} }
+// class has no ODB pragmas defined.
 
 #endif

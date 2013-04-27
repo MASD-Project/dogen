@@ -28,8 +28,8 @@
 #include <boost/archive/xml_oarchive.hpp>
 #include <boost/serialization/nvp.hpp>
 #include "dogen/trivial_inheritance/serialization/base_ser.hpp"
-#include "dogen/trivial_inheritance/serialization/descendant1_ser.hpp"
 #include "dogen/trivial_inheritance/serialization/descendant2_ser.hpp"
+#include "dogen/trivial_inheritance/serialization/descendant3_ser.hpp"
 
 #ifdef __linux__
 #include "eos/portable_iarchive.hpp"

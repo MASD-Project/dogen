@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_TYPES_DEPENDENCY_DETAILS_HPP
-#define DOGEN_CPP_TYPES_DEPENDENCY_DETAILS_HPP
+#ifndef DOGEN_CPP_TYPES_RELATIONSHIPS_HPP
+#define DOGEN_CPP_TYPES_RELATIONSHIPS_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -27,24 +27,24 @@
 
 #include <algorithm>
 #include <unordered_set>
-#include "dogen/cpp/serialization/dependency_details_fwd_ser.hpp"
+#include "dogen/cpp/serialization/relationships_fwd_ser.hpp"
 #include "dogen/sml/hash/qname_hash.hpp"
 #include "dogen/sml/types/qname.hpp"
 
 namespace dogen {
 namespace cpp {
 
-class dependency_details final {
+class relationships final {
 public:
-    dependency_details(const dependency_details&) = default;
-    dependency_details(dependency_details&&) = default;
-    ~dependency_details() = default;
+    relationships(const relationships&) = default;
+    relationships(relationships&&) = default;
+    ~relationships() = default;
 
 public:
-    dependency_details();
+    relationships();
 
 public:
-    dependency_details(
+    relationships(
         const std::unordered_set<dogen::sml::qname>& names,
         const std::unordered_set<dogen::sml::qname>& forward_decls,
         const std::unordered_set<dogen::sml::qname>& keys,
@@ -58,10 +58,10 @@ public:
 
 private:
     template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const dependency_details& v, unsigned int version);
+    friend void boost::serialization::save(Archive& ar, const relationships& v, unsigned int version);
 
     template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, dependency_details& v, unsigned int version);
+    friend void boost::serialization::load(Archive& ar, relationships& v, unsigned int version);
 
 public:
     const std::unordered_set<dogen::sml::qname>& names() const;
@@ -103,14 +103,14 @@ public:
     void has_std_pair(const bool v);
 
 public:
-    bool operator==(const dependency_details& rhs) const;
-    bool operator!=(const dependency_details& rhs) const {
+    bool operator==(const relationships& rhs) const;
+    bool operator!=(const relationships& rhs) const {
         return !this->operator==(rhs);
     }
 
 public:
-    void swap(dependency_details& other) noexcept;
-    dependency_details& operator=(dependency_details other);
+    void swap(relationships& other) noexcept;
+    relationships& operator=(relationships other);
 
 private:
     std::unordered_set<dogen::sml::qname> names_;
@@ -131,8 +131,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::cpp::dependency_details& lhs,
-    dogen::cpp::dependency_details& rhs) {
+    dogen::cpp::relationships& lhs,
+    dogen::cpp::relationships& rhs) {
     lhs.swap(rhs);
 }
 

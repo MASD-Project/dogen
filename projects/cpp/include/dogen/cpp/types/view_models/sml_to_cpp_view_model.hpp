@@ -206,6 +206,11 @@ private:
      */
     std::vector<file_view_model> transform_packages();
 
+    /**
+     * @brief Transforms visitors into view models.
+     */
+    std::vector<file_view_model> transform_visitors();
+
 public:
     /**
      * @brief Transforms the SML model instance into the corresponding
@@ -239,6 +244,7 @@ private:
     qname_to_enumeration_;
     std::unordered_map<sml::qname, exception_view_model>
     qname_to_exception_;
+    std::unordered_map<sml::qname, visitor_view_model> qname_to_visitor_;
     graph_type graph_;
     qname_to_vertex_type qname_to_vertex_;
     vertex_descriptor_type root_vertex_;

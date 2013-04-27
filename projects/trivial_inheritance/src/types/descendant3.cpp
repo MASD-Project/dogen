@@ -18,23 +18,29 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_IO_DEPENDENCY_DETAILS_IO_HPP
-#define DOGEN_CPP_IO_DEPENDENCY_DETAILS_IO_HPP
-
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
-
-#include <iosfwd>
-#include "dogen/cpp/types/dependency_details.hpp"
+#include <ostream>
+#include "dogen/trivial_inheritance/io/descendant1_io.hpp"
+#include "dogen/trivial_inheritance/types/descendant3.hpp"
 
 namespace dogen {
-namespace cpp {
+namespace trivial_inheritance {
 
-std::ostream&
-operator<<(std::ostream& s,
-     const dogen::cpp::dependency_details& v);
+void descendant3::to_stream(std::ostream& s) const {
+    s << " { "
+      << "\"__type__\": " << "\"dogen::trivial_inheritance::descendant3\"" << ", "
+      << "\"__parent_0__\": ";
+    descendant1::to_stream(s);
+    s << " }";
+}
+
+bool descendant3::equals(const dogen::trivial_inheritance::base& other) const {
+    const descendant3* const p(dynamic_cast<const descendant3* const>(&other));
+    if (!p) return false;
+    return *this == *p;
+}
+
+bool descendant3::operator==(const descendant3& /*rhs*/) const {
+    return true;
+}
 
 } }
-
-#endif

@@ -44,7 +44,8 @@ public:
 public:
     visitor_view_model(
         const std::string& name,
-        const std::list<std::string>& types);
+        const std::list<std::string>& types,
+        const std::string& documentation);
 
 private:
     template<typename Archive>
@@ -64,6 +65,11 @@ public:
     void types(const std::list<std::string>& v);
     void types(const std::list<std::string>&& v);
 
+    const std::string& documentation() const;
+    std::string& documentation();
+    void documentation(const std::string& v);
+    void documentation(const std::string&& v);
+
 public:
     bool operator==(const visitor_view_model& rhs) const;
     bool operator!=(const visitor_view_model& rhs) const {
@@ -77,6 +83,7 @@ public:
 private:
     std::string name_;
     std::list<std::string> types_;
+    std::string documentation_;
 };
 
 } } }
