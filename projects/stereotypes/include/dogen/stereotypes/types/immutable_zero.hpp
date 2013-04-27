@@ -40,7 +40,7 @@ public:
     immutable_zero(const immutable_zero&) = default;
     immutable_zero(immutable_zero&&) = default;
     ~immutable_zero() = default;
-    immutable_zero& operator=(const immutable_zero&) = default;
+    immutable_zero& operator=(const immutable_zero&) = delete;
 
 private:
     template<typename Archive>

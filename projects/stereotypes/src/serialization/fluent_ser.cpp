@@ -27,7 +27,9 @@
 #include <boost/archive/xml_iarchive.hpp>
 #include <boost/archive/xml_oarchive.hpp>
 #include <boost/serialization/nvp.hpp>
+#include <boost/serialization/string.hpp>
 #include "dogen/stereotypes/serialization/fluent_ser.hpp"
+#include "dogen/stereotypes/serialization/value_ser.hpp"
 
 #ifdef __linux__
 #include "eos/portable_iarchive.hpp"
@@ -42,6 +44,8 @@ void save(Archive& ar,
     const dogen::stereotypes::fluent& v,
     const unsigned int /*version*/) {
     ar << make_nvp("prop_0", v.prop_0_);
+    ar << make_nvp("prop_1", v.prop_1_);
+    ar << make_nvp("prop_2", v.prop_2_);
 }
 
 template<typename Archive>
@@ -49,6 +53,8 @@ void load(Archive& ar,
     dogen::stereotypes::fluent& v,
     const unsigned int /*version*/) {
     ar >> make_nvp("prop_0", v.prop_0_);
+    ar >> make_nvp("prop_1", v.prop_1_);
+    ar >> make_nvp("prop_2", v.prop_2_);
 }
 
 } }

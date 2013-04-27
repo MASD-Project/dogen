@@ -166,7 +166,10 @@ compiler_generated_constuctors(const class_view_model& vm) {
                 << std::endl;
     }
 
-    if (vm.all_properties().empty()) {
+    if (vm.is_immutable()) {
+        stream_ << indenter_ << vm.name() << "& operator=(const " << vm.name()
+                << "&) = delete;" << std::endl;
+    } else if (vm.all_properties().empty()) {
         stream_ << indenter_ << vm.name() << "& operator=(const " << vm.name()
                 << "&) = default;" << std::endl;
     }
@@ -192,7 +195,8 @@ void class_declaration::friends(const class_view_model& vm) {
 }
 
 void class_declaration::
-non_pod_getters_and_setters(const property_view_model& vm) {
+non_pod_getters_and_setters(const std::string class_name,
+    const property_view_model& vm) {
     doxygen_comments dc(stream_, indenter_);
     dc.format(vm.documentation());
     if (!vm.is_immutable())
@@ -202,8 +206,13 @@ non_pod_getters_and_setters(const property_view_model& vm) {
             << "() const;" << std::endl;
 
     if (!vm.is_immutable()) {
-        stream_ << indenter_ << "void " << vm.name() << "(const "
-                << vm.type().complete_name();
+        stream_ << indenter_;
+        if (vm.is_fluent())
+            stream_ << class_name << "& ";
+        else
+            stream_ << "void ";
+
+        stream_ << vm.name() << "(const " << vm.type().complete_name();
 
         if (!vm.type().is_primitive())
             stream_ << "&";
@@ -217,7 +226,8 @@ non_pod_getters_and_setters(const property_view_model& vm) {
 }
 
 void class_declaration::
-pod_getters_and_setters(const property_view_model& vm) {
+pod_getters_and_setters(const std::string class_name,
+    const property_view_model& vm) {
     doxygen_comments dc(stream_, indenter_);
     dc.format(vm.documentation());
     if (!vm.is_immutable())
@@ -235,8 +245,12 @@ pod_getters_and_setters(const property_view_model& vm) {
                 << "();" << std::endl;
 
         // traditional setter
-        stream_ << indenter_ << "void " << vm.name() << "(const "
-                << vm.type().complete_name();
+        stream_ << indenter_;
+        if (vm.is_fluent())
+            stream_ << class_name << "& ";
+        else
+            stream_ << "void ";
+        stream_ << vm.name() << "(const " << vm.type().complete_name();
 
         if (!vm.type().is_primitive())
             stream_ << "&";
@@ -244,8 +258,12 @@ pod_getters_and_setters(const property_view_model& vm) {
         stream_ << " v);" << std::endl;
 
         // move setter
-        stream_ << indenter_ << "void " << vm.name() << "(const "
-                << vm.type().complete_name();
+        stream_ << indenter_;
+        if (vm.is_fluent())
+            stream_ << class_name << "& ";
+        else
+            stream_ << "void ";
+        stream_ << vm.name() << "(const " << vm.type().complete_name();
 
         if (!vm.type().is_primitive())
             stream_ << "&&";
@@ -265,11 +283,11 @@ void class_declaration::getters_and_setters(const class_view_model& vm) {
     utility_.public_access_specifier();
     for (const auto p : vm.properties()) {
         if (p.type().is_primitive() || p.type().is_enumeration()) {
-            non_pod_getters_and_setters(p);
+            non_pod_getters_and_setters(vm.name(), p);
             continue;
         }
 
-        pod_getters_and_setters(p);
+        pod_getters_and_setters(vm.name(), p);
     }
 }
 

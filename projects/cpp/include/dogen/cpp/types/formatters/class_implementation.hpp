@@ -52,6 +52,12 @@ public:
 public:
     explicit class_implementation(std::ostream& stream);
 
+private:
+    void non_pod_getters_and_setters(const std::string class_name,
+        const property_view_model& vm);
+    void pod_getters_and_setters(const std::string class_name,
+        const property_view_model& vm);
+
 protected:
     void default_constructor(const class_view_model& vm);
     void move_constructor(const class_view_model& vm);
@@ -62,10 +68,6 @@ protected:
     void equals_operator(const class_view_model& vm);
     void assignment_operator(const class_view_model& vm);
     void getters_and_setters(const class_view_model& vm);
-    void non_pod_getters_and_setters(const std::string class_name,
-        const property_view_model& vm);
-    void pod_getters_and_setters(const std::string class_name,
-        const property_view_model& vm);
 
 public:
     virtual void format(const class_view_model& vm) = 0;

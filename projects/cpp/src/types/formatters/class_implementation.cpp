@@ -304,8 +304,14 @@ non_pod_getters_and_setters(const std::string class_name,
     utility_.blank_line();
 
     if (!vm.is_immutable()) {
-        stream_ << indenter_ << "void " << class_name << "::" << vm.name()
-                << "(const " << vm.type().complete_name();
+        stream_ << indenter_;
+        if (vm.is_fluent())
+            stream_ << class_name << "& ";
+        else
+            stream_ << "void ";
+
+        stream_ << class_name << "::" << vm.name() << "(const "
+                << vm.type().complete_name();
 
         if (!vm.type().is_primitive())
             stream_ << "&";
@@ -316,6 +322,9 @@ non_pod_getters_and_setters(const std::string class_name,
             positive_indenter_scope s(indenter_);
             stream_ << indenter_ << utility_.as_member_variable(vm.name())
                     << " = v;" << std::endl;
+
+            if (vm.is_fluent())
+                stream_ << indenter_ << "return *this;" << std::endl;
         }
         utility_.close_scope();
         utility_.blank_line();
@@ -355,8 +364,13 @@ pod_getters_and_setters(const std::string class_name,
         utility_.blank_line();
 
         // traditional setter
-        stream_ << indenter_ << "void " << class_name << "::" << vm.name()
-                << "(const " << vm.type().complete_name();
+        stream_ << indenter_;
+        if (vm.is_fluent())
+            stream_ << class_name << "& ";
+        else
+            stream_ << "void ";
+        stream_ << class_name << "::" << vm.name() << "(const "
+                << vm.type().complete_name();
 
         if (!vm.type().is_primitive())
             stream_ << "&";
@@ -367,13 +381,20 @@ pod_getters_and_setters(const std::string class_name,
             positive_indenter_scope s(indenter_);
             stream_ << indenter_ << utility_.as_member_variable(vm.name())
                     << " = v;" << std::endl;
+            if (vm.is_fluent())
+                stream_ << indenter_ << "return *this;" << std::endl;
         }
         utility_.close_scope();
         utility_.blank_line();
 
         // move setter
-        stream_ << indenter_ << "void " << class_name << "::" << vm.name()
-                << "(const " << vm.type().complete_name();
+        stream_ << indenter_;
+        if (vm.is_fluent())
+            stream_ << class_name << "& ";
+        else
+            stream_ << "void ";
+        stream_ << class_name << "::" << vm.name() << "(const "
+                << vm.type().complete_name();
 
         if (!vm.type().is_primitive())
             stream_ << "&&";
@@ -384,6 +405,8 @@ pod_getters_and_setters(const std::string class_name,
             positive_indenter_scope s(indenter_);
             stream_ << indenter_ << utility_.as_member_variable(vm.name())
                     << " = std::move(v);" << std::endl;
+            if (vm.is_fluent())
+                stream_ << indenter_ << "return *this;" << std::endl;
         }
         utility_.close_scope();
         utility_.blank_line();

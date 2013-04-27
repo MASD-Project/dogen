@@ -39,6 +39,7 @@ public:
     immutable_one_primitive(const immutable_one_primitive&) = default;
     immutable_one_primitive(immutable_one_primitive&&) = default;
     ~immutable_one_primitive() = default;
+    immutable_one_primitive& operator=(const immutable_one_primitive&) = delete;
 
 public:
     immutable_one_primitive();

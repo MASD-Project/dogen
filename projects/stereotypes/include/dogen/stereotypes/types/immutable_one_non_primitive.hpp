@@ -41,6 +41,7 @@ public:
     immutable_one_non_primitive(const immutable_one_non_primitive&) = default;
     immutable_one_non_primitive(immutable_one_non_primitive&&) = default;
     ~immutable_one_non_primitive() = default;
+    immutable_one_non_primitive& operator=(const immutable_one_non_primitive&) = delete;
 
 public:
     explicit immutable_one_non_primitive(const std::string& prop_0);

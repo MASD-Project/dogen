@@ -25,6 +25,7 @@
 #pragma once
 #endif
 
+#include "dogen/stereotypes/odb/value_pragmas.hpp"
 #include "dogen/stereotypes/types/fluent.hpp"
 
 // class has no ODB pragmas defined.

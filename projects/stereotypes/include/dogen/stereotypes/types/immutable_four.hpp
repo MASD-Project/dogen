@@ -42,6 +42,7 @@ public:
     immutable_four(const immutable_four&) = default;
     immutable_four(immutable_four&&) = default;
     ~immutable_four() = default;
+    immutable_four& operator=(const immutable_four&) = delete;
 
 public:
     immutable_four();

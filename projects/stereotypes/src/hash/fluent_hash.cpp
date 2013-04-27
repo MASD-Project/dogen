@@ -19,6 +19,7 @@
  *
  */
 #include "dogen/stereotypes/hash/fluent_hash.hpp"
+#include "dogen/stereotypes/hash/value_hash.hpp"
 
 namespace {
 
@@ -38,6 +39,9 @@ std::size_t fluent_hasher::hash(const fluent&v) {
     std::size_t seed(0);
 
     combine(seed, v.prop_0());
+    combine(seed, v.prop_1());
+    combine(seed, v.prop_2());
+
     return seed;
 }
 

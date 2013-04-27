@@ -37,6 +37,7 @@ public:
     immutable_two(const immutable_two&) = default;
     immutable_two(immutable_two&&) = default;
     ~immutable_two() = default;
+    immutable_two& operator=(const immutable_two&) = delete;
 
 public:
     immutable_two();

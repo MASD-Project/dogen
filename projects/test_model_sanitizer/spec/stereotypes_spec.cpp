@@ -20,6 +20,7 @@
  */
 #include <boost/test/unit_test.hpp>
 #include "dogen/utility/io/vector_io.hpp"
+#include "dogen/utility/test/asserter.hpp"
 #include "dogen/utility/test/logging.hpp"
 #include "dogen/utility/test/canned_tests.hpp"
 #include "dogen/stereotypes/types/all.hpp"
@@ -37,6 +38,7 @@ const std::string test_suite("stereotypes");
 
 }
 
+using dogen::utility::test::asserter;
 using namespace dogen::stereotypes;
 using namespace dogen::utility::test;
 
@@ -46,30 +48,64 @@ BOOST_AUTO_TEST_CASE(validate_equality) {
     SETUP_TEST_LOG("validate_equality");
     test_equality<entity_generator>();
     test_equality<value_generator>();
+    test_equality<immutable_four_generator>();
+    test_equality<immutable_one_non_primitive_generator>();
+    test_equality<immutable_one_primitive_generator>();
+    test_equality<immutable_two_generator>();
+    test_equality<fluent_generator>();
 }
 
 BOOST_AUTO_TEST_CASE(validate_serialisation) {
     SETUP_TEST_LOG("validate_serialisation");
     rountrip_type<entity_generator>();
     rountrip_type<value_generator>();
+    rountrip_type<immutable_four_generator>();
+    rountrip_type<immutable_one_non_primitive_generator>();
+    rountrip_type<immutable_one_primitive_generator>();
+    rountrip_type<immutable_two_generator>();
+    rountrip_type<fluent_generator>();
 }
 
 BOOST_AUTO_TEST_CASE(validate_hashing) {
     SETUP_TEST_LOG("validate_hashing");
     test_hashing<entity_generator>();
     test_hashing<value_generator>();
+    test_hashing<immutable_four_generator>();
+    test_hashing<immutable_one_non_primitive_generator>();
+    test_hashing<immutable_one_primitive_generator>();
+    test_hashing<immutable_two_generator>();
+    test_hashing<fluent_generator>();
 }
 
 BOOST_AUTO_TEST_CASE(validate_swap) {
     SETUP_TEST_LOG("validate_hashing");
     test_swap<entity_generator>();
     test_swap<value_generator>();
+    test_swap<fluent_generator>();
 }
 
 BOOST_AUTO_TEST_CASE(validate_io) {
     SETUP_TEST_LOG("validate_io");
     test_io<entity_generator>();
     test_io<value_generator>();
+    test_io<immutable_four_generator>();
+    test_io<immutable_one_non_primitive_generator>();
+    test_io<immutable_one_primitive_generator>();
+    test_io<immutable_two_generator>();
+    test_io<immutable_zero_generator>();
+    test_io<fluent_generator>();
+}
+
+
+BOOST_AUTO_TEST_CASE(setting_properties_using_the_fluent_interface_produces_expected_result) {
+    SETUP_TEST_LOG_SOURCE("setting_properties_using_the_fluent_interface_produces_expected_result");
+
+    const dogen::stereotypes::value z(15);
+    const std::string s("a string");
+    const fluent e(1234, s, z);
+    fluent a;
+    a.prop_0(1234).prop_1(s).prop_2(z);
+    BOOST_CHECK(asserter::assert_equals(e, a));
 }
 
 BOOST_AUTO_TEST_SUITE_END()

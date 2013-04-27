@@ -52,6 +52,12 @@ public:
         const bool disable_serialization);
     virtual ~class_declaration() noexcept {}
 
+private:
+    void non_pod_getters_and_setters(const std::string class_name,
+        const property_view_model& vm);
+    void pod_getters_and_setters(const std::string class_name,
+        const property_view_model& vm);
+
 protected:
     void open_class(const class_view_model& vm);
     void close_class();
@@ -62,8 +68,6 @@ protected:
     void destructor(const class_view_model& vm);
     void friends(const class_view_model& vm);
     void getters_and_setters(const class_view_model& vm);
-    void non_pod_getters_and_setters(const property_view_model& vm);
-    void pod_getters_and_setters(const property_view_model& vm);
     void member_variables(const class_view_model& vm);
     void equality(const class_view_model& vm);
     void to_stream(const class_view_model& vm);

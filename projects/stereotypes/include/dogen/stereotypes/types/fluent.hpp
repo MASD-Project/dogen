@@ -26,11 +26,16 @@
 #endif
 
 #include <algorithm>
+#include <string>
 #include "dogen/stereotypes/serialization/fluent_fwd_ser.hpp"
+#include "dogen/stereotypes/types/value.hpp"
 
 namespace dogen {
 namespace stereotypes {
 
+/**
+ * @brief Tests the fluent scenario across the different types of properties.
+ */
 class fluent final {
 public:
     fluent(const fluent&) = default;
@@ -41,7 +46,10 @@ public:
     fluent();
 
 public:
-    explicit fluent(const unsigned int prop_0);
+    fluent(
+        const unsigned int prop_0,
+        const std::string& prop_1,
+        const dogen::stereotypes::value& prop_2);
 
 private:
     template<typename Archive>
@@ -52,7 +60,17 @@ private:
 
 public:
     unsigned int prop_0() const;
-    void prop_0(const unsigned int v);
+    fluent& prop_0(const unsigned int v);
+
+    const std::string& prop_1() const;
+    std::string& prop_1();
+    fluent& prop_1(const std::string& v);
+    fluent& prop_1(const std::string&& v);
+
+    const dogen::stereotypes::value& prop_2() const;
+    dogen::stereotypes::value& prop_2();
+    fluent& prop_2(const dogen::stereotypes::value& v);
+    fluent& prop_2(const dogen::stereotypes::value&& v);
 
 public:
     bool operator==(const fluent& rhs) const;
@@ -66,6 +84,8 @@ public:
 
 private:
     unsigned int prop_0_;
+    std::string prop_1_;
+    dogen::stereotypes::value prop_2_;
 };
 
 } }
