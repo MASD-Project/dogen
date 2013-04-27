@@ -623,17 +623,6 @@ something of the sort.
 We don't support generic types (see [[Supporting%20user%20defined%20generic%20types][Supporting user defined generic
 types]]) so we should throw if a user attempts to use them.
 
-*** Consider adding a fluent option
-
-It would be fairly trivial to allow generation of model types with
-setters that are fluent (e.g. return =this=).
-
-See: http://en.wikipedia.org/wiki/Fluent_interface
-
-This could also be a stereotype so that a model could have both fluent
-and non-fluent classes. This story is dependent on support for
-multiple stereotypes.
-
 *** Cross model referencing tests
 
 At present we do not have any tests were a pod in one model makes use
