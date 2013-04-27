@@ -32,8 +32,8 @@ namespace {
 
 const std::string empty;
 const boost::filesystem::path empty_dir;
-const std::string test_module("generator");
-const std::string test_suite("settings_spec");
+const std::string test_module("config");
+const std::string test_suite("validator_spec");
 
 const boost::filesystem::path target("some_target");
 const boost::filesystem::path src_dir("src directory");
@@ -99,9 +99,8 @@ split_project(const bool split, const boost::filesystem::path& proj) {
 
 using dogen::utility::test::contains_checker;
 using dogen::config::configuration_error;
-using dogen::config::validator;
 
-BOOST_AUTO_TEST_SUITE(settings)
+BOOST_AUTO_TEST_SUITE(validator)
 
 BOOST_AUTO_TEST_CASE(modeling_target_must_be_supplied) {
     SETUP_TEST_LOG_SOURCE("modeling_target_must_be_supplied");
@@ -109,9 +108,10 @@ BOOST_AUTO_TEST_CASE(modeling_target_must_be_supplied) {
     dogen::config::settings s;
     BOOST_CHECK(s.modeling().target().empty());
     contains_checker<configuration_error> c(missing_target);
-    BOOST_CHECK_EXCEPTION(validator::validate(s), configuration_error, c);
+    BOOST_CHECK_EXCEPTION(
+        dogen::config::validator::validate(s), configuration_error, c);
 
-    validator::validate(defaults());
+    dogen::config::validator::validate(defaults());
 }
 
 BOOST_AUTO_TEST_CASE(non_split_projects_require_project_directory) {
@@ -119,9 +119,10 @@ BOOST_AUTO_TEST_CASE(non_split_projects_require_project_directory) {
 
     auto s(split_project(false));
     contains_checker<configuration_error> c(missing_project_dir);
-    BOOST_CHECK_EXCEPTION(validator::validate(s), configuration_error, c);
+    BOOST_CHECK_EXCEPTION(
+        dogen::config::validator::validate(s), configuration_error, c);
 
-    validator::validate(split_project(false, project_dir));
+    dogen::config::validator::validate(split_project(false, project_dir));
 }
 
 BOOST_AUTO_TEST_CASE(non_split_projects_with_include_or_source_throw) {
@@ -129,13 +130,16 @@ BOOST_AUTO_TEST_CASE(non_split_projects_with_include_or_source_throw) {
 
     auto s(split_project(false, include_dir, src_dir));
     contains_checker<configuration_error> c(unexpected_source_include);
-    BOOST_CHECK_EXCEPTION(validator::validate(s), configuration_error, c);
+    BOOST_CHECK_EXCEPTION(
+        dogen::config::validator::validate(s), configuration_error, c);
 
     s = split_project(false, include_dir, empty_dir);
-    BOOST_CHECK_EXCEPTION(validator::validate(s), configuration_error, c);
+    BOOST_CHECK_EXCEPTION(
+        dogen::config::validator::validate(s), configuration_error, c);
 
     s = split_project(false, empty_dir, src_dir);
-    BOOST_CHECK_EXCEPTION(validator::validate(s), configuration_error, c);
+    BOOST_CHECK_EXCEPTION(
+        dogen::config::validator::validate(s), configuration_error, c);
 }
 
 BOOST_AUTO_TEST_CASE(split_projects_require_source_and_include_directories) {
@@ -143,15 +147,19 @@ BOOST_AUTO_TEST_CASE(split_projects_require_source_and_include_directories) {
 
     auto s(split_project(true));
     contains_checker<configuration_error> c(missing_source_include);
-    BOOST_CHECK_EXCEPTION(validator::validate(s), configuration_error, c);
+    BOOST_CHECK_EXCEPTION(
+        dogen::config::validator::validate(s), configuration_error, c);
 
     s = split_project(true, include_dir, empty_dir);
-    BOOST_CHECK_EXCEPTION(validator::validate(s), configuration_error, c);
+    BOOST_CHECK_EXCEPTION(
+        dogen::config::validator::validate(s), configuration_error, c);
 
     s = split_project(true, empty_dir, src_dir);
-    BOOST_CHECK_EXCEPTION(validator::validate(s), configuration_error, c);
+    BOOST_CHECK_EXCEPTION(
+        dogen::config::validator::validate(s), configuration_error, c);
 
-    validator::validate(split_project(true, include_dir, src_dir));
+    dogen::config::validator::validate(
+        split_project(true, include_dir, src_dir));
 }
 
 BOOST_AUTO_TEST_CASE(split_projects_with_project_directory_throws) {
@@ -159,7 +167,8 @@ BOOST_AUTO_TEST_CASE(split_projects_with_project_directory_throws) {
 
     const auto s(split_project(true, project_dir));
     contains_checker<configuration_error> c(unexpected_project_dir);
-    BOOST_CHECK_EXCEPTION(validator::validate(s), configuration_error, c);
+    BOOST_CHECK_EXCEPTION(
+        dogen::config::validator::validate(s), configuration_error, c);
 }
 
 BOOST_AUTO_TEST_SUITE_END()
