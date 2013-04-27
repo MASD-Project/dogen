@@ -923,7 +923,8 @@ std::vector<file_view_model> sml_to_cpp_view_model::transform_packages() {
         const file_types file_type(file_types::header);
         sml::qname qn(p.second.name());
         qn.package_path().push_back(p.second.name().type_name());
-        log_generating_file(ft, at, file_type, qn.type_name(), qn.meta_type());
+        // FIXME: for some reason this line causes AVs on Win32
+        // log_generating_file(ft, at, file_type, qn.type_name(), qn.meta_type());
         const auto rq(location_request_factory(ft, file_type, at, qn));
         const auto rp(locator_.relative_logical_path(rq));
 
