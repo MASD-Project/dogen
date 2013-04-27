@@ -11,6 +11,10 @@ This file contains all stories that haven't been assigned to a sprint.
 
 Stories that we intend to look at, at some point.
 
+*** Add test for fluent and immutable
+
+Its not possible to be immutable and fluent.
+
 *** Warn if value or entity has methods
 
 We should issue a warning if a user defines methods in value or entity
