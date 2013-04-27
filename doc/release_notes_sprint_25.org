@@ -65,6 +65,11 @@ that they can be combined.
 
 Minor typo on formatter, should have used spaced inserter.
 
+*** COMPLETED Implement immutability                                  :story:
+    CLOSED: [2013-04-27 Sat 01:58]
+
+Create a stereotype that switches off the mutable members of a pod.
+
 *** Re-implement key support                                          :story:
 
 - create a new stereotype of keyed. when set, it results in the
