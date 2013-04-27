@@ -29,35 +29,35 @@ namespace {
 
 const std::string empty;
 const std::string test_module("dia");
-const std::string test_suite("equality_spec");
+const std::string test_suite("swap_spec");
 
 }
 
 using namespace dogen::dia;
 using namespace dogen::utility::test;
 
-BOOST_AUTO_TEST_SUITE(equality)
+BOOST_AUTO_TEST_SUITE(swap)
 
-BOOST_AUTO_TEST_CASE(validate_equality) {
-    SETUP_TEST_LOG("validate_equality");
+BOOST_AUTO_TEST_CASE(validate_swap) {
+    SETUP_TEST_LOG("validate_swap");
 
-    test_equality<attribute_generator>();
-    test_equality<boolean_generator>();
-    test_equality<child_node_generator>();
-    test_equality<color_generator>();
-    test_equality<composite_generator>();
-    test_equality<connection_generator>();
-    test_equality<diagram_data_generator>();
-    test_equality<diagram_generator>();
-    test_equality<enumeration_generator>();
-    test_equality<font_generator>();
-    test_equality<integer_generator>();
-    test_equality<layer_generator>();
-    test_equality<object_generator>();
-    test_equality<point_generator>();
-    test_equality<real_generator>();
-    test_equality<rectangle_generator>();
-    test_equality<string_generator>();
+    test_swap<attribute_generator>();
+    test_swap<boolean_generator>();
+    test_swap<child_node_generator>();
+    test_swap<color_generator>();
+    test_swap<composite_generator>();
+    test_swap<connection_generator>();
+    test_swap<diagram_data_generator>();
+    test_swap<diagram_generator>();
+    test_swap<enumeration_generator>();
+    test_swap<font_generator>();
+    test_swap<integer_generator>();
+    test_swap<layer_generator>();
+    test_swap<object_generator>();
+    test_swap<point_generator>();
+    test_swap<real_generator>();
+    test_swap<rectangle_generator>();
+    test_swap<string_generator>();
 }
 
 BOOST_AUTO_TEST_SUITE_END()

@@ -29,35 +29,35 @@ namespace {
 
 const std::string empty;
 const std::string test_module("dia");
-const std::string test_suite("equality_spec");
+const std::string test_suite("io_spec");
 
 }
 
 using namespace dogen::dia;
 using namespace dogen::utility::test;
 
-BOOST_AUTO_TEST_SUITE(equality)
+BOOST_AUTO_TEST_SUITE(io)
 
-BOOST_AUTO_TEST_CASE(validate_equality) {
-    SETUP_TEST_LOG("validate_equality");
+BOOST_AUTO_TEST_CASE(validate_io) {
+    SETUP_TEST_LOG("validate_io");
 
-    test_equality<attribute_generator>();
-    test_equality<boolean_generator>();
-    test_equality<child_node_generator>();
-    test_equality<color_generator>();
-    test_equality<composite_generator>();
-    test_equality<connection_generator>();
-    test_equality<diagram_data_generator>();
-    test_equality<diagram_generator>();
-    test_equality<enumeration_generator>();
-    test_equality<font_generator>();
-    test_equality<integer_generator>();
-    test_equality<layer_generator>();
-    test_equality<object_generator>();
-    test_equality<point_generator>();
-    test_equality<real_generator>();
-    test_equality<rectangle_generator>();
-    test_equality<string_generator>();
+    test_io<attribute_generator>();
+    test_io<boolean_generator>();
+    test_io<child_node_generator>();
+    test_io<color_generator>();
+    test_io<composite_generator>();
+    test_io<connection_generator>();
+    test_io<diagram_data_generator>();
+    test_io<diagram_generator>();
+    test_io<enumeration_generator>();
+    test_io<font_generator>();
+    test_io<integer_generator>();
+    test_io<layer_generator>();
+    test_io<object_generator>();
+    test_io<point_generator>();
+    test_io<real_generator>();
+    test_io<rectangle_generator>();
+    test_io<string_generator>();
 }
 
 BOOST_AUTO_TEST_SUITE_END()
