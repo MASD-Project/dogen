@@ -43,6 +43,8 @@ const std::string invalid_model_name("INVALID");
 const std::string invalid_type_name("INVALID");
 const std::string zero_postfix("_0");
 const std::string one_postfix("_1");
+const std::string two_postfix("_2");
+const std::string three_postfix("_3");
 
 const std::string model_name_prefix("some_model_");
 const std::string type_name_prefix("some_type_");
@@ -96,6 +98,14 @@ bool is_type_zero(const dogen::sml::qname& qn) {
 
 bool is_type_one(const dogen::sml::qname& qn) {
     return boost::ends_with(qn.type_name(), one_postfix);
+}
+
+bool is_type_two(const dogen::sml::qname& qn) {
+    return boost::ends_with(qn.type_name(), two_postfix);
+}
+
+bool is_type_three(const dogen::sml::qname& qn) {
+    return boost::ends_with(qn.type_name(), three_postfix);
 }
 
 bool is_pod(const dogen::sml::qname& qn) {
@@ -297,107 +307,72 @@ BOOST_AUTO_TEST_CASE(pod_with_parent_in_the_same_model_merges_successfully) {
 }
 
 BOOST_AUTO_TEST_CASE(pod_with_parent_in_different_models_merges_successfully) {
-    SETUP_TEST_LOG("pod_with_parent_in_different_models_merges_successfully");
+    SETUP_TEST_LOG_SOURCE("pod_with_parent_in_different_models_merges_successfully");
+    const auto m(mock_model_factory::pod_with_parent_in_different_models());
     dogen::sml::merger mg;
-
-    using namespace dogen::sml;
-    pod pod0(mock_pod(0));
-    pod pod1(mock_pod(1));
-    pod0.parent_name(pod1.name());
-
-    model m0;
-    m0.pods(
-        std::unordered_map<qname, pod> {
-            { pod0.name(), pod0 }
-        });
-    m0.name(model_name(0));
-
-    model m1;
-    m1.pods(
-        std::unordered_map<qname, pod> {
-            { pod1.name(), pod1 }
-        });
-    m1.name(model_name(1));
-
-    mg.add_target(m0);
-    mg.add(m1);
-
+    mg.add_target(m[0]);
+    mg.add(m[1]);
     const auto combined(mg.merge());
     BOOST_CHECK(combined.pods().size() == 2);
     BOOST_CHECK(combined.primitives().empty());
 
-    const auto pods(combined.pods());
-    const auto i(pods.find(pod0.name()));
-    BOOST_CHECK(i != pods.end());
-    const auto pn(i->second.parent_name());
-    BOOST_CHECK(pn);
-    BOOST_CHECK(pn->type_name() == pod1.name().type_name());
-    BOOST_CHECK(pn->meta_type() == meta_types::pod);
+    bool found(false);
+    for (const auto pair : combined.pods()) {
+        if (is_type_zero(pair.first)) {
+            BOOST_LOG_SEV(lg, debug) << "found pod: " << pair.first;
+            found = true;
+            const auto pn(pair.second.parent_name());
+            BOOST_REQUIRE(pn);
+            BOOST_LOG_SEV(lg, debug) << "parent: " << *pn;
+            BOOST_CHECK(is_type_one(*pn));
+            BOOST_CHECK(is_model_one(*pn));
+            BOOST_CHECK(is_pod(*pn));
+        }
+    }
+    BOOST_CHECK(found);
 }
 
 BOOST_AUTO_TEST_CASE(pod_with_third_degree_parent_in_same_model_merges_successfully) {
-    SETUP_TEST_LOG("pod_with_third_degree_parent_in_same_model_merges_successfully");
+    SETUP_TEST_LOG_SOURCE("pod_with_third_degree_parent_in_same_model_merges_successfully");
+    const auto m(mock_model_factory::pod_with_third_degree_parent_in_same_model());
     dogen::sml::merger mg;
-
-    using namespace dogen::sml;
-    const std::string mn(model_name(0));
-    pod pod0(mock_pod(0, mn));
-    pod pod1(mock_pod(1, mn));
-    pod pod2(mock_pod(2, mn));
-    pod pod3(mock_pod(3, mn));
-
-    pod0.parent_name(pod1.name());
-    pod1.parent_name(pod2.name());
-    pod2.parent_name(pod3.name());
-
-    model m;
-    m.pods(
-        std::unordered_map<qname, pod> {
-            { pod0.name(), pod0 },
-            { pod1.name(), pod1 },
-            { pod2.name(), pod2 },
-            { pod3.name(), pod3 }
-        });
-    m.name(mn);
-
     mg.add_target(m);
 
     const auto combined(mg.merge());
     BOOST_CHECK(combined.pods().size() == 4);
     BOOST_CHECK(combined.primitives().empty());
 
-    const auto pods(combined.pods());
-    const auto i(pods.find(pod0.name()));
-    BOOST_CHECK(i != pods.end());
-    const auto pn(i->second.parent_name());
-    BOOST_CHECK(pn);
-    BOOST_CHECK(pn->type_name() == pod1.name().type_name());
+    bool found_one(false);
+    bool found_two(false);
+    for (const auto pair : combined.pods()) {
+        if (is_type_zero(pair.first)) {
+            BOOST_LOG_SEV(lg, debug) << "found pod: " << pair.first;
+            found_one = true;
+            const auto pn(pair.second.parent_name());
+            BOOST_REQUIRE(pn);
+            BOOST_LOG_SEV(lg, debug) << "parent: " << *pn;
+            BOOST_CHECK(is_type_one(*pn));
+            BOOST_CHECK(is_model_zero(*pn));
+            BOOST_CHECK(is_pod(*pn));
+        } else if (is_type_one(pair.first)) {
+            BOOST_LOG_SEV(lg, debug) << "found pod: " << pair.first;
+            found_two = true;
+            const auto pn(pair.second.parent_name());
+            BOOST_REQUIRE(pn);
+            BOOST_LOG_SEV(lg, debug) << "parent: " << *pn;
+            BOOST_CHECK(is_type_two(*pn));
+            BOOST_CHECK(is_model_zero(*pn));
+            BOOST_CHECK(is_pod(*pn));
+        }
+    }
+    BOOST_CHECK(found_one);
+    BOOST_CHECK(found_two);
 }
 
 BOOST_AUTO_TEST_CASE(pod_with_third_degree_parent_missing_within_single_model_throws) {
     SETUP_TEST_LOG("pod_with_third_degree_parent_missing_within_single_model_throws");
     dogen::sml::merger mg;
-
-    using namespace dogen::sml;
-    const std::string mn(model_name(0));
-    pod pod0(mock_pod(0, mn));
-    pod pod1(mock_pod(1, mn));
-    pod pod2(mock_pod(2, mn));
-    pod pod3(mock_pod(3, mn));
-
-    pod0.parent_name(pod1.name());
-    pod1.parent_name(pod2.name());
-    pod2.parent_name(pod3.name());
-
-    model m;
-    m.pods(
-        std::unordered_map<qname, pod> {
-            { pod0.name(), pod0 },
-            { pod1.name(), pod1 },
-            { pod2.name(), pod2 }
-        });
-    m.name(mn);
-
+    const auto m(mock_model_factory::pod_with_third_degree_parent_missing());
     mg.add_target(m);
     contains_checker<merging_error> c(missing_parent);
     BOOST_CHECK_EXCEPTION(mg.merge(), merging_error, c);

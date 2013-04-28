@@ -81,6 +81,12 @@ public:
     pod_with_parent_in_different_models();
 
     /**
+     * @brief Scenario: pod three levels deep in inheritance tree in
+     * current model.
+     */
+    static model pod_with_third_degree_parent_in_same_model();
+
+    /**
      * @brief Scenario: pod three levels deep in inheritance tree has
      * missing parent.
      */
