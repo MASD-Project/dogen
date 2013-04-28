@@ -23,43 +23,41 @@
 #include "dogen/utility/test/canned_tests.hpp"
 #include "dogen/sml/types/all.hpp"
 #include "dogen/sml/io/all_io.hpp"
-#include "dogen/sml/hash/all_hash.hpp"
 #include "dogen/sml/test_data/all_td.hpp"
 
 namespace {
 
 const std::string empty;
 const std::string test_module("sml");
-const std::string test_suite("hashing_spec");
+const std::string test_suite("io_spec");
 
 }
 
 using namespace dogen::sml;
 using namespace dogen::utility::test;
 
-BOOST_AUTO_TEST_SUITE(hashing)
+BOOST_AUTO_TEST_SUITE(io)
 
-BOOST_AUTO_TEST_CASE(validate_hashing) {
-    SETUP_TEST_LOG("validate_hashing");
+BOOST_AUTO_TEST_CASE(validate_io) {
+    SETUP_TEST_LOG("validate_io");
 
-    test_hashing<category_types_generator>();
-    test_hashing<entry_generator>();
-    test_hashing<enumeration_generator>();
-    test_hashing<enumerator_generator>();
-    test_hashing<exception_generator>();
-    test_hashing<generation_types_generator>();
-    test_hashing<meta_types_generator>();
-    test_hashing<model_generator>();
-    // FIXME: bug in composition?
-    // test_hashing<nested_qname_generator>();
-    test_hashing<package_generator>();
-    test_hashing<pod_generator>();
-    test_hashing<pod_types_generator>();
-    test_hashing<primitive_generator>();
-    test_hashing<property_generator>();
-    test_hashing<qname_generator>();
-    test_hashing<reference_generator>();
-    test_hashing<string_table_generator>();
+    test_io<category_types_generator>();
+    test_io<entry_generator>();
+    test_io<enumeration_generator>();
+    test_io<enumerator_generator>();
+    test_io<exception_generator>();
+    test_io<generation_types_generator>();
+    test_io<meta_types_generator>();
+    test_io<model_generator>();
+    test_io<nested_qname_generator>();
+    test_io<package_generator>();
+    test_io<pod_generator>();
+    test_io<pod_types_generator>();
+    test_io<primitive_generator>();
+    test_io<property_generator>();
+    test_io<qname_generator>();
+    test_io<reference_generator>();
+    test_io<string_table_generator>();
 }
 
 BOOST_AUTO_TEST_SUITE_END()

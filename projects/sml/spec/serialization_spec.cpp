@@ -19,15 +19,13 @@
  *
  */
 #include <boost/test/unit_test.hpp>
-#include <boost/archive/xml_oarchive.hpp>
-#include <boost/archive/xml_iarchive.hpp>
 #include "dogen/utility/test/logging.hpp"
+#include "dogen/utility/test/canned_tests.hpp"
 #include "dogen/sml/types/all.hpp"
 #include "dogen/sml/io/all_io.hpp"
-#include "dogen/utility/test/serialization_tester.hpp"
-#include "dogen/sml/serialization/registrar_ser.hpp"
-#include "dogen/sml/serialization/all_ser.hpp"
 #include "dogen/sml/test_data/all_td.hpp"
+#include "dogen/sml/serialization/all_ser.hpp"
+#include "dogen/sml/serialization/registrar_ser.hpp"
 
 template<typename Archive> void register_types(Archive& ar) {
     dogen::sml::register_types<Archive>(ar);
@@ -35,35 +33,37 @@ template<typename Archive> void register_types(Archive& ar) {
 
 namespace {
 
+const std::string empty;
 const std::string test_module("sml");
-const std::string test_suite("serialization");
-const std::string documentation("@brief sample doc");
-
-/**
- * @brief Performs a serialisation round-trip using a test object
- * read from Sequence.
- */
-template<typename Sequence>
-void rountrip_type() {
-    Sequence sequence;
-    dogen::utility::test::serialization_tester<typename Sequence::result_type>::
-        all_roundtrips_produce_the_same_entity(sequence());
-}
+const std::string test_suite("serialization_spec");
 
 }
+
+using namespace dogen::sml;
+using namespace dogen::utility::test;
 
 BOOST_AUTO_TEST_SUITE(serialization)
 
-BOOST_AUTO_TEST_CASE(roundtrips_of_the_same_type_produce_the_same_entity) {
-    SETUP_TEST_LOG("roundtrips_of_the_same_type_produce_the_same_entity");
-    using namespace dogen::sml;
+BOOST_AUTO_TEST_CASE(validate_serialization) {
+    SETUP_TEST_LOG("validate_serialization");
 
-    // rountrip_type<meta_types_generator>();
-    // rountrip_type<qname_generator>();
-    // rountrip_type<property_generator>();
-    // rountrip_type<pod_generator>();
-    // rountrip_type<package_generator>();
-    // rountrip_type<model_generator>();
+    rountrip_type<category_types_generator>();
+    rountrip_type<entry_generator>();
+    rountrip_type<enumeration_generator>();
+    rountrip_type<enumerator_generator>();
+    rountrip_type<exception_generator>();
+    rountrip_type<generation_types_generator>();
+    rountrip_type<meta_types_generator>();
+    rountrip_type<model_generator>();
+    rountrip_type<nested_qname_generator>();
+    rountrip_type<package_generator>();
+    rountrip_type<pod_generator>();
+    rountrip_type<pod_types_generator>();
+    rountrip_type<primitive_generator>();
+    rountrip_type<property_generator>();
+    rountrip_type<qname_generator>();
+    rountrip_type<reference_generator>();
+    rountrip_type<string_table_generator>();
 }
 
 BOOST_AUTO_TEST_SUITE_END()

@@ -23,43 +23,41 @@
 #include "dogen/utility/test/canned_tests.hpp"
 #include "dogen/sml/types/all.hpp"
 #include "dogen/sml/io/all_io.hpp"
-#include "dogen/sml/hash/all_hash.hpp"
 #include "dogen/sml/test_data/all_td.hpp"
 
 namespace {
 
 const std::string empty;
 const std::string test_module("sml");
-const std::string test_suite("hashing_spec");
+const std::string test_suite("swap_spec");
 
 }
 
 using namespace dogen::sml;
 using namespace dogen::utility::test;
 
-BOOST_AUTO_TEST_SUITE(hashing)
+BOOST_AUTO_TEST_SUITE(swap)
 
-BOOST_AUTO_TEST_CASE(validate_hashing) {
-    SETUP_TEST_LOG("validate_hashing");
+BOOST_AUTO_TEST_CASE(validate_swap) {
+    SETUP_TEST_LOG("validate_swap");
 
-    test_hashing<category_types_generator>();
-    test_hashing<entry_generator>();
-    test_hashing<enumeration_generator>();
-    test_hashing<enumerator_generator>();
-    test_hashing<exception_generator>();
-    test_hashing<generation_types_generator>();
-    test_hashing<meta_types_generator>();
-    test_hashing<model_generator>();
-    // FIXME: bug in composition?
-    // test_hashing<nested_qname_generator>();
-    test_hashing<package_generator>();
-    test_hashing<pod_generator>();
-    test_hashing<pod_types_generator>();
-    test_hashing<primitive_generator>();
-    test_hashing<property_generator>();
-    test_hashing<qname_generator>();
-    test_hashing<reference_generator>();
-    test_hashing<string_table_generator>();
+    test_swap<category_types_generator>();
+    test_swap<entry_generator>();
+    test_swap<enumeration_generator>();
+    test_swap<enumerator_generator>();
+    test_swap<exception_generator>();
+    test_swap<generation_types_generator>();
+    test_swap<meta_types_generator>();
+    test_swap<model_generator>();
+    test_swap<nested_qname_generator>();
+    test_swap<package_generator>();
+    test_swap<pod_generator>();
+    test_swap<pod_types_generator>();
+    test_swap<primitive_generator>();
+    test_swap<property_generator>();
+    test_swap<qname_generator>();
+    test_swap<reference_generator>();
+    test_swap<string_table_generator>();
 }
 
 BOOST_AUTO_TEST_SUITE_END()
