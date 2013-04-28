@@ -272,36 +272,28 @@ BOOST_AUTO_TEST_CASE(pod_with_missing_property_type_throws) {
 }
 
 BOOST_AUTO_TEST_CASE(pod_with_parent_in_the_same_model_merges_successfully) {
-    SETUP_TEST_LOG("pod_with_parent_in_the_same_model_merges_successfully");
+    SETUP_TEST_LOG_SOURCE("pod_with_parent_in_the_same_model_merges_successfully");
     dogen::sml::merger mg;
-
-    using namespace dogen::sml;
-    const std::string mn(model_name(0));
-    pod pod0(mock_pod(0, mn));
-    pod pod1(mock_pod(1, mn));
-    pod0.parent_name(pod1.name());
-
-    model m;
-    m.pods(
-        std::unordered_map<qname, pod> {
-            { pod0.name(), pod0 },
-            { pod1.name(), pod1 }
-        });
-    m.name(mn);
-
+    const auto m(mock_model_factory::pod_with_parent_in_the_same_model());
     mg.add_target(m);
-
     const auto combined(mg.merge());
     BOOST_CHECK(combined.pods().size() == 2);
     BOOST_CHECK(combined.primitives().empty());
 
-    const auto pods(combined.pods());
-    const auto i(pods.find(pod0.name()));
-    BOOST_CHECK(i != pods.end());
-    const auto pn(i->second.parent_name());
-    BOOST_CHECK(pn);
-    BOOST_CHECK(pn->type_name() == pod1.name().type_name());
-    BOOST_CHECK(pn->meta_type() == meta_types::pod);
+    bool found(false);
+    for (const auto pair : combined.pods()) {
+        if (is_type_zero(pair.first)) {
+            BOOST_LOG_SEV(lg, debug) << "found pod: " << pair.first;
+            found = true;
+            const auto pn(pair.second.parent_name());
+            BOOST_REQUIRE(pn);
+            BOOST_LOG_SEV(lg, debug) << "parent: " << *pn;
+            BOOST_CHECK(is_type_one(*pn));
+            BOOST_CHECK(is_model_zero(*pn));
+            BOOST_CHECK(is_pod(*pn));
+        }
+    }
+    BOOST_CHECK(found);
 }
 
 BOOST_AUTO_TEST_CASE(pod_with_parent_in_different_models_merges_successfully) {

@@ -163,7 +163,15 @@ model mock_model_factory::pod_with_missing_property_type() {
 }
 
 model mock_model_factory::pod_with_parent_in_the_same_model() {
+    const std::string mn(model_name(0));
+    pod pod0(mock_pod(0, mn));
+    pod pod1(mock_pod(1, mn));
+    pod0.parent_name(pod1.name());
+
     model r;
+    r.pods().insert(std::make_pair(pod0.name(), pod0));
+    r.pods().insert(std::make_pair(pod1.name(), pod1));
+    r.name(mn);
     return r;
 }
 
