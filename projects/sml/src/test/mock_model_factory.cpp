@@ -231,15 +231,60 @@ model mock_model_factory::pod_with_third_degree_parent_missing() {
     return r;
 }
 
-model mock_model_factory::pod_with_third_degree_parent_in_different_models() {
-    model r;
-    return r;
+std::array<model, 4>
+mock_model_factory::pod_with_third_degree_parent_in_different_models() {
+    pod pod0(mock_pod(0));
+    pod pod1(mock_pod(1));
+    pod pod2(mock_pod(2));
+    pod pod3(mock_pod(3));
+
+    pod0.parent_name(pod1.name());
+    pod1.parent_name(pod2.name());
+    pod2.parent_name(pod3.name());
+
+    model m0;
+    m0.pods().insert(std::make_pair(pod0.name(), pod0));
+    m0.name(model_name(0));
+
+    model m1;
+    m1.pods().insert(std::make_pair(pod1.name(), pod1));
+    m1.name(model_name(1));
+
+    model m2;
+    m2.pods().insert(std::make_pair(pod2.name(), pod2));
+    m2.name(model_name(2));
+
+    model m3;
+    m3.pods().insert(std::make_pair(pod3.name(), pod3));
+    m3.name(model_name(3));
+
+    return std::array<model, 4>{{ m0, m1, m2, m3 }};
 }
 
-model mock_model_factory::
+std::array<model, 4> mock_model_factory::
 pod_with_missing_third_degree_parent_in_different_models() {
-    model r;
-    return r;
+    pod pod0(mock_pod(0));
+    pod pod1(mock_pod(1));
+    pod pod2(mock_pod(2));
+    pod pod3(mock_pod(3));
+
+    pod0.parent_name(pod1.name());
+    pod1.parent_name(pod2.name());
+    pod2.parent_name(pod3.name());
+
+    model m0;
+    m0.pods().insert(std::make_pair(pod0.name(), pod0));
+    m0.name(model_name(0));
+
+    model m1;
+    m1.pods().insert(std::make_pair(pod1.name(), pod1));
+    m1.name(model_name(1));
+
+    model m2;
+    m2.pods().insert(std::make_pair(pod2.name(), pod2));
+    m2.name(model_name(2));
+
+    return std::array<model, 4>{{ m0, m1, m2 }};
 }
 
 } } }

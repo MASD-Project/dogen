@@ -96,14 +96,16 @@ public:
      * @brief Scenario: pod three levels deep in inheritance tree,
      * with parents in different models.
      */
-    static model pod_with_third_degree_parent_in_different_models();
+    static std::array<model, 4>
+    pod_with_third_degree_parent_in_different_models();
 
     /**
      * @brief Scenario: pod three levels deep in inheritance tree,
      * with parents in different models and a missing top-level
      * parent.
      */
-    static model pod_with_missing_third_degree_parent_in_different_models();
+    static std::array<model, 4>
+    pod_with_missing_third_degree_parent_in_different_models();
 };
 
 } } }
