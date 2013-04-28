@@ -46,7 +46,6 @@ const std::string one_postfix("_1");
 
 const std::string model_name_prefix("some_model_");
 const std::string type_name_prefix("some_type_");
-const std::string property_name_prefix("some_property_");
 const std::string incorrect_model("Pod does not belong to this model");
 const std::string inconsistent_kvp("Inconsistency between key and value");
 const std::string missing_target("No target model found");
@@ -64,12 +63,6 @@ std::string type_name(unsigned int i) {
 std::string model_name(unsigned int i) {
     std::ostringstream stream;
     stream << model_name_prefix << i;
-    return stream.str();
-}
-
-std::string property_name(unsigned int i) {
-    std::ostringstream stream;
-    stream << property_name_prefix << i;
     return stream.str();
 }
 
