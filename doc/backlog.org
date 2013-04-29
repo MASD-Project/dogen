@@ -11,6 +11,14 @@ This file contains all stories that haven't been assigned to a sprint.
 
 Stories that we intend to look at, at some point.
 
+*** Add C++-03 mode
+
+It shouldn't be too hard to generate C++-03 code in addition to
+C++-11. We could follow the gcc/odb convention and have a =-std=
+option for this. The only problem would be testing - at present the
+language settings comes from PFH scripts, not cmake, and we'd have to
+make sure the compiler is not in C++-11 mode when compiling 03.
+
 *** Use dogen models to test dogen
 
 We should really use the dogen models in the dogen unit tests. The
