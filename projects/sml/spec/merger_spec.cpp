@@ -44,10 +44,7 @@ const std::string invalid_type_name("INVALID");
 const std::string zero_postfix("_0");
 const std::string one_postfix("_1");
 const std::string two_postfix("_2");
-const std::string three_postfix("_3");
 
-const std::string model_name_prefix("some_model_");
-const std::string type_name_prefix("some_type_");
 const std::string incorrect_model("Pod does not belong to this model");
 const std::string inconsistent_kvp("Inconsistency between key and value");
 const std::string missing_target("No target model found");
@@ -55,34 +52,6 @@ const std::string too_many_targets("Only one target expected.");
 const std::string undefined_type("Pod has property with undefined type");
 const std::string missing_parent("Pod's parent could not be located");
 const std::string incorrect_meta_type("Pod has incorrect meta_type");
-
-std::string type_name(unsigned int i) {
-    std::ostringstream stream;
-    stream << type_name_prefix << i;
-    return stream.str();
-}
-
-std::string model_name(unsigned int i) {
-    std::ostringstream stream;
-    stream << model_name_prefix << i;
-    return stream.str();
-}
-
-dogen::sml::pod mock_pod(unsigned int i, std::string model_name) {
-    dogen::sml::qname qn;
-    qn.model_name(model_name);
-    qn.type_name(type_name(i));
-    qn.meta_type(dogen::sml::meta_types::pod);
-
-    dogen::sml::pod r;
-    r.name(qn);
-    r.generation_type(dogen::sml::generation_types::full_generation);
-    return r;
-}
-
-dogen::sml::pod mock_pod(unsigned int i) {
-    return mock_pod(i, model_name(i));
-}
 
 bool is_model_zero(const dogen::sml::qname& qn) {
     return boost::ends_with(qn.model_name(), zero_postfix);
@@ -102,10 +71,6 @@ bool is_type_one(const dogen::sml::qname& qn) {
 
 bool is_type_two(const dogen::sml::qname& qn) {
     return boost::ends_with(qn.type_name(), two_postfix);
-}
-
-bool is_type_three(const dogen::sml::qname& qn) {
-    return boost::ends_with(qn.type_name(), three_postfix);
 }
 
 bool is_pod(const dogen::sml::qname& qn) {
@@ -422,24 +387,16 @@ BOOST_AUTO_TEST_CASE(pod_with_missing_third_degree_parent_in_different_models_th
 
 BOOST_AUTO_TEST_CASE(pod_incorrect_meta_type_throws) {
     SETUP_TEST_LOG("pod_incorrect_meta_type_throws");
+
+    auto m(mock_model_factory::build_single_pod_model(0));
+    BOOST_CHECK(m.pods().size() == 1);
+
+    auto p(m.pods().begin()->second);
+    p.name().meta_type(dogen::sml::meta_types::primitive);
+    m.pods().clear();
+    m.pods().insert(std::make_pair(p.name(), p));
+
     dogen::sml::merger mg;
-
-    using namespace dogen::sml;
-    pod p(mock_pod(0));
-
-    dogen::sml::qname qn;
-    qn.type_name(p.name().type_name());
-    qn.model_name(p.name().model_name());
-    qn.meta_type(meta_types::primitive);
-    p.name(qn);
-
-    model m;
-    m.pods(
-        std::unordered_map<qname, pod> {
-            { p.name(), p }
-        });
-    m.name(model_name(0));
-
     mg.add_target(m);
 
     contains_checker<merging_error> c(incorrect_meta_type);
