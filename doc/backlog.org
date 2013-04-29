@@ -128,6 +128,7 @@ output.
   hard-coded year of 2012. It should really be a parameter passed in.
 - we should really only have one formatter that understands different
   commenting syntaxes (e.g. cmake comments, c++ comments).
+- we should support multiple licences.
 
 *** Handling of include cmakelists in split projects is not correct   :story:
 
