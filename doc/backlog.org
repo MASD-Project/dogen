@@ -11,6 +11,14 @@ This file contains all stories that haven't been assigned to a sprint.
 
 Stories that we intend to look at, at some point.
 
+*** Type framing
+
+In places such as a cache or a socket, it may be useful to create a
+basic "frame" around serialised types. The minimum requirements for a
+frame would be a model ID, a type ID, a "format" (i.e. xml, text, etc)
+and potentially a size, depending on the medium. The remainder of the
+frame would be the payload - i.e. the serialised object.
+
 *** Model and type enums
 
 It may be useful to create enumerations for models, types and
