@@ -11,6 +11,22 @@ This file contains all stories that haven't been assigned to a sprint.
 
 Stories that we intend to look at, at some point.
 
+*** Use dogen models to test dogen
+
+We should really use the dogen models in the dogen unit tests. The
+rationale is as follows:
+
+- if somebody changes a diagram but forgets to code generate, we want
+  the build to break;
+- if somebody changes the code generator but forgets to regenerate all
+  the dogen models and verify that the code generator still works, we
+  want the build to break.
+
+This will cause some inconvenience during development because it will
+mean that some tests will fail until a feature is finished (or that
+the developer will have to continuously rebase the dogen models), but
+the advantages are important.
+
 *** Model naming
 
 It would be nice to be able to generate a model with a name other than
