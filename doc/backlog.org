@@ -11,6 +11,13 @@ This file contains all stories that haven't been assigned to a sprint.
 
 Stories that we intend to look at, at some point.
 
+*** Add camel case option
+
+It would be nice to have a command line option that switches names
+from underscores into camel case. The default convention would be that
+diagrams are always with underscores and then you can convert them at
+generation time. There should be a regex for this conversion.
+
 *** Add test for fluent and immutable
 
 Its not possible to be immutable and fluent.
