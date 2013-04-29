@@ -11,6 +11,13 @@ This file contains all stories that haven't been assigned to a sprint.
 
 Stories that we intend to look at, at some point.
 
+*** Model and type enums
+
+It may be useful to create enumerations for models, types and
+properties within pods. This would in the future form the basis of
+reflection. One could use implementation specific properties to set
+the model ID and pod IDs.
+
 *** Add pimpl support
 
 It may be useful to mark classes as pimpl and generate a private
