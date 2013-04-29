@@ -38,6 +38,17 @@ namespace test {
 class mock_model_factory {
 public:
     /**
+     * @brief Returns the model name derived from n.
+     */
+    static std::string model_name(const unsigned int n);
+
+    /**
+     * @brief Returns the pod name derived from n.
+     */
+    static std::string pod_name(const unsigned int n);
+
+public:
+    /**
      * @brief Builds a model with a name derived from n, containing a
      * single pod with a name also deriving from n.
      */

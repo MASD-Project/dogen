@@ -34,6 +34,8 @@
 #include "dogen/utility/test/exception_checkers.hpp"
 #include "dogen/sml/test/mock_model_factory.hpp"
 
+using dogen::sml::test::mock_model_factory;
+
 namespace {
 
 const std::string test_module("sml");
@@ -54,23 +56,23 @@ const std::string missing_parent("Pod's parent could not be located");
 const std::string incorrect_meta_type("Pod has incorrect meta_type");
 
 bool is_model_zero(const dogen::sml::qname& qn) {
-    return boost::ends_with(qn.model_name(), zero_postfix);
+    return mock_model_factory::model_name(0) == qn.model_name();
 }
 
 bool is_model_one(const dogen::sml::qname& qn) {
-    return boost::ends_with(qn.model_name(), one_postfix);
+    return mock_model_factory::model_name(1) == qn.model_name();
 }
 
 bool is_type_zero(const dogen::sml::qname& qn) {
-    return boost::ends_with(qn.type_name(), zero_postfix);
+    return mock_model_factory::pod_name(0) == qn.type_name();
 }
 
 bool is_type_one(const dogen::sml::qname& qn) {
-    return boost::ends_with(qn.type_name(), one_postfix);
+    return mock_model_factory::pod_name(1) == qn.type_name();
 }
 
 bool is_type_two(const dogen::sml::qname& qn) {
-    return boost::ends_with(qn.type_name(), two_postfix);
+    return mock_model_factory::pod_name(2) == qn.type_name();
 }
 
 bool is_pod(const dogen::sml::qname& qn) {
@@ -80,7 +82,6 @@ bool is_pod(const dogen::sml::qname& qn) {
 
 }
 
-using dogen::sml::test::mock_model_factory;
 using dogen::utility::test::contains_checker;
 using dogen::sml::merging_error;
 

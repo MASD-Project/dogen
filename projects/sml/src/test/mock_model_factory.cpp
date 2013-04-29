@@ -24,12 +24,12 @@
 namespace {
 
 const std::string model_name_prefix("some_model_");
-const std::string type_name_prefix("some_type_");
+const std::string pod_name_prefix("some_type_");
 const std::string property_name_prefix("some_property_");
 
-std::string type_name(unsigned int i) {
+std::string pod_name(unsigned int i) {
     std::ostringstream stream;
-    stream << type_name_prefix << i;
+    stream << pod_name_prefix << i;
     return stream.str();
 }
 
@@ -48,7 +48,7 @@ std::string property_name(unsigned int i) {
 dogen::sml::pod mock_pod(unsigned int i, std::string model_name) {
     dogen::sml::qname qn;
     qn.model_name(model_name);
-    qn.type_name(type_name(i));
+    qn.type_name(pod_name(i));
     qn.meta_type(dogen::sml::meta_types::pod);
 
     dogen::sml::pod r;
@@ -66,6 +66,14 @@ dogen::sml::pod mock_pod(unsigned int i) {
 namespace dogen {
 namespace sml {
 namespace test {
+
+std::string mock_model_factory::model_name(const unsigned int n) {
+    return ::model_name(n);
+}
+
+std::string mock_model_factory::pod_name(const unsigned int n) {
+    return ::pod_name(n);
+}
 
 model mock_model_factory::build_single_pod_model(const unsigned int n) {
     pod p(mock_pod(n));
