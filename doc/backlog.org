@@ -11,6 +11,12 @@ This file contains all stories that haven't been assigned to a sprint.
 
 Stories that we intend to look at, at some point.
 
+*** Add pimpl support
+
+It may be useful to mark classes as pimpl and generate a private
+implementation. On the public header we could forward declare all
+types.
+
 *** Add C++-03 mode
 
 It shouldn't be too hard to generate C++-03 code in addition to
