@@ -54,7 +54,7 @@ includer::includer(const sml::model& model,
               config::cpp_facet_types::serialization)),
       hash_enabled_(contains(settings_.enabled_facets(),
               config::cpp_facet_types::hash)), boost_(), std_(),
-      extractor_(model_.pods(), boost_, std_) {
+      extractor_(model_.pods()) {
 
     BOOST_LOG_SEV(lg, debug)
         << "Initial configuration:"

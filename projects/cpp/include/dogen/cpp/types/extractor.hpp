@@ -46,9 +46,7 @@ public:
     typedef const std::unordered_map<sml::qname, sml::pod> pod_map;
 
 public:
-    extractor(const pod_map& pods,
-        const boost_model_helper& boost,
-        const std_model_helper& std) : pods_(pods), boost_(boost), std_(std) { }
+    extractor(const pod_map& pods) : pods_(pods), boost_(), std_() { }
 
 private:
     /**
@@ -79,8 +77,8 @@ public:
 
 private:
     const pod_map& pods_;
-    const boost_model_helper& boost_;
-    const std_model_helper& std_;
+    const boost_model_helper boost_;
+    const std_model_helper std_;
 };
 
 } }
