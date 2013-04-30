@@ -11,6 +11,21 @@ This file contains all stories that haven't been assigned to a sprint.
 
 Stories that we intend to look at, at some point.
 
+*** Refactor boost and std helpers and enums
+
+We shouldn't really have std and boost enums. These are just a repeat
+of the SML models. We should have a find pod by name in a model which
+returns the appropriate qname given a type name. Then the helpers bind
+to those qnames; given a qname, they return the include information,
+etc. In the current implementation, the enums are basically a
+duplication of the static models.
+
+In reality we should really load up these models from a file, such
+that users can add their own bindings without having to change C++
+code. This could be done with a config file using boost property
+tree. However, one would need some kind of way of mapping types into
+primitives, sequence containers etc - some kind of "concepts".
+
 *** Type framing
 
 In places such as a cache or a socket, it may be useful to create a
