@@ -27,6 +27,9 @@ const std::string model_name_prefix("some_model_");
 const std::string pod_name_prefix("some_type_");
 const std::string property_name_prefix("some_property_");
 
+const std::string boolean("bool");
+const std::string unsigned_int("unsigned int");
+
 std::string pod_name(unsigned int i) {
     std::ostringstream stream;
     stream << pod_name_prefix << i;
@@ -44,6 +47,43 @@ std::string property_name(unsigned int i) {
     stream << property_name_prefix << i;
     return stream.str();
 }
+
+// dogen::sml::nested_qname mock_qname(dogen::sml::pod p) {
+//     dogen::sml::qname qn;
+//     qn.type_name(p.name().type_name());
+//     qn.model_name(p.name().model_name());
+
+//     dogen::sml::nested_qname r;
+//     r.type(qn);
+//     return r;
+// }
+
+// dogen::sml::nested_qname mock_qname(
+//     dogen::sml::test::mock_model_factory::property_types pt) {
+//     dogen::sml::qname qn;
+
+//     typedef dogen::sml::test::mock_model_factory::property_types property_types;
+//     switch(pt) {
+//     case property_types::unsigned_int:
+//         qn.type_name(unsigned_int);
+//         break;
+//     case property_types::boolean:
+//         qn.type_name(boolean);
+//         break;
+//     case property_types::boost_variant:
+//     case property_types::std_string:
+//     case property_types::std_pair:
+//     case property_types::boost_shared_ptr:
+//     default:
+//     }
+    
+//     // qn.model_name(p.name().model_name());
+
+//     dogen::sml::nested_qname r;
+//     r.type(qn);
+//     return r;
+
+// }
 
 dogen::sml::pod mock_pod(unsigned int i, std::string model_name) {
     dogen::sml::qname qn;
@@ -95,7 +135,7 @@ model mock_model_factory::build_multi_pod_model(const unsigned int n,
     return r;
 }
 
-model mock_model_factory::pod_with_property() {
+model mock_model_factory::pod_with_property(const property_types /*pt*/) {
     using namespace dogen::sml;
     const std::string mn(model_name(0));
     pod pod0(mock_pod(0, mn));
@@ -121,7 +161,7 @@ model mock_model_factory::pod_with_property() {
 }
 
 std::array<model, 2> mock_model_factory::
-pod_with_property_type_in_different_model() {
+pod_with_property_type_in_different_model(const property_types/*pt*/) {
     pod pod0(mock_pod(0));
     pod pod1(mock_pod(1));
 
@@ -148,7 +188,8 @@ pod_with_property_type_in_different_model() {
     return std::array<model, 2> {{ m0, m1 }};
 }
 
-model mock_model_factory::pod_with_missing_property_type() {
+model mock_model_factory::
+pod_with_missing_property_type(const property_types/*pt*/) {
     pod pod0(mock_pod(0));
     pod pod1(mock_pod(1));
 
@@ -175,6 +216,8 @@ model mock_model_factory::pod_with_parent_in_the_same_model() {
     pod pod0(mock_pod(0, mn));
     pod pod1(mock_pod(1, mn));
     pod0.parent_name(pod1.name());
+    pod0.original_parent_name(pod1.name());
+    pod1.is_parent(true);
 
     model r;
     r.pods().insert(std::make_pair(pod0.name(), pod0));
@@ -187,7 +230,9 @@ std::array<model, 2> mock_model_factory::
 pod_with_parent_in_different_models() {
     pod pod0(mock_pod(0));
     pod pod1(mock_pod(1));
+    pod0.original_parent_name(pod1.name());
     pod0.parent_name(pod1.name());
+    pod1.is_parent(true);
 
     model m0;
     m0.pods().insert(std::make_pair(pod0.name(), pod0));
@@ -208,8 +253,17 @@ model mock_model_factory::pod_with_third_degree_parent_in_same_model() {
     pod pod3(mock_pod(3, mn));
 
     pod0.parent_name(pod1.name());
+    pod0.original_parent_name(pod3.name());
+
     pod1.parent_name(pod2.name());
+    pod1.original_parent_name(pod3.name());
+    pod1.is_parent(true);
+
     pod2.parent_name(pod3.name());
+    pod2.original_parent_name(pod3.name());
+    pod2.is_parent(true);
+
+    pod3.is_parent(true);
 
     model r;
     r.pods().insert(std::make_pair(pod0.name(), pod0));
@@ -228,8 +282,17 @@ model mock_model_factory::pod_with_third_degree_parent_missing() {
     pod pod3(mock_pod(3, mn));
 
     pod0.parent_name(pod1.name());
+    pod0.original_parent_name(pod3.name());
+
     pod1.parent_name(pod2.name());
+    pod1.original_parent_name(pod3.name());
+    pod1.is_parent(true);
+
     pod2.parent_name(pod3.name());
+    pod2.original_parent_name(pod3.name());
+    pod2.is_parent(true);
+
+    pod3.is_parent(true);
 
     model r;
     r.pods().insert(std::make_pair(pod0.name(), pod0));
@@ -247,8 +310,17 @@ mock_model_factory::pod_with_third_degree_parent_in_different_models() {
     pod pod3(mock_pod(3));
 
     pod0.parent_name(pod1.name());
+    pod0.original_parent_name(pod3.name());
+
     pod1.parent_name(pod2.name());
+    pod1.original_parent_name(pod3.name());
+    pod1.is_parent(true);
+
     pod2.parent_name(pod3.name());
+    pod2.original_parent_name(pod3.name());
+    pod2.is_parent(true);
+
+    pod3.is_parent(true);
 
     model m0;
     m0.pods().insert(std::make_pair(pod0.name(), pod0));
@@ -277,8 +349,17 @@ pod_with_missing_third_degree_parent_in_different_models() {
     pod pod3(mock_pod(3));
 
     pod0.parent_name(pod1.name());
+    pod0.original_parent_name(pod3.name());
+
     pod1.parent_name(pod2.name());
+    pod1.original_parent_name(pod3.name());
+    pod1.is_parent(true);
+
     pod2.parent_name(pod3.name());
+    pod2.original_parent_name(pod3.name());
+    pod2.is_parent(true);
+
+    pod3.is_parent(true);
 
     model m0;
     m0.pods().insert(std::make_pair(pod0.name(), pod0));

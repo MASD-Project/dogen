@@ -62,23 +62,39 @@ public:
         const unsigned int pod_n);
 
 public:
+    enum class property_types : unsigned int {
+        invalid = 0,
+        unsigned_int,
+        boolean,
+        other_pod,
+        missing_pod,
+        boost_variant,
+        std_string,
+        std_pair,
+        boost_shared_ptr
+    };
+
+public:
     /**
      * @brief Scenario: pod with single property of a type existent in
      * current model.
      */
-    static model pod_with_property();
+    static model
+    pod_with_property(const property_types pt = property_types::other_pod);
 
     /**
      * @brief Scenario: pod with single property of a type existent in
      * a second model.
      */
     static std::array<model, 2>
-    pod_with_property_type_in_different_model();
+    pod_with_property_type_in_different_model(
+        const property_types pt = property_types::other_pod);
 
     /**
      * @brief Scenario: pod with property of missing type.
      */
-    static model pod_with_missing_property_type();
+    static model pod_with_missing_property_type(
+        const property_types pt = property_types::other_pod);
 
     /**
      * @brief Scenario: pod with parent in current model.

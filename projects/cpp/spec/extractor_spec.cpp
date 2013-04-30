@@ -40,9 +40,9 @@ bool is_type_zero(const dogen::sml::qname& qn) {
     return mock_model_factory::pod_name(0) == qn.type_name();
 }
 
-// bool is_type_one(const dogen::sml::qname& qn) {
-//     return mock_model_factory::pod_name(1) == qn.type_name();
-// }
+bool is_type_one(const dogen::sml::qname& qn) {
+    return mock_model_factory::pod_name(1) == qn.type_name();
+}
 
 }
 
@@ -83,11 +83,40 @@ BOOST_AUTO_TEST_CASE(pod_with_parent_has_one_name_in_relationships) {
     bool found(false);
     for (const auto pair : m.pods()) {
         if (is_type_zero(pair.first)) {
-            BOOST_LOG_SEV(lg, debug) << "found pod: " << pair.first;
+            BOOST_LOG_SEV(lg, debug) << "found child pod: " << pair.first;
 
             found = true;
             const auto r(x.extract_dependency_graph(pair.second));
             BOOST_LOG_SEV(lg, debug) << "relationships: " << r;
+
+            BOOST_REQUIRE(r.names().size() == 1);
+            BOOST_REQUIRE(is_type_one(*r.names().begin()));
+            BOOST_CHECK(r.forward_decls().empty());
+            BOOST_CHECK(r.keys().empty());
+            BOOST_CHECK(r.leaves().empty());
+            BOOST_CHECK(!r.has_std_string());
+            BOOST_CHECK(!r.has_variant());
+            BOOST_CHECK(!r.is_parent());
+            BOOST_CHECK(r.is_child());
+            BOOST_CHECK(!r.requires_stream_manipulators());
+            BOOST_CHECK(!r.has_std_pair());
+        } else if (is_type_one(pair.first)) {
+            BOOST_LOG_SEV(lg, debug) << "found parent pod: " << pair.first;
+
+            found = true;
+            const auto r(x.extract_dependency_graph(pair.second));
+            BOOST_LOG_SEV(lg, debug) << "relationships: " << r;
+
+            BOOST_REQUIRE(r.names().empty());
+            BOOST_CHECK(r.forward_decls().empty());
+            BOOST_CHECK(r.keys().empty());
+            BOOST_CHECK(r.leaves().empty());
+            BOOST_CHECK(!r.has_std_string());
+            BOOST_CHECK(!r.has_variant());
+            BOOST_CHECK(r.is_parent());
+            BOOST_CHECK(!r.is_child());
+            BOOST_CHECK(!r.requires_stream_manipulators());
+            BOOST_CHECK(!r.has_std_pair());
         }
     }
     BOOST_CHECK(found);
@@ -99,7 +128,6 @@ BOOST_AUTO_TEST_CASE(pod_with_parent_has_one_name_in_relationships) {
 // pod with missing relationship
 // pod with pair
 // pod with variant
-// 3 levels deep pod
 // pod with shared_ptr -> fwd decls
 
 
