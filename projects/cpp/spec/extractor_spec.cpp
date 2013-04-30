@@ -40,9 +40,9 @@ bool is_type_zero(const dogen::sml::qname& qn) {
     return mock_model_factory::pod_name(0) == qn.type_name();
 }
 
-bool is_type_one(const dogen::sml::qname& qn) {
-    return mock_model_factory::pod_name(1) == qn.type_name();
-}
+// bool is_type_one(const dogen::sml::qname& qn) {
+//     return mock_model_factory::pod_name(1) == qn.type_name();
+// }
 
 }
 
