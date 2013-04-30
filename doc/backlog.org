@@ -1094,6 +1094,14 @@ respect the archive type requested by the user.
 - [[http://lists.boost.org/boost-users/2011/01/65790.php][sent]] email to boost users mailing list asking for benchmarking
   support.
 
+In the mean time, one way of implementing this which wont require
+boost test changes is to create perf specific tests. These wont get
+executed by regular users (e.g. they are not part of =run_all_specs=)
+but they do get executed in the build machine. These are selected
+tests with big loops (say 1M times) doing things like reading dia
+diagrams etc. We could chose a few key things just to give us some
+metrics around performance.
+
 ** Won't fix
 
 Stories which we do not think we are going to work on.
