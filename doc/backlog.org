@@ -458,6 +458,16 @@ serialisation.
 
 *** Generation of cache code
 
+New understanding for this story:
+
+- create a cache interface in types;  all types marked as =cacheable=
+  have gets, puts  etc.
+- create a memcache implementation.
+- create a type to string which converts a key made up of primitives
+  into a underscore delimited string, used as a key in the cache.
+
+Old text of story:
+
 Some thought on adding caching to dogen:
 
 - we could have "modes" in dogen; instead of the
