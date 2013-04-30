@@ -67,7 +67,6 @@ public:
         unsigned_int,
         boolean,
         other_pod,
-        missing_pod,
         boost_variant,
         std_string,
         std_pair,
@@ -87,14 +86,12 @@ public:
      * a second model.
      */
     static std::array<model, 2>
-    pod_with_property_type_in_different_model(
-        const property_types pt = property_types::other_pod);
+    pod_with_property_type_in_different_model();
 
     /**
      * @brief Scenario: pod with property of missing type.
      */
-    static model pod_with_missing_property_type(
-        const property_types pt = property_types::other_pod);
+    static model pod_with_missing_property_type();
 
     /**
      * @brief Scenario: pod with parent in current model.

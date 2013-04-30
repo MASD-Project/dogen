@@ -19,9 +19,15 @@
  *
  */
 #include <sstream>
+#include <boost/throw_exception.hpp>
+#include "dogen/utility/exception/utility_exception.hpp"
+#include "dogen/utility/log/logger.hpp"
 #include "dogen/sml/test/mock_model_factory.hpp"
 
 namespace {
+
+using namespace dogen::utility::log;
+static logger lg(logger_factory("sml.mock_model_factory"));
 
 const std::string model_name_prefix("some_model_");
 const std::string pod_name_prefix("some_type_");
@@ -48,42 +54,96 @@ std::string property_name(unsigned int i) {
     return stream.str();
 }
 
-// dogen::sml::nested_qname mock_qname(dogen::sml::pod p) {
-//     dogen::sml::qname qn;
-//     qn.type_name(p.name().type_name());
-//     qn.model_name(p.name().model_name());
+dogen::sml::nested_qname mock_qname(dogen::sml::pod p) {
+    dogen::sml::qname qn;
+    qn.type_name(p.name().type_name());
+    qn.model_name(p.name().model_name());
+    qn.meta_type(dogen::sml::meta_types::pod);
 
-//     dogen::sml::nested_qname r;
-//     r.type(qn);
-//     return r;
-// }
+    dogen::sml::nested_qname r;
+    r.type(qn);
+    return r;
+}
 
-// dogen::sml::nested_qname mock_qname(
-//     dogen::sml::test::mock_model_factory::property_types pt) {
-//     dogen::sml::qname qn;
+dogen::sml::nested_qname mock_qname(
+    dogen::sml::test::mock_model_factory::property_types pt) {
+    dogen::sml::qname qn;
+    dogen::sml::nested_qname r;
 
-//     typedef dogen::sml::test::mock_model_factory::property_types property_types;
-//     switch(pt) {
-//     case property_types::unsigned_int:
-//         qn.type_name(unsigned_int);
-//         break;
-//     case property_types::boolean:
-//         qn.type_name(boolean);
-//         break;
-//     case property_types::boost_variant:
-//     case property_types::std_string:
-//     case property_types::std_pair:
-//     case property_types::boost_shared_ptr:
-//     default:
-//     }
-    
-//     // qn.model_name(p.name().model_name());
+    typedef dogen::sml::test::mock_model_factory::property_types property_types;
+    switch(pt) {
+    case property_types::unsigned_int:
+        qn.type_name(unsigned_int);
+        qn.meta_type(dogen::sml::meta_types::primitive);
+        r.type(qn);
+        break;
+    case property_types::boolean:
+        qn.type_name(boolean);
+        qn.meta_type(dogen::sml::meta_types::primitive);
+        r.type(qn);
+        break;
+    case property_types::boost_variant: {
+        dogen::sml::qname e;
+        e.type_name("variant");
+        e.model_name("boost");
+        r.type(e);
 
-//     dogen::sml::nested_qname r;
-//     r.type(qn);
-//     return r;
+        dogen::sml::qname f;
+        f.type_name(boolean);
+        dogen::sml::nested_qname c;
+        c.type(f);
 
-// }
+        dogen::sml::qname g;
+        g.type_name(unsigned_int);
+        dogen::sml::nested_qname d;
+        d.type(g);
+        r.children(std::list<dogen::sml::nested_qname> { c, d });
+        break;
+    }
+    case property_types::std_string:
+        qn.type_name("string");
+        qn.model_name("std");
+        r.type(qn);
+        break;
+    case property_types::std_pair: {
+        dogen::sml::qname e;
+        e.type_name("pair");
+        e.model_name("std");
+        r.type(e);
+
+        dogen::sml::qname f;
+        f.type_name(boolean);
+        dogen::sml::nested_qname c;
+        c.type(f);
+
+        dogen::sml::qname g;
+        g.type_name(boolean);
+        dogen::sml::nested_qname d;
+        d.type(g);
+        r.children(std::list<dogen::sml::nested_qname> { c, d });
+        break;
+    }
+    case property_types::boost_shared_ptr: {
+        dogen::sml::qname e;
+        e.type_name("boost");
+        e.model_name("shared_ptr");
+        r.type(e);
+
+        dogen::sml::qname f;
+        f.type_name(boolean);
+        dogen::sml::nested_qname c;
+        c.type(f);
+
+        r.children(std::list<dogen::sml::nested_qname> { c });
+        break;
+    }
+    default:
+        BOOST_LOG_SEV(lg, error) << "Unknown property type.";
+        BOOST_THROW_EXCEPTION(
+            dogen::utility::exception::exception("Unknown property type."));
+    }
+    return r;
+}
 
 dogen::sml::pod mock_pod(unsigned int i, std::string model_name) {
     dogen::sml::qname qn;
@@ -135,7 +195,7 @@ model mock_model_factory::build_multi_pod_model(const unsigned int n,
     return r;
 }
 
-model mock_model_factory::pod_with_property(const property_types /*pt*/) {
+model mock_model_factory::pod_with_property(const property_types pt) {
     using namespace dogen::sml;
     const std::string mn(model_name(0));
     pod pod0(mock_pod(0, mn));
@@ -144,37 +204,29 @@ model mock_model_factory::pod_with_property(const property_types /*pt*/) {
     property p;
     p.name(property_name(0));
 
-    dogen::sml::qname qn;
-    qn.type_name(pod1.name().type_name());
-    qn.model_name(pod1.name().model_name());
+    if (pt == property_types::other_pod)
+        p.type_name(mock_qname(pod1));
+    else
+        p.type_name(mock_qname(pt));
 
-    dogen::sml::nested_qname nqn;
-    nqn.type(qn);
-    p.type_name(nqn);
     pod0.properties().push_back(p);
 
     model r;
     r.pods().insert(std::make_pair(pod0.name(), pod0));
-    r.pods().insert(std::make_pair(pod1.name(), pod1));
+    if (pt == property_types::other_pod)
+        r.pods().insert(std::make_pair(pod1.name(), pod1));
     r.name(mn);
     return r;
 }
 
-std::array<model, 2> mock_model_factory::
-pod_with_property_type_in_different_model(const property_types/*pt*/) {
+std::array<model, 2>
+mock_model_factory::pod_with_property_type_in_different_model() {
     pod pod0(mock_pod(0));
     pod pod1(mock_pod(1));
 
     property p;
     p.name(property_name(0));
-
-    dogen::sml::qname qn;
-    qn.type_name(pod1.name().type_name());
-    qn.model_name(pod1.name().model_name());
-
-    dogen::sml::nested_qname nqn;
-    nqn.type(qn);
-    p.type_name(nqn);
+    p.type_name(mock_qname(pod1));
     pod0.properties().push_back(p);
 
     model m0;
@@ -188,21 +240,13 @@ pod_with_property_type_in_different_model(const property_types/*pt*/) {
     return std::array<model, 2> {{ m0, m1 }};
 }
 
-model mock_model_factory::
-pod_with_missing_property_type(const property_types/*pt*/) {
+model mock_model_factory::pod_with_missing_property_type() {
     pod pod0(mock_pod(0));
     pod pod1(mock_pod(1));
 
     property p;
     p.name(property_name(0));
-
-    dogen::sml::qname qn;
-    qn.type_name(pod1.name().type_name());
-    qn.model_name(pod1.name().model_name());
-
-    dogen::sml::nested_qname nqn;
-    nqn.type(qn);
-    p.type_name(nqn);
+    p.type_name(mock_qname(pod1));
     pod0.properties().push_back(p);
 
     model r;
