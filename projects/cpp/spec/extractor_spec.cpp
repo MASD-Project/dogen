@@ -364,5 +364,78 @@ BOOST_AUTO_TEST_CASE(pod_with_no_parents_has_no_names_inheritance_graph) {
     BOOST_CHECK(!r.has_std_pair());
 }
 
+BOOST_AUTO_TEST_CASE(pod_with_no_parents_and_one_property_has_no_names_inheritance_graph) {
+    SETUP_TEST_LOG_SOURCE("pod_with_no_parents_and_one_property_has_no_names_inheritance_graph");
+
+    const auto m(mock_model_factory::pod_with_property());
+    BOOST_LOG_SEV(lg, debug) << "input model: " << m;
+    BOOST_CHECK(m.pods().size() == 2);
+
+    dogen::cpp::extractor x(m.pods());
+    const auto r(x.extract_inheritance_graph(m.pods().begin()->second.name()));
+    BOOST_LOG_SEV(lg, debug) << "relationships: " << r;
+
+    BOOST_CHECK(r.names().empty());
+    BOOST_CHECK(r.forward_decls().empty());
+    BOOST_CHECK(r.keys().empty());
+    BOOST_CHECK(r.leaves().empty());
+    BOOST_CHECK(!r.has_std_string());
+    BOOST_CHECK(!r.has_variant());
+    BOOST_CHECK(!r.is_parent());
+    BOOST_CHECK(!r.is_child());
+    BOOST_CHECK(!r.requires_stream_manipulators());
+    BOOST_CHECK(!r.has_std_pair());
+}
+
+BOOST_AUTO_TEST_CASE(pod_with_parent_has_one_name_in_inheritance_graph) {
+    SETUP_TEST_LOG_SOURCE("pod_with_parent_has_one_name_in_inheritance_graph");
+
+    const auto m(mock_model_factory::pod_with_parent_in_the_same_model());
+    BOOST_LOG_SEV(lg, debug) << "input model: " << m;
+    BOOST_CHECK(!m.pods().empty());
+
+    dogen::cpp::extractor x(m.pods());
+
+    bool found(false);
+    for (const auto pair : m.pods()) {
+        if (is_type_zero(pair.first)) {
+            BOOST_LOG_SEV(lg, debug) << "found child pod: " << pair.first;
+
+            found = true;
+            const auto r(x.extract_inheritance_graph(pair.second.name()));
+            BOOST_LOG_SEV(lg, debug) << "relationships: " << r;
+
+            // BOOST_REQUIRE(r.names().size() == 1);
+            // BOOST_REQUIRE(is_type_one(*r.names().begin()));
+            // BOOST_CHECK(r.forward_decls().empty());
+            // BOOST_CHECK(r.keys().empty());
+            // BOOST_CHECK(r.leaves().empty());
+            // BOOST_CHECK(!r.has_std_string());
+            // BOOST_CHECK(!r.has_variant());
+            // BOOST_CHECK(!r.is_parent());
+            // BOOST_CHECK(r.is_child());
+            // BOOST_CHECK(!r.requires_stream_manipulators());
+            // BOOST_CHECK(!r.has_std_pair());
+        } else if (is_type_one(pair.first)) {
+            BOOST_LOG_SEV(lg, debug) << "found parent pod: " << pair.first;
+
+            found = true;
+            const auto r(x.extract_inheritance_graph(pair.second.name()));
+            BOOST_LOG_SEV(lg, debug) << "relationships: " << r;
+
+            // BOOST_REQUIRE(r.names().empty());
+            // BOOST_CHECK(r.forward_decls().empty());
+            // BOOST_CHECK(r.keys().empty());
+            // BOOST_CHECK(r.leaves().empty());
+            // BOOST_CHECK(!r.has_std_string());
+            // BOOST_CHECK(!r.has_variant());
+            // // BOOST_CHECK(r.is_parent());
+            // BOOST_CHECK(!r.is_child());
+            // BOOST_CHECK(!r.requires_stream_manipulators());
+            // BOOST_CHECK(!r.has_std_pair());
+        }
+    }
+    BOOST_CHECK(found);
+}
 
 BOOST_AUTO_TEST_SUITE_END()
