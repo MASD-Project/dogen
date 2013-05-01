@@ -341,4 +341,28 @@ BOOST_AUTO_TEST_CASE(pod_with_boost_shared_ptr_property_has_expected_name_in_rel
     BOOST_CHECK(found);
 }
 
+BOOST_AUTO_TEST_CASE(pod_with_no_parents_has_no_names_inheritance_graph) {
+    SETUP_TEST_LOG_SOURCE("pod_with_no_parents_has_no_names_inheritance_graph");
+
+    const auto m(mock_model_factory::build_single_pod_model(0));
+    BOOST_LOG_SEV(lg, debug) << "input model: " << m;
+    BOOST_CHECK(m.pods().size() == 1);
+
+    dogen::cpp::extractor x(m.pods());
+    const auto r(x.extract_inheritance_graph(m.pods().begin()->second.name()));
+    BOOST_LOG_SEV(lg, debug) << "relationships: " << r;
+
+    BOOST_CHECK(r.names().empty());
+    BOOST_CHECK(r.forward_decls().empty());
+    BOOST_CHECK(r.keys().empty());
+    BOOST_CHECK(r.leaves().empty());
+    BOOST_CHECK(!r.has_std_string());
+    BOOST_CHECK(!r.has_variant());
+    BOOST_CHECK(!r.is_parent());
+    BOOST_CHECK(!r.is_child());
+    BOOST_CHECK(!r.requires_stream_manipulators());
+    BOOST_CHECK(!r.has_std_pair());
+}
+
+
 BOOST_AUTO_TEST_SUITE_END()
