@@ -193,6 +193,7 @@ BOOST_AUTO_TEST_CASE(pod_with_other_pod_property_has_expected_names_in_relations
     for (const auto pair : m.pods()) {
         if (is_type_zero(pair.first)) {
             BOOST_LOG_SEV(lg, debug) << "found child pod: " << pair.first;
+            BOOST_REQUIRE(pair.second.properties().size() == 1);
             const auto r(x.extract_dependency_graph(pair.second));
 
             BOOST_LOG_SEV(lg, debug) << "relationships: " << r;
@@ -306,29 +307,38 @@ BOOST_AUTO_TEST_CASE(pod_with_std_string_property_has_expected_name_in_relations
     BOOST_CHECK(!r.has_std_pair());
 }
 
-// BOOST_IGNORE_AUTO_TEST_CASE(pod_with_boost_shared_ptr_property_has_expected_name_in_relationships) {
-//     SETUP_TEST_LOG_SOURCE("pod_with_boost_shared_ptr_property_has_expected_name_in_relationships");
+BOOST_AUTO_TEST_CASE(pod_with_boost_shared_ptr_property_has_expected_name_in_relationships) {
+    SETUP_TEST_LOG_SOURCE("pod_with_boost_shared_ptr_property_has_expected_name_in_relationships");
 
-//     const auto pt(property_types::boost_shared_ptr);
-//     const auto m(mock_model_factory::pod_with_property(pt));
-//     BOOST_LOG_SEV(lg, debug) << "input model: " << m;
-//     BOOST_REQUIRE(m.pods().size() == 1);
-//     BOOST_REQUIRE(m.pods().begin()->second.properties().size() == 1);
+    const auto pt(property_types::boost_shared_ptr);
+    const auto m(mock_model_factory::pod_with_property(pt));
+    BOOST_LOG_SEV(lg, debug) << "input model: " << m;
+    BOOST_REQUIRE(m.pods().size() == 3);
 
-//     dogen::cpp::extractor x(m.pods());
-//     const auto r(x.extract_dependency_graph(m.pods().begin()->second));
-//     BOOST_LOG_SEV(lg, debug) << "relationships: " << r;
+    bool found(false);
+    dogen::cpp::extractor x(m.pods());
+    for (const auto pair : m.pods()) {
+        if (is_type_zero(pair.first)) {
+            BOOST_LOG_SEV(lg, debug) << "found pod: " << pair.first;
+            BOOST_REQUIRE(pair.second.properties().size() == 1);
 
-//     BOOST_REQUIRE(r.names().size() == 2);
-//     BOOST_CHECK(r.forward_decls().size() == 1);
-//     BOOST_CHECK(r.keys().empty());
-//     BOOST_CHECK(r.leaves().empty());
-//     BOOST_CHECK(!r.has_std_string());
-//     BOOST_CHECK(!r.has_variant());
-//     BOOST_CHECK(!r.is_parent());
-//     BOOST_CHECK(!r.is_child());
-//     BOOST_CHECK(!r.requires_stream_manipulators());
-//     BOOST_CHECK(!r.has_std_pair());
-// }
+            found = true;
+            const auto r(x.extract_dependency_graph(pair.second));
+            BOOST_LOG_SEV(lg, debug) << "relationships: " << r;
+
+            BOOST_REQUIRE(r.names().size() == 1);
+            BOOST_CHECK(r.forward_decls().size() == 1);
+            BOOST_CHECK(r.keys().empty());
+            BOOST_CHECK(r.leaves().empty());
+            BOOST_CHECK(!r.has_std_string());
+            BOOST_CHECK(!r.has_variant());
+            BOOST_CHECK(!r.is_parent());
+            BOOST_CHECK(!r.is_child());
+            BOOST_CHECK(!r.requires_stream_manipulators());
+            BOOST_CHECK(!r.has_std_pair());
+        }
+    }
+    BOOST_CHECK(found);
+}
 
 BOOST_AUTO_TEST_SUITE_END()

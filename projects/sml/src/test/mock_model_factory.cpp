@@ -65,6 +65,23 @@ dogen::sml::nested_qname mock_qname(dogen::sml::pod p) {
     return r;
 }
 
+dogen::sml::nested_qname mock_qname_shared_ptr(dogen::sml::pod p) {
+    dogen::sml::qname e;
+    e.type_name("boost");
+    e.model_name("shared_ptr");
+    e.meta_type(dogen::sml::meta_types::pod);
+
+    dogen::sml::nested_qname r;
+    r.type(e);
+
+    dogen::sml::nested_qname c;
+    c.type(p.name());
+
+    r.children(std::list<dogen::sml::nested_qname> { c });
+
+    return r;
+}
+
 dogen::sml::nested_qname mock_qname(
     dogen::sml::test::mock_model_factory::property_types pt) {
     dogen::sml::qname qn;
@@ -121,20 +138,6 @@ dogen::sml::nested_qname mock_qname(
         dogen::sml::nested_qname d;
         d.type(g);
         r.children(std::list<dogen::sml::nested_qname> { c, d });
-        break;
-    }
-    case property_types::boost_shared_ptr: {
-        dogen::sml::qname e;
-        e.type_name("boost");
-        e.model_name("shared_ptr");
-        r.type(e);
-
-        dogen::sml::qname f;
-        f.type_name(boolean);
-        dogen::sml::nested_qname c;
-        c.type(f);
-
-        r.children(std::list<dogen::sml::nested_qname> { c });
         break;
     }
     default:
@@ -200,12 +203,22 @@ model mock_model_factory::pod_with_property(const property_types pt) {
     const std::string mn(model_name(0));
     pod pod0(mock_pod(0, mn));
     pod pod1(mock_pod(1, mn));
+    pod pod2;
+
+    dogen::sml::qname qn;
+    qn.type_name("boost");
+    qn.model_name("shared_ptr");
+    qn.meta_type(dogen::sml::meta_types::pod);
+    pod2.name(qn);
+    pod2.pod_type(dogen::sml::pod_types::smart_pointer);
 
     property p;
     p.name(property_name(0));
 
     if (pt == property_types::other_pod)
         p.type_name(mock_qname(pod1));
+    else if (pt == property_types::boost_shared_ptr)
+        p.type_name(mock_qname_shared_ptr(pod1));
     else
         p.type_name(mock_qname(pt));
 
@@ -213,8 +226,13 @@ model mock_model_factory::pod_with_property(const property_types pt) {
 
     model r;
     r.pods().insert(std::make_pair(pod0.name(), pod0));
-    if (pt == property_types::other_pod)
+    if (pt == property_types::other_pod ||
+        pt == property_types::boost_shared_ptr)
         r.pods().insert(std::make_pair(pod1.name(), pod1));
+
+    if (pt == property_types::boost_shared_ptr)
+        r.pods().insert(std::make_pair(pod2.name(), pod2));
+
     r.name(mn);
     return r;
 }
