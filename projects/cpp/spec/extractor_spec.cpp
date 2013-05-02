@@ -54,8 +54,8 @@ using dogen::utility::test::contains_checker;
 
 BOOST_AUTO_TEST_SUITE(extractor)
 
-BOOST_AUTO_TEST_CASE(pod_with_no_properties_and_no_inheritance_has_no_names_in_relationships) {
-    SETUP_TEST_LOG_SOURCE("pod_with_no_properties_and_no_inheritance_has_no_names_in_relationships");
+BOOST_AUTO_TEST_CASE(dependency_graph_of_pod_with_no_properties_and_no_inheritance_has_no_names_in_relationships) {
+    SETUP_TEST_LOG_SOURCE("dependency_graph_of_pod_with_no_properties_and_no_inheritance_has_no_names_in_relationships");
 
     const auto m(mock_model_factory::build_single_pod_model(0));
     BOOST_LOG_SEV(lg, debug) << "input model: " << m;
@@ -77,8 +77,8 @@ BOOST_AUTO_TEST_CASE(pod_with_no_properties_and_no_inheritance_has_no_names_in_r
     BOOST_CHECK(!r.has_std_pair());
 }
 
-BOOST_AUTO_TEST_CASE(pod_with_parent_has_one_name_in_relationships) {
-    SETUP_TEST_LOG_SOURCE("pod_with_parent_has_one_name_in_relationships");
+BOOST_AUTO_TEST_CASE(dependency_graph_of_pod_with_parent_has_one_name_in_relationships) {
+    SETUP_TEST_LOG_SOURCE("dependency_graph_of_pod_with_parent_has_one_name_in_relationships");
 
     const auto m(mock_model_factory::pod_with_parent_in_the_same_model());
     BOOST_LOG_SEV(lg, debug) << "input model: " << m;
@@ -128,8 +128,8 @@ BOOST_AUTO_TEST_CASE(pod_with_parent_has_one_name_in_relationships) {
     BOOST_CHECK(found);
 }
 
-BOOST_AUTO_TEST_CASE(pod_with_unsigned_int_property_has_expected_name_in_relationships) {
-    SETUP_TEST_LOG_SOURCE("pod_with_unsigned_int_property_has_expected_name_in_relationships");
+BOOST_AUTO_TEST_CASE(dependency_graph_of_pod_with_unsigned_int_property_has_expected_name_in_relationships) {
+    SETUP_TEST_LOG_SOURCE("dependency_graph_of_pod_with_unsigned_int_property_has_expected_name_in_relationships");
 
     const auto pt(property_types::unsigned_int);
     const auto m(mock_model_factory::pod_with_property(pt));
@@ -154,8 +154,8 @@ BOOST_AUTO_TEST_CASE(pod_with_unsigned_int_property_has_expected_name_in_relatio
     BOOST_CHECK(!r.has_std_pair());
 }
 
-BOOST_AUTO_TEST_CASE(pod_with_boolean_property_has_expected_name_in_relationships) {
-    SETUP_TEST_LOG_SOURCE("pod_with_boolean_property_has_expected_name_in_relationships");
+BOOST_AUTO_TEST_CASE(dependency_graph_of_pod_with_boolean_property_has_expected_name_in_relationships) {
+    SETUP_TEST_LOG_SOURCE("dependency_graph_of_pod_with_boolean_property_has_expected_name_in_relationships");
 
     const auto pt(property_types::boolean);
     const auto m(mock_model_factory::pod_with_property(pt));
@@ -180,8 +180,8 @@ BOOST_AUTO_TEST_CASE(pod_with_boolean_property_has_expected_name_in_relationship
     BOOST_CHECK(!r.has_std_pair());
 }
 
-BOOST_AUTO_TEST_CASE(pod_with_other_pod_property_has_expected_names_in_relationships) {
-    SETUP_TEST_LOG_SOURCE("pod_with_other_pod_property_has_expected_names_in_relationships");
+BOOST_AUTO_TEST_CASE(dependency_graph_of_pod_with_other_pod_property_has_expected_names_in_relationships) {
+    SETUP_TEST_LOG_SOURCE("dependency_graph_of_pod_with_other_pod_property_has_expected_names_in_relationships");
 
     const auto pt(property_types::other_pod);
     const auto m(mock_model_factory::pod_with_property(pt));
@@ -216,8 +216,8 @@ BOOST_AUTO_TEST_CASE(pod_with_other_pod_property_has_expected_names_in_relations
     BOOST_CHECK(found);
 }
 
-BOOST_AUTO_TEST_CASE(pod_with_missing_pod_property_throws) {
-    SETUP_TEST_LOG_SOURCE("pod_with_missing_pod_property_throws");
+BOOST_AUTO_TEST_CASE(dependency_graph_of_pod_with_missing_pod_property_throws) {
+    SETUP_TEST_LOG_SOURCE("dependency_graph_of_pod_with_missing_pod_property_throws");
 
     const auto m(mock_model_factory::pod_with_missing_property_type());
     BOOST_LOG_SEV(lg, debug) << "input model: " << m;
@@ -231,8 +231,8 @@ BOOST_AUTO_TEST_CASE(pod_with_missing_pod_property_throws) {
     BOOST_CHECK_EXCEPTION(x.extract_dependency_graph(p), extraction_error, c);
 }
 
-BOOST_AUTO_TEST_CASE(pod_with_pair_property_has_expected_names_in_relationships) {
-    SETUP_TEST_LOG_SOURCE("pod_with_pair_has_expected_names_in_relationships");
+BOOST_AUTO_TEST_CASE(dependency_graph_of_pod_with_pair_property_has_expected_names_in_relationships) {
+    SETUP_TEST_LOG_SOURCE("dependency_graph_of_pod_with_pair_property_has_expected_names_in_relationships");
 
     const auto pt(property_types::std_pair);
     const auto m(mock_model_factory::pod_with_property(pt));
@@ -256,8 +256,8 @@ BOOST_AUTO_TEST_CASE(pod_with_pair_property_has_expected_names_in_relationships)
     BOOST_CHECK(r.has_std_pair());
 }
 
-BOOST_AUTO_TEST_CASE(pod_with_variant_property_has_expected_names_in_relationships) {
-    SETUP_TEST_LOG_SOURCE("pod_with_variant_has_expected_names_in_relationships");
+BOOST_AUTO_TEST_CASE(dependency_graph_of_pod_with_variant_property_has_expected_names_in_relationships) {
+    SETUP_TEST_LOG_SOURCE("dependency_graph_of_pod_with_variant_property_has_expected_names_in_relationships");
 
     const auto pt(property_types::boost_variant);
     const auto m(mock_model_factory::pod_with_property(pt));
@@ -281,8 +281,8 @@ BOOST_AUTO_TEST_CASE(pod_with_variant_property_has_expected_names_in_relationshi
     BOOST_CHECK(!r.has_std_pair());
 }
 
-BOOST_AUTO_TEST_CASE(pod_with_std_string_property_has_expected_name_in_relationships) {
-    SETUP_TEST_LOG_SOURCE("pod_with_std_string_property_has_expected_name_in_relationships");
+BOOST_AUTO_TEST_CASE(dependency_graph_of_pod_with_std_string_property_has_expected_name_in_relationships) {
+    SETUP_TEST_LOG_SOURCE("dependency_graph_of_pod_with_std_string_property_has_expected_name_in_relationships");
 
     const auto pt(property_types::std_string);
     const auto m(mock_model_factory::pod_with_property(pt));
@@ -307,8 +307,8 @@ BOOST_AUTO_TEST_CASE(pod_with_std_string_property_has_expected_name_in_relations
     BOOST_CHECK(!r.has_std_pair());
 }
 
-BOOST_AUTO_TEST_CASE(pod_with_boost_shared_ptr_property_has_expected_name_in_relationships) {
-    SETUP_TEST_LOG_SOURCE("pod_with_boost_shared_ptr_property_has_expected_name_in_relationships");
+BOOST_AUTO_TEST_CASE(dependency_graph_of_pod_with_boost_shared_ptr_property_has_expected_name_in_relationships) {
+    SETUP_TEST_LOG_SOURCE("dependency_graph_of_pod_with_boost_shared_ptr_property_has_expected_name_in_relationships");
 
     const auto pt(property_types::boost_shared_ptr);
     const auto m(mock_model_factory::pod_with_property(pt));
@@ -341,8 +341,8 @@ BOOST_AUTO_TEST_CASE(pod_with_boost_shared_ptr_property_has_expected_name_in_rel
     BOOST_CHECK(found);
 }
 
-BOOST_AUTO_TEST_CASE(pod_with_no_parents_has_no_names_inheritance_graph) {
-    SETUP_TEST_LOG_SOURCE("pod_with_no_parents_has_no_names_inheritance_graph");
+BOOST_AUTO_TEST_CASE(inheritance_graph_of_pod_with_no_parents_has_no_names_in_relationships) {
+    SETUP_TEST_LOG_SOURCE("inheritance_graph_of_pod_with_no_parents_has_no_names_in_relationships");
 
     const auto m(mock_model_factory::build_single_pod_model(0));
     BOOST_LOG_SEV(lg, debug) << "input model: " << m;
@@ -364,8 +364,8 @@ BOOST_AUTO_TEST_CASE(pod_with_no_parents_has_no_names_inheritance_graph) {
     BOOST_CHECK(!r.has_std_pair());
 }
 
-BOOST_AUTO_TEST_CASE(pod_with_no_parents_and_one_property_has_no_names_inheritance_graph) {
-    SETUP_TEST_LOG_SOURCE("pod_with_no_parents_and_one_property_has_no_names_inheritance_graph");
+BOOST_AUTO_TEST_CASE(inheritance_graph_of_pod_with_no_parents_and_one_property_has_no_names_in_relationships) {
+    SETUP_TEST_LOG_SOURCE("inheritance_graph_of_pod_with_no_parents_and_one_property_has_no_names_in_relationships");
 
     const auto m(mock_model_factory::pod_with_property());
     BOOST_LOG_SEV(lg, debug) << "input model: " << m;
@@ -387,8 +387,8 @@ BOOST_AUTO_TEST_CASE(pod_with_no_parents_and_one_property_has_no_names_inheritan
     BOOST_CHECK(!r.has_std_pair());
 }
 
-BOOST_AUTO_TEST_CASE(pod_with_parent_has_one_name_in_inheritance_graph) {
-    SETUP_TEST_LOG_SOURCE("pod_with_parent_has_one_name_in_inheritance_graph");
+BOOST_AUTO_TEST_CASE(inheritance_graph_of_pod_with_parent_has_one_name_in_relationships) {
+    SETUP_TEST_LOG_SOURCE("inheritance_graph_of_pod_with_parent_has_one_name_in_relationships");
 
     const auto m(mock_model_factory::pod_with_parent_in_the_same_model());
     BOOST_LOG_SEV(lg, debug) << "input model: " << m;
