@@ -11,6 +11,36 @@ This file contains all stories that haven't been assigned to a sprint.
 
 Stories that we intend to look at, at some point.
 
+*** Private and public includes
+
+At present we are making all headers in a model public. However, for
+models such as cpp this doesn't make any sense since only one type
+should be available to the outside world. What we really need is a
+separation between public and private headers, a functionality similar
+to =internal= in C#. In order to do this:
+
+- add a new config parameter: default visibility to private or default
+  visibility to public. This is just so we don't have to mark all
+  types manually - instead we just need to mark the exceptions.
+- add two new stereotypes: =public= and =private=.
+- add enum to sml: =visibility_type= (check with .Net for
+  names). Valid values are =public=, =private=. Pods, enumerations,
+  etc will have this enum.
+- locator will now respect this value when producing an absolute file
+  path. If public files go under =include/public=, if private files go
+  under =include/private=.
+- CMakelists for the component will add to the include path the
+  private directory. Same for the spec CMakelists. Need to check that
+  this not add to the global include path.
+- CMakelists for the include files will only package the public
+  headers.
+- mark all the types accordingly in all our models. fix all the
+  ensuing breakage. we will probably need to move forward on the IoC
+  front in order for this to work as we don't want to expose
+  implementations - e.g. =workflow_interface= will be public but
+  =workflow= will be private; this means we need some kind of factory
+  to generate =workflow_interface=.
+
 *** Refactor boost and std helpers and enums
 
 We shouldn't really have std and boost enums. These are just a repeat
