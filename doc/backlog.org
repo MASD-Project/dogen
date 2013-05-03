@@ -11,6 +11,34 @@ This file contains all stories that haven't been assigned to a sprint.
 
 Stories that we intend to look at, at some point.
 
+*** Enumeration string conversion could be configurable               :story:
+
+It should be possible to pass in one or more string values as implementation
+specific parameters that tells dogen what valid values an enumerator
+can have. We can then generate a from string method that does the
+appropriate conversions.
+
+*** Enumeration string dumps could be configurable                    :story:
+
+It should be possible to pass in a string value as an implementation
+specific parameter that tells dogen what string to use for debug
+dumping.
+
+*** Add aggregate root stereotype                                     :story:
+
+We need to re-read DDD to see if there is anything dogen can do for us
+other than marking the type as aggregate root. Evans states that its
+the job of the aggregate root to perform validation; perhaps we could
+automatically generate a =validator= for the root that has to be
+implemented by the user.
+
+*** Add is comparable to SML                                          :story:
+
+- add a property to SML types: is comparable. if all attributes are
+  comparable, generate =operator<= for the keys.
+- perhaps we should also have a =comparable= stereotype. if not set,
+  ignore this.
+
 *** Private and public includes
 
 At present we are making all headers in a model public. However, for
@@ -169,17 +197,6 @@ So we need to:
 - injector decides which internal injectors to use based on options
   passed in.
 - in the IoC spirit, we should probably create a =injector_interface=.
-
-*** Add visitor support
-
-The base class of an inheritance hierarchy should be markable with the
-=visitable= stereotype. This would then result in the generation of
-visitor code:
-
-- a visitor class with a number of const and non-const methods that do
-  nothing by default
-- an =accept= method on the class that dispatches to the correct
-  method in visitor.
 
 *** "enumeration" of strings
 

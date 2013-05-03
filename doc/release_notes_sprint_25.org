@@ -70,7 +70,7 @@ Minor typo on formatter, should have used spaced inserter.
 
 Create a stereotype that switches off the mutable members of a pod.
 
-*** COMPLETED Consider adding a fluent option
+*** COMPLETED Consider adding a fluent option                         :story:
     CLOSED: [2013-04-27 Sat 02:48]
 
 It would be fairly trivial to allow generation of model types with
@@ -81,6 +81,22 @@ See: http://en.wikipedia.org/wiki/Fluent_interface
 This could also be a stereotype so that a model could have both fluent
 and non-fluent classes. This story is dependent on support for
 multiple stereotypes.
+
+*** COMPLETED Add new stereotype for versioning                       :story:
+    CLOSED: [2013-05-03 Fri 08:00]
+
+- versioned: add version property to class.
+
+*** IMPLEMENTATION Add visitor support
+
+The base class of an inheritance hierarchy should be markable with the
+=visitable= stereotype. This would then result in the generation of
+visitor code:
+
+- a visitor class with a number of const and non-const methods that do
+  nothing by default
+- an =accept= method on the class that dispatches to the correct
+  method in visitor.
 
 *** Re-implement key support                                          :story:
 
@@ -95,25 +111,6 @@ multiple stereotypes.
 - keys are comparable if all properties are of comparable types. add
   =operator<= automatically.
 
-*** Add aggregate root stereotype                                     :story:
-
-We need to re-read DDD to see if there is anything dogen can do for us
-other than marking the type as aggregate root. Evans states that its
-the job of the aggregate root to perform validation; perhaps we could
-automatically generate a =validator= for the root that has to be
-implemented by the user.
-
-*** Add new stereotype for versioning                                 :story:
-
-- versioned: add version property to class.
-
-*** Add is comparable to SML                                          :story:
-
-- add a property to SML types: is comparable. if all attributes are
-  comparable, generate =operator<= for the keys.
-- perhaps we should also have a =comparable= stereotype. if not set,
-  ignore this.
-
 *** Fix entity stereotype                                             :story:
 
 Instead of generating versioned/unversioned keys, it should just force
@@ -126,19 +123,6 @@ These should really be called back end specific parameters at the SM
 level. At the dia level, if a parameter is passed in which has a
 representation at the SML level it should simply be converted to this
 representation instead of being added to the KVP.
-
-*** Enumeration string conversion could be configurable               :story:
-
-It should be possible to pass in one or more string values as implementation
-specific parameters that tells dogen what valid values an enumerator
-can have. We can then generate a from string method that does the
-appropriate conversions.
-
-*** Enumeration string dumps could be configurable                    :story:
-
-It should be possible to pass in a string value as an implementation
-specific parameter that tells dogen what string to use for debug
-dumping.
 
 *** Use explicit casting for versioned to unversioned conversions     :story:
     CLOCK: [2012-11-22 Thu 08:44]--[2012-11-22 Thu 09:20] =>  0:36
@@ -157,7 +141,7 @@ correct design decisions in this area. We need to wait until we start
 using keys in anger in Creris and then design the API around the use
 cases.
 
-*** Create a model specific to versioning                             :story:
+*** Create a model specific to versioning, keys, etc                  :story:
 
 - remove versioning from all other models such as std::model, etc.
 - add tests for =std::unordered=, maps etc.
