@@ -11,6 +11,75 @@ This file contains all stories that haven't been assigned to a sprint.
 
 Stories that we intend to look at, at some point.
 
+*** Tidy-up test models
+
+We have a lot of fine grained test models for historic reasons. A lot
+of these could be collapsed into a smaller number of models, focused
+on testing a set of well defined features.
+
+**** Models that need changing
+
+Merge the following models into a =basic= or =trivial= model (no
+aggregation, no association):
+
+- classes_in_a_package
+- classes_inout_package
+- classes_without_package
+- class_in_a_package
+- class_without_attributes
+- class_without_package
+- stand_alone_class
+
+Merge the following models into stereotypes:
+
+- enumeration
+- exception
+
+Consider deleting the comments model and make sure we have comments in
+all models with the same features:
+
+- top-level comment for the model
+- package level comment
+- notes
+
+These models are at the right level of granularity but need renaming:
+
+- all_primitives: primitives or primitives_model to line up with boost
+  and std.
+- trivial_association: association
+- trivial_inheritance: inheritance
+
+**** Models that do not need changing and why
+
+These models test other models, and we cannot remove the postfix
+=_model= to avoid clashes with namespaces:
+
+- boost_model
+- std_model
+
+These models test command line options, which means they cannot be
+merged:
+
+- disable_cmakelists
+- disable_facet_folders
+- disable_full_ctor
+- dmp
+- enable_facet_domain
+- enable_facet_hash
+- enable_facet_io
+- enable_facet_serialization
+- split_project
+
+These models test features which have enough scenarios to justify
+keeping them in isolation:
+
+- database
+
+These models test dia features and must be kept isolated:
+
+- compressed
+- two_layers_with_objects
+
 *** Enumeration string conversion could be configurable               :story:
 
 It should be possible to pass in one or more string values as implementation
