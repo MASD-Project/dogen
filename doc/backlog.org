@@ -11,6 +11,14 @@ This file contains all stories that haven't been assigned to a sprint.
 
 Stories that we intend to look at, at some point.
 
+*** Add string table support
+
+We need a way of creating "tables" of strings such as for example for
+listing all the valid values for dia field names, etc. We could
+implement this by creating a new stereotype where the name is the
+string name and the default value is the string value. All strings
+would be static public members of a class.
+
 *** Tidy-up test models
 
 We have a lot of fine grained test models for historic reasons. A lot
