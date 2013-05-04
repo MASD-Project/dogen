@@ -223,15 +223,15 @@ BOOST_AUTO_TEST_CASE(exception_shall_be_usable_as_a_boost_exception) {
     }
 }
 
-BOOST_AUTO_TEST_CASE(exercise_array_inserter) {
-    SETUP_TEST_LOG_SOURCE("exercise_array_inserter");
-    std::array<int, 3> ints({{ 0, 5, 10 }});
-    ints[0] = 10;
-    ints[1] = 20;
-    ints[2] = 30;
-    BOOST_LOG_SEV(lg, debug) << "ints: " << ints;
-    BOOST_CHECK(true);
-}
+// BOOST_AUTO_TEST_CASE(exercise_array_inserter) {
+//     SETUP_TEST_LOG_SOURCE("exercise_array_inserter");
+//     std::array<int, 3> ints({{ 0, 5, 10 }});
+//     ints[0] = 10;
+//     ints[1] = 20;
+//     ints[2] = 30;
+//     BOOST_LOG_SEV(lg, debug) << "ints: " << ints;
+//     BOOST_CHECK(true);
+// }
 
 BOOST_AUTO_TEST_CASE(exercise_vector_inserter) {
     SETUP_TEST_LOG_SOURCE("exercise_vector_inserter");
