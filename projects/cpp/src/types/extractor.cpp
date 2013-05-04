@@ -115,6 +115,9 @@ extract_dependency_graph(const sml::pod& p) const {
 
 relationships extractor::
 extract_inheritance_graph(const sml::qname& qn) const {
+    BOOST_LOG_SEV(lg, debug) << "Extracting inheritance graph for "
+                             << qn.type_name();
+
     relationships r;
 
     auto i(pods_.find(qn));
@@ -124,28 +127,36 @@ extract_inheritance_graph(const sml::qname& qn) const {
                 boost::lexical_cast<std::string>(qn)));
     }
 
-    const auto leaves(i->second.leaves());
-    for (const auto& l : leaves) {
+    BOOST_LOG_SEV(lg, debug) << "adding type itself" << qn;
+    r.names().insert(qn);
+
+    const auto lambda([](const sml::qname& qn, const std::string& msg ) {
+            BOOST_LOG_SEV(lg, error) << msg << qn;
+            BOOST_THROW_EXCEPTION(extraction_error(msg +
+                    boost::lexical_cast<std::string>(qn)));
+        });
+
+    if (i->second.leaves().empty())
+        BOOST_LOG_SEV(lg, debug) << "type has no leaves.";
+
+    for (const auto& l : i->second.leaves()) {
         i = pods_.find(l);
-        if (i == pods_.end()) {
-            BOOST_LOG_SEV(lg, error) << qname_could_not_be_found << l;
-            BOOST_THROW_EXCEPTION(extraction_error(qname_could_not_be_found +
-                    boost::lexical_cast<std::string>(l)));
-        }
+        if (i == pods_.end())
+            lambda(l, qname_could_not_be_found);
 
         do {
+           BOOST_LOG_SEV(lg, debug) << "adding " << i->second.name();
             r.names().insert(i->second.name());
-            if (!i->second.parent_name()) {
-                BOOST_LOG_SEV(lg, error) << type_does_not_have_a_parent
-                                         << i->second.name();
 
-                BOOST_THROW_EXCEPTION(
-                    extraction_error(type_does_not_have_a_parent +
-                        boost::lexical_cast<std::string>(i->second.name())));
-            }
+            if (!i->second.parent_name())
+                lambda(i->second.name(), type_does_not_have_a_parent);
+
             i = pods_.find(*i->second.parent_name());
-        } while (i->second.parent_name() != qn);
+        } while (i->second.name() != qn);
     }
+
+    BOOST_LOG_SEV(lg, debug) << "Done extracting inheritance graph for "
+                             << qn.type_name();
 
     return r;
 }

@@ -99,20 +99,30 @@ public:
     static model pod_with_parent_in_the_same_model();
 
     /**
+     * @brief Scenario: pod with missing parent in current model.
+     */
+    static model pod_with_missing_child_in_the_same_model();
+
+    /**
      * @brief Scenario: pod with a parent in a second model.
      */
     static std::array<model, 2>
     pod_with_parent_in_different_models();
 
     /**
-     * @brief Scenario: pod three levels deep in inheritance tree in
-     * current model.
+     * @brief Scenario: pod with three children.
+     */
+    static model pod_with_three_children_in_same_model();
+
+    /**
+     * @brief Scenario: pod with three levels deep in inheritance tree
+     * in current model.
      */
     static model pod_with_third_degree_parent_in_same_model();
 
     /**
-     * @brief Scenario: pod three levels deep in inheritance tree has
-     * missing parent.
+     * @brief Scenario: pod with three levels deep in inheritance tree
+     * has missing parent.
      */
     static model pod_with_third_degree_parent_missing();
 

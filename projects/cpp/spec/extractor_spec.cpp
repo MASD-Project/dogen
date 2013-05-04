@@ -48,6 +48,14 @@ bool is_type_one(const dogen::sml::qname& qn) {
     return mock_model_factory::pod_name(1) == qn.type_name();
 }
 
+bool is_type_two(const dogen::sml::qname& qn) {
+    return mock_model_factory::pod_name(2) == qn.type_name();
+}
+
+bool is_type_three(const dogen::sml::qname& qn) {
+    return mock_model_factory::pod_name(3) == qn.type_name();
+}
+
 }
 
 using dogen::utility::test::contains_checker;
@@ -86,12 +94,12 @@ BOOST_AUTO_TEST_CASE(dependency_graph_of_pod_with_parent_has_one_name_in_relatio
 
     dogen::cpp::extractor x(m.pods());
 
-    bool found(false);
+    std::array<bool, 2> found({{ false, false }});
     for (const auto pair : m.pods()) {
         if (is_type_zero(pair.first)) {
             BOOST_LOG_SEV(lg, debug) << "found child pod: " << pair.first;
 
-            found = true;
+            found[0] = true;
             const auto r(x.extract_dependency_graph(pair.second));
             BOOST_LOG_SEV(lg, debug) << "relationships: " << r;
 
@@ -109,14 +117,15 @@ BOOST_AUTO_TEST_CASE(dependency_graph_of_pod_with_parent_has_one_name_in_relatio
         } else if (is_type_one(pair.first)) {
             BOOST_LOG_SEV(lg, debug) << "found parent pod: " << pair.first;
 
-            found = true;
+            found[1] = true;
             const auto r(x.extract_dependency_graph(pair.second));
             BOOST_LOG_SEV(lg, debug) << "relationships: " << r;
 
             BOOST_REQUIRE(r.names().empty());
             BOOST_CHECK(r.forward_decls().empty());
             BOOST_CHECK(r.keys().empty());
-            BOOST_CHECK(r.leaves().empty());
+            BOOST_CHECK(r.leaves().size() == 1);
+            BOOST_REQUIRE(is_type_zero(*r.leaves().begin()));
             BOOST_CHECK(!r.has_std_string());
             BOOST_CHECK(!r.has_variant());
             BOOST_CHECK(r.is_parent());
@@ -125,7 +134,7 @@ BOOST_AUTO_TEST_CASE(dependency_graph_of_pod_with_parent_has_one_name_in_relatio
             BOOST_CHECK(!r.has_std_pair());
         }
     }
-    BOOST_CHECK(found);
+    BOOST_CHECK(found[0] && found[1]);
 }
 
 BOOST_AUTO_TEST_CASE(dependency_graph_of_pod_with_unsigned_int_property_has_expected_name_in_relationships) {
@@ -341,8 +350,8 @@ BOOST_AUTO_TEST_CASE(dependency_graph_of_pod_with_boost_shared_ptr_property_has_
     BOOST_CHECK(found);
 }
 
-BOOST_AUTO_TEST_CASE(inheritance_graph_of_pod_with_no_parents_has_no_names_in_relationships) {
-    SETUP_TEST_LOG_SOURCE("inheritance_graph_of_pod_with_no_parents_has_no_names_in_relationships");
+BOOST_AUTO_TEST_CASE(inheritance_graph_of_pod_with_no_parents_has_one_name_in_relationships) {
+    SETUP_TEST_LOG_SOURCE("inheritance_graph_of_pod_with_no_parents_has_one_name_in_relationships");
 
     const auto m(mock_model_factory::build_single_pod_model(0));
     BOOST_LOG_SEV(lg, debug) << "input model: " << m;
@@ -352,7 +361,9 @@ BOOST_AUTO_TEST_CASE(inheritance_graph_of_pod_with_no_parents_has_no_names_in_re
     const auto r(x.extract_inheritance_graph(m.pods().begin()->second.name()));
     BOOST_LOG_SEV(lg, debug) << "relationships: " << r;
 
-    BOOST_CHECK(r.names().empty());
+    BOOST_CHECK(r.names().size() == 1);
+    BOOST_REQUIRE(is_type_zero(*r.names().begin()));
+
     BOOST_CHECK(r.forward_decls().empty());
     BOOST_CHECK(r.keys().empty());
     BOOST_CHECK(r.leaves().empty());
@@ -364,78 +375,336 @@ BOOST_AUTO_TEST_CASE(inheritance_graph_of_pod_with_no_parents_has_no_names_in_re
     BOOST_CHECK(!r.has_std_pair());
 }
 
-BOOST_AUTO_TEST_CASE(inheritance_graph_of_pod_with_no_parents_and_one_property_has_no_names_in_relationships) {
-    SETUP_TEST_LOG_SOURCE("inheritance_graph_of_pod_with_no_parents_and_one_property_has_no_names_in_relationships");
+BOOST_AUTO_TEST_CASE(inheritance_graph_of_pod_with_no_parents_and_one_property_has_one_name_in_relationships) {
+    SETUP_TEST_LOG_SOURCE("inheritance_graph_of_pod_with_no_parents_and_one_property_has_one_name_in_relationships");
 
     const auto m(mock_model_factory::pod_with_property());
     BOOST_LOG_SEV(lg, debug) << "input model: " << m;
     BOOST_CHECK(m.pods().size() == 2);
 
     dogen::cpp::extractor x(m.pods());
-    const auto r(x.extract_inheritance_graph(m.pods().begin()->second.name()));
-    BOOST_LOG_SEV(lg, debug) << "relationships: " << r;
-
-    BOOST_CHECK(r.names().empty());
-    BOOST_CHECK(r.forward_decls().empty());
-    BOOST_CHECK(r.keys().empty());
-    BOOST_CHECK(r.leaves().empty());
-    BOOST_CHECK(!r.has_std_string());
-    BOOST_CHECK(!r.has_variant());
-    BOOST_CHECK(!r.is_parent());
-    BOOST_CHECK(!r.is_child());
-    BOOST_CHECK(!r.requires_stream_manipulators());
-    BOOST_CHECK(!r.has_std_pair());
-}
-
-BOOST_AUTO_TEST_CASE(inheritance_graph_of_pod_with_parent_has_one_name_in_relationships) {
-    SETUP_TEST_LOG_SOURCE("inheritance_graph_of_pod_with_parent_has_one_name_in_relationships");
-
-    const auto m(mock_model_factory::pod_with_parent_in_the_same_model());
-    BOOST_LOG_SEV(lg, debug) << "input model: " << m;
-    BOOST_CHECK(!m.pods().empty());
-
-    dogen::cpp::extractor x(m.pods());
-
-    bool found(false);
+    std::array<bool, 2> found({{ false, false }});
     for (const auto pair : m.pods()) {
         if (is_type_zero(pair.first)) {
             BOOST_LOG_SEV(lg, debug) << "found child pod: " << pair.first;
 
-            found = true;
+            found[0] = true;
             const auto r(x.extract_inheritance_graph(pair.second.name()));
             BOOST_LOG_SEV(lg, debug) << "relationships: " << r;
 
-            // BOOST_REQUIRE(r.names().size() == 1);
-            // BOOST_REQUIRE(is_type_one(*r.names().begin()));
-            // BOOST_CHECK(r.forward_decls().empty());
-            // BOOST_CHECK(r.keys().empty());
-            // BOOST_CHECK(r.leaves().empty());
-            // BOOST_CHECK(!r.has_std_string());
-            // BOOST_CHECK(!r.has_variant());
-            // BOOST_CHECK(!r.is_parent());
-            // BOOST_CHECK(r.is_child());
-            // BOOST_CHECK(!r.requires_stream_manipulators());
-            // BOOST_CHECK(!r.has_std_pair());
+            BOOST_REQUIRE(r.names().size() == 1);
+            BOOST_REQUIRE(is_type_zero(*r.names().begin()));
+            BOOST_CHECK(r.forward_decls().empty());
+            BOOST_CHECK(r.keys().empty());
+            BOOST_CHECK(r.leaves().empty());
+            BOOST_CHECK(!r.has_std_string());
+            BOOST_CHECK(!r.has_variant());
+            BOOST_CHECK(!r.is_parent());
+            BOOST_CHECK(!r.is_child());
+            BOOST_CHECK(!r.requires_stream_manipulators());
+            BOOST_CHECK(!r.has_std_pair());
         } else if (is_type_one(pair.first)) {
             BOOST_LOG_SEV(lg, debug) << "found parent pod: " << pair.first;
 
-            found = true;
+            found[1] = true;
             const auto r(x.extract_inheritance_graph(pair.second.name()));
             BOOST_LOG_SEV(lg, debug) << "relationships: " << r;
 
-            // BOOST_REQUIRE(r.names().empty());
-            // BOOST_CHECK(r.forward_decls().empty());
-            // BOOST_CHECK(r.keys().empty());
-            // BOOST_CHECK(r.leaves().empty());
-            // BOOST_CHECK(!r.has_std_string());
-            // BOOST_CHECK(!r.has_variant());
-            // // BOOST_CHECK(r.is_parent());
-            // BOOST_CHECK(!r.is_child());
-            // BOOST_CHECK(!r.requires_stream_manipulators());
-            // BOOST_CHECK(!r.has_std_pair());
+            BOOST_CHECK(r.names().size() == 1);
+            BOOST_REQUIRE(is_type_one(*r.names().begin()));
+
+            BOOST_CHECK(r.forward_decls().empty());
+            BOOST_CHECK(r.keys().empty());
+            BOOST_CHECK(r.leaves().empty());
+            BOOST_CHECK(!r.has_std_string());
+            BOOST_CHECK(!r.has_variant());
+            BOOST_CHECK(!r.is_parent());
+            BOOST_CHECK(!r.is_child());
+            BOOST_CHECK(!r.requires_stream_manipulators());
+            BOOST_CHECK(!r.has_std_pair());
         }
     }
-    BOOST_CHECK(found);
+    BOOST_CHECK(found[0] && found[1]);
+}
+
+BOOST_AUTO_TEST_CASE(inheritance_graph_of_pod_with_parent_has_two_names_in_relationships) {
+    SETUP_TEST_LOG_SOURCE("inheritance_graph_of_pod_with_parent_has_two_names_in_relationships");
+
+    const auto m(mock_model_factory::pod_with_parent_in_the_same_model());
+    BOOST_LOG_SEV(lg, debug) << "input model: " << m;
+    BOOST_CHECK(m.pods().size() == 2);
+
+    dogen::cpp::extractor x(m.pods());
+
+    std::array<bool, 2> found({{ false, false }});
+    for (const auto pair : m.pods()) {
+        if (is_type_zero(pair.first)) {
+            BOOST_LOG_SEV(lg, debug) << "found child pod: " << pair.first;
+
+            found[0] = true;
+            const auto r(x.extract_inheritance_graph(pair.second.name()));
+            BOOST_LOG_SEV(lg, debug) << "relationships: " << r;
+
+            BOOST_REQUIRE(r.names().size() == 1);
+            BOOST_REQUIRE(is_type_zero(*r.names().begin()));
+            BOOST_CHECK(r.forward_decls().empty());
+            BOOST_CHECK(r.keys().empty());
+            BOOST_CHECK(r.leaves().empty());
+            BOOST_CHECK(!r.has_std_string());
+            BOOST_CHECK(!r.has_variant());
+            BOOST_CHECK(!r.is_parent());
+            BOOST_CHECK(!r.is_child());
+            BOOST_CHECK(!r.requires_stream_manipulators());
+            BOOST_CHECK(!r.has_std_pair());
+        } else if (is_type_one(pair.first)) {
+            BOOST_LOG_SEV(lg, debug) << "found parent pod: " << pair.first;
+
+            found[1] = true;
+            const auto r(x.extract_inheritance_graph(pair.second.name()));
+            BOOST_LOG_SEV(lg, debug) << "relationships: " << r;
+
+            BOOST_CHECK(r.names().size() == 2);
+            bool found_0(false), found_1(false);
+            for (const auto n : r.names()) {
+                found_0 = found_0 || is_type_zero(n);
+                found_1 = found_1 || is_type_one(n);
+            }
+            BOOST_REQUIRE(found_0 && found_1);
+
+            BOOST_CHECK(r.forward_decls().empty());
+            BOOST_CHECK(r.keys().empty());
+            BOOST_CHECK(r.leaves().empty());
+            BOOST_CHECK(!r.has_std_string());
+            BOOST_CHECK(!r.has_variant());
+            BOOST_CHECK(!r.is_parent());
+            BOOST_CHECK(!r.is_child());
+            BOOST_CHECK(!r.requires_stream_manipulators());
+            BOOST_CHECK(!r.has_std_pair());
+        }
+    }
+    BOOST_CHECK(found[0] && found[1]);
+}
+
+BOOST_AUTO_TEST_CASE(inheritance_graph_of_pod_with_missing_parent_throws) {
+    SETUP_TEST_LOG_SOURCE("inheritance_graph_of_pod_with_missing_parent_throws");
+
+    const auto m(
+        mock_model_factory::pod_with_missing_child_in_the_same_model());
+    BOOST_LOG_SEV(lg, debug) << "input model: " << m;
+    BOOST_CHECK(m.pods().size() == 1);
+
+    dogen::cpp::extractor x(m.pods());
+
+    const auto qn(m.pods().begin()->second.name());
+    using dogen::cpp::extraction_error;
+    contains_checker<extraction_error> c(pod_not_found);
+    BOOST_CHECK_EXCEPTION(x.extract_inheritance_graph(qn), extraction_error, c);
+}
+
+BOOST_AUTO_TEST_CASE(inheritance_graph_of_pod_with_third_degree_children_has_four_names_in_relationships) {
+    SETUP_TEST_LOG_SOURCE("inheritance_graph_of_pod_with_third_degree_children_has_four_names_in_relationships");
+
+    const auto m(
+        mock_model_factory::pod_with_third_degree_parent_in_same_model());
+    BOOST_LOG_SEV(lg, debug) << "input model: " << m;
+    BOOST_CHECK(m.pods().size() == 4);
+
+    dogen::cpp::extractor x(m.pods());
+
+    std::array<bool, 4> found({{ false, false, false, false }});
+    for (const auto pair : m.pods()) {
+        if (is_type_zero(pair.first)) {
+            BOOST_LOG_SEV(lg, debug) << "found parent pod: " << pair.first;
+
+            found[0] = true;
+            const auto r(x.extract_inheritance_graph(pair.second.name()));
+            BOOST_LOG_SEV(lg, debug) << "relationships: " << r;
+
+            BOOST_REQUIRE(r.names().size() == 1);
+            BOOST_REQUIRE(is_type_zero(*r.names().begin()));
+            BOOST_CHECK(r.forward_decls().empty());
+            BOOST_CHECK(r.keys().empty());
+            BOOST_CHECK(r.leaves().empty());
+            BOOST_CHECK(!r.has_std_string());
+            BOOST_CHECK(!r.has_variant());
+            BOOST_CHECK(!r.is_parent());
+            BOOST_CHECK(!r.is_child());
+            BOOST_CHECK(!r.requires_stream_manipulators());
+            BOOST_CHECK(!r.has_std_pair());
+        } else if (is_type_one(pair.first)) {
+            BOOST_LOG_SEV(lg, debug) << "found parent pod: " << pair.first;
+
+            found[1] = true;
+            const auto r(x.extract_inheritance_graph(pair.second.name()));
+            BOOST_LOG_SEV(lg, debug) << "relationships: " << r;
+
+            BOOST_REQUIRE(r.names().size() == 2);
+            bool found_0(false), found_1(false);
+            for (const auto n : r.names()) {
+                found_0 = found_0 || is_type_zero(n);
+                found_1 = found_1 || is_type_one(n);
+            }
+            BOOST_REQUIRE(found_0 && found_1);
+
+            BOOST_CHECK(r.forward_decls().empty());
+            BOOST_CHECK(r.keys().empty());
+            BOOST_CHECK(r.leaves().empty());
+            BOOST_CHECK(!r.has_std_string());
+            BOOST_CHECK(!r.has_variant());
+            BOOST_CHECK(!r.is_parent());
+            BOOST_CHECK(!r.is_child());
+            BOOST_CHECK(!r.requires_stream_manipulators());
+            BOOST_CHECK(!r.has_std_pair());
+        } else if (is_type_two(pair.first)) {
+            BOOST_LOG_SEV(lg, debug) << "found parent pod: " << pair.first;
+
+            found[2] = true;
+            const auto r(x.extract_inheritance_graph(pair.second.name()));
+            BOOST_LOG_SEV(lg, debug) << "relationships: " << r;
+
+            BOOST_REQUIRE(r.names().size() == 3);
+            bool found_0(false), found_1(false), found_2(false);
+            for (const auto n : r.names()) {
+                found_0 = found_0 || is_type_zero(n);
+                found_1 = found_1 || is_type_one(n);
+                found_2 = found_2 || is_type_two(n);
+            }
+            BOOST_REQUIRE(found_0 && found_1 && found_2);
+
+            BOOST_CHECK(r.forward_decls().empty());
+            BOOST_CHECK(r.keys().empty());
+            BOOST_CHECK(r.leaves().empty());
+            BOOST_CHECK(!r.has_std_string());
+            BOOST_CHECK(!r.has_variant());
+            BOOST_CHECK(!r.is_parent());
+            BOOST_CHECK(!r.is_child());
+            BOOST_CHECK(!r.requires_stream_manipulators());
+            BOOST_CHECK(!r.has_std_pair());
+        } else if (is_type_three(pair.first)) {
+            BOOST_LOG_SEV(lg, debug) << "found parent pod: " << pair.first;
+
+            found[3] = true;
+            const auto r(x.extract_inheritance_graph(pair.second.name()));
+            BOOST_LOG_SEV(lg, debug) << "relationships: " << r;
+
+            BOOST_REQUIRE(r.names().size() == 4);
+            bool found_0(false), found_1(false), found_2(false), found_3(false);
+            for (const auto n : r.names()) {
+                found_0 = found_0 || is_type_zero(n);
+                found_1 = found_1 || is_type_one(n);
+                found_2 = found_2 || is_type_two(n);
+                found_3 = found_3 || is_type_three(n);
+            }
+            BOOST_REQUIRE(found_0 && found_1 && found_2 && found_3);
+
+            BOOST_CHECK(r.forward_decls().empty());
+            BOOST_CHECK(r.keys().empty());
+            BOOST_CHECK(r.leaves().empty());
+            BOOST_CHECK(!r.has_std_string());
+            BOOST_CHECK(!r.has_variant());
+            BOOST_CHECK(!r.is_parent());
+            BOOST_CHECK(!r.is_child());
+            BOOST_CHECK(!r.requires_stream_manipulators());
+            BOOST_CHECK(!r.has_std_pair());
+        }
+    }
+    BOOST_CHECK(found[0] && found[1] && found[2] && found[3]);
+}
+
+BOOST_AUTO_TEST_CASE(inheritance_graph_of_pod_with_three_children_has_four_names_in_relationships) {
+    SETUP_TEST_LOG_SOURCE("inheritance_graph_of_pod_with_three_children_has_four_names_in_relationships");
+
+    const auto m(mock_model_factory::pod_with_three_children_in_same_model());
+    BOOST_LOG_SEV(lg, debug) << "input model: " << m;
+    BOOST_CHECK(m.pods().size() == 4);
+
+    dogen::cpp::extractor x(m.pods());
+
+    std::array<bool, 4> found({{ false, false, false, false }});
+    for (const auto pair : m.pods()) {
+        if (is_type_zero(pair.first)) {
+            BOOST_LOG_SEV(lg, debug) << "found parent pod: " << pair.first;
+
+            found[0] = true;
+            const auto r(x.extract_inheritance_graph(pair.second.name()));
+            BOOST_LOG_SEV(lg, debug) << "relationships: " << r;
+
+            BOOST_REQUIRE(r.names().size() == 1);
+            BOOST_REQUIRE(is_type_zero(*r.names().begin()));
+            BOOST_CHECK(r.forward_decls().empty());
+            BOOST_CHECK(r.keys().empty());
+            BOOST_CHECK(r.leaves().empty());
+            BOOST_CHECK(!r.has_std_string());
+            BOOST_CHECK(!r.has_variant());
+            BOOST_CHECK(!r.is_parent());
+            BOOST_CHECK(!r.is_child());
+            BOOST_CHECK(!r.requires_stream_manipulators());
+            BOOST_CHECK(!r.has_std_pair());
+        } else if (is_type_one(pair.first)) {
+            BOOST_LOG_SEV(lg, debug) << "found parent pod: " << pair.first;
+
+            found[1] = true;
+            const auto r(x.extract_inheritance_graph(pair.second.name()));
+            BOOST_LOG_SEV(lg, debug) << "relationships: " << r;
+
+            BOOST_REQUIRE(r.names().size() == 1);
+            BOOST_REQUIRE(is_type_one(*r.names().begin()));
+            BOOST_CHECK(r.forward_decls().empty());
+            BOOST_CHECK(r.keys().empty());
+            BOOST_CHECK(r.leaves().empty());
+            BOOST_CHECK(!r.has_std_string());
+            BOOST_CHECK(!r.has_variant());
+            BOOST_CHECK(!r.is_parent());
+            BOOST_CHECK(!r.is_child());
+            BOOST_CHECK(!r.requires_stream_manipulators());
+            BOOST_CHECK(!r.has_std_pair());
+        } else if (is_type_two(pair.first)) {
+            BOOST_LOG_SEV(lg, debug) << "found parent pod: " << pair.first;
+
+            found[2] = true;
+            const auto r(x.extract_inheritance_graph(pair.second.name()));
+            BOOST_LOG_SEV(lg, debug) << "relationships: " << r;
+
+            BOOST_REQUIRE(r.names().size() == 1);
+            BOOST_REQUIRE(is_type_two(*r.names().begin()));
+            BOOST_CHECK(r.forward_decls().empty());
+            BOOST_CHECK(r.keys().empty());
+            BOOST_CHECK(r.leaves().empty());
+            BOOST_CHECK(!r.has_std_string());
+            BOOST_CHECK(!r.has_variant());
+            BOOST_CHECK(!r.is_parent());
+            BOOST_CHECK(!r.is_child());
+            BOOST_CHECK(!r.requires_stream_manipulators());
+            BOOST_CHECK(!r.has_std_pair());
+        } else if (is_type_three(pair.first)) {
+            BOOST_LOG_SEV(lg, debug) << "found parent pod: " << pair.first;
+
+            found[3] = true;
+            const auto r(x.extract_inheritance_graph(pair.second.name()));
+            BOOST_LOG_SEV(lg, debug) << "relationships: " << r;
+
+            BOOST_REQUIRE(r.names().size() == 4);
+            bool found_0(false), found_1(false), found_2(false), found_3(false);
+            for (const auto n : r.names()) {
+                found_0 = found_0 || is_type_zero(n);
+                found_1 = found_1 || is_type_one(n);
+                found_2 = found_2 || is_type_two(n);
+                found_3 = found_3 || is_type_three(n);
+            }
+            BOOST_REQUIRE(found_0 && found_1 && found_2 && found_3);
+
+            BOOST_CHECK(r.forward_decls().empty());
+            BOOST_CHECK(r.keys().empty());
+            BOOST_CHECK(r.leaves().empty());
+            BOOST_CHECK(!r.has_std_string());
+            BOOST_CHECK(!r.has_variant());
+            BOOST_CHECK(!r.is_parent());
+            BOOST_CHECK(!r.is_child());
+            BOOST_CHECK(!r.requires_stream_manipulators());
+            BOOST_CHECK(!r.has_std_pair());
+        }
+    }
+    BOOST_CHECK(found[0] && found[1] && found[2] && found[3]);
 }
 
 BOOST_AUTO_TEST_SUITE_END()

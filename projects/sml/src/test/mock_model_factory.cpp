@@ -280,9 +280,25 @@ model mock_model_factory::pod_with_parent_in_the_same_model() {
     pod0.parent_name(pod1.name());
     pod0.original_parent_name(pod1.name());
     pod1.is_parent(true);
+    pod1.leaves().push_back(pod0.name());
 
     model r;
     r.pods().insert(std::make_pair(pod0.name(), pod0));
+    r.pods().insert(std::make_pair(pod1.name(), pod1));
+    r.name(mn);
+    return r;
+}
+
+model mock_model_factory::pod_with_missing_child_in_the_same_model() {
+    const std::string mn(model_name(0));
+    pod pod0(mock_pod(0, mn));
+    pod pod1(mock_pod(1, mn));
+    pod0.parent_name(pod1.name());
+    pod0.original_parent_name(pod1.name());
+    pod1.is_parent(true);
+    pod1.leaves().push_back(pod0.name());
+
+    model r;
     r.pods().insert(std::make_pair(pod1.name(), pod1));
     r.name(mn);
     return r;
@@ -295,6 +311,7 @@ pod_with_parent_in_different_models() {
     pod0.original_parent_name(pod1.name());
     pod0.parent_name(pod1.name());
     pod1.is_parent(true);
+    pod1.leaves().push_back(pod0.name());
 
     model m0;
     m0.pods().insert(std::make_pair(pod0.name(), pod0));
@@ -305,6 +322,37 @@ pod_with_parent_in_different_models() {
     m1.name(model_name(1));
 
     return std::array<model, 2> {{ m0, m1 }};
+}
+
+model mock_model_factory::pod_with_three_children_in_same_model() {
+    const std::string mn(model_name(0));
+    pod pod0(mock_pod(0, mn));
+    pod pod1(mock_pod(1, mn));
+    pod pod2(mock_pod(2, mn));
+    pod pod3(mock_pod(3, mn));
+
+    pod0.parent_name(pod3.name());
+    pod0.original_parent_name(pod3.name());
+
+    pod1.parent_name(pod3.name());
+    pod1.original_parent_name(pod3.name());
+
+    pod2.parent_name(pod3.name());
+    pod2.original_parent_name(pod3.name());
+
+    pod3.is_parent(true);
+    pod3.leaves().push_back(pod0.name());
+    pod3.leaves().push_back(pod1.name());
+    pod3.leaves().push_back(pod2.name());
+
+    model r;
+    r.pods().insert(std::make_pair(pod0.name(), pod0));
+    r.pods().insert(std::make_pair(pod1.name(), pod1));
+    r.pods().insert(std::make_pair(pod2.name(), pod2));
+    r.pods().insert(std::make_pair(pod3.name(), pod3));
+    r.name(mn);
+    return r;
+
 }
 
 model mock_model_factory::pod_with_third_degree_parent_in_same_model() {
@@ -320,11 +368,14 @@ model mock_model_factory::pod_with_third_degree_parent_in_same_model() {
     pod1.parent_name(pod2.name());
     pod1.original_parent_name(pod3.name());
     pod1.is_parent(true);
+    pod1.leaves().push_back(pod0.name());
 
     pod2.parent_name(pod3.name());
     pod2.original_parent_name(pod3.name());
     pod2.is_parent(true);
+    pod2.leaves().push_back(pod0.name());
 
+    pod3.leaves().push_back(pod0.name());
     pod3.is_parent(true);
 
     model r;
@@ -349,12 +400,15 @@ model mock_model_factory::pod_with_third_degree_parent_missing() {
     pod1.parent_name(pod2.name());
     pod1.original_parent_name(pod3.name());
     pod1.is_parent(true);
+    pod1.leaves().push_back(pod0.name());
 
     pod2.parent_name(pod3.name());
     pod2.original_parent_name(pod3.name());
     pod2.is_parent(true);
+    pod2.leaves().push_back(pod0.name());
 
     pod3.is_parent(true);
+    pod3.leaves().push_back(pod0.name());
 
     model r;
     r.pods().insert(std::make_pair(pod0.name(), pod0));
@@ -377,12 +431,15 @@ mock_model_factory::pod_with_third_degree_parent_in_different_models() {
     pod1.parent_name(pod2.name());
     pod1.original_parent_name(pod3.name());
     pod1.is_parent(true);
+    pod1.leaves().push_back(pod0.name());
 
     pod2.parent_name(pod3.name());
     pod2.original_parent_name(pod3.name());
     pod2.is_parent(true);
+    pod2.leaves().push_back(pod0.name());
 
     pod3.is_parent(true);
+    pod3.leaves().push_back(pod0.name());
 
     model m0;
     m0.pods().insert(std::make_pair(pod0.name(), pod0));
@@ -416,12 +473,15 @@ pod_with_missing_third_degree_parent_in_different_models() {
     pod1.parent_name(pod2.name());
     pod1.original_parent_name(pod3.name());
     pod1.is_parent(true);
+    pod1.leaves().push_back(pod0.name());
 
     pod2.parent_name(pod3.name());
     pod2.original_parent_name(pod3.name());
     pod2.is_parent(true);
+    pod2.leaves().push_back(pod0.name());
 
     pod3.is_parent(true);
+    pod3.leaves().push_back(pod0.name());
 
     model m0;
     m0.pods().insert(std::make_pair(pod0.name(), pod0));
