@@ -11,6 +11,18 @@ This file contains all stories that haven't been assigned to a sprint.
 
 Stories that we intend to look at, at some point.
 
+*** Use leaves to determine visitor accept methods
+
+At present we implemented visitor in terms of the full inheritance
+graph. In reality, we only need the leafs because for all the
+non-leafs, we will not have implementations for accept (which makes
+sense as these classes cannot be instantiated). We should try to
+implement the visitor class only in terms of leaves, removing most of
+the inheritance graph functionality.
+
+The same logic applies to includes of course. We probably don't even
+need a different method in extractor.
+
 *** Add string table support
 
 We need a way of creating "tables" of strings such as for example for
