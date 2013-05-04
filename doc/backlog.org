@@ -11,6 +11,12 @@ This file contains all stories that haven't been assigned to a sprint.
 
 Stories that we intend to look at, at some point.
 
+*** Visitor header file not included in includer
+
+At present the visitor header file is not being added to the main
+includer. We need a common solution for all system files including
+keys, etc.
+
 *** Use leaves to determine visitor accept methods
 
 At present we implemented visitor in terms of the full inheritance
