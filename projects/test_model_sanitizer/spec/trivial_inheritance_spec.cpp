@@ -43,6 +43,9 @@ public:
     mock_visitor() { reset(); }
 
 public:
+    using dogen::trivial_inheritance::base_visitor::visit;
+
+public:
     virtual void visit(
         const dogen::trivial_inheritance::descendant2&) const override {
         visited |= 0x02;
