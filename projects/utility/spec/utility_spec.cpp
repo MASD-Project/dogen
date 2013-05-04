@@ -18,6 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#include <array>
 #include <string>
 #include <sstream>
 #include <boost/test/unit_test.hpp>
@@ -28,6 +29,7 @@
 #include "dogen/utility/io/vector_io.hpp"
 #include "dogen/utility/io/pair_io.hpp"
 #include "dogen/utility/io/map_io.hpp"
+#include "dogen/utility/io/array_io.hpp"
 #include "dogen/utility/test/logging.hpp"
 #include "dogen/utility/log/life_cycle_manager.hpp"
 #include "dogen/utility/log/scoped_life_cycle_manager.hpp"
@@ -219,6 +221,16 @@ BOOST_AUTO_TEST_CASE(exception_shall_be_usable_as_a_boost_exception) {
                                  << boost::diagnostic_information(e);
         BOOST_CHECK(true);
     }
+}
+
+BOOST_AUTO_TEST_CASE(exercise_array_inserter) {
+    SETUP_TEST_LOG_SOURCE("exercise_array_inserter");
+    std::array<int, 3> ints({{ 0, 5, 10 }});
+    ints[0] = 10;
+    ints[1] = 20;
+    ints[2] = 30;
+    BOOST_LOG_SEV(lg, debug) << "ints: " << ints;
+    BOOST_CHECK(true);
 }
 
 BOOST_AUTO_TEST_CASE(exercise_vector_inserter) {
