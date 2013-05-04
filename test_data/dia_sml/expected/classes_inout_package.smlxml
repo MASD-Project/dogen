@@ -55,10 +55,11 @@
 					<item_version>0</item_version>
 				</external_package_path>
 				<package_path>
-					<count>0</count>
+					<count>1</count>
 					<item_version>0</item_version>
+					<item>package_1</item>
 				</package_path>
-				<type_name>class_2</type_name>
+				<type_name>class_1</type_name>
 				<meta_type>2</meta_type>
 			</first>
 			<second class_id="9" tracking_level="0" version="0">
@@ -69,10 +70,11 @@
 						<item_version>0</item_version>
 					</external_package_path>
 					<package_path>
-						<count>0</count>
+						<count>1</count>
 						<item_version>0</item_version>
+						<item>package_1</item>
 					</package_path>
-					<type_name>class_2</type_name>
+					<type_name>class_1</type_name>
 					<meta_type>2</meta_type>
 				</name>
 				<properties class_id="10" tracking_level="0" version="0">
@@ -145,11 +147,10 @@
 					<item_version>0</item_version>
 				</external_package_path>
 				<package_path>
-					<count>1</count>
+					<count>0</count>
 					<item_version>0</item_version>
-					<item>package_1</item>
 				</package_path>
-				<type_name>class_1</type_name>
+				<type_name>class_2</type_name>
 				<meta_type>2</meta_type>
 			</first>
 			<second>
@@ -160,11 +161,10 @@
 						<item_version>0</item_version>
 					</external_package_path>
 					<package_path>
-						<count>1</count>
+						<count>0</count>
 						<item_version>0</item_version>
-						<item>package_1</item>
 					</package_path>
-					<type_name>class_1</type_name>
+					<type_name>class_2</type_name>
 					<meta_type>2</meta_type>
 				</name>
 				<properties>

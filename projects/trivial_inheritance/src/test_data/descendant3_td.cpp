@@ -21,7 +21,13 @@
 #include "dogen/trivial_inheritance/test_data/descendant1_td.hpp"
 #include "dogen/trivial_inheritance/test_data/descendant3_td.hpp"
 
+namespace {
 
+bool create_bool(const unsigned int position) {
+    return (position % 2) == 0;
+}
+
+}
 
 namespace dogen {
 namespace trivial_inheritance {
@@ -29,13 +35,15 @@ namespace trivial_inheritance {
 descendant3_generator::descendant3_generator() : position_(0) { }
 
 void descendant3_generator::
-populate(const unsigned int /*position*/, result_type& /*v*/) {
+populate(const unsigned int position, result_type& v) {
+    v.prop_0(create_bool(position + 0));
 }
 
 descendant3_generator::result_type
 descendant3_generator::create(const unsigned int position) {
     descendant3 r;
     dogen::trivial_inheritance::descendant1_generator::populate(position, r);
+    descendant3_generator::populate(position, r);
     return r;
 }
 descendant3_generator::result_type*

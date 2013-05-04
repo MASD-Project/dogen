@@ -36,10 +36,14 @@ namespace trivial_inheritance {
 
 class descendant3 final : public dogen::trivial_inheritance::descendant1 {
 public:
-    descendant3() = default;
     descendant3(const descendant3&) = default;
     descendant3(descendant3&&) = default;
-    descendant3& operator=(const descendant3&) = default;
+
+public:
+    descendant3();
+
+public:
+    explicit descendant3(const bool prop_0);
 
 private:
     template<typename Archive>
@@ -69,6 +73,10 @@ public:
     void to_stream(std::ostream& s) const override;
 
 public:
+    bool prop_0() const;
+    void prop_0(const bool v);
+
+public:
     bool operator==(const descendant3& rhs) const;
     bool operator!=(const descendant3& rhs) const {
         return !this->operator==(rhs);
@@ -77,8 +85,25 @@ public:
 public:
     bool equals(const dogen::trivial_inheritance::base& other) const override;
 
+public:
+    void swap(descendant3& other) noexcept;
+    descendant3& operator=(descendant3 other);
+
+private:
+    bool prop_0_;
 };
 
 } }
+
+namespace std {
+
+template<>
+inline void swap(
+    dogen::trivial_inheritance::descendant3& lhs,
+    dogen::trivial_inheritance::descendant3& rhs) {
+    lhs.swap(rhs);
+}
+
+}
 
 #endif

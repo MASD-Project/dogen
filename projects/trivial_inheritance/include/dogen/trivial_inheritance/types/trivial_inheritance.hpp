@@ -18,30 +18,23 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/trivial_inheritance/hash/base_hash.hpp"
-#include "dogen/trivial_inheritance/hash/descendant2_hash.hpp"
+#ifndef DOGEN_TRIVIAL_INHERITANCE_TYPES_TRIVIAL_INHERITANCE_HPP
+#define DOGEN_TRIVIAL_INHERITANCE_TYPES_TRIVIAL_INHERITANCE_HPP
 
-namespace {
-
-template <typename HashableType>
-inline void combine(std::size_t& seed, const HashableType& value)
-{
-    std::hash<HashableType> hasher;
-    seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
-}
-
-}
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
 namespace dogen {
+
+/**
+ * @brief This model tests all aspects related to inheritance.
+ *
+ * It includes the visitable stereotype since it only makes sense
+ * in the context of inheritance.
+ *
+ */
 namespace trivial_inheritance {
-
-std::size_t descendant2_hasher::hash(const descendant2&v) {
-    std::size_t seed(0);
-
-    combine(seed, dynamic_cast<const dogen::trivial_inheritance::base&>(v));
-
-    combine(seed, v.prop_0());
-    return seed;
-}
-
 } }
+
+#endif

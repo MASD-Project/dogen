@@ -39,6 +39,8 @@ std::size_t descendant3_hasher::hash(const descendant3&v) {
     std::size_t seed(0);
 
     combine(seed, dynamic_cast<const dogen::trivial_inheritance::descendant1&>(v));
+
+    combine(seed, v.prop_0());
     return seed;
 }
 

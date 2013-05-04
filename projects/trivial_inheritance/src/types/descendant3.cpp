@@ -18,6 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/io/ios_state.hpp>
 #include <ostream>
 #include "dogen/trivial_inheritance/io/descendant1_io.hpp"
 #include "dogen/trivial_inheritance/types/descendant3.hpp"
@@ -25,12 +26,34 @@
 namespace dogen {
 namespace trivial_inheritance {
 
+descendant3::descendant3()
+    : prop_0_(static_cast<bool>(0)) { }
+
+descendant3::descendant3(const bool prop_0)
+    : dogen::trivial_inheritance::descendant1(),
+      prop_0_(prop_0) { }
+
 void descendant3::to_stream(std::ostream& s) const {
+    boost::io::ios_flags_saver ifs(s);
+    s.setf(std::ios_base::boolalpha);
+    s.setf(std::ios::fixed, std::ios::floatfield);
+    s.precision(6);
+    s.setf(std::ios::showpoint);
+
     s << " { "
       << "\"__type__\": " << "\"dogen::trivial_inheritance::descendant3\"" << ", "
       << "\"__parent_0__\": ";
     descendant1::to_stream(s);
-    s << " }";
+    s << ", "
+      << "\"prop_0\": " << prop_0_
+      << " }";
+}
+
+void descendant3::swap(descendant3& other) noexcept {
+    descendant1::swap(other);
+
+    using std::swap;
+    swap(prop_0_, other.prop_0_);
 }
 
 bool descendant3::equals(const dogen::trivial_inheritance::base& other) const {
@@ -39,8 +62,23 @@ bool descendant3::equals(const dogen::trivial_inheritance::base& other) const {
     return *this == *p;
 }
 
-bool descendant3::operator==(const descendant3& /*rhs*/) const {
-    return true;
+bool descendant3::operator==(const descendant3& rhs) const {
+    return descendant1::compare(rhs) &&
+        prop_0_ == rhs.prop_0_;
+}
+
+descendant3& descendant3::operator=(descendant3 other) {
+    using std::swap;
+    swap(*this, other);
+    return *this;
+}
+
+bool descendant3::prop_0() const {
+    return prop_0_;
+}
+
+void descendant3::prop_0(const bool v) {
+    prop_0_ = v;
 }
 
 } }

@@ -18,11 +18,14 @@
  * MA 02110-1301, USA.
  *
  */
+#include <array>
+#include <memory>
 #include <boost/test/unit_test.hpp>
 #include "dogen/utility/io/vector_io.hpp"
 #include "dogen/utility/test/logging.hpp"
 #include "dogen/utility/test/canned_tests.hpp"
 #include "dogen/trivial_inheritance/types/all.hpp"
+#include "dogen/trivial_inheritance/types/base_visitor.hpp"
 #include "dogen/trivial_inheritance/io/all_io.hpp"
 #include "dogen/trivial_inheritance/serialization/all_ser.hpp"
 #include "dogen/test_model_sanitizer/register_types.hpp"
@@ -34,6 +37,56 @@ namespace {
 const std::string empty;
 const std::string test_module("test_model_sanitizer");
 const std::string test_suite("trivial_inheritance");
+
+class mock_visitor : public dogen::trivial_inheritance::base_visitor {
+public:
+    mock_visitor() { reset(); }
+
+public:
+    virtual void visit(
+        const dogen::trivial_inheritance::descendant2&) const override {
+        visited |= 0x02;
+    }
+
+    virtual void visit(
+        const dogen::trivial_inheritance::descendant2&) override {
+        visited |= 0x04;
+    }
+
+    virtual void visit(
+        dogen::trivial_inheritance::descendant2&) const override {
+        visited |= 0x08;
+    }
+
+    virtual void visit(dogen::trivial_inheritance::descendant2&) override {
+        visited |= 0x10;
+    }
+
+    virtual void visit(
+        const dogen::trivial_inheritance::descendant3&) const override {
+        visited |= 0x20;
+    }
+
+    virtual void visit(
+        const dogen::trivial_inheritance::descendant3&) override {
+        visited |= 0x30;
+    }
+
+    virtual void visit(
+        dogen::trivial_inheritance::descendant3& d) const override {
+        d.prop_0(true);
+        visited |= 0x40;
+    }
+
+    virtual void visit(dogen::trivial_inheritance::descendant3& d) override {
+        d.prop_0(true);
+        visited |= 0x50;
+    }
+
+    void reset() const { visited = 0; }
+
+    mutable unsigned int visited;
+};
 
 }
 
@@ -95,6 +148,80 @@ BOOST_AUTO_TEST_CASE(validate_io) {
     test_io<pkg1::child_generator>();
     test_io<pkg3::child_generator>();
     test_io<pkg4::child_generator>();
+}
+
+BOOST_AUTO_TEST_CASE(visitor_dispatches_to_the_correct_classes) {
+    SETUP_TEST_LOG_SOURCE("visitor_dispatches_to_the_correct_classes");
+
+    using namespace dogen::trivial_inheritance;
+    std::unique_ptr<base> b1(descendant3_generator::create_ptr(0));
+
+    mock_visitor v;
+    b1->accept(v);
+    BOOST_LOG_SEV(lg, debug) << v.visited;
+    BOOST_CHECK(v.visited == 0x50);
+    v.reset();
+
+    const mock_visitor cv;
+    b1->accept(cv);
+    BOOST_LOG_SEV(lg, debug) << cv.visited;
+    BOOST_CHECK(cv.visited == 0x40);
+    cv.reset();
+
+    std::unique_ptr<const base> b2(descendant3_generator::create_ptr(0));
+    b2->accept(v);
+    BOOST_LOG_SEV(lg, debug) << v.visited;
+    BOOST_CHECK(v.visited == 0x30);
+    v.reset();
+
+    b2->accept(cv);
+    BOOST_LOG_SEV(lg, debug) << cv.visited;
+    BOOST_CHECK(cv.visited == 0x20);
+    cv.reset();
+
+    std::unique_ptr<descendant1> d1(descendant3_generator::create_ptr(0));
+    d1->accept(v);
+    BOOST_LOG_SEV(lg, debug) << v.visited;
+    BOOST_CHECK(v.visited == 0x50);
+    v.reset();
+
+    d1->accept(cv);
+    BOOST_LOG_SEV(lg, debug) << cv.visited;
+    BOOST_CHECK(cv.visited == 0x40);
+    cv.reset();
+
+    std::unique_ptr<const descendant1> d2(descendant3_generator::create_ptr(0));
+    d2->accept(v);
+    BOOST_LOG_SEV(lg, debug) << v.visited;
+    BOOST_CHECK(v.visited == 0x30);
+    v.reset();
+
+    d2->accept(cv);
+    BOOST_LOG_SEV(lg, debug) << cv.visited;
+    BOOST_CHECK(cv.visited == 0x20);
+    cv.reset();
+
+    std::unique_ptr<base> b3(descendant2_generator::create_ptr(0));
+    b3->accept(v);
+    BOOST_LOG_SEV(lg, debug) << v.visited;
+    BOOST_CHECK(v.visited == 0x10);
+    v.reset();
+
+    b3->accept(cv);
+    BOOST_LOG_SEV(lg, debug) << cv.visited;
+    BOOST_CHECK(cv.visited == 0x08);
+    cv.reset();
+
+    std::unique_ptr<const base> b4(descendant2_generator::create_ptr(0));
+    b4->accept(v);
+    BOOST_LOG_SEV(lg, debug) << v.visited;
+    BOOST_CHECK(v.visited == 0x04);
+    v.reset();
+
+    b4->accept(cv);
+    BOOST_LOG_SEV(lg, debug) << cv.visited;
+    BOOST_CHECK(cv.visited == 0x02);
+    cv.reset();
 }
 
 BOOST_AUTO_TEST_SUITE_END()

@@ -47,6 +47,8 @@ void save(Archive& ar,
     const dogen::trivial_inheritance::descendant3& v,
     const unsigned int /*version*/) {
     ar << make_nvp("descendant1", base_object<dogen::trivial_inheritance::descendant1>(v));
+
+    ar << make_nvp("prop_0", v.prop_0_);
 }
 
 template<typename Archive>
@@ -54,6 +56,8 @@ void load(Archive& ar,
     dogen::trivial_inheritance::descendant3& v,
     const unsigned int /*version*/) {
     ar >> make_nvp("descendant1", base_object<dogen::trivial_inheritance::descendant1>(v));
+
+    ar >> make_nvp("prop_0", v.prop_0_);
 }
 
 } }
