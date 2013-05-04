@@ -95,6 +95,25 @@ extract_dependency_graph(const sml::pod& p) const {
     if (p.parent_name())
         r.names().insert(*p.parent_name());
 
+    if (p.is_visitable()) {
+        auto qn(p.name());
+        qn.type_name(qn.type_name() + "_visitor");
+        r.visitor(qn);
+    } else if (p.original_parent_name()) {
+        auto opn(*p.original_parent_name());
+        auto i(pods_.find(opn));
+        if (i == pods_.end()) {
+            BOOST_LOG_SEV(lg, error) << qname_could_not_be_found << opn;
+            BOOST_THROW_EXCEPTION(extraction_error(qname_could_not_be_found +
+                    boost::lexical_cast<std::string>(opn)));
+        }
+
+        if (i->second.is_visitable()) {
+            opn.type_name(opn.type_name() + "_visitor");
+            r.visitor(opn);
+        }
+    }
+
     r.is_parent(p.is_parent());
     r.is_child(p.parent_name());
     r.leaves().insert(p.leaves().begin(), p.leaves().end());

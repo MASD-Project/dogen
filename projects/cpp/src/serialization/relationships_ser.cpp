@@ -27,6 +27,7 @@
 #include <boost/archive/xml_iarchive.hpp>
 #include <boost/archive/xml_oarchive.hpp>
 #include <boost/serialization/nvp.hpp>
+#include <boost/serialization/optional.hpp>
 #include "dogen/cpp/serialization/relationships_ser.hpp"
 #include "dogen/sml/serialization/qname_ser.hpp"
 #include "dogen/utility/serialization/unordered_set.hpp"
@@ -53,6 +54,7 @@ void save(Archive& ar,
     ar << make_nvp("is_child", v.is_child_);
     ar << make_nvp("requires_stream_manipulators", v.requires_stream_manipulators_);
     ar << make_nvp("has_std_pair", v.has_std_pair_);
+    ar << make_nvp("visitor", v.visitor_);
 }
 
 template<typename Archive>
@@ -69,6 +71,7 @@ void load(Archive& ar,
     ar >> make_nvp("is_child", v.is_child_);
     ar >> make_nvp("requires_stream_manipulators", v.requires_stream_manipulators_);
     ar >> make_nvp("has_std_pair", v.has_std_pair_);
+    ar >> make_nvp("visitor", v.visitor_);
 }
 
 } }

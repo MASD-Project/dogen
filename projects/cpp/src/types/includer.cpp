@@ -556,6 +556,16 @@ void includer::append_relationship_dependencies(
         if (is_implementation && is_ser)
             il.user.push_back(header_dependency(l, ft, main));
     }
+
+    if (rel.visitor()) {
+        /*
+         * rule 11: leaves require generators in test data.
+         */
+        const bool header_and_domain(is_header && is_domain);
+        const auto main(aspect_types::main);
+        if (header_and_domain)
+            il.user.push_back(header_dependency(*rel.visitor(), ft, main));
+    }
 }
 
 void includer::

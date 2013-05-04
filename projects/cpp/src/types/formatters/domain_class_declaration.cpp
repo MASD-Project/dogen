@@ -18,6 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#include <ostream>
 #include "dogen/cpp/types/formatters/domain_class_declaration.hpp"
 
 namespace dogen {
@@ -41,6 +42,63 @@ hand_crafted_constructors(const class_view_model& vm) {
         complete_constructor(vm);
 }
 
+void domain_class_declaration::visitor_method(const class_view_model& vm) {
+    if (vm.is_visitable()) {
+        utility_.public_access_specifier();
+        stream_ << indenter_ << "virtual void accept(const " << vm.name()
+                << "_visitor& v) const = 0;" << std::endl;
+        stream_ << indenter_ << "virtual void accept(" << vm.name()
+                << "_visitor& v) const = 0;" << std::endl;
+        stream_ << indenter_ << "virtual void accept(const " << vm.name()
+                << "_visitor& v) = 0;" << std::endl;
+        stream_ << indenter_ << "virtual void accept(" << vm.name()
+                << "_visitor& v) = 0;" << std::endl;
+        utility_.blank_line();
+    } else if (vm.is_original_parent_visitable() && !vm.is_parent()) {
+        utility_.public_access_specifier();
+        stream_ << indenter_ << "virtual void accept(const "
+                << vm.original_parent_name()
+                << "_visitor& v) const override {" << std::endl;
+
+        {
+            positive_indenter_scope s(indenter_);
+            stream_ << indenter_ << "v.visit(*this);" << std::endl;
+        }
+        stream_ << indenter_ << "}" << std::endl;
+        utility_.blank_line();
+        stream_ << indenter_ << "virtual void accept("
+                << vm.original_parent_name()
+                << "_visitor& v) const override {" << std::endl;
+
+        {
+            positive_indenter_scope s(indenter_);
+            stream_ << indenter_ << "v.visit(*this);" << std::endl;
+        }
+        stream_ << indenter_ << "}" << std::endl;
+        utility_.blank_line();
+        stream_ << indenter_ << "virtual void accept(const "
+                << vm.original_parent_name()
+                << "_visitor& v) override {" << std::endl;
+
+        {
+            positive_indenter_scope s(indenter_);
+            stream_ << indenter_ << "v.visit(*this);" << std::endl;
+        }
+        stream_ << indenter_ << "}" << std::endl;
+        utility_.blank_line();
+        stream_ << indenter_ << "virtual void accept("
+                << vm.original_parent_name()
+                << "_visitor& v) override {" << std::endl;
+
+        {
+            positive_indenter_scope s(indenter_);
+            stream_ << indenter_ << "v.visit(*this);" << std::endl;
+        }
+        stream_ << indenter_ << "}" << std::endl;
+        utility_.blank_line();
+    }
+}
+
 void domain_class_declaration::format(const class_view_model& vm) {
     open_class(vm);
     {
@@ -48,6 +106,7 @@ void domain_class_declaration::format(const class_view_model& vm) {
         compiler_generated_constuctors(vm);
         hand_crafted_constructors(vm);
         friends(vm);
+        visitor_method(vm);
         if (!disable_io_)
             to_stream(vm);
         getters_and_setters(vm);

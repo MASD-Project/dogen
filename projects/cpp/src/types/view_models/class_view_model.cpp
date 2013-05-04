@@ -32,7 +32,8 @@ class_view_model::class_view_model()
       is_parent_(static_cast<bool>(0)),
       is_comparable_(static_cast<bool>(0)),
       is_visitable_(static_cast<bool>(0)),
-      is_immutable_(static_cast<bool>(0)) { }
+      is_immutable_(static_cast<bool>(0)),
+      is_original_parent_visitable_(static_cast<bool>(0)) { }
 
 class_view_model::class_view_model(
     const std::list<std::string>& namespaces,
@@ -47,11 +48,13 @@ class_view_model::class_view_model(
     const bool is_parent,
     const std::string& documentation,
     const std::string& original_parent_name,
+    const std::string& original_parent_name_qualified,
     const std::list<std::string>& leaves,
     const std::vector<std::pair<std::string, std::string> >& implementation_specific_parameters,
     const bool is_comparable,
     const bool is_visitable,
-    const bool is_immutable)
+    const bool is_immutable,
+    const bool is_original_parent_visitable)
     : namespaces_(namespaces),
       name_(name),
       properties_(properties),
@@ -64,11 +67,13 @@ class_view_model::class_view_model(
       is_parent_(is_parent),
       documentation_(documentation),
       original_parent_name_(original_parent_name),
+      original_parent_name_qualified_(original_parent_name_qualified),
       leaves_(leaves),
       implementation_specific_parameters_(implementation_specific_parameters),
       is_comparable_(is_comparable),
       is_visitable_(is_visitable),
-      is_immutable_(is_immutable) { }
+      is_immutable_(is_immutable),
+      is_original_parent_visitable_(is_original_parent_visitable) { }
 
 void class_view_model::swap(class_view_model& other) noexcept {
     using std::swap;
@@ -84,11 +89,13 @@ void class_view_model::swap(class_view_model& other) noexcept {
     swap(is_parent_, other.is_parent_);
     swap(documentation_, other.documentation_);
     swap(original_parent_name_, other.original_parent_name_);
+    swap(original_parent_name_qualified_, other.original_parent_name_qualified_);
     swap(leaves_, other.leaves_);
     swap(implementation_specific_parameters_, other.implementation_specific_parameters_);
     swap(is_comparable_, other.is_comparable_);
     swap(is_visitable_, other.is_visitable_);
     swap(is_immutable_, other.is_immutable_);
+    swap(is_original_parent_visitable_, other.is_original_parent_visitable_);
 }
 
 bool class_view_model::operator==(const class_view_model& rhs) const {
@@ -104,11 +111,13 @@ bool class_view_model::operator==(const class_view_model& rhs) const {
         is_parent_ == rhs.is_parent_ &&
         documentation_ == rhs.documentation_ &&
         original_parent_name_ == rhs.original_parent_name_ &&
+        original_parent_name_qualified_ == rhs.original_parent_name_qualified_ &&
         leaves_ == rhs.leaves_ &&
         implementation_specific_parameters_ == rhs.implementation_specific_parameters_ &&
         is_comparable_ == rhs.is_comparable_ &&
         is_visitable_ == rhs.is_visitable_ &&
-        is_immutable_ == rhs.is_immutable_;
+        is_immutable_ == rhs.is_immutable_ &&
+        is_original_parent_visitable_ == rhs.is_original_parent_visitable_;
 }
 
 class_view_model& class_view_model::operator=(class_view_model other) {
@@ -269,6 +278,22 @@ void class_view_model::original_parent_name(const std::string&& v) {
     original_parent_name_ = std::move(v);
 }
 
+const std::string& class_view_model::original_parent_name_qualified() const {
+    return original_parent_name_qualified_;
+}
+
+std::string& class_view_model::original_parent_name_qualified() {
+    return original_parent_name_qualified_;
+}
+
+void class_view_model::original_parent_name_qualified(const std::string& v) {
+    original_parent_name_qualified_ = v;
+}
+
+void class_view_model::original_parent_name_qualified(const std::string&& v) {
+    original_parent_name_qualified_ = std::move(v);
+}
+
 const std::list<std::string>& class_view_model::leaves() const {
     return leaves_;
 }
@@ -323,6 +348,14 @@ bool class_view_model::is_immutable() const {
 
 void class_view_model::is_immutable(const bool v) {
     is_immutable_ = v;
+}
+
+bool class_view_model::is_original_parent_visitable() const {
+    return is_original_parent_visitable_;
+}
+
+void class_view_model::is_original_parent_visitable(const bool v) {
+    is_original_parent_visitable_ = v;
 }
 
 } } }

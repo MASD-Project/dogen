@@ -336,12 +336,14 @@ void class_declaration::equality(const class_view_model& vm) {
                 << std::endl;
     } else if (vm.is_parent()) {
         stream_ << indenter_
-                << "virtual bool equals(const " << vm.original_parent_name()
+                << "virtual bool equals(const "
+                << vm.original_parent_name_qualified()
                 <<  "& other) const = 0;"
                 << std::endl;
     } else {
         stream_ << indenter_
-                << "bool equals(const " << vm.original_parent_name()
+                << "bool equals(const "
+                << vm.original_parent_name_qualified()
                 <<  "& other) const override;"
                 << std::endl;
     }

@@ -214,7 +214,7 @@ void class_implementation::equals_method(const class_view_model& vm) {
         return;
 
     stream_ << indenter_ << "bool " << vm.name() << "::equals(const "
-            << vm.original_parent_name() << "& other) const ";
+            << vm.original_parent_name_qualified() << "& other) const ";
     utility_.open_scope();
     {
         positive_indenter_scope s(indenter_);

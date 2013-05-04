@@ -37,6 +37,21 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_set<dogen:
 
 }
 
+namespace boost {
+
+inline std::ostream& operator<<(std::ostream& s, const boost::optional<dogen::sml::qname>& v) {
+    s << "{ " << "\"__type__\": " << "\"boost::optional\"" << ", ";
+
+    if (v)
+        s << "\"data\": " << *v;
+    else
+        s << "\"data\": ""\"<empty>\"";
+    s << " }";
+    return s;
+}
+
+}
+
 namespace dogen {
 namespace cpp {
 
@@ -58,7 +73,8 @@ std::ostream& operator<<(std::ostream& s, const relationships& v) {
       << "\"is_parent\": " << v.is_parent() << ", "
       << "\"is_child\": " << v.is_child() << ", "
       << "\"requires_stream_manipulators\": " << v.requires_stream_manipulators() << ", "
-      << "\"has_std_pair\": " << v.has_std_pair()
+      << "\"has_std_pair\": " << v.has_std_pair() << ", "
+      << "\"visitor\": " << v.visitor()
       << " }";
     return(s);
 }

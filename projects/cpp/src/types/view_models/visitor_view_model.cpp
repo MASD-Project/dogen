@@ -27,22 +27,26 @@ namespace view_models {
 visitor_view_model::visitor_view_model(
     const std::string& name,
     const std::list<std::string>& types,
-    const std::string& documentation)
+    const std::string& documentation,
+    const std::list<std::string>& namespaces)
     : name_(name),
       types_(types),
-      documentation_(documentation) { }
+      documentation_(documentation),
+      namespaces_(namespaces) { }
 
 void visitor_view_model::swap(visitor_view_model& other) noexcept {
     using std::swap;
     swap(name_, other.name_);
     swap(types_, other.types_);
     swap(documentation_, other.documentation_);
+    swap(namespaces_, other.namespaces_);
 }
 
 bool visitor_view_model::operator==(const visitor_view_model& rhs) const {
     return name_ == rhs.name_ &&
         types_ == rhs.types_ &&
-        documentation_ == rhs.documentation_;
+        documentation_ == rhs.documentation_ &&
+        namespaces_ == rhs.namespaces_;
 }
 
 visitor_view_model& visitor_view_model::operator=(visitor_view_model other) {
@@ -97,6 +101,22 @@ void visitor_view_model::documentation(const std::string& v) {
 
 void visitor_view_model::documentation(const std::string&& v) {
     documentation_ = std::move(v);
+}
+
+const std::list<std::string>& visitor_view_model::namespaces() const {
+    return namespaces_;
+}
+
+std::list<std::string>& visitor_view_model::namespaces() {
+    return namespaces_;
+}
+
+void visitor_view_model::namespaces(const std::list<std::string>& v) {
+    namespaces_ = v;
+}
+
+void visitor_view_model::namespaces(const std::list<std::string>&& v) {
+    namespaces_ = std::move(v);
 }
 
 } } }

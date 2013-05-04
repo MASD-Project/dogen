@@ -107,11 +107,13 @@ populate(const unsigned int position, result_type& v) {
     v.is_parent(create_bool(position + 9));
     v.documentation(create_std_string(position + 10));
     v.original_parent_name(create_std_string(position + 11));
-    v.leaves(create_std_list_std_string(position + 12));
-    v.implementation_specific_parameters(create_std_vector_std_pair_std_string_std_string_(position + 13));
-    v.is_comparable(create_bool(position + 14));
-    v.is_visitable(create_bool(position + 15));
-    v.is_immutable(create_bool(position + 16));
+    v.original_parent_name_qualified(create_std_string(position + 12));
+    v.leaves(create_std_list_std_string(position + 13));
+    v.implementation_specific_parameters(create_std_vector_std_pair_std_string_std_string_(position + 14));
+    v.is_comparable(create_bool(position + 15));
+    v.is_visitable(create_bool(position + 16));
+    v.is_immutable(create_bool(position + 17));
+    v.is_original_parent_visitable(create_bool(position + 18));
 }
 
 class_view_model_generator::result_type

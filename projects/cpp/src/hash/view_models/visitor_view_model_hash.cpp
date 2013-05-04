@@ -49,6 +49,7 @@ std::size_t visitor_view_model_hasher::hash(const visitor_view_model&v) {
     combine(seed, v.name());
     combine(seed, hash_std_list_std_string(v.types()));
     combine(seed, v.documentation());
+    combine(seed, hash_std_list_std_string(v.namespaces()));
 
     return seed;
 }

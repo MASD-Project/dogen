@@ -53,7 +53,8 @@ std::ostream& operator<<(std::ostream& s, const visitor_view_model& v) {
       << "\"__type__\": " << "\"dogen::cpp::view_models::visitor_view_model\"" << ", "
       << "\"name\": " << "\"" << tidy_up_string(v.name()) << "\"" << ", "
       << "\"types\": " << v.types() << ", "
-      << "\"documentation\": " << "\"" << tidy_up_string(v.documentation()) << "\""
+      << "\"documentation\": " << "\"" << tidy_up_string(v.documentation()) << "\"" << ", "
+      << "\"namespaces\": " << v.namespaces()
       << " }";
     return(s);
 }

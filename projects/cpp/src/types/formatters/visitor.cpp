@@ -53,40 +53,59 @@ file_formatter::shared_ptr visitor::create(std::ostream& stream) {
 }
 
 void visitor::format(const visitor_view_model& vm) {
-    doxygen_comments dc(stream_, indenter_);
-    dc.format(vm.documentation());
-    stream_ << indenter_ << "class " << vm.name() << " {" << std::endl;
-    utility_.public_access_specifier();
     {
-        positive_indenter_scope s(indenter_);
-        bool is_first(true);
-        for (const auto& t : vm.types()) {
-            if (!is_first)
-                utility_.blank_line();
+        namespace_helper ns(stream_, vm.namespaces());
+        utility_.blank_line();
 
-            dc.format(comments + t);
-            dc.format_start_block(comments);
-
-            stream_ << indenter_ << "virtual void visit(const " << t
-                    << "&) const { }"
+        doxygen_comments dc(stream_, indenter_);
+        dc.format(vm.documentation());
+        stream_ << indenter_ << "class " << vm.name() << " {" << std::endl;
+        utility_.public_access_specifier();
+        {
+            positive_indenter_scope s(indenter_);
+            stream_ << indenter_ << "virtual ~" << vm.name()
+                    << "() noexcept = 0;"
                     << std::endl;
-            stream_ << indenter_ << "virtual void visit(const " << t
-                    << "&) { }"
-                    << std::endl;
-            stream_ << indenter_ << "virtual void visit(" << t
-                    << "&) const { }"
-                    << std::endl;
-            stream_ << indenter_ << "virtual void visit(" << t
-                    << "&) { }"
-                    << std::endl;
-
-            dc.format_end_block(comments);
-            is_first = false;
+            utility_.blank_line();
         }
-    }
 
-    stream_ << indenter_ << "};" << std::endl;
-    utility_.blank_line();
+        utility_.public_access_specifier();
+        {
+            positive_indenter_scope s(indenter_);
+            bool is_first(true);
+            for (const auto& t : vm.types()) {
+                if (!is_first)
+                    utility_.blank_line();
+
+                dc.format(comments + t);
+                dc.format_start_block(comments);
+
+                stream_ << indenter_ << "virtual void visit(const " << t
+                        << "&) const { }"
+                        << std::endl;
+                stream_ << indenter_ << "virtual void visit(const " << t
+                        << "&) { }"
+                        << std::endl;
+                stream_ << indenter_ << "virtual void visit(" << t
+                        << "&) const { }"
+                        << std::endl;
+                stream_ << indenter_ << "virtual void visit(" << t
+                        << "&) { }"
+                        << std::endl;
+
+                dc.format_end_block(comments);
+                is_first = false;
+            }
+        }
+
+        stream_ << indenter_ << "};" << std::endl;
+        utility_.blank_line();
+
+        stream_ << indenter_ << "inline " << vm.name() << "::~"<< vm.name()
+                << "() noexcept { }" << std::endl;
+        utility_.blank_line();
+    }
+    utility_.blank_line(2);
 }
 
 void visitor::format(const file_view_model& vm) {

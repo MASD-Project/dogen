@@ -38,6 +38,16 @@ inline std::size_t hash_std_unordered_set_dogen_sml_qname(const std::unordered_s
     return seed;
 }
 
+inline std::size_t hash_boost_optional_dogen_sml_qname(const boost::optional<dogen::sml::qname>& v){
+    std::size_t seed(0);
+
+    if (!v)
+        return seed;
+
+    combine(seed, *v);
+    return seed;
+}
+
 }
 
 namespace dogen {
@@ -56,6 +66,7 @@ std::size_t relationships_hasher::hash(const relationships&v) {
     combine(seed, v.is_child());
     combine(seed, v.requires_stream_manipulators());
     combine(seed, v.has_std_pair());
+    combine(seed, hash_boost_optional_dogen_sml_qname(v.visitor()));
 
     return seed;
 }

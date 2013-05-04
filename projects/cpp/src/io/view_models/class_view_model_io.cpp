@@ -127,11 +127,13 @@ std::ostream& operator<<(std::ostream& s, const class_view_model& v) {
       << "\"is_parent\": " << v.is_parent() << ", "
       << "\"documentation\": " << "\"" << tidy_up_string(v.documentation()) << "\"" << ", "
       << "\"original_parent_name\": " << "\"" << tidy_up_string(v.original_parent_name()) << "\"" << ", "
+      << "\"original_parent_name_qualified\": " << "\"" << tidy_up_string(v.original_parent_name_qualified()) << "\"" << ", "
       << "\"leaves\": " << v.leaves() << ", "
       << "\"implementation_specific_parameters\": " << v.implementation_specific_parameters() << ", "
       << "\"is_comparable\": " << v.is_comparable() << ", "
       << "\"is_visitable\": " << v.is_visitable() << ", "
-      << "\"is_immutable\": " << v.is_immutable()
+      << "\"is_immutable\": " << v.is_immutable() << ", "
+      << "\"is_original_parent_visitable\": " << v.is_original_parent_visitable()
       << " }";
     return(s);
 }

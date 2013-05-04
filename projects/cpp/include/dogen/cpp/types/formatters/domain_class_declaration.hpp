@@ -52,6 +52,7 @@ public:
 
 private:
     void hand_crafted_constructors(const class_view_model& vm);
+    void visitor_method(const class_view_model& vm);
 
 public:
     virtual void format(const class_view_model& vm) override;

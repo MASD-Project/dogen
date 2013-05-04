@@ -59,11 +59,13 @@ void save(Archive& ar,
     ar << make_nvp("is_parent", v.is_parent_);
     ar << make_nvp("documentation", v.documentation_);
     ar << make_nvp("original_parent_name", v.original_parent_name_);
+    ar << make_nvp("original_parent_name_qualified", v.original_parent_name_qualified_);
     ar << make_nvp("leaves", v.leaves_);
     ar << make_nvp("implementation_specific_parameters", v.implementation_specific_parameters_);
     ar << make_nvp("is_comparable", v.is_comparable_);
     ar << make_nvp("is_visitable", v.is_visitable_);
     ar << make_nvp("is_immutable", v.is_immutable_);
+    ar << make_nvp("is_original_parent_visitable", v.is_original_parent_visitable_);
 }
 
 template<typename Archive>
@@ -82,11 +84,13 @@ void load(Archive& ar,
     ar >> make_nvp("is_parent", v.is_parent_);
     ar >> make_nvp("documentation", v.documentation_);
     ar >> make_nvp("original_parent_name", v.original_parent_name_);
+    ar >> make_nvp("original_parent_name_qualified", v.original_parent_name_qualified_);
     ar >> make_nvp("leaves", v.leaves_);
     ar >> make_nvp("implementation_specific_parameters", v.implementation_specific_parameters_);
     ar >> make_nvp("is_comparable", v.is_comparable_);
     ar >> make_nvp("is_visitable", v.is_visitable_);
     ar >> make_nvp("is_immutable", v.is_immutable_);
+    ar >> make_nvp("is_original_parent_visitable", v.is_original_parent_visitable_);
 }
 
 } }

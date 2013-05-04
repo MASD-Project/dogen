@@ -40,6 +40,12 @@ bool create_bool(const unsigned int position) {
     return (position % 2) == 0;
 }
 
+boost::optional<dogen::sml::qname>
+create_boost_optional_dogen_sml_qname(unsigned int position) {
+    boost::optional<dogen::sml::qname> r(        create_dogen_sml_qname(position));
+    return r;
+}
+
 }
 
 namespace dogen {
@@ -59,6 +65,7 @@ populate(const unsigned int position, result_type& v) {
     v.is_child(create_bool(position + 7));
     v.requires_stream_manipulators(create_bool(position + 8));
     v.has_std_pair(create_bool(position + 9));
+    v.visitor(create_boost_optional_dogen_sml_qname(position + 10));
 }
 
 relationships_generator::result_type

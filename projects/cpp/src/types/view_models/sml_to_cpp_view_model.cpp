@@ -204,7 +204,7 @@ private:
         visit_state(pod_map_type pods) : pods_(pods) { }
 
         qname_to_class_view_model_type class_view_models_;
-        pod_map_type pods_;
+        pod_map_type pods_; // FIXME: reference to pods?
         qname_to_visitor_view_model_type visitor_view_models_;
     };
 
@@ -412,6 +412,7 @@ void sml_dfs_visitor::process_sml_pod(const dogen::sml::pod& pod) {
     cvm.is_parent(pod.is_parent());
     cvm.documentation(pod.documentation());
     cvm.is_immutable(pod.is_immutable());
+    cvm.is_visitable(pod.is_visitable());
 
     if (pod.is_visitable()) {
         BOOST_LOG_SEV(lg, debug) << "Pod '" << name.type_name()
@@ -419,6 +420,7 @@ void sml_dfs_visitor::process_sml_pod(const dogen::sml::pod& pod) {
 
         visitor_view_model vvm;
         vvm.name(cvm.name() + "_visitor");
+        vvm.namespaces(ns);
 
         std::list<std::string> fqn(ns);
         fqn.push_back(cvm.name());
@@ -478,13 +480,15 @@ void sml_dfs_visitor::process_sml_pod(const dogen::sml::pod& pod) {
         std::list<std::string> opn_name(join_namespaces(*opn));
         opn_name.push_back(opn->type_name());
         using boost::join;
-        cvm.original_parent_name(join(opn_name, namespace_separator));
+        cvm.original_parent_name_qualified(join(opn_name, namespace_separator));
+        cvm.original_parent_name(opn->type_name());
 
         const auto i(state_->visitor_view_models_.find(*opn));
         if (i != state_->visitor_view_models_.end()) {
             std::list<std::string> fqn(ns);
             fqn.push_back(cvm.name());
             i->second.types().push_back(join(fqn, namespace_separator));
+            cvm.is_original_parent_visitable(true);
         }
     }
 

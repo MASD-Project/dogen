@@ -28,6 +28,7 @@
 #include <algorithm>
 #include <iosfwd>
 #include "dogen/trivial_inheritance/serialization/descendant3_fwd_ser.hpp"
+#include "dogen/trivial_inheritance/types/base_visitor.hpp"
 #include "dogen/trivial_inheritance/types/descendant1.hpp"
 
 namespace dogen {
@@ -46,6 +47,23 @@ private:
 
     template<typename Archive>
     friend void boost::serialization::load(Archive& ar, descendant3& v, unsigned int version);
+
+public:
+    virtual void accept(const base_visitor& v) const override {
+        v.visit(*this);
+    }
+
+    virtual void accept(base_visitor& v) const override {
+        v.visit(*this);
+    }
+
+    virtual void accept(const base_visitor& v) override {
+        v.visit(*this);
+    }
+
+    virtual void accept(base_visitor& v) override {
+        v.visit(*this);
+    }
 
 public:
     void to_stream(std::ostream& s) const override;

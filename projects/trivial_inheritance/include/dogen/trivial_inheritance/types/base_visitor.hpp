@@ -30,7 +30,13 @@
 #include "dogen/trivial_inheritance/types/descendant2_fwd.hpp"
 #include "dogen/trivial_inheritance/types/descendant3_fwd.hpp"
 
+namespace dogen {
+namespace trivial_inheritance {
+
 class base_visitor {
+public:
+    virtual ~base_visitor() noexcept = 0;
+
 public:
     /**
      * @brief Accept visits for type dogen::trivial_inheritance::base
@@ -72,5 +78,9 @@ public:
     virtual void visit(dogen::trivial_inheritance::descendant3&) { }
     /**@}*/
 };
+
+inline base_visitor::~base_visitor() noexcept { }
+
+} }
 
 #endif

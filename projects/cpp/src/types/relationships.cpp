@@ -31,6 +31,19 @@ relationships::relationships()
       requires_stream_manipulators_(static_cast<bool>(0)),
       has_std_pair_(static_cast<bool>(0)) { }
 
+relationships::relationships(relationships&& rhs)
+    : names_(std::move(rhs.names_)),
+      forward_decls_(std::move(rhs.forward_decls_)),
+      keys_(std::move(rhs.keys_)),
+      leaves_(std::move(rhs.leaves_)),
+      has_std_string_(std::move(rhs.has_std_string_)),
+      has_variant_(std::move(rhs.has_variant_)),
+      is_parent_(std::move(rhs.is_parent_)),
+      is_child_(std::move(rhs.is_child_)),
+      requires_stream_manipulators_(std::move(rhs.requires_stream_manipulators_)),
+      has_std_pair_(std::move(rhs.has_std_pair_)),
+      visitor_(std::move(rhs.visitor_)) { }
+
 relationships::relationships(
     const std::unordered_set<dogen::sml::qname>& names,
     const std::unordered_set<dogen::sml::qname>& forward_decls,
@@ -41,7 +54,8 @@ relationships::relationships(
     const bool is_parent,
     const bool is_child,
     const bool requires_stream_manipulators,
-    const bool has_std_pair)
+    const bool has_std_pair,
+    const boost::optional<dogen::sml::qname>& visitor)
     : names_(names),
       forward_decls_(forward_decls),
       keys_(keys),
@@ -51,7 +65,8 @@ relationships::relationships(
       is_parent_(is_parent),
       is_child_(is_child),
       requires_stream_manipulators_(requires_stream_manipulators),
-      has_std_pair_(has_std_pair) { }
+      has_std_pair_(has_std_pair),
+      visitor_(visitor) { }
 
 void relationships::swap(relationships& other) noexcept {
     using std::swap;
@@ -65,6 +80,7 @@ void relationships::swap(relationships& other) noexcept {
     swap(is_child_, other.is_child_);
     swap(requires_stream_manipulators_, other.requires_stream_manipulators_);
     swap(has_std_pair_, other.has_std_pair_);
+    swap(visitor_, other.visitor_);
 }
 
 bool relationships::operator==(const relationships& rhs) const {
@@ -77,7 +93,8 @@ bool relationships::operator==(const relationships& rhs) const {
         is_parent_ == rhs.is_parent_ &&
         is_child_ == rhs.is_child_ &&
         requires_stream_manipulators_ == rhs.requires_stream_manipulators_ &&
-        has_std_pair_ == rhs.has_std_pair_;
+        has_std_pair_ == rhs.has_std_pair_ &&
+        visitor_ == rhs.visitor_;
 }
 
 relationships& relationships::operator=(relationships other) {
@@ -196,6 +213,22 @@ bool relationships::has_std_pair() const {
 
 void relationships::has_std_pair(const bool v) {
     has_std_pair_ = v;
+}
+
+const boost::optional<dogen::sml::qname>& relationships::visitor() const {
+    return visitor_;
+}
+
+boost::optional<dogen::sml::qname>& relationships::visitor() {
+    return visitor_;
+}
+
+void relationships::visitor(const boost::optional<dogen::sml::qname>& v) {
+    visitor_ = v;
+}
+
+void relationships::visitor(const boost::optional<dogen::sml::qname>&& v) {
+    visitor_ = std::move(v);
 }
 
 } }

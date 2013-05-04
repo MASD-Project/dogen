@@ -61,11 +61,13 @@ public:
         const bool is_parent,
         const std::string& documentation,
         const std::string& original_parent_name,
+        const std::string& original_parent_name_qualified,
         const std::list<std::string>& leaves,
         const std::vector<std::pair<std::string, std::string> >& implementation_specific_parameters,
         const bool is_comparable,
         const bool is_visitable,
-        const bool is_immutable);
+        const bool is_immutable,
+        const bool is_original_parent_visitable);
 
 private:
     template<typename Archive>
@@ -194,6 +196,11 @@ public:
     void original_parent_name(const std::string&& v);
     /**@}*/
 
+    const std::string& original_parent_name_qualified() const;
+    std::string& original_parent_name_qualified();
+    void original_parent_name_qualified(const std::string& v);
+    void original_parent_name_qualified(const std::string&& v);
+
     /**
      * @brief If the class is abstract, list of concrete types that
      * descend from it. Names are in identifiable name format.
@@ -219,6 +226,9 @@ public:
     bool is_immutable() const;
     void is_immutable(const bool v);
 
+    bool is_original_parent_visitable() const;
+    void is_original_parent_visitable(const bool v);
+
 public:
     bool operator==(const class_view_model& rhs) const;
     bool operator!=(const class_view_model& rhs) const {
@@ -242,11 +252,13 @@ private:
     bool is_parent_;
     std::string documentation_;
     std::string original_parent_name_;
+    std::string original_parent_name_qualified_;
     std::list<std::string> leaves_;
     std::vector<std::pair<std::string, std::string> > implementation_specific_parameters_;
     bool is_comparable_;
     bool is_visitable_;
     bool is_immutable_;
+    bool is_original_parent_visitable_;
 };
 
 } } }

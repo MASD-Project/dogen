@@ -26,6 +26,7 @@
 #endif
 
 #include <algorithm>
+#include <boost/optional.hpp>
 #include <unordered_set>
 #include "dogen/cpp/serialization/relationships_fwd_ser.hpp"
 #include "dogen/sml/hash/qname_hash.hpp"
@@ -37,11 +38,13 @@ namespace cpp {
 class relationships final {
 public:
     relationships(const relationships&) = default;
-    relationships(relationships&&) = default;
     ~relationships() = default;
 
 public:
     relationships();
+
+public:
+    relationships(relationships&& rhs);
 
 public:
     relationships(
@@ -54,7 +57,8 @@ public:
         const bool is_parent,
         const bool is_child,
         const bool requires_stream_manipulators,
-        const bool has_std_pair);
+        const bool has_std_pair,
+        const boost::optional<dogen::sml::qname>& visitor);
 
 private:
     template<typename Archive>
@@ -102,6 +106,11 @@ public:
     bool has_std_pair() const;
     void has_std_pair(const bool v);
 
+    const boost::optional<dogen::sml::qname>& visitor() const;
+    boost::optional<dogen::sml::qname>& visitor();
+    void visitor(const boost::optional<dogen::sml::qname>& v);
+    void visitor(const boost::optional<dogen::sml::qname>&& v);
+
 public:
     bool operator==(const relationships& rhs) const;
     bool operator!=(const relationships& rhs) const {
@@ -123,6 +132,7 @@ private:
     bool is_child_;
     bool requires_stream_manipulators_;
     bool has_std_pair_;
+    boost::optional<dogen::sml::qname> visitor_;
 };
 
 } }
