@@ -48,31 +48,41 @@ namespace formatters {
 visitor::visitor(std::ostream& stream)
     : stream_(stream), utility_(stream_, indenter_) { }
 
+file_formatter::shared_ptr visitor::create(std::ostream& stream) {
+    return file_formatter::shared_ptr(new visitor(stream));
+}
+
 void visitor::format(const visitor_view_model& vm) {
     doxygen_comments dc(stream_, indenter_);
     dc.format(vm.documentation());
     stream_ << indenter_ << "class " << vm.name() << " {" << std::endl;
     utility_.public_access_specifier();
+    {
+        positive_indenter_scope s(indenter_);
+        bool is_first(true);
+        for (const auto& t : vm.types()) {
+            if (!is_first)
+                utility_.blank_line();
 
-    bool is_first(true);
-    for (const auto& t : vm.types()) {
-        if (!is_first)
-            utility_.blank_line();
+            dc.format(comments + t);
+            dc.format_start_block(vm.documentation());
 
-        dc.format(comments + t);
-        dc.format_start_block(vm.documentation());
+            stream_ << indenter_ << "virtual void visit(const " << t
+                    << "&) const { }"
+                    << std::endl;
+            stream_ << indenter_ << "virtual void visit(const " << t
+                    << "&) { }"
+                    << std::endl;
+            stream_ << indenter_ << "virtual void visit(" << t
+                    << "&) const { }"
+                    << std::endl;
+            stream_ << indenter_ << "virtual void visit(" << t
+                    << "&) { }"
+                    << std::endl;
 
-        stream_ << indenter_ << "void visit(const " << t << "&) const { } "
-                << std::endl;
-        stream_ << indenter_ << "void visit(const " << t << "&) { } "
-                << std::endl;
-        stream_ << indenter_ << "void visit(" << t << "&) const { } "
-                << std::endl;
-        stream_ << indenter_ << "void visit(" << t << "&) { } "
-                << std::endl;
-
-        dc.format_end_block(vm.documentation());
-        is_first = false;
+            dc.format_end_block(vm.documentation());
+            is_first = false;
+        }
     }
 
     stream_ << indenter_ << "};" << std::endl;

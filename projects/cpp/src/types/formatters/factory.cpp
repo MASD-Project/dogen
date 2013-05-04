@@ -44,6 +44,7 @@
 #include "dogen/cpp/types/formatters/null_formatter.hpp"
 #include "dogen/cpp/types/formatters/namespace_documentation.hpp"
 #include "dogen/cpp/types/formatters/odb_header.hpp"
+#include "dogen/cpp/types/formatters/visitor.hpp"
 #include "dogen/cpp/types/formatters/factory.hpp"
 
 using namespace dogen::utility::log;
@@ -173,6 +174,9 @@ factory::create(std::ostream& s, config::cpp_facet_types ft, file_types flt,
         break;
     case aspect_types::null_aspect:
         return create_null_formatter(s);
+        break;
+    case aspect_types::visitor:
+        return visitor::create(s);
         break;
     default: {
         std::ostringstream s;

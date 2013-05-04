@@ -39,6 +39,7 @@
 #include "dogen/cpp/types/view_models/transformation_error.hpp"
 #include "dogen/cpp/io/aspect_types_io.hpp"
 #include "dogen/cpp/io/file_types_io.hpp"
+#include "dogen/cpp/types/extractor.hpp"
 #include "dogen/cpp/io/view_models/file_view_model_io.hpp"
 #include "dogen/cpp/types/view_models/sml_to_cpp_view_model.hpp"
 
@@ -413,8 +414,11 @@ void sml_dfs_visitor::process_sml_pod(const dogen::sml::pod& pod) {
     cvm.is_immutable(pod.is_immutable());
 
     if (pod.is_visitable()) {
+        BOOST_LOG_SEV(lg, debug) << "Pod '" << name.type_name()
+                                 << "' is visitable so generating visitor";
+
         visitor_view_model vvm;
-        vvm.name("visitor_" + cvm.name());
+        vvm.name(cvm.name() + "_visitor");
 
         std::list<std::string> fqn(ns);
         fqn.push_back(cvm.name());
@@ -1068,8 +1072,12 @@ std::vector<file_view_model> sml_to_cpp_view_model::transform_visitors() {
         vm.file_path(locator_.absolute_path(rq));
         vm.file_type(file_type);
         vm.aspect_type(at);
+        vm.visitor_vm(v.second);
 
-        const auto includes(includer_.includes_for_visitor(qn));
+        const auto rp(locator_.relative_logical_path(rq));
+        vm.header_guard(to_header_guard_name(rp));
+
+        const auto includes(includer_.includes_for_visitor(v.first));
         vm.system_includes(includes.system);
         vm.user_includes(includes.user);
 

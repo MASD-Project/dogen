@@ -39,6 +39,7 @@ const std::string serialization_postfix("_ser");
 const std::string test_data_postfix("_td");
 const std::string odb_postfix("_pragmas");
 const std::string forward_decls_postfix("_fwd");
+const std::string visitor_postfix("_visitor");
 
 const std::string src_dir("src");
 const std::string include_dir("include");
@@ -126,11 +127,14 @@ locator::aspect_postfix(aspect_types aspect) const {
         return empty;
 
     switch(aspect) {
-    case aspect_types::main: return empty; break;
-    case aspect_types::includers: return empty; break;
     case aspect_types::forward_decls: return forward_decls_postfix; break;
-    case aspect_types::registrar: return empty; break;
-    case aspect_types::namespace_doc: return empty; break;
+    case aspect_types::visitor: return visitor_postfix; break;
+    case aspect_types::main:
+    case aspect_types::includers:
+    case aspect_types::registrar:
+    case aspect_types::namespace_doc:
+        return empty; break;
+
     default:
         BOOST_LOG_SEV(lg, error) << invalid_aspect_types;
         BOOST_THROW_EXCEPTION(invalid_enum_value(invalid_aspect_types));

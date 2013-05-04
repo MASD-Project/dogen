@@ -50,6 +50,9 @@ public:
     explicit visitor(std::ostream& stream);
     virtual ~visitor() noexcept {}
 
+public:
+    static file_formatter::shared_ptr create(std::ostream& stream);
+
 private:
     void format(const visitor_view_model& vm);
 

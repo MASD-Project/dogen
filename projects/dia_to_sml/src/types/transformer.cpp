@@ -190,6 +190,7 @@ transform_pod(const object_profile& op, const processed_object& po) {
 
     pod.is_fluent(op.is_fluent());
     pod.is_versioned(op.is_versioned());
+    pod.is_visitable(op.is_visitable());
 
     using sml::generation_types;
     pod.generation_type(context_.is_target() ?
