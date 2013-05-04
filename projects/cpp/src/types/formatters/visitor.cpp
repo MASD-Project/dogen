@@ -65,7 +65,7 @@ void visitor::format(const visitor_view_model& vm) {
                 utility_.blank_line();
 
             dc.format(comments + t);
-            dc.format_start_block(vm.documentation());
+            dc.format_start_block(comments);
 
             stream_ << indenter_ << "virtual void visit(const " << t
                     << "&) const { }"
@@ -80,7 +80,7 @@ void visitor::format(const visitor_view_model& vm) {
                     << "&) { }"
                     << std::endl;
 
-            dc.format_end_block(vm.documentation());
+            dc.format_end_block(comments);
             is_first = false;
         }
     }
