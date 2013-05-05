@@ -11,6 +11,12 @@ This file contains all stories that haven't been assigned to a sprint.
 
 Stories that we intend to look at, at some point.
 
+*** Vistor is only supported at the base class level
+
+Due to implementation constraints, we only support visitable at the
+base class level. Add an exception if users attempt to use visitable
+stereotype in a class that has parents.
+
 *** Create an interface for the text reader
 
 In order to do performance testing of the dia model we should create
