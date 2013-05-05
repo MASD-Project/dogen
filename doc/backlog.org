@@ -11,6 +11,45 @@ This file contains all stories that haven't been assigned to a sprint.
 
 Stories that we intend to look at, at some point.
 
+*** Create a validator in SML
+
+We need a class responsible for checking the consistency of the SML
+model. There are several things we need to check for non-merged
+models:
+
+- type names, model names, etc must not contain spaces or other
+  invalid characters.
+- the qname of all keys in pods, etc must be part of the current
+  model.
+- the qnames of all types as keys are consistent with the values.
+- type_name is non-empty
+- parent names and original parent names must exist in current model.
+- leaves exist in current model.
+- entity must have at least one key.
+- keyed must be entity.
+- all properties of types in current model must exist.
+- properties of types in other models result in dependencies.
+- enumeration must have at least one enumerator
+- enumerator name must not be empty
+- enumerator name must be unique
+- external package path of the model matches all pods, etc in current
+  model.
+- model name is non-empty.
+- documentation does not have non-printable characters.
+- number of type arguments is consistent with pod type.
+- pod marked as is comparable must only have properties with is
+  comparable types.
+- pod marked as is parent must have at least one child.
+- property can only have a default value if primitive
+- property default value must be castable to primitive type.
+- property must have non-empty name.
+- is versioned pod must have a property called version.
+- string table cannot have duplicate entries.
+
+For merged models:
+
+- properties exist in merged model.
+
 *** Create a resolver in SML
 
 We should really move the qname resolution code from merger into a
