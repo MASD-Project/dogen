@@ -87,7 +87,7 @@ multiple stereotypes.
 
 - versioned: add version property to class.
 
-*** COMPLETED Add visitor support
+*** COMPLETED Add visitor support                                     :story:
     CLOSED: [2013-05-05 Sun 12:31]
 
 The base class of an inheritance hierarchy should be markable with the
@@ -109,14 +109,25 @@ visitor code:
   the same file as the key.
 - if versioned, also create unversioned key class. add typedefs in
   class for versioned key.
-- keys are comparable if all properties are of comparable types. add
-  =operator<= automatically.
 
-*** Fix entity stereotype                                             :story:
+Rules:
+
+- entities must have at least one KEY_ATTRIBUTE
+- keyed pods must be entities.
+- unversioned keyed entities will have unversioned keys.
+- versioned keyed entities will have versioned keys.
+- values can be versioned.
+
+**** IMPLEMENTATION Propagate key attribute to SML
+**** Ensure entities have at least one key attribute defined
+**** Unhook key generation from entity stereotype
 
 Instead of generating versioned/unversioned keys, it should just force
 the user to define at least one attribute with  property of
 identity.
+
+**** Hook key generation to keyed stereotype
+**** Only define versioned key if versioned stereotype is present
 
 *** Use explicit casting for versioned to unversioned conversions     :story:
     CLOCK: [2012-11-22 Thu 08:44]--[2012-11-22 Thu 09:20] =>  0:36
