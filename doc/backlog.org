@@ -11,6 +11,10 @@ This file contains all stories that haven't been assigned to a sprint.
 
 Stories that we intend to look at, at some point.
 
+*** Consider renaming dependencies to references in model
+
+Dependencies is a map of reference; why not call it references?
+
 *** IoC work                                                           :epic:
 
 All stories related to IoC work are tracked here.
