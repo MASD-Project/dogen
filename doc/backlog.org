@@ -11,6 +11,15 @@ This file contains all stories that haven't been assigned to a sprint.
 
 Stories that we intend to look at, at some point.
 
+*** Add composite stereotype
+
+It would be nice if one could just mark a pod as =composite= and dogen
+automatically created the composite structure. As we only support
+boost shared pointer that's what we'd use. We have a few use cases for
+this (node, nested qname, etc).
+
+This would be part of the injection framework.
+
 *** Clean up C++ model                                                 :epic:
 
 C++ model has become a bit of a mess. This story is a general bucket
