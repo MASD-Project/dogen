@@ -11,6 +11,40 @@ This file contains all stories that haven't been assigned to a sprint.
 
 Stories that we intend to look at, at some point.
 
+*** Add support for bitsets
+
+We are using a lot of boolean variables to define properties at the
+pod level, relationships, etc. In reality, these all could be
+implemented with  =std::bitset=, plus an enumeration. One possible
+implementation is:
+
+- add =std::bitset= to std model.
+- create a new stereotype of bitset.
+- classes with stereotype bitset are like enumerations, e.g. users are
+  expected to add a list of names to the class.
+- dogen will then implement the properties of type bitset as a
+  =std::bitset= of the appropriate size, and also generate an
+  enumeration which can be used for indexing the bitset. This may need
+  to be a C++-03 enumeration, due to type safety in C++-11
+  enumerations.
+- we should also implement default bitsets with values corresponding
+  to the flags.
+
+Example usage:
+
+#+begin_src c++
+const unsigned int my_bitset_size(10);
+std::bitset<my_bitset_size> bs;
+
+bs[first_flag_index] = 1;
+bs = first_flag_value;
+#+end_src
+
+Links:
+
+- [[http://www.java2s.com/Tutorial/Cpp/0360__bitset/Usebitsetwithenumtogether.htm][Use bitset with enum together]]
+- [[http://stackoverflow.com/questions/9857239/c11-and-17-5-2-1-3-bitmask-types][C++11 and {17.5.2.1.3} Bitmask Types]]
+
 *** Vistor is only supported at the base class level
 
 Due to implementation constraints, we only support visitable at the
