@@ -11,6 +11,12 @@ This file contains all stories that haven't been assigned to a sprint.
 
 Stories that we intend to look at, at some point.
 
+*** Visitor as an injected system type
+
+The current implementation of visitor relies on creating a view model
+without a corresponding type. In reality we should do as we did for
+keys and create a category type of visitor. This is really a SML
+concept, not a backend specific concept.
 
 *** Model name should be a qname
 
