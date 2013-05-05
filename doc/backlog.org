@@ -11,6 +11,12 @@ This file contains all stories that haven't been assigned to a sprint.
 
 Stories that we intend to look at, at some point.
 
+
+*** Model name should be a qname
+
+We already have most of the qname properties in the model anyway, so
+might as well just use a qname.
+
 *** Create a validator in SML
 
 We need a class responsible for checking the consistency of the SML
