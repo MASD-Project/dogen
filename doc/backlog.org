@@ -102,6 +102,10 @@ implement this by creating a new stereotype where the name is the
 string name and the default value is the string value. All strings
 would be static public members of a class.
 
+We should also add a validate method which checks to see if a string
+is a valid value according to the string table. We could have a case
+insensitive validate too.
+
 *** Tidy-up test models
 
 We have a lot of fine grained test models for historic reasons. A lot
