@@ -87,7 +87,8 @@ multiple stereotypes.
 
 - versioned: add version property to class.
 
-*** IMPLEMENTATION Add visitor support
+*** COMPLETED Add visitor support
+    CLOSED: [2013-05-05 Sun 12:31]
 
 The base class of an inheritance hierarchy should be markable with the
 =visitable= stereotype. This would then result in the generation of
@@ -98,11 +99,11 @@ visitor code:
 - an =accept= method on the class that dispatches to the correct
   method in visitor.
 
-*** Re-implement key support                                          :story:
+*** IMPLEMENTATION Re-implement key support                           :story:
 
 - create a new stereotype of keyed. when set, it results in the
   creation of a new class containing all properties marked as
-  identity. if none are found, throw.
+  identity. if none are found, throw. only entities can be keyed.
 - create new stand alone function =extract_key=. given an instance of
   a class, it returns the corresponding key. it should be defined in
   the same file as the key.
@@ -116,13 +117,6 @@ visitor code:
 Instead of generating versioned/unversioned keys, it should just force
 the user to define at least one attribute with  property of
 identity.
-
-*** Rename implementation specific parameters                         :story:
-
-These should really be called back end specific parameters at the SM
-level. At the dia level, if a parameter is passed in which has a
-representation at the SML level it should simply be converted to this
-representation instead of being added to the KVP.
 
 *** Use explicit casting for versioned to unversioned conversions     :story:
     CLOCK: [2012-11-22 Thu 08:44]--[2012-11-22 Thu 09:20] =>  0:36
@@ -141,7 +135,7 @@ correct design decisions in this area. We need to wait until we start
 using keys in anger in Creris and then design the API around the use
 cases.
 
-*** Create a model specific to versioning, keys, etc                  :story:
+*** Move all of the versioning, entity, key tests to stereotypes      :story:
 
 - remove versioning from all other models such as std::model, etc.
 - add tests for =std::unordered=, maps etc.
