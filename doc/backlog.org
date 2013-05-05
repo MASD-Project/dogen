@@ -27,6 +27,9 @@ Actually, these are more like generic parameters:
 - at the backend level, they are used to provide information which
   does not make sense to live in SML: for example the ODB parameters.
 
+Also, when the string table support has been added, we need to create
+a string table with all valid values for the parameter keys.
+
 *** Add support for bitsets
 
 We are using a lot of boolean variables to define properties at the
