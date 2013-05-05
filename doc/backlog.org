@@ -11,6 +11,47 @@ This file contains all stories that haven't been assigned to a sprint.
 
 Stories that we intend to look at, at some point.
 
+*** Clean up C++ model                                                 :epic:
+
+C++ model has become a bit of a mess. This story is a general bucket
+to capture all of the refactorings that can/need to be done to
+it. These will be broken down into stories and shipped in iterations.
+
+- remove view model namespace and postfix. These are just types at the
+  c++ model level and don't need any further qualifications. For types
+  where the name is a C++ keyword (e.g. =class=, =namespace=), create
+  a well known prefix like eCore. Question is what prefix to use.
+- clean up the SML to C++ transformer: split graph from transformer,
+  split visitor from transformer, etc.
+- file view model has a silly approach for the containing view models:
+  we keep on adding more optional member variables. We should probably
+  create a base class for all of these view models and have a single
+  property for it. Then use the =visitor= stereotype to dispatch.
+- extractor should be split into two. The first part is SML specific
+  and its just creating a different representation of the information
+  already available in SML: dependencies such as parents, properties,
+  etc. This should be moved into SML. The second part is C++ specific
+  (i.e. dependencies which we gained because of the specifics of the
+  C++ implementation). To some extent this could be done by adding a
+  backend specific "dependency manager" which could add to SML any
+  dependencies that are specific to a backend. This ties in nicely
+  with the fact that we already have a =boost= model, a =std= model
+  etc - all C++ specific. For the types which are in those models, its
+  simply a case of adding them to SML. The relationship could have a
+  "implementation specific dependency" bucket for this. It would have
+  to take into account things such as facets etc which SML knows not
+  of. The last set of dependencies are also implementation specific
+  but they are not in the =boost=, =std= etc models. These are things
+  like ostream, etc which only make sense as header files. For these,
+  the includer would have to continue doing what it does.
+- It should be possible to [[*Refactor%20boost%20and%20std%20helpers%20and%20enums][configure new models]] via text files. The
+  includer should have an inteface that allows adding types at run
+  time. However, we would also need SML support for this.
+- create a string table for all the strings in formatter such as
+  colon, semi-colon, ls_colon (left-spaced colon), etc.
+- consider renaming formatters. Not sure what the right name should be
+  though; templates?
+
 *** Rename implementation specific parameters                         :story:
 
 These should really be called back end specific parameters at the SML
