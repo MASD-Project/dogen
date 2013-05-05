@@ -11,6 +11,12 @@ This file contains all stories that haven't been assigned to a sprint.
 
 Stories that we intend to look at, at some point.
 
+*** Create an interface for the text reader
+
+In order to do performance testing of the dia model we should create
+an interface for text reader and implement it as a mock. This will
+avoid the overhead of reading stuff from the hard drive.
+
 *** Visitor header file not included in includer
 
 At present the visitor header file is not being added to the main
