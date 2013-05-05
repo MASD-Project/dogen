@@ -243,6 +243,8 @@ implemented by the user.
   comparable, generate =operator<= for the keys.
 - perhaps we should also have a =comparable= stereotype. if not set,
   ignore this.
+- keys are comparable if all properties are of comparable types. add
+  =operator<= automatically.
 
 *** Private and public includes
 
