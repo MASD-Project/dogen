@@ -11,6 +11,13 @@ This file contains all stories that haven't been assigned to a sprint.
 
 Stories that we intend to look at, at some point.
 
+*** Create a resolver in SML
+
+We should really move the qname resolution code from merger into a
+resolver class. This class would have access to a merged model and
+given a qname, it would resolve it. The different resolution
+strategies could then be separate methods.
+
 *** Add composite stereotype
 
 It would be nice if one could just mark a pod as =composite= and dogen
