@@ -39,7 +39,8 @@ using namespace dogen::utility::log;
 static logger lg(logger_factory("dia_to_sml.transformer"));
 
 const std::string empty;
-const std::string comment_marker("COMMENT");
+const std::string key_attribute_key("KEY_ATTRIBUTE");
+const std::string comment_key("COMMENT");
 const std::string empty_dia_object_name("Dia object name is empty");
 const std::string original_parent_not_found("Pod has no original parent: ");
 const std::string parent_not_found("Object has a parent but its not defined: ");
@@ -157,6 +158,14 @@ transform_property(const processed_property& p) {
     const auto pair(comments_parser_->parse(p.comment()));
     r.documentation(pair.first);
     r.implementation_specific_parameters(pair.second);
+
+    for (const auto pair : r.implementation_specific_parameters()) {
+        if (pair.first != key_attribute_key)
+            continue;
+
+        r.is_key_attribute(true);
+        break;
+    }
 
     if (r.name().empty()) {
         BOOST_LOG_SEV(lg, error) << empty_dia_object_name;
@@ -376,7 +385,7 @@ void transformer::transform_note(const processed_object& o) {
     const auto pair(comments_parser_->parse(o.text()));
     bool has_marker(false);
     for (const auto& p : pair.second) {
-        has_marker = p.first == comment_marker;
+        has_marker = p.first == comment_key;
         if (has_marker)
             break;
     }

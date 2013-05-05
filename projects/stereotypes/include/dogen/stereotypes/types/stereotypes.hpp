@@ -28,7 +28,7 @@
 namespace dogen {
 
 /**
- * @brief This model tests the stereotype related scenarios.
+ * @brief Test model for all of the stereotype related scenarios.
  *
  * These are the main cases:
  *

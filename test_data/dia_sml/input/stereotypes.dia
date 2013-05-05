@@ -610,7 +610,7 @@
         <dia:point val="38.1042,3.09167"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="8.5849999999999991"/>
+        <dia:real val="8.5850000000000009"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="5.2000000000000011"/>
@@ -1138,7 +1138,7 @@
         <dia:point val="80.9938,19.9688"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="80.9438,19.9187;89.2438,24.4187"/>
+        <dia:rectangle val="80.9438,19.9188;89.2438,24.4188"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="80.9938,19.9688"/>
@@ -1429,7 +1429,7 @@
         <dia:point val="81.0563,14.0938"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="81.0063,14.0437;95.0538,17.7438"/>
+        <dia:rectangle val="81.0063,14.0438;95.0538,17.7438"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="81.0563,14.0938"/>
@@ -1563,7 +1563,7 @@
         <dia:point val="80.8688,27.0938"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="80.8188,27.0437;93.7387,33.1437"/>
+        <dia:rectangle val="80.8188,27.0438;93.7388,33.1438"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="80.8688,27.0938"/>
@@ -1775,7 +1775,7 @@
         <dia:point val="5.0625,-10.875"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="25.540000000000003"/>
+        <dia:real val="25.539999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="9.7000000000000011"/>
@@ -1792,7 +1792,7 @@
       <dia:attribute name="text">
         <dia:composite type="text">
           <dia:attribute name="string">
-            <dia:string>#This model tests the stereotype related scenarios.
+            <dia:string>#Test model for all of the stereotype related scenarios.
 
 These are the main cases:
 

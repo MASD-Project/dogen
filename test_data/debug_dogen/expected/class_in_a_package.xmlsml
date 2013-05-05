@@ -5,7 +5,7 @@
 	<name>class_in_a_package</name>
 	<packages class_id="1" tracking_level="0" version="0">
 		<count>1</count>
-		<bucket_count>23</bucket_count>
+		<bucket_count>11</bucket_count>
 		<item_version>0</item_version>
 		<item class_id="2" tracking_level="0" version="0">
 			<first class_id="3" tracking_level="0" version="0">
@@ -45,7 +45,7 @@
 	</packages>
 	<pods class_id="7" tracking_level="0" version="0">
 		<count>1</count>
-		<bucket_count>23</bucket_count>
+		<bucket_count>11</bucket_count>
 		<item_version>0</item_version>
 		<item class_id="8" tracking_level="0" version="0">
 			<first>
@@ -104,6 +104,7 @@
 						</type_name>
 						<default_value></default_value>
 						<documentation></documentation>
+						<is_key_attribute>0</is_key_attribute>
 						<implementation_specific_parameters>
 							<count>0</count>
 							<item_version>0</item_version>
@@ -133,6 +134,7 @@
 						</type_name>
 						<default_value></default_value>
 						<documentation></documentation>
+						<is_key_attribute>0</is_key_attribute>
 						<implementation_specific_parameters>
 							<count>0</count>
 							<item_version>0</item_version>
@@ -171,17 +173,17 @@
 	</pods>
 	<primitives class_id="16" tracking_level="0" version="0">
 		<count>0</count>
-		<bucket_count>23</bucket_count>
+		<bucket_count>11</bucket_count>
 		<item_version>0</item_version>
 	</primitives>
 	<enumerations class_id="17" tracking_level="0" version="0">
 		<count>0</count>
-		<bucket_count>23</bucket_count>
+		<bucket_count>11</bucket_count>
 		<item_version>0</item_version>
 	</enumerations>
 	<exceptions class_id="18" tracking_level="0" version="0">
 		<count>0</count>
-		<bucket_count>23</bucket_count>
+		<bucket_count>11</bucket_count>
 		<item_version>0</item_version>
 	</exceptions>
 	<external_package_path>
@@ -191,12 +193,12 @@
 	<is_system>0</is_system>
 	<dependencies class_id="19" tracking_level="0" version="0">
 		<count>0</count>
-		<bucket_count>23</bucket_count>
+		<bucket_count>11</bucket_count>
 		<item_version>0</item_version>
 	</dependencies>
 	<leaves class_id="20" tracking_level="0" version="0">
 		<count>0</count>
-		<bucket_count>23</bucket_count>
+		<bucket_count>11</bucket_count>
 		<item_version>0</item_version>
 	</leaves>
 	<documentation></documentation>

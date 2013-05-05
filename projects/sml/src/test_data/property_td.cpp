@@ -35,6 +35,10 @@ create_dogen_sml_nested_qname(const unsigned int position) {
     return dogen::sml::nested_qname_generator::create(position);
 }
 
+bool create_bool(const unsigned int position) {
+    return (position % 2) == 0;
+}
+
 std::pair<std::string, std::string>
 create_std_pair_std_string_std_string(unsigned int position) {
     std::pair<std::string, std::string> r(
@@ -64,7 +68,8 @@ populate(const unsigned int position, result_type& v) {
     v.type_name(create_dogen_sml_nested_qname(position + 1));
     v.default_value(create_std_string(position + 2));
     v.documentation(create_std_string(position + 3));
-    v.implementation_specific_parameters(create_std_vector_std_pair_std_string_std_string_(position + 4));
+    v.is_key_attribute(create_bool(position + 4));
+    v.implementation_specific_parameters(create_std_vector_std_pair_std_string_std_string_(position + 5));
 }
 
 property_generator::result_type

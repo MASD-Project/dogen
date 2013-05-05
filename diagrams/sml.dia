@@ -1815,7 +1815,7 @@ or other comparable model types.#</dia:string>
         <dia:point val="27.2353,63.2198"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="27.1853,63.1698;60.1253,69.2698"/>
+        <dia:rectangle val="27.1853,63.1698;60.1253,70.0698"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="27.2353,63.2198"/>
@@ -1824,7 +1824,7 @@ or other comparable model types.#</dia:string>
         <dia:real val="32.840000000000003"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="6"/>
+        <dia:real val="6.8000000000000007"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#property#</dia:string>
@@ -1997,6 +1997,29 @@ Must only contain characters that can be used for identifiers in the target back
           </dia:attribute>
           <dia:attribute name="comment">
             <dia:string>#Doxygen documentation for the type.#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#is_key_attribute#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>#bool#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>#If true, the attribute is part of the key.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -2911,7 +2934,7 @@ Must only contain characters that can be used for identifiers in the target back
         <dia:point val="-47.4429,76.0686"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-47.4929,71.2969;-11.8188,76.8686"/>
+        <dia:rectangle val="-47.4929,71.2469;-11.8188,76.8686"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -4282,7 +4305,7 @@ which make code generation different.#</dia:string>
         <dia:point val="-12.5688,68.8479"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-22.8129,65.2969;-11.8188,69.6479"/>
+        <dia:rectangle val="-22.8129,65.2469;-11.8188,69.6479"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -4350,7 +4373,7 @@ which make code generation different.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="43.6553,69.2198"/>
+        <dia:point val="43.6553,70.0198"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
         <dia:rectangle val="42.9053,67.4782;76.2304,74.2271"/>
@@ -4359,7 +4382,7 @@ which make code generation different.#</dia:string>
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="43.6553,69.2198"/>
+        <dia:point val="43.6553,70.0198"/>
         <dia:point val="43.6553,74.1771"/>
         <dia:point val="76.0304,74.1771"/>
         <dia:point val="76.0304,67.5282"/>
@@ -4568,7 +4591,7 @@ which make code generation different.#</dia:string>
         <dia:point val="-27.952,88.1198"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-28.002,88.0698;2.62803,94.9698"/>
+        <dia:rectangle val="-28.002,88.0698;2.628,94.9698"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-27.952,88.1198"/>
@@ -6275,7 +6298,7 @@ which make code generation different.#</dia:string>
         <dia:point val="-25.8931,78.1875"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-25.9431,78.1375;-5.30807,80.7375"/>
+        <dia:rectangle val="-25.9431,78.1375;-5.3081,80.7375"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -6327,7 +6350,7 @@ and all of the supported types within those models.#</dia:string>
         <dia:point val="-15.6256,78.1875"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-15.6839,74.1455;3.97383,78.2458"/>
+        <dia:rectangle val="-15.6839,74.1455;3.97382,78.2458"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -6485,7 +6508,7 @@ all types in the combined model.#</dia:string>
         <dia:point val="62.2473,84.0625"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="61.4973,80.2493;72.8209,84.9285"/>
+        <dia:rectangle val="61.4973,80.1993;72.8209,84.9285"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -7857,7 +7880,7 @@ but with a focus only on data structures and domain driven constructs.
         <dia:point val="-57.3821,64.074"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-64.0554,55.7074;-56.6321,65.674"/>
+        <dia:rectangle val="-64.0554,55.7074;-56.6321,64.874"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>

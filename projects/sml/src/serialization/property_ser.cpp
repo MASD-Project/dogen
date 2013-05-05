@@ -49,6 +49,7 @@ void save(Archive& ar,
     ar << make_nvp("type_name", v.type_name_);
     ar << make_nvp("default_value", v.default_value_);
     ar << make_nvp("documentation", v.documentation_);
+    ar << make_nvp("is_key_attribute", v.is_key_attribute_);
     ar << make_nvp("implementation_specific_parameters", v.implementation_specific_parameters_);
 }
 
@@ -60,6 +61,7 @@ void load(Archive& ar,
     ar >> make_nvp("type_name", v.type_name_);
     ar >> make_nvp("default_value", v.default_value_);
     ar >> make_nvp("documentation", v.documentation_);
+    ar >> make_nvp("is_key_attribute", v.is_key_attribute_);
     ar >> make_nvp("implementation_specific_parameters", v.implementation_specific_parameters_);
 }
 
