@@ -11,6 +11,12 @@ This file contains all stories that haven't been assigned to a sprint.
 
 Stories that we intend to look at, at some point.
 
+*** Rename nested qname to composite qname
+
+This is not required if we decide to [[*Add%20composite%20stereotype][implement]] the composite
+pattern. We should just follow the composite pattern in the
+naming. The same applies to node.
+
 *** Visitor as an injected system type
 
 The current implementation of visitor relies on creating a view model
