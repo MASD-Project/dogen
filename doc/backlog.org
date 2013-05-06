@@ -723,11 +723,9 @@ perhaps we need to have this switched off by default.
 
 *** Stereotypes to disable facets
 
-At present we generate empty files for all facets in a service. This
-quick hack saves some time because otherwise one would have to
-manually generate these by hand (since the includers will include all
-aspects regardless). However, the correct fix is to have stereotypes
-to disable facets:
+At present we do not generate files for all facets in a service other
+than types. However, the correct fix is to have stereotypes to disable/enable
+facets:
 
 - =nonhashable=, =hashable=: hashing support
 - =nontestable=, =testable=: test data support
@@ -741,6 +739,9 @@ These stereotypes can then be combined:
 
 Results in a service for which there will only be a header file and
 serialization support.
+
+By default services would have all aspects other than domain disabled,
+entities and values would have all aspects enabled.
 
 *** Add support for references to types
 
