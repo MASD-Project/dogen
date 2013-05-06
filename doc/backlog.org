@@ -20,6 +20,10 @@ Dependencies is a map of reference; why not call it references?
 All stories related to IoC work are tracked here.
 
 - add workflow_interface to SML.
+- we should be doing a bit more IoC, particularly with inclusion
+  manager, location manager etc. In order to do so we could define
+  interfaces for these classes and provide mocks for the tests. This
+  would make the tests considerably smaller.
 
 *** Rename nested qname to composite qname
 
@@ -74,6 +78,7 @@ models:
 - is versioned pod must have a property called version.
 - string table cannot have duplicate entries.
 - [[*Issue%20error%20when%20a%20property%20is%20a%20value%20of%20an%20abstract%20class][Issue error when a property is a value of an abstract class]]
+- [[*Test%20relationships%20between%20pods%20and%20other%20meta%20types][Test relationships between pods and other meta types]]
 
 For merged models:
 
@@ -1124,13 +1129,6 @@ vice-versa. Add tests for this.
 
 At present our enumerations always use unsigned int as the underlying
 type. It should be possible to override that from dia.
-
-*** Create interfaces to help with mocking
-
-We should be doing a bit more IoC, particularly with inclusion
-manager, location manager etc. In order to do so we could define
-interfaces for these classes and provide mocks for the tests. This
-would make the tests considerably smaller.
 
 *** Add test for disabling XML
 
