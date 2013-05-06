@@ -382,6 +382,9 @@ frame would be a model ID, a type ID, a "format" (i.e. xml, text, etc)
 and potentially a size, depending on the medium. The remainder of the
 frame would be the payload - i.e. the serialised object.
 
+In order for this to work we probably need the concept of a "model
+group"; the type frame would be done for a group of models.
+
 *** Model and type enums
 
 It may be useful to create enumerations for models, types and
