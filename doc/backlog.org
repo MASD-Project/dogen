@@ -1319,6 +1319,8 @@ At present we treat private properties as if they were public; we
 should ignore them. We need to go through all the models and change
 the private ones to public before we do this.
 
+We should also issue a warning.
+
 *** Sanity check packages automatically
 
 This work is also covered by tasks in the PFH backlog so update
