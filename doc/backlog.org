@@ -585,6 +585,15 @@ which returns it, e.g. =my_enumeration_to_array.hpp=:
 
 : std::array<my_enumeration, 5> my_enumeration_to_array();
 
+We could make this slightly more generic by adding the notion of
+enumeration groups. Out of the box we have:
+
+- all: includes invalid;
+- valid: excludes invalid
+
+Users could then add implementation specific properties to create
+other groups if needed.
+
 *** Add support for user supplied test data sets                      :story:
 
 The correct solution for test data and test data sets is as follows:
