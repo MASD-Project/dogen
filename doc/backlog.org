@@ -250,6 +250,9 @@ aggregation, no association):
 - class_without_package
 - stand_alone_class
 
+We should also check the combined model has all the scenarios
+described in [[*Cross%20package%20referencing%20tests][Cross package referencing tests]].
+
 Merge the following models into stereotypes:
 
 - enumeration
