@@ -701,6 +701,13 @@ could be done in a similar fashion to the licence formatter. It should
 either be after the licence or at the very top and take on the
 responsibilities of emacs/vi headers.
 
+We should also add a model level version which will be stamped on the
+marker.
+
+In addition, we should also stamp the dogen version too. However, this
+will make all our tests break every time there is a new commit so
+perhaps we need to have this switched off by default.
+
 *** Stereotypes to disable facets
 
 At present we generate empty files for all facets in a service. This
