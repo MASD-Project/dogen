@@ -73,6 +73,7 @@ models:
 - property must have non-empty name.
 - is versioned pod must have a property called version.
 - string table cannot have duplicate entries.
+- [[*Issue%20error%20when%20a%20property%20is%20a%20value%20of%20an%20abstract%20class][Issue error when a property is a value of an abstract class]]
 
 For merged models:
 
