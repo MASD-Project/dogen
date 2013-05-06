@@ -1,0 +1,76 @@
+#+title: Release Notes for Sprint 26
+#+options: date:nil toc:nil author:nil num:nil
+#+todo: ANALYSIS IMPLEMENTATION TESTING | COMPLETED CANCELLED
+#+tags: story(s) epic(e) task(t) note(n) spike(p)
+
+* Release Notes
+
+This file contains all stories that were closed during sprint 26.
+
+** Development Stories Implemented
+
+#+begin: clocktable :maxlevel 3 :scope subtree
+Clock summary at [2013-05-06 Mon 19:13]
+
+| Headline                                                      | Time   |      |      |
+|---------------------------------------------------------------+--------+------+------|
+| *Total time*                                                  | *0:36* |      |      |
+|---------------------------------------------------------------+--------+------+------|
+| Development Stories Implemented                               |        | 0:36 |      |
+| Use explicit casting for versioned to unversioned conversions |        |      | 0:36 |
+#+end:
+
+*** IMPLEMENTATION Re-implement key support                           :story:
+
+- create a new stereotype of keyed. when set, it results in the
+  creation of a new class containing all properties marked as
+  identity. if none are found, throw. only entities can be keyed.
+- create new stand alone function =extract_key=. given an instance of
+  a class, it returns the corresponding key. it should be defined in
+  the same file as the key.
+- if versioned, also create unversioned key class. add typedefs in
+  class for versioned key.
+
+Rules:
+
+- entities must have at least one KEY_ATTRIBUTE
+- keyed pods must be entities.
+- unversioned keyed entities will have unversioned keys.
+- versioned keyed entities will have versioned keys.
+- values can be versioned.
+
+**** IMPLEMENTATION Propagate key attribute to SML
+**** Ensure entities have at least one key attribute defined
+**** Unhook key generation from entity stereotype
+
+Instead of generating versioned/unversioned keys, it should just force
+the user to define at least one attribute with  property of
+identity.
+
+**** Hook key generation to keyed stereotype
+**** Only define versioned key if versioned stereotype is present
+
+*** Use explicit casting for versioned to unversioned conversions     :story:
+    CLOCK: [2012-11-22 Thu 08:44]--[2012-11-22 Thu 09:20] =>  0:36
+
+At present we have to_versioned; in reality this would be dealt much
+better using explicit casts:
+
+: explicit operator std::string() { return "explicit"; }
+
+Actually the real solution for this is to make the versioned key
+contain the unversioned key; then dogen will generate all the
+required code.
+
+At this point in time we do not have enough use cases to make the
+correct design decisions in this area. We need to wait until we start
+using keys in anger in Creris and then design the API around the use
+cases.
+
+*** Move all of the versioning, entity, key tests to stereotypes      :story:
+
+- remove versioning from all other models such as std::model, etc.
+- add tests for =std::unordered=, maps etc.
+
+
+** Deprecated Development Stories
