@@ -1078,6 +1078,9 @@ std::vector<file_view_model> sml_to_cpp_view_model::transform_visitors() {
         vm.aspect_type(at);
         vm.visitor_vm(v.second);
 
+        // FIXME: hack to solve ordering issues
+        vm.visitor_vm()->types().sort();
+
         const auto rp(locator_.relative_logical_path(rq));
         vm.header_guard(to_header_guard_name(rp));
 

@@ -272,11 +272,10 @@ transform_pod(const object_profile& op, const processed_object& po) {
         while (parent) {
             auto k(context_.leaves().find(*parent));
             if (k == context_.leaves().end()) {
-                std::list<sml::qname> l { pod.name() };
+                const std::list<sml::qname> l { pod.name() };
                 context_.leaves().insert(std::make_pair(*parent, l));
-            } else {
+            } else
                 k->second.push_back(pod.name());
-            }
 
             auto j(context_.model().pods().find(*parent));
             if (j == context_.model().pods().end()) {

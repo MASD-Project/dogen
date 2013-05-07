@@ -20,12 +20,17 @@ Clock summary at [2013-05-06 Mon 19:13]
 | Use explicit casting for versioned to unversioned conversions |        |      | 0:36 |
 #+end:
 
-*** Sort qnames returned by extractor                                 :story:
+*** COMPLETED Fix build break on visitor tests                        :story:
+    CLOSED: [2013-05-07 Tue 08:36]
+    CLOCK: [2013-05-07 Tue 08:32]--[2013-05-07 Tue 08:36] =>  0:04
+    CLOCK: [2013-05-07 Tue 07:47]--[2013-05-07 Tue 08:15] =>  0:28
 
-We have occasional test failures due to reordering of the qnames
-container returned by extractor. We need to ensure the container is
-sorted before we return it. Create a local less than for qname just
-for this as a quick hack until we have proper comparison support.
+We have occasional test failures due to reordering of the types list
+in the visitor view model. Not quite sure why the ordering keeps on
+changing as the underlying processes all seem ordered. At any rate, we
+need a quick fix for this to get the builds green consistent and stop
+the traffic lighting. Do a quick hack and sort the types container
+when generating the visitor view model.
 
 *** IMPLEMENTATION Re-implement key support                           :story:
 
