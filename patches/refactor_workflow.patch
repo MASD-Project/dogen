@@ -1,0 +1,250 @@
+diff --git a/doc/release_notes_sprint_26.org b/doc/release_notes_sprint_26.org
+index 7649040..ad93ee9 100644
+--- a/doc/release_notes_sprint_26.org
++++ b/doc/release_notes_sprint_26.org
+@@ -32,6 +32,25 @@ need a quick fix for this to get the builds green consistent and stop
+ the traffic lighting. Do a quick hack and sort the types container
+ when generating the visitor view model.
+ 
++*** IMPLEMENTATION Remove workflow aspects from transformer           :story:
++    CLOCK: [2013-05-07 Tue 18:30]
++    CLOCK: [2013-05-07 Tue 18:25]--[2013-05-07 Tue 18:30] =>  0:05
++
++When we created transformer, we added profiling and validation into
++it, simply because it was easier. However, the right thing to do is to
++move that code into workflow and leave it only with its core
++responsibilities (i.e. to transform processed objects into SML
++objects). To do so we need to refactor the visitor to take a function
++instead of a transformer interface - which is now no longer
++required.
++
++*** Add tests for profiler                                            :story:
++    CLOCK: [2013-05-07 Tue 18:07]--[2013-05-07 Tue 18:24] =>  0:17
++
++We don't seem to have any specs testing the conversion of a dia object
++to an object profile. Although its fairly trivial, we should still
++have minimum tests.
++
+ *** IMPLEMENTATION Re-implement key support                           :story:
+ 
+ - create a new stereotype of keyed. when set, it results in the
+@@ -52,6 +71,9 @@ Rules:
+ - values can be versioned.
+ 
+ **** IMPLEMENTATION Propagate key attribute to SML
++     CLOCK: [2013-05-07 Tue 18:02]--[2013-05-07 Tue 18:07] =>  0:05
++     CLOCK: [2013-05-07 Tue 17:46]--[2013-05-07 Tue 17:56] =>  0:10
++
+ **** Ensure entities have at least one key attribute defined
+ **** Unhook key generation from entity stereotype
+ 
+diff --git a/projects/dia_to_sml/include/dogen/dia_to_sml/types/transformer.hpp b/projects/dia_to_sml/include/dogen/dia_to_sml/types/transformer.hpp
+index 56117a2..4aba44d 100644
+--- a/projects/dia_to_sml/include/dogen/dia_to_sml/types/transformer.hpp
++++ b/projects/dia_to_sml/include/dogen/dia_to_sml/types/transformer.hpp
+@@ -41,7 +41,6 @@
+ #include "dogen/dia_to_sml/types/comments_parser.hpp"
+ #include "dogen/dia_to_sml/types/object_types.hpp"
+ #include "dogen/dia_to_sml/types/context.hpp"
+-#include "dogen/dia_to_sml/types/transformer_interface.hpp"
+ #include "dogen/dia_to_sml/types/object_profile.hpp"
+ 
+ namespace dogen {
+@@ -50,14 +49,14 @@ namespace dia_to_sml {
+ /**
+  * @brief Transforms dia objects
+  */
+-class transformer : public transformer_interface {
++class transformer {
+ public:
+     transformer(const transformer&) = delete;
+     transformer(transformer&&) = default;
++    ~transformer() noexcept = default;
+ 
+ public:
+     explicit transformer(context& c);
+-    virtual ~transformer() noexcept;
+ 
+ private:
+     /**
+@@ -133,7 +132,10 @@ private:
+     void transform_exception(const processed_object& o);
+ 
+ public:
+-    virtual void transform(const processed_object& o) override;
++    /**
++     * @brief Transform a dia object.
++     */
++    void transform(const processed_object& o, const object_profile& op);
+ 
+ private:
+     context& context_;
+diff --git a/projects/dia_to_sml/include/dogen/dia_to_sml/types/visitor.hpp b/projects/dia_to_sml/include/dogen/dia_to_sml/types/visitor.hpp
+index 77abd74..f77686d 100644
+--- a/projects/dia_to_sml/include/dogen/dia_to_sml/types/visitor.hpp
++++ b/projects/dia_to_sml/include/dogen/dia_to_sml/types/visitor.hpp
+@@ -26,10 +26,10 @@
+ #endif
+ 
+ #include <memory>
++#include <functional>
+ #include <boost/graph/depth_first_search.hpp>
+-#include "dogen/dia/types/object.hpp"
+ #include "dogen/dia_to_sml/types/graph_builder.hpp"
+-#include "dogen/dia_to_sml/types/transformer_interface.hpp"
++#include "dogen/dia_to_sml/types/processed_object.hpp"
+ 
+ namespace dogen {
+ namespace dia_to_sml {
+@@ -42,18 +42,21 @@ public:
+     visitor(visitor&&) = default;
+ 
+ public:
+-    explicit visitor(transformer_interface& transformer);
++    typedef std::function<void(const processed_object&)> function_type;
++
++public:
++    explicit visitor(const function_type& function);
+ 
+ public:
+     template<typename Vertex, typename Graph>
+     void finish_vertex(const Vertex& u, const Graph& g) {
+         const auto o(g[u]);
+         if (o.id() != graph_builder::root_id())
+-            transformer_.transform(o);
++            function(o);
+     }
+ 
+ private:
+-    transformer_interface& transformer_;
++    const function_type& function_;
+ };
+ 
+ } }
+diff --git a/projects/dia_to_sml/include/dogen/dia_to_sml/types/workflow.hpp b/projects/dia_to_sml/include/dogen/dia_to_sml/types/workflow.hpp
+index cfb810d..783b650 100644
+--- a/projects/dia_to_sml/include/dogen/dia_to_sml/types/workflow.hpp
++++ b/projects/dia_to_sml/include/dogen/dia_to_sml/types/workflow.hpp
+@@ -41,6 +41,7 @@ public:
+     virtual ~workflow() noexcept;
+ 
+ private:
++    void transformation_sub_workflow(const processed_object& o)
+     graph_type build_graph(const dia::diagram& diagram, context& c) const;
+     void initialise_context(const std::string& model_name,
+         const std::string& external_package_path,
+diff --git a/projects/dia_to_sml/spec/profiler_spec.cpp b/projects/dia_to_sml/spec/profiler_spec.cpp
+new file mode 100644
+index 0000000..62690d6
+--- /dev/null
++++ b/projects/dia_to_sml/spec/profiler_spec.cpp
+@@ -0,0 +1,56 @@
++/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
++ *
++ * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
++ *
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation; either version 3 of the License, or
++ * (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program; if not, write to the Free Software
++ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
++ * MA 02110-1301, USA.
++ *
++ */
++#include <sstream>
++#include <boost/test/unit_test.hpp>
++#include <boost/algorithm/string/predicate.hpp>
++#include "dogen/utility/test/asserter.hpp"
++#include "dogen/utility/test/logging.hpp"
++#include "dogen/dia_to_sml/types/processed_object.hpp"
++#include "dogen/dia_to_sml/types/profiler.hpp"
++#include "dogen/dia_to_sml/types/profiling_error.hpp"
++#include "dogen/dia_to_sml/io/context_io.hpp"
++#include "dogen/dia_to_sml/io/processed_object_io.hpp"
++#include "dogen/dia/test/mock_object_factory.hpp"
++#include "dogen/utility/test/exception_checkers.hpp"
++
++using namespace dogen::dia_to_sml;
++using dogen::utility::test::asserter;
++
++namespace  {
++
++const std::string test_module("dia_to_sml");
++const std::string test_suite("processor_spec");
++
++}
++
++using dogen::utility::test::contains_checker;
++using dogen::dia::test::mock_object_factory;
++using dogen::dia_to_sml::object_types;
++
++BOOST_AUTO_TEST_SUITE(profiler)
++
++BOOST_AUTO_TEST_CASE(uml_class_with_no_stereotype_transforms_into_expected_processed_object) {
++    SETUP_TEST_LOG_SOURCE("uml_class_with_no_stereotype_transforms_into_expected_pod");
++    dogen::dia_to_sml::profiler p;
++    const auto o(p.profile(mock_object_factory::build_class(0)));
++}
++
++BOOST_AUTO_TEST_SUITE_END()
+diff --git a/projects/dia_to_sml/src/types/transformer.cpp b/projects/dia_to_sml/src/types/transformer.cpp
+index 4c4f476..3dff756 100644
+--- a/projects/dia_to_sml/src/types/transformer.cpp
++++ b/projects/dia_to_sml/src/types/transformer.cpp
+@@ -68,8 +68,6 @@ transformer::transformer(context& c)
+               c.model().external_package_path(), c.model().name())),
+       comments_parser_(new comments_parser()) { }
+ 
+-transformer::~transformer() noexcept { }
+-
+ void transformer::
+ compute_model_dependencies(const sml::nested_qname& nqn) {
+     // primitives model is empty
+@@ -200,6 +198,7 @@ transform_pod(const object_profile& op, const processed_object& po) {
+     pod.is_fluent(op.is_fluent());
+     pod.is_versioned(op.is_versioned());
+     pod.is_visitable(op.is_visitable());
++    pod.is_keyed(op.is_keyed());
+ 
+     using sml::generation_types;
+     pod.generation_type(context_.is_target() ?
+@@ -433,15 +432,11 @@ void transformer::transform_exception(const processed_object& o) {
+     context_.model().exceptions().insert(std::make_pair(e.name(), e));
+ }
+ 
+-void transformer::transform(const processed_object& o) {
++void transformer::
++transform(const processed_object& o, const object_profile& op) {
+     BOOST_LOG_SEV(lg, debug) << "Starting to transform: " << o.id();
+     BOOST_LOG_SEV(lg, debug) << "Object contents: " << o;
+ 
+-    profiler p;
+-    const auto op(p.profile(o));
+-
+-    validator v;
+-    v.validate(op);
+     ensure_type_is_processable(op, o);
+ 
+     if (op.is_uml_large_package())
+diff --git a/projects/dia_to_sml/src/types/visitor.cpp b/projects/dia_to_sml/src/types/visitor.cpp
+index 1b2fdf7..2d0bbb5 100644
+--- a/projects/dia_to_sml/src/types/visitor.cpp
++++ b/projects/dia_to_sml/src/types/visitor.cpp
+@@ -23,7 +23,7 @@
+ namespace dogen {
+ namespace dia_to_sml {
+ 
+-visitor::visitor(transformer_interface& transformer)
+-  : transformer_(transformer) { }
++visitor::visitor(const function_type& function)
++    : function_(function) { }
+ 
+ } }
