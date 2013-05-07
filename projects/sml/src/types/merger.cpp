@@ -315,7 +315,6 @@ void merger::add_target(model model) {
 
     add(model);
     BOOST_LOG_SEV(lg, debug) << "added target model: " << model.name();
-    BOOST_LOG_SEV(lg, debug) << "contents: " << model;
 }
 
 void merger::add(model model) {
