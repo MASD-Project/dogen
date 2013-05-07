@@ -41,10 +41,22 @@ static logger lg(logger_factory("dia_to_sml.workflow"));
 namespace dogen {
 namespace dia_to_sml {
 
+workflow::workflow() { }
+
 workflow::~workflow() noexcept { }
 
-graph_type workflow::
-build_graph(const dia::diagram& diagram, context& c) const {
+void workflow::initialise_context(const std::string& model_name,
+    const std::string& external_package_path, bool is_target) {
+
+    context_ = context();
+
+    const auto epp(identifier_parser::parse_scoped_name(external_package_path));
+    context_.model().external_package_path(epp);
+    context_.model().name(model_name);
+    context_.is_target(is_target);
+}
+
+graph_type workflow::build_graph(const dia::diagram& diagram) {
     graph_builder b;
     processor p;
     for (const auto& l : diagram.layers()) {
@@ -53,55 +65,51 @@ build_graph(const dia::diagram& diagram, context& c) const {
             b.add(po);
         }
     }
+
     b.build();
-    c.child_to_parent(b.child_to_parent());
-    c.parent_ids(b.parent_ids());
-    c.top_level_package_names(b.top_level_package_names());
+    context_.child_to_parent(b.child_to_parent());
+    context_.parent_ids(b.parent_ids());
+    context_.top_level_package_names(b.top_level_package_names());
     return b.graph();
 }
 
-void workflow::initialise_context(const std::string& model_name,
-    const std::string& external_package_path,
-    bool is_target, context& c) const {
-
-    const auto epp(identifier_parser::parse_scoped_name(external_package_path));
-    c.model().external_package_path(epp);
-    c.model().name(model_name);
-    c.is_target(is_target);
+void workflow::transformation_sub_workflow(const processed_object& o) {
+    const auto op(profiler_.profile(o));
+    validator_.validate(op);
+    return transformer_->transform(o, op);
 }
 
-void workflow::graph_to_context(const graph_type& g, context& c) const {
-    transformer t(c);
-    visitor v(t);
+void workflow::graph_to_context(const graph_type& g) {
+    transformer_ = std::unique_ptr<transformer>(new transformer(context_));
+
+    using namespace std::placeholders;
+    const auto f(std::bind(&workflow::transformation_sub_workflow, this, _1));
+    visitor v(f);
     boost::depth_first_search(g, boost::visitor(v));
 }
 
-void workflow::post_process_model(context& c) const {
-    c.model().is_system(false);
-    for (auto& pair : c.model().pods()) {
-        auto j(c.leaves().find(pair.first));
-        if (j != c.leaves().end()) {
+void workflow::post_process_model() {
+    context_.model().is_system(false);
+    for (auto& pair : context_.model().pods()) {
+        auto j(context_.leaves().find(pair.first));
+        if (j != context_.leaves().end()) {
             pair.second.leaves(j->second);
             for (const auto k : j->second)
-                c.model().leaves().insert(k);
+                context_.model().leaves().insert(k);
         }
     }
 }
 
 sml::model workflow::execute(const dia::diagram& diagram,
-    const std::string& model_name,
-    const std::string& external_package_path,
+    const std::string& model_name, const std::string& external_package_path,
     bool is_target) {
 
-    context c;
-    initialise_context(model_name, external_package_path, is_target, c);
+    initialise_context(model_name, external_package_path, is_target);
+    graph_to_context(build_graph(diagram));
+    post_process_model();
 
-    auto g(build_graph(diagram, c));
-    graph_to_context(g, c);
-
-    post_process_model(c);
-    BOOST_LOG_SEV(lg, debug) << "Final workflow model: " << c.model();
-    return c.model();
+    BOOST_LOG_SEV(lg, debug) << "Final workflow model: " << context_.model();
+    return context_.model();
 }
 
 } }

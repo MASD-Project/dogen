@@ -41,7 +41,6 @@
 #include "dogen/dia_to_sml/types/comments_parser.hpp"
 #include "dogen/dia_to_sml/types/object_types.hpp"
 #include "dogen/dia_to_sml/types/context.hpp"
-#include "dogen/dia_to_sml/types/transformer_interface.hpp"
 #include "dogen/dia_to_sml/types/object_profile.hpp"
 
 namespace dogen {
@@ -50,14 +49,14 @@ namespace dia_to_sml {
 /**
  * @brief Transforms dia objects
  */
-class transformer : public transformer_interface {
+class transformer {
 public:
     transformer(const transformer&) = delete;
     transformer(transformer&&) = default;
+    ~transformer() noexcept = default;
 
 public:
     explicit transformer(context& c);
-    virtual ~transformer() noexcept;
 
 private:
     /**
@@ -133,7 +132,10 @@ private:
     void transform_exception(const processed_object& o);
 
 public:
-    virtual void transform(const processed_object& o) override;
+    /**
+     * @brief Transform a dia object.
+     */
+    void transform(const processed_object& o, const object_profile& op);
 
 private:
     context& context_;

@@ -26,8 +26,12 @@
 #endif
 
 #include <string>
+#include <memory>
+#include "dogen/dia_to_sml/types/context.hpp"
+#include "dogen/dia_to_sml/types/profiler.hpp"
+#include "dogen/dia_to_sml/types/validator.hpp"
+#include "dogen/dia_to_sml/types/transformer.hpp"
 #include "dogen/dia_to_sml/types/graph_builder.hpp"
-#include "dogen/dia_to_sml/types/context_fwd.hpp"
 #include "dogen/dia_to_sml/types/workflow_interface.hpp"
 
 namespace dogen {
@@ -35,24 +39,53 @@ namespace dia_to_sml {
 
 class workflow : public workflow_interface {
 public:
-    workflow() = default;
     workflow(const workflow&) = delete;
     workflow(workflow&&) = default;
     virtual ~workflow() noexcept;
 
+public:
+    workflow();
+
 private:
-    graph_type build_graph(const dia::diagram& diagram, context& c) const;
+    /**
+     * @brief Reset context and set it up with arguments supplied.
+     */
     void initialise_context(const std::string& model_name,
-        const std::string& external_package_path,
-        bool is_target, context& c) const;
-    void graph_to_context(const graph_type& g, context& c) const;
-    void post_process_model(context& c) const;
+        const std::string& external_package_path, bool is_target);
+
+    /**
+     * @brief Setup the DAG of processed objects.
+     */
+    graph_type build_graph(const dia::diagram& diagram);
+
+    /**
+     * @brief Perform the transformation sub-workflow on the supplied
+     * processed object.
+     */
+    void transformation_sub_workflow(const processed_object& o);
+
+    /**
+     * @brief Transforms the entire graph of processed objects into a
+     * SML model.
+     */
+    void graph_to_context(const graph_type& g);
+
+    /**
+     * @brief Performs any required post-processing to the SML model.
+     */
+    void post_process_model();
 
 public:
     virtual sml::model execute(const dia::diagram& diagram,
         const std::string& model_name,
         const std::string& external_package_path,
         bool is_target) override;
+
+private:
+    context context_;
+    profiler profiler_;
+    validator validator_;
+    std::unique_ptr<transformer> transformer_;
 };
 
 } }

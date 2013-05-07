@@ -10,13 +10,17 @@ This file contains all stories that were closed during sprint 26.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-05-06 Mon 19:13]
+Clock summary at [2013-05-08 Wed 00:19]
 
 | Headline                                                      | Time   |      |      |
 |---------------------------------------------------------------+--------+------+------|
-| *Total time*                                                  | *0:36* |      |      |
+| *Total time*                                                  | *3:37* |      |      |
 |---------------------------------------------------------------+--------+------+------|
-| Development Stories Implemented                               |        | 0:36 |      |
+| Development Stories Implemented                               |        | 3:37 |      |
+| COMPLETED Fix build break on visitor tests                    |        |      | 0:32 |
+| IMPLEMENTATION Remove workflow aspects from transformer       |        |      | 1:57 |
+| Add tests for profiler                                        |        |      | 0:17 |
+| IMPLEMENTATION Re-implement key support                       |        |      | 0:15 |
 | Use explicit casting for versioned to unversioned conversions |        |      | 0:36 |
 #+end:
 
@@ -31,6 +35,29 @@ changing as the underlying processes all seem ordered. At any rate, we
 need a quick fix for this to get the builds green consistent and stop
 the traffic lighting. Do a quick hack and sort the types container
 when generating the visitor view model.
+
+*** IMPLEMENTATION Remove workflow aspects from transformer           :story:
+    CLOCK: [2013-05-07 Tue 22:46]--[2013-05-08 Wed 00:18] =>  1:32
+    CLOCK: [2013-05-07 Tue 18:30]--[2013-05-07 Tue 18:50] =>  0:20
+    CLOCK: [2013-05-07 Tue 18:25]--[2013-05-07 Tue 18:30] =>  0:05
+
+When we created transformer, we added profiling and validation into
+it, simply because it was easier. However, the right thing to do is to
+move that code into workflow and leave it only with its core
+responsibilities (i.e. to transform processed objects into SML
+objects). To do so we need to refactor the visitor to take a function
+instead of a transformer interface - which is now no longer
+required.
+
+**** COMPLETED Update code
+     CLOSED: [2013-05-08 Wed 00:19]
+**** Update diagram
+*** Add tests for profiler                                            :story:
+    CLOCK: [2013-05-07 Tue 18:07]--[2013-05-07 Tue 18:24] =>  0:17
+
+We don't seem to have any specs testing the conversion of a dia object
+to an object profile. Although its fairly trivial, we should still
+have minimum tests.
 
 *** IMPLEMENTATION Re-implement key support                           :story:
 
@@ -52,6 +79,9 @@ Rules:
 - values can be versioned.
 
 **** IMPLEMENTATION Propagate key attribute to SML
+     CLOCK: [2013-05-07 Tue 18:02]--[2013-05-07 Tue 18:07] =>  0:05
+     CLOCK: [2013-05-07 Tue 17:46]--[2013-05-07 Tue 17:56] =>  0:10
+
 **** Ensure entities have at least one key attribute defined
 **** Unhook key generation from entity stereotype
 
@@ -83,6 +113,5 @@ cases.
 
 - remove versioning from all other models such as std::model, etc.
 - add tests for =std::unordered=, maps etc.
-
 
 ** Deprecated Development Stories

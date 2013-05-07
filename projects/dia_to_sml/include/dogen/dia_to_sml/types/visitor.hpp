@@ -26,10 +26,10 @@
 #endif
 
 #include <memory>
+#include <functional>
 #include <boost/graph/depth_first_search.hpp>
-#include "dogen/dia/types/object.hpp"
 #include "dogen/dia_to_sml/types/graph_builder.hpp"
-#include "dogen/dia_to_sml/types/transformer_interface.hpp"
+#include "dogen/dia_to_sml/types/processed_object.hpp"
 
 namespace dogen {
 namespace dia_to_sml {
@@ -42,18 +42,21 @@ public:
     visitor(visitor&&) = default;
 
 public:
-    explicit visitor(transformer_interface& transformer);
+    typedef std::function<void(const processed_object&)> function_type;
+
+public:
+    explicit visitor(const function_type& function);
 
 public:
     template<typename Vertex, typename Graph>
     void finish_vertex(const Vertex& u, const Graph& g) {
         const auto o(g[u]);
         if (o.id() != graph_builder::root_id())
-            transformer_.transform(o);
+            function_(std::cref(o));
     }
 
 private:
-    transformer_interface& transformer_;
+    function_type function_;
 };
 
 } }

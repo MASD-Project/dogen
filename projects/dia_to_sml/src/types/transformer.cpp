@@ -29,6 +29,7 @@
 #include "dogen/sml/types/exception.hpp"
 #include "dogen/dia_to_sml/types/processed_object.hpp"
 #include "dogen/dia_to_sml/io/processed_object_io.hpp"
+#include "dogen/dia_to_sml/io/context_io.hpp"
 #include "dogen/dia_to_sml/types/profiler.hpp"
 #include "dogen/dia_to_sml/types/validator.hpp"
 #include "dogen/dia_to_sml/types/transformer.hpp"
@@ -66,9 +67,10 @@ transformer::transformer(context& c)
       identifier_parser_(
           new identifier_parser(c.top_level_package_names(),
               c.model().external_package_path(), c.model().name())),
-      comments_parser_(new comments_parser()) { }
+      comments_parser_(new comments_parser()) {
 
-transformer::~transformer() noexcept { }
+    BOOST_LOG_SEV(lg, debug) << "Initial context: " << context_;
+}
 
 void transformer::
 compute_model_dependencies(const sml::nested_qname& nqn) {
@@ -78,6 +80,9 @@ compute_model_dependencies(const sml::nested_qname& nqn) {
         sml::reference ref;
         ref.model_name(mn);
         context_.model().dependencies().insert(std::make_pair(mn, ref));
+        BOOST_LOG_SEV(lg, debug) << "Adding model dependency: "
+                                 << mn << ". Current model: "
+                                 << context_.model().name();
     }
 
     for (const auto c : nqn.children())
@@ -200,6 +205,7 @@ transform_pod(const object_profile& op, const processed_object& po) {
     pod.is_fluent(op.is_fluent());
     pod.is_versioned(op.is_versioned());
     pod.is_visitable(op.is_visitable());
+    pod.is_keyed(op.is_keyed());
 
     using sml::generation_types;
     pod.generation_type(context_.is_target() ?
@@ -433,15 +439,11 @@ void transformer::transform_exception(const processed_object& o) {
     context_.model().exceptions().insert(std::make_pair(e.name(), e));
 }
 
-void transformer::transform(const processed_object& o) {
+void transformer::
+transform(const processed_object& o, const object_profile& op) {
     BOOST_LOG_SEV(lg, debug) << "Starting to transform: " << o.id();
     BOOST_LOG_SEV(lg, debug) << "Object contents: " << o;
 
-    profiler p;
-    const auto op(p.profile(o));
-
-    validator v;
-    v.validate(op);
     ensure_type_is_processable(op, o);
 
     if (op.is_uml_large_package())
