@@ -11,6 +11,15 @@ This file contains all stories that haven't been assigned to a sprint.
 
 Stories that we intend to look at, at some point.
 
+*** Add comments to test model sanitizer
+
+We should explain why we decided to create a test model sanitizer
+instead of just adding specs to the test models themselves. The
+rationale behind it was that it would break the current diffing and
+rebaselining logic; we would either have to ignore specs on the diff
+or find a way to copy them after code generation. Both options are a
+bit of a hack. So instead we created a model with all the specs.
+
 *** Consider renaming dependencies to references in model
 
 Dependencies is a map of reference; why not call it references?
