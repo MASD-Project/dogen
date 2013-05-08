@@ -45,6 +45,13 @@ public:
     static std::string to_oject_id(const unsigned int n);
 
     /**
+     * @brief Generates a UML message.
+     *
+     * @param n identifier used for object ID generation.
+     */
+    static processed_object build_uml_message(const unsigned int n = 0);
+
+    /**
      * @brief Generates a UML note without a dogen marker.
      *
      * @param n identifier used for object ID generation.
@@ -136,6 +143,15 @@ public:
      */
     static std::array<processed_object, 2>
     build_class_inside_large_package(unsigned int n = 0);
+
+    /**
+     * @brief Generates two UML classes and a realisation between
+     * the two.
+     *
+     * @param n identifier used for object ID generation.
+     */
+    static std::array<processed_object, 3>
+    build_realization(unsigned int n = 0);
 
     /**
      * @brief Generates two UML classes and a generalisation between

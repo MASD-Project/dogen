@@ -76,6 +76,12 @@ std::string mock_processed_object_factory::to_oject_id(const unsigned int n) {
 }
 
 processed_object mock_processed_object_factory::
+build_uml_message(const unsigned int n) {
+    processed_object r(create_object(object_types::uml_message, n));
+    return r;
+}
+
+processed_object mock_processed_object_factory::
 build_uml_note(const unsigned int n) {
     processed_object r(create_object(object_types::uml_note, n));
 
@@ -100,7 +106,6 @@ build_empty_uml_note(const unsigned int n) {
     processed_object r(create_object(object_types::uml_note, n));
     return r;
 }
-
 
 std::array<processed_object, 2> mock_processed_object_factory::
 build_uml_note_inside_large_package(unsigned int n) {
@@ -180,6 +185,17 @@ processed_object mock_processed_object_factory::build_stereotyped_class(
     const std::string& st, const unsigned int n) {
     processed_object r(create_named_object(object_types::uml_class, n));
     r.stereotype(st);
+    return r;
+}
+
+std::array<processed_object, 3>
+mock_processed_object_factory::build_realization(unsigned int n) {
+    std::array<processed_object, 3> r = {{
+            create_object(object_types::uml_realization, n),
+            build_class(++n),
+            build_class(++n),
+        }};
+    r[0].connection(std::make_pair(r[1].id(), r[2].id()));
     return r;
 }
 
