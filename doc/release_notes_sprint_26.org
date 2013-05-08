@@ -36,7 +36,11 @@ need a quick fix for this to get the builds green consistent and stop
 the traffic lighting. Do a quick hack and sort the types container
 when generating the visitor view model.
 
-*** IMPLEMENTATION Remove workflow aspects from transformer           :story:
+*** COMPLETED Remove workflow aspects from transformer                :story:
+    CLOSED: [2013-05-08 Wed 08:34]
+    CLOCK: [2013-05-08 Wed 08:25]--[2013-05-08 Wed 08:34] =>  0:09
+    CLOCK: [2013-05-08 Wed 08:23]--[2013-05-08 Wed 08:24] =>  0:01
+    CLOCK: [2013-05-08 Wed 08:02]--[2013-05-08 Wed 08:18] =>  0:16
     CLOCK: [2013-05-07 Tue 22:46]--[2013-05-08 Wed 00:18] =>  1:32
     CLOCK: [2013-05-07 Tue 18:30]--[2013-05-07 Tue 18:50] =>  0:20
     CLOCK: [2013-05-07 Tue 18:25]--[2013-05-07 Tue 18:30] =>  0:05
@@ -51,7 +55,8 @@ required.
 
 **** COMPLETED Update code
      CLOSED: [2013-05-08 Wed 00:19]
-**** Update diagram
+**** COMPLETED Update diagram
+     CLOSED: [2013-05-08 Wed 08:30]
 *** Add tests for profiler                                            :story:
     CLOCK: [2013-05-07 Tue 18:07]--[2013-05-07 Tue 18:24] =>  0:17
 
