@@ -11,6 +11,38 @@ This file contains all stories that haven't been assigned to a sprint.
 
 Stories that we intend to look at, at some point.
 
+*** Split resolver from merger
+    CLOCK: [2013-05-08 Wed 07:59]--[2013-05-08 Wed 08:01] =>  0:02
+
+At present merger is doing to distinct things: merges multiple models
+into one and resolves partially formed qnames into full qnames. The
+resolution part should really be the responsibility of a
+class. Investigate if we could IoC the resolution, although on first
+thought it doesn't make sense.
+
+*** Consider adding "concepts"
+    CLOCK: [2013-05-08 Wed 07:47]--[2013-05-08 Wed 07:59] =>  0:12
+
+A concept is just like a pod, except its stereotype is
+=concept=. Types can then "model" a given concept by having it as
+their stereotype. This effectively results in merging all the
+properties of the concept into the type. The concept has no
+representation in code, its only a diagram/SML thing.
+
+Concepts will solve the problems in SML with pods, etc where we didn't
+want to use inheritance to avoid tight coupling - but at the same time
+its annoying to have to repeat the same properties in lots of
+different places: name, documentation, implementation specific
+parameters, etc. We could create concepts for these: =named=,
+=documented=, etc. and then use them as stereotypes in the affected
+types, removing the need for duplication.
+
+Conceivably one could imagine defining boost concept check rules for
+these concepts but at present there is no need for this.
+
+In terms of implementation, we need a string container for these
+concepts and a way of resolving the stereotype into a qname.
+
 *** Add comments to test model sanitizer
 
 We should explain why we decided to create a test model sanitizer
@@ -567,6 +599,13 @@ However, we still haven't solved the following cases:
 : BOOST_CHECK(test_primitive("unsigneder"));
 
 As these are not so common they have been left for later.
+
+*** Manual typedef generation
+
+We should be able to create a stereotype of =typedef group=. This is a
+pod type with lots of attributes. The code generator will take the
+name and type of each attribute and generate a file with the name of
+the group and all the typedefs inside.
 
 *** Automatic typedef generation                                      :story:
 
