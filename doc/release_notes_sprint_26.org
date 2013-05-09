@@ -10,16 +10,16 @@ This file contains all stories that were closed during sprint 26.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-05-08 Wed 00:19]
+Clock summary at [2013-05-09 Thu 08:57]
 
 | Headline                                                      | Time   |      |      |
 |---------------------------------------------------------------+--------+------+------|
-| *Total time*                                                  | *3:37* |      |      |
+| *Total time*                                                  | *5:42* |      |      |
 |---------------------------------------------------------------+--------+------+------|
-| Development Stories Implemented                               |        | 3:37 |      |
+| Development Stories Implemented                               |        | 5:42 |      |
 | COMPLETED Fix build break on visitor tests                    |        |      | 0:32 |
-| IMPLEMENTATION Remove workflow aspects from transformer       |        |      | 1:57 |
-| Add tests for profiler                                        |        |      | 0:17 |
+| COMPLETED Remove workflow aspects from transformer            |        |      | 2:23 |
+| COMPLETED Add tests for profiler                              |        |      | 1:56 |
 | IMPLEMENTATION Re-implement key support                       |        |      | 0:15 |
 | Use explicit casting for versioned to unversioned conversions |        |      | 0:36 |
 #+end:
@@ -57,7 +57,10 @@ required.
      CLOSED: [2013-05-08 Wed 00:19]
 **** COMPLETED Update diagram
      CLOSED: [2013-05-08 Wed 08:30]
-*** IMPLEMENTATION Add tests for profiler                             :story:
+*** COMPLETED Add tests for profiler                                  :story:
+    CLOSED: [2013-05-09 Thu 08:57]
+    CLOCK: [2013-05-09 Thu 08:46]--[2013-05-09 Thu 08:57] =>  0:11
+    CLOCK: [2013-05-09 Thu 07:37]--[2013-05-09 Thu 08:40] =>  1:03
     CLOCK: [2013-05-08 Wed 18:28]--[2013-05-08 Wed 18:41] =>  0:13
     CLOCK: [2013-05-08 Wed 18:22]--[2013-05-08 Wed 18:28] =>  0:06
     CLOCK: [2013-05-08 Wed 18:04]--[2013-05-08 Wed 18:10] =>  0:06
