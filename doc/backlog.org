@@ -11,6 +11,21 @@ This file contains all stories that haven't been assigned to a sprint.
 
 Stories that we intend to look at, at some point.
 
+*** Build shared objects instead of dynamic libraries
+
+With the increase in tests build speeds have started to suffer,
+especially on low hardware. One potential way to mitigate this is to
+avoid unnecessary linking. The problem we have at present is that
+every time something changes in any model we have to relink all the
+binaries that use that model as it is consumed as a static library. If
+all the static libraries were converted to shared objects this would
+no longer be necessary.
+
+We probably need a dogen command line option to determine what to
+build so that users are not forced to always build static / shared
+libraries. We should make sure one of the tests is using a static
+library to make sure this scenario doesn't get borked.
+
 *** Split resolver from merger
     CLOCK: [2013-05-08 Wed 07:59]--[2013-05-08 Wed 08:01] =>  0:02
 
