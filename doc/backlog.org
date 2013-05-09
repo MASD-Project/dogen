@@ -400,7 +400,10 @@ At present we are making all headers in a model public. However, for
 models such as cpp this doesn't make any sense since only one type
 should be available to the outside world. What we really need is a
 separation between public and private headers, a functionality similar
-to =internal= in C#. In order to do this:
+to =internal= in C#. In conjunction with [[*Build%20shared%20objects%20instead%20of%20dynamic%20libraries][using shared objects]], this
+should improve build times.
+
+ In order to do this:
 
 - add a new config parameter: default visibility to private or default
   visibility to public. This is just so we don't have to mark all
