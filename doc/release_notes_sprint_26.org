@@ -10,17 +10,17 @@ This file contains all stories that were closed during sprint 26.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-05-09 Thu 08:57]
+Clock summary at [2013-05-10 Fri 08:19]
 
 | Headline                                                      | Time   |      |      |
 |---------------------------------------------------------------+--------+------+------|
-| *Total time*                                                  | *5:42* |      |      |
+| *Total time*                                                  | *5:48* |      |      |
 |---------------------------------------------------------------+--------+------+------|
-| Development Stories Implemented                               |        | 5:42 |      |
+| Development Stories Implemented                               |        | 5:48 |      |
 | COMPLETED Fix build break on visitor tests                    |        |      | 0:32 |
 | COMPLETED Remove workflow aspects from transformer            |        |      | 2:23 |
 | COMPLETED Add tests for profiler                              |        |      | 1:56 |
-| IMPLEMENTATION Re-implement key support                       |        |      | 0:15 |
+| IMPLEMENTATION Re-implement key support                       |        |      | 0:21 |
 | Use explicit casting for versioned to unversioned conversions |        |      | 0:36 |
 #+end:
 
@@ -89,16 +89,20 @@ Rules:
 - versioned keyed entities will have versioned keys.
 - values can be versioned.
 
-**** IMPLEMENTATION Propagate key attribute to SML
+**** COMPLETED Propagate key attribute to SML
+     CLOSED: [2013-05-10 Fri 08:16]
+     CLOCK: [2013-05-10 Fri 08:10]--[2013-05-10 Fri 08:16] =>  0:06
      CLOCK: [2013-05-07 Tue 18:02]--[2013-05-07 Tue 18:07] =>  0:05
      CLOCK: [2013-05-07 Tue 17:46]--[2013-05-07 Tue 17:56] =>  0:10
 
-**** Ensure entities have at least one key attribute defined
+**** CANCELLED Ensure entities have at least one key attribute defined
+     CLOSED: [2013-05-10 Fri 08:17]
+
+This work will be part of adding a validator to SML.
+
 **** Unhook key generation from entity stereotype
 
-Instead of generating versioned/unversioned keys, it should just force
-the user to define at least one attribute with  property of
-identity.
+Do not generate versioned/unversioned keys for entities.
 
 **** Hook key generation to keyed stereotype
 **** Only define versioned key if versioned stereotype is present
