@@ -100,6 +100,16 @@ Rules:
 
 This work will be part of adding a validator to SML.
 
+**** IMPLEMENTATION Remove =disable_versioning=
+     CLOCK: [2013-05-10 Fri 08:27]--[2013-05-10 Fri 08:36] =>  0:09
+
+For some unexplained reason there is a switch that disables versioning
+altogether. This seems like a bad idea since its overriding the
+definitions made inside the model, potentially generating invalid
+models - for instance if a model makes reference to a key, it will no
+longer work. Not quite sure what was the original intention but as its
+stands this is not a useful feature, so remove it across the board.
+
 **** Unhook key generation from entity stereotype
 
 Do not generate versioned/unversioned keys for entities.
