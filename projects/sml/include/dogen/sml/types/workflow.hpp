@@ -42,7 +42,7 @@ public:
 
 public:
     workflow();
-    workflow(const bool add_system_models, const bool add_versioning_types);
+    workflow(const bool add_system_models);
 
 private:
     void add_system_models();

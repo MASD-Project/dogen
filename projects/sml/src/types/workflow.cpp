@@ -30,9 +30,8 @@ namespace sml {
 workflow::workflow() : add_system_models_(true), add_versioning_types_(true) {}
 
 workflow::
-workflow(const bool add_system_models, const bool add_versioning_types)
-    : add_system_models_(add_system_models),
-      add_versioning_types_(add_versioning_types) {}
+workflow(const bool add_system_models)
+    : add_system_models_(add_system_models), add_versioning_types_(true) {}
 
 bool workflow::has_generatable_types(const sml::model& m) const {
     auto lambda([](sml::generation_types gt) {

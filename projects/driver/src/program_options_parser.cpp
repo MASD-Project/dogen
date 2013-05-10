@@ -97,7 +97,6 @@ const std::string cpp_odb_facet_folder_arg("cpp-odb-facet-folder");
 const std::string cpp_disable_xml_serialization_arg(
     "cpp-disable-xml-serialization");
 const std::string cpp_use_integrated_io_arg("cpp-use-integrated-io");
-const std::string cpp_disable_versioning_arg("cpp-disable-versioning");
 
 const std::string target_arg("target");
 const std::string external_package_path_arg("external-package-path");
@@ -437,7 +436,6 @@ transform_cpp_settings(const boost::program_options::variables_map& vm) const {
     r.disable_xml_serialization(vm.count(cpp_disable_xml_serialization_arg));
     r.disable_unique_file_names(vm.count(cpp_disable_unique_file_names_arg));
     r.use_integrated_io(vm.count(cpp_use_integrated_io_arg));
-    r.disable_versioning(vm.count(cpp_disable_versioning_arg));
     r.disable_complete_constructor(
         vm.count(cpp_disable_complete_constructor_arg));
 

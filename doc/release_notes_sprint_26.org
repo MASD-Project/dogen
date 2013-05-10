@@ -10,17 +10,17 @@ This file contains all stories that were closed during sprint 26.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-05-10 Fri 08:19]
+Clock summary at [2013-05-10 Fri 19:58]
 
 | Headline                                                      | Time   |      |      |
 |---------------------------------------------------------------+--------+------+------|
-| *Total time*                                                  | *5:48* |      |      |
+| *Total time*                                                  | *6:12* |      |      |
 |---------------------------------------------------------------+--------+------+------|
-| Development Stories Implemented                               |        | 5:48 |      |
+| Development Stories Implemented                               |        | 6:12 |      |
 | COMPLETED Fix build break on visitor tests                    |        |      | 0:32 |
 | COMPLETED Remove workflow aspects from transformer            |        |      | 2:23 |
 | COMPLETED Add tests for profiler                              |        |      | 1:56 |
-| IMPLEMENTATION Re-implement key support                       |        |      | 0:21 |
+| IMPLEMENTATION Re-implement key support                       |        |      | 0:45 |
 | Use explicit casting for versioned to unversioned conversions |        |      | 0:36 |
 #+end:
 
@@ -100,7 +100,9 @@ Rules:
 
 This work will be part of adding a validator to SML.
 
-**** IMPLEMENTATION Remove =disable_versioning=
+**** COMPLETED Remove =disable_versioning=
+     CLOSED: [2013-05-10 Fri 19:58]
+     CLOCK: [2013-05-10 Fri 18:25]--[2013-05-10 Fri 18:40] =>  0:15
      CLOCK: [2013-05-10 Fri 08:27]--[2013-05-10 Fri 08:36] =>  0:09
 
 For some unexplained reason there is a switch that disables versioning

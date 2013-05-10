@@ -21,6 +21,7 @@
 #include <boost/range/algorithm.hpp>
 #include <boost/range/algorithm/find_first_of.hpp>
 #include "dogen/utility/log/logger.hpp"
+#include "dogen/config/io/cpp_settings_io.hpp"
 #include "dogen/cpp/types/includer.hpp"
 
 namespace {
@@ -56,14 +57,7 @@ includer::includer(const sml::model& model,
               config::cpp_facet_types::hash)), boost_(), std_(),
       extractor_(model_.pods()) {
 
-    BOOST_LOG_SEV(lg, debug)
-        << "Initial configuration:"
-        << " disable_versioning: " << settings_.disable_versioning()
-        << " use_integrated_io: " << settings_.use_integrated_io()
-        << " io_enabled: " << io_enabled_
-        << " serialization_enabled: " << serialization_enabled_
-        << " hash_enabled_: " << hash_enabled_
-        << " model name: " << model_.name();
+    BOOST_LOG_SEV(lg, debug) << "Initial configuration: " << settings_;
 }
 
 location_request includer::

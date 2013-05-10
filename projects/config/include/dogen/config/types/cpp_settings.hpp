@@ -73,8 +73,7 @@ public:
         const std::string& test_data_facet_folder,
         const std::string& odb_facet_folder,
         const bool disable_xml_serialization,
-        const bool use_integrated_io,
-        const bool disable_versioning);
+        const bool use_integrated_io);
 
 private:
     template<typename Archive>
@@ -298,15 +297,6 @@ public:
     void use_integrated_io(const bool v);
     /**@}*/
 
-    /**
-     * @brief If false, add versioning code to domain entities; if
-     * true, no versioning code is added.
-     */
-    /**@{*/
-    bool disable_versioning() const;
-    void disable_versioning(const bool v);
-    /**@}*/
-
 public:
     bool operator==(const cpp_settings& rhs) const;
     bool operator!=(const cpp_settings& rhs) const {
@@ -340,7 +330,6 @@ private:
     std::string odb_facet_folder_;
     bool disable_xml_serialization_;
     bool use_integrated_io_;
-    bool disable_versioning_;
 };
 
 } }

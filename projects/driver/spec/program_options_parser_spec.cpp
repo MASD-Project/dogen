@@ -118,7 +118,6 @@ const std::string cpp_disable_xml_serialization_arg(
     "--cpp-disable-xml-serialization");
 const std::string cpp_use_integrated_io_arg(
     "--cpp-use-integrated-io");
-const std::string cpp_disable_versioning_arg("--cpp-disable-versioning");
 
 const std::string output_to_stdout_arg("--output-to-stdout");
 const std::string output_to_file_arg("--output-to-file");
@@ -384,8 +383,7 @@ BOOST_AUTO_TEST_CASE(supplying_cpp_arguments_results_in_expected_settings) {
         cpp_test_data_facet_folder_arg,
         cpp_test_data_facet_folder_value_arg,
         cpp_disable_xml_serialization_arg,
-        cpp_use_integrated_io_arg,
-        cpp_disable_versioning_arg
+        cpp_use_integrated_io_arg
     };
 
     const auto s(check_valid_arguments(o));
@@ -403,7 +401,6 @@ BOOST_AUTO_TEST_CASE(supplying_cpp_arguments_results_in_expected_settings) {
     BOOST_CHECK(cs.disable_unique_file_names());
     BOOST_CHECK(cs.disable_xml_serialization());
     BOOST_CHECK(cs.use_integrated_io());
-    BOOST_CHECK(cs.disable_versioning());
 
     BOOST_CHECK(cs.header_extension() == cpp_header_extension_value_arg);
     BOOST_CHECK(cs.source_extension() == cpp_source_extension_value_arg);
@@ -470,7 +467,6 @@ BOOST_AUTO_TEST_CASE(not_supplying_cpp_arguments_results_in_expected_settings) {
     BOOST_CHECK(!cs.disable_unique_file_names());
     BOOST_CHECK(!cs.disable_xml_serialization());
     BOOST_CHECK(!cs.use_integrated_io());
-    BOOST_CHECK(!cs.disable_versioning());
 
     BOOST_CHECK(!cs.header_extension().empty());
     BOOST_CHECK(!cs.source_extension().empty());

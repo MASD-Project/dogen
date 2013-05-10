@@ -96,8 +96,7 @@ dogen::sml::model pod_with_parent_model() {
 }
 
 dogen::config::cpp_settings create_settings(
-    bool disable_facet_includers = false, bool disable_versioning = false,
-    bool use_integrated_io = false) {
+    bool disable_facet_includers = false, bool use_integrated_io = false) {
 
     using dogen::config::test::mock_settings_factory;
     auto r(mock_settings_factory::build_cpp_settings(empty, empty));
@@ -107,19 +106,17 @@ dogen::config::cpp_settings create_settings(
 
     r.enabled_facets(ft);
     r.use_integrated_io(use_integrated_io);
-    r.disable_versioning(disable_versioning);
     r.disable_facet_includers(disable_facet_includers);
     return r;
 }
 
 std::vector<file_view_model> execute_transformer(
     const boost::filesystem::path& input_path,
-    bool disable_facet_includers = false, bool disable_versioning = false) {
+    bool disable_facet_includers = false) {
 
     using dogen::utility::test::xml_deserialize;
     const auto m(xml_deserialize<dogen::sml::model>(input_path));
     auto s(create_settings());
-    s.disable_versioning(disable_versioning);
     s.disable_facet_includers(disable_facet_includers);
 
     locator lm(test_model_name, s);
@@ -129,11 +126,9 @@ std::vector<file_view_model> execute_transformer(
 }
 
 std::vector<file_view_model> execute_transformer(
-    const dogen::sml::model& model, bool disable_facet_includers = false,
-    bool disable_versioning = false) {
+    const dogen::sml::model& model, bool disable_facet_includers = false) {
 
     auto s(create_settings());
-    s.disable_versioning(disable_versioning);
     s.disable_facet_includers(disable_facet_includers);
 
     locator lm(test_model_name, s);
@@ -244,8 +239,7 @@ BOOST_AUTO_TEST_CASE(disabling_keys_results_in_no_keys) {
     using dogen::utility::test_data::dia_sml;
     auto input_path(dia_sml::expected_class_in_a_package_sml_xml());
     const bool disable_facet_includers(false);
-    const bool disable_versioning(true);
-    const auto actual(execute_transformer(input_path, disable_facet_includers, disable_versioning));
+    const auto actual(execute_transformer(input_path, disable_facet_includers));
 
     BOOST_CHECK(actual.size() == 4);
     using dogen::sml::category_types;
@@ -263,9 +257,7 @@ BOOST_AUTO_TEST_CASE(is_parent_flag_is_correctly_set_on_view_models) {
     const auto pod(pods.begin()->second);
 
     const bool disable_facet_includers(true);
-    const bool disable_versioning(true);
-    const auto actual(execute_transformer(m, disable_facet_includers,
-            disable_versioning));
+    const auto actual(execute_transformer(m, disable_facet_includers));
 
     // 2 headers and 2 implementation files plus 2 forward decls
     BOOST_CHECK(actual.size() == 6);

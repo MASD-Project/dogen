@@ -90,7 +90,6 @@ std::string pod_name() {
 includer default_includer(const dogen::sml::model& m) {
     auto s(mock_settings());
     s.use_integrated_io(false);
-    s.disable_versioning(false);
 
     locator lm(m.name(), s);
     return includer(m, lm, s);
@@ -99,7 +98,6 @@ includer default_includer(const dogen::sml::model& m) {
 includer includer_with_no_keys(const dogen::sml::model& m) {
     auto s(mock_settings());
     s.use_integrated_io(false);
-    s.disable_versioning(true);
     locator lm(m.name(), s);
     return includer(m, lm, s);
 }

@@ -68,7 +68,6 @@ std::size_t cpp_settings_hasher::hash(const cpp_settings&v) {
     combine(seed, v.odb_facet_folder());
     combine(seed, v.disable_xml_serialization());
     combine(seed, v.use_integrated_io());
-    combine(seed, v.disable_versioning());
 
     return seed;
 }

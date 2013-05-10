@@ -159,8 +159,7 @@ boost::optional<sml::model> workflow::make_generatable_model() const {
     const sml::model target(pro.provide(path, epp, is_target));
 
     const bool add_system_models(true);
-    const bool add_versioning_types(!settings_.cpp().disable_versioning());
-    sml::workflow w(add_system_models, add_versioning_types);
+    sml::workflow w(add_system_models);
     const auto pair(w.execute(target, references));
     const auto& m(pair.second);
 
