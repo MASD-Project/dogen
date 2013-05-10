@@ -386,13 +386,34 @@ automatically generate a =validator= for the root that has to be
 implemented by the user.
 
 *** Add is comparable to SML                                          :story:
+     CLOCK: [2013-05-10 Fri 07:48]--[2013-05-10 Fri 08:09] =>  0:21
 
-- add a property to SML types: is comparable. if all attributes are
-  comparable, generate =operator<= for the keys.
-- perhaps we should also have a =comparable= stereotype. if not set,
-  ignore this.
-- keys are comparable if all properties are of comparable types. add
-  =operator<= automatically.
+A pod can have a stereotype of comparable. If so, then at least one
+property must be marked as comparable. Properties are marked as
+comparable if they have an implementation specific parameter called
+=comparison_order=. =comparison_order= is a sequence starting at 0 and
+incrementing by 1; it determines the order in which properties are
+compared between two objects of the same type.
+
+In order for a property to qualify as a comparison candidate its type
+must be:
+
+- primitive;
+- =std::string=;
+- a pod marked as comparable.
+
+Some facts about comparable pods:
+
+- they generate =operator<= as a global operator in the type
+  header file.
+- they can be keys in =std::map= and =std::set=.
+
+Relation to keys:
+
+- If all properties that are part of a key are also comparable then
+  the key will be comparable.
+- comparable versioned keys always compare the version after all other
+  comparable properties.
 
 *** Private and public includes
 
