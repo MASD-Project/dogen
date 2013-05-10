@@ -113,7 +113,7 @@ models:
 - type_name is non-empty
 - parent names and original parent names must exist in current model.
 - leaves exist in current model.
-- entity must have at least one key.
+- entity must have at least one key attribute.
 - keyed must be entity.
 - all properties of types in current model must exist.
 - properties of types in other models result in dependencies.
@@ -125,8 +125,7 @@ models:
 - model name is non-empty.
 - documentation does not have non-printable characters.
 - number of type arguments is consistent with pod type.
-- pod marked as is comparable must only have properties with is
-  comparable types.
+- pod marked as is comparable must follow the [[*Add%20is%20comparable%20to%20SML][comparison rules]].
 - pod marked as is parent must have at least one child.
 - property can only have a default value if primitive
 - property default value must be castable to primitive type.
