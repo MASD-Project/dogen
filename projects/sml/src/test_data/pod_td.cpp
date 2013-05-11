@@ -133,6 +133,8 @@ populate(const unsigned int position, result_type& v) {
     v.is_comparable(create_bool(position + 16));
     v.is_fluent(create_bool(position + 17));
     v.is_aggregate_root(create_bool(position + 18));
+    v.versioned_key(create_boost_optional_dogen_sml_qname(position + 19));
+    v.unversioned_key(create_boost_optional_dogen_sml_qname(position + 20));
 }
 
 pod_generator::result_type

@@ -286,6 +286,12 @@
 				<is_comparable>0</is_comparable>
 				<is_fluent>0</is_fluent>
 				<is_aggregate_root>0</is_aggregate_root>
+				<versioned_key>
+					<initialized>0</initialized>
+				</versioned_key>
+				<unversioned_key>
+					<initialized>0</initialized>
+				</unversioned_key>
 			</second>
 		</item>
 		<item>
@@ -587,6 +593,12 @@
 				<is_comparable>0</is_comparable>
 				<is_fluent>0</is_fluent>
 				<is_aggregate_root>0</is_aggregate_root>
+				<versioned_key>
+					<initialized>0</initialized>
+				</versioned_key>
+				<unversioned_key>
+					<initialized>0</initialized>
+				</unversioned_key>
 			</second>
 		</item>
 		<item>
@@ -878,6 +890,12 @@
 				<is_comparable>0</is_comparable>
 				<is_fluent>0</is_fluent>
 				<is_aggregate_root>0</is_aggregate_root>
+				<versioned_key>
+					<initialized>0</initialized>
+				</versioned_key>
+				<unversioned_key>
+					<initialized>0</initialized>
+				</unversioned_key>
 			</second>
 		</item>
 		<item>
@@ -1004,6 +1022,12 @@
 				<is_comparable>0</is_comparable>
 				<is_fluent>0</is_fluent>
 				<is_aggregate_root>0</is_aggregate_root>
+				<versioned_key>
+					<initialized>0</initialized>
+				</versioned_key>
+				<unversioned_key>
+					<initialized>0</initialized>
+				</unversioned_key>
 			</second>
 		</item>
 		<item>
@@ -1128,6 +1152,12 @@
 				<is_comparable>0</is_comparable>
 				<is_fluent>0</is_fluent>
 				<is_aggregate_root>0</is_aggregate_root>
+				<versioned_key>
+					<initialized>0</initialized>
+				</versioned_key>
+				<unversioned_key>
+					<initialized>0</initialized>
+				</unversioned_key>
 			</second>
 		</item>
 		<item>
@@ -1290,6 +1320,12 @@
 				<is_comparable>0</is_comparable>
 				<is_fluent>0</is_fluent>
 				<is_aggregate_root>0</is_aggregate_root>
+				<versioned_key>
+					<initialized>0</initialized>
+				</versioned_key>
+				<unversioned_key>
+					<initialized>0</initialized>
+				</unversioned_key>
 			</second>
 		</item>
 		<item>
@@ -1672,6 +1708,12 @@
 				<is_comparable>0</is_comparable>
 				<is_fluent>0</is_fluent>
 				<is_aggregate_root>0</is_aggregate_root>
+				<versioned_key>
+					<initialized>0</initialized>
+				</versioned_key>
+				<unversioned_key>
+					<initialized>0</initialized>
+				</unversioned_key>
 			</second>
 		</item>
 		<item>
@@ -2054,6 +2096,12 @@
 				<is_comparable>0</is_comparable>
 				<is_fluent>0</is_fluent>
 				<is_aggregate_root>0</is_aggregate_root>
+				<versioned_key>
+					<initialized>0</initialized>
+				</versioned_key>
+				<unversioned_key>
+					<initialized>0</initialized>
+				</unversioned_key>
 			</second>
 		</item>
 		<item>
@@ -2297,6 +2345,12 @@
 				<is_comparable>0</is_comparable>
 				<is_fluent>0</is_fluent>
 				<is_aggregate_root>0</is_aggregate_root>
+				<versioned_key>
+					<initialized>0</initialized>
+				</versioned_key>
+				<unversioned_key>
+					<initialized>0</initialized>
+				</unversioned_key>
 			</second>
 		</item>
 		<item>
@@ -2569,6 +2623,12 @@
 				<is_comparable>0</is_comparable>
 				<is_fluent>0</is_fluent>
 				<is_aggregate_root>0</is_aggregate_root>
+				<versioned_key>
+					<initialized>0</initialized>
+				</versioned_key>
+				<unversioned_key>
+					<initialized>0</initialized>
+				</unversioned_key>
 			</second>
 		</item>
 		<item>
@@ -2951,6 +3011,12 @@
 				<is_comparable>0</is_comparable>
 				<is_fluent>0</is_fluent>
 				<is_aggregate_root>0</is_aggregate_root>
+				<versioned_key>
+					<initialized>0</initialized>
+				</versioned_key>
+				<unversioned_key>
+					<initialized>0</initialized>
+				</unversioned_key>
 			</second>
 		</item>
 		<item>
@@ -3334,6 +3400,12 @@
 				<is_comparable>0</is_comparable>
 				<is_fluent>0</is_fluent>
 				<is_aggregate_root>0</is_aggregate_root>
+				<versioned_key>
+					<initialized>0</initialized>
+				</versioned_key>
+				<unversioned_key>
+					<initialized>0</initialized>
+				</unversioned_key>
 			</second>
 		</item>
 		<item>
@@ -3474,6 +3546,12 @@
 				<is_comparable>0</is_comparable>
 				<is_fluent>0</is_fluent>
 				<is_aggregate_root>0</is_aggregate_root>
+				<versioned_key>
+					<initialized>0</initialized>
+				</versioned_key>
+				<unversioned_key>
+					<initialized>0</initialized>
+				</unversioned_key>
 			</second>
 		</item>
 	</pods>

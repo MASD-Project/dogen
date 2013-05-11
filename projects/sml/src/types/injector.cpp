@@ -92,8 +92,8 @@ void injector::inject_keys(model& m) const {
     BOOST_LOG_SEV(lg, debug) << "Injecting keys.";
 
     std::list<pod> keys;
-    for (const auto& pair : m.pods()) {
-        const auto& pod(pair.second);
+    for (auto& pair : m.pods()) {
+        auto& pod(pair.second);
 
         if (!pod.is_keyed())
             continue;
@@ -115,11 +115,17 @@ void injector::inject_keys(model& m) const {
         const bool unversioned(false);
         const auto gt(pod.generation_type());
         const auto qn(pod.name());
-        keys.push_back(create_key(qn, gt, identity_properties, unversioned));
+        const auto uvk(create_key(qn, gt, identity_properties, unversioned));
+        keys.push_back(uvk);
+        pod.unversioned_key(uvk.name());
 
         const bool versioned(true);
-        if (pod.is_versioned())
-            keys.push_back(create_key(qn, gt, identity_properties, versioned));
+        if (pod.is_versioned()) {
+            auto vk(create_key(qn, gt, identity_properties, versioned));
+            pod.versioned_key(vk.name());
+            vk.unversioned_key(uvk.name());
+            keys.push_back(vk);
+        }
     }
 
     for (const auto& k : keys) {
@@ -133,7 +139,6 @@ void injector::inject_keys(model& m) const {
     }
 
     BOOST_LOG_SEV(lg, debug) << "Done injecting keys. Total: " << keys.size();
-
 }
 
 void injector::inject_version(pod& p) const {

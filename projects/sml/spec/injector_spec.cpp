@@ -152,8 +152,11 @@ BOOST_AUTO_TEST_CASE(unversioned_keyed_pod_has_unversioned_key_injected) {
         const auto& qn(pair.first);
         BOOST_LOG_SEV(lg, debug) << "checking pod: " << qn;
 
-        if (is_type_zero(qn))
+        if (is_type_zero(qn)) {
             type_zero = true;
+            BOOST_CHECK(!pair.second.versioned_key());
+            BOOST_CHECK(pair.second.unversioned_key());
+        }
         else if (is_type_zero_unversioned(qn))
             unversioned_key = true;
         BOOST_CHECK(!is_type_zero_versioned(qn));
@@ -189,14 +192,20 @@ BOOST_AUTO_TEST_CASE(versioned_keyed_pod_has_both_keys_injected) {
     for (auto& pair : a.pods()) {
         BOOST_LOG_SEV(lg, debug) << "checking pod: " << pair.first;
 
-        if (is_type_zero(pair.first))
+        if (is_type_zero(pair.first)) {
+            BOOST_CHECK(pair.second.versioned_key());
+            BOOST_CHECK(pair.second.unversioned_key());
             type_zero = true;
-        else if (is_type_zero_unversioned(pair.first)) {
+        } else if (is_type_zero_unversioned(pair.first)) {
             unversioned_key = true;
             BOOST_CHECK(!pair.second.documentation().empty());
+            BOOST_CHECK(!pair.second.versioned_key());
+            BOOST_CHECK(!pair.second.unversioned_key());
         } else if (is_type_zero_versioned(pair.first)) {
             versioned_key = true;
             BOOST_CHECK(!pair.second.documentation().empty());
+            BOOST_CHECK(!pair.second.versioned_key());
+            BOOST_CHECK(pair.second.unversioned_key());
         }
     }
 
@@ -222,6 +231,9 @@ BOOST_AUTO_TEST_CASE(versioned_pod_has_version_propery_injected) {
 
     BOOST_LOG_SEV(lg, debug) << "pod after: " << m.pods().begin()->second;
     BOOST_CHECK(m.pods().size() == 1);
+    BOOST_CHECK(!m.pods().begin()->second.versioned_key());
+    BOOST_CHECK(!m.pods().begin()->second.unversioned_key());
+
     const auto& props(m.pods().begin()->second.properties());
     BOOST_REQUIRE(props.size() == 1);
     BOOST_CHECK(props.front().name() == version_name);

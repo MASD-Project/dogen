@@ -72,7 +72,9 @@ public:
         const bool is_keyed,
         const bool is_comparable,
         const bool is_fluent,
-        const bool is_aggregate_root);
+        const bool is_aggregate_root,
+        const boost::optional<dogen::sml::qname>& versioned_key,
+        const boost::optional<dogen::sml::qname>& unversioned_key);
 
 private:
     template<typename Archive>
@@ -253,6 +255,26 @@ public:
     void is_aggregate_root(const bool v);
     /**@}*/
 
+    /**
+     * @brief If the pod is a versioned keyed entity, its versioned key.
+     */
+    /**@{*/
+    const boost::optional<dogen::sml::qname>& versioned_key() const;
+    boost::optional<dogen::sml::qname>& versioned_key();
+    void versioned_key(const boost::optional<dogen::sml::qname>& v);
+    void versioned_key(const boost::optional<dogen::sml::qname>&& v);
+    /**@}*/
+
+    /**
+     * @brief If the pod is an unversioned keyed entity, its unversioned key.
+     */
+    /**@{*/
+    const boost::optional<dogen::sml::qname>& unversioned_key() const;
+    boost::optional<dogen::sml::qname>& unversioned_key();
+    void unversioned_key(const boost::optional<dogen::sml::qname>& v);
+    void unversioned_key(const boost::optional<dogen::sml::qname>&& v);
+    /**@}*/
+
 public:
     bool operator==(const pod& rhs) const;
     bool operator!=(const pod& rhs) const {
@@ -283,6 +305,8 @@ private:
     bool is_comparable_;
     bool is_fluent_;
     bool is_aggregate_root_;
+    boost::optional<dogen::sml::qname> versioned_key_;
+    boost::optional<dogen::sml::qname> unversioned_key_;
 };
 
 } }

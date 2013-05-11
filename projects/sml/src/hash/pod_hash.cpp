@@ -103,6 +103,8 @@ std::size_t pod_hasher::hash(const pod&v) {
     combine(seed, v.is_comparable());
     combine(seed, v.is_fluent());
     combine(seed, v.is_aggregate_root());
+    combine(seed, hash_boost_optional_dogen_sml_qname(v.versioned_key()));
+    combine(seed, hash_boost_optional_dogen_sml_qname(v.unversioned_key()));
 
     return seed;
 }

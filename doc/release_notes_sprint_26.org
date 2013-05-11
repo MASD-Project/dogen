@@ -146,27 +146,8 @@ Do not generate versioned/unversioned keys for entities.
     CLOSED: [2013-05-11 Sat 16:23]
     CLOCK: [2013-05-11 Sat 16:13]--[2013-05-11 Sat 16:23] =>  0:10
 
-*** IMPLEMENTATION Add =extract_key= function                         :story:
-    CLOCK: [2013-05-11 Sat 15:24]--[2013-05-11 Sat 15:34] =>  0:10
-    CLOCK: [2013-05-11 Sat 15:20]--[2013-05-11 Sat 15:24] =>  0:04
-    CLOCK: [2013-05-11 Sat 03:55]--[2013-05-11 Sat 04:03] =>  0:08
-
-We need a way to automatically extract a key for a pod. To do so
-create a utility file with a method that extracts keys for a type. We
-need to create a new aspect for this.
-
-The right solution is to create pods at the SML level to represent
-this concept. If we do that we get all of the includer etc work for
-free. For that we need to add new category types:
-
-- visitor
-- key_extractor
-
-Injector creates pods for these just like it does with keys; the view
-model transformer intercepts them and generates the correct view
-models.
-
-*** Use explicit casting for versioned to unversioned conversions     :story:
+*** IMPLEMENTATION Use explicit casting for versioned to unversioned conversions :story:
+    CLOCK: [2013-05-11 Sat 16:27]--[2013-05-11 Sat 16:29] =>  0:02
     CLOCK: [2013-05-11 Sat 15:06]--[2013-05-11 Sat 15:13] =>  0:07
     CLOCK: [2012-11-22 Thu 08:44]--[2012-11-22 Thu 09:20] =>  0:36
 
@@ -187,5 +168,32 @@ cases.
 It is not possible to use global cast operators so we need to
 introduce a dependency between versioned and unversioned keys in order
 for this to work.
+
+**** COMPLETED Link pod to its versioned and unversioned keys
+     CLOSED: [2013-05-11 Sat 17:11]
+     CLOCK: [2013-05-11 Sat 16:54]--[2013-05-11 Sat 17:11] =>  0:17
+     CLOCK: [2013-05-11 Sat 16:31]--[2013-05-11 Sat 16:54] =>  0:23
+
+Also link versioned key to unversioned key.
+
+*** IMPLEMENTATION Add =extract_key= function                         :story:
+    CLOCK: [2013-05-11 Sat 15:24]--[2013-05-11 Sat 15:34] =>  0:10
+    CLOCK: [2013-05-11 Sat 15:20]--[2013-05-11 Sat 15:24] =>  0:04
+    CLOCK: [2013-05-11 Sat 03:55]--[2013-05-11 Sat 04:03] =>  0:08
+
+We need a way to automatically extract a key for a pod. To do so
+create a utility file with a method that extracts keys for a type. We
+need to create a new aspect for this.
+
+The right solution is to create pods at the SML level to represent
+this concept. If we do that we get all of the includer etc work for
+free. For that we need to add new category types:
+
+- visitor
+- key_extractor
+
+Injector creates pods for these just like it does with keys; the view
+model transformer intercepts them and generates the correct view
+models.
 
 ** Deprecated Development Stories

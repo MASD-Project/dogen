@@ -56,7 +56,9 @@ pod::pod(pod&& rhs)
       is_keyed_(std::move(rhs.is_keyed_)),
       is_comparable_(std::move(rhs.is_comparable_)),
       is_fluent_(std::move(rhs.is_fluent_)),
-      is_aggregate_root_(std::move(rhs.is_aggregate_root_)) { }
+      is_aggregate_root_(std::move(rhs.is_aggregate_root_)),
+      versioned_key_(std::move(rhs.versioned_key_)),
+      unversioned_key_(std::move(rhs.unversioned_key_)) { }
 
 pod::pod(
     const dogen::sml::qname& name,
@@ -77,7 +79,9 @@ pod::pod(
     const bool is_keyed,
     const bool is_comparable,
     const bool is_fluent,
-    const bool is_aggregate_root)
+    const bool is_aggregate_root,
+    const boost::optional<dogen::sml::qname>& versioned_key,
+    const boost::optional<dogen::sml::qname>& unversioned_key)
     : name_(name),
       properties_(properties),
       parent_name_(parent_name),
@@ -96,7 +100,9 @@ pod::pod(
       is_keyed_(is_keyed),
       is_comparable_(is_comparable),
       is_fluent_(is_fluent),
-      is_aggregate_root_(is_aggregate_root) { }
+      is_aggregate_root_(is_aggregate_root),
+      versioned_key_(versioned_key),
+      unversioned_key_(unversioned_key) { }
 
 void pod::swap(pod& other) noexcept {
     using std::swap;
@@ -119,6 +125,8 @@ void pod::swap(pod& other) noexcept {
     swap(is_comparable_, other.is_comparable_);
     swap(is_fluent_, other.is_fluent_);
     swap(is_aggregate_root_, other.is_aggregate_root_);
+    swap(versioned_key_, other.versioned_key_);
+    swap(unversioned_key_, other.unversioned_key_);
 }
 
 bool pod::operator==(const pod& rhs) const {
@@ -140,7 +148,9 @@ bool pod::operator==(const pod& rhs) const {
         is_keyed_ == rhs.is_keyed_ &&
         is_comparable_ == rhs.is_comparable_ &&
         is_fluent_ == rhs.is_fluent_ &&
-        is_aggregate_root_ == rhs.is_aggregate_root_;
+        is_aggregate_root_ == rhs.is_aggregate_root_ &&
+        versioned_key_ == rhs.versioned_key_ &&
+        unversioned_key_ == rhs.unversioned_key_;
 }
 
 pod& pod::operator=(pod other) {
@@ -355,6 +365,38 @@ bool pod::is_aggregate_root() const {
 
 void pod::is_aggregate_root(const bool v) {
     is_aggregate_root_ = v;
+}
+
+const boost::optional<dogen::sml::qname>& pod::versioned_key() const {
+    return versioned_key_;
+}
+
+boost::optional<dogen::sml::qname>& pod::versioned_key() {
+    return versioned_key_;
+}
+
+void pod::versioned_key(const boost::optional<dogen::sml::qname>& v) {
+    versioned_key_ = v;
+}
+
+void pod::versioned_key(const boost::optional<dogen::sml::qname>&& v) {
+    versioned_key_ = std::move(v);
+}
+
+const boost::optional<dogen::sml::qname>& pod::unversioned_key() const {
+    return unversioned_key_;
+}
+
+boost::optional<dogen::sml::qname>& pod::unversioned_key() {
+    return unversioned_key_;
+}
+
+void pod::unversioned_key(const boost::optional<dogen::sml::qname>& v) {
+    unversioned_key_ = v;
+}
+
+void pod::unversioned_key(const boost::optional<dogen::sml::qname>&& v) {
+    unversioned_key_ = std::move(v);
 }
 
 } }
