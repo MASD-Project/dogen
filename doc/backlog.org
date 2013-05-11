@@ -133,6 +133,7 @@ models:
 - entity must have at least one key attribute.
 - non entity must not have key attributes (value, service)
 - keyed must be entity.
+- aggregate root must be entity.
 - all properties of types in current model must exist.
 - properties of types in other models result in dependencies.
 - enumeration must have at least one enumerator
