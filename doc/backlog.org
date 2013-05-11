@@ -551,6 +551,14 @@ pods as its most likely by mistake.
 
 *** Add diff support
 
+New understanding: just create a new facet call diff and make these
+classes generate a simple textual representation of differences,
+inspired in =diff=. Where the pod is an entity provide its ID. In
+general just provide some "path" to the difference,
+e.g. model/pod/member variable/etc.
+
+Old understanding:
+
 Dogen should have a =diff= option. When switched on, it would generate
 =diff= classes. These are system types like keys and live in a
 sub-folder of =types=. They have full serialisation, hashing etc
