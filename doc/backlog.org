@@ -131,6 +131,7 @@ models:
 - parent names and original parent names must exist in current model.
 - leaves exist in current model.
 - entity must have at least one key attribute.
+- non entity must not have key attributes (value, service)
 - keyed must be entity.
 - all properties of types in current model must exist.
 - properties of types in other models result in dependencies.
