@@ -43,6 +43,10 @@ const std::string unversioned_name("unversioned_key");
 const std::string uint_name("unsigned int");
 const std::string id_name("id");
 const std::string version_name("version");
+const std::string unversioned_key_doxygen("Unversioned key for ");
+const std::string versioned_doxygen("Object instance's version.");
+
+const std::string versioned_key_doxygen("Versioned key for ");
 const std::string missing_identity_attribute(
     "Expected entity to have at least one identity attribute: ");
 const std::string duplicate_qname(
@@ -68,6 +72,9 @@ pod injector::create_key(const qname& qn, const generation_types gt,
     r.name(kqn);
     r.generation_type(gt);
     r.pod_type(pod_types::value);
+    r.documentation(
+        (versioned ? versioned_key_doxygen : unversioned_key_doxygen) +
+        qn.type_name());
 
     const auto vtc(category_types::versioned_key);
     const auto uvtc(category_types::unversioned_key);
@@ -143,6 +150,7 @@ void injector::inject_version(pod& p) const {
     property v;
     v.name(version_name);
     v.type_name(nqn);
+    v.documentation(versioned_doxygen);
 
     p.properties().push_back(v);
 }

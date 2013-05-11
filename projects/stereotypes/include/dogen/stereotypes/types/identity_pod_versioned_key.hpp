@@ -32,6 +32,9 @@
 namespace dogen {
 namespace stereotypes {
 
+/**
+ * @brief Versioned key for identity_pod
+ */
 class identity_pod_versioned_key final {
 public:
     identity_pod_versioned_key(const identity_pod_versioned_key&) = default;
@@ -65,8 +68,13 @@ public:
     void prop_0(const dogen::stereotypes::value&& v);
     /**@}*/
 
+    /**
+     * @brief Object instance's version.
+     */
+    /**@{*/
     unsigned int version() const;
     void version(const unsigned int v);
+    /**@}*/
 
 public:
     bool operator==(const identity_pod_versioned_key& rhs) const;

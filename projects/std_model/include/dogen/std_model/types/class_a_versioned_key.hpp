@@ -32,6 +32,9 @@
 namespace dogen {
 namespace std_model {
 
+/**
+ * @brief Versioned key for class_a
+ */
 class class_a_versioned_key final {
 public:
     class_a_versioned_key(const class_a_versioned_key&) = default;
@@ -59,8 +62,13 @@ public:
     void prop0(const std::string& v);
     void prop0(const std::string&& v);
 
+    /**
+     * @brief Object instance's version.
+     */
+    /**@{*/
     unsigned int version() const;
     void version(const unsigned int v);
+    /**@}*/
 
 public:
     bool operator==(const class_a_versioned_key& rhs) const;

@@ -68,8 +68,13 @@ public:
     void prop_0(const dogen::stereotypes::value&& v);
     /**@}*/
 
+    /**
+     * @brief Object instance's version.
+     */
+    /**@{*/
     unsigned int version() const;
     void version(const unsigned int v);
+    /**@}*/
 
 public:
     bool operator==(const identity_pod& rhs) const;

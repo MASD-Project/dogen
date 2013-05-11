@@ -84,8 +84,13 @@ public:
     void prop_2(const int v);
     /**@}*/
 
+    /**
+     * @brief Object instance's version.
+     */
+    /**@{*/
     unsigned int version() const;
     void version(const unsigned int v);
+    /**@}*/
 
 public:
     bool operator==(const composite_identity_ver& rhs) const;

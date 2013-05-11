@@ -32,6 +32,9 @@
 namespace dogen {
 namespace std_model {
 
+/**
+ * @brief Unversioned key for class_a
+ */
 class class_a_unversioned_key final {
 public:
     class_a_unversioned_key() = default;

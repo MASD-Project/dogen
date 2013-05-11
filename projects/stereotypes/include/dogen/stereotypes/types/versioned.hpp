@@ -54,8 +54,13 @@ private:
     friend void boost::serialization::load(Archive& ar, versioned& v, unsigned int version);
 
 public:
+    /**
+     * @brief Object instance's version.
+     */
+    /**@{*/
     unsigned int version() const;
     void version(const unsigned int v);
+    /**@}*/
 
 public:
     bool operator==(const versioned& rhs) const;

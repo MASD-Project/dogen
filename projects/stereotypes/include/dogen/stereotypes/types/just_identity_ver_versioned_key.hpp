@@ -31,6 +31,9 @@
 namespace dogen {
 namespace stereotypes {
 
+/**
+ * @brief Versioned key for just_identity_ver
+ */
 class just_identity_ver_versioned_key final {
 public:
     just_identity_ver_versioned_key(const just_identity_ver_versioned_key&) = default;
@@ -56,8 +59,13 @@ public:
     int prop_0() const;
     void prop_0(const int v);
 
+    /**
+     * @brief Object instance's version.
+     */
+    /**@{*/
     unsigned int version() const;
     void version(const unsigned int v);
+    /**@}*/
 
 public:
     bool operator==(const just_identity_ver_versioned_key& rhs) const;

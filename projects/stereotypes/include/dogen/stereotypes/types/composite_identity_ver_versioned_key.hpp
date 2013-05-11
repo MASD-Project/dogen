@@ -31,6 +31,9 @@
 namespace dogen {
 namespace stereotypes {
 
+/**
+ * @brief Versioned key for composite_identity_ver
+ */
 class composite_identity_ver_versioned_key final {
 public:
     composite_identity_ver_versioned_key(const composite_identity_ver_versioned_key&) = default;
@@ -72,8 +75,13 @@ public:
     void prop_1(const int v);
     /**@}*/
 
+    /**
+     * @brief Object instance's version.
+     */
+    /**@{*/
     unsigned int version() const;
     void version(const unsigned int v);
+    /**@}*/
 
 public:
     bool operator==(const composite_identity_ver_versioned_key& rhs) const;

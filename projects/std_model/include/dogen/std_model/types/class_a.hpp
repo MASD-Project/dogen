@@ -70,8 +70,13 @@ public:
     void prop1(const std::string&& v);
     /**@}*/
 
+    /**
+     * @brief Object instance's version.
+     */
+    /**@{*/
     unsigned int version() const;
     void version(const unsigned int v);
+    /**@}*/
 
 public:
     bool operator==(const class_a& rhs) const;

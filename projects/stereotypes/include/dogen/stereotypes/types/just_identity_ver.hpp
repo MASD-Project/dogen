@@ -59,8 +59,13 @@ public:
     int prop_0() const;
     void prop_0(const int v);
 
+    /**
+     * @brief Object instance's version.
+     */
+    /**@{*/
     unsigned int version() const;
     void version(const unsigned int v);
+    /**@}*/
 
 public:
     bool operator==(const just_identity_ver& rhs) const;

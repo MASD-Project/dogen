@@ -31,6 +31,9 @@
 namespace dogen {
 namespace stereotypes {
 
+/**
+ * @brief Unversioned key for composite_identity_ver
+ */
 class composite_identity_ver_unversioned_key final {
 public:
     composite_identity_ver_unversioned_key(const composite_identity_ver_unversioned_key&) = default;

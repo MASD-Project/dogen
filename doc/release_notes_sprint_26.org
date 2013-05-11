@@ -10,18 +10,19 @@ This file contains all stories that were closed during sprint 26.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-05-11 Sat 16:08]
+Clock summary at [2013-05-11 Sat 16:24]
 
 | Headline                                                      | Time    |       |      |
 |---------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                  | *11:14* |       |      |
+| *Total time*                                                  | *11:24* |       |      |
 |---------------------------------------------------------------+---------+-------+------|
-| Development Stories Implemented                               |         | 11:14 |      |
+| Development Stories Implemented                               |         | 11:24 |      |
 | COMPLETED Fix build break on visitor tests                    |         |       | 0:32 |
 | COMPLETED Remove workflow aspects from transformer            |         |       | 2:23 |
 | COMPLETED Add tests for profiler                              |         |       | 1:56 |
 | COMPLETED Re-implement key support                            |         |       | 4:03 |
 | COMPLETED Add injector tests                                  |         |       | 1:15 |
+| COMPLETED Add doxygen comments to keys and version            |         |       | 0:10 |
 | IMPLEMENTATION Add =extract_key= function                     |         |       | 0:22 |
 | Use explicit casting for versioned to unversioned conversions |         |       | 0:43 |
 #+end:
@@ -141,6 +142,10 @@ Do not generate versioned/unversioned keys for entities.
     CLOCK: [2013-05-11 Sat 15:34]--[2013-05-11 Sat 16:07] =>  0:33
     CLOCK: [2013-05-11 Sat 04:03]--[2013-05-11 Sat 04:45] =>  0:42
 
+*** COMPLETED Add doxygen comments to keys and version                :story:
+    CLOSED: [2013-05-11 Sat 16:23]
+    CLOCK: [2013-05-11 Sat 16:13]--[2013-05-11 Sat 16:23] =>  0:10
+
 *** IMPLEMENTATION Add =extract_key= function                         :story:
     CLOCK: [2013-05-11 Sat 15:24]--[2013-05-11 Sat 15:34] =>  0:10
     CLOCK: [2013-05-11 Sat 15:20]--[2013-05-11 Sat 15:24] =>  0:04
@@ -161,7 +166,6 @@ Injector creates pods for these just like it does with keys; the view
 model transformer intercepts them and generates the correct view
 models.
 
-*** Add doxygen comments to keys                                      :story:
 *** Use explicit casting for versioned to unversioned conversions     :story:
     CLOCK: [2013-05-11 Sat 15:06]--[2013-05-11 Sat 15:13] =>  0:07
     CLOCK: [2012-11-22 Thu 08:44]--[2012-11-22 Thu 09:20] =>  0:36

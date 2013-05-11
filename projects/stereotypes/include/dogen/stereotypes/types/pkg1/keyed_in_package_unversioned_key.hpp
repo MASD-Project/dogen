@@ -32,6 +32,9 @@ namespace dogen {
 namespace stereotypes {
 namespace pkg1 {
 
+/**
+ * @brief Unversioned key for keyed_in_package
+ */
 class keyed_in_package_unversioned_key final {
 public:
     keyed_in_package_unversioned_key(const keyed_in_package_unversioned_key&) = default;

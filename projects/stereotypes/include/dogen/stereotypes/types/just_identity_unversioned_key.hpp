@@ -31,6 +31,9 @@
 namespace dogen {
 namespace stereotypes {
 
+/**
+ * @brief Unversioned key for just_identity
+ */
 class just_identity_unversioned_key final {
 public:
     just_identity_unversioned_key(const just_identity_unversioned_key&) = default;

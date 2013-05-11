@@ -191,10 +191,13 @@ BOOST_AUTO_TEST_CASE(versioned_keyed_pod_has_both_keys_injected) {
 
         if (is_type_zero(pair.first))
             type_zero = true;
-        else if (is_type_zero_unversioned(pair.first))
+        else if (is_type_zero_unversioned(pair.first)) {
             unversioned_key = true;
-        else if (is_type_zero_versioned(pair.first))
+            BOOST_CHECK(!pair.second.documentation().empty());
+        } else if (is_type_zero_versioned(pair.first)) {
             versioned_key = true;
+            BOOST_CHECK(!pair.second.documentation().empty());
+        }
     }
 
     BOOST_CHECK(type_zero);
@@ -222,6 +225,7 @@ BOOST_AUTO_TEST_CASE(versioned_pod_has_version_propery_injected) {
     const auto& props(m.pods().begin()->second.properties());
     BOOST_REQUIRE(props.size() == 1);
     BOOST_CHECK(props.front().name() == version_name);
+    BOOST_CHECK(!props.front().documentation().empty());
 }
 
 BOOST_AUTO_TEST_SUITE_END()

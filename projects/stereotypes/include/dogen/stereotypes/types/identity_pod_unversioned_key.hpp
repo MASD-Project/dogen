@@ -32,6 +32,9 @@
 namespace dogen {
 namespace stereotypes {
 
+/**
+ * @brief Unversioned key for identity_pod
+ */
 class identity_pod_unversioned_key final {
 public:
     identity_pod_unversioned_key() = default;
