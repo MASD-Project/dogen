@@ -10,21 +10,23 @@ This file contains all stories that were closed during sprint 26.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-05-11 Sat 16:24]
+Clock summary at [2013-05-12 Sun 00:11]
 
-| Headline                                                      | Time    |       |      |
-|---------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                  | *11:24* |       |      |
-|---------------------------------------------------------------+---------+-------+------|
-| Development Stories Implemented                               |         | 11:24 |      |
-| COMPLETED Fix build break on visitor tests                    |         |       | 0:32 |
-| COMPLETED Remove workflow aspects from transformer            |         |       | 2:23 |
-| COMPLETED Add tests for profiler                              |         |       | 1:56 |
-| COMPLETED Re-implement key support                            |         |       | 4:03 |
-| COMPLETED Add injector tests                                  |         |       | 1:15 |
-| COMPLETED Add doxygen comments to keys and version            |         |       | 0:10 |
-| IMPLEMENTATION Add =extract_key= function                     |         |       | 0:22 |
-| Use explicit casting for versioned to unversioned conversions |         |       | 0:43 |
+| Headline                                                                     | Time    |       |      |
+|------------------------------------------------------------------------------+---------+-------+------|
+| *Total time*                                                                 | *14:59* |       |      |
+|------------------------------------------------------------------------------+---------+-------+------|
+| Development Stories Implemented                                              |         | 14:59 |      |
+| COMPLETED Fix build break on visitor tests                                   |         |       | 0:32 |
+| COMPLETED Remove workflow aspects from transformer                           |         |       | 2:23 |
+| COMPLETED Add tests for profiler                                             |         |       | 1:56 |
+| COMPLETED Re-implement key support                                           |         |       | 4:03 |
+| COMPLETED Add injector tests                                                 |         |       | 1:15 |
+| COMPLETED Add doxygen comments to keys and version                           |         |       | 0:10 |
+| COMPLETED Sort issues with SATA port in lorenz                               |         |       | 1:50 |
+| COMPLETED Refactor SML diagram                                               |         |       | 0:39 |
+| IMPLEMENTATION Use explicit casting for versioned to unversioned conversions |         |       | 1:49 |
+| IMPLEMENTATION Add =extract_key= function                                    |         |       | 0:22 |
 #+end:
 
 *** COMPLETED Fix build break on visitor tests                        :story:
@@ -146,7 +148,18 @@ Do not generate versioned/unversioned keys for entities.
     CLOSED: [2013-05-11 Sat 16:23]
     CLOCK: [2013-05-11 Sat 16:13]--[2013-05-11 Sat 16:23] =>  0:10
 
+*** COMPLETED Sort issues with SATA port in lorenz                    :spike:
+    CLOSED: [2013-05-12 Sun 00:11]
+    CLOCK: [2013-05-07 Tue 22:00]--[2013-05-07 Tue 23:50] =>  1:50
+
+*** COMPLETED Refactor SML diagram                                    :spike:
+    CLOSED: [2013-05-12 Sun 00:09]
+    CLOCK: [2013-05-11 Sat 23:30]--[2013-05-12 Sun 00:09] =>  0:39
+
+SML has gotten really messy and very hard to understand. Do a general tidy-up.
+
 *** IMPLEMENTATION Use explicit casting for versioned to unversioned conversions :story:
+    CLOCK: [2013-05-11 Sat 23:06]--[2013-05-11 Sat 23:30] =>  0:24
     CLOCK: [2013-05-11 Sat 16:27]--[2013-05-11 Sat 16:29] =>  0:02
     CLOCK: [2013-05-11 Sat 15:06]--[2013-05-11 Sat 15:13] =>  0:07
     CLOCK: [2012-11-22 Thu 08:44]--[2012-11-22 Thu 09:20] =>  0:36
