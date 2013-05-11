@@ -10,17 +10,17 @@ This file contains all stories that were closed during sprint 26.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-05-11 Sat 03:28]
+Clock summary at [2013-05-11 Sat 03:52]
 
 | Headline                                                      | Time   |      |      |
 |---------------------------------------------------------------+--------+------+------|
-| *Total time*                                                  | *9:08* |      |      |
+| *Total time*                                                  | *9:30* |      |      |
 |---------------------------------------------------------------+--------+------+------|
-| Development Stories Implemented                               |        | 9:08 |      |
+| Development Stories Implemented                               |        | 9:30 |      |
 | COMPLETED Fix build break on visitor tests                    |        |      | 0:32 |
 | COMPLETED Remove workflow aspects from transformer            |        |      | 2:23 |
 | COMPLETED Add tests for profiler                              |        |      | 1:56 |
-| IMPLEMENTATION Re-implement key support                       |        |      | 3:41 |
+| IMPLEMENTATION Re-implement key support                       |        |      | 4:03 |
 | Use explicit casting for versioned to unversioned conversions |        |      | 0:36 |
 #+end:
 
@@ -120,8 +120,13 @@ stands this is not a useful feature, so remove it across the board.
 
 Do not generate versioned/unversioned keys for entities.
 
-**** Add =std::string= identity scenario to =std_model=
-**** Add pod identity scenario to stereotypes model
+**** COMPLETED Add =std::string= identity scenario to =std_model=
+     CLOSED: [2013-05-11 Sat 03:33]
+**** COMPLETED Add pod identity scenario to stereotypes model
+     CLOSED: [2013-05-11 Sat 03:51]
+     CLOCK: [2013-05-11 Sat 03:38]--[2013-05-11 Sat 03:50] =>  0:12
+     CLOCK: [2013-05-11 Sat 03:28]--[2013-05-11 Sat 03:38] =>  0:10
+
 **** Add =extract_key= function
 *** Add injector tests                                                :story:
 *** Use explicit casting for versioned to unversioned conversions     :story:
@@ -141,7 +146,8 @@ correct design decisions in this area. We need to wait until we start
 using keys in anger in Creris and then design the API around the use
 cases.
 
-*** Move all of the versioning, entity, key tests to stereotypes      :story:
+*** COMPLETED Move all of the versioning, entity, key tests to stereotypes :story:
+    CLOSED: [2013-05-11 Sat 03:40]
 
 - remove versioning from all other models such as std::model, etc.
 - add tests for =std::unordered=, maps etc.

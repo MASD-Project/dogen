@@ -53,6 +53,29 @@ BOOST_AUTO_TEST_CASE(validate_equality) {
     test_equality<immutable_one_primitive_generator>();
     test_equality<immutable_two_generator>();
     test_equality<fluent_generator>();
+    test_equality<composite_identity_generator>();
+    test_equality<composite_identity_unversioned_key_generator>();
+    test_equality<composite_identity_ver_generator>();
+    test_equality<composite_identity_ver_unversioned_key_generator>();
+    test_equality<composite_identity_ver_versioned_key_generator>();
+    test_equality<entity_generator>();
+    test_equality<fluent_generator>();
+    test_equality<identity_and_other_generator>();
+    test_equality<identity_and_other_unversioned_key_generator>();
+    test_equality<identity_and_other_ver_generator>();
+    test_equality<identity_and_other_ver_unversioned_key_generator>();
+    test_equality<identity_and_other_ver_versioned_key_generator>();
+    test_equality<identity_pod_generator>();
+    test_equality<identity_pod_unversioned_key_generator>();
+    test_equality<identity_pod_versioned_key_generator>();
+    test_equality<just_identity_generator>();
+    test_equality<just_identity_unversioned_key_generator>();
+    test_equality<just_identity_ver_generator>();
+    test_equality<just_identity_ver_unversioned_key_generator>();
+    test_equality<just_identity_ver_versioned_key_generator>();
+    test_equality<pkg1::keyed_in_package_generator>();
+    test_equality<pkg1::keyed_in_package_unversioned_key_generator>();
+    test_equality<versioned_generator>();
 }
 
 BOOST_AUTO_TEST_CASE(validate_serialisation) {
@@ -64,6 +87,29 @@ BOOST_AUTO_TEST_CASE(validate_serialisation) {
     rountrip_type<immutable_one_primitive_generator>();
     rountrip_type<immutable_two_generator>();
     rountrip_type<fluent_generator>();
+    rountrip_type<composite_identity_generator>();
+    rountrip_type<composite_identity_unversioned_key_generator>();
+    rountrip_type<composite_identity_ver_generator>();
+    rountrip_type<composite_identity_ver_unversioned_key_generator>();
+    rountrip_type<composite_identity_ver_versioned_key_generator>();
+    rountrip_type<entity_generator>();
+    rountrip_type<fluent_generator>();
+    rountrip_type<identity_and_other_generator>();
+    rountrip_type<identity_and_other_unversioned_key_generator>();
+    rountrip_type<identity_and_other_ver_generator>();
+    rountrip_type<identity_and_other_ver_unversioned_key_generator>();
+    rountrip_type<identity_and_other_ver_versioned_key_generator>();
+    rountrip_type<identity_pod_generator>();
+    rountrip_type<identity_pod_unversioned_key_generator>();
+    rountrip_type<identity_pod_versioned_key_generator>();
+    rountrip_type<just_identity_generator>();
+    rountrip_type<just_identity_unversioned_key_generator>();
+    rountrip_type<just_identity_ver_generator>();
+    rountrip_type<just_identity_ver_unversioned_key_generator>();
+    rountrip_type<just_identity_ver_versioned_key_generator>();
+    rountrip_type<pkg1::keyed_in_package_generator>();
+    rountrip_type<pkg1::keyed_in_package_unversioned_key_generator>();
+    rountrip_type<versioned_generator>();
 }
 
 BOOST_AUTO_TEST_CASE(validate_hashing) {
@@ -75,6 +121,29 @@ BOOST_AUTO_TEST_CASE(validate_hashing) {
     test_hashing<immutable_one_primitive_generator>();
     test_hashing<immutable_two_generator>();
     test_hashing<fluent_generator>();
+    test_hashing<composite_identity_generator>();
+    test_hashing<composite_identity_unversioned_key_generator>();
+    test_hashing<composite_identity_ver_generator>();
+    test_hashing<composite_identity_ver_unversioned_key_generator>();
+    test_hashing<composite_identity_ver_versioned_key_generator>();
+    test_hashing<entity_generator>();
+    test_hashing<fluent_generator>();
+    test_hashing<identity_and_other_generator>();
+    test_hashing<identity_and_other_unversioned_key_generator>();
+    test_hashing<identity_and_other_ver_generator>();
+    test_hashing<identity_and_other_ver_unversioned_key_generator>();
+    test_hashing<identity_and_other_ver_versioned_key_generator>();
+    test_hashing<identity_pod_generator>();
+    test_hashing<identity_pod_unversioned_key_generator>();
+    test_hashing<identity_pod_versioned_key_generator>();
+    test_hashing<just_identity_generator>();
+    test_hashing<just_identity_unversioned_key_generator>();
+    test_hashing<just_identity_ver_generator>();
+    test_hashing<just_identity_ver_unversioned_key_generator>();
+    test_hashing<just_identity_ver_versioned_key_generator>();
+    test_hashing<pkg1::keyed_in_package_generator>();
+    test_hashing<pkg1::keyed_in_package_unversioned_key_generator>();
+    test_hashing<versioned_generator>();
 }
 
 BOOST_AUTO_TEST_CASE(validate_swap) {
@@ -82,6 +151,29 @@ BOOST_AUTO_TEST_CASE(validate_swap) {
     test_swap<entity_generator>();
     test_swap<value_generator>();
     test_swap<fluent_generator>();
+    test_swap<composite_identity_generator>();
+    test_swap<composite_identity_unversioned_key_generator>();
+    test_swap<composite_identity_ver_generator>();
+    test_swap<composite_identity_ver_unversioned_key_generator>();
+    test_swap<composite_identity_ver_versioned_key_generator>();
+    test_swap<entity_generator>();
+    test_swap<fluent_generator>();
+    test_swap<identity_and_other_generator>();
+    test_swap<identity_and_other_unversioned_key_generator>();
+    test_swap<identity_and_other_ver_generator>();
+    test_swap<identity_and_other_ver_unversioned_key_generator>();
+    test_swap<identity_and_other_ver_versioned_key_generator>();
+    test_swap<identity_pod_generator>();
+    test_swap<identity_pod_unversioned_key_generator>();
+    test_swap<identity_pod_versioned_key_generator>();
+    test_swap<just_identity_generator>();
+    test_swap<just_identity_unversioned_key_generator>();
+    test_swap<just_identity_ver_generator>();
+    test_swap<just_identity_ver_unversioned_key_generator>();
+    test_swap<just_identity_ver_versioned_key_generator>();
+    test_swap<pkg1::keyed_in_package_generator>();
+    test_swap<pkg1::keyed_in_package_unversioned_key_generator>();
+    test_swap<versioned_generator>();
 }
 
 BOOST_AUTO_TEST_CASE(validate_io) {
@@ -94,8 +186,30 @@ BOOST_AUTO_TEST_CASE(validate_io) {
     test_io<immutable_two_generator>();
     test_io<immutable_zero_generator>();
     test_io<fluent_generator>();
+    test_io<composite_identity_generator>();
+    test_io<composite_identity_unversioned_key_generator>();
+    test_io<composite_identity_ver_generator>();
+    test_io<composite_identity_ver_unversioned_key_generator>();
+    test_io<composite_identity_ver_versioned_key_generator>();
+    test_io<entity_generator>();
+    test_io<fluent_generator>();
+    test_io<identity_and_other_generator>();
+    test_io<identity_and_other_unversioned_key_generator>();
+    test_io<identity_and_other_ver_generator>();
+    test_io<identity_and_other_ver_unversioned_key_generator>();
+    test_io<identity_and_other_ver_versioned_key_generator>();
+    test_io<identity_pod_generator>();
+    test_io<identity_pod_unversioned_key_generator>();
+    test_io<identity_pod_versioned_key_generator>();
+    test_io<just_identity_generator>();
+    test_io<just_identity_unversioned_key_generator>();
+    test_io<just_identity_ver_generator>();
+    test_io<just_identity_ver_unversioned_key_generator>();
+    test_io<just_identity_ver_versioned_key_generator>();
+    test_io<pkg1::keyed_in_package_generator>();
+    test_io<pkg1::keyed_in_package_unversioned_key_generator>();
+    test_io<versioned_generator>();
 }
-
 
 BOOST_AUTO_TEST_CASE(setting_properties_using_the_fluent_interface_produces_expected_result) {
     SETUP_TEST_LOG("setting_properties_using_the_fluent_interface_produces_expected_result");
