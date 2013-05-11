@@ -11,6 +11,13 @@ This file contains all stories that haven't been assigned to a sprint.
 
 Stories that we intend to look at, at some point.
 
+*** Consider not creating unversioned keys for single property        :story:
+
+If a key is made up of a single property, its a bit nonsensical to
+create an unversioned key. We should only generate the versioned
+key. However, it does make life easier. Wait for real world use cases
+to decide.
+
 *** Add support for boost parameter
 
 It would be nice to have boost parameter support. [[http://www.boost.org/doc/libs/1_53_0/libs/parameter/doc/html/index.html#named-function-parameters][Documentation here]].
