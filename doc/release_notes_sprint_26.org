@@ -10,20 +10,20 @@ This file contains all stories that were closed during sprint 26.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-05-11 Sat 04:45]
+Clock summary at [2013-05-11 Sat 16:08]
 
 | Headline                                                      | Time    |       |      |
 |---------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                  | *10:20* |       |      |
+| *Total time*                                                  | *11:14* |       |      |
 |---------------------------------------------------------------+---------+-------+------|
-| Development Stories Implemented                               |         | 10:20 |      |
+| Development Stories Implemented                               |         | 11:14 |      |
 | COMPLETED Fix build break on visitor tests                    |         |       | 0:32 |
 | COMPLETED Remove workflow aspects from transformer            |         |       | 2:23 |
 | COMPLETED Add tests for profiler                              |         |       | 1:56 |
 | COMPLETED Re-implement key support                            |         |       | 4:03 |
-| IMPLEMENTATION Add =extract_key= function                     |         |       | 0:08 |
-| IMPLEMENTATION Add injector tests                             |         |       | 0:42 |
-| Use explicit casting for versioned to unversioned conversions |         |       | 0:36 |
+| COMPLETED Add injector tests                                  |         |       | 1:15 |
+| IMPLEMENTATION Add =extract_key= function                     |         |       | 0:22 |
+| Use explicit casting for versioned to unversioned conversions |         |       | 0:43 |
 #+end:
 
 *** COMPLETED Fix build break on visitor tests                        :story:
@@ -136,17 +136,34 @@ Do not generate versioned/unversioned keys for entities.
      CLOCK: [2013-05-11 Sat 03:38]--[2013-05-11 Sat 03:50] =>  0:12
      CLOCK: [2013-05-11 Sat 03:28]--[2013-05-11 Sat 03:38] =>  0:10
 
+*** COMPLETED Add injector tests                                      :story:
+    CLOSED: [2013-05-11 Sat 16:07]
+    CLOCK: [2013-05-11 Sat 15:34]--[2013-05-11 Sat 16:07] =>  0:33
+    CLOCK: [2013-05-11 Sat 04:03]--[2013-05-11 Sat 04:45] =>  0:42
+
 *** IMPLEMENTATION Add =extract_key= function                         :story:
+    CLOCK: [2013-05-11 Sat 15:24]--[2013-05-11 Sat 15:34] =>  0:10
+    CLOCK: [2013-05-11 Sat 15:20]--[2013-05-11 Sat 15:24] =>  0:04
     CLOCK: [2013-05-11 Sat 03:55]--[2013-05-11 Sat 04:03] =>  0:08
 
 We need a way to automatically extract a key for a pod. To do so
 create a utility file with a method that extracts keys for a type. We
 need to create a new aspect for this.
 
-*** IMPLEMENTATION Add injector tests                                 :story:
-    CLOCK: [2013-05-11 Sat 04:03]--[2013-05-11 Sat 04:45] =>  0:42
+The right solution is to create pods at the SML level to represent
+this concept. If we do that we get all of the includer etc work for
+free. For that we need to add new category types:
 
+- visitor
+- key_extractor
+
+Injector creates pods for these just like it does with keys; the view
+model transformer intercepts them and generates the correct view
+models.
+
+*** Add doxygen comments to keys                                      :story:
 *** Use explicit casting for versioned to unversioned conversions     :story:
+    CLOCK: [2013-05-11 Sat 15:06]--[2013-05-11 Sat 15:13] =>  0:07
     CLOCK: [2012-11-22 Thu 08:44]--[2012-11-22 Thu 09:20] =>  0:36
 
 At present we have to_versioned; in reality this would be dealt much
@@ -162,5 +179,9 @@ At this point in time we do not have enough use cases to make the
 correct design decisions in this area. We need to wait until we start
 using keys in anger in Creris and then design the API around the use
 cases.
+
+It is not possible to use global cast operators so we need to
+introduce a dependency between versioned and unversioned keys in order
+for this to work.
 
 ** Deprecated Development Stories
