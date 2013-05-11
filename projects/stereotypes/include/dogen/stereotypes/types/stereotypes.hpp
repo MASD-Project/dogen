@@ -37,6 +37,8 @@ namespace dogen {
  * @li @e generability: pods which are marked as non-generatable
  * @li @e value and @e enttiy: value and entity pods.
  * @li @e service: pods marked as service - non-generatable.
+ * @li @e entity: pods marked as entity must have an identity
+ * @li @e keyed: entities marked as keyed will generate external keys.
  *
  */
 namespace stereotypes {

@@ -24,20 +24,20 @@ namespace dogen {
 namespace sml {
 
 property::property()
-    : is_key_attribute_(static_cast<bool>(0)) { }
+    : is_identity_attribute_(static_cast<bool>(0)) { }
 
 property::property(
     const std::string& name,
     const dogen::sml::nested_qname& type_name,
     const std::string& default_value,
     const std::string& documentation,
-    const bool is_key_attribute,
+    const bool is_identity_attribute,
     const std::vector<std::pair<std::string, std::string> >& implementation_specific_parameters)
     : name_(name),
       type_name_(type_name),
       default_value_(default_value),
       documentation_(documentation),
-      is_key_attribute_(is_key_attribute),
+      is_identity_attribute_(is_identity_attribute),
       implementation_specific_parameters_(implementation_specific_parameters) { }
 
 void property::swap(property& other) noexcept {
@@ -46,7 +46,7 @@ void property::swap(property& other) noexcept {
     swap(type_name_, other.type_name_);
     swap(default_value_, other.default_value_);
     swap(documentation_, other.documentation_);
-    swap(is_key_attribute_, other.is_key_attribute_);
+    swap(is_identity_attribute_, other.is_identity_attribute_);
     swap(implementation_specific_parameters_, other.implementation_specific_parameters_);
 }
 
@@ -55,7 +55,7 @@ bool property::operator==(const property& rhs) const {
         type_name_ == rhs.type_name_ &&
         default_value_ == rhs.default_value_ &&
         documentation_ == rhs.documentation_ &&
-        is_key_attribute_ == rhs.is_key_attribute_ &&
+        is_identity_attribute_ == rhs.is_identity_attribute_ &&
         implementation_specific_parameters_ == rhs.implementation_specific_parameters_;
 }
 
@@ -129,12 +129,12 @@ void property::documentation(const std::string&& v) {
     documentation_ = std::move(v);
 }
 
-bool property::is_key_attribute() const {
-    return is_key_attribute_;
+bool property::is_identity_attribute() const {
+    return is_identity_attribute_;
 }
 
-void property::is_key_attribute(const bool v) {
-    is_key_attribute_ = v;
+void property::is_identity_attribute(const bool v) {
+    is_identity_attribute_ = v;
 }
 
 const std::vector<std::pair<std::string, std::string> >& property::implementation_specific_parameters() const {

@@ -10,17 +10,17 @@ This file contains all stories that were closed during sprint 26.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-05-10 Fri 19:58]
+Clock summary at [2013-05-11 Sat 03:28]
 
 | Headline                                                      | Time   |      |      |
 |---------------------------------------------------------------+--------+------+------|
-| *Total time*                                                  | *6:12* |      |      |
+| *Total time*                                                  | *9:08* |      |      |
 |---------------------------------------------------------------+--------+------+------|
-| Development Stories Implemented                               |        | 6:12 |      |
+| Development Stories Implemented                               |        | 9:08 |      |
 | COMPLETED Fix build break on visitor tests                    |        |      | 0:32 |
 | COMPLETED Remove workflow aspects from transformer            |        |      | 2:23 |
 | COMPLETED Add tests for profiler                              |        |      | 1:56 |
-| IMPLEMENTATION Re-implement key support                       |        |      | 0:45 |
+| IMPLEMENTATION Re-implement key support                       |        |      | 3:41 |
 | Use explicit casting for versioned to unversioned conversions |        |      | 0:36 |
 #+end:
 
@@ -78,8 +78,8 @@ have minimum tests.
 - create new stand alone function =extract_key=. given an instance of
   a class, it returns the corresponding key. it should be defined in
   the same file as the key.
-- if versioned, also create unversioned key class. add typedefs in
-  class for versioned key.
+- if versioned, also create versioned key class. add typedefs in class
+  for versioned key.
 
 Rules:
 
@@ -112,13 +112,18 @@ models - for instance if a model makes reference to a key, it will no
 longer work. Not quite sure what was the original intention but as its
 stands this is not a useful feature, so remove it across the board.
 
-**** Unhook key generation from entity stereotype
+**** COMPLETED Implement new key generation and remove legacy code
+     CLOSED: [2013-05-11 Sat 03:28]
+     CLOCK: [2013-05-11 Sat 00:54]--[2013-05-11 Sat 03:28] =>  2:34
+     CLOCK: [2013-05-11 Sat 00:40]--[2013-05-11 Sat 00:54] =>  0:14
+     CLOCK: [2013-05-11 Sat 00:14]--[2013-05-11 Sat 00:22] =>  0:08
 
 Do not generate versioned/unversioned keys for entities.
 
-**** Hook key generation to keyed stereotype
-**** Only define versioned key if versioned stereotype is present
-
+**** Add =std::string= identity scenario to =std_model=
+**** Add pod identity scenario to stereotypes model
+**** Add =extract_key= function
+*** Add injector tests                                                :story:
 *** Use explicit casting for versioned to unversioned conversions     :story:
     CLOCK: [2012-11-22 Thu 08:44]--[2012-11-22 Thu 09:20] =>  0:36
 

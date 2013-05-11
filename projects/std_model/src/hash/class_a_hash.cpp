@@ -19,7 +19,6 @@
  *
  */
 #include "dogen/std_model/hash/class_a_hash.hpp"
-#include "dogen/std_model/hash/class_a_versioned_key_hash.hpp"
 
 namespace {
 
@@ -40,7 +39,7 @@ std::size_t class_a_hasher::hash(const class_a&v) {
 
     combine(seed, v.prop0());
     combine(seed, v.prop1());
-    combine(seed, v.versioned_key());
+    combine(seed, v.version());
 
     return seed;
 }

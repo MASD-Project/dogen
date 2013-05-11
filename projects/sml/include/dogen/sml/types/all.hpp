@@ -25,6 +25,7 @@
 #include "dogen/sml/types/enumerator.hpp"
 #include "dogen/sml/types/exception.hpp"
 #include "dogen/sml/types/generation_types.hpp"
+#include "dogen/sml/types/injection_error.hpp"
 #include "dogen/sml/types/injector.hpp"
 #include "dogen/sml/types/merger.hpp"
 #include "dogen/sml/types/merging_error.hpp"

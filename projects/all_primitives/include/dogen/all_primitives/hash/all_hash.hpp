@@ -19,5 +19,3 @@
  *
  */
 #include "dogen/all_primitives/hash/a_class_hash.hpp"
-#include "dogen/all_primitives/hash/a_class_unversioned_key_hash.hpp"
-#include "dogen/all_primitives/hash/a_class_versioned_key_hash.hpp"

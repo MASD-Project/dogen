@@ -37,7 +37,7 @@ namespace std_model {
 std::size_t class_a_unversioned_key_hasher::hash(const class_a_unversioned_key&v) {
     std::size_t seed(0);
 
-    combine(seed, v.id());
+    combine(seed, v.prop0());
     return seed;
 }
 

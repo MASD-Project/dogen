@@ -27,6 +27,7 @@
 #include <boost/archive/xml_iarchive.hpp>
 #include <boost/archive/xml_oarchive.hpp>
 #include <boost/serialization/nvp.hpp>
+#include <boost/serialization/string.hpp>
 #include "dogen/std_model/serialization/class_a_unversioned_key_ser.hpp"
 
 #ifdef __linux__
@@ -41,14 +42,14 @@ template<typename Archive>
 void save(Archive& ar,
     const dogen::std_model::class_a_unversioned_key& v,
     const unsigned int /*version*/) {
-    ar << make_nvp("id", v.id_);
+    ar << make_nvp("prop0", v.prop0_);
 }
 
 template<typename Archive>
 void load(Archive& ar,
     dogen::std_model::class_a_unversioned_key& v,
     const unsigned int /*version*/) {
-    ar >> make_nvp("id", v.id_);
+    ar >> make_nvp("prop0", v.prop0_);
 }
 
 } }

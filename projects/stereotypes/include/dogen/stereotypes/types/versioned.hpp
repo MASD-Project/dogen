@@ -31,6 +31,9 @@
 namespace dogen {
 namespace stereotypes {
 
+/**
+ * @brief Types marked as versioned will generate a system property called version.
+ */
 class versioned final {
 public:
     versioned(const versioned&) = default;

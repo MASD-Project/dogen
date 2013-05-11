@@ -67,7 +67,7 @@
 						</type_name>
 						<default_value></default_value>
 						<documentation></documentation>
-						<is_key_attribute>0</is_key_attribute>
+						<is_identity_attribute>0</is_identity_attribute>
 						<implementation_specific_parameters class_id="11" tracking_level="0" version="0">
 							<count>0</count>
 							<item_version>0</item_version>

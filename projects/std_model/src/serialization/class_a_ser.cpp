@@ -29,7 +29,6 @@
 #include <boost/serialization/nvp.hpp>
 #include <boost/serialization/string.hpp>
 #include "dogen/std_model/serialization/class_a_ser.hpp"
-#include "dogen/std_model/serialization/class_a_versioned_key_ser.hpp"
 
 #ifdef __linux__
 #include "eos/portable_iarchive.hpp"
@@ -45,7 +44,7 @@ void save(Archive& ar,
     const unsigned int /*version*/) {
     ar << make_nvp("prop0", v.prop0_);
     ar << make_nvp("prop1", v.prop1_);
-    ar << make_nvp("versioned_key", v.versioned_key_);
+    ar << make_nvp("version", v.version_);
 }
 
 template<typename Archive>
@@ -54,7 +53,7 @@ void load(Archive& ar,
     const unsigned int /*version*/) {
     ar >> make_nvp("prop0", v.prop0_);
     ar >> make_nvp("prop1", v.prop1_);
-    ar >> make_nvp("versioned_key", v.versioned_key_);
+    ar >> make_nvp("version", v.version_);
 }
 
 } }

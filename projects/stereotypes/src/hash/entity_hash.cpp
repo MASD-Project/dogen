@@ -19,7 +19,6 @@
  *
  */
 #include "dogen/stereotypes/hash/entity_hash.hpp"
-#include "dogen/stereotypes/hash/entity_versioned_key_hash.hpp"
 
 namespace {
 
@@ -39,8 +38,6 @@ std::size_t entity_hasher::hash(const entity&v) {
     std::size_t seed(0);
 
     combine(seed, v.prop_0());
-    combine(seed, v.versioned_key());
-
     return seed;
 }
 

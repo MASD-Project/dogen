@@ -19,5 +19,3 @@
  *
  */
 #include "dogen/class_in_a_package/odb/package1/first_class_pragmas.hpp"
-#include "dogen/class_in_a_package/odb/package1/first_class_unversioned_key_pragmas.hpp"
-#include "dogen/class_in_a_package/odb/package1/first_class_versioned_key_pragmas.hpp"

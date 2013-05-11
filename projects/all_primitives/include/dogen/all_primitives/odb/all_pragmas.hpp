@@ -19,5 +19,3 @@
  *
  */
 #include "dogen/all_primitives/odb/a_class_pragmas.hpp"
-#include "dogen/all_primitives/odb/a_class_unversioned_key_pragmas.hpp"
-#include "dogen/all_primitives/odb/a_class_versioned_key_pragmas.hpp"

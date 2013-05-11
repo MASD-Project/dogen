@@ -26,21 +26,16 @@ namespace stereotypes {
 entity::entity()
     : prop_0_(static_cast<int>(0)) { }
 
-entity::entity(
-    const int prop_0,
-    const dogen::stereotypes::entity_versioned_key& versioned_key)
-    : prop_0_(prop_0),
-      versioned_key_(versioned_key) { }
+entity::entity(const int prop_0)
+    : prop_0_(prop_0) { }
 
 void entity::swap(entity& other) noexcept {
     using std::swap;
     swap(prop_0_, other.prop_0_);
-    swap(versioned_key_, other.versioned_key_);
 }
 
 bool entity::operator==(const entity& rhs) const {
-    return prop_0_ == rhs.prop_0_ &&
-        versioned_key_ == rhs.versioned_key_;
+    return prop_0_ == rhs.prop_0_;
 }
 
 entity& entity::operator=(entity other) {
@@ -55,22 +50,6 @@ int entity::prop_0() const {
 
 void entity::prop_0(const int v) {
     prop_0_ = v;
-}
-
-const dogen::stereotypes::entity_versioned_key& entity::versioned_key() const {
-    return versioned_key_;
-}
-
-dogen::stereotypes::entity_versioned_key& entity::versioned_key() {
-    return versioned_key_;
-}
-
-void entity::versioned_key(const dogen::stereotypes::entity_versioned_key& v) {
-    versioned_key_ = v;
-}
-
-void entity::versioned_key(const dogen::stereotypes::entity_versioned_key&& v) {
-    versioned_key_ = std::move(v);
 }
 
 } }

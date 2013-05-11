@@ -75,7 +75,7 @@ std::ostream& operator<<(std::ostream& s, const property& v) {
       << "\"type_name\": " << v.type_name() << ", "
       << "\"default_value\": " << "\"" << tidy_up_string(v.default_value()) << "\"" << ", "
       << "\"documentation\": " << "\"" << tidy_up_string(v.documentation()) << "\"" << ", "
-      << "\"is_key_attribute\": " << v.is_key_attribute() << ", "
+      << "\"is_identity_attribute\": " << v.is_identity_attribute() << ", "
       << "\"implementation_specific_parameters\": " << v.implementation_specific_parameters()
       << " }";
     return(s);

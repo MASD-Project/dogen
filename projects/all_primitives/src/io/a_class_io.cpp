@@ -21,7 +21,6 @@
 #include <boost/io/ios_state.hpp>
 #include <ostream>
 #include "dogen/all_primitives/io/a_class_io.hpp"
-#include "dogen/all_primitives/io/a_class_versioned_key_io.hpp"
 
 namespace dogen {
 namespace all_primitives {
@@ -47,8 +46,7 @@ std::ostream& operator<<(std::ostream& s, const a_class& v) {
       << "\"short_property\": " << v.short_property() << ", "
       << "\"ushort_property\": " << v.ushort_property() << ", "
       << "\"double_property\": " << v.double_property() << ", "
-      << "\"float_property\": " << v.float_property() << ", "
-      << "\"versioned_key\": " << v.versioned_key()
+      << "\"float_property\": " << v.float_property()
       << " }";
     return(s);
 }

@@ -19,5 +19,3 @@
  *
  */
 #include "dogen/all_primitives/io/a_class_io.hpp"
-#include "dogen/all_primitives/io/a_class_unversioned_key_io.hpp"
-#include "dogen/all_primitives/io/a_class_versioned_key_io.hpp"

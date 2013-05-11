@@ -26,6 +26,7 @@
 #endif
 
 #include <algorithm>
+#include <string>
 #include "dogen/std_model/serialization/class_a_unversioned_key_fwd_ser.hpp"
 
 namespace dogen {
@@ -33,15 +34,13 @@ namespace std_model {
 
 class class_a_unversioned_key final {
 public:
+    class_a_unversioned_key() = default;
     class_a_unversioned_key(const class_a_unversioned_key&) = default;
     class_a_unversioned_key(class_a_unversioned_key&&) = default;
     ~class_a_unversioned_key() = default;
 
 public:
-    class_a_unversioned_key();
-
-public:
-    explicit class_a_unversioned_key(const unsigned int id);
+    explicit class_a_unversioned_key(const std::string& prop0);
 
 private:
     template<typename Archive>
@@ -51,8 +50,10 @@ private:
     friend void boost::serialization::load(Archive& ar, class_a_unversioned_key& v, unsigned int version);
 
 public:
-    unsigned int id() const;
-    void id(const unsigned int v);
+    const std::string& prop0() const;
+    std::string& prop0();
+    void prop0(const std::string& v);
+    void prop0(const std::string&& v);
 
 public:
     bool operator==(const class_a_unversioned_key& rhs) const;
@@ -65,7 +66,7 @@ public:
     class_a_unversioned_key& operator=(class_a_unversioned_key other);
 
 private:
-    unsigned int id_;
+    std::string prop0_;
 };
 
 } }

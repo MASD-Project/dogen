@@ -23,25 +23,28 @@
 namespace dogen {
 namespace std_model {
 
+class_a::class_a()
+    : version_(static_cast<unsigned int>(0)) { }
+
 class_a::class_a(
     const std::string& prop0,
     const std::string& prop1,
-    const dogen::std_model::class_a_versioned_key& versioned_key)
+    const unsigned int version)
     : prop0_(prop0),
       prop1_(prop1),
-      versioned_key_(versioned_key) { }
+      version_(version) { }
 
 void class_a::swap(class_a& other) noexcept {
     using std::swap;
     swap(prop0_, other.prop0_);
     swap(prop1_, other.prop1_);
-    swap(versioned_key_, other.versioned_key_);
+    swap(version_, other.version_);
 }
 
 bool class_a::operator==(const class_a& rhs) const {
     return prop0_ == rhs.prop0_ &&
         prop1_ == rhs.prop1_ &&
-        versioned_key_ == rhs.versioned_key_;
+        version_ == rhs.version_;
 }
 
 class_a& class_a::operator=(class_a other) {
@@ -82,20 +85,12 @@ void class_a::prop1(const std::string&& v) {
     prop1_ = std::move(v);
 }
 
-const dogen::std_model::class_a_versioned_key& class_a::versioned_key() const {
-    return versioned_key_;
+unsigned int class_a::version() const {
+    return version_;
 }
 
-dogen::std_model::class_a_versioned_key& class_a::versioned_key() {
-    return versioned_key_;
-}
-
-void class_a::versioned_key(const dogen::std_model::class_a_versioned_key& v) {
-    versioned_key_ = v;
-}
-
-void class_a::versioned_key(const dogen::std_model::class_a_versioned_key&& v) {
-    versioned_key_ = std::move(v);
+void class_a::version(const unsigned int v) {
+    version_ = v;
 }
 
 } }

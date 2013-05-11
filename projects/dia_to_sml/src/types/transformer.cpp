@@ -40,7 +40,7 @@ using namespace dogen::utility::log;
 static logger lg(logger_factory("dia_to_sml.transformer"));
 
 const std::string empty;
-const std::string key_attribute_key("KEY_ATTRIBUTE");
+const std::string identity_attribute_key("IDENTITY_ATTRIBUTE");
 const std::string comment_key("COMMENT");
 const std::string empty_dia_object_name("Dia object name is empty");
 const std::string original_parent_not_found("Pod has no original parent: ");
@@ -165,10 +165,10 @@ transform_property(const processed_property& p) {
     r.implementation_specific_parameters(pair.second);
 
     for (const auto pair : r.implementation_specific_parameters()) {
-        if (pair.first != key_attribute_key)
+        if (pair.first != identity_attribute_key)
             continue;
 
-        r.is_key_attribute(true);
+        r.is_identity_attribute(true);
         break;
     }
 

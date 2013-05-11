@@ -25,7 +25,6 @@
 #pragma once
 #endif
 
-#include "dogen/stereotypes/odb/entity_versioned_key_pragmas.hpp"
 #include "dogen/stereotypes/types/entity.hpp"
 
 // class has no ODB pragmas defined.

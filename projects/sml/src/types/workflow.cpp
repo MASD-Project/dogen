@@ -27,11 +27,11 @@
 namespace dogen {
 namespace sml {
 
-workflow::workflow() : add_system_models_(true), add_versioning_types_(true) {}
+workflow::workflow() : add_system_models_(true) {}
 
 workflow::
 workflow(const bool add_system_models)
-    : add_system_models_(add_system_models), add_versioning_types_(true) {}
+    : add_system_models_(add_system_models) {}
 
 bool workflow::has_generatable_types(const sml::model& m) const {
     auto lambda([](sml::generation_types gt) {
@@ -68,7 +68,7 @@ void workflow::add_system_models() {
 }
 
 void workflow::add_references(const std::list<model>& references) {
-    injector i(add_versioning_types_);
+    injector i;
     for (auto r : references) {
         i.inject(r);
         merger_.add(r);
@@ -76,7 +76,7 @@ void workflow::add_references(const std::list<model>& references) {
 }
 
 void workflow::add_target(const model& target) {
-    injector i(add_versioning_types_);
+    injector i;
     auto t(target);
     i.inject(t);
     merger_.add_target(t);

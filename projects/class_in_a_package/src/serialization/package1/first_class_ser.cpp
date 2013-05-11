@@ -28,7 +28,6 @@
 #include <boost/archive/xml_oarchive.hpp>
 #include <boost/serialization/nvp.hpp>
 #include "dogen/class_in_a_package/serialization/package1/first_class_ser.hpp"
-#include "dogen/class_in_a_package/serialization/package1/first_class_versioned_key_ser.hpp"
 
 #ifdef __linux__
 #include "eos/portable_iarchive.hpp"
@@ -44,7 +43,6 @@ void save(Archive& ar,
     const unsigned int /*version*/) {
     ar << make_nvp("public_attribute", v.public_attribute_);
     ar << make_nvp("private_attribute", v.private_attribute_);
-    ar << make_nvp("versioned_key", v.versioned_key_);
 }
 
 template<typename Archive>
@@ -53,7 +51,6 @@ void load(Archive& ar,
     const unsigned int /*version*/) {
     ar >> make_nvp("public_attribute", v.public_attribute_);
     ar >> make_nvp("private_attribute", v.private_attribute_);
-    ar >> make_nvp("versioned_key", v.versioned_key_);
 }
 
 } }

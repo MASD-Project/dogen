@@ -28,23 +28,24 @@
 #include <algorithm>
 #include <string>
 #include "dogen/std_model/serialization/class_a_fwd_ser.hpp"
-#include "dogen/std_model/types/class_a_versioned_key.hpp"
 
 namespace dogen {
 namespace std_model {
 
 class class_a final {
 public:
-    class_a() = default;
     class_a(const class_a&) = default;
     class_a(class_a&&) = default;
     ~class_a() = default;
 
 public:
+    class_a();
+
+public:
     class_a(
         const std::string& prop0,
         const std::string& prop1,
-        const dogen::std_model::class_a_versioned_key& versioned_key);
+        const unsigned int version);
 
 private:
     template<typename Archive>
@@ -69,10 +70,8 @@ public:
     void prop1(const std::string&& v);
     /**@}*/
 
-    const dogen::std_model::class_a_versioned_key& versioned_key() const;
-    dogen::std_model::class_a_versioned_key& versioned_key();
-    void versioned_key(const dogen::std_model::class_a_versioned_key& v);
-    void versioned_key(const dogen::std_model::class_a_versioned_key&& v);
+    unsigned int version() const;
+    void version(const unsigned int v);
 
 public:
     bool operator==(const class_a& rhs) const;
@@ -87,7 +86,7 @@ public:
 private:
     std::string prop0_;
     std::string prop1_;
-    dogen::std_model::class_a_versioned_key versioned_key_;
+    unsigned int version_;
 };
 
 } }

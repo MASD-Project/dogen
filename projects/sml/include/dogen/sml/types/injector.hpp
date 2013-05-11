@@ -25,6 +25,7 @@
 #pragma once
 #endif
 
+#include <vector>
 #include "dogen/sml/types/pod.hpp"
 #include "dogen/sml/types/model.hpp"
 
@@ -33,35 +34,38 @@ namespace sml {
 
 class injector {
 public:
+    injector() = default;
     injector(const injector&) = default;
     ~injector() = default;
     injector(injector&&) = default;
     injector& operator=(const injector&) = default;
-
-public:
-    injector();
-    explicit injector(const bool add_versioning_types);
 
 private:
     /**
      * @brief Creates a key for the given pod.
      *
      * @param p pod for which to create a key
-     * @param is_versioned if true, create a versioned key. Otherwise,
+     * @param versioned if true, create a versioned key. Otherwise,
      * creates an unversioned key.
      */
-    pod create_key_system_pod(const sml::pod& p, const bool is_versioned) const;
+    pod create_key(const qname& qn, const generation_types gt,
+        const std::vector<property>& properties, const bool versioned) const;
 
     /**
-     * @brief Performs the deprecated behaviour for key management.
+     * @brief Injects versioned and unversioned keys for keyed entities.
      */
-    void inject_legacy_keys(model& m) const;
+    void inject_keys(model& m) const;
+
+    /**
+     * @brief Injects the version property on the pod passed in.
+     */
+    void inject_version(pod& p) const;
 
     /**
      * @brief Injects the version property on any types marked as
      * versioned.
      */
-    void inject_versioning(model& m) const;
+    void inject_version(model& m) const;
 
 public:
 
@@ -71,9 +75,6 @@ public:
      * @param m SML model to operate on.
      */
     void inject(model& m) const;
-
-private:
-    const bool add_versioning_types_;
 };
 
 } }

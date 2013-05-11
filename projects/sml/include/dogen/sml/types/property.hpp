@@ -53,7 +53,7 @@ public:
         const dogen::sml::nested_qname& type_name,
         const std::string& default_value,
         const std::string& documentation,
-        const bool is_key_attribute,
+        const bool is_identity_attribute,
         const std::vector<std::pair<std::string, std::string> >& implementation_specific_parameters);
 
 private:
@@ -107,11 +107,11 @@ public:
     /**@}*/
 
     /**
-     * @brief If true, the attribute is part of the key.
+     * @brief If true, the attribute is part of the object's identity attribute set.
      */
     /**@{*/
-    bool is_key_attribute() const;
-    void is_key_attribute(const bool v);
+    bool is_identity_attribute() const;
+    void is_identity_attribute(const bool v);
     /**@}*/
 
     /**
@@ -139,7 +139,7 @@ private:
     dogen::sml::nested_qname type_name_;
     std::string default_value_;
     std::string documentation_;
-    bool is_key_attribute_;
+    bool is_identity_attribute_;
     std::vector<std::pair<std::string, std::string> > implementation_specific_parameters_;
 };
 

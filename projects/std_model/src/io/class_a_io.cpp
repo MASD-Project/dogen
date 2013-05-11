@@ -21,7 +21,6 @@
 #include <boost/algorithm/string.hpp>
 #include <ostream>
 #include "dogen/std_model/io/class_a_io.hpp"
-#include "dogen/std_model/io/class_a_versioned_key_io.hpp"
 
 
 inline std::string tidy_up_string(std::string s) {
@@ -39,7 +38,7 @@ std::ostream& operator<<(std::ostream& s, const class_a& v) {
       << "\"__type__\": " << "\"dogen::std_model::class_a\"" << ", "
       << "\"prop0\": " << "\"" << tidy_up_string(v.prop0()) << "\"" << ", "
       << "\"prop1\": " << "\"" << tidy_up_string(v.prop1()) << "\"" << ", "
-      << "\"versioned_key\": " << v.versioned_key()
+      << "\"version\": " << v.version()
       << " }";
     return(s);
 }

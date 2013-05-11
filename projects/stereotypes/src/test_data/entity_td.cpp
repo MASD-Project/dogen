@@ -19,17 +19,11 @@
  *
  */
 #include "dogen/stereotypes/test_data/entity_td.hpp"
-#include "dogen/stereotypes/test_data/entity_versioned_key_td.hpp"
 
 namespace {
 
 int create_int(const unsigned int position) {
     return position;
-}
-
-dogen::stereotypes::entity_versioned_key
-create_dogen_stereotypes_entity_versioned_key(const unsigned int position) {
-    return dogen::stereotypes::entity_versioned_key_generator::create(position);
 }
 
 }
@@ -42,7 +36,6 @@ entity_generator::entity_generator() : position_(0) { }
 void entity_generator::
 populate(const unsigned int position, result_type& v) {
     v.prop_0(create_int(position + 0));
-    v.versioned_key(create_dogen_stereotypes_entity_versioned_key(position + 1));
 }
 
 entity_generator::result_type

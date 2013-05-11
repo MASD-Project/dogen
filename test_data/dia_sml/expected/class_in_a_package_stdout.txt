@@ -21,8 +21,6 @@ Contents:
  *
  */
 #include "class_in_a_package/hash/package1/first_class_hash.hpp"
-#include "class_in_a_package/hash/package1/first_class_unversioned_key_hash.hpp"
-#include "class_in_a_package/hash/package1/first_class_versioned_key_hash.hpp"
 
 Filename: /empty_tds/actual/include/class_in_a_package/hash/package1/first_class_hash.hpp
 Contents: 
@@ -79,116 +77,6 @@ public:
 }
 #endif
 
-Filename: /empty_tds/actual/include/class_in_a_package/hash/package1/first_class_unversioned_key_hash.hpp
-Contents: 
-/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
- *
- * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
- *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
- * MA 02110-1301, USA.
- *
- */
-#ifndef CLASS_IN_A_PACKAGE_HASH_PACKAGE1_FIRST_CLASS_UNVERSIONED_KEY_HASH_HPP
-#define CLASS_IN_A_PACKAGE_HASH_PACKAGE1_FIRST_CLASS_UNVERSIONED_KEY_HASH_HPP
-
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
-
-#include <functional>
-#include "class_in_a_package/types/package1/first_class_unversioned_key.hpp"
-
-namespace class_in_a_package {
-namespace package1 {
-
-class first_class_unversioned_key_hasher {
-public:
-    static std::size_t hash(const first_class_unversioned_key& v);
-};
-
-} }
-
-namespace std {
-
-template<>
-class hash<class_in_a_package::package1::first_class_unversioned_key> {
-public:
-    size_t operator()(const class_in_a_package::package1::first_class_unversioned_key& v) const {
-        return class_in_a_package::package1::first_class_unversioned_key_hasher::hash(v);
-    }
-};
-
-}
-#endif
-
-Filename: /empty_tds/actual/include/class_in_a_package/hash/package1/first_class_versioned_key_hash.hpp
-Contents: 
-/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
- *
- * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
- *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
- * MA 02110-1301, USA.
- *
- */
-#ifndef CLASS_IN_A_PACKAGE_HASH_PACKAGE1_FIRST_CLASS_VERSIONED_KEY_HASH_HPP
-#define CLASS_IN_A_PACKAGE_HASH_PACKAGE1_FIRST_CLASS_VERSIONED_KEY_HASH_HPP
-
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
-
-#include <functional>
-#include "class_in_a_package/types/package1/first_class_versioned_key.hpp"
-
-namespace class_in_a_package {
-namespace package1 {
-
-class first_class_versioned_key_hasher {
-public:
-    static std::size_t hash(const first_class_versioned_key& v);
-};
-
-} }
-
-namespace std {
-
-template<>
-class hash<class_in_a_package::package1::first_class_versioned_key> {
-public:
-    size_t operator()(const class_in_a_package::package1::first_class_versioned_key& v) const {
-        return class_in_a_package::package1::first_class_versioned_key_hasher::hash(v);
-    }
-};
-
-}
-#endif
-
 Filename: /empty_tds/actual/include/class_in_a_package/io/all_io.hpp
 Contents: 
 /* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
@@ -212,8 +100,6 @@ Contents:
  *
  */
 #include "class_in_a_package/io/package1/first_class_io.hpp"
-#include "class_in_a_package/io/package1/first_class_unversioned_key_io.hpp"
-#include "class_in_a_package/io/package1/first_class_versioned_key_io.hpp"
 
 Filename: /empty_tds/actual/include/class_in_a_package/io/package1/first_class_io.hpp
 Contents: 
@@ -258,92 +144,6 @@ operator<<(std::ostream& s,
 
 #endif
 
-Filename: /empty_tds/actual/include/class_in_a_package/io/package1/first_class_unversioned_key_io.hpp
-Contents: 
-/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
- *
- * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
- *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
- * MA 02110-1301, USA.
- *
- */
-#ifndef CLASS_IN_A_PACKAGE_IO_PACKAGE1_FIRST_CLASS_UNVERSIONED_KEY_IO_HPP
-#define CLASS_IN_A_PACKAGE_IO_PACKAGE1_FIRST_CLASS_UNVERSIONED_KEY_IO_HPP
-
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
-
-#include <iosfwd>
-#include "class_in_a_package/types/package1/first_class_unversioned_key.hpp"
-
-namespace class_in_a_package {
-namespace package1 {
-
-std::ostream&
-operator<<(std::ostream& s,
-     const class_in_a_package::package1::first_class_unversioned_key& v);
-
-} }
-
-#endif
-
-Filename: /empty_tds/actual/include/class_in_a_package/io/package1/first_class_versioned_key_io.hpp
-Contents: 
-/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
- *
- * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
- *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
- * MA 02110-1301, USA.
- *
- */
-#ifndef CLASS_IN_A_PACKAGE_IO_PACKAGE1_FIRST_CLASS_VERSIONED_KEY_IO_HPP
-#define CLASS_IN_A_PACKAGE_IO_PACKAGE1_FIRST_CLASS_VERSIONED_KEY_IO_HPP
-
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
-
-#include <iosfwd>
-#include "class_in_a_package/types/package1/first_class_versioned_key.hpp"
-
-namespace class_in_a_package {
-namespace package1 {
-
-std::ostream&
-operator<<(std::ostream& s,
-     const class_in_a_package::package1::first_class_versioned_key& v);
-
-} }
-
-#endif
-
 Filename: /empty_tds/actual/include/class_in_a_package/odb/all_pragmas.hpp
 Contents: 
 /* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
@@ -367,8 +167,6 @@ Contents:
  *
  */
 #include "class_in_a_package/odb/package1/first_class_pragmas.hpp"
-#include "class_in_a_package/odb/package1/first_class_unversioned_key_pragmas.hpp"
-#include "class_in_a_package/odb/package1/first_class_versioned_key_pragmas.hpp"
 
 Filename: /empty_tds/actual/include/class_in_a_package/odb/package1/first_class_pragmas.hpp
 Contents: 
@@ -399,78 +197,7 @@ Contents:
 #pragma once
 #endif
 
-#include "class_in_a_package/odb/package1/first_class_versioned_key_pragmas.hpp"
 #include "class_in_a_package/types/package1/first_class.hpp"
-
-// class has no ODB pragmas defined.
-
-#endif
-
-Filename: /empty_tds/actual/include/class_in_a_package/odb/package1/first_class_unversioned_key_pragmas.hpp
-Contents: 
-/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
- *
- * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
- *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
- * MA 02110-1301, USA.
- *
- */
-#ifndef CLASS_IN_A_PACKAGE_ODB_PACKAGE1_FIRST_CLASS_UNVERSIONED_KEY_PRAGMAS_HPP
-#define CLASS_IN_A_PACKAGE_ODB_PACKAGE1_FIRST_CLASS_UNVERSIONED_KEY_PRAGMAS_HPP
-
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
-
-#include "class_in_a_package/types/package1/first_class_unversioned_key.hpp"
-
-// class has no ODB pragmas defined.
-
-#endif
-
-Filename: /empty_tds/actual/include/class_in_a_package/odb/package1/first_class_versioned_key_pragmas.hpp
-Contents: 
-/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
- *
- * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
- *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
- * MA 02110-1301, USA.
- *
- */
-#ifndef CLASS_IN_A_PACKAGE_ODB_PACKAGE1_FIRST_CLASS_VERSIONED_KEY_PRAGMAS_HPP
-#define CLASS_IN_A_PACKAGE_ODB_PACKAGE1_FIRST_CLASS_VERSIONED_KEY_PRAGMAS_HPP
-
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
-
-#include "class_in_a_package/types/package1/first_class_versioned_key.hpp"
 
 // class has no ODB pragmas defined.
 
@@ -499,8 +226,6 @@ Contents:
  *
  */
 #include "class_in_a_package/serialization/package1/first_class_ser.hpp"
-#include "class_in_a_package/serialization/package1/first_class_unversioned_key_ser.hpp"
-#include "class_in_a_package/serialization/package1/first_class_versioned_key_ser.hpp"
 
 Filename: /empty_tds/actual/include/class_in_a_package/serialization/package1/first_class_fwd_ser.hpp
 Contents: 
@@ -592,186 +317,6 @@ void load(Archive& ar, class_in_a_package::package1::first_class& v, unsigned in
 
 #endif
 
-Filename: /empty_tds/actual/include/class_in_a_package/serialization/package1/first_class_unversioned_key_fwd_ser.hpp
-Contents: 
-/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
- *
- * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
- *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
- * MA 02110-1301, USA.
- *
- */
-#ifndef CLASS_IN_A_PACKAGE_SERIALIZATION_PACKAGE1_FIRST_CLASS_UNVERSIONED_KEY_FWD_SER_HPP
-#define CLASS_IN_A_PACKAGE_SERIALIZATION_PACKAGE1_FIRST_CLASS_UNVERSIONED_KEY_FWD_SER_HPP
-
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
-
-#include "class_in_a_package/types/package1/first_class_unversioned_key_fwd.hpp"
-
-namespace boost {
-namespace serialization {
-
-template<class Archive>
-void save(Archive& ar, const class_in_a_package::package1::first_class_unversioned_key& v, unsigned int version);
-
-template<class Archive>
-void load(Archive& ar, class_in_a_package::package1::first_class_unversioned_key& v, unsigned int version);
-
-} }
-
-#endif
-
-Filename: /empty_tds/actual/include/class_in_a_package/serialization/package1/first_class_unversioned_key_ser.hpp
-Contents: 
-/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
- *
- * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
- *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
- * MA 02110-1301, USA.
- *
- */
-#ifndef CLASS_IN_A_PACKAGE_SERIALIZATION_PACKAGE1_FIRST_CLASS_UNVERSIONED_KEY_SER_HPP
-#define CLASS_IN_A_PACKAGE_SERIALIZATION_PACKAGE1_FIRST_CLASS_UNVERSIONED_KEY_SER_HPP
-
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
-
-#include <boost/serialization/split_free.hpp>
-#include "class_in_a_package/types/package1/first_class_unversioned_key.hpp"
-
-BOOST_SERIALIZATION_SPLIT_FREE(class_in_a_package::package1::first_class_unversioned_key)
-namespace boost {
-namespace serialization {
-
-template<typename Archive>
-void save(Archive& ar, const class_in_a_package::package1::first_class_unversioned_key& v, unsigned int version);
-
-template<typename Archive>
-void load(Archive& ar, class_in_a_package::package1::first_class_unversioned_key& v, unsigned int version);
-
-} }
-
-#endif
-
-Filename: /empty_tds/actual/include/class_in_a_package/serialization/package1/first_class_versioned_key_fwd_ser.hpp
-Contents: 
-/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
- *
- * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
- *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
- * MA 02110-1301, USA.
- *
- */
-#ifndef CLASS_IN_A_PACKAGE_SERIALIZATION_PACKAGE1_FIRST_CLASS_VERSIONED_KEY_FWD_SER_HPP
-#define CLASS_IN_A_PACKAGE_SERIALIZATION_PACKAGE1_FIRST_CLASS_VERSIONED_KEY_FWD_SER_HPP
-
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
-
-#include "class_in_a_package/types/package1/first_class_versioned_key_fwd.hpp"
-
-namespace boost {
-namespace serialization {
-
-template<class Archive>
-void save(Archive& ar, const class_in_a_package::package1::first_class_versioned_key& v, unsigned int version);
-
-template<class Archive>
-void load(Archive& ar, class_in_a_package::package1::first_class_versioned_key& v, unsigned int version);
-
-} }
-
-#endif
-
-Filename: /empty_tds/actual/include/class_in_a_package/serialization/package1/first_class_versioned_key_ser.hpp
-Contents: 
-/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
- *
- * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
- *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
- * MA 02110-1301, USA.
- *
- */
-#ifndef CLASS_IN_A_PACKAGE_SERIALIZATION_PACKAGE1_FIRST_CLASS_VERSIONED_KEY_SER_HPP
-#define CLASS_IN_A_PACKAGE_SERIALIZATION_PACKAGE1_FIRST_CLASS_VERSIONED_KEY_SER_HPP
-
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
-
-#include <boost/serialization/split_free.hpp>
-#include "class_in_a_package/types/package1/first_class_versioned_key.hpp"
-
-BOOST_SERIALIZATION_SPLIT_FREE(class_in_a_package::package1::first_class_versioned_key)
-namespace boost {
-namespace serialization {
-
-template<typename Archive>
-void save(Archive& ar, const class_in_a_package::package1::first_class_versioned_key& v, unsigned int version);
-
-template<typename Archive>
-void load(Archive& ar, class_in_a_package::package1::first_class_versioned_key& v, unsigned int version);
-
-} }
-
-#endif
-
 Filename: /empty_tds/actual/include/class_in_a_package/serialization/registrar_ser.hpp
 Contents: 
 /* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
@@ -824,8 +369,6 @@ Contents:
  *
  */
 #include "class_in_a_package/test_data/package1/first_class_td.hpp"
-#include "class_in_a_package/test_data/package1/first_class_unversioned_key_td.hpp"
-#include "class_in_a_package/test_data/package1/first_class_versioned_key_td.hpp"
 
 Filename: /empty_tds/actual/include/class_in_a_package/test_data/package1/first_class_td.hpp
 Contents: 
@@ -883,118 +426,6 @@ public:
 
 #endif
 
-Filename: /empty_tds/actual/include/class_in_a_package/test_data/package1/first_class_unversioned_key_td.hpp
-Contents: 
-/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
- *
- * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
- *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
- * MA 02110-1301, USA.
- *
- */
-#ifndef CLASS_IN_A_PACKAGE_TEST_DATA_PACKAGE1_FIRST_CLASS_UNVERSIONED_KEY_TD_HPP
-#define CLASS_IN_A_PACKAGE_TEST_DATA_PACKAGE1_FIRST_CLASS_UNVERSIONED_KEY_TD_HPP
-
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
-
-#include "class_in_a_package/types/package1/first_class_unversioned_key.hpp"
-
-namespace class_in_a_package {
-namespace package1 {
-
-class first_class_unversioned_key_generator {
-public:
-    first_class_unversioned_key_generator();
-
-public:
-    typedef class_in_a_package::package1::first_class_unversioned_key result_type;
-
-public:
-    static void populate(const unsigned int position, result_type& v);
-    static result_type create(const unsigned int position);
-    result_type operator()();
-
-private:
-    unsigned int position_;
-public:
-    static result_type* create_ptr(const unsigned int position);
-};
-
-} }
-
-#endif
-
-Filename: /empty_tds/actual/include/class_in_a_package/test_data/package1/first_class_versioned_key_td.hpp
-Contents: 
-/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
- *
- * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
- *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
- * MA 02110-1301, USA.
- *
- */
-#ifndef CLASS_IN_A_PACKAGE_TEST_DATA_PACKAGE1_FIRST_CLASS_VERSIONED_KEY_TD_HPP
-#define CLASS_IN_A_PACKAGE_TEST_DATA_PACKAGE1_FIRST_CLASS_VERSIONED_KEY_TD_HPP
-
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
-
-#include "class_in_a_package/types/package1/first_class_versioned_key.hpp"
-
-namespace class_in_a_package {
-namespace package1 {
-
-class first_class_versioned_key_generator {
-public:
-    first_class_versioned_key_generator();
-
-public:
-    typedef class_in_a_package::package1::first_class_versioned_key result_type;
-
-public:
-    static void populate(const unsigned int position, result_type& v);
-    static result_type create(const unsigned int position);
-    result_type operator()();
-
-private:
-    unsigned int position_;
-public:
-    static result_type* create_ptr(const unsigned int position);
-};
-
-} }
-
-#endif
-
 Filename: /empty_tds/actual/include/class_in_a_package/types/all.hpp
 Contents: 
 /* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
@@ -1018,8 +449,6 @@ Contents:
  *
  */
 #include "class_in_a_package/types/package1/first_class.hpp"
-#include "class_in_a_package/types/package1/first_class_unversioned_key.hpp"
-#include "class_in_a_package/types/package1/first_class_versioned_key.hpp"
 
 Filename: /empty_tds/actual/include/class_in_a_package/types/package1/first_class.hpp
 Contents: 
@@ -1052,7 +481,6 @@ Contents:
 
 #include <algorithm>
 #include "class_in_a_package/serialization/package1/first_class_fwd_ser.hpp"
-#include "class_in_a_package/types/package1/first_class_versioned_key.hpp"
 
 namespace class_in_a_package {
 namespace package1 {
@@ -1069,8 +497,7 @@ public:
 public:
     first_class(
         const int public_attribute,
-        const int private_attribute,
-        const class_in_a_package::package1::first_class_versioned_key& versioned_key);
+        const int private_attribute);
 
 private:
     template<typename Archive>
@@ -1086,11 +513,6 @@ public:
     int private_attribute() const;
     void private_attribute(const int v);
 
-    const class_in_a_package::package1::first_class_versioned_key& versioned_key() const;
-    class_in_a_package::package1::first_class_versioned_key& versioned_key();
-    void versioned_key(const class_in_a_package::package1::first_class_versioned_key& v);
-    void versioned_key(const class_in_a_package::package1::first_class_versioned_key&& v);
-
 public:
     bool operator==(const first_class& rhs) const;
     bool operator!=(const first_class& rhs) const {
@@ -1104,7 +526,6 @@ public:
 private:
     int public_attribute_;
     int private_attribute_;
-    class_in_a_package::package1::first_class_versioned_key versioned_key_;
 };
 
 } }
@@ -1155,262 +576,6 @@ namespace class_in_a_package {
 namespace package1 {
 
 class first_class;
-
-} }
-
-#endif
-
-Filename: /empty_tds/actual/include/class_in_a_package/types/package1/first_class_unversioned_key.hpp
-Contents: 
-/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
- *
- * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
- *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
- * MA 02110-1301, USA.
- *
- */
-#ifndef CLASS_IN_A_PACKAGE_TYPES_PACKAGE1_FIRST_CLASS_UNVERSIONED_KEY_HPP
-#define CLASS_IN_A_PACKAGE_TYPES_PACKAGE1_FIRST_CLASS_UNVERSIONED_KEY_HPP
-
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
-
-#include <algorithm>
-#include "class_in_a_package/serialization/package1/first_class_unversioned_key_fwd_ser.hpp"
-
-namespace class_in_a_package {
-namespace package1 {
-
-class first_class_unversioned_key final {
-public:
-    first_class_unversioned_key(const first_class_unversioned_key&) = default;
-    first_class_unversioned_key(first_class_unversioned_key&&) = default;
-    ~first_class_unversioned_key() = default;
-
-public:
-    first_class_unversioned_key();
-
-public:
-    explicit first_class_unversioned_key(const unsigned int id);
-
-private:
-    template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const first_class_unversioned_key& v, unsigned int version);
-
-    template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, first_class_unversioned_key& v, unsigned int version);
-
-public:
-    unsigned int id() const;
-    void id(const unsigned int v);
-
-public:
-    bool operator==(const first_class_unversioned_key& rhs) const;
-    bool operator!=(const first_class_unversioned_key& rhs) const {
-        return !this->operator==(rhs);
-    }
-
-public:
-    void swap(first_class_unversioned_key& other) noexcept;
-    first_class_unversioned_key& operator=(first_class_unversioned_key other);
-
-private:
-    unsigned int id_;
-};
-
-} }
-
-namespace std {
-
-template<>
-inline void swap(
-    class_in_a_package::package1::first_class_unversioned_key& lhs,
-    class_in_a_package::package1::first_class_unversioned_key& rhs) {
-    lhs.swap(rhs);
-}
-
-}
-
-#endif
-
-Filename: /empty_tds/actual/include/class_in_a_package/types/package1/first_class_unversioned_key_fwd.hpp
-Contents: 
-/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
- *
- * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
- *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
- * MA 02110-1301, USA.
- *
- */
-#ifndef CLASS_IN_A_PACKAGE_TYPES_PACKAGE1_FIRST_CLASS_UNVERSIONED_KEY_FWD_HPP
-#define CLASS_IN_A_PACKAGE_TYPES_PACKAGE1_FIRST_CLASS_UNVERSIONED_KEY_FWD_HPP
-
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
-
-namespace class_in_a_package {
-namespace package1 {
-
-class first_class_unversioned_key;
-
-} }
-
-#endif
-
-Filename: /empty_tds/actual/include/class_in_a_package/types/package1/first_class_versioned_key.hpp
-Contents: 
-/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
- *
- * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
- *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
- * MA 02110-1301, USA.
- *
- */
-#ifndef CLASS_IN_A_PACKAGE_TYPES_PACKAGE1_FIRST_CLASS_VERSIONED_KEY_HPP
-#define CLASS_IN_A_PACKAGE_TYPES_PACKAGE1_FIRST_CLASS_VERSIONED_KEY_HPP
-
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
-
-#include <algorithm>
-#include "class_in_a_package/serialization/package1/first_class_versioned_key_fwd_ser.hpp"
-
-namespace class_in_a_package {
-namespace package1 {
-
-class first_class_versioned_key final {
-public:
-    first_class_versioned_key(const first_class_versioned_key&) = default;
-    first_class_versioned_key(first_class_versioned_key&&) = default;
-    ~first_class_versioned_key() = default;
-
-public:
-    first_class_versioned_key();
-
-public:
-    first_class_versioned_key(
-        const unsigned int id,
-        const unsigned int version);
-
-private:
-    template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const first_class_versioned_key& v, unsigned int version);
-
-    template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, first_class_versioned_key& v, unsigned int version);
-
-public:
-    unsigned int id() const;
-    void id(const unsigned int v);
-
-    unsigned int version() const;
-    void version(const unsigned int v);
-
-public:
-    bool operator==(const first_class_versioned_key& rhs) const;
-    bool operator!=(const first_class_versioned_key& rhs) const {
-        return !this->operator==(rhs);
-    }
-
-public:
-    void swap(first_class_versioned_key& other) noexcept;
-    first_class_versioned_key& operator=(first_class_versioned_key other);
-
-private:
-    unsigned int id_;
-    unsigned int version_;
-};
-
-} }
-
-namespace std {
-
-template<>
-inline void swap(
-    class_in_a_package::package1::first_class_versioned_key& lhs,
-    class_in_a_package::package1::first_class_versioned_key& rhs) {
-    lhs.swap(rhs);
-}
-
-}
-
-#endif
-
-Filename: /empty_tds/actual/include/class_in_a_package/types/package1/first_class_versioned_key_fwd.hpp
-Contents: 
-/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
- *
- * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
- *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
- * MA 02110-1301, USA.
- *
- */
-#ifndef CLASS_IN_A_PACKAGE_TYPES_PACKAGE1_FIRST_CLASS_VERSIONED_KEY_FWD_HPP
-#define CLASS_IN_A_PACKAGE_TYPES_PACKAGE1_FIRST_CLASS_VERSIONED_KEY_FWD_HPP
-
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
-
-namespace class_in_a_package {
-namespace package1 {
-
-class first_class_versioned_key;
 
 } }
 
@@ -1471,7 +636,6 @@ Contents:
  *
  */
 #include "class_in_a_package/hash/package1/first_class_hash.hpp"
-#include "class_in_a_package/hash/package1/first_class_versioned_key_hash.hpp"
 
 namespace {
 
@@ -1492,103 +656,6 @@ std::size_t first_class_hasher::hash(const first_class&v) {
 
     combine(seed, v.public_attribute());
     combine(seed, v.private_attribute());
-    combine(seed, v.versioned_key());
-
-    return seed;
-}
-
-} }
-
-Filename: /empty_tds/actual/src/class_in_a_package/hash/package1/first_class_unversioned_key_hash.cpp
-Contents: 
-/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
- *
- * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
- *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
- * MA 02110-1301, USA.
- *
- */
-#include "class_in_a_package/hash/package1/first_class_unversioned_key_hash.hpp"
-
-namespace {
-
-template <typename HashableType>
-inline void combine(std::size_t& seed, const HashableType& value)
-{
-    std::hash<HashableType> hasher;
-    seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
-}
-
-}
-
-namespace class_in_a_package {
-namespace package1 {
-
-std::size_t first_class_unversioned_key_hasher::hash(const first_class_unversioned_key&v) {
-    std::size_t seed(0);
-
-    combine(seed, v.id());
-    return seed;
-}
-
-} }
-
-Filename: /empty_tds/actual/src/class_in_a_package/hash/package1/first_class_versioned_key_hash.cpp
-Contents: 
-/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
- *
- * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
- *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
- * MA 02110-1301, USA.
- *
- */
-#include "class_in_a_package/hash/package1/first_class_versioned_key_hash.hpp"
-
-namespace {
-
-template <typename HashableType>
-inline void combine(std::size_t& seed, const HashableType& value)
-{
-    std::hash<HashableType> hasher;
-    seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
-}
-
-}
-
-namespace class_in_a_package {
-namespace package1 {
-
-std::size_t first_class_versioned_key_hasher::hash(const first_class_versioned_key&v) {
-    std::size_t seed(0);
-
-    combine(seed, v.id());
-    combine(seed, v.version());
 
     return seed;
 }
@@ -1619,7 +686,6 @@ Contents:
  */
 #include <ostream>
 #include "class_in_a_package/io/package1/first_class_io.hpp"
-#include "class_in_a_package/io/package1/first_class_versioned_key_io.hpp"
 
 namespace class_in_a_package {
 namespace package1 {
@@ -1628,83 +694,7 @@ std::ostream& operator<<(std::ostream& s, const first_class& v) {
     s << " { "
       << "\"__type__\": " << "\"class_in_a_package::package1::first_class\"" << ", "
       << "\"public_attribute\": " << v.public_attribute() << ", "
-      << "\"private_attribute\": " << v.private_attribute() << ", "
-      << "\"versioned_key\": " << v.versioned_key()
-      << " }";
-    return(s);
-}
-
-} }
-Filename: /empty_tds/actual/src/class_in_a_package/io/package1/first_class_unversioned_key_io.cpp
-Contents: 
-/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
- *
- * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
- *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
- * MA 02110-1301, USA.
- *
- */
-#include <ostream>
-#include "class_in_a_package/io/package1/first_class_unversioned_key_io.hpp"
-
-namespace class_in_a_package {
-namespace package1 {
-
-std::ostream& operator<<(std::ostream& s, const first_class_unversioned_key& v) {
-    s << " { "
-      << "\"__type__\": " << "\"class_in_a_package::package1::first_class_unversioned_key\"" << ", "
-      << "\"id\": " << v.id()
-      << " }";
-    return(s);
-}
-
-} }
-Filename: /empty_tds/actual/src/class_in_a_package/io/package1/first_class_versioned_key_io.cpp
-Contents: 
-/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
- *
- * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
- *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
- * MA 02110-1301, USA.
- *
- */
-#include <ostream>
-#include "class_in_a_package/io/package1/first_class_versioned_key_io.hpp"
-
-namespace class_in_a_package {
-namespace package1 {
-
-std::ostream& operator<<(std::ostream& s, const first_class_versioned_key& v) {
-    s << " { "
-      << "\"__type__\": " << "\"class_in_a_package::package1::first_class_versioned_key\"" << ", "
-      << "\"id\": " << v.id() << ", "
-      << "\"version\": " << v.version()
+      << "\"private_attribute\": " << v.private_attribute()
       << " }";
     return(s);
 }
@@ -1778,7 +768,6 @@ Contents:
 #include <boost/archive/xml_oarchive.hpp>
 #include <boost/serialization/nvp.hpp>
 #include "class_in_a_package/serialization/package1/first_class_ser.hpp"
-#include "class_in_a_package/serialization/package1/first_class_versioned_key_ser.hpp"
 
 #ifdef __linux__
 #include "eos/portable_iarchive.hpp"
@@ -1794,7 +783,6 @@ void save(Archive& ar,
     const unsigned int /*version*/) {
     ar << make_nvp("public_attribute", v.public_attribute_);
     ar << make_nvp("private_attribute", v.private_attribute_);
-    ar << make_nvp("versioned_key", v.versioned_key_);
 }
 
 template<typename Archive>
@@ -1803,7 +791,6 @@ void load(Archive& ar,
     const unsigned int /*version*/) {
     ar >> make_nvp("public_attribute", v.public_attribute_);
     ar >> make_nvp("private_attribute", v.private_attribute_);
-    ar >> make_nvp("versioned_key", v.versioned_key_);
 }
 
 } }
@@ -1826,164 +813,6 @@ template void load(archive::xml_iarchive& ar, class_in_a_package::package1::firs
 #ifdef __linux__
 template void save(eos::portable_oarchive& ar, const class_in_a_package::package1::first_class& v, unsigned int version);
 template void load(eos::portable_iarchive& ar, class_in_a_package::package1::first_class& v, unsigned int version);
-#endif
-
-} }
-Filename: /empty_tds/actual/src/class_in_a_package/serialization/package1/first_class_unversioned_key_ser.cpp
-Contents: 
-/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
- *
- * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
- *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
- * MA 02110-1301, USA.
- *
- */
-#include <boost/archive/binary_iarchive.hpp>
-#include <boost/archive/binary_oarchive.hpp>
-#include <boost/archive/polymorphic_iarchive.hpp>
-#include <boost/archive/polymorphic_oarchive.hpp>
-#include <boost/archive/text_iarchive.hpp>
-#include <boost/archive/text_oarchive.hpp>
-#include <boost/archive/xml_iarchive.hpp>
-#include <boost/archive/xml_oarchive.hpp>
-#include <boost/serialization/nvp.hpp>
-#include "class_in_a_package/serialization/package1/first_class_unversioned_key_ser.hpp"
-
-#ifdef __linux__
-#include "eos/portable_iarchive.hpp"
-#include "eos/portable_oarchive.hpp"
-#endif
-
-namespace boost {
-namespace serialization {
-
-template<typename Archive>
-void save(Archive& ar,
-    const class_in_a_package::package1::first_class_unversioned_key& v,
-    const unsigned int /*version*/) {
-    ar << make_nvp("id", v.id_);
-}
-
-template<typename Archive>
-void load(Archive& ar,
-    class_in_a_package::package1::first_class_unversioned_key& v,
-    const unsigned int /*version*/) {
-    ar >> make_nvp("id", v.id_);
-}
-
-} }
-
-namespace boost {
-namespace serialization {
-
-template void save(archive::polymorphic_oarchive& ar, const class_in_a_package::package1::first_class_unversioned_key& v, unsigned int version);
-template void load(archive::polymorphic_iarchive& ar, class_in_a_package::package1::first_class_unversioned_key& v, unsigned int version);
-
-template void save(archive::text_oarchive& ar, const class_in_a_package::package1::first_class_unversioned_key& v, unsigned int version);
-template void load(archive::text_iarchive& ar, class_in_a_package::package1::first_class_unversioned_key& v, unsigned int version);
-
-template void save(archive::binary_oarchive& ar, const class_in_a_package::package1::first_class_unversioned_key& v, unsigned int version);
-template void load(archive::binary_iarchive& ar, class_in_a_package::package1::first_class_unversioned_key& v, unsigned int version);
-
-template void save(archive::xml_oarchive& ar, const class_in_a_package::package1::first_class_unversioned_key& v, unsigned int version);
-template void load(archive::xml_iarchive& ar, class_in_a_package::package1::first_class_unversioned_key& v, unsigned int version);
-
-#ifdef __linux__
-template void save(eos::portable_oarchive& ar, const class_in_a_package::package1::first_class_unversioned_key& v, unsigned int version);
-template void load(eos::portable_iarchive& ar, class_in_a_package::package1::first_class_unversioned_key& v, unsigned int version);
-#endif
-
-} }
-Filename: /empty_tds/actual/src/class_in_a_package/serialization/package1/first_class_versioned_key_ser.cpp
-Contents: 
-/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
- *
- * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
- *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
- * MA 02110-1301, USA.
- *
- */
-#include <boost/archive/binary_iarchive.hpp>
-#include <boost/archive/binary_oarchive.hpp>
-#include <boost/archive/polymorphic_iarchive.hpp>
-#include <boost/archive/polymorphic_oarchive.hpp>
-#include <boost/archive/text_iarchive.hpp>
-#include <boost/archive/text_oarchive.hpp>
-#include <boost/archive/xml_iarchive.hpp>
-#include <boost/archive/xml_oarchive.hpp>
-#include <boost/serialization/nvp.hpp>
-#include "class_in_a_package/serialization/package1/first_class_versioned_key_ser.hpp"
-
-#ifdef __linux__
-#include "eos/portable_iarchive.hpp"
-#include "eos/portable_oarchive.hpp"
-#endif
-
-namespace boost {
-namespace serialization {
-
-template<typename Archive>
-void save(Archive& ar,
-    const class_in_a_package::package1::first_class_versioned_key& v,
-    const unsigned int /*version*/) {
-    ar << make_nvp("id", v.id_);
-    ar << make_nvp("version", v.version_);
-}
-
-template<typename Archive>
-void load(Archive& ar,
-    class_in_a_package::package1::first_class_versioned_key& v,
-    const unsigned int /*version*/) {
-    ar >> make_nvp("id", v.id_);
-    ar >> make_nvp("version", v.version_);
-}
-
-} }
-
-namespace boost {
-namespace serialization {
-
-template void save(archive::polymorphic_oarchive& ar, const class_in_a_package::package1::first_class_versioned_key& v, unsigned int version);
-template void load(archive::polymorphic_iarchive& ar, class_in_a_package::package1::first_class_versioned_key& v, unsigned int version);
-
-template void save(archive::text_oarchive& ar, const class_in_a_package::package1::first_class_versioned_key& v, unsigned int version);
-template void load(archive::text_iarchive& ar, class_in_a_package::package1::first_class_versioned_key& v, unsigned int version);
-
-template void save(archive::binary_oarchive& ar, const class_in_a_package::package1::first_class_versioned_key& v, unsigned int version);
-template void load(archive::binary_iarchive& ar, class_in_a_package::package1::first_class_versioned_key& v, unsigned int version);
-
-template void save(archive::xml_oarchive& ar, const class_in_a_package::package1::first_class_versioned_key& v, unsigned int version);
-template void load(archive::xml_iarchive& ar, class_in_a_package::package1::first_class_versioned_key& v, unsigned int version);
-
-#ifdef __linux__
-template void save(eos::portable_oarchive& ar, const class_in_a_package::package1::first_class_versioned_key& v, unsigned int version);
-template void load(eos::portable_iarchive& ar, class_in_a_package::package1::first_class_versioned_key& v, unsigned int version);
 #endif
 
 } }
@@ -2069,17 +898,11 @@ Contents:
  *
  */
 #include "class_in_a_package/test_data/package1/first_class_td.hpp"
-#include "class_in_a_package/test_data/package1/first_class_versioned_key_td.hpp"
 
 namespace {
 
 int create_int(const unsigned int position) {
     return position;
-}
-
-class_in_a_package::package1::first_class_versioned_key
-create_class_in_a_package_package1_first_class_versioned_key(const unsigned int position) {
-    return class_in_a_package::package1::first_class_versioned_key_generator::create(position);
 }
 
 }
@@ -2093,7 +916,6 @@ void first_class_generator::
 populate(const unsigned int position, result_type& v) {
     v.public_attribute(create_int(position + 0));
     v.private_attribute(create_int(position + 1));
-    v.versioned_key(create_class_in_a_package_package1_first_class_versioned_key(position + 2));
 }
 
 first_class_generator::result_type
@@ -2111,131 +933,6 @@ first_class_generator::create_ptr(const unsigned int position) {
 
 first_class_generator::result_type
 first_class_generator::operator()() {
-    return create(position_++);
-}
-
-} }
-
-Filename: /empty_tds/actual/src/class_in_a_package/test_data/package1/first_class_unversioned_key_td.cpp
-Contents: 
-/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
- *
- * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
- *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
- * MA 02110-1301, USA.
- *
- */
-#include "class_in_a_package/test_data/package1/first_class_unversioned_key_td.hpp"
-
-namespace {
-
-unsigned int create_unsigned_int(const unsigned int position) {
-    return static_cast<unsigned int>(position);
-}
-
-}
-
-namespace class_in_a_package {
-namespace package1 {
-
-first_class_unversioned_key_generator::first_class_unversioned_key_generator() : position_(0) { }
-
-void first_class_unversioned_key_generator::
-populate(const unsigned int position, result_type& v) {
-    v.id(create_unsigned_int(position + 0));
-}
-
-first_class_unversioned_key_generator::result_type
-first_class_unversioned_key_generator::create(const unsigned int position) {
-    first_class_unversioned_key r;
-    first_class_unversioned_key_generator::populate(position, r);
-    return r;
-}
-first_class_unversioned_key_generator::result_type*
-first_class_unversioned_key_generator::create_ptr(const unsigned int position) {
-    first_class_unversioned_key* p = new first_class_unversioned_key();
-    first_class_unversioned_key_generator::populate(position, *p);
-    return p;
-}
-
-first_class_unversioned_key_generator::result_type
-first_class_unversioned_key_generator::operator()() {
-    return create(position_++);
-}
-
-} }
-
-Filename: /empty_tds/actual/src/class_in_a_package/test_data/package1/first_class_versioned_key_td.cpp
-Contents: 
-/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
- *
- * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
- *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
- * MA 02110-1301, USA.
- *
- */
-#include "class_in_a_package/test_data/package1/first_class_versioned_key_td.hpp"
-
-namespace {
-
-unsigned int create_unsigned_int(const unsigned int position) {
-    return static_cast<unsigned int>(position);
-}
-
-}
-
-namespace class_in_a_package {
-namespace package1 {
-
-first_class_versioned_key_generator::first_class_versioned_key_generator() : position_(0) { }
-
-void first_class_versioned_key_generator::
-populate(const unsigned int position, result_type& v) {
-    v.id(create_unsigned_int(position + 0));
-    v.version(create_unsigned_int(position + 1));
-}
-
-first_class_versioned_key_generator::result_type
-first_class_versioned_key_generator::create(const unsigned int position) {
-    first_class_versioned_key r;
-    first_class_versioned_key_generator::populate(position, r);
-    return r;
-}
-first_class_versioned_key_generator::result_type*
-first_class_versioned_key_generator::create_ptr(const unsigned int position) {
-    first_class_versioned_key* p = new first_class_versioned_key();
-    first_class_versioned_key_generator::populate(position, *p);
-    return p;
-}
-
-first_class_versioned_key_generator::result_type
-first_class_versioned_key_generator::operator()() {
     return create(position_++);
 }
 
@@ -2274,23 +971,19 @@ first_class::first_class()
 
 first_class::first_class(
     const int public_attribute,
-    const int private_attribute,
-    const class_in_a_package::package1::first_class_versioned_key& versioned_key)
+    const int private_attribute)
     : public_attribute_(public_attribute),
-      private_attribute_(private_attribute),
-      versioned_key_(versioned_key) { }
+      private_attribute_(private_attribute) { }
 
 void first_class::swap(first_class& other) noexcept {
     using std::swap;
     swap(public_attribute_, other.public_attribute_);
     swap(private_attribute_, other.private_attribute_);
-    swap(versioned_key_, other.versioned_key_);
 }
 
 bool first_class::operator==(const first_class& rhs) const {
     return public_attribute_ == rhs.public_attribute_ &&
-        private_attribute_ == rhs.private_attribute_ &&
-        versioned_key_ == rhs.versioned_key_;
+        private_attribute_ == rhs.private_attribute_;
 }
 
 first_class& first_class::operator=(first_class other) {
@@ -2313,150 +1006,6 @@ int first_class::private_attribute() const {
 
 void first_class::private_attribute(const int v) {
     private_attribute_ = v;
-}
-
-const class_in_a_package::package1::first_class_versioned_key& first_class::versioned_key() const {
-    return versioned_key_;
-}
-
-class_in_a_package::package1::first_class_versioned_key& first_class::versioned_key() {
-    return versioned_key_;
-}
-
-void first_class::versioned_key(const class_in_a_package::package1::first_class_versioned_key& v) {
-    versioned_key_ = v;
-}
-
-void first_class::versioned_key(const class_in_a_package::package1::first_class_versioned_key&& v) {
-    versioned_key_ = std::move(v);
-}
-
-} }
-Filename: /empty_tds/actual/src/class_in_a_package/types/package1/first_class_unversioned_key.cpp
-Contents: 
-/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
- *
- * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
- *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
- * MA 02110-1301, USA.
- *
- */
-#include "class_in_a_package/types/package1/first_class_unversioned_key.hpp"
-
-namespace class_in_a_package {
-namespace package1 {
-
-first_class_unversioned_key::first_class_unversioned_key()
-    : id_(static_cast<unsigned int>(0)) { }
-
-first_class_unversioned_key::first_class_unversioned_key(const unsigned int id)
-    : id_(id) { }
-
-void first_class_unversioned_key::swap(first_class_unversioned_key& other) noexcept {
-    using std::swap;
-    swap(id_, other.id_);
-}
-
-bool first_class_unversioned_key::operator==(const first_class_unversioned_key& rhs) const {
-    return id_ == rhs.id_;
-}
-
-first_class_unversioned_key& first_class_unversioned_key::operator=(first_class_unversioned_key other) {
-    using std::swap;
-    swap(*this, other);
-    return *this;
-}
-
-unsigned int first_class_unversioned_key::id() const {
-    return id_;
-}
-
-void first_class_unversioned_key::id(const unsigned int v) {
-    id_ = v;
-}
-
-} }
-Filename: /empty_tds/actual/src/class_in_a_package/types/package1/first_class_versioned_key.cpp
-Contents: 
-/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
- *
- * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
- *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
- * MA 02110-1301, USA.
- *
- */
-#include "class_in_a_package/types/package1/first_class_versioned_key.hpp"
-
-namespace class_in_a_package {
-namespace package1 {
-
-first_class_versioned_key::first_class_versioned_key()
-    : id_(static_cast<unsigned int>(0)),
-      version_(static_cast<unsigned int>(0)) { }
-
-first_class_versioned_key::first_class_versioned_key(
-    const unsigned int id,
-    const unsigned int version)
-    : id_(id),
-      version_(version) { }
-
-void first_class_versioned_key::swap(first_class_versioned_key& other) noexcept {
-    using std::swap;
-    swap(id_, other.id_);
-    swap(version_, other.version_);
-}
-
-bool first_class_versioned_key::operator==(const first_class_versioned_key& rhs) const {
-    return id_ == rhs.id_ &&
-        version_ == rhs.version_;
-}
-
-first_class_versioned_key& first_class_versioned_key::operator=(first_class_versioned_key other) {
-    using std::swap;
-    swap(*this, other);
-    return *this;
-}
-
-unsigned int first_class_versioned_key::id() const {
-    return id_;
-}
-
-void first_class_versioned_key::id(const unsigned int v) {
-    id_ = v;
-}
-
-unsigned int first_class_versioned_key::version() const {
-    return version_;
-}
-
-void first_class_versioned_key::version(const unsigned int v) {
-    version_ = v;
 }
 
 } }

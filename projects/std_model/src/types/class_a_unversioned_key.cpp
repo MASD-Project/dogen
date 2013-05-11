@@ -23,19 +23,16 @@
 namespace dogen {
 namespace std_model {
 
-class_a_unversioned_key::class_a_unversioned_key()
-    : id_(static_cast<unsigned int>(0)) { }
-
-class_a_unversioned_key::class_a_unversioned_key(const unsigned int id)
-    : id_(id) { }
+class_a_unversioned_key::class_a_unversioned_key(const std::string& prop0)
+    : prop0_(prop0) { }
 
 void class_a_unversioned_key::swap(class_a_unversioned_key& other) noexcept {
     using std::swap;
-    swap(id_, other.id_);
+    swap(prop0_, other.prop0_);
 }
 
 bool class_a_unversioned_key::operator==(const class_a_unversioned_key& rhs) const {
-    return id_ == rhs.id_;
+    return prop0_ == rhs.prop0_;
 }
 
 class_a_unversioned_key& class_a_unversioned_key::operator=(class_a_unversioned_key other) {
@@ -44,12 +41,20 @@ class_a_unversioned_key& class_a_unversioned_key::operator=(class_a_unversioned_
     return *this;
 }
 
-unsigned int class_a_unversioned_key::id() const {
-    return id_;
+const std::string& class_a_unversioned_key::prop0() const {
+    return prop0_;
 }
 
-void class_a_unversioned_key::id(const unsigned int v) {
-    id_ = v;
+std::string& class_a_unversioned_key::prop0() {
+    return prop0_;
+}
+
+void class_a_unversioned_key::prop0(const std::string& v) {
+    prop0_ = v;
+}
+
+void class_a_unversioned_key::prop0(const std::string&& v) {
+    prop0_ = std::move(v);
 }
 
 } }

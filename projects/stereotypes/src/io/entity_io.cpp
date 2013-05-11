@@ -20,7 +20,6 @@
  */
 #include <ostream>
 #include "dogen/stereotypes/io/entity_io.hpp"
-#include "dogen/stereotypes/io/entity_versioned_key_io.hpp"
 
 namespace dogen {
 namespace stereotypes {
@@ -28,8 +27,7 @@ namespace stereotypes {
 std::ostream& operator<<(std::ostream& s, const entity& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::stereotypes::entity\"" << ", "
-      << "\"prop_0\": " << v.prop_0() << ", "
-      << "\"versioned_key\": " << v.versioned_key()
+      << "\"prop_0\": " << v.prop_0()
       << " }";
     return(s);
 }

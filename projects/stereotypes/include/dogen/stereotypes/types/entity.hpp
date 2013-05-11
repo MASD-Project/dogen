@@ -27,7 +27,6 @@
 
 #include <algorithm>
 #include "dogen/stereotypes/serialization/entity_fwd_ser.hpp"
-#include "dogen/stereotypes/types/entity_versioned_key.hpp"
 
 namespace dogen {
 namespace stereotypes {
@@ -42,9 +41,7 @@ public:
     entity();
 
 public:
-    entity(
-        const int prop_0,
-        const dogen::stereotypes::entity_versioned_key& versioned_key);
+    explicit entity(const int prop_0);
 
 private:
     template<typename Archive>
@@ -56,11 +53,6 @@ private:
 public:
     int prop_0() const;
     void prop_0(const int v);
-
-    const dogen::stereotypes::entity_versioned_key& versioned_key() const;
-    dogen::stereotypes::entity_versioned_key& versioned_key();
-    void versioned_key(const dogen::stereotypes::entity_versioned_key& v);
-    void versioned_key(const dogen::stereotypes::entity_versioned_key&& v);
 
 public:
     bool operator==(const entity& rhs) const;
@@ -74,7 +66,6 @@ public:
 
 private:
     int prop_0_;
-    dogen::stereotypes::entity_versioned_key versioned_key_;
 };
 
 } }

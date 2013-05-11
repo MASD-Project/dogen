@@ -18,7 +18,11 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/lexical_cast.hpp>
+#include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
+#include "dogen/sml/io/qname_io.hpp"
+#include "dogen/sml/types/injection_error.hpp"
 #include "dogen/sml/types/injector.hpp"
 
 using namespace dogen::utility::log;
@@ -39,142 +43,126 @@ const std::string unversioned_name("unversioned_key");
 const std::string uint_name("unsigned int");
 const std::string id_name("id");
 const std::string version_name("version");
-const std::string invalid_archive_type("Invalid or unexpected archive type");
+const std::string missing_identity_attribute(
+    "Expected entity to have at least one identity attribute: ");
+const std::string duplicate_qname(
+    "Attempt to add pod with a name that already exists in model: ");
 
 }
 
 namespace dogen {
 namespace sml {
 
-injector::injector() : add_versioning_types_(true) {}
+pod injector::create_key(const qname& qn, const generation_types gt,
+    const std::vector<property>& properties, const bool versioned) const {
 
-injector::injector(const bool add_versioning_types)
-    : add_versioning_types_(add_versioning_types) { }
+    qname kqn;
+    kqn.type_name(qn.type_name() + "_" +
+        (versioned ? versioned_name : unversioned_name));
+    kqn.model_name(qn.model_name());
+    kqn.package_path(qn.package_path());
+    kqn.external_package_path(qn.external_package_path());
+    kqn.meta_type(meta_types::pod);
 
-pod injector::
-create_key_system_pod(const sml::pod& p, const bool is_versioned) const {
-    sml::qname qn;
-    qn.type_name(p.name().type_name() + "_" +
-        (is_versioned ? versioned_name : unversioned_name));
-    qn.model_name(p.name().model_name());
-    qn.package_path(p.name().package_path());
-    qn.external_package_path(p.name().external_package_path());
-    qn.meta_type(sml::meta_types::pod);
+    pod r;
+    r.name(kqn);
+    r.generation_type(gt);
+    r.pod_type(pod_types::value);
 
-    sml::pod r;
-    r.name(qn);
-    r.generation_type(p.generation_type());
-    r.pod_type(sml::pod_types::value);
+    const auto vtc(category_types::versioned_key);
+    const auto uvtc(category_types::unversioned_key);
+    r.category_type(versioned ? vtc : uvtc);
+    r.properties(properties);
 
-    const auto vtc(sml::category_types::versioned_key);
-    const auto uvtc(sml::category_types::unversioned_key);
-    r.category_type(is_versioned ? vtc : uvtc);
+    if (versioned)
+        inject_version(r);
 
-    auto props(r.properties());
-
-    sml::qname uint_qn;
-    uint_qn.type_name(uint_name);
-    uint_qn.meta_type(sml::meta_types::primitive);
-
-    sml::property id;
-    id.name(id_name);
-
-    sml::nested_qname nqn;
-    nqn.type(uint_qn);
-    id.type_name(nqn);
-    props.push_back(id);
-
-    if (is_versioned) {
-        sml::property version;
-        version.name(version_name);
-
-        sml::nested_qname nqn2;
-        nqn2.type(uint_qn);
-        version.type_name(nqn2);
-        props.push_back(version);
-    }
-    r.properties(props);
+    BOOST_LOG_SEV(lg, debug) << "Created key: " << kqn.type_name();
     return r;
 }
 
-void injector::inject_legacy_keys(model& m) const {
-    if (!add_versioning_types_) {
-        BOOST_LOG_SEV(lg, warn) << "Keys are NOT enabled, "
-                                << "NOT injecting them into model.";
-        return;
-    }
+void injector::inject_keys(model& m) const {
+    BOOST_LOG_SEV(lg, debug) << "Injecting keys.";
 
-    BOOST_LOG_SEV(lg, info) << "Keys are enabled, "
-                            << "so injecting them into model.";
+    std::list<pod> keys;
+    for (const auto& pair : m.pods()) {
+        const auto& pod(pair.second);
 
-    const auto old_pods(m.pods());
-    if (old_pods.empty())
-        return;
-
-    std::unordered_map<sml::qname, sml::pod> new_pods;
-    const bool is_versioned(true);
-    for (auto i(std::begin(old_pods)); i != std::end(old_pods); ++i) {
-        auto pod(i->second);
-
-        if (pod.parent_name()) {
-            new_pods.insert(std::make_pair(pod.name(), pod));
+        if (!pod.is_keyed())
             continue;
+
+        std::vector<property> identity_properties;
+        for (const auto& prop : pod.properties()) {
+            if (prop.is_identity_attribute())
+                identity_properties.push_back(prop);
         }
 
-        auto props(pod.properties());
-        if (pod.pod_type() == sml::pod_types::entity) {
-            const auto versioned_pod(create_key_system_pod(pod, is_versioned));
-            new_pods.insert(std::make_pair(versioned_pod.name(), versioned_pod));
+        if (identity_properties.empty()) {
+            BOOST_LOG_SEV(lg, error) << missing_identity_attribute
+                                     << pod.name();
 
-            sml::property vk_prop;
-            vk_prop.name(versioned_name);
-
-            sml::nested_qname nqn;
-            nqn.type(versioned_pod.name());
-            vk_prop.type_name(nqn);
-
-            const auto unversioned_pod(create_key_system_pod(pod, !is_versioned));
-            new_pods.insert(
-                std::make_pair(unversioned_pod.name(), unversioned_pod));
-            props.push_back(vk_prop);
+            BOOST_THROW_EXCEPTION(injection_error(missing_identity_attribute +
+                    boost::lexical_cast<std::string>(pod.name())));
         }
 
-        pod.properties(props);
-        new_pods.insert(std::make_pair(pod.name(), pod));
+        const bool unversioned(false);
+        const auto gt(pod.generation_type());
+        const auto qn(pod.name());
+        keys.push_back(create_key(qn, gt, identity_properties, unversioned));
+
+        const bool versioned(true);
+        if (pod.is_versioned())
+            keys.push_back(create_key(qn, gt, identity_properties, versioned));
     }
-    m.pods(new_pods);
+
+    for (const auto& k : keys) {
+        const auto r(m.pods().insert(std::make_pair(k.name(), k)));
+        if (!r.second) {
+            BOOST_LOG_SEV(lg, error) << duplicate_qname << k.name();
+
+            BOOST_THROW_EXCEPTION(injection_error(duplicate_qname +
+                    boost::lexical_cast<std::string>(k.name())));
+        }
+    }
+
+    BOOST_LOG_SEV(lg, debug) << "Done injecting keys. Total: " << keys.size();
+
 }
 
-void injector::inject_versioning(model& m) const {
-    BOOST_LOG_SEV(lg, debug) << "Injecting version property.";
+void injector::inject_version(pod& p) const {
+    BOOST_LOG_SEV(lg, debug) << "Injecting version property to type: "
+                             << p.name();
 
-    if (m.pods().empty())
-        return;
+    qname qn;
+    qn.type_name(uint_name);
+    qn.meta_type(meta_types::primitive);
+
+    nested_qname nqn;
+    nqn.type(qn);
+
+    property v;
+    v.name(version_name);
+    v.type_name(nqn);
+
+    p.properties().push_back(v);
+}
+
+void injector::inject_version(model& m) const {
+    BOOST_LOG_SEV(lg, debug) << "Injecting version property.";
 
     for (auto& pair : m.pods()) {
         auto& pod(pair.second);
 
-        if (!pod.is_versioned())
-            continue;
-
-        sml::qname qn;
-        qn.type_name(uint_name);
-        qn.meta_type(sml::meta_types::primitive);
-
-        sml::nested_qname nqn;
-        nqn.type(qn);
-
-        sml::property v;
-        v.name(version_name);
-        v.type_name(nqn);
-
-        pod.properties().push_back(v);
+        if (pod.is_versioned())
+            inject_version(pod);
     }
+
+    BOOST_LOG_SEV(lg, debug) << "Done injecting version property.";
 }
 
 void injector::inject(model& m) const {
-    inject_legacy_keys(m);
-    inject_versioning(m);
+    inject_version(m);
+    inject_keys(m);
 }
 
 } }

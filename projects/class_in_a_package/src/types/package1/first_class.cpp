@@ -30,23 +30,19 @@ first_class::first_class()
 
 first_class::first_class(
     const int public_attribute,
-    const int private_attribute,
-    const dogen::class_in_a_package::package1::first_class_versioned_key& versioned_key)
+    const int private_attribute)
     : public_attribute_(public_attribute),
-      private_attribute_(private_attribute),
-      versioned_key_(versioned_key) { }
+      private_attribute_(private_attribute) { }
 
 void first_class::swap(first_class& other) noexcept {
     using std::swap;
     swap(public_attribute_, other.public_attribute_);
     swap(private_attribute_, other.private_attribute_);
-    swap(versioned_key_, other.versioned_key_);
 }
 
 bool first_class::operator==(const first_class& rhs) const {
     return public_attribute_ == rhs.public_attribute_ &&
-        private_attribute_ == rhs.private_attribute_ &&
-        versioned_key_ == rhs.versioned_key_;
+        private_attribute_ == rhs.private_attribute_;
 }
 
 first_class& first_class::operator=(first_class other) {
@@ -69,22 +65,6 @@ int first_class::private_attribute() const {
 
 void first_class::private_attribute(const int v) {
     private_attribute_ = v;
-}
-
-const dogen::class_in_a_package::package1::first_class_versioned_key& first_class::versioned_key() const {
-    return versioned_key_;
-}
-
-dogen::class_in_a_package::package1::first_class_versioned_key& first_class::versioned_key() {
-    return versioned_key_;
-}
-
-void first_class::versioned_key(const dogen::class_in_a_package::package1::first_class_versioned_key& v) {
-    versioned_key_ = v;
-}
-
-void first_class::versioned_key(const dogen::class_in_a_package::package1::first_class_versioned_key&& v) {
-    versioned_key_ = std::move(v);
 }
 
 } } }

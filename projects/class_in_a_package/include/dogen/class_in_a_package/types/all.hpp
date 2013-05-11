@@ -19,5 +19,3 @@
  *
  */
 #include "dogen/class_in_a_package/types/package1/first_class.hpp"
-#include "dogen/class_in_a_package/types/package1/first_class_unversioned_key.hpp"
-#include "dogen/class_in_a_package/types/package1/first_class_versioned_key.hpp"

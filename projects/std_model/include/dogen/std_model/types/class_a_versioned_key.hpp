@@ -26,6 +26,7 @@
 #endif
 
 #include <algorithm>
+#include <string>
 #include "dogen/std_model/serialization/class_a_versioned_key_fwd_ser.hpp"
 
 namespace dogen {
@@ -42,7 +43,7 @@ public:
 
 public:
     class_a_versioned_key(
-        const unsigned int id,
+        const std::string& prop0,
         const unsigned int version);
 
 private:
@@ -53,8 +54,10 @@ private:
     friend void boost::serialization::load(Archive& ar, class_a_versioned_key& v, unsigned int version);
 
 public:
-    unsigned int id() const;
-    void id(const unsigned int v);
+    const std::string& prop0() const;
+    std::string& prop0();
+    void prop0(const std::string& v);
+    void prop0(const std::string&& v);
 
     unsigned int version() const;
     void version(const unsigned int v);
@@ -70,7 +73,7 @@ public:
     class_a_versioned_key& operator=(class_a_versioned_key other);
 
 private:
-    unsigned int id_;
+    std::string prop0_;
     unsigned int version_;
 };
 

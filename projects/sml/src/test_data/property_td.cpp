@@ -68,7 +68,7 @@ populate(const unsigned int position, result_type& v) {
     v.type_name(create_dogen_sml_nested_qname(position + 1));
     v.default_value(create_std_string(position + 2));
     v.documentation(create_std_string(position + 3));
-    v.is_key_attribute(create_bool(position + 4));
+    v.is_identity_attribute(create_bool(position + 4));
     v.implementation_specific_parameters(create_std_vector_std_pair_std_string_std_string_(position + 5));
 }
 

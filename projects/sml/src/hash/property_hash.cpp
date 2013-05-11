@@ -58,7 +58,7 @@ std::size_t property_hasher::hash(const property&v) {
     combine(seed, v.type_name());
     combine(seed, v.default_value());
     combine(seed, v.documentation());
-    combine(seed, v.is_key_attribute());
+    combine(seed, v.is_identity_attribute());
     combine(seed, hash_std_vector_std_pair_std_string_std_string_(v.implementation_specific_parameters()));
 
     return seed;

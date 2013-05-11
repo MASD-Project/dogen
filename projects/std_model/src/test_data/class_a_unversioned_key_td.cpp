@@ -18,12 +18,15 @@
  * MA 02110-1301, USA.
  *
  */
+#include <sstream>
 #include "dogen/std_model/test_data/class_a_unversioned_key_td.hpp"
 
 namespace {
 
-unsigned int create_unsigned_int(const unsigned int position) {
-    return static_cast<unsigned int>(position);
+std::string create_std_string(const unsigned int position) {
+    std::ostringstream s;
+    s << "a_string_" << position;
+    return s.str();
 }
 
 }
@@ -35,7 +38,7 @@ class_a_unversioned_key_generator::class_a_unversioned_key_generator() : positio
 
 void class_a_unversioned_key_generator::
 populate(const unsigned int position, result_type& v) {
-    v.id(create_unsigned_int(position + 0));
+    v.prop0(create_std_string(position + 0));
 }
 
 class_a_unversioned_key_generator::result_type

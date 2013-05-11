@@ -27,7 +27,6 @@
 
 #include <algorithm>
 #include "dogen/all_primitives/serialization/a_class_fwd_ser.hpp"
-#include "dogen/all_primitives/types/a_class_versioned_key.hpp"
 
 namespace dogen {
 namespace all_primitives {
@@ -55,8 +54,7 @@ public:
         const short short_property,
         const unsigned short ushort_property,
         const double double_property,
-        const float float_property,
-        const dogen::all_primitives::a_class_versioned_key& versioned_key);
+        const float float_property);
 
 private:
     template<typename Archive>
@@ -105,11 +103,6 @@ public:
     float float_property() const;
     void float_property(const float v);
 
-    const dogen::all_primitives::a_class_versioned_key& versioned_key() const;
-    dogen::all_primitives::a_class_versioned_key& versioned_key();
-    void versioned_key(const dogen::all_primitives::a_class_versioned_key& v);
-    void versioned_key(const dogen::all_primitives::a_class_versioned_key&& v);
-
 public:
     bool operator==(const a_class& rhs) const;
     bool operator!=(const a_class& rhs) const {
@@ -134,7 +127,6 @@ private:
     unsigned short ushort_property_;
     double double_property_;
     float float_property_;
-    dogen::all_primitives::a_class_versioned_key versioned_key_;
 };
 
 } }

@@ -51,8 +51,7 @@ a_class::a_class(
     const short short_property,
     const unsigned short ushort_property,
     const double double_property,
-    const float float_property,
-    const dogen::all_primitives::a_class_versioned_key& versioned_key)
+    const float float_property)
     : bool_property_(bool_property),
       char_property_(char_property),
       uchar_property_(uchar_property),
@@ -65,8 +64,7 @@ a_class::a_class(
       short_property_(short_property),
       ushort_property_(ushort_property),
       double_property_(double_property),
-      float_property_(float_property),
-      versioned_key_(versioned_key) { }
+      float_property_(float_property) { }
 
 void a_class::swap(a_class& other) noexcept {
     using std::swap;
@@ -83,7 +81,6 @@ void a_class::swap(a_class& other) noexcept {
     swap(ushort_property_, other.ushort_property_);
     swap(double_property_, other.double_property_);
     swap(float_property_, other.float_property_);
-    swap(versioned_key_, other.versioned_key_);
 }
 
 bool a_class::operator==(const a_class& rhs) const {
@@ -99,8 +96,7 @@ bool a_class::operator==(const a_class& rhs) const {
         short_property_ == rhs.short_property_ &&
         ushort_property_ == rhs.ushort_property_ &&
         double_property_ == rhs.double_property_ &&
-        float_property_ == rhs.float_property_ &&
-        versioned_key_ == rhs.versioned_key_;
+        float_property_ == rhs.float_property_;
 }
 
 a_class& a_class::operator=(a_class other) {
@@ -211,22 +207,6 @@ float a_class::float_property() const {
 
 void a_class::float_property(const float v) {
     float_property_ = v;
-}
-
-const dogen::all_primitives::a_class_versioned_key& a_class::versioned_key() const {
-    return versioned_key_;
-}
-
-dogen::all_primitives::a_class_versioned_key& a_class::versioned_key() {
-    return versioned_key_;
-}
-
-void a_class::versioned_key(const dogen::all_primitives::a_class_versioned_key& v) {
-    versioned_key_ = v;
-}
-
-void a_class::versioned_key(const dogen::all_primitives::a_class_versioned_key&& v) {
-    versioned_key_ = std::move(v);
 }
 
 } }

@@ -19,7 +19,6 @@
  *
  */
 #include "dogen/all_primitives/hash/a_class_hash.hpp"
-#include "dogen/all_primitives/hash/a_class_versioned_key_hash.hpp"
 
 namespace {
 
@@ -51,7 +50,6 @@ std::size_t a_class_hasher::hash(const a_class&v) {
     combine(seed, v.ushort_property());
     combine(seed, v.double_property());
     combine(seed, v.float_property());
-    combine(seed, v.versioned_key());
 
     return seed;
 }
