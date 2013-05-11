@@ -11,6 +11,16 @@ This file contains all stories that haven't been assigned to a sprint.
 
 Stories that we intend to look at, at some point.
 
+*** Add support for boost parameter
+
+It would be nice to have boost parameter support. [[http://www.boost.org/doc/libs/1_53_0/libs/parameter/doc/html/index.html#named-function-parameters][Documentation here]].
+
+Ideally one would mark a type with a stereotype such as =named
+parameter= and this would result in a full constructor with named
+parameters. However since it seems one has to add a lot of boiler
+plate code, perhaps its better to have a create function on a separate
+header which internally calls the appropriate setters.
+
 *** Build shared objects instead of dynamic libraries
 
 With the increase in tests build speeds have started to suffer,
