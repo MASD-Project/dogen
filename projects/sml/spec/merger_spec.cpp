@@ -25,10 +25,7 @@
 #include "dogen/sml/types/all.hpp"
 #include "dogen/sml/io/all_io.hpp"
 #include "dogen/utility/test/equality_tester.hpp"
-#include "dogen/sml/test_data/all_td.hpp"
 #include "dogen/sml/types/model.hpp"
-#include "dogen/sml/io/nested_qname_io.hpp"
-#include "dogen/sml/io/qname_io.hpp"
 #include "dogen/sml/types/merging_error.hpp"
 #include "dogen/sml/types/merger.hpp"
 #include "dogen/utility/test/exception_checkers.hpp"
@@ -137,7 +134,7 @@ BOOST_AUTO_TEST_CASE(merging_empty_model_results_in_empty_merged_model) {
 
 BOOST_AUTO_TEST_CASE(type_with_incorrect_model_name_throws) {
     SETUP_TEST_LOG("type_with_incorrect_model_name_throws");
-    auto m(mock_model_factory::build_single_pod_model(0));
+    auto m(mock_model_factory::build_single_pod_model());
     m.name(invalid_model_name);
 
     dogen::sml::merger mg;
@@ -163,7 +160,7 @@ BOOST_AUTO_TEST_CASE(type_with_inconsistent_key_value_pair_throws) {
 BOOST_AUTO_TEST_CASE(not_adding_a_target_throws) {
     SETUP_TEST_LOG("not_adding_a_target_throws");
 
-    const auto m(mock_model_factory::build_single_pod_model(0));
+    const auto m(mock_model_factory::build_single_pod_model());
     dogen::sml::merger mg;
     mg.add(m);
 
@@ -389,7 +386,7 @@ BOOST_AUTO_TEST_CASE(pod_with_missing_third_degree_parent_in_different_models_th
 BOOST_AUTO_TEST_CASE(pod_incorrect_meta_type_throws) {
     SETUP_TEST_LOG("pod_incorrect_meta_type_throws");
 
-    auto m(mock_model_factory::build_single_pod_model(0));
+    auto m(mock_model_factory::build_single_pod_model());
     BOOST_CHECK(m.pods().size() == 1);
 
     auto p(m.pods().begin()->second);

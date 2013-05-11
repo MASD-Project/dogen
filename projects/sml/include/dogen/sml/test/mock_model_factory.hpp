@@ -40,19 +40,19 @@ public:
     /**
      * @brief Returns the model name derived from n.
      */
-    static std::string model_name(const unsigned int n);
+    static std::string model_name(const unsigned int n = 0);
 
     /**
      * @brief Returns the pod name derived from n.
      */
-    static std::string pod_name(const unsigned int n);
+    static std::string pod_name(const unsigned int n = 0);
 
 public:
     /**
      * @brief Builds a model with a name derived from n, containing a
      * single pod with a name also deriving from n.
      */
-    static model build_single_pod_model(const unsigned int n);
+    static model build_single_pod_model(const unsigned int n = 0);
 
     /**
      * @brief Builds a model with a name derived from n, and a number
