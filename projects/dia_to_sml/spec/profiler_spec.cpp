@@ -194,6 +194,16 @@ BOOST_AUTO_TEST_CASE(stereotyped_class_transforms_into_expected_profile) {
     BOOST_CHECK(op.is_exception());
     BOOST_CHECK(op.is_entity());
 
+    s = "entity, aggregate root";
+    o = mock_processed_object_factory::build_stereotyped_class(s);
+    op = p.profile(o);
+
+    BOOST_LOG_SEV(lg, debug) << "actual 2:" << op;
+    BOOST_CHECK(is_valid_uml_class(op));
+    BOOST_CHECK(stereotype_count(op) == 2);
+    BOOST_CHECK(op.is_aggregate_root());
+    BOOST_CHECK(op.is_entity());
+
     s = "nongeneratable, versioned, keyed, visitable, immutable, fluent";
     o = mock_processed_object_factory::build_stereotyped_class(s);
     op = p.profile(o);

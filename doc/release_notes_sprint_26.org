@@ -10,13 +10,13 @@ This file contains all stories that were closed during sprint 26.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-05-12 Sun 00:11]
+Clock summary at [2013-05-12 Sun 00:56]
 
 | Headline                                                                     | Time    |       |      |
 |------------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                                 | *14:59* |       |      |
+| *Total time*                                                                 | *15:44* |       |      |
 |------------------------------------------------------------------------------+---------+-------+------|
-| Development Stories Implemented                                              |         | 14:59 |      |
+| Development Stories Implemented                                              |         | 15:44 |      |
 | COMPLETED Fix build break on visitor tests                                   |         |       | 0:32 |
 | COMPLETED Remove workflow aspects from transformer                           |         |       | 2:23 |
 | COMPLETED Add tests for profiler                                             |         |       | 1:56 |
@@ -24,7 +24,8 @@ Clock summary at [2013-05-12 Sun 00:11]
 | COMPLETED Add injector tests                                                 |         |       | 1:15 |
 | COMPLETED Add doxygen comments to keys and version                           |         |       | 0:10 |
 | COMPLETED Sort issues with SATA port in lorenz                               |         |       | 1:50 |
-| COMPLETED Refactor SML diagram                                               |         |       | 0:39 |
+| COMPLETED Add tests for aggregate root stereotype                            |         |       | 0:23 |
+| COMPLETED Refactor SML diagram                                               |         |       | 1:01 |
 | IMPLEMENTATION Use explicit casting for versioned to unversioned conversions |         |       | 1:49 |
 | IMPLEMENTATION Add =extract_key= function                                    |         |       | 0:22 |
 #+end:
@@ -152,8 +153,17 @@ Do not generate versioned/unversioned keys for entities.
     CLOSED: [2013-05-12 Sun 00:11]
     CLOCK: [2013-05-07 Tue 22:00]--[2013-05-07 Tue 23:50] =>  1:50
 
+*** COMPLETED Add tests for aggregate root stereotype                 :story:
+    CLOSED: [2013-05-12 Sun 00:53]
+    CLOCK: [2013-05-12 Sun 00:36]--[2013-05-12 Sun 00:59] =>  0:23
+
+We added support for aggregate root at the SML level but never
+finished hooking up things properly. Add a test for it and fix any problems.
+
 *** COMPLETED Refactor SML diagram                                    :spike:
     CLOSED: [2013-05-12 Sun 00:09]
+    CLOCK: [2013-05-12 Sun 00:24]--[2013-05-12 Sun 00:35] =>  0:11
+    CLOCK: [2013-05-12 Sun 00:13]--[2013-05-12 Sun 00:24] =>  0:11
     CLOCK: [2013-05-11 Sat 23:30]--[2013-05-12 Sun 00:09] =>  0:39
 
 SML has gotten really messy and very hard to understand. Do a general tidy-up.

@@ -76,6 +76,7 @@ BOOST_AUTO_TEST_CASE(validate_equality) {
     test_equality<pkg1::keyed_in_package_generator>();
     test_equality<pkg1::keyed_in_package_unversioned_key_generator>();
     test_equality<versioned_generator>();
+    test_equality<aggregate_root_generator>();
 }
 
 BOOST_AUTO_TEST_CASE(validate_serialisation) {
@@ -110,6 +111,7 @@ BOOST_AUTO_TEST_CASE(validate_serialisation) {
     rountrip_type<pkg1::keyed_in_package_generator>();
     rountrip_type<pkg1::keyed_in_package_unversioned_key_generator>();
     rountrip_type<versioned_generator>();
+    rountrip_type<aggregate_root_generator>();
 }
 
 BOOST_AUTO_TEST_CASE(validate_hashing) {
@@ -144,6 +146,7 @@ BOOST_AUTO_TEST_CASE(validate_hashing) {
     test_hashing<pkg1::keyed_in_package_generator>();
     test_hashing<pkg1::keyed_in_package_unversioned_key_generator>();
     test_hashing<versioned_generator>();
+    test_hashing<aggregate_root_generator>();
 }
 
 BOOST_AUTO_TEST_CASE(validate_swap) {
@@ -174,6 +177,7 @@ BOOST_AUTO_TEST_CASE(validate_swap) {
     test_swap<pkg1::keyed_in_package_generator>();
     test_swap<pkg1::keyed_in_package_unversioned_key_generator>();
     test_swap<versioned_generator>();
+    test_swap<aggregate_root_generator>();
 }
 
 BOOST_AUTO_TEST_CASE(validate_io) {
@@ -209,6 +213,7 @@ BOOST_AUTO_TEST_CASE(validate_io) {
     test_io<pkg1::keyed_in_package_generator>();
     test_io<pkg1::keyed_in_package_unversioned_key_generator>();
     test_io<versioned_generator>();
+    test_io<aggregate_root_generator>();
 }
 
 BOOST_AUTO_TEST_CASE(setting_properties_using_the_fluent_interface_produces_expected_result) {

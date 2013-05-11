@@ -31,6 +31,9 @@
 namespace dogen {
 namespace stereotypes {
 
+/**
+ * @brief Type is a value.
+ */
 class value final {
 public:
     value(const value&) = default;

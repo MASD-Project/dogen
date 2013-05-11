@@ -43,6 +43,7 @@ const std::string immutable("immutable");
 const std::string keyed("keyed");
 const std::string fluent("fluent");
 const std::string versioned("versioned");
+const std::string aggregate_root("aggregate root");
 
 }
 
@@ -94,6 +95,8 @@ process_stereotype(object_profile& o, const std::string& s) const {
             o.is_fluent(true);
         else if (stereotype == versioned)
             o.is_versioned(true);
+        else if (stereotype == aggregate_root)
+            o.is_aggregate_root(true);
         else {
             BOOST_LOG_SEV(lg, error) << invalid_stereotype << "'"
                                      << stereotype << "'";

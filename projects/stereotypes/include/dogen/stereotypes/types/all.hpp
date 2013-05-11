@@ -18,6 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen/stereotypes/types/aggregate_root.hpp"
 #include "dogen/stereotypes/types/composite_identity.hpp"
 #include "dogen/stereotypes/types/composite_identity_unversioned_key.hpp"
 #include "dogen/stereotypes/types/composite_identity_ver.hpp"

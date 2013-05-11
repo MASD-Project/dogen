@@ -18,60 +18,54 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_STEREOTYPES_TYPES_ENTITY_HPP
-#define DOGEN_STEREOTYPES_TYPES_ENTITY_HPP
+#ifndef DOGEN_STEREOTYPES_TYPES_AGGREGATE_ROOT_HPP
+#define DOGEN_STEREOTYPES_TYPES_AGGREGATE_ROOT_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <algorithm>
-#include "dogen/stereotypes/serialization/entity_fwd_ser.hpp"
+#include "dogen/stereotypes/serialization/aggregate_root_fwd_ser.hpp"
 
 namespace dogen {
 namespace stereotypes {
 
 /**
- * @brief Type is an entity.
+ * @brief Type is an aggregate root.
  */
-class entity final {
+class aggregate_root final {
 public:
-    entity(const entity&) = default;
-    entity(entity&&) = default;
-    ~entity() = default;
+    aggregate_root(const aggregate_root&) = default;
+    aggregate_root(aggregate_root&&) = default;
+    ~aggregate_root() = default;
 
 public:
-    entity();
+    aggregate_root();
 
 public:
-    explicit entity(const int prop_0);
+    explicit aggregate_root(const int prop_0);
 
 private:
     template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const entity& v, unsigned int version);
+    friend void boost::serialization::save(Archive& ar, const aggregate_root& v, unsigned int version);
 
     template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, entity& v, unsigned int version);
+    friend void boost::serialization::load(Archive& ar, aggregate_root& v, unsigned int version);
 
 public:
-    /**
-     * @brief Identity attribute.
-     *
-     */
-    /**@{*/
     int prop_0() const;
     void prop_0(const int v);
-    /**@}*/
 
 public:
-    bool operator==(const entity& rhs) const;
-    bool operator!=(const entity& rhs) const {
+    bool operator==(const aggregate_root& rhs) const;
+    bool operator!=(const aggregate_root& rhs) const {
         return !this->operator==(rhs);
     }
 
 public:
-    void swap(entity& other) noexcept;
-    entity& operator=(entity other);
+    void swap(aggregate_root& other) noexcept;
+    aggregate_root& operator=(aggregate_root other);
 
 private:
     int prop_0_;
@@ -83,8 +77,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::stereotypes::entity& lhs,
-    dogen::stereotypes::entity& rhs) {
+    dogen::stereotypes::aggregate_root& lhs,
+    dogen::stereotypes::aggregate_root& rhs) {
     lhs.swap(rhs);
 }
 
