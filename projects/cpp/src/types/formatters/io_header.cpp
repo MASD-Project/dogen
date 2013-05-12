@@ -36,9 +36,9 @@ namespace {
 
 auto lg(logger_factory("cpp.formatters.io_header"));
 
-const std::string missing_class_view_model(
+const std::string missing_class_info(
     "Meta type is pod but class view model is empty");
-const std::string missing_enumeration_view_model(
+const std::string missing_enumeration_info(
     "Meta type is enumeration but enumeration view model is empty");
 
 }
@@ -57,15 +57,15 @@ file_formatter::shared_ptr io_header::create(std::ostream& stream) {
     return file_formatter::shared_ptr(new io_header(stream));
 }
 
-void io_header::format_class(const file_view_model& vm) {
-    boost::optional<class_view_model> o(vm.class_vm());
+void io_header::format_class(const file_info& vm) {
+    boost::optional<class_info> o(vm.class_info());
     if (!o) {
-        BOOST_LOG_SEV(lg, error) << missing_class_view_model;
-        BOOST_THROW_EXCEPTION(formatting_error(missing_class_view_model));
+        BOOST_LOG_SEV(lg, error) << missing_class_info;
+        BOOST_THROW_EXCEPTION(formatting_error(missing_class_info));
     }
 
     {
-        const class_view_model& cvm(*o);
+        const class_info& cvm(*o);
         namespace_helper helper1(stream_, cvm.namespaces());
         utility_.blank_line();
 
@@ -86,11 +86,11 @@ void io_header::format_class(const file_view_model& vm) {
     utility_.blank_line(2);
 }
 
-void io_header::format_enumeration(const file_view_model& vm) {
-    const auto o(vm.enumeration_vm());
+void io_header::format_enumeration(const file_info& vm) {
+    const auto o(vm.enumeration_info());
     if (!o) {
-        BOOST_LOG_SEV(lg, error) << missing_enumeration_view_model;
-        BOOST_THROW_EXCEPTION(formatting_error(missing_enumeration_view_model));
+        BOOST_LOG_SEV(lg, error) << missing_enumeration_info;
+        BOOST_THROW_EXCEPTION(formatting_error(missing_enumeration_info));
     }
 
     const auto evm(*o);
@@ -105,7 +105,7 @@ void io_header::format_enumeration(const file_view_model& vm) {
     utility_.blank_line(2);
 }
 
-void io_header::format(const file_view_model& vm) {
+void io_header::format(const file_info& vm) {
     licence licence(stream_);
     licence.format();
 

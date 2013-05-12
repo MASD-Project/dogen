@@ -37,7 +37,7 @@ enumeration_declaration::
 enumeration_declaration(std::ostream& stream)
     : stream_(stream), utility_(stream_, indenter_) { }
 
-void enumeration_declaration::format(const enumeration_view_model& vm) {
+void enumeration_declaration::format(const enumeration_info& vm) {
     doxygen_comments dc1(stream_, indenter_);
     dc1.format(vm.documentation());
 

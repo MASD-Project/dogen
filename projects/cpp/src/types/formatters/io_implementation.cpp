@@ -45,9 +45,9 @@ const std::string colon(": ");
 const std::string comma(", ");
 const std::string semi_colon(";");
 
-const std::string missing_class_view_model(
+const std::string missing_class_info(
     "Meta type is pod but class view model is empty");
-const std::string missing_enumeration_view_model(
+const std::string missing_enumeration_info(
     "Meta type is enumeration but enumeration view model is empty");
 
 }
@@ -65,7 +65,7 @@ file_formatter::shared_ptr io_implementation::create(std::ostream& stream) {
     return file_formatter::shared_ptr(new io_implementation(stream));
 }
 
-void io_implementation::io_helper_methods(const class_view_model& vm) {
+void io_implementation::io_helper_methods(const class_info& vm) {
     if (vm.is_parent() || !vm.parents().empty())
         return;
 
@@ -74,11 +74,11 @@ void io_implementation::io_helper_methods(const class_view_model& vm) {
     i.format_helper_methods(vm);
 }
 
-void io_implementation::format_enumeration(const file_view_model& vm) {
-    const auto o(vm.enumeration_vm());
+void io_implementation::format_enumeration(const file_info& vm) {
+    const auto o(vm.enumeration_info());
     if (!o) {
-        BOOST_LOG_SEV(lg, error) << missing_enumeration_view_model;
-        BOOST_THROW_EXCEPTION(formatting_error(missing_enumeration_view_model));
+        BOOST_LOG_SEV(lg, error) << missing_enumeration_info;
+        BOOST_THROW_EXCEPTION(formatting_error(missing_enumeration_info));
     }
 
     const auto evm(*o);
@@ -138,14 +138,14 @@ void io_implementation::format_enumeration(const file_view_model& vm) {
     utility_.blank_line();
 }
 
-void io_implementation::format_class(const file_view_model& vm) {
-    const auto o(vm.class_vm());
+void io_implementation::format_class(const file_info& vm) {
+    const auto o(vm.class_info());
     if (!o) {
-        BOOST_LOG_SEV(lg, error) << missing_class_view_model;
-        BOOST_THROW_EXCEPTION(formatting_error(missing_class_view_model));
+        BOOST_LOG_SEV(lg, error) << missing_class_info;
+        BOOST_THROW_EXCEPTION(formatting_error(missing_class_info));
     }
 
-    const class_view_model& cvm(*o);
+    const class_info& cvm(*o);
     io_helper_methods(cvm);
 
     namespace_helper ns_helper(stream_, cvm.namespaces());
@@ -173,7 +173,7 @@ void io_implementation::format_class(const file_view_model& vm) {
     utility_.blank_line();
 }
 
-void io_implementation::format(const file_view_model& vm) {
+void io_implementation::format(const file_info& vm) {
     licence licence(stream_);
     licence.format();
 

@@ -30,7 +30,7 @@
 #include <iosfwd>
 #include "dogen/cpp/types/formatters/indenter.hpp"
 #include "dogen/cpp/types/formatters/utility.hpp"
-#include "dogen/cpp/types/file_view_model.hpp"
+#include "dogen/cpp/types/file_info.hpp"
 
 namespace dogen {
 namespace cpp {
@@ -51,7 +51,7 @@ private:
     void format(std::list<std::string> v, bool is_system);
 
 public:
-    void format(const file_view_model& vm);
+    void format(const file_info& vm);
 
 private:
     std::ostream& stream_;

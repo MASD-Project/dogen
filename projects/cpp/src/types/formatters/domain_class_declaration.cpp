@@ -34,7 +34,7 @@ domain_class_declaration(std::ostream& stream,
       disable_io_(disable_io) { }
 
 void domain_class_declaration::
-hand_crafted_constructors(const class_view_model& vm) {
+hand_crafted_constructors(const class_info& vm) {
     default_constructor(vm);
     destructor(vm);
     move_constructor(vm);
@@ -42,7 +42,7 @@ hand_crafted_constructors(const class_view_model& vm) {
         complete_constructor(vm);
 }
 
-void domain_class_declaration::visitor_method(const class_view_model& vm) {
+void domain_class_declaration::visitor_method(const class_info& vm) {
     if (vm.is_visitable()) {
         utility_.public_access_specifier();
         stream_ << indenter_ << "virtual void accept(const " << vm.name()
@@ -99,7 +99,7 @@ void domain_class_declaration::visitor_method(const class_view_model& vm) {
     }
 }
 
-void domain_class_declaration::format(const class_view_model& vm) {
+void domain_class_declaration::format(const class_info& vm) {
     open_class(vm);
     {
         positive_indenter_scope s(indenter_);

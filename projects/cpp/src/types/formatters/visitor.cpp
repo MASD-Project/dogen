@@ -36,7 +36,7 @@ using namespace dogen::utility::log;
 namespace {
 
 auto lg(logger_factory("cpp.formatters.visitor"));
-const std::string missing_visitor_view_model("Visitor view model is empty");
+const std::string missing_visitor_info("Visitor view model is empty");
 const std::string comments("Accept visits for type ");
 
 }
@@ -52,7 +52,7 @@ file_formatter::shared_ptr visitor::create(std::ostream& stream) {
     return file_formatter::shared_ptr(new visitor(stream));
 }
 
-void visitor::format(const visitor_view_model& vm) {
+void visitor::format(const visitor_info& vm) {
     {
         namespace_helper ns(stream_, vm.namespaces());
         utility_.blank_line();
@@ -108,7 +108,7 @@ void visitor::format(const visitor_view_model& vm) {
     utility_.blank_line(2);
 }
 
-void visitor::format(const file_view_model& vm) {
+void visitor::format(const file_info& vm) {
     licence licence(stream_);
     licence.format();
 
@@ -119,10 +119,10 @@ void visitor::format(const file_view_model& vm) {
     includes includes(stream_);
     includes.format(vm);
 
-    const auto o(vm.visitor_vm());
+    const auto o(vm.visitor_info());
     if (!o) {
-        BOOST_LOG_SEV(lg, error) << missing_visitor_view_model;
-        BOOST_THROW_EXCEPTION(formatting_error(missing_visitor_view_model));
+        BOOST_LOG_SEV(lg, error) << missing_visitor_info;
+        BOOST_THROW_EXCEPTION(formatting_error(missing_visitor_info));
     }
     format(*o);
 

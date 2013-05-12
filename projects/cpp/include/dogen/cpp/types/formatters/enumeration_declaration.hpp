@@ -27,7 +27,7 @@
 
 #include <iosfwd>
 #include <string>
-#include "dogen/cpp/types/enumeration_view_model.hpp"
+#include "dogen/cpp/types/enumeration_info.hpp"
 #include "dogen/cpp/types/formatters/indenter.hpp"
 #include "dogen/cpp/types/formatters/utility.hpp"
 
@@ -48,7 +48,7 @@ public:
     enumeration_declaration(std::ostream& stream);
 
 public:
-    void format(const enumeration_view_model& vm);
+    void format(const enumeration_info& vm);
 
 protected:
     std::ostream& stream_;

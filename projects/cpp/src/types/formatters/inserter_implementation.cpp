@@ -79,12 +79,12 @@ inserter_implementation(std::ostream& stream, indenter& indenter,
 }
 
 bool inserter_implementation::
-is_insertable(const nested_type_view_model& vm) {
+is_insertable(const nested_type_info& vm) {
     return !vm.is_sequence_container() && !vm.is_associative_container();
 }
 
 void inserter_implementation::
-sequence_container_helper(const nested_type_view_model& vm) {
+sequence_container_helper(const nested_type_info& vm) {
     const auto children(vm.children());
     if (children.size() != 1) {
         BOOST_LOG_SEV(lg, error) << invalid_sequence_container;
@@ -136,7 +136,7 @@ sequence_container_helper(const nested_type_view_model& vm) {
 }
 
 void inserter_implementation::
-associative_container_helper(const nested_type_view_model& vm) {
+associative_container_helper(const nested_type_info& vm) {
     const auto children(vm.children());
     if (children.size() != 1 && children.size() != 2) {
         BOOST_LOG_SEV(lg, error) << invalid_associative_container;
@@ -227,7 +227,7 @@ associative_container_helper(const nested_type_view_model& vm) {
 }
 
 void inserter_implementation::
-smart_pointer_helper(const nested_type_view_model& vm) {
+smart_pointer_helper(const nested_type_info& vm) {
     const auto children(vm.children());
     if (children.size() != 1) {
         BOOST_LOG_SEV(lg, error) << invalid_smart_pointer;
@@ -303,7 +303,7 @@ smart_pointer_helper(const nested_type_view_model& vm) {
 }
 
 void inserter_implementation::
-optional_helper(const nested_type_view_model& vm) {
+optional_helper(const nested_type_info& vm) {
     const auto children(vm.children());
     if (children.size() != 1) {
         BOOST_LOG_SEV(lg, error) << invalid_optional_type;
@@ -373,7 +373,7 @@ optional_helper(const nested_type_view_model& vm) {
 }
 
 void inserter_implementation::
-pair_helper(const nested_type_view_model& vm) {
+pair_helper(const nested_type_info& vm) {
     const auto children(vm.children());
     if (children.size() != 2) {
         BOOST_LOG_SEV(lg, error) << invalid_pair_type;
@@ -446,7 +446,7 @@ pair_helper(const nested_type_view_model& vm) {
 }
 
 void inserter_implementation::
-variant_helper(const nested_type_view_model& vm) {
+variant_helper(const nested_type_info& vm) {
     const auto children(vm.children());
     if (children.empty()) {
         BOOST_LOG_SEV(lg, error) << invalid_variant;
@@ -580,7 +580,7 @@ void inserter_implementation::tidy_up_string_method() {
 }
 
 void inserter_implementation::
-recursive_helper_method_creator(const nested_type_view_model& vm,
+recursive_helper_method_creator(const nested_type_info& vm,
     std::unordered_set<std::string>& types_done) {
 
     if (types_done.find(vm.complete_identifiable_name()) != types_done.end())
@@ -609,7 +609,7 @@ recursive_helper_method_creator(const nested_type_view_model& vm,
 }
 
 void inserter_implementation::
-format_helper_methods(const class_view_model& vm) {
+format_helper_methods(const class_info& vm) {
     const auto props(vm.properties());
     if (props.empty())
         return;
@@ -620,7 +620,7 @@ format_helper_methods(const class_view_model& vm) {
 }
 
 void inserter_implementation::
-format_inserter_implementation(const class_view_model& vm) {
+format_inserter_implementation(const class_info& vm) {
     if (vm.requires_stream_manipulators()) {
         stream_ << indenter_ << "boost::io::ios_flags_saver ifs(s);"
                 << std::endl

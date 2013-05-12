@@ -33,7 +33,7 @@ class_declaration(std::ostream& stream, const bool disable_serialization)
     : stream_(stream), utility_(stream_, indenter_),
       disable_serialization_(disable_serialization) { }
 
-void class_declaration::open_class(const class_view_model& vm) {
+void class_declaration::open_class(const class_info& vm) {
     doxygen_comments dc(stream_, indenter_);
     dc.format(vm.documentation());
     stream_ << indenter_ << "class " << vm.name();
@@ -67,7 +67,7 @@ void class_declaration::close_class() {
     utility_.blank_line();
 }
 
-void class_declaration::default_constructor(const class_view_model& vm) {
+void class_declaration::default_constructor(const class_info& vm) {
     if (!vm.requires_manual_default_constructor())
         return;
 
@@ -77,7 +77,7 @@ void class_declaration::default_constructor(const class_view_model& vm) {
     utility_.blank_line();
 }
 
-void class_declaration::complete_constructor(const class_view_model& vm) {
+void class_declaration::complete_constructor(const class_info& vm) {
     const auto props(vm.all_properties());
     if (props.empty())
         return;
@@ -115,7 +115,7 @@ void class_declaration::complete_constructor(const class_view_model& vm) {
     utility_.blank_line();
 }
 
-void class_declaration::move_constructor(const class_view_model& vm) {
+void class_declaration::move_constructor(const class_info& vm) {
     if (!vm.requires_manual_move_constructor())
         return;
 
@@ -130,7 +130,7 @@ void class_declaration::move_constructor(const class_view_model& vm) {
     utility_.blank_line();
 }
 
-void class_declaration::destructor(const class_view_model& vm) {
+void class_declaration::destructor(const class_info& vm) {
     /*
      * according to MEC++, item 33, base classes should always be
      * abstract. this avoids all sorts of tricky problems with
@@ -147,7 +147,7 @@ void class_declaration::destructor(const class_view_model& vm) {
 }
 
 void class_declaration::
-compiler_generated_constuctors(const class_view_model& vm) {
+compiler_generated_constuctors(const class_info& vm) {
     utility_.public_access_specifier();
 
     if (!vm.requires_manual_default_constructor())
@@ -176,7 +176,7 @@ compiler_generated_constuctors(const class_view_model& vm) {
     utility_.blank_line();
 }
 
-void class_declaration::friends(const class_view_model& vm) {
+void class_declaration::friends(const class_info& vm) {
     if (disable_serialization_)
         return;
 
@@ -196,7 +196,7 @@ void class_declaration::friends(const class_view_model& vm) {
 
 void class_declaration::
 non_pod_getters_and_setters(const std::string class_name,
-    const property_view_model& vm) {
+    const property_info& vm) {
     doxygen_comments dc(stream_, indenter_);
     dc.format(vm.documentation());
     if (!vm.is_immutable())
@@ -227,7 +227,7 @@ non_pod_getters_and_setters(const std::string class_name,
 
 void class_declaration::
 pod_getters_and_setters(const std::string class_name,
-    const property_view_model& vm) {
+    const property_info& vm) {
     doxygen_comments dc(stream_, indenter_);
     dc.format(vm.documentation());
     if (!vm.is_immutable())
@@ -276,7 +276,7 @@ pod_getters_and_setters(const std::string class_name,
     utility_.blank_line();
 }
 
-void class_declaration::getters_and_setters(const class_view_model& vm) {
+void class_declaration::getters_and_setters(const class_info& vm) {
     if (vm.properties().empty())
         return;
 
@@ -291,7 +291,7 @@ void class_declaration::getters_and_setters(const class_view_model& vm) {
     }
 }
 
-void class_declaration::member_variables(const class_view_model& vm) {
+void class_declaration::member_variables(const class_info& vm) {
     if (vm.properties().empty())
         return;
 
@@ -303,7 +303,7 @@ void class_declaration::member_variables(const class_view_model& vm) {
     }
 }
 
-void class_declaration::equality(const class_view_model& vm) {
+void class_declaration::equality(const class_info& vm) {
     // equality is only public in leaf classes - MEC++-33
     if (vm.is_parent()) {
         utility_.protected_access_specifier();
@@ -350,7 +350,7 @@ void class_declaration::equality(const class_view_model& vm) {
     utility_.blank_line();
 }
 
-void class_declaration::to_stream(const class_view_model& vm) {
+void class_declaration::to_stream(const class_info& vm) {
     if (!vm.is_parent() && vm.parents().empty())
         return;
 
@@ -369,7 +369,7 @@ void class_declaration::to_stream(const class_view_model& vm) {
     utility_.blank_line();
 }
 
-void class_declaration::swap_and_assignment(const class_view_model& vm) {
+void class_declaration::swap_and_assignment(const class_info& vm) {
     if ((vm.all_properties().empty() && !vm.is_parent()) || vm.is_immutable())
         return;
 

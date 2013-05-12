@@ -39,9 +39,9 @@ auto lg(logger_factory("cpp.formatters.serialization_implementation"));
 
 const std::string boost_ns("boost");
 const std::string serialization_ns("serialization");
-const std::string missing_class_view_model(
+const std::string missing_class_info(
     "Meta type is pod but class view model is empty");
-const std::string enumeration_view_model_not_supported(
+const std::string enumeration_info_not_supported(
     "Enumerations do not have an implementation");
 
 }
@@ -64,7 +64,7 @@ serialization_implementation::create(std::ostream& stream,
         new serialization_implementation(stream, disable_xml_serialization));
 }
 
-void serialization_implementation::save_function(const class_view_model& vm) {
+void serialization_implementation::save_function(const class_info& vm) {
     const auto parents(vm.parents());
     const auto props(vm.properties());
     const bool has_properties(!props.empty());
@@ -126,7 +126,7 @@ void serialization_implementation::save_function(const class_view_model& vm) {
     utility_.blank_line();
 }
 
-void serialization_implementation::load_function(const class_view_model& vm) {
+void serialization_implementation::load_function(const class_info& vm) {
     const auto parents(vm.parents());
     const auto props(vm.properties());
     const bool has_properties(!props.empty());
@@ -204,7 +204,7 @@ void serialization_implementation::load_function(const class_view_model& vm) {
 }
 
 void serialization_implementation::
-template_instantiations(const class_view_model& vm) {
+template_instantiations(const class_info& vm) {
     stream_ << indenter_ << "template void save("
             << "archive::polymorphic_oarchive& ar, const ";
     qname qname(stream_);
@@ -257,14 +257,14 @@ template_instantiations(const class_view_model& vm) {
     utility_.blank_line();
 }
 
-void serialization_implementation::format_class(const file_view_model& vm) {
-    const auto o(vm.class_vm());
+void serialization_implementation::format_class(const file_info& vm) {
+    const auto o(vm.class_info());
     if (!o) {
-        BOOST_LOG_SEV(lg, error) << missing_class_view_model;
-        BOOST_THROW_EXCEPTION(formatting_error(missing_class_view_model));
+        BOOST_LOG_SEV(lg, error) << missing_class_info;
+        BOOST_THROW_EXCEPTION(formatting_error(missing_class_info));
     }
 
-    const class_view_model& cvm(*o);
+    const class_info& cvm(*o);
     qname qname(stream_);
     if (cvm.is_parent() || !cvm.parents().empty()) {
         stream_ << indenter_ << "BOOST_CLASS_TRACKING(" << std::endl;
@@ -298,13 +298,13 @@ void serialization_implementation::format_class(const file_view_model& vm) {
 }
 
 void serialization_implementation::
-format_enumeration(const file_view_model&) {
-    BOOST_LOG_SEV(lg, error) << enumeration_view_model_not_supported;
+format_enumeration(const file_info&) {
+    BOOST_LOG_SEV(lg, error) << enumeration_info_not_supported;
     BOOST_THROW_EXCEPTION(
-        formatting_error(enumeration_view_model_not_supported));
+        formatting_error(enumeration_info_not_supported));
 }
 
-void serialization_implementation::format(const file_view_model& vm) {
+void serialization_implementation::format(const file_info& vm) {
     licence licence(stream_);
     licence.format();
 

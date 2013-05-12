@@ -30,7 +30,7 @@ create(std::ostream&) {
     return file_formatter::shared_ptr(new null_formatter);
 }
 
-void null_formatter::format(const file_view_model&) {
+void null_formatter::format(const file_info&) {
     return;
 }
 

@@ -41,9 +41,9 @@ auto lg(logger_factory("cpp.formatters.serialization_header"));
 
 const std::string boost_ns("boost");
 const std::string serialization_ns("serialization");
-const std::string missing_class_view_model(
+const std::string missing_class_info(
     "Meta type is pod but class view model is empty");
-const std::string missing_enumeration_view_model(
+const std::string missing_enumeration_info(
     "Meta type is enumeration but enumeration view model is empty");
 
 }
@@ -65,7 +65,7 @@ serialization_header::create(std::ostream& stream,
         new serialization_header(stream, disable_xml_serialization));
 }
 
-void serialization_header::load_and_save_functions(const class_view_model& vm) {
+void serialization_header::load_and_save_functions(const class_info& vm) {
     qname qname(stream_);
     stream_ << indenter_ << "template<typename Archive>" << std::endl
             << indenter_ << "void save(Archive& ar, const ";
@@ -79,14 +79,14 @@ void serialization_header::load_and_save_functions(const class_view_model& vm) {
     stream_ << "& v, unsigned int version);" << std::endl;
 }
 
-void serialization_header::format_class(const file_view_model& vm) {
-    const auto o(vm.class_vm());
+void serialization_header::format_class(const file_info& vm) {
+    const auto o(vm.class_info());
     if (!o) {
-        BOOST_LOG_SEV(lg, error) << missing_class_view_model;
-        BOOST_THROW_EXCEPTION(formatting_error(missing_class_view_model));
+        BOOST_LOG_SEV(lg, error) << missing_class_info;
+        BOOST_THROW_EXCEPTION(formatting_error(missing_class_info));
     }
 
-    const class_view_model& cvm(*o);
+    const class_info& cvm(*o);
     qname qname(stream_);
     const auto parents(cvm.parents());
     if (!cvm.is_parent() && !parents.empty())
@@ -137,11 +137,11 @@ void serialization_header::format_class(const file_view_model& vm) {
     utility_.blank_line(2);
 }
 
-void serialization_header::format_enumeration(const file_view_model& vm) {
-    const auto o(vm.enumeration_vm());
+void serialization_header::format_enumeration(const file_info& vm) {
+    const auto o(vm.enumeration_info());
     if (!o) {
-        BOOST_LOG_SEV(lg, error) << missing_enumeration_view_model;
-        BOOST_THROW_EXCEPTION(formatting_error(missing_enumeration_view_model));
+        BOOST_LOG_SEV(lg, error) << missing_enumeration_info;
+        BOOST_THROW_EXCEPTION(formatting_error(missing_enumeration_info));
     }
 
     const auto evm(*o);
@@ -168,7 +168,7 @@ void serialization_header::format_enumeration(const file_view_model& vm) {
     utility_.blank_line();
 }
 
-void serialization_header::format(const file_view_model& vm) {
+void serialization_header::format(const file_info& vm) {
     licence licence(stream_);
     licence.format();
 

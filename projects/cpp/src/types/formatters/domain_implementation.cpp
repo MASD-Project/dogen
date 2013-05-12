@@ -50,9 +50,9 @@ const std::string semi_colon(";");
 const std::string space(" ");
 const std::string comma(",");
 
-const std::string missing_class_view_model(
+const std::string missing_class_info(
     "Meta type is pod but class view model is empty");
-const std::string enumeration_view_model_not_supported(
+const std::string enumeration_info_not_supported(
     "Enumerations do not have an implementation");
 const std::string invalid_smart_pointer(
     "Smart pointers have exactly one type argument");
@@ -86,7 +86,7 @@ create(std::ostream& stream, bool disable_complete_constructor,
 }
 
 void domain_implementation::
-smart_pointer_helper(const nested_type_view_model& vm) {
+smart_pointer_helper(const nested_type_info& vm) {
     const auto children(vm.children());
     if (children.size() != 1) {
         BOOST_LOG_SEV(lg, error) << invalid_smart_pointer;
@@ -117,7 +117,7 @@ smart_pointer_helper(const nested_type_view_model& vm) {
 }
 
 void domain_implementation::
-recursive_helper_method_creator(const nested_type_view_model& vm,
+recursive_helper_method_creator(const nested_type_info& vm,
     std::unordered_set<std::string>& types_done) {
     if (types_done.find(vm.complete_identifiable_name()) != types_done.end())
         return;
@@ -132,7 +132,7 @@ recursive_helper_method_creator(const nested_type_view_model& vm,
     types_done.insert(vm.complete_identifiable_name());
 }
 
-void domain_implementation::io_helper_methods(const class_view_model& vm) {
+void domain_implementation::io_helper_methods(const class_info& vm) {
     const bool has_io(vm.is_parent() || !vm.parents().empty() ||
         use_integrated_io_);
 
@@ -145,7 +145,7 @@ void domain_implementation::io_helper_methods(const class_view_model& vm) {
 }
 
 void domain_implementation::
-inserter_operator(const class_view_model& vm) {
+inserter_operator(const class_info& vm) {
     if (!use_integrated_io_ || disable_io_)
         return;
 
@@ -173,7 +173,7 @@ inserter_operator(const class_view_model& vm) {
 
 void domain_implementation::
 class_implementation(aspect_types at, const sml::category_types ct,
-    const class_view_model& vm) {
+    const class_info& vm) {
 
     using dogen::utility::exception::invalid_enum_value;
     if (at == aspect_types::main) {
@@ -196,13 +196,13 @@ class_implementation(aspect_types at, const sml::category_types ct,
     BOOST_THROW_EXCEPTION(invalid_enum_value(invalid_aspect_type));
 }
 
-void domain_implementation::format_class(const file_view_model& vm) {
-    boost::optional<class_view_model> o(vm.class_vm());
+void domain_implementation::format_class(const file_info& vm) {
+    boost::optional<class_info> o(vm.class_info());
     if (!o) {
-        BOOST_LOG_SEV(lg, error) << missing_class_view_model;
-        BOOST_THROW_EXCEPTION(formatting_error(missing_class_view_model));
+        BOOST_LOG_SEV(lg, error) << missing_class_info;
+        BOOST_THROW_EXCEPTION(formatting_error(missing_class_info));
     }
-    const class_view_model& cvm(*o);
+    const class_info& cvm(*o);
     io_helper_methods(cvm);
 
     std::unordered_set<std::string> types_done;
@@ -216,13 +216,13 @@ void domain_implementation::format_class(const file_view_model& vm) {
     inserter_operator(cvm);
 }
 
-void domain_implementation::format_enumeration(const file_view_model&) {
-    BOOST_LOG_SEV(lg, error) << missing_class_view_model;
+void domain_implementation::format_enumeration(const file_info&) {
+    BOOST_LOG_SEV(lg, error) << missing_class_info;
     BOOST_THROW_EXCEPTION(
-        formatting_error(enumeration_view_model_not_supported));
+        formatting_error(enumeration_info_not_supported));
 }
 
-void domain_implementation::format(const file_view_model& vm) {
+void domain_implementation::format(const file_info& vm) {
     licence licence(stream_);
     licence.format();
 

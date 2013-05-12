@@ -37,9 +37,9 @@ namespace {
 
 auto lg(logger_factory("cpp.formatters.generator_header"));
 
-const std::string missing_class_view_model(
+const std::string missing_class_info(
     "Meta type is pod but class view model is empty");
-const std::string missing_enumeration_view_model(
+const std::string missing_enumeration_info(
     "Meta type is enumeration but enumeration view model is empty");
 
 }
@@ -58,7 +58,7 @@ file_formatter::shared_ptr generator_header::create(std::ostream& stream) {
     return file_formatter::shared_ptr(new generator_header(stream));
 }
 
-void generator_header::generator_class(const enumeration_view_model& vm) {
+void generator_header::generator_class(const enumeration_info& vm) {
     const std::string class_name(vm.name() + "_generator");
 
     stream_ << indenter_ << "class " << class_name << " ";
@@ -99,7 +99,7 @@ void generator_header::generator_class(const enumeration_view_model& vm) {
     stream_ << "};";
 }
 
-void generator_header::generator_class(const class_view_model& vm) {
+void generator_header::generator_class(const class_info& vm) {
     const std::string class_name(vm.name() + "_generator");
 
     stream_ << indenter_ << "class " << class_name << " ";
@@ -150,11 +150,11 @@ void generator_header::generator_class(const class_view_model& vm) {
     stream_ << "};";
 }
 
-void generator_header::format_enumeration(const file_view_model& vm) {
-    const auto o(vm.enumeration_vm());
+void generator_header::format_enumeration(const file_info& vm) {
+    const auto o(vm.enumeration_info());
     if (!o) {
-        BOOST_LOG_SEV(lg, error) << missing_enumeration_view_model;
-        BOOST_THROW_EXCEPTION(formatting_error(missing_enumeration_view_model));
+        BOOST_LOG_SEV(lg, error) << missing_enumeration_info;
+        BOOST_THROW_EXCEPTION(formatting_error(missing_enumeration_info));
     }
 
     const auto evm(*o);
@@ -169,15 +169,15 @@ void generator_header::format_enumeration(const file_view_model& vm) {
     utility_.blank_line(2);
 }
 
-void generator_header::format_class(const file_view_model& vm) {
-    boost::optional<class_view_model> o(vm.class_vm());
+void generator_header::format_class(const file_info& vm) {
+    boost::optional<class_info> o(vm.class_info());
     if (!o) {
-        BOOST_LOG_SEV(lg, error) << missing_class_view_model;
-        BOOST_THROW_EXCEPTION(formatting_error(missing_class_view_model));
+        BOOST_LOG_SEV(lg, error) << missing_class_info;
+        BOOST_THROW_EXCEPTION(formatting_error(missing_class_info));
     }
 
     {
-        const class_view_model& cvm(*o);
+        const class_info& cvm(*o);
         std::list<std::string> namespaces(cvm.namespaces());
         namespace_helper ns_helper(stream_, namespaces);
         utility_.blank_line();
@@ -188,7 +188,7 @@ void generator_header::format_class(const file_view_model& vm) {
     utility_.blank_line(2);
 }
 
-void generator_header::format(const file_view_model& vm) {
+void generator_header::format(const file_info& vm) {
     licence licence(stream_);
     licence.format();
 

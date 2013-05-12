@@ -36,7 +36,7 @@ namespace formatters {
 
 odb_options::odb_options(std::ostream& stream) : stream_(stream) {}
 
-void odb_options::format(const odb_options_view_model& vm) {
+void odb_options::format(const odb_options_info& vm) {
     const std::string mn(vm.model_name().empty() ?
         unnamed_model :
         vm.model_name());

@@ -47,9 +47,9 @@ const std::string invalid_associative_container(
     "Associative containers have one or two type arguments");
 const std::string invalid_smart_pointer(
     "Smart pointers have exactly one type argument");
-const std::string missing_class_view_model(
+const std::string missing_class_info(
     "Meta type is pod but class view model is empty");
-const std::string enumeration_view_model_not_supported(
+const std::string enumeration_info_not_supported(
     "Enumerations do not have an implementation");
 
 }
@@ -65,7 +65,7 @@ file_formatter::shared_ptr hash_implementation::create(std::ostream& stream) {
     return file_formatter::shared_ptr(new hash_implementation(stream));
 }
 
-bool hash_implementation::is_hashable(const nested_type_view_model& vm) {
+bool hash_implementation::is_hashable(const nested_type_info& vm) {
     return
         !vm.is_sequence_container() &&
         !vm.is_associative_container() &&
@@ -77,7 +77,7 @@ bool hash_implementation::is_hashable(const nested_type_view_model& vm) {
         !vm.is_time_duration();
 }
 
-void hash_implementation::combine_function(const class_view_model& vm) {
+void hash_implementation::combine_function(const class_info& vm) {
     if (vm.properties().empty() && vm.parents().empty())
         return;
 
@@ -95,7 +95,7 @@ void hash_implementation::combine_function(const class_view_model& vm) {
     utility_.close_scope();
 }
 
-void hash_implementation::pair_helper(const nested_type_view_model& vm) {
+void hash_implementation::pair_helper(const nested_type_info& vm) {
     const auto children(vm.children());
     if (children.size() != 2) {
         BOOST_LOG_SEV(lg, error) << "Children container has unexpected size: "
@@ -145,7 +145,7 @@ void hash_implementation::pair_helper(const nested_type_view_model& vm) {
     utility_.close_scope();
 }
 
-void hash_implementation::optional_helper(const nested_type_view_model& vm) {
+void hash_implementation::optional_helper(const nested_type_info& vm) {
     const auto children(vm.children());
     if (children.size() != 1) {
         BOOST_LOG_SEV(lg, error) << "Children container has unexpected size: "
@@ -192,7 +192,7 @@ void hash_implementation::optional_helper(const nested_type_view_model& vm) {
     utility_.close_scope();
 }
 
-void hash_implementation::variant_helper(const nested_type_view_model& vm) {
+void hash_implementation::variant_helper(const nested_type_info& vm) {
     const auto children(vm.children());
     if (children.empty()) {
         BOOST_LOG_SEV(lg, error) << "Children container has unexpected size: "
@@ -259,7 +259,7 @@ void hash_implementation::variant_helper(const nested_type_view_model& vm) {
 }
 
 void hash_implementation::
-sequence_container_helper(const nested_type_view_model& vm) {
+sequence_container_helper(const nested_type_info& vm) {
     const auto children(vm.children());
     if (children.size() != 1) {
         BOOST_LOG_SEV(lg, error) << "Children container has unexpected size: "
@@ -304,7 +304,7 @@ sequence_container_helper(const nested_type_view_model& vm) {
 }
 
 void hash_implementation::
-associative_container_helper(const nested_type_view_model& vm) {
+associative_container_helper(const nested_type_info& vm) {
     const auto children(vm.children());
     if (children.size() != 1 && children.size() != 2) {
         BOOST_LOG_SEV(lg, error) << invalid_associative_container;
@@ -361,7 +361,7 @@ associative_container_helper(const nested_type_view_model& vm) {
 }
 
 void hash_implementation::
-smart_pointer_helper(const nested_type_view_model& vm) {
+smart_pointer_helper(const nested_type_info& vm) {
     const auto children(vm.children());
     if (children.size() != 1) {
         BOOST_LOG_SEV(lg, error) << invalid_smart_pointer;
@@ -396,7 +396,7 @@ smart_pointer_helper(const nested_type_view_model& vm) {
     utility_.close_scope();
 }
 
-void hash_implementation::ptime_helper(const nested_type_view_model& vm) {
+void hash_implementation::ptime_helper(const nested_type_info& vm) {
     const std::string identifiable_type_name(
         vm.complete_identifiable_name());
     const std::string type_name(vm.complete_name());
@@ -426,7 +426,7 @@ void hash_implementation::ptime_helper(const nested_type_view_model& vm) {
 }
 
 void hash_implementation::
-time_duration_helper(const nested_type_view_model& vm) {
+time_duration_helper(const nested_type_info& vm) {
     const std::string identifiable_type_name(
         vm.complete_identifiable_name());
     const std::string type_name(vm.complete_name());
@@ -450,7 +450,7 @@ time_duration_helper(const nested_type_view_model& vm) {
 }
 
 void hash_implementation::
-recursive_helper_method_creator(const nested_type_view_model& vm,
+recursive_helper_method_creator(const nested_type_info& vm,
     std::unordered_set<std::string>& types_done) {
     BOOST_LOG_SEV(lg, debug) << "Creating helper methods for " << vm.name();
 
@@ -481,7 +481,7 @@ recursive_helper_method_creator(const nested_type_view_model& vm,
     types_done.insert(vm.complete_identifiable_name());
 }
 
-void hash_implementation::create_helper_methods(const class_view_model& vm) {
+void hash_implementation::create_helper_methods(const class_info& vm) {
     const auto props(vm.properties());
     if (props.empty())
         return;
@@ -491,7 +491,7 @@ void hash_implementation::create_helper_methods(const class_view_model& vm) {
         recursive_helper_method_creator(p.type(), types_done);
 }
 
-void hash_implementation::hasher_hash_method(const class_view_model& vm) {
+void hash_implementation::hasher_hash_method(const class_info& vm) {
     BOOST_LOG_SEV(lg, debug) << "Creating hash method for " << vm.name();
 
     const auto props(vm.properties());
@@ -547,14 +547,14 @@ void hash_implementation::hasher_hash_method(const class_view_model& vm) {
     utility_.close_scope();
 }
 
-void hash_implementation::format_class(const file_view_model& vm) {
-    boost::optional<class_view_model> o(vm.class_vm());
+void hash_implementation::format_class(const file_info& vm) {
+    boost::optional<class_info> o(vm.class_info());
     if (!o) {
-        BOOST_LOG_SEV(lg, error) << missing_class_view_model;
-        BOOST_THROW_EXCEPTION(formatting_error(missing_class_view_model));
+        BOOST_LOG_SEV(lg, error) << missing_class_info;
+        BOOST_THROW_EXCEPTION(formatting_error(missing_class_info));
     }
 
-    const class_view_model& cvm(*o);
+    const class_info& cvm(*o);
     {
         namespace_helper nsh(stream_, std::list<std::string> { });
         utility_.blank_line();
@@ -573,12 +573,12 @@ void hash_implementation::format_class(const file_view_model& vm) {
     utility_.blank_line();
 }
 
-void hash_implementation::format_enumeration(const file_view_model&) {
-    BOOST_LOG_SEV(lg, error) << enumeration_view_model_not_supported;
-    BOOST_THROW_EXCEPTION(formatting_error(enumeration_view_model_not_supported));
+void hash_implementation::format_enumeration(const file_info&) {
+    BOOST_LOG_SEV(lg, error) << enumeration_info_not_supported;
+    BOOST_THROW_EXCEPTION(formatting_error(enumeration_info_not_supported));
 }
 
-void hash_implementation::format(const file_view_model& vm) {
+void hash_implementation::format(const file_info& vm) {
     licence licence(stream_);
     licence.format();
 

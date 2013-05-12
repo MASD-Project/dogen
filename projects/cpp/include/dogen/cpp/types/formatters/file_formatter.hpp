@@ -26,7 +26,7 @@
 #endif
 
 #include <memory>
-#include "dogen/cpp/types/file_view_model.hpp"
+#include "dogen/cpp/types/file_info.hpp"
 
 namespace dogen {
 namespace cpp {
@@ -46,7 +46,7 @@ public:
     typedef std::shared_ptr<file_formatter> shared_ptr;
 
 public:
-    virtual void format(const file_view_model& vm) = 0;
+    virtual void format(const file_info& vm) = 0;
 };
 
 } } }

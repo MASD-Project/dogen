@@ -27,7 +27,7 @@
 
 #include <iosfwd>
 #include "dogen/cpp/types/formatters/class_declaration.hpp"
-#include "dogen/cpp/types/class_view_model.hpp"
+#include "dogen/cpp/types/class_info.hpp"
 
 namespace dogen {
 namespace cpp {
@@ -48,11 +48,11 @@ public:
     virtual ~domain_class_declaration() noexcept {}
 
 private:
-    void hand_crafted_constructors(const class_view_model& vm);
-    void visitor_method(const class_view_model& vm);
+    void hand_crafted_constructors(const class_info& vm);
+    void visitor_method(const class_info& vm);
 
 public:
-    virtual void format(const class_view_model& vm) override;
+    virtual void format(const class_info& vm) override;
 
 private:
     const bool disable_complete_constructor_;

@@ -30,10 +30,10 @@
 #include "dogen/sml/types/category_types.hpp"
 #include "dogen/cpp/types/formatters/indenter.hpp"
 #include "dogen/cpp/types/formatters/utility.hpp"
-#include "dogen/cpp/types/class_view_model.hpp"
-#include "dogen/cpp/types/exception_view_model.hpp"
-#include "dogen/cpp/types/enumeration_view_model.hpp"
-#include "dogen/cpp/types/file_view_model.hpp"
+#include "dogen/cpp/types/class_info.hpp"
+#include "dogen/cpp/types/exception_info.hpp"
+#include "dogen/cpp/types/enumeration_info.hpp"
+#include "dogen/cpp/types/file_info.hpp"
 #include "dogen/cpp/types/formatters/file_formatter.hpp"
 
 namespace dogen {
@@ -60,20 +60,20 @@ public:
         const bool disable_io, const bool disable_serialization);
 
 private:
-    void inserter_operator(const class_view_model& vm);
-    void equality_operator(const class_view_model& vm);
-    void swap_method(const class_view_model& vm);
+    void inserter_operator(const class_info& vm);
+    void equality_operator(const class_info& vm);
+    void swap_method(const class_info& vm);
     void class_declaration(const sml::category_types ct,
-        const class_view_model& vm);
-    void format_main(const sml::category_types ct, const class_view_model& vm);
+        const class_info& vm);
+    void format_main(const sml::category_types ct, const class_info& vm);
 
 private:
-    void format_class(const file_view_model& vm);
-    void format_enumeration(const file_view_model& vm);
-    void format_exception(const file_view_model& vm);
+    void format_class(const file_info& vm);
+    void format_enumeration(const file_info& vm);
+    void format_exception(const file_info& vm);
 
 public:
-    virtual void format(const file_view_model& vm) override;
+    virtual void format(const file_info& vm) override;
 
 private:
     std::ostream& stream_;

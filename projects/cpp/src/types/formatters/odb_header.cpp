@@ -40,9 +40,9 @@ const std::string std_ns("std");
 const std::string odb_pragma("#pragma db");
 const std::string odb_key("ODB_PRAGMA");
 
-const std::string missing_class_view_model(
+const std::string missing_class_info(
     "Meta type is pod but class view model is empty");
-const std::string missing_enumeration_view_model(
+const std::string missing_enumeration_info(
     "Meta type is enumeration but enumeration view model is empty");
 
 }
@@ -61,11 +61,11 @@ file_formatter::shared_ptr odb_header::create(std::ostream& stream) {
     return file_formatter::shared_ptr(new odb_header(stream));
 }
 
-void odb_header::format_enumeration(const file_view_model& vm) {
-    const auto o(vm.enumeration_vm());
+void odb_header::format_enumeration(const file_info& vm) {
+    const auto o(vm.enumeration_info());
     if (!o) {
-        BOOST_LOG_SEV(lg, error) << missing_enumeration_view_model;
-        BOOST_THROW_EXCEPTION(formatting_error(missing_enumeration_view_model));
+        BOOST_LOG_SEV(lg, error) << missing_enumeration_info;
+        BOOST_THROW_EXCEPTION(formatting_error(missing_enumeration_info));
     }
 
     const auto evm(*o);
@@ -81,11 +81,11 @@ void odb_header::format_enumeration(const file_view_model& vm) {
     utility_.blank_line(2);
 }
 
-void odb_header::format_class(const file_view_model& vm) {
-    const auto o(vm.class_vm());
+void odb_header::format_class(const file_info& vm) {
+    const auto o(vm.class_info());
     if (!o) {
-        BOOST_LOG_SEV(lg, error) << missing_class_view_model;
-        BOOST_THROW_EXCEPTION(formatting_error(missing_class_view_model));
+        BOOST_LOG_SEV(lg, error) << missing_class_info;
+        BOOST_THROW_EXCEPTION(formatting_error(missing_class_info));
     }
 
     const auto evm(*o);
@@ -143,7 +143,7 @@ void odb_header::format_class(const file_view_model& vm) {
     }
 }
 
-void odb_header::format(const file_view_model& vm) {
+void odb_header::format(const file_info& vm) {
     licence licence(stream_);
     licence.format();
 

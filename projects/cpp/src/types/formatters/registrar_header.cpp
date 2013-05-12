@@ -36,7 +36,7 @@ auto lg(logger_factory("cpp.formatters.registrar_header"));
 const bool is_system(true);
 const bool is_user(false);
 
-const std::string expected_registrar_view_model(
+const std::string expected_registrar_info(
     "File view model must contain a registrar view model");
 
 }
@@ -54,11 +54,11 @@ create(std::ostream& stream) {
     return file_formatter::shared_ptr(new registrar_header(stream));
 }
 
-void registrar_header::format(const file_view_model& vm) {
-    const auto o(vm.registrar_vm());
+void registrar_header::format(const file_info& vm) {
+    const auto o(vm.registrar_info());
     if (!o) {
-        BOOST_LOG_SEV(lg, error) << expected_registrar_view_model;
-        BOOST_THROW_EXCEPTION(formatting_error(expected_registrar_view_model));
+        BOOST_LOG_SEV(lg, error) << expected_registrar_info;
+        BOOST_THROW_EXCEPTION(formatting_error(expected_registrar_info));
     }
 
     licence licence(stream_);

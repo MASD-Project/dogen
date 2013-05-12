@@ -28,8 +28,8 @@
 #include <iosfwd>
 #include <string>
 #include <unordered_set>
-#include "dogen/cpp/types/nested_type_view_model.hpp"
-#include "dogen/cpp/types/class_view_model.hpp"
+#include "dogen/cpp/types/nested_type_info.hpp"
+#include "dogen/cpp/types/class_info.hpp"
 #include "dogen/cpp/types/formatters/indenter.hpp"
 #include "dogen/cpp/types/formatters/utility.hpp"
 
@@ -50,22 +50,22 @@ public:
     virtual ~inserter_implementation() noexcept {}
 
 private:
-    bool is_insertable(const nested_type_view_model& vm);
+    bool is_insertable(const nested_type_info& vm);
 
 private:
     void tidy_up_string_method();
-    void sequence_container_helper(const nested_type_view_model& vm);
-    void associative_container_helper(const nested_type_view_model& vm);
-    void smart_pointer_helper(const nested_type_view_model& vm);
-    void optional_helper(const nested_type_view_model& vm);
-    void pair_helper(const nested_type_view_model& vm);
-    void variant_helper(const nested_type_view_model& vm);
-    void recursive_helper_method_creator(const nested_type_view_model& vm,
+    void sequence_container_helper(const nested_type_info& vm);
+    void associative_container_helper(const nested_type_info& vm);
+    void smart_pointer_helper(const nested_type_info& vm);
+    void optional_helper(const nested_type_info& vm);
+    void pair_helper(const nested_type_info& vm);
+    void variant_helper(const nested_type_info& vm);
+    void recursive_helper_method_creator(const nested_type_info& vm,
         std::unordered_set<std::string>& types_done);
 
 public:
-    void format_helper_methods(const class_view_model& vm);
-    void format_inserter_implementation(const class_view_model& vm);
+    void format_helper_methods(const class_info& vm);
+    void format_inserter_implementation(const class_info& vm);
 
 protected:
     const bool is_inside_class_;

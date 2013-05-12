@@ -1,4 +1,4 @@
-/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+/* -*- Mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
  *
  * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
  *
@@ -19,7 +19,7 @@
  *
  */
 #include <boost/test/unit_test.hpp>
-#include "dogen/cpp/types/sml_to_cpp_view_model.hpp"
+#include "dogen/cpp/types/sml_to_cpp_info.hpp"
 #include "dogen/utility/test_data/dia_sml.hpp"
 #include "dogen/utility/io/list_io.hpp"
 #include "dogen/utility/test/xml_serialization_helper.hpp"
@@ -36,7 +36,7 @@ namespace {
 
 const std::string empty;
 const std::string test_module("cpp");
-const std::string test_suite("sml_to_cpp_view_model_spec");
+const std::string test_suite("sml_to_cpp_info_spec");
 const std::string test_model_name("test");
 const std::string class_name("first_class");
 const std::string header_guard_name(
@@ -109,7 +109,7 @@ dogen::config::cpp_settings create_settings(
     return r;
 }
 
-std::vector<file_view_model> execute_transformer(
+std::vector<file_info> execute_transformer(
     const boost::filesystem::path& input_path,
     bool disable_facet_includers = false) {
 
@@ -120,11 +120,11 @@ std::vector<file_view_model> execute_transformer(
 
     locator lm(test_model_name, s);
     includer im(m, lm, s);
-    sml_to_cpp_view_model t(lm, im, s, m);
+    sml_to_cpp_info t(lm, im, s, m);
     return t.transform();
 }
 
-std::vector<file_view_model> execute_transformer(
+std::vector<file_info> execute_transformer(
     const dogen::sml::model& model, bool disable_facet_includers = false) {
 
     auto s(create_settings());
@@ -132,19 +132,19 @@ std::vector<file_view_model> execute_transformer(
 
     locator lm(test_model_name, s);
     includer im(model, lm, s);
-    sml_to_cpp_view_model t(lm, im, s, model);
+    sml_to_cpp_info t(lm, im, s, model);
     return t.transform();
 }
 
 }
 
-BOOST_AUTO_TEST_SUITE(sml_to_cpp_view_model)
+BOOST_AUTO_TEST_SUITE(sml_to_cpp_info)
 
-BOOST_AUTO_TEST_CASE(view_model_transformer_correctly_transforms_domain_files) {
-    SETUP_TEST_LOG_SOURCE("view_model_transformer_correctly_transforms_domain_files");
+BOOST_AUTO_TEST_CASE(info_transformer_correctly_transforms_domain_files) {
+    SETUP_TEST_LOG_SOURCE("info_transformer_correctly_transforms_domain_files");
     using dogen::utility::test_data::dia_sml;
     auto input_path(dia_sml::expected_class_in_a_package_sml_xml());
-    std::vector<file_view_model> actual(execute_transformer(input_path));
+    std::vector<file_info> actual(execute_transformer(input_path));
 
     BOOST_CHECK(actual.size() == 4);
     for (const auto f : actual) {
@@ -172,7 +172,7 @@ BOOST_AUTO_TEST_CASE(view_model_transformer_correctly_transforms_domain_files) {
         else
             BOOST_CHECK(f.system_includes().empty());
 
-        const auto o(f.class_vm());
+        const auto o(f.class_info());
         if (!o) {
             BOOST_CHECK(f.file_type() == file_types::header);
             BOOST_CHECK(f.aspect_type() == aspect_types::includers);
@@ -228,13 +228,13 @@ BOOST_AUTO_TEST_CASE(disabling_facet_includers_results_in_no_facet_includers) {
     BOOST_CHECK(actual.size() == 3);
     for (const auto f : actual) {
         BOOST_CHECK(f.aspect_type() != aspect_types::includers);
-        const auto o(f.class_vm());
+        const auto o(f.class_info());
         BOOST_CHECK(o);
     }
 }
 
-BOOST_AUTO_TEST_CASE(is_parent_flag_is_correctly_set_on_view_models) {
-    SETUP_TEST_LOG_SOURCE("is_parent_flag_is_correctly_set_on_view_models");
+BOOST_AUTO_TEST_CASE(is_parent_flag_is_correctly_set_on_infos) {
+    SETUP_TEST_LOG_SOURCE("is_parent_flag_is_correctly_set_on_infos");
     const auto m(pod_with_parent_model());
     const auto pods(m.pods());
     BOOST_CHECK(pods.size() == 2);
@@ -253,7 +253,7 @@ BOOST_AUTO_TEST_CASE(is_parent_flag_is_correctly_set_on_view_models) {
             fvm.aspect_type() == aspect_types::main ||
             fvm.aspect_type() == aspect_types::forward_decls
             );
-        const auto o(fvm.class_vm());
+        const auto o(fvm.class_info());
         BOOST_REQUIRE(o);
 
         const auto cvm(*o);

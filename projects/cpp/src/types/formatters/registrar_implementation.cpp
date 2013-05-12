@@ -38,7 +38,7 @@ const bool is_user(false);
 
 const std::string boost_ns("boost::archive");
 
-const std::string expected_registrar_view_model(
+const std::string expected_registrar_info(
     "File view model must contain a registrar view model");
 
 }
@@ -59,11 +59,11 @@ create(std::ostream& stream, const bool disable_xml_serialization) {
         new registrar_implementation(stream, disable_xml_serialization));
 }
 
-void registrar_implementation::format(const file_view_model& vm) {
-    const auto o(vm.registrar_vm());
+void registrar_implementation::format(const file_info& vm) {
+    const auto o(vm.registrar_info());
     if (!o) {
-        BOOST_LOG_SEV(lg, error) << expected_registrar_view_model;
-        BOOST_THROW_EXCEPTION(formatting_error(expected_registrar_view_model));
+        BOOST_LOG_SEV(lg, error) << expected_registrar_info;
+        BOOST_THROW_EXCEPTION(formatting_error(expected_registrar_info));
     }
 
     licence licence(stream_);

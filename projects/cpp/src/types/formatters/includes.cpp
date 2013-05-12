@@ -60,7 +60,7 @@ void includes::format(std::list<std::string> v, bool is_system) {
     }
 }
 
-void includes::format(const file_view_model& vm) {
+void includes::format(const file_info& vm) {
     const auto sys(vm.system_includes());
     const auto usr(vm.user_includes());
 

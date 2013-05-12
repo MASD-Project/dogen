@@ -36,9 +36,9 @@ namespace {
 
 auto lg(logger_factory("cpp.formatters.namespace_documentation"));
 
-const std::string missing_namespace_view_model(
+const std::string missing_namespace_info(
     "Meta type is pod but class view model is empty");
-const std::string missing_enumeration_view_model(
+const std::string missing_enumeration_info(
     "Meta type is enumeration but enumeration view model is empty");
 
 }
@@ -58,15 +58,15 @@ namespace_documentation::create(std::ostream& stream) {
     return file_formatter::shared_ptr(new namespace_documentation(stream));
 }
 
-void namespace_documentation::format_namespace(const file_view_model& vm) {
-    auto o(vm.namespace_vm());
+void namespace_documentation::format_namespace(const file_info& vm) {
+    auto o(vm.namespace_info());
     if (!o) {
-        BOOST_LOG_SEV(lg, error) << missing_namespace_view_model;
-        BOOST_THROW_EXCEPTION(formatting_error(missing_namespace_view_model));
+        BOOST_LOG_SEV(lg, error) << missing_namespace_info;
+        BOOST_THROW_EXCEPTION(formatting_error(missing_namespace_info));
     }
 
     {
-        const namespace_view_model& cvm(*o);
+        const namespace_info& cvm(*o);
         if (cvm.namespaces().empty())
             return;
 
@@ -92,7 +92,7 @@ void namespace_documentation::format_namespace(const file_view_model& vm) {
     utility_.blank_line(2);
 }
 
-void namespace_documentation::format(const file_view_model& vm) {
+void namespace_documentation::format(const file_info& vm) {
     licence licence(stream_);
     licence.format();
 

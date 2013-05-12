@@ -33,8 +33,8 @@
 #include "dogen/sml/types/model.hpp"
 #include "dogen/config/types/cpp_settings.hpp"
 #include "dogen/cpp/types/locator.hpp"
-#include "dogen/cpp/types/cmakelists_view_model.hpp"
-#include "dogen/cpp/types/file_view_model.hpp"
+#include "dogen/cpp/types/cmakelists_info.hpp"
+#include "dogen/cpp/types/file_info.hpp"
 
 namespace dogen {
 namespace cpp {
@@ -63,8 +63,8 @@ private:
 
 private:
     value_entry_type
-    generate_file_view_model(const file_view_model& vm) const;
-    value_type generate_file_view_models() const;
+    generate_file_info(const file_info& vm) const;
+    value_type generate_file_infos() const;
     value_type generate_cmakelists() const;
     value_entry_type generate_odb_options() const;
 

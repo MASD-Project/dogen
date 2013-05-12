@@ -34,14 +34,14 @@ key_class_declaration(std::ostream& stream,
       disable_io_(disable_io) {}
 
 void key_class_declaration::
-hand_crafted_constructors(const class_view_model& vm) {
+hand_crafted_constructors(const class_info& vm) {
     default_constructor(vm);
     destructor(vm);
     if (!disable_complete_constructor_)
         complete_constructor(vm);
 }
 
-void key_class_declaration::format(const class_view_model& vm) {
+void key_class_declaration::format(const class_info& vm) {
     open_class(vm);
     {
         positive_indenter_scope s(indenter_);

@@ -28,7 +28,7 @@
 #include <list>
 #include <iosfwd>
 #include <boost/filesystem/path.hpp>
-#include "dogen/cpp/types/file_view_model.hpp"
+#include "dogen/cpp/types/file_info.hpp"
 #include "dogen/cpp/types/formatters/indenter.hpp"
 #include "dogen/cpp/types/formatters/utility.hpp"
 #include "dogen/cpp/types/formatters/file_formatter.hpp"
@@ -54,7 +54,7 @@ public:
         const bool disable_xml_serialization);
 
 public:
-    virtual void format(const file_view_model& vm) override;
+    virtual void format(const file_info& vm) override;
 
 private:
     std::ostream& stream_;

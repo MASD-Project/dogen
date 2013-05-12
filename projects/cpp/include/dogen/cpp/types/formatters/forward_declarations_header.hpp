@@ -30,9 +30,9 @@
 #include "dogen/sml/types/category_types.hpp"
 #include "dogen/cpp/types/formatters/indenter.hpp"
 #include "dogen/cpp/types/formatters/utility.hpp"
-#include "dogen/cpp/types//class_view_model.hpp"
-#include "dogen/cpp/types/enumeration_view_model.hpp"
-#include "dogen/cpp/types/file_view_model.hpp"
+#include "dogen/cpp/types//class_info.hpp"
+#include "dogen/cpp/types/enumeration_info.hpp"
+#include "dogen/cpp/types/file_info.hpp"
 #include "dogen/cpp/types/formatters/file_formatter.hpp"
 
 namespace dogen {
@@ -54,15 +54,15 @@ public:
     static file_formatter::shared_ptr create(std::ostream& stream);
 
 private:
-    void format_serialization_class(const class_view_model& vm);
-    void format_domain_class(const class_view_model& vm);
+    void format_serialization_class(const class_info& vm);
+    void format_domain_class(const class_info& vm);
 
-    void format_class(const file_view_model& vm);
-    void format_enumeration(const file_view_model& vm);
-    void format_exception(const file_view_model& vm);
+    void format_class(const file_info& vm);
+    void format_enumeration(const file_info& vm);
+    void format_exception(const file_info& vm);
 
 public:
-    virtual void format(const file_view_model& vm) override;
+    virtual void format(const file_info& vm) override;
 
 private:
     std::ostream& stream_;

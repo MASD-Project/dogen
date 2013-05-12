@@ -29,7 +29,7 @@ namespace {
 const bool is_system(true);
 const bool is_user(false);
 
-const std::string unexpected_class_view_model(
+const std::string unexpected_class_info(
     "File view model should not contain a class view model");
 
 }
@@ -46,9 +46,9 @@ create(std::ostream& stream) {
     return file_formatter::shared_ptr(new facet_includer(stream));
 }
 
-void facet_includer::format(const file_view_model& vm) {
-    if (vm.class_vm())
-        BOOST_THROW_EXCEPTION(formatting_error(unexpected_class_view_model));
+void facet_includer::format(const file_info& vm) {
+    if (vm.class_info())
+        BOOST_THROW_EXCEPTION(formatting_error(unexpected_class_info));
 
     licence licence(stream_);
     licence.format();

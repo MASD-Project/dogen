@@ -27,7 +27,7 @@
 
 #include <iosfwd>
 #include <string>
-#include "dogen/cpp/types/exception_view_model.hpp"
+#include "dogen/cpp/types/exception_info.hpp"
 #include "dogen/cpp/types/formatters/indenter.hpp"
 #include "dogen/cpp/types/formatters/utility.hpp"
 
@@ -48,7 +48,7 @@ public:
     exception_declaration(std::ostream& stream);
 
 public:
-    void format(const exception_view_model& vm);
+    void format(const exception_info& vm);
 
 protected:
     std::ostream& stream_;

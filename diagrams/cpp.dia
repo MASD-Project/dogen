@@ -7083,7 +7083,7 @@ pre-processor includes.#</dia:string>
         </dia:composite>
         <dia:composite type="umloperation">
           <dia:attribute name="name">
-            <dia:string>#generate_file_view_model#</dia:string>
+            <dia:string>#generate_file_info#</dia:string>
           </dia:attribute>
           <dia:attribute name="stereotype">
             <dia:string>##</dia:string>
@@ -7115,7 +7115,7 @@ pre-processor includes.#</dia:string>
                 <dia:string>#vm)#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const view_models::file_view_model&amp;#</dia:string>
+                <dia:string>#const file_info&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -7131,7 +7131,7 @@ pre-processor includes.#</dia:string>
         </dia:composite>
         <dia:composite type="umloperation">
           <dia:attribute name="name">
-            <dia:string>#generate_file_view_models#</dia:string>
+            <dia:string>#generate_file_info#</dia:string>
           </dia:attribute>
           <dia:attribute name="stereotype">
             <dia:string>##</dia:string>
@@ -14700,22 +14700,22 @@ of relationship information.#</dia:string>
     </dia:object>
     <dia:object type="UML - Note" version="0" id="O111">
       <dia:attribute name="obj_pos">
-        <dia:point val="-74.0524,-102.925"/>
+        <dia:point val="-75,-113"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-74.1024,-102.975;-44.9974,-84.375"/>
+        <dia:rectangle val="-75.05,-113.05;-45.56,-87.25"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-74.0524,-102.925"/>
+        <dia:point val="-75,-113"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="29.005000000000003"/>
+        <dia:real val="29.390000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="18.500000000000004"/>
+        <dia:real val="25.700000000000003"/>
       </dia:attribute>
       <dia:attribute name="line_width">
         <dia:real val="0.10000000000000001"/>
@@ -14734,6 +14734,15 @@ of relationship information.#</dia:string>
 CPP is responsible for converting a generic SML representation
 into compilable C++ code, according to a set of well-defined
 conventions.
+
+&lt;b&gt;Info postfix&lt;/b&gt;
+
+The types in the C++ meta-model should not have any prefixes or post-fixes
+since they naturally belong to the CPP model. However, because names like
+class and namespace clash with keywords, and to maintain consistency - 
+perhaps foolishly - it was decided to use the postfix @e info on all types
+which are part of the meta-model. Info was chosen very randomly, but it is
+used by @e type_info, so that's at least one excuse.
 
 &lt;b&gt;Using Clang AST as a C++ meta model&lt;/b&gt;
 
@@ -14759,7 +14768,7 @@ switch to Clang when it has 100% feature coverage.
             <dia:real val="0.80000000000000004"/>
           </dia:attribute>
           <dia:attribute name="pos">
-            <dia:point val="-73.7024,-101.68"/>
+            <dia:point val="-74.65,-111.755"/>
           </dia:attribute>
           <dia:attribute name="color">
             <dia:color val="#000000"/>
@@ -15121,13 +15130,13 @@ switch to Clang when it has 100% feature coverage.
         <dia:real val="17.200000000000003"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#class_view_model#</dia:string>
+        <dia:string>#class_info#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>##</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##</dia:string>
+        <dia:string>#Represents a C++ class.#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -15210,29 +15219,6 @@ switch to Clang when it has 100% feature coverage.
       <dia:attribute name="attributes">
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#namespaces#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>#std::list&lt;std::string&gt;#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>#List of all namespaces containing the class.#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
             <dia:string>#name#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
@@ -15256,10 +15242,33 @@ switch to Clang when it has 100% feature coverage.
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
+            <dia:string>#namespaces#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>#std::list&lt;std::string&gt;#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>#List of all namespaces containing the class.#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
             <dia:string>#properties#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::list&lt;property_view_model&gt;#</dia:string>
+            <dia:string>#std::list&lt;property_info&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -15283,7 +15292,7 @@ properties).#</dia:string>
             <dia:string>#all_properties#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::list&lt;property_view_model&gt;#</dia:string>
+            <dia:string>#std::list&lt;property_info&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -15406,7 +15415,7 @@ constructor, false otherwise.#</dia:string>
             <dia:string>#parents#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::list&lt;parent_view_model&gt;#</dia:string>
+            <dia:string>#std::list&lt;parent_info&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -15505,7 +15514,7 @@ false otherwise.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##</dia:string>
+            <dia:string>#Original parent name as a fully qualified name.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -15575,7 +15584,7 @@ descend from it. Names are in identifiable name format.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##</dia:string>
+            <dia:string>#If true, the C++ class has operator&lt;  defined.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -15598,7 +15607,7 @@ descend from it. Names are in identifiable name format.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##</dia:string>
+            <dia:string>#If true, the class has a visitor defined.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -15621,7 +15630,7 @@ descend from it. Names are in identifiable name format.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##</dia:string>
+            <dia:string>#If true, the class has only getters.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -15644,7 +15653,7 @@ descend from it. Names are in identifiable name format.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##</dia:string>
+            <dia:string>#If true, the class' original parent has a visitor defined.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -15680,13 +15689,13 @@ descend from it. Names are in identifiable name format.#</dia:string>
         <dia:real val="5.2000000000000011"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#cmakelists_view_model#</dia:string>
+        <dia:string>#cmakelists_info#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>##</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##</dia:string>
+        <dia:string>#Represents a CMakeLists.txt top-level makefile.#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -15778,7 +15787,7 @@ descend from it. Names are in identifiable name format.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##</dia:string>
+            <dia:string>#Location of the CMake file.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -15801,7 +15810,7 @@ descend from it. Names are in identifiable name format.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##</dia:string>
+            <dia:string>#Name of the model for which the make file is being generated.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -15824,7 +15833,7 @@ descend from it. Names are in identifiable name format.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##</dia:string>
+            <dia:string>#Name of the product which contains this make file.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -15847,7 +15856,7 @@ descend from it. Names are in identifiable name format.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##</dia:string>
+            <dia:string>#Name for the CMake file.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -15868,28 +15877,28 @@ descend from it. Names are in identifiable name format.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O118">
       <dia:attribute name="obj_pos">
-        <dia:point val="30.9375,65.125"/>
+        <dia:point val="35,65"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="30.8875,65.075;49.1975,70.375"/>
+        <dia:rectangle val="34.95,64.95;50.95,70.25"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="30.9375,65.125"/>
+        <dia:point val="35,65"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="18.210000000000001"/>
+        <dia:real val="15.9"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="5.2000000000000011"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#enumeration_view_model#</dia:string>
+        <dia:string>#enumeration_info#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>##</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##</dia:string>
+        <dia:string>#Represents a C++ enumeration.#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -15972,6 +15981,29 @@ descend from it. Names are in identifiable name format.#</dia:string>
       <dia:attribute name="attributes">
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
+            <dia:string>#name#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>#std::string#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>#Name of the enumeration.#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
             <dia:string>#namespaces#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
@@ -15981,7 +16013,7 @@ descend from it. Names are in identifiable name format.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##</dia:string>
+            <dia:string>#Namespaces containing the type.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -15998,36 +16030,13 @@ descend from it. Names are in identifiable name format.#</dia:string>
             <dia:string>#enumerators#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::list&lt;enumerator_view_model&gt;#</dia:string>
+            <dia:string>#std::list&lt;enumerator_info&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#name#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>#std::string#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>##</dia:string>
+            <dia:string>#Valid values for the enumeration.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -16050,7 +16059,7 @@ descend from it. Names are in identifiable name format.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##</dia:string>
+            <dia:string>#Documentation for the enumeration.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -16074,25 +16083,25 @@ descend from it. Names are in identifiable name format.#</dia:string>
         <dia:point val="32,84"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="31.95,83.95;43.5225,88.45"/>
+        <dia:rectangle val="31.95,83.95;42.945,88.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="32,84"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="11.4725"/>
+        <dia:real val="10.895"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="4.4000000000000004"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#enumerator_view_model#</dia:string>
+        <dia:string>#enumerator_info#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>##</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##</dia:string>
+        <dia:string>#Represents a member of an enumeration.#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -16184,7 +16193,7 @@ descend from it. Names are in identifiable name format.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##</dia:string>
+            <dia:string>#Name of the enumeration member.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -16207,7 +16216,7 @@ descend from it. Names are in identifiable name format.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##</dia:string>
+            <dia:string>#Numeric value for the member.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -16230,7 +16239,9 @@ descend from it. Names are in identifiable name format.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##</dia:string>
+            <dia:string>#Documentation for the enumerator.
+
+Should be very short as it is used inline.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -16287,19 +16298,19 @@ descend from it. Names are in identifiable name format.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="40.0425,70.325"/>
+        <dia:point val="42.95,70.2"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="37.6862,69.575;40.7925,84.8"/>
+        <dia:rectangle val="37.3975,69.45;43.7,84.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="40.0425,70.325"/>
-        <dia:point val="40.0425,78"/>
-        <dia:point val="37.7362,78"/>
-        <dia:point val="37.7362,84"/>
+        <dia:point val="42.95,70.2"/>
+        <dia:point val="42.95,78"/>
+        <dia:point val="37.4475,78"/>
+        <dia:point val="37.4475,84"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -16337,13 +16348,13 @@ descend from it. Names are in identifiable name format.#</dia:string>
         <dia:real val="4.4000000000000004"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#exception_view_model#</dia:string>
+        <dia:string>#exception_info#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>##</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##</dia:string>
+        <dia:string>#Represents a C++ exception.#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -16426,16 +16437,16 @@ descend from it. Names are in identifiable name format.#</dia:string>
       <dia:attribute name="attributes">
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#namespaces#</dia:string>
+            <dia:string>#name#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::list&lt;std::string&gt;#</dia:string>
+            <dia:string>#std::string#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##</dia:string>
+            <dia:string>#Name of the exception.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -16449,16 +16460,16 @@ descend from it. Names are in identifiable name format.#</dia:string>
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#name#</dia:string>
+            <dia:string>#namespaces#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::string#</dia:string>
+            <dia:string>#std::list&lt;std::string&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##</dia:string>
+            <dia:string>#List of namespaces, in order, to which the exception belongs to.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -16481,7 +16492,7 @@ descend from it. Names are in identifiable name format.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##</dia:string>
+            <dia:string>#Doxygen documentation.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -16505,25 +16516,25 @@ descend from it. Names are in identifiable name format.#</dia:string>
         <dia:point val="16.0625,41"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="16.0125,40.95;38.1725,55.05"/>
+        <dia:rectangle val="16.0125,40.95;36.6325,55.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="16.0625,41"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="22.059999999999999"/>
+        <dia:real val="20.52"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="14.000000000000004"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#file_view_model#</dia:string>
+        <dia:string>#file_info#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>##</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##</dia:string>
+        <dia:string>#Represents a C++ header or implementation file.#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -16615,7 +16626,7 @@ descend from it. Names are in identifiable name format.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##</dia:string>
+            <dia:string>#Facet that this file represents.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -16638,7 +16649,7 @@ descend from it. Names are in identifiable name format.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##</dia:string>
+            <dia:string>#Type of the file.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -16661,7 +16672,7 @@ descend from it. Names are in identifiable name format.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##</dia:string>
+            <dia:string>#Aspect that this file represents.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -16684,7 +16695,7 @@ descend from it. Names are in identifiable name format.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##</dia:string>
+            <dia:string>#Category of the contained pod.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -16707,7 +16718,7 @@ descend from it. Names are in identifiable name format.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##</dia:string>
+            <dia:string>#Meta type of the contained type.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -16721,16 +16732,16 @@ descend from it. Names are in identifiable name format.#</dia:string>
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#class_vm#</dia:string>
+            <dia:string>#class_info#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#boost::optional&lt;class_view_model&gt;#</dia:string>
+            <dia:string>#boost::optional&lt;class_info&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##</dia:string>
+            <dia:string>#If non-empty, the file contains a class.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -16744,16 +16755,16 @@ descend from it. Names are in identifiable name format.#</dia:string>
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#enumeration_vm#</dia:string>
+            <dia:string>#enumeration_info#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#boost::optional&lt;enumeration_view_model&gt;#</dia:string>
+            <dia:string>#boost::optional&lt;enumeration_info&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##</dia:string>
+            <dia:string>#If non-empty, the file contains an enumeration.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -16767,16 +16778,16 @@ descend from it. Names are in identifiable name format.#</dia:string>
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#exception_vm#</dia:string>
+            <dia:string>#exception_info#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#boost::optional&lt;exception_view_model&gt;#</dia:string>
+            <dia:string>#boost::optional&lt;exception_info&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##</dia:string>
+            <dia:string>#If non-empty, the file contains an exception.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -16790,16 +16801,16 @@ descend from it. Names are in identifiable name format.#</dia:string>
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#registrar_vm#</dia:string>
+            <dia:string>#registrar_info#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#boost::optional&lt;registrar_view_model&gt;#</dia:string>
+            <dia:string>#boost::optional&lt;registrar_info&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##</dia:string>
+            <dia:string>#If non-empty, the file contains a registrar.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -16822,7 +16833,7 @@ descend from it. Names are in identifiable name format.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##</dia:string>
+            <dia:string>#If file type is header, name to use for header guards.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -16845,7 +16856,7 @@ descend from it. Names are in identifiable name format.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##</dia:string>
+            <dia:string>#List of files to include using angle brackets.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -16868,7 +16879,7 @@ descend from it. Names are in identifiable name format.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##</dia:string>
+            <dia:string>#List of files to include using quotes.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -16891,7 +16902,7 @@ descend from it. Names are in identifiable name format.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##</dia:string>
+            <dia:string>#Path to the file.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -16905,16 +16916,16 @@ descend from it. Names are in identifiable name format.#</dia:string>
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#namespace_vm#</dia:string>
+            <dia:string>#namespace_info#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#boost::optional&lt;namespace_view_model&gt;#</dia:string>
+            <dia:string>#boost::optional&lt;namespace_info&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##</dia:string>
+            <dia:string>#Namespaces in which to include the type.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -16928,16 +16939,16 @@ descend from it. Names are in identifiable name format.#</dia:string>
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#visitor_vm#</dia:string>
+            <dia:string>#visitor_info#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#boost::optional&lt;visitor_view_model&gt;#</dia:string>
+            <dia:string>#boost::optional&lt;visitor_info&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##</dia:string>
+            <dia:string>#If non-empty, file includes a visitor.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -16958,28 +16969,28 @@ descend from it. Names are in identifiable name format.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O123">
       <dia:attribute name="obj_pos">
-        <dia:point val="-19.75,104.578"/>
+        <dia:point val="-6,111"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-19.8,104.528;-2.26,123.428"/>
+        <dia:rectangle val="-6.05,110.95;9.95,129.85"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-19.75,104.578"/>
+        <dia:point val="-6,111"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="17.440000000000001"/>
+        <dia:real val="15.9"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="18.800000000000004"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#nested_type_view_model#</dia:string>
+        <dia:string>#nested_type_info#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>##</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##</dia:string>
+        <dia:string>#Represents a declaration of a C++ type with nesting.#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -17071,7 +17082,7 @@ descend from it. Names are in identifiable name format.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##</dia:string>
+            <dia:string>#Name of the top-level type.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -17094,7 +17105,9 @@ descend from it. Names are in identifiable name format.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##</dia:string>
+            <dia:string>#Name of the type taking into account all contained types.
+
+Does not use characters which are not valid for C++ identifiers.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -17117,7 +17130,7 @@ descend from it. Names are in identifiable name format.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##</dia:string>
+            <dia:string>#Fully qualified name.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -17140,7 +17153,7 @@ descend from it. Names are in identifiable name format.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##</dia:string>
+            <dia:string>#Fully qualified name with complete type nesting.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -17163,7 +17176,7 @@ descend from it. Names are in identifiable name format.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##</dia:string>
+            <dia:string>#If true, the type is primitive.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -17186,7 +17199,7 @@ descend from it. Names are in identifiable name format.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##</dia:string>
+            <dia:string>#If true the type is an enumeration#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -17209,7 +17222,7 @@ descend from it. Names are in identifiable name format.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##</dia:string>
+            <dia:string>#If true, the type is a std::string or another string like type.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -17232,7 +17245,7 @@ descend from it. Names are in identifiable name format.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##</dia:string>
+            <dia:string>#If true, the type is a std::string, char, unsigned char or another char like type.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -17255,7 +17268,7 @@ descend from it. Names are in identifiable name format.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##</dia:string>
+            <dia:string>#If true, the type is an int, unsigned int or another int like type.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -17278,7 +17291,7 @@ descend from it. Names are in identifiable name format.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##</dia:string>
+            <dia:string>#If true, the type is a sequence container like std::list or std::vector.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -17301,7 +17314,7 @@ descend from it. Names are in identifiable name format.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##</dia:string>
+            <dia:string>#If true, the type is a associative container like std::map or std::unordered_set.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -17324,7 +17337,7 @@ descend from it. Names are in identifiable name format.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##</dia:string>
+            <dia:string>#If true, the type is a smart pointer like std::shared_ptr.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -17347,7 +17360,7 @@ descend from it. Names are in identifiable name format.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##</dia:string>
+            <dia:string>#If true, the type is boost::optional.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -17370,7 +17383,7 @@ descend from it. Names are in identifiable name format.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##</dia:string>
+            <dia:string>#If true, the type is boost::variant.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -17387,13 +17400,13 @@ descend from it. Names are in identifiable name format.#</dia:string>
             <dia:string>#children#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::list&lt;nested_type_view_model&gt;#</dia:string>
+            <dia:string>#std::list&lt;nested_type_info&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##</dia:string>
+            <dia:string>#Contained types.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -17416,7 +17429,7 @@ descend from it. Names are in identifiable name format.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##</dia:string>
+            <dia:string>#Namespaces to which the type belongs to.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -17439,7 +17452,7 @@ descend from it. Names are in identifiable name format.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##</dia:string>
+            <dia:string>#If true the type is boost::filesystem::path.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -17462,7 +17475,7 @@ descend from it. Names are in identifiable name format.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##</dia:string>
+            <dia:string>#If true the type is boost::date_time::date.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -17485,7 +17498,7 @@ descend from it. Names are in identifiable name format.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##</dia:string>
+            <dia:string>#If true the type is boost::date_time::ptime#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -17508,7 +17521,7 @@ descend from it. Names are in identifiable name format.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##</dia:string>
+            <dia:string>#If true the type is boost::date_time::time_duration.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -17531,7 +17544,7 @@ descend from it. Names are in identifiable name format.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##</dia:string>
+            <dia:string>#If true the type is std::pair.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -17552,28 +17565,28 @@ descend from it. Names are in identifiable name format.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O124">
       <dia:attribute name="obj_pos">
-        <dia:point val="9.25,104.704"/>
+        <dia:point val="23,111"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="9.2,104.654;26.355,109.154"/>
+        <dia:rectangle val="22.95,110.95;37.795,115.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="9.25,104.704"/>
+        <dia:point val="23,111"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="17.055"/>
+        <dia:real val="14.744999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="4.4000000000000004"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#parent_view_model#</dia:string>
+        <dia:string>#parent_info#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>##</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##</dia:string>
+        <dia:string>#Represents the details for a parent class.#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -17654,29 +17667,6 @@ descend from it. Names are in identifiable name format.#</dia:string>
         <dia:real val="0.69999999999999996"/>
       </dia:attribute>
       <dia:attribute name="attributes">
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#namespaces#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>#std::list&lt;std::string&gt;#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>#List of all namespaces containing the class.#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
             <dia:string>#name#</dia:string>
@@ -17702,10 +17692,33 @@ descend from it. Names are in identifiable name format.#</dia:string>
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
+            <dia:string>#namespaces#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>#std::list&lt;std::string&gt;#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>#List of all namespaces containing the class.#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
             <dia:string>#properties#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::list&lt;property_view_model&gt;#</dia:string>
+            <dia:string>#std::list&lt;property_info&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -17732,13 +17745,13 @@ descend from it. Names are in identifiable name format.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O125">
       <dia:attribute name="obj_pos">
-        <dia:point val="-14,90"/>
+        <dia:point val="-11,94"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-14.05,89.95;18.89,96.85"/>
+        <dia:rectangle val="-11.05,93.95;21.89,100.85"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-14,90"/>
+        <dia:point val="-11,94"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="32.839999999999996"/>
@@ -17747,13 +17760,13 @@ descend from it. Names are in identifiable name format.#</dia:string>
         <dia:real val="6.8000000000000007"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#property_view_model#</dia:string>
+        <dia:string>#property_info#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>##</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##</dia:string>
+        <dia:string>#Represents a pair of getter and setter methods.#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -17862,7 +17875,7 @@ descend from it. Names are in identifiable name format.#</dia:string>
             <dia:string>#type#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#nested_type_view_model#</dia:string>
+            <dia:string>#nested_type_info#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -17938,7 +17951,7 @@ descend from it. Names are in identifiable name format.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##</dia:string>
+            <dia:string>#If true, the setter is not available for this property.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -17961,7 +17974,7 @@ descend from it. Names are in identifiable name format.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##</dia:string>
+            <dia:string>#If true, the setter returns the instance of the object.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -18018,19 +18031,19 @@ descend from it. Names are in identifiable name format.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="-5.8125,82.1375"/>
+        <dia:point val="10.6075,82.1375"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-14.05,81.3875;-5.0625,90.8"/>
+        <dia:rectangle val="5.37,81.3875;11.3575,94.7507"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="-5.8125,82.1375"/>
-        <dia:point val="-5.8125,87"/>
-        <dia:point val="-14,87"/>
-        <dia:point val="-14,90"/>
+        <dia:point val="10.6075,82.1375"/>
+        <dia:point val="10.6075,87"/>
+        <dia:point val="5.42,87"/>
+        <dia:point val="5.42,93.9507"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -18047,8 +18060,8 @@ descend from it. Names are in identifiable name format.#</dia:string>
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:connections>
-        <dia:connection handle="0" to="O116" connection="5"/>
-        <dia:connection handle="1" to="O125" connection="0"/>
+        <dia:connection handle="0" to="O116" connection="6"/>
+        <dia:connection handle="1" to="O125" connection="20"/>
       </dia:connections>
     </dia:object>
     <dia:object type="UML - Association" version="2" id="O127">
@@ -18089,19 +18102,19 @@ descend from it. Names are in identifiable name format.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="9.25,104.704"/>
+        <dia:point val="30.3725,111"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="8.5,96.75;19.04,105.504"/>
+        <dia:rectangle val="21.79,100.75;31.1225,111.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="9.25,104.704"/>
-        <dia:point val="9.25,101.469"/>
-        <dia:point val="18.84,101.469"/>
-        <dia:point val="18.84,96.8"/>
+        <dia:point val="30.3725,111"/>
+        <dia:point val="30.3725,105.469"/>
+        <dia:point val="21.84,105.469"/>
+        <dia:point val="21.84,100.8"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -18118,7 +18131,7 @@ descend from it. Names are in identifiable name format.#</dia:string>
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:connections>
-        <dia:connection handle="0" to="O124" connection="0"/>
+        <dia:connection handle="0" to="O124" connection="1"/>
         <dia:connection handle="1" to="O125" connection="7"/>
       </dia:connections>
     </dia:object>
@@ -18160,19 +18173,19 @@ descend from it. Names are in identifiable name format.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="-14,96.8"/>
+        <dia:point val="-11,100.8"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-14.75,96.05;-10.83,105.378"/>
+        <dia:rectangle val="-11.75,100.05;2.15,111.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="-14,96.8"/>
-        <dia:point val="-14,101.172"/>
-        <dia:point val="-11.03,101.172"/>
-        <dia:point val="-11.03,104.578"/>
+        <dia:point val="-11,100.8"/>
+        <dia:point val="-11,106"/>
+        <dia:point val="1.95,106"/>
+        <dia:point val="1.95,111"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -18231,17 +18244,17 @@ descend from it. Names are in identifiable name format.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="27.0925,55"/>
+        <dia:point val="26.3225,55"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="10.5575,54.25;27.8425,65.7375"/>
+        <dia:rectangle val="10.5575,54.25;27.0725,65.7375"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="27.0925,55"/>
-        <dia:point val="27.0925,59.125"/>
+        <dia:point val="26.3225,55"/>
+        <dia:point val="26.3225,59.125"/>
         <dia:point val="10.6075,59.125"/>
         <dia:point val="10.6075,64.9375"/>
       </dia:attribute>
@@ -18302,17 +18315,17 @@ descend from it. Names are in identifiable name format.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="27.0925,55"/>
+        <dia:point val="26.3225,55"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-17,54.25;27.8425,65.925"/>
+        <dia:rectangle val="-17,54.25;27.0725,65.925"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="27.0925,55"/>
-        <dia:point val="27.0925,59.125"/>
+        <dia:point val="26.3225,55"/>
+        <dia:point val="26.3225,59.125"/>
         <dia:point val="-16.95,59.125"/>
         <dia:point val="-16.95,65.125"/>
       </dia:attribute>
@@ -18373,19 +18386,19 @@ descend from it. Names are in identifiable name format.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="27.0925,55"/>
+        <dia:point val="26.3225,55"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="26.3425,54.25;40.2425,65.925"/>
+        <dia:rectangle val="25.5725,54.25;43.15,65.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="27.0925,55"/>
-        <dia:point val="27.0925,59.125"/>
-        <dia:point val="40.0425,59.125"/>
-        <dia:point val="40.0425,65.125"/>
+        <dia:point val="26.3225,55"/>
+        <dia:point val="26.3225,59.125"/>
+        <dia:point val="42.95,59.125"/>
+        <dia:point val="42.95,65"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -18423,13 +18436,13 @@ descend from it. Names are in identifiable name format.#</dia:string>
         <dia:real val="4.4000000000000004"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#registrar_view_model#</dia:string>
+        <dia:string>#registrar_info#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>##</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##</dia:string>
+        <dia:string>#Represents a serialisation registrar for boost serialisation.#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -18521,7 +18534,7 @@ descend from it. Names are in identifiable name format.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##</dia:string>
+            <dia:string>#Lists of namespaces the type belongs to.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -18544,7 +18557,7 @@ descend from it. Names are in identifiable name format.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##</dia:string>
+            <dia:string>#List of all concrete classes which are part of an inheritance tree.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -18567,7 +18580,7 @@ descend from it. Names are in identifiable name format.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##</dia:string>
+            <dia:string>#List of all models which the model depends on.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -18624,17 +18637,17 @@ descend from it. Names are in identifiable name format.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="27.0925,55"/>
+        <dia:point val="26.3225,55"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="26.3425,54.25;63.415,74.8625"/>
+        <dia:rectangle val="25.5725,54.25;63.415,74.8625"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="27.0925,55"/>
-        <dia:point val="27.0925,59.1134"/>
+        <dia:point val="26.3225,55"/>
+        <dia:point val="26.3225,59.1134"/>
         <dia:point val="63.215,59.1134"/>
         <dia:point val="63.215,74.0625"/>
       </dia:attribute>
@@ -18674,7 +18687,7 @@ descend from it. Names are in identifiable name format.#</dia:string>
         <dia:real val="3"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#sml_to_cpp_view_model#</dia:string>
+        <dia:string>#sml_to_cpp_info#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#service#</dia:string>
@@ -18989,16 +19002,16 @@ descend from it. Names are in identifiable name format.#</dia:string>
         <dia:point val="49.1875,41.125"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="38.0725,36.5437;49.9375,41.925"/>
+        <dia:rectangle val="36.5325,35.95;49.9375,41.925"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
         <dia:point val="49.1875,41.125"/>
-        <dia:point val="49.1875,36.5937"/>
-        <dia:point val="38.1225,36.5937"/>
-        <dia:point val="38.1225,41"/>
+        <dia:point val="49.1875,36"/>
+        <dia:point val="36.5825,36"/>
+        <dia:point val="36.5825,41"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -19036,13 +19049,13 @@ descend from it. Names are in identifiable name format.#</dia:string>
         <dia:real val="6"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#odb_options_view_model#</dia:string>
+        <dia:string>#odb_options_info#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>##</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##</dia:string>
+        <dia:string>#Represents a text file with ODB options.#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -19134,7 +19147,7 @@ descend from it. Names are in identifiable name format.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##</dia:string>
+            <dia:string>#Name of the model to which the options belong.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -19157,7 +19170,7 @@ descend from it. Names are in identifiable name format.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##</dia:string>
+            <dia:string>#Name of the product for which we are generating this model.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -19180,7 +19193,7 @@ descend from it. Names are in identifiable name format.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##</dia:string>
+            <dia:string>#Path to options file.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -19203,7 +19216,7 @@ descend from it. Names are in identifiable name format.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##</dia:string>
+            <dia:string>#Name of the options file.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -19226,7 +19239,7 @@ descend from it. Names are in identifiable name format.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##</dia:string>
+            <dia:string>#Folder in which the ODB files are contained.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -19262,13 +19275,13 @@ descend from it. Names are in identifiable name format.#</dia:string>
         <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#namespace_view_model#</dia:string>
+        <dia:string>#namespace_info#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>##</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##</dia:string>
+        <dia:string>#Represents a C++ namespace.#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -19443,7 +19456,7 @@ descend from it. Names are in identifiable name format.#</dia:string>
         <dia:point val="74.2129,65"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="26.3425,54.25;74.4129,65.8"/>
+        <dia:rectangle val="25.5725,54.25;74.4129,65.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -19451,8 +19464,8 @@ descend from it. Names are in identifiable name format.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="74.2129,65"/>
         <dia:point val="74.2129,59.125"/>
-        <dia:point val="27.0925,59.125"/>
-        <dia:point val="27.0925,55"/>
+        <dia:point val="26.3225,59.125"/>
+        <dia:point val="26.3225,55"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -19490,13 +19503,13 @@ descend from it. Names are in identifiable name format.#</dia:string>
         <dia:real val="5.2000000000000011"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#visitor_view_model#</dia:string>
+        <dia:string>#visitor_info#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>##</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##</dia:string>
+        <dia:string>#Represents a C++ class modeling the visitor pattern.#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -19588,7 +19601,7 @@ descend from it. Names are in identifiable name format.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##</dia:string>
+            <dia:string>#Name of the visitor#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -19611,7 +19624,7 @@ descend from it. Names are in identifiable name format.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##</dia:string>
+            <dia:string>#Types for which an accept method will be generated.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -19634,7 +19647,7 @@ descend from it. Names are in identifiable name format.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##</dia:string>
+            <dia:string>#Documentation for the type.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -19657,7 +19670,7 @@ descend from it. Names are in identifiable name format.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##</dia:string>
+            <dia:string>#Namespaces to which the type belongs to.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -19717,7 +19730,7 @@ descend from it. Names are in identifiable name format.#</dia:string>
         <dia:point val="86.7427,73.9352"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="26.3425,54.25;86.9427,74.7352"/>
+        <dia:rectangle val="25.5725,54.25;86.9427,74.7352"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -19725,8 +19738,8 @@ descend from it. Names are in identifiable name format.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="86.7427,73.9352"/>
         <dia:point val="86.7427,59.1134"/>
-        <dia:point val="27.0925,59.1134"/>
-        <dia:point val="27.0925,55"/>
+        <dia:point val="26.3225,59.1134"/>
+        <dia:point val="26.3225,55"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -19764,13 +19777,13 @@ descend from it. Names are in identifiable name format.#</dia:string>
         <dia:real val="4.4000000000000004"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#string_table_view_model#</dia:string>
+        <dia:string>#string_table_info#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>##</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##</dia:string>
+        <dia:string>#Represents a C++ class containing a number of std::strings.#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -19862,7 +19875,7 @@ descend from it. Names are in identifiable name format.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##</dia:string>
+            <dia:string>#Name of the class.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -19885,7 +19898,7 @@ descend from it. Names are in identifiable name format.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##</dia:string>
+            <dia:string>#Documentation for the class.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -19908,7 +19921,7 @@ descend from it. Names are in identifiable name format.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##</dia:string>
+            <dia:string>#List of strings contained in the table.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -19968,7 +19981,7 @@ descend from it. Names are in identifiable name format.#</dia:string>
         <dia:point val="101.093,64.8818"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="26.3425,54.25;101.293,65.6818"/>
+        <dia:rectangle val="25.5725,54.25;101.293,65.6818"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -19976,8 +19989,8 @@ descend from it. Names are in identifiable name format.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="101.093,64.8818"/>
         <dia:point val="101.093,59.1318"/>
-        <dia:point val="27.0925,59.1318"/>
-        <dia:point val="27.0925,55"/>
+        <dia:point val="26.3225,59.1318"/>
+        <dia:point val="26.3225,55"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>

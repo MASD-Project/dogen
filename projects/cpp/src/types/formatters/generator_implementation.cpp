@@ -49,9 +49,9 @@ const std::string invalid_smart_pointer(
     "Smart pointers have exactly one type argument");
 const std::string invalid_pair(
     "Pairs  have exactly two type arguments");
-const std::string missing_class_view_model(
+const std::string missing_class_info(
     "Meta type is pod but class view model is empty");
-const std::string missing_enumeration_view_model(
+const std::string missing_enumeration_info(
     "Meta type is enumeration but enumeration view model is empty");
 
 }
@@ -72,7 +72,7 @@ generator_implementation::create(std::ostream& stream) {
 
 void generator_implementation::
 sequence_container_helper(
-    const nested_type_view_model& vm, unsigned int quantity) {
+    const nested_type_info& vm, unsigned int quantity) {
     const auto container_identifiable_type_name(
         vm.complete_identifiable_name());
     const auto container_type_name(vm.complete_name());
@@ -114,7 +114,7 @@ sequence_container_helper(
 
 void generator_implementation::
 associative_container_helper(
-    const nested_type_view_model& vm, unsigned int quantity) {
+    const nested_type_info& vm, unsigned int quantity) {
 
     const auto children(vm.children());
     if (children.size() != 1 && children.size() != 2) {
@@ -166,7 +166,7 @@ associative_container_helper(
 }
 
 void generator_implementation::
-smart_pointer_helper(const nested_type_view_model& vm) {
+smart_pointer_helper(const nested_type_info& vm) {
     const auto container_identifiable_type_name(
         vm.complete_identifiable_name());
     const auto container_type_name(vm.complete_name());
@@ -205,7 +205,7 @@ smart_pointer_helper(const nested_type_view_model& vm) {
 }
 
 void generator_implementation::
-optional_helper(const nested_type_view_model& vm) {
+optional_helper(const nested_type_info& vm) {
     const auto container_identifiable_type_name(
         vm.complete_identifiable_name());
     const auto container_type_name(vm.complete_name());
@@ -243,7 +243,7 @@ optional_helper(const nested_type_view_model& vm) {
 }
 
 void generator_implementation::
-pair_helper(const nested_type_view_model& vm) {
+pair_helper(const nested_type_info& vm) {
     const auto container_identifiable_type_name(
         vm.complete_identifiable_name());
     const auto container_type_name(vm.complete_name());
@@ -289,7 +289,7 @@ pair_helper(const nested_type_view_model& vm) {
 }
 
 void generator_implementation::
-filesystem_path_helper(const nested_type_view_model& vm) {
+filesystem_path_helper(const nested_type_info& vm) {
     const auto type_name(vm.identifiable_name());
     const auto identifiable_type_name(vm.complete_identifiable_name());
 
@@ -310,7 +310,7 @@ filesystem_path_helper(const nested_type_view_model& vm) {
     utility_.blank_line();
 }
 
-void generator_implementation::date_helper(const nested_type_view_model& vm) {
+void generator_implementation::date_helper(const nested_type_info& vm) {
     const auto type_name(vm.identifiable_name());
     const auto identifiable_type_name(vm.complete_identifiable_name());
 
@@ -330,7 +330,7 @@ void generator_implementation::date_helper(const nested_type_view_model& vm) {
     utility_.blank_line();
 }
 
-void generator_implementation::ptime_helper(const nested_type_view_model& vm) {
+void generator_implementation::ptime_helper(const nested_type_info& vm) {
     const auto type_name(vm.identifiable_name());
     const auto identifiable_type_name(vm.complete_identifiable_name());
 
@@ -357,7 +357,7 @@ void generator_implementation::ptime_helper(const nested_type_view_model& vm) {
 }
 
 void generator_implementation::
-time_duration_helper(const nested_type_view_model& vm) {
+time_duration_helper(const nested_type_info& vm) {
     const auto type_name(vm.identifiable_name());
     const auto identifiable_type_name(vm.complete_identifiable_name());
 
@@ -379,7 +379,7 @@ time_duration_helper(const nested_type_view_model& vm) {
 }
 
 void generator_implementation::
-variant_helper(const nested_type_view_model& vm) {
+variant_helper(const nested_type_info& vm) {
     const auto container_identifiable_type_name(
         vm.complete_identifiable_name());
     const auto container_type_name(vm.complete_name());
@@ -543,7 +543,7 @@ int_like_helper(const std::string& identifiable_type_name,
 
 void generator_implementation::
 recursive_helper_method_creator(const std::string& owner_name,
-    const nested_type_view_model& vm,
+    const nested_type_info& vm,
     std::unordered_set<std::string>& types_done, bool as_pointer) {
     const unsigned int quantity(10);
 
@@ -609,7 +609,7 @@ recursive_helper_method_creator(const std::string& owner_name,
 }
 
 void generator_implementation::
-create_helper_methods(const class_view_model& vm) {
+create_helper_methods(const class_info& vm) {
     const auto props(vm.properties());
     if (props.empty())
         return;
@@ -624,7 +624,7 @@ create_helper_methods(const class_view_model& vm) {
         recursive_helper_method_creator(owner, p.type(), types_done, as_ptr);
 }
 
-void generator_implementation::populate_method(const class_view_model& vm) {
+void generator_implementation::populate_method(const class_info& vm) {
     if (vm.is_immutable())
         return;
 
@@ -652,7 +652,7 @@ void generator_implementation::populate_method(const class_view_model& vm) {
     utility_.close_scope();
 }
 
-void generator_implementation::create_method(const class_view_model& vm) {
+void generator_implementation::create_method(const class_info& vm) {
     if (vm.is_parent())
         return;
 
@@ -709,7 +709,7 @@ void generator_implementation::create_method(const class_view_model& vm) {
     utility_.close_scope();
 }
 
-void generator_implementation::create_method_ptr(const class_view_model& vm) {
+void generator_implementation::create_method_ptr(const class_info& vm) {
     auto leaves(vm.leaves());
     const std::string name(vm.name() + "_generator");
     stream_ << indenter_ << name << "::result_type*" << std::endl
@@ -754,7 +754,7 @@ void generator_implementation::create_method_ptr(const class_view_model& vm) {
     utility_.close_scope();
 }
 
-void generator_implementation::function_operator(const class_view_model& vm) {
+void generator_implementation::function_operator(const class_info& vm) {
     if (vm.is_parent())
         return;
 
@@ -772,7 +772,7 @@ void generator_implementation::function_operator(const class_view_model& vm) {
     utility_.close_scope();
 }
 
-void generator_implementation::default_constructor(const class_view_model& vm) {
+void generator_implementation::default_constructor(const class_info& vm) {
     if (vm.is_parent())
         return;
 
@@ -781,14 +781,14 @@ void generator_implementation::default_constructor(const class_view_model& vm) {
     utility_.blank_line();
 }
 
-void generator_implementation::format_class(const file_view_model& vm) {
-    boost::optional<class_view_model> o(vm.class_vm());
+void generator_implementation::format_class(const file_info& vm) {
+    boost::optional<class_info> o(vm.class_info());
     if (!o) {
-        BOOST_LOG_SEV(lg, error) << missing_class_view_model;
-        BOOST_THROW_EXCEPTION(formatting_error(missing_class_view_model));
+        BOOST_LOG_SEV(lg, error) << missing_class_info;
+        BOOST_THROW_EXCEPTION(formatting_error(missing_class_info));
     }
 
-    const class_view_model& cvm(*o);
+    const class_info& cvm(*o);
     create_helper_methods(cvm);
     utility_.blank_line(2);
 
@@ -811,11 +811,11 @@ void generator_implementation::format_class(const file_view_model& vm) {
     utility_.blank_line();
 }
 
-void generator_implementation::format_enumeration(const file_view_model& vm) {
-    const auto o(vm.enumeration_vm());
+void generator_implementation::format_enumeration(const file_info& vm) {
+    const auto o(vm.enumeration_info());
     if (!o) {
-        BOOST_LOG_SEV(lg, error) << missing_enumeration_view_model;
-        BOOST_THROW_EXCEPTION(formatting_error(missing_enumeration_view_model));
+        BOOST_LOG_SEV(lg, error) << missing_enumeration_info;
+        BOOST_THROW_EXCEPTION(formatting_error(missing_enumeration_info));
     }
 
     const auto evm(*o);
@@ -871,7 +871,7 @@ void generator_implementation::format_enumeration(const file_view_model& vm) {
     }
 }
 
-void generator_implementation::format(const file_view_model& vm) {
+void generator_implementation::format(const file_info& vm) {
     licence licence(stream_);
     licence.format();
 

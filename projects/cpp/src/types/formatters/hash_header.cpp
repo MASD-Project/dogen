@@ -39,9 +39,9 @@ auto lg(logger_factory("cpp.hash_header"));
 
 const std::string std_ns("std");
 
-const std::string missing_class_view_model(
+const std::string missing_class_info(
     "Meta type is pod but class view model is empty");
-const std::string missing_enumeration_view_model(
+const std::string missing_enumeration_info(
     "Meta type is enumeration but enumeration view model is empty");
 
 }
@@ -60,7 +60,7 @@ file_formatter::shared_ptr hash_header::create(std::ostream& stream) {
     return file_formatter::shared_ptr(new hash_header(stream));
 }
 
-void hash_header::operator_bracket_method(const class_view_model& vm) {
+void hash_header::operator_bracket_method(const class_info& vm) {
     stream_ << indenter_ << "size_t operator()(const ";
 
     qname qname(stream_);
@@ -79,7 +79,7 @@ void hash_header::operator_bracket_method(const class_view_model& vm) {
     utility_.close_scope();
 }
 
-void hash_header::hash_helper_class(const class_view_model& vm) {
+void hash_header::hash_helper_class(const class_info& vm) {
     stream_ << indenter_ << indenter_ << "class " << vm.name()
             << "_hasher ";
 
@@ -93,7 +93,7 @@ void hash_header::hash_helper_class(const class_view_model& vm) {
     stream_ << indenter_ << "};" << std::endl;
 }
 
-void hash_header::hash_class(const class_view_model& vm) {
+void hash_header::hash_class(const class_info& vm) {
     stream_ << indenter_ << "template<>" << std::endl
             << indenter_ << "class hash<";
 
@@ -110,11 +110,11 @@ void hash_header::hash_class(const class_view_model& vm) {
     stream_ << indenter_ << "};" << std::endl;
 }
 
-void hash_header::format_class(const file_view_model& vm) {
-    const auto o(vm.enumeration_vm());
+void hash_header::format_class(const file_info& vm) {
+    const auto o(vm.enumeration_info());
     if (!o) {
-        BOOST_LOG_SEV(lg, error) << missing_enumeration_view_model;
-        BOOST_THROW_EXCEPTION(formatting_error(missing_enumeration_view_model));
+        BOOST_LOG_SEV(lg, error) << missing_enumeration_info;
+        BOOST_THROW_EXCEPTION(formatting_error(missing_enumeration_info));
     }
 
     const auto evm(*o);
@@ -151,14 +151,14 @@ void hash_header::format_class(const file_view_model& vm) {
     utility_.blank_line(2);
 }
 
-void hash_header::format_enumeration(const file_view_model& vm) {
-    const auto o(vm.class_vm());
+void hash_header::format_enumeration(const file_info& vm) {
+    const auto o(vm.class_info());
     if (!o) {
-        BOOST_LOG_SEV(lg, error) << missing_class_view_model;
-        BOOST_THROW_EXCEPTION(formatting_error(missing_class_view_model));
+        BOOST_LOG_SEV(lg, error) << missing_class_info;
+        BOOST_THROW_EXCEPTION(formatting_error(missing_class_info));
     }
 
-    const class_view_model& cvm(*o);
+    const class_info& cvm(*o);
     {
         namespace_helper nsh(stream_, cvm.namespaces());
         utility_.blank_line();
@@ -179,7 +179,7 @@ void hash_header::format_enumeration(const file_view_model& vm) {
     utility_.blank_line();
 }
 
-void hash_header::format(const file_view_model& vm) {
+void hash_header::format(const file_info& vm) {
     licence licence(stream_);
     licence.format();
 

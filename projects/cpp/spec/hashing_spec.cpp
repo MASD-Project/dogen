@@ -48,20 +48,20 @@ BOOST_AUTO_TEST_CASE(validate_hashing) {
     test_hashing<location_request_generator>();
     test_hashing<relationships_generator>();
     test_hashing<std_types_generator>();
-    test_hashing<class_view_model_generator>();
-    test_hashing<cmakelists_view_model_generator>();
-    test_hashing<enumeration_view_model_generator>();
-    test_hashing<enumerator_view_model_generator>();
-    test_hashing<exception_view_model_generator>();
-    test_hashing<file_view_model_generator>();
-    test_hashing<namespace_view_model_generator>();
-    test_hashing<nested_type_view_model_generator>();
-    test_hashing<odb_options_view_model_generator>();
-    test_hashing<parent_view_model_generator>();
-    test_hashing<property_view_model_generator>();
-    test_hashing<registrar_view_model_generator>();
-    test_hashing<string_table_view_model_generator>();
-    test_hashing<visitor_view_model_generator>();
+    test_hashing<class_info_generator>();
+    test_hashing<cmakelists_info_generator>();
+    test_hashing<enumeration_info_generator>();
+    test_hashing<enumerator_info_generator>();
+    test_hashing<exception_info_generator>();
+    test_hashing<file_info_generator>();
+    test_hashing<namespace_info_generator>();
+    test_hashing<nested_type_info_generator>();
+    test_hashing<odb_options_info_generator>();
+    test_hashing<parent_info_generator>();
+    test_hashing<property_info_generator>();
+    test_hashing<registrar_info_generator>();
+    test_hashing<string_table_info_generator>();
+    test_hashing<visitor_info_generator>();
 }
 
 BOOST_AUTO_TEST_SUITE_END()

@@ -47,20 +47,20 @@ BOOST_AUTO_TEST_CASE(validate_equality) {
     test_equality<location_request_generator>();
     test_equality<relationships_generator>();
     test_equality<std_types_generator>();
-    test_equality<class_view_model_generator>();
-    test_equality<cmakelists_view_model_generator>();
-    test_equality<enumeration_view_model_generator>();
-    test_equality<enumerator_view_model_generator>();
-    test_equality<exception_view_model_generator>();
-    test_equality<file_view_model_generator>();
-    test_equality<namespace_view_model_generator>();
-    test_equality<nested_type_view_model_generator>();
-    test_equality<odb_options_view_model_generator>();
-    test_equality<parent_view_model_generator>();
-    test_equality<property_view_model_generator>();
-    test_equality<registrar_view_model_generator>();
-    test_equality<string_table_view_model_generator>();
-    test_equality<visitor_view_model_generator>();
+    test_equality<class_info_generator>();
+    test_equality<cmakelists_info_generator>();
+    test_equality<enumeration_info_generator>();
+    test_equality<enumerator_info_generator>();
+    test_equality<exception_info_generator>();
+    test_equality<file_info_generator>();
+    test_equality<namespace_info_generator>();
+    test_equality<nested_type_info_generator>();
+    test_equality<odb_options_info_generator>();
+    test_equality<parent_info_generator>();
+    test_equality<property_info_generator>();
+    test_equality<registrar_info_generator>();
+    test_equality<string_table_info_generator>();
+    test_equality<visitor_info_generator>();
 }
 
 BOOST_AUTO_TEST_SUITE_END()

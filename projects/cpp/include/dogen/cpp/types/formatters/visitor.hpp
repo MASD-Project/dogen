@@ -28,7 +28,7 @@
 #include <iosfwd>
 #include "dogen/cpp/types/formatters/utility.hpp"
 #include "dogen/cpp/types/formatters/indenter.hpp"
-#include "dogen/cpp/types/visitor_view_model.hpp"
+#include "dogen/cpp/types/visitor_info.hpp"
 #include "dogen/cpp/types/formatters/file_formatter.hpp"
 
 namespace dogen {
@@ -50,10 +50,10 @@ public:
     static file_formatter::shared_ptr create(std::ostream& stream);
 
 private:
-    void format(const visitor_view_model& vm);
+    void format(const visitor_info& vm);
 
 public:
-    virtual void format(const file_view_model& vm) override;
+    virtual void format(const file_info& vm) override;
 
 private:
     std::ostream& stream_;

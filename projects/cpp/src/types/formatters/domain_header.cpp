@@ -45,11 +45,11 @@ const std::string boost_ns("boost");
 const std::string serialization_ns("serialization");
 const std::string invalid_aspect_type("Invalid value for aspect_types");
 const std::string invalid_category_type("Invalid value for category_types");
-const std::string missing_class_view_model(
+const std::string missing_class_info(
     "Meta type is pod but class view model is empty");
-const std::string missing_enumeration_view_model(
+const std::string missing_enumeration_info(
     "Meta type is enumeration but enumeration view model is empty");
-const std::string missing_exception_view_model(
+const std::string missing_exception_info(
     "Meta type is exception but exception view model is empty");
 }
 
@@ -77,7 +77,7 @@ create(std::ostream& stream, const bool disable_complete_constructor,
 }
 
 void domain_header::
-equality_operator(const class_view_model& vm) {
+equality_operator(const class_info& vm) {
     if (!vm.is_parent())
         return;
 
@@ -93,7 +93,7 @@ equality_operator(const class_view_model& vm) {
 }
 
 void domain_header::
-inserter_operator(const class_view_model& vm) {
+inserter_operator(const class_info& vm) {
     if (!use_integrated_io_ || disable_io_)
         return;
 
@@ -103,7 +103,7 @@ inserter_operator(const class_view_model& vm) {
 }
 
 void domain_header::
-swap_method(const class_view_model& vm) {
+swap_method(const class_info& vm) {
     // swap overload is only available in leaf classes - MEC++-33
     if (vm.all_properties().empty() || vm.is_parent() || vm.is_immutable())
         return;
@@ -133,7 +133,7 @@ swap_method(const class_view_model& vm) {
 }
 
 void domain_header::
-class_declaration(const sml::category_types ct, const class_view_model& vm) {
+class_declaration(const sml::category_types ct, const class_info& vm) {
     using dogen::utility::exception::invalid_enum_value;
     if (ct == sml::category_types::versioned_key ||
         ct == sml::category_types::unversioned_key) {
@@ -155,7 +155,7 @@ class_declaration(const sml::category_types ct, const class_view_model& vm) {
 }
 
 void domain_header::format_main(const sml::category_types ct,
-    const class_view_model& vm) {
+    const class_info& vm) {
 
     {
         namespace_helper ns(stream_, vm.namespaces());
@@ -178,29 +178,29 @@ void domain_header::format_main(const sml::category_types ct,
         utility_.blank_line(2);
 }
 
-void domain_header::format_class(const file_view_model& vm) {
-    boost::optional<class_view_model> o(vm.class_vm());
+void domain_header::format_class(const file_info& vm) {
+    boost::optional<class_info> o(vm.class_info());
     if (!o) {
-        BOOST_LOG_SEV(lg, error) << missing_class_view_model;
-        BOOST_THROW_EXCEPTION(formatting_error(missing_class_view_model));
+        BOOST_LOG_SEV(lg, error) << missing_class_info;
+        BOOST_THROW_EXCEPTION(formatting_error(missing_class_info));
     }
     const auto at(vm.aspect_type());
     const auto ct(vm.category_type());
-    const class_view_model& cvm(*o);
+    const class_info& cvm(*o);
     if (at == aspect_types::main)
         format_main(ct, cvm);
     else {
         using dogen::utility::exception::invalid_enum_value;
-        BOOST_LOG_SEV(lg, error) << missing_class_view_model;
+        BOOST_LOG_SEV(lg, error) << missing_class_info;
         BOOST_THROW_EXCEPTION(invalid_enum_value(invalid_aspect_type));
     }
 }
 
-void domain_header::format_enumeration(const file_view_model& vm) {
-    const auto o(vm.enumeration_vm());
+void domain_header::format_enumeration(const file_info& vm) {
+    const auto o(vm.enumeration_info());
     if (!o) {
-        BOOST_LOG_SEV(lg, error) << missing_enumeration_view_model;
-        BOOST_THROW_EXCEPTION(formatting_error(missing_enumeration_view_model));
+        BOOST_LOG_SEV(lg, error) << missing_enumeration_info;
+        BOOST_THROW_EXCEPTION(formatting_error(missing_enumeration_info));
     }
     {
         const auto evm(*o);
@@ -212,11 +212,11 @@ void domain_header::format_enumeration(const file_view_model& vm) {
     utility_.blank_line(2);
 }
 
-void domain_header::format_exception(const file_view_model& vm) {
-    const auto o(vm.exception_vm());
+void domain_header::format_exception(const file_info& vm) {
+    const auto o(vm.exception_info());
     if (!o) {
-        BOOST_LOG_SEV(lg, error) << missing_enumeration_view_model;
-        BOOST_THROW_EXCEPTION(formatting_error(missing_exception_view_model));
+        BOOST_LOG_SEV(lg, error) << missing_enumeration_info;
+        BOOST_THROW_EXCEPTION(formatting_error(missing_exception_info));
     }
     {
         const auto evm(*o);
@@ -228,7 +228,7 @@ void domain_header::format_exception(const file_view_model& vm) {
     utility_.blank_line(2);
 }
 
-void domain_header::format(const file_view_model& vm) {
+void domain_header::format(const file_info& vm) {
     licence licence(stream_);
     licence.format();
 

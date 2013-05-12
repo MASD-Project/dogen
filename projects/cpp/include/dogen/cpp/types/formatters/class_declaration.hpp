@@ -27,8 +27,8 @@
 
 #include <iosfwd>
 #include <string>
-#include "dogen/cpp/types/class_view_model.hpp"
-#include "dogen/cpp/types/property_view_model.hpp"
+#include "dogen/cpp/types/class_info.hpp"
+#include "dogen/cpp/types/property_info.hpp"
 #include "dogen/cpp/types/formatters/indenter.hpp"
 #include "dogen/cpp/types/formatters/utility.hpp"
 
@@ -50,27 +50,27 @@ public:
 
 private:
     void non_pod_getters_and_setters(const std::string class_name,
-        const property_view_model& vm);
+        const property_info& vm);
     void pod_getters_and_setters(const std::string class_name,
-        const property_view_model& vm);
+        const property_info& vm);
 
 protected:
-    void open_class(const class_view_model& vm);
+    void open_class(const class_info& vm);
     void close_class();
-    void compiler_generated_constuctors(const class_view_model& vm);
-    void default_constructor(const class_view_model& vm);
-    void move_constructor(const class_view_model& vm);
-    void complete_constructor(const class_view_model& vm);
-    void destructor(const class_view_model& vm);
-    void friends(const class_view_model& vm);
-    void getters_and_setters(const class_view_model& vm);
-    void member_variables(const class_view_model& vm);
-    void equality(const class_view_model& vm);
-    void to_stream(const class_view_model& vm);
-    void swap_and_assignment(const class_view_model& vm);
+    void compiler_generated_constuctors(const class_info& vm);
+    void default_constructor(const class_info& vm);
+    void move_constructor(const class_info& vm);
+    void complete_constructor(const class_info& vm);
+    void destructor(const class_info& vm);
+    void friends(const class_info& vm);
+    void getters_and_setters(const class_info& vm);
+    void member_variables(const class_info& vm);
+    void equality(const class_info& vm);
+    void to_stream(const class_info& vm);
+    void swap_and_assignment(const class_info& vm);
 
 public:
-    virtual void format(const class_view_model& vm) = 0;
+    virtual void format(const class_info& vm) = 0;
 
 protected:
     std::ostream& stream_;

@@ -29,7 +29,7 @@
 #include <boost/filesystem/path.hpp>
 #include "dogen/cpp/types/formatters/indenter.hpp"
 #include "dogen/cpp/types/formatters/utility.hpp"
-#include "dogen/cpp/types/file_view_model.hpp"
+#include "dogen/cpp/types/file_info.hpp"
 #include "dogen/cpp/types/formatters/file_formatter.hpp"
 
 namespace dogen {
@@ -51,14 +51,14 @@ public:
     static file_formatter::shared_ptr create(std::ostream& stream);
 
 private:
-    void io_helper_methods(const class_view_model& vm);
+    void io_helper_methods(const class_info& vm);
 
 private:
-    void format_class(const file_view_model& vm);
-    void format_enumeration(const file_view_model& vm);
+    void format_class(const file_info& vm);
+    void format_enumeration(const file_info& vm);
 
 public:
-    virtual void format(const file_view_model& vm) override;
+    virtual void format(const file_info& vm) override;
 
 private:
     std::ostream& stream_;

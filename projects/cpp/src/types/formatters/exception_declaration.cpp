@@ -38,7 +38,7 @@ exception_declaration::
 exception_declaration(std::ostream& stream)
     : stream_(stream), utility_(stream_, indenter_) { }
 
-void exception_declaration::format(const exception_view_model& vm) {
+void exception_declaration::format(const exception_info& vm) {
     doxygen_comments dc1(stream_, indenter_);
     dc1.format(vm.documentation());
 

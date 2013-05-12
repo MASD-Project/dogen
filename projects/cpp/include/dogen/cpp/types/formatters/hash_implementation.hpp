@@ -28,8 +28,8 @@
 #include <iosfwd>
 #include <unordered_set>
 #include <boost/filesystem/path.hpp>
-#include "dogen/cpp/types/file_view_model.hpp"
-#include "dogen/cpp/types/nested_type_view_model.hpp"
+#include "dogen/cpp/types/file_info.hpp"
+#include "dogen/cpp/types/nested_type_info.hpp"
 #include "dogen/cpp/types/formatters/indenter.hpp"
 #include "dogen/cpp/types/formatters/utility.hpp"
 #include "dogen/cpp/types/formatters/file_formatter.hpp"
@@ -53,31 +53,31 @@ public:
     static file_formatter::shared_ptr create(std::ostream& stream);
 
 private:
-    bool is_hashable(const nested_type_view_model& vm);
+    bool is_hashable(const nested_type_info& vm);
 
 private:
-    void pair_helper(const nested_type_view_model& vm);
-    void optional_helper(const nested_type_view_model& vm);
-    void variant_helper(const nested_type_view_model& vm);
-    void sequence_container_helper(const nested_type_view_model& vm);
-    void associative_container_helper(const nested_type_view_model& vm);
-    void smart_pointer_helper(const nested_type_view_model& vm);
-    void ptime_helper(const nested_type_view_model& vm);
-    void time_duration_helper(const nested_type_view_model& vm);
-    void recursive_helper_method_creator(const nested_type_view_model& vm,
+    void pair_helper(const nested_type_info& vm);
+    void optional_helper(const nested_type_info& vm);
+    void variant_helper(const nested_type_info& vm);
+    void sequence_container_helper(const nested_type_info& vm);
+    void associative_container_helper(const nested_type_info& vm);
+    void smart_pointer_helper(const nested_type_info& vm);
+    void ptime_helper(const nested_type_info& vm);
+    void time_duration_helper(const nested_type_info& vm);
+    void recursive_helper_method_creator(const nested_type_info& vm,
         std::unordered_set<std::string>& types_done);
-    void create_helper_methods(const class_view_model& vm);
+    void create_helper_methods(const class_info& vm);
 
 private:
-    void combine_function(const class_view_model& vm);
-    void hasher_hash_method(const class_view_model& vm);
+    void combine_function(const class_info& vm);
+    void hasher_hash_method(const class_info& vm);
 
 private:
-    void format_class(const file_view_model& vm);
-    void format_enumeration(const file_view_model& vm);
+    void format_class(const file_info& vm);
+    void format_enumeration(const file_info& vm);
 
 public:
-    virtual void format(const file_view_model& vm) override;
+    virtual void format(const file_info& vm) override;
 
 private:
     std::ostream& stream_;

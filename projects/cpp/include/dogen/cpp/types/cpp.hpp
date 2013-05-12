@@ -34,6 +34,15 @@ namespace dogen {
  * into compilable C++ code, according to a set of well-defined
  * conventions.
  *
+ * <b>Info postfix</b>
+ *
+ * The types in the C++ meta-model should not have any prefixes or post-fixes
+ * since they naturally belong to the CPP model. However, because names like
+ * class and namespace clash with keywords, and to maintain consistency -
+ * perhaps foolishly - it was decided to use the postfix @e info on all types
+ * which are part of the meta-model. Info was chosen very randomly, but it is
+ * used by @e type_info, so that's at least one excuse.
+ *
  * <b>Using Clang AST as a C++ meta model</b>
  *
  * If implemented properly, the C++ model should really just generate

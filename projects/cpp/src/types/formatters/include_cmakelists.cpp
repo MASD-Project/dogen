@@ -41,7 +41,7 @@ include_cmakelists(std::ostream& stream, const bool odb_enabled,
                                     odb_enabled_(odb_enabled),
                                     odb_folder_(odb_folder) {}
 
-void include_cmakelists::format(const cmakelists_view_model& vm) {
+void include_cmakelists::format(const cmakelists_info& vm) {
     const std::string mn(vm.model_name().empty() ?
         unnamed_model :
         vm.model_name());

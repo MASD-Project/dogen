@@ -38,7 +38,7 @@ namespace formatters {
 class_implementation::class_implementation(std::ostream& stream)
     : stream_(stream), utility_(stream_, indenter_) { }
 
-void class_implementation::default_constructor(const class_view_model& vm) {
+void class_implementation::default_constructor(const class_info& vm) {
     if (!vm.requires_manual_default_constructor())
         return;
 
@@ -65,7 +65,7 @@ void class_implementation::default_constructor(const class_view_model& vm) {
     utility_.blank_line();
 }
 
-void class_implementation::move_constructor(const class_view_model& vm) {
+void class_implementation::move_constructor(const class_info& vm) {
     if (!vm.requires_manual_move_constructor())
         return;
 
@@ -90,7 +90,7 @@ void class_implementation::move_constructor(const class_view_model& vm) {
     utility_.blank_line();
 }
 
-void class_implementation::complete_constructor(const class_view_model& vm) {
+void class_implementation::complete_constructor(const class_info& vm) {
     const auto props(vm.all_properties());
     if (props.empty())
         return;
@@ -155,7 +155,7 @@ void class_implementation::complete_constructor(const class_view_model& vm) {
     utility_.blank_line();
 }
 
-void class_implementation::to_stream(const class_view_model& vm) {
+void class_implementation::to_stream(const class_info& vm) {
     if (!vm.is_parent() && vm.parents().empty())
         return;
 
@@ -174,7 +174,7 @@ void class_implementation::to_stream(const class_view_model& vm) {
     utility_.blank_line();
 }
 
-void class_implementation::swap(const class_view_model& vm) {
+void class_implementation::swap(const class_info& vm) {
     if ((vm.all_properties().empty() && !vm.is_parent()) || vm.is_immutable())
         return;
 
@@ -209,7 +209,7 @@ void class_implementation::swap(const class_view_model& vm) {
     utility_.blank_line();
 }
 
-void class_implementation::equals_method(const class_view_model& vm) {
+void class_implementation::equals_method(const class_info& vm) {
     if (vm.is_parent() || vm.parents().empty())
         return;
 
@@ -231,7 +231,7 @@ void class_implementation::equals_method(const class_view_model& vm) {
     utility_.blank_line();
 }
 
-void class_implementation::equals_operator(const class_view_model& vm) {
+void class_implementation::equals_operator(const class_info& vm) {
     if (vm.is_parent()) {
         stream_ << indenter_ << "bool " << vm.name() << "::compare(const "
                 << vm.name() <<  "& ";
@@ -289,7 +289,7 @@ void class_implementation::equals_operator(const class_view_model& vm) {
 
 void class_implementation::
 non_pod_getters_and_setters(const std::string class_name,
-    const property_view_model& vm) {
+    const property_info& vm) {
     stream_ << indenter_ << vm.type().complete_name() << " " << class_name
             << "::" << vm.name() << "() const ";
 
@@ -333,7 +333,7 @@ non_pod_getters_and_setters(const std::string class_name,
 
 void class_implementation::
 pod_getters_and_setters(const std::string class_name,
-    const property_view_model& vm) {
+    const property_info& vm) {
     // const getter
     stream_ << indenter_ << "const " << vm.type().complete_name()
             << "& " << class_name << "::" << vm.name()
@@ -413,7 +413,7 @@ pod_getters_and_setters(const std::string class_name,
     }
 }
 
-void class_implementation::getters_and_setters(const class_view_model& vm) {
+void class_implementation::getters_and_setters(const class_info& vm) {
     if (vm.properties().empty())
         return;
 
@@ -426,7 +426,7 @@ void class_implementation::getters_and_setters(const class_view_model& vm) {
 }
 
 void class_implementation::
-assignment_operator(const class_view_model& vm) {
+assignment_operator(const class_info& vm) {
     // assignment is only available in leaf classes - MEC++-33
     if (vm.all_properties().empty() || vm.is_parent() || vm.is_immutable())
         return;

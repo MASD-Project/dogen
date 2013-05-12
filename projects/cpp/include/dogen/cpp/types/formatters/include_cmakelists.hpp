@@ -28,7 +28,7 @@
 #include <iosfwd>
 #include <string>
 #include "dogen/cpp/types/formatters/indenter.hpp"
-#include "dogen/cpp/types/cmakelists_view_model.hpp"
+#include "dogen/cpp/types/cmakelists_info.hpp"
 
 namespace dogen {
 namespace cpp {
@@ -47,7 +47,7 @@ public:
         const std::string odb_folder);
 
 public:
-    void format(const cmakelists_view_model& vm);
+    void format(const cmakelists_info& vm);
 
 private:
     std::ostream& stream_;

@@ -41,16 +41,16 @@ namespace formatters {
 qname::qname(std::ostream& stream)
     : stream_(stream) { }
 
-void qname::format(const parent_view_model& vm) {
-    ::format<parent_view_model>(stream_, vm);
+void qname::format(const parent_info& vm) {
+    ::format<parent_info>(stream_, vm);
 }
 
-void qname::format(const class_view_model& vm) {
-    ::format<class_view_model>(stream_, vm);
+void qname::format(const class_info& vm) {
+    ::format<class_info>(stream_, vm);
 }
 
-void qname::format(const enumeration_view_model& vm) {
-    ::format<enumeration_view_model>(stream_, vm);
+void qname::format(const enumeration_info& vm) {
+    ::format<enumeration_info>(stream_, vm);
 }
 
 } } }

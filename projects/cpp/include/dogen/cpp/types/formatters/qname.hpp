@@ -27,9 +27,9 @@
 
 #include <iosfwd>
 #include <string>
-#include "dogen/cpp/types/class_view_model.hpp"
-#include "dogen/cpp/types/parent_view_model.hpp"
-#include "dogen/cpp/types/enumeration_view_model.hpp"
+#include "dogen/cpp/types/class_info.hpp"
+#include "dogen/cpp/types/parent_info.hpp"
+#include "dogen/cpp/types/enumeration_info.hpp"
 
 namespace dogen {
 namespace cpp {
@@ -47,9 +47,9 @@ public:
     explicit qname(std::ostream& stream);
 
 public:
-    void format(const class_view_model& vm);
-    void format(const enumeration_view_model& vm);
-    void format(const parent_view_model& vm);
+    void format(const class_info& vm);
+    void format(const enumeration_info& vm);
+    void format(const parent_info& vm);
 
 private:
     std::ostream& stream_;

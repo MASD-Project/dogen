@@ -27,10 +27,10 @@ types/#pragma once
 
 #include <iosfwd>
 #include <string>
-#include "dogen/cpp/types/class_view_model.hpp"
+#include "dogen/cpp/types/class_info.hpp"
 #include "dogen/cpp/types/formatters/indenter.hpp"
 #include "dogen/cpp/types/formatters/utility.hpp"
-#include "dogen/cpp/types/property_view_model.hpp"
+#include "dogen/cpp/types/property_info.hpp"
 
 namespace dogen {
 namespace cpp {
@@ -50,23 +50,23 @@ public:
 
 private:
     void non_pod_getters_and_setters(const std::string class_name,
-        const property_view_model& vm);
+        const property_info& vm);
     void pod_getters_and_setters(const std::string class_name,
-        const property_view_model& vm);
+        const property_info& vm);
 
 protected:
-    void default_constructor(const class_view_model& vm);
-    void move_constructor(const class_view_model& vm);
-    void complete_constructor(const class_view_model& vm);
-    void to_stream(const class_view_model& vm);
-    void swap(const class_view_model& vm);
-    void equals_method(const class_view_model& vm);
-    void equals_operator(const class_view_model& vm);
-    void assignment_operator(const class_view_model& vm);
-    void getters_and_setters(const class_view_model& vm);
+    void default_constructor(const class_info& vm);
+    void move_constructor(const class_info& vm);
+    void complete_constructor(const class_info& vm);
+    void to_stream(const class_info& vm);
+    void swap(const class_info& vm);
+    void equals_method(const class_info& vm);
+    void equals_operator(const class_info& vm);
+    void assignment_operator(const class_info& vm);
+    void getters_and_setters(const class_info& vm);
 
 public:
-    virtual void format(const class_view_model& vm) = 0;
+    virtual void format(const class_info& vm) = 0;
 
 protected:
     std::ostream& stream_;

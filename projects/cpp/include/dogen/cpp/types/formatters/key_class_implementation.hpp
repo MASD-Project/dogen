@@ -25,7 +25,7 @@
 #pragma once
 #endif
 
-#include "dogen/cpp/types/class_view_model.hpp"
+#include "dogen/cpp/types/class_info.hpp"
 #include "dogen/cpp/types/formatters/class_implementation.hpp"
 
 namespace dogen {
@@ -46,10 +46,10 @@ public:
     virtual ~key_class_implementation() noexcept {}
 
 private:
-    void hand_crafted_constructors(const class_view_model& vm);
+    void hand_crafted_constructors(const class_info& vm);
 
 public:
-    virtual void format(const class_view_model& vm) override;
+    virtual void format(const class_info& vm) override;
 
 private:
     const bool disable_complete_constructor_;

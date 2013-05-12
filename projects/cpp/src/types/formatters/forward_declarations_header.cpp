@@ -43,11 +43,11 @@ const std::string invalid_aspect_type("Invalid value for aspect_types");
 const std::string invalid_category_type("Invalid value for category_types");
 
 const std::string invalid_facet_types("Invalid value for facet_types");
-const std::string missing_class_view_model(
+const std::string missing_class_info(
     "Meta type is pod but class view model is empty");
-const std::string missing_enumeration_view_model(
+const std::string missing_enumeration_info(
     "Meta type is enumeration but enumeration view model is empty");
-const std::string missing_exception_view_model(
+const std::string missing_exception_info(
     "Meta type is exception but enumeration view model is empty");
 
 }
@@ -66,7 +66,7 @@ create(std::ostream& stream) {
 }
 
 void forward_declarations_header::
-format_serialization_class(const class_view_model& vm) {
+format_serialization_class(const class_info& vm) {
     {
         std::list<std::string> ns({ boost_ns, serialization_ns });
         namespace_helper nsh(stream_, ns);
@@ -92,7 +92,7 @@ format_serialization_class(const class_view_model& vm) {
 }
 
 void forward_declarations_header::
-format_domain_class(const class_view_model& vm) {
+format_domain_class(const class_info& vm) {
     {
         namespace_helper nsh(stream_, vm.namespaces());
         utility_.blank_line();
@@ -103,15 +103,15 @@ format_domain_class(const class_view_model& vm) {
     utility_.blank_line(2);
 }
 
-void forward_declarations_header::format_class(const file_view_model& vm) {
-    boost::optional<class_view_model> o(vm.class_vm());
+void forward_declarations_header::format_class(const file_info& vm) {
+    boost::optional<class_info> o(vm.class_info());
     if (!o) {
-        BOOST_LOG_SEV(lg, error) << missing_class_view_model;
-        BOOST_THROW_EXCEPTION(formatting_error(missing_class_view_model));
+        BOOST_LOG_SEV(lg, error) << missing_class_info;
+        BOOST_THROW_EXCEPTION(formatting_error(missing_class_info));
     }
 
     const auto ft(vm.facet_type());
-    const class_view_model& cvm(*o);
+    const class_info& cvm(*o);
     if (ft == config::cpp_facet_types::serialization)
         format_serialization_class(cvm);
     else if (ft == config::cpp_facet_types::types)
@@ -124,11 +124,11 @@ void forward_declarations_header::format_class(const file_view_model& vm) {
 }
 
 void forward_declarations_header::
-format_enumeration(const file_view_model& vm) {
-    const auto o(vm.enumeration_vm());
+format_enumeration(const file_info& vm) {
+    const auto o(vm.enumeration_info());
     if (!o) {
-        BOOST_LOG_SEV(lg, error) << missing_enumeration_view_model;
-        BOOST_THROW_EXCEPTION(formatting_error(missing_enumeration_view_model));
+        BOOST_LOG_SEV(lg, error) << missing_enumeration_info;
+        BOOST_THROW_EXCEPTION(formatting_error(missing_enumeration_info));
     }
 
     const auto evm(*o);
@@ -143,11 +143,11 @@ format_enumeration(const file_view_model& vm) {
     utility_.blank_line(2);
 }
 
-void forward_declarations_header::format_exception(const file_view_model& vm) {
-    const auto o(vm.exception_vm());
+void forward_declarations_header::format_exception(const file_info& vm) {
+    const auto o(vm.exception_info());
     if (!o) {
-        BOOST_LOG_SEV(lg, error) << missing_exception_view_model;
-        BOOST_THROW_EXCEPTION(formatting_error(missing_exception_view_model));
+        BOOST_LOG_SEV(lg, error) << missing_exception_info;
+        BOOST_THROW_EXCEPTION(formatting_error(missing_exception_info));
     }
 
     const auto evm(*o);
@@ -161,7 +161,7 @@ void forward_declarations_header::format_exception(const file_view_model& vm) {
     utility_.blank_line(2);
 }
 
-void forward_declarations_header::format(const file_view_model& vm) {
+void forward_declarations_header::format(const file_info& vm) {
     if (vm.aspect_type() != aspect_types::forward_decls) {
         using dogen::utility::exception::invalid_enum_value;
         BOOST_LOG_SEV(lg, error) << invalid_facet_types;
