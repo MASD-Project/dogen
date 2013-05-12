@@ -18,32 +18,26 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_SML_TYPES_POD_TYPES_HPP
-#define DOGEN_SML_TYPES_POD_TYPES_HPP
+#ifndef DOGEN_SML_HASH_SERVICE_TYPES_HASH_HPP
+#define DOGEN_SML_HASH_SERVICE_TYPES_HASH_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-namespace dogen {
-namespace sml {
+#include <functional>
+#include "dogen/sml/types/service_types.hpp"
 
-/**
- * @brief Types of pods.
- *
- * We need to classify pods with regards to distinguishing properties
- * which make code generation different.
- */
-enum class pod_types : unsigned int {
-    invalid = 0, ///< Represents an uninitialised enum
-    sequence_container = 1, ///< Pod is a sequence container
-    associative_container = 2, ///< Pod is an associative container
-    smart_pointer = 3, ///< Pod is a smart pointer
-    entity = 4, ///< Pod is a domain entity
-    value = 5, ///< Pod is a domain value
-    service = 6 ///< Pod is a service
+namespace std {
+
+template<>
+class hash<dogen::sml::service_types> {
+public:
+    size_t operator()(const dogen::sml::service_types& v) const {
+        return std::hash<unsigned int>()(static_cast<unsigned int>(v));
+    }
 };
 
-} }
+}
 
 #endif

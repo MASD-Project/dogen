@@ -175,7 +175,7 @@ BOOST_AUTO_TEST_CASE(stereotyped_class_transforms_into_expected_profile) {
     SETUP_TEST_LOG_SOURCE("stereotyped_class_transforms_into_expected_profile");
 
     std::string s("enumeration");
-    auto o(mock_processed_object_factory::build_stereotyped_class(s));
+    auto o(mock_processed_object_factory::build_class(0, s));
     dogen::dia_to_sml::profiler p;
     auto op(p.profile(o));
 
@@ -185,7 +185,7 @@ BOOST_AUTO_TEST_CASE(stereotyped_class_transforms_into_expected_profile) {
     BOOST_CHECK(op.is_enumeration());
 
     s = "exception, entity";
-    o = mock_processed_object_factory::build_stereotyped_class(s);
+    o = mock_processed_object_factory::build_class(0, s);
     op = p.profile(o);
 
     BOOST_LOG_SEV(lg, debug) << "actual 2:" << op;
@@ -195,7 +195,7 @@ BOOST_AUTO_TEST_CASE(stereotyped_class_transforms_into_expected_profile) {
     BOOST_CHECK(op.is_entity());
 
     s = "entity, aggregate root";
-    o = mock_processed_object_factory::build_stereotyped_class(s);
+    o = mock_processed_object_factory::build_class(0, s);
     op = p.profile(o);
 
     BOOST_LOG_SEV(lg, debug) << "actual 2:" << op;
@@ -205,7 +205,7 @@ BOOST_AUTO_TEST_CASE(stereotyped_class_transforms_into_expected_profile) {
     BOOST_CHECK(op.is_entity());
 
     s = "nongeneratable, versioned, keyed, visitable, immutable, fluent";
-    o = mock_processed_object_factory::build_stereotyped_class(s);
+    o = mock_processed_object_factory::build_class(0, s);
     op = p.profile(o);
 
     BOOST_LOG_SEV(lg, debug) << "actual 3:" << op;
@@ -223,21 +223,21 @@ BOOST_AUTO_TEST_CASE(invalid_stereotypes_throw) {
     SETUP_TEST_LOG_SOURCE("invalid_stereotypes_throw");
 
     std::string s("enumerationz");
-    auto o(mock_processed_object_factory::build_stereotyped_class(s));
+    auto o(mock_processed_object_factory::build_class(0, s));
     dogen::dia_to_sml::profiler p;
     contains_checker<profiling_error> c(invalid_stereotype);
     BOOST_CHECK_EXCEPTION(p.profile(o), profiling_error, c);
 
     s = "enumeration,invalid";
-    o = mock_processed_object_factory::build_stereotyped_class(s);
+    o = mock_processed_object_factory::build_class(0, s);
     BOOST_CHECK_EXCEPTION(p.profile(o), profiling_error, c);
 
     s = "enumeration|service";
-    o = mock_processed_object_factory::build_stereotyped_class(s);
+    o = mock_processed_object_factory::build_class(0, s);
     BOOST_CHECK_EXCEPTION(p.profile(o), profiling_error, c);
 
     s = "enumeration service";
-    o = mock_processed_object_factory::build_stereotyped_class(s);
+    o = mock_processed_object_factory::build_class(0, s);
     BOOST_CHECK_EXCEPTION(p.profile(o), profiling_error, c);
 }
 

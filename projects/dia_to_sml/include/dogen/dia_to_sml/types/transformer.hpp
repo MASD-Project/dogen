@@ -27,19 +27,14 @@
 
 #include <string>
 #include <memory>
-#include "dogen/dia/types/composite.hpp"
-#include "dogen/dia/types/attribute.hpp"
 #include "dogen/dia/types/object.hpp"
-#include "dogen/sml/types/qname.hpp"
-#include "dogen/sml/types/package.hpp"
-#include "dogen/sml/types/pod.hpp"
+#include "dogen/sml/types/nested_qname.hpp"
 #include "dogen/sml/types/meta_types.hpp"
 #include "dogen/sml/types/enumerator.hpp"
 #include "dogen/dia_to_sml/types/processed_object.hpp"
 #include "dogen/dia_to_sml/types/processed_property.hpp"
 #include "dogen/dia_to_sml/types/identifier_parser.hpp"
 #include "dogen/dia_to_sml/types/comments_parser.hpp"
-#include "dogen/dia_to_sml/types/object_types.hpp"
 #include "dogen/dia_to_sml/types/context.hpp"
 #include "dogen/dia_to_sml/types/object_profile.hpp"
 
@@ -95,15 +90,20 @@ private:
 
     /**
      * @brief Converts a object containing a class into an pod.
-     *
-     * @param o the Dia UML class
      */
     void transform_pod(const object_profile& op, const processed_object& po);
 
     /**
+     * @brief Converts a object containing a class into a service.
+     *
+     * @param o the Dia UML class containing a service.
+     */
+    void transform_service(const processed_object& o);
+
+    /**
      * @brief Converts a object containing a class into an enumeration.
      *
-     * @param o the Dia UML class
+     * @param o the Dia UML class containing an enumeration.
      */
     void transform_enumeration(const processed_object& o);
 

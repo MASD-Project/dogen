@@ -41,6 +41,7 @@
 #include "dogen/sml/types/primitive.hpp"
 #include "dogen/sml/types/qname.hpp"
 #include "dogen/sml/types/reference.hpp"
+#include "dogen/sml/types/service.hpp"
 
 namespace dogen {
 namespace sml {
@@ -70,7 +71,8 @@ public:
         const std::unordered_map<std::string, dogen::sml::reference>& dependencies,
         const std::unordered_set<dogen::sml::qname>& leaves,
         const std::string& documentation,
-        const std::vector<std::pair<std::string, std::string> >& implementation_specific_parameters);
+        const std::vector<std::pair<std::string, std::string> >& implementation_specific_parameters,
+        const std::unordered_map<dogen::sml::qname, dogen::sml::service>& services);
 
 private:
     template<typename Archive>
@@ -210,6 +212,16 @@ public:
     void implementation_specific_parameters(const std::vector<std::pair<std::string, std::string> >&& v);
     /**@}*/
 
+    /**
+     * @brief Services contained in the model.
+     */
+    /**@{*/
+    const std::unordered_map<dogen::sml::qname, dogen::sml::service>& services() const;
+    std::unordered_map<dogen::sml::qname, dogen::sml::service>& services();
+    void services(const std::unordered_map<dogen::sml::qname, dogen::sml::service>& v);
+    void services(const std::unordered_map<dogen::sml::qname, dogen::sml::service>&& v);
+    /**@}*/
+
 public:
     bool operator==(const model& rhs) const;
     bool operator!=(const model& rhs) const {
@@ -233,6 +245,7 @@ private:
     std::unordered_set<dogen::sml::qname> leaves_;
     std::string documentation_;
     std::vector<std::pair<std::string, std::string> > implementation_specific_parameters_;
+    std::unordered_map<dogen::sml::qname, dogen::sml::service> services_;
 };
 
 } }

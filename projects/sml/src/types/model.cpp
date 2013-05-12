@@ -38,7 +38,8 @@ model::model(
     const std::unordered_map<std::string, dogen::sml::reference>& dependencies,
     const std::unordered_set<dogen::sml::qname>& leaves,
     const std::string& documentation,
-    const std::vector<std::pair<std::string, std::string> >& implementation_specific_parameters)
+    const std::vector<std::pair<std::string, std::string> >& implementation_specific_parameters,
+    const std::unordered_map<dogen::sml::qname, dogen::sml::service>& services)
     : name_(name),
       packages_(packages),
       pods_(pods),
@@ -50,7 +51,8 @@ model::model(
       dependencies_(dependencies),
       leaves_(leaves),
       documentation_(documentation),
-      implementation_specific_parameters_(implementation_specific_parameters) { }
+      implementation_specific_parameters_(implementation_specific_parameters),
+      services_(services) { }
 
 void model::swap(model& other) noexcept {
     using std::swap;
@@ -66,6 +68,7 @@ void model::swap(model& other) noexcept {
     swap(leaves_, other.leaves_);
     swap(documentation_, other.documentation_);
     swap(implementation_specific_parameters_, other.implementation_specific_parameters_);
+    swap(services_, other.services_);
 }
 
 bool model::operator==(const model& rhs) const {
@@ -80,7 +83,8 @@ bool model::operator==(const model& rhs) const {
         dependencies_ == rhs.dependencies_ &&
         leaves_ == rhs.leaves_ &&
         documentation_ == rhs.documentation_ &&
-        implementation_specific_parameters_ == rhs.implementation_specific_parameters_;
+        implementation_specific_parameters_ == rhs.implementation_specific_parameters_ &&
+        services_ == rhs.services_;
 }
 
 model& model::operator=(model other) {
@@ -271,6 +275,22 @@ void model::implementation_specific_parameters(const std::vector<std::pair<std::
 
 void model::implementation_specific_parameters(const std::vector<std::pair<std::string, std::string> >&& v) {
     implementation_specific_parameters_ = std::move(v);
+}
+
+const std::unordered_map<dogen::sml::qname, dogen::sml::service>& model::services() const {
+    return services_;
+}
+
+std::unordered_map<dogen::sml::qname, dogen::sml::service>& model::services() {
+    return services_;
+}
+
+void model::services(const std::unordered_map<dogen::sml::qname, dogen::sml::service>& v) {
+    services_ = v;
+}
+
+void model::services(const std::unordered_map<dogen::sml::qname, dogen::sml::service>&& v) {
+    services_ = std::move(v);
 }
 
 } }

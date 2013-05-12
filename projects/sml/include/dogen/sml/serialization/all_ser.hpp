@@ -34,4 +34,6 @@
 #include "dogen/sml/serialization/property_ser.hpp"
 #include "dogen/sml/serialization/qname_ser.hpp"
 #include "dogen/sml/serialization/reference_ser.hpp"
+#include "dogen/sml/serialization/service_ser.hpp"
+#include "dogen/sml/serialization/service_types_ser.hpp"
 #include "dogen/sml/serialization/string_table_ser.hpp"

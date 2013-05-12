@@ -45,6 +45,11 @@ public:
     static std::string to_oject_id(const unsigned int n);
 
     /**
+     * @brief Given a number, returns an object name
+     */
+    static std::string to_object_name(const unsigned int n);
+
+    /**
      * @brief Generates a UML message.
      *
      * @param n identifier used for object ID generation.
@@ -101,8 +106,10 @@ public:
      * @brief Generates a new UML class.
      *
      * @param n identifier used for object ID generation.
+     * @param st stereotype to apply to class.
      */
-    static processed_object build_class(const unsigned int n = 0);
+    static processed_object build_class(const unsigned int n = 0,
+        const std::string& st = std::string());
 
     /**
      * @brief Generates a new UML class with an empty name.
@@ -110,14 +117,6 @@ public:
      * @param n identifier used for object ID generation.
      */
     static processed_object build_empty_named_class(const unsigned int n = 0);
-
-    /**
-     * @brief Generates a new UML class with the given stereotype.
-     *
-     * @param n identifier used for object ID generation.
-     */
-    static processed_object build_stereotyped_class(
-        const std::string& st, const unsigned int n = 0);
 
     /**
      * @brief Generates a new UML large package.
@@ -131,54 +130,66 @@ public:
      * large package itself.
      *
      * @param n identifier used for object ID generation.
+     * @param st stereotype to apply to class.
      */
     static std::array<processed_object, 3>
-    build_class_inside_two_large_packages(unsigned int n = 0);
+    build_class_inside_two_large_packages(unsigned int n = 0,
+        const std::string& st = std::string());
 
     /**
      * @brief Generates a UML class inside a large package, itself
      * inside a large package.
      *
      * @param n identifier used for object ID generation.
+     * @param st stereotype to apply to class.
      */
     static std::array<processed_object, 2>
-    build_class_inside_large_package(unsigned int n = 0);
+    build_class_inside_large_package(unsigned int n = 0,
+        const std::string& st = std::string());
 
     /**
      * @brief Generates two UML classes and a realisation between
      * the two.
      *
      * @param n identifier used for object ID generation.
+     * @param st stereotype to apply to class.
      */
     static std::array<processed_object, 3>
-    build_realization(unsigned int n = 0);
+    build_realization(unsigned int n = 0,
+        const std::string& st = std::string());
 
     /**
      * @brief Generates two UML classes and a generalisation between
      * the two.
      *
      * @param n identifier used for object ID generation.
+     * @param st stereotype to apply to class.
      */
     static std::array<processed_object, 3>
-    build_generalization(unsigned int n = 0);
+    build_generalization(unsigned int n = 0,
+        const std::string& st = std::string());
 
     /**
      * @brief Generates two UML classes and a generalisation between
      * the two, and places all objects inside a package.
      *
      * @param n identifier used for object ID generation.
+     * @param st stereotype to apply to class.
      */
     static std::array<processed_object, 4>
-    build_generalization_inside_large_package(unsigned int n = 0);
+    build_generalization_inside_large_package(unsigned int n = 0,
+        const std::string& st = std::string());
 
     /**
      * @brief Generates two UML classes and an association between
      * the two.
      *
      * @param n identifier used for object ID generation.
+     * @param st stereotype to apply to class.
      */
     static std::array<processed_object, 3>
-    build_association(unsigned int n = 0);
+    build_association(unsigned int n = 0,
+        const std::string& st = std::string());
 
     /**
      * @brief Generates objects directly connected in a cycle.

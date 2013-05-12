@@ -18,32 +18,20 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_SML_TYPES_POD_TYPES_HPP
-#define DOGEN_SML_TYPES_POD_TYPES_HPP
+#ifndef DOGEN_SML_SERIALIZATION_SERVICE_TYPES_SER_HPP
+#define DOGEN_SML_SERIALIZATION_SERVICE_TYPES_SER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-namespace dogen {
-namespace sml {
+#include <boost/serialization/nvp.hpp>
+#include "dogen/sml/types/service_types.hpp"
 
-/**
- * @brief Types of pods.
- *
- * We need to classify pods with regards to distinguishing properties
- * which make code generation different.
- */
-enum class pod_types : unsigned int {
-    invalid = 0, ///< Represents an uninitialised enum
-    sequence_container = 1, ///< Pod is a sequence container
-    associative_container = 2, ///< Pod is an associative container
-    smart_pointer = 3, ///< Pod is a smart pointer
-    entity = 4, ///< Pod is a domain entity
-    value = 5, ///< Pod is a domain value
-    service = 6 ///< Pod is a service
-};
-
-} }
+template<class Archive>
+void serialize(Archive& ar, dogen::sml::service_types& v, unsigned int /*version*/){
+    using boost::serialization::make_nvp;
+    ar & make_nvp("service_types", v);
+}
 
 #endif

@@ -27,6 +27,7 @@
 #include "dogen/sml/test_data/primitive_td.hpp"
 #include "dogen/sml/test_data/qname_td.hpp"
 #include "dogen/sml/test_data/reference_td.hpp"
+#include "dogen/sml/test_data/service_td.hpp"
 
 namespace {
 
@@ -155,6 +156,19 @@ std::vector<std::pair<std::string, std::string> > create_std_vector_std_pair_std
     return r;
 }
 
+dogen::sml::service
+create_dogen_sml_service(const unsigned int position) {
+    return dogen::sml::service_generator::create(position);
+}
+
+std::unordered_map<dogen::sml::qname, dogen::sml::service> create_std_unordered_map_dogen_sml_qname_dogen_sml_service(unsigned int position) {
+    std::unordered_map<dogen::sml::qname, dogen::sml::service> r;
+    for (unsigned int i(0); i < 10; ++i) {
+        r.insert(std::make_pair(create_dogen_sml_qname(position + i), create_dogen_sml_service(position + i)));
+    }
+    return r;
+}
+
 }
 
 namespace dogen {
@@ -176,6 +190,7 @@ populate(const unsigned int position, result_type& v) {
     v.leaves(create_std_unordered_set_dogen_sml_qname(position + 9));
     v.documentation(create_std_string(position + 10));
     v.implementation_specific_parameters(create_std_vector_std_pair_std_string_std_string_(position + 11));
+    v.services(create_std_unordered_map_dogen_sml_qname_dogen_sml_service(position + 12));
 }
 
 model_generator::result_type

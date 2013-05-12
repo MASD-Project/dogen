@@ -41,6 +41,7 @@
 #include "dogen/sml/types/meta_types.hpp"
 #include "dogen/sml/types/package.hpp"
 #include "dogen/sml/types/pod.hpp"
+#include "dogen/sml/types/service.hpp"
 #include "dogen/sml/types/model.hpp"
 #include "dogen/sml/types/nested_qname.hpp"
 #include "dogen/cpp/types/view_models/file_view_model.hpp"
@@ -132,6 +133,12 @@ private:
         file_types flt, aspect_types at, const sml::pod& p);
 
     /**
+     * @brief Transforms a SML service into a C++ file view.
+     */
+    file_view_model transform_file(config::cpp_facet_types ft,
+        file_types flt, aspect_types at, const sml::service& p);
+
+    /**
      * @brief Transforms a SML enumeration into a C++ file view.
      */
     file_view_model
@@ -190,6 +197,11 @@ private:
      * @brief Transforms pods into file view models.
      */
     std::vector<file_view_model> transform_pods();
+
+    /**
+     * @brief Transforms services into file view models.
+     */
+    std::vector<file_view_model> transform_services();
 
     /**
      * @brief Transforms enumerations into view models.

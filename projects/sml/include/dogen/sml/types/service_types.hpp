@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_SML_TYPES_POD_TYPES_HPP
-#define DOGEN_SML_TYPES_POD_TYPES_HPP
+#ifndef DOGEN_SML_TYPES_SERVICE_TYPES_HPP
+#define DOGEN_SML_TYPES_SERVICE_TYPES_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -29,19 +29,13 @@ namespace dogen {
 namespace sml {
 
 /**
- * @brief Types of pods.
- *
- * We need to classify pods with regards to distinguishing properties
- * which make code generation different.
+ * @brief Type of the service.
  */
-enum class pod_types : unsigned int {
+enum class service_types : unsigned int {
     invalid = 0, ///< Represents an uninitialised enum
-    sequence_container = 1, ///< Pod is a sequence container
-    associative_container = 2, ///< Pod is an associative container
-    smart_pointer = 3, ///< Pod is a smart pointer
-    entity = 4, ///< Pod is a domain entity
-    value = 5, ///< Pod is a domain value
-    service = 6 ///< Pod is a service
+    user_defined = 1, ///< The service has been defined by the user.
+    visitor = 2, ///< The service is a system generated visitor.
+    key_extractor = 3 ///< The service is a system defined key extractor.
 };
 
 } }

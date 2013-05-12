@@ -29,6 +29,7 @@
 #include "dogen/sml/io/primitive_io.hpp"
 #include "dogen/sml/io/qname_io.hpp"
 #include "dogen/sml/io/reference_io.hpp"
+#include "dogen/sml/io/service_io.hpp"
 
 
 inline std::string tidy_up_string(std::string s) {
@@ -201,6 +202,24 @@ inline std::ostream& operator<<(std::ostream& s, const std::vector<std::pair<std
 
 }
 
+namespace std {
+
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen::sml::qname, dogen::sml::service>& v) {
+    s << "[";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
+        s << i->first;
+        s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
+        s << i->second;
+        s << " } ]";
+    }
+    s << " ] ";
+    return s;
+}
+
+}
+
 namespace dogen {
 namespace sml {
 
@@ -224,7 +243,8 @@ std::ostream& operator<<(std::ostream& s, const model& v) {
       << "\"dependencies\": " << v.dependencies() << ", "
       << "\"leaves\": " << v.leaves() << ", "
       << "\"documentation\": " << "\"" << tidy_up_string(v.documentation()) << "\"" << ", "
-      << "\"implementation_specific_parameters\": " << v.implementation_specific_parameters()
+      << "\"implementation_specific_parameters\": " << v.implementation_specific_parameters() << ", "
+      << "\"services\": " << v.services()
       << " }";
     return(s);
 }

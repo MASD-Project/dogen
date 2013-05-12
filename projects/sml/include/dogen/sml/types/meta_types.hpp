@@ -38,7 +38,8 @@ enum class meta_types : unsigned int {
     package = 3, ///< Type is a package
     primitive = 4, ///< Type is a primitive
     exception = 5, ///< Type is an exception
-    string_table = 6 ///< Type is a string table.
+    string_table = 6, ///< Type is a string table.
+    service = 7
 };
 
 } }

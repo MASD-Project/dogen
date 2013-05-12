@@ -633,6 +633,38 @@ transform_file(config::cpp_facet_types ft, file_types flt,
 
 file_view_model sml_to_cpp_view_model::
 transform_file(config::cpp_facet_types ft, file_types flt,
+    aspect_types at, const sml::service& s) {
+    const sml::qname name(s.name());
+    const std::list<std::string> ns(join_namespaces(name));
+
+    file_view_model r(create_file(ft, flt, at, name));
+    r.category_type(sml::category_types::user_defined);
+    r.meta_type(s.name().meta_type());
+
+    if (at != aspect_types::forward_decls &&
+        s.generation_type() == sml::generation_types::partial_generation)
+        r.aspect_type(aspect_types::null_aspect);
+
+    const auto i(qname_to_class_.find(name));
+    if (i == qname_to_class_.end()) {
+        BOOST_LOG_SEV(lg, error) << view_model_not_found
+                                 << name.type_name();
+
+        BOOST_LOG_SEV(lg, error) << view_model_not_found << name.type_name();
+        BOOST_THROW_EXCEPTION(transformation_error(view_model_not_found +
+                name.type_name()));
+    }
+    r.class_vm(i->second);
+
+    // FIXME
+    // const auto includes(includer_.includes_for_pod(s, ft, flt, at));
+    // r.system_includes(includes.system);
+    // r.user_includes(includes.user);
+    return r;
+}
+
+file_view_model sml_to_cpp_view_model::
+transform_file(config::cpp_facet_types ft, file_types flt,
     aspect_types at, const sml::enumeration& e) {
     const sml::qname name(e.name());
     const std::list<std::string> ns(join_namespaces(name));
@@ -807,6 +839,16 @@ void sml_to_cpp_view_model::create_exception_view_models() {
 
 std::set<config::cpp_facet_types> sml_to_cpp_view_model::
 enabled_facet_types(const sml::meta_types mt, const sml::pod_types pt) const {
+    // FIXME: services hack
+    // using config::cpp_facet_types;
+    // using sml::meta_types;
+    // if (mt == meta_types::pod) {
+    //     if (pt == sml::pod_types::value || pt == sml::pod_types::entity)
+    //         return settings_.enabled_facets();
+    // } else if (mt == meta_types::enumeration || mt == meta_types::primitive)
+    //     return settings_.enabled_facets();
+    // else if (mt == meta_types::exception || mt == meta_types::service)
+    //     return std::set<cpp_facet_types> { cpp_facet_types::types };
     using config::cpp_facet_types;
     if (mt == sml::meta_types::pod) {
         if (pt == sml::pod_types::value || pt == sml::pod_types::entity)
@@ -823,6 +865,7 @@ enabled_facet_types(const sml::meta_types mt, const sml::pod_types pt) const {
     BOOST_LOG_SEV(lg, error) << invalid_enabled_facets
                              << boost::lexical_cast<std::string>(mt)
                              << boost::lexical_cast<std::string>(pt);
+
     BOOST_THROW_EXCEPTION(transformation_error(invalid_enabled_facets +
             boost::lexical_cast<std::string>(mt) + ", " +
             boost::lexical_cast<std::string>(pt)));
@@ -870,6 +913,51 @@ std::vector<file_view_model> sml_to_cpp_view_model::transform_pods() {
     }
 
     BOOST_LOG_SEV(lg, debug) << "Transformed pods: " << pods.size();
+    return r;
+}
+
+std::vector<file_view_model> sml_to_cpp_view_model::transform_services() {
+    std::vector<file_view_model> r;
+    using config::cpp_facet_types;
+    auto lambda([&](cpp_facet_types ft, file_types flt, aspect_types at,
+            const sml::service& s) {
+            const std::string n(s.name().type_name());
+            log_generating_file(ft, at, flt, n, s.name().meta_type());
+            r.push_back(transform_file(ft, flt, at, s));
+        });
+
+    for (const auto& pair : model_.services()) {
+        const auto& s(pair.second);
+
+        if (s.generation_type() == sml::generation_types::no_generation)
+            continue;
+
+        try {
+            const auto header(file_types::header);
+            const auto implementation(file_types::implementation);
+            const auto main(aspect_types::main);
+            const auto forward_decls(aspect_types::forward_decls);
+            const auto pod_mt(sml::meta_types::pod);
+            const auto facets(enabled_facet_types(pod_mt));
+
+            for (const auto ft: facets) {
+                lambda(ft, header, main, s);
+
+                if (has_implementation(ft, pod_mt))
+                    lambda(ft, implementation, main, s);
+
+                if (has_forward_decls(ft, pod_mt))
+                    lambda(ft, header, forward_decls, s);
+            }
+        } catch (boost::exception& e) {
+            e << errmsg_sml_to_cpp_view_model(failed_to_process_type +
+                boost::lexical_cast<std::string>(s.name()));
+            throw;
+        }
+    }
+
+    BOOST_LOG_SEV(lg, debug) << "Transformed services: "
+                             << model_.services().size();
     return r;
 }
 
@@ -1177,6 +1265,7 @@ std::vector<file_view_model> sml_to_cpp_view_model::transform() {
     auto reg(transform_registrar());
     auto pkg(transform_packages());
     auto vis(transform_visitors());
+    // auto ser(transform_services()); // FIXME: services hack
 
     r.reserve(p.size() + e.size() + ex.size() + reg.size() + pkg.size());
     r.insert(r.end(), p.begin(), p.end());
@@ -1185,6 +1274,7 @@ std::vector<file_view_model> sml_to_cpp_view_model::transform() {
     r.insert(r.end(), reg.begin(), reg.end());
     r.insert(r.end(), pkg.begin(), pkg.end());
     r.insert(r.end(), vis.begin(), vis.end());
+    // r.insert(r.end(), ser.begin(), ser.end()); // FIXME: services hack
 
     log_includers();
     if (settings_.disable_facet_includers())

@@ -10,13 +10,13 @@ This file contains all stories that were closed during sprint 26.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-05-12 Sun 01:04]
+Clock summary at [2013-05-12 Sun 19:31]
 
 | Headline                                                                     | Time    |       |      |
 |------------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                                 | *15:47* |       |      |
+| *Total time*                                                                 | *19:34* |       |      |
 |------------------------------------------------------------------------------+---------+-------+------|
-| Development Stories Implemented                                              |         | 15:47 |      |
+| Development Stories Implemented                                              |         | 19:34 |      |
 | COMPLETED Fix build break on visitor tests                                   |         |       | 0:32 |
 | COMPLETED Remove workflow aspects from transformer                           |         |       | 2:23 |
 | COMPLETED Add tests for profiler                                             |         |       | 1:56 |
@@ -26,6 +26,8 @@ Clock summary at [2013-05-12 Sun 01:04]
 | COMPLETED Sort issues with SATA port in lorenz                               |         |       | 1:50 |
 | COMPLETED Add tests for aggregate root stereotype                            |         |       | 0:23 |
 | COMPLETED Refactor SML diagram                                               |         |       | 1:04 |
+| COMPLETED Add code generation links to =README=                              |         |       | 0:25 |
+| IMPLEMENTATION Move services into their own type                             |         |       | 3:22 |
 | IMPLEMENTATION Use explicit casting for versioned to unversioned conversions |         |       | 1:49 |
 | IMPLEMENTATION Add =extract_key= function                                    |         |       | 0:22 |
 #+end:
@@ -168,6 +170,29 @@ finished hooking up things properly. Add a test for it and fix any problems.
     CLOCK: [2013-05-11 Sat 23:30]--[2013-05-12 Sun 00:09] =>  0:39
 
 SML has gotten really messy and very hard to understand. Do a general tidy-up.
+
+*** COMPLETED Add code generation links to =README=                   :spike:
+    CLOSED: [2013-05-12 Sun 19:14]
+    CLOCK: [2013-05-12 Sun 18:30]--[2013-05-12 Sun 18:55] =>  0:25
+
+Since we are already looking into C++ meta models, might as well
+update the main readme with the links we find.
+
+*** IMPLEMENTATION Move services into their own type                  :story:
+    CLOCK: [2013-05-12 Sun 19:15]--[2013-05-12 Sun 19:30] =>  0:15
+    CLOCK: [2013-05-12 Sun 18:55]--[2013-05-12 Sun 19:15] =>  0:20
+    CLOCK: [2013-05-12 Sun 01:07]--[2013-05-12 Sun 03:54] =>  2:47
+
+At present we have piggy-backed on pods to define services. This was
+fine as long as services remained pretty basic, but now there is a
+need to start generating system services; this would mean adding
+attributes to pods that would have different semantics depending on
+the =pod_type=. Instead, clean things up by adding a new top-level
+class for services.
+
+**** COMPLETED Add new type to SML to represent services
+     CLOSED: [2013-05-12 Sun 19:30]
+**** IMPLEMENTATION Move all of the existing pod code to use new type
 
 *** IMPLEMENTATION Use explicit casting for versioned to unversioned conversions :story:
     CLOCK: [2013-05-11 Sat 23:06]--[2013-05-11 Sat 23:30] =>  0:24

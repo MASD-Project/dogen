@@ -39,6 +39,7 @@
 #include "dogen/sml/serialization/primitive_ser.hpp"
 #include "dogen/sml/serialization/qname_ser.hpp"
 #include "dogen/sml/serialization/reference_ser.hpp"
+#include "dogen/sml/serialization/service_ser.hpp"
 #include "dogen/utility/serialization/unordered_map.hpp"
 #include "dogen/utility/serialization/unordered_set.hpp"
 
@@ -66,6 +67,7 @@ void save(Archive& ar,
     ar << make_nvp("leaves", v.leaves_);
     ar << make_nvp("documentation", v.documentation_);
     ar << make_nvp("implementation_specific_parameters", v.implementation_specific_parameters_);
+    ar << make_nvp("services", v.services_);
 }
 
 template<typename Archive>
@@ -84,6 +86,7 @@ void load(Archive& ar,
     ar >> make_nvp("leaves", v.leaves_);
     ar >> make_nvp("documentation", v.documentation_);
     ar >> make_nvp("implementation_specific_parameters", v.implementation_specific_parameters_);
+    ar >> make_nvp("services", v.services_);
 }
 
 } }

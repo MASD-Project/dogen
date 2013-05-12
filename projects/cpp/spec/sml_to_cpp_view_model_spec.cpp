@@ -234,21 +234,6 @@ BOOST_AUTO_TEST_CASE(disabling_facet_includers_results_in_no_facet_includers) {
     }
 }
 
-BOOST_AUTO_TEST_CASE(disabling_keys_results_in_no_keys) {
-    SETUP_TEST_LOG("disabling_facet_includers_results_in_no_facet_includers");
-    using dogen::utility::test_data::dia_sml;
-    auto input_path(dia_sml::expected_class_in_a_package_sml_xml());
-    const bool disable_facet_includers(false);
-    const auto actual(execute_transformer(input_path, disable_facet_includers));
-
-    BOOST_CHECK(actual.size() == 4);
-    using dogen::sml::category_types;
-    for (const auto f : actual) {
-        BOOST_CHECK(f.category_type() != category_types::versioned_key);
-        BOOST_CHECK(f.category_type() != category_types::unversioned_key);
-    }
-}
-
 BOOST_AUTO_TEST_CASE(is_parent_flag_is_correctly_set_on_view_models) {
     SETUP_TEST_LOG_SOURCE("is_parent_flag_is_correctly_set_on_view_models");
     const auto m(pod_with_parent_model());

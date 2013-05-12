@@ -26,6 +26,7 @@
 #include "dogen/sml/hash/primitive_hash.hpp"
 #include "dogen/sml/hash/qname_hash.hpp"
 #include "dogen/sml/hash/reference_hash.hpp"
+#include "dogen/sml/hash/service_hash.hpp"
 
 namespace {
 
@@ -122,6 +123,15 @@ inline std::size_t hash_std_vector_std_pair_std_string_std_string_(const std::ve
     return seed;
 }
 
+inline std::size_t hash_std_unordered_map_dogen_sml_qname_dogen_sml_service(const std::unordered_map<dogen::sml::qname, dogen::sml::service>& v){
+    std::size_t seed(0);
+    for (const auto i : v) {
+        combine(seed, i.first);
+        combine(seed, i.second);
+    }
+    return seed;
+}
+
 }
 
 namespace dogen {
@@ -142,6 +152,7 @@ std::size_t model_hasher::hash(const model&v) {
     combine(seed, hash_std_unordered_set_dogen_sml_qname(v.leaves()));
     combine(seed, v.documentation());
     combine(seed, hash_std_vector_std_pair_std_string_std_string_(v.implementation_specific_parameters()));
+    combine(seed, hash_std_unordered_map_dogen_sml_qname_dogen_sml_service(v.services()));
 
     return seed;
 }

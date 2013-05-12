@@ -18,32 +18,35 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_SML_TYPES_POD_TYPES_HPP
-#define DOGEN_SML_TYPES_POD_TYPES_HPP
-
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
+#include <ostream>
+#include <stdexcept>
+#include "dogen/sml/io/service_types_io.hpp"
 
 namespace dogen {
 namespace sml {
 
-/**
- * @brief Types of pods.
- *
- * We need to classify pods with regards to distinguishing properties
- * which make code generation different.
- */
-enum class pod_types : unsigned int {
-    invalid = 0, ///< Represents an uninitialised enum
-    sequence_container = 1, ///< Pod is a sequence container
-    associative_container = 2, ///< Pod is an associative container
-    smart_pointer = 3, ///< Pod is a smart pointer
-    entity = 4, ///< Pod is a domain entity
-    value = 5, ///< Pod is a domain value
-    service = 6 ///< Pod is a service
-};
+std::ostream& operator<<(std::ostream& s, const service_types& v) {
+    s << "{ " << "\"__type__\": " << "\"service_types\", " << "\"value\": ";
+
+    std::string attr;
+    switch (v) {
+    case service_types::invalid:
+        attr = "\"invalid\"";
+        break;
+    case service_types::user_defined:
+        attr = "\"user_defined\"";
+        break;
+    case service_types::visitor:
+        attr = "\"visitor\"";
+        break;
+    case service_types::key_extractor:
+        attr = "\"key_extractor\"";
+        break;
+    default:
+        throw std::invalid_argument("Invalid value for service_types");
+    }
+    s << attr << " }";
+    return s;
+}
 
 } }
-
-#endif
