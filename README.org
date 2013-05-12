@@ -28,3 +28,26 @@ fitted our requirements - open source or otherwise.
 Note that Dogen is specifically tailored for our needs and as such it
 is not a general purpose domain generator. We are, however, wiling to
 accept any patches for functionality not directly required by us.
+
+** Links of interest around code generation
+
+Here we collect links to other C++ code generators, as well as
+interesting projects in this space on other languages, books and
+papers we have read (or intend to read) on the subject, etc.
+
+- [[http://www.amazon.co.uk/Domain-Driven-Design-Tackling-Complexity-ebook/dp/B00794TAUG/ref%3Dsr_1_2?ie%3DUTF8&qid%3D1368380797&sr%3D8-2&keywords%3Dmodel%2Bdriven%2Bdesign][Domain-Driven Design: Tackling Complexity in the Heart of Software]]:
+  The Eric Evans book from which we tried to steal most concepts in
+  Dogen. A must read for any developer.
+- [[http://www.amazon.co.uk/EMF-Eclipse-Modeling-Framework-ebook/dp/B0013TPYVW/ref%3Dsr_1_2?s%3Dbooks&ie%3DUTF8&qid%3D1368380262&sr%3D1-2&keywords%3DEclipse%2BModeling%2BFramework%2B%255BPaperback%255D][EMF: Eclipse Modeling Framework]]: The original EMF book. Useful read
+  for anyone interested in code generation.
+- [[http://www.scribd.com/doc/78264699/Model-Driven-Architecture-for-Reverse-Engineering-Technologies-Strategic-Directions-and-System-Evolution-Premier-Reference-Source][Model Driven Architecture for Reverse Engineering Technologies]]:
+  Preview of a potentially interesting MDA book.
+- [[http://www2.informatik.hu-berlin.de/~piefel/Documents/06CITSA-CMMCG.pdf][A Common Metamodel for Code Generation]]: This paper will be of
+  interest if we decide to support multiple languages.
+- [[http://www.vollmann.com/pubs/meta/meta/meta.html][Metaclasses and Reflection in C++]]: Some (early) ideas on
+  implementing a MOP (Meta Object Protocol) in C++.
+- [[https://code.google.com/a/eclipselabs.org/p/cppgenmodel/][cppgenmodel - A model driven C++ code generator]]: This seems more
+  like a run time / reflection based generator.
+- [[https://code.google.com/p/emf4cpp/][EMF4CPP - Eclipse Modeling Framework]]: C++ port of the EMF/eCore
+  eclipse framework. As with Java it includes run time support. There
+  is also [[http://apps.nabbel.es/dsdm2010/download_files/dsdm2010_senac.pdf][a paper]] on it.
