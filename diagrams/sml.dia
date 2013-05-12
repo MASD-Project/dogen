@@ -68,7 +68,7 @@
         <dia:point val="-12,60"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-12.05,59.95;20.89,71.65"/>
+        <dia:rectangle val="-12.05,59.95;20.89,72.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-12,60"/>
@@ -77,13 +77,13 @@
         <dia:real val="32.839999999999996"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="11.600000000000001"/>
+        <dia:real val="12.4"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#model#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>##</dia:string>
+        <dia:string>#entity, aggregate root#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#Represents a domain model.#</dia:string>
@@ -181,7 +181,9 @@
             <dia:string>#Name of the domain model.
 
 Must not contain spaces or any special character as its used to
-name folders in the file-system.#</dia:string>
+name folders in the file-system.
+
+#DOGEN IDENTITY_ATTRIBUTE=true#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -694,7 +696,7 @@ This is only needed because we don't have a type base class.#</dia:string>
         <dia:point val="-25,84"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-25.05,83.95;7.89,88.45"/>
+        <dia:rectangle val="-25.05,83.95;7.89,89.25"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-25,84"/>
@@ -703,13 +705,13 @@ This is only needed because we don't have a type base class.#</dia:string>
         <dia:real val="32.839999999999996"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="4.4000000000000004"/>
+        <dia:real val="5.2000000000000011"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#package#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>##</dia:string>
+        <dia:string>#entity#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#Groups types, and provides a namespace for the grouped types.#</dia:string>
@@ -804,7 +806,9 @@ This is only needed because we don't have a type base class.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>#Qualified name for the package.#</dia:string>
+            <dia:string>#Qualified name for the package.
+
+#DOGEN IDENTITY_ATTRIBUTE=true#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -874,7 +878,7 @@ This is only needed because we don't have a type base class.#</dia:string>
         <dia:point val="28,94"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="27.95,93.95;42.795,99.25"/>
+        <dia:rectangle val="27.95,93.95;42.795,100.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="28,94"/>
@@ -883,13 +887,13 @@ This is only needed because we don't have a type base class.#</dia:string>
         <dia:real val="14.744999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="5.2000000000000011"/>
+        <dia:real val="6.0000000000000009"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#enumeration#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>##</dia:string>
+        <dia:string>#entity, aggregate root#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#An enumeration type provides an efficient way to define
@@ -985,7 +989,9 @@ a set of named integral constants that may be assigned to a variable.#</dia:stri
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>#Qualified name for the type.#</dia:string>
+            <dia:string>#Qualified name for the type.
+
+#DOGEN IDENTITY_ATTRIBUTE=true#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -1262,7 +1268,7 @@ It must be castable to instance of the type defined in the enumeration.#</dia:st
         <dia:point val="-38,29"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-38.05,28.95;-5.11,47.85"/>
+        <dia:rectangle val="-38.05,28.95;-5.11,48.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-38,29"/>
@@ -1271,16 +1277,21 @@ It must be castable to instance of the type defined in the enumeration.#</dia:st
         <dia:real val="32.839999999999996"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="18.800000000000004"/>
+        <dia:real val="19.600000000000005"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#pod#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>##</dia:string>
+        <dia:string>#entity, aggregate root#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##</dia:string>
+        <dia:string>#Represents a plain C++ object with basic associated behaviours.
+
+The name pod is misleading because its actually not used in the strict sense of POD as defined here:
+
+ &lt;a href="http://en.wikipedia.org/wiki/Plain_old_data_structure"&gt;Plain old data structure&lt;/a&gt;. 
+#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -1372,7 +1383,9 @@ It must be castable to instance of the type defined in the enumeration.#</dia:st
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>#Qualified name for the type.#</dia:string>
+            <dia:string>#Qualified name for the type.
+
+#DOGEN IDENTITY_ATTRIBUTE=true#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -2145,16 +2158,16 @@ Must only contain characters that can be used for identifiers in the target back
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="-38,47.8"/>
+        <dia:point val="-38,48.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-47.21,47.05;-37.25,60.8"/>
+        <dia:rectangle val="-47.21,47.85;-37.25,60.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="-38,47.8"/>
+        <dia:point val="-38,48.6"/>
         <dia:point val="-38,54"/>
         <dia:point val="-47.16,54"/>
         <dia:point val="-47.16,60"/>
@@ -2216,16 +2229,16 @@ Must only contain characters that can be used for identifiers in the target back
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="35.3725,99.2"/>
+        <dia:point val="35.3725,100"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="34.6225,98.45;42.6475,110.8"/>
+        <dia:rectangle val="34.6225,99.25;42.6475,110.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="35.3725,99.2"/>
+        <dia:point val="35.3725,100"/>
         <dia:point val="35.3725,105.056"/>
         <dia:point val="42.4475,105.056"/>
         <dia:point val="42.4475,110"/>
@@ -2287,16 +2300,16 @@ Must only contain characters that can be used for identifiers in the target back
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="-5.16,47.8"/>
+        <dia:point val="-5.16,48.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-12.75,47.75;-4.96,60.8"/>
+        <dia:rectangle val="-12.75,48.55;-4.96,60.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="-5.16,47.8"/>
+        <dia:point val="-5.16,48.6"/>
         <dia:point val="-5.16,54"/>
         <dia:point val="-12,54"/>
         <dia:point val="-12,60"/>
@@ -2361,7 +2374,7 @@ Must only contain characters that can be used for identifiers in the target back
         <dia:point val="35.3725,94"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="3.67,70.85;35.5725,94.8"/>
+        <dia:rectangle val="3.67,71.65;35.5725,94.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -2370,7 +2383,7 @@ Must only contain characters that can be used for identifiers in the target back
         <dia:point val="35.3725,94"/>
         <dia:point val="35.3725,79"/>
         <dia:point val="4.42,79"/>
-        <dia:point val="4.42,71.6"/>
+        <dia:point val="4.42,72.4"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -2393,19 +2406,19 @@ Must only contain characters that can be used for identifiers in the target back
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O11">
       <dia:attribute name="obj_pos">
-        <dia:point val="-74,10"/>
+        <dia:point val="-75,10"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-74.05,9.95;-67.675,16.85"/>
+        <dia:rectangle val="-75.05,9.95;-68.675,17.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-74,10"/>
+        <dia:point val="-75,10"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="6.2750000000000004"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="6.8000000000000007"/>
+        <dia:real val="7.6000000000000005"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#meta_types#</dia:string>
@@ -2414,7 +2427,7 @@ Must only contain characters that can be used for identifiers in the target back
         <dia:string>#enumeration#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##</dia:string>
+        <dia:string>#Type of type.#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -2529,7 +2542,7 @@ Must only contain characters that can be used for identifiers in the target back
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>#Type is Plain Old Data#</dia:string>
+            <dia:string>#Type is a pod#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -2610,6 +2623,29 @@ Must only contain characters that can be used for identifiers in the target back
             <dia:boolean val="false"/>
           </dia:attribute>
         </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#string_table#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>#Type is a string table.#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
       </dia:attribute>
       <dia:attribute name="operations"/>
       <dia:attribute name="template">
@@ -2658,7 +2694,7 @@ Must only contain characters that can be used for identifiers in the target back
         <dia:point val="-65,28"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-70.9125,16.75;-64.25,28.8"/>
+        <dia:rectangle val="-71.9125,17.55;-64.25,28.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -2666,8 +2702,8 @@ Must only contain characters that can be used for identifiers in the target back
       <dia:attribute name="orth_points">
         <dia:point val="-65,28"/>
         <dia:point val="-65,23"/>
-        <dia:point val="-70.8625,23"/>
-        <dia:point val="-70.8625,16.8"/>
+        <dia:point val="-71.8625,23"/>
+        <dia:point val="-71.8625,17.6"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -2693,7 +2729,7 @@ Must only contain characters that can be used for identifiers in the target back
         <dia:point val="5,94"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="4.95,93.95;18.64,98.45"/>
+        <dia:rectangle val="4.95,93.95;18.64,99.25"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="5,94"/>
@@ -2702,13 +2738,13 @@ Must only contain characters that can be used for identifiers in the target back
         <dia:real val="13.59"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="4.4000000000000004"/>
+        <dia:real val="5.2000000000000011"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#primitive#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>##</dia:string>
+        <dia:string>#entity#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#Represents a type that is built-in to the language.#</dia:string>
@@ -2803,7 +2839,9 @@ Must only contain characters that can be used for identifiers in the target back
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>#Qualified name for the type.#</dia:string>
+            <dia:string>#Qualified name for the type.
+
+#DOGEN IDENTITY_ATTRIBUTE=true#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -2909,7 +2947,7 @@ Must only contain characters that can be used for identifiers in the target back
         <dia:point val="11.795,94"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="3.67,70.85;11.995,94.8"/>
+        <dia:rectangle val="3.67,71.65;11.995,94.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -2918,7 +2956,7 @@ Must only contain characters that can be used for identifiers in the target back
         <dia:point val="11.795,94"/>
         <dia:point val="11.795,79"/>
         <dia:point val="4.42,79"/>
-        <dia:point val="4.42,71.6"/>
+        <dia:point val="4.42,72.4"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -2980,7 +3018,7 @@ Must only contain characters that can be used for identifiers in the target back
         <dia:point val="-8.58,84"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-8.63,70.85;5.17,84.8"/>
+        <dia:rectangle val="-8.63,71.65;5.17,84.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -2989,7 +3027,7 @@ Must only contain characters that can be used for identifiers in the target back
         <dia:point val="-8.58,84"/>
         <dia:point val="-8.58,79"/>
         <dia:point val="4.42,79"/>
-        <dia:point val="4.42,71.6"/>
+        <dia:point val="4.42,72.4"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -3200,7 +3238,7 @@ categories for them.#</dia:string>
         <dia:point val="15,84"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="14.95,83.95;28.64,88.45"/>
+        <dia:rectangle val="14.95,83.95;28.64,89.25"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="15,84"/>
@@ -3209,13 +3247,13 @@ categories for them.#</dia:string>
         <dia:real val="13.59"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="4.4000000000000004"/>
+        <dia:real val="5.2000000000000011"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#exception#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>##</dia:string>
+        <dia:string>#entity#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#Represents errors that occur during application execution.#</dia:string>
@@ -3310,7 +3348,9 @@ categories for them.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>#Qualified name for the type.#</dia:string>
+            <dia:string>#Qualified name for the type.
+
+#DOGEN IDENTITY_ATTRIBUTE=true#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -3413,16 +3453,16 @@ categories for them.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="4.42,71.6499"/>
+        <dia:point val="4.42,72.4504"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="3.67,70.8999;21.995,84.8"/>
+        <dia:rectangle val="3.67,71.7004;21.995,84.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="4.42,71.6499"/>
+        <dia:point val="4.42,72.4504"/>
         <dia:point val="4.42,79"/>
         <dia:point val="21.795,79"/>
         <dia:point val="21.795,84"/>
@@ -4348,16 +4388,16 @@ which make code generation different.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="4.42,71.6"/>
+        <dia:point val="4.42,72.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="3.67,70.85;51.305,84.8"/>
+        <dia:rectangle val="3.67,71.65;51.305,84.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="4.42,71.6"/>
+        <dia:point val="4.42,72.4"/>
         <dia:point val="4.42,79"/>
         <dia:point val="51.105,79"/>
         <dia:point val="51.105,84"/>
@@ -4475,7 +4515,7 @@ which make code generation different.#</dia:string>
         <dia:string>#enumeration#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##</dia:string>
+        <dia:string>#What kind of code generation to perform for type.#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -7266,25 +7306,25 @@ but with a focus only on data structures and domain driven constructs.
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O44">
       <dia:attribute name="obj_pos">
-        <dia:point val="-40.9667,84.1929"/>
+        <dia:point val="-45,84"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-41.0167,84.1429;-30.0217,88.6429"/>
+        <dia:rectangle val="-45.05,83.95;-34.055,89.25"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-40.9667,84.1929"/>
+        <dia:point val="-45,84"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="10.895"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="4.4000000000000004"/>
+        <dia:real val="5.2000000000000011"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#string_table#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>##</dia:string>
+        <dia:string>#entity, aggregate root#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#Stores a static table of strings.#</dia:string>
@@ -7379,7 +7419,9 @@ but with a focus only on data structures and domain driven constructs.
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##</dia:string>
+            <dia:string>#Qualified name for the type.
+
+#DOGEN IDENTITY_ATTRIBUTE=true#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -7482,19 +7524,19 @@ but with a focus only on data structures and domain driven constructs.
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="-35.5192,84.1929"/>
+        <dia:point val="-39.5525,84"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-35.5692,70.85;5.17,84.9929"/>
+        <dia:rectangle val="-39.6025,71.65;5.17,84.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="-35.5192,84.1929"/>
-        <dia:point val="-35.5192,79"/>
+        <dia:point val="-39.5525,84"/>
+        <dia:point val="-39.5525,79"/>
         <dia:point val="4.42,79"/>
-        <dia:point val="4.42,71.6"/>
+        <dia:point val="4.42,72.4"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -7517,13 +7559,13 @@ but with a focus only on data structures and domain driven constructs.
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O46">
       <dia:attribute name="obj_pos">
-        <dia:point val="-45,98"/>
+        <dia:point val="-47,98"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-45.05,97.95;-37.135,101.65"/>
+        <dia:rectangle val="-47.05,97.95;-39.135,101.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-45,98"/>
+        <dia:point val="-47,98"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="7.8150000000000004"/>
@@ -7538,7 +7580,7 @@ but with a focus only on data structures and domain driven constructs.
         <dia:string>##</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##</dia:string>
+        <dia:string>#Represents an entry in a table of strings.#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -7891,19 +7933,19 @@ but with a focus only on data structures and domain driven constructs.
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="-35.5192,88.5929"/>
+        <dia:point val="-39.5525,89.2"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-41.1425,87.8429;-34.7692,99.6"/>
+        <dia:rectangle val="-43.1425,88.45;-38.8025,99.6"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="-35.5192,88.5929"/>
-        <dia:point val="-35.5192,94.0564"/>
-        <dia:point val="-41.0925,94.0564"/>
-        <dia:point val="-41.0925,98"/>
+        <dia:point val="-39.5525,89.2"/>
+        <dia:point val="-39.5525,94.0564"/>
+        <dia:point val="-43.0925,94.0564"/>
+        <dia:point val="-43.0925,98"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -7962,16 +8004,16 @@ but with a focus only on data structures and domain driven constructs.
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="-21.58,47.8"/>
+        <dia:point val="-21.58,48.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-27.8825,47.05;-20.83,61.6"/>
+        <dia:rectangle val="-27.8825,47.85;-20.83,61.6"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="-21.58,47.8"/>
+        <dia:point val="-21.58,48.6"/>
         <dia:point val="-21.58,54"/>
         <dia:point val="-27.8325,54"/>
         <dia:point val="-27.8325,60"/>

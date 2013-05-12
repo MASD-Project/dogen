@@ -26,7 +26,7 @@ namespace sml {
 meta_types_generator::meta_types_generator() : position_(0) { }
 void meta_types_generator::
 populate(const unsigned int position, result_type& v) {
-    v = static_cast<meta_types>(position % 6);
+    v = static_cast<meta_types>(position % 7);
 }
 
 meta_types_generator::result_type

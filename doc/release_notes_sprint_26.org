@@ -10,13 +10,13 @@ This file contains all stories that were closed during sprint 26.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-05-12 Sun 00:56]
+Clock summary at [2013-05-12 Sun 01:04]
 
 | Headline                                                                     | Time    |       |      |
 |------------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                                 | *15:44* |       |      |
+| *Total time*                                                                 | *15:47* |       |      |
 |------------------------------------------------------------------------------+---------+-------+------|
-| Development Stories Implemented                                              |         | 15:44 |      |
+| Development Stories Implemented                                              |         | 15:47 |      |
 | COMPLETED Fix build break on visitor tests                                   |         |       | 0:32 |
 | COMPLETED Remove workflow aspects from transformer                           |         |       | 2:23 |
 | COMPLETED Add tests for profiler                                             |         |       | 1:56 |
@@ -25,7 +25,7 @@ Clock summary at [2013-05-12 Sun 00:56]
 | COMPLETED Add doxygen comments to keys and version                           |         |       | 0:10 |
 | COMPLETED Sort issues with SATA port in lorenz                               |         |       | 1:50 |
 | COMPLETED Add tests for aggregate root stereotype                            |         |       | 0:23 |
-| COMPLETED Refactor SML diagram                                               |         |       | 1:01 |
+| COMPLETED Refactor SML diagram                                               |         |       | 1:04 |
 | IMPLEMENTATION Use explicit casting for versioned to unversioned conversions |         |       | 1:49 |
 | IMPLEMENTATION Add =extract_key= function                                    |         |       | 0:22 |
 #+end:
@@ -162,6 +162,7 @@ finished hooking up things properly. Add a test for it and fix any problems.
 
 *** COMPLETED Refactor SML diagram                                    :spike:
     CLOSED: [2013-05-12 Sun 00:09]
+    CLOCK: [2013-05-12 Sun 01:00]--[2013-05-12 Sun 01:03] =>  0:03
     CLOCK: [2013-05-12 Sun 00:24]--[2013-05-12 Sun 00:35] =>  0:11
     CLOCK: [2013-05-12 Sun 00:13]--[2013-05-12 Sun 00:24] =>  0:11
     CLOCK: [2013-05-11 Sat 23:30]--[2013-05-12 Sun 00:09] =>  0:39

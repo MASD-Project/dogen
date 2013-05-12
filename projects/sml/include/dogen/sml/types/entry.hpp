@@ -32,6 +32,9 @@
 namespace dogen {
 namespace sml {
 
+/**
+ * @brief Represents an entry in a table of strings.
+ */
 class entry final {
 public:
     entry() = default;

@@ -28,13 +28,17 @@
 namespace dogen {
 namespace sml {
 
+/**
+ * @brief Type of type.
+ */
 enum class meta_types : unsigned int {
     invalid = 0, ///< Represents an uninitialised enum
     enumeration = 1, ///< Type is an enumeration
-    pod = 2, ///< Type is Plain Old Data
+    pod = 2, ///< Type is a pod
     package = 3, ///< Type is a package
     primitive = 4, ///< Type is a primitive
-    exception = 5 ///< Type is an exception
+    exception = 5, ///< Type is an exception
+    string_table = 6 ///< Type is a string table.
 };
 
 } }

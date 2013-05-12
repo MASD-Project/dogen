@@ -62,6 +62,7 @@ private:
 public:
     /**
      * @brief Qualified name for the type.
+     *
      */
     /**@{*/
     const dogen::sml::qname& name() const;

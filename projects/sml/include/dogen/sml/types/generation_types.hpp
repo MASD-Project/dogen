@@ -28,6 +28,9 @@
 namespace dogen {
 namespace sml {
 
+/**
+ * @brief What kind of code generation to perform for type.
+ */
 enum class generation_types : unsigned int {
     invalid = 0, ///< Represents an uninitialised enum
     full_generation = 1, ///< Type will be fully generated.

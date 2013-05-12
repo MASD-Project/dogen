@@ -85,6 +85,7 @@ public:
      *
      * Must not contain spaces or any special character as its used to
      * name folders in the file-system.
+     *
      */
     /**@{*/
     const std::string& name() const;

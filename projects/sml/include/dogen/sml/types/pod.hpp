@@ -41,6 +41,13 @@
 namespace dogen {
 namespace sml {
 
+/**
+ * @brief Represents a plain C++ object with basic associated behaviours.
+ *
+ * The name pod is misleading because its actually not used in the strict sense of POD as defined here:
+ *
+ *  <a href="http://en.wikipedia.org/wiki/Plain_old_data_structure">Plain old data structure</a>.
+ */
 class pod final {
 public:
     pod(const pod&) = default;
@@ -86,6 +93,7 @@ private:
 public:
     /**
      * @brief Qualified name for the type.
+     *
      */
     /**@{*/
     const dogen::sml::qname& name() const;

@@ -59,10 +59,16 @@ private:
     friend void boost::serialization::load(Archive& ar, string_table& v, unsigned int version);
 
 public:
+    /**
+     * @brief Qualified name for the type.
+     *
+     */
+    /**@{*/
     const dogen::sml::qname& name() const;
     dogen::sml::qname& name();
     void name(const dogen::sml::qname& v);
     void name(const dogen::sml::qname&& v);
+    /**@}*/
 
     const std::string& documentation() const;
     std::string& documentation();
