@@ -28,8 +28,8 @@
 #include <iosfwd>
 #include <unordered_set>
 #include <boost/filesystem/path.hpp>
-#include "dogen/cpp/types/view_models/nested_type_view_model.hpp"
-#include "dogen/cpp/types/view_models/file_view_model.hpp"
+#include "dogen/cpp/types/nested_type_view_model.hpp"
+#include "dogen/cpp/types/file_view_model.hpp"
 #include "dogen/cpp/types/formatters/indenter.hpp"
 #include "dogen/cpp/types/formatters/utility.hpp"
 #include "dogen/cpp/types/formatters/file_formatter.hpp"
@@ -39,11 +39,6 @@ namespace cpp {
 namespace formatters {
 
 class domain_implementation : public file_formatter {
-public:
-    typedef view_models::nested_type_view_model nested_type_view_model;
-    typedef view_models::class_view_model class_view_model;
-    typedef view_models::file_view_model file_view_model;
-
 public:
     domain_implementation() = delete;
     domain_implementation(const domain_implementation&) = default;

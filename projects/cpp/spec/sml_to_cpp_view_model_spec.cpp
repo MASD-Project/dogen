@@ -19,7 +19,7 @@
  *
  */
 #include <boost/test/unit_test.hpp>
-#include "dogen/cpp/types/view_models/sml_to_cpp_view_model.hpp"
+#include "dogen/cpp/types/sml_to_cpp_view_model.hpp"
 #include "dogen/utility/test_data/dia_sml.hpp"
 #include "dogen/utility/io/list_io.hpp"
 #include "dogen/utility/test/xml_serialization_helper.hpp"
@@ -31,7 +31,6 @@
 
 using dogen::config::cpp_facet_types;
 using namespace dogen::cpp;
-using namespace dogen::cpp::view_models;
 
 namespace {
 

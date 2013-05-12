@@ -30,16 +30,13 @@
 #include <iosfwd>
 #include "dogen/cpp/types/formatters/indenter.hpp"
 #include "dogen/cpp/types/formatters/utility.hpp"
-#include "dogen/cpp/types/view_models/file_view_model.hpp"
+#include "dogen/cpp/types/file_view_model.hpp"
 
 namespace dogen {
 namespace cpp {
 namespace formatters {
 
 class includes {
-public:
-    typedef view_models::file_view_model file_view_model;
-
 public:
     includes() = delete;
     includes(const includes&) = default;

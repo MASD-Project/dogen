@@ -548,7 +548,7 @@ void hash_implementation::hasher_hash_method(const class_view_model& vm) {
 }
 
 void hash_implementation::format_class(const file_view_model& vm) {
-    boost::optional<view_models::class_view_model> o(vm.class_vm());
+    boost::optional<class_view_model> o(vm.class_vm());
     if (!o) {
         BOOST_LOG_SEV(lg, error) << missing_class_view_model;
         BOOST_THROW_EXCEPTION(formatting_error(missing_class_view_model));

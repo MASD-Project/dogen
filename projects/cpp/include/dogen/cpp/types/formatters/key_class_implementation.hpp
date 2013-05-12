@@ -25,7 +25,7 @@
 #pragma once
 #endif
 
-#include "dogen/cpp/types/view_models/class_view_model.hpp"
+#include "dogen/cpp/types/class_view_model.hpp"
 #include "dogen/cpp/types/formatters/class_implementation.hpp"
 
 namespace dogen {
@@ -33,9 +33,6 @@ namespace cpp {
 namespace formatters {
 
 class key_class_implementation : public class_implementation {
-public:
-    typedef view_models::class_view_model class_view_model;
-
 public:
     key_class_implementation() = delete;
     key_class_implementation(const key_class_implementation&) = default;

@@ -28,16 +28,13 @@
 #include <iosfwd>
 #include <string>
 #include <boost/filesystem/path.hpp>
-#include "dogen/cpp/types/view_models/cmakelists_view_model.hpp"
+#include "dogen/cpp/types/cmakelists_view_model.hpp"
 
 namespace dogen {
 namespace cpp {
 namespace formatters {
 
 class src_cmakelists {
-public:
-    typedef view_models::cmakelists_view_model cmakelists_view_model;
-
 public:
     src_cmakelists() = delete;
     src_cmakelists(const src_cmakelists&) = default;

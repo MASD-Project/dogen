@@ -86,7 +86,7 @@ void serialization_header::format_class(const file_view_model& vm) {
         BOOST_THROW_EXCEPTION(formatting_error(missing_class_view_model));
     }
 
-    const view_models::class_view_model& cvm(*o);
+    const class_view_model& cvm(*o);
     qname qname(stream_);
     const auto parents(cvm.parents());
     if (!cvm.is_parent() && !parents.empty())

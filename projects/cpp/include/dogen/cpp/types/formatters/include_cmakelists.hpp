@@ -28,16 +28,13 @@
 #include <iosfwd>
 #include <string>
 #include "dogen/cpp/types/formatters/indenter.hpp"
-#include "dogen/cpp/types/view_models/cmakelists_view_model.hpp"
+#include "dogen/cpp/types/cmakelists_view_model.hpp"
 
 namespace dogen {
 namespace cpp {
 namespace formatters {
 
 class include_cmakelists {
-public:
-    typedef view_models::cmakelists_view_model cmakelists_view_model;
-
 public:
     include_cmakelists() = delete;
     include_cmakelists(const include_cmakelists&) = default;

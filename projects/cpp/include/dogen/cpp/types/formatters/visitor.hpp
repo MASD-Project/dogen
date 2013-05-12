@@ -28,7 +28,7 @@
 #include <iosfwd>
 #include "dogen/cpp/types/formatters/utility.hpp"
 #include "dogen/cpp/types/formatters/indenter.hpp"
-#include "dogen/cpp/types/view_models/visitor_view_model.hpp"
+#include "dogen/cpp/types/visitor_view_model.hpp"
 #include "dogen/cpp/types/formatters/file_formatter.hpp"
 
 namespace dogen {
@@ -36,10 +36,6 @@ namespace cpp {
 namespace formatters {
 
 class visitor : public file_formatter {
-public:
-    typedef view_models::visitor_view_model visitor_view_model;
-    typedef view_models::file_view_model file_view_model;
-
 public:
     visitor() = delete;
     visitor(const visitor&) = default;

@@ -104,14 +104,14 @@ format_domain_class(const class_view_model& vm) {
 }
 
 void forward_declarations_header::format_class(const file_view_model& vm) {
-    boost::optional<view_models::class_view_model> o(vm.class_vm());
+    boost::optional<class_view_model> o(vm.class_vm());
     if (!o) {
         BOOST_LOG_SEV(lg, error) << missing_class_view_model;
         BOOST_THROW_EXCEPTION(formatting_error(missing_class_view_model));
     }
 
     const auto ft(vm.facet_type());
-    const view_models::class_view_model& cvm(*o);
+    const class_view_model& cvm(*o);
     if (ft == config::cpp_facet_types::serialization)
         format_serialization_class(cvm);
     else if (ft == config::cpp_facet_types::types)

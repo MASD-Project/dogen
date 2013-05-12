@@ -180,10 +180,6 @@ C++ model has become a bit of a mess. This story is a general bucket
 to capture all of the refactorings that can/need to be done to
 it. These will be broken down into stories and shipped in iterations.
 
-- remove view model namespace and postfix. These are just types at the
-  c++ model level and don't need any further qualifications. For types
-  where the name is a C++ keyword (e.g. =class=, =namespace=), create
-  a well known prefix like eCore. Question is what prefix to use.
 - clean up the SML to C++ transformer: split graph from transformer,
   split visitor from transformer, etc.
 - file view model has a silly approach for the containing view models:

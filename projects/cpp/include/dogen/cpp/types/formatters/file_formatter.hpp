@@ -26,16 +26,13 @@
 #endif
 
 #include <memory>
-#include "dogen/cpp/types/view_models/file_view_model.hpp"
+#include "dogen/cpp/types/file_view_model.hpp"
 
 namespace dogen {
 namespace cpp {
 namespace formatters {
 
 class file_formatter {
-public:
-    typedef view_models::file_view_model file_view_model;
-
 public:
     file_formatter(const file_formatter&) = default;
     file_formatter(file_formatter&&) = default;

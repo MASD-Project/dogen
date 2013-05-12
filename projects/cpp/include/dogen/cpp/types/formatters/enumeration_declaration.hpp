@@ -27,7 +27,7 @@
 
 #include <iosfwd>
 #include <string>
-#include "dogen/cpp/types/view_models/enumeration_view_model.hpp"
+#include "dogen/cpp/types/enumeration_view_model.hpp"
 #include "dogen/cpp/types/formatters/indenter.hpp"
 #include "dogen/cpp/types/formatters/utility.hpp"
 
@@ -36,9 +36,6 @@ namespace cpp {
 namespace formatters {
 
 class enumeration_declaration {
-public:
-    typedef view_models::enumeration_view_model enumeration_view_model;
-
 public:
     enumeration_declaration() = default;
     ~enumeration_declaration() = default;

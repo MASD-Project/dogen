@@ -28,7 +28,7 @@
 #include <list>
 #include <iosfwd>
 #include <boost/filesystem/path.hpp>
-#include "dogen/cpp/types/view_models/file_view_model.hpp"
+#include "dogen/cpp/types/file_view_model.hpp"
 #include "dogen/cpp/types/formatters/indenter.hpp"
 #include "dogen/cpp/types/formatters/utility.hpp"
 #include "dogen/cpp/types/formatters/file_formatter.hpp"
@@ -38,9 +38,6 @@ namespace cpp {
 namespace formatters {
 
 class registrar_header : public file_formatter {
-public:
-    typedef view_models::file_view_model file_view_model;
-
 public:
     registrar_header() = delete;
     registrar_header(const registrar_header&) = default;

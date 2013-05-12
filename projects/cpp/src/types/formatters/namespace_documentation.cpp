@@ -66,7 +66,7 @@ void namespace_documentation::format_namespace(const file_view_model& vm) {
     }
 
     {
-        const view_models::namespace_view_model& cvm(*o);
+        const namespace_view_model& cvm(*o);
         if (cvm.namespaces().empty())
             return;
 

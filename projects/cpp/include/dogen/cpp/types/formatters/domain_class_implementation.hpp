@@ -33,9 +33,6 @@ namespace formatters {
 
 class domain_class_implementation : public class_implementation {
 public:
-    typedef view_models::class_view_model class_view_model;
-
-public:
     domain_class_implementation() = delete;
     domain_class_implementation(
         const domain_class_implementation&) = default;

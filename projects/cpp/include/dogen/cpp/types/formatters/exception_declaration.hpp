@@ -27,7 +27,7 @@
 
 #include <iosfwd>
 #include <string>
-#include "dogen/cpp/types/view_models/exception_view_model.hpp"
+#include "dogen/cpp/types/exception_view_model.hpp"
 #include "dogen/cpp/types/formatters/indenter.hpp"
 #include "dogen/cpp/types/formatters/utility.hpp"
 
@@ -36,9 +36,6 @@ namespace cpp {
 namespace formatters {
 
 class exception_declaration {
-public:
-    typedef view_models::exception_view_model exception_view_model;
-
 public:
     exception_declaration() = default;
     ~exception_declaration() = default;

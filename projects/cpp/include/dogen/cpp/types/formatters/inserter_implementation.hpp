@@ -28,8 +28,8 @@
 #include <iosfwd>
 #include <string>
 #include <unordered_set>
-#include "dogen/cpp/types/view_models/nested_type_view_model.hpp"
-#include "dogen/cpp/types/view_models/class_view_model.hpp"
+#include "dogen/cpp/types/nested_type_view_model.hpp"
+#include "dogen/cpp/types/class_view_model.hpp"
 #include "dogen/cpp/types/formatters/indenter.hpp"
 #include "dogen/cpp/types/formatters/utility.hpp"
 
@@ -38,10 +38,6 @@ namespace cpp {
 namespace formatters {
 
 class inserter_implementation {
-public:
-    typedef view_models::class_view_model class_view_model;
-    typedef view_models::nested_type_view_model nested_type_view_model;
-
 public:
     inserter_implementation() = delete;
     inserter_implementation(const inserter_implementation&) = default;

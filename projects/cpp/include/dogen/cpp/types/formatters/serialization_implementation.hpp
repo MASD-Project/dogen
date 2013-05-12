@@ -27,7 +27,7 @@
 
 #include <iosfwd>
 #include <boost/filesystem/path.hpp>
-#include "dogen/cpp/types/view_models/file_view_model.hpp"
+#include "dogen/cpp/types/file_view_model.hpp"
 #include "dogen/cpp/types/formatters/indenter.hpp"
 #include "dogen/cpp/types/formatters/utility.hpp"
 #include "dogen/cpp/types/formatters/file_formatter.hpp"
@@ -37,10 +37,6 @@ namespace cpp {
 namespace formatters {
 
 class serialization_implementation : public file_formatter {
-public:
-    typedef view_models::class_view_model class_view_model;
-    typedef view_models::file_view_model file_view_model;
-
 public:
     serialization_implementation() = delete;
     serialization_implementation(const serialization_implementation&) = default;

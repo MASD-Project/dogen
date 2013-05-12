@@ -158,7 +158,7 @@ void hash_header::format_enumeration(const file_view_model& vm) {
         BOOST_THROW_EXCEPTION(formatting_error(missing_class_view_model));
     }
 
-    const view_models::class_view_model& cvm(*o);
+    const class_view_model& cvm(*o);
     {
         namespace_helper nsh(stream_, cvm.namespaces());
         utility_.blank_line();

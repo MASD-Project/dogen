@@ -27,20 +27,16 @@ types/#pragma once
 
 #include <iosfwd>
 #include <string>
-#include "dogen/cpp/types/view_models/class_view_model.hpp"
+#include "dogen/cpp/types/class_view_model.hpp"
 #include "dogen/cpp/types/formatters/indenter.hpp"
 #include "dogen/cpp/types/formatters/utility.hpp"
-#include "dogen/cpp/types/view_models/property_view_model.hpp"
+#include "dogen/cpp/types/property_view_model.hpp"
 
 namespace dogen {
 namespace cpp {
 namespace formatters {
 
 class class_implementation {
-public:
-    typedef view_models::class_view_model class_view_model;
-    typedef view_models::property_view_model property_view_model;
-
 public:
     class_implementation() = default;
     class_implementation(const class_implementation&) = default;

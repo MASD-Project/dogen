@@ -53,20 +53,20 @@ BOOST_AUTO_TEST_CASE(validate_serialization) {
     rountrip_type<location_request_generator>();
     rountrip_type<relationships_generator>();
     rountrip_type<std_types_generator>();
-    rountrip_type<view_models::class_view_model_generator>();
-    rountrip_type<view_models::cmakelists_view_model_generator>();
-    rountrip_type<view_models::enumeration_view_model_generator>();
-    rountrip_type<view_models::enumerator_view_model_generator>();
-    rountrip_type<view_models::exception_view_model_generator>();
-    rountrip_type<view_models::file_view_model_generator>();
-    rountrip_type<view_models::namespace_view_model_generator>();
-    rountrip_type<view_models::nested_type_view_model_generator>();
-    rountrip_type<view_models::odb_options_view_model_generator>();
-    rountrip_type<view_models::parent_view_model_generator>();
-    rountrip_type<view_models::property_view_model_generator>();
-    rountrip_type<view_models::registrar_view_model_generator>();
-    rountrip_type<view_models::string_table_view_model_generator>();
-    rountrip_type<view_models::visitor_view_model_generator>();
+    rountrip_type<class_view_model_generator>();
+    rountrip_type<cmakelists_view_model_generator>();
+    rountrip_type<enumeration_view_model_generator>();
+    rountrip_type<enumerator_view_model_generator>();
+    rountrip_type<exception_view_model_generator>();
+    rountrip_type<file_view_model_generator>();
+    rountrip_type<namespace_view_model_generator>();
+    rountrip_type<nested_type_view_model_generator>();
+    rountrip_type<odb_options_view_model_generator>();
+    rountrip_type<parent_view_model_generator>();
+    rountrip_type<property_view_model_generator>();
+    rountrip_type<registrar_view_model_generator>();
+    rountrip_type<string_table_view_model_generator>();
+    rountrip_type<visitor_view_model_generator>();
 }
 
 BOOST_AUTO_TEST_SUITE_END()

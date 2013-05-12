@@ -26,7 +26,7 @@
 #include "dogen/cpp/types/formatters/src_cmakelists.hpp"
 #include "dogen/cpp/types/formatters/include_cmakelists.hpp"
 #include "dogen/cpp/types/formatters/odb_options.hpp"
-#include "dogen/cpp/types/view_models/sml_to_cpp_view_model.hpp"
+#include "dogen/cpp/types/sml_to_cpp_view_model.hpp"
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/cpp/types/workflow.hpp"
 
@@ -91,7 +91,7 @@ void workflow::log_file_views(unsigned int how_many) const {
 }
 
 workflow::value_type workflow::generate_cmakelists() const {
-    view_models::cmakelists_view_model vm;
+    cmakelists_view_model vm;
     vm.file_name(cmakelists_file_name);
     vm.file_path(locator_.absolute_path_to_src(vm.file_name()));
     vm.model_name(model_.name());
@@ -125,7 +125,7 @@ workflow::value_type workflow::generate_cmakelists() const {
 workflow::value_entry_type workflow::generate_odb_options() const {
     BOOST_LOG_SEV(lg, info) << "Generating ODB options file.";
 
-    view_models::odb_options_view_model vm;
+    odb_options_view_model vm;
     vm.file_name(odb_options_file_name);
     vm.file_path(locator_.absolute_path_to_src(vm.file_name()));
     vm.model_name(model_.name());
@@ -143,7 +143,7 @@ workflow::value_entry_type workflow::generate_odb_options() const {
 }
 
 workflow::value_entry_type workflow::
-generate_file_view_model(const view_models::file_view_model& vm) const {
+generate_file_view_model(const file_view_model& vm) const {
     log_formating_view(vm.file_path().string());
     formatters::factory factory(settings_);
     formatters::file_formatter::shared_ptr ff;
@@ -156,9 +156,8 @@ generate_file_view_model(const view_models::file_view_model& vm) const {
 workflow::value_type workflow::generate_file_view_models() const {
     includer im(model_, locator_, settings_);
 
-    using view_models::sml_to_cpp_view_model;
     sml_to_cpp_view_model t(locator_, im, settings_, model_);
-    std::vector<view_models::file_view_model> fvms(t.transform());
+    std::vector<file_view_model> fvms(t.transform());
     log_file_views(fvms.size());
 
     workflow::value_type r;

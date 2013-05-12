@@ -28,16 +28,13 @@
 #include <iosfwd>
 #include <string>
 #include "dogen/cpp/types/formatters/indenter.hpp"
-#include "dogen/cpp/types/view_models/odb_options_view_model.hpp"
+#include "dogen/cpp/types/odb_options_view_model.hpp"
 
 namespace dogen {
 namespace cpp {
 namespace formatters {
 
 class odb_options {
-public:
-    typedef view_models::odb_options_view_model odb_options_view_model;
-
 public:
     odb_options() = delete;
     odb_options(const odb_options&) = default;

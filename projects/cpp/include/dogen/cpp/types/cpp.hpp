@@ -34,6 +34,21 @@ namespace dogen {
  * into compilable C++ code, according to a set of well-defined
  * conventions.
  *
+ * <b>Using Clang AST as a C++ meta model</b>
+ *
+ * If implemented properly, the C++ model should really just generate
+ * Clang AST and use the clang framework to perform the code generation.
+ * However, it is non-trivial to create such transformers able to make a
+ * valid AST for all the use cases we have (say boost serialisation, etc).
+ * So we took the easy approach which is to create what can be thought of
+ * as a high-level AST model, that represents C++ meta model concepts in
+ * in a very high-level form. This form is suitable for our formatters.
+ *
+ * In the future we should consider a Clang based C++ backend, but we should
+ * not reuse any of this code as its too far apart. On the plus side we can
+ * start working on it side-by-side such that we have both backends and only
+ * switch to Clang when it has 100% feature coverage.
+ *
  */
 namespace cpp {
 } }

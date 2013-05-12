@@ -27,20 +27,15 @@
 
 #include <iosfwd>
 #include <string>
-#include "dogen/cpp/types/view_models/class_view_model.hpp"
-#include "dogen/cpp/types/view_models/parent_view_model.hpp"
-#include "dogen/cpp/types/view_models/enumeration_view_model.hpp"
+#include "dogen/cpp/types/class_view_model.hpp"
+#include "dogen/cpp/types/parent_view_model.hpp"
+#include "dogen/cpp/types/enumeration_view_model.hpp"
 
 namespace dogen {
 namespace cpp {
 namespace formatters {
 
 class qname {
-public:
-    typedef view_models::class_view_model class_view_model;
-    typedef view_models::enumeration_view_model enumeration_view_model;
-    typedef view_models::parent_view_model parent_view_model;
-
 public:
     qname() = delete;
     qname(const qname&) = default;

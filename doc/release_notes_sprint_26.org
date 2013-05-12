@@ -10,13 +10,13 @@ This file contains all stories that were closed during sprint 26.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-05-12 Sun 19:31]
+Clock summary at [2013-05-12 Sun 20:58]
 
 | Headline                                                                     | Time    |       |      |
 |------------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                                 | *19:34* |       |      |
+| *Total time*                                                                 | *21:02* |       |      |
 |------------------------------------------------------------------------------+---------+-------+------|
-| Development Stories Implemented                                              |         | 19:34 |      |
+| Development Stories Implemented                                              |         | 21:02 |      |
 | COMPLETED Fix build break on visitor tests                                   |         |       | 0:32 |
 | COMPLETED Remove workflow aspects from transformer                           |         |       | 2:23 |
 | COMPLETED Add tests for profiler                                             |         |       | 1:56 |
@@ -27,6 +27,7 @@ Clock summary at [2013-05-12 Sun 19:31]
 | COMPLETED Add tests for aggregate root stereotype                            |         |       | 0:23 |
 | COMPLETED Refactor SML diagram                                               |         |       | 1:04 |
 | COMPLETED Add code generation links to =README=                              |         |       | 0:25 |
+| IMPLEMENTATION Remove view model namespace and postfix                       |         |       | 1:28 |
 | IMPLEMENTATION Move services into their own type                             |         |       | 3:22 |
 | IMPLEMENTATION Use explicit casting for versioned to unversioned conversions |         |       | 1:49 |
 | IMPLEMENTATION Add =extract_key= function                                    |         |       | 0:22 |
@@ -177,6 +178,19 @@ SML has gotten really messy and very hard to understand. Do a general tidy-up.
 
 Since we are already looking into C++ meta models, might as well
 update the main readme with the links we find.
+
+*** IMPLEMENTATION Remove view model namespace and postfix            :spike:
+    CLOCK: [2013-05-12 Sun 20:10]--[2013-05-12 Sun 20:58] =>  0:48
+    CLOCK: [2013-05-12 Sun 19:30]--[2013-05-12 Sun 20:10] =>  0:40
+
+Part of the required surgery to the C++ model.
+
+Remove view model namespace and postfix. These are just types at the
+c++ model level and don't need any further qualifications. For types
+where the name is a C++ keyword (e.g. =class=, =namespace=), create a
+well known prefix like eCore. Question is what prefix to use.
+
+**** IMPLEMENTATION Move types to top-level namespace
 
 *** IMPLEMENTATION Move services into their own type                  :story:
     CLOCK: [2013-05-12 Sun 19:15]--[2013-05-12 Sun 19:30] =>  0:15

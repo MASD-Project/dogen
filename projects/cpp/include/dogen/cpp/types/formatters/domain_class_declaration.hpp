@@ -27,16 +27,13 @@
 
 #include <iosfwd>
 #include "dogen/cpp/types/formatters/class_declaration.hpp"
-#include "dogen/cpp/types/view_models/class_view_model.hpp"
+#include "dogen/cpp/types/class_view_model.hpp"
 
 namespace dogen {
 namespace cpp {
 namespace formatters {
 
 class domain_class_declaration : public class_declaration {
-public:
-    typedef view_models::class_view_model class_view_model;
-
 public:
     domain_class_declaration() = delete;
     domain_class_declaration(const domain_class_declaration&) = default;

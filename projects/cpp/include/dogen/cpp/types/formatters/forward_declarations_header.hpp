@@ -30,9 +30,9 @@
 #include "dogen/sml/types/category_types.hpp"
 #include "dogen/cpp/types/formatters/indenter.hpp"
 #include "dogen/cpp/types/formatters/utility.hpp"
-#include "dogen/cpp/types/view_models/class_view_model.hpp"
-#include "dogen/cpp/types/view_models/enumeration_view_model.hpp"
-#include "dogen/cpp/types/view_models/file_view_model.hpp"
+#include "dogen/cpp/types//class_view_model.hpp"
+#include "dogen/cpp/types/enumeration_view_model.hpp"
+#include "dogen/cpp/types/file_view_model.hpp"
 #include "dogen/cpp/types/formatters/file_formatter.hpp"
 
 namespace dogen {
@@ -40,11 +40,6 @@ namespace cpp {
 namespace formatters {
 
 class forward_declarations_header : public file_formatter {
-public:
-    typedef view_models::enumeration_view_model enumeration_view_model;
-    typedef view_models::class_view_model class_view_model;
-    typedef view_models::file_view_model file_view_model;
-
 public:
     forward_declarations_header() = delete;
     forward_declarations_header(const forward_declarations_header&) = default;
