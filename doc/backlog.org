@@ -11,6 +11,13 @@ This file contains all stories that haven't been assigned to a sprint.
 
 Stories that we intend to look at, at some point.
 
+*** Formatters should cache qname formatting
+
+We seem to re-format the same qname lots of times. We should just use
+a =std::ostringstream= to format once and reuse the resulting
+string. Probably worth doing this change after the performance tests
+are in.
+
 *** Add versioning support
     CLOCK: [2013-05-13 Mon 08:28]--[2013-05-13 Mon 08:37] =>  0:09
 
