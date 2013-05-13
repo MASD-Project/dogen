@@ -50,22 +50,22 @@ public:
     virtual ~inserter_implementation() noexcept {}
 
 private:
-    bool is_insertable(const nested_type_info& vm);
+    bool is_insertable(const nested_type_info& nti);
 
 private:
     void tidy_up_string_method();
-    void sequence_container_helper(const nested_type_info& vm);
-    void associative_container_helper(const nested_type_info& vm);
-    void smart_pointer_helper(const nested_type_info& vm);
-    void optional_helper(const nested_type_info& vm);
-    void pair_helper(const nested_type_info& vm);
-    void variant_helper(const nested_type_info& vm);
-    void recursive_helper_method_creator(const nested_type_info& vm,
+    void sequence_container_helper(const nested_type_info& nti);
+    void associative_container_helper(const nested_type_info& nti);
+    void smart_pointer_helper(const nested_type_info& nti);
+    void optional_helper(const nested_type_info& nti);
+    void pair_helper(const nested_type_info& nti);
+    void variant_helper(const nested_type_info& nti);
+    void recursive_helper_method_creator(const nested_type_info& nti,
         std::unordered_set<std::string>& types_done);
 
 public:
-    void format_helper_methods(const class_info& vm);
-    void format_inserter_implementation(const class_info& vm);
+    void format_helper_methods(const class_info& ci);
+    void format_inserter_implementation(const class_info& ci);
 
 protected:
     const bool is_inside_class_;

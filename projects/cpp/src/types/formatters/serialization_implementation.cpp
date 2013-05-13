@@ -64,9 +64,9 @@ serialization_implementation::create(std::ostream& stream,
         new serialization_implementation(stream, disable_xml_serialization));
 }
 
-void serialization_implementation::save_function(const class_info& vm) {
-    const auto parents(vm.parents());
-    const auto props(vm.properties());
+void serialization_implementation::save_function(const class_info& ci) {
+    const auto parents(ci.parents());
+    const auto props(ci.properties());
     const bool has_properties(!props.empty());
     const bool has_parents(!parents.empty());
     const bool has_properties_or_parents(has_properties || has_parents);
@@ -80,7 +80,7 @@ void serialization_implementation::save_function(const class_info& vm) {
         positive_indenter_scope s(indenter_);
         stream_ << indenter_ << "const ";
         qname qname(stream_);
-        qname.format(vm);
+        qname.format(ci);
 
         stream_ << (has_properties_or_parents ? "& v," : "& /*v*/,")
                 << std::endl
@@ -126,9 +126,9 @@ void serialization_implementation::save_function(const class_info& vm) {
     utility_.blank_line();
 }
 
-void serialization_implementation::load_function(const class_info& vm) {
-    const auto parents(vm.parents());
-    const auto props(vm.properties());
+void serialization_implementation::load_function(const class_info& ci) {
+    const auto parents(ci.parents());
+    const auto props(ci.properties());
     const bool has_properties(!props.empty());
     const bool has_parents(!parents.empty());
     const bool has_properties_or_parents(has_properties || has_parents);
@@ -142,7 +142,7 @@ void serialization_implementation::load_function(const class_info& vm) {
         positive_indenter_scope s(indenter_);
         stream_ << indenter_;
         qname qname(stream_);
-        qname.format(vm);
+        qname.format(ci);
 
         stream_ << (has_properties_or_parents ? "& v," : "& /*v*/,")
                 << std::endl
@@ -204,43 +204,43 @@ void serialization_implementation::load_function(const class_info& vm) {
 }
 
 void serialization_implementation::
-template_instantiations(const class_info& vm) {
+template_instantiations(const class_info& ci) {
     stream_ << indenter_ << "template void save("
             << "archive::polymorphic_oarchive& ar, const ";
     qname qname(stream_);
-    qname.format(vm);
+    qname.format(ci);
     stream_ << "& v, unsigned int version);" << std::endl;
     stream_ << indenter_ << "template void load("
             << "archive::polymorphic_iarchive& ar, ";
-    qname.format(vm);
+    qname.format(ci);
     stream_ << "& v, unsigned int version);" << std::endl;
     utility_.blank_line();
 
     stream_ << indenter_ << "template void save(archive::text_oarchive& ar, "
             << "const ";
-    qname.format(vm);
+    qname.format(ci);
     stream_ << "& v, unsigned int version);" << std::endl;
     stream_ << indenter_ << "template void load(archive::text_iarchive& ar, ";
-    qname.format(vm);
+    qname.format(ci);
     stream_ << "& v, unsigned int version);" << std::endl;
     utility_.blank_line();
 
     stream_ << indenter_ << "template void save(archive::binary_oarchive& ar, "
             << "const ";
-    qname.format(vm);
+    qname.format(ci);
     stream_ << "& v, unsigned int version);" << std::endl;
     stream_ << indenter_ << "template void load(archive::binary_iarchive& ar, ";
-    qname.format(vm);
+    qname.format(ci);
     stream_ << "& v, unsigned int version);" << std::endl;
     utility_.blank_line();
 
     if (!disable_xml_serialization_) {
         stream_ << indenter_ << "template void save(archive::xml_oarchive& ar, "
                 << "const ";
-        qname.format(vm);
+        qname.format(ci);
         stream_ << "& v, unsigned int version);" << std::endl;
         stream_ << indenter_ << "template void load(archive::xml_iarchive& ar, ";
-        qname.format(vm);
+        qname.format(ci);
         stream_ << "& v, unsigned int version);" << std::endl;
         utility_.blank_line();
     }
@@ -248,30 +248,30 @@ template_instantiations(const class_info& vm) {
     stream_ << "#ifdef __linux__" << std::endl
             << indenter_ << "template void save(eos::portable_oarchive& ar, "
             << "const ";
-    qname.format(vm);
+    qname.format(ci);
     stream_ << "& v, unsigned int version);" << std::endl;
     stream_ << indenter_ << "template void load(eos::portable_iarchive& ar, ";
-    qname.format(vm);
+    qname.format(ci);
     stream_ << "& v, unsigned int version);" << std::endl
             << "#endif" << std::endl;
     utility_.blank_line();
 }
 
-void serialization_implementation::format_class(const file_info& vm) {
-    const auto o(vm.class_info());
+void serialization_implementation::format_class(const file_info& fi) {
+    const auto o(fi.class_info());
     if (!o) {
         BOOST_LOG_SEV(lg, error) << missing_class_info;
         BOOST_THROW_EXCEPTION(formatting_error(missing_class_info));
     }
 
-    const class_info& cvm(*o);
+    const class_info& ci(*o);
     qname qname(stream_);
-    if (cvm.is_parent() || !cvm.parents().empty()) {
+    if (ci.is_parent() || !ci.parents().empty()) {
         stream_ << indenter_ << "BOOST_CLASS_TRACKING(" << std::endl;
         {
             positive_indenter_scope s(indenter_);
             stream_ << indenter_;
-            qname.format(cvm);
+            qname.format(ci);
             stream_ << "," << std::endl;
             stream_ << indenter_ << "boost::serialization"
                     << "::track_selectively)"
@@ -284,8 +284,8 @@ void serialization_implementation::format_class(const file_info& vm) {
         std::list<std::string> ns { boost_ns, serialization_ns };
         namespace_helper nsh(stream_, ns);
         utility_.blank_line();
-        save_function(cvm);
-        load_function(cvm);
+        save_function(ci);
+        load_function(ci);
     }
     utility_.blank_line(2);
 
@@ -293,7 +293,7 @@ void serialization_implementation::format_class(const file_info& vm) {
         std::list<std::string> ns { boost_ns, serialization_ns };
         namespace_helper nsh(stream_, ns);
         utility_.blank_line();
-        template_instantiations(cvm);
+        template_instantiations(ci);
     }
 }
 
@@ -304,12 +304,12 @@ format_enumeration(const file_info&) {
         formatting_error(enumeration_info_not_supported));
 }
 
-void serialization_implementation::format(const file_info& vm) {
+void serialization_implementation::format(const file_info& fi) {
     licence licence(stream_);
     licence.format();
 
     includes includes(stream_);
-    includes.format(vm);
+    includes.format(fi);
 
     // FIXME: massive hack for EOS workaround
     stream_ << "#ifdef __linux__" << std::endl
@@ -318,10 +318,10 @@ void serialization_implementation::format(const file_info& vm) {
             << "#endif" << std::endl;
     utility_.blank_line();
 
-    if (vm.meta_type() == sml::meta_types::enumeration)
-        format_enumeration(vm);
-    else if (vm.meta_type() == sml::meta_types::pod)
-        format_class(vm);
+    if (fi.meta_type() == sml::meta_types::enumeration)
+        format_enumeration(fi);
+    else if (fi.meta_type() == sml::meta_types::pod)
+        format_class(fi);
 }
 
 } } }

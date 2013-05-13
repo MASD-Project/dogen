@@ -48,7 +48,7 @@ public:
     exception_declaration(std::ostream& stream);
 
 public:
-    void format(const exception_info& vm);
+    void format(const exception_info& ei);
 
 protected:
     std::ostream& stream_;

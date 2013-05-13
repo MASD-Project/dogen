@@ -46,7 +46,7 @@ public:
     explicit src_cmakelists(std::ostream& stream);
 
 public:
-    void format(const cmakelists_info& vm);
+    void format(const cmakelists_info& ci);
 
 private:
     std::ostream& stream_;

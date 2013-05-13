@@ -46,8 +46,8 @@ create(std::ostream& stream) {
     return file_formatter::shared_ptr(new facet_includer(stream));
 }
 
-void facet_includer::format(const file_info& vm) {
-    if (vm.class_info())
+void facet_includer::format(const file_info& fi) {
+    if (fi.class_info())
         BOOST_THROW_EXCEPTION(formatting_error(unexpected_class_info));
 
     licence licence(stream_);
@@ -55,7 +55,7 @@ void facet_includer::format(const file_info& vm) {
 
     const bool blank_line(false);
     includes includes(stream_, blank_line);
-    includes.format(vm);
+    includes.format(fi);
 }
 
 } } }

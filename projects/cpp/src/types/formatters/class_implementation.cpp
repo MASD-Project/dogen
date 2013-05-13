@@ -38,16 +38,16 @@ namespace formatters {
 class_implementation::class_implementation(std::ostream& stream)
     : stream_(stream), utility_(stream_, indenter_) { }
 
-void class_implementation::default_constructor(const class_info& vm) {
-    if (!vm.requires_manual_default_constructor())
+void class_implementation::default_constructor(const class_info& ci) {
+    if (!ci.requires_manual_default_constructor())
         return;
 
-    stream_ << indenter_ << vm.name() << "::"
-            << vm.name() << "()" << std::endl;
+    stream_ << indenter_ << ci.name() << "::"
+            << ci.name() << "()" << std::endl;
     {
         positive_indenter_scope s(indenter_);
         bool is_first(true);
-        for (const auto p : vm.properties()) {
+        for (const auto p : ci.properties()) {
             if (!p.type().is_primitive() && !p.type().is_enumeration())
                 continue;
 
@@ -65,16 +65,16 @@ void class_implementation::default_constructor(const class_info& vm) {
     utility_.blank_line();
 }
 
-void class_implementation::move_constructor(const class_info& vm) {
-    if (!vm.requires_manual_move_constructor())
+void class_implementation::move_constructor(const class_info& ci) {
+    if (!ci.requires_manual_move_constructor())
         return;
 
-    stream_ << indenter_ << vm.name() << "::" << vm.name()
-            << "(" << vm.name() << "&& rhs)" << std::endl;
+    stream_ << indenter_ << ci.name() << "::" << ci.name()
+            << "(" << ci.name() << "&& rhs)" << std::endl;
     {
         positive_indenter_scope s(indenter_);
         bool is_first(true);
-        for (const auto p : vm.properties()) {
+        for (const auto p : ci.properties()) {
             if (is_first)
                 stream_ << indenter_ << ": ";
             else
@@ -90,12 +90,12 @@ void class_implementation::move_constructor(const class_info& vm) {
     utility_.blank_line();
 }
 
-void class_implementation::complete_constructor(const class_info& vm) {
-    const auto props(vm.all_properties());
+void class_implementation::complete_constructor(const class_info& ci) {
+    const auto props(ci.all_properties());
     if (props.empty())
         return;
 
-    stream_ << indenter_ << vm.name() << "::" << vm.name() << "(";
+    stream_ << indenter_ << ci.name() << "::" << ci.name() << "(";
 
     if (props.size() == 1) {
         const auto p(*props.begin());
@@ -126,7 +126,7 @@ void class_implementation::complete_constructor(const class_info& vm) {
         bool is_first(true);
         stream_ << indenter_ << ": ";
 
-        for (const auto p : vm.parents()) {
+        for (const auto p : ci.parents()) {
             qname qname(stream_);
             qname.format(p);
 
@@ -142,7 +142,7 @@ void class_implementation::complete_constructor(const class_info& vm) {
             is_first = false;
         }
 
-        for (const auto p : vm.properties()) {
+        for (const auto p : ci.properties()) {
             if (!is_first)
                 stream_ << "," << std::endl << indenter_ << "  ";
 
@@ -155,11 +155,11 @@ void class_implementation::complete_constructor(const class_info& vm) {
     utility_.blank_line();
 }
 
-void class_implementation::to_stream(const class_info& vm) {
-    if (!vm.is_parent() && vm.parents().empty())
+void class_implementation::to_stream(const class_info& ci) {
+    if (!ci.is_parent() && ci.parents().empty())
         return;
 
-    stream_ << "void " << vm.name()
+    stream_ << "void " << ci.name()
             << "::to_stream(std::ostream& s) const ";
 
     utility_.open_scope();
@@ -168,32 +168,32 @@ void class_implementation::to_stream(const class_info& vm) {
 
         const bool inside_class(true);
         inserter_implementation inserter(stream_, indenter_, inside_class);
-        inserter.format_inserter_implementation(vm);
+        inserter.format_inserter_implementation(ci);
     }
     utility_.close_scope();
     utility_.blank_line();
 }
 
-void class_implementation::swap(const class_info& vm) {
-    if ((vm.all_properties().empty() && !vm.is_parent()) || vm.is_immutable())
+void class_implementation::swap(const class_info& ci) {
+    if ((ci.all_properties().empty() && !ci.is_parent()) || ci.is_immutable())
         return;
 
-    const bool empty(vm.all_properties().empty() && vm.parents().empty());
-    stream_ << indenter_ << "void " << vm.name() << "::swap("
-            << vm.name() << "&" << (empty ? "" : " other")
+    const bool empty(ci.all_properties().empty() && ci.parents().empty());
+    stream_ << indenter_ << "void " << ci.name() << "::swap("
+            << ci.name() << "&" << (empty ? "" : " other")
             <<") noexcept ";
 
     utility_.open_scope();
     {
         positive_indenter_scope s(indenter_);
-        const auto parents(vm.parents());
+        const auto parents(ci.parents());
         for (const auto p : parents)
             stream_ << indenter_ << p.name() << "::swap(other);" << std::endl;
 
         if (!parents.empty())
             utility_.blank_line();
 
-        const auto props(vm.properties());
+        const auto props(ci.properties());
         if (!props.empty()) {
             stream_ << indenter_ << "using std::swap;" << std::endl;
             for (const auto p : props) {
@@ -209,17 +209,17 @@ void class_implementation::swap(const class_info& vm) {
     utility_.blank_line();
 }
 
-void class_implementation::equals_method(const class_info& vm) {
-    if (vm.is_parent() || vm.parents().empty())
+void class_implementation::equals_method(const class_info& ci) {
+    if (ci.is_parent() || ci.parents().empty())
         return;
 
-    stream_ << indenter_ << "bool " << vm.name() << "::equals(const "
-            << vm.original_parent_name_qualified() << "& other) const ";
+    stream_ << indenter_ << "bool " << ci.name() << "::equals(const "
+            << ci.original_parent_name_qualified() << "& other) const ";
     utility_.open_scope();
     {
         positive_indenter_scope s(indenter_);
-        stream_ << indenter_ << "const " << vm.name()
-                << "* const p(dynamic_cast<const " << vm.name()
+        stream_ << indenter_ << "const " << ci.name()
+                << "* const p(dynamic_cast<const " << ci.name()
                 << "* const>(&other));"
                 << std::endl;
         stream_ << indenter_ << "if (!p) return false;"
@@ -231,16 +231,16 @@ void class_implementation::equals_method(const class_info& vm) {
     utility_.blank_line();
 }
 
-void class_implementation::equals_operator(const class_info& vm) {
-    if (vm.is_parent()) {
-        stream_ << indenter_ << "bool " << vm.name() << "::compare(const "
-                << vm.name() <<  "& ";
+void class_implementation::equals_operator(const class_info& ci) {
+    if (ci.is_parent()) {
+        stream_ << indenter_ << "bool " << ci.name() << "::compare(const "
+                << ci.name() <<  "& ";
     } else {
-        stream_ << indenter_ << "bool " << vm.name() << "::operator==(const "
-                << vm.name() <<  "& ";
+        stream_ << indenter_ << "bool " << ci.name() << "::operator==(const "
+                << ci.name() <<  "& ";
     }
 
-    if (vm.all_properties().empty())
+    if (ci.all_properties().empty())
         stream_ << "/*rhs*/";
     else
         stream_ << "rhs";
@@ -250,14 +250,14 @@ void class_implementation::equals_operator(const class_info& vm) {
     utility_.open_scope();
     {
         positive_indenter_scope s(indenter_);
-        if (vm.all_properties().empty())
+        if (ci.all_properties().empty())
             stream_ << indenter_ << "return true";
         else {
             stream_ << indenter_ << "return ";
             bool is_first(true);
             {
                 positive_indenter_scope s(indenter_);
-                const auto parents(vm.parents());
+                const auto parents(ci.parents());
                 for (const auto p : parents) {
                     if (!is_first)
                         stream_ << " &&" << std::endl << indenter_;
@@ -268,7 +268,7 @@ void class_implementation::equals_operator(const class_info& vm) {
                     is_first = false;
                 }
 
-                for (const auto p : vm.properties()) {
+                for (const auto p : ci.properties()) {
                     if (!is_first)
                         stream_ << " &&" << std::endl << indenter_;
                     {
@@ -289,41 +289,41 @@ void class_implementation::equals_operator(const class_info& vm) {
 
 void class_implementation::
 non_pod_getters_and_setters(const std::string class_name,
-    const property_info& vm) {
-    stream_ << indenter_ << vm.type().complete_name() << " " << class_name
-            << "::" << vm.name() << "() const ";
+    const property_info& ci) {
+    stream_ << indenter_ << ci.type().complete_name() << " " << class_name
+            << "::" << ci.name() << "() const ";
 
     utility_.open_scope();
     {
         positive_indenter_scope s(indenter_);
         stream_ << indenter_ << "return "
-                << utility_.as_member_variable(vm.name()) << ";"
+                << utility_.as_member_variable(ci.name()) << ";"
                 << std::endl;
     }
     utility_.close_scope();
     utility_.blank_line();
 
-    if (!vm.is_immutable()) {
+    if (!ci.is_immutable()) {
         stream_ << indenter_;
-        if (vm.is_fluent())
+        if (ci.is_fluent())
             stream_ << class_name << "& ";
         else
             stream_ << "void ";
 
-        stream_ << class_name << "::" << vm.name() << "(const "
-                << vm.type().complete_name();
+        stream_ << class_name << "::" << ci.name() << "(const "
+                << ci.type().complete_name();
 
-        if (!vm.type().is_primitive())
+        if (!ci.type().is_primitive())
             stream_ << "&";
 
         stream_ << " v) ";
         utility_.open_scope();
         {
             positive_indenter_scope s(indenter_);
-            stream_ << indenter_ << utility_.as_member_variable(vm.name())
+            stream_ << indenter_ << utility_.as_member_variable(ci.name())
                     << " = v;" << std::endl;
 
-            if (vm.is_fluent())
+            if (ci.is_fluent())
                 stream_ << indenter_ << "return *this;" << std::endl;
         }
         utility_.close_scope();
@@ -333,31 +333,31 @@ non_pod_getters_and_setters(const std::string class_name,
 
 void class_implementation::
 pod_getters_and_setters(const std::string class_name,
-    const property_info& vm) {
+    const property_info& ci) {
     // const getter
-    stream_ << indenter_ << "const " << vm.type().complete_name()
-            << "& " << class_name << "::" << vm.name()
+    stream_ << indenter_ << "const " << ci.type().complete_name()
+            << "& " << class_name << "::" << ci.name()
             << "() const ";
     utility_.open_scope();
     {
         positive_indenter_scope s(indenter_);
         stream_ << indenter_ << "return "
-                << utility_.as_member_variable(vm.name()) << ";"
+                << utility_.as_member_variable(ci.name()) << ";"
                 << std::endl;
     }
     utility_.close_scope();
     utility_.blank_line();
 
-    if (!vm.is_immutable()) {
+    if (!ci.is_immutable()) {
         // Popsicle immutability
-        stream_ << indenter_ << vm.type().complete_name()
-                << "& " << class_name << "::" << vm.name()
+        stream_ << indenter_ << ci.type().complete_name()
+                << "& " << class_name << "::" << ci.name()
                 << "() ";
         utility_.open_scope();
         {
             positive_indenter_scope s(indenter_);
             stream_ << indenter_ << "return "
-                    << utility_.as_member_variable(vm.name()) << ";"
+                    << utility_.as_member_variable(ci.name()) << ";"
                     << std::endl;
         }
         utility_.close_scope();
@@ -365,23 +365,23 @@ pod_getters_and_setters(const std::string class_name,
 
         // traditional setter
         stream_ << indenter_;
-        if (vm.is_fluent())
+        if (ci.is_fluent())
             stream_ << class_name << "& ";
         else
             stream_ << "void ";
-        stream_ << class_name << "::" << vm.name() << "(const "
-                << vm.type().complete_name();
+        stream_ << class_name << "::" << ci.name() << "(const "
+                << ci.type().complete_name();
 
-        if (!vm.type().is_primitive())
+        if (!ci.type().is_primitive())
             stream_ << "&";
 
         stream_ << " v) ";
         utility_.open_scope();
         {
             positive_indenter_scope s(indenter_);
-            stream_ << indenter_ << utility_.as_member_variable(vm.name())
+            stream_ << indenter_ << utility_.as_member_variable(ci.name())
                     << " = v;" << std::endl;
-            if (vm.is_fluent())
+            if (ci.is_fluent())
                 stream_ << indenter_ << "return *this;" << std::endl;
         }
         utility_.close_scope();
@@ -389,23 +389,23 @@ pod_getters_and_setters(const std::string class_name,
 
         // move setter
         stream_ << indenter_;
-        if (vm.is_fluent())
+        if (ci.is_fluent())
             stream_ << class_name << "& ";
         else
             stream_ << "void ";
-        stream_ << class_name << "::" << vm.name() << "(const "
-                << vm.type().complete_name();
+        stream_ << class_name << "::" << ci.name() << "(const "
+                << ci.type().complete_name();
 
-        if (!vm.type().is_primitive())
+        if (!ci.type().is_primitive())
             stream_ << "&&";
 
         stream_ << " v) ";
         utility_.open_scope();
         {
             positive_indenter_scope s(indenter_);
-            stream_ << indenter_ << utility_.as_member_variable(vm.name())
+            stream_ << indenter_ << utility_.as_member_variable(ci.name())
                     << " = std::move(v);" << std::endl;
-            if (vm.is_fluent())
+            if (ci.is_fluent())
                 stream_ << indenter_ << "return *this;" << std::endl;
         }
         utility_.close_scope();
@@ -413,26 +413,26 @@ pod_getters_and_setters(const std::string class_name,
     }
 }
 
-void class_implementation::getters_and_setters(const class_info& vm) {
-    if (vm.properties().empty())
+void class_implementation::getters_and_setters(const class_info& ci) {
+    if (ci.properties().empty())
         return;
 
-    for (const auto p : vm.properties()) {
+    for (const auto p : ci.properties()) {
         if (p.type().is_primitive() || p.type().is_enumeration())
-            non_pod_getters_and_setters(vm.name(), p);
+            non_pod_getters_and_setters(ci.name(), p);
         else
-            pod_getters_and_setters(vm.name(), p);
+            pod_getters_and_setters(ci.name(), p);
     }
 }
 
 void class_implementation::
-assignment_operator(const class_info& vm) {
+assignment_operator(const class_info& ci) {
     // assignment is only available in leaf classes - MEC++-33
-    if (vm.all_properties().empty() || vm.is_parent() || vm.is_immutable())
+    if (ci.all_properties().empty() || ci.is_parent() || ci.is_immutable())
         return;
 
-    stream_ << indenter_ << vm.name() << "& "
-            << vm.name() << "::operator=(" << vm.name()
+    stream_ << indenter_ << ci.name() << "& "
+            << ci.name() << "::operator=(" << ci.name()
             << " other) ";
 
     utility_.open_scope();

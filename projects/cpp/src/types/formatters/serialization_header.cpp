@@ -65,31 +65,31 @@ serialization_header::create(std::ostream& stream,
         new serialization_header(stream, disable_xml_serialization));
 }
 
-void serialization_header::load_and_save_functions(const class_info& vm) {
+void serialization_header::load_and_save_functions(const class_info& ci) {
     qname qname(stream_);
     stream_ << indenter_ << "template<typename Archive>" << std::endl
             << indenter_ << "void save(Archive& ar, const ";
-    qname.format(vm);
+    qname.format(ci);
     stream_ << "& v, unsigned int version);" << std::endl;
     utility_.blank_line();
 
     stream_ << indenter_ << "template<typename Archive>" << std::endl
             << indenter_ << "void load(Archive& ar" << ", ";
-    qname.format(vm);
+    qname.format(ci);
     stream_ << "& v, unsigned int version);" << std::endl;
 }
 
-void serialization_header::format_class(const file_info& vm) {
-    const auto o(vm.class_info());
+void serialization_header::format_class(const file_info& fi) {
+    const auto o(fi.class_info());
     if (!o) {
         BOOST_LOG_SEV(lg, error) << missing_class_info;
         BOOST_THROW_EXCEPTION(formatting_error(missing_class_info));
     }
 
-    const class_info& cvm(*o);
+    const class_info& ci(*o);
     qname qname(stream_);
-    const auto parents(cvm.parents());
-    if (!cvm.is_parent() && !parents.empty())
+    const auto parents(ci.parents());
+    if (!ci.is_parent() && !parents.empty())
     {
         {
             std::list<std::string> ns { boost_ns };
@@ -105,7 +105,7 @@ void serialization_header::format_class(const file_info& vm) {
                     qname.format(p);
                     stream_ << "," << std::endl
                             << indenter_;
-                    qname.format(cvm);
+                    qname.format(ci);
                     stream_ << std::endl;
                 }
                 stream_ << indenter_ << "> : public mpl::true_ {};"
@@ -117,12 +117,12 @@ void serialization_header::format_class(const file_info& vm) {
     }
 
     stream_ << indenter_ << "BOOST_SERIALIZATION_SPLIT_FREE(";
-    qname.format(cvm);
+    qname.format(ci);
     stream_ << ")" << std::endl;
 
-    if (cvm.is_parent()) {
+    if (ci.is_parent()) {
         stream_ << indenter_ << "BOOST_SERIALIZATION_ASSUME_ABSTRACT(";
-        qname.format(cvm);
+        qname.format(ci);
         stream_ << ")" << std::endl;
         utility_.blank_line();
     }
@@ -131,25 +131,25 @@ void serialization_header::format_class(const file_info& vm) {
         std::list<std::string> ns { boost_ns, serialization_ns };
         namespace_helper nsh(stream_, ns);
         utility_.blank_line();
-        load_and_save_functions(cvm);
+        load_and_save_functions(ci);
         utility_.blank_line();
     }
     utility_.blank_line(2);
 }
 
-void serialization_header::format_enumeration(const file_info& vm) {
-    const auto o(vm.enumeration_info());
+void serialization_header::format_enumeration(const file_info& fi) {
+    const auto o(fi.enumeration_info());
     if (!o) {
         BOOST_LOG_SEV(lg, error) << missing_enumeration_info;
         BOOST_THROW_EXCEPTION(formatting_error(missing_enumeration_info));
     }
 
-    const auto evm(*o);
+    const auto ei(*o);
     stream_ << indenter_ << "template<class Archive>" << std::endl
             << "void serialize(Archive& ar, ";
 
     qname qnf(stream_);
-    qnf.format(evm);
+    qnf.format(ei);
 
     stream_ << "& v, unsigned int /*version*/)";
     utility_.open_scope();
@@ -161,28 +161,28 @@ void serialization_header::format_enumeration(const file_info& vm) {
             stream_ << indenter_ << "using boost::serialization::make_nvp;"
                     << std::endl
                     << indenter_ << "ar & make_nvp(\""
-                    << evm.name() << "\", v);" << std::endl;
+                    << ei.name() << "\", v);" << std::endl;
         }
     }
     utility_.close_scope();
     utility_.blank_line();
 }
 
-void serialization_header::format(const file_info& vm) {
+void serialization_header::format(const file_info& fi) {
     licence licence(stream_);
     licence.format();
 
     header_guards guards(stream_);
-    guards.format_start(vm.header_guard());
+    guards.format_start(fi.header_guard());
     utility_.blank_line();
 
     includes includes(stream_);
-    includes.format(vm);
+    includes.format(fi);
 
-    if (vm.meta_type() == sml::meta_types::enumeration)
-        format_enumeration(vm);
-    else if (vm.meta_type() == sml::meta_types::pod)
-        format_class(vm);
+    if (fi.meta_type() == sml::meta_types::enumeration)
+        format_enumeration(fi);
+    else if (fi.meta_type() == sml::meta_types::pod)
+        format_class(fi);
 
     guards.format_end();
 }

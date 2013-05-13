@@ -52,18 +52,18 @@ file_formatter::shared_ptr visitor::create(std::ostream& stream) {
     return file_formatter::shared_ptr(new visitor(stream));
 }
 
-void visitor::format(const visitor_info& vm) {
+void visitor::format(const visitor_info& vi) {
     {
-        namespace_helper ns(stream_, vm.namespaces());
+        namespace_helper ns(stream_, vi.namespaces());
         utility_.blank_line();
 
         doxygen_comments dc(stream_, indenter_);
-        dc.format(vm.documentation());
-        stream_ << indenter_ << "class " << vm.name() << " {" << std::endl;
+        dc.format(vi.documentation());
+        stream_ << indenter_ << "class " << vi.name() << " {" << std::endl;
         utility_.public_access_specifier();
         {
             positive_indenter_scope s(indenter_);
-            stream_ << indenter_ << "virtual ~" << vm.name()
+            stream_ << indenter_ << "virtual ~" << vi.name()
                     << "() noexcept = 0;"
                     << std::endl;
             utility_.blank_line();
@@ -73,7 +73,7 @@ void visitor::format(const visitor_info& vm) {
         {
             positive_indenter_scope s(indenter_);
             bool is_first(true);
-            for (const auto& t : vm.types()) {
+            for (const auto& t : vi.types()) {
                 if (!is_first)
                     utility_.blank_line();
 
@@ -101,25 +101,25 @@ void visitor::format(const visitor_info& vm) {
         stream_ << indenter_ << "};" << std::endl;
         utility_.blank_line();
 
-        stream_ << indenter_ << "inline " << vm.name() << "::~"<< vm.name()
+        stream_ << indenter_ << "inline " << vi.name() << "::~"<< vi.name()
                 << "() noexcept { }" << std::endl;
         utility_.blank_line();
     }
     utility_.blank_line(2);
 }
 
-void visitor::format(const file_info& vm) {
+void visitor::format(const file_info& fi) {
     licence licence(stream_);
     licence.format();
 
     header_guards guards(stream_);
-    guards.format_start(vm.header_guard());
+    guards.format_start(fi.header_guard());
     utility_.blank_line();
 
     includes includes(stream_);
-    includes.format(vm);
+    includes.format(fi);
 
-    const auto o(vm.visitor_info());
+    const auto o(fi.visitor_info());
     if (!o) {
         BOOST_LOG_SEV(lg, error) << missing_visitor_info;
         BOOST_THROW_EXCEPTION(formatting_error(missing_visitor_info));

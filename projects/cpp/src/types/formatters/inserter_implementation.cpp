@@ -79,19 +79,19 @@ inserter_implementation(std::ostream& stream, indenter& indenter,
 }
 
 bool inserter_implementation::
-is_insertable(const nested_type_info& vm) {
-    return !vm.is_sequence_container() && !vm.is_associative_container();
+is_insertable(const nested_type_info& nti) {
+    return !nti.is_sequence_container() && !nti.is_associative_container();
 }
 
 void inserter_implementation::
-sequence_container_helper(const nested_type_info& vm) {
-    const auto children(vm.children());
+sequence_container_helper(const nested_type_info& nti) {
+    const auto children(nti.children());
     if (children.size() != 1) {
         BOOST_LOG_SEV(lg, error) << invalid_sequence_container;
         BOOST_THROW_EXCEPTION(formatting_error(invalid_sequence_container));
     }
 
-    const auto container(vm);
+    const auto container(nti);
     const auto containee(children.front());
 
     {
@@ -116,7 +116,7 @@ sequence_container_helper(const nested_type_info& vm) {
                         << utility_.quote(", ") << ";" << std::endl;
 
                 if (containee.is_string_like()) {
-                    const std::string tus(vm.is_char_like() ? "*i" :
+                    const std::string tus(nti.is_char_like() ? "*i" :
                         "tidy_up_string(*i)");
                     stream_ << indenter_ << "s" << space_inserter
                             << utility_.quote_escaped_streamed(tus)
@@ -136,19 +136,19 @@ sequence_container_helper(const nested_type_info& vm) {
 }
 
 void inserter_implementation::
-associative_container_helper(const nested_type_info& vm) {
-    const auto children(vm.children());
+associative_container_helper(const nested_type_info& nti) {
+    const auto children(nti.children());
     if (children.size() != 1 && children.size() != 2) {
         BOOST_LOG_SEV(lg, error) << invalid_associative_container;
         BOOST_THROW_EXCEPTION(formatting_error(invalid_associative_container));
     }
 
     if (children.size() == 1) {
-        sequence_container_helper(vm);
+        sequence_container_helper(nti);
         return;
     }
 
-    const auto container(vm);
+    const auto container(nti);
     {
         namespace_helper ns_helper(stream_, container.namespaces());
 
@@ -183,7 +183,7 @@ associative_container_helper(const nested_type_info& vm) {
 
                 const auto key(children.front());
                 if (key.is_string_like()) {
-                    const std::string tus(vm.is_char_like() ? "i->first" :
+                    const std::string tus(nti.is_char_like() ? "i->first" :
                         "tidy_up_string(i->first)");
                     stream_ << indenter_ << "s" << space_inserter
                             << utility_.quote_escaped_streamed(tus)
@@ -203,7 +203,7 @@ associative_container_helper(const nested_type_info& vm) {
 
                 const auto value(children.back());
                 if (value.is_string_like()) {
-                    const std::string tus(vm.is_char_like() ? "i->second" :
+                    const std::string tus(nti.is_char_like() ? "i->second" :
                         "tidy_up_string(i->second)");
                     stream_ << indenter_ << "s" << space_inserter
                             << utility_.quote_escaped_streamed(tus)
@@ -227,14 +227,14 @@ associative_container_helper(const nested_type_info& vm) {
 }
 
 void inserter_implementation::
-smart_pointer_helper(const nested_type_info& vm) {
-    const auto children(vm.children());
+smart_pointer_helper(const nested_type_info& nti) {
+    const auto children(nti.children());
     if (children.size() != 1) {
         BOOST_LOG_SEV(lg, error) << invalid_smart_pointer;
         BOOST_THROW_EXCEPTION(formatting_error(invalid_smart_pointer));
     }
 
-    const auto container(vm);
+    const auto container(nti);
     {
         namespace_helper ns_helper(stream_, container.namespaces());
 
@@ -250,7 +250,7 @@ smart_pointer_helper(const nested_type_info& vm) {
                     << utility_.quote("{ ") << space_inserter
                     << utility_.quote(utility_.quote_escaped(type) + colon)
                     << space_inserter
-                    << utility_.quote(utility_.quote_escaped(vm.name()))
+                    << utility_.quote(utility_.quote_escaped(nti.name()))
                     << space_inserter << utility_.quote(spaced_comma)
                     << std::endl;
 
@@ -272,7 +272,7 @@ smart_pointer_helper(const nested_type_info& vm) {
                         << utility_.quote(utility_.quote_escaped("data") +
                             colon);
                 if (containee.is_string_like()) {
-                    const std::string tus(vm.is_char_like() ? "*v" :
+                    const std::string tus(nti.is_char_like() ? "*v" :
                         "tidy_up_string(*v)");
 
                     stream_ << space_inserter
@@ -303,14 +303,14 @@ smart_pointer_helper(const nested_type_info& vm) {
 }
 
 void inserter_implementation::
-optional_helper(const nested_type_info& vm) {
-    const auto children(vm.children());
+optional_helper(const nested_type_info& nti) {
+    const auto children(nti.children());
     if (children.size() != 1) {
         BOOST_LOG_SEV(lg, error) << invalid_optional_type;
         BOOST_THROW_EXCEPTION(formatting_error(invalid_optional_type));
     }
 
-    const auto container(vm);
+    const auto container(nti);
     {
         namespace_helper ns_helper(stream_, container.namespaces());
 
@@ -326,7 +326,7 @@ optional_helper(const nested_type_info& vm) {
                     << utility_.quote("{ ") << space_inserter
                     << utility_.quote(utility_.quote_escaped(type) + colon)
                     << space_inserter
-                    << utility_.quote(utility_.quote_escaped(vm.name()))
+                    << utility_.quote(utility_.quote_escaped(nti.name()))
                     << space_inserter << utility_.quote(spaced_comma)
                     << ";"
                     << std::endl;
@@ -341,7 +341,7 @@ optional_helper(const nested_type_info& vm) {
                             colon);
 
                 if (containee.is_string_like()) {
-                    const std::string tus(vm.is_char_like() ? "*v" :
+                    const std::string tus(nti.is_char_like() ? "*v" :
                         "tidy_up_string(*v)");
 
                     stream_ << space_inserter
@@ -373,14 +373,14 @@ optional_helper(const nested_type_info& vm) {
 }
 
 void inserter_implementation::
-pair_helper(const nested_type_info& vm) {
-    const auto children(vm.children());
+pair_helper(const nested_type_info& nti) {
+    const auto children(nti.children());
     if (children.size() != 2) {
         BOOST_LOG_SEV(lg, error) << invalid_pair_type;
         BOOST_THROW_EXCEPTION(formatting_error(invalid_pair_type));
     }
 
-    const auto container(vm);
+    const auto container(nti);
     {
         namespace_helper ns_helper(stream_, container.namespaces());
 
@@ -396,7 +396,7 @@ pair_helper(const nested_type_info& vm) {
                     << utility_.quote("{ ") << space_inserter
                     << utility_.quote(utility_.quote_escaped(type) + colon)
                     << space_inserter
-                    << utility_.quote(utility_.quote_escaped(vm.name()))
+                    << utility_.quote(utility_.quote_escaped(nti.name()))
                     << space_inserter << utility_.quote(spaced_comma)
                     << ";"
                     << std::endl;
@@ -407,7 +407,7 @@ pair_helper(const nested_type_info& vm) {
                     << utility_.quote(utility_.quote_escaped("first") + colon);
 
             if (first.is_string_like()) {
-                const std::string tus(vm.is_char_like() ? "v.first" :
+                const std::string tus(nti.is_char_like() ? "v.first" :
                     "tidy_up_string(v.first)");
 
                 stream_ << space_inserter
@@ -424,7 +424,7 @@ pair_helper(const nested_type_info& vm) {
                     << utility_.quote(utility_.quote_escaped("second") + colon);
 
             if (second.is_string_like()) {
-                const std::string tus(vm.is_char_like() ? "v.second" :
+                const std::string tus(nti.is_char_like() ? "v.second" :
                     "tidy_up_string(v.second)");
 
                 stream_ << space_inserter
@@ -446,26 +446,26 @@ pair_helper(const nested_type_info& vm) {
 }
 
 void inserter_implementation::
-variant_helper(const nested_type_info& vm) {
-    const auto children(vm.children());
+variant_helper(const nested_type_info& nti) {
+    const auto children(nti.children());
     if (children.empty()) {
         BOOST_LOG_SEV(lg, error) << invalid_variant;
         BOOST_THROW_EXCEPTION(formatting_error(invalid_variant));
     }
 
-    const auto container(vm);
+    const auto container(nti);
     {
         namespace_helper ns_helper(stream_, container.namespaces());
 
         utility_.blank_line();
         stream_ << indenter_
-                << "struct " << vm.complete_identifiable_name()
+                << "struct " << nti.complete_identifiable_name()
                 << "_visitor : public boost::static_visitor<> ";
 
         utility_.open_scope();
         {
             positive_indenter_scope s(indenter_);
-            stream_ << indenter_ << vm.complete_identifiable_name()
+            stream_ << indenter_ << nti.complete_identifiable_name()
                     << "_visitor(std::ostream& s) : stream_(s) ";
             utility_.open_scope();
             {
@@ -474,7 +474,7 @@ variant_helper(const nested_type_info& vm) {
                         << utility_.quote("{ ") << space_inserter
                         << utility_.quote(utility_.quote_escaped(type) + colon)
                         << space_inserter
-                        << utility_.quote(utility_.quote_escaped(vm.name()))
+                        << utility_.quote(utility_.quote_escaped(nti.name()))
                         << space_inserter << utility_.quote(spaced_comma)
                         << ";"
                         << std::endl;
@@ -486,7 +486,7 @@ variant_helper(const nested_type_info& vm) {
             utility_.close_scope();
             utility_.blank_line();
 
-            stream_ << indenter_ << "~" << vm.complete_identifiable_name()
+            stream_ << indenter_ << "~" << nti.complete_identifiable_name()
                     << "_visitor() { stream_" << space_inserter
                     << utility_.quote(" }") << "; }" << std::endl;
             utility_.blank_line();
@@ -545,7 +545,7 @@ variant_helper(const nested_type_info& vm) {
             positive_indenter_scope s(indenter_);
             stream_ << indenter_
                     << "boost::apply_visitor("
-                    << vm.complete_identifiable_name()
+                    << nti.complete_identifiable_name()
                     << "_visitor(s), v);" << std::endl;
             stream_ << indenter_ << "return s;" << std::endl;
         }
@@ -580,37 +580,37 @@ void inserter_implementation::tidy_up_string_method() {
 }
 
 void inserter_implementation::
-recursive_helper_method_creator(const nested_type_info& vm,
+recursive_helper_method_creator(const nested_type_info& nti,
     std::unordered_set<std::string>& types_done) {
 
-    if (types_done.find(vm.complete_identifiable_name()) != types_done.end())
+    if (types_done.find(nti.complete_identifiable_name()) != types_done.end())
         return;
 
-    const auto children(vm.children());
+    const auto children(nti.children());
     for (const auto c : children)
         recursive_helper_method_creator(c, types_done);
 
-    if (vm.is_sequence_container())
-        sequence_container_helper(vm);
-    else if (vm.is_associative_container())
-        associative_container_helper(vm);
-    else if (vm.is_smart_pointer())
-        smart_pointer_helper(vm);
-    else if (vm.is_optional_like())
-        optional_helper(vm);
-    else if (vm.is_pair())
-        pair_helper(vm);
-    else if (vm.is_variant_like())
-        variant_helper(vm);
-    else if (vm.is_string_like() && !vm.is_char_like())
+    if (nti.is_sequence_container())
+        sequence_container_helper(nti);
+    else if (nti.is_associative_container())
+        associative_container_helper(nti);
+    else if (nti.is_smart_pointer())
+        smart_pointer_helper(nti);
+    else if (nti.is_optional_like())
+        optional_helper(nti);
+    else if (nti.is_pair())
+        pair_helper(nti);
+    else if (nti.is_variant_like())
+        variant_helper(nti);
+    else if (nti.is_string_like() && !nti.is_char_like())
         tidy_up_string_method();
 
-    types_done.insert(vm.complete_identifiable_name());
+    types_done.insert(nti.complete_identifiable_name());
 }
 
 void inserter_implementation::
-format_helper_methods(const class_info& vm) {
-    const auto props(vm.properties());
+format_helper_methods(const class_info& ci) {
+    const auto props(ci.properties());
     if (props.empty())
         return;
 
@@ -620,8 +620,8 @@ format_helper_methods(const class_info& vm) {
 }
 
 void inserter_implementation::
-format_inserter_implementation(const class_info& vm) {
-    if (vm.requires_stream_manipulators()) {
+format_inserter_implementation(const class_info& ci) {
+    if (ci.requires_stream_manipulators()) {
         stream_ << indenter_ << "boost::io::ios_flags_saver ifs(s);"
                 << std::endl
                 << indenter_ << "s.setf(std::ios_base::boolalpha);"
@@ -641,7 +641,7 @@ format_inserter_implementation(const class_info& vm) {
 
     std::ostringstream ss;
     qname qname(ss);
-    qname.format(vm);
+    qname.format(ci);
 
     stream_ << indenter_ << special_indent << inserter
             << utility_.quote(utility_.quote_escaped(type) + colon)
@@ -649,7 +649,7 @@ format_inserter_implementation(const class_info& vm) {
             << utility_.quote(utility_.quote_escaped(ss.str()));
 
     unsigned int i(0);
-    const auto parents(vm.parents());
+    const auto parents(ci.parents());
     for (const auto p : parents) {
         if (i != 0)
             stream_ << indenter_ << "s";
@@ -664,7 +664,7 @@ format_inserter_implementation(const class_info& vm) {
         ++i;
     }
 
-    const auto props(vm.properties());
+    const auto props(ci.properties());
     if (!parents.empty())
         stream_ << indenter_ << "s";
 

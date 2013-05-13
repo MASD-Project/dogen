@@ -58,19 +58,19 @@ namespace_documentation::create(std::ostream& stream) {
     return file_formatter::shared_ptr(new namespace_documentation(stream));
 }
 
-void namespace_documentation::format_namespace(const file_info& vm) {
-    auto o(vm.namespace_info());
+void namespace_documentation::format_namespace(const file_info& fi) {
+    auto o(fi.namespace_info());
     if (!o) {
         BOOST_LOG_SEV(lg, error) << missing_namespace_info;
         BOOST_THROW_EXCEPTION(formatting_error(missing_namespace_info));
     }
 
     {
-        const namespace_info& cvm(*o);
-        if (cvm.namespaces().empty())
+        const namespace_info& ci(*o);
+        if (ci.namespaces().empty())
             return;
 
-        auto other_ns(cvm.namespaces());
+        auto other_ns(ci.namespaces());
         other_ns.pop_back();
         namespace_formatter nsf(stream_);
         for (auto ns : other_ns)
@@ -78,11 +78,11 @@ void namespace_documentation::format_namespace(const file_info& vm) {
         utility_.blank_line();
 
         doxygen_comments dc(stream_, indenter_);
-        dc.format(cvm.documentation());
-        nsf.format_start(cvm.namespaces().back());
+        dc.format(ci.documentation());
+        nsf.format_start(ci.namespaces().back());
 
         bool first(true);
-        for (auto ns : cvm.namespaces()) {
+        for (auto ns : ci.namespaces()) {
             if (!first)
                 stream_ << " ";
             nsf.format_end();
@@ -92,19 +92,19 @@ void namespace_documentation::format_namespace(const file_info& vm) {
     utility_.blank_line(2);
 }
 
-void namespace_documentation::format(const file_info& vm) {
+void namespace_documentation::format(const file_info& fi) {
     licence licence(stream_);
     licence.format();
 
     header_guards guards(stream_);
-    guards.format_start(vm.header_guard());
+    guards.format_start(fi.header_guard());
     utility_.blank_line();
 
     includes includes(stream_);
-    includes.format(vm);
+    includes.format(fi);
 
-    if (vm.meta_type() == sml::meta_types::package)
-        format_namespace(vm);
+    if (fi.meta_type() == sml::meta_types::package)
+        format_namespace(fi);
 
     guards.format_end();
 }

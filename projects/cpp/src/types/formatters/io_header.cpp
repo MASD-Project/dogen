@@ -57,16 +57,16 @@ file_formatter::shared_ptr io_header::create(std::ostream& stream) {
     return file_formatter::shared_ptr(new io_header(stream));
 }
 
-void io_header::format_class(const file_info& vm) {
-    boost::optional<class_info> o(vm.class_info());
+void io_header::format_class(const file_info& fi) {
+    boost::optional<class_info> o(fi.class_info());
     if (!o) {
         BOOST_LOG_SEV(lg, error) << missing_class_info;
         BOOST_THROW_EXCEPTION(formatting_error(missing_class_info));
     }
 
     {
-        const class_info& cvm(*o);
-        namespace_helper helper1(stream_, cvm.namespaces());
+        const class_info& ci(*o);
+        namespace_helper helper1(stream_, ci.namespaces());
         utility_.blank_line();
 
         stream_ << indenter_ << "std::ostream&" << std::endl
@@ -78,7 +78,7 @@ void io_header::format_class(const file_info& vm) {
             stream_ << indenter_ << " const ";
 
             qname qname(stream_);
-            qname.format(cvm);
+            qname.format(ci);
             stream_ << "& v);" << std::endl;
             utility_.blank_line();
         }
@@ -86,40 +86,40 @@ void io_header::format_class(const file_info& vm) {
     utility_.blank_line(2);
 }
 
-void io_header::format_enumeration(const file_info& vm) {
-    const auto o(vm.enumeration_info());
+void io_header::format_enumeration(const file_info& fi) {
+    const auto o(fi.enumeration_info());
     if (!o) {
         BOOST_LOG_SEV(lg, error) << missing_enumeration_info;
         BOOST_THROW_EXCEPTION(formatting_error(missing_enumeration_info));
     }
 
-    const auto evm(*o);
+    const auto ei(*o);
     {
-        namespace_helper ns_helper(stream_, evm.namespaces());
+        namespace_helper ns_helper(stream_, ei.namespaces());
         utility_.blank_line();
 
         stream_ << indenter_ << "std::ostream& operator<<(std::ostream& s, "
-                << "const " << evm.name() << "& v);" << std::endl;
+                << "const " << ei.name() << "& v);" << std::endl;
         utility_.blank_line();
     }
     utility_.blank_line(2);
 }
 
-void io_header::format(const file_info& vm) {
+void io_header::format(const file_info& fi) {
     licence licence(stream_);
     licence.format();
 
     header_guards guards(stream_);
-    guards.format_start(vm.header_guard());
+    guards.format_start(fi.header_guard());
     utility_.blank_line();
 
     includes includes(stream_);
-    includes.format(vm);
+    includes.format(fi);
 
-    if (vm.meta_type() == sml::meta_types::enumeration)
-        format_enumeration(vm);
-    else if (vm.meta_type() == sml::meta_types::pod)
-        format_class(vm);
+    if (fi.meta_type() == sml::meta_types::enumeration)
+        format_enumeration(fi);
+    else if (fi.meta_type() == sml::meta_types::pod)
+        format_class(fi);
 
     guards.format_end();
 }

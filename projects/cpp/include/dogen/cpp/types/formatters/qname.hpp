@@ -47,9 +47,9 @@ public:
     explicit qname(std::ostream& stream);
 
 public:
-    void format(const class_info& vm);
-    void format(const enumeration_info& vm);
-    void format(const parent_info& vm);
+    void format(const class_info& ci);
+    void format(const enumeration_info& ei);
+    void format(const parent_info& pi);
 
 private:
     std::ostream& stream_;

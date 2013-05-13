@@ -54,15 +54,15 @@ public:
     static file_formatter::shared_ptr create(std::ostream& stream);
 
 private:
-    void format_serialization_class(const class_info& vm);
-    void format_domain_class(const class_info& vm);
+    void format_serialization_class(const class_info& ci);
+    void format_domain_class(const class_info& ci);
 
-    void format_class(const file_info& vm);
-    void format_enumeration(const file_info& vm);
-    void format_exception(const file_info& vm);
+    void format_class(const file_info& fi);
+    void format_enumeration(const file_info& fi);
+    void format_exception(const file_info& fi);
 
 public:
-    virtual void format(const file_info& vm) override;
+    virtual void format(const file_info& fi) override;
 
 private:
     std::ostream& stream_;

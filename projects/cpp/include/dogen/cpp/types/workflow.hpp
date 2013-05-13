@@ -63,7 +63,7 @@ private:
 
 private:
     value_entry_type
-    generate_file_info(const file_info& vm) const;
+    generate_file_info(const file_info& fi) const;
     value_type generate_file_infos() const;
     value_type generate_cmakelists() const;
     value_entry_type generate_odb_options() const;

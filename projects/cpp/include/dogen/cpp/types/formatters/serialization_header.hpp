@@ -53,14 +53,14 @@ public:
         const bool disable_xml_serialization);
 
 private:
-    void load_and_save_functions(const class_info& vm);
+    void load_and_save_functions(const class_info& ci);
 
 private:
-    void format_class(const file_info& vm);
-    void format_enumeration(const file_info& vm);
+    void format_class(const file_info& fi);
+    void format_enumeration(const file_info& fi);
 
 public:
-    virtual void format(const file_info& vm) override;
+    virtual void format(const file_info& fi) override;
 
 private:
     std::ostream& stream_;

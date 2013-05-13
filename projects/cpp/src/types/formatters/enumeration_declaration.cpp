@@ -37,16 +37,16 @@ enumeration_declaration::
 enumeration_declaration(std::ostream& stream)
     : stream_(stream), utility_(stream_, indenter_) { }
 
-void enumeration_declaration::format(const enumeration_info& vm) {
+void enumeration_declaration::format(const enumeration_info& ei) {
     doxygen_comments dc1(stream_, indenter_);
-    dc1.format(vm.documentation());
+    dc1.format(ei.documentation());
 
-    stream_ << indenter_ << "enum class " << vm.name() << " : unsigned int ";
+    stream_ << indenter_ << "enum class " << ei.name() << " : unsigned int ";
     utility_.open_scope();
     {
         positive_indenter_scope s(indenter_);
         bool is_first(true);
-        const auto enumerators(vm.enumerators());
+        const auto enumerators(ei.enumerators());
         std::ostringstream assignment;
         std::ostringstream comment;
         for (auto i(enumerators.cbegin()); i != enumerators.cend(); ++i) {

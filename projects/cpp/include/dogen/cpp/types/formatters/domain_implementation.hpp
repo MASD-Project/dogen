@@ -53,14 +53,14 @@ public:
     virtual ~domain_implementation() noexcept {}
 
 private:
-    void smart_pointer_helper(const nested_type_info& vm);
-    void recursive_helper_method_creator(const nested_type_info& vm,
+    void smart_pointer_helper(const nested_type_info& nti);
+    void recursive_helper_method_creator(const nested_type_info& nti,
         std::unordered_set<std::string>& types_done);
 
-    void io_helper_methods(const class_info& vm);
-    void inserter_operator(const class_info& vm);
+    void io_helper_methods(const class_info& ci);
+    void inserter_operator(const class_info& ci);
     void class_implementation(const aspect_types at,
-        const sml::category_types ct, const class_info& vm);
+        const sml::category_types ct, const class_info& ci);
 
 public:
     static file_formatter::shared_ptr create(std::ostream& stream,
@@ -68,11 +68,11 @@ public:
         bool disable_io);
 
 private:
-    void format_class(const file_info& vm);
-    void format_enumeration(const file_info& vm);
+    void format_class(const file_info& fi);
+    void format_enumeration(const file_info& fi);
 
 public:
-    virtual void format(const file_info& vm) override;
+    virtual void format(const file_info& fi) override;
 
 private:
     std::ostream& stream_;

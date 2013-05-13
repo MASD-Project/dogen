@@ -34,26 +34,26 @@ key_class_declaration(std::ostream& stream,
       disable_io_(disable_io) {}
 
 void key_class_declaration::
-hand_crafted_constructors(const class_info& vm) {
-    default_constructor(vm);
-    destructor(vm);
+hand_crafted_constructors(const class_info& ci) {
+    default_constructor(ci);
+    destructor(ci);
     if (!disable_complete_constructor_)
-        complete_constructor(vm);
+        complete_constructor(ci);
 }
 
-void key_class_declaration::format(const class_info& vm) {
-    open_class(vm);
+void key_class_declaration::format(const class_info& ci) {
+    open_class(ci);
     {
         positive_indenter_scope s(indenter_);
-        compiler_generated_constuctors(vm);
-        hand_crafted_constructors(vm);
-        friends(vm);
+        compiler_generated_constuctors(ci);
+        hand_crafted_constructors(ci);
+        friends(ci);
         if (!disable_io_)
-            to_stream(vm);
-        getters_and_setters(vm);
-        equality(vm);
-        swap_and_assignment(vm);
-        member_variables(vm);
+            to_stream(ci);
+        getters_and_setters(ci);
+        equality(ci);
+        swap_and_assignment(ci);
+        member_variables(ci);
     }
     close_class();
 }

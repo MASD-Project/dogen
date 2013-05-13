@@ -41,10 +41,10 @@ include_cmakelists(std::ostream& stream, const bool odb_enabled,
                                     odb_enabled_(odb_enabled),
                                     odb_folder_(odb_folder) {}
 
-void include_cmakelists::format(const cmakelists_info& vm) {
-    const std::string mn(vm.model_name().empty() ?
+void include_cmakelists::format(const cmakelists_info& ci) {
+    const std::string mn(ci.model_name().empty() ?
         unnamed_model :
-        vm.model_name());
+        ci.model_name());
 
     stream_ << "# -*- mode: cmake; tab-width: 4; indent-tabs-mode: nil -*-"
             << std::endl
@@ -90,7 +90,7 @@ void include_cmakelists::format(const cmakelists_info& vm) {
 
     stream_  << std::endl
              << "set(include_dir \"${CMAKE_CURRENT_SOURCE_DIR}/include/"
-            << vm.product_name() << "/" << vm.model_name() << "\")"
+            << ci.product_name() << "/" << ci.model_name() << "\")"
             << std::endl;
 
     stream_ << "set(all_odb_files \"\")" << std::endl;
@@ -109,13 +109,13 @@ void include_cmakelists::format(const cmakelists_info& vm) {
             << std::endl
             << "endif()" << std::endl << std::endl;
 
-    stream_ << "add_custom_target(codegen_" << vm.model_name()
+    stream_ << "add_custom_target(codegen_" << ci.model_name()
             << "_" << odb_folder_ << std::endl
             << indenter_ << "WORKING_DIRECTORY ${CMAKE_BINARY_DIR}" << std::endl
             << indenter_
             << "COMMAND mv ${CMAKE_CURRENT_SOURCE_DIR}/include/"
-            << vm.product_name() << "/"
-            << vm.model_name() << "/"
+            << ci.product_name() << "/"
+            << ci.model_name() << "/"
             << odb_folder_ << "/*.cpp" << std::endl
             << indenter_ << "${src_odb_dir})" << std::endl << std::endl;
 
@@ -145,7 +145,7 @@ void include_cmakelists::format(const cmakelists_info& vm) {
         stream_ << indenter_ << "set(pfh_dir \"$ENV{PFH_LOCATION}\")"
                 << std::endl
                 << indenter_ << "set(target_name \"codegen_"
-                << vm.model_name() << "_odb_${type_name}\")" << std::endl
+                << ci.model_name() << "_odb_${type_name}\")" << std::endl
                 << indenter_ << "add_custom_target(${target_name}"
                 << std::endl;
 
@@ -161,11 +161,11 @@ void include_cmakelists::format(const cmakelists_info& vm) {
                     << indenter_ << "--std c++11" << std::endl
                     << indenter_
                     << "--output-dir ${CMAKE_CURRENT_SOURCE_DIR}/include/"
-                    << vm.product_name() << "/" << vm.model_name()
+                    << ci.product_name() << "/" << ci.model_name()
                     << "/" << odb_folder_ << "/" << std::endl
                     << indenter_
                     << "--odb-epilogue '\\#include \\\""
-                    << vm.product_name() << "/" << vm.model_name()
+                    << ci.product_name() << "/" << ci.model_name()
                     << "/" << odb_folder_ << "/${odb_file}\\\"'" << std::endl
                     << indenter_
                     << "-I ${pfh_dir}/include -I ${CMAKE_CURRENT_SOURCE_DIR}"
@@ -176,13 +176,13 @@ void include_cmakelists::format(const cmakelists_info& vm) {
         }
 
         stream_ << indenter_
-                << "add_dependencies(codegen_" << vm.model_name()
+                << "add_dependencies(codegen_" << ci.model_name()
                 << "_odb ${target_name})" << std::endl;
     }
     stream_ << indenter_ << "endif()" << std::endl
             << indenter_
-            << "add_dependencies(codegen_" << vm.model_name() << "_odb "
-            << "codegen_" << vm.model_name() << ")"
+            << "add_dependencies(codegen_" << ci.model_name() << "_odb "
+            << "codegen_" << ci.model_name() << ")"
             << std::endl
             << indenter_ << "set(ignore_file false)" << std::endl;
 

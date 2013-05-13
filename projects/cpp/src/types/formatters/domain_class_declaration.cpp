@@ -34,30 +34,30 @@ domain_class_declaration(std::ostream& stream,
       disable_io_(disable_io) { }
 
 void domain_class_declaration::
-hand_crafted_constructors(const class_info& vm) {
-    default_constructor(vm);
-    destructor(vm);
-    move_constructor(vm);
+hand_crafted_constructors(const class_info& ci) {
+    default_constructor(ci);
+    destructor(ci);
+    move_constructor(ci);
     if (!disable_complete_constructor_)
-        complete_constructor(vm);
+        complete_constructor(ci);
 }
 
-void domain_class_declaration::visitor_method(const class_info& vm) {
-    if (vm.is_visitable()) {
+void domain_class_declaration::visitor_method(const class_info& ci) {
+    if (ci.is_visitable()) {
         utility_.public_access_specifier();
-        stream_ << indenter_ << "virtual void accept(const " << vm.name()
+        stream_ << indenter_ << "virtual void accept(const " << ci.name()
                 << "_visitor& v) const = 0;" << std::endl;
-        stream_ << indenter_ << "virtual void accept(" << vm.name()
+        stream_ << indenter_ << "virtual void accept(" << ci.name()
                 << "_visitor& v) const = 0;" << std::endl;
-        stream_ << indenter_ << "virtual void accept(const " << vm.name()
+        stream_ << indenter_ << "virtual void accept(const " << ci.name()
                 << "_visitor& v) = 0;" << std::endl;
-        stream_ << indenter_ << "virtual void accept(" << vm.name()
+        stream_ << indenter_ << "virtual void accept(" << ci.name()
                 << "_visitor& v) = 0;" << std::endl;
         utility_.blank_line();
-    } else if (vm.is_original_parent_visitable() && !vm.is_parent()) {
+    } else if (ci.is_original_parent_visitable() && !ci.is_parent()) {
         utility_.public_access_specifier();
         stream_ << indenter_ << "virtual void accept(const "
-                << vm.original_parent_name()
+                << ci.original_parent_name()
                 << "_visitor& v) const override {" << std::endl;
 
         {
@@ -67,7 +67,7 @@ void domain_class_declaration::visitor_method(const class_info& vm) {
         stream_ << indenter_ << "}" << std::endl;
         utility_.blank_line();
         stream_ << indenter_ << "virtual void accept("
-                << vm.original_parent_name()
+                << ci.original_parent_name()
                 << "_visitor& v) const override {" << std::endl;
 
         {
@@ -77,7 +77,7 @@ void domain_class_declaration::visitor_method(const class_info& vm) {
         stream_ << indenter_ << "}" << std::endl;
         utility_.blank_line();
         stream_ << indenter_ << "virtual void accept(const "
-                << vm.original_parent_name()
+                << ci.original_parent_name()
                 << "_visitor& v) override {" << std::endl;
 
         {
@@ -87,7 +87,7 @@ void domain_class_declaration::visitor_method(const class_info& vm) {
         stream_ << indenter_ << "}" << std::endl;
         utility_.blank_line();
         stream_ << indenter_ << "virtual void accept("
-                << vm.original_parent_name()
+                << ci.original_parent_name()
                 << "_visitor& v) override {" << std::endl;
 
         {
@@ -99,20 +99,20 @@ void domain_class_declaration::visitor_method(const class_info& vm) {
     }
 }
 
-void domain_class_declaration::format(const class_info& vm) {
-    open_class(vm);
+void domain_class_declaration::format(const class_info& ci) {
+    open_class(ci);
     {
         positive_indenter_scope s(indenter_);
-        compiler_generated_constuctors(vm);
-        hand_crafted_constructors(vm);
-        friends(vm);
-        visitor_method(vm);
+        compiler_generated_constuctors(ci);
+        hand_crafted_constructors(ci);
+        friends(ci);
+        visitor_method(ci);
         if (!disable_io_)
-            to_stream(vm);
-        getters_and_setters(vm);
-        equality(vm);
-        swap_and_assignment(vm);
-        member_variables(vm);
+            to_stream(ci);
+        getters_and_setters(ci);
+        equality(ci);
+        swap_and_assignment(ci);
+        member_variables(ci);
     }
     close_class();
 }

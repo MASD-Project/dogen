@@ -51,11 +51,11 @@ public:
     static file_formatter::shared_ptr create(std::ostream& stream);
 
 private:
-    void format_class(const file_info& vm);
-    void format_enumeration(const file_info& vm);
+    void format_class(const file_info& fi);
+    void format_enumeration(const file_info& fi);
 
 public:
-    virtual void format(const file_info& vm) override;
+    virtual void format(const file_info& fi) override;
 
 private:
     std::ostream& stream_;

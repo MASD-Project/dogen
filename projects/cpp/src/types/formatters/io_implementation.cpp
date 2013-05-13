@@ -65,28 +65,28 @@ file_formatter::shared_ptr io_implementation::create(std::ostream& stream) {
     return file_formatter::shared_ptr(new io_implementation(stream));
 }
 
-void io_implementation::io_helper_methods(const class_info& vm) {
-    if (vm.is_parent() || !vm.parents().empty())
+void io_implementation::io_helper_methods(const class_info& ci) {
+    if (ci.is_parent() || !ci.parents().empty())
         return;
 
     const bool inside_class(false);
     inserter_implementation i(stream_, indenter_, inside_class);
-    i.format_helper_methods(vm);
+    i.format_helper_methods(ci);
 }
 
-void io_implementation::format_enumeration(const file_info& vm) {
-    const auto o(vm.enumeration_info());
+void io_implementation::format_enumeration(const file_info& fi) {
+    const auto o(fi.enumeration_info());
     if (!o) {
         BOOST_LOG_SEV(lg, error) << missing_enumeration_info;
         BOOST_THROW_EXCEPTION(formatting_error(missing_enumeration_info));
     }
 
-    const auto evm(*o);
-    namespace_helper ns_helper(stream_, evm.namespaces());
+    const auto ei(*o);
+    namespace_helper ns_helper(stream_, ei.namespaces());
     utility_.blank_line();
 
     stream_ << "std::ostream& operator<<(std::ostream& s, "
-            << "const " << evm.name() << "& v) ";
+            << "const " << ei.name() << "& v) ";
     utility_.open_scope();
     {
         positive_indenter_scope s(indenter_);
@@ -95,7 +95,7 @@ void io_implementation::format_enumeration(const file_info& vm) {
                 << utility_.quote(utility_.quote_escaped(type) + colon);
 
         stream_ << spaced_inserter
-                << utility_.quote(utility_.quote_escaped(evm.name()) + comma)
+                << utility_.quote(utility_.quote_escaped(ei.name()) + comma)
                 << spaced_inserter
                 << utility_.quote(utility_.quote_escaped("value") + colon)
                 << ";" << std::endl;
@@ -105,8 +105,8 @@ void io_implementation::format_enumeration(const file_info& vm) {
         stream_ << indenter_ << "switch (v) ";
         utility_.open_scope();
         {
-            for (const auto e : evm.enumerators()) {
-                stream_ << indenter_ << "case " << evm.name()
+            for (const auto e : ei.enumerators()) {
+                stream_ << indenter_ << "case " << ei.name()
                         << "::" << e.name() << ":"
                         << std::endl;
                 {
@@ -122,7 +122,7 @@ void io_implementation::format_enumeration(const file_info& vm) {
             {
                 positive_indenter_scope s(indenter_);
                 stream_ << indenter_ << "throw std::invalid_argument("
-                        << "\"Invalid value for " << evm.name() << "\");"
+                        << "\"Invalid value for " << ei.name() << "\");"
                         << std::endl;
             }
             utility_.close_scope();
@@ -138,52 +138,52 @@ void io_implementation::format_enumeration(const file_info& vm) {
     utility_.blank_line();
 }
 
-void io_implementation::format_class(const file_info& vm) {
-    const auto o(vm.class_info());
+void io_implementation::format_class(const file_info& fi) {
+    const auto o(fi.class_info());
     if (!o) {
         BOOST_LOG_SEV(lg, error) << missing_class_info;
         BOOST_THROW_EXCEPTION(formatting_error(missing_class_info));
     }
 
-    const class_info& cvm(*o);
-    io_helper_methods(cvm);
+    const class_info& ci(*o);
+    io_helper_methods(ci);
 
-    namespace_helper ns_helper(stream_, cvm.namespaces());
+    namespace_helper ns_helper(stream_, ci.namespaces());
     utility_.blank_line();
 
     stream_ << "std::ostream& operator<<(std::ostream& s, ";
     {
         positive_indenter_scope s(indenter_);
-        const auto parents(cvm.parents());
-        const bool no_arg(!cvm.is_parent() && parents.empty() &&
-            cvm.properties().empty());
-        stream_ << "const " << cvm.name() << "&" << (no_arg ? ") " : " v) ");
+        const auto parents(ci.parents());
+        const bool no_arg(!ci.is_parent() && parents.empty() &&
+            ci.properties().empty());
+        stream_ << "const " << ci.name() << "&" << (no_arg ? ") " : " v) ");
         utility_.open_scope();
 
-        if (cvm.is_parent() || !parents.empty()) {
+        if (ci.is_parent() || !parents.empty()) {
             stream_ << indenter_ << "v.to_stream(s);" << std::endl
                     << indenter_ << "return(s);" << std::endl;
         } else {
             const bool inside_class(false);
             inserter_implementation i(stream_, indenter_, inside_class);
-            i.format_inserter_implementation(cvm);
+            i.format_inserter_implementation(ci);
         }
     }
     utility_.close_scope();
     utility_.blank_line();
 }
 
-void io_implementation::format(const file_info& vm) {
+void io_implementation::format(const file_info& fi) {
     licence licence(stream_);
     licence.format();
 
     includes includes(stream_);
-    includes.format(vm);
+    includes.format(fi);
 
-    if (vm.meta_type() == sml::meta_types::enumeration)
-        format_enumeration(vm);
-    else if (vm.meta_type() == sml::meta_types::pod)
-        format_class(vm);
+    if (fi.meta_type() == sml::meta_types::enumeration)
+        format_enumeration(fi);
+    else if (fi.meta_type() == sml::meta_types::pod)
+        format_class(fi);
 }
 
 } } }

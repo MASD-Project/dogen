@@ -61,16 +61,16 @@ file_formatter::shared_ptr odb_header::create(std::ostream& stream) {
     return file_formatter::shared_ptr(new odb_header(stream));
 }
 
-void odb_header::format_enumeration(const file_info& vm) {
-    const auto o(vm.enumeration_info());
+void odb_header::format_enumeration(const file_info& fi) {
+    const auto o(fi.enumeration_info());
     if (!o) {
         BOOST_LOG_SEV(lg, error) << missing_enumeration_info;
         BOOST_THROW_EXCEPTION(formatting_error(missing_enumeration_info));
     }
 
-    const auto evm(*o);
+    const auto ei(*o);
     {
-        namespace_helper ns(stream_, evm.namespaces());
+        namespace_helper ns(stream_, ei.namespaces());
         utility_.blank_line();
 
         stream_ << indenter_ << "#ifdef ODB_COMPILER" << std::endl;
@@ -81,16 +81,16 @@ void odb_header::format_enumeration(const file_info& vm) {
     utility_.blank_line(2);
 }
 
-void odb_header::format_class(const file_info& vm) {
-    const auto o(vm.class_info());
+void odb_header::format_class(const file_info& fi) {
+    const auto o(fi.class_info());
     if (!o) {
         BOOST_LOG_SEV(lg, error) << missing_class_info;
         BOOST_THROW_EXCEPTION(formatting_error(missing_class_info));
     }
 
-    const auto evm(*o);
+    const auto ei(*o);
     {
-        if (evm.implementation_specific_parameters().empty()) {
+        if (ei.implementation_specific_parameters().empty()) {
             stream_ << indenter_ << "// class has no ODB pragmas defined."
                     << std::endl;
             utility_.blank_line();
@@ -102,22 +102,22 @@ void odb_header::format_class(const file_info& vm) {
         odb_stream << indenter_ << "#ifdef ODB_COMPILER" << std::endl
                    << std::endl;
 
-        for (const auto kvp : evm.implementation_specific_parameters()) {
+        for (const auto kvp : ei.implementation_specific_parameters()) {
             if (kvp.first == odb_key) {
                 has_odb_parms = true;
                 odb_stream << indenter_
-                           << odb_pragma << " object(" << evm.name() << ") "
+                           << odb_pragma << " object(" << ei.name() << ") "
                            << kvp.second << std::endl;
             }
         }
 
         odb_stream << std::endl;
-        for (const auto p : evm.properties()) {
+        for (const auto p : ei.properties()) {
             for (const auto kvp : p.implementation_specific_parameters()) {
                 if (kvp.first == odb_key) {
                     has_odb_parms = true;
                     odb_stream << indenter_
-                               << odb_pragma << " member(" << evm.name() << "::"
+                               << odb_pragma << " member(" << ei.name() << "::"
                                << utility_.as_member_variable(p.name()) << ") "
                                << kvp.second << std::endl;
                 }
@@ -135,7 +135,7 @@ void odb_header::format_class(const file_info& vm) {
         }
 
         {
-            namespace_helper ns(stream_, evm.namespaces());
+            namespace_helper ns(stream_, ei.namespaces());
             utility_.blank_line();
             stream_ << odb_stream.str();
         }
@@ -143,21 +143,21 @@ void odb_header::format_class(const file_info& vm) {
     }
 }
 
-void odb_header::format(const file_info& vm) {
+void odb_header::format(const file_info& fi) {
     licence licence(stream_);
     licence.format();
 
     header_guards guards(stream_);
-    guards.format_start(vm.header_guard());
+    guards.format_start(fi.header_guard());
     stream_ << std::endl;
 
     includes includes(stream_);
-    includes.format(vm);
+    includes.format(fi);
 
-    if (vm.meta_type() == sml::meta_types::pod)
-        format_class(vm);
-    if (vm.meta_type() == sml::meta_types::enumeration)
-        format_enumeration(vm);
+    if (fi.meta_type() == sml::meta_types::pod)
+        format_class(fi);
+    if (fi.meta_type() == sml::meta_types::enumeration)
+        format_enumeration(fi);
 
     guards.format_end();
 }

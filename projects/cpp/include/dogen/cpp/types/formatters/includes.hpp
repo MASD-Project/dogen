@@ -51,7 +51,7 @@ private:
     void format(std::list<std::string> v, bool is_system);
 
 public:
-    void format(const file_info& vm);
+    void format(const file_info& fi);
 
 private:
     std::ostream& stream_;

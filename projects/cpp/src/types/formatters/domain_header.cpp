@@ -77,12 +77,12 @@ create(std::ostream& stream, const bool disable_complete_constructor,
 }
 
 void domain_header::
-equality_operator(const class_info& vm) {
-    if (!vm.is_parent())
+equality_operator(const class_info& ci) {
+    if (!ci.is_parent())
         return;
 
     stream_ << indenter_ << "inline bool operator==(const "
-            << vm.name() << "& lhs, const " << vm.name() << "& rhs) ";
+            << ci.name() << "& lhs, const " << ci.name() << "& rhs) ";
     utility_.open_scope();
     {
         positive_indenter_scope s(indenter_);
@@ -93,19 +93,19 @@ equality_operator(const class_info& vm) {
 }
 
 void domain_header::
-inserter_operator(const class_info& vm) {
+inserter_operator(const class_info& ci) {
     if (!use_integrated_io_ || disable_io_)
         return;
 
     stream_ << indenter_ << "std::ostream& operator<<(std::ostream& s, "
-            << "const " << vm.name() << "& v);" << std::endl;
+            << "const " << ci.name() << "& v);" << std::endl;
     utility_.blank_line();
 }
 
 void domain_header::
-swap_method(const class_info& vm) {
+swap_method(const class_info& ci) {
     // swap overload is only available in leaf classes - MEC++-33
-    if (vm.all_properties().empty() || vm.is_parent() || vm.is_immutable())
+    if (ci.all_properties().empty() || ci.is_parent() || ci.is_immutable())
         return;
 
     namespace_helper ns(stream_, std::list<std::string> { "std" });
@@ -118,11 +118,11 @@ swap_method(const class_info& vm) {
         positive_indenter_scope s(indenter_);
         stream_ << indenter_;
         qname qname(stream_);
-        qname.format(vm);
+        qname.format(ci);
         stream_ << "& lhs," << std::endl;
 
         stream_ << indenter_;
-        qname.format(vm);
+        qname.format(ci);
         stream_ << "& rhs) ";
 
         utility_.open_scope();
@@ -133,20 +133,20 @@ swap_method(const class_info& vm) {
 }
 
 void domain_header::
-class_declaration(const sml::category_types ct, const class_info& vm) {
+class_declaration(const sml::category_types ct, const class_info& ci) {
     using dogen::utility::exception::invalid_enum_value;
     if (ct == sml::category_types::versioned_key ||
         ct == sml::category_types::unversioned_key) {
         key_class_declaration
             f(stream_, disable_complete_constructor_, disable_io_,
                 disable_serialization_);
-        f.format(vm);
+        f.format(ci);
         return;
     } else if (ct == sml::category_types::user_defined) {
         domain_class_declaration
             f(stream_, disable_complete_constructor_, disable_io_,
                 disable_serialization_);
-        f.format(vm);
+        f.format(ci);
         return;
     }
 
@@ -155,40 +155,40 @@ class_declaration(const sml::category_types ct, const class_info& vm) {
 }
 
 void domain_header::format_main(const sml::category_types ct,
-    const class_info& vm) {
+    const class_info& ci) {
 
     {
-        namespace_helper ns(stream_, vm.namespaces());
+        namespace_helper ns(stream_, ci.namespaces());
         utility_.blank_line();
-        class_declaration(ct, vm);
+        class_declaration(ct, ci);
 
-        if (vm.is_parent()) {
-            stream_ << indenter_ << "inline " << vm.name() << "::~"<< vm.name()
+        if (ci.is_parent()) {
+            stream_ << indenter_ << "inline " << ci.name() << "::~"<< ci.name()
                     << "() noexcept { }" << std::endl;
             utility_.blank_line();
         }
 
-        inserter_operator(vm);
-        equality_operator(vm);
+        inserter_operator(ci);
+        equality_operator(ci);
     }
     utility_.blank_line(2);
 
-    swap_method(vm);
-    if (!vm.all_properties().empty())
+    swap_method(ci);
+    if (!ci.all_properties().empty())
         utility_.blank_line(2);
 }
 
-void domain_header::format_class(const file_info& vm) {
-    boost::optional<class_info> o(vm.class_info());
+void domain_header::format_class(const file_info& fi) {
+    boost::optional<class_info> o(fi.class_info());
     if (!o) {
         BOOST_LOG_SEV(lg, error) << missing_class_info;
         BOOST_THROW_EXCEPTION(formatting_error(missing_class_info));
     }
-    const auto at(vm.aspect_type());
-    const auto ct(vm.category_type());
-    const class_info& cvm(*o);
+    const auto at(fi.aspect_type());
+    const auto ct(fi.category_type());
+    const class_info& ci(*o);
     if (at == aspect_types::main)
-        format_main(ct, cvm);
+        format_main(ct, ci);
     else {
         using dogen::utility::exception::invalid_enum_value;
         BOOST_LOG_SEV(lg, error) << missing_class_info;
@@ -196,55 +196,55 @@ void domain_header::format_class(const file_info& vm) {
     }
 }
 
-void domain_header::format_enumeration(const file_info& vm) {
-    const auto o(vm.enumeration_info());
+void domain_header::format_enumeration(const file_info& fi) {
+    const auto o(fi.enumeration_info());
     if (!o) {
         BOOST_LOG_SEV(lg, error) << missing_enumeration_info;
         BOOST_THROW_EXCEPTION(formatting_error(missing_enumeration_info));
     }
     {
-        const auto evm(*o);
-        namespace_helper ns(stream_, evm.namespaces());
+        const auto ei(*o);
+        namespace_helper ns(stream_, ei.namespaces());
         utility_.blank_line();
         enumeration_declaration f(stream_);
-        f.format(evm);
+        f.format(ei);
     }
     utility_.blank_line(2);
 }
 
-void domain_header::format_exception(const file_info& vm) {
-    const auto o(vm.exception_info());
+void domain_header::format_exception(const file_info& fi) {
+    const auto o(fi.exception_info());
     if (!o) {
         BOOST_LOG_SEV(lg, error) << missing_enumeration_info;
         BOOST_THROW_EXCEPTION(formatting_error(missing_exception_info));
     }
     {
-        const auto evm(*o);
-        namespace_helper ns(stream_, evm.namespaces());
+        const auto ei(*o);
+        namespace_helper ns(stream_, ei.namespaces());
         utility_.blank_line();
         exception_declaration f(stream_);
-        f.format(evm);
+        f.format(ei);
     }
     utility_.blank_line(2);
 }
 
-void domain_header::format(const file_info& vm) {
+void domain_header::format(const file_info& fi) {
     licence licence(stream_);
     licence.format();
 
     header_guards guards(stream_);
-    guards.format_start(vm.header_guard());
+    guards.format_start(fi.header_guard());
     utility_.blank_line();
 
     includes includes(stream_);
-    includes.format(vm);
+    includes.format(fi);
 
-    if (vm.meta_type() == sml::meta_types::enumeration)
-        format_enumeration(vm);
-    else if (vm.meta_type() == sml::meta_types::pod)
-        format_class(vm);
-    else if (vm.meta_type() == sml::meta_types::exception)
-        format_exception(vm);
+    if (fi.meta_type() == sml::meta_types::enumeration)
+        format_enumeration(fi);
+    else if (fi.meta_type() == sml::meta_types::pod)
+        format_class(fi);
+    else if (fi.meta_type() == sml::meta_types::exception)
+        format_exception(fi);
 
     guards.format_end();
 }

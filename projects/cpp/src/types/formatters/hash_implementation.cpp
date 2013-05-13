@@ -65,20 +65,20 @@ file_formatter::shared_ptr hash_implementation::create(std::ostream& stream) {
     return file_formatter::shared_ptr(new hash_implementation(stream));
 }
 
-bool hash_implementation::is_hashable(const nested_type_info& vm) {
+bool hash_implementation::is_hashable(const nested_type_info& nti) {
     return
-        !vm.is_sequence_container() &&
-        !vm.is_associative_container() &&
-        !vm.is_smart_pointer() &&
-        !vm.is_pair() &&
-        !vm.is_optional_like() &&
-        !vm.is_variant_like() &&
-        !vm.is_ptime() &&
-        !vm.is_time_duration();
+        !nti.is_sequence_container() &&
+        !nti.is_associative_container() &&
+        !nti.is_smart_pointer() &&
+        !nti.is_pair() &&
+        !nti.is_optional_like() &&
+        !nti.is_variant_like() &&
+        !nti.is_ptime() &&
+        !nti.is_time_duration();
 }
 
-void hash_implementation::combine_function(const class_info& vm) {
-    if (vm.properties().empty() && vm.parents().empty())
+void hash_implementation::combine_function(const class_info& ci) {
+    if (ci.properties().empty() && ci.parents().empty())
         return;
 
     stream_ << indenter_ << "template <typename HashableType>" << std::endl
@@ -95,20 +95,20 @@ void hash_implementation::combine_function(const class_info& vm) {
     utility_.close_scope();
 }
 
-void hash_implementation::pair_helper(const nested_type_info& vm) {
-    const auto children(vm.children());
+void hash_implementation::pair_helper(const nested_type_info& nti) {
+    const auto children(nti.children());
     if (children.size() != 2) {
         BOOST_LOG_SEV(lg, error) << "Children container has unexpected size: "
                                  << children.size() << " in nested type: "
-                                 << vm.name();
+                                 << nti.name();
 
         BOOST_THROW_EXCEPTION(formatting_error(invalid_sequence_container
-                + vm.name()));
+                + nti.name()));
     }
 
     const std::string container_identifiable_type_name(
-        vm.complete_identifiable_name());
-    const std::string container_type_name(vm.complete_name());
+        nti.complete_identifiable_name());
+    const std::string container_type_name(nti.complete_name());
 
     utility_.blank_line();
     stream_ << indenter_ << "inline std::size_t hash_"
@@ -145,20 +145,20 @@ void hash_implementation::pair_helper(const nested_type_info& vm) {
     utility_.close_scope();
 }
 
-void hash_implementation::optional_helper(const nested_type_info& vm) {
-    const auto children(vm.children());
+void hash_implementation::optional_helper(const nested_type_info& nti) {
+    const auto children(nti.children());
     if (children.size() != 1) {
         BOOST_LOG_SEV(lg, error) << "Children container has unexpected size: "
                                  << children.size() << " in nested type: "
-                                 << vm.name();
+                                 << nti.name();
 
         BOOST_THROW_EXCEPTION(formatting_error(invalid_sequence_container
-                + vm.name()));
+                + nti.name()));
     }
 
     const std::string container_identifiable_type_name(
-        vm.complete_identifiable_name());
-    const std::string container_type_name(vm.complete_name());
+        nti.complete_identifiable_name());
+    const std::string container_type_name(nti.complete_name());
 
     utility_.blank_line();
     stream_ << indenter_ << "inline std::size_t hash_"
@@ -192,30 +192,30 @@ void hash_implementation::optional_helper(const nested_type_info& vm) {
     utility_.close_scope();
 }
 
-void hash_implementation::variant_helper(const nested_type_info& vm) {
-    const auto children(vm.children());
+void hash_implementation::variant_helper(const nested_type_info& nti) {
+    const auto children(nti.children());
     if (children.empty()) {
         BOOST_LOG_SEV(lg, error) << "Children container has unexpected size: "
                                  << children.size() << " in nested type: "
-                                 << vm.name();
+                                 << nti.name();
 
         BOOST_THROW_EXCEPTION(formatting_error(invalid_sequence_container
-                + vm.name()));
+                + nti.name()));
     }
 
     const std::string container_identifiable_type_name(
-        vm.complete_identifiable_name());
-    const std::string container_type_name(vm.complete_name());
+        nti.complete_identifiable_name());
+    const std::string container_type_name(nti.complete_name());
 
     utility_.blank_line();
     stream_ << indenter_ << "struct "
-            << vm.complete_identifiable_name()
+            << nti.complete_identifiable_name()
             << "_visitor : public boost::static_visitor<> ";
 
     utility_.open_scope();
     {
         positive_indenter_scope s(indenter_);
-        stream_ << indenter_ << vm.complete_identifiable_name()
+        stream_ << indenter_ << nti.complete_identifiable_name()
                 << "_visitor() : hash(0) {}" << std::endl;
 
         for (const auto& c : children) {
@@ -250,7 +250,7 @@ void hash_implementation::variant_helper(const nested_type_info& vm) {
     utility_.open_scope();
     {
         positive_indenter_scope s(indenter_);
-        stream_ << indenter_ << vm.complete_identifiable_name()
+        stream_ << indenter_ << nti.complete_identifiable_name()
                 << "_visitor vis;" << std::endl
                 << indenter_ << "boost::apply_visitor(vis, v);" << std::endl
                 << indenter_ << "return vis.hash;" << std::endl;
@@ -259,20 +259,20 @@ void hash_implementation::variant_helper(const nested_type_info& vm) {
 }
 
 void hash_implementation::
-sequence_container_helper(const nested_type_info& vm) {
-    const auto children(vm.children());
+sequence_container_helper(const nested_type_info& nti) {
+    const auto children(nti.children());
     if (children.size() != 1) {
         BOOST_LOG_SEV(lg, error) << "Children container has unexpected size: "
                                  << children.size() << " in nested type: "
-                                 << vm.name();
+                                 << nti.name();
 
         BOOST_THROW_EXCEPTION(formatting_error(invalid_sequence_container
-                + vm.name()));
+                + nti.name()));
     }
 
     const std::string container_identifiable_type_name(
-        vm.complete_identifiable_name());
-    const std::string container_type_name(vm.complete_name());
+        nti.complete_identifiable_name());
+    const std::string container_type_name(nti.complete_name());
 
     utility_.blank_line();
     stream_ << indenter_ << "inline std::size_t hash_"
@@ -304,22 +304,22 @@ sequence_container_helper(const nested_type_info& vm) {
 }
 
 void hash_implementation::
-associative_container_helper(const nested_type_info& vm) {
-    const auto children(vm.children());
+associative_container_helper(const nested_type_info& nti) {
+    const auto children(nti.children());
     if (children.size() != 1 && children.size() != 2) {
         BOOST_LOG_SEV(lg, error) << invalid_associative_container;
         BOOST_THROW_EXCEPTION(formatting_error(invalid_associative_container));
     }
 
     if (children.size() == 1) {
-        sequence_container_helper(vm);
+        sequence_container_helper(nti);
 
         return;
     }
 
     const std::string container_identifiable_type_name(
-        vm.complete_identifiable_name());
-    const std::string container_type_name(vm.complete_name());
+        nti.complete_identifiable_name());
+    const std::string container_type_name(nti.complete_name());
 
     utility_.blank_line();
     stream_ << indenter_ << "inline std::size_t hash_"
@@ -361,16 +361,16 @@ associative_container_helper(const nested_type_info& vm) {
 }
 
 void hash_implementation::
-smart_pointer_helper(const nested_type_info& vm) {
-    const auto children(vm.children());
+smart_pointer_helper(const nested_type_info& nti) {
+    const auto children(nti.children());
     if (children.size() != 1) {
         BOOST_LOG_SEV(lg, error) << invalid_smart_pointer;
         BOOST_THROW_EXCEPTION(formatting_error(invalid_smart_pointer));
     }
 
     const std::string container_identifiable_type_name(
-        vm.complete_identifiable_name());
-    const std::string container_type_name(vm.complete_name());
+        nti.complete_identifiable_name());
+    const std::string container_type_name(nti.complete_name());
 
     utility_.blank_line();
     stream_ << indenter_ << "inline std::size_t hash_"
@@ -396,10 +396,10 @@ smart_pointer_helper(const nested_type_info& vm) {
     utility_.close_scope();
 }
 
-void hash_implementation::ptime_helper(const nested_type_info& vm) {
+void hash_implementation::ptime_helper(const nested_type_info& nti) {
     const std::string identifiable_type_name(
-        vm.complete_identifiable_name());
-    const std::string type_name(vm.complete_name());
+        nti.complete_identifiable_name());
+    const std::string type_name(nti.complete_name());
 
     utility_.blank_line();
     stream_ << indenter_ << "inline std::size_t hash_" << identifiable_type_name
@@ -426,10 +426,10 @@ void hash_implementation::ptime_helper(const nested_type_info& vm) {
 }
 
 void hash_implementation::
-time_duration_helper(const nested_type_info& vm) {
+time_duration_helper(const nested_type_info& nti) {
     const std::string identifiable_type_name(
-        vm.complete_identifiable_name());
-    const std::string type_name(vm.complete_name());
+        nti.complete_identifiable_name());
+    const std::string type_name(nti.complete_name());
 
     utility_.blank_line();
     stream_ << indenter_ << "inline std::size_t hash_" << identifiable_type_name
@@ -450,39 +450,39 @@ time_duration_helper(const nested_type_info& vm) {
 }
 
 void hash_implementation::
-recursive_helper_method_creator(const nested_type_info& vm,
+recursive_helper_method_creator(const nested_type_info& nti,
     std::unordered_set<std::string>& types_done) {
-    BOOST_LOG_SEV(lg, debug) << "Creating helper methods for " << vm.name();
+    BOOST_LOG_SEV(lg, debug) << "Creating helper methods for " << nti.name();
 
-    if (types_done.find(vm.complete_identifiable_name()) != types_done.end())
+    if (types_done.find(nti.complete_identifiable_name()) != types_done.end())
         return;
 
-    const auto children(vm.children());
+    const auto children(nti.children());
     for (const auto c : children)
         recursive_helper_method_creator(c, types_done);
 
-    if (vm.is_sequence_container())
-        sequence_container_helper(vm);
-    else if (vm.is_associative_container())
-        associative_container_helper(vm);
-    else if (vm.is_smart_pointer())
-        smart_pointer_helper(vm);
-    else if (vm.is_pair())
-        pair_helper(vm);
-    else if (vm.is_optional_like())
-        optional_helper(vm);
-    else if (vm.is_variant_like())
-        variant_helper(vm);
-    else if (vm.is_ptime())
-        ptime_helper(vm);
-    else if (vm.is_time_duration())
-        time_duration_helper(vm);
+    if (nti.is_sequence_container())
+        sequence_container_helper(nti);
+    else if (nti.is_associative_container())
+        associative_container_helper(nti);
+    else if (nti.is_smart_pointer())
+        smart_pointer_helper(nti);
+    else if (nti.is_pair())
+        pair_helper(nti);
+    else if (nti.is_optional_like())
+        optional_helper(nti);
+    else if (nti.is_variant_like())
+        variant_helper(nti);
+    else if (nti.is_ptime())
+        ptime_helper(nti);
+    else if (nti.is_time_duration())
+        time_duration_helper(nti);
 
-    types_done.insert(vm.complete_identifiable_name());
+    types_done.insert(nti.complete_identifiable_name());
 }
 
-void hash_implementation::create_helper_methods(const class_info& vm) {
-    const auto props(vm.properties());
+void hash_implementation::create_helper_methods(const class_info& ci) {
+    const auto props(ci.properties());
     if (props.empty())
         return;
 
@@ -491,14 +491,14 @@ void hash_implementation::create_helper_methods(const class_info& vm) {
         recursive_helper_method_creator(p.type(), types_done);
 }
 
-void hash_implementation::hasher_hash_method(const class_info& vm) {
-    BOOST_LOG_SEV(lg, debug) << "Creating hash method for " << vm.name();
+void hash_implementation::hasher_hash_method(const class_info& ci) {
+    BOOST_LOG_SEV(lg, debug) << "Creating hash method for " << ci.name();
 
-    const auto props(vm.properties());
-    const auto parents(vm.parents());
-    stream_ << indenter_ << "std::size_t " << vm.name() << "_hasher::"
+    const auto props(ci.properties());
+    const auto parents(ci.parents());
+    stream_ << indenter_ << "std::size_t " << ci.name() << "_hasher::"
             << "hash(const "
-            << vm.name() << "&"
+            << ci.name() << "&"
             << (props.empty() && parents.empty() ? ") " : "v) ");
 
     utility_.open_scope();
@@ -507,7 +507,7 @@ void hash_implementation::hasher_hash_method(const class_info& vm) {
 
         stream_ << indenter_ << "std::size_t seed(0);" << std::endl;
 
-        const auto parents(vm.parents());
+        const auto parents(ci.parents());
         if (!parents.empty())
             utility_.blank_line();
 
@@ -547,27 +547,27 @@ void hash_implementation::hasher_hash_method(const class_info& vm) {
     utility_.close_scope();
 }
 
-void hash_implementation::format_class(const file_info& vm) {
-    boost::optional<class_info> o(vm.class_info());
+void hash_implementation::format_class(const file_info& fi) {
+    boost::optional<class_info> o(fi.class_info());
     if (!o) {
         BOOST_LOG_SEV(lg, error) << missing_class_info;
         BOOST_THROW_EXCEPTION(formatting_error(missing_class_info));
     }
 
-    const class_info& cvm(*o);
+    const class_info& ci(*o);
     {
         namespace_helper nsh(stream_, std::list<std::string> { });
         utility_.blank_line();
-        combine_function(cvm);
-        create_helper_methods(cvm);
+        combine_function(ci);
+        create_helper_methods(ci);
         utility_.blank_line();
     }
     utility_.blank_line(2);
     {
-        namespace_helper ns_helper(stream_, cvm.namespaces());
+        namespace_helper ns_helper(stream_, ci.namespaces());
         utility_.blank_line();
 
-        hasher_hash_method(cvm);
+        hasher_hash_method(ci);
         utility_.blank_line();
     }
     utility_.blank_line();
@@ -578,17 +578,17 @@ void hash_implementation::format_enumeration(const file_info&) {
     BOOST_THROW_EXCEPTION(formatting_error(enumeration_info_not_supported));
 }
 
-void hash_implementation::format(const file_info& vm) {
+void hash_implementation::format(const file_info& fi) {
     licence licence(stream_);
     licence.format();
 
     includes includes(stream_);
-    includes.format(vm);
+    includes.format(fi);
 
-    if (vm.meta_type() == sml::meta_types::enumeration)
-        format_enumeration(vm);
-    else if (vm.meta_type() == sml::meta_types::pod)
-        format_class(vm);
+    if (fi.meta_type() == sml::meta_types::enumeration)
+        format_enumeration(fi);
+    else if (fi.meta_type() == sml::meta_types::pod)
+        format_class(fi);
 }
 
 } } }

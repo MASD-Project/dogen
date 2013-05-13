@@ -53,31 +53,31 @@ public:
     static file_formatter::shared_ptr create(std::ostream& stream);
 
 private:
-    bool is_hashable(const nested_type_info& vm);
+    bool is_hashable(const nested_type_info& nti);
 
 private:
-    void pair_helper(const nested_type_info& vm);
-    void optional_helper(const nested_type_info& vm);
-    void variant_helper(const nested_type_info& vm);
-    void sequence_container_helper(const nested_type_info& vm);
-    void associative_container_helper(const nested_type_info& vm);
-    void smart_pointer_helper(const nested_type_info& vm);
-    void ptime_helper(const nested_type_info& vm);
-    void time_duration_helper(const nested_type_info& vm);
-    void recursive_helper_method_creator(const nested_type_info& vm,
+    void pair_helper(const nested_type_info& nti);
+    void optional_helper(const nested_type_info& nti);
+    void variant_helper(const nested_type_info& nti);
+    void sequence_container_helper(const nested_type_info& nti);
+    void associative_container_helper(const nested_type_info& nti);
+    void smart_pointer_helper(const nested_type_info& nti);
+    void ptime_helper(const nested_type_info& nti);
+    void time_duration_helper(const nested_type_info& nti);
+    void recursive_helper_method_creator(const nested_type_info& nti,
         std::unordered_set<std::string>& types_done);
-    void create_helper_methods(const class_info& vm);
+    void create_helper_methods(const class_info& ci);
 
 private:
-    void combine_function(const class_info& vm);
-    void hasher_hash_method(const class_info& vm);
+    void combine_function(const class_info& ci);
+    void hasher_hash_method(const class_info& ci);
 
 private:
-    void format_class(const file_info& vm);
-    void format_enumeration(const file_info& vm);
+    void format_class(const file_info& fi);
+    void format_enumeration(const file_info& fi);
 
 public:
-    virtual void format(const file_info& vm) override;
+    virtual void format(const file_info& fi) override;
 
 private:
     std::ostream& stream_;

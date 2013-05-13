@@ -60,11 +60,11 @@ file_formatter::shared_ptr hash_header::create(std::ostream& stream) {
     return file_formatter::shared_ptr(new hash_header(stream));
 }
 
-void hash_header::operator_bracket_method(const class_info& vm) {
+void hash_header::operator_bracket_method(const class_info& ci) {
     stream_ << indenter_ << "size_t operator()(const ";
 
     qname qname(stream_);
-    qname.format(vm);
+    qname.format(ci);
 
     stream_ << "& v) const ";
 
@@ -73,14 +73,14 @@ void hash_header::operator_bracket_method(const class_info& vm) {
         positive_indenter_scope s(indenter_);
 
         stream_ << indenter_ << "return ";
-        qname.format(vm);
+        qname.format(ci);
         stream_ << "_hasher::hash(v);" << std::endl;
     }
     utility_.close_scope();
 }
 
-void hash_header::hash_helper_class(const class_info& vm) {
-    stream_ << indenter_ << indenter_ << "class " << vm.name()
+void hash_header::hash_helper_class(const class_info& ci) {
+    stream_ << indenter_ << indenter_ << "class " << ci.name()
             << "_hasher ";
 
     utility_.open_scope();
@@ -88,36 +88,36 @@ void hash_header::hash_helper_class(const class_info& vm) {
         positive_indenter_scope s(indenter_);
         utility_.public_access_specifier();
         stream_ << indenter_ << "static std::size_t hash(const "
-                << vm.name() << "& v);" << std::endl;
+                << ci.name() << "& v);" << std::endl;
     }
     stream_ << indenter_ << "};" << std::endl;
 }
 
-void hash_header::hash_class(const class_info& vm) {
+void hash_header::hash_class(const class_info& ci) {
     stream_ << indenter_ << "template<>" << std::endl
             << indenter_ << "class hash<";
 
     qname qname(stream_);
-    qname.format(vm);
+    qname.format(ci);
 
     stream_ << "> ";
     utility_.open_scope();
     {
         positive_indenter_scope s(indenter_);
         utility_.public_access_specifier();
-        operator_bracket_method(vm);
+        operator_bracket_method(ci);
     }
     stream_ << indenter_ << "};" << std::endl;
 }
 
-void hash_header::format_class(const file_info& vm) {
-    const auto o(vm.enumeration_info());
+void hash_header::format_class(const file_info& fi) {
+    const auto o(fi.enumeration_info());
     if (!o) {
         BOOST_LOG_SEV(lg, error) << missing_enumeration_info;
         BOOST_THROW_EXCEPTION(formatting_error(missing_enumeration_info));
     }
 
-    const auto evm(*o);
+    const auto ei(*o);
     {
         namespace_helper nsh(stream_, std::list<std::string> { std_ns });
         utility_.blank_line();
@@ -126,7 +126,7 @@ void hash_header::format_class(const file_info& vm) {
                 << indenter_ << "class hash<";
 
         qname qnf(stream_);
-        qnf.format(evm);
+        qnf.format(ei);
 
         stream_ << "> ";
         utility_.open_scope();
@@ -134,7 +134,7 @@ void hash_header::format_class(const file_info& vm) {
         {
             positive_indenter_scope s(indenter_);
             stream_ << indenter_ << "size_t operator()(const ";
-            qnf.format(evm);
+            qnf.format(ei);
             stream_ << "& v) const ";
             utility_.open_scope();
             {
@@ -151,18 +151,18 @@ void hash_header::format_class(const file_info& vm) {
     utility_.blank_line(2);
 }
 
-void hash_header::format_enumeration(const file_info& vm) {
-    const auto o(vm.class_info());
+void hash_header::format_enumeration(const file_info& fi) {
+    const auto o(fi.class_info());
     if (!o) {
         BOOST_LOG_SEV(lg, error) << missing_class_info;
         BOOST_THROW_EXCEPTION(formatting_error(missing_class_info));
     }
 
-    const class_info& cvm(*o);
+    const class_info& ci(*o);
     {
-        namespace_helper nsh(stream_, cvm.namespaces());
+        namespace_helper nsh(stream_, ci.namespaces());
         utility_.blank_line();
-        hash_helper_class(cvm);
+        hash_helper_class(ci);
         utility_.blank_line();
     }
 
@@ -173,27 +173,27 @@ void hash_header::format_enumeration(const file_info& vm) {
         namespace_helper nsh(stream_, namespaces);
 
         utility_.blank_line();
-        hash_class(cvm);
+        hash_class(ci);
         utility_.blank_line();
     }
     utility_.blank_line();
 }
 
-void hash_header::format(const file_info& vm) {
+void hash_header::format(const file_info& fi) {
     licence licence(stream_);
     licence.format();
 
     header_guards guards(stream_);
-    guards.format_start(vm.header_guard());
+    guards.format_start(fi.header_guard());
     stream_ << std::endl;
 
     includes includes(stream_);
-    includes.format(vm);
+    includes.format(fi);
 
-    if (vm.meta_type() == sml::meta_types::enumeration)
-        format_class(vm);
-    else if (vm.meta_type() == sml::meta_types::pod)
-        format_enumeration(vm);
+    if (fi.meta_type() == sml::meta_types::enumeration)
+        format_class(fi);
+    else if (fi.meta_type() == sml::meta_types::pod)
+        format_enumeration(fi);
     guards.format_end();
 }
 

@@ -48,7 +48,7 @@ public:
     enumeration_declaration(std::ostream& stream);
 
 public:
-    void format(const enumeration_info& vm);
+    void format(const enumeration_info& ei);
 
 protected:
     std::ostream& stream_;

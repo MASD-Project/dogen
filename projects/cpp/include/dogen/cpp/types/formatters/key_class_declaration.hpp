@@ -48,10 +48,10 @@ public:
     virtual ~key_class_declaration() noexcept {}
 
 private:
-    void hand_crafted_constructors(const class_info& vm);
+    void hand_crafted_constructors(const class_info& ci);
 
 public:
-    virtual void format(const class_info& vm) override;
+    virtual void format(const class_info& ci) override;
 
 private:
     const bool disable_complete_constructor_;

@@ -72,20 +72,20 @@ generator_implementation::create(std::ostream& stream) {
 
 void generator_implementation::
 sequence_container_helper(
-    const nested_type_info& vm, unsigned int quantity) {
+    const nested_type_info& nti, unsigned int quantity) {
     const auto container_identifiable_type_name(
-        vm.complete_identifiable_name());
-    const auto container_type_name(vm.complete_name());
+        nti.complete_identifiable_name());
+    const auto container_type_name(nti.complete_name());
 
-    const auto children(vm.children());
+    const auto children(nti.children());
     if (children.size() != 1) {
         BOOST_LOG_SEV(lg, error) << invalid_sequence_container;
         BOOST_THROW_EXCEPTION(formatting_error(invalid_sequence_container));
     }
 
-    const auto containee_vm(children.front());
+    const auto containee_nti(children.front());
     const auto containee_identifiable_type_name(
-        containee_vm.complete_identifiable_name());
+        containee_nti.complete_identifiable_name());
 
     stream_ << indenter_ << container_type_name << " create_"
             << container_identifiable_type_name
@@ -114,16 +114,16 @@ sequence_container_helper(
 
 void generator_implementation::
 associative_container_helper(
-    const nested_type_info& vm, unsigned int quantity) {
+    const nested_type_info& nti, unsigned int quantity) {
 
-    const auto children(vm.children());
+    const auto children(nti.children());
     if (children.size() != 1 && children.size() != 2) {
         BOOST_LOG_SEV(lg, error) << invalid_associative_container;
         BOOST_THROW_EXCEPTION(formatting_error(invalid_associative_container));
     }
 
-    const auto container_identifiable_type_name(vm.complete_identifiable_name());
-    const auto container_type_name(vm.complete_name());
+    const auto container_identifiable_type_name(nti.complete_identifiable_name());
+    const auto container_type_name(nti.complete_name());
 
     stream_ << indenter_ << container_type_name << " create_"
             << container_identifiable_type_name
@@ -140,9 +140,9 @@ associative_container_helper(
         {
             positive_indenter_scope s(indenter_);
             if (children.size() == 1) {
-                const auto containee_vm(children.front());
+                const auto containee_nti(children.front());
                 const auto containee_identifiable_type_name(
-                    containee_vm.complete_identifiable_name());
+                    containee_nti.complete_identifiable_name());
 
                 stream_ << indenter_ << "r.insert(create_"
                         << containee_identifiable_type_name
@@ -166,20 +166,20 @@ associative_container_helper(
 }
 
 void generator_implementation::
-smart_pointer_helper(const nested_type_info& vm) {
+smart_pointer_helper(const nested_type_info& nti) {
     const auto container_identifiable_type_name(
-        vm.complete_identifiable_name());
-    const auto container_type_name(vm.complete_name());
+        nti.complete_identifiable_name());
+    const auto container_type_name(nti.complete_name());
 
-    const auto children(vm.children());
+    const auto children(nti.children());
     if (children.size() != 1) {
         BOOST_LOG_SEV(lg, error) << invalid_smart_pointer;
         BOOST_THROW_EXCEPTION(formatting_error(invalid_smart_pointer));
     }
 
-    const auto containee_vm(children.front());
+    const auto containee_nti(children.front());
     const auto containee_identifiable_type_name(
-        containee_vm.complete_identifiable_name());
+        containee_nti.complete_identifiable_name());
 
     stream_ << indenter_ << container_type_name
             << std::endl
@@ -205,12 +205,12 @@ smart_pointer_helper(const nested_type_info& vm) {
 }
 
 void generator_implementation::
-optional_helper(const nested_type_info& vm) {
+optional_helper(const nested_type_info& nti) {
     const auto container_identifiable_type_name(
-        vm.complete_identifiable_name());
-    const auto container_type_name(vm.complete_name());
+        nti.complete_identifiable_name());
+    const auto container_type_name(nti.complete_name());
 
-    const auto children(vm.children());
+    const auto children(nti.children());
     if (children.size() != 1) {
         BOOST_LOG_SEV(lg, error) << invalid_smart_pointer;
         BOOST_THROW_EXCEPTION(formatting_error(invalid_smart_pointer));
@@ -228,9 +228,9 @@ optional_helper(const nested_type_info& vm) {
         stream_ << indenter_ << container_type_name << " r(";
         {
             positive_indenter_scope s(indenter_);
-            const auto containee_vm(children.front());
+            const auto containee_nti(children.front());
             const auto containee_identifiable_type_name(
-                containee_vm.complete_identifiable_name());
+                containee_nti.complete_identifiable_name());
 
             stream_ << indenter_ << "create_"
                     << containee_identifiable_type_name
@@ -243,12 +243,12 @@ optional_helper(const nested_type_info& vm) {
 }
 
 void generator_implementation::
-pair_helper(const nested_type_info& vm) {
+pair_helper(const nested_type_info& nti) {
     const auto container_identifiable_type_name(
-        vm.complete_identifiable_name());
-    const auto container_type_name(vm.complete_name());
+        nti.complete_identifiable_name());
+    const auto container_type_name(nti.complete_name());
 
-    const auto children(vm.children());
+    const auto children(nti.children());
     if (children.size() != 2) {
         BOOST_LOG_SEV(lg, error) << invalid_pair;
         BOOST_THROW_EXCEPTION(formatting_error(invalid_pair));
@@ -289,11 +289,11 @@ pair_helper(const nested_type_info& vm) {
 }
 
 void generator_implementation::
-filesystem_path_helper(const nested_type_info& vm) {
-    const auto type_name(vm.identifiable_name());
-    const auto identifiable_type_name(vm.complete_identifiable_name());
+filesystem_path_helper(const nested_type_info& nti) {
+    const auto type_name(nti.identifiable_name());
+    const auto identifiable_type_name(nti.complete_identifiable_name());
 
-    stream_ << indenter_ << vm.name() << std::endl
+    stream_ << indenter_ << nti.name() << std::endl
             << "create_" << identifiable_type_name
             << "(const unsigned int position) ";
 
@@ -303,18 +303,18 @@ filesystem_path_helper(const nested_type_info& vm) {
         stream_ << indenter_ << "std::ostringstream s;" << std::endl
                 << indenter_ << "s << " << utility_.quote("/a/path/number_")
                 << " << position;" << std::endl;
-        stream_ << indenter_ << "return " << vm.name() << "(s.str());"
+        stream_ << indenter_ << "return " << nti.name() << "(s.str());"
                 << std::endl;
     }
     utility_.close_scope();
     utility_.blank_line();
 }
 
-void generator_implementation::date_helper(const nested_type_info& vm) {
-    const auto type_name(vm.identifiable_name());
-    const auto identifiable_type_name(vm.complete_identifiable_name());
+void generator_implementation::date_helper(const nested_type_info& nti) {
+    const auto type_name(nti.identifiable_name());
+    const auto identifiable_type_name(nti.complete_identifiable_name());
 
-    stream_ << indenter_ << vm.name() << std::endl
+    stream_ << indenter_ << nti.name() << std::endl
             << "create_" << identifiable_type_name
             << "(const unsigned int position) ";
 
@@ -330,11 +330,11 @@ void generator_implementation::date_helper(const nested_type_info& vm) {
     utility_.blank_line();
 }
 
-void generator_implementation::ptime_helper(const nested_type_info& vm) {
-    const auto type_name(vm.identifiable_name());
-    const auto identifiable_type_name(vm.complete_identifiable_name());
+void generator_implementation::ptime_helper(const nested_type_info& nti) {
+    const auto type_name(nti.identifiable_name());
+    const auto identifiable_type_name(nti.complete_identifiable_name());
 
-    stream_ << indenter_ << vm.name() << std::endl
+    stream_ << indenter_ << nti.name() << std::endl
             << "create_" << identifiable_type_name
             << "(const unsigned int position) ";
 
@@ -357,11 +357,11 @@ void generator_implementation::ptime_helper(const nested_type_info& vm) {
 }
 
 void generator_implementation::
-time_duration_helper(const nested_type_info& vm) {
-    const auto type_name(vm.identifiable_name());
-    const auto identifiable_type_name(vm.complete_identifiable_name());
+time_duration_helper(const nested_type_info& nti) {
+    const auto type_name(nti.identifiable_name());
+    const auto identifiable_type_name(nti.complete_identifiable_name());
 
-    stream_ << indenter_ << vm.name() << std::endl
+    stream_ << indenter_ << nti.name() << std::endl
             << "create_" << identifiable_type_name
             << "(const unsigned int position) ";
 
@@ -379,12 +379,12 @@ time_duration_helper(const nested_type_info& vm) {
 }
 
 void generator_implementation::
-variant_helper(const nested_type_info& vm) {
+variant_helper(const nested_type_info& nti) {
     const auto container_identifiable_type_name(
-        vm.complete_identifiable_name());
-    const auto container_type_name(vm.complete_name());
+        nti.complete_identifiable_name());
+    const auto container_type_name(nti.complete_name());
 
-    const auto children(vm.children());
+    const auto children(nti.children());
     if (children.empty()) {
         BOOST_LOG_SEV(lg, error) << invalid_smart_pointer;
         BOOST_THROW_EXCEPTION(formatting_error(invalid_smart_pointer));
@@ -543,63 +543,63 @@ int_like_helper(const std::string& identifiable_type_name,
 
 void generator_implementation::
 recursive_helper_method_creator(const std::string& owner_name,
-    const nested_type_info& vm,
+    const nested_type_info& nti,
     std::unordered_set<std::string>& types_done, bool as_pointer) {
     const unsigned int quantity(10);
 
-    std::string type_name(vm.complete_identifiable_name());
+    std::string type_name(nti.complete_identifiable_name());
     if (as_pointer)
         type_name += "_ptr";
 
     if (types_done.find(type_name) != types_done.end())
         return;
 
-    const auto children(vm.children());
+    const auto children(nti.children());
     for (const auto c : children)
         recursive_helper_method_creator(owner_name, c, types_done,
-            vm.is_smart_pointer());
+            nti.is_smart_pointer());
 
-    if (vm.is_primitive()) {
-        if (vm.is_char_like()) {
-            char_like_helper(vm.identifiable_name(), vm.name());
+    if (nti.is_primitive()) {
+        if (nti.is_char_like()) {
+            char_like_helper(nti.identifiable_name(), nti.name());
             utility_.blank_line();
-        } else if (vm.is_int_like()) {
-            int_like_helper(vm.identifiable_name(), vm.name());
+        } else if (nti.is_int_like()) {
+            int_like_helper(nti.identifiable_name(), nti.name());
             utility_.blank_line();
-        } else if (vm.name() == bool_type) {
+        } else if (nti.name() == bool_type) {
             bool_helper();
             utility_.blank_line();
         }
-    } else if (vm.is_sequence_container())
-        sequence_container_helper(vm, quantity);
-    else if (vm.is_associative_container())
-        associative_container_helper(vm, quantity);
-    else if (vm.is_smart_pointer())
-        smart_pointer_helper(vm);
-    else if (vm.is_optional_like())
-        optional_helper(vm);
-    else if (vm.is_pair())
-        pair_helper(vm);
-    else if (vm.is_variant_like())
-        variant_helper(vm);
-    else if (vm.is_filesystem_path())
-        filesystem_path_helper(vm);
-    else if (vm.is_date())
-        date_helper(vm);
-    else if (vm.is_ptime())
-        ptime_helper(vm);
-    else if (vm.is_time_duration())
-        time_duration_helper(vm);
+    } else if (nti.is_sequence_container())
+        sequence_container_helper(nti, quantity);
+    else if (nti.is_associative_container())
+        associative_container_helper(nti, quantity);
+    else if (nti.is_smart_pointer())
+        smart_pointer_helper(nti);
+    else if (nti.is_optional_like())
+        optional_helper(nti);
+    else if (nti.is_pair())
+        pair_helper(nti);
+    else if (nti.is_variant_like())
+        variant_helper(nti);
+    else if (nti.is_filesystem_path())
+        filesystem_path_helper(nti);
+    else if (nti.is_date())
+        date_helper(nti);
+    else if (nti.is_ptime())
+        ptime_helper(nti);
+    else if (nti.is_time_duration())
+        time_duration_helper(nti);
     else {
-        if (vm.name() == string_type) {
+        if (nti.name() == string_type) {
             string_helper();
             utility_.blank_line();
         } else {
-            if (boost::algorithm::ends_with(vm.name(), "::" + owner_name)) {
-                composite_domain_type_helper(vm.identifiable_name(), vm.name(),
+            if (boost::algorithm::ends_with(nti.name(), "::" + owner_name)) {
+                composite_domain_type_helper(nti.identifiable_name(), nti.name(),
                     as_pointer);
             } else {
-                domain_type_helper(vm.identifiable_name(), vm.name(),
+                domain_type_helper(nti.identifiable_name(), nti.name(),
                     as_pointer);
             }
             utility_.blank_line();
@@ -609,8 +609,8 @@ recursive_helper_method_creator(const std::string& owner_name,
 }
 
 void generator_implementation::
-create_helper_methods(const class_info& vm) {
-    const auto props(vm.properties());
+create_helper_methods(const class_info& ci) {
+    const auto props(ci.properties());
     if (props.empty())
         return;
 
@@ -619,17 +619,17 @@ create_helper_methods(const class_info& vm) {
 
     utility_.blank_line();
     const bool as_ptr(false);
-    const auto owner(vm.name());
+    const auto owner(ci.name());
     for (const auto p : props)
         recursive_helper_method_creator(owner, p.type(), types_done, as_ptr);
 }
 
-void generator_implementation::populate_method(const class_info& vm) {
-    if (vm.is_immutable())
+void generator_implementation::populate_method(const class_info& ci) {
+    if (ci.is_immutable())
         return;
 
-    const auto props(vm.properties());
-    const std::string name(vm.name() + "_generator");
+    const auto props(ci.properties());
+    const std::string name(ci.name() + "_generator");
 
     stream_ << indenter_ << "void " << name << "::" << std::endl;
     if (!props.empty()) {
@@ -652,16 +652,16 @@ void generator_implementation::populate_method(const class_info& vm) {
     utility_.close_scope();
 }
 
-void generator_implementation::create_method(const class_info& vm) {
-    if (vm.is_parent())
+void generator_implementation::create_method(const class_info& ci) {
+    if (ci.is_parent())
         return;
 
-    const bool has_properties(!vm.properties().empty());
-    const auto parents(vm.parents());
+    const bool has_properties(!ci.properties().empty());
+    const auto parents(ci.parents());
     const bool has_parents(!parents.empty());
     const bool has_properties_or_parents(has_properties || has_parents);
 
-    const std::string name(vm.name() + "_generator");
+    const std::string name(ci.name() + "_generator");
     stream_ << indenter_ << name << "::result_type" << std::endl
             << name << "::create(const unsigned int"
             << (has_properties_or_parents ? " position" : "/*position*/")
@@ -671,12 +671,12 @@ void generator_implementation::create_method(const class_info& vm) {
     {
         positive_indenter_scope s(indenter_);
 
-        if (vm.is_immutable()) {
-            stream_ << indenter_ << "return " << vm.name() << "(" << std::endl;
+        if (ci.is_immutable()) {
+            stream_ << indenter_ << "return " << ci.name() << "(" << std::endl;
             positive_indenter_scope s(indenter_);
             {
                 unsigned int i(0);
-                for (const auto p : vm.properties()) {
+                for (const auto p : ci.properties()) {
                     if (i != 0)
                         stream_ << "," << std::endl;
 
@@ -689,7 +689,7 @@ void generator_implementation::create_method(const class_info& vm) {
             }
             stream_ << indenter_ << ");" << std::endl;
         } else {
-            stream_ << indenter_ << vm.name() << " r;" << std::endl;
+            stream_ << indenter_ << ci.name() << " r;" << std::endl;
 
             for (const auto p : parents) {
                 stream_ << indenter_;
@@ -709,9 +709,9 @@ void generator_implementation::create_method(const class_info& vm) {
     utility_.close_scope();
 }
 
-void generator_implementation::create_method_ptr(const class_info& vm) {
-    auto leaves(vm.leaves());
-    const std::string name(vm.name() + "_generator");
+void generator_implementation::create_method_ptr(const class_info& ci) {
+    auto leaves(ci.leaves());
+    const std::string name(ci.name() + "_generator");
     stream_ << indenter_ << name << "::result_type*" << std::endl
             << name << "::create_ptr(const unsigned int position) ";
 
@@ -720,11 +720,11 @@ void generator_implementation::create_method_ptr(const class_info& vm) {
         positive_indenter_scope s(indenter_);
 
         if (leaves.empty()) {
-            if (vm.is_immutable()) {
-                stream_ << indenter_ << "return new " << vm.name()
+            if (ci.is_immutable()) {
+                stream_ << indenter_ << "return new " << ci.name()
                         << "(create(position));" << std::endl;
             } else {
-                stream_ << indenter_ << vm.name() << "* p = new " << vm.name()
+                stream_ << indenter_ << ci.name() << "* p = new " << ci.name()
                         << "();" << std::endl
                         << indenter_ << name << "::populate(position, *p);"
                         << std::endl
@@ -754,11 +754,11 @@ void generator_implementation::create_method_ptr(const class_info& vm) {
     utility_.close_scope();
 }
 
-void generator_implementation::function_operator(const class_info& vm) {
-    if (vm.is_parent())
+void generator_implementation::function_operator(const class_info& ci) {
+    if (ci.is_parent())
         return;
 
-    const std::string name(vm.name() + "_generator");
+    const std::string name(ci.name() + "_generator");
     stream_ << indenter_ << name << "::result_type" << std::endl
             << name << "::operator()() ";
 
@@ -772,59 +772,59 @@ void generator_implementation::function_operator(const class_info& vm) {
     utility_.close_scope();
 }
 
-void generator_implementation::default_constructor(const class_info& vm) {
-    if (vm.is_parent())
+void generator_implementation::default_constructor(const class_info& ci) {
+    if (ci.is_parent())
         return;
 
-    const std::string name(vm.name() + "_generator");
+    const std::string name(ci.name() + "_generator");
     stream_ << indenter_ << name << "::" << name << "() : position_(0) { }";
     utility_.blank_line();
 }
 
-void generator_implementation::format_class(const file_info& vm) {
-    boost::optional<class_info> o(vm.class_info());
+void generator_implementation::format_class(const file_info& fi) {
+    boost::optional<class_info> o(fi.class_info());
     if (!o) {
         BOOST_LOG_SEV(lg, error) << missing_class_info;
         BOOST_THROW_EXCEPTION(formatting_error(missing_class_info));
     }
 
-    const class_info& cvm(*o);
-    create_helper_methods(cvm);
+    const class_info& ci(*o);
+    create_helper_methods(ci);
     utility_.blank_line(2);
 
     {
-        std::list<std::string> ns(cvm.namespaces());
+        std::list<std::string> ns(ci.namespaces());
         namespace_helper ns_helper(stream_, ns);
 
         utility_.blank_line();
-        default_constructor(cvm);
+        default_constructor(ci);
         utility_.blank_line();
-        populate_method(cvm);
-        if (!cvm.is_immutable())
+        populate_method(ci);
+        if (!ci.is_immutable())
             utility_.blank_line();
-        create_method(cvm);
-        create_method_ptr(cvm);
+        create_method(ci);
+        create_method_ptr(ci);
         utility_.blank_line();
-        function_operator(cvm);
+        function_operator(ci);
         utility_.blank_line();
     }
     utility_.blank_line();
 }
 
-void generator_implementation::format_enumeration(const file_info& vm) {
-    const auto o(vm.enumeration_info());
+void generator_implementation::format_enumeration(const file_info& fi) {
+    const auto o(fi.enumeration_info());
     if (!o) {
         BOOST_LOG_SEV(lg, error) << missing_enumeration_info;
         BOOST_THROW_EXCEPTION(formatting_error(missing_enumeration_info));
     }
 
-    const auto evm(*o);
+    const auto ei(*o);
     {
-        std::list<std::string> ns(evm.namespaces());
+        std::list<std::string> ns(ei.namespaces());
         namespace_helper ns_helper(stream_, ns);
 
         utility_.blank_line();
-        const std::string name(evm.name() + "_generator");
+        const std::string name(ei.name() + "_generator");
         stream_ << indenter_ << name << "::" << name << "() : position_(0) { }";
         utility_.blank_line();
 
@@ -834,8 +834,8 @@ void generator_implementation::format_enumeration(const file_info& vm) {
         utility_.open_scope();
         {
             positive_indenter_scope s(indenter_);
-            stream_ << indenter_ << "v = static_cast<" << evm.name() << ">"
-                    << "(position % " << evm.enumerators().size() << ");"
+            stream_ << indenter_ << "v = static_cast<" << ei.name() << ">"
+                    << "(position % " << ei.enumerators().size() << ");"
                     << std::endl;
         }
         utility_.close_scope();
@@ -871,17 +871,17 @@ void generator_implementation::format_enumeration(const file_info& vm) {
     }
 }
 
-void generator_implementation::format(const file_info& vm) {
+void generator_implementation::format(const file_info& fi) {
     licence licence(stream_);
     licence.format();
 
     includes includes(stream_);
-    includes.format(vm);
+    includes.format(fi);
 
-    if (vm.meta_type() == sml::meta_types::enumeration)
-        format_enumeration(vm);
-    else if (vm.meta_type() == sml::meta_types::pod)
-        format_class(vm);
+    if (fi.meta_type() == sml::meta_types::enumeration)
+        format_enumeration(fi);
+    else if (fi.meta_type() == sml::meta_types::pod)
+        format_class(fi);
 }
 
 } } }

@@ -46,7 +46,7 @@ public:
     typedef std::shared_ptr<file_formatter> shared_ptr;
 
 public:
-    virtual void format(const file_info& vm) = 0;
+    virtual void format(const file_info& fi) = 0;
 };
 
 } } }

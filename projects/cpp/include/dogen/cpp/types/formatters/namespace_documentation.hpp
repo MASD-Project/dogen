@@ -51,10 +51,10 @@ public:
     static file_formatter::shared_ptr create(std::ostream& stream);
 
 private:
-    void format_namespace(const file_info& vm);
+    void format_namespace(const file_info& fi);
 
 public:
-    virtual void format(const file_info& vm) override;
+    virtual void format(const file_info& fi) override;
 
 private:
     std::ostream& stream_;

@@ -58,8 +58,8 @@ file_formatter::shared_ptr generator_header::create(std::ostream& stream) {
     return file_formatter::shared_ptr(new generator_header(stream));
 }
 
-void generator_header::generator_class(const enumeration_info& vm) {
-    const std::string class_name(vm.name() + "_generator");
+void generator_header::generator_class(const enumeration_info& ei) {
+    const std::string class_name(ei.name() + "_generator");
 
     stream_ << indenter_ << "class " << class_name << " ";
     utility_.open_scope();
@@ -74,7 +74,7 @@ void generator_header::generator_class(const enumeration_info& vm) {
 
         stream_ << indenter_ << "typedef ";
         qname qname(stream_);
-        qname.format(vm);
+        qname.format(ei);
         stream_ << " result_type;" << std::endl;
         utility_.blank_line();
 
@@ -99,8 +99,8 @@ void generator_header::generator_class(const enumeration_info& vm) {
     stream_ << "};";
 }
 
-void generator_header::generator_class(const class_info& vm) {
-    const std::string class_name(vm.name() + "_generator");
+void generator_header::generator_class(const class_info& ci) {
+    const std::string class_name(ci.name() + "_generator");
 
     stream_ << indenter_ << "class " << class_name << " ";
     utility_.open_scope();
@@ -115,19 +115,19 @@ void generator_header::generator_class(const class_info& vm) {
 
         stream_ << indenter_ << "typedef ";
         qname qname(stream_);
-        qname.format(vm);
+        qname.format(ci);
         stream_ << " result_type;" << std::endl;
         utility_.blank_line();
 
         utility_.public_access_specifier();
-        if (!vm.is_immutable()) {
+        if (!ci.is_immutable()) {
             stream_ << indenter_
                     << "static void populate(const unsigned int position,"
                     <<" result_type& v);"
                     << std::endl;
         }
 
-        if (!vm.is_parent()) {
+        if (!ci.is_parent()) {
             stream_ << indenter_
                     << "static result_type create(const unsigned int position);"
                     << std::endl;
@@ -150,59 +150,59 @@ void generator_header::generator_class(const class_info& vm) {
     stream_ << "};";
 }
 
-void generator_header::format_enumeration(const file_info& vm) {
-    const auto o(vm.enumeration_info());
+void generator_header::format_enumeration(const file_info& fi) {
+    const auto o(fi.enumeration_info());
     if (!o) {
         BOOST_LOG_SEV(lg, error) << missing_enumeration_info;
         BOOST_THROW_EXCEPTION(formatting_error(missing_enumeration_info));
     }
 
-    const auto evm(*o);
+    const auto ei(*o);
     {
-        std::list<std::string> namespaces(evm.namespaces());
+        std::list<std::string> namespaces(ei.namespaces());
         namespace_helper ns_helper(stream_, namespaces);
         utility_.blank_line();
 
-        generator_class(evm);
+        generator_class(ei);
         utility_.blank_line(2);
     }
     utility_.blank_line(2);
 }
 
-void generator_header::format_class(const file_info& vm) {
-    boost::optional<class_info> o(vm.class_info());
+void generator_header::format_class(const file_info& fi) {
+    boost::optional<class_info> o(fi.class_info());
     if (!o) {
         BOOST_LOG_SEV(lg, error) << missing_class_info;
         BOOST_THROW_EXCEPTION(formatting_error(missing_class_info));
     }
 
     {
-        const class_info& cvm(*o);
-        std::list<std::string> namespaces(cvm.namespaces());
+        const class_info& ci(*o);
+        std::list<std::string> namespaces(ci.namespaces());
         namespace_helper ns_helper(stream_, namespaces);
         utility_.blank_line();
 
-        generator_class(cvm);
+        generator_class(ci);
         utility_.blank_line(2);
     }
     utility_.blank_line(2);
 }
 
-void generator_header::format(const file_info& vm) {
+void generator_header::format(const file_info& fi) {
     licence licence(stream_);
     licence.format();
 
     header_guards guards(stream_);
-    guards.format_start(vm.header_guard());
+    guards.format_start(fi.header_guard());
     utility_.blank_line();
 
     includes includes(stream_);
-    includes.format(vm);
+    includes.format(fi);
 
-    if (vm.meta_type() == sml::meta_types::enumeration)
-        format_enumeration(vm);
-    else if (vm.meta_type() == sml::meta_types::pod)
-        format_class(vm);
+    if (fi.meta_type() == sml::meta_types::enumeration)
+        format_enumeration(fi);
+    else if (fi.meta_type() == sml::meta_types::pod)
+        format_class(fi);
 
     guards.format_end();
 }

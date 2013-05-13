@@ -50,27 +50,27 @@ public:
 
 private:
     void non_pod_getters_and_setters(const std::string class_name,
-        const property_info& vm);
+        const property_info& pi);
     void pod_getters_and_setters(const std::string class_name,
-        const property_info& vm);
+        const property_info& pi);
 
 protected:
-    void open_class(const class_info& vm);
+    void open_class(const class_info& ci);
     void close_class();
-    void compiler_generated_constuctors(const class_info& vm);
-    void default_constructor(const class_info& vm);
-    void move_constructor(const class_info& vm);
-    void complete_constructor(const class_info& vm);
-    void destructor(const class_info& vm);
-    void friends(const class_info& vm);
-    void getters_and_setters(const class_info& vm);
-    void member_variables(const class_info& vm);
-    void equality(const class_info& vm);
-    void to_stream(const class_info& vm);
-    void swap_and_assignment(const class_info& vm);
+    void compiler_generated_constuctors(const class_info& ci);
+    void default_constructor(const class_info& ci);
+    void move_constructor(const class_info& ci);
+    void complete_constructor(const class_info& ci);
+    void destructor(const class_info& ci);
+    void friends(const class_info& ci);
+    void getters_and_setters(const class_info& ci);
+    void member_variables(const class_info& ci);
+    void equality(const class_info& ci);
+    void to_stream(const class_info& ci);
+    void swap_and_assignment(const class_info& ci);
 
 public:
-    virtual void format(const class_info& vm) = 0;
+    virtual void format(const class_info& ci) = 0;
 
 protected:
     std::ostream& stream_;

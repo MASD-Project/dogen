@@ -54,7 +54,7 @@ public:
         const bool disable_xml_serialization);
 
 public:
-    virtual void format(const file_info& vm) override;
+    virtual void format(const file_info& fi) override;
 
 private:
     std::ostream& stream_;

@@ -42,7 +42,7 @@ public:
     operator=(const domain_class_implementation&) = default;
 
 private:
-    void hand_crafted_constructors(const class_info& vm);
+    void hand_crafted_constructors(const class_info& ci);
 
 public:
     domain_class_implementation(std::ostream& stream,
@@ -50,7 +50,7 @@ public:
     virtual ~domain_class_implementation() noexcept {}
 
 public:
-    virtual void format(const class_info& vm) override;
+    virtual void format(const class_info& ci) override;
 
 private:
     const bool disable_complete_constructor_;

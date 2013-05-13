@@ -33,15 +33,15 @@ class_declaration(std::ostream& stream, const bool disable_serialization)
     : stream_(stream), utility_(stream_, indenter_),
       disable_serialization_(disable_serialization) { }
 
-void class_declaration::open_class(const class_info& vm) {
+void class_declaration::open_class(const class_info& ci) {
     doxygen_comments dc(stream_, indenter_);
-    dc.format(vm.documentation());
-    stream_ << indenter_ << "class " << vm.name();
+    dc.format(ci.documentation());
+    stream_ << indenter_ << "class " << ci.name();
 
-    if (!vm.is_parent())
+    if (!ci.is_parent())
         stream_ << " final";
 
-    const auto parents(vm.parents());
+    const auto parents(ci.parents());
     if (!parents.empty()) {
         stream_ << " :";
 
@@ -52,7 +52,7 @@ void class_declaration::open_class(const class_info& vm) {
         } else {
             bool is_first(true);
             positive_indenter_scope s(indenter_);
-            for (const auto p : vm.parents()) {
+            for (const auto p : ci.parents()) {
                 stream_ << (is_first ? "" : ",") << std::endl << indenter_;
                 stream_ << " public " << p.name();
                 is_first = false;
@@ -67,25 +67,25 @@ void class_declaration::close_class() {
     utility_.blank_line();
 }
 
-void class_declaration::default_constructor(const class_info& vm) {
-    if (!vm.requires_manual_default_constructor())
+void class_declaration::default_constructor(const class_info& ci) {
+    if (!ci.requires_manual_default_constructor())
         return;
 
-    const auto props(vm.properties());
+    const auto props(ci.properties());
     utility_.public_access_specifier();
-    stream_ << indenter_ << vm.name() << "();" << std::endl;
+    stream_ << indenter_ << ci.name() << "();" << std::endl;
     utility_.blank_line();
 }
 
-void class_declaration::complete_constructor(const class_info& vm) {
-    const auto props(vm.all_properties());
+void class_declaration::complete_constructor(const class_info& ci) {
+    const auto props(ci.all_properties());
     if (props.empty())
         return;
 
     utility_.public_access_specifier();
     if (props.size() == 1) {
         const auto p(*props.begin());
-        stream_ << indenter_ << "explicit " << vm.name() << "(const "
+        stream_ << indenter_ << "explicit " << ci.name() << "(const "
                 << p.type().complete_name();
 
         if (!p.type().is_primitive())
@@ -96,7 +96,7 @@ void class_declaration::complete_constructor(const class_info& vm) {
         return;
     }
 
-    stream_ << indenter_ << vm.name() << "(";
+    stream_ << indenter_ << ci.name() << "(";
     {
         positive_indenter_scope s(indenter_);
         bool is_first(true);
@@ -115,22 +115,22 @@ void class_declaration::complete_constructor(const class_info& vm) {
     utility_.blank_line();
 }
 
-void class_declaration::move_constructor(const class_info& vm) {
-    if (!vm.requires_manual_move_constructor())
+void class_declaration::move_constructor(const class_info& ci) {
+    if (!ci.requires_manual_move_constructor())
         return;
 
-    const auto props(vm.all_properties());
+    const auto props(ci.all_properties());
     if (props.empty())
         return;
 
     utility_.public_access_specifier();
     const auto p(*props.begin());
-    stream_ << indenter_ << vm.name() << "(" << vm.name()
+    stream_ << indenter_ << ci.name() << "(" << ci.name()
             << "&& rhs);" << std::endl;
     utility_.blank_line();
 }
 
-void class_declaration::destructor(const class_info& vm) {
+void class_declaration::destructor(const class_info& ci) {
     /*
      * according to MEC++, item 33, base classes should always be
      * abstract. this avoids all sorts of tricky problems with
@@ -139,44 +139,45 @@ void class_declaration::destructor(const class_info& vm) {
      * incidentally, this also fixes some strange clang errors:
      * undefined reference to `vtable.
      */
-    if (vm.is_parent()) {
-        stream_ << indenter_ << "virtual ~" << vm.name()
+    if (ci.is_parent()) {
+        stream_ << indenter_ << "virtual ~" << ci.name()
                 << "() noexcept = 0;" << std::endl;
         utility_.blank_line();
     }
 }
 
 void class_declaration::
-compiler_generated_constuctors(const class_info& vm) {
+compiler_generated_constuctors(const class_info& ci) {
     utility_.public_access_specifier();
 
-    if (!vm.requires_manual_default_constructor())
-        stream_ << indenter_ << vm.name() << "() = default;" << std::endl;
+    if (!ci.requires_manual_default_constructor())
+        stream_ << indenter_ << ci.name() << "() = default;" << std::endl;
 
-    stream_ << indenter_ << vm.name() << "(const " << vm.name()
+    stream_ << indenter_ << ci.name() << "(const " << ci.name()
             << "&) = default;" << std::endl;
 
-    if (!vm.requires_manual_move_constructor()) {
-        stream_ << indenter_ << vm.name() << "(" << vm.name() << "&&) = default;"
+    if (!ci.requires_manual_move_constructor()) {
+        stream_ << indenter_ << ci.name() << "(" << ci.name()
+                << "&&) = default;"
                 << std::endl;
     }
 
-    if (!vm.is_parent() && vm.parents().empty()) {
-        stream_ << indenter_ << "~" << vm.name() << "() = default;"
+    if (!ci.is_parent() && ci.parents().empty()) {
+        stream_ << indenter_ << "~" << ci.name() << "() = default;"
                 << std::endl;
     }
 
-    if (vm.is_immutable()) {
-        stream_ << indenter_ << vm.name() << "& operator=(const " << vm.name()
+    if (ci.is_immutable()) {
+        stream_ << indenter_ << ci.name() << "& operator=(const " << ci.name()
                 << "&) = delete;" << std::endl;
-    } else if (vm.all_properties().empty()) {
-        stream_ << indenter_ << vm.name() << "& operator=(const " << vm.name()
+    } else if (ci.all_properties().empty()) {
+        stream_ << indenter_ << ci.name() << "& operator=(const " << ci.name()
                 << "&) = default;" << std::endl;
     }
     utility_.blank_line();
 }
 
-void class_declaration::friends(const class_info& vm) {
+void class_declaration::friends(const class_info& ci) {
     if (disable_serialization_)
         return;
 
@@ -184,178 +185,177 @@ void class_declaration::friends(const class_info& vm) {
 
     stream_ << indenter_ << "template<typename Archive>" << std::endl
             << indenter_ << "friend void boost::serialization::save(Archive& ar"
-            << ", const " << vm.name() << "& v, unsigned int version);"
+            << ", const " << ci.name() << "& v, unsigned int version);"
             << std::endl;
     utility_.blank_line();
 
     stream_ << indenter_ << "template<typename Archive>" << std::endl
             << indenter_ << "friend void boost::serialization::load(Archive& ar"
-            << ", " << vm.name() << "& v, unsigned int version);" << std::endl;
+            << ", " << ci.name() << "& v, unsigned int version);" << std::endl;
     utility_.blank_line();
 }
 
 void class_declaration::
 non_pod_getters_and_setters(const std::string class_name,
-    const property_info& vm) {
+    const property_info& pi) {
     doxygen_comments dc(stream_, indenter_);
-    dc.format(vm.documentation());
-    if (!vm.is_immutable())
-        dc.format_start_block(vm.documentation());
+    dc.format(pi.documentation());
+    if (!pi.is_immutable())
+        dc.format_start_block(pi.documentation());
 
-    stream_ << indenter_ << vm.type().complete_name() << " " << vm.name()
+    stream_ << indenter_ << pi.type().complete_name() << " " << pi.name()
             << "() const;" << std::endl;
 
-    if (!vm.is_immutable()) {
+    if (!pi.is_immutable()) {
         stream_ << indenter_;
-        if (vm.is_fluent())
+        if (pi.is_fluent())
             stream_ << class_name << "& ";
         else
             stream_ << "void ";
 
-        stream_ << vm.name() << "(const " << vm.type().complete_name();
+        stream_ << pi.name() << "(const " << pi.type().complete_name();
 
-        if (!vm.type().is_primitive())
+        if (!pi.type().is_primitive())
             stream_ << "&";
 
         stream_ << " v);" << std::endl;
     }
 
-    if (!vm.is_immutable())
-        dc.format_end_block(vm.documentation());
+    if (!pi.is_immutable())
+        dc.format_end_block(pi.documentation());
     utility_.blank_line();
 }
 
 void class_declaration::
 pod_getters_and_setters(const std::string class_name,
-    const property_info& vm) {
+    const property_info& pi) {
     doxygen_comments dc(stream_, indenter_);
-    dc.format(vm.documentation());
-    if (!vm.is_immutable())
-        dc.format_start_block(vm.documentation());
+    dc.format(pi.documentation());
+    if (!pi.is_immutable())
+        dc.format_start_block(pi.documentation());
 
     // const getter
-    stream_ << indenter_ << "const " << vm.type().complete_name()
-            << "& " << vm.name()
-            << "() const;" << std::endl;
+    stream_ << indenter_ << "const " << pi.type().complete_name()
+            << "& " << pi.name() << "() const;" << std::endl;
 
-    if (!vm.is_immutable()) {
+    if (!pi.is_immutable()) {
         // Popsicle immutability
-        stream_ << indenter_ << "" << vm.type().complete_name()
-                << "& " << vm.name()
-                << "();" << std::endl;
+        stream_ << indenter_ << "" << pi.type().complete_name()
+                << "& " << pi.name() << "();" << std::endl;
 
         // traditional setter
         stream_ << indenter_;
-        if (vm.is_fluent())
+        if (pi.is_fluent())
             stream_ << class_name << "& ";
         else
             stream_ << "void ";
-        stream_ << vm.name() << "(const " << vm.type().complete_name();
+        stream_ << pi.name() << "(const " << pi.type().complete_name();
 
-        if (!vm.type().is_primitive())
+        if (!pi.type().is_primitive())
             stream_ << "&";
 
         stream_ << " v);" << std::endl;
 
         // move setter
         stream_ << indenter_;
-        if (vm.is_fluent())
+        if (pi.is_fluent())
             stream_ << class_name << "& ";
         else
             stream_ << "void ";
-        stream_ << vm.name() << "(const " << vm.type().complete_name();
+        stream_ << pi.name() << "(const " << pi.type().complete_name();
 
-        if (!vm.type().is_primitive())
+        if (!pi.type().is_primitive())
             stream_ << "&&";
 
         stream_ << " v);" << std::endl;
     }
 
-    if (!vm.is_immutable())
-        dc.format_end_block(vm.documentation());
+    if (!pi.is_immutable())
+        dc.format_end_block(pi.documentation());
     utility_.blank_line();
 }
 
-void class_declaration::getters_and_setters(const class_info& vm) {
-    if (vm.properties().empty())
+void class_declaration::getters_and_setters(const class_info& ci) {
+    if (ci.properties().empty())
         return;
 
     utility_.public_access_specifier();
-    for (const auto p : vm.properties()) {
+    for (const auto p : ci.properties()) {
         if (p.type().is_primitive() || p.type().is_enumeration()) {
-            non_pod_getters_and_setters(vm.name(), p);
+            non_pod_getters_and_setters(ci.name(), p);
             continue;
         }
 
-        pod_getters_and_setters(vm.name(), p);
+        pod_getters_and_setters(ci.name(), p);
     }
 }
 
-void class_declaration::member_variables(const class_info& vm) {
-    if (vm.properties().empty())
+void class_declaration::member_variables(const class_info& ci) {
+    if (ci.properties().empty())
         return;
 
     utility_.private_access_specifier();
-    for (const auto p : vm.properties()) {
+    for (const auto p : ci.properties()) {
         stream_ << indenter_ << p.type().complete_name() << " "
                 << utility_.as_member_variable(p.name()) << ";"
                 << std::endl;
     }
 }
 
-void class_declaration::equality(const class_info& vm) {
+void class_declaration::equality(const class_info& ci) {
     // equality is only public in leaf classes - MEC++-33
-    if (vm.is_parent()) {
+    if (ci.is_parent()) {
         utility_.protected_access_specifier();
-        stream_ << indenter_ << "bool compare(const " << vm.name()
+        stream_ << indenter_ << "bool compare(const " << ci.name()
                 <<  "& rhs) const;" << std::endl;
     } else {
         utility_.public_access_specifier();
 
-        stream_ << indenter_ << "bool operator==(const " << vm.name()
+        stream_ << indenter_ << "bool operator==(const " << ci.name()
                 <<  "& rhs) const;" << std::endl;
-        stream_ << indenter_ << "bool operator!=(const " << vm.name()
+        stream_ << indenter_ << "bool operator!=(const " << ci.name()
                 << "& rhs) const ";
         utility_.open_scope();
         {
             positive_indenter_scope s(indenter_);
-            stream_ << indenter_ << "return !this->operator==(rhs);" << std::endl;
+            stream_ << indenter_ << "return !this->operator==(rhs);"
+                    << std::endl;
         }
         utility_.close_scope();
         utility_.blank_line();
     }
 
-    if (!vm.is_parent() && vm.parents().empty())
+    if (!ci.is_parent() && ci.parents().empty())
         return;
 
     utility_.public_access_specifier();
-    if (vm.is_parent() && vm.parents().empty()) {
+    if (ci.is_parent() && ci.parents().empty()) {
         stream_ << indenter_
-                << "virtual bool equals(const " << vm.name()
+                << "virtual bool equals(const " << ci.name()
                 <<  "& other) const = 0;"
                 << std::endl;
-    } else if (vm.is_parent()) {
+    } else if (ci.is_parent()) {
         stream_ << indenter_
                 << "virtual bool equals(const "
-                << vm.original_parent_name_qualified()
+                << ci.original_parent_name_qualified()
                 <<  "& other) const = 0;"
                 << std::endl;
     } else {
         stream_ << indenter_
                 << "bool equals(const "
-                << vm.original_parent_name_qualified()
+                << ci.original_parent_name_qualified()
                 <<  "& other) const override;"
                 << std::endl;
     }
     utility_.blank_line();
 }
 
-void class_declaration::to_stream(const class_info& vm) {
-    if (!vm.is_parent() && vm.parents().empty())
+void class_declaration::to_stream(const class_info& ci) {
+    if (!ci.is_parent() && ci.parents().empty())
         return;
 
     utility_.public_access_specifier();
-    if (vm.is_parent()) {
+    if (ci.is_parent()) {
         stream_ << indenter_
                 << "virtual void to_stream("
                 << "std::ostream& s) const;"
@@ -369,22 +369,22 @@ void class_declaration::to_stream(const class_info& vm) {
     utility_.blank_line();
 }
 
-void class_declaration::swap_and_assignment(const class_info& vm) {
-    if ((vm.all_properties().empty() && !vm.is_parent()) || vm.is_immutable())
+void class_declaration::swap_and_assignment(const class_info& ci) {
+    if ((ci.all_properties().empty() && !ci.is_parent()) || ci.is_immutable())
         return;
 
     // swap is only public in leaf classes - MEC++-33
-    if (vm.is_parent())
+    if (ci.is_parent())
         utility_.protected_access_specifier();
     else
         utility_.public_access_specifier();
 
-    stream_ << indenter_ << "void swap(" << vm.name() << "& other) noexcept;"
+    stream_ << indenter_ << "void swap(" << ci.name() << "& other) noexcept;"
             << std::endl;
 
     // assignment is only available in leaf classes - MEC++-33
-    if (!vm.is_parent()) {
-        stream_ << indenter_ << vm.name() << "& operator=(" << vm.name()
+    if (!ci.is_parent()) {
+        stream_ << indenter_ << ci.name() << "& operator=(" << ci.name()
                 << " other);" << std::endl;
     }
 

@@ -50,10 +50,10 @@ public:
     static file_formatter::shared_ptr create(std::ostream& stream);
 
 private:
-    void format(const visitor_info& vm);
+    void format(const visitor_info& vi);
 
 public:
-    virtual void format(const file_info& vm) override;
+    virtual void format(const file_info& fi) override;
 
 private:
     std::ostream& stream_;

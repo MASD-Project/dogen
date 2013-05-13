@@ -47,7 +47,7 @@ public:
         const std::string odb_folder);
 
 public:
-    void format(const cmakelists_info& vm);
+    void format(const cmakelists_info& ci);
 
 private:
     std::ostream& stream_;

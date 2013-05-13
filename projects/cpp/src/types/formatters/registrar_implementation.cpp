@@ -59,8 +59,8 @@ create(std::ostream& stream, const bool disable_xml_serialization) {
         new registrar_implementation(stream, disable_xml_serialization));
 }
 
-void registrar_implementation::format(const file_info& vm) {
-    const auto o(vm.registrar_info());
+void registrar_implementation::format(const file_info& fi) {
+    const auto o(fi.registrar_info());
     if (!o) {
         BOOST_LOG_SEV(lg, error) << expected_registrar_info;
         BOOST_THROW_EXCEPTION(formatting_error(expected_registrar_info));
@@ -71,7 +71,7 @@ void registrar_implementation::format(const file_info& vm) {
 
     const bool blank_line(false);
     includes includes(stream_, blank_line);
-    includes.format(vm);
+    includes.format(fi);
 
     // FIXME: massive hack for EOS workaround
     stream_ << "#ifdef __linux__" << std::endl
@@ -81,11 +81,11 @@ void registrar_implementation::format(const file_info& vm) {
     utility_.blank_line();
 
     {
-        const auto rvm(*o);
-        namespace_helper ns(stream_, rvm.namespaces());
+        const auto ei(*o);
+        namespace_helper ns(stream_, ei.namespaces());
 
-        const auto deps(rvm.model_dependencies());
-        const auto leaves(rvm.leaves());
+        const auto deps(ei.model_dependencies());
+        const auto leaves(ei.leaves());
         const bool has_types(!deps.empty() || !leaves.empty());
         const std::string arg_name(has_types ? " ar" : "");
         utility_.blank_line();

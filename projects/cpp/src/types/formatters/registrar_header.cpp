@@ -54,8 +54,8 @@ create(std::ostream& stream) {
     return file_formatter::shared_ptr(new registrar_header(stream));
 }
 
-void registrar_header::format(const file_info& vm) {
-    const auto o(vm.registrar_info());
+void registrar_header::format(const file_info& fi) {
+    const auto o(fi.registrar_info());
     if (!o) {
         BOOST_LOG_SEV(lg, error) << expected_registrar_info;
         BOOST_THROW_EXCEPTION(formatting_error(expected_registrar_info));
@@ -66,11 +66,11 @@ void registrar_header::format(const file_info& vm) {
 
     const bool blank_line(false);
     includes includes(stream_, blank_line);
-    includes.format(vm);
+    includes.format(fi);
 
     {
-        const auto rvm(*o);
-        namespace_helper ns(stream_, rvm.namespaces());
+        const auto ri(*o);
+        namespace_helper ns(stream_, ri.namespaces());
         utility_.blank_line();
         stream_ << indenter_ << "template<typename Archive>" << std::endl
                 << indenter_ << "void register_types(Archive& ar);"

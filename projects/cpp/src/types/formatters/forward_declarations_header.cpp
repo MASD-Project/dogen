@@ -66,7 +66,7 @@ create(std::ostream& stream) {
 }
 
 void forward_declarations_header::
-format_serialization_class(const class_info& vm) {
+format_serialization_class(const class_info& ci) {
     {
         std::list<std::string> ns({ boost_ns, serialization_ns });
         namespace_helper nsh(stream_, ns);
@@ -76,14 +76,14 @@ format_serialization_class(const class_info& vm) {
             << indenter_ << "void save(Archive& ar, const ";
 
         qname qname(stream_);
-        qname.format(vm);
+        qname.format(ci);
 
         stream_ << indenter_ << "& v, unsigned int version);" << std::endl;
         utility_.blank_line();
 
         stream_ << indenter_ << "template<class Archive>" << std::endl
                 << indenter_ << "void load(Archive& ar, ";
-        qname.format(vm);
+        qname.format(ci);
 
         stream_ << indenter_ << "& v, unsigned int version);" << std::endl;
         utility_.blank_line();
@@ -92,30 +92,30 @@ format_serialization_class(const class_info& vm) {
 }
 
 void forward_declarations_header::
-format_domain_class(const class_info& vm) {
+format_domain_class(const class_info& ci) {
     {
-        namespace_helper nsh(stream_, vm.namespaces());
+        namespace_helper nsh(stream_, ci.namespaces());
         utility_.blank_line();
 
-        stream_ << indenter_ << "class " << vm.name() << ";" << std::endl;
+        stream_ << indenter_ << "class " << ci.name() << ";" << std::endl;
         utility_.blank_line();
     }
     utility_.blank_line(2);
 }
 
-void forward_declarations_header::format_class(const file_info& vm) {
-    boost::optional<class_info> o(vm.class_info());
+void forward_declarations_header::format_class(const file_info& fi) {
+    boost::optional<class_info> o(fi.class_info());
     if (!o) {
         BOOST_LOG_SEV(lg, error) << missing_class_info;
         BOOST_THROW_EXCEPTION(formatting_error(missing_class_info));
     }
 
-    const auto ft(vm.facet_type());
-    const class_info& cvm(*o);
+    const auto ft(fi.facet_type());
+    const class_info& ci(*o);
     if (ft == config::cpp_facet_types::serialization)
-        format_serialization_class(cvm);
+        format_serialization_class(ci);
     else if (ft == config::cpp_facet_types::types)
-        format_domain_class(cvm);
+        format_domain_class(ci);
     else {
         using dogen::utility::exception::invalid_enum_value;
         BOOST_LOG_SEV(lg, error) << invalid_facet_types;
@@ -124,45 +124,45 @@ void forward_declarations_header::format_class(const file_info& vm) {
 }
 
 void forward_declarations_header::
-format_enumeration(const file_info& vm) {
-    const auto o(vm.enumeration_info());
+format_enumeration(const file_info& fi) {
+    const auto o(fi.enumeration_info());
     if (!o) {
         BOOST_LOG_SEV(lg, error) << missing_enumeration_info;
         BOOST_THROW_EXCEPTION(formatting_error(missing_enumeration_info));
     }
 
-    const auto evm(*o);
+    const auto ei(*o);
     {
-        namespace_helper nsh(stream_, evm.namespaces());
+        namespace_helper nsh(stream_, ei.namespaces());
         utility_.blank_line();
 
-        stream_ << indenter_ << "enum class " << evm.name()
+        stream_ << indenter_ << "enum class " << ei.name()
                 << " : unsigned int;";
         utility_.blank_line();
     }
     utility_.blank_line(2);
 }
 
-void forward_declarations_header::format_exception(const file_info& vm) {
-    const auto o(vm.exception_info());
+void forward_declarations_header::format_exception(const file_info& fi) {
+    const auto o(fi.exception_info());
     if (!o) {
         BOOST_LOG_SEV(lg, error) << missing_exception_info;
         BOOST_THROW_EXCEPTION(formatting_error(missing_exception_info));
     }
 
-    const auto evm(*o);
+    const auto ei(*o);
     {
-        namespace_helper nsh(stream_, evm.namespaces());
+        namespace_helper nsh(stream_, ei.namespaces());
         utility_.blank_line();
 
-        stream_ << indenter_ << "class " << evm.name() << ";" << std::endl;
+        stream_ << indenter_ << "class " << ei.name() << ";" << std::endl;
         utility_.blank_line();
     }
     utility_.blank_line(2);
 }
 
-void forward_declarations_header::format(const file_info& vm) {
-    if (vm.aspect_type() != aspect_types::forward_decls) {
+void forward_declarations_header::format(const file_info& fi) {
+    if (fi.aspect_type() != aspect_types::forward_decls) {
         using dogen::utility::exception::invalid_enum_value;
         BOOST_LOG_SEV(lg, error) << invalid_facet_types;
         BOOST_THROW_EXCEPTION(invalid_enum_value(invalid_facet_types));
@@ -172,18 +172,18 @@ void forward_declarations_header::format(const file_info& vm) {
     licence.format();
 
     header_guards guards(stream_);
-    guards.format_start(vm.header_guard());
+    guards.format_start(fi.header_guard());
     utility_.blank_line();
 
     includes includes(stream_);
-    includes.format(vm);
+    includes.format(fi);
 
-    if (vm.meta_type() == sml::meta_types::enumeration)
-        format_enumeration(vm);
-    else if (vm.meta_type() == sml::meta_types::pod)
-        format_class(vm);
-    else if (vm.meta_type() == sml::meta_types::exception)
-        format_exception(vm);
+    if (fi.meta_type() == sml::meta_types::enumeration)
+        format_enumeration(fi);
+    else if (fi.meta_type() == sml::meta_types::pod)
+        format_class(fi);
+    else if (fi.meta_type() == sml::meta_types::exception)
+        format_exception(fi);
 
     guards.format_end();
 }

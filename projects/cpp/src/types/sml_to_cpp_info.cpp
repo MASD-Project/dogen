@@ -288,37 +288,36 @@ requires_stream_manipulators(const std::string type_name) const {
 
 void sml_dfs_visitor::transform_nested_qname(
     const dogen::sml::nested_qname& nqn,
-    dogen::cpp::nested_type_info&
-    vm, std::string& complete_name,
+    dogen::cpp::nested_type_info& nti, std::string& complete_name,
     bool& requires_stream_manipulators) const {
 
     const auto qn(nqn.type());
     std::list<std::string> ns_list(join_namespaces(qn));
-    vm.namespaces(ns_list);
+    nti.namespaces(ns_list);
     ns_list.push_back(qn.type_name());
 
     using boost::algorithm::join;
     std::string ns(join(ns_list, namespace_separator));
-    vm.name(ns);
+    nti.name(ns);
 
     using dogen::sml::meta_types;
-    vm.is_enumeration(qn.meta_type() == meta_types::enumeration);
-    vm.is_primitive(qn.meta_type() == meta_types::primitive);
-    if (vm.is_primitive()) {
-        if (this->requires_stream_manipulators(vm.name()))
+    nti.is_enumeration(qn.meta_type() == meta_types::enumeration);
+    nti.is_primitive(qn.meta_type() == meta_types::primitive);
+    if (nti.is_primitive()) {
+        if (this->requires_stream_manipulators(nti.name()))
             requires_stream_manipulators = true;
 
-        vm.is_char_like(is_char_like(vm.name()));
-        vm.is_int_like(is_int_like(vm.name()));
+        nti.is_char_like(is_char_like(nti.name()));
+        nti.is_int_like(is_int_like(nti.name()));
     }
-    vm.is_string_like(is_string_like(vm.name()));
-    vm.is_optional_like(is_optional_like(vm.name()));
-    vm.is_pair(is_pair(vm.name()));
-    vm.is_variant_like(is_variant_like(vm.name()));
-    vm.is_filesystem_path(is_filesystem_path(vm.name()));
-    vm.is_date(is_gregorian_date(vm.name()));
-    vm.is_ptime(is_ptime(vm.name()));
-    vm.is_time_duration(is_time_duration(vm.name()));
+    nti.is_string_like(is_string_like(nti.name()));
+    nti.is_optional_like(is_optional_like(nti.name()));
+    nti.is_pair(is_pair(nti.name()));
+    nti.is_variant_like(is_variant_like(nti.name()));
+    nti.is_filesystem_path(is_filesystem_path(nti.name()));
+    nti.is_date(is_gregorian_date(nti.name()));
+    nti.is_ptime(is_ptime(nti.name()));
+    nti.is_time_duration(is_time_duration(nti.name()));
 
     if (qn.meta_type() == meta_types::pod) {
         const auto i(state_->pods_.find(qn));
@@ -330,15 +329,15 @@ void sml_dfs_visitor::transform_nested_qname(
         }
         const auto pt(i->second.pod_type());
         using dogen::sml::pod_types;
-        vm.is_sequence_container(pt == pod_types::sequence_container);
-        vm.is_associative_container(pt == pod_types::associative_container);
-        vm.is_smart_pointer(pt == pod_types::smart_pointer);
+        nti.is_sequence_container(pt == pod_types::sequence_container);
+        nti.is_associative_container(pt == pod_types::associative_container);
+        nti.is_smart_pointer(pt == pod_types::smart_pointer);
     }
 
     using dogen::cpp::nested_type_info;
     const auto nqn_children(nqn.children());
 
-    std::string my_complete_name(vm.name());
+    std::string my_complete_name(nti.name());
     auto lambda([&](char c) {
             if (!nqn_children.empty()) {
                 if (my_complete_name[my_complete_name.length() - 1] == c)
@@ -354,18 +353,18 @@ void sml_dfs_visitor::transform_nested_qname(
         if (!is_first)
             my_complete_name += ", ";
 
-        nested_type_info cvm;
-        transform_nested_qname(c, cvm, my_complete_name,
+        nested_type_info ci;
+        transform_nested_qname(c, ci, my_complete_name,
             requires_stream_manipulators);
-        children.push_back(cvm);
+        children.push_back(ci);
         is_first = false;
     }
     lambda('>');
 
-    vm.identifiable_name(to_identifiable_name(ns));
-    vm.complete_identifiable_name(to_identifiable_name(my_complete_name));
-    vm.complete_name(my_complete_name);
-    vm.children(children);
+    nti.identifiable_name(to_identifiable_name(ns));
+    nti.complete_identifiable_name(to_identifiable_name(my_complete_name));
+    nti.complete_name(my_complete_name);
+    nti.children(children);
     complete_name += my_complete_name;
 }
 
@@ -374,9 +373,9 @@ void sml_dfs_visitor::process_sml_pod(const dogen::sml::pod& pod) {
     const std::list<std::string> ns(join_namespaces(name));
 
     using namespace dogen::cpp;
-    class_info cvm;
-    cvm.name(name.type_name());
-    std::list<property_info> all_props_vm;
+    class_info ci;
+    ci.name(name.type_name());
+    std::list<property_info> all_props;
 
     if (pod.parent_name()) {
         const auto pqn(*pod.parent_name());
@@ -400,36 +399,36 @@ void sml_dfs_visitor::process_sml_pod(const dogen::sml::pod& pod) {
         parent.properties(i->second.all_properties());
         // FIXME: quick hack to avoid modifying source.
         auto tmp(i->second.all_properties());
-        all_props_vm.splice(all_props_vm.end(), tmp);
+        all_props.splice(all_props.end(), tmp);
         parent.namespaces(i->second.namespaces());
 
         std::list<parent_info> parents;
         parents.push_back(parent);
-        cvm.parents(parents);
+        ci.parents(parents);
     }
 
-    cvm.namespaces(ns);
-    cvm.is_parent(pod.is_parent());
-    cvm.documentation(pod.documentation());
-    cvm.is_immutable(pod.is_immutable());
-    cvm.is_visitable(pod.is_visitable());
+    ci.namespaces(ns);
+    ci.is_parent(pod.is_parent());
+    ci.documentation(pod.documentation());
+    ci.is_immutable(pod.is_immutable());
+    ci.is_visitable(pod.is_visitable());
 
     if (pod.is_visitable()) {
         BOOST_LOG_SEV(lg, debug) << "Pod '" << name.type_name()
                                  << "' is visitable so generating visitor";
 
-        visitor_info vvm;
-        vvm.name(cvm.name() + "_visitor");
-        vvm.namespaces(ns);
+        visitor_info vi;
+        vi.name(ci.name() + "_visitor");
+        vi.namespaces(ns);
 
         std::list<std::string> fqn(ns);
-        fqn.push_back(cvm.name());
+        fqn.push_back(ci.name());
         using boost::join;
-        vvm.types().push_back(join(fqn, namespace_separator));
-        state_->visitor_infos_.insert(std::make_pair(pod.name(), vvm));
+        vi.types().push_back(join(fqn, namespace_separator));
+        state_->visitor_infos_.insert(std::make_pair(pod.name(), vi));
     }
 
-    std::list<property_info> props_vm;
+    std::list<property_info> props;
     bool has_primitive_properties(false);
     bool requires_stream_manipulators(false);
     bool requires_manual_move_constructor(false);
@@ -441,38 +440,38 @@ void sml_dfs_visitor::process_sml_pod(const dogen::sml::pod& pod) {
         k.is_immutable(pod.is_immutable());
         k.is_fluent(pod.is_fluent());
 
-        nested_type_info type_vm;
+        nested_type_info nti;
         std::string complete_name;
         if (p.type_name().type().type_name() == "optional" ||
             p.type_name().type().type_name() == "path" ||
             p.type_name().type().type_name() == "variant")
             requires_manual_move_constructor = true;
 
-        transform_nested_qname(p.type_name(), type_vm, complete_name,
+        transform_nested_qname(p.type_name(), nti, complete_name,
             requires_stream_manipulators);
-        if (type_vm.is_primitive()) {
+        if (nti.is_primitive()) {
             has_primitive_properties = true;
             requires_manual_default_constructor = true;
-        } else if (type_vm.is_enumeration())
+        } else if (nti.is_enumeration())
             requires_manual_default_constructor = true;
 
-        type_vm.complete_name(complete_name);
-        k.type(type_vm);
+        nti.complete_name(complete_name);
+        k.type(nti);
         k.implementation_specific_parameters(
             p.implementation_specific_parameters());
 
-        props_vm.push_back(k);
+        props.push_back(k);
     }
 
-    all_props_vm.insert(all_props_vm.end(), props_vm.begin(), props_vm.end());
-    cvm.properties(props_vm);
-    cvm.all_properties(all_props_vm);
-    cvm.has_primitive_properties(has_primitive_properties);
-    cvm.requires_stream_manipulators(requires_stream_manipulators);
-    cvm.requires_manual_move_constructor(requires_manual_move_constructor);
-    cvm.requires_manual_default_constructor(
+    all_props.insert(all_props.end(), props.begin(), props.end());
+    ci.properties(props);
+    ci.all_properties(all_props);
+    ci.has_primitive_properties(has_primitive_properties);
+    ci.requires_stream_manipulators(requires_stream_manipulators);
+    ci.requires_manual_move_constructor(requires_manual_move_constructor);
+    ci.requires_manual_default_constructor(
         requires_manual_default_constructor);
-    cvm.implementation_specific_parameters(
+    ci.implementation_specific_parameters(
         pod.implementation_specific_parameters());
 
     const auto opn(pod.original_parent_name());
@@ -480,15 +479,15 @@ void sml_dfs_visitor::process_sml_pod(const dogen::sml::pod& pod) {
         std::list<std::string> opn_name(join_namespaces(*opn));
         opn_name.push_back(opn->type_name());
         using boost::join;
-        cvm.original_parent_name_qualified(join(opn_name, namespace_separator));
-        cvm.original_parent_name(opn->type_name());
+        ci.original_parent_name_qualified(join(opn_name, namespace_separator));
+        ci.original_parent_name(opn->type_name());
 
         const auto i(state_->visitor_infos_.find(*opn));
         if (i != state_->visitor_infos_.end()) {
             std::list<std::string> fqn(ns);
-            fqn.push_back(cvm.name());
+            fqn.push_back(ci.name());
             i->second.types().push_back(join(fqn, namespace_separator));
-            cvm.is_original_parent_visitable(true);
+            ci.is_original_parent_visitable(true);
         }
     }
 
@@ -499,8 +498,8 @@ void sml_dfs_visitor::process_sml_pod(const dogen::sml::pod& pod) {
         using boost::join;
         leaves.push_back(join(leaf_name, namespace_separator));
     }
-    cvm.leaves(leaves);
-    state_->class_infos_.insert(std::make_pair(name, cvm));
+    ci.leaves(leaves);
+    state_->class_infos_.insert(std::make_pair(name, ci));
 }
 
 }
@@ -801,20 +800,20 @@ void sml_to_cpp_info::create_enumeration_infos() {
         const dogen::sml::qname name(e.name());
         const std::list<std::string> ns(join_namespaces(name));
 
-        enumeration_info vm;
-        vm.name(e.name().type_name());
-        vm.namespaces(ns);
-        vm.documentation(e.documentation());
+        enumeration_info ei;
+        ei.name(e.name().type_name());
+        ei.namespaces(ns);
+        ei.documentation(e.documentation());
         std::list<enumerator_info> enumerators;
         for (const auto en : e.enumerators()) {
-            enumerator_info evm;
-            evm.name(en.name());
-            evm.value(en.value());
-            evm.documentation(en.documentation());
-            enumerators.push_back(evm);
+            enumerator_info ei;
+            ei.name(en.name());
+            ei.value(en.value());
+            ei.documentation(en.documentation());
+            enumerators.push_back(ei);
         }
-        vm.enumerators(enumerators);
-        qname_to_enumeration_.insert(std::make_pair(e.name(), vm));
+        ei.enumerators(enumerators);
+        qname_to_enumeration_.insert(std::make_pair(e.name(), ei));
     }
 }
 
@@ -828,11 +827,11 @@ void sml_to_cpp_info::create_exception_infos() {
         const dogen::sml::qname name(e.name());
         const std::list<std::string> ns(join_namespaces(name));
 
-        exception_info vm;
-        vm.name(e.name().type_name());
-        vm.namespaces(ns);
-        vm.documentation(e.documentation());
-        qname_to_exception_.insert(std::make_pair(e.name(), vm));
+        exception_info ei;
+        ei.name(e.name().type_name());
+        ei.namespaces(ns);
+        ei.documentation(e.documentation());
+        qname_to_exception_.insert(std::make_pair(e.name(), ei));
     }
 }
 
@@ -1021,19 +1020,19 @@ std::vector<file_info> sml_to_cpp_info::transform_packages() {
         const auto rq(location_request_factory(ft, file_type, at, qn));
         const auto rp(locator_.relative_logical_path(rq));
 
-        file_info vm;
-        vm.header_guard(to_header_guard_name(rp));
-        vm.facet_type(ft);
-        vm.file_path(locator_.absolute_path(rq));
-        vm.file_type(file_type);
-        vm.aspect_type(at);
-        vm.meta_type(qn.meta_type());
+        file_info fi;
+        fi.header_guard(to_header_guard_name(rp));
+        fi.facet_type(ft);
+        fi.file_path(locator_.absolute_path(rq));
+        fi.file_type(file_type);
+        fi.aspect_type(at);
+        fi.meta_type(qn.meta_type());
 
-        namespace_info nvm;
-        nvm.documentation(model_.documentation());
-        nvm.namespaces(ns);
-        vm.namespace_info(nvm);
-        r.push_back(vm);
+        namespace_info ni;
+        ni.documentation(model_.documentation());
+        ni.namespaces(ns);
+        fi.namespace_info(ni);
+        r.push_back(fi);
     }
 
     for (const auto& p : model_.packages()) {
@@ -1054,20 +1053,20 @@ std::vector<file_info> sml_to_cpp_info::transform_packages() {
         qn = p.second.name();
         const std::list<std::string> ns(join_namespaces(qn));
 
-        file_info vm;
-        vm.header_guard(to_header_guard_name(rp));
-        vm.facet_type(ft);
-        vm.file_path(locator_.absolute_path(rq));
-        vm.file_type(file_type);
-        vm.aspect_type(at);
-        vm.meta_type(qn.meta_type());
+        file_info fi;
+        fi.header_guard(to_header_guard_name(rp));
+        fi.facet_type(ft);
+        fi.file_path(locator_.absolute_path(rq));
+        fi.file_type(file_type);
+        fi.aspect_type(at);
+        fi.meta_type(qn.meta_type());
 
-        namespace_info nvm;
-        nvm.documentation(p.second.documentation());
-        nvm.namespaces(ns);
-        vm.namespace_info(nvm);
+        namespace_info ni;
+        ni.documentation(p.second.documentation());
+        ni.namespaces(ns);
+        fi.namespace_info(ni);
 
-        r.push_back(vm);
+        r.push_back(fi);
     }
 
     BOOST_LOG_SEV(lg, debug) << "Transformed packages: "
@@ -1129,17 +1128,17 @@ sml_to_cpp_info::transform_facet_includers() const {
         qn.external_package_path(model_.external_package_path());
         const auto rq(location_request_factory(ft, file_type, at, qn));
 
-        file_info vm;
-        vm.facet_type(ft);
-        vm.file_path(locator_.absolute_path(rq));
-        vm.file_type(file_type);
-        vm.aspect_type(at);
+        file_info fi;
+        fi.facet_type(ft);
+        fi.file_path(locator_.absolute_path(rq));
+        fi.file_type(file_type);
+        fi.aspect_type(at);
 
         const auto includes(includer_.includes_for_includer_files(ft));
-        vm.system_includes(includes.system);
-        vm.user_includes(includes.user);
+        fi.system_includes(includes.system);
+        fi.user_includes(includes.user);
 
-        r.push_back(vm);
+        r.push_back(fi);
     }
     return r;
 }
@@ -1158,24 +1157,24 @@ std::vector<file_info> sml_to_cpp_info::transform_visitors() {
         qn.external_package_path(v.first.external_package_path());
         const auto rq(location_request_factory(ft, file_type, at, qn));
 
-        file_info vm;
-        vm.facet_type(ft);
-        vm.file_path(locator_.absolute_path(rq));
-        vm.file_type(file_type);
-        vm.aspect_type(at);
-        vm.visitor_info(v.second);
+        file_info fi;
+        fi.facet_type(ft);
+        fi.file_path(locator_.absolute_path(rq));
+        fi.file_type(file_type);
+        fi.aspect_type(at);
+        fi.visitor_info(v.second);
 
         // FIXME: hack to solve ordering issues
-        vm.visitor_info()->types().sort();
+        fi.visitor_info()->types().sort();
 
         const auto rp(locator_.relative_logical_path(rq));
-        vm.header_guard(to_header_guard_name(rp));
+        fi.header_guard(to_header_guard_name(rp));
 
         const auto includes(includer_.includes_for_visitor(v.first));
-        vm.system_includes(includes.system);
-        vm.user_includes(includes.user);
+        fi.system_includes(includes.system);
+        fi.user_includes(includes.user);
 
-        r.push_back(vm);
+        r.push_back(fi);
     }
     return r;
 }
@@ -1197,9 +1196,9 @@ sml_to_cpp_info::transform_registrar() const {
     qn.model_name(model_.name());
     qn.external_package_path(model_.external_package_path());
 
-    registrar_info rvm;
-    rvm.namespaces(join_namespaces(qn));
-    BOOST_LOG_SEV(lg, debug) << "Added namespaces: " << rvm.namespaces();
+    registrar_info ri;
+    ri.namespaces(join_namespaces(qn));
+    BOOST_LOG_SEV(lg, debug) << "Added namespaces: " << ri.namespaces();
 
     std::list<std::string> deps;
     for (const auto& pair : model_.dependencies()) {
@@ -1207,9 +1206,9 @@ sml_to_cpp_info::transform_registrar() const {
         if (!d.is_system())
             deps.push_back(d.model_name());
     }
-    rvm.model_dependencies(deps);
+    ri.model_dependencies(deps);
     BOOST_LOG_SEV(lg, debug) << "Added dependencies: "
-                             << rvm.model_dependencies();
+                             << ri.model_dependencies();
 
     std::list<std::string> leaves;
     using boost::join;
@@ -1219,12 +1218,12 @@ sml_to_cpp_info::transform_registrar() const {
         leaves.push_back(join(ns, namespace_separator));
     }
     leaves.sort();
-    rvm.leaves(leaves);
-    BOOST_LOG_SEV(lg, debug) << "Added leaves: " << rvm.leaves();
+    ri.leaves(leaves);
+    BOOST_LOG_SEV(lg, debug) << "Added leaves: " << ri.leaves();
 
     using config::cpp_facet_types;
     auto lambda([&](const file_types flt) ->  file_info {
-            file_info fvm;
+            file_info fi;
             const auto ft(cpp_facet_types::serialization);
             const auto at(aspect_types::registrar);
             const auto n(registrar_name);
@@ -1233,17 +1232,17 @@ sml_to_cpp_info::transform_registrar() const {
             qn.external_package_path(model_.external_package_path());
             const auto rq(location_request_factory(ft, flt, at, qn));
 
-            fvm.facet_type(ft);
-            fvm.file_path(locator_.absolute_path(rq));
-            fvm.file_type(flt);
-            fvm.aspect_type(at);
-            fvm.registrar_info(rvm);
+            fi.facet_type(ft);
+            fi.file_path(locator_.absolute_path(rq));
+            fi.file_type(flt);
+            fi.aspect_type(at);
+            fi.registrar_info(ri);
 
             const auto includes(includer_.includes_for_registrar(flt));
-            fvm.system_includes(includes.system);
-            fvm.user_includes(includes.user);
+            fi.system_includes(includes.system);
+            fi.user_includes(includes.user);
 
-            return fvm;
+            return fi;
         });
 
     r.push_back(lambda(file_types::header));

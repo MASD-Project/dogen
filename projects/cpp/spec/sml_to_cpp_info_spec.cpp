@@ -191,18 +191,18 @@ BOOST_AUTO_TEST_CASE(info_transformer_correctly_transforms_domain_files) {
             BOOST_CHECK(f.user_includes().front() == user_dependency);
         }
 
-        const auto class_vm(*o);
-        BOOST_LOG_SEV(lg, debug) << "class name: " << class_vm.name();
-        BOOST_CHECK(class_vm.name() == class_name);
-        BOOST_CHECK(!class_vm.is_parent());
+        const auto ci(*o);
+        BOOST_LOG_SEV(lg, debug) << "class name: " << ci.name();
+        BOOST_CHECK(ci.name() == class_name);
+        BOOST_CHECK(!ci.is_parent());
 
-        const auto ns(class_vm.namespaces());
+        const auto ns(ci.namespaces());
         BOOST_LOG_SEV(lg, debug) << "namespaces: " << ns;
         BOOST_CHECK(ns.size() == 2);
         BOOST_CHECK(ns.front() == namespace_1);
         BOOST_CHECK(ns.back() == namespace_2);
 
-        const auto properties(class_vm.properties());
+        const auto properties(ci.properties());
         BOOST_LOG_SEV(lg, debug) << "property count: " << properties.size();
         BOOST_REQUIRE(properties.size() == 2);
 
@@ -247,21 +247,21 @@ BOOST_AUTO_TEST_CASE(is_parent_flag_is_correctly_set_on_infos) {
     BOOST_CHECK(actual.size() == 6);
     BOOST_LOG_SEV(lg, debug) << "files generated: " << actual.size();
 
-    for (const auto fvm : actual) {
-        BOOST_LOG_SEV(lg, debug) << "file: " << fvm.file_path();
+    for (const auto& fi : actual) {
+        BOOST_LOG_SEV(lg, debug) << "file: " << fi.file_path();
         BOOST_CHECK(
-            fvm.aspect_type() == aspect_types::main ||
-            fvm.aspect_type() == aspect_types::forward_decls
+            fi.aspect_type() == aspect_types::main ||
+            fi.aspect_type() == aspect_types::forward_decls
             );
-        const auto o(fvm.class_info());
+        const auto o(fi.class_info());
         BOOST_REQUIRE(o);
 
-        const auto cvm(*o);
-        if (cvm.name() == pod_parent_name)
-            BOOST_CHECK(cvm.is_parent());
+        const auto ci(*o);
+        if (ci.name() == pod_parent_name)
+            BOOST_CHECK(ci.is_parent());
         else {
-            BOOST_CHECK(cvm.name() == pod_child_name);
-            BOOST_CHECK(!cvm.is_parent());
+            BOOST_CHECK(ci.name() == pod_child_name);
+            BOOST_CHECK(!ci.is_parent());
         }
     }
 }

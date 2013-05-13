@@ -32,23 +32,23 @@ domain_class_implementation(std::ostream& stream,
     disable_io_(disable_io) { }
 
 void domain_class_implementation::
-hand_crafted_constructors(const class_info& vm) {
-    default_constructor(vm);
-    move_constructor(vm);
+hand_crafted_constructors(const class_info& ci) {
+    default_constructor(ci);
+    move_constructor(ci);
     if (!disable_complete_constructor_)
-        complete_constructor(vm);
+        complete_constructor(ci);
 }
 
 
-void domain_class_implementation::format(const class_info& vm) {
-    hand_crafted_constructors(vm);
+void domain_class_implementation::format(const class_info& ci) {
+    hand_crafted_constructors(ci);
     if (!disable_io_)
-        to_stream(vm);
-    swap(vm);
-    equals_method(vm);
-    equals_operator(vm);
-    assignment_operator(vm);
-    getters_and_setters(vm);
+        to_stream(ci);
+    swap(ci);
+    equals_method(ci);
+    equals_operator(ci);
+    assignment_operator(ci);
+    getters_and_setters(ci);
 }
 
 } } }

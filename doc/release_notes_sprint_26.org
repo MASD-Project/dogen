@@ -179,7 +179,8 @@ SML has gotten really messy and very hard to understand. Do a general tidy-up.
 Since we are already looking into C++ meta models, might as well
 update the main readme with the links we find.
 
-*** IMPLEMENTATION Remove view model namespace and postfix            :spike:
+*** COMPLETED Remove view model namespace and postfix                 :spike:
+    CLOSED: [2013-05-13 Mon 20:04]
     CLOCK: [2013-05-12 Sun 20:59]--[2013-05-12 Sun 22:00] =>  1:01
     CLOCK: [2013-05-12 Sun 20:10]--[2013-05-12 Sun 20:58] =>  0:48
     CLOCK: [2013-05-12 Sun 19:30]--[2013-05-12 Sun 20:10] =>  0:40
@@ -195,6 +196,14 @@ well known prefix like eCore. Question is what prefix to use.
      CLOSED: [2013-05-12 Sun 22:00]
 **** COMPLETED Replace =_view_models= post-fix with =info=
      CLOSED: [2013-05-12 Sun 22:00]
+
+**** COMPLETED Rename =vm= variables and any remaining reference to view model
+     CLOSED: [2013-05-13 Mon 20:04]
+     CLOCK: [2013-05-13 Mon 19:50]--[2013-05-13 Mon 20:04] =>  0:14
+     CLOCK: [2013-05-13 Mon 19:21]--[2013-05-13 Mon 19:25] =>  0:04
+     CLOCK: [2013-05-13 Mon 18:16]--[2013-05-13 Mon 18:35] =>  0:19
+     CLOCK: [2013-05-13 Mon 18:06]--[2013-05-13 Mon 18:16] =>  0:10
+     CLOCK: [2013-05-13 Mon 17:50]--[2013-05-13 Mon 18:00] =>  0:10
 
 *** IMPLEMENTATION Move services into their own type                  :story:
     CLOCK: [2013-05-12 Sun 19:15]--[2013-05-12 Sun 19:30] =>  0:15

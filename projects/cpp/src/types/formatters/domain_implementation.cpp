@@ -86,13 +86,13 @@ create(std::ostream& stream, bool disable_complete_constructor,
 }
 
 void domain_implementation::
-smart_pointer_helper(const nested_type_info& vm) {
-    const auto children(vm.children());
+smart_pointer_helper(const nested_type_info& nti) {
+    const auto children(nti.children());
     if (children.size() != 1) {
         BOOST_LOG_SEV(lg, error) << invalid_smart_pointer;
         BOOST_THROW_EXCEPTION(formatting_error(invalid_smart_pointer));
     }
-    const auto container(vm);
+    const auto container(nti);
     {
         namespace_helper ns_helper(stream_, container.namespaces());
 
@@ -117,23 +117,23 @@ smart_pointer_helper(const nested_type_info& vm) {
 }
 
 void domain_implementation::
-recursive_helper_method_creator(const nested_type_info& vm,
+recursive_helper_method_creator(const nested_type_info& nti,
     std::unordered_set<std::string>& types_done) {
-    if (types_done.find(vm.complete_identifiable_name()) != types_done.end())
+    if (types_done.find(nti.complete_identifiable_name()) != types_done.end())
         return;
 
-    const auto children(vm.children());
+    const auto children(nti.children());
     for (const auto c : children)
         recursive_helper_method_creator(c, types_done);
 
-    if (vm.is_smart_pointer())
-        smart_pointer_helper(vm);
+    if (nti.is_smart_pointer())
+        smart_pointer_helper(nti);
 
-    types_done.insert(vm.complete_identifiable_name());
+    types_done.insert(nti.complete_identifiable_name());
 }
 
-void domain_implementation::io_helper_methods(const class_info& vm) {
-    const bool has_io(vm.is_parent() || !vm.parents().empty() ||
+void domain_implementation::io_helper_methods(const class_info& ci) {
+    const bool has_io(ci.is_parent() || !ci.parents().empty() ||
         use_integrated_io_);
 
     if (!has_io  || disable_io_)
@@ -141,30 +141,30 @@ void domain_implementation::io_helper_methods(const class_info& vm) {
 
     const bool inside_class(false);
     inserter_implementation i(stream_, indenter_, inside_class);
-    i.format_helper_methods(vm);
+    i.format_helper_methods(ci);
 }
 
 void domain_implementation::
-inserter_operator(const class_info& vm) {
+inserter_operator(const class_info& ci) {
     if (!use_integrated_io_ || disable_io_)
         return;
 
-    const bool no_arg(!vm.is_parent() && vm.parents().empty() &&
-        vm.properties().empty());
+    const bool no_arg(!ci.is_parent() && ci.parents().empty() &&
+        ci.properties().empty());
     stream_ << indenter_ << "std::ostream& operator<<(std::ostream& s"
-            << ", const " << vm.name() << "&" << (no_arg ? ") " : "v) ");
+            << ", const " << ci.name() << "&" << (no_arg ? ") " : "v) ");
 
     utility_.open_scope();
     {
         positive_indenter_scope s(indenter_);
 
-        if (vm.is_parent() || !vm.parents().empty()) {
+        if (ci.is_parent() || !ci.parents().empty()) {
             stream_ << indenter_ << "v.to_stream(s);" << std::endl
                     << indenter_ << "return(s);" << std::endl;
         } else {
             const bool inside_class(false);
             inserter_implementation i(stream_, indenter_, inside_class);
-            i.format_inserter_implementation(vm);
+            i.format_inserter_implementation(ci);
         }
     }
     utility_.close_scope();
@@ -173,7 +173,7 @@ inserter_operator(const class_info& vm) {
 
 void domain_implementation::
 class_implementation(aspect_types at, const sml::category_types ct,
-    const class_info& vm) {
+    const class_info& ci) {
 
     using dogen::utility::exception::invalid_enum_value;
     if (at == aspect_types::main) {
@@ -181,12 +181,12 @@ class_implementation(aspect_types at, const sml::category_types ct,
             ct == sml::category_types::unversioned_key) {
             key_class_implementation
                 f(stream_, disable_complete_constructor_, disable_io_);
-            f.format(vm);
+            f.format(ci);
             return;
         } else if (ct == sml::category_types::user_defined) {
             domain_class_implementation
                 f(stream_, disable_complete_constructor_, disable_io_);
-            f.format(vm);
+            f.format(ci);
             return;
         }
         BOOST_LOG_SEV(lg, error) << invalid_category_type;
@@ -196,24 +196,24 @@ class_implementation(aspect_types at, const sml::category_types ct,
     BOOST_THROW_EXCEPTION(invalid_enum_value(invalid_aspect_type));
 }
 
-void domain_implementation::format_class(const file_info& vm) {
-    boost::optional<class_info> o(vm.class_info());
+void domain_implementation::format_class(const file_info& fi) {
+    boost::optional<class_info> o(fi.class_info());
     if (!o) {
         BOOST_LOG_SEV(lg, error) << missing_class_info;
         BOOST_THROW_EXCEPTION(formatting_error(missing_class_info));
     }
-    const class_info& cvm(*o);
-    io_helper_methods(cvm);
+    const class_info& ci(*o);
+    io_helper_methods(ci);
 
     std::unordered_set<std::string> types_done;
-    const auto props(cvm.properties());
+    const auto props(ci.properties());
     for (const auto p : props)
         recursive_helper_method_creator(p.type(), types_done);
 
-    namespace_helper ns_helper(stream_, cvm.namespaces());
+    namespace_helper ns_helper(stream_, ci.namespaces());
     utility_.blank_line();
-    class_implementation(vm.aspect_type(), vm.category_type(), cvm);
-    inserter_operator(cvm);
+    class_implementation(fi.aspect_type(), fi.category_type(), ci);
+    inserter_operator(ci);
 }
 
 void domain_implementation::format_enumeration(const file_info&) {
@@ -222,17 +222,17 @@ void domain_implementation::format_enumeration(const file_info&) {
         formatting_error(enumeration_info_not_supported));
 }
 
-void domain_implementation::format(const file_info& vm) {
+void domain_implementation::format(const file_info& fi) {
     licence licence(stream_);
     licence.format();
 
     includes includes(stream_);
-    includes.format(vm);
+    includes.format(fi);
 
-    if (vm.meta_type() == sml::meta_types::enumeration)
-        format_enumeration(vm);
-    else if (vm.meta_type() == sml::meta_types::pod)
-        format_class(vm);
+    if (fi.meta_type() == sml::meta_types::enumeration)
+        format_enumeration(fi);
+    else if (fi.meta_type() == sml::meta_types::pod)
+        format_class(fi);
 }
 
 } } }

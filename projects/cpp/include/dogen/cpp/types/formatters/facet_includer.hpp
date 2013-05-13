@@ -52,7 +52,7 @@ public:
     static file_formatter::shared_ptr create(std::ostream& stream);
 
 public:
-    virtual void format(const file_info& vm) override;
+    virtual void format(const file_info& fi) override;
 
 private:
     std::ostream& stream_;

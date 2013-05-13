@@ -39,10 +39,10 @@ namespace formatters {
 src_cmakelists::src_cmakelists(std::ostream& stream) : stream_(stream) {
 }
 
-void src_cmakelists::format(const cmakelists_info& vm) {
-    const std::string mn(vm.model_name().empty() ?
+void src_cmakelists::format(const cmakelists_info& ci) {
+    const std::string mn(ci.model_name().empty() ?
         unnamed_model :
-        vm.model_name());
+        ci.model_name());
 
     stream_ << "# -*- mode: cmake; tab-width: 4; indent-tabs-mode: nil -*-"
             << std::endl
@@ -80,8 +80,8 @@ void src_cmakelists::format(const cmakelists_info& vm) {
             << "add_library(" << mn << " STATIC ${all_files})"
             << std::endl
             << "set_target_properties(" << mn << " PROPERTIES"
-            << std::endl << "    OUTPUT_NAME " << vm.product_name()
-            << (vm.product_name().empty() ? empty : underscore) << mn << ")";
+            << std::endl << "    OUTPUT_NAME " << ci.product_name()
+            << (ci.product_name().empty() ? empty : underscore) << mn << ")";
 
     stream_ << std::endl
             << std::endl

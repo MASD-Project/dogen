@@ -55,17 +55,17 @@ public:
 
 private:
     void sequence_container_helper(
-        const nested_type_info& vm, unsigned int quantity);
+        const nested_type_info& nti, unsigned int quantity);
     void associative_container_helper(
-        const nested_type_info& vm, unsigned int quantity);
-    void smart_pointer_helper(const nested_type_info& vm);
-    void optional_helper(const nested_type_info& vm);
-    void pair_helper(const nested_type_info& vm);
-    void variant_helper(const nested_type_info& vm);
-    void filesystem_path_helper(const nested_type_info& vm);
-    void date_helper(const nested_type_info& vm);
-    void ptime_helper(const nested_type_info& vm);
-    void time_duration_helper(const nested_type_info& vm);
+        const nested_type_info& nti, unsigned int quantity);
+    void smart_pointer_helper(const nested_type_info& nti);
+    void optional_helper(const nested_type_info& nti);
+    void pair_helper(const nested_type_info& nti);
+    void variant_helper(const nested_type_info& nti);
+    void filesystem_path_helper(const nested_type_info& nti);
+    void date_helper(const nested_type_info& nti);
+    void ptime_helper(const nested_type_info& nti);
+    void time_duration_helper(const nested_type_info& nti);
 
     void composite_domain_type_helper(const std::string& identifiable_type_name,
         const std::string& type_name, bool as_pointer);
@@ -78,23 +78,23 @@ private:
     void int_like_helper(const std::string& identifiable_type_name,
         const std::string& type_name);
     void recursive_helper_method_creator(const std::string& owner_name,
-        const nested_type_info& vm,
+        const nested_type_info& nti,
         std::unordered_set<std::string>& types_done, bool as_pointer);
-    void create_helper_methods(const class_info& vm);
+    void create_helper_methods(const class_info& ci);
 
 private:
-    void populate_method(const class_info& vm);
-    void create_method(const class_info& vm);
-    void create_method_ptr(const class_info& vm);
-    void function_operator(const class_info& vm);
-    void default_constructor(const class_info& vm);
+    void populate_method(const class_info& ci);
+    void create_method(const class_info& ci);
+    void create_method_ptr(const class_info& ci);
+    void function_operator(const class_info& ci);
+    void default_constructor(const class_info& ci);
 
 private:
-    void format_class(const file_info& vm);
-    void format_enumeration(const file_info& vm);
+    void format_class(const file_info& fi);
+    void format_enumeration(const file_info& fi);
 
 public:
-    virtual void format(const file_info& vm) override;
+    virtual void format(const file_info& fi) override;
 
 private:
     std::ostream& stream_;

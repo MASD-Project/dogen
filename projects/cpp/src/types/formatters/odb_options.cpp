@@ -36,10 +36,10 @@ namespace formatters {
 
 odb_options::odb_options(std::ostream& stream) : stream_(stream) {}
 
-void odb_options::format(const odb_options_info& vm) {
-    const std::string mn(vm.model_name().empty() ?
+void odb_options::format(const odb_options_info& ooi) {
+    const std::string mn(ooi.model_name().empty() ?
         unnamed_model :
-        vm.model_name());
+        ooi.model_name());
 
 
     stream_ << "# -*- mode: sh; tab-width: 4; indent-tabs-mode: nil -*-"
@@ -66,27 +66,27 @@ void odb_options::format(const odb_options_info& vm) {
             << "--cxx-suffix .cpp" << std::endl << std::endl;
 
     stream_ << "# fix domain includes" << std::endl
-            << "--include-regex '%(.*).hpp%" << vm.product_name()
-            << "/" << vm.model_name() << "/types/$1.hpp%'"
+            << "--include-regex '%(.*).hpp%" << ooi.product_name()
+            << "/" << ooi.model_name() << "/types/$1.hpp%'"
             << std::endl << std::endl;
 
     stream_ << "# fix odb generated includes" << std::endl
             << "--include-regex '%(^[a-zA-Z0-9_]+)-odb.(.*)%"
-            << vm.product_name() << "/" << vm.model_name() << "/"
-            << vm.odb_folder() << "/$1-odb.$2%'" << std::endl
-            << "--include-regex '%" << vm.product_name()
-            << "/" << vm.model_name() << "/types/(.*)-odb.(.*)%"
-            << vm.product_name() << "/" << vm.model_name()
-            << "/" << vm.odb_folder() << "/$1-odb.$2%'"
+            << ooi.product_name() << "/" << ooi.model_name() << "/"
+            << ooi.odb_folder() << "/$1-odb.$2%'" << std::endl
+            << "--include-regex '%" << ooi.product_name()
+            << "/" << ooi.model_name() << "/types/(.*)-odb.(.*)%"
+            << ooi.product_name() << "/" << ooi.model_name()
+            << "/" << ooi.odb_folder() << "/$1-odb.$2%'"
             << std::endl << std::endl;
 
     stream_ << "# debug regexes" << std::endl
             << "# --include-regex-trace" << std::endl << std::endl;
 
     stream_ << "# make the header guards similar to dogen ones" << std::endl
-            << "--guard-prefix " << boost::to_upper_copy(vm.product_name())
-            << "_" << boost::to_upper_copy(vm.model_name()) << "_"
-            << boost::to_upper_copy(vm.odb_folder())
+            << "--guard-prefix " << boost::to_upper_copy(ooi.product_name())
+            << "_" << boost::to_upper_copy(ooi.model_name()) << "_"
+            << boost::to_upper_copy(ooi.odb_folder())
             << std::endl;
 
 }

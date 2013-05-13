@@ -91,32 +91,32 @@ void workflow::log_file_views(unsigned int how_many) const {
 }
 
 workflow::value_type workflow::generate_cmakelists() const {
-    cmakelists_info vm;
-    vm.file_name(cmakelists_file_name);
-    vm.file_path(locator_.absolute_path_to_src(vm.file_name()));
-    vm.model_name(model_.name());
+    cmakelists_info ci;
+    ci.file_name(cmakelists_file_name);
+    ci.file_path(locator_.absolute_path_to_src(ci.file_name()));
+    ci.model_name(model_.name());
 
     if (!model_.external_package_path().empty())
-        vm.product_name(model_.external_package_path().front());
+        ci.product_name(model_.external_package_path().front());
 
-    log_formating_view(vm.file_path().string());
+    log_formating_view(ci.file_path().string());
     std::ostringstream stream;
     formatters::src_cmakelists src(stream);
-    src.format(vm);
+    src.format(ci);
 
     workflow::value_type r;
-    r.insert(std::make_pair(vm.file_path(), stream.str()));
+    r.insert(std::make_pair(ci.file_path(), stream.str()));
 
     if (!settings_.split_project()) {
         const auto f(settings_.enabled_facets());
         const bool odb_enabled(f.find(config::cpp_facet_types::odb) != f.end());
         stream.str("");
-        vm.file_path(locator_.absolute_path(vm.file_name()));
-        log_formating_view(vm.file_path().string());
+        ci.file_path(locator_.absolute_path(ci.file_name()));
+        log_formating_view(ci.file_path().string());
         formatters::include_cmakelists inc(stream, odb_enabled,
             settings_.odb_facet_folder());
-        inc.format(vm);
-        r.insert(std::make_pair(vm.file_path(), stream.str()));
+        inc.format(ci);
+        r.insert(std::make_pair(ci.file_path(), stream.str()));
     }
 
     return r;
@@ -125,44 +125,44 @@ workflow::value_type workflow::generate_cmakelists() const {
 workflow::value_entry_type workflow::generate_odb_options() const {
     BOOST_LOG_SEV(lg, info) << "Generating ODB options file.";
 
-    odb_options_info vm;
-    vm.file_name(odb_options_file_name);
-    vm.file_path(locator_.absolute_path_to_src(vm.file_name()));
-    vm.model_name(model_.name());
-    vm.odb_folder(settings_.odb_facet_folder());
+    odb_options_info ooi;
+    ooi.file_name(odb_options_file_name);
+    ooi.file_path(locator_.absolute_path_to_src(ooi.file_name()));
+    ooi.model_name(model_.name());
+    ooi.odb_folder(settings_.odb_facet_folder());
 
     if (!model_.external_package_path().empty())
-        vm.product_name(model_.external_package_path().front());
+        ooi.product_name(model_.external_package_path().front());
 
-    log_formating_view(vm.file_path().string());
+    log_formating_view(ooi.file_path().string());
     std::ostringstream stream;
     formatters::odb_options f(stream);
-    f.format(vm);
+    f.format(ooi);
 
-    return std::make_pair(vm.file_path(), stream.str());
+    return std::make_pair(ooi.file_path(), stream.str());
 }
 
 workflow::value_entry_type workflow::
-generate_file_info(const file_info& vm) const {
-    log_formating_view(vm.file_path().string());
+generate_file_info(const file_info& fi) const {
+    log_formating_view(fi.file_path().string());
     formatters::factory factory(settings_);
     formatters::file_formatter::shared_ptr ff;
     std::ostringstream s;
-    ff = factory.create(s, vm.facet_type(), vm.file_type(), vm.aspect_type());
-    ff->format(vm);
-    return std::make_pair(vm.file_path(), s.str());
+    ff = factory.create(s, fi.facet_type(), fi.file_type(), fi.aspect_type());
+    ff->format(fi);
+    return std::make_pair(fi.file_path(), s.str());
 }
 
 workflow::value_type workflow::generate_file_infos() const {
     includer im(model_, locator_, settings_);
 
     sml_to_cpp_info t(locator_, im, settings_, model_);
-    std::vector<file_info> fvms(t.transform());
-    log_file_views(fvms.size());
+    std::vector<file_info> vfi(t.transform());
+    log_file_views(vfi.size());
 
     workflow::value_type r;
-    for (auto fvm : fvms)
-        r.insert(generate_file_info(fvm));
+    for (const auto& fi : vfi)
+        r.insert(generate_file_info(fi));
     return r;
 }
 

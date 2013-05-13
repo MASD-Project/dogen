@@ -38,25 +38,25 @@ exception_declaration::
 exception_declaration(std::ostream& stream)
     : stream_(stream), utility_(stream_, indenter_) { }
 
-void exception_declaration::format(const exception_info& vm) {
+void exception_declaration::format(const exception_info& ei) {
     doxygen_comments dc1(stream_, indenter_);
-    dc1.format(vm.documentation());
+    dc1.format(ei.documentation());
 
-    stream_ << indenter_ << "class " << vm.name()
+    stream_ << indenter_ << "class " << ei.name()
             << " : public virtual std::exception, "
             << "public virtual boost::exception ";
     utility_.open_scope();
     {
         positive_indenter_scope s(indenter_);
         utility_.public_access_specifier();
-        stream_ << indenter_ << vm.name() << "() = default;"
+        stream_ << indenter_ << ei.name() << "() = default;"
                 << std::endl;
-        stream_ << indenter_ << "~" << vm.name() << "() noexcept = default;"
+        stream_ << indenter_ << "~" << ei.name() << "() noexcept = default;"
                 << std::endl;
         utility_.blank_line();
 
         utility_.public_access_specifier();
-        stream_ << indenter_ << vm.name()
+        stream_ << indenter_ << ei.name()
                 << "(const std::string& message) : message_(message) { }"
                 << std::endl;
         utility_.blank_line();

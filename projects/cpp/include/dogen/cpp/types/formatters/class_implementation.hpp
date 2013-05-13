@@ -50,23 +50,23 @@ public:
 
 private:
     void non_pod_getters_and_setters(const std::string class_name,
-        const property_info& vm);
+        const property_info& pi);
     void pod_getters_and_setters(const std::string class_name,
-        const property_info& vm);
+        const property_info& pi);
 
 protected:
-    void default_constructor(const class_info& vm);
-    void move_constructor(const class_info& vm);
-    void complete_constructor(const class_info& vm);
-    void to_stream(const class_info& vm);
-    void swap(const class_info& vm);
-    void equals_method(const class_info& vm);
-    void equals_operator(const class_info& vm);
-    void assignment_operator(const class_info& vm);
-    void getters_and_setters(const class_info& vm);
+    void default_constructor(const class_info& ci);
+    void move_constructor(const class_info& ci);
+    void complete_constructor(const class_info& ci);
+    void to_stream(const class_info& ci);
+    void swap(const class_info& ci);
+    void equals_method(const class_info& ci);
+    void equals_operator(const class_info& ci);
+    void assignment_operator(const class_info& ci);
+    void getters_and_setters(const class_info& ci);
 
 public:
-    virtual void format(const class_info& vm) = 0;
+    virtual void format(const class_info& ci) = 0;
 
 protected:
     std::ostream& stream_;

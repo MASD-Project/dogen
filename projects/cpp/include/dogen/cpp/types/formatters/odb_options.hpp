@@ -46,7 +46,7 @@ public:
     explicit odb_options(std::ostream& stream);
 
 public:
-    void format(const odb_options_info& vm);
+    void format(const odb_options_info& ooi);
 
 private:
     std::ostream& stream_;
