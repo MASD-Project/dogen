@@ -11,6 +11,60 @@ This file contains all stories that haven't been assigned to a sprint.
 
 Stories that we intend to look at, at some point.
 
+*** Add versioning support
+    CLOCK: [2013-05-13 Mon 08:28]--[2013-05-13 Mon 08:37] =>  0:09
+
+Versioning support is now available in SML, so we need to apply it to
+SML itself. That is, we need a way of having two versions of an SML
+model coexist, and allow Dogen to diff those two versions to make code
+generation decisions so that we can add basic backwards compatibility
+support.
+
+Before we can do this, we need a way of stamping a model version into
+models. This can easily be done via implementation specific
+parameters. See [[*Add%20a%20code%20generation%20marker][Add a code generation marker]].
+
+We then need to create some kind of strategy for version number
+management:
+
+- minor bumps are backwards compatible; e.g. only adding new fields.
+- major bumps are not backwards compatible: e.g. deleting fields,
+  classes, etc.
+
+However, at present we only support a single version number. Perhaps
+we should just declare which versions are backwards compatible and
+which ones are not.
+
+Once all of these are in place we should add versioning support to
+dogen:
+
+- add a new command line argument: =--previous-version= or something
+  of the kind.
+- the model supplied by this argument must have the same name as the
+  model supplied by =--target=.
+- change all SML types to be versioned.
+- dogen will load up both models, and stamp the versions in each
+  type. Merger will then be responsible for stamping the versions on
+  each property, taking previous and new as input.
+- for every field which is in new model but not in previous, add boost
+  serialisation code to handle that.
+- add unit tests with v1, v2 models.
+- in order for dia diagrams with multiple versions to coexist in the
+  same directory we will probably need to add the version to the
+  diagram name, e.g. =sml_1.dia= or =sml_v1.dia=. We probably need
+  some parsing code that looks for the last few characters of the file
+  name and if it obeys a simple convention such as =_v= followed by a
+  number, it ignores these for the model name and uses it for the
+  version.
+
+With this in place, when rebasing we can now do a proper comparison
+between expected and actual.
+
+Potential future feature: to put the files of different versions in
+separate folders. This would allow the creation of "conversion" apps
+which take types for one version and transform them into the next
+version.
+
 *** Consider not creating unversioned keys for single property        :story:
 
 If a key is made up of a single property, its a bit nonsensical to
