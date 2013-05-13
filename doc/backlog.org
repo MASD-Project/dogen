@@ -241,12 +241,6 @@ C++ model has become a bit of a mess. This story is a general bucket
 to capture all of the refactorings that can/need to be done to
 it. These will be broken down into stories and shipped in iterations.
 
-- clean up the SML to C++ transformer: split graph from transformer,
-  split visitor from transformer, etc.
-- file view model has a silly approach for the containing view models:
-  we keep on adding more optional member variables. We should probably
-  create a base class for all of these view models and have a single
-  property for it. Then use the =visitor= stereotype to dispatch.
 - extractor should be split into two. The first part is SML specific
   and its just creating a different representation of the information
   already available in SML: dependencies such as parents, properties,
