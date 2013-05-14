@@ -11,6 +11,16 @@ This file contains all stories that haven't been assigned to a sprint.
 
 Stories that we intend to look at, at some point.
 
+*** Generate service skeleton
+
+Since we already have all of the boiler plate code for services such
+as licence, header guards, etc - we could just create a service
+skeleton to stop us from having to copy it from the forward
+declarations.
+
+In addition to the class definition, it should also define all of the
+automatic constructors, and add a private section at the bottom.
+
 *** Formatters should cache qname formatting
 
 We seem to re-format the same qname lots of times. We should just use
