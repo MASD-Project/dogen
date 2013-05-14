@@ -1,0 +1,211 @@
+diff --git a/projects/cpp/include/dogen/cpp/types/transformer.hpp b/projects/cpp/include/dogen/cpp/types/transformer.hpp
+index 2197f43..eeb8d5c 100644
+--- a/projects/cpp/include/dogen/cpp/types/transformer.hpp
++++ b/projects/cpp/include/dogen/cpp/types/transformer.hpp
+@@ -30,6 +30,9 @@
+ #include "dogen/sml/types/model.hpp"
+ #include "dogen/sml/types/enumeration.hpp"
+ #include "dogen/cpp/types/file_info.hpp"
++#include "dogen/cpp/types/locator.hpp"
++#include "dogen//cpp/types/includer.hpp"
++#include "dogen/cpp/types/location_request.hpp"
+ #include "dogen/config/types/cpp_settings.hpp"
+ #include "dogen/config/types/cpp_facet_types.hpp"
+ 
+@@ -45,7 +48,8 @@ public:
+     transformer(transformer&& rhs) = default;
+ 
+ public:
+-    transformer(const config::cpp_settings& s, const sml::model& m);
++    transformer(const locator& l, const includer& i,
++        const config::cpp_settings& s, const sml::model& m);
+ 
+ private:
+     /**
+@@ -58,24 +62,38 @@ private:
+     std::set<config::cpp_facet_types> facet_types(const sml::meta_types mt,
+         const sml::pod_types pt = sml::pod_types::invalid) const;
+ 
++    /**
++     * @brief Generates a location request.
++     */
++    location_request location_request_factory(config::cpp_facet_types ft,
++        file_types flt, aspect_types at, const sml::qname& qn) const;
++
++    /**
++     * @brief Generates a file info with the appropriate setup.
++     */
++    file_info file_info_factory(config::cpp_facet_types ft, file_types flt,
++        aspect_types at, const sml::qname& name);
++
+ private:
+     /**
+      * @brief Flattens all the SML namespace information stored in qname
+      * into a list of strings with C++ namespaces.
+      */
+-    std::list<std::string>
+-    transform_namespaces(const dogen::sml::qname& qn) const;
++    std::list<std::string> transform(const dogen::sml::qname& qn) const;
+ 
+     /**
+-     * @brief Transforms a SML enumeration into an enumeration info.
++     * @brief Transforms an SML enumerator to an enumerator info.
+      */
+-    enumeration_info transform_enumeration(const sml::enumeration& e) const;
++    enumerator_info transform(const sml::enumerator& e) const;
+ 
+-public:
+-    std::list<file_info> transform(const sml::enumeration& e) const;
++    /**
++     * @brief Transforms a SML enumeration into an enumeration info.
++     */
++    enumeration_info transform(const sml::enumeration& e) const;
+ 
+ private:
+-    const config::cpp_settings& settings_;
++    const locator locator_;
++    includer includer_;
+     const sml::model& model_;
+ };
+ 
+diff --git a/projects/cpp/src/types/transformer.cpp b/projects/cpp/src/types/transformer.cpp
+index f870eee..ac56a69 100644
+--- a/projects/cpp/src/types/transformer.cpp
++++ b/projects/cpp/src/types/transformer.cpp
+@@ -20,8 +20,11 @@
+  */
+ #include <boost/lexical_cast.hpp>
+ #include "dogen/utility/log/logger.hpp"
++#include "dogen/sml/io/qname_io.hpp"
+ #include "dogen/sml/io/pod_types_io.hpp"
+ #include "dogen/sml/io/meta_types_io.hpp"
++#include "dogen/cpp/io/aspect_types_io.hpp"
++#include "dogen/cpp/io/file_types_io.hpp"
+ #include "dogen/cpp/types/transformation_error.hpp"
+ #include "dogen/cpp/types/transformer.hpp"
+ 
+@@ -38,8 +41,9 @@ const std::string invalid_enabled_facets("Invalid enabled facets request: ");
+ namespace dogen {
+ namespace cpp {
+ 
+-transformer::transformer(const config::cpp_settings& s, const sml::model& m)
+-    : settings_(s), model_(m) { }
++transformer::transformer(const locator& l, const includer& i,
++    const config::cpp_settings& s, const sml::model& m)
++    : locator_(l), includer_(i), settings_(s), model_(m) { }
+ 
+ std::set<config::cpp_facet_types> transformer::
+ facet_types(const sml::meta_types mt, const sml::pod_types pt) const {
+@@ -72,7 +76,50 @@ facet_types(const sml::meta_types mt, const sml::pod_types pt) const {
+     BOOST_THROW_EXCEPTION(transformation_error(invalid_enabled_facets +
+             boost::lexical_cast<std::string>(mt) + ", " +
+             boost::lexical_cast<std::string>(pt)));
++}
+ 
++location_request transformer::
++location_request_factory(config::cpp_facet_types ft,
++    file_types flt, aspect_types at, const sml::qname& qn) const {
++
++    location_request r;
++    r.facet_type(ft);
++    r.file_type(flt);
++    r.aspect_type(at);
++    r.model_name(model_.name());
++    r.package_path(n.package_path());
++    r.file_name(qn.type_name());
++    r.external_package_path(qn.external_package_path());
++    return r;
++}
++
++file_info transformer::
++file_info_factory(config::cpp_facet_types ft, file_types flt,
++    aspect_types at, const sml::qname& name) {
++
++    BOOST_LOG_SEV(lg, debug) << "Generating file info. "
++                             << "facet type: " << facet
++                             << " aspect type: " << aspect
++                             << " file type: " << ft
++                             << " meta type: " << mt
++                             << " name: " << name;
++
++    file_info r;
++    r.facet_type(ft);
++    r.file_type(flt);
++    r.aspect_type(at);
++
++    auto rq(location_request_factory(ft, flt, at, name));
++    r.file_path(locator_.absolute_path(rq));
++
++    if (flt == file_types::header) {
++        rq = location_request_factory(ft, flt, at, name);
++        const auto rp(locator_.relative_logical_path(rq));
++        r.header_guard(to_header_guard_name(rp));
++        if (at == aspect_types::main)
++            includer_.register_header(ft, rp);
++    }
++    return r;
+ }
+ 
+ std::list<std::string>
+@@ -91,26 +138,50 @@ transformer::transform_namespaces(const dogen::sml::qname& qn) const {
+     return r;
+ }
+ 
++enumerator_info transformer::
++transform_enumerator(const sml::enumerator& e) const {
++    enumerator_info r;
++    r.name(e.name());
++    r.value(e.value());
++    r.documentation(r.documentation());
++    return r;
++}
++
+ enumeration_info transformer::
+ transform_enumeration(const sml::enumeration& e) const {
+     enumeration_info r;
+-    r.name(e.name().type_name());
+ 
+-    const auto ns(transform_namespaces(e.name()));
+-    r.namespaces(ns);
++    r.name(e.name().type_name());
++    r.namespaces(transform_namespaces(e.name()));
+     r.documentation(e.documentation());
+-    for (const auto& en : e.enumerators()) {
+-        enumerator_info ei;
+-        ei.name(en.name());
+-        ei.value(en.value());
+-        ei.documentation(en.documentation());
+-        r.enumerators().push_back(ei);
+-    }
++
++    for (const auto& en : e.enumerators())
++        r.enumerators().push_back(transform_enumerator(en));
++
+     return r;
+ }
+ 
+-std::list<file_info> transformer::transform(const sml::enumeration&) const {
++std::list<file_info> transformer::transform(const sml::enumeration& e) const {
+     std::list<file_info> r;
++
++    for (const auto ft : enabled_facet_types(sml::meta_types::enumeration)) {
++        const auto header(file_types::header);
++        const auto main(aspect_types::main);
++        r.push_back(file_info_factory(ft, header, main, e));
++
++        const auto io(cpp_facet_types::io);
++        const auto td(cpp_facet_types::test_data);
++        if (ft == io || ft == td) {
++            const auto implementation(file_types::implementation);
++            r.push_back(file_info_factory(ft, implementation, main, e));
++        }
++
++        if (ft == cpp_facet_types::types) {
++            const auto forward_decls(aspect_types::forward_decls);
++            r.push_back(file_info_factory(ft, header, forward_decls, e);
++        }
++    }
++
+     return r;
+ }
+ 
