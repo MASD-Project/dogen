@@ -45,7 +45,7 @@ public:
     transformer(transformer&& rhs) = default;
 
 public:
-    transformer(const config::cpp_settings& s, const sml::model& m);
+    transformer(const config::cpp_settings& s);
 
 private:
     /**
@@ -76,7 +76,6 @@ public:
 
 private:
     const config::cpp_settings& settings_;
-    const sml::model& model_;
 };
 
 } }

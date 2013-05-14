@@ -38,8 +38,8 @@ const std::string invalid_enabled_facets("Invalid enabled facets request: ");
 namespace dogen {
 namespace cpp {
 
-transformer::transformer(const config::cpp_settings& s, const sml::model& m)
-    : settings_(s), model_(m) { }
+transformer::transformer(const config::cpp_settings& s)
+    : settings_(s) { }
 
 std::set<config::cpp_facet_types> transformer::
 facet_types(const sml::meta_types mt, const sml::pod_types pt) const {
