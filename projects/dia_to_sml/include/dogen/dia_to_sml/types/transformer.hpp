@@ -46,6 +46,7 @@ namespace dia_to_sml {
  */
 class transformer {
 public:
+    transformer() = delete;
     transformer(const transformer&) = delete;
     transformer(transformer&&) = default;
     ~transformer() noexcept = default;

@@ -228,6 +228,9 @@ transformer. At present it only seems useful to determine container
 types; if that is the case, we could pass in a simple qname to enum
 container that only has container types in it.
 
+**** IMPLEMENTATION Create skeleton for transformer and specs
+     CLOCK: [2013-05-14 Tue 07:47]--[2013-05-14 Tue 08:13] =>  0:26
+
 *** IMPLEMENTATION Move services into their own type                  :story:
     CLOCK: [2013-05-12 Sun 19:15]--[2013-05-12 Sun 19:30] =>  0:15
     CLOCK: [2013-05-12 Sun 18:55]--[2013-05-12 Sun 19:15] =>  0:20

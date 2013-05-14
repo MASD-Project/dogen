@@ -88,6 +88,7 @@
 #include "dogen/cpp/types/std_types.hpp"
 #include "dogen/cpp/types/string_table_info.hpp"
 #include "dogen/cpp/types/transformation_error.hpp"
+#include "dogen/cpp/types/transformer.hpp"
 #include "dogen/cpp/types/visitor_info.hpp"
 #include "dogen/cpp/types/workflow.hpp"
 #include "dogen/cpp/types/workflow_failure.hpp"
