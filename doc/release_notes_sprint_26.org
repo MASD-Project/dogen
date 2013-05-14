@@ -10,13 +10,13 @@ This file contains all stories that were closed during sprint 26.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-05-14 Tue 00:10]
+Clock summary at [2013-05-14 Tue 22:20]
 
 | Headline                                                                     | Time    |       |      |
 |------------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                                 | *24:08* |       |      |
+| *Total time*                                                                 | *25:06* |       |      |
 |------------------------------------------------------------------------------+---------+-------+------|
-| Development Stories Implemented                                              |         | 24:08 |      |
+| Development Stories Implemented                                              |         | 25:06 |      |
 | COMPLETED Fix build break on visitor tests                                   |         |       | 0:32 |
 | COMPLETED Remove workflow aspects from transformer                           |         |       | 2:23 |
 | COMPLETED Add tests for profiler                                             |         |       | 1:56 |
@@ -28,7 +28,7 @@ Clock summary at [2013-05-14 Tue 00:10]
 | COMPLETED Refactor SML diagram                                               |         |       | 1:04 |
 | COMPLETED Add code generation links to =README=                              |         |       | 0:25 |
 | COMPLETED Remove view model namespace and postfix                            |         |       | 3:26 |
-| IMPLEMENTATION Clean up the SML to C++ transformer                           |         |       | 1:08 |
+| IMPLEMENTATION Clean up the SML to C++ transformer                           |         |       | 2:06 |
 | IMPLEMENTATION Move services into their own type                             |         |       | 3:22 |
 | IMPLEMENTATION Use explicit casting for versioned to unversioned conversions |         |       | 1:49 |
 | IMPLEMENTATION Add =extract_key= function                                    |         |       | 0:22 |
@@ -228,8 +228,14 @@ transformer. At present it only seems useful to determine container
 types; if that is the case, we could pass in a simple qname to enum
 container that only has container types in it.
 
-**** IMPLEMENTATION Create skeleton for transformer and specs
+**** COMPLETED Create skeleton for transformer and specs
+     CLOSED: [2013-05-14 Tue 18:18]
      CLOCK: [2013-05-14 Tue 07:47]--[2013-05-14 Tue 08:13] =>  0:26
+
+**** IMPLEMENTATION Add support for enumeration transformation
+     CLOCK: [2013-05-14 Tue 18:43]--[2013-05-14 Tue 19:03] =>  0:20
+     CLOCK: [2013-05-14 Tue 18:32]--[2013-05-14 Tue 18:37] =>  0:05
+     CLOCK: [2013-05-14 Tue 18:19]--[2013-05-14 Tue 18:26] =>  0:07
 
 *** IMPLEMENTATION Move services into their own type                  :story:
     CLOCK: [2013-05-12 Sun 19:15]--[2013-05-12 Sun 19:30] =>  0:15

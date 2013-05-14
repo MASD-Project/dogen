@@ -39,7 +39,7 @@ const std::string test_suite("transformer_spec");
 BOOST_AUTO_TEST_SUITE(transformer)
 
 BOOST_AUTO_TEST_CASE(transforming_enumeration_results_in_expected_enumeration_info) {
-    SETUP_TEST_LOG("transforming_enumeration_results_in_expected_enumeration_info");
+    SETUP_TEST_LOG_SOURCE("transforming_enumeration_results_in_expected_enumeration_info");
 }
 
 BOOST_AUTO_TEST_SUITE_END()
