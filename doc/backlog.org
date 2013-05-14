@@ -184,7 +184,7 @@ model. There are several things we need to check for non-merged
 models:
 
 - type names, model names, etc must not contain spaces or other
-  invalid characters.
+  invalid characters. We should use a identifier parser for this.
 - the qname of all keys in pods, etc must be part of the current
   model.
 - the qnames of all types as keys are consistent with the values.
@@ -218,6 +218,13 @@ models:
 For merged models:
 
 - properties exist in merged model.
+
+Validator should provide contextual validation error messages:
+
+: error 1: properties must have a non-null name
+: in model 'my_model' (Dia ID: O0)
+: in pod 'my_pod' (Dia ID: O0)
+: property 'my_property' has empty name.
 
 *** Create a resolver in SML
 
