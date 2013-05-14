@@ -233,6 +233,8 @@ container that only has container types in it.
      CLOCK: [2013-05-14 Tue 07:47]--[2013-05-14 Tue 08:13] =>  0:26
 
 **** IMPLEMENTATION Add support for enumeration transformation
+     CLOCK: [2013-05-14 Tue 23:59]--[2013-05-15 Wed 00:08] =>  0:09
+     CLOCK: [2013-05-14 Tue 22:10]--[2013-05-14 Tue 23:59] =>  1:49
      CLOCK: [2013-05-14 Tue 18:43]--[2013-05-14 Tue 19:03] =>  0:20
      CLOCK: [2013-05-14 Tue 18:32]--[2013-05-14 Tue 18:37] =>  0:05
      CLOCK: [2013-05-14 Tue 18:19]--[2013-05-14 Tue 18:26] =>  0:07
