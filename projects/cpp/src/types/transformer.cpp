@@ -18,10 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#include <boost/lexical_cast.hpp>
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/sml/io/pod_types_io.hpp"
-#include "dogen/sml/io/meta_types_io.hpp"
+#include "dogen/sml/io/qname_io.hpp"
 #include "dogen/cpp/types/transformation_error.hpp"
 #include "dogen/cpp/types/transformer.hpp"
 
@@ -31,52 +29,13 @@ namespace {
 
 auto lg(logger_factory("cpp.transformer"));
 
-const std::string invalid_enabled_facets("Invalid enabled facets request: ");
-
 }
 
 namespace dogen {
 namespace cpp {
 
-transformer::transformer(const config::cpp_settings& s)
-    : settings_(s) { }
-
-std::set<config::cpp_facet_types> transformer::
-facet_types(const sml::meta_types mt, const sml::pod_types pt) const {
-    using sml::pod_types;
-    using sml::meta_types;
-    using config::cpp_facet_types;
-
-    switch(mt) {
-    case meta_types::pod:
-        if (pt == pod_types::value || pt == pod_types::entity)
-            return settings_.enabled_facets();
-        else if (pt == sml::pod_types::service)
-            return std::set<cpp_facet_types> { cpp_facet_types::types };
-        break;
-    case meta_types::enumeration:
-    case meta_types::primitive:
-        return settings_.enabled_facets();
-        break;
-    case meta_types::exception:
-        return std::set<cpp_facet_types> { cpp_facet_types::types };
-        break;
-    default:
-        break;
-    }
-
-    BOOST_LOG_SEV(lg, error) << invalid_enabled_facets
-                             << boost::lexical_cast<std::string>(mt)
-                             << boost::lexical_cast<std::string>(pt);
-
-    BOOST_THROW_EXCEPTION(transformation_error(invalid_enabled_facets +
-            boost::lexical_cast<std::string>(mt) + ", " +
-            boost::lexical_cast<std::string>(pt)));
-
-}
-
 std::list<std::string>
-transformer::transform_namespaces(const dogen::sml::qname& qn) const {
+transformer::transform(const dogen::sml::qname& qn) const {
     std::list<std::string> r(qn.external_package_path());
 
     if (!qn.model_name().empty())
@@ -91,26 +50,28 @@ transformer::transform_namespaces(const dogen::sml::qname& qn) const {
     return r;
 }
 
-enumeration_info transformer::
-transform_enumeration(const sml::enumeration& e) const {
-    enumeration_info r;
-    r.name(e.name().type_name());
-
-    const auto ns(transform_namespaces(e.name()));
-    r.namespaces(ns);
-    r.documentation(e.documentation());
-    for (const auto& en : e.enumerators()) {
-        enumerator_info ei;
-        ei.name(en.name());
-        ei.value(en.value());
-        ei.documentation(en.documentation());
-        r.enumerators().push_back(ei);
-    }
+enumerator_info transformer::transform(const sml::enumerator& e) const {
+    enumerator_info r;
+    r.name(e.name());
+    r.value(e.value());
+    r.documentation(r.documentation());
     return r;
 }
 
-std::list<file_info> transformer::transform(const sml::enumeration&) const {
-    std::list<file_info> r;
+enumeration_info transformer::transform(const sml::enumeration& e) const {
+    BOOST_LOG_SEV(lg, debug) << "Transforming enumeration: " << e.name();
+
+    enumeration_info r;
+
+    r.name(e.name().type_name());
+    r.namespaces(transform(e.name()));
+    r.documentation(e.documentation());
+
+    for (const auto& en : e.enumerators())
+        r.enumerators().push_back(transform(en));
+
+    BOOST_LOG_SEV(lg, debug) << "Transformed enumeration: " << e.name();
+
     return r;
 }
 

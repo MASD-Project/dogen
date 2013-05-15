@@ -111,7 +111,7 @@ std::vector<std::list<std::string> >
 includes_for_one_pod_model(cpp_facet_types ft,
     const includer_factory& factory) {
     using dogen::sml::test::mock_model_factory;
-    const auto m(mock_model_factory::build_single_pod_model(0));
+    const auto m(mock_model_factory::build_single_type_model());
     const auto pods(m.pods());
     BOOST_REQUIRE(pods.size() == 1);
     const auto p(pods.begin()->second);

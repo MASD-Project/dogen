@@ -22,6 +22,7 @@
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/exception/utility_exception.hpp"
 #include "dogen/utility/log/logger.hpp"
+#include "dogen/sml/test/building_error.hpp"
 #include "dogen/sml/test/mock_model_factory.hpp"
 
 namespace {
@@ -35,6 +36,9 @@ const std::string property_name_prefix("some_property_");
 
 const std::string boolean("bool");
 const std::string unsigned_int("unsigned int");
+
+const std::string invalid_property("Unknown property type.");
+const std::string invalid_meta_type("Invalid or unsupported meta type.");
 
 std::string pod_name(unsigned int i) {
     std::ostringstream stream;
@@ -141,9 +145,9 @@ dogen::sml::nested_qname mock_qname(
         break;
     }
     default:
-        BOOST_LOG_SEV(lg, error) << "Unknown property type.";
+        BOOST_LOG_SEV(lg, error) << invalid_property;
         BOOST_THROW_EXCEPTION(
-            dogen::utility::exception::exception("Unknown property type."));
+            dogen::sml::test::building_error(invalid_property));
     }
     return r;
 }
@@ -178,23 +182,43 @@ std::string mock_model_factory::pod_name(const unsigned int n) {
     return ::pod_name(n);
 }
 
-model mock_model_factory::build_single_pod_model(const unsigned int n) {
-    pod p(mock_pod(n));
+model mock_model_factory::
+build_single_type_model(const unsigned int n, const meta_types mt) {
     model r;
-    r.pods().insert(std::make_pair(p.name(), p));
     r.name(model_name(n));
+
+    switch (mt) {
+    case meta_types::pod: {
+        pod p(mock_pod(n));
+        r.pods().insert(std::make_pair(p.name(), p));
+        break;
+    }
+    default:
+        BOOST_LOG_SEV(lg, error) << invalid_meta_type;
+        BOOST_THROW_EXCEPTION(building_error(invalid_meta_type));
+    }
+
     return r;
 }
 
-model mock_model_factory::build_multi_pod_model(const unsigned int n,
-    const unsigned int pod_n) {
+model mock_model_factory::build_multi_type_model(const unsigned int n,
+    const unsigned int pod_n, const meta_types mt) {
 
     model r;
-    for (unsigned int i(0); i < pod_n; ++i) {
-        const auto p(mock_pod(i, model_name(n)));
-        r.pods().insert(std::make_pair(p.name(), p));
-    }
     r.name(model_name(n));
+
+    switch (mt) {
+    case meta_types::pod:
+        for (unsigned int i(0); i < pod_n; ++i) {
+            const auto p(mock_pod(i, model_name(n)));
+            r.pods().insert(std::make_pair(p.name(), p));
+        }
+        break;
+    default:
+        BOOST_LOG_SEV(lg, error) << invalid_meta_type;
+        BOOST_THROW_EXCEPTION(building_error(invalid_meta_type));
+    }
+
     return r;
 }
 

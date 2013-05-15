@@ -1,4 +1,4 @@
-/* -*- Mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
  *
  * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
  *
@@ -18,30 +18,38 @@
  * MA 02110-1301, USA.
  *
  */
-#include <boost/test/unit_test.hpp>
-#include "dogen/utility/test/logging.hpp"
-#include "dogen/sml/types/model.hpp"
-#include "dogen/sml/io/model_io.hpp"
-#include "dogen/sml/test/mock_model_factory.hpp"
-#include "dogen/cpp/types/transformer.hpp"
+#ifndef DOGEN_SML_TYPES_BUILDING_ERROR_HPP
+#define DOGEN_SML_TYPES_BUILDING_ERROR_HPP
 
-using dogen::sml::test::mock_model_factory;
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
-namespace {
+#include <boost/exception/info.hpp>
+#include <string>
 
-const std::string empty;
-const std::string test_module("cpp");
-const std::string test_suite("transformer_spec");
+namespace dogen {
+namespace sml {
+namespace test {
 
-}
+/**
+ * @brief An error has occurred while injecting types.
+ */
+class building_error : public virtual std::exception, public virtual boost::exception {
+public:
+    building_error() = default;
+    ~building_error() noexcept = default;
 
-BOOST_AUTO_TEST_SUITE(transformer)
+public:
+    building_error(const std::string& message) : message_(message) { }
 
-BOOST_AUTO_TEST_CASE(transforming_enumeration_results_in_expected_enumeration_info) {
-    SETUP_TEST_LOG_SOURCE("transforming_enumeration_results_in_expected_enumeration_info");
+public:
+    const char* what() const noexcept { return(message_.c_str()); }
 
+private:
+    const std::string message_;
+};
 
+} } }
 
-}
-
-BOOST_AUTO_TEST_SUITE_END()
+#endif

@@ -75,7 +75,7 @@ BOOST_AUTO_TEST_SUITE(injector)
 BOOST_AUTO_TEST_CASE(model_that_doesnt_require_any_new_types_is_untouched_by_injector) {
     SETUP_TEST_LOG_SOURCE("model_that_doesnt_require_any_new_types_is_untouched_by_injector");
 
-    auto a(mock_model_factory::build_single_pod_model());
+    auto a(mock_model_factory::build_single_type_model());
     BOOST_REQUIRE(a.pods().size() == 1);
 
     const auto e(a);
@@ -217,7 +217,7 @@ BOOST_AUTO_TEST_CASE(versioned_keyed_pod_has_both_keys_injected) {
 BOOST_AUTO_TEST_CASE(versioned_pod_has_version_propery_injected) {
     SETUP_TEST_LOG_SOURCE("versioned_pod_has_version_propery_injected");
 
-    auto m(mock_model_factory::build_single_pod_model());
+    auto m(mock_model_factory::build_single_type_model());
     BOOST_REQUIRE(m.pods().size() == 1);
     BOOST_REQUIRE(m.pods().begin()->second.properties().empty());
 

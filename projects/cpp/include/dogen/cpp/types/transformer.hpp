@@ -26,56 +26,38 @@
 #endif
 
 #include <list>
-#include <set>
-#include "dogen/sml/types/model.hpp"
+#include "dogen/sml/types/qname.hpp"
 #include "dogen/sml/types/enumeration.hpp"
-#include "dogen/cpp/types/file_info.hpp"
-#include "dogen/config/types/cpp_settings.hpp"
-#include "dogen/config/types/cpp_facet_types.hpp"
+#include "dogen/cpp/types/enumeration_info.hpp"
 
 namespace dogen {
 namespace cpp {
 
 class transformer {
 public:
-    transformer() = delete;
+    transformer() = default;
     transformer(const transformer&) = default;
     ~transformer() = default;
     transformer& operator=(const transformer&) = delete;
     transformer(transformer&& rhs) = default;
-
-public:
-    transformer(const config::cpp_settings& s);
-
-private:
-    /**
-     * @brief Returns the available facets for the given inputs.
-     *
-     * @param mt Meta-type which we want to process.
-     * @param pt Pod type to process; must be set to invalid if the
-     * meta-type is not a pod.
-     */
-    std::set<config::cpp_facet_types> facet_types(const sml::meta_types mt,
-        const sml::pod_types pt = sml::pod_types::invalid) const;
 
 private:
     /**
      * @brief Flattens all the SML namespace information stored in qname
      * into a list of strings with C++ namespaces.
      */
-    std::list<std::string>
-    transform_namespaces(const dogen::sml::qname& qn) const;
+    std::list<std::string> transform(const dogen::sml::qname& qn) const;
 
+    /**
+     * @brief Transforms an SML enumerator to an enumerator info.
+     */
+    enumerator_info transform(const sml::enumerator& e) const;
+
+public:
     /**
      * @brief Transforms a SML enumeration into an enumeration info.
      */
-    enumeration_info transform_enumeration(const sml::enumeration& e) const;
-
-public:
-    std::list<file_info> transform(const sml::enumeration& e) const;
-
-private:
-    const config::cpp_settings& settings_;
+    enumeration_info transform(const sml::enumeration& e) const;
 };
 
 } }

@@ -50,16 +50,17 @@ public:
 public:
     /**
      * @brief Builds a model with a name derived from n, containing a
-     * single pod with a name also deriving from n.
+     * single type with a name also deriving from n.
      */
-    static model build_single_pod_model(const unsigned int n = 0);
+    static model build_single_type_model(const unsigned int n = 0,
+        const meta_types mt = meta_types::pod);
 
     /**
      * @brief Builds a model with a name derived from n, and a number
-     * of pods determined by pod_n.
+     * of types determined by pod_n.
      */
-    static model build_multi_pod_model(const unsigned int n,
-        const unsigned int pod_n);
+    static model build_multi_type_model(const unsigned int n,
+        const unsigned int pod_n, const meta_types mt = meta_types::pod);
 
 public:
     enum class property_types : unsigned int {

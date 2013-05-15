@@ -65,7 +65,7 @@ BOOST_AUTO_TEST_SUITE(extractor)
 BOOST_AUTO_TEST_CASE(dependency_graph_of_pod_with_no_properties_and_no_inheritance_has_no_names_in_relationships) {
     SETUP_TEST_LOG_SOURCE("dependency_graph_of_pod_with_no_properties_and_no_inheritance_has_no_names_in_relationships");
 
-    const auto m(mock_model_factory::build_single_pod_model(0));
+    const auto m(mock_model_factory::build_single_type_model());
     BOOST_LOG_SEV(lg, debug) << "input model: " << m;
     BOOST_CHECK(m.pods().size() == 1);
 
@@ -353,7 +353,7 @@ BOOST_AUTO_TEST_CASE(dependency_graph_of_pod_with_boost_shared_ptr_property_has_
 BOOST_AUTO_TEST_CASE(inheritance_graph_of_pod_with_no_parents_has_one_name_in_relationships) {
     SETUP_TEST_LOG_SOURCE("inheritance_graph_of_pod_with_no_parents_has_one_name_in_relationships");
 
-    const auto m(mock_model_factory::build_single_pod_model(0));
+    const auto m(mock_model_factory::build_single_type_model());
     BOOST_LOG_SEV(lg, debug) << "input model: " << m;
     BOOST_CHECK(m.pods().size() == 1);
 
