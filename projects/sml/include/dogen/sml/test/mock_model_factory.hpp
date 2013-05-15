@@ -56,11 +56,19 @@ public:
         const meta_types mt = meta_types::pod);
 
     /**
+     * @brief Builds a model with a name derived from n, containing a
+     * single type with a name also deriving from n, inside pkg_n packages.
+     */
+    static model build_single_type_model_in_package(const unsigned int n = 0,
+        const meta_types mt = meta_types::pod, const unsigned int pkg_n = 0);
+
+    /**
      * @brief Builds a model with a name derived from n, and a number
-     * of types determined by pod_n.
+     * of types determined by type_n, inside pkg_n packages.
      */
     static model build_multi_type_model(const unsigned int n,
-        const unsigned int pod_n, const meta_types mt = meta_types::pod);
+        const unsigned int type_n, const meta_types mt = meta_types::pod,
+        const unsigned int pkg_n = 0);
 
 public:
     enum class property_types : unsigned int {

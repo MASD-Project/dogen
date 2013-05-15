@@ -100,22 +100,33 @@ BOOST_AUTO_TEST_CASE(merging_n_distinct_models_with_one_pod_each_results_in_n_po
     std::set<std::string> pod_names;
     std::set<std::string> model_names;
     for (const auto& pair : combined.pods()) {
-        pod_names.insert(pair.first.type_name());
-        model_names.insert(pair.first.model_name());
+        const auto& qn(pair.first);
+        pod_names.insert(qn.model_name() + "_" + qn.type_name());
+        model_names.insert(qn.model_name());
     }
+
+    BOOST_REQUIRE(pod_names.size() == n);
+    BOOST_REQUIRE(model_names.size() == n);
 
     auto pod_i(pod_names.cbegin());
     auto model_i(model_names.cbegin());
     for (unsigned int i(0); i < n; ++i) {
+        BOOST_REQUIRE(pod_i != pod_names.cend());
+        BOOST_REQUIRE(model_i != model_names.cend());
+
         BOOST_LOG_SEV(lg, debug) << "pod name: " << *pod_i;
         BOOST_LOG_SEV(lg, debug) << "model name: " << *model_i;
 
-        std::ostringstream ss;
-        ss << "_" << i;
-        const auto s(ss.str());
-        BOOST_LOG_SEV(lg, debug) << "expected prefix: " << s;
-        BOOST_CHECK(boost::ends_with(*pod_i, s));
-        BOOST_CHECK(boost::ends_with(*model_i, s));
+        const auto expected_model_name(mock_model_factory::model_name(i));
+        const auto expected_pod_name(mock_model_factory::pod_name(0));
+        BOOST_LOG_SEV(lg, debug) << "expected pod name: "
+                                 << expected_pod_name;
+        BOOST_LOG_SEV(lg, debug) << "expected model name: "
+                                 << expected_model_name;
+
+        BOOST_CHECK(boost::ends_with(*pod_i, expected_pod_name));
+        BOOST_CHECK(boost::starts_with(*pod_i, expected_model_name));
+        BOOST_CHECK(*model_i == expected_model_name);
         ++pod_i;
         ++model_i;
     }

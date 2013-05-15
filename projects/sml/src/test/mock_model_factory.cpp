@@ -33,6 +33,7 @@ static logger lg(logger_factory("sml.mock_model_factory"));
 const std::string model_name_prefix("some_model_");
 const std::string pod_name_prefix("some_type_");
 const std::string property_name_prefix("some_property_");
+const std::string package_name_prefix("some_package_");
 
 const std::string boolean("bool");
 const std::string unsigned_int("unsigned int");
@@ -55,6 +56,12 @@ std::string model_name(unsigned int i) {
 std::string property_name(unsigned int i) {
     std::ostringstream stream;
     stream << property_name_prefix << i;
+    return stream.str();
+}
+
+std::string package_name(unsigned int i) {
+    std::ostringstream stream;
+    stream << package_name_prefix << i;
     return stream.str();
 }
 
@@ -152,11 +159,15 @@ dogen::sml::nested_qname mock_qname(
     return r;
 }
 
-dogen::sml::pod mock_pod(unsigned int i, std::string model_name) {
+dogen::sml::pod mock_pod(const unsigned int i, const std::string& model_name,
+    const unsigned int package_n = 0) {
     dogen::sml::qname qn;
     qn.model_name(model_name);
     qn.type_name(pod_name(i));
     qn.meta_type(dogen::sml::meta_types::pod);
+
+    for (unsigned int i(0); i < package_n; ++i)
+        qn.package_path().push_back(package_name(i));
 
     dogen::sml::pod r;
     r.name(qn);
@@ -164,8 +175,8 @@ dogen::sml::pod mock_pod(unsigned int i, std::string model_name) {
     return r;
 }
 
-dogen::sml::pod mock_pod(unsigned int i) {
-    return mock_pod(i, model_name(i));
+dogen::sml::pod mock_pod(unsigned int i, const unsigned int package_n = 0) {
+    return mock_pod(i, model_name(i), package_n);
 }
 
 }
@@ -184,33 +195,25 @@ std::string mock_model_factory::pod_name(const unsigned int n) {
 
 model mock_model_factory::
 build_single_type_model(const unsigned int n, const meta_types mt) {
-    model r;
-    r.name(model_name(n));
+    return build_multi_type_model(n, 1, mt);
+}
 
-    switch (mt) {
-    case meta_types::pod: {
-        pod p(mock_pod(n));
-        r.pods().insert(std::make_pair(p.name(), p));
-        break;
-    }
-    default:
-        BOOST_LOG_SEV(lg, error) << invalid_meta_type;
-        BOOST_THROW_EXCEPTION(building_error(invalid_meta_type));
-    }
-
-    return r;
+model mock_model_factory::
+build_single_type_model_in_package(const unsigned int n, const meta_types mt,
+    const unsigned int pkg_n) {
+    return build_multi_type_model(n, 1, mt, pkg_n);
 }
 
 model mock_model_factory::build_multi_type_model(const unsigned int n,
-    const unsigned int pod_n, const meta_types mt) {
+    const unsigned int type_n, const meta_types mt, const unsigned int pkg_n) {
 
     model r;
     r.name(model_name(n));
 
     switch (mt) {
     case meta_types::pod:
-        for (unsigned int i(0); i < pod_n; ++i) {
-            const auto p(mock_pod(i, model_name(n)));
+        for (unsigned int i(0); i < type_n; ++i) {
+            const auto p(mock_pod(i, model_name(n), pkg_n));
             r.pods().insert(std::make_pair(p.name(), p));
         }
         break;
