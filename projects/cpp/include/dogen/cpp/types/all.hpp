@@ -23,6 +23,7 @@
 #include "dogen/cpp/types/boost_types.hpp"
 #include "dogen/cpp/types/class_info.hpp"
 #include "dogen/cpp/types/cmakelists_info.hpp"
+#include "dogen/cpp/types/content_descriptor.hpp"
 #include "dogen/cpp/types/enumeration_info.hpp"
 #include "dogen/cpp/types/enumerator_info.hpp"
 #include "dogen/cpp/types/exception_info.hpp"

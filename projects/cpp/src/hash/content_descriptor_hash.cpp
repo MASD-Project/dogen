@@ -18,24 +18,37 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen/config/hash/cpp_facet_types_hash.hpp"
 #include "dogen/cpp/hash/aspect_types_hash.hpp"
-#include "dogen/cpp/hash/boost_types_hash.hpp"
-#include "dogen/cpp/hash/class_info_hash.hpp"
-#include "dogen/cpp/hash/cmakelists_info_hash.hpp"
 #include "dogen/cpp/hash/content_descriptor_hash.hpp"
-#include "dogen/cpp/hash/enumeration_info_hash.hpp"
-#include "dogen/cpp/hash/enumerator_info_hash.hpp"
-#include "dogen/cpp/hash/exception_info_hash.hpp"
-#include "dogen/cpp/hash/file_info_hash.hpp"
 #include "dogen/cpp/hash/file_types_hash.hpp"
-#include "dogen/cpp/hash/location_request_hash.hpp"
-#include "dogen/cpp/hash/namespace_info_hash.hpp"
-#include "dogen/cpp/hash/nested_type_info_hash.hpp"
-#include "dogen/cpp/hash/odb_options_info_hash.hpp"
-#include "dogen/cpp/hash/parent_info_hash.hpp"
-#include "dogen/cpp/hash/property_info_hash.hpp"
-#include "dogen/cpp/hash/registrar_info_hash.hpp"
-#include "dogen/cpp/hash/relationships_hash.hpp"
-#include "dogen/cpp/hash/std_types_hash.hpp"
-#include "dogen/cpp/hash/string_table_info_hash.hpp"
-#include "dogen/cpp/hash/visitor_info_hash.hpp"
+#include "dogen/sml/hash/category_types_hash.hpp"
+#include "dogen/sml/hash/qname_hash.hpp"
+
+namespace {
+
+template <typename HashableType>
+inline void combine(std::size_t& seed, const HashableType& value)
+{
+    std::hash<HashableType> hasher;
+    seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
+}
+
+}
+
+namespace dogen {
+namespace cpp {
+
+std::size_t content_descriptor_hasher::hash(const content_descriptor&v) {
+    std::size_t seed(0);
+
+    combine(seed, v.file_type());
+    combine(seed, v.facet_type());
+    combine(seed, v.aspect_type());
+    combine(seed, v.category_type());
+    combine(seed, v.name());
+
+    return seed;
+}
+
+} }

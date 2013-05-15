@@ -18,24 +18,27 @@
  * MA 02110-1301, USA.
  *
  */
+#include <ostream>
+#include "dogen/config/io/cpp_facet_types_io.hpp"
 #include "dogen/cpp/io/aspect_types_io.hpp"
-#include "dogen/cpp/io/boost_types_io.hpp"
-#include "dogen/cpp/io/class_info_io.hpp"
-#include "dogen/cpp/io/cmakelists_info_io.hpp"
 #include "dogen/cpp/io/content_descriptor_io.hpp"
-#include "dogen/cpp/io/enumeration_info_io.hpp"
-#include "dogen/cpp/io/enumerator_info_io.hpp"
-#include "dogen/cpp/io/exception_info_io.hpp"
-#include "dogen/cpp/io/file_info_io.hpp"
 #include "dogen/cpp/io/file_types_io.hpp"
-#include "dogen/cpp/io/location_request_io.hpp"
-#include "dogen/cpp/io/namespace_info_io.hpp"
-#include "dogen/cpp/io/nested_type_info_io.hpp"
-#include "dogen/cpp/io/odb_options_info_io.hpp"
-#include "dogen/cpp/io/parent_info_io.hpp"
-#include "dogen/cpp/io/property_info_io.hpp"
-#include "dogen/cpp/io/registrar_info_io.hpp"
-#include "dogen/cpp/io/relationships_io.hpp"
-#include "dogen/cpp/io/std_types_io.hpp"
-#include "dogen/cpp/io/string_table_info_io.hpp"
-#include "dogen/cpp/io/visitor_info_io.hpp"
+#include "dogen/sml/io/category_types_io.hpp"
+#include "dogen/sml/io/qname_io.hpp"
+
+namespace dogen {
+namespace cpp {
+
+std::ostream& operator<<(std::ostream& s, const content_descriptor& v) {
+    s << " { "
+      << "\"__type__\": " << "\"dogen::cpp::content_descriptor\"" << ", "
+      << "\"file_type\": " << v.file_type() << ", "
+      << "\"facet_type\": " << v.facet_type() << ", "
+      << "\"aspect_type\": " << v.aspect_type() << ", "
+      << "\"category_type\": " << v.category_type() << ", "
+      << "\"name\": " << v.name()
+      << " }";
+    return(s);
+}
+
+} }

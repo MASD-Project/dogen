@@ -10,13 +10,13 @@ This file contains all stories that were closed during sprint 26.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-05-14 Tue 22:20]
+Clock summary at [2013-05-15 Wed 08:31]
 
 | Headline                                                                     | Time    |       |      |
 |------------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                                 | *25:06* |       |      |
+| *Total time*                                                                 | *27:34* |       |      |
 |------------------------------------------------------------------------------+---------+-------+------|
-| Development Stories Implemented                                              |         | 25:06 |      |
+| Development Stories Implemented                                              |         | 27:34 |      |
 | COMPLETED Fix build break on visitor tests                                   |         |       | 0:32 |
 | COMPLETED Remove workflow aspects from transformer                           |         |       | 2:23 |
 | COMPLETED Add tests for profiler                                             |         |       | 1:56 |
@@ -28,7 +28,7 @@ Clock summary at [2013-05-14 Tue 22:20]
 | COMPLETED Refactor SML diagram                                               |         |       | 1:04 |
 | COMPLETED Add code generation links to =README=                              |         |       | 0:25 |
 | COMPLETED Remove view model namespace and postfix                            |         |       | 3:26 |
-| IMPLEMENTATION Clean up the SML to C++ transformer                           |         |       | 2:06 |
+| IMPLEMENTATION Clean up the SML to C++ transformer                           |         |       | 4:34 |
 | IMPLEMENTATION Move services into their own type                             |         |       | 3:22 |
 | IMPLEMENTATION Use explicit casting for versioned to unversioned conversions |         |       | 1:49 |
 | IMPLEMENTATION Add =extract_key= function                                    |         |       | 0:22 |
@@ -232,12 +232,33 @@ container that only has container types in it.
      CLOSED: [2013-05-14 Tue 18:18]
      CLOCK: [2013-05-14 Tue 07:47]--[2013-05-14 Tue 08:13] =>  0:26
 
+**** COMPLETED Create a content descriptor
+     CLOSED: [2013-05-15 Wed 08:31]
+     CLOCK: [2013-05-15 Wed 07:47]--[2013-05-15 Wed 08:17] =>  0:30
+
+We need to aggregate the common enumerations that are used to describe
+a file into a class. This is kind of what location request does expect
+its too specific to locator. We need something more generic so that
+both locator and transformer can use it, and potentially even file
+info.
+
+Its difficult to name this type as it is a bit of a mixed bag of
+attributes, but in general its job is to describe the contents of a
+file so we'll go with =content_descriptor=.
+
 **** IMPLEMENTATION Add support for enumeration transformation
      CLOCK: [2013-05-14 Tue 23:59]--[2013-05-15 Wed 00:08] =>  0:09
      CLOCK: [2013-05-14 Tue 22:10]--[2013-05-14 Tue 23:59] =>  1:49
      CLOCK: [2013-05-14 Tue 18:43]--[2013-05-14 Tue 19:03] =>  0:20
      CLOCK: [2013-05-14 Tue 18:32]--[2013-05-14 Tue 18:37] =>  0:05
      CLOCK: [2013-05-14 Tue 18:19]--[2013-05-14 Tue 18:26] =>  0:07
+
+The previous transformer took on far too many responsibilities. We
+need to create a transformer that does only transformation and all the
+workflow aspects must be extracted from it. It must not know about
+enabled facets, must not create all the file infos or keep state. This
+will also make async'ing it very easy because there is no shared
+state.
 
 *** IMPLEMENTATION Move services into their own type                  :story:
     CLOCK: [2013-05-12 Sun 19:15]--[2013-05-12 Sun 19:30] =>  0:15
