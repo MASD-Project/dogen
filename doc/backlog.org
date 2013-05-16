@@ -1676,6 +1676,25 @@ tests with big loops (say 1M times) doing things like reading dia
 diagrams etc. We could chose a few key things just to give us some
 metrics around performance.
 
+In fact, we could create a set of colossus models: models with really
+large number of classes (say 500), maybe 5 of these with
+references. We could then use the diagrams to test the individual
+workflows: dia, dia_to_sml, cpp and engine with no writing. We should
+avoid writing files to filesystem to avoid number jitter caused by the
+hard drive. There should be no comparisons between actual and expected
+for the same reason.
+
+We need to make sure the benchmark tests won't run on valgrind or else
+the nightly builds will take over 24 hours. However, if we had it
+running on continuous we'd spot regressions on every check-in. But we
+don't want to delay continuous any more than necessary. Perhaps we
+need a separate build called performance which is also continuous and
+only runs these tests. We could pass in some kind of variable to CMake
+so that if performance is on, it ignores all tests other than
+performance and vice-versa. We'd also need a performance target that
+only builds the performance binary, and a =run_performance= target
+that executes it.
+
 ** Won't fix
 
 Stories which we do not think we are going to work on.
