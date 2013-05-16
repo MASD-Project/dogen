@@ -11,6 +11,12 @@ This file contains all stories that haven't been assigned to a sprint.
 
 Stories that we intend to look at, at some point.
 
+*** Generate wire-framing diagrams
+
+This story is extremely blue-skies, but we need to start capturing
+ideas on this space. There is nothing stopping us from generating a
+presentation model off of a wire frame diagram.
+
 *** Add C++ model XML tests
 
 We should take an SML model, convert it into a list of =file_info= and
