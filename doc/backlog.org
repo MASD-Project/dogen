@@ -46,6 +46,39 @@ are in.
 *** Add versioning support
     CLOCK: [2013-05-13 Mon 08:28]--[2013-05-13 Mon 08:37] =>  0:09
 
+New understanding:
+
+- Add versioning support by adding versions at the pod level and at
+  the property level. Properties with 0 version will have no special
+  handling. Properties with non-zero version (V) will have the
+  following code added in serialisation:
+
+: if (version > V)
+:    // read or write property
+
+- If a number of consecutive properties all share the same version,
+  dogen will group them under the same version if. There will be no
+  other special grouping or otherwise changing of order of properties.
+- The pod version will be max(version) of all properties for that
+  class, excluding inherited properties.
+- The pod version will be stamped using boost serialisation class
+  version macro, unless the pod version is zero.
+- Dogen will make no validation or otherwise dictate the management of
+  version numbers; its up to the users to ensure they make sensible
+  backwards compatibility decisions such as adding only new properties
+  and always adding to the end.
+- The model version is a human level concept and has no direct
+  relation to class versioning. It will be implemented as an
+  implementation specific parameter in the Dia model and as a string
+  in the SML model class. See [[*Add%20a%20code%20generation%20marker][Add a code generation marker]].
+- Model version will be used for the following:
+  - stamped on doxygen documentation for the model namespace;
+  - stamped on DLLs, etc.
+  - used by humans to convey the "type" of changes made to the
+    diagram/model (e.g. a minor version bump is a small change, etc).
+
+Previous understanding:
+
 Versioning support is now available in SML, so we need to apply it to
 SML itself. That is, we need a way of having two versions of an SML
 model coexist, and allow Dogen to diff those two versions to make code
