@@ -13,9 +13,48 @@ Stories that we intend to look at, at some point.
 
 *** Generate wire-framing diagrams
 
+New understanding:
+
+We can't actually directly translate from wire-frame diagrams into a
+functional presentation model because there is no way to represent the
+state machine that drives the interface. Instead what we need is:
+
+- create a presentation model composed of a generic representation of
+  all "widget" types we're interested in, and some kind of containment
+  between "widgets", etc. However, these shouldn't be called "widgets"
+  as we are not in the view layer, but something more generic. For
+  example forms, dialogs, etc.
+- the user then has to manually instantiate this model to match the
+  understanding of the application:
+
+: place home("My Application", starting_pace);
+:
+: std::list<command> c1; // all commands available on the main window
+: c1.push_back(command("File", "File related commands", is_enabled);
+:
+: std::list<command> sc2; // sub-commands of c1
+: sc2.push_back(command("login", "Login to the main server", login);
+: c1.push_back(sc2);
+:
+: home.commands(c1);
+:
+: place login("Login to server", login)
+
+: file_list fl;
+:
+
+Old understanding:
+
 This story is extremely blue-skies, but we need to start capturing
 ideas on this space. There is nothing stopping us from generating a
 presentation model off of a wire frame diagram.
+
+- dia does have wire-framing shapes at the moment. It shouldn't be too
+  hard to copy ideas from [[http://www.moqups.com][moqups]] and implement these as svg shapes.
+- once the shapes are in dia, we could create SML level concepts for
+  the different widget types. This could be done as either aspect
+  types or new SML types.
+
 
 *** Add C++ model XML tests
 
