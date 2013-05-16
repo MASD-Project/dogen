@@ -157,6 +157,15 @@ Do not generate versioned/unversioned keys for entities.
     CLOSED: [2013-05-12 Sun 00:11]
     CLOCK: [2013-05-07 Tue 22:00]--[2013-05-07 Tue 23:50] =>  1:50
 
+*** COMPLETED Add aggregate root stereotype                           :story:
+    CLOSED: [2013-05-16 Thu 07:52]
+
+We need to re-read DDD to see if there is anything dogen can do for us
+other than marking the type as aggregate root. Evans states that its
+the job of the aggregate root to perform validation; perhaps we could
+automatically generate a =validator= for the root that has to be
+implemented by the user.
+
 *** COMPLETED Add tests for aggregate root stereotype                 :story:
     CLOSED: [2013-05-12 Sun 00:53]
     CLOCK: [2013-05-12 Sun 00:36]--[2013-05-12 Sun 00:59] =>  0:23

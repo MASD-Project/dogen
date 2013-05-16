@@ -463,14 +463,6 @@ It should be possible to pass in a string value as an implementation
 specific parameter that tells dogen what string to use for debug
 dumping.
 
-*** Add aggregate root stereotype                                     :story:
-
-We need to re-read DDD to see if there is anything dogen can do for us
-other than marking the type as aggregate root. Evans states that its
-the job of the aggregate root to perform validation; perhaps we could
-automatically generate a =validator= for the root that has to be
-implemented by the user.
-
 *** Add is comparable to SML                                          :story:
      CLOCK: [2013-05-10 Fri 07:48]--[2013-05-10 Fri 08:09] =>  0:21
 
