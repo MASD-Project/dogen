@@ -11,6 +11,14 @@ This file contains all stories that haven't been assigned to a sprint.
 
 Stories that we intend to look at, at some point.
 
+*** Add C++ model XML tests
+
+We should take an SML model, convert it into a list of =file_info= and
+save that down as XML. This will be our expected. We should then load
+the file, convert it into a =std::unordered_map= where the file name
+is the key and the =file_info= is the value. We do the same thing with
+current code and then compare the two.
+
 *** Generate state diagrams
 
 There is nothing stopping us from reading the UML State Chart objects
