@@ -11,6 +11,14 @@ This file contains all stories that haven't been assigned to a sprint.
 
 Stories that we intend to look at, at some point.
 
+*** Loading external models from file
+
+We should really use something like boost property tree to allow user
+defined models to be loaded from file. We can then convert primitives,
+boost, STL, etc to this. These "models" would then output both a SML
+model as well as some kind of CPP representation with include files,
+etc.
+
 *** Generate wire-framing diagrams
     CLOCK: [2013-05-17 Fri 08:28]--[2013-05-17 Fri 08:30] =>  0:02
     CLOCK: [2013-05-17 Fri 07:50]--[2013-05-17 Fri 08:19] =>  0:29
