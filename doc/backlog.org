@@ -1771,10 +1771,18 @@ name and test suite.
 We did a crud implementation of finding WinSock just to get windows to
 build. There should be a FindWinSock somewhere. If not create one.
 
-*** =persister= does not support all archive types
+*** Refactor engine's =persister=
 
-At present the =persister= in engine always outputs in XML. it should
-respect the archive type requested by the user.
+- add documentation
+- we put the decision on whether to persist on not based on settings
+  inside of persister. It should really be up to the person calling
+  the persister to decide. Persister should always persist.
+- we should have an argument deciding the file format, perhaps an
+  enumeration, instead of passing in the extension. The extension
+  should be automatically determined.
+- persister should support all archive types. At present it always
+  outputs in XML; it should respect the archive type requested by the
+  user.
 
 *** Add unit test benchmarking
 
