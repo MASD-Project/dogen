@@ -1778,23 +1778,14 @@ respect the archive type requested by the user.
 
 *** Add unit test benchmarking
 
-[[https://svn.boost.org/trac/boost/ticket/7082][Raised ticket]]
+New understanding:
 
-- nightly builds should run all unit tests in "benchmarking mode";
-- for each test we should find the sweet spot for N repetitions;
-- when plugged into ctest, make sure the benchmark tests have
-  different names from the main tests otherwise the timing history
-  will be nonsense.
-- [[http://lists.boost.org/boost-users/2011/01/65790.php][sent]] email to boost users mailing list asking for benchmarking
-  support.
-
-In the mean time, one way of implementing this which wont require
-boost test changes is to create perf specific tests. These wont get
-executed by regular users (e.g. they are not part of =run_all_specs=)
-but they do get executed in the build machine. These are selected
-tests with big loops (say 1M times) doing things like reading dia
-diagrams etc. We could chose a few key things just to give us some
-metrics around performance.
+Create a set of performance specific tests. These wont get executed by
+regular users (e.g. they are not part of =run_all_specs=) but they do
+get executed in the build machine. These are selected tests with big
+loops (say 1M times) doing things like reading dia diagrams etc. We
+could chose a few key things just to give us some metrics around
+performance.
 
 In fact, we could create a set of colossus models: models with really
 large number of classes (say 500), maybe 5 of these with
@@ -1814,6 +1805,18 @@ so that if performance is on, it ignores all tests other than
 performance and vice-versa. We'd also need a performance target that
 only builds the performance binary, and a =run_performance= target
 that executes it.
+
+Old understanding:
+
+[[https://svn.boost.org/trac/boost/ticket/7082][Raised ticket]]
+
+- nightly builds should run all unit tests in "benchmarking mode";
+- for each test we should find the sweet spot for N repetitions;
+- when plugged into ctest, make sure the benchmark tests have
+  different names from the main tests otherwise the timing history
+  will be nonsense.
+- [[http://lists.boost.org/boost-users/2011/01/65790.php][sent]] email to boost users mailing list asking for benchmarking
+  support.
 
 ** Won't fix
 
