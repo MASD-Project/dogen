@@ -1768,8 +1768,11 @@ name and test suite.
 
 *** Clean up WinSock definition in CMakeLists
 
-We did a crud implementation of finding WinSock just to get windows to
-build. There should be a FindWinSock somewhere. If not create one.
+We did a crude implementation of finding WinSock just to get windows
+to build. There should be a FindWinSock somewhere. If not create one.
+
+Do we need this anymore? we probably need it for linking the database
+model, but we should check - maybe ODB has some magic around this.
 
 *** Refactor engine's =persister=
 
