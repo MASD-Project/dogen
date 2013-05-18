@@ -1269,6 +1269,10 @@ see if this has changed in latter versions:
 
 http://lists.boost.org/boost-users/2012/11/76458.php
 
+However, it should be pretty trivial to generate serialisation code by
+hand at least for =std::array= or to use a solution similar to
+=std::unordered_map=.
+
 *** Support for ordered containers
 
 In order to provide support for ordered containers such as maps and
