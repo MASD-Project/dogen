@@ -23,7 +23,7 @@
 #include "dogen/sml/types/model.hpp"
 #include "dogen/sml/io/model_io.hpp"
 #include "dogen/sml/test/mock_model_factory.hpp"
-#include "dogen/cpp/io/enumeration_info_io.hpp"
+#include "dogen/cpp/io/all_io.hpp"
 #include "dogen/cpp/types/transformer.hpp"
 
 using dogen::sml::test::mock_model_factory;
@@ -118,6 +118,57 @@ BOOST_AUTO_TEST_CASE(transforming_enumeration_in_package_results_in_expected_enu
     BOOST_CHECK(e1.enumerators().size() == 2);
     BOOST_CHECK(is_type_zero(e1.enumerators().front().name()));
     BOOST_CHECK(is_type_one(e1.enumerators().back().name()));
+}
+
+BOOST_AUTO_TEST_CASE(transforming_exception_results_in_expected_exception_info) {
+    SETUP_TEST_LOG_SOURCE("transforming_exception_results_in_expected_exception_info");
+
+    const auto mt(dogen::sml::meta_types::exception);
+    const auto m(mock_model_factory::build_single_type_model(0, mt));
+    BOOST_LOG_SEV(lg, debug) << "model: " << m;
+    BOOST_REQUIRE(m.exceptions().size() == 1);
+
+    dogen::cpp::transformer t;
+    const auto e(t.transform(m.exceptions().begin()->second));
+    BOOST_LOG_SEV(lg, debug) << "exception: " << e;
+
+    BOOST_CHECK(is_type_zero(e.name()));
+    BOOST_CHECK(!e.documentation().empty());
+    BOOST_CHECK(e.namespaces().size() == 1);
+    BOOST_CHECK(is_model_zero(e.namespaces().front()));
+}
+
+BOOST_AUTO_TEST_CASE(transforming_exception_in_package_results_in_expected_exception_info) {
+    SETUP_TEST_LOG_SOURCE("transforming_exception_in_package_results_in_expected_exception_info");
+
+    const auto mt(dogen::sml::meta_types::exception);
+    const auto m0(
+        mock_model_factory::build_single_type_model_in_package(0, mt, 1));
+    BOOST_LOG_SEV(lg, debug) << "model 0: " << m0;
+    BOOST_REQUIRE(m0.exceptions().size() == 1);
+
+    dogen::cpp::transformer t;
+    const auto e0(t.transform(m0.exceptions().begin()->second));
+    BOOST_LOG_SEV(lg, debug) << "exception 0: " << e0;
+
+    BOOST_CHECK(is_type_zero(e0.name()));
+    BOOST_CHECK(!e0.documentation().empty());
+    BOOST_CHECK(e0.namespaces().size() == 2);
+    BOOST_CHECK(is_model_zero(e0.namespaces().front()));
+    BOOST_CHECK(is_package_zero(e0.namespaces().back()));
+
+    const auto m1(
+        mock_model_factory::build_single_type_model_in_package(0, mt, 2));
+    BOOST_LOG_SEV(lg, debug) << "model 1: " << m1;
+    BOOST_REQUIRE(m0.exceptions().size() == 1);
+
+    const auto e1(t.transform(m1.exceptions().begin()->second));
+    BOOST_LOG_SEV(lg, debug) << "exception 1: " << e1;
+    BOOST_CHECK(is_type_zero(e1.name()));
+    BOOST_CHECK(!e1.documentation().empty());
+    BOOST_CHECK(e1.namespaces().size() == 3);
+    BOOST_CHECK(is_model_zero(e1.namespaces().front()));
+    BOOST_CHECK(is_package_one(e1.namespaces().back()));
 }
 
 BOOST_AUTO_TEST_SUITE_END()

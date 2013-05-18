@@ -27,7 +27,9 @@
 
 #include <list>
 #include "dogen/sml/types/qname.hpp"
+#include "dogen/sml/types/exception.hpp"
 #include "dogen/sml/types/enumeration.hpp"
+#include "dogen/cpp/types/exception_info.hpp"
 #include "dogen/cpp/types/enumeration_info.hpp"
 
 namespace dogen {
@@ -58,6 +60,11 @@ public:
      * @brief Transforms a SML enumeration into an enumeration info.
      */
     enumeration_info transform(const sml::enumeration& e) const;
+
+    /**
+     * @brief Transforms a SML exception into an exception info.
+     */
+    exception_info transform(const sml::exception& e) const;
 };
 
 } }

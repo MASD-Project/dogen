@@ -215,6 +215,29 @@ mock_enumeration(unsigned int i, const unsigned int package_n = 0) {
     return mock_enumeration(i, model_name(i), package_n);
 }
 
+dogen::sml::exception
+mock_exception(const unsigned int i, const std::string& model_name,
+    const unsigned int package_n = 0) {
+    dogen::sml::qname qn;
+    qn.model_name(model_name);
+    qn.type_name(type_name(i));
+    qn.meta_type(dogen::sml::meta_types::pod);
+
+    for (unsigned int i(0); i < package_n; ++i)
+        qn.package_path().push_back(package_name(i));
+
+    dogen::sml::exception r;
+    r.name(qn);
+    r.generation_type(dogen::sml::generation_types::full_generation);
+    r.documentation(documentation);
+    return r;
+}
+
+dogen::sml::exception
+mock_exception(unsigned int i, const unsigned int package_n = 0) {
+    return mock_exception(i, model_name(i), package_n);
+}
+
 }
 
 namespace dogen {
@@ -261,6 +284,12 @@ model mock_model_factory::build_multi_type_model(const unsigned int n,
         for (unsigned int i(0); i < type_n; ++i) {
             const auto e(mock_enumeration(i, model_name(n), pkg_n));
             r.enumerations().insert(std::make_pair(e.name(), e));
+        }
+        break;
+    case meta_types::exception:
+        for (unsigned int i(0); i < type_n; ++i) {
+            const auto e(mock_exception(i, model_name(n), pkg_n));
+            r.exceptions().insert(std::make_pair(e.name(), e));
         }
         break;
     default:

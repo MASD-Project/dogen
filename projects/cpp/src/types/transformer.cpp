@@ -75,4 +75,17 @@ enumeration_info transformer::transform(const sml::enumeration& e) const {
     return r;
 }
 
+exception_info transformer::transform(const sml::exception& e) const {
+    BOOST_LOG_SEV(lg, debug) << "Transforming exception: " << e.name();
+
+    exception_info r;
+    r.name(e.name().type_name());
+    r.namespaces(transform(e.name()));
+    r.documentation(e.documentation());
+
+    BOOST_LOG_SEV(lg, debug) << "Transformed exception: " << e.name();
+
+    return r;
+}
+
 } }
