@@ -61,15 +61,15 @@ bool is_model_one(const dogen::sml::qname& qn) {
 }
 
 bool is_type_zero(const dogen::sml::qname& qn) {
-    return mock_model_factory::pod_name(0) == qn.type_name();
+    return mock_model_factory::type_name(0) == qn.type_name();
 }
 
 bool is_type_one(const dogen::sml::qname& qn) {
-    return mock_model_factory::pod_name(1) == qn.type_name();
+    return mock_model_factory::type_name(1) == qn.type_name();
 }
 
 bool is_type_two(const dogen::sml::qname& qn) {
-    return mock_model_factory::pod_name(2) == qn.type_name();
+    return mock_model_factory::type_name(2) == qn.type_name();
 }
 
 bool is_pod(const dogen::sml::qname& qn) {
@@ -118,7 +118,7 @@ BOOST_AUTO_TEST_CASE(merging_n_distinct_models_with_one_pod_each_results_in_n_po
         BOOST_LOG_SEV(lg, debug) << "model name: " << *model_i;
 
         const auto expected_model_name(mock_model_factory::model_name(i));
-        const auto expected_pod_name(mock_model_factory::pod_name(0));
+        const auto expected_pod_name(mock_model_factory::type_name(0));
         BOOST_LOG_SEV(lg, debug) << "expected pod name: "
                                  << expected_pod_name;
         BOOST_LOG_SEV(lg, debug) << "expected model name: "

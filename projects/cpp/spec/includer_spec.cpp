@@ -84,7 +84,7 @@ dogen::config::cpp_settings mock_settings() {
 }
 
 std::string pod_name() {
-    return dogen::sml::test::mock_model_factory::pod_name(0);
+    return dogen::sml::test::mock_model_factory::type_name(0);
 }
 
 includer default_includer(const dogen::sml::model& m) {

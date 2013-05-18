@@ -41,19 +41,19 @@ const std::string test_suite("extractor_spec");
 const std::string pod_not_found("Could not find QName in pod container");
 
 bool is_type_zero(const dogen::sml::qname& qn) {
-    return mock_model_factory::pod_name(0) == qn.type_name();
+    return mock_model_factory::type_name(0) == qn.type_name();
 }
 
 bool is_type_one(const dogen::sml::qname& qn) {
-    return mock_model_factory::pod_name(1) == qn.type_name();
+    return mock_model_factory::type_name(1) == qn.type_name();
 }
 
 bool is_type_two(const dogen::sml::qname& qn) {
-    return mock_model_factory::pod_name(2) == qn.type_name();
+    return mock_model_factory::type_name(2) == qn.type_name();
 }
 
 bool is_type_three(const dogen::sml::qname& qn) {
-    return mock_model_factory::pod_name(3) == qn.type_name();
+    return mock_model_factory::type_name(3) == qn.type_name();
 }
 
 }

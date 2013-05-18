@@ -47,20 +47,20 @@ const std::string missing_identity(
     "Expected entity to have at least one identity");
 
 bool is_type_zero(const dogen::sml::qname& qn) {
-    return mock_model_factory::pod_name(0) == qn.type_name();
+    return mock_model_factory::type_name(0) == qn.type_name();
 }
 
 bool is_type_zero_unversioned(const dogen::sml::qname& qn) {
     const auto s(qn.type_name());
     return
-        boost::contains(s, mock_model_factory::pod_name(0)) &&
+        boost::contains(s, mock_model_factory::type_name(0)) &&
         boost::contains(s, unversioned_postfix);
 }
 
 bool is_type_zero_versioned(const dogen::sml::qname& qn) {
     const auto s(qn.type_name());
     return
-        boost::contains(s, mock_model_factory::pod_name(0)) &&
+        boost::contains(s, mock_model_factory::type_name(0)) &&
         boost::contains(s, versioned_postfix);
 }
 

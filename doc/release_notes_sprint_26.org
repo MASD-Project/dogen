@@ -10,13 +10,13 @@ This file contains all stories that were closed during sprint 26.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-05-16 Thu 23:31]
+Clock summary at [2013-05-19 Sun 00:35]
 
 | Headline                                                                     | Time    |       |      |
 |------------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                                 | *31:11* |       |      |
+| *Total time*                                                                 | *32:15* |       |      |
 |------------------------------------------------------------------------------+---------+-------+------|
-| Development Stories Implemented                                              |         | 31:11 |      |
+| Development Stories Implemented                                              |         | 32:15 |      |
 | IMPLEMENTATION Release notes and backlog grooming                            |         |       | 1:08 |
 | COMPLETED Fix build break on visitor tests                                   |         |       | 0:32 |
 | COMPLETED Remove workflow aspects from transformer                           |         |       | 2:23 |
@@ -29,7 +29,7 @@ Clock summary at [2013-05-16 Thu 23:31]
 | COMPLETED Refactor SML diagram                                               |         |       | 1:04 |
 | COMPLETED Add code generation links to =README=                              |         |       | 0:25 |
 | COMPLETED Remove view model namespace and postfix                            |         |       | 3:26 |
-| IMPLEMENTATION Clean up the SML to C++ transformer                           |         |       | 7:03 |
+| IMPLEMENTATION Clean up the SML to C++ transformer                           |         |       | 8:07 |
 | IMPLEMENTATION Move services into their own type                             |         |       | 3:22 |
 | IMPLEMENTATION Use explicit casting for versioned to unversioned conversions |         |       | 1:49 |
 | IMPLEMENTATION Add =extract_key= function                                    |         |       | 0:22 |
@@ -263,7 +263,9 @@ Its difficult to name this type as it is a bit of a mixed bag of
 attributes, but in general its job is to describe the contents of a
 file so we'll go with =content_descriptor=.
 
-**** IMPLEMENTATION Add support for enumeration transformation
+**** COMPLETED Add support for enumeration transformation
+     CLOSED: [2013-05-19 Sun 00:35]
+     CLOCK: [2013-05-18 Sat 23:31]--[2013-05-19 Sun 00:35] =>  1:04
      CLOCK: [2013-05-15 Wed 22:42]--[2013-05-15 Wed 23:33] =>  0:51
      CLOCK: [2013-05-15 Wed 22:35]--[2013-05-15 Wed 22:42] =>  0:07
      CLOCK: [2013-05-15 Wed 21:30]--[2013-05-15 Wed 22:13] =>  0:43

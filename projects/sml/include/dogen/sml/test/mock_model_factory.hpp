@@ -43,9 +43,14 @@ public:
     static std::string model_name(const unsigned int n = 0);
 
     /**
-     * @brief Returns the pod name derived from n.
+     * @brief Returns the type name derived from n.
      */
-    static std::string pod_name(const unsigned int n = 0);
+    static std::string type_name(const unsigned int n = 0);
+
+    /**
+     * @brief Returns the package name derived from n.
+     */
+    static std::string package_name(const unsigned int n = 0);
 
 public:
     /**
