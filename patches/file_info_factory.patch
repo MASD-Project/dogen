@@ -1,0 +1,1149 @@
+diff --git a/diagrams/cpp.dia b/diagrams/cpp.dia
+index 63b9538..4b27eca 100644
+--- a/diagrams/cpp.dia
++++ b/diagrams/cpp.dia
+@@ -349,7 +349,7 @@
+         <dia:point val="110.125,-49.9375"/>
+       </dia:attribute>
+       <dia:attribute name="elem_width">
+-        <dia:real val="11.664999999999999"/>
++        <dia:real val="11.665000000000001"/>
+       </dia:attribute>
+       <dia:attribute name="elem_height">
+         <dia:real val="34.000000000000021"/>
+@@ -5167,7 +5167,7 @@ pre-processor includes.#</dia:string>
+         <dia:point val="51.125,-28.9375"/>
+       </dia:attribute>
+       <dia:attribute name="elem_width">
+-        <dia:real val="27.065000000000001"/>
++        <dia:real val="27.064999999999998"/>
+       </dia:attribute>
+       <dia:attribute name="elem_height">
+         <dia:real val="10.600000000000001"/>
+@@ -7731,7 +7731,7 @@ pre-processor includes.#</dia:string>
+         <dia:point val="-126.375,96.0625"/>
+       </dia:attribute>
+       <dia:attribute name="elem_width">
+-        <dia:real val="11.9975"/>
++        <dia:real val="11.997499999999999"/>
+       </dia:attribute>
+       <dia:attribute name="elem_height">
+         <dia:real val="3"/>
+@@ -7842,7 +7842,7 @@ pre-processor includes.#</dia:string>
+         <dia:point val="-125.312,72.75"/>
+       </dia:attribute>
+       <dia:attribute name="elem_width">
+-        <dia:real val="7.4024999999999999"/>
++        <dia:real val="7.4025000000000007"/>
+       </dia:attribute>
+       <dia:attribute name="elem_height">
+         <dia:real val="3"/>
+@@ -8481,7 +8481,7 @@ pre-processor includes.#</dia:string>
+         <dia:point val="-136.438,83.9375"/>
+       </dia:attribute>
+       <dia:attribute name="elem_width">
+-        <dia:real val="10.442500000000001"/>
++        <dia:real val="10.442499999999999"/>
+       </dia:attribute>
+       <dia:attribute name="elem_height">
+         <dia:real val="3"/>
+@@ -8703,7 +8703,7 @@ pre-processor includes.#</dia:string>
+         <dia:point val="-58.625,64.9375"/>
+       </dia:attribute>
+       <dia:attribute name="elem_width">
+-        <dia:real val="13.595000000000001"/>
++        <dia:real val="13.594999999999999"/>
+       </dia:attribute>
+       <dia:attribute name="elem_height">
+         <dia:real val="3"/>
+@@ -9120,7 +9120,7 @@ pre-processor includes.#</dia:string>
+         <dia:point val="-105,65"/>
+       </dia:attribute>
+       <dia:attribute name="elem_width">
+-        <dia:real val="6.2175000000000002"/>
++        <dia:real val="6.2174999999999994"/>
+       </dia:attribute>
+       <dia:attribute name="elem_height">
+         <dia:real val="3"/>
+@@ -9675,7 +9675,7 @@ pre-processor includes.#</dia:string>
+         <dia:point val="-51.8125,73.3125"/>
+       </dia:attribute>
+       <dia:attribute name="elem_width">
+-        <dia:real val="11.619999999999999"/>
++        <dia:real val="11.620000000000001"/>
+       </dia:attribute>
+       <dia:attribute name="elem_height">
+         <dia:real val="3"/>
+@@ -10634,7 +10634,7 @@ pre-processor includes.#</dia:string>
+         <dia:point val="-149,65"/>
+       </dia:attribute>
+       <dia:attribute name="elem_width">
+-        <dia:real val="6.9574999999999996"/>
++        <dia:real val="6.9575000000000005"/>
+       </dia:attribute>
+       <dia:attribute name="elem_height">
+         <dia:real val="3"/>
+@@ -11078,7 +11078,7 @@ pre-processor includes.#</dia:string>
+         <dia:point val="-166,65"/>
+       </dia:attribute>
+       <dia:attribute name="elem_width">
+-        <dia:real val="9.6225000000000005"/>
++        <dia:real val="9.6224999999999987"/>
+       </dia:attribute>
+       <dia:attribute name="elem_height">
+         <dia:real val="3"/>
+@@ -11189,7 +11189,7 @@ pre-processor includes.#</dia:string>
+         <dia:point val="-160,73"/>
+       </dia:attribute>
+       <dia:attribute name="elem_width">
+-        <dia:real val="13.602499999999999"/>
++        <dia:real val="13.602500000000001"/>
+       </dia:attribute>
+       <dia:attribute name="elem_height">
+         <dia:real val="3"/>
+@@ -11300,7 +11300,7 @@ pre-processor includes.#</dia:string>
+         <dia:point val="-40.875,84.5"/>
+       </dia:attribute>
+       <dia:attribute name="elem_width">
+-        <dia:real val="7.0274999999999999"/>
++        <dia:real val="7.0275000000000007"/>
+       </dia:attribute>
+       <dia:attribute name="elem_height">
+         <dia:real val="3"/>
+@@ -12740,7 +12740,7 @@ pre-processor includes.#</dia:string>
+         <dia:point val="-89,96"/>
+       </dia:attribute>
+       <dia:attribute name="elem_width">
+-        <dia:real val="14.022500000000001"/>
++        <dia:real val="14.022499999999999"/>
+       </dia:attribute>
+       <dia:attribute name="elem_height">
+         <dia:real val="3"/>
+@@ -13650,7 +13650,7 @@ pre-processor includes.#</dia:string>
+         <dia:point val="-191.425,83.8906"/>
+       </dia:attribute>
+       <dia:attribute name="elem_width">
+-        <dia:real val="5.9699999999999998"/>
++        <dia:real val="5.9700000000000006"/>
+       </dia:attribute>
+       <dia:attribute name="elem_height">
+         <dia:real val="3"/>
+@@ -14403,7 +14403,7 @@ for a given type.#</dia:string>
+         <dia:point val="28,-25"/>
+       </dia:attribute>
+       <dia:attribute name="elem_width">
+-        <dia:real val="18.609999999999999"/>
++        <dia:real val="18.610000000000003"/>
+       </dia:attribute>
+       <dia:attribute name="elem_height">
+         <dia:real val="2.5"/>
+@@ -14713,7 +14713,7 @@ of relationship information.#</dia:string>
+         <dia:point val="-75,-113"/>
+       </dia:attribute>
+       <dia:attribute name="elem_width">
+-        <dia:real val="29.389999999999997"/>
++        <dia:real val="29.390000000000001"/>
+       </dia:attribute>
+       <dia:attribute name="elem_height">
+         <dia:real val="25.700000000000003"/>
+@@ -15125,7 +15125,7 @@ switch to Clang when it has 100% feature coverage.
+         <dia:point val="-5.8125,64.9375"/>
+       </dia:attribute>
+       <dia:attribute name="elem_width">
+-        <dia:real val="32.840000000000003"/>
++        <dia:real val="32.839999999999996"/>
+       </dia:attribute>
+       <dia:attribute name="elem_height">
+         <dia:real val="17.200000000000003"/>
+@@ -17755,7 +17755,7 @@ Does not use characters which are not valid for C++ identifiers.#</dia:string>
+         <dia:point val="-11,94"/>
+       </dia:attribute>
+       <dia:attribute name="elem_width">
+-        <dia:real val="32.840000000000003"/>
++        <dia:real val="32.839999999999996"/>
+       </dia:attribute>
+       <dia:attribute name="elem_height">
+         <dia:real val="6.8000000000000007"/>
+@@ -18682,7 +18682,7 @@ Does not use characters which are not valid for C++ identifiers.#</dia:string>
+         <dia:point val="50,40.8125"/>
+       </dia:attribute>
+       <dia:attribute name="elem_width">
+-        <dia:real val="7.5774999999999997"/>
++        <dia:real val="7.5775000000000006"/>
+       </dia:attribute>
+       <dia:attribute name="elem_height">
+         <dia:real val="3"/>
+@@ -18804,7 +18804,7 @@ Does not use characters which are not valid for C++ identifiers.#</dia:string>
+         <dia:string>#exception#</dia:string>
+       </dia:attribute>
+       <dia:attribute name="comment">
+-        <dia:string>##</dia:string>
++        <dia:string>#A transformation error occurred.#</dia:string>
+       </dia:attribute>
+       <dia:attribute name="abstract">
+         <dia:boolean val="false"/>
+@@ -20170,8 +20170,8 @@ Does not use characters which are not valid for C++ identifiers.#</dia:string>
+       </dia:attribute>
+       <dia:attribute name="orth_points">
+         <dia:point val="67.9673,30.7871"/>
+-        <dia:point val="67.9673,36.2748"/>
+-        <dia:point val="73.4912,36.2748"/>
++        <dia:point val="67.9673,35.9955"/>
++        <dia:point val="73.4912,35.9955"/>
+         <dia:point val="73.4912,41.0625"/>
+       </dia:attribute>
+       <dia:attribute name="orth_orient">
+@@ -20180,7 +20180,7 @@ Does not use characters which are not valid for C++ identifiers.#</dia:string>
+         <dia:enum val="1"/>
+       </dia:attribute>
+       <dia:attribute name="orth_autoroute">
+-        <dia:boolean val="true"/>
++        <dia:boolean val="false"/>
+       </dia:attribute>
+       <dia:attribute name="text_colour">
+         <dia:color val="#000000"/>
+@@ -20195,13 +20195,13 @@ Does not use characters which are not valid for C++ identifiers.#</dia:string>
+     </dia:object>
+     <dia:object type="UML - Class" version="0" id="O147">
+       <dia:attribute name="obj_pos">
+-        <dia:point val="74.1021,11.1251"/>
++        <dia:point val="20.9592,15.9822"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="74.0521,11.0751;88.5121,17.1751"/>
++        <dia:rectangle val="20.9092,15.9322;35.3692,22.0322"/>
+       </dia:attribute>
+       <dia:attribute name="elem_corner">
+-        <dia:point val="74.1021,11.1251"/>
++        <dia:point val="20.9592,15.9822"/>
+       </dia:attribute>
+       <dia:attribute name="elem_width">
+         <dia:real val="14.359999999999999"/>
+@@ -20457,19 +20457,200 @@ Does not use characters which are not valid for C++ identifiers.#</dia:string>
+         <dia:boolean val="false"/>
+       </dia:attribute>
+       <dia:attribute name="obj_pos">
+-        <dia:point val="67.9673,27.7871"/>
++        <dia:point val="51.0025,16.067"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="67.2173,17.0751;81.4821,29.3871"/>
++        <dia:rectangle val="28.0892,11.2455;51.7525,16.867"/>
+       </dia:attribute>
+       <dia:attribute name="meta">
+         <dia:composite type="dict"/>
+       </dia:attribute>
+       <dia:attribute name="orth_points">
++        <dia:point val="51.0025,16.067"/>
++        <dia:point val="51.0025,11.9955"/>
++        <dia:point val="28.1392,11.9955"/>
++        <dia:point val="28.1392,15.9822"/>
++      </dia:attribute>
++      <dia:attribute name="orth_orient">
++        <dia:enum val="1"/>
++        <dia:enum val="0"/>
++        <dia:enum val="1"/>
++      </dia:attribute>
++      <dia:attribute name="orth_autoroute">
++        <dia:boolean val="false"/>
++      </dia:attribute>
++      <dia:attribute name="text_colour">
++        <dia:color val="#000000"/>
++      </dia:attribute>
++      <dia:attribute name="line_colour">
++        <dia:color val="#000000"/>
++      </dia:attribute>
++      <dia:connections>
++        <dia:connection handle="0" to="O149" connection="0"/>
++        <dia:connection handle="1" to="O147" connection="1"/>
++      </dia:connections>
++    </dia:object>
++    <dia:object type="UML - Class" version="0" id="O149">
++      <dia:attribute name="obj_pos">
++        <dia:point val="51.0025,16.067"/>
++      </dia:attribute>
++      <dia:attribute name="obj_bb">
++        <dia:rectangle val="50.9525,16.017;58.7175,19.117"/>
++      </dia:attribute>
++      <dia:attribute name="elem_corner">
++        <dia:point val="51.0025,16.067"/>
++      </dia:attribute>
++      <dia:attribute name="elem_width">
++        <dia:real val="7.6650000000000009"/>
++      </dia:attribute>
++      <dia:attribute name="elem_height">
++        <dia:real val="3"/>
++      </dia:attribute>
++      <dia:attribute name="name">
++        <dia:string>#file_info_factory#</dia:string>
++      </dia:attribute>
++      <dia:attribute name="stereotype">
++        <dia:string>#service#</dia:string>
++      </dia:attribute>
++      <dia:attribute name="comment">
++        <dia:string>##</dia:string>
++      </dia:attribute>
++      <dia:attribute name="abstract">
++        <dia:boolean val="false"/>
++      </dia:attribute>
++      <dia:attribute name="suppress_attributes">
++        <dia:boolean val="false"/>
++      </dia:attribute>
++      <dia:attribute name="suppress_operations">
++        <dia:boolean val="false"/>
++      </dia:attribute>
++      <dia:attribute name="visible_attributes">
++        <dia:boolean val="true"/>
++      </dia:attribute>
++      <dia:attribute name="visible_operations">
++        <dia:boolean val="true"/>
++      </dia:attribute>
++      <dia:attribute name="visible_comments">
++        <dia:boolean val="false"/>
++      </dia:attribute>
++      <dia:attribute name="wrap_operations">
++        <dia:boolean val="true"/>
++      </dia:attribute>
++      <dia:attribute name="wrap_after_char">
++        <dia:int val="40"/>
++      </dia:attribute>
++      <dia:attribute name="comment_line_length">
++        <dia:int val="17"/>
++      </dia:attribute>
++      <dia:attribute name="comment_tagging">
++        <dia:boolean val="false"/>
++      </dia:attribute>
++      <dia:attribute name="line_width">
++        <dia:real val="0.10000000000000001"/>
++      </dia:attribute>
++      <dia:attribute name="line_color">
++        <dia:color val="#000000"/>
++      </dia:attribute>
++      <dia:attribute name="fill_color">
++        <dia:color val="#ffffff"/>
++      </dia:attribute>
++      <dia:attribute name="text_color">
++        <dia:color val="#000000"/>
++      </dia:attribute>
++      <dia:attribute name="normal_font">
++        <dia:font family="monospace" style="0" name="Courier"/>
++      </dia:attribute>
++      <dia:attribute name="abstract_font">
++        <dia:font family="monospace" style="88" name="Courier-BoldOblique"/>
++      </dia:attribute>
++      <dia:attribute name="polymorphic_font">
++        <dia:font family="monospace" style="8" name="Courier-Oblique"/>
++      </dia:attribute>
++      <dia:attribute name="classname_font">
++        <dia:font family="sans" style="80" name="Helvetica-Bold"/>
++      </dia:attribute>
++      <dia:attribute name="abstract_classname_font">
++        <dia:font family="sans" style="88" name="Helvetica-BoldOblique"/>
++      </dia:attribute>
++      <dia:attribute name="comment_font">
++        <dia:font family="sans" style="8" name="Helvetica-Oblique"/>
++      </dia:attribute>
++      <dia:attribute name="normal_font_height">
++        <dia:real val="0.80000000000000004"/>
++      </dia:attribute>
++      <dia:attribute name="polymorphic_font_height">
++        <dia:real val="0.80000000000000004"/>
++      </dia:attribute>
++      <dia:attribute name="abstract_font_height">
++        <dia:real val="0.80000000000000004"/>
++      </dia:attribute>
++      <dia:attribute name="classname_font_height">
++        <dia:real val="1"/>
++      </dia:attribute>
++      <dia:attribute name="abstract_classname_font_height">
++        <dia:real val="1"/>
++      </dia:attribute>
++      <dia:attribute name="comment_font_height">
++        <dia:real val="0.69999999999999996"/>
++      </dia:attribute>
++      <dia:attribute name="attributes"/>
++      <dia:attribute name="operations"/>
++      <dia:attribute name="template">
++        <dia:boolean val="false"/>
++      </dia:attribute>
++      <dia:attribute name="templates"/>
++    </dia:object>
++    <dia:object type="UML - Association" version="2" id="O150">
++      <dia:attribute name="name">
++        <dia:string>##</dia:string>
++      </dia:attribute>
++      <dia:attribute name="direction">
++        <dia:enum val="1"/>
++      </dia:attribute>
++      <dia:attribute name="show_direction">
++        <dia:boolean val="false"/>
++      </dia:attribute>
++      <dia:attribute name="assoc_type">
++        <dia:enum val="1"/>
++      </dia:attribute>
++      <dia:attribute name="role_a">
++        <dia:string>##</dia:string>
++      </dia:attribute>
++      <dia:attribute name="multipicity_a">
++        <dia:string>##</dia:string>
++      </dia:attribute>
++      <dia:attribute name="visibility_a">
++        <dia:enum val="3"/>
++      </dia:attribute>
++      <dia:attribute name="show_arrow_a">
++        <dia:boolean val="false"/>
++      </dia:attribute>
++      <dia:attribute name="role_b">
++        <dia:string>##</dia:string>
++      </dia:attribute>
++      <dia:attribute name="multipicity_b">
++        <dia:string>##</dia:string>
++      </dia:attribute>
++      <dia:attribute name="visibility_b">
++        <dia:enum val="3"/>
++      </dia:attribute>
++      <dia:attribute name="show_arrow_b">
++        <dia:boolean val="false"/>
++      </dia:attribute>
++      <dia:attribute name="obj_pos">
++        <dia:point val="54.835,19.067"/>
++      </dia:attribute>
++      <dia:attribute name="obj_bb">
++        <dia:rectangle val="54.085,18.317;68.1673,29.3871"/>
++      </dia:attribute>
++      <dia:attribute name="meta">
++        <dia:composite type="dict"/>
++      </dia:attribute>
++      <dia:attribute name="orth_points">
++        <dia:point val="54.835,19.067"/>
++        <dia:point val="54.835,23.1384"/>
++        <dia:point val="67.9673,23.1384"/>
+         <dia:point val="67.9673,27.7871"/>
+-        <dia:point val="67.9673,22.1061"/>
+-        <dia:point val="81.2821,22.1061"/>
+-        <dia:point val="81.2821,17.1251"/>
+       </dia:attribute>
+       <dia:attribute name="orth_orient">
+         <dia:enum val="1"/>
+@@ -20477,8 +20658,189 @@ Does not use characters which are not valid for C++ identifiers.#</dia:string>
+         <dia:enum val="1"/>
+       </dia:attribute>
+       <dia:attribute name="orth_autoroute">
++        <dia:boolean val="false"/>
++      </dia:attribute>
++      <dia:attribute name="text_colour">
++        <dia:color val="#000000"/>
++      </dia:attribute>
++      <dia:attribute name="line_colour">
++        <dia:color val="#000000"/>
++      </dia:attribute>
++      <dia:connections>
++        <dia:connection handle="0" to="O149" connection="6"/>
++        <dia:connection handle="1" to="O145" connection="1"/>
++      </dia:connections>
++    </dia:object>
++    <dia:object type="UML - Class" version="0" id="O151">
++      <dia:attribute name="obj_pos">
++        <dia:point val="72.8259,15.9527"/>
++      </dia:attribute>
++      <dia:attribute name="obj_bb">
++        <dia:rectangle val="72.7759,15.9027;79.7359,19.0027"/>
++      </dia:attribute>
++      <dia:attribute name="elem_corner">
++        <dia:point val="72.8259,15.9527"/>
++      </dia:attribute>
++      <dia:attribute name="elem_width">
++        <dia:real val="6.8600000000000003"/>
++      </dia:attribute>
++      <dia:attribute name="elem_height">
++        <dia:real val="3"/>
++      </dia:attribute>
++      <dia:attribute name="name">
++        <dia:string>#building_error#</dia:string>
++      </dia:attribute>
++      <dia:attribute name="stereotype">
++        <dia:string>#exception#</dia:string>
++      </dia:attribute>
++      <dia:attribute name="comment">
++        <dia:string>#An error occurred while the factory was building.#</dia:string>
++      </dia:attribute>
++      <dia:attribute name="abstract">
++        <dia:boolean val="false"/>
++      </dia:attribute>
++      <dia:attribute name="suppress_attributes">
++        <dia:boolean val="false"/>
++      </dia:attribute>
++      <dia:attribute name="suppress_operations">
++        <dia:boolean val="false"/>
++      </dia:attribute>
++      <dia:attribute name="visible_attributes">
++        <dia:boolean val="true"/>
++      </dia:attribute>
++      <dia:attribute name="visible_operations">
+         <dia:boolean val="true"/>
+       </dia:attribute>
++      <dia:attribute name="visible_comments">
++        <dia:boolean val="false"/>
++      </dia:attribute>
++      <dia:attribute name="wrap_operations">
++        <dia:boolean val="true"/>
++      </dia:attribute>
++      <dia:attribute name="wrap_after_char">
++        <dia:int val="40"/>
++      </dia:attribute>
++      <dia:attribute name="comment_line_length">
++        <dia:int val="17"/>
++      </dia:attribute>
++      <dia:attribute name="comment_tagging">
++        <dia:boolean val="false"/>
++      </dia:attribute>
++      <dia:attribute name="line_width">
++        <dia:real val="0.10000000000000001"/>
++      </dia:attribute>
++      <dia:attribute name="line_color">
++        <dia:color val="#000000"/>
++      </dia:attribute>
++      <dia:attribute name="fill_color">
++        <dia:color val="#ffffff"/>
++      </dia:attribute>
++      <dia:attribute name="text_color">
++        <dia:color val="#000000"/>
++      </dia:attribute>
++      <dia:attribute name="normal_font">
++        <dia:font family="monospace" style="0" name="Courier"/>
++      </dia:attribute>
++      <dia:attribute name="abstract_font">
++        <dia:font family="monospace" style="88" name="Courier-BoldOblique"/>
++      </dia:attribute>
++      <dia:attribute name="polymorphic_font">
++        <dia:font family="monospace" style="8" name="Courier-Oblique"/>
++      </dia:attribute>
++      <dia:attribute name="classname_font">
++        <dia:font family="sans" style="80" name="Helvetica-Bold"/>
++      </dia:attribute>
++      <dia:attribute name="abstract_classname_font">
++        <dia:font family="sans" style="88" name="Helvetica-BoldOblique"/>
++      </dia:attribute>
++      <dia:attribute name="comment_font">
++        <dia:font family="sans" style="8" name="Helvetica-Oblique"/>
++      </dia:attribute>
++      <dia:attribute name="normal_font_height">
++        <dia:real val="0.80000000000000004"/>
++      </dia:attribute>
++      <dia:attribute name="polymorphic_font_height">
++        <dia:real val="0.80000000000000004"/>
++      </dia:attribute>
++      <dia:attribute name="abstract_font_height">
++        <dia:real val="0.80000000000000004"/>
++      </dia:attribute>
++      <dia:attribute name="classname_font_height">
++        <dia:real val="1"/>
++      </dia:attribute>
++      <dia:attribute name="abstract_classname_font_height">
++        <dia:real val="1"/>
++      </dia:attribute>
++      <dia:attribute name="comment_font_height">
++        <dia:real val="0.69999999999999996"/>
++      </dia:attribute>
++      <dia:attribute name="attributes"/>
++      <dia:attribute name="operations"/>
++      <dia:attribute name="template">
++        <dia:boolean val="false"/>
++      </dia:attribute>
++      <dia:attribute name="templates"/>
++    </dia:object>
++    <dia:object type="UML - Association" version="2" id="O152">
++      <dia:attribute name="name">
++        <dia:string>##</dia:string>
++      </dia:attribute>
++      <dia:attribute name="direction">
++        <dia:enum val="1"/>
++      </dia:attribute>
++      <dia:attribute name="show_direction">
++        <dia:boolean val="false"/>
++      </dia:attribute>
++      <dia:attribute name="assoc_type">
++        <dia:enum val="1"/>
++      </dia:attribute>
++      <dia:attribute name="role_a">
++        <dia:string>##</dia:string>
++      </dia:attribute>
++      <dia:attribute name="multipicity_a">
++        <dia:string>##</dia:string>
++      </dia:attribute>
++      <dia:attribute name="visibility_a">
++        <dia:enum val="3"/>
++      </dia:attribute>
++      <dia:attribute name="show_arrow_a">
++        <dia:boolean val="false"/>
++      </dia:attribute>
++      <dia:attribute name="role_b">
++        <dia:string>##</dia:string>
++      </dia:attribute>
++      <dia:attribute name="multipicity_b">
++        <dia:string>##</dia:string>
++      </dia:attribute>
++      <dia:attribute name="visibility_b">
++        <dia:enum val="3"/>
++      </dia:attribute>
++      <dia:attribute name="show_arrow_b">
++        <dia:boolean val="false"/>
++      </dia:attribute>
++      <dia:attribute name="obj_pos">
++        <dia:point val="58.6675,16.067"/>
++      </dia:attribute>
++      <dia:attribute name="obj_bb">
++        <dia:rectangle val="57.9175,12.017;76.4559,17.667"/>
++      </dia:attribute>
++      <dia:attribute name="meta">
++        <dia:composite type="dict"/>
++      </dia:attribute>
++      <dia:attribute name="orth_points">
++        <dia:point val="58.6675,16.067"/>
++        <dia:point val="58.6675,12.067"/>
++        <dia:point val="76.2559,12.067"/>
++        <dia:point val="76.2559,15.9527"/>
++      </dia:attribute>
++      <dia:attribute name="orth_orient">
++        <dia:enum val="1"/>
++        <dia:enum val="0"/>
++        <dia:enum val="1"/>
++      </dia:attribute>
++      <dia:attribute name="orth_autoroute">
++        <dia:boolean val="false"/>
++      </dia:attribute>
+       <dia:attribute name="text_colour">
+         <dia:color val="#000000"/>
+       </dia:attribute>
+@@ -20486,8 +20848,8 @@ Does not use characters which are not valid for C++ identifiers.#</dia:string>
+         <dia:color val="#000000"/>
+       </dia:attribute>
+       <dia:connections>
+-        <dia:connection handle="0" to="O145" connection="1"/>
+-        <dia:connection handle="1" to="O147" connection="6"/>
++        <dia:connection handle="0" to="O149" connection="2"/>
++        <dia:connection handle="1" to="O151" connection="1"/>
+       </dia:connections>
+     </dia:object>
+   </dia:layer>
+diff --git a/doc/release_notes_sprint_27.org b/doc/release_notes_sprint_27.org
+index 58077d0..b1b176d 100644
+--- a/doc/release_notes_sprint_27.org
++++ b/doc/release_notes_sprint_27.org
+@@ -10,18 +10,22 @@ This file contains all stories that were closed during sprint 27.
+ ** Development Stories Implemented
+ 
+ #+begin: clocktable :maxlevel 3 :scope subtree
+-Clock summary at [2013-05-19 Sun 21:55]
+-
+-| Headline     | Time   |
+-|--------------+--------|
+-| *Total time* | *0:00* |
++Clock summary at [2013-05-20 Mon 00:04]
++
++| Headline                                           | Time   |      |      |
++|----------------------------------------------------+--------+------+------|
++| *Total time*                                       | *1:11* |      |      |
++|----------------------------------------------------+--------+------+------|
++| Development Stories Implemented                    |        | 1:11 |      |
++| IMPLEMENTATION Clean up the SML to C++ transformer |        |      | 1:11 |
+ #+end:
+ 
+ *** IMPLEMENTATION Clean up the SML to C++ transformer                :spike:
+ 
+ Continuing from previous iteration, see description in Sprint 26.
+ 
+-**** Create =file_info_factory=
++**** IMPLEMENTATION Create =file_info_factory=
++     CLOCK: [2013-05-19 Sun 22:53]--[2013-05-20 Mon 00:04] =>  1:11
+ 
+ *** IMPLEMENTATION Move services into their own type                  :story:
+ 
+diff --git a/projects/cpp/include/dogen/cpp/types/all.hpp b/projects/cpp/include/dogen/cpp/types/all.hpp
+index 7f67254..4f8120d 100644
+--- a/projects/cpp/include/dogen/cpp/types/all.hpp
++++ b/projects/cpp/include/dogen/cpp/types/all.hpp
+@@ -21,6 +21,7 @@
+ #include "dogen/cpp/types/aspect_types.hpp"
+ #include "dogen/cpp/types/boost_model_helper.hpp"
+ #include "dogen/cpp/types/boost_types.hpp"
++#include "dogen/cpp/types/building_error.hpp"
+ #include "dogen/cpp/types/class_info.hpp"
+ #include "dogen/cpp/types/cmakelists_info.hpp"
+ #include "dogen/cpp/types/content_descriptor.hpp"
+@@ -30,6 +31,7 @@
+ #include "dogen/cpp/types/extraction_error.hpp"
+ #include "dogen/cpp/types/extractor.hpp"
+ #include "dogen/cpp/types/file_info.hpp"
++#include "dogen/cpp/types/file_info_factory.hpp"
+ #include "dogen/cpp/types/file_types.hpp"
+ #include "dogen/cpp/types/formatters/class_declaration.hpp"
+ #include "dogen/cpp/types/formatters/class_implementation.hpp"
+diff --git a/projects/cpp/include/dogen/cpp/types/building_error.hpp b/projects/cpp/include/dogen/cpp/types/building_error.hpp
+new file mode 100644
+index 0000000..31b3ada
+--- /dev/null
++++ b/projects/cpp/include/dogen/cpp/types/building_error.hpp
+@@ -0,0 +1,54 @@
++/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
++ *
++ * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
++ *
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation; either version 3 of the License, or
++ * (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program; if not, write to the Free Software
++ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
++ * MA 02110-1301, USA.
++ *
++ */
++#ifndef DOGEN_CPP_TYPES_BUILDING_ERROR_HPP
++#define DOGEN_CPP_TYPES_BUILDING_ERROR_HPP
++
++#if defined(_MSC_VER) && (_MSC_VER >= 1200)
++#pragma once
++#endif
++
++#include <boost/exception/info.hpp>
++#include <string>
++
++namespace dogen {
++namespace cpp {
++
++/**
++ * @brief An error occurred while the factory was building.
++ */
++class building_error : public virtual std::exception, public virtual boost::exception {
++public:
++    building_error() = default;
++    ~building_error() noexcept = default;
++
++public:
++    building_error(const std::string& message) : message_(message) { }
++
++public:
++    const char* what() const noexcept { return(message_.c_str()); }
++
++private:
++    const std::string message_;
++};
++
++} }
++
++#endif
+diff --git a/projects/cpp/include/dogen/cpp/types/building_error_fwd.hpp b/projects/cpp/include/dogen/cpp/types/building_error_fwd.hpp
+new file mode 100644
+index 0000000..778c1c8
+--- /dev/null
++++ b/projects/cpp/include/dogen/cpp/types/building_error_fwd.hpp
+@@ -0,0 +1,38 @@
++/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
++ *
++ * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
++ *
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation; either version 3 of the License, or
++ * (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program; if not, write to the Free Software
++ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
++ * MA 02110-1301, USA.
++ *
++ */
++#ifndef DOGEN_CPP_TYPES_BUILDING_ERROR_FWD_HPP
++#define DOGEN_CPP_TYPES_BUILDING_ERROR_FWD_HPP
++
++#if defined(_MSC_VER) && (_MSC_VER >= 1200)
++#pragma once
++#endif
++
++#include <boost/exception/info.hpp>
++#include <string>
++
++namespace dogen {
++namespace cpp {
++
++class building_error;
++
++} }
++
++#endif
+diff --git a/projects/cpp/include/dogen/cpp/types/file_info_factory.hpp b/projects/cpp/include/dogen/cpp/types/file_info_factory.hpp
+new file mode 100644
+index 0000000..6deb77b
+--- /dev/null
++++ b/projects/cpp/include/dogen/cpp/types/file_info_factory.hpp
+@@ -0,0 +1,89 @@
++/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
++ *
++ * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
++ *
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation; either version 3 of the License, or
++ * (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program; if not, write to the Free Software
++ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
++ * MA 02110-1301, USA.
++ *
++ */
++#ifndef DOGEN_CPP_TYPES_FILE_INFO_FACTORY_HPP
++#define DOGEN_CPP_TYPES_FILE_INFO_FACTORY_HPP
++
++#if defined(_MSC_VER) && (_MSC_VER >= 1200)
++#pragma once
++#endif
++
++#include <list>
++#include <boost/filesystem/path.hpp>
++#include "dogen/sml/types/enumeration.hpp"
++#include "dogen/cpp/types/locator.hpp"
++#include "dogen/cpp/types/location_request.hpp"
++#include "dogen//cpp/types/includer.hpp"
++#include "dogen/cpp/types/transformer.hpp"
++#include "dogen/cpp/types/content_descriptor.hpp"
++#include "dogen/cpp/types/file_info.hpp"
++
++namespace dogen {
++namespace cpp {
++
++class file_info_factory {
++public:
++    file_info_factory() = delete;
++    file_info_factory(const file_info_factory&) = default;
++    ~file_info_factory() = default;
++    file_info_factory& operator=(const file_info_factory&) = delete;
++
++public:
++    file_info_factory(const transformer& t, const locator& l, includer& i);
++
++private:
++
++    /**
++     * @brief Transforms a relative path to a header file into a C++
++     * header guard name.
++     */
++    std::string to_header_guard_name(const boost::filesystem::path& rp) const;
++
++    /**
++     * @brief Returns a location request for the given contents.
++     */
++    location_request
++    location_request_factory(const content_descriptor& cd) const;
++
++    /**
++     * @brief Performs the initial setup of the file info.
++     */
++    file_info create(const content_descriptor& cd);
++
++    /**
++     * @brief Manufacture the file info for the given enumeration info.
++     */
++    file_info create(const enumeration_info& e, const content_descriptor& cd);
++
++public:
++    /**
++     * @brief Manufacture all the file infos for the given enumeration.
++     */
++    std::list<file_info> create(const sml::enumeration& e);
++
++private:
++    const transformer& transformer_;
++    const locator& locator_;
++    includer& includer_;
++};
++
++} }
++
++#endif
+diff --git a/projects/cpp/include/dogen/cpp/types/file_info_factory_fwd.hpp b/projects/cpp/include/dogen/cpp/types/file_info_factory_fwd.hpp
+new file mode 100644
+index 0000000..9efdd5f
+--- /dev/null
++++ b/projects/cpp/include/dogen/cpp/types/file_info_factory_fwd.hpp
+@@ -0,0 +1,35 @@
++/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
++ *
++ * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
++ *
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation; either version 3 of the License, or
++ * (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program; if not, write to the Free Software
++ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
++ * MA 02110-1301, USA.
++ *
++ */
++#ifndef DOGEN_CPP_TYPES_FILE_INFO_FACTORY_FWD_HPP
++#define DOGEN_CPP_TYPES_FILE_INFO_FACTORY_FWD_HPP
++
++#if defined(_MSC_VER) && (_MSC_VER >= 1200)
++#pragma once
++#endif
++
++namespace dogen {
++namespace cpp {
++
++class file_info_factory;
++
++} }
++
++#endif
+diff --git a/projects/cpp/include/dogen/cpp/types/transformation_error.hpp b/projects/cpp/include/dogen/cpp/types/transformation_error.hpp
+index c5e0156..dd1f319 100644
+--- a/projects/cpp/include/dogen/cpp/types/transformation_error.hpp
++++ b/projects/cpp/include/dogen/cpp/types/transformation_error.hpp
+@@ -31,6 +31,9 @@
+ namespace dogen {
+ namespace cpp {
+ 
++/**
++ * @brief A transformation error occurred.
++ */
+ class transformation_error : public virtual std::exception, public virtual boost::exception {
+ public:
+     transformation_error() = default;
+diff --git a/projects/cpp/spec/file_info_factory_spec.cpp b/projects/cpp/spec/file_info_factory_spec.cpp
+new file mode 100644
+index 0000000..aac1fef
+--- /dev/null
++++ b/projects/cpp/spec/file_info_factory_spec.cpp
+@@ -0,0 +1,80 @@
++/* -*- Mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
++ *
++ * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
++ *
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation; either version 3 of the License, or
++ * (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program; if not, write to the Free Software
++ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
++ * MA 02110-1301, USA.
++ *
++ */
++#include <boost/test/unit_test.hpp>
++#include "dogen/utility/test/exception_checkers.hpp"
++#include "dogen/utility/test/logging.hpp"
++#include "dogen/sml/types/model.hpp"
++#include "dogen/sml/io/model_io.hpp"
++#include "dogen/cpp/io/all_io.hpp"
++#include "dogen/cpp/types/building_error.hpp"
++#include "dogen/sml/test/mock_model_factory.hpp"
++#include "dogen/config/test/mock_settings_factory.hpp"
++#include "dogen/cpp/types/file_info_factory.hpp"
++
++using dogen::config::cpp_facet_types;
++using dogen::sml::test::mock_model_factory;
++
++namespace {
++
++const std::string empty;
++const std::string test_module("cpp");
++const std::string test_suite("transformer_spec");
++
++dogen::config::cpp_settings create_settings(
++    bool disable_facet_includers = false, bool use_integrated_io = false) {
++
++    using dogen::config::test::mock_settings_factory;
++    auto r(mock_settings_factory::build_cpp_settings(empty, empty));
++
++    std::set<cpp_facet_types> ft;
++    ft.insert(cpp_facet_types::types);
++
++    r.enabled_facets(ft);
++    r.use_integrated_io(use_integrated_io);
++    r.disable_facet_includers(disable_facet_includers);
++    return r;
++}
++
++}
++
++using dogen::utility::test::contains_checker;
++
++BOOST_AUTO_TEST_SUITE(file_info_factory)
++
++BOOST_AUTO_TEST_CASE(test) {
++    SETUP_TEST_LOG_SOURCE("test");
++
++    const auto mt(dogen::sml::meta_types::enumeration);
++    const auto m(mock_model_factory::build_single_type_model(0, mt));
++    BOOST_LOG_SEV(lg, debug) << "model: " << m;
++    BOOST_REQUIRE(m.enumerations().size() == 1);
++
++    const auto s(create_settings());
++    dogen::cpp::locator l(m.name(), s);
++    dogen::cpp::includer i(m, l, s);
++    dogen::cpp::transformer t(m);
++
++    dogen::cpp::file_info_factory f(t, l, i);
++    const auto fi(f.create(m.enumerations().begin()->second));
++    BOOST_REQUIRE(!fi.empty());
++}
++
++BOOST_AUTO_TEST_SUITE_END()
+diff --git a/projects/cpp/src/types/file_info_factory.cpp b/projects/cpp/src/types/file_info_factory.cpp
+new file mode 100644
+index 0000000..e64a13f
+--- /dev/null
++++ b/projects/cpp/src/types/file_info_factory.cpp
+@@ -0,0 +1,122 @@
++/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
++ *
++ * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
++ *
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation; either version 3 of the License, or
++ * (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program; if not, write to the Free Software
++ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
++ * MA 02110-1301, USA.
++ *
++ */
++#include <sstream>
++#include <boost/algorithm/string.hpp>
++#include "dogen/cpp/types/file_info_factory.hpp"
++
++namespace {
++
++const std::string empty;
++const std::string dot(".");
++const std::string separator("_");
++
++}
++
++namespace dogen {
++namespace cpp {
++
++file_info_factory::
++file_info_factory(const transformer& t, const locator& l, includer& i)
++    : transformer_(t), locator_(l), includer_(i) { }
++
++std::string file_info_factory::
++to_header_guard_name(const boost::filesystem::path& rp) const {
++    bool is_first(true);
++    std::ostringstream stream;
++    for (auto p : rp) {
++        std::string s(p.string());
++        boost::replace_all(s, dot, separator);
++        boost::to_upper(s);
++        stream << (is_first ? empty : separator) << s;
++        is_first = false;
++    }
++    return stream.str();
++}
++
++location_request file_info_factory::
++location_request_factory(const content_descriptor& cd) const {
++    location_request r;
++    r.facet_type(cd.facet_type());
++    r.file_type(cd.file_type());
++    r.aspect_type(cd.aspect_type());
++    r.model_name(cd.name().model_name());
++    r.package_path(cd.name().package_path());
++    r.file_name(cd.name().type_name());
++    r.external_package_path(cd.name().external_package_path());
++    return r;
++}
++
++file_info file_info_factory::create(const content_descriptor& cd) {
++    file_info r;
++    r.facet_type(cd.facet_type());
++    r.file_type(cd.file_type());
++    r.aspect_type(cd.aspect_type());
++
++    const auto rq(location_request_factory(cd));
++    r.file_path(locator_.absolute_path(rq));
++
++    if (cd.file_type() == file_types::header) {
++        const auto rp(locator_.relative_logical_path(rq));
++        r.header_guard(to_header_guard_name(rp));
++        if (cd.aspect_type() == aspect_types::main)
++            includer_.register_header(cd.facet_type(), rp);
++    }
++
++    return r;
++}
++
++std::list<file_info> file_info_factory::create(const sml::enumeration& e) {
++    std::list<file_info> r;
++
++    if (e.generation_type() == sml::generation_types::no_generation)
++        return r;
++
++    const auto header(file_types::header);
++    const auto implementation(file_types::implementation);
++    const auto main(aspect_types::main);
++    const auto forward_decls(aspect_types::forward_decls);
++    const auto enum_mt(sml::meta_types::enumeration);
++    const auto facets(enabled_facet_types(enum_mt));
++
++    for (const auto ft : facets) {
++        lambda(ft, header, main, e);
++
++        if (has_implementation(ft, enum_mt))
++            lambda(ft, implementation, main, e);
++
++        if (has_forward_decls(ft, enum_mt))
++            lambda(ft, header, forward_decls, e);
++    }
++
++    content_descriptor cd;
++    file_info fi(create(cd));
++    fi.category_type(sml::category_types::user_defined);
++    fi.meta_type(cd.name().meta_type());
++    fi.enumeration_info(ei);
++
++    const auto in(includer_.includes_for_enumeration(e, ft, flt, at));
++    r.system_includes(in.system);
++    r.user_includes(in.user);
++
++    return r;
++}
++
++} }
