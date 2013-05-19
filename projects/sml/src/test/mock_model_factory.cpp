@@ -210,11 +210,6 @@ mock_enumeration(const unsigned int i, const std::string& model_name,
     return r;
 }
 
-dogen::sml::enumeration
-mock_enumeration(unsigned int i, const unsigned int package_n = 0) {
-    return mock_enumeration(i, model_name(i), package_n);
-}
-
 dogen::sml::exception
 mock_exception(const unsigned int i, const std::string& model_name,
     const unsigned int package_n = 0) {
@@ -231,11 +226,6 @@ mock_exception(const unsigned int i, const std::string& model_name,
     r.generation_type(dogen::sml::generation_types::full_generation);
     r.documentation(documentation);
     return r;
-}
-
-dogen::sml::exception
-mock_exception(unsigned int i, const unsigned int package_n = 0) {
-    return mock_exception(i, model_name(i), package_n);
 }
 
 }
