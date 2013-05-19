@@ -232,12 +232,18 @@ BOOST_AUTO_TEST_CASE(transforming_package_results_in_expected_package_info) {
     BOOST_LOG_SEV(lg, debug) << "model 1: " << m1;
     BOOST_REQUIRE(m1.packages().size() == 2);
 
-    const auto p1(t.transform(m1.packages().begin()->second));
+    auto i(m1.packages().begin());
+    if (!is_package_one(i->first.type_name()))
+        ++i;
+
+    BOOST_CHECK(is_package_one(i->first.type_name()));
+    const auto p1(t.transform(i->second));
     BOOST_LOG_SEV(lg, debug) << "package 1: " << p1;
 
     BOOST_CHECK(!p1.documentation().empty());
     BOOST_CHECK(p1.namespaces().size() == 2);
     BOOST_CHECK(is_package_zero(p1.namespaces().front()));
+    BOOST_CHECK(is_package_one(p1.namespaces().back()));
 }
 
 BOOST_AUTO_TEST_CASE(transforming_model_results_in_expected_package_info) {
