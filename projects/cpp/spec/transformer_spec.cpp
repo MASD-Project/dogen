@@ -19,11 +19,14 @@
  *
  */
 #include <boost/test/unit_test.hpp>
+#include <boost/algorithm/string/predicate.hpp>
+#include "dogen/utility/test/exception_checkers.hpp"
 #include "dogen/utility/test/logging.hpp"
 #include "dogen/sml/types/model.hpp"
 #include "dogen/sml/io/model_io.hpp"
 #include "dogen/sml/test/mock_model_factory.hpp"
 #include "dogen/cpp/io/all_io.hpp"
+#include "dogen/cpp/types/transformation_error.hpp"
 #include "dogen/cpp/types/transformer.hpp"
 
 using dogen::sml::test::mock_model_factory;
@@ -34,6 +37,9 @@ const std::string empty;
 const std::string test_module("cpp");
 const std::string test_suite("transformer_spec");
 const std::string external_package("some_package");
+
+const std::string no_parent_info("Type has a parent ");
+const std::string unexpected_parent_info("Type does not have a parent");
 
 bool is_type_zero(const std::string& n) {
     return mock_model_factory::type_name(0) == n;
@@ -55,7 +61,20 @@ bool is_model_zero(const std::string& n) {
     return mock_model_factory::model_name(0) == n;
 }
 
+bool check_name(const std::string& n) {
+    return
+        !boost::contains(n, ":") && !boost::contains(n, " ") &&
+        !boost::contains(n, "<") && !boost::contains(n, ">") &&
+        !boost::contains(n, ",");
 }
+
+bool check_scoped_name(const std::string& n) {
+    return boost::contains(n, "::");
+}
+
+}
+
+using dogen::utility::test::contains_checker;
 
 BOOST_AUTO_TEST_SUITE(transformer)
 
@@ -233,8 +252,10 @@ BOOST_AUTO_TEST_CASE(transforming_package_results_in_expected_package_info) {
     BOOST_REQUIRE(m1.packages().size() == 2);
 
     auto i(m1.packages().begin());
-    if (!is_package_one(i->first.type_name()))
+    if (!is_package_one(i->first.type_name()) && i != m1.packages().end())
         ++i;
+
+    BOOST_REQUIRE(i != m1.packages().end());
 
     BOOST_CHECK(is_package_one(i->first.type_name()));
     const auto p1(t.transform(i->second));
@@ -297,7 +318,7 @@ BOOST_AUTO_TEST_CASE(transforming_pod_results_in_expected_class_info) {
 
     dogen::cpp::transformer t(m);
     const auto p(t.transform(m.pods().begin()->second));
-    BOOST_LOG_SEV(lg, debug) << "pod: " << p;
+    BOOST_LOG_SEV(lg, debug) << "class: " << p;
     BOOST_CHECK(is_type_zero(p.name()));
     BOOST_CHECK(!p.documentation().empty());
     BOOST_CHECK(p.namespaces().size() == 1);
@@ -319,6 +340,371 @@ BOOST_AUTO_TEST_CASE(transforming_pod_results_in_expected_class_info) {
     BOOST_CHECK(!p.is_visitable());
     BOOST_CHECK(!p.is_immutable());
     BOOST_CHECK(!p.is_original_parent_visitable());
+}
+
+BOOST_AUTO_TEST_CASE(transforming_pod_with_property_results_in_expected_class_info) {
+    SETUP_TEST_LOG_SOURCE("transforming_pod_with_property_results_in_expected_class_info");
+
+    auto m(mock_model_factory::pod_with_property());
+    BOOST_LOG_SEV(lg, debug) << "model: " << m;
+
+    auto i(m.pods().begin());
+    if (!is_type_zero(i->first.type_name()) && i != m.pods().end())
+        ++i;
+
+    BOOST_REQUIRE(i != m.pods().end());
+
+    dogen::cpp::transformer t(m);
+    const auto p(t.transform(i->second));
+    BOOST_LOG_SEV(lg, debug) << "class: " << p;
+
+    BOOST_CHECK(p.all_properties().size() == 1);
+    BOOST_CHECK(p.properties().size() == 1);
+    const auto type(p.properties().begin()->type());
+    BOOST_CHECK(!type.is_enumeration());
+    BOOST_CHECK(!type.is_primitive());
+    BOOST_CHECK(!type.is_char_like());
+    BOOST_CHECK(!type.is_int_like());
+    BOOST_CHECK(!type.is_string_like());
+    BOOST_CHECK(!type.is_optional_like());
+    BOOST_CHECK(!type.is_pair());
+    BOOST_CHECK(!type.is_variant_like());
+    BOOST_CHECK(!type.is_filesystem_path());
+    BOOST_CHECK(!type.is_date());
+    BOOST_CHECK(!type.is_ptime());
+    BOOST_CHECK(!type.is_time_duration());
+    BOOST_CHECK(!type.is_sequence_container());
+    BOOST_CHECK(!type.is_associative_container());
+    BOOST_CHECK(!type.is_smart_pointer());
+    BOOST_CHECK(type.children().empty());
+
+    BOOST_CHECK(is_type_zero(p.name()));
+    BOOST_CHECK(!p.documentation().empty());
+    BOOST_CHECK(p.namespaces().size() == 1);
+    BOOST_CHECK(is_model_zero(p.namespaces().back()));
+    BOOST_CHECK(!p.has_primitive_properties());
+    BOOST_CHECK(!p.requires_stream_manipulators());
+    BOOST_CHECK(!p.requires_manual_move_constructor());
+    BOOST_CHECK(!p.requires_manual_default_constructor());
+    BOOST_CHECK(p.parents().empty());
+    BOOST_CHECK(!p.is_parent());
+    BOOST_CHECK(p.original_parent_name().empty());
+    BOOST_CHECK(p.original_parent_name_qualified().empty());
+    BOOST_CHECK(p.leaves().empty());
+    BOOST_CHECK(p.implementation_specific_parameters().empty());
+    BOOST_CHECK(!p.is_comparable());
+    BOOST_CHECK(!p.is_visitable());
+    BOOST_CHECK(!p.is_immutable());
+    BOOST_CHECK(!p.is_original_parent_visitable());
+}
+
+BOOST_AUTO_TEST_CASE(transforming_pod_with_bool_property_results_in_expected_class_info) {
+    SETUP_TEST_LOG_SOURCE("transforming_pod_bool_with_property_results_in_expected_class_info");
+
+    auto pt(mock_model_factory::property_types::boolean);
+    auto m(mock_model_factory::pod_with_property(pt));
+    BOOST_LOG_SEV(lg, debug) << "model: " << m;
+
+    auto i(m.pods().begin());
+    if (!is_type_zero(i->first.type_name()) && i != m.pods().end())
+        ++i;
+
+    BOOST_REQUIRE(i != m.pods().end());
+
+    dogen::cpp::transformer t(m);
+    const auto p(t.transform(i->second));
+    BOOST_LOG_SEV(lg, debug) << "class: " << p;
+
+    BOOST_CHECK(p.all_properties().size() == 1);
+    BOOST_CHECK(p.properties().size() == 1);
+    const auto type(p.properties().begin()->type());
+    BOOST_CHECK(check_name(type.name()));
+    BOOST_CHECK(check_name(type.complete_name()));
+    BOOST_CHECK(check_name(type.identifiable_name()));
+    BOOST_CHECK(check_name(type.complete_identifiable_name()));
+    BOOST_CHECK(!type.is_enumeration());
+    BOOST_CHECK(type.is_primitive());
+    BOOST_CHECK(!type.is_char_like());
+    BOOST_CHECK(!type.is_int_like());
+    BOOST_CHECK(!type.is_string_like());
+    BOOST_CHECK(!type.is_optional_like());
+    BOOST_CHECK(!type.is_pair());
+    BOOST_CHECK(!type.is_variant_like());
+    BOOST_CHECK(!type.is_filesystem_path());
+    BOOST_CHECK(!type.is_date());
+    BOOST_CHECK(!type.is_ptime());
+    BOOST_CHECK(!type.is_time_duration());
+    BOOST_CHECK(!type.is_sequence_container());
+    BOOST_CHECK(!type.is_associative_container());
+    BOOST_CHECK(!type.is_smart_pointer());
+    BOOST_CHECK(type.children().empty());
+
+    BOOST_CHECK(is_type_zero(p.name()));
+    BOOST_CHECK(!p.documentation().empty());
+    BOOST_CHECK(p.namespaces().size() == 1);
+    BOOST_CHECK(is_model_zero(p.namespaces().back()));
+    BOOST_CHECK(p.has_primitive_properties());
+    BOOST_CHECK(p.requires_stream_manipulators());
+    BOOST_CHECK(!p.requires_manual_move_constructor());
+    BOOST_CHECK(p.requires_manual_default_constructor());
+    BOOST_CHECK(p.parents().empty());
+    BOOST_CHECK(!p.is_parent());
+    BOOST_CHECK(p.original_parent_name().empty());
+    BOOST_CHECK(p.original_parent_name_qualified().empty());
+    BOOST_CHECK(p.leaves().empty());
+    BOOST_CHECK(p.implementation_specific_parameters().empty());
+    BOOST_CHECK(!p.is_comparable());
+    BOOST_CHECK(!p.is_visitable());
+    BOOST_CHECK(!p.is_immutable());
+    BOOST_CHECK(!p.is_original_parent_visitable());
+}
+
+BOOST_AUTO_TEST_CASE(transforming_pod_with_unsigned_int_property_results_in_expected_class_info) {
+    SETUP_TEST_LOG_SOURCE("transforming_pod_unsigned_int_with_property_results_in_expected_class_info");
+
+    auto pt(mock_model_factory::property_types::unsigned_int);
+    auto m(mock_model_factory::pod_with_property(pt));
+    BOOST_LOG_SEV(lg, debug) << "model: " << m;
+
+    auto i(m.pods().begin());
+    if (!is_type_zero(i->first.type_name()) && i != m.pods().end())
+        ++i;
+
+    BOOST_REQUIRE(i != m.pods().end());
+
+    dogen::cpp::transformer t(m);
+    const auto p(t.transform(i->second));
+    BOOST_LOG_SEV(lg, debug) << "class: " << p;
+
+    BOOST_CHECK(p.all_properties().size() == 1);
+    BOOST_CHECK(p.properties().size() == 1);
+
+    const auto type(p.properties().begin()->type());
+    BOOST_CHECK(check_name(type.identifiable_name()));
+    BOOST_CHECK(check_name(type.complete_identifiable_name()));
+    BOOST_CHECK(!type.is_enumeration());
+    BOOST_CHECK(type.is_primitive());
+    BOOST_CHECK(!type.is_char_like());
+    BOOST_CHECK(type.is_int_like());
+    BOOST_CHECK(!type.is_string_like());
+    BOOST_CHECK(!type.is_optional_like());
+    BOOST_CHECK(!type.is_pair());
+    BOOST_CHECK(!type.is_variant_like());
+    BOOST_CHECK(!type.is_filesystem_path());
+    BOOST_CHECK(!type.is_date());
+    BOOST_CHECK(!type.is_ptime());
+    BOOST_CHECK(!type.is_time_duration());
+    BOOST_CHECK(!type.is_sequence_container());
+    BOOST_CHECK(!type.is_associative_container());
+    BOOST_CHECK(!type.is_smart_pointer());
+    BOOST_CHECK(type.children().empty());
+
+    BOOST_CHECK(is_type_zero(p.name()));
+    BOOST_CHECK(!p.documentation().empty());
+    BOOST_CHECK(p.namespaces().size() == 1);
+    BOOST_CHECK(is_model_zero(p.namespaces().back()));
+    BOOST_CHECK(p.has_primitive_properties());
+    BOOST_CHECK(!p.requires_stream_manipulators());
+    BOOST_CHECK(!p.requires_manual_move_constructor());
+    BOOST_CHECK(p.requires_manual_default_constructor());
+    BOOST_CHECK(p.parents().empty());
+    BOOST_CHECK(!p.is_parent());
+    BOOST_CHECK(p.original_parent_name().empty());
+    BOOST_CHECK(p.original_parent_name_qualified().empty());
+    BOOST_CHECK(p.leaves().empty());
+    BOOST_CHECK(p.implementation_specific_parameters().empty());
+    BOOST_CHECK(!p.is_comparable());
+    BOOST_CHECK(!p.is_visitable());
+    BOOST_CHECK(!p.is_immutable());
+    BOOST_CHECK(!p.is_original_parent_visitable());
+}
+
+BOOST_AUTO_TEST_CASE(transforming_pod_with_boost_variant_property_results_in_expected_class_info) {
+    SETUP_TEST_LOG_SOURCE("transforming_pod_boost_variant_with_property_results_in_expected_class_info");
+
+    auto pt(mock_model_factory::property_types::boost_variant);
+    auto m(mock_model_factory::pod_with_property(pt));
+    BOOST_LOG_SEV(lg, debug) << "model: " << m;
+
+    auto i(m.pods().begin());
+    if (!is_type_zero(i->first.type_name()) && i != m.pods().end())
+        ++i;
+
+    BOOST_REQUIRE(i != m.pods().end());
+
+    dogen::cpp::transformer t(m);
+    const auto p(t.transform(i->second));
+    BOOST_LOG_SEV(lg, debug) << "class: " << p;
+
+    BOOST_CHECK(p.all_properties().size() == 1);
+    BOOST_CHECK(p.properties().size() == 1);
+
+    const auto type(p.properties().begin()->type());
+    BOOST_CHECK(check_scoped_name(type.name()));
+    BOOST_CHECK(check_scoped_name(type.complete_name()));
+    BOOST_CHECK(check_name(type.identifiable_name()));
+    BOOST_CHECK(check_name(type.complete_identifiable_name()));
+    BOOST_CHECK(!type.is_enumeration());
+    BOOST_CHECK(!type.is_primitive());
+    BOOST_CHECK(!type.is_char_like());
+    BOOST_CHECK(!type.is_int_like());
+    BOOST_CHECK(!type.is_string_like());
+    BOOST_CHECK(!type.is_optional_like());
+    BOOST_CHECK(!type.is_pair());
+    BOOST_CHECK(type.is_variant_like());
+    BOOST_CHECK(!type.is_filesystem_path());
+    BOOST_CHECK(!type.is_date());
+    BOOST_CHECK(!type.is_ptime());
+    BOOST_CHECK(!type.is_time_duration());
+    BOOST_CHECK(!type.is_sequence_container());
+    BOOST_CHECK(!type.is_associative_container());
+    BOOST_CHECK(!type.is_smart_pointer());
+    BOOST_CHECK(type.children().size() == 2);
+
+    BOOST_CHECK(is_type_zero(p.name()));
+    BOOST_CHECK(!p.documentation().empty());
+    BOOST_CHECK(p.namespaces().size() == 1);
+    BOOST_CHECK(is_model_zero(p.namespaces().back()));
+    BOOST_CHECK(!p.has_primitive_properties());
+    BOOST_CHECK(!p.requires_stream_manipulators());
+    BOOST_CHECK(p.requires_manual_move_constructor());
+    BOOST_CHECK(!p.requires_manual_default_constructor());
+    BOOST_CHECK(p.parents().empty());
+    BOOST_CHECK(!p.is_parent());
+    BOOST_CHECK(p.original_parent_name().empty());
+    BOOST_CHECK(p.original_parent_name_qualified().empty());
+    BOOST_CHECK(p.leaves().empty());
+    BOOST_CHECK(p.implementation_specific_parameters().empty());
+    BOOST_CHECK(!p.is_comparable());
+    BOOST_CHECK(!p.is_visitable());
+    BOOST_CHECK(!p.is_immutable());
+    BOOST_CHECK(!p.is_original_parent_visitable());
+}
+
+BOOST_AUTO_TEST_CASE(transforming_with_parent_results_in_expected_class_info) {
+    SETUP_TEST_LOG_SOURCE("transforming_with_parent_results_in_expected_class_info");
+
+    auto m(mock_model_factory::pod_with_parent_in_the_same_model(true));
+    BOOST_LOG_SEV(lg, debug) << "model: " << m;
+
+    dogen::cpp::transformer t(m);
+    dogen::cpp::class_info p1;
+    bool found_one(false);
+    for (const auto& pair : m.pods()) {
+        if (is_type_one(pair.first.type_name())) {
+            found_one = true;
+            p1 = t.transform(pair.second);
+            BOOST_LOG_SEV(lg, debug) << "class 1: " << p1;
+
+            BOOST_CHECK(is_type_one(p1.name()));
+            BOOST_CHECK(p1.all_properties().size() == 1);
+            BOOST_CHECK(p1.properties().size() == 1);
+            BOOST_CHECK(p1.parents().empty());
+            BOOST_CHECK(!p1.is_parent());
+            BOOST_CHECK(p1.original_parent_name().empty());
+            BOOST_CHECK(p1.original_parent_name_qualified().empty());
+            BOOST_CHECK(p1.leaves().size() == 1);
+            BOOST_CHECK(p1.implementation_specific_parameters().empty());
+            BOOST_CHECK(!p1.is_comparable());
+            BOOST_CHECK(!p1.is_visitable());
+            BOOST_CHECK(!p1.is_immutable());
+            BOOST_CHECK(!p1.is_original_parent_visitable());
+        }
+    }
+    BOOST_CHECK(found_one);
+
+    bool found_zero(false);
+    for (const auto& pair : m.pods()) {
+        if (is_type_zero(pair.first.type_name())) {
+            found_zero = true;
+            const auto p(t.transform(pair.second, p1, p1));
+            BOOST_LOG_SEV(lg, debug) << "class 0: " << p;
+
+            BOOST_CHECK(is_type_zero(p.name()));
+            BOOST_CHECK(p.all_properties().size() == 2);
+            BOOST_CHECK(p.properties().size() == 1);
+            BOOST_CHECK(p.parents().size() == 1);
+            BOOST_CHECK(!p.is_parent());
+            BOOST_CHECK(is_type_one(p.parents().front().name()));
+            BOOST_CHECK(is_type_one(p.original_parent_name()));
+            BOOST_CHECK(!p.original_parent_name_qualified().empty());
+            BOOST_CHECK(p.leaves().empty());
+            BOOST_CHECK(p.implementation_specific_parameters().empty());
+            BOOST_CHECK(!p.is_comparable());
+            BOOST_CHECK(!p.is_visitable());
+            BOOST_CHECK(!p.is_immutable());
+            BOOST_CHECK(!p.is_original_parent_visitable());
+        }
+    }
+    BOOST_CHECK(found_zero);
+}
+
+BOOST_AUTO_TEST_CASE(supplying_parent_class_info_for_type_without_parent_throws) {
+    SETUP_TEST_LOG_SOURCE("supplying_parent_class_info_for_type_without_parent_throws");
+
+    const auto m(mock_model_factory::build_single_type_model());
+    BOOST_LOG_SEV(lg, debug) << "model: " << m;
+    BOOST_REQUIRE(m.pods().size() == 1);
+
+    dogen::cpp::transformer t(m);
+    const auto pod0(m.pods().begin()->second);
+    const auto p(t.transform(pod0));
+
+    using dogen::cpp::transformation_error;
+    contains_checker<transformation_error> c(unexpected_parent_info);
+    BOOST_CHECK_EXCEPTION(t.transform(pod0, p, p), transformation_error, c);
+}
+
+BOOST_AUTO_TEST_CASE(not_supplying_parent_class_info_for_type_with_parent_throws) {
+    SETUP_TEST_LOG_SOURCE("not_supplying_parent_class_info_for_type_with_parent_throws");
+
+    auto m(mock_model_factory::pod_with_parent_in_the_same_model(true));
+    BOOST_LOG_SEV(lg, debug) << "model: " << m;
+    BOOST_REQUIRE(m.pods().size() == 2);
+
+    dogen::cpp::transformer t(m);
+    bool found_zero(false);
+    for (const auto& pair : m.pods()) {
+        if (is_type_zero(pair.first.type_name())) {
+            found_zero = true;
+            using dogen::cpp::transformation_error;
+            contains_checker<transformation_error> c(no_parent_info);
+            const auto p(pair.second);
+            BOOST_CHECK_EXCEPTION(t.transform(p), transformation_error, c);
+        }
+    }
+    BOOST_CHECK(found_zero);
+}
+
+BOOST_AUTO_TEST_CASE(not_supplying_original_parent_class_info_for_type_with_parent_throws) {
+    SETUP_TEST_LOG_SOURCE("not_supplying_original_parent_class_info_for_type_with_parent_throws");
+
+    auto m(mock_model_factory::pod_with_parent_in_the_same_model(true));
+    BOOST_LOG_SEV(lg, debug) << "model: " << m;
+
+    dogen::cpp::transformer t(m);
+    dogen::cpp::class_info p1;
+    bool found_one(false);
+    for (const auto& pair : m.pods()) {
+        if (is_type_one(pair.first.type_name())) {
+            found_one = true;
+            p1 = t.transform(pair.second);
+            BOOST_LOG_SEV(lg, debug) << "class 1: " << p1;
+        }
+    }
+    BOOST_CHECK(found_one);
+
+    bool found_zero(false);
+    for (const auto& pair : m.pods()) {
+        if (is_type_zero(pair.first.type_name())) {
+            found_zero = true;
+            using dogen::cpp::transformation_error;
+            contains_checker<transformation_error> c(no_parent_info);
+            const auto p(pair.second);
+            BOOST_CHECK_EXCEPTION(t.transform(p, p1), transformation_error, c);
+        }
+    }
+    BOOST_CHECK(found_zero);
 }
 
 BOOST_AUTO_TEST_SUITE_END()

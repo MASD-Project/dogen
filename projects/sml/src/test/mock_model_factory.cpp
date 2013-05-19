@@ -381,10 +381,25 @@ model mock_model_factory::pod_with_missing_property_type() {
     return r;
 }
 
-model mock_model_factory::pod_with_parent_in_the_same_model() {
+model mock_model_factory::pod_with_parent_in_the_same_model(bool add_property) {
     const std::string mn(model_name(0));
+
     pod pod0(mock_pod(0, mn));
+    if (add_property) {
+        property p;
+        p.name(property_name(0));
+        p.type_name(mock_qname(property_types::unsigned_int));
+        pod0.properties().push_back(p);
+    }
+
     pod pod1(mock_pod(1, mn));
+    if (add_property) {
+        property p;
+        p.name(property_name(1));
+        p.type_name(mock_qname(property_types::unsigned_int));
+        pod1.properties().push_back(p);
+    }
+
     pod0.parent_name(pod1.name());
     pod0.original_parent_name(pod1.name());
     pod1.is_parent(true);

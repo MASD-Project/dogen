@@ -110,7 +110,7 @@ public:
     /**
      * @brief Scenario: pod with parent in current model.
      */
-    static model pod_with_parent_in_the_same_model();
+    static model pod_with_parent_in_the_same_model(bool add_property = false);
 
     /**
      * @brief Scenario: pod with missing parent in current model.

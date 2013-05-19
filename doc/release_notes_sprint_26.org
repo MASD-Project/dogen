@@ -10,13 +10,13 @@ This file contains all stories that were closed during sprint 26.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-05-19 Sun 13:13]
+Clock summary at [2013-05-19 Sun 21:17]
 
 | Headline                                                                     | Time    |       |       |
 |------------------------------------------------------------------------------+---------+-------+-------|
-| *Total time*                                                                 | *35:05* |       |       |
+| *Total time*                                                                 | *37:02* |       |       |
 |------------------------------------------------------------------------------+---------+-------+-------|
-| Development Stories Implemented                                              |         | 35:05 |       |
+| Development Stories Implemented                                              |         | 37:02 |       |
 | IMPLEMENTATION Release notes and backlog grooming                            |         |       |  1:08 |
 | COMPLETED Fix build break on visitor tests                                   |         |       |  0:32 |
 | COMPLETED Remove workflow aspects from transformer                           |         |       |  2:23 |
@@ -29,7 +29,7 @@ Clock summary at [2013-05-19 Sun 13:13]
 | COMPLETED Refactor SML diagram                                               |         |       |  1:04 |
 | COMPLETED Add code generation links to =README=                              |         |       |  0:25 |
 | COMPLETED Remove view model namespace and postfix                            |         |       |  3:26 |
-| IMPLEMENTATION Clean up the SML to C++ transformer                           |         |       | 10:57 |
+| IMPLEMENTATION Clean up the SML to C++ transformer                           |         |       | 12:54 |
 | IMPLEMENTATION Move services into their own type                             |         |       |  3:22 |
 | IMPLEMENTATION Use explicit casting for versioned to unversioned conversions |         |       |  1:49 |
 | IMPLEMENTATION Add =extract_key= function                                    |         |       |  0:22 |
@@ -299,6 +299,8 @@ state.
      CLOCK: [2013-05-19 Sun 02:04]--[2013-05-19 Sun 02:22] =>  0:18
 
 **** IMPLEMENTATION Add support for pod transformation
+     CLOCK: [2013-05-19 Sun 20:32]--[2013-05-19 Sun 21:17] =>  0:45
+     CLOCK: [2013-05-19 Sun 19:20]--[2013-05-19 Sun 20:32] =>  1:12
      CLOCK: [2013-05-19 Sun 12:59]--[2013-05-19 Sun 13:12] =>  0:13
      CLOCK: [2013-05-19 Sun 12:12]--[2013-05-19 Sun 12:38] =>  0:26
      CLOCK: [2013-05-19 Sun 02:35]--[2013-05-19 Sun 03:33] =>  0:58

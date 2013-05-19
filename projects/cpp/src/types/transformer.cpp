@@ -77,6 +77,8 @@ const std::string uint64_t_type("std::uint64_t");
 const std::string pod_not_found("pod not found in pod container: ");
 const std::string parent_info_not_supplied(
     "Type has a parent but no parent info supplied: ");
+const std::string parent_info_supplied(
+    "Type does not have a parent parent info was supplied: ");
 
 bool is_char_like(const std::string& type_name) {
     return
@@ -375,11 +377,17 @@ class_info transformer::
 transform(const sml::pod& p, const optional_class_info pci,
     const optional_class_info opci) const {
 
-    if (p.parent_name() && (!pci || opci)) {
+    if (p.parent_name() && (!pci || !opci)) {
         BOOST_LOG_SEV(lg, error) << parent_info_not_supplied
                                  << p.name().type_name();
         BOOST_THROW_EXCEPTION(
             transformation_error(parent_info_not_supplied +
+                p.name().type_name()));
+    } else if (!p.parent_name() && (pci || opci)) {
+        BOOST_LOG_SEV(lg, error) << parent_info_supplied
+                                 << p.name().type_name();
+        BOOST_THROW_EXCEPTION(
+            transformation_error(parent_info_supplied +
                 p.name().type_name()));
     }
 
