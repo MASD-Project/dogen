@@ -272,6 +272,7 @@ model mock_model_factory::build_multi_type_model(const unsigned int n,
 
     model r;
     r.name(model_name(n));
+    r.documentation(documentation);
 
     std::list<std::string> pp;
     for (unsigned int i(0); i < pkg_n; ++i) {

@@ -201,4 +201,20 @@ BOOST_AUTO_TEST_CASE(transforming_package_results_in_expected_package_info) {
     BOOST_CHECK(is_package_zero(p1.namespaces().front()));
 }
 
+BOOST_AUTO_TEST_CASE(transforming_model_results_in_expected_package_info) {
+    SETUP_TEST_LOG_SOURCE("transforming_model_results_in_expected_package_info");
+
+    const auto mt(dogen::sml::meta_types::pod);
+    const auto m(mock_model_factory::build_single_type_model_in_package(0, mt));
+    BOOST_LOG_SEV(lg, debug) << "model: " << m;
+
+    dogen::cpp::transformer t;
+    const auto p(t.transform(m));
+    BOOST_LOG_SEV(lg, debug) << "package: " << p;
+
+    BOOST_CHECK(!p.documentation().empty());
+    BOOST_CHECK(p.namespaces().size() == 1);
+    BOOST_CHECK(is_model_zero(p.namespaces().front()));
+}
+
 BOOST_AUTO_TEST_SUITE_END()

@@ -26,6 +26,7 @@
 #endif
 
 #include <list>
+#include "dogen/sml/types/model.hpp"
 #include "dogen/sml/types/qname.hpp"
 #include "dogen/sml/types/package.hpp"
 #include "dogen/sml/types/exception.hpp"
@@ -72,6 +73,17 @@ public:
      * @brief Transforms a SML package into a namespace info.
      */
     namespace_info transform(const sml::package& e) const;
+
+    /**
+     * @brief Transforms a SML model into a namespace info.
+     *
+     * Note that this method is very misleading - we are not
+     * transforming the entire model, only the package aspect of a
+     * model.
+     *
+     * @todo Create an attribute of type package in model.
+     */
+    namespace_info transform(const sml::model& e) const;
 };
 
 } }

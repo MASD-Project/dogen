@@ -98,7 +98,23 @@ namespace_info transformer::transform(const sml::package& p) const {
     BOOST_LOG_SEV(lg, debug) << "Transformed package: " << p.name();
 
     return r;
+}
 
+namespace_info transformer::transform(const sml::model& m) const {
+    BOOST_LOG_SEV(lg, debug) << "Transforming model: " << m.name();
+
+    namespace_info r;
+    r.documentation(m.documentation());
+
+    sml::qname qn;
+    qn.type_name(m.name());
+    qn.external_package_path(m.external_package_path());
+    qn.meta_type(sml::meta_types::package);
+    r.namespaces(transform(qn));
+
+    BOOST_LOG_SEV(lg, debug) << "Transformed model: " << m.name();
+
+    return r;
 }
 
 } }
