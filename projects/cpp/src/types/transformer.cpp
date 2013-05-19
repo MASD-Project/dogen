@@ -88,4 +88,17 @@ exception_info transformer::transform(const sml::exception& e) const {
     return r;
 }
 
+namespace_info transformer::transform(const sml::package& p) const {
+    BOOST_LOG_SEV(lg, debug) << "Transforming package: " << p.name();
+
+    namespace_info r;
+    r.documentation(p.documentation());
+    r.namespaces(transform(p.name()));
+
+    BOOST_LOG_SEV(lg, debug) << "Transformed package: " << p.name();
+
+    return r;
+
+}
+
 } }

@@ -290,6 +290,9 @@ state.
      CLOSED: [2013-05-19 Sun 00:46]
      CLOCK: [2013-05-19 Sun 00:38]--[2013-05-19 Sun 00:46] =>  0:08
 
+**** IMPLEMENTATION Add support for package transformation
+     CLOCK: [2013-05-19 Sun 00:47]--[2013-05-19 Sun 01:10] =>  0:23
+
 *** IMPLEMENTATION Move services into their own type                  :story:
     CLOCK: [2013-05-12 Sun 19:15]--[2013-05-12 Sun 19:30] =>  0:15
     CLOCK: [2013-05-12 Sun 18:55]--[2013-05-12 Sun 19:15] =>  0:20

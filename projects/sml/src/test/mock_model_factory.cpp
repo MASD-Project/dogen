@@ -273,6 +273,21 @@ model mock_model_factory::build_multi_type_model(const unsigned int n,
     model r;
     r.name(model_name(n));
 
+    std::list<std::string> pp;
+    for (unsigned int i(0); i < pkg_n; ++i) {
+        qname qn;
+        qn.type_name(package_name(i));
+        qn.package_path(pp);
+        qn.meta_type(dogen::sml::meta_types::package);
+
+        package p;
+        p.name(qn);
+        p.documentation(documentation);
+        r.packages().insert(std::make_pair(p.name(), p));
+
+        pp.push_back(package_name(i));
+    }
+
     switch (mt) {
     case meta_types::pod:
         for (unsigned int i(0); i < type_n; ++i) {

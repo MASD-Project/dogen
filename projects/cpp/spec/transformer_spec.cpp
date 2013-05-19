@@ -171,4 +171,34 @@ BOOST_AUTO_TEST_CASE(transforming_exception_in_package_results_in_expected_excep
     BOOST_CHECK(is_package_one(e1.namespaces().back()));
 }
 
+BOOST_AUTO_TEST_CASE(transforming_package_results_in_expected_package_info) {
+    SETUP_TEST_LOG_SOURCE("transforming_package_results_in_expected_package_info");
+
+    const auto mt(dogen::sml::meta_types::pod);
+    const auto m0(
+        mock_model_factory::build_single_type_model_in_package(0, mt, 1));
+    BOOST_LOG_SEV(lg, debug) << "model 0: " << m0;
+    BOOST_REQUIRE(m0.packages().size() == 1);
+
+    dogen::cpp::transformer t;
+    const auto p0(t.transform(m0.packages().begin()->second));
+    BOOST_LOG_SEV(lg, debug) << "package 0: " << p0;
+
+    BOOST_CHECK(!p0.documentation().empty());
+    BOOST_CHECK(p0.namespaces().size() == 1);
+    BOOST_CHECK(is_package_zero(p0.namespaces().front()));
+
+    const auto m1(
+        mock_model_factory::build_single_type_model_in_package(0, mt, 2));
+    BOOST_LOG_SEV(lg, debug) << "model 1: " << m1;
+    BOOST_REQUIRE(m1.packages().size() == 2);
+
+    const auto p1(t.transform(m1.packages().begin()->second));
+    BOOST_LOG_SEV(lg, debug) << "package 1: " << p1;
+
+    BOOST_CHECK(!p1.documentation().empty());
+    BOOST_CHECK(p1.namespaces().size() == 2);
+    BOOST_CHECK(is_package_zero(p1.namespaces().front()));
+}
+
 BOOST_AUTO_TEST_SUITE_END()
