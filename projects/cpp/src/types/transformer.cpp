@@ -373,9 +373,9 @@ transformer::transform(const sml::property p, const bool is_immutable,
 
 class_info transformer::
 transform(const sml::pod& p, const optional_class_info pci,
-    const optional_class_info /*opci*/) const {
+    const optional_class_info opci) const {
 
-    if (p.parent_name() && !pci) {
+    if (p.parent_name() && (!pci || opci)) {
         BOOST_LOG_SEV(lg, error) << parent_info_not_supplied
                                  << p.name().type_name();
         BOOST_THROW_EXCEPTION(
@@ -384,22 +384,57 @@ transform(const sml::pod& p, const optional_class_info pci,
     }
 
     class_info r;
-    std::list<property_info> all_props;
+    r.name(p.name().type_name());
+    r.namespaces(transform(p.name()));
+    r.documentation(p.documentation());
+    r.is_immutable(p.is_immutable());
+    r.is_visitable(p.is_visitable());
+    r.implementation_specific_parameters(
+        p.implementation_specific_parameters());
+
     if (p.parent_name()) {
         parent_info pi;
         pi.name(pci->name());
         pi.properties(pci->all_properties());
         pi.namespaces(pci->namespaces());
         r.parents().push_back(pi);
-
-        all_props = pci->all_properties();
+        r.all_properties(pci->all_properties());
     }
 
-    r.name(p.name().type_name());
-    r.namespaces(transform(p.name()));
-    r.documentation(p.documentation());
-    r.is_immutable(p.is_immutable());
-    r.is_visitable(p.is_visitable());
+    if (opci) {
+        std::list<std::string> ns(opci->namespaces());
+        ns.push_back(opci->name());
+
+        using boost::join;
+        r.original_parent_name_qualified(join(ns, namespace_separator));
+        r.original_parent_name(opci->name());
+        r.is_original_parent_visitable(opci->is_visitable());
+    }
+
+    for(const auto& prop : p.properties()) {
+        const auto tuple(transform(prop, p.is_immutable(), p.is_fluent()));
+        r.properties().push_back(std::get<0>(tuple));
+        r.all_properties().push_back(std::get<0>(tuple));
+
+        if (std::get<1>(tuple))
+            r.has_primitive_properties(true);
+
+        if (std::get<2>(tuple))
+            r.requires_stream_manipulators(true);
+
+        if (std::get<3>(tuple))
+            r.requires_manual_move_constructor(true);
+
+        if (std::get<4>(tuple))
+            r.requires_manual_default_constructor(true);
+    }
+
+    for (const auto l : p.leaves()) {
+        std::list<std::string> leaf_name(transform(l));
+        leaf_name.push_back(l.type_name());
+        using boost::join;
+        r.leaves().push_back(join(leaf_name, namespace_separator));
+    }
 
     return r;
 }

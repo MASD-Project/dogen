@@ -299,6 +299,7 @@ state.
      CLOCK: [2013-05-19 Sun 02:04]--[2013-05-19 Sun 02:22] =>  0:18
 
 **** IMPLEMENTATION Add support for pod transformation
+     CLOCK: [2013-05-19 Sun 12:12]--[2013-05-19 Sun 12:38] =>  0:26
      CLOCK: [2013-05-19 Sun 02:35]--[2013-05-19 Sun 03:33] =>  0:58
      CLOCK: [2013-05-19 Sun 02:22]--[2013-05-19 Sun 02:35] =>  0:13
 
