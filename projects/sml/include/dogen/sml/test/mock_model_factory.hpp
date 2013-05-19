@@ -132,7 +132,8 @@ public:
      * @brief Scenario: pod with three levels deep in inheritance tree
      * in current model.
      */
-    static model pod_with_third_degree_parent_in_same_model();
+    static model pod_with_third_degree_parent_in_same_model(
+        bool add_property = false);
 
     /**
      * @brief Scenario: pod with three levels deep in inheritance tree

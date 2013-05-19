@@ -41,12 +41,24 @@ const std::string external_package("some_package");
 const std::string no_parent_info("Type has a parent ");
 const std::string unexpected_parent_info("Type does not have a parent");
 
+bool ends_with_type_zero(const std::string& n) {
+    return boost::ends_with(n, mock_model_factory::type_name(0));
+}
+
 bool is_type_zero(const std::string& n) {
     return mock_model_factory::type_name(0) == n;
 }
 
 bool is_type_one(const std::string& n) {
     return mock_model_factory::type_name(1) == n;
+}
+
+bool is_type_two(const std::string& n) {
+    return mock_model_factory::type_name(2) == n;
+}
+
+bool is_type_three(const std::string& n) {
+    return mock_model_factory::type_name(3) == n;
 }
 
 bool is_package_zero(const std::string& n) {
@@ -581,8 +593,8 @@ BOOST_AUTO_TEST_CASE(transforming_pod_with_boost_variant_property_results_in_exp
     BOOST_CHECK(!p.is_original_parent_visitable());
 }
 
-BOOST_AUTO_TEST_CASE(transforming_with_parent_results_in_expected_class_info) {
-    SETUP_TEST_LOG_SOURCE("transforming_with_parent_results_in_expected_class_info");
+BOOST_AUTO_TEST_CASE(transforming_pod_with_parent_results_in_expected_class_info) {
+    SETUP_TEST_LOG_SOURCE("transforming_pod_with_parent_results_in_expected_class_info");
 
     auto m(mock_model_factory::pod_with_parent_in_the_same_model(true));
     BOOST_LOG_SEV(lg, debug) << "model: " << m;
@@ -600,14 +612,10 @@ BOOST_AUTO_TEST_CASE(transforming_with_parent_results_in_expected_class_info) {
             BOOST_CHECK(p1.all_properties().size() == 1);
             BOOST_CHECK(p1.properties().size() == 1);
             BOOST_CHECK(p1.parents().empty());
-            BOOST_CHECK(!p1.is_parent());
+            BOOST_CHECK(p1.is_parent());
             BOOST_CHECK(p1.original_parent_name().empty());
             BOOST_CHECK(p1.original_parent_name_qualified().empty());
             BOOST_CHECK(p1.leaves().size() == 1);
-            BOOST_CHECK(p1.implementation_specific_parameters().empty());
-            BOOST_CHECK(!p1.is_comparable());
-            BOOST_CHECK(!p1.is_visitable());
-            BOOST_CHECK(!p1.is_immutable());
             BOOST_CHECK(!p1.is_original_parent_visitable());
         }
     }
@@ -629,10 +637,6 @@ BOOST_AUTO_TEST_CASE(transforming_with_parent_results_in_expected_class_info) {
             BOOST_CHECK(is_type_one(p.original_parent_name()));
             BOOST_CHECK(!p.original_parent_name_qualified().empty());
             BOOST_CHECK(p.leaves().empty());
-            BOOST_CHECK(p.implementation_specific_parameters().empty());
-            BOOST_CHECK(!p.is_comparable());
-            BOOST_CHECK(!p.is_visitable());
-            BOOST_CHECK(!p.is_immutable());
             BOOST_CHECK(!p.is_original_parent_visitable());
         }
     }
@@ -702,6 +706,99 @@ BOOST_AUTO_TEST_CASE(not_supplying_original_parent_class_info_for_type_with_pare
             contains_checker<transformation_error> c(no_parent_info);
             const auto p(pair.second);
             BOOST_CHECK_EXCEPTION(t.transform(p, p1), transformation_error, c);
+        }
+    }
+    BOOST_CHECK(found_zero);
+}
+
+BOOST_AUTO_TEST_CASE(transforming_third_degree_pod_results_in_expected_class_info) {
+    SETUP_TEST_LOG_SOURCE("transforming_third_degree_pod_results_in_expected_class_info");
+
+    auto m(
+        mock_model_factory::pod_with_third_degree_parent_in_same_model(true));
+    BOOST_LOG_SEV(lg, debug) << "model: " << m;
+
+    dogen::cpp::transformer t(m);
+    dogen::cpp::class_info p3;
+    bool found_three(false);
+    for (const auto& pair : m.pods()) {
+        if (is_type_three(pair.first.type_name())) {
+            found_three = true;
+            p3 = t.transform(pair.second);
+            BOOST_LOG_SEV(lg, debug) << "class 3: " << p3;
+
+            BOOST_CHECK(is_type_three(p3.name()));
+            BOOST_CHECK(p3.all_properties().size() == 1);
+            BOOST_CHECK(p3.properties().size() == 1);
+            BOOST_CHECK(p3.parents().empty());
+            BOOST_CHECK(p3.is_parent());
+            BOOST_CHECK(p3.original_parent_name().empty());
+            BOOST_CHECK(p3.original_parent_name_qualified().empty());
+            BOOST_CHECK(p3.leaves().size() == 1);
+            BOOST_CHECK(ends_with_type_zero(p3.leaves().front()));
+        }
+    }
+    BOOST_CHECK(found_three);
+
+    dogen::cpp::class_info p2;
+    bool found_two(false);
+    for (const auto& pair : m.pods()) {
+        if (is_type_two(pair.first.type_name())) {
+            found_two = true;
+            p2 = t.transform(pair.second, p3, p3);
+            BOOST_LOG_SEV(lg, debug) << "class 2: " << p2;
+
+            BOOST_CHECK(is_type_two(p2.name()));
+            BOOST_CHECK(p2.all_properties().size() == 2);
+            BOOST_CHECK(p2.properties().size() == 1);
+            BOOST_CHECK(!p2.parents().empty());
+            BOOST_CHECK(p2.is_parent());
+            BOOST_CHECK(is_type_three(p2.original_parent_name()));
+            BOOST_CHECK(!p2.original_parent_name_qualified().empty());
+            BOOST_CHECK(p2.leaves().size() == 1);
+            BOOST_CHECK(ends_with_type_zero(p3.leaves().front()));
+        }
+    }
+    BOOST_CHECK(found_two);
+
+    dogen::cpp::class_info p1;
+    bool found_one(false);
+    for (const auto& pair : m.pods()) {
+        if (is_type_one(pair.first.type_name())) {
+            found_one = true;
+            p1 = t.transform(pair.second, p2, p3);
+            BOOST_LOG_SEV(lg, debug) << "class 1: " << p1;
+
+            BOOST_CHECK(is_type_one(p1.name()));
+            BOOST_CHECK(p1.all_properties().size() == 3);
+            BOOST_CHECK(p1.properties().size() == 1);
+            BOOST_CHECK(p1.parents().size() == 1);
+            BOOST_CHECK(p1.is_parent());
+            BOOST_CHECK(is_type_two(p1.parents().front().name()));
+            BOOST_CHECK(is_type_three(p1.original_parent_name()));
+            BOOST_CHECK(!p1.original_parent_name_qualified().empty());
+            BOOST_CHECK(p1.leaves().size() == 1);
+            BOOST_CHECK(ends_with_type_zero(p3.leaves().front()));
+        }
+    }
+    BOOST_CHECK(found_one);
+
+    bool found_zero(false);
+    for (const auto& pair : m.pods()) {
+        if (is_type_zero(pair.first.type_name())) {
+            found_zero = true;
+            const auto p(t.transform(pair.second, p1, p3));
+            BOOST_LOG_SEV(lg, debug) << "class 0: " << p;
+
+            BOOST_CHECK(is_type_zero(p.name()));
+            BOOST_CHECK(p.all_properties().size() == 4);
+            BOOST_CHECK(p.properties().size() == 1);
+            BOOST_CHECK(p.parents().size() == 1);
+            BOOST_CHECK(!p.is_parent());
+            BOOST_CHECK(is_type_one(p.parents().front().name()));
+            BOOST_CHECK(is_type_three(p.original_parent_name()));
+            BOOST_CHECK(!p.original_parent_name_qualified().empty());
+            BOOST_CHECK(p.leaves().empty());
         }
     }
     BOOST_CHECK(found_zero);

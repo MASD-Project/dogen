@@ -397,6 +397,7 @@ transform(const sml::pod& p, const optional_class_info pci,
     r.documentation(p.documentation());
     r.is_immutable(p.is_immutable());
     r.is_visitable(p.is_visitable());
+    r.is_parent(p.is_parent());
     r.implementation_specific_parameters(
         p.implementation_specific_parameters());
 
