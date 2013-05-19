@@ -10,13 +10,13 @@ This file contains all stories that were closed during sprint 26.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-05-19 Sun 00:46]
+Clock summary at [2013-05-19 Sun 02:20]
 
 | Headline                                                                     | Time    |       |      |
 |------------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                                 | *32:23* |       |      |
+| *Total time*                                                                 | *33:15* |       |      |
 |------------------------------------------------------------------------------+---------+-------+------|
-| Development Stories Implemented                                              |         | 32:23 |      |
+| Development Stories Implemented                                              |         | 33:15 |      |
 | IMPLEMENTATION Release notes and backlog grooming                            |         |       | 1:08 |
 | COMPLETED Fix build break on visitor tests                                   |         |       | 0:32 |
 | COMPLETED Remove workflow aspects from transformer                           |         |       | 2:23 |
@@ -29,7 +29,7 @@ Clock summary at [2013-05-19 Sun 00:46]
 | COMPLETED Refactor SML diagram                                               |         |       | 1:04 |
 | COMPLETED Add code generation links to =README=                              |         |       | 0:25 |
 | COMPLETED Remove view model namespace and postfix                            |         |       | 3:26 |
-| IMPLEMENTATION Clean up the SML to C++ transformer                           |         |       | 8:15 |
+| IMPLEMENTATION Clean up the SML to C++ transformer                           |         |       | 9:07 |
 | IMPLEMENTATION Move services into their own type                             |         |       | 3:22 |
 | IMPLEMENTATION Use explicit casting for versioned to unversioned conversions |         |       | 1:49 |
 | IMPLEMENTATION Add =extract_key= function                                    |         |       | 0:22 |
@@ -294,6 +294,9 @@ state.
      CLOSED: [2013-05-19 Sun 02:04]
      CLOCK: [2013-05-19 Sun 01:53]--[2013-05-19 Sun 02:04] =>  0:11
      CLOCK: [2013-05-19 Sun 00:47]--[2013-05-19 Sun 01:10] =>  0:23
+**** COMPLETED Add tests for external package path
+     CLOSED: [2013-05-19 Sun 02:18]
+     CLOCK: [2013-05-19 Sun 02:04]--[2013-05-19 Sun 02:22] =>  0:18
 
 *** IMPLEMENTATION Move services into their own type                  :story:
     CLOCK: [2013-05-12 Sun 19:15]--[2013-05-12 Sun 19:30] =>  0:15

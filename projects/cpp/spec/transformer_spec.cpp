@@ -33,6 +33,7 @@ namespace {
 const std::string empty;
 const std::string test_module("cpp");
 const std::string test_suite("transformer_spec");
+const std::string external_package("some_package");
 
 bool is_type_zero(const std::string& n) {
     return mock_model_factory::type_name(0) == n;
@@ -120,6 +121,25 @@ BOOST_AUTO_TEST_CASE(transforming_enumeration_in_package_results_in_expected_enu
     BOOST_CHECK(is_type_one(e1.enumerators().back().name()));
 }
 
+BOOST_AUTO_TEST_CASE(transforming_enumeration_in_external_package_results_in_expected_enumeration_info) {
+    SETUP_TEST_LOG_SOURCE("transforming_enumeration_in_external_package_results_in_expected_enumeration_info");
+
+    const auto mt(dogen::sml::meta_types::enumeration);
+    auto m(mock_model_factory::build_single_type_model_in_package(0, mt));
+    BOOST_REQUIRE(m.enumerations().size() == 1);
+    auto enumeration(m.enumerations().begin()->second);
+    enumeration.name().external_package_path().push_back(external_package);
+    BOOST_LOG_SEV(lg, debug) << "model: " << m;
+
+    dogen::cpp::transformer t;
+    const auto e(t.transform(enumeration));
+    BOOST_LOG_SEV(lg, debug) << "enumeration: " << e;
+
+    BOOST_CHECK(e.namespaces().size() == 2);
+    BOOST_CHECK(e.namespaces().front() == external_package);
+    BOOST_CHECK(is_model_zero(e.namespaces().back()));
+}
+
 BOOST_AUTO_TEST_CASE(transforming_exception_results_in_expected_exception_info) {
     SETUP_TEST_LOG_SOURCE("transforming_exception_results_in_expected_exception_info");
 
@@ -171,6 +191,25 @@ BOOST_AUTO_TEST_CASE(transforming_exception_in_package_results_in_expected_excep
     BOOST_CHECK(is_package_one(e1.namespaces().back()));
 }
 
+BOOST_AUTO_TEST_CASE(transforming_exception_in_external_package_results_in_expected_exception_info) {
+    SETUP_TEST_LOG_SOURCE("transforming_exception_in_external_package_results_in_expected_exception_info");
+
+    const auto mt(dogen::sml::meta_types::exception);
+    auto m(mock_model_factory::build_single_type_model_in_package(0, mt));
+    BOOST_REQUIRE(m.exceptions().size() == 1);
+    auto exception(m.exceptions().begin()->second);
+    exception.name().external_package_path().push_back(external_package);
+    BOOST_LOG_SEV(lg, debug) << "model: " << m;
+
+    dogen::cpp::transformer t;
+    const auto e(t.transform(exception));
+    BOOST_LOG_SEV(lg, debug) << "exception: " << e;
+
+    BOOST_CHECK(e.namespaces().size() == 2);
+    BOOST_CHECK(e.namespaces().front() == external_package);
+    BOOST_CHECK(is_model_zero(e.namespaces().back()));
+}
+
 BOOST_AUTO_TEST_CASE(transforming_package_results_in_expected_package_info) {
     SETUP_TEST_LOG_SOURCE("transforming_package_results_in_expected_package_info");
 
@@ -215,6 +254,33 @@ BOOST_AUTO_TEST_CASE(transforming_model_results_in_expected_package_info) {
     BOOST_CHECK(!p.documentation().empty());
     BOOST_CHECK(p.namespaces().size() == 1);
     BOOST_CHECK(is_model_zero(p.namespaces().front()));
+}
+
+BOOST_AUTO_TEST_CASE(transforming_package_in_external_package_results_in_expected_package_info) {
+    SETUP_TEST_LOG_SOURCE("transforming_package_in_external_package_results_in_expected_package_info");
+
+    const auto mt(dogen::sml::meta_types::pod);
+    auto m(mock_model_factory::build_single_type_model_in_package(0, mt, 1));
+    m.external_package_path().push_back(external_package);
+    BOOST_REQUIRE(m.packages().size() == 1);
+    auto package(m.packages().begin()->second);
+    package.name().external_package_path().push_back(external_package);
+    BOOST_LOG_SEV(lg, debug) << "model: " << m;
+
+    dogen::cpp::transformer t;
+    const auto p0(t.transform(package));
+    BOOST_LOG_SEV(lg, debug) << "package 0: " << p0;
+
+    BOOST_CHECK(p0.namespaces().size() == 2);
+    BOOST_CHECK(p0.namespaces().front() == external_package);
+    BOOST_CHECK(is_package_zero(p0.namespaces().back()));
+
+    const auto p1(t.transform(m));
+    BOOST_LOG_SEV(lg, debug) << "package 1: " << p1;
+
+    BOOST_CHECK(p1.namespaces().size() == 2);
+    BOOST_CHECK(p1.namespaces().front() == external_package);
+    BOOST_CHECK(is_model_zero(p1.namespaces().back()));
 }
 
 BOOST_AUTO_TEST_SUITE_END()
