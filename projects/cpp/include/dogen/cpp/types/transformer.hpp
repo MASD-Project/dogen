@@ -26,25 +26,37 @@
 #endif
 
 #include <list>
+#include <tuple>
+#include <boost/optional.hpp>
+#include "dogen/sml/types/pod.hpp"
 #include "dogen/sml/types/model.hpp"
 #include "dogen/sml/types/qname.hpp"
 #include "dogen/sml/types/package.hpp"
 #include "dogen/sml/types/exception.hpp"
 #include "dogen/sml/types/enumeration.hpp"
+#include "dogen/sml/types/nested_qname.hpp"
+#include "dogen/cpp/types/class_info.hpp"
 #include "dogen/cpp/types/namespace_info.hpp"
 #include "dogen/cpp/types/exception_info.hpp"
 #include "dogen/cpp/types/enumeration_info.hpp"
+#include "dogen/cpp/types/nested_type_info.hpp"
 
 namespace dogen {
 namespace cpp {
 
 class transformer {
 public:
-    transformer() = default;
+    transformer() = delete;
     transformer(const transformer&) = default;
     ~transformer() = default;
     transformer& operator=(const transformer&) = delete;
     transformer(transformer&& rhs) = default;
+
+public:
+    explicit transformer(const sml::model& m);
+
+public:
+    typedef boost::optional<const class_info> optional_class_info;
 
 private:
     /**
@@ -57,6 +69,34 @@ private:
      * @brief Transforms an SML enumerator to an enumerator info.
      */
     enumerator_info transform(const sml::enumerator& e) const;
+
+    /**
+     * @brief Transforms the SML nested qname into a nested type info.
+     */
+    void transform(const sml::nested_qname& nqn,
+        cpp::nested_type_info& nti, std::string& complete_name,
+        bool& requires_stream_manipulators) const;
+
+    /**
+     * @brief Transforms an SML property into a property info.
+     *
+     * The four Boolean values on the tuple work as follows:
+     *
+     * @li position 1: if true, the property has a top-level primitive
+     * type.
+     *
+     * @li position 2: if true, the property requires stream
+     * manipulators.
+     *
+     * @li position 3: if true, the property invalidates the compiler
+     * generated move constructor.
+     *
+     * @li position 4: if true, the property invalidates the compiler
+     * generated default constructor.
+     */
+    std::tuple<property_info, bool, bool, bool, bool>
+    transform(const sml::property p, const bool is_immutable,
+        const bool is_fluent) const;
 
 public:
     /**
@@ -72,7 +112,7 @@ public:
     /**
      * @brief Transforms a SML package into a namespace info.
      */
-    namespace_info transform(const sml::package& e) const;
+    namespace_info transform(const sml::package& p) const;
 
     /**
      * @brief Transforms a SML model into a namespace info.
@@ -83,7 +123,21 @@ public:
      *
      * @todo Create an attribute of type package in model.
      */
-    namespace_info transform(const sml::model& e) const;
+    namespace_info transform(const sml::model& m) const;
+
+    /**
+     * @brief Transform a SML pod into a class info.
+     *
+     * @param p pod to transform.
+     * @param pci if the pod has a parent, its class info.
+     * @param opci if the parent pod was not the root parent, the root parent.
+     */
+    class_info transform(const sml::pod& p,
+        const optional_class_info pci = boost::optional<const class_info>(),
+        const optional_class_info opci = optional_class_info()) const;
+
+private:
+    const sml::model& model_;
 };
 
 } }

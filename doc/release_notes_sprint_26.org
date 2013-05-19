@@ -10,29 +10,29 @@ This file contains all stories that were closed during sprint 26.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-05-19 Sun 02:20]
+Clock summary at [2013-05-19 Sun 03:33]
 
-| Headline                                                                     | Time    |       |      |
-|------------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                                 | *33:15* |       |      |
-|------------------------------------------------------------------------------+---------+-------+------|
-| Development Stories Implemented                                              |         | 33:15 |      |
-| IMPLEMENTATION Release notes and backlog grooming                            |         |       | 1:08 |
-| COMPLETED Fix build break on visitor tests                                   |         |       | 0:32 |
-| COMPLETED Remove workflow aspects from transformer                           |         |       | 2:23 |
-| COMPLETED Add tests for profiler                                             |         |       | 1:56 |
-| COMPLETED Re-implement key support                                           |         |       | 4:03 |
-| COMPLETED Add injector tests                                                 |         |       | 1:15 |
-| COMPLETED Add doxygen comments to keys and version                           |         |       | 0:10 |
-| COMPLETED Sort issues with SATA port in lorenz                               |         |       | 1:50 |
-| COMPLETED Add tests for aggregate root stereotype                            |         |       | 0:23 |
-| COMPLETED Refactor SML diagram                                               |         |       | 1:04 |
-| COMPLETED Add code generation links to =README=                              |         |       | 0:25 |
-| COMPLETED Remove view model namespace and postfix                            |         |       | 3:26 |
-| IMPLEMENTATION Clean up the SML to C++ transformer                           |         |       | 9:07 |
-| IMPLEMENTATION Move services into their own type                             |         |       | 3:22 |
-| IMPLEMENTATION Use explicit casting for versioned to unversioned conversions |         |       | 1:49 |
-| IMPLEMENTATION Add =extract_key= function                                    |         |       | 0:22 |
+| Headline                                                                     | Time    |       |       |
+|------------------------------------------------------------------------------+---------+-------+-------|
+| *Total time*                                                                 | *34:26* |       |       |
+|------------------------------------------------------------------------------+---------+-------+-------|
+| Development Stories Implemented                                              |         | 34:26 |       |
+| IMPLEMENTATION Release notes and backlog grooming                            |         |       |  1:08 |
+| COMPLETED Fix build break on visitor tests                                   |         |       |  0:32 |
+| COMPLETED Remove workflow aspects from transformer                           |         |       |  2:23 |
+| COMPLETED Add tests for profiler                                             |         |       |  1:56 |
+| COMPLETED Re-implement key support                                           |         |       |  4:03 |
+| COMPLETED Add injector tests                                                 |         |       |  1:15 |
+| COMPLETED Add doxygen comments to keys and version                           |         |       |  0:10 |
+| COMPLETED Sort issues with SATA port in lorenz                               |         |       |  1:50 |
+| COMPLETED Add tests for aggregate root stereotype                            |         |       |  0:23 |
+| COMPLETED Refactor SML diagram                                               |         |       |  1:04 |
+| COMPLETED Add code generation links to =README=                              |         |       |  0:25 |
+| COMPLETED Remove view model namespace and postfix                            |         |       |  3:26 |
+| IMPLEMENTATION Clean up the SML to C++ transformer                           |         |       | 10:18 |
+| IMPLEMENTATION Move services into their own type                             |         |       |  3:22 |
+| IMPLEMENTATION Use explicit casting for versioned to unversioned conversions |         |       |  1:49 |
+| IMPLEMENTATION Add =extract_key= function                                    |         |       |  0:22 |
 #+end:
 
 *** IMPLEMENTATION Release notes and backlog grooming                  :task:
@@ -297,6 +297,10 @@ state.
 **** COMPLETED Add tests for external package path
      CLOSED: [2013-05-19 Sun 02:18]
      CLOCK: [2013-05-19 Sun 02:04]--[2013-05-19 Sun 02:22] =>  0:18
+
+**** IMPLEMENTATION Add support for pod transformation
+     CLOCK: [2013-05-19 Sun 02:35]--[2013-05-19 Sun 03:33] =>  0:58
+     CLOCK: [2013-05-19 Sun 02:22]--[2013-05-19 Sun 02:35] =>  0:13
 
 *** IMPLEMENTATION Move services into their own type                  :story:
     CLOCK: [2013-05-12 Sun 19:15]--[2013-05-12 Sun 19:30] =>  0:15

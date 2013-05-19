@@ -67,7 +67,7 @@ BOOST_AUTO_TEST_CASE(transforming_enumeration_results_in_expected_enumeration_in
     BOOST_LOG_SEV(lg, debug) << "model: " << m;
     BOOST_REQUIRE(m.enumerations().size() == 1);
 
-    dogen::cpp::transformer t;
+    dogen::cpp::transformer t(m);
     const auto e(t.transform(m.enumerations().begin()->second));
     BOOST_LOG_SEV(lg, debug) << "enumeration: " << e;
 
@@ -89,7 +89,7 @@ BOOST_AUTO_TEST_CASE(transforming_enumeration_in_package_results_in_expected_enu
     BOOST_LOG_SEV(lg, debug) << "model 0: " << m0;
     BOOST_REQUIRE(m0.enumerations().size() == 1);
 
-    dogen::cpp::transformer t;
+    dogen::cpp::transformer t(m0);
     const auto e0(t.transform(m0.enumerations().begin()->second));
     BOOST_LOG_SEV(lg, debug) << "enumeration 0: " << e0;
 
@@ -131,7 +131,7 @@ BOOST_AUTO_TEST_CASE(transforming_enumeration_in_external_package_results_in_exp
     enumeration.name().external_package_path().push_back(external_package);
     BOOST_LOG_SEV(lg, debug) << "model: " << m;
 
-    dogen::cpp::transformer t;
+    dogen::cpp::transformer t(m);
     const auto e(t.transform(enumeration));
     BOOST_LOG_SEV(lg, debug) << "enumeration: " << e;
 
@@ -148,7 +148,7 @@ BOOST_AUTO_TEST_CASE(transforming_exception_results_in_expected_exception_info) 
     BOOST_LOG_SEV(lg, debug) << "model: " << m;
     BOOST_REQUIRE(m.exceptions().size() == 1);
 
-    dogen::cpp::transformer t;
+    dogen::cpp::transformer t(m);
     const auto e(t.transform(m.exceptions().begin()->second));
     BOOST_LOG_SEV(lg, debug) << "exception: " << e;
 
@@ -167,7 +167,7 @@ BOOST_AUTO_TEST_CASE(transforming_exception_in_package_results_in_expected_excep
     BOOST_LOG_SEV(lg, debug) << "model 0: " << m0;
     BOOST_REQUIRE(m0.exceptions().size() == 1);
 
-    dogen::cpp::transformer t;
+    dogen::cpp::transformer t(m0);
     const auto e0(t.transform(m0.exceptions().begin()->second));
     BOOST_LOG_SEV(lg, debug) << "exception 0: " << e0;
 
@@ -201,7 +201,7 @@ BOOST_AUTO_TEST_CASE(transforming_exception_in_external_package_results_in_expec
     exception.name().external_package_path().push_back(external_package);
     BOOST_LOG_SEV(lg, debug) << "model: " << m;
 
-    dogen::cpp::transformer t;
+    dogen::cpp::transformer t(m);
     const auto e(t.transform(exception));
     BOOST_LOG_SEV(lg, debug) << "exception: " << e;
 
@@ -219,7 +219,7 @@ BOOST_AUTO_TEST_CASE(transforming_package_results_in_expected_package_info) {
     BOOST_LOG_SEV(lg, debug) << "model 0: " << m0;
     BOOST_REQUIRE(m0.packages().size() == 1);
 
-    dogen::cpp::transformer t;
+    dogen::cpp::transformer t(m0);
     const auto p0(t.transform(m0.packages().begin()->second));
     BOOST_LOG_SEV(lg, debug) << "package 0: " << p0;
 
@@ -247,7 +247,7 @@ BOOST_AUTO_TEST_CASE(transforming_model_results_in_expected_package_info) {
     const auto m(mock_model_factory::build_single_type_model_in_package(0, mt));
     BOOST_LOG_SEV(lg, debug) << "model: " << m;
 
-    dogen::cpp::transformer t;
+    dogen::cpp::transformer t(m);
     const auto p(t.transform(m));
     BOOST_LOG_SEV(lg, debug) << "package: " << p;
 
@@ -267,7 +267,7 @@ BOOST_AUTO_TEST_CASE(transforming_package_in_external_package_results_in_expecte
     package.name().external_package_path().push_back(external_package);
     BOOST_LOG_SEV(lg, debug) << "model: " << m;
 
-    dogen::cpp::transformer t;
+    dogen::cpp::transformer t(m);
     const auto p0(t.transform(package));
     BOOST_LOG_SEV(lg, debug) << "package 0: " << p0;
 
