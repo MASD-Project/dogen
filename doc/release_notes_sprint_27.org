@@ -1,0 +1,40 @@
+#+title: Release Notes for Sprint 27
+#+options: date:nil toc:nil author:nil num:nil
+#+todo: ANALYSIS IMPLEMENTATION TESTING | COMPLETED CANCELLED
+#+tags: story(s) epic(e) task(t) note(n) spike(p)
+
+* Release Notes
+
+This file contains all stories that were closed during sprint 27.
+
+** Development Stories Implemented
+
+#+begin: clocktable :maxlevel 3 :scope subtree
+Clock summary at [2013-05-19 Sun 21:55]
+
+| Headline     | Time   |
+|--------------+--------|
+| *Total time* | *0:00* |
+#+end:
+
+*** IMPLEMENTATION Clean up the SML to C++ transformer                :spike:
+
+Continuing from previous iteration, see description in Sprint 26.
+
+**** Create =file_info_factory=
+
+*** IMPLEMENTATION Move services into their own type                  :story:
+
+Continuing from previous iteration, see description in Sprint 26.
+
+**** IMPLEMENTATION Move all of the existing pod code to use new type
+
+*** IMPLEMENTATION Use explicit casting for versioned to unversioned conversions :story:
+
+Continuing from previous iteration, see description in Sprint 26.
+
+*** IMPLEMENTATION Add =extract_key= function                         :story:
+
+Continuing from previous iteration, see description in Sprint 26.
+
+** Deprecated Development Stories

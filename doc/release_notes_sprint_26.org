@@ -10,32 +10,33 @@ This file contains all stories that were closed during sprint 26.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-05-19 Sun 21:50]
+Clock summary at [2013-05-19 Sun 21:52]
 
-| Headline                                                                     | Time    |       |       |
-|------------------------------------------------------------------------------+---------+-------+-------|
-| *Total time*                                                                 | *37:31* |       |       |
-|------------------------------------------------------------------------------+---------+-------+-------|
-| Development Stories Implemented                                              |         | 37:31 |       |
-| IMPLEMENTATION Release notes and backlog grooming                            |         |       |  1:08 |
-| COMPLETED Fix build break on visitor tests                                   |         |       |  0:32 |
-| COMPLETED Remove workflow aspects from transformer                           |         |       |  2:23 |
-| COMPLETED Add tests for profiler                                             |         |       |  1:56 |
-| COMPLETED Re-implement key support                                           |         |       |  4:03 |
-| COMPLETED Add injector tests                                                 |         |       |  1:15 |
-| COMPLETED Add doxygen comments to keys and version                           |         |       |  0:10 |
-| COMPLETED Sort issues with SATA port in lorenz                               |         |       |  1:50 |
-| COMPLETED Add tests for aggregate root stereotype                            |         |       |  0:23 |
-| COMPLETED Refactor SML diagram                                               |         |       |  1:04 |
-| COMPLETED Add code generation links to =README=                              |         |       |  0:25 |
-| COMPLETED Remove view model namespace and postfix                            |         |       |  3:26 |
-| IMPLEMENTATION Clean up the SML to C++ transformer                           |         |       | 13:23 |
-| IMPLEMENTATION Move services into their own type                             |         |       |  3:22 |
-| IMPLEMENTATION Use explicit casting for versioned to unversioned conversions |         |       |  1:49 |
-| IMPLEMENTATION Add =extract_key= function                                    |         |       |  0:22 |
+| Headline                                                                | Time    |       |       |
+|-------------------------------------------------------------------------+---------+-------+-------|
+| *Total time*                                                            | *37:31* |       |       |
+|-------------------------------------------------------------------------+---------+-------+-------|
+| Development Stories Implemented                                         |         | 37:31 |       |
+| COMPLETED Release notes and backlog grooming                            |         |       |  1:08 |
+| COMPLETED Fix build break on visitor tests                              |         |       |  0:32 |
+| COMPLETED Remove workflow aspects from transformer                      |         |       |  2:23 |
+| COMPLETED Add tests for profiler                                        |         |       |  1:56 |
+| COMPLETED Re-implement key support                                      |         |       |  4:03 |
+| COMPLETED Add injector tests                                            |         |       |  1:15 |
+| COMPLETED Add doxygen comments to keys and version                      |         |       |  0:10 |
+| COMPLETED Sort issues with SATA port in lorenz                          |         |       |  1:50 |
+| COMPLETED Add tests for aggregate root stereotype                       |         |       |  0:23 |
+| COMPLETED Refactor SML diagram                                          |         |       |  1:04 |
+| COMPLETED Add code generation links to =README=                         |         |       |  0:25 |
+| COMPLETED Remove view model namespace and postfix                       |         |       |  3:26 |
+| CANCELLED Clean up the SML to C++ transformer                           |         |       | 13:23 |
+| CANCELLED Move services into their own type                             |         |       |  3:22 |
+| CANCELLED Use explicit casting for versioned to unversioned conversions |         |       |  1:49 |
+| CANCELLED Add =extract_key= function                                    |         |       |  0:22 |
 #+end:
 
-*** IMPLEMENTATION Release notes and backlog grooming                  :task:
+*** COMPLETED Release notes and backlog grooming                       :task:
+    CLOSED: [2013-05-19 Sun 21:51]
     CLOCK: [2013-05-16 Thu 18:40]--[2013-05-16 Thu 19:05] =>  0:25
     CLOCK: [2013-05-16 Thu 18:26]--[2013-05-16 Thu 18:30] =>  0:04
     CLOCK: [2013-05-16 Thu 18:22]--[2013-05-16 Thu 18:26] =>  0:04
@@ -223,7 +224,8 @@ well known prefix like eCore. Question is what prefix to use.
      CLOCK: [2013-05-13 Mon 18:06]--[2013-05-13 Mon 18:16] =>  0:10
      CLOCK: [2013-05-13 Mon 17:50]--[2013-05-13 Mon 18:00] =>  0:10
 
-*** IMPLEMENTATION Clean up the SML to C++ transformer                :spike:
+*** CANCELLED Clean up the SML to C++ transformer                     :spike:
+    CLOSED: [2013-05-19 Sun 21:51]
     CLOCK: [2013-05-13 Mon 23:04]--[2013-05-14 Tue 00:08] =>  1:04
     CLOCK: [2013-05-13 Mon 23:00]--[2013-05-13 Mon 23:04] =>  0:04
 
@@ -308,7 +310,7 @@ state.
      CLOCK: [2013-05-19 Sun 02:35]--[2013-05-19 Sun 03:33] =>  0:58
      CLOCK: [2013-05-19 Sun 02:22]--[2013-05-19 Sun 02:35] =>  0:13
 
-*** IMPLEMENTATION Move services into their own type                  :story:
+*** CANCELLED Move services into their own type                  :story:
     CLOCK: [2013-05-12 Sun 19:15]--[2013-05-12 Sun 19:30] =>  0:15
     CLOCK: [2013-05-12 Sun 18:55]--[2013-05-12 Sun 19:15] =>  0:20
     CLOCK: [2013-05-12 Sun 01:07]--[2013-05-12 Sun 03:54] =>  2:47
@@ -324,7 +326,7 @@ class for services.
      CLOSED: [2013-05-12 Sun 19:30]
 **** IMPLEMENTATION Move all of the existing pod code to use new type
 
-*** IMPLEMENTATION Use explicit casting for versioned to unversioned conversions :story:
+*** CANCELLED Use explicit casting for versioned to unversioned conversions :story:
     CLOCK: [2013-05-11 Sat 23:06]--[2013-05-11 Sat 23:30] =>  0:24
     CLOCK: [2013-05-11 Sat 16:27]--[2013-05-11 Sat 16:29] =>  0:02
     CLOCK: [2013-05-11 Sat 15:06]--[2013-05-11 Sat 15:13] =>  0:07
@@ -355,7 +357,7 @@ for this to work.
 
 Also link versioned key to unversioned key.
 
-*** IMPLEMENTATION Add =extract_key= function                         :story:
+*** CANCELLED Add =extract_key= function                         :story:
     CLOCK: [2013-05-11 Sat 15:24]--[2013-05-11 Sat 15:34] =>  0:10
     CLOCK: [2013-05-11 Sat 15:20]--[2013-05-11 Sat 15:24] =>  0:04
     CLOCK: [2013-05-11 Sat 03:55]--[2013-05-11 Sat 04:03] =>  0:08
