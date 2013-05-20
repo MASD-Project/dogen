@@ -192,6 +192,25 @@ file_info_factory::content_descriptor_factory(const sml::qname& qn,
     return r;
 }
 
+std::list<content_descriptor>
+file_info_factory::content_descriptor_factory(const sml::model& m) const {
+    std::list<content_descriptor> r;
+
+    sml::qname qn;
+    qn.type_name(m.name());
+    qn.external_package_path(m.external_package_path());
+    qn.meta_type(sml::meta_types::package);
+
+    using config::cpp_facet_types;
+    const auto ft(cpp_facet_types::types);
+    const auto at(aspect_types::namespace_doc);
+    const auto header(file_types::header);
+    const auto ct(sml::category_types::invalid);
+    r.push_back(content_descriptor(header, ft, at, ct, qn));
+
+    return r;
+}
+
 file_info file_info_factory::create(const content_descriptor& cd) {
     file_info r;
     r.facet_type(cd.facet_type());
@@ -262,6 +281,20 @@ std::list<file_info> file_info_factory::create(const sml::package& p) {
     std::list<file_info> r;
     const auto pi(transformer_.transform(p));
     for (const auto cd : content_descriptor_factory(p.name())) {
+        file_info fi(create(cd));
+        fi.namespace_info(pi);
+        r.push_back(fi);
+    }
+    return r;
+}
+
+std::list<file_info> file_info_factory::create(const sml::model& m) {
+    if (m.documentation().empty())
+        return std::list<file_info>{ };
+
+    std::list<file_info> r;
+    const auto pi(transformer_.transform(m));
+    for (const auto cd : content_descriptor_factory(m)) {
         file_info fi(create(cd));
         fi.namespace_info(pi);
         r.push_back(fi);

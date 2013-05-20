@@ -29,6 +29,7 @@
 #include <list>
 #include <boost/filesystem/path.hpp>
 #include "dogen/config/types/cpp_facet_types.hpp"
+#include "dogen/sml/types/model.hpp"
 #include "dogen/sml/types/enumeration.hpp"
 #include "dogen/sml/types/exception.hpp"
 #include "dogen/sml/types/package.hpp"
@@ -104,6 +105,15 @@ private:
         const sml::qname& qn, const sml::category_types ct =
         sml::category_types::invalid) const;
 
+    /**
+     * @brief Generate a content descriptor for the model.
+     *
+     * @todo this is a hack to deal with a lack of qname at the model
+     * level.
+     */
+    std::list<content_descriptor> content_descriptor_factory(
+        const sml::model& m) const;
+
     private:
     /**
      * @brief Performs the initial setup of the file info.
@@ -130,6 +140,17 @@ public:
      * @brief Manufacture all the file infos for the given package.
      */
     std::list<file_info> create(const sml::package& p);
+
+    /**
+     * @brief Manufacture all the file infos for the given model.
+     *
+     * Note that this method is very misleading - we are not
+     * transforming the entire model, only the package aspect of a
+     * model.
+     *
+     * @todo Create an attribute of type package in model.
+     */
+    std::list<file_info> create(const sml::model& m);
 
 private:
     const std::set<config::cpp_facet_types> enabled_facets_;

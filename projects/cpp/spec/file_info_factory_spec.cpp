@@ -47,8 +47,8 @@ using dogen::utility::test::contains_checker;
 
 BOOST_AUTO_TEST_SUITE(file_info_factory)
 
-BOOST_AUTO_TEST_CASE(creating_enumeration_file_info_for_all_facets_produces_expected_results) {
-    SETUP_TEST_LOG_SOURCE("creating_enumeration_file_info_for_all_facets_produces_expected_results");
+BOOST_AUTO_TEST_CASE(creating_file_info_for_enumeration_with_all_facets_enabled_produces_expected_results) {
+    SETUP_TEST_LOG_SOURCE("creating_file_info_for_enumeration_with_all_facets_enabled_produces_expected_results");
 
     const auto mt(dogen::sml::meta_types::enumeration);
     const auto m(mock_model_factory::build_single_type_model(0, mt));
@@ -85,8 +85,8 @@ BOOST_AUTO_TEST_CASE(creating_enumeration_file_info_for_all_facets_produces_expe
     BOOST_CHECK(found_facets == s.enabled_facets());
 }
 
-BOOST_AUTO_TEST_CASE(creating_enumeration_file_info_for_a_few__facets_produces_expected_results) {
-    SETUP_TEST_LOG_SOURCE("creating_enumeration_file_info_for_a_few_facets_produces_expected_results");
+BOOST_AUTO_TEST_CASE(creating_file_info_for_enumeration_with_a_few_facets_enabled_produces_expected_results) {
+    SETUP_TEST_LOG_SOURCE("creating_file_info_for_enumeration_with_a_few_facets_enabled_produces_expected_results");
 
     const auto mt(dogen::sml::meta_types::enumeration);
     const auto m(mock_model_factory::build_single_type_model(0, mt));
@@ -128,8 +128,8 @@ BOOST_AUTO_TEST_CASE(creating_enumeration_file_info_for_a_few__facets_produces_e
     BOOST_CHECK(found_facets == s.enabled_facets());
 }
 
-BOOST_AUTO_TEST_CASE(creating_exception_file_info_produces_expected_results) {
-    SETUP_TEST_LOG_SOURCE("creating_exception_file_info_produces_expected_results");
+BOOST_AUTO_TEST_CASE(creating_file_info_for_exception_produces_expected_results) {
+    SETUP_TEST_LOG_SOURCE("creating_file_info_for_exception_produces_expected_results");
 
     const auto mt(dogen::sml::meta_types::exception);
     const auto m(mock_model_factory::build_single_type_model(0, mt));
@@ -167,8 +167,8 @@ BOOST_AUTO_TEST_CASE(creating_exception_file_info_produces_expected_results) {
     BOOST_CHECK(*found_facets.begin() == dogen::config::cpp_facet_types::types);
 }
 
-BOOST_AUTO_TEST_CASE(creating_package_file_info_produces_expected_results) {
-    SETUP_TEST_LOG_SOURCE("creating_exception_file_info_produces_expected_results");
+BOOST_AUTO_TEST_CASE(creating_file_info_for_package_produces_expected_results) {
+    SETUP_TEST_LOG_SOURCE("creating_file_info_for_package_produces_expected_results");
 
     const auto mt(dogen::sml::meta_types::pod);
     const auto m(
@@ -190,6 +190,44 @@ BOOST_AUTO_TEST_CASE(creating_package_file_info_produces_expected_results) {
     for (const auto& fi : infos) {
         found_facets.insert(fi.facet_type());
         BOOST_CHECK(fi.meta_type() == p.name().meta_type());
+        BOOST_CHECK(!fi.enumeration_info());
+        BOOST_CHECK(!fi.class_info());
+        BOOST_CHECK(!fi.exception_info());
+        BOOST_CHECK(fi.namespace_info());
+        BOOST_CHECK(!fi.registrar_info());
+        BOOST_CHECK(!fi.visitor_info());
+        BOOST_CHECK(!fi.file_path().empty());
+
+        if (fi.file_type() == dogen::cpp::file_types::header)
+            BOOST_CHECK(!fi.header_guard().empty());
+        else if (fi.file_type() == dogen::cpp::file_types::implementation)
+            BOOST_CHECK(fi.header_guard().empty());
+    }
+    BOOST_CHECK(found_facets.size() == 1);
+    BOOST_CHECK(*found_facets.begin() == dogen::config::cpp_facet_types::types);
+}
+
+BOOST_AUTO_TEST_CASE(creating_file_info_for_model_produces_expected_results) {
+    SETUP_TEST_LOG_SOURCE("creating_file_info_for_model_produces_expected_results");
+
+    const auto mt(dogen::sml::meta_types::pod);
+    const auto m(
+        mock_model_factory::build_single_type_model_in_package(0, mt, 1));
+    BOOST_LOG_SEV(lg, debug) << "model: " << m;
+
+    const auto s(mock_settings_factory::build_cpp_settings(src_dir, inc_dir));
+    dogen::cpp::locator l(m.name(), s);
+    dogen::cpp::includer i(m, l, s);
+    dogen::cpp::transformer t(m);
+
+    dogen::cpp::file_info_factory f(s.enabled_facets(), t, l, i);
+    const auto infos(f.create(m));
+    BOOST_LOG_SEV(lg, debug) << "file infos: " << infos;
+
+    std::set<dogen::config::cpp_facet_types> found_facets;
+    for (const auto& fi : infos) {
+        found_facets.insert(fi.facet_type());
+        BOOST_CHECK(fi.meta_type() == dogen::sml::meta_types::package);
         BOOST_CHECK(!fi.enumeration_info());
         BOOST_CHECK(!fi.class_info());
         BOOST_CHECK(!fi.exception_info());
