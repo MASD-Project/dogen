@@ -11,6 +11,13 @@ This file contains all stories that haven't been assigned to a sprint.
 
 Stories that we intend to look at, at some point.
 
+*** Inserter for enumerations shouldn't throw
+
+We only use the inserter for debug dumping and it could happen that we
+are about to write the message for an exception when we decide to
+throw. Instead we should just print unexpected/invalid value and cast
+it to a numeric value in brackets.
+
 *** Loading external models from file
 
 We should really use something like boost property tree to allow user
