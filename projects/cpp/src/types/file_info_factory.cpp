@@ -124,6 +124,8 @@ bool file_info_factory::has_implementation(const config::cpp_facet_types ft,
             ft == cpp_facet_types::test_data ||
             ft == cpp_facet_types::serialization;
         break;
+    case meta_types::exception:
+        return false; break;
     case meta_types::enumeration:
         return
             ft == cpp_facet_types::io ||
@@ -217,6 +219,27 @@ std::list<file_info> file_info_factory::create(const sml::enumeration& e) {
         fi.enumeration_info(ei);
 
         const auto in(includer_.includes_for_enumeration(e,
+                cd.facet_type(), cd.file_type(), cd.aspect_type()));
+        fi.system_includes(in.system);
+        fi.user_includes(in.user);
+
+        r.push_back(fi);
+    }
+    return r;
+}
+
+std::list<file_info> file_info_factory::create(const sml::exception& e) {
+    if (e.generation_type() == sml::generation_types::no_generation)
+        return std::list<file_info>{ };
+
+    std::list<file_info> r;
+    const auto ei(transformer_.transform(e));
+    const auto ct(sml::category_types::user_defined);
+    for (const auto cd : content_descriptor_factory(e.name(), ct)) {
+        file_info fi(create(cd));
+        fi.exception_info(ei);
+
+        const auto in(includer_.includes_for_exception(e,
                 cd.facet_type(), cd.file_type(), cd.aspect_type()));
         fi.system_includes(in.system);
         fi.user_includes(in.user);

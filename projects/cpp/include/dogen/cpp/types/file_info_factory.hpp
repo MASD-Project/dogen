@@ -30,16 +30,23 @@
 #include <boost/filesystem/path.hpp>
 #include "dogen/config/types/cpp_facet_types.hpp"
 #include "dogen/sml/types/enumeration.hpp"
+#include "dogen/sml/types/exception.hpp"
 #include "dogen/cpp/types/locator.hpp"
 #include "dogen/cpp/types/location_request.hpp"
 #include "dogen//cpp/types/includer.hpp"
 #include "dogen/cpp/types/transformer.hpp"
 #include "dogen/cpp/types/content_descriptor.hpp"
+#include "dogen/cpp/types/enumeration_info.hpp"
+#include "dogen/cpp/types/exception_info.hpp"
 #include "dogen/cpp/types/file_info.hpp"
 
 namespace dogen {
 namespace cpp {
 
+/**
+ * @brief Generates the various file info representations for a given
+ * SML type.
+ */
 class file_info_factory {
 public:
     file_info_factory() = delete;
@@ -107,9 +114,14 @@ private:
 
 public:
     /**
-     * @brief Manufacture all the file infos for the given enumeration.
+     * @brief Manufacture all the file infos for the given type.
      */
     std::list<file_info> create(const sml::enumeration& e);
+
+    /**
+     * @brief Manufacture all the file infos for the given exception.
+     */
+    std::list<file_info> create(const sml::exception& e);
 
 private:
     const std::set<config::cpp_facet_types> enabled_facets_;
