@@ -27,12 +27,14 @@
 
 #include <set>
 #include <list>
+#include <boost/optional.hpp>
 #include <boost/filesystem/path.hpp>
 #include "dogen/config/types/cpp_facet_types.hpp"
 #include "dogen/sml/types/model.hpp"
 #include "dogen/sml/types/enumeration.hpp"
 #include "dogen/sml/types/exception.hpp"
 #include "dogen/sml/types/package.hpp"
+#include "dogen/sml/types/pod.hpp"
 #include "dogen/cpp/types/locator.hpp"
 #include "dogen/cpp/types/location_request.hpp"
 #include "dogen//cpp/types/includer.hpp"
@@ -41,6 +43,7 @@
 #include "dogen/cpp/types/enumeration_info.hpp"
 #include "dogen/cpp/types/exception_info.hpp"
 #include "dogen/cpp/types/namespace_info.hpp"
+#include "dogen/cpp/types/class_info.hpp"
 #include "dogen/cpp/types/file_info.hpp"
 
 namespace dogen {
@@ -60,6 +63,9 @@ public:
 public:
     file_info_factory(const std::set<config::cpp_facet_types>& enabled_facets,
         const transformer& t, const locator& l, includer& i);
+
+public:
+    typedef boost::optional<const class_info> optional_class_info;
 
 private:
     /**
@@ -151,6 +157,13 @@ public:
      * @todo Create an attribute of type package in model.
      */
     std::list<file_info> create(const sml::model& m);
+
+    /**
+     * @brief Manufacture all the file infos for the given pod.
+     */
+    std::list<file_info> create(const sml::pod& p,
+        const optional_class_info pci = optional_class_info(),
+        const optional_class_info opci = optional_class_info());
 
 private:
     const std::set<config::cpp_facet_types> enabled_facets_;

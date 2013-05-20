@@ -302,4 +302,27 @@ std::list<file_info> file_info_factory::create(const sml::model& m) {
     return r;
 }
 
+std::list<file_info> file_info_factory::create(const sml::pod& p,
+    const optional_class_info pci, const optional_class_info opci) {
+
+    if (p.generation_type() == sml::generation_types::no_generation)
+        return std::list<file_info>{ };
+
+    std::list<file_info> r;
+    const auto ci(transformer_.transform(p, pci, opci));
+    const auto ct(p.category_type());
+    for (const auto cd : content_descriptor_factory(p.name(), ct)) {
+        file_info fi(create(cd));
+        fi.class_info(ci);
+
+        const auto in(includer_.includes_for_pod(p,
+                cd.facet_type(), cd.file_type(), cd.aspect_type()));
+        fi.system_includes(in.system);
+        fi.user_includes(in.user);
+
+        r.push_back(fi);
+    }
+    return r;
+}
+
 } }

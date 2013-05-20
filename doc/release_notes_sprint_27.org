@@ -25,6 +25,8 @@ Clock summary at [2013-05-20 Mon 22:41]
 Continuing from previous iteration, see description in Sprint 26.
 
 **** IMPLEMENTATION Create =file_info_factory=
+     CLOCK: [2013-05-20 Mon 23:10]--[2013-05-20 Mon 23:20] =>  0:10
+     CLOCK: [2013-05-20 Mon 22:54]--[2013-05-20 Mon 23:10] =>  0:16
      CLOCK: [2013-05-20 Mon 22:42]--[2013-05-20 Mon 22:54] =>  0:12
      CLOCK: [2013-05-20 Mon 22:22]--[2013-05-20 Mon 22:41] =>  0:19
      CLOCK: [2013-05-20 Mon 22:08]--[2013-05-20 Mon 22:21] =>  0:13

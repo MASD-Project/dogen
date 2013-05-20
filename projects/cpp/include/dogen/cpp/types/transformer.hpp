@@ -136,7 +136,7 @@ public:
      * @param opci if the parent pod was not the root parent, the root parent.
      */
     class_info transform(const sml::pod& p,
-        const optional_class_info pci = boost::optional<const class_info>(),
+        const optional_class_info pci = optional_class_info(),
         const optional_class_info opci = optional_class_info()) const;
 
 private:
