@@ -188,7 +188,7 @@ mock_enumeration(const unsigned int i, const std::string& model_name,
     dogen::sml::qname qn;
     qn.model_name(model_name);
     qn.type_name(type_name(i));
-    qn.meta_type(dogen::sml::meta_types::pod);
+    qn.meta_type(dogen::sml::meta_types::enumeration);
 
     for (unsigned int i(0); i < package_n; ++i)
         qn.package_path().push_back(package_name(i));
@@ -216,7 +216,7 @@ mock_exception(const unsigned int i, const std::string& model_name,
     dogen::sml::qname qn;
     qn.model_name(model_name);
     qn.type_name(type_name(i));
-    qn.meta_type(dogen::sml::meta_types::pod);
+    qn.meta_type(dogen::sml::meta_types::exception);
 
     for (unsigned int i(0); i < package_n; ++i)
         qn.package_path().push_back(package_name(i));

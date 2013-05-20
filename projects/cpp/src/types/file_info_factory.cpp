@@ -79,17 +79,26 @@ location_request_factory(const content_descriptor& cd) const {
 
 std::set<config::cpp_facet_types> file_info_factory::
 enabled_facets(const sml::meta_types mt, const sml::pod_types pt) const {
+    using sml::pod_types;
+    using sml::meta_types;
     using config::cpp_facet_types;
-    if (mt == sml::meta_types::pod) {
-        if (pt == sml::pod_types::value || pt == sml::pod_types::entity)
+
+    switch(mt) {
+    case meta_types::pod:
+        if (pt == pod_types::value || pt == pod_types::entity)
             return enabled_facets_;
-        else if (pt == sml::pod_types::service)
+        else if (pt == pod_types::service)
             return std::set<cpp_facet_types> { cpp_facet_types::types };
-    } else if (mt == sml::meta_types::enumeration ||
-        mt == sml::meta_types::primitive) {
+        break;
+    case meta_types::enumeration:
+    case meta_types::primitive:
         return enabled_facets_;
-    } else if (mt == sml::meta_types::exception) {
+        break;
+    case meta_types::exception:
         return std::set<cpp_facet_types> { cpp_facet_types::types };
+        break;
+    default:
+        break;
     }
 
     BOOST_LOG_SEV(lg, error) << invalid_enabled_facets
@@ -106,44 +115,73 @@ bool file_info_factory::has_implementation(const config::cpp_facet_types ft,
 
     using sml::meta_types;
     using config::cpp_facet_types;
-    if (mt == meta_types::pod) {
+    switch(mt) {
+    case meta_types::pod:
         return
             ft == cpp_facet_types::types ||
             ft == cpp_facet_types::hash ||
             ft == cpp_facet_types::io ||
             ft == cpp_facet_types::test_data ||
             ft == cpp_facet_types::serialization;
-    } else if (mt == meta_types::enumeration) {
+        break;
+    case meta_types::enumeration:
         return
             ft == cpp_facet_types::io ||
             ft == cpp_facet_types::test_data;
-    } else if (mt == meta_types::enumeration)
-        return false;
+        break;
+    default: break;
+    }
 
-    std::ostringstream s;
-    s << unsupported_meta_type << mt;
-    BOOST_LOG_SEV(lg, error) << s.str();
-    BOOST_THROW_EXCEPTION(building_error(s.str()));
+    BOOST_LOG_SEV(lg, error) << unsupported_meta_type << mt;
+    BOOST_THROW_EXCEPTION(building_error(unsupported_meta_type +
+            boost::lexical_cast<std::string>(mt)));
 }
 
 bool file_info_factory::has_forward_decls(const config::cpp_facet_types ft,
     const dogen::sml::meta_types mt) const {
     using dogen::sml::meta_types;
     using config::cpp_facet_types;
-    if (mt == meta_types::pod) {
+
+    switch(mt) {
+    case meta_types::pod:
         return
             ft == cpp_facet_types::types ||
             ft == cpp_facet_types::serialization;
-    } else if (mt == meta_types::enumeration) {
+        break;
+    case meta_types::enumeration:
         return ft == cpp_facet_types::types;
-    } else if (mt == meta_types::exception) {
+        break;
+    case meta_types::exception:
         return ft == cpp_facet_types::types;
+        break;
+    default: break;
     }
 
-    std::ostringstream s;
-    s << unsupported_meta_type << mt;
-    BOOST_LOG_SEV(lg, error) << s.str();
-    BOOST_THROW_EXCEPTION(building_error(s.str()));
+    BOOST_LOG_SEV(lg, error) << unsupported_meta_type << mt;
+    BOOST_THROW_EXCEPTION(building_error(unsupported_meta_type +
+            boost::lexical_cast<std::string>(mt)));
+}
+
+std::list<content_descriptor>
+file_info_factory::content_descriptor_factory(const sml::qname& qn,
+    const sml::category_types ct) const {
+
+    std::list<content_descriptor> r;
+    const auto mt(qn.meta_type());
+    for (const auto ft : enabled_facets(mt)) {
+        const auto main(aspect_types::main);
+        const auto header(file_types::header);
+        r.push_back(content_descriptor(header, ft, main, ct, qn));
+
+        const auto implementation(file_types::implementation);
+        if (has_implementation(ft, mt))
+            r.push_back(content_descriptor(implementation, ft, main, ct, qn));
+
+        const auto forward_decls(aspect_types::forward_decls);
+        if (has_forward_decls(ft, mt))
+            r.push_back(content_descriptor(header, ft, forward_decls, ct, qn));
+    }
+    return r;
 }
 
 file_info file_info_factory::create(const content_descriptor& cd) {
@@ -151,6 +189,8 @@ file_info file_info_factory::create(const content_descriptor& cd) {
     r.facet_type(cd.facet_type());
     r.file_type(cd.file_type());
     r.aspect_type(cd.aspect_type());
+    r.category_type(cd.category_type());
+    r.meta_type(cd.name().meta_type());
 
     const auto rq(location_request_factory(cd));
     r.file_path(locator_.absolute_path(rq));
@@ -166,44 +206,23 @@ file_info file_info_factory::create(const content_descriptor& cd) {
 }
 
 std::list<file_info> file_info_factory::create(const sml::enumeration& e) {
-    std::list<file_info> r;
-
     if (e.generation_type() == sml::generation_types::no_generation)
-        return r;
+        return std::list<file_info>{ };
 
-    using config::cpp_facet_types;
-    auto lambda([&](cpp_facet_types ft, file_types flt, aspect_types at,
-            const sml::enumeration& e) {
-            const auto ct(sml::category_types::user_defined);
-            content_descriptor cd(flt, ft, at, ct,e.name());
-            file_info fi(create(cd));
-            fi.category_type(sml::category_types::user_defined);
-            fi.meta_type(cd.name().meta_type());
-            // fi.enumeration_info(ei);
+    std::list<file_info> r;
+    const auto ei(transformer_.transform(e));
+    const auto ct(sml::category_types::user_defined);
+    for (const auto cd : content_descriptor_factory(e.name(), ct)) {
+        file_info fi(create(cd));
+        fi.enumeration_info(ei);
 
-            const auto in(includer_.includes_for_enumeration(e, ft, flt, at));
-            fi.system_includes(in.system);
-            fi.user_includes(in.user);
-            r.push_back(fi);
-        });
+        const auto in(includer_.includes_for_enumeration(e,
+                cd.facet_type(), cd.file_type(), cd.aspect_type()));
+        fi.system_includes(in.system);
+        fi.user_includes(in.user);
 
-    const auto header(file_types::header);
-    const auto implementation(file_types::implementation);
-    const auto main(aspect_types::main);
-    const auto forward_decls(aspect_types::forward_decls);
-    const auto mt(sml::meta_types::enumeration);
-    const auto facets(enabled_facets(mt));
-
-    for (const auto ft : facets) {
-        lambda(ft, header, main, e);
-
-        if (has_implementation(ft, mt))
-            lambda(ft, implementation, main, e);
-
-        if (has_forward_decls(ft, mt))
-            lambda(ft, header, forward_decls, e);
+        r.push_back(fi);
     }
-
     return r;
 }
 

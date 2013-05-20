@@ -87,7 +87,14 @@ private:
     bool has_forward_decls(const config::cpp_facet_types ft,
         const sml::meta_types mt) const;
 
-private:
+    /**
+     * @brief Generate all of the content descriptors for the given
+     * parameters.
+     */
+    std::list<content_descriptor> content_descriptor_factory(
+        const sml::qname& qn, const sml::category_types ct) const;
+
+    private:
     /**
      * @brief Performs the initial setup of the file info.
      */
