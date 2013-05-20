@@ -31,6 +31,7 @@
 #include "dogen/config/types/cpp_facet_types.hpp"
 #include "dogen/sml/types/enumeration.hpp"
 #include "dogen/sml/types/exception.hpp"
+#include "dogen/sml/types/package.hpp"
 #include "dogen/cpp/types/locator.hpp"
 #include "dogen/cpp/types/location_request.hpp"
 #include "dogen//cpp/types/includer.hpp"
@@ -38,6 +39,7 @@
 #include "dogen/cpp/types/content_descriptor.hpp"
 #include "dogen/cpp/types/enumeration_info.hpp"
 #include "dogen/cpp/types/exception_info.hpp"
+#include "dogen/cpp/types/namespace_info.hpp"
 #include "dogen/cpp/types/file_info.hpp"
 
 namespace dogen {
@@ -99,7 +101,8 @@ private:
      * parameters.
      */
     std::list<content_descriptor> content_descriptor_factory(
-        const sml::qname& qn, const sml::category_types ct) const;
+        const sml::qname& qn, const sml::category_types ct =
+        sml::category_types::invalid) const;
 
     private:
     /**
@@ -122,6 +125,11 @@ public:
      * @brief Manufacture all the file infos for the given exception.
      */
     std::list<file_info> create(const sml::exception& e);
+
+    /**
+     * @brief Manufacture all the file infos for the given package.
+     */
+    std::list<file_info> create(const sml::package& p);
 
 private:
     const std::set<config::cpp_facet_types> enabled_facets_;

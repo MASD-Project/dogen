@@ -44,6 +44,9 @@
 namespace dogen {
 namespace cpp {
 
+/**
+ * @brief Transforms an SML type into its corresponding CPP type.
+ */
 class transformer {
 public:
     transformer() = delete;
