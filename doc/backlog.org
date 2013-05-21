@@ -1651,7 +1651,9 @@ This story is waiting for SML to be code generated.
 *** Add an includer for all includers
 
 It would be nice to totally include a model. For that we need an
-includer that includes all other includers.
+includer that includes all other includers. This should be as easy as
+keeping track of the different includers for each facet in the map
+inside of the includer service.
 
 *** Add new equivalence operator to domain types
 
