@@ -166,7 +166,7 @@ bool file_info_factory::has_forward_decls(const config::cpp_facet_types ft,
 
 std::list<content_descriptor>
 file_info_factory::content_descriptor_factory(const sml::qname& qn,
-    const sml::category_types ct) const {
+    const sml::category_types ct, const sml::pod_types pt) const {
 
     std::list<content_descriptor> r;
     const auto main(aspect_types::main);
@@ -178,7 +178,7 @@ file_info_factory::content_descriptor_factory(const sml::qname& qn,
     }
 
     const auto mt(qn.meta_type());
-    for (const auto ft : enabled_facets(mt)) {
+    for (const auto ft : enabled_facets(mt, pt)) {
         r.push_back(content_descriptor(header, ft, main, ct, qn));
 
         const auto implementation(file_types::implementation);
@@ -311,7 +311,8 @@ std::list<file_info> file_info_factory::create(const sml::pod& p,
     std::list<file_info> r;
     const auto ci(transformer_.transform(p, pci, opci));
     const auto ct(p.category_type());
-    for (const auto cd : content_descriptor_factory(p.name(), ct)) {
+    const auto pt(p.pod_type());
+    for (const auto cd : content_descriptor_factory(p.name(), ct, pt)) {
         file_info fi(create(cd));
         fi.class_info(ci);
 

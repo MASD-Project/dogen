@@ -107,9 +107,10 @@ private:
      * @brief Generate all of the content descriptors for the given
      * parameters.
      */
-    std::list<content_descriptor> content_descriptor_factory(
-        const sml::qname& qn, const sml::category_types ct =
-        sml::category_types::invalid) const;
+    std::list<content_descriptor>
+    content_descriptor_factory(const sml::qname& qn,
+        const sml::category_types ct = sml::category_types::invalid,
+        const sml::pod_types pt = sml::pod_types::invalid) const;
 
     /**
      * @brief Generate a content descriptor for the model.
