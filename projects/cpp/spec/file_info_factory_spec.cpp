@@ -19,6 +19,7 @@
  *
  */
 #include <boost/test/unit_test.hpp>
+#include <boost/algorithm/string/predicate.hpp>
 #include "dogen/utility/io/list_io.hpp"
 #include "dogen/utility/test/logging.hpp"
 #include "dogen/utility/test/exception_checkers.hpp"
@@ -323,6 +324,49 @@ BOOST_AUTO_TEST_CASE(creating_file_info_for_pod_with_some_facets_enabled_produce
     }
     BOOST_CHECK(found_facets.size() == 2);
     BOOST_CHECK(*found_facets.begin() == dogen::config::cpp_facet_types::types);
+}
+
+BOOST_AUTO_TEST_CASE(creating_includer_file_info_for_single_pod_produces_expected_results) {
+    SETUP_TEST_LOG_SOURCE("creating_includer_file_info_for_single_pod_produces_expected_results");
+
+    const auto m(mock_model_factory::build_single_type_model());
+    BOOST_LOG_SEV(lg, debug) << "model: " << m;
+    BOOST_REQUIRE(m.pods().size() == 1);
+
+    const auto s(mock_settings_factory::build_cpp_settings(src_dir, inc_dir));
+    dogen::cpp::locator l(m.name(), s);
+    dogen::cpp::includer i(m, l, s);
+    dogen::cpp::transformer t(m);
+
+    dogen::cpp::file_info_factory f(s.enabled_facets(), t, l, i);
+    const auto p(m.pods().begin()->second);
+    const auto pod_infos(f.create(p));
+    BOOST_LOG_SEV(lg, debug) << "pod file infos: " << pod_infos;
+
+    const auto ft(dogen::config::cpp_facet_types::types);
+    const auto includer_infos(f.create_includer(m.external_package_path(), ft));
+    BOOST_LOG_SEV(lg, debug) << "includer file infos: " << includer_infos;
+
+    BOOST_REQUIRE(includer_infos.size() == 1);
+    const auto fi(includer_infos.front());
+
+    BOOST_CHECK(fi.facet_type() == ft);
+    BOOST_CHECK(fi.aspect_type() == dogen::cpp::aspect_types::includers);
+    BOOST_CHECK(!fi.enumeration_info());
+    BOOST_CHECK(!fi.class_info());
+    BOOST_CHECK(!fi.exception_info());
+    BOOST_CHECK(!fi.namespace_info());
+    BOOST_CHECK(!fi.registrar_info());
+    BOOST_CHECK(!fi.visitor_info());
+    BOOST_CHECK(!fi.file_path().empty());
+    BOOST_CHECK(fi.file_type() == dogen::cpp::file_types::header);
+
+    bool found(false);
+    for (const auto& ui : fi.user_includes()) {
+        if (boost::contains(ui, p.name().type_name()))
+            found = true;
+    }
+    BOOST_CHECK(found);
 }
 
 BOOST_AUTO_TEST_SUITE_END()

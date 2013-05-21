@@ -127,9 +127,11 @@ public:
         const optional_class_info opci = optional_class_info());
 
     /**
-     * @brief Manufacture all the file infos for includers.
+     * @brief Manufacture file info for includer.
      */
-    std::list<file_info> create_facet_includers() const;
+    std::list<file_info> create_includer(
+        const std::list<std::string>& external_package_path,
+        const config::cpp_facet_types ft);
 
 private:
     const content_descriptor_factory descriptor_factory_;

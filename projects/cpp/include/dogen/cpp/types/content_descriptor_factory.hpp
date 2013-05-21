@@ -92,6 +92,13 @@ public:
      */
     std::list<content_descriptor> create(const sml::model& m) const;
 
+    /**
+     * @brief Generate all of the content descriptors for facet
+     * includers.
+     */
+    std::list<content_descriptor> create_includer(const sml::qname& qn,
+        const config::cpp_facet_types ft) const;
+
 private:
     const std::set<config::cpp_facet_types>& enabled_facets_;
 };

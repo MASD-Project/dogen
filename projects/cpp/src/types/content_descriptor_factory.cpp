@@ -24,6 +24,7 @@
 #include "dogen/sml/io/meta_types_io.hpp"
 #include "dogen/sml/io/pod_types_io.hpp"
 #include "dogen/cpp/types/building_error.hpp"
+#include "dogen/cpp/types/aspect_types.hpp"
 #include "dogen/cpp/types/content_descriptor_factory.hpp"
 
 using namespace dogen::utility::log;
@@ -197,6 +198,19 @@ content_descriptor_factory::create(const sml::model& m) const {
     using config::cpp_facet_types;
     const auto ft(cpp_facet_types::types);
     const auto at(aspect_types::namespace_doc);
+    const auto header(file_types::header);
+    const auto ct(sml::category_types::invalid);
+    r.push_back(content_descriptor(header, ft, at, ct, qn));
+
+    return r;
+}
+
+std::list<content_descriptor> content_descriptor_factory::
+create_includer(const sml::qname& qn, const config::cpp_facet_types ft) const {
+    std::list<content_descriptor> r;
+
+    using config::cpp_facet_types;
+    const auto at(aspect_types::includers);
     const auto header(file_types::header);
     const auto ct(sml::category_types::invalid);
     r.push_back(content_descriptor(header, ft, at, ct, qn));

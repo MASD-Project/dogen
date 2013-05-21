@@ -193,4 +193,26 @@ std::list<file_info> file_info_factory::create(const sml::pod& p,
     return r;
 }
 
+std::list<file_info> file_info_factory::create_includer(
+    const std::list<std::string>& external_package_path,
+    const config::cpp_facet_types ft) {
+
+    sml::qname qn;
+    qn.type_name(includer_name);
+    qn.external_package_path(external_package_path);
+    qn.meta_type(sml::meta_types::pod);
+
+    std::list<file_info> r;
+    for (const auto cd : descriptor_factory_.create_includer(qn, ft)) {
+        file_info fi(create(cd));
+        fi.aspect_type(aspect_types::includers);
+
+        const auto includes(includer_.includes_for_includer_files(ft));
+        fi.system_includes(includes.system);
+        fi.user_includes(includes.user);
+        r.push_back(fi);
+    }
+    return r;
+}
+
 } }
