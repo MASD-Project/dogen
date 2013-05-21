@@ -45,6 +45,7 @@
 #include "dogen/cpp/types/namespace_info.hpp"
 #include "dogen/cpp/types/class_info.hpp"
 #include "dogen/cpp/types/file_info.hpp"
+#include "dogen/cpp/types/content_descriptor_factory.hpp"
 
 namespace dogen {
 namespace cpp {
@@ -80,48 +81,7 @@ private:
     location_request
     location_request_factory(const content_descriptor& cd) const;
 
-    /**
-     * @brief Returns the available facets for the given inputs.
-     *
-     * @param mt Meta-type which we want to process.
-     * @param pt Pod type to process; must be set to invalid if the
-     * meta-type is not a pod.
-     */
-    std::set<config::cpp_facet_types> enabled_facets(const sml::meta_types mt,
-        const sml::pod_types pt = sml::pod_types::invalid) const;
-
-    /**
-     * @brief Returns true if the facet requires a C++ source file,
-     * false otherwise.
-     */
-    bool has_implementation(const config::cpp_facet_types ft,
-        const sml::meta_types mt) const;
-
-    /**
-     * @brief Returns true if facet has forward declarations, false otherwise.
-     */
-    bool has_forward_decls(const config::cpp_facet_types ft,
-        const sml::meta_types mt) const;
-
-    /**
-     * @brief Generate all of the content descriptors for the given
-     * parameters.
-     */
-    std::list<content_descriptor>
-    content_descriptor_factory(const sml::qname& qn,
-        const sml::category_types ct = sml::category_types::invalid,
-        const sml::pod_types pt = sml::pod_types::invalid) const;
-
-    /**
-     * @brief Generate a content descriptor for the model.
-     *
-     * @todo this is a hack to deal with a lack of qname at the model
-     * level.
-     */
-    std::list<content_descriptor> content_descriptor_factory(
-        const sml::model& m) const;
-
-    private:
+private:
     /**
      * @brief Performs the initial setup of the file info.
      */
@@ -166,8 +126,13 @@ public:
         const optional_class_info pci = optional_class_info(),
         const optional_class_info opci = optional_class_info());
 
+    /**
+     * @brief Manufacture all the file infos for includers.
+     */
+    std::list<file_info> create_facet_includers() const;
+
 private:
-    const std::set<config::cpp_facet_types> enabled_facets_;
+    const content_descriptor_factory descriptor_factory_;
     const transformer& transformer_;
     const locator& locator_;
     includer& includer_;

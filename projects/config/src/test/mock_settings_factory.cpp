@@ -67,6 +67,10 @@ build_troubleshooting_settings(bool verbose) {
     return r;
 }
 
+config::cpp_settings mock_settings_factory::build_cpp_settings() {
+    return build_cpp_settings(empty, empty);
+}
+
 config::cpp_settings mock_settings_factory::build_cpp_settings(
     boost::filesystem::path src_dir,
     boost::filesystem::path include_dir,

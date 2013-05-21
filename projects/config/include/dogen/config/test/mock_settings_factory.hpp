@@ -47,6 +47,8 @@ public:
     static config::troubleshooting_settings
     build_troubleshooting_settings(bool verbose = true);
 
+    static config::cpp_settings build_cpp_settings();
+
     static config::cpp_settings build_cpp_settings(
         boost::filesystem::path src_dir,
         boost::filesystem::path include_dir,

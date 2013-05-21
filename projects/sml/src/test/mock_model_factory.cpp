@@ -176,6 +176,7 @@ dogen::sml::pod mock_pod(const unsigned int i, const std::string& model_name,
     r.generation_type(dogen::sml::generation_types::full_generation);
     r.documentation(documentation);
     r.pod_type(dogen::sml::pod_types::value);
+    r.category_type(dogen::sml::category_types::user_defined);
     return r;
 }
 

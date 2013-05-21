@@ -10,14 +10,14 @@ This file contains all stories that were closed during sprint 27.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-05-21 Tue 08:31]
+Clock summary at [2013-05-21 Tue 23:23]
 
 | Headline                                           | Time   |      |      |
 |----------------------------------------------------+--------+------+------|
-| *Total time*                                       | *4:45* |      |      |
+| *Total time*                                       | *6:16* |      |      |
 |----------------------------------------------------+--------+------+------|
-| Development Stories Implemented                    |        | 4:45 |      |
-| IMPLEMENTATION Clean up the SML to C++ transformer |        |      | 4:45 |
+| Development Stories Implemented                    |        | 6:16 |      |
+| IMPLEMENTATION Clean up the SML to C++ transformer |        |      | 6:16 |
 #+end:
 
 *** IMPLEMENTATION Clean up the SML to C++ transformer                :spike:
@@ -25,6 +25,9 @@ Clock summary at [2013-05-21 Tue 08:31]
 Continuing from previous iteration, see description in Sprint 26.
 
 **** IMPLEMENTATION Create =file_info_factory=
+     CLOCK: [2013-05-21 Tue 22:30]--[2013-05-21 Tue 23:22] =>  0:52
+     CLOCK: [2013-05-21 Tue 18:10]--[2013-05-21 Tue 18:42] =>  0:32
+     CLOCK: [2013-05-21 Tue 17:57]--[2013-05-21 Tue 18:04] =>  0:07
      CLOCK: [2013-05-21 Tue 08:30]--[2013-05-21 Tue 08:32] =>  0:02
      CLOCK: [2013-05-21 Tue 08:23]--[2013-05-21 Tue 08:26] =>  0:08
      CLOCK: [2013-05-21 Tue 07:56]--[2013-05-21 Tue 08:15] =>  0:19
