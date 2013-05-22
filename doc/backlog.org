@@ -11,6 +11,11 @@ This file contains all stories that haven't been assigned to a sprint.
 
 Stories that we intend to look at, at some point.
 
+*** Make inclusion lists in includer a model type
+
+We created a class inlined in the header for no good reason. make it a
+model type.
+
 *** Inserter for enumerations shouldn't throw
 
 We only use the inserter for debug dumping and it could happen that we
