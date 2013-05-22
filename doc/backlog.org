@@ -551,6 +551,9 @@ Relation to keys:
 
 *** Private and public includes
 
+NOTE: We should use the terms internal and external to avoid confusion
+with C++ scopes. This follows Microsoft terminology for C# assemblies.
+
 At present we are making all headers in a model public. However, for
 models such as cpp this doesn't make any sense since only one type
 should be available to the outside world. What we really need is a
