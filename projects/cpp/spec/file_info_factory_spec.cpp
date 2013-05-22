@@ -29,6 +29,7 @@
 #include "dogen/cpp/types/building_error.hpp"
 #include "dogen/sml/test/mock_model_factory.hpp"
 #include "dogen/config/test/mock_settings_factory.hpp"
+#include "dogen/cpp/types/transformer.hpp"
 #include "dogen/cpp/types/file_info_factory.hpp"
 
 using dogen::config::cpp_facet_types;

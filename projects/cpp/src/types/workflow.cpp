@@ -19,6 +19,7 @@
  *
  */
 #include <boost/throw_exception.hpp>
+#include "dogen/utility/log/logger.hpp"
 #include "dogen/cpp/types/includer.hpp"
 #include "dogen/cpp/types/workflow_failure.hpp"
 #include "dogen/cpp/types/formatters/factory.hpp"
@@ -27,7 +28,8 @@
 #include "dogen/cpp/types/formatters/include_cmakelists.hpp"
 #include "dogen/cpp/types/formatters/odb_options.hpp"
 #include "dogen/cpp/types/sml_to_cpp_info.hpp"
-#include "dogen/utility/log/logger.hpp"
+#include "dogen/cpp/types/transformer.hpp"
+#include "dogen/cpp/types/file_info_factory.hpp"
 #include "dogen/cpp/types/workflow.hpp"
 
 using namespace dogen::utility::log;
@@ -153,7 +155,7 @@ generate_file_info(const file_info& fi) const {
     return std::make_pair(fi.file_path(), s.str());
 }
 
-workflow::value_type workflow::generate_file_infos() const {
+workflow::value_type workflow::old_generate_file_infos() const {
     includer im(model_, locator_, settings_);
 
     sml_to_cpp_info t(locator_, im, settings_, model_);
@@ -166,10 +168,47 @@ workflow::value_type workflow::generate_file_infos() const {
     return r;
 }
 
+workflow::value_type workflow::generate_file_infos() const {
+    includer i(model_, locator_, settings_);
+    transformer t(model_);
+    file_info_factory f(settings_.enabled_facets(), t, locator_, i);
+
+    workflow::value_type r;
+    for (const auto& e : model_.enumerations()) {
+        for (const auto& fi : f.create(e.second))
+            r.insert(generate_file_info(fi));
+    }
+
+    for (const auto& e : model_.exceptions()) {
+        for (const auto& fi : f.create(e.second))
+            r.insert(generate_file_info(fi));
+    }
+
+    for (const auto& fi : f.create(model_))
+        r.insert(generate_file_info(fi));
+
+    for (const auto& e : model_.packages()) {
+        for (const auto& fi : f.create(e.second))
+            r.insert(generate_file_info(fi));
+    }
+
+    for (const auto& fi : f.create_registrar(model_))
+        r.insert(generate_file_info(fi));
+
+    for (const auto ft : settings_.enabled_facets()) {
+        const auto epp(model_.external_package_path());
+        for (const auto& fi : f.create_includer(epp, ft))
+            r.insert(generate_file_info(fi));
+    }
+
+    return r;
+}
+
+
 workflow::value_type workflow::execute() {
     log_started();
 
-    workflow::value_type r(generate_file_infos());
+    workflow::value_type r(old_generate_file_infos());
     if (settings_.disable_cmakelists())
         log_cmakelists_disabled();
     else {
