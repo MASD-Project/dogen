@@ -40,6 +40,7 @@
 #include "dogen/cpp/types/exception_info.hpp"
 #include "dogen/cpp/types/enumeration_info.hpp"
 #include "dogen/cpp/types/nested_type_info.hpp"
+#include "dogen/cpp/types/registrar_info.hpp"
 
 namespace dogen {
 namespace cpp {
@@ -120,13 +121,14 @@ public:
     /**
      * @brief Transforms a SML model into a namespace info.
      *
-     * Note that this method is very misleading - we are not
-     * transforming the entire model, only the package aspect of a
-     * model.
-     *
      * @todo Create an attribute of type package in model.
      */
-    namespace_info transform(const sml::model& m) const;
+    namespace_info transform_model_into_namespace() const;
+
+    /**
+     * @brief Transforms a SML model into a registrar info.
+     */
+    registrar_info transform_model_into_registrar() const;
 
     /**
      * @brief Transform a SML pod into a class info.

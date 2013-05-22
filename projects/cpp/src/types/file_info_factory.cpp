@@ -160,7 +160,7 @@ std::list<file_info> file_info_factory::create(const sml::model& m) {
         return std::list<file_info>{ };
 
     std::list<file_info> r;
-    const auto pi(transformer_.transform(m));
+    const auto pi(transformer_.transform_model_into_namespace());
     for (const auto cd : descriptor_factory_.create(m)) {
         file_info fi(create(cd));
         fi.namespace_info(pi);
@@ -200,6 +200,8 @@ std::list<file_info> file_info_factory::create_includer(
     sml::qname qn;
     qn.type_name(includer_name);
     qn.external_package_path(external_package_path);
+
+    // FIXME: we should probably have a not SML type instead of lying
     qn.meta_type(sml::meta_types::pod);
 
     std::list<file_info> r;
@@ -212,6 +214,28 @@ std::list<file_info> file_info_factory::create_includer(
         fi.user_includes(includes.user);
         r.push_back(fi);
     }
+    return r;
+}
+
+std::list<file_info>
+file_info_factory::create_registrar(const sml::model&) const {
+    std::list<file_info> r;
+    // sml::qname qn;
+    // qn.model_name(model_.name());
+    // qn.external_package_path(model_.external_package_path());
+
+    // // FIXME: we should probably have a not SML type instead of lying
+    // qn.meta_type(sml::meta_types::pod);
+
+    // const auto ri(transformer_.transform_model_into_registrar());
+    // for (const auto cd : descriptor_factory_.create_registrar(qn)) {
+    //     file_info fi(create(cd));
+
+    //     fi.registrar_info(ri);
+    //     const auto includes(includer_.includes_for_registrar(flt));
+    //     fi.system_includes(includes.system);
+    //     fi.user_includes(includes.user);
+    // }
     return r;
 }
 

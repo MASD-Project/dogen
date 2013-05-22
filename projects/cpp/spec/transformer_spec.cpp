@@ -287,7 +287,7 @@ BOOST_AUTO_TEST_CASE(transforming_model_results_in_expected_package_info) {
     BOOST_LOG_SEV(lg, debug) << "model: " << m;
 
     dogen::cpp::transformer t(m);
-    const auto p(t.transform(m));
+    const auto p(t.transform_model_into_namespace());
     BOOST_LOG_SEV(lg, debug) << "package: " << p;
 
     BOOST_CHECK(!p.documentation().empty());
@@ -314,7 +314,7 @@ BOOST_AUTO_TEST_CASE(transforming_package_in_external_package_results_in_expecte
     BOOST_CHECK(p0.namespaces().front() == external_package);
     BOOST_CHECK(is_package_zero(p0.namespaces().back()));
 
-    const auto p1(t.transform(m));
+    const auto p1(t.transform_model_into_namespace());
     BOOST_LOG_SEV(lg, debug) << "package 1: " << p1;
 
     BOOST_CHECK(p1.namespaces().size() == 2);

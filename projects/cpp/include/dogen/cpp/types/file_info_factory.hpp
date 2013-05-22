@@ -133,6 +133,11 @@ public:
         const std::list<std::string>& external_package_path,
         const config::cpp_facet_types ft);
 
+    /**
+     * @brief Manufacture file info for registrar.
+     */
+    std::list<file_info> create_registrar(const sml::model& m) const;
+
 private:
     const content_descriptor_factory descriptor_factory_;
     const transformer& transformer_;

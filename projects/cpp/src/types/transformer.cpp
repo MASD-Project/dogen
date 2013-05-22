@@ -237,20 +237,49 @@ namespace_info transformer::transform(const sml::package& p) const {
     return r;
 }
 
-namespace_info transformer::transform(const sml::model& m) const {
-    BOOST_LOG_SEV(lg, debug) << "Transforming model: " << m.name();
+namespace_info transformer::transform_model_into_namespace() const {
+    const std::string n(model_.name());
+    BOOST_LOG_SEV(lg, debug) << "Transforming model into namespace: " << n;
 
     namespace_info r;
-    r.documentation(m.documentation());
+    r.documentation(model_.documentation());
 
     sml::qname qn;
-    qn.type_name(m.name());
-    qn.external_package_path(m.external_package_path());
+    qn.type_name(n);
+    qn.external_package_path(model_.external_package_path());
     qn.meta_type(sml::meta_types::package);
     r.namespaces(transform(qn));
 
-    BOOST_LOG_SEV(lg, debug) << "Transformed model: " << m.name();
+    BOOST_LOG_SEV(lg, debug) << "Transformed model into namespace: " << n;
+    return r;
+}
 
+registrar_info transformer::transform_model_into_registrar() const {
+    const std::string n(model_.name());
+    BOOST_LOG_SEV(lg, debug) << "Transforming model into registrar: " << n;
+
+    sml::qname qn;
+    qn.model_name(n);
+    qn.external_package_path(model_.external_package_path());
+    qn.meta_type(sml::meta_types::package);
+
+    registrar_info r;
+    r.namespaces(transform(qn));
+
+    for (const auto& pair : model_.dependencies()) {
+        const auto d(pair.second);
+        if (!d.is_system())
+            r.model_dependencies().push_back(d.model_name());
+    }
+
+    using boost::join;
+    for (const auto& l : model_.leaves()) {
+        const auto ns(transform(l));
+        r.leaves().push_back(join(ns, namespace_separator));
+    }
+    r.leaves().sort();
+
+    BOOST_LOG_SEV(lg, debug) << "Transformed model into registrar: " << n;
     return r;
 }
 
