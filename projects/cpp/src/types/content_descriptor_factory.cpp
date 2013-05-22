@@ -218,4 +218,18 @@ create_includer(const sml::qname& qn, const config::cpp_facet_types ft) const {
     return r;
 }
 
+std::list<content_descriptor>
+content_descriptor_factory::create_registrar(const sml::qname& qn) const {
+    std::list<content_descriptor> r;
+
+    using config::cpp_facet_types;
+    const auto ft(cpp_facet_types::serialization);
+    const auto at(aspect_types::registrar);
+    const auto header(file_types::header);
+    const auto ct(sml::category_types::invalid);
+    r.push_back(content_descriptor(header, ft, at, ct, qn));
+
+    return r;
+}
+
 } }

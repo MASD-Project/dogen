@@ -156,6 +156,10 @@ std::list<file_info> file_info_factory::create(const sml::package& p) {
 }
 
 std::list<file_info> file_info_factory::create(const sml::model& m) {
+    // FIXME Create an attribute of type package in model.
+    // FIXME: we shouldn't really be passing models around since
+    // the transformer is already bound to a model.
+
     if (m.documentation().empty())
         return std::list<file_info>{ };
 
@@ -218,24 +222,27 @@ std::list<file_info> file_info_factory::create_includer(
 }
 
 std::list<file_info>
-file_info_factory::create_registrar(const sml::model&) const {
+file_info_factory::create_registrar(const sml::model& m) {
+    // FIXME: we shouldn't really be passing models around since
+    // the transformer is already bound to a model.
     std::list<file_info> r;
-    // sml::qname qn;
-    // qn.model_name(model_.name());
-    // qn.external_package_path(model_.external_package_path());
+    sml::qname qn;
+    qn.model_name(m.name());
+    qn.external_package_path(m.external_package_path());
 
-    // // FIXME: we should probably have a not SML type instead of lying
-    // qn.meta_type(sml::meta_types::pod);
+    // FIXME: we should probably have a not SML type instead of lying
+    qn.meta_type(sml::meta_types::pod);
 
-    // const auto ri(transformer_.transform_model_into_registrar());
-    // for (const auto cd : descriptor_factory_.create_registrar(qn)) {
-    //     file_info fi(create(cd));
+    const auto ri(transformer_.transform_model_into_registrar());
+    for (const auto cd : descriptor_factory_.create_registrar(qn)) {
+        file_info fi(create(cd));
 
-    //     fi.registrar_info(ri);
-    //     const auto includes(includer_.includes_for_registrar(flt));
-    //     fi.system_includes(includes.system);
-    //     fi.user_includes(includes.user);
-    // }
+        fi.registrar_info(ri);
+        const auto includes(includer_.includes_for_registrar(cd.file_type()));
+        fi.system_includes(includes.system);
+        fi.user_includes(includes.user);
+        r.push_back(fi);
+    }
     return r;
 }
 

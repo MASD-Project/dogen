@@ -114,8 +114,6 @@ public:
      * Note that this method is very misleading - we are not
      * transforming the entire model, only the package aspect of a
      * model.
-     *
-     * @todo Create an attribute of type package in model.
      */
     std::list<file_info> create(const sml::model& m);
 
@@ -136,7 +134,7 @@ public:
     /**
      * @brief Manufacture file info for registrar.
      */
-    std::list<file_info> create_registrar(const sml::model& m) const;
+    std::list<file_info> create_registrar(const sml::model& m);
 
 private:
     const content_descriptor_factory descriptor_factory_;

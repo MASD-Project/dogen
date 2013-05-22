@@ -369,4 +369,35 @@ BOOST_AUTO_TEST_CASE(creating_includer_file_info_for_single_pod_produces_expecte
     BOOST_CHECK(found);
 }
 
+BOOST_AUTO_TEST_CASE(creating_file_info_for_registrar_produces_expected_results) {
+    SETUP_TEST_LOG_SOURCE("creating_file_info_for_registrar_produces_expected_results");
+
+    const auto m(mock_model_factory::build_single_type_model());
+    BOOST_LOG_SEV(lg, debug) << "model: " << m;
+
+    const auto s(mock_settings_factory::build_cpp_settings(src_dir, inc_dir));
+    dogen::cpp::locator l(m.name(), s);
+    dogen::cpp::includer i(m, l, s);
+    dogen::cpp::transformer t(m);
+
+    dogen::cpp::file_info_factory f(s.enabled_facets(), t, l, i);
+    const auto infos(f.create_registrar(m));
+    BOOST_LOG_SEV(lg, debug) << "file infos: " << infos;
+
+    BOOST_REQUIRE(infos.size() == 1);
+    const auto fi(infos.front());
+
+    const auto ft(dogen::config::cpp_facet_types::serialization);
+    BOOST_CHECK(fi.facet_type() == ft);
+    BOOST_CHECK(fi.aspect_type() == dogen::cpp::aspect_types::registrar);
+    BOOST_CHECK(!fi.enumeration_info());
+    BOOST_CHECK(!fi.class_info());
+    BOOST_CHECK(!fi.exception_info());
+    BOOST_CHECK(!fi.namespace_info());
+    BOOST_CHECK(fi.registrar_info());
+    BOOST_CHECK(!fi.visitor_info());
+    BOOST_CHECK(!fi.file_path().empty());
+    BOOST_CHECK(fi.file_type() == dogen::cpp::file_types::header);
+}
+
 BOOST_AUTO_TEST_SUITE_END()
