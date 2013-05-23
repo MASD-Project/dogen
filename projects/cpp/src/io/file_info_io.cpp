@@ -165,7 +165,8 @@ std::ostream& operator<<(std::ostream& s, const file_info& v) {
       << "\"user_includes\": " << v.user_includes() << ", "
       << "\"file_path\": " << "\"" << v.file_path().generic_string() << "\"" << ", "
       << "\"namespace_info\": " << v.namespace_info() << ", "
-      << "\"visitor_info\": " << v.visitor_info()
+      << "\"visitor_info\": " << v.visitor_info() << ", "
+      << "\"relative_path\": " << "\"" << v.relative_path().generic_string() << "\""
       << " }";
     return(s);
 }

@@ -76,7 +76,8 @@ public:
         const std::list<std::string>& user_includes,
         const boost::filesystem::path& file_path,
         const boost::optional<dogen::cpp::namespace_info>& namespace_info,
-        const boost::optional<dogen::cpp::visitor_info>& visitor_info);
+        const boost::optional<dogen::cpp::visitor_info>& visitor_info,
+        const boost::filesystem::path& relative_path);
 
 private:
     template<typename Archive>
@@ -226,6 +227,16 @@ public:
     void visitor_info(const boost::optional<dogen::cpp::visitor_info>&& v);
     /**@}*/
 
+    /**
+     * @brief Relative path to file.
+     */
+    /**@{*/
+    const boost::filesystem::path& relative_path() const;
+    boost::filesystem::path& relative_path();
+    void relative_path(const boost::filesystem::path& v);
+    void relative_path(const boost::filesystem::path&& v);
+    /**@}*/
+
 public:
     bool operator==(const file_info& rhs) const;
     bool operator!=(const file_info& rhs) const {
@@ -252,6 +263,7 @@ private:
     boost::filesystem::path file_path_;
     boost::optional<dogen::cpp::namespace_info> namespace_info_;
     boost::optional<dogen::cpp::visitor_info> visitor_info_;
+    boost::filesystem::path relative_path_;
 };
 
 } }

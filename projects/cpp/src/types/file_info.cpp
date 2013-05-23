@@ -45,7 +45,8 @@ file_info::file_info(file_info&& rhs)
       user_includes_(std::move(rhs.user_includes_)),
       file_path_(std::move(rhs.file_path_)),
       namespace_info_(std::move(rhs.namespace_info_)),
-      visitor_info_(std::move(rhs.visitor_info_)) { }
+      visitor_info_(std::move(rhs.visitor_info_)),
+      relative_path_(std::move(rhs.relative_path_)) { }
 
 file_info::file_info(
     const dogen::config::cpp_facet_types& facet_type,
@@ -62,7 +63,8 @@ file_info::file_info(
     const std::list<std::string>& user_includes,
     const boost::filesystem::path& file_path,
     const boost::optional<dogen::cpp::namespace_info>& namespace_info,
-    const boost::optional<dogen::cpp::visitor_info>& visitor_info)
+    const boost::optional<dogen::cpp::visitor_info>& visitor_info,
+    const boost::filesystem::path& relative_path)
     : facet_type_(facet_type),
       file_type_(file_type),
       aspect_type_(aspect_type),
@@ -77,7 +79,8 @@ file_info::file_info(
       user_includes_(user_includes),
       file_path_(file_path),
       namespace_info_(namespace_info),
-      visitor_info_(visitor_info) { }
+      visitor_info_(visitor_info),
+      relative_path_(relative_path) { }
 
 void file_info::swap(file_info& other) noexcept {
     using std::swap;
@@ -96,6 +99,7 @@ void file_info::swap(file_info& other) noexcept {
     swap(file_path_, other.file_path_);
     swap(namespace_info_, other.namespace_info_);
     swap(visitor_info_, other.visitor_info_);
+    swap(relative_path_, other.relative_path_);
 }
 
 bool file_info::operator==(const file_info& rhs) const {
@@ -113,7 +117,8 @@ bool file_info::operator==(const file_info& rhs) const {
         user_includes_ == rhs.user_includes_ &&
         file_path_ == rhs.file_path_ &&
         namespace_info_ == rhs.namespace_info_ &&
-        visitor_info_ == rhs.visitor_info_;
+        visitor_info_ == rhs.visitor_info_ &&
+        relative_path_ == rhs.relative_path_;
 }
 
 file_info& file_info::operator=(file_info other) {
@@ -320,6 +325,22 @@ void file_info::visitor_info(const boost::optional<dogen::cpp::visitor_info>& v)
 
 void file_info::visitor_info(const boost::optional<dogen::cpp::visitor_info>&& v) {
     visitor_info_ = std::move(v);
+}
+
+const boost::filesystem::path& file_info::relative_path() const {
+    return relative_path_;
+}
+
+boost::filesystem::path& file_info::relative_path() {
+    return relative_path_;
+}
+
+void file_info::relative_path(const boost::filesystem::path& v) {
+    relative_path_ = v;
+}
+
+void file_info::relative_path(const boost::filesystem::path&& v) {
+    relative_path_ = std::move(v);
 }
 
 } }

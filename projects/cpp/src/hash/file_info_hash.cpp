@@ -131,6 +131,7 @@ std::size_t file_info_hasher::hash(const file_info&v) {
     combine(seed, v.file_path().generic_string());
     combine(seed, hash_boost_optional_dogen_cpp_namespace_info(v.namespace_info()));
     combine(seed, hash_boost_optional_dogen_cpp_visitor_info(v.visitor_info()));
+    combine(seed, v.relative_path().generic_string());
 
     return seed;
 }

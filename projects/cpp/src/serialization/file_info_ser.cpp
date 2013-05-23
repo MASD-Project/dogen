@@ -70,6 +70,7 @@ void save(Archive& ar,
     ar << make_nvp("file_path", v.file_path_.generic_string());
     ar << make_nvp("namespace_info", v.namespace_info_);
     ar << make_nvp("visitor_info", v.visitor_info_);
+    ar << make_nvp("relative_path", v.relative_path_.generic_string());
 }
 
 template<typename Archive>
@@ -93,6 +94,9 @@ void load(Archive& ar,
     v.file_path_ = file_path_tmp;
     ar >> make_nvp("namespace_info", v.namespace_info_);
     ar >> make_nvp("visitor_info", v.visitor_info_);
+    std::string relative_path_tmp;
+    ar >> make_nvp("relative_path", relative_path_tmp);
+    v.relative_path_ = relative_path_tmp;
 }
 
 } }

@@ -170,6 +170,7 @@ populate(const unsigned int position, result_type& v) {
     v.file_path(create_boost_filesystem_path(position + 12));
     v.namespace_info(create_boost_optional_dogen_cpp_namespace_info(position + 13));
     v.visitor_info(create_boost_optional_dogen_cpp_visitor_info(position + 14));
+    v.relative_path(create_boost_filesystem_path(position + 15));
 }
 
 file_info_generator::result_type
