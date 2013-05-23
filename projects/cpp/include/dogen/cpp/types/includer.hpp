@@ -43,17 +43,10 @@
 #include "dogen/cpp/types/file_types.hpp"
 #include "dogen/sml/types/model.hpp"
 #include "dogen/sml/types/pod.hpp"
+#include "dogen/cpp/types/inclusion_lists.hpp"
 
 namespace dogen {
 namespace cpp {
-
-/**
- * @brief Result of a request for includes.
- */
-struct inclusion_lists {
-    std::list<std::string> system;
-    std::list<std::string> user;
-};
 
 /**
  * @brief Responsible for computing all the include dependencies for a

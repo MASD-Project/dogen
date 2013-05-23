@@ -20,6 +20,13 @@ Clock summary at [2013-05-22 Wed 22:56]
 | IMPLEMENTATION Clean up the SML to C++ transformer |        |      | 8:35 |
 #+end:
 
+*** COMPLETED Make inclusion lists in includer a model type
+    CLOSED: [2013-05-23 Thu 23:16]
+    CLOCK: [2013-05-23 Thu 23:05]--[2013-05-23 Thu 23:20] =>  0:15
+
+We created a class inlined in the header for no good reason. make it a
+model type.
+
 *** IMPLEMENTATION Clean up the SML to C++ transformer                :spike:
 
 Continuing from previous iteration, see description in Sprint 26.

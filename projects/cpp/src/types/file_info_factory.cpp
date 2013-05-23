@@ -112,8 +112,8 @@ std::list<file_info> file_info_factory::create(const sml::enumeration& e) {
 
         const auto in(includer_.includes_for_enumeration(e,
                 cd.facet_type(), cd.file_type(), cd.aspect_type()));
-        fi.system_includes(in.system);
-        fi.user_includes(in.user);
+        fi.system_includes(in.system());
+        fi.user_includes(in.user());
 
         r.push_back(fi);
     }
@@ -133,8 +133,8 @@ std::list<file_info> file_info_factory::create(const sml::exception& e) {
 
         const auto in(includer_.includes_for_exception(e,
                 cd.facet_type(), cd.file_type(), cd.aspect_type()));
-        fi.system_includes(in.system);
-        fi.user_includes(in.user);
+        fi.system_includes(in.system());
+        fi.user_includes(in.user());
 
         r.push_back(fi);
     }
@@ -189,8 +189,8 @@ std::list<file_info> file_info_factory::create(const sml::pod& p,
 
         const auto in(includer_.includes_for_pod(p,
                 cd.facet_type(), cd.file_type(), cd.aspect_type()));
-        fi.system_includes(in.system);
-        fi.user_includes(in.user);
+        fi.system_includes(in.system());
+        fi.user_includes(in.user());
 
         r.push_back(fi);
     }
@@ -214,8 +214,8 @@ std::list<file_info> file_info_factory::create_includer(
         fi.aspect_type(aspect_types::includers);
 
         const auto includes(includer_.includes_for_includer_files(ft));
-        fi.system_includes(includes.system);
-        fi.user_includes(includes.user);
+        fi.system_includes(includes.system());
+        fi.user_includes(includes.user());
         r.push_back(fi);
     }
     return r;
@@ -239,8 +239,8 @@ file_info_factory::create_registrar(const sml::model& m) {
 
         fi.registrar_info(ri);
         const auto includes(includer_.includes_for_registrar(cd.file_type()));
-        fi.system_includes(includes.system);
-        fi.user_includes(includes.user);
+        fi.system_includes(includes.system());
+        fi.user_includes(includes.user());
         r.push_back(fi);
     }
     return r;

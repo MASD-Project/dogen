@@ -28,6 +28,7 @@
 #include "dogen/cpp/hash/exception_info_hash.hpp"
 #include "dogen/cpp/hash/file_info_hash.hpp"
 #include "dogen/cpp/hash/file_types_hash.hpp"
+#include "dogen/cpp/hash/inclusion_lists_hash.hpp"
 #include "dogen/cpp/hash/location_request_hash.hpp"
 #include "dogen/cpp/hash/namespace_info_hash.hpp"
 #include "dogen/cpp/hash/nested_type_info_hash.hpp"

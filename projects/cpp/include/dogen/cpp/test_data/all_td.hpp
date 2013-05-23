@@ -28,6 +28,7 @@
 #include "dogen/cpp/test_data/exception_info_td.hpp"
 #include "dogen/cpp/test_data/file_info_td.hpp"
 #include "dogen/cpp/test_data/file_types_td.hpp"
+#include "dogen/cpp/test_data/inclusion_lists_td.hpp"
 #include "dogen/cpp/test_data/location_request_td.hpp"
 #include "dogen/cpp/test_data/namespace_info_td.hpp"
 #include "dogen/cpp/test_data/nested_type_info_td.hpp"

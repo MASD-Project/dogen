@@ -28,6 +28,7 @@
 #include "dogen/cpp/serialization/exception_info_ser.hpp"
 #include "dogen/cpp/serialization/file_info_ser.hpp"
 #include "dogen/cpp/serialization/file_types_ser.hpp"
+#include "dogen/cpp/serialization/inclusion_lists_ser.hpp"
 #include "dogen/cpp/serialization/location_request_ser.hpp"
 #include "dogen/cpp/serialization/namespace_info_ser.hpp"
 #include "dogen/cpp/serialization/nested_type_info_ser.hpp"

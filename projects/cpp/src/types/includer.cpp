@@ -116,22 +116,22 @@ append_implementation_dependencies(const relationships& rel,
         (settings_.use_integrated_io() || rel.is_parent() || rel.is_child()));
 
     if (is_header && io_enabled_ && (domain_with_io || is_io))
-        il.system.push_back(std_.include(std_types::iosfwd));
+        il.system().push_back(std_.include(std_types::iosfwd));
 
     // algorithm: domain headers need it for the swap function.
     if (is_header && is_domain)
-        il.system.push_back(std_.include(std_types::algorithm));
+        il.system().push_back(std_.include(std_types::algorithm));
 
     // ostream:
     const bool is_implementation(flt == file_types::implementation);
     const bool io_without_iio(is_io && !settings_.use_integrated_io());
     if (is_implementation && io_enabled_ && (domain_with_io || io_without_iio))
-        il.system.push_back(std_.include(std_types::ostream));
+        il.system().push_back(std_.include(std_types::ostream));
 
     // functional
     const bool is_hash(ft == cpp_facet_types::hash);
     if (is_header && is_hash)
-        il.system.push_back(std_.include(std_types::functional));
+        il.system().push_back(std_.include(std_types::functional));
 
     /*
      * boost
@@ -140,55 +140,55 @@ append_implementation_dependencies(const relationships& rel,
     const bool is_serialization(ft == cpp_facet_types::serialization);
     if (is_implementation && is_serialization &&
         !settings_.disable_xml_serialization())
-        il.system.push_back(boost_.include(boost_types::nvp));
+        il.system().push_back(boost_.include(boost_types::nvp));
 
     // split free serialisation
     if (is_header && is_serialization)
-        il.system.push_back(boost_.include(boost_types::split_free));
+        il.system().push_back(boost_.include(boost_types::split_free));
 
     // assume abstract
     if (is_header && is_serialization && rel.is_parent())
-        il.system.push_back(boost_.include(boost_types::assume_abstract));
+        il.system().push_back(boost_.include(boost_types::assume_abstract));
 
     // boost virtual base of
     if (is_header && is_serialization && !rel.is_parent() && rel.is_child())
-        il.system.push_back(boost_.include(boost_types::is_virtual_base_of));
+        il.system().push_back(boost_.include(boost_types::is_virtual_base_of));
 
     // boost archive types
     if (is_implementation && is_serialization) {
         if (!settings_.disable_xml_serialization()) {
-            il.system.push_back(boost_.include(boost_types::xml_oarchive));
-            il.system.push_back(boost_.include(boost_types::xml_iarchive));
+            il.system().push_back(boost_.include(boost_types::xml_oarchive));
+            il.system().push_back(boost_.include(boost_types::xml_iarchive));
         }
-        il.system.push_back(boost_.include(boost_types::text_oarchive));
-        il.system.push_back(boost_.include(boost_types::text_iarchive));
-        il.system.push_back(boost_.include(boost_types::binary_oarchive));
-        il.system.push_back(boost_.include(boost_types::binary_iarchive));
-        il.system.push_back(boost_.include(boost_types::polymorphic_iarchive));
-        il.system.push_back(boost_.include(boost_types::polymorphic_oarchive));
+        il.system().push_back(boost_.include(boost_types::text_oarchive));
+        il.system().push_back(boost_.include(boost_types::text_iarchive));
+        il.system().push_back(boost_.include(boost_types::binary_oarchive));
+        il.system().push_back(boost_.include(boost_types::binary_iarchive));
+        il.system().push_back(boost_.include(boost_types::polymorphic_iarchive));
+        il.system().push_back(boost_.include(boost_types::polymorphic_oarchive));
     }
 
     // state saver
     if (is_implementation && io_enabled_ &&
         rel.requires_stream_manipulators() && (domain_with_io || io_without_iio))
-        il.system.push_back(boost_.include(boost_types::io_ios_state));
+        il.system().push_back(boost_.include(boost_types::io_ios_state));
 
     // boost string algorithm
     if (is_implementation && io_enabled_ && (domain_with_io || io_without_iio)
         && rel.has_std_string())
-        il.system.push_back(boost_.include(boost_types::string_algorithm));
+        il.system().push_back(boost_.include(boost_types::string_algorithm));
 
     // apply visitor
     if (is_implementation && io_enabled_ && (domain_with_io || io_without_iio)
         && rel.has_variant())
-        il.system.push_back(boost_.include(boost_types::apply_visitor));
+        il.system().push_back(boost_.include(boost_types::apply_visitor));
 
     if (is_implementation && is_hash && rel.has_variant())
-        il.system.push_back(boost_.include(boost_types::apply_visitor));
+        il.system().push_back(boost_.include(boost_types::apply_visitor));
 
     // pair dependencies
     if (is_implementation && is_serialization && rel.has_std_pair())
-        il.system.push_back(boost_.include(boost_types::serialization_pair));
+        il.system().push_back(boost_.include(boost_types::serialization_pair));
 }
 
 void includer::append_boost_dependencies(
@@ -206,12 +206,12 @@ void includer::append_boost_dependencies(
     const bool is_domain(ft == cpp_facet_types::types);
     const bool is_sp(type_name == boost_.type(boost_types::shared_ptr));
     if (is_header && is_domain && is_sp)
-        il.system.push_back(boost_.include(boost_types::shared_ptr));
+        il.system().push_back(boost_.include(boost_types::shared_ptr));
 
     const bool is_serialization(ft == cpp_facet_types::serialization);
     const bool is_implementation(flt == file_types::implementation);
     if (is_implementation && is_serialization && is_sp)
-        il.system.push_back(
+        il.system().push_back(
             boost_.include(boost_types::serialization_shared_ptr));
 
     /*
@@ -219,10 +219,10 @@ void includer::append_boost_dependencies(
      */
     const bool is_opt(type_name == boost_.type(boost_types::optional));
     if (is_header && is_domain && is_opt)
-        il.system.push_back(boost_.include(boost_types::optional));
+        il.system().push_back(boost_.include(boost_types::optional));
 
     if (is_implementation && is_serialization && is_opt)
-        il.system.push_back(
+        il.system().push_back(
             boost_.include(boost_types::serialization_optional));
 
     /*
@@ -230,21 +230,21 @@ void includer::append_boost_dependencies(
      */
     const bool is_variant(type_name == boost_.type(boost_types::variant));
     if (is_header && is_domain && is_variant)
-        il.system.push_back(boost_.include(boost_types::variant));
+        il.system().push_back(boost_.include(boost_types::variant));
 
     if (is_implementation && is_serialization && is_variant)
-        il.system.push_back(boost_.include(boost_types::serialization_variant));
+        il.system().push_back(boost_.include(boost_types::serialization_variant));
 
     /*
      * boost::filesystem::path
      */
     const bool is_path(type_name == boost_.type(boost_types::filesystem_path));
     if (is_header && is_domain && is_path)
-        il.system.push_back(boost_.include(boost_types::filesystem_path));
+        il.system().push_back(boost_.include(boost_types::filesystem_path));
 
     const bool is_test_data(ft == cpp_facet_types::test_data);
     if (is_implementation && is_test_data && is_path)
-        il.system.push_back(std_.include(std_types::sstream));
+        il.system().push_back(std_.include(std_types::sstream));
 
     const bool is_io(ft == cpp_facet_types::io);
     // FIXME: removed  || p.parent_name() || p.is_parent()
@@ -256,15 +256,15 @@ void includer::append_boost_dependencies(
      */
     const bool is_date(type_name == boost_.type(boost_types::gregorian_date));
     if (is_header && is_domain && is_date)
-        il.system.push_back(boost_.include(boost_types::gregorian_date));
+        il.system().push_back(boost_.include(boost_types::gregorian_date));
 
     if (is_date && is_implementation && io_enabled_ &&
         (domain_with_io || io_without_iio))
-        il.system.push_back(boost_.include(boost_types::io_gregorian_date));
+        il.system().push_back(boost_.include(boost_types::io_gregorian_date));
 
     if (is_implementation && is_serialization && is_date) {
-        il.system.push_back(boost_.include(boost_types::io_gregorian_date));
-        il.system.push_back(
+        il.system().push_back(boost_.include(boost_types::io_gregorian_date));
+        il.system().push_back(
             boost_.include(boost_types::serialization_gregorian_date));
     }
 
@@ -273,15 +273,15 @@ void includer::append_boost_dependencies(
      */
     const bool is_time(type_name == boost_.type(boost_types::ptime));
     if (is_header && is_domain && is_time)
-        il.system.push_back(boost_.include(boost_types::ptime));
+        il.system().push_back(boost_.include(boost_types::ptime));
 
     if (is_time && is_implementation && io_enabled_ &&
         (domain_with_io || io_without_iio))
-        il.system.push_back(boost_.include(boost_types::io_time));
+        il.system().push_back(boost_.include(boost_types::io_time));
 
     if (is_implementation && is_serialization && is_time) {
-        il.system.push_back(boost_.include(boost_types::io_time));
-        il.system.push_back(boost_.include(boost_types::serialization_ptime));
+        il.system().push_back(boost_.include(boost_types::io_time));
+        il.system().push_back(boost_.include(boost_types::serialization_ptime));
     }
 
     /*
@@ -290,15 +290,15 @@ void includer::append_boost_dependencies(
     const bool is_duration(
         type_name == boost_.type(boost_types::time_duration));
     if (is_header && is_domain && is_duration)
-        il.system.push_back(boost_.include(boost_types::time_duration));
+        il.system().push_back(boost_.include(boost_types::time_duration));
 
     if (is_duration && is_implementation && io_enabled_ &&
         (domain_with_io || io_without_iio))
-        il.system.push_back(boost_.include(boost_types::io_time));
+        il.system().push_back(boost_.include(boost_types::io_time));
 
     if (is_implementation && is_serialization && is_duration) {
-        il.system.push_back(boost_.include(boost_types::io_time));
-        il.system.push_back(
+        il.system().push_back(boost_.include(boost_types::io_time));
+        il.system().push_back(
             boost_.include(boost_types::serialization_time_duration));
     }
 }
@@ -318,56 +318,56 @@ void includer::append_std_dependencies(
     const bool is_domain(ft == cpp_facet_types::types);
     const bool is_string(type_name == std_.type(std_types::string));
     if (is_header && is_domain && is_string)
-        il.system.push_back(std_.include(std_types::string));
+        il.system().push_back(std_.include(std_types::string));
 
     const bool is_serialization(ft == cpp_facet_types::serialization);
     const bool is_implementation(flt == file_types::implementation);
     if (is_implementation && is_serialization && is_string)
-        il.system.push_back(boost_.include(boost_types::string));
+        il.system().push_back(boost_.include(boost_types::string));
 
     const bool is_test_data(ft == cpp_facet_types::test_data);
     if (is_implementation && is_test_data && is_string)
-        il.system.push_back(std_.include(std_types::sstream));
+        il.system().push_back(std_.include(std_types::sstream));
 
     /*
      * std::vector
      */
     const bool is_vector(type_name == std_.type(std_types::vector));
     if (is_header && is_domain && is_vector)
-        il.system.push_back(std_.include(std_types::vector));
+        il.system().push_back(std_.include(std_types::vector));
 
     if (is_implementation && is_serialization && is_vector)
-        il.system.push_back(boost_.include(boost_types::vector));
+        il.system().push_back(boost_.include(boost_types::vector));
 
     /*
      * std::list
      */
     const bool is_list(type_name == std_.type(std_types::list));
     if (is_header && is_domain && is_list)
-        il.system.push_back(std_.include(std_types::list));
+        il.system().push_back(std_.include(std_types::list));
 
     if (is_implementation && is_serialization && is_list)
-        il.system.push_back(boost_.include(boost_types::list));
+        il.system().push_back(boost_.include(boost_types::list));
 
     /*
      * std::deque
      */
     const bool is_deque(type_name == std_.type(std_types::deque));
     if (is_header && is_domain && is_deque)
-        il.system.push_back(std_.include(std_types::deque));
+        il.system().push_back(std_.include(std_types::deque));
 
     if (is_implementation && is_serialization && is_deque)
-        il.system.push_back(boost_.include(boost_types::deque));
+        il.system().push_back(boost_.include(boost_types::deque));
 
     /*
      * std::set
      */
     const bool is_set(type_name == std_.type(std_types::set));
     if (is_header && is_domain && is_set)
-        il.system.push_back(std_.include(std_types::set));
+        il.system().push_back(std_.include(std_types::set));
 
     if (is_implementation && is_serialization && is_set)
-        il.system.push_back(boost_.include(boost_types::set));
+        il.system().push_back(boost_.include(boost_types::set));
 
     // FIXME: massive hack. boost doesn't have support for
     // serialisation so we are using our own hacked headers
@@ -379,7 +379,7 @@ void includer::append_std_dependencies(
             private_ser_header = epp.front() + "/" + private_ser_header;
 
         if (is_implementation && is_serialization && qname.type_name() == type)
-            il.user.push_back(private_ser_header);
+            il.user().push_back(private_ser_header);
         });
 
     /*
@@ -387,7 +387,7 @@ void includer::append_std_dependencies(
      */
     const bool is_umap(type_name == std_.type(std_types::unordered_map));
     if (is_header && is_domain && is_umap)
-        il.system.push_back(std_.include(std_types::unordered_map));
+        il.system().push_back(std_.include(std_types::unordered_map));
     lambda(std_.type(std_types::unordered_map));
 
     /*
@@ -395,7 +395,7 @@ void includer::append_std_dependencies(
      */
     const bool is_uset(type_name == std_.type(std_types::unordered_set));
     if (is_header && is_domain && is_uset)
-        il.system.push_back(std_.include(std_types::unordered_set));
+        il.system().push_back(std_.include(std_types::unordered_set));
     lambda(std_.type(std_types::unordered_set));
 
     /*
@@ -403,7 +403,7 @@ void includer::append_std_dependencies(
      */
     if (is_header && is_domain && std_.is_primitive(qname.type_name())) {
         const auto t(std_.string_to_type(type_name));
-        il.system.push_back(std_.include(t));
+        il.system().push_back(std_.include(t));
     }
 
     /*
@@ -411,7 +411,7 @@ void includer::append_std_dependencies(
      */
     const bool is_pair(type_name == std_.type(std_types::pair));
     if (is_header && is_domain && is_pair)
-        il.system.push_back(std_.include(std_types::pair));
+        il.system().push_back(std_.include(std_types::pair));
 }
 
 void includer::append_relationship_dependencies(
@@ -438,7 +438,7 @@ void includer::append_relationship_dependencies(
          * which can be forward declared will forward declare it.
          */
         const auto fwd(aspect_types::forward_decls);
-        il.user.push_back(header_dependency(n, ft, fwd));
+        il.user().push_back(header_dependency(n, ft, fwd));
     }
 
     for(const auto n : names) {
@@ -467,7 +467,7 @@ void includer::append_relationship_dependencies(
          */
         const auto main(aspect_types::main);
         if (is_header && !is_primitive && is_domain)
-            il.user.push_back(header_dependency(n, ft, main));
+            il.user().push_back(header_dependency(n, ft, main));
 
         /*
          * rule 4: odb headers need the corresponding header file
@@ -475,7 +475,7 @@ void includer::append_relationship_dependencies(
          */
         const bool is_odb(ft == cpp_facet_types::odb);
         if (is_header && !is_primitive && is_odb)
-            il.user.push_back(header_dependency(n, ft, main));
+            il.user().push_back(header_dependency(n, ft, main));
 
         /*
          * rule 5: hash, IO, serialisation, and test data
@@ -490,7 +490,7 @@ void includer::append_relationship_dependencies(
         const bool is_non_domain(is_hash || is_io || is_td || is_ser);
 
         if (is_implementation && is_non_domain)
-            il.user.push_back(header_dependency(n, ft, main));
+            il.user().push_back(header_dependency(n, ft, main));
 
         /*
          * rule 6: Domain implementation needs to include any files
@@ -499,7 +499,7 @@ void includer::append_relationship_dependencies(
         const bool forwarded(rel.forward_decls().find(n) !=
             rel.forward_decls().end());
         if (is_implementation && is_domain && forwarded)
-            il.user.push_back(header_dependency(n, ft, main));
+            il.user().push_back(header_dependency(n, ft, main));
 
         /*
          * rule 7: parents and children with integrated IO require IO
@@ -510,7 +510,7 @@ void includer::append_relationship_dependencies(
                 rel.is_child()));
 
         if (is_implementation && io_enabled_ && domain_with_io)
-            il.user.push_back(header_dependency(n, cpp_facet_types::io, main));
+            il.user().push_back(header_dependency(n, cpp_facet_types::io, main));
     }
 
     for (const auto k : rel.keys()) {
@@ -529,7 +529,7 @@ void includer::append_relationship_dependencies(
 
         const auto main(aspect_types::main);
         if (!is_primitive && is_header && hash_enabled_ && is_domain)
-            il.user.push_back(header_dependency(k, cpp_facet_types::hash, main));
+            il.user().push_back(header_dependency(k, cpp_facet_types::hash, main));
     }
 
     for (const auto l : rel.leaves() ) {
@@ -540,7 +540,7 @@ void includer::append_relationship_dependencies(
         const bool is_td(ft == cpp_facet_types::test_data);
         const auto main(aspect_types::main);
         if (is_implementation && is_td)
-            il.user.push_back(header_dependency(l, ft, main));
+            il.user().push_back(header_dependency(l, ft, main));
 
         /*
          * rule 10: base classes require registering all leaves in
@@ -548,7 +548,7 @@ void includer::append_relationship_dependencies(
          */
         const bool is_ser(ft == cpp_facet_types::serialization);
         if (is_implementation && is_ser)
-            il.user.push_back(header_dependency(l, ft, main));
+            il.user().push_back(header_dependency(l, ft, main));
     }
 
     if (rel.visitor()) {
@@ -558,7 +558,7 @@ void includer::append_relationship_dependencies(
         const bool header_and_domain(is_header && is_domain);
         const auto main(aspect_types::main);
         if (header_and_domain)
-            il.user.push_back(header_dependency(*rel.visitor(), ft, main));
+            il.user().push_back(header_dependency(*rel.visitor(), ft, main));
     }
 }
 
@@ -578,7 +578,7 @@ append_self_dependencies(dogen::sml::qname name,
          * domain header.
          */
         if (is_header && !is_domain)
-            il.user.push_back(domain_header_dependency(name, fwd));
+            il.user().push_back(domain_header_dependency(name, fwd));
         return;
     }
 
@@ -588,7 +588,7 @@ append_self_dependencies(dogen::sml::qname name,
      */
     if (is_header && is_domain && serialization_enabled_
         && mt == sml::meta_types::pod)
-        il.user.push_back(header_dependency(name,
+        il.user().push_back(header_dependency(name,
                 cpp_facet_types::serialization, fwd));
 
     /*
@@ -597,21 +597,21 @@ append_self_dependencies(dogen::sml::qname name,
      */
     const auto main(aspect_types::main);
     if (is_header && !is_domain)
-        il.user.push_back(domain_header_dependency(name, main));
+        il.user().push_back(domain_header_dependency(name, main));
 
     /*
      * rule 4: all implementation files depend on the domain header file.
      */
     const bool is_implementation(flt == file_types::implementation);
     if (is_implementation)
-        il.user.push_back(header_dependency(name, ft, main));
+        il.user().push_back(header_dependency(name, ft, main));
 }
 
 void includer::remove_duplicates(inclusion_lists& il) const {
-    il.system.sort();
-    il.system.unique();
-    il.user.sort();
-    il.user.unique();
+    il.system().sort();
+    il.system().unique();
+    il.user().sort();
+    il.user().unique();
 }
 
 inclusion_lists includer::
@@ -619,7 +619,7 @@ includes_for_includer_files(config::cpp_facet_types ft) const {
     inclusion_lists r;
     const auto i(headers_for_facet_.find(ft));
     if (i != headers_for_facet_.end())
-        r.user = i->second;
+        r.user(i->second);
     return r;
 }
 
@@ -635,26 +635,26 @@ includes_for_enumeration(const sml::enumeration& e, config::cpp_facet_types ft,
     const bool is_header(flt == file_types::header);
     const bool is_hash(ft == cpp_facet_types::hash);
     if (is_header && is_hash)
-        r.system.push_back(std_.include(std_types::functional));
+        r.system().push_back(std_.include(std_types::functional));
 
     // nvp serialisation
     const bool is_serialization(ft == cpp_facet_types::serialization);
     if (is_header && is_serialization && !settings_.disable_xml_serialization())
-        r.system.push_back(boost_.include(boost_types::nvp));
+        r.system().push_back(boost_.include(boost_types::nvp));
 
     // iosfwd
     const bool is_io(ft == cpp_facet_types::io);
     if (is_header && is_io && io_enabled_)
-        r.system.push_back(std_.include(std_types::iosfwd));
+        r.system().push_back(std_.include(std_types::iosfwd));
 
     // ostream
     const bool is_implementation(flt == file_types::implementation);
     if (is_implementation && is_io && io_enabled_)
-        r.system.push_back(std_.include(std_types::ostream));
+        r.system().push_back(std_.include(std_types::ostream));
 
     // stdexcept
     if (is_implementation && is_io && io_enabled_)
-        r.system.push_back(std_.include(std_types::stdexcept));
+        r.system().push_back(std_.include(std_types::stdexcept));
 
     remove_duplicates(r);
     return r;
@@ -672,11 +672,11 @@ includes_for_exception(const sml::exception& e, config::cpp_facet_types ft,
     const bool is_header(flt == file_types::header);
     const bool is_domain(ft == cpp_facet_types::types);
     if (is_header && is_domain)
-        r.system.push_back(boost_.include(boost_types::exception_info));
+        r.system().push_back(boost_.include(boost_types::exception_info));
 
     // string
     if (is_header && is_domain)
-        r.system.push_back(std_.include(std_types::string));
+        r.system().push_back(std_.include(std_types::string));
 
     remove_duplicates(r);
     return r;
@@ -693,7 +693,7 @@ includes_for_registrar(file_types flt) const {
     const auto main(aspect_types::main);
     const auto ft(cpp_facet_types::serialization);
     for (const auto& l : model_.leaves())
-        r.user.push_back(header_dependency(l, ft, main));
+        r.user().push_back(header_dependency(l, ft, main));
 
     for (const auto& d : model_.dependencies()) {
         const auto ref(d.second);
@@ -704,19 +704,19 @@ includes_for_registrar(file_types flt) const {
         n.model_name(ref.model_name());
         n.type_name("registrar");
         n.external_package_path(ref.external_package_path());
-        r.user.push_back(header_dependency(n, ft, main));
+        r.user().push_back(header_dependency(n, ft, main));
     }
 
     if (!settings_.disable_xml_serialization()) {
-        r.system.push_back(boost_.include(boost_types::xml_oarchive));
-        r.system.push_back(boost_.include(boost_types::xml_iarchive));
+        r.system().push_back(boost_.include(boost_types::xml_oarchive));
+        r.system().push_back(boost_.include(boost_types::xml_iarchive));
     }
-    r.system.push_back(boost_.include(boost_types::text_oarchive));
-    r.system.push_back(boost_.include(boost_types::text_iarchive));
-    r.system.push_back(boost_.include(boost_types::binary_oarchive));
-    r.system.push_back(boost_.include(boost_types::binary_iarchive));
-    r.system.push_back(boost_.include(boost_types::polymorphic_iarchive));
-    r.system.push_back(boost_.include(boost_types::polymorphic_oarchive));
+    r.system().push_back(boost_.include(boost_types::text_oarchive));
+    r.system().push_back(boost_.include(boost_types::text_iarchive));
+    r.system().push_back(boost_.include(boost_types::binary_oarchive));
+    r.system().push_back(boost_.include(boost_types::binary_iarchive));
+    r.system().push_back(boost_.include(boost_types::polymorphic_iarchive));
+    r.system().push_back(boost_.include(boost_types::polymorphic_oarchive));
 
     return r;
 }
@@ -730,7 +730,7 @@ includes_for_visitor(const dogen::sml::qname& qname) const {
     const auto ft(cpp_facet_types::types);
     for(const auto n : rel.names()) {
         const auto fwd(aspect_types::forward_decls);
-        r.user.push_back(header_dependency(n, ft, fwd));
+        r.user().push_back(header_dependency(n, ft, fwd));
     }
     return r;
 }

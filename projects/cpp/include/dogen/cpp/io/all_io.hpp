@@ -28,6 +28,7 @@
 #include "dogen/cpp/io/exception_info_io.hpp"
 #include "dogen/cpp/io/file_info_io.hpp"
 #include "dogen/cpp/io/file_types_io.hpp"
+#include "dogen/cpp/io/inclusion_lists_io.hpp"
 #include "dogen/cpp/io/location_request_io.hpp"
 #include "dogen/cpp/io/namespace_info_io.hpp"
 #include "dogen/cpp/io/nested_type_info_io.hpp"

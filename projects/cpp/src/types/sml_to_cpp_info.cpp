@@ -624,8 +624,8 @@ transform_file(config::cpp_facet_types ft, file_types flt,
     r.class_info(i->second);
 
     const auto includes(includer_.includes_for_pod(p, ft, flt, at));
-    r.system_includes(includes.system);
-    r.user_includes(includes.user);
+    r.system_includes(includes.system());
+    r.user_includes(includes.user());
     return r;
 }
 
@@ -682,8 +682,8 @@ transform_file(config::cpp_facet_types ft, file_types flt,
     r.enumeration_info(i->second);
 
     const auto in(includer_.includes_for_enumeration(e, ft, flt, at));
-    r.system_includes(in.system);
-    r.user_includes(in.user);
+    r.system_includes(in.system());
+    r.user_includes(in.user());
     return r;
 }
 
@@ -708,8 +708,8 @@ transform_file(config::cpp_facet_types ft, file_types flt,
     r.exception_info(i->second);
 
     const auto in(includer_.includes_for_exception(e, ft, flt, at));
-    r.system_includes(in.system);
-    r.user_includes(in.user);
+    r.system_includes(in.system());
+    r.user_includes(in.user());
     return r;
 }
 
@@ -1135,8 +1135,8 @@ sml_to_cpp_info::transform_facet_includers() const {
         fi.aspect_type(at);
 
         const auto includes(includer_.includes_for_includer_files(ft));
-        fi.system_includes(includes.system);
-        fi.user_includes(includes.user);
+        fi.system_includes(includes.system());
+        fi.user_includes(includes.user());
 
         r.push_back(fi);
     }
@@ -1171,8 +1171,8 @@ std::vector<file_info> sml_to_cpp_info::transform_visitors() {
         fi.header_guard(to_header_guard_name(rp));
 
         const auto includes(includer_.includes_for_visitor(v.first));
-        fi.system_includes(includes.system);
-        fi.user_includes(includes.user);
+        fi.system_includes(includes.system());
+        fi.user_includes(includes.user());
 
         r.push_back(fi);
     }
@@ -1239,8 +1239,8 @@ sml_to_cpp_info::transform_registrar() const {
             fi.registrar_info(ri);
 
             const auto includes(includer_.includes_for_registrar(flt));
-            fi.system_includes(includes.system);
-            fi.user_includes(includes.user);
+            fi.system_includes(includes.system());
+            fi.user_includes(includes.user());
 
             return fi;
         });
