@@ -1,0 +1,299 @@
+diff --git a/doc/release_notes_sprint_27.org b/doc/release_notes_sprint_27.org
+index c72c5cf..3bd12bb 100644
+--- a/doc/release_notes_sprint_27.org
++++ b/doc/release_notes_sprint_27.org
+@@ -25,6 +25,7 @@ Clock summary at [2013-05-22 Wed 22:56]
+ Continuing from previous iteration, see description in Sprint 26.
+ 
+ **** IMPLEMENTATION Create =file_info_factory=
++     CLOCK: [2013-05-23 Thu 07:50]--[2013-05-23 Thu 08:15] =>  0:25
+      CLOCK: [2013-05-22 Wed 18:27]--[2013-05-22 Wed 18:52] =>  0:25
+      CLOCK: [2013-05-22 Wed 18:24]--[2013-05-22 Wed 18:27] =>  0:03
+      CLOCK: [2013-05-22 Wed 18:09]--[2013-05-22 Wed 18:18] =>  0:09
+diff --git a/projects/cpp/include/dogen/cpp/types/file_info_factory.hpp b/projects/cpp/include/dogen/cpp/types/file_info_factory.hpp
+index 68f9c0a..2983b01 100644
+--- a/projects/cpp/include/dogen/cpp/types/file_info_factory.hpp
++++ b/projects/cpp/include/dogen/cpp/types/file_info_factory.hpp
+@@ -27,25 +27,19 @@
+ 
+ #include <set>
+ #include <list>
+-#include <boost/optional.hpp>
+ #include <boost/filesystem/path.hpp>
+ #include "dogen/config/types/cpp_facet_types.hpp"
+ #include "dogen/sml/types/model.hpp"
+-#include "dogen/sml/types/enumeration.hpp"
+-#include "dogen/sml/types/exception.hpp"
+-#include "dogen/sml/types/package.hpp"
+-#include "dogen/sml/types/pod.hpp"
+ #include "dogen/cpp/types/locator.hpp"
+ #include "dogen/cpp/types/location_request.hpp"
+ #include "dogen//cpp/types/includer.hpp"
+-#include "dogen/cpp/types/transformer.hpp"
+ #include "dogen/cpp/types/content_descriptor.hpp"
+ #include "dogen/cpp/types/enumeration_info.hpp"
+ #include "dogen/cpp/types/exception_info.hpp"
+ #include "dogen/cpp/types/namespace_info.hpp"
+ #include "dogen/cpp/types/class_info.hpp"
++#include "dogen/cpp/types/registrar_info.hpp"
+ #include "dogen/cpp/types/file_info.hpp"
+-#include "dogen/cpp/types/content_descriptor_factory.hpp"
+ 
+ namespace dogen {
+ namespace cpp {
+@@ -63,14 +57,11 @@ public:
+ 
+ public:
+     file_info_factory(const std::set<config::cpp_facet_types>& enabled_facets,
+-        const transformer& t, const locator& l, includer& i);
+-
+-public:
+-    typedef boost::optional<const class_info> optional_class_info;
++        const locator& l, includer& i);
+ 
+ private:
+     /**
+-     * @brief Transforms a relative path to a header file into a C++
++     * @brief Converts a relative path to a header file into a C++
+      * header guard name.
+      */
+     std::string to_header_guard_name(const boost::filesystem::path& rp) const;
+@@ -87,42 +78,38 @@ private:
+      */
+     file_info create(const content_descriptor& cd);
+ 
+-    /**
+-     * @brief Manufacture the file info for the given enumeration info.
+-     */
+-    file_info create(const enumeration_info& e, const content_descriptor& cd);
+-
+ public:
+     /**
+-     * @brief Manufacture all the file infos for the given type.
++     * @brief Manufacture the file info for the given enumeration info.
+      */
+-    std::list<file_info> create(const sml::enumeration& e);
++    std::list<file_info> create(const enumeration_info& ei,
++        const std::list<content_descriptor>& descriptors);
+ 
+     /**
+      * @brief Manufacture all the file infos for the given exception.
+      */
+-    std::list<file_info> create(const sml::exception& e);
++    std::list<file_info> create(const sml::exception& e,
++        const exception_info& ei);
+ 
+     /**
+      * @brief Manufacture all the file infos for the given package.
+      */
+-    std::list<file_info> create(const sml::package& p);
++    std::list<file_info> create(const sml::package& p,
++        const namespace_info& ni);
+ 
+     /**
+      * @brief Manufacture all the file infos for the given model.
+      *
+-     * Note that this method is very misleading - we are not
+-     * transforming the entire model, only the package aspect of a
++     * Note that this method is very misleading - we are not creating
++     * file infos for the entire model, only the package aspect of a
+      * model.
+      */
+-    std::list<file_info> create(const sml::model& m);
++    std::list<file_info> create(const sml::model& m, const namespace_info& ni);
+ 
+     /**
+      * @brief Manufacture all the file infos for the given pod.
+      */
+-    std::list<file_info> create(const sml::pod& p,
+-        const optional_class_info pci = optional_class_info(),
+-        const optional_class_info opci = optional_class_info());
++    std::list<file_info> create(const sml::pod& p, const class_info& ci);
+ 
+     /**
+      * @brief Manufacture file info for includer.
+@@ -134,11 +121,11 @@ public:
+     /**
+      * @brief Manufacture file info for registrar.
+      */
+-    std::list<file_info> create_registrar(const sml::model& m);
++    std::list<file_info> create_registrar(const sml::model& m,
++        const registrar_info& ri);
+ 
+ private:
+     const content_descriptor_factory descriptor_factory_;
+-    const transformer& transformer_;
+     const locator& locator_;
+     includer& includer_;
+ };
+diff --git a/projects/cpp/src/types/file_info_factory.cpp b/projects/cpp/src/types/file_info_factory.cpp
+index 2038be3..b54b22b 100644
+--- a/projects/cpp/src/types/file_info_factory.cpp
++++ b/projects/cpp/src/types/file_info_factory.cpp
+@@ -47,9 +47,8 @@ namespace cpp {
+ 
+ file_info_factory::
+ file_info_factory(const std::set<config::cpp_facet_types>& enabled_facets,
+-    const transformer& t, const locator& l, includer& i)
+-    : descriptor_factory_(enabled_facets), transformer_(t), locator_(l),
+-      includer_(i) { }
++    const locator& l, includer& i)
++    : descriptor_factory_(enabled_facets), locator_(l), includer_(i) { }
+ 
+ std::string file_info_factory::
+ to_header_guard_name(const boost::filesystem::path& rp) const {
+@@ -99,14 +98,10 @@ file_info file_info_factory::create(const content_descriptor& cd) {
+     return r;
+ }
+ 
+-std::list<file_info> file_info_factory::create(const sml::enumeration& e) {
+-    if (e.generation_type() == sml::generation_types::no_generation)
+-        return std::list<file_info>{ };
+-
++std::list<file_info> file_info_factory::create(const enumeration_info& ei,
++    const std::list<content_descriptor>& descriptors) {
+     std::list<file_info> r;
+-    const auto ei(transformer_.transform(e));
+-    const auto ct(sml::category_types::user_defined);
+-    for (const auto cd : descriptor_factory_.create(e.name(), ct)) {
++    for (const auto cd : descriptors) {
+         file_info fi(create(cd));
+         fi.enumeration_info(ei);
+ 
+@@ -120,12 +115,10 @@ std::list<file_info> file_info_factory::create(const sml::enumeration& e) {
+     return r;
+ }
+ 
+-std::list<file_info> file_info_factory::create(const sml::exception& e) {
+-    if (e.generation_type() == sml::generation_types::no_generation)
+-        return std::list<file_info>{ };
+-
++std::list<file_info> file_info_factory::
++create(const exception_info& ei,
++    const std::list<content_descriptor>& descriptors) {
+     std::list<file_info> r;
+-    const auto ei(transformer_.transform(e));
+     const auto ct(sml::category_types::user_defined);
+     for (const auto cd : descriptor_factory_.create(e.name(), ct)) {
+         file_info fi(create(cd));
+@@ -141,21 +134,22 @@ std::list<file_info> file_info_factory::create(const sml::exception& e) {
+     return r;
+ }
+ 
+-std::list<file_info> file_info_factory::create(const sml::package& p) {
++std::list<file_info> file_info_factory::
++create(const sml::package& p, const namespace_info& ni) {
+     if (p.documentation().empty())
+         return std::list<file_info>{ };
+ 
+     std::list<file_info> r;
+-    const auto pi(transformer_.transform(p));
+     for (const auto cd : descriptor_factory_.create(p.name())) {
+         file_info fi(create(cd));
+-        fi.namespace_info(pi);
++        fi.namespace_info(ni);
+         r.push_back(fi);
+     }
+     return r;
+ }
+ 
+-std::list<file_info> file_info_factory::create(const sml::model& m) {
++std::list<file_info> file_info_factory::
++create(const sml::model& m, const namespace_info& ni) {
+     // FIXME Create an attribute of type package in model.
+     // FIXME: we shouldn't really be passing models around since
+     // the transformer is already bound to a model.
+@@ -164,23 +158,21 @@ std::list<file_info> file_info_factory::create(const sml::model& m) {
+         return std::list<file_info>{ };
+ 
+     std::list<file_info> r;
+-    const auto pi(transformer_.transform_model_into_namespace());
+     for (const auto cd : descriptor_factory_.create(m)) {
+         file_info fi(create(cd));
+-        fi.namespace_info(pi);
++        fi.namespace_info(ni);
+         r.push_back(fi);
+     }
+     return r;
+ }
+ 
+-std::list<file_info> file_info_factory::create(const sml::pod& p,
+-    const optional_class_info pci, const optional_class_info opci) {
++std::list<file_info> file_info_factory::
++create(const sml::pod& p, const class_info& ci) {
+ 
+     if (p.generation_type() == sml::generation_types::no_generation)
+         return std::list<file_info>{ };
+ 
+     std::list<file_info> r;
+-    const auto ci(transformer_.transform(p, pci, opci));
+     const auto ct(p.category_type());
+     const auto pt(p.pod_type());
+     for (const auto cd : descriptor_factory_.create(p.name(), ct, pt)) {
+@@ -222,7 +214,8 @@ std::list<file_info> file_info_factory::create_includer(
+ }
+ 
+ std::list<file_info>
+-file_info_factory::create_registrar(const sml::model& m) {
++file_info_factory::
++create_registrar(const sml::model& m, const registrar_info& ri) {
+     // FIXME: we shouldn't really be passing models around since
+     // the transformer is already bound to a model.
+     std::list<file_info> r;
+@@ -233,7 +226,6 @@ file_info_factory::create_registrar(const sml::model& m) {
+     // FIXME: we should probably have a not SML type instead of lying
+     qn.meta_type(sml::meta_types::pod);
+ 
+-    const auto ri(transformer_.transform_model_into_registrar());
+     for (const auto cd : descriptor_factory_.create_registrar(qn)) {
+         file_info fi(create(cd));
+ 
+diff --git a/projects/cpp/src/types/workflow.cpp b/projects/cpp/src/types/workflow.cpp
+index 55b6356..bd86961 100644
+--- a/projects/cpp/src/types/workflow.cpp
++++ b/projects/cpp/src/types/workflow.cpp
+@@ -170,16 +170,30 @@ workflow::value_type workflow::old_generate_file_infos() const {
+ 
+ workflow::value_type workflow::generate_file_infos() const {
+     includer i(model_, locator_, settings_);
++    file_info_factory f(locator_, i);
+     transformer t(model_);
+-    file_info_factory f(settings_.enabled_facets(), t, locator_, i);
++    const descriptor_factory df(settings_.enabled_facets());
+ 
+     workflow::value_type r;
+-    for (const auto& e : model_.enumerations()) {
++    for (const auto& pair : model_.enumerations()) {
++        const auto& e(pair.second);
++        if (e.generation_type() == sml::generation_types::no_generation)
++            continue;
++
++        const auto ct(sml::category_types::user_defined);
++
++        const auto descriptors(descriptor_factory_.create(e.name(), ct));
+         for (const auto& fi : f.create(e.second))
+             r.insert(generate_file_info(fi));
+     }
+ 
+     for (const auto& e : model_.exceptions()) {
++        if (e.generation_type() == sml::generation_types::no_generation)
++            return std::list<file_info>{ };
++
++        const auto ct(sml::category_types::user_defined);
++        const auto descriptors(descriptor_factory_.create(e.name(), ct));
++
+         for (const auto& fi : f.create(e.second))
+             r.insert(generate_file_info(fi));
+     }
+@@ -201,6 +215,11 @@ workflow::value_type workflow::generate_file_infos() const {
+             r.insert(generate_file_info(fi));
+     }
+ 
++    std::unordered_map<sml::qname, class_info> class_infos;
++    for (const auto& e : model_.pods()) {
++        for (const auto& fi : f.create(e.second))
++            r.insert(generate_file_info(fi));
++    }
+     return r;
+ }
+ 
