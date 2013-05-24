@@ -1111,6 +1111,14 @@ in dia, for which the values would be the strings to use for the
 error. The user could then create an exception and pass in the error
 code in the constructor.
 
+We should also make use of string tables to define all the error
+messages.
+
+Could we just have an exception factory that handles all of the
+machinery of creating an exception with the right code, message etc?
+it could also be responsible for appending more content to an existing
+exception so that we'd have the tags all in one place.
+
 *** Registrar is not included in serialisation includer
 
 For some reason we are not including the registrar on the includer for
