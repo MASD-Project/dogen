@@ -14,6 +14,8 @@ Stories that we intend to look at, at some point.
 *** Remote method invocation
     CLOCK: [2013-05-24 Fri 07:46]--[2013-05-24 Fri 08:13] =>  0:27
 
+See [[*Type%20framing][type framing]], [[*Model%20and%20type%20enums][Model and type enums]],
+
 It seems fairly straightforward to add remote method invocation to a
 few select types. The following would have to be done:
 
