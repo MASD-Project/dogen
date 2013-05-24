@@ -11,6 +11,45 @@ This file contains all stories that haven't been assigned to a sprint.
 
 Stories that we intend to look at, at some point.
 
+*** Remote method invocation
+
+It seems fairly straightforward to add remote method invocation to a
+few select types. The following would have to be done:
+
+- create a new stereotype like =dispatchable= or suchlike
+- validation: model must have a model ID, thought to be unique across
+  models.
+- validation: types must be marked as both =dispatchable= and
+  =service= and have a unique type ID in the model.
+- validation: types must have at least one public method
+- injector: if at least one type is =dispatchable=, a new system
+  package is created: =dispatching=.
+- injector: a system enumeration will be created with all the
+  supported serialisation types. actually, we should create this
+  anyway in serialisation.
+- dispatching will contain one class that represents a "frame". this
+  frame will be composed as follows: model ID, type ID, serialisation
+  type, raw buffer. we need to look at RMI terminology to come up with
+  a good name for this frame.
+- messages: for each method that exists in each dispatchable service,
+  a message class will be created with a name following some well
+  defined convention such as =CLASS_NAME_METHOD_NAME=. we need
+  examples to make up a sensible convention. or perhaps an
+  implementation specific parameter can override the class name. the
+  message class is a data object and has as attributes all of the
+  parameters of the method.
+- a dispatcher class will be created in dispatching. it will have as
+  constructor arguments references to all the dispatchable
+  services. when passed in a frame, it will hydrate it and dispatch it
+  to the correct service.
+- a "framer" class will be created in dispatching. it will be
+  configured for a given serialisation type. it will take a message
+  object, serialise it and frame it.
+
+Now we just need a way of creating some generic interfaces that take a
+wire client and a wire service and plug the framer and the dispatcher
+into it.
+
 *** Make inclusion lists in includer a model type
 
 We created a class inlined in the header for no good reason. make it a
