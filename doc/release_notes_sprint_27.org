@@ -10,14 +10,15 @@ This file contains all stories that were closed during sprint 27.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-05-22 Wed 22:56]
+Clock summary at [2013-05-25 Sat 23:39]
 
-| Headline                                           | Time   |      |      |
-|----------------------------------------------------+--------+------+------|
-| *Total time*                                       | *8:35* |      |      |
-|----------------------------------------------------+--------+------+------|
-| Development Stories Implemented                    |        | 8:35 |      |
-| IMPLEMENTATION Clean up the SML to C++ transformer |        |      | 8:35 |
+| Headline                                                | Time    |       |       |
+|---------------------------------------------------------+---------+-------+-------|
+| *Total time*                                            | *12:45* |       |       |
+|---------------------------------------------------------+---------+-------+-------|
+| Development Stories Implemented                         |         | 12:45 |       |
+| COMPLETED Make inclusion lists in includer a model type |         |       |  0:15 |
+| IMPLEMENTATION Clean up the SML to C++ transformer      |         |       | 12:30 |
 #+end:
 
 *** COMPLETED Make inclusion lists in includer a model type
@@ -31,7 +32,11 @@ model type.
 
 Continuing from previous iteration, see description in Sprint 26.
 
-**** IMPLEMENTATION Create =file_info_factory=
+**** COMPLETED Create =file_info_factory=
+     CLOSED: [2013-05-25 Sat 23:39]
+     CLOCK: [2013-05-23 Thu 23:20]--[2013-05-24 Fri 00:35] =>  1:15
+     CLOCK: [2013-05-23 Thu 22:00]--[2013-05-23 Thu 23:05] =>  1:05
+     CLOCK: [2013-05-23 Thu 07:50]--[2013-05-23 Thu 08:15] =>  0:25
      CLOCK: [2013-05-22 Wed 18:27]--[2013-05-22 Wed 18:52] =>  0:25
      CLOCK: [2013-05-22 Wed 18:24]--[2013-05-22 Wed 18:27] =>  0:03
      CLOCK: [2013-05-22 Wed 18:09]--[2013-05-22 Wed 18:18] =>  0:09
@@ -60,6 +65,7 @@ Continuing from previous iteration, see description in Sprint 26.
      CLOCK: [2013-05-19 Sun 22:53]--[2013-05-20 Mon 00:04] =>  1:11
 
 **** IMPLEMENTATION Plug =file_info_factory= into workflow
+     CLOCK: [2013-05-25 Sat 22:29]--[2013-05-25 Sat 23:39] =>  1:10
      CLOCK: [2013-05-22 Wed 22:20]--[2013-05-22 Wed 22:56] =>  0:36
 
 *** IMPLEMENTATION Move services into their own type                  :story:

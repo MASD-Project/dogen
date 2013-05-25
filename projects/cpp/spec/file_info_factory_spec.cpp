@@ -29,7 +29,6 @@
 #include "dogen/cpp/types/building_error.hpp"
 #include "dogen/sml/test/mock_model_factory.hpp"
 #include "dogen/config/test/mock_settings_factory.hpp"
-#include "dogen/cpp/types/transformer.hpp"
 #include "dogen/cpp/types/file_info_factory.hpp"
 
 using dogen::config::cpp_facet_types;
@@ -43,14 +42,74 @@ const std::string test_suite("file_info_factory_spec");
 const std::string src_dir("__source_directory__");
 const std::string inc_dir("__include_directory__");
 
+std::list<dogen::cpp::content_descriptor>
+mock_descriptors(const dogen::sml::qname& qn) {
+    std::list<dogen::cpp::content_descriptor> r;
+
+    dogen::cpp::content_descriptor cd;
+    cd.name(qn);
+    cd.facet_type(dogen::config::cpp_facet_types::types);
+    cd.file_type(dogen::cpp::file_types::header);
+    cd.aspect_type(dogen::cpp::aspect_types::main);
+    cd.category_type(dogen::sml::category_types::user_defined);
+    r.push_back(cd);
+
+    cd.facet_type(dogen::config::cpp_facet_types::serialization);
+    r.push_back(cd);
+
+    cd.facet_type(dogen::config::cpp_facet_types::hash);
+    r.push_back(cd);
+
+    return r;
+}
+
+std::list<dogen::cpp::content_descriptor>
+mock_descriptor_for_includer(const dogen::config::cpp_facet_types ft) {
+    std::list<dogen::cpp::content_descriptor> r;
+
+    dogen::sml::qname qn;
+    qn.type_name(mock_model_factory::type_name());
+    qn.meta_type(dogen::sml::meta_types::pod);
+    qn.model_name(mock_model_factory::model_name());
+
+    dogen::cpp::content_descriptor cd;
+    cd.name(qn);
+    cd.facet_type(ft);
+    cd.file_type(dogen::cpp::file_types::header);
+    cd.aspect_type(dogen::cpp::aspect_types::includers);
+    cd.category_type(dogen::sml::category_types::user_defined);
+    r.push_back(cd);
+
+    return r;
+}
+
+std::list<dogen::cpp::content_descriptor> mock_descriptor_for_registrar() {
+    std::list<dogen::cpp::content_descriptor> r;
+
+    dogen::sml::qname qn;
+    qn.type_name(mock_model_factory::type_name());
+    qn.meta_type(dogen::sml::meta_types::pod);
+    qn.model_name(mock_model_factory::model_name());
+
+    dogen::cpp::content_descriptor cd;
+    cd.name(qn);
+    cd.facet_type(dogen::config::cpp_facet_types::serialization);
+    cd.file_type(dogen::cpp::file_types::header);
+    cd.aspect_type(dogen::cpp::aspect_types::registrar);
+    cd.category_type(dogen::sml::category_types::user_defined);
+    r.push_back(cd);
+
+    return r;
+}
+
 }
 
 using dogen::utility::test::contains_checker;
 
 BOOST_AUTO_TEST_SUITE(file_info_factory)
 
-BOOST_AUTO_TEST_CASE(creating_file_info_for_enumeration_with_all_facets_enabled_produces_expected_results) {
-    SETUP_TEST_LOG_SOURCE("creating_file_info_for_enumeration_with_all_facets_enabled_produces_expected_results");
+BOOST_AUTO_TEST_CASE(creating_file_info_for_enumeration_produces_expected_results) {
+    SETUP_TEST_LOG_SOURCE("creating_file_info_for_enumeration_produces_expected_results");
 
     const auto mt(dogen::sml::meta_types::enumeration);
     const auto m(mock_model_factory::build_single_type_model(0, mt));
@@ -60,17 +119,18 @@ BOOST_AUTO_TEST_CASE(creating_file_info_for_enumeration_with_all_facets_enabled_
     const auto s(mock_settings_factory::build_cpp_settings(src_dir, inc_dir));
     dogen::cpp::locator l(m.name(), s);
     dogen::cpp::includer i(m, l, s);
-    dogen::cpp::transformer t(m);
 
-    dogen::cpp::file_info_factory f(s.enabled_facets(), t, l, i);
+    dogen::cpp::file_info_factory f(l, i);
+    const dogen::cpp::enumeration_info ei;
     const auto en(m.enumerations().begin()->second);
-    const auto infos(f.create(en));
+    const auto md(mock_descriptors(en.name()));
+    const auto infos(f.create(ei, md));
     BOOST_LOG_SEV(lg, debug) << "file infos: " << infos;
 
     std::set<dogen::config::cpp_facet_types> found_facets;
     for (const auto& fi : infos) {
         found_facets.insert(fi.facet_type());
-        BOOST_CHECK(fi.meta_type() == en.name().meta_type());
+        BOOST_CHECK(fi.meta_type() == dogen::sml::meta_types::enumeration);
         BOOST_CHECK(fi.enumeration_info());
         BOOST_CHECK(!fi.class_info());
         BOOST_CHECK(!fi.exception_info());
@@ -84,50 +144,9 @@ BOOST_AUTO_TEST_CASE(creating_file_info_for_enumeration_with_all_facets_enabled_
         else if (fi.file_type() == dogen::cpp::file_types::implementation)
             BOOST_CHECK(fi.header_guard().empty());
     }
-    BOOST_CHECK(found_facets == s.enabled_facets());
-}
-
-BOOST_AUTO_TEST_CASE(creating_file_info_for_enumeration_with_a_few_facets_enabled_produces_expected_results) {
-    SETUP_TEST_LOG_SOURCE("creating_file_info_for_enumeration_with_a_few_facets_enabled_produces_expected_results");
-
-    const auto mt(dogen::sml::meta_types::enumeration);
-    const auto m(mock_model_factory::build_single_type_model(0, mt));
-    BOOST_LOG_SEV(lg, debug) << "model: " << m;
-    BOOST_REQUIRE(m.enumerations().size() == 1);
-
-    auto s(mock_settings_factory::build_cpp_settings(src_dir, inc_dir));
-    std::set<cpp_facet_types> ft;
-    ft.insert(cpp_facet_types::types);
-    ft.insert(cpp_facet_types::io);
-    s.enabled_facets(ft);
-
-    dogen::cpp::locator l(m.name(), s);
-    dogen::cpp::includer i(m, l, s);
-    dogen::cpp::transformer t(m);
-
-    dogen::cpp::file_info_factory f(s.enabled_facets(), t, l, i);
-    const auto en(m.enumerations().begin()->second);
-    const auto infos(f.create(en));
-    BOOST_LOG_SEV(lg, debug) << "file infos: " << infos;
-
-    std::set<dogen::config::cpp_facet_types> found_facets;
-    for (const auto& fi : infos) {
-        found_facets.insert(fi.facet_type());
-        BOOST_CHECK(fi.meta_type() == en.name().meta_type());
-        BOOST_CHECK(fi.enumeration_info());
-        BOOST_CHECK(!fi.class_info());
-        BOOST_CHECK(!fi.exception_info());
-        BOOST_CHECK(!fi.namespace_info());
-        BOOST_CHECK(!fi.registrar_info());
-        BOOST_CHECK(!fi.visitor_info());
-        BOOST_CHECK(!fi.file_path().empty());
-
-        if (fi.file_type() == dogen::cpp::file_types::header)
-            BOOST_CHECK(!fi.header_guard().empty());
-        else if (fi.file_type() == dogen::cpp::file_types::implementation)
-            BOOST_CHECK(fi.header_guard().empty());
-    }
-    BOOST_CHECK(found_facets == s.enabled_facets());
+    BOOST_CHECK(found_facets.size() == md.size());
+    for (const auto& d : md)
+        BOOST_CHECK(found_facets.find(d.facet_type()) != found_facets.end());
 }
 
 BOOST_AUTO_TEST_CASE(creating_file_info_for_exception_produces_expected_results) {
@@ -141,11 +160,11 @@ BOOST_AUTO_TEST_CASE(creating_file_info_for_exception_produces_expected_results)
     const auto s(mock_settings_factory::build_cpp_settings(src_dir, inc_dir));
     dogen::cpp::locator l(m.name(), s);
     dogen::cpp::includer i(m, l, s);
-    dogen::cpp::transformer t(m);
-
-    dogen::cpp::file_info_factory f(s.enabled_facets(), t, l, i);
+    dogen::cpp::file_info_factory f(l, i);
     const auto ex(m.exceptions().begin()->second);
-    const auto infos(f.create(ex));
+    const auto md(mock_descriptors(ex.name()));
+    const dogen::cpp::exception_info ei;
+    const auto infos(f.create(ei, md));
     BOOST_LOG_SEV(lg, debug) << "file infos: " << infos;
 
     std::set<dogen::config::cpp_facet_types> found_facets;
@@ -165,8 +184,9 @@ BOOST_AUTO_TEST_CASE(creating_file_info_for_exception_produces_expected_results)
         else if (fi.file_type() == dogen::cpp::file_types::implementation)
             BOOST_CHECK(fi.header_guard().empty());
     }
-    BOOST_CHECK(found_facets.size() == 1);
-    BOOST_CHECK(*found_facets.begin() == dogen::config::cpp_facet_types::types);
+    BOOST_CHECK(found_facets.size() == md.size());
+    for (const auto& d : md)
+        BOOST_CHECK(found_facets.find(d.facet_type()) != found_facets.end());
 }
 
 BOOST_AUTO_TEST_CASE(creating_file_info_for_package_produces_expected_results) {
@@ -181,11 +201,11 @@ BOOST_AUTO_TEST_CASE(creating_file_info_for_package_produces_expected_results) {
     const auto s(mock_settings_factory::build_cpp_settings(src_dir, inc_dir));
     dogen::cpp::locator l(m.name(), s);
     dogen::cpp::includer i(m, l, s);
-    dogen::cpp::transformer t(m);
-
-    dogen::cpp::file_info_factory f(s.enabled_facets(), t, l, i);
+    dogen::cpp::file_info_factory f(l, i);
     const auto p(m.packages().begin()->second);
-    const auto infos(f.create(p));
+    const auto md(mock_descriptors(p.name()));
+    const dogen::cpp::namespace_info ni;
+    const auto infos(f.create(ni, md));
     BOOST_LOG_SEV(lg, debug) << "file infos: " << infos;
 
     std::set<dogen::config::cpp_facet_types> found_facets;
@@ -205,50 +225,13 @@ BOOST_AUTO_TEST_CASE(creating_file_info_for_package_produces_expected_results) {
         else if (fi.file_type() == dogen::cpp::file_types::implementation)
             BOOST_CHECK(fi.header_guard().empty());
     }
-    BOOST_CHECK(found_facets.size() == 1);
-    BOOST_CHECK(*found_facets.begin() == dogen::config::cpp_facet_types::types);
+    BOOST_CHECK(found_facets.size() == md.size());
+    for (const auto& d : md)
+        BOOST_CHECK(found_facets.find(d.facet_type()) != found_facets.end());
 }
 
-BOOST_AUTO_TEST_CASE(creating_file_info_for_model_produces_expected_results) {
-    SETUP_TEST_LOG_SOURCE("creating_file_info_for_model_produces_expected_results");
-
-    const auto mt(dogen::sml::meta_types::pod);
-    const auto m(
-        mock_model_factory::build_single_type_model_in_package(0, mt, 1));
-    BOOST_LOG_SEV(lg, debug) << "model: " << m;
-
-    const auto s(mock_settings_factory::build_cpp_settings(src_dir, inc_dir));
-    dogen::cpp::locator l(m.name(), s);
-    dogen::cpp::includer i(m, l, s);
-    dogen::cpp::transformer t(m);
-
-    dogen::cpp::file_info_factory f(s.enabled_facets(), t, l, i);
-    const auto infos(f.create(m));
-    BOOST_LOG_SEV(lg, debug) << "file infos: " << infos;
-
-    std::set<dogen::config::cpp_facet_types> found_facets;
-    for (const auto& fi : infos) {
-        found_facets.insert(fi.facet_type());
-        BOOST_CHECK(fi.meta_type() == dogen::sml::meta_types::package);
-        BOOST_CHECK(!fi.enumeration_info());
-        BOOST_CHECK(!fi.class_info());
-        BOOST_CHECK(!fi.exception_info());
-        BOOST_CHECK(fi.namespace_info());
-        BOOST_CHECK(!fi.registrar_info());
-        BOOST_CHECK(!fi.visitor_info());
-        BOOST_CHECK(!fi.file_path().empty());
-
-        if (fi.file_type() == dogen::cpp::file_types::header)
-            BOOST_CHECK(!fi.header_guard().empty());
-        else if (fi.file_type() == dogen::cpp::file_types::implementation)
-            BOOST_CHECK(fi.header_guard().empty());
-    }
-    BOOST_CHECK(found_facets.size() == 1);
-    BOOST_CHECK(*found_facets.begin() == dogen::config::cpp_facet_types::types);
-}
-
-BOOST_AUTO_TEST_CASE(creating_file_info_for_pod_with_all_facets_enabled_produces_expected_results) {
-    SETUP_TEST_LOG_SOURCE("creating_file_info_for_pod_with_all_facets_enabled_produces_expected_results");
+BOOST_AUTO_TEST_CASE(creating_file_info_for_pod_produces_expected_results) {
+    SETUP_TEST_LOG_SOURCE("creating_file_info_for_pod_produces_expected_results");
 
     const auto m(mock_model_factory::build_single_type_model());
     BOOST_LOG_SEV(lg, debug) << "model: " << m;
@@ -257,11 +240,11 @@ BOOST_AUTO_TEST_CASE(creating_file_info_for_pod_with_all_facets_enabled_produces
     const auto s(mock_settings_factory::build_cpp_settings(src_dir, inc_dir));
     dogen::cpp::locator l(m.name(), s);
     dogen::cpp::includer i(m, l, s);
-    dogen::cpp::transformer t(m);
-
-    dogen::cpp::file_info_factory f(s.enabled_facets(), t, l, i);
+    dogen::cpp::file_info_factory f(l, i);
     const auto p(m.pods().begin()->second);
-    const auto infos(f.create(p));
+    const auto md(mock_descriptors(p.name()));
+    const dogen::cpp::class_info ci;
+    const auto infos(f.create(ci, md));
     BOOST_LOG_SEV(lg, debug) << "file infos: " << infos;
 
     std::set<dogen::config::cpp_facet_types> found_facets;
@@ -281,54 +264,13 @@ BOOST_AUTO_TEST_CASE(creating_file_info_for_pod_with_all_facets_enabled_produces
         else if (fi.file_type() == dogen::cpp::file_types::implementation)
             BOOST_CHECK(fi.header_guard().empty());
     }
-    BOOST_CHECK(found_facets == s.enabled_facets());
+    BOOST_CHECK(found_facets.size() == md.size());
+    for (const auto& d : md)
+        BOOST_CHECK(found_facets.find(d.facet_type()) != found_facets.end());
 }
 
-BOOST_AUTO_TEST_CASE(creating_file_info_for_pod_with_some_facets_enabled_produces_expected_results) {
-    SETUP_TEST_LOG_SOURCE("creating_file_info_for_pod_with_some_facets_enabled_produces_expected_results");
-
-    const auto m(mock_model_factory::build_single_type_model());
-    BOOST_LOG_SEV(lg, debug) << "model: " << m;
-    BOOST_REQUIRE(m.pods().size() == 1);
-
-    auto s(mock_settings_factory::build_cpp_settings(src_dir, inc_dir));
-    std::set<cpp_facet_types> ft;
-    ft.insert(cpp_facet_types::types);
-    ft.insert(cpp_facet_types::io);
-    s.enabled_facets(ft);
-
-    dogen::cpp::locator l(m.name(), s);
-    dogen::cpp::includer i(m, l, s);
-    dogen::cpp::transformer t(m);
-
-    dogen::cpp::file_info_factory f(s.enabled_facets(), t, l, i);
-    const auto p(m.pods().begin()->second);
-    const auto infos(f.create(p));
-    BOOST_LOG_SEV(lg, debug) << "file infos: " << infos;
-
-    std::set<dogen::config::cpp_facet_types> found_facets;
-    for (const auto& fi : infos) {
-        found_facets.insert(fi.facet_type());
-        BOOST_CHECK(fi.meta_type() == p.name().meta_type());
-        BOOST_CHECK(!fi.enumeration_info());
-        BOOST_CHECK(fi.class_info());
-        BOOST_CHECK(!fi.exception_info());
-        BOOST_CHECK(!fi.namespace_info());
-        BOOST_CHECK(!fi.registrar_info());
-        BOOST_CHECK(!fi.visitor_info());
-        BOOST_CHECK(!fi.file_path().empty());
-
-        if (fi.file_type() == dogen::cpp::file_types::header)
-            BOOST_CHECK(!fi.header_guard().empty());
-        else if (fi.file_type() == dogen::cpp::file_types::implementation)
-            BOOST_CHECK(fi.header_guard().empty());
-    }
-    BOOST_CHECK(found_facets.size() == 2);
-    BOOST_CHECK(*found_facets.begin() == dogen::config::cpp_facet_types::types);
-}
-
-BOOST_AUTO_TEST_CASE(creating_includer_file_info_for_single_pod_produces_expected_results) {
-    SETUP_TEST_LOG_SOURCE("creating_includer_file_info_for_single_pod_produces_expected_results");
+BOOST_AUTO_TEST_CASE(creating_non_empty_includer_file_info_produces_expected_results) {
+    SETUP_TEST_LOG_SOURCE("creating_non_empty_includer_file_info_produces_expected_results");
 
     const auto m(mock_model_factory::build_single_type_model());
     BOOST_LOG_SEV(lg, debug) << "model: " << m;
@@ -337,15 +279,13 @@ BOOST_AUTO_TEST_CASE(creating_includer_file_info_for_single_pod_produces_expecte
     const auto s(mock_settings_factory::build_cpp_settings(src_dir, inc_dir));
     dogen::cpp::locator l(m.name(), s);
     dogen::cpp::includer i(m, l, s);
-    dogen::cpp::transformer t(m);
-
-    dogen::cpp::file_info_factory f(s.enabled_facets(), t, l, i);
-    const auto p(m.pods().begin()->second);
-    const auto pod_infos(f.create(p));
-    BOOST_LOG_SEV(lg, debug) << "pod file infos: " << pod_infos;
+    dogen::cpp::file_info_factory f(l, i);
 
     const auto ft(dogen::config::cpp_facet_types::types);
-    const auto includer_infos(f.create_includer(m.external_package_path(), ft));
+    i.register_header(ft, mock_model_factory::type_name(0));
+    i.register_header(ft, mock_model_factory::type_name(1));
+    const auto md(mock_descriptor_for_includer(ft));
+    const auto includer_infos(f.create_includer(md));
     BOOST_LOG_SEV(lg, debug) << "includer file infos: " << includer_infos;
 
     BOOST_REQUIRE(includer_infos.size() == 1);
@@ -362,12 +302,52 @@ BOOST_AUTO_TEST_CASE(creating_includer_file_info_for_single_pod_produces_expecte
     BOOST_CHECK(!fi.file_path().empty());
     BOOST_CHECK(fi.file_type() == dogen::cpp::file_types::header);
 
-    bool found(false);
+    bool found_0(false), found_1(false);
     for (const auto& ui : fi.user_includes()) {
-        if (boost::contains(ui, p.name().type_name()))
-            found = true;
+        if (ui == mock_model_factory::type_name(0))
+            found_0 = true;
+        else if (ui == mock_model_factory::type_name(1))
+            found_1 = true;
     }
-    BOOST_CHECK(found);
+    BOOST_CHECK(found_0);
+    BOOST_CHECK(found_1);
+}
+
+BOOST_AUTO_TEST_CASE(creating_empty_includer_file_info_produces_expected_results) {
+    SETUP_TEST_LOG_SOURCE("creating_empty_includer_file_info_produces_expected_results");
+
+    const auto m(mock_model_factory::build_single_type_model());
+    BOOST_LOG_SEV(lg, debug) << "model: " << m;
+    BOOST_REQUIRE(m.pods().size() == 1);
+
+    const auto s(mock_settings_factory::build_cpp_settings(src_dir, inc_dir));
+    dogen::cpp::locator l(m.name(), s);
+    dogen::cpp::includer i(m, l, s);
+    dogen::cpp::file_info_factory f(l, i);
+
+    const auto ft1(dogen::config::cpp_facet_types::types);
+    i.register_header(ft1, mock_model_factory::type_name(0));
+    i.register_header(ft1, mock_model_factory::type_name(1));
+
+    const auto ft2(dogen::config::cpp_facet_types::serialization);
+    const auto md(mock_descriptor_for_includer(ft2));
+    const auto includer_infos(f.create_includer(md));
+    BOOST_LOG_SEV(lg, debug) << "includer file infos: " << includer_infos;
+
+    BOOST_REQUIRE(includer_infos.size() == 1);
+    const auto fi(includer_infos.front());
+
+    BOOST_CHECK(fi.facet_type() == ft2);
+    BOOST_CHECK(fi.aspect_type() == dogen::cpp::aspect_types::includers);
+    BOOST_CHECK(!fi.enumeration_info());
+    BOOST_CHECK(!fi.class_info());
+    BOOST_CHECK(!fi.exception_info());
+    BOOST_CHECK(!fi.namespace_info());
+    BOOST_CHECK(!fi.registrar_info());
+    BOOST_CHECK(!fi.visitor_info());
+    BOOST_CHECK(!fi.file_path().empty());
+    BOOST_CHECK(fi.file_type() == dogen::cpp::file_types::header);
+    BOOST_CHECK(fi.user_includes().empty());
 }
 
 BOOST_AUTO_TEST_CASE(creating_file_info_for_registrar_produces_expected_results) {
@@ -379,10 +359,11 @@ BOOST_AUTO_TEST_CASE(creating_file_info_for_registrar_produces_expected_results)
     const auto s(mock_settings_factory::build_cpp_settings(src_dir, inc_dir));
     dogen::cpp::locator l(m.name(), s);
     dogen::cpp::includer i(m, l, s);
-    dogen::cpp::transformer t(m);
+    dogen::cpp::file_info_factory f(l, i);
 
-    dogen::cpp::file_info_factory f(s.enabled_facets(), t, l, i);
-    const auto infos(f.create_registrar(m));
+    const auto md(mock_descriptor_for_registrar());
+    const dogen::cpp::registrar_info ri;
+    const auto infos(f.create_registrar(ri, md));
     BOOST_LOG_SEV(lg, debug) << "file infos: " << infos;
 
     BOOST_REQUIRE(infos.size() == 1);

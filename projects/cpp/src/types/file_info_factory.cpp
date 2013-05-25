@@ -36,20 +36,14 @@ auto lg(logger_factory("cpp.file_info_factory"));
 const std::string empty;
 const std::string dot(".");
 const std::string separator("_");
-const std::string includer_name("all");
-const std::string invalid_enabled_facets("Invalid enabled facets request: ");
-const std::string unsupported_meta_type("Meta type not supported: ");
 
 }
 
 namespace dogen {
 namespace cpp {
 
-file_info_factory::
-file_info_factory(const std::set<config::cpp_facet_types>& enabled_facets,
-    const transformer& t, const locator& l, includer& i)
-    : descriptor_factory_(enabled_facets), transformer_(t), locator_(l),
-      includer_(i) { }
+file_info_factory::file_info_factory(const locator& l, includer& i)
+    : locator_(l), includer_(i) { }
 
 std::string file_info_factory::
 to_header_guard_name(const boost::filesystem::path& rp) const {
@@ -89,158 +83,116 @@ file_info file_info_factory::create(const content_descriptor& cd) {
     const auto rq(location_request_factory(cd));
     r.file_path(locator_.absolute_path(rq));
 
-    if (cd.file_type() == file_types::header) {
-        const auto rp(locator_.relative_logical_path(rq));
+    const auto rp(locator_.relative_logical_path(rq));
+    r.relative_path(rp);
+    if (cd.file_type() == file_types::header)
         r.header_guard(to_header_guard_name(rp));
-        if (cd.aspect_type() == aspect_types::main)
-            includer_.register_header(cd.facet_type(), rp);
-    }
 
     return r;
 }
 
-std::list<file_info> file_info_factory::create(const sml::enumeration& e) {
-    if (e.generation_type() == sml::generation_types::no_generation)
-        return std::list<file_info>{ };
+std::list<file_info> file_info_factory::create(const enumeration_info& ei,
+    const std::list<content_descriptor>& cds) {
 
     std::list<file_info> r;
-    const auto ei(transformer_.transform(e));
-    const auto ct(sml::category_types::user_defined);
-    for (const auto cd : descriptor_factory_.create(e.name(), ct)) {
+    for (const auto cd : cds) {
         file_info fi(create(cd));
         fi.enumeration_info(ei);
 
-        const auto in(includer_.includes_for_enumeration(e,
+        // FIXME: hack until we update includer
+        sml::enumeration e;
+        e.name(cd.name());
+        const auto il(includer_.includes_for_enumeration(e,
                 cd.facet_type(), cd.file_type(), cd.aspect_type()));
-        fi.system_includes(in.system());
-        fi.user_includes(in.user());
 
+        fi.system_includes(il.system());
+        fi.user_includes(il.user());
         r.push_back(fi);
     }
     return r;
 }
 
-std::list<file_info> file_info_factory::create(const sml::exception& e) {
-    if (e.generation_type() == sml::generation_types::no_generation)
-        return std::list<file_info>{ };
+std::list<file_info> file_info_factory::
+create(const exception_info& ei, const std::list<content_descriptor>& cds) {
 
     std::list<file_info> r;
-    const auto ei(transformer_.transform(e));
-    const auto ct(sml::category_types::user_defined);
-    for (const auto cd : descriptor_factory_.create(e.name(), ct)) {
+    for (const auto cd : cds) {
         file_info fi(create(cd));
         fi.exception_info(ei);
 
-        const auto in(includer_.includes_for_exception(e,
+        // FIXME: hack until we update includer
+        sml::exception e;
+        e.name(cd.name());
+        const auto il(includer_.includes_for_exception(e,
                 cd.facet_type(), cd.file_type(), cd.aspect_type()));
-        fi.system_includes(in.system());
-        fi.user_includes(in.user());
 
+        fi.system_includes(il.system());
+        fi.user_includes(il.user());
         r.push_back(fi);
     }
     return r;
 }
 
-std::list<file_info> file_info_factory::create(const sml::package& p) {
-    if (p.documentation().empty())
-        return std::list<file_info>{ };
+std::list<file_info> file_info_factory::
+create(const namespace_info& ni, const std::list<content_descriptor>& cds) {
 
     std::list<file_info> r;
-    const auto pi(transformer_.transform(p));
-    for (const auto cd : descriptor_factory_.create(p.name())) {
+    for (const auto cd : cds) {
         file_info fi(create(cd));
-        fi.namespace_info(pi);
+        fi.namespace_info(ni);
         r.push_back(fi);
     }
     return r;
 }
 
-std::list<file_info> file_info_factory::create(const sml::model& m) {
-    // FIXME Create an attribute of type package in model.
-    // FIXME: we shouldn't really be passing models around since
-    // the transformer is already bound to a model.
-
-    if (m.documentation().empty())
-        return std::list<file_info>{ };
+std::list<file_info> file_info_factory::
+create(const class_info& ci, const std::list<content_descriptor>& cds) {
 
     std::list<file_info> r;
-    const auto pi(transformer_.transform_model_into_namespace());
-    for (const auto cd : descriptor_factory_.create(m)) {
-        file_info fi(create(cd));
-        fi.namespace_info(pi);
-        r.push_back(fi);
-    }
-    return r;
-}
-
-std::list<file_info> file_info_factory::create(const sml::pod& p,
-    const optional_class_info pci, const optional_class_info opci) {
-
-    if (p.generation_type() == sml::generation_types::no_generation)
-        return std::list<file_info>{ };
-
-    std::list<file_info> r;
-    const auto ci(transformer_.transform(p, pci, opci));
-    const auto ct(p.category_type());
-    const auto pt(p.pod_type());
-    for (const auto cd : descriptor_factory_.create(p.name(), ct, pt)) {
+    for (const auto cd : cds) {
         file_info fi(create(cd));
         fi.class_info(ci);
 
-        const auto in(includer_.includes_for_pod(p,
+        // FIXME: hack until we update includer
+        sml::pod p;
+        p.name(cd.name());
+        const auto il(includer_.includes_for_pod(p,
                 cd.facet_type(), cd.file_type(), cd.aspect_type()));
-        fi.system_includes(in.system());
-        fi.user_includes(in.user());
-
+        fi.system_includes(il.system());
+        fi.user_includes(il.user());
         r.push_back(fi);
     }
     return r;
 }
 
 std::list<file_info> file_info_factory::create_includer(
-    const std::list<std::string>& external_package_path,
-    const config::cpp_facet_types ft) {
-
-    sml::qname qn;
-    qn.type_name(includer_name);
-    qn.external_package_path(external_package_path);
-
-    // FIXME: we should probably have a not SML type instead of lying
-    qn.meta_type(sml::meta_types::pod);
+    const std::list<content_descriptor>& cds) {
 
     std::list<file_info> r;
-    for (const auto cd : descriptor_factory_.create_includer(qn, ft)) {
+    for (const auto cd : cds) {
         file_info fi(create(cd));
         fi.aspect_type(aspect_types::includers);
 
-        const auto includes(includer_.includes_for_includer_files(ft));
-        fi.system_includes(includes.system());
-        fi.user_includes(includes.user());
+        const auto il(includer_.includes_for_includer_files(cd.facet_type()));
+        fi.system_includes(il.system());
+        fi.user_includes(il.user());
         r.push_back(fi);
     }
     return r;
 }
 
 std::list<file_info>
-file_info_factory::create_registrar(const sml::model& m) {
-    // FIXME: we shouldn't really be passing models around since
-    // the transformer is already bound to a model.
+file_info_factory::create_registrar(const registrar_info& ri,
+    const std::list<content_descriptor>& cds) {
+
     std::list<file_info> r;
-    sml::qname qn;
-    qn.model_name(m.name());
-    qn.external_package_path(m.external_package_path());
-
-    // FIXME: we should probably have a not SML type instead of lying
-    qn.meta_type(sml::meta_types::pod);
-
-    const auto ri(transformer_.transform_model_into_registrar());
-    for (const auto cd : descriptor_factory_.create_registrar(qn)) {
+    for (const auto cd : cds) {
         file_info fi(create(cd));
-
         fi.registrar_info(ri);
-        const auto includes(includer_.includes_for_registrar(cd.file_type()));
-        fi.system_includes(includes.system());
-        fi.user_includes(includes.user());
+
+        const auto il(includer_.includes_for_registrar(cd.file_type()));
+        fi.system_includes(il.system());
+        fi.user_includes(il.user());
         r.push_back(fi);
     }
     return r;
