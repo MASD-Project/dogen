@@ -19,18 +19,20 @@ See [[*Type%20framing][type framing]], [[*Model%20and%20type%20enums][Model and 
 It seems fairly straightforward to add remote method invocation to a
 few select types. The following would have to be done:
 
-- create a new stereotype like =dispatchable= or suchlike
+- create a new stereotype like =dispatchable=, =remotable= or suchlike
+- create a new stereotype: interface.
+- add support for interface code generation.
 - validation: model must have a model ID, thought to be unique across
   models.
-- validation: types must be marked as both =dispatchable= and
-  =service= and have a unique type ID in the model.
+- validation: types must be marked as both =remotable= and
+  =interface= and have a unique type ID in the model.
 - validation: types must have at least one public method
-- injector: if at least one type is =dispatchable=, a new system
-  package is created: =dispatching=.
+- injector: if at least one type is =remotable=, a new system
+  package is created: =rmi=.
 - injector: a system enumeration will be created with all the
   supported serialisation types. actually, we should create this
-  anyway in serialisation.
-- dispatching will contain one class that represents a "frame". this
+  anyway in serialisation or reflection.
+- rmi will contain one class that represents a "frame". this
   frame will be composed as follows: model ID, type ID, serialisation
   type, raw buffer. we need to look at RMI terminology to come up with
   a good name for this frame.
@@ -48,6 +50,9 @@ few select types. The following would have to be done:
 - a "framer" class will be created in dispatching. it will be
   configured for a given serialisation type. it will take a message
   object, serialise it and frame it.
+- we could support the notion of callbacks. for this we need to be
+  able to serialise stubs as references such that when the other end
+  receives it, it calls a registrar to activate a client stub.
 
 Now we just need a way of creating some generic interfaces that take a
 wire client and a wire service and plug the framer and the dispatcher
