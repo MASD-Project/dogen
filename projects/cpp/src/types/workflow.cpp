@@ -344,6 +344,7 @@ workflow::result_type workflow::execute() {
     log_started();
 
     workflow::result_type r(old_generate_file_infos());
+    // workflow::result_type r(generate_file_infos_activity());
     if (settings_.disable_cmakelists())
         log_cmakelists_disabled();
     else {

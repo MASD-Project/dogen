@@ -85,6 +85,8 @@ path expected_class_in_a_package_dia_xml(
     "dia_sml/expected/class_in_a_package.diaxml");
 path expected_class_in_a_package_sml_xml(
     "dia_sml/expected/class_in_a_package.smlxml");
+path expected_class_in_a_package_cpp_xml(
+    "dia_sml/expected/class_in_a_package.cppxml");
 path expected_compressed_dia_xml(
     "dia_sml/expected/compressed.diaxml");
 path expected_empty_dia_xml(
@@ -168,6 +170,8 @@ path actual_class_in_a_package_dia_xml(
     "dia_sml/actual/class_in_a_package.diaxml");
 path actual_class_in_a_package_sml_xml(
     "dia_sml/actual/class_in_a_package.smlxml");
+path actual_class_in_a_package_cpp_xml(
+    "dia_sml/actual/class_in_a_package.cppxml");
 path actual_compressed_dia_xml(
     "dia_sml/actual/compressed.diaxml");
 path actual_empty_dia_xml(
@@ -419,6 +423,10 @@ path dia_sml::expected_class_in_a_package_sml_xml() {
     return validating_resolver::resolve(::expected_class_in_a_package_sml_xml);
 }
 
+path dia_sml::expected_class_in_a_package_cpp_xml() {
+    return resolver::resolve(::expected_class_in_a_package_cpp_xml);
+}
+
 path dia_sml::expected_compressed_dia_xml() {
     return validating_resolver::resolve(::expected_compressed_dia_xml);
 }
@@ -584,6 +592,10 @@ path dia_sml::actual_class_in_a_package_dia_xml() {
 
 path dia_sml::actual_class_in_a_package_sml_xml() {
     return resolver::resolve(::actual_class_in_a_package_sml_xml);
+}
+
+path dia_sml::actual_class_in_a_package_cpp_xml() {
+    return resolver::resolve(::actual_class_in_a_package_cpp_xml);
 }
 
 path dia_sml::actual_compressed_dia_xml() {

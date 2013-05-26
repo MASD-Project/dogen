@@ -65,6 +65,8 @@ Continuing from previous iteration, see description in Sprint 26.
      CLOCK: [2013-05-19 Sun 22:53]--[2013-05-20 Mon 00:04] =>  1:11
 
 **** IMPLEMENTATION Plug =file_info_factory= into workflow
+     CLOCK: [2013-05-26 Sun 01:27]--[2013-05-26 Sun 01:37] =>  0:10
+     CLOCK: [2013-05-25 Sat 23:39]--[2013-05-26 Sun 01:27] =>  1:48
      CLOCK: [2013-05-25 Sat 22:29]--[2013-05-25 Sat 23:39] =>  1:10
      CLOCK: [2013-05-22 Wed 22:20]--[2013-05-22 Wed 22:56] =>  0:36
 

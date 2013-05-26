@@ -84,6 +84,7 @@ public:
     static boost::filesystem::path expected();
     static boost::filesystem::path expected_class_in_a_package_dia_xml();
     static boost::filesystem::path expected_class_in_a_package_sml_xml();
+    static boost::filesystem::path expected_class_in_a_package_cpp_xml();
     static boost::filesystem::path expected_compressed_dia_xml();
     static boost::filesystem::path expected_empty_dia_xml();
     static boost::filesystem::path expected_empty_sml_xml();
@@ -123,6 +124,7 @@ public:
     static boost::filesystem::path actual();
     static boost::filesystem::path actual_class_in_a_package_dia_xml();
     static boost::filesystem::path actual_class_in_a_package_sml_xml();
+    static boost::filesystem::path actual_class_in_a_package_cpp_xml();
     static boost::filesystem::path actual_compressed_dia_xml();
     static boost::filesystem::path actual_empty_dia_xml();
     static boost::filesystem::path actual_empty_sml_xml();
