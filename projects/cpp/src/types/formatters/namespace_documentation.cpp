@@ -66,11 +66,11 @@ void namespace_documentation::format_namespace(const file_info& fi) {
     }
 
     {
-        const namespace_info& ci(*o);
-        if (ci.namespaces().empty())
+        const namespace_info& ni(*o);
+        if (ni.namespaces().empty())
             return;
 
-        auto other_ns(ci.namespaces());
+        auto other_ns(ni.namespaces());
         other_ns.pop_back();
         namespace_formatter nsf(stream_);
         for (auto ns : other_ns)
@@ -78,11 +78,11 @@ void namespace_documentation::format_namespace(const file_info& fi) {
         utility_.blank_line();
 
         doxygen_comments dc(stream_, indenter_);
-        dc.format(ci.documentation());
-        nsf.format_start(ci.namespaces().back());
+        dc.format(ni.documentation());
+        nsf.format_start(ni.namespaces().back());
 
         bool first(true);
-        for (auto ns : ci.namespaces()) {
+        for (auto ns : ni.namespaces()) {
             if (!first)
                 stream_ << " ";
             nsf.format_end();

@@ -171,14 +171,22 @@ content_descriptor_factory::create(const sml::qname& qn,
     }
 
     std::list<content_descriptor> r;
-    const auto main(aspect_types::main);
     const auto header(file_types::header);
     if (qn.meta_type() == sml::meta_types::package) {
+        const auto doc(aspect_types::namespace_doc);
         const auto ft(config::cpp_facet_types::types);
-        r.push_back(content_descriptor(header, ft, main, ct, qn));
+
+        // content descriptors for packages must take into account the
+        // package name itself as they are used to name the files.
+        // if we didn't do this we'd place the file outside the
+        // package folder.
+        auto new_qn(qn);
+        new_qn.package_path().push_back(qn.type_name());
+        r.push_back(content_descriptor(header, ft, doc, ct, new_qn));
         return r;
     }
 
+    const auto main(aspect_types::main);
     const auto mt(qn.meta_type());
     for (const auto ft : enabled_facets(mt, pt)) {
         r.push_back(content_descriptor(header, ft, main, ct, qn));
@@ -202,6 +210,7 @@ content_descriptor_factory::create(const sml::model& m) const {
 
     sml::qname qn;
     qn.type_name(m.name());
+    qn.model_name(m.name());
     qn.external_package_path(m.external_package_path());
     qn.meta_type(sml::meta_types::package);
 

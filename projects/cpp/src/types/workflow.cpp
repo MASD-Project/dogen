@@ -268,10 +268,10 @@ workflow::result_type workflow::generate_namespaces_activity() {
             r.insert(generate_file_info(fi));
 
             // FIXME: do we need to register these headers?
-            const auto header(file_types::header);
-            const auto main(aspect_types::main);
-            if (fi.file_type() == header && fi.aspect_type() == main)
-                includer_.register_header(fi.facet_type(), fi.relative_path());
+            // const auto header(file_types::header);
+            // const auto main(aspect_types::main);
+            // if (fi.file_type() == header && fi.aspect_type() == main)
+            //     includer_.register_header(fi.facet_type(), fi.relative_path());
         }
     }
 
@@ -283,19 +283,18 @@ workflow::result_type workflow::generate_namespaces_activity() {
 
         const auto ni(transformer_.transform(p));
         auto cds(descriptor_factory_.create(p.name()));
-
         for (const auto& fi : file_info_factory_.create(ni, cds)) {
             r.insert(generate_file_info(fi));
 
             // FIXME: do we need to register these headers?
-            const auto header(file_types::header);
-            const auto main(aspect_types::main);
-            if (fi.file_type() == header && fi.aspect_type() == main)
-                includer_.register_header(fi.facet_type(), fi.relative_path());
+            // const auto header(file_types::header);
+            // const auto main(aspect_types::main);
+            // if (fi.file_type() == header && fi.aspect_type() == main)
+            //     includer_.register_header(fi.facet_type(), fi.relative_path());
         }
     }
 
-    BOOST_LOG_SEV(lg, debug) << "Finished generate classes activity.";
+    BOOST_LOG_SEV(lg, debug) << "Finished generate namespaces activity.";
     return r;
 }
 
