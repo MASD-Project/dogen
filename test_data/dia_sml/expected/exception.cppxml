@@ -1,0 +1,1293 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE boost_serialization>
+<boost_serialization signature="serialization::archive" version="9">
+<entity class_id="0" tracking_level="0" version="0">
+	<count>28</count>
+	<item_version>0</item_version>
+	<item class_id="1" tracking_level="0" version="0">
+		<first>/exception.cppxml/exception/CMakeLists.txt</first>
+		<second># -*- mode: cmake; tab-width: 4; indent-tabs-mode: nil -*-
+#
+# Copyright (C) 2012 Kitanda &lt;info@kitanda.co.uk&gt;
+#
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be  useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+# MA 02110-1301, USA.
+#
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/src)
+
+install(
+    DIRECTORY include/
+    DESTINATION include/
+    COMPONENT headers
+    FILES_MATCHING PATTERN &quot;*.hpp&quot;)
+
+set(include_dir &quot;${CMAKE_CURRENT_SOURCE_DIR}/include//exception&quot;)
+set(all_odb_files &quot;&quot;)
+file(GLOB_RECURSE all_odb_files RELATIVE
+    &quot;${include_dir}/odb/&quot;
+    &quot;${include_dir}/odb/*_pragmas.hpp&quot;)
+
+set(src_odb_dir &quot;${CMAKE_CURRENT_SOURCE_DIR}/src/odb/&quot;)
+if(NOT EXISTS &quot;${src_odb_dir}&quot;)
+    file(MAKE_DIRECTORY &quot;${src_odb_dir}&quot;)
+endif()
+
+add_custom_target(codegen_exception_odb
+    WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
+    COMMAND mv ${CMAKE_CURRENT_SOURCE_DIR}/include//exception/odb/*.cpp
+    ${src_odb_dir})
+
+set(ignore_file false)
+foreach(odb_file ${all_odb_files})
+    if (odb_file MATCHES &quot;all_pragmas.hpp&quot;)
+        set(ignore_file true)
+    endif()
+
+    if(NOT ignore_file)
+        set(type_name &quot;&quot;)
+        string(REPLACE &quot;_pragmas.hpp&quot; &quot;&quot; type_name ${odb_file})
+        string(REPLACE &quot;\\&quot; &quot;_&quot; type_name ${type_name})
+        string(REPLACE &quot;/&quot; &quot;_&quot; type_name ${type_name})
+
+        set(pfh_dir &quot;$ENV{PFH_LOCATION}&quot;)
+        set(target_name &quot;codegen_exception_odb_${type_name}&quot;)
+        add_custom_target(${target_name}
+            WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
+            COMMAND odb
+            --options-file ${CMAKE_CURRENT_SOURCE_DIR}/src/options.odb
+            --std c++11
+            --output-dir ${CMAKE_CURRENT_SOURCE_DIR}/include//exception/odb/
+            --odb-epilogue &apos;\#include \&quot;/exception/odb/${odb_file}\&quot;&apos;
+            -I ${pfh_dir}/include -I ${CMAKE_CURRENT_SOURCE_DIR}/include
+            ${include_dir}/types/${type_name}.hpp)
+
+        add_dependencies(codegen_exception_odb ${target_name})
+    endif()
+    add_dependencies(codegen_exception_odb codegen_exception)
+    set(ignore_file false)
+endforeach()
+</second>
+	</item>
+	<item>
+		<first>/exception.cppxml/exception/include/exception/hash/a_class_hash.hpp</first>
+		<second>/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+ *
+ * Copyright (C) 2012 Kitanda &lt;info@kitanda.co.uk&gt;
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+ * MA 02110-1301, USA.
+ *
+ */
+#ifndef EXCEPTION_HASH_A_CLASS_HASH_HPP
+#define EXCEPTION_HASH_A_CLASS_HASH_HPP
+
+#if defined(_MSC_VER) &amp;&amp; (_MSC_VER &gt;= 1200)
+#pragma once
+#endif
+
+#include &lt;functional&gt;
+#include &quot;exception/types/a_class.hpp&quot;
+
+namespace exception {
+
+class a_class_hasher {
+public:
+    static std::size_t hash(const a_class&amp; v);
+};
+
+}
+
+namespace std {
+
+template&lt;&gt;
+class hash&lt;exception::a_class&gt; {
+public:
+    size_t operator()(const exception::a_class&amp; v) const {
+        return exception::a_class_hasher::hash(v);
+    }
+};
+
+}
+#endif
+</second>
+	</item>
+	<item>
+		<first>/exception.cppxml/exception/include/exception/hash/all_hash.hpp</first>
+		<second>/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+ *
+ * Copyright (C) 2012 Kitanda &lt;info@kitanda.co.uk&gt;
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+ * MA 02110-1301, USA.
+ *
+ */
+#include &quot;exception/hash/a_class_hash.hpp&quot;
+</second>
+	</item>
+	<item>
+		<first>/exception.cppxml/exception/include/exception/io/a_class_io.hpp</first>
+		<second>/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+ *
+ * Copyright (C) 2012 Kitanda &lt;info@kitanda.co.uk&gt;
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+ * MA 02110-1301, USA.
+ *
+ */
+#ifndef EXCEPTION_IO_A_CLASS_IO_HPP
+#define EXCEPTION_IO_A_CLASS_IO_HPP
+
+#if defined(_MSC_VER) &amp;&amp; (_MSC_VER &gt;= 1200)
+#pragma once
+#endif
+
+#include &lt;iosfwd&gt;
+#include &quot;exception/types/a_class.hpp&quot;
+
+namespace exception {
+
+std::ostream&amp;
+operator&lt;&lt;(std::ostream&amp; s,
+     const exception::a_class&amp; v);
+
+}
+
+#endif
+</second>
+	</item>
+	<item>
+		<first>/exception.cppxml/exception/include/exception/io/all_io.hpp</first>
+		<second>/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+ *
+ * Copyright (C) 2012 Kitanda &lt;info@kitanda.co.uk&gt;
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+ * MA 02110-1301, USA.
+ *
+ */
+#include &quot;exception/io/a_class_io.hpp&quot;
+</second>
+	</item>
+	<item>
+		<first>/exception.cppxml/exception/include/exception/odb/a_class_pragmas.hpp</first>
+		<second>/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+ *
+ * Copyright (C) 2012 Kitanda &lt;info@kitanda.co.uk&gt;
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+ * MA 02110-1301, USA.
+ *
+ */
+#ifndef EXCEPTION_ODB_A_CLASS_PRAGMAS_HPP
+#define EXCEPTION_ODB_A_CLASS_PRAGMAS_HPP
+
+#if defined(_MSC_VER) &amp;&amp; (_MSC_VER &gt;= 1200)
+#pragma once
+#endif
+
+#include &quot;exception/types/a_class.hpp&quot;
+#include &quot;odb/int_pragmas.hpp&quot;
+
+// class has no ODB pragmas defined.
+
+#endif
+</second>
+	</item>
+	<item>
+		<first>/exception.cppxml/exception/include/exception/odb/all_pragmas.hpp</first>
+		<second>/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+ *
+ * Copyright (C) 2012 Kitanda &lt;info@kitanda.co.uk&gt;
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+ * MA 02110-1301, USA.
+ *
+ */
+#include &quot;exception/odb/a_class_pragmas.hpp&quot;
+</second>
+	</item>
+	<item>
+		<first>/exception.cppxml/exception/include/exception/serialization/a_class_fwd_ser.hpp</first>
+		<second>/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+ *
+ * Copyright (C) 2012 Kitanda &lt;info@kitanda.co.uk&gt;
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+ * MA 02110-1301, USA.
+ *
+ */
+#ifndef EXCEPTION_SERIALIZATION_A_CLASS_FWD_SER_HPP
+#define EXCEPTION_SERIALIZATION_A_CLASS_FWD_SER_HPP
+
+#if defined(_MSC_VER) &amp;&amp; (_MSC_VER &gt;= 1200)
+#pragma once
+#endif
+
+#include &quot;exception/types/a_class_fwd.hpp&quot;
+
+namespace boost {
+namespace serialization {
+
+template&lt;class Archive&gt;
+void save(Archive&amp; ar, const exception::a_class&amp; v, unsigned int version);
+
+template&lt;class Archive&gt;
+void load(Archive&amp; ar, exception::a_class&amp; v, unsigned int version);
+
+} }
+
+#endif
+</second>
+	</item>
+	<item>
+		<first>/exception.cppxml/exception/include/exception/serialization/a_class_ser.hpp</first>
+		<second>/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+ *
+ * Copyright (C) 2012 Kitanda &lt;info@kitanda.co.uk&gt;
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+ * MA 02110-1301, USA.
+ *
+ */
+#ifndef EXCEPTION_SERIALIZATION_A_CLASS_SER_HPP
+#define EXCEPTION_SERIALIZATION_A_CLASS_SER_HPP
+
+#if defined(_MSC_VER) &amp;&amp; (_MSC_VER &gt;= 1200)
+#pragma once
+#endif
+
+#include &lt;boost/serialization/split_free.hpp&gt;
+#include &quot;exception/types/a_class.hpp&quot;
+
+BOOST_SERIALIZATION_SPLIT_FREE(exception::a_class)
+namespace boost {
+namespace serialization {
+
+template&lt;typename Archive&gt;
+void save(Archive&amp; ar, const exception::a_class&amp; v, unsigned int version);
+
+template&lt;typename Archive&gt;
+void load(Archive&amp; ar, exception::a_class&amp; v, unsigned int version);
+
+} }
+
+#endif
+</second>
+	</item>
+	<item>
+		<first>/exception.cppxml/exception/include/exception/serialization/all_ser.hpp</first>
+		<second>/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+ *
+ * Copyright (C) 2012 Kitanda &lt;info@kitanda.co.uk&gt;
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+ * MA 02110-1301, USA.
+ *
+ */
+#include &quot;exception/serialization/a_class_ser.hpp&quot;
+</second>
+	</item>
+	<item>
+		<first>/exception.cppxml/exception/include/exception/serialization/registrar_ser.hpp</first>
+		<second>/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+ *
+ * Copyright (C) 2012 Kitanda &lt;info@kitanda.co.uk&gt;
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+ * MA 02110-1301, USA.
+ *
+ */
+namespace exception {
+
+template&lt;typename Archive&gt;
+void register_types(Archive&amp; ar);
+
+}
+</second>
+	</item>
+	<item>
+		<first>/exception.cppxml/exception/include/exception/test_data/a_class_td.hpp</first>
+		<second>/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+ *
+ * Copyright (C) 2012 Kitanda &lt;info@kitanda.co.uk&gt;
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+ * MA 02110-1301, USA.
+ *
+ */
+#ifndef EXCEPTION_TEST_DATA_A_CLASS_TD_HPP
+#define EXCEPTION_TEST_DATA_A_CLASS_TD_HPP
+
+#if defined(_MSC_VER) &amp;&amp; (_MSC_VER &gt;= 1200)
+#pragma once
+#endif
+
+#include &quot;exception/types/a_class.hpp&quot;
+
+namespace exception {
+
+class a_class_generator {
+public:
+    a_class_generator();
+
+public:
+    typedef exception::a_class result_type;
+
+public:
+    static void populate(const unsigned int position, result_type&amp; v);
+    static result_type create(const unsigned int position);
+    result_type operator()();
+
+private:
+    unsigned int position_;
+public:
+    static result_type* create_ptr(const unsigned int position);
+};
+
+}
+
+#endif
+</second>
+	</item>
+	<item>
+		<first>/exception.cppxml/exception/include/exception/test_data/all_td.hpp</first>
+		<second>/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+ *
+ * Copyright (C) 2012 Kitanda &lt;info@kitanda.co.uk&gt;
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+ * MA 02110-1301, USA.
+ *
+ */
+#include &quot;exception/test_data/a_class_td.hpp&quot;
+</second>
+	</item>
+	<item>
+		<first>/exception.cppxml/exception/include/exception/types/a_class.hpp</first>
+		<second>/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+ *
+ * Copyright (C) 2012 Kitanda &lt;info@kitanda.co.uk&gt;
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+ * MA 02110-1301, USA.
+ *
+ */
+#ifndef EXCEPTION_TYPES_A_CLASS_HPP
+#define EXCEPTION_TYPES_A_CLASS_HPP
+
+#if defined(_MSC_VER) &amp;&amp; (_MSC_VER &gt;= 1200)
+#pragma once
+#endif
+
+#include &lt;algorithm&gt;
+#include &quot;exception/serialization/a_class_fwd_ser.hpp&quot;
+#include &quot;types/int.hpp&quot;
+
+namespace exception {
+
+class a_class final {
+public:
+    a_class() = default;
+    a_class(const a_class&amp;) = default;
+    a_class(a_class&amp;&amp;) = default;
+    ~a_class() = default;
+
+public:
+    explicit a_class(const int&amp; prop_0);
+
+private:
+    template&lt;typename Archive&gt;
+    friend void boost::serialization::save(Archive&amp; ar, const a_class&amp; v, unsigned int version);
+
+    template&lt;typename Archive&gt;
+    friend void boost::serialization::load(Archive&amp; ar, a_class&amp; v, unsigned int version);
+
+public:
+    const int&amp; prop_0() const;
+    int&amp; prop_0();
+    void prop_0(const int&amp; v);
+    void prop_0(const int&amp;&amp; v);
+
+public:
+    bool operator==(const a_class&amp; rhs) const;
+    bool operator!=(const a_class&amp; rhs) const {
+        return !this-&gt;operator==(rhs);
+    }
+
+public:
+    void swap(a_class&amp; other) noexcept;
+    a_class&amp; operator=(a_class other);
+
+private:
+    int prop_0_;
+};
+
+}
+
+namespace std {
+
+template&lt;&gt;
+inline void swap(
+    exception::a_class&amp; lhs,
+    exception::a_class&amp; rhs) {
+    lhs.swap(rhs);
+}
+
+}
+
+#endif
+</second>
+	</item>
+	<item>
+		<first>/exception.cppxml/exception/include/exception/types/a_class_fwd.hpp</first>
+		<second>/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+ *
+ * Copyright (C) 2012 Kitanda &lt;info@kitanda.co.uk&gt;
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+ * MA 02110-1301, USA.
+ *
+ */
+#ifndef EXCEPTION_TYPES_A_CLASS_FWD_HPP
+#define EXCEPTION_TYPES_A_CLASS_FWD_HPP
+
+#if defined(_MSC_VER) &amp;&amp; (_MSC_VER &gt;= 1200)
+#pragma once
+#endif
+
+namespace exception {
+
+class a_class;
+
+}
+
+#endif
+</second>
+	</item>
+	<item>
+		<first>/exception.cppxml/exception/include/exception/types/all.hpp</first>
+		<second>/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+ *
+ * Copyright (C) 2012 Kitanda &lt;info@kitanda.co.uk&gt;
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+ * MA 02110-1301, USA.
+ *
+ */
+#include &quot;exception/types/a_class.hpp&quot;
+#include &quot;exception/types/my_error.hpp&quot;
+#include &quot;exception/types/pkg/catastrophic_error.hpp&quot;
+</second>
+	</item>
+	<item>
+		<first>/exception.cppxml/exception/include/exception/types/my_error.hpp</first>
+		<second>/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+ *
+ * Copyright (C) 2012 Kitanda &lt;info@kitanda.co.uk&gt;
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+ * MA 02110-1301, USA.
+ *
+ */
+#ifndef EXCEPTION_TYPES_MY_ERROR_HPP
+#define EXCEPTION_TYPES_MY_ERROR_HPP
+
+#if defined(_MSC_VER) &amp;&amp; (_MSC_VER &gt;= 1200)
+#pragma once
+#endif
+
+#include &lt;boost/exception/info.hpp&gt;
+#include &lt;string&gt;
+
+namespace exception {
+
+/**
+ * @brief this is an exception
+ */
+class my_error : public virtual std::exception, public virtual boost::exception {
+public:
+    my_error() = default;
+    ~my_error() noexcept = default;
+
+public:
+    my_error(const std::string&amp; message) : message_(message) { }
+
+public:
+    const char* what() const noexcept { return(message_.c_str()); }
+
+private:
+    const std::string message_;
+};
+
+}
+
+#endif
+</second>
+	</item>
+	<item>
+		<first>/exception.cppxml/exception/include/exception/types/my_error_fwd.hpp</first>
+		<second>/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+ *
+ * Copyright (C) 2012 Kitanda &lt;info@kitanda.co.uk&gt;
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+ * MA 02110-1301, USA.
+ *
+ */
+#ifndef EXCEPTION_TYPES_MY_ERROR_FWD_HPP
+#define EXCEPTION_TYPES_MY_ERROR_FWD_HPP
+
+#if defined(_MSC_VER) &amp;&amp; (_MSC_VER &gt;= 1200)
+#pragma once
+#endif
+
+#include &lt;boost/exception/info.hpp&gt;
+#include &lt;string&gt;
+
+namespace exception {
+
+class my_error;
+
+}
+
+#endif
+</second>
+	</item>
+	<item>
+		<first>/exception.cppxml/exception/include/exception/types/pkg/catastrophic_error.hpp</first>
+		<second>/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+ *
+ * Copyright (C) 2012 Kitanda &lt;info@kitanda.co.uk&gt;
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+ * MA 02110-1301, USA.
+ *
+ */
+#ifndef EXCEPTION_TYPES_PKG_CATASTROPHIC_ERROR_HPP
+#define EXCEPTION_TYPES_PKG_CATASTROPHIC_ERROR_HPP
+
+#if defined(_MSC_VER) &amp;&amp; (_MSC_VER &gt;= 1200)
+#pragma once
+#endif
+
+#include &lt;boost/exception/info.hpp&gt;
+#include &lt;string&gt;
+
+namespace exception {
+namespace pkg {
+
+class catastrophic_error : public virtual std::exception, public virtual boost::exception {
+public:
+    catastrophic_error() = default;
+    ~catastrophic_error() noexcept = default;
+
+public:
+    catastrophic_error(const std::string&amp; message) : message_(message) { }
+
+public:
+    const char* what() const noexcept { return(message_.c_str()); }
+
+private:
+    const std::string message_;
+};
+
+} }
+
+#endif
+</second>
+	</item>
+	<item>
+		<first>/exception.cppxml/exception/include/exception/types/pkg/catastrophic_error_fwd.hpp</first>
+		<second>/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+ *
+ * Copyright (C) 2012 Kitanda &lt;info@kitanda.co.uk&gt;
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+ * MA 02110-1301, USA.
+ *
+ */
+#ifndef EXCEPTION_TYPES_PKG_CATASTROPHIC_ERROR_FWD_HPP
+#define EXCEPTION_TYPES_PKG_CATASTROPHIC_ERROR_FWD_HPP
+
+#if defined(_MSC_VER) &amp;&amp; (_MSC_VER &gt;= 1200)
+#pragma once
+#endif
+
+#include &lt;boost/exception/info.hpp&gt;
+#include &lt;string&gt;
+
+namespace exception {
+namespace pkg {
+
+class catastrophic_error;
+
+} }
+
+#endif
+</second>
+	</item>
+	<item>
+		<first>/exception.cppxml/exception/src/CMakeLists.txt</first>
+		<second># -*- mode: cmake; tab-width: 4; indent-tabs-mode: nil -*-
+#
+# Copyright (C) 2012 Kitanda &lt;info@kitanda.co.uk&gt;
+#
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be  useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+# MA 02110-1301, USA.
+#
+set(all_files &quot;&quot;)
+file(GLOB_RECURSE all_files RELATIVE
+    &quot;${CMAKE_CURRENT_SOURCE_DIR}/&quot;
+    &quot;${CMAKE_CURRENT_SOURCE_DIR}/*.cpp&quot;)
+
+add_library(exception STATIC ${all_files})
+set_target_properties(exception PROPERTIES
+    OUTPUT_NAME exception)
+
+install(TARGETS exception ARCHIVE DESTINATION lib COMPONENT libraries)
+</second>
+	</item>
+	<item>
+		<first>/exception.cppxml/exception/src/hash/a_class_hash.cpp</first>
+		<second>/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+ *
+ * Copyright (C) 2012 Kitanda &lt;info@kitanda.co.uk&gt;
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+ * MA 02110-1301, USA.
+ *
+ */
+#include &quot;exception/hash/a_class_hash.hpp&quot;
+#include &quot;hash/int_hash.hpp&quot;
+
+namespace {
+
+template &lt;typename HashableType&gt;
+inline void combine(std::size_t&amp; seed, const HashableType&amp; value)
+{
+    std::hash&lt;HashableType&gt; hasher;
+    seed ^= hasher(value) + 0x9e3779b9 + (seed &lt;&lt; 6) + (seed &gt;&gt; 2);
+}
+
+}
+
+namespace exception {
+
+std::size_t a_class_hasher::hash(const a_class&amp;v) {
+    std::size_t seed(0);
+
+    combine(seed, v.prop_0());
+    return seed;
+}
+
+}
+</second>
+	</item>
+	<item>
+		<first>/exception.cppxml/exception/src/io/a_class_io.cpp</first>
+		<second>/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+ *
+ * Copyright (C) 2012 Kitanda &lt;info@kitanda.co.uk&gt;
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+ * MA 02110-1301, USA.
+ *
+ */
+#include &lt;ostream&gt;
+#include &quot;exception/io/a_class_io.hpp&quot;
+#include &quot;io/int_io.hpp&quot;
+
+namespace exception {
+
+std::ostream&amp; operator&lt;&lt;(std::ostream&amp; s, const a_class&amp; v) {
+    s &lt;&lt; &quot; { &quot;
+      &lt;&lt; &quot;\&quot;__type__\&quot;: &quot; &lt;&lt; &quot;\&quot;exception::a_class\&quot;&quot; &lt;&lt; &quot;, &quot;
+      &lt;&lt; &quot;\&quot;prop_0\&quot;: &quot; &lt;&lt; v.prop_0()
+      &lt;&lt; &quot; }&quot;;
+    return(s);
+}
+
+}</second>
+	</item>
+	<item>
+		<first>/exception.cppxml/exception/src/options.odb</first>
+		<second># -*- mode: sh; tab-width: 4; indent-tabs-mode: nil -*-
+
+# enable C++11. FIXME: causes ODB crash in options file.
+# --std c++11
+
+# target postgres
+--database pgsql
+
+# use the boost profile
+--profile boost
+
+# generate queries and embedded schemas
+--generate-query
+--generate-schema
+--schema-format embedded
+
+# use extensions similar to the dogen ones
+# --ixx-suffix .ipp
+# --hxx-suffix .hpp
+--cxx-suffix .cpp
+
+# fix domain includes
+--include-regex &apos;%(.*).hpp%/exception/types/$1.hpp%&apos;
+
+# fix odb generated includes
+--include-regex &apos;%(^[a-zA-Z0-9_]+)-odb.(.*)%/exception/odb/$1-odb.$2%&apos;
+--include-regex &apos;%/exception/types/(.*)-odb.(.*)%/exception/odb/$1-odb.$2%&apos;
+
+# debug regexes
+# --include-regex-trace
+
+# make the header guards similar to dogen ones
+--guard-prefix _EXCEPTION_ODB
+</second>
+	</item>
+	<item>
+		<first>/exception.cppxml/exception/src/serialization/a_class_ser.cpp</first>
+		<second>/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+ *
+ * Copyright (C) 2012 Kitanda &lt;info@kitanda.co.uk&gt;
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+ * MA 02110-1301, USA.
+ *
+ */
+#include &lt;boost/archive/binary_iarchive.hpp&gt;
+#include &lt;boost/archive/binary_oarchive.hpp&gt;
+#include &lt;boost/archive/polymorphic_iarchive.hpp&gt;
+#include &lt;boost/archive/polymorphic_oarchive.hpp&gt;
+#include &lt;boost/archive/text_iarchive.hpp&gt;
+#include &lt;boost/archive/text_oarchive.hpp&gt;
+#include &lt;boost/archive/xml_iarchive.hpp&gt;
+#include &lt;boost/archive/xml_oarchive.hpp&gt;
+#include &lt;boost/serialization/nvp.hpp&gt;
+#include &quot;exception/serialization/a_class_ser.hpp&quot;
+#include &quot;serialization/int_ser.hpp&quot;
+
+#ifdef __linux__
+#include &quot;eos/portable_iarchive.hpp&quot;
+#include &quot;eos/portable_oarchive.hpp&quot;
+#endif
+
+namespace boost {
+namespace serialization {
+
+template&lt;typename Archive&gt;
+void save(Archive&amp; ar,
+    const exception::a_class&amp; v,
+    const unsigned int /*version*/) {
+    ar &lt;&lt; make_nvp(&quot;prop_0&quot;, v.prop_0_);
+}
+
+template&lt;typename Archive&gt;
+void load(Archive&amp; ar,
+    exception::a_class&amp; v,
+    const unsigned int /*version*/) {
+    ar &gt;&gt; make_nvp(&quot;prop_0&quot;, v.prop_0_);
+}
+
+} }
+
+namespace boost {
+namespace serialization {
+
+template void save(archive::polymorphic_oarchive&amp; ar, const exception::a_class&amp; v, unsigned int version);
+template void load(archive::polymorphic_iarchive&amp; ar, exception::a_class&amp; v, unsigned int version);
+
+template void save(archive::text_oarchive&amp; ar, const exception::a_class&amp; v, unsigned int version);
+template void load(archive::text_iarchive&amp; ar, exception::a_class&amp; v, unsigned int version);
+
+template void save(archive::binary_oarchive&amp; ar, const exception::a_class&amp; v, unsigned int version);
+template void load(archive::binary_iarchive&amp; ar, exception::a_class&amp; v, unsigned int version);
+
+template void save(archive::xml_oarchive&amp; ar, const exception::a_class&amp; v, unsigned int version);
+template void load(archive::xml_iarchive&amp; ar, exception::a_class&amp; v, unsigned int version);
+
+#ifdef __linux__
+template void save(eos::portable_oarchive&amp; ar, const exception::a_class&amp; v, unsigned int version);
+template void load(eos::portable_iarchive&amp; ar, exception::a_class&amp; v, unsigned int version);
+#endif
+
+} }</second>
+	</item>
+	<item>
+		<first>/exception.cppxml/exception/src/serialization/registrar_ser.cpp</first>
+		<second>/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+ *
+ * Copyright (C) 2012 Kitanda &lt;info@kitanda.co.uk&gt;
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+ * MA 02110-1301, USA.
+ *
+ */
+#include &lt;boost/archive/binary_iarchive.hpp&gt;
+#include &lt;boost/archive/binary_oarchive.hpp&gt;
+#include &lt;boost/archive/polymorphic_iarchive.hpp&gt;
+#include &lt;boost/archive/polymorphic_oarchive.hpp&gt;
+#include &lt;boost/archive/text_iarchive.hpp&gt;
+#include &lt;boost/archive/text_oarchive.hpp&gt;
+#include &lt;boost/archive/xml_iarchive.hpp&gt;
+#include &lt;boost/archive/xml_oarchive.hpp&gt;
+#ifdef __linux__
+#include &quot;eos/portable_iarchive.hpp&quot;
+#include &quot;eos/portable_oarchive.hpp&quot;
+#endif
+
+namespace exception {
+
+template&lt;typename Archive&gt;
+void register_types(Archive&amp;) {
+}
+
+template void register_types(boost::archive::polymorphic_oarchive&amp;);
+template void register_types(boost::archive::polymorphic_iarchive&amp;);
+
+template void register_types(boost::archive::text_oarchive&amp;);
+template void register_types(boost::archive::text_iarchive&amp;);
+
+template void register_types(boost::archive::binary_oarchive&amp;);
+template void register_types(boost::archive::binary_iarchive&amp;);
+
+template void register_types(boost::archive::xml_oarchive&amp;);
+template void register_types(boost::archive::xml_iarchive&amp;);
+
+#ifdef __linux__
+template void register_types(eos::portable_oarchive&amp; ar);
+template void register_types(eos::portable_iarchive&amp; ar);
+#endif
+
+}</second>
+	</item>
+	<item>
+		<first>/exception.cppxml/exception/src/test_data/a_class_td.cpp</first>
+		<second>/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+ *
+ * Copyright (C) 2012 Kitanda &lt;info@kitanda.co.uk&gt;
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+ * MA 02110-1301, USA.
+ *
+ */
+#include &quot;exception/test_data/a_class_td.hpp&quot;
+#include &quot;test_data/int_td.hpp&quot;
+
+namespace {
+
+int
+create_int(const unsigned int position) {
+    return int_generator::create(position);
+}
+
+}
+
+namespace exception {
+
+a_class_generator::a_class_generator() : position_(0) { }
+
+void a_class_generator::
+populate(const unsigned int position, result_type&amp; v) {
+    v.prop_0(create_int(position + 0));
+}
+
+a_class_generator::result_type
+a_class_generator::create(const unsigned int position) {
+    a_class r;
+    a_class_generator::populate(position, r);
+    return r;
+}
+a_class_generator::result_type*
+a_class_generator::create_ptr(const unsigned int position) {
+    a_class* p = new a_class();
+    a_class_generator::populate(position, *p);
+    return p;
+}
+
+a_class_generator::result_type
+a_class_generator::operator()() {
+    return create(position_++);
+}
+
+}
+</second>
+	</item>
+	<item>
+		<first>/exception.cppxml/exception/src/types/a_class.cpp</first>
+		<second>/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+ *
+ * Copyright (C) 2012 Kitanda &lt;info@kitanda.co.uk&gt;
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+ * MA 02110-1301, USA.
+ *
+ */
+#include &quot;exception/types/a_class.hpp&quot;
+
+namespace exception {
+
+a_class::a_class(const int&amp; prop_0)
+    : prop_0_(prop_0) { }
+
+void a_class::swap(a_class&amp; other) noexcept {
+    using std::swap;
+    swap(prop_0_, other.prop_0_);
+}
+
+bool a_class::operator==(const a_class&amp; rhs) const {
+    return prop_0_ == rhs.prop_0_;
+}
+
+a_class&amp; a_class::operator=(a_class other) {
+    using std::swap;
+    swap(*this, other);
+    return *this;
+}
+
+const int&amp; a_class::prop_0() const {
+    return prop_0_;
+}
+
+int&amp; a_class::prop_0() {
+    return prop_0_;
+}
+
+void a_class::prop_0(const int&amp; v) {
+    prop_0_ = v;
+}
+
+void a_class::prop_0(const int&amp;&amp; v) {
+    prop_0_ = std::move(v);
+}
+
+}</second>
+	</item>
+</entity>
+</boost_serialization>
+

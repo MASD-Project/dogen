@@ -231,4 +231,13 @@ BOOST_AUTO_TEST_CASE(enumeration_results_in_expected_objects) {
     BOOST_CHECK(test_hydrator(input, expected, actual));
 }
 
+BOOST_AUTO_TEST_CASE(exception_results_in_expected_objects) {
+    SETUP_TEST_LOG_SOURCE("exception_results_in_expected_objects");
+    using dogen::utility::test_data::dia_sml;
+    const auto input(dia_sml::input_exception_dia());
+    const auto actual(dia_sml::actual_exception_dia_xml());
+    const auto expected(dia_sml::expected_exception_dia_xml());
+    BOOST_CHECK(test_hydrator(input, expected, actual));
+}
+
 BOOST_AUTO_TEST_SUITE_END()
