@@ -98,4 +98,13 @@ BOOST_AUTO_TEST_CASE(empty_model_generates_expected_code) {
     BOOST_CHECK(test_workflow(i, e, a));
 }
 
+BOOST_AUTO_TEST_CASE(comments_model_generates_expected_code) {
+    SETUP_TEST_LOG("comments_model_generates_expected_code");
+    const auto i(dia_sml::expected_comments_sml_xml());
+    const auto a(dia_sml::actual_comments_cpp_xml());
+    const auto e(dia_sml::expected_comments_cpp_xml());
+
+    BOOST_CHECK(test_workflow(i, e, a));
+}
+
 BOOST_AUTO_TEST_SUITE_END()

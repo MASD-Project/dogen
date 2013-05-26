@@ -1,0 +1,1931 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE boost_serialization>
+<boost_serialization signature="serialization::archive" version="9">
+<entity class_id="0" tracking_level="0" version="0">
+	<count>40</count>
+	<item_version>0</item_version>
+	<item class_id="1" tracking_level="0" version="0">
+		<first>/comments.cppxml/comments/CMakeLists.txt</first>
+		<second># -*- mode: cmake; tab-width: 4; indent-tabs-mode: nil -*-
+#
+# Copyright (C) 2012 Kitanda &lt;info@kitanda.co.uk&gt;
+#
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be  useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+# MA 02110-1301, USA.
+#
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/src)
+
+install(
+    DIRECTORY include/
+    DESTINATION include/
+    COMPONENT headers
+    FILES_MATCHING PATTERN &quot;*.hpp&quot;)
+
+set(include_dir &quot;${CMAKE_CURRENT_SOURCE_DIR}/include//comments&quot;)
+set(all_odb_files &quot;&quot;)
+file(GLOB_RECURSE all_odb_files RELATIVE
+    &quot;${include_dir}/odb/&quot;
+    &quot;${include_dir}/odb/*_pragmas.hpp&quot;)
+
+set(src_odb_dir &quot;${CMAKE_CURRENT_SOURCE_DIR}/src/odb/&quot;)
+if(NOT EXISTS &quot;${src_odb_dir}&quot;)
+    file(MAKE_DIRECTORY &quot;${src_odb_dir}&quot;)
+endif()
+
+add_custom_target(codegen_comments_odb
+    WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
+    COMMAND mv ${CMAKE_CURRENT_SOURCE_DIR}/include//comments/odb/*.cpp
+    ${src_odb_dir})
+
+set(ignore_file false)
+foreach(odb_file ${all_odb_files})
+    if (odb_file MATCHES &quot;all_pragmas.hpp&quot;)
+        set(ignore_file true)
+    endif()
+
+    if(NOT ignore_file)
+        set(type_name &quot;&quot;)
+        string(REPLACE &quot;_pragmas.hpp&quot; &quot;&quot; type_name ${odb_file})
+        string(REPLACE &quot;\\&quot; &quot;_&quot; type_name ${type_name})
+        string(REPLACE &quot;/&quot; &quot;_&quot; type_name ${type_name})
+
+        set(pfh_dir &quot;$ENV{PFH_LOCATION}&quot;)
+        set(target_name &quot;codegen_comments_odb_${type_name}&quot;)
+        add_custom_target(${target_name}
+            WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
+            COMMAND odb
+            --options-file ${CMAKE_CURRENT_SOURCE_DIR}/src/options.odb
+            --std c++11
+            --output-dir ${CMAKE_CURRENT_SOURCE_DIR}/include//comments/odb/
+            --odb-epilogue &apos;\#include \&quot;/comments/odb/${odb_file}\&quot;&apos;
+            -I ${pfh_dir}/include -I ${CMAKE_CURRENT_SOURCE_DIR}/include
+            ${include_dir}/types/${type_name}.hpp)
+
+        add_dependencies(codegen_comments_odb ${target_name})
+    endif()
+    add_dependencies(codegen_comments_odb codegen_comments)
+    set(ignore_file false)
+endforeach()
+</second>
+	</item>
+	<item>
+		<first>/comments.cppxml/comments/include/comments/hash/all_hash.hpp</first>
+		<second>/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+ *
+ * Copyright (C) 2012 Kitanda &lt;info@kitanda.co.uk&gt;
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+ * MA 02110-1301, USA.
+ *
+ */
+#include &quot;comments/hash/multi_line_hash.hpp&quot;
+#include &quot;comments/hash/one_line_hash.hpp&quot;
+</second>
+	</item>
+	<item>
+		<first>/comments.cppxml/comments/include/comments/hash/multi_line_hash.hpp</first>
+		<second>/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+ *
+ * Copyright (C) 2012 Kitanda &lt;info@kitanda.co.uk&gt;
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+ * MA 02110-1301, USA.
+ *
+ */
+#ifndef COMMENTS_HASH_MULTI_LINE_HASH_HPP
+#define COMMENTS_HASH_MULTI_LINE_HASH_HPP
+
+#if defined(_MSC_VER) &amp;&amp; (_MSC_VER &gt;= 1200)
+#pragma once
+#endif
+
+#include &lt;functional&gt;
+#include &quot;comments/types/multi_line.hpp&quot;
+
+namespace comments {
+
+class multi_line_hasher {
+public:
+    static std::size_t hash(const multi_line&amp; v);
+};
+
+}
+
+namespace std {
+
+template&lt;&gt;
+class hash&lt;comments::multi_line&gt; {
+public:
+    size_t operator()(const comments::multi_line&amp; v) const {
+        return comments::multi_line_hasher::hash(v);
+    }
+};
+
+}
+#endif
+</second>
+	</item>
+	<item>
+		<first>/comments.cppxml/comments/include/comments/hash/one_line_hash.hpp</first>
+		<second>/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+ *
+ * Copyright (C) 2012 Kitanda &lt;info@kitanda.co.uk&gt;
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+ * MA 02110-1301, USA.
+ *
+ */
+#ifndef COMMENTS_HASH_ONE_LINE_HASH_HPP
+#define COMMENTS_HASH_ONE_LINE_HASH_HPP
+
+#if defined(_MSC_VER) &amp;&amp; (_MSC_VER &gt;= 1200)
+#pragma once
+#endif
+
+#include &lt;functional&gt;
+#include &quot;comments/types/one_line.hpp&quot;
+
+namespace comments {
+
+class one_line_hasher {
+public:
+    static std::size_t hash(const one_line&amp; v);
+};
+
+}
+
+namespace std {
+
+template&lt;&gt;
+class hash&lt;comments::one_line&gt; {
+public:
+    size_t operator()(const comments::one_line&amp; v) const {
+        return comments::one_line_hasher::hash(v);
+    }
+};
+
+}
+#endif
+</second>
+	</item>
+	<item>
+		<first>/comments.cppxml/comments/include/comments/io/all_io.hpp</first>
+		<second>/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+ *
+ * Copyright (C) 2012 Kitanda &lt;info@kitanda.co.uk&gt;
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+ * MA 02110-1301, USA.
+ *
+ */
+#include &quot;comments/io/multi_line_io.hpp&quot;
+#include &quot;comments/io/one_line_io.hpp&quot;
+</second>
+	</item>
+	<item>
+		<first>/comments.cppxml/comments/include/comments/io/multi_line_io.hpp</first>
+		<second>/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+ *
+ * Copyright (C) 2012 Kitanda &lt;info@kitanda.co.uk&gt;
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+ * MA 02110-1301, USA.
+ *
+ */
+#ifndef COMMENTS_IO_MULTI_LINE_IO_HPP
+#define COMMENTS_IO_MULTI_LINE_IO_HPP
+
+#if defined(_MSC_VER) &amp;&amp; (_MSC_VER &gt;= 1200)
+#pragma once
+#endif
+
+#include &lt;iosfwd&gt;
+#include &quot;comments/types/multi_line.hpp&quot;
+
+namespace comments {
+
+std::ostream&amp;
+operator&lt;&lt;(std::ostream&amp; s,
+     const comments::multi_line&amp; v);
+
+}
+
+#endif
+</second>
+	</item>
+	<item>
+		<first>/comments.cppxml/comments/include/comments/io/one_line_io.hpp</first>
+		<second>/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+ *
+ * Copyright (C) 2012 Kitanda &lt;info@kitanda.co.uk&gt;
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+ * MA 02110-1301, USA.
+ *
+ */
+#ifndef COMMENTS_IO_ONE_LINE_IO_HPP
+#define COMMENTS_IO_ONE_LINE_IO_HPP
+
+#if defined(_MSC_VER) &amp;&amp; (_MSC_VER &gt;= 1200)
+#pragma once
+#endif
+
+#include &lt;iosfwd&gt;
+#include &quot;comments/types/one_line.hpp&quot;
+
+namespace comments {
+
+std::ostream&amp;
+operator&lt;&lt;(std::ostream&amp; s,
+     const comments::one_line&amp; v);
+
+}
+
+#endif
+</second>
+	</item>
+	<item>
+		<first>/comments.cppxml/comments/include/comments/odb/all_pragmas.hpp</first>
+		<second>/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+ *
+ * Copyright (C) 2012 Kitanda &lt;info@kitanda.co.uk&gt;
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+ * MA 02110-1301, USA.
+ *
+ */
+#include &quot;comments/odb/multi_line_pragmas.hpp&quot;
+#include &quot;comments/odb/one_line_pragmas.hpp&quot;
+</second>
+	</item>
+	<item>
+		<first>/comments.cppxml/comments/include/comments/odb/multi_line_pragmas.hpp</first>
+		<second>/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+ *
+ * Copyright (C) 2012 Kitanda &lt;info@kitanda.co.uk&gt;
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+ * MA 02110-1301, USA.
+ *
+ */
+#ifndef COMMENTS_ODB_MULTI_LINE_PRAGMAS_HPP
+#define COMMENTS_ODB_MULTI_LINE_PRAGMAS_HPP
+
+#if defined(_MSC_VER) &amp;&amp; (_MSC_VER &gt;= 1200)
+#pragma once
+#endif
+
+#include &quot;comments/types/multi_line.hpp&quot;
+
+// class has no ODB pragmas defined.
+
+#endif
+</second>
+	</item>
+	<item>
+		<first>/comments.cppxml/comments/include/comments/odb/one_line_pragmas.hpp</first>
+		<second>/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+ *
+ * Copyright (C) 2012 Kitanda &lt;info@kitanda.co.uk&gt;
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+ * MA 02110-1301, USA.
+ *
+ */
+#ifndef COMMENTS_ODB_ONE_LINE_PRAGMAS_HPP
+#define COMMENTS_ODB_ONE_LINE_PRAGMAS_HPP
+
+#if defined(_MSC_VER) &amp;&amp; (_MSC_VER &gt;= 1200)
+#pragma once
+#endif
+
+#include &quot;comments/types/one_line.hpp&quot;
+#include &quot;odb/int_pragmas.hpp&quot;
+
+// class has no ODB pragmas defined.
+
+#endif
+</second>
+	</item>
+	<item>
+		<first>/comments.cppxml/comments/include/comments/serialization/all_ser.hpp</first>
+		<second>/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+ *
+ * Copyright (C) 2012 Kitanda &lt;info@kitanda.co.uk&gt;
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+ * MA 02110-1301, USA.
+ *
+ */
+#include &quot;comments/serialization/multi_line_ser.hpp&quot;
+#include &quot;comments/serialization/one_line_ser.hpp&quot;
+</second>
+	</item>
+	<item>
+		<first>/comments.cppxml/comments/include/comments/serialization/multi_line_fwd_ser.hpp</first>
+		<second>/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+ *
+ * Copyright (C) 2012 Kitanda &lt;info@kitanda.co.uk&gt;
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+ * MA 02110-1301, USA.
+ *
+ */
+#ifndef COMMENTS_SERIALIZATION_MULTI_LINE_FWD_SER_HPP
+#define COMMENTS_SERIALIZATION_MULTI_LINE_FWD_SER_HPP
+
+#if defined(_MSC_VER) &amp;&amp; (_MSC_VER &gt;= 1200)
+#pragma once
+#endif
+
+#include &quot;comments/types/multi_line_fwd.hpp&quot;
+
+namespace boost {
+namespace serialization {
+
+template&lt;class Archive&gt;
+void save(Archive&amp; ar, const comments::multi_line&amp; v, unsigned int version);
+
+template&lt;class Archive&gt;
+void load(Archive&amp; ar, comments::multi_line&amp; v, unsigned int version);
+
+} }
+
+#endif
+</second>
+	</item>
+	<item>
+		<first>/comments.cppxml/comments/include/comments/serialization/multi_line_ser.hpp</first>
+		<second>/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+ *
+ * Copyright (C) 2012 Kitanda &lt;info@kitanda.co.uk&gt;
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+ * MA 02110-1301, USA.
+ *
+ */
+#ifndef COMMENTS_SERIALIZATION_MULTI_LINE_SER_HPP
+#define COMMENTS_SERIALIZATION_MULTI_LINE_SER_HPP
+
+#if defined(_MSC_VER) &amp;&amp; (_MSC_VER &gt;= 1200)
+#pragma once
+#endif
+
+#include &lt;boost/serialization/split_free.hpp&gt;
+#include &quot;comments/types/multi_line.hpp&quot;
+
+BOOST_SERIALIZATION_SPLIT_FREE(comments::multi_line)
+namespace boost {
+namespace serialization {
+
+template&lt;typename Archive&gt;
+void save(Archive&amp; ar, const comments::multi_line&amp; v, unsigned int version);
+
+template&lt;typename Archive&gt;
+void load(Archive&amp; ar, comments::multi_line&amp; v, unsigned int version);
+
+} }
+
+#endif
+</second>
+	</item>
+	<item>
+		<first>/comments.cppxml/comments/include/comments/serialization/one_line_fwd_ser.hpp</first>
+		<second>/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+ *
+ * Copyright (C) 2012 Kitanda &lt;info@kitanda.co.uk&gt;
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+ * MA 02110-1301, USA.
+ *
+ */
+#ifndef COMMENTS_SERIALIZATION_ONE_LINE_FWD_SER_HPP
+#define COMMENTS_SERIALIZATION_ONE_LINE_FWD_SER_HPP
+
+#if defined(_MSC_VER) &amp;&amp; (_MSC_VER &gt;= 1200)
+#pragma once
+#endif
+
+#include &quot;comments/types/one_line_fwd.hpp&quot;
+
+namespace boost {
+namespace serialization {
+
+template&lt;class Archive&gt;
+void save(Archive&amp; ar, const comments::one_line&amp; v, unsigned int version);
+
+template&lt;class Archive&gt;
+void load(Archive&amp; ar, comments::one_line&amp; v, unsigned int version);
+
+} }
+
+#endif
+</second>
+	</item>
+	<item>
+		<first>/comments.cppxml/comments/include/comments/serialization/one_line_ser.hpp</first>
+		<second>/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+ *
+ * Copyright (C) 2012 Kitanda &lt;info@kitanda.co.uk&gt;
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+ * MA 02110-1301, USA.
+ *
+ */
+#ifndef COMMENTS_SERIALIZATION_ONE_LINE_SER_HPP
+#define COMMENTS_SERIALIZATION_ONE_LINE_SER_HPP
+
+#if defined(_MSC_VER) &amp;&amp; (_MSC_VER &gt;= 1200)
+#pragma once
+#endif
+
+#include &lt;boost/serialization/split_free.hpp&gt;
+#include &quot;comments/types/one_line.hpp&quot;
+
+BOOST_SERIALIZATION_SPLIT_FREE(comments::one_line)
+namespace boost {
+namespace serialization {
+
+template&lt;typename Archive&gt;
+void save(Archive&amp; ar, const comments::one_line&amp; v, unsigned int version);
+
+template&lt;typename Archive&gt;
+void load(Archive&amp; ar, comments::one_line&amp; v, unsigned int version);
+
+} }
+
+#endif
+</second>
+	</item>
+	<item>
+		<first>/comments.cppxml/comments/include/comments/serialization/registrar_ser.hpp</first>
+		<second>/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+ *
+ * Copyright (C) 2012 Kitanda &lt;info@kitanda.co.uk&gt;
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+ * MA 02110-1301, USA.
+ *
+ */
+namespace comments {
+
+template&lt;typename Archive&gt;
+void register_types(Archive&amp; ar);
+
+}
+</second>
+	</item>
+	<item>
+		<first>/comments.cppxml/comments/include/comments/test_data/all_td.hpp</first>
+		<second>/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+ *
+ * Copyright (C) 2012 Kitanda &lt;info@kitanda.co.uk&gt;
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+ * MA 02110-1301, USA.
+ *
+ */
+#include &quot;comments/test_data/multi_line_td.hpp&quot;
+#include &quot;comments/test_data/one_line_td.hpp&quot;
+</second>
+	</item>
+	<item>
+		<first>/comments.cppxml/comments/include/comments/test_data/multi_line_td.hpp</first>
+		<second>/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+ *
+ * Copyright (C) 2012 Kitanda &lt;info@kitanda.co.uk&gt;
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+ * MA 02110-1301, USA.
+ *
+ */
+#ifndef COMMENTS_TEST_DATA_MULTI_LINE_TD_HPP
+#define COMMENTS_TEST_DATA_MULTI_LINE_TD_HPP
+
+#if defined(_MSC_VER) &amp;&amp; (_MSC_VER &gt;= 1200)
+#pragma once
+#endif
+
+#include &quot;comments/types/multi_line.hpp&quot;
+
+namespace comments {
+
+class multi_line_generator {
+public:
+    multi_line_generator();
+
+public:
+    typedef comments::multi_line result_type;
+
+public:
+    static void populate(const unsigned int position, result_type&amp; v);
+    static result_type create(const unsigned int position);
+    result_type operator()();
+
+private:
+    unsigned int position_;
+public:
+    static result_type* create_ptr(const unsigned int position);
+};
+
+}
+
+#endif
+</second>
+	</item>
+	<item>
+		<first>/comments.cppxml/comments/include/comments/test_data/one_line_td.hpp</first>
+		<second>/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+ *
+ * Copyright (C) 2012 Kitanda &lt;info@kitanda.co.uk&gt;
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+ * MA 02110-1301, USA.
+ *
+ */
+#ifndef COMMENTS_TEST_DATA_ONE_LINE_TD_HPP
+#define COMMENTS_TEST_DATA_ONE_LINE_TD_HPP
+
+#if defined(_MSC_VER) &amp;&amp; (_MSC_VER &gt;= 1200)
+#pragma once
+#endif
+
+#include &quot;comments/types/one_line.hpp&quot;
+
+namespace comments {
+
+class one_line_generator {
+public:
+    one_line_generator();
+
+public:
+    typedef comments::one_line result_type;
+
+public:
+    static void populate(const unsigned int position, result_type&amp; v);
+    static result_type create(const unsigned int position);
+    result_type operator()();
+
+private:
+    unsigned int position_;
+public:
+    static result_type* create_ptr(const unsigned int position);
+};
+
+}
+
+#endif
+</second>
+	</item>
+	<item>
+		<first>/comments.cppxml/comments/include/comments/types/all.hpp</first>
+		<second>/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+ *
+ * Copyright (C) 2012 Kitanda &lt;info@kitanda.co.uk&gt;
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+ * MA 02110-1301, USA.
+ *
+ */
+#include &quot;comments/types/multi_line.hpp&quot;
+#include &quot;comments/types/one_line.hpp&quot;
+</second>
+	</item>
+	<item>
+		<first>/comments.cppxml/comments/include/comments/types/comments.hpp</first>
+		<second>/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+ *
+ * Copyright (C) 2012 Kitanda &lt;info@kitanda.co.uk&gt;
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+ * MA 02110-1301, USA.
+ *
+ */
+#ifndef COMMENTS_TYPES_COMMENTS_HPP
+#define COMMENTS_TYPES_COMMENTS_HPP
+
+#if defined(_MSC_VER) &amp;&amp; (_MSC_VER &gt;= 1200)
+#pragma once
+#endif
+
+
+/**
+ * @brief This model demonstrates the use of comments in dogen.
+ *
+ * This comment will be applied to the model namespace itself.
+ */
+namespace comments {
+}
+
+#endif
+</second>
+	</item>
+	<item>
+		<first>/comments.cppxml/comments/include/comments/types/multi_line.hpp</first>
+		<second>/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+ *
+ * Copyright (C) 2012 Kitanda &lt;info@kitanda.co.uk&gt;
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+ * MA 02110-1301, USA.
+ *
+ */
+#ifndef COMMENTS_TYPES_MULTI_LINE_HPP
+#define COMMENTS_TYPES_MULTI_LINE_HPP
+
+#if defined(_MSC_VER) &amp;&amp; (_MSC_VER &gt;= 1200)
+#pragma once
+#endif
+
+#include &lt;algorithm&gt;
+#include &quot;comments/serialization/multi_line_fwd_ser.hpp&quot;
+
+namespace comments {
+
+/**
+ * @brief first line
+ *
+ * second line
+ * third line with &quot;quote&quot;
+ */
+class multi_line final {
+public:
+    multi_line() = default;
+    multi_line(const multi_line&amp;) = default;
+    multi_line(multi_line&amp;&amp;) = default;
+    ~multi_line() = default;
+    multi_line&amp; operator=(const multi_line&amp;) = default;
+
+private:
+    template&lt;typename Archive&gt;
+    friend void boost::serialization::save(Archive&amp; ar, const multi_line&amp; v, unsigned int version);
+
+    template&lt;typename Archive&gt;
+    friend void boost::serialization::load(Archive&amp; ar, multi_line&amp; v, unsigned int version);
+
+public:
+    bool operator==(const multi_line&amp; rhs) const;
+    bool operator!=(const multi_line&amp; rhs) const {
+        return !this-&gt;operator==(rhs);
+    }
+
+};
+
+}
+
+#endif
+</second>
+	</item>
+	<item>
+		<first>/comments.cppxml/comments/include/comments/types/multi_line_fwd.hpp</first>
+		<second>/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+ *
+ * Copyright (C) 2012 Kitanda &lt;info@kitanda.co.uk&gt;
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+ * MA 02110-1301, USA.
+ *
+ */
+#ifndef COMMENTS_TYPES_MULTI_LINE_FWD_HPP
+#define COMMENTS_TYPES_MULTI_LINE_FWD_HPP
+
+#if defined(_MSC_VER) &amp;&amp; (_MSC_VER &gt;= 1200)
+#pragma once
+#endif
+
+namespace comments {
+
+class multi_line;
+
+}
+
+#endif
+</second>
+	</item>
+	<item>
+		<first>/comments.cppxml/comments/include/comments/types/one_line.hpp</first>
+		<second>/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+ *
+ * Copyright (C) 2012 Kitanda &lt;info@kitanda.co.uk&gt;
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+ * MA 02110-1301, USA.
+ *
+ */
+#ifndef COMMENTS_TYPES_ONE_LINE_HPP
+#define COMMENTS_TYPES_ONE_LINE_HPP
+
+#if defined(_MSC_VER) &amp;&amp; (_MSC_VER &gt;= 1200)
+#pragma once
+#endif
+
+#include &lt;algorithm&gt;
+#include &quot;comments/serialization/one_line_fwd_ser.hpp&quot;
+#include &quot;types/int.hpp&quot;
+
+namespace comments {
+
+/**
+ * @brief this is the brief comment
+ */
+class one_line final {
+public:
+    one_line() = default;
+    one_line(const one_line&amp;) = default;
+    one_line(one_line&amp;&amp;) = default;
+    ~one_line() = default;
+
+public:
+    one_line(
+        const int&amp; prop_0,
+        const int&amp; prop_1,
+        const int&amp; prop_2);
+
+private:
+    template&lt;typename Archive&gt;
+    friend void boost::serialization::save(Archive&amp; ar, const one_line&amp; v, unsigned int version);
+
+    template&lt;typename Archive&gt;
+    friend void boost::serialization::load(Archive&amp; ar, one_line&amp; v, unsigned int version);
+
+public:
+    /**
+     * @brief another brief comment
+     */
+    /**@{*/
+    const int&amp; prop_0() const;
+    int&amp; prop_0();
+    void prop_0(const int&amp; v);
+    void prop_0(const int&amp;&amp; v);
+    /**@}*/
+
+    /**
+     * @brief the brief comment
+     *
+     * a second line
+     */
+    /**@{*/
+    const int&amp; prop_1() const;
+    int&amp; prop_1();
+    void prop_1(const int&amp; v);
+    void prop_1(const int&amp;&amp; v);
+    /**@}*/
+
+    const int&amp; prop_2() const;
+    int&amp; prop_2();
+    void prop_2(const int&amp; v);
+    void prop_2(const int&amp;&amp; v);
+
+public:
+    bool operator==(const one_line&amp; rhs) const;
+    bool operator!=(const one_line&amp; rhs) const {
+        return !this-&gt;operator==(rhs);
+    }
+
+public:
+    void swap(one_line&amp; other) noexcept;
+    one_line&amp; operator=(one_line other);
+
+private:
+    int prop_0_;
+    int prop_1_;
+    int prop_2_;
+};
+
+}
+
+namespace std {
+
+template&lt;&gt;
+inline void swap(
+    comments::one_line&amp; lhs,
+    comments::one_line&amp; rhs) {
+    lhs.swap(rhs);
+}
+
+}
+
+#endif
+</second>
+	</item>
+	<item>
+		<first>/comments.cppxml/comments/include/comments/types/one_line_fwd.hpp</first>
+		<second>/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+ *
+ * Copyright (C) 2012 Kitanda &lt;info@kitanda.co.uk&gt;
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+ * MA 02110-1301, USA.
+ *
+ */
+#ifndef COMMENTS_TYPES_ONE_LINE_FWD_HPP
+#define COMMENTS_TYPES_ONE_LINE_FWD_HPP
+
+#if defined(_MSC_VER) &amp;&amp; (_MSC_VER &gt;= 1200)
+#pragma once
+#endif
+
+namespace comments {
+
+class one_line;
+
+}
+
+#endif
+</second>
+	</item>
+	<item>
+		<first>/comments.cppxml/comments/include/comments/types/package/package.hpp</first>
+		<second>/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+ *
+ * Copyright (C) 2012 Kitanda &lt;info@kitanda.co.uk&gt;
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+ * MA 02110-1301, USA.
+ *
+ */
+#ifndef COMMENTS_TYPES_PACKAGE_PACKAGE_HPP
+#define COMMENTS_TYPES_PACKAGE_PACKAGE_HPP
+
+#if defined(_MSC_VER) &amp;&amp; (_MSC_VER &gt;= 1200)
+#pragma once
+#endif
+
+namespace comments {
+
+/**
+ * @brief package
+ */
+namespace package {
+} }
+
+#endif
+</second>
+	</item>
+	<item>
+		<first>/comments.cppxml/comments/include/comments/types/package/package2/package2.hpp</first>
+		<second>/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+ *
+ * Copyright (C) 2012 Kitanda &lt;info@kitanda.co.uk&gt;
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+ * MA 02110-1301, USA.
+ *
+ */
+#ifndef COMMENTS_TYPES_PACKAGE_PACKAGE2_PACKAGE2_HPP
+#define COMMENTS_TYPES_PACKAGE_PACKAGE2_PACKAGE2_HPP
+
+#if defined(_MSC_VER) &amp;&amp; (_MSC_VER &gt;= 1200)
+#pragma once
+#endif
+
+namespace comments {
+namespace package {
+
+/**
+ * @brief package2
+ */
+namespace package2 {
+} } }
+
+#endif
+</second>
+	</item>
+	<item>
+		<first>/comments.cppxml/comments/src/CMakeLists.txt</first>
+		<second># -*- mode: cmake; tab-width: 4; indent-tabs-mode: nil -*-
+#
+# Copyright (C) 2012 Kitanda &lt;info@kitanda.co.uk&gt;
+#
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be  useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+# MA 02110-1301, USA.
+#
+set(all_files &quot;&quot;)
+file(GLOB_RECURSE all_files RELATIVE
+    &quot;${CMAKE_CURRENT_SOURCE_DIR}/&quot;
+    &quot;${CMAKE_CURRENT_SOURCE_DIR}/*.cpp&quot;)
+
+add_library(comments STATIC ${all_files})
+set_target_properties(comments PROPERTIES
+    OUTPUT_NAME comments)
+
+install(TARGETS comments ARCHIVE DESTINATION lib COMPONENT libraries)
+</second>
+	</item>
+	<item>
+		<first>/comments.cppxml/comments/src/hash/multi_line_hash.cpp</first>
+		<second>/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+ *
+ * Copyright (C) 2012 Kitanda &lt;info@kitanda.co.uk&gt;
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+ * MA 02110-1301, USA.
+ *
+ */
+#include &quot;comments/hash/multi_line_hash.hpp&quot;
+
+namespace {
+
+
+}
+
+namespace comments {
+
+std::size_t multi_line_hasher::hash(const multi_line&amp;) {
+    std::size_t seed(0);
+    return seed;
+}
+
+}
+</second>
+	</item>
+	<item>
+		<first>/comments.cppxml/comments/src/hash/one_line_hash.cpp</first>
+		<second>/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+ *
+ * Copyright (C) 2012 Kitanda &lt;info@kitanda.co.uk&gt;
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+ * MA 02110-1301, USA.
+ *
+ */
+#include &quot;comments/hash/one_line_hash.hpp&quot;
+#include &quot;hash/int_hash.hpp&quot;
+
+namespace {
+
+template &lt;typename HashableType&gt;
+inline void combine(std::size_t&amp; seed, const HashableType&amp; value)
+{
+    std::hash&lt;HashableType&gt; hasher;
+    seed ^= hasher(value) + 0x9e3779b9 + (seed &lt;&lt; 6) + (seed &gt;&gt; 2);
+}
+
+}
+
+namespace comments {
+
+std::size_t one_line_hasher::hash(const one_line&amp;v) {
+    std::size_t seed(0);
+
+    combine(seed, v.prop_0());
+    combine(seed, v.prop_1());
+    combine(seed, v.prop_2());
+
+    return seed;
+}
+
+}
+</second>
+	</item>
+	<item>
+		<first>/comments.cppxml/comments/src/io/multi_line_io.cpp</first>
+		<second>/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+ *
+ * Copyright (C) 2012 Kitanda &lt;info@kitanda.co.uk&gt;
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+ * MA 02110-1301, USA.
+ *
+ */
+#include &lt;ostream&gt;
+#include &quot;comments/io/multi_line_io.hpp&quot;
+
+namespace comments {
+
+std::ostream&amp; operator&lt;&lt;(std::ostream&amp; s, const multi_line&amp;) {
+    s &lt;&lt; &quot; { &quot;
+      &lt;&lt; &quot;\&quot;__type__\&quot;: &quot; &lt;&lt; &quot;\&quot;comments::multi_line\&quot;&quot; &lt;&lt; &quot; }&quot;;
+    return(s);
+}
+
+}</second>
+	</item>
+	<item>
+		<first>/comments.cppxml/comments/src/io/one_line_io.cpp</first>
+		<second>/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+ *
+ * Copyright (C) 2012 Kitanda &lt;info@kitanda.co.uk&gt;
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+ * MA 02110-1301, USA.
+ *
+ */
+#include &lt;ostream&gt;
+#include &quot;comments/io/one_line_io.hpp&quot;
+#include &quot;io/int_io.hpp&quot;
+
+namespace comments {
+
+std::ostream&amp; operator&lt;&lt;(std::ostream&amp; s, const one_line&amp; v) {
+    s &lt;&lt; &quot; { &quot;
+      &lt;&lt; &quot;\&quot;__type__\&quot;: &quot; &lt;&lt; &quot;\&quot;comments::one_line\&quot;&quot; &lt;&lt; &quot;, &quot;
+      &lt;&lt; &quot;\&quot;prop_0\&quot;: &quot; &lt;&lt; v.prop_0() &lt;&lt; &quot;, &quot;
+      &lt;&lt; &quot;\&quot;prop_1\&quot;: &quot; &lt;&lt; v.prop_1() &lt;&lt; &quot;, &quot;
+      &lt;&lt; &quot;\&quot;prop_2\&quot;: &quot; &lt;&lt; v.prop_2()
+      &lt;&lt; &quot; }&quot;;
+    return(s);
+}
+
+}</second>
+	</item>
+	<item>
+		<first>/comments.cppxml/comments/src/options.odb</first>
+		<second># -*- mode: sh; tab-width: 4; indent-tabs-mode: nil -*-
+
+# enable C++11. FIXME: causes ODB crash in options file.
+# --std c++11
+
+# target postgres
+--database pgsql
+
+# use the boost profile
+--profile boost
+
+# generate queries and embedded schemas
+--generate-query
+--generate-schema
+--schema-format embedded
+
+# use extensions similar to the dogen ones
+# --ixx-suffix .ipp
+# --hxx-suffix .hpp
+--cxx-suffix .cpp
+
+# fix domain includes
+--include-regex &apos;%(.*).hpp%/comments/types/$1.hpp%&apos;
+
+# fix odb generated includes
+--include-regex &apos;%(^[a-zA-Z0-9_]+)-odb.(.*)%/comments/odb/$1-odb.$2%&apos;
+--include-regex &apos;%/comments/types/(.*)-odb.(.*)%/comments/odb/$1-odb.$2%&apos;
+
+# debug regexes
+# --include-regex-trace
+
+# make the header guards similar to dogen ones
+--guard-prefix _COMMENTS_ODB
+</second>
+	</item>
+	<item>
+		<first>/comments.cppxml/comments/src/serialization/multi_line_ser.cpp</first>
+		<second>/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+ *
+ * Copyright (C) 2012 Kitanda &lt;info@kitanda.co.uk&gt;
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+ * MA 02110-1301, USA.
+ *
+ */
+#include &lt;boost/archive/binary_iarchive.hpp&gt;
+#include &lt;boost/archive/binary_oarchive.hpp&gt;
+#include &lt;boost/archive/polymorphic_iarchive.hpp&gt;
+#include &lt;boost/archive/polymorphic_oarchive.hpp&gt;
+#include &lt;boost/archive/text_iarchive.hpp&gt;
+#include &lt;boost/archive/text_oarchive.hpp&gt;
+#include &lt;boost/archive/xml_iarchive.hpp&gt;
+#include &lt;boost/archive/xml_oarchive.hpp&gt;
+#include &lt;boost/serialization/nvp.hpp&gt;
+#include &quot;comments/serialization/multi_line_ser.hpp&quot;
+
+#ifdef __linux__
+#include &quot;eos/portable_iarchive.hpp&quot;
+#include &quot;eos/portable_oarchive.hpp&quot;
+#endif
+
+namespace boost {
+namespace serialization {
+
+template&lt;typename Archive&gt;
+void save(Archive&amp; /*ar*/,
+    const comments::multi_line&amp; /*v*/,
+    const unsigned int /*version*/) {
+}
+
+template&lt;typename Archive&gt;
+void load(Archive&amp; /*ar*/,
+    comments::multi_line&amp; /*v*/,
+    const unsigned int /*version*/) {
+}
+
+} }
+
+namespace boost {
+namespace serialization {
+
+template void save(archive::polymorphic_oarchive&amp; ar, const comments::multi_line&amp; v, unsigned int version);
+template void load(archive::polymorphic_iarchive&amp; ar, comments::multi_line&amp; v, unsigned int version);
+
+template void save(archive::text_oarchive&amp; ar, const comments::multi_line&amp; v, unsigned int version);
+template void load(archive::text_iarchive&amp; ar, comments::multi_line&amp; v, unsigned int version);
+
+template void save(archive::binary_oarchive&amp; ar, const comments::multi_line&amp; v, unsigned int version);
+template void load(archive::binary_iarchive&amp; ar, comments::multi_line&amp; v, unsigned int version);
+
+template void save(archive::xml_oarchive&amp; ar, const comments::multi_line&amp; v, unsigned int version);
+template void load(archive::xml_iarchive&amp; ar, comments::multi_line&amp; v, unsigned int version);
+
+#ifdef __linux__
+template void save(eos::portable_oarchive&amp; ar, const comments::multi_line&amp; v, unsigned int version);
+template void load(eos::portable_iarchive&amp; ar, comments::multi_line&amp; v, unsigned int version);
+#endif
+
+} }</second>
+	</item>
+	<item>
+		<first>/comments.cppxml/comments/src/serialization/one_line_ser.cpp</first>
+		<second>/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+ *
+ * Copyright (C) 2012 Kitanda &lt;info@kitanda.co.uk&gt;
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+ * MA 02110-1301, USA.
+ *
+ */
+#include &lt;boost/archive/binary_iarchive.hpp&gt;
+#include &lt;boost/archive/binary_oarchive.hpp&gt;
+#include &lt;boost/archive/polymorphic_iarchive.hpp&gt;
+#include &lt;boost/archive/polymorphic_oarchive.hpp&gt;
+#include &lt;boost/archive/text_iarchive.hpp&gt;
+#include &lt;boost/archive/text_oarchive.hpp&gt;
+#include &lt;boost/archive/xml_iarchive.hpp&gt;
+#include &lt;boost/archive/xml_oarchive.hpp&gt;
+#include &lt;boost/serialization/nvp.hpp&gt;
+#include &quot;comments/serialization/one_line_ser.hpp&quot;
+#include &quot;serialization/int_ser.hpp&quot;
+
+#ifdef __linux__
+#include &quot;eos/portable_iarchive.hpp&quot;
+#include &quot;eos/portable_oarchive.hpp&quot;
+#endif
+
+namespace boost {
+namespace serialization {
+
+template&lt;typename Archive&gt;
+void save(Archive&amp; ar,
+    const comments::one_line&amp; v,
+    const unsigned int /*version*/) {
+    ar &lt;&lt; make_nvp(&quot;prop_0&quot;, v.prop_0_);
+    ar &lt;&lt; make_nvp(&quot;prop_1&quot;, v.prop_1_);
+    ar &lt;&lt; make_nvp(&quot;prop_2&quot;, v.prop_2_);
+}
+
+template&lt;typename Archive&gt;
+void load(Archive&amp; ar,
+    comments::one_line&amp; v,
+    const unsigned int /*version*/) {
+    ar &gt;&gt; make_nvp(&quot;prop_0&quot;, v.prop_0_);
+    ar &gt;&gt; make_nvp(&quot;prop_1&quot;, v.prop_1_);
+    ar &gt;&gt; make_nvp(&quot;prop_2&quot;, v.prop_2_);
+}
+
+} }
+
+namespace boost {
+namespace serialization {
+
+template void save(archive::polymorphic_oarchive&amp; ar, const comments::one_line&amp; v, unsigned int version);
+template void load(archive::polymorphic_iarchive&amp; ar, comments::one_line&amp; v, unsigned int version);
+
+template void save(archive::text_oarchive&amp; ar, const comments::one_line&amp; v, unsigned int version);
+template void load(archive::text_iarchive&amp; ar, comments::one_line&amp; v, unsigned int version);
+
+template void save(archive::binary_oarchive&amp; ar, const comments::one_line&amp; v, unsigned int version);
+template void load(archive::binary_iarchive&amp; ar, comments::one_line&amp; v, unsigned int version);
+
+template void save(archive::xml_oarchive&amp; ar, const comments::one_line&amp; v, unsigned int version);
+template void load(archive::xml_iarchive&amp; ar, comments::one_line&amp; v, unsigned int version);
+
+#ifdef __linux__
+template void save(eos::portable_oarchive&amp; ar, const comments::one_line&amp; v, unsigned int version);
+template void load(eos::portable_iarchive&amp; ar, comments::one_line&amp; v, unsigned int version);
+#endif
+
+} }</second>
+	</item>
+	<item>
+		<first>/comments.cppxml/comments/src/serialization/registrar_ser.cpp</first>
+		<second>/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+ *
+ * Copyright (C) 2012 Kitanda &lt;info@kitanda.co.uk&gt;
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+ * MA 02110-1301, USA.
+ *
+ */
+#include &lt;boost/archive/binary_iarchive.hpp&gt;
+#include &lt;boost/archive/binary_oarchive.hpp&gt;
+#include &lt;boost/archive/polymorphic_iarchive.hpp&gt;
+#include &lt;boost/archive/polymorphic_oarchive.hpp&gt;
+#include &lt;boost/archive/text_iarchive.hpp&gt;
+#include &lt;boost/archive/text_oarchive.hpp&gt;
+#include &lt;boost/archive/xml_iarchive.hpp&gt;
+#include &lt;boost/archive/xml_oarchive.hpp&gt;
+#ifdef __linux__
+#include &quot;eos/portable_iarchive.hpp&quot;
+#include &quot;eos/portable_oarchive.hpp&quot;
+#endif
+
+namespace comments {
+
+template&lt;typename Archive&gt;
+void register_types(Archive&amp;) {
+}
+
+template void register_types(boost::archive::polymorphic_oarchive&amp;);
+template void register_types(boost::archive::polymorphic_iarchive&amp;);
+
+template void register_types(boost::archive::text_oarchive&amp;);
+template void register_types(boost::archive::text_iarchive&amp;);
+
+template void register_types(boost::archive::binary_oarchive&amp;);
+template void register_types(boost::archive::binary_iarchive&amp;);
+
+template void register_types(boost::archive::xml_oarchive&amp;);
+template void register_types(boost::archive::xml_iarchive&amp;);
+
+#ifdef __linux__
+template void register_types(eos::portable_oarchive&amp; ar);
+template void register_types(eos::portable_iarchive&amp; ar);
+#endif
+
+}</second>
+	</item>
+	<item>
+		<first>/comments.cppxml/comments/src/test_data/multi_line_td.cpp</first>
+		<second>/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+ *
+ * Copyright (C) 2012 Kitanda &lt;info@kitanda.co.uk&gt;
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+ * MA 02110-1301, USA.
+ *
+ */
+#include &quot;comments/test_data/multi_line_td.hpp&quot;
+
+
+
+namespace comments {
+
+multi_line_generator::multi_line_generator() : position_(0) { }
+
+void multi_line_generator::
+populate(const unsigned int /*position*/, result_type&amp; /*v*/) {
+}
+
+multi_line_generator::result_type
+multi_line_generator::create(const unsigned int/*position*/) {
+    multi_line r;
+    return r;
+}
+multi_line_generator::result_type*
+multi_line_generator::create_ptr(const unsigned int position) {
+    multi_line* p = new multi_line();
+    multi_line_generator::populate(position, *p);
+    return p;
+}
+
+multi_line_generator::result_type
+multi_line_generator::operator()() {
+    return create(position_++);
+}
+
+}
+</second>
+	</item>
+	<item>
+		<first>/comments.cppxml/comments/src/test_data/one_line_td.cpp</first>
+		<second>/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+ *
+ * Copyright (C) 2012 Kitanda &lt;info@kitanda.co.uk&gt;
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+ * MA 02110-1301, USA.
+ *
+ */
+#include &quot;comments/test_data/one_line_td.hpp&quot;
+#include &quot;test_data/int_td.hpp&quot;
+
+namespace {
+
+int
+create_int(const unsigned int position) {
+    return int_generator::create(position);
+}
+
+}
+
+namespace comments {
+
+one_line_generator::one_line_generator() : position_(0) { }
+
+void one_line_generator::
+populate(const unsigned int position, result_type&amp; v) {
+    v.prop_0(create_int(position + 0));
+    v.prop_1(create_int(position + 1));
+    v.prop_2(create_int(position + 2));
+}
+
+one_line_generator::result_type
+one_line_generator::create(const unsigned int position) {
+    one_line r;
+    one_line_generator::populate(position, r);
+    return r;
+}
+one_line_generator::result_type*
+one_line_generator::create_ptr(const unsigned int position) {
+    one_line* p = new one_line();
+    one_line_generator::populate(position, *p);
+    return p;
+}
+
+one_line_generator::result_type
+one_line_generator::operator()() {
+    return create(position_++);
+}
+
+}
+</second>
+	</item>
+	<item>
+		<first>/comments.cppxml/comments/src/types/multi_line.cpp</first>
+		<second>/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+ *
+ * Copyright (C) 2012 Kitanda &lt;info@kitanda.co.uk&gt;
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+ * MA 02110-1301, USA.
+ *
+ */
+#include &quot;comments/types/multi_line.hpp&quot;
+
+namespace comments {
+
+bool multi_line::operator==(const multi_line&amp; /*rhs*/) const {
+    return true;
+}
+
+}</second>
+	</item>
+	<item>
+		<first>/comments.cppxml/comments/src/types/one_line.cpp</first>
+		<second>/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+ *
+ * Copyright (C) 2012 Kitanda &lt;info@kitanda.co.uk&gt;
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+ * MA 02110-1301, USA.
+ *
+ */
+#include &quot;comments/types/one_line.hpp&quot;
+
+namespace comments {
+
+one_line::one_line(
+    const int&amp; prop_0,
+    const int&amp; prop_1,
+    const int&amp; prop_2)
+    : prop_0_(prop_0),
+      prop_1_(prop_1),
+      prop_2_(prop_2) { }
+
+void one_line::swap(one_line&amp; other) noexcept {
+    using std::swap;
+    swap(prop_0_, other.prop_0_);
+    swap(prop_1_, other.prop_1_);
+    swap(prop_2_, other.prop_2_);
+}
+
+bool one_line::operator==(const one_line&amp; rhs) const {
+    return prop_0_ == rhs.prop_0_ &amp;&amp;
+        prop_1_ == rhs.prop_1_ &amp;&amp;
+        prop_2_ == rhs.prop_2_;
+}
+
+one_line&amp; one_line::operator=(one_line other) {
+    using std::swap;
+    swap(*this, other);
+    return *this;
+}
+
+const int&amp; one_line::prop_0() const {
+    return prop_0_;
+}
+
+int&amp; one_line::prop_0() {
+    return prop_0_;
+}
+
+void one_line::prop_0(const int&amp; v) {
+    prop_0_ = v;
+}
+
+void one_line::prop_0(const int&amp;&amp; v) {
+    prop_0_ = std::move(v);
+}
+
+const int&amp; one_line::prop_1() const {
+    return prop_1_;
+}
+
+int&amp; one_line::prop_1() {
+    return prop_1_;
+}
+
+void one_line::prop_1(const int&amp; v) {
+    prop_1_ = v;
+}
+
+void one_line::prop_1(const int&amp;&amp; v) {
+    prop_1_ = std::move(v);
+}
+
+const int&amp; one_line::prop_2() const {
+    return prop_2_;
+}
+
+int&amp; one_line::prop_2() {
+    return prop_2_;
+}
+
+void one_line::prop_2(const int&amp; v) {
+    prop_2_ = v;
+}
+
+void one_line::prop_2(const int&amp;&amp; v) {
+    prop_2_ = std::move(v);
+}
+
+}</second>
+	</item>
+</entity>
+</boost_serialization>
+

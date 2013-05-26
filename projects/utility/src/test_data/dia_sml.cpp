@@ -149,6 +149,8 @@ path expected_comments_dia_xml(
     "dia_sml/expected/comments.diaxml");
 path expected_comments_sml_xml(
     "dia_sml/expected/comments.smlxml");
+path expected_comments_cpp_xml(
+    "dia_sml/expected/comments.cppxml");
 path expected_enumeration_dia_xml(
     "dia_sml/expected/enumeration.diaxml");
 path expected_enumeration_sml_xml(
@@ -234,6 +236,8 @@ path actual_comments_dia_xml(
     "dia_sml/actual/comments.diaxml");
 path actual_comments_sml_xml(
     "dia_sml/actual/comments.smlxml");
+path actual_comments_cpp_xml(
+    "dia_sml/actual/comments.cppxml");
 path actual_enumeration_dia_xml(
     "dia_sml/actual/enumeration.diaxml");
 path actual_enumeration_sml_xml(
@@ -558,6 +562,10 @@ path dia_sml::expected_comments_sml_xml() {
     return resolver::resolve(::expected_comments_sml_xml);
 }
 
+path dia_sml::expected_comments_cpp_xml() {
+    return resolver::resolve(::expected_comments_cpp_xml);
+}
+
 path dia_sml::expected_enumeration_dia_xml() {
     return validating_resolver::resolve(::expected_enumeration_dia_xml);
 }
@@ -717,6 +725,10 @@ path dia_sml::actual_comments_dia_xml() {
 
 path dia_sml::actual_comments_sml_xml() {
     return resolver::resolve(::actual_comments_sml_xml);
+}
+
+path dia_sml::actual_comments_cpp_xml() {
+    return resolver::resolve(::actual_comments_cpp_xml);
 }
 
 path dia_sml::actual_enumeration_dia_xml() {
