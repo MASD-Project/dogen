@@ -88,6 +88,7 @@ public:
     static boost::filesystem::path expected_compressed_dia_xml();
     static boost::filesystem::path expected_empty_dia_xml();
     static boost::filesystem::path expected_empty_sml_xml();
+    static boost::filesystem::path expected_empty_cpp_xml();
     static boost::filesystem::path expected_two_empty_layers_dia_xml();
     static boost::filesystem::path expected_stand_alone_class_dia_xml();
     static boost::filesystem::path expected_empty_package_dia_xml();
@@ -128,6 +129,7 @@ public:
     static boost::filesystem::path actual_compressed_dia_xml();
     static boost::filesystem::path actual_empty_dia_xml();
     static boost::filesystem::path actual_empty_sml_xml();
+    static boost::filesystem::path actual_empty_cpp_xml();
     static boost::filesystem::path actual_two_empty_layers_dia_xml();
     static boost::filesystem::path actual_stand_alone_class_dia_xml();
     static boost::filesystem::path actual_empty_package_dia_xml();

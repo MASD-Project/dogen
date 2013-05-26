@@ -93,6 +93,8 @@ path expected_empty_dia_xml(
     "dia_sml/expected/empty.diaxml");
 path expected_empty_sml_xml(
     "dia_sml/expected/empty.smlxml");
+path expected_empty_cpp_xml(
+    "dia_sml/expected/empty.cppxml");
 path expected_two_empty_layers_dia_xml(
     "dia_sml/expected/two_empty_layers.diaxml");
 path expected_stand_alone_class_dia_xml(
@@ -178,6 +180,8 @@ path actual_empty_dia_xml(
     "dia_sml/actual/empty.diaxml");
 path actual_empty_sml_xml(
     "dia_sml/actual/empty.smlxml");
+path actual_empty_cpp_xml(
+    "dia_sml/actual/empty.cppxml");
 path actual_two_empty_layers_dia_xml(
     "dia_sml/actual/two_empty_layers.diaxml");
 path actual_stand_alone_class_dia_xml(
@@ -439,6 +443,10 @@ path dia_sml::expected_empty_sml_xml() {
     return validating_resolver::resolve(::expected_empty_sml_xml);
 }
 
+path dia_sml::expected_empty_cpp_xml() {
+    return resolver::resolve(::expected_empty_cpp_xml);
+}
+
 path dia_sml::expected_two_empty_layers_dia_xml() {
     return validating_resolver::resolve(::expected_two_empty_layers_dia_xml);
 }
@@ -608,6 +616,10 @@ path dia_sml::actual_empty_dia_xml() {
 
 path dia_sml::actual_empty_sml_xml() {
     return resolver::resolve(::actual_empty_sml_xml);
+}
+
+path dia_sml::actual_empty_cpp_xml() {
+    return resolver::resolve(::actual_empty_cpp_xml);
 }
 
 path dia_sml::actual_two_empty_layers_dia_xml() {
