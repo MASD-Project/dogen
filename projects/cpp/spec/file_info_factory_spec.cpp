@@ -121,7 +121,7 @@ BOOST_AUTO_TEST_CASE(creating_file_info_for_enumeration_produces_expected_result
     dogen::cpp::includer i(m, l, s);
 
     dogen::cpp::file_info_factory f(l, i);
-    const dogen::cpp::enumeration_info ei;
+    const auto ei((dogen::cpp::enumeration_info()));
     const auto en(m.enumerations().begin()->second);
     const auto md(mock_descriptors(en.name()));
     const auto infos(f.create(ei, md));
@@ -163,7 +163,7 @@ BOOST_AUTO_TEST_CASE(creating_file_info_for_exception_produces_expected_results)
     dogen::cpp::file_info_factory f(l, i);
     const auto ex(m.exceptions().begin()->second);
     const auto md(mock_descriptors(ex.name()));
-    const dogen::cpp::exception_info ei;
+    const auto ei((dogen::cpp::exception_info()));
     const auto infos(f.create(ei, md));
     BOOST_LOG_SEV(lg, debug) << "file infos: " << infos;
 
@@ -204,7 +204,7 @@ BOOST_AUTO_TEST_CASE(creating_file_info_for_package_produces_expected_results) {
     dogen::cpp::file_info_factory f(l, i);
     const auto p(m.packages().begin()->second);
     const auto md(mock_descriptors(p.name()));
-    const dogen::cpp::namespace_info ni;
+    const auto ni((dogen::cpp::namespace_info()));
     const auto infos(f.create(ni, md));
     BOOST_LOG_SEV(lg, debug) << "file infos: " << infos;
 
@@ -243,7 +243,7 @@ BOOST_AUTO_TEST_CASE(creating_file_info_for_pod_produces_expected_results) {
     dogen::cpp::file_info_factory f(l, i);
     const auto p(m.pods().begin()->second);
     const auto md(mock_descriptors(p.name()));
-    const dogen::cpp::class_info ci;
+    const auto ci((dogen::cpp::class_info()));
     const auto infos(f.create(ci, md));
     BOOST_LOG_SEV(lg, debug) << "file infos: " << infos;
 
@@ -362,7 +362,7 @@ BOOST_AUTO_TEST_CASE(creating_file_info_for_registrar_produces_expected_results)
     dogen::cpp::file_info_factory f(l, i);
 
     const auto md(mock_descriptor_for_registrar());
-    const dogen::cpp::registrar_info ri;
+    const auto ri((dogen::cpp::registrar_info()));
     const auto infos(f.create_registrar(ri, md));
     BOOST_LOG_SEV(lg, debug) << "file infos: " << infos;
 
