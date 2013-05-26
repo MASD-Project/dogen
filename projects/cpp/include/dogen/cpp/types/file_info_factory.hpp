@@ -29,6 +29,7 @@
 #include <list>
 #include <boost/filesystem/path.hpp>
 #include "dogen/config/types/cpp_facet_types.hpp"
+#include "dogen/sml/types/pod.hpp"
 #include "dogen/sml/types/model.hpp"
 #include "dogen/cpp/types/locator.hpp"
 #include "dogen/cpp/types/location_request.hpp"
@@ -75,44 +76,45 @@ private:
     /**
      * @brief Performs the initial setup of the file info.
      */
-    file_info create(const content_descriptor& cd);
+    file_info create(const content_descriptor& cd) const;
 
 public:
     /**
      * @brief Manufacture the file info for the given enumeration info.
      */
     std::list<file_info> create(const enumeration_info& ei,
-        const std::list<content_descriptor>& cds);
+        const std::list<content_descriptor>& cds) const;
 
     /**
      * @brief Manufacture all the file infos for the given exception.
      */
     std::list<file_info> create(const exception_info& ei,
-        const std::list<content_descriptor>& cds);
+        const std::list<content_descriptor>& cds) const;
 
     /**
      * @brief Manufacture all the file infos for the given package.
      */
     std::list<file_info> create(const namespace_info& ni,
-        const std::list<content_descriptor>& cds);
+        const std::list<content_descriptor>& cds) const;
 
     /**
      * @brief Manufacture all the file infos for the given pod.
      */
-    std::list<file_info> create(const class_info& ci,
-        const std::list<content_descriptor>& cds);
+    // FIXME: hack until we update includer
+    std::list<file_info> create(const sml::pod& p, const class_info& ci,
+        const std::list<content_descriptor>& cds) const;
 
     /**
      * @brief Manufacture file info for includer.
      */
     std::list<file_info> create_includer(
-        const std::list<content_descriptor>& cds);
+        const std::list<content_descriptor>& cds) const;
 
     /**
      * @brief Manufacture file info for registrar.
      */
     std::list<file_info> create_registrar(const registrar_info& ri,
-        const std::list<content_descriptor>& cds);
+        const std::list<content_descriptor>& cds) const;
 
 private:
     const locator& locator_;

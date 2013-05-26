@@ -244,7 +244,7 @@ BOOST_AUTO_TEST_CASE(creating_file_info_for_pod_produces_expected_results) {
     const auto p(m.pods().begin()->second);
     const auto md(mock_descriptors(p.name()));
     const auto ci((dogen::cpp::class_info()));
-    const auto infos(f.create(ci, md));
+    const auto infos(f.create(p, ci, md));
     BOOST_LOG_SEV(lg, debug) << "file infos: " << infos;
 
     std::set<dogen::config::cpp_facet_types> found_facets;

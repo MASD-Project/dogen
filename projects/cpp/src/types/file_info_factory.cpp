@@ -72,7 +72,7 @@ location_request_factory(const content_descriptor& cd) const {
     return r;
 }
 
-file_info file_info_factory::create(const content_descriptor& cd) {
+file_info file_info_factory::create(const content_descriptor& cd) const {
     file_info r;
     r.facet_type(cd.facet_type());
     r.file_type(cd.file_type());
@@ -92,7 +92,7 @@ file_info file_info_factory::create(const content_descriptor& cd) {
 }
 
 std::list<file_info> file_info_factory::create(const enumeration_info& ei,
-    const std::list<content_descriptor>& cds) {
+    const std::list<content_descriptor>& cds) const {
 
     std::list<file_info> r;
     for (const auto cd : cds) {
@@ -112,8 +112,8 @@ std::list<file_info> file_info_factory::create(const enumeration_info& ei,
     return r;
 }
 
-std::list<file_info> file_info_factory::
-create(const exception_info& ei, const std::list<content_descriptor>& cds) {
+std::list<file_info> file_info_factory::create(const exception_info& ei,
+    const std::list<content_descriptor>& cds) const {
 
     std::list<file_info> r;
     for (const auto cd : cds) {
@@ -133,8 +133,8 @@ create(const exception_info& ei, const std::list<content_descriptor>& cds) {
     return r;
 }
 
-std::list<file_info> file_info_factory::
-create(const namespace_info& ni, const std::list<content_descriptor>& cds) {
+std::list<file_info> file_info_factory::create(const namespace_info& ni,
+    const std::list<content_descriptor>& cds) const {
 
     std::list<file_info> r;
     for (const auto cd : cds) {
@@ -145,17 +145,14 @@ create(const namespace_info& ni, const std::list<content_descriptor>& cds) {
     return r;
 }
 
-std::list<file_info> file_info_factory::
-create(const class_info& ci, const std::list<content_descriptor>& cds) {
+std::list<file_info> file_info_factory::create(const sml::pod& p,
+    const class_info& ci, const std::list<content_descriptor>& cds) const {
 
     std::list<file_info> r;
     for (const auto cd : cds) {
         file_info fi(create(cd));
         fi.class_info(ci);
 
-        // FIXME: hack until we update includer
-        sml::pod p;
-        p.name(cd.name());
         const auto il(includer_.includes_for_pod(p,
                 cd.facet_type(), cd.file_type(), cd.aspect_type()));
         fi.system_includes(il.system());
@@ -166,7 +163,7 @@ create(const class_info& ci, const std::list<content_descriptor>& cds) {
 }
 
 std::list<file_info> file_info_factory::create_includer(
-    const std::list<content_descriptor>& cds) {
+    const std::list<content_descriptor>& cds) const {
 
     std::list<file_info> r;
     for (const auto cd : cds) {
@@ -183,7 +180,7 @@ std::list<file_info> file_info_factory::create_includer(
 
 std::list<file_info>
 file_info_factory::create_registrar(const registrar_info& ri,
-    const std::list<content_descriptor>& cds) {
+    const std::list<content_descriptor>& cds) const {
 
     std::list<file_info> r;
     for (const auto cd : cds) {

@@ -242,7 +242,7 @@ workflow::result_type workflow::generate_classes_activity() {
         const auto ct(p.category_type());
         const auto cds(descriptor_factory_.create(p.name(), ct, pt));
         const auto pi(transformer_.transform(p));
-        for (const auto& fi : file_info_factory_.create(pi, cds)) {
+        for (const auto& fi : file_info_factory_.create(p, pi, cds)) {
             r.insert(generate_file_info(fi));
 
             const auto header(file_types::header);
