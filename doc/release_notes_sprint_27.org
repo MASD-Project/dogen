@@ -10,15 +10,15 @@ This file contains all stories that were closed during sprint 27.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-05-26 Sun 20:37]
+Clock summary at [2013-05-26 Sun 23:58]
 
 | Headline                                                | Time    |       |       |
 |---------------------------------------------------------+---------+-------+-------|
-| *Total time*                                            | *18:08* |       |       |
+| *Total time*                                            | *20:02* |       |       |
 |---------------------------------------------------------+---------+-------+-------|
-| Development Stories Implemented                         |         | 18:08 |       |
+| Development Stories Implemented                         |         | 20:02 |       |
 | COMPLETED Make inclusion lists in includer a model type |         |       |  0:15 |
-| IMPLEMENTATION Clean up the SML to C++ transformer      |         |       | 17:53 |
+| IMPLEMENTATION Clean up the SML to C++ transformer      |         |       | 19:47 |
 #+end:
 
 *** COMPLETED Make inclusion lists in includer a model type
@@ -74,6 +74,7 @@ Continuing from previous iteration, see description in Sprint 26.
      CLOCK: [2013-05-22 Wed 22:20]--[2013-05-22 Wed 22:56] =>  0:36
 
 **** IMPLEMENTATION Create workflow tests and fix new code
+     CLOCK: [2013-05-26 Sun 23:36]--[2013-05-26 Sun 23:58] =>  0:22
      CLOCK: [2013-05-26 Sun 23:05]--[2013-05-26 Sun 23:36] =>  0:31
      CLOCK: [2013-05-26 Sun 22:43]--[2013-05-26 Sun 23:05] =>  0:22
      CLOCK: [2013-05-26 Sun 22:10]--[2013-05-26 Sun 22:38] =>  0:28
