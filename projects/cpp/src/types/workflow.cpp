@@ -333,6 +333,7 @@ workflow::result_type workflow::generate_includers_activity() {
     sml::qname qn;
     qn.type_name(includer_name);
     qn.external_package_path(model_.external_package_path());
+    qn.model_name(model_.name());
 
     // FIXME: we should probably have "a not SML type" instead of lying
     qn.meta_type(sml::meta_types::pod);
