@@ -151,6 +151,11 @@ std::list<file_info> file_info_factory::create(const sml::pod& p,
     std::list<file_info> r;
     for (const auto cd : cds) {
         file_info fi(create(cd));
+
+        if (cd.aspect_type() != aspect_types::forward_decls &&
+            p.generation_type() == sml::generation_types::partial_generation)
+            fi.aspect_type(aspect_types::null_aspect);
+
         fi.class_info(ci);
 
         const auto il(includer_.includes_for_pod(p,

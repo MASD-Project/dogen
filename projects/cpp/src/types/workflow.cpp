@@ -247,7 +247,10 @@ workflow::result_type workflow::generate_classes_activity() {
 
             const auto header(file_types::header);
             const auto main(aspect_types::main);
-            if (fi.file_type() == header && fi.aspect_type() == main)
+            const auto at(fi.aspect_type());
+            const auto na(aspect_types::null_aspect);
+            const auto registrable_aspect(at == main || at == na);
+            if (fi.file_type() == header && registrable_aspect)
                 includer_.register_header(fi.facet_type(), fi.relative_path());
         }
     }

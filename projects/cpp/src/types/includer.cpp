@@ -22,6 +22,7 @@
 #include <boost/range/algorithm/find_first_of.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/config/io/cpp_settings_io.hpp"
+#include "dogen/config/io/cpp_facet_types_io.hpp"
 #include "dogen/cpp/types/includer.hpp"
 
 namespace {
@@ -77,6 +78,10 @@ location_request_factory(config::cpp_facet_types ft, file_types flt,
 
 void includer::register_header(config::cpp_facet_types ft,
     const boost::filesystem::path& relative_path) {
+    BOOST_LOG_SEV(lg, debug) << "Registering header: "
+                             << relative_path.generic_string()
+                             << " for facet: " << ft;
+
     headers_for_facet_[ft].push_back(relative_path.generic_string());
 }
 
