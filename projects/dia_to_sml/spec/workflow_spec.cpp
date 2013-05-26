@@ -170,4 +170,12 @@ BOOST_AUTO_TEST_CASE(comments_dia_transforms_into_expected_sml) {
     BOOST_CHECK(test_workflow(input_path, expected_path, actual_path));
 }
 
+BOOST_AUTO_TEST_CASE(enumeration_dia_transforms_into_expected_sml) {
+    SETUP_TEST_LOG("enumeration_dia_transforms_into_expected_sml");
+    const auto input_path(dia_sml::expected_enumeration_dia_xml());
+    const auto actual_path(dia_sml::actual_enumeration_sml_xml());
+    const auto expected_path(dia_sml::expected_enumeration_sml_xml());
+    BOOST_CHECK(test_workflow(input_path, expected_path, actual_path));
+}
+
 BOOST_AUTO_TEST_SUITE_END()

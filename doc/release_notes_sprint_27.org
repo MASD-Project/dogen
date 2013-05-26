@@ -10,15 +10,15 @@ This file contains all stories that were closed during sprint 27.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-05-25 Sat 23:39]
+Clock summary at [2013-05-26 Sun 20:02]
 
 | Headline                                                | Time    |       |       |
 |---------------------------------------------------------+---------+-------+-------|
-| *Total time*                                            | *12:45* |       |       |
+| *Total time*                                            | *17:39* |       |       |
 |---------------------------------------------------------+---------+-------+-------|
-| Development Stories Implemented                         |         | 12:45 |       |
+| Development Stories Implemented                         |         | 17:39 |       |
 | COMPLETED Make inclusion lists in includer a model type |         |       |  0:15 |
-| IMPLEMENTATION Clean up the SML to C++ transformer      |         |       | 12:30 |
+| IMPLEMENTATION Clean up the SML to C++ transformer      |         |       | 17:24 |
 #+end:
 
 *** COMPLETED Make inclusion lists in includer a model type
@@ -64,12 +64,17 @@ Continuing from previous iteration, see description in Sprint 26.
      CLOCK: [2013-05-20 Mon 07:53]--[2013-05-20 Mon 08:15] =>  0:22
      CLOCK: [2013-05-19 Sun 22:53]--[2013-05-20 Mon 00:04] =>  1:11
 
-**** IMPLEMENTATION Plug =file_info_factory= into workflow
+**** COMPLETED Plug =file_info_factory= into workflow
+     CLOSED: [2013-05-26 Sun 20:02]
+     CLOCK: [2013-05-26 Sun 19:02]--[2013-05-26 Sun 20:02] =>  1:00
      CLOCK: [2013-05-26 Sun 01:37]--[2013-05-26 Sun 03:33] =>  1:56
      CLOCK: [2013-05-26 Sun 01:27]--[2013-05-26 Sun 01:37] =>  0:10
      CLOCK: [2013-05-25 Sat 23:39]--[2013-05-26 Sun 01:27] =>  1:48
      CLOCK: [2013-05-25 Sat 22:29]--[2013-05-25 Sat 23:39] =>  1:10
      CLOCK: [2013-05-22 Wed 22:20]--[2013-05-22 Wed 22:56] =>  0:36
+
+**** IMPLEMENTATION Create workflow tests and fix new code
+     CLOCK: [2013-05-26 Sun 20:02]--[2013-05-26 Sun 20:03] =>  0:01
 
 *** IMPLEMENTATION Move services into their own type                  :story:
 

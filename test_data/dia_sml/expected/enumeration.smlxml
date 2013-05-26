@@ -1,0 +1,433 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE boost_serialization>
+<boost_serialization signature="serialization::archive" version="9">
+<entity class_id="0" tracking_level="0" version="0">
+	<name>enumeration</name>
+	<packages class_id="1" tracking_level="0" version="0">
+		<count>1</count>
+		<bucket_count>11</bucket_count>
+		<item_version>0</item_version>
+		<item class_id="2" tracking_level="0" version="0">
+			<first class_id="3" tracking_level="0" version="0">
+				<model_name>enumeration</model_name>
+				<external_package_path class_id="4" tracking_level="0" version="0">
+					<count>0</count>
+					<item_version>0</item_version>
+				</external_package_path>
+				<package_path>
+					<count>0</count>
+					<item_version>0</item_version>
+				</package_path>
+				<type_name>pkg1</type_name>
+				<meta_type>3</meta_type>
+			</first>
+			<second class_id="5" tracking_level="0" version="0">
+				<name>
+					<model_name>enumeration</model_name>
+					<external_package_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</external_package_path>
+					<package_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</package_path>
+					<type_name>pkg1</type_name>
+					<meta_type>3</meta_type>
+				</name>
+				<documentation></documentation>
+				<implementation_specific_parameters class_id="6" tracking_level="0" version="0">
+					<count>0</count>
+					<item_version>0</item_version>
+				</implementation_specific_parameters>
+			</second>
+		</item>
+	</packages>
+	<pods class_id="7" tracking_level="0" version="0">
+		<count>1</count>
+		<bucket_count>11</bucket_count>
+		<item_version>0</item_version>
+		<item class_id="8" tracking_level="0" version="0">
+			<first>
+				<model_name>enumeration</model_name>
+				<external_package_path>
+					<count>0</count>
+					<item_version>0</item_version>
+				</external_package_path>
+				<package_path>
+					<count>0</count>
+					<item_version>0</item_version>
+				</package_path>
+				<type_name>a_class</type_name>
+				<meta_type>2</meta_type>
+			</first>
+			<second class_id="9" tracking_level="0" version="0">
+				<name>
+					<model_name>enumeration</model_name>
+					<external_package_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</external_package_path>
+					<package_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</package_path>
+					<type_name>a_class</type_name>
+					<meta_type>2</meta_type>
+				</name>
+				<properties class_id="10" tracking_level="0" version="0">
+					<count>3</count>
+					<item_version>0</item_version>
+					<item class_id="11" tracking_level="0" version="0">
+						<name>colour_type</name>
+						<type_name class_id="12" tracking_level="0" version="0">
+							<type>
+								<model_name></model_name>
+								<external_package_path>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_package_path>
+								<package_path>
+									<count>0</count>
+									<item_version>0</item_version>
+								</package_path>
+								<type_name>colour_types</type_name>
+								<meta_type>0</meta_type>
+							</type>
+							<children class_id="13" tracking_level="0" version="0">
+								<count>0</count>
+								<item_version>0</item_version>
+							</children>
+							<is_pointer>0</is_pointer>
+						</type_name>
+						<default_value></default_value>
+						<documentation></documentation>
+						<is_identity_attribute>0</is_identity_attribute>
+						<implementation_specific_parameters>
+							<count>0</count>
+							<item_version>0</item_version>
+						</implementation_specific_parameters>
+					</item>
+					<item>
+						<name>book_type</name>
+						<type_name>
+							<type>
+								<model_name></model_name>
+								<external_package_path>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_package_path>
+								<package_path>
+									<count>0</count>
+									<item_version>0</item_version>
+								</package_path>
+								<type_name>book_types</type_name>
+								<meta_type>0</meta_type>
+							</type>
+							<children>
+								<count>0</count>
+								<item_version>0</item_version>
+							</children>
+							<is_pointer>0</is_pointer>
+						</type_name>
+						<default_value></default_value>
+						<documentation></documentation>
+						<is_identity_attribute>0</is_identity_attribute>
+						<implementation_specific_parameters>
+							<count>0</count>
+							<item_version>0</item_version>
+						</implementation_specific_parameters>
+					</item>
+					<item>
+						<name>shape_type</name>
+						<type_name>
+							<type>
+								<model_name>enumeration</model_name>
+								<external_package_path>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_package_path>
+								<package_path>
+									<count>1</count>
+									<item_version>0</item_version>
+									<item>pkg1</item>
+								</package_path>
+								<type_name>shape_types</type_name>
+								<meta_type>0</meta_type>
+							</type>
+							<children>
+								<count>0</count>
+								<item_version>0</item_version>
+							</children>
+							<is_pointer>0</is_pointer>
+						</type_name>
+						<default_value></default_value>
+						<documentation></documentation>
+						<is_identity_attribute>0</is_identity_attribute>
+						<implementation_specific_parameters>
+							<count>0</count>
+							<item_version>0</item_version>
+						</implementation_specific_parameters>
+					</item>
+				</properties>
+				<parent_name class_id="14" tracking_level="0" version="0">
+					<initialized>0</initialized>
+				</parent_name>
+				<original_parent_name>
+					<initialized>0</initialized>
+				</original_parent_name>
+				<leaves class_id="15" tracking_level="0" version="0">
+					<count>0</count>
+					<item_version>0</item_version>
+				</leaves>
+				<generation_type>1</generation_type>
+				<is_parent>0</is_parent>
+				<category_type>1</category_type>
+				<pod_type>5</pod_type>
+				<documentation></documentation>
+				<number_of_type_arguments>0</number_of_type_arguments>
+				<implementation_specific_parameters>
+					<count>0</count>
+					<item_version>0</item_version>
+				</implementation_specific_parameters>
+				<is_visitable>0</is_visitable>
+				<is_immutable>0</is_immutable>
+				<is_versioned>0</is_versioned>
+				<is_keyed>0</is_keyed>
+				<is_comparable>0</is_comparable>
+				<is_fluent>0</is_fluent>
+				<is_aggregate_root>0</is_aggregate_root>
+				<versioned_key>
+					<initialized>0</initialized>
+				</versioned_key>
+				<unversioned_key>
+					<initialized>0</initialized>
+				</unversioned_key>
+			</second>
+		</item>
+	</pods>
+	<primitives class_id="16" tracking_level="0" version="0">
+		<count>0</count>
+		<bucket_count>11</bucket_count>
+		<item_version>0</item_version>
+	</primitives>
+	<enumerations class_id="17" tracking_level="0" version="0">
+		<count>3</count>
+		<bucket_count>11</bucket_count>
+		<item_version>0</item_version>
+		<item class_id="18" tracking_level="0" version="0">
+			<first>
+				<model_name>enumeration</model_name>
+				<external_package_path>
+					<count>0</count>
+					<item_version>0</item_version>
+				</external_package_path>
+				<package_path>
+					<count>1</count>
+					<item_version>0</item_version>
+					<item>pkg1</item>
+				</package_path>
+				<type_name>shape_types</type_name>
+				<meta_type>1</meta_type>
+			</first>
+			<second class_id="19" tracking_level="0" version="0">
+				<name>
+					<model_name>enumeration</model_name>
+					<external_package_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</external_package_path>
+					<package_path>
+						<count>1</count>
+						<item_version>0</item_version>
+						<item>pkg1</item>
+					</package_path>
+					<type_name>shape_types</type_name>
+					<meta_type>1</meta_type>
+				</name>
+				<generation_type>1</generation_type>
+				<documentation></documentation>
+				<enumerators class_id="20" tracking_level="0" version="0">
+					<count>5</count>
+					<item_version>0</item_version>
+					<item class_id="21" tracking_level="0" version="0">
+						<name>invalid</name>
+						<value>0</value>
+						<documentation>Represents an uninitialised enum</documentation>
+					</item>
+					<item>
+						<name>triangle</name>
+						<value>1</value>
+						<documentation>some comment</documentation>
+					</item>
+					<item>
+						<name>square</name>
+						<value>2</value>
+						<documentation>other comment</documentation>
+					</item>
+					<item>
+						<name>rectangle</name>
+						<value>3</value>
+						<documentation></documentation>
+					</item>
+					<item>
+						<name>cube</name>
+						<value>4</value>
+						<documentation>some comment</documentation>
+					</item>
+				</enumerators>
+			</second>
+		</item>
+		<item>
+			<first>
+				<model_name>enumeration</model_name>
+				<external_package_path>
+					<count>0</count>
+					<item_version>0</item_version>
+				</external_package_path>
+				<package_path>
+					<count>0</count>
+					<item_version>0</item_version>
+				</package_path>
+				<type_name>colour_types</type_name>
+				<meta_type>1</meta_type>
+			</first>
+			<second>
+				<name>
+					<model_name>enumeration</model_name>
+					<external_package_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</external_package_path>
+					<package_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</package_path>
+					<type_name>colour_types</type_name>
+					<meta_type>1</meta_type>
+				</name>
+				<generation_type>1</generation_type>
+				<documentation></documentation>
+				<enumerators>
+					<count>5</count>
+					<item_version>0</item_version>
+					<item>
+						<name>invalid</name>
+						<value>0</value>
+						<documentation>Represents an uninitialised enum</documentation>
+					</item>
+					<item>
+						<name>red</name>
+						<value>1</value>
+						<documentation>this is colour red</documentation>
+					</item>
+					<item>
+						<name>blue</name>
+						<value>2</value>
+						<documentation>this is blue</documentation>
+					</item>
+					<item>
+						<name>green</name>
+						<value>3</value>
+						<documentation></documentation>
+					</item>
+					<item>
+						<name>gray</name>
+						<value>4</value>
+						<documentation>another comment</documentation>
+					</item>
+				</enumerators>
+			</second>
+		</item>
+		<item>
+			<first>
+				<model_name>enumeration</model_name>
+				<external_package_path>
+					<count>0</count>
+					<item_version>0</item_version>
+				</external_package_path>
+				<package_path>
+					<count>0</count>
+					<item_version>0</item_version>
+				</package_path>
+				<type_name>book_types</type_name>
+				<meta_type>1</meta_type>
+			</first>
+			<second>
+				<name>
+					<model_name>enumeration</model_name>
+					<external_package_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</external_package_path>
+					<package_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</package_path>
+					<type_name>book_types</type_name>
+					<meta_type>1</meta_type>
+				</name>
+				<generation_type>1</generation_type>
+				<documentation>this is a brief comment
+
+this is a long comment</documentation>
+				<enumerators>
+					<count>4</count>
+					<item_version>0</item_version>
+					<item>
+						<name>invalid</name>
+						<value>0</value>
+						<documentation>Represents an uninitialised enum</documentation>
+					</item>
+					<item>
+						<name>great</name>
+						<value>1</value>
+						<documentation></documentation>
+					</item>
+					<item>
+						<name>not_so_great</name>
+						<value>2</value>
+						<documentation></documentation>
+					</item>
+					<item>
+						<name>bad</name>
+						<value>3</value>
+						<documentation></documentation>
+					</item>
+				</enumerators>
+			</second>
+		</item>
+	</enumerations>
+	<exceptions class_id="22" tracking_level="0" version="0">
+		<count>0</count>
+		<bucket_count>11</bucket_count>
+		<item_version>0</item_version>
+	</exceptions>
+	<external_package_path>
+		<count>0</count>
+		<item_version>0</item_version>
+	</external_package_path>
+	<is_system>0</is_system>
+	<dependencies class_id="23" tracking_level="0" version="0">
+		<count>0</count>
+		<bucket_count>11</bucket_count>
+		<item_version>0</item_version>
+	</dependencies>
+	<leaves class_id="24" tracking_level="0" version="0">
+		<count>0</count>
+		<bucket_count>11</bucket_count>
+		<item_version>0</item_version>
+	</leaves>
+	<documentation></documentation>
+	<implementation_specific_parameters>
+		<count>0</count>
+		<item_version>0</item_version>
+	</implementation_specific_parameters>
+	<services class_id="25" tracking_level="0" version="0">
+		<count>0</count>
+		<bucket_count>11</bucket_count>
+		<item_version>0</item_version>
+	</services>
+</entity>
+</boost_serialization>
+

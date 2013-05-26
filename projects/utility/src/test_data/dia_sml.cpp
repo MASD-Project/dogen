@@ -155,6 +155,8 @@ path expected_enumeration_dia_xml(
     "dia_sml/expected/enumeration.diaxml");
 path expected_enumeration_sml_xml(
     "dia_sml/expected/enumeration.smlxml");
+path expected_enumeration_cpp_xml(
+    "dia_sml/expected/enumeration.cppxml");
 path expected_exception_dia_xml(
     "dia_sml/expected/exception.diaxml");
 path expected_exception_sml_xml(
@@ -242,6 +244,8 @@ path actual_enumeration_dia_xml(
     "dia_sml/actual/enumeration.diaxml");
 path actual_enumeration_sml_xml(
     "dia_sml/actual/enumeration.smlxml");
+path actual_enumeration_cpp_xml(
+    "dia_sml/actual/enumeration.cppxml");
 path actual_exception_dia_xml(
     "dia_sml/actual/exception.diaxml");
 path actual_exception_sml_xml(
@@ -555,15 +559,15 @@ path dia_sml::expected_trivial_inheritance_sml_xml() {
 }
 
 path dia_sml::expected_comments_dia_xml() {
-    return resolver::resolve(::expected_comments_dia_xml);
+    return validating_resolver::resolve(::expected_comments_dia_xml);
 }
 
 path dia_sml::expected_comments_sml_xml() {
-    return resolver::resolve(::expected_comments_sml_xml);
+    return validating_resolver::resolve(::expected_comments_sml_xml);
 }
 
 path dia_sml::expected_comments_cpp_xml() {
-    return resolver::resolve(::expected_comments_cpp_xml);
+    return validating_resolver::resolve(::expected_comments_cpp_xml);
 }
 
 path dia_sml::expected_enumeration_dia_xml() {
@@ -572,6 +576,10 @@ path dia_sml::expected_enumeration_dia_xml() {
 
 path dia_sml::expected_enumeration_sml_xml() {
     return validating_resolver::resolve(::expected_enumeration_sml_xml);
+}
+
+path dia_sml::expected_enumeration_cpp_xml() {
+    return resolver::resolve(::expected_enumeration_cpp_xml);
 }
 
 path dia_sml::expected_exception_dia_xml() {
@@ -737,6 +745,10 @@ path dia_sml::actual_enumeration_dia_xml() {
 
 path dia_sml::actual_enumeration_sml_xml() {
     return resolver::resolve(::actual_enumeration_sml_xml);
+}
+
+path dia_sml::actual_enumeration_cpp_xml() {
+    return resolver::resolve(::actual_enumeration_cpp_xml);
 }
 
 path dia_sml::actual_exception_dia_xml() {

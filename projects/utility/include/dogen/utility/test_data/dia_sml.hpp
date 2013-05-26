@@ -116,6 +116,7 @@ public:
     static boost::filesystem::path expected_comments_cpp_xml();
     static boost::filesystem::path expected_enumeration_dia_xml();
     static boost::filesystem::path expected_enumeration_sml_xml();
+    static boost::filesystem::path expected_enumeration_cpp_xml();
     static boost::filesystem::path expected_exception_dia_xml();
     static boost::filesystem::path expected_exception_sml_xml();
     static boost::filesystem::path expected_std_model_dia_xml();
@@ -158,6 +159,7 @@ public:
     static boost::filesystem::path actual_comments_cpp_xml();
     static boost::filesystem::path actual_enumeration_dia_xml();
     static boost::filesystem::path actual_enumeration_sml_xml();
+    static boost::filesystem::path actual_enumeration_cpp_xml();
     static boost::filesystem::path actual_exception_dia_xml();
     static boost::filesystem::path actual_exception_sml_xml();
     static boost::filesystem::path actual_std_model_dia_xml();
