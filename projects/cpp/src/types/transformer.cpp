@@ -261,7 +261,7 @@ registrar_info transformer::transform_model_into_registrar() const {
     sml::qname qn;
     qn.model_name(n);
     qn.external_package_path(model_.external_package_path());
-    qn.meta_type(sml::meta_types::package);
+    qn.meta_type(sml::meta_types::pod);
 
     registrar_info r;
     r.namespaces(transform(qn));

@@ -424,7 +424,7 @@ path dia_sml::expected_class_in_a_package_sml_xml() {
 }
 
 path dia_sml::expected_class_in_a_package_cpp_xml() {
-    return resolver::resolve(::expected_class_in_a_package_cpp_xml);
+    return validating_resolver::resolve(::expected_class_in_a_package_cpp_xml);
 }
 
 path dia_sml::expected_compressed_dia_xml() {
