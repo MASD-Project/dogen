@@ -64,9 +64,9 @@ bool test_workflow(path t, path e, path a) {
     std::map<std::string, std::string> actual;
     for (auto& pair : actual_full_path) {
         const auto base(dia_sml::actual());
-        auto key(pair.first.string());
+        auto key(pair.first.generic_string());
         using boost::replace_first;
-        replace_first(key, base.string(), empty);
+        replace_first(key, base.generic_string(), empty);
         actual.insert(std::make_pair(key, pair.second));
     }
     return asserter::assert_object(e, a, actual);
