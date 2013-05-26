@@ -36,6 +36,7 @@ namespace {
 auto lg(logger_factory("cpp.workflow"));
 
 const std::string includer_name("all");
+const std::string registrar_name("registrar");
 const std::string cmakelists_file_name("CMakeLists.txt");
 const std::string odb_options_file_name("options.odb");
 const std::string domain_facet_must_be_enabled("Domain facet must be enabled");
@@ -174,6 +175,8 @@ workflow::result_type workflow::old_generate_file_infos() const {
 }
 
 workflow::result_type workflow::generate_enums_activity() {
+    BOOST_LOG_SEV(lg, debug) << "Started generate enums activity.";
+
     workflow::result_type r;
     for (const auto& pair : model_.enumerations()) {
         const auto& e(pair.second);
@@ -193,10 +196,14 @@ workflow::result_type workflow::generate_enums_activity() {
                 includer_.register_header(fi.facet_type(), fi.relative_path());
         }
     }
+
+    BOOST_LOG_SEV(lg, debug) << "Finished generate enums activity.";
     return r;
 }
 
 workflow::result_type workflow::generate_exceptions_activity() {
+    BOOST_LOG_SEV(lg, debug) << "Started generate exceptions activity.";
+
     workflow::result_type r;
     for (const auto& pair : model_.exceptions()) {
         const auto& e(pair.second);
@@ -216,10 +223,14 @@ workflow::result_type workflow::generate_exceptions_activity() {
                 includer_.register_header(fi.facet_type(), fi.relative_path());
         }
     }
+
+    BOOST_LOG_SEV(lg, debug) << "Finished generate exceptions activity";
     return r;
 }
 
 workflow::result_type workflow::generate_classes_activity() {
+    BOOST_LOG_SEV(lg, debug) << "Started generate classes activity.";
+
     workflow::result_type r;
     for (const auto& pair : model_.pods()) {
         const auto p(pair.second);
@@ -227,9 +238,10 @@ workflow::result_type workflow::generate_classes_activity() {
         if (p.generation_type() == sml::generation_types::no_generation)
             continue;
 
-        const auto pi(transformer_.transform(p));
+        const auto pt(p.pod_type());
         const auto ct(p.category_type());
-        const auto cds(descriptor_factory_.create(p.name(), ct));
+        const auto cds(descriptor_factory_.create(p.name(), ct, pt));
+        const auto pi(transformer_.transform(p));
         for (const auto& fi : file_info_factory_.create(pi, cds)) {
             r.insert(generate_file_info(fi));
 
@@ -239,12 +251,15 @@ workflow::result_type workflow::generate_classes_activity() {
                 includer_.register_header(fi.facet_type(), fi.relative_path());
         }
     }
+
+    BOOST_LOG_SEV(lg, debug) << "Finished generate classes activity";
     return r;
 }
 
 workflow::result_type workflow::generate_namespaces_activity() {
-    workflow::result_type r;
+    BOOST_LOG_SEV(lg, debug) << "Started generate namespaces activity.";
 
+    workflow::result_type r;
     if (!model_.documentation().empty()) {
         const auto ni(transformer_.transform_model_into_namespace());
         auto cds(descriptor_factory_.create(model_));
@@ -280,19 +295,23 @@ workflow::result_type workflow::generate_namespaces_activity() {
         }
     }
 
+    BOOST_LOG_SEV(lg, debug) << "Finished generate classes activity.";
     return r;
 }
 
 workflow::result_type workflow::generate_registrars_activity() {
+    BOOST_LOG_SEV(lg, debug) << "Started generate registrars activity.";
+
     sml::qname qn;
     qn.model_name(model_.name());
     qn.external_package_path(model_.external_package_path());
+    qn.type_name(registrar_name);
 
-    // FIXME: we should probably have a not SML type instead of lying
+    // FIXME: we should probably have "a not SML type" instead of lying
     qn.meta_type(sml::meta_types::pod);
 
+    const auto cds(descriptor_factory_.create_registrar(qn));
     const auto ri(transformer_.transform_model_into_registrar());
-    const auto cds(descriptor_factory_.create(qn));
 
     workflow::result_type r;
     for (const auto& fi : file_info_factory_.create_registrar(ri, cds)) {
@@ -303,15 +322,19 @@ workflow::result_type workflow::generate_registrars_activity() {
         if (fi.file_type() == header && fi.aspect_type() == main)
             includer_.register_header(fi.facet_type(), fi.relative_path());
     }
+
+    BOOST_LOG_SEV(lg, debug) << "Finished generate registrars activity";
     return r;
 }
 
 workflow::result_type workflow::generate_includers_activity() {
+    BOOST_LOG_SEV(lg, debug) << "Started generate includers activity.";
+
     sml::qname qn;
     qn.type_name(includer_name);
     qn.external_package_path(model_.external_package_path());
 
-    // FIXME: we should probably have a not SML type instead of lying
+    // FIXME: we should probably have "a not SML type" instead of lying
     qn.meta_type(sml::meta_types::pod);
 
     const auto cds(descriptor_factory_.create_includer(qn));
@@ -319,6 +342,8 @@ workflow::result_type workflow::generate_includers_activity() {
     workflow::result_type r;
     for (const auto& fi : file_info_factory_.create_includer(cds))
         r.insert(generate_file_info(fi));
+
+    BOOST_LOG_SEV(lg, debug) << "Finished generate includers activity.";
     return r;
 }
 
@@ -336,7 +361,7 @@ workflow::result_type workflow::generate_file_infos_activity() {
     r.insert(c.begin(), c.end());
     r.insert(d.begin(), d.end());
     r.insert(e.begin(), e.end());
-    r.insert(f.begin(), e.end());
+    r.insert(f.begin(), f.end());
     return r;
 }
 

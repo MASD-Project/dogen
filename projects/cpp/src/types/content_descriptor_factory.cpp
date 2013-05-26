@@ -21,8 +21,12 @@
 #include <sstream>
 #include <boost/lexical_cast.hpp>
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/sml/io/meta_types_io.hpp"
+#include "dogen/sml/io/qname_io.hpp"
 #include "dogen/sml/io/pod_types_io.hpp"
+#include "dogen/sml/io/meta_types_io.hpp"
+#include "dogen/sml/io/category_types_io.hpp"
+#include "dogen/utility/io/list_io.hpp"
+#include "dogen/cpp/io/content_descriptor_io.hpp"
 #include "dogen/cpp/types/building_error.hpp"
 #include "dogen/cpp/types/aspect_types.hpp"
 #include "dogen/cpp/types/content_descriptor_factory.hpp"
@@ -145,6 +149,10 @@ content_descriptor_factory::create(const sml::qname& qn,
     using sml::category_types;
     using sml::pod_types;
 
+    BOOST_LOG_SEV(lg, debug) << "Creating descriptors: " << qn
+                             << " category: " << ct
+                             << " pod type: " << pt;
+
     if (qn.meta_type() == meta_types::invalid) {
         BOOST_LOG_SEV(lg, error) << must_supply_valid_meta_type;
         BOOST_THROW_EXCEPTION(building_error(must_supply_valid_meta_type));
@@ -183,6 +191,8 @@ content_descriptor_factory::create(const sml::qname& qn,
         if (has_forward_decls(ft, mt))
             r.push_back(content_descriptor(header, ft, forward_decls, ct, qn));
     }
+
+    BOOST_LOG_SEV(lg, debug) << "Descriptors: " << r;
     return r;
 }
 
@@ -215,6 +225,19 @@ content_descriptor_factory::create_includer(const sml::qname& qn) const {
         const auto ct(sml::category_types::invalid);
         r.push_back(content_descriptor(header, ft, at, ct, qn));
     }
+    return r;
+}
+
+std::list<content_descriptor>
+content_descriptor_factory::create_registrar(const sml::qname& qn) const {
+    std::list<content_descriptor> r;
+
+    const auto ft(config::cpp_facet_types::serialization);
+    const auto at(aspect_types::includers);
+    const auto header(file_types::header);
+    const auto ct(sml::category_types::invalid);
+    r.push_back(content_descriptor(header, ft, at, ct, qn));
+
     return r;
 }
 

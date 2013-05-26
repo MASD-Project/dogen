@@ -5,7 +5,7 @@
 	<count>24</count>
 	<item_version>0</item_version>
 	<item class_id="1" tracking_level="0" version="0">
-		<first>/mnt/ssd/marco/output/stage/bin/../test_data/dia_sml/expected/class_in_a_package.cppxml/class_in_a_package/CMakeLists.txt</first>
+		<first>/class_in_a_package.cppxml/class_in_a_package/CMakeLists.txt</first>
 		<second># -*- mode: cmake; tab-width: 4; indent-tabs-mode: nil -*-
 #
 # Copyright (C) 2012 Kitanda &lt;info@kitanda.co.uk&gt;
@@ -81,7 +81,7 @@ endforeach()
 </second>
 	</item>
 	<item>
-		<first>/mnt/ssd/marco/output/stage/bin/../test_data/dia_sml/expected/class_in_a_package.cppxml/class_in_a_package/include/class_in_a_package/hash/all_hash.hpp</first>
+		<first>/class_in_a_package.cppxml/class_in_a_package/include/class_in_a_package/hash/all_hash.hpp</first>
 		<second>/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
  *
  * Copyright (C) 2012 Kitanda &lt;info@kitanda.co.uk&gt;
@@ -106,7 +106,7 @@ endforeach()
 </second>
 	</item>
 	<item>
-		<first>/mnt/ssd/marco/output/stage/bin/../test_data/dia_sml/expected/class_in_a_package.cppxml/class_in_a_package/include/class_in_a_package/hash/package1/first_class_hash.hpp</first>
+		<first>/class_in_a_package.cppxml/class_in_a_package/include/class_in_a_package/hash/package1/first_class_hash.hpp</first>
 		<second>/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
  *
  * Copyright (C) 2012 Kitanda &lt;info@kitanda.co.uk&gt;
@@ -162,7 +162,7 @@ public:
 </second>
 	</item>
 	<item>
-		<first>/mnt/ssd/marco/output/stage/bin/../test_data/dia_sml/expected/class_in_a_package.cppxml/class_in_a_package/include/class_in_a_package/io/all_io.hpp</first>
+		<first>/class_in_a_package.cppxml/class_in_a_package/include/class_in_a_package/io/all_io.hpp</first>
 		<second>/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
  *
  * Copyright (C) 2012 Kitanda &lt;info@kitanda.co.uk&gt;
@@ -187,7 +187,7 @@ public:
 </second>
 	</item>
 	<item>
-		<first>/mnt/ssd/marco/output/stage/bin/../test_data/dia_sml/expected/class_in_a_package.cppxml/class_in_a_package/include/class_in_a_package/io/package1/first_class_io.hpp</first>
+		<first>/class_in_a_package.cppxml/class_in_a_package/include/class_in_a_package/io/package1/first_class_io.hpp</first>
 		<second>/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
  *
  * Copyright (C) 2012 Kitanda &lt;info@kitanda.co.uk&gt;
@@ -231,7 +231,7 @@ operator&lt;&lt;(std::ostream&amp; s,
 </second>
 	</item>
 	<item>
-		<first>/mnt/ssd/marco/output/stage/bin/../test_data/dia_sml/expected/class_in_a_package.cppxml/class_in_a_package/include/class_in_a_package/odb/all_pragmas.hpp</first>
+		<first>/class_in_a_package.cppxml/class_in_a_package/include/class_in_a_package/odb/all_pragmas.hpp</first>
 		<second>/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
  *
  * Copyright (C) 2012 Kitanda &lt;info@kitanda.co.uk&gt;
@@ -256,7 +256,7 @@ operator&lt;&lt;(std::ostream&amp; s,
 </second>
 	</item>
 	<item>
-		<first>/mnt/ssd/marco/output/stage/bin/../test_data/dia_sml/expected/class_in_a_package.cppxml/class_in_a_package/include/class_in_a_package/odb/package1/first_class_pragmas.hpp</first>
+		<first>/class_in_a_package.cppxml/class_in_a_package/include/class_in_a_package/odb/package1/first_class_pragmas.hpp</first>
 		<second>/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
  *
  * Copyright (C) 2012 Kitanda &lt;info@kitanda.co.uk&gt;
@@ -293,7 +293,7 @@ operator&lt;&lt;(std::ostream&amp; s,
 </second>
 	</item>
 	<item>
-		<first>/mnt/ssd/marco/output/stage/bin/../test_data/dia_sml/expected/class_in_a_package.cppxml/class_in_a_package/include/class_in_a_package/serialization/all_ser.hpp</first>
+		<first>/class_in_a_package.cppxml/class_in_a_package/include/class_in_a_package/serialization/all_ser.hpp</first>
 		<second>/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
  *
  * Copyright (C) 2012 Kitanda &lt;info@kitanda.co.uk&gt;
@@ -318,7 +318,7 @@ operator&lt;&lt;(std::ostream&amp; s,
 </second>
 	</item>
 	<item>
-		<first>/mnt/ssd/marco/output/stage/bin/../test_data/dia_sml/expected/class_in_a_package.cppxml/class_in_a_package/include/class_in_a_package/serialization/package1/first_class_fwd_ser.hpp</first>
+		<first>/class_in_a_package.cppxml/class_in_a_package/include/class_in_a_package/serialization/package1/first_class_fwd_ser.hpp</first>
 		<second>/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
  *
  * Copyright (C) 2012 Kitanda &lt;info@kitanda.co.uk&gt;
@@ -363,7 +363,7 @@ void load(Archive&amp; ar, class_in_a_package::package1::first_class&amp; v, uns
 </second>
 	</item>
 	<item>
-		<first>/mnt/ssd/marco/output/stage/bin/../test_data/dia_sml/expected/class_in_a_package.cppxml/class_in_a_package/include/class_in_a_package/serialization/package1/first_class_ser.hpp</first>
+		<first>/class_in_a_package.cppxml/class_in_a_package/include/class_in_a_package/serialization/package1/first_class_ser.hpp</first>
 		<second>/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
  *
  * Copyright (C) 2012 Kitanda &lt;info@kitanda.co.uk&gt;
@@ -410,7 +410,7 @@ void load(Archive&amp; ar, class_in_a_package::package1::first_class&amp; v, uns
 </second>
 	</item>
 	<item>
-		<first>/mnt/ssd/marco/output/stage/bin/../test_data/dia_sml/expected/class_in_a_package.cppxml/class_in_a_package/include/class_in_a_package/serialization/registrar_ser.hpp</first>
+		<first>/class_in_a_package.cppxml/class_in_a_package/include/class_in_a_package/serialization/registrar_ser.hpp</first>
 		<second>/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
  *
  * Copyright (C) 2012 Kitanda &lt;info@kitanda.co.uk&gt;
@@ -440,7 +440,7 @@ void register_types(Archive&amp; ar);
 </second>
 	</item>
 	<item>
-		<first>/mnt/ssd/marco/output/stage/bin/../test_data/dia_sml/expected/class_in_a_package.cppxml/class_in_a_package/include/class_in_a_package/test_data/all_td.hpp</first>
+		<first>/class_in_a_package.cppxml/class_in_a_package/include/class_in_a_package/test_data/all_td.hpp</first>
 		<second>/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
  *
  * Copyright (C) 2012 Kitanda &lt;info@kitanda.co.uk&gt;
@@ -465,7 +465,7 @@ void register_types(Archive&amp; ar);
 </second>
 	</item>
 	<item>
-		<first>/mnt/ssd/marco/output/stage/bin/../test_data/dia_sml/expected/class_in_a_package.cppxml/class_in_a_package/include/class_in_a_package/test_data/package1/first_class_td.hpp</first>
+		<first>/class_in_a_package.cppxml/class_in_a_package/include/class_in_a_package/test_data/package1/first_class_td.hpp</first>
 		<second>/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
  *
  * Copyright (C) 2012 Kitanda &lt;info@kitanda.co.uk&gt;
@@ -522,7 +522,7 @@ public:
 </second>
 	</item>
 	<item>
-		<first>/mnt/ssd/marco/output/stage/bin/../test_data/dia_sml/expected/class_in_a_package.cppxml/class_in_a_package/include/class_in_a_package/types/all.hpp</first>
+		<first>/class_in_a_package.cppxml/class_in_a_package/include/class_in_a_package/types/all.hpp</first>
 		<second>/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
  *
  * Copyright (C) 2012 Kitanda &lt;info@kitanda.co.uk&gt;
@@ -547,7 +547,7 @@ public:
 </second>
 	</item>
 	<item>
-		<first>/mnt/ssd/marco/output/stage/bin/../test_data/dia_sml/expected/class_in_a_package.cppxml/class_in_a_package/include/class_in_a_package/types/package1/first_class.hpp</first>
+		<first>/class_in_a_package.cppxml/class_in_a_package/include/class_in_a_package/types/package1/first_class.hpp</first>
 		<second>/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
  *
  * Copyright (C) 2012 Kitanda &lt;info@kitanda.co.uk&gt;
@@ -644,7 +644,7 @@ inline void swap(
 </second>
 	</item>
 	<item>
-		<first>/mnt/ssd/marco/output/stage/bin/../test_data/dia_sml/expected/class_in_a_package.cppxml/class_in_a_package/include/class_in_a_package/types/package1/first_class_fwd.hpp</first>
+		<first>/class_in_a_package.cppxml/class_in_a_package/include/class_in_a_package/types/package1/first_class_fwd.hpp</first>
 		<second>/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
  *
  * Copyright (C) 2012 Kitanda &lt;info@kitanda.co.uk&gt;
@@ -683,7 +683,7 @@ class first_class;
 </second>
 	</item>
 	<item>
-		<first>/mnt/ssd/marco/output/stage/bin/../test_data/dia_sml/expected/class_in_a_package.cppxml/class_in_a_package/src/CMakeLists.txt</first>
+		<first>/class_in_a_package.cppxml/class_in_a_package/src/CMakeLists.txt</first>
 		<second># -*- mode: cmake; tab-width: 4; indent-tabs-mode: nil -*-
 #
 # Copyright (C) 2012 Kitanda &lt;info@kitanda.co.uk&gt;
@@ -716,7 +716,7 @@ install(TARGETS class_in_a_package ARCHIVE DESTINATION lib COMPONENT libraries)
 </second>
 	</item>
 	<item>
-		<first>/mnt/ssd/marco/output/stage/bin/../test_data/dia_sml/expected/class_in_a_package.cppxml/class_in_a_package/src/hash/package1/first_class_hash.cpp</first>
+		<first>/class_in_a_package.cppxml/class_in_a_package/src/hash/package1/first_class_hash.cpp</first>
 		<second>/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
  *
  * Copyright (C) 2012 Kitanda &lt;info@kitanda.co.uk&gt;
@@ -767,7 +767,7 @@ std::size_t first_class_hasher::hash(const first_class&amp;v) {
 </second>
 	</item>
 	<item>
-		<first>/mnt/ssd/marco/output/stage/bin/../test_data/dia_sml/expected/class_in_a_package.cppxml/class_in_a_package/src/io/package1/first_class_io.cpp</first>
+		<first>/class_in_a_package.cppxml/class_in_a_package/src/io/package1/first_class_io.cpp</first>
 		<second>/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
  *
  * Copyright (C) 2012 Kitanda &lt;info@kitanda.co.uk&gt;
@@ -807,7 +807,7 @@ std::ostream&amp; operator&lt;&lt;(std::ostream&amp; s, const first_class&amp; v
 } }</second>
 	</item>
 	<item>
-		<first>/mnt/ssd/marco/output/stage/bin/../test_data/dia_sml/expected/class_in_a_package.cppxml/class_in_a_package/src/options.odb</first>
+		<first>/class_in_a_package.cppxml/class_in_a_package/src/options.odb</first>
 		<second># -*- mode: sh; tab-width: 4; indent-tabs-mode: nil -*-
 
 # enable C++11. FIXME: causes ODB crash in options file.
@@ -844,7 +844,7 @@ std::ostream&amp; operator&lt;&lt;(std::ostream&amp; s, const first_class&amp; v
 </second>
 	</item>
 	<item>
-		<first>/mnt/ssd/marco/output/stage/bin/../test_data/dia_sml/expected/class_in_a_package.cppxml/class_in_a_package/src/serialization/package1/first_class_ser.cpp</first>
+		<first>/class_in_a_package.cppxml/class_in_a_package/src/serialization/package1/first_class_ser.cpp</first>
 		<second>/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
  *
  * Copyright (C) 2012 Kitanda &lt;info@kitanda.co.uk&gt;
@@ -926,7 +926,7 @@ template void load(eos::portable_iarchive&amp; ar, class_in_a_package::package1:
 } }</second>
 	</item>
 	<item>
-		<first>/mnt/ssd/marco/output/stage/bin/../test_data/dia_sml/expected/class_in_a_package.cppxml/class_in_a_package/src/serialization/registrar_ser.cpp</first>
+		<first>/class_in_a_package.cppxml/class_in_a_package/src/serialization/registrar_ser.cpp</first>
 		<second>/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
  *
  * Copyright (C) 2012 Kitanda &lt;info@kitanda.co.uk&gt;
@@ -986,7 +986,7 @@ template void register_types(eos::portable_iarchive&amp; ar);
 }</second>
 	</item>
 	<item>
-		<first>/mnt/ssd/marco/output/stage/bin/../test_data/dia_sml/expected/class_in_a_package.cppxml/class_in_a_package/src/test_data/package1/first_class_td.cpp</first>
+		<first>/class_in_a_package.cppxml/class_in_a_package/src/test_data/package1/first_class_td.cpp</first>
 		<second>/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
  *
  * Copyright (C) 2012 Kitanda &lt;info@kitanda.co.uk&gt;
@@ -1052,7 +1052,7 @@ first_class_generator::operator()() {
 </second>
 	</item>
 	<item>
-		<first>/mnt/ssd/marco/output/stage/bin/../test_data/dia_sml/expected/class_in_a_package.cppxml/class_in_a_package/src/types/package1/first_class.cpp</first>
+		<first>/class_in_a_package.cppxml/class_in_a_package/src/types/package1/first_class.cpp</first>
 		<second>/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
  *
  * Copyright (C) 2012 Kitanda &lt;info@kitanda.co.uk&gt;
