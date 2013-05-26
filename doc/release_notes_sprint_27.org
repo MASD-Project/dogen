@@ -74,6 +74,7 @@ Continuing from previous iteration, see description in Sprint 26.
      CLOCK: [2013-05-22 Wed 22:20]--[2013-05-22 Wed 22:56] =>  0:36
 
 **** IMPLEMENTATION Create workflow tests and fix new code
+     CLOCK: [2013-05-26 Sun 20:08]--[2013-05-26 Sun 20:16] =>  0:08
      CLOCK: [2013-05-26 Sun 20:02]--[2013-05-26 Sun 20:03] =>  0:01
 
 *** IMPLEMENTATION Move services into their own type                  :story:

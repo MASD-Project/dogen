@@ -191,7 +191,7 @@ enumerator_info transformer::transform(const sml::enumerator& e) const {
     enumerator_info r;
     r.name(e.name());
     r.value(e.value());
-    r.documentation(r.documentation());
+    r.documentation(e.documentation());
     return r;
 }
 
