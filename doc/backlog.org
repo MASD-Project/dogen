@@ -563,6 +563,10 @@ These models test dia features and must be kept isolated:
 - compressed
 - two_layers_with_objects
 
+**** Add pods, enumerations and exceptions to comments model
+
+At present we are only testing packages in comments.
+
 *** Enumeration string conversion could be configurable               :story:
 
 It should be possible to pass in one or more string values as implementation
