@@ -451,6 +451,7 @@ operator&lt;&lt;(std::ostream&amp; s,
  */
 #include &quot;comments/serialization/multi_line_ser.hpp&quot;
 #include &quot;comments/serialization/one_line_ser.hpp&quot;
+#include &quot;comments/serialization/registrar_ser.hpp&quot;
 </second>
 	</item>
 	<item>
@@ -827,8 +828,11 @@ public:
  * MA 02110-1301, USA.
  *
  */
+#include &quot;comments/types/comments.hpp&quot;
 #include &quot;comments/types/multi_line.hpp&quot;
 #include &quot;comments/types/one_line.hpp&quot;
+#include &quot;comments/types/package/package.hpp&quot;
+#include &quot;comments/types/package/package2/package2.hpp&quot;
 </second>
 	</item>
 	<item>

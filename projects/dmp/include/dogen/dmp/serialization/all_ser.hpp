@@ -19,3 +19,4 @@
  *
  */
 #include "dogen/dmp/serialization/package1/first_class_ser.hpp"
+#include "dogen/dmp/serialization/registrar_ser.hpp"

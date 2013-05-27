@@ -23,3 +23,4 @@
 #include "dogen/classes_in_a_package/serialization/package_1/class_3_ser.hpp"
 #include "dogen/classes_in_a_package/serialization/package_1/class_4_ser.hpp"
 #include "dogen/classes_in_a_package/serialization/package_1/class_5_ser.hpp"
+#include "dogen/classes_in_a_package/serialization/registrar_ser.hpp"

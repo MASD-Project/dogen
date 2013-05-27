@@ -32,3 +32,4 @@
 #include "dogen/std_model/serialization/derived_ser.hpp"
 #include "dogen/std_model/serialization/pkg1/class_c_ser.hpp"
 #include "dogen/std_model/serialization/primitives_ser.hpp"
+#include "dogen/std_model/serialization/registrar_ser.hpp"

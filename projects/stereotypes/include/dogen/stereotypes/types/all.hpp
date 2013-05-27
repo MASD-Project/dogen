@@ -48,5 +48,6 @@
 #include "dogen/stereotypes/types/pkg1/keyed_in_package_unversioned_key.hpp"
 #include "dogen/stereotypes/types/service.hpp"
 #include "dogen/stereotypes/types/some_type.hpp"
+#include "dogen/stereotypes/types/stereotypes.hpp"
 #include "dogen/stereotypes/types/value.hpp"
 #include "dogen/stereotypes/types/versioned.hpp"

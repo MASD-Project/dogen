@@ -19,3 +19,4 @@
  *
  */
 #include "dogen/disable_cmakelists/serialization/package1/first_class_ser.hpp"
+#include "dogen/disable_cmakelists/serialization/registrar_ser.hpp"

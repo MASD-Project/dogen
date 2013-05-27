@@ -19,3 +19,4 @@
  *
  */
 #include "dogen/disable_facet_folders/package1/first_class_ser.hpp"
+#include "dogen/disable_facet_folders/registrar_ser.hpp"

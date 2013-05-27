@@ -19,3 +19,4 @@
  *
  */
 #include "dogen/class_without_package/serialization/class_1_ser.hpp"
+#include "dogen/class_without_package/serialization/registrar_ser.hpp"

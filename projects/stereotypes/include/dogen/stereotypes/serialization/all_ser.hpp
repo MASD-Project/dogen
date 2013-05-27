@@ -46,6 +46,7 @@
 #include "dogen/stereotypes/serialization/just_identity_ver_versioned_key_ser.hpp"
 #include "dogen/stereotypes/serialization/pkg1/keyed_in_package_ser.hpp"
 #include "dogen/stereotypes/serialization/pkg1/keyed_in_package_unversioned_key_ser.hpp"
+#include "dogen/stereotypes/serialization/registrar_ser.hpp"
 #include "dogen/stereotypes/serialization/some_type_ser.hpp"
 #include "dogen/stereotypes/serialization/value_ser.hpp"
 #include "dogen/stereotypes/serialization/versioned_ser.hpp"

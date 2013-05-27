@@ -19,3 +19,4 @@
  *
  */
 #include "dogen/all_primitives/serialization/a_class_ser.hpp"
+#include "dogen/all_primitives/serialization/registrar_ser.hpp"

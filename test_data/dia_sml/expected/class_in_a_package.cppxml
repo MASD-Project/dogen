@@ -315,6 +315,7 @@ operator&lt;&lt;(std::ostream&amp; s,
  *
  */
 #include &quot;class_in_a_package/serialization/package1/first_class_ser.hpp&quot;
+#include &quot;class_in_a_package/serialization/registrar_ser.hpp&quot;
 </second>
 	</item>
 	<item>

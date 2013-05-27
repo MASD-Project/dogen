@@ -10,15 +10,15 @@ This file contains all stories that were closed during sprint 27.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-05-27 Mon 03:01]
+Clock summary at [2013-05-27 Mon 03:40]
 
 | Headline                                                | Time    |       |       |
 |---------------------------------------------------------+---------+-------+-------|
-| *Total time*                                            | *22:59* |       |       |
+| *Total time*                                            | *23:31* |       |       |
 |---------------------------------------------------------+---------+-------+-------|
-| Development Stories Implemented                         |         | 22:59 |       |
+| Development Stories Implemented                         |         | 23:31 |       |
 | COMPLETED Make inclusion lists in includer a model type |         |       |  0:15 |
-| IMPLEMENTATION Clean up the SML to C++ transformer      |         |       | 22:44 |
+| IMPLEMENTATION Clean up the SML to C++ transformer      |         |       | 23:16 |
 #+end:
 
 *** COMPLETED Make inclusion lists in includer a model type
@@ -96,6 +96,19 @@ Continuing from previous iteration, see description in Sprint 26.
 **** COMPLETED Remove legacy transformer
      CLOSED: [2013-05-27 Mon 03:01]
      CLOCK: [2013-05-27 Mon 02:27]--[2013-05-27 Mon 03:01] =>  0:34
+**** COMPLETED Add namespace files to includers
+     CLOSED: [2013-05-27 Mon 03:19]
+     CLOCK: [2013-05-27 Mon 03:11]--[2013-05-27 Mon 03:43] =>  0:32
+
+*** COMPLETED Registrar is not included in serialisation includer
+    CLOSED: [2013-05-27 Mon 03:18]
+
+For some reason we are not including the registrar on the includer for
+serialisation.
+
+Implemented as part of the clean up of cpp model.
+
+
 *** IMPLEMENTATION Move services into their own type                  :story:
 
 Continuing from previous iteration, see description in Sprint 26.

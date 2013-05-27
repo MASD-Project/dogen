@@ -1160,11 +1160,6 @@ machinery of creating an exception with the right code, message etc?
 it could also be responsible for appending more content to an existing
 exception so that we'd have the tags all in one place.
 
-*** Registrar is not included in serialisation includer
-
-For some reason we are not including the registrar on the includer for
-serialisation.
-
 *** Generation of cache code
 
 New understanding for this story:

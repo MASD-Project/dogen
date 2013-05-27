@@ -19,3 +19,4 @@
  *
  */
 #include "dogen/split_project/serialization/package/a_class_ser.hpp"
+#include "dogen/split_project/serialization/registrar_ser.hpp"

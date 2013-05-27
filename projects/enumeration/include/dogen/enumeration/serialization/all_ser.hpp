@@ -22,3 +22,4 @@
 #include "dogen/enumeration/serialization/book_types_ser.hpp"
 #include "dogen/enumeration/serialization/colour_types_ser.hpp"
 #include "dogen/enumeration/serialization/pkg1/shape_types_ser.hpp"
+#include "dogen/enumeration/serialization/registrar_ser.hpp"

@@ -405,6 +405,7 @@ void load(Archive&amp; ar, exception::a_class&amp; v, unsigned int version);
  *
  */
 #include &quot;exception/serialization/a_class_ser.hpp&quot;
+#include &quot;exception/serialization/registrar_ser.hpp&quot;
 </second>
 	</item>
 	<item>

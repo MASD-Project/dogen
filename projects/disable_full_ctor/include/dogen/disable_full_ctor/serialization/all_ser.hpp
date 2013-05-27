@@ -19,3 +19,4 @@
  *
  */
 #include "dogen/disable_full_ctor/serialization/package1/first_class_ser.hpp"
+#include "dogen/disable_full_ctor/serialization/registrar_ser.hpp"

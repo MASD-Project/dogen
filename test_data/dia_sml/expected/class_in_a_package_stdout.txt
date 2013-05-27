@@ -226,6 +226,7 @@ Contents:
  *
  */
 #include "class_in_a_package/serialization/package1/first_class_ser.hpp"
+#include "class_in_a_package/serialization/registrar_ser.hpp"
 
 Filename: /empty_tds/actual/include/class_in_a_package/serialization/package1/first_class_fwd_ser.hpp
 Contents: 

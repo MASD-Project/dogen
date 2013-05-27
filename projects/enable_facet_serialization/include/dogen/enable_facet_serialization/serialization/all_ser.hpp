@@ -19,3 +19,4 @@
  *
  */
 #include "dogen/enable_facet_serialization/serialization/package1/first_class_ser.hpp"
+#include "dogen/enable_facet_serialization/serialization/registrar_ser.hpp"

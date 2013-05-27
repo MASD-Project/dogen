@@ -20,3 +20,4 @@
  */
 #include "dogen/comments/serialization/multi_line_ser.hpp"
 #include "dogen/comments/serialization/one_line_ser.hpp"
+#include "dogen/comments/serialization/registrar_ser.hpp"
