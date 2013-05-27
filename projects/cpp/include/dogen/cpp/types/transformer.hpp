@@ -38,7 +38,7 @@
 #include "dogen/cpp/types/class_info.hpp"
 #include "dogen/cpp/types/namespace_info.hpp"
 #include "dogen/cpp/types/exception_info.hpp"
-#include "dogen/cpp/types/enumeration_info.hpp"
+#include "dogen/cpp/types/enum_info.hpp"
 #include "dogen/cpp/types/nested_type_info.hpp"
 #include "dogen/cpp/types/registrar_info.hpp"
 #include "dogen/cpp/types/visitor_info.hpp"
@@ -114,7 +114,7 @@ public:
     /**
      * @brief Transforms a SML enumeration into an enumeration info.
      */
-    enumeration_info transform(const sml::enumeration& e) const;
+    enum_info transform(const sml::enumeration& e) const;
 
     /**
      * @brief Transforms a SML exception into an exception info.

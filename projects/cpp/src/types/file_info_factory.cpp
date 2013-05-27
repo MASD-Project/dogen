@@ -92,13 +92,13 @@ file_info file_info_factory::create(const content_descriptor& cd) const {
     return r;
 }
 
-std::list<file_info> file_info_factory::create(const enumeration_info& ei,
+std::list<file_info> file_info_factory::create(const enum_info& ei,
     const std::list<content_descriptor>& cds) const {
 
     std::list<file_info> r;
     for (const auto cd : cds) {
         file_info fi(create(cd));
-        fi.enumeration_info(ei);
+        fi.enum_info(ei);
 
         // FIXME: hack until we update includer
         sml::enumeration e;

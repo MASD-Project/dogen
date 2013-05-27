@@ -35,7 +35,7 @@
 #include "dogen/cpp/types/location_request.hpp"
 #include "dogen//cpp/types/includer.hpp"
 #include "dogen/cpp/types/content_descriptor.hpp"
-#include "dogen/cpp/types/enumeration_info.hpp"
+#include "dogen/cpp/types/enum_info.hpp"
 #include "dogen/cpp/types/exception_info.hpp"
 #include "dogen/cpp/types/namespace_info.hpp"
 #include "dogen/cpp/types/class_info.hpp"
@@ -83,7 +83,7 @@ public:
     /**
      * @brief Manufacture the file info for the given enumeration info.
      */
-    std::list<file_info> create(const enumeration_info& ei,
+    std::list<file_info> create(const enum_info& ei,
         const std::list<content_descriptor>& cds) const;
 
     /**

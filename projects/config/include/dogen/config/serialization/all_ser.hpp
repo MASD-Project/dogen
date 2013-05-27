@@ -24,5 +24,6 @@
 #include "dogen/config/serialization/modeling_settings_ser.hpp"
 #include "dogen/config/serialization/output_settings_ser.hpp"
 #include "dogen/config/serialization/reference_ser.hpp"
+#include "dogen/config/serialization/registrar_ser.hpp"
 #include "dogen/config/serialization/settings_ser.hpp"
 #include "dogen/config/serialization/troubleshooting_settings_ser.hpp"

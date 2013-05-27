@@ -49,7 +49,7 @@ BOOST_AUTO_TEST_CASE(validate_equality) {
     test_equality<std_types_generator>();
     test_equality<class_info_generator>();
     test_equality<cmakelists_info_generator>();
-    test_equality<enumeration_info_generator>();
+    test_equality<enum_info_generator>();
     test_equality<enumerator_info_generator>();
     test_equality<exception_info_generator>();
     test_equality<file_info_generator>();

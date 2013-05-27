@@ -18,24 +18,24 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_TEST_DATA_ENUMERATION_INFO_TD_HPP
-#define DOGEN_CPP_TEST_DATA_ENUMERATION_INFO_TD_HPP
+#ifndef DOGEN_CPP_TEST_DATA_ENUM_INFO_TD_HPP
+#define DOGEN_CPP_TEST_DATA_ENUM_INFO_TD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/cpp/types/enumeration_info.hpp"
+#include "dogen/cpp/types/enum_info.hpp"
 
 namespace dogen {
 namespace cpp {
 
-class enumeration_info_generator {
+class enum_info_generator {
 public:
-    enumeration_info_generator();
+    enum_info_generator();
 
 public:
-    typedef dogen::cpp::enumeration_info result_type;
+    typedef dogen::cpp::enum_info result_type;
 
 public:
     static void populate(const unsigned int position, result_type& v);

@@ -19,7 +19,7 @@
  *
  */
 #include <sstream>
-#include "dogen/cpp/test_data/enumeration_info_td.hpp"
+#include "dogen/cpp/test_data/enum_info_td.hpp"
 #include "dogen/cpp/test_data/enumerator_info_td.hpp"
 
 namespace {
@@ -56,9 +56,9 @@ std::list<dogen::cpp::enumerator_info> create_std_list_dogen_cpp_enumerator_info
 namespace dogen {
 namespace cpp {
 
-enumeration_info_generator::enumeration_info_generator() : position_(0) { }
+enum_info_generator::enum_info_generator() : position_(0) { }
 
-void enumeration_info_generator::
+void enum_info_generator::
 populate(const unsigned int position, result_type& v) {
     v.name(create_std_string(position + 0));
     v.namespaces(create_std_list_std_string(position + 1));
@@ -66,21 +66,21 @@ populate(const unsigned int position, result_type& v) {
     v.documentation(create_std_string(position + 3));
 }
 
-enumeration_info_generator::result_type
-enumeration_info_generator::create(const unsigned int position) {
-    enumeration_info r;
-    enumeration_info_generator::populate(position, r);
+enum_info_generator::result_type
+enum_info_generator::create(const unsigned int position) {
+    enum_info r;
+    enum_info_generator::populate(position, r);
     return r;
 }
-enumeration_info_generator::result_type*
-enumeration_info_generator::create_ptr(const unsigned int position) {
-    enumeration_info* p = new enumeration_info();
-    enumeration_info_generator::populate(position, *p);
+enum_info_generator::result_type*
+enum_info_generator::create_ptr(const unsigned int position) {
+    enum_info* p = new enum_info();
+    enum_info_generator::populate(position, *p);
     return p;
 }
 
-enumeration_info_generator::result_type
-enumeration_info_generator::operator()() {
+enum_info_generator::result_type
+enum_info_generator::operator()() {
     return create(position_++);
 }
 

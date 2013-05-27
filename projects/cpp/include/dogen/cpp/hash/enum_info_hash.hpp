@@ -18,23 +18,35 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_IO_ENUMERATION_INFO_IO_HPP
-#define DOGEN_CPP_IO_ENUMERATION_INFO_IO_HPP
+#ifndef DOGEN_CPP_HASH_ENUM_INFO_HASH_HPP
+#define DOGEN_CPP_HASH_ENUM_INFO_HASH_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <iosfwd>
-#include "dogen/cpp/types/enumeration_info.hpp"
+#include <functional>
+#include "dogen/cpp/types/enum_info.hpp"
 
 namespace dogen {
 namespace cpp {
 
-std::ostream&
-operator<<(std::ostream& s,
-     const dogen::cpp::enumeration_info& v);
+class enum_info_hasher {
+public:
+    static std::size_t hash(const enum_info& v);
+};
 
 } }
 
+namespace std {
+
+template<>
+class hash<dogen::cpp::enum_info> {
+public:
+    size_t operator()(const dogen::cpp::enum_info& v) const {
+        return dogen::cpp::enum_info_hasher::hash(v);
+    }
+};
+
+}
 #endif

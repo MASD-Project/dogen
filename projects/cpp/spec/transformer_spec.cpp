@@ -90,8 +90,8 @@ using dogen::utility::test::contains_checker;
 
 BOOST_AUTO_TEST_SUITE(transformer)
 
-BOOST_AUTO_TEST_CASE(transforming_enumeration_results_in_expected_enumeration_info) {
-    SETUP_TEST_LOG_SOURCE("transforming_enumeration_results_in_expected_enumeration_info");
+BOOST_AUTO_TEST_CASE(transforming_enumeration_results_in_expected_enum_info) {
+    SETUP_TEST_LOG_SOURCE("transforming_enumeration_results_in_expected_enum_info");
 
     const auto mt(dogen::sml::meta_types::enumeration);
     const auto m(mock_model_factory::build_single_type_model(0, mt));
@@ -111,8 +111,8 @@ BOOST_AUTO_TEST_CASE(transforming_enumeration_results_in_expected_enumeration_in
     BOOST_CHECK(is_type_one(e.enumerators().back().name()));
 }
 
-BOOST_AUTO_TEST_CASE(transforming_enumeration_in_package_results_in_expected_enumeration_info) {
-    SETUP_TEST_LOG_SOURCE("transforming_enumeration_in_package_results_in_expected_enumeration_info");
+BOOST_AUTO_TEST_CASE(transforming_enumeration_in_package_results_in_expected_enum_info) {
+    SETUP_TEST_LOG_SOURCE("transforming_enumeration_in_package_results_in_expected_enum_info");
 
     const auto mt(dogen::sml::meta_types::enumeration);
     const auto m0(
@@ -152,8 +152,8 @@ BOOST_AUTO_TEST_CASE(transforming_enumeration_in_package_results_in_expected_enu
     BOOST_CHECK(is_type_one(e1.enumerators().back().name()));
 }
 
-BOOST_AUTO_TEST_CASE(transforming_enumeration_in_external_package_results_in_expected_enumeration_info) {
-    SETUP_TEST_LOG_SOURCE("transforming_enumeration_in_external_package_results_in_expected_enumeration_info");
+BOOST_AUTO_TEST_CASE(transforming_enumeration_in_external_package_results_in_expected_enum_info) {
+    SETUP_TEST_LOG_SOURCE("transforming_enumeration_in_external_package_results_in_expected_enum_info");
 
     const auto mt(dogen::sml::meta_types::enumeration);
     auto m(mock_model_factory::build_single_type_model_in_package(0, mt));

@@ -21,7 +21,7 @@
 #include "dogen/config/hash/cpp_facet_types_hash.hpp"
 #include "dogen/cpp/hash/aspect_types_hash.hpp"
 #include "dogen/cpp/hash/class_info_hash.hpp"
-#include "dogen/cpp/hash/enumeration_info_hash.hpp"
+#include "dogen/cpp/hash/enum_info_hash.hpp"
 #include "dogen/cpp/hash/exception_info_hash.hpp"
 #include "dogen/cpp/hash/file_info_hash.hpp"
 #include "dogen/cpp/hash/file_types_hash.hpp"
@@ -50,7 +50,7 @@ inline std::size_t hash_boost_optional_dogen_cpp_class_info(const boost::optiona
     return seed;
 }
 
-inline std::size_t hash_boost_optional_dogen_cpp_enumeration_info(const boost::optional<dogen::cpp::enumeration_info>& v){
+inline std::size_t hash_boost_optional_dogen_cpp_enum_info(const boost::optional<dogen::cpp::enum_info>& v){
     std::size_t seed(0);
 
     if (!v)
@@ -122,7 +122,7 @@ std::size_t file_info_hasher::hash(const file_info&v) {
     combine(seed, v.category_type());
     combine(seed, v.meta_type());
     combine(seed, hash_boost_optional_dogen_cpp_class_info(v.class_info()));
-    combine(seed, hash_boost_optional_dogen_cpp_enumeration_info(v.enumeration_info()));
+    combine(seed, hash_boost_optional_dogen_cpp_enum_info(v.enum_info()));
     combine(seed, hash_boost_optional_dogen_cpp_exception_info(v.exception_info()));
     combine(seed, hash_boost_optional_dogen_cpp_registrar_info(v.registrar_info()));
     combine(seed, v.header_guard());

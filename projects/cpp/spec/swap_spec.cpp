@@ -49,7 +49,7 @@ BOOST_AUTO_TEST_CASE(validate_swap) {
     test_swap<std_types_generator>();
     test_swap<class_info_generator>();
     test_swap<cmakelists_info_generator>();
-    test_swap<enumeration_info_generator>();
+    test_swap<enum_info_generator>();
     test_swap<enumerator_info_generator>();
     test_swap<exception_info_generator>();
     test_swap<file_info_generator>();

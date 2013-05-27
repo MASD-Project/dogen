@@ -31,7 +31,6 @@
 #include "dogen/cpp/types/formatters/indenter.hpp"
 #include "dogen/cpp/types/formatters/utility.hpp"
 #include "dogen/cpp/types//class_info.hpp"
-#include "dogen/cpp/types/enumeration_info.hpp"
 #include "dogen/cpp/types/file_info.hpp"
 #include "dogen/cpp/types/formatters/file_formatter.hpp"
 

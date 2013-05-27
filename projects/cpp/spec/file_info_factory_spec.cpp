@@ -121,7 +121,7 @@ BOOST_AUTO_TEST_CASE(creating_file_info_for_enumeration_produces_expected_result
     dogen::cpp::includer i(m, l, s);
 
     dogen::cpp::file_info_factory f(l, i);
-    const auto ei((dogen::cpp::enumeration_info()));
+    const auto ei((dogen::cpp::enum_info()));
     const auto en(m.enumerations().begin()->second);
     const auto md(mock_descriptors(en.name()));
     const auto infos(f.create(ei, md));
@@ -131,7 +131,7 @@ BOOST_AUTO_TEST_CASE(creating_file_info_for_enumeration_produces_expected_result
     for (const auto& fi : infos) {
         found_facets.insert(fi.facet_type());
         BOOST_CHECK(fi.meta_type() == dogen::sml::meta_types::enumeration);
-        BOOST_CHECK(fi.enumeration_info());
+        BOOST_CHECK(fi.enum_info());
         BOOST_CHECK(!fi.class_info());
         BOOST_CHECK(!fi.exception_info());
         BOOST_CHECK(!fi.namespace_info());
@@ -171,7 +171,7 @@ BOOST_AUTO_TEST_CASE(creating_file_info_for_exception_produces_expected_results)
     for (const auto& fi : infos) {
         found_facets.insert(fi.facet_type());
         BOOST_CHECK(fi.meta_type() == ex.name().meta_type());
-        BOOST_CHECK(!fi.enumeration_info());
+        BOOST_CHECK(!fi.enum_info());
         BOOST_CHECK(!fi.class_info());
         BOOST_CHECK(fi.exception_info());
         BOOST_CHECK(!fi.namespace_info());
@@ -212,7 +212,7 @@ BOOST_AUTO_TEST_CASE(creating_file_info_for_package_produces_expected_results) {
     for (const auto& fi : infos) {
         found_facets.insert(fi.facet_type());
         BOOST_CHECK(fi.meta_type() == p.name().meta_type());
-        BOOST_CHECK(!fi.enumeration_info());
+        BOOST_CHECK(!fi.enum_info());
         BOOST_CHECK(!fi.class_info());
         BOOST_CHECK(!fi.exception_info());
         BOOST_CHECK(fi.namespace_info());
@@ -251,7 +251,7 @@ BOOST_AUTO_TEST_CASE(creating_file_info_for_pod_produces_expected_results) {
     for (const auto& fi : infos) {
         found_facets.insert(fi.facet_type());
         BOOST_CHECK(fi.meta_type() == p.name().meta_type());
-        BOOST_CHECK(!fi.enumeration_info());
+        BOOST_CHECK(!fi.enum_info());
         BOOST_CHECK(fi.class_info());
         BOOST_CHECK(!fi.exception_info());
         BOOST_CHECK(!fi.namespace_info());
@@ -293,7 +293,7 @@ BOOST_AUTO_TEST_CASE(creating_non_empty_includer_file_info_produces_expected_res
 
     BOOST_CHECK(fi.facet_type() == ft);
     BOOST_CHECK(fi.aspect_type() == dogen::cpp::aspect_types::includers);
-    BOOST_CHECK(!fi.enumeration_info());
+    BOOST_CHECK(!fi.enum_info());
     BOOST_CHECK(!fi.class_info());
     BOOST_CHECK(!fi.exception_info());
     BOOST_CHECK(!fi.namespace_info());
@@ -339,7 +339,7 @@ BOOST_AUTO_TEST_CASE(creating_empty_includer_file_info_produces_expected_results
 
     BOOST_CHECK(fi.facet_type() == ft2);
     BOOST_CHECK(fi.aspect_type() == dogen::cpp::aspect_types::includers);
-    BOOST_CHECK(!fi.enumeration_info());
+    BOOST_CHECK(!fi.enum_info());
     BOOST_CHECK(!fi.class_info());
     BOOST_CHECK(!fi.exception_info());
     BOOST_CHECK(!fi.namespace_info());
@@ -372,7 +372,7 @@ BOOST_AUTO_TEST_CASE(creating_file_info_for_registrar_produces_expected_results)
     const auto ft(dogen::config::cpp_facet_types::serialization);
     BOOST_CHECK(fi.facet_type() == ft);
     BOOST_CHECK(fi.aspect_type() == dogen::cpp::aspect_types::registrar);
-    BOOST_CHECK(!fi.enumeration_info());
+    BOOST_CHECK(!fi.enum_info());
     BOOST_CHECK(!fi.class_info());
     BOOST_CHECK(!fi.exception_info());
     BOOST_CHECK(!fi.namespace_info());

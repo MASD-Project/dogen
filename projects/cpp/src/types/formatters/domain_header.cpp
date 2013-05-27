@@ -47,7 +47,7 @@ const std::string invalid_aspect_type("Invalid value for aspect_types");
 const std::string invalid_category_type("Invalid value for category_types");
 const std::string missing_class_info(
     "Meta type is pod but class view model is empty");
-const std::string missing_enumeration_info(
+const std::string missing_enum_info(
     "Meta type is enumeration but enumeration view model is empty");
 const std::string missing_exception_info(
     "Meta type is exception but exception view model is empty");
@@ -197,10 +197,10 @@ void domain_header::format_class(const file_info& fi) {
 }
 
 void domain_header::format_enumeration(const file_info& fi) {
-    const auto o(fi.enumeration_info());
+    const auto o(fi.enum_info());
     if (!o) {
-        BOOST_LOG_SEV(lg, error) << missing_enumeration_info;
-        BOOST_THROW_EXCEPTION(formatting_error(missing_enumeration_info));
+        BOOST_LOG_SEV(lg, error) << missing_enum_info;
+        BOOST_THROW_EXCEPTION(formatting_error(missing_enum_info));
     }
     {
         const auto ei(*o);
@@ -215,7 +215,7 @@ void domain_header::format_enumeration(const file_info& fi) {
 void domain_header::format_exception(const file_info& fi) {
     const auto o(fi.exception_info());
     if (!o) {
-        BOOST_LOG_SEV(lg, error) << missing_enumeration_info;
+        BOOST_LOG_SEV(lg, error) << missing_enum_info;
         BOOST_THROW_EXCEPTION(formatting_error(missing_exception_info));
     }
     {

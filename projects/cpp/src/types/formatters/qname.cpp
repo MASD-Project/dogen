@@ -49,8 +49,8 @@ void qname::format(const class_info& ci) {
     ::format<class_info>(stream_, ci);
 }
 
-void qname::format(const enumeration_info& ei) {
-    ::format<enumeration_info>(stream_, ei);
+void qname::format(const enum_info& ei) {
+    ::format<enum_info>(stream_, ei);
 }
 
 } } }

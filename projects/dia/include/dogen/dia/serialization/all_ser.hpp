@@ -34,4 +34,5 @@
 #include "dogen/dia/serialization/point_ser.hpp"
 #include "dogen/dia/serialization/real_ser.hpp"
 #include "dogen/dia/serialization/rectangle_ser.hpp"
+#include "dogen/dia/serialization/registrar_ser.hpp"
 #include "dogen/dia/serialization/string_ser.hpp"

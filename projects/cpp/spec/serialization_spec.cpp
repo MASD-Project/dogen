@@ -55,7 +55,7 @@ BOOST_AUTO_TEST_CASE(validate_serialization) {
     rountrip_type<std_types_generator>();
     rountrip_type<class_info_generator>();
     rountrip_type<cmakelists_info_generator>();
-    rountrip_type<enumeration_info_generator>();
+    rountrip_type<enum_info_generator>();
     rountrip_type<enumerator_info_generator>();
     rountrip_type<exception_info_generator>();
     rountrip_type<file_info_generator>();

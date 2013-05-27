@@ -18,35 +18,26 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_HASH_ENUMERATION_INFO_HASH_HPP
-#define DOGEN_CPP_HASH_ENUMERATION_INFO_HASH_HPP
+#ifndef DOGEN_CPP_SERIALIZATION_ENUM_INFO_SER_HPP
+#define DOGEN_CPP_SERIALIZATION_ENUM_INFO_SER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <functional>
-#include "dogen/cpp/types/enumeration_info.hpp"
+#include <boost/serialization/split_free.hpp>
+#include "dogen/cpp/types/enum_info.hpp"
 
-namespace dogen {
-namespace cpp {
+BOOST_SERIALIZATION_SPLIT_FREE(dogen::cpp::enum_info)
+namespace boost {
+namespace serialization {
 
-class enumeration_info_hasher {
-public:
-    static std::size_t hash(const enumeration_info& v);
-};
+template<typename Archive>
+void save(Archive& ar, const dogen::cpp::enum_info& v, unsigned int version);
+
+template<typename Archive>
+void load(Archive& ar, dogen::cpp::enum_info& v, unsigned int version);
 
 } }
 
-namespace std {
-
-template<>
-class hash<dogen::cpp::enumeration_info> {
-public:
-    size_t operator()(const dogen::cpp::enumeration_info& v) const {
-        return dogen::cpp::enumeration_info_hasher::hash(v);
-    }
-};
-
-}
 #endif

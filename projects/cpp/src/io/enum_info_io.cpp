@@ -20,7 +20,7 @@
  */
 #include <boost/algorithm/string.hpp>
 #include <ostream>
-#include "dogen/cpp/io/enumeration_info_io.hpp"
+#include "dogen/cpp/io/enum_info_io.hpp"
 #include "dogen/cpp/io/enumerator_info_io.hpp"
 
 
@@ -62,9 +62,9 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::cpp::enu
 namespace dogen {
 namespace cpp {
 
-std::ostream& operator<<(std::ostream& s, const enumeration_info& v) {
+std::ostream& operator<<(std::ostream& s, const enum_info& v) {
     s << " { "
-      << "\"__type__\": " << "\"dogen::cpp::enumeration_info\"" << ", "
+      << "\"__type__\": " << "\"dogen::cpp::enum_info\"" << ", "
       << "\"name\": " << "\"" << tidy_up_string(v.name()) << "\"" << ", "
       << "\"namespaces\": " << v.namespaces() << ", "
       << "\"enumerators\": " << v.enumerators() << ", "

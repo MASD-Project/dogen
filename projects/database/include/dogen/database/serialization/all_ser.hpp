@@ -23,3 +23,4 @@
 #include "dogen/database/serialization/no_keys_ser.hpp"
 #include "dogen/database/serialization/primary_key_2_ser.hpp"
 #include "dogen/database/serialization/primary_key_ser.hpp"
+#include "dogen/database/serialization/registrar_ser.hpp"

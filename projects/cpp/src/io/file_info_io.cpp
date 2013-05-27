@@ -23,7 +23,7 @@
 #include "dogen/config/io/cpp_facet_types_io.hpp"
 #include "dogen/cpp/io/aspect_types_io.hpp"
 #include "dogen/cpp/io/class_info_io.hpp"
-#include "dogen/cpp/io/enumeration_info_io.hpp"
+#include "dogen/cpp/io/enum_info_io.hpp"
 #include "dogen/cpp/io/exception_info_io.hpp"
 #include "dogen/cpp/io/file_info_io.hpp"
 #include "dogen/cpp/io/file_types_io.hpp"
@@ -50,7 +50,7 @@ inline std::ostream& operator<<(std::ostream& s, const boost::optional<dogen::cp
 
 namespace boost {
 
-inline std::ostream& operator<<(std::ostream& s, const boost::optional<dogen::cpp::enumeration_info>& v) {
+inline std::ostream& operator<<(std::ostream& s, const boost::optional<dogen::cpp::enum_info>& v) {
     s << "{ " << "\"__type__\": " << "\"boost::optional\"" << ", ";
 
     if (v)
@@ -157,7 +157,7 @@ std::ostream& operator<<(std::ostream& s, const file_info& v) {
       << "\"category_type\": " << v.category_type() << ", "
       << "\"meta_type\": " << v.meta_type() << ", "
       << "\"class_info\": " << v.class_info() << ", "
-      << "\"enumeration_info\": " << v.enumeration_info() << ", "
+      << "\"enum_info\": " << v.enum_info() << ", "
       << "\"exception_info\": " << v.exception_info() << ", "
       << "\"registrar_info\": " << v.registrar_info() << ", "
       << "\"header_guard\": " << "\"" << tidy_up_string(v.header_guard()) << "\"" << ", "

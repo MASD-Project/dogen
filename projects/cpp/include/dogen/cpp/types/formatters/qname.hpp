@@ -29,7 +29,7 @@
 #include <string>
 #include "dogen/cpp/types/class_info.hpp"
 #include "dogen/cpp/types/parent_info.hpp"
-#include "dogen/cpp/types/enumeration_info.hpp"
+#include "dogen/cpp/types/enum_info.hpp"
 
 namespace dogen {
 namespace cpp {
@@ -48,7 +48,7 @@ public:
 
 public:
     void format(const class_info& ci);
-    void format(const enumeration_info& ei);
+    void format(const enum_info& ei);
     void format(const parent_info& pi);
 
 private:

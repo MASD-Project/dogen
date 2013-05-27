@@ -41,7 +41,7 @@ const std::string boost_ns("boost");
 const std::string serialization_ns("serialization");
 const std::string missing_class_info(
     "Meta type is pod but class view model is empty");
-const std::string enumeration_info_not_supported(
+const std::string enum_info_not_supported(
     "Enumerations do not have an implementation");
 
 }
@@ -299,9 +299,9 @@ void serialization_implementation::format_class(const file_info& fi) {
 
 void serialization_implementation::
 format_enumeration(const file_info&) {
-    BOOST_LOG_SEV(lg, error) << enumeration_info_not_supported;
+    BOOST_LOG_SEV(lg, error) << enum_info_not_supported;
     BOOST_THROW_EXCEPTION(
-        formatting_error(enumeration_info_not_supported));
+        formatting_error(enum_info_not_supported));
 }
 
 void serialization_implementation::format(const file_info& fi) {

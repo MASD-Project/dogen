@@ -207,10 +207,10 @@ enumerator_info transformer::transform(const sml::enumerator& e) const {
     return r;
 }
 
-enumeration_info transformer::transform(const sml::enumeration& e) const {
+enum_info transformer::transform(const sml::enumeration& e) const {
     BOOST_LOG_SEV(lg, debug) << "Transforming enumeration: " << e.name();
 
-    enumeration_info r;
+    enum_info r;
 
     r.name(e.name().type_name());
     r.namespaces(transform_into_namespace_list(e.name()));

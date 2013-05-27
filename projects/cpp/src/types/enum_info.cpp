@@ -18,12 +18,12 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/cpp/types/enumeration_info.hpp"
+#include "dogen/cpp/types/enum_info.hpp"
 
 namespace dogen {
 namespace cpp {
 
-enumeration_info::enumeration_info(
+enum_info::enum_info(
     const std::string& name,
     const std::list<std::string>& namespaces,
     const std::list<dogen::cpp::enumerator_info>& enumerators,
@@ -33,7 +33,7 @@ enumeration_info::enumeration_info(
       enumerators_(enumerators),
       documentation_(documentation) { }
 
-void enumeration_info::swap(enumeration_info& other) noexcept {
+void enum_info::swap(enum_info& other) noexcept {
     using std::swap;
     swap(name_, other.name_);
     swap(namespaces_, other.namespaces_);
@@ -41,80 +41,80 @@ void enumeration_info::swap(enumeration_info& other) noexcept {
     swap(documentation_, other.documentation_);
 }
 
-bool enumeration_info::operator==(const enumeration_info& rhs) const {
+bool enum_info::operator==(const enum_info& rhs) const {
     return name_ == rhs.name_ &&
         namespaces_ == rhs.namespaces_ &&
         enumerators_ == rhs.enumerators_ &&
         documentation_ == rhs.documentation_;
 }
 
-enumeration_info& enumeration_info::operator=(enumeration_info other) {
+enum_info& enum_info::operator=(enum_info other) {
     using std::swap;
     swap(*this, other);
     return *this;
 }
 
-const std::string& enumeration_info::name() const {
+const std::string& enum_info::name() const {
     return name_;
 }
 
-std::string& enumeration_info::name() {
+std::string& enum_info::name() {
     return name_;
 }
 
-void enumeration_info::name(const std::string& v) {
+void enum_info::name(const std::string& v) {
     name_ = v;
 }
 
-void enumeration_info::name(const std::string&& v) {
+void enum_info::name(const std::string&& v) {
     name_ = std::move(v);
 }
 
-const std::list<std::string>& enumeration_info::namespaces() const {
+const std::list<std::string>& enum_info::namespaces() const {
     return namespaces_;
 }
 
-std::list<std::string>& enumeration_info::namespaces() {
+std::list<std::string>& enum_info::namespaces() {
     return namespaces_;
 }
 
-void enumeration_info::namespaces(const std::list<std::string>& v) {
+void enum_info::namespaces(const std::list<std::string>& v) {
     namespaces_ = v;
 }
 
-void enumeration_info::namespaces(const std::list<std::string>&& v) {
+void enum_info::namespaces(const std::list<std::string>&& v) {
     namespaces_ = std::move(v);
 }
 
-const std::list<dogen::cpp::enumerator_info>& enumeration_info::enumerators() const {
+const std::list<dogen::cpp::enumerator_info>& enum_info::enumerators() const {
     return enumerators_;
 }
 
-std::list<dogen::cpp::enumerator_info>& enumeration_info::enumerators() {
+std::list<dogen::cpp::enumerator_info>& enum_info::enumerators() {
     return enumerators_;
 }
 
-void enumeration_info::enumerators(const std::list<dogen::cpp::enumerator_info>& v) {
+void enum_info::enumerators(const std::list<dogen::cpp::enumerator_info>& v) {
     enumerators_ = v;
 }
 
-void enumeration_info::enumerators(const std::list<dogen::cpp::enumerator_info>&& v) {
+void enum_info::enumerators(const std::list<dogen::cpp::enumerator_info>&& v) {
     enumerators_ = std::move(v);
 }
 
-const std::string& enumeration_info::documentation() const {
+const std::string& enum_info::documentation() const {
     return documentation_;
 }
 
-std::string& enumeration_info::documentation() {
+std::string& enum_info::documentation() {
     return documentation_;
 }
 
-void enumeration_info::documentation(const std::string& v) {
+void enum_info::documentation(const std::string& v) {
     documentation_ = v;
 }
 
-void enumeration_info::documentation(const std::string&& v) {
+void enum_info::documentation(const std::string&& v) {
     documentation_ = std::move(v);
 }
 

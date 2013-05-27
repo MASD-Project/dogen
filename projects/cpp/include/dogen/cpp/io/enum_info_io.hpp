@@ -18,25 +18,22 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_SERIALIZATION_ENUMERATION_INFO_SER_HPP
-#define DOGEN_CPP_SERIALIZATION_ENUMERATION_INFO_SER_HPP
+#ifndef DOGEN_CPP_IO_ENUM_INFO_IO_HPP
+#define DOGEN_CPP_IO_ENUM_INFO_IO_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <boost/serialization/split_free.hpp>
-#include "dogen/cpp/types/enumeration_info.hpp"
+#include <iosfwd>
+#include "dogen/cpp/types/enum_info.hpp"
 
-BOOST_SERIALIZATION_SPLIT_FREE(dogen::cpp::enumeration_info)
-namespace boost {
-namespace serialization {
+namespace dogen {
+namespace cpp {
 
-template<typename Archive>
-void save(Archive& ar, const dogen::cpp::enumeration_info& v, unsigned int version);
-
-template<typename Archive>
-void load(Archive& ar, dogen::cpp::enumeration_info& v, unsigned int version);
+std::ostream&
+operator<<(std::ostream& s,
+     const dogen::cpp::enum_info& v);
 
 } }
 

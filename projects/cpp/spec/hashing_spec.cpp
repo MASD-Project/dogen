@@ -50,7 +50,7 @@ BOOST_AUTO_TEST_CASE(validate_hashing) {
     test_hashing<std_types_generator>();
     test_hashing<class_info_generator>();
     test_hashing<cmakelists_info_generator>();
-    test_hashing<enumeration_info_generator>();
+    test_hashing<enum_info_generator>();
     test_hashing<enumerator_info_generator>();
     test_hashing<exception_info_generator>();
     test_hashing<file_info_generator>();

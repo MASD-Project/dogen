@@ -42,6 +42,7 @@
 #include "dogen/sml/types/reference.hpp"
 #include "dogen/sml/types/service.hpp"
 #include "dogen/sml/types/service_types.hpp"
+#include "dogen/sml/types/sml.hpp"
 #include "dogen/sml/types/std_model_factory.hpp"
 #include "dogen/sml/types/string_table.hpp"
 #include "dogen/sml/types/workflow.hpp"

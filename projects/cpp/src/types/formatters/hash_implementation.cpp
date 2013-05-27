@@ -49,7 +49,7 @@ const std::string invalid_smart_pointer(
     "Smart pointers have exactly one type argument");
 const std::string missing_class_info(
     "Meta type is pod but class view model is empty");
-const std::string enumeration_info_not_supported(
+const std::string enum_info_not_supported(
     "Enumerations do not have an implementation");
 
 }
@@ -574,8 +574,8 @@ void hash_implementation::format_class(const file_info& fi) {
 }
 
 void hash_implementation::format_enumeration(const file_info&) {
-    BOOST_LOG_SEV(lg, error) << enumeration_info_not_supported;
-    BOOST_THROW_EXCEPTION(formatting_error(enumeration_info_not_supported));
+    BOOST_LOG_SEV(lg, error) << enum_info_not_supported;
+    BOOST_THROW_EXCEPTION(formatting_error(enum_info_not_supported));
 }
 
 void hash_implementation::format(const file_info& fi) {

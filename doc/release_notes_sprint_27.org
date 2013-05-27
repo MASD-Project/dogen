@@ -10,15 +10,16 @@ This file contains all stories that were closed during sprint 27.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-05-27 Mon 03:40]
+Clock summary at [2013-05-27 Mon 21:40]
 
 | Headline                                                | Time    |       |       |
 |---------------------------------------------------------+---------+-------+-------|
-| *Total time*                                            | *23:31* |       |       |
+| *Total time*                                            | *23:51* |       |       |
 |---------------------------------------------------------+---------+-------+-------|
-| Development Stories Implemented                         |         | 23:31 |       |
+| Development Stories Implemented                         |         | 23:51 |       |
 | COMPLETED Make inclusion lists in includer a model type |         |       |  0:15 |
-| IMPLEMENTATION Clean up the SML to C++ transformer      |         |       | 23:16 |
+| COMPLETED Clean up the SML to C++ transformer           |         |       | 23:16 |
+| IMPLEMENTATION Rename =enumeration_info= to =enum_info= |         |       |  0:20 |
 #+end:
 
 *** COMPLETED Make inclusion lists in includer a model type
@@ -28,7 +29,8 @@ Clock summary at [2013-05-27 Mon 03:40]
 We created a class inlined in the header for no good reason. make it a
 model type.
 
-*** IMPLEMENTATION Clean up the SML to C++ transformer                :spike:
+*** COMPLETED Clean up the SML to C++ transformer                     :spike:
+    CLOSED: [2013-05-27 Mon 21:24]
 
 Continuing from previous iteration, see description in Sprint 26.
 
@@ -108,6 +110,11 @@ serialisation.
 
 Implemented as part of the clean up of cpp model.
 
+*** IMPLEMENTATION Rename =enumeration_info= to =enum_info=
+    CLOCK: [2013-05-27 Mon 21:32]--[2013-05-27 Mon 21:40] =>  0:08
+    CLOCK: [2013-05-27 Mon 21:20]--[2013-05-27 Mon 21:32] =>  0:12
+
+Slight modeling error, we should have used the C++ name for the type.
 
 *** IMPLEMENTATION Move services into their own type                  :story:
 

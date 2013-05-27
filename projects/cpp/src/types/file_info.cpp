@@ -37,7 +37,7 @@ file_info::file_info(file_info&& rhs)
       category_type_(std::move(rhs.category_type_)),
       meta_type_(std::move(rhs.meta_type_)),
       class_info_(std::move(rhs.class_info_)),
-      enumeration_info_(std::move(rhs.enumeration_info_)),
+      enum_info_(std::move(rhs.enum_info_)),
       exception_info_(std::move(rhs.exception_info_)),
       registrar_info_(std::move(rhs.registrar_info_)),
       header_guard_(std::move(rhs.header_guard_)),
@@ -55,7 +55,7 @@ file_info::file_info(
     const dogen::sml::category_types& category_type,
     const dogen::sml::meta_types& meta_type,
     const boost::optional<dogen::cpp::class_info>& class_info,
-    const boost::optional<dogen::cpp::enumeration_info>& enumeration_info,
+    const boost::optional<dogen::cpp::enum_info>& enum_info,
     const boost::optional<dogen::cpp::exception_info>& exception_info,
     const boost::optional<dogen::cpp::registrar_info>& registrar_info,
     const std::string& header_guard,
@@ -71,7 +71,7 @@ file_info::file_info(
       category_type_(category_type),
       meta_type_(meta_type),
       class_info_(class_info),
-      enumeration_info_(enumeration_info),
+      enum_info_(enum_info),
       exception_info_(exception_info),
       registrar_info_(registrar_info),
       header_guard_(header_guard),
@@ -90,7 +90,7 @@ void file_info::swap(file_info& other) noexcept {
     swap(category_type_, other.category_type_);
     swap(meta_type_, other.meta_type_);
     swap(class_info_, other.class_info_);
-    swap(enumeration_info_, other.enumeration_info_);
+    swap(enum_info_, other.enum_info_);
     swap(exception_info_, other.exception_info_);
     swap(registrar_info_, other.registrar_info_);
     swap(header_guard_, other.header_guard_);
@@ -109,7 +109,7 @@ bool file_info::operator==(const file_info& rhs) const {
         category_type_ == rhs.category_type_ &&
         meta_type_ == rhs.meta_type_ &&
         class_info_ == rhs.class_info_ &&
-        enumeration_info_ == rhs.enumeration_info_ &&
+        enum_info_ == rhs.enum_info_ &&
         exception_info_ == rhs.exception_info_ &&
         registrar_info_ == rhs.registrar_info_ &&
         header_guard_ == rhs.header_guard_ &&
@@ -183,20 +183,20 @@ void file_info::class_info(const boost::optional<dogen::cpp::class_info>&& v) {
     class_info_ = std::move(v);
 }
 
-const boost::optional<dogen::cpp::enumeration_info>& file_info::enumeration_info() const {
-    return enumeration_info_;
+const boost::optional<dogen::cpp::enum_info>& file_info::enum_info() const {
+    return enum_info_;
 }
 
-boost::optional<dogen::cpp::enumeration_info>& file_info::enumeration_info() {
-    return enumeration_info_;
+boost::optional<dogen::cpp::enum_info>& file_info::enum_info() {
+    return enum_info_;
 }
 
-void file_info::enumeration_info(const boost::optional<dogen::cpp::enumeration_info>& v) {
-    enumeration_info_ = v;
+void file_info::enum_info(const boost::optional<dogen::cpp::enum_info>& v) {
+    enum_info_ = v;
 }
 
-void file_info::enumeration_info(const boost::optional<dogen::cpp::enumeration_info>&& v) {
-    enumeration_info_ = std::move(v);
+void file_info::enum_info(const boost::optional<dogen::cpp::enum_info>&& v) {
+    enum_info_ = std::move(v);
 }
 
 const boost::optional<dogen::cpp::exception_info>& file_info::exception_info() const {

@@ -49,7 +49,7 @@ BOOST_AUTO_TEST_CASE(validate_io) {
     test_io<std_types_generator>();
     test_io<class_info_generator>();
     test_io<cmakelists_info_generator>();
-    test_io<enumeration_info_generator>();
+    test_io<enum_info_generator>();
     test_io<enumerator_info_generator>();
     test_io<exception_info_generator>();
     test_io<file_info_generator>();

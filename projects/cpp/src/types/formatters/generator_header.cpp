@@ -39,7 +39,7 @@ auto lg(logger_factory("cpp.formatters.generator_header"));
 
 const std::string missing_class_info(
     "Meta type is pod but class view model is empty");
-const std::string missing_enumeration_info(
+const std::string missing_enum_info(
     "Meta type is enumeration but enumeration view model is empty");
 
 }
@@ -58,7 +58,7 @@ file_formatter::shared_ptr generator_header::create(std::ostream& stream) {
     return file_formatter::shared_ptr(new generator_header(stream));
 }
 
-void generator_header::generator_class(const enumeration_info& ei) {
+void generator_header::generator_class(const enum_info& ei) {
     const std::string class_name(ei.name() + "_generator");
 
     stream_ << indenter_ << "class " << class_name << " ";
@@ -151,10 +151,10 @@ void generator_header::generator_class(const class_info& ci) {
 }
 
 void generator_header::format_enumeration(const file_info& fi) {
-    const auto o(fi.enumeration_info());
+    const auto o(fi.enum_info());
     if (!o) {
-        BOOST_LOG_SEV(lg, error) << missing_enumeration_info;
-        BOOST_THROW_EXCEPTION(formatting_error(missing_enumeration_info));
+        BOOST_LOG_SEV(lg, error) << missing_enum_info;
+        BOOST_THROW_EXCEPTION(formatting_error(missing_enum_info));
     }
 
     const auto ei(*o);

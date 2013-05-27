@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_TYPES_ENUMERATION_INFO_HPP
-#define DOGEN_CPP_TYPES_ENUMERATION_INFO_HPP
+#ifndef DOGEN_CPP_TYPES_ENUM_INFO_HPP
+#define DOGEN_CPP_TYPES_ENUM_INFO_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -28,24 +28,24 @@
 #include <algorithm>
 #include <list>
 #include <string>
-#include "dogen/cpp/serialization/enumeration_info_fwd_ser.hpp"
+#include "dogen/cpp/serialization/enum_info_fwd_ser.hpp"
 #include "dogen/cpp/types/enumerator_info.hpp"
 
 namespace dogen {
 namespace cpp {
 
 /**
- * @brief Represents a C++ enumeration.
+ * @brief Represents a C++ enum.
  */
-class enumeration_info final {
+class enum_info final {
 public:
-    enumeration_info() = default;
-    enumeration_info(const enumeration_info&) = default;
-    enumeration_info(enumeration_info&&) = default;
-    ~enumeration_info() = default;
+    enum_info() = default;
+    enum_info(const enum_info&) = default;
+    enum_info(enum_info&&) = default;
+    ~enum_info() = default;
 
 public:
-    enumeration_info(
+    enum_info(
         const std::string& name,
         const std::list<std::string>& namespaces,
         const std::list<dogen::cpp::enumerator_info>& enumerators,
@@ -53,10 +53,10 @@ public:
 
 private:
     template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const enumeration_info& v, unsigned int version);
+    friend void boost::serialization::save(Archive& ar, const enum_info& v, unsigned int version);
 
     template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, enumeration_info& v, unsigned int version);
+    friend void boost::serialization::load(Archive& ar, enum_info& v, unsigned int version);
 
 public:
     /**
@@ -100,14 +100,14 @@ public:
     /**@}*/
 
 public:
-    bool operator==(const enumeration_info& rhs) const;
-    bool operator!=(const enumeration_info& rhs) const {
+    bool operator==(const enum_info& rhs) const;
+    bool operator!=(const enum_info& rhs) const {
         return !this->operator==(rhs);
     }
 
 public:
-    void swap(enumeration_info& other) noexcept;
-    enumeration_info& operator=(enumeration_info other);
+    void swap(enum_info& other) noexcept;
+    enum_info& operator=(enum_info other);
 
 private:
     std::string name_;
@@ -122,8 +122,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::cpp::enumeration_info& lhs,
-    dogen::cpp::enumeration_info& rhs) {
+    dogen::cpp::enum_info& lhs,
+    dogen::cpp::enum_info& rhs) {
     lhs.swap(rhs);
 }
 

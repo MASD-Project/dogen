@@ -34,7 +34,7 @@
 #include "dogen/cpp/serialization/file_info_fwd_ser.hpp"
 #include "dogen/cpp/types/aspect_types.hpp"
 #include "dogen/cpp/types/class_info.hpp"
-#include "dogen/cpp/types/enumeration_info.hpp"
+#include "dogen/cpp/types/enum_info.hpp"
 #include "dogen/cpp/types/exception_info.hpp"
 #include "dogen/cpp/types/file_types.hpp"
 #include "dogen/cpp/types/namespace_info.hpp"
@@ -68,7 +68,7 @@ public:
         const dogen::sml::category_types& category_type,
         const dogen::sml::meta_types& meta_type,
         const boost::optional<dogen::cpp::class_info>& class_info,
-        const boost::optional<dogen::cpp::enumeration_info>& enumeration_info,
+        const boost::optional<dogen::cpp::enum_info>& enum_info,
         const boost::optional<dogen::cpp::exception_info>& exception_info,
         const boost::optional<dogen::cpp::registrar_info>& registrar_info,
         const std::string& header_guard,
@@ -138,13 +138,13 @@ public:
     /**@}*/
 
     /**
-     * @brief If non-empty, the file contains an enumeration.
+     * @brief If non-empty, the file contains an enum.
      */
     /**@{*/
-    const boost::optional<dogen::cpp::enumeration_info>& enumeration_info() const;
-    boost::optional<dogen::cpp::enumeration_info>& enumeration_info();
-    void enumeration_info(const boost::optional<dogen::cpp::enumeration_info>& v);
-    void enumeration_info(const boost::optional<dogen::cpp::enumeration_info>&& v);
+    const boost::optional<dogen::cpp::enum_info>& enum_info() const;
+    boost::optional<dogen::cpp::enum_info>& enum_info();
+    void enum_info(const boost::optional<dogen::cpp::enum_info>& v);
+    void enum_info(const boost::optional<dogen::cpp::enum_info>&& v);
     /**@}*/
 
     /**
@@ -254,7 +254,7 @@ private:
     dogen::sml::category_types category_type_;
     dogen::sml::meta_types meta_type_;
     boost::optional<dogen::cpp::class_info> class_info_;
-    boost::optional<dogen::cpp::enumeration_info> enumeration_info_;
+    boost::optional<dogen::cpp::enum_info> enum_info_;
     boost::optional<dogen::cpp::exception_info> exception_info_;
     boost::optional<dogen::cpp::registrar_info> registrar_info_;
     std::string header_guard_;

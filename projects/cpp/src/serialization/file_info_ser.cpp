@@ -33,7 +33,7 @@
 #include "dogen/config/serialization/cpp_facet_types_ser.hpp"
 #include "dogen/cpp/serialization/aspect_types_ser.hpp"
 #include "dogen/cpp/serialization/class_info_ser.hpp"
-#include "dogen/cpp/serialization/enumeration_info_ser.hpp"
+#include "dogen/cpp/serialization/enum_info_ser.hpp"
 #include "dogen/cpp/serialization/exception_info_ser.hpp"
 #include "dogen/cpp/serialization/file_info_ser.hpp"
 #include "dogen/cpp/serialization/file_types_ser.hpp"
@@ -61,7 +61,7 @@ void save(Archive& ar,
     ar << make_nvp("category_type", v.category_type_);
     ar << make_nvp("meta_type", v.meta_type_);
     ar << make_nvp("class_info", v.class_info_);
-    ar << make_nvp("enumeration_info", v.enumeration_info_);
+    ar << make_nvp("enum_info", v.enum_info_);
     ar << make_nvp("exception_info", v.exception_info_);
     ar << make_nvp("registrar_info", v.registrar_info_);
     ar << make_nvp("header_guard", v.header_guard_);
@@ -83,7 +83,7 @@ void load(Archive& ar,
     ar >> make_nvp("category_type", v.category_type_);
     ar >> make_nvp("meta_type", v.meta_type_);
     ar >> make_nvp("class_info", v.class_info_);
-    ar >> make_nvp("enumeration_info", v.enumeration_info_);
+    ar >> make_nvp("enum_info", v.enum_info_);
     ar >> make_nvp("exception_info", v.exception_info_);
     ar >> make_nvp("registrar_info", v.registrar_info_);
     ar >> make_nvp("header_guard", v.header_guard_);

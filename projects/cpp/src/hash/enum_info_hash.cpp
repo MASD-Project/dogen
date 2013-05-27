@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/cpp/hash/enumeration_info_hash.hpp"
+#include "dogen/cpp/hash/enum_info_hash.hpp"
 #include "dogen/cpp/hash/enumerator_info_hash.hpp"
 
 namespace {
@@ -51,7 +51,7 @@ inline std::size_t hash_std_list_dogen_cpp_enumerator_info(const std::list<dogen
 namespace dogen {
 namespace cpp {
 
-std::size_t enumeration_info_hasher::hash(const enumeration_info&v) {
+std::size_t enum_info_hasher::hash(const enum_info&v) {
     std::size_t seed(0);
 
     combine(seed, v.name());

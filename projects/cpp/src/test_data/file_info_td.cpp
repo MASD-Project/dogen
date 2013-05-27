@@ -22,7 +22,7 @@
 #include "dogen/config/test_data/cpp_facet_types_td.hpp"
 #include "dogen/cpp/test_data/aspect_types_td.hpp"
 #include "dogen/cpp/test_data/class_info_td.hpp"
-#include "dogen/cpp/test_data/enumeration_info_td.hpp"
+#include "dogen/cpp/test_data/enum_info_td.hpp"
 #include "dogen/cpp/test_data/exception_info_td.hpp"
 #include "dogen/cpp/test_data/file_info_td.hpp"
 #include "dogen/cpp/test_data/file_types_td.hpp"
@@ -70,14 +70,14 @@ create_boost_optional_dogen_cpp_class_info(unsigned int position) {
     return r;
 }
 
-dogen::cpp::enumeration_info
-create_dogen_cpp_enumeration_info(const unsigned int position) {
-    return dogen::cpp::enumeration_info_generator::create(position);
+dogen::cpp::enum_info
+create_dogen_cpp_enum_info(const unsigned int position) {
+    return dogen::cpp::enum_info_generator::create(position);
 }
 
-boost::optional<dogen::cpp::enumeration_info>
-create_boost_optional_dogen_cpp_enumeration_info(unsigned int position) {
-    boost::optional<dogen::cpp::enumeration_info> r(        create_dogen_cpp_enumeration_info(position));
+boost::optional<dogen::cpp::enum_info>
+create_boost_optional_dogen_cpp_enum_info(unsigned int position) {
+    boost::optional<dogen::cpp::enum_info> r(        create_dogen_cpp_enum_info(position));
     return r;
 }
 
@@ -161,7 +161,7 @@ populate(const unsigned int position, result_type& v) {
     v.category_type(create_dogen_sml_category_types(position + 3));
     v.meta_type(create_dogen_sml_meta_types(position + 4));
     v.class_info(create_boost_optional_dogen_cpp_class_info(position + 5));
-    v.enumeration_info(create_boost_optional_dogen_cpp_enumeration_info(position + 6));
+    v.enum_info(create_boost_optional_dogen_cpp_enum_info(position + 6));
     v.exception_info(create_boost_optional_dogen_cpp_exception_info(position + 7));
     v.registrar_info(create_boost_optional_dogen_cpp_registrar_info(position + 8));
     v.header_guard(create_std_string(position + 9));
