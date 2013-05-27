@@ -36,7 +36,6 @@
 #include "dogen/config/types/cpp_settings.hpp"
 #include "dogen/sml/types/meta_types.hpp"
 #include "dogen/cpp/types/relationships.hpp"
-#include "dogen/cpp/types/extractor.hpp"
 #include "dogen/cpp/types/locator.hpp"
 #include "dogen/cpp/types/aspect_types.hpp"
 #include "dogen/config/types/cpp_facet_types.hpp"
@@ -81,8 +80,7 @@ public:
       hash_enabled_(std::move(rhs.hash_enabled_)),
       headers_for_facet_(std::move(rhs.headers_for_facet_)),
       boost_(std::move(rhs.boost_)),
-      std_(std::move(rhs.std_)),
-      extractor_(std::move(rhs.extractor_)) { }
+      std_(std::move(rhs.std_)) { }
 
     includer(const sml::model& model,
         const locator& locator,
@@ -229,7 +227,8 @@ public:
     /**
      * @brief Returns all the includes for a visitor based on qname.
      */
-    inclusion_lists includes_for_visitor(const dogen::sml::qname& qname) const;
+    inclusion_lists includes_for_visitor(const content_descriptor& cd,
+        const relationships& rel) const;
 
 private:
     const sml::model model_;
@@ -242,7 +241,6 @@ private:
     headers_for_facet_;
     const boost_model_helper boost_;
     const std_model_helper std_;
-    const extractor extractor_;
 };
 
 } }

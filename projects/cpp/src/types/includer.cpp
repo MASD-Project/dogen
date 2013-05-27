@@ -55,8 +55,7 @@ includer::includer(const sml::model& model,
       serialization_enabled_(contains(settings_.enabled_facets(),
               config::cpp_facet_types::serialization)),
       hash_enabled_(contains(settings_.enabled_facets(),
-              config::cpp_facet_types::hash)), boost_(), std_(),
-      extractor_(model_.pods()) {
+              config::cpp_facet_types::hash)), boost_(), std_() {
 
     BOOST_LOG_SEV(lg, debug) << "Initial configuration: " << settings_;
 }
@@ -730,14 +729,15 @@ includes_for_registrar(file_types flt) const {
     return r;
 }
 
-inclusion_lists includer::
-includes_for_visitor(const dogen::sml::qname& qname) const {
+inclusion_lists includer::includes_for_visitor(const content_descriptor& cd,
+    const relationships& rel) const {
     inclusion_lists r;
-    const auto rel(extractor_.extract_inheritance_graph(qname));
-    auto names(rel.names());
-    using config::cpp_facet_types;
-    const auto ft(cpp_facet_types::types);
+    const auto ft(cd.facet_type());
     for(const auto n : rel.names()) {
+        // we need to override the aspect requested by the content
+        // descriptor because we do not need an include of the visitor
+        // itself but of the forward declarations of the types in
+        // question.
         const auto fwd(aspect_types::forward_decls);
         r.user().push_back(header_dependency(n, ft, fwd));
     }

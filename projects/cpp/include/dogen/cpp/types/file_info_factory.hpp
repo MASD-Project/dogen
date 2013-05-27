@@ -120,8 +120,8 @@ public:
     /**
      * @brief Manufacture file info for visitor.
      */
-    std::list<file_info> create_visitor(const visitor_info& vi,
-        const std::list<content_descriptor>& cds) const;
+    file_info create_visitor(const visitor_info& vi,
+        const content_descriptor& cd, const inclusion_lists& il) const;
 
 private:
     const locator& locator_;

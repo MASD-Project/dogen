@@ -38,6 +38,7 @@
 #include "dogen/cpp/types/content_descriptor_factory.hpp"
 #include "dogen/cpp/types/cmakelists_info.hpp"
 #include "dogen/cpp/types/file_info.hpp"
+#include "dogen/cpp/types/extractor.hpp"
 #include "dogen/cpp/types/file_info_factory.hpp"
 
 namespace dogen {

@@ -393,9 +393,12 @@ workflow::result_type workflow::generate_visitors_activity() const {
             continue;
 
         const auto vi(transformer_.transform_into_visitor(p));
-        const auto cds(descriptor_factory_.create_visitor(p.name()));
-        for (const auto& fi : file_info_factory_.create_visitor(vi, cds))
+        const auto rel(extractor_.extract_inheritance_graph(p.name()));
+        for (const auto& cd : descriptor_factory_.create_visitor(p.name())) {
+            const auto il(includer_.includes_for_visitor(cd, rel));
+            const auto fi(file_info_factory_.create_visitor(vi, cd, il));
             r.insert(format(fi));
+        }
     }
 
     BOOST_LOG_SEV(lg, debug) << "Finished generate visitors activity.";
