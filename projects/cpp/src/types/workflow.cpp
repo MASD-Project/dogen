@@ -26,7 +26,6 @@
 #include "dogen/cpp/types/formatters/src_cmakelists.hpp"
 #include "dogen/cpp/types/formatters/include_cmakelists.hpp"
 #include "dogen/cpp/types/formatters/odb_options.hpp"
-#include "dogen/cpp/types/sml_to_cpp_info.hpp"
 #include "dogen/cpp/types/workflow.hpp"
 
 using namespace dogen::utility::log;
@@ -159,19 +158,6 @@ generate_file_info(const file_info& fi) const {
     ff = factory.create(s, fi.facet_type(), fi.file_type(), fi.aspect_type());
     ff->format(fi);
     return std::make_pair(fi.file_path(), s.str());
-}
-
-workflow::result_type workflow::old_generate_file_infos() const {
-    includer im(model_, locator_, settings_);
-
-    sml_to_cpp_info t(locator_, im, settings_, model_);
-    std::vector<file_info> vfi(t.transform());
-    log_file_views(vfi.size());
-
-    workflow::result_type r;
-    for (const auto& fi : vfi)
-        r.insert(generate_file_info(fi));
-    return r;
 }
 
 workflow::result_type workflow::generate_enums_activity() const {
@@ -429,7 +415,6 @@ workflow::result_type workflow::generate_file_infos_activity() const {
 workflow::result_type workflow::execute() {
     log_started();
 
-    // workflow::result_type r(old_generate_file_infos());
     workflow::result_type r(generate_file_infos_activity());
     if (settings_.disable_cmakelists())
         log_cmakelists_disabled();

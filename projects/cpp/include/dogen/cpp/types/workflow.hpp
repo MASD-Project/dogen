@@ -122,7 +122,6 @@ private:
 private:
     result_entry_type
     generate_file_info(const file_info& fi) const;
-    result_type old_generate_file_infos() const;
     result_type generate_cmakelists() const;
     result_entry_type generate_odb_options() const;
 
