@@ -124,7 +124,7 @@ BOOST_AUTO_TEST_CASE(creating_file_info_for_enumeration_produces_expected_result
     const auto ei((dogen::cpp::enum_info()));
     const auto en(m.enumerations().begin()->second);
     const auto md(mock_descriptors(en.name()));
-    const dogen::cpp::inclusion_lists il;
+    const auto il((dogen::cpp::inclusion_lists()));
 
     std::list<dogen::cpp::file_info> infos;
     for (const auto& cd : md)
@@ -168,7 +168,7 @@ BOOST_AUTO_TEST_CASE(creating_file_info_for_exception_produces_expected_results)
     const auto ex(m.exceptions().begin()->second);
     const auto md(mock_descriptors(ex.name()));
     const auto ei((dogen::cpp::exception_info()));
-    const dogen::cpp::inclusion_lists il;
+    const auto il((dogen::cpp::inclusion_lists()));
 
     std::list<dogen::cpp::file_info> infos;
     for (const auto& cd : md)
@@ -213,7 +213,10 @@ BOOST_AUTO_TEST_CASE(creating_file_info_for_package_produces_expected_results) {
     const auto p(m.packages().begin()->second);
     const auto md(mock_descriptors(p.name()));
     const auto ni((dogen::cpp::namespace_info()));
-    const auto infos(f.create(ni, md));
+
+    std::list<dogen::cpp::file_info> infos;
+    for (const auto& cd : md)
+        infos.push_back(f.create(ni, cd));
     BOOST_LOG_SEV(lg, debug) << "file infos: " << infos;
 
     std::set<dogen::config::cpp_facet_types> found_facets;
@@ -252,7 +255,7 @@ BOOST_AUTO_TEST_CASE(creating_file_info_for_pod_produces_expected_results) {
     const auto p(m.pods().begin()->second);
     const auto md(mock_descriptors(p.name()));
     const auto ci((dogen::cpp::class_info()));
-    const dogen::cpp::inclusion_lists il;
+    const auto il((dogen::cpp::inclusion_lists()));
 
     std::list<dogen::cpp::file_info> infos;
     for (const auto& cd : md)

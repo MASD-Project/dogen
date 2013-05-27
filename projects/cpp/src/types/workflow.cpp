@@ -303,9 +303,8 @@ workflow::result_type workflow::generate_namespaces_activity() const {
     workflow::result_type r;
     if (!model_.documentation().empty()) {
         const auto ni(transformer_.transform_model_into_namespace());
-        auto cds(descriptor_factory_.create(model_));
-
-        for (const auto& fi : file_info_factory_.create(ni, cds)) {
+        for (const auto& cd : descriptor_factory_.create(model_)) {
+            const auto fi(file_info_factory_.create(ni, cd));
             r.insert(format(fi));
 
             if (fi.file_type() == header && fi.aspect_type() == doc)
@@ -320,8 +319,8 @@ workflow::result_type workflow::generate_namespaces_activity() const {
             continue;
 
         const auto ni(transformer_.transform(p));
-        auto cds(descriptor_factory_.create(p.name()));
-        for (const auto& fi : file_info_factory_.create(ni, cds)) {
+        for (const auto& cd : descriptor_factory_.create(p.name())) {
+            const auto fi(file_info_factory_.create(ni, cd));
             r.insert(format(fi));
 
             if (fi.file_type() == header && fi.aspect_type() == doc)

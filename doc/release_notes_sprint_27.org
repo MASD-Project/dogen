@@ -10,17 +10,17 @@ This file contains all stories that were closed during sprint 27.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-05-27 Mon 23:21]
+Clock summary at [2013-05-27 Mon 23:29]
 
 | Headline                                                | Time    |       |       |
 |---------------------------------------------------------+---------+-------+-------|
-| *Total time*                                            | *25:31* |       |       |
+| *Total time*                                            | *25:38* |       |       |
 |---------------------------------------------------------+---------+-------+-------|
-| Development Stories Implemented                         |         | 25:31 |       |
+| Development Stories Implemented                         |         | 25:38 |       |
 | COMPLETED Make inclusion lists in includer a model type |         |       |  0:15 |
 | COMPLETED Clean up the SML to C++ transformer           |         |       | 23:16 |
 | COMPLETED Rename =enumeration_info= to =enum_info=      |         |       |  0:30 |
-| IMPLEMENTATION Use content descriptors in includer      |         |       |  1:30 |
+| IMPLEMENTATION Use content descriptors in includer      |         |       |  1:37 |
 #+end:
 
 *** COMPLETED Make inclusion lists in includer a model type
@@ -141,6 +141,10 @@ calls into workflow.
      CLOSED: [2013-05-27 Mon 23:21]
      CLOCK: [2013-05-27 Mon 23:12]--[2013-05-27 Mon 23:21] =>  0:09
      CLOCK: [2013-05-27 Mon 23:00]--[2013-05-27 Mon 23:12] =>  0:12
+
+**** COMPLETED Fix namespaces
+     CLOSED: [2013-05-27 Mon 23:29]
+     CLOCK: [2013-05-27 Mon 23:22]--[2013-05-27 Mon 23:29] =>  0:07
 
 *** IMPLEMENTATION Move services into their own type                  :story:
 

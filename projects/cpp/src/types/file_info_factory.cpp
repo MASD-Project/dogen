@@ -110,15 +110,10 @@ file_info file_info_factory::create(const exception_info& ei,
     return r;
 }
 
-std::list<file_info> file_info_factory::create(const namespace_info& ni,
-    const std::list<content_descriptor>& cds) const {
-
-    std::list<file_info> r;
-    for (const auto cd : cds) {
-        file_info fi(create(cd));
-        fi.namespace_info(ni);
-        r.push_back(fi);
-    }
+file_info file_info_factory::
+create(const namespace_info& ni, const content_descriptor& cd) const {
+    file_info r(create(cd));
+    r.namespace_info(ni);
     return r;
 }
 

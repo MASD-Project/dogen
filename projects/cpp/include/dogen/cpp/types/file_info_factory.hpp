@@ -96,8 +96,8 @@ public:
     /**
      * @brief Manufacture all the file infos for the given package.
      */
-    std::list<file_info> create(const namespace_info& ni,
-        const std::list<content_descriptor>& cds) const;
+    file_info create(const namespace_info& ni,
+        const content_descriptor& cd) const;
 
     /**
      * @brief Manufacture all the file infos for the given pod.
