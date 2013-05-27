@@ -42,7 +42,7 @@
 #include "dogen/cpp/types/formatters/domain_header.hpp"
 #include "dogen/cpp/types/formatters/domain_implementation.hpp"
 #include "dogen/cpp/types/formatters/doxygen_comments.hpp"
-#include "dogen/cpp/types/formatters/enumeration_declaration.hpp"
+#include "dogen/cpp/types/formatters/enum_declaration.hpp"
 #include "dogen/cpp/types/formatters/exception_declaration.hpp"
 #include "dogen/cpp/types/formatters/facet_includer.hpp"
 #include "dogen/cpp/types/formatters/factory.hpp"

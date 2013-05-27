@@ -18,43 +18,18 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_TYPES_FORMATTERS_ENUMERATION_DECLARATION_HPP
-#define DOGEN_CPP_TYPES_FORMATTERS_ENUMERATION_DECLARATION_HPP
+#ifndef DOGEN_CPP_TYPES_FORMATTERS_ENUM_DECLARATION_FWD_HPP
+#define DOGEN_CPP_TYPES_FORMATTERS_ENUM_DECLARATION_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <iosfwd>
-#include <string>
-#include "dogen/cpp/types/enum_info.hpp"
-#include "dogen/cpp/types/formatters/indenter.hpp"
-#include "dogen/cpp/types/formatters/utility.hpp"
-
 namespace dogen {
 namespace cpp {
 namespace formatters {
 
-class enumeration_declaration {
-public:
-    enumeration_declaration() = default;
-    ~enumeration_declaration() = default;
-    enumeration_declaration(const enumeration_declaration&) = default;
-    enumeration_declaration(enumeration_declaration&&) = default;
-    enumeration_declaration& operator=(
-        const enumeration_declaration&) = default;
-
-public:
-    enumeration_declaration(std::ostream& stream);
-
-public:
-    void format(const enum_info& ei);
-
-protected:
-    std::ostream& stream_;
-    indenter indenter_;
-    utility utility_;
-};
+class enum_declaration;
 
 } } }
 

@@ -110,7 +110,9 @@ serialisation.
 
 Implemented as part of the clean up of cpp model.
 
-*** IMPLEMENTATION Rename =enumeration_info= to =enum_info=
+*** COMPLETED Rename =enumeration_info= to =enum_info=
+    CLOSED: [2013-05-27 Mon 21:50]
+    CLOCK: [2013-05-27 Mon 21:40]--[2013-05-27 Mon 21:50] =>  0:10
     CLOCK: [2013-05-27 Mon 21:32]--[2013-05-27 Mon 21:40] =>  0:08
     CLOCK: [2013-05-27 Mon 21:20]--[2013-05-27 Mon 21:32] =>  0:12
 

@@ -30,7 +30,7 @@
 #include "dogen/cpp/types/formatters/key_class_declaration.hpp"
 #include "dogen/cpp/types/formatters/namespace_helper.hpp"
 #include "dogen/cpp/types/formatters/includes.hpp"
-#include "dogen/cpp/types/formatters/enumeration_declaration.hpp"
+#include "dogen/cpp/types/formatters/enum_declaration.hpp"
 #include "dogen/cpp/types/formatters/exception_declaration.hpp"
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/cpp/types/formatters/domain_header.hpp"
@@ -206,7 +206,7 @@ void domain_header::format_enumeration(const file_info& fi) {
         const auto ei(*o);
         namespace_helper ns(stream_, ei.namespaces());
         utility_.blank_line();
-        enumeration_declaration f(stream_);
+        enum_declaration f(stream_);
         f.format(ei);
     }
     utility_.blank_line(2);

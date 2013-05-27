@@ -8364,19 +8364,19 @@ pre-processor includes.#</dia:string>
         <dia:point val="-147.5,91.25"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-147.55,91.2;-135.662,94.3"/>
+        <dia:rectangle val="-147.55,91.2;-138.917,94.3"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-147.5,91.25"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="11.7875"/>
+        <dia:real val="8.5325000000000006"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#enumeration_declaration#</dia:string>
+        <dia:string>#enum_declaration#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#service#</dia:string>
@@ -13427,7 +13427,7 @@ pre-processor includes.#</dia:string>
         <dia:point val="-121.611,75.75"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-141.656,75;-120.861,92.05"/>
+        <dia:rectangle val="-143.284,75;-120.861,92.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -13435,8 +13435,8 @@ pre-processor includes.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="-121.611,75.75"/>
         <dia:point val="-121.611,81"/>
-        <dia:point val="-141.606,81"/>
-        <dia:point val="-141.606,91.25"/>
+        <dia:point val="-143.234,81"/>
+        <dia:point val="-143.234,91.25"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>

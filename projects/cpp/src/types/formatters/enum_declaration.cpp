@@ -21,7 +21,7 @@
 #include <ostream>
 #include <sstream>
 #include "dogen/cpp/types/formatters/doxygen_comments.hpp"
-#include "dogen/cpp/types/formatters/enumeration_declaration.hpp"
+#include "dogen/cpp/types/formatters/enum_declaration.hpp"
 
 namespace {
 
@@ -33,11 +33,11 @@ namespace dogen {
 namespace cpp {
 namespace formatters {
 
-enumeration_declaration::
-enumeration_declaration(std::ostream& stream)
+enum_declaration::
+enum_declaration(std::ostream& stream)
     : stream_(stream), utility_(stream_, indenter_) { }
 
-void enumeration_declaration::format(const enum_info& ei) {
+void enum_declaration::format(const enum_info& ei) {
     doxygen_comments dc1(stream_, indenter_);
     dc1.format(ei.documentation());
 
