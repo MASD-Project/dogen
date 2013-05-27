@@ -193,6 +193,8 @@ set(DOGEN_VERSION "${DOGEN_VERSION}.${DOGEN_PATCH_VERSION}")
 if(WITH_DEBUG)
     message(STATUS "Building with DEBUG symbols...")
     set(DOGEN_VERSION "${DOGEN_VERSION}d")
+else()
+    message(STATUS "Building WITHOUT debug symbols...")
 endif()
 message(STATUS "Product version: ${DOGEN_VERSION}")
 
