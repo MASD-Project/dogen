@@ -51,7 +51,7 @@ workflow::
 workflow(const sml::model& model, const config::cpp_settings& settings) :
     model_(model), settings_(settings), locator_(model.name(), settings_),
     includer_(model_, locator_, settings_),
-    file_info_factory_(locator_, includer_),
+    file_info_factory_(locator_),
     transformer_(model_),
     descriptor_factory_(settings_.enabled_facets()), extractor_(model_.pods()) {
 

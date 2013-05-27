@@ -25,6 +25,7 @@
 #include "dogen/utility/test/exception_checkers.hpp"
 #include "dogen/sml/types/model.hpp"
 #include "dogen/sml/io/model_io.hpp"
+#include "dogen/cpp/types/includer.hpp"
 #include "dogen/cpp/io/all_io.hpp"
 #include "dogen/cpp/types/building_error.hpp"
 #include "dogen/sml/test/mock_model_factory.hpp"
@@ -118,9 +119,7 @@ BOOST_AUTO_TEST_CASE(creating_file_info_for_enumeration_produces_expected_result
 
     const auto s(mock_settings_factory::build_cpp_settings(src_dir, inc_dir));
     dogen::cpp::locator l(m.name(), s);
-    dogen::cpp::includer i(m, l, s);
-
-    dogen::cpp::file_info_factory f(l, i);
+    dogen::cpp::file_info_factory f(l);
     const auto ei((dogen::cpp::enum_info()));
     const auto en(m.enumerations().begin()->second);
     const auto md(mock_descriptors(en.name()));
@@ -163,8 +162,7 @@ BOOST_AUTO_TEST_CASE(creating_file_info_for_exception_produces_expected_results)
 
     const auto s(mock_settings_factory::build_cpp_settings(src_dir, inc_dir));
     dogen::cpp::locator l(m.name(), s);
-    dogen::cpp::includer i(m, l, s);
-    dogen::cpp::file_info_factory f(l, i);
+    dogen::cpp::file_info_factory f(l);
     const auto ex(m.exceptions().begin()->second);
     const auto md(mock_descriptors(ex.name()));
     const auto ei((dogen::cpp::exception_info()));
@@ -208,8 +206,7 @@ BOOST_AUTO_TEST_CASE(creating_file_info_for_package_produces_expected_results) {
 
     const auto s(mock_settings_factory::build_cpp_settings(src_dir, inc_dir));
     dogen::cpp::locator l(m.name(), s);
-    dogen::cpp::includer i(m, l, s);
-    dogen::cpp::file_info_factory f(l, i);
+    dogen::cpp::file_info_factory f(l);
     const auto p(m.packages().begin()->second);
     const auto md(mock_descriptors(p.name()));
     const auto ni((dogen::cpp::namespace_info()));
@@ -250,8 +247,7 @@ BOOST_AUTO_TEST_CASE(creating_file_info_for_pod_produces_expected_results) {
 
     const auto s(mock_settings_factory::build_cpp_settings(src_dir, inc_dir));
     dogen::cpp::locator l(m.name(), s);
-    dogen::cpp::includer i(m, l, s);
-    dogen::cpp::file_info_factory f(l, i);
+    dogen::cpp::file_info_factory f(l);
     const auto p(m.pods().begin()->second);
     const auto md(mock_descriptors(p.name()));
     const auto ci((dogen::cpp::class_info()));
@@ -294,7 +290,7 @@ BOOST_AUTO_TEST_CASE(creating_non_empty_includer_file_info_produces_expected_res
     const auto s(mock_settings_factory::build_cpp_settings(src_dir, inc_dir));
     dogen::cpp::locator l(m.name(), s);
     dogen::cpp::includer i(m, l, s);
-    dogen::cpp::file_info_factory f(l, i);
+    dogen::cpp::file_info_factory f(l);
 
     const auto ft(dogen::config::cpp_facet_types::types);
     i.register_header(ft, mock_model_factory::type_name(0));
@@ -343,7 +339,7 @@ BOOST_AUTO_TEST_CASE(creating_empty_includer_file_info_produces_expected_results
     const auto s(mock_settings_factory::build_cpp_settings(src_dir, inc_dir));
     dogen::cpp::locator l(m.name(), s);
     dogen::cpp::includer i(m, l, s);
-    dogen::cpp::file_info_factory f(l, i);
+    dogen::cpp::file_info_factory f(l);
 
     const auto ft1(dogen::config::cpp_facet_types::types);
     i.register_header(ft1, mock_model_factory::type_name(0));
@@ -383,7 +379,7 @@ BOOST_AUTO_TEST_CASE(creating_file_info_for_registrar_produces_expected_results)
     const auto s(mock_settings_factory::build_cpp_settings(src_dir, inc_dir));
     dogen::cpp::locator l(m.name(), s);
     dogen::cpp::includer i(m, l, s);
-    dogen::cpp::file_info_factory f(l, i);
+    dogen::cpp::file_info_factory f(l);
 
     const auto md(mock_descriptor_for_registrar());
     const auto ri((dogen::cpp::registrar_info()));

@@ -10,17 +10,17 @@ This file contains all stories that were closed during sprint 27.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-05-27 Mon 23:56]
+Clock summary at [2013-05-28 Tue 00:02]
 
 | Headline                                                | Time    |       |       |
 |---------------------------------------------------------+---------+-------+-------|
-| *Total time*                                            | *26:04* |       |       |
+| *Total time*                                            | *26:09* |       |       |
 |---------------------------------------------------------+---------+-------+-------|
-| Development Stories Implemented                         |         | 26:04 |       |
+| Development Stories Implemented                         |         | 26:09 |       |
 | COMPLETED Make inclusion lists in includer a model type |         |       |  0:15 |
 | COMPLETED Clean up the SML to C++ transformer           |         |       | 23:16 |
 | COMPLETED Rename =enumeration_info= to =enum_info=      |         |       |  0:30 |
-| IMPLEMENTATION Use content descriptors in includer      |         |       |  2:03 |
+| COMPLETED Use content descriptors in includer           |         |       |  2:08 |
 #+end:
 
 *** COMPLETED Make inclusion lists in includer a model type
@@ -119,7 +119,8 @@ Implemented as part of the clean up of cpp model.
 
 Slight modeling error, we should have used the C++ name for the type.
 
-*** IMPLEMENTATION Use content descriptors in includer
+*** COMPLETED Use content descriptors in includer
+    CLOSED: [2013-05-28 Tue 00:02]
 
 Instead of passing the facets, etc into includer we should just pass a
 whole content descriptor in one go. We should also move the includer
@@ -154,6 +155,10 @@ calls into workflow.
 **** COMPLETED Fix includer
      CLOSED: [2013-05-27 Mon 23:56]
      CLOCK: [2013-05-27 Mon 23:41]--[2013-05-27 Mon 23:56] =>  0:15
+
+**** COMPLETED Tidy-up factory
+     CLOSED: [2013-05-28 Tue 00:02]
+     CLOCK: [2013-05-27 Mon 23:56]--[2013-05-28 Tue 00:01] =>  0:05
 
 *** IMPLEMENTATION Move services into their own type                  :story:
 

@@ -28,7 +28,6 @@
 #include <boost/filesystem/path.hpp>
 #include "dogen/cpp/types/locator.hpp"
 #include "dogen/cpp/types/location_request.hpp"
-#include "dogen//cpp/types/includer.hpp"
 #include "dogen/cpp/types/inclusion_lists.hpp"
 #include "dogen/cpp/types/content_descriptor.hpp"
 #include "dogen/cpp/types/enum_info.hpp"
@@ -54,7 +53,7 @@ public:
     file_info_factory& operator=(const file_info_factory&) = delete;
 
 public:
-    file_info_factory(const locator& l, includer& i);
+    explicit file_info_factory(const locator& l);
 
 private:
     /**
@@ -120,7 +119,6 @@ public:
 
 private:
     const locator& locator_;
-    const includer& includer_;
 };
 
 } }

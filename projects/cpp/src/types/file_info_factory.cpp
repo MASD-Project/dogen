@@ -43,8 +43,7 @@ const std::string visitor_postfix("_visitor");
 namespace dogen {
 namespace cpp {
 
-file_info_factory::file_info_factory(const locator& l, includer& i)
-    : locator_(l), includer_(i) { }
+file_info_factory::file_info_factory(const locator& l) : locator_(l) { }
 
 std::string file_info_factory::
 to_header_guard_name(const boost::filesystem::path& rp) const {
