@@ -10,15 +10,15 @@ This file contains all stories that were closed during sprint 27.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-05-26 Sun 23:58]
+Clock summary at [2013-05-27 Mon 01:01]
 
 | Headline                                                | Time    |       |       |
 |---------------------------------------------------------+---------+-------+-------|
-| *Total time*                                            | *20:02* |       |       |
+| *Total time*                                            | *21:00* |       |       |
 |---------------------------------------------------------+---------+-------+-------|
-| Development Stories Implemented                         |         | 20:02 |       |
+| Development Stories Implemented                         |         | 21:00 |       |
 | COMPLETED Make inclusion lists in includer a model type |         |       |  0:15 |
-| IMPLEMENTATION Clean up the SML to C++ transformer      |         |       | 19:47 |
+| IMPLEMENTATION Clean up the SML to C++ transformer      |         |       | 20:45 |
 #+end:
 
 *** COMPLETED Make inclusion lists in includer a model type
@@ -73,7 +73,8 @@ Continuing from previous iteration, see description in Sprint 26.
      CLOCK: [2013-05-25 Sat 22:29]--[2013-05-25 Sat 23:39] =>  1:10
      CLOCK: [2013-05-22 Wed 22:20]--[2013-05-22 Wed 22:56] =>  0:36
 
-**** IMPLEMENTATION Create workflow tests and fix new code
+**** COMPLETED Create workflow tests and fix new code
+     CLOSED: [2013-05-27 Mon 00:02]
      CLOCK: [2013-05-26 Sun 23:36]--[2013-05-26 Sun 23:58] =>  0:22
      CLOCK: [2013-05-26 Sun 23:05]--[2013-05-26 Sun 23:36] =>  0:31
      CLOCK: [2013-05-26 Sun 22:43]--[2013-05-26 Sun 23:05] =>  0:22
@@ -82,6 +83,11 @@ Continuing from previous iteration, see description in Sprint 26.
      CLOCK: [2013-05-26 Sun 20:17]--[2013-05-26 Sun 20:37] =>  0:20
      CLOCK: [2013-05-26 Sun 20:08]--[2013-05-26 Sun 20:16] =>  0:08
      CLOCK: [2013-05-26 Sun 20:02]--[2013-05-26 Sun 20:03] =>  0:01
+
+**** IMPLEMENTATION Add support for inheritance in workflow
+     CLOCK: [2013-05-27 Mon 00:03]--[2013-05-27 Mon 01:01] =>  0:58
+
+**** Add support for visitor
 
 *** IMPLEMENTATION Move services into their own type                  :story:
 

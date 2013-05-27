@@ -60,7 +60,7 @@ public:
     explicit transformer(const sml::model& m);
 
 public:
-    typedef boost::optional<const class_info> optional_class_info;
+    typedef boost::optional<class_info> optional_class_info;
 
 private:
     /**

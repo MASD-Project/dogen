@@ -274,7 +274,8 @@ registrar_info transformer::transform_model_into_registrar() const {
 
     using boost::join;
     for (const auto& l : model_.leaves()) {
-        const auto ns(transform(l));
+        auto ns(transform(l));
+        ns.push_back(l.type_name());
         r.leaves().push_back(join(ns, namespace_separator));
     }
     r.leaves().sort();

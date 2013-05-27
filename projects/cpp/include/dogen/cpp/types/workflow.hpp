@@ -71,41 +71,48 @@ private:
      */
     void validate_settings() const;
 
+    /**
+     * @brief Recursively generates pods.
+     */
+    class_info generate_class_info_recursive(
+        std::unordered_map<sml::qname, class_info>& infos,
+        const sml::qname& qn) const;
+
 private:
     /**
      * @brief Creates all C++ files for enums in the model.
      */
-    result_type generate_enums_activity();
+    result_type generate_enums_activity() const;
 
     /**
      * @brief Creates all C++ files for exceptions in the model.
      */
-    result_type generate_exceptions_activity();
+    result_type generate_exceptions_activity() const;
 
     /**
      * @brief Creates all C++ files for classes in the model.
      */
-    result_type generate_classes_activity();
+    result_type generate_classes_activity() const;
 
     /**
      * @brief Creates all C++ files for namespaces in the model.
      */
-    result_type generate_namespaces_activity();
+    result_type generate_namespaces_activity() const;
 
     /**
      * @brief Creates all C++ files for registrars in the model.
      */
-    result_type generate_registrars_activity();
+    result_type generate_registrars_activity() const;
 
     /**
      * @brief Creates all C++ files for includers in the model.
      */
-    result_type generate_includers_activity();
+    result_type generate_includers_activity() const;
 
     /**
      * @brief Composite activity that generates all C++ files.
      */
-    result_type generate_file_infos_activity();
+    result_type generate_file_infos_activity() const;
 
 private:
     result_entry_type
@@ -122,8 +129,8 @@ private:
     const sml::model model_;
     const config::cpp_settings settings_;
     const locator locator_;
-    includer includer_;
-    file_info_factory file_info_factory_;
+    mutable includer includer_;
+    const file_info_factory file_info_factory_;
     const transformer transformer_;
     const content_descriptor_factory descriptor_factory_;
 };

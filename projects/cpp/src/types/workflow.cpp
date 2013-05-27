@@ -174,7 +174,7 @@ workflow::result_type workflow::old_generate_file_infos() const {
     return r;
 }
 
-workflow::result_type workflow::generate_enums_activity() {
+workflow::result_type workflow::generate_enums_activity() const {
     BOOST_LOG_SEV(lg, debug) << "Started generate enums activity.";
 
     workflow::result_type r;
@@ -201,7 +201,7 @@ workflow::result_type workflow::generate_enums_activity() {
     return r;
 }
 
-workflow::result_type workflow::generate_exceptions_activity() {
+workflow::result_type workflow::generate_exceptions_activity() const {
     BOOST_LOG_SEV(lg, debug) << "Started generate exceptions activity.";
 
     workflow::result_type r;
@@ -228,10 +228,46 @@ workflow::result_type workflow::generate_exceptions_activity() {
     return r;
 }
 
-workflow::result_type workflow::generate_classes_activity() {
+class_info workflow::generate_class_info_recursive(
+    std::unordered_map<sml::qname, class_info>& infos,
+    const sml::qname& qn) const {
+
+    const auto i(model_.pods().find(qn));
+    if (i == model_.pods().end()) {
+        // throw
+    }
+
+    boost::optional<class_info> pci;
+    const auto p(i->second);
+    const auto pn(p.parent_name());
+    if (pn) {
+        auto j(infos.find(*pn));
+        if (j == infos.end()) {
+            pci = generate_class_info_recursive(infos, *pn);
+            infos.insert(std::make_pair(*p.parent_name(), *pci));
+        } else
+            pci = j->second;
+    }
+
+    boost::optional<class_info> opci;
+    const auto opn(p.original_parent_name());
+    if (opn) {
+        auto j(infos.find(*opn));
+        if (j == infos.end()) {
+            opci = generate_class_info_recursive(infos, *opn);
+            infos.insert(std::make_pair(*p.original_parent_name(), *opci));
+        } else
+            opci = j->second;
+    }
+
+    return transformer_.transform(p, pci, opci);
+}
+
+workflow::result_type workflow::generate_classes_activity() const {
     BOOST_LOG_SEV(lg, debug) << "Started generate classes activity.";
 
     workflow::result_type r;
+    std::unordered_map<sml::qname, class_info> infos;
     for (const auto& pair : model_.pods()) {
         const auto p(pair.second);
 
@@ -241,8 +277,8 @@ workflow::result_type workflow::generate_classes_activity() {
         const auto pt(p.pod_type());
         const auto ct(p.category_type());
         const auto cds(descriptor_factory_.create(p.name(), ct, pt));
-        const auto pi(transformer_.transform(p));
-        for (const auto& fi : file_info_factory_.create(p, pi, cds)) {
+        const auto ci(generate_class_info_recursive(infos, p.name()));
+        for (const auto& fi : file_info_factory_.create(p, ci, cds)) {
             r.insert(generate_file_info(fi));
 
             const auto header(file_types::header);
@@ -259,7 +295,7 @@ workflow::result_type workflow::generate_classes_activity() {
     return r;
 }
 
-workflow::result_type workflow::generate_namespaces_activity() {
+workflow::result_type workflow::generate_namespaces_activity() const {
     BOOST_LOG_SEV(lg, debug) << "Started generate namespaces activity.";
 
     workflow::result_type r;
@@ -301,7 +337,7 @@ workflow::result_type workflow::generate_namespaces_activity() {
     return r;
 }
 
-workflow::result_type workflow::generate_registrars_activity() {
+workflow::result_type workflow::generate_registrars_activity() const {
     BOOST_LOG_SEV(lg, debug) << "Started generate registrars activity.";
 
     sml::qname qn;
@@ -329,7 +365,7 @@ workflow::result_type workflow::generate_registrars_activity() {
     return r;
 }
 
-workflow::result_type workflow::generate_includers_activity() {
+workflow::result_type workflow::generate_includers_activity() const {
     BOOST_LOG_SEV(lg, debug) << "Started generate includers activity.";
 
     sml::qname qn;
@@ -350,7 +386,7 @@ workflow::result_type workflow::generate_includers_activity() {
     return r;
 }
 
-workflow::result_type workflow::generate_file_infos_activity() {
+workflow::result_type workflow::generate_file_infos_activity() const {
     const auto a(generate_enums_activity());
     const auto b(generate_exceptions_activity());
     const auto c(generate_classes_activity());
