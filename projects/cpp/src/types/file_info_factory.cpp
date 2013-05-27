@@ -126,19 +126,12 @@ file_info file_info_factory::create(const class_info& ci,
     return r;
 }
 
-std::list<file_info> file_info_factory::create_includer(
-    const std::list<content_descriptor>& cds) const {
-
-    std::list<file_info> r;
-    for (const auto cd : cds) {
-        file_info fi(create(cd));
-        fi.aspect_type(aspect_types::includers);
-
-        const auto il(includer_.includes_for_includer_files(cd.facet_type()));
-        fi.system_includes(il.system());
-        fi.user_includes(il.user());
-        r.push_back(fi);
-    }
+file_info file_info_factory::create_includer(const content_descriptor& cd,
+    const inclusion_lists& il) const {
+    file_info r(create(cd));
+    r.aspect_type(aspect_types::includers);
+    r.system_includes(il.system());
+    r.user_includes(il.user());
     return r;
 }
 

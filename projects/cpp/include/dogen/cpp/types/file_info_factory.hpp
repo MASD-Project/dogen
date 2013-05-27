@@ -25,12 +25,7 @@
 #pragma once
 #endif
 
-#include <set>
-#include <list>
 #include <boost/filesystem/path.hpp>
-#include "dogen/config/types/cpp_facet_types.hpp"
-#include "dogen/sml/types/pod.hpp"
-#include "dogen/sml/types/model.hpp"
 #include "dogen/cpp/types/locator.hpp"
 #include "dogen/cpp/types/location_request.hpp"
 #include "dogen//cpp/types/includer.hpp"
@@ -100,7 +95,7 @@ public:
         const content_descriptor& cd) const;
 
     /**
-     * @brief Manufacture all the file infos for the given pod.
+     * @brief Manufacture all the file infos for the given class.
      */
     file_info create(const class_info& ci,const content_descriptor& cd,
         const inclusion_lists& il) const;
@@ -108,8 +103,8 @@ public:
     /**
      * @brief Manufacture file info for includer.
      */
-    std::list<file_info> create_includer(
-        const std::list<content_descriptor>& cds) const;
+    file_info create_includer(const content_descriptor& cd,
+        const inclusion_lists& il) const;
 
     /**
      * @brief Manufacture file info for registrar.

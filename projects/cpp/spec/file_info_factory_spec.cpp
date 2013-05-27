@@ -300,7 +300,12 @@ BOOST_AUTO_TEST_CASE(creating_non_empty_includer_file_info_produces_expected_res
     i.register_header(ft, mock_model_factory::type_name(0));
     i.register_header(ft, mock_model_factory::type_name(1));
     const auto md(mock_descriptor_for_includer(ft));
-    const auto includer_infos(f.create_includer(md));
+
+    std::list<dogen::cpp::file_info> includer_infos;
+    for (const auto& cd : md) {
+        const auto il(i.includes_for_includer_files(cd));
+        includer_infos.push_back(f.create_includer(cd, il));
+    }
     BOOST_LOG_SEV(lg, debug) << "includer file infos: " << includer_infos;
 
     BOOST_REQUIRE(includer_infos.size() == 1);
@@ -346,7 +351,11 @@ BOOST_AUTO_TEST_CASE(creating_empty_includer_file_info_produces_expected_results
 
     const auto ft2(dogen::config::cpp_facet_types::serialization);
     const auto md(mock_descriptor_for_includer(ft2));
-    const auto includer_infos(f.create_includer(md));
+    const auto il((dogen::cpp::inclusion_lists()));
+
+    std::list<dogen::cpp::file_info> includer_infos;
+    for (const auto& cd : md)
+        includer_infos.push_back(f.create_includer(cd, il));
     BOOST_LOG_SEV(lg, debug) << "includer file infos: " << includer_infos;
 
     BOOST_REQUIRE(includer_infos.size() == 1);

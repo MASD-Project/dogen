@@ -619,9 +619,9 @@ void includer::remove_duplicates(inclusion_lists& il) const {
 }
 
 inclusion_lists includer::
-includes_for_includer_files(config::cpp_facet_types ft) const {
+includes_for_includer_files(const content_descriptor& cd) const {
     inclusion_lists r;
-    const auto i(headers_for_facet_.find(ft));
+    const auto i(headers_for_facet_.find(cd.facet_type()));
     if (i != headers_for_facet_.end())
         r.user(i->second);
     return r;

@@ -197,7 +197,7 @@ public:
      * @param ft Facet for which we want the inclusion lists.
      */
     inclusion_lists
-    includes_for_includer_files(config::cpp_facet_types ft) const;
+    includes_for_includer_files(const content_descriptor& cd) const;
 
     /**
      * @brief Returns all the includes required for the given pod.

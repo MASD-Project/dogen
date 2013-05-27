@@ -371,11 +371,11 @@ workflow::result_type workflow::generate_includers_activity() const {
     // FIXME: we should probably have "a not SML type" instead of lying
     qn.meta_type(sml::meta_types::pod);
 
-    const auto cds(descriptor_factory_.create_includer(qn));
-
     workflow::result_type r;
-    for (const auto& fi : file_info_factory_.create_includer(cds))
-        r.insert(format(fi));
+    for (const auto& cd : descriptor_factory_.create_includer(qn)) {
+        const auto il(includer_.includes_for_includer_files(cd));
+        r.insert(format(file_info_factory_.create_includer(cd, il)));
+    }
 
     BOOST_LOG_SEV(lg, debug) << "Finished generate includers activity.";
     return r;
