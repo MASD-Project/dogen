@@ -64,10 +64,17 @@ public:
 
 private:
     /**
+     * @brief Converts an SML qname into a C++ qualified name.
+     */
+    std::string
+    transform_into_qualified_name(const dogen::sml::qname& qn) const;
+
+    /**
      * @brief Flattens all the SML namespace information stored in qname
      * into a list of strings with C++ namespaces.
      */
-    std::list<std::string> transform(const dogen::sml::qname& qn) const;
+    std::list<std::string>
+    transform_into_namespace_list(const dogen::sml::qname& qn) const;
 
     /**
      * @brief Transforms an SML enumerator to an enumerator info.

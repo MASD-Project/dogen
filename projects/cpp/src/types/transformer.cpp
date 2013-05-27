@@ -171,8 +171,18 @@ namespace cpp {
 
 transformer::transformer(const sml::model& m) : model_(m) { }
 
+std::string
+transformer::transform_into_qualified_name(const dogen::sml::qname& qn) const {
+    std::list<std::string> l(transform_into_namespace_list(qn));
+    l.push_back(qn.type_name());
+
+    using boost::algorithm::join;
+    std::string r(join(l, namespace_separator));
+    return r;
+}
+
 std::list<std::string>
-transformer::transform(const dogen::sml::qname& qn) const {
+transformer::transform_into_namespace_list(const dogen::sml::qname& qn) const {
     std::list<std::string> r(qn.external_package_path());
 
     if (!qn.model_name().empty())
@@ -201,7 +211,7 @@ enumeration_info transformer::transform(const sml::enumeration& e) const {
     enumeration_info r;
 
     r.name(e.name().type_name());
-    r.namespaces(transform(e.name()));
+    r.namespaces(transform_into_namespace_list(e.name()));
     r.documentation(e.documentation());
 
     for (const auto& en : e.enumerators())
@@ -217,7 +227,7 @@ exception_info transformer::transform(const sml::exception& e) const {
 
     exception_info r;
     r.name(e.name().type_name());
-    r.namespaces(transform(e.name()));
+    r.namespaces(transform_into_namespace_list(e.name()));
     r.documentation(e.documentation());
 
     BOOST_LOG_SEV(lg, debug) << "Transformed exception: " << e.name();
@@ -230,7 +240,7 @@ namespace_info transformer::transform(const sml::package& p) const {
 
     namespace_info r;
     r.documentation(p.documentation());
-    r.namespaces(transform(p.name()));
+    r.namespaces(transform_into_namespace_list(p.name()));
 
     BOOST_LOG_SEV(lg, debug) << "Transformed package: " << p.name();
 
@@ -248,7 +258,7 @@ namespace_info transformer::transform_model_into_namespace() const {
     qn.type_name(n);
     qn.external_package_path(model_.external_package_path());
     qn.meta_type(sml::meta_types::package);
-    r.namespaces(transform(qn));
+    r.namespaces(transform_into_namespace_list(qn));
 
     BOOST_LOG_SEV(lg, debug) << "Transformed model into namespace: " << n;
     return r;
@@ -264,7 +274,7 @@ registrar_info transformer::transform_model_into_registrar() const {
     qn.meta_type(sml::meta_types::pod);
 
     registrar_info r;
-    r.namespaces(transform(qn));
+    r.namespaces(transform_into_namespace_list(qn));
 
     for (const auto& pair : model_.dependencies()) {
         const auto d(pair.second);
@@ -272,12 +282,8 @@ registrar_info transformer::transform_model_into_registrar() const {
             r.model_dependencies().push_back(d.model_name());
     }
 
-    using boost::join;
-    for (const auto& l : model_.leaves()) {
-        auto ns(transform(l));
-        ns.push_back(l.type_name());
-        r.leaves().push_back(join(ns, namespace_separator));
-    }
+    for (const auto& l : model_.leaves())
+        r.leaves().push_back(transform_into_qualified_name(l));
     r.leaves().sort();
 
     BOOST_LOG_SEV(lg, debug) << "Transformed model into registrar: " << n;
@@ -289,13 +295,9 @@ void transformer::transform(const sml::nested_qname& nqn,
     bool& requires_stream_manipulators) const {
 
     const auto qn(nqn.type());
-    std::list<std::string> ns_list(transform(qn));
-    nti.namespaces(transform(nqn.type()));
-    ns_list.push_back(qn.type_name());
-
-    using boost::algorithm::join;
-    std::string ns(join(ns_list, namespace_separator));
-    nti.name(ns);
+    const auto qualified_name(transform_into_qualified_name(qn));
+    nti.name(qualified_name);
+    nti.namespaces(transform_into_namespace_list(qn));
 
     using dogen::sml::meta_types;
     nti.is_enumeration(qn.meta_type() == meta_types::enumeration);
@@ -357,7 +359,7 @@ void transformer::transform(const sml::nested_qname& nqn,
     }
     lambda('>');
 
-    nti.identifiable_name(to_identifiable_name(ns));
+    nti.identifiable_name(to_identifiable_name(qualified_name));
     nti.complete_identifiable_name(to_identifiable_name(my_complete_name));
     nti.complete_name(my_complete_name);
     nti.children(children);
@@ -423,7 +425,7 @@ transform(const sml::pod& p, const optional_class_info pci,
 
     class_info r;
     r.name(p.name().type_name());
-    r.namespaces(transform(p.name()));
+    r.namespaces(transform_into_namespace_list(p.name()));
     r.documentation(p.documentation());
     r.is_immutable(p.is_immutable());
     r.is_visitable(p.is_visitable());
@@ -468,12 +470,8 @@ transform(const sml::pod& p, const optional_class_info pci,
             r.requires_manual_default_constructor(true);
     }
 
-    for (const auto l : p.leaves()) {
-        std::list<std::string> leaf_name(transform(l));
-        leaf_name.push_back(l.type_name());
-        using boost::join;
-        r.leaves().push_back(join(leaf_name, namespace_separator));
-    }
+    for (const auto l : p.leaves())
+        r.leaves().push_back(transform_into_qualified_name(l));
 
     return r;
 }
