@@ -386,6 +386,26 @@ workflow::result_type workflow::generate_includers_activity() const {
     return r;
 }
 
+workflow::result_type workflow::generate_visitors_activity() const {
+    BOOST_LOG_SEV(lg, debug) << "Started generate visitors activity.";
+
+    workflow::result_type r;
+    for (const auto& pair : model_.pods()) {
+        const auto p(pair.second);
+
+        if (!p.is_visitable())
+            continue;
+
+        const auto vi(transformer_.transform_into_visitor(p));
+        const auto cds(descriptor_factory_.create_visitor(p.name()));
+        for (const auto& fi : file_info_factory_.create_visitor(vi, cds))
+            r.insert(generate_file_info(fi));
+    }
+
+    BOOST_LOG_SEV(lg, debug) << "Finished generate visitors activity.";
+    return r;
+}
+
 workflow::result_type workflow::generate_file_infos_activity() const {
     const auto a(generate_enums_activity());
     const auto b(generate_exceptions_activity());
@@ -393,6 +413,7 @@ workflow::result_type workflow::generate_file_infos_activity() const {
     const auto d(generate_namespaces_activity());
     const auto e(generate_registrars_activity());
     const auto f(generate_includers_activity());
+    const auto g(generate_visitors_activity());
 
     workflow::result_type r;
     r.insert(a.begin(), a.end());
@@ -401,6 +422,7 @@ workflow::result_type workflow::generate_file_infos_activity() const {
     r.insert(d.begin(), d.end());
     r.insert(e.begin(), e.end());
     r.insert(f.begin(), f.end());
+    r.insert(g.begin(), g.end());
     return r;
 }
 

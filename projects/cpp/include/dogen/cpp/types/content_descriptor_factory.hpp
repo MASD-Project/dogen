@@ -99,9 +99,14 @@ public:
     std::list<content_descriptor> create_includer(const sml::qname& qn) const;
 
     /**
-     * @brief Generate all of the content descriptors for the registrar..
+     * @brief Generate all of the content descriptors for the registrar.
      */
     std::list<content_descriptor> create_registrar(const sml::qname& qn) const;
+
+    /**
+     * @brief Generate all of the content descriptors for a visitor.
+     */
+    std::list<content_descriptor> create_visitor(const sml::qname& qn) const;
 
 private:
     const std::set<config::cpp_facet_types>& enabled_facets_;

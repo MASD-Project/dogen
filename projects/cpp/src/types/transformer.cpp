@@ -42,6 +42,7 @@ const std::string more_than(">");
 const std::string separator("_");
 const std::string extension("HPP");
 const std::string namespace_separator("::");
+const std::string visitor_postfix("_visitor");
 
 const std::string bool_type("bool");
 const std::string string_type("std::string");
@@ -79,6 +80,7 @@ const std::string parent_info_not_supplied(
     "Type has a parent but no parent info supplied: ");
 const std::string parent_info_supplied(
     "Type does not have a parent parent info was supplied: ");
+const std::string non_visitable_pod_supplied("Pod is non-visitable: ");
 
 bool is_char_like(const std::string& type_name) {
     return
@@ -472,6 +474,25 @@ transform(const sml::pod& p, const optional_class_info pci,
 
     for (const auto l : p.leaves())
         r.leaves().push_back(transform_into_qualified_name(l));
+
+    return r;
+}
+
+visitor_info transformer::transform_into_visitor(const sml::pod& p) const {
+    if (!p.is_visitable()) {
+        BOOST_LOG_SEV(lg, error) << non_visitable_pod_supplied
+                                 << p.name().type_name();
+        BOOST_THROW_EXCEPTION(
+            transformation_error(non_visitable_pod_supplied +
+                p.name().type_name()));
+    }
+
+    visitor_info r;
+    r.name(p.name().type_name() + visitor_postfix);
+    r.namespaces(transform_into_namespace_list(p.name()));
+
+    for (const auto l : p.leaves())
+        r.types().push_back(transform_into_qualified_name(l));
 
     return r;
 }

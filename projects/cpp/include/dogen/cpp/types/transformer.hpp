@@ -41,6 +41,7 @@
 #include "dogen/cpp/types/enumeration_info.hpp"
 #include "dogen/cpp/types/nested_type_info.hpp"
 #include "dogen/cpp/types/registrar_info.hpp"
+#include "dogen/cpp/types/visitor_info.hpp"
 
 namespace dogen {
 namespace cpp {
@@ -147,6 +148,13 @@ public:
     class_info transform(const sml::pod& p,
         const optional_class_info pci = optional_class_info(),
         const optional_class_info opci = optional_class_info()) const;
+
+    /**
+     * @brief Transform a SML pod into a visitor info.
+     *
+     * @pre pod must be visitable.
+     */
+    visitor_info transform_into_visitor(const sml::pod& p) const;
 
 private:
     const sml::model& model_;

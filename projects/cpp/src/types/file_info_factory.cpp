@@ -36,6 +36,7 @@ auto lg(logger_factory("cpp.file_info_factory"));
 const std::string empty;
 const std::string dot(".");
 const std::string separator("_");
+const std::string visitor_postfix("_visitor");
 
 }
 
@@ -193,6 +194,26 @@ file_info_factory::create_registrar(const registrar_info& ri,
         fi.registrar_info(ri);
 
         const auto il(includer_.includes_for_registrar(cd.file_type()));
+        fi.system_includes(il.system());
+        fi.user_includes(il.user());
+        r.push_back(fi);
+    }
+    return r;
+}
+
+std::list<file_info>
+file_info_factory::create_visitor(const visitor_info& ri,
+    const std::list<content_descriptor>& cds) const {
+
+    std::list<file_info> r;
+    for (const auto cd : cds) {
+        // auto cd2(cd);
+        // cd2.name().type_name(cd2.name().type_name() + visitor_postfix);
+
+        file_info fi(create(cd));
+        fi.visitor_info(ri);
+
+        const auto il(includer_.includes_for_visitor(cd.name()));
         fi.system_includes(il.system());
         fi.user_includes(il.user());
         r.push_back(fi);

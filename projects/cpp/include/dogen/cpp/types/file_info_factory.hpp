@@ -40,6 +40,7 @@
 #include "dogen/cpp/types/namespace_info.hpp"
 #include "dogen/cpp/types/class_info.hpp"
 #include "dogen/cpp/types/registrar_info.hpp"
+#include "dogen/cpp/types/visitor_info.hpp"
 #include "dogen/cpp/types/file_info.hpp"
 
 namespace dogen {
@@ -114,6 +115,12 @@ public:
      * @brief Manufacture file info for registrar.
      */
     std::list<file_info> create_registrar(const registrar_info& ri,
+        const std::list<content_descriptor>& cds) const;
+
+    /**
+     * @brief Manufacture file info for visitor.
+     */
+    std::list<file_info> create_visitor(const visitor_info& vi,
         const std::list<content_descriptor>& cds) const;
 
 private:

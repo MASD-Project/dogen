@@ -122,6 +122,8 @@ void file_outputter::to_file(outputter::value_entry_type value) const {
         const boost::filesystem::path path(value.first);
         const std::string contents(value.second);
 
+        BOOST_LOG_SEV(lg, debug) << "Processing file: " << path.string();
+
         boost::filesystem::path dir(path);
         dir.remove_filename();
 

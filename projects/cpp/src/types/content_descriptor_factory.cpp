@@ -256,4 +256,17 @@ content_descriptor_factory::create_registrar(const sml::qname& qn) const {
     return r;
 }
 
+std::list<content_descriptor>
+content_descriptor_factory::create_visitor(const sml::qname& qn) const {
+    std::list<content_descriptor> r;
+
+    const auto ft(config::cpp_facet_types::types);
+    const auto at(aspect_types::visitor);
+    const auto header(file_types::header);
+    const auto ct(sml::category_types::invalid);
+    r.push_back(content_descriptor(header, ft, at, ct, qn));
+
+    return r;
+}
+
 } }

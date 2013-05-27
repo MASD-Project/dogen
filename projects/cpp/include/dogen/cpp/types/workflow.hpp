@@ -110,6 +110,11 @@ private:
     result_type generate_includers_activity() const;
 
     /**
+     * @brief Creates all C++ files for visitors in the model.
+     */
+    result_type generate_visitors_activity() const;
+
+    /**
      * @brief Composite activity that generates all C++ files.
      */
     result_type generate_file_infos_activity() const;
