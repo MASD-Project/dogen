@@ -11,6 +11,11 @@ This file contains all stories that haven't been assigned to a sprint.
 
 Stories that we intend to look at, at some point.
 
+*** Move extractor out of includer
+
+We should be able to pass in a list of qnames plus the target qname
+into the includer.
+
 *** Add support for object cloning
 
 We should have a clone method which copy constructs all non-pointer
