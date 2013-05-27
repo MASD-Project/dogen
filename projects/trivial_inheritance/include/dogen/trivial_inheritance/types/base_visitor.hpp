@@ -39,26 +39,6 @@ public:
 
 public:
     /**
-     * @brief Accept visits for type dogen::trivial_inheritance::base
-     */
-    /**@{*/
-    virtual void visit(const dogen::trivial_inheritance::base&) const { }
-    virtual void visit(const dogen::trivial_inheritance::base&) { }
-    virtual void visit(dogen::trivial_inheritance::base&) const { }
-    virtual void visit(dogen::trivial_inheritance::base&) { }
-    /**@}*/
-
-    /**
-     * @brief Accept visits for type dogen::trivial_inheritance::descendant1
-     */
-    /**@{*/
-    virtual void visit(const dogen::trivial_inheritance::descendant1&) const { }
-    virtual void visit(const dogen::trivial_inheritance::descendant1&) { }
-    virtual void visit(dogen::trivial_inheritance::descendant1&) const { }
-    virtual void visit(dogen::trivial_inheritance::descendant1&) { }
-    /**@}*/
-
-    /**
      * @brief Accept visits for type dogen::trivial_inheritance::descendant2
      */
     /**@{*/
