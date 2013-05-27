@@ -122,25 +122,12 @@ std::list<file_info> file_info_factory::create(const namespace_info& ni,
     return r;
 }
 
-std::list<file_info> file_info_factory::create(const sml::pod& p,
-    const class_info& ci, const std::list<content_descriptor>& cds) const {
-
-    std::list<file_info> r;
-    for (const auto cd : cds) {
-        file_info fi(create(cd));
-
-        if (cd.aspect_type() != aspect_types::forward_decls &&
-            p.generation_type() == sml::generation_types::partial_generation)
-            fi.aspect_type(aspect_types::null_aspect);
-
-        fi.class_info(ci);
-
-        const auto il(includer_.includes_for_pod(p,
-                cd.facet_type(), cd.file_type(), cd.aspect_type()));
-        fi.system_includes(il.system());
-        fi.user_includes(il.user());
-        r.push_back(fi);
-    }
+file_info file_info_factory::create(const class_info& ci,
+    const content_descriptor& cd, const inclusion_lists& il) const {
+    file_info r(create(cd));
+    r.class_info(ci);
+    r.system_includes(il.system());
+    r.user_includes(il.user());
     return r;
 }
 

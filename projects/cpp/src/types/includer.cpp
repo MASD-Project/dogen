@@ -745,17 +745,18 @@ includes_for_visitor(const dogen::sml::qname& qname) const {
 }
 
 inclusion_lists includer::
-includes_for_pod(const sml::pod& pod, config::cpp_facet_types ft,
-    file_types flt, aspect_types at) const {
+includes_for_pod(const content_descriptor& cd, const relationships& rel) const {
+    const auto ft(cd.facet_type());
+    const auto flt(cd.file_type());
+    const auto at(cd.aspect_type());
 
     inclusion_lists r;
-    const auto n(pod.name());
+    const auto n(cd.name());
     if (at == aspect_types::forward_decls) {
         append_self_dependencies(n, ft, flt, at, n.meta_type(), r);
         return r;
     }
 
-    const auto rel(extractor_.extract_dependency_graph(pod));
     append_implementation_dependencies(rel, ft, flt, r);
     append_relationship_dependencies(rel, ft, flt, r);
     append_self_dependencies(n, ft, flt, at, n.meta_type(), r);

@@ -140,6 +140,7 @@ private:
     const file_info_factory file_info_factory_;
     const transformer transformer_;
     const content_descriptor_factory descriptor_factory_;
+    const extractor extractor_;
 };
 
 } }

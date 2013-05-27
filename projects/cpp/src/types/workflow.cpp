@@ -26,6 +26,7 @@
 #include "dogen/cpp/types/formatters/src_cmakelists.hpp"
 #include "dogen/cpp/types/formatters/include_cmakelists.hpp"
 #include "dogen/cpp/types/formatters/odb_options.hpp"
+#include "dogen/cpp/types/extractor.hpp"
 #include "dogen/cpp/types/workflow.hpp"
 
 using namespace dogen::utility::log;
@@ -52,7 +53,7 @@ workflow(const sml::model& model, const config::cpp_settings& settings) :
     includer_(model_, locator_, settings_),
     file_info_factory_(locator_, includer_),
     transformer_(model_),
-    descriptor_factory_(settings_.enabled_facets()) {
+    descriptor_factory_(settings_.enabled_facets()), extractor_(model_.pods()) {
 
     validate_settings();
 }
@@ -171,7 +172,7 @@ workflow::result_type workflow::generate_enums_activity() const {
         const auto ei(transformer_.transform(e));
 
         const auto ct(sml::category_types::user_defined);
-        for (const auto cd : descriptor_factory_.create(e.name(), ct)) {
+        for (const auto& cd : descriptor_factory_.create(e.name(), ct)) {
             const auto il(includer_.includes_for_enumeration(cd));
             const auto fi(file_info_factory_.create(ei, cd, il));
             r.insert(format(fi));
@@ -199,7 +200,7 @@ workflow::result_type workflow::generate_exceptions_activity() const {
         const auto ei(transformer_.transform(e));
 
         const auto ct(sml::category_types::user_defined);
-        for (const auto cd : descriptor_factory_.create(e.name(), ct)) {
+        for (const auto& cd : descriptor_factory_.create(e.name(), ct)) {
             const auto il(includer_.includes_for_exception(cd));
             const auto fi(file_info_factory_.create(ei, cd, il));
             r.insert(format(fi));
@@ -263,16 +264,27 @@ workflow::result_type workflow::generate_classes_activity() const {
 
         const auto pt(p.pod_type());
         const auto ct(p.category_type());
-        const auto cds(descriptor_factory_.create(p.name(), ct, pt));
         const auto ci(generate_class_info_recursive(infos, p.name()));
-        for (const auto& fi : file_info_factory_.create(p, ci, cds)) {
+        const auto rel(extractor_.extract_dependency_graph(p));
+        for (const auto& cd : descriptor_factory_.create(p.name(), ct, pt)) {
+            const auto il(includer_.includes_for_pod(cd, rel));
+            auto fi(file_info_factory_.create(ci, cd, il));
+
+            // we want to make sure we do not actually generate code
+            // for partial generation, so override the output of the
+            // factory. however, as we still want to create forward
+            // declarations, ignore those.
+            using sml::generation_types;
+            if (cd.aspect_type() != aspect_types::forward_decls &&
+                p.generation_type() == generation_types::partial_generation) {
+                fi.aspect_type(aspect_types::null_aspect);
+            }
             r.insert(format(fi));
 
+            const auto registrable_aspect(
+                fi.aspect_type() == aspect_types::main ||
+                fi.aspect_type() == aspect_types::null_aspect);
             const auto header(file_types::header);
-            const auto main(aspect_types::main);
-            const auto at(fi.aspect_type());
-            const auto na(aspect_types::null_aspect);
-            const auto registrable_aspect(at == main || at == na);
             if (fi.file_type() == header && registrable_aspect)
                 includer_.register_header(fi.facet_type(), fi.relative_path());
         }

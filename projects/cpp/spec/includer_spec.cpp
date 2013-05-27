@@ -121,11 +121,18 @@ includes_for_one_pod_model(cpp_facet_types ft,
     r.reserve(4);
 
     const auto main(aspect_types::main);
-    const auto i0(im.includes_for_pod(p, ft,  file_types::header, main));
+    dogen::cpp::content_descriptor cd;
+    cd.name(p.name());
+    cd.facet_type(ft);
+    cd.file_type(file_types::header);
+    cd.aspect_type(main);
+    dogen::cpp::relationships rel;
+    const auto i0(im.includes_for_pod(cd, rel));
     r.push_back(i0.system());
     r.push_back(i0.user());
 
-    const auto i1(im.includes_for_pod(p, ft,  file_types::implementation, main));
+    cd.file_type(file_types::implementation);
+    const auto i1(im.includes_for_pod(cd, rel));
     r.push_back(i1.system());
     r.push_back(i1.user());
     return r;

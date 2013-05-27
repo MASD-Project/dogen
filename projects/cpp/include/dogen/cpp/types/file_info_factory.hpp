@@ -102,9 +102,8 @@ public:
     /**
      * @brief Manufacture all the file infos for the given pod.
      */
-    // FIXME: hack until we update includer
-    std::list<file_info> create(const sml::pod& p, const class_info& ci,
-        const std::list<content_descriptor>& cds) const;
+    file_info create(const class_info& ci,const content_descriptor& cd,
+        const inclusion_lists& il) const;
 
     /**
      * @brief Manufacture file info for includer.

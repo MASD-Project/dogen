@@ -204,9 +204,8 @@ public:
     /**
      * @brief Returns all the includes required for the given pod.
      */
-    inclusion_lists includes_for_pod(const sml::pod& pod,
-        config::cpp_facet_types ft, file_types flt,
-        aspect_types at) const;
+    inclusion_lists includes_for_pod(const content_descriptor& cd,
+        const relationships& rel) const;
 
     /**
      * @brief Returns all the includes required for the given
