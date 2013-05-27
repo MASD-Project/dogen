@@ -343,11 +343,11 @@ workflow::result_type workflow::generate_registrars_activity() const {
     // FIXME: we should probably have "a not SML type" instead of lying
     qn.meta_type(sml::meta_types::pod);
 
-    const auto cds(descriptor_factory_.create_registrar(qn));
-    const auto ri(transformer_.transform_model_into_registrar());
-
     workflow::result_type r;
-    for (const auto& fi : file_info_factory_.create_registrar(ri, cds)) {
+    const auto ri(transformer_.transform_model_into_registrar());
+    for (const auto& cd : descriptor_factory_.create_registrar(qn)) {
+        const auto il(includer_.includes_for_registrar(cd));
+        const auto fi(file_info_factory_.create_registrar(ri, cd, il));
         r.insert(format(fi));
 
         const auto header(file_types::header);

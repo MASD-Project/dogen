@@ -378,7 +378,11 @@ BOOST_AUTO_TEST_CASE(creating_file_info_for_registrar_produces_expected_results)
 
     const auto md(mock_descriptor_for_registrar());
     const auto ri((dogen::cpp::registrar_info()));
-    const auto infos(f.create_registrar(ri, md));
+    const auto il((dogen::cpp::inclusion_lists()));
+
+    std::list<dogen::cpp::file_info> infos;
+    for (const auto& cd : md)
+        infos.push_back(f.create_registrar(ri, cd, il));
     BOOST_LOG_SEV(lg, debug) << "file infos: " << infos;
 
     BOOST_REQUIRE(infos.size() == 1);

@@ -222,7 +222,7 @@ public:
      * @brief Returns all the includes required for the serialisation
      * registrar.
      */
-    inclusion_lists includes_for_registrar(file_types flt) const;
+    inclusion_lists includes_for_registrar(const content_descriptor& cd) const;
 
     /**
      * @brief Returns all the includes for a visitor based on qname.

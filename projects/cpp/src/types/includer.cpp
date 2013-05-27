@@ -691,9 +691,10 @@ includes_for_exception(const content_descriptor& cd) const {
 }
 
 inclusion_lists includer::
-includes_for_registrar(file_types flt) const {
+includes_for_registrar(const content_descriptor& cd) const {
     inclusion_lists r;
 
+    const auto flt(cd.file_type());
     if (flt == file_types::header)
         return r;
 

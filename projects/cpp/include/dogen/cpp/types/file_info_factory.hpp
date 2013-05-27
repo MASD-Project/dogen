@@ -114,8 +114,8 @@ public:
     /**
      * @brief Manufacture file info for registrar.
      */
-    std::list<file_info> create_registrar(const registrar_info& ri,
-        const std::list<content_descriptor>& cds) const;
+    file_info create_registrar(const registrar_info& ri,
+        const content_descriptor& cd, const inclusion_lists& il) const;
 
     /**
      * @brief Manufacture file info for visitor.

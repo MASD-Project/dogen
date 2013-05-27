@@ -142,20 +142,12 @@ std::list<file_info> file_info_factory::create_includer(
     return r;
 }
 
-std::list<file_info>
-file_info_factory::create_registrar(const registrar_info& ri,
-    const std::list<content_descriptor>& cds) const {
-
-    std::list<file_info> r;
-    for (const auto cd : cds) {
-        file_info fi(create(cd));
-        fi.registrar_info(ri);
-
-        const auto il(includer_.includes_for_registrar(cd.file_type()));
-        fi.system_includes(il.system());
-        fi.user_includes(il.user());
-        r.push_back(fi);
-    }
+file_info file_info_factory::create_registrar(const registrar_info& ri,
+    const content_descriptor& cd, const inclusion_lists& il) const {
+    file_info r(create(cd));
+    r.registrar_info(ri);
+    r.system_includes(il.system());
+    r.user_includes(il.user());
     return r;
 }
 
