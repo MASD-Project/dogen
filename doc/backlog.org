@@ -11,6 +11,11 @@ This file contains all stories that haven't been assigned to a sprint.
 
 Stories that we intend to look at, at some point.
 
+*** Move includer out of file info factory
+
+We should be able to pass in the inclusion lists into the factory
+rather than having it collaborate with the includer.
+
 *** Move extractor out of includer
 
 We should be able to pass in a list of qnames plus the target qname
