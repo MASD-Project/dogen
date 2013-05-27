@@ -101,24 +101,12 @@ file_info file_info_factory::create(const enum_info& ei,
     return r;
 }
 
-std::list<file_info> file_info_factory::create(const exception_info& ei,
-    const std::list<content_descriptor>& cds) const {
-
-    std::list<file_info> r;
-    for (const auto cd : cds) {
-        file_info fi(create(cd));
-        fi.exception_info(ei);
-
-        // FIXME: hack until we update includer
-        sml::exception e;
-        e.name(cd.name());
-        const auto il(includer_.includes_for_exception(e,
-                cd.facet_type(), cd.file_type(), cd.aspect_type()));
-
-        fi.system_includes(il.system());
-        fi.user_includes(il.user());
-        r.push_back(fi);
-    }
+file_info file_info_factory::create(const exception_info& ei,
+    const content_descriptor& cd, const inclusion_lists& il) const {
+    file_info r(create(cd));
+    r.exception_info(ei);
+    r.system_includes(il.system());
+    r.user_includes(il.user());
     return r;
 }
 

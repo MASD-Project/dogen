@@ -199,8 +199,9 @@ workflow::result_type workflow::generate_exceptions_activity() const {
         const auto ei(transformer_.transform(e));
 
         const auto ct(sml::category_types::user_defined);
-        const auto cds(descriptor_factory_.create(e.name(), ct));
-        for (const auto& fi : file_info_factory_.create(ei, cds)) {
+        for (const auto cd : descriptor_factory_.create(e.name(), ct)) {
+            const auto il(includer_.includes_for_exception(cd));
+            const auto fi(file_info_factory_.create(ei, cd, il));
             r.insert(format(fi));
 
             const auto header(file_types::header);

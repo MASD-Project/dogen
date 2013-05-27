@@ -168,7 +168,11 @@ BOOST_AUTO_TEST_CASE(creating_file_info_for_exception_produces_expected_results)
     const auto ex(m.exceptions().begin()->second);
     const auto md(mock_descriptors(ex.name()));
     const auto ei((dogen::cpp::exception_info()));
-    const auto infos(f.create(ei, md));
+    const dogen::cpp::inclusion_lists il;
+
+    std::list<dogen::cpp::file_info> infos;
+    for (const auto& cd : md)
+        infos.push_back(f.create(ei, cd, il));
     BOOST_LOG_SEV(lg, debug) << "file infos: " << infos;
 
     std::set<dogen::config::cpp_facet_types> found_facets;

@@ -632,13 +632,13 @@ inclusion_lists includer::
 includes_for_enumeration(const content_descriptor& cd) const {
     inclusion_lists r;
 
-    using config::cpp_facet_types;
-    const cpp_facet_types ft(cd.facet_type());
-    const file_types flt(cd.file_type());
-    const aspect_types at(cd.aspect_type());
+    const auto ft(cd.facet_type());
+    const auto flt(cd.file_type());
+    const auto at(cd.aspect_type());
     append_self_dependencies(cd.name(), ft, flt, at, cd.name().meta_type(), r);
 
     // functional
+    using config::cpp_facet_types;
     const bool is_header(flt == file_types::header);
     const bool is_hash(ft == cpp_facet_types::hash);
     if (is_header && is_hash)
@@ -668,14 +668,16 @@ includes_for_enumeration(const content_descriptor& cd) const {
 }
 
 inclusion_lists includer::
-includes_for_exception(const sml::exception& e, config::cpp_facet_types ft,
-    file_types flt, aspect_types at) const {
+includes_for_exception(const content_descriptor& cd) const {
     inclusion_lists r;
 
-    using config::cpp_facet_types;
-    append_self_dependencies(e.name(), ft, flt, at, e.name().meta_type(), r);
+    const auto ft(cd.facet_type());
+    const auto flt(cd.file_type());
+    const auto at(cd.aspect_type());
+    append_self_dependencies(cd.name(), ft, flt, at, cd.name().meta_type(), r);
 
     // exception info
+    using config::cpp_facet_types;
     const bool is_header(flt == file_types::header);
     const bool is_domain(ft == cpp_facet_types::types);
     if (is_header && is_domain)

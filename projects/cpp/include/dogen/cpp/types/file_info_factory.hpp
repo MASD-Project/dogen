@@ -90,8 +90,8 @@ public:
     /**
      * @brief Manufacture all the file infos for the given exception.
      */
-    std::list<file_info> create(const exception_info& ei,
-        const std::list<content_descriptor>& cds) const;
+    file_info create(const exception_info& ei, const content_descriptor& cd,
+        const inclusion_lists& il) const;
 
     /**
      * @brief Manufacture all the file infos for the given package.

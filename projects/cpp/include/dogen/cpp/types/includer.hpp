@@ -212,15 +212,14 @@ public:
      * @brief Returns all the includes required for the given
      * enumeration.
      */
-    inclusion_lists includes_for_enumeration(const content_descriptor& cd) const;
+    inclusion_lists
+    includes_for_enumeration(const content_descriptor& cd) const;
 
     /**
      * @brief Returns all the includes required for the given
      * exception.
      */
-    inclusion_lists includes_for_exception(const sml::exception& e,
-        config::cpp_facet_types ft, file_types flt,
-        aspect_types at) const;
+    inclusion_lists includes_for_exception(const content_descriptor& cd) const;
 
     /**
      * @brief Returns all the includes required for the serialisation
