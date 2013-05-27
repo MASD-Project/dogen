@@ -629,12 +629,14 @@ includes_for_includer_files(config::cpp_facet_types ft) const {
 }
 
 inclusion_lists includer::
-includes_for_enumeration(const sml::enumeration& e, config::cpp_facet_types ft,
-    file_types flt, aspect_types at) const {
+includes_for_enumeration(const content_descriptor& cd) const {
     inclusion_lists r;
 
     using config::cpp_facet_types;
-    append_self_dependencies(e.name(), ft, flt, at, e.name().meta_type(), r);
+    const cpp_facet_types ft(cd.facet_type());
+    const file_types flt(cd.file_type());
+    const aspect_types at(cd.aspect_type());
+    append_self_dependencies(cd.name(), ft, flt, at, cd.name().meta_type(), r);
 
     // functional
     const bool is_header(flt == file_types::header);

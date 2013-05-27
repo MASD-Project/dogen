@@ -34,6 +34,7 @@
 #include "dogen/cpp/types/locator.hpp"
 #include "dogen/cpp/types/location_request.hpp"
 #include "dogen//cpp/types/includer.hpp"
+#include "dogen/cpp/types/inclusion_lists.hpp"
 #include "dogen/cpp/types/content_descriptor.hpp"
 #include "dogen/cpp/types/enum_info.hpp"
 #include "dogen/cpp/types/exception_info.hpp"
@@ -81,10 +82,10 @@ private:
 
 public:
     /**
-     * @brief Manufacture the file info for the given enumeration info.
+     * @brief Manufacture the file info for the given enum info.
      */
-    std::list<file_info> create(const enum_info& ei,
-        const std::list<content_descriptor>& cds) const;
+    file_info create(const enum_info& ei, const content_descriptor& cd,
+        const inclusion_lists& il) const;
 
     /**
      * @brief Manufacture all the file infos for the given exception.

@@ -44,6 +44,7 @@
 #include "dogen/sml/types/model.hpp"
 #include "dogen/sml/types/pod.hpp"
 #include "dogen/cpp/types/inclusion_lists.hpp"
+#include "dogen/cpp/types/content_descriptor.hpp"
 
 namespace dogen {
 namespace cpp {
@@ -211,9 +212,7 @@ public:
      * @brief Returns all the includes required for the given
      * enumeration.
      */
-    inclusion_lists includes_for_enumeration(const sml::enumeration& e,
-        config::cpp_facet_types ft, file_types flt,
-        aspect_types at) const;
+    inclusion_lists includes_for_enumeration(const content_descriptor& cd) const;
 
     /**
      * @brief Returns all the includes required for the given

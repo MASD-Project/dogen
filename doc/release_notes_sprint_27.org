@@ -10,16 +10,17 @@ This file contains all stories that were closed during sprint 27.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-05-27 Mon 21:40]
+Clock summary at [2013-05-27 Mon 22:14]
 
 | Headline                                                | Time    |       |       |
 |---------------------------------------------------------+---------+-------+-------|
-| *Total time*                                            | *23:51* |       |       |
+| *Total time*                                            | *24:24* |       |       |
 |---------------------------------------------------------+---------+-------+-------|
-| Development Stories Implemented                         |         | 23:51 |       |
+| Development Stories Implemented                         |         | 24:24 |       |
 | COMPLETED Make inclusion lists in includer a model type |         |       |  0:15 |
 | COMPLETED Clean up the SML to C++ transformer           |         |       | 23:16 |
-| IMPLEMENTATION Rename =enumeration_info= to =enum_info= |         |       |  0:20 |
+| COMPLETED Rename =enumeration_info= to =enum_info=      |         |       |  0:30 |
+| IMPLEMENTATION Use content descriptors in includer      |         |       |  0:23 |
 #+end:
 
 *** COMPLETED Make inclusion lists in includer a model type
@@ -117,6 +118,16 @@ Implemented as part of the clean up of cpp model.
     CLOCK: [2013-05-27 Mon 21:20]--[2013-05-27 Mon 21:32] =>  0:12
 
 Slight modeling error, we should have used the C++ name for the type.
+
+*** IMPLEMENTATION Use content descriptors in includer
+
+Instead of passing the facets, etc into includer we should just pass a
+whole content descriptor in one go. We should also move the includer
+calls into workflow.
+
+**** COMPLETED Fix enumerations
+     CLOSED: [2013-05-27 Mon 22:13]
+     CLOCK: [2013-05-27 Mon 21:50]--[2013-05-27 Mon 22:13] =>  0:23
 
 *** IMPLEMENTATION Move services into their own type                  :story:
 

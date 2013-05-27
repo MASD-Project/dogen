@@ -149,8 +149,7 @@ workflow::result_entry_type workflow::generate_odb_options() const {
     return std::make_pair(ooi.file_path(), stream.str());
 }
 
-workflow::result_entry_type workflow::
-generate_file_info(const file_info& fi) const {
+workflow::result_entry_type workflow::format(const file_info& fi) const {
     log_formating_view(fi.file_path().string());
     formatters::factory factory(settings_);
     formatters::file_formatter::shared_ptr ff;
@@ -172,9 +171,10 @@ workflow::result_type workflow::generate_enums_activity() const {
         const auto ei(transformer_.transform(e));
 
         const auto ct(sml::category_types::user_defined);
-        const auto cds(descriptor_factory_.create(e.name(), ct));
-        for (const auto& fi : file_info_factory_.create(ei, cds)) {
-            r.insert(generate_file_info(fi));
+        for (const auto cd : descriptor_factory_.create(e.name(), ct)) {
+            const auto il(includer_.includes_for_enumeration(cd));
+            const auto fi(file_info_factory_.create(ei, cd, il));
+            r.insert(format(fi));
 
             const auto header(file_types::header);
             const auto main(aspect_types::main);
@@ -201,7 +201,7 @@ workflow::result_type workflow::generate_exceptions_activity() const {
         const auto ct(sml::category_types::user_defined);
         const auto cds(descriptor_factory_.create(e.name(), ct));
         for (const auto& fi : file_info_factory_.create(ei, cds)) {
-            r.insert(generate_file_info(fi));
+            r.insert(format(fi));
 
             const auto header(file_types::header);
             const auto main(aspect_types::main);
@@ -265,7 +265,7 @@ workflow::result_type workflow::generate_classes_activity() const {
         const auto cds(descriptor_factory_.create(p.name(), ct, pt));
         const auto ci(generate_class_info_recursive(infos, p.name()));
         for (const auto& fi : file_info_factory_.create(p, ci, cds)) {
-            r.insert(generate_file_info(fi));
+            r.insert(format(fi));
 
             const auto header(file_types::header);
             const auto main(aspect_types::main);
@@ -293,7 +293,7 @@ workflow::result_type workflow::generate_namespaces_activity() const {
         auto cds(descriptor_factory_.create(model_));
 
         for (const auto& fi : file_info_factory_.create(ni, cds)) {
-            r.insert(generate_file_info(fi));
+            r.insert(format(fi));
 
             if (fi.file_type() == header && fi.aspect_type() == doc)
                 includer_.register_header(fi.facet_type(), fi.relative_path());
@@ -309,7 +309,7 @@ workflow::result_type workflow::generate_namespaces_activity() const {
         const auto ni(transformer_.transform(p));
         auto cds(descriptor_factory_.create(p.name()));
         for (const auto& fi : file_info_factory_.create(ni, cds)) {
-            r.insert(generate_file_info(fi));
+            r.insert(format(fi));
 
             if (fi.file_type() == header && fi.aspect_type() == doc)
                 includer_.register_header(fi.facet_type(), fi.relative_path());
@@ -336,7 +336,7 @@ workflow::result_type workflow::generate_registrars_activity() const {
 
     workflow::result_type r;
     for (const auto& fi : file_info_factory_.create_registrar(ri, cds)) {
-        r.insert(generate_file_info(fi));
+        r.insert(format(fi));
 
         const auto header(file_types::header);
         const auto registrar(aspect_types::registrar);
@@ -363,7 +363,7 @@ workflow::result_type workflow::generate_includers_activity() const {
 
     workflow::result_type r;
     for (const auto& fi : file_info_factory_.create_includer(cds))
-        r.insert(generate_file_info(fi));
+        r.insert(format(fi));
 
     BOOST_LOG_SEV(lg, debug) << "Finished generate includers activity.";
     return r;
@@ -382,7 +382,7 @@ workflow::result_type workflow::generate_visitors_activity() const {
         const auto vi(transformer_.transform_into_visitor(p));
         const auto cds(descriptor_factory_.create_visitor(p.name()));
         for (const auto& fi : file_info_factory_.create_visitor(vi, cds))
-            r.insert(generate_file_info(fi));
+            r.insert(format(fi));
     }
 
     BOOST_LOG_SEV(lg, debug) << "Finished generate visitors activity.";

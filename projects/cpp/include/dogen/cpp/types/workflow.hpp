@@ -120,8 +120,11 @@ private:
     result_type generate_file_infos_activity() const;
 
 private:
-    result_entry_type
-    generate_file_info(const file_info& fi) const;
+    /**
+     * @brief Format the file info into a C++ file representation.
+     */
+    result_entry_type format(const file_info& fi) const;
+
     result_type generate_cmakelists() const;
     result_entry_type generate_odb_options() const;
 
