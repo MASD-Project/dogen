@@ -418,14 +418,13 @@ void includer::append_std_dependencies(
         il.system().push_back(std_.include(std_types::pair));
 }
 
-void includer::append_relationship_dependencies(
-    const relationships& rel, const config::cpp_facet_types ft,
-    const file_types flt, inclusion_lists& il) const {
+void includer::append_relationship_dependencies(const relationships& rel,
+    const content_descriptor& cd, inclusion_lists& il) const {
 
     auto names(rel.names());
     using config::cpp_facet_types;
-    const bool is_header(flt == file_types::header);
-    const bool is_domain(ft == cpp_facet_types::types);
+    const bool is_header(cd.file_type() == file_types::header);
+    const bool is_domain(cd.facet_type() == cpp_facet_types::types);
     for(const auto n : rel.forward_decls()) {
         const bool is_primitive(n.meta_type() == sml::meta_types::primitive);
         const bool header_and_domain(is_header && is_domain);
@@ -442,16 +441,18 @@ void includer::append_relationship_dependencies(
          * which can be forward declared will forward declare it.
          */
         const auto fwd(aspect_types::forward_decls);
-        il.user().push_back(header_dependency(n, ft, fwd));
+        il.user().push_back(header_dependency(n, cd.facet_type(), fwd));
     }
 
+    const auto impl(file_types::implementation);
+    const bool is_implementation(cd.file_type() == impl);
     for(const auto n : names) {
         // handle all special models first
         if (n.model_name() == std_.model()) {
-            append_std_dependencies(ft, flt, n, il);
+            append_std_dependencies(cd.facet_type(), cd.file_type(), n, il);
             continue;
         } else if (n.model_name() == boost_.model()) {
-            append_boost_dependencies(ft, flt, n, il);
+            append_boost_dependencies(cd.facet_type(), cd.file_type(), n, il);
             continue;
         } else if (n.model_name() == primitive_model)
             continue;
@@ -471,30 +472,29 @@ void includer::append_relationship_dependencies(
          */
         const auto main(aspect_types::main);
         if (is_header && !is_primitive && is_domain)
-            il.user().push_back(header_dependency(n, ft, main));
+            il.user().push_back(header_dependency(n, cd.facet_type(), main));
 
         /*
          * rule 4: odb headers need the corresponding header file
          * for the dependency
          */
-        const bool is_odb(ft == cpp_facet_types::odb);
+        const bool is_odb(cd.facet_type() == cpp_facet_types::odb);
         if (is_header && !is_primitive && is_odb)
-            il.user().push_back(header_dependency(n, ft, main));
+            il.user().push_back(header_dependency(n, cd.facet_type(), main));
 
         /*
          * rule 5: hash, IO, serialisation, and test data
          * implementations need the corresponding header file for the
          * dependency
          */
-        const bool is_implementation(flt == file_types::implementation);
-        const bool is_hash(ft == cpp_facet_types::hash);
-        const bool is_io(ft == cpp_facet_types::io);
-        const bool is_ser(ft == cpp_facet_types::serialization);
-        const bool is_td(ft == cpp_facet_types::test_data);
+        const bool is_hash(cd.facet_type() == cpp_facet_types::hash);
+        const bool is_io(cd.facet_type() == cpp_facet_types::io);
+        const bool is_ser(cd.facet_type() == cpp_facet_types::serialization);
+        const bool is_td(cd.facet_type() == cpp_facet_types::test_data);
         const bool is_non_domain(is_hash || is_io || is_td || is_ser);
 
         if (is_implementation && is_non_domain)
-            il.user().push_back(header_dependency(n, ft, main));
+            il.user().push_back(header_dependency(n, cd.facet_type(), main));
 
         /*
          * rule 6: Domain implementation needs to include any files
@@ -503,7 +503,7 @@ void includer::append_relationship_dependencies(
         const bool forwarded(rel.forward_decls().find(n) !=
             rel.forward_decls().end());
         if (is_implementation && is_domain && forwarded)
-            il.user().push_back(header_dependency(n, ft, main));
+            il.user().push_back(header_dependency(n, cd.facet_type(), main));
 
         /*
          * rule 7: parents and children with integrated IO require IO
@@ -527,8 +527,8 @@ void includer::append_relationship_dependencies(
         /*
          * rule 8: domain headers require hashing for all keys.
          */
-        const bool is_header(flt == file_types::header);
-        const bool is_domain(ft == cpp_facet_types::types);
+        const bool is_header(cd.file_type() == file_types::header);
+        const bool is_domain(cd.facet_type() == cpp_facet_types::types);
         const bool is_primitive(k.meta_type() == sml::meta_types::primitive);
 
         const auto main(aspect_types::main);
@@ -540,19 +540,18 @@ void includer::append_relationship_dependencies(
         /*
          * rule 9: leaves require generators in test data.
          */
-        const bool is_implementation(flt == file_types::implementation);
-        const bool is_td(ft == cpp_facet_types::test_data);
+        const bool is_td(cd.facet_type() == cpp_facet_types::test_data);
         const auto main(aspect_types::main);
         if (is_implementation && is_td)
-            il.user().push_back(header_dependency(l, ft, main));
+            il.user().push_back(header_dependency(l, cd.facet_type(), main));
 
         /*
          * rule 10: base classes require registering all leaves in
          * serialisation implementation.
          */
-        const bool is_ser(ft == cpp_facet_types::serialization);
+        const bool is_ser(cd.facet_type() == cpp_facet_types::serialization);
         if (is_implementation && is_ser)
-            il.user().push_back(header_dependency(l, ft, main));
+            il.user().push_back(header_dependency(l, cd.facet_type(), main));
     }
 
     if (rel.visitor()) {
@@ -562,27 +561,23 @@ void includer::append_relationship_dependencies(
         const bool header_and_domain(is_header && is_domain);
         const auto main(aspect_types::main);
         if (header_and_domain)
-            il.user().push_back(header_dependency(*rel.visitor(), ft, main));
+            il.user().push_back(header_dependency(*rel.visitor(), cd.facet_type(), main));
     }
 }
 
-void includer::
-append_self_dependencies(dogen::sml::qname name,
-    const config::cpp_facet_types ft, const file_types flt,
-    const aspect_types at, const sml::meta_types mt,
+void includer::append_self_dependencies(const content_descriptor& cd,
     inclusion_lists& il) const {
-
     using config::cpp_facet_types;
-    const bool is_header(flt == file_types::header);
-    const bool is_domain(ft == cpp_facet_types::types);
+    const bool is_header(cd.file_type() == file_types::header);
+    const bool is_domain(cd.facet_type() == cpp_facet_types::types);
     const auto fwd(aspect_types::forward_decls);
-    if (at == aspect_types::forward_decls) {
+    if (cd.aspect_type() == aspect_types::forward_decls) {
         /*
          * rule 1: non-domain forward declarations depend on the
          * domain header.
          */
         if (is_header && !is_domain)
-            il.user().push_back(domain_header_dependency(name, fwd));
+            il.user().push_back(domain_header_dependency(cd.name(), fwd));
         return;
     }
 
@@ -590,10 +585,10 @@ append_self_dependencies(dogen::sml::qname name,
      * rule 2: if serialisation is enabled, domain headers depend on
      * the serialisation forward declaration headers.
      */
-    if (is_header && is_domain && serialization_enabled_
-        && mt == sml::meta_types::pod)
-        il.user().push_back(header_dependency(name,
-                cpp_facet_types::serialization, fwd));
+    const auto is_pod(cd.name().meta_type() == sml::meta_types::pod);
+    const auto ser(cpp_facet_types::serialization);
+    if (is_header && is_domain && serialization_enabled_ && is_pod)
+        il.user().push_back(header_dependency(cd.name(), ser, fwd));
 
     /*
      * rule 3: all header files depend on the domain header file,
@@ -601,14 +596,14 @@ append_self_dependencies(dogen::sml::qname name,
      */
     const auto main(aspect_types::main);
     if (is_header && !is_domain)
-        il.user().push_back(domain_header_dependency(name, main));
+        il.user().push_back(domain_header_dependency(cd.name(), main));
 
     /*
      * rule 4: all implementation files depend on the domain header file.
      */
-    const bool is_implementation(flt == file_types::implementation);
+    const bool is_implementation(cd.file_type() == file_types::implementation);
     if (is_implementation)
-        il.user().push_back(header_dependency(name, ft, main));
+        il.user().push_back(header_dependency(cd.name(), cd.facet_type(), main));
 }
 
 void includer::remove_duplicates(inclusion_lists& il) const {
@@ -633,8 +628,7 @@ includes_for_enumeration(const content_descriptor& cd) const {
 
     const auto ft(cd.facet_type());
     const auto flt(cd.file_type());
-    const auto at(cd.aspect_type());
-    append_self_dependencies(cd.name(), ft, flt, at, cd.name().meta_type(), r);
+    append_self_dependencies(cd, r);
 
     // functional
     using config::cpp_facet_types;
@@ -672,8 +666,7 @@ includes_for_exception(const content_descriptor& cd) const {
 
     const auto ft(cd.facet_type());
     const auto flt(cd.file_type());
-    const auto at(cd.aspect_type());
-    append_self_dependencies(cd.name(), ft, flt, at, cd.name().meta_type(), r);
+    append_self_dependencies(cd, r);
 
     // exception info
     using config::cpp_facet_types;
@@ -749,18 +742,16 @@ inclusion_lists includer::
 includes_for_pod(const content_descriptor& cd, const relationships& rel) const {
     const auto ft(cd.facet_type());
     const auto flt(cd.file_type());
-    const auto at(cd.aspect_type());
 
     inclusion_lists r;
-    const auto n(cd.name());
-    if (at == aspect_types::forward_decls) {
-        append_self_dependencies(n, ft, flt, at, n.meta_type(), r);
+    if (cd.aspect_type() == aspect_types::forward_decls) {
+        append_self_dependencies(cd, r);
         return r;
     }
 
     append_implementation_dependencies(rel, ft, flt, r);
-    append_relationship_dependencies(rel, ft, flt, r);
-    append_self_dependencies(n, ft, flt, at, n.meta_type(), r);
+    append_relationship_dependencies(rel, cd, r);
+    append_self_dependencies(cd, r);
 
     remove_duplicates(r);
     return r;

@@ -167,9 +167,8 @@ private:
      * specialisation/generalisation or association - e.g. the parent
      * of the type and all types of all properties it may have.
      */
-    void append_relationship_dependencies(
-        const relationships& rel, const config::cpp_facet_types ft,
-        const file_types flt, inclusion_lists& il) const;
+    void append_relationship_dependencies(const relationships& rel,
+        const content_descriptor& cd, inclusion_lists& il) const;
 
     /**
      * @brief Appends to the inclusion lists dependencies related to
@@ -178,9 +177,7 @@ private:
      * For instance, this is the case of the implementation file
      * including the header file.
      */
-    void append_self_dependencies(dogen::sml::qname name,
-        const config::cpp_facet_types ft, const file_types flt,
-        const aspect_types at, const sml::meta_types mt,
+    void append_self_dependencies(const content_descriptor& cd,
         inclusion_lists& il) const;
 
 public:

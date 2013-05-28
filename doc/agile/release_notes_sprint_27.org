@@ -10,17 +10,19 @@ This file contains all stories that were closed during sprint 27.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-05-28 Tue 00:02]
+Clock summary at [2013-05-28 Tue 09:04]
 
 | Headline                                                | Time    |       |       |
 |---------------------------------------------------------+---------+-------+-------|
-| *Total time*                                            | *26:09* |       |       |
+| *Total time*                                            | *26:42* |       |       |
 |---------------------------------------------------------+---------+-------+-------|
-| Development Stories Implemented                         |         | 26:09 |       |
+| Development Stories Implemented                         |         | 26:42 |       |
 | COMPLETED Make inclusion lists in includer a model type |         |       |  0:15 |
 | COMPLETED Clean up the SML to C++ transformer           |         |       | 23:16 |
 | COMPLETED Rename =enumeration_info= to =enum_info=      |         |       |  0:30 |
 | COMPLETED Use content descriptors in includer           |         |       |  2:08 |
+| IMPLEMENTATION Create a basic skeleton for manuals      |         |       |  0:10 |
+| IMPLEMENTATION Remove location request                  |         |       |  0:23 |
 #+end:
 
 *** COMPLETED Make inclusion lists in includer a model type
@@ -159,6 +161,20 @@ calls into workflow.
 **** COMPLETED Tidy-up factory
      CLOSED: [2013-05-28 Tue 00:02]
      CLOCK: [2013-05-27 Mon 23:56]--[2013-05-28 Tue 00:01] =>  0:05
+
+*** IMPLEMENTATION Create a basic skeleton for manuals
+    CLOCK: [2013-05-28 Tue 07:55]--[2013-05-28 Tue 08:05] =>  0:10
+
+*** IMPLEMENTATION Remove location request
+
+Now we have content descriptor, the location request is no longer required.
+
+**** IMPLEMENTATION Update all private methods in includer to use content descriptor
+     CLOCK: [2013-05-28 Tue 08:28]--[2013-05-28 Tue 08:38] =>  0:10
+     CLOCK: [2013-05-28 Tue 08:14]--[2013-05-28 Tue 08:18] =>  0:04
+     CLOCK: [2013-05-28 Tue 08:05]--[2013-05-28 Tue 08:14] =>  0:09
+
+**** Update locator to use content descriptor
 
 *** IMPLEMENTATION Move services into their own type                  :story:
 
