@@ -71,25 +71,12 @@ public:
     includer& operator=(const includer&) = delete;
 
 public:
-    includer(includer&& rhs)
-    : model_(std::move(rhs.model_)),
-      locator_(std::move(rhs.locator_)),
-      settings_(std::move(rhs.settings_)),
-      io_enabled_(std::move(rhs.io_enabled_)),
-      serialization_enabled_(std::move(rhs.serialization_enabled_)),
-      hash_enabled_(std::move(rhs.hash_enabled_)),
-      headers_for_facet_(std::move(rhs.headers_for_facet_)),
-      boost_(std::move(rhs.boost_)),
-      std_(std::move(rhs.std_)) { }
-
+    includer(includer&& rhs);
     includer(const sml::model& model,
         const locator& locator,
         const config::cpp_settings& settings);
 
 private:
-    location_request location_request_factory(config::cpp_facet_types ft,
-        file_types flt, aspect_types at, const sml::qname& name) const;
-
     /**
      * @brief Returns the include path to the domain header.
      *
@@ -117,12 +104,12 @@ public:
     void register_header(config::cpp_facet_types ft,
         const boost::filesystem::path& relative_path);
 
+private:
     /**
      * @brief Remove duplicates from inclusion lists
      */
     void remove_duplicates(inclusion_lists& il) const;
 
-private:
     /**
      * @brief Appends to the inclusion lists all dependencies related
      * to the formatter implementation.

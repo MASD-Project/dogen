@@ -59,19 +59,6 @@ to_header_guard_name(const boost::filesystem::path& rp) const {
     return stream.str();
 }
 
-location_request file_info_factory::
-location_request_factory(const content_descriptor& cd) const {
-    location_request r;
-    r.facet_type(cd.facet_type());
-    r.file_type(cd.file_type());
-    r.aspect_type(cd.aspect_type());
-    r.model_name(cd.name().model_name());
-    r.package_path(cd.name().package_path());
-    r.file_name(cd.name().type_name());
-    r.external_package_path(cd.name().external_package_path());
-    return r;
-}
-
 file_info file_info_factory::create(const content_descriptor& cd) const {
     file_info r;
     r.facet_type(cd.facet_type());
@@ -79,11 +66,9 @@ file_info file_info_factory::create(const content_descriptor& cd) const {
     r.aspect_type(cd.aspect_type());
     r.category_type(cd.category_type());
     r.meta_type(cd.name().meta_type());
+    r.file_path(locator_.absolute_path(cd));
 
-    const auto rq(location_request_factory(cd));
-    r.file_path(locator_.absolute_path(rq));
-
-    const auto rp(locator_.relative_logical_path(rq));
+    const auto rp(locator_.relative_logical_path(cd));
     r.relative_path(rp);
     if (cd.file_type() == file_types::header)
         r.header_guard(to_header_guard_name(rp));

@@ -57,6 +57,12 @@ namespace cpp {
 
 using utility::exception::invalid_enum_value;
 
+locator::locator(locator&& rhs)
+  : model_name_(std::move(rhs.model_name_)),
+    settings_(std::move(rhs.settings_)),
+    source_directory_(std::move(rhs.source_directory_)),
+    include_directory_(std::move(rhs.include_directory_)) { }
+
 locator::locator(const std::string& model_name,
     const config::cpp_settings& settings) :
     model_name_(model_name), settings_(settings) {
@@ -164,11 +170,11 @@ std::string locator::extension(file_types file_type) const {
 }
 
 boost::filesystem::path locator::relative_logical_path(
-    const location_request& request) const {
+    const content_descriptor& request) const {
     boost::filesystem::path r;
 
     if (settings_.split_project()) {
-        for(auto n : request.external_package_path())
+        for(auto n : request.name().external_package_path())
             r /= n;
         return r / relative_physical_path(request);
     }
@@ -177,23 +183,23 @@ boost::filesystem::path locator::relative_logical_path(
 }
 
 boost::filesystem::path locator::relative_physical_path(
-    const location_request& request) const {
+    const content_descriptor& request) const {
     boost::filesystem::path r;
 
     if (settings_.split_project())
-        r /= request.model_name();
+        r /= request.name().model_name();
     else if (request.file_type() == file_types::header) {
-        for(auto n : request.external_package_path())
+        for(auto n : request.name().external_package_path())
             r /= n;
-        r /= request.model_name();
+        r /= request.name().model_name();
     }
 
     r /= facet_directory(request.facet_type());
-    for(auto n : request.package_path())
+    for(auto n : request.name().package_path())
         r /= n;
 
     std::ostringstream stream;
-    stream << request.file_name()
+    stream << request.name().type_name()
            << aspect_postfix(request.aspect_type())
            << facet_postfix(request.facet_type())
            << extension(request.file_type());
@@ -203,7 +209,7 @@ boost::filesystem::path locator::relative_physical_path(
 }
 
 boost::filesystem::path
-locator::absolute_path(const location_request& request) const {
+locator::absolute_path(const content_descriptor& request) const {
 
     auto r(file_type_directory(request.file_type()));
     r /= relative_physical_path(request);

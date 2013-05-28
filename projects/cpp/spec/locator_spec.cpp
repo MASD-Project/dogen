@@ -28,8 +28,8 @@
 #include "dogen/config/types/cpp_facet_types.hpp"
 #include "dogen/config/types/cpp_settings.hpp"
 #include "dogen/config/io/cpp_settings_io.hpp"
+#include "dogen/cpp/types/content_descriptor.hpp"
 #include "dogen/cpp/types/locator.hpp"
-#include "dogen/cpp/types/location_request.hpp"
 #include "dogen/config/test/mock_settings_factory.hpp"
 
 using namespace dogen::cpp;
@@ -71,24 +71,23 @@ dogen::config::cpp_settings split_project_settings() {
         build_cpp_settings(src_dir, include_dir);
 }
 
-location_request request(cpp_facet_types ft, file_types flt,
+content_descriptor request(cpp_facet_types ft, file_types flt,
     std::string type_name, std::list<std::string> package_path,
     std::list<std::string> external_package_path) {
 
-    location_request r;
-
+    content_descriptor r;
     r.facet_type(ft);
     r.file_type(flt);
     r.aspect_type(aspect_types::main);
-    r.model_name(test_model_name);
-    r.package_path(package_path);
-    r.file_name(type_name);
-    r.external_package_path(external_package_path);
+    r.name().model_name(test_model_name);
+    r.name().package_path(package_path);
+    r.name().type_name(type_name);
+    r.name().external_package_path(external_package_path);
 
     return r;
 }
 
-location_request request(cpp_facet_types ft, file_types flt) {
+content_descriptor request(cpp_facet_types ft, file_types flt) {
     return request(ft, flt, type_name, package_path_1, external_package_path_1);
 }
 
@@ -126,7 +125,6 @@ BOOST_AUTO_TEST_CASE(split_project_configuration_results_in_expected_locations) 
     BOOST_CHECK(s.split_project());
 
     locator lm(test_model_name, s);
-    using dogen::cpp::location_request;
     auto rq(request(cpp_facet_types::types, file_types::header));
 
     boost::filesystem::path e("c/d/test/types/a/b/a_type.hpp");
@@ -183,7 +181,6 @@ BOOST_AUTO_TEST_CASE(non_split_project_configuration_results_in_expected_locatio
     BOOST_CHECK(!s.split_project());
 
     locator lm(test_model_name, s);
-    using dogen::cpp::location_request;
     auto rq(request(cpp_facet_types::types, file_types::header));
 
     boost::filesystem::path e("c/d/test/types/a/b/a_type.hpp");

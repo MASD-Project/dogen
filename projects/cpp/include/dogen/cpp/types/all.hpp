@@ -80,7 +80,6 @@
 #include "dogen/cpp/types/formatters/visitor.hpp"
 #include "dogen/cpp/types/includer.hpp"
 #include "dogen/cpp/types/inclusion_lists.hpp"
-#include "dogen/cpp/types/location_request.hpp"
 #include "dogen/cpp/types/locator.hpp"
 #include "dogen/cpp/types/namespace_info.hpp"
 #include "dogen/cpp/types/nested_type_info.hpp"

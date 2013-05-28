@@ -50,7 +50,6 @@ BOOST_AUTO_TEST_CASE(validate_serialization) {
     rountrip_type<aspect_types_generator>();
     rountrip_type<boost_types_generator>();
     rountrip_type<file_types_generator>();
-    rountrip_type<location_request_generator>();
     rountrip_type<relationships_generator>();
     rountrip_type<std_types_generator>();
     rountrip_type<class_info_generator>();

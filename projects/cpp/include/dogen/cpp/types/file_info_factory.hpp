@@ -27,7 +27,6 @@
 
 #include <boost/filesystem/path.hpp>
 #include "dogen/cpp/types/locator.hpp"
-#include "dogen/cpp/types/location_request.hpp"
 #include "dogen/cpp/types/inclusion_lists.hpp"
 #include "dogen/cpp/types/content_descriptor.hpp"
 #include "dogen/cpp/types/enum_info.hpp"
@@ -61,12 +60,6 @@ private:
      * header guard name.
      */
     std::string to_header_guard_name(const boost::filesystem::path& rp) const;
-
-    /**
-     * @brief Returns a location request for the given contents.
-     */
-    location_request
-    location_request_factory(const content_descriptor& cd) const;
 
 private:
     /**

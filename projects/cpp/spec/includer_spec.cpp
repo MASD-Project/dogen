@@ -28,7 +28,6 @@
 #include "dogen/utility/test/logging.hpp"
 #include "dogen/config/io/cpp_facet_types_io.hpp"
 #include "dogen/cpp/types/locator.hpp"
-#include "dogen/cpp/types/location_request.hpp"
 #include "dogen/config/test/mock_settings_factory.hpp"
 #include "dogen/cpp/types/includer.hpp"
 #include "dogen/sml/test/mock_model_factory.hpp"

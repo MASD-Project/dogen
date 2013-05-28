@@ -45,7 +45,6 @@ BOOST_AUTO_TEST_CASE(validate_hashing) {
     test_hashing<aspect_types_generator>();
     test_hashing<boost_types_generator>();
     test_hashing<file_types_generator>();
-    test_hashing<location_request_generator>();
     test_hashing<relationships_generator>();
     test_hashing<std_types_generator>();
     test_hashing<class_info_generator>();

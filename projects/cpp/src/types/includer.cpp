@@ -46,6 +46,17 @@ bool contains(const std::set<dogen::config::cpp_facet_types>& f,
 namespace dogen {
 namespace cpp {
 
+includer::includer(includer&& rhs)
+    : model_(std::move(rhs.model_)),
+      locator_(std::move(rhs.locator_)),
+      settings_(std::move(rhs.settings_)),
+      io_enabled_(std::move(rhs.io_enabled_)),
+      serialization_enabled_(std::move(rhs.serialization_enabled_)),
+      hash_enabled_(std::move(rhs.hash_enabled_)),
+      headers_for_facet_(std::move(rhs.headers_for_facet_)),
+      boost_(std::move(rhs.boost_)),
+      std_(std::move(rhs.std_)) { }
+
 includer::includer(const sml::model& model,
     const locator& locator,
     const config::cpp_settings& settings)
@@ -60,21 +71,6 @@ includer::includer(const sml::model& model,
     BOOST_LOG_SEV(lg, debug) << "Initial configuration: " << settings_;
 }
 
-location_request includer::
-location_request_factory(config::cpp_facet_types ft, file_types flt,
-    aspect_types at, const sml::qname& name) const {
-
-    location_request r;
-    r.facet_type(ft);
-    r.file_type(flt);
-    r.aspect_type(at);
-    r.model_name(name.model_name());
-    r.package_path(name.package_path());
-    r.file_name(name.type_name());
-    r.external_package_path(name.external_package_path());
-    return r;
-}
-
 void includer::register_header(config::cpp_facet_types ft,
     const boost::filesystem::path& relative_path) {
     BOOST_LOG_SEV(lg, debug) << "Registering header: "
@@ -86,19 +82,18 @@ void includer::register_header(config::cpp_facet_types ft,
 
 std::string includer::
 domain_header_dependency(const sml::qname& name, const aspect_types at) const {
-    const auto d(config::cpp_facet_types::types);
-    const auto h(file_types::header);
-    const auto rq(location_request_factory(d, h, at, name));
-    return locator_.relative_logical_path(rq).generic_string();
+    return header_dependency(name, config::cpp_facet_types::types, at);
 }
 
 std::string includer::header_dependency(
     const sml::qname& name, config::cpp_facet_types facet_type,
     const aspect_types at) const {
-    const auto h(file_types::header);
-    const auto main(at);
-    const auto rq(location_request_factory(facet_type, h, main, name));
-    return locator_.relative_logical_path(rq).generic_string();
+    content_descriptor cd;
+    cd.file_type(file_types::header);
+    cd.facet_type(facet_type);
+    cd.aspect_type(at);
+    cd.name(name);
+    return locator_.relative_logical_path(cd).generic_string();
 }
 
 void includer::

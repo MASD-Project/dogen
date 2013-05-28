@@ -44,7 +44,6 @@ BOOST_AUTO_TEST_CASE(validate_equality) {
     test_equality<aspect_types_generator>();
     test_equality<boost_types_generator>();
     test_equality<file_types_generator>();
-    test_equality<location_request_generator>();
     test_equality<relationships_generator>();
     test_equality<std_types_generator>();
     test_equality<class_info_generator>();

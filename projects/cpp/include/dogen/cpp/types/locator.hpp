@@ -29,7 +29,7 @@
 #include <string>
 #include <boost/filesystem/path.hpp>
 #include "dogen/config/types/cpp_settings.hpp"
-#include "dogen/cpp/types/location_request.hpp"
+#include "dogen/cpp/types/content_descriptor.hpp"
 #include "dogen/config/types/cpp_facet_types.hpp"
 #include "dogen/cpp/types/file_types.hpp"
 #include "dogen/cpp/types/aspect_types.hpp"
@@ -49,12 +49,7 @@ public:
     locator& operator=(const locator&) = delete;
 
 public:
-    locator(locator&& rhs)
-    : model_name_(std::move(rhs.model_name_)),
-      settings_(std::move(rhs.settings_)),
-      source_directory_(std::move(rhs.source_directory_)),
-      include_directory_(std::move(rhs.include_directory_)) { }
-
+    locator(locator&& rhs);
     locator(const std::string& model_name,
         const config::cpp_settings& settings);
 
@@ -76,7 +71,7 @@ public:
      * take into account existing namespaces the user may have already
      * defined.
      */
-    path relative_logical_path(const location_request& request) const;
+    path relative_logical_path(const content_descriptor& request) const;
 
     /**
      * @brief Returns the path to the requested location, excluding
@@ -86,13 +81,13 @@ public:
      * physical path matches the location on the hard drive for the
      * artefact in question.
      */
-    path relative_physical_path(const location_request& request) const;
+    path relative_physical_path(const content_descriptor& request) const;
 
     /**
      * @brief Returns the absolute path for the request, taking into
      * account source and include directories, etc.
      */
-    path absolute_path(const location_request& request) const;
+    path absolute_path(const content_descriptor& request) const;
 
     /**
      * @brief Returns an absolute path into the source directory for
