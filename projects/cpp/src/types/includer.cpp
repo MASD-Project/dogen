@@ -307,36 +307,35 @@ void includer::append_boost_dependencies(
     }
 }
 
-void includer::append_std_dependencies(
-    const config::cpp_facet_types ft, const file_types flt,
-    const dogen::sml::qname& qname,
+void includer::append_std_dependencies(const content_descriptor& cd,
     inclusion_lists& il) const {
 
-    const std::string type_name(qname.type_name());
+    const std::string type_name(cd.name().type_name());
     using config::cpp_facet_types;
 
     /*
      * std::string
      */
-    const bool is_header(flt == file_types::header);
-    const bool is_domain(ft == cpp_facet_types::types);
+    const bool is_header(cd.file_type() == file_types::header);
+    const bool is_domain(cd.facet_type() == cpp_facet_types::types);
     const bool is_string(type_name == std_.type(std_types::string));
     if (is_header && is_domain && is_string)
         il.system().push_back(std_.include(std_types::string));
 
-    const bool is_serialization(ft == cpp_facet_types::serialization);
-    const bool is_implementation(flt == file_types::implementation);
+    const auto ser(cpp_facet_types::serialization);
+    const bool is_serialization(cd.facet_type() == ser);
+    const bool is_implementation(cd.file_type() == file_types::implementation);
     if (is_implementation && is_serialization && is_string)
         il.system().push_back(boost_.include(boost_types::string));
 
-    const bool is_test_data(ft == cpp_facet_types::test_data);
+    const bool is_test_data(cd.facet_type() == cpp_facet_types::test_data);
     if (is_implementation && is_test_data && is_string)
         il.system().push_back(std_.include(std_types::sstream));
 
     /*
      * std::vector
      */
-    const bool is_vector(type_name == std_.type(std_types::vector));
+const bool is_vector(type_name == std_.type(std_types::vector));
     if (is_header && is_domain && is_vector)
         il.system().push_back(std_.include(std_types::vector));
 
@@ -346,7 +345,7 @@ void includer::append_std_dependencies(
     /*
      * std::list
      */
-    const bool is_list(type_name == std_.type(std_types::list));
+const bool is_list(type_name == std_.type(std_types::list));
     if (is_header && is_domain && is_list)
         il.system().push_back(std_.include(std_types::list));
 
@@ -356,7 +355,7 @@ void includer::append_std_dependencies(
     /*
      * std::deque
      */
-    const bool is_deque(type_name == std_.type(std_types::deque));
+const bool is_deque(type_name == std_.type(std_types::deque));
     if (is_header && is_domain && is_deque)
         il.system().push_back(std_.include(std_types::deque));
 
@@ -382,7 +381,7 @@ void includer::append_std_dependencies(
         if (!epp.empty())
             private_ser_header = epp.front() + "/" + private_ser_header;
 
-        if (is_implementation && is_serialization && qname.type_name() == type)
+        if (is_implementation && is_serialization && type_name== type)
             il.user().push_back(private_ser_header);
         });
 
@@ -405,7 +404,7 @@ void includer::append_std_dependencies(
     /*
      * primitives
      */
-    if (is_header && is_domain && std_.is_primitive(qname.type_name())) {
+    if (is_header && is_domain && std_.is_primitive(type_name)) {
         const auto t(std_.string_to_type(type_name));
         il.system().push_back(std_.include(t));
     }
@@ -447,9 +446,12 @@ void includer::append_relationship_dependencies(const relationships& rel,
     const auto impl(file_types::implementation);
     const bool is_implementation(cd.file_type() == impl);
     for(const auto n : names) {
+        auto cd2(cd);
+        cd2.name(n);
+
         // handle all special models first
         if (n.model_name() == std_.model()) {
-            append_std_dependencies(cd.facet_type(), cd.file_type(), n, il);
+            append_std_dependencies(cd2, il);
             continue;
         } else if (n.model_name() == boost_.model()) {
             append_boost_dependencies(cd.facet_type(), cd.file_type(), n, il);

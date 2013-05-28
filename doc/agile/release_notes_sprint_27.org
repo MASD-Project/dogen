@@ -10,19 +10,19 @@ This file contains all stories that were closed during sprint 27.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-05-28 Tue 09:04]
+Clock summary at [2013-05-28 Tue 18:18]
 
 | Headline                                                | Time    |       |       |
 |---------------------------------------------------------+---------+-------+-------|
-| *Total time*                                            | *26:42* |       |       |
+| *Total time*                                            | *27:02* |       |       |
 |---------------------------------------------------------+---------+-------+-------|
-| Development Stories Implemented                         |         | 26:42 |       |
+| Development Stories Implemented                         |         | 27:02 |       |
 | COMPLETED Make inclusion lists in includer a model type |         |       |  0:15 |
 | COMPLETED Clean up the SML to C++ transformer           |         |       | 23:16 |
 | COMPLETED Rename =enumeration_info= to =enum_info=      |         |       |  0:30 |
 | COMPLETED Use content descriptors in includer           |         |       |  2:08 |
 | IMPLEMENTATION Create a basic skeleton for manuals      |         |       |  0:10 |
-| IMPLEMENTATION Remove location request                  |         |       |  0:23 |
+| IMPLEMENTATION Remove location request                  |         |       |  0:43 |
 #+end:
 
 *** COMPLETED Make inclusion lists in includer a model type
@@ -170,6 +170,8 @@ calls into workflow.
 Now we have content descriptor, the location request is no longer required.
 
 **** IMPLEMENTATION Update all private methods in includer to use content descriptor
+     CLOCK: [2013-05-28 Tue 18:09]--[2013-05-28 Tue 18:23] =>  0:14
+     CLOCK: [2013-05-28 Tue 17:50]--[2013-05-28 Tue 18:02] =>  0:12
      CLOCK: [2013-05-28 Tue 08:28]--[2013-05-28 Tue 08:38] =>  0:10
      CLOCK: [2013-05-28 Tue 08:14]--[2013-05-28 Tue 08:18] =>  0:04
      CLOCK: [2013-05-28 Tue 08:05]--[2013-05-28 Tue 08:14] =>  0:09

@@ -154,9 +154,7 @@ private:
      * @brief Handles all dependencies to types in the standard
      * library.
      */
-    void append_std_dependencies(
-        const config::cpp_facet_types ft, const file_types flt,
-        const dogen::sml::qname& qname,
+    void append_std_dependencies(const content_descriptor& cd,
         inclusion_lists& il) const;
 
     /**
