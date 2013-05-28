@@ -137,9 +137,8 @@ private:
      * compile, but on the flip side, all inclusion related code is
      * kept in one place.
      */
-    void append_implementation_dependencies(
-        const relationships& rel, const config::cpp_facet_types ft,
-        const file_types flt, inclusion_lists& il) const;
+    void append_implementation_dependencies(const relationships& rel,
+        const content_descriptor& cd, inclusion_lists& il) const;
 
     /**
      * @brief Handles all dependencies to types in the boost
