@@ -53,33 +53,55 @@ public:
     locator(const std::string& model_name,
         const config::cpp_settings& settings);
 
-private:
-    std::string facet_directory(config::cpp_facet_types facet) const;
-    std::string facet_postfix(config::cpp_facet_types facet) const;
-    std::string aspect_postfix(aspect_types aspect) const;
-    boost::filesystem::path file_type_directory(file_types file_type) const;
-    std::string extension(file_types file_type) const;
-
 public:
     typedef boost::filesystem::path path;
 
+private:
     /**
-     * @brief Returns the path to the requested location taking into
-     * account the external package path.
+     * @brief Returns the directory that houses the given facet.
+     */
+    std::string facet_directory(const config::cpp_facet_types ft) const;
+
+    /**
+     * @brief Returns a postfix to append to filenames in a given
+     * facet.
+     */
+    std::string facet_postfix(const config::cpp_facet_types ft) const;
+
+    /**
+     * @brief Returns a postfix to append to filenames that implement
+     * a certain aspect.
+     */
+    std::string aspect_postfix(const aspect_types at) const;
+
+    /**
+     * @brief Returns the directory for the given file type.
+     */
+    path file_type_directory(const file_types flt) const;
+
+    /**
+     * @brief Returns the extension for the given file type.
+     */
+    std::string extension(const file_types flt) const;
+
+public:
+    /**
+     * @brief Returns the path to place a file with content described
+     * by the supplied content descriptor.
      *
-     * Logical relative paths are used for include files; they need to
-     * take into account existing namespaces the user may have already
-     * defined.
+     * @b Includes the external package path. Logical relative paths
+     * are used for include files; they need to take into account
+     * existing namespaces the user may have already defined.
      */
     path relative_logical_path(const content_descriptor& cd) const;
 
     /**
-     * @brief Returns the path to the requested location, excluding
-     * the external package path.
+     * @brief Returns the path to place a file with content described
+     * by the supplied content descriptor.
      *
-     * When combined with the source or include directories, the
-     * physical path matches the location on the hard drive for the
-     * artefact in question.
+     * @b Excludes the external package path. When combined with the
+     * source or include directories, the physical path matches the
+     * location on the hard drive for the artefact in question.
      */
     path relative_physical_path(const content_descriptor& cd) const;
 

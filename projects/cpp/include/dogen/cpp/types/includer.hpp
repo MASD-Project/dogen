@@ -41,7 +41,6 @@
 #include "dogen/config/types/cpp_facet_types.hpp"
 #include "dogen/cpp/types/file_types.hpp"
 #include "dogen/sml/types/model.hpp"
-#include "dogen/sml/types/pod.hpp"
 #include "dogen/cpp/types/inclusion_lists.hpp"
 #include "dogen/cpp/types/content_descriptor.hpp"
 

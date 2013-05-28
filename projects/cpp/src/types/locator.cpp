@@ -86,12 +86,12 @@ locator::locator(const std::string& model_name,
         << " model name: " << model_name;
 }
 
-std::string locator::facet_directory(config::cpp_facet_types facet) const {
+std::string locator::facet_directory(const config::cpp_facet_types ft) const {
     if (settings_.disable_facet_folders())
         return empty;
 
     using config::cpp_facet_types;
-    switch(facet) {
+    switch(ft) {
     case cpp_facet_types::io: return settings_.io_facet_folder(); break;
     case cpp_facet_types::types: return settings_.domain_facet_folder(); break;
     case cpp_facet_types::hash: return settings_.hash_facet_folder(); break;
@@ -109,12 +109,12 @@ std::string locator::facet_directory(config::cpp_facet_types facet) const {
 }
 
 std::string locator::
-facet_postfix(config::cpp_facet_types facet) const {
+facet_postfix(const config::cpp_facet_types ft) const {
     if (settings_.disable_unique_file_names())
         return empty;
 
     using config::cpp_facet_types;
-    switch(facet) {
+    switch(ft) {
     case cpp_facet_types::io: return io_postfix; break;
     case cpp_facet_types::types: return domain_postfix; break;
     case cpp_facet_types::hash: return hash_postfix; break;
@@ -128,11 +128,11 @@ facet_postfix(config::cpp_facet_types facet) const {
 }
 
 std::string
-locator::aspect_postfix(aspect_types aspect) const {
+locator::aspect_postfix(const aspect_types at) const {
     if (settings_.disable_unique_file_names())
         return empty;
 
-    switch(aspect) {
+    switch(at) {
     case aspect_types::forward_decls: return forward_decls_postfix; break;
     case aspect_types::visitor: return visitor_postfix; break;
     case aspect_types::main:
@@ -148,8 +148,8 @@ locator::aspect_postfix(aspect_types aspect) const {
 }
 
 boost::filesystem::path
-locator::file_type_directory(file_types file_type) const {
-    switch(file_type) {
+locator::file_type_directory(const file_types flt) const {
+    switch(flt) {
     case file_types::header: return include_directory_; break;
     case file_types::implementation: return source_directory_; break;
     default:
@@ -158,8 +158,8 @@ locator::file_type_directory(file_types file_type) const {
     }
 }
 
-std::string locator::extension(file_types file_type) const {
-    switch(file_type) {
+std::string locator::extension(const file_types flt) const {
+    switch(flt) {
     case file_types::header: return settings_.header_extension(); break;
     case file_types::implementation:
         return settings_.source_extension(); break;
