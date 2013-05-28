@@ -71,7 +71,7 @@ public:
      * take into account existing namespaces the user may have already
      * defined.
      */
-    path relative_logical_path(const content_descriptor& request) const;
+    path relative_logical_path(const content_descriptor& cd) const;
 
     /**
      * @brief Returns the path to the requested location, excluding
@@ -81,13 +81,13 @@ public:
      * physical path matches the location on the hard drive for the
      * artefact in question.
      */
-    path relative_physical_path(const content_descriptor& request) const;
+    path relative_physical_path(const content_descriptor& cd) const;
 
     /**
-     * @brief Returns the absolute path for the request, taking into
-     * account source and include directories, etc.
+     * @brief Returns the absolute path for the descriptor, taking
+     * into account source and include directories, etc.
      */
-    path absolute_path(const content_descriptor& request) const;
+    path absolute_path(const content_descriptor& cd) const;
 
     /**
      * @brief Returns an absolute path into the source directory for

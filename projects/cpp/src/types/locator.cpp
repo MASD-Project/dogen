@@ -170,49 +170,49 @@ std::string locator::extension(file_types file_type) const {
 }
 
 boost::filesystem::path locator::relative_logical_path(
-    const content_descriptor& request) const {
+    const content_descriptor& cd) const {
     boost::filesystem::path r;
 
     if (settings_.split_project()) {
-        for(auto n : request.name().external_package_path())
+        for(auto n : cd.name().external_package_path())
             r /= n;
-        return r / relative_physical_path(request);
+        return r / relative_physical_path(cd);
     }
 
-    return relative_physical_path(request);
+    return relative_physical_path(cd);
 }
 
 boost::filesystem::path locator::relative_physical_path(
-    const content_descriptor& request) const {
+    const content_descriptor& cd) const {
     boost::filesystem::path r;
 
     if (settings_.split_project())
-        r /= request.name().model_name();
-    else if (request.file_type() == file_types::header) {
-        for(auto n : request.name().external_package_path())
+        r /= cd.name().model_name();
+    else if (cd.file_type() == file_types::header) {
+        for(auto n : cd.name().external_package_path())
             r /= n;
-        r /= request.name().model_name();
+        r /= cd.name().model_name();
     }
 
-    r /= facet_directory(request.facet_type());
-    for(auto n : request.name().package_path())
+    r /= facet_directory(cd.facet_type());
+    for(auto n : cd.name().package_path())
         r /= n;
 
     std::ostringstream stream;
-    stream << request.name().type_name()
-           << aspect_postfix(request.aspect_type())
-           << facet_postfix(request.facet_type())
-           << extension(request.file_type());
+    stream << cd.name().type_name()
+           << aspect_postfix(cd.aspect_type())
+           << facet_postfix(cd.facet_type())
+           << extension(cd.file_type());
     r /= stream.str();
 
     return r;
 }
 
 boost::filesystem::path
-locator::absolute_path(const content_descriptor& request) const {
+locator::absolute_path(const content_descriptor& cd) const {
 
-    auto r(file_type_directory(request.file_type()));
-    r /= relative_physical_path(request);
+    auto r(file_type_directory(cd.file_type()));
+    r /= relative_physical_path(cd);
     return r;
 }
 
