@@ -1,4 +1,0 @@
-#+title: Dogen Developer Guide
-#+options: author:nil
-
-* Introduction

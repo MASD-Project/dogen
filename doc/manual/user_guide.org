@@ -1,4 +1,0 @@
-#+title: Dogen User Guide
-#+options: author:nil
-
-* Introduction

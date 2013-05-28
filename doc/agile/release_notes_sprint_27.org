@@ -10,19 +10,19 @@ This file contains all stories that were closed during sprint 27.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-05-28 Tue 18:44]
+Clock summary at [2013-05-28 Tue 23:05]
 
 | Headline                                                | Time    |       |       |
 |---------------------------------------------------------+---------+-------+-------|
-| *Total time*                                            | *27:27* |       |       |
+| *Total time*                                            | *28:31* |       |       |
 |---------------------------------------------------------+---------+-------+-------|
-| Development Stories Implemented                         |         | 27:27 |       |
+| Development Stories Implemented                         |         | 28:31 |       |
 | COMPLETED Make inclusion lists in includer a model type |         |       |  0:15 |
 | COMPLETED Clean up the SML to C++ transformer           |         |       | 23:16 |
 | COMPLETED Rename =enumeration_info= to =enum_info=      |         |       |  0:30 |
 | COMPLETED Use content descriptors in includer           |         |       |  2:08 |
-| IMPLEMENTATION Create a basic skeleton for manuals      |         |       |  0:10 |
-| IMPLEMENTATION Remove location request                  |         |       |  1:08 |
+| COMPLETED Remove location request                       |         |       |  1:57 |
+| COMPLETED Create a basic skeleton for manual            |         |       |  0:25 |
 #+end:
 
 *** COMPLETED Make inclusion lists in includer a model type
@@ -162,14 +162,13 @@ calls into workflow.
      CLOSED: [2013-05-28 Tue 00:02]
      CLOCK: [2013-05-27 Mon 23:56]--[2013-05-28 Tue 00:01] =>  0:05
 
-*** IMPLEMENTATION Create a basic skeleton for manuals
-    CLOCK: [2013-05-28 Tue 07:55]--[2013-05-28 Tue 08:05] =>  0:10
-
-*** IMPLEMENTATION Remove location request
+*** COMPLETED Remove location request
+    CLOSED: [2013-05-28 Tue 22:49]
 
 Now we have content descriptor, the location request is no longer required.
 
-**** IMPLEMENTATION Update all private methods in includer to use content descriptor
+**** COMPLETED Update all private methods in includer to use content descriptor
+     CLOSED: [2013-05-28 Tue 22:48]
      CLOCK: [2013-05-28 Tue 18:37]--[2013-05-28 Tue 18:44] =>  0:07
      CLOCK: [2013-05-28 Tue 18:25]--[2013-05-28 Tue 18:37] =>  0:12
      CLOCK: [2013-05-28 Tue 18:09]--[2013-05-28 Tue 18:23] =>  0:14
@@ -178,7 +177,19 @@ Now we have content descriptor, the location request is no longer required.
      CLOCK: [2013-05-28 Tue 08:14]--[2013-05-28 Tue 08:18] =>  0:04
      CLOCK: [2013-05-28 Tue 08:05]--[2013-05-28 Tue 08:14] =>  0:09
 
-**** Update locator to use content descriptor
+**** COMPLETED Update locator to use content descriptor
+     CLOSED: [2013-05-28 Tue 22:49]
+     CLOCK: [2013-05-28 Tue 22:00]--[2013-05-28 Tue 22:49] =>  0:49
+
+*** COMPLETED Create a basic skeleton for manual
+    CLOSED: [2013-05-28 Tue 23:05]
+    CLOCK: [2013-05-28 Tue 22:49]--[2013-05-28 Tue 23:04] =>  0:15
+    CLOCK: [2013-05-28 Tue 07:55]--[2013-05-28 Tue 08:05] =>  0:10
+
+Copy a basic skeleton structure from the ODB manual and define basic
+org to HTML formatting.
+
+See: [[http://www.codesynthesis.com/products/odb/doc/manual.xhtml][C++ Object Persistence with ODB]]
 
 *** IMPLEMENTATION Move services into their own type                  :story:
 
