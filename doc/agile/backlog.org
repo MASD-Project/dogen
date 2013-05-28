@@ -87,11 +87,16 @@ it to a numeric value in brackets.
 
 *** Loading external models from file
 
-We should really use something like boost property tree to allow user
-defined models to be loaded from file. We can then convert primitives,
+We should really use something like boost property tree to allow
+system models to be loaded from file. We can then convert primitives,
 boost, STL, etc to this. These "models" would then output both a SML
 model as well as some kind of CPP representation with include files,
 etc.
+
+We should call these "profiles" in the sense of ODB (the Qt profile,
+the boost profile, etc). A file should contain all types for that
+profile, from which we generate both the SML model and the inclusions
+for includer.
 
 *** Add C++ model XML tests
 
