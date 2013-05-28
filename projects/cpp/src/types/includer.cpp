@@ -199,24 +199,23 @@ append_implementation_dependencies(const relationships& rel,
 }
 
 void includer::append_boost_dependencies(
-    const config::cpp_facet_types ft, const file_types flt,
-    const dogen::sml::qname& qname,
-    inclusion_lists& il) const {
+    const content_descriptor& cd, inclusion_lists& il) const {
 
-    const std::string type_name(qname.type_name());
+    const std::string type_name(cd.name().type_name());
     using config::cpp_facet_types;
 
     /*
      * boost::shared_ptr
      */
-    const bool is_header(flt == file_types::header);
-    const bool is_domain(ft == cpp_facet_types::types);
+    const bool is_header(cd.file_type() == file_types::header);
+    const bool is_domain(cd.facet_type() == cpp_facet_types::types);
     const bool is_sp(type_name == boost_.type(boost_types::shared_ptr));
     if (is_header && is_domain && is_sp)
         il.system().push_back(boost_.include(boost_types::shared_ptr));
 
-    const bool is_serialization(ft == cpp_facet_types::serialization);
-    const bool is_implementation(flt == file_types::implementation);
+    const bool is_serialization(
+        cd.facet_type() == cpp_facet_types::serialization);
+    const bool is_implementation(cd.file_type() == file_types::implementation);
     if (is_implementation && is_serialization && is_sp)
         il.system().push_back(
             boost_.include(boost_types::serialization_shared_ptr));
@@ -240,7 +239,8 @@ void includer::append_boost_dependencies(
         il.system().push_back(boost_.include(boost_types::variant));
 
     if (is_implementation && is_serialization && is_variant)
-        il.system().push_back(boost_.include(boost_types::serialization_variant));
+        il.system().push_back(
+            boost_.include(boost_types::serialization_variant));
 
     /*
      * boost::filesystem::path
@@ -249,12 +249,11 @@ void includer::append_boost_dependencies(
     if (is_header && is_domain && is_path)
         il.system().push_back(boost_.include(boost_types::filesystem_path));
 
-    const bool is_test_data(ft == cpp_facet_types::test_data);
+    const bool is_test_data(cd.facet_type() == cpp_facet_types::test_data);
     if (is_implementation && is_test_data && is_path)
         il.system().push_back(std_.include(std_types::sstream));
 
-    const bool is_io(ft == cpp_facet_types::io);
-    // FIXME: removed  || p.parent_name() || p.is_parent()
+    const bool is_io(cd.facet_type() == cpp_facet_types::io);
     const bool domain_with_io(is_domain && (settings_.use_integrated_io()));
     const bool io_without_iio(is_io && !settings_.use_integrated_io());
 
@@ -457,7 +456,7 @@ void includer::append_relationship_dependencies(const relationships& rel,
             append_std_dependencies(cd2, il);
             continue;
         } else if (n.model_name() == boost_.model()) {
-            append_boost_dependencies(cd.facet_type(), cd.file_type(), n, il);
+            append_boost_dependencies(cd2, il);
             continue;
         } else if (n.model_name() == primitive_model)
             continue;

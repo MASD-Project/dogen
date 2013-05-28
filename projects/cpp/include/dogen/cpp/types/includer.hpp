@@ -144,9 +144,7 @@ private:
      * @brief Handles all dependencies to types in the boost
      * libraries.
      */
-    void append_boost_dependencies(
-        const config::cpp_facet_types ft, const file_types flt,
-        const dogen::sml::qname& qname,
+    void append_boost_dependencies(const content_descriptor& cd,
         inclusion_lists& il) const;
 
     /**
