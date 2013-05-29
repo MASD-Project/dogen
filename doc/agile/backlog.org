@@ -11,15 +11,10 @@ This file contains all stories that haven't been assigned to a sprint.
 
 Stories that we intend to look at, at some point.
 
-*** Move includer out of file info factory
+*** Consider renaming formatters
 
-We should be able to pass in the inclusion lists into the factory
-rather than having it collaborate with the includer.
-
-*** Move extractor out of includer
-
-We should be able to pass in a list of qnames plus the target qname
-into the includer.
+These are not really formatters; not sure what the right name should
+be though; templates?
 
 *** Add support for object cloning
 
@@ -73,11 +68,6 @@ Now we just need a way of creating some generic interfaces that take a
 wire client and a wire service and plug the framer and the dispatcher
 into it.
 
-*** Make inclusion lists in includer a model type
-
-We created a class inlined in the header for no good reason. make it a
-model type.
-
 *** Inserter for enumerations shouldn't throw
 
 We only use the inserter for debug dumping and it could happen that we
@@ -98,13 +88,10 @@ the boost profile, etc). A file should contain all types for that
 profile, from which we generate both the SML model and the inclusions
 for includer.
 
-*** Add C++ model XML tests
+Since INI files do not support nesting/collections, we probably need
+to use XML or JSON.
 
-We should take an SML model, convert it into a list of =file_info= and
-save that down as XML. This will be our expected. We should then load
-the file, convert it into a =std::unordered_map= where the file name
-is the key and the =file_info= is the value. We do the same thing with
-current code and then compare the two.
+See [[http://www.boost.org/doc/libs/1_53_0/doc/html/boost_propertytree/parsers.html#boost_propertytree.parsers.ini_parser][boost property tree]].
 
 *** Generate state diagrams
 
@@ -357,11 +344,20 @@ models:
 - property must have non-empty name.
 - is versioned pod must have a property called version.
 - string table cannot have duplicate entries.
-- [[*Issue%20error%20when%20a%20property%20is%20a%20value%20of%20an%20abstract%20class][Issue error when a property is a value of an abstract class]]
-- [[*Test%20relationships%20between%20pods%20and%20other%20meta%20types][Test relationships between pods and other meta types]]
+- Issue error when a property is a value of an abstract class: SML
+  should fail to merge if the user attempts to create a property of a
+  base class. It should allow pointers to the base class though.
+- Test relationships between pods and other meta types: We should
+  validate that pods are only related to other pods - e.g. they cannot
+  inherit from exception or enumeration or vice-versa. Add tests for
+  this.
+- Its not possible to be immutable and fluent.
+- We don't support generic types (see [[Supporting%20user%20defined%20generic%20types][Supporting user defined generic
+types]]) so we should throw if a user attempts to use them.
 
 For merged models:
 
+- issue error when a property is a value of an abstract class
 - properties exist in merged model.
 
 Validator should provide contextual validation error messages:
@@ -380,36 +376,29 @@ this (node, nested qname, etc).
 
 This would be part of the injection framework.
 
-*** Clean up C++ model                                                 :epic:
+*** Move extractor from C++ model into SML                             :story:
 
-C++ model has become a bit of a mess. This story is a general bucket
-to capture all of the refactorings that can/need to be done to
-it. These will be broken down into stories and shipped in iterations.
+Extractor should be split into two. The first part is SML specific and
+its just creating a different representation of the information
+already available in SML: dependencies such as parents, properties,
+etc. This should be moved into SML.
 
-- extractor should be split into two. The first part is SML specific
-  and its just creating a different representation of the information
-  already available in SML: dependencies such as parents, properties,
-  etc. This should be moved into SML. The second part is C++ specific
-  (i.e. dependencies which we gained because of the specifics of the
-  C++ implementation). To some extent this could be done by adding a
-  backend specific "dependency manager" which could add to SML any
-  dependencies that are specific to a backend. This ties in nicely
-  with the fact that we already have a =boost= model, a =std= model
-  etc - all C++ specific. For the types which are in those models, its
-  simply a case of adding them to SML. The relationship could have a
-  "implementation specific dependency" bucket for this. It would have
-  to take into account things such as facets etc which SML knows not
-  of. The last set of dependencies are also implementation specific
-  but they are not in the =boost=, =std= etc models. These are things
-  like ostream, etc which only make sense as header files. For these,
-  the includer would have to continue doing what it does.
-- It should be possible to [[*Refactor%20boost%20and%20std%20helpers%20and%20enums][configure new models]] via text files. The
-  includer should have an inteface that allows adding types at run
-  time. However, we would also need SML support for this.
-- create a string table for all the strings in formatter such as
-  colon, semi-colon, ls_colon (left-spaced colon), etc.
-- consider renaming formatters. Not sure what the right name should be
-  though; templates?
+The second part is C++ specific (i.e. dependencies which we gained
+because of the specifics of the C++ implementation). To some extent
+this could be done by adding a backend specific "dependency manager"
+which could add to SML any dependencies that are specific to a
+backend. This ties in nicely with the fact that we already have a
+=boost= model, a =std= model etc - all C++ specific. For the types
+which are in those models, its simply a case of adding them to
+SML.
+
+The relationship could have a "implementation specific dependency"
+bucket for this. It would have to take into account things such as
+facets etc which SML knows not of. The last set of dependencies are
+also implementation specific but they are not in the =boost=, =std=
+etc models. These are things like ostream, etc which only make sense
+as header files. For these, the includer would have to continue doing
+what it does.
 
 *** Rename implementation specific parameters                         :story:
 
@@ -429,6 +418,11 @@ Actually, these are more like generic parameters:
 
 Also, when the string table support has been added, we need to create
 a string table with all valid values for the parameter keys.
+
+Name choices:
+
+- opaque parameters
+- untyped parameters
 
 *** Add support for bitsets
 
@@ -475,24 +469,6 @@ stereotype in a class that has parents.
 In order to do performance testing of the dia model we should create
 an interface for text reader and implement it as a mock. This will
 avoid the overhead of reading stuff from the hard drive.
-
-*** Visitor header file not included in includer
-
-At present the visitor header file is not being added to the main
-includer. We need a common solution for all system files including
-keys, etc.
-
-*** Use leaves to determine visitor accept methods
-
-At present we implemented visitor in terms of the full inheritance
-graph. In reality, we only need the leafs because for all the
-non-leafs, we will not have implementations for accept (which makes
-sense as these classes cannot be instantiated). We should try to
-implement the visitor class only in terms of leaves, removing most of
-the inheritance graph functionality.
-
-The same logic applies to includes of course. We probably don't even
-need a different method in extractor.
 
 *** Add string table support
 
@@ -589,6 +565,8 @@ specific parameters that tells dogen what valid values an enumerator
 can have. We can then generate a from string method that does the
 appropriate conversions.
 
+These should be passed in as implementation specific parameters.
+
 *** Enumeration string dumps could be configurable                    :story:
 
 It should be possible to pass in a string value as an implementation
@@ -627,8 +605,9 @@ Relation to keys:
 
 *** Private and public includes
 
-NOTE: We should use the terms internal and external to avoid confusion
-with C++ scopes. This follows Microsoft terminology for C# assemblies.
+NOTE: We should use the terms =internal= and =external= to avoid
+confusion with C++ scopes. This follows Microsoft terminology for C#
+assemblies.
 
 At present we are making all headers in a model public. However, for
 models such as cpp this doesn't make any sense since only one type
@@ -737,10 +716,6 @@ from underscores into camel case. The default convention would be that
 diagrams are always with underscores and then you can convert them at
 generation time. There should be a regex for this conversion.
 
-*** Add test for fluent and immutable
-
-Its not possible to be immutable and fluent.
-
 *** Warn if value or entity has methods
 
 We should issue a warning if a user defines methods in value or entity
@@ -793,23 +768,12 @@ derived from the existing model types:
 
 So we need to:
 
-- rename =system_types_injector= to =injector=.
-- make it a composite of injectors that do the real work such as
+- make injector a composite of injectors that do the real work such as
   =key_injector=. internally =injector= just delegates the work to
   these classes.
 - injector decides which internal injectors to use based on options
   passed in.
 - in the IoC spirit, we should probably create a =injector_interface=.
-
-*** "enumeration" of strings
-
-It would be really useful to have a class that encapsulates an
-enumeration of strings, or to have the ability to associate string
-values with an enumeration such that one could have automatic
-conversions between the two.
-
-Actually this could be a more generic concept, such that the type does
-not necessarily have to be a string - int, long etc.
 
 *** Container details in JSON dump
 
@@ -830,19 +794,6 @@ At present we are only generating a cmakelists file for include
 folders on non-split projects. This means that the header files for
 split projects won't be packaged up. It also means that for ODB
 projects we won't get the ODB targets.
-
-*** Rename C++ model into something more generic
-
-The C++ model should by rights be called something like c-like model
-or something of the kind because it can be extended to generate C,
-COM, GObject, etc.
-
-*** Refactor =transform_string_attribute=                             :story:
-
-At present we have a copy and paste job in modeling for
-=transform_string_attribute=. We should add a service to the dia
-model: =string_parser= or something along this lines, copy all the
-duplicated code into it and add tests.
 
 *** Partial matching of primitives doesn't work for certain types     :story:
 
@@ -1002,11 +953,6 @@ don't have any changes around it. A simple test would be to generate
 code for a test model, read the timestamp of a file (or even all
 files), then regenerate the model and compare the timestamps. If there
 are changes, the test would fail.
-
-*** Issue error when a property is a value of an abstract class
-
-SML should fail to merge if the user attempts to create a property of
-a base class. It should allow pointers to the base class though.
 
 *** Add support for =std::function= in services
 
@@ -1404,11 +1350,6 @@ We used =inserter_implementation= to provide all sorts of utility
 methods for IO. This class should really be named IO utility or
 something of the sort.
 
-*** Throw if user supplies type arguments
-
-We don't support generic types (see [[Supporting%20user%20defined%20generic%20types][Supporting user defined generic
-types]]) so we should throw if a user attempts to use them.
-
 *** Cross model referencing tests
 
 At present we do not have any tests were a pod in one model makes use
@@ -1451,12 +1392,6 @@ makefile if there are no implementation files generated.
 If there are no files for a feature, we should not generate includers
 and folders for that feature.
 
-*** Test relationships between pods and other meta types
-
-We should validate that pods are only related to other pods -
-e.g. they cannot inherit from exception or enumeration or
-vice-versa. Add tests for this.
-
 *** Add support for configurable enumerations types
 
 At present our enumerations always use unsigned int as the underlying
@@ -1495,19 +1430,6 @@ composition relationship.
 
 Detect if a diagram defines the same class or package multiple
 times. Should throw an exception.
-
-*** Create a class with file information
-
-In C++ model we use four parameters that get passed all over the
-place: facet, aspect, file type and category. We should:
-
-- rename file type to file kind (interface, implementation)
-- create a class containing the four bits of information called file
-  type
-- replace all the API calls with file type
-- change the view model to take a file type
-
-The class could be called =context= or something of the like.
 
 *** Test model sanity checks fail for enable facet serialisation
 
@@ -1697,27 +1619,6 @@ STL containers with types of that model.
 - [[https://github.com/ruediger/Boost-Pretty-Printer][Boost pretty printer]]
 - [[https://groups.google.com/group/boost-list/browse_thread/thread/ff232ac626bf41cf/18fbf516ceb091da?pli%3D1][Example for multi-index]]
 
-*** Replace manual exception checks with =BOOST_CHECK_EXCEPTION=
-
-In the past we were testing for exceptions by doing a try and catch:
-
-:     try {
-:         std::generate_n(std::back_inserter(terms), beyond_end, sequence);
-:         BOOST_FAIL("Expected sequence_exhausted exception to be thrown.");
-:     } catch (const kitanda::utility::test_data::sequence_exhausted& e) {
-:         BOOST_TEST_MESSAGE("Exception thrown as expected: " << e.what());
-:         BOOST_CHECK(true);
-:     }
-
-We have now found out about =BOOST_CHECK_EXCEPTION=, so we should
-replace the manual checks on all specs that have them. Example usage:
-
-:     BOOST_CHECK_EXCEPTION(
-:         reader.get_attribute_as_string(label_non_existent_attribute),
-:         exception,
-:         std::bind(check_exception, _1, message_error_get_attribute)
-:         );
-
 *** Generator usage in template tests needs to be cleaned
 
 At present some template tests in =utility/test= ask for a
@@ -1746,6 +1647,8 @@ tree:
 - ...
 
 This story is waiting for SML to be code generated.
+
+Definition of [[http://en.wikipedia.org/wiki/Plain_old_data_structure][pod in wikipedia]].
 
 *** Add an includer for all includers
 
