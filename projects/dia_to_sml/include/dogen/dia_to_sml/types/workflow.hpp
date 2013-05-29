@@ -50,30 +50,30 @@ private:
     /**
      * @brief Reset context and set it up with arguments supplied.
      */
-    void initialise_context(const std::string& model_name,
+    void initialise_context_activity(const std::string& model_name,
         const std::string& external_package_path, bool is_target);
 
     /**
      * @brief Setup the DAG of processed objects.
      */
-    graph_type build_graph(const dia::diagram& diagram);
+    graph_type build_graph_activity(const dia::diagram& diagram);
 
     /**
      * @brief Perform the transformation sub-workflow on the supplied
      * processed object.
      */
-    void transformation_sub_workflow(const processed_object& o);
+    void transformation_activity(const processed_object& o);
 
     /**
      * @brief Transforms the entire graph of processed objects into a
      * SML model.
      */
-    void graph_to_context(const graph_type& g);
+    void graph_to_context_activity(const graph_type& g);
 
     /**
      * @brief Performs any required post-processing to the SML model.
      */
-    void post_process_model();
+    void post_process_model_activity();
 
 public:
     virtual sml::model execute(const dia::diagram& diagram,

@@ -45,7 +45,7 @@ workflow::workflow() { }
 
 workflow::~workflow() noexcept { }
 
-void workflow::initialise_context(const std::string& model_name,
+void workflow::initialise_context_activity(const std::string& model_name,
     const std::string& external_package_path, bool is_target) {
 
     context_ = context();
@@ -54,9 +54,10 @@ void workflow::initialise_context(const std::string& model_name,
     context_.model().external_package_path(epp);
     context_.model().name(model_name);
     context_.is_target(is_target);
+    context_.model().is_system(false);
 }
 
-graph_type workflow::build_graph(const dia::diagram& diagram) {
+graph_type workflow::build_graph_activity(const dia::diagram& diagram) {
     graph_builder b;
     processor p;
     for (const auto& l : diagram.layers()) {
@@ -73,30 +74,34 @@ graph_type workflow::build_graph(const dia::diagram& diagram) {
     return b.graph();
 }
 
-void workflow::transformation_sub_workflow(const processed_object& o) {
+void workflow::transformation_activity(const processed_object& o) {
     const auto op(profiler_.profile(o));
     validator_.validate(op);
     return transformer_->transform(o, op);
 }
 
-void workflow::graph_to_context(const graph_type& g) {
+void workflow::graph_to_context_activity(const graph_type& g) {
     transformer_ = std::unique_ptr<transformer>(new transformer(context_));
 
     using namespace std::placeholders;
-    const auto f(std::bind(&workflow::transformation_sub_workflow, this, _1));
+    const auto f(std::bind(&workflow::transformation_activity, this, _1));
     visitor v(f);
     boost::depth_first_search(g, boost::visitor(v));
 }
 
-void workflow::post_process_model() {
-    context_.model().is_system(false);
+void workflow::post_process_model_activity() {
     for (auto& pair : context_.model().pods()) {
-        auto j(context_.leaves().find(pair.first));
-        if (j != context_.leaves().end()) {
-            pair.second.leaves(j->second);
-            for (const auto k : j->second)
-                context_.model().leaves().insert(k);
-        }
+        auto i(context_.leaves().find(pair.first));
+        if (i == context_.leaves().end())
+            continue;
+
+        // for every base (abstract) type which has concrete
+        // implementations (leafs), find them and add them to the type
+        // itself; then add each leaf type to the model's leaf
+        // container.
+        pair.second.leaves(i->second);
+        for (const auto& j : i->second)
+            context_.model().leaves().insert(j);
     }
 }
 
@@ -104,11 +109,11 @@ sml::model workflow::execute(const dia::diagram& diagram,
     const std::string& model_name, const std::string& external_package_path,
     bool is_target) {
 
-    initialise_context(model_name, external_package_path, is_target);
-    graph_to_context(build_graph(diagram));
-    post_process_model();
+    initialise_context_activity(model_name, external_package_path, is_target);
+    graph_to_context_activity(build_graph_activity(diagram));
+    post_process_model_activity();
 
-    BOOST_LOG_SEV(lg, debug) << "Final workflow model: " << context_.model();
+    BOOST_LOG_SEV(lg, debug) << "Final model: " << context_.model();
     return context_.model();
 }
 
