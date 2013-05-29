@@ -11,6 +11,38 @@ This file contains all stories that haven't been assigned to a sprint.
 
 Stories that we intend to look at, at some point.
 
+*** Make a more truthful C++ model
+
+The C++ model should really be a model of the _language_ not of
+high-level constructs such as exceptions, visitor, etc. We should only
+have a few types, and they should all be part of the C++ language:
+
+- file
+- class
+- namespace
+- enum
+- function (which when in a class becomes a member function)
+- argument (check standard's definition)
+- variable
+
+The job of the transformer is then to create the diversity of the
+classes needed to implement the different aspects and facets in a
+model. The class should contain:
+
+- licence
+- for each function, implementation; a string with the code for the
+  implementation of the function, as we would at present generate in
+  the formatter.
+
+We should end up with a single formatter which takes a file and
+converts it into C++ code. All the clever logic would be inside of the
+transformer.
+
+Once we have this in place, a transition to a clang based backend
+should be slightly easier, since the only (big) difference is the
+low-level AST generation inside of functions. It would still be a
+tough job.
+
 *** Consider renaming formatters
 
 These are not really formatters; not sure what the right name should
