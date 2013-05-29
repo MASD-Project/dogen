@@ -10,13 +10,13 @@ This file contains all stories that were closed during sprint 27.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-05-29 Wed 08:29]
+Clock summary at [2013-05-29 Wed 20:23]
 
 | Headline                                                | Time    |       |       |
 |---------------------------------------------------------+---------+-------+-------|
-| *Total time*                                            | *29:59* |       |       |
+| *Total time*                                            | *30:35* |       |       |
 |---------------------------------------------------------+---------+-------+-------|
-| Development Stories Implemented                         |         | 29:59 |       |
+| Development Stories Implemented                         |         | 30:35 |       |
 | COMPLETED Make inclusion lists in includer a model type |         |       |  0:15 |
 | COMPLETED Clean up the SML to C++ transformer           |         |       | 23:16 |
 | COMPLETED Rename =enumeration_info= to =enum_info=      |         |       |  0:30 |
@@ -25,16 +25,17 @@ Clock summary at [2013-05-29 Wed 08:29]
 | COMPLETED Create a basic skeleton for manual            |         |       |  0:25 |
 | COMPLETED Update C++ dia model to reflect code changes  |         |       |  1:08 |
 | COMPLETED Tidy-up workflow class                        |         |       |  0:20 |
+| IMPLEMENTATION Move services into their own type        |         |       |  0:36 |
 #+end:
 
-*** COMPLETED Make inclusion lists in includer a model type
+*** COMPLETED Make inclusion lists in includer a model type           :story:
     CLOSED: [2013-05-23 Thu 23:16]
     CLOCK: [2013-05-23 Thu 23:05]--[2013-05-23 Thu 23:20] =>  0:15
 
 We created a class inlined in the header for no good reason. make it a
 model type.
 
-*** COMPLETED Clean up the SML to C++ transformer                     :spike:
+*** COMPLETED Clean up the SML to C++ transformer                     :story:
     CLOSED: [2013-05-27 Mon 21:24]
 
 Continuing from previous iteration, see description in Sprint 26.
@@ -107,7 +108,7 @@ Continuing from previous iteration, see description in Sprint 26.
      CLOSED: [2013-05-27 Mon 03:19]
      CLOCK: [2013-05-27 Mon 03:11]--[2013-05-27 Mon 03:43] =>  0:32
 
-*** COMPLETED Registrar is not included in serialisation includer
+*** COMPLETED Registrar is not included in serialisation includer     :story:
     CLOSED: [2013-05-27 Mon 03:18]
 
 For some reason we are not including the registrar on the includer for
@@ -115,7 +116,7 @@ serialisation.
 
 Implemented as part of the clean up of cpp model.
 
-*** COMPLETED Rename =enumeration_info= to =enum_info=
+*** COMPLETED Rename =enumeration_info= to =enum_info=                :story:
     CLOSED: [2013-05-27 Mon 21:50]
     CLOCK: [2013-05-27 Mon 21:40]--[2013-05-27 Mon 21:50] =>  0:10
     CLOCK: [2013-05-27 Mon 21:32]--[2013-05-27 Mon 21:40] =>  0:08
@@ -123,7 +124,7 @@ Implemented as part of the clean up of cpp model.
 
 Slight modeling error, we should have used the C++ name for the type.
 
-*** COMPLETED Use content descriptors in includer
+*** COMPLETED Use content descriptors in includer                     :story:
     CLOSED: [2013-05-28 Tue 00:02]
 
 Instead of passing the facets, etc into includer we should just pass a
@@ -164,7 +165,7 @@ calls into workflow.
      CLOSED: [2013-05-28 Tue 00:02]
      CLOCK: [2013-05-27 Mon 23:56]--[2013-05-28 Tue 00:01] =>  0:05
 
-*** COMPLETED Remove location request
+*** COMPLETED Remove location request                                 :story:
     CLOSED: [2013-05-28 Tue 22:49]
 
 Now we have content descriptor, the location request is no longer required.
@@ -183,7 +184,7 @@ Now we have content descriptor, the location request is no longer required.
      CLOSED: [2013-05-28 Tue 22:49]
      CLOCK: [2013-05-28 Tue 22:00]--[2013-05-28 Tue 22:49] =>  0:49
 
-*** COMPLETED Create a basic skeleton for manual
+*** COMPLETED Create a basic skeleton for manual                      :story:
     CLOSED: [2013-05-28 Tue 23:05]
     CLOCK: [2013-05-28 Tue 22:49]--[2013-05-28 Tue 23:04] =>  0:15
     CLOCK: [2013-05-28 Tue 07:55]--[2013-05-28 Tue 08:05] =>  0:10
@@ -193,12 +194,12 @@ org to HTML formatting.
 
 See: [[http://www.codesynthesis.com/products/odb/doc/manual.xhtml][C++ Object Persistence with ODB]]
 
-*** COMPLETED Update C++ dia model to reflect code changes
+*** COMPLETED Update C++ dia model to reflect code changes            :story:
     CLOSED: [2013-05-29 Wed 00:03]
     CLOCK: [2013-05-29 Wed 07:50]--[2013-05-29 Wed 08:00] =>  0:10
     CLOCK: [2013-05-28 Tue 23:07]--[2013-05-29 Wed 00:05] =>  0:58
 
-*** COMPLETED Tidy-up workflow class
+*** COMPLETED Tidy-up workflow class                                  :story:
     CLOSED: [2013-05-29 Wed 08:29]
     CLOCK: [2013-05-29 Wed 08:23]--[2013-05-29 Wed 08:29] =>  0:06
     CLOCK: [2013-05-29 Wed 08:05]--[2013-05-29 Wed 08:19] =>  0:14
@@ -208,6 +209,9 @@ See: [[http://www.codesynthesis.com/products/odb/doc/manual.xhtml][C++ Object Pe
 Continuing from previous iteration, see description in Sprint 26.
 
 **** IMPLEMENTATION Move all of the existing pod code to use new type
+     CLOCK: [2013-05-29 Wed 18:26]--[2013-05-29 Wed 18:42] =>  0:16
+     CLOCK: [2013-05-29 Wed 18:03]--[2013-05-29 Wed 18:17] =>  0:14
+     CLOCK: [2013-05-29 Wed 17:56]--[2013-05-29 Wed 18:02] =>  0:06
 
 *** IMPLEMENTATION Use explicit casting for versioned to unversioned conversions :story:
 
