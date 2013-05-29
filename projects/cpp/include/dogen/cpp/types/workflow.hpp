@@ -81,6 +81,11 @@ private:
         std::unordered_map<sml::qname, class_info>& infos,
         const sml::qname& qn) const;
 
+    /**
+     * @brief Register the file with registrar, if it's a header file.
+     */
+    void register_header(const file_info& fi) const;
+
 private:
     /**
      * @brief Creates all C++ files for enums in the model.

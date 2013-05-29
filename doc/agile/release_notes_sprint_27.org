@@ -10,13 +10,13 @@ This file contains all stories that were closed during sprint 27.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-05-29 Wed 20:23]
+Clock summary at [2013-05-29 Wed 22:36]
 
 | Headline                                                | Time    |       |       |
 |---------------------------------------------------------+---------+-------+-------|
-| *Total time*                                            | *30:35* |       |       |
+| *Total time*                                            | *30:59* |       |       |
 |---------------------------------------------------------+---------+-------+-------|
-| Development Stories Implemented                         |         | 30:35 |       |
+| Development Stories Implemented                         |         | 30:59 |       |
 | COMPLETED Make inclusion lists in includer a model type |         |       |  0:15 |
 | COMPLETED Clean up the SML to C++ transformer           |         |       | 23:16 |
 | COMPLETED Rename =enumeration_info= to =enum_info=      |         |       |  0:30 |
@@ -25,6 +25,7 @@ Clock summary at [2013-05-29 Wed 20:23]
 | COMPLETED Create a basic skeleton for manual            |         |       |  0:25 |
 | COMPLETED Update C++ dia model to reflect code changes  |         |       |  1:08 |
 | COMPLETED Tidy-up workflow class                        |         |       |  0:20 |
+| COMPLETED Visitor header file not included in includer  |         |       |  0:24 |
 | IMPLEMENTATION Move services into their own type        |         |       |  0:36 |
 #+end:
 
@@ -290,7 +291,9 @@ replace the manual checks on all specs that have them. Example usage:
 :         std::bind(check_exception, _1, message_error_get_attribute)
 :         );
 
-*** Visitor header file not included in includer
+*** COMPLETED Visitor header file not included in includer
+    CLOSED: [2013-05-29 Wed 22:36]
+    CLOCK: [2013-05-29 Wed 22:12]--[2013-05-29 Wed 22:36] =>  0:24
 
 At present the visitor header file is not being added to the main
 includer. We need a common solution for all system files including

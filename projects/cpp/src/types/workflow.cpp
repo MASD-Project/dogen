@@ -128,6 +128,12 @@ generate_class_info_recursive(std::unordered_map<sml::qname, class_info>& infos,
     return transformer_.transform(p, pci, opci);
 }
 
+void workflow::register_header(const file_info& fi) const {
+    const auto header(file_types::header);
+    if (fi.file_type() == header)
+        includer_.register_header(fi.facet_type(), fi.relative_path());
+}
+
 workflow::result_type workflow::generate_classes_activity() const {
     BOOST_LOG_SEV(lg, debug) << "Started generate classes activity.";
 
@@ -158,12 +164,9 @@ workflow::result_type workflow::generate_classes_activity() const {
             }
             r.insert(format(fi));
 
-            const auto registrable_aspect(
-                fi.aspect_type() == aspect_types::main ||
-                fi.aspect_type() == aspect_types::null_aspect);
-            const auto header(file_types::header);
-            if (fi.file_type() == header && registrable_aspect)
-                includer_.register_header(fi.facet_type(), fi.relative_path());
+            const auto at(fi.aspect_type());
+            if (at == aspect_types::main || at == aspect_types::null_aspect)
+                register_header(fi);
         }
     }
 
@@ -174,9 +177,6 @@ workflow::result_type workflow::generate_classes_activity() const {
 workflow::result_type workflow::generate_namespaces_activity() const {
     BOOST_LOG_SEV(lg, debug) << "Started generate namespaces activity.";
 
-    const auto header(file_types::header);
-    const auto doc(aspect_types::namespace_doc);
-
     workflow::result_type r;
     if (!model_.documentation().empty()) {
         const auto ni(transformer_.transform_model_into_namespace());
@@ -184,8 +184,8 @@ workflow::result_type workflow::generate_namespaces_activity() const {
             const auto fi(file_info_factory_.create(ni, cd));
             r.insert(format(fi));
 
-            if (fi.file_type() == header && fi.aspect_type() == doc)
-                includer_.register_header(fi.facet_type(), fi.relative_path());
+            if (fi.aspect_type() == aspect_types::namespace_doc)
+                register_header(fi);
         }
     }
 
@@ -200,8 +200,8 @@ workflow::result_type workflow::generate_namespaces_activity() const {
             const auto fi(file_info_factory_.create(ni, cd));
             r.insert(format(fi));
 
-            if (fi.file_type() == header && fi.aspect_type() == doc)
-                includer_.register_header(fi.facet_type(), fi.relative_path());
+            if (fi.aspect_type() == aspect_types::namespace_doc)
+                register_header(fi);
         }
     }
 
@@ -227,10 +227,8 @@ workflow::result_type workflow::generate_registrars_activity() const {
         const auto fi(file_info_factory_.create_registrar(ri, cd, il));
         r.insert(format(fi));
 
-        const auto header(file_types::header);
-        const auto registrar(aspect_types::registrar);
-        if (fi.file_type() == header && fi.aspect_type() == registrar)
-            includer_.register_header(fi.facet_type(), fi.relative_path());
+        if (fi.aspect_type() == aspect_types::registrar)
+            register_header(fi);
     }
 
     BOOST_LOG_SEV(lg, debug) << "Finished generate registrars activity";
@@ -274,6 +272,9 @@ workflow::result_type workflow::generate_visitors_activity() const {
             const auto il(includer_.includes_for_visitor(cd, rel));
             const auto fi(file_info_factory_.create_visitor(vi, cd, il));
             r.insert(format(fi));
+            if (fi.aspect_type() == aspect_types::visitor) {
+                register_header(fi);
+            }
         }
     }
 
@@ -298,10 +299,8 @@ workflow::result_type workflow::generate_enums_activity() const {
             const auto fi(file_info_factory_.create(ei, cd, il));
             r.insert(format(fi));
 
-            const auto header(file_types::header);
-            const auto main(aspect_types::main);
-            if (fi.file_type() == header && fi.aspect_type() == main)
-                includer_.register_header(fi.facet_type(), fi.relative_path());
+            if (fi.aspect_type() == aspect_types::main)
+                register_header(fi);
         }
     }
 
@@ -326,10 +325,8 @@ workflow::result_type workflow::generate_exceptions_activity() const {
             const auto fi(file_info_factory_.create(ei, cd, il));
             r.insert(format(fi));
 
-            const auto header(file_types::header);
-            const auto main(aspect_types::main);
-            if (fi.file_type() == header && fi.aspect_type() == main)
-                includer_.register_header(fi.facet_type(), fi.relative_path());
+            if (fi.aspect_type() == aspect_types::main)
+                register_header(fi);
         }
     }
 
@@ -343,8 +340,8 @@ workflow::result_type workflow::generate_file_infos_activity() const {
     const auto c(generate_classes_activity());
     const auto d(generate_namespaces_activity());
     const auto e(generate_registrars_activity());
-    const auto f(generate_includers_activity());
-    const auto g(generate_visitors_activity());
+    const auto f(generate_visitors_activity());
+    const auto g(generate_includers_activity());
 
     workflow::result_type r;
     r.insert(a.begin(), a.end());

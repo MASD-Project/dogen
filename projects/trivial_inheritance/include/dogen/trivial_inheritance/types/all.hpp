@@ -19,6 +19,7 @@
  *
  */
 #include "dogen/trivial_inheritance/types/base.hpp"
+#include "dogen/trivial_inheritance/types/base_visitor.hpp"
 #include "dogen/trivial_inheritance/types/child_of_a_child1.hpp"
 #include "dogen/trivial_inheritance/types/child_of_a_child2.hpp"
 #include "dogen/trivial_inheritance/types/child_with_members.hpp"
