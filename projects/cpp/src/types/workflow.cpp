@@ -18,8 +18,10 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/lexical_cast.hpp>
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
+#include "dogen/sml/io/qname_io.hpp"
 #include "dogen/cpp/types/workflow_failure.hpp"
 #include "dogen/cpp/types/formatters/factory.hpp"
 #include "dogen/cpp/types/formatters/file_formatter.hpp"
@@ -40,8 +42,10 @@ const std::string registrar_name("registrar");
 const std::string cmakelists_file_name("CMakeLists.txt");
 const std::string odb_options_file_name("options.odb");
 const std::string domain_facet_must_be_enabled("Domain facet must be enabled");
+const std::string could_not_find_pod("Could not find pod: ");
 const std::string integrated_io_incompatible_with_io_facet(
     "Integrated IO cannot be used with the IO facet");
+
 }
 
 namespace dogen {
@@ -56,27 +60,6 @@ workflow(const sml::model& model, const config::cpp_settings& settings) :
     descriptor_factory_(settings_.enabled_facets()), extractor_(model_.pods()) {
 
     validate_settings();
-}
-
-void workflow::log_formating_view(const std::string& view_name) const {
-    BOOST_LOG_SEV(lg, debug) << "Formatting file view: " << view_name;
-}
-
-void workflow::log_started() const {
-    BOOST_LOG_SEV(lg, info) << "C++ backend started.";
-}
-
-void workflow::log_finished() const {
-    BOOST_LOG_SEV(lg, info) << "C++ backend finished.";
-}
-
-void workflow::log_cmakelists_disabled() const {
-    BOOST_LOG_SEV(lg, info) << "CMakeLists generation disabled.";
-}
-
-void workflow::log_file_views(unsigned int how_many) const {
-    BOOST_LOG_SEV(lg, debug) << "File views returned by SML to C++ view model"
-                             << " transformer: " << how_many;
 }
 
 void workflow::validate_settings() const {
@@ -98,60 +81,8 @@ void workflow::validate_settings() const {
     }
 }
 
-workflow::result_type workflow::generate_cmakelists() const {
-    cmakelists_info ci;
-    ci.file_name(cmakelists_file_name);
-    ci.file_path(locator_.absolute_path_to_src(ci.file_name()));
-    ci.model_name(model_.name());
-
-    if (!model_.external_package_path().empty())
-        ci.product_name(model_.external_package_path().front());
-
-    log_formating_view(ci.file_path().string());
-    std::ostringstream stream;
-    formatters::src_cmakelists src(stream);
-    src.format(ci);
-
-    workflow::result_type r;
-    r.insert(std::make_pair(ci.file_path(), stream.str()));
-
-    if (!settings_.split_project()) {
-        const auto f(settings_.enabled_facets());
-        const bool odb_enabled(f.find(config::cpp_facet_types::odb) != f.end());
-        stream.str("");
-        ci.file_path(locator_.absolute_path(ci.file_name()));
-        log_formating_view(ci.file_path().string());
-        formatters::include_cmakelists inc(stream, odb_enabled,
-            settings_.odb_facet_folder());
-        inc.format(ci);
-        r.insert(std::make_pair(ci.file_path(), stream.str()));
-    }
-
-    return r;
-}
-
-workflow::result_entry_type workflow::generate_odb_options() const {
-    BOOST_LOG_SEV(lg, info) << "Generating ODB options file.";
-
-    odb_options_info ooi;
-    ooi.file_name(odb_options_file_name);
-    ooi.file_path(locator_.absolute_path_to_src(ooi.file_name()));
-    ooi.model_name(model_.name());
-    ooi.odb_folder(settings_.odb_facet_folder());
-
-    if (!model_.external_package_path().empty())
-        ooi.product_name(model_.external_package_path().front());
-
-    log_formating_view(ooi.file_path().string());
-    std::ostringstream stream;
-    formatters::odb_options f(stream);
-    f.format(ooi);
-
-    return std::make_pair(ooi.file_path(), stream.str());
-}
-
 workflow::result_entry_type workflow::format(const file_info& fi) const {
-    log_formating_view(fi.file_path().string());
+    BOOST_LOG_SEV(lg, debug) << "Formatting:" << fi.file_path().string();
     formatters::factory factory(settings_);
     formatters::file_formatter::shared_ptr ff;
     std::ostringstream s;
@@ -160,69 +91,15 @@ workflow::result_entry_type workflow::format(const file_info& fi) const {
     return std::make_pair(fi.file_path(), s.str());
 }
 
-workflow::result_type workflow::generate_enums_activity() const {
-    BOOST_LOG_SEV(lg, debug) << "Started generate enums activity.";
-
-    workflow::result_type r;
-    for (const auto& pair : model_.enumerations()) {
-        const auto& e(pair.second);
-        if (e.generation_type() == sml::generation_types::no_generation)
-            continue;
-
-        const auto ei(transformer_.transform(e));
-
-        const auto ct(sml::category_types::user_defined);
-        for (const auto& cd : descriptor_factory_.create(e.name(), ct)) {
-            const auto il(includer_.includes_for_enumeration(cd));
-            const auto fi(file_info_factory_.create(ei, cd, il));
-            r.insert(format(fi));
-
-            const auto header(file_types::header);
-            const auto main(aspect_types::main);
-            if (fi.file_type() == header && fi.aspect_type() == main)
-                includer_.register_header(fi.facet_type(), fi.relative_path());
-        }
-    }
-
-    BOOST_LOG_SEV(lg, debug) << "Finished generate enums activity.";
-    return r;
-}
-
-workflow::result_type workflow::generate_exceptions_activity() const {
-    BOOST_LOG_SEV(lg, debug) << "Started generate exceptions activity.";
-
-    workflow::result_type r;
-    for (const auto& pair : model_.exceptions()) {
-        const auto& e(pair.second);
-        if (e.generation_type() == sml::generation_types::no_generation)
-            continue;
-
-        const auto ei(transformer_.transform(e));
-
-        const auto ct(sml::category_types::user_defined);
-        for (const auto& cd : descriptor_factory_.create(e.name(), ct)) {
-            const auto il(includer_.includes_for_exception(cd));
-            const auto fi(file_info_factory_.create(ei, cd, il));
-            r.insert(format(fi));
-
-            const auto header(file_types::header);
-            const auto main(aspect_types::main);
-            if (fi.file_type() == header && fi.aspect_type() == main)
-                includer_.register_header(fi.facet_type(), fi.relative_path());
-        }
-    }
-
-    BOOST_LOG_SEV(lg, debug) << "Finished generate exceptions activity";
-    return r;
-}
-
-class_info workflow::generate_class_info_recursive(
-    std::unordered_map<sml::qname, class_info>& infos,
+class_info workflow::
+generate_class_info_recursive(std::unordered_map<sml::qname, class_info>& infos,
     const sml::qname& qn) const {
 
     const auto i(model_.pods().find(qn));
     if (i == model_.pods().end()) {
-        // throw
+        BOOST_LOG_SEV(lg, error) << could_not_find_pod << qn;
+        BOOST_THROW_EXCEPTION(workflow_failure(could_not_find_pod +
+                boost::lexical_cast<std::string>(qn)));
     }
 
     boost::optional<class_info> pci;
@@ -404,6 +281,62 @@ workflow::result_type workflow::generate_visitors_activity() const {
     return r;
 }
 
+workflow::result_type workflow::generate_enums_activity() const {
+    BOOST_LOG_SEV(lg, debug) << "Started generate enums activity.";
+
+    workflow::result_type r;
+    for (const auto& pair : model_.enumerations()) {
+        const auto& e(pair.second);
+        if (e.generation_type() == sml::generation_types::no_generation)
+            continue;
+
+        const auto ei(transformer_.transform(e));
+
+        const auto ct(sml::category_types::user_defined);
+        for (const auto& cd : descriptor_factory_.create(e.name(), ct)) {
+            const auto il(includer_.includes_for_enumeration(cd));
+            const auto fi(file_info_factory_.create(ei, cd, il));
+            r.insert(format(fi));
+
+            const auto header(file_types::header);
+            const auto main(aspect_types::main);
+            if (fi.file_type() == header && fi.aspect_type() == main)
+                includer_.register_header(fi.facet_type(), fi.relative_path());
+        }
+    }
+
+    BOOST_LOG_SEV(lg, debug) << "Finished generate enums activity.";
+    return r;
+}
+
+workflow::result_type workflow::generate_exceptions_activity() const {
+    BOOST_LOG_SEV(lg, debug) << "Started generate exceptions activity.";
+
+    workflow::result_type r;
+    for (const auto& pair : model_.exceptions()) {
+        const auto& e(pair.second);
+        if (e.generation_type() == sml::generation_types::no_generation)
+            continue;
+
+        const auto ei(transformer_.transform(e));
+
+        const auto ct(sml::category_types::user_defined);
+        for (const auto& cd : descriptor_factory_.create(e.name(), ct)) {
+            const auto il(includer_.includes_for_exception(cd));
+            const auto fi(file_info_factory_.create(ei, cd, il));
+            r.insert(format(fi));
+
+            const auto header(file_types::header);
+            const auto main(aspect_types::main);
+            if (fi.file_type() == header && fi.aspect_type() == main)
+                includer_.register_header(fi.facet_type(), fi.relative_path());
+        }
+    }
+
+    BOOST_LOG_SEV(lg, debug) << "Finished generate exceptions activity";
+    return r;
+}
+
 workflow::result_type workflow::generate_file_infos_activity() const {
     const auto a(generate_enums_activity());
     const auto b(generate_exceptions_activity());
@@ -424,30 +357,83 @@ workflow::result_type workflow::generate_file_infos_activity() const {
     return r;
 }
 
+workflow::result_type workflow::generate_cmakelists_activity() const {
+    cmakelists_info ci;
+    ci.model_name(model_.name());
+    ci.file_name(cmakelists_file_name);
+    ci.file_path(locator_.absolute_path_to_src(ci.file_name()));
+    BOOST_LOG_SEV(lg, debug) << "Formatting: " << ci.file_path().string();
+
+    if (!model_.external_package_path().empty())
+        ci.product_name(model_.external_package_path().front());
+
+    std::ostringstream stream;
+    formatters::src_cmakelists src(stream);
+    src.format(ci);
+
+    workflow::result_type r;
+    r.insert(std::make_pair(ci.file_path(), stream.str()));
+
+    if (!settings_.split_project()) {
+        const auto f(settings_.enabled_facets());
+        const bool odb_enabled(f.find(config::cpp_facet_types::odb) != f.end());
+        stream.str("");
+        ci.file_path(locator_.absolute_path(ci.file_name()));
+        BOOST_LOG_SEV(lg, debug) << "Formatting: " << ci.file_path().string();
+
+        formatters::include_cmakelists inc(stream, odb_enabled,
+            settings_.odb_facet_folder());
+        inc.format(ci);
+        r.insert(std::make_pair(ci.file_path(), stream.str()));
+    }
+
+    return r;
+}
+
+workflow::result_entry_type workflow::generate_odb_options_activity() const {
+    BOOST_LOG_SEV(lg, info) << "Generating ODB options file.";
+
+    odb_options_info ooi;
+    ooi.file_name(odb_options_file_name);
+    ooi.file_path(locator_.absolute_path_to_src(ooi.file_name()));
+    ooi.model_name(model_.name());
+    ooi.odb_folder(settings_.odb_facet_folder());
+
+    if (!model_.external_package_path().empty())
+        ooi.product_name(model_.external_package_path().front());
+
+    BOOST_LOG_SEV(lg, debug) << "Formatting:" << ooi.file_path().string();
+    std::ostringstream stream;
+    formatters::odb_options f(stream);
+    f.format(ooi);
+
+    return std::make_pair(ooi.file_path(), stream.str());
+}
+
+std::vector<boost::filesystem::path> workflow::managed_directories() const {
+    return locator_.managed_directories();
+}
+
 workflow::result_type workflow::execute() {
-    log_started();
+    BOOST_LOG_SEV(lg, info) << "C++ backend started.";
 
     workflow::result_type r(generate_file_infos_activity());
     if (settings_.disable_cmakelists())
-        log_cmakelists_disabled();
+        BOOST_LOG_SEV(lg, info) << "CMakeLists generation disabled.";
     else {
-        const auto cm(generate_cmakelists());
+        const auto cm(generate_cmakelists_activity());
         r.insert(cm.begin(), cm.end());
     }
 
     const auto f(settings_.enabled_facets());
     const bool odb_enabled(f.find(config::cpp_facet_types::odb) != f.end());
     if (odb_enabled)
-        r.insert(generate_odb_options());
+        r.insert(generate_odb_options_activity());
     else
         BOOST_LOG_SEV(lg, info) << "ODB options file generation disabled.";
 
-    log_finished();
+    BOOST_LOG_SEV(lg, info) << "C++ backend finished.";
     return r;
-}
-
-std::vector<boost::filesystem::path> workflow::managed_directories() const {
-    return locator_.managed_directories();
 }
 
 } }

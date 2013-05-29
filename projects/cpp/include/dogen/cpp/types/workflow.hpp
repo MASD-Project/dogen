@@ -44,6 +44,10 @@
 namespace dogen {
 namespace cpp {
 
+/**
+ * @brief Orchestrates all the classes in the C++ model to go from an
+ * SML model into a set of C++ files representing that model.
+ */
 class workflow final {
 public:
     workflow() = delete;
@@ -60,17 +64,15 @@ public:
     typedef std::pair<boost::filesystem::path, std::string> result_entry_type;
 
 private:
-    void log_formating_view(const std::string& view_name) const;
-    void log_started() const;
-    void log_finished() const;
-    void log_cmakelists_disabled() const;
-    void log_file_views(unsigned int how_many) const;
-
-private:
     /**
      * @brief Ensure the C++ settings are consistent.
      */
     void validate_settings() const;
+
+    /**
+     * @brief Format the file info into a C++ file representation.
+     */
+    result_entry_type format(const file_info& fi) const;
 
     /**
      * @brief Recursively generates pods.
@@ -120,17 +122,27 @@ private:
      */
     result_type generate_file_infos_activity() const;
 
-private:
     /**
-     * @brief Format the file info into a C++ file representation.
+     * @brief Create the cmakelists makefiles.
      */
-    result_entry_type format(const file_info& fi) const;
+    result_type generate_cmakelists_activity() const;
 
-    result_type generate_cmakelists() const;
-    result_entry_type generate_odb_options() const;
+    /**
+     * @brief Creates the ODB compiler options file.
+     */
+    result_entry_type generate_odb_options_activity() const;
 
 public:
+    /**
+     * @brief Execute the workflow.
+     */
     result_type execute();
+
+    /**
+     * @brief Returns the directories managed by this workflow.
+     *
+     * This method is only exposed for testing purposes.
+     */
     std::vector<boost::filesystem::path> managed_directories() const;
 
 private:

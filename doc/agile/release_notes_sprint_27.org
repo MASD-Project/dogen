@@ -10,20 +10,21 @@ This file contains all stories that were closed during sprint 27.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-05-29 Wed 00:05]
+Clock summary at [2013-05-29 Wed 08:29]
 
 | Headline                                                | Time    |       |       |
 |---------------------------------------------------------+---------+-------+-------|
-| *Total time*                                            | *29:29* |       |       |
+| *Total time*                                            | *29:59* |       |       |
 |---------------------------------------------------------+---------+-------+-------|
-| Development Stories Implemented                         |         | 29:29 |       |
+| Development Stories Implemented                         |         | 29:59 |       |
 | COMPLETED Make inclusion lists in includer a model type |         |       |  0:15 |
 | COMPLETED Clean up the SML to C++ transformer           |         |       | 23:16 |
 | COMPLETED Rename =enumeration_info= to =enum_info=      |         |       |  0:30 |
 | COMPLETED Use content descriptors in includer           |         |       |  2:08 |
 | COMPLETED Remove location request                       |         |       |  1:57 |
 | COMPLETED Create a basic skeleton for manual            |         |       |  0:25 |
-| COMPLETED Update C++ dia model to reflect code changes  |         |       |  0:58 |
+| COMPLETED Update C++ dia model to reflect code changes  |         |       |  1:08 |
+| COMPLETED Tidy-up workflow class                        |         |       |  0:20 |
 #+end:
 
 *** COMPLETED Make inclusion lists in includer a model type
@@ -194,7 +195,13 @@ See: [[http://www.codesynthesis.com/products/odb/doc/manual.xhtml][C++ Object Pe
 
 *** COMPLETED Update C++ dia model to reflect code changes
     CLOSED: [2013-05-29 Wed 00:03]
+    CLOCK: [2013-05-29 Wed 07:50]--[2013-05-29 Wed 08:00] =>  0:10
     CLOCK: [2013-05-28 Tue 23:07]--[2013-05-29 Wed 00:05] =>  0:58
+
+*** COMPLETED Tidy-up workflow class
+    CLOSED: [2013-05-29 Wed 08:29]
+    CLOCK: [2013-05-29 Wed 08:23]--[2013-05-29 Wed 08:29] =>  0:06
+    CLOCK: [2013-05-29 Wed 08:05]--[2013-05-29 Wed 08:19] =>  0:14
 
 *** IMPLEMENTATION Move services into their own type                  :story:
 
