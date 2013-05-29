@@ -11,6 +11,13 @@ This file contains all stories that haven't been assigned to a sprint.
 
 Stories that we intend to look at, at some point.
 
+*** Add support for GtkBuilder / Glade XML files
+
+There is nothing stopping us from using a GtkBuilder / Glade XML file
+as an input, create some SML from it and then generate code which
+would do the boiler plate setup of the UI. With a bit more work one
+could potentially even generate the bindings for a presentation model.
+
 *** Make a more truthful C++ model
 
 The C++ model should really be a model of the _language_ not of
