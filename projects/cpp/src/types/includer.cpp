@@ -332,7 +332,7 @@ void includer::append_std_dependencies(const content_descriptor& cd,
     /*
      * std::vector
      */
-const bool is_vector(type_name == std_.type(std_types::vector));
+    const bool is_vector(type_name == std_.type(std_types::vector));
     if (is_header && is_domain && is_vector)
         il.system().push_back(std_.include(std_types::vector));
 
@@ -342,7 +342,7 @@ const bool is_vector(type_name == std_.type(std_types::vector));
     /*
      * std::list
      */
-const bool is_list(type_name == std_.type(std_types::list));
+    const bool is_list(type_name == std_.type(std_types::list));
     if (is_header && is_domain && is_list)
         il.system().push_back(std_.include(std_types::list));
 
@@ -352,7 +352,7 @@ const bool is_list(type_name == std_.type(std_types::list));
     /*
      * std::deque
      */
-const bool is_deque(type_name == std_.type(std_types::deque));
+    const bool is_deque(type_name == std_.type(std_types::deque));
     if (is_header && is_domain && is_deque)
         il.system().push_back(std_.include(std_types::deque));
 
