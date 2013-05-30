@@ -10,13 +10,14 @@ This file contains all stories that were closed during sprint 27.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-05-29 Wed 22:36]
+Clock summary at [2013-05-30 Thu 08:38]
 
 | Headline                                                | Time    |       |       |
 |---------------------------------------------------------+---------+-------+-------|
-| *Total time*                                            | *30:59* |       |       |
+| *Total time*                                            | *32:40* |       |       |
 |---------------------------------------------------------+---------+-------+-------|
-| Development Stories Implemented                         |         | 30:59 |       |
+| Development Stories Implemented                         |         | 32:40 |       |
+| IMPLEMENTATION Release notes and backlog grooming       |         |       |  1:41 |
 | COMPLETED Make inclusion lists in includer a model type |         |       |  0:15 |
 | COMPLETED Clean up the SML to C++ transformer           |         |       | 23:16 |
 | COMPLETED Rename =enumeration_info= to =enum_info=      |         |       |  0:30 |
@@ -28,6 +29,11 @@ Clock summary at [2013-05-29 Wed 22:36]
 | COMPLETED Visitor header file not included in includer  |         |       |  0:24 |
 | IMPLEMENTATION Move services into their own type        |         |       |  0:36 |
 #+end:
+
+*** IMPLEMENTATION Release notes and backlog grooming                  :task:
+    CLOCK: [2013-05-30 Thu 08:28]--[2013-05-30 Thu 08:38] =>  0:10
+    CLOCK: [2013-05-30 Thu 07:47]--[2013-05-30 Thu 08:18] =>  0:31
+    CLOCK: [2013-05-29 Wed 22:36]--[2013-05-29 Wed 23:36] =>  1:00
 
 *** COMPLETED Make inclusion lists in includer a model type           :story:
     CLOSED: [2013-05-23 Thu 23:16]
