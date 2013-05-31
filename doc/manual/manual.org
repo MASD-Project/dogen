@@ -20,31 +20,56 @@ in the following formats: HTML and PDF.
 
 ** About This Document
 
-One of the main problems facing any software engineer working on large
-software systems is the need to clearly separate the business rules
-from the infrastructural code. If we think back, this is what the word
-/Application/ was all about: the use of computer science /applied/ to
-a specific problem to provide an automated solution to a real world
-problem. Unavoidably, the solution will always be made up of a large
-portion of code which is not specific to the problem at hand: reading
-records from a database, writing them back, reading and writing to
-file and so on. However, one would like for the business rules to be
-stated in code as clearly as possible, and not mixed up with code
-which is totally unrelated to the problem at hand.
-
-Domain driven development is a software engineering methodology that
-formalises ideas around this separation of concerns. Just like design
-patterns are attributed to the Gang of Four (GoF) but largely
-developed through painstaking evolution 
-allows for clear delineation of domain knowledge, splitting it from
-other infrastructural code. 
-
+This document is the official manual for Dogen. Dogen - the domain
+generator - is a code generation tool designed specifically to target
+domain models. Dogen was created to make the modeling process simpler:
+the user creates a domain model using a UML tool and Dogen uses it to
+generate its source code representation. The generated code contains
+most of the services required from a typical C++ domain object such as
+serialisation, hashing, streaming and so on.
 
 ** More Information
+
+You can find the latest source code for Dogen at the official
+repository in GitHub:
+
+- https://github.com/kitanda/dogen
+
+There is also a mirror in BitBucket:
+
+- FIXME
+
 
 * PART I - BASIC CONCEPTS
 
 ** Introduction
+
+One of the main problems facing software engineers working on large
+systems is the need to clearly separate business rules from
+scaffolding code. In many ways, this need originates from the long
+forgotten days when the word /Application/ was coined: the use of
+computer science /applied/ to a specific problem to provide an
+automated solution to the set of people with the problem - the
+/users/. During the process of development, users will provide all
+sorts of insights into what it is they want solved, and these are
+ultimately captured in code. Code will also be made up of reading and
+writing records to a database, socket communication, reading and
+writing to file and so on; the challenge then is to avoid obscuring
+the former while dealing with the latter.
+
+Many people have thought deeply about this dichotomy. Arguably, the
+most significant advance was made by Eric Evans with his seminal book
+"Domain-Driven Design: Tackling Complexity in the Heart of
+Software". Domain Driven Design (DDD) is a software engineering
+methodology that places great emphasis on understanding the /problem
+domain/, and coupled with Agile it provides a great platform for
+iterative improvements both to the understanding and to its expression
+in code. DDD places great emphasis in defining a clear and concise
+domain model - a set of classes and relationships that model the
+insights provided by the users and domain experts in general. It also
+explains the difference between the conceptual domain model and myriad
+of representations: UML diagrams, specification documents, oral
+conversations and, most importantly, source code.
 
 ** Hello World Example
 

@@ -10,20 +10,20 @@ This file contains all stories that were closed during sprint 27.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-05-30 Thu 23:52]
+Clock summary at [2013-05-31 Fri 08:43]
 
 | Headline                                                | Time    |       |       |
 |---------------------------------------------------------+---------+-------+-------|
-| *Total time*                                            | *32:58* |       |       |
+| *Total time*                                            | *33:33* |       |       |
 |---------------------------------------------------------+---------+-------+-------|
-| Development Stories Implemented                         |         | 32:58 |       |
+| Development Stories Implemented                         |         | 33:33 |       |
 | IMPLEMENTATION Release notes and backlog grooming       |         |       |  1:41 |
 | COMPLETED Make inclusion lists in includer a model type |         |       |  0:15 |
 | COMPLETED Clean up the SML to C++ transformer           |         |       | 23:16 |
 | COMPLETED Rename =enumeration_info= to =enum_info=      |         |       |  0:30 |
 | COMPLETED Use content descriptors in includer           |         |       |  2:08 |
 | COMPLETED Remove location request                       |         |       |  1:57 |
-| COMPLETED Create a basic skeleton for manual            |         |       |  0:43 |
+| COMPLETED Create a basic skeleton for manual            |         |       |  1:18 |
 | COMPLETED Update C++ dia model to reflect code changes  |         |       |  1:08 |
 | COMPLETED Tidy-up workflow class                        |         |       |  0:20 |
 | COMPLETED Visitor header file not included in includer  |         |       |  0:24 |
@@ -193,6 +193,7 @@ Now we have content descriptor, the location request is no longer required.
 
 *** COMPLETED Create a basic skeleton for manual                      :story:
     CLOSED: [2013-05-28 Tue 23:05]
+    CLOCK: [2013-05-31 Fri 07:35]--[2013-05-31 Fri 08:10] =>  0:35
     CLOCK: [2013-05-30 Thu 19:33]--[2013-05-30 Thu 19:51] =>  0:18
     CLOCK: [2013-05-28 Tue 22:49]--[2013-05-28 Tue 23:04] =>  0:15
     CLOCK: [2013-05-28 Tue 07:55]--[2013-05-28 Tue 08:05] =>  0:10
