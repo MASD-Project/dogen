@@ -353,6 +353,12 @@ boost date time library.
 
 See boost documentation: [[http://www.boost.org/doc/libs/1_53_0/doc/html/date_time/local_time.html#date_time.local_time.posix_time_zone][Posix Time Zone]]
 
+*** Automatic commenting of enumeration properties
+
+When a pod has a property of an enumeration type, there is not much
+point in manually commenting the property. We could just use the brief
+of the enumeration if the user didn't supply any documentation.
+
 *** "Data driven" includer
 
 We should simply go through all the types in the SML model and for
