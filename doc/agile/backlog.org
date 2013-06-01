@@ -11,6 +11,12 @@ This file contains all stories that haven't been assigned to a sprint.
 
 Stories that we intend to look at, at some point.
 
+*** Add support for posix_time_zone
+
+At present we need to use std::string to convey time zone
+information. We should be able to use the time zones available in
+boost date time library.
+
 *** "Data driven" includer
 
 We should simply go through all the types in the SML model and for
