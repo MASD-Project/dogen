@@ -17,6 +17,8 @@ At present we need to use std::string to convey time zone
 information. We should be able to use the time zones available in
 boost date time library.
 
+See boost documentation: [[http://www.boost.org/doc/libs/1_53_0/doc/html/date_time/local_time.html#date_time.local_time.posix_time_zone][Posix Time Zone]]
+
 *** "Data driven" includer
 
 We should simply go through all the types in the SML model and for
