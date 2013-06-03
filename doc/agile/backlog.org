@@ -11,6 +11,12 @@ This file contains all stories that haven't been assigned to a sprint.
 
 Stories that we intend to look at, at some point.
 
+*** Make ODB support optional
+
+We should be able to build dogen without ODB. It would still generate
+all the ODB headers etc, but the database test model would not be
+compiled. This would be useful to reduce the number of dependencies.
+
 *** Add support for posix_time_zone
 
 At present we need to use std::string to convey time zone
