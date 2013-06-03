@@ -10,12 +10,22 @@ This file contains all stories that were closed during sprint 28.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-06-02 Sun 22:58]
+Clock summary at [2013-06-03 Mon 19:18]
 
-| Headline     | Time   |
-|--------------+--------|
-| *Total time* | *0:00* |
+| Headline                        | Time   |      |      |
+|---------------------------------+--------+------+------|
+| *Total time*                    | *0:28* |      |      |
+|---------------------------------+--------+------+------|
+| Development Stories Implemented |        | 0:28 |      |
+| Update README                   |        |      | 0:28 |
 #+end:
+
+*** IMPLEMENTATION Update README
+    CLOCK: [2013-06-03 Mon 18:16]--[2013-06-03 Mon 18:42] =>  0:26
+    CLOCK: [2013-06-03 Mon 18:03]--[2013-06-03 Mon 18:05] =>  0:02
+
+The [[https://github.com/Neverlord/libcppa][C++ actor library]] has a nice README layout, most of which is
+applicable to Dogen. Copy the appropriate parts.
 
 *** IMPLEMENTATION Release notes and backlog grooming                  :task:
 *** IMPLEMENTATION Move services into their own type                  :story:

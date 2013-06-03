@@ -7,21 +7,21 @@ will write itself.
 
 ** What is Dogen
 
-*Dogen* is a code generator designed to target domain models. It is
-crucial for Kitanda because we use a intensively [[http://en.wikipedia.org/wiki/Domain-driven_design][domain driven]]
-approach to software engineering, resulting in a very large number of
-domain specific languages. Dogen was created to make the modeling
-process simpler: the user creates a domain model using a UML tool and
-Dogen uses it to generate its source code representation. The
-generated code contains most of the services required from a typical
-C++ domain object such as serialisation, hashing, streaming and so on.
+*Dogen* is a code generator designed to target domain models, inspired
+by the [[http://en.wikipedia.org/wiki/Domain-driven_design][domain driven design]] methodology. Our main objective was to
+automate the modeling process as much as possible: the user creates
+domain models using a supported UML tool and respecting a set of
+predefined restrictions; Dogen then uses the tool's diagram files to
+generate the source code representation. The generated code contains
+most of the services required from a typical C++ domain object such as
+serialisation, hashing, streaming and so on.
 
 ** Why do we need Dogen
 
 The main objective of creating a domain generator is to avoid having
 to maintain manually a significant amount of trivial code; this not
 only speeds up the development process but it also improves quality as
-programmers do not tend to perform repetitive tasks terribly well.  We
+programmers do not tend to perform repetitive tasks terribly well. We
 developed our own domain generator because we could not find one that
 fitted our requirements - open source or otherwise.
 
@@ -29,7 +29,55 @@ Note that Dogen is specifically tailored for our needs and as such it
 is not a general purpose domain generator. We are, however, wiling to
 accept any patches for functionality not directly required by us.
 
-** Links of interest around code generation
+* Building from Source
+
+In order to compile Dogen you need:
+
+- a fairly recent version of GCC (> 4.7) or Clang (> 3.0);
+- CMake 2.8 or later;
+- a patched version of boost which we call [[https://github.com/kitanda/turbo][turbo]]. This is largely
+  boost 1.52 a few out-of-tree libraries such as boost log and EOS
+  portable serialisation support. With boost 1.54 turbo should no
+  longer be required.
+- The development includes and libraries for ODB. In truth this should
+  really be optional as its only required if you are building the
+  database test model.
+
+Once these libraries are available, follow the following steps:
+
+: git clone git://github.com/kitanda/dogen.git
+: mkdir output
+: cd output
+: cmake ../dogen
+: make -j5 # number of cores available
+
+First Steps
+
+./configure
+make
+make install [as root, optional]
+It is recommended to run the unit tests as well.
+
+make test
+Please submit a bug report that includes (a) your compiler version, (b) your OS, and (c) the content of the file build/Testing/Temporary/LastTest.log if an error occurs.
+
+Dependencies
+
+CMake
+Pthread (until C++11 compilers support the new thread_local keyword)
+Optional: Boost.Context (enables context-switching actors)
+Supported Compilers
+
+GCC >= 4.7
+Clang >= 3.2
+Supported Operating Systems
+
+Linux
+Mac OS X
+Note for MS Windows: libcppa relies on C++11 features such as variadic templates. We will support this platform as soon as Microsoft's compiler implements all required C++11 features.
+
+
+* Links of interest around code generation
 
 Here we collect links to other C++ code generators, as well as
 interesting projects in this space on other languages, books and
