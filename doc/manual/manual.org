@@ -39,7 +39,6 @@ There is also a mirror in BitBucket:
 
 - FIXME
 
-
 * PART I - BASIC CONCEPTS
 
 ** Introduction
