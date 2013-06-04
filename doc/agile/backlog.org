@@ -1721,8 +1721,23 @@ such as =vector_io=, =list_io=, etc. We should be using the new =for=
 syntax for C++-11.
 
 *** Rename pod in SML
+    CLOCK: [2013-06-04 Tue 18:40]--[2013-06-04 Tue 19:02] =>  0:22
 
-We mistakingly called complex types =pod= because of a lack of
+New understanding:
+
+SML is in many ways the domain model of domain driven development
+(DDD). Due to this, DDD concepts should be first class citizens:
+
+- entity
+- value
+- service
+- aggregate root
+- factory
+- repository
+
+Previous understanding:
+
+We mistakenly called complex types =pod= because of a lack of
 understanding of what a C++ pod type is. They should really be called
 =complex_type=. This would be a good time to clean up the inheritance
 tree:
