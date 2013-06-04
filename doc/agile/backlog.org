@@ -11,6 +11,24 @@ This file contains all stories that haven't been assigned to a sprint.
 
 Stories that we intend to look at, at some point.
 
+*** Add support for boost and/or std tuple
+    CLOCK: [2013-06-04 Tue 18:30]--[2013-06-04 Tue 18:32] =>  0:02
+    CLOCK: [2013-06-04 Tue 18:18]--[2013-06-04 Tue 18:27] =>  0:09
+
+It would be nice to be able to use =std::tuple= and/or =boost::tuple=
+from dogen. The processing would be rather similar to containers. It
+would be even nicer if one could associate an enumeration to a tuple
+so that the gets would be more meaningful, e.g.:
+
+: std::get<my_field>()
+
+rather than
+
+: std::get<0>()
+
+Using =std::tuple= would mean we'd have to create our own serialisers
+for it most likely.
+
 *** Make ODB support optional
 
 We should be able to build dogen without ODB. It would still generate
