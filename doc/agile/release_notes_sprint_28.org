@@ -10,17 +10,20 @@ This file contains all stories that were closed during sprint 28.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-06-03 Mon 19:18]
+Clock summary at [2013-06-04 Tue 08:37]
 
 | Headline                        | Time   |      |      |
 |---------------------------------+--------+------+------|
-| *Total time*                    | *0:28* |      |      |
+| *Total time*                    | *1:04* |      |      |
 |---------------------------------+--------+------+------|
-| Development Stories Implemented |        | 0:28 |      |
-| Update README                   |        |      | 0:28 |
+| Development Stories Implemented |        | 1:04 |      |
+| IMPLEMENTATION Update README    |        |      | 1:04 |
 #+end:
 
-*** IMPLEMENTATION Update README
+*** COMPLETED Update README
+    CLOSED: [2013-06-04 Tue 08:37]
+    CLOCK: [2013-06-04 Tue 08:30]--[2013-06-04 Tue 08:37] =>  0:07
+    CLOCK: [2013-06-04 Tue 07:49]--[2013-06-04 Tue 08:18] =>  0:48
     CLOCK: [2013-06-03 Mon 18:16]--[2013-06-03 Mon 18:42] =>  0:26
     CLOCK: [2013-06-03 Mon 18:03]--[2013-06-03 Mon 18:05] =>  0:02
 
