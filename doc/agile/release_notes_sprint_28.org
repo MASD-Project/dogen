@@ -31,7 +31,76 @@ The [[https://github.com/Neverlord/libcppa][C++ actor library]] has a nice READM
 applicable to Dogen. Copy the appropriate parts.
 
 *** IMPLEMENTATION Release notes and backlog grooming                  :task:
+    CLOCK: [2013-06-04 Tue 19:06]--[2013-06-04 Tue 19:12] =>  0:06
+    CLOCK: [2013-06-04 Tue 18:55]--[2013-06-04 Tue 19:06] =>  0:11
+
+*** Consider adding "concepts"
+    CLOCK: [2013-05-08 Wed 07:47]--[2013-05-08 Wed 07:59] =>  0:12
+
+A concept is just like a pod, except its stereotype is
+=concept=. Types can then "model" a given concept by having it as
+their stereotype. This effectively results in merging all the
+properties of the concept into the type. The concept has no
+representation in code, its only a diagram/SML thing.
+
+Concepts will solve the problems in SML with pods, etc where we didn't
+want to use inheritance to avoid tight coupling - but at the same time
+its annoying to have to repeat the same properties in lots of
+different places: name, documentation, implementation specific
+parameters, etc. We could create concepts for these: =named=,
+=documented=, etc. and then use them as stereotypes in the affected
+types, removing the need for duplication.
+
+Conceivably one could imagine defining boost concept check rules for
+these concepts but at present there is no need for this.
+
+In terms of implementation, we need a string container for these
+concepts and a way of resolving the stereotype into a qname.
+
+*** Break down SML into concepts
+    CLOCK: [2013-06-04 Tue 20:33]
+
+We should use the types in eCore as a starting point for breaking down
+the model into concepts. We should have a hierarchy of concepts where
+applicable. Sample concepts:
+
+- NamedModelElement
+- DocumentableModelElement
+
+*** Rename pod in SML
+    CLOCK: [2013-06-04 Tue 18:40]--[2013-06-04 Tue 19:02] =>  0:22
+
+New understanding:
+
+SML is in many ways the domain model of domain driven development
+(DDD). Due to this, DDD concepts should be first class citizens:
+
+- entity
+- value
+- service
+- aggregate root
+- factory
+- repository
+
+Previous understanding:
+
+We mistakenly called complex types =pod= because of a lack of
+understanding of what a C++ pod type is. They should really be called
+=complex_type=. This would be a good time to clean up the inheritance
+tree:
+
+- type: parent; has a name
+- simple_type: primitives; child of type.
+- complex_type: pods; child of type.
+- enumeration: child of type.
+- ...
+
+This story is waiting for SML to be code generated.
+
+Definition of [[http://en.wikipedia.org/wiki/Plain_old_data_structure][pod in wikipedia]].
+
 *** IMPLEMENTATION Move services into their own type                  :story:
+    CLOCK: [2013-06-04 Tue 18:32]--[2013-06-04 Tue 18:38] =>  0:06
 
 Continuing from previous iteration, see description in Sprint 26.
 
