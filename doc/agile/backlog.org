@@ -17,6 +17,8 @@ Once dogen supports concepts, the natural thing to do is to express
 them in C++ code. This could easily be done using boost concept, or
 the C++-14 concepts light.
 
+See [[http://www.boost.org/doc/libs/1_53_0/libs/concept_check/creating_concepts.htm][Creating Concepts]].
+
 *** Add support for boost and/or std tuple
     CLOCK: [2013-06-04 Tue 18:30]--[2013-06-04 Tue 18:32] =>  0:02
     CLOCK: [2013-06-04 Tue 18:18]--[2013-06-04 Tue 18:27] =>  0:09
@@ -372,23 +374,10 @@ All stories related to IoC work are tracked here.
   interfaces for these classes and provide mocks for the tests. This
   would make the tests considerably smaller.
 
-*** Rename nested qname to composite qname
+*** Refactor node according to composite pattern in dia to sml
 
 This is not required if we decide to [[*Add%20composite%20stereotype][implement]] the composite
-pattern. We should just follow the composite pattern in the
-naming. The same applies to node.
-
-*** Visitor as an injected system type
-
-The current implementation of visitor relies on creating a view model
-without a corresponding type. In reality we should do as we did for
-keys and create a category type of visitor. This is really a SML
-concept, not a backend specific concept.
-
-*** Model name should be a qname
-
-We already have most of the qname properties in the model anyway, so
-might as well just use a qname.
+pattern. We should just follow the composite pattern.
 
 *** Create a validator in SML
 
@@ -470,30 +459,6 @@ We should also remove the references to =forward_decls= directly and
 instead have something like "pointer only" dependencies or some such
 SML level concept and then interpret this dependency as a forward
 declaration at the C++ level.
-
-*** Rename implementation specific parameters                         :story:
-
-These should really be called back end specific parameters at the SML
-level. At the dia level, if a parameter is passed in which has a
-representation at the SML level it should simply be converted to this
-representation instead of being added to the KVP.
-
-Actually, these are more like generic parameters:
-
-- at the dia level they are used to fill in gaps in dia (e.g. packages
-  and diagrams do not have comments)
-- at the SML level, they are used to add information which does not
-  make sense for it to be in dia: is property key.
-- at the backend level, they are used to provide information which
-  does not make sense to live in SML: for example the ODB parameters.
-
-Also, when the string table support has been added, we need to create
-a string table with all valid values for the parameter keys.
-
-Name choices:
-
-- opaque parameters
-- untyped parameters
 
 *** Add support for bitsets
 

@@ -10,14 +10,19 @@ This file contains all stories that were closed during sprint 28.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-06-04 Tue 08:37]
+Clock summary at [2013-06-05 Wed 00:00]
 
-| Headline                        | Time   |      |      |
-|---------------------------------+--------+------+------|
-| *Total time*                    | *1:04* |      |      |
-|---------------------------------+--------+------+------|
-| Development Stories Implemented |        | 1:04 |      |
-| IMPLEMENTATION Update README    |        |      | 1:04 |
+| Headline                                          | Time   |      |      |
+|---------------------------------------------------+--------+------+------|
+| *Total time*                                      | *3:33* |      |      |
+|---------------------------------------------------+--------+------+------|
+| Development Stories Implemented                   |        | 3:33 |      |
+| COMPLETED Update README                           |        |      | 1:04 |
+| IMPLEMENTATION Release notes and backlog grooming |        |      | 0:22 |
+| Add support for concepts at the SML level         |        |      | 0:12 |
+| ANALYSIS Break down SML into concepts             |        |      | 1:27 |
+| Refactor top level concepts in SML                |        |      | 0:22 |
+| IMPLEMENTATION Move services into their own type  |        |      | 0:06 |
 #+end:
 
 *** COMPLETED Update README
@@ -31,10 +36,16 @@ The [[https://github.com/Neverlord/libcppa][C++ actor library]] has a nice READM
 applicable to Dogen. Copy the appropriate parts.
 
 *** IMPLEMENTATION Release notes and backlog grooming                  :task:
+    CLOCK: [2013-06-04 Tue 23:54]--[2013-06-04 Tue 23:59] =>  0:05
     CLOCK: [2013-06-04 Tue 19:06]--[2013-06-04 Tue 19:12] =>  0:06
     CLOCK: [2013-06-04 Tue 18:55]--[2013-06-04 Tue 19:06] =>  0:11
 
-*** Consider adding "concepts"
+*** Model name should be a qname
+
+We already have most of the qname properties in the model anyway, so
+might as well just use a qname.
+
+*** Add support for concepts at the SML level
     CLOCK: [2013-05-08 Wed 07:47]--[2013-05-08 Wed 07:59] =>  0:12
 
 A concept is just like a pod, except its stereotype is
@@ -57,17 +68,45 @@ these concepts but at present there is no need for this.
 In terms of implementation, we need a string container for these
 concepts and a way of resolving the stereotype into a qname.
 
-*** Break down SML into concepts
-    CLOCK: [2013-06-04 Tue 20:33]
+**** Create a new class called concept which mirrors pod
+**** Add support for multiple inheritance in concepts
+**** Add concepts to model
+**** Add concepts to pod
+**** When transforming a pod, copy across properties from concept
+
+Must traverse inheritance.
+
+**** Add test to inheritance model
+*** ANALYSIS Break down SML into concepts
+    CLOCK: [2013-06-04 Tue 23:09]--[2013-06-04 Tue 23:54] =>  0:45
+    CLOCK: [2013-06-04 Tue 22:29]--[2013-06-04 Tue 23:09] =>  0:40
+    CLOCK: [2013-06-04 Tue 20:33]--[2013-06-04 Tue 20:35] =>  0:02
 
 We should use the types in eCore as a starting point for breaking down
 the model into concepts. We should have a hierarchy of concepts where
-applicable. Sample concepts:
+applicable. Things that need to be modeled as concepts:
 
-- NamedModelElement
-- DocumentableModelElement
+- UniquelyIdentifiable: type has can be uniquely identified by its
+  qualified name.
+- Documentable: type can be documented.
+- Parameterisable: type supports opaque parameters (implementation
+  specific parameters).
+- Generatable: type has different properties with respect to
+  generation.
+- Inheritable: type provides support for inheritance.
+- Stateful: type has properties.
+- Operatable: type has methods (operations).
+- ModelElement: refinement of UniquelyIdentifiable, Documentable,
+  Parameterisable. Modeled by =sml::model=.
+- GeneratableModelElement: refinement of ModelElement and
+  Generatable. Modeled by =sml::enumeration=, =sml::exception=, etc.
+- ClassifiableModelElement: refinement of GeneratableModelElement,
+  Stateful and Operatable. At present modeled by =sml::pod=. In the
+  future: =sml::value=, =sml::entity=, =sml::service=,
+  =sml::repository=, =sml::factory=. =sml::versioned_key=,
+  =sml::unversioned_key=, =sml::concept=.
 
-*** Rename pod in SML
+*** Refactor top level concepts in SML                                :story:
     CLOCK: [2013-06-04 Tue 18:40]--[2013-06-04 Tue 19:02] =>  0:22
 
 New understanding:
@@ -98,6 +137,41 @@ tree:
 This story is waiting for SML to be code generated.
 
 Definition of [[http://en.wikipedia.org/wiki/Plain_old_data_structure][pod in wikipedia]].
+
+*** Rename implementation specific parameters                         :story:
+
+These should really be called back end specific parameters at the SML
+level. At the dia level, if a parameter is passed in which has a
+representation at the SML level it should simply be converted to this
+representation instead of being added to the KVP.
+
+Actually, these are more like generic parameters:
+
+- at the dia level they are used to fill in gaps in dia (e.g. packages
+  and diagrams do not have comments)
+- at the SML level, they are used to add information which does not
+  make sense for it to be in dia: is property key.
+- at the backend level, they are used to provide information which
+  does not make sense to live in SML: for example the ODB parameters.
+
+Also, when the string table support has been added, we need to create
+a string table with all valid values for the parameter keys.
+
+Name choices:
+
+- opaque parameters
+- untyped parameters
+
+*** Rename nested qname to composite qname
+
+We should just follow the composite pattern in the naming.
+
+*** Visitor as an injected system type
+
+The current implementation of visitor relies on creating a view model
+without a corresponding type. In reality we should do as we did for
+keys and create a category type of visitor. This is really a SML
+concept, not a backend specific concept.
 
 *** IMPLEMENTATION Move services into their own type                  :story:
     CLOCK: [2013-06-04 Tue 18:32]--[2013-06-04 Tue 18:38] =>  0:06
