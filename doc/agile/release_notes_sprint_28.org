@@ -49,6 +49,8 @@ Refactoring for concepts would be made a lot easier if we only had a
 base class that contained all the type features.
 
 **** ANALYSIS Find the correct name for base class
+     CLOCK: [2013-06-05 Wed 08:37]--[2013-06-05 Wed 08:42] =>  0:05
+     CLOCK: [2013-06-05 Wed 08:29]--[2013-06-05 Wed 08:32] =>  0:03
      CLOCK: [2013-06-05 Wed 07:58]--[2013-06-05 Wed 08:17] =>  0:19
 
 eCore and UML ideas:
@@ -57,7 +59,7 @@ eCore and UML ideas:
 - classifier: "A classifier is a discrete concept in the model, having
   identity, state, behavior, and relationships."
 
-XML ideas:
+XML schema ideas:
 
 - =type=: parent; has a name
 - =simple_type=: primitives; child of type.
