@@ -10,20 +10,21 @@ This file contains all stories that were closed during sprint 28.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-06-05 Wed 08:17]
+Clock summary at [2013-06-06 Thu 09:30]
 
-| Headline                                          | Time   |      |      |
-|---------------------------------------------------+--------+------+------|
-| *Total time*                                      | *4:04* |      |      |
-|---------------------------------------------------+--------+------+------|
-| Development Stories Implemented                   |        | 4:04 |      |
-| COMPLETED Update README                           |        |      | 1:04 |
-| IMPLEMENTATION Release notes and backlog grooming |        |      | 0:34 |
-| ANALYSIS Create a base class for SML types        |        |      | 0:19 |
-| Add support for concepts at the SML level         |        |      | 0:12 |
-| ANALYSIS Break down SML into concepts             |        |      | 1:27 |
-| Refactor top level concepts in SML                |        |      | 0:22 |
-| IMPLEMENTATION Move services into their own type  |        |      | 0:06 |
+| Headline                                          | Time    |       |       |
+|---------------------------------------------------+---------+-------+-------|
+| *Total time*                                      | *31:54* |       |       |
+|---------------------------------------------------+---------+-------+-------|
+| Development Stories Implemented                   |         | 31:54 |       |
+| COMPLETED Update README                           |         |       |  1:04 |
+| IMPLEMENTATION Release notes and backlog grooming |         |       |  1:04 |
+| COMPLETED Whiteboarding on the role of SML        |         |       |  1:45 |
+| Improve modeling of domain driven concepts in SML |         |       | 25:54 |
+| Add support for concepts at the SML level         |         |       |  0:12 |
+| ANALYSIS Break down SML into concepts             |         |       |  1:27 |
+| Refactor top level concepts in SML                |         |       |  0:22 |
+| IMPLEMENTATION Move services into their own type  |         |       |  0:06 |
 #+end:
 
 *** COMPLETED Update README
@@ -37,47 +38,138 @@ The [[https://github.com/Neverlord/libcppa][C++ actor library]] has a nice READM
 applicable to Dogen. Copy the appropriate parts.
 
 *** IMPLEMENTATION Release notes and backlog grooming                  :task:
+    CLOCK: [2013-06-06 Thu 07:50]--[2013-06-06 Thu 08:15] =>  0:25
+    CLOCK: [2013-06-05 Wed 19:19]--[2013-06-05 Wed 19:24] =>  0:05
     CLOCK: [2013-06-05 Wed 07:54]--[2013-06-05 Wed 07:58] =>  0:04
     CLOCK: [2013-06-05 Wed 07:46]--[2013-06-05 Wed 07:54] =>  0:08
     CLOCK: [2013-06-04 Tue 23:54]--[2013-06-04 Tue 23:59] =>  0:05
     CLOCK: [2013-06-04 Tue 19:06]--[2013-06-04 Tue 19:12] =>  0:06
     CLOCK: [2013-06-04 Tue 18:55]--[2013-06-04 Tue 19:06] =>  0:11
 
-*** ANALYSIS Create a base class for SML types                        :story:
+*** COMPLETED Whiteboarding on the role of SML                         :task:
+    CLOSED: [2013-06-06 Thu 07:57]
+    CLOCK: [2013-06-05 Wed 20:30]--[2013-06-05 Wed 22:15] =>  1:45
 
-Refactoring for concepts would be made a lot easier if we only had a
-base class that contained all the type features.
+*** Improve modeling of domain driven concepts in SML                 :epic:
+    CLOCK: [2013-06-06 Thu 08:52]--[2013-06-06 Thu 09:03] =>  0:11
+    CLOCK: [2013-06-06 Thu 08:18]--[2013-06-06 Thu 08:48] =>  0:30
 
-**** ANALYSIS Find the correct name for base class
-     CLOCK: [2013-06-05 Wed 08:37]--[2013-06-05 Wed 08:42] =>  0:05
+Its becoming obvious that SML is largely trying to model part of the
+domain driven design model - the part that is closer to code and
+further away from the higher-level design processes. However, we
+introduced DDD features into SML in a somewhat haphazard fashion,
+which obscured this. The objective of this story is to bring to the
+fore all parts of SML which are representations of DDD concepts, and
+to make sure these are modeled as closely as possible to DDD.
+
+**** Rename package to module                                         :story:
+
+Preferred name in DDD. Also more language neutral.
+
+***** Rename class in SML
+***** Update qname
+
+- external package path;
+- package path
+
+***** Update method names
+
+**** Create a base class for types                                    :story:
+     CLOCK: [2013-06-05 Wed 08:37]--[2013-06-06 Thu 09:28] => 24:51
      CLOCK: [2013-06-05 Wed 08:29]--[2013-06-05 Wed 08:32] =>  0:03
      CLOCK: [2013-06-05 Wed 07:58]--[2013-06-05 Wed 08:17] =>  0:19
 
-eCore and UML ideas:
+Refactoring for concepts would be made a lot easier if only we had a
+base class that contained all the type features. We need two levels of
+inheritance:
 
-- typed_element: not very clear; a model type with a type?
-- classifier: "A classifier is a discrete concept in the model, having
-  identity, state, behavior, and relationships."
+- a =type=: this is the base class for things such as =module=,
+  =enumeration=, =string_table=, etc. It has a =qname=, implementation
+  specific parameters and documentation. For now, it should also have
+  generation type (but this needs to be revisited).
+- an =object_type= (see naming rationale below)which derives from type
+  and adds properties and operations to it.
 
-XML schema ideas:
+***** ANALYSIS Find the correct name for object base class
+
+In SML, entities, services and values are all "types of objects". The
+book is never very clear about their relationship, but a few
+inferences can be made:
+
+- "value objects": these are objects which have no identity;
+- services: these contain functions that would otherwise be
+  stand-alone but in a OO world must be packaged inside of objects. in
+  SML, due to code generation limitations we take this further and
+  consider a service anything which has behaviour. This is not a DDD
+  view though.
+- entities: these are objects with identity.
+
+Now, a type used to describe objects is traditionally called a class
+(e.g. a meta object, or the object that models objects), so it would
+make sense for the base class to be called =class=. However DDD
+terminology seems to focus more on run time aspects. One could
+conceivably call it =object=.
+
+eCore and UML derived ideas:
+
+- =typed_element=: not very clear; a model type with a type?
+- =classifier=: "A classifier is a discrete concept in the model,
+  having identity, state, behavior, and relationships."
+
+XML schema derived ideas:
 
 - =type=: parent; has a name
 - =simple_type=: primitives; child of type.
 - =complex_type=: pods; child of type.
 - =enumeration=: child of simple type.
-- ...
 
-**** Update the SML diagram and code generate it
+***** Update the SML diagram and code generate it
 
 Make the type visitable
 
-**** Change Transformation code to use the visitor
+***** Change Transformation code to use the visitor
 
 - dia to sml
 - sml to c++
 - potentially merger
 
-**** Update model to be a container of the base type
+***** Update model to be a container of the base type
+
+- Consider using boost pointer container, although this would mean
+  adding support for it in dogen. Maybe for now we could start with
+  =boost::shared_ptr=.
+- Change transformer to become a visitor of type
+- Change C++ transformer
+
+**** keys and visitor                                                  :note:
+
+At the meta-model level, keys are actually just an instance of a value
+object with properties. The injector will create them. An entity
+should have a special association with its keys.
+
+Visitors are injected as services. They have operations with the visit
+methods.
+
+**** Create class to model entity
+
+We should have an entity class with an identity. Identity is just a
+set of properties which are used to uniquely identify the object. The
+entity class should also have associated with it the set of versioned
+and unversioned keys, if such exist (e.g. if the class is keyed and/or
+versioned). Potentially =boost::optional=?
+
+**** Create classes to model service, factory and repository
+
+For practical purposes (and for now) these classes are all identical:
+they can have properties and operations. They have different names to
+keep in sync with DDD. We could of course create a common type with a
+not-so-clear-name (e.g. =object_with_behaviour=) and then stick an
+enumeration in it for the three different types. However, it appears
+much more meaningful to have the correct DDD names, even it if means a
+few identical classes with different names.
+
+We need to add stereotypes for factory and repository to the
+transformer.
 
 *** Model name should be a qname                                      :story:
 
