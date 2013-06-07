@@ -11,6 +11,14 @@ This file contains all stories that haven't been assigned to a sprint.
 
 Stories that we intend to look at, at some point.
 
+*** Make EOS support optional
+
+With the release of boost 1.54 We can almost compile dogen with a
+vanilla boost. once we make ODB optional, the only blocker would be
+EOS. We should make it optional too. This is not so easy because it
+would break the tests as the output is expected to contain EOS
+stuff. Perhaps we should consider removing it altogether?
+
 *** Add support for boost concept
 
 Once dogen supports concepts, the natural thing to do is to express
