@@ -310,13 +310,6 @@ separate folders. This would allow the creation of "conversion" apps
 which take types for one version and transform them into the next
 version.
 
-*** Consider not creating unversioned keys for single property        :story:
-
-If a key is made up of a single property, its a bit nonsensical to
-create an unversioned key. We should only generate the versioned
-key. However, it does make life easier. Wait for real world use cases
-to decide.
-
 *** Add support for boost parameter
 
 It would be nice to have boost parameter support. [[http://www.boost.org/doc/libs/1_53_0/libs/parameter/doc/html/index.html#named-function-parameters][Documentation here]].
@@ -789,27 +782,6 @@ reflection class and field.
 
 Diff support is injected into the model just like keys. It also
 requires that reflection support gets injected too.
-
-*** Injection framework
-
-We need a more generic way of handling system types injection into
-models. This is because there is a number of things that can be
-derived from the existing model types:
-
-- keys
-- diff support
-- reflection
-- cache code
-- etc.
-
-So we need to:
-
-- make injector a composite of injectors that do the real work such as
-  =key_injector=. internally =injector= just delegates the work to
-  these classes.
-- injector decides which internal injectors to use based on options
-  passed in.
-- in the IoC spirit, we should probably create a =injector_interface=.
 
 *** Container details in JSON dump
 
