@@ -41,7 +41,6 @@ const std::string test_suite("processor_spec");
 const std::string model_name("test");
 const std::string missing_name("Could not find name");
 const std::string empty_name("Dia object name is empty");
-const std::string missing_package("Missing package for dia object");
 
 const std::string dia_enumeration_stereotype("#enumeration#");
 const std::string dia_exception_stereotype("#exception#");
@@ -94,8 +93,8 @@ BOOST_AUTO_TEST_CASE(uml_class_with_exception_stereotype_transforms_into_expecte
     BOOST_CHECK(po.stereotype() == exception_stereotype);
 }
 
-BOOST_AUTO_TEST_CASE(uml_large_package_transforms_into_expected_package) {
-    SETUP_TEST_LOG_SOURCE("uml_large_package_transforms_into_expected_package");
+BOOST_AUTO_TEST_CASE(uml_large_package_transforms_into_expected_processed_object) {
+    SETUP_TEST_LOG_SOURCE("uml_large_package_transforms_into_expected_processed_object");
 
     dogen::dia_to_sml::processor p;
     const auto o(mock_object_factory::build_large_package(0));

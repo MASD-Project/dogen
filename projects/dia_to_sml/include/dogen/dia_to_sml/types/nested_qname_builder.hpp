@@ -47,8 +47,8 @@ public:
 
 public:
     nested_qname_builder(
-        const std::unordered_set<std::string>& packages,
-        const std::list<std::string>& external_package_path,
+        const std::unordered_set<std::string>& modules,
+        const std::list<std::string>& external_module_path,
         const std::string& model_name);
 
 private:
@@ -64,8 +64,8 @@ public:
     sml::nested_qname build();
 
 private:
-    const std::unordered_set<std::string> packages_;
-    const std::list<std::string> external_package_path_;
+    const std::unordered_set<std::string> modules_;
+    const std::list<std::string> external_module_path_;
     const std::string model_name_;
     std::list<std::string> names_;
     boost::shared_ptr<node> root_;

@@ -36,16 +36,16 @@ namespace dogen {
 namespace dia_to_sml {
 
 nested_qname_builder::nested_qname_builder(
-    const std::unordered_set<std::string>& packages,
-    const std::list<std::string>& external_package_path,
+    const std::unordered_set<std::string>& modules,
+    const std::list<std::string>& external_module_path,
     const std::string& model_name)
-    : packages_(packages), external_package_path_(external_package_path),
+    : modules_(modules), external_module_path_(external_module_path),
       model_name_(model_name), root_(new node), current_(root_) {
 
     BOOST_LOG_SEV(lg, debug) << "Initialised with settings:"
-                             << " packages: " << packages
-                             << " external_package_path: "
-                             << external_package_path
+                             << " modules: " << modules
+                             << " external_module_path: "
+                             << external_module_path
                              << " model_name: " << model_name;
 
 }
@@ -78,8 +78,8 @@ void nested_qname_builder::finish_current_node() {
         return;
     }
 
-    const auto i(packages_.find(names_.front()));
-    if (i != packages_.end()) {
+    const auto i(modules_.find(names_.front()));
+    if (i != modules_.end()) {
         qn.model_name(model_name_);
         BOOST_LOG_SEV(lg, debug) << "model name: " << model_name_;
     } else {
@@ -92,8 +92,8 @@ void nested_qname_builder::finish_current_node() {
     BOOST_LOG_SEV(lg, debug) << "type name: " << qn.type_name();
 
     names_.pop_back();
-    qn.package_path(names_);
-    BOOST_LOG_SEV(lg, debug) << "package path: " << qn.package_path();
+    qn.module_path(names_);
+    BOOST_LOG_SEV(lg, debug) << "module path: " << qn.module_path();
 
     names_.clear();
     current_->data(qn);

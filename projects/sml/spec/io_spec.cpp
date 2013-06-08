@@ -42,7 +42,6 @@ BOOST_AUTO_TEST_CASE(validate_io) {
     SETUP_TEST_LOG("validate_io");
 
     test_io<category_types_generator>();
-    test_io<entry_generator>();
     test_io<enumeration_generator>();
     test_io<enumerator_generator>();
     test_io<exception_generator>();
@@ -50,14 +49,12 @@ BOOST_AUTO_TEST_CASE(validate_io) {
     test_io<meta_types_generator>();
     test_io<model_generator>();
     test_io<nested_qname_generator>();
-    test_io<package_generator>();
     test_io<pod_generator>();
     test_io<pod_types_generator>();
     test_io<primitive_generator>();
     test_io<property_generator>();
     test_io<qname_generator>();
     test_io<reference_generator>();
-    test_io<string_table_generator>();
 }
 
 BOOST_AUTO_TEST_SUITE_END()

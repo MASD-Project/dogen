@@ -33,7 +33,6 @@ namespace {
 auto lg(logger_factory("cpp.transformer"));
 
 const std::string empty;
-const std::list<std::string> empty_package_path;
 const std::string dot(".");
 const std::string comma(",");
 const std::string space(" ");
@@ -185,15 +184,15 @@ transformer::transform_into_qualified_name(const dogen::sml::qname& qn) const {
 
 std::list<std::string>
 transformer::transform_into_namespace_list(const dogen::sml::qname& qn) const {
-    std::list<std::string> r(qn.external_package_path());
+    std::list<std::string> r(qn.external_module_path());
 
     if (!qn.model_name().empty())
         r.push_back(qn.model_name());
 
-    const std::list<std::string> pp(qn.package_path());
+    const std::list<std::string> pp(qn.module_path());
     r.insert(r.end(), pp.begin(), pp.end());
 
-    if (qn.meta_type() == sml::meta_types::package)
+    if (qn.meta_type() == sml::meta_types::module)
         r.push_back(qn.type_name());
 
     return r;
@@ -237,14 +236,14 @@ exception_info transformer::transform(const sml::exception& e) const {
     return r;
 }
 
-namespace_info transformer::transform(const sml::package& p) const {
-    BOOST_LOG_SEV(lg, debug) << "Transforming package: " << p.name();
+namespace_info transformer::transform(const sml::module& p) const {
+    BOOST_LOG_SEV(lg, debug) << "Transforming module: " << p.name();
 
     namespace_info r;
     r.documentation(p.documentation());
     r.namespaces(transform_into_namespace_list(p.name()));
 
-    BOOST_LOG_SEV(lg, debug) << "Transformed package: " << p.name();
+    BOOST_LOG_SEV(lg, debug) << "Transformed module: " << p.name();
 
     return r;
 }
@@ -258,8 +257,8 @@ namespace_info transformer::transform_model_into_namespace() const {
 
     sml::qname qn;
     qn.type_name(n);
-    qn.external_package_path(model_.external_package_path());
-    qn.meta_type(sml::meta_types::package);
+    qn.external_module_path(model_.external_module_path());
+    qn.meta_type(sml::meta_types::module);
     r.namespaces(transform_into_namespace_list(qn));
 
     BOOST_LOG_SEV(lg, debug) << "Transformed model into namespace: " << n;
@@ -272,7 +271,7 @@ registrar_info transformer::transform_model_into_registrar() const {
 
     sml::qname qn;
     qn.model_name(n);
-    qn.external_package_path(model_.external_package_path());
+    qn.external_module_path(model_.external_module_path());
     qn.meta_type(sml::meta_types::pod);
 
     registrar_info r;

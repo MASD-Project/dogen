@@ -50,11 +50,11 @@ using dogen::utility::test_data::dia_sml;
 namespace  {
 
 const std::string empty;
-const std::string empty_package_path;
+const std::string empty_module_path;
 const std::string test_module("engine");
 const std::string test_suite("workflow_spec");
-const std::string package_path("dogen");
-const std::string package_path_disabled_model_package("dogen::dmp");
+const std::string module_path("dogen");
+const std::string module_path_disabled_model_module("dogen::dmp");
 const std::string extra_folder("dmp");
 const std::string domain_facet_must_be_enabled("Domain facet must be enabled");
 const std::string io_facet_and_integrated_io_error(
@@ -79,7 +79,7 @@ dogen::config::settings
 default_mock_settings(dogen::utility::test_data::codegen_tds tds) {
     using dogen::config::test::mock_settings_factory;
     return mock_settings_factory::build_settings(
-        tds.target(), tds.actual(), package_path);
+        tds.target(), tds.actual(), module_path);
 }
 
 dogen::config::settings debug_dogen_mock_settings() {
@@ -89,7 +89,7 @@ dogen::config::settings debug_dogen_mock_settings() {
         tds::target(),
         tds::actual_src(),
         tds::actual_include(),
-        empty_package_path);
+        empty_module_path);
 }
 
 dogen::config::settings empty_tds_mock_settings() {
@@ -99,7 +99,7 @@ dogen::config::settings empty_tds_mock_settings() {
         tds::target(),
         tds::actual_src(),
         tds::actual_include(),
-        empty_package_path);
+        empty_module_path);
 }
 
 template<typename SettingsFactoryFunction>
@@ -229,8 +229,8 @@ BOOST_AUTO_TEST_CASE(disable_facet_folders_generates_expected_code) {
     BOOST_CHECK(check_code_generation(t, lambda));
 }
 
-BOOST_AUTO_TEST_CASE(disable_model_package_generates_expected_code) {
-    SETUP_TEST_LOG("disable_model_package_generates_expected_code");
+BOOST_AUTO_TEST_CASE(disable_model_module_generates_expected_code) {
+    SETUP_TEST_LOG("disable_model_module_generates_expected_code");
     using dogen::config::settings;
     auto lambda([](dogen::utility::test_data::codegen_tds tds) -> settings {
             auto s(default_mock_settings(tds));
@@ -239,8 +239,8 @@ BOOST_AUTO_TEST_CASE(disable_model_package_generates_expected_code) {
             s.cpp(cs);
 
             auto ms(s.modeling());
-            ms.disable_model_package(true);
-            ms.external_package_path(package_path_disabled_model_package);
+            ms.disable_model_module(true);
+            ms.external_module_path(module_path_disabled_model_module);
             s.modeling(ms);
             return s;
         });
@@ -550,7 +550,7 @@ BOOST_AUTO_TEST_CASE(split_project_model_generates_expected_code) {
                 tds.target(),
                 tds.actual() / "split_project/source",
                 tds.actual() / "split_project/dir/inc/dogen",
-                package_path);
+                module_path);
         });
 
     const auto t(dia_sml::input_split_project_dia());

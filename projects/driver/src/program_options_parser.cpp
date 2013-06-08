@@ -99,9 +99,9 @@ const std::string cpp_disable_xml_serialization_arg(
 const std::string cpp_use_integrated_io_arg("cpp-use-integrated-io");
 
 const std::string target_arg("target");
-const std::string external_package_path_arg("external-package-path");
+const std::string external_module_path_arg("external-module-path");
 const std::string reference_arg("reference");
-const std::string disable_model_package("disable-model-package");
+const std::string disable_model_module("disable-model-module");
 
 const std::string output_to_stdout_arg("output-to-stdout");
 const std::string output_to_file_arg("output-to-file");
@@ -171,18 +171,18 @@ program_options_parser::modeling_options_factory() const {
     using boost::program_options::value;
     boost::program_options::options_description r("Modeling options");
     r.add_options()
-        ("external-package-path,p",
+        ("external-module-path,p",
             value<std::string>(),
-            "External packages containing the target model, delimited by '::'.")
+            "External modules containing the target model, delimited by '::'.")
         ("target,t",
             value<std::string>(),
             "Dia diagram to generate code for.")
         ("reference,r",
             value<std::vector<std::string> >(),
             "Dia diagrams that our target diagram depends on."
-            "If required you can add the package path: file,PP.")
-        ("disable-model-package",
-            "Do not generate a top-level package with the model name.");
+            "If required you can add the module path: file,PP.")
+        ("disable-model-module",
+            "Do not generate a top-level module with the model name.");
 
     return r;
 }
@@ -501,9 +501,9 @@ program_options_parser::transform_modeling_settings(
         throw_missing_target();
     r.target(vm[target_arg].as<std::string>());
 
-    if (vm.count(external_package_path_arg)) {
-        r.external_package_path(
-            vm[external_package_path_arg].as<std::string>());
+    if (vm.count(external_module_path_arg)) {
+        r.external_module_path(
+            vm[external_module_path_arg].as<std::string>());
     }
 
     if (vm.count(reference_arg)) {
@@ -527,12 +527,12 @@ program_options_parser::transform_modeling_settings(
             dogen::config::reference ref;
             ref.path(tokens[0]);
             if (tokens.size() > 1)
-                ref.external_package_path(tokens[1]);
+                ref.external_module_path(tokens[1]);
             references.push_back(ref);
         }
         r.references(references);
     }
-    r.disable_model_package(vm.count(disable_model_package));
+    r.disable_model_module(vm.count(disable_model_module));
 
     return r;
 }

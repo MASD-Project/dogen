@@ -185,7 +185,7 @@ into its SML representation.#</dia:string>
         <dia:point val="-40.1268,53.1173"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="24.370000000000001"/>
+        <dia:real val="24.369999999999997"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="14.000000000000002"/>
@@ -1119,7 +1119,7 @@ into its SML representation.#</dia:string>
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#top_level_package_names#</dia:string>
+            <dia:string>#top_level_module_names#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#std::unordered_set&lt;std::string&gt;#</dia:string>
@@ -2036,7 +2036,7 @@ into its SML representation.#</dia:string>
         </dia:composite>
         <dia:composite type="umloperation">
           <dia:attribute name="name">
-            <dia:string>#transform_package#</dia:string>
+            <dia:string>#transform_module#</dia:string>
           </dia:attribute>
           <dia:attribute name="stereotype">
             <dia:string>##</dia:string>
@@ -2244,10 +2244,10 @@ into its SML representation.#</dia:string>
         <dia:point val="-55.0305,29.0703"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="12.065"/>
+        <dia:real val="12.065000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="1.7"/>
+        <dia:real val="1.7000000000000002"/>
       </dia:attribute>
       <dia:attribute name="line_width">
         <dia:real val="0.10000000000000001"/>
@@ -2286,7 +2286,7 @@ into its SML representation.#</dia:string>
         <dia:point val="-42.9655,29.9203"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-43.0158,29.4931;-37.4165,30.6068"/>
+        <dia:rectangle val="-43.0157,29.4931;-37.4165,30.6068"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -2430,13 +2430,13 @@ into its SML representation.#</dia:string>
         <dia:point val="65.677,81.0114"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="65.627,80.9614;90.867,90.8614"/>
+        <dia:rectangle val="65.627,80.9614;90.482,90.8614"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="65.677,81.0114"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="25.140000000000001"/>
+        <dia:real val="24.755000000000003"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="9.8000000000000007"/>
@@ -2531,7 +2531,7 @@ into its SML representation.#</dia:string>
       <dia:attribute name="attributes">
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#packages#</dia:string>
+            <dia:string>#modules#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#std::unordered_set&lt;std::string&gt;#</dia:string>
@@ -2554,7 +2554,7 @@ into its SML representation.#</dia:string>
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#external_package_path#</dia:string>
+            <dia:string>#external_module_path#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#std::list&lt;std::string&gt;#</dia:string>
@@ -2631,7 +2631,7 @@ into its SML representation.#</dia:string>
           <dia:attribute name="parameters">
             <dia:composite type="umlparameter">
               <dia:attribute name="name">
-                <dia:string>#packages#</dia:string>
+                <dia:string>#modules#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
                 <dia:string>#std::unordered_set&lt;std::string&gt;#</dia:string>
@@ -2648,7 +2648,7 @@ into its SML representation.#</dia:string>
             </dia:composite>
             <dia:composite type="umlparameter">
               <dia:attribute name="name">
-                <dia:string>#external_package_path#</dia:string>
+                <dia:string>#external_module_path#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
                 <dia:string>#std::list&lt;std::string&gt;#</dia:string>
@@ -2870,17 +2870,17 @@ into its SML representation.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="90.817,81.0114"/>
+        <dia:point val="90.432,81.0114"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="90.067,74.1751;102.242,81.8508"/>
+        <dia:rectangle val="89.682,74.1751;102.242,81.8508"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="90.817,81.0114"/>
-        <dia:point val="90.817,74.9251"/>
+        <dia:point val="90.432,81.0114"/>
+        <dia:point val="90.432,74.9251"/>
         <dia:point val="102.042,74.9251"/>
         <dia:point val="102.042,81.0508"/>
       </dia:attribute>
@@ -2908,14 +2908,14 @@ into its SML representation.#</dia:string>
         <dia:point val="76.5774,98.412"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="76.5178,90.6767;78.6484,98.4716"/>
+        <dia:rectangle val="76.5188,90.686;78.4567,98.4706"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="conn_endpoints">
         <dia:point val="76.5774,98.412"/>
-        <dia:point val="78.247,90.8114"/>
+        <dia:point val="78.0545,90.8114"/>
       </dia:attribute>
       <dia:attribute name="text_colour">
         <dia:color val="#000000"/>
@@ -2930,7 +2930,7 @@ into its SML representation.#</dia:string>
         <dia:enum val="0"/>
       </dia:attribute>
       <dia:attribute name="text_pos">
-        <dia:point val="77.4124,95.112"/>
+        <dia:point val="77.3162,95.112"/>
       </dia:attribute>
       <dia:connections>
         <dia:connection handle="0" to="O15" connection="1"/>
@@ -2951,7 +2951,7 @@ into its SML representation.#</dia:string>
         <dia:point val="67.0799,98.412"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="18.994999999999997"/>
+        <dia:real val="18.995000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3.3000000000000003"/>
@@ -3001,7 +3001,7 @@ off of them.#</dia:string>
         <dia:point val="116.915,81.0197"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="20.135000000000002"/>
+        <dia:real val="20.134999999999998"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="5.2000000000000002"/>
@@ -3237,7 +3237,7 @@ off of them.#</dia:string>
         <dia:real val="20.535"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="4.1000000000000005"/>
+        <dia:real val="4.0999999999999996"/>
       </dia:attribute>
       <dia:attribute name="line_width">
         <dia:real val="0.10000000000000001"/>
@@ -3349,7 +3349,7 @@ finds.#</dia:string>
         <dia:point val="87.6884,65.9969"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="78.197,65.2469;88.4384,81.8114"/>
+        <dia:rectangle val="78.0045,65.2469;88.4384,81.8114"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -3357,8 +3357,8 @@ finds.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="87.6884,65.9969"/>
         <dia:point val="87.6884,74.9918"/>
-        <dia:point val="78.247,74.9918"/>
-        <dia:point val="78.247,81.0114"/>
+        <dia:point val="78.0545,74.9918"/>
+        <dia:point val="78.0545,81.0114"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -3904,7 +3904,7 @@ finds.#</dia:string>
             </dia:composite>
             <dia:composite type="umlparameter">
               <dia:attribute name="name">
-                <dia:string>#external_package_path#</dia:string>
+                <dia:string>#external_module_path#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
                 <dia:string>#const std::string&amp;#</dia:string>
@@ -4248,7 +4248,7 @@ finds.#</dia:string>
             </dia:composite>
             <dia:composite type="umlparameter">
               <dia:attribute name="name">
-                <dia:string>#external_package_path#</dia:string>
+                <dia:string>#external_module_path#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
                 <dia:string>#const std::string&amp;#</dia:string>
@@ -4521,7 +4521,7 @@ finds.#</dia:string>
             </dia:composite>
             <dia:composite type="umlparameter">
               <dia:attribute name="name">
-                <dia:string>#external_package_path#</dia:string>
+                <dia:string>#external_module_path#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
                 <dia:string>#const std::string&amp;#</dia:string>
@@ -4583,13 +4583,13 @@ finds.#</dia:string>
         <dia:point val="96.0379,98.9907"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="95.9879,98.9407;122.383,112.841"/>
+        <dia:rectangle val="95.9879,98.9407;121.998,112.841"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="96.0379,98.9907"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="26.295000000000002"/>
+        <dia:real val="25.91"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="13.800000000000001"/>
@@ -4684,7 +4684,7 @@ finds.#</dia:string>
       <dia:attribute name="attributes">
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#packages#</dia:string>
+            <dia:string>#modules#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#std::unordered_set&lt;std::string&gt;#</dia:string>
@@ -4707,7 +4707,7 @@ finds.#</dia:string>
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#external_package_path#</dia:string>
+            <dia:string>#external_module_path#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#std::list&lt;std::string&gt;#</dia:string>
@@ -4853,7 +4853,7 @@ finds.#</dia:string>
           <dia:attribute name="parameters">
             <dia:composite type="umlparameter">
               <dia:attribute name="name">
-                <dia:string>#packages#</dia:string>
+                <dia:string>#modules#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
                 <dia:string>#std::unordered_set&lt;std::string&gt;#</dia:string>
@@ -4870,7 +4870,7 @@ finds.#</dia:string>
             </dia:composite>
             <dia:composite type="umlparameter">
               <dia:attribute name="name">
-                <dia:string>#external_package_path#</dia:string>
+                <dia:string>#external_module_path#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
                 <dia:string>#std::list&lt;std::string&gt;#</dia:string>
@@ -5352,7 +5352,7 @@ finds.#</dia:string>
         <dia:point val="96.1385,122.041"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="96.0885,112.041;109.935,122.841"/>
+        <dia:rectangle val="96.0885,112.041;109.743,122.841"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -5360,8 +5360,8 @@ finds.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="96.1385,122.041"/>
         <dia:point val="96.1385,118.025"/>
-        <dia:point val="109.185,118.025"/>
-        <dia:point val="109.185,112.791"/>
+        <dia:point val="108.993,118.025"/>
+        <dia:point val="108.993,112.791"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -5420,19 +5420,19 @@ finds.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="90.817,90.8114"/>
+        <dia:point val="90.432,90.8114"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="90.067,90.0614;109.385,99.7907"/>
+        <dia:rectangle val="89.682,90.0614;109.193,99.7907"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="90.817,90.8114"/>
-        <dia:point val="90.817,95.9125"/>
-        <dia:point val="109.185,95.9125"/>
-        <dia:point val="109.185,98.9907"/>
+        <dia:point val="90.432,90.8114"/>
+        <dia:point val="90.432,95.9125"/>
+        <dia:point val="108.993,95.9125"/>
+        <dia:point val="108.993,98.9907"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -6017,7 +6017,7 @@ finds.#</dia:string>
         <dia:point val="7.1079,98.8947"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="9.4324999999999992"/>
+        <dia:real val="9.432500000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="4.4000000000000004"/>
@@ -8173,7 +8173,7 @@ finds.#</dia:string>
         <dia:point val="25.9114,113.95"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="6.9800000000000004"/>
+        <dia:real val="6.9799999999999995"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -8538,7 +8538,7 @@ finds.#</dia:string>
         <dia:point val="-36.1625,7.36663"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="22.844999999999999"/>
+        <dia:real val="22.845000000000002"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="5.7000000000000002"/>

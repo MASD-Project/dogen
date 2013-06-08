@@ -18,35 +18,27 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_SML_HASH_STRING_TABLE_HASH_HPP
-#define DOGEN_SML_HASH_STRING_TABLE_HASH_HPP
+#ifndef DOGEN_SML_TYPES_MODEL_ELEMENT_VISITOR_HPP
+#define DOGEN_SML_TYPES_MODEL_ELEMENT_VISITOR_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <functional>
-#include "dogen/sml/types/string_table.hpp"
+#include "dogen/sml/types/model_element_fwd.hpp"
 
 namespace dogen {
 namespace sml {
 
-class string_table_hasher {
+class model_element_visitor {
 public:
-    static std::size_t hash(const string_table& v);
+    virtual ~model_element_visitor() noexcept = 0;
+
+public:
 };
+
+inline model_element_visitor::~model_element_visitor() noexcept { }
 
 } }
 
-namespace std {
-
-template<>
-class hash<dogen::sml::string_table> {
-public:
-    size_t operator()(const dogen::sml::string_table& v) const {
-        return dogen::sml::string_table_hasher::hash(v);
-    }
-};
-
-}
 #endif

@@ -151,7 +151,7 @@ std::ostream& operator<<(std::ostream& s, const context& v) {
       << "\"dia_id_to_qname\": " << v.dia_id_to_qname() << ", "
       << "\"original_parent\": " << v.original_parent() << ", "
       << "\"leaves\": " << v.leaves() << ", "
-      << "\"top_level_package_names\": " << v.top_level_package_names() << ", "
+      << "\"top_level_module_names\": " << v.top_level_module_names() << ", "
       << "\"model\": " << v.model()
       << " }";
     return(s);

@@ -58,12 +58,12 @@ private:
      */
     sml::model to_sml(const dia::diagram& d,
         const std::string& model_name,
-        const std::string& external_package_path,
+        const std::string& external_module_path,
         const bool is_target) const;
 
 public:
     virtual sml::model provide(const boost::filesystem::path& p,
-        const std::string& external_package_path,
+        const std::string& external_module_path,
         const bool is_target = false) override;
 
 private:

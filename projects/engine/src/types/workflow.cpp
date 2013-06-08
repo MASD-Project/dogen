@@ -149,13 +149,13 @@ boost::optional<sml::model> workflow::make_generatable_model() const {
     std::list<sml::model> references;
     for (const auto ref : settings_.modeling().references()) {
         const auto path(ref.path());
-        const auto epp(ref.external_package_path());
+        const auto epp(ref.external_module_path());
         references.push_back(pro.provide(path, epp, is_target));
     }
 
     is_target = true;
     const auto path(settings_.modeling().target());
-    const auto epp(settings_.modeling().external_package_path());
+    const auto epp(settings_.modeling().external_module_path());
     const sml::model target(pro.provide(path, epp, is_target));
 
     const bool add_system_models(true);
@@ -168,7 +168,7 @@ boost::optional<sml::model> workflow::make_generatable_model() const {
     per.persist(m, merged);
 
     BOOST_LOG_SEV(lg, debug) << "Totals: pods: " << m.pods().size()
-                             << " packages: " << m.packages().size()
+                             << " modules: " << m.modules().size()
                              << " enumerations: " << m.enumerations().size()
                              << " exceptions: " << m.exceptions().size()
                              << " primitives: " << m.primitives().size();

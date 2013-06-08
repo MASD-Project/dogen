@@ -28,22 +28,22 @@ reference::reference()
 
 reference::reference(
     const std::string& model_name,
-    const std::list<std::string>& external_package_path,
+    const std::list<std::string>& external_module_path,
     const bool is_system)
     : model_name_(model_name),
-      external_package_path_(external_package_path),
+      external_module_path_(external_module_path),
       is_system_(is_system) { }
 
 void reference::swap(reference& other) noexcept {
     using std::swap;
     swap(model_name_, other.model_name_);
-    swap(external_package_path_, other.external_package_path_);
+    swap(external_module_path_, other.external_module_path_);
     swap(is_system_, other.is_system_);
 }
 
 bool reference::operator==(const reference& rhs) const {
     return model_name_ == rhs.model_name_ &&
-        external_package_path_ == rhs.external_package_path_ &&
+        external_module_path_ == rhs.external_module_path_ &&
         is_system_ == rhs.is_system_;
 }
 
@@ -69,20 +69,20 @@ void reference::model_name(const std::string&& v) {
     model_name_ = std::move(v);
 }
 
-const std::list<std::string>& reference::external_package_path() const {
-    return external_package_path_;
+const std::list<std::string>& reference::external_module_path() const {
+    return external_module_path_;
 }
 
-std::list<std::string>& reference::external_package_path() {
-    return external_package_path_;
+std::list<std::string>& reference::external_module_path() {
+    return external_module_path_;
 }
 
-void reference::external_package_path(const std::list<std::string>& v) {
-    external_package_path_ = v;
+void reference::external_module_path(const std::list<std::string>& v) {
+    external_module_path_ = v;
 }
 
-void reference::external_package_path(const std::list<std::string>&& v) {
-    external_package_path_ = std::move(v);
+void reference::external_module_path(const std::list<std::string>&& v) {
+    external_module_path_ = std::move(v);
 }
 
 bool reference::is_system() const {

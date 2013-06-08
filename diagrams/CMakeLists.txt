@@ -46,7 +46,9 @@ add_custom_target(codegen_${target}
     --cpp-enable-facet test_data
     --ignore-files-matching-regex .*/test/.*
     --ignore-files-matching-regex .*/spec/.*
-    -v -d -p dogen)
+    --verbose
+    --delete-extra-files
+    --external-module-path dogen)
 if(use_latest_driver)
     add_dependencies(codegen_${target} driver)
 endif()
@@ -66,7 +68,9 @@ add_custom_target(codegen_${target}
     --cpp-enable-facet test_data
     --ignore-files-matching-regex .*/test/.*
     --ignore-files-matching-regex .*/spec/.*
-    -v -d -p dogen)
+    --verbose
+    --delete-extra-files
+    --external-module-path dogen)
 if(use_latest_driver)
     add_dependencies(codegen_${target} driver)
 endif()
@@ -86,7 +90,9 @@ add_custom_target(codegen_${target}
     --cpp-enable-facet test_data
     --ignore-files-matching-regex .*/test/.*
     --ignore-files-matching-regex .*/spec/.*
-    -v -d -p dogen)
+    --verbose
+    --delete-extra-files
+    --external-module-path dogen)
 if(use_latest_driver)
     add_dependencies(codegen_${target} driver)
 endif()
@@ -107,7 +113,9 @@ add_custom_target(codegen_${target}
     --cpp-enable-facet serialization
     --cpp-enable-facet test_data
     --ignore-files-matching-regex .*/spec/.*
-    -v -d -p dogen)
+    --verbose
+    --delete-extra-files
+    --external-module-path dogen)
 if(use_latest_driver)
     add_dependencies(codegen_${target} driver)
 endif()
@@ -130,7 +138,9 @@ add_custom_target(codegen_${target}
     --ignore-files-matching-regex .*/spec/.*
     --ignore-files-matching-regex .*sql
     --ignore-files-matching-regex .*-odb.*
-    -v -d -p dogen)
+    --verbose
+    --delete-extra-files
+    --external-module-path dogen)
 if(use_latest_driver)
     add_dependencies(codegen_${target} driver)
 endif()
@@ -154,7 +164,9 @@ add_custom_target(codegen_${target}
     --cpp-disable-cmakelists
     --ignore-files-matching-regex .*/CMakeLists.txt
     --ignore-files-matching-regex .*/spec/.*
-    -v -d -p dogen)
+    --verbose
+    --delete-extra-files
+    --external-module-path dogen)
 if(use_latest_driver)
     add_dependencies(codegen_${target} driver)
 endif()
@@ -178,7 +190,9 @@ add_custom_target(codegen_${target}
     --ignore-files-matching-regex .*/CMakeLists.txt
     --ignore-files-matching-regex .*/spec/.*
     --ignore-files-matching-regex .*/test/.*
-    -v -d -p dogen)
+    --verbose
+    --delete-extra-files
+    --external-module-path dogen)
 if(use_latest_driver)
     add_dependencies(codegen_${target} driver)
 endif()

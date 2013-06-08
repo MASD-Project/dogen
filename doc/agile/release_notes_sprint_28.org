@@ -196,18 +196,22 @@ few identical classes with different names.
 We need to add stereotypes for factory and repository to the
 transformer.
 
-**** Rename package to module                                         :story:
+**** COMPLETED Rename package to module                               :story:
+     CLOSED: [2013-06-08 Sat 22:56]
+     CLOCK: [2013-06-08 Sat 20:40]--[2013-06-08 Sat 22:56] =>  2:16
 
 Preferred name in DDD. Also more language neutral.
 
-***** Rename class in SML
-***** Update qname
+***** COMPLETED Rename class in SML
+      CLOSED: [2013-06-08 Sat 22:56]
+***** COMPLETED Update qname
+      CLOSED: [2013-06-08 Sat 22:56]
 
 - external package path;
 - package path
 
-***** Update method names
-
+***** COMPLETED Update method names
+      CLOSED: [2013-06-08 Sat 22:56]
 **** Remove generation types                                          :story:
 
 SML knows not of code generation so we shouldn't have a generation

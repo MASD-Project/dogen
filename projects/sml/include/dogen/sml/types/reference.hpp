@@ -48,7 +48,7 @@ public:
 public:
     reference(
         const std::string& model_name,
-        const std::list<std::string>& external_package_path,
+        const std::list<std::string>& external_module_path,
         const bool is_system);
 
 private:
@@ -70,13 +70,13 @@ public:
     /**@}*/
 
     /**
-     * @brief Path of packages that contain the dependent model.
+     * @brief Path of modules that contain the dependent model.
      */
     /**@{*/
-    const std::list<std::string>& external_package_path() const;
-    std::list<std::string>& external_package_path();
-    void external_package_path(const std::list<std::string>& v);
-    void external_package_path(const std::list<std::string>&& v);
+    const std::list<std::string>& external_module_path() const;
+    std::list<std::string>& external_module_path();
+    void external_module_path(const std::list<std::string>& v);
+    void external_module_path(const std::list<std::string>&& v);
     /**@}*/
 
     /**
@@ -99,7 +99,7 @@ public:
 
 private:
     std::string model_name_;
-    std::list<std::string> external_package_path_;
+    std::list<std::string> external_module_path_;
     bool is_system_;
 };
 

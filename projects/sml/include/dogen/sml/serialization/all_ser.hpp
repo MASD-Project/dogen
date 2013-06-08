@@ -20,7 +20,6 @@
  */
 #include "dogen/sml/serialization/category_types_ser.hpp"
 #include "dogen/sml/serialization/entity_ser.hpp"
-#include "dogen/sml/serialization/entry_ser.hpp"
 #include "dogen/sml/serialization/enumeration_ser.hpp"
 #include "dogen/sml/serialization/enumerator_ser.hpp"
 #include "dogen/sml/serialization/exception_ser.hpp"
@@ -31,7 +30,6 @@
 #include "dogen/sml/serialization/model_ser.hpp"
 #include "dogen/sml/serialization/module_ser.hpp"
 #include "dogen/sml/serialization/nested_qname_ser.hpp"
-#include "dogen/sml/serialization/package_ser.hpp"
 #include "dogen/sml/serialization/pod_ser.hpp"
 #include "dogen/sml/serialization/pod_types_ser.hpp"
 #include "dogen/sml/serialization/primitive_ser.hpp"
@@ -42,7 +40,6 @@
 #include "dogen/sml/serialization/repository_ser.hpp"
 #include "dogen/sml/serialization/service_ser.hpp"
 #include "dogen/sml/serialization/service_types_ser.hpp"
-#include "dogen/sml/serialization/string_table_ser.hpp"
 #include "dogen/sml/serialization/typed_element_ser.hpp"
 #include "dogen/sml/serialization/value_ser.hpp"
 #include "dogen/sml/serialization/value_types_ser.hpp"

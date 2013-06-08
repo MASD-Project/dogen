@@ -59,10 +59,10 @@ std::ostream& operator<<(std::ostream& s, const modeling_settings& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::config::modeling_settings\"" << ", "
       << "\"target\": " << "\"" << v.target().generic_string() << "\"" << ", "
-      << "\"external_package_path\": " << "\"" << tidy_up_string(v.external_package_path()) << "\"" << ", "
+      << "\"external_module_path\": " << "\"" << tidy_up_string(v.external_module_path()) << "\"" << ", "
       << "\"references\": " << v.references() << ", "
       << "\"verbose\": " << v.verbose() << ", "
-      << "\"disable_model_package\": " << v.disable_model_package()
+      << "\"disable_model_module\": " << v.disable_model_module()
       << " }";
     return(s);
 }

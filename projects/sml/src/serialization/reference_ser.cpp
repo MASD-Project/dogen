@@ -44,7 +44,7 @@ void save(Archive& ar,
     const dogen::sml::reference& v,
     const unsigned int /*version*/) {
     ar << make_nvp("model_name", v.model_name_);
-    ar << make_nvp("external_package_path", v.external_package_path_);
+    ar << make_nvp("external_module_path", v.external_module_path_);
     ar << make_nvp("is_system", v.is_system_);
 }
 
@@ -53,7 +53,7 @@ void load(Archive& ar,
     dogen::sml::reference& v,
     const unsigned int /*version*/) {
     ar >> make_nvp("model_name", v.model_name_);
-    ar >> make_nvp("external_package_path", v.external_package_path_);
+    ar >> make_nvp("external_module_path", v.external_module_path_);
     ar >> make_nvp("is_system", v.is_system_);
 }
 

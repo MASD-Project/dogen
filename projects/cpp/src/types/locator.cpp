@@ -174,7 +174,7 @@ boost::filesystem::path locator::relative_logical_path(
     boost::filesystem::path r;
 
     if (settings_.split_project()) {
-        for(auto n : cd.name().external_package_path())
+        for(auto n : cd.name().external_module_path())
             r /= n;
         return r / relative_physical_path(cd);
     }
@@ -189,13 +189,13 @@ boost::filesystem::path locator::relative_physical_path(
     if (settings_.split_project())
         r /= cd.name().model_name();
     else if (cd.file_type() == file_types::header) {
-        for(auto n : cd.name().external_package_path())
+        for(auto n : cd.name().external_module_path())
             r /= n;
         r /= cd.name().model_name();
     }
 
     r /= facet_directory(cd.facet_type());
-    for(auto n : cd.name().package_path())
+    for(auto n : cd.name().module_path())
         r /= n;
 
     std::ostringstream stream;

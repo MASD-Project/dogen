@@ -195,19 +195,19 @@ BOOST_AUTO_TEST_CASE(creating_file_info_for_exception_produces_expected_results)
         BOOST_CHECK(found_facets.find(d.facet_type()) != found_facets.end());
 }
 
-BOOST_AUTO_TEST_CASE(creating_file_info_for_package_produces_expected_results) {
-    SETUP_TEST_LOG_SOURCE("creating_file_info_for_package_produces_expected_results");
+BOOST_AUTO_TEST_CASE(creating_file_info_for_module_produces_expected_results) {
+    SETUP_TEST_LOG_SOURCE("creating_file_info_for_module_produces_expected_results");
 
     const auto mt(dogen::sml::meta_types::pod);
     const auto m(
-        mock_model_factory::build_single_type_model_in_package(0, mt, 1));
+        mock_model_factory::build_single_type_model_in_module(0, mt, 1));
     BOOST_LOG_SEV(lg, debug) << "model: " << m;
-    BOOST_REQUIRE(m.packages().size() == 1);
+    BOOST_REQUIRE(m.modules().size() == 1);
 
     const auto s(mock_settings_factory::build_cpp_settings(src_dir, inc_dir));
     dogen::cpp::locator l(m.name(), s);
     dogen::cpp::file_info_factory f(l);
-    const auto p(m.packages().begin()->second);
+    const auto p(m.modules().begin()->second);
     const auto md(mock_descriptors(p.name()));
     const auto ni((dogen::cpp::namespace_info()));
 

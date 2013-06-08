@@ -47,8 +47,8 @@ std::size_t qname_hasher::hash(const qname&v) {
     std::size_t seed(0);
 
     combine(seed, v.model_name());
-    combine(seed, hash_std_list_std_string(v.external_package_path()));
-    combine(seed, hash_std_list_std_string(v.package_path()));
+    combine(seed, hash_std_list_std_string(v.external_module_path()));
+    combine(seed, hash_std_list_std_string(v.module_path()));
     combine(seed, v.type_name());
     combine(seed, v.meta_type());
 

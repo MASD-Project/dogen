@@ -108,7 +108,7 @@ populate(const unsigned int position, result_type& v) {
     v.dia_id_to_qname(create_std_unordered_map_std_string_dogen_sml_qname(position + 3));
     v.original_parent(create_std_unordered_map_dogen_sml_qname_dogen_sml_qname(position + 4));
     v.leaves(create_std_unordered_map_dogen_sml_qname_std_list_dogen_sml_qname_(position + 5));
-    v.top_level_package_names(create_std_unordered_set_std_string(position + 6));
+    v.top_level_module_names(create_std_unordered_set_std_string(position + 6));
     v.model(create_dogen_sml_model(position + 7));
 }
 

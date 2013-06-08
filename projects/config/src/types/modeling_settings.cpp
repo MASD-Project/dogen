@@ -25,42 +25,42 @@ namespace config {
 
 modeling_settings::modeling_settings()
     : verbose_(static_cast<bool>(0)),
-      disable_model_package_(static_cast<bool>(0)) { }
+      disable_model_module_(static_cast<bool>(0)) { }
 
 modeling_settings::modeling_settings(modeling_settings&& rhs)
     : target_(std::move(rhs.target_)),
-      external_package_path_(std::move(rhs.external_package_path_)),
+      external_module_path_(std::move(rhs.external_module_path_)),
       references_(std::move(rhs.references_)),
       verbose_(std::move(rhs.verbose_)),
-      disable_model_package_(std::move(rhs.disable_model_package_)) { }
+      disable_model_module_(std::move(rhs.disable_model_module_)) { }
 
 modeling_settings::modeling_settings(
     const boost::filesystem::path& target,
-    const std::string& external_package_path,
+    const std::string& external_module_path,
     const std::vector<dogen::config::reference>& references,
     const bool verbose,
-    const bool disable_model_package)
+    const bool disable_model_module)
     : target_(target),
-      external_package_path_(external_package_path),
+      external_module_path_(external_module_path),
       references_(references),
       verbose_(verbose),
-      disable_model_package_(disable_model_package) { }
+      disable_model_module_(disable_model_module) { }
 
 void modeling_settings::swap(modeling_settings& other) noexcept {
     using std::swap;
     swap(target_, other.target_);
-    swap(external_package_path_, other.external_package_path_);
+    swap(external_module_path_, other.external_module_path_);
     swap(references_, other.references_);
     swap(verbose_, other.verbose_);
-    swap(disable_model_package_, other.disable_model_package_);
+    swap(disable_model_module_, other.disable_model_module_);
 }
 
 bool modeling_settings::operator==(const modeling_settings& rhs) const {
     return target_ == rhs.target_ &&
-        external_package_path_ == rhs.external_package_path_ &&
+        external_module_path_ == rhs.external_module_path_ &&
         references_ == rhs.references_ &&
         verbose_ == rhs.verbose_ &&
-        disable_model_package_ == rhs.disable_model_package_;
+        disable_model_module_ == rhs.disable_model_module_;
 }
 
 modeling_settings& modeling_settings::operator=(modeling_settings other) {
@@ -85,20 +85,20 @@ void modeling_settings::target(const boost::filesystem::path&& v) {
     target_ = std::move(v);
 }
 
-const std::string& modeling_settings::external_package_path() const {
-    return external_package_path_;
+const std::string& modeling_settings::external_module_path() const {
+    return external_module_path_;
 }
 
-std::string& modeling_settings::external_package_path() {
-    return external_package_path_;
+std::string& modeling_settings::external_module_path() {
+    return external_module_path_;
 }
 
-void modeling_settings::external_package_path(const std::string& v) {
-    external_package_path_ = v;
+void modeling_settings::external_module_path(const std::string& v) {
+    external_module_path_ = v;
 }
 
-void modeling_settings::external_package_path(const std::string&& v) {
-    external_package_path_ = std::move(v);
+void modeling_settings::external_module_path(const std::string&& v) {
+    external_module_path_ = std::move(v);
 }
 
 const std::vector<dogen::config::reference>& modeling_settings::references() const {
@@ -125,12 +125,12 @@ void modeling_settings::verbose(const bool v) {
     verbose_ = v;
 }
 
-bool modeling_settings::disable_model_package() const {
-    return disable_model_package_;
+bool modeling_settings::disable_model_module() const {
+    return disable_model_module_;
 }
 
-void modeling_settings::disable_model_package(const bool v) {
-    disable_model_package_ = v;
+void modeling_settings::disable_model_module(const bool v) {
+    disable_model_module_ = v;
 }
 
 } }

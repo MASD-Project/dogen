@@ -206,7 +206,7 @@ void graph_builder::add(const processed_object& o) {
 
     const bool is_package(o.object_type() == object_types::uml_large_package);
     if (is_package && o.child_node_id().empty())
-        top_level_package_names_.insert(o.name());
+        top_level_module_names_.insert(o.name());
 
     if (o.connection()) {
         process_connections(o);
@@ -235,9 +235,9 @@ const std::unordered_set<std::string>& graph_builder::parent_ids() const {
 }
 
 const std::unordered_set<std::string>& graph_builder::
-top_level_package_names() const {
+top_level_module_names() const {
     ensure_built();
-    return top_level_package_names_;
+    return top_level_module_names_;
 }
 
 void graph_builder::build() {

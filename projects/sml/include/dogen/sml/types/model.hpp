@@ -37,7 +37,6 @@
 #include "dogen/sml/types/enumeration.hpp"
 #include "dogen/sml/types/exception.hpp"
 #include "dogen/sml/types/module.hpp"
-#include "dogen/sml/types/package.hpp"
 #include "dogen/sml/types/pod.hpp"
 #include "dogen/sml/types/primitive.hpp"
 #include "dogen/sml/types/qname.hpp"
@@ -62,12 +61,11 @@ public:
 public:
     model(
         const std::string& name,
-        const std::unordered_map<dogen::sml::qname, dogen::sml::package>& packages,
         const std::unordered_map<dogen::sml::qname, dogen::sml::pod>& pods,
         const std::unordered_map<dogen::sml::qname, dogen::sml::primitive>& primitives,
         const std::unordered_map<dogen::sml::qname, dogen::sml::enumeration>& enumerations,
         const std::unordered_map<dogen::sml::qname, dogen::sml::exception>& exceptions,
-        const std::list<std::string>& external_package_path,
+        const std::list<std::string>& external_module_path,
         const bool is_system,
         const std::unordered_map<std::string, dogen::sml::reference>& dependencies,
         const std::unordered_set<dogen::sml::qname>& leaves,
@@ -96,16 +94,6 @@ public:
     std::string& name();
     void name(const std::string& v);
     void name(const std::string&& v);
-    /**@}*/
-
-    /**
-     * @brief Packages contained in the model.
-     */
-    /**@{*/
-    const std::unordered_map<dogen::sml::qname, dogen::sml::package>& packages() const;
-    std::unordered_map<dogen::sml::qname, dogen::sml::package>& packages();
-    void packages(const std::unordered_map<dogen::sml::qname, dogen::sml::package>& v);
-    void packages(const std::unordered_map<dogen::sml::qname, dogen::sml::package>&& v);
     /**@}*/
 
     /**
@@ -149,13 +137,13 @@ public:
     /**@}*/
 
     /**
-     * @brief Path of packages that contain this model.
+     * @brief Path of modules that contain this model.
      */
     /**@{*/
-    const std::list<std::string>& external_package_path() const;
-    std::list<std::string>& external_package_path();
-    void external_package_path(const std::list<std::string>& v);
-    void external_package_path(const std::list<std::string>&& v);
+    const std::list<std::string>& external_module_path() const;
+    std::list<std::string>& external_module_path();
+    void external_module_path(const std::list<std::string>& v);
+    void external_module_path(const std::list<std::string>&& v);
     /**@}*/
 
     /**
@@ -246,12 +234,11 @@ public:
 
 private:
     std::string name_;
-    std::unordered_map<dogen::sml::qname, dogen::sml::package> packages_;
     std::unordered_map<dogen::sml::qname, dogen::sml::pod> pods_;
     std::unordered_map<dogen::sml::qname, dogen::sml::primitive> primitives_;
     std::unordered_map<dogen::sml::qname, dogen::sml::enumeration> enumerations_;
     std::unordered_map<dogen::sml::qname, dogen::sml::exception> exceptions_;
-    std::list<std::string> external_package_path_;
+    std::list<std::string> external_module_path_;
     bool is_system_;
     std::unordered_map<std::string, dogen::sml::reference> dependencies_;
     std::unordered_set<dogen::sml::qname> leaves_;

@@ -3,136 +3,49 @@
 <boost_serialization signature="serialization::archive" version="9">
 <entity class_id="0" tracking_level="0" version="0">
 	<name>comments</name>
-	<packages class_id="1" tracking_level="0" version="0">
+	<pods class_id="1" tracking_level="0" version="0">
 		<count>2</count>
 		<bucket_count>11</bucket_count>
 		<item_version>0</item_version>
 		<item class_id="2" tracking_level="0" version="0">
 			<first class_id="3" tracking_level="0" version="0">
 				<model_name>comments</model_name>
-				<external_package_path class_id="4" tracking_level="0" version="0">
+				<external_module_path class_id="4" tracking_level="0" version="0">
 					<count>0</count>
 					<item_version>0</item_version>
-				</external_package_path>
-				<package_path>
-					<count>1</count>
+				</external_module_path>
+				<module_path>
+					<count>0</count>
 					<item_version>0</item_version>
-					<item>package</item>
-				</package_path>
-				<type_name>package2</type_name>
-				<meta_type>3</meta_type>
+				</module_path>
+				<type_name>multi_line</type_name>
+				<meta_type>2</meta_type>
 			</first>
 			<second class_id="5" tracking_level="0" version="0">
 				<name>
 					<model_name>comments</model_name>
-					<external_package_path>
+					<external_module_path>
 						<count>0</count>
 						<item_version>0</item_version>
-					</external_package_path>
-					<package_path>
-						<count>1</count>
-						<item_version>0</item_version>
-						<item>package</item>
-					</package_path>
-					<type_name>package2</type_name>
-					<meta_type>3</meta_type>
-				</name>
-				<documentation>package2
-</documentation>
-				<implementation_specific_parameters class_id="6" tracking_level="0" version="0">
-					<count>1</count>
-					<item_version>0</item_version>
-					<item class_id="7" tracking_level="0" version="0">
-						<first>COMMENT</first>
-						<second>true</second>
-					</item>
-				</implementation_specific_parameters>
-			</second>
-		</item>
-		<item>
-			<first>
-				<model_name>comments</model_name>
-				<external_package_path>
-					<count>0</count>
-					<item_version>0</item_version>
-				</external_package_path>
-				<package_path>
-					<count>0</count>
-					<item_version>0</item_version>
-				</package_path>
-				<type_name>package</type_name>
-				<meta_type>3</meta_type>
-			</first>
-			<second>
-				<name>
-					<model_name>comments</model_name>
-					<external_package_path>
+					</external_module_path>
+					<module_path>
 						<count>0</count>
 						<item_version>0</item_version>
-					</external_package_path>
-					<package_path>
-						<count>0</count>
-						<item_version>0</item_version>
-					</package_path>
-					<type_name>package</type_name>
-					<meta_type>3</meta_type>
-				</name>
-				<documentation>package
-</documentation>
-				<implementation_specific_parameters>
-					<count>1</count>
-					<item_version>0</item_version>
-					<item>
-						<first>COMMENT</first>
-						<second>true</second>
-					</item>
-				</implementation_specific_parameters>
-			</second>
-		</item>
-	</packages>
-	<pods class_id="8" tracking_level="0" version="0">
-		<count>2</count>
-		<bucket_count>11</bucket_count>
-		<item_version>0</item_version>
-		<item class_id="9" tracking_level="0" version="0">
-			<first>
-				<model_name>comments</model_name>
-				<external_package_path>
-					<count>0</count>
-					<item_version>0</item_version>
-				</external_package_path>
-				<package_path>
-					<count>0</count>
-					<item_version>0</item_version>
-				</package_path>
-				<type_name>multi_line</type_name>
-				<meta_type>2</meta_type>
-			</first>
-			<second class_id="10" tracking_level="0" version="0">
-				<name>
-					<model_name>comments</model_name>
-					<external_package_path>
-						<count>0</count>
-						<item_version>0</item_version>
-					</external_package_path>
-					<package_path>
-						<count>0</count>
-						<item_version>0</item_version>
-					</package_path>
+					</module_path>
 					<type_name>multi_line</type_name>
 					<meta_type>2</meta_type>
 				</name>
-				<properties class_id="11" tracking_level="0" version="0">
+				<properties class_id="6" tracking_level="0" version="0">
 					<count>0</count>
 					<item_version>0</item_version>
 				</properties>
-				<parent_name class_id="12" tracking_level="0" version="0">
+				<parent_name class_id="7" tracking_level="0" version="0">
 					<initialized>0</initialized>
 				</parent_name>
 				<original_parent_name>
 					<initialized>0</initialized>
 				</original_parent_name>
-				<leaves class_id="13" tracking_level="0" version="0">
+				<leaves class_id="8" tracking_level="0" version="0">
 					<count>0</count>
 					<item_version>0</item_version>
 				</leaves>
@@ -146,10 +59,10 @@ second line
 third line with &quot;quote&quot;
 </documentation>
 				<number_of_type_arguments>0</number_of_type_arguments>
-				<implementation_specific_parameters>
+				<implementation_specific_parameters class_id="9" tracking_level="0" version="0">
 					<count>1</count>
 					<item_version>0</item_version>
-					<item>
+					<item class_id="10" tracking_level="0" version="0">
 						<first>key</first>
 						<second>value</second>
 					</item>
@@ -172,51 +85,51 @@ third line with &quot;quote&quot;
 		<item>
 			<first>
 				<model_name>comments</model_name>
-				<external_package_path>
+				<external_module_path>
 					<count>0</count>
 					<item_version>0</item_version>
-				</external_package_path>
-				<package_path>
+				</external_module_path>
+				<module_path>
 					<count>0</count>
 					<item_version>0</item_version>
-				</package_path>
+				</module_path>
 				<type_name>one_line</type_name>
 				<meta_type>2</meta_type>
 			</first>
 			<second>
 				<name>
 					<model_name>comments</model_name>
-					<external_package_path>
+					<external_module_path>
 						<count>0</count>
 						<item_version>0</item_version>
-					</external_package_path>
-					<package_path>
+					</external_module_path>
+					<module_path>
 						<count>0</count>
 						<item_version>0</item_version>
-					</package_path>
+					</module_path>
 					<type_name>one_line</type_name>
 					<meta_type>2</meta_type>
 				</name>
 				<properties>
 					<count>3</count>
 					<item_version>0</item_version>
-					<item class_id="14" tracking_level="0" version="0">
+					<item class_id="11" tracking_level="0" version="0">
 						<name>prop_0</name>
-						<type_name class_id="15" tracking_level="0" version="0">
+						<type_name class_id="12" tracking_level="0" version="0">
 							<type>
 								<model_name></model_name>
-								<external_package_path>
+								<external_module_path>
 									<count>0</count>
 									<item_version>0</item_version>
-								</external_package_path>
-								<package_path>
+								</external_module_path>
+								<module_path>
 									<count>0</count>
 									<item_version>0</item_version>
-								</package_path>
+								</module_path>
 								<type_name>int</type_name>
 								<meta_type>0</meta_type>
 							</type>
-							<children class_id="16" tracking_level="0" version="0">
+							<children class_id="13" tracking_level="0" version="0">
 								<count>0</count>
 								<item_version>0</item_version>
 							</children>
@@ -236,14 +149,14 @@ third line with &quot;quote&quot;
 						<type_name>
 							<type>
 								<model_name></model_name>
-								<external_package_path>
+								<external_module_path>
 									<count>0</count>
 									<item_version>0</item_version>
-								</external_package_path>
-								<package_path>
+								</external_module_path>
+								<module_path>
 									<count>0</count>
 									<item_version>0</item_version>
-								</package_path>
+								</module_path>
 								<type_name>int</type_name>
 								<meta_type>0</meta_type>
 							</type>
@@ -269,14 +182,14 @@ a second line
 						<type_name>
 							<type>
 								<model_name></model_name>
-								<external_package_path>
+								<external_module_path>
 									<count>0</count>
 									<item_version>0</item_version>
-								</external_package_path>
-								<package_path>
+								</external_module_path>
+								<module_path>
 									<count>0</count>
 									<item_version>0</item_version>
-								</package_path>
+								</module_path>
 								<type_name>int</type_name>
 								<meta_type>0</meta_type>
 							</type>
@@ -332,32 +245,32 @@ a second line
 			</second>
 		</item>
 	</pods>
-	<primitives class_id="17" tracking_level="0" version="0">
+	<primitives class_id="14" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>11</bucket_count>
 		<item_version>0</item_version>
 	</primitives>
-	<enumerations class_id="18" tracking_level="0" version="0">
+	<enumerations class_id="15" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>11</bucket_count>
 		<item_version>0</item_version>
 	</enumerations>
-	<exceptions class_id="19" tracking_level="0" version="0">
+	<exceptions class_id="16" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>11</bucket_count>
 		<item_version>0</item_version>
 	</exceptions>
-	<external_package_path>
+	<external_module_path>
 		<count>0</count>
 		<item_version>0</item_version>
-	</external_package_path>
+	</external_module_path>
 	<is_system>0</is_system>
-	<dependencies class_id="20" tracking_level="0" version="0">
+	<dependencies class_id="17" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>11</bucket_count>
 		<item_version>0</item_version>
 	</dependencies>
-	<leaves class_id="21" tracking_level="0" version="0">
+	<leaves class_id="18" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>11</bucket_count>
 		<item_version>0</item_version>
@@ -374,15 +287,111 @@ This comment will be applied to the model namespace itself.
 			<second>true</second>
 		</item>
 	</implementation_specific_parameters>
-	<services class_id="22" tracking_level="0" version="0">
+	<services class_id="19" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>11</bucket_count>
 		<item_version>0</item_version>
 	</services>
-	<modules class_id="23" tracking_level="0" version="0">
-		<count>0</count>
+	<modules class_id="20" tracking_level="0" version="0">
+		<count>2</count>
 		<bucket_count>11</bucket_count>
 		<item_version>0</item_version>
+		<item class_id="21" tracking_level="0" version="0">
+			<first>
+				<model_name>comments</model_name>
+				<external_module_path>
+					<count>0</count>
+					<item_version>0</item_version>
+				</external_module_path>
+				<module_path>
+					<count>1</count>
+					<item_version>0</item_version>
+					<item>package</item>
+				</module_path>
+				<type_name>package2</type_name>
+				<meta_type>6</meta_type>
+			</first>
+			<second class_id="22" tracking_level="1" version="0" object_id="_0">
+				<model_element class_id="23" tracking_level="0" version="0">
+					<name>
+						<model_name>comments</model_name>
+						<external_module_path>
+							<count>0</count>
+							<item_version>0</item_version>
+						</external_module_path>
+						<module_path>
+							<count>1</count>
+							<item_version>0</item_version>
+							<item>package</item>
+						</module_path>
+						<type_name>package2</type_name>
+						<meta_type>6</meta_type>
+					</name>
+					<documentation>package2
+</documentation>
+					<implementation_specific_parameters>
+						<count>1</count>
+						<item_version>0</item_version>
+						<item>
+							<first>COMMENT</first>
+							<second>true</second>
+						</item>
+					</implementation_specific_parameters>
+					<is_external>0</is_external>
+				</model_element>
+				<members>
+					<count>0</count>
+					<item_version>0</item_version>
+				</members>
+			</second>
+		</item>
+		<item>
+			<first>
+				<model_name>comments</model_name>
+				<external_module_path>
+					<count>0</count>
+					<item_version>0</item_version>
+				</external_module_path>
+				<module_path>
+					<count>0</count>
+					<item_version>0</item_version>
+				</module_path>
+				<type_name>package</type_name>
+				<meta_type>6</meta_type>
+			</first>
+			<second object_id="_1">
+				<model_element>
+					<name>
+						<model_name>comments</model_name>
+						<external_module_path>
+							<count>0</count>
+							<item_version>0</item_version>
+						</external_module_path>
+						<module_path>
+							<count>0</count>
+							<item_version>0</item_version>
+						</module_path>
+						<type_name>package</type_name>
+						<meta_type>6</meta_type>
+					</name>
+					<documentation>package
+</documentation>
+					<implementation_specific_parameters>
+						<count>1</count>
+						<item_version>0</item_version>
+						<item>
+							<first>COMMENT</first>
+							<second>true</second>
+						</item>
+					</implementation_specific_parameters>
+					<is_external>0</is_external>
+				</model_element>
+				<members>
+					<count>0</count>
+					<item_version>0</item_version>
+				</members>
+			</second>
+		</item>
 	</modules>
 </entity>
 </boost_serialization>

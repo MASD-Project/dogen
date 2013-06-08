@@ -35,7 +35,6 @@
 #include "dogen/sml/serialization/exception_ser.hpp"
 #include "dogen/sml/serialization/model_ser.hpp"
 #include "dogen/sml/serialization/module_ser.hpp"
-#include "dogen/sml/serialization/package_ser.hpp"
 #include "dogen/sml/serialization/pod_ser.hpp"
 #include "dogen/sml/serialization/primitive_ser.hpp"
 #include "dogen/sml/serialization/qname_ser.hpp"
@@ -57,12 +56,11 @@ void save(Archive& ar,
     const dogen::sml::model& v,
     const unsigned int /*version*/) {
     ar << make_nvp("name", v.name_);
-    ar << make_nvp("packages", v.packages_);
     ar << make_nvp("pods", v.pods_);
     ar << make_nvp("primitives", v.primitives_);
     ar << make_nvp("enumerations", v.enumerations_);
     ar << make_nvp("exceptions", v.exceptions_);
-    ar << make_nvp("external_package_path", v.external_package_path_);
+    ar << make_nvp("external_module_path", v.external_module_path_);
     ar << make_nvp("is_system", v.is_system_);
     ar << make_nvp("dependencies", v.dependencies_);
     ar << make_nvp("leaves", v.leaves_);
@@ -77,12 +75,11 @@ void load(Archive& ar,
     dogen::sml::model& v,
     const unsigned int /*version*/) {
     ar >> make_nvp("name", v.name_);
-    ar >> make_nvp("packages", v.packages_);
     ar >> make_nvp("pods", v.pods_);
     ar >> make_nvp("primitives", v.primitives_);
     ar >> make_nvp("enumerations", v.enumerations_);
     ar >> make_nvp("exceptions", v.exceptions_);
-    ar >> make_nvp("external_package_path", v.external_package_path_);
+    ar >> make_nvp("external_module_path", v.external_module_path_);
     ar >> make_nvp("is_system", v.is_system_);
     ar >> make_nvp("dependencies", v.dependencies_);
     ar >> make_nvp("leaves", v.leaves_);

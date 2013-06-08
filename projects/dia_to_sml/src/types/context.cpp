@@ -33,7 +33,7 @@ context::context(
     const std::unordered_map<std::string, dogen::sml::qname>& dia_id_to_qname,
     const std::unordered_map<dogen::sml::qname, dogen::sml::qname>& original_parent,
     const std::unordered_map<dogen::sml::qname, std::list<dogen::sml::qname> >& leaves,
-    const std::unordered_set<std::string>& top_level_package_names,
+    const std::unordered_set<std::string>& top_level_module_names,
     const dogen::sml::model& model)
     : is_target_(is_target),
       child_to_parent_(child_to_parent),
@@ -41,7 +41,7 @@ context::context(
       dia_id_to_qname_(dia_id_to_qname),
       original_parent_(original_parent),
       leaves_(leaves),
-      top_level_package_names_(top_level_package_names),
+      top_level_module_names_(top_level_module_names),
       model_(model) { }
 
 void context::swap(context& other) noexcept {
@@ -52,7 +52,7 @@ void context::swap(context& other) noexcept {
     swap(dia_id_to_qname_, other.dia_id_to_qname_);
     swap(original_parent_, other.original_parent_);
     swap(leaves_, other.leaves_);
-    swap(top_level_package_names_, other.top_level_package_names_);
+    swap(top_level_module_names_, other.top_level_module_names_);
     swap(model_, other.model_);
 }
 
@@ -63,7 +63,7 @@ bool context::operator==(const context& rhs) const {
         dia_id_to_qname_ == rhs.dia_id_to_qname_ &&
         original_parent_ == rhs.original_parent_ &&
         leaves_ == rhs.leaves_ &&
-        top_level_package_names_ == rhs.top_level_package_names_ &&
+        top_level_module_names_ == rhs.top_level_module_names_ &&
         model_ == rhs.model_;
 }
 
@@ -161,20 +161,20 @@ void context::leaves(const std::unordered_map<dogen::sml::qname, std::list<dogen
     leaves_ = std::move(v);
 }
 
-const std::unordered_set<std::string>& context::top_level_package_names() const {
-    return top_level_package_names_;
+const std::unordered_set<std::string>& context::top_level_module_names() const {
+    return top_level_module_names_;
 }
 
-std::unordered_set<std::string>& context::top_level_package_names() {
-    return top_level_package_names_;
+std::unordered_set<std::string>& context::top_level_module_names() {
+    return top_level_module_names_;
 }
 
-void context::top_level_package_names(const std::unordered_set<std::string>& v) {
-    top_level_package_names_ = v;
+void context::top_level_module_names(const std::unordered_set<std::string>& v) {
+    top_level_module_names_ = v;
 }
 
-void context::top_level_package_names(const std::unordered_set<std::string>&& v) {
-    top_level_package_names_ = std::move(v);
+void context::top_level_module_names(const std::unordered_set<std::string>&& v) {
+    top_level_module_names_ = std::move(v);
 }
 
 const dogen::sml::model& context::model() const {

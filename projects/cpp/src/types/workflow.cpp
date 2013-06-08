@@ -189,7 +189,7 @@ workflow::result_type workflow::generate_namespaces_activity() const {
         }
     }
 
-    for (const auto& pair : model_.packages()) {
+    for (const auto& pair : model_.modules()) {
         const auto& p(pair.second);
 
         if (p.documentation().empty())
@@ -214,7 +214,7 @@ workflow::result_type workflow::generate_registrars_activity() const {
 
     sml::qname qn;
     qn.model_name(model_.name());
-    qn.external_package_path(model_.external_package_path());
+    qn.external_module_path(model_.external_module_path());
     qn.type_name(registrar_name);
 
     // FIXME: we should probably have "a not SML type" instead of lying
@@ -240,7 +240,7 @@ workflow::result_type workflow::generate_includers_activity() const {
 
     sml::qname qn;
     qn.type_name(includer_name);
-    qn.external_package_path(model_.external_package_path());
+    qn.external_module_path(model_.external_module_path());
     qn.model_name(model_.name());
 
     // FIXME: we should probably have "a not SML type" instead of lying
@@ -361,8 +361,8 @@ workflow::result_type workflow::generate_cmakelists_activity() const {
     ci.file_path(locator_.absolute_path_to_src(ci.file_name()));
     BOOST_LOG_SEV(lg, debug) << "Formatting: " << ci.file_path().string();
 
-    if (!model_.external_package_path().empty())
-        ci.product_name(model_.external_package_path().front());
+    if (!model_.external_module_path().empty())
+        ci.product_name(model_.external_module_path().front());
 
     std::ostringstream stream;
     formatters::src_cmakelists src(stream);
@@ -396,8 +396,8 @@ workflow::result_entry_type workflow::generate_odb_options_activity() const {
     ooi.model_name(model_.name());
     ooi.odb_folder(settings_.odb_facet_folder());
 
-    if (!model_.external_package_path().empty())
-        ooi.product_name(model_.external_package_path().front());
+    if (!model_.external_module_path().empty())
+        ooi.product_name(model_.external_module_path().front());
 
     BOOST_LOG_SEV(lg, debug) << "Formatting:" << ooi.file_path().string();
     std::ostringstream stream;

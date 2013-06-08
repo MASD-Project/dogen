@@ -81,7 +81,7 @@ public:
         const inclusion_lists& il) const;
 
     /**
-     * @brief Manufacture all the file infos for the given package.
+     * @brief Manufacture all the file infos for the given namespace.
      */
     file_info create(const namespace_info& ni,
         const content_descriptor& cd) const;

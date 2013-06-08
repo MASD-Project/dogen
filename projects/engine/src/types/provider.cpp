@@ -50,25 +50,25 @@ provider::hydrate_diagram(const boost::filesystem::path& path) const {
 
 sml::model provider::to_sml(const dia::diagram& d,
     const std::string& model_name,
-    const std::string& external_package_path,
+    const std::string& external_module_path,
     const bool is_target) const {
 
-    const bool dmp(settings_.modeling().disable_model_package());
+    const bool dmp(settings_.modeling().disable_model_module());
     const std::string name(dmp ? empty : model_name);
 
     dogen::dia_to_sml::workflow w;
-    sml::model r(w.execute(d, name, external_package_path, is_target));
+    sml::model r(w.execute(d, name, external_module_path, is_target));
     persister_.persist(r, empty);
     return std::move(r);
 }
 
 sml::model provider::provide(const boost::filesystem::path& p,
-    const std::string& external_package_path,
+    const std::string& external_module_path,
     const bool is_target) {
 
     const dia::diagram d(hydrate_diagram(p));
     const std::string model_name(p.stem().string());
-    return to_sml(d, model_name, external_package_path, is_target);
+    return to_sml(d, model_name, external_module_path, is_target);
 }
 
 } }

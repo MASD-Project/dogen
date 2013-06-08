@@ -58,7 +58,7 @@ public:
         const std::unordered_map<std::string, dogen::sml::qname>& dia_id_to_qname,
         const std::unordered_map<dogen::sml::qname, dogen::sml::qname>& original_parent,
         const std::unordered_map<dogen::sml::qname, std::list<dogen::sml::qname> >& leaves,
-        const std::unordered_set<std::string>& top_level_package_names,
+        const std::unordered_set<std::string>& top_level_module_names,
         const dogen::sml::model& model);
 
 private:
@@ -97,10 +97,10 @@ public:
     void leaves(const std::unordered_map<dogen::sml::qname, std::list<dogen::sml::qname> >& v);
     void leaves(const std::unordered_map<dogen::sml::qname, std::list<dogen::sml::qname> >&& v);
 
-    const std::unordered_set<std::string>& top_level_package_names() const;
-    std::unordered_set<std::string>& top_level_package_names();
-    void top_level_package_names(const std::unordered_set<std::string>& v);
-    void top_level_package_names(const std::unordered_set<std::string>&& v);
+    const std::unordered_set<std::string>& top_level_module_names() const;
+    std::unordered_set<std::string>& top_level_module_names();
+    void top_level_module_names(const std::unordered_set<std::string>& v);
+    void top_level_module_names(const std::unordered_set<std::string>&& v);
 
     const dogen::sml::model& model() const;
     dogen::sml::model& model();
@@ -124,7 +124,7 @@ private:
     std::unordered_map<std::string, dogen::sml::qname> dia_id_to_qname_;
     std::unordered_map<dogen::sml::qname, dogen::sml::qname> original_parent_;
     std::unordered_map<dogen::sml::qname, std::list<dogen::sml::qname> > leaves_;
-    std::unordered_set<std::string> top_level_package_names_;
+    std::unordered_set<std::string> top_level_module_names_;
     dogen::sml::model model_;
 };
 

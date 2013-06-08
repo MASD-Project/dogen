@@ -49,10 +49,10 @@ public:
 public:
     modeling_settings(
         const boost::filesystem::path& target,
-        const std::string& external_package_path,
+        const std::string& external_module_path,
         const std::vector<dogen::config::reference>& references,
         const bool verbose,
-        const bool disable_model_package);
+        const bool disable_model_module);
 
 private:
     template<typename Archive>
@@ -74,14 +74,13 @@ public:
     /**@}*/
 
     /**
-     * @brief External packages which contain the model to generate,
-     * delimited by "::".
+     * @brief External modules which contain the model to generate, delimited by "::".
      */
     /**@{*/
-    const std::string& external_package_path() const;
-    std::string& external_package_path();
-    void external_package_path(const std::string& v);
-    void external_package_path(const std::string&& v);
+    const std::string& external_module_path() const;
+    std::string& external_module_path();
+    void external_module_path(const std::string& v);
+    void external_module_path(const std::string&& v);
     /**@}*/
 
     /**
@@ -103,12 +102,11 @@ public:
     /**@}*/
 
     /**
-     * @brief Do not generate a top-level package with the model
-     * name.
+     * @brief Do not generate a top-level module with the model name.
      */
     /**@{*/
-    bool disable_model_package() const;
-    void disable_model_package(const bool v);
+    bool disable_model_module() const;
+    void disable_model_module(const bool v);
     /**@}*/
 
 public:
@@ -123,10 +121,10 @@ public:
 
 private:
     boost::filesystem::path target_;
-    std::string external_package_path_;
+    std::string external_module_path_;
     std::vector<dogen::config::reference> references_;
     bool verbose_;
-    bool disable_model_package_;
+    bool disable_model_module_;
 };
 
 } }

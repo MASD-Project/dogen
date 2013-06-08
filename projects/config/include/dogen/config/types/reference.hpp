@@ -33,6 +33,9 @@
 namespace dogen {
 namespace config {
 
+/**
+ * @brief Reference to a model used by the target model.
+ */
 class reference final {
 public:
     reference() = default;
@@ -45,7 +48,7 @@ public:
 public:
     reference(
         const boost::filesystem::path& path,
-        const std::string& external_package_path);
+        const std::string& external_module_path);
 
 private:
     template<typename Archive>
@@ -66,13 +69,13 @@ public:
     /**@}*/
 
     /**
-     * @brief External package path to dependent model.
+     * @brief External module path to dependent model.
      */
     /**@{*/
-    const std::string& external_package_path() const;
-    std::string& external_package_path();
-    void external_package_path(const std::string& v);
-    void external_package_path(const std::string&& v);
+    const std::string& external_module_path() const;
+    std::string& external_module_path();
+    void external_module_path(const std::string& v);
+    void external_module_path(const std::string&& v);
     /**@}*/
 
 public:
@@ -87,7 +90,7 @@ public:
 
 private:
     boost::filesystem::path path_;
-    std::string external_package_path_;
+    std::string external_module_path_;
 };
 
 } }

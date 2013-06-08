@@ -64,10 +64,10 @@ modeling_settings_generator::modeling_settings_generator() : position_(0) { }
 void modeling_settings_generator::
 populate(const unsigned int position, result_type& v) {
     v.target(create_boost_filesystem_path(position + 0));
-    v.external_package_path(create_std_string(position + 1));
+    v.external_module_path(create_std_string(position + 1));
     v.references(create_std_vector_dogen_config_reference(position + 2));
     v.verbose(create_bool(position + 3));
-    v.disable_model_package(create_bool(position + 4));
+    v.disable_model_module(create_bool(position + 4));
 }
 
 modeling_settings_generator::result_type

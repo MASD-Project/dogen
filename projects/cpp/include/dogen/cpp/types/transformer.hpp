@@ -31,7 +31,7 @@
 #include "dogen/sml/types/pod.hpp"
 #include "dogen/sml/types/model.hpp"
 #include "dogen/sml/types/qname.hpp"
-#include "dogen/sml/types/package.hpp"
+#include "dogen/sml/types/module.hpp"
 #include "dogen/sml/types/exception.hpp"
 #include "dogen/sml/types/enumeration.hpp"
 #include "dogen/sml/types/nested_qname.hpp"
@@ -122,14 +122,14 @@ public:
     exception_info transform(const sml::exception& e) const;
 
     /**
-     * @brief Transforms a SML package into a namespace info.
+     * @brief Transforms a SML module into a namespace info.
      */
-    namespace_info transform(const sml::package& p) const;
+    namespace_info transform(const sml::module& p) const;
 
     /**
      * @brief Transforms a SML model into a namespace info.
      *
-     * @todo Create an attribute of type package in model.
+     * @todo Create an attribute of type module in model.
      */
     namespace_info transform_model_into_namespace() const;
 

@@ -89,7 +89,7 @@ public:
      * @brief Returns the path to place a file with content described
      * by the supplied content descriptor.
      *
-     * @b Includes the external package path. Logical relative paths
+     * @b Includes the external module path. Logical relative paths
      * are used for include files; they need to take into account
      * existing namespaces the user may have already defined.
      */
@@ -99,7 +99,7 @@ public:
      * @brief Returns the path to place a file with content described
      * by the supplied content descriptor.
      *
-     * @b Excludes the external package path. When combined with the
+     * @b Excludes the external module path. When combined with the
      * source or include directories, the physical path matches the
      * location on the hard drive for the artefact in question.
      */

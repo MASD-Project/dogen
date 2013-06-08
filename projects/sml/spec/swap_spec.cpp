@@ -42,7 +42,6 @@ BOOST_AUTO_TEST_CASE(validate_swap) {
     SETUP_TEST_LOG("validate_swap");
 
     test_swap<category_types_generator>();
-    test_swap<entry_generator>();
     test_swap<enumeration_generator>();
     test_swap<enumerator_generator>();
     test_swap<exception_generator>();
@@ -50,14 +49,12 @@ BOOST_AUTO_TEST_CASE(validate_swap) {
     test_swap<meta_types_generator>();
     test_swap<model_generator>();
     test_swap<nested_qname_generator>();
-    test_swap<package_generator>();
     test_swap<pod_generator>();
     test_swap<pod_types_generator>();
     test_swap<primitive_generator>();
     test_swap<property_generator>();
     test_swap<qname_generator>();
     test_swap<reference_generator>();
-    test_swap<string_table_generator>();
 }
 
 BOOST_AUTO_TEST_SUITE_END()

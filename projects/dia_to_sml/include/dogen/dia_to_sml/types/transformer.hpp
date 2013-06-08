@@ -110,11 +110,11 @@ private:
 
     /**
      * @brief Converts a dia object of type large UML package into a
-     * package in SML.
+     * module in SML.
      *
      * @param o Dia object which contains a UML package.
      */
-    void transform_package(const processed_object& o);
+    void transform_module(const processed_object& o);
 
     /**
      * @brief Converts a dia object of type UML note into

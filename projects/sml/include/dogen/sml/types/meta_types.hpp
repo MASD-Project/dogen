@@ -35,16 +35,15 @@ enum class meta_types : unsigned int {
     invalid = 0, ///< Represents an uninitialised enum
     enumeration = 1, ///< Type is an enumeration
     pod = 2, ///< Type is a pod
-    package = 3, ///< Type is a package
-    primitive = 4, ///< Type is a primitive
-    exception = 5, ///< Type is an exception
-    string_table = 6, ///< Type is a string table.
-    module = 7,
-    service = 8,
-    entity = 9,
-    value = 10,
-    factory = 11,
-    repository = 12
+    primitive = 3, ///< Type is a primitive
+    exception = 4, ///< Type is an exception
+    string_table = 5, ///< Type is a string table.
+    module = 6,
+    service = 7,
+    entity = 8,
+    value = 9,
+    factory = 10,
+    repository = 11
 };
 
 } }

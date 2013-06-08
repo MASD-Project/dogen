@@ -47,10 +47,10 @@ std::size_t modeling_settings_hasher::hash(const modeling_settings&v) {
     std::size_t seed(0);
 
     combine(seed, v.target().generic_string());
-    combine(seed, v.external_package_path());
+    combine(seed, v.external_module_path());
     combine(seed, hash_std_vector_dogen_config_reference(v.references()));
     combine(seed, v.verbose());
-    combine(seed, v.disable_model_package());
+    combine(seed, v.disable_model_module());
 
     return seed;
 }

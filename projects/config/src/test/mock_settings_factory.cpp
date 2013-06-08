@@ -40,10 +40,10 @@ namespace test {
 
 config::modeling_settings mock_settings_factory::
 build_modeling_settings(boost::filesystem::path target,
-    std::string package_path, bool verbose) {
+    std::string module_path, bool verbose) {
     config::modeling_settings r;
     r.verbose(verbose);
-    r.external_package_path(package_path);
+    r.external_module_path(module_path);
     r.target(target);
     return r;
 }
@@ -117,10 +117,10 @@ config::settings
 mock_settings_factory::build_settings(boost::filesystem::path target,
     boost::filesystem::path src_dir,
     boost::filesystem::path include_dir,
-    std::string package_path,
+    std::string module_path,
     bool verbose) {
     config::settings r;
-    r.modeling(build_modeling_settings(target, package_path, verbose));
+    r.modeling(build_modeling_settings(target, module_path, verbose));
     r.cpp(build_cpp_settings(src_dir, include_dir, verbose));
     r.troubleshooting(build_troubleshooting_settings(verbose));
     r.output(build_output_settings(verbose));
@@ -130,10 +130,10 @@ mock_settings_factory::build_settings(boost::filesystem::path target,
 config::settings
 mock_settings_factory::build_settings(boost::filesystem::path target,
     boost::filesystem::path project_dir,
-    std::string package_path,
+    std::string module_path,
     bool verbose) {
     config::settings r;
-    r.modeling(build_modeling_settings(target, package_path, verbose));
+    r.modeling(build_modeling_settings(target, module_path, verbose));
     r.cpp(build_cpp_settings(project_dir, verbose));
     r.troubleshooting(build_troubleshooting_settings(verbose));
     r.output(build_output_settings(verbose));

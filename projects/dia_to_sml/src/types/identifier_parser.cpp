@@ -174,10 +174,10 @@ namespace dogen {
 namespace dia_to_sml {
 
 identifier_parser::
-identifier_parser(const std::unordered_set<std::string>& packages,
-    const std::list<std::string>& external_package_path,
+identifier_parser(const std::unordered_set<std::string>& modules,
+    const std::list<std::string>& external_module_path,
     const std::string model_name)
-    : packages_(packages), external_package_path_(external_package_path),
+    : modules_(modules), external_module_path_(external_module_path),
       model_name_(model_name) { }
 
 sml::nested_qname identifier_parser::
@@ -188,8 +188,8 @@ parse_qname(const std::string& n) {
     BOOST_LOG_SEV(lg, debug) << "parsing qname: " << n;
 
     std::shared_ptr<nested_qname_builder>
-        builder(new nested_qname_builder(packages_,
-                external_package_path_, model_name_));
+        builder(new nested_qname_builder(modules_,
+                external_module_path_, model_name_));
     grammar<std::string::const_iterator> g(builder);
     const bool ok(boost::spirit::qi::parse(it, end, g));
 

@@ -43,7 +43,6 @@ BOOST_AUTO_TEST_CASE(validate_hashing) {
     SETUP_TEST_LOG("validate_hashing");
 
     test_hashing<category_types_generator>();
-    test_hashing<entry_generator>();
     test_hashing<enumeration_generator>();
     test_hashing<enumerator_generator>();
     test_hashing<exception_generator>();
@@ -52,14 +51,12 @@ BOOST_AUTO_TEST_CASE(validate_hashing) {
     test_hashing<model_generator>();
     // FIXME: bug in composition?
     // test_hashing<nested_qname_generator>();
-    test_hashing<package_generator>();
     test_hashing<pod_generator>();
     test_hashing<pod_types_generator>();
     test_hashing<primitive_generator>();
     test_hashing<property_generator>();
     test_hashing<qname_generator>();
     test_hashing<reference_generator>();
-    test_hashing<string_table_generator>();
 }
 
 BOOST_AUTO_TEST_SUITE_END()

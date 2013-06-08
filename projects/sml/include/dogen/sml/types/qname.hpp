@@ -49,8 +49,8 @@ public:
 public:
     qname(
         const std::string& model_name,
-        const std::list<std::string>& external_package_path,
-        const std::list<std::string>& package_path,
+        const std::list<std::string>& external_module_path,
+        const std::list<std::string>& module_path,
         const std::string& type_name,
         const dogen::sml::meta_types& meta_type);
 
@@ -73,23 +73,23 @@ public:
     /**@}*/
 
     /**
-     * @brief Path of packages that contain the model from where the type came from.
+     * @brief Path of modules that contain the model from where the type came from.
      */
     /**@{*/
-    const std::list<std::string>& external_package_path() const;
-    std::list<std::string>& external_package_path();
-    void external_package_path(const std::list<std::string>& v);
-    void external_package_path(const std::list<std::string>&& v);
+    const std::list<std::string>& external_module_path() const;
+    std::list<std::string>& external_module_path();
+    void external_module_path(const std::list<std::string>& v);
+    void external_module_path(const std::list<std::string>&& v);
     /**@}*/
 
     /**
-     * @brief Path of packages that contain this type.
+     * @brief Path of modules that contain this type.
      */
     /**@{*/
-    const std::list<std::string>& package_path() const;
-    std::list<std::string>& package_path();
-    void package_path(const std::list<std::string>& v);
-    void package_path(const std::list<std::string>&& v);
+    const std::list<std::string>& module_path() const;
+    std::list<std::string>& module_path();
+    void module_path(const std::list<std::string>& v);
+    void module_path(const std::list<std::string>&& v);
     /**@}*/
 
     /**
@@ -124,8 +124,8 @@ public:
 
 private:
     std::string model_name_;
-    std::list<std::string> external_package_path_;
-    std::list<std::string> package_path_;
+    std::list<std::string> external_module_path_;
+    std::list<std::string> module_path_;
     std::string type_name_;
     dogen::sml::meta_types meta_type_;
 };

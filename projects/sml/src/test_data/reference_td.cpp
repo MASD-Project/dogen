@@ -51,7 +51,7 @@ reference_generator::reference_generator() : position_(0) { }
 void reference_generator::
 populate(const unsigned int position, result_type& v) {
     v.model_name(create_std_string(position + 0));
-    v.external_package_path(create_std_list_std_string(position + 1));
+    v.external_module_path(create_std_list_std_string(position + 1));
     v.is_system(create_bool(position + 2));
 }
 

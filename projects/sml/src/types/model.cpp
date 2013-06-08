@@ -28,12 +28,11 @@ model::model()
 
 model::model(
     const std::string& name,
-    const std::unordered_map<dogen::sml::qname, dogen::sml::package>& packages,
     const std::unordered_map<dogen::sml::qname, dogen::sml::pod>& pods,
     const std::unordered_map<dogen::sml::qname, dogen::sml::primitive>& primitives,
     const std::unordered_map<dogen::sml::qname, dogen::sml::enumeration>& enumerations,
     const std::unordered_map<dogen::sml::qname, dogen::sml::exception>& exceptions,
-    const std::list<std::string>& external_package_path,
+    const std::list<std::string>& external_module_path,
     const bool is_system,
     const std::unordered_map<std::string, dogen::sml::reference>& dependencies,
     const std::unordered_set<dogen::sml::qname>& leaves,
@@ -42,12 +41,11 @@ model::model(
     const std::unordered_map<dogen::sml::qname, dogen::sml::service>& services,
     const std::unordered_map<dogen::sml::qname, dogen::sml::module>& modules)
     : name_(name),
-      packages_(packages),
       pods_(pods),
       primitives_(primitives),
       enumerations_(enumerations),
       exceptions_(exceptions),
-      external_package_path_(external_package_path),
+      external_module_path_(external_module_path),
       is_system_(is_system),
       dependencies_(dependencies),
       leaves_(leaves),
@@ -59,12 +57,11 @@ model::model(
 void model::swap(model& other) noexcept {
     using std::swap;
     swap(name_, other.name_);
-    swap(packages_, other.packages_);
     swap(pods_, other.pods_);
     swap(primitives_, other.primitives_);
     swap(enumerations_, other.enumerations_);
     swap(exceptions_, other.exceptions_);
-    swap(external_package_path_, other.external_package_path_);
+    swap(external_module_path_, other.external_module_path_);
     swap(is_system_, other.is_system_);
     swap(dependencies_, other.dependencies_);
     swap(leaves_, other.leaves_);
@@ -76,12 +73,11 @@ void model::swap(model& other) noexcept {
 
 bool model::operator==(const model& rhs) const {
     return name_ == rhs.name_ &&
-        packages_ == rhs.packages_ &&
         pods_ == rhs.pods_ &&
         primitives_ == rhs.primitives_ &&
         enumerations_ == rhs.enumerations_ &&
         exceptions_ == rhs.exceptions_ &&
-        external_package_path_ == rhs.external_package_path_ &&
+        external_module_path_ == rhs.external_module_path_ &&
         is_system_ == rhs.is_system_ &&
         dependencies_ == rhs.dependencies_ &&
         leaves_ == rhs.leaves_ &&
@@ -111,22 +107,6 @@ void model::name(const std::string& v) {
 
 void model::name(const std::string&& v) {
     name_ = std::move(v);
-}
-
-const std::unordered_map<dogen::sml::qname, dogen::sml::package>& model::packages() const {
-    return packages_;
-}
-
-std::unordered_map<dogen::sml::qname, dogen::sml::package>& model::packages() {
-    return packages_;
-}
-
-void model::packages(const std::unordered_map<dogen::sml::qname, dogen::sml::package>& v) {
-    packages_ = v;
-}
-
-void model::packages(const std::unordered_map<dogen::sml::qname, dogen::sml::package>&& v) {
-    packages_ = std::move(v);
 }
 
 const std::unordered_map<dogen::sml::qname, dogen::sml::pod>& model::pods() const {
@@ -193,20 +173,20 @@ void model::exceptions(const std::unordered_map<dogen::sml::qname, dogen::sml::e
     exceptions_ = std::move(v);
 }
 
-const std::list<std::string>& model::external_package_path() const {
-    return external_package_path_;
+const std::list<std::string>& model::external_module_path() const {
+    return external_module_path_;
 }
 
-std::list<std::string>& model::external_package_path() {
-    return external_package_path_;
+std::list<std::string>& model::external_module_path() {
+    return external_module_path_;
 }
 
-void model::external_package_path(const std::list<std::string>& v) {
-    external_package_path_ = v;
+void model::external_module_path(const std::list<std::string>& v) {
+    external_module_path_ = v;
 }
 
-void model::external_package_path(const std::list<std::string>&& v) {
-    external_package_path_ = std::move(v);
+void model::external_module_path(const std::list<std::string>&& v) {
+    external_module_path_ = std::move(v);
 }
 
 bool model::is_system() const {

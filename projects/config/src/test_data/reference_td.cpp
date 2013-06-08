@@ -46,7 +46,7 @@ reference_generator::reference_generator() : position_(0) { }
 void reference_generator::
 populate(const unsigned int position, result_type& v) {
     v.path(create_boost_filesystem_path(position + 0));
-    v.external_package_path(create_std_string(position + 1));
+    v.external_module_path(create_std_string(position + 1));
 }
 
 reference_generator::result_type

@@ -374,7 +374,7 @@ void includer::append_std_dependencies(const content_descriptor& cd,
     auto lambda([&](const std::string& type) {
         std::string private_ser_header("utility/serialization/");
         private_ser_header+= type + ".hpp";
-        const auto epp(model_.external_package_path());
+        const auto epp(model_.external_module_path());
         if (!epp.empty())
             private_ser_header = epp.front() + "/" + private_ser_header;
 
@@ -704,7 +704,7 @@ includes_for_registrar(const content_descriptor& cd) const {
         sml::qname n;
         n.model_name(ref.model_name());
         n.type_name("registrar");
-        n.external_package_path(ref.external_package_path());
+        n.external_module_path(ref.external_module_path());
         r.user().push_back(header_dependency(n, ft, main));
     }
 

@@ -48,7 +48,6 @@ BOOST_AUTO_TEST_CASE(validate_serialization) {
     SETUP_TEST_LOG("validate_serialization");
 
     rountrip_type<category_types_generator>();
-    rountrip_type<entry_generator>();
     rountrip_type<enumeration_generator>();
     rountrip_type<enumerator_generator>();
     rountrip_type<exception_generator>();
@@ -56,14 +55,12 @@ BOOST_AUTO_TEST_CASE(validate_serialization) {
     rountrip_type<meta_types_generator>();
     rountrip_type<model_generator>();
     rountrip_type<nested_qname_generator>();
-    rountrip_type<package_generator>();
     rountrip_type<pod_generator>();
     rountrip_type<pod_types_generator>();
     rountrip_type<primitive_generator>();
     rountrip_type<property_generator>();
     rountrip_type<qname_generator>();
     rountrip_type<reference_generator>();
-    rountrip_type<string_table_generator>();
 }
 
 BOOST_AUTO_TEST_SUITE_END()

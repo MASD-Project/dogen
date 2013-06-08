@@ -42,7 +42,6 @@ BOOST_AUTO_TEST_CASE(validate_equality) {
     SETUP_TEST_LOG("validate_equality");
 
     test_equality<category_types_generator>();
-    test_equality<entry_generator>();
     test_equality<enumeration_generator>();
     test_equality<enumerator_generator>();
     test_equality<exception_generator>();
@@ -50,14 +49,12 @@ BOOST_AUTO_TEST_CASE(validate_equality) {
     test_equality<meta_types_generator>();
     test_equality<model_generator>();
     test_equality<nested_qname_generator>();
-    test_equality<package_generator>();
     test_equality<pod_generator>();
     test_equality<pod_types_generator>();
     test_equality<primitive_generator>();
     test_equality<property_generator>();
     test_equality<qname_generator>();
     test_equality<reference_generator>();
-    test_equality<string_table_generator>();
 }
 
 BOOST_AUTO_TEST_SUITE_END()

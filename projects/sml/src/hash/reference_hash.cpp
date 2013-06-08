@@ -46,7 +46,7 @@ std::size_t reference_hasher::hash(const reference&v) {
     std::size_t seed(0);
 
     combine(seed, v.model_name());
-    combine(seed, hash_std_list_std_string(v.external_package_path()));
+    combine(seed, hash_std_list_std_string(v.external_module_path()));
     combine(seed, v.is_system());
 
     return seed;

@@ -38,7 +38,7 @@ std::size_t reference_hasher::hash(const reference&v) {
     std::size_t seed(0);
 
     combine(seed, v.path().generic_string());
-    combine(seed, v.external_package_path());
+    combine(seed, v.external_module_path());
 
     return seed;
 }

@@ -42,3 +42,4 @@
 #include "dogen/dia_to_sml/types/visitor.hpp"
 #include "dogen/dia_to_sml/types/workflow.hpp"
 #include "dogen/dia_to_sml/types/workflow_interface.hpp"
+#include "dogen/sml/types/model_element_visitor.hpp"

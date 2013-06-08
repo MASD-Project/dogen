@@ -45,14 +45,14 @@ public:
     /**
      * @brief Initialises the parser.
      *
-     * @param packages names of all the top-level packages in the
+     * @param modules names of all the top-level modules in the
      * current model.
-     * @param external_package_path packages external to the current
+     * @param external_module_path modules external to the current
      * model
      * @param model_name name of the current model
      */
-    identifier_parser(const std::unordered_set<std::string>& packages,
-        const std::list<std::string>& external_package_path,
+    identifier_parser(const std::unordered_set<std::string>& modules,
+        const std::list<std::string>& external_module_path,
         const std::string model_name);
 
 public:
@@ -61,8 +61,8 @@ public:
     static std::list<std::string> parse_csv_string(const std::string& n);
 
 private:
-    const std::unordered_set<std::string> packages_;
-    const std::list<std::string> external_package_path_;
+    const std::unordered_set<std::string> modules_;
+    const std::list<std::string> external_module_path_;
     const std::string model_name_;
 };
 

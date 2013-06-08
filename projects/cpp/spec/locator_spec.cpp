@@ -46,8 +46,8 @@ const boost::filesystem::path src_dir("source directory");
 const boost::filesystem::path include_dir("include directory");
 const boost::filesystem::path project_dir("project directory");
 const std::string type_name("a_type");
-const std::list<std::string> package_path_1({ "a", "b" });
-const std::list<std::string> external_package_path_1({ "c", "d" });
+const std::list<std::string> module_path_1({ "a", "b" });
+const std::list<std::string> external_module_path_1({ "c", "d" });
 const std::string unique_name("unique_name");
 const std::string header_extension(".hxx");
 const std::string source_extension(".cxx");
@@ -72,24 +72,24 @@ dogen::config::cpp_settings split_project_settings() {
 }
 
 content_descriptor mock_descriptor(cpp_facet_types ft, file_types flt,
-    std::string type_name, std::list<std::string> package_path,
-    std::list<std::string> external_package_path) {
+    std::string type_name, std::list<std::string> module_path,
+    std::list<std::string> external_module_path) {
 
     content_descriptor r;
     r.facet_type(ft);
     r.file_type(flt);
     r.aspect_type(aspect_types::main);
     r.name().model_name(test_model_name);
-    r.name().package_path(package_path);
+    r.name().module_path(module_path);
     r.name().type_name(type_name);
-    r.name().external_package_path(external_package_path);
+    r.name().external_module_path(external_module_path);
 
     return r;
 }
 
 content_descriptor mock_descriptor(cpp_facet_types ft, file_types flt) {
     return mock_descriptor(
-        ft, flt, type_name, package_path_1, external_package_path_1);
+        ft, flt, type_name, module_path_1, external_module_path_1);
 }
 
 std::list<std::string>

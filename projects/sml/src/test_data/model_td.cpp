@@ -23,7 +23,6 @@
 #include "dogen/sml/test_data/exception_td.hpp"
 #include "dogen/sml/test_data/model_td.hpp"
 #include "dogen/sml/test_data/module_td.hpp"
-#include "dogen/sml/test_data/package_td.hpp"
 #include "dogen/sml/test_data/pod_td.hpp"
 #include "dogen/sml/test_data/primitive_td.hpp"
 #include "dogen/sml/test_data/qname_td.hpp"
@@ -41,19 +40,6 @@ std::string create_std_string(const unsigned int position) {
 dogen::sml::qname
 create_dogen_sml_qname(const unsigned int position) {
     return dogen::sml::qname_generator::create(position);
-}
-
-dogen::sml::package
-create_dogen_sml_package(const unsigned int position) {
-    return dogen::sml::package_generator::create(position);
-}
-
-std::unordered_map<dogen::sml::qname, dogen::sml::package> create_std_unordered_map_dogen_sml_qname_dogen_sml_package(unsigned int position) {
-    std::unordered_map<dogen::sml::qname, dogen::sml::package> r;
-    for (unsigned int i(0); i < 10; ++i) {
-        r.insert(std::make_pair(create_dogen_sml_qname(position + i), create_dogen_sml_package(position + i)));
-    }
-    return r;
 }
 
 dogen::sml::pod
@@ -193,19 +179,18 @@ model_generator::model_generator() : position_(0) { }
 void model_generator::
 populate(const unsigned int position, result_type& v) {
     v.name(create_std_string(position + 0));
-    v.packages(create_std_unordered_map_dogen_sml_qname_dogen_sml_package(position + 1));
-    v.pods(create_std_unordered_map_dogen_sml_qname_dogen_sml_pod(position + 2));
-    v.primitives(create_std_unordered_map_dogen_sml_qname_dogen_sml_primitive(position + 3));
-    v.enumerations(create_std_unordered_map_dogen_sml_qname_dogen_sml_enumeration(position + 4));
-    v.exceptions(create_std_unordered_map_dogen_sml_qname_dogen_sml_exception(position + 5));
-    v.external_package_path(create_std_list_std_string(position + 6));
-    v.is_system(create_bool(position + 7));
-    v.dependencies(create_std_unordered_map_std_string_dogen_sml_reference(position + 8));
-    v.leaves(create_std_unordered_set_dogen_sml_qname(position + 9));
-    v.documentation(create_std_string(position + 10));
-    v.implementation_specific_parameters(create_std_vector_std_pair_std_string_std_string_(position + 11));
-    v.services(create_std_unordered_map_dogen_sml_qname_dogen_sml_service(position + 12));
-    v.modules(create_std_unordered_map_dogen_sml_qname_dogen_sml_module(position + 13));
+    v.pods(create_std_unordered_map_dogen_sml_qname_dogen_sml_pod(position + 1));
+    v.primitives(create_std_unordered_map_dogen_sml_qname_dogen_sml_primitive(position + 2));
+    v.enumerations(create_std_unordered_map_dogen_sml_qname_dogen_sml_enumeration(position + 3));
+    v.exceptions(create_std_unordered_map_dogen_sml_qname_dogen_sml_exception(position + 4));
+    v.external_module_path(create_std_list_std_string(position + 5));
+    v.is_system(create_bool(position + 6));
+    v.dependencies(create_std_unordered_map_std_string_dogen_sml_reference(position + 7));
+    v.leaves(create_std_unordered_set_dogen_sml_qname(position + 8));
+    v.documentation(create_std_string(position + 9));
+    v.implementation_specific_parameters(create_std_vector_std_pair_std_string_std_string_(position + 10));
+    v.services(create_std_unordered_map_dogen_sml_qname_dogen_sml_service(position + 11));
+    v.modules(create_std_unordered_map_dogen_sml_qname_dogen_sml_module(position + 12));
 }
 
 model_generator::result_type

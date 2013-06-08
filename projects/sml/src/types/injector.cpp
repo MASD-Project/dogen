@@ -64,8 +64,8 @@ pod injector::create_key(const qname& qn, const generation_types gt,
     kqn.type_name(qn.type_name() + "_" +
         (versioned ? versioned_name : unversioned_name));
     kqn.model_name(qn.model_name());
-    kqn.package_path(qn.package_path());
-    kqn.external_package_path(qn.external_package_path());
+    kqn.module_path(qn.module_path());
+    kqn.external_module_path(qn.external_module_path());
     kqn.meta_type(meta_types::pod);
 
     pod r;

@@ -69,7 +69,7 @@ BOOST_AUTO_TEST_CASE(parsing_string_with_many_nested_scopes_produces_expected_qn
     dogen::sml::nested_qname nqn;
     dogen::sml::qname e;
     e.type_name("z");
-    e.package_path(std::list<std::string> { "b", "c"});
+    e.module_path(std::list<std::string> { "b", "c"});
     e.model_name("a");
     nqn.type(e);
     BOOST_CHECK(asserter::assert_equals(nqn, a));

@@ -49,13 +49,13 @@ namespace {
 const std::string empty;
 const std::string test_module("cpp");
 const std::string test_suite("workflow_spec");
-const std::string package_path("dogen");
+const std::string module_path("dogen");
 
 using boost::filesystem::path;
 bool test_workflow(path t, path e, path a) {
 
     using dogen::config::test::mock_settings_factory;
-    const auto s(mock_settings_factory::build_settings(t, a, package_path));
+    const auto s(mock_settings_factory::build_settings(t, a, module_path));
     using dogen::utility::test::xml_deserialize;
     const auto m(xml_deserialize<dogen::sml::model>(t));
 

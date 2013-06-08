@@ -46,12 +46,12 @@ workflow::workflow() { }
 workflow::~workflow() noexcept { }
 
 void workflow::initialise_context_activity(const std::string& model_name,
-    const std::string& external_package_path, bool is_target) {
+    const std::string& external_module_path, bool is_target) {
 
     context_ = context();
 
-    const auto epp(identifier_parser::parse_scoped_name(external_package_path));
-    context_.model().external_package_path(epp);
+    const auto epp(identifier_parser::parse_scoped_name(external_module_path));
+    context_.model().external_module_path(epp);
     context_.model().name(model_name);
     context_.is_target(is_target);
     context_.model().is_system(false);
@@ -70,7 +70,7 @@ graph_type workflow::build_graph_activity(const dia::diagram& diagram) {
     b.build();
     context_.child_to_parent(b.child_to_parent());
     context_.parent_ids(b.parent_ids());
-    context_.top_level_package_names(b.top_level_package_names());
+    context_.top_level_module_names(b.top_level_module_names());
     return b.graph();
 }
 
@@ -106,10 +106,10 @@ void workflow::post_process_model_activity() {
 }
 
 sml::model workflow::execute(const dia::diagram& diagram,
-    const std::string& model_name, const std::string& external_package_path,
+    const std::string& model_name, const std::string& external_module_path,
     bool is_target) {
 
-    initialise_context_activity(model_name, external_package_path, is_target);
+    initialise_context_activity(model_name, external_module_path, is_target);
     graph_to_context_activity(build_graph_activity(diagram));
     post_process_model_activity();
 

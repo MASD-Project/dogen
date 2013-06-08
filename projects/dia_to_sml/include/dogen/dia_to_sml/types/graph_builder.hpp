@@ -147,11 +147,11 @@ public:
     const std::unordered_set<std::string>& parent_ids() const;
 
     /**
-     * @brief Returns the list of top-level package names.
+     * @brief Returns the list of top-level module names.
      *
      * @pre The graph must have already been built.
      */
-    const std::unordered_set<std::string>& top_level_package_names() const;
+    const std::unordered_set<std::string>& top_level_module_names() const;
 
 private:
     bool built_;
@@ -162,7 +162,7 @@ private:
     std::unordered_map<std::string, std::string> child_to_parent_;
     std::unordered_set<std::string> parent_ids_;
     std::unordered_set<std::string> connected_ids_;
-    std::unordered_set<std::string> top_level_package_names_;
+    std::unordered_set<std::string> top_level_module_names_;
 };
 
 } }

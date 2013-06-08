@@ -33,7 +33,7 @@ static logger lg(logger_factory("sml.mock_model_factory"));
 const std::string model_name_prefix("some_model_");
 const std::string type_name_prefix("some_type_");
 const std::string property_name_prefix("some_property_");
-const std::string package_name_prefix("some_package_");
+const std::string module_name_prefix("some_module_");
 
 const std::string boolean("bool");
 const std::string unsigned_int("unsigned int");
@@ -61,9 +61,9 @@ std::string property_name(unsigned int i) {
     return stream.str();
 }
 
-std::string package_name(unsigned int i) {
+std::string module_name(unsigned int i) {
     std::ostringstream stream;
-    stream << package_name_prefix << i;
+    stream << module_name_prefix << i;
     return stream.str();
 }
 
@@ -162,14 +162,14 @@ dogen::sml::nested_qname mock_qname(
 }
 
 dogen::sml::pod mock_pod(const unsigned int i, const std::string& model_name,
-    const unsigned int package_n = 0) {
+    const unsigned int module_n = 0) {
     dogen::sml::qname qn;
     qn.model_name(model_name);
     qn.type_name(type_name(i));
     qn.meta_type(dogen::sml::meta_types::pod);
 
-    for (unsigned int i(0); i < package_n; ++i)
-        qn.package_path().push_back(package_name(i));
+    for (unsigned int i(0); i < module_n; ++i)
+        qn.module_path().push_back(module_name(i));
 
     dogen::sml::pod r;
     r.name(qn);
@@ -180,20 +180,20 @@ dogen::sml::pod mock_pod(const unsigned int i, const std::string& model_name,
     return r;
 }
 
-dogen::sml::pod mock_pod(unsigned int i, const unsigned int package_n = 0) {
-    return mock_pod(i, model_name(i), package_n);
+dogen::sml::pod mock_pod(unsigned int i, const unsigned int module_n = 0) {
+    return mock_pod(i, model_name(i), module_n);
 }
 
 dogen::sml::enumeration
 mock_enumeration(const unsigned int i, const std::string& model_name,
-    const unsigned int package_n = 0) {
+    const unsigned int module_n = 0) {
     dogen::sml::qname qn;
     qn.model_name(model_name);
     qn.type_name(type_name(i));
     qn.meta_type(dogen::sml::meta_types::enumeration);
 
-    for (unsigned int i(0); i < package_n; ++i)
-        qn.package_path().push_back(package_name(i));
+    for (unsigned int i(0); i < module_n; ++i)
+        qn.module_path().push_back(module_name(i));
 
     dogen::sml::enumerator e0;
     e0.name(type_name(0));
@@ -214,14 +214,14 @@ mock_enumeration(const unsigned int i, const std::string& model_name,
 
 dogen::sml::exception
 mock_exception(const unsigned int i, const std::string& model_name,
-    const unsigned int package_n = 0) {
+    const unsigned int module_n = 0) {
     dogen::sml::qname qn;
     qn.model_name(model_name);
     qn.type_name(type_name(i));
     qn.meta_type(dogen::sml::meta_types::exception);
 
-    for (unsigned int i(0); i < package_n; ++i)
-        qn.package_path().push_back(package_name(i));
+    for (unsigned int i(0); i < module_n; ++i)
+        qn.module_path().push_back(module_name(i));
 
     dogen::sml::exception r;
     r.name(qn);
@@ -244,8 +244,8 @@ std::string mock_model_factory::type_name(const unsigned int n) {
     return ::type_name(n);
 }
 
-std::string mock_model_factory::package_name(const unsigned int n) {
-    return ::package_name(n);
+std::string mock_model_factory::module_name(const unsigned int n) {
+    return ::module_name(n);
 }
 
 model mock_model_factory::
@@ -254,49 +254,49 @@ build_single_type_model(const unsigned int n, const meta_types mt) {
 }
 
 model mock_model_factory::
-build_single_type_model_in_package(const unsigned int n, const meta_types mt,
-    const unsigned int pkg_n) {
-    return build_multi_type_model(n, 1, mt, pkg_n);
+build_single_type_model_in_module(const unsigned int n, const meta_types mt,
+    const unsigned int mod_n) {
+    return build_multi_type_model(n, 1, mt, mod_n);
 }
 
 model mock_model_factory::build_multi_type_model(const unsigned int n,
-    const unsigned int type_n, const meta_types mt, const unsigned int pkg_n) {
+    const unsigned int type_n, const meta_types mt, const unsigned int mod_n) {
 
     model r;
     r.name(model_name(n));
     r.documentation(documentation);
 
     std::list<std::string> pp;
-    for (unsigned int i(0); i < pkg_n; ++i) {
+    for (unsigned int i(0); i < mod_n; ++i) {
         qname qn;
-        qn.type_name(package_name(i));
-        qn.package_path(pp);
-        qn.meta_type(dogen::sml::meta_types::package);
+        qn.type_name(module_name(i));
+        qn.module_path(pp);
+        qn.meta_type(dogen::sml::meta_types::module);
 
-        package p;
+        module p;
         p.name(qn);
         p.documentation(documentation);
-        r.packages().insert(std::make_pair(p.name(), p));
+        r.modules().insert(std::make_pair(p.name(), p));
 
-        pp.push_back(package_name(i));
+        pp.push_back(module_name(i));
     }
 
     switch (mt) {
     case meta_types::pod:
         for (unsigned int i(0); i < type_n; ++i) {
-            const auto p(mock_pod(i, model_name(n), pkg_n));
+            const auto p(mock_pod(i, model_name(n), mod_n));
             r.pods().insert(std::make_pair(p.name(), p));
         }
         break;
     case meta_types::enumeration:
         for (unsigned int i(0); i < type_n; ++i) {
-            const auto e(mock_enumeration(i, model_name(n), pkg_n));
+            const auto e(mock_enumeration(i, model_name(n), mod_n));
             r.enumerations().insert(std::make_pair(e.name(), e));
         }
         break;
     case meta_types::exception:
         for (unsigned int i(0); i < type_n; ++i) {
-            const auto e(mock_exception(i, model_name(n), pkg_n));
+            const auto e(mock_exception(i, model_name(n), mod_n));
             r.exceptions().insert(std::make_pair(e.name(), e));
         }
         break;

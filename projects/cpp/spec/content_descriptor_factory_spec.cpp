@@ -125,8 +125,8 @@ BOOST_AUTO_TEST_CASE(creating_content_descriptor_from_model_produces_expected_re
     for (const auto& cd : cds) {
         found_facets.insert(cd.facet_type());
         BOOST_CHECK(cd.name().type_name() == m.name());
-        BOOST_CHECK(cd.name().external_package_path()
-            == m.external_package_path());
+        BOOST_CHECK(cd.name().external_module_path()
+            == m.external_module_path());
     }
     BOOST_CHECK(found_facets.size() == 1);
 }

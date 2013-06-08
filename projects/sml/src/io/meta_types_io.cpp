@@ -39,9 +39,6 @@ std::ostream& operator<<(std::ostream& s, const meta_types& v) {
     case meta_types::pod:
         attr = "\"pod\"";
         break;
-    case meta_types::package:
-        attr = "\"package\"";
-        break;
     case meta_types::primitive:
         attr = "\"primitive\"";
         break;

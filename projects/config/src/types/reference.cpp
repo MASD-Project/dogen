@@ -25,23 +25,23 @@ namespace config {
 
 reference::reference(reference&& rhs)
     : path_(std::move(rhs.path_)),
-      external_package_path_(std::move(rhs.external_package_path_)) { }
+      external_module_path_(std::move(rhs.external_module_path_)) { }
 
 reference::reference(
     const boost::filesystem::path& path,
-    const std::string& external_package_path)
+    const std::string& external_module_path)
     : path_(path),
-      external_package_path_(external_package_path) { }
+      external_module_path_(external_module_path) { }
 
 void reference::swap(reference& other) noexcept {
     using std::swap;
     swap(path_, other.path_);
-    swap(external_package_path_, other.external_package_path_);
+    swap(external_module_path_, other.external_module_path_);
 }
 
 bool reference::operator==(const reference& rhs) const {
     return path_ == rhs.path_ &&
-        external_package_path_ == rhs.external_package_path_;
+        external_module_path_ == rhs.external_module_path_;
 }
 
 reference& reference::operator=(reference other) {
@@ -66,20 +66,20 @@ void reference::path(const boost::filesystem::path&& v) {
     path_ = std::move(v);
 }
 
-const std::string& reference::external_package_path() const {
-    return external_package_path_;
+const std::string& reference::external_module_path() const {
+    return external_module_path_;
 }
 
-std::string& reference::external_package_path() {
-    return external_package_path_;
+std::string& reference::external_module_path() {
+    return external_module_path_;
 }
 
-void reference::external_package_path(const std::string& v) {
-    external_package_path_ = v;
+void reference::external_module_path(const std::string& v) {
+    external_module_path_ = v;
 }
 
-void reference::external_package_path(const std::string&& v) {
-    external_package_path_ = std::move(v);
+void reference::external_module_path(const std::string&& v) {
+    external_module_path_ = std::move(v);
 }
 
 } }

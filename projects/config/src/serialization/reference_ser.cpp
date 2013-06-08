@@ -43,7 +43,7 @@ void save(Archive& ar,
     const dogen::config::reference& v,
     const unsigned int /*version*/) {
     ar << make_nvp("path", v.path_.generic_string());
-    ar << make_nvp("external_package_path", v.external_package_path_);
+    ar << make_nvp("external_module_path", v.external_module_path_);
 }
 
 template<typename Archive>
@@ -53,7 +53,7 @@ void load(Archive& ar,
     std::string path_tmp;
     ar >> make_nvp("path", path_tmp);
     v.path_ = path_tmp;
-    ar >> make_nvp("external_package_path", v.external_package_path_);
+    ar >> make_nvp("external_module_path", v.external_module_path_);
 }
 
 } }

@@ -114,23 +114,23 @@ qname merger::resolve_partial_type(const qname& n) const {
     if (i != pods.end())
         return r;
 
-    // then try setting package path to the target one
-    r.external_package_path(merged_model_.external_package_path());
+    // then try setting module path to the target one
+    r.external_module_path(merged_model_.external_module_path());
     i = pods.find(r);
     if (i != pods.end())
         return r;
 
-    // now try all available package paths
+    // now try all available module paths
     for (const auto& pair : models_) {
         const auto& m(pair.second);
-        r.external_package_path(m.external_package_path());
+        r.external_module_path(m.external_module_path());
         i = pods.find(r);
         if (i != pods.end())
             return r;
     }
 
-    // reset external package path
-    r.external_package_path(std::list<std::string>{});
+    // reset external module path
+    r.external_module_path(std::list<std::string>{});
 
     // its not a pod, could it be a primitive?
     const auto& primitives(merged_model_.primitives());
@@ -146,16 +146,16 @@ qname merger::resolve_partial_type(const qname& n) const {
     if (k != enumerations.end())
         return r;
 
-    // then try setting package path to the target one
-    r.external_package_path(merged_model_.external_package_path());
+    // then try setting module path to the target one
+    r.external_module_path(merged_model_.external_module_path());
     k = enumerations.find(r);
     if (k != enumerations.end())
         return r;
 
-    // now try all available package paths
+    // now try all available module paths
     for (const auto& pair : models_) {
         const auto m(pair.second);
-        r.external_package_path(m.external_package_path());
+        r.external_module_path(m.external_module_path());
         k = enumerations.find(r);
         if (k != enumerations.end())
             return r;
@@ -165,7 +165,7 @@ qname merger::resolve_partial_type(const qname& n) const {
         // it could be a type defined in this model
         r.meta_type(meta_types::pod);
         r.model_name(merged_model_.name());
-        r.external_package_path(merged_model_.external_package_path());
+        r.external_module_path(merged_model_.external_module_path());
         i = pods.find(r);
         if (i != pods.end())
             return r;
@@ -253,7 +253,7 @@ merger::compute_dependencies() const {
         }
 
         const auto m(i->second);
-        reference ref(m.name(), m.external_package_path(), m.is_system());
+        reference ref(m.name(), m.external_module_path(), m.is_system());
         r.insert(std::make_pair(m.name(), ref));
     }
     return r;
@@ -310,8 +310,8 @@ void merger::add_target(model model) {
     merged_model_.name(model.name());
     merged_model_.documentation(model.documentation());
     merged_model_.leaves(model.leaves());
-    merged_model_.packages(model.packages());
-    merged_model_.external_package_path(model.external_package_path());
+    merged_model_.modules(model.modules());
+    merged_model_.external_module_path(model.external_module_path());
 
     add(model);
     BOOST_LOG_SEV(lg, debug) << "added target model: " << model.name();

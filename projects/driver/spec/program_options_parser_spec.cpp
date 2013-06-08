@@ -63,20 +63,20 @@ const std::string stop_after_formatting_arg("--stop-after-formatting");
 
 const std::string target_arg("--target");
 const std::string target_value_arg("some_target");
-const std::string external_package_path_arg("--external-package-path");
-const std::string external_package_path_value_arg("a package");
+const std::string external_module_path_arg("--external-module-path");
+const std::string external_module_path_value_arg("a module");
 const std::string reference_arg("--reference");
 const std::string reference_value_1_arg("some reference");
 const std::string reference_value_2_arg("another reference");
-const std::string reference_value_3_arg("a reference,package path 3");
-const std::string reference_value_4_arg("another reference,package path 4");
+const std::string reference_value_3_arg("a reference,module path 3");
+const std::string reference_value_4_arg("another reference,module path 4");
 
 const std::string reference_value_3_diagram("a reference");
-const std::string reference_value_3_package_path("package path 3");
+const std::string reference_value_3_module_path("module path 3");
 const std::string reference_value_4_diagram("another reference");
-const std::string reference_value_4_package_path("package path 4");
+const std::string reference_value_4_module_path("module path 4");
 
-const std::string disable_model_package_arg("--disable-model-package");
+const std::string disable_model_module_arg("--disable-model-module");
 
 const std::string cpp_split_project_arg("--cpp-split-project");
 const std::string cpp_project_dir_arg("--cpp-project-dir");
@@ -281,13 +281,13 @@ BOOST_AUTO_TEST_CASE(supplying_modeling_options_results_in_expected_settings) {
     SETUP_TEST_LOG_SOURCE("supplying_modeling_options_results_in_expected_settings");
     const std::vector<std::string> o = {
         target_arg, target_value_arg,
-        external_package_path_arg,
-        external_package_path_value_arg,
+        external_module_path_arg,
+        external_module_path_value_arg,
         reference_arg,
         reference_value_1_arg,
         reference_arg,
         reference_value_2_arg,
-        disable_model_package_arg
+        disable_model_module_arg
     };
 
     const auto s(check_valid_arguments(o));
@@ -295,8 +295,8 @@ BOOST_AUTO_TEST_CASE(supplying_modeling_options_results_in_expected_settings) {
 
     const auto ms(s.modeling());
     BOOST_CHECK(ms.target().string() == target_value_arg);
-    BOOST_CHECK(ms.external_package_path() == external_package_path_value_arg);
-    BOOST_CHECK(ms.disable_model_package());
+    BOOST_CHECK(ms.external_module_path() == external_module_path_value_arg);
+    BOOST_CHECK(ms.disable_model_module());
 
     const auto refs(ms.references());
     BOOST_REQUIRE(refs.size() == 2);
@@ -304,17 +304,17 @@ BOOST_AUTO_TEST_CASE(supplying_modeling_options_results_in_expected_settings) {
     BOOST_CHECK(refs[1].path().string() == reference_value_2_arg);
 }
 
-BOOST_AUTO_TEST_CASE(supplying_package_path_for_references_results_in_correct_package_path) {
-    SETUP_TEST_LOG_SOURCE("supplying_package_path_for_references_results_in_correct_package_path");
+BOOST_AUTO_TEST_CASE(supplying_module_path_for_references_results_in_correct_module_path) {
+    SETUP_TEST_LOG_SOURCE("supplying_module_path_for_references_results_in_correct_module_path");
     const std::vector<std::string> o = {
         target_arg, target_value_arg,
-        external_package_path_arg,
-        external_package_path_value_arg,
+        external_module_path_arg,
+        external_module_path_value_arg,
         reference_arg,
         reference_value_3_arg,
         reference_arg,
         reference_value_4_arg,
-        disable_model_package_arg
+        disable_model_module_arg
     };
 
     const auto s(check_valid_arguments(o));
@@ -326,10 +326,10 @@ BOOST_AUTO_TEST_CASE(supplying_package_path_for_references_results_in_correct_pa
 
     BOOST_CHECK(refs[0].path().string() == reference_value_3_diagram);
     BOOST_CHECK(
-        refs[0].external_package_path() == reference_value_3_package_path);
+        refs[0].external_module_path() == reference_value_3_module_path);
     BOOST_CHECK(refs[1].path().string() == reference_value_4_diagram);
     BOOST_CHECK(
-        refs[1].external_package_path() == reference_value_4_package_path);
+        refs[1].external_module_path() == reference_value_4_module_path);
 }
 
 BOOST_AUTO_TEST_CASE(not_supplying_modeling_options_other_than_target_results_in_expected_settings) {
@@ -344,7 +344,7 @@ BOOST_AUTO_TEST_CASE(not_supplying_modeling_options_other_than_target_results_in
 
     const auto ms(s.modeling());
     BOOST_CHECK(ms.target().string() == target_value_arg);
-    BOOST_CHECK(ms.external_package_path().empty());
+    BOOST_CHECK(ms.external_module_path().empty());
     BOOST_REQUIRE(ms.references().empty());
 }
 

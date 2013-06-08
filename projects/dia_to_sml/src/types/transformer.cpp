@@ -23,7 +23,7 @@
 #include <boost/lexical_cast.hpp>
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/sml/types/package.hpp"
+#include "dogen/sml/types/module.hpp"
 #include "dogen/sml/types/pod.hpp"
 #include "dogen/sml/types/service.hpp"
 #include "dogen/dia/types/composite.hpp"
@@ -50,8 +50,8 @@ const std::string comment_key("COMMENT");
 const std::string empty_dia_object_name("Dia object name is empty");
 const std::string original_parent_not_found("Pod has no original parent: ");
 const std::string parent_not_found("Object has a parent but its not defined: ");
-const std::string missing_package_for_id("Missing package for dia object ID: ");
-const std::string missing_package_for_qname("Missing package for qname: ");
+const std::string missing_module_for_id("Missing module for dia object ID: ");
+const std::string missing_module_for_qname("Missing module for qname: ");
 const std::string missing_qname_for_id("Missing QName for dia object ID: ");
 const std::string type_attribute_expected(
     "Could not find type attribute. ID: ");
@@ -70,8 +70,8 @@ namespace dia_to_sml {
 transformer::transformer(context& c)
     : context_(c),
       identifier_parser_(
-          new identifier_parser(c.top_level_package_names(),
-              c.model().external_package_path(), c.model().name())),
+          new identifier_parser(c.top_level_module_names(),
+              c.model().external_module_path(), c.model().name())),
       comments_parser_(new comments_parser()) {
 
     BOOST_LOG_SEV(lg, debug) << "Initial context: " << context_;
@@ -117,7 +117,7 @@ sml::qname transformer::transform_qname(const std::string& n,
     sml::qname name;
     name.model_name(context_.model().name());
     name.meta_type(meta_type);
-    name.external_package_path(context_.model().external_package_path());
+    name.external_module_path(context_.model().external_module_path());
 
     if (!pkg_id.empty()) {
         const auto i(context_.dia_id_to_qname().find(pkg_id));
@@ -127,19 +127,19 @@ sml::qname transformer::transform_qname(const std::string& n,
                     missing_qname_for_id + pkg_id));
         }
 
-        auto j(context_.model().packages().find(i->second));
-        if (j == context_.model().packages().end()) {
-            BOOST_LOG_SEV(lg, error) << missing_package_for_qname
+        auto j(context_.model().modules().find(i->second));
+        if (j == context_.model().modules().end()) {
+            BOOST_LOG_SEV(lg, error) << missing_module_for_qname
                                      << i->second.type_name();
 
             BOOST_THROW_EXCEPTION(
-                transformation_error(missing_package_for_qname +
+                transformation_error(missing_module_for_qname +
                     i->second.type_name()));
         }
 
-        auto pp(j->second.name().package_path());
+        auto pp(j->second.name().module_path());
         pp.push_back(j->second.name().type_name());
-        name.package_path(pp);
+        name.module_path(pp);
     }
 
     name.type_name(n);
@@ -467,13 +467,13 @@ void transformer::transform_enumeration(const processed_object& o) {
     context_.model().enumerations().insert(std::make_pair(e.name(), e));
 }
 
-void transformer::transform_package(const processed_object& o) {
-    BOOST_LOG_SEV(lg, debug) << "Object is a package: " << o.id();
+void transformer::transform_module(const processed_object& o) {
+    BOOST_LOG_SEV(lg, debug) << "Object is a module: " << o.id();
 
-    sml::package p;
+    sml::module p;
     const std::string pkg_id(o.child_node_id());
     using sml::meta_types;
-    p.name(transform_qname(o.name(), meta_types::package, pkg_id));
+    p.name(transform_qname(o.name(), meta_types::module, pkg_id));
     p.documentation(o.comment());
 
     if (p.name().type_name().empty()) {
@@ -483,7 +483,7 @@ void transformer::transform_package(const processed_object& o) {
     }
 
     context_.dia_id_to_qname().insert(std::make_pair(o.id(), p.name()));
-    context_.model().packages().insert(std::make_pair(p.name(), p));
+    context_.model().modules().insert(std::make_pair(p.name(), p));
 }
 
 void transformer::transform_note(const processed_object& o) {
@@ -512,18 +512,18 @@ void transformer::transform_note(const processed_object& o) {
 
     const auto i(context_.dia_id_to_qname().find(o.child_node_id()));
     if (i == context_.dia_id_to_qname().end()) {
-        BOOST_LOG_SEV(lg, error) << missing_package_for_id << o.child_node_id();
+        BOOST_LOG_SEV(lg, error) << missing_module_for_id << o.child_node_id();
         BOOST_THROW_EXCEPTION(
-            transformation_error(missing_package_for_id + o.child_node_id()));
+            transformation_error(missing_module_for_id + o.child_node_id()));
     }
 
-    auto j(context_.model().packages().find(i->second));
-    if (j == context_.model().packages().end()) {
-        BOOST_LOG_SEV(lg, error) << missing_package_for_qname
+    auto j(context_.model().modules().find(i->second));
+    if (j == context_.model().modules().end()) {
+        BOOST_LOG_SEV(lg, error) << missing_module_for_qname
                                  << i->second.type_name();
 
         BOOST_THROW_EXCEPTION(
-            transformation_error(missing_package_for_qname +
+            transformation_error(missing_module_for_qname +
                 i->second.type_name()));
     }
     j->second.documentation(pair.first);
@@ -553,7 +553,7 @@ transform(const processed_object& o, const object_profile& op) {
     ensure_type_is_processable(op, o);
 
     if (op.is_uml_large_package())
-        transform_package(o);
+        transform_module(o);
     else if (op.is_uml_note())
         transform_note(o);
     else if (op.is_enumeration())

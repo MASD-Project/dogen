@@ -97,7 +97,7 @@ std::size_t context_hasher::hash(const context&v) {
     combine(seed, hash_std_unordered_map_std_string_dogen_sml_qname(v.dia_id_to_qname()));
     combine(seed, hash_std_unordered_map_dogen_sml_qname_dogen_sml_qname(v.original_parent()));
     combine(seed, hash_std_unordered_map_dogen_sml_qname_std_list_dogen_sml_qname_(v.leaves()));
-    combine(seed, hash_std_unordered_set_std_string(v.top_level_package_names()));
+    combine(seed, hash_std_unordered_set_std_string(v.top_level_module_names()));
     combine(seed, v.model());
 
     return seed;

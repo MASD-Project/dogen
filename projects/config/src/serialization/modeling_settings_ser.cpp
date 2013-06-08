@@ -45,10 +45,10 @@ void save(Archive& ar,
     const dogen::config::modeling_settings& v,
     const unsigned int /*version*/) {
     ar << make_nvp("target", v.target_.generic_string());
-    ar << make_nvp("external_package_path", v.external_package_path_);
+    ar << make_nvp("external_module_path", v.external_module_path_);
     ar << make_nvp("references", v.references_);
     ar << make_nvp("verbose", v.verbose_);
-    ar << make_nvp("disable_model_package", v.disable_model_package_);
+    ar << make_nvp("disable_model_module", v.disable_model_module_);
 }
 
 template<typename Archive>
@@ -58,10 +58,10 @@ void load(Archive& ar,
     std::string target_tmp;
     ar >> make_nvp("target", target_tmp);
     v.target_ = target_tmp;
-    ar >> make_nvp("external_package_path", v.external_package_path_);
+    ar >> make_nvp("external_module_path", v.external_module_path_);
     ar >> make_nvp("references", v.references_);
     ar >> make_nvp("verbose", v.verbose_);
-    ar >> make_nvp("disable_model_package", v.disable_model_package_);
+    ar >> make_nvp("disable_model_module", v.disable_model_module_);
 }
 
 } }
