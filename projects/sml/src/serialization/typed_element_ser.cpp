@@ -69,6 +69,7 @@ void save(Archive& ar,
     ar << make_nvp("is_versioned", v.is_versioned_);
     ar << make_nvp("is_comparable", v.is_comparable_);
     ar << make_nvp("is_fluent", v.is_fluent_);
+    ar << make_nvp("modeled_concepts", v.modeled_concepts_);
 }
 
 template<typename Archive>
@@ -88,6 +89,7 @@ void load(Archive& ar,
     ar >> make_nvp("is_versioned", v.is_versioned_);
     ar >> make_nvp("is_comparable", v.is_comparable_);
     ar >> make_nvp("is_fluent", v.is_fluent_);
+    ar >> make_nvp("modeled_concepts", v.modeled_concepts_);
 }
 
 } }

@@ -33,7 +33,7 @@ service::service(
     const dogen::sml::qname& name,
     const std::string& documentation,
     const std::vector<std::pair<std::string, std::string> >& implementation_specific_parameters,
-    const bool is_external,
+    const dogen::sml::generation_types& generation_type,
     const std::vector<dogen::sml::property>& properties,
     const boost::optional<dogen::sml::qname>& parent_name,
     const boost::optional<dogen::sml::qname>& original_parent_name,
@@ -45,11 +45,12 @@ service::service(
     const bool is_versioned,
     const bool is_comparable,
     const bool is_fluent,
+    const std::list<dogen::sml::qname>& modeled_concepts,
     const dogen::sml::service_types& type)
     : dogen::sml::typed_element(name,
       documentation,
       implementation_specific_parameters,
-      is_external,
+      generation_type,
       properties,
       parent_name,
       original_parent_name,
@@ -60,7 +61,8 @@ service::service(
       is_immutable,
       is_versioned,
       is_comparable,
-      is_fluent),
+      is_fluent,
+      modeled_concepts),
       type_(type) { }
 
 void service::to_stream(std::ostream& s) const {

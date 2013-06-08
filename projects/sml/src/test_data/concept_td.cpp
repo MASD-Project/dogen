@@ -18,15 +18,10 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/sml/test_data/entity_td.hpp"
-#include "dogen/sml/test_data/factory_td.hpp"
+#include "dogen/sml/test_data/concept_td.hpp"
 #include "dogen/sml/test_data/model_element_td.hpp"
 #include "dogen/sml/test_data/property_td.hpp"
 #include "dogen/sml/test_data/qname_td.hpp"
-#include "dogen/sml/test_data/repository_td.hpp"
-#include "dogen/sml/test_data/service_td.hpp"
-#include "dogen/sml/test_data/typed_element_td.hpp"
-#include "dogen/sml/test_data/value_td.hpp"
 
 namespace {
 
@@ -48,12 +43,6 @@ create_dogen_sml_qname(const unsigned int position) {
     return dogen::sml::qname_generator::create(position);
 }
 
-boost::optional<dogen::sml::qname>
-create_boost_optional_dogen_sml_qname(unsigned int position) {
-    boost::optional<dogen::sml::qname> r(        create_dogen_sml_qname(position));
-    return r;
-}
-
 std::list<dogen::sml::qname> create_std_list_dogen_sml_qname(unsigned int position) {
     std::list<dogen::sml::qname> r;
     for (unsigned int i(0); i < 10; ++i) {
@@ -62,48 +51,36 @@ std::list<dogen::sml::qname> create_std_list_dogen_sml_qname(unsigned int positi
     return r;
 }
 
-unsigned int create_unsigned_int(const unsigned int position) {
-    return static_cast<unsigned int>(position);
-}
-
-bool create_bool(const unsigned int position) {
-    return (position % 2) == 0;
-}
-
 }
 
 namespace dogen {
 namespace sml {
 
+concept_generator::concept_generator() : position_(0) { }
 
-void typed_element_generator::
+void concept_generator::
 populate(const unsigned int position, result_type& v) {
     v.properties(create_std_vector_dogen_sml_property(position + 0));
-    v.parent_name(create_boost_optional_dogen_sml_qname(position + 1));
-    v.original_parent_name(create_boost_optional_dogen_sml_qname(position + 2));
-    v.leaves(create_std_list_dogen_sml_qname(position + 3));
-    v.number_of_type_arguments(create_unsigned_int(position + 4));
-    v.is_parent(create_bool(position + 5));
-    v.is_visitable(create_bool(position + 6));
-    v.is_immutable(create_bool(position + 7));
-    v.is_versioned(create_bool(position + 8));
-    v.is_comparable(create_bool(position + 9));
-    v.is_fluent(create_bool(position + 10));
-    v.modeled_concepts(create_std_list_dogen_sml_qname(position + 11));
+    v.refines(create_std_list_dogen_sml_qname(position + 1));
 }
 
-typed_element_generator::result_type*
-typed_element_generator::create_ptr(const unsigned int position) {
-    if ((position % 4) == 0)
-        return dogen::sml::entity_generator::create_ptr(position);
-    if ((position % 4) == 1)
-        return dogen::sml::service_generator::create_ptr(position);
-    if ((position % 4) == 2)
-        return dogen::sml::factory_generator::create_ptr(position);
-    if ((position % 4) == 3)
-        return dogen::sml::repository_generator::create_ptr(position);
-    return dogen::sml::value_generator::create_ptr(position);
+concept_generator::result_type
+concept_generator::create(const unsigned int position) {
+    concept r;
+    dogen::sml::model_element_generator::populate(position, r);
+    concept_generator::populate(position, r);
+    return r;
+}
+concept_generator::result_type*
+concept_generator::create_ptr(const unsigned int position) {
+    concept* p = new concept();
+    concept_generator::populate(position, *p);
+    return p;
 }
 
+concept_generator::result_type
+concept_generator::operator()() {
+    return create(position_++);
+}
 
 } }

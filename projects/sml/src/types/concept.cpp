@@ -20,8 +20,23 @@
  */
 #include <ostream>
 #include "dogen/sml/io/model_element_io.hpp"
+#include "dogen/sml/io/property_io.hpp"
 #include "dogen/sml/io/qname_io.hpp"
-#include "dogen/sml/types/module.hpp"
+#include "dogen/sml/types/concept.hpp"
+
+namespace std {
+
+inline std::ostream& operator<<(std::ostream& s, const std::vector<dogen::sml::property>& v) {
+    s << "[ ";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << *i;
+    }
+    s << "] ";
+    return s;
+}
+
+}
 
 namespace std {
 
@@ -40,66 +55,87 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::sml::qna
 namespace dogen {
 namespace sml {
 
-module::module(
+concept::concept(
     const dogen::sml::qname& name,
     const std::string& documentation,
     const std::vector<std::pair<std::string, std::string> >& implementation_specific_parameters,
     const dogen::sml::generation_types& generation_type,
-    const std::list<dogen::sml::qname>& members)
+    const std::vector<dogen::sml::property>& properties,
+    const std::list<dogen::sml::qname>& refines)
     : dogen::sml::model_element(name,
       documentation,
       implementation_specific_parameters,
       generation_type),
-      members_(members) { }
+      properties_(properties),
+      refines_(refines) { }
 
-void module::to_stream(std::ostream& s) const {
+void concept::to_stream(std::ostream& s) const {
     s << " { "
-      << "\"__type__\": " << "\"dogen::sml::module\"" << ", "
+      << "\"__type__\": " << "\"dogen::sml::concept\"" << ", "
       << "\"__parent_0__\": ";
     model_element::to_stream(s);
     s << ", "
-      << "\"members\": " << members_
+      << "\"properties\": " << properties_ << ", "
+      << "\"refines\": " << refines_
       << " }";
 }
 
-void module::swap(module& other) noexcept {
+void concept::swap(concept& other) noexcept {
     model_element::swap(other);
 
     using std::swap;
-    swap(members_, other.members_);
+    swap(properties_, other.properties_);
+    swap(refines_, other.refines_);
 }
 
-bool module::equals(const dogen::sml::model_element& other) const {
-    const module* const p(dynamic_cast<const module* const>(&other));
+bool concept::equals(const dogen::sml::model_element& other) const {
+    const concept* const p(dynamic_cast<const concept* const>(&other));
     if (!p) return false;
     return *this == *p;
 }
 
-bool module::operator==(const module& rhs) const {
+bool concept::operator==(const concept& rhs) const {
     return model_element::compare(rhs) &&
-        members_ == rhs.members_;
+        properties_ == rhs.properties_ &&
+        refines_ == rhs.refines_;
 }
 
-module& module::operator=(module other) {
+concept& concept::operator=(concept other) {
     using std::swap;
     swap(*this, other);
     return *this;
 }
 
-const std::list<dogen::sml::qname>& module::members() const {
-    return members_;
+const std::vector<dogen::sml::property>& concept::properties() const {
+    return properties_;
 }
 
-std::list<dogen::sml::qname>& module::members() {
-    return members_;
+std::vector<dogen::sml::property>& concept::properties() {
+    return properties_;
 }
 
-void module::members(const std::list<dogen::sml::qname>& v) {
-    members_ = v;
+void concept::properties(const std::vector<dogen::sml::property>& v) {
+    properties_ = v;
 }
 
-void module::members(const std::list<dogen::sml::qname>&& v) {
-    members_ = std::move(v);
+void concept::properties(const std::vector<dogen::sml::property>&& v) {
+    properties_ = std::move(v);
+}
+
+const std::list<dogen::sml::qname>& concept::refines() const {
+    return refines_;
+}
+
+std::list<dogen::sml::qname>& concept::refines() {
+    return refines_;
+}
+
+void concept::refines(const std::list<dogen::sml::qname>& v) {
+    refines_ = v;
+}
+
+void concept::refines(const std::list<dogen::sml::qname>&& v) {
+    refines_ = std::move(v);
 }
 
 } }

@@ -54,7 +54,7 @@ public:
         const dogen::sml::qname& name,
         const std::string& documentation,
         const std::vector<std::pair<std::string, std::string> >& implementation_specific_parameters,
-        const bool is_external,
+        const dogen::sml::generation_types& generation_type,
         const std::list<dogen::sml::qname>& members);
 
 private:

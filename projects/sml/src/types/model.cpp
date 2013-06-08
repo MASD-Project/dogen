@@ -39,7 +39,8 @@ model::model(
     const std::string& documentation,
     const std::vector<std::pair<std::string, std::string> >& implementation_specific_parameters,
     const std::unordered_map<dogen::sml::qname, dogen::sml::service>& services,
-    const std::unordered_map<dogen::sml::qname, dogen::sml::module>& modules)
+    const std::unordered_map<dogen::sml::qname, dogen::sml::module>& modules,
+    const std::unordered_map<dogen::sml::qname, dogen::sml::concept>& concepts)
     : name_(name),
       pods_(pods),
       primitives_(primitives),
@@ -52,7 +53,8 @@ model::model(
       documentation_(documentation),
       implementation_specific_parameters_(implementation_specific_parameters),
       services_(services),
-      modules_(modules) { }
+      modules_(modules),
+      concepts_(concepts) { }
 
 void model::swap(model& other) noexcept {
     using std::swap;
@@ -69,6 +71,7 @@ void model::swap(model& other) noexcept {
     swap(implementation_specific_parameters_, other.implementation_specific_parameters_);
     swap(services_, other.services_);
     swap(modules_, other.modules_);
+    swap(concepts_, other.concepts_);
 }
 
 bool model::operator==(const model& rhs) const {
@@ -84,7 +87,8 @@ bool model::operator==(const model& rhs) const {
         documentation_ == rhs.documentation_ &&
         implementation_specific_parameters_ == rhs.implementation_specific_parameters_ &&
         services_ == rhs.services_ &&
-        modules_ == rhs.modules_;
+        modules_ == rhs.modules_ &&
+        concepts_ == rhs.concepts_;
 }
 
 model& model::operator=(model other) {
@@ -291,6 +295,22 @@ void model::modules(const std::unordered_map<dogen::sml::qname, dogen::sml::modu
 
 void model::modules(const std::unordered_map<dogen::sml::qname, dogen::sml::module>&& v) {
     modules_ = std::move(v);
+}
+
+const std::unordered_map<dogen::sml::qname, dogen::sml::concept>& model::concepts() const {
+    return concepts_;
+}
+
+std::unordered_map<dogen::sml::qname, dogen::sml::concept>& model::concepts() {
+    return concepts_;
+}
+
+void model::concepts(const std::unordered_map<dogen::sml::qname, dogen::sml::concept>& v) {
+    concepts_ = v;
+}
+
+void model::concepts(const std::unordered_map<dogen::sml::qname, dogen::sml::concept>&& v) {
+    concepts_ = std::move(v);
 }
 
 } }

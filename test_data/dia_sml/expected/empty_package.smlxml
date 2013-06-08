@@ -86,7 +86,7 @@
 						<count>0</count>
 						<item_version>0</item_version>
 					</implementation_specific_parameters>
-					<is_external>0</is_external>
+					<generation_type>0</generation_type>
 				</model_element>
 				<members class_id="15" tracking_level="0" version="0">
 					<count>0</count>
@@ -95,6 +95,11 @@
 			</second>
 		</item>
 	</modules>
+	<concepts class_id="16" tracking_level="0" version="0">
+		<count>0</count>
+		<bucket_count>11</bucket_count>
+		<item_version>0</item_version>
+	</concepts>
 </entity>
 </boost_serialization>
 

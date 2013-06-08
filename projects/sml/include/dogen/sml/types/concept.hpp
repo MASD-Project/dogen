@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_SML_TYPES_SERVICE_HPP
-#define DOGEN_SML_TYPES_SERVICE_HPP
+#ifndef DOGEN_SML_TYPES_CONCEPT_HPP
+#define DOGEN_SML_TYPES_CONCEPT_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -27,57 +27,43 @@
 
 #include <algorithm>
 #include <iosfwd>
-#include "dogen/sml/serialization/service_fwd_ser.hpp"
+#include <list>
+#include <vector>
+#include "dogen/sml/serialization/concept_fwd_ser.hpp"
+#include "dogen/sml/types/model_element.hpp"
 #include "dogen/sml/types/model_element_visitor.hpp"
-#include "dogen/sml/types/service_types.hpp"
-#include "dogen/sml/types/typed_element.hpp"
+#include "dogen/sml/types/property.hpp"
+#include "dogen/sml/types/qname.hpp"
 
 namespace dogen {
 namespace sml {
 
 /**
- * @brief Type of model element that has behaviour but not necessarily other object properties.
- *
- * In traditional Domain Driven Design, a service is a set of operations that
- * conceptually do not belong to any specific object. In dogen, due to code
- * generation constraints, services tend to be where all the behaviour sits.
+ * @brief Represents a concept, similar to the C++ definition.
  */
-class service final : public dogen::sml::typed_element {
+class concept final : public dogen::sml::model_element {
 public:
-    service(const service&) = default;
-    service(service&&) = default;
+    concept() = default;
+    concept(const concept&) = default;
+    concept(concept&&) = default;
+
+    virtual ~concept() noexcept { }
 
 public:
-    service();
-
-    virtual ~service() noexcept { }
-
-public:
-    service(
+    concept(
         const dogen::sml::qname& name,
         const std::string& documentation,
         const std::vector<std::pair<std::string, std::string> >& implementation_specific_parameters,
         const dogen::sml::generation_types& generation_type,
         const std::vector<dogen::sml::property>& properties,
-        const boost::optional<dogen::sml::qname>& parent_name,
-        const boost::optional<dogen::sml::qname>& original_parent_name,
-        const std::list<dogen::sml::qname>& leaves,
-        const unsigned int number_of_type_arguments,
-        const bool is_parent,
-        const bool is_visitable,
-        const bool is_immutable,
-        const bool is_versioned,
-        const bool is_comparable,
-        const bool is_fluent,
-        const std::list<dogen::sml::qname>& modeled_concepts,
-        const dogen::sml::service_types& type);
+        const std::list<dogen::sml::qname>& refines);
 
 private:
     template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const service& v, unsigned int version);
+    friend void boost::serialization::save(Archive& ar, const concept& v, unsigned int version);
 
     template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, service& v, unsigned int version);
+    friend void boost::serialization::load(Archive& ar, concept& v, unsigned int version);
 
 public:
     virtual void accept(const model_element_visitor& v) const override {
@@ -101,16 +87,30 @@ public:
 
 public:
     /**
-     * @brief Type of the service.
+     * @brief Attributes that belong to this type.
+     *
+     * Does not include inherited attributes.
      */
     /**@{*/
-    dogen::sml::service_types type() const;
-    void type(const dogen::sml::service_types& v);
+    const std::vector<dogen::sml::property>& properties() const;
+    std::vector<dogen::sml::property>& properties();
+    void properties(const std::vector<dogen::sml::property>& v);
+    void properties(const std::vector<dogen::sml::property>&& v);
+    /**@}*/
+
+    /**
+     * @brief List of concepts that this concept is a refinement of.
+     */
+    /**@{*/
+    const std::list<dogen::sml::qname>& refines() const;
+    std::list<dogen::sml::qname>& refines();
+    void refines(const std::list<dogen::sml::qname>& v);
+    void refines(const std::list<dogen::sml::qname>&& v);
     /**@}*/
 
 public:
-    bool operator==(const service& rhs) const;
-    bool operator!=(const service& rhs) const {
+    bool operator==(const concept& rhs) const;
+    bool operator!=(const concept& rhs) const {
         return !this->operator==(rhs);
     }
 
@@ -118,11 +118,12 @@ public:
     bool equals(const dogen::sml::model_element& other) const override;
 
 public:
-    void swap(service& other) noexcept;
-    service& operator=(service other);
+    void swap(concept& other) noexcept;
+    concept& operator=(concept other);
 
 private:
-    dogen::sml::service_types type_;
+    std::vector<dogen::sml::property> properties_;
+    std::list<dogen::sml::qname> refines_;
 };
 
 } }
@@ -131,8 +132,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::sml::service& lhs,
-    dogen::sml::service& rhs) {
+    dogen::sml::concept& lhs,
+    dogen::sml::concept& rhs) {
     lhs.swap(rhs);
 }
 

@@ -31,6 +31,7 @@
 #include <utility>
 #include <vector>
 #include "dogen/sml/serialization/model_element_fwd_ser.hpp"
+#include "dogen/sml/types/generation_types.hpp"
 #include "dogen/sml/types/model_element_visitor.hpp"
 #include "dogen/sml/types/qname.hpp"
 
@@ -59,7 +60,7 @@ public:
         const dogen::sml::qname& name,
         const std::string& documentation,
         const std::vector<std::pair<std::string, std::string> >& implementation_specific_parameters,
-        const bool is_external);
+        const dogen::sml::generation_types& generation_type);
 
 private:
     template<typename Archive>
@@ -110,11 +111,11 @@ public:
     /**@}*/
 
     /**
-     * @brief If true, this modeling element does not belong to the merged model.
+     * @brief What type of code generation to perform for model element.
      */
     /**@{*/
-    bool is_external() const;
-    void is_external(const bool v);
+    dogen::sml::generation_types generation_type() const;
+    void generation_type(const dogen::sml::generation_types& v);
     /**@}*/
 
 protected:
@@ -129,7 +130,7 @@ private:
     dogen::sml::qname name_;
     std::string documentation_;
     std::vector<std::pair<std::string, std::string> > implementation_specific_parameters_;
-    bool is_external_;
+    dogen::sml::generation_types generation_type_;
 };
 
 inline model_element::~model_element() noexcept { }

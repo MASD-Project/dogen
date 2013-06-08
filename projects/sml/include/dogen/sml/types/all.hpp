@@ -20,6 +20,7 @@
  */
 #include "dogen/sml/types/boost_model_factory.hpp"
 #include "dogen/sml/types/category_types.hpp"
+#include "dogen/sml/types/concept.hpp"
 #include "dogen/sml/types/entity.hpp"
 #include "dogen/sml/types/enumeration.hpp"
 #include "dogen/sml/types/enumerator.hpp"

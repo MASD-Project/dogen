@@ -18,18 +18,24 @@
  * MA 02110-1301, USA.
  *
  */
-#include <boost/algorithm/string.hpp>
-#include <ostream>
-#include "dogen/sml/io/generation_types_io.hpp"
-#include "dogen/sml/io/model_element_io.hpp"
-#include "dogen/sml/io/qname_io.hpp"
+#ifndef DOGEN_SML_SERIALIZATION_CONCEPT_FWD_SER_HPP
+#define DOGEN_SML_SERIALIZATION_CONCEPT_FWD_SER_HPP
 
-namespace dogen {
-namespace sml {
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
-std::ostream& operator<<(std::ostream& s, const model_element& v) {
-    v.to_stream(s);
-    return(s);
-}
+#include "dogen/sml/types/concept_fwd.hpp"
+
+namespace boost {
+namespace serialization {
+
+template<class Archive>
+void save(Archive& ar, const dogen::sml::concept& v, unsigned int version);
+
+template<class Archive>
+void load(Archive& ar, dogen::sml::concept& v, unsigned int version);
 
 } }
+
+#endif

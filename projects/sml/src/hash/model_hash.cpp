@@ -18,6 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen/sml/hash/concept_hash.hpp"
 #include "dogen/sml/hash/enumeration_hash.hpp"
 #include "dogen/sml/hash/exception_hash.hpp"
 #include "dogen/sml/hash/model_hash.hpp"
@@ -132,6 +133,15 @@ inline std::size_t hash_std_unordered_map_dogen_sml_qname_dogen_sml_module(const
     return seed;
 }
 
+inline std::size_t hash_std_unordered_map_dogen_sml_qname_dogen_sml_concept(const std::unordered_map<dogen::sml::qname, dogen::sml::concept>& v){
+    std::size_t seed(0);
+    for (const auto i : v) {
+        combine(seed, i.first);
+        combine(seed, i.second);
+    }
+    return seed;
+}
+
 }
 
 namespace dogen {
@@ -153,6 +163,7 @@ std::size_t model_hasher::hash(const model&v) {
     combine(seed, hash_std_vector_std_pair_std_string_std_string_(v.implementation_specific_parameters()));
     combine(seed, hash_std_unordered_map_dogen_sml_qname_dogen_sml_service(v.services()));
     combine(seed, hash_std_unordered_map_dogen_sml_qname_dogen_sml_module(v.modules()));
+    combine(seed, hash_std_unordered_map_dogen_sml_qname_dogen_sml_concept(v.concepts()));
 
     return seed;
 }

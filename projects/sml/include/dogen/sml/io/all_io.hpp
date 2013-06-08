@@ -19,6 +19,7 @@
  *
  */
 #include "dogen/sml/io/category_types_io.hpp"
+#include "dogen/sml/io/concept_io.hpp"
 #include "dogen/sml/io/entity_io.hpp"
 #include "dogen/sml/io/enumeration_io.hpp"
 #include "dogen/sml/io/enumerator_io.hpp"

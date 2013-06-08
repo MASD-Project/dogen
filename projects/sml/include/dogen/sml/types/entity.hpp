@@ -67,7 +67,7 @@ public:
         const dogen::sml::qname& name,
         const std::string& documentation,
         const std::vector<std::pair<std::string, std::string> >& implementation_specific_parameters,
-        const bool is_external,
+        const dogen::sml::generation_types& generation_type,
         const std::vector<dogen::sml::property>& properties,
         const boost::optional<dogen::sml::qname>& parent_name,
         const boost::optional<dogen::sml::qname>& original_parent_name,
@@ -79,6 +79,7 @@ public:
         const bool is_versioned,
         const bool is_comparable,
         const bool is_fluent,
+        const std::list<dogen::sml::qname>& modeled_concepts,
         const bool is_aggregate_root,
         const dogen::sml::qname& unversioned_key,
         const boost::optional<dogen::sml::qname>& versioned_key);

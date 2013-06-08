@@ -34,6 +34,7 @@
 #include <vector>
 #include "dogen/sml/hash/qname_hash.hpp"
 #include "dogen/sml/serialization/model_fwd_ser.hpp"
+#include "dogen/sml/types/concept.hpp"
 #include "dogen/sml/types/enumeration.hpp"
 #include "dogen/sml/types/exception.hpp"
 #include "dogen/sml/types/module.hpp"
@@ -72,7 +73,8 @@ public:
         const std::string& documentation,
         const std::vector<std::pair<std::string, std::string> >& implementation_specific_parameters,
         const std::unordered_map<dogen::sml::qname, dogen::sml::service>& services,
-        const std::unordered_map<dogen::sml::qname, dogen::sml::module>& modules);
+        const std::unordered_map<dogen::sml::qname, dogen::sml::module>& modules,
+        const std::unordered_map<dogen::sml::qname, dogen::sml::concept>& concepts);
 
 private:
     template<typename Archive>
@@ -222,6 +224,16 @@ public:
     void modules(const std::unordered_map<dogen::sml::qname, dogen::sml::module>&& v);
     /**@}*/
 
+    /**
+     * @brief All the concepts available in this model.
+     */
+    /**@{*/
+    const std::unordered_map<dogen::sml::qname, dogen::sml::concept>& concepts() const;
+    std::unordered_map<dogen::sml::qname, dogen::sml::concept>& concepts();
+    void concepts(const std::unordered_map<dogen::sml::qname, dogen::sml::concept>& v);
+    void concepts(const std::unordered_map<dogen::sml::qname, dogen::sml::concept>&& v);
+    /**@}*/
+
 public:
     bool operator==(const model& rhs) const;
     bool operator!=(const model& rhs) const {
@@ -246,6 +258,7 @@ private:
     std::vector<std::pair<std::string, std::string> > implementation_specific_parameters_;
     std::unordered_map<dogen::sml::qname, dogen::sml::service> services_;
     std::unordered_map<dogen::sml::qname, dogen::sml::module> modules_;
+    std::unordered_map<dogen::sml::qname, dogen::sml::concept> concepts_;
 };
 
 } }

@@ -220,17 +220,8 @@ Preferred name in DDD. Also more language neutral.
 
 ***** COMPLETED Update method names
       CLOSED: [2013-06-08 Sat 22:56]
-**** Remove generation types                                          :story:
-
-SML knows not of code generation so we shouldn't have a generation
-type in it. What we should have instead is a way of identifying a type
-as belonging to the target model or not. In a way, its qname already
-does that.
-
-Partial generation is actually a c++ model decision based on how much
-features it supports.
-
-**** Create a value types enumeration                                 :story:
+**** COMPLETED Create a value types enumeration                       :story:
+     CLOSED: [2013-06-08 Sat 23:17]
 
 All these types are actually types of values:
 
@@ -246,6 +237,19 @@ All these types are actually types of values:
 We should create an enumeration, say =value_types= which only values
 have and then collapse all these types into value. These concepts
 don't really exist at the SML level.
+
+**** Convert exceptions into value type objects                       :story:
+**** Convert enumerations into value type objects                     :story:
+**** Convert primitives into value type objects                       :story:
+**** Remove generation types                                          :story:
+
+SML knows not of code generation so we shouldn't have a generation
+type in it. What we should have instead is a way of identifying a type
+as belonging to the target model or not. In a way, its qname already
+does that.
+
+Partial generation is actually a c++ model decision based on how much
+features it supports.
 
 **** Models should have types                                         :story:
 
@@ -272,7 +276,9 @@ transformation code:
 We already have most of the qname properties in the model anyway, so
 might as well just use a qname.
 
-*** Add support for concepts at the SML level                         :story:
+*** IMPLEMENTATION Add support for concepts at the SML level          :story:
+    CLOCK: [2013-06-08 Sat 23:35]--[2013-06-09 Sun 00:51] =>  1:16
+    CLOCK: [2013-06-08 Sat 23:18]--[2013-06-08 Sat 23:35] =>  0:17
     CLOCK: [2013-05-08 Wed 07:47]--[2013-05-08 Wed 07:59] =>  0:12
 
 A concept is just like a pod, except its stereotype is
@@ -295,10 +301,15 @@ these concepts but at present there is no need for this.
 In terms of implementation, we need a string container for these
 concepts and a way of resolving the stereotype into a qname.
 
-**** Create a new class called concept which mirrors pod
-**** Add support for multiple inheritance in concepts
-**** Add concepts to model
-**** Add concepts to pod
+**** COMPLETED Create a new class called concept which mirrors pod
+     CLOSED: [2013-06-08 Sat 23:35]
+**** COMPLETED Add support for multiple inheritance in concepts
+     CLOSED: [2013-06-08 Sat 23:35]
+**** COMPLETED Add concepts to model
+     CLOSED: [2013-06-08 Sat 23:35]
+**** COMPLETED Add concepts to base type
+     CLOSED: [2013-06-08 Sat 23:35]
+**** Add support for concepts to the dia to sml transformer
 **** When transforming a pod, copy across properties from concept
 
 Must traverse inheritance.

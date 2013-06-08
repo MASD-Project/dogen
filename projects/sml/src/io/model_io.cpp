@@ -21,6 +21,7 @@
 #include <boost/algorithm/string.hpp>
 #include <boost/io/ios_state.hpp>
 #include <ostream>
+#include "dogen/sml/io/concept_io.hpp"
 #include "dogen/sml/io/enumeration_io.hpp"
 #include "dogen/sml/io/exception_io.hpp"
 #include "dogen/sml/io/model_io.hpp"
@@ -220,6 +221,24 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen:
 
 }
 
+namespace std {
+
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen::sml::qname, dogen::sml::concept>& v) {
+    s << "[";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
+        s << i->first;
+        s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
+        s << i->second;
+        s << " } ]";
+    }
+    s << " ] ";
+    return s;
+}
+
+}
+
 namespace dogen {
 namespace sml {
 
@@ -244,7 +263,8 @@ std::ostream& operator<<(std::ostream& s, const model& v) {
       << "\"documentation\": " << "\"" << tidy_up_string(v.documentation()) << "\"" << ", "
       << "\"implementation_specific_parameters\": " << v.implementation_specific_parameters() << ", "
       << "\"services\": " << v.services() << ", "
-      << "\"modules\": " << v.modules()
+      << "\"modules\": " << v.modules() << ", "
+      << "\"concepts\": " << v.concepts()
       << " }";
     return(s);
 }

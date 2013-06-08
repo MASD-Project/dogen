@@ -19,6 +19,7 @@
  *
  */
 #include <sstream>
+#include "dogen/sml/test_data/concept_td.hpp"
 #include "dogen/sml/test_data/enumeration_td.hpp"
 #include "dogen/sml/test_data/exception_td.hpp"
 #include "dogen/sml/test_data/model_td.hpp"
@@ -169,6 +170,19 @@ std::unordered_map<dogen::sml::qname, dogen::sml::module> create_std_unordered_m
     return r;
 }
 
+dogen::sml::concept
+create_dogen_sml_concept(const unsigned int position) {
+    return dogen::sml::concept_generator::create(position);
+}
+
+std::unordered_map<dogen::sml::qname, dogen::sml::concept> create_std_unordered_map_dogen_sml_qname_dogen_sml_concept(unsigned int position) {
+    std::unordered_map<dogen::sml::qname, dogen::sml::concept> r;
+    for (unsigned int i(0); i < 10; ++i) {
+        r.insert(std::make_pair(create_dogen_sml_qname(position + i), create_dogen_sml_concept(position + i)));
+    }
+    return r;
+}
+
 }
 
 namespace dogen {
@@ -191,6 +205,7 @@ populate(const unsigned int position, result_type& v) {
     v.implementation_specific_parameters(create_std_vector_std_pair_std_string_std_string_(position + 10));
     v.services(create_std_unordered_map_dogen_sml_qname_dogen_sml_service(position + 11));
     v.modules(create_std_unordered_map_dogen_sml_qname_dogen_sml_module(position + 12));
+    v.concepts(create_std_unordered_map_dogen_sml_qname_dogen_sml_concept(position + 13));
 }
 
 model_generator::result_type

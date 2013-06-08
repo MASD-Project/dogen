@@ -19,6 +19,7 @@
  *
  */
 #include "dogen/sml/hash/category_types_hash.hpp"
+#include "dogen/sml/hash/concept_hash.hpp"
 #include "dogen/sml/hash/entity_hash.hpp"
 #include "dogen/sml/hash/enumeration_hash.hpp"
 #include "dogen/sml/hash/enumerator_hash.hpp"

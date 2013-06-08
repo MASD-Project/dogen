@@ -18,18 +18,18 @@
  * MA 02110-1301, USA.
  *
  */
-#include <boost/algorithm/string.hpp>
-#include <ostream>
-#include "dogen/sml/io/generation_types_io.hpp"
-#include "dogen/sml/io/model_element_io.hpp"
-#include "dogen/sml/io/qname_io.hpp"
+#ifndef DOGEN_SML_TYPES_CONCEPT_FWD_HPP
+#define DOGEN_SML_TYPES_CONCEPT_FWD_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
 namespace dogen {
 namespace sml {
 
-std::ostream& operator<<(std::ostream& s, const model_element& v) {
-    v.to_stream(s);
-    return(s);
-}
+class concept;
 
 } }
+
+#endif

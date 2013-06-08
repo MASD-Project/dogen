@@ -79,6 +79,7 @@ std::size_t typed_element_hasher::hash(const typed_element&v) {
     combine(seed, v.is_versioned());
     combine(seed, v.is_comparable());
     combine(seed, v.is_fluent());
+    combine(seed, hash_std_list_dogen_sml_qname(v.modeled_concepts()));
 
     return seed;
 }

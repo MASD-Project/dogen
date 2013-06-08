@@ -29,7 +29,7 @@ repository::repository(
     const dogen::sml::qname& name,
     const std::string& documentation,
     const std::vector<std::pair<std::string, std::string> >& implementation_specific_parameters,
-    const bool is_external,
+    const dogen::sml::generation_types& generation_type,
     const std::vector<dogen::sml::property>& properties,
     const boost::optional<dogen::sml::qname>& parent_name,
     const boost::optional<dogen::sml::qname>& original_parent_name,
@@ -40,11 +40,12 @@ repository::repository(
     const bool is_immutable,
     const bool is_versioned,
     const bool is_comparable,
-    const bool is_fluent)
+    const bool is_fluent,
+    const std::list<dogen::sml::qname>& modeled_concepts)
     : dogen::sml::typed_element(name,
       documentation,
       implementation_specific_parameters,
-      is_external,
+      generation_type,
       properties,
       parent_name,
       original_parent_name,
@@ -55,7 +56,8 @@ repository::repository(
       is_immutable,
       is_versioned,
       is_comparable,
-      is_fluent) { }
+      is_fluent,
+      modeled_concepts) { }
 
 void repository::to_stream(std::ostream& s) const {
     s << " { "

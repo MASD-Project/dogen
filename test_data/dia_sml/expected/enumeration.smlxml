@@ -426,7 +426,7 @@ this is a long comment</documentation>
 						<count>0</count>
 						<item_version>0</item_version>
 					</implementation_specific_parameters>
-					<is_external>0</is_external>
+					<generation_type>0</generation_type>
 				</model_element>
 				<members>
 					<count>0</count>
@@ -435,6 +435,11 @@ this is a long comment</documentation>
 			</second>
 		</item>
 	</modules>
+	<concepts class_id="27" tracking_level="0" version="0">
+		<count>0</count>
+		<bucket_count>11</bucket_count>
+		<item_version>0</item_version>
+	</concepts>
 </entity>
 </boost_serialization>
 

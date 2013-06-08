@@ -19,8 +19,8 @@
  *
  */
 #include <boost/algorithm/string.hpp>
-#include <boost/io/ios_state.hpp>
 #include <ostream>
+#include "dogen/sml/io/generation_types_io.hpp"
 #include "dogen/sml/io/qname_io.hpp"
 #include "dogen/sml/types/model_element.hpp"
 
@@ -63,31 +63,25 @@ namespace dogen {
 namespace sml {
 
 model_element::model_element()
-    : is_external_(static_cast<bool>(0)) { }
+    : generation_type_(static_cast<dogen::sml::generation_types>(0)) { }
 
 model_element::model_element(
     const dogen::sml::qname& name,
     const std::string& documentation,
     const std::vector<std::pair<std::string, std::string> >& implementation_specific_parameters,
-    const bool is_external)
+    const dogen::sml::generation_types& generation_type)
     : name_(name),
       documentation_(documentation),
       implementation_specific_parameters_(implementation_specific_parameters),
-      is_external_(is_external) { }
+      generation_type_(generation_type) { }
 
 void model_element::to_stream(std::ostream& s) const {
-    boost::io::ios_flags_saver ifs(s);
-    s.setf(std::ios_base::boolalpha);
-    s.setf(std::ios::fixed, std::ios::floatfield);
-    s.precision(6);
-    s.setf(std::ios::showpoint);
-
     s << " { "
       << "\"__type__\": " << "\"dogen::sml::model_element\"" << ", "
       << "\"name\": " << name_ << ", "
       << "\"documentation\": " << "\"" << tidy_up_string(documentation_) << "\"" << ", "
       << "\"implementation_specific_parameters\": " << implementation_specific_parameters_ << ", "
-      << "\"is_external\": " << is_external_
+      << "\"generation_type\": " << generation_type_
       << " }";
 }
 
@@ -96,14 +90,14 @@ void model_element::swap(model_element& other) noexcept {
     swap(name_, other.name_);
     swap(documentation_, other.documentation_);
     swap(implementation_specific_parameters_, other.implementation_specific_parameters_);
-    swap(is_external_, other.is_external_);
+    swap(generation_type_, other.generation_type_);
 }
 
 bool model_element::compare(const model_element& rhs) const {
     return name_ == rhs.name_ &&
         documentation_ == rhs.documentation_ &&
         implementation_specific_parameters_ == rhs.implementation_specific_parameters_ &&
-        is_external_ == rhs.is_external_;
+        generation_type_ == rhs.generation_type_;
 }
 
 const dogen::sml::qname& model_element::name() const {
@@ -154,12 +148,12 @@ void model_element::implementation_specific_parameters(const std::vector<std::pa
     implementation_specific_parameters_ = std::move(v);
 }
 
-bool model_element::is_external() const {
-    return is_external_;
+dogen::sml::generation_types model_element::generation_type() const {
+    return generation_type_;
 }
 
-void model_element::is_external(const bool v) {
-    is_external_ = v;
+void model_element::generation_type(const dogen::sml::generation_types& v) {
+    generation_type_ = v;
 }
 
 } }

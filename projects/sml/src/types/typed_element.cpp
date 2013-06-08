@@ -91,13 +91,14 @@ typed_element::typed_element(typed_element&& rhs)
       is_immutable_(std::move(rhs.is_immutable_)),
       is_versioned_(std::move(rhs.is_versioned_)),
       is_comparable_(std::move(rhs.is_comparable_)),
-      is_fluent_(std::move(rhs.is_fluent_)) { }
+      is_fluent_(std::move(rhs.is_fluent_)),
+      modeled_concepts_(std::move(rhs.modeled_concepts_)) { }
 
 typed_element::typed_element(
     const dogen::sml::qname& name,
     const std::string& documentation,
     const std::vector<std::pair<std::string, std::string> >& implementation_specific_parameters,
-    const bool is_external,
+    const dogen::sml::generation_types& generation_type,
     const std::vector<dogen::sml::property>& properties,
     const boost::optional<dogen::sml::qname>& parent_name,
     const boost::optional<dogen::sml::qname>& original_parent_name,
@@ -108,11 +109,12 @@ typed_element::typed_element(
     const bool is_immutable,
     const bool is_versioned,
     const bool is_comparable,
-    const bool is_fluent)
+    const bool is_fluent,
+    const std::list<dogen::sml::qname>& modeled_concepts)
     : dogen::sml::model_element(name,
       documentation,
       implementation_specific_parameters,
-      is_external),
+      generation_type),
       properties_(properties),
       parent_name_(parent_name),
       original_parent_name_(original_parent_name),
@@ -123,7 +125,8 @@ typed_element::typed_element(
       is_immutable_(is_immutable),
       is_versioned_(is_versioned),
       is_comparable_(is_comparable),
-      is_fluent_(is_fluent) { }
+      is_fluent_(is_fluent),
+      modeled_concepts_(modeled_concepts) { }
 
 void typed_element::to_stream(std::ostream& s) const {
     boost::io::ios_flags_saver ifs(s);
@@ -147,7 +150,8 @@ void typed_element::to_stream(std::ostream& s) const {
       << "\"is_immutable\": " << is_immutable_ << ", "
       << "\"is_versioned\": " << is_versioned_ << ", "
       << "\"is_comparable\": " << is_comparable_ << ", "
-      << "\"is_fluent\": " << is_fluent_
+      << "\"is_fluent\": " << is_fluent_ << ", "
+      << "\"modeled_concepts\": " << modeled_concepts_
       << " }";
 }
 
@@ -166,6 +170,7 @@ void typed_element::swap(typed_element& other) noexcept {
     swap(is_versioned_, other.is_versioned_);
     swap(is_comparable_, other.is_comparable_);
     swap(is_fluent_, other.is_fluent_);
+    swap(modeled_concepts_, other.modeled_concepts_);
 }
 
 bool typed_element::compare(const typed_element& rhs) const {
@@ -180,7 +185,8 @@ bool typed_element::compare(const typed_element& rhs) const {
         is_immutable_ == rhs.is_immutable_ &&
         is_versioned_ == rhs.is_versioned_ &&
         is_comparable_ == rhs.is_comparable_ &&
-        is_fluent_ == rhs.is_fluent_;
+        is_fluent_ == rhs.is_fluent_ &&
+        modeled_concepts_ == rhs.modeled_concepts_;
 }
 
 const std::vector<dogen::sml::property>& typed_element::properties() const {
@@ -301,6 +307,22 @@ bool typed_element::is_fluent() const {
 
 void typed_element::is_fluent(const bool v) {
     is_fluent_ = v;
+}
+
+const std::list<dogen::sml::qname>& typed_element::modeled_concepts() const {
+    return modeled_concepts_;
+}
+
+std::list<dogen::sml::qname>& typed_element::modeled_concepts() {
+    return modeled_concepts_;
+}
+
+void typed_element::modeled_concepts(const std::list<dogen::sml::qname>& v) {
+    modeled_concepts_ = v;
+}
+
+void typed_element::modeled_concepts(const std::list<dogen::sml::qname>&& v) {
+    modeled_concepts_ = std::move(v);
 }
 
 } }

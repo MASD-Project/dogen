@@ -18,18 +18,36 @@
  * MA 02110-1301, USA.
  *
  */
-#include <boost/algorithm/string.hpp>
-#include <ostream>
-#include "dogen/sml/io/generation_types_io.hpp"
-#include "dogen/sml/io/model_element_io.hpp"
-#include "dogen/sml/io/qname_io.hpp"
+#ifndef DOGEN_SML_TEST_DATA_CONCEPT_TD_HPP
+#define DOGEN_SML_TEST_DATA_CONCEPT_TD_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include "dogen/sml/types/concept.hpp"
 
 namespace dogen {
 namespace sml {
 
-std::ostream& operator<<(std::ostream& s, const model_element& v) {
-    v.to_stream(s);
-    return(s);
-}
+class concept_generator {
+public:
+    concept_generator();
+
+public:
+    typedef dogen::sml::concept result_type;
+
+public:
+    static void populate(const unsigned int position, result_type& v);
+    static result_type create(const unsigned int position);
+    result_type operator()();
+
+private:
+    unsigned int position_;
+public:
+    static result_type* create_ptr(const unsigned int position);
+};
 
 } }
+
+#endif

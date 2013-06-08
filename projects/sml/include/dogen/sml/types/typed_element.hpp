@@ -59,7 +59,7 @@ public:
         const dogen::sml::qname& name,
         const std::string& documentation,
         const std::vector<std::pair<std::string, std::string> >& implementation_specific_parameters,
-        const bool is_external,
+        const dogen::sml::generation_types& generation_type,
         const std::vector<dogen::sml::property>& properties,
         const boost::optional<dogen::sml::qname>& parent_name,
         const boost::optional<dogen::sml::qname>& original_parent_name,
@@ -70,7 +70,8 @@ public:
         const bool is_immutable,
         const bool is_versioned,
         const bool is_comparable,
-        const bool is_fluent);
+        const bool is_fluent,
+        const std::list<dogen::sml::qname>& modeled_concepts);
 
 private:
     template<typename Archive>
@@ -185,6 +186,16 @@ public:
     void is_fluent(const bool v);
     /**@}*/
 
+    /**
+     * @brief All the concepts that this type models, if any.
+     */
+    /**@{*/
+    const std::list<dogen::sml::qname>& modeled_concepts() const;
+    std::list<dogen::sml::qname>& modeled_concepts();
+    void modeled_concepts(const std::list<dogen::sml::qname>& v);
+    void modeled_concepts(const std::list<dogen::sml::qname>&& v);
+    /**@}*/
+
 protected:
     bool compare(const typed_element& rhs) const;
 public:
@@ -205,6 +216,7 @@ private:
     bool is_versioned_;
     bool is_comparable_;
     bool is_fluent_;
+    std::list<dogen::sml::qname> modeled_concepts_;
 };
 
 inline typed_element::~typed_element() noexcept { }

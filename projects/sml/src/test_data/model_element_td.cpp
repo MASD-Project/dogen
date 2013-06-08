@@ -19,8 +19,10 @@
  *
  */
 #include <sstream>
+#include "dogen/sml/test_data/concept_td.hpp"
 #include "dogen/sml/test_data/entity_td.hpp"
 #include "dogen/sml/test_data/factory_td.hpp"
+#include "dogen/sml/test_data/generation_types_td.hpp"
 #include "dogen/sml/test_data/model_element_td.hpp"
 #include "dogen/sml/test_data/module_td.hpp"
 #include "dogen/sml/test_data/qname_td.hpp"
@@ -57,8 +59,9 @@ std::vector<std::pair<std::string, std::string> > create_std_vector_std_pair_std
     return r;
 }
 
-bool create_bool(const unsigned int position) {
-    return (position % 2) == 0;
+dogen::sml::generation_types
+create_dogen_sml_generation_types(const unsigned int position) {
+    return dogen::sml::generation_types_generator::create(position);
 }
 
 }
@@ -72,21 +75,23 @@ populate(const unsigned int position, result_type& v) {
     v.name(create_dogen_sml_qname(position + 0));
     v.documentation(create_std_string(position + 1));
     v.implementation_specific_parameters(create_std_vector_std_pair_std_string_std_string_(position + 2));
-    v.is_external(create_bool(position + 3));
+    v.generation_type(create_dogen_sml_generation_types(position + 3));
 }
 
 model_element_generator::result_type*
 model_element_generator::create_ptr(const unsigned int position) {
-    if ((position % 5) == 0)
+    if ((position % 6) == 0)
         return dogen::sml::value_generator::create_ptr(position);
-    if ((position % 5) == 1)
+    if ((position % 6) == 1)
         return dogen::sml::entity_generator::create_ptr(position);
-    if ((position % 5) == 2)
+    if ((position % 6) == 2)
         return dogen::sml::service_generator::create_ptr(position);
-    if ((position % 5) == 3)
+    if ((position % 6) == 3)
         return dogen::sml::factory_generator::create_ptr(position);
-    if ((position % 5) == 4)
+    if ((position % 6) == 4)
         return dogen::sml::repository_generator::create_ptr(position);
+    if ((position % 6) == 5)
+        return dogen::sml::concept_generator::create_ptr(position);
     return dogen::sml::module_generator::create_ptr(position);
 }
 
