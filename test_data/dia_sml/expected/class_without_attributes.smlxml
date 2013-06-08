@@ -157,6 +157,11 @@
 		<bucket_count>11</bucket_count>
 		<item_version>0</item_version>
 	</services>
+	<modules class_id="19" tracking_level="0" version="0">
+		<count>0</count>
+		<bucket_count>11</bucket_count>
+		<item_version>0</item_version>
+	</modules>
 </entity>
 </boost_serialization>
 

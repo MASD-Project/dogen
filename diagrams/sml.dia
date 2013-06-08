@@ -7450,7 +7450,7 @@ all types in the combined model.#</dia:string>
         <dia:real val="7.2999999999999998"/>
       </dia:attribute>
       <dia:attribute name="line_width">
-        <dia:real val="0.10000000000000001"/>
+        <dia:real val="0.10000000149011612"/>
       </dia:attribute>
       <dia:attribute name="line_colour">
         <dia:color val="#000000"/>
