@@ -41,6 +41,8 @@ public:
 public:
     class_derived();
 
+    virtual ~class_derived() noexcept { }
+
 public:
     class_derived(
         const int prop_0,

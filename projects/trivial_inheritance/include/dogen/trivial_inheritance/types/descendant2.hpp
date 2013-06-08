@@ -42,6 +42,8 @@ public:
 public:
     descendant2();
 
+    virtual ~descendant2() noexcept { }
+
 public:
     explicit descendant2(const bool prop_0);
 

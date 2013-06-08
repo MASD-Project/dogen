@@ -40,6 +40,8 @@ public:
     child_without_members(child_without_members&&) = default;
     child_without_members& operator=(const child_without_members&) = default;
 
+    virtual ~child_without_members() noexcept { }
+
 private:
     template<typename Archive>
     friend void boost::serialization::save(Archive& ar, const child_without_members& v, unsigned int version);

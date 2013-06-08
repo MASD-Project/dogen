@@ -143,6 +143,10 @@ void class_declaration::destructor(const class_info& ci) {
         stream_ << indenter_ << "virtual ~" << ci.name()
                 << "() noexcept = 0;" << std::endl;
         utility_.blank_line();
+    } else if (ci.parents().size() != 0) {
+        stream_ << indenter_ << "virtual ~" << ci.name()
+                << "() noexcept { }" << std::endl;
+        utility_.blank_line();
     }
 }
 

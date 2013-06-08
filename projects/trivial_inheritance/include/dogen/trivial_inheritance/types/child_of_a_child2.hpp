@@ -41,6 +41,8 @@ public:
 public:
     child_of_a_child2();
 
+    virtual ~child_of_a_child2() noexcept { }
+
 public:
     child_of_a_child2(
         const int prop_0,

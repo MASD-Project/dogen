@@ -42,6 +42,8 @@ public:
 public:
     child();
 
+    virtual ~child() noexcept { }
+
 public:
     child(
         const int prop_0,

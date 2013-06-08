@@ -41,6 +41,8 @@ public:
 public:
     child_with_members();
 
+    virtual ~child_with_members() noexcept { }
+
 public:
     explicit child_with_members(const unsigned int prop_0);
 

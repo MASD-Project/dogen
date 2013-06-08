@@ -41,6 +41,8 @@ public:
     derived(const derived&) = default;
     derived(derived&&) = default;
 
+    virtual ~derived() noexcept { }
+
 public:
     derived(
         const std::vector<std::string>& prop_0,

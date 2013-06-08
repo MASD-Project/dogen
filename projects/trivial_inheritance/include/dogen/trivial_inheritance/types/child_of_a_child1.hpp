@@ -39,6 +39,8 @@ public:
     child_of_a_child1(const child_of_a_child1&) = default;
     child_of_a_child1(child_of_a_child1&&) = default;
 
+    virtual ~child_of_a_child1() noexcept { }
+
 public:
     child_of_a_child1(
         const int prop_0,

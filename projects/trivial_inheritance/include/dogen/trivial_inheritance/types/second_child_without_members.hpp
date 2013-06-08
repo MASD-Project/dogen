@@ -39,6 +39,8 @@ public:
     second_child_without_members(const second_child_without_members&) = default;
     second_child_without_members(second_child_without_members&&) = default;
 
+    virtual ~second_child_without_members() noexcept { }
+
 public:
     explicit second_child_without_members(const int prop_0);
 

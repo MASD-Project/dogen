@@ -41,6 +41,15 @@ applicable to Dogen. Copy the appropriate parts.
     CLOSED: [2013-06-06 Thu 07:57]
     CLOCK: [2013-06-05 Wed 20:30]--[2013-06-05 Wed 22:15] =>  1:45
 
+*** COMPLETED Leaf types do not have a virtual destructor             :spike:
+    CLOSED: [2013-06-08 Sat 14:13]
+    CLOCK: [2013-06-08 Sat 14:14]--[2013-06-08 Sat 14:17] =>  0:03
+    CLOCK: [2013-06-08 Sat 14:02]--[2013-06-08 Sat 14:13] =>  0:11
+    CLOCK: [2013-06-08 Sat 13:50]--[2013-06-08 Sat 14:02] =>  0:12
+
+For some reason we are not generating a virtual destructor for the
+leaf types.
+
 *** IMPLEMENTATION Release notes and backlog grooming                  :task:
     CLOCK: [2013-06-06 Thu 07:50]--[2013-06-06 Thu 08:15] =>  0:25
     CLOCK: [2013-06-05 Wed 19:19]--[2013-06-05 Wed 19:24] =>  0:05
