@@ -45,12 +45,12 @@ module::module(
     const std::string& documentation,
     const std::vector<std::pair<std::string, std::string> >& implementation_specific_parameters,
     const bool is_external,
-    const std::list<dogen::sml::qname>& modules)
+    const std::list<dogen::sml::qname>& members)
     : dogen::sml::model_element(name,
       documentation,
       implementation_specific_parameters,
       is_external),
-      modules_(modules) { }
+      members_(members) { }
 
 void module::to_stream(std::ostream& s) const {
     s << " { "
@@ -58,7 +58,7 @@ void module::to_stream(std::ostream& s) const {
       << "\"__parent_0__\": ";
     model_element::to_stream(s);
     s << ", "
-      << "\"modules\": " << modules_
+      << "\"members\": " << members_
       << " }";
 }
 
@@ -66,7 +66,7 @@ void module::swap(module& other) noexcept {
     model_element::swap(other);
 
     using std::swap;
-    swap(modules_, other.modules_);
+    swap(members_, other.members_);
 }
 
 bool module::equals(const dogen::sml::model_element& other) const {
@@ -77,7 +77,7 @@ bool module::equals(const dogen::sml::model_element& other) const {
 
 bool module::operator==(const module& rhs) const {
     return model_element::compare(rhs) &&
-        modules_ == rhs.modules_;
+        members_ == rhs.members_;
 }
 
 module& module::operator=(module other) {
@@ -86,20 +86,20 @@ module& module::operator=(module other) {
     return *this;
 }
 
-const std::list<dogen::sml::qname>& module::modules() const {
-    return modules_;
+const std::list<dogen::sml::qname>& module::members() const {
+    return members_;
 }
 
-std::list<dogen::sml::qname>& module::modules() {
-    return modules_;
+std::list<dogen::sml::qname>& module::members() {
+    return members_;
 }
 
-void module::modules(const std::list<dogen::sml::qname>& v) {
-    modules_ = v;
+void module::members(const std::list<dogen::sml::qname>& v) {
+    members_ = v;
 }
 
-void module::modules(const std::list<dogen::sml::qname>&& v) {
-    modules_ = std::move(v);
+void module::members(const std::list<dogen::sml::qname>&& v) {
+    members_ = std::move(v);
 }
 
 } }

@@ -34,6 +34,7 @@
 #include "dogen/sml/serialization/enumeration_ser.hpp"
 #include "dogen/sml/serialization/exception_ser.hpp"
 #include "dogen/sml/serialization/model_ser.hpp"
+#include "dogen/sml/serialization/module_ser.hpp"
 #include "dogen/sml/serialization/package_ser.hpp"
 #include "dogen/sml/serialization/pod_ser.hpp"
 #include "dogen/sml/serialization/primitive_ser.hpp"
@@ -68,6 +69,7 @@ void save(Archive& ar,
     ar << make_nvp("documentation", v.documentation_);
     ar << make_nvp("implementation_specific_parameters", v.implementation_specific_parameters_);
     ar << make_nvp("services", v.services_);
+    ar << make_nvp("modules", v.modules_);
 }
 
 template<typename Archive>
@@ -87,6 +89,7 @@ void load(Archive& ar,
     ar >> make_nvp("documentation", v.documentation_);
     ar >> make_nvp("implementation_specific_parameters", v.implementation_specific_parameters_);
     ar >> make_nvp("services", v.services_);
+    ar >> make_nvp("modules", v.modules_);
 }
 
 } }

@@ -60,13 +60,13 @@ public:
         const std::string& documentation,
         const std::vector<std::pair<std::string, std::string> >& implementation_specific_parameters,
         const bool is_external,
+        const std::vector<dogen::sml::property>& properties,
         const boost::optional<dogen::sml::qname>& parent_name,
         const boost::optional<dogen::sml::qname>& original_parent_name,
-        const std::vector<dogen::sml::property>& properties,
         const std::list<dogen::sml::qname>& leaves,
         const unsigned int number_of_type_arguments,
-        const bool is_visitable,
         const bool is_parent,
+        const bool is_visitable,
         const bool is_immutable,
         const bool is_versioned,
         const bool is_comparable,
@@ -84,7 +84,19 @@ public:
 
 public:
     /**
-     * @brief Qualified name for the object's parent, if one exists.
+     * @brief Attributes that belong to this type.
+     *
+     * Does not include inherited attributes.
+     */
+    /**@{*/
+    const std::vector<dogen::sml::property>& properties() const;
+    std::vector<dogen::sml::property>& properties();
+    void properties(const std::vector<dogen::sml::property>& v);
+    void properties(const std::vector<dogen::sml::property>&& v);
+    /**@}*/
+
+    /**
+     * @brief Qualified name for the type's parent, if one exists.
      */
     /**@{*/
     const boost::optional<dogen::sml::qname>& parent_name() const;
@@ -94,23 +106,13 @@ public:
     /**@}*/
 
     /**
-     * @brief Qualified name for the root of the inheritance hierarchy, if the object is part of one.
+     * @brief Qualified name for the root of the inheritance hierarchy, if the type is part of one.
      */
     /**@{*/
     const boost::optional<dogen::sml::qname>& original_parent_name() const;
     boost::optional<dogen::sml::qname>& original_parent_name();
     void original_parent_name(const boost::optional<dogen::sml::qname>& v);
     void original_parent_name(const boost::optional<dogen::sml::qname>&& v);
-    /**@}*/
-
-    /**
-     * @brief Attributes that belong just to this object.
-     */
-    /**@{*/
-    const std::vector<dogen::sml::property>& properties() const;
-    std::vector<dogen::sml::property>& properties();
-    void properties(const std::vector<dogen::sml::property>& v);
-    void properties(const std::vector<dogen::sml::property>&& v);
     /**@}*/
 
     /**
@@ -132,6 +134,14 @@ public:
     /**@}*/
 
     /**
+     * @brief True if this type is the parent of one or more types, false otherwise.
+     */
+    /**@{*/
+    bool is_parent() const;
+    void is_parent(const bool v);
+    /**@}*/
+
+    /**
      * @brief If true, the type has an associated visitor type.
      *
      * Only applicable if is_parent is true.
@@ -139,14 +149,6 @@ public:
     /**@{*/
     bool is_visitable() const;
     void is_visitable(const bool v);
-    /**@}*/
-
-    /**
-     * @brief True if this type is the parent of one or more types, false otherwise.
-     */
-    /**@{*/
-    bool is_parent() const;
-    void is_parent(const bool v);
     /**@}*/
 
     /**
@@ -168,7 +170,7 @@ public:
     /**
      * @brief If true, instances of this type can be compared.
      *
-     * A type is only comparable if all of its properties are comparable.
+     * A type is only comparable if all of its properties have comparable types.
      */
     /**@{*/
     bool is_comparable() const;
@@ -192,13 +194,13 @@ protected:
     void swap(typed_element& other) noexcept;
 
 private:
+    std::vector<dogen::sml::property> properties_;
     boost::optional<dogen::sml::qname> parent_name_;
     boost::optional<dogen::sml::qname> original_parent_name_;
-    std::vector<dogen::sml::property> properties_;
     std::list<dogen::sml::qname> leaves_;
     unsigned int number_of_type_arguments_;
-    bool is_visitable_;
     bool is_parent_;
+    bool is_visitable_;
     bool is_immutable_;
     bool is_versioned_;
     bool is_comparable_;

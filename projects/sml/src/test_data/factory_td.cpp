@@ -18,39 +18,36 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/sml/hash/model_element_hash.hpp"
-#include "dogen/sml/hash/module_hash.hpp"
-#include "dogen/sml/hash/qname_hash.hpp"
+#include "dogen/sml/test_data/factory_td.hpp"
+#include "dogen/sml/test_data/typed_element_td.hpp"
 
-namespace {
 
-template <typename HashableType>
-inline void combine(std::size_t& seed, const HashableType& value)
-{
-    std::hash<HashableType> hasher;
-    seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
-}
-
-inline std::size_t hash_std_list_dogen_sml_qname(const std::list<dogen::sml::qname>& v){
-    std::size_t seed(0);
-    for (const auto i : v) {
-        combine(seed, i);
-    }
-    return seed;
-}
-
-}
 
 namespace dogen {
 namespace sml {
 
-std::size_t module_hasher::hash(const module&v) {
-    std::size_t seed(0);
+factory_generator::factory_generator() : position_(0) { }
 
-    combine(seed, dynamic_cast<const dogen::sml::model_element&>(v));
+void factory_generator::
+populate(const unsigned int /*position*/, result_type& /*v*/) {
+}
 
-    combine(seed, hash_std_list_dogen_sml_qname(v.members()));
-    return seed;
+factory_generator::result_type
+factory_generator::create(const unsigned int position) {
+    factory r;
+    dogen::sml::typed_element_generator::populate(position, r);
+    return r;
+}
+factory_generator::result_type*
+factory_generator::create_ptr(const unsigned int position) {
+    factory* p = new factory();
+    factory_generator::populate(position, *p);
+    return p;
+}
+
+factory_generator::result_type
+factory_generator::operator()() {
+    return create(position_++);
 }
 
 } }

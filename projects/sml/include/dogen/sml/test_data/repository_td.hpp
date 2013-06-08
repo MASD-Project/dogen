@@ -18,39 +18,36 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/sml/hash/model_element_hash.hpp"
-#include "dogen/sml/hash/module_hash.hpp"
-#include "dogen/sml/hash/qname_hash.hpp"
+#ifndef DOGEN_SML_TEST_DATA_REPOSITORY_TD_HPP
+#define DOGEN_SML_TEST_DATA_REPOSITORY_TD_HPP
 
-namespace {
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
-template <typename HashableType>
-inline void combine(std::size_t& seed, const HashableType& value)
-{
-    std::hash<HashableType> hasher;
-    seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
-}
-
-inline std::size_t hash_std_list_dogen_sml_qname(const std::list<dogen::sml::qname>& v){
-    std::size_t seed(0);
-    for (const auto i : v) {
-        combine(seed, i);
-    }
-    return seed;
-}
-
-}
+#include "dogen/sml/types/repository.hpp"
 
 namespace dogen {
 namespace sml {
 
-std::size_t module_hasher::hash(const module&v) {
-    std::size_t seed(0);
+class repository_generator {
+public:
+    repository_generator();
 
-    combine(seed, dynamic_cast<const dogen::sml::model_element&>(v));
+public:
+    typedef dogen::sml::repository result_type;
 
-    combine(seed, hash_std_list_dogen_sml_qname(v.members()));
-    return seed;
-}
+public:
+    static void populate(const unsigned int position, result_type& v);
+    static result_type create(const unsigned int position);
+    result_type operator()();
+
+private:
+    unsigned int position_;
+public:
+    static result_type* create_ptr(const unsigned int position);
+};
 
 } }
+
+#endif

@@ -35,6 +35,13 @@
 namespace dogen {
 namespace sml {
 
+/**
+ * @brief Type of model element that has behaviour but not necessarily other object properties.
+ *
+ * In traditional Domain Driven Design, a service is a set of operations that
+ * conceptually do not belong to any specific object. In dogen, due to code
+ * generation constraints, services tend to be where all the behaviour sits.
+ */
 class service final : public dogen::sml::typed_element {
 public:
     service(const service&) = default;
@@ -51,13 +58,13 @@ public:
         const std::string& documentation,
         const std::vector<std::pair<std::string, std::string> >& implementation_specific_parameters,
         const bool is_external,
+        const std::vector<dogen::sml::property>& properties,
         const boost::optional<dogen::sml::qname>& parent_name,
         const boost::optional<dogen::sml::qname>& original_parent_name,
-        const std::vector<dogen::sml::property>& properties,
         const std::list<dogen::sml::qname>& leaves,
         const unsigned int number_of_type_arguments,
-        const bool is_visitable,
         const bool is_parent,
+        const bool is_visitable,
         const bool is_immutable,
         const bool is_versioned,
         const bool is_comparable,

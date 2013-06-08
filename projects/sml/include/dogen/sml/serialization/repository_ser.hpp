@@ -18,39 +18,37 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/sml/hash/model_element_hash.hpp"
-#include "dogen/sml/hash/module_hash.hpp"
-#include "dogen/sml/hash/qname_hash.hpp"
+#ifndef DOGEN_SML_SERIALIZATION_REPOSITORY_SER_HPP
+#define DOGEN_SML_SERIALIZATION_REPOSITORY_SER_HPP
 
-namespace {
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
-template <typename HashableType>
-inline void combine(std::size_t& seed, const HashableType& value)
-{
-    std::hash<HashableType> hasher;
-    seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
-}
+#include <boost/serialization/split_free.hpp>
+#include <boost/type_traits/is_virtual_base_of.hpp>
+#include "dogen/sml/types/repository.hpp"
 
-inline std::size_t hash_std_list_dogen_sml_qname(const std::list<dogen::sml::qname>& v){
-    std::size_t seed(0);
-    for (const auto i : v) {
-        combine(seed, i);
-    }
-    return seed;
-}
+namespace boost {
+
+template<>struct
+is_virtual_base_of<
+    dogen::sml::typed_element,
+    dogen::sml::repository
+> : public mpl::true_ {};
 
 }
 
-namespace dogen {
-namespace sml {
+BOOST_SERIALIZATION_SPLIT_FREE(dogen::sml::repository)
+namespace boost {
+namespace serialization {
 
-std::size_t module_hasher::hash(const module&v) {
-    std::size_t seed(0);
+template<typename Archive>
+void save(Archive& ar, const dogen::sml::repository& v, unsigned int version);
 
-    combine(seed, dynamic_cast<const dogen::sml::model_element&>(v));
-
-    combine(seed, hash_std_list_dogen_sml_qname(v.members()));
-    return seed;
-}
+template<typename Archive>
+void load(Archive& ar, dogen::sml::repository& v, unsigned int version);
 
 } }
+
+#endif

@@ -19,17 +19,13 @@
  *
  */
 #include <ostream>
-#include "dogen/sml/io/service_types_io.hpp"
 #include "dogen/sml/io/typed_element_io.hpp"
-#include "dogen/sml/types/service.hpp"
+#include "dogen/sml/types/factory.hpp"
 
 namespace dogen {
 namespace sml {
 
-service::service()
-    : type_(static_cast<dogen::sml::service_types>(0)) { }
-
-service::service(
+factory::factory(
     const dogen::sml::qname& name,
     const std::string& documentation,
     const std::vector<std::pair<std::string, std::string> >& implementation_specific_parameters,
@@ -44,8 +40,7 @@ service::service(
     const bool is_immutable,
     const bool is_versioned,
     const bool is_comparable,
-    const bool is_fluent,
-    const dogen::sml::service_types& type)
+    const bool is_fluent)
     : dogen::sml::typed_element(name,
       documentation,
       implementation_specific_parameters,
@@ -60,49 +55,35 @@ service::service(
       is_immutable,
       is_versioned,
       is_comparable,
-      is_fluent),
-      type_(type) { }
+      is_fluent) { }
 
-void service::to_stream(std::ostream& s) const {
+void factory::to_stream(std::ostream& s) const {
     s << " { "
-      << "\"__type__\": " << "\"dogen::sml::service\"" << ", "
+      << "\"__type__\": " << "\"dogen::sml::factory\"" << ", "
       << "\"__parent_0__\": ";
     typed_element::to_stream(s);
-    s << ", "
-      << "\"type\": " << type_
-      << " }";
+    s << " }";
 }
 
-void service::swap(service& other) noexcept {
+void factory::swap(factory& other) noexcept {
     typed_element::swap(other);
 
-    using std::swap;
-    swap(type_, other.type_);
 }
 
-bool service::equals(const dogen::sml::model_element& other) const {
-    const service* const p(dynamic_cast<const service* const>(&other));
+bool factory::equals(const dogen::sml::model_element& other) const {
+    const factory* const p(dynamic_cast<const factory* const>(&other));
     if (!p) return false;
     return *this == *p;
 }
 
-bool service::operator==(const service& rhs) const {
-    return typed_element::compare(rhs) &&
-        type_ == rhs.type_;
+bool factory::operator==(const factory& rhs) const {
+    return typed_element::compare(rhs);
 }
 
-service& service::operator=(service other) {
+factory& factory::operator=(factory other) {
     using std::swap;
     swap(*this, other);
     return *this;
-}
-
-dogen::sml::service_types service::type() const {
-    return type_;
-}
-
-void service::type(const dogen::sml::service_types& v) {
-    type_ = v;
 }
 
 } }

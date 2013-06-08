@@ -36,6 +36,20 @@
 namespace dogen {
 namespace sml {
 
+/**
+ * @brief Represents a type in the domain which has identity.
+ *
+ * Identity here is understood in the strong sense, not just of the basic identity
+ * provided by the programming language (e.g. unique memory address for the
+ * object) but in a domain sense, such that this identity could be perserved
+ * regardless of how the object was stored (e.g. persisted in a database).
+ *
+ * All entities have keys associated with them which are implementations of  the
+ * identity function; they key could be a regular domain type such as a value, or it
+ * could be a system generated type for this purpose. As with any typed element,
+ * keys can be versioned or unversioned, depending on the versioning
+ * requirements of the underlying typed element.
+ */
 class entity final : public dogen::sml::typed_element {
 public:
     entity(const entity&) = default;
@@ -54,13 +68,13 @@ public:
         const std::string& documentation,
         const std::vector<std::pair<std::string, std::string> >& implementation_specific_parameters,
         const bool is_external,
+        const std::vector<dogen::sml::property>& properties,
         const boost::optional<dogen::sml::qname>& parent_name,
         const boost::optional<dogen::sml::qname>& original_parent_name,
-        const std::vector<dogen::sml::property>& properties,
         const std::list<dogen::sml::qname>& leaves,
         const unsigned int number_of_type_arguments,
-        const bool is_visitable,
         const bool is_parent,
+        const bool is_visitable,
         const bool is_immutable,
         const bool is_versioned,
         const bool is_comparable,

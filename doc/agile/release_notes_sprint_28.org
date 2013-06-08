@@ -61,6 +61,8 @@ leaf types.
     CLOCK: [2013-06-04 Tue 18:55]--[2013-06-04 Tue 19:06] =>  0:11
 
 *** IMPLEMENTATION Improve modeling of domain driven concepts in SML   :epic:
+    CLOCK: [2013-06-08 Sat 19:53]--[2013-06-08 Sat 20:00] =>  0:07
+    CLOCK: [2013-06-08 Sat 19:00]--[2013-06-08 Sat 19:52] =>  0:52
     CLOCK: [2013-06-08 Sat 12:49]--[2013-06-08 Sat 12:51] =>  0:02
     CLOCK: [2013-06-08 Sat 12:10]--[2013-06-08 Sat 12:49] =>  0:39
     CLOCK: [2013-06-06 Thu 08:52]--[2013-06-06 Thu 09:03] =>  0:11
@@ -73,6 +75,15 @@ introduced DDD features into SML in a somewhat haphazard fashion,
 which obscured this. The objective of this story is to bring to the
 fore all parts of SML which are representations of DDD concepts, and
 to make sure these are modeled as closely as possible to DDD.
+
+*Keys and visitor*
+
+At the meta-model level, keys are actually just an instance of a value
+object with properties. The injector will create them. An entity
+should have a special association with its keys.
+
+Visitors are injected as services. They have operations with the visit
+methods.
 
 **** COMPLETED Create a base class for types                          :story:
      CLOSED: [2013-06-08 Sat 14:30]
@@ -162,28 +173,8 @@ Make the type visitable
 
 No need for this, will cause a lot of breakage for no reason.
 
-**** Rename package to module                                         :story:
-
-Preferred name in DDD. Also more language neutral.
-
-***** Rename class in SML
-***** Update qname
-
-- external package path;
-- package path
-
-***** Update method names
-
-**** keys and visitor                                                  :note:
-
-At the meta-model level, keys are actually just an instance of a value
-object with properties. The injector will create them. An entity
-should have a special association with its keys.
-
-Visitors are injected as services. They have operations with the visit
-methods.
-
-**** Create class to model entity                                     :story:
+**** COMPLETED Create class to model entity                           :story:
+     CLOSED: [2013-06-08 Sat 19:52]
 
 We should have an entity class with an identity. Identity is just a
 set of properties which are used to uniquely identify the object. The
@@ -191,7 +182,8 @@ entity class should also have associated with it the set of versioned
 and unversioned keys, if such exist (e.g. if the class is keyed and/or
 versioned). Potentially =boost::optional=?
 
-**** Create classes to model service, factory and repository          :story:
+**** COMPLETED Create classes to model service, factory and repository :story:
+     CLOSED: [2013-06-08 Sat 19:52]
 
 For practical purposes (and for now) these classes are all identical:
 they can have properties and operations. They have different names to
@@ -203,6 +195,18 @@ few identical classes with different names.
 
 We need to add stereotypes for factory and repository to the
 transformer.
+
+**** Rename package to module                                         :story:
+
+Preferred name in DDD. Also more language neutral.
+
+***** Rename class in SML
+***** Update qname
+
+- external package path;
+- package path
+
+***** Update method names
 
 **** Remove generation types                                          :story:
 

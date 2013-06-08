@@ -39,7 +39,8 @@ model::model(
     const std::unordered_set<dogen::sml::qname>& leaves,
     const std::string& documentation,
     const std::vector<std::pair<std::string, std::string> >& implementation_specific_parameters,
-    const std::unordered_map<dogen::sml::qname, dogen::sml::service>& services)
+    const std::unordered_map<dogen::sml::qname, dogen::sml::service>& services,
+    const std::unordered_map<dogen::sml::qname, dogen::sml::module>& modules)
     : name_(name),
       packages_(packages),
       pods_(pods),
@@ -52,7 +53,8 @@ model::model(
       leaves_(leaves),
       documentation_(documentation),
       implementation_specific_parameters_(implementation_specific_parameters),
-      services_(services) { }
+      services_(services),
+      modules_(modules) { }
 
 void model::swap(model& other) noexcept {
     using std::swap;
@@ -69,6 +71,7 @@ void model::swap(model& other) noexcept {
     swap(documentation_, other.documentation_);
     swap(implementation_specific_parameters_, other.implementation_specific_parameters_);
     swap(services_, other.services_);
+    swap(modules_, other.modules_);
 }
 
 bool model::operator==(const model& rhs) const {
@@ -84,7 +87,8 @@ bool model::operator==(const model& rhs) const {
         leaves_ == rhs.leaves_ &&
         documentation_ == rhs.documentation_ &&
         implementation_specific_parameters_ == rhs.implementation_specific_parameters_ &&
-        services_ == rhs.services_;
+        services_ == rhs.services_ &&
+        modules_ == rhs.modules_;
 }
 
 model& model::operator=(model other) {
@@ -291,6 +295,22 @@ void model::services(const std::unordered_map<dogen::sml::qname, dogen::sml::ser
 
 void model::services(const std::unordered_map<dogen::sml::qname, dogen::sml::service>&& v) {
     services_ = std::move(v);
+}
+
+const std::unordered_map<dogen::sml::qname, dogen::sml::module>& model::modules() const {
+    return modules_;
+}
+
+std::unordered_map<dogen::sml::qname, dogen::sml::module>& model::modules() {
+    return modules_;
+}
+
+void model::modules(const std::unordered_map<dogen::sml::qname, dogen::sml::module>& v) {
+    modules_ = v;
+}
+
+void model::modules(const std::unordered_map<dogen::sml::qname, dogen::sml::module>&& v) {
+    modules_ = std::move(v);
 }
 
 } }

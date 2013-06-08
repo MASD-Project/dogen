@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_SML_TYPES_VALUE_HPP
-#define DOGEN_SML_TYPES_VALUE_HPP
+#ifndef DOGEN_SML_TYPES_FACTORY_HPP
+#define DOGEN_SML_TYPES_FACTORY_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -27,33 +27,26 @@
 
 #include <algorithm>
 #include <iosfwd>
-#include "dogen/sml/serialization/value_fwd_ser.hpp"
+#include "dogen/sml/serialization/factory_fwd_ser.hpp"
 #include "dogen/sml/types/model_element_visitor.hpp"
 #include "dogen/sml/types/typed_element.hpp"
-#include "dogen/sml/types/value_types.hpp"
 
 namespace dogen {
 namespace sml {
 
 /**
- * @brief Represents a descriptive aspect of the domain.
- *
- * A value (or value object) does not have an identity, but instead are used
- * to describe some aspect of the domain. For example colour is a value
- * object.
+ * @brief Type whose responsibility is to create other types.
  */
-class value final : public dogen::sml::typed_element {
+class factory final : public dogen::sml::typed_element {
 public:
-    value(const value&) = default;
-    value(value&&) = default;
+    factory() = default;
+    factory(const factory&) = default;
+    factory(factory&&) = default;
+
+    virtual ~factory() noexcept { }
 
 public:
-    value();
-
-    virtual ~value() noexcept { }
-
-public:
-    value(
+    factory(
         const dogen::sml::qname& name,
         const std::string& documentation,
         const std::vector<std::pair<std::string, std::string> >& implementation_specific_parameters,
@@ -68,15 +61,14 @@ public:
         const bool is_immutable,
         const bool is_versioned,
         const bool is_comparable,
-        const bool is_fluent,
-        const dogen::sml::value_types& type);
+        const bool is_fluent);
 
 private:
     template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const value& v, unsigned int version);
+    friend void boost::serialization::save(Archive& ar, const factory& v, unsigned int version);
 
     template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, value& v, unsigned int version);
+    friend void boost::serialization::load(Archive& ar, factory& v, unsigned int version);
 
 public:
     virtual void accept(const model_element_visitor& v) const override {
@@ -99,17 +91,8 @@ public:
     void to_stream(std::ostream& s) const override;
 
 public:
-    /**
-     * @brief Type of this value object.
-     */
-    /**@{*/
-    dogen::sml::value_types type() const;
-    void type(const dogen::sml::value_types& v);
-    /**@}*/
-
-public:
-    bool operator==(const value& rhs) const;
-    bool operator!=(const value& rhs) const {
+    bool operator==(const factory& rhs) const;
+    bool operator!=(const factory& rhs) const {
         return !this->operator==(rhs);
     }
 
@@ -117,11 +100,9 @@ public:
     bool equals(const dogen::sml::model_element& other) const override;
 
 public:
-    void swap(value& other) noexcept;
-    value& operator=(value other);
+    void swap(factory& other) noexcept;
+    factory& operator=(factory other);
 
-private:
-    dogen::sml::value_types type_;
 };
 
 } }
@@ -130,8 +111,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::sml::value& lhs,
-    dogen::sml::value& rhs) {
+    dogen::sml::factory& lhs,
+    dogen::sml::factory& rhs) {
     lhs.swap(rhs);
 }
 

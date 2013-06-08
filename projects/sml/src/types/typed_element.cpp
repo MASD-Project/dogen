@@ -25,6 +25,20 @@
 #include "dogen/sml/io/qname_io.hpp"
 #include "dogen/sml/types/typed_element.hpp"
 
+namespace std {
+
+inline std::ostream& operator<<(std::ostream& s, const std::vector<dogen::sml::property>& v) {
+    s << "[ ";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << *i;
+    }
+    s << "] ";
+    return s;
+}
+
+}
+
 namespace boost {
 
 inline std::ostream& operator<<(std::ostream& s, const boost::optional<dogen::sml::qname>& v) {
@@ -35,20 +49,6 @@ inline std::ostream& operator<<(std::ostream& s, const boost::optional<dogen::sm
     else
         s << "\"data\": ""\"<empty>\"";
     s << " }";
-    return s;
-}
-
-}
-
-namespace std {
-
-inline std::ostream& operator<<(std::ostream& s, const std::vector<dogen::sml::property>& v) {
-    s << "[ ";
-    for (auto i(v.begin()); i != v.end(); ++i) {
-        if (i != v.begin()) s << ", ";
-        s << *i;
-    }
-    s << "] ";
     return s;
 }
 
@@ -73,21 +73,21 @@ namespace sml {
 
 typed_element::typed_element()
     : number_of_type_arguments_(static_cast<unsigned int>(0)),
-      is_visitable_(static_cast<bool>(0)),
       is_parent_(static_cast<bool>(0)),
+      is_visitable_(static_cast<bool>(0)),
       is_immutable_(static_cast<bool>(0)),
       is_versioned_(static_cast<bool>(0)),
       is_comparable_(static_cast<bool>(0)),
       is_fluent_(static_cast<bool>(0)) { }
 
 typed_element::typed_element(typed_element&& rhs)
-    : parent_name_(std::move(rhs.parent_name_)),
+    : properties_(std::move(rhs.properties_)),
+      parent_name_(std::move(rhs.parent_name_)),
       original_parent_name_(std::move(rhs.original_parent_name_)),
-      properties_(std::move(rhs.properties_)),
       leaves_(std::move(rhs.leaves_)),
       number_of_type_arguments_(std::move(rhs.number_of_type_arguments_)),
-      is_visitable_(std::move(rhs.is_visitable_)),
       is_parent_(std::move(rhs.is_parent_)),
+      is_visitable_(std::move(rhs.is_visitable_)),
       is_immutable_(std::move(rhs.is_immutable_)),
       is_versioned_(std::move(rhs.is_versioned_)),
       is_comparable_(std::move(rhs.is_comparable_)),
@@ -98,13 +98,13 @@ typed_element::typed_element(
     const std::string& documentation,
     const std::vector<std::pair<std::string, std::string> >& implementation_specific_parameters,
     const bool is_external,
+    const std::vector<dogen::sml::property>& properties,
     const boost::optional<dogen::sml::qname>& parent_name,
     const boost::optional<dogen::sml::qname>& original_parent_name,
-    const std::vector<dogen::sml::property>& properties,
     const std::list<dogen::sml::qname>& leaves,
     const unsigned int number_of_type_arguments,
-    const bool is_visitable,
     const bool is_parent,
+    const bool is_visitable,
     const bool is_immutable,
     const bool is_versioned,
     const bool is_comparable,
@@ -113,13 +113,13 @@ typed_element::typed_element(
       documentation,
       implementation_specific_parameters,
       is_external),
+      properties_(properties),
       parent_name_(parent_name),
       original_parent_name_(original_parent_name),
-      properties_(properties),
       leaves_(leaves),
       number_of_type_arguments_(number_of_type_arguments),
-      is_visitable_(is_visitable),
       is_parent_(is_parent),
+      is_visitable_(is_visitable),
       is_immutable_(is_immutable),
       is_versioned_(is_versioned),
       is_comparable_(is_comparable),
@@ -137,13 +137,13 @@ void typed_element::to_stream(std::ostream& s) const {
       << "\"__parent_0__\": ";
     model_element::to_stream(s);
     s << ", "
+      << "\"properties\": " << properties_ << ", "
       << "\"parent_name\": " << parent_name_ << ", "
       << "\"original_parent_name\": " << original_parent_name_ << ", "
-      << "\"properties\": " << properties_ << ", "
       << "\"leaves\": " << leaves_ << ", "
       << "\"number_of_type_arguments\": " << number_of_type_arguments_ << ", "
-      << "\"is_visitable\": " << is_visitable_ << ", "
       << "\"is_parent\": " << is_parent_ << ", "
+      << "\"is_visitable\": " << is_visitable_ << ", "
       << "\"is_immutable\": " << is_immutable_ << ", "
       << "\"is_versioned\": " << is_versioned_ << ", "
       << "\"is_comparable\": " << is_comparable_ << ", "
@@ -155,13 +155,13 @@ void typed_element::swap(typed_element& other) noexcept {
     model_element::swap(other);
 
     using std::swap;
+    swap(properties_, other.properties_);
     swap(parent_name_, other.parent_name_);
     swap(original_parent_name_, other.original_parent_name_);
-    swap(properties_, other.properties_);
     swap(leaves_, other.leaves_);
     swap(number_of_type_arguments_, other.number_of_type_arguments_);
-    swap(is_visitable_, other.is_visitable_);
     swap(is_parent_, other.is_parent_);
+    swap(is_visitable_, other.is_visitable_);
     swap(is_immutable_, other.is_immutable_);
     swap(is_versioned_, other.is_versioned_);
     swap(is_comparable_, other.is_comparable_);
@@ -170,17 +170,33 @@ void typed_element::swap(typed_element& other) noexcept {
 
 bool typed_element::compare(const typed_element& rhs) const {
     return model_element::compare(rhs) &&
+        properties_ == rhs.properties_ &&
         parent_name_ == rhs.parent_name_ &&
         original_parent_name_ == rhs.original_parent_name_ &&
-        properties_ == rhs.properties_ &&
         leaves_ == rhs.leaves_ &&
         number_of_type_arguments_ == rhs.number_of_type_arguments_ &&
-        is_visitable_ == rhs.is_visitable_ &&
         is_parent_ == rhs.is_parent_ &&
+        is_visitable_ == rhs.is_visitable_ &&
         is_immutable_ == rhs.is_immutable_ &&
         is_versioned_ == rhs.is_versioned_ &&
         is_comparable_ == rhs.is_comparable_ &&
         is_fluent_ == rhs.is_fluent_;
+}
+
+const std::vector<dogen::sml::property>& typed_element::properties() const {
+    return properties_;
+}
+
+std::vector<dogen::sml::property>& typed_element::properties() {
+    return properties_;
+}
+
+void typed_element::properties(const std::vector<dogen::sml::property>& v) {
+    properties_ = v;
+}
+
+void typed_element::properties(const std::vector<dogen::sml::property>&& v) {
+    properties_ = std::move(v);
 }
 
 const boost::optional<dogen::sml::qname>& typed_element::parent_name() const {
@@ -215,22 +231,6 @@ void typed_element::original_parent_name(const boost::optional<dogen::sml::qname
     original_parent_name_ = std::move(v);
 }
 
-const std::vector<dogen::sml::property>& typed_element::properties() const {
-    return properties_;
-}
-
-std::vector<dogen::sml::property>& typed_element::properties() {
-    return properties_;
-}
-
-void typed_element::properties(const std::vector<dogen::sml::property>& v) {
-    properties_ = v;
-}
-
-void typed_element::properties(const std::vector<dogen::sml::property>&& v) {
-    properties_ = std::move(v);
-}
-
 const std::list<dogen::sml::qname>& typed_element::leaves() const {
     return leaves_;
 }
@@ -255,20 +255,20 @@ void typed_element::number_of_type_arguments(const unsigned int v) {
     number_of_type_arguments_ = v;
 }
 
-bool typed_element::is_visitable() const {
-    return is_visitable_;
-}
-
-void typed_element::is_visitable(const bool v) {
-    is_visitable_ = v;
-}
-
 bool typed_element::is_parent() const {
     return is_parent_;
 }
 
 void typed_element::is_parent(const bool v) {
     is_parent_ = v;
+}
+
+bool typed_element::is_visitable() const {
+    return is_visitable_;
+}
+
+void typed_element::is_visitable(const bool v) {
+    is_visitable_ = v;
 }
 
 bool typed_element::is_immutable() const {

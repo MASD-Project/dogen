@@ -18,39 +18,16 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/sml/hash/model_element_hash.hpp"
-#include "dogen/sml/hash/module_hash.hpp"
-#include "dogen/sml/hash/qname_hash.hpp"
-
-namespace {
-
-template <typename HashableType>
-inline void combine(std::size_t& seed, const HashableType& value)
-{
-    std::hash<HashableType> hasher;
-    seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
-}
-
-inline std::size_t hash_std_list_dogen_sml_qname(const std::list<dogen::sml::qname>& v){
-    std::size_t seed(0);
-    for (const auto i : v) {
-        combine(seed, i);
-    }
-    return seed;
-}
-
-}
+#include <ostream>
+#include "dogen/sml/io/factory_io.hpp"
+#include "dogen/sml/io/typed_element_io.hpp"
 
 namespace dogen {
 namespace sml {
 
-std::size_t module_hasher::hash(const module&v) {
-    std::size_t seed(0);
-
-    combine(seed, dynamic_cast<const dogen::sml::model_element&>(v));
-
-    combine(seed, hash_std_list_dogen_sml_qname(v.members()));
-    return seed;
+std::ostream& operator<<(std::ostream& s, const factory& v) {
+    v.to_stream(s);
+    return(s);
 }
 
 } }

@@ -26,8 +26,10 @@
 #endif
 
 #include "dogen/sml/types/entity_fwd.hpp"
+#include "dogen/sml/types/factory_fwd.hpp"
 #include "dogen/sml/types/model_element_fwd.hpp"
 #include "dogen/sml/types/module_fwd.hpp"
+#include "dogen/sml/types/repository_fwd.hpp"
 #include "dogen/sml/types/service_fwd.hpp"
 #include "dogen/sml/types/typed_element_fwd.hpp"
 #include "dogen/sml/types/value_fwd.hpp"
@@ -78,6 +80,26 @@ public:
     virtual void visit(const dogen::sml::service&) { }
     virtual void visit(dogen::sml::service&) const { }
     virtual void visit(dogen::sml::service&) { }
+    /**@}*/
+
+    /**
+     * @brief Accept visits for type dogen::sml::factory
+     */
+    /**@{*/
+    virtual void visit(const dogen::sml::factory&) const { }
+    virtual void visit(const dogen::sml::factory&) { }
+    virtual void visit(dogen::sml::factory&) const { }
+    virtual void visit(dogen::sml::factory&) { }
+    /**@}*/
+
+    /**
+     * @brief Accept visits for type dogen::sml::repository
+     */
+    /**@{*/
+    virtual void visit(const dogen::sml::repository&) const { }
+    virtual void visit(const dogen::sml::repository&) { }
+    virtual void visit(dogen::sml::repository&) const { }
+    virtual void visit(dogen::sml::repository&) { }
     /**@}*/
 };
 

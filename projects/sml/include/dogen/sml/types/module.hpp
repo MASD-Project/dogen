@@ -55,7 +55,7 @@ public:
         const std::string& documentation,
         const std::vector<std::pair<std::string, std::string> >& implementation_specific_parameters,
         const bool is_external,
-        const std::list<dogen::sml::qname>& modules);
+        const std::list<dogen::sml::qname>& members);
 
 private:
     template<typename Archive>
@@ -86,13 +86,13 @@ public:
 
 public:
     /**
-     * @brief All the modules contained in this module.
+     * @brief All the model elements contained in this module.
      */
     /**@{*/
-    const std::list<dogen::sml::qname>& modules() const;
-    std::list<dogen::sml::qname>& modules();
-    void modules(const std::list<dogen::sml::qname>& v);
-    void modules(const std::list<dogen::sml::qname>&& v);
+    const std::list<dogen::sml::qname>& members() const;
+    std::list<dogen::sml::qname>& members();
+    void members(const std::list<dogen::sml::qname>& v);
+    void members(const std::list<dogen::sml::qname>&& v);
     /**@}*/
 
 public:
@@ -109,7 +109,7 @@ public:
     module& operator=(module other);
 
 private:
-    std::list<dogen::sml::qname> modules_;
+    std::list<dogen::sml::qname> members_;
 };
 
 } }

@@ -32,6 +32,14 @@ inline void combine(std::size_t& seed, const HashableType& value)
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 }
 
+inline std::size_t hash_std_vector_dogen_sml_property(const std::vector<dogen::sml::property>& v){
+    std::size_t seed(0);
+    for (const auto i : v) {
+        combine(seed, i);
+    }
+    return seed;
+}
+
 inline std::size_t hash_boost_optional_dogen_sml_qname(const boost::optional<dogen::sml::qname>& v){
     std::size_t seed(0);
 
@@ -39,14 +47,6 @@ inline std::size_t hash_boost_optional_dogen_sml_qname(const boost::optional<dog
         return seed;
 
     combine(seed, *v);
-    return seed;
-}
-
-inline std::size_t hash_std_vector_dogen_sml_property(const std::vector<dogen::sml::property>& v){
-    std::size_t seed(0);
-    for (const auto i : v) {
-        combine(seed, i);
-    }
     return seed;
 }
 
@@ -68,13 +68,13 @@ std::size_t typed_element_hasher::hash(const typed_element&v) {
 
     combine(seed, dynamic_cast<const dogen::sml::model_element&>(v));
 
+    combine(seed, hash_std_vector_dogen_sml_property(v.properties()));
     combine(seed, hash_boost_optional_dogen_sml_qname(v.parent_name()));
     combine(seed, hash_boost_optional_dogen_sml_qname(v.original_parent_name()));
-    combine(seed, hash_std_vector_dogen_sml_property(v.properties()));
     combine(seed, hash_std_list_dogen_sml_qname(v.leaves()));
     combine(seed, v.number_of_type_arguments());
-    combine(seed, v.is_visitable());
     combine(seed, v.is_parent());
+    combine(seed, v.is_visitable());
     combine(seed, v.is_immutable());
     combine(seed, v.is_versioned());
     combine(seed, v.is_comparable());

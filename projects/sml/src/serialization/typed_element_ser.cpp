@@ -31,9 +31,11 @@
 #include <boost/serialization/optional.hpp>
 #include <boost/serialization/vector.hpp>
 #include "dogen/sml/serialization/entity_ser.hpp"
+#include "dogen/sml/serialization/factory_ser.hpp"
 #include "dogen/sml/serialization/model_element_ser.hpp"
 #include "dogen/sml/serialization/property_ser.hpp"
 #include "dogen/sml/serialization/qname_ser.hpp"
+#include "dogen/sml/serialization/repository_ser.hpp"
 #include "dogen/sml/serialization/service_ser.hpp"
 #include "dogen/sml/serialization/typed_element_ser.hpp"
 #include "dogen/sml/serialization/value_ser.hpp"
@@ -56,13 +58,13 @@ void save(Archive& ar,
     const unsigned int /*version*/) {
     ar << make_nvp("model_element", base_object<dogen::sml::model_element>(v));
 
+    ar << make_nvp("properties", v.properties_);
     ar << make_nvp("parent_name", v.parent_name_);
     ar << make_nvp("original_parent_name", v.original_parent_name_);
-    ar << make_nvp("properties", v.properties_);
     ar << make_nvp("leaves", v.leaves_);
     ar << make_nvp("number_of_type_arguments", v.number_of_type_arguments_);
-    ar << make_nvp("is_visitable", v.is_visitable_);
     ar << make_nvp("is_parent", v.is_parent_);
+    ar << make_nvp("is_visitable", v.is_visitable_);
     ar << make_nvp("is_immutable", v.is_immutable_);
     ar << make_nvp("is_versioned", v.is_versioned_);
     ar << make_nvp("is_comparable", v.is_comparable_);
@@ -75,13 +77,13 @@ void load(Archive& ar,
     const unsigned int /*version*/) {
     ar >> make_nvp("model_element", base_object<dogen::sml::model_element>(v));
 
+    ar >> make_nvp("properties", v.properties_);
     ar >> make_nvp("parent_name", v.parent_name_);
     ar >> make_nvp("original_parent_name", v.original_parent_name_);
-    ar >> make_nvp("properties", v.properties_);
     ar >> make_nvp("leaves", v.leaves_);
     ar >> make_nvp("number_of_type_arguments", v.number_of_type_arguments_);
-    ar >> make_nvp("is_visitable", v.is_visitable_);
     ar >> make_nvp("is_parent", v.is_parent_);
+    ar >> make_nvp("is_visitable", v.is_visitable_);
     ar >> make_nvp("is_immutable", v.is_immutable_);
     ar >> make_nvp("is_versioned", v.is_versioned_);
     ar >> make_nvp("is_comparable", v.is_comparable_);

@@ -51,8 +51,23 @@ std::ostream& operator<<(std::ostream& s, const meta_types& v) {
     case meta_types::string_table:
         attr = "\"string_table\"";
         break;
+    case meta_types::module:
+        attr = "\"module\"";
+        break;
     case meta_types::service:
         attr = "\"service\"";
+        break;
+    case meta_types::entity:
+        attr = "\"entity\"";
+        break;
+    case meta_types::value:
+        attr = "\"value\"";
+        break;
+    case meta_types::factory:
+        attr = "\"factory\"";
+        break;
+    case meta_types::repository:
+        attr = "\"repository\"";
         break;
     default:
         throw std::invalid_argument("Invalid value for meta_types");

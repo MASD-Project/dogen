@@ -36,6 +36,7 @@
 #include "dogen/sml/serialization/model_fwd_ser.hpp"
 #include "dogen/sml/types/enumeration.hpp"
 #include "dogen/sml/types/exception.hpp"
+#include "dogen/sml/types/module.hpp"
 #include "dogen/sml/types/package.hpp"
 #include "dogen/sml/types/pod.hpp"
 #include "dogen/sml/types/primitive.hpp"
@@ -72,7 +73,8 @@ public:
         const std::unordered_set<dogen::sml::qname>& leaves,
         const std::string& documentation,
         const std::vector<std::pair<std::string, std::string> >& implementation_specific_parameters,
-        const std::unordered_map<dogen::sml::qname, dogen::sml::service>& services);
+        const std::unordered_map<dogen::sml::qname, dogen::sml::service>& services,
+        const std::unordered_map<dogen::sml::qname, dogen::sml::module>& modules);
 
 private:
     template<typename Archive>
@@ -222,6 +224,16 @@ public:
     void services(const std::unordered_map<dogen::sml::qname, dogen::sml::service>&& v);
     /**@}*/
 
+    /**
+     * @brief Modules contained in the model.
+     */
+    /**@{*/
+    const std::unordered_map<dogen::sml::qname, dogen::sml::module>& modules() const;
+    std::unordered_map<dogen::sml::qname, dogen::sml::module>& modules();
+    void modules(const std::unordered_map<dogen::sml::qname, dogen::sml::module>& v);
+    void modules(const std::unordered_map<dogen::sml::qname, dogen::sml::module>&& v);
+    /**@}*/
+
 public:
     bool operator==(const model& rhs) const;
     bool operator!=(const model& rhs) const {
@@ -246,6 +258,7 @@ private:
     std::string documentation_;
     std::vector<std::pair<std::string, std::string> > implementation_specific_parameters_;
     std::unordered_map<dogen::sml::qname, dogen::sml::service> services_;
+    std::unordered_map<dogen::sml::qname, dogen::sml::module> modules_;
 };
 
 } }
