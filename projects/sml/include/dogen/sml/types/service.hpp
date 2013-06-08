@@ -26,52 +26,43 @@
 #endif
 
 #include <algorithm>
-#include <boost/optional.hpp>
-#include <list>
-#include <string>
-#include <utility>
-#include <vector>
+#include <iosfwd>
 #include "dogen/sml/serialization/service_fwd_ser.hpp"
-#include "dogen/sml/types/generation_types.hpp"
-#include "dogen/sml/types/property.hpp"
-#include "dogen/sml/types/qname.hpp"
+#include "dogen/sml/types/model_element_visitor.hpp"
 #include "dogen/sml/types/service_types.hpp"
+#include "dogen/sml/types/typed_element.hpp"
 
 namespace dogen {
 namespace sml {
 
-/**
- * @brief Represents a class with behaviour.
- *
- * We have distorted the use of services as defined by DDD because its not
- * possible to attach non-trivial behaviour to pods. Thus anything which requires
- * non-trivial behaviour has to be a service in Dogen.
- */
-class service final {
+class service final : public dogen::sml::typed_element {
 public:
     service(const service&) = default;
-    ~service() = default;
+    service(service&&) = default;
 
 public:
     service();
 
-public:
-    service(service&& rhs);
+    virtual ~service() noexcept { }
 
 public:
     service(
         const dogen::sml::qname& name,
-        const std::vector<dogen::sml::property>& properties,
+        const std::string& documentation,
+        const std::vector<std::pair<std::string, std::string> >& implementation_specific_parameters,
+        const bool is_external,
         const boost::optional<dogen::sml::qname>& parent_name,
         const boost::optional<dogen::sml::qname>& original_parent_name,
+        const std::vector<dogen::sml::property>& properties,
         const std::list<dogen::sml::qname>& leaves,
-        const dogen::sml::generation_types& generation_type,
-        const bool is_parent,
-        const dogen::sml::service_types& service_type,
-        const std::string& documentation,
         const unsigned int number_of_type_arguments,
-        const std::vector<std::pair<std::string, std::string> >& implementation_specific_parameters,
-        const bool is_visitable);
+        const bool is_visitable,
+        const bool is_parent,
+        const bool is_immutable,
+        const bool is_versioned,
+        const bool is_comparable,
+        const bool is_fluent,
+        const dogen::sml::service_types& type);
 
 private:
     template<typename Archive>
@@ -81,117 +72,32 @@ private:
     friend void boost::serialization::load(Archive& ar, service& v, unsigned int version);
 
 public:
-    /**
-     * @brief Qualified name for the type.
-     *
-     */
-    /**@{*/
-    const dogen::sml::qname& name() const;
-    dogen::sml::qname& name();
-    void name(const dogen::sml::qname& v);
-    void name(const dogen::sml::qname&& v);
-    /**@}*/
+    virtual void accept(const model_element_visitor& v) const override {
+        v.visit(*this);
+    }
 
-    /**
-     * @brief All the properties this pod owns.
-     */
-    /**@{*/
-    const std::vector<dogen::sml::property>& properties() const;
-    std::vector<dogen::sml::property>& properties();
-    void properties(const std::vector<dogen::sml::property>& v);
-    void properties(const std::vector<dogen::sml::property>&& v);
-    /**@}*/
+    virtual void accept(model_element_visitor& v) const override {
+        v.visit(*this);
+    }
 
-    /**
-     * @brief Qualified name for the pod's parent, if the pod has one.
-     */
-    /**@{*/
-    const boost::optional<dogen::sml::qname>& parent_name() const;
-    boost::optional<dogen::sml::qname>& parent_name();
-    void parent_name(const boost::optional<dogen::sml::qname>& v);
-    void parent_name(const boost::optional<dogen::sml::qname>&& v);
-    /**@}*/
+    virtual void accept(const model_element_visitor& v) override {
+        v.visit(*this);
+    }
 
-    /**
-     * @brief Qualified name for the root of the inheritance hierarchy, if the pod is part of one.
-     */
-    /**@{*/
-    const boost::optional<dogen::sml::qname>& original_parent_name() const;
-    boost::optional<dogen::sml::qname>& original_parent_name();
-    void original_parent_name(const boost::optional<dogen::sml::qname>& v);
-    void original_parent_name(const boost::optional<dogen::sml::qname>&& v);
-    /**@}*/
+    virtual void accept(model_element_visitor& v) override {
+        v.visit(*this);
+    }
 
-    /**
-     * @brief All concrete types which are indirectly or directly derived from this type.
-     */
-    /**@{*/
-    const std::list<dogen::sml::qname>& leaves() const;
-    std::list<dogen::sml::qname>& leaves();
-    void leaves(const std::list<dogen::sml::qname>& v);
-    void leaves(const std::list<dogen::sml::qname>&& v);
-    /**@}*/
+public:
+    void to_stream(std::ostream& s) const override;
 
+public:
     /**
-     * @brief What to do with this pod in terms of code generation
+     * @brief Type of the service.
      */
     /**@{*/
-    dogen::sml::generation_types generation_type() const;
-    void generation_type(const dogen::sml::generation_types& v);
-    /**@}*/
-
-    /**
-     * @brief True if this class is the parent of one or more classes, false otherwise.
-     */
-    /**@{*/
-    bool is_parent() const;
-    void is_parent(const bool v);
-    /**@}*/
-
-    /**
-     * @brief Type of this service.
-     */
-    /**@{*/
-    dogen::sml::service_types service_type() const;
-    void service_type(const dogen::sml::service_types& v);
-    /**@}*/
-
-    /**
-     * @brief Doxygen documentation for the type.
-     */
-    /**@{*/
-    const std::string& documentation() const;
-    std::string& documentation();
-    void documentation(const std::string& v);
-    void documentation(const std::string&& v);
-    /**@}*/
-
-    /**
-     * @brief How many type arguments does this type have
-     */
-    /**@{*/
-    unsigned int number_of_type_arguments() const;
-    void number_of_type_arguments(const unsigned int v);
-    /**@}*/
-
-    /**
-     * @brief Parameters associated with the pod which are opaque to SML.
-     */
-    /**@{*/
-    const std::vector<std::pair<std::string, std::string> >& implementation_specific_parameters() const;
-    std::vector<std::pair<std::string, std::string> >& implementation_specific_parameters();
-    void implementation_specific_parameters(const std::vector<std::pair<std::string, std::string> >& v);
-    void implementation_specific_parameters(const std::vector<std::pair<std::string, std::string> >&& v);
-    /**@}*/
-
-    /**
-     * @brief If true, a visitor is to be generated for this type and its descendants.
-     *
-     * Only applicable if is_parent is true.
-     */
-    /**@{*/
-    bool is_visitable() const;
-    void is_visitable(const bool v);
+    dogen::sml::service_types type() const;
+    void type(const dogen::sml::service_types& v);
     /**@}*/
 
 public:
@@ -201,22 +107,14 @@ public:
     }
 
 public:
+    bool equals(const dogen::sml::model_element& other) const override;
+
+public:
     void swap(service& other) noexcept;
     service& operator=(service other);
 
 private:
-    dogen::sml::qname name_;
-    std::vector<dogen::sml::property> properties_;
-    boost::optional<dogen::sml::qname> parent_name_;
-    boost::optional<dogen::sml::qname> original_parent_name_;
-    std::list<dogen::sml::qname> leaves_;
-    dogen::sml::generation_types generation_type_;
-    bool is_parent_;
-    dogen::sml::service_types service_type_;
-    std::string documentation_;
-    unsigned int number_of_type_arguments_;
-    std::vector<std::pair<std::string, std::string> > implementation_specific_parameters_;
-    bool is_visitable_;
+    dogen::sml::service_types type_;
 };
 
 } }

@@ -19,13 +19,16 @@
  *
  */
 #include "dogen/sml/io/category_types_io.hpp"
+#include "dogen/sml/io/entity_io.hpp"
 #include "dogen/sml/io/entry_io.hpp"
 #include "dogen/sml/io/enumeration_io.hpp"
 #include "dogen/sml/io/enumerator_io.hpp"
 #include "dogen/sml/io/exception_io.hpp"
 #include "dogen/sml/io/generation_types_io.hpp"
 #include "dogen/sml/io/meta_types_io.hpp"
+#include "dogen/sml/io/model_element_io.hpp"
 #include "dogen/sml/io/model_io.hpp"
+#include "dogen/sml/io/module_io.hpp"
 #include "dogen/sml/io/nested_qname_io.hpp"
 #include "dogen/sml/io/package_io.hpp"
 #include "dogen/sml/io/pod_io.hpp"
@@ -37,3 +40,6 @@
 #include "dogen/sml/io/service_io.hpp"
 #include "dogen/sml/io/service_types_io.hpp"
 #include "dogen/sml/io/string_table_io.hpp"
+#include "dogen/sml/io/typed_element_io.hpp"
+#include "dogen/sml/io/value_io.hpp"
+#include "dogen/sml/io/value_types_io.hpp"

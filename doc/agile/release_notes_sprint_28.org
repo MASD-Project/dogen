@@ -10,21 +10,22 @@ This file contains all stories that were closed during sprint 28.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-06-08 Sat 12:51]
+Clock summary at [2013-06-08 Sat 14:20]
 
-| Headline                                                   | Time    |       |       |
-|------------------------------------------------------------+---------+-------+-------|
-| *Total time*                                               | *32:35* |       |       |
-|------------------------------------------------------------+---------+-------+-------|
-| Development Stories Implemented                            |         | 32:35 |       |
-| COMPLETED Update README                                    |         |       |  1:04 |
-| COMPLETED Whiteboarding on the role of SML                 |         |       |  1:45 |
-| IMPLEMENTATION Release notes and backlog grooming          |         |       |  1:04 |
-| ANALYSIS Improve modeling of domain driven concepts in SML |         |       | 26:35 |
-| Add support for concepts at the SML level                  |         |       |  0:12 |
-| ANALYSIS Break down SML into concepts                      |         |       |  1:27 |
-| Refactor top level concepts in SML                         |         |       |  0:22 |
-| IMPLEMENTATION Move services into their own type           |         |       |  0:06 |
+| Headline                                                         | Time   |      |      |
+|------------------------------------------------------------------+--------+------+------|
+| *Total time*                                                     | *9:51* |      |      |
+|------------------------------------------------------------------+--------+------+------|
+| Development Stories Implemented                                  |        | 9:51 |      |
+| COMPLETED Update README                                          |        |      | 1:04 |
+| COMPLETED Whiteboarding on the role of SML                       |        |      | 1:45 |
+| COMPLETED Leaf types do not have a virtual destructor            |        |      | 0:26 |
+| IMPLEMENTATION Release notes and backlog grooming                |        |      | 1:04 |
+| IMPLEMENTATION Improve modeling of domain driven concepts in SML |        |      | 3:25 |
+| Add support for concepts at the SML level                        |        |      | 0:12 |
+| ANALYSIS Break down SML into concepts                            |        |      | 1:27 |
+| Refactor top level concepts in SML                               |        |      | 0:22 |
+| IMPLEMENTATION Move services into their own type                 |        |      | 0:06 |
 #+end:
 
 *** COMPLETED Update README
@@ -59,7 +60,7 @@ leaf types.
     CLOCK: [2013-06-04 Tue 19:06]--[2013-06-04 Tue 19:12] =>  0:06
     CLOCK: [2013-06-04 Tue 18:55]--[2013-06-04 Tue 19:06] =>  0:11
 
-*** ANALYSIS Improve modeling of domain driven concepts in SML         :epic:
+*** IMPLEMENTATION Improve modeling of domain driven concepts in SML   :epic:
     CLOCK: [2013-06-08 Sat 12:49]--[2013-06-08 Sat 12:51] =>  0:02
     CLOCK: [2013-06-08 Sat 12:10]--[2013-06-08 Sat 12:49] =>  0:39
     CLOCK: [2013-06-06 Thu 08:52]--[2013-06-06 Thu 09:03] =>  0:11
@@ -73,22 +74,24 @@ which obscured this. The objective of this story is to bring to the
 fore all parts of SML which are representations of DDD concepts, and
 to make sure these are modeled as closely as possible to DDD.
 
-**** Rename package to module                                         :story:
-
-Preferred name in DDD. Also more language neutral.
-
-***** Rename class in SML
-***** Update qname
-
-- external package path;
-- package path
-
-***** Update method names
-
-**** Create a base class for types                                    :story:
-     CLOCK: [2013-06-05 Wed 08:37]--[2013-06-06 Thu 09:28] => 24:51
+**** COMPLETED Create a base class for types                          :story:
+     CLOSED: [2013-06-08 Sat 14:30]
+     CLOCK: [2013-06-08 Sat 14:22]--[2013-06-08 Sat 14:30] =>  0:08
+     CLOCK: [2013-06-08 Sat 14:18]--[2013-06-08 Sat 14:22] =>  0:04
+     CLOCK: [2013-06-08 Sat 12:59]--[2013-06-08 Sat 13:50] =>  0:51
+     CLOCK: [2013-06-05 Wed 08:37]--[2013-06-05 Wed 09:27] =>  0:50
      CLOCK: [2013-06-05 Wed 08:29]--[2013-06-05 Wed 08:32] =>  0:03
      CLOCK: [2013-06-05 Wed 07:58]--[2013-06-05 Wed 08:17] =>  0:19
+
+New understanding:
+
+- create a base class call =model_element=. =thing= seems to be the
+  only other name for this type according to DDD book, but the eCore
+  name seems a bit more sensible.
+- create a derived class of =model_element= called =object=. entities,
+  services and values derive from object.
+
+Old understanding:
 
 Refactoring for concepts would be made a lot easier if only we had a
 base class that contained all the type features. We need two levels of
@@ -101,7 +104,15 @@ inheritance:
 - an =object_type= (see naming rationale below)which derives from type
   and adds properties and operations to it.
 
-***** ANALYSIS Find the correct name for object base class
+***** COMPLETED Find the correct name for object base class
+      CLOSED: [2013-06-08 Sat 13:47]
+
+Final results:
+
+- we are going to use a variation of eCore names: =model_element= and
+  =typed_element=.
+
+Investigation:
 
 In SML, entities, services and values are all "types of objects". The
 book is never very clear about their relationship, but a few
@@ -134,23 +145,34 @@ XML schema derived ideas:
 - =complex_type=: pods; child of type.
 - =enumeration=: child of simple type.
 
-***** Update the SML diagram and code generate it
+***** COMPLETED Update the SML diagram and code generate it
+      CLOSED: [2013-06-08 Sat 14:28]
 
 Make the type visitable
 
-***** Change Transformation code to use the visitor
-
-- dia to sml
-- sml to c++
-- potentially merger
-
-***** Update model to be a container of the base type
+***** CANCELLED Update model to be a container of the base type
+      CLOSED: [2013-06-08 Sat 14:29]
 
 - Consider using boost pointer container, although this would mean
   adding support for it in dogen. Maybe for now we could start with
   =boost::shared_ptr=.
 - Change transformer to become a visitor of type
 - Change C++ transformer
+
+
+No need for this, will cause a lot of breakage for no reason.
+
+**** Rename package to module                                         :story:
+
+Preferred name in DDD. Also more language neutral.
+
+***** Rename class in SML
+***** Update qname
+
+- external package path;
+- package path
+
+***** Update method names
 
 **** keys and visitor                                                  :note:
 
@@ -219,6 +241,15 @@ Consider creating an enumeration for model types:
 - segregated core model
 
 This still requires a lot of analysis work around the DDD book.
+
+**** Change Transformation code to use a type visitor                 :story:
+
+Now we have a base type, we could probably simplify some of the
+transformation code:
+
+- dia to sml
+- sml to c++
+- potentially merger
 
 *** Model name should be a qname                                      :story:
 

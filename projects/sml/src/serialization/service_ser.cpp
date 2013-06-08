@@ -26,22 +26,19 @@
 #include <boost/archive/text_oarchive.hpp>
 #include <boost/archive/xml_iarchive.hpp>
 #include <boost/archive/xml_oarchive.hpp>
-#include <boost/serialization/list.hpp>
 #include <boost/serialization/nvp.hpp>
-#include <boost/serialization/optional.hpp>
-#include <boost/serialization/string.hpp>
-#include <boost/serialization/utility.hpp>
-#include <boost/serialization/vector.hpp>
-#include "dogen/sml/serialization/generation_types_ser.hpp"
-#include "dogen/sml/serialization/property_ser.hpp"
-#include "dogen/sml/serialization/qname_ser.hpp"
 #include "dogen/sml/serialization/service_ser.hpp"
 #include "dogen/sml/serialization/service_types_ser.hpp"
+#include "dogen/sml/serialization/typed_element_ser.hpp"
 
 #ifdef __linux__
 #include "eos/portable_iarchive.hpp"
 #include "eos/portable_oarchive.hpp"
 #endif
+
+BOOST_CLASS_TRACKING(
+    dogen::sml::service,
+    boost::serialization::track_selectively)
 
 namespace boost {
 namespace serialization {
@@ -50,36 +47,18 @@ template<typename Archive>
 void save(Archive& ar,
     const dogen::sml::service& v,
     const unsigned int /*version*/) {
-    ar << make_nvp("name", v.name_);
-    ar << make_nvp("properties", v.properties_);
-    ar << make_nvp("parent_name", v.parent_name_);
-    ar << make_nvp("original_parent_name", v.original_parent_name_);
-    ar << make_nvp("leaves", v.leaves_);
-    ar << make_nvp("generation_type", v.generation_type_);
-    ar << make_nvp("is_parent", v.is_parent_);
-    ar << make_nvp("service_type", v.service_type_);
-    ar << make_nvp("documentation", v.documentation_);
-    ar << make_nvp("number_of_type_arguments", v.number_of_type_arguments_);
-    ar << make_nvp("implementation_specific_parameters", v.implementation_specific_parameters_);
-    ar << make_nvp("is_visitable", v.is_visitable_);
+    ar << make_nvp("typed_element", base_object<dogen::sml::typed_element>(v));
+
+    ar << make_nvp("type", v.type_);
 }
 
 template<typename Archive>
 void load(Archive& ar,
     dogen::sml::service& v,
     const unsigned int /*version*/) {
-    ar >> make_nvp("name", v.name_);
-    ar >> make_nvp("properties", v.properties_);
-    ar >> make_nvp("parent_name", v.parent_name_);
-    ar >> make_nvp("original_parent_name", v.original_parent_name_);
-    ar >> make_nvp("leaves", v.leaves_);
-    ar >> make_nvp("generation_type", v.generation_type_);
-    ar >> make_nvp("is_parent", v.is_parent_);
-    ar >> make_nvp("service_type", v.service_type_);
-    ar >> make_nvp("documentation", v.documentation_);
-    ar >> make_nvp("number_of_type_arguments", v.number_of_type_arguments_);
-    ar >> make_nvp("implementation_specific_parameters", v.implementation_specific_parameters_);
-    ar >> make_nvp("is_visitable", v.is_visitable_);
+    ar >> make_nvp("typed_element", base_object<dogen::sml::typed_element>(v));
+
+    ar >> make_nvp("type", v.type_);
 }
 
 } }

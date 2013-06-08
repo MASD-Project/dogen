@@ -324,14 +324,14 @@ void transformer::transform_service(const processed_object& po) {
     service.name(transform_qname(po.name(), meta_types::pod, pkg_id));
 
     using sml::service_types;
-    service.service_type(service_types::user_defined);
+    service.type(service_types::user_defined);
 
-    using sml::generation_types;
-    service.generation_type(context_.is_target() ?
-        generation_types::full_generation :
-        generation_types::no_generation);
+    // using sml::generation_types;
+    // service.generation_type(context_.is_target() ?
+    //     generation_types::full_generation :
+    //     generation_types::no_generation);
 
-    service.generation_type(generation_types::partial_generation);
+    // service.generation_type(generation_types::partial_generation);
 
     const auto pair(comments_parser_->parse(po.comment()));
     service.documentation(pair.first);

@@ -18,118 +18,16 @@
  * MA 02110-1301, USA.
  *
  */
-#include <boost/algorithm/string.hpp>
-#include <boost/io/ios_state.hpp>
 #include <ostream>
-#include "dogen/sml/io/generation_types_io.hpp"
-#include "dogen/sml/io/property_io.hpp"
-#include "dogen/sml/io/qname_io.hpp"
 #include "dogen/sml/io/service_io.hpp"
 #include "dogen/sml/io/service_types_io.hpp"
-
-namespace std {
-
-inline std::ostream& operator<<(std::ostream& s, const std::vector<dogen::sml::property>& v) {
-    s << "[ ";
-    for (auto i(v.begin()); i != v.end(); ++i) {
-        if (i != v.begin()) s << ", ";
-        s << *i;
-    }
-    s << "] ";
-    return s;
-}
-
-}
-
-namespace boost {
-
-inline std::ostream& operator<<(std::ostream& s, const boost::optional<dogen::sml::qname>& v) {
-    s << "{ " << "\"__type__\": " << "\"boost::optional\"" << ", ";
-
-    if (v)
-        s << "\"data\": " << *v;
-    else
-        s << "\"data\": ""\"<empty>\"";
-    s << " }";
-    return s;
-}
-
-}
-
-namespace std {
-
-inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::sml::qname>& v) {
-    s << "[ ";
-    for (auto i(v.begin()); i != v.end(); ++i) {
-        if (i != v.begin()) s << ", ";
-        s << *i;
-    }
-    s << "] ";
-    return s;
-}
-
-}
-
-
-inline std::string tidy_up_string(std::string s) {
-    boost::replace_all(s, "\r\n", "<new_line>");
-    boost::replace_all(s, "\n", "<new_line>");
-    boost::replace_all(s, "\"", "<quote>");
-    return s;
-}
-
-namespace std {
-
-inline std::ostream& operator<<(std::ostream& s, const std::pair<std::string, std::string>& v) {
-    s << "{ " << "\"__type__\": " << "\"std::pair\"" << ", ";
-
-    s << "\"first\": " << "\"" << tidy_up_string(v.first) << "\"" << ", ";
-    s << "\"second\": " << "\"" << tidy_up_string(v.second) << "\"";
-    s << " }";
-    return s;
-}
-
-}
-
-namespace std {
-
-inline std::ostream& operator<<(std::ostream& s, const std::vector<std::pair<std::string, std::string> >& v) {
-    s << "[ ";
-    for (auto i(v.begin()); i != v.end(); ++i) {
-        if (i != v.begin()) s << ", ";
-        s << *i;
-    }
-    s << "] ";
-    return s;
-}
-
-}
+#include "dogen/sml/io/typed_element_io.hpp"
 
 namespace dogen {
 namespace sml {
 
 std::ostream& operator<<(std::ostream& s, const service& v) {
-    boost::io::ios_flags_saver ifs(s);
-    s.setf(std::ios_base::boolalpha);
-    s.setf(std::ios::fixed, std::ios::floatfield);
-    s.precision(6);
-    s.setf(std::ios::showpoint);
-
-    s << " { "
-      << "\"__type__\": " << "\"dogen::sml::service\"" << ", "
-      << "\"name\": " << v.name() << ", "
-      << "\"properties\": " << v.properties() << ", "
-      << "\"parent_name\": " << v.parent_name() << ", "
-      << "\"original_parent_name\": " << v.original_parent_name() << ", "
-      << "\"leaves\": " << v.leaves() << ", "
-      << "\"generation_type\": " << v.generation_type() << ", "
-      << "\"is_parent\": " << v.is_parent() << ", "
-      << "\"service_type\": " << v.service_type() << ", "
-      << "\"documentation\": " << "\"" << tidy_up_string(v.documentation()) << "\"" << ", "
-      << "\"number_of_type_arguments\": " << v.number_of_type_arguments() << ", "
-      << "\"implementation_specific_parameters\": " << v.implementation_specific_parameters() << ", "
-      << "\"is_visitable\": " << v.is_visitable()
-      << " }";
+    v.to_stream(s);
     return(s);
 }
 
