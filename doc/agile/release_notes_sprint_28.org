@@ -10,21 +10,21 @@ This file contains all stories that were closed during sprint 28.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-06-06 Thu 09:30]
+Clock summary at [2013-06-08 Sat 12:51]
 
-| Headline                                          | Time    |       |       |
-|---------------------------------------------------+---------+-------+-------|
-| *Total time*                                      | *31:54* |       |       |
-|---------------------------------------------------+---------+-------+-------|
-| Development Stories Implemented                   |         | 31:54 |       |
-| COMPLETED Update README                           |         |       |  1:04 |
-| IMPLEMENTATION Release notes and backlog grooming |         |       |  1:04 |
-| COMPLETED Whiteboarding on the role of SML        |         |       |  1:45 |
-| Improve modeling of domain driven concepts in SML |         |       | 25:54 |
-| Add support for concepts at the SML level         |         |       |  0:12 |
-| ANALYSIS Break down SML into concepts             |         |       |  1:27 |
-| Refactor top level concepts in SML                |         |       |  0:22 |
-| IMPLEMENTATION Move services into their own type  |         |       |  0:06 |
+| Headline                                                   | Time    |       |       |
+|------------------------------------------------------------+---------+-------+-------|
+| *Total time*                                               | *32:35* |       |       |
+|------------------------------------------------------------+---------+-------+-------|
+| Development Stories Implemented                            |         | 32:35 |       |
+| COMPLETED Update README                                    |         |       |  1:04 |
+| COMPLETED Whiteboarding on the role of SML                 |         |       |  1:45 |
+| IMPLEMENTATION Release notes and backlog grooming          |         |       |  1:04 |
+| ANALYSIS Improve modeling of domain driven concepts in SML |         |       | 26:35 |
+| Add support for concepts at the SML level                  |         |       |  0:12 |
+| ANALYSIS Break down SML into concepts                      |         |       |  1:27 |
+| Refactor top level concepts in SML                         |         |       |  0:22 |
+| IMPLEMENTATION Move services into their own type           |         |       |  0:06 |
 #+end:
 
 *** COMPLETED Update README
@@ -37,6 +37,10 @@ Clock summary at [2013-06-06 Thu 09:30]
 The [[https://github.com/Neverlord/libcppa][C++ actor library]] has a nice README layout, most of which is
 applicable to Dogen. Copy the appropriate parts.
 
+*** COMPLETED Whiteboarding on the role of SML                         :task:
+    CLOSED: [2013-06-06 Thu 07:57]
+    CLOCK: [2013-06-05 Wed 20:30]--[2013-06-05 Wed 22:15] =>  1:45
+
 *** IMPLEMENTATION Release notes and backlog grooming                  :task:
     CLOCK: [2013-06-06 Thu 07:50]--[2013-06-06 Thu 08:15] =>  0:25
     CLOCK: [2013-06-05 Wed 19:19]--[2013-06-05 Wed 19:24] =>  0:05
@@ -46,11 +50,9 @@ applicable to Dogen. Copy the appropriate parts.
     CLOCK: [2013-06-04 Tue 19:06]--[2013-06-04 Tue 19:12] =>  0:06
     CLOCK: [2013-06-04 Tue 18:55]--[2013-06-04 Tue 19:06] =>  0:11
 
-*** COMPLETED Whiteboarding on the role of SML                         :task:
-    CLOSED: [2013-06-06 Thu 07:57]
-    CLOCK: [2013-06-05 Wed 20:30]--[2013-06-05 Wed 22:15] =>  1:45
-
 *** ANALYSIS Improve modeling of domain driven concepts in SML         :epic:
+    CLOCK: [2013-06-08 Sat 12:49]--[2013-06-08 Sat 12:51] =>  0:02
+    CLOCK: [2013-06-08 Sat 12:10]--[2013-06-08 Sat 12:49] =>  0:39
     CLOCK: [2013-06-06 Thu 08:52]--[2013-06-06 Thu 09:03] =>  0:11
     CLOCK: [2013-06-06 Thu 08:18]--[2013-06-06 Thu 08:48] =>  0:30
 
@@ -170,6 +172,44 @@ few identical classes with different names.
 
 We need to add stereotypes for factory and repository to the
 transformer.
+
+**** Remove generation types                                          :story:
+
+SML knows not of code generation so we shouldn't have a generation
+type in it. What we should have instead is a way of identifying a type
+as belonging to the target model or not. In a way, its qname already
+does that.
+
+Partial generation is actually a c++ model decision based on how much
+features it supports.
+
+**** Create a value types enumeration                                 :story:
+
+All these types are actually types of values:
+
+- enumeration
+- string table
+- key (versioned and unversioned)
+- exception
+- user defined values
+- smart pointer
+- associative container
+- sequence container
+
+We should create an enumeration, say =value_types= which only values
+have and then collapse all these types into value. These concepts
+don't really exist at the SML level.
+
+**** Models should have types                                         :story:
+
+Consider creating an enumeration for model types:
+
+- relational model
+- core domain model
+- generic sub-domain model
+- segregated core model
+
+This still requires a lot of analysis work around the DDD book.
 
 *** Model name should be a qname                                      :story:
 
