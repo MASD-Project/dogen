@@ -262,8 +262,8 @@ workflow::result_type workflow::generate_visitors_activity() const {
     workflow::result_type r;
     for (const auto& pair : model_.pods()) {
         const auto p(pair.second);
-
-        if (!p.is_visitable())
+        const auto no_generation(sml::generation_types::no_generation);
+        if (!p.is_visitable() || p.generation_type() == no_generation)
             continue;
 
         const auto vi(transformer_.transform_into_visitor(p));
