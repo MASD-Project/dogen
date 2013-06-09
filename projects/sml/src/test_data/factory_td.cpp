@@ -29,13 +29,14 @@ namespace sml {
 factory_generator::factory_generator() : position_(0) { }
 
 void factory_generator::
-populate(const unsigned int /*position*/, result_type& /*v*/) {
+populate(const unsigned int position, result_type& v) {
+    dogen::sml::typed_element_generator::populate(position, v);
 }
 
 factory_generator::result_type
 factory_generator::create(const unsigned int position) {
     factory r;
-    dogen::sml::typed_element_generator::populate(position, r);
+    factory_generator::populate(position, r);
     return r;
 }
 factory_generator::result_type*

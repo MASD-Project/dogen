@@ -35,7 +35,8 @@ create_dogen_sml_qname(const unsigned int position) {
 
 boost::optional<dogen::sml::qname>
 create_boost_optional_dogen_sml_qname(unsigned int position) {
-    boost::optional<dogen::sml::qname> r(        create_dogen_sml_qname(position));
+    boost::optional<dogen::sml::qname> r(
+        create_dogen_sml_qname(position));
     return r;
 }
 
@@ -48,6 +49,7 @@ entity_generator::entity_generator() : position_(0) { }
 
 void entity_generator::
 populate(const unsigned int position, result_type& v) {
+    dogen::sml::typed_element_generator::populate(position, v);
     v.is_aggregate_root(create_bool(position + 0));
     v.unversioned_key(create_dogen_sml_qname(position + 1));
     v.versioned_key(create_boost_optional_dogen_sml_qname(position + 2));
@@ -56,7 +58,6 @@ populate(const unsigned int position, result_type& v) {
 entity_generator::result_type
 entity_generator::create(const unsigned int position) {
     entity r;
-    dogen::sml::typed_element_generator::populate(position, r);
     entity_generator::populate(position, r);
     return r;
 }

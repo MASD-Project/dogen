@@ -66,7 +66,8 @@ create_dogen_cpp_class_info(const unsigned int position) {
 
 boost::optional<dogen::cpp::class_info>
 create_boost_optional_dogen_cpp_class_info(unsigned int position) {
-    boost::optional<dogen::cpp::class_info> r(        create_dogen_cpp_class_info(position));
+    boost::optional<dogen::cpp::class_info> r(
+        create_dogen_cpp_class_info(position));
     return r;
 }
 
@@ -77,7 +78,8 @@ create_dogen_cpp_enum_info(const unsigned int position) {
 
 boost::optional<dogen::cpp::enum_info>
 create_boost_optional_dogen_cpp_enum_info(unsigned int position) {
-    boost::optional<dogen::cpp::enum_info> r(        create_dogen_cpp_enum_info(position));
+    boost::optional<dogen::cpp::enum_info> r(
+        create_dogen_cpp_enum_info(position));
     return r;
 }
 
@@ -88,7 +90,8 @@ create_dogen_cpp_exception_info(const unsigned int position) {
 
 boost::optional<dogen::cpp::exception_info>
 create_boost_optional_dogen_cpp_exception_info(unsigned int position) {
-    boost::optional<dogen::cpp::exception_info> r(        create_dogen_cpp_exception_info(position));
+    boost::optional<dogen::cpp::exception_info> r(
+        create_dogen_cpp_exception_info(position));
     return r;
 }
 
@@ -99,7 +102,8 @@ create_dogen_cpp_registrar_info(const unsigned int position) {
 
 boost::optional<dogen::cpp::registrar_info>
 create_boost_optional_dogen_cpp_registrar_info(unsigned int position) {
-    boost::optional<dogen::cpp::registrar_info> r(        create_dogen_cpp_registrar_info(position));
+    boost::optional<dogen::cpp::registrar_info> r(
+        create_dogen_cpp_registrar_info(position));
     return r;
 }
 
@@ -131,7 +135,8 @@ create_dogen_cpp_namespace_info(const unsigned int position) {
 
 boost::optional<dogen::cpp::namespace_info>
 create_boost_optional_dogen_cpp_namespace_info(unsigned int position) {
-    boost::optional<dogen::cpp::namespace_info> r(        create_dogen_cpp_namespace_info(position));
+    boost::optional<dogen::cpp::namespace_info> r(
+        create_dogen_cpp_namespace_info(position));
     return r;
 }
 
@@ -142,7 +147,8 @@ create_dogen_cpp_visitor_info(const unsigned int position) {
 
 boost::optional<dogen::cpp::visitor_info>
 create_boost_optional_dogen_cpp_visitor_info(unsigned int position) {
-    boost::optional<dogen::cpp::visitor_info> r(        create_dogen_cpp_visitor_info(position));
+    boost::optional<dogen::cpp::visitor_info> r(
+        create_dogen_cpp_visitor_info(position));
     return r;
 }
 

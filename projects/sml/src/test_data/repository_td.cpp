@@ -29,13 +29,14 @@ namespace sml {
 repository_generator::repository_generator() : position_(0) { }
 
 void repository_generator::
-populate(const unsigned int /*position*/, result_type& /*v*/) {
+populate(const unsigned int position, result_type& v) {
+    dogen::sml::typed_element_generator::populate(position, v);
 }
 
 repository_generator::result_type
 repository_generator::create(const unsigned int position) {
     repository r;
-    dogen::sml::typed_element_generator::populate(position, r);
+    repository_generator::populate(position, r);
     return r;
 }
 repository_generator::result_type*

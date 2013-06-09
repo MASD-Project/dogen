@@ -38,13 +38,13 @@ service_generator::service_generator() : position_(0) { }
 
 void service_generator::
 populate(const unsigned int position, result_type& v) {
+    dogen::sml::typed_element_generator::populate(position, v);
     v.type(create_dogen_sml_service_types(position + 0));
 }
 
 service_generator::result_type
 service_generator::create(const unsigned int position) {
     service r;
-    dogen::sml::typed_element_generator::populate(position, r);
     service_generator::populate(position, r);
     return r;
 }

@@ -56,7 +56,8 @@ create_dogen_dia_child_node(const unsigned int position) {
 
 boost::optional<dogen::dia::child_node>
 create_boost_optional_dogen_dia_child_node(unsigned int position) {
-    boost::optional<dogen::dia::child_node> r(        create_dogen_dia_child_node(position));
+    boost::optional<dogen::dia::child_node> r(
+        create_dogen_dia_child_node(position));
     return r;
 }
 

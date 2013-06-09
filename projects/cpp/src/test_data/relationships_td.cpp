@@ -42,7 +42,8 @@ bool create_bool(const unsigned int position) {
 
 boost::optional<dogen::sml::qname>
 create_boost_optional_dogen_sml_qname(unsigned int position) {
-    boost::optional<dogen::sml::qname> r(        create_dogen_sml_qname(position));
+    boost::optional<dogen::sml::qname> r(
+        create_dogen_sml_qname(position));
     return r;
 }
 

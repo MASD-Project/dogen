@@ -38,13 +38,13 @@ value_generator::value_generator() : position_(0) { }
 
 void value_generator::
 populate(const unsigned int position, result_type& v) {
+    dogen::sml::typed_element_generator::populate(position, v);
     v.type(create_dogen_sml_value_types(position + 0));
 }
 
 value_generator::result_type
 value_generator::create(const unsigned int position) {
     value r;
-    dogen::sml::typed_element_generator::populate(position, r);
     value_generator::populate(position, r);
     return r;
 }

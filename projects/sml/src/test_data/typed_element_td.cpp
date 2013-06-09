@@ -50,7 +50,8 @@ create_dogen_sml_qname(const unsigned int position) {
 
 boost::optional<dogen::sml::qname>
 create_boost_optional_dogen_sml_qname(unsigned int position) {
-    boost::optional<dogen::sml::qname> r(        create_dogen_sml_qname(position));
+    boost::optional<dogen::sml::qname> r(
+        create_dogen_sml_qname(position));
     return r;
 }
 
@@ -78,6 +79,7 @@ namespace sml {
 
 void typed_element_generator::
 populate(const unsigned int position, result_type& v) {
+    dogen::sml::model_element_generator::populate(position, v);
     v.properties(create_std_vector_dogen_sml_property(position + 0));
     v.parent_name(create_boost_optional_dogen_sml_qname(position + 1));
     v.original_parent_name(create_boost_optional_dogen_sml_qname(position + 2));

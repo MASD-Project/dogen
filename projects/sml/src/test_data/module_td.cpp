@@ -46,13 +46,13 @@ module_generator::module_generator() : position_(0) { }
 
 void module_generator::
 populate(const unsigned int position, result_type& v) {
+    dogen::sml::model_element_generator::populate(position, v);
     v.members(create_std_list_dogen_sml_qname(position + 0));
 }
 
 module_generator::result_type
 module_generator::create(const unsigned int position) {
     module r;
-    dogen::sml::model_element_generator::populate(position, r);
     module_generator::populate(position, r);
     return r;
 }

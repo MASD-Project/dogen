@@ -60,6 +60,7 @@ concept_generator::concept_generator() : position_(0) { }
 
 void concept_generator::
 populate(const unsigned int position, result_type& v) {
+    dogen::sml::model_element_generator::populate(position, v);
     v.properties(create_std_vector_dogen_sml_property(position + 0));
     v.refines(create_std_list_dogen_sml_qname(position + 1));
 }
@@ -67,7 +68,6 @@ populate(const unsigned int position, result_type& v) {
 concept_generator::result_type
 concept_generator::create(const unsigned int position) {
     concept r;
-    dogen::sml::model_element_generator::populate(position, r);
     concept_generator::populate(position, r);
     return r;
 }

@@ -46,7 +46,8 @@ create_std_pair_std_string_std_string(unsigned int position) {
 
 boost::optional<std::pair<std::string, std::string> >
 create_boost_optional_std_pair_std_string_std_string_(unsigned int position) {
-    boost::optional<std::pair<std::string, std::string> > r(        create_std_pair_std_string_std_string(position));
+    boost::optional<std::pair<std::string, std::string> > r(
+        create_std_pair_std_string_std_string(position));
     return r;
 }
 
