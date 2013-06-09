@@ -81,7 +81,9 @@ typed_element::typed_element()
       is_fluent_(static_cast<bool>(0)) { }
 
 typed_element::typed_element(typed_element&& rhs)
-    : properties_(std::move(rhs.properties_)),
+    : dogen::sml::model_element(
+        std::forward<dogen::sml::model_element>(rhs)),
+      properties_(std::move(rhs.properties_)),
       parent_name_(std::move(rhs.parent_name_)),
       original_parent_name_(std::move(rhs.original_parent_name_)),
       leaves_(std::move(rhs.leaves_)),

@@ -46,7 +46,9 @@ entity::entity()
     : is_aggregate_root_(static_cast<bool>(0)) { }
 
 entity::entity(entity&& rhs)
-    : is_aggregate_root_(std::move(rhs.is_aggregate_root_)),
+    : dogen::sml::typed_element(
+        std::forward<dogen::sml::typed_element>(rhs)),
+      is_aggregate_root_(std::move(rhs.is_aggregate_root_)),
       unversioned_key_(std::move(rhs.unversioned_key_)),
       versioned_key_(std::move(rhs.versioned_key_)) { }
 

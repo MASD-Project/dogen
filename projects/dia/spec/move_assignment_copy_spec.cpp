@@ -21,19 +21,19 @@
 #include <boost/test/unit_test.hpp>
 #include "dogen/utility/test/logging.hpp"
 #include "dogen/utility/test/canned_tests.hpp"
-#include "dogen/sml/types/all.hpp"
-#include "dogen/sml/io/all_io.hpp"
-#include "dogen/sml/test_data/all_td.hpp"
+#include "dogen/dia/types/all.hpp"
+#include "dogen/dia/io/all_io.hpp"
+#include "dogen/dia/test_data/all_td.hpp"
 
 namespace {
 
 const std::string empty;
-const std::string test_module("sml");
-const std::string test_suite("move_copy_assignment_spec");
+const std::string test_module("dia");
+const std::string test_suite("move_assignment_copy_spec");
 
 }
 
-using namespace dogen::sml;
+using namespace dogen::dia;
 using namespace dogen::utility::test;
 
 BOOST_AUTO_TEST_SUITE(move_assignment_copy)
@@ -41,26 +41,23 @@ BOOST_AUTO_TEST_SUITE(move_assignment_copy)
 BOOST_AUTO_TEST_CASE(validate_move_assignment_copy) {
     SETUP_TEST_LOG("validate_move_assignment_copy");
 
-    test_move_assignment_copy<category_types_generator>();
+    test_move_assignment_copy<attribute_generator>();
+    test_move_assignment_copy<boolean_generator>();
+    test_move_assignment_copy<child_node_generator>();
+    test_move_assignment_copy<color_generator>();
+    test_move_assignment_copy<composite_generator>();
+    test_move_assignment_copy<connection_generator>();
+    test_move_assignment_copy<diagram_data_generator>();
+    test_move_assignment_copy<diagram_generator>();
     test_move_assignment_copy<enumeration_generator>();
-    test_move_assignment_copy<enumerator_generator>();
-    test_move_assignment_copy<exception_generator>();
-    test_move_assignment_copy<generation_types_generator>();
-    test_move_assignment_copy<meta_types_generator>();
-    test_move_assignment_copy<model_generator>();
-    test_move_assignment_copy<nested_qname_generator>();
-    test_move_assignment_copy<pod_generator>();
-    test_move_assignment_copy<pod_types_generator>();
-    test_move_assignment_copy<primitive_generator>();
-    test_move_assignment_copy<property_generator>();
-    test_move_assignment_copy<qname_generator>();
-    test_move_assignment_copy<value_generator>();
-    test_move_assignment_copy<entity_generator>();
-    test_move_assignment_copy<service_generator>();
-    test_move_assignment_copy<module_generator>();
-    test_move_assignment_copy<repository_generator>();
-    test_move_assignment_copy<factory_generator>();
-    test_move_assignment_copy<concept_generator>();
+    test_move_assignment_copy<font_generator>();
+    test_move_assignment_copy<integer_generator>();
+    test_move_assignment_copy<layer_generator>();
+    test_move_assignment_copy<object_generator>();
+    test_move_assignment_copy<point_generator>();
+    test_move_assignment_copy<real_generator>();
+    test_move_assignment_copy<rectangle_generator>();
+    test_move_assignment_copy<string_generator>();
 }
 
 BOOST_AUTO_TEST_SUITE_END()
