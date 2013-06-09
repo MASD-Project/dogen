@@ -11,6 +11,10 @@ This file contains all stories that haven't been assigned to a sprint.
 
 Stories that we intend to look at, at some point.
 
+*** Fix spelling of =rountrip_type=
+
+Should be =roundtrip_type=.
+
 *** Test data generator with immutability looks wrong
 
 We are using the full constructor for immutability, but its not clear
