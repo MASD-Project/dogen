@@ -1,0 +1,2282 @@
+diff --git a/diagrams/sml.dia b/diagrams/sml.dia
+index d771316..4a296a9 100644
+--- a/diagrams/sml.dia
++++ b/diagrams/sml.dia
+@@ -269,7 +269,7 @@ name folders in the file-system.
+             <dia:string>#exceptions#</dia:string>
+           </dia:attribute>
+           <dia:attribute name="type">
+-            <dia:string>#std::unordered_map&lt;qname,exception&gt;#</dia:string>
++            <dia:string>#std::unordered_map&lt;qname,value&gt;#</dia:string>
+           </dia:attribute>
+           <dia:attribute name="value">
+             <dia:string>##</dia:string>
+@@ -3143,259 +3143,6 @@ categories for them.#</dia:string>
+     </dia:object>
+     <dia:object type="UML - Class" version="0" id="O15">
+       <dia:attribute name="obj_pos">
+-        <dia:point val="15,84"/>
+-      </dia:attribute>
+-      <dia:attribute name="obj_bb">
+-        <dia:rectangle val="14.95,83.95;28.64,89.25"/>
+-      </dia:attribute>
+-      <dia:attribute name="elem_corner">
+-        <dia:point val="15,84"/>
+-      </dia:attribute>
+-      <dia:attribute name="elem_width">
+-        <dia:real val="13.59"/>
+-      </dia:attribute>
+-      <dia:attribute name="elem_height">
+-        <dia:real val="5.2000000000000011"/>
+-      </dia:attribute>
+-      <dia:attribute name="name">
+-        <dia:string>#exception#</dia:string>
+-      </dia:attribute>
+-      <dia:attribute name="stereotype">
+-        <dia:string>#entity#</dia:string>
+-      </dia:attribute>
+-      <dia:attribute name="comment">
+-        <dia:string>#Represents errors that occur during application execution.#</dia:string>
+-      </dia:attribute>
+-      <dia:attribute name="abstract">
+-        <dia:boolean val="false"/>
+-      </dia:attribute>
+-      <dia:attribute name="suppress_attributes">
+-        <dia:boolean val="false"/>
+-      </dia:attribute>
+-      <dia:attribute name="suppress_operations">
+-        <dia:boolean val="false"/>
+-      </dia:attribute>
+-      <dia:attribute name="visible_attributes">
+-        <dia:boolean val="true"/>
+-      </dia:attribute>
+-      <dia:attribute name="visible_operations">
+-        <dia:boolean val="true"/>
+-      </dia:attribute>
+-      <dia:attribute name="visible_comments">
+-        <dia:boolean val="false"/>
+-      </dia:attribute>
+-      <dia:attribute name="wrap_operations">
+-        <dia:boolean val="true"/>
+-      </dia:attribute>
+-      <dia:attribute name="wrap_after_char">
+-        <dia:int val="40"/>
+-      </dia:attribute>
+-      <dia:attribute name="comment_line_length">
+-        <dia:int val="17"/>
+-      </dia:attribute>
+-      <dia:attribute name="comment_tagging">
+-        <dia:boolean val="false"/>
+-      </dia:attribute>
+-      <dia:attribute name="line_width">
+-        <dia:real val="0.10000000000000001"/>
+-      </dia:attribute>
+-      <dia:attribute name="line_color">
+-        <dia:color val="#000000"/>
+-      </dia:attribute>
+-      <dia:attribute name="fill_color">
+-        <dia:color val="#ffffff"/>
+-      </dia:attribute>
+-      <dia:attribute name="text_color">
+-        <dia:color val="#000000"/>
+-      </dia:attribute>
+-      <dia:attribute name="normal_font">
+-        <dia:font family="monospace" style="0" name="Courier"/>
+-      </dia:attribute>
+-      <dia:attribute name="abstract_font">
+-        <dia:font family="monospace" style="0" name="Courier"/>
+-      </dia:attribute>
+-      <dia:attribute name="polymorphic_font">
+-        <dia:font family="monospace" style="0" name="Courier"/>
+-      </dia:attribute>
+-      <dia:attribute name="classname_font">
+-        <dia:font family="sans" style="80" name="Helvetica-Bold"/>
+-      </dia:attribute>
+-      <dia:attribute name="abstract_classname_font">
+-        <dia:font family="sans" style="0" name="Helvetica"/>
+-      </dia:attribute>
+-      <dia:attribute name="comment_font">
+-        <dia:font family="sans" style="0" name="Helvetica"/>
+-      </dia:attribute>
+-      <dia:attribute name="normal_font_height">
+-        <dia:real val="0.80000000000000004"/>
+-      </dia:attribute>
+-      <dia:attribute name="polymorphic_font_height">
+-        <dia:real val="0.80000000000000004"/>
+-      </dia:attribute>
+-      <dia:attribute name="abstract_font_height">
+-        <dia:real val="0.80000000000000004"/>
+-      </dia:attribute>
+-      <dia:attribute name="classname_font_height">
+-        <dia:real val="1"/>
+-      </dia:attribute>
+-      <dia:attribute name="abstract_classname_font_height">
+-        <dia:real val="1"/>
+-      </dia:attribute>
+-      <dia:attribute name="comment_font_height">
+-        <dia:real val="0.69999999999999996"/>
+-      </dia:attribute>
+-      <dia:attribute name="attributes">
+-        <dia:composite type="umlattribute">
+-          <dia:attribute name="name">
+-            <dia:string>#name#</dia:string>
+-          </dia:attribute>
+-          <dia:attribute name="type">
+-            <dia:string>#qname#</dia:string>
+-          </dia:attribute>
+-          <dia:attribute name="value">
+-            <dia:string>##</dia:string>
+-          </dia:attribute>
+-          <dia:attribute name="comment">
+-            <dia:string>#Qualified name for the type.
+-
+-#DOGEN IDENTITY_ATTRIBUTE=true#</dia:string>
+-          </dia:attribute>
+-          <dia:attribute name="visibility">
+-            <dia:enum val="0"/>
+-          </dia:attribute>
+-          <dia:attribute name="abstract">
+-            <dia:boolean val="false"/>
+-          </dia:attribute>
+-          <dia:attribute name="class_scope">
+-            <dia:boolean val="false"/>
+-          </dia:attribute>
+-        </dia:composite>
+-        <dia:composite type="umlattribute">
+-          <dia:attribute name="name">
+-            <dia:string>#generation_type#</dia:string>
+-          </dia:attribute>
+-          <dia:attribute name="type">
+-            <dia:string>#generation_types#</dia:string>
+-          </dia:attribute>
+-          <dia:attribute name="value">
+-            <dia:string>##</dia:string>
+-          </dia:attribute>
+-          <dia:attribute name="comment">
+-            <dia:string>#What to do with this exception in terms of code generation.#</dia:string>
+-          </dia:attribute>
+-          <dia:attribute name="visibility">
+-            <dia:enum val="0"/>
+-          </dia:attribute>
+-          <dia:attribute name="abstract">
+-            <dia:boolean val="false"/>
+-          </dia:attribute>
+-          <dia:attribute name="class_scope">
+-            <dia:boolean val="false"/>
+-          </dia:attribute>
+-        </dia:composite>
+-        <dia:composite type="umlattribute">
+-          <dia:attribute name="name">
+-            <dia:string>#documentation#</dia:string>
+-          </dia:attribute>
+-          <dia:attribute name="type">
+-            <dia:string>#std::string#</dia:string>
+-          </dia:attribute>
+-          <dia:attribute name="value">
+-            <dia:string>##</dia:string>
+-          </dia:attribute>
+-          <dia:attribute name="comment">
+-            <dia:string>#Doxygen documentation for the type.#</dia:string>
+-          </dia:attribute>
+-          <dia:attribute name="visibility">
+-            <dia:enum val="0"/>
+-          </dia:attribute>
+-          <dia:attribute name="abstract">
+-            <dia:boolean val="false"/>
+-          </dia:attribute>
+-          <dia:attribute name="class_scope">
+-            <dia:boolean val="false"/>
+-          </dia:attribute>
+-        </dia:composite>
+-      </dia:attribute>
+-      <dia:attribute name="operations"/>
+-      <dia:attribute name="template">
+-        <dia:boolean val="false"/>
+-      </dia:attribute>
+-      <dia:attribute name="templates"/>
+-    </dia:object>
+-    <dia:object type="UML - Association" version="2" id="O16">
+-      <dia:attribute name="name">
+-        <dia:string>##</dia:string>
+-      </dia:attribute>
+-      <dia:attribute name="direction">
+-        <dia:enum val="1"/>
+-      </dia:attribute>
+-      <dia:attribute name="show_direction">
+-        <dia:boolean val="false"/>
+-      </dia:attribute>
+-      <dia:attribute name="assoc_type">
+-        <dia:enum val="1"/>
+-      </dia:attribute>
+-      <dia:attribute name="role_a">
+-        <dia:string>##</dia:string>
+-      </dia:attribute>
+-      <dia:attribute name="multipicity_a">
+-        <dia:string>##</dia:string>
+-      </dia:attribute>
+-      <dia:attribute name="visibility_a">
+-        <dia:enum val="3"/>
+-      </dia:attribute>
+-      <dia:attribute name="show_arrow_a">
+-        <dia:boolean val="false"/>
+-      </dia:attribute>
+-      <dia:attribute name="role_b">
+-        <dia:string>##</dia:string>
+-      </dia:attribute>
+-      <dia:attribute name="multipicity_b">
+-        <dia:string>##</dia:string>
+-      </dia:attribute>
+-      <dia:attribute name="visibility_b">
+-        <dia:enum val="3"/>
+-      </dia:attribute>
+-      <dia:attribute name="show_arrow_b">
+-        <dia:boolean val="false"/>
+-      </dia:attribute>
+-      <dia:attribute name="obj_pos">
+-        <dia:point val="27.42,74.0496"/>
+-      </dia:attribute>
+-      <dia:attribute name="obj_bb">
+-        <dia:rectangle val="21.745,73.2996;28.17,84.8"/>
+-      </dia:attribute>
+-      <dia:attribute name="meta">
+-        <dia:composite type="dict"/>
+-      </dia:attribute>
+-      <dia:attribute name="orth_points">
+-        <dia:point val="27.42,74.0496"/>
+-        <dia:point val="27.42,79"/>
+-        <dia:point val="21.795,79"/>
+-        <dia:point val="21.795,84"/>
+-      </dia:attribute>
+-      <dia:attribute name="orth_orient">
+-        <dia:enum val="1"/>
+-        <dia:enum val="0"/>
+-        <dia:enum val="1"/>
+-      </dia:attribute>
+-      <dia:attribute name="orth_autoroute">
+-        <dia:boolean val="false"/>
+-      </dia:attribute>
+-      <dia:attribute name="text_colour">
+-        <dia:color val="#000000"/>
+-      </dia:attribute>
+-      <dia:attribute name="line_colour">
+-        <dia:color val="#000000"/>
+-      </dia:attribute>
+-      <dia:connections>
+-        <dia:connection handle="0" to="O0" connection="36"/>
+-        <dia:connection handle="1" to="O15" connection="1"/>
+-      </dia:connections>
+-    </dia:object>
+-    <dia:object type="UML - Class" version="0" id="O17">
+-      <dia:attribute name="obj_pos">
+         <dia:point val="58,29"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+@@ -3504,7 +3251,7 @@ categories for them.#</dia:string>
+       </dia:attribute>
+       <dia:attribute name="templates"/>
+     </dia:object>
+-    <dia:object type="UML - Association" version="2" id="O18">
++    <dia:object type="UML - Association" version="2" id="O16">
+       <dia:attribute name="name">
+         <dia:string>##</dia:string>
+       </dia:attribute>
+@@ -3575,7 +3322,7 @@ categories for them.#</dia:string>
+         <dia:connection handle="1" to="O14" connection="6"/>
+       </dia:connections>
+     </dia:object>
+-    <dia:object type="UML - Class" version="0" id="O19">
++    <dia:object type="UML - Class" version="0" id="O17">
+       <dia:attribute name="obj_pos">
+         <dia:point val="-76,45"/>
+       </dia:attribute>
+@@ -3755,7 +3502,7 @@ categories for them.#</dia:string>
+       </dia:attribute>
+       <dia:attribute name="templates"/>
+     </dia:object>
+-    <dia:object type="UML - Class" version="0" id="O20">
++    <dia:object type="UML - Class" version="0" id="O18">
+       <dia:attribute name="obj_pos">
+         <dia:point val="-19,10"/>
+       </dia:attribute>
+@@ -4007,7 +3754,7 @@ which make code generation different.#</dia:string>
+       </dia:attribute>
+       <dia:attribute name="templates"/>
+     </dia:object>
+-    <dia:object type="UML - Association" version="2" id="O21">
++    <dia:object type="UML - Association" version="2" id="O19">
+       <dia:attribute name="name">
+         <dia:string>##</dia:string>
+       </dia:attribute>
+@@ -4075,10 +3822,10 @@ which make code generation different.#</dia:string>
+       </dia:attribute>
+       <dia:connections>
+         <dia:connection handle="0" to="O4" connection="2"/>
+-        <dia:connection handle="1" to="O20" connection="6"/>
++        <dia:connection handle="1" to="O18" connection="6"/>
+       </dia:connections>
+     </dia:object>
+-    <dia:object type="UML - Class" version="0" id="O22">
++    <dia:object type="UML - Class" version="0" id="O20">
+       <dia:attribute name="obj_pos">
+         <dia:point val="42,84"/>
+       </dia:attribute>
+@@ -4258,7 +4005,7 @@ which make code generation different.#</dia:string>
+       </dia:attribute>
+       <dia:attribute name="templates"/>
+     </dia:object>
+-    <dia:object type="UML - Association" version="2" id="O23">
++    <dia:object type="UML - Association" version="2" id="O21">
+       <dia:attribute name="name">
+         <dia:string>##</dia:string>
+       </dia:attribute>
+@@ -4326,10 +4073,10 @@ which make code generation different.#</dia:string>
+       </dia:attribute>
+       <dia:connections>
+         <dia:connection handle="0" to="O0" connection="6"/>
+-        <dia:connection handle="1" to="O22" connection="1"/>
++        <dia:connection handle="1" to="O20" connection="1"/>
+       </dia:connections>
+     </dia:object>
+-    <dia:object type="UML - Association" version="2" id="O24">
++    <dia:object type="UML - Association" version="2" id="O22">
+       <dia:attribute name="name">
+         <dia:string>##</dia:string>
+       </dia:attribute>
+@@ -4397,10 +4144,10 @@ which make code generation different.#</dia:string>
+       </dia:attribute>
+       <dia:connections>
+         <dia:connection handle="0" to="O5" connection="0"/>
+-        <dia:connection handle="1" to="O19" connection="6"/>
++        <dia:connection handle="1" to="O17" connection="6"/>
+       </dia:connections>
+     </dia:object>
+-    <dia:object type="UML - Class" version="0" id="O25">
++    <dia:object type="UML - Class" version="0" id="O23">
+       <dia:attribute name="obj_pos">
+         <dia:point val="-32,60"/>
+       </dia:attribute>
+@@ -4580,7 +4327,7 @@ which make code generation different.#</dia:string>
+       </dia:attribute>
+       <dia:attribute name="templates"/>
+     </dia:object>
+-    <dia:object type="UML - Class" version="0" id="O26">
++    <dia:object type="UML - Class" version="0" id="O24">
+       <dia:attribute name="obj_pos">
+         <dia:point val="11,-6"/>
+       </dia:attribute>
+@@ -4916,7 +4663,7 @@ which make code generation different.#</dia:string>
+       </dia:attribute>
+       <dia:attribute name="templates"/>
+     </dia:object>
+-    <dia:object type="UML - Class" version="0" id="O27">
++    <dia:object type="UML - Class" version="0" id="O25">
+       <dia:attribute name="obj_pos">
+         <dia:point val="19,29"/>
+       </dia:attribute>
+@@ -5543,7 +5290,7 @@ which make code generation different.#</dia:string>
+       </dia:attribute>
+       <dia:attribute name="templates"/>
+     </dia:object>
+-    <dia:object type="UML - Association" version="2" id="O28">
++    <dia:object type="UML - Association" version="2" id="O26">
+       <dia:attribute name="name">
+         <dia:string>#merges one or more &gt;#</dia:string>
+       </dia:attribute>
+@@ -5611,10 +5358,10 @@ which make code generation different.#</dia:string>
+       </dia:attribute>
+       <dia:connections>
+         <dia:connection handle="0" to="O0" connection="2"/>
+-        <dia:connection handle="1" to="O27" connection="6"/>
++        <dia:connection handle="1" to="O25" connection="6"/>
+       </dia:connections>
+     </dia:object>
+-    <dia:object type="UML - Class" version="0" id="O29">
++    <dia:object type="UML - Class" version="0" id="O27">
+       <dia:attribute name="obj_pos">
+         <dia:point val="71,-6"/>
+       </dia:attribute>
+@@ -5885,7 +5632,7 @@ which make code generation different.#</dia:string>
+       </dia:attribute>
+       <dia:attribute name="templates"/>
+     </dia:object>
+-    <dia:object type="UML - Class" version="0" id="O30">
++    <dia:object type="UML - Class" version="0" id="O28">
+       <dia:attribute name="obj_pos">
+         <dia:point val="47,-6"/>
+       </dia:attribute>
+@@ -6074,7 +5821,7 @@ which make code generation different.#</dia:string>
+       </dia:attribute>
+       <dia:attribute name="templates"/>
+     </dia:object>
+-    <dia:object type="UML - Note" version="0" id="O31">
++    <dia:object type="UML - Note" version="0" id="O29">
+       <dia:attribute name="obj_pos">
+         <dia:point val="46,16"/>
+       </dia:attribute>
+@@ -6126,7 +5873,7 @@ and all of the supported types within those models.#</dia:string>
+         </dia:composite>
+       </dia:attribute>
+     </dia:object>
+-    <dia:object type="UML - Message" version="0" id="O32">
++    <dia:object type="UML - Message" version="0" id="O30">
+       <dia:attribute name="obj_pos">
+         <dia:point val="56.2675,16"/>
+       </dia:attribute>
+@@ -6156,11 +5903,11 @@ and all of the supported types within those models.#</dia:string>
+         <dia:point val="46.4763,13.9999"/>
+       </dia:attribute>
+       <dia:connections>
+-        <dia:connection handle="0" to="O31" connection="1"/>
+-        <dia:connection handle="1" to="O37" connection="2"/>
++        <dia:connection handle="0" to="O29" connection="1"/>
++        <dia:connection handle="1" to="O35" connection="2"/>
+       </dia:connections>
+     </dia:object>
+-    <dia:object type="UML - Message" version="0" id="O33">
++    <dia:object type="UML - Message" version="0" id="O31">
+       <dia:attribute name="obj_pos">
+         <dia:point val="53,41.05"/>
+       </dia:attribute>
+@@ -6190,11 +5937,11 @@ and all of the supported types within those models.#</dia:string>
+         <dia:point val="50.11,41.3749"/>
+       </dia:attribute>
+       <dia:connections>
+-        <dia:connection handle="0" to="O34" connection="3"/>
+-        <dia:connection handle="1" to="O27" connection="31"/>
++        <dia:connection handle="0" to="O32" connection="3"/>
++        <dia:connection handle="1" to="O25" connection="31"/>
+       </dia:connections>
+     </dia:object>
+-    <dia:object type="UML - Note" version="0" id="O34">
++    <dia:object type="UML - Note" version="0" id="O32">
+       <dia:attribute name="obj_pos">
+         <dia:point val="53,39"/>
+       </dia:attribute>
+@@ -6248,7 +5995,7 @@ all types in the combined model.#</dia:string>
+         </dia:composite>
+       </dia:attribute>
+     </dia:object>
+-    <dia:object type="UML - Association" version="2" id="O35">
++    <dia:object type="UML - Association" version="2" id="O33">
+       <dia:attribute name="name">
+         <dia:string>#throws on failure &gt;#</dia:string>
+       </dia:attribute>
+@@ -6315,11 +6062,11 @@ all types in the combined model.#</dia:string>
+         <dia:color val="#000000"/>
+       </dia:attribute>
+       <dia:connections>
+-        <dia:connection handle="0" to="O27" connection="2"/>
+-        <dia:connection handle="1" to="O17" connection="1"/>
++        <dia:connection handle="0" to="O25" connection="2"/>
++        <dia:connection handle="1" to="O15" connection="1"/>
+       </dia:connections>
+     </dia:object>
+-    <dia:object type="UML - Class" version="0" id="O36">
++    <dia:object type="UML - Class" version="0" id="O34">
+       <dia:attribute name="obj_pos">
+         <dia:point val="-16,-6"/>
+       </dia:attribute>
+@@ -6574,7 +6321,7 @@ all types in the combined model.#</dia:string>
+       </dia:attribute>
+       <dia:attribute name="templates"/>
+     </dia:object>
+-    <dia:object type="UML - Class" version="0" id="O37">
++    <dia:object type="UML - Class" version="0" id="O35">
+       <dia:attribute name="obj_pos">
+         <dia:point val="5,11"/>
+       </dia:attribute>
+@@ -6941,7 +6688,7 @@ all types in the combined model.#</dia:string>
+       </dia:attribute>
+       <dia:attribute name="templates"/>
+     </dia:object>
+-    <dia:object type="UML - Association" version="2" id="O38">
++    <dia:object type="UML - Association" version="2" id="O36">
+       <dia:attribute name="name">
+         <dia:string>#merges models using &gt;#</dia:string>
+       </dia:attribute>
+@@ -7008,11 +6755,11 @@ all types in the combined model.#</dia:string>
+         <dia:color val="#000000"/>
+       </dia:attribute>
+       <dia:connections>
+-        <dia:connection handle="0" to="O37" connection="6"/>
+-        <dia:connection handle="1" to="O27" connection="38"/>
++        <dia:connection handle="0" to="O35" connection="6"/>
++        <dia:connection handle="1" to="O25" connection="38"/>
+       </dia:connections>
+     </dia:object>
+-    <dia:object type="UML - Association" version="2" id="O39">
++    <dia:object type="UML - Association" version="2" id="O37">
+       <dia:attribute name="name">
+         <dia:string>#injects system types for &gt;#</dia:string>
+       </dia:attribute>
+@@ -7079,11 +6826,11 @@ all types in the combined model.#</dia:string>
+         <dia:color val="#000000"/>
+       </dia:attribute>
+       <dia:connections>
+-        <dia:connection handle="0" to="O37" connection="0"/>
+-        <dia:connection handle="1" to="O36" connection="6"/>
++        <dia:connection handle="0" to="O35" connection="0"/>
++        <dia:connection handle="1" to="O34" connection="6"/>
+       </dia:connections>
+     </dia:object>
+-    <dia:object type="UML - Association" version="2" id="O40">
++    <dia:object type="UML - Association" version="2" id="O38">
+       <dia:attribute name="name">
+         <dia:string>##</dia:string>
+       </dia:attribute>
+@@ -7150,11 +6897,11 @@ all types in the combined model.#</dia:string>
+         <dia:color val="#000000"/>
+       </dia:attribute>
+       <dia:connections>
+-        <dia:connection handle="0" to="O19" connection="1"/>
++        <dia:connection handle="0" to="O17" connection="1"/>
+         <dia:connection handle="1" to="O1" connection="6"/>
+       </dia:connections>
+     </dia:object>
+-    <dia:object type="UML - Note" version="0" id="O41">
++    <dia:object type="UML - Note" version="0" id="O39">
+       <dia:attribute name="obj_pos">
+         <dia:point val="-79,-11"/>
+       </dia:attribute>
+@@ -7212,7 +6959,7 @@ but with a focus only on data structures and domain driven constructs.
+         </dia:composite>
+       </dia:attribute>
+     </dia:object>
+-    <dia:object type="UML - Class" version="0" id="O42">
++    <dia:object type="UML - Class" version="0" id="O40">
+       <dia:attribute name="obj_pos">
+         <dia:point val="-32,-6"/>
+       </dia:attribute>
+@@ -7322,7 +7069,7 @@ but with a focus only on data structures and domain driven constructs.
+       </dia:attribute>
+       <dia:attribute name="templates"/>
+     </dia:object>
+-    <dia:object type="UML - Association" version="2" id="O43">
++    <dia:object type="UML - Association" version="2" id="O41">
+       <dia:attribute name="name">
+         <dia:string>#&lt; throws on failure#</dia:string>
+       </dia:attribute>
+@@ -7389,11 +7136,11 @@ but with a focus only on data structures and domain driven constructs.
+         <dia:color val="#000000"/>
+       </dia:attribute>
+       <dia:connections>
+-        <dia:connection handle="0" to="O36" connection="1"/>
+-        <dia:connection handle="1" to="O42" connection="1"/>
++        <dia:connection handle="0" to="O34" connection="1"/>
++        <dia:connection handle="1" to="O40" connection="1"/>
+       </dia:connections>
+     </dia:object>
+-    <dia:object type="UML - Association" version="2" id="O44">
++    <dia:object type="UML - Association" version="2" id="O42">
+       <dia:attribute name="name">
+         <dia:string>##</dia:string>
+       </dia:attribute>
+@@ -7461,10 +7208,10 @@ but with a focus only on data structures and domain driven constructs.
+       </dia:attribute>
+       <dia:connections>
+         <dia:connection handle="0" to="O4" connection="6"/>
+-        <dia:connection handle="1" to="O25" connection="1"/>
++        <dia:connection handle="1" to="O23" connection="1"/>
+       </dia:connections>
+     </dia:object>
+-    <dia:object type="UML - Association" version="2" id="O45">
++    <dia:object type="UML - Association" version="2" id="O43">
+       <dia:attribute name="name">
+         <dia:string>##</dia:string>
+       </dia:attribute>
+@@ -7535,7 +7282,7 @@ but with a focus only on data structures and domain driven constructs.
+         <dia:connection handle="1" to="O1" connection="2"/>
+       </dia:connections>
+     </dia:object>
+-    <dia:object type="UML - Association" version="2" id="O46">
++    <dia:object type="UML - Association" version="2" id="O44">
+       <dia:attribute name="name">
+         <dia:string>##</dia:string>
+       </dia:attribute>
+@@ -7602,11 +7349,11 @@ but with a focus only on data structures and domain driven constructs.
+         <dia:color val="#000000"/>
+       </dia:attribute>
+       <dia:connections>
+-        <dia:connection handle="0" to="O37" connection="2"/>
+-        <dia:connection handle="1" to="O26" connection="6"/>
++        <dia:connection handle="0" to="O35" connection="2"/>
++        <dia:connection handle="1" to="O24" connection="6"/>
+       </dia:connections>
+     </dia:object>
+-    <dia:object type="UML - Association" version="2" id="O47">
++    <dia:object type="UML - Association" version="2" id="O45">
+       <dia:attribute name="name">
+         <dia:string>##</dia:string>
+       </dia:attribute>
+@@ -7673,11 +7420,11 @@ but with a focus only on data structures and domain driven constructs.
+         <dia:color val="#000000"/>
+       </dia:attribute>
+       <dia:connections>
+-        <dia:connection handle="0" to="O37" connection="2"/>
+-        <dia:connection handle="1" to="O30" connection="6"/>
++        <dia:connection handle="0" to="O35" connection="2"/>
++        <dia:connection handle="1" to="O28" connection="6"/>
+       </dia:connections>
+     </dia:object>
+-    <dia:object type="UML - Association" version="2" id="O48">
++    <dia:object type="UML - Association" version="2" id="O46">
+       <dia:attribute name="name">
+         <dia:string>##</dia:string>
+       </dia:attribute>
+@@ -7744,11 +7491,11 @@ but with a focus only on data structures and domain driven constructs.
+         <dia:color val="#000000"/>
+       </dia:attribute>
+       <dia:connections>
+-        <dia:connection handle="0" to="O37" connection="2"/>
+-        <dia:connection handle="1" to="O29" connection="6"/>
++        <dia:connection handle="0" to="O35" connection="2"/>
++        <dia:connection handle="1" to="O27" connection="6"/>
+       </dia:connections>
+     </dia:object>
+-    <dia:object type="UML - Class" version="0" id="O49">
++    <dia:object type="UML - Class" version="0" id="O47">
+       <dia:attribute name="obj_pos">
+         <dia:point val="-65,129"/>
+       </dia:attribute>
+@@ -7928,7 +7675,7 @@ but with a focus only on data structures and domain driven constructs.
+       </dia:attribute>
+       <dia:attribute name="templates"/>
+     </dia:object>
+-    <dia:object type="UML - Class" version="0" id="O50">
++    <dia:object type="UML - Class" version="0" id="O48">
+       <dia:attribute name="obj_pos">
+         <dia:point val="-122,76"/>
+       </dia:attribute>
+@@ -8137,7 +7884,7 @@ what is common to all the things that belong to a domain model.#</dia:string>
+       </dia:attribute>
+       <dia:attribute name="templates"/>
+     </dia:object>
+-    <dia:object type="UML - Class" version="0" id="O51">
++    <dia:object type="UML - Class" version="0" id="O49">
+       <dia:attribute name="obj_pos">
+         <dia:point val="-134,93"/>
+       </dia:attribute>
+@@ -8273,7 +8020,7 @@ Aggregates a group of logically related types into a unit.#</dia:string>
+       </dia:attribute>
+       <dia:attribute name="templates"/>
+     </dia:object>
+-    <dia:object type="UML - Generalization" version="1" id="O52">
++    <dia:object type="UML - Generalization" version="1" id="O50">
+       <dia:attribute name="obj_pos">
+         <dia:point val="-105.58,82"/>
+       </dia:attribute>
+@@ -8310,11 +8057,11 @@ Aggregates a group of logically related types into a unit.#</dia:string>
+         <dia:string>##</dia:string>
+       </dia:attribute>
+       <dia:connections>
+-        <dia:connection handle="0" to="O50" connection="6"/>
+-        <dia:connection handle="1" to="O51" connection="1"/>
++        <dia:connection handle="0" to="O48" connection="6"/>
++        <dia:connection handle="1" to="O49" connection="1"/>
+       </dia:connections>
+     </dia:object>
+-    <dia:object type="UML - Class" version="0" id="O53">
++    <dia:object type="UML - Class" version="0" id="O51">
+       <dia:attribute name="obj_pos">
+         <dia:point val="-89,93"/>
+       </dia:attribute>
+@@ -8707,7 +8454,7 @@ A type is only comparable if all of its properties have comparable types.#</dia:
+       </dia:attribute>
+       <dia:attribute name="templates"/>
+     </dia:object>
+-    <dia:object type="UML - Generalization" version="1" id="O54">
++    <dia:object type="UML - Generalization" version="1" id="O52">
+       <dia:attribute name="obj_pos">
+         <dia:point val="-105.58,82"/>
+       </dia:attribute>
+@@ -8744,11 +8491,11 @@ A type is only comparable if all of its properties have comparable types.#</dia:
+         <dia:string>##</dia:string>
+       </dia:attribute>
+       <dia:connections>
+-        <dia:connection handle="0" to="O50" connection="6"/>
+-        <dia:connection handle="1" to="O53" connection="1"/>
++        <dia:connection handle="0" to="O48" connection="6"/>
++        <dia:connection handle="1" to="O51" connection="1"/>
+       </dia:connections>
+     </dia:object>
+-    <dia:object type="UML - Class" version="0" id="O55">
++    <dia:object type="UML - Class" version="0" id="O53">
+       <dia:attribute name="obj_pos">
+         <dia:point val="-119,115"/>
+       </dia:attribute>
+@@ -8886,7 +8633,7 @@ object.#</dia:string>
+       </dia:attribute>
+       <dia:attribute name="templates"/>
+     </dia:object>
+-    <dia:object type="UML - Class" version="0" id="O56">
++    <dia:object type="UML - Class" version="0" id="O54">
+       <dia:attribute name="obj_pos">
+         <dia:point val="-102,115"/>
+       </dia:attribute>
+@@ -9077,7 +8824,7 @@ requirements of the underlying typed element.#</dia:string>
+       </dia:attribute>
+       <dia:attribute name="templates"/>
+     </dia:object>
+-    <dia:object type="UML - Class" version="0" id="O57">
++    <dia:object type="UML - Class" version="0" id="O55">
+       <dia:attribute name="obj_pos">
+         <dia:point val="-128,129"/>
+       </dia:attribute>
+@@ -9395,7 +9142,7 @@ requirements of the underlying typed element.#</dia:string>
+       </dia:attribute>
+       <dia:attribute name="templates"/>
+     </dia:object>
+-    <dia:object type="UML - Generalization" version="1" id="O58">
++    <dia:object type="UML - Generalization" version="1" id="O56">
+       <dia:attribute name="obj_pos">
+         <dia:point val="-80.0875,105.4"/>
+       </dia:attribute>
+@@ -9432,11 +9179,11 @@ requirements of the underlying typed element.#</dia:string>
+         <dia:string>##</dia:string>
+       </dia:attribute>
+       <dia:connections>
+-        <dia:connection handle="0" to="O53" connection="6"/>
+-        <dia:connection handle="1" to="O55" connection="1"/>
++        <dia:connection handle="0" to="O51" connection="6"/>
++        <dia:connection handle="1" to="O53" connection="1"/>
+       </dia:connections>
+     </dia:object>
+-    <dia:object type="UML - Association" version="2" id="O59">
++    <dia:object type="UML - Association" version="2" id="O57">
+       <dia:attribute name="name">
+         <dia:string>##</dia:string>
+       </dia:attribute>
+@@ -9503,11 +9250,11 @@ requirements of the underlying typed element.#</dia:string>
+         <dia:color val="#000000"/>
+       </dia:attribute>
+       <dia:connections>
+-        <dia:connection handle="0" to="O55" connection="6"/>
+-        <dia:connection handle="1" to="O57" connection="1"/>
++        <dia:connection handle="0" to="O53" connection="6"/>
++        <dia:connection handle="1" to="O55" connection="1"/>
+       </dia:connections>
+     </dia:object>
+-    <dia:object type="UML - Generalization" version="1" id="O60">
++    <dia:object type="UML - Generalization" version="1" id="O58">
+       <dia:attribute name="obj_pos">
+         <dia:point val="-80.0875,105.4"/>
+       </dia:attribute>
+@@ -9544,11 +9291,11 @@ requirements of the underlying typed element.#</dia:string>
+         <dia:string>##</dia:string>
+       </dia:attribute>
+       <dia:connections>
+-        <dia:connection handle="0" to="O53" connection="6"/>
+-        <dia:connection handle="1" to="O56" connection="14"/>
++        <dia:connection handle="0" to="O51" connection="6"/>
++        <dia:connection handle="1" to="O54" connection="14"/>
+       </dia:connections>
+     </dia:object>
+-    <dia:object type="UML - Class" version="0" id="O61">
++    <dia:object type="UML - Class" version="0" id="O59">
+       <dia:attribute name="obj_pos">
+         <dia:point val="-79,115"/>
+       </dia:attribute>
+@@ -9686,7 +9433,7 @@ generation constraints, services tend to be where all the behaviour sits.#</dia:
+       </dia:attribute>
+       <dia:attribute name="templates"/>
+     </dia:object>
+-    <dia:object type="UML - Generalization" version="1" id="O62">
++    <dia:object type="UML - Generalization" version="1" id="O60">
+       <dia:attribute name="obj_pos">
+         <dia:point val="-80.0875,105.4"/>
+       </dia:attribute>
+@@ -9723,11 +9470,11 @@ generation constraints, services tend to be where all the behaviour sits.#</dia:
+         <dia:string>##</dia:string>
+       </dia:attribute>
+       <dia:connections>
+-        <dia:connection handle="0" to="O53" connection="6"/>
+-        <dia:connection handle="1" to="O61" connection="1"/>
++        <dia:connection handle="0" to="O51" connection="6"/>
++        <dia:connection handle="1" to="O59" connection="1"/>
+       </dia:connections>
+     </dia:object>
+-    <dia:object type="UML - Association" version="2" id="O63">
++    <dia:object type="UML - Association" version="2" id="O61">
+       <dia:attribute name="name">
+         <dia:string>##</dia:string>
+       </dia:attribute>
+@@ -9794,11 +9541,11 @@ generation constraints, services tend to be where all the behaviour sits.#</dia:
+         <dia:color val="#000000"/>
+       </dia:attribute>
+       <dia:connections>
+-        <dia:connection handle="0" to="O61" connection="6"/>
+-        <dia:connection handle="1" to="O49" connection="1"/>
++        <dia:connection handle="0" to="O59" connection="6"/>
++        <dia:connection handle="1" to="O47" connection="1"/>
+       </dia:connections>
+     </dia:object>
+-    <dia:object type="UML - Class" version="0" id="O64">
++    <dia:object type="UML - Class" version="0" id="O62">
+       <dia:attribute name="obj_pos">
+         <dia:point val="-61,115"/>
+       </dia:attribute>
+@@ -9908,7 +9655,7 @@ generation constraints, services tend to be where all the behaviour sits.#</dia:
+       </dia:attribute>
+       <dia:attribute name="templates"/>
+     </dia:object>
+-    <dia:object type="UML - Generalization" version="1" id="O65">
++    <dia:object type="UML - Generalization" version="1" id="O63">
+       <dia:attribute name="obj_pos">
+         <dia:point val="-80.0875,105.45"/>
+       </dia:attribute>
+@@ -9945,11 +9692,11 @@ generation constraints, services tend to be where all the behaviour sits.#</dia:
+         <dia:string>##</dia:string>
+       </dia:attribute>
+       <dia:connections>
+-        <dia:connection handle="0" to="O53" connection="32"/>
+-        <dia:connection handle="1" to="O64" connection="1"/>
++        <dia:connection handle="0" to="O51" connection="32"/>
++        <dia:connection handle="1" to="O62" connection="1"/>
+       </dia:connections>
+     </dia:object>
+-    <dia:object type="UML - Class" version="0" id="O66">
++    <dia:object type="UML - Class" version="0" id="O64">
+       <dia:attribute name="obj_pos">
+         <dia:point val="-45,115"/>
+       </dia:attribute>
+@@ -10064,7 +9811,7 @@ underlying storage (for example, a relational database).#</dia:string>
+       </dia:attribute>
+       <dia:attribute name="templates"/>
+     </dia:object>
+-    <dia:object type="UML - Generalization" version="1" id="O67">
++    <dia:object type="UML - Generalization" version="1" id="O65">
+       <dia:attribute name="obj_pos">
+         <dia:point val="-80.0875,105.4"/>
+       </dia:attribute>
+@@ -10101,11 +9848,11 @@ underlying storage (for example, a relational database).#</dia:string>
+         <dia:string>##</dia:string>
+       </dia:attribute>
+       <dia:connections>
+-        <dia:connection handle="0" to="O53" connection="6"/>
+-        <dia:connection handle="1" to="O66" connection="1"/>
++        <dia:connection handle="0" to="O51" connection="6"/>
++        <dia:connection handle="1" to="O64" connection="1"/>
+       </dia:connections>
+     </dia:object>
+-    <dia:object type="UML - Class" version="0" id="O68">
++    <dia:object type="UML - Class" version="0" id="O66">
+       <dia:attribute name="obj_pos">
+         <dia:point val="-113,93"/>
+       </dia:attribute>
+@@ -10264,7 +10011,7 @@ Does not include inherited attributes.#</dia:string>
+       </dia:attribute>
+       <dia:attribute name="templates"/>
+     </dia:object>
+-    <dia:object type="UML - Generalization" version="1" id="O69">
++    <dia:object type="UML - Generalization" version="1" id="O67">
+       <dia:attribute name="obj_pos">
+         <dia:point val="-105.58,82"/>
+       </dia:attribute>
+@@ -10301,8 +10048,8 @@ Does not include inherited attributes.#</dia:string>
+         <dia:string>##</dia:string>
+       </dia:attribute>
+       <dia:connections>
+-        <dia:connection handle="0" to="O50" connection="6"/>
+-        <dia:connection handle="1" to="O68" connection="1"/>
++        <dia:connection handle="0" to="O48" connection="6"/>
++        <dia:connection handle="1" to="O66" connection="1"/>
+       </dia:connections>
+     </dia:object>
+   </dia:layer>
+diff --git a/doc/agile/release_notes_sprint_28.org b/doc/agile/release_notes_sprint_28.org
+index 1f61733..c7fc7a3 100644
+--- a/doc/agile/release_notes_sprint_28.org
++++ b/doc/agile/release_notes_sprint_28.org
+@@ -10,20 +10,22 @@ This file contains all stories that were closed during sprint 28.
+ ** Development Stories Implemented
+ 
+ #+begin: clocktable :maxlevel 3 :scope subtree
+-Clock summary at [2013-06-08 Sat 23:16]
++Clock summary at [2013-06-10 Mon 00:17]
+ 
+ | Headline                                                         | Time    |       |      |
+ |------------------------------------------------------------------+---------+-------+------|
+-| *Total time*                                                     | *13:38* |       |      |
++| *Total time*                                                     | *20:50* |       |      |
+ |------------------------------------------------------------------+---------+-------+------|
+-| Development Stories Implemented                                  |         | 13:38 |      |
++| Development Stories Implemented                                  |         | 20:50 |      |
+ | COMPLETED Update README                                          |         |       | 1:04 |
+ | COMPLETED Whiteboarding on the role of SML                       |         |       | 1:45 |
+ | COMPLETED Leaf types do not have a virtual destructor            |         |       | 0:26 |
+ | COMPLETED Suppress visitor generation for non-target models      |         |       | 0:20 |
++| COMPLETED Fix generation bug in inheritance tree                 |         |       | 1:22 |
++| COMPLETED Test move constructors in test model                   |         |       | 2:52 |
+ | IMPLEMENTATION Release notes and backlog grooming                |         |       | 1:04 |
+-| IMPLEMENTATION Improve modeling of domain driven concepts in SML |         |       | 6:52 |
+-| Add support for concepts at the SML level                        |         |       | 0:12 |
++| IMPLEMENTATION Improve modeling of domain driven concepts in SML |         |       | 8:17 |
++| IMPLEMENTATION Add support for concepts at the SML level         |         |       | 1:45 |
+ | ANALYSIS Break down SML into concepts                            |         |       | 1:27 |
+ | Refactor top level concepts in SML                               |         |       | 0:22 |
+ | IMPLEMENTATION Move services into their own type                 |         |       | 0:06 |
+@@ -82,6 +84,12 @@ of them in Creris, the compiler complained. We need to add a generic
+ test that performs a =std::move= in sanitiser and fix the fallout of
+ the test.
+ 
++*** Transformer tests should check that docs are not empty            :spike:
++
++Dia to SML transformer tests don't appear to check that we are
++correctly transforming the documentation. Change factory to create
++documentation if necessary.
++
+ *** IMPLEMENTATION Release notes and backlog grooming                  :task:
+     CLOCK: [2013-06-06 Thu 07:50]--[2013-06-06 Thu 08:15] =>  0:25
+     CLOCK: [2013-06-05 Wed 19:19]--[2013-06-05 Wed 19:24] =>  0:05
+@@ -261,7 +269,12 @@ We should create an enumeration, say =value_types= which only values
+ have and then collapse all these types into value. These concepts
+ don't really exist at the SML level.
+ 
+-**** Convert exceptions into value type objects                       :story:
++**** IMPLEMENTATION Convert exceptions into value type objects        :story:
++     CLOCK: [2013-06-10 Mon 00:22]
++     CLOCK: [2013-06-10 Mon 00:10]--[2013-06-10 Mon 00:22] =>  0:12
++     CLOCK: [2013-06-09 Sun 17:47]--[2013-06-09 Sun 18:04] =>  0:17
++     CLOCK: [2013-06-09 Sun 00:51]--[2013-06-09 Sun 01:59] =>  1:08
++
+ **** Convert enumerations into value type objects                     :story:
+ **** Convert primitives into value type objects                       :story:
+ **** Remove generation types                                          :story:
+diff --git a/projects/cpp/include/dogen/cpp/types/transformer.hpp b/projects/cpp/include/dogen/cpp/types/transformer.hpp
+index f08fafc..0601645 100644
+--- a/projects/cpp/include/dogen/cpp/types/transformer.hpp
++++ b/projects/cpp/include/dogen/cpp/types/transformer.hpp
+@@ -32,7 +32,7 @@
+ #include "dogen/sml/types/model.hpp"
+ #include "dogen/sml/types/qname.hpp"
+ #include "dogen/sml/types/module.hpp"
+-#include "dogen/sml/types/exception.hpp"
++#include "dogen/sml/types/value.hpp"
+ #include "dogen/sml/types/enumeration.hpp"
+ #include "dogen/sml/types/nested_qname.hpp"
+ #include "dogen/cpp/types/class_info.hpp"
+@@ -117,9 +117,9 @@ public:
+     enum_info transform(const sml::enumeration& e) const;
+ 
+     /**
+-     * @brief Transforms a SML exception into an exception info.
++     * @brief Transforms a SML value into an exception info.
+      */
+-    exception_info transform(const sml::exception& e) const;
++    exception_info transform(const sml::value& e) const;
+ 
+     /**
+      * @brief Transforms a SML module into a namespace info.
+diff --git a/projects/cpp/spec/transformer_spec.cpp b/projects/cpp/spec/transformer_spec.cpp
+index 8b4bfdc..f91cc3d 100644
+--- a/projects/cpp/spec/transformer_spec.cpp
++++ b/projects/cpp/spec/transformer_spec.cpp
+@@ -185,7 +185,7 @@ BOOST_AUTO_TEST_CASE(transforming_exception_results_in_expected_exception_info)
+ 
+     BOOST_CHECK(is_type_zero(e.name()));
+     BOOST_CHECK(!e.documentation().empty());
+-    BOOST_CHECK(e.namespaces().size() == 1);
++    BOOST_REQUIRE(e.namespaces().size() == 1);
+     BOOST_CHECK(is_model_zero(e.namespaces().front()));
+ }
+ 
+diff --git a/projects/cpp/src/types/transformer.cpp b/projects/cpp/src/types/transformer.cpp
+index a23ced0..95ae697 100644
+--- a/projects/cpp/src/types/transformer.cpp
++++ b/projects/cpp/src/types/transformer.cpp
+@@ -223,7 +223,7 @@ enum_info transformer::transform(const sml::enumeration& e) const {
+     return r;
+ }
+ 
+-exception_info transformer::transform(const sml::exception& e) const {
++exception_info transformer::transform(const sml::value& e) const {
+     BOOST_LOG_SEV(lg, debug) << "Transforming exception: " << e.name();
+ 
+     exception_info r;
+diff --git a/projects/dia_to_sml/src/types/transformer.cpp b/projects/dia_to_sml/src/types/transformer.cpp
+index a1a2b2e..7821820 100644
+--- a/projects/dia_to_sml/src/types/transformer.cpp
++++ b/projects/dia_to_sml/src/types/transformer.cpp
+@@ -28,10 +28,11 @@
+ #include "dogen/sml/types/service.hpp"
+ #include "dogen/dia/types/composite.hpp"
+ #include "dogen/dia/types/attribute.hpp"
++#include "dogen/sml/types/enumeration.hpp"
++#include "dogen/sml/types/value.hpp"
++#include "dogen/sml/io/value_io.hpp"
+ #include "dogen/dia_to_sml/types/transformation_error.hpp"
+ #include "dogen/dia_to_sml/io/object_types_io.hpp"
+-#include "dogen/sml/types/enumeration.hpp"
+-#include "dogen/sml/types/exception.hpp"
+ #include "dogen/dia_to_sml/types/processed_object.hpp"
+ #include "dogen/dia_to_sml/io/processed_object_io.hpp"
+ #include "dogen/dia_to_sml/io/context_io.hpp"
+@@ -533,7 +534,8 @@ void transformer::transform_note(const processed_object& o) {
+ void transformer::transform_exception(const processed_object& o) {
+     BOOST_LOG_SEV(lg, debug) << "Object is an exception: " << o.id();
+ 
+-    sml::exception e;
++    sml::value e;
++    e.type(sml::value_types::exception);
+     e.generation_type(context_.is_target() ?
+         sml::generation_types::full_generation :
+         sml::generation_types::no_generation);
+@@ -543,6 +545,10 @@ void transformer::transform_exception(const processed_object& o) {
+     e.name(transform_qname(o.name(), meta_types::exception, pkg_id));
+     e.documentation(o.comment());
+     context_.model().exceptions().insert(std::make_pair(e.name(), e));
++
++    for (const auto p : context_.model().exceptions()) {
++        BOOST_LOG_SEV(lg, debug) << "Created exception: " << p.second;
++    }
+ }
+ 
+ void transformer::
+diff --git a/projects/sml/include/dogen/sml/hash/all_hash.hpp b/projects/sml/include/dogen/sml/hash/all_hash.hpp
+index 89ac1ca..c9485d0 100644
+--- a/projects/sml/include/dogen/sml/hash/all_hash.hpp
++++ b/projects/sml/include/dogen/sml/hash/all_hash.hpp
+@@ -23,7 +23,6 @@
+ #include "dogen/sml/hash/entity_hash.hpp"
+ #include "dogen/sml/hash/enumeration_hash.hpp"
+ #include "dogen/sml/hash/enumerator_hash.hpp"
+-#include "dogen/sml/hash/exception_hash.hpp"
+ #include "dogen/sml/hash/factory_hash.hpp"
+ #include "dogen/sml/hash/generation_types_hash.hpp"
+ #include "dogen/sml/hash/meta_types_hash.hpp"
+diff --git a/projects/sml/include/dogen/sml/hash/exception_hash.hpp b/projects/sml/include/dogen/sml/hash/exception_hash.hpp
+deleted file mode 100644
+index 8618533..0000000
+--- a/projects/sml/include/dogen/sml/hash/exception_hash.hpp
++++ /dev/null
+@@ -1,52 +0,0 @@
+-/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+- *
+- * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
+- *
+- * This program is free software; you can redistribute it and/or modify
+- * it under the terms of the GNU General Public License as published by
+- * the Free Software Foundation; either version 3 of the License, or
+- * (at your option) any later version.
+- *
+- * This program is distributed in the hope that it will be useful,
+- * but WITHOUT ANY WARRANTY; without even the implied warranty of
+- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+- * GNU General Public License for more details.
+- *
+- * You should have received a copy of the GNU General Public License
+- * along with this program; if not, write to the Free Software
+- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+- * MA 02110-1301, USA.
+- *
+- */
+-#ifndef DOGEN_SML_HASH_EXCEPTION_HASH_HPP
+-#define DOGEN_SML_HASH_EXCEPTION_HASH_HPP
+-
+-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+-#pragma once
+-#endif
+-
+-#include <functional>
+-#include "dogen/sml/types/exception.hpp"
+-
+-namespace dogen {
+-namespace sml {
+-
+-class exception_hasher {
+-public:
+-    static std::size_t hash(const exception& v);
+-};
+-
+-} }
+-
+-namespace std {
+-
+-template<>
+-class hash<dogen::sml::exception> {
+-public:
+-    size_t operator()(const dogen::sml::exception& v) const {
+-        return dogen::sml::exception_hasher::hash(v);
+-    }
+-};
+-
+-}
+-#endif
+diff --git a/projects/sml/include/dogen/sml/io/all_io.hpp b/projects/sml/include/dogen/sml/io/all_io.hpp
+index 28ffb20..418b008 100644
+--- a/projects/sml/include/dogen/sml/io/all_io.hpp
++++ b/projects/sml/include/dogen/sml/io/all_io.hpp
+@@ -23,7 +23,6 @@
+ #include "dogen/sml/io/entity_io.hpp"
+ #include "dogen/sml/io/enumeration_io.hpp"
+ #include "dogen/sml/io/enumerator_io.hpp"
+-#include "dogen/sml/io/exception_io.hpp"
+ #include "dogen/sml/io/factory_io.hpp"
+ #include "dogen/sml/io/generation_types_io.hpp"
+ #include "dogen/sml/io/meta_types_io.hpp"
+diff --git a/projects/sml/include/dogen/sml/io/exception_io.hpp b/projects/sml/include/dogen/sml/io/exception_io.hpp
+deleted file mode 100644
+index 62541af..0000000
+--- a/projects/sml/include/dogen/sml/io/exception_io.hpp
++++ /dev/null
+@@ -1,40 +0,0 @@
+-/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+- *
+- * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
+- *
+- * This program is free software; you can redistribute it and/or modify
+- * it under the terms of the GNU General Public License as published by
+- * the Free Software Foundation; either version 3 of the License, or
+- * (at your option) any later version.
+- *
+- * This program is distributed in the hope that it will be useful,
+- * but WITHOUT ANY WARRANTY; without even the implied warranty of
+- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+- * GNU General Public License for more details.
+- *
+- * You should have received a copy of the GNU General Public License
+- * along with this program; if not, write to the Free Software
+- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+- * MA 02110-1301, USA.
+- *
+- */
+-#ifndef DOGEN_SML_IO_EXCEPTION_IO_HPP
+-#define DOGEN_SML_IO_EXCEPTION_IO_HPP
+-
+-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+-#pragma once
+-#endif
+-
+-#include <iosfwd>
+-#include "dogen/sml/types/exception.hpp"
+-
+-namespace dogen {
+-namespace sml {
+-
+-std::ostream&
+-operator<<(std::ostream& s,
+-     const dogen::sml::exception& v);
+-
+-} }
+-
+-#endif
+diff --git a/projects/sml/include/dogen/sml/serialization/all_ser.hpp b/projects/sml/include/dogen/sml/serialization/all_ser.hpp
+index 00604b8..c0b2011 100644
+--- a/projects/sml/include/dogen/sml/serialization/all_ser.hpp
++++ b/projects/sml/include/dogen/sml/serialization/all_ser.hpp
+@@ -23,7 +23,6 @@
+ #include "dogen/sml/serialization/entity_ser.hpp"
+ #include "dogen/sml/serialization/enumeration_ser.hpp"
+ #include "dogen/sml/serialization/enumerator_ser.hpp"
+-#include "dogen/sml/serialization/exception_ser.hpp"
+ #include "dogen/sml/serialization/factory_ser.hpp"
+ #include "dogen/sml/serialization/generation_types_ser.hpp"
+ #include "dogen/sml/serialization/meta_types_ser.hpp"
+diff --git a/projects/sml/include/dogen/sml/serialization/exception_fwd_ser.hpp b/projects/sml/include/dogen/sml/serialization/exception_fwd_ser.hpp
+deleted file mode 100644
+index 0412de9..0000000
+--- a/projects/sml/include/dogen/sml/serialization/exception_fwd_ser.hpp
++++ /dev/null
+@@ -1,41 +0,0 @@
+-/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+- *
+- * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
+- *
+- * This program is free software; you can redistribute it and/or modify
+- * it under the terms of the GNU General Public License as published by
+- * the Free Software Foundation; either version 3 of the License, or
+- * (at your option) any later version.
+- *
+- * This program is distributed in the hope that it will be useful,
+- * but WITHOUT ANY WARRANTY; without even the implied warranty of
+- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+- * GNU General Public License for more details.
+- *
+- * You should have received a copy of the GNU General Public License
+- * along with this program; if not, write to the Free Software
+- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+- * MA 02110-1301, USA.
+- *
+- */
+-#ifndef DOGEN_SML_SERIALIZATION_EXCEPTION_FWD_SER_HPP
+-#define DOGEN_SML_SERIALIZATION_EXCEPTION_FWD_SER_HPP
+-
+-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+-#pragma once
+-#endif
+-
+-#include "dogen/sml/types/exception_fwd.hpp"
+-
+-namespace boost {
+-namespace serialization {
+-
+-template<class Archive>
+-void save(Archive& ar, const dogen::sml::exception& v, unsigned int version);
+-
+-template<class Archive>
+-void load(Archive& ar, dogen::sml::exception& v, unsigned int version);
+-
+-} }
+-
+-#endif
+diff --git a/projects/sml/include/dogen/sml/serialization/exception_ser.hpp b/projects/sml/include/dogen/sml/serialization/exception_ser.hpp
+deleted file mode 100644
+index 1af6c3e..0000000
+--- a/projects/sml/include/dogen/sml/serialization/exception_ser.hpp
++++ /dev/null
+@@ -1,43 +0,0 @@
+-/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+- *
+- * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
+- *
+- * This program is free software; you can redistribute it and/or modify
+- * it under the terms of the GNU General Public License as published by
+- * the Free Software Foundation; either version 3 of the License, or
+- * (at your option) any later version.
+- *
+- * This program is distributed in the hope that it will be useful,
+- * but WITHOUT ANY WARRANTY; without even the implied warranty of
+- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+- * GNU General Public License for more details.
+- *
+- * You should have received a copy of the GNU General Public License
+- * along with this program; if not, write to the Free Software
+- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+- * MA 02110-1301, USA.
+- *
+- */
+-#ifndef DOGEN_SML_SERIALIZATION_EXCEPTION_SER_HPP
+-#define DOGEN_SML_SERIALIZATION_EXCEPTION_SER_HPP
+-
+-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+-#pragma once
+-#endif
+-
+-#include <boost/serialization/split_free.hpp>
+-#include "dogen/sml/types/exception.hpp"
+-
+-BOOST_SERIALIZATION_SPLIT_FREE(dogen::sml::exception)
+-namespace boost {
+-namespace serialization {
+-
+-template<typename Archive>
+-void save(Archive& ar, const dogen::sml::exception& v, unsigned int version);
+-
+-template<typename Archive>
+-void load(Archive& ar, dogen::sml::exception& v, unsigned int version);
+-
+-} }
+-
+-#endif
+diff --git a/projects/sml/include/dogen/sml/test_data/all_td.hpp b/projects/sml/include/dogen/sml/test_data/all_td.hpp
+index 87b378c..4f6e2fc 100644
+--- a/projects/sml/include/dogen/sml/test_data/all_td.hpp
++++ b/projects/sml/include/dogen/sml/test_data/all_td.hpp
+@@ -23,7 +23,6 @@
+ #include "dogen/sml/test_data/entity_td.hpp"
+ #include "dogen/sml/test_data/enumeration_td.hpp"
+ #include "dogen/sml/test_data/enumerator_td.hpp"
+-#include "dogen/sml/test_data/exception_td.hpp"
+ #include "dogen/sml/test_data/factory_td.hpp"
+ #include "dogen/sml/test_data/generation_types_td.hpp"
+ #include "dogen/sml/test_data/meta_types_td.hpp"
+diff --git a/projects/sml/include/dogen/sml/test_data/exception_td.hpp b/projects/sml/include/dogen/sml/test_data/exception_td.hpp
+deleted file mode 100644
+index 78cd26b..0000000
+--- a/projects/sml/include/dogen/sml/test_data/exception_td.hpp
++++ /dev/null
+@@ -1,53 +0,0 @@
+-/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+- *
+- * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
+- *
+- * This program is free software; you can redistribute it and/or modify
+- * it under the terms of the GNU General Public License as published by
+- * the Free Software Foundation; either version 3 of the License, or
+- * (at your option) any later version.
+- *
+- * This program is distributed in the hope that it will be useful,
+- * but WITHOUT ANY WARRANTY; without even the implied warranty of
+- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+- * GNU General Public License for more details.
+- *
+- * You should have received a copy of the GNU General Public License
+- * along with this program; if not, write to the Free Software
+- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+- * MA 02110-1301, USA.
+- *
+- */
+-#ifndef DOGEN_SML_TEST_DATA_EXCEPTION_TD_HPP
+-#define DOGEN_SML_TEST_DATA_EXCEPTION_TD_HPP
+-
+-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+-#pragma once
+-#endif
+-
+-#include "dogen/sml/types/exception.hpp"
+-
+-namespace dogen {
+-namespace sml {
+-
+-class exception_generator {
+-public:
+-    exception_generator();
+-
+-public:
+-    typedef dogen::sml::exception result_type;
+-
+-public:
+-    static void populate(const unsigned int position, result_type& v);
+-    static result_type create(const unsigned int position);
+-    result_type operator()();
+-
+-private:
+-    unsigned int position_;
+-public:
+-    static result_type* create_ptr(const unsigned int position);
+-};
+-
+-} }
+-
+-#endif
+diff --git a/projects/sml/include/dogen/sml/types/all.hpp b/projects/sml/include/dogen/sml/types/all.hpp
+index 8922e9b..93a957e 100644
+--- a/projects/sml/include/dogen/sml/types/all.hpp
++++ b/projects/sml/include/dogen/sml/types/all.hpp
+@@ -24,7 +24,6 @@
+ #include "dogen/sml/types/entity.hpp"
+ #include "dogen/sml/types/enumeration.hpp"
+ #include "dogen/sml/types/enumerator.hpp"
+-#include "dogen/sml/types/exception.hpp"
+ #include "dogen/sml/types/factory.hpp"
+ #include "dogen/sml/types/generation_types.hpp"
+ #include "dogen/sml/types/injection_error.hpp"
+diff --git a/projects/sml/include/dogen/sml/types/exception.hpp b/projects/sml/include/dogen/sml/types/exception.hpp
+deleted file mode 100644
+index 86b657b..0000000
+--- a/projects/sml/include/dogen/sml/types/exception.hpp
++++ /dev/null
+@@ -1,121 +0,0 @@
+-/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+- *
+- * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
+- *
+- * This program is free software; you can redistribute it and/or modify
+- * it under the terms of the GNU General Public License as published by
+- * the Free Software Foundation; either version 3 of the License, or
+- * (at your option) any later version.
+- *
+- * This program is distributed in the hope that it will be useful,
+- * but WITHOUT ANY WARRANTY; without even the implied warranty of
+- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+- * GNU General Public License for more details.
+- *
+- * You should have received a copy of the GNU General Public License
+- * along with this program; if not, write to the Free Software
+- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+- * MA 02110-1301, USA.
+- *
+- */
+-#ifndef DOGEN_SML_TYPES_EXCEPTION_HPP
+-#define DOGEN_SML_TYPES_EXCEPTION_HPP
+-
+-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+-#pragma once
+-#endif
+-
+-#include <algorithm>
+-#include <string>
+-#include "dogen/sml/serialization/exception_fwd_ser.hpp"
+-#include "dogen/sml/types/generation_types.hpp"
+-#include "dogen/sml/types/qname.hpp"
+-
+-namespace dogen {
+-namespace sml {
+-
+-/**
+- * @brief Represents errors that occur during application execution.
+- */
+-class exception final {
+-public:
+-    exception(const exception&) = default;
+-    exception(exception&&) = default;
+-    ~exception() = default;
+-
+-public:
+-    exception();
+-
+-public:
+-    exception(
+-        const dogen::sml::qname& name,
+-        const dogen::sml::generation_types& generation_type,
+-        const std::string& documentation);
+-
+-private:
+-    template<typename Archive>
+-    friend void boost::serialization::save(Archive& ar, const exception& v, unsigned int version);
+-
+-    template<typename Archive>
+-    friend void boost::serialization::load(Archive& ar, exception& v, unsigned int version);
+-
+-public:
+-    /**
+-     * @brief Qualified name for the type.
+-     *
+-     */
+-    /**@{*/
+-    const dogen::sml::qname& name() const;
+-    dogen::sml::qname& name();
+-    void name(const dogen::sml::qname& v);
+-    void name(const dogen::sml::qname&& v);
+-    /**@}*/
+-
+-    /**
+-     * @brief What to do with this exception in terms of code generation.
+-     */
+-    /**@{*/
+-    dogen::sml::generation_types generation_type() const;
+-    void generation_type(const dogen::sml::generation_types& v);
+-    /**@}*/
+-
+-    /**
+-     * @brief Doxygen documentation for the type.
+-     */
+-    /**@{*/
+-    const std::string& documentation() const;
+-    std::string& documentation();
+-    void documentation(const std::string& v);
+-    void documentation(const std::string&& v);
+-    /**@}*/
+-
+-public:
+-    bool operator==(const exception& rhs) const;
+-    bool operator!=(const exception& rhs) const {
+-        return !this->operator==(rhs);
+-    }
+-
+-public:
+-    void swap(exception& other) noexcept;
+-    exception& operator=(exception other);
+-
+-private:
+-    dogen::sml::qname name_;
+-    dogen::sml::generation_types generation_type_;
+-    std::string documentation_;
+-};
+-
+-} }
+-
+-namespace std {
+-
+-template<>
+-inline void swap(
+-    dogen::sml::exception& lhs,
+-    dogen::sml::exception& rhs) {
+-    lhs.swap(rhs);
+-}
+-
+-}
+-
+-#endif
+diff --git a/projects/sml/include/dogen/sml/types/exception_fwd.hpp b/projects/sml/include/dogen/sml/types/exception_fwd.hpp
+deleted file mode 100644
+index c997e51..0000000
+--- a/projects/sml/include/dogen/sml/types/exception_fwd.hpp
++++ /dev/null
+@@ -1,35 +0,0 @@
+-/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+- *
+- * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
+- *
+- * This program is free software; you can redistribute it and/or modify
+- * it under the terms of the GNU General Public License as published by
+- * the Free Software Foundation; either version 3 of the License, or
+- * (at your option) any later version.
+- *
+- * This program is distributed in the hope that it will be useful,
+- * but WITHOUT ANY WARRANTY; without even the implied warranty of
+- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+- * GNU General Public License for more details.
+- *
+- * You should have received a copy of the GNU General Public License
+- * along with this program; if not, write to the Free Software
+- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+- * MA 02110-1301, USA.
+- *
+- */
+-#ifndef DOGEN_SML_TYPES_EXCEPTION_FWD_HPP
+-#define DOGEN_SML_TYPES_EXCEPTION_FWD_HPP
+-
+-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+-#pragma once
+-#endif
+-
+-namespace dogen {
+-namespace sml {
+-
+-class exception;
+-
+-} }
+-
+-#endif
+diff --git a/projects/sml/include/dogen/sml/types/model.hpp b/projects/sml/include/dogen/sml/types/model.hpp
+index 619f64a..704d8b7 100644
+--- a/projects/sml/include/dogen/sml/types/model.hpp
++++ b/projects/sml/include/dogen/sml/types/model.hpp
+@@ -36,13 +36,13 @@
+ #include "dogen/sml/serialization/model_fwd_ser.hpp"
+ #include "dogen/sml/types/concept.hpp"
+ #include "dogen/sml/types/enumeration.hpp"
+-#include "dogen/sml/types/exception.hpp"
+ #include "dogen/sml/types/module.hpp"
+ #include "dogen/sml/types/pod.hpp"
+ #include "dogen/sml/types/primitive.hpp"
+ #include "dogen/sml/types/qname.hpp"
+ #include "dogen/sml/types/reference.hpp"
+ #include "dogen/sml/types/service.hpp"
++#include "dogen/sml/types/value.hpp"
+ 
+ namespace dogen {
+ namespace sml {
+@@ -65,7 +65,7 @@ public:
+         const std::unordered_map<dogen::sml::qname, dogen::sml::pod>& pods,
+         const std::unordered_map<dogen::sml::qname, dogen::sml::primitive>& primitives,
+         const std::unordered_map<dogen::sml::qname, dogen::sml::enumeration>& enumerations,
+-        const std::unordered_map<dogen::sml::qname, dogen::sml::exception>& exceptions,
++        const std::unordered_map<dogen::sml::qname, dogen::sml::value>& exceptions,
+         const std::list<std::string>& external_module_path,
+         const bool is_system,
+         const std::unordered_map<std::string, dogen::sml::reference>& dependencies,
+@@ -132,10 +132,10 @@ public:
+      * @brief Exceptions contained in the model.
+      */
+     /**@{*/
+-    const std::unordered_map<dogen::sml::qname, dogen::sml::exception>& exceptions() const;
+-    std::unordered_map<dogen::sml::qname, dogen::sml::exception>& exceptions();
+-    void exceptions(const std::unordered_map<dogen::sml::qname, dogen::sml::exception>& v);
+-    void exceptions(const std::unordered_map<dogen::sml::qname, dogen::sml::exception>&& v);
++    const std::unordered_map<dogen::sml::qname, dogen::sml::value>& exceptions() const;
++    std::unordered_map<dogen::sml::qname, dogen::sml::value>& exceptions();
++    void exceptions(const std::unordered_map<dogen::sml::qname, dogen::sml::value>& v);
++    void exceptions(const std::unordered_map<dogen::sml::qname, dogen::sml::value>&& v);
+     /**@}*/
+ 
+     /**
+@@ -249,7 +249,7 @@ private:
+     std::unordered_map<dogen::sml::qname, dogen::sml::pod> pods_;
+     std::unordered_map<dogen::sml::qname, dogen::sml::primitive> primitives_;
+     std::unordered_map<dogen::sml::qname, dogen::sml::enumeration> enumerations_;
+-    std::unordered_map<dogen::sml::qname, dogen::sml::exception> exceptions_;
++    std::unordered_map<dogen::sml::qname, dogen::sml::value> exceptions_;
+     std::list<std::string> external_module_path_;
+     bool is_system_;
+     std::unordered_map<std::string, dogen::sml::reference> dependencies_;
+diff --git a/projects/sml/spec/equality_spec.cpp b/projects/sml/spec/equality_spec.cpp
+index aad794d..0b3edf4 100644
+--- a/projects/sml/spec/equality_spec.cpp
++++ b/projects/sml/spec/equality_spec.cpp
+@@ -18,7 +18,10 @@
+  * MA 02110-1301, USA.
+  *
+  */
++#include <unordered_map>
+ #include <boost/test/unit_test.hpp>
++#include "dogen/utility/io/unordered_map_io.hpp"
++#include "dogen/utility/test/asserter.hpp"
+ #include "dogen/utility/test/logging.hpp"
+ #include "dogen/utility/test/canned_tests.hpp"
+ #include "dogen/sml/types/all.hpp"
+@@ -34,6 +37,7 @@ const std::string test_suite("equality_spec");
+ }
+ 
+ using namespace dogen::sml;
++using dogen::utility::test::asserter;
+ using namespace dogen::utility::test;
+ 
+ BOOST_AUTO_TEST_SUITE(equality)
+@@ -44,7 +48,6 @@ BOOST_AUTO_TEST_CASE(validate_equality) {
+     test_equality<category_types_generator>();
+     test_equality<enumeration_generator>();
+     test_equality<enumerator_generator>();
+-    test_equality<exception_generator>();
+     test_equality<generation_types_generator>();
+     test_equality<meta_types_generator>();
+     test_equality<model_generator>();
+@@ -63,4 +66,31 @@ BOOST_AUTO_TEST_CASE(validate_equality) {
+     test_equality<concept_generator>();
+ }
+ 
++BOOST_AUTO_TEST_CASE(moving_a_value_results_in_an_equal_object) {
++    SETUP_TEST_LOG_SOURCE("moving_a_value_results_in_an_equal_object");
++
++    value_generator g;
++    const auto e(g());
++    auto tmp(e);
++    const auto a(std::move(tmp));
++    BOOST_CHECK(asserter::assert_object(e, a));
++
++    std::unordered_map<dogen::sml::qname, dogen::sml::value> map;
++    map.insert(std::make_pair(e.name(), e));
++    BOOST_LOG_SEV(lg, debug) << "map: " << map;
++    BOOST_CHECK(asserter::assert_object(e, map.begin()->second));
++}
++
++BOOST_AUTO_TEST_CASE(assigning_a_value_results_in_an_equal_object) {
++    SETUP_TEST_LOG_SOURCE("assigning_a_value_results_in_an_equal_object");
++
++    value_generator g;
++    const auto e(g());
++    dogen::sml::value a;
++    BOOST_CHECK(!asserter::assert_object(e, a));
++
++    a = e;
++    BOOST_CHECK(asserter::assert_object(e, a));
++}
++
+ BOOST_AUTO_TEST_SUITE_END()
+diff --git a/projects/sml/spec/hashing_spec.cpp b/projects/sml/spec/hashing_spec.cpp
+index d918b4c..43a9fa0 100644
+--- a/projects/sml/spec/hashing_spec.cpp
++++ b/projects/sml/spec/hashing_spec.cpp
+@@ -45,7 +45,6 @@ BOOST_AUTO_TEST_CASE(validate_hashing) {
+     test_hashing<category_types_generator>();
+     test_hashing<enumeration_generator>();
+     test_hashing<enumerator_generator>();
+-    test_hashing<exception_generator>();
+     test_hashing<generation_types_generator>();
+     test_hashing<meta_types_generator>();
+     test_hashing<model_generator>();
+diff --git a/projects/sml/spec/io_spec.cpp b/projects/sml/spec/io_spec.cpp
+index bada509..c0bbc75 100644
+--- a/projects/sml/spec/io_spec.cpp
++++ b/projects/sml/spec/io_spec.cpp
+@@ -44,7 +44,6 @@ BOOST_AUTO_TEST_CASE(validate_io) {
+     test_io<category_types_generator>();
+     test_io<enumeration_generator>();
+     test_io<enumerator_generator>();
+-    test_io<exception_generator>();
+     test_io<generation_types_generator>();
+     test_io<meta_types_generator>();
+     test_io<model_generator>();
+diff --git a/projects/sml/spec/move_assignment_copy_spec.cpp b/projects/sml/spec/move_assignment_copy_spec.cpp
+index 1a59887..6206d62 100644
+--- a/projects/sml/spec/move_assignment_copy_spec.cpp
++++ b/projects/sml/spec/move_assignment_copy_spec.cpp
+@@ -44,7 +44,6 @@ BOOST_AUTO_TEST_CASE(validate_move_assignment_copy) {
+     test_move_assignment_copy<category_types_generator>();
+     test_move_assignment_copy<enumeration_generator>();
+     test_move_assignment_copy<enumerator_generator>();
+-    test_move_assignment_copy<exception_generator>();
+     test_move_assignment_copy<generation_types_generator>();
+     test_move_assignment_copy<meta_types_generator>();
+     test_move_assignment_copy<model_generator>();
+diff --git a/projects/sml/spec/serialization_spec.cpp b/projects/sml/spec/serialization_spec.cpp
+index 1ba25d3..8728bf6 100644
+--- a/projects/sml/spec/serialization_spec.cpp
++++ b/projects/sml/spec/serialization_spec.cpp
+@@ -50,7 +50,6 @@ BOOST_AUTO_TEST_CASE(validate_serialization) {
+     rountrip_type<category_types_generator>();
+     rountrip_type<enumeration_generator>();
+     rountrip_type<enumerator_generator>();
+-    rountrip_type<exception_generator>();
+     rountrip_type<generation_types_generator>();
+     rountrip_type<meta_types_generator>();
+     rountrip_type<model_generator>();
+diff --git a/projects/sml/spec/swap_spec.cpp b/projects/sml/spec/swap_spec.cpp
+index 50c68a0..dc52e95 100644
+--- a/projects/sml/spec/swap_spec.cpp
++++ b/projects/sml/spec/swap_spec.cpp
+@@ -44,7 +44,6 @@ BOOST_AUTO_TEST_CASE(validate_swap) {
+     test_swap<category_types_generator>();
+     test_swap<enumeration_generator>();
+     test_swap<enumerator_generator>();
+-    test_swap<exception_generator>();
+     test_swap<generation_types_generator>();
+     test_swap<meta_types_generator>();
+     test_swap<model_generator>();
+diff --git a/projects/sml/src/hash/exception_hash.cpp b/projects/sml/src/hash/exception_hash.cpp
+deleted file mode 100644
+index 22b87e1..0000000
+--- a/projects/sml/src/hash/exception_hash.cpp
++++ /dev/null
+@@ -1,49 +0,0 @@
+-/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+- *
+- * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
+- *
+- * This program is free software; you can redistribute it and/or modify
+- * it under the terms of the GNU General Public License as published by
+- * the Free Software Foundation; either version 3 of the License, or
+- * (at your option) any later version.
+- *
+- * This program is distributed in the hope that it will be useful,
+- * but WITHOUT ANY WARRANTY; without even the implied warranty of
+- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+- * GNU General Public License for more details.
+- *
+- * You should have received a copy of the GNU General Public License
+- * along with this program; if not, write to the Free Software
+- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+- * MA 02110-1301, USA.
+- *
+- */
+-#include "dogen/sml/hash/exception_hash.hpp"
+-#include "dogen/sml/hash/generation_types_hash.hpp"
+-#include "dogen/sml/hash/qname_hash.hpp"
+-
+-namespace {
+-
+-template <typename HashableType>
+-inline void combine(std::size_t& seed, const HashableType& value)
+-{
+-    std::hash<HashableType> hasher;
+-    seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
+-}
+-
+-}
+-
+-namespace dogen {
+-namespace sml {
+-
+-std::size_t exception_hasher::hash(const exception&v) {
+-    std::size_t seed(0);
+-
+-    combine(seed, v.name());
+-    combine(seed, v.generation_type());
+-    combine(seed, v.documentation());
+-
+-    return seed;
+-}
+-
+-} }
+diff --git a/projects/sml/src/hash/model_hash.cpp b/projects/sml/src/hash/model_hash.cpp
+index 98c6b5a..b388916 100644
+--- a/projects/sml/src/hash/model_hash.cpp
++++ b/projects/sml/src/hash/model_hash.cpp
+@@ -20,7 +20,6 @@
+  */
+ #include "dogen/sml/hash/concept_hash.hpp"
+ #include "dogen/sml/hash/enumeration_hash.hpp"
+-#include "dogen/sml/hash/exception_hash.hpp"
+ #include "dogen/sml/hash/model_hash.hpp"
+ #include "dogen/sml/hash/module_hash.hpp"
+ #include "dogen/sml/hash/pod_hash.hpp"
+@@ -28,6 +27,7 @@
+ #include "dogen/sml/hash/qname_hash.hpp"
+ #include "dogen/sml/hash/reference_hash.hpp"
+ #include "dogen/sml/hash/service_hash.hpp"
++#include "dogen/sml/hash/value_hash.hpp"
+ 
+ namespace {
+ 
+@@ -65,7 +65,7 @@ inline std::size_t hash_std_unordered_map_dogen_sml_qname_dogen_sml_enumeration(
+     return seed;
+ }
+ 
+-inline std::size_t hash_std_unordered_map_dogen_sml_qname_dogen_sml_exception(const std::unordered_map<dogen::sml::qname, dogen::sml::exception>& v){
++inline std::size_t hash_std_unordered_map_dogen_sml_qname_dogen_sml_value(const std::unordered_map<dogen::sml::qname, dogen::sml::value>& v){
+     std::size_t seed(0);
+     for (const auto i : v) {
+         combine(seed, i.first);
+@@ -154,7 +154,7 @@ std::size_t model_hasher::hash(const model&v) {
+     combine(seed, hash_std_unordered_map_dogen_sml_qname_dogen_sml_pod(v.pods()));
+     combine(seed, hash_std_unordered_map_dogen_sml_qname_dogen_sml_primitive(v.primitives()));
+     combine(seed, hash_std_unordered_map_dogen_sml_qname_dogen_sml_enumeration(v.enumerations()));
+-    combine(seed, hash_std_unordered_map_dogen_sml_qname_dogen_sml_exception(v.exceptions()));
++    combine(seed, hash_std_unordered_map_dogen_sml_qname_dogen_sml_value(v.exceptions()));
+     combine(seed, hash_std_list_std_string(v.external_module_path()));
+     combine(seed, v.is_system());
+     combine(seed, hash_std_unordered_map_std_string_dogen_sml_reference(v.dependencies()));
+diff --git a/projects/sml/src/io/exception_io.cpp b/projects/sml/src/io/exception_io.cpp
+deleted file mode 100644
+index b2446ad..0000000
+--- a/projects/sml/src/io/exception_io.cpp
++++ /dev/null
+@@ -1,48 +0,0 @@
+-/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+- *
+- * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
+- *
+- * This program is free software; you can redistribute it and/or modify
+- * it under the terms of the GNU General Public License as published by
+- * the Free Software Foundation; either version 3 of the License, or
+- * (at your option) any later version.
+- *
+- * This program is distributed in the hope that it will be useful,
+- * but WITHOUT ANY WARRANTY; without even the implied warranty of
+- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+- * GNU General Public License for more details.
+- *
+- * You should have received a copy of the GNU General Public License
+- * along with this program; if not, write to the Free Software
+- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+- * MA 02110-1301, USA.
+- *
+- */
+-#include <boost/algorithm/string.hpp>
+-#include <ostream>
+-#include "dogen/sml/io/exception_io.hpp"
+-#include "dogen/sml/io/generation_types_io.hpp"
+-#include "dogen/sml/io/qname_io.hpp"
+-
+-
+-inline std::string tidy_up_string(std::string s) {
+-    boost::replace_all(s, "\r\n", "<new_line>");
+-    boost::replace_all(s, "\n", "<new_line>");
+-    boost::replace_all(s, "\"", "<quote>");
+-    return s;
+-}
+-
+-namespace dogen {
+-namespace sml {
+-
+-std::ostream& operator<<(std::ostream& s, const exception& v) {
+-    s << " { "
+-      << "\"__type__\": " << "\"dogen::sml::exception\"" << ", "
+-      << "\"name\": " << v.name() << ", "
+-      << "\"generation_type\": " << v.generation_type() << ", "
+-      << "\"documentation\": " << "\"" << tidy_up_string(v.documentation()) << "\""
+-      << " }";
+-    return(s);
+-}
+-
+-} }
+\ No newline at end of file
+diff --git a/projects/sml/src/io/model_io.cpp b/projects/sml/src/io/model_io.cpp
+index 4713a35..4d62962 100644
+--- a/projects/sml/src/io/model_io.cpp
++++ b/projects/sml/src/io/model_io.cpp
+@@ -23,7 +23,6 @@
+ #include <ostream>
+ #include "dogen/sml/io/concept_io.hpp"
+ #include "dogen/sml/io/enumeration_io.hpp"
+-#include "dogen/sml/io/exception_io.hpp"
+ #include "dogen/sml/io/model_io.hpp"
+ #include "dogen/sml/io/module_io.hpp"
+ #include "dogen/sml/io/pod_io.hpp"
+@@ -31,6 +30,7 @@
+ #include "dogen/sml/io/qname_io.hpp"
+ #include "dogen/sml/io/reference_io.hpp"
+ #include "dogen/sml/io/service_io.hpp"
++#include "dogen/sml/io/value_io.hpp"
+ 
+ 
+ inline std::string tidy_up_string(std::string s) {
+@@ -96,7 +96,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen:
+ 
+ namespace std {
+ 
+-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen::sml::qname, dogen::sml::exception>& v) {
++inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen::sml::qname, dogen::sml::value>& v) {
+     s << "[";
+     for (auto i(v.begin()); i != v.end(); ++i) {
+         if (i != v.begin()) s << ", ";
+diff --git a/projects/sml/src/serialization/exception_ser.cpp b/projects/sml/src/serialization/exception_ser.cpp
+deleted file mode 100644
+index d20f93a..0000000
+--- a/projects/sml/src/serialization/exception_ser.cpp
++++ /dev/null
+@@ -1,83 +0,0 @@
+-/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+- *
+- * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
+- *
+- * This program is free software; you can redistribute it and/or modify
+- * it under the terms of the GNU General Public License as published by
+- * the Free Software Foundation; either version 3 of the License, or
+- * (at your option) any later version.
+- *
+- * This program is distributed in the hope that it will be useful,
+- * but WITHOUT ANY WARRANTY; without even the implied warranty of
+- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+- * GNU General Public License for more details.
+- *
+- * You should have received a copy of the GNU General Public License
+- * along with this program; if not, write to the Free Software
+- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+- * MA 02110-1301, USA.
+- *
+- */
+-#include <boost/archive/binary_iarchive.hpp>
+-#include <boost/archive/binary_oarchive.hpp>
+-#include <boost/archive/polymorphic_iarchive.hpp>
+-#include <boost/archive/polymorphic_oarchive.hpp>
+-#include <boost/archive/text_iarchive.hpp>
+-#include <boost/archive/text_oarchive.hpp>
+-#include <boost/archive/xml_iarchive.hpp>
+-#include <boost/archive/xml_oarchive.hpp>
+-#include <boost/serialization/nvp.hpp>
+-#include <boost/serialization/string.hpp>
+-#include "dogen/sml/serialization/exception_ser.hpp"
+-#include "dogen/sml/serialization/generation_types_ser.hpp"
+-#include "dogen/sml/serialization/qname_ser.hpp"
+-
+-#ifdef __linux__
+-#include "eos/portable_iarchive.hpp"
+-#include "eos/portable_oarchive.hpp"
+-#endif
+-
+-namespace boost {
+-namespace serialization {
+-
+-template<typename Archive>
+-void save(Archive& ar,
+-    const dogen::sml::exception& v,
+-    const unsigned int /*version*/) {
+-    ar << make_nvp("name", v.name_);
+-    ar << make_nvp("generation_type", v.generation_type_);
+-    ar << make_nvp("documentation", v.documentation_);
+-}
+-
+-template<typename Archive>
+-void load(Archive& ar,
+-    dogen::sml::exception& v,
+-    const unsigned int /*version*/) {
+-    ar >> make_nvp("name", v.name_);
+-    ar >> make_nvp("generation_type", v.generation_type_);
+-    ar >> make_nvp("documentation", v.documentation_);
+-}
+-
+-} }
+-
+-namespace boost {
+-namespace serialization {
+-
+-template void save(archive::polymorphic_oarchive& ar, const dogen::sml::exception& v, unsigned int version);
+-template void load(archive::polymorphic_iarchive& ar, dogen::sml::exception& v, unsigned int version);
+-
+-template void save(archive::text_oarchive& ar, const dogen::sml::exception& v, unsigned int version);
+-template void load(archive::text_iarchive& ar, dogen::sml::exception& v, unsigned int version);
+-
+-template void save(archive::binary_oarchive& ar, const dogen::sml::exception& v, unsigned int version);
+-template void load(archive::binary_iarchive& ar, dogen::sml::exception& v, unsigned int version);
+-
+-template void save(archive::xml_oarchive& ar, const dogen::sml::exception& v, unsigned int version);
+-template void load(archive::xml_iarchive& ar, dogen::sml::exception& v, unsigned int version);
+-
+-#ifdef __linux__
+-template void save(eos::portable_oarchive& ar, const dogen::sml::exception& v, unsigned int version);
+-template void load(eos::portable_iarchive& ar, dogen::sml::exception& v, unsigned int version);
+-#endif
+-
+-} }
+\ No newline at end of file
+diff --git a/projects/sml/src/serialization/model_ser.cpp b/projects/sml/src/serialization/model_ser.cpp
+index f4ac7fd..4e1c79a 100644
+--- a/projects/sml/src/serialization/model_ser.cpp
++++ b/projects/sml/src/serialization/model_ser.cpp
+@@ -33,7 +33,6 @@
+ #include <boost/serialization/vector.hpp>
+ #include "dogen/sml/serialization/concept_ser.hpp"
+ #include "dogen/sml/serialization/enumeration_ser.hpp"
+-#include "dogen/sml/serialization/exception_ser.hpp"
+ #include "dogen/sml/serialization/model_ser.hpp"
+ #include "dogen/sml/serialization/module_ser.hpp"
+ #include "dogen/sml/serialization/pod_ser.hpp"
+@@ -41,6 +40,7 @@
+ #include "dogen/sml/serialization/qname_ser.hpp"
+ #include "dogen/sml/serialization/reference_ser.hpp"
+ #include "dogen/sml/serialization/service_ser.hpp"
++#include "dogen/sml/serialization/value_ser.hpp"
+ #include "dogen/utility/serialization/unordered_map.hpp"
+ #include "dogen/utility/serialization/unordered_set.hpp"
+ 
+diff --git a/projects/sml/src/test/mock_model_factory.cpp b/projects/sml/src/test/mock_model_factory.cpp
+index 585c0ff..83f3a8e 100644
+--- a/projects/sml/src/test/mock_model_factory.cpp
++++ b/projects/sml/src/test/mock_model_factory.cpp
+@@ -212,7 +212,7 @@ mock_enumeration(const unsigned int i, const std::string& model_name,
+     return r;
+ }
+ 
+-dogen::sml::exception
++dogen::sml::value
+ mock_exception(const unsigned int i, const std::string& model_name,
+     const unsigned int module_n = 0) {
+     dogen::sml::qname qn;
+@@ -223,10 +223,11 @@ mock_exception(const unsigned int i, const std::string& model_name,
+     for (unsigned int i(0); i < module_n; ++i)
+         qn.module_path().push_back(module_name(i));
+ 
+-    dogen::sml::exception r;
++    dogen::sml::value r;
+     r.name(qn);
+     r.generation_type(dogen::sml::generation_types::full_generation);
+     r.documentation(documentation);
++    r.type(dogen::sml::value_types::exception);
+     return r;
+ }
+ 
+diff --git a/projects/sml/src/test_data/exception_td.cpp b/projects/sml/src/test_data/exception_td.cpp
+deleted file mode 100644
+index b19afe8..0000000
+--- a/projects/sml/src/test_data/exception_td.cpp
++++ /dev/null
+@@ -1,76 +0,0 @@
+-/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+- *
+- * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
+- *
+- * This program is free software; you can redistribute it and/or modify
+- * it under the terms of the GNU General Public License as published by
+- * the Free Software Foundation; either version 3 of the License, or
+- * (at your option) any later version.
+- *
+- * This program is distributed in the hope that it will be useful,
+- * but WITHOUT ANY WARRANTY; without even the implied warranty of
+- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+- * GNU General Public License for more details.
+- *
+- * You should have received a copy of the GNU General Public License
+- * along with this program; if not, write to the Free Software
+- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+- * MA 02110-1301, USA.
+- *
+- */
+-#include <sstream>
+-#include "dogen/sml/test_data/exception_td.hpp"
+-#include "dogen/sml/test_data/generation_types_td.hpp"
+-#include "dogen/sml/test_data/qname_td.hpp"
+-
+-namespace {
+-
+-dogen::sml::qname
+-create_dogen_sml_qname(const unsigned int position) {
+-    return dogen::sml::qname_generator::create(position);
+-}
+-
+-dogen::sml::generation_types
+-create_dogen_sml_generation_types(const unsigned int position) {
+-    return dogen::sml::generation_types_generator::create(position);
+-}
+-
+-std::string create_std_string(const unsigned int position) {
+-    std::ostringstream s;
+-    s << "a_string_" << position;
+-    return s.str();
+-}
+-
+-}
+-
+-namespace dogen {
+-namespace sml {
+-
+-exception_generator::exception_generator() : position_(0) { }
+-
+-void exception_generator::
+-populate(const unsigned int position, result_type& v) {
+-    v.name(create_dogen_sml_qname(position + 0));
+-    v.generation_type(create_dogen_sml_generation_types(position + 1));
+-    v.documentation(create_std_string(position + 2));
+-}
+-
+-exception_generator::result_type
+-exception_generator::create(const unsigned int position) {
+-    exception r;
+-    exception_generator::populate(position, r);
+-    return r;
+-}
+-exception_generator::result_type*
+-exception_generator::create_ptr(const unsigned int position) {
+-    exception* p = new exception();
+-    exception_generator::populate(position, *p);
+-    return p;
+-}
+-
+-exception_generator::result_type
+-exception_generator::operator()() {
+-    return create(position_++);
+-}
+-
+-} }
+diff --git a/projects/sml/src/test_data/model_td.cpp b/projects/sml/src/test_data/model_td.cpp
+index bab2ee3..4f1a738 100644
+--- a/projects/sml/src/test_data/model_td.cpp
++++ b/projects/sml/src/test_data/model_td.cpp
+@@ -21,7 +21,6 @@
+ #include <sstream>
+ #include "dogen/sml/test_data/concept_td.hpp"
+ #include "dogen/sml/test_data/enumeration_td.hpp"
+-#include "dogen/sml/test_data/exception_td.hpp"
+ #include "dogen/sml/test_data/model_td.hpp"
+ #include "dogen/sml/test_data/module_td.hpp"
+ #include "dogen/sml/test_data/pod_td.hpp"
+@@ -29,6 +28,7 @@
+ #include "dogen/sml/test_data/qname_td.hpp"
+ #include "dogen/sml/test_data/reference_td.hpp"
+ #include "dogen/sml/test_data/service_td.hpp"
++#include "dogen/sml/test_data/value_td.hpp"
+ 
+ namespace {
+ 
+@@ -82,15 +82,15 @@ std::unordered_map<dogen::sml::qname, dogen::sml::enumeration> create_std_unorde
+     return r;
+ }
+ 
+-dogen::sml::exception
+-create_dogen_sml_exception(const unsigned int position) {
+-    return dogen::sml::exception_generator::create(position);
++dogen::sml::value
++create_dogen_sml_value(const unsigned int position) {
++    return dogen::sml::value_generator::create(position);
+ }
+ 
+-std::unordered_map<dogen::sml::qname, dogen::sml::exception> create_std_unordered_map_dogen_sml_qname_dogen_sml_exception(unsigned int position) {
+-    std::unordered_map<dogen::sml::qname, dogen::sml::exception> r;
++std::unordered_map<dogen::sml::qname, dogen::sml::value> create_std_unordered_map_dogen_sml_qname_dogen_sml_value(unsigned int position) {
++    std::unordered_map<dogen::sml::qname, dogen::sml::value> r;
+     for (unsigned int i(0); i < 10; ++i) {
+-        r.insert(std::make_pair(create_dogen_sml_qname(position + i), create_dogen_sml_exception(position + i)));
++        r.insert(std::make_pair(create_dogen_sml_qname(position + i), create_dogen_sml_value(position + i)));
+     }
+     return r;
+ }
+@@ -196,7 +196,7 @@ populate(const unsigned int position, result_type& v) {
+     v.pods(create_std_unordered_map_dogen_sml_qname_dogen_sml_pod(position + 1));
+     v.primitives(create_std_unordered_map_dogen_sml_qname_dogen_sml_primitive(position + 2));
+     v.enumerations(create_std_unordered_map_dogen_sml_qname_dogen_sml_enumeration(position + 3));
+-    v.exceptions(create_std_unordered_map_dogen_sml_qname_dogen_sml_exception(position + 4));
++    v.exceptions(create_std_unordered_map_dogen_sml_qname_dogen_sml_value(position + 4));
+     v.external_module_path(create_std_list_std_string(position + 5));
+     v.is_system(create_bool(position + 6));
+     v.dependencies(create_std_unordered_map_std_string_dogen_sml_reference(position + 7));
+diff --git a/projects/sml/src/types/exception.cpp b/projects/sml/src/types/exception.cpp
+deleted file mode 100644
+index 526de3f..0000000
+--- a/projects/sml/src/types/exception.cpp
++++ /dev/null
+@@ -1,96 +0,0 @@
+-/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+- *
+- * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
+- *
+- * This program is free software; you can redistribute it and/or modify
+- * it under the terms of the GNU General Public License as published by
+- * the Free Software Foundation; either version 3 of the License, or
+- * (at your option) any later version.
+- *
+- * This program is distributed in the hope that it will be useful,
+- * but WITHOUT ANY WARRANTY; without even the implied warranty of
+- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+- * GNU General Public License for more details.
+- *
+- * You should have received a copy of the GNU General Public License
+- * along with this program; if not, write to the Free Software
+- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+- * MA 02110-1301, USA.
+- *
+- */
+-#include "dogen/sml/types/exception.hpp"
+-
+-namespace dogen {
+-namespace sml {
+-
+-exception::exception()
+-    : generation_type_(static_cast<dogen::sml::generation_types>(0)) { }
+-
+-exception::exception(
+-    const dogen::sml::qname& name,
+-    const dogen::sml::generation_types& generation_type,
+-    const std::string& documentation)
+-    : name_(name),
+-      generation_type_(generation_type),
+-      documentation_(documentation) { }
+-
+-void exception::swap(exception& other) noexcept {
+-    using std::swap;
+-    swap(name_, other.name_);
+-    swap(generation_type_, other.generation_type_);
+-    swap(documentation_, other.documentation_);
+-}
+-
+-bool exception::operator==(const exception& rhs) const {
+-    return name_ == rhs.name_ &&
+-        generation_type_ == rhs.generation_type_ &&
+-        documentation_ == rhs.documentation_;
+-}
+-
+-exception& exception::operator=(exception other) {
+-    using std::swap;
+-    swap(*this, other);
+-    return *this;
+-}
+-
+-const dogen::sml::qname& exception::name() const {
+-    return name_;
+-}
+-
+-dogen::sml::qname& exception::name() {
+-    return name_;
+-}
+-
+-void exception::name(const dogen::sml::qname& v) {
+-    name_ = v;
+-}
+-
+-void exception::name(const dogen::sml::qname&& v) {
+-    name_ = std::move(v);
+-}
+-
+-dogen::sml::generation_types exception::generation_type() const {
+-    return generation_type_;
+-}
+-
+-void exception::generation_type(const dogen::sml::generation_types& v) {
+-    generation_type_ = v;
+-}
+-
+-const std::string& exception::documentation() const {
+-    return documentation_;
+-}
+-
+-std::string& exception::documentation() {
+-    return documentation_;
+-}
+-
+-void exception::documentation(const std::string& v) {
+-    documentation_ = v;
+-}
+-
+-void exception::documentation(const std::string&& v) {
+-    documentation_ = std::move(v);
+-}
+-
+-} }
+\ No newline at end of file
+diff --git a/projects/sml/src/types/model.cpp b/projects/sml/src/types/model.cpp
+index 8aa4231..21d2e73 100644
+--- a/projects/sml/src/types/model.cpp
++++ b/projects/sml/src/types/model.cpp
+@@ -31,7 +31,7 @@ model::model(
+     const std::unordered_map<dogen::sml::qname, dogen::sml::pod>& pods,
+     const std::unordered_map<dogen::sml::qname, dogen::sml::primitive>& primitives,
+     const std::unordered_map<dogen::sml::qname, dogen::sml::enumeration>& enumerations,
+-    const std::unordered_map<dogen::sml::qname, dogen::sml::exception>& exceptions,
++    const std::unordered_map<dogen::sml::qname, dogen::sml::value>& exceptions,
+     const std::list<std::string>& external_module_path,
+     const bool is_system,
+     const std::unordered_map<std::string, dogen::sml::reference>& dependencies,
+@@ -161,19 +161,19 @@ void model::enumerations(const std::unordered_map<dogen::sml::qname, dogen::sml:
+     enumerations_ = std::move(v);
+ }
+ 
+-const std::unordered_map<dogen::sml::qname, dogen::sml::exception>& model::exceptions() const {
++const std::unordered_map<dogen::sml::qname, dogen::sml::value>& model::exceptions() const {
+     return exceptions_;
+ }
+ 
+-std::unordered_map<dogen::sml::qname, dogen::sml::exception>& model::exceptions() {
++std::unordered_map<dogen::sml::qname, dogen::sml::value>& model::exceptions() {
+     return exceptions_;
+ }
+ 
+-void model::exceptions(const std::unordered_map<dogen::sml::qname, dogen::sml::exception>& v) {
++void model::exceptions(const std::unordered_map<dogen::sml::qname, dogen::sml::value>& v) {
+     exceptions_ = v;
+ }
+ 
+-void model::exceptions(const std::unordered_map<dogen::sml::qname, dogen::sml::exception>&& v) {
++void model::exceptions(const std::unordered_map<dogen::sml::qname, dogen::sml::value>&& v) {
+     exceptions_ = std::move(v);
+ }
+ 
