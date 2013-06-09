@@ -24,6 +24,9 @@
 #include <boost/archive/polymorphic_oarchive.hpp>
 #include <boost/archive/text_iarchive.hpp>
 #include <boost/archive/text_oarchive.hpp>
+#include <boost/archive/xml_iarchive.hpp>
+#include <boost/archive/xml_oarchive.hpp>
+#include <boost/serialization/nvp.hpp>
 #include "dogen/enable_facet_serialization/serialization/package1/first_class_ser.hpp"
 
 #ifdef __linux__
@@ -38,16 +41,16 @@ template<typename Archive>
 void save(Archive& ar,
     const dogen::enable_facet_serialization::package1::first_class& v,
     const unsigned int /*version*/) {
-    ar << v.public_attribute_;
-    ar << v.private_attribute_;
+    ar << make_nvp("public_attribute", v.public_attribute_);
+    ar << make_nvp("private_attribute", v.private_attribute_);
 }
 
 template<typename Archive>
 void load(Archive& ar,
     dogen::enable_facet_serialization::package1::first_class& v,
     const unsigned int /*version*/) {
-    ar >> v.public_attribute_;
-    ar >> v.private_attribute_;
+    ar >> make_nvp("public_attribute", v.public_attribute_);
+    ar >> make_nvp("private_attribute", v.private_attribute_);
 }
 
 } }
@@ -63,6 +66,9 @@ template void load(archive::text_iarchive& ar, dogen::enable_facet_serialization
 
 template void save(archive::binary_oarchive& ar, const dogen::enable_facet_serialization::package1::first_class& v, unsigned int version);
 template void load(archive::binary_iarchive& ar, dogen::enable_facet_serialization::package1::first_class& v, unsigned int version);
+
+template void save(archive::xml_oarchive& ar, const dogen::enable_facet_serialization::package1::first_class& v, unsigned int version);
+template void load(archive::xml_iarchive& ar, dogen::enable_facet_serialization::package1::first_class& v, unsigned int version);
 
 #ifdef __linux__
 template void save(eos::portable_oarchive& ar, const dogen::enable_facet_serialization::package1::first_class& v, unsigned int version);

@@ -82,4 +82,12 @@ BOOST_AUTO_TEST_CASE(validate_io) {
     test_io<a_class_generator>();
 }
 
+BOOST_AUTO_TEST_CASE(validate_move_assignment_copy) {
+    SETUP_TEST_LOG("validate_move_assignment_copy");
+    test_move_assignment_copy<book_types_generator>();
+    test_move_assignment_copy<colour_types_generator>();
+    test_move_assignment_copy<pkg1::shape_types_generator>();
+    test_move_assignment_copy<a_class_generator>();
+}
+
 BOOST_AUTO_TEST_SUITE_END()

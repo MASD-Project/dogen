@@ -50,10 +50,7 @@ public:
 
         std::stringstream s;
         s << a;
-        if (!json_validator::validate(s)) {
-            BOOST_LOG_SEV(lg, error) << "JSON fails to validate";
-            BOOST_CHECK_MESSAGE(false, "JSON fails to validate");
-        }
+        BOOST_CHECK(json_validator::validate(s));
     }
 };
 

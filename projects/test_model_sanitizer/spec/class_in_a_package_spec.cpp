@@ -67,4 +67,9 @@ BOOST_AUTO_TEST_CASE(validate_io) {
     test_io<package1::first_class_generator>();
 }
 
+BOOST_AUTO_TEST_CASE(validate_move_assignment_copy) {
+    SETUP_TEST_LOG("validate_move_assignment_copy");
+    test_move_assignment_copy<package1::first_class_generator>();
+}
+
 BOOST_AUTO_TEST_SUITE_END()

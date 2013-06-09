@@ -335,7 +335,7 @@ BOOST_AUTO_TEST_CASE(enable_facet_serialization_generates_expected_code) {
                 cpp_facet_types::serialization
             };
             cs.enabled_facets(f);
-            cs.disable_xml_serialization(true);
+            cs.disable_xml_serialization(false);
             s.cpp(cs);
             return s;
         });

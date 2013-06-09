@@ -67,7 +67,12 @@ contains a visitable type is just a reference rather than the target.
 For some reason we are not populating all classes across the
 inheritance tree.
 
-*** IMPLEMENTATION Test move constructors in test model               :spike:
+*** COMPLETED Test move constructors in test model                    :spike:
+    CLOSED: [2013-06-09 Sun 23:42]
+    CLOCK: [2013-06-09 Sun 23:48]--[2013-06-09 Sun 23:52] =>  0:04
+    CLOCK: [2013-06-09 Sun 23:42]--[2013-06-09 Sun 23:48] =>  0:06
+    CLOCK: [2013-06-09 Sun 22:34]--[2013-06-09 Sun 23:42] =>  1:08
+    CLOCK: [2013-06-09 Sun 22:00]--[2013-06-09 Sun 22:34] =>  0:34
     CLOCK: [2013-06-09 Sun 18:46]--[2013-06-09 Sun 19:10] =>  0:24
     CLOCK: [2013-06-09 Sun 18:10]--[2013-06-09 Sun 18:46] =>  0:36
 

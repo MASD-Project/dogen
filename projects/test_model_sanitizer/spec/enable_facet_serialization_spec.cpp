@@ -23,9 +23,9 @@
 #include "dogen/utility/test/logging.hpp"
 #include "dogen/utility/test/macros.hpp"
 #include "dogen/utility/test/canned_tests.hpp"
+#include "dogen/enable_facet_serialization/serialization/all_ser.hpp"
 #include "dogen/test_model_sanitizer/register_types.hpp"
 #include "dogen/enable_facet_serialization/types/all.hpp"
-#include "dogen/enable_facet_serialization/serialization/all_ser.hpp"
 
 namespace {
 
@@ -72,14 +72,19 @@ BOOST_AUTO_TEST_CASE(validate_equality) {
     test_equality<first_class_generator>();
 }
 
-BOOST_IGNORE_AUTO_TEST_CASE(validate_serialisation) {
+BOOST_AUTO_TEST_CASE(validate_serialisation) {
     SETUP_TEST_LOG("validate_serialisation");
-    // rountrip_type<first_class_generator>();
+    rountrip_type<first_class_generator>();
 }
 
 BOOST_AUTO_TEST_CASE(validate_swap) {
     SETUP_TEST_LOG("validate_swap");
     test_swap<first_class_generator>();
+}
+
+BOOST_AUTO_TEST_CASE(validate_move_assignment_copy) {
+    SETUP_TEST_LOG("validate_move_assignment_copy");
+    test_move_assignment_copy<first_class_generator>();
 }
 
 BOOST_AUTO_TEST_SUITE_END()

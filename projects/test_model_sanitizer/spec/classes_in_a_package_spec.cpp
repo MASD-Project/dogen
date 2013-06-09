@@ -88,4 +88,13 @@ BOOST_AUTO_TEST_CASE(validate_io) {
     test_io<class_5_generator>();
 }
 
+BOOST_AUTO_TEST_CASE(validate_move_assignment_copy) {
+    SETUP_TEST_LOG("validate_move_assignment_copy");
+    test_move_assignment_copy<class_1_generator>();
+    test_move_assignment_copy<class_2_generator>();
+    test_move_assignment_copy<class_3_generator>();
+    test_move_assignment_copy<class_4_generator>();
+    test_move_assignment_copy<class_5_generator>();
+}
+
 BOOST_AUTO_TEST_SUITE_END()

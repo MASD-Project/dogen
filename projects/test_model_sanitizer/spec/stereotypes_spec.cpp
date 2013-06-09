@@ -216,6 +216,43 @@ BOOST_AUTO_TEST_CASE(validate_io) {
     test_io<aggregate_root_generator>();
 }
 
+BOOST_AUTO_TEST_CASE(validate_move_assignment_copy) {
+    SETUP_TEST_LOG("validate_move_assignment_copy");
+    // NOTE: skipping immutable_one_primitive because boolean types
+    // don't play well with our requirement that the parameter passed
+    // in must not be equal to a default constructed type.
+    test_move_assignment_copy<entity_generator>();
+    test_move_assignment_copy<value_generator>();
+    test_move_assignment_copy<immutable_four_generator>();
+    test_move_assignment_copy<immutable_one_non_primitive_generator>();
+    test_move_assignment_copy<immutable_two_generator>();
+    test_move_assignment_copy<fluent_generator>();
+    test_move_assignment_copy<composite_identity_generator>();
+    test_move_assignment_copy<composite_identity_unversioned_key_generator>();
+    test_move_assignment_copy<composite_identity_ver_generator>();
+    test_move_assignment_copy<composite_identity_ver_unversioned_key_generator>();
+    test_move_assignment_copy<composite_identity_ver_versioned_key_generator>();
+    test_move_assignment_copy<entity_generator>();
+    test_move_assignment_copy<fluent_generator>();
+    test_move_assignment_copy<identity_and_other_generator>();
+    test_move_assignment_copy<identity_and_other_unversioned_key_generator>();
+    test_move_assignment_copy<identity_and_other_ver_generator>();
+    test_move_assignment_copy<identity_and_other_ver_unversioned_key_generator>();
+    test_move_assignment_copy<identity_and_other_ver_versioned_key_generator>();
+    test_move_assignment_copy<identity_pod_generator>();
+    test_move_assignment_copy<identity_pod_unversioned_key_generator>();
+    test_move_assignment_copy<identity_pod_versioned_key_generator>();
+    test_move_assignment_copy<just_identity_generator>();
+    test_move_assignment_copy<just_identity_unversioned_key_generator>();
+    test_move_assignment_copy<just_identity_ver_generator>();
+    test_move_assignment_copy<just_identity_ver_unversioned_key_generator>();
+    test_move_assignment_copy<just_identity_ver_versioned_key_generator>();
+    test_move_assignment_copy<pkg1::keyed_in_package_generator>();
+    test_move_assignment_copy<pkg1::keyed_in_package_unversioned_key_generator>();
+    test_move_assignment_copy<versioned_generator>();
+    test_move_assignment_copy<aggregate_root_generator>();
+}
+
 BOOST_AUTO_TEST_CASE(setting_properties_using_the_fluent_interface_produces_expected_result) {
     SETUP_TEST_LOG("setting_properties_using_the_fluent_interface_produces_expected_result");
 

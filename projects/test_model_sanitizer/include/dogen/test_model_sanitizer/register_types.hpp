@@ -63,6 +63,7 @@ template<typename Archive> void register_types(Archive& ar) {
     dogen::split_project::register_types<Archive>(ar);
     dogen::stand_alone_class::register_types<Archive>(ar);
     dogen::std_model::register_types<Archive>(ar);
+    dogen::enable_facet_serialization::register_types<Archive>(ar);
     dogen::trivial_association::register_types<Archive>(ar);
     dogen::trivial_inheritance::register_types<Archive>(ar);
     dogen::two_layers_with_objects::register_types<Archive>(ar);

@@ -74,6 +74,25 @@ void class_implementation::move_constructor(const class_info& ci) {
     {
         positive_indenter_scope s(indenter_);
         bool is_first(true);
+
+        for (const auto p : ci.parents()) {
+            if (is_first)
+                stream_ << indenter_ << ": ";
+            else
+                stream_ << "," << std::endl << indenter_ << "  ";
+
+            qname qname(stream_);
+            qname.format(p);
+            stream_ << "(" << std::endl;
+            {
+                positive_indenter_scope s(indenter_);
+                stream_ << indenter_ << "std::forward<";
+                qname.format(p);
+                stream_ << ">(rhs))";
+            }
+            is_first = false;
+        }
+
         for (const auto p : ci.properties()) {
             if (is_first)
                 stream_ << indenter_ << ": ";
