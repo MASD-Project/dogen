@@ -11,6 +11,12 @@ This file contains all stories that haven't been assigned to a sprint.
 
 Stories that we intend to look at, at some point.
 
+*** Test data generator with immutability looks wrong
+
+We are using the full constructor for immutability, but its not clear
+how that would work on a inheritance tree. Ensure we have test cases
+for this.
+
 *** Make EOS support optional
 
 With the release of boost 1.54 We can almost compile dogen with a
