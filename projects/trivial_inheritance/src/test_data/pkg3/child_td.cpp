@@ -37,13 +37,13 @@ child_generator::child_generator() : position_(0) { }
 
 void child_generator::
 populate(const unsigned int position, result_type& v) {
+    dogen::trivial_inheritance::pkg2::parent_generator::populate(position, v);
     v.prop_1(create_int(position + 0));
 }
 
 child_generator::result_type
 child_generator::create(const unsigned int position) {
     child r;
-    dogen::trivial_inheritance::pkg2::parent_generator::populate(position, r);
     child_generator::populate(position, r);
     return r;
 }

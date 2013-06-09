@@ -225,7 +225,7 @@ optional_helper(const nested_type_info& nti) {
     utility_.open_scope();
     {
         positive_indenter_scope s(indenter_);
-        stream_ << indenter_ << container_type_name << " r(";
+        stream_ << indenter_ << container_type_name << " r(" << std::endl;
         {
             positive_indenter_scope s(indenter_);
             const auto containee_nti(children.front());
@@ -632,7 +632,7 @@ void generator_implementation::populate_method(const class_info& ci) {
     const std::string name(ci.name() + "_generator");
 
     stream_ << indenter_ << "void " << name << "::" << std::endl;
-    if (!props.empty()) {
+    if (!props.empty() || !ci.parents().empty()) {
         stream_ << "populate(const unsigned int position, result_type& v) " ;
     } else {
         stream_ << "populate(const unsigned int /*position*/, "
@@ -641,6 +641,14 @@ void generator_implementation::populate_method(const class_info& ci) {
     utility_.open_scope();
     {
         positive_indenter_scope s(indenter_);
+        for (const auto p : ci.parents()) {
+            stream_ << indenter_;
+            qname qname(stream_);
+            qname.format(p);
+            stream_ << "_generator::populate(position, v);"
+                    << std::endl;
+        }
+
         unsigned int i(0);
         for (const auto p : props) {
             stream_ << indenter_ << "v." << p.name() << "("
@@ -656,15 +664,11 @@ void generator_implementation::create_method(const class_info& ci) {
     if (ci.is_parent())
         return;
 
-    const bool has_properties(!ci.properties().empty());
-    const auto parents(ci.parents());
-    const bool has_parents(!parents.empty());
-    const bool has_properties_or_parents(has_properties || has_parents);
-
+    const bool has_properties(!ci.all_properties().empty());
     const std::string name(ci.name() + "_generator");
     stream_ << indenter_ << name << "::result_type" << std::endl
             << name << "::create(const unsigned int"
-            << (has_properties_or_parents ? " position" : "/*position*/")
+            << (has_properties ? " position" : "/*position*/")
             << ") ";
 
     utility_.open_scope();
@@ -690,15 +694,6 @@ void generator_implementation::create_method(const class_info& ci) {
             stream_ << indenter_ << ");" << std::endl;
         } else {
             stream_ << indenter_ << ci.name() << " r;" << std::endl;
-
-            for (const auto p : parents) {
-                stream_ << indenter_;
-                qname qname(stream_);
-                qname.format(p);
-                stream_ << "_generator::populate(position, r);"
-                        << std::endl;
-            }
-
             if (has_properties) {
                 stream_ << indenter_ << name << "::populate(position, r);"
                         << std::endl;

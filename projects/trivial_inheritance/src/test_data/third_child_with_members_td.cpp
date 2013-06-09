@@ -37,6 +37,7 @@ namespace trivial_inheritance {
 
 void third_child_with_members_generator::
 populate(const unsigned int position, result_type& v) {
+    dogen::trivial_inheritance::parent_with_members_generator::populate(position, v);
     v.prop_1(create_unsigned_int(position + 0));
 }
 

@@ -857,14 +857,6 @@ code. In theory all we need is:
 5. we should also generate a typedef for the key if the class is an
    entity. See Typedef keys for each type.
 
-*** Test move constructors in test model                              :story:
-
-At present we are not testing that the generated move constructors are
-valid. It does not appear to be the case as when we tried to make use
-of them in Creris, the compiler complained. We need to add a generic
-test that performs a =std::move= in sanitiser and fix the fallout of
-the test.
-
 *** Add support for iterable enumerations                             :story:
 
 We should create an additional aspect for each enumerations which

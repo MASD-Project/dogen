@@ -29,6 +29,7 @@
 #include "dogen/utility/test/asserter.hpp"
 #include "dogen/utility/test/io_tester.hpp"
 #include "dogen/utility/test/hash_tester.hpp"
+#include "dogen/utility/test/move_assignment_copy_tester.hpp"
 #include "dogen/utility/test/equality_tester.hpp"
 #include "dogen/utility/test/serialization_tester.hpp"
 
@@ -39,15 +40,28 @@ namespace test {
 template<typename Sequence>
 void test_equality() {
     Sequence sequence;
-    const typename Sequence::result_type a(sequence());
-    const typename Sequence::result_type b(a);
-    const typename Sequence::result_type c(sequence());
+    const auto a(sequence());
+    const auto b(a);
+    const auto c(sequence());
 
     typedef utility::test::equality_tester
-        <typename Sequence::result_type> equality_tester;
-    equality_tester::an_object_is_equal_to_itself(a);
-    equality_tester::identical_objects_are_equal(a, b);
-    equality_tester::distinct_objects_are_unequal(a, c);
+        <typename Sequence::result_type> tester;
+    tester::an_object_is_equal_to_itself(a);
+    tester::identical_objects_are_equal(a, b);
+    tester::distinct_objects_are_unequal(a, c);
+}
+
+template<typename Sequence>
+void test_move_assignment_copy() {
+    Sequence sequence;
+    sequence(); // throw the first one away
+    const auto a(sequence());
+
+    typedef utility::test::move_assignment_copy_tester
+        <typename Sequence::result_type> tester;
+    tester::moved_objects_are_equal(a);
+    tester::assigned_objects_are_equal(a);
+    tester::copy_constructed_objects_are_equal(a);
 }
 
 template<typename Sequence>

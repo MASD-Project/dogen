@@ -30,7 +30,8 @@ int create_int(const unsigned int position) {
 
 boost::optional<int>
 create_boost_optional_int(unsigned int position) {
-    boost::optional<int> r(        create_int(position));
+    boost::optional<int> r(
+        create_int(position));
     return r;
 }
 
@@ -41,7 +42,8 @@ create_dogen_boost_model_class_a(const unsigned int position) {
 
 boost::optional<dogen::boost_model::class_a>
 create_boost_optional_dogen_boost_model_class_a(unsigned int position) {
-    boost::optional<dogen::boost_model::class_a> r(        create_dogen_boost_model_class_a(position));
+    boost::optional<dogen::boost_model::class_a> r(
+        create_dogen_boost_model_class_a(position));
     return r;
 }
 
@@ -52,7 +54,8 @@ create_dogen_boost_model_pkg1_class_c(const unsigned int position) {
 
 boost::optional<dogen::boost_model::pkg1::class_c>
 create_boost_optional_dogen_boost_model_pkg1_class_c(unsigned int position) {
-    boost::optional<dogen::boost_model::pkg1::class_c> r(        create_dogen_boost_model_pkg1_class_c(position));
+    boost::optional<dogen::boost_model::pkg1::class_c> r(
+        create_dogen_boost_model_pkg1_class_c(position));
     return r;
 }
 
@@ -66,7 +69,8 @@ std::vector<dogen::boost_model::class_a> create_std_vector_dogen_boost_model_cla
 
 boost::optional<std::vector<dogen::boost_model::class_a> >
 create_boost_optional_std_vector_dogen_boost_model_class_a_(unsigned int position) {
-    boost::optional<std::vector<dogen::boost_model::class_a> > r(        create_std_vector_dogen_boost_model_class_a(position));
+    boost::optional<std::vector<dogen::boost_model::class_a> > r(
+        create_std_vector_dogen_boost_model_class_a(position));
     return r;
 }
 

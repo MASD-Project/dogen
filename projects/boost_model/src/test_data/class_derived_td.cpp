@@ -36,13 +36,13 @@ class_derived_generator::class_derived_generator() : position_(0) { }
 
 void class_derived_generator::
 populate(const unsigned int position, result_type& v) {
+    dogen::boost_model::class_base_generator::populate(position, v);
     v.prop_1(create_int(position + 0));
 }
 
 class_derived_generator::result_type
 class_derived_generator::create(const unsigned int position) {
     class_derived r;
-    dogen::boost_model::class_base_generator::populate(position, r);
     class_derived_generator::populate(position, r);
     return r;
 }

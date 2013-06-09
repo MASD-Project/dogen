@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_ORG_SPEC_LESS_THAN_HPP
-#define DOGEN_ORG_SPEC_LESS_THAN_HPP
+#ifndef DOGEN_UTILITY_TEST_LESS_THAN_TESTER_HPP
+#define DOGEN_UTILITY_TEST_LESS_THAN_TESTER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -34,7 +34,7 @@ namespace utility {
 namespace test {
 
 template<typename Entity, typename Sequence>
-class less_than {
+class less_than_tester {
 private:
     typedef Entity entity_type;
     typedef Sequence sequence_type;

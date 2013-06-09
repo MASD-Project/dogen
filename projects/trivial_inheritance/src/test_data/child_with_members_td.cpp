@@ -36,13 +36,13 @@ child_with_members_generator::child_with_members_generator() : position_(0) { }
 
 void child_with_members_generator::
 populate(const unsigned int position, result_type& v) {
+    dogen::trivial_inheritance::parent_without_members_generator::populate(position, v);
     v.prop_0(create_unsigned_int(position + 0));
 }
 
 child_with_members_generator::result_type
 child_with_members_generator::create(const unsigned int position) {
     child_with_members r;
-    dogen::trivial_inheritance::parent_without_members_generator::populate(position, r);
     child_with_members_generator::populate(position, r);
     return r;
 }

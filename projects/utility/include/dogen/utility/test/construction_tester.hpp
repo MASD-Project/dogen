@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_ORG_SPEC_CONSTRUCTION_HPP
-#define DOGEN_ORG_SPEC_CONSTRUCTION_HPP
+#ifndef DOGEN_UTILITY_TEST_CONSTRUCTION_TESTER_HPP
+#define DOGEN_UTILITY_TEST_CONSTRUCTION_TESTER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -39,7 +39,7 @@ namespace test {
  * covered by other requirements such as equality or less_than, etc.
  */
 template<class Entity, class Sequence>
-class construction {
+class construction_tester {
 private:
     typedef Entity entity_type;
     typedef Sequence sequence_type;

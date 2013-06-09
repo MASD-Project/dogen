@@ -54,7 +54,13 @@ BOOST_AUTO_TEST_CASE(validate_equality) {
     test_equality<primitive_generator>();
     test_equality<property_generator>();
     test_equality<qname_generator>();
-    test_equality<reference_generator>();
+    test_equality<value_generator>();
+    test_equality<entity_generator>();
+    test_equality<service_generator>();
+    test_equality<module_generator>();
+    test_equality<repository_generator>();
+    test_equality<factory_generator>();
+    test_equality<concept_generator>();
 }
 
 BOOST_AUTO_TEST_SUITE_END()

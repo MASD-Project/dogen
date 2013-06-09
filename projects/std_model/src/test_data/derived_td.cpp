@@ -46,13 +46,13 @@ derived_generator::derived_generator() : position_(0) { }
 
 void derived_generator::
 populate(const unsigned int position, result_type& v) {
+    dogen::std_model::base_generator::populate(position, v);
     v.prop_1(create_std_list_dogen_std_model_pkg1_class_c(position + 0));
 }
 
 derived_generator::result_type
 derived_generator::create(const unsigned int position) {
     derived r;
-    dogen::std_model::base_generator::populate(position, r);
     derived_generator::populate(position, r);
     return r;
 }

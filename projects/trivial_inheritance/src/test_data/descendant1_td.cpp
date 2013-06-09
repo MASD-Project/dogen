@@ -29,7 +29,8 @@ namespace trivial_inheritance {
 
 
 void descendant1_generator::
-populate(const unsigned int /*position*/, result_type& /*v*/) {
+populate(const unsigned int position, result_type& v) {
+    dogen::trivial_inheritance::base_generator::populate(position, v);
 }
 
 descendant1_generator::result_type*

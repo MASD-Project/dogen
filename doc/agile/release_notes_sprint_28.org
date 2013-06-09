@@ -59,6 +59,24 @@ leaf types.
 We are generating visitors all the time, even when the model that
 contains a visitable type is just a reference rather than the target.
 
+*** COMPLETED Fix generation bug in inheritance tree                  :spike:
+    CLOSED: [2013-06-09 Sun 20:52]
+    CLOCK: [2013-06-09 Sun 20:50]--[2013-06-09 Sun 20:52] =>  0:02
+    CLOCK: [2013-06-09 Sun 19:30]--[2013-06-09 Sun 20:50] =>  1:20
+
+For some reason we are not populating all classes across the
+inheritance tree.
+
+*** IMPLEMENTATION Test move constructors in test model               :spike:
+    CLOCK: [2013-06-09 Sun 18:46]--[2013-06-09 Sun 19:10] =>  0:24
+    CLOCK: [2013-06-09 Sun 18:10]--[2013-06-09 Sun 18:46] =>  0:36
+
+At present we are not testing that the generated move constructors are
+valid. It does not appear to be the case as when we tried to make use
+of them in Creris, the compiler complained. We need to add a generic
+test that performs a =std::move= in sanitiser and fix the fallout of
+the test.
+
 *** IMPLEMENTATION Release notes and backlog grooming                  :task:
     CLOCK: [2013-06-06 Thu 07:50]--[2013-06-06 Thu 08:15] =>  0:25
     CLOCK: [2013-06-05 Wed 19:19]--[2013-06-05 Wed 19:24] =>  0:05

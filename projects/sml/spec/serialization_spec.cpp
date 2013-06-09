@@ -61,6 +61,13 @@ BOOST_AUTO_TEST_CASE(validate_serialization) {
     rountrip_type<property_generator>();
     rountrip_type<qname_generator>();
     rountrip_type<reference_generator>();
+    rountrip_type<value_generator>();
+    rountrip_type<entity_generator>();
+    rountrip_type<service_generator>();
+    rountrip_type<module_generator>();
+    rountrip_type<repository_generator>();
+    rountrip_type<factory_generator>();
+    rountrip_type<concept_generator>();
 }
 
 BOOST_AUTO_TEST_SUITE_END()

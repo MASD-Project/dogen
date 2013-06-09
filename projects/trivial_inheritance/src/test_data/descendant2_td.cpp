@@ -36,13 +36,13 @@ descendant2_generator::descendant2_generator() : position_(0) { }
 
 void descendant2_generator::
 populate(const unsigned int position, result_type& v) {
+    dogen::trivial_inheritance::base_generator::populate(position, v);
     v.prop_0(create_bool(position + 0));
 }
 
 descendant2_generator::result_type
 descendant2_generator::create(const unsigned int position) {
     descendant2 r;
-    dogen::trivial_inheritance::base_generator::populate(position, r);
     descendant2_generator::populate(position, r);
     return r;
 }
