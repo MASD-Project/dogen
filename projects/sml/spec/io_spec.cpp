@@ -42,8 +42,6 @@ BOOST_AUTO_TEST_CASE(validate_io) {
     SETUP_TEST_LOG("validate_io");
 
     test_io<category_types_generator>();
-    test_io<enumeration_generator>();
-    test_io<enumerator_generator>();
     test_io<generation_types_generator>();
     test_io<meta_types_generator>();
     test_io<model_generator>();

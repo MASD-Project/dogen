@@ -48,8 +48,6 @@ BOOST_AUTO_TEST_CASE(validate_serialization) {
     SETUP_TEST_LOG("validate_serialization");
 
     rountrip_type<category_types_generator>();
-    rountrip_type<enumeration_generator>();
-    rountrip_type<enumerator_generator>();
     rountrip_type<generation_types_generator>();
     rountrip_type<meta_types_generator>();
     rountrip_type<model_generator>();

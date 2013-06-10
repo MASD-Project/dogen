@@ -46,8 +46,6 @@ BOOST_AUTO_TEST_CASE(validate_equality) {
     SETUP_TEST_LOG("validate_equality");
 
     test_equality<category_types_generator>();
-    test_equality<enumeration_generator>();
-    test_equality<enumerator_generator>();
     test_equality<generation_types_generator>();
     test_equality<meta_types_generator>();
     test_equality<model_generator>();

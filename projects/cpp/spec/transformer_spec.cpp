@@ -99,14 +99,14 @@ BOOST_AUTO_TEST_CASE(transforming_enumeration_results_in_expected_enum_info) {
     BOOST_REQUIRE(m.enumerations().size() == 1);
 
     dogen::cpp::transformer t(m);
-    const auto e(t.transform(m.enumerations().begin()->second));
+    const auto e(t.transform_enumeration(m.enumerations().begin()->second));
     BOOST_LOG_SEV(lg, debug) << "enumeration: " << e;
 
     BOOST_CHECK(is_type_zero(e.name()));
     BOOST_CHECK(!e.documentation().empty());
-    BOOST_CHECK(e.namespaces().size() == 1);
+    BOOST_REQUIRE(e.namespaces().size() == 1);
     BOOST_CHECK(is_model_zero(e.namespaces().front()));
-    BOOST_CHECK(e.enumerators().size() == 2);
+    BOOST_REQUIRE(e.enumerators().size() == 2);
     BOOST_CHECK(is_type_zero(e.enumerators().front().name()));
     BOOST_CHECK(is_type_one(e.enumerators().back().name()));
 }
@@ -121,16 +121,16 @@ BOOST_AUTO_TEST_CASE(transforming_enumeration_in_module_results_in_expected_enum
     BOOST_REQUIRE(m0.enumerations().size() == 1);
 
     dogen::cpp::transformer t(m0);
-    const auto e0(t.transform(m0.enumerations().begin()->second));
+    const auto e0(t.transform_enumeration(m0.enumerations().begin()->second));
     BOOST_LOG_SEV(lg, debug) << "enumeration 0: " << e0;
 
     BOOST_CHECK(is_type_zero(e0.name()));
     BOOST_CHECK(!e0.documentation().empty());
-    BOOST_CHECK(e0.namespaces().size() == 2);
+    BOOST_REQUIRE(e0.namespaces().size() == 2);
     BOOST_CHECK(is_model_zero(e0.namespaces().front()));
     BOOST_CHECK(is_module_zero(e0.namespaces().back()));
 
-    BOOST_CHECK(e0.enumerators().size() == 2);
+    BOOST_REQUIRE(e0.enumerators().size() == 2);
     BOOST_CHECK(is_type_zero(e0.enumerators().front().name()));
     BOOST_CHECK(is_type_one(e0.enumerators().back().name()));
 
@@ -139,15 +139,15 @@ BOOST_AUTO_TEST_CASE(transforming_enumeration_in_module_results_in_expected_enum
     BOOST_LOG_SEV(lg, debug) << "model 1: " << m1;
     BOOST_REQUIRE(m0.enumerations().size() == 1);
 
-    const auto e1(t.transform(m1.enumerations().begin()->second));
+    const auto e1(t.transform_enumeration(m1.enumerations().begin()->second));
     BOOST_LOG_SEV(lg, debug) << "enumeration 1: " << e1;
     BOOST_CHECK(is_type_zero(e1.name()));
     BOOST_CHECK(!e1.documentation().empty());
-    BOOST_CHECK(e1.namespaces().size() == 3);
+    BOOST_REQUIRE(e1.namespaces().size() == 3);
     BOOST_CHECK(is_model_zero(e1.namespaces().front()));
     BOOST_CHECK(is_module_one(e1.namespaces().back()));
 
-    BOOST_CHECK(e1.enumerators().size() == 2);
+    BOOST_REQUIRE(e1.enumerators().size() == 2);
     BOOST_CHECK(is_type_zero(e1.enumerators().front().name()));
     BOOST_CHECK(is_type_one(e1.enumerators().back().name()));
 }
@@ -163,10 +163,10 @@ BOOST_AUTO_TEST_CASE(transforming_enumeration_in_external_module_results_in_expe
     BOOST_LOG_SEV(lg, debug) << "model: " << m;
 
     dogen::cpp::transformer t(m);
-    const auto e(t.transform(enumeration));
+    const auto e(t.transform_enumeration(enumeration));
     BOOST_LOG_SEV(lg, debug) << "enumeration: " << e;
 
-    BOOST_CHECK(e.namespaces().size() == 2);
+    BOOST_REQUIRE(e.namespaces().size() == 2);
     BOOST_CHECK(e.namespaces().front() == external_module);
     BOOST_CHECK(is_model_zero(e.namespaces().back()));
 }
@@ -180,7 +180,7 @@ BOOST_AUTO_TEST_CASE(transforming_exception_results_in_expected_exception_info) 
     BOOST_REQUIRE(m.exceptions().size() == 1);
 
     dogen::cpp::transformer t(m);
-    const auto e(t.transform(m.exceptions().begin()->second));
+    const auto e(t.transform_exception(m.exceptions().begin()->second));
     BOOST_LOG_SEV(lg, debug) << "exception: " << e;
 
     BOOST_CHECK(is_type_zero(e.name()));
@@ -199,12 +199,12 @@ BOOST_AUTO_TEST_CASE(transforming_exception_in_module_results_in_expected_except
     BOOST_REQUIRE(m0.exceptions().size() == 1);
 
     dogen::cpp::transformer t(m0);
-    const auto e0(t.transform(m0.exceptions().begin()->second));
+    const auto e0(t.transform_exception(m0.exceptions().begin()->second));
     BOOST_LOG_SEV(lg, debug) << "exception 0: " << e0;
 
     BOOST_CHECK(is_type_zero(e0.name()));
     BOOST_CHECK(!e0.documentation().empty());
-    BOOST_CHECK(e0.namespaces().size() == 2);
+    BOOST_REQUIRE(e0.namespaces().size() == 2);
     BOOST_CHECK(is_model_zero(e0.namespaces().front()));
     BOOST_CHECK(is_module_zero(e0.namespaces().back()));
 
@@ -213,11 +213,11 @@ BOOST_AUTO_TEST_CASE(transforming_exception_in_module_results_in_expected_except
     BOOST_LOG_SEV(lg, debug) << "model 1: " << m1;
     BOOST_REQUIRE(m0.exceptions().size() == 1);
 
-    const auto e1(t.transform(m1.exceptions().begin()->second));
+    const auto e1(t.transform_exception(m1.exceptions().begin()->second));
     BOOST_LOG_SEV(lg, debug) << "exception 1: " << e1;
     BOOST_CHECK(is_type_zero(e1.name()));
     BOOST_CHECK(!e1.documentation().empty());
-    BOOST_CHECK(e1.namespaces().size() == 3);
+    BOOST_REQUIRE(e1.namespaces().size() == 3);
     BOOST_CHECK(is_model_zero(e1.namespaces().front()));
     BOOST_CHECK(is_module_one(e1.namespaces().back()));
 }
@@ -233,10 +233,10 @@ BOOST_AUTO_TEST_CASE(transforming_exception_in_external_module_results_in_expect
     BOOST_LOG_SEV(lg, debug) << "model: " << m;
 
     dogen::cpp::transformer t(m);
-    const auto e(t.transform(exception));
+    const auto e(t.transform_exception(exception));
     BOOST_LOG_SEV(lg, debug) << "exception: " << e;
 
-    BOOST_CHECK(e.namespaces().size() == 2);
+    BOOST_REQUIRE(e.namespaces().size() == 2);
     BOOST_CHECK(e.namespaces().front() == external_module);
     BOOST_CHECK(is_model_zero(e.namespaces().back()));
 }
@@ -255,7 +255,7 @@ BOOST_AUTO_TEST_CASE(transforming_module_results_in_expected_namespace_info) {
     BOOST_LOG_SEV(lg, debug) << "module 0: " << p0;
 
     BOOST_CHECK(!p0.documentation().empty());
-    BOOST_CHECK(p0.namespaces().size() == 1);
+    BOOST_REQUIRE(p0.namespaces().size() == 1);
     BOOST_CHECK(is_module_zero(p0.namespaces().front()));
 
     const auto m1(
@@ -274,7 +274,7 @@ BOOST_AUTO_TEST_CASE(transforming_module_results_in_expected_namespace_info) {
     BOOST_LOG_SEV(lg, debug) << "module 1: " << p1;
 
     BOOST_CHECK(!p1.documentation().empty());
-    BOOST_CHECK(p1.namespaces().size() == 2);
+    BOOST_REQUIRE(p1.namespaces().size() == 2);
     BOOST_CHECK(is_module_zero(p1.namespaces().front()));
     BOOST_CHECK(is_module_one(p1.namespaces().back()));
 }
@@ -291,7 +291,7 @@ BOOST_AUTO_TEST_CASE(transforming_model_results_in_expected_namespace_info) {
     BOOST_LOG_SEV(lg, debug) << "module: " << p;
 
     BOOST_CHECK(!p.documentation().empty());
-    BOOST_CHECK(p.namespaces().size() == 1);
+    BOOST_REQUIRE(p.namespaces().size() == 1);
     BOOST_CHECK(is_model_zero(p.namespaces().front()));
 }
 
@@ -310,14 +310,14 @@ BOOST_AUTO_TEST_CASE(transforming_module_in_external_module_results_in_expected_
     const auto p0(t.transform(module));
     BOOST_LOG_SEV(lg, debug) << "module 0: " << p0;
 
-    BOOST_CHECK(p0.namespaces().size() == 2);
+    BOOST_REQUIRE(p0.namespaces().size() == 2);
     BOOST_CHECK(p0.namespaces().front() == external_module);
     BOOST_CHECK(is_module_zero(p0.namespaces().back()));
 
     const auto p1(t.transform_model_into_namespace());
     BOOST_LOG_SEV(lg, debug) << "module 1: " << p1;
 
-    BOOST_CHECK(p1.namespaces().size() == 2);
+    BOOST_REQUIRE(p1.namespaces().size() == 2);
     BOOST_CHECK(p1.namespaces().front() == external_module);
     BOOST_CHECK(is_model_zero(p1.namespaces().back()));
 }
@@ -333,7 +333,7 @@ BOOST_AUTO_TEST_CASE(transforming_pod_results_in_expected_class_info) {
     BOOST_LOG_SEV(lg, debug) << "class: " << p;
     BOOST_CHECK(is_type_zero(p.name()));
     BOOST_CHECK(!p.documentation().empty());
-    BOOST_CHECK(p.namespaces().size() == 1);
+    BOOST_REQUIRE(p.namespaces().size() == 1);
     BOOST_CHECK(is_model_zero(p.namespaces().back()));
 
     BOOST_CHECK(p.properties().empty());
@@ -371,7 +371,7 @@ BOOST_AUTO_TEST_CASE(transforming_pod_with_property_results_in_expected_class_in
     BOOST_LOG_SEV(lg, debug) << "class: " << p;
 
     BOOST_CHECK(p.all_properties().size() == 1);
-    BOOST_CHECK(p.properties().size() == 1);
+    BOOST_REQUIRE(p.properties().size() == 1);
     const auto type(p.properties().begin()->type());
     BOOST_CHECK(!type.is_enumeration());
     BOOST_CHECK(!type.is_primitive());
@@ -392,7 +392,7 @@ BOOST_AUTO_TEST_CASE(transforming_pod_with_property_results_in_expected_class_in
 
     BOOST_CHECK(is_type_zero(p.name()));
     BOOST_CHECK(!p.documentation().empty());
-    BOOST_CHECK(p.namespaces().size() == 1);
+    BOOST_REQUIRE(p.namespaces().size() == 1);
     BOOST_CHECK(is_model_zero(p.namespaces().back()));
     BOOST_CHECK(!p.has_primitive_properties());
     BOOST_CHECK(!p.requires_stream_manipulators());
@@ -428,7 +428,7 @@ BOOST_AUTO_TEST_CASE(transforming_pod_with_bool_property_results_in_expected_cla
     BOOST_LOG_SEV(lg, debug) << "class: " << p;
 
     BOOST_CHECK(p.all_properties().size() == 1);
-    BOOST_CHECK(p.properties().size() == 1);
+    BOOST_REQUIRE(p.properties().size() == 1);
     const auto type(p.properties().begin()->type());
     BOOST_CHECK(check_name(type.name()));
     BOOST_CHECK(check_name(type.complete_name()));
@@ -453,7 +453,7 @@ BOOST_AUTO_TEST_CASE(transforming_pod_with_bool_property_results_in_expected_cla
 
     BOOST_CHECK(is_type_zero(p.name()));
     BOOST_CHECK(!p.documentation().empty());
-    BOOST_CHECK(p.namespaces().size() == 1);
+    BOOST_REQUIRE(p.namespaces().size() == 1);
     BOOST_CHECK(is_model_zero(p.namespaces().back()));
     BOOST_CHECK(p.has_primitive_properties());
     BOOST_CHECK(p.requires_stream_manipulators());
@@ -489,7 +489,7 @@ BOOST_AUTO_TEST_CASE(transforming_pod_with_unsigned_int_property_results_in_expe
     BOOST_LOG_SEV(lg, debug) << "class: " << p;
 
     BOOST_CHECK(p.all_properties().size() == 1);
-    BOOST_CHECK(p.properties().size() == 1);
+    BOOST_REQUIRE(p.properties().size() == 1);
 
     const auto type(p.properties().begin()->type());
     BOOST_CHECK(check_name(type.identifiable_name()));
@@ -513,7 +513,7 @@ BOOST_AUTO_TEST_CASE(transforming_pod_with_unsigned_int_property_results_in_expe
 
     BOOST_CHECK(is_type_zero(p.name()));
     BOOST_CHECK(!p.documentation().empty());
-    BOOST_CHECK(p.namespaces().size() == 1);
+    BOOST_REQUIRE(p.namespaces().size() == 1);
     BOOST_CHECK(is_model_zero(p.namespaces().back()));
     BOOST_CHECK(p.has_primitive_properties());
     BOOST_CHECK(!p.requires_stream_manipulators());
@@ -549,7 +549,7 @@ BOOST_AUTO_TEST_CASE(transforming_pod_with_boost_variant_property_results_in_exp
     BOOST_LOG_SEV(lg, debug) << "class: " << p;
 
     BOOST_CHECK(p.all_properties().size() == 1);
-    BOOST_CHECK(p.properties().size() == 1);
+    BOOST_REQUIRE(p.properties().size() == 1);
 
     const auto type(p.properties().begin()->type());
     BOOST_CHECK(check_scoped_name(type.name()));
@@ -575,7 +575,7 @@ BOOST_AUTO_TEST_CASE(transforming_pod_with_boost_variant_property_results_in_exp
 
     BOOST_CHECK(is_type_zero(p.name()));
     BOOST_CHECK(!p.documentation().empty());
-    BOOST_CHECK(p.namespaces().size() == 1);
+    BOOST_REQUIRE(p.namespaces().size() == 1);
     BOOST_CHECK(is_model_zero(p.namespaces().back()));
     BOOST_CHECK(!p.has_primitive_properties());
     BOOST_CHECK(!p.requires_stream_manipulators());
@@ -734,7 +734,7 @@ BOOST_AUTO_TEST_CASE(transforming_third_degree_pod_results_in_expected_class_inf
             BOOST_CHECK(p3.is_parent());
             BOOST_CHECK(p3.original_parent_name().empty());
             BOOST_CHECK(p3.original_parent_name_qualified().empty());
-            BOOST_CHECK(p3.leaves().size() == 1);
+            BOOST_REQUIRE(p3.leaves().size() == 1);
             BOOST_CHECK(ends_with_type_zero(p3.leaves().front()));
         }
     }
@@ -755,8 +755,8 @@ BOOST_AUTO_TEST_CASE(transforming_third_degree_pod_results_in_expected_class_inf
             BOOST_CHECK(p2.is_parent());
             BOOST_CHECK(is_type_three(p2.original_parent_name()));
             BOOST_CHECK(!p2.original_parent_name_qualified().empty());
-            BOOST_CHECK(p2.leaves().size() == 1);
-            BOOST_CHECK(ends_with_type_zero(p3.leaves().front()));
+            BOOST_REQUIRE(p2.leaves().size() == 1);
+            BOOST_CHECK(ends_with_type_zero(p2.leaves().front()));
         }
     }
     BOOST_CHECK(found_two);
@@ -772,13 +772,13 @@ BOOST_AUTO_TEST_CASE(transforming_third_degree_pod_results_in_expected_class_inf
             BOOST_CHECK(is_type_one(p1.name()));
             BOOST_CHECK(p1.all_properties().size() == 3);
             BOOST_CHECK(p1.properties().size() == 1);
-            BOOST_CHECK(p1.parents().size() == 1);
+            BOOST_REQUIRE(p1.parents().size() == 1);
             BOOST_CHECK(p1.is_parent());
             BOOST_CHECK(is_type_two(p1.parents().front().name()));
             BOOST_CHECK(is_type_three(p1.original_parent_name()));
             BOOST_CHECK(!p1.original_parent_name_qualified().empty());
-            BOOST_CHECK(p1.leaves().size() == 1);
-            BOOST_CHECK(ends_with_type_zero(p3.leaves().front()));
+            BOOST_REQUIRE(p1.leaves().size() == 1);
+            BOOST_CHECK(ends_with_type_zero(p1.leaves().front()));
         }
     }
     BOOST_CHECK(found_one);
@@ -793,7 +793,7 @@ BOOST_AUTO_TEST_CASE(transforming_third_degree_pod_results_in_expected_class_inf
             BOOST_CHECK(is_type_zero(p.name()));
             BOOST_CHECK(p.all_properties().size() == 4);
             BOOST_CHECK(p.properties().size() == 1);
-            BOOST_CHECK(p.parents().size() == 1);
+            BOOST_REQUIRE(p.parents().size() == 1);
             BOOST_CHECK(!p.is_parent());
             BOOST_CHECK(is_type_one(p.parents().front().name()));
             BOOST_CHECK(is_type_three(p.original_parent_name()));

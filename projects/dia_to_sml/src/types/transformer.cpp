@@ -28,7 +28,6 @@
 #include "dogen/sml/types/service.hpp"
 #include "dogen/dia/types/composite.hpp"
 #include "dogen/dia/types/attribute.hpp"
-#include "dogen/sml/types/enumeration.hpp"
 #include "dogen/sml/types/value.hpp"
 #include "dogen/sml/io/value_io.hpp"
 #include "dogen/dia_to_sml/types/transformation_error.hpp"
@@ -46,6 +45,7 @@ using namespace dogen::utility::log;
 static logger lg(logger_factory("dia_to_sml.transformer"));
 
 const std::string empty;
+const std::string unsigned_int("unsigned int");
 const std::string identity_attribute_key("IDENTITY_ATTRIBUTE");
 const std::string comment_key("COMMENT");
 const std::string empty_dia_object_name("Dia object name is empty");
@@ -151,21 +151,22 @@ sml::qname transformer::transform_qname(const std::string& n,
     return name;
 }
 
+sml::nested_qname
+transformer::transform_nested_qname(const std::string& n) const {
+    sml::nested_qname r(identifier_parser_->parse_qname(n));
+    if (r.type().type_name().empty()) {
+        BOOST_LOG_SEV(lg, error) << invalid_type_string << n;
+        BOOST_THROW_EXCEPTION(transformation_error(invalid_type_string + n));
+    }
+    return r;
+}
+
 sml::property transformer::
 transform_property(const processed_property& p) {
     sml::property r;
     typedef boost::shared_ptr<dia::attribute> attribute_ptr;
 
     r.name(p.name());
-    auto nested_name(identifier_parser_->parse_qname(p.type()));
-    if (nested_name.type().type_name().empty()) {
-        BOOST_LOG_SEV(lg, error) << invalid_type_string << p.type();
-        BOOST_THROW_EXCEPTION(
-            transformation_error(invalid_type_string + p.type()));
-    }
-    r.type_name(nested_name);
-    compute_model_dependencies(nested_name);
-
     const auto pair(comments_parser_->parse(p.comment()));
     r.documentation(pair.first);
     r.implementation_specific_parameters(pair.second);
@@ -181,11 +182,6 @@ transform_property(const processed_property& p) {
     if (r.name().empty()) {
         BOOST_LOG_SEV(lg, error) << empty_dia_object_name;
         BOOST_THROW_EXCEPTION(transformation_error(empty_dia_object_name));
-    }
-
-    if (r.type_name().type().type_name().empty()) {
-        BOOST_LOG_SEV(lg, error) << "Could not find a type attribute.";
-        BOOST_THROW_EXCEPTION(transformation_error(type_attribute_expected));
     }
     return r;
 }
@@ -227,8 +223,12 @@ transform_pod(const object_profile& op, const processed_object& po) {
     pod.documentation(pair.first);
     pod.implementation_specific_parameters(pair.second);
 
-    for (const auto& p : po.properties())
-        pod.properties().push_back(transform_property(p));
+    for (const auto& p : po.properties()) {
+        auto property(transform_property(p));
+        property.type_name(transform_nested_qname(p.type()));
+        compute_model_dependencies(property.type_name());
+        pod.properties().push_back(property);
+    }
 
     if (pod.name().type_name().empty()) {
         BOOST_LOG_SEV(lg, error) << empty_dia_object_name + po.id();
@@ -414,25 +414,9 @@ void transformer::transform_service(const processed_object& po) {
     context_.model().services().insert(std::make_pair(service.name(), service));
 }
 
-sml::enumerator transformer::
-transform_enumerator(const processed_property& p,
-    const unsigned int position) const {
-
-    dogen::sml::enumerator r;
-    r.name(p.name());
-    r.documentation(p.comment());
-    r.value(boost::lexical_cast<std::string>(position));
-
-    if (r.name().empty()) {
-        BOOST_LOG_SEV(lg, error) << empty_dia_object_name;
-        BOOST_THROW_EXCEPTION(transformation_error(empty_dia_object_name));
-    }
-    return r;
-}
-
 void transformer::transform_enumeration(const processed_object& o) {
     BOOST_LOG_SEV(lg, debug) << "Object is an enumeration: " << o.id();
-    sml::enumeration e;
+    sml::value e;
 
     e.generation_type(context_.is_target() ?
         sml::generation_types::full_generation :
@@ -443,18 +427,34 @@ void transformer::transform_enumeration(const processed_object& o) {
     e.name(transform_qname(o.name(), meta_types::enumeration, pkg_id));
     e.documentation(o.comment());
 
-    dogen::sml::enumerator invalid;
+    dogen::sml::property invalid;
     invalid.name("invalid");
     invalid.documentation("Represents an uninitialised enum");
-    invalid.value("0");
-    e.enumerators().push_back(invalid);
+    invalid.default_value("0");
+    e.properties().push_back(invalid);
 
     std::set<std::string> enumerator_names;
     enumerator_names.insert(invalid.name());
 
-    unsigned int pos(1);
+    unsigned int pos(0);
+    sml::nested_qname nqn;
     for (const auto& p : o.properties()) {
-        const auto enumerator(transform_enumerator(p, pos++));
+        auto enumerator(transform_property(p));
+        enumerator.default_value(boost::lexical_cast<std::string>(++pos));
+
+        // first property can set the type of the enumeration; if not
+        // set, we use the default type.
+        if (pos == 1) {
+            if (p.type().empty()) {
+                dogen::sml::qname qn;
+                qn.type_name(unsigned_int);
+                qn.meta_type(dogen::sml::meta_types::primitive);
+                nqn.type(qn);
+            } else
+                nqn = transform_nested_qname(p.type());
+        }
+        enumerator.type_name(nqn);
+
         const auto i(enumerator_names.find(enumerator.name()));
         if (i != enumerator_names.end()) {
             BOOST_LOG_SEV(lg, error) << "Duplicate enumerator name: "
@@ -462,7 +462,7 @@ void transformer::transform_enumeration(const processed_object& o) {
             BOOST_THROW_EXCEPTION(transformation_error(
                     "Duplicate enumerator name: " + enumerator.name()));
         }
-        e.enumerators().push_back(enumerator);
+        e.properties().push_back(enumerator);
         enumerator_names.insert(enumerator.name());
     }
     context_.model().enumerations().insert(std::make_pair(e.name(), e));

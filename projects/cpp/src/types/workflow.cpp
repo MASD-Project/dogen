@@ -291,7 +291,7 @@ workflow::result_type workflow::generate_enums_activity() const {
         if (e.generation_type() == sml::generation_types::no_generation)
             continue;
 
-        const auto ei(transformer_.transform(e));
+        const auto ei(transformer_.transform_enumeration(e));
 
         const auto ct(sml::category_types::user_defined);
         for (const auto& cd : descriptor_factory_.create(e.name(), ct)) {
@@ -317,7 +317,7 @@ workflow::result_type workflow::generate_exceptions_activity() const {
         if (e.generation_type() == sml::generation_types::no_generation)
             continue;
 
-        const auto ei(transformer_.transform(e));
+        const auto ei(transformer_.transform_exception(e));
 
         const auto ct(sml::category_types::user_defined);
         for (const auto& cd : descriptor_factory_.create(e.name(), ct)) {

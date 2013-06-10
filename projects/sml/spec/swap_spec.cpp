@@ -42,8 +42,6 @@ BOOST_AUTO_TEST_CASE(validate_swap) {
     SETUP_TEST_LOG("validate_swap");
 
     test_swap<category_types_generator>();
-    test_swap<enumeration_generator>();
-    test_swap<enumerator_generator>();
     test_swap<generation_types_generator>();
     test_swap<meta_types_generator>();
     test_swap<model_generator>();

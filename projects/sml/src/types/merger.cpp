@@ -26,7 +26,7 @@
 #include "dogen/utility/io/unordered_map_io.hpp"
 #include "dogen/utility/io/vector_io.hpp"
 #include "dogen/utility/io/list_io.hpp"
-#include "dogen/sml/io/enumeration_io.hpp"
+#include "dogen/sml/io/value_io.hpp"
 #include "dogen/sml/io/qname_io.hpp"
 #include "dogen/sml/io/nested_qname_io.hpp"
 #include "dogen/sml/io/primitive_io.hpp"

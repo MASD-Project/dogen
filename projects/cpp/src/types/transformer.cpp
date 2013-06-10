@@ -198,32 +198,33 @@ transformer::transform_into_namespace_list(const dogen::sml::qname& qn) const {
     return r;
 }
 
-enumerator_info transformer::transform(const sml::enumerator& e) const {
+enumerator_info
+transformer::transform_enumerator(const sml::property& e) const {
     enumerator_info r;
     r.name(e.name());
-    r.value(e.value());
+    r.value(e.default_value());
     r.documentation(e.documentation());
     return r;
 }
 
-enum_info transformer::transform(const sml::enumeration& e) const {
+enum_info transformer::transform_enumeration(const sml::value& e) const {
     BOOST_LOG_SEV(lg, debug) << "Transforming enumeration: " << e.name();
 
     enum_info r;
-
     r.name(e.name().type_name());
     r.namespaces(transform_into_namespace_list(e.name()));
     r.documentation(e.documentation());
 
-    for (const auto& en : e.enumerators())
-        r.enumerators().push_back(transform(en));
+    // FIXME: check the type of the first property
+    for (const auto& en : e.properties())
+        r.enumerators().push_back(transform_enumerator(en));
 
     BOOST_LOG_SEV(lg, debug) << "Transformed enumeration: " << e.name();
 
     return r;
 }
 
-exception_info transformer::transform(const sml::value& e) const {
+exception_info transformer::transform_exception(const sml::value& e) const {
     BOOST_LOG_SEV(lg, debug) << "Transforming exception: " << e.name();
 
     exception_info r;

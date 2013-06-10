@@ -43,8 +43,6 @@ BOOST_AUTO_TEST_CASE(validate_hashing) {
     SETUP_TEST_LOG("validate_hashing");
 
     test_hashing<category_types_generator>();
-    test_hashing<enumeration_generator>();
-    test_hashing<enumerator_generator>();
     test_hashing<generation_types_generator>();
     test_hashing<meta_types_generator>();
     test_hashing<model_generator>();

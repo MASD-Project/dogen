@@ -10,26 +10,26 @@ This file contains all stories that were closed during sprint 28.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-06-10 Mon 22:28]
+Clock summary at [2013-06-11 Tue 00:08]
 
-| Headline                                                         | Time    |       |      |
-|------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                     | *22:57* |       |      |
-|------------------------------------------------------------------+---------+-------+------|
-| Development Stories Implemented                                  |         | 22:57 |      |
-| COMPLETED Update README                                          |         |       | 1:04 |
-| COMPLETED Whiteboarding on the role of SML                       |         |       | 1:45 |
-| COMPLETED Leaf types do not have a virtual destructor            |         |       | 0:26 |
-| COMPLETED Suppress visitor generation for non-target models      |         |       | 0:20 |
-| COMPLETED Fix generation bug in inheritance tree                 |         |       | 1:22 |
-| COMPLETED Test move constructors in test model                   |         |       | 2:52 |
-| COMPLETED Transformer tests should check that docs are not empty |         |       | 0:28 |
-| IMPLEMENTATION Release notes and backlog grooming                |         |       | 1:04 |
-| IMPLEMENTATION Improve modeling of domain driven concepts in SML |         |       | 9:56 |
-| IMPLEMENTATION Add support for concepts at the SML level         |         |       | 1:45 |
-| ANALYSIS Break down SML into concepts                            |         |       | 1:27 |
-| Refactor top level concepts in SML                               |         |       | 0:22 |
-| IMPLEMENTATION Move services into their own type                 |         |       | 0:06 |
+| Headline                                                         | Time    |       |       |
+|------------------------------------------------------------------+---------+-------+-------|
+| *Total time*                                                     | *24:35* |       |       |
+|------------------------------------------------------------------+---------+-------+-------|
+| Development Stories Implemented                                  |         | 24:35 |       |
+| COMPLETED Update README                                          |         |       |  1:04 |
+| COMPLETED Whiteboarding on the role of SML                       |         |       |  1:45 |
+| COMPLETED Leaf types do not have a virtual destructor            |         |       |  0:26 |
+| COMPLETED Suppress visitor generation for non-target models      |         |       |  0:20 |
+| COMPLETED Fix generation bug in inheritance tree                 |         |       |  1:22 |
+| COMPLETED Test move constructors in test model                   |         |       |  2:52 |
+| COMPLETED Transformer tests should check that docs are not empty |         |       |  0:28 |
+| IMPLEMENTATION Release notes and backlog grooming                |         |       |  1:04 |
+| IMPLEMENTATION Improve modeling of domain driven concepts in SML |         |       | 11:34 |
+| IMPLEMENTATION Add support for concepts at the SML level         |         |       |  1:45 |
+| ANALYSIS Break down SML into concepts                            |         |       |  1:27 |
+| Refactor top level concepts in SML                               |         |       |  0:22 |
+| IMPLEMENTATION Move services into their own type                 |         |       |  0:06 |
 #+end:
 
 *** COMPLETED Update README
@@ -283,38 +283,12 @@ don't really exist at the SML level.
      CLOCK: [2013-06-09 Sun 17:47]--[2013-06-09 Sun 18:04] =>  0:17
      CLOCK: [2013-06-09 Sun 00:51]--[2013-06-09 Sun 01:59] =>  1:08
 
-**** Convert enumerations into value type objects                     :story:
+**** COMPLETED Convert enumerations into value type objects           :story:
+     CLOSED: [2013-06-11 Tue 00:07]
+     CLOCK: [2013-06-10 Mon 22:29]--[2013-06-11 Tue 00:07] =>  1:38
+
 **** Convert primitives into value type objects                       :story:
-**** Remove generation types                                          :story:
-
-SML knows not of code generation so we shouldn't have a generation
-type in it. What we should have instead is a way of identifying a type
-as belonging to the target model or not. In a way, its qname already
-does that.
-
-Partial generation is actually a c++ model decision based on how much
-features it supports.
-
-**** Models should have types                                         :story:
-
-Consider creating an enumeration for model types:
-
-- relational model
-- core domain model
-- generic sub-domain model
-- segregated core model
-
-This still requires a lot of analysis work around the DDD book.
-
-**** Change Transformation code to use a type visitor                 :story:
-
-Now we have a base type, we could probably simplify some of the
-transformation code:
-
-- dia to sml
-- sml to c++
-- potentially merger
-
+**** Convert pods into entity, value or service type objects          :story:
 *** Model name should be a qname                                      :story:
 
 We already have most of the qname properties in the model anyway, so

@@ -30,7 +30,6 @@
 #include "dogen/dia/types/object.hpp"
 #include "dogen/sml/types/nested_qname.hpp"
 #include "dogen/sml/types/meta_types.hpp"
-#include "dogen/sml/types/enumerator.hpp"
 #include "dogen/dia_to_sml/types/processed_object.hpp"
 #include "dogen/dia_to_sml/types/processed_property.hpp"
 #include "dogen/dia_to_sml/types/identifier_parser.hpp"
@@ -76,18 +75,17 @@ private:
         sml::meta_types meta_type, const std::string& pkg_id) const;
 
     /**
+     * @brief Converts the string into a nested qname.
+     */
+    sml::nested_qname transform_nested_qname(const std::string& n) const;
+
+    /**
      * @brief Converts a Dia composite storing the UML attribute into
      * an SML property
      *
      * @param uml_attribute the Dia UML attribute
      */
     sml::property transform_property(const processed_property& p);
-
-    /**
-     * @brief Transforms the attribute into a SML enumerator.
-     */
-    sml::enumerator transform_enumerator(const processed_property& p,
-        const unsigned int position) const;
 
     /**
      * @brief Converts a object containing a class into an pod.

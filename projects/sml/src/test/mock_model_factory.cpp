@@ -19,6 +19,7 @@
  *
  */
 #include <sstream>
+#include <boost/lexical_cast.hpp>
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/exception/utility_exception.hpp"
 #include "dogen/utility/log/logger.hpp"
@@ -184,7 +185,7 @@ dogen::sml::pod mock_pod(unsigned int i, const unsigned int module_n = 0) {
     return mock_pod(i, model_name(i), module_n);
 }
 
-dogen::sml::enumeration
+dogen::sml::value
 mock_enumeration(const unsigned int i, const std::string& model_name,
     const unsigned int module_n = 0) {
     dogen::sml::qname qn;
@@ -195,20 +196,28 @@ mock_enumeration(const unsigned int i, const std::string& model_name,
     for (unsigned int i(0); i < module_n; ++i)
         qn.module_path().push_back(module_name(i));
 
-    dogen::sml::enumerator e0;
-    e0.name(type_name(0));
-    e0.value("0");
-
-    dogen::sml::enumerator e1;
-    e1.name(type_name(1));
-    e1.value("1");
-
-    dogen::sml::enumeration r;
+    dogen::sml::value r;
     r.name(qn);
     r.generation_type(dogen::sml::generation_types::full_generation);
-    r.enumerators().push_back(e0);
-    r.enumerators().push_back(e1);
     r.documentation(documentation);
+
+    const auto lambda([](const unsigned int n) {
+            dogen::sml::qname qn;
+            qn.type_name(unsigned_int);
+            qn.meta_type(dogen::sml::meta_types::primitive);
+
+            dogen::sml::nested_qname nqn;
+            nqn.type(qn);
+
+            dogen::sml::property r;
+            r.name(type_name(n));
+            r.type_name(nqn);
+            r.default_value(boost::lexical_cast<std::string>(n));
+            return r;
+        });
+
+    r.properties().push_back(lambda(0));
+    r.properties().push_back(lambda(1));
     return r;
 }
 
