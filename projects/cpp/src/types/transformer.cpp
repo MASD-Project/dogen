@@ -223,7 +223,7 @@ enum_info transformer::transform(const sml::enumeration& e) const {
     return r;
 }
 
-exception_info transformer::transform(const sml::exception& e) const {
+exception_info transformer::transform(const sml::value& e) const {
     BOOST_LOG_SEV(lg, debug) << "Transforming exception: " << e.name();
 
     exception_info r;

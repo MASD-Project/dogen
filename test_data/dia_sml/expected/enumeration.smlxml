@@ -5,7 +5,7 @@
 	<name>enumeration</name>
 	<pods class_id="1" tracking_level="0" version="0">
 		<count>1</count>
-		<bucket_count>11</bucket_count>
+		<bucket_count>23</bucket_count>
 		<item_version>0</item_version>
 		<item class_id="2" tracking_level="0" version="0">
 			<first class_id="3" tracking_level="0" version="0">
@@ -168,12 +168,12 @@
 	</pods>
 	<primitives class_id="13" tracking_level="0" version="0">
 		<count>0</count>
-		<bucket_count>11</bucket_count>
+		<bucket_count>23</bucket_count>
 		<item_version>0</item_version>
 	</primitives>
 	<enumerations class_id="14" tracking_level="0" version="0">
 		<count>3</count>
-		<bucket_count>11</bucket_count>
+		<bucket_count>23</bucket_count>
 		<item_version>0</item_version>
 		<item class_id="15" tracking_level="0" version="0">
 			<first>
@@ -360,7 +360,7 @@ this is a long comment</documentation>
 	</enumerations>
 	<exceptions class_id="19" tracking_level="0" version="0">
 		<count>0</count>
-		<bucket_count>11</bucket_count>
+		<bucket_count>23</bucket_count>
 		<item_version>0</item_version>
 	</exceptions>
 	<external_module_path>
@@ -370,12 +370,12 @@ this is a long comment</documentation>
 	<is_system>0</is_system>
 	<dependencies class_id="20" tracking_level="0" version="0">
 		<count>0</count>
-		<bucket_count>11</bucket_count>
+		<bucket_count>23</bucket_count>
 		<item_version>0</item_version>
 	</dependencies>
 	<leaves class_id="21" tracking_level="0" version="0">
 		<count>0</count>
-		<bucket_count>11</bucket_count>
+		<bucket_count>23</bucket_count>
 		<item_version>0</item_version>
 	</leaves>
 	<documentation></documentation>
@@ -385,12 +385,12 @@ this is a long comment</documentation>
 	</implementation_specific_parameters>
 	<services class_id="22" tracking_level="0" version="0">
 		<count>0</count>
-		<bucket_count>11</bucket_count>
+		<bucket_count>23</bucket_count>
 		<item_version>0</item_version>
 	</services>
 	<modules class_id="23" tracking_level="0" version="0">
 		<count>1</count>
-		<bucket_count>11</bucket_count>
+		<bucket_count>23</bucket_count>
 		<item_version>0</item_version>
 		<item class_id="24" tracking_level="0" version="0">
 			<first>
@@ -437,7 +437,7 @@ this is a long comment</documentation>
 	</modules>
 	<concepts class_id="27" tracking_level="0" version="0">
 		<count>0</count>
-		<bucket_count>11</bucket_count>
+		<bucket_count>23</bucket_count>
 		<item_version>0</item_version>
 	</concepts>
 </entity>

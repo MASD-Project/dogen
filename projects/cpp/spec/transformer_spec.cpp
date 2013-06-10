@@ -185,7 +185,7 @@ BOOST_AUTO_TEST_CASE(transforming_exception_results_in_expected_exception_info) 
 
     BOOST_CHECK(is_type_zero(e.name()));
     BOOST_CHECK(!e.documentation().empty());
-    BOOST_CHECK(e.namespaces().size() == 1);
+    BOOST_REQUIRE(e.namespaces().size() == 1);
     BOOST_CHECK(is_model_zero(e.namespaces().front()));
 }
 

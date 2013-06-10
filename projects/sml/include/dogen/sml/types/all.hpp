@@ -24,7 +24,6 @@
 #include "dogen/sml/types/entity.hpp"
 #include "dogen/sml/types/enumeration.hpp"
 #include "dogen/sml/types/enumerator.hpp"
-#include "dogen/sml/types/exception.hpp"
 #include "dogen/sml/types/factory.hpp"
 #include "dogen/sml/types/generation_types.hpp"
 #include "dogen/sml/types/injection_error.hpp"

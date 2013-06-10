@@ -44,7 +44,6 @@ BOOST_AUTO_TEST_CASE(validate_move_assignment_copy) {
     test_move_assignment_copy<category_types_generator>();
     test_move_assignment_copy<enumeration_generator>();
     test_move_assignment_copy<enumerator_generator>();
-    test_move_assignment_copy<exception_generator>();
     test_move_assignment_copy<generation_types_generator>();
     test_move_assignment_copy<meta_types_generator>();
     test_move_assignment_copy<model_generator>();

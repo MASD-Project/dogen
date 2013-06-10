@@ -10,20 +10,22 @@ This file contains all stories that were closed during sprint 28.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-06-08 Sat 23:16]
+Clock summary at [2013-06-10 Mon 20:13]
 
 | Headline                                                         | Time    |       |      |
 |------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                     | *13:38* |       |      |
+| *Total time*                                                     | *22:29* |       |      |
 |------------------------------------------------------------------+---------+-------+------|
-| Development Stories Implemented                                  |         | 13:38 |      |
+| Development Stories Implemented                                  |         | 22:29 |      |
 | COMPLETED Update README                                          |         |       | 1:04 |
 | COMPLETED Whiteboarding on the role of SML                       |         |       | 1:45 |
 | COMPLETED Leaf types do not have a virtual destructor            |         |       | 0:26 |
 | COMPLETED Suppress visitor generation for non-target models      |         |       | 0:20 |
+| COMPLETED Fix generation bug in inheritance tree                 |         |       | 1:22 |
+| COMPLETED Test move constructors in test model                   |         |       | 2:52 |
 | IMPLEMENTATION Release notes and backlog grooming                |         |       | 1:04 |
-| IMPLEMENTATION Improve modeling of domain driven concepts in SML |         |       | 6:52 |
-| Add support for concepts at the SML level                        |         |       | 0:12 |
+| IMPLEMENTATION Improve modeling of domain driven concepts in SML |         |       | 9:56 |
+| IMPLEMENTATION Add support for concepts at the SML level         |         |       | 1:45 |
 | ANALYSIS Break down SML into concepts                            |         |       | 1:27 |
 | Refactor top level concepts in SML                               |         |       | 0:22 |
 | IMPLEMENTATION Move services into their own type                 |         |       | 0:06 |
@@ -81,6 +83,12 @@ valid. It does not appear to be the case as when we tried to make use
 of them in Creris, the compiler complained. We need to add a generic
 test that performs a =std::move= in sanitiser and fix the fallout of
 the test.
+
+*** Transformer tests should check that docs are not empty            :spike:
+
+Dia to SML transformer tests don't appear to check that we are
+correctly transforming the documentation. Change factory to create
+documentation if necessary.
 
 *** IMPLEMENTATION Release notes and backlog grooming                  :task:
     CLOCK: [2013-06-06 Thu 07:50]--[2013-06-06 Thu 08:15] =>  0:25
@@ -261,7 +269,16 @@ We should create an enumeration, say =value_types= which only values
 have and then collapse all these types into value. These concepts
 don't really exist at the SML level.
 
-**** Convert exceptions into value type objects                       :story:
+**** COMPLETED Convert exceptions into value type objects             :story:
+     CLOSED: [2013-06-10 Mon 20:12]
+     CLOCK: [2013-06-10 Mon 19:35]--[2013-06-10 Mon 20:00] =>  0:25
+     CLOCK: [2013-06-10 Mon 08:32]--[2013-06-10 Mon 08:42] =>  0:10
+     CLOCK: [2013-06-10 Mon 07:48]--[2013-06-10 Mon 08:15] =>  0:27
+     CLOCK: [2013-06-10 Mon 00:22]--[2013-06-10 Mon 00:47] =>  0:25
+     CLOCK: [2013-06-10 Mon 00:10]--[2013-06-10 Mon 00:22] =>  0:12
+     CLOCK: [2013-06-09 Sun 17:47]--[2013-06-09 Sun 18:04] =>  0:17
+     CLOCK: [2013-06-09 Sun 00:51]--[2013-06-09 Sun 01:59] =>  1:08
+
 **** Convert enumerations into value type objects                     :story:
 **** Convert primitives into value type objects                       :story:
 **** Remove generation types                                          :story:

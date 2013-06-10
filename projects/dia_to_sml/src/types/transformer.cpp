@@ -28,10 +28,11 @@
 #include "dogen/sml/types/service.hpp"
 #include "dogen/dia/types/composite.hpp"
 #include "dogen/dia/types/attribute.hpp"
+#include "dogen/sml/types/enumeration.hpp"
+#include "dogen/sml/types/value.hpp"
+#include "dogen/sml/io/value_io.hpp"
 #include "dogen/dia_to_sml/types/transformation_error.hpp"
 #include "dogen/dia_to_sml/io/object_types_io.hpp"
-#include "dogen/sml/types/enumeration.hpp"
-#include "dogen/sml/types/exception.hpp"
 #include "dogen/dia_to_sml/types/processed_object.hpp"
 #include "dogen/dia_to_sml/io/processed_object_io.hpp"
 #include "dogen/dia_to_sml/io/context_io.hpp"
@@ -533,7 +534,8 @@ void transformer::transform_note(const processed_object& o) {
 void transformer::transform_exception(const processed_object& o) {
     BOOST_LOG_SEV(lg, debug) << "Object is an exception: " << o.id();
 
-    sml::exception e;
+    sml::value e;
+    e.type(sml::value_types::exception);
     e.generation_type(context_.is_target() ?
         sml::generation_types::full_generation :
         sml::generation_types::no_generation);
@@ -543,6 +545,10 @@ void transformer::transform_exception(const processed_object& o) {
     e.name(transform_qname(o.name(), meta_types::exception, pkg_id));
     e.documentation(o.comment());
     context_.model().exceptions().insert(std::make_pair(e.name(), e));
+
+    for (const auto p : context_.model().exceptions()) {
+        BOOST_LOG_SEV(lg, debug) << "Created exception: " << p.second;
+    }
 }
 
 void transformer::

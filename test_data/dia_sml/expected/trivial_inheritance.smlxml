@@ -5,7 +5,7 @@
 	<name>trivial_inheritance</name>
 	<pods class_id="1" tracking_level="0" version="0">
 		<count>23</count>
-		<bucket_count>37</bucket_count>
+		<bucket_count>53</bucket_count>
 		<item_version>0</item_version>
 		<item class_id="2" tracking_level="0" version="0">
 			<first class_id="3" tracking_level="0" version="0">
@@ -111,11 +111,10 @@
 					<item_version>0</item_version>
 				</external_module_path>
 				<module_path>
-					<count>1</count>
+					<count>0</count>
 					<item_version>0</item_version>
-					<item>pkg1</item>
 				</module_path>
-				<type_name>child</type_name>
+				<type_name>parent_without_members</type_name>
 				<meta_type>2</meta_type>
 			</first>
 			<second>
@@ -126,89 +125,54 @@
 						<item_version>0</item_version>
 					</external_module_path>
 					<module_path>
-						<count>1</count>
+						<count>0</count>
 						<item_version>0</item_version>
-						<item>pkg1</item>
 					</module_path>
-					<type_name>child</type_name>
+					<type_name>parent_without_members</type_name>
 					<meta_type>2</meta_type>
 				</name>
 				<properties>
-					<count>1</count>
-					<item_version>0</item_version>
-					<item class_id="10" tracking_level="0" version="0">
-						<name>prop_1</name>
-						<type_name class_id="11" tracking_level="0" version="0">
-							<type>
-								<model_name></model_name>
-								<external_module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</external_module_path>
-								<module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</module_path>
-								<type_name>int</type_name>
-								<meta_type>0</meta_type>
-							</type>
-							<children class_id="12" tracking_level="0" version="0">
-								<count>0</count>
-								<item_version>0</item_version>
-							</children>
-							<is_pointer>0</is_pointer>
-						</type_name>
-						<default_value></default_value>
-						<documentation></documentation>
-						<is_identity_attribute>0</is_identity_attribute>
-						<implementation_specific_parameters>
-							<count>0</count>
-							<item_version>0</item_version>
-						</implementation_specific_parameters>
-					</item>
-				</properties>
-				<parent_name>
-					<initialized>1</initialized>
-					<item_version>0</item_version>
-					<value>
-						<model_name>trivial_inheritance</model_name>
-						<external_module_path>
-							<count>0</count>
-							<item_version>0</item_version>
-						</external_module_path>
-						<module_path>
-							<count>1</count>
-							<item_version>0</item_version>
-							<item>pkg1</item>
-						</module_path>
-						<type_name>parent</type_name>
-						<meta_type>2</meta_type>
-					</value>
-				</parent_name>
-				<original_parent_name>
-					<initialized>1</initialized>
-					<item_version>0</item_version>
-					<value>
-						<model_name>trivial_inheritance</model_name>
-						<external_module_path>
-							<count>0</count>
-							<item_version>0</item_version>
-						</external_module_path>
-						<module_path>
-							<count>1</count>
-							<item_version>0</item_version>
-							<item>pkg1</item>
-						</module_path>
-						<type_name>parent</type_name>
-						<meta_type>2</meta_type>
-					</value>
-				</original_parent_name>
-				<leaves>
 					<count>0</count>
 					<item_version>0</item_version>
+				</properties>
+				<parent_name>
+					<initialized>0</initialized>
+				</parent_name>
+				<original_parent_name>
+					<initialized>0</initialized>
+				</original_parent_name>
+				<leaves>
+					<count>2</count>
+					<item_version>0</item_version>
+					<item>
+						<model_name>trivial_inheritance</model_name>
+						<external_module_path>
+							<count>0</count>
+							<item_version>0</item_version>
+						</external_module_path>
+						<module_path>
+							<count>0</count>
+							<item_version>0</item_version>
+						</module_path>
+						<type_name>child_without_members</type_name>
+						<meta_type>2</meta_type>
+					</item>
+					<item>
+						<model_name>trivial_inheritance</model_name>
+						<external_module_path>
+							<count>0</count>
+							<item_version>0</item_version>
+						</external_module_path>
+						<module_path>
+							<count>0</count>
+							<item_version>0</item_version>
+						</module_path>
+						<type_name>child_with_members</type_name>
+						<meta_type>2</meta_type>
+					</item>
 				</leaves>
 				<generation_type>1</generation_type>
-				<is_parent>0</is_parent>
+				<is_parent>1</is_parent>
 				<category_type>1</category_type>
 				<pod_type>5</pod_type>
 				<documentation></documentation>
@@ -265,9 +229,9 @@
 				<properties>
 					<count>1</count>
 					<item_version>0</item_version>
-					<item>
+					<item class_id="10" tracking_level="0" version="0">
 						<name>prop_0</name>
-						<type_name>
+						<type_name class_id="11" tracking_level="0" version="0">
 							<type>
 								<model_name></model_name>
 								<external_module_path>
@@ -281,7 +245,7 @@
 								<type_name>unsigned int</type_name>
 								<meta_type>0</meta_type>
 							</type>
-							<children>
+							<children class_id="12" tracking_level="0" version="0">
 								<count>0</count>
 								<item_version>0</item_version>
 							</children>
@@ -353,10 +317,11 @@
 					<item_version>0</item_version>
 				</external_module_path>
 				<module_path>
-					<count>0</count>
+					<count>1</count>
 					<item_version>0</item_version>
+					<item>pkg4</item>
 				</module_path>
-				<type_name>child_of_a_child1</type_name>
+				<type_name>child</type_name>
 				<meta_type>2</meta_type>
 			</first>
 			<second>
@@ -367,207 +332,18 @@
 						<item_version>0</item_version>
 					</external_module_path>
 					<module_path>
-						<count>0</count>
+						<count>1</count>
 						<item_version>0</item_version>
+						<item>pkg4</item>
 					</module_path>
-					<type_name>child_of_a_child1</type_name>
-					<meta_type>2</meta_type>
-				</name>
-				<properties>
-					<count>0</count>
-					<item_version>0</item_version>
-				</properties>
-				<parent_name>
-					<initialized>1</initialized>
-					<item_version>0</item_version>
-					<value>
-						<model_name>trivial_inheritance</model_name>
-						<external_module_path>
-							<count>0</count>
-							<item_version>0</item_version>
-						</external_module_path>
-						<module_path>
-							<count>0</count>
-							<item_version>0</item_version>
-						</module_path>
-						<type_name>third_child_with_members</type_name>
-						<meta_type>2</meta_type>
-					</value>
-				</parent_name>
-				<original_parent_name>
-					<initialized>1</initialized>
-					<item_version>0</item_version>
-					<value>
-						<model_name>trivial_inheritance</model_name>
-						<external_module_path>
-							<count>0</count>
-							<item_version>0</item_version>
-						</external_module_path>
-						<module_path>
-							<count>0</count>
-							<item_version>0</item_version>
-						</module_path>
-						<type_name>parent_with_members</type_name>
-						<meta_type>2</meta_type>
-					</value>
-				</original_parent_name>
-				<leaves>
-					<count>0</count>
-					<item_version>0</item_version>
-				</leaves>
-				<generation_type>1</generation_type>
-				<is_parent>0</is_parent>
-				<category_type>1</category_type>
-				<pod_type>5</pod_type>
-				<documentation></documentation>
-				<number_of_type_arguments>0</number_of_type_arguments>
-				<implementation_specific_parameters>
-					<count>0</count>
-					<item_version>0</item_version>
-				</implementation_specific_parameters>
-				<is_visitable>0</is_visitable>
-				<is_immutable>0</is_immutable>
-				<is_versioned>0</is_versioned>
-				<is_keyed>0</is_keyed>
-				<is_comparable>0</is_comparable>
-				<is_fluent>0</is_fluent>
-				<is_aggregate_root>0</is_aggregate_root>
-				<versioned_key>
-					<initialized>0</initialized>
-				</versioned_key>
-				<unversioned_key>
-					<initialized>0</initialized>
-				</unversioned_key>
-			</second>
-		</item>
-		<item>
-			<first>
-				<model_name>trivial_inheritance</model_name>
-				<external_module_path>
-					<count>0</count>
-					<item_version>0</item_version>
-				</external_module_path>
-				<module_path>
-					<count>0</count>
-					<item_version>0</item_version>
-				</module_path>
-				<type_name>second_child_without_members</type_name>
-				<meta_type>2</meta_type>
-			</first>
-			<second>
-				<name>
-					<model_name>trivial_inheritance</model_name>
-					<external_module_path>
-						<count>0</count>
-						<item_version>0</item_version>
-					</external_module_path>
-					<module_path>
-						<count>0</count>
-						<item_version>0</item_version>
-					</module_path>
-					<type_name>second_child_without_members</type_name>
-					<meta_type>2</meta_type>
-				</name>
-				<properties>
-					<count>0</count>
-					<item_version>0</item_version>
-				</properties>
-				<parent_name>
-					<initialized>1</initialized>
-					<item_version>0</item_version>
-					<value>
-						<model_name>trivial_inheritance</model_name>
-						<external_module_path>
-							<count>0</count>
-							<item_version>0</item_version>
-						</external_module_path>
-						<module_path>
-							<count>0</count>
-							<item_version>0</item_version>
-						</module_path>
-						<type_name>parent_with_members</type_name>
-						<meta_type>2</meta_type>
-					</value>
-				</parent_name>
-				<original_parent_name>
-					<initialized>1</initialized>
-					<item_version>0</item_version>
-					<value>
-						<model_name>trivial_inheritance</model_name>
-						<external_module_path>
-							<count>0</count>
-							<item_version>0</item_version>
-						</external_module_path>
-						<module_path>
-							<count>0</count>
-							<item_version>0</item_version>
-						</module_path>
-						<type_name>parent_with_members</type_name>
-						<meta_type>2</meta_type>
-					</value>
-				</original_parent_name>
-				<leaves>
-					<count>0</count>
-					<item_version>0</item_version>
-				</leaves>
-				<generation_type>1</generation_type>
-				<is_parent>0</is_parent>
-				<category_type>1</category_type>
-				<pod_type>5</pod_type>
-				<documentation></documentation>
-				<number_of_type_arguments>0</number_of_type_arguments>
-				<implementation_specific_parameters>
-					<count>0</count>
-					<item_version>0</item_version>
-				</implementation_specific_parameters>
-				<is_visitable>0</is_visitable>
-				<is_immutable>0</is_immutable>
-				<is_versioned>0</is_versioned>
-				<is_keyed>0</is_keyed>
-				<is_comparable>0</is_comparable>
-				<is_fluent>0</is_fluent>
-				<is_aggregate_root>0</is_aggregate_root>
-				<versioned_key>
-					<initialized>0</initialized>
-				</versioned_key>
-				<unversioned_key>
-					<initialized>0</initialized>
-				</unversioned_key>
-			</second>
-		</item>
-		<item>
-			<first>
-				<model_name>trivial_inheritance</model_name>
-				<external_module_path>
-					<count>0</count>
-					<item_version>0</item_version>
-				</external_module_path>
-				<module_path>
-					<count>0</count>
-					<item_version>0</item_version>
-				</module_path>
-				<type_name>parent_outside</type_name>
-				<meta_type>2</meta_type>
-			</first>
-			<second>
-				<name>
-					<model_name>trivial_inheritance</model_name>
-					<external_module_path>
-						<count>0</count>
-						<item_version>0</item_version>
-					</external_module_path>
-					<module_path>
-						<count>0</count>
-						<item_version>0</item_version>
-					</module_path>
-					<type_name>parent_outside</type_name>
+					<type_name>child</type_name>
 					<meta_type>2</meta_type>
 				</name>
 				<properties>
 					<count>1</count>
 					<item_version>0</item_version>
 					<item>
-						<name>prop_0</name>
+						<name>prop_1</name>
 						<type_name>
 							<type>
 								<model_name></model_name>
@@ -598,31 +374,45 @@
 					</item>
 				</properties>
 				<parent_name>
-					<initialized>0</initialized>
-				</parent_name>
-				<original_parent_name>
-					<initialized>0</initialized>
-				</original_parent_name>
-				<leaves>
-					<count>1</count>
+					<initialized>1</initialized>
 					<item_version>0</item_version>
-					<item>
+					<value>
 						<model_name>trivial_inheritance</model_name>
 						<external_module_path>
 							<count>0</count>
 							<item_version>0</item_version>
 						</external_module_path>
 						<module_path>
-							<count>1</count>
+							<count>0</count>
 							<item_version>0</item_version>
-							<item>pkg4</item>
 						</module_path>
-						<type_name>child</type_name>
+						<type_name>parent_outside</type_name>
 						<meta_type>2</meta_type>
-					</item>
+					</value>
+				</parent_name>
+				<original_parent_name>
+					<initialized>1</initialized>
+					<item_version>0</item_version>
+					<value>
+						<model_name>trivial_inheritance</model_name>
+						<external_module_path>
+							<count>0</count>
+							<item_version>0</item_version>
+						</external_module_path>
+						<module_path>
+							<count>0</count>
+							<item_version>0</item_version>
+						</module_path>
+						<type_name>parent_outside</type_name>
+						<meta_type>2</meta_type>
+					</value>
+				</original_parent_name>
+				<leaves>
+					<count>0</count>
+					<item_version>0</item_version>
 				</leaves>
 				<generation_type>1</generation_type>
-				<is_parent>1</is_parent>
+				<is_parent>0</is_parent>
 				<category_type>1</category_type>
 				<pod_type>5</pod_type>
 				<documentation></documentation>
@@ -657,7 +447,7 @@
 					<count>0</count>
 					<item_version>0</item_version>
 				</module_path>
-				<type_name>child_of_a_child2</type_name>
+				<type_name>base</type_name>
 				<meta_type>2</meta_type>
 			</first>
 			<second>
@@ -671,42 +461,105 @@
 						<count>0</count>
 						<item_version>0</item_version>
 					</module_path>
-					<type_name>child_of_a_child2</type_name>
+					<type_name>base</type_name>
 					<meta_type>2</meta_type>
 				</name>
 				<properties>
-					<count>1</count>
+					<count>0</count>
+					<item_version>0</item_version>
+				</properties>
+				<parent_name>
+					<initialized>0</initialized>
+				</parent_name>
+				<original_parent_name>
+					<initialized>0</initialized>
+				</original_parent_name>
+				<leaves>
+					<count>2</count>
 					<item_version>0</item_version>
 					<item>
-						<name>prop_2</name>
-						<type_name>
-							<type>
-								<model_name></model_name>
-								<external_module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</external_module_path>
-								<module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</module_path>
-								<type_name>unsigned int</type_name>
-								<meta_type>0</meta_type>
-							</type>
-							<children>
-								<count>0</count>
-								<item_version>0</item_version>
-							</children>
-							<is_pointer>0</is_pointer>
-						</type_name>
-						<default_value></default_value>
-						<documentation></documentation>
-						<is_identity_attribute>0</is_identity_attribute>
-						<implementation_specific_parameters>
+						<model_name>trivial_inheritance</model_name>
+						<external_module_path>
 							<count>0</count>
 							<item_version>0</item_version>
-						</implementation_specific_parameters>
+						</external_module_path>
+						<module_path>
+							<count>0</count>
+							<item_version>0</item_version>
+						</module_path>
+						<type_name>descendant2</type_name>
+						<meta_type>2</meta_type>
 					</item>
+					<item>
+						<model_name>trivial_inheritance</model_name>
+						<external_module_path>
+							<count>0</count>
+							<item_version>0</item_version>
+						</external_module_path>
+						<module_path>
+							<count>0</count>
+							<item_version>0</item_version>
+						</module_path>
+						<type_name>descendant3</type_name>
+						<meta_type>2</meta_type>
+					</item>
+				</leaves>
+				<generation_type>1</generation_type>
+				<is_parent>1</is_parent>
+				<category_type>1</category_type>
+				<pod_type>5</pod_type>
+				<documentation></documentation>
+				<number_of_type_arguments>0</number_of_type_arguments>
+				<implementation_specific_parameters>
+					<count>0</count>
+					<item_version>0</item_version>
+				</implementation_specific_parameters>
+				<is_visitable>1</is_visitable>
+				<is_immutable>0</is_immutable>
+				<is_versioned>0</is_versioned>
+				<is_keyed>0</is_keyed>
+				<is_comparable>0</is_comparable>
+				<is_fluent>0</is_fluent>
+				<is_aggregate_root>0</is_aggregate_root>
+				<versioned_key>
+					<initialized>0</initialized>
+				</versioned_key>
+				<unversioned_key>
+					<initialized>0</initialized>
+				</unversioned_key>
+			</second>
+		</item>
+		<item>
+			<first>
+				<model_name>trivial_inheritance</model_name>
+				<external_module_path>
+					<count>0</count>
+					<item_version>0</item_version>
+				</external_module_path>
+				<module_path>
+					<count>0</count>
+					<item_version>0</item_version>
+				</module_path>
+				<type_name>child_without_members</type_name>
+				<meta_type>2</meta_type>
+			</first>
+			<second>
+				<name>
+					<model_name>trivial_inheritance</model_name>
+					<external_module_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</external_module_path>
+					<module_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</module_path>
+					<type_name>child_without_members</type_name>
+					<meta_type>2</meta_type>
+				</name>
+				<properties>
+					<count>0</count>
+					<item_version>0</item_version>
 				</properties>
 				<parent_name>
 					<initialized>1</initialized>
@@ -721,7 +574,7 @@
 							<count>0</count>
 							<item_version>0</item_version>
 						</module_path>
-						<type_name>third_child_with_members</type_name>
+						<type_name>parent_without_members</type_name>
 						<meta_type>2</meta_type>
 					</value>
 				</parent_name>
@@ -738,7 +591,7 @@
 							<count>0</count>
 							<item_version>0</item_version>
 						</module_path>
-						<type_name>parent_with_members</type_name>
+						<type_name>parent_without_members</type_name>
 						<meta_type>2</meta_type>
 					</value>
 				</original_parent_name>
@@ -933,6 +786,531 @@
 					<count>0</count>
 					<item_version>0</item_version>
 				</module_path>
+				<type_name>descendant3</type_name>
+				<meta_type>2</meta_type>
+			</first>
+			<second>
+				<name>
+					<model_name>trivial_inheritance</model_name>
+					<external_module_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</external_module_path>
+					<module_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</module_path>
+					<type_name>descendant3</type_name>
+					<meta_type>2</meta_type>
+				</name>
+				<properties>
+					<count>1</count>
+					<item_version>0</item_version>
+					<item>
+						<name>prop_0</name>
+						<type_name>
+							<type>
+								<model_name></model_name>
+								<external_module_path>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_module_path>
+								<module_path>
+									<count>0</count>
+									<item_version>0</item_version>
+								</module_path>
+								<type_name>bool</type_name>
+								<meta_type>0</meta_type>
+							</type>
+							<children>
+								<count>0</count>
+								<item_version>0</item_version>
+							</children>
+							<is_pointer>0</is_pointer>
+						</type_name>
+						<default_value></default_value>
+						<documentation></documentation>
+						<is_identity_attribute>0</is_identity_attribute>
+						<implementation_specific_parameters>
+							<count>0</count>
+							<item_version>0</item_version>
+						</implementation_specific_parameters>
+					</item>
+				</properties>
+				<parent_name>
+					<initialized>1</initialized>
+					<item_version>0</item_version>
+					<value>
+						<model_name>trivial_inheritance</model_name>
+						<external_module_path>
+							<count>0</count>
+							<item_version>0</item_version>
+						</external_module_path>
+						<module_path>
+							<count>0</count>
+							<item_version>0</item_version>
+						</module_path>
+						<type_name>descendant1</type_name>
+						<meta_type>2</meta_type>
+					</value>
+				</parent_name>
+				<original_parent_name>
+					<initialized>1</initialized>
+					<item_version>0</item_version>
+					<value>
+						<model_name>trivial_inheritance</model_name>
+						<external_module_path>
+							<count>0</count>
+							<item_version>0</item_version>
+						</external_module_path>
+						<module_path>
+							<count>0</count>
+							<item_version>0</item_version>
+						</module_path>
+						<type_name>base</type_name>
+						<meta_type>2</meta_type>
+					</value>
+				</original_parent_name>
+				<leaves>
+					<count>0</count>
+					<item_version>0</item_version>
+				</leaves>
+				<generation_type>1</generation_type>
+				<is_parent>0</is_parent>
+				<category_type>1</category_type>
+				<pod_type>5</pod_type>
+				<documentation></documentation>
+				<number_of_type_arguments>0</number_of_type_arguments>
+				<implementation_specific_parameters>
+					<count>0</count>
+					<item_version>0</item_version>
+				</implementation_specific_parameters>
+				<is_visitable>0</is_visitable>
+				<is_immutable>0</is_immutable>
+				<is_versioned>0</is_versioned>
+				<is_keyed>0</is_keyed>
+				<is_comparable>0</is_comparable>
+				<is_fluent>0</is_fluent>
+				<is_aggregate_root>0</is_aggregate_root>
+				<versioned_key>
+					<initialized>0</initialized>
+				</versioned_key>
+				<unversioned_key>
+					<initialized>0</initialized>
+				</unversioned_key>
+			</second>
+		</item>
+		<item>
+			<first>
+				<model_name>trivial_inheritance</model_name>
+				<external_module_path>
+					<count>0</count>
+					<item_version>0</item_version>
+				</external_module_path>
+				<module_path>
+					<count>0</count>
+					<item_version>0</item_version>
+				</module_path>
+				<type_name>service</type_name>
+				<meta_type>2</meta_type>
+			</first>
+			<second>
+				<name>
+					<model_name>trivial_inheritance</model_name>
+					<external_module_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</external_module_path>
+					<module_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</module_path>
+					<type_name>service</type_name>
+					<meta_type>2</meta_type>
+				</name>
+				<properties>
+					<count>0</count>
+					<item_version>0</item_version>
+				</properties>
+				<parent_name>
+					<initialized>0</initialized>
+				</parent_name>
+				<original_parent_name>
+					<initialized>0</initialized>
+				</original_parent_name>
+				<leaves>
+					<count>0</count>
+					<item_version>0</item_version>
+				</leaves>
+				<generation_type>2</generation_type>
+				<is_parent>0</is_parent>
+				<category_type>1</category_type>
+				<pod_type>6</pod_type>
+				<documentation></documentation>
+				<number_of_type_arguments>0</number_of_type_arguments>
+				<implementation_specific_parameters>
+					<count>0</count>
+					<item_version>0</item_version>
+				</implementation_specific_parameters>
+				<is_visitable>0</is_visitable>
+				<is_immutable>0</is_immutable>
+				<is_versioned>0</is_versioned>
+				<is_keyed>0</is_keyed>
+				<is_comparable>0</is_comparable>
+				<is_fluent>0</is_fluent>
+				<is_aggregate_root>0</is_aggregate_root>
+				<versioned_key>
+					<initialized>0</initialized>
+				</versioned_key>
+				<unversioned_key>
+					<initialized>0</initialized>
+				</unversioned_key>
+			</second>
+		</item>
+		<item>
+			<first>
+				<model_name>trivial_inheritance</model_name>
+				<external_module_path>
+					<count>0</count>
+					<item_version>0</item_version>
+				</external_module_path>
+				<module_path>
+					<count>0</count>
+					<item_version>0</item_version>
+				</module_path>
+				<type_name>child_of_a_child1</type_name>
+				<meta_type>2</meta_type>
+			</first>
+			<second>
+				<name>
+					<model_name>trivial_inheritance</model_name>
+					<external_module_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</external_module_path>
+					<module_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</module_path>
+					<type_name>child_of_a_child1</type_name>
+					<meta_type>2</meta_type>
+				</name>
+				<properties>
+					<count>0</count>
+					<item_version>0</item_version>
+				</properties>
+				<parent_name>
+					<initialized>1</initialized>
+					<item_version>0</item_version>
+					<value>
+						<model_name>trivial_inheritance</model_name>
+						<external_module_path>
+							<count>0</count>
+							<item_version>0</item_version>
+						</external_module_path>
+						<module_path>
+							<count>0</count>
+							<item_version>0</item_version>
+						</module_path>
+						<type_name>third_child_with_members</type_name>
+						<meta_type>2</meta_type>
+					</value>
+				</parent_name>
+				<original_parent_name>
+					<initialized>1</initialized>
+					<item_version>0</item_version>
+					<value>
+						<model_name>trivial_inheritance</model_name>
+						<external_module_path>
+							<count>0</count>
+							<item_version>0</item_version>
+						</external_module_path>
+						<module_path>
+							<count>0</count>
+							<item_version>0</item_version>
+						</module_path>
+						<type_name>parent_with_members</type_name>
+						<meta_type>2</meta_type>
+					</value>
+				</original_parent_name>
+				<leaves>
+					<count>0</count>
+					<item_version>0</item_version>
+				</leaves>
+				<generation_type>1</generation_type>
+				<is_parent>0</is_parent>
+				<category_type>1</category_type>
+				<pod_type>5</pod_type>
+				<documentation></documentation>
+				<number_of_type_arguments>0</number_of_type_arguments>
+				<implementation_specific_parameters>
+					<count>0</count>
+					<item_version>0</item_version>
+				</implementation_specific_parameters>
+				<is_visitable>0</is_visitable>
+				<is_immutable>0</is_immutable>
+				<is_versioned>0</is_versioned>
+				<is_keyed>0</is_keyed>
+				<is_comparable>0</is_comparable>
+				<is_fluent>0</is_fluent>
+				<is_aggregate_root>0</is_aggregate_root>
+				<versioned_key>
+					<initialized>0</initialized>
+				</versioned_key>
+				<unversioned_key>
+					<initialized>0</initialized>
+				</unversioned_key>
+			</second>
+		</item>
+		<item>
+			<first>
+				<model_name>trivial_inheritance</model_name>
+				<external_module_path>
+					<count>0</count>
+					<item_version>0</item_version>
+				</external_module_path>
+				<module_path>
+					<count>0</count>
+					<item_version>0</item_version>
+				</module_path>
+				<type_name>child_of_a_child2</type_name>
+				<meta_type>2</meta_type>
+			</first>
+			<second>
+				<name>
+					<model_name>trivial_inheritance</model_name>
+					<external_module_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</external_module_path>
+					<module_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</module_path>
+					<type_name>child_of_a_child2</type_name>
+					<meta_type>2</meta_type>
+				</name>
+				<properties>
+					<count>1</count>
+					<item_version>0</item_version>
+					<item>
+						<name>prop_2</name>
+						<type_name>
+							<type>
+								<model_name></model_name>
+								<external_module_path>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_module_path>
+								<module_path>
+									<count>0</count>
+									<item_version>0</item_version>
+								</module_path>
+								<type_name>unsigned int</type_name>
+								<meta_type>0</meta_type>
+							</type>
+							<children>
+								<count>0</count>
+								<item_version>0</item_version>
+							</children>
+							<is_pointer>0</is_pointer>
+						</type_name>
+						<default_value></default_value>
+						<documentation></documentation>
+						<is_identity_attribute>0</is_identity_attribute>
+						<implementation_specific_parameters>
+							<count>0</count>
+							<item_version>0</item_version>
+						</implementation_specific_parameters>
+					</item>
+				</properties>
+				<parent_name>
+					<initialized>1</initialized>
+					<item_version>0</item_version>
+					<value>
+						<model_name>trivial_inheritance</model_name>
+						<external_module_path>
+							<count>0</count>
+							<item_version>0</item_version>
+						</external_module_path>
+						<module_path>
+							<count>0</count>
+							<item_version>0</item_version>
+						</module_path>
+						<type_name>third_child_with_members</type_name>
+						<meta_type>2</meta_type>
+					</value>
+				</parent_name>
+				<original_parent_name>
+					<initialized>1</initialized>
+					<item_version>0</item_version>
+					<value>
+						<model_name>trivial_inheritance</model_name>
+						<external_module_path>
+							<count>0</count>
+							<item_version>0</item_version>
+						</external_module_path>
+						<module_path>
+							<count>0</count>
+							<item_version>0</item_version>
+						</module_path>
+						<type_name>parent_with_members</type_name>
+						<meta_type>2</meta_type>
+					</value>
+				</original_parent_name>
+				<leaves>
+					<count>0</count>
+					<item_version>0</item_version>
+				</leaves>
+				<generation_type>1</generation_type>
+				<is_parent>0</is_parent>
+				<category_type>1</category_type>
+				<pod_type>5</pod_type>
+				<documentation></documentation>
+				<number_of_type_arguments>0</number_of_type_arguments>
+				<implementation_specific_parameters>
+					<count>0</count>
+					<item_version>0</item_version>
+				</implementation_specific_parameters>
+				<is_visitable>0</is_visitable>
+				<is_immutable>0</is_immutable>
+				<is_versioned>0</is_versioned>
+				<is_keyed>0</is_keyed>
+				<is_comparable>0</is_comparable>
+				<is_fluent>0</is_fluent>
+				<is_aggregate_root>0</is_aggregate_root>
+				<versioned_key>
+					<initialized>0</initialized>
+				</versioned_key>
+				<unversioned_key>
+					<initialized>0</initialized>
+				</unversioned_key>
+			</second>
+		</item>
+		<item>
+			<first>
+				<model_name>trivial_inheritance</model_name>
+				<external_module_path>
+					<count>0</count>
+					<item_version>0</item_version>
+				</external_module_path>
+				<module_path>
+					<count>1</count>
+					<item_version>0</item_version>
+					<item>pkg2</item>
+				</module_path>
+				<type_name>parent</type_name>
+				<meta_type>2</meta_type>
+			</first>
+			<second>
+				<name>
+					<model_name>trivial_inheritance</model_name>
+					<external_module_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</external_module_path>
+					<module_path>
+						<count>1</count>
+						<item_version>0</item_version>
+						<item>pkg2</item>
+					</module_path>
+					<type_name>parent</type_name>
+					<meta_type>2</meta_type>
+				</name>
+				<properties>
+					<count>1</count>
+					<item_version>0</item_version>
+					<item>
+						<name>prop_0</name>
+						<type_name>
+							<type>
+								<model_name></model_name>
+								<external_module_path>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_module_path>
+								<module_path>
+									<count>0</count>
+									<item_version>0</item_version>
+								</module_path>
+								<type_name>int</type_name>
+								<meta_type>0</meta_type>
+							</type>
+							<children>
+								<count>0</count>
+								<item_version>0</item_version>
+							</children>
+							<is_pointer>0</is_pointer>
+						</type_name>
+						<default_value></default_value>
+						<documentation></documentation>
+						<is_identity_attribute>0</is_identity_attribute>
+						<implementation_specific_parameters>
+							<count>0</count>
+							<item_version>0</item_version>
+						</implementation_specific_parameters>
+					</item>
+				</properties>
+				<parent_name>
+					<initialized>0</initialized>
+				</parent_name>
+				<original_parent_name>
+					<initialized>0</initialized>
+				</original_parent_name>
+				<leaves>
+					<count>1</count>
+					<item_version>0</item_version>
+					<item>
+						<model_name>trivial_inheritance</model_name>
+						<external_module_path>
+							<count>0</count>
+							<item_version>0</item_version>
+						</external_module_path>
+						<module_path>
+							<count>1</count>
+							<item_version>0</item_version>
+							<item>pkg3</item>
+						</module_path>
+						<type_name>child</type_name>
+						<meta_type>2</meta_type>
+					</item>
+				</leaves>
+				<generation_type>1</generation_type>
+				<is_parent>1</is_parent>
+				<category_type>1</category_type>
+				<pod_type>5</pod_type>
+				<documentation></documentation>
+				<number_of_type_arguments>0</number_of_type_arguments>
+				<implementation_specific_parameters>
+					<count>0</count>
+					<item_version>0</item_version>
+				</implementation_specific_parameters>
+				<is_visitable>0</is_visitable>
+				<is_immutable>0</is_immutable>
+				<is_versioned>0</is_versioned>
+				<is_keyed>0</is_keyed>
+				<is_comparable>0</is_comparable>
+				<is_fluent>0</is_fluent>
+				<is_aggregate_root>0</is_aggregate_root>
+				<versioned_key>
+					<initialized>0</initialized>
+				</versioned_key>
+				<unversioned_key>
+					<initialized>0</initialized>
+				</unversioned_key>
+			</second>
+		</item>
+		<item>
+			<first>
+				<model_name>trivial_inheritance</model_name>
+				<external_module_path>
+					<count>0</count>
+					<item_version>0</item_version>
+				</external_module_path>
+				<module_path>
+					<count>0</count>
+					<item_version>0</item_version>
+				</module_path>
 				<type_name>parent_with_members</type_name>
 				<meta_type>2</meta_type>
 			</first>
@@ -1030,319 +1408,6 @@
 							<item_version>0</item_version>
 						</module_path>
 						<type_name>child_of_a_child2</type_name>
-						<meta_type>2</meta_type>
-					</item>
-				</leaves>
-				<generation_type>1</generation_type>
-				<is_parent>1</is_parent>
-				<category_type>1</category_type>
-				<pod_type>5</pod_type>
-				<documentation></documentation>
-				<number_of_type_arguments>0</number_of_type_arguments>
-				<implementation_specific_parameters>
-					<count>0</count>
-					<item_version>0</item_version>
-				</implementation_specific_parameters>
-				<is_visitable>0</is_visitable>
-				<is_immutable>0</is_immutable>
-				<is_versioned>0</is_versioned>
-				<is_keyed>0</is_keyed>
-				<is_comparable>0</is_comparable>
-				<is_fluent>0</is_fluent>
-				<is_aggregate_root>0</is_aggregate_root>
-				<versioned_key>
-					<initialized>0</initialized>
-				</versioned_key>
-				<unversioned_key>
-					<initialized>0</initialized>
-				</unversioned_key>
-			</second>
-		</item>
-		<item>
-			<first>
-				<model_name>trivial_inheritance</model_name>
-				<external_module_path>
-					<count>0</count>
-					<item_version>0</item_version>
-				</external_module_path>
-				<module_path>
-					<count>0</count>
-					<item_version>0</item_version>
-				</module_path>
-				<type_name>descendant2</type_name>
-				<meta_type>2</meta_type>
-			</first>
-			<second>
-				<name>
-					<model_name>trivial_inheritance</model_name>
-					<external_module_path>
-						<count>0</count>
-						<item_version>0</item_version>
-					</external_module_path>
-					<module_path>
-						<count>0</count>
-						<item_version>0</item_version>
-					</module_path>
-					<type_name>descendant2</type_name>
-					<meta_type>2</meta_type>
-				</name>
-				<properties>
-					<count>1</count>
-					<item_version>0</item_version>
-					<item>
-						<name>prop_0</name>
-						<type_name>
-							<type>
-								<model_name></model_name>
-								<external_module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</external_module_path>
-								<module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</module_path>
-								<type_name>bool</type_name>
-								<meta_type>0</meta_type>
-							</type>
-							<children>
-								<count>0</count>
-								<item_version>0</item_version>
-							</children>
-							<is_pointer>0</is_pointer>
-						</type_name>
-						<default_value></default_value>
-						<documentation></documentation>
-						<is_identity_attribute>0</is_identity_attribute>
-						<implementation_specific_parameters>
-							<count>0</count>
-							<item_version>0</item_version>
-						</implementation_specific_parameters>
-					</item>
-				</properties>
-				<parent_name>
-					<initialized>1</initialized>
-					<item_version>0</item_version>
-					<value>
-						<model_name>trivial_inheritance</model_name>
-						<external_module_path>
-							<count>0</count>
-							<item_version>0</item_version>
-						</external_module_path>
-						<module_path>
-							<count>0</count>
-							<item_version>0</item_version>
-						</module_path>
-						<type_name>base</type_name>
-						<meta_type>2</meta_type>
-					</value>
-				</parent_name>
-				<original_parent_name>
-					<initialized>1</initialized>
-					<item_version>0</item_version>
-					<value>
-						<model_name>trivial_inheritance</model_name>
-						<external_module_path>
-							<count>0</count>
-							<item_version>0</item_version>
-						</external_module_path>
-						<module_path>
-							<count>0</count>
-							<item_version>0</item_version>
-						</module_path>
-						<type_name>base</type_name>
-						<meta_type>2</meta_type>
-					</value>
-				</original_parent_name>
-				<leaves>
-					<count>0</count>
-					<item_version>0</item_version>
-				</leaves>
-				<generation_type>1</generation_type>
-				<is_parent>0</is_parent>
-				<category_type>1</category_type>
-				<pod_type>5</pod_type>
-				<documentation></documentation>
-				<number_of_type_arguments>0</number_of_type_arguments>
-				<implementation_specific_parameters>
-					<count>0</count>
-					<item_version>0</item_version>
-				</implementation_specific_parameters>
-				<is_visitable>0</is_visitable>
-				<is_immutable>0</is_immutable>
-				<is_versioned>0</is_versioned>
-				<is_keyed>0</is_keyed>
-				<is_comparable>0</is_comparable>
-				<is_fluent>0</is_fluent>
-				<is_aggregate_root>0</is_aggregate_root>
-				<versioned_key>
-					<initialized>0</initialized>
-				</versioned_key>
-				<unversioned_key>
-					<initialized>0</initialized>
-				</unversioned_key>
-			</second>
-		</item>
-		<item>
-			<first>
-				<model_name>trivial_inheritance</model_name>
-				<external_module_path>
-					<count>0</count>
-					<item_version>0</item_version>
-				</external_module_path>
-				<module_path>
-					<count>0</count>
-					<item_version>0</item_version>
-				</module_path>
-				<type_name>child_without_members</type_name>
-				<meta_type>2</meta_type>
-			</first>
-			<second>
-				<name>
-					<model_name>trivial_inheritance</model_name>
-					<external_module_path>
-						<count>0</count>
-						<item_version>0</item_version>
-					</external_module_path>
-					<module_path>
-						<count>0</count>
-						<item_version>0</item_version>
-					</module_path>
-					<type_name>child_without_members</type_name>
-					<meta_type>2</meta_type>
-				</name>
-				<properties>
-					<count>0</count>
-					<item_version>0</item_version>
-				</properties>
-				<parent_name>
-					<initialized>1</initialized>
-					<item_version>0</item_version>
-					<value>
-						<model_name>trivial_inheritance</model_name>
-						<external_module_path>
-							<count>0</count>
-							<item_version>0</item_version>
-						</external_module_path>
-						<module_path>
-							<count>0</count>
-							<item_version>0</item_version>
-						</module_path>
-						<type_name>parent_without_members</type_name>
-						<meta_type>2</meta_type>
-					</value>
-				</parent_name>
-				<original_parent_name>
-					<initialized>1</initialized>
-					<item_version>0</item_version>
-					<value>
-						<model_name>trivial_inheritance</model_name>
-						<external_module_path>
-							<count>0</count>
-							<item_version>0</item_version>
-						</external_module_path>
-						<module_path>
-							<count>0</count>
-							<item_version>0</item_version>
-						</module_path>
-						<type_name>parent_without_members</type_name>
-						<meta_type>2</meta_type>
-					</value>
-				</original_parent_name>
-				<leaves>
-					<count>0</count>
-					<item_version>0</item_version>
-				</leaves>
-				<generation_type>1</generation_type>
-				<is_parent>0</is_parent>
-				<category_type>1</category_type>
-				<pod_type>5</pod_type>
-				<documentation></documentation>
-				<number_of_type_arguments>0</number_of_type_arguments>
-				<implementation_specific_parameters>
-					<count>0</count>
-					<item_version>0</item_version>
-				</implementation_specific_parameters>
-				<is_visitable>0</is_visitable>
-				<is_immutable>0</is_immutable>
-				<is_versioned>0</is_versioned>
-				<is_keyed>0</is_keyed>
-				<is_comparable>0</is_comparable>
-				<is_fluent>0</is_fluent>
-				<is_aggregate_root>0</is_aggregate_root>
-				<versioned_key>
-					<initialized>0</initialized>
-				</versioned_key>
-				<unversioned_key>
-					<initialized>0</initialized>
-				</unversioned_key>
-			</second>
-		</item>
-		<item>
-			<first>
-				<model_name>trivial_inheritance</model_name>
-				<external_module_path>
-					<count>0</count>
-					<item_version>0</item_version>
-				</external_module_path>
-				<module_path>
-					<count>0</count>
-					<item_version>0</item_version>
-				</module_path>
-				<type_name>parent_without_members</type_name>
-				<meta_type>2</meta_type>
-			</first>
-			<second>
-				<name>
-					<model_name>trivial_inheritance</model_name>
-					<external_module_path>
-						<count>0</count>
-						<item_version>0</item_version>
-					</external_module_path>
-					<module_path>
-						<count>0</count>
-						<item_version>0</item_version>
-					</module_path>
-					<type_name>parent_without_members</type_name>
-					<meta_type>2</meta_type>
-				</name>
-				<properties>
-					<count>0</count>
-					<item_version>0</item_version>
-				</properties>
-				<parent_name>
-					<initialized>0</initialized>
-				</parent_name>
-				<original_parent_name>
-					<initialized>0</initialized>
-				</original_parent_name>
-				<leaves>
-					<count>2</count>
-					<item_version>0</item_version>
-					<item>
-						<model_name>trivial_inheritance</model_name>
-						<external_module_path>
-							<count>0</count>
-							<item_version>0</item_version>
-						</external_module_path>
-						<module_path>
-							<count>0</count>
-							<item_version>0</item_version>
-						</module_path>
-						<type_name>child_without_members</type_name>
-						<meta_type>2</meta_type>
-					</item>
-					<item>
-						<model_name>trivial_inheritance</model_name>
-						<external_module_path>
-							<count>0</count>
-							<item_version>0</item_version>
-						</external_module_path>
-						<module_path>
-							<count>0</count>
-							<item_version>0</item_version>
-						</module_path>
-						<type_name>child_with_members</type_name>
 						<meta_type>2</meta_type>
 					</item>
 				</leaves>
@@ -1508,11 +1573,10 @@
 					<item_version>0</item_version>
 				</external_module_path>
 				<module_path>
-					<count>1</count>
+					<count>0</count>
 					<item_version>0</item_version>
-					<item>pkg4</item>
 				</module_path>
-				<type_name>child</type_name>
+				<type_name>descendant2</type_name>
 				<meta_type>2</meta_type>
 			</first>
 			<second>
@@ -1523,138 +1587,10 @@
 						<item_version>0</item_version>
 					</external_module_path>
 					<module_path>
-						<count>1</count>
-						<item_version>0</item_version>
-						<item>pkg4</item>
-					</module_path>
-					<type_name>child</type_name>
-					<meta_type>2</meta_type>
-				</name>
-				<properties>
-					<count>1</count>
-					<item_version>0</item_version>
-					<item>
-						<name>prop_1</name>
-						<type_name>
-							<type>
-								<model_name></model_name>
-								<external_module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</external_module_path>
-								<module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</module_path>
-								<type_name>int</type_name>
-								<meta_type>0</meta_type>
-							</type>
-							<children>
-								<count>0</count>
-								<item_version>0</item_version>
-							</children>
-							<is_pointer>0</is_pointer>
-						</type_name>
-						<default_value></default_value>
-						<documentation></documentation>
-						<is_identity_attribute>0</is_identity_attribute>
-						<implementation_specific_parameters>
-							<count>0</count>
-							<item_version>0</item_version>
-						</implementation_specific_parameters>
-					</item>
-				</properties>
-				<parent_name>
-					<initialized>1</initialized>
-					<item_version>0</item_version>
-					<value>
-						<model_name>trivial_inheritance</model_name>
-						<external_module_path>
-							<count>0</count>
-							<item_version>0</item_version>
-						</external_module_path>
-						<module_path>
-							<count>0</count>
-							<item_version>0</item_version>
-						</module_path>
-						<type_name>parent_outside</type_name>
-						<meta_type>2</meta_type>
-					</value>
-				</parent_name>
-				<original_parent_name>
-					<initialized>1</initialized>
-					<item_version>0</item_version>
-					<value>
-						<model_name>trivial_inheritance</model_name>
-						<external_module_path>
-							<count>0</count>
-							<item_version>0</item_version>
-						</external_module_path>
-						<module_path>
-							<count>0</count>
-							<item_version>0</item_version>
-						</module_path>
-						<type_name>parent_outside</type_name>
-						<meta_type>2</meta_type>
-					</value>
-				</original_parent_name>
-				<leaves>
-					<count>0</count>
-					<item_version>0</item_version>
-				</leaves>
-				<generation_type>1</generation_type>
-				<is_parent>0</is_parent>
-				<category_type>1</category_type>
-				<pod_type>5</pod_type>
-				<documentation></documentation>
-				<number_of_type_arguments>0</number_of_type_arguments>
-				<implementation_specific_parameters>
-					<count>0</count>
-					<item_version>0</item_version>
-				</implementation_specific_parameters>
-				<is_visitable>0</is_visitable>
-				<is_immutable>0</is_immutable>
-				<is_versioned>0</is_versioned>
-				<is_keyed>0</is_keyed>
-				<is_comparable>0</is_comparable>
-				<is_fluent>0</is_fluent>
-				<is_aggregate_root>0</is_aggregate_root>
-				<versioned_key>
-					<initialized>0</initialized>
-				</versioned_key>
-				<unversioned_key>
-					<initialized>0</initialized>
-				</unversioned_key>
-			</second>
-		</item>
-		<item>
-			<first>
-				<model_name>trivial_inheritance</model_name>
-				<external_module_path>
-					<count>0</count>
-					<item_version>0</item_version>
-				</external_module_path>
-				<module_path>
-					<count>1</count>
-					<item_version>0</item_version>
-					<item>pkg2</item>
-				</module_path>
-				<type_name>parent</type_name>
-				<meta_type>2</meta_type>
-			</first>
-			<second>
-				<name>
-					<model_name>trivial_inheritance</model_name>
-					<external_module_path>
 						<count>0</count>
 						<item_version>0</item_version>
-					</external_module_path>
-					<module_path>
-						<count>1</count>
-						<item_version>0</item_version>
-						<item>pkg2</item>
 					</module_path>
-					<type_name>parent</type_name>
+					<type_name>descendant2</type_name>
 					<meta_type>2</meta_type>
 				</name>
 				<properties>
@@ -1673,7 +1609,7 @@
 									<count>0</count>
 									<item_version>0</item_version>
 								</module_path>
-								<type_name>int</type_name>
+								<type_name>bool</type_name>
 								<meta_type>0</meta_type>
 							</type>
 							<children>
@@ -1692,31 +1628,45 @@
 					</item>
 				</properties>
 				<parent_name>
-					<initialized>0</initialized>
-				</parent_name>
-				<original_parent_name>
-					<initialized>0</initialized>
-				</original_parent_name>
-				<leaves>
-					<count>1</count>
+					<initialized>1</initialized>
 					<item_version>0</item_version>
-					<item>
+					<value>
 						<model_name>trivial_inheritance</model_name>
 						<external_module_path>
 							<count>0</count>
 							<item_version>0</item_version>
 						</external_module_path>
 						<module_path>
-							<count>1</count>
+							<count>0</count>
 							<item_version>0</item_version>
-							<item>pkg3</item>
 						</module_path>
-						<type_name>child</type_name>
+						<type_name>base</type_name>
 						<meta_type>2</meta_type>
-					</item>
+					</value>
+				</parent_name>
+				<original_parent_name>
+					<initialized>1</initialized>
+					<item_version>0</item_version>
+					<value>
+						<model_name>trivial_inheritance</model_name>
+						<external_module_path>
+							<count>0</count>
+							<item_version>0</item_version>
+						</external_module_path>
+						<module_path>
+							<count>0</count>
+							<item_version>0</item_version>
+						</module_path>
+						<type_name>base</type_name>
+						<meta_type>2</meta_type>
+					</value>
+				</original_parent_name>
+				<leaves>
+					<count>0</count>
+					<item_version>0</item_version>
 				</leaves>
 				<generation_type>1</generation_type>
-				<is_parent>1</is_parent>
+				<is_parent>0</is_parent>
 				<category_type>1</category_type>
 				<pod_type>5</pod_type>
 				<documentation></documentation>
@@ -1726,233 +1676,6 @@
 					<item_version>0</item_version>
 				</implementation_specific_parameters>
 				<is_visitable>0</is_visitable>
-				<is_immutable>0</is_immutable>
-				<is_versioned>0</is_versioned>
-				<is_keyed>0</is_keyed>
-				<is_comparable>0</is_comparable>
-				<is_fluent>0</is_fluent>
-				<is_aggregate_root>0</is_aggregate_root>
-				<versioned_key>
-					<initialized>0</initialized>
-				</versioned_key>
-				<unversioned_key>
-					<initialized>0</initialized>
-				</unversioned_key>
-			</second>
-		</item>
-		<item>
-			<first>
-				<model_name>trivial_inheritance</model_name>
-				<external_module_path>
-					<count>0</count>
-					<item_version>0</item_version>
-				</external_module_path>
-				<module_path>
-					<count>0</count>
-					<item_version>0</item_version>
-				</module_path>
-				<type_name>service_interface</type_name>
-				<meta_type>2</meta_type>
-			</first>
-			<second>
-				<name>
-					<model_name>trivial_inheritance</model_name>
-					<external_module_path>
-						<count>0</count>
-						<item_version>0</item_version>
-					</external_module_path>
-					<module_path>
-						<count>0</count>
-						<item_version>0</item_version>
-					</module_path>
-					<type_name>service_interface</type_name>
-					<meta_type>2</meta_type>
-				</name>
-				<properties>
-					<count>0</count>
-					<item_version>0</item_version>
-				</properties>
-				<parent_name>
-					<initialized>0</initialized>
-				</parent_name>
-				<original_parent_name>
-					<initialized>0</initialized>
-				</original_parent_name>
-				<leaves>
-					<count>0</count>
-					<item_version>0</item_version>
-				</leaves>
-				<generation_type>2</generation_type>
-				<is_parent>0</is_parent>
-				<category_type>1</category_type>
-				<pod_type>6</pod_type>
-				<documentation></documentation>
-				<number_of_type_arguments>0</number_of_type_arguments>
-				<implementation_specific_parameters>
-					<count>0</count>
-					<item_version>0</item_version>
-				</implementation_specific_parameters>
-				<is_visitable>0</is_visitable>
-				<is_immutable>0</is_immutable>
-				<is_versioned>0</is_versioned>
-				<is_keyed>0</is_keyed>
-				<is_comparable>0</is_comparable>
-				<is_fluent>0</is_fluent>
-				<is_aggregate_root>0</is_aggregate_root>
-				<versioned_key>
-					<initialized>0</initialized>
-				</versioned_key>
-				<unversioned_key>
-					<initialized>0</initialized>
-				</unversioned_key>
-			</second>
-		</item>
-		<item>
-			<first>
-				<model_name>trivial_inheritance</model_name>
-				<external_module_path>
-					<count>0</count>
-					<item_version>0</item_version>
-				</external_module_path>
-				<module_path>
-					<count>0</count>
-					<item_version>0</item_version>
-				</module_path>
-				<type_name>service</type_name>
-				<meta_type>2</meta_type>
-			</first>
-			<second>
-				<name>
-					<model_name>trivial_inheritance</model_name>
-					<external_module_path>
-						<count>0</count>
-						<item_version>0</item_version>
-					</external_module_path>
-					<module_path>
-						<count>0</count>
-						<item_version>0</item_version>
-					</module_path>
-					<type_name>service</type_name>
-					<meta_type>2</meta_type>
-				</name>
-				<properties>
-					<count>0</count>
-					<item_version>0</item_version>
-				</properties>
-				<parent_name>
-					<initialized>0</initialized>
-				</parent_name>
-				<original_parent_name>
-					<initialized>0</initialized>
-				</original_parent_name>
-				<leaves>
-					<count>0</count>
-					<item_version>0</item_version>
-				</leaves>
-				<generation_type>2</generation_type>
-				<is_parent>0</is_parent>
-				<category_type>1</category_type>
-				<pod_type>6</pod_type>
-				<documentation></documentation>
-				<number_of_type_arguments>0</number_of_type_arguments>
-				<implementation_specific_parameters>
-					<count>0</count>
-					<item_version>0</item_version>
-				</implementation_specific_parameters>
-				<is_visitable>0</is_visitable>
-				<is_immutable>0</is_immutable>
-				<is_versioned>0</is_versioned>
-				<is_keyed>0</is_keyed>
-				<is_comparable>0</is_comparable>
-				<is_fluent>0</is_fluent>
-				<is_aggregate_root>0</is_aggregate_root>
-				<versioned_key>
-					<initialized>0</initialized>
-				</versioned_key>
-				<unversioned_key>
-					<initialized>0</initialized>
-				</unversioned_key>
-			</second>
-		</item>
-		<item>
-			<first>
-				<model_name>trivial_inheritance</model_name>
-				<external_module_path>
-					<count>0</count>
-					<item_version>0</item_version>
-				</external_module_path>
-				<module_path>
-					<count>0</count>
-					<item_version>0</item_version>
-				</module_path>
-				<type_name>base</type_name>
-				<meta_type>2</meta_type>
-			</first>
-			<second>
-				<name>
-					<model_name>trivial_inheritance</model_name>
-					<external_module_path>
-						<count>0</count>
-						<item_version>0</item_version>
-					</external_module_path>
-					<module_path>
-						<count>0</count>
-						<item_version>0</item_version>
-					</module_path>
-					<type_name>base</type_name>
-					<meta_type>2</meta_type>
-				</name>
-				<properties>
-					<count>0</count>
-					<item_version>0</item_version>
-				</properties>
-				<parent_name>
-					<initialized>0</initialized>
-				</parent_name>
-				<original_parent_name>
-					<initialized>0</initialized>
-				</original_parent_name>
-				<leaves>
-					<count>2</count>
-					<item_version>0</item_version>
-					<item>
-						<model_name>trivial_inheritance</model_name>
-						<external_module_path>
-							<count>0</count>
-							<item_version>0</item_version>
-						</external_module_path>
-						<module_path>
-							<count>0</count>
-							<item_version>0</item_version>
-						</module_path>
-						<type_name>descendant2</type_name>
-						<meta_type>2</meta_type>
-					</item>
-					<item>
-						<model_name>trivial_inheritance</model_name>
-						<external_module_path>
-							<count>0</count>
-							<item_version>0</item_version>
-						</external_module_path>
-						<module_path>
-							<count>0</count>
-							<item_version>0</item_version>
-						</module_path>
-						<type_name>descendant3</type_name>
-						<meta_type>2</meta_type>
-					</item>
-				</leaves>
-				<generation_type>1</generation_type>
-				<is_parent>1</is_parent>
-				<category_type>1</category_type>
-				<pod_type>5</pod_type>
-				<documentation></documentation>
-				<number_of_type_arguments>0</number_of_type_arguments>
-				<implementation_specific_parameters>
-					<count>0</count>
-					<item_version>0</item_version>
-				</implementation_specific_parameters>
-				<is_visitable>1</is_visitable>
 				<is_immutable>0</is_immutable>
 				<is_versioned>0</is_versioned>
 				<is_keyed>0</is_keyed>
@@ -2060,6 +1783,441 @@
 							<item_version>0</item_version>
 						</module_path>
 						<type_name>parent_without_members</type_name>
+						<meta_type>2</meta_type>
+					</value>
+				</original_parent_name>
+				<leaves>
+					<count>0</count>
+					<item_version>0</item_version>
+				</leaves>
+				<generation_type>1</generation_type>
+				<is_parent>0</is_parent>
+				<category_type>1</category_type>
+				<pod_type>5</pod_type>
+				<documentation></documentation>
+				<number_of_type_arguments>0</number_of_type_arguments>
+				<implementation_specific_parameters>
+					<count>0</count>
+					<item_version>0</item_version>
+				</implementation_specific_parameters>
+				<is_visitable>0</is_visitable>
+				<is_immutable>0</is_immutable>
+				<is_versioned>0</is_versioned>
+				<is_keyed>0</is_keyed>
+				<is_comparable>0</is_comparable>
+				<is_fluent>0</is_fluent>
+				<is_aggregate_root>0</is_aggregate_root>
+				<versioned_key>
+					<initialized>0</initialized>
+				</versioned_key>
+				<unversioned_key>
+					<initialized>0</initialized>
+				</unversioned_key>
+			</second>
+		</item>
+		<item>
+			<first>
+				<model_name>trivial_inheritance</model_name>
+				<external_module_path>
+					<count>0</count>
+					<item_version>0</item_version>
+				</external_module_path>
+				<module_path>
+					<count>0</count>
+					<item_version>0</item_version>
+				</module_path>
+				<type_name>parent_outside</type_name>
+				<meta_type>2</meta_type>
+			</first>
+			<second>
+				<name>
+					<model_name>trivial_inheritance</model_name>
+					<external_module_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</external_module_path>
+					<module_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</module_path>
+					<type_name>parent_outside</type_name>
+					<meta_type>2</meta_type>
+				</name>
+				<properties>
+					<count>1</count>
+					<item_version>0</item_version>
+					<item>
+						<name>prop_0</name>
+						<type_name>
+							<type>
+								<model_name></model_name>
+								<external_module_path>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_module_path>
+								<module_path>
+									<count>0</count>
+									<item_version>0</item_version>
+								</module_path>
+								<type_name>int</type_name>
+								<meta_type>0</meta_type>
+							</type>
+							<children>
+								<count>0</count>
+								<item_version>0</item_version>
+							</children>
+							<is_pointer>0</is_pointer>
+						</type_name>
+						<default_value></default_value>
+						<documentation></documentation>
+						<is_identity_attribute>0</is_identity_attribute>
+						<implementation_specific_parameters>
+							<count>0</count>
+							<item_version>0</item_version>
+						</implementation_specific_parameters>
+					</item>
+				</properties>
+				<parent_name>
+					<initialized>0</initialized>
+				</parent_name>
+				<original_parent_name>
+					<initialized>0</initialized>
+				</original_parent_name>
+				<leaves>
+					<count>1</count>
+					<item_version>0</item_version>
+					<item>
+						<model_name>trivial_inheritance</model_name>
+						<external_module_path>
+							<count>0</count>
+							<item_version>0</item_version>
+						</external_module_path>
+						<module_path>
+							<count>1</count>
+							<item_version>0</item_version>
+							<item>pkg4</item>
+						</module_path>
+						<type_name>child</type_name>
+						<meta_type>2</meta_type>
+					</item>
+				</leaves>
+				<generation_type>1</generation_type>
+				<is_parent>1</is_parent>
+				<category_type>1</category_type>
+				<pod_type>5</pod_type>
+				<documentation></documentation>
+				<number_of_type_arguments>0</number_of_type_arguments>
+				<implementation_specific_parameters>
+					<count>0</count>
+					<item_version>0</item_version>
+				</implementation_specific_parameters>
+				<is_visitable>0</is_visitable>
+				<is_immutable>0</is_immutable>
+				<is_versioned>0</is_versioned>
+				<is_keyed>0</is_keyed>
+				<is_comparable>0</is_comparable>
+				<is_fluent>0</is_fluent>
+				<is_aggregate_root>0</is_aggregate_root>
+				<versioned_key>
+					<initialized>0</initialized>
+				</versioned_key>
+				<unversioned_key>
+					<initialized>0</initialized>
+				</unversioned_key>
+			</second>
+		</item>
+		<item>
+			<first>
+				<model_name>trivial_inheritance</model_name>
+				<external_module_path>
+					<count>0</count>
+					<item_version>0</item_version>
+				</external_module_path>
+				<module_path>
+					<count>0</count>
+					<item_version>0</item_version>
+				</module_path>
+				<type_name>move_ctor_descendant</type_name>
+				<meta_type>2</meta_type>
+			</first>
+			<second>
+				<name>
+					<model_name>trivial_inheritance</model_name>
+					<external_module_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</external_module_path>
+					<module_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</module_path>
+					<type_name>move_ctor_descendant</type_name>
+					<meta_type>2</meta_type>
+				</name>
+				<properties>
+					<count>1</count>
+					<item_version>0</item_version>
+					<item>
+						<name>prop_1</name>
+						<type_name>
+							<type>
+								<model_name>boost</model_name>
+								<external_module_path>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_module_path>
+								<module_path>
+									<count>1</count>
+									<item_version>0</item_version>
+									<item>filesystem</item>
+								</module_path>
+								<type_name>path</type_name>
+								<meta_type>0</meta_type>
+							</type>
+							<children>
+								<count>0</count>
+								<item_version>0</item_version>
+							</children>
+							<is_pointer>0</is_pointer>
+						</type_name>
+						<default_value></default_value>
+						<documentation>Force manual move constructor.
+</documentation>
+						<is_identity_attribute>0</is_identity_attribute>
+						<implementation_specific_parameters>
+							<count>0</count>
+							<item_version>0</item_version>
+						</implementation_specific_parameters>
+					</item>
+				</properties>
+				<parent_name>
+					<initialized>1</initialized>
+					<item_version>0</item_version>
+					<value>
+						<model_name>trivial_inheritance</model_name>
+						<external_module_path>
+							<count>0</count>
+							<item_version>0</item_version>
+						</external_module_path>
+						<module_path>
+							<count>0</count>
+							<item_version>0</item_version>
+						</module_path>
+						<type_name>move_ctor_base</type_name>
+						<meta_type>2</meta_type>
+					</value>
+				</parent_name>
+				<original_parent_name>
+					<initialized>1</initialized>
+					<item_version>0</item_version>
+					<value>
+						<model_name>trivial_inheritance</model_name>
+						<external_module_path>
+							<count>0</count>
+							<item_version>0</item_version>
+						</external_module_path>
+						<module_path>
+							<count>0</count>
+							<item_version>0</item_version>
+						</module_path>
+						<type_name>move_ctor_base</type_name>
+						<meta_type>2</meta_type>
+					</value>
+				</original_parent_name>
+				<leaves>
+					<count>0</count>
+					<item_version>0</item_version>
+				</leaves>
+				<generation_type>1</generation_type>
+				<is_parent>0</is_parent>
+				<category_type>1</category_type>
+				<pod_type>5</pod_type>
+				<documentation>Descendant class for scenario that tests code generated move contructors.
+</documentation>
+				<number_of_type_arguments>0</number_of_type_arguments>
+				<implementation_specific_parameters>
+					<count>0</count>
+					<item_version>0</item_version>
+				</implementation_specific_parameters>
+				<is_visitable>0</is_visitable>
+				<is_immutable>0</is_immutable>
+				<is_versioned>0</is_versioned>
+				<is_keyed>0</is_keyed>
+				<is_comparable>0</is_comparable>
+				<is_fluent>0</is_fluent>
+				<is_aggregate_root>0</is_aggregate_root>
+				<versioned_key>
+					<initialized>0</initialized>
+				</versioned_key>
+				<unversioned_key>
+					<initialized>0</initialized>
+				</unversioned_key>
+			</second>
+		</item>
+		<item>
+			<first>
+				<model_name>trivial_inheritance</model_name>
+				<external_module_path>
+					<count>0</count>
+					<item_version>0</item_version>
+				</external_module_path>
+				<module_path>
+					<count>0</count>
+					<item_version>0</item_version>
+				</module_path>
+				<type_name>service_interface</type_name>
+				<meta_type>2</meta_type>
+			</first>
+			<second>
+				<name>
+					<model_name>trivial_inheritance</model_name>
+					<external_module_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</external_module_path>
+					<module_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</module_path>
+					<type_name>service_interface</type_name>
+					<meta_type>2</meta_type>
+				</name>
+				<properties>
+					<count>0</count>
+					<item_version>0</item_version>
+				</properties>
+				<parent_name>
+					<initialized>0</initialized>
+				</parent_name>
+				<original_parent_name>
+					<initialized>0</initialized>
+				</original_parent_name>
+				<leaves>
+					<count>0</count>
+					<item_version>0</item_version>
+				</leaves>
+				<generation_type>2</generation_type>
+				<is_parent>0</is_parent>
+				<category_type>1</category_type>
+				<pod_type>6</pod_type>
+				<documentation></documentation>
+				<number_of_type_arguments>0</number_of_type_arguments>
+				<implementation_specific_parameters>
+					<count>0</count>
+					<item_version>0</item_version>
+				</implementation_specific_parameters>
+				<is_visitable>0</is_visitable>
+				<is_immutable>0</is_immutable>
+				<is_versioned>0</is_versioned>
+				<is_keyed>0</is_keyed>
+				<is_comparable>0</is_comparable>
+				<is_fluent>0</is_fluent>
+				<is_aggregate_root>0</is_aggregate_root>
+				<versioned_key>
+					<initialized>0</initialized>
+				</versioned_key>
+				<unversioned_key>
+					<initialized>0</initialized>
+				</unversioned_key>
+			</second>
+		</item>
+		<item>
+			<first>
+				<model_name>trivial_inheritance</model_name>
+				<external_module_path>
+					<count>0</count>
+					<item_version>0</item_version>
+				</external_module_path>
+				<module_path>
+					<count>1</count>
+					<item_version>0</item_version>
+					<item>pkg1</item>
+				</module_path>
+				<type_name>child</type_name>
+				<meta_type>2</meta_type>
+			</first>
+			<second>
+				<name>
+					<model_name>trivial_inheritance</model_name>
+					<external_module_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</external_module_path>
+					<module_path>
+						<count>1</count>
+						<item_version>0</item_version>
+						<item>pkg1</item>
+					</module_path>
+					<type_name>child</type_name>
+					<meta_type>2</meta_type>
+				</name>
+				<properties>
+					<count>1</count>
+					<item_version>0</item_version>
+					<item>
+						<name>prop_1</name>
+						<type_name>
+							<type>
+								<model_name></model_name>
+								<external_module_path>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_module_path>
+								<module_path>
+									<count>0</count>
+									<item_version>0</item_version>
+								</module_path>
+								<type_name>int</type_name>
+								<meta_type>0</meta_type>
+							</type>
+							<children>
+								<count>0</count>
+								<item_version>0</item_version>
+							</children>
+							<is_pointer>0</is_pointer>
+						</type_name>
+						<default_value></default_value>
+						<documentation></documentation>
+						<is_identity_attribute>0</is_identity_attribute>
+						<implementation_specific_parameters>
+							<count>0</count>
+							<item_version>0</item_version>
+						</implementation_specific_parameters>
+					</item>
+				</properties>
+				<parent_name>
+					<initialized>1</initialized>
+					<item_version>0</item_version>
+					<value>
+						<model_name>trivial_inheritance</model_name>
+						<external_module_path>
+							<count>0</count>
+							<item_version>0</item_version>
+						</external_module_path>
+						<module_path>
+							<count>1</count>
+							<item_version>0</item_version>
+							<item>pkg1</item>
+						</module_path>
+						<type_name>parent</type_name>
+						<meta_type>2</meta_type>
+					</value>
+				</parent_name>
+				<original_parent_name>
+					<initialized>1</initialized>
+					<item_version>0</item_version>
+					<value>
+						<model_name>trivial_inheritance</model_name>
+						<external_module_path>
+							<count>0</count>
+							<item_version>0</item_version>
+						</external_module_path>
+						<module_path>
+							<count>1</count>
+							<item_version>0</item_version>
+							<item>pkg1</item>
+						</module_path>
+						<type_name>parent</type_name>
 						<meta_type>2</meta_type>
 					</value>
 				</original_parent_name>
@@ -2211,7 +2369,7 @@
 					<count>0</count>
 					<item_version>0</item_version>
 				</module_path>
-				<type_name>descendant3</type_name>
+				<type_name>second_child_without_members</type_name>
 				<meta_type>2</meta_type>
 			</first>
 			<second>
@@ -2225,42 +2383,12 @@
 						<count>0</count>
 						<item_version>0</item_version>
 					</module_path>
-					<type_name>descendant3</type_name>
+					<type_name>second_child_without_members</type_name>
 					<meta_type>2</meta_type>
 				</name>
 				<properties>
-					<count>1</count>
+					<count>0</count>
 					<item_version>0</item_version>
-					<item>
-						<name>prop_0</name>
-						<type_name>
-							<type>
-								<model_name></model_name>
-								<external_module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</external_module_path>
-								<module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</module_path>
-								<type_name>bool</type_name>
-								<meta_type>0</meta_type>
-							</type>
-							<children>
-								<count>0</count>
-								<item_version>0</item_version>
-							</children>
-							<is_pointer>0</is_pointer>
-						</type_name>
-						<default_value></default_value>
-						<documentation></documentation>
-						<is_identity_attribute>0</is_identity_attribute>
-						<implementation_specific_parameters>
-							<count>0</count>
-							<item_version>0</item_version>
-						</implementation_specific_parameters>
-					</item>
 				</properties>
 				<parent_name>
 					<initialized>1</initialized>
@@ -2275,7 +2403,7 @@
 							<count>0</count>
 							<item_version>0</item_version>
 						</module_path>
-						<type_name>descendant1</type_name>
+						<type_name>parent_with_members</type_name>
 						<meta_type>2</meta_type>
 					</value>
 				</parent_name>
@@ -2292,7 +2420,7 @@
 							<count>0</count>
 							<item_version>0</item_version>
 						</module_path>
-						<type_name>base</type_name>
+						<type_name>parent_with_members</type_name>
 						<meta_type>2</meta_type>
 					</value>
 				</original_parent_name>
@@ -2451,148 +2579,20 @@
 				</unversioned_key>
 			</second>
 		</item>
-		<item>
-			<first>
-				<model_name>trivial_inheritance</model_name>
-				<external_module_path>
-					<count>0</count>
-					<item_version>0</item_version>
-				</external_module_path>
-				<module_path>
-					<count>0</count>
-					<item_version>0</item_version>
-				</module_path>
-				<type_name>move_ctor_descendant</type_name>
-				<meta_type>2</meta_type>
-			</first>
-			<second>
-				<name>
-					<model_name>trivial_inheritance</model_name>
-					<external_module_path>
-						<count>0</count>
-						<item_version>0</item_version>
-					</external_module_path>
-					<module_path>
-						<count>0</count>
-						<item_version>0</item_version>
-					</module_path>
-					<type_name>move_ctor_descendant</type_name>
-					<meta_type>2</meta_type>
-				</name>
-				<properties>
-					<count>1</count>
-					<item_version>0</item_version>
-					<item>
-						<name>prop_1</name>
-						<type_name>
-							<type>
-								<model_name>boost</model_name>
-								<external_module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</external_module_path>
-								<module_path>
-									<count>1</count>
-									<item_version>0</item_version>
-									<item>filesystem</item>
-								</module_path>
-								<type_name>path</type_name>
-								<meta_type>0</meta_type>
-							</type>
-							<children>
-								<count>0</count>
-								<item_version>0</item_version>
-							</children>
-							<is_pointer>0</is_pointer>
-						</type_name>
-						<default_value></default_value>
-						<documentation>Force manual move constructor.
-</documentation>
-						<is_identity_attribute>0</is_identity_attribute>
-						<implementation_specific_parameters>
-							<count>0</count>
-							<item_version>0</item_version>
-						</implementation_specific_parameters>
-					</item>
-				</properties>
-				<parent_name>
-					<initialized>1</initialized>
-					<item_version>0</item_version>
-					<value>
-						<model_name>trivial_inheritance</model_name>
-						<external_module_path>
-							<count>0</count>
-							<item_version>0</item_version>
-						</external_module_path>
-						<module_path>
-							<count>0</count>
-							<item_version>0</item_version>
-						</module_path>
-						<type_name>move_ctor_base</type_name>
-						<meta_type>2</meta_type>
-					</value>
-				</parent_name>
-				<original_parent_name>
-					<initialized>1</initialized>
-					<item_version>0</item_version>
-					<value>
-						<model_name>trivial_inheritance</model_name>
-						<external_module_path>
-							<count>0</count>
-							<item_version>0</item_version>
-						</external_module_path>
-						<module_path>
-							<count>0</count>
-							<item_version>0</item_version>
-						</module_path>
-						<type_name>move_ctor_base</type_name>
-						<meta_type>2</meta_type>
-					</value>
-				</original_parent_name>
-				<leaves>
-					<count>0</count>
-					<item_version>0</item_version>
-				</leaves>
-				<generation_type>1</generation_type>
-				<is_parent>0</is_parent>
-				<category_type>1</category_type>
-				<pod_type>5</pod_type>
-				<documentation>Descendant class for scenario that tests code generated move contructors.
-</documentation>
-				<number_of_type_arguments>0</number_of_type_arguments>
-				<implementation_specific_parameters>
-					<count>0</count>
-					<item_version>0</item_version>
-				</implementation_specific_parameters>
-				<is_visitable>0</is_visitable>
-				<is_immutable>0</is_immutable>
-				<is_versioned>0</is_versioned>
-				<is_keyed>0</is_keyed>
-				<is_comparable>0</is_comparable>
-				<is_fluent>0</is_fluent>
-				<is_aggregate_root>0</is_aggregate_root>
-				<versioned_key>
-					<initialized>0</initialized>
-				</versioned_key>
-				<unversioned_key>
-					<initialized>0</initialized>
-				</unversioned_key>
-			</second>
-		</item>
 	</pods>
 	<primitives class_id="13" tracking_level="0" version="0">
 		<count>0</count>
-		<bucket_count>11</bucket_count>
+		<bucket_count>23</bucket_count>
 		<item_version>0</item_version>
 	</primitives>
 	<enumerations class_id="14" tracking_level="0" version="0">
 		<count>0</count>
-		<bucket_count>11</bucket_count>
+		<bucket_count>23</bucket_count>
 		<item_version>0</item_version>
 	</enumerations>
 	<exceptions class_id="15" tracking_level="0" version="0">
 		<count>0</count>
-		<bucket_count>11</bucket_count>
+		<bucket_count>23</bucket_count>
 		<item_version>0</item_version>
 	</exceptions>
 	<external_module_path>
@@ -2602,7 +2602,7 @@
 	<is_system>0</is_system>
 	<dependencies class_id="16" tracking_level="0" version="0">
 		<count>1</count>
-		<bucket_count>11</bucket_count>
+		<bucket_count>23</bucket_count>
 		<item_version>0</item_version>
 		<item class_id="17" tracking_level="0" version="0">
 			<first>boost</first>
@@ -2643,7 +2643,74 @@
 				<count>0</count>
 				<item_version>0</item_version>
 			</module_path>
-			<type_name>move_ctor_descendant</type_name>
+			<type_name>second_child_without_members</type_name>
+			<meta_type>2</meta_type>
+		</item>
+		<item>
+			<model_name>trivial_inheritance</model_name>
+			<external_module_path>
+				<count>0</count>
+				<item_version>0</item_version>
+			</external_module_path>
+			<module_path>
+				<count>1</count>
+				<item_version>0</item_version>
+				<item>pkg3</item>
+			</module_path>
+			<type_name>child</type_name>
+			<meta_type>2</meta_type>
+		</item>
+		<item>
+			<model_name>trivial_inheritance</model_name>
+			<external_module_path>
+				<count>0</count>
+				<item_version>0</item_version>
+			</external_module_path>
+			<module_path>
+				<count>0</count>
+				<item_version>0</item_version>
+			</module_path>
+			<type_name>child_of_a_child2</type_name>
+			<meta_type>2</meta_type>
+		</item>
+		<item>
+			<model_name>trivial_inheritance</model_name>
+			<external_module_path>
+				<count>0</count>
+				<item_version>0</item_version>
+			</external_module_path>
+			<module_path>
+				<count>0</count>
+				<item_version>0</item_version>
+			</module_path>
+			<type_name>child_of_a_child1</type_name>
+			<meta_type>2</meta_type>
+		</item>
+		<item>
+			<model_name>trivial_inheritance</model_name>
+			<external_module_path>
+				<count>0</count>
+				<item_version>0</item_version>
+			</external_module_path>
+			<module_path>
+				<count>0</count>
+				<item_version>0</item_version>
+			</module_path>
+			<type_name>descendant2</type_name>
+			<meta_type>2</meta_type>
+		</item>
+		<item>
+			<model_name>trivial_inheritance</model_name>
+			<external_module_path>
+				<count>0</count>
+				<item_version>0</item_version>
+			</external_module_path>
+			<module_path>
+				<count>1</count>
+				<item_version>0</item_version>
+				<item>pkg4</item>
+			</module_path>
+			<type_name>child</type_name>
 			<meta_type>2</meta_type>
 		</item>
 		<item>
@@ -2670,7 +2737,7 @@
 				<count>0</count>
 				<item_version>0</item_version>
 			</module_path>
-			<type_name>child_of_a_child1</type_name>
+			<type_name>move_ctor_descendant</type_name>
 			<meta_type>2</meta_type>
 		</item>
 		<item>
@@ -2683,33 +2750,7 @@
 				<count>0</count>
 				<item_version>0</item_version>
 			</module_path>
-			<type_name>second_child_without_members</type_name>
-			<meta_type>2</meta_type>
-		</item>
-		<item>
-			<model_name>trivial_inheritance</model_name>
-			<external_module_path>
-				<count>0</count>
-				<item_version>0</item_version>
-			</external_module_path>
-			<module_path>
-				<count>0</count>
-				<item_version>0</item_version>
-			</module_path>
-			<type_name>descendant2</type_name>
-			<meta_type>2</meta_type>
-		</item>
-		<item>
-			<model_name>trivial_inheritance</model_name>
-			<external_module_path>
-				<count>0</count>
-				<item_version>0</item_version>
-			</external_module_path>
-			<module_path>
-				<count>0</count>
-				<item_version>0</item_version>
-			</module_path>
-			<type_name>child_of_a_child2</type_name>
+			<type_name>child_with_members</type_name>
 			<meta_type>2</meta_type>
 		</item>
 		<item>
@@ -2738,47 +2779,6 @@
 			<type_name>child_without_members</type_name>
 			<meta_type>2</meta_type>
 		</item>
-		<item>
-			<model_name>trivial_inheritance</model_name>
-			<external_module_path>
-				<count>0</count>
-				<item_version>0</item_version>
-			</external_module_path>
-			<module_path>
-				<count>0</count>
-				<item_version>0</item_version>
-			</module_path>
-			<type_name>child_with_members</type_name>
-			<meta_type>2</meta_type>
-		</item>
-		<item>
-			<model_name>trivial_inheritance</model_name>
-			<external_module_path>
-				<count>0</count>
-				<item_version>0</item_version>
-			</external_module_path>
-			<module_path>
-				<count>1</count>
-				<item_version>0</item_version>
-				<item>pkg4</item>
-			</module_path>
-			<type_name>child</type_name>
-			<meta_type>2</meta_type>
-		</item>
-		<item>
-			<model_name>trivial_inheritance</model_name>
-			<external_module_path>
-				<count>0</count>
-				<item_version>0</item_version>
-			</external_module_path>
-			<module_path>
-				<count>1</count>
-				<item_version>0</item_version>
-				<item>pkg3</item>
-			</module_path>
-			<type_name>child</type_name>
-			<meta_type>2</meta_type>
-		</item>
 	</leaves>
 	<documentation>This model tests all aspects related to inheritance.
 
@@ -2796,12 +2796,12 @@ in the context of inheritance.
 	</implementation_specific_parameters>
 	<services class_id="21" tracking_level="0" version="0">
 		<count>0</count>
-		<bucket_count>11</bucket_count>
+		<bucket_count>23</bucket_count>
 		<item_version>0</item_version>
 	</services>
 	<modules class_id="22" tracking_level="0" version="0">
 		<count>4</count>
-		<bucket_count>11</bucket_count>
+		<bucket_count>23</bucket_count>
 		<item_version>0</item_version>
 		<item class_id="23" tracking_level="0" version="0">
 			<first>
@@ -2974,7 +2974,7 @@ in the context of inheritance.
 	</modules>
 	<concepts class_id="26" tracking_level="0" version="0">
 		<count>0</count>
-		<bucket_count>11</bucket_count>
+		<bucket_count>23</bucket_count>
 		<item_version>0</item_version>
 	</concepts>
 </entity>

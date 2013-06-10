@@ -33,7 +33,6 @@
 #include <boost/serialization/vector.hpp>
 #include "dogen/sml/serialization/concept_ser.hpp"
 #include "dogen/sml/serialization/enumeration_ser.hpp"
-#include "dogen/sml/serialization/exception_ser.hpp"
 #include "dogen/sml/serialization/model_ser.hpp"
 #include "dogen/sml/serialization/module_ser.hpp"
 #include "dogen/sml/serialization/pod_ser.hpp"
@@ -41,6 +40,7 @@
 #include "dogen/sml/serialization/qname_ser.hpp"
 #include "dogen/sml/serialization/reference_ser.hpp"
 #include "dogen/sml/serialization/service_ser.hpp"
+#include "dogen/sml/serialization/value_ser.hpp"
 #include "dogen/utility/serialization/unordered_map.hpp"
 #include "dogen/utility/serialization/unordered_set.hpp"
 

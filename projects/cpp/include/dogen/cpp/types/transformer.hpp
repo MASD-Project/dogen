@@ -32,7 +32,7 @@
 #include "dogen/sml/types/model.hpp"
 #include "dogen/sml/types/qname.hpp"
 #include "dogen/sml/types/module.hpp"
-#include "dogen/sml/types/exception.hpp"
+#include "dogen/sml/types/value.hpp"
 #include "dogen/sml/types/enumeration.hpp"
 #include "dogen/sml/types/nested_qname.hpp"
 #include "dogen/cpp/types/class_info.hpp"
@@ -117,9 +117,9 @@ public:
     enum_info transform(const sml::enumeration& e) const;
 
     /**
-     * @brief Transforms a SML exception into an exception info.
+     * @brief Transforms a SML value into an exception info.
      */
-    exception_info transform(const sml::exception& e) const;
+    exception_info transform(const sml::value& e) const;
 
     /**
      * @brief Transforms a SML module into a namespace info.

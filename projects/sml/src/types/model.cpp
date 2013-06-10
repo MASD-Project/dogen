@@ -31,7 +31,7 @@ model::model(
     const std::unordered_map<dogen::sml::qname, dogen::sml::pod>& pods,
     const std::unordered_map<dogen::sml::qname, dogen::sml::primitive>& primitives,
     const std::unordered_map<dogen::sml::qname, dogen::sml::enumeration>& enumerations,
-    const std::unordered_map<dogen::sml::qname, dogen::sml::exception>& exceptions,
+    const std::unordered_map<dogen::sml::qname, dogen::sml::value>& exceptions,
     const std::list<std::string>& external_module_path,
     const bool is_system,
     const std::unordered_map<std::string, dogen::sml::reference>& dependencies,
@@ -161,19 +161,19 @@ void model::enumerations(const std::unordered_map<dogen::sml::qname, dogen::sml:
     enumerations_ = std::move(v);
 }
 
-const std::unordered_map<dogen::sml::qname, dogen::sml::exception>& model::exceptions() const {
+const std::unordered_map<dogen::sml::qname, dogen::sml::value>& model::exceptions() const {
     return exceptions_;
 }
 
-std::unordered_map<dogen::sml::qname, dogen::sml::exception>& model::exceptions() {
+std::unordered_map<dogen::sml::qname, dogen::sml::value>& model::exceptions() {
     return exceptions_;
 }
 
-void model::exceptions(const std::unordered_map<dogen::sml::qname, dogen::sml::exception>& v) {
+void model::exceptions(const std::unordered_map<dogen::sml::qname, dogen::sml::value>& v) {
     exceptions_ = v;
 }
 
-void model::exceptions(const std::unordered_map<dogen::sml::qname, dogen::sml::exception>&& v) {
+void model::exceptions(const std::unordered_map<dogen::sml::qname, dogen::sml::value>&& v) {
     exceptions_ = std::move(v);
 }
 
