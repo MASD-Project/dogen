@@ -10,19 +10,20 @@ This file contains all stories that were closed during sprint 28.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-06-10 Mon 20:13]
+Clock summary at [2013-06-10 Mon 22:28]
 
 | Headline                                                         | Time    |       |      |
 |------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                     | *22:29* |       |      |
+| *Total time*                                                     | *22:57* |       |      |
 |------------------------------------------------------------------+---------+-------+------|
-| Development Stories Implemented                                  |         | 22:29 |      |
+| Development Stories Implemented                                  |         | 22:57 |      |
 | COMPLETED Update README                                          |         |       | 1:04 |
 | COMPLETED Whiteboarding on the role of SML                       |         |       | 1:45 |
 | COMPLETED Leaf types do not have a virtual destructor            |         |       | 0:26 |
 | COMPLETED Suppress visitor generation for non-target models      |         |       | 0:20 |
 | COMPLETED Fix generation bug in inheritance tree                 |         |       | 1:22 |
 | COMPLETED Test move constructors in test model                   |         |       | 2:52 |
+| COMPLETED Transformer tests should check that docs are not empty |         |       | 0:28 |
 | IMPLEMENTATION Release notes and backlog grooming                |         |       | 1:04 |
 | IMPLEMENTATION Improve modeling of domain driven concepts in SML |         |       | 9:56 |
 | IMPLEMENTATION Add support for concepts at the SML level         |         |       | 1:45 |
@@ -84,7 +85,10 @@ of them in Creris, the compiler complained. We need to add a generic
 test that performs a =std::move= in sanitiser and fix the fallout of
 the test.
 
-*** Transformer tests should check that docs are not empty            :spike:
+*** COMPLETED Transformer tests should check that docs are not empty  :spike:
+    CLOSED: [2013-06-10 Mon 22:28]
+    CLOCK: [2013-06-10 Mon 22:20]--[2013-06-10 Mon 22:28] =>  0:08
+    CLOCK: [2013-06-10 Mon 22:00]--[2013-06-10 Mon 22:20] =>  0:20
 
 Dia to SML transformer tests don't appear to check that we are
 correctly transforming the documentation. Change factory to create

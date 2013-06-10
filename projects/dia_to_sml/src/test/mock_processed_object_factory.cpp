@@ -30,6 +30,7 @@ static logger lg(logger_factory("dia.mock_processed_object_factory"));
 
 const std::string empty;
 const std::string object_prefix("O");
+const std::string doxygen_comment("this is a doxygen brief");
 const std::string uml_large_package("UML - LargePackage");
 const std::string uml_class("UML - Class");
 const std::string uml_generalization("UML - Generalization");
@@ -98,7 +99,7 @@ build_uml_note_with_marker(const unsigned int n) {
     processed_object r(create_object(object_types::uml_note, n));
     std::ostringstream s;
     s << "#DOGEN COMMENT=true" << std::endl << std::endl
-      << "this is a doxygen brief";
+      << doxygen_comment;
     r.text(s.str());
     return r;
 }
@@ -146,6 +147,7 @@ processed_object mock_processed_object_factory::
 build_class(const unsigned int n, const std::string& st) {
     auto r(create_named_object(object_types::uml_class, n));
     r.stereotype(st);
+    r.comment(doxygen_comment);
     return r;
 }
 
