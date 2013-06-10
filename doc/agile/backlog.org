@@ -11,6 +11,36 @@ This file contains all stories that haven't been assigned to a sprint.
 
 Stories that we intend to look at, at some point.
 
+*** Remove generation types in SML                                    :story:
+
+SML knows not of code generation so we shouldn't have a generation
+type in it. What we should have instead is a way of identifying a type
+as belonging to the target model or not. In a way, its qname already
+does that.
+
+Partial generation is actually a c++ model decision based on how much
+features it supports.
+
+*** SML models could have types                                       :story:
+
+Consider creating an enumeration for model types:
+
+- relational model
+- core domain model
+- generic sub-domain model
+- segregated core model
+
+This still requires a lot of analysis work around the DDD book.
+
+*** Change transformation code to use a type visitor                  :story:
+
+Now we have a base type, we could probably simplify some of the
+transformation code:
+
+- dia to sml
+- sml to c++
+- potentially merger
+
 *** Fix spelling of =rountrip_type=
 
 Should be =roundtrip_type=.
