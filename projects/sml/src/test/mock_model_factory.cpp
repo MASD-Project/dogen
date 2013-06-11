@@ -201,7 +201,7 @@ mock_enumeration(const unsigned int i, const std::string& model_name,
     r.generation_type(dogen::sml::generation_types::full_generation);
     r.documentation(documentation);
 
-    const auto lambda([](const unsigned int n) {
+    const auto lambda([](const unsigned int n) -> dogen::sml::property {
             dogen::sml::qname qn;
             qn.type_name(unsigned_int);
             qn.meta_type(dogen::sml::meta_types::primitive);
