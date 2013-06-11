@@ -48,17 +48,6 @@ const std::string time_duration_name("time_duration");
 namespace dogen {
 namespace sml {
 
-primitive boost_model_factory::create_primitive(const std::string& name) {
-    qname q;
-    q.type_name(name);
-    q.meta_type(meta_types::primitive);
-    q.model_name(model_name);
-    primitive r;
-    r.name(q);
-    r.generation_type(generation_types::no_generation);
-    return r;
-}
-
 pod boost_model_factory::create_pod(const std::string& name, pod_types pt,
     std::list<std::string> module_path) {
     qname q;
@@ -66,6 +55,7 @@ pod boost_model_factory::create_pod(const std::string& name, pod_types pt,
     q.meta_type(meta_types::pod);
     q.model_name(model_name);
     q.module_path(module_path);
+
     pod r;
     r.name(q);
     r.generation_type(generation_types::no_generation);
@@ -93,20 +83,20 @@ create_module(const std::string& name, std::list<std::string> module_path) {
 
 model boost_model_factory::create() {
     using namespace sml;
-    std::unordered_map<qname, primitive> primitives;
-    std::unordered_map<qname, pod> pods;
-    std::unordered_map<qname, module> modules;
+    model r;
+    r.name(model_name);
+    r.is_system(true);
 
     const auto pi([&](std::string name, pod_types pt,
             std::list<std::string> module_path) {
             pod p(create_pod(name, pt, module_path));
-            pods.insert(std::make_pair(p.name(), p));
+            r.pods().insert(std::make_pair(p.name(), p));
         });
 
     const auto gamma([&](std::string name,
             std::list<std::string> module_path) {
             module p(create_module(name, module_path));
-            modules.insert(std::make_pair(p.name(), p));
+            r.modules().insert(std::make_pair(p.name(), p));
         });
 
     std::list<std::string> module_path;
@@ -147,12 +137,6 @@ model boost_model_factory::create() {
     pi(ptime_name, pod_types::value, module_path);
     pi(time_duration_name, pod_types::value, module_path);
 
-    model r;
-    r.name(model_name);
-    r.primitives(primitives);
-    r.pods(pods);
-    r.modules(modules);
-    r.is_system(true);
     return r;
 }
 

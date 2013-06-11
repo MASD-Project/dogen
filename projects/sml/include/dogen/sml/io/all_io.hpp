@@ -30,7 +30,6 @@
 #include "dogen/sml/io/nested_qname_io.hpp"
 #include "dogen/sml/io/pod_io.hpp"
 #include "dogen/sml/io/pod_types_io.hpp"
-#include "dogen/sml/io/primitive_io.hpp"
 #include "dogen/sml/io/property_io.hpp"
 #include "dogen/sml/io/qname_io.hpp"
 #include "dogen/sml/io/reference_io.hpp"

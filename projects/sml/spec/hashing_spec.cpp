@@ -50,7 +50,6 @@ BOOST_AUTO_TEST_CASE(validate_hashing) {
     // test_hashing<nested_qname_generator>();
     test_hashing<pod_generator>();
     test_hashing<pod_types_generator>();
-    test_hashing<primitive_generator>();
     test_hashing<property_generator>();
     test_hashing<qname_generator>();
     test_hashing<reference_generator>();

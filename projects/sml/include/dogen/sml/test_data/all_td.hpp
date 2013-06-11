@@ -30,7 +30,6 @@
 #include "dogen/sml/test_data/nested_qname_td.hpp"
 #include "dogen/sml/test_data/pod_td.hpp"
 #include "dogen/sml/test_data/pod_types_td.hpp"
-#include "dogen/sml/test_data/primitive_td.hpp"
 #include "dogen/sml/test_data/property_td.hpp"
 #include "dogen/sml/test_data/qname_td.hpp"
 #include "dogen/sml/test_data/reference_td.hpp"

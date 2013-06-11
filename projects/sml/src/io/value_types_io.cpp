@@ -60,6 +60,9 @@ std::ostream& operator<<(std::ostream& s, const value_types& v) {
     case value_types::sequence_container:
         attr = "\"sequence_container\"";
         break;
+    case value_types::primitive:
+        attr = "\"primitive\"";
+        break;
     default:
         throw std::invalid_argument("Invalid value for value_types");
     }

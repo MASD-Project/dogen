@@ -30,7 +30,6 @@
 #include "dogen/sml/serialization/nested_qname_ser.hpp"
 #include "dogen/sml/serialization/pod_ser.hpp"
 #include "dogen/sml/serialization/pod_types_ser.hpp"
-#include "dogen/sml/serialization/primitive_ser.hpp"
 #include "dogen/sml/serialization/property_ser.hpp"
 #include "dogen/sml/serialization/qname_ser.hpp"
 #include "dogen/sml/serialization/reference_ser.hpp"

@@ -38,7 +38,8 @@ enum class value_types : unsigned int {
     string_table = 6, ///< Value is a list of strings.
     smart_pointer = 7, ///< Value is a smart pointer.
     associative_container = 8, ///< Type is an associative container.
-    sequence_container = 9 ///< Type is a sequence container.
+    sequence_container = 9, ///< Type is a sequence container.
+    primitive = 10
 };
 
 } }

@@ -48,7 +48,6 @@ BOOST_AUTO_TEST_CASE(validate_io) {
     test_io<nested_qname_generator>();
     test_io<pod_generator>();
     test_io<pod_types_generator>();
-    test_io<primitive_generator>();
     test_io<property_generator>();
     test_io<qname_generator>();
     test_io<reference_generator>();

@@ -59,13 +59,15 @@ const std::string uint64_t_name("uint64_t");
 namespace dogen {
 namespace sml {
 
-primitive std_model_factory::create_primitive(const std::string& name) {
+value std_model_factory::create_primitive(const std::string& name) {
     qname q;
     q.type_name(name);
     q.meta_type(meta_types::primitive);
     q.model_name(model_name);
-    primitive r;
+
+    value r;
     r.name(q);
+    r.type(value_types::primitive);
     r.generation_type(generation_types::no_generation);
     return r;
 }
@@ -89,18 +91,18 @@ create_pod(const std::string& name, pod_types pt) {
 }
 
 model std_model_factory::create() {
-    using namespace sml;
-    std::unordered_map<qname, primitive> primitives;
-    std::unordered_map<qname, pod> pods;
+    model r;
+    r.name(model_name);
+    r.is_system(true);
 
     const auto lambda([&](std::string name){
-            primitive p(create_primitive(name));
-            primitives.insert(std::make_pair(p.name(), p));
+            const auto p(create_primitive(name));
+            r.primitives().insert(std::make_pair(p.name(), p));
         });
 
     const auto pi([&](std::string name, pod_types pt) {
-            pod p(create_pod(name, pt));
-            pods.insert(std::make_pair(p.name(), p));
+            const auto p(create_pod(name, pt));
+            r.pods().insert(std::make_pair(p.name(), p));
         });
 
     lambda(int8_t_name);
@@ -134,11 +136,6 @@ model std_model_factory::create() {
 
     pi(function_name, pod_types::value);
 
-    model r;
-    r.name(model_name);
-    r.primitives(primitives);
-    r.pods(pods);
-    r.is_system(true);
     return r;
 }
 

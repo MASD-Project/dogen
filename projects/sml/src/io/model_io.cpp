@@ -25,7 +25,6 @@
 #include "dogen/sml/io/model_io.hpp"
 #include "dogen/sml/io/module_io.hpp"
 #include "dogen/sml/io/pod_io.hpp"
-#include "dogen/sml/io/primitive_io.hpp"
 #include "dogen/sml/io/qname_io.hpp"
 #include "dogen/sml/io/reference_io.hpp"
 #include "dogen/sml/io/service_io.hpp"
@@ -42,24 +41,6 @@ inline std::string tidy_up_string(std::string s) {
 namespace std {
 
 inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen::sml::qname, dogen::sml::pod>& v) {
-    s << "[";
-    for (auto i(v.begin()); i != v.end(); ++i) {
-        if (i != v.begin()) s << ", ";
-        s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
-        s << i->first;
-        s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
-        s << i->second;
-        s << " } ]";
-    }
-    s << " ] ";
-    return s;
-}
-
-}
-
-namespace std {
-
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen::sml::qname, dogen::sml::primitive>& v) {
     s << "[";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";

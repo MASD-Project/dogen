@@ -26,6 +26,8 @@
 #endif
 
 #include <string>
+#include "dogen/sml/types/pod.hpp"
+#include "dogen/sml/types/value.hpp"
 #include "dogen/sml/types/model.hpp"
 
 namespace dogen {
@@ -40,7 +42,7 @@ public:
     std_model_factory& operator=(const std_model_factory&) = delete;
 
 private:
-    static primitive create_primitive(const std::string& name);
+    static value create_primitive(const std::string& name);
     static pod create_pod(const std::string& name, pod_types pt);
 
 

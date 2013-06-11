@@ -26,6 +26,7 @@
 #endif
 
 #include <string>
+#include "dogen/sml/types/value.hpp"
 #include "dogen/sml/types/model.hpp"
 
 namespace dogen {
@@ -40,7 +41,7 @@ public:
     primitive_model_factory& operator=(const primitive_model_factory&) = delete;
 
 private:
-    static primitive create(const std::string& name);
+    static value create(const std::string& name);
 
 public:
     static model create();

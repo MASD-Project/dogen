@@ -36,7 +36,6 @@
 #include "dogen/sml/types/nested_qname.hpp"
 #include "dogen/sml/types/pod.hpp"
 #include "dogen/sml/types/pod_types.hpp"
-#include "dogen/sml/types/primitive.hpp"
 #include "dogen/sml/types/primitive_model_factory.hpp"
 #include "dogen/sml/types/property.hpp"
 #include "dogen/sml/types/qname.hpp"

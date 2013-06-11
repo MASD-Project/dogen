@@ -37,7 +37,6 @@
 #include "dogen/sml/types/concept.hpp"
 #include "dogen/sml/types/module.hpp"
 #include "dogen/sml/types/pod.hpp"
-#include "dogen/sml/types/primitive.hpp"
 #include "dogen/sml/types/qname.hpp"
 #include "dogen/sml/types/reference.hpp"
 #include "dogen/sml/types/service.hpp"
@@ -62,7 +61,7 @@ public:
     model(
         const std::string& name,
         const std::unordered_map<dogen::sml::qname, dogen::sml::pod>& pods,
-        const std::unordered_map<dogen::sml::qname, dogen::sml::primitive>& primitives,
+        const std::unordered_map<dogen::sml::qname, dogen::sml::value>& primitives,
         const std::unordered_map<dogen::sml::qname, dogen::sml::value>& enumerations,
         const std::unordered_map<dogen::sml::qname, dogen::sml::value>& exceptions,
         const std::list<std::string>& external_module_path,
@@ -111,10 +110,10 @@ public:
      * @brief Primitives contained in the model.
      */
     /**@{*/
-    const std::unordered_map<dogen::sml::qname, dogen::sml::primitive>& primitives() const;
-    std::unordered_map<dogen::sml::qname, dogen::sml::primitive>& primitives();
-    void primitives(const std::unordered_map<dogen::sml::qname, dogen::sml::primitive>& v);
-    void primitives(const std::unordered_map<dogen::sml::qname, dogen::sml::primitive>&& v);
+    const std::unordered_map<dogen::sml::qname, dogen::sml::value>& primitives() const;
+    std::unordered_map<dogen::sml::qname, dogen::sml::value>& primitives();
+    void primitives(const std::unordered_map<dogen::sml::qname, dogen::sml::value>& v);
+    void primitives(const std::unordered_map<dogen::sml::qname, dogen::sml::value>&& v);
     /**@}*/
 
     /**
@@ -246,7 +245,7 @@ public:
 private:
     std::string name_;
     std::unordered_map<dogen::sml::qname, dogen::sml::pod> pods_;
-    std::unordered_map<dogen::sml::qname, dogen::sml::primitive> primitives_;
+    std::unordered_map<dogen::sml::qname, dogen::sml::value> primitives_;
     std::unordered_map<dogen::sml::qname, dogen::sml::value> enumerations_;
     std::unordered_map<dogen::sml::qname, dogen::sml::value> exceptions_;
     std::list<std::string> external_module_path_;

@@ -52,7 +52,6 @@ BOOST_AUTO_TEST_CASE(validate_equality) {
     test_equality<nested_qname_generator>();
     test_equality<pod_generator>();
     test_equality<pod_types_generator>();
-    test_equality<primitive_generator>();
     test_equality<property_generator>();
     test_equality<qname_generator>();
     test_equality<value_generator>();

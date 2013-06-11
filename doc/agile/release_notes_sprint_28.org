@@ -10,13 +10,13 @@ This file contains all stories that were closed during sprint 28.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-06-11 Tue 00:08]
+Clock summary at [2013-06-11 Tue 18:32]
 
 | Headline                                                         | Time    |       |       |
 |------------------------------------------------------------------+---------+-------+-------|
-| *Total time*                                                     | *24:35* |       |       |
+| *Total time*                                                     | *25:17* |       |       |
 |------------------------------------------------------------------+---------+-------+-------|
-| Development Stories Implemented                                  |         | 24:35 |       |
+| Development Stories Implemented                                  |         | 25:17 |       |
 | COMPLETED Update README                                          |         |       |  1:04 |
 | COMPLETED Whiteboarding on the role of SML                       |         |       |  1:45 |
 | COMPLETED Leaf types do not have a virtual destructor            |         |       |  0:26 |
@@ -25,7 +25,7 @@ Clock summary at [2013-06-11 Tue 00:08]
 | COMPLETED Test move constructors in test model                   |         |       |  2:52 |
 | COMPLETED Transformer tests should check that docs are not empty |         |       |  0:28 |
 | IMPLEMENTATION Release notes and backlog grooming                |         |       |  1:04 |
-| IMPLEMENTATION Improve modeling of domain driven concepts in SML |         |       | 11:34 |
+| IMPLEMENTATION Improve modeling of domain driven concepts in SML |         |       | 12:16 |
 | IMPLEMENTATION Add support for concepts at the SML level         |         |       |  1:45 |
 | ANALYSIS Break down SML into concepts                            |         |       |  1:27 |
 | Refactor top level concepts in SML                               |         |       |  0:22 |
@@ -287,7 +287,12 @@ don't really exist at the SML level.
      CLOSED: [2013-06-11 Tue 00:07]
      CLOCK: [2013-06-10 Mon 22:29]--[2013-06-11 Tue 00:07] =>  1:38
 
-**** Convert primitives into value type objects                       :story:
+**** COMPLETED Convert primitives into value type objects             :story:
+     CLOSED: [2013-06-11 Tue 18:33]
+     CLOCK: [2013-06-11 Tue 18:26]--[2013-06-11 Tue 18:32] =>  0:06
+     CLOCK: [2013-06-11 Tue 08:24]--[2013-06-11 Tue 08:31] =>  0:07
+     CLOCK: [2013-06-11 Tue 07:47]--[2013-06-11 Tue 08:16] =>  0:29
+
 **** Convert pods into entity, value or service type objects          :story:
 *** Model name should be a qname                                      :story:
 

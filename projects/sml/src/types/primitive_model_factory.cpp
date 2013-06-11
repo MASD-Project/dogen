@@ -43,22 +43,25 @@ const std::string float_name("float");
 namespace dogen {
 namespace sml {
 
-primitive primitive_model_factory::create(const std::string& name) {
+value primitive_model_factory::create(const std::string& name) {
     qname q;
     q.type_name(name);
     q.meta_type(meta_types::primitive);
-    primitive r;
+    value r;
     r.name(q);
+    r.type(value_types::primitive);
     r.generation_type(generation_types::no_generation);
     return r;
 }
 
 model primitive_model_factory::create() {
-    using namespace sml;
-    std::unordered_map<qname, primitive> p;
+    model r;
+    r.name(model_name);
+    r.is_system(true);
+
     const auto lambda([&](const std::string& name){
-            primitive prim(create(name));
-            p.insert(std::make_pair(prim.name(), prim));
+            const auto prim(create(name));
+            r.primitives().insert(std::make_pair(prim.name(), prim));
         });
 
     lambda(bool_name);
@@ -75,10 +78,6 @@ model primitive_model_factory::create() {
     lambda(double_name);
     lambda(float_name);
 
-    model r;
-    r.name(model_name);
-    r.primitives(p);
-    r.is_system(true);
     return r;
 }
 

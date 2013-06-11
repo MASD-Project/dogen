@@ -48,7 +48,6 @@ BOOST_AUTO_TEST_CASE(validate_swap) {
     test_swap<nested_qname_generator>();
     test_swap<pod_generator>();
     test_swap<pod_types_generator>();
-    test_swap<primitive_generator>();
     test_swap<property_generator>();
     test_swap<qname_generator>();
     test_swap<reference_generator>();
