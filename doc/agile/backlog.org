@@ -11,6 +11,11 @@ This file contains all stories that haven't been assigned to a sprint.
 
 Stories that we intend to look at, at some point.
 
+*** Assignment operator should be protected in ABC                    :story:
+
+As per MEC 33. We should probably do the same for the move and copy
+constructors.
+
 *** Remove generation types in SML                                    :story:
 
 SML knows not of code generation so we shouldn't have a generation
