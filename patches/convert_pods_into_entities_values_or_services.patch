@@ -3529,8 +3529,24 @@ index fbac346..63adecb 100644
        </dia:connections>
      </dia:object>
    </dia:layer>
+diff --git a/doc/agile/backlog.org b/doc/agile/backlog.org
+index 08890b7..9a44de8 100644
+--- a/doc/agile/backlog.org
++++ b/doc/agile/backlog.org
+@@ -11,6 +11,11 @@ This file contains all stories that haven't been assigned to a sprint.
+ 
+ Stories that we intend to look at, at some point.
+ 
++*** Assignment operator should be protected in ABC                    :story:
++
++As per MEC 33. We should probably do the same for the move and copy
++constructors.
++
+ *** Remove generation types in SML                                    :story:
+ 
+ SML knows not of code generation so we shouldn't have a generation
 diff --git a/doc/agile/release_notes_sprint_28.org b/doc/agile/release_notes_sprint_28.org
-index b40bd8d..d4938f6 100644
+index b40bd8d..7934f82 100644
 --- a/doc/agile/release_notes_sprint_28.org
 +++ b/doc/agile/release_notes_sprint_28.org
 @@ -10,13 +10,13 @@ This file contains all stories that were closed during sprint 28.
@@ -3559,19 +3575,86 @@ index b40bd8d..d4938f6 100644
  | IMPLEMENTATION Add support for concepts at the SML level         |         |       |  1:45 |
  | ANALYSIS Break down SML into concepts                            |         |       |  1:27 |
  | Refactor top level concepts in SML                               |         |       |  0:22 |
-@@ -293,7 +293,11 @@ don't really exist at the SML level.
+@@ -110,6 +110,7 @@ documentation if necessary.
+     CLOCK: [2013-06-08 Sat 12:10]--[2013-06-08 Sat 12:49] =>  0:39
+     CLOCK: [2013-06-06 Thu 08:52]--[2013-06-06 Thu 09:03] =>  0:11
+     CLOCK: [2013-06-06 Thu 08:18]--[2013-06-06 Thu 08:48] =>  0:30
++    CLOCK: [2013-06-04 Tue 18:40]--[2013-06-04 Tue 19:02] =>  0:22
+ 
+ Its becoming obvious that SML is largely trying to model part of the
+ domain driven design model - the part that is closer to code and
+@@ -119,6 +120,9 @@ which obscured this. The objective of this story is to bring to the
+ fore all parts of SML which are representations of DDD concepts, and
+ to make sure these are modeled as closely as possible to DDD.
+ 
++This will be a good chance to fix =pod= which was incorrectly named
++due to of a lack of understanding of what a C++ pod type [[http://en.wikipedia.org/wiki/Plain_old_data_structure][really is]].
++
+ *Keys and visitor*
+ 
+ At the meta-model level, keys are actually just an instance of a value
+@@ -293,7 +297,15 @@ don't really exist at the SML level.
       CLOCK: [2013-06-11 Tue 08:24]--[2013-06-11 Tue 08:31] =>  0:07
       CLOCK: [2013-06-11 Tue 07:47]--[2013-06-11 Tue 08:16] =>  0:29
  
 -**** Convert pods into entity, value or service type objects          :story:
 +**** IMPLEMENTATION Convert pods into entities, values or services    :story:
-+     CLOCK: [2013-06-11 Tue 19:44]
++     CLOCK: [2013-06-12 Wed 18:13]
++     CLOCK: [2013-06-12 Wed 18:00]--[2013-06-12 Wed 18:10] =>  0:10
++     CLOCK: [2013-06-12 Wed 08:31]--[2013-06-12 Wed 08:40] =>  0:09
++     CLOCK: [2013-06-12 Wed 07:56]--[2013-06-12 Wed 08:15] =>  0:19
++     CLOCK: [2013-06-11 Tue 19:44]--[2013-06-11 Tue 20:04] =>  0:20
 +     CLOCK: [2013-06-11 Tue 18:48]--[2013-06-11 Tue 19:20] =>  0:32
 +     CLOCK: [2013-06-11 Tue 18:42]--[2013-06-11 Tue 18:45] =>  0:03
 +
  *** Model name should be a qname                                      :story:
  
  We already have most of the qname properties in the model anyway, so
+@@ -350,39 +362,23 @@ applicable. Things that need to be modeled as concepts:
+ - UniquelyIdentifiable: type has can be uniquely identified by its
+   qualified name.
+ - Documentable: type can be documented.
+-- Parameterisable: type supports opaque parameters (implementation
+-  specific parameters).
++- Parameterisable: type supports pass-through parameters
++  (implementation specific parameters).
+ - Generatable: type has different properties with respect to
+   generation.
+-- Inheritable: type provides support for inheritance.
+-- Stateful: type has properties.
+-- Operatable: type has methods (operations).
+ - ModelElement: refinement of UniquelyIdentifiable, Documentable,
+   Parameterisable. Modeled by =sml::model=.
+ - GeneratableModelElement: refinement of ModelElement and
+   Generatable. Modeled by =sml::enumeration=, =sml::exception=, etc.
++- Inheritable: type provides support for inheritance.
++- Stateful: type has properties.
++- Operatable: type has methods (operations).
+ - ClassifiableModelElement: refinement of GeneratableModelElement,
+   Stateful and Operatable. At present modeled by =sml::pod=. In the
+   future: =sml::value=, =sml::entity=, =sml::service=,
+   =sml::repository=, =sml::factory=. =sml::versioned_key=,
+   =sml::unversioned_key=, =sml::concept=.
+ 
+-*** Refactor top level concepts in SML                                :story:
+-    CLOCK: [2013-06-04 Tue 18:40]--[2013-06-04 Tue 19:02] =>  0:22
+-
+-SML is in many ways the domain model of domain driven development
+-(DDD). Due to this, DDD concepts should be first class citizens:
+-
+-- entity
+-- value
+-- service
+-- aggregate root
+-- factory
+-- repository
+-
+-This will be a good chance to fix =pod= which was incorrectly named
+-due to of a lack of understanding of what a C++ pod type [[http://en.wikipedia.org/wiki/Plain_old_data_structure][really is]].
+-
+ *** Rename implementation specific parameters                         :story:
+ 
+ These should really be called back end specific parameters at the SML
 diff --git a/projects/sml/include/dogen/sml/hash/all_hash.hpp b/projects/sml/include/dogen/sml/hash/all_hash.hpp
 index 866e782..2328f68 100644
 --- a/projects/sml/include/dogen/sml/hash/all_hash.hpp
@@ -4322,6 +4405,27 @@ index 52773bc..c4c6d0a 100644
  #include "dogen/sml/types/primitive_model_factory.hpp"
  #include "dogen/sml/types/property.hpp"
  #include "dogen/sml/types/qname.hpp"
+diff --git a/projects/sml/include/dogen/sml/types/boost_model_factory.hpp b/projects/sml/include/dogen/sml/types/boost_model_factory.hpp
+index dea0980..a4f21be 100644
+--- a/projects/sml/include/dogen/sml/types/boost_model_factory.hpp
++++ b/projects/sml/include/dogen/sml/types/boost_model_factory.hpp
+@@ -26,7 +26,6 @@
+ #endif
+ 
+ #include <string>
+-#include "dogen/sml/types/pod.hpp"
+ #include "dogen/sml/types/value.hpp"
+ #include "dogen/sml/types/model.hpp"
+ 
+@@ -44,7 +43,7 @@ public:
+ private:
+     static module create_module(const std::string& name,
+         std::list<std::string> module_path);
+-    static pod create_pod(const std::string& name, pod_types pt,
++    static value create_value_object(const std::string& name, value_types pt,
+         std::list<std::string> module_path);
+ 
+ public:
 diff --git a/projects/sml/include/dogen/sml/types/category_types.hpp b/projects/sml/include/dogen/sml/types/category_types.hpp
 deleted file mode 100644
 index 5f6d0ee..0000000
@@ -4416,6 +4520,48 @@ index 946ecb5..0000000
 -} }
 -
 -#endif
+diff --git a/projects/sml/include/dogen/sml/types/injector.hpp b/projects/sml/include/dogen/sml/types/injector.hpp
+index ec8b754..6b685cc 100644
+--- a/projects/sml/include/dogen/sml/types/injector.hpp
++++ b/projects/sml/include/dogen/sml/types/injector.hpp
+@@ -26,7 +26,7 @@
+ #endif
+ 
+ #include <vector>
+-#include "dogen/sml/types/pod.hpp"
++#include "dogen/sml/types/value.hpp"
+ #include "dogen/sml/types/model.hpp"
+ 
+ namespace dogen {
+@@ -42,13 +42,13 @@ public:
+ 
+ private:
+     /**
+-     * @brief Creates a key for the given pod.
++     * @brief Creates a key for the given entity.
+      *
+-     * @param p pod for which to create a key
++     * @param p entity for which to create a key
+      * @param versioned if true, create a versioned key. Otherwise,
+      * creates an unversioned key.
+      */
+-    pod create_key(const qname& qn, const generation_types gt,
++    value create_key(const qname& qn, const generation_types gt,
+         const std::vector<property>& properties, const bool versioned) const;
+ 
+     /**
+@@ -57,9 +57,9 @@ private:
+     void inject_keys(model& m) const;
+ 
+     /**
+-     * @brief Injects the version property on the pod passed in.
++     * @brief Creates a property to represent versioning.
+      */
+-    void inject_version(pod& p) const;
++    property create_version_property() const;
+ 
+     /**
+      * @brief Injects the version property on any types marked as
 diff --git a/projects/sml/include/dogen/sml/types/meta_types.hpp b/projects/sml/include/dogen/sml/types/meta_types.hpp
 index 546474b..6b9f832 100644
 --- a/projects/sml/include/dogen/sml/types/meta_types.hpp
@@ -6193,6 +6339,99 @@ index e63efd6..0000000
 -
 -} }
 \ No newline at end of file
+diff --git a/projects/sml/src/types/injector.cpp b/projects/sml/src/types/injector.cpp
+index de270c7..c1f6d4c 100644
+--- a/projects/sml/src/types/injector.cpp
++++ b/projects/sml/src/types/injector.cpp
+@@ -57,7 +57,7 @@ const std::string duplicate_qname(
+ namespace dogen {
+ namespace sml {
+ 
+-pod injector::create_key(const qname& qn, const generation_types gt,
++value injector::create_key(const qname& qn, const generation_types gt,
+     const std::vector<property>& properties, const bool versioned) const {
+ 
+     qname kqn;
+@@ -66,23 +66,20 @@ pod injector::create_key(const qname& qn, const generation_types gt,
+     kqn.model_name(qn.model_name());
+     kqn.module_path(qn.module_path());
+     kqn.external_module_path(qn.external_module_path());
+-    kqn.meta_type(meta_types::pod);
++    kqn.meta_type(meta_types::value);
+ 
+-    pod r;
++    value r;
+     r.name(kqn);
+     r.generation_type(gt);
+-    r.pod_type(pod_types::value);
+-    r.documentation(
+-        (versioned ? versioned_key_doxygen : unversioned_key_doxygen) +
+-        qn.type_name());
+-
+-    const auto vtc(category_types::versioned_key);
+-    const auto uvtc(category_types::unversioned_key);
+-    r.category_type(versioned ? vtc : uvtc);
+     r.properties(properties);
+-
+-    if (versioned)
+-        inject_version(r);
++    if (versioned) {
++        r.type(value_types::versioned_key);
++        r.documentation(versioned_key_doxygen + qn.type_name());
++        r.properties().push_back(create_version_property());
++    } else {
++        r.type(value_types::unversioned_key);
++        r.documentation(unversioned_key_doxygen + qn.type_name());
++    }
+ 
+     BOOST_LOG_SEV(lg, debug) << "Created key: " << kqn.type_name();
+     return r;
+@@ -91,11 +88,11 @@ pod injector::create_key(const qname& qn, const generation_types gt,
+ void injector::inject_keys(model& m) const {
+     BOOST_LOG_SEV(lg, debug) << "Injecting keys.";
+ 
+-    std::list<pod> keys;
+-    for (auto& pair : m.pods()) {
+-        auto& pod(pair.second);
++    std::list<value> keys;
++    for (auto& pair : m.entities()) {
++        auto& entity(pair.second);
+ 
+-        if (!pod.is_keyed())
++        if (!entities.is_keyed())
+             continue;
+ 
+         std::vector<property> identity_properties;
+@@ -141,10 +138,7 @@ void injector::inject_keys(model& m) const {
+     BOOST_LOG_SEV(lg, debug) << "Done injecting keys. Total: " << keys.size();
+ }
+ 
+-void injector::inject_version(pod& p) const {
+-    BOOST_LOG_SEV(lg, debug) << "Injecting version property to type: "
+-                             << p.name();
+-
++property injector::create_version_property() const {
+     qname qn;
+     qn.type_name(uint_name);
+     qn.meta_type(meta_types::primitive);
+@@ -152,12 +146,11 @@ void injector::inject_version(pod& p) const {
+     nested_qname nqn;
+     nqn.type(qn);
+ 
+-    property v;
+-    v.name(version_name);
+-    v.type_name(nqn);
+-    v.documentation(versioned_doxygen);
+-
+-    p.properties().push_back(v);
++    property r;
++    r.name(version_name);
++    r.type_name(nqn);
++    r.documentation(versioned_doxygen);
++    return r;
+ }
+ 
+ void injector::inject_version(model& m) const {
 diff --git a/projects/sml/src/types/model.cpp b/projects/sml/src/types/model.cpp
 index b87c5c9..9a9fd0e 100644
 --- a/projects/sml/src/types/model.cpp
