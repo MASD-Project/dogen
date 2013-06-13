@@ -43,6 +43,36 @@ There is also a mirror in BitBucket:
 
 ** Introduction
 
+Dogen is the union of two core ideas:
+
+- Code generation
+- Domain Driven Design
+
+We'll introduce each in turn, and then explain why we decided to marry
+the two.
+
+*** Code generation
+
+The creation of programs that generate programs is probably as old as
+computer science itself. These ideas where even incorporated in some
+languages such as LISP, where there was a blurring of the lines
+between hand crafted source code and machine generated source
+code. Sadly, these progressive thoughts faded into the foreground as
+the C family of languages took front stage. Code generation became the
+mainstay in some domains such parsing, but a lot of power and
+intelligence was lost.
+
+In its more LISP-like form, code generation is intimately linking with
+meta-modeling. Meta-models are a class of domain models that focus on
+describing /domain models/ themselves. They allow code to introspect
+and to think about code; to reflect. Code generation in this sense can
+simply be thought of as the translation of one such representation
+into a text file, following the rules laid out by the grammar of a
+programming language. The more complete the meta-model, the more
+expressive the generated code can be - and vice-versa.
+
+*** Domain Driven Design
+
 One of the main problems facing software engineers working on large
 systems is the need to clearly separate business rules from
 scaffolding code. In many ways, this need originates from the long
@@ -69,6 +99,16 @@ insights provided by the users and domain experts in general. It also
 explains the difference between the conceptual domain model and myriad
 of representations: UML diagrams, specification documents, oral
 conversations and, most importantly, source code.
+
+*** Adding the two together
+
+One of the most common meta-models in existence is UML. It is used
+widely in the industry and there are many tools that can be used to
+generate source code from UML diagrams. UML is simultaneously
+ubiquitous - that is, available everywhere - and complete - that is,
+as a meta-model it defines a extensive list of concepts for pretty
+much any aspect of programming. However, after sped
+
 
 ** Hello World Example
 

@@ -10,13 +10,13 @@ This file contains all stories that were closed during sprint 28.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-06-12 Wed 22:27]
+Clock summary at [2013-06-13 Thu 22:58]
 
 | Headline                                                         | Time    |       |       |
 |------------------------------------------------------------------+---------+-------+-------|
-| *Total time*                                                     | *27:19* |       |       |
+| *Total time*                                                     | *27:50* |       |       |
 |------------------------------------------------------------------+---------+-------+-------|
-| Development Stories Implemented                                  |         | 27:19 |       |
+| Development Stories Implemented                                  |         | 27:50 |       |
 | COMPLETED Update README                                          |         |       |  1:04 |
 | COMPLETED Whiteboarding on the role of SML                       |         |       |  1:45 |
 | COMPLETED Leaf types do not have a virtual destructor            |         |       |  0:26 |
@@ -24,6 +24,7 @@ Clock summary at [2013-06-12 Wed 22:27]
 | COMPLETED Fix generation bug in inheritance tree                 |         |       |  1:22 |
 | COMPLETED Test move constructors in test model                   |         |       |  2:52 |
 | COMPLETED Transformer tests should check that docs are not empty |         |       |  0:28 |
+| IMPLEMENTATION Complete the introduction in manual               |         |       |  0:31 |
 | IMPLEMENTATION Release notes and backlog grooming                |         |       |  1:04 |
 | IMPLEMENTATION Improve modeling of domain driven concepts in SML |         |       | 14:40 |
 | IMPLEMENTATION Add support for concepts at the SML level         |         |       |  1:45 |
@@ -92,6 +93,9 @@ the test.
 Dia to SML transformer tests don't appear to check that we are
 correctly transforming the documentation. Change factory to create
 documentation if necessary.
+
+*** IMPLEMENTATION Complete the introduction in manual                :story:
+    CLOCK: [2013-06-13 Thu 20:29]--[2013-06-13 Thu 21:00] =>  0:31
 
 *** IMPLEMENTATION Release notes and backlog grooming                  :task:
     CLOCK: [2013-06-06 Thu 07:50]--[2013-06-06 Thu 08:15] =>  0:25
