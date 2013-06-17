@@ -339,11 +339,11 @@ applicable. Things that need to be modeled as concepts:
 - Inheritable: type provides support for inheritance.
 - Stateful: type has properties.
 - Operatable: type has methods (operations).
-- ClassifiableModelElement: refinement of GeneratableModelElement,
-  Stateful and Operatable. At present modeled by =sml::pod=. In the
-  future: =sml::value=, =sml::entity=, =sml::service=,
-  =sml::repository=, =sml::factory=. =sml::versioned_key=,
-  =sml::unversioned_key=, =sml::concept=.
+- Object: refinement of GeneratableModelElement, Stateful and
+  Operatable. At present modeled by =sml::pod=. In the future:
+  =sml::value=, =sml::entity=, =sml::service=, =sml::repository=,
+  =sml::factory=. =sml::versioned_key=, =sml::unversioned_key=,
+  =sml::concept=.
 
 *** COMPLETED Add initial support for concepts at the SML level       :story:
     CLOSED: [2013-06-17 Mon 07:53]

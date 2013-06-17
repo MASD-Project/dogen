@@ -21,6 +21,7 @@ Clock summary at [2013-06-17 Mon 08:07]
 #+end:
 
 *** IMPLEMENTATION Release notes and backlog grooming                  :task:
+    CLOCK: [2013-06-17 Mon 08:07]--[2013-06-17 Mon 08:20] =>  0:13
     CLOCK: [2013-06-17 Mon 07:56]--[2013-06-17 Mon 08:07] =>  0:11
 
 *** Add content to the introduction in manual                         :story:
