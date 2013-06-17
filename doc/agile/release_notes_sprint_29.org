@@ -1,0 +1,137 @@
+#+title: Release Notes for Sprint 29
+#+options: date:nil toc:nil author:nil num:nil
+#+todo: ANALYSIS IMPLEMENTATION TESTING | COMPLETED CANCELLED
+#+tags: story(s) epic(e) task(t) note(n) spike(p)
+
+* Release Notes
+
+This file contains all stories that were closed during sprint 29.
+
+** Development Stories Implemented
+
+#+begin: clocktable :maxlevel 3 :scope subtree
+Clock summary at [2013-06-17 Mon 08:07]
+
+| Headline                                          | Time   |      |      |
+|---------------------------------------------------+--------+------+------|
+| *Total time*                                      | *0:11* |      |      |
+|---------------------------------------------------+--------+------+------|
+| Development Stories Implemented                   |        | 0:11 |      |
+| IMPLEMENTATION Release notes and backlog grooming |        |      | 0:11 |
+#+end:
+
+*** IMPLEMENTATION Release notes and backlog grooming                  :task:
+    CLOCK: [2013-06-17 Mon 07:56]--[2013-06-17 Mon 08:07] =>  0:11
+
+*** Add content to the introduction in manual                         :story:
+*** Create the correct inheritance tree for DDD classes in SML        :story:
+
+In S28 as part of "Improve modeling of domain driven concepts in SML",
+we have started making SML look a lot more like a model of
+DDD. However, a number of limitations became apparent in terms of the
+inheritance tree:
+
+- value objects had too many attributes to model primitives and
+  enumerations properly
+- typed_element was too broad for a root of the object based parts of
+  the tree
+
+A better approach is to create base classes that are less well-defined
+and a larger number of derived classes. This is the objective of this
+story.
+
+**** Convert pods into entities, values or services                   :story:
+*** Model name should be a qname                                      :story:
+
+We already have most of the qname properties in the model anyway, so
+might as well just use a qname.
+
+*** Implement concepts in SML                                         :story:
+
+In S28 we added the initial support for concepts to SML. We now need
+to start making use of them.
+
+**** Add support for concepts to the dia to sml transformer
+**** When transforming a pod, copy across properties from concept
+
+Must traverse inheritance.
+
+**** Add test to inheritance model
+*** Update SML to make use of concepts                                :story:
+
+In S28 as part of "Break down SML into concepts at the design level"
+we have defined all of the main concepts that SML types should be
+using. Attempt to make use of these to simplify the model.
+
+*** Rename implementation specific parameters                         :story:
+
+These should really be called back end specific parameters at the SML
+level. At the dia level, if a parameter is passed in which has a
+representation at the SML level it should simply be converted to this
+representation instead of being added to the KVP.
+
+Actually, these are more like generic parameters:
+
+- at the dia level they are used to fill in gaps in dia (e.g. packages
+  and diagrams do not have comments)
+- at the SML level, they are used to add information which does not
+  make sense for it to be in dia: is property key.
+- at the backend level, they are used to provide information which
+  does not make sense to live in SML: for example the ODB parameters.
+
+Also, when the string table support has been added, we need to create
+a string table with all valid values for the parameter keys.
+
+Name choices:
+
+- opaque parameters
+- untyped parameters
+
+*** Rename nested qname to composite qname                            :story:
+
+We should just follow the composite pattern in the naming.
+
+*** Visitor as an injected system type                                :story:
+
+The current implementation of visitor relies on creating a view model
+without a corresponding type. In reality we should do as we did for
+keys and create a category type of visitor. This is really a SML
+concept, not a backend specific concept.
+
+*** Use explicit casting for versioned to unversioned conversions     :story:
+
+Continuing from previous iteration, see description in Sprint 26.
+
+*** Add =extract_key= function                                        :story:
+
+Continuing from previous iteration, see description in Sprint 26.
+
+*** Consider not creating unversioned keys for single property        :story:
+
+If a key is made up of a single property, its a bit nonsensical to
+create an unversioned key. We should only generate the versioned
+key. However, it does make life easier. Wait for real world use cases
+to decide.
+
+*** Injection framework
+
+We need a more generic way of handling system types injection into
+models. This is because there is a number of things that can be
+derived from the existing model types:
+
+- keys
+- diff support
+- reflection
+- cache code
+- etc.
+
+So we need to:
+
+- make injector a composite of injectors that do the real work such as
+  =key_injector=. internally =injector= just delegates the work to
+  these classes.
+- injector decides which internal injectors to use based on options
+  passed in.
+- in the IoC spirit, we should probably create a =injector_interface=.
+
+** Deprecated Development Stories

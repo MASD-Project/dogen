@@ -10,13 +10,13 @@ This file contains all stories that were closed during sprint 28.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-06-14 Fri 22:02]
+Clock summary at [2013-06-17 Mon 07:56]
 
 | Headline                                                         | Time    |       |       |
 |------------------------------------------------------------------+---------+-------+-------|
-| *Total time*                                                     | *28:33* |       |       |
+| *Total time*                                                     | *28:42* |       |       |
 |------------------------------------------------------------------+---------+-------+-------|
-| Development Stories Implemented                                  |         | 28:33 |       |
+| Development Stories Implemented                                  |         | 28:42 |       |
 | COMPLETED Update README                                          |         |       |  1:04 |
 | COMPLETED Whiteboarding on the role of SML                       |         |       |  1:45 |
 | COMPLETED Leaf types do not have a virtual destructor            |         |       |  0:26 |
@@ -24,12 +24,12 @@ Clock summary at [2013-06-14 Fri 22:02]
 | COMPLETED Fix generation bug in inheritance tree                 |         |       |  1:22 |
 | COMPLETED Test move constructors in test model                   |         |       |  2:52 |
 | COMPLETED Transformer tests should check that docs are not empty |         |       |  0:28 |
-| IMPLEMENTATION Complete the introduction in manual               |         |       |  1:14 |
-| IMPLEMENTATION Release notes and backlog grooming                |         |       |  1:04 |
-| IMPLEMENTATION Improve modeling of domain driven concepts in SML |         |       | 14:40 |
-| IMPLEMENTATION Add support for concepts at the SML level         |         |       |  1:45 |
-| ANALYSIS Break down SML into concepts                            |         |       |  1:27 |
-| IMPLEMENTATION Move services into their own type                 |         |       |  0:06 |
+| COMPLETED Add to the introduction in manual                      |         |       |  1:14 |
+| COMPLETED Release notes and backlog grooming                     |         |       |  1:13 |
+| COMPLETED Improve modeling of domain driven concepts in SML      |         |       | 14:40 |
+| COMPLETED Break down SML into concepts at the design level       |         |       |  1:27 |
+| COMPLETED Add initial support for concepts at the SML level      |         |       |  1:45 |
+| CANCELLED Move services into their own type                      |         |       |  0:06 |
 #+end:
 
 *** COMPLETED Update README
@@ -94,12 +94,15 @@ Dia to SML transformer tests don't appear to check that we are
 correctly transforming the documentation. Change factory to create
 documentation if necessary.
 
-*** IMPLEMENTATION Complete the introduction in manual                :story:
+*** COMPLETED Add to the introduction in manual                       :story:
+    CLOSED: [2013-06-17 Mon 07:51]
     CLOCK: [2013-06-14 Fri 08:30]--[2013-06-14 Fri 08:40] =>  0:10
     CLOCK: [2013-06-14 Fri 07:49]--[2013-06-14 Fri 08:22] =>  0:33
     CLOCK: [2013-06-13 Thu 20:29]--[2013-06-13 Thu 21:00] =>  0:31
 
-*** IMPLEMENTATION Release notes and backlog grooming                  :task:
+*** COMPLETED Release notes and backlog grooming                       :task:
+    CLOSED: [2013-06-17 Mon 07:52]
+    CLOCK: [2013-06-17 Mon 07:47]--[2013-06-17 Mon 07:56] =>  0:09
     CLOCK: [2013-06-06 Thu 07:50]--[2013-06-06 Thu 08:15] =>  0:25
     CLOCK: [2013-06-05 Wed 19:19]--[2013-06-05 Wed 19:24] =>  0:05
     CLOCK: [2013-06-05 Wed 07:54]--[2013-06-05 Wed 07:58] =>  0:04
@@ -108,7 +111,8 @@ documentation if necessary.
     CLOCK: [2013-06-04 Tue 19:06]--[2013-06-04 Tue 19:12] =>  0:06
     CLOCK: [2013-06-04 Tue 18:55]--[2013-06-04 Tue 19:06] =>  0:11
 
-*** IMPLEMENTATION Improve modeling of domain driven concepts in SML   :epic:
+*** COMPLETED Improve modeling of domain driven concepts in SML        :epic:
+    CLOSED: [2013-06-17 Mon 07:52]
     CLOCK: [2013-06-08 Sat 19:53]--[2013-06-08 Sat 20:00] =>  0:07
     CLOCK: [2013-06-08 Sat 19:00]--[2013-06-08 Sat 19:52] =>  0:52
     CLOCK: [2013-06-08 Sat 12:49]--[2013-06-08 Sat 12:51] =>  0:02
@@ -302,7 +306,7 @@ don't really exist at the SML level.
      CLOCK: [2013-06-11 Tue 08:24]--[2013-06-11 Tue 08:31] =>  0:07
      CLOCK: [2013-06-11 Tue 07:47]--[2013-06-11 Tue 08:16] =>  0:29
 
-**** IMPLEMENTATION Convert pods into entities, values or services    :story:
+**** CANCELLED Convert pods into entities, values or services         :story:
      CLOCK: [2013-06-12 Wed 18:13]--[2013-06-12 Wed 18:42] =>  0:29
      CLOCK: [2013-06-12 Wed 18:00]--[2013-06-12 Wed 18:10] =>  0:10
      CLOCK: [2013-06-12 Wed 08:31]--[2013-06-12 Wed 08:40] =>  0:09
@@ -311,12 +315,38 @@ don't really exist at the SML level.
      CLOCK: [2013-06-11 Tue 18:48]--[2013-06-11 Tue 19:20] =>  0:32
      CLOCK: [2013-06-11 Tue 18:42]--[2013-06-11 Tue 18:45] =>  0:03
 
-*** Model name should be a qname                                      :story:
+*** COMPLETED Break down SML into concepts at the design level        :story:
+    CLOSED: [2013-06-17 Mon 07:54]
+    CLOCK: [2013-06-04 Tue 23:09]--[2013-06-04 Tue 23:54] =>  0:45
+    CLOCK: [2013-06-04 Tue 22:29]--[2013-06-04 Tue 23:09] =>  0:40
+    CLOCK: [2013-06-04 Tue 20:33]--[2013-06-04 Tue 20:35] =>  0:02
 
-We already have most of the qname properties in the model anyway, so
-might as well just use a qname.
+We should use the types in eCore as a starting point for breaking down
+the model into concepts. We should have a hierarchy of concepts where
+applicable. Things that need to be modeled as concepts:
 
-*** IMPLEMENTATION Add support for concepts at the SML level          :story:
+- UniquelyIdentifiable: type has can be uniquely identified by its
+  qualified name.
+- Documentable: type can be documented.
+- Parameterisable: type supports pass-through parameters
+  (implementation specific parameters).
+- Generatable: type has different properties with respect to
+  generation.
+- ModelElement: refinement of UniquelyIdentifiable, Documentable,
+  Parameterisable. Modeled by =sml::model=.
+- GeneratableModelElement: refinement of ModelElement and
+  Generatable. Modeled by =sml::enumeration=, =sml::exception=, etc.
+- Inheritable: type provides support for inheritance.
+- Stateful: type has properties.
+- Operatable: type has methods (operations).
+- ClassifiableModelElement: refinement of GeneratableModelElement,
+  Stateful and Operatable. At present modeled by =sml::pod=. In the
+  future: =sml::value=, =sml::entity=, =sml::service=,
+  =sml::repository=, =sml::factory=. =sml::versioned_key=,
+  =sml::unversioned_key=, =sml::concept=.
+
+*** COMPLETED Add initial support for concepts at the SML level       :story:
+    CLOSED: [2013-06-17 Mon 07:53]
     CLOCK: [2013-06-08 Sat 23:35]--[2013-06-09 Sun 00:51] =>  1:16
     CLOCK: [2013-06-08 Sat 23:18]--[2013-06-08 Sat 23:35] =>  0:17
     CLOCK: [2013-05-08 Wed 07:47]--[2013-05-08 Wed 07:59] =>  0:12
@@ -349,117 +379,22 @@ concepts and a way of resolving the stereotype into a qname.
      CLOSED: [2013-06-08 Sat 23:35]
 **** COMPLETED Add concepts to base type
      CLOSED: [2013-06-08 Sat 23:35]
-**** Add support for concepts to the dia to sml transformer
-**** When transforming a pod, copy across properties from concept
-
-Must traverse inheritance.
-
-**** Add test to inheritance model
-*** ANALYSIS Break down SML into concepts                              :epic:
-    CLOCK: [2013-06-04 Tue 23:09]--[2013-06-04 Tue 23:54] =>  0:45
-    CLOCK: [2013-06-04 Tue 22:29]--[2013-06-04 Tue 23:09] =>  0:40
-    CLOCK: [2013-06-04 Tue 20:33]--[2013-06-04 Tue 20:35] =>  0:02
-
-We should use the types in eCore as a starting point for breaking down
-the model into concepts. We should have a hierarchy of concepts where
-applicable. Things that need to be modeled as concepts:
-
-- UniquelyIdentifiable: type has can be uniquely identified by its
-  qualified name.
-- Documentable: type can be documented.
-- Parameterisable: type supports pass-through parameters
-  (implementation specific parameters).
-- Generatable: type has different properties with respect to
-  generation.
-- ModelElement: refinement of UniquelyIdentifiable, Documentable,
-  Parameterisable. Modeled by =sml::model=.
-- GeneratableModelElement: refinement of ModelElement and
-  Generatable. Modeled by =sml::enumeration=, =sml::exception=, etc.
-- Inheritable: type provides support for inheritance.
-- Stateful: type has properties.
-- Operatable: type has methods (operations).
-- ClassifiableModelElement: refinement of GeneratableModelElement,
-  Stateful and Operatable. At present modeled by =sml::pod=. In the
-  future: =sml::value=, =sml::entity=, =sml::service=,
-  =sml::repository=, =sml::factory=. =sml::versioned_key=,
-  =sml::unversioned_key=, =sml::concept=.
-
-*** Rename implementation specific parameters                         :story:
-
-These should really be called back end specific parameters at the SML
-level. At the dia level, if a parameter is passed in which has a
-representation at the SML level it should simply be converted to this
-representation instead of being added to the KVP.
-
-Actually, these are more like generic parameters:
-
-- at the dia level they are used to fill in gaps in dia (e.g. packages
-  and diagrams do not have comments)
-- at the SML level, they are used to add information which does not
-  make sense for it to be in dia: is property key.
-- at the backend level, they are used to provide information which
-  does not make sense to live in SML: for example the ODB parameters.
-
-Also, when the string table support has been added, we need to create
-a string table with all valid values for the parameter keys.
-
-Name choices:
-
-- opaque parameters
-- untyped parameters
-
-*** Rename nested qname to composite qname                            :story:
-
-We should just follow the composite pattern in the naming.
-
-*** Visitor as an injected system type                                :story:
-
-The current implementation of visitor relies on creating a view model
-without a corresponding type. In reality we should do as we did for
-keys and create a category type of visitor. This is really a SML
-concept, not a backend specific concept.
-
-*** IMPLEMENTATION Move services into their own type                  :story:
+*** CANCELLED Move services into their own type                       :story:
+    CLOSED: [2013-06-17 Mon 07:54]
     CLOCK: [2013-06-04 Tue 18:32]--[2013-06-04 Tue 18:38] =>  0:06
 
 Continuing from previous iteration, see description in Sprint 26.
 
 **** IMPLEMENTATION Move all of the existing pod code to use new type
 
-*** IMPLEMENTATION Use explicit casting for versioned to unversioned conversions :story:
+*** CANCELLED Use explicit casting for versioned to unversioned conversions :story:
+    CLOSED: [2013-06-17 Mon 07:54]
 
 Continuing from previous iteration, see description in Sprint 26.
 
-*** IMPLEMENTATION Add =extract_key= function                         :story:
+*** CANCELLED Add =extract_key= function                              :story:
+    CLOSED: [2013-06-17 Mon 07:54]
 
 Continuing from previous iteration, see description in Sprint 26.
-
-*** Consider not creating unversioned keys for single property        :story:
-
-If a key is made up of a single property, its a bit nonsensical to
-create an unversioned key. We should only generate the versioned
-key. However, it does make life easier. Wait for real world use cases
-to decide.
-
-*** Injection framework
-
-We need a more generic way of handling system types injection into
-models. This is because there is a number of things that can be
-derived from the existing model types:
-
-- keys
-- diff support
-- reflection
-- cache code
-- etc.
-
-So we need to:
-
-- make injector a composite of injectors that do the real work such as
-  =key_injector=. internally =injector= just delegates the work to
-  these classes.
-- injector decides which internal injectors to use based on options
-  passed in.
-- in the IoC spirit, we should probably create a =injector_interface=.
 
 ** Deprecated Development Stories
