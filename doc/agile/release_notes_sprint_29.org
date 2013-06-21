@@ -10,14 +10,15 @@ This file contains all stories that were closed during sprint 29.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-06-17 Mon 08:07]
+Clock summary at [2013-06-21 Fri 21:39]
 
-| Headline                                          | Time   |      |      |
-|---------------------------------------------------+--------+------+------|
-| *Total time*                                      | *0:11* |      |      |
-|---------------------------------------------------+--------+------+------|
-| Development Stories Implemented                   |        | 0:11 |      |
-| IMPLEMENTATION Release notes and backlog grooming |        |      | 0:11 |
+| Headline                                                         | Time   |      |      |
+|------------------------------------------------------------------+--------+------+------|
+| *Total time*                                                     | *1:49* |      |      |
+|------------------------------------------------------------------+--------+------+------|
+| Development Stories Implemented                                  |        | 1:49 |      |
+| IMPLEMENTATION Release notes and backlog grooming                |        |      | 0:24 |
+| IMPLEMENTATION Design the inheritance tree of DDD classes in SML |        |      | 1:25 |
 #+end:
 
 *** IMPLEMENTATION Release notes and backlog grooming                  :task:
@@ -25,7 +26,7 @@ Clock summary at [2013-06-17 Mon 08:07]
     CLOCK: [2013-06-17 Mon 07:56]--[2013-06-17 Mon 08:07] =>  0:11
 
 *** Add content to the introduction in manual                         :story:
-*** Create the correct inheritance tree for DDD classes in SML        :story:
+*** IMPLEMENTATION Design the inheritance tree of DDD classes in SML  :story:
 
 In S28 as part of "Improve modeling of domain driven concepts in SML",
 we have started making SML look a lot more like a model of
@@ -40,6 +41,84 @@ inheritance tree:
 A better approach is to create base classes that are less well-defined
 and a larger number of derived classes. This is the objective of this
 story.
+
+**** COMPLETED List of SML concepts                                    :note:
+     CLOSED: [2013-06-20 Thu 08:08]
+     CLOCK: [2013-06-20 Thu 08:00]--[2013-06-20 Thu 08:15] =>  0:15
+
+- =Nameable=: type has can be uniquely identified by its qualified name.
+- =Documentable=: type can be documented.
+- =Parameterisable=: type supports pass-through parameters
+  (implementation specific parameters).
+- =Generatable=: type has properties related to code generation.
+- =Element=: A unit of modeling. Refinement of =Namable=,
+  =Documentable=, =Parameterisable=.
+- GeneratableElement: A unit of modeling that can be code
+  generated. Refinement of =Element= and =Generatable=. Modeled by
+  "special" value types such as =sml::enumeration= and
+  =sml::primitive=; modeled by =sml::model=, =sml::concept= and
+  =sml::module=.
+- =Inheritable=: type provides support for inheritance.
+- =Stateful=: type has properties.
+- =Operatable=: type has methods (operations).
+- =Object=: refinement of =GeneratableElement=, =Stateful= and
+  =Operatable=. Modeled by =sml::abstract_entity=, =sml::value_object=,
+  =sml::service=, =sml::factory= and =sml::repository=.
+
+**** ANALYSIS Why is the current design wrong?                         :task:
+     CLOCK: [2013-06-20 Thu 08:24]--[2013-06-20 Thu 08:38] =>  0:14
+     CLOCK: [2013-06-20 Thu 07:46]--[2013-06-20 Thu 08:00] =>  0:14
+     CLOCK: [2013-06-18 Tue 18:13]--[2013-06-18 Tue 18:19] =>  0:06
+     CLOCK: [2013-06-18 Tue 08:16]--[2013-06-18 Tue 08:24] =>  0:08
+     CLOCK: [2013-06-18 Tue 07:48]--[2013-06-18 Tue 08:16] =>  0:28
+
+There is a great deal of confusion when choosing between concepts and
+inheritance. Both provide a way to factor out similar characteristics
+(behaviour and state) and to reuse them. Inheritance is to be used
+when:
+
+- the thing modeled by the base class naturally exists in the domain
+  as a type and is recognisable by domain experts;
+- the base class should be used by other types in the domain on its
+  own - e.g. its not there just to provide functionality or behaviour
+  and is otherwise never used in the domain; the only exception is
+  when we need to comply with MEC-33.
+- there is a strong is-a relationship between parent and children; one
+  should be able to look at the inheritance tree and see consistent
+  ontological work rather than a hodgepodge of unrelated classes.
+
+Concepts are to be used when types have similar characteristics but
+the packaging of those characteristics is not obviously attributable
+to a common ancestor. In this case one needs to package the
+characteristics in cohesive units and give names that reflect
+them.
+
+In this light we can see a lot of modeling errors, that explain the
+current confusion:
+
+- model element: basic unit of modeling. this is not a type as there
+  is no such thing as a model element in terms of the domain. no other
+  domain type will refer to it directly.
+- typed element: this is too broad as a base type; for instance it
+  provides attributes that make no sense in the context of a primitive
+  or an enumeration.
+
+What we need is a an inheritance tree that reflects a fundamental type
+hierarchy (prefix =abstract_= used when there is a need for MEC-33
+compliance):
+
+- =concept=, =module=, =type=: totally unrelated entities at the
+  inheritance level. Models of GeneratableElement concept. =type= as a
+  base class is justified because we may have some code which can
+  process types generically. For instance, the model could have a
+  container of =type=.
+- =primitive=, =enumeration=, =abstract_object= derive from =type=.
+- =object= derives from =abstract_object= and has a =object_types=
+  enum: =value=, =service=, =factory= or =repository=. Has an optional
+  =version= property.
+- =abstract_entity= derives from =abstract_object=, and provides a set
+  of properties that make its identity function.
+- =entity= and =keyed_entity= descend from =abstract_entity=.
 
 **** Convert pods into entities, values or services                   :story:
 *** Model name should be a qname                                      :story:
