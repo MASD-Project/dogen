@@ -51,10 +51,10 @@ const std::string exception_stereotype("exception");
 const std::string service_stereotype("service");
 const std::string immutable_stereotype("immutable");
 
-dogen::dia_to_sml::object_profile
-profile(const dogen::dia_to_sml::processed_object& o) {
+dogen::dia_to_sml::profile
+mock_profile(const dogen::dia_to_sml::processed_object& o) {
     profiler profiler;
-    return profiler.profile(o);
+    return profiler.generate(o);
 }
 
 bool is_type_one(const dogen::sml::qname& qn) {
@@ -78,7 +78,7 @@ BOOST_AUTO_TEST_CASE(uml_class_with_no_stereotype_transforms_into_expected_pod) 
 
     const auto o(mock_processed_object_factory::build_class());
     dogen::dia_to_sml::transformer t(c);
-    t.transform(o, profile(o));
+    t.transform(o, mock_profile(o));
 
     BOOST_LOG_SEV(lg, debug) << "context: " << c;
     BOOST_REQUIRE(c.model().pods().size() == 1);
@@ -99,7 +99,7 @@ BOOST_AUTO_TEST_CASE(empty_named_uml_class_throws) {
     dogen::dia_to_sml::transformer t(c);
     const auto o(mock_processed_object_factory::build_empty_named_class());
     contains_checker<transformation_error> cc(empty_name);
-    BOOST_CHECK_EXCEPTION(t.transform(o, profile(o)), transformation_error, cc);
+    BOOST_CHECK_EXCEPTION(t.transform(o, mock_profile(o)), transformation_error, cc);
 }
 
 BOOST_AUTO_TEST_CASE(uml_class_with_enumeration_stereotype_transforms_into_expected_enumeration) {
@@ -110,7 +110,7 @@ BOOST_AUTO_TEST_CASE(uml_class_with_enumeration_stereotype_transforms_into_expec
     dogen::dia_to_sml::transformer t(c);
     const auto st(enumeration_stereotype);
     const auto o(mock_processed_object_factory::build_class(0, st));
-    t.transform(o, profile(o));
+    t.transform(o, mock_profile(o));
 
     BOOST_LOG_SEV(lg, debug) << "context: " << c;
     BOOST_CHECK(c.model().pods().empty());
@@ -130,7 +130,7 @@ BOOST_AUTO_TEST_CASE(uml_class_with_exception_stereotype_transforms_into_expecte
     dogen::dia_to_sml::transformer t(c);
     const auto st(exception_stereotype);
     const auto o(mock_processed_object_factory::build_class(0, st));
-    t.transform(o, profile(o));
+    t.transform(o, mock_profile(o));
 
     BOOST_LOG_SEV(lg, debug) << "context: " << c;
     BOOST_CHECK(c.model().pods().empty());
@@ -150,7 +150,7 @@ BOOST_AUTO_TEST_CASE(uml_class_with_exception_stereotype_transforms_into_expecte
 //     dogen::dia_to_sml::transformer t(c);
 //     const auto st(service_stereotype);
 //     const auto o(mock_processed_object_factory::build_class(0, st));
-//     t.transform(o, profile(o));
+//     t.transform(o, mock_profile(o));
 
 //     BOOST_LOG_SEV(lg, debug) << "context: " << c;
 //     BOOST_CHECK(c.model().pods().empty());
@@ -170,7 +170,7 @@ BOOST_AUTO_TEST_CASE(uml_large_package_transforms_into_expected_module) {
 
     dogen::dia_to_sml::transformer t(c);
     const auto o(mock_processed_object_factory::build_large_package());
-    t.transform(o, profile(o));
+    t.transform(o, mock_profile(o));
 
     BOOST_LOG_SEV(lg, debug) << "context: " << c;
     BOOST_CHECK(c.model().pods().empty());
@@ -190,8 +190,8 @@ BOOST_AUTO_TEST_CASE(uml_class_in_package_transforms_into_expected_pod) {
     dogen::dia_to_sml::transformer t(c);
     const auto a(
         mock_processed_object_factory::build_class_inside_large_package());
-    t.transform(a[0], profile(a[0]));
-    t.transform(a[1], profile(a[1]));
+    t.transform(a[0], mock_profile(a[0]));
+    t.transform(a[1], mock_profile(a[1]));
 
     BOOST_LOG_SEV(lg, debug) << "context: " << c;
 
@@ -221,8 +221,8 @@ BOOST_AUTO_TEST_CASE(uml_class_with_enumeration_stereotype_in_package_transforms
     const auto st(enumeration_stereotype);
     const auto a(
         mock_processed_object_factory::build_class_inside_large_package(0, st));
-    t.transform(a[0], profile(a[0]));
-    t.transform(a[1], profile(a[1]));
+    t.transform(a[0], mock_profile(a[0]));
+    t.transform(a[1], mock_profile(a[1]));
 
     BOOST_LOG_SEV(lg, debug) << "context: " << c;
 
@@ -250,8 +250,8 @@ BOOST_AUTO_TEST_CASE(uml_class_with_exception_stereotype_in_package_transforms_i
     const auto st(exception_stereotype);
     const auto a(
         mock_processed_object_factory::build_class_inside_large_package(0, st));
-    t.transform(a[0], profile(a[0]));
-    t.transform(a[1], profile(a[1]));
+    t.transform(a[0], mock_profile(a[0]));
+    t.transform(a[1], mock_profile(a[1]));
 
     BOOST_LOG_SEV(lg, debug) << "context: " << c;
 
@@ -279,8 +279,8 @@ BOOST_AUTO_TEST_CASE(uml_class_with_exception_stereotype_in_package_transforms_i
 //     const auto st(service_stereotype);
 //     const auto a(
 //         mock_processed_object_factory::build_class_inside_large_package(0, st));
-//     t.transform(a[0], profile(a[0]));
-//     t.transform(a[1], profile(a[1]));
+//     t.transform(a[0], mock_profile(a[0]));
+//     t.transform(a[1], mock_profile(a[1]));
 
 //     BOOST_LOG_SEV(lg, debug) << "context: " << c;
 
@@ -308,26 +308,26 @@ BOOST_AUTO_TEST_CASE(uml_class_in_non_existing_package_throws) {
     auto a(
         mock_processed_object_factory::build_class_inside_large_package());
     auto o(a[1]);
-    auto op(profile(o));
+    auto op(mock_profile(o));
     contains_checker<transformation_error> cc(missing_qname);
     BOOST_CHECK_EXCEPTION(t.transform(o, op), transformation_error, cc);
 
     auto st(enumeration_stereotype);
     a = mock_processed_object_factory::build_class_inside_large_package(0 , st);
     o = a[1];
-    op = profile(o);
+    op = mock_profile(o);
     BOOST_CHECK_EXCEPTION(t.transform(o, op), transformation_error, cc);
 
     st = exception_stereotype;
     a = mock_processed_object_factory::build_class_inside_large_package(0 , st);
     o = a[1];
-    op = profile(o);
+    op = mock_profile(o);
     BOOST_CHECK_EXCEPTION(t.transform(o, op), transformation_error, cc);
 
     st = service_stereotype;
     a = mock_processed_object_factory::build_class_inside_large_package(0 , st);
     o = a[1];
-    op = profile(o);
+    op = mock_profile(o);
     BOOST_CHECK_EXCEPTION(t.transform(o, op), transformation_error, cc);
 }
 
@@ -339,9 +339,9 @@ BOOST_AUTO_TEST_CASE(uml_class_in_two_packages_transforms_into_expected_pod) {
     dogen::dia_to_sml::transformer t(c);
     const auto a(
         mock_processed_object_factory::build_class_inside_two_large_packages());
-    t.transform(a[0], profile(a[0]));
-    t.transform(a[1], profile(a[1]));
-    t.transform(a[2], profile(a[2]));
+    t.transform(a[0], mock_profile(a[0]));
+    t.transform(a[1], mock_profile(a[1]));
+    t.transform(a[2], mock_profile(a[2]));
 
     BOOST_LOG_SEV(lg, debug) << "context: " << c;
 
@@ -396,9 +396,9 @@ BOOST_AUTO_TEST_CASE(uml_class_with_enumeration_stereotype_in_two_packages_trans
     const auto st(enumeration_stereotype);
     const auto a(mock_processed_object_factory::
         build_class_inside_two_large_packages(0, st));
-    t.transform(a[0], profile(a[0]));
-    t.transform(a[1], profile(a[1]));
-    t.transform(a[2], profile(a[2]));
+    t.transform(a[0], mock_profile(a[0]));
+    t.transform(a[1], mock_profile(a[1]));
+    t.transform(a[2], mock_profile(a[2]));
 
     BOOST_LOG_SEV(lg, debug) << "context: " << c;
 
@@ -451,9 +451,9 @@ BOOST_AUTO_TEST_CASE(uml_class_with_exception_stereotype_in_two_packages_transfo
     const auto st(exception_stereotype);
     const auto a(mock_processed_object_factory::
         build_class_inside_two_large_packages(0, st));
-    t.transform(a[0], profile(a[0]));
-    t.transform(a[1], profile(a[1]));
-    t.transform(a[2], profile(a[2]));
+    t.transform(a[0], mock_profile(a[0]));
+    t.transform(a[1], mock_profile(a[1]));
+    t.transform(a[2], mock_profile(a[2]));
 
     BOOST_LOG_SEV(lg, debug) << "context: " << c;
 
@@ -506,9 +506,9 @@ BOOST_AUTO_TEST_CASE(uml_class_with_exception_stereotype_in_two_packages_transfo
 //     const auto st(service_stereotype);
 //     const auto a(mock_processed_object_factory::
 //         build_class_inside_two_large_packages(0, st));
-//     t.transform(a[0], profile(a[0]));
-//     t.transform(a[1], profile(a[1]));
-//     t.transform(a[2], profile(a[2]));
+//     t.transform(a[0], mock_profile(a[0]));
+//     t.transform(a[1], mock_profile(a[1]));
+//     t.transform(a[2], mock_profile(a[2]));
 
 //     BOOST_LOG_SEV(lg, debug) << "context: " << c;
 
@@ -559,7 +559,7 @@ BOOST_AUTO_TEST_CASE(uml_note_with_marker_transforms_into_model_comments) {
     c.model().name(model_name);
     dogen::dia_to_sml::transformer t(c);
     const auto o(mock_processed_object_factory::build_uml_note_with_marker());
-    t.transform(o, profile(o));
+    t.transform(o, mock_profile(o));
 
     BOOST_LOG_SEV(lg, debug) << "context: " << c;
     BOOST_CHECK(!c.model().documentation().empty());
@@ -573,7 +573,7 @@ BOOST_AUTO_TEST_CASE(uml_note_with_text_but_no_marker_does_nothing) {
     c.model().name(model_name);
     dogen::dia_to_sml::transformer t(c);
     const auto o(mock_processed_object_factory::build_uml_note());
-    t.transform(o, profile(o));
+    t.transform(o, mock_profile(o));
 
     BOOST_LOG_SEV(lg, debug) << "context: " << c;
     BOOST_CHECK(c.model().documentation().empty());
@@ -587,7 +587,7 @@ BOOST_AUTO_TEST_CASE(empty_uml_note_does_nothing) {
     c.model().name(model_name);
     dogen::dia_to_sml::transformer t(c);
     const auto o(mock_processed_object_factory::build_empty_uml_note());
-    t.transform(o, profile(o));
+    t.transform(o, mock_profile(o));
 
     BOOST_LOG_SEV(lg, debug) << "context: " << c;
     BOOST_CHECK(c.model().documentation().empty());
@@ -601,8 +601,8 @@ BOOST_AUTO_TEST_CASE(uml_note_with_marker_inside_package_transforms_into_package
     dogen::dia_to_sml::transformer t(c);
     const auto a(mock_processed_object_factory::
         build_uml_note_with_marker_inside_large_package());
-    t.transform(a[0], profile(a[0]));
-    t.transform(a[1], profile(a[1]));
+    t.transform(a[0], mock_profile(a[0]));
+    t.transform(a[1], mock_profile(a[1]));
 
     BOOST_LOG_SEV(lg, debug) << "context: " << c;
     BOOST_CHECK(c.model().documentation().empty());
@@ -621,8 +621,8 @@ BOOST_AUTO_TEST_CASE(uml_note_with_text_but_no_marker_inside_package_does_nothin
     dogen::dia_to_sml::transformer t(c);
     const auto a(mock_processed_object_factory::
         build_uml_note_inside_large_package());
-    t.transform(a[0], profile(a[0]));
-    t.transform(a[1], profile(a[1]));
+    t.transform(a[0], mock_profile(a[0]));
+    t.transform(a[1], mock_profile(a[1]));
 
     BOOST_LOG_SEV(lg, debug) << "context: " << c;
     BOOST_CHECK(c.model().documentation().empty());
@@ -641,8 +641,8 @@ BOOST_AUTO_TEST_CASE(empty_uml_note_inside_package_does_nothing) {
     dogen::dia_to_sml::transformer t(c);
     const auto a(mock_processed_object_factory::
         build_empty_uml_note_inside_large_package());
-    t.transform(a[0], profile(a[0]));
-    t.transform(a[1], profile(a[1]));
+    t.transform(a[0], mock_profile(a[0]));
+    t.transform(a[1], mock_profile(a[1]));
 
     BOOST_LOG_SEV(lg, debug) << "context: " << c;
     BOOST_CHECK(c.model().documentation().empty());
@@ -666,10 +666,10 @@ BOOST_AUTO_TEST_CASE(inheritance_with_immutability_throws) {
     c.child_to_parents().insert(std::make_pair(con->second, parents));
 
     dogen::dia_to_sml::transformer t1(c);
-    t1.transform(a[1], profile(a[1]));
+    t1.transform(a[1], mock_profile(a[1]));
     auto po1(a[2]);
     po1.stereotype(immutable_stereotype);
-    const auto op1(profile(po1));
+    const auto op1(mock_profile(po1));
     contains_checker<transformation_error> cc(immutability_inheritance);
     BOOST_CHECK_EXCEPTION(t1.transform(po1, op1), transformation_error, cc);
 
@@ -678,7 +678,7 @@ BOOST_AUTO_TEST_CASE(inheritance_with_immutability_throws) {
     dogen::dia_to_sml::transformer t2(c);
     auto po2(a[1]);
     po2.stereotype(immutable_stereotype);
-    const auto op2(profile(po2));
+    const auto op2(mock_profile(po2));
     BOOST_CHECK_EXCEPTION(t1.transform(po2, op2), transformation_error, cc);
 }
 
@@ -695,8 +695,8 @@ BOOST_AUTO_TEST_CASE(uml_class_with_inheritance_results_in_expected_pod) {
     c.parent_ids().insert(con->first);
 
     dogen::dia_to_sml::transformer t1(c);
-    t1.transform(a[1], profile(a[1]));
-    t1.transform(a[2], profile(a[2]));
+    t1.transform(a[1], mock_profile(a[1]));
+    t1.transform(a[2], mock_profile(a[2]));
 
     BOOST_LOG_SEV(lg, debug) << "context: " << c;
 
@@ -729,8 +729,8 @@ BOOST_AUTO_TEST_CASE(uml_class_with_inheritance_results_in_expected_pod) {
 //     c.parent_ids().insert(con->first);
 
 //     dogen::dia_to_sml::transformer t1(c);
-//     t1.transform(a[1], profile(a[1]));
-//     t1.transform(a[2], profile(a[2]));
+//     t1.transform(a[1], mock_profile(a[1]));
+//     t1.transform(a[2], mock_profile(a[2]));
 
 //     BOOST_LOG_SEV(lg, debug) << "context: " << c;
 

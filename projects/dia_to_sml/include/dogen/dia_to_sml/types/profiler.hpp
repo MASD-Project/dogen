@@ -27,7 +27,7 @@
 
 #include <string>
 #include "dogen/dia_to_sml/types/object_types.hpp"
-#include "dogen/dia_to_sml/types/object_profile.hpp"
+#include "dogen/dia_to_sml/types/profile.hpp"
 #include "dogen/dia_to_sml/types/processed_object_fwd.hpp"
 
 namespace dogen {
@@ -47,19 +47,19 @@ private:
      * @brief Given a string with a valid dia object type, updates the
      * processed object type flags.
      */
-    void process_object_type(object_profile& o, const object_types ot) const;
+    void process_object_type(profile& o, const object_types ot) const;
 
     /**
      * @brief Given a string with a valid stereotype, updates the
      * profile's stereotype flags.
      */
-    void process_stereotype(object_profile& o, const std::string& s) const;
+    void process_stereotype(profile& o, const std::string& s) const;
 
 public:
     /**
      * @brief Perform the profiling.
      */
-    object_profile profile(const processed_object& o);
+    profile generate(const processed_object& o);
 };
 
 } }

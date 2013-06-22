@@ -49,7 +49,7 @@ BOOST_AUTO_TEST_CASE(validate_serialization) {
 
     rountrip_type<context_generator>();
     rountrip_type<node_generator>();
-    rountrip_type<object_profile_generator>();
+    rountrip_type<profile_generator>();
     rountrip_type<object_types_generator>();
     rountrip_type<processed_object_generator>();
     rountrip_type<processed_property_generator>();

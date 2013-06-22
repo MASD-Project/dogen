@@ -43,7 +43,7 @@ BOOST_AUTO_TEST_CASE(validate_equality) {
 
     test_equality<context_generator>();
     test_equality<node_generator>();
-    test_equality<object_profile_generator>();
+    test_equality<profile_generator>();
     test_equality<object_types_generator>();
     test_equality<processed_object_generator>();
     test_equality<processed_property_generator>();

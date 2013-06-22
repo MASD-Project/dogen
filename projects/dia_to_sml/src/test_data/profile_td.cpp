@@ -18,7 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/dia_to_sml/test_data/object_profile_td.hpp"
+#include <sstream>
+#include "dogen/dia_to_sml/test_data/profile_td.hpp"
 
 namespace {
 
@@ -26,14 +27,28 @@ bool create_bool(const unsigned int position) {
     return (position % 2) == 0;
 }
 
+std::string create_std_string(const unsigned int position) {
+    std::ostringstream s;
+    s << "a_string_" << position;
+    return s.str();
+}
+
+std::list<std::string> create_std_list_std_string(unsigned int position) {
+    std::list<std::string> r;
+    for (unsigned int i(0); i < 10; ++i) {
+        r.push_back(create_std_string(position + i));
+    }
+    return r;
+}
+
 }
 
 namespace dogen {
 namespace dia_to_sml {
 
-object_profile_generator::object_profile_generator() : position_(0) { }
+profile_generator::profile_generator() : position_(0) { }
 
-void object_profile_generator::
+void profile_generator::
 populate(const unsigned int position, result_type& v) {
     v.is_uml_large_package(create_bool(position + 0));
     v.is_uml_class(create_bool(position + 1));
@@ -55,23 +70,24 @@ populate(const unsigned int position, result_type& v) {
     v.is_fluent(create_bool(position + 17));
     v.is_aggregate_root(create_bool(position + 18));
     v.is_string_table(create_bool(position + 19));
+    v.unknown_stereotypes(create_std_list_std_string(position + 20));
 }
 
-object_profile_generator::result_type
-object_profile_generator::create(const unsigned int position) {
-    object_profile r;
-    object_profile_generator::populate(position, r);
+profile_generator::result_type
+profile_generator::create(const unsigned int position) {
+    profile r;
+    profile_generator::populate(position, r);
     return r;
 }
-object_profile_generator::result_type*
-object_profile_generator::create_ptr(const unsigned int position) {
-    object_profile* p = new object_profile();
-    object_profile_generator::populate(position, *p);
+profile_generator::result_type*
+profile_generator::create_ptr(const unsigned int position) {
+    profile* p = new profile();
+    profile_generator::populate(position, *p);
     return p;
 }
 
-object_profile_generator::result_type
-object_profile_generator::operator()() {
+profile_generator::result_type
+profile_generator::operator()() {
     return create(position_++);
 }
 

@@ -35,7 +35,6 @@
 #include "dogen/dia_to_sml/types/processed_object.hpp"
 #include "dogen/dia_to_sml/io/processed_object_io.hpp"
 #include "dogen/dia_to_sml/io/context_io.hpp"
-#include "dogen/dia_to_sml/types/profiler.hpp"
 #include "dogen/dia_to_sml/types/validator.hpp"
 #include "dogen/dia_to_sml/types/transformer.hpp"
 
@@ -188,7 +187,7 @@ transform_property(const processed_property& p) {
 }
 
 void transformer::
-transform_pod(const object_profile& op, const processed_object& po) {
+transform_pod(const processed_object& po, const profile& p) {
     BOOST_LOG_SEV(lg, debug) << "Object is a pod: " << po.id();
 
     sml::pod pod;
@@ -200,15 +199,15 @@ transform_pod(const object_profile& op, const processed_object& po) {
 
     using sml::pod_types;
     pod.pod_type(pod_types::value);
-    if (op.is_entity())
+    if (p.is_entity())
         pod.pod_type(pod_types::entity);
-    else if (op.is_service()) // FIXME: service HACK
+    else if (p.is_service()) // FIXME: service HACK
         pod.pod_type(pod_types::service);
 
-    pod.is_fluent(op.is_fluent());
-    pod.is_versioned(op.is_versioned());
-    pod.is_visitable(op.is_visitable());
-    pod.is_keyed(op.is_keyed());
+    pod.is_fluent(p.is_fluent());
+    pod.is_versioned(p.is_versioned());
+    pod.is_visitable(p.is_visitable());
+    pod.is_keyed(p.is_keyed());
 
     using sml::generation_types;
     pod.generation_type(context_.is_target() ?
@@ -216,8 +215,8 @@ transform_pod(const object_profile& op, const processed_object& po) {
         generation_types::no_generation);
 
     // FIXME: service hack
-    // if (context_.is_target() && op.is_non_generatable())
-    if (context_.is_target() && (op.is_non_generatable() || op.is_service()))
+    // if (context_.is_target() && p.is_non_generatable())
+    if (context_.is_target() && (p.is_non_generatable() || p.is_service()))
         pod.generation_type(generation_types::partial_generation);
 
     const auto pair(comments_parser_->parse(po.comment()));
@@ -316,8 +315,8 @@ transform_pod(const object_profile& op, const processed_object& po) {
         }
     }
 
-    pod.is_immutable(op.is_immutable());
-    if ((pod.is_parent() || pod.parent_name()) && op.is_immutable())  {
+    pod.is_immutable(p.is_immutable());
+    if ((pod.is_parent() || pod.parent_name()) && p.is_immutable())  {
         BOOST_LOG_SEV(lg, error) << immutabilty_with_inheritance
                                  << pod.name().type_name();
 
@@ -476,22 +475,22 @@ bool transformer::is_transformable(const processed_object& o) const {
 }
 
 void transformer::
-transform(const processed_object& o, const object_profile& op) {
+transform(const processed_object& o, const profile& p) {
     BOOST_LOG_SEV(lg, debug) << "Starting to transform: " << o.id();
     BOOST_LOG_SEV(lg, debug) << "Object contents: " << o;
 
     require_is_transformable(o);
 
-    if (op.is_uml_large_package())
+    if (p.is_uml_large_package())
         transform_module(o);
-    else if (op.is_uml_note())
+    else if (p.is_uml_note())
         transform_note(o);
-    else if (op.is_enumeration())
+    else if (p.is_enumeration())
         transform_enumeration(o);
-    else if (op.is_exception())
+    else if (p.is_exception())
         transform_exception(o);
     else
-        transform_pod(op, o);
+        transform_pod(o, p);
 
     BOOST_LOG_SEV(lg, debug) << "Transformed: " << o.id();
 }

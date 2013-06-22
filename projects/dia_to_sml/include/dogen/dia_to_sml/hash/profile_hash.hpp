@@ -18,24 +18,35 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_DIA_TO_SML_SERIALIZATION_OBJECT_PROFILE_FWD_SER_HPP
-#define DOGEN_DIA_TO_SML_SERIALIZATION_OBJECT_PROFILE_FWD_SER_HPP
+#ifndef DOGEN_DIA_TO_SML_HASH_PROFILE_HASH_HPP
+#define DOGEN_DIA_TO_SML_HASH_PROFILE_HASH_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/dia_to_sml/types/object_profile_fwd.hpp"
+#include <functional>
+#include "dogen/dia_to_sml/types/profile.hpp"
 
-namespace boost {
-namespace serialization {
+namespace dogen {
+namespace dia_to_sml {
 
-template<class Archive>
-void save(Archive& ar, const dogen::dia_to_sml::object_profile& v, unsigned int version);
-
-template<class Archive>
-void load(Archive& ar, dogen::dia_to_sml::object_profile& v, unsigned int version);
+class profile_hasher {
+public:
+    static std::size_t hash(const profile& v);
+};
 
 } }
 
+namespace std {
+
+template<>
+class hash<dogen::dia_to_sml::profile> {
+public:
+    size_t operator()(const dogen::dia_to_sml::profile& v) const {
+        return dogen::dia_to_sml::profile_hasher::hash(v);
+    }
+};
+
+}
 #endif

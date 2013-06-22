@@ -23,7 +23,7 @@
 #include "dogen/utility/test/logging.hpp"
 #include "dogen/utility/test/asserter.hpp"
 #include "dogen/dia_to_sml/types/validator.hpp"
-#include "dogen/dia_to_sml/io/object_profile_io.hpp"
+#include "dogen/dia_to_sml/io/profile_io.hpp"
 #include "dogen/dia_to_sml/types/validation_error.hpp"
 #include "dogen/utility/test/exception_checkers.hpp"
 
@@ -52,208 +52,208 @@ BOOST_AUTO_TEST_SUITE(validator)
 BOOST_AUTO_TEST_CASE(default_profile_throws) {
     SETUP_TEST_LOG_SOURCE("default_profile_throws");
     dogen::dia_to_sml::validator v;
-    dogen::dia_to_sml::object_profile op;
-    BOOST_LOG_SEV(lg, debug) << "input: " << op;
+    dogen::dia_to_sml::profile p;
+    BOOST_LOG_SEV(lg, debug) << "input: " << p;
 
     contains_checker<validation_error> cc(no_type_flags_set);
-    BOOST_CHECK_EXCEPTION(v.validate(op), validation_error, cc);
+    BOOST_CHECK_EXCEPTION(v.validate(p), validation_error, cc);
 }
 
 BOOST_AUTO_TEST_CASE(setting_more_than_one_type_throws) {
     SETUP_TEST_LOG_SOURCE("setting_more_than_one_type_throws");
     dogen::dia_to_sml::validator v;
-    dogen::dia_to_sml::object_profile op1;
-    op1.is_uml_large_package(true);
-    op1.is_uml_class(true);
-    BOOST_LOG_SEV(lg, debug) << "input op1: " << op1;
+    dogen::dia_to_sml::profile p1;
+    p1.is_uml_large_package(true);
+    p1.is_uml_class(true);
+    BOOST_LOG_SEV(lg, debug) << "input p1: " << p1;
 
     contains_checker<validation_error> cc(too_many_type_flags_set);
-    BOOST_CHECK_EXCEPTION(v.validate(op1), validation_error, cc);
+    BOOST_CHECK_EXCEPTION(v.validate(p1), validation_error, cc);
 
-    dogen::dia_to_sml::object_profile op2;
-    op2.is_uml_note(true);
-    op2.is_uml_message(true);
-    op2.is_uml_realization(true);
+    dogen::dia_to_sml::profile p2;
+    p2.is_uml_note(true);
+    p2.is_uml_message(true);
+    p2.is_uml_realization(true);
 
-    BOOST_LOG_SEV(lg, debug) << "input op2: " << op2;
-    BOOST_CHECK_EXCEPTION(v.validate(op2), validation_error, cc);
+    BOOST_LOG_SEV(lg, debug) << "input p2: " << p2;
+    BOOST_CHECK_EXCEPTION(v.validate(p2), validation_error, cc);
 
-    dogen::dia_to_sml::object_profile op3;
-    op3.is_uml_generalization(true);
-    op3.is_uml_association(true);
+    dogen::dia_to_sml::profile p3;
+    p3.is_uml_generalization(true);
+    p3.is_uml_association(true);
 
-    BOOST_LOG_SEV(lg, debug) << "input op3: " << op3;
-    BOOST_CHECK_EXCEPTION(v.validate(op3), validation_error, cc);
+    BOOST_LOG_SEV(lg, debug) << "input p3: " << p3;
+    BOOST_CHECK_EXCEPTION(v.validate(p3), validation_error, cc);
 }
 
 BOOST_AUTO_TEST_CASE(setting_stereotypes_for_non_uml_classes_throws) {
     SETUP_TEST_LOG_SOURCE("setting_stereotypes_for_non_uml_classes_throws");
     dogen::dia_to_sml::validator v;
-    dogen::dia_to_sml::object_profile op1;
-    op1.is_uml_large_package(true);
-    op1.is_enumeration(true);
-    BOOST_LOG_SEV(lg, debug) << "input op1: " << op1;
+    dogen::dia_to_sml::profile p1;
+    p1.is_uml_large_package(true);
+    p1.is_enumeration(true);
+    BOOST_LOG_SEV(lg, debug) << "input p1: " << p1;
 
     contains_checker<validation_error> cc(stereotypes_require_uml_class);
-    BOOST_CHECK_EXCEPTION(v.validate(op1), validation_error, cc);
+    BOOST_CHECK_EXCEPTION(v.validate(p1), validation_error, cc);
 
-    dogen::dia_to_sml::object_profile op2;
-    op2.is_uml_note(true);
-    op2.is_keyed(true);
-    op2.is_versioned(true);
+    dogen::dia_to_sml::profile p2;
+    p2.is_uml_note(true);
+    p2.is_keyed(true);
+    p2.is_versioned(true);
 
-    BOOST_LOG_SEV(lg, debug) << "input op2: " << op2;
-    BOOST_CHECK_EXCEPTION(v.validate(op2), validation_error, cc);
+    BOOST_LOG_SEV(lg, debug) << "input p2: " << p2;
+    BOOST_CHECK_EXCEPTION(v.validate(p2), validation_error, cc);
 
-    dogen::dia_to_sml::object_profile op3;
-    op3.is_uml_generalization(true);
-    op3.is_exception(true);
-    op3.is_service(true);
+    dogen::dia_to_sml::profile p3;
+    p3.is_uml_generalization(true);
+    p3.is_exception(true);
+    p3.is_service(true);
 
-    BOOST_LOG_SEV(lg, debug) << "input op3: " << op3;
-    BOOST_CHECK_EXCEPTION(v.validate(op3), validation_error, cc);
+    BOOST_LOG_SEV(lg, debug) << "input p3: " << p3;
+    BOOST_CHECK_EXCEPTION(v.validate(p3), validation_error, cc);
 }
 
 BOOST_AUTO_TEST_CASE(setting_more_than_one_type_related_stereotype_throws) {
     SETUP_TEST_LOG_SOURCE("setting_more_than_one_type_related_stereotype_throws");
 
     dogen::dia_to_sml::validator v;
-    dogen::dia_to_sml::object_profile op1;
-    op1.is_uml_class(true);
-    op1.is_enumeration(true);
-    op1.is_exception(true);
-    BOOST_LOG_SEV(lg, debug) << "input op1: " << op1;
+    dogen::dia_to_sml::profile p1;
+    p1.is_uml_class(true);
+    p1.is_enumeration(true);
+    p1.is_exception(true);
+    BOOST_LOG_SEV(lg, debug) << "input p1: " << p1;
 
     contains_checker<validation_error> cc(type_related_stereotype);
-    BOOST_CHECK_EXCEPTION(v.validate(op1), validation_error, cc);
+    BOOST_CHECK_EXCEPTION(v.validate(p1), validation_error, cc);
 
-    dogen::dia_to_sml::object_profile op2;
-    op2.is_uml_class(true);
-    op2.is_entity(true);
-    op2.is_service(true);
+    dogen::dia_to_sml::profile p2;
+    p2.is_uml_class(true);
+    p2.is_entity(true);
+    p2.is_service(true);
 
-    BOOST_LOG_SEV(lg, debug) << "input op2: " << op2;
-    BOOST_CHECK_EXCEPTION(v.validate(op2), validation_error, cc);
+    BOOST_LOG_SEV(lg, debug) << "input p2: " << p2;
+    BOOST_CHECK_EXCEPTION(v.validate(p2), validation_error, cc);
 
-    dogen::dia_to_sml::object_profile op3;
-    op3.is_uml_class(true);
-    op3.is_entity(true);
-    op3.is_service(true);
-    op3.is_value(true);
+    dogen::dia_to_sml::profile p3;
+    p3.is_uml_class(true);
+    p3.is_entity(true);
+    p3.is_service(true);
+    p3.is_value(true);
 
-    BOOST_LOG_SEV(lg, debug) << "input op3: " << op3;
-    BOOST_CHECK_EXCEPTION(v.validate(op3), validation_error, cc);
+    BOOST_LOG_SEV(lg, debug) << "input p3: " << p3;
+    BOOST_CHECK_EXCEPTION(v.validate(p3), validation_error, cc);
 }
 
 BOOST_AUTO_TEST_CASE(setting_only_one_type_flag_does_not_throw) {
     SETUP_TEST_LOG_SOURCE("setting_only_one_type_flag_does_not_throw");
     dogen::dia_to_sml::validator v;
-    dogen::dia_to_sml::object_profile op;
-    op.is_uml_class(true);
-    BOOST_LOG_SEV(lg, debug) << "input: " << op;
-    v.validate(op);
+    dogen::dia_to_sml::profile p;
+    p.is_uml_class(true);
+    BOOST_LOG_SEV(lg, debug) << "input: " << p;
+    v.validate(p);
 
-    op.is_uml_large_package(true);
-    op.is_uml_class(false);
-    BOOST_LOG_SEV(lg, debug) << "input: " << op;
-    v.validate(op);
+    p.is_uml_large_package(true);
+    p.is_uml_class(false);
+    BOOST_LOG_SEV(lg, debug) << "input: " << p;
+    v.validate(p);
 
-    op.is_uml_large_package(false);
-    op.is_uml_generalization(true);
-    BOOST_LOG_SEV(lg, debug) << "input: " << op;
-    v.validate(op);
+    p.is_uml_large_package(false);
+    p.is_uml_generalization(true);
+    BOOST_LOG_SEV(lg, debug) << "input: " << p;
+    v.validate(p);
 
-    op.is_uml_association(true);
-    op.is_uml_generalization(false);
-    BOOST_LOG_SEV(lg, debug) << "input: " << op;
-    v.validate(op);
+    p.is_uml_association(true);
+    p.is_uml_generalization(false);
+    BOOST_LOG_SEV(lg, debug) << "input: " << p;
+    v.validate(p);
 
-    op.is_uml_note(true);
-    op.is_uml_association(false);
-    BOOST_LOG_SEV(lg, debug) << "input: " << op;
-    v.validate(op);
+    p.is_uml_note(true);
+    p.is_uml_association(false);
+    BOOST_LOG_SEV(lg, debug) << "input: " << p;
+    v.validate(p);
 
-    op.is_uml_note(false);
-    op.is_uml_message(true);
-    BOOST_LOG_SEV(lg, debug) << "input: " << op;
-    v.validate(op);
+    p.is_uml_note(false);
+    p.is_uml_message(true);
+    BOOST_LOG_SEV(lg, debug) << "input: " << p;
+    v.validate(p);
 
-    op.is_uml_realization(true);
-    op.is_uml_message(false);
-    BOOST_LOG_SEV(lg, debug) << "input: " << op;
-    v.validate(op);
+    p.is_uml_realization(true);
+    p.is_uml_message(false);
+    BOOST_LOG_SEV(lg, debug) << "input: " << p;
+    v.validate(p);
 }
 
 BOOST_AUTO_TEST_CASE(setting_non_type_stereotypes_on_types_other_than_entity_or_value_throws) {
     SETUP_TEST_LOG_SOURCE("setting_non_type_stereotypes_on_types_other_than_entity_or_value_throws");
 
     dogen::dia_to_sml::validator v;
-    dogen::dia_to_sml::object_profile op1;
-    op1.is_uml_class(true);
-    op1.is_enumeration(true);
-    op1.is_versioned(true);
-    BOOST_LOG_SEV(lg, debug) << "input op1: " << op1;
+    dogen::dia_to_sml::profile p1;
+    p1.is_uml_class(true);
+    p1.is_enumeration(true);
+    p1.is_versioned(true);
+    BOOST_LOG_SEV(lg, debug) << "input p1: " << p1;
 
     contains_checker<validation_error> cc1(type_does_not_support_stereotypes);
-    BOOST_CHECK_EXCEPTION(v.validate(op1), validation_error, cc1);
+    BOOST_CHECK_EXCEPTION(v.validate(p1), validation_error, cc1);
 
-    dogen::dia_to_sml::object_profile op2;
-    op2.is_uml_class(true);
-    op2.is_exception(true);
-    op2.is_versioned(true);
-    op2.is_non_generatable(true);
+    dogen::dia_to_sml::profile p2;
+    p2.is_uml_class(true);
+    p2.is_exception(true);
+    p2.is_versioned(true);
+    p2.is_non_generatable(true);
 
-    BOOST_LOG_SEV(lg, debug) << "input op2: " << op2;
-    BOOST_CHECK_EXCEPTION(v.validate(op2), validation_error, cc1);
+    BOOST_LOG_SEV(lg, debug) << "input p2: " << p2;
+    BOOST_CHECK_EXCEPTION(v.validate(p2), validation_error, cc1);
 
-    dogen::dia_to_sml::object_profile op3;
-    op3.is_uml_class(true);
-    op3.is_enumeration(true);
-    op3.is_versioned(true);
-    op3.is_keyed(true);
+    dogen::dia_to_sml::profile p3;
+    p3.is_uml_class(true);
+    p3.is_enumeration(true);
+    p3.is_versioned(true);
+    p3.is_keyed(true);
 
-    BOOST_LOG_SEV(lg, debug) << "input op3: " << op3;
-    BOOST_CHECK_EXCEPTION(v.validate(op3), validation_error, cc1);
+    BOOST_LOG_SEV(lg, debug) << "input p3: " << p3;
+    BOOST_CHECK_EXCEPTION(v.validate(p3), validation_error, cc1);
 
-    dogen::dia_to_sml::object_profile op4;
-    op4.is_uml_class(true);
-    op4.is_service(true);
-    op4.is_versioned(true);
-    op4.is_keyed(true);
+    dogen::dia_to_sml::profile p4;
+    p4.is_uml_class(true);
+    p4.is_service(true);
+    p4.is_versioned(true);
+    p4.is_keyed(true);
 
-    BOOST_LOG_SEV(lg, debug) << "input op4: " << op4;
-    BOOST_CHECK_EXCEPTION(v.validate(op4), validation_error, cc1);
+    BOOST_LOG_SEV(lg, debug) << "input p4: " << p4;
+    BOOST_CHECK_EXCEPTION(v.validate(p4), validation_error, cc1);
 }
 
 BOOST_AUTO_TEST_CASE(setting_non_type_stereotypes_on_entities_does_not_throw) {
     SETUP_TEST_LOG_SOURCE("setting_non_type_stereotypes_on_entities_does_not_throw");
 
     dogen::dia_to_sml::validator v;
-    dogen::dia_to_sml::object_profile op1;
-    op1.is_uml_class(true);
-    op1.is_entity(true);
-    op1.is_versioned(true);
-    BOOST_LOG_SEV(lg, debug) << "input op1: " << op1;
-    v.validate(op1);
-    BOOST_TEST_CHECKPOINT("op1 is valid.");
+    dogen::dia_to_sml::profile p1;
+    p1.is_uml_class(true);
+    p1.is_entity(true);
+    p1.is_versioned(true);
+    BOOST_LOG_SEV(lg, debug) << "input p1: " << p1;
+    v.validate(p1);
+    BOOST_TEST_CHECKPOINT("p1 is valid.");
 
-    dogen::dia_to_sml::object_profile op2;
-    op2.is_uml_class(true);
-    op2.is_entity(true);
-    op2.is_versioned(true);
-    op2.is_non_generatable(true);
-    BOOST_LOG_SEV(lg, debug) << "input op2: " << op2;
-    v.validate(op2);
-    BOOST_TEST_CHECKPOINT("op2 is valid.");
+    dogen::dia_to_sml::profile p2;
+    p2.is_uml_class(true);
+    p2.is_entity(true);
+    p2.is_versioned(true);
+    p2.is_non_generatable(true);
+    BOOST_LOG_SEV(lg, debug) << "input p2: " << p2;
+    v.validate(p2);
+    BOOST_TEST_CHECKPOINT("p2 is valid.");
 
-    dogen::dia_to_sml::object_profile op3;
-    op3.is_uml_class(true);
-    op3.is_entity(true);
-    op3.is_versioned(true);
-    op3.is_keyed(true);
-    BOOST_LOG_SEV(lg, debug) << "input op3: " << op3;
-    v.validate(op3);
-    BOOST_TEST_CHECKPOINT("op3 is valid.");
+    dogen::dia_to_sml::profile p3;
+    p3.is_uml_class(true);
+    p3.is_entity(true);
+    p3.is_versioned(true);
+    p3.is_keyed(true);
+    BOOST_LOG_SEV(lg, debug) << "input p3: " << p3;
+    v.validate(p3);
+    BOOST_TEST_CHECKPOINT("p3 is valid.");
 }
 
 BOOST_AUTO_TEST_SUITE_END()

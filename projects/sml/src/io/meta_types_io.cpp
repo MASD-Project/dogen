@@ -66,6 +66,9 @@ std::ostream& operator<<(std::ostream& s, const meta_types& v) {
     case meta_types::repository:
         attr = "\"repository\"";
         break;
+    case meta_types::concept:
+        attr = "\"concept\"";
+        break;
     default:
         throw std::invalid_argument("Invalid value for meta_types");
     }

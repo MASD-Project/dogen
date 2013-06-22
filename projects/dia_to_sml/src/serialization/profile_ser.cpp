@@ -26,8 +26,10 @@
 #include <boost/archive/text_oarchive.hpp>
 #include <boost/archive/xml_iarchive.hpp>
 #include <boost/archive/xml_oarchive.hpp>
+#include <boost/serialization/list.hpp>
 #include <boost/serialization/nvp.hpp>
-#include "dogen/dia_to_sml/serialization/object_profile_ser.hpp"
+#include <boost/serialization/string.hpp>
+#include "dogen/dia_to_sml/serialization/profile_ser.hpp"
 
 #ifdef __linux__
 #include "eos/portable_iarchive.hpp"
@@ -39,7 +41,7 @@ namespace serialization {
 
 template<typename Archive>
 void save(Archive& ar,
-    const dogen::dia_to_sml::object_profile& v,
+    const dogen::dia_to_sml::profile& v,
     const unsigned int /*version*/) {
     ar << make_nvp("is_uml_large_package", v.is_uml_large_package_);
     ar << make_nvp("is_uml_class", v.is_uml_class_);
@@ -61,11 +63,12 @@ void save(Archive& ar,
     ar << make_nvp("is_fluent", v.is_fluent_);
     ar << make_nvp("is_aggregate_root", v.is_aggregate_root_);
     ar << make_nvp("is_string_table", v.is_string_table_);
+    ar << make_nvp("unknown_stereotypes", v.unknown_stereotypes_);
 }
 
 template<typename Archive>
 void load(Archive& ar,
-    dogen::dia_to_sml::object_profile& v,
+    dogen::dia_to_sml::profile& v,
     const unsigned int /*version*/) {
     ar >> make_nvp("is_uml_large_package", v.is_uml_large_package_);
     ar >> make_nvp("is_uml_class", v.is_uml_class_);
@@ -87,6 +90,7 @@ void load(Archive& ar,
     ar >> make_nvp("is_fluent", v.is_fluent_);
     ar >> make_nvp("is_aggregate_root", v.is_aggregate_root_);
     ar >> make_nvp("is_string_table", v.is_string_table_);
+    ar >> make_nvp("unknown_stereotypes", v.unknown_stereotypes_);
 }
 
 } }
@@ -94,21 +98,21 @@ void load(Archive& ar,
 namespace boost {
 namespace serialization {
 
-template void save(archive::polymorphic_oarchive& ar, const dogen::dia_to_sml::object_profile& v, unsigned int version);
-template void load(archive::polymorphic_iarchive& ar, dogen::dia_to_sml::object_profile& v, unsigned int version);
+template void save(archive::polymorphic_oarchive& ar, const dogen::dia_to_sml::profile& v, unsigned int version);
+template void load(archive::polymorphic_iarchive& ar, dogen::dia_to_sml::profile& v, unsigned int version);
 
-template void save(archive::text_oarchive& ar, const dogen::dia_to_sml::object_profile& v, unsigned int version);
-template void load(archive::text_iarchive& ar, dogen::dia_to_sml::object_profile& v, unsigned int version);
+template void save(archive::text_oarchive& ar, const dogen::dia_to_sml::profile& v, unsigned int version);
+template void load(archive::text_iarchive& ar, dogen::dia_to_sml::profile& v, unsigned int version);
 
-template void save(archive::binary_oarchive& ar, const dogen::dia_to_sml::object_profile& v, unsigned int version);
-template void load(archive::binary_iarchive& ar, dogen::dia_to_sml::object_profile& v, unsigned int version);
+template void save(archive::binary_oarchive& ar, const dogen::dia_to_sml::profile& v, unsigned int version);
+template void load(archive::binary_iarchive& ar, dogen::dia_to_sml::profile& v, unsigned int version);
 
-template void save(archive::xml_oarchive& ar, const dogen::dia_to_sml::object_profile& v, unsigned int version);
-template void load(archive::xml_iarchive& ar, dogen::dia_to_sml::object_profile& v, unsigned int version);
+template void save(archive::xml_oarchive& ar, const dogen::dia_to_sml::profile& v, unsigned int version);
+template void load(archive::xml_iarchive& ar, dogen::dia_to_sml::profile& v, unsigned int version);
 
 #ifdef __linux__
-template void save(eos::portable_oarchive& ar, const dogen::dia_to_sml::object_profile& v, unsigned int version);
-template void load(eos::portable_iarchive& ar, dogen::dia_to_sml::object_profile& v, unsigned int version);
+template void save(eos::portable_oarchive& ar, const dogen::dia_to_sml::profile& v, unsigned int version);
+template void load(eos::portable_iarchive& ar, dogen::dia_to_sml::profile& v, unsigned int version);
 #endif
 
 } }

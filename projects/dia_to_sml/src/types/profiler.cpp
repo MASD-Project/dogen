@@ -51,7 +51,7 @@ namespace dogen {
 namespace dia_to_sml {
 
 void profiler::
-process_object_type(object_profile& o, const object_types ot) const {
+process_object_type(profile& o, const object_types ot) const {
     if (ot == object_types::uml_large_package)
         o.is_uml_large_package(true);
     else if (ot == object_types::uml_class)
@@ -69,7 +69,7 @@ process_object_type(object_profile& o, const object_types ot) const {
 }
 
 void profiler::
-process_stereotype(object_profile& o, const std::string& s) const {
+process_stereotype(profile& o, const std::string& s) const {
     const auto stereotypes(identifier_parser::parse_csv_string(s));
 
     for (const auto& stereotype : stereotypes) {
@@ -106,8 +106,8 @@ process_stereotype(object_profile& o, const std::string& s) const {
     }
 }
 
-object_profile profiler::profile(const processed_object& o) {
-    object_profile r;
+profile profiler::generate(const processed_object& o) {
+    profile r;
     process_object_type(r, o.object_type());
     process_stereotype(r, o.stereotype());
     return r;

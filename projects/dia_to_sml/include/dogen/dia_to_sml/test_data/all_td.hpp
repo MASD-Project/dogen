@@ -20,7 +20,7 @@
  */
 #include "dogen/dia_to_sml/test_data/context_td.hpp"
 #include "dogen/dia_to_sml/test_data/node_td.hpp"
-#include "dogen/dia_to_sml/test_data/object_profile_td.hpp"
 #include "dogen/dia_to_sml/test_data/object_types_td.hpp"
 #include "dogen/dia_to_sml/test_data/processed_object_td.hpp"
 #include "dogen/dia_to_sml/test_data/processed_property_td.hpp"
+#include "dogen/dia_to_sml/test_data/profile_td.hpp"

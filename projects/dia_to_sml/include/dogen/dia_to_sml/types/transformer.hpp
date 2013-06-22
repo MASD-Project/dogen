@@ -35,7 +35,7 @@
 #include "dogen/dia_to_sml/types/identifier_parser.hpp"
 #include "dogen/dia_to_sml/types/comments_parser.hpp"
 #include "dogen/dia_to_sml/types/context.hpp"
-#include "dogen/dia_to_sml/types/object_profile.hpp"
+#include "dogen/dia_to_sml/types/profile.hpp"
 
 namespace dogen {
 namespace dia_to_sml {
@@ -89,7 +89,7 @@ private:
     /**
      * @brief Converts a object containing a class into an pod.
      */
-    void transform_pod(const object_profile& op, const processed_object& po);
+    void transform_pod(const processed_object& po, const profile& p);
 
     /**
      * @brief Converts a object containing a class into an enumeration.
@@ -134,7 +134,7 @@ public:
      *
      * @pre Object must be transformable.
      */
-    void transform(const processed_object& o, const object_profile& op);
+    void transform(const processed_object& o, const profile& p);
 
 private:
     context& context_;

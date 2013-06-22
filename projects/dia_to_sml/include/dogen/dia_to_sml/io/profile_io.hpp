@@ -18,17 +18,22 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_DIA_TO_SML_TYPES_OBJECT_PROFILE_FWD_HPP
-#define DOGEN_DIA_TO_SML_TYPES_OBJECT_PROFILE_FWD_HPP
+#ifndef DOGEN_DIA_TO_SML_IO_PROFILE_IO_HPP
+#define DOGEN_DIA_TO_SML_IO_PROFILE_IO_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
+#include <iosfwd>
+#include "dogen/dia_to_sml/types/profile.hpp"
+
 namespace dogen {
 namespace dia_to_sml {
 
-class object_profile;
+std::ostream&
+operator<<(std::ostream& s,
+     const dogen::dia_to_sml::profile& v);
 
 } }
 

@@ -58,7 +58,8 @@ pod::pod(pod&& rhs)
       is_fluent_(std::move(rhs.is_fluent_)),
       is_aggregate_root_(std::move(rhs.is_aggregate_root_)),
       versioned_key_(std::move(rhs.versioned_key_)),
-      unversioned_key_(std::move(rhs.unversioned_key_)) { }
+      unversioned_key_(std::move(rhs.unversioned_key_)),
+      modeled_concepts_(std::move(rhs.modeled_concepts_)) { }
 
 pod::pod(
     const dogen::sml::qname& name,
@@ -81,7 +82,8 @@ pod::pod(
     const bool is_fluent,
     const bool is_aggregate_root,
     const boost::optional<dogen::sml::qname>& versioned_key,
-    const boost::optional<dogen::sml::qname>& unversioned_key)
+    const boost::optional<dogen::sml::qname>& unversioned_key,
+    const std::list<dogen::sml::concept>& modeled_concepts)
     : name_(name),
       properties_(properties),
       parent_name_(parent_name),
@@ -102,7 +104,8 @@ pod::pod(
       is_fluent_(is_fluent),
       is_aggregate_root_(is_aggregate_root),
       versioned_key_(versioned_key),
-      unversioned_key_(unversioned_key) { }
+      unversioned_key_(unversioned_key),
+      modeled_concepts_(modeled_concepts) { }
 
 void pod::swap(pod& other) noexcept {
     using std::swap;
@@ -127,6 +130,7 @@ void pod::swap(pod& other) noexcept {
     swap(is_aggregate_root_, other.is_aggregate_root_);
     swap(versioned_key_, other.versioned_key_);
     swap(unversioned_key_, other.unversioned_key_);
+    swap(modeled_concepts_, other.modeled_concepts_);
 }
 
 bool pod::operator==(const pod& rhs) const {
@@ -150,7 +154,8 @@ bool pod::operator==(const pod& rhs) const {
         is_fluent_ == rhs.is_fluent_ &&
         is_aggregate_root_ == rhs.is_aggregate_root_ &&
         versioned_key_ == rhs.versioned_key_ &&
-        unversioned_key_ == rhs.unversioned_key_;
+        unversioned_key_ == rhs.unversioned_key_ &&
+        modeled_concepts_ == rhs.modeled_concepts_;
 }
 
 pod& pod::operator=(pod other) {
@@ -397,6 +402,22 @@ void pod::unversioned_key(const boost::optional<dogen::sml::qname>& v) {
 
 void pod::unversioned_key(const boost::optional<dogen::sml::qname>&& v) {
     unversioned_key_ = std::move(v);
+}
+
+const std::list<dogen::sml::concept>& pod::modeled_concepts() const {
+    return modeled_concepts_;
+}
+
+std::list<dogen::sml::concept>& pod::modeled_concepts() {
+    return modeled_concepts_;
+}
+
+void pod::modeled_concepts(const std::list<dogen::sml::concept>& v) {
+    modeled_concepts_ = v;
+}
+
+void pod::modeled_concepts(const std::list<dogen::sml::concept>&& v) {
+    modeled_concepts_ = std::move(v);
 }
 
 } }

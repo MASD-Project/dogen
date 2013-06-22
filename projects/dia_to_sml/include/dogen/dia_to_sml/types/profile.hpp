@@ -18,30 +18,35 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_DIA_TO_SML_TYPES_OBJECT_PROFILE_HPP
-#define DOGEN_DIA_TO_SML_TYPES_OBJECT_PROFILE_HPP
+#ifndef DOGEN_DIA_TO_SML_TYPES_PROFILE_HPP
+#define DOGEN_DIA_TO_SML_TYPES_PROFILE_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <algorithm>
-#include "dogen/dia_to_sml/serialization/object_profile_fwd_ser.hpp"
+#include <list>
+#include <string>
+#include "dogen/dia_to_sml/serialization/profile_fwd_ser.hpp"
 
 namespace dogen {
 namespace dia_to_sml {
 
-class object_profile final {
+/**
+ * @brief Provides a more useful view of processed objects.
+ */
+class profile final {
 public:
-    object_profile(const object_profile&) = default;
-    object_profile(object_profile&&) = default;
-    ~object_profile() = default;
+    profile(const profile&) = default;
+    profile(profile&&) = default;
+    ~profile() = default;
 
 public:
-    object_profile();
+    profile();
 
 public:
-    object_profile(
+    profile(
         const bool is_uml_large_package,
         const bool is_uml_class,
         const bool is_uml_generalization,
@@ -61,85 +66,196 @@ public:
         const bool is_immutable,
         const bool is_fluent,
         const bool is_aggregate_root,
-        const bool is_string_table);
+        const bool is_string_table,
+        const std::list<std::string>& unknown_stereotypes);
 
 private:
     template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const object_profile& v, unsigned int version);
+    friend void boost::serialization::save(Archive& ar, const profile& v, unsigned int version);
 
     template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, object_profile& v, unsigned int version);
+    friend void boost::serialization::load(Archive& ar, profile& v, unsigned int version);
 
 public:
+    /**
+     * @brief If true, the underlying object is an UML large package.
+     */
+    /**@{*/
     bool is_uml_large_package() const;
     void is_uml_large_package(const bool v);
+    /**@}*/
 
+    /**
+     * @brief If true, the underlying object is an UML class.
+     */
+    /**@{*/
     bool is_uml_class() const;
     void is_uml_class(const bool v);
+    /**@}*/
 
+    /**
+     * @brief If true, the underlying object is an UML generalisation.
+     */
+    /**@{*/
     bool is_uml_generalization() const;
     void is_uml_generalization(const bool v);
+    /**@}*/
 
+    /**
+     * @brief If true, the underlying object is an UML association.
+     */
+    /**@{*/
     bool is_uml_association() const;
     void is_uml_association(const bool v);
+    /**@}*/
 
+    /**
+     * @brief If true, the underlying object is an UML note.
+     */
+    /**@{*/
     bool is_uml_note() const;
     void is_uml_note(const bool v);
+    /**@}*/
 
+    /**
+     * @brief If true, the underlying object is an UML message.
+     */
+    /**@{*/
     bool is_uml_message() const;
     void is_uml_message(const bool v);
+    /**@}*/
 
+    /**
+     * @brief If true, the underlying object is an UML realisation.
+     */
+    /**@{*/
     bool is_uml_realization() const;
     void is_uml_realization(const bool v);
+    /**@}*/
 
+    /**
+     * @brief If true, the underlying object is an enumeration.
+     */
+    /**@{*/
     bool is_enumeration() const;
     void is_enumeration(const bool v);
+    /**@}*/
 
+    /**
+     * @brief If true, the underlying object is an exception
+     */
+    /**@{*/
     bool is_exception() const;
     void is_exception(const bool v);
+    /**@}*/
 
+    /**
+     * @brief If true, the underlying object is an entity.
+     */
+    /**@{*/
     bool is_entity() const;
     void is_entity(const bool v);
+    /**@}*/
 
+    /**
+     * @brief If true, the underlying object is a value object.
+     */
+    /**@{*/
     bool is_value() const;
     void is_value(const bool v);
+    /**@}*/
 
+    /**
+     * @brief If true, the underlying object is a service.
+     */
+    /**@{*/
     bool is_service() const;
     void is_service(const bool v);
+    /**@}*/
 
+    /**
+     * @brief If true, the underlying object is non-generatable.
+     */
+    /**@{*/
     bool is_non_generatable() const;
     void is_non_generatable(const bool v);
+    /**@}*/
 
+    /**
+     * @brief If true, the underlying object is versioned.
+     */
+    /**@{*/
     bool is_versioned() const;
     void is_versioned(const bool v);
+    /**@}*/
 
+    /**
+     * @brief If true, the underlying object is has keyes for its identity function.
+     */
+    /**@{*/
     bool is_keyed() const;
     void is_keyed(const bool v);
+    /**@}*/
 
+    /**
+     * @brief If true, the underlying object can be visited as per visitor pattern.
+     */
+    /**@{*/
     bool is_visitable() const;
     void is_visitable(const bool v);
+    /**@}*/
 
+    /**
+     * @brief If true, the underlying object is immutable.
+     */
+    /**@{*/
     bool is_immutable() const;
     void is_immutable(const bool v);
+    /**@}*/
 
+    /**
+     * @brief If true, the underlying object is fluent.
+     */
+    /**@{*/
     bool is_fluent() const;
     void is_fluent(const bool v);
+    /**@}*/
 
+    /**
+     * @brief If true, the underlying object is the root of an aggregate.
+     */
+    /**@{*/
     bool is_aggregate_root() const;
     void is_aggregate_root(const bool v);
+    /**@}*/
 
+    /**
+     * @brief If true, the underlying object is a table of strings.
+     */
+    /**@{*/
     bool is_string_table() const;
     void is_string_table(const bool v);
+    /**@}*/
+
+    /**
+     * @brief List of all unknown stereotypes.
+     */
+    /**@{*/
+    const std::list<std::string>& unknown_stereotypes() const;
+    std::list<std::string>& unknown_stereotypes();
+    void unknown_stereotypes(const std::list<std::string>& v);
+    void unknown_stereotypes(const std::list<std::string>&& v);
+    /**@}*/
 
 public:
-    bool operator==(const object_profile& rhs) const;
-    bool operator!=(const object_profile& rhs) const {
+    bool operator==(const profile& rhs) const;
+    bool operator!=(const profile& rhs) const {
         return !this->operator==(rhs);
     }
 
 public:
-    void swap(object_profile& other) noexcept;
-    object_profile& operator=(object_profile other);
+    void swap(profile& other) noexcept;
+    profile& operator=(profile other);
 
 private:
     bool is_uml_large_package_;
@@ -162,6 +278,7 @@ private:
     bool is_fluent_;
     bool is_aggregate_root_;
     bool is_string_table_;
+    std::list<std::string> unknown_stereotypes_;
 };
 
 } }
@@ -170,8 +287,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::dia_to_sml::object_profile& lhs,
-    dogen::dia_to_sml::object_profile& rhs) {
+    dogen::dia_to_sml::profile& lhs,
+    dogen::dia_to_sml::profile& rhs) {
     lhs.swap(rhs);
 }
 

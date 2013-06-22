@@ -26,7 +26,7 @@
 #endif
 
 #include <string>
-#include "dogen/dia_to_sml/types/object_profile.hpp"
+#include "dogen/dia_to_sml/types/profile.hpp"
 
 namespace dogen {
 namespace dia_to_sml {
@@ -45,34 +45,34 @@ private:
      * @brief Returns the number of stereotypes flags set that are not
      * type related.
      */
-    unsigned int count_stereotypes_non_types(const object_profile& op) const;
+    unsigned int count_stereotypes_non_types(const profile& p) const;
 
     /**
      * @brief Returns the number of type related stereotypes flags set.
      */
-    unsigned int count_stereotypes_types(const object_profile& op) const;
+    unsigned int count_stereotypes_types(const profile& p) const;
 
     /**
      * @brief Checks the stereotype flags.
      */
-    void validate_stereotypes(const object_profile& op) const;
+    void validate_stereotypes(const profile& p) const;
 
     /**
      * @brief Returns the number of type flags set.
      */
-    unsigned int count_types(const object_profile& op) const;
+    unsigned int count_types(const profile& p) const;
 
     /**
      * @brief Check the object type flags.
      */
-    void validate_type(const object_profile& op);
+    void validate_type(const profile& p);
 
 public:
     /**
      * @brief Throws an exception of the object profile is not
      * considered to be valid.
      */
-    void validate(const object_profile& op);
+    void validate(const profile& p);
 };
 
 } }

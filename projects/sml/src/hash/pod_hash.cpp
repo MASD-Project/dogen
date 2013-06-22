@@ -19,6 +19,7 @@
  *
  */
 #include "dogen/sml/hash/category_types_hash.hpp"
+#include "dogen/sml/hash/concept_hash.hpp"
 #include "dogen/sml/hash/generation_types_hash.hpp"
 #include "dogen/sml/hash/pod_hash.hpp"
 #include "dogen/sml/hash/pod_types_hash.hpp"
@@ -76,6 +77,14 @@ inline std::size_t hash_std_vector_std_pair_std_string_std_string_(const std::ve
     return seed;
 }
 
+inline std::size_t hash_std_list_dogen_sml_concept(const std::list<dogen::sml::concept>& v){
+    std::size_t seed(0);
+    for (const auto i : v) {
+        combine(seed, i);
+    }
+    return seed;
+}
+
 }
 
 namespace dogen {
@@ -105,6 +114,7 @@ std::size_t pod_hasher::hash(const pod&v) {
     combine(seed, v.is_aggregate_root());
     combine(seed, hash_boost_optional_dogen_sml_qname(v.versioned_key()));
     combine(seed, hash_boost_optional_dogen_sml_qname(v.unversioned_key()));
+    combine(seed, hash_std_list_dogen_sml_concept(v.modeled_concepts()));
 
     return seed;
 }

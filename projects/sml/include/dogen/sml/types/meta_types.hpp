@@ -43,7 +43,8 @@ enum class meta_types : unsigned int {
     entity = 8,
     value = 9,
     factory = 10,
-    repository = 11
+    repository = 11,
+    concept = 12
 };
 
 } }

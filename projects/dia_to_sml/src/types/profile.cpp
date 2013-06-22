@@ -18,12 +18,12 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/dia_to_sml/types/object_profile.hpp"
+#include "dogen/dia_to_sml/types/profile.hpp"
 
 namespace dogen {
 namespace dia_to_sml {
 
-object_profile::object_profile()
+profile::profile()
     : is_uml_large_package_(static_cast<bool>(0)),
       is_uml_class_(static_cast<bool>(0)),
       is_uml_generalization_(static_cast<bool>(0)),
@@ -45,7 +45,7 @@ object_profile::object_profile()
       is_aggregate_root_(static_cast<bool>(0)),
       is_string_table_(static_cast<bool>(0)) { }
 
-object_profile::object_profile(
+profile::profile(
     const bool is_uml_large_package,
     const bool is_uml_class,
     const bool is_uml_generalization,
@@ -65,7 +65,8 @@ object_profile::object_profile(
     const bool is_immutable,
     const bool is_fluent,
     const bool is_aggregate_root,
-    const bool is_string_table)
+    const bool is_string_table,
+    const std::list<std::string>& unknown_stereotypes)
     : is_uml_large_package_(is_uml_large_package),
       is_uml_class_(is_uml_class),
       is_uml_generalization_(is_uml_generalization),
@@ -85,9 +86,10 @@ object_profile::object_profile(
       is_immutable_(is_immutable),
       is_fluent_(is_fluent),
       is_aggregate_root_(is_aggregate_root),
-      is_string_table_(is_string_table) { }
+      is_string_table_(is_string_table),
+      unknown_stereotypes_(unknown_stereotypes) { }
 
-void object_profile::swap(object_profile& other) noexcept {
+void profile::swap(profile& other) noexcept {
     using std::swap;
     swap(is_uml_large_package_, other.is_uml_large_package_);
     swap(is_uml_class_, other.is_uml_class_);
@@ -109,9 +111,10 @@ void object_profile::swap(object_profile& other) noexcept {
     swap(is_fluent_, other.is_fluent_);
     swap(is_aggregate_root_, other.is_aggregate_root_);
     swap(is_string_table_, other.is_string_table_);
+    swap(unknown_stereotypes_, other.unknown_stereotypes_);
 }
 
-bool object_profile::operator==(const object_profile& rhs) const {
+bool profile::operator==(const profile& rhs) const {
     return is_uml_large_package_ == rhs.is_uml_large_package_ &&
         is_uml_class_ == rhs.is_uml_class_ &&
         is_uml_generalization_ == rhs.is_uml_generalization_ &&
@@ -131,173 +134,190 @@ bool object_profile::operator==(const object_profile& rhs) const {
         is_immutable_ == rhs.is_immutable_ &&
         is_fluent_ == rhs.is_fluent_ &&
         is_aggregate_root_ == rhs.is_aggregate_root_ &&
-        is_string_table_ == rhs.is_string_table_;
+        is_string_table_ == rhs.is_string_table_ &&
+        unknown_stereotypes_ == rhs.unknown_stereotypes_;
 }
 
-object_profile& object_profile::operator=(object_profile other) {
+profile& profile::operator=(profile other) {
     using std::swap;
     swap(*this, other);
     return *this;
 }
 
-bool object_profile::is_uml_large_package() const {
+bool profile::is_uml_large_package() const {
     return is_uml_large_package_;
 }
 
-void object_profile::is_uml_large_package(const bool v) {
+void profile::is_uml_large_package(const bool v) {
     is_uml_large_package_ = v;
 }
 
-bool object_profile::is_uml_class() const {
+bool profile::is_uml_class() const {
     return is_uml_class_;
 }
 
-void object_profile::is_uml_class(const bool v) {
+void profile::is_uml_class(const bool v) {
     is_uml_class_ = v;
 }
 
-bool object_profile::is_uml_generalization() const {
+bool profile::is_uml_generalization() const {
     return is_uml_generalization_;
 }
 
-void object_profile::is_uml_generalization(const bool v) {
+void profile::is_uml_generalization(const bool v) {
     is_uml_generalization_ = v;
 }
 
-bool object_profile::is_uml_association() const {
+bool profile::is_uml_association() const {
     return is_uml_association_;
 }
 
-void object_profile::is_uml_association(const bool v) {
+void profile::is_uml_association(const bool v) {
     is_uml_association_ = v;
 }
 
-bool object_profile::is_uml_note() const {
+bool profile::is_uml_note() const {
     return is_uml_note_;
 }
 
-void object_profile::is_uml_note(const bool v) {
+void profile::is_uml_note(const bool v) {
     is_uml_note_ = v;
 }
 
-bool object_profile::is_uml_message() const {
+bool profile::is_uml_message() const {
     return is_uml_message_;
 }
 
-void object_profile::is_uml_message(const bool v) {
+void profile::is_uml_message(const bool v) {
     is_uml_message_ = v;
 }
 
-bool object_profile::is_uml_realization() const {
+bool profile::is_uml_realization() const {
     return is_uml_realization_;
 }
 
-void object_profile::is_uml_realization(const bool v) {
+void profile::is_uml_realization(const bool v) {
     is_uml_realization_ = v;
 }
 
-bool object_profile::is_enumeration() const {
+bool profile::is_enumeration() const {
     return is_enumeration_;
 }
 
-void object_profile::is_enumeration(const bool v) {
+void profile::is_enumeration(const bool v) {
     is_enumeration_ = v;
 }
 
-bool object_profile::is_exception() const {
+bool profile::is_exception() const {
     return is_exception_;
 }
 
-void object_profile::is_exception(const bool v) {
+void profile::is_exception(const bool v) {
     is_exception_ = v;
 }
 
-bool object_profile::is_entity() const {
+bool profile::is_entity() const {
     return is_entity_;
 }
 
-void object_profile::is_entity(const bool v) {
+void profile::is_entity(const bool v) {
     is_entity_ = v;
 }
 
-bool object_profile::is_value() const {
+bool profile::is_value() const {
     return is_value_;
 }
 
-void object_profile::is_value(const bool v) {
+void profile::is_value(const bool v) {
     is_value_ = v;
 }
 
-bool object_profile::is_service() const {
+bool profile::is_service() const {
     return is_service_;
 }
 
-void object_profile::is_service(const bool v) {
+void profile::is_service(const bool v) {
     is_service_ = v;
 }
 
-bool object_profile::is_non_generatable() const {
+bool profile::is_non_generatable() const {
     return is_non_generatable_;
 }
 
-void object_profile::is_non_generatable(const bool v) {
+void profile::is_non_generatable(const bool v) {
     is_non_generatable_ = v;
 }
 
-bool object_profile::is_versioned() const {
+bool profile::is_versioned() const {
     return is_versioned_;
 }
 
-void object_profile::is_versioned(const bool v) {
+void profile::is_versioned(const bool v) {
     is_versioned_ = v;
 }
 
-bool object_profile::is_keyed() const {
+bool profile::is_keyed() const {
     return is_keyed_;
 }
 
-void object_profile::is_keyed(const bool v) {
+void profile::is_keyed(const bool v) {
     is_keyed_ = v;
 }
 
-bool object_profile::is_visitable() const {
+bool profile::is_visitable() const {
     return is_visitable_;
 }
 
-void object_profile::is_visitable(const bool v) {
+void profile::is_visitable(const bool v) {
     is_visitable_ = v;
 }
 
-bool object_profile::is_immutable() const {
+bool profile::is_immutable() const {
     return is_immutable_;
 }
 
-void object_profile::is_immutable(const bool v) {
+void profile::is_immutable(const bool v) {
     is_immutable_ = v;
 }
 
-bool object_profile::is_fluent() const {
+bool profile::is_fluent() const {
     return is_fluent_;
 }
 
-void object_profile::is_fluent(const bool v) {
+void profile::is_fluent(const bool v) {
     is_fluent_ = v;
 }
 
-bool object_profile::is_aggregate_root() const {
+bool profile::is_aggregate_root() const {
     return is_aggregate_root_;
 }
 
-void object_profile::is_aggregate_root(const bool v) {
+void profile::is_aggregate_root(const bool v) {
     is_aggregate_root_ = v;
 }
 
-bool object_profile::is_string_table() const {
+bool profile::is_string_table() const {
     return is_string_table_;
 }
 
-void object_profile::is_string_table(const bool v) {
+void profile::is_string_table(const bool v) {
     is_string_table_ = v;
+}
+
+const std::list<std::string>& profile::unknown_stereotypes() const {
+    return unknown_stereotypes_;
+}
+
+std::list<std::string>& profile::unknown_stereotypes() {
+    return unknown_stereotypes_;
+}
+
+void profile::unknown_stereotypes(const std::list<std::string>& v) {
+    unknown_stereotypes_ = v;
+}
+
+void profile::unknown_stereotypes(const std::list<std::string>&& v) {
+    unknown_stereotypes_ = std::move(v);
 }
 
 } }

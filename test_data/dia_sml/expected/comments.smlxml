@@ -80,6 +80,10 @@ third line with &quot;quote&quot;
 				<unversioned_key>
 					<initialized>0</initialized>
 				</unversioned_key>
+				<modeled_concepts class_id="11" tracking_level="0" version="0">
+					<count>0</count>
+					<item_version>0</item_version>
+				</modeled_concepts>
 			</second>
 		</item>
 		<item>
@@ -113,9 +117,9 @@ third line with &quot;quote&quot;
 				<properties>
 					<count>3</count>
 					<item_version>0</item_version>
-					<item class_id="11" tracking_level="0" version="0">
+					<item class_id="12" tracking_level="0" version="0">
 						<name>prop_0</name>
-						<type_name class_id="12" tracking_level="0" version="0">
+						<type_name class_id="13" tracking_level="0" version="0">
 							<type>
 								<model_name></model_name>
 								<external_module_path>
@@ -129,7 +133,7 @@ third line with &quot;quote&quot;
 								<type_name>int</type_name>
 								<meta_type>0</meta_type>
 							</type>
-							<children class_id="13" tracking_level="0" version="0">
+							<children class_id="14" tracking_level="0" version="0">
 								<count>0</count>
 								<item_version>0</item_version>
 							</children>
@@ -242,15 +246,19 @@ a second line
 				<unversioned_key>
 					<initialized>0</initialized>
 				</unversioned_key>
+				<modeled_concepts>
+					<count>0</count>
+					<item_version>0</item_version>
+				</modeled_concepts>
 			</second>
 		</item>
 	</pods>
-	<primitives class_id="14" tracking_level="0" version="0">
+	<primitives class_id="15" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>11</bucket_count>
 		<item_version>0</item_version>
 	</primitives>
-	<enumerations class_id="15" tracking_level="0" version="0">
+	<enumerations>
 		<count>0</count>
 		<bucket_count>11</bucket_count>
 		<item_version>0</item_version>

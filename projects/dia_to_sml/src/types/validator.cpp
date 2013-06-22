@@ -43,33 +43,33 @@ namespace dogen {
 namespace dia_to_sml {
 
 unsigned int validator::
-count_stereotypes_non_types(const object_profile& op) const {
+count_stereotypes_non_types(const profile& p) const {
     unsigned int r(0);
 
-    if (op.is_non_generatable()) ++r;
-    if (op.is_versioned()) ++r;
-    if (op.is_keyed()) ++r;
+    if (p.is_non_generatable()) ++r;
+    if (p.is_versioned()) ++r;
+    if (p.is_keyed()) ++r;
 
     return r;
 }
 
-unsigned int validator::count_stereotypes_types(const object_profile& op) const {
+unsigned int validator::count_stereotypes_types(const profile& p) const {
     unsigned int r(0);
 
-    if (op.is_enumeration()) ++r;
-    if (op.is_exception()) ++r;
-    if (op.is_entity()) ++r;
-    if (op.is_value()) ++r;
-    if (op.is_service()) ++r;
+    if (p.is_enumeration()) ++r;
+    if (p.is_exception()) ++r;
+    if (p.is_entity()) ++r;
+    if (p.is_value()) ++r;
+    if (p.is_service()) ++r;
 
     return r;
 }
 
-void validator::validate_stereotypes(const object_profile& op) const {
-    const auto types(count_stereotypes_types(op));
-    const auto non_types(count_stereotypes_non_types(op));
+void validator::validate_stereotypes(const profile& p) const {
+    const auto types(count_stereotypes_types(p));
+    const auto non_types(count_stereotypes_non_types(p));
 
-    if (!op.is_uml_class() && (types != 0 || non_types != 0)) {
+    if (!p.is_uml_class() && (types != 0 || non_types != 0)) {
         BOOST_LOG_SEV(lg, error) << stereotypes_require_uml_class;
         BOOST_THROW_EXCEPTION(validation_error(stereotypes_require_uml_class));
     }
@@ -80,7 +80,7 @@ void validator::validate_stereotypes(const object_profile& op) const {
             validation_error(too_many_type_related_stereotypes));
     }
 
-    if ((op.is_enumeration() || op.is_exception() || op.is_service()) &&
+    if ((p.is_enumeration() || p.is_exception() || p.is_service()) &&
         non_types > 0) {
         BOOST_LOG_SEV(lg, error) << type_does_not_support_further_stereotypes;
 
@@ -89,22 +89,22 @@ void validator::validate_stereotypes(const object_profile& op) const {
     }
 }
 
-unsigned int validator::count_types(const object_profile& op) const {
+unsigned int validator::count_types(const profile& p) const {
     unsigned int r(0);
 
-    if (op.is_uml_large_package()) ++r;
-    if (op.is_uml_class()) ++r;
-    if (op.is_uml_generalization()) ++r;
-    if (op.is_uml_association()) ++r;
-    if (op.is_uml_note()) ++r;
-    if (op.is_uml_message()) ++r;
-    if (op.is_uml_realization()) ++r;
+    if (p.is_uml_large_package()) ++r;
+    if (p.is_uml_class()) ++r;
+    if (p.is_uml_generalization()) ++r;
+    if (p.is_uml_association()) ++r;
+    if (p.is_uml_note()) ++r;
+    if (p.is_uml_message()) ++r;
+    if (p.is_uml_realization()) ++r;
 
     return r;
 }
 
-void validator::validate_type(const object_profile& op) {
-    const auto types(count_types(op));
+void validator::validate_type(const profile& p) {
+    const auto types(count_types(p));
 
     if (types == 0) {
         BOOST_LOG_SEV(lg, error) << no_type_flags_set;
@@ -117,9 +117,9 @@ void validator::validate_type(const object_profile& op) {
     }
 }
 
-void validator::validate(const object_profile& op) {
-    validate_type(op);
-    validate_stereotypes(op);
+void validator::validate(const profile& p) {
+    validate_type(p);
+    validate_stereotypes(p);
 }
 
 } }

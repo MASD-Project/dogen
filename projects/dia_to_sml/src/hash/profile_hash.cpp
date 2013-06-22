@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/dia_to_sml/hash/object_profile_hash.hpp"
+#include "dogen/dia_to_sml/hash/profile_hash.hpp"
 
 namespace {
 
@@ -29,12 +29,20 @@ inline void combine(std::size_t& seed, const HashableType& value)
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 }
 
+inline std::size_t hash_std_list_std_string(const std::list<std::string>& v){
+    std::size_t seed(0);
+    for (const auto i : v) {
+        combine(seed, i);
+    }
+    return seed;
+}
+
 }
 
 namespace dogen {
 namespace dia_to_sml {
 
-std::size_t object_profile_hasher::hash(const object_profile&v) {
+std::size_t profile_hasher::hash(const profile&v) {
     std::size_t seed(0);
 
     combine(seed, v.is_uml_large_package());
@@ -57,6 +65,7 @@ std::size_t object_profile_hasher::hash(const object_profile&v) {
     combine(seed, v.is_fluent());
     combine(seed, v.is_aggregate_root());
     combine(seed, v.is_string_table());
+    combine(seed, hash_std_list_std_string(v.unknown_stereotypes()));
 
     return seed;
 }

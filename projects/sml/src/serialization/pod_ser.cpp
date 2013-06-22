@@ -33,6 +33,7 @@
 #include <boost/serialization/utility.hpp>
 #include <boost/serialization/vector.hpp>
 #include "dogen/sml/serialization/category_types_ser.hpp"
+#include "dogen/sml/serialization/concept_ser.hpp"
 #include "dogen/sml/serialization/generation_types_ser.hpp"
 #include "dogen/sml/serialization/pod_ser.hpp"
 #include "dogen/sml/serialization/pod_types_ser.hpp"
@@ -72,6 +73,7 @@ void save(Archive& ar,
     ar << make_nvp("is_aggregate_root", v.is_aggregate_root_);
     ar << make_nvp("versioned_key", v.versioned_key_);
     ar << make_nvp("unversioned_key", v.unversioned_key_);
+    ar << make_nvp("modeled_concepts", v.modeled_concepts_);
 }
 
 template<typename Archive>
@@ -99,6 +101,7 @@ void load(Archive& ar,
     ar >> make_nvp("is_aggregate_root", v.is_aggregate_root_);
     ar >> make_nvp("versioned_key", v.versioned_key_);
     ar >> make_nvp("unversioned_key", v.unversioned_key_);
+    ar >> make_nvp("modeled_concepts", v.modeled_concepts_);
 }
 
 } }

@@ -18,25 +18,25 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_DIA_TO_SML_SERIALIZATION_OBJECT_PROFILE_SER_HPP
-#define DOGEN_DIA_TO_SML_SERIALIZATION_OBJECT_PROFILE_SER_HPP
+#ifndef DOGEN_DIA_TO_SML_SERIALIZATION_PROFILE_SER_HPP
+#define DOGEN_DIA_TO_SML_SERIALIZATION_PROFILE_SER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <boost/serialization/split_free.hpp>
-#include "dogen/dia_to_sml/types/object_profile.hpp"
+#include "dogen/dia_to_sml/types/profile.hpp"
 
-BOOST_SERIALIZATION_SPLIT_FREE(dogen::dia_to_sml::object_profile)
+BOOST_SERIALIZATION_SPLIT_FREE(dogen::dia_to_sml::profile)
 namespace boost {
 namespace serialization {
 
 template<typename Archive>
-void save(Archive& ar, const dogen::dia_to_sml::object_profile& v, unsigned int version);
+void save(Archive& ar, const dogen::dia_to_sml::profile& v, unsigned int version);
 
 template<typename Archive>
-void load(Archive& ar, dogen::dia_to_sml::object_profile& v, unsigned int version);
+void load(Archive& ar, dogen::dia_to_sml::profile& v, unsigned int version);
 
 } }
 

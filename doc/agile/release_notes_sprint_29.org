@@ -10,17 +10,17 @@ This file contains all stories that were closed during sprint 29.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-06-22 Sat 17:14]
+Clock summary at [2013-06-22 Sat 18:52]
 
 | Headline                                                           | Time   |      |      |
 |--------------------------------------------------------------------+--------+------+------|
-| *Total time*                                                       | *5:17* |      |      |
+| *Total time*                                                       | *6:33* |      |      |
 |--------------------------------------------------------------------+--------+------+------|
-| Development Stories Implemented                                    |        | 5:17 |      |
+| Development Stories Implemented                                    |        | 6:33 |      |
 | IMPLEMENTATION Release notes and backlog grooming                  |        |      | 0:32 |
 | COMPLETED Make design by contract methods consistent in dia to sml |        |      | 0:52 |
 | IMPLEMENTATION Design the inheritance tree of DDD classes in SML   |        |      | 1:25 |
-| IMPLEMENTATION Implement concepts in SML                           |        |      | 2:28 |
+| IMPLEMENTATION Implement concepts in SML                           |        |      | 3:44 |
 #+end:
 
 *** IMPLEMENTATION Release notes and backlog grooming                  :task:
@@ -157,7 +157,9 @@ to start making use of them.
 - transformer to throw when transforming pod if it has more than one
   parent.
 
-**** Add support for concepts to the dia to sml transformer            :task:
+**** IMPLEMENTATION Add support for concepts to the dia to sml transformer :task:
+     CLOCK: [2013-06-22 Sat 17:53]--[2013-06-22 Sat 18:52] =>  0:59
+     CLOCK: [2013-06-22 Sat 17:16]--[2013-06-22 Sat 17:33] =>  0:17
 
 - add meta-type of concept.
 - pod to have a list of modeled concepts.

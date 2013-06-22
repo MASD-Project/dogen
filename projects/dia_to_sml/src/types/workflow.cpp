@@ -79,9 +79,9 @@ graph_type workflow::build_graph_activity(const dia::diagram& diagram) {
 }
 
 void workflow::transformation_activity(const processed_object& o) {
-    const auto op(profiler_.profile(o));
-    validator_.validate(op);
-    return transformer_->transform(o, op);
+    const auto p(profiler_.generate(o));
+    validator_.validate(p);
+    transformer_->transform(o, p);
 }
 
 void workflow::graph_to_context_activity(const graph_type& g) {
