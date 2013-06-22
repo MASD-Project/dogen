@@ -31,7 +31,7 @@
 #include "dogen/dia_to_sml/types/profiler.hpp"
 #include "dogen/dia_to_sml/types/validator.hpp"
 #include "dogen/dia_to_sml/types/transformer.hpp"
-#include "dogen/dia_to_sml/types/graph_builder.hpp"
+#include "dogen/dia_to_sml/types/grapher.hpp"
 #include "dogen/dia_to_sml/types/workflow_interface.hpp"
 
 namespace dogen {

@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_DIA_TO_SML_TYPES_GRAPH_BUILDER_HPP
-#define DOGEN_DIA_TO_SML_TYPES_GRAPH_BUILDER_HPP
+#ifndef DOGEN_DIA_TO_SML_TYPES_GRAPHER_HPP
+#define DOGEN_DIA_TO_SML_TYPES_GRAPHER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -45,7 +45,7 @@ typedef boost::adjacency_list<
 /**
  * @brief Builds a DAG of dia objects.
  */
-class graph_builder {
+class grapher {
 private:
     typedef boost::graph_traits<graph_type>::vertex_descriptor
     vertex_descriptor_type;
@@ -57,7 +57,7 @@ private:
                                std::list<std::string> > child_to_parents_type;
 
 public:
-    graph_builder();
+    grapher();
 
 private:
     /**
@@ -80,12 +80,6 @@ private:
     void ensure_built() const;
 
     /**
-     * @brief Returns true if the object is relevant to the object
-     * graph, false otherwise.
-     */
-    bool is_relevant(const object_types ot) const;
-
-    /**
      * @brief Handle relationships derived from child node.
      */
     void process_child_node(const vertex_descriptor_type& v,
@@ -96,10 +90,21 @@ private:
      */
     void process_connections(const processed_object& po);
 
-public: // only for testing purposes
+public:
+    /**
+     * @brief Returns the dia object ID of the root object.
+     *
+     * @note only for testing purposes
+     */
     static std::string root_id();
 
 public:
+    /**
+     * @brief Returns true if the object can be added to the object
+     * graph, false otherwise.
+     */
+    bool is_relevant(const object_types ot) const;
+
     /**
      * @brief Adds an object to the graph.
      *

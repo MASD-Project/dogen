@@ -18,11 +18,11 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/dia_to_sml/types/building_error.hpp"
 #include "dogen/dia_to_sml/types/comments_parser.hpp"
 #include "dogen/dia_to_sml/types/context.hpp"
 #include "dogen/dia_to_sml/types/dia_to_sml.hpp"
-#include "dogen/dia_to_sml/types/graph_builder.hpp"
+#include "dogen/dia_to_sml/types/grapher.hpp"
+#include "dogen/dia_to_sml/types/graphing_error.hpp"
 #include "dogen/dia_to_sml/types/identifier_parser.hpp"
 #include "dogen/dia_to_sml/types/nested_qname_builder.hpp"
 #include "dogen/dia_to_sml/types/node.hpp"

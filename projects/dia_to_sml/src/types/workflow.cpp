@@ -23,7 +23,7 @@
 #include "dogen/sml/types/model.hpp"
 #include "dogen/sml/io/model_io.hpp"
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/dia_to_sml/types/graph_builder.hpp"
+#include "dogen/dia_to_sml/types/grapher.hpp"
 #include "dogen/dia_to_sml/types/context.hpp"
 #include "dogen/dia_to_sml/types/visitor.hpp"
 #include "dogen/dia_to_sml/types/transformer.hpp"
@@ -67,7 +67,7 @@ void workflow::initialise_context_activity(const std::string& model_name,
 }
 
 graph_type workflow::build_graph_activity(const dia::diagram& diagram) {
-    graph_builder b;
+    grapher b;
     processor p;
     for (const auto& l : diagram.layers()) {
         for (const auto& o : l.objects()) {

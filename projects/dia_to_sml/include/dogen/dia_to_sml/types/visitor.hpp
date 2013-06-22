@@ -28,7 +28,7 @@
 #include <memory>
 #include <functional>
 #include <boost/graph/depth_first_search.hpp>
-#include "dogen/dia_to_sml/types/graph_builder.hpp"
+#include "dogen/dia_to_sml/types/grapher.hpp"
 #include "dogen/dia_to_sml/types/processed_object.hpp"
 
 namespace dogen {
@@ -51,7 +51,7 @@ public:
     template<typename Vertex, typename Graph>
     void finish_vertex(const Vertex& u, const Graph& g) {
         const auto o(g[u]);
-        if (o.id() != graph_builder::root_id())
+        if (o.id() != grapher::root_id())
             function_(std::cref(o));
     }
 

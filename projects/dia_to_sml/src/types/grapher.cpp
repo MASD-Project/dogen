@@ -25,13 +25,13 @@
 #include <boost/graph/depth_first_search.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/dia_to_sml/io/object_types_io.hpp"
-#include "dogen/dia_to_sml/types/building_error.hpp"
-#include "dogen/dia_to_sml/types/graph_builder.hpp"
+#include "dogen/dia_to_sml/types/graphing_error.hpp"
+#include "dogen/dia_to_sml/types/grapher.hpp"
 
 namespace {
 
 using namespace dogen::utility::log;
-static logger lg(logger_factory("dia_to_sml.graph_builder"));
+static logger lg(logger_factory("dia_to_sml.grapher"));
 
 const std::string empty;
 const std::string root_id("__root__");
@@ -73,7 +73,7 @@ public:
                                  << g[target(e, g)].id() << ". Graph as sexp: "
                                  << state_->stream_.str();
 
-        BOOST_THROW_EXCEPTION(building_error(found_cycle_in_graph +
+        BOOST_THROW_EXCEPTION(graphing_error(found_cycle_in_graph +
                 boost::lexical_cast<std::string>(g[target(e, g)].id())));
     }
 
@@ -83,7 +83,7 @@ private:
     std::shared_ptr<state> state_;
 };
 
-graph_builder::graph_builder()
+grapher::grapher()
     : built_(false), root_vertex_(boost::add_vertex(graph_)) {
     processed_object root;
     root.id(::root_id);
@@ -91,12 +91,12 @@ graph_builder::graph_builder()
     id_to_vertex_.insert(std::make_pair(::root_id, root_vertex_));
 }
 
-std::string graph_builder::root_id() {
+std::string grapher::root_id() {
     return ::root_id;
 }
 
-graph_builder::vertex_descriptor_type
-graph_builder::vertex_for_id(const std::string& id) {
+grapher::vertex_descriptor_type
+grapher::vertex_for_id(const std::string& id) {
     const auto i(id_to_vertex_.find(id));
     if (i != id_to_vertex_.end()) {
         BOOST_LOG_SEV(lg, debug) << "Vertex already exists: " << id;
@@ -110,21 +110,21 @@ graph_builder::vertex_for_id(const std::string& id) {
     return r;
 }
 
-void graph_builder::ensure_not_built() const {
+void grapher::ensure_not_built() const {
     if (built_) {
         BOOST_LOG_SEV(lg, error) << error_add_after_build;
-        BOOST_THROW_EXCEPTION(building_error(error_add_after_build));
+        BOOST_THROW_EXCEPTION(graphing_error(error_add_after_build));
     }
 }
 
-void graph_builder::ensure_built() const {
+void grapher::ensure_built() const {
     if (!built_) {
         BOOST_LOG_SEV(lg, error) << error_not_built;
-        BOOST_THROW_EXCEPTION(building_error(error_not_built));
+        BOOST_THROW_EXCEPTION(graphing_error(error_not_built));
     }
 }
 
-bool graph_builder::is_relevant(const object_types ot) const {
+bool grapher::is_relevant(const object_types ot) const {
     return
         ot == object_types::uml_large_package ||
         ot == object_types::uml_generalization ||
@@ -132,7 +132,7 @@ bool graph_builder::is_relevant(const object_types ot) const {
         ot == object_types::uml_note;
 }
 
-void graph_builder::
+void grapher::
 process_child_node(const vertex_descriptor_type& v, const processed_object& o) {
     if (!o.child_node_id().empty()) {
         const std::string id(o.child_node_id());
@@ -157,7 +157,7 @@ process_child_node(const vertex_descriptor_type& v, const processed_object& o) {
     }
 }
 
-void graph_builder::process_connections(const processed_object& o) {
+void grapher::process_connections(const processed_object& o) {
     BOOST_LOG_SEV(lg, debug) << "Processing connections for object: '"
                              << o.id() << "' of type: '"
                              << o.object_type() << "'";
@@ -199,7 +199,7 @@ void graph_builder::process_connections(const processed_object& o) {
     }
 }
 
-void graph_builder::add(const processed_object& o) {
+void grapher::add(const processed_object& o) {
     ensure_not_built();
 
     if (!is_relevant(o.object_type()))
@@ -219,29 +219,29 @@ void graph_builder::add(const processed_object& o) {
     process_child_node(v, o);
 }
 
-const graph_type& graph_builder::graph() const {
+const graph_type& grapher::graph() const {
     ensure_built();
     return graph_;
 }
 
-const graph_builder::child_to_parents_type& graph_builder::
+const grapher::child_to_parents_type& grapher::
 child_to_parents() const {
     ensure_built();
     return child_to_parents_;
 }
 
-const std::unordered_set<std::string>& graph_builder::parent_ids() const {
+const std::unordered_set<std::string>& grapher::parent_ids() const {
     ensure_built();
     return parent_ids_;
 }
 
-const std::unordered_set<std::string>& graph_builder::
+const std::unordered_set<std::string>& grapher::
 top_level_module_names() const {
     ensure_built();
     return top_level_module_names_;
 }
 
-void graph_builder::build() {
+void grapher::build() {
     BOOST_LOG_SEV(lg, debug) << "Processing orphan vertices.";
     for (const auto& pair : orphanage_) {
         BOOST_LOG_SEV(lg, debug) << "Connecting root to '" << pair.first << "'";

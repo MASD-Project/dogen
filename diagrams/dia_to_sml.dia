@@ -191,7 +191,7 @@ into its SML representation.#</dia:string>
         <dia:real val="14.000000000000002"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#graph_builder#</dia:string>
+        <dia:string>#grapher#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#service#</dia:string>
@@ -770,19 +770,19 @@ into its SML representation.#</dia:string>
         <dia:point val="-55.0654,53.0257"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-55.1154,52.9757;-48.1554,56.0757"/>
+        <dia:rectangle val="-55.1154,52.9757;-47.7704,56.0757"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-55.0654,53.0257"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="6.8600000000000003"/>
+        <dia:real val="7.2450000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#building_error#</dia:string>
+        <dia:string>#graphing_error#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#exception#</dia:string>
@@ -2129,7 +2129,7 @@ into its SML representation.#</dia:string>
         <dia:point val="-40.1268,53.1173"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-51.6854,45.2;-39.3768,53.9173"/>
+        <dia:rectangle val="-51.4929,45.2;-39.3768,53.9173"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -2137,8 +2137,8 @@ into its SML representation.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="-40.1268,53.1173"/>
         <dia:point val="-40.1268,45.95"/>
-        <dia:point val="-51.6354,45.95"/>
-        <dia:point val="-51.6354,53.0257"/>
+        <dia:point val="-51.4429,45.95"/>
+        <dia:point val="-51.4429,53.0257"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -5549,8 +5549,8 @@ finds.#</dia:string>
       </dia:attribute>
       <dia:attribute name="orth_points">
         <dia:point val="-27.9418,67.1173"/>
-        <dia:point val="-27.9418,71.9873"/>
-        <dia:point val="-7.84542,71.9873"/>
+        <dia:point val="-27.9418,75"/>
+        <dia:point val="-7.84542,75"/>
         <dia:point val="-7.84542,80.9016"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
@@ -8697,6 +8697,91 @@ an instance of a dia diagram, into an SML model.
       <dia:connections>
         <dia:connection handle="0" to="O28" connection="7"/>
         <dia:connection handle="1" to="O46" connection="1"/>
+      </dia:connections>
+    </dia:object>
+    <dia:object type="UML - Note" version="0" id="O58">
+      <dia:attribute name="obj_pos">
+        <dia:point val="-36,46"/>
+      </dia:attribute>
+      <dia:attribute name="obj_bb">
+        <dia:rectangle val="-36.05,45.95;-22.345,47.75"/>
+      </dia:attribute>
+      <dia:attribute name="meta">
+        <dia:composite type="dict"/>
+      </dia:attribute>
+      <dia:attribute name="elem_corner">
+        <dia:point val="-36,46"/>
+      </dia:attribute>
+      <dia:attribute name="elem_width">
+        <dia:real val="13.605"/>
+      </dia:attribute>
+      <dia:attribute name="elem_height">
+        <dia:real val="1.7000000000000002"/>
+      </dia:attribute>
+      <dia:attribute name="line_width">
+        <dia:real val="0.10000000000000001"/>
+      </dia:attribute>
+      <dia:attribute name="line_colour">
+        <dia:color val="#000000"/>
+      </dia:attribute>
+      <dia:attribute name="fill_colour">
+        <dia:color val="#ffffff"/>
+      </dia:attribute>
+      <dia:attribute name="text">
+        <dia:composite type="text">
+          <dia:attribute name="string">
+            <dia:string>#Responsible for creating a graph.#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="font">
+            <dia:font family="monospace" style="0" name="Courier"/>
+          </dia:attribute>
+          <dia:attribute name="height">
+            <dia:real val="0.80000000000000004"/>
+          </dia:attribute>
+          <dia:attribute name="pos">
+            <dia:point val="-35.65,47.245"/>
+          </dia:attribute>
+          <dia:attribute name="color">
+            <dia:color val="#000000"/>
+          </dia:attribute>
+          <dia:attribute name="alignment">
+            <dia:enum val="0"/>
+          </dia:attribute>
+        </dia:composite>
+      </dia:attribute>
+    </dia:object>
+    <dia:object type="UML - Message" version="0" id="O59">
+      <dia:attribute name="obj_pos">
+        <dia:point val="-29.1975,47.7"/>
+      </dia:attribute>
+      <dia:attribute name="obj_bb">
+        <dia:rectangle val="-29.2575,47.64;-27.5408,53.2563"/>
+      </dia:attribute>
+      <dia:attribute name="meta">
+        <dia:composite type="dict"/>
+      </dia:attribute>
+      <dia:attribute name="conn_endpoints">
+        <dia:point val="-29.1975,47.7"/>
+        <dia:point val="-27.9418,53.1173"/>
+      </dia:attribute>
+      <dia:attribute name="text_colour">
+        <dia:color val="#000000"/>
+      </dia:attribute>
+      <dia:attribute name="line_colour">
+        <dia:color val="#000000"/>
+      </dia:attribute>
+      <dia:attribute name="text">
+        <dia:string>##</dia:string>
+      </dia:attribute>
+      <dia:attribute name="type">
+        <dia:enum val="0"/>
+      </dia:attribute>
+      <dia:attribute name="text_pos">
+        <dia:point val="-28.5693,50.9087"/>
+      </dia:attribute>
+      <dia:connections>
+        <dia:connection handle="0" to="O58" connection="6"/>
+        <dia:connection handle="1" to="O1" connection="1"/>
       </dia:connections>
     </dia:object>
   </dia:layer>

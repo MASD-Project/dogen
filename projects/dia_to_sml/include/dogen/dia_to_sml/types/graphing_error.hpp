@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_DIA_TO_SML_TYPES_BUILDING_ERROR_HPP
-#define DOGEN_DIA_TO_SML_TYPES_BUILDING_ERROR_HPP
+#ifndef DOGEN_DIA_TO_SML_TYPES_GRAPHING_ERROR_HPP
+#define DOGEN_DIA_TO_SML_TYPES_GRAPHING_ERROR_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -34,13 +34,13 @@ namespace dia_to_sml {
 /**
  * @brief An error has occurred while building the dia object graph.
  */
-class building_error : public virtual std::exception, public virtual boost::exception {
+class graphing_error : public virtual std::exception, public virtual boost::exception {
 public:
-    building_error() = default;
-    ~building_error() noexcept = default;
+    graphing_error() = default;
+    ~graphing_error() noexcept = default;
 
 public:
-    building_error(const std::string& message) : message_(message) { }
+    graphing_error(const std::string& message) : message_(message) { }
 
 public:
     const char* what() const noexcept { return(message_.c_str()); }
