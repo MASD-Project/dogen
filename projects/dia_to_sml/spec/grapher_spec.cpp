@@ -39,7 +39,8 @@ namespace  {
 
 const std::string test_module("dia_to_sml");
 const std::string test_suite("grapher_spec");
-const std::string adding_after_build("Cannot add object after building");
+const std::string graph_built("Graph has already been built");
+const std::string graph_not_built("Graph has not yet been built");
 const std::string graph_has_cycle("Graph has a cycle");
 
 bool is_root_id(const std::string id) {
@@ -147,19 +148,41 @@ BOOST_AUTO_TEST_CASE(adding_generalization_inside_package_produces_expected_orde
     BOOST_CHECK(is_root_id((++i)->id()));
 }
 
+BOOST_AUTO_TEST_CASE(building_after_graph_has_been_built_throws) {
+    SETUP_TEST_LOG("building_object_after_graph_has_been_built_throws");
+
+    dogen::dia_to_sml::grapher g;
+    g.build();
+    const auto o(mock_processed_object_factory::build_class(0));
+    contains_checker<graphing_error> c(graph_built);
+    BOOST_CHECK_EXCEPTION(g.build(), graphing_error, c);
+}
+
 BOOST_AUTO_TEST_CASE(adding_object_after_graph_has_been_built_throws) {
     SETUP_TEST_LOG("adding_object_after_graph_has_been_built_throws");
 
     dogen::dia_to_sml::grapher g1;
     g1.build();
     const auto o(mock_processed_object_factory::build_class(0));
-    contains_checker<graphing_error> c(adding_after_build);
+    contains_checker<graphing_error> c(graph_built);
     BOOST_CHECK_EXCEPTION(g1.add(o), graphing_error, c);
 
     dogen::dia_to_sml::grapher g2;
     g2.add(o);
     g2.build();
     BOOST_CHECK_EXCEPTION(g2.add(o), graphing_error, c);
+}
+
+BOOST_AUTO_TEST_CASE(querying_state_before_building_throws) {
+    SETUP_TEST_LOG("querying_state_before_building_throws");
+
+    dogen::dia_to_sml::grapher g;
+    const auto o(mock_processed_object_factory::build_class(0));
+    contains_checker<graphing_error> c(graph_not_built);
+    BOOST_CHECK_EXCEPTION(g.graph(), graphing_error, c);
+    BOOST_CHECK_EXCEPTION(g.child_to_parents(), graphing_error, c);
+    BOOST_CHECK_EXCEPTION(g.parent_ids(), graphing_error, c);
+    BOOST_CHECK_EXCEPTION(g.top_level_module_names(), graphing_error, c);
 }
 
 BOOST_AUTO_TEST_CASE(building_graph_with_first_degree_cycle_throws) {

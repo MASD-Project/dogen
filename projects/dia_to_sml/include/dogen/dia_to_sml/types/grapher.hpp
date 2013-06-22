@@ -130,7 +130,15 @@ public:
     }
 
     /**
+     * @brief Returns true if the graph has been built, false
+     * otherwise.
+     */
+    bool is_built() const { return built_; }
+
+    /**
      * @brief Generate a DAG of all objects that have been added.
+     *
+     * @pre Graph must not yet have been built.
      */
     void build();
 

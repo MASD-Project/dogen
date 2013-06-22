@@ -35,8 +35,8 @@ static logger lg(logger_factory("dia_to_sml.grapher"));
 
 const std::string empty;
 const std::string root_id("__root__");
-const std::string error_add_after_build("Cannot add object after building");
-const std::string error_not_built("Graph has not yet been built");
+const std::string graph_already_built("Graph has already been built");
+const std::string graph_not_yet_built("Graph has not yet been built");
 const std::string found_cycle_in_graph("Graph has a cycle: ");
 const std::string irrelevant_object(
     "Attempt to add object not relevant to graph: ");
@@ -113,16 +113,16 @@ grapher::vertex_for_id(const std::string& id) {
 }
 
 void grapher::require_not_built() const {
-    if (built_) {
-        BOOST_LOG_SEV(lg, error) << error_add_after_build;
-        BOOST_THROW_EXCEPTION(graphing_error(error_add_after_build));
+    if (is_built()) {
+        BOOST_LOG_SEV(lg, error) << graph_already_built;
+        BOOST_THROW_EXCEPTION(graphing_error(graph_already_built));
     }
 }
 
 void grapher::require_built() const {
-    if (!built_) {
-        BOOST_LOG_SEV(lg, error) << error_not_built;
-        BOOST_THROW_EXCEPTION(graphing_error(error_not_built));
+    if (!is_built()) {
+        BOOST_LOG_SEV(lg, error) << graph_not_yet_built;
+        BOOST_THROW_EXCEPTION(graphing_error(graph_not_yet_built));
     }
 }
 
@@ -247,6 +247,8 @@ top_level_module_names() const {
 }
 
 void grapher::build() {
+    require_not_built();
+
     BOOST_LOG_SEV(lg, debug) << "Processing orphan vertices.";
     for (const auto& pair : orphanage_) {
         BOOST_LOG_SEV(lg, debug) << "Connecting root to '" << pair.first << "'";
