@@ -64,8 +64,7 @@ private:
      * @brief Checks that the type of the object is a processable
      * type.
      */
-    void ensure_type_is_processable(const object_profile& op,
-        const processed_object& po) const;
+    void require_is_transformable(const processed_object& o) const;
 
 private:
     /**
@@ -125,7 +124,15 @@ private:
 
 public:
     /**
+     * @brief Returns true if the object is supported by the
+     * transformer, false otherwise.
+     */
+    bool is_transformable(const processed_object& o) const;
+
+    /**
      * @brief Transform a dia object.
+     *
+     * @pre Object must be transformable.
      */
     void transform(const processed_object& o, const object_profile& op);
 

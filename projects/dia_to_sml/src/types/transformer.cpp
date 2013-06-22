@@ -99,11 +99,8 @@ compute_model_dependencies(const sml::nested_qname& nqn) {
         compute_model_dependencies(c);
 }
 
-void transformer::ensure_type_is_processable(const object_profile& op,
-    const processed_object& po) const {
-    if (op.is_uml_generalization() ||
-        op.is_uml_association() ||
-        op.is_uml_message()) {
+void transformer::require_is_transformable(const processed_object& po) const {
+    if (!is_transformable(po)) {
         const auto type(boost::lexical_cast<std::string>(po.object_type()));
         BOOST_LOG_SEV(lg, error) << object_has_invalid_type << type;
         BOOST_THROW_EXCEPTION(
@@ -469,12 +466,21 @@ void transformer::transform_exception(const processed_object& o) {
     }
 }
 
+bool transformer::is_transformable(const processed_object& o) const {
+    const auto ot(o.object_type());
+    return
+        ot == object_types::uml_large_package ||
+        ot == object_types::uml_generalization ||
+        ot == object_types::uml_class ||
+        ot == object_types::uml_note;
+}
+
 void transformer::
 transform(const processed_object& o, const object_profile& op) {
     BOOST_LOG_SEV(lg, debug) << "Starting to transform: " << o.id();
     BOOST_LOG_SEV(lg, debug) << "Object contents: " << o;
 
-    ensure_type_is_processable(op, o);
+    require_is_transformable(o);
 
     if (op.is_uml_large_package())
         transform_module(o);

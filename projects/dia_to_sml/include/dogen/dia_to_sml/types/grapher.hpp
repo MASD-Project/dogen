@@ -72,12 +72,12 @@ private:
     /**
      * @brief Ensures the graph has not yet been built.
      */
-    void ensure_not_built() const;
+    void require_not_built() const;
 
     /**
      * @brief Ensures the graph has been built.
      */
-    void ensure_built() const;
+    void require_built() const;
 
     /**
      * @brief Handle relationships derived from child node.
@@ -103,12 +103,13 @@ public:
      * @brief Returns true if the object can be added to the object
      * graph, false otherwise.
      */
-    bool is_relevant(const object_types ot) const;
+    bool is_relevant(const processed_object& o) const;
 
     /**
      * @brief Adds an object to the graph.
      *
      * @pre The graph must not yet have been built.
+     * @pre The object must be relevant to the graph.
      */
     void add(const processed_object& o);
 

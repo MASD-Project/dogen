@@ -38,6 +38,8 @@ const std::string root_id("__root__");
 const std::string error_add_after_build("Cannot add object after building");
 const std::string error_not_built("Graph has not yet been built");
 const std::string found_cycle_in_graph("Graph has a cycle: ");
+const std::string irrelevant_object(
+    "Attempt to add object not relevant to graph: ");
 
 }
 
@@ -110,21 +112,22 @@ grapher::vertex_for_id(const std::string& id) {
     return r;
 }
 
-void grapher::ensure_not_built() const {
+void grapher::require_not_built() const {
     if (built_) {
         BOOST_LOG_SEV(lg, error) << error_add_after_build;
         BOOST_THROW_EXCEPTION(graphing_error(error_add_after_build));
     }
 }
 
-void grapher::ensure_built() const {
+void grapher::require_built() const {
     if (!built_) {
         BOOST_LOG_SEV(lg, error) << error_not_built;
         BOOST_THROW_EXCEPTION(graphing_error(error_not_built));
     }
 }
 
-bool grapher::is_relevant(const object_types ot) const {
+bool grapher::is_relevant(const processed_object& o) const {
+    const auto ot(o.object_type());
     return
         ot == object_types::uml_large_package ||
         ot == object_types::uml_generalization ||
@@ -200,10 +203,12 @@ void grapher::process_connections(const processed_object& o) {
 }
 
 void grapher::add(const processed_object& o) {
-    ensure_not_built();
+    require_not_built();
 
-    if (!is_relevant(o.object_type()))
-        return;
+    if (!is_relevant(o)) {
+        BOOST_LOG_SEV(lg, error) << irrelevant_object << o.id();
+        BOOST_THROW_EXCEPTION(graphing_error(irrelevant_object + o.id()));
+    }
 
     const bool is_package(o.object_type() == object_types::uml_large_package);
     if (is_package && o.child_node_id().empty())
@@ -220,24 +225,24 @@ void grapher::add(const processed_object& o) {
 }
 
 const graph_type& grapher::graph() const {
-    ensure_built();
+    require_built();
     return graph_;
 }
 
 const grapher::child_to_parents_type& grapher::
 child_to_parents() const {
-    ensure_built();
+    require_built();
     return child_to_parents_;
 }
 
 const std::unordered_set<std::string>& grapher::parent_ids() const {
-    ensure_built();
+    require_built();
     return parent_ids_;
 }
 
 const std::unordered_set<std::string>& grapher::
 top_level_module_names() const {
-    ensure_built();
+    require_built();
     return top_level_module_names_;
 }
 

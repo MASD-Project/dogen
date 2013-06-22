@@ -48,13 +48,6 @@ public:
 
 private:
     /**
-     * @brief Returns true if the processed object should be added to
-     * the graph.
-     */
-    bool is_object_for_graph(const processed_object& o) const;
-
-private:
-    /**
      * @brief Reset context and set it up with arguments supplied.
      */
     void initialise_context_activity(const std::string& model_name,
