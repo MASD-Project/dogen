@@ -158,6 +158,7 @@ to start making use of them.
   parent.
 
 **** IMPLEMENTATION Add support for concepts to the dia to sml transformer :task:
+     CLOCK: [2013-06-22 Sat 18:54]--[2013-06-22 Sat 19:08] =>  0:14
      CLOCK: [2013-06-22 Sat 17:53]--[2013-06-22 Sat 18:52] =>  0:59
      CLOCK: [2013-06-22 Sat 17:16]--[2013-06-22 Sat 17:33] =>  0:17
 

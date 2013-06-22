@@ -24,10 +24,8 @@
 #include "dogen/utility/test/logging.hpp"
 #include "dogen/dia_to_sml/types/processed_object.hpp"
 #include "dogen/dia_to_sml/types/profiler.hpp"
-#include "dogen/dia_to_sml/types/profiling_error.hpp"
 #include "dogen/dia_to_sml/io/profile_io.hpp"
 #include "dogen/dia_to_sml/test/mock_processed_object_factory.hpp"
-#include "dogen/utility/test/exception_checkers.hpp"
 
 using namespace dogen::dia_to_sml;
 using dogen::utility::test::asserter;
@@ -36,7 +34,14 @@ namespace  {
 
 const std::string test_module("dia_to_sml");
 const std::string test_suite("profiler_spec");
-const std::string invalid_stereotype("Invalid value for stereotype");
+
+const std::string us_str_1("AStereoType");
+const std::string us_str_2("AStereoType,Another");
+const std::string us_str_3("AStereoType,Another,third stereotype");
+
+const std::string us_1("AStereoType");
+const std::string us_2("Another");
+const std::string us_3("third stereotype");
 
 unsigned int stereotype_count(const profile& p) {
     unsigned int r(0);
@@ -82,7 +87,6 @@ bool is_valid_uml_class(const profile& p) {
 
 }
 
-using dogen::utility::test::contains_checker;
 using dogen::dia_to_sml::test::mock_processed_object_factory;
 
 BOOST_AUTO_TEST_SUITE(profiler)
@@ -219,26 +223,31 @@ BOOST_AUTO_TEST_CASE(stereotyped_class_transforms_into_expected_profile) {
     BOOST_CHECK(p.is_fluent());
 }
 
-BOOST_AUTO_TEST_CASE(invalid_stereotypes_throw) {
-    SETUP_TEST_LOG_SOURCE("invalid_stereotypes_throw");
+BOOST_AUTO_TEST_CASE(unknown_stereotypes_are_added_to_list) {
+    SETUP_TEST_LOG_SOURCE("unknown_stereotypes_are_added_to_list");
 
-    std::string s("enumerationz");
-    auto o(mock_processed_object_factory::build_class(0, s));
+    auto o(mock_processed_object_factory::build_class(0, us_str_1));
     dogen::dia_to_sml::profiler profiler;
-    contains_checker<profiling_error> c(invalid_stereotype);
-    BOOST_CHECK_EXCEPTION(profiler.generate(o), profiling_error, c);
+    auto p = profiler.generate(o);
+    BOOST_LOG_SEV(lg, debug) << "actual:" << p;
+    BOOST_REQUIRE(p.unknown_stereotypes().size() == 1);
+    p.unknown_stereotypes().front() == us_1;
 
-    s = "enumeration,invalid";
-    o = mock_processed_object_factory::build_class(0, s);
-    BOOST_CHECK_EXCEPTION(profiler.generate(o), profiling_error, c);
+    o = mock_processed_object_factory::build_class(0, us_str_2);
+    p = profiler.generate(o);
+    BOOST_REQUIRE(p.unknown_stereotypes().size() == 2);
+    BOOST_LOG_SEV(lg, debug) << "actual:" << p;
+    p.unknown_stereotypes().front() == us_1;
+    p.unknown_stereotypes().back() == us_2;
 
-    s = "enumeration|service";
-    o = mock_processed_object_factory::build_class(0, s);
-    BOOST_CHECK_EXCEPTION(profiler.generate(o), profiling_error, c);
-
-    s = "enumeration service";
-    o = mock_processed_object_factory::build_class(0, s);
-    BOOST_CHECK_EXCEPTION(profiler.generate(o), profiling_error, c);
+    o = mock_processed_object_factory::build_class(0, us_str_3);
+    p = profiler.generate(o);
+    BOOST_REQUIRE(p.unknown_stereotypes().size() == 3);
+    BOOST_LOG_SEV(lg, debug) << "actual:" << p;
+    auto i(p.unknown_stereotypes().begin());
+    BOOST_CHECK(*i++ == us_1);
+    BOOST_CHECK(*i++ == us_2);
+    BOOST_CHECK(*i == us_3);
 }
 
 BOOST_AUTO_TEST_SUITE_END()

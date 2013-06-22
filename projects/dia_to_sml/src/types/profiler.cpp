@@ -20,7 +20,6 @@
  */
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/dia_to_sml/types/profiling_error.hpp"
 #include "dogen/dia_to_sml/types/identifier_parser.hpp"
 #include "dogen/dia_to_sml/types/processed_object.hpp"
 #include "dogen/dia_to_sml/types/profiler.hpp"
@@ -29,8 +28,6 @@ namespace {
 
 using namespace dogen::utility::log;
 static logger lg(logger_factory("dia_to_sml.profiler"));
-
-const std::string invalid_stereotype("Invalid value for stereotype: ");
 
 const std::string enumeration("enumeration");
 const std::string exception("exception");
@@ -97,12 +94,8 @@ process_stereotype(profile& o, const std::string& s) const {
             o.is_versioned(true);
         else if (stereotype == aggregate_root)
             o.is_aggregate_root(true);
-        else {
-            BOOST_LOG_SEV(lg, error) << invalid_stereotype << "'"
-                                     << stereotype << "'";
-            BOOST_THROW_EXCEPTION(
-                profiling_error(invalid_stereotype + stereotype));
-        }
+        else
+            o.unknown_stereotypes().push_back(stereotype);
     }
 }
 
