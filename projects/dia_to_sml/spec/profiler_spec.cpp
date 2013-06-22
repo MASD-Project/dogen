@@ -231,14 +231,14 @@ BOOST_AUTO_TEST_CASE(unknown_stereotypes_are_added_to_list) {
     auto p = profiler.generate(o);
     BOOST_LOG_SEV(lg, debug) << "actual:" << p;
     BOOST_REQUIRE(p.unknown_stereotypes().size() == 1);
-    p.unknown_stereotypes().front() == us_1;
+    BOOST_CHECK(p.unknown_stereotypes().front() == us_1);
 
     o = mock_processed_object_factory::build_class(0, us_str_2);
     p = profiler.generate(o);
     BOOST_REQUIRE(p.unknown_stereotypes().size() == 2);
     BOOST_LOG_SEV(lg, debug) << "actual:" << p;
-    p.unknown_stereotypes().front() == us_1;
-    p.unknown_stereotypes().back() == us_2;
+    BOOST_CHECK(p.unknown_stereotypes().front() == us_1);
+    BOOST_CHECK(p.unknown_stereotypes().back() == us_2);
 
     o = mock_processed_object_factory::build_class(0, us_str_3);
     p = profiler.generate(o);
