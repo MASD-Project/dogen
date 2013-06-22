@@ -173,15 +173,16 @@ void graph_builder::process_connections(const processed_object& o) {
     BOOST_LOG_SEV(lg, debug) << "Created edge between '" << child_id
                              << "' and: '" << parent_id << "'";
 
-    const auto pair(std::make_pair(child_id, parent_id));
-    const bool key_exists(!child_to_parent_.insert(pair).second);
-    if (key_exists) {
-        std::ostringstream ss;
-        ss << "Child has more than one parent: '"
-           << child_id << "'. Multiple inheritance is not supported.";
+    auto i(child_to_parents_.find(child_id));
+    if (i == child_to_parents_.end()) {
+        std::list<std::string> l = { parent_id };
+        child_to_parents_.insert(std::make_pair(child_id, l));
+        BOOST_LOG_SEV(lg, debug) << "First parent for Child: " << child_id;
 
-        BOOST_LOG_SEV(lg, error) << ss.str();
-        BOOST_THROW_EXCEPTION(building_error(ss.str()));
+    } else {
+        i->second.push_back(parent_id);
+        BOOST_LOG_SEV(lg, debug) << "Child has more than one parent: "
+                                 << child_id;
     }
 
     if (connected_ids_.find(child_id) == connected_ids_.end()) {
@@ -223,10 +224,10 @@ const graph_type& graph_builder::graph() const {
     return graph_;
 }
 
-const std::unordered_map<std::string, std::string>& graph_builder::
-child_to_parent() const {
+const graph_builder::child_to_parents_type& graph_builder::
+child_to_parents() const {
     ensure_built();
-    return child_to_parent_;
+    return child_to_parents_;
 }
 
 const std::unordered_set<std::string>& graph_builder::parent_ids() const {

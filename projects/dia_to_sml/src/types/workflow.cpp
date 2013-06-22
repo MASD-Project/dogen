@@ -45,6 +45,15 @@ workflow::workflow() { }
 
 workflow::~workflow() noexcept { }
 
+bool workflow::is_object_for_graph(const processed_object& o) const {
+    return
+        o.object_type() == object_types::uml_large_package ||
+        o.object_type() == object_types::uml_class ||
+        o.object_type() == object_types::uml_generalization ||
+        o.object_type() == object_types::uml_note ||
+        o.object_type() == object_types::uml_message;
+}
+
 void workflow::initialise_context_activity(const std::string& model_name,
     const std::string& external_module_path, bool is_target) {
 
@@ -63,12 +72,16 @@ graph_type workflow::build_graph_activity(const dia::diagram& diagram) {
     for (const auto& l : diagram.layers()) {
         for (const auto& o : l.objects()) {
             const auto po(p.process(o));
+
+            if (!is_object_for_graph(po))
+                continue;
+
             b.add(po);
         }
     }
 
     b.build();
-    context_.child_to_parent(b.child_to_parent());
+    context_.child_to_parents(b.child_to_parents());
     context_.parent_ids(b.parent_ids());
     context_.top_level_module_names(b.top_level_module_names());
     return b.graph();

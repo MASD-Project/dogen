@@ -51,6 +51,8 @@ const std::string comment_key("COMMENT");
 const std::string empty_dia_object_name("Dia object name is empty");
 const std::string original_parent_not_found("Pod has no original parent: ");
 const std::string parent_not_found("Object has a parent but its not defined: ");
+const std::string empty_parent_container(
+    "Object has an entry in child to parent container but its empty: ");
 const std::string missing_module_for_id("Missing module for dia object ID: ");
 const std::string missing_module_for_qname("Missing module for qname: ");
 const std::string missing_qname_for_id("Missing QName for dia object ID: ");
@@ -62,6 +64,8 @@ const std::string object_has_invalid_type("Invalid dia type: ");
 const std::string invalid_stereotype_in_graph("Invalid stereotype: ");
 const std::string immutabilty_with_inheritance(
     "Immutability not supported with inheritance: ");
+const std::string multiple_inheritance(
+    "Child has more than one parent, but multiple inheritance not supported:");
 
 }
 
@@ -236,14 +240,27 @@ transform_pod(const object_profile& op, const processed_object& po) {
             transformation_error(empty_dia_object_name + po.id()));
     }
 
-    const auto i(context_.child_to_parent().find(po.id()));
-    if (i != context_.child_to_parent().end()) {
-        const auto j(context_.dia_id_to_qname().find(i->second));
+    const auto i(context_.child_to_parents().find(po.id()));
+    if (i != context_.child_to_parents().end()) {
+        if (i->second.empty()) {
+            BOOST_LOG_SEV(lg, error) << empty_parent_container << po.id();
+            BOOST_THROW_EXCEPTION(
+                transformation_error(empty_parent_container + po.id()));
+        }
+
+        if (i->second.size() > 1) {
+            BOOST_LOG_SEV(lg, error) << multiple_inheritance << po.id();
+            BOOST_THROW_EXCEPTION(
+                transformation_error(multiple_inheritance + po.id()));
+        }
+
+        const auto parent_name(i->second.front());
+        const auto j(context_.dia_id_to_qname().find(parent_name));
         if (j == context_.dia_id_to_qname().end()) {
             BOOST_LOG_SEV(lg, error) << "Object has a parent but "
                                      << " there is no QName mapping defined."
                                      << " Child ID: '" << po.id()
-                                     << "' Parent ID: '" << i->second << "'";
+                                     << "' Parent ID: '" << parent_name << "'";
 
             BOOST_THROW_EXCEPTION(
                 transformation_error(parent_not_found + po.id()));
@@ -313,105 +330,6 @@ transform_pod(const object_profile& op, const processed_object& po) {
     }
 
     context_.model().pods().insert(std::make_pair(pod.name(), pod));
-}
-
-void transformer::transform_service(const processed_object& po) {
-    BOOST_LOG_SEV(lg, debug) << "Object is a service: " << po.id();
-
-    sml::service service;
-
-    const std::string pkg_id(po.child_node_id());
-    using sml::meta_types;
-    service.name(transform_qname(po.name(), meta_types::pod, pkg_id));
-
-    using sml::service_types;
-    service.type(service_types::user_defined);
-
-    // using sml::generation_types;
-    // service.generation_type(context_.is_target() ?
-    //     generation_types::full_generation :
-    //     generation_types::no_generation);
-
-    // service.generation_type(generation_types::partial_generation);
-
-    const auto pair(comments_parser_->parse(po.comment()));
-    service.documentation(pair.first);
-    service.implementation_specific_parameters(pair.second);
-
-    for (const auto& p : po.properties())
-        service.properties().push_back(transform_property(p));
-
-    if (service.name().type_name().empty()) {
-        BOOST_LOG_SEV(lg, error) << empty_dia_object_name + po.id();
-        BOOST_THROW_EXCEPTION(
-            transformation_error(empty_dia_object_name + po.id()));
-    }
-
-    const auto i(context_.child_to_parent().find(po.id()));
-    if (i != context_.child_to_parent().end()) {
-        const auto j(context_.dia_id_to_qname().find(i->second));
-        if (j == context_.dia_id_to_qname().end()) {
-            BOOST_LOG_SEV(lg, error) << "Object has a parent but "
-                                     << " there is no QName mapping defined."
-                                     << " Child ID: '" << po.id()
-                                     << "' Parent ID: '" << i->second << "'";
-
-            BOOST_THROW_EXCEPTION(
-                transformation_error(parent_not_found + po.id()));
-        }
-
-        BOOST_LOG_SEV(lg, debug) << "Setting parent for: "
-                                 << service.name().type_name() << " as "
-                                 << j->second.type_name();
-        service.parent_name(j->second);
-    } else {
-        BOOST_LOG_SEV(lg, debug) << "Pod has no parent: "
-                                 << service.name().type_name();
-    }
-
-    const auto j(context_.parent_ids().find(po.id()));
-    service.is_parent(j != context_.parent_ids().end());
-    context_.dia_id_to_qname().insert(std::make_pair(po.id(), service.name()));
-
-    if (!service.parent_name()) {
-        context_.original_parent().insert(
-            std::make_pair(service.name(), service.name()));
-    } else {
-        const auto k(context_.original_parent().find(*service.parent_name()));
-        if (k == context_.original_parent().end()) {
-            BOOST_LOG_SEV(lg, error) << "Could not find the original parent of "
-                                     << service.name().type_name();
-
-            BOOST_THROW_EXCEPTION(
-                transformation_error(original_parent_not_found +
-                    service.name().type_name()));
-        }
-        service.original_parent_name(k->second);
-        context_.original_parent().insert(
-            std::make_pair(service.name(), k->second));
-    }
-
-    if (!service.is_parent() && service.parent_name()) {
-        auto parent(service.parent_name());
-        while (parent) {
-            auto k(context_.leaves().find(*parent));
-            if (k == context_.leaves().end()) {
-                const std::list<sml::qname> l { service.name() };
-                context_.leaves().insert(std::make_pair(*parent, l));
-            } else
-                k->second.push_back(service.name());
-
-            auto j(context_.model().services().find(*parent));
-            if (j == context_.model().services().end()) {
-                BOOST_LOG_SEV(lg, error) << "Could not find the parent of "
-                                         << parent->type_name();
-                BOOST_THROW_EXCEPTION(transformation_error(parent_not_found +
-                        parent->type_name()));
-            }
-            parent = j->second.parent_name();
-        }
-    }
-    context_.model().services().insert(std::make_pair(service.name(), service));
 }
 
 void transformer::transform_enumeration(const processed_object& o) {
@@ -566,9 +484,6 @@ transform(const processed_object& o, const object_profile& op) {
         transform_enumeration(o);
     else if (op.is_exception())
         transform_exception(o);
-    // FIXME: service hack
-    // else if (op.is_service())
-    //     transform_service(o);
     else
         transform_pod(op, o);
 

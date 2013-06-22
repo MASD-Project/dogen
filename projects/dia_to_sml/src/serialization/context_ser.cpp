@@ -48,7 +48,7 @@ void save(Archive& ar,
     const dogen::dia_to_sml::context& v,
     const unsigned int /*version*/) {
     ar << make_nvp("is_target", v.is_target_);
-    ar << make_nvp("child_to_parent", v.child_to_parent_);
+    ar << make_nvp("child_to_parents", v.child_to_parents_);
     ar << make_nvp("parent_ids", v.parent_ids_);
     ar << make_nvp("dia_id_to_qname", v.dia_id_to_qname_);
     ar << make_nvp("original_parent", v.original_parent_);
@@ -62,7 +62,7 @@ void load(Archive& ar,
     dogen::dia_to_sml::context& v,
     const unsigned int /*version*/) {
     ar >> make_nvp("is_target", v.is_target_);
-    ar >> make_nvp("child_to_parent", v.child_to_parent_);
+    ar >> make_nvp("child_to_parents", v.child_to_parents_);
     ar >> make_nvp("parent_ids", v.parent_ids_);
     ar >> make_nvp("dia_id_to_qname", v.dia_id_to_qname_);
     ar >> make_nvp("original_parent", v.original_parent_);

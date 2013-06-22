@@ -28,7 +28,7 @@ context::context()
 
 context::context(
     const bool is_target,
-    const std::unordered_map<std::string, std::string>& child_to_parent,
+    const std::unordered_map<std::string, std::list<std::string> >& child_to_parents,
     const std::unordered_set<std::string>& parent_ids,
     const std::unordered_map<std::string, dogen::sml::qname>& dia_id_to_qname,
     const std::unordered_map<dogen::sml::qname, dogen::sml::qname>& original_parent,
@@ -36,7 +36,7 @@ context::context(
     const std::unordered_set<std::string>& top_level_module_names,
     const dogen::sml::model& model)
     : is_target_(is_target),
-      child_to_parent_(child_to_parent),
+      child_to_parents_(child_to_parents),
       parent_ids_(parent_ids),
       dia_id_to_qname_(dia_id_to_qname),
       original_parent_(original_parent),
@@ -47,7 +47,7 @@ context::context(
 void context::swap(context& other) noexcept {
     using std::swap;
     swap(is_target_, other.is_target_);
-    swap(child_to_parent_, other.child_to_parent_);
+    swap(child_to_parents_, other.child_to_parents_);
     swap(parent_ids_, other.parent_ids_);
     swap(dia_id_to_qname_, other.dia_id_to_qname_);
     swap(original_parent_, other.original_parent_);
@@ -58,7 +58,7 @@ void context::swap(context& other) noexcept {
 
 bool context::operator==(const context& rhs) const {
     return is_target_ == rhs.is_target_ &&
-        child_to_parent_ == rhs.child_to_parent_ &&
+        child_to_parents_ == rhs.child_to_parents_ &&
         parent_ids_ == rhs.parent_ids_ &&
         dia_id_to_qname_ == rhs.dia_id_to_qname_ &&
         original_parent_ == rhs.original_parent_ &&
@@ -81,20 +81,20 @@ void context::is_target(const bool v) {
     is_target_ = v;
 }
 
-const std::unordered_map<std::string, std::string>& context::child_to_parent() const {
-    return child_to_parent_;
+const std::unordered_map<std::string, std::list<std::string> >& context::child_to_parents() const {
+    return child_to_parents_;
 }
 
-std::unordered_map<std::string, std::string>& context::child_to_parent() {
-    return child_to_parent_;
+std::unordered_map<std::string, std::list<std::string> >& context::child_to_parents() {
+    return child_to_parents_;
 }
 
-void context::child_to_parent(const std::unordered_map<std::string, std::string>& v) {
-    child_to_parent_ = v;
+void context::child_to_parents(const std::unordered_map<std::string, std::list<std::string> >& v) {
+    child_to_parents_ = v;
 }
 
-void context::child_to_parent(const std::unordered_map<std::string, std::string>&& v) {
-    child_to_parent_ = std::move(v);
+void context::child_to_parents(const std::unordered_map<std::string, std::list<std::string> >&& v) {
+    child_to_parents_ = std::move(v);
 }
 
 const std::unordered_set<std::string>& context::parent_ids() const {

@@ -25,6 +25,7 @@
 #pragma once
 #endif
 
+#include <list>
 #include <unordered_map>
 #include <unordered_set>
 #include <boost/graph/adjacency_list.hpp>
@@ -51,6 +52,9 @@ private:
 
     typedef std::unordered_map<std::string, vertex_descriptor_type>
     id_to_vertex_type;
+
+    typedef std::unordered_map<std::string,
+                               std::list<std::string> > child_to_parents_type;
 
 public:
     graph_builder();
@@ -137,7 +141,7 @@ public:
      *
      * @pre The graph must have already been built.
      */
-    const std::unordered_map<std::string, std::string>& child_to_parent() const;
+    const child_to_parents_type& child_to_parents() const;
 
     /**
      * @brief Returns the child to parent relationships.
@@ -159,7 +163,7 @@ private:
     id_to_vertex_type id_to_vertex_;
     id_to_vertex_type orphanage_;
     vertex_descriptor_type root_vertex_;
-    std::unordered_map<std::string, std::string> child_to_parent_;
+    child_to_parents_type child_to_parents_;
     std::unordered_set<std::string> parent_ids_;
     std::unordered_set<std::string> connected_ids_;
     std::unordered_set<std::string> top_level_module_names_;

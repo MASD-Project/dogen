@@ -93,13 +93,6 @@ private:
     void transform_pod(const object_profile& op, const processed_object& po);
 
     /**
-     * @brief Converts a object containing a class into a service.
-     *
-     * @param o the Dia UML class containing a service.
-     */
-    void transform_service(const processed_object& o);
-
-    /**
      * @brief Converts a object containing a class into an enumeration.
      *
      * @param o the Dia UML class containing an enumeration.

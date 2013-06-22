@@ -662,7 +662,8 @@ BOOST_AUTO_TEST_CASE(inheritance_with_immutability_throws) {
     const auto a(mock_processed_object_factory::build_generalization());
     const auto con(a[0].connection());
     BOOST_REQUIRE(con);
-    c.child_to_parent().insert(std::make_pair(con->second, con->first));
+    const auto parents = std::list<std::string> { con->first };
+    c.child_to_parents().insert(std::make_pair(con->second, parents));
 
     dogen::dia_to_sml::transformer t1(c);
     t1.transform(a[1], profile(a[1]));
@@ -672,7 +673,7 @@ BOOST_AUTO_TEST_CASE(inheritance_with_immutability_throws) {
     contains_checker<transformation_error> cc(immutability_inheritance);
     BOOST_CHECK_EXCEPTION(t1.transform(po1, op1), transformation_error, cc);
 
-    c.child_to_parent().clear();
+    c.child_to_parents().clear();
     c.parent_ids().insert(con->first);
     dogen::dia_to_sml::transformer t2(c);
     auto po2(a[1]);
@@ -689,7 +690,8 @@ BOOST_AUTO_TEST_CASE(uml_class_with_inheritance_results_in_expected_pod) {
     const auto a(mock_processed_object_factory::build_generalization());
     const auto con(a[0].connection());
     BOOST_REQUIRE(con);
-    c.child_to_parent().insert(std::make_pair(con->second, con->first));
+    const auto parents = std::list<std::string> { con->first };
+    c.child_to_parents().insert(std::make_pair(con->second, parents));
     c.parent_ids().insert(con->first);
 
     dogen::dia_to_sml::transformer t1(c);

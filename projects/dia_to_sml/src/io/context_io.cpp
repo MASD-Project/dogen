@@ -35,14 +35,28 @@ inline std::string tidy_up_string(std::string s) {
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, std::string>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::list<std::string>& v) {
+    s << "[ ";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << "\"" << tidy_up_string(*i) << "\"";
+    }
+    s << "] ";
+    return s;
+}
+
+}
+
+namespace std {
+
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, std::list<std::string> >& v) {
     s << "[";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
         s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
         s << "\"" << tidy_up_string(i->first) << "\"";
         s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
-        s << "\"" << tidy_up_string(i->second) << "\"";
+        s << i->second;
         s << " } ]";
     }
     s << " ] ";
@@ -146,7 +160,7 @@ std::ostream& operator<<(std::ostream& s, const context& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::dia_to_sml::context\"" << ", "
       << "\"is_target\": " << v.is_target() << ", "
-      << "\"child_to_parent\": " << v.child_to_parent() << ", "
+      << "\"child_to_parents\": " << v.child_to_parents() << ", "
       << "\"parent_ids\": " << v.parent_ids() << ", "
       << "\"dia_id_to_qname\": " << v.dia_id_to_qname() << ", "
       << "\"original_parent\": " << v.original_parent() << ", "

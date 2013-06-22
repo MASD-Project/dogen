@@ -53,7 +53,7 @@ public:
 public:
     context(
         const bool is_target,
-        const std::unordered_map<std::string, std::string>& child_to_parent,
+        const std::unordered_map<std::string, std::list<std::string> >& child_to_parents,
         const std::unordered_set<std::string>& parent_ids,
         const std::unordered_map<std::string, dogen::sml::qname>& dia_id_to_qname,
         const std::unordered_map<dogen::sml::qname, dogen::sml::qname>& original_parent,
@@ -69,43 +69,83 @@ private:
     friend void boost::serialization::load(Archive& ar, context& v, unsigned int version);
 
 public:
+    /**
+     * @brief If true, this is the target model.
+     */
+    /**@{*/
     bool is_target() const;
     void is_target(const bool v);
+    /**@}*/
 
-    const std::unordered_map<std::string, std::string>& child_to_parent() const;
-    std::unordered_map<std::string, std::string>& child_to_parent();
-    void child_to_parent(const std::unordered_map<std::string, std::string>& v);
-    void child_to_parent(const std::unordered_map<std::string, std::string>&& v);
+    /**
+     * @brief List of parents for a given child.
+     */
+    /**@{*/
+    const std::unordered_map<std::string, std::list<std::string> >& child_to_parents() const;
+    std::unordered_map<std::string, std::list<std::string> >& child_to_parents();
+    void child_to_parents(const std::unordered_map<std::string, std::list<std::string> >& v);
+    void child_to_parents(const std::unordered_map<std::string, std::list<std::string> >&& v);
+    /**@}*/
 
+    /**
+     * @brief All dia object IDs of classes that are parents in a generalisation.
+     */
+    /**@{*/
     const std::unordered_set<std::string>& parent_ids() const;
     std::unordered_set<std::string>& parent_ids();
     void parent_ids(const std::unordered_set<std::string>& v);
     void parent_ids(const std::unordered_set<std::string>&& v);
+    /**@}*/
 
+    /**
+     * @brief The QName corresponding to a dia object ID.
+     */
+    /**@{*/
     const std::unordered_map<std::string, dogen::sml::qname>& dia_id_to_qname() const;
     std::unordered_map<std::string, dogen::sml::qname>& dia_id_to_qname();
     void dia_id_to_qname(const std::unordered_map<std::string, dogen::sml::qname>& v);
     void dia_id_to_qname(const std::unordered_map<std::string, dogen::sml::qname>&& v);
+    /**@}*/
 
+    /**
+     * @brief Maps a QName to its corresponding top-most parent in an inheritance tree.
+     */
+    /**@{*/
     const std::unordered_map<dogen::sml::qname, dogen::sml::qname>& original_parent() const;
     std::unordered_map<dogen::sml::qname, dogen::sml::qname>& original_parent();
     void original_parent(const std::unordered_map<dogen::sml::qname, dogen::sml::qname>& v);
     void original_parent(const std::unordered_map<dogen::sml::qname, dogen::sml::qname>&& v);
+    /**@}*/
 
+    /**
+     * @brief All outermost derived objects in an inheritance tree.
+     */
+    /**@{*/
     const std::unordered_map<dogen::sml::qname, std::list<dogen::sml::qname> >& leaves() const;
     std::unordered_map<dogen::sml::qname, std::list<dogen::sml::qname> >& leaves();
     void leaves(const std::unordered_map<dogen::sml::qname, std::list<dogen::sml::qname> >& v);
     void leaves(const std::unordered_map<dogen::sml::qname, std::list<dogen::sml::qname> >&& v);
+    /**@}*/
 
+    /**
+     * @brief All modules that sit just below the model.
+     */
+    /**@{*/
     const std::unordered_set<std::string>& top_level_module_names() const;
     std::unordered_set<std::string>& top_level_module_names();
     void top_level_module_names(const std::unordered_set<std::string>& v);
     void top_level_module_names(const std::unordered_set<std::string>&& v);
+    /**@}*/
 
+    /**
+     * @brief SML model we are currently building.
+     */
+    /**@{*/
     const dogen::sml::model& model() const;
     dogen::sml::model& model();
     void model(const dogen::sml::model& v);
     void model(const dogen::sml::model&& v);
+    /**@}*/
 
 public:
     bool operator==(const context& rhs) const;
@@ -119,7 +159,7 @@ public:
 
 private:
     bool is_target_;
-    std::unordered_map<std::string, std::string> child_to_parent_;
+    std::unordered_map<std::string, std::list<std::string> > child_to_parents_;
     std::unordered_set<std::string> parent_ids_;
     std::unordered_map<std::string, dogen::sml::qname> dia_id_to_qname_;
     std::unordered_map<dogen::sml::qname, dogen::sml::qname> original_parent_;

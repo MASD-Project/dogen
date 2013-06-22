@@ -10,15 +10,16 @@ This file contains all stories that were closed during sprint 29.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-06-21 Fri 21:39]
+Clock summary at [2013-06-22 Sat 14:08]
 
 | Headline                                                         | Time   |      |      |
 |------------------------------------------------------------------+--------+------+------|
-| *Total time*                                                     | *1:49* |      |      |
+| *Total time*                                                     | *3:44* |      |      |
 |------------------------------------------------------------------+--------+------+------|
-| Development Stories Implemented                                  |        | 1:49 |      |
+| Development Stories Implemented                                  |        | 3:44 |      |
 | IMPLEMENTATION Release notes and backlog grooming                |        |      | 0:24 |
 | IMPLEMENTATION Design the inheritance tree of DDD classes in SML |        |      | 1:25 |
+| IMPLEMENTATION Implement concepts in SML                         |        |      | 1:55 |
 #+end:
 
 *** IMPLEMENTATION Release notes and backlog grooming                  :task:
@@ -126,17 +127,45 @@ compliance):
 We already have most of the qname properties in the model anyway, so
 might as well just use a qname.
 
-*** Implement concepts in SML                                         :story:
+*** IMPLEMENTATION Implement concepts in SML                          :story:
+     CLOCK: [2013-06-22 Sat 12:26]--[2013-06-22 Sat 12:59] =>  0:33
 
 In S28 we added the initial support for concepts to SML. We now need
 to start making use of them.
 
-**** Add support for concepts to the dia to sml transformer
-**** When transforming a pod, copy across properties from concept
+**** COMPLETED Add support for multiple inheritance in graph builder   :task:
+     CLOSED: [2013-06-22 Sat 13:58]
+     CLOCK: [2013-06-22 Sat 13:58]--[2013-06-22 Sat 14:07] =>  0:09
+     CLOCK: [2013-06-22 Sat 13:04]--[2013-06-22 Sat 13:58] =>  0:54
+     CLOCK: [2013-06-22 Sat 12:07]--[2013-06-22 Sat 12:26] =>  0:19
 
-Must traverse inheritance.
+- graph builder to allow building graph with multiple
+  inheritance. we're still a DAG so this should not be a problem.
+- context to have a list of parents rather than just one parent.
+- transformer to throw when transforming pod if it has more than one
+  parent.
 
-**** Add test to inheritance model
+**** Add support for concepts to the dia to sml transformer            :task:
+
+- add meta-type of concept.
+- pod to have a list of modeled concepts.
+- push unknown stereotypes into a list in object profile
+  when transforming pod
+- convert this list into qnames that belong to current model and have
+  a meta type of concept
+- merger to check that all such concepts exist in model.
+
+**** When transforming a pod, copy across properties from concept      :task:
+
+- in CPP model's transformer, traverse concepts and add properties.
+
+**** Add test to stereotypes model                                     :task:
+
+- stand-alone concept
+- concept with single-inheritance
+- concept with multiple-inheritance
+- non-existing concept (using mock model)
+
 *** Update SML to make use of concepts                                :story:
 
 In S28 as part of "Break down SML into concepts at the design level"
