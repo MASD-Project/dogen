@@ -156,7 +156,6 @@ compliance):
   of properties that make its identity function.
 - =entity= and =keyed_entity= descend from =abstract_entity=.
 
-**** Convert pods into entities, values or services                   :story:
 *** IMPLEMENTATION Implement concepts in SML                          :story:
      CLOCK: [2013-06-22 Sat 12:26]--[2013-06-22 Sat 12:59] =>  0:33
 
@@ -203,7 +202,8 @@ to start making use of them.
 
 - in CPP model's transformer, traverse concepts and add properties.
 
-**** Add test to stereotypes model                                     :task:
+**** IMPLEMENTATION Add test to stereotypes model                      :task:
+     CLOCK: [2013-06-23 Sun 23:22]--[2013-06-23 Sun 23:37] =>  0:15
 
 - stand-alone concept
 - concept with single-inheritance
@@ -221,6 +221,8 @@ might as well just use a qname.
 In S28 as part of "Break down SML into concepts at the design level"
 we have defined all of the main concepts that SML types should be
 using. Attempt to make use of these to simplify the model.
+
+**** Convert pods into entities, values or services                   :story:
 
 *** Rename implementation specific parameters                         :story:
 

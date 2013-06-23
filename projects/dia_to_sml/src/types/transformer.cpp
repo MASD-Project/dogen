@@ -473,6 +473,10 @@ void transformer::transform_exception(const processed_object& o) {
 
 void transformer::transform_concept(const processed_object& o) {
     sml::concept c;
+    const std::string pkg_id(o.child_node_id());
+    using sml::meta_types;
+    c.name(transform_qname(o.name(), meta_types::concept, pkg_id));
+
     for (const auto& prop : o.properties()) {
         auto property(transform_property(prop));
         property.type_name(transform_nested_qname(prop.type()));

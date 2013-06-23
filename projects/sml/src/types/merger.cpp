@@ -144,12 +144,18 @@ void merger::merge_model(const model& m) {
     BOOST_LOG_SEV(lg, info) << "Merging model: '" << m.name()
                             << "' pods: " << m.pods().size()
                             << " primitives: " << m.primitives().size()
+                            << " concepts: " << m.concepts().size()
                             << " enumerations: " << m.enumerations().size()
                             << " exceptions: " << m.exceptions().size();
 
     for (const auto& p : m.pods()) {
         check_qname(n, meta_types::pod, p.first, p.second.name());
         merged_model_.pods().insert(p);
+    }
+
+    for (const auto& c : m.concepts()) {
+        check_qname(n, meta_types::concept, c.first, c.second.name());
+        merged_model_.concepts().insert(c);
     }
 
     for (const auto& p : m.primitives()) {

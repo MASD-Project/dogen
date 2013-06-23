@@ -61,6 +61,7 @@ unsigned int validator::count_stereotypes_types(const profile& p) const {
     if (p.is_entity()) ++r;
     if (p.is_value()) ++r;
     if (p.is_service()) ++r;
+    if (p.is_concept()) ++r;
 
     return r;
 }
@@ -80,8 +81,8 @@ void validator::validate_stereotypes(const profile& p) const {
             validation_error(too_many_type_related_stereotypes));
     }
 
-    if ((p.is_enumeration() || p.is_exception() || p.is_service()) &&
-        non_types > 0) {
+    if ((p.is_enumeration() || p.is_exception() || p.is_service() ||
+            p.is_concept()) && non_types > 0) {
         BOOST_LOG_SEV(lg, error) << type_does_not_support_further_stereotypes;
 
         BOOST_THROW_EXCEPTION(

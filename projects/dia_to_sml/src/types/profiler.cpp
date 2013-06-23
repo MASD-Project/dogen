@@ -29,6 +29,7 @@ namespace {
 using namespace dogen::utility::log;
 static logger lg(logger_factory("dia_to_sml.profiler"));
 
+const std::string concept("concept");
 const std::string enumeration("enumeration");
 const std::string exception("exception");
 const std::string entity("entity");
@@ -94,6 +95,8 @@ process_stereotype(profile& o, const std::string& s) const {
             o.is_versioned(true);
         else if (stereotype == aggregate_root)
             o.is_aggregate_root(true);
+        else if (stereotype == concept)
+            o.is_concept(true);
         else
             o.unknown_stereotypes().push_back(stereotype);
     }
