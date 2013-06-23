@@ -28,7 +28,6 @@
 #include <boost/archive/xml_oarchive.hpp>
 #include <boost/serialization/list.hpp>
 #include <boost/serialization/nvp.hpp>
-#include <boost/serialization/vector.hpp>
 #include "dogen/sml/serialization/concept_ser.hpp"
 #include "dogen/sml/serialization/model_element_ser.hpp"
 #include "dogen/sml/serialization/property_ser.hpp"

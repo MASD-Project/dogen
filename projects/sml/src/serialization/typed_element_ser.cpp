@@ -29,7 +29,6 @@
 #include <boost/serialization/list.hpp>
 #include <boost/serialization/nvp.hpp>
 #include <boost/serialization/optional.hpp>
-#include <boost/serialization/vector.hpp>
 #include "dogen/sml/serialization/entity_ser.hpp"
 #include "dogen/sml/serialization/factory_ser.hpp"
 #include "dogen/sml/serialization/model_element_ser.hpp"

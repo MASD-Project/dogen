@@ -175,23 +175,21 @@ void resolver::resolve_partial_type(nested_qname& n) const {
     n.type(qn);
 }
 
-std::vector<property> resolver::resolve_properties(const qname& owner,
-    const std::vector<property>& unresolved_properties) const {
-    auto r(unresolved_properties);
+std::list<property> resolver::resolve_properties(const qname& owner,
+    const std::list<property>& unresolved_properties) const {
+    std::list<property> r;
 
-    for (unsigned int i(0); i < r.size(); ++i) {
-        property property(r[i]);
-
+    for (auto p : unresolved_properties) {
         try {
-            auto t(property.type_name());
+            auto t(p.type_name());
             resolve_partial_type(t);
-            property.type_name(t);
-            r[i] = property;
+            p.type_name(t);
+            r.push_back(p);
         } catch (boost::exception& e) {
             std::ostringstream s;
             s << "Pod: " << owner.type_name()
-              << " Property: " << property.name()
-              << " type: " << property.type_name();
+              << " Property: " << p.name()
+              << " type: " << p.type_name();
             e << errmsg_info(s.str());
             throw;
         }

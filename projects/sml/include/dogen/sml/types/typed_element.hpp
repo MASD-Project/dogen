@@ -29,7 +29,6 @@
 #include <boost/optional.hpp>
 #include <iosfwd>
 #include <list>
-#include <vector>
 #include "dogen/sml/serialization/typed_element_fwd_ser.hpp"
 #include "dogen/sml/types/model_element.hpp"
 #include "dogen/sml/types/model_element_visitor.hpp"
@@ -60,7 +59,7 @@ public:
         const std::string& documentation,
         const std::vector<std::pair<std::string, std::string> >& implementation_specific_parameters,
         const dogen::sml::generation_types& generation_type,
-        const std::vector<dogen::sml::property>& properties,
+        const std::list<dogen::sml::property>& properties,
         const boost::optional<dogen::sml::qname>& parent_name,
         const boost::optional<dogen::sml::qname>& original_parent_name,
         const std::list<dogen::sml::qname>& leaves,
@@ -90,10 +89,10 @@ public:
      * Does not include inherited attributes.
      */
     /**@{*/
-    const std::vector<dogen::sml::property>& properties() const;
-    std::vector<dogen::sml::property>& properties();
-    void properties(const std::vector<dogen::sml::property>& v);
-    void properties(const std::vector<dogen::sml::property>&& v);
+    const std::list<dogen::sml::property>& properties() const;
+    std::list<dogen::sml::property>& properties();
+    void properties(const std::list<dogen::sml::property>& v);
+    void properties(const std::list<dogen::sml::property>&& v);
     /**@}*/
 
     /**
@@ -205,7 +204,7 @@ protected:
     void swap(typed_element& other) noexcept;
 
 private:
-    std::vector<dogen::sml::property> properties_;
+    std::list<dogen::sml::property> properties_;
     boost::optional<dogen::sml::qname> parent_name_;
     boost::optional<dogen::sml::qname> original_parent_name_;
     std::list<dogen::sml::qname> leaves_;

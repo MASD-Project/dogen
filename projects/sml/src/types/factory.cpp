@@ -30,7 +30,7 @@ factory::factory(
     const std::string& documentation,
     const std::vector<std::pair<std::string, std::string> >& implementation_specific_parameters,
     const dogen::sml::generation_types& generation_type,
-    const std::vector<dogen::sml::property>& properties,
+    const std::list<dogen::sml::property>& properties,
     const boost::optional<dogen::sml::qname>& parent_name,
     const boost::optional<dogen::sml::qname>& original_parent_name,
     const std::list<dogen::sml::qname>& leaves,

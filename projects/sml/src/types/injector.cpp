@@ -58,7 +58,7 @@ namespace dogen {
 namespace sml {
 
 pod injector::create_key(const qname& qn, const generation_types gt,
-    const std::vector<property>& properties, const bool versioned) const {
+    const std::list<property>& properties, const bool versioned) const {
 
     qname kqn;
     kqn.type_name(qn.type_name() + "_" +
@@ -98,7 +98,7 @@ void injector::inject_keys(model& m) const {
         if (!pod.is_keyed())
             continue;
 
-        std::vector<property> identity_properties;
+        std::list<property> identity_properties;
         for (const auto& prop : pod.properties()) {
             if (prop.is_identity_attribute())
                 identity_properties.push_back(prop);

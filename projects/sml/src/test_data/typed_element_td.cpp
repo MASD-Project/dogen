@@ -35,8 +35,8 @@ create_dogen_sml_property(const unsigned int position) {
     return dogen::sml::property_generator::create(position);
 }
 
-std::vector<dogen::sml::property> create_std_vector_dogen_sml_property(unsigned int position) {
-    std::vector<dogen::sml::property> r;
+std::list<dogen::sml::property> create_std_list_dogen_sml_property(unsigned int position) {
+    std::list<dogen::sml::property> r;
     for (unsigned int i(0); i < 10; ++i) {
         r.push_back(create_dogen_sml_property(position + i));
     }
@@ -80,7 +80,7 @@ namespace sml {
 void typed_element_generator::
 populate(const unsigned int position, result_type& v) {
     dogen::sml::model_element_generator::populate(position, v);
-    v.properties(create_std_vector_dogen_sml_property(position + 0));
+    v.properties(create_std_list_dogen_sml_property(position + 0));
     v.parent_name(create_boost_optional_dogen_sml_qname(position + 1));
     v.original_parent_name(create_boost_optional_dogen_sml_qname(position + 2));
     v.leaves(create_std_list_dogen_sml_qname(position + 3));

@@ -110,7 +110,7 @@ BOOST_AUTO_TEST_CASE(pod_with_property_type_in_the_same_model_resolves_successfu
 
             found = true;
             BOOST_CHECK(pair.second.properties().size() == 1);
-            const auto prop(pair.second.properties()[0]);
+            const auto prop(pair.second.properties().front());
             BOOST_LOG_SEV(lg, debug) << "property: " << prop;
             BOOST_CHECK(is_type_one(prop.type_name().type()));
             BOOST_CHECK(is_model_zero(prop.type_name().type()));
@@ -141,7 +141,7 @@ BOOST_AUTO_TEST_CASE(pod_with_property_type_in_different_model_results_in_succes
             BOOST_LOG_SEV(lg, debug) << "found pod: " << pair.first;
             found = true;
             BOOST_CHECK(pair.second.properties().size() == 1);
-            const auto prop(pair.second.properties()[0]);
+            const auto prop(pair.second.properties().front());
             BOOST_LOG_SEV(lg, debug) << "property: " << prop;
 
             BOOST_CHECK(is_type_one(prop.type_name().type()));

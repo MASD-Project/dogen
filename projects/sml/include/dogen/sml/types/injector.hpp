@@ -25,7 +25,7 @@
 #pragma once
 #endif
 
-#include <vector>
+#include <list>
 #include "dogen/sml/types/pod.hpp"
 #include "dogen/sml/types/model.hpp"
 
@@ -49,7 +49,7 @@ private:
      * creates an unversioned key.
      */
     pod create_key(const qname& qn, const generation_types gt,
-        const std::vector<property>& properties, const bool versioned) const;
+        const std::list<property>& properties, const bool versioned) const;
 
     /**
      * @brief Injects versioned and unversioned keys for keyed entities.

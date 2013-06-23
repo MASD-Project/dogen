@@ -63,7 +63,7 @@ pod::pod(pod&& rhs)
 
 pod::pod(
     const dogen::sml::qname& name,
-    const std::vector<dogen::sml::property>& properties,
+    const std::list<dogen::sml::property>& properties,
     const boost::optional<dogen::sml::qname>& parent_name,
     const boost::optional<dogen::sml::qname>& original_parent_name,
     const std::list<dogen::sml::qname>& leaves,
@@ -180,19 +180,19 @@ void pod::name(const dogen::sml::qname&& v) {
     name_ = std::move(v);
 }
 
-const std::vector<dogen::sml::property>& pod::properties() const {
+const std::list<dogen::sml::property>& pod::properties() const {
     return properties_;
 }
 
-std::vector<dogen::sml::property>& pod::properties() {
+std::list<dogen::sml::property>& pod::properties() {
     return properties_;
 }
 
-void pod::properties(const std::vector<dogen::sml::property>& v) {
+void pod::properties(const std::list<dogen::sml::property>& v) {
     properties_ = v;
 }
 
-void pod::properties(const std::vector<dogen::sml::property>&& v) {
+void pod::properties(const std::list<dogen::sml::property>&& v) {
     properties_ = std::move(v);
 }
 

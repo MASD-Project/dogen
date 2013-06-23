@@ -25,6 +25,7 @@
 #pragma once
 #endif
 
+#include <list>
 #include <unordered_map>
 #include "dogen/sml/types/nested_qname.hpp"
 #include "dogen/sml/types/reference.hpp"
@@ -69,8 +70,8 @@ private:
     /**
      * @brief Resolves all references to types in the supplied properties.
      */
-    std::vector<property> resolve_properties(const qname& owner,
-        const std::vector<property>& unresolved_properties) const;
+    std::list<property> resolve_properties(const qname& owner,
+        const std::list<property>& unresolved_properties) const;
 
     /**
      * @brief Validates the inheritance graph for the pod.

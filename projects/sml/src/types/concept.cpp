@@ -26,7 +26,7 @@
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::vector<dogen::sml::property>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::sml::property>& v) {
     s << "[ ";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -60,7 +60,7 @@ concept::concept(
     const std::string& documentation,
     const std::vector<std::pair<std::string, std::string> >& implementation_specific_parameters,
     const dogen::sml::generation_types& generation_type,
-    const std::vector<dogen::sml::property>& properties,
+    const std::list<dogen::sml::property>& properties,
     const std::list<dogen::sml::qname>& refines)
     : dogen::sml::model_element(name,
       documentation,
@@ -106,19 +106,19 @@ concept& concept::operator=(concept other) {
     return *this;
 }
 
-const std::vector<dogen::sml::property>& concept::properties() const {
+const std::list<dogen::sml::property>& concept::properties() const {
     return properties_;
 }
 
-std::vector<dogen::sml::property>& concept::properties() {
+std::list<dogen::sml::property>& concept::properties() {
     return properties_;
 }
 
-void concept::properties(const std::vector<dogen::sml::property>& v) {
+void concept::properties(const std::list<dogen::sml::property>& v) {
     properties_ = v;
 }
 
-void concept::properties(const std::vector<dogen::sml::property>&& v) {
+void concept::properties(const std::list<dogen::sml::property>&& v) {
     properties_ = std::move(v);
 }
 

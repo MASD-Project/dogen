@@ -62,7 +62,7 @@ public:
 public:
     pod(
         const dogen::sml::qname& name,
-        const std::vector<dogen::sml::property>& properties,
+        const std::list<dogen::sml::property>& properties,
         const boost::optional<dogen::sml::qname>& parent_name,
         const boost::optional<dogen::sml::qname>& original_parent_name,
         const std::list<dogen::sml::qname>& leaves,
@@ -107,10 +107,10 @@ public:
      * @brief All the properties this pod owns.
      */
     /**@{*/
-    const std::vector<dogen::sml::property>& properties() const;
-    std::vector<dogen::sml::property>& properties();
-    void properties(const std::vector<dogen::sml::property>& v);
-    void properties(const std::vector<dogen::sml::property>&& v);
+    const std::list<dogen::sml::property>& properties() const;
+    std::list<dogen::sml::property>& properties();
+    void properties(const std::list<dogen::sml::property>& v);
+    void properties(const std::list<dogen::sml::property>&& v);
     /**@}*/
 
     /**
@@ -306,7 +306,7 @@ public:
 
 private:
     dogen::sml::qname name_;
-    std::vector<dogen::sml::property> properties_;
+    std::list<dogen::sml::property> properties_;
     boost::optional<dogen::sml::qname> parent_name_;
     boost::optional<dogen::sml::qname> original_parent_name_;
     std::list<dogen::sml::qname> leaves_;

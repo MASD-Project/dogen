@@ -54,6 +54,14 @@ class: =resolver=.
 As we need to update resolution rules for concepts, we need to pickup
 this story.
 
+*** COMPLETED Property container should be a list not a vector        :spike:
+    CLOSED: [2013-06-23 Sun 22:51]
+    CLOCK: [2013-06-23 Sun 22:40]--[2013-06-23 Sun 22:51] =>  0:11
+    CLOCK: [2013-06-23 Sun 22:20]--[2013-06-23 Sun 22:27] =>  0:07
+
+For some reason we made this container a vector, but in reality we
+never really use random access and we do a lot of push backs to it.
+
 *** IMPLEMENTATION Design the inheritance tree of DDD classes in SML  :story:
 
 In S28 as part of "Improve modeling of domain driven concepts in SML",
@@ -188,7 +196,8 @@ to start making use of them.
   a meta type of concept
 - merger to check that all such concepts exist in model.
 
-**** When transforming a pod, copy across properties from concept      :task:
+**** IMPLEMENTATION When transforming a pod, copy across properties from concept :task:
+     CLOCK: [2013-06-23 Sun 22:07]--[2013-06-23 Sun 22:19] =>  0:12
 
 - in CPP model's transformer, traverse concepts and add properties.
 

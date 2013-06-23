@@ -27,7 +27,7 @@
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::vector<dogen::sml::property>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::sml::property>& v) {
     s << "[ ";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -101,7 +101,7 @@ typed_element::typed_element(
     const std::string& documentation,
     const std::vector<std::pair<std::string, std::string> >& implementation_specific_parameters,
     const dogen::sml::generation_types& generation_type,
-    const std::vector<dogen::sml::property>& properties,
+    const std::list<dogen::sml::property>& properties,
     const boost::optional<dogen::sml::qname>& parent_name,
     const boost::optional<dogen::sml::qname>& original_parent_name,
     const std::list<dogen::sml::qname>& leaves,
@@ -191,19 +191,19 @@ bool typed_element::compare(const typed_element& rhs) const {
         modeled_concepts_ == rhs.modeled_concepts_;
 }
 
-const std::vector<dogen::sml::property>& typed_element::properties() const {
+const std::list<dogen::sml::property>& typed_element::properties() const {
     return properties_;
 }
 
-std::vector<dogen::sml::property>& typed_element::properties() {
+std::list<dogen::sml::property>& typed_element::properties() {
     return properties_;
 }
 
-void typed_element::properties(const std::vector<dogen::sml::property>& v) {
+void typed_element::properties(const std::list<dogen::sml::property>& v) {
     properties_ = v;
 }
 
-void typed_element::properties(const std::vector<dogen::sml::property>&& v) {
+void typed_element::properties(const std::list<dogen::sml::property>&& v) {
     properties_ = std::move(v);
 }
 
