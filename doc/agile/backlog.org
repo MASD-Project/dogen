@@ -11,6 +11,12 @@ This file contains all stories that haven't been assigned to a sprint.
 
 Stories that we intend to look at, at some point.
 
+*** Sort model dependencies
+
+It seems the order of registration of models has moved with recent
+builds of dogen (1418). Investigate if we sort the dependencies and if
+not, sort them.
+
 *** Use pimpl for a few "one-shot" services
 
 We have quite a few services where it would be great to have
