@@ -10,17 +10,18 @@ This file contains all stories that were closed during sprint 29.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-06-22 Sat 18:52]
+Clock summary at [2013-06-23 Sun 01:05]
 
-| Headline                                                           | Time   |      |      |
-|--------------------------------------------------------------------+--------+------+------|
-| *Total time*                                                       | *6:33* |      |      |
-|--------------------------------------------------------------------+--------+------+------|
-| Development Stories Implemented                                    |        | 6:33 |      |
-| IMPLEMENTATION Release notes and backlog grooming                  |        |      | 0:32 |
-| COMPLETED Make design by contract methods consistent in dia to sml |        |      | 0:52 |
-| IMPLEMENTATION Design the inheritance tree of DDD classes in SML   |        |      | 1:25 |
-| IMPLEMENTATION Implement concepts in SML                           |        |      | 3:44 |
+| Headline                                                           | Time    |       |      |
+|--------------------------------------------------------------------+---------+-------+------|
+| *Total time*                                                       | *10:16* |       |      |
+|--------------------------------------------------------------------+---------+-------+------|
+| Development Stories Implemented                                    |         | 10:16 |      |
+| IMPLEMENTATION Release notes and backlog grooming                  |         |       | 0:32 |
+| COMPLETED Make design by contract methods consistent in dia to sml |         |       | 0:52 |
+| COMPLETED Split resolver from merger                               |         |       | 3:18 |
+| IMPLEMENTATION Design the inheritance tree of DDD classes in SML   |         |       | 1:25 |
+| IMPLEMENTATION Implement concepts in SML                           |         |       | 4:09 |
 #+end:
 
 *** IMPLEMENTATION Release notes and backlog grooming                  :task:
@@ -52,7 +53,6 @@ class: =resolver=.
 As we need to update resolution rules for concepts, we need to pickup
 this story.
 
-*** Add content to the introduction in manual                         :story:
 *** IMPLEMENTATION Design the inheritance tree of DDD classes in SML  :story:
 
 In S28 as part of "Improve modeling of domain driven concepts in SML",
@@ -148,11 +148,6 @@ compliance):
 - =entity= and =keyed_entity= descend from =abstract_entity=.
 
 **** Convert pods into entities, values or services                   :story:
-*** Model name should be a qname                                      :story:
-
-We already have most of the qname properties in the model anyway, so
-might as well just use a qname.
-
 *** IMPLEMENTATION Implement concepts in SML                          :story:
      CLOCK: [2013-06-22 Sat 12:26]--[2013-06-22 Sat 12:59] =>  0:33
 
@@ -197,6 +192,12 @@ to start making use of them.
 - concept with multiple-inheritance
 - non-existing concept (using mock model)
 
+*** Model name should be a qname                                      :story:
+
+We already have most of the qname properties in the model anyway, so
+might as well just use a qname.
+
+*** Add content to the introduction in manual                         :story:
 *** Update SML to make use of concepts                                :story:
 
 In S28 as part of "Break down SML into concepts at the design level"
