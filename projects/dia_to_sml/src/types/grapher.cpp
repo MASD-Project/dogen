@@ -176,10 +176,10 @@ void grapher::process_connections(const processed_object& o) {
     BOOST_LOG_SEV(lg, debug) << "Created edge between '" << child_id
                              << "' and: '" << parent_id << "'";
 
-    auto i(child_to_parents_.find(child_id));
-    if (i == child_to_parents_.end()) {
+    auto i(child_id_to_parent_ids_.find(child_id));
+    if (i == child_id_to_parent_ids_.end()) {
         std::list<std::string> l = { parent_id };
-        child_to_parents_.insert(std::make_pair(child_id, l));
+        child_id_to_parent_ids_.insert(std::make_pair(child_id, l));
         BOOST_LOG_SEV(lg, debug) << "First parent for Child: " << child_id;
 
     } else {
@@ -229,10 +229,10 @@ const graph_type& grapher::graph() const {
     return graph_;
 }
 
-const grapher::child_to_parents_type& grapher::
-child_to_parents() const {
+const grapher::child_id_to_parent_ids_type& grapher::
+child_id_to_parent_ids() const {
     require_built();
-    return child_to_parents_;
+    return child_id_to_parent_ids_;
 }
 
 const std::unordered_set<std::string>& grapher::parent_ids() const {

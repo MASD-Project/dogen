@@ -100,9 +100,9 @@ std::size_t context_hasher::hash(const context&v) {
     std::size_t seed(0);
 
     combine(seed, v.is_target());
-    combine(seed, hash_std_unordered_map_std_string_std_list_std_string_(v.child_to_parents()));
+    combine(seed, hash_std_unordered_map_std_string_std_list_std_string_(v.child_id_to_parent_ids()));
     combine(seed, hash_std_unordered_set_std_string(v.parent_ids()));
-    combine(seed, hash_std_unordered_map_std_string_dogen_sml_qname(v.dia_id_to_qname()));
+    combine(seed, hash_std_unordered_map_std_string_dogen_sml_qname(v.id_to_qname()));
     combine(seed, hash_std_unordered_map_dogen_sml_qname_dogen_sml_qname(v.original_parent()));
     combine(seed, hash_std_unordered_map_dogen_sml_qname_std_list_dogen_sml_qname_(v.leaves()));
     combine(seed, hash_std_unordered_set_std_string(v.top_level_module_names()));

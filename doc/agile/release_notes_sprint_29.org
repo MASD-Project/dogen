@@ -10,21 +10,22 @@ This file contains all stories that were closed during sprint 29.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-06-23 Sun 01:05]
+Clock summary at [2013-06-23 Sun 21:22]
 
 | Headline                                                           | Time    |       |      |
 |--------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                       | *10:16* |       |      |
+| *Total time*                                                       | *12:54* |       |      |
 |--------------------------------------------------------------------+---------+-------+------|
-| Development Stories Implemented                                    |         | 10:16 |      |
-| IMPLEMENTATION Release notes and backlog grooming                  |         |       | 0:32 |
+| Development Stories Implemented                                    |         | 12:54 |      |
+| IMPLEMENTATION Release notes and backlog grooming                  |         |       | 0:53 |
 | COMPLETED Make design by contract methods consistent in dia to sml |         |       | 0:52 |
 | COMPLETED Split resolver from merger                               |         |       | 3:18 |
 | IMPLEMENTATION Design the inheritance tree of DDD classes in SML   |         |       | 1:25 |
-| IMPLEMENTATION Implement concepts in SML                           |         |       | 4:09 |
+| IMPLEMENTATION Implement concepts in SML                           |         |       | 6:26 |
 #+end:
 
 *** IMPLEMENTATION Release notes and backlog grooming                  :task:
+    CLOCK: [2013-06-23 Sun 20:50]--[2013-06-23 Sun 21:11] =>  0:21
     CLOCK: [2013-06-22 Sat 17:06]--[2013-06-22 Sat 17:14] =>  0:08
     CLOCK: [2013-06-17 Mon 08:07]--[2013-06-17 Mon 08:20] =>  0:13
     CLOCK: [2013-06-17 Mon 07:56]--[2013-06-17 Mon 08:07] =>  0:11
@@ -168,6 +169,9 @@ to start making use of them.
   parent.
 
 **** IMPLEMENTATION Add support for concepts to the dia to sml transformer :task:
+     CLOCK: [2013-06-23 Sun 21:11]--[2013-06-23 Sun 21:22] =>  0:11
+     CLOCK: [2013-06-23 Sun 19:10]--[2013-06-23 Sun 20:50] =>  1:40
+     CLOCK: [2013-06-23 Sun 08:24]--[2013-06-23 Sun 08:50] =>  0:26
      CLOCK: [2013-06-22 Sat 19:15]--[2013-06-22 Sat 19:26] =>  0:11
      CLOCK: [2013-06-22 Sat 18:54]--[2013-06-22 Sat 19:08] =>  0:14
      CLOCK: [2013-06-22 Sat 17:53]--[2013-06-22 Sat 18:52] =>  0:59

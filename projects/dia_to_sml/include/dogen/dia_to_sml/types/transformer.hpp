@@ -84,12 +84,12 @@ private:
      *
      * @param uml_attribute the Dia UML attribute
      */
-    sml::property transform_property(const processed_property& p);
+    sml::property transform_property(const processed_property& p) const;
 
     /**
      * @brief Converts a object containing a class into an pod.
      */
-    void transform_pod(const processed_object& po, const profile& p);
+    void transform_pod(const processed_object& o, const profile& p);
 
     /**
      * @brief Converts a object containing a class into an enumeration.
@@ -121,6 +121,14 @@ private:
      * @param o Dia object which contains an exception.
      */
     void transform_exception(const processed_object& o);
+
+    /**
+     * @brief Converts a dia object with a stereotype of concept
+     * into a SML concept.
+     *
+     * @param o Dia object which contains a concept.
+     */
+    void transform_concept(const processed_object& o);
 
 public:
     /**

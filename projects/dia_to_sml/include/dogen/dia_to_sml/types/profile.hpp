@@ -67,6 +67,7 @@ public:
         const bool is_fluent,
         const bool is_aggregate_root,
         const bool is_string_table,
+        const bool is_concept,
         const std::list<std::string>& unknown_stereotypes);
 
 private:
@@ -238,6 +239,14 @@ public:
     /**@}*/
 
     /**
+     * @brief If true, the underlying object represents a concept.
+     */
+    /**@{*/
+    bool is_concept() const;
+    void is_concept(const bool v);
+    /**@}*/
+
+    /**
      * @brief List of all unknown stereotypes.
      */
     /**@{*/
@@ -278,6 +287,7 @@ private:
     bool is_fluent_;
     bool is_aggregate_root_;
     bool is_string_table_;
+    bool is_concept_;
     std::list<std::string> unknown_stereotypes_;
 };
 

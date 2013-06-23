@@ -121,8 +121,8 @@ sml::qname transformer::transform_qname(const std::string& n,
     name.external_module_path(context_.model().external_module_path());
 
     if (!pkg_id.empty()) {
-        const auto i(context_.dia_id_to_qname().find(pkg_id));
-        if (i == context_.dia_id_to_qname().end()) {
+        const auto i(context_.id_to_qname().find(pkg_id));
+        if (i == context_.id_to_qname().end()) {
             BOOST_LOG_SEV(lg, error) << missing_qname_for_id << pkg_id;
             BOOST_THROW_EXCEPTION(transformation_error(
                     missing_qname_for_id + pkg_id));
@@ -162,7 +162,7 @@ transformer::transform_nested_qname(const std::string& n) const {
 }
 
 sml::property transformer::
-transform_property(const processed_property& p) {
+transform_property(const processed_property& p) const {
     sml::property r;
     typedef boost::shared_ptr<dia::attribute> attribute_ptr;
 
@@ -187,15 +187,15 @@ transform_property(const processed_property& p) {
 }
 
 void transformer::
-transform_pod(const processed_object& po, const profile& p) {
-    BOOST_LOG_SEV(lg, debug) << "Object is a pod: " << po.id();
+transform_pod(const processed_object& o, const profile& p) {
+    BOOST_LOG_SEV(lg, debug) << "Object is a pod: " << o.id();
 
     sml::pod pod;
     pod.category_type(sml::category_types::user_defined);
 
-    const std::string pkg_id(po.child_node_id());
+    const std::string pkg_id(o.child_node_id());
     using sml::meta_types;
-    pod.name(transform_qname(po.name(), meta_types::pod, pkg_id));
+    pod.name(transform_qname(o.name(), meta_types::pod, pkg_id));
 
     using sml::pod_types;
     pod.pod_type(pod_types::value);
@@ -224,11 +224,11 @@ transform_pod(const processed_object& po, const profile& p) {
     if (context_.is_target() && (p.is_non_generatable() || p.is_service()))
         pod.generation_type(generation_types::partial_generation);
 
-    const auto pair(comments_parser_->parse(po.comment()));
+    const auto pair(comments_parser_->parse(o.comment()));
     pod.documentation(pair.first);
     pod.implementation_specific_parameters(pair.second);
 
-    for (const auto& p : po.properties()) {
+    for (const auto& p : o.properties()) {
         auto property(transform_property(p));
         property.type_name(transform_nested_qname(p.type()));
         compute_model_dependencies(property.type_name());
@@ -236,35 +236,35 @@ transform_pod(const processed_object& po, const profile& p) {
     }
 
     if (pod.name().type_name().empty()) {
-        BOOST_LOG_SEV(lg, error) << empty_dia_object_name + po.id();
+        BOOST_LOG_SEV(lg, error) << empty_dia_object_name + o.id();
         BOOST_THROW_EXCEPTION(
-            transformation_error(empty_dia_object_name + po.id()));
+            transformation_error(empty_dia_object_name + o.id()));
     }
 
-    const auto i(context_.child_to_parents().find(po.id()));
-    if (i != context_.child_to_parents().end()) {
+    const auto i(context_.child_id_to_parent_ids().find(o.id()));
+    if (i != context_.child_id_to_parent_ids().end()) {
         if (i->second.empty()) {
-            BOOST_LOG_SEV(lg, error) << empty_parent_container << po.id();
+            BOOST_LOG_SEV(lg, error) << empty_parent_container << o.id();
             BOOST_THROW_EXCEPTION(
-                transformation_error(empty_parent_container + po.id()));
+                transformation_error(empty_parent_container + o.id()));
         }
 
         if (i->second.size() > 1) {
-            BOOST_LOG_SEV(lg, error) << multiple_inheritance << po.id();
+            BOOST_LOG_SEV(lg, error) << multiple_inheritance << o.id();
             BOOST_THROW_EXCEPTION(
-                transformation_error(multiple_inheritance + po.id()));
+                transformation_error(multiple_inheritance + o.id()));
         }
 
         const auto parent_name(i->second.front());
-        const auto j(context_.dia_id_to_qname().find(parent_name));
-        if (j == context_.dia_id_to_qname().end()) {
+        const auto j(context_.id_to_qname().find(parent_name));
+        if (j == context_.id_to_qname().end()) {
             BOOST_LOG_SEV(lg, error) << "Object has a parent but "
                                      << " there is no QName mapping defined."
-                                     << " Child ID: '" << po.id()
+                                     << " Child ID: '" << o.id()
                                      << "' Parent ID: '" << parent_name << "'";
 
             BOOST_THROW_EXCEPTION(
-                transformation_error(parent_not_found + po.id()));
+                transformation_error(parent_not_found + o.id()));
         }
 
         BOOST_LOG_SEV(lg, debug) << "Setting parent for: "
@@ -276,9 +276,9 @@ transform_pod(const processed_object& po, const profile& p) {
                                  << pod.name().type_name();
     }
 
-    const auto j(context_.parent_ids().find(po.id()));
+    const auto j(context_.parent_ids().find(o.id()));
     pod.is_parent(j != context_.parent_ids().end());
-    context_.dia_id_to_qname().insert(std::make_pair(po.id(), pod.name()));
+    context_.id_to_qname().insert(std::make_pair(o.id(), pod.name()));
 
     if (!pod.parent_name()) {
         context_.original_parent().insert(
@@ -402,7 +402,7 @@ void transformer::transform_module(const processed_object& o) {
         BOOST_LOG_SEV(lg, error) << empty_dia_object_name + o.id();
     }
 
-    context_.dia_id_to_qname().insert(std::make_pair(o.id(), p.name()));
+    context_.id_to_qname().insert(std::make_pair(o.id(), p.name()));
     context_.model().modules().insert(std::make_pair(p.name(), p));
 }
 
@@ -430,8 +430,8 @@ void transformer::transform_note(const processed_object& o) {
         return;
     }
 
-    const auto i(context_.dia_id_to_qname().find(o.child_node_id()));
-    if (i == context_.dia_id_to_qname().end()) {
+    const auto i(context_.id_to_qname().find(o.child_node_id()));
+    if (i == context_.id_to_qname().end()) {
         BOOST_LOG_SEV(lg, error) << missing_module_for_id << o.child_node_id();
         BOOST_THROW_EXCEPTION(
             transformation_error(missing_module_for_id + o.child_node_id()));
@@ -465,9 +465,45 @@ void transformer::transform_exception(const processed_object& o) {
     e.documentation(o.comment());
     context_.model().exceptions().insert(std::make_pair(e.name(), e));
 
+    // FIXME: dumping all exceptions???
     for (const auto p : context_.model().exceptions()) {
         BOOST_LOG_SEV(lg, debug) << "Created exception: " << p.second;
     }
+}
+
+void transformer::transform_concept(const processed_object& o) {
+    sml::concept c;
+    for (const auto& prop : o.properties()) {
+        auto property(transform_property(prop));
+        property.type_name(transform_nested_qname(prop.type()));
+        compute_model_dependencies(property.type_name());
+        c.properties().push_back(property);
+    }
+
+    const auto i(context_.child_id_to_parent_ids().find(o.id()));
+    if (i != context_.child_id_to_parent_ids().end()) {
+        if (i->second.empty()) {
+            BOOST_LOG_SEV(lg, error) << empty_parent_container << o.id();
+            BOOST_THROW_EXCEPTION(
+                transformation_error(empty_parent_container + o.id()));
+        }
+
+        for (const auto& concept_id : i->second) {
+            const auto j(context_.id_to_qname().find(concept_id));
+            if (j == context_.id_to_qname().end()) {
+                BOOST_LOG_SEV(lg, error) << "Object has a parent but "
+                                         << " there is no QName mapping."
+                                         << " Child ID: '" << o.id()
+                                         << "' Parent ID: '" << concept_id
+                                         << "'";
+
+                BOOST_THROW_EXCEPTION(
+                    transformation_error(parent_not_found + o.id()));
+            }
+            c.refines().push_back(j->second);
+        }
+    }
+    context_.model().concepts().insert(std::make_pair(c.name(), c));
 }
 
 bool transformer::is_transformable(const processed_object& o) const {
@@ -494,6 +530,8 @@ transform(const processed_object& o, const profile& p) {
         transform_enumeration(o);
     else if (p.is_exception())
         transform_exception(o);
+    else if (p.is_concept())
+        transform_concept(o);
     else
         transform_pod(o, p);
 

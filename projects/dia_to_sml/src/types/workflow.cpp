@@ -72,7 +72,7 @@ graph_type workflow::build_graph_activity(const dia::diagram& diagram) {
     }
 
     g.build();
-    context_.child_to_parents(g.child_to_parents());
+    context_.child_id_to_parent_ids(g.child_id_to_parent_ids());
     context_.parent_ids(g.parent_ids());
     context_.top_level_module_names(g.top_level_module_names());
     return g.graph();

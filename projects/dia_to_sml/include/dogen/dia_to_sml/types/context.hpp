@@ -53,9 +53,9 @@ public:
 public:
     context(
         const bool is_target,
-        const std::unordered_map<std::string, std::list<std::string> >& child_to_parents,
+        const std::unordered_map<std::string, std::list<std::string> >& child_id_to_parent_ids,
         const std::unordered_set<std::string>& parent_ids,
-        const std::unordered_map<std::string, dogen::sml::qname>& dia_id_to_qname,
+        const std::unordered_map<std::string, dogen::sml::qname>& id_to_qname,
         const std::unordered_map<dogen::sml::qname, dogen::sml::qname>& original_parent,
         const std::unordered_map<dogen::sml::qname, std::list<dogen::sml::qname> >& leaves,
         const std::unordered_set<std::string>& top_level_module_names,
@@ -78,13 +78,13 @@ public:
     /**@}*/
 
     /**
-     * @brief List of parents for a given child.
+     * @brief List of parent object IDs for a given child ID.
      */
     /**@{*/
-    const std::unordered_map<std::string, std::list<std::string> >& child_to_parents() const;
-    std::unordered_map<std::string, std::list<std::string> >& child_to_parents();
-    void child_to_parents(const std::unordered_map<std::string, std::list<std::string> >& v);
-    void child_to_parents(const std::unordered_map<std::string, std::list<std::string> >&& v);
+    const std::unordered_map<std::string, std::list<std::string> >& child_id_to_parent_ids() const;
+    std::unordered_map<std::string, std::list<std::string> >& child_id_to_parent_ids();
+    void child_id_to_parent_ids(const std::unordered_map<std::string, std::list<std::string> >& v);
+    void child_id_to_parent_ids(const std::unordered_map<std::string, std::list<std::string> >&& v);
     /**@}*/
 
     /**
@@ -101,10 +101,10 @@ public:
      * @brief The QName corresponding to a dia object ID.
      */
     /**@{*/
-    const std::unordered_map<std::string, dogen::sml::qname>& dia_id_to_qname() const;
-    std::unordered_map<std::string, dogen::sml::qname>& dia_id_to_qname();
-    void dia_id_to_qname(const std::unordered_map<std::string, dogen::sml::qname>& v);
-    void dia_id_to_qname(const std::unordered_map<std::string, dogen::sml::qname>&& v);
+    const std::unordered_map<std::string, dogen::sml::qname>& id_to_qname() const;
+    std::unordered_map<std::string, dogen::sml::qname>& id_to_qname();
+    void id_to_qname(const std::unordered_map<std::string, dogen::sml::qname>& v);
+    void id_to_qname(const std::unordered_map<std::string, dogen::sml::qname>&& v);
     /**@}*/
 
     /**
@@ -159,9 +159,9 @@ public:
 
 private:
     bool is_target_;
-    std::unordered_map<std::string, std::list<std::string> > child_to_parents_;
+    std::unordered_map<std::string, std::list<std::string> > child_id_to_parent_ids_;
     std::unordered_set<std::string> parent_ids_;
-    std::unordered_map<std::string, dogen::sml::qname> dia_id_to_qname_;
+    std::unordered_map<std::string, dogen::sml::qname> id_to_qname_;
     std::unordered_map<dogen::sml::qname, dogen::sml::qname> original_parent_;
     std::unordered_map<dogen::sml::qname, std::list<dogen::sml::qname> > leaves_;
     std::unordered_set<std::string> top_level_module_names_;

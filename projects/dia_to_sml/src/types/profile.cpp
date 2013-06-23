@@ -43,7 +43,8 @@ profile::profile()
       is_immutable_(static_cast<bool>(0)),
       is_fluent_(static_cast<bool>(0)),
       is_aggregate_root_(static_cast<bool>(0)),
-      is_string_table_(static_cast<bool>(0)) { }
+      is_string_table_(static_cast<bool>(0)),
+      is_concept_(static_cast<bool>(0)) { }
 
 profile::profile(
     const bool is_uml_large_package,
@@ -66,6 +67,7 @@ profile::profile(
     const bool is_fluent,
     const bool is_aggregate_root,
     const bool is_string_table,
+    const bool is_concept,
     const std::list<std::string>& unknown_stereotypes)
     : is_uml_large_package_(is_uml_large_package),
       is_uml_class_(is_uml_class),
@@ -87,6 +89,7 @@ profile::profile(
       is_fluent_(is_fluent),
       is_aggregate_root_(is_aggregate_root),
       is_string_table_(is_string_table),
+      is_concept_(is_concept),
       unknown_stereotypes_(unknown_stereotypes) { }
 
 void profile::swap(profile& other) noexcept {
@@ -111,6 +114,7 @@ void profile::swap(profile& other) noexcept {
     swap(is_fluent_, other.is_fluent_);
     swap(is_aggregate_root_, other.is_aggregate_root_);
     swap(is_string_table_, other.is_string_table_);
+    swap(is_concept_, other.is_concept_);
     swap(unknown_stereotypes_, other.unknown_stereotypes_);
 }
 
@@ -135,6 +139,7 @@ bool profile::operator==(const profile& rhs) const {
         is_fluent_ == rhs.is_fluent_ &&
         is_aggregate_root_ == rhs.is_aggregate_root_ &&
         is_string_table_ == rhs.is_string_table_ &&
+        is_concept_ == rhs.is_concept_ &&
         unknown_stereotypes_ == rhs.unknown_stereotypes_;
 }
 
@@ -302,6 +307,14 @@ bool profile::is_string_table() const {
 
 void profile::is_string_table(const bool v) {
     is_string_table_ = v;
+}
+
+bool profile::is_concept() const {
+    return is_concept_;
+}
+
+void profile::is_concept(const bool v) {
+    is_concept_ = v;
 }
 
 const std::list<std::string>& profile::unknown_stereotypes() const {
