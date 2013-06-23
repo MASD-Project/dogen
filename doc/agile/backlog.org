@@ -11,6 +11,29 @@ This file contains all stories that haven't been assigned to a sprint.
 
 Stories that we intend to look at, at some point.
 
+*** Use pimpl for a few "one-shot" services
+
+We have quite a few services where it would be great to have
+transactional semantics. For example, when building a graph in
+=sml::grapher=, it would be great if one could have a list of objects
+to graph as an input and some kind of =grapher_result= as the
+output. From a potential =grapher_interface= it would look like a
+simple method in the interface, almost static. The problem with this
+approach of course is that it makes the =grapher_interface=
+implementations cumbersome because one has to pass all parameters to
+all internal methods instead of using class state. The present
+approach is to make it a "prepare" and then "use" sort of service,
+causing the usual nonsensical methods of "is it finished yet" and "are
+you trying to use the service a second time" (e.g. =is_built=,
+etc). Even if we pass in all the inputs in the constructor, its still
+not ideal. There are two options:
+
+- set member variables inside the "one-shot" function and then unset
+  them at the end;
+- have a =grapher= implementation which uses a =grapher_impl= that
+  does provide a sensible implementation. We used to do this inside
+  the =.cpp= files but then they became too big to manage.
+
 *** Assignment operator should be protected in ABC                    :story:
 
 As per MEC 33. We should probably do the same for the move and copy
