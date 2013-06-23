@@ -22,7 +22,6 @@
 #include <boost/io/ios_state.hpp>
 #include <ostream>
 #include "dogen/sml/io/category_types_io.hpp"
-#include "dogen/sml/io/concept_io.hpp"
 #include "dogen/sml/io/generation_types_io.hpp"
 #include "dogen/sml/io/pod_io.hpp"
 #include "dogen/sml/io/pod_types_io.hpp"
@@ -96,20 +95,6 @@ inline std::ostream& operator<<(std::ostream& s, const std::pair<std::string, st
 namespace std {
 
 inline std::ostream& operator<<(std::ostream& s, const std::vector<std::pair<std::string, std::string> >& v) {
-    s << "[ ";
-    for (auto i(v.begin()); i != v.end(); ++i) {
-        if (i != v.begin()) s << ", ";
-        s << *i;
-    }
-    s << "] ";
-    return s;
-}
-
-}
-
-namespace std {
-
-inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::sml::concept>& v) {
     s << "[ ";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";

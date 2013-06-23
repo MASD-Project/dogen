@@ -22,6 +22,8 @@
 #include "dogen/sml/types/primitive_model_factory.hpp"
 #include "dogen/sml/types/std_model_factory.hpp"
 #include "dogen/sml/types/boost_model_factory.hpp"
+#include "dogen/sml/types/merger.hpp"
+#include "dogen/sml/types/resolver.hpp"
 #include "dogen/sml/types/workflow.hpp"
 
 namespace dogen {
@@ -58,37 +60,50 @@ bool workflow::has_generatable_types(const sml::model& m) const {
     return false;
 }
 
-void workflow::add_system_models() {
-    if (!add_system_models_)
-        return;
-
-    merger_.add(sml::primitive_model_factory::create());
-    merger_.add(sml::std_model_factory::create());
-    merger_.add(sml::boost_model_factory::create());
-}
-
-void workflow::add_references(const std::list<model>& references) {
-    injector i;
-    for (auto r : references) {
-        i.inject(r);
-        merger_.add(r);
+std::list<model>
+workflow::augment_references_activity(const std::list<model>& references) {
+    std::list<model> r(references);
+    if (add_system_models_) {
+        r.push_back(sml::primitive_model_factory::create());
+        r.push_back(sml::std_model_factory::create());
+        r.push_back(sml::boost_model_factory::create());
     }
+    return r;
 }
 
-void workflow::add_target(const model& target) {
+model workflow::create_merged_model_activity(const model& target,
+    const std::list<model>& references) {
+
     injector i;
     auto t(target);
     i.inject(t);
-    merger_.add_target(t);
+
+    merger mg;
+    mg.add_target(t);
+
+    for (auto r : references) {
+        i.inject(r);
+        mg.add(r);
+    }
+    return mg.merge();
+}
+
+void workflow::resolve_types_activity(model& merged_model,
+    const std::list<model>& references) {
+    resolver res(merged_model);
+
+    for (const auto& m : references) {
+        const reference ref(m.name(), m.external_module_path(), m.is_system());
+        res.add_reference(ref);
+    }
+    res.resolve();
 }
 
 std::pair<bool, model> workflow::
 execute(const model& target, const std::list<model>& references) {
-    add_system_models();
-    add_target(target);
-    add_references(references);
-
-    const auto r(merger_.merge());
+    const auto augment_references(augment_references_activity(references));
+    auto r(create_merged_model_activity(target, augment_references));
+    resolve_types_activity(r, augment_references);
     return std::pair<bool, model> { has_generatable_types(r), r };
 }
 

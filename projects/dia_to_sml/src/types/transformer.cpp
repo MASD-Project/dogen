@@ -209,6 +209,11 @@ transform_pod(const processed_object& po, const profile& p) {
     pod.is_visitable(p.is_visitable());
     pod.is_keyed(p.is_keyed());
 
+    for (const auto us : p.unknown_stereotypes()) {
+        const auto c(transform_qname(us, meta_types::concept, empty));
+        pod.modeled_concepts().push_back(c);
+    }
+
     using sml::generation_types;
     pod.generation_type(context_.is_target() ?
         generation_types::full_generation :

@@ -41,6 +41,8 @@
 #include "dogen/sml/types/qname.hpp"
 #include "dogen/sml/types/reference.hpp"
 #include "dogen/sml/types/repository.hpp"
+#include "dogen/sml/types/resolution_error.hpp"
+#include "dogen/sml/types/resolver.hpp"
 #include "dogen/sml/types/service.hpp"
 #include "dogen/sml/types/service_types.hpp"
 #include "dogen/sml/types/sml.hpp"

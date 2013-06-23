@@ -20,7 +20,6 @@
  */
 #include <sstream>
 #include "dogen/sml/test_data/category_types_td.hpp"
-#include "dogen/sml/test_data/concept_td.hpp"
 #include "dogen/sml/test_data/generation_types_td.hpp"
 #include "dogen/sml/test_data/pod_td.hpp"
 #include "dogen/sml/test_data/pod_types_td.hpp"
@@ -107,19 +106,6 @@ std::vector<std::pair<std::string, std::string> > create_std_vector_std_pair_std
     return r;
 }
 
-dogen::sml::concept
-create_dogen_sml_concept(const unsigned int position) {
-    return dogen::sml::concept_generator::create(position);
-}
-
-std::list<dogen::sml::concept> create_std_list_dogen_sml_concept(unsigned int position) {
-    std::list<dogen::sml::concept> r;
-    for (unsigned int i(0); i < 10; ++i) {
-        r.push_back(create_dogen_sml_concept(position + i));
-    }
-    return r;
-}
-
 }
 
 namespace dogen {
@@ -150,7 +136,7 @@ populate(const unsigned int position, result_type& v) {
     v.is_aggregate_root(create_bool(position + 18));
     v.versioned_key(create_boost_optional_dogen_sml_qname(position + 19));
     v.unversioned_key(create_boost_optional_dogen_sml_qname(position + 20));
-    v.modeled_concepts(create_std_list_dogen_sml_concept(position + 21));
+    v.modeled_concepts(create_std_list_dogen_sml_qname(position + 21));
 }
 
 pod_generator::result_type

@@ -37,6 +37,21 @@ Clock summary at [2013-06-22 Sat 18:52]
 - add tests around preconditions
 - rename =graph_builder= to =grapher=, no need for two words.
 
+*** COMPLETED Split resolver from merger                              :spike:
+    CLOSED: [2013-06-23 Sun 01:02]
+    CLOCK: [2013-06-22 Sat 23:20]--[2013-06-23 Sun 01:02] =>  1:42
+    CLOCK: [2013-06-22 Sat 22:50]--[2013-06-22 Sat 23:20] =>  0:30
+    CLOCK: [2013-06-22 Sat 19:26]--[2013-06-22 Sat 20:30] =>  1:04
+    CLOCK: [2013-05-08 Wed 07:59]--[2013-05-08 Wed 08:01] =>  0:02
+
+At present merger is doing to distinct things: merges multiple models
+into one and resolves partially formed qnames into full qnames. The
+resolution part should really be the responsibility of a
+class: =resolver=.
+
+As we need to update resolution rules for concepts, we need to pickup
+this story.
+
 *** Add content to the introduction in manual                         :story:
 *** IMPLEMENTATION Design the inheritance tree of DDD classes in SML  :story:
 
@@ -158,6 +173,7 @@ to start making use of them.
   parent.
 
 **** IMPLEMENTATION Add support for concepts to the dia to sml transformer :task:
+     CLOCK: [2013-06-22 Sat 19:15]--[2013-06-22 Sat 19:26] =>  0:11
      CLOCK: [2013-06-22 Sat 18:54]--[2013-06-22 Sat 19:08] =>  0:14
      CLOCK: [2013-06-22 Sat 17:53]--[2013-06-22 Sat 18:52] =>  0:59
      CLOCK: [2013-06-22 Sat 17:16]--[2013-06-22 Sat 17:33] =>  0:17

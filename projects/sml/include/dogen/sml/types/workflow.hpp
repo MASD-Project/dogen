@@ -28,7 +28,6 @@
 #include <list>
 #include <utility>
 #include "dogen/sml/types/model.hpp"
-#include "dogen/sml/types/merger.hpp"
 
 namespace dogen {
 namespace sml {
@@ -45,10 +44,26 @@ public:
     explicit workflow(const bool add_system_models);
 
 private:
-    void add_system_models();
-    void add_references(const std::list<model>& references);
-    void add_target(const model& target);
+    /**
+     * @brief Add any additional models to the original list of
+     * references passed in by user.
+     */
+    std::list<model> augment_references_activity(
+        const std::list<model>& references);
 
+    /**
+     * @brief Create the merged model.
+     */
+    model create_merged_model_activity(const model& target,
+        const std::list<model>& references);
+
+    /**
+     * @brief Resolve all types.
+     */
+    void resolve_types_activity(model& merged_model,
+        const std::list<model>& references);
+
+private:
     /**
      * @brief Returns true if there are any types that require code
      * generation, false otherwise.
@@ -61,7 +76,6 @@ public:
 
 private:
     const bool add_system_models_;
-    merger merger_;
 };
 
 } }

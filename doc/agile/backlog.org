@@ -388,15 +388,6 @@ build so that users are not forced to always build static / shared
 libraries. We should make sure one of the tests is using a static
 library to make sure this scenario doesn't get borked.
 
-*** Split resolver from merger
-    CLOCK: [2013-05-08 Wed 07:59]--[2013-05-08 Wed 08:01] =>  0:02
-
-At present merger is doing to distinct things: merges multiple models
-into one and resolves partially formed qnames into full qnames. The
-resolution part should really be the responsibility of a
-class. Investigate if we could IoC the resolution, although on first
-thought it doesn't make sense.
-
 *** Add comments to test model sanitizer
 
 We should explain why we decided to create a test model sanitizer

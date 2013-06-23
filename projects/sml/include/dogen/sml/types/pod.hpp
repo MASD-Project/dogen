@@ -33,7 +33,6 @@
 #include <vector>
 #include "dogen/sml/serialization/pod_fwd_ser.hpp"
 #include "dogen/sml/types/category_types.hpp"
-#include "dogen/sml/types/concept.hpp"
 #include "dogen/sml/types/generation_types.hpp"
 #include "dogen/sml/types/pod_types.hpp"
 #include "dogen/sml/types/property.hpp"
@@ -83,7 +82,7 @@ public:
         const bool is_aggregate_root,
         const boost::optional<dogen::sml::qname>& versioned_key,
         const boost::optional<dogen::sml::qname>& unversioned_key,
-        const std::list<dogen::sml::concept>& modeled_concepts);
+        const std::list<dogen::sml::qname>& modeled_concepts);
 
 private:
     template<typename Archive>
@@ -289,10 +288,10 @@ public:
      * @brief List of concepts this pod models.
      */
     /**@{*/
-    const std::list<dogen::sml::concept>& modeled_concepts() const;
-    std::list<dogen::sml::concept>& modeled_concepts();
-    void modeled_concepts(const std::list<dogen::sml::concept>& v);
-    void modeled_concepts(const std::list<dogen::sml::concept>&& v);
+    const std::list<dogen::sml::qname>& modeled_concepts() const;
+    std::list<dogen::sml::qname>& modeled_concepts();
+    void modeled_concepts(const std::list<dogen::sml::qname>& v);
+    void modeled_concepts(const std::list<dogen::sml::qname>&& v);
     /**@}*/
 
 public:
@@ -327,7 +326,7 @@ private:
     bool is_aggregate_root_;
     boost::optional<dogen::sml::qname> versioned_key_;
     boost::optional<dogen::sml::qname> unversioned_key_;
-    std::list<dogen::sml::concept> modeled_concepts_;
+    std::list<dogen::sml::qname> modeled_concepts_;
 };
 
 } }

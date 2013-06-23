@@ -35,7 +35,13 @@
 namespace dogen {
 namespace sml {
 
+/**
+ * @brief Combines a number of models into a merged model.
+ */
 class merger {
+private:
+    typedef std::unordered_map<std::string, model> models_type;
+
 public:
     merger(const merger&) = default;
     ~merger() = default;
@@ -46,29 +52,73 @@ public:
     merger();
 
 private:
+    /**
+     * @brief Validates the qname.
+     */
     void check_qname(const std::string& model_name,
         const meta_types meta_type, const qname& key,
         const qname& value) const;
-    qname resolve_partial_type(const qname& n) const;
-    void resolve_partial_type(nested_qname& t) const;
-    std::vector<property> resolve_properties(const pod& pod);
-    void resolve_parent(const pod& pod);
-    void resolve();
-    std::unordered_map<std::string, reference> compute_dependencies() const;
-    void combine();
+
+    /**
+     * @brief Ensure that all known references have been added.
+     */
+    void check_references() const;
+
+    /**
+     * @brief Target model must have been set.
+     */
+    void require_has_target() const;
+
+    /**
+     * @brief Target model must @e not have been set.
+     */
+    void require_not_has_target(const std::string& name) const;
+
+    /**
+     * @brief Merge must not yet have taken place.
+     */
+    void require_not_has_merged() const;
 
 public:
-    void add_target(model model);
-    void add(model model);
-    model merge();
+    /**
+     * @brief Returns true if the target model has already been added,
+     * false otherwise.
+     */
+    bool has_target() const { return has_target_; }
 
-private:
-    typedef std::unordered_map<std::string, model> models_type;
+    /**
+     * @brief Returns true if the target model has already been added,
+     * false otherwise.
+     */
+    bool has_merged() const { return has_merged_; }
+
+    /**
+     * @brief Adds the target model.
+     *
+     * @pre Must not already have a target model.
+     * @pre Merge mustn't have taken place already.
+     */
+    void add_target(const model& target);
+
+    /**
+     * @brief Adds a reference model.
+     *
+     * @pre Merge mustn't have taken place already.
+     */
+    void add(const model& m);
+
+    /**
+     * @brief Combines all models into a merged model.
+     *
+     * @pre Merge mustn't have taken place already.
+     */
+    model merge();
 
 private:
     models_type models_;
     model merged_model_;
     bool has_target_;
+    bool has_merged_;
 };
 
 } }
