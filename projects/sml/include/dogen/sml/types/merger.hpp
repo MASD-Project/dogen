@@ -61,8 +61,10 @@ private:
 
     /**
      * @brief Ensure that all known references have been added.
+     *
+     * @note should really be moved to validator.
      */
-    void check_references() const;
+    void validate_references() const;
 
     /**
      * @brief Target model must have been set.
@@ -78,6 +80,16 @@ private:
      * @brief Merge must not yet have taken place.
      */
     void require_not_has_merged() const;
+
+    /**
+     * @brief Merge supplied model.
+     */
+    void merge_model(const model& m);
+
+    /**
+     * @brief Merge all models.
+     */
+    void merge_models();
 
 public:
     /**

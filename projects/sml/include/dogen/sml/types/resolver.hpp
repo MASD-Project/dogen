@@ -67,15 +67,25 @@ private:
     void resolve_partial_type(nested_qname& t) const;
 
     /**
-     * @brief Resolves all references contained in the pod's
-     * properties.
+     * @brief Resolves all references to types in the supplied properties.
      */
-    std::vector<property> resolve_properties(const pod& pod);
+    std::vector<property> resolve_properties(const qname& owner,
+        const std::vector<property>& unresolved_properties) const;
 
     /**
-     * @brief Resolves inheritance related references.
+     * @brief Validates the inheritance graph for the pod.
+     *
+     * @note should really be moved to validator.
      */
-    void resolve_parent(const pod& pod);
+    void validate_inheritance_graph(const pod& p) const;
+
+    /**
+     * @brief Ensures that all concepts refined by the current concept
+     * are defined in the model.
+     *
+     * @note should really be moved to validator.
+     */
+    void validate_refinements(const concept& c) const;
 
     /**
      * @brief Resolve model references.
@@ -86,6 +96,16 @@ private:
      * @brief Resolution must not yet have taken place.
      */
     void require_not_has_resolved() const;
+
+    /**
+     * @brief Resolve all concepts.
+     */
+    void resolve_concepts();
+
+    /**
+     * @brief Resolve all pods.
+     */
+    void resolve_pods();
 
 public:
     /**

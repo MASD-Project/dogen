@@ -73,7 +73,7 @@ void merger::check_qname(const std::string& model_name,
     }
 }
 
-void merger::check_references() const {
+void merger::validate_references() const {
     for (const auto pair : merged_model_.dependencies()) {
         const auto mn(pair.second.model_name());
         const auto i(models_.find(mn));
@@ -139,44 +139,48 @@ void merger::add(const model& m) {
     models_.insert(std::make_pair(m.name(), m));
 }
 
+void merger::merge_model(const model& m) {
+    const auto n(m.name());
+    BOOST_LOG_SEV(lg, info) << "Merging model: '" << m.name()
+                            << "' pods: " << m.pods().size()
+                            << " primitives: " << m.primitives().size()
+                            << " enumerations: " << m.enumerations().size()
+                            << " exceptions: " << m.exceptions().size();
+
+    for (const auto& p : m.pods()) {
+        check_qname(n, meta_types::pod, p.first, p.second.name());
+        merged_model_.pods().insert(p);
+    }
+
+    for (const auto& p : m.primitives()) {
+        // FIXME: mega hack to handle primitive model.
+        check_qname(
+            (n == primitive_model_name ? empty : n),
+            meta_types::primitive, p.first, p.second.name());
+        merged_model_.primitives().insert(p);
+    }
+
+    for (const auto& p : m.enumerations()) {
+        check_qname(n, meta_types::enumeration, p.first, p.second.name());
+        merged_model_.enumerations().insert(p);
+    }
+
+    for (const auto& p : m.exceptions()) {
+        check_qname(n, meta_types::exception, p.first, p.second.name());
+        merged_model_.exceptions().insert(p);
+    }
+}
+
+void merger::merge_models() {
+    for (const auto& pair : models_)
+        merge_model(pair.second);
+}
+
 model merger::merge() {
     require_has_target();
     require_not_has_merged();
-    check_references();
-
-    for (const auto& pair : models_) {
-        const auto& m(pair.second);
-        const auto n(m.name());
-        BOOST_LOG_SEV(lg, info) << "Merging model: '" << m.name()
-                                << "' pods: " << m.pods().size()
-                                << " primitives: " << m.primitives().size()
-                                << " enumerations: " << m.enumerations().size()
-                                << " exceptions: " << m.exceptions().size();
-
-        for (const auto& p : m.pods()) {
-            check_qname(n, meta_types::pod, p.first, p.second.name());
-            merged_model_.pods().insert(p);
-        }
-
-        for (const auto& p : m.primitives()) {
-            // FIXME: mega hack to handle primitive model.
-            check_qname(
-                (n == primitive_model_name ? empty : n),
-                meta_types::primitive, p.first, p.second.name());
-            merged_model_.primitives().insert(p);
-        }
-
-        for (const auto& p : m.enumerations()) {
-            check_qname(n, meta_types::enumeration, p.first, p.second.name());
-            merged_model_.enumerations().insert(p);
-        }
-
-        for (const auto& p : m.exceptions()) {
-            check_qname(n, meta_types::exception, p.first, p.second.name());
-            merged_model_.exceptions().insert(p);
-        }
-    }
-
+    validate_references();
+    merge_models();
     has_merged_ = true;
     return merged_model_;
 }

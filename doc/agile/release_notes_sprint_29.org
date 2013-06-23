@@ -10,18 +10,18 @@ This file contains all stories that were closed during sprint 29.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-06-23 Sun 21:22]
+Clock summary at [2013-06-23 Sun 22:06]
 
 | Headline                                                           | Time    |       |      |
 |--------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                       | *12:54* |       |      |
+| *Total time*                                                       | *13:37* |       |      |
 |--------------------------------------------------------------------+---------+-------+------|
-| Development Stories Implemented                                    |         | 12:54 |      |
+| Development Stories Implemented                                    |         | 13:37 |      |
 | IMPLEMENTATION Release notes and backlog grooming                  |         |       | 0:53 |
 | COMPLETED Make design by contract methods consistent in dia to sml |         |       | 0:52 |
 | COMPLETED Split resolver from merger                               |         |       | 3:18 |
 | IMPLEMENTATION Design the inheritance tree of DDD classes in SML   |         |       | 1:25 |
-| IMPLEMENTATION Implement concepts in SML                           |         |       | 6:26 |
+| IMPLEMENTATION Implement concepts in SML                           |         |       | 7:09 |
 #+end:
 
 *** IMPLEMENTATION Release notes and backlog grooming                  :task:
@@ -168,7 +168,10 @@ to start making use of them.
 - transformer to throw when transforming pod if it has more than one
   parent.
 
-**** IMPLEMENTATION Add support for concepts to the dia to sml transformer :task:
+**** COMPLETED Add support for concepts to the dia to sml transformer  :task:
+     CLOSED: [2013-06-23 Sun 22:05]
+     CLOCK: [2013-06-23 Sun 21:38]--[2013-06-23 Sun 22:05] =>  0:27
+     CLOCK: [2013-06-23 Sun 21:22]--[2013-06-23 Sun 21:38] =>  0:16
      CLOCK: [2013-06-23 Sun 21:11]--[2013-06-23 Sun 21:22] =>  0:11
      CLOCK: [2013-06-23 Sun 19:10]--[2013-06-23 Sun 20:50] =>  1:40
      CLOCK: [2013-06-23 Sun 08:24]--[2013-06-23 Sun 08:50] =>  0:26

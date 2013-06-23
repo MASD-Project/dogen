@@ -37,6 +37,7 @@ auto lg(logger_factory("sml.resolver"));
 
 const std::string empty;
 const std::string orphan_pod("Pod's parent could not be located: ");
+const std::string orphan_concept("Refined concept could not be located: ");
 const std::string undefined_type("Pod has property with undefined type: ");
 const std::string missing_dependency("Cannot find dependency: ");
 const std::string model_resolved("Resolution has already been done for model");
@@ -50,22 +51,38 @@ namespace sml {
 
 resolver::resolver(model& m) : model_(m), has_resolved_(false) { }
 
-void resolver::resolve_parent(const pod& pod) {
-    const auto& pods(model_.pods());
-    auto parent(pod.parent_name());
-
+void resolver::validate_inheritance_graph(const pod& p) const {
+    // FIXME: we should really just check that the parent exists since
+    // we know all pods get checked anyway. this results in a lot of
+    // double-checks for no reason.
+    auto parent(p.parent_name());
     while (parent) {
         qname pqn(*parent);
-        const auto i(pods.find(pqn));
-        if (i == pods.end()) {
+        const auto i(model_.pods().find(pqn));
+        if (i == model_.pods().end()) {
             std::ostringstream stream;
             stream << orphan_pod << ". pod: "
-                   << pod.name().type_name() << ". parent: "
+                   << p.name().type_name() << ". parent: "
                    << pqn.type_name();
             BOOST_LOG_SEV(lg, error) << stream.str();
             BOOST_THROW_EXCEPTION(resolution_error(stream.str()));
         }
         parent = i->second.parent_name();
+    }
+}
+
+void resolver::validate_refinements(const concept& c) const {
+    for (const auto& qn : c.refines()) {
+        const auto i(model_.concepts().find(qn));
+        if (i == model_.concepts().end()) {
+            std::ostringstream stream;
+            stream << orphan_concept << ". concept: "
+                   << c.name().type_name() << ". refined concept: "
+                   << qn.type_name();
+
+            BOOST_LOG_SEV(lg, error) << stream.str();
+            BOOST_THROW_EXCEPTION(resolution_error(stream.str()));
+        }
     }
 }
 
@@ -158,9 +175,9 @@ void resolver::resolve_partial_type(nested_qname& n) const {
     n.type(qn);
 }
 
-std::vector<property>
-resolver::resolve_properties(const pod& pod) {
-    auto r(pod.properties());
+std::vector<property> resolver::resolve_properties(const qname& owner,
+    const std::vector<property>& unresolved_properties) const {
+    auto r(unresolved_properties);
 
     for (unsigned int i(0); i < r.size(); ++i) {
         property property(r[i]);
@@ -172,7 +189,7 @@ resolver::resolve_properties(const pod& pod) {
             r[i] = property;
         } catch (boost::exception& e) {
             std::ostringstream s;
-            s << "Pod: " << pod.name().type_name()
+            s << "Pod: " << owner.type_name()
               << " Property: " << property.name()
               << " type: " << property.type_name();
             e << errmsg_info(s.str());
@@ -209,20 +226,30 @@ void resolver::add_reference(const reference& ref) {
     references_.insert(std::make_pair(ref.model_name(), ref));
 }
 
+void resolver::resolve_concepts() {
+    for (auto& pair : model_.concepts()) {
+        concept& c(pair.second);
+        c.properties(resolve_properties(c.name(), c.properties()));
+        validate_refinements(c);
+    }
+}
+
+void resolver::resolve_pods() {
+    for (auto& pair : model_.pods()) {
+        pod& p(pair.second);
+        if (p.generation_type() == generation_types::no_generation)
+            continue;
+
+        validate_inheritance_graph(p);
+        p.properties(resolve_properties(p.name(), p.properties()));
+    }
+}
+
 void resolver::resolve() {
     require_not_has_resolved();
     resolve_references();
-
-    for (auto& pair : model_.pods()) {
-        const qname qname(pair.first);
-        pod& pod(pair.second);
-        if (pod.generation_type() == generation_types::no_generation)
-            continue;
-
-        resolve_parent(pod);
-        pod.properties(resolve_properties(pod));
-    }
-
+    resolve_pods();
+    resolve_concepts();
     has_resolved_ = true;
 }
 
