@@ -405,6 +405,32 @@ Dependencies is a map of reference; why not call it references?
 
 All stories related to IoC work are tracked here.
 
+new understanding:
+
+in reality, there is really only one place where IoC makes sense: in
+the workflows. It would be great if one could pass in something akin
+to a IoC container into the workflow's constructor and then use the
+container to obtain access to all services via interfaces. Using
+sml::workflow as an example, one could have:
+
+- container_interface which returns grapher_interface,
+  processor_interface, etc.
+- the container could even return references to the these interfaces
+  and own the lifetime of the objects.
+- this would then allow us to provide mock container interface
+  implementations returning mock services.
+
+However:
+
+- it seems like a lot of moving parts just to allow testing the
+  workflow in isolation. this is particularly more so in the case of
+  the workflows we have, which are fairly trivial. perhaps we should
+  consider this approach when dogen is generating the interfaces
+  automatically as this would require a lot of manual work for little
+  gain.
+
+old understanding:
+
 - add workflow_interface to SML.
 - we should be doing a bit more IoC, particularly with inclusion
   manager, location manager etc. In order to do so we could define
