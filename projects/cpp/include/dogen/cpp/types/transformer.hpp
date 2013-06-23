@@ -64,17 +64,25 @@ public:
 
 private:
     /**
+     * @brief Collects all the properties associated with a concept,
+     * and any otheer concepts it may refine.
+     */
+    void properties_for_concept(const sml::qname& qn,
+        std::list<sml::property>& properties) const;
+
+private:
+    /**
      * @brief Converts an SML qname into a C++ qualified name.
      */
     std::string
-    transform_into_qualified_name(const dogen::sml::qname& qn) const;
+    transform_into_qualified_name(const sml::qname& qn) const;
 
     /**
      * @brief Flattens all the SML namespace information stored in qname
      * into a list of strings with C++ namespaces.
      */
     std::list<std::string>
-    transform_into_namespace_list(const dogen::sml::qname& qn) const;
+    transform_into_namespace_list(const sml::qname& qn) const;
 
     /**
      * @brief Transforms an SML property to an enumerator info.

@@ -75,6 +75,7 @@ const std::string uint32_t_type("std::uint32_t");
 const std::string uint64_t_type("std::uint64_t");
 
 const std::string pod_not_found("pod not found in pod container: ");
+const std::string concept_not_found("Concept not found in concept container: ");
 const std::string parent_info_not_supplied(
     "Type has a parent but no parent info supplied: ");
 const std::string parent_info_supplied(
@@ -172,8 +173,25 @@ namespace cpp {
 
 transformer::transformer(const sml::model& m) : model_(m) { }
 
+void transformer::properties_for_concept(const sml::qname& qn,
+    std::list<sml::property>& properties) const {
+    const auto i(model_.concepts().find(qn));
+    if (i == model_.concepts().end()) {
+        using dogen::cpp::transformation_error;
+        BOOST_LOG_SEV(lg, error) << concept_not_found << qn.type_name();
+        BOOST_THROW_EXCEPTION(transformation_error(concept_not_found +
+                qn.type_name()));
+    }
+
+    const auto& props(i->second.properties());
+    properties.insert(properties.end(), props.begin(), props.end());
+
+    for (const auto& c : i->second.refines())
+        properties_for_concept(c, properties);
+}
+
 std::string
-transformer::transform_into_qualified_name(const dogen::sml::qname& qn) const {
+transformer::transform_into_qualified_name(const sml::qname& qn) const {
     std::list<std::string> l(transform_into_namespace_list(qn));
     l.push_back(qn.type_name());
 
@@ -183,7 +201,7 @@ transformer::transform_into_qualified_name(const dogen::sml::qname& qn) const {
 }
 
 std::list<std::string>
-transformer::transform_into_namespace_list(const dogen::sml::qname& qn) const {
+transformer::transform_into_namespace_list(const sml::qname& qn) const {
     std::list<std::string> r(qn.external_module_path());
 
     if (!qn.model_name().empty())
@@ -301,7 +319,7 @@ void transformer::transform(const sml::nested_qname& nqn,
     nti.name(qualified_name);
     nti.namespaces(transform_into_namespace_list(qn));
 
-    using dogen::sml::meta_types;
+    using sml::meta_types;
     nti.is_enumeration(qn.meta_type() == meta_types::enumeration);
     nti.is_primitive(qn.meta_type() == meta_types::primitive);
     if (nti.is_primitive()) {
@@ -329,7 +347,7 @@ void transformer::transform(const sml::nested_qname& nqn,
                 qn.type_name()));
         }
         const auto pt(i->second.pod_type());
-        using dogen::sml::pod_types;
+        using sml::pod_types;
         nti.is_sequence_container(pt == pod_types::sequence_container);
         nti.is_associative_container(pt == pod_types::associative_container);
         nti.is_smart_pointer(pt == pod_types::smart_pointer);
@@ -454,7 +472,12 @@ transform(const sml::pod& p, const optional_class_info pci,
         r.is_original_parent_visitable(opci->is_visitable());
     }
 
-    for(const auto& prop : p.properties()) {
+    auto properties(p.properties());
+    for (const auto& qn : p.modeled_concepts()) {
+        properties_for_concept(qn, properties);
+    }
+
+    for (const auto& prop : properties) {
         const auto tuple(transform(prop, p.is_immutable(), p.is_fluent()));
         r.properties().push_back(std::get<0>(tuple));
         r.all_properties().push_back(std::get<0>(tuple));

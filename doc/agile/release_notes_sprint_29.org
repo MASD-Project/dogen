@@ -196,7 +196,9 @@ to start making use of them.
   a meta type of concept
 - merger to check that all such concepts exist in model.
 
-**** IMPLEMENTATION When transforming a pod, copy across properties from concept :task:
+**** COMPLETED Copy properties from concept when transforming a pod    :task:
+     CLOSED: [2013-06-23 Sun 23:14]
+     CLOCK: [2013-06-23 Sun 22:54]--[2013-06-23 Sun 23:14] =>  0:20
      CLOCK: [2013-06-23 Sun 22:07]--[2013-06-23 Sun 22:19] =>  0:12
 
 - in CPP model's transformer, traverse concepts and add properties.
