@@ -45,6 +45,7 @@
 #include "dogen/stereotypes/hash/just_identity_ver_hash.hpp"
 #include "dogen/stereotypes/hash/just_identity_ver_unversioned_key_hash.hpp"
 #include "dogen/stereotypes/hash/just_identity_ver_versioned_key_hash.hpp"
+#include "dogen/stereotypes/hash/multi_concept_model_hash.hpp"
 #include "dogen/stereotypes/hash/multiple_refinement_concept_model_hash.hpp"
 #include "dogen/stereotypes/hash/pkg1/keyed_in_package_hash.hpp"
 #include "dogen/stereotypes/hash/pkg1/keyed_in_package_unversioned_key_hash.hpp"

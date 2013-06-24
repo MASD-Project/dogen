@@ -45,6 +45,7 @@
 #include "dogen/stereotypes/odb/just_identity_ver_pragmas.hpp"
 #include "dogen/stereotypes/odb/just_identity_ver_unversioned_key_pragmas.hpp"
 #include "dogen/stereotypes/odb/just_identity_ver_versioned_key_pragmas.hpp"
+#include "dogen/stereotypes/odb/multi_concept_model_pragmas.hpp"
 #include "dogen/stereotypes/odb/multiple_refinement_concept_model_pragmas.hpp"
 #include "dogen/stereotypes/odb/pkg1/keyed_in_package_pragmas.hpp"
 #include "dogen/stereotypes/odb/pkg1/keyed_in_package_unversioned_key_pragmas.hpp"

@@ -45,6 +45,7 @@
 #include "dogen/stereotypes/serialization/just_identity_ver_ser.hpp"
 #include "dogen/stereotypes/serialization/just_identity_ver_unversioned_key_ser.hpp"
 #include "dogen/stereotypes/serialization/just_identity_ver_versioned_key_ser.hpp"
+#include "dogen/stereotypes/serialization/multi_concept_model_ser.hpp"
 #include "dogen/stereotypes/serialization/multiple_refinement_concept_model_ser.hpp"
 #include "dogen/stereotypes/serialization/pkg1/keyed_in_package_ser.hpp"
 #include "dogen/stereotypes/serialization/pkg1/keyed_in_package_unversioned_key_ser.hpp"

@@ -45,6 +45,7 @@
 #include "dogen/stereotypes/types/just_identity_ver.hpp"
 #include "dogen/stereotypes/types/just_identity_ver_unversioned_key.hpp"
 #include "dogen/stereotypes/types/just_identity_ver_versioned_key.hpp"
+#include "dogen/stereotypes/types/multi_concept_model.hpp"
 #include "dogen/stereotypes/types/multiple_refinement_concept_model.hpp"
 #include "dogen/stereotypes/types/pkg1/keyed_in_package.hpp"
 #include "dogen/stereotypes/types/pkg1/keyed_in_package_unversioned_key.hpp"
