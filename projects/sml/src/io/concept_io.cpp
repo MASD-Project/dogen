@@ -18,17 +18,89 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/algorithm/string.hpp>
 #include <ostream>
 #include "dogen/sml/io/concept_io.hpp"
-#include "dogen/sml/io/model_element_io.hpp"
+#include "dogen/sml/io/generation_types_io.hpp"
 #include "dogen/sml/io/property_io.hpp"
 #include "dogen/sml/io/qname_io.hpp"
+
+namespace std {
+
+inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::sml::property>& v) {
+    s << "[ ";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << *i;
+    }
+    s << "] ";
+    return s;
+}
+
+}
+
+
+inline std::string tidy_up_string(std::string s) {
+    boost::replace_all(s, "\r\n", "<new_line>");
+    boost::replace_all(s, "\n", "<new_line>");
+    boost::replace_all(s, "\"", "<quote>");
+    return s;
+}
+
+namespace std {
+
+inline std::ostream& operator<<(std::ostream& s, const std::pair<std::string, std::string>& v) {
+    s << "{ " << "\"__type__\": " << "\"std::pair\"" << ", ";
+
+    s << "\"first\": " << "\"" << tidy_up_string(v.first) << "\"" << ", ";
+    s << "\"second\": " << "\"" << tidy_up_string(v.second) << "\"";
+    s << " }";
+    return s;
+}
+
+}
+
+namespace std {
+
+inline std::ostream& operator<<(std::ostream& s, const std::vector<std::pair<std::string, std::string> >& v) {
+    s << "[ ";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << *i;
+    }
+    s << "] ";
+    return s;
+}
+
+}
+
+namespace std {
+
+inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::sml::qname>& v) {
+    s << "[ ";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << *i;
+    }
+    s << "] ";
+    return s;
+}
+
+}
 
 namespace dogen {
 namespace sml {
 
 std::ostream& operator<<(std::ostream& s, const concept& v) {
-    v.to_stream(s);
+    s << " { "
+      << "\"__type__\": " << "\"dogen::sml::concept\"" << ", "
+      << "\"properties\": " << v.properties() << ", "
+      << "\"documentation\": " << "\"" << tidy_up_string(v.documentation()) << "\"" << ", "
+      << "\"implementation_specific_parameters\": " << v.implementation_specific_parameters() << ", "
+      << "\"name\": " << v.name() << ", "
+      << "\"generation_type\": " << v.generation_type() << ", "
+      << "\"refines\": " << v.refines()
+      << " }";
     return(s);
 }
 

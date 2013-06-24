@@ -19,7 +19,6 @@
  *
  */
 #include <sstream>
-#include "dogen/sml/test_data/concept_td.hpp"
 #include "dogen/sml/test_data/entity_td.hpp"
 #include "dogen/sml/test_data/factory_td.hpp"
 #include "dogen/sml/test_data/generation_types_td.hpp"
@@ -79,16 +78,14 @@ populate(const unsigned int position, result_type& v) {
 
 model_element_generator::result_type*
 model_element_generator::create_ptr(const unsigned int position) {
-    if ((position % 5) == 0)
+    if ((position % 4) == 0)
         return dogen::sml::entity_generator::create_ptr(position);
-    if ((position % 5) == 1)
+    if ((position % 4) == 1)
         return dogen::sml::service_generator::create_ptr(position);
-    if ((position % 5) == 2)
+    if ((position % 4) == 2)
         return dogen::sml::factory_generator::create_ptr(position);
-    if ((position % 5) == 3)
+    if ((position % 4) == 3)
         return dogen::sml::repository_generator::create_ptr(position);
-    if ((position % 5) == 4)
-        return dogen::sml::concept_generator::create_ptr(position);
     return dogen::sml::value_generator::create_ptr(position);
 }
 

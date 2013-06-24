@@ -26,11 +26,12 @@
 #endif
 
 #include <algorithm>
-#include <iosfwd>
 #include <list>
+#include <string>
+#include <utility>
+#include <vector>
 #include "dogen/sml/serialization/concept_fwd_ser.hpp"
-#include "dogen/sml/types/model_element.hpp"
-#include "dogen/sml/types/model_element_visitor.hpp"
+#include "dogen/sml/types/generation_types.hpp"
 #include "dogen/sml/types/property.hpp"
 #include "dogen/sml/types/qname.hpp"
 
@@ -40,21 +41,22 @@ namespace sml {
 /**
  * @brief Represents a concept, similar to the C++ definition.
  */
-class concept final : public dogen::sml::model_element {
+class concept final {
 public:
-    concept() = default;
     concept(const concept&) = default;
     concept(concept&&) = default;
+    ~concept() = default;
 
-    virtual ~concept() noexcept { }
+public:
+    concept();
 
 public:
     concept(
-        const dogen::sml::qname& name,
+        const std::list<dogen::sml::property>& properties,
         const std::string& documentation,
         const std::vector<std::pair<std::string, std::string> >& implementation_specific_parameters,
+        const dogen::sml::qname& name,
         const dogen::sml::generation_types& generation_type,
-        const std::list<dogen::sml::property>& properties,
         const std::list<dogen::sml::qname>& refines);
 
 private:
@@ -65,28 +67,8 @@ private:
     friend void boost::serialization::load(Archive& ar, concept& v, unsigned int version);
 
 public:
-    virtual void accept(const model_element_visitor& v) const override {
-        v.visit(*this);
-    }
-
-    virtual void accept(model_element_visitor& v) const override {
-        v.visit(*this);
-    }
-
-    virtual void accept(const model_element_visitor& v) override {
-        v.visit(*this);
-    }
-
-    virtual void accept(model_element_visitor& v) override {
-        v.visit(*this);
-    }
-
-public:
-    void to_stream(std::ostream& s) const override;
-
-public:
     /**
-     * @brief Attributes that belong to this type.
+     * @brief State of this entity.
      *
      * Does not include inherited attributes.
      */
@@ -95,6 +77,49 @@ public:
     std::list<dogen::sml::property>& properties();
     void properties(const std::list<dogen::sml::property>& v);
     void properties(const std::list<dogen::sml::property>&& v);
+    /**@}*/
+
+    /**
+     * @brief Code comments.
+     *
+     * These are expected to follow the grammer of the comment processing tools
+     * of the programming language in question, e.g. Doxygen for C++, JavaDoc
+     * for Java, etc.
+     */
+    /**@{*/
+    const std::string& documentation() const;
+    std::string& documentation();
+    void documentation(const std::string& v);
+    void documentation(const std::string&& v);
+    /**@}*/
+
+    /**
+     * @brief Associated generic parameters which may be opaque.
+     */
+    /**@{*/
+    const std::vector<std::pair<std::string, std::string> >& implementation_specific_parameters() const;
+    std::vector<std::pair<std::string, std::string> >& implementation_specific_parameters();
+    void implementation_specific_parameters(const std::vector<std::pair<std::string, std::string> >& v);
+    void implementation_specific_parameters(const std::vector<std::pair<std::string, std::string> >&& v);
+    /**@}*/
+
+    /**
+     * @brief Fully qualified name.
+     *
+     */
+    /**@{*/
+    const dogen::sml::qname& name() const;
+    dogen::sml::qname& name();
+    void name(const dogen::sml::qname& v);
+    void name(const dogen::sml::qname&& v);
+    /**@}*/
+
+    /**
+     * @brief What to do with this pod in terms of code generation,
+     */
+    /**@{*/
+    dogen::sml::generation_types generation_type() const;
+    void generation_type(const dogen::sml::generation_types& v);
     /**@}*/
 
     /**
@@ -114,14 +139,15 @@ public:
     }
 
 public:
-    bool equals(const dogen::sml::model_element& other) const override;
-
-public:
     void swap(concept& other) noexcept;
     concept& operator=(concept other);
 
 private:
     std::list<dogen::sml::property> properties_;
+    std::string documentation_;
+    std::vector<std::pair<std::string, std::string> > implementation_specific_parameters_;
+    dogen::sml::qname name_;
+    dogen::sml::generation_types generation_type_;
     std::list<dogen::sml::qname> refines_;
 };
 

@@ -18,85 +18,44 @@
  * MA 02110-1301, USA.
  *
  */
-#include <ostream>
-#include "dogen/sml/io/model_element_io.hpp"
-#include "dogen/sml/io/property_io.hpp"
-#include "dogen/sml/io/qname_io.hpp"
 #include "dogen/sml/types/concept.hpp"
-
-namespace std {
-
-inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::sml::property>& v) {
-    s << "[ ";
-    for (auto i(v.begin()); i != v.end(); ++i) {
-        if (i != v.begin()) s << ", ";
-        s << *i;
-    }
-    s << "] ";
-    return s;
-}
-
-}
-
-namespace std {
-
-inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::sml::qname>& v) {
-    s << "[ ";
-    for (auto i(v.begin()); i != v.end(); ++i) {
-        if (i != v.begin()) s << ", ";
-        s << *i;
-    }
-    s << "] ";
-    return s;
-}
-
-}
 
 namespace dogen {
 namespace sml {
 
+concept::concept()
+    : generation_type_(static_cast<dogen::sml::generation_types>(0)) { }
+
 concept::concept(
-    const dogen::sml::qname& name,
+    const std::list<dogen::sml::property>& properties,
     const std::string& documentation,
     const std::vector<std::pair<std::string, std::string> >& implementation_specific_parameters,
+    const dogen::sml::qname& name,
     const dogen::sml::generation_types& generation_type,
-    const std::list<dogen::sml::property>& properties,
     const std::list<dogen::sml::qname>& refines)
-    : dogen::sml::model_element(name,
-      documentation,
-      implementation_specific_parameters,
-      generation_type),
-      properties_(properties),
+    : properties_(properties),
+      documentation_(documentation),
+      implementation_specific_parameters_(implementation_specific_parameters),
+      name_(name),
+      generation_type_(generation_type),
       refines_(refines) { }
 
-void concept::to_stream(std::ostream& s) const {
-    s << " { "
-      << "\"__type__\": " << "\"dogen::sml::concept\"" << ", "
-      << "\"__parent_0__\": ";
-    model_element::to_stream(s);
-    s << ", "
-      << "\"properties\": " << properties_ << ", "
-      << "\"refines\": " << refines_
-      << " }";
-}
-
 void concept::swap(concept& other) noexcept {
-    model_element::swap(other);
-
     using std::swap;
     swap(properties_, other.properties_);
+    swap(documentation_, other.documentation_);
+    swap(implementation_specific_parameters_, other.implementation_specific_parameters_);
+    swap(name_, other.name_);
+    swap(generation_type_, other.generation_type_);
     swap(refines_, other.refines_);
 }
 
-bool concept::equals(const dogen::sml::model_element& other) const {
-    const concept* const p(dynamic_cast<const concept* const>(&other));
-    if (!p) return false;
-    return *this == *p;
-}
-
 bool concept::operator==(const concept& rhs) const {
-    return model_element::compare(rhs) &&
-        properties_ == rhs.properties_ &&
+    return properties_ == rhs.properties_ &&
+        documentation_ == rhs.documentation_ &&
+        implementation_specific_parameters_ == rhs.implementation_specific_parameters_ &&
+        name_ == rhs.name_ &&
+        generation_type_ == rhs.generation_type_ &&
         refines_ == rhs.refines_;
 }
 
@@ -120,6 +79,62 @@ void concept::properties(const std::list<dogen::sml::property>& v) {
 
 void concept::properties(const std::list<dogen::sml::property>&& v) {
     properties_ = std::move(v);
+}
+
+const std::string& concept::documentation() const {
+    return documentation_;
+}
+
+std::string& concept::documentation() {
+    return documentation_;
+}
+
+void concept::documentation(const std::string& v) {
+    documentation_ = v;
+}
+
+void concept::documentation(const std::string&& v) {
+    documentation_ = std::move(v);
+}
+
+const std::vector<std::pair<std::string, std::string> >& concept::implementation_specific_parameters() const {
+    return implementation_specific_parameters_;
+}
+
+std::vector<std::pair<std::string, std::string> >& concept::implementation_specific_parameters() {
+    return implementation_specific_parameters_;
+}
+
+void concept::implementation_specific_parameters(const std::vector<std::pair<std::string, std::string> >& v) {
+    implementation_specific_parameters_ = v;
+}
+
+void concept::implementation_specific_parameters(const std::vector<std::pair<std::string, std::string> >&& v) {
+    implementation_specific_parameters_ = std::move(v);
+}
+
+const dogen::sml::qname& concept::name() const {
+    return name_;
+}
+
+dogen::sml::qname& concept::name() {
+    return name_;
+}
+
+void concept::name(const dogen::sml::qname& v) {
+    name_ = v;
+}
+
+void concept::name(const dogen::sml::qname&& v) {
+    name_ = std::move(v);
+}
+
+dogen::sml::generation_types concept::generation_type() const {
+    return generation_type_;
+}
+
+void concept::generation_type(const dogen::sml::generation_types& v) {
+    generation_type_ = v;
 }
 
 const std::list<dogen::sml::qname>& concept::refines() const {

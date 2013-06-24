@@ -30,7 +30,6 @@
 #include <boost/serialization/string.hpp>
 #include <boost/serialization/utility.hpp>
 #include <boost/serialization/vector.hpp>
-#include "dogen/sml/serialization/concept_ser.hpp"
 #include "dogen/sml/serialization/entity_ser.hpp"
 #include "dogen/sml/serialization/factory_ser.hpp"
 #include "dogen/sml/serialization/generation_types_ser.hpp"

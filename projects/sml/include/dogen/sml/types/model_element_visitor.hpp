@@ -25,7 +25,6 @@
 #pragma once
 #endif
 
-#include "dogen/sml/types/concept_fwd.hpp"
 #include "dogen/sml/types/entity_fwd.hpp"
 #include "dogen/sml/types/factory_fwd.hpp"
 #include "dogen/sml/types/model_element_fwd.hpp"
@@ -90,16 +89,6 @@ public:
     virtual void visit(const dogen::sml::repository&) { }
     virtual void visit(dogen::sml::repository&) const { }
     virtual void visit(dogen::sml::repository&) { }
-    /**@}*/
-
-    /**
-     * @brief Accept visits for type dogen::sml::concept
-     */
-    /**@{*/
-    virtual void visit(const dogen::sml::concept&) const { }
-    virtual void visit(const dogen::sml::concept&) { }
-    virtual void visit(dogen::sml::concept&) const { }
-    virtual void visit(dogen::sml::concept&) { }
     /**@}*/
 };
 
