@@ -29,7 +29,6 @@
 #include "dogen/sml/types/entity_fwd.hpp"
 #include "dogen/sml/types/factory_fwd.hpp"
 #include "dogen/sml/types/model_element_fwd.hpp"
-#include "dogen/sml/types/module_fwd.hpp"
 #include "dogen/sml/types/repository_fwd.hpp"
 #include "dogen/sml/types/service_fwd.hpp"
 #include "dogen/sml/types/typed_element_fwd.hpp"
@@ -43,16 +42,6 @@ public:
     virtual ~model_element_visitor() noexcept = 0;
 
 public:
-    /**
-     * @brief Accept visits for type dogen::sml::module
-     */
-    /**@{*/
-    virtual void visit(const dogen::sml::module&) const { }
-    virtual void visit(const dogen::sml::module&) { }
-    virtual void visit(dogen::sml::module&) const { }
-    virtual void visit(dogen::sml::module&) { }
-    /**@}*/
-
     /**
      * @brief Accept visits for type dogen::sml::value
      */

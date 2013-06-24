@@ -35,7 +35,6 @@
 #include "dogen/sml/serialization/factory_ser.hpp"
 #include "dogen/sml/serialization/generation_types_ser.hpp"
 #include "dogen/sml/serialization/model_element_ser.hpp"
-#include "dogen/sml/serialization/module_ser.hpp"
 #include "dogen/sml/serialization/qname_ser.hpp"
 #include "dogen/sml/serialization/repository_ser.hpp"
 #include "dogen/sml/serialization/service_ser.hpp"

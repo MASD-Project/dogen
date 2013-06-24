@@ -18,65 +18,40 @@
  * MA 02110-1301, USA.
  *
  */
-#include <ostream>
-#include "dogen/sml/io/model_element_io.hpp"
-#include "dogen/sml/io/qname_io.hpp"
 #include "dogen/sml/types/module.hpp"
-
-namespace std {
-
-inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::sml::qname>& v) {
-    s << "[ ";
-    for (auto i(v.begin()); i != v.end(); ++i) {
-        if (i != v.begin()) s << ", ";
-        s << *i;
-    }
-    s << "] ";
-    return s;
-}
-
-}
 
 namespace dogen {
 namespace sml {
 
+module::module()
+    : generation_type_(static_cast<dogen::sml::generation_types>(0)) { }
+
 module::module(
-    const dogen::sml::qname& name,
     const std::string& documentation,
     const std::vector<std::pair<std::string, std::string> >& implementation_specific_parameters,
+    const dogen::sml::qname& name,
     const dogen::sml::generation_types& generation_type,
     const std::list<dogen::sml::qname>& members)
-    : dogen::sml::model_element(name,
-      documentation,
-      implementation_specific_parameters,
-      generation_type),
+    : documentation_(documentation),
+      implementation_specific_parameters_(implementation_specific_parameters),
+      name_(name),
+      generation_type_(generation_type),
       members_(members) { }
 
-void module::to_stream(std::ostream& s) const {
-    s << " { "
-      << "\"__type__\": " << "\"dogen::sml::module\"" << ", "
-      << "\"__parent_0__\": ";
-    model_element::to_stream(s);
-    s << ", "
-      << "\"members\": " << members_
-      << " }";
-}
-
 void module::swap(module& other) noexcept {
-    model_element::swap(other);
-
     using std::swap;
+    swap(documentation_, other.documentation_);
+    swap(implementation_specific_parameters_, other.implementation_specific_parameters_);
+    swap(name_, other.name_);
+    swap(generation_type_, other.generation_type_);
     swap(members_, other.members_);
 }
 
-bool module::equals(const dogen::sml::model_element& other) const {
-    const module* const p(dynamic_cast<const module* const>(&other));
-    if (!p) return false;
-    return *this == *p;
-}
-
 bool module::operator==(const module& rhs) const {
-    return model_element::compare(rhs) &&
+    return documentation_ == rhs.documentation_ &&
+        implementation_specific_parameters_ == rhs.implementation_specific_parameters_ &&
+        name_ == rhs.name_ &&
+        generation_type_ == rhs.generation_type_ &&
         members_ == rhs.members_;
 }
 
@@ -84,6 +59,62 @@ module& module::operator=(module other) {
     using std::swap;
     swap(*this, other);
     return *this;
+}
+
+const std::string& module::documentation() const {
+    return documentation_;
+}
+
+std::string& module::documentation() {
+    return documentation_;
+}
+
+void module::documentation(const std::string& v) {
+    documentation_ = v;
+}
+
+void module::documentation(const std::string&& v) {
+    documentation_ = std::move(v);
+}
+
+const std::vector<std::pair<std::string, std::string> >& module::implementation_specific_parameters() const {
+    return implementation_specific_parameters_;
+}
+
+std::vector<std::pair<std::string, std::string> >& module::implementation_specific_parameters() {
+    return implementation_specific_parameters_;
+}
+
+void module::implementation_specific_parameters(const std::vector<std::pair<std::string, std::string> >& v) {
+    implementation_specific_parameters_ = v;
+}
+
+void module::implementation_specific_parameters(const std::vector<std::pair<std::string, std::string> >&& v) {
+    implementation_specific_parameters_ = std::move(v);
+}
+
+const dogen::sml::qname& module::name() const {
+    return name_;
+}
+
+dogen::sml::qname& module::name() {
+    return name_;
+}
+
+void module::name(const dogen::sml::qname& v) {
+    name_ = v;
+}
+
+void module::name(const dogen::sml::qname&& v) {
+    name_ = std::move(v);
+}
+
+dogen::sml::generation_types module::generation_type() const {
+    return generation_type_;
+}
+
+void module::generation_type(const dogen::sml::generation_types& v) {
+    generation_type_ = v;
 }
 
 const std::list<dogen::sml::qname>& module::members() const {

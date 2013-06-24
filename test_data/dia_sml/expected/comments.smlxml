@@ -319,34 +319,32 @@ This comment will be applied to the model namespace itself.
 				<type_name>package2</type_name>
 				<meta_type>6</meta_type>
 			</first>
-			<second class_id="20" tracking_level="1" version="0" object_id="_0">
-				<model_element class_id="21" tracking_level="0" version="0">
-					<name>
-						<model_name>comments</model_name>
-						<external_module_path>
-							<count>0</count>
-							<item_version>0</item_version>
-						</external_module_path>
-						<module_path>
-							<count>1</count>
-							<item_version>0</item_version>
-							<item>package</item>
-						</module_path>
-						<type_name>package2</type_name>
-						<meta_type>6</meta_type>
-					</name>
-					<documentation>package2
+			<second class_id="20" tracking_level="0" version="0">
+				<documentation>package2
 </documentation>
-					<implementation_specific_parameters>
+				<implementation_specific_parameters>
+					<count>1</count>
+					<item_version>0</item_version>
+					<item>
+						<first>COMMENT</first>
+						<second>true</second>
+					</item>
+				</implementation_specific_parameters>
+				<name>
+					<model_name>comments</model_name>
+					<external_module_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</external_module_path>
+					<module_path>
 						<count>1</count>
 						<item_version>0</item_version>
-						<item>
-							<first>COMMENT</first>
-							<second>true</second>
-						</item>
-					</implementation_specific_parameters>
-					<generation_type>0</generation_type>
-				</model_element>
+						<item>package</item>
+					</module_path>
+					<type_name>package2</type_name>
+					<meta_type>6</meta_type>
+				</name>
+				<generation_type>0</generation_type>
 				<members>
 					<count>0</count>
 					<item_version>0</item_version>
@@ -367,33 +365,31 @@ This comment will be applied to the model namespace itself.
 				<type_name>package</type_name>
 				<meta_type>6</meta_type>
 			</first>
-			<second object_id="_1">
-				<model_element>
-					<name>
-						<model_name>comments</model_name>
-						<external_module_path>
-							<count>0</count>
-							<item_version>0</item_version>
-						</external_module_path>
-						<module_path>
-							<count>0</count>
-							<item_version>0</item_version>
-						</module_path>
-						<type_name>package</type_name>
-						<meta_type>6</meta_type>
-					</name>
-					<documentation>package
+			<second>
+				<documentation>package
 </documentation>
-					<implementation_specific_parameters>
-						<count>1</count>
+				<implementation_specific_parameters>
+					<count>1</count>
+					<item_version>0</item_version>
+					<item>
+						<first>COMMENT</first>
+						<second>true</second>
+					</item>
+				</implementation_specific_parameters>
+				<name>
+					<model_name>comments</model_name>
+					<external_module_path>
+						<count>0</count>
 						<item_version>0</item_version>
-						<item>
-							<first>COMMENT</first>
-							<second>true</second>
-						</item>
-					</implementation_specific_parameters>
-					<generation_type>0</generation_type>
-				</model_element>
+					</external_module_path>
+					<module_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</module_path>
+					<type_name>package</type_name>
+					<meta_type>6</meta_type>
+				</name>
+				<generation_type>0</generation_type>
 				<members>
 					<count>0</count>
 					<item_version>0</item_version>
@@ -401,7 +397,7 @@ This comment will be applied to the model namespace itself.
 			</second>
 		</item>
 	</modules>
-	<concepts class_id="22" tracking_level="0" version="0">
+	<concepts class_id="21" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>11</bucket_count>
 		<item_version>0</item_version>

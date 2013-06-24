@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/sml/hash/model_element_hash.hpp"
+#include "dogen/sml/hash/generation_types_hash.hpp"
 #include "dogen/sml/hash/module_hash.hpp"
 #include "dogen/sml/hash/qname_hash.hpp"
 
@@ -29,6 +29,22 @@ inline void combine(std::size_t& seed, const HashableType& value)
 {
     std::hash<HashableType> hasher;
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
+}
+
+inline std::size_t hash_std_pair_std_string_std_string(const std::pair<std::string, std::string>& v){
+    std::size_t seed(0);
+
+    combine(seed, v.first);
+    combine(seed, v.second);
+    return seed;
+}
+
+inline std::size_t hash_std_vector_std_pair_std_string_std_string_(const std::vector<std::pair<std::string, std::string> >& v){
+    std::size_t seed(0);
+    for (const auto i : v) {
+        combine(seed, hash_std_pair_std_string_std_string(i));
+    }
+    return seed;
 }
 
 inline std::size_t hash_std_list_dogen_sml_qname(const std::list<dogen::sml::qname>& v){
@@ -47,9 +63,12 @@ namespace sml {
 std::size_t module_hasher::hash(const module&v) {
     std::size_t seed(0);
 
-    combine(seed, dynamic_cast<const dogen::sml::model_element&>(v));
-
+    combine(seed, v.documentation());
+    combine(seed, hash_std_vector_std_pair_std_string_std_string_(v.implementation_specific_parameters()));
+    combine(seed, v.name());
+    combine(seed, v.generation_type());
     combine(seed, hash_std_list_dogen_sml_qname(v.members()));
+
     return seed;
 }
 

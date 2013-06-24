@@ -856,28 +856,26 @@ this is a long comment</documentation>
 				<type_name>pkg1</type_name>
 				<meta_type>6</meta_type>
 			</first>
-			<second class_id="23" tracking_level="1" version="0" object_id="_3">
-				<model_element>
-					<name>
-						<model_name>enumeration</model_name>
-						<external_module_path>
-							<count>0</count>
-							<item_version>0</item_version>
-						</external_module_path>
-						<module_path>
-							<count>0</count>
-							<item_version>0</item_version>
-						</module_path>
-						<type_name>pkg1</type_name>
-						<meta_type>6</meta_type>
-					</name>
-					<documentation></documentation>
-					<implementation_specific_parameters>
+			<second class_id="23" tracking_level="0" version="0">
+				<documentation></documentation>
+				<implementation_specific_parameters>
+					<count>0</count>
+					<item_version>0</item_version>
+				</implementation_specific_parameters>
+				<name>
+					<model_name>enumeration</model_name>
+					<external_module_path>
 						<count>0</count>
 						<item_version>0</item_version>
-					</implementation_specific_parameters>
-					<generation_type>0</generation_type>
-				</model_element>
+					</external_module_path>
+					<module_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</module_path>
+					<type_name>pkg1</type_name>
+					<meta_type>6</meta_type>
+				</name>
+				<generation_type>0</generation_type>
 				<members>
 					<count>0</count>
 					<item_version>0</item_version>

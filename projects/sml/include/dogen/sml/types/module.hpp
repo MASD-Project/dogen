@@ -26,11 +26,12 @@
 #endif
 
 #include <algorithm>
-#include <iosfwd>
 #include <list>
+#include <string>
+#include <utility>
+#include <vector>
 #include "dogen/sml/serialization/module_fwd_ser.hpp"
-#include "dogen/sml/types/model_element.hpp"
-#include "dogen/sml/types/model_element_visitor.hpp"
+#include "dogen/sml/types/generation_types.hpp"
 #include "dogen/sml/types/qname.hpp"
 
 namespace dogen {
@@ -41,19 +42,20 @@ namespace sml {
  *
  * Aggregates a group of logically related types into a unit.
  */
-class module final : public dogen::sml::model_element {
+class module final {
 public:
-    module() = default;
     module(const module&) = default;
     module(module&&) = default;
+    ~module() = default;
 
-    virtual ~module() noexcept { }
+public:
+    module();
 
 public:
     module(
-        const dogen::sml::qname& name,
         const std::string& documentation,
         const std::vector<std::pair<std::string, std::string> >& implementation_specific_parameters,
+        const dogen::sml::qname& name,
         const dogen::sml::generation_types& generation_type,
         const std::list<dogen::sml::qname>& members);
 
@@ -65,26 +67,49 @@ private:
     friend void boost::serialization::load(Archive& ar, module& v, unsigned int version);
 
 public:
-    virtual void accept(const model_element_visitor& v) const override {
-        v.visit(*this);
-    }
+    /**
+     * @brief Code comments.
+     *
+     * These are expected to follow the grammer of the comment processing tools
+     * of the programming language in question, e.g. Doxygen for C++, JavaDoc
+     * for Java, etc.
+     */
+    /**@{*/
+    const std::string& documentation() const;
+    std::string& documentation();
+    void documentation(const std::string& v);
+    void documentation(const std::string&& v);
+    /**@}*/
 
-    virtual void accept(model_element_visitor& v) const override {
-        v.visit(*this);
-    }
+    /**
+     * @brief Associated generic parameters which may be opaque.
+     */
+    /**@{*/
+    const std::vector<std::pair<std::string, std::string> >& implementation_specific_parameters() const;
+    std::vector<std::pair<std::string, std::string> >& implementation_specific_parameters();
+    void implementation_specific_parameters(const std::vector<std::pair<std::string, std::string> >& v);
+    void implementation_specific_parameters(const std::vector<std::pair<std::string, std::string> >&& v);
+    /**@}*/
 
-    virtual void accept(const model_element_visitor& v) override {
-        v.visit(*this);
-    }
+    /**
+     * @brief Fully qualified name.
+     *
+     */
+    /**@{*/
+    const dogen::sml::qname& name() const;
+    dogen::sml::qname& name();
+    void name(const dogen::sml::qname& v);
+    void name(const dogen::sml::qname&& v);
+    /**@}*/
 
-    virtual void accept(model_element_visitor& v) override {
-        v.visit(*this);
-    }
+    /**
+     * @brief What to do with this pod in terms of code generation,
+     */
+    /**@{*/
+    dogen::sml::generation_types generation_type() const;
+    void generation_type(const dogen::sml::generation_types& v);
+    /**@}*/
 
-public:
-    void to_stream(std::ostream& s) const override;
-
-public:
     /**
      * @brief All the model elements contained in this module.
      */
@@ -102,13 +127,14 @@ public:
     }
 
 public:
-    bool equals(const dogen::sml::model_element& other) const override;
-
-public:
     void swap(module& other) noexcept;
     module& operator=(module other);
 
 private:
+    std::string documentation_;
+    std::vector<std::pair<std::string, std::string> > implementation_specific_parameters_;
+    dogen::sml::qname name_;
+    dogen::sml::generation_types generation_type_;
     std::list<dogen::sml::qname> members_;
 };
 

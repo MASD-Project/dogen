@@ -2909,28 +2909,26 @@ in the context of inheritance.
 				<type_name>pkg4</type_name>
 				<meta_type>6</meta_type>
 			</first>
-			<second class_id="22" tracking_level="1" version="0" object_id="_0">
-				<model_element class_id="23" tracking_level="0" version="0">
-					<name>
-						<model_name>trivial_inheritance</model_name>
-						<external_module_path>
-							<count>0</count>
-							<item_version>0</item_version>
-						</external_module_path>
-						<module_path>
-							<count>0</count>
-							<item_version>0</item_version>
-						</module_path>
-						<type_name>pkg4</type_name>
-						<meta_type>6</meta_type>
-					</name>
-					<documentation></documentation>
-					<implementation_specific_parameters>
+			<second class_id="22" tracking_level="0" version="0">
+				<documentation></documentation>
+				<implementation_specific_parameters>
+					<count>0</count>
+					<item_version>0</item_version>
+				</implementation_specific_parameters>
+				<name>
+					<model_name>trivial_inheritance</model_name>
+					<external_module_path>
 						<count>0</count>
 						<item_version>0</item_version>
-					</implementation_specific_parameters>
-					<generation_type>0</generation_type>
-				</model_element>
+					</external_module_path>
+					<module_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</module_path>
+					<type_name>pkg4</type_name>
+					<meta_type>6</meta_type>
+				</name>
+				<generation_type>0</generation_type>
 				<members>
 					<count>0</count>
 					<item_version>0</item_version>
@@ -2951,28 +2949,26 @@ in the context of inheritance.
 				<type_name>pkg3</type_name>
 				<meta_type>6</meta_type>
 			</first>
-			<second object_id="_1">
-				<model_element>
-					<name>
-						<model_name>trivial_inheritance</model_name>
-						<external_module_path>
-							<count>0</count>
-							<item_version>0</item_version>
-						</external_module_path>
-						<module_path>
-							<count>0</count>
-							<item_version>0</item_version>
-						</module_path>
-						<type_name>pkg3</type_name>
-						<meta_type>6</meta_type>
-					</name>
-					<documentation></documentation>
-					<implementation_specific_parameters>
+			<second>
+				<documentation></documentation>
+				<implementation_specific_parameters>
+					<count>0</count>
+					<item_version>0</item_version>
+				</implementation_specific_parameters>
+				<name>
+					<model_name>trivial_inheritance</model_name>
+					<external_module_path>
 						<count>0</count>
 						<item_version>0</item_version>
-					</implementation_specific_parameters>
-					<generation_type>0</generation_type>
-				</model_element>
+					</external_module_path>
+					<module_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</module_path>
+					<type_name>pkg3</type_name>
+					<meta_type>6</meta_type>
+				</name>
+				<generation_type>0</generation_type>
 				<members>
 					<count>0</count>
 					<item_version>0</item_version>
@@ -2993,28 +2989,26 @@ in the context of inheritance.
 				<type_name>pkg2</type_name>
 				<meta_type>6</meta_type>
 			</first>
-			<second object_id="_2">
-				<model_element>
-					<name>
-						<model_name>trivial_inheritance</model_name>
-						<external_module_path>
-							<count>0</count>
-							<item_version>0</item_version>
-						</external_module_path>
-						<module_path>
-							<count>0</count>
-							<item_version>0</item_version>
-						</module_path>
-						<type_name>pkg2</type_name>
-						<meta_type>6</meta_type>
-					</name>
-					<documentation></documentation>
-					<implementation_specific_parameters>
+			<second>
+				<documentation></documentation>
+				<implementation_specific_parameters>
+					<count>0</count>
+					<item_version>0</item_version>
+				</implementation_specific_parameters>
+				<name>
+					<model_name>trivial_inheritance</model_name>
+					<external_module_path>
 						<count>0</count>
 						<item_version>0</item_version>
-					</implementation_specific_parameters>
-					<generation_type>0</generation_type>
-				</model_element>
+					</external_module_path>
+					<module_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</module_path>
+					<type_name>pkg2</type_name>
+					<meta_type>6</meta_type>
+				</name>
+				<generation_type>0</generation_type>
 				<members>
 					<count>0</count>
 					<item_version>0</item_version>
@@ -3035,28 +3029,26 @@ in the context of inheritance.
 				<type_name>pkg1</type_name>
 				<meta_type>6</meta_type>
 			</first>
-			<second object_id="_3">
-				<model_element>
-					<name>
-						<model_name>trivial_inheritance</model_name>
-						<external_module_path>
-							<count>0</count>
-							<item_version>0</item_version>
-						</external_module_path>
-						<module_path>
-							<count>0</count>
-							<item_version>0</item_version>
-						</module_path>
-						<type_name>pkg1</type_name>
-						<meta_type>6</meta_type>
-					</name>
-					<documentation></documentation>
-					<implementation_specific_parameters>
+			<second>
+				<documentation></documentation>
+				<implementation_specific_parameters>
+					<count>0</count>
+					<item_version>0</item_version>
+				</implementation_specific_parameters>
+				<name>
+					<model_name>trivial_inheritance</model_name>
+					<external_module_path>
 						<count>0</count>
 						<item_version>0</item_version>
-					</implementation_specific_parameters>
-					<generation_type>0</generation_type>
-				</model_element>
+					</external_module_path>
+					<module_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</module_path>
+					<type_name>pkg1</type_name>
+					<meta_type>6</meta_type>
+				</name>
+				<generation_type>0</generation_type>
 				<members>
 					<count>0</count>
 					<item_version>0</item_version>
@@ -3064,7 +3056,7 @@ in the context of inheritance.
 			</second>
 		</item>
 	</modules>
-	<concepts class_id="24" tracking_level="0" version="0">
+	<concepts class_id="23" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>11</bucket_count>
 		<item_version>0</item_version>

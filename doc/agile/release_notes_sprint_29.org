@@ -10,13 +10,13 @@ This file contains all stories that were closed during sprint 29.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-06-24 Mon 23:18]
+Clock summary at [2013-06-24 Mon 23:29]
 
 | Headline                                                           | Time    |       |      |
 |--------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                       | *17:33* |       |      |
+| *Total time*                                                       | *17:43* |       |      |
 |--------------------------------------------------------------------+---------+-------+------|
-| Development Stories Implemented                                    |         | 17:33 |      |
+| Development Stories Implemented                                    |         | 17:43 |      |
 | IMPLEMENTATION Release notes and backlog grooming                  |         |       | 0:53 |
 | COMPLETED Make design by contract methods consistent in dia to sml |         |       | 0:52 |
 | COMPLETED Split resolver from merger                               |         |       | 3:18 |
@@ -25,7 +25,7 @@ Clock summary at [2013-06-24 Mon 23:18]
 | COMPLETED Design the inheritance tree of DDD classes in SML        |         |       | 2:02 |
 | COMPLETED Add concept properties in order of inheritance           |         |       | 0:18 |
 | COMPLETED Ensure extractor takes concepts into account             |         |       | 0:22 |
-| IMPLEMENTATION Update SML to make use of concepts                  |         |       | 0:06 |
+| IMPLEMENTATION Update SML to make use of concepts                  |         |       | 0:16 |
 #+end:
 
 *** IMPLEMENTATION Release notes and backlog grooming                  :task:
@@ -252,9 +252,12 @@ In S28 as part of "Break down SML into concepts at the design level"
 we have defined all of the main concepts that SML types should be
 using. Attempt to make use of these to simplify the model.
 
-**** IMPLEMENTATION Implement modules in terms of concepts             :task:
+**** COMPLETED Implement modules in terms of concepts                  :task:
+     CLOSED: [2013-06-24 Mon 23:29]
+     CLOCK: [2013-06-24 Mon 23:19]--[2013-06-24 Mon 23:29] =>  0:10
      CLOCK: [2013-06-24 Mon 22:55]--[2013-06-24 Mon 23:01] =>  0:06
 
+**** Implement concepts in terms of concepts                           :task:
 **** Revert back to a primitive class but now based on concepts        :task:
 **** Convert pods into entities, values or services                    :task:
 

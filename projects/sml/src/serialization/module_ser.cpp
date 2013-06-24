@@ -28,7 +28,10 @@
 #include <boost/archive/xml_oarchive.hpp>
 #include <boost/serialization/list.hpp>
 #include <boost/serialization/nvp.hpp>
-#include "dogen/sml/serialization/model_element_ser.hpp"
+#include <boost/serialization/string.hpp>
+#include <boost/serialization/utility.hpp>
+#include <boost/serialization/vector.hpp>
+#include "dogen/sml/serialization/generation_types_ser.hpp"
 #include "dogen/sml/serialization/module_ser.hpp"
 #include "dogen/sml/serialization/qname_ser.hpp"
 
@@ -37,10 +40,6 @@
 #include "eos/portable_oarchive.hpp"
 #endif
 
-BOOST_CLASS_TRACKING(
-    dogen::sml::module,
-    boost::serialization::track_selectively)
-
 namespace boost {
 namespace serialization {
 
@@ -48,8 +47,10 @@ template<typename Archive>
 void save(Archive& ar,
     const dogen::sml::module& v,
     const unsigned int /*version*/) {
-    ar << make_nvp("model_element", base_object<dogen::sml::model_element>(v));
-
+    ar << make_nvp("documentation", v.documentation_);
+    ar << make_nvp("implementation_specific_parameters", v.implementation_specific_parameters_);
+    ar << make_nvp("name", v.name_);
+    ar << make_nvp("generation_type", v.generation_type_);
     ar << make_nvp("members", v.members_);
 }
 
@@ -57,8 +58,10 @@ template<typename Archive>
 void load(Archive& ar,
     dogen::sml::module& v,
     const unsigned int /*version*/) {
-    ar >> make_nvp("model_element", base_object<dogen::sml::model_element>(v));
-
+    ar >> make_nvp("documentation", v.documentation_);
+    ar >> make_nvp("implementation_specific_parameters", v.implementation_specific_parameters_);
+    ar >> make_nvp("name", v.name_);
+    ar >> make_nvp("generation_type", v.generation_type_);
     ar >> make_nvp("members", v.members_);
 }
 
