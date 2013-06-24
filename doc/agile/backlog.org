@@ -11,6 +11,16 @@ This file contains all stories that haven't been assigned to a sprint.
 
 Stories that we intend to look at, at some point.
 
+*** Add getter and setter prefixes
+
+External users may have getter and setter prefix conventions such as
+=set_prop= or =SetProp=. It would be nice if we could pass in a
+getter/setting prefix and then dogen would append them when converting
+the diagram, e.g. =--getter-prefix=set_=.
+
+We should check what ODB has done for this and implement the same
+pattern.
+
 *** Sort model dependencies
 
 It seems the order of registration of models has moved with recent
