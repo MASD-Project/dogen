@@ -35,11 +35,11 @@ multiple_refinement_concept_model_generator::multiple_refinement_concept_model_g
 
 void multiple_refinement_concept_model_generator::
 populate(const unsigned int position, result_type& v) {
-    v.prop_10(create_int(position + 0));
-    v.prop_3(create_int(position + 1));
-    v.prop_1(create_int(position + 2));
-    v.prop_0(create_int(position + 3));
-    v.prop_2(create_int(position + 4));
+    v.prop_0(create_int(position + 0));
+    v.prop_1(create_int(position + 1));
+    v.prop_2(create_int(position + 2));
+    v.prop_3(create_int(position + 3));
+    v.prop_10(create_int(position + 4));
 }
 
 multiple_refinement_concept_model_generator::result_type

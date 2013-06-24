@@ -27,8 +27,8 @@ namespace stereotypes {
 std::ostream& operator<<(std::ostream& s, const refinement_concept_model& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::stereotypes::refinement_concept_model\"" << ", "
-      << "\"prop_1\": " << v.prop_1() << ", "
-      << "\"prop_0\": " << v.prop_0()
+      << "\"prop_0\": " << v.prop_0() << ", "
+      << "\"prop_1\": " << v.prop_1()
       << " }";
     return(s);
 }

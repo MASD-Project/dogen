@@ -37,11 +37,11 @@ namespace stereotypes {
 std::size_t multiple_refinement_concept_model_hasher::hash(const multiple_refinement_concept_model&v) {
     std::size_t seed(0);
 
-    combine(seed, v.prop_10());
-    combine(seed, v.prop_3());
-    combine(seed, v.prop_1());
     combine(seed, v.prop_0());
+    combine(seed, v.prop_1());
     combine(seed, v.prop_2());
+    combine(seed, v.prop_3());
+    combine(seed, v.prop_10());
 
     return seed;
 }

@@ -24,29 +24,29 @@ namespace dogen {
 namespace stereotypes {
 
 second_refinement_concept_model::second_refinement_concept_model()
-    : prop_10_(static_cast<int>(0)),
+    : prop_0_(static_cast<int>(0)),
       prop_2_(static_cast<int>(0)),
-      prop_0_(static_cast<int>(0)) { }
+      prop_10_(static_cast<int>(0)) { }
 
 second_refinement_concept_model::second_refinement_concept_model(
-    const int prop_10,
+    const int prop_0,
     const int prop_2,
-    const int prop_0)
-    : prop_10_(prop_10),
+    const int prop_10)
+    : prop_0_(prop_0),
       prop_2_(prop_2),
-      prop_0_(prop_0) { }
+      prop_10_(prop_10) { }
 
 void second_refinement_concept_model::swap(second_refinement_concept_model& other) noexcept {
     using std::swap;
-    swap(prop_10_, other.prop_10_);
-    swap(prop_2_, other.prop_2_);
     swap(prop_0_, other.prop_0_);
+    swap(prop_2_, other.prop_2_);
+    swap(prop_10_, other.prop_10_);
 }
 
 bool second_refinement_concept_model::operator==(const second_refinement_concept_model& rhs) const {
-    return prop_10_ == rhs.prop_10_ &&
+    return prop_0_ == rhs.prop_0_ &&
         prop_2_ == rhs.prop_2_ &&
-        prop_0_ == rhs.prop_0_;
+        prop_10_ == rhs.prop_10_;
 }
 
 second_refinement_concept_model& second_refinement_concept_model::operator=(second_refinement_concept_model other) {
@@ -55,12 +55,12 @@ second_refinement_concept_model& second_refinement_concept_model::operator=(seco
     return *this;
 }
 
-int second_refinement_concept_model::prop_10() const {
-    return prop_10_;
+int second_refinement_concept_model::prop_0() const {
+    return prop_0_;
 }
 
-void second_refinement_concept_model::prop_10(const int v) {
-    prop_10_ = v;
+void second_refinement_concept_model::prop_0(const int v) {
+    prop_0_ = v;
 }
 
 int second_refinement_concept_model::prop_2() const {
@@ -71,12 +71,12 @@ void second_refinement_concept_model::prop_2(const int v) {
     prop_2_ = v;
 }
 
-int second_refinement_concept_model::prop_0() const {
-    return prop_0_;
+int second_refinement_concept_model::prop_10() const {
+    return prop_10_;
 }
 
-void second_refinement_concept_model::prop_0(const int v) {
-    prop_0_ = v;
+void second_refinement_concept_model::prop_10(const int v) {
+    prop_10_ = v;
 }
 
 } }

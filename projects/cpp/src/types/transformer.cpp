@@ -189,11 +189,11 @@ void transformer::properties_for_concept(const sml::qname& qn,
                 qn.type_name()));
     }
 
-    const auto& props(i->second.properties());
-    properties.insert(properties.end(), props.begin(), props.end());
-
     for (const auto& c : i->second.refines())
         properties_for_concept(c, properties, processed_qnames);
+
+    const auto& props(i->second.properties());
+    properties.insert(properties.end(), props.begin(), props.end());
 }
 
 std::string
@@ -478,13 +478,13 @@ transform(const sml::pod& p, const optional_class_info pci,
         r.is_original_parent_visitable(opci->is_visitable());
     }
 
-    auto properties(p.properties());
+    std::list<sml::property> props;
     std::unordered_set<sml::qname> processed_qnames;
-    for (const auto& qn : p.modeled_concepts()) {
-        properties_for_concept(qn, properties, processed_qnames);
-    }
+    for (const auto& qn : p.modeled_concepts())
+        properties_for_concept(qn, props, processed_qnames);
+    props.insert(props.end(), p.properties().begin(), p.properties().end());
 
-    for (const auto& prop : properties) {
+    for (const auto& prop : props) {
         const auto tuple(transform(prop, p.is_immutable(), p.is_fluent()));
         r.properties().push_back(std::get<0>(tuple));
         r.all_properties().push_back(std::get<0>(tuple));

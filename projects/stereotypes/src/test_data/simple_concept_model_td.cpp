@@ -35,8 +35,8 @@ simple_concept_model_generator::simple_concept_model_generator() : position_(0) 
 
 void simple_concept_model_generator::
 populate(const unsigned int position, result_type& v) {
-    v.prop_1(create_int(position + 0));
-    v.prop_0(create_int(position + 1));
+    v.prop_0(create_int(position + 0));
+    v.prop_1(create_int(position + 1));
 }
 
 simple_concept_model_generator::result_type

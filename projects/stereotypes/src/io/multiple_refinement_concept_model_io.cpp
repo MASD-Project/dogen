@@ -27,11 +27,11 @@ namespace stereotypes {
 std::ostream& operator<<(std::ostream& s, const multiple_refinement_concept_model& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::stereotypes::multiple_refinement_concept_model\"" << ", "
-      << "\"prop_10\": " << v.prop_10() << ", "
-      << "\"prop_3\": " << v.prop_3() << ", "
-      << "\"prop_1\": " << v.prop_1() << ", "
       << "\"prop_0\": " << v.prop_0() << ", "
-      << "\"prop_2\": " << v.prop_2()
+      << "\"prop_1\": " << v.prop_1() << ", "
+      << "\"prop_2\": " << v.prop_2() << ", "
+      << "\"prop_3\": " << v.prop_3() << ", "
+      << "\"prop_10\": " << v.prop_10()
       << " }";
     return(s);
 }

@@ -10,19 +10,20 @@ This file contains all stories that were closed during sprint 29.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-06-24 Mon 22:32]
+Clock summary at [2013-06-24 Mon 22:51]
 
 | Headline                                                           | Time    |       |      |
 |--------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                       | *16:47* |       |      |
+| *Total time*                                                       | *17:05* |       |      |
 |--------------------------------------------------------------------+---------+-------+------|
-| Development Stories Implemented                                    |         | 16:47 |      |
+| Development Stories Implemented                                    |         | 17:05 |      |
 | IMPLEMENTATION Release notes and backlog grooming                  |         |       | 0:53 |
 | COMPLETED Make design by contract methods consistent in dia to sml |         |       | 0:52 |
 | COMPLETED Split resolver from merger                               |         |       | 3:18 |
 | COMPLETED Property container should be a list not a vector         |         |       | 0:18 |
 | COMPLETED Implement concepts in SML                                |         |       | 9:24 |
 | COMPLETED Design the inheritance tree of DDD classes in SML        |         |       | 2:02 |
+| IMPLEMENTATION Update SML to make use of concepts                  |         |       | 0:18 |
 #+end:
 
 *** IMPLEMENTATION Release notes and backlog grooming                  :task:
@@ -225,20 +226,30 @@ compliance):
   of properties that make its identity function.
 - =entity= and =keyed_entity= descend from =abstract_entity=.
 
+*** IMPLEMENTATION Update SML to make use of concepts                 :story:
+
+In S28 as part of "Break down SML into concepts at the design level"
+we have defined all of the main concepts that SML types should be
+using. Attempt to make use of these to simplify the model.
+
+**** COMPLETED Add concept properties in order of inheritance         :spike:
+     CLOSED: [2013-06-24 Mon 22:46]
+     CLOCK: [2013-06-24 Mon 22:38]--[2013-06-24 Mon 22:56] =>  0:18
+
+At present we are adding properties in reverse order of inheritance,
+which makes the generated code look confusing. Add them in the same
+order as inheritance.
+
+**** Implement modules in terms of concepts                            :task:
+**** Revert back to a primitive class but now based on concepts        :task:
+**** Convert pods into entities, values or services                    :task:
+
 *** Model name should be a qname                                      :story:
 
 We already have most of the qname properties in the model anyway, so
 might as well just use a qname.
 
 *** Add content to the introduction in manual                         :story:
-*** Update SML to make use of concepts                                :story:
-
-In S28 as part of "Break down SML into concepts at the design level"
-we have defined all of the main concepts that SML types should be
-using. Attempt to make use of these to simplify the model.
-
-**** Convert pods into entities, values or services                   :story:
-
 *** Rename implementation specific parameters                         :story:
 
 These should really be called back end specific parameters at the SML

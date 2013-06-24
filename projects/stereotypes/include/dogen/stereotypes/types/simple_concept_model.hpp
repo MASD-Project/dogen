@@ -45,8 +45,8 @@ public:
 
 public:
     simple_concept_model(
-        const int prop_1,
-        const int prop_0);
+        const int prop_0,
+        const int prop_1);
 
 private:
     template<typename Archive>
@@ -57,19 +57,19 @@ private:
 
 public:
     /**
-     * @brief Property that belongs to class.
-     */
-    /**@{*/
-    int prop_1() const;
-    void prop_1(const int v);
-    /**@}*/
-
-    /**
      * @brief This is a sample property in a concept.
      */
     /**@{*/
     int prop_0() const;
     void prop_0(const int v);
+    /**@}*/
+
+    /**
+     * @brief Property that belongs to class.
+     */
+    /**@{*/
+    int prop_1() const;
+    void prop_1(const int v);
     /**@}*/
 
 public:
@@ -83,8 +83,8 @@ public:
     simple_concept_model& operator=(simple_concept_model other);
 
 private:
-    int prop_1_;
     int prop_0_;
+    int prop_1_;
 };
 
 } }

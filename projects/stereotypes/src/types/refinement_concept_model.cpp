@@ -24,24 +24,24 @@ namespace dogen {
 namespace stereotypes {
 
 refinement_concept_model::refinement_concept_model()
-    : prop_1_(static_cast<int>(0)),
-      prop_0_(static_cast<int>(0)) { }
+    : prop_0_(static_cast<int>(0)),
+      prop_1_(static_cast<int>(0)) { }
 
 refinement_concept_model::refinement_concept_model(
-    const int prop_1,
-    const int prop_0)
-    : prop_1_(prop_1),
-      prop_0_(prop_0) { }
+    const int prop_0,
+    const int prop_1)
+    : prop_0_(prop_0),
+      prop_1_(prop_1) { }
 
 void refinement_concept_model::swap(refinement_concept_model& other) noexcept {
     using std::swap;
-    swap(prop_1_, other.prop_1_);
     swap(prop_0_, other.prop_0_);
+    swap(prop_1_, other.prop_1_);
 }
 
 bool refinement_concept_model::operator==(const refinement_concept_model& rhs) const {
-    return prop_1_ == rhs.prop_1_ &&
-        prop_0_ == rhs.prop_0_;
+    return prop_0_ == rhs.prop_0_ &&
+        prop_1_ == rhs.prop_1_;
 }
 
 refinement_concept_model& refinement_concept_model::operator=(refinement_concept_model other) {
@@ -50,20 +50,20 @@ refinement_concept_model& refinement_concept_model::operator=(refinement_concept
     return *this;
 }
 
-int refinement_concept_model::prop_1() const {
-    return prop_1_;
-}
-
-void refinement_concept_model::prop_1(const int v) {
-    prop_1_ = v;
-}
-
 int refinement_concept_model::prop_0() const {
     return prop_0_;
 }
 
 void refinement_concept_model::prop_0(const int v) {
     prop_0_ = v;
+}
+
+int refinement_concept_model::prop_1() const {
+    return prop_1_;
+}
+
+void refinement_concept_model::prop_1(const int v) {
+    prop_1_ = v;
 }
 
 } }

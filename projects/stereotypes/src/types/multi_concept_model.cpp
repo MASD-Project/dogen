@@ -24,56 +24,40 @@ namespace dogen {
 namespace stereotypes {
 
 multi_concept_model::multi_concept_model()
-    : prop_10_(static_cast<int>(0)),
+    : prop_0_(static_cast<int>(0)),
       prop_1_(static_cast<int>(0)),
-      prop_0_(static_cast<int>(0)),
-      prop_2_(static_cast<int>(0)) { }
+      prop_2_(static_cast<int>(0)),
+      prop_10_(static_cast<int>(0)) { }
 
 multi_concept_model::multi_concept_model(
-    const int prop_10,
-    const int prop_1,
     const int prop_0,
-    const int prop_2)
-    : prop_10_(prop_10),
+    const int prop_1,
+    const int prop_2,
+    const int prop_10)
+    : prop_0_(prop_0),
       prop_1_(prop_1),
-      prop_0_(prop_0),
-      prop_2_(prop_2) { }
+      prop_2_(prop_2),
+      prop_10_(prop_10) { }
 
 void multi_concept_model::swap(multi_concept_model& other) noexcept {
     using std::swap;
-    swap(prop_10_, other.prop_10_);
-    swap(prop_1_, other.prop_1_);
     swap(prop_0_, other.prop_0_);
+    swap(prop_1_, other.prop_1_);
     swap(prop_2_, other.prop_2_);
+    swap(prop_10_, other.prop_10_);
 }
 
 bool multi_concept_model::operator==(const multi_concept_model& rhs) const {
-    return prop_10_ == rhs.prop_10_ &&
+    return prop_0_ == rhs.prop_0_ &&
         prop_1_ == rhs.prop_1_ &&
-        prop_0_ == rhs.prop_0_ &&
-        prop_2_ == rhs.prop_2_;
+        prop_2_ == rhs.prop_2_ &&
+        prop_10_ == rhs.prop_10_;
 }
 
 multi_concept_model& multi_concept_model::operator=(multi_concept_model other) {
     using std::swap;
     swap(*this, other);
     return *this;
-}
-
-int multi_concept_model::prop_10() const {
-    return prop_10_;
-}
-
-void multi_concept_model::prop_10(const int v) {
-    prop_10_ = v;
-}
-
-int multi_concept_model::prop_1() const {
-    return prop_1_;
-}
-
-void multi_concept_model::prop_1(const int v) {
-    prop_1_ = v;
 }
 
 int multi_concept_model::prop_0() const {
@@ -84,12 +68,28 @@ void multi_concept_model::prop_0(const int v) {
     prop_0_ = v;
 }
 
+int multi_concept_model::prop_1() const {
+    return prop_1_;
+}
+
+void multi_concept_model::prop_1(const int v) {
+    prop_1_ = v;
+}
+
 int multi_concept_model::prop_2() const {
     return prop_2_;
 }
 
 void multi_concept_model::prop_2(const int v) {
     prop_2_ = v;
+}
+
+int multi_concept_model::prop_10() const {
+    return prop_10_;
+}
+
+void multi_concept_model::prop_10(const int v) {
+    prop_10_ = v;
 }
 
 } }

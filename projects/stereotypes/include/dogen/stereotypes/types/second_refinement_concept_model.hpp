@@ -45,9 +45,9 @@ public:
 
 public:
     second_refinement_concept_model(
-        const int prop_10,
+        const int prop_0,
         const int prop_2,
-        const int prop_0);
+        const int prop_10);
 
 private:
     template<typename Archive>
@@ -58,11 +58,11 @@ private:
 
 public:
     /**
-     * @brief Property of the class itself.
+     * @brief Base concept property
      */
     /**@{*/
-    int prop_10() const;
-    void prop_10(const int v);
+    int prop_0() const;
+    void prop_0(const int v);
     /**@}*/
 
     /**
@@ -74,11 +74,11 @@ public:
     /**@}*/
 
     /**
-     * @brief Base concept property
+     * @brief Property of the class itself.
      */
     /**@{*/
-    int prop_0() const;
-    void prop_0(const int v);
+    int prop_10() const;
+    void prop_10(const int v);
     /**@}*/
 
 public:
@@ -92,9 +92,9 @@ public:
     second_refinement_concept_model& operator=(second_refinement_concept_model other);
 
 private:
-    int prop_10_;
-    int prop_2_;
     int prop_0_;
+    int prop_2_;
+    int prop_10_;
 };
 
 } }
