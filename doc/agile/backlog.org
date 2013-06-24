@@ -11,6 +11,15 @@ This file contains all stories that haven't been assigned to a sprint.
 
 Stories that we intend to look at, at some point.
 
+*** Check concept properties for identity              :story:
+    CLOCK: [2013-06-24 Mon 22:33]--[2013-06-24 Mon 22:36] =>  0:03
+
+When we added concepts we didn't had a link to the processing of
+identity attributes. This means that if we get a property via modeling
+a concept it is not processed and added to the keys.
+
+Update injector to follow concepts.
+
 *** Add getter and setter prefixes
 
 External users may have getter and setter prefix conventions such as

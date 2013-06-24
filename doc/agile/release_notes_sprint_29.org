@@ -225,12 +225,6 @@ compliance):
   of properties that make its identity function.
 - =entity= and =keyed_entity= descend from =abstract_entity=.
 
-*** Check concept properties for identity                             :spike:
-
-When we added concepts we didn't had a link to the processing of
-identity attributes. This means that if we get a property via modeling
-a concept it is not processed.
-
 *** Model name should be a qname                                      :story:
 
 We already have most of the qname properties in the model anyway, so
