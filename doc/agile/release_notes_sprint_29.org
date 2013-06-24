@@ -10,19 +10,19 @@ This file contains all stories that were closed during sprint 29.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-06-24 Mon 22:24]
+Clock summary at [2013-06-24 Mon 22:32]
 
 | Headline                                                           | Time    |       |      |
 |--------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                       | *16:45* |       |      |
+| *Total time*                                                       | *16:47* |       |      |
 |--------------------------------------------------------------------+---------+-------+------|
-| Development Stories Implemented                                    |         | 16:45 |      |
+| Development Stories Implemented                                    |         | 16:47 |      |
 | IMPLEMENTATION Release notes and backlog grooming                  |         |       | 0:53 |
 | COMPLETED Make design by contract methods consistent in dia to sml |         |       | 0:52 |
 | COMPLETED Split resolver from merger                               |         |       | 3:18 |
 | COMPLETED Property container should be a list not a vector         |         |       | 0:18 |
 | COMPLETED Implement concepts in SML                                |         |       | 9:24 |
-| IMPLEMENTATION Design the inheritance tree of DDD classes in SML   |         |       | 2:00 |
+| COMPLETED Design the inheritance tree of DDD classes in SML        |         |       | 2:02 |
 #+end:
 
 *** IMPLEMENTATION Release notes and backlog grooming                  :task:
@@ -126,7 +126,8 @@ to start making use of them.
 - concept with multiple-inheritance
 - model more than one concept
 
-*** IMPLEMENTATION Design the inheritance tree of DDD classes in SML  :story:
+*** COMPLETED Design the inheritance tree of DDD classes in SML       :story:
+    CLOSED: [2013-06-24 Mon 22:32]
 
 In S28 as part of "Improve modeling of domain driven concepts in SML",
 we have started making SML look a lot more like a model of
@@ -144,6 +145,7 @@ story.
 
 **** COMPLETED List of SML concepts                                    :note:
      CLOSED: [2013-06-20 Thu 08:08]
+     CLOCK: [2013-06-24 Mon 22:29]--[2013-06-24 Mon 22:31] =>  0:02
      CLOCK: [2013-06-24 Mon 22:12]--[2013-06-24 Mon 22:18] =>  0:06
      CLOCK: [2013-06-24 Mon 20:01]--[2013-06-24 Mon 20:30] =>  0:29
      CLOCK: [2013-06-20 Thu 08:00]--[2013-06-20 Thu 08:15] =>  0:15
@@ -167,7 +169,8 @@ story.
   =Operatable=. Modeled by =sml::abstract_entity=, =sml::value_object=,
   =sml::service=, =sml::factory= and =sml::repository=.
 
-**** ANALYSIS Why is the current design wrong?                         :task:
+**** COMPLETED Why is the current design wrong?                        :task:
+     CLOSED: [2013-06-24 Mon 22:31]
      CLOCK: [2013-06-20 Thu 08:24]--[2013-06-20 Thu 08:38] =>  0:14
      CLOCK: [2013-06-20 Thu 07:46]--[2013-06-20 Thu 08:00] =>  0:14
      CLOCK: [2013-06-18 Tue 18:13]--[2013-06-18 Tue 18:19] =>  0:06
