@@ -27,10 +27,12 @@
 
 #include <list>
 #include <tuple>
+#include <unordered_set>
 #include <boost/optional.hpp>
 #include "dogen/sml/types/pod.hpp"
 #include "dogen/sml/types/model.hpp"
 #include "dogen/sml/types/qname.hpp"
+#include "dogen/sml/hash/qname_hash.hpp"
 #include "dogen/sml/types/module.hpp"
 #include "dogen/sml/types/value.hpp"
 #include "dogen/sml/types/nested_qname.hpp"
@@ -68,7 +70,8 @@ private:
      * and any otheer concepts it may refine.
      */
     void properties_for_concept(const sml::qname& qn,
-        std::list<sml::property>& properties) const;
+        std::list<sml::property>& properties,
+        std::unordered_set<sml::qname>& processed_qnames) const;
 
 private:
     /**

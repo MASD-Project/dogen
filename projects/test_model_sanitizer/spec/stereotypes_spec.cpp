@@ -80,6 +80,7 @@ BOOST_AUTO_TEST_CASE(validate_equality) {
     test_equality<simple_concept_model_generator>();
     test_equality<base_concept_model_generator>();
     test_equality<refinement_concept_model_generator>();
+    test_equality<multiple_refinement_concept_model_generator>();
 }
 
 BOOST_AUTO_TEST_CASE(validate_serialisation) {
@@ -118,6 +119,7 @@ BOOST_AUTO_TEST_CASE(validate_serialisation) {
     rountrip_type<simple_concept_model_generator>();
     rountrip_type<base_concept_model_generator>();
     rountrip_type<refinement_concept_model_generator>();
+    rountrip_type<multiple_refinement_concept_model_generator>();
 }
 
 BOOST_AUTO_TEST_CASE(validate_hashing) {
@@ -190,6 +192,7 @@ BOOST_AUTO_TEST_CASE(validate_swap) {
     test_swap<simple_concept_model_generator>();
     test_swap<base_concept_model_generator>();
     test_swap<refinement_concept_model_generator>();
+    test_swap<multiple_refinement_concept_model_generator>();
 }
 
 BOOST_AUTO_TEST_CASE(validate_io) {
@@ -229,6 +232,7 @@ BOOST_AUTO_TEST_CASE(validate_io) {
     test_io<simple_concept_model_generator>();
     test_io<base_concept_model_generator>();
     test_io<refinement_concept_model_generator>();
+    test_io<multiple_refinement_concept_model_generator>();
 }
 
 BOOST_AUTO_TEST_CASE(validate_move_assignment_copy) {
@@ -269,6 +273,7 @@ BOOST_AUTO_TEST_CASE(validate_move_assignment_copy) {
     test_move_assignment_copy<simple_concept_model_generator>();
     test_move_assignment_copy<base_concept_model_generator>();
     test_move_assignment_copy<refinement_concept_model_generator>();
+    test_move_assignment_copy<multiple_refinement_concept_model_generator>();
 }
 
 BOOST_AUTO_TEST_CASE(setting_properties_using_the_fluent_interface_produces_expected_result) {

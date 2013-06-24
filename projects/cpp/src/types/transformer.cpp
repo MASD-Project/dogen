@@ -174,7 +174,13 @@ namespace cpp {
 transformer::transformer(const sml::model& m) : model_(m) { }
 
 void transformer::properties_for_concept(const sml::qname& qn,
-    std::list<sml::property>& properties) const {
+    std::list<sml::property>& properties,
+    std::unordered_set<sml::qname>& processed_qnames) const {
+
+    if (processed_qnames.find(qn) != processed_qnames.end())
+        return;
+
+    processed_qnames.insert(qn);
     const auto i(model_.concepts().find(qn));
     if (i == model_.concepts().end()) {
         using dogen::cpp::transformation_error;
@@ -187,7 +193,7 @@ void transformer::properties_for_concept(const sml::qname& qn,
     properties.insert(properties.end(), props.begin(), props.end());
 
     for (const auto& c : i->second.refines())
-        properties_for_concept(c, properties);
+        properties_for_concept(c, properties, processed_qnames);
 }
 
 std::string
@@ -473,8 +479,9 @@ transform(const sml::pod& p, const optional_class_info pci,
     }
 
     auto properties(p.properties());
+    std::unordered_set<sml::qname> processed_qnames;
     for (const auto& qn : p.modeled_concepts()) {
-        properties_for_concept(qn, properties);
+        properties_for_concept(qn, properties, processed_qnames);
     }
 
     for (const auto& prop : properties) {
