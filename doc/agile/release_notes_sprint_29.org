@@ -10,13 +10,13 @@ This file contains all stories that were closed during sprint 29.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-06-24 Mon 23:42]
+Clock summary at [2013-06-25 Tue 00:06]
 
 | Headline                                                           | Time    |       |      |
 |--------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                       | *17:55* |       |      |
+| *Total time*                                                       | *18:17* |       |      |
 |--------------------------------------------------------------------+---------+-------+------|
-| Development Stories Implemented                                    |         | 17:55 |      |
+| Development Stories Implemented                                    |         | 18:17 |      |
 | IMPLEMENTATION Release notes and backlog grooming                  |         |       | 0:53 |
 | COMPLETED Make design by contract methods consistent in dia to sml |         |       | 0:52 |
 | COMPLETED Split resolver from merger                               |         |       | 3:18 |
@@ -25,7 +25,7 @@ Clock summary at [2013-06-24 Mon 23:42]
 | COMPLETED Design the inheritance tree of DDD classes in SML        |         |       | 2:02 |
 | COMPLETED Add concept properties in order of inheritance           |         |       | 0:18 |
 | COMPLETED Ensure extractor takes concepts into account             |         |       | 0:22 |
-| IMPLEMENTATION Update SML to make use of concepts                  |         |       | 0:28 |
+| IMPLEMENTATION Update SML to make use of concepts                  |         |       | 0:50 |
 #+end:
 
 *** IMPLEMENTATION Release notes and backlog grooming                  :task:
@@ -267,7 +267,14 @@ using. Attempt to make use of these to simplify the model.
      CLOSED: [2013-06-24 Mon 23:42]
      CLOCK: [2013-06-24 Mon 23:30]--[2013-06-24 Mon 23:42] =>  0:12
 
-**** Revert back to a primitive class but now based on concepts        :task:
+**** IMPLEMENTATION Revert back to a primitive class but now based on concepts :task:
+     CLOCK: [2013-06-24 Mon 23:42]--[2013-06-25 Tue 00:04] =>  0:22
+
+- create primitive class
+- update model to use primitives
+- update primitive model to generate primitives
+- update C++ transformer
+
 **** Convert pods into entities, values or services                    :task:
 
 *** Model name should be a qname                                      :story:

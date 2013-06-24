@@ -28,6 +28,7 @@
 #include <boost/archive/xml_oarchive.hpp>
 #include "dogen/sml/serialization/entity_ser.hpp"
 #include "dogen/sml/serialization/factory_ser.hpp"
+#include "dogen/sml/serialization/primitive_ser.hpp"
 #include "dogen/sml/serialization/repository_ser.hpp"
 #include "dogen/sml/serialization/service_ser.hpp"
 #include "dogen/sml/serialization/value_ser.hpp"
@@ -43,6 +44,7 @@ template<typename Archive>
 void register_types(Archive& ar) {
     ar.template register_type<dogen::sml::entity>();
     ar.template register_type<dogen::sml::factory>();
+    ar.template register_type<dogen::sml::primitive>();
     ar.template register_type<dogen::sml::repository>();
     ar.template register_type<dogen::sml::service>();
     ar.template register_type<dogen::sml::value>();
