@@ -487,6 +487,9 @@ We need a class responsible for checking the consistency of the SML
 model. There are several things we need to check for non-merged
 models:
 
+- concepts must have at least one property (or method).
+- refined concepts must not have properties (or methods) with clashing
+  names.
 - type names, model names, etc must not contain spaces or other
   invalid characters. We should use a identifier parser for this.
 - the qname of all keys in pods, etc must be part of the current
