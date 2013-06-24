@@ -19,6 +19,7 @@
  *
  */
 #include <ostream>
+#include "dogen/stereotypes/io/entity_io.hpp"
 #include "dogen/stereotypes/io/simple_concept_model_io.hpp"
 
 namespace dogen {
@@ -28,7 +29,8 @@ std::ostream& operator<<(std::ostream& s, const simple_concept_model& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::stereotypes::simple_concept_model\"" << ", "
       << "\"prop_0\": " << v.prop_0() << ", "
-      << "\"prop_1\": " << v.prop_1()
+      << "\"prop_1\": " << v.prop_1() << ", "
+      << "\"prop_10\": " << v.prop_10()
       << " }";
     return(s);
 }

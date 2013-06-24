@@ -57,7 +57,8 @@ workflow(const sml::model& model, const config::cpp_settings& settings) :
     includer_(model_, locator_, settings_),
     file_info_factory_(locator_),
     transformer_(model_),
-    descriptor_factory_(settings_.enabled_facets()), extractor_(model_.pods()) {
+    descriptor_factory_(settings_.enabled_facets()),
+    extractor_(model_.pods(), model_.concepts()) {
 
     validate_settings();
 }

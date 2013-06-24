@@ -18,12 +18,18 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen/stereotypes/test_data/entity_td.hpp"
 #include "dogen/stereotypes/test_data/simple_concept_model_td.hpp"
 
 namespace {
 
 int create_int(const unsigned int position) {
     return position;
+}
+
+dogen::stereotypes::entity
+create_dogen_stereotypes_entity(const unsigned int position) {
+    return dogen::stereotypes::entity_generator::create(position);
 }
 
 }
@@ -36,7 +42,8 @@ simple_concept_model_generator::simple_concept_model_generator() : position_(0) 
 void simple_concept_model_generator::
 populate(const unsigned int position, result_type& v) {
     v.prop_0(create_int(position + 0));
-    v.prop_1(create_int(position + 1));
+    v.prop_1(create_dogen_stereotypes_entity(position + 1));
+    v.prop_10(create_int(position + 2));
 }
 
 simple_concept_model_generator::result_type

@@ -18,6 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen/stereotypes/hash/entity_hash.hpp"
 #include "dogen/stereotypes/hash/simple_concept_model_hash.hpp"
 
 namespace {
@@ -39,6 +40,7 @@ std::size_t simple_concept_model_hasher::hash(const simple_concept_model&v) {
 
     combine(seed, v.prop_0());
     combine(seed, v.prop_1());
+    combine(seed, v.prop_10());
 
     return seed;
 }

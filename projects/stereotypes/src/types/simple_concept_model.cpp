@@ -25,23 +25,27 @@ namespace stereotypes {
 
 simple_concept_model::simple_concept_model()
     : prop_0_(static_cast<int>(0)),
-      prop_1_(static_cast<int>(0)) { }
+      prop_10_(static_cast<int>(0)) { }
 
 simple_concept_model::simple_concept_model(
     const int prop_0,
-    const int prop_1)
+    const dogen::stereotypes::entity& prop_1,
+    const int prop_10)
     : prop_0_(prop_0),
-      prop_1_(prop_1) { }
+      prop_1_(prop_1),
+      prop_10_(prop_10) { }
 
 void simple_concept_model::swap(simple_concept_model& other) noexcept {
     using std::swap;
     swap(prop_0_, other.prop_0_);
     swap(prop_1_, other.prop_1_);
+    swap(prop_10_, other.prop_10_);
 }
 
 bool simple_concept_model::operator==(const simple_concept_model& rhs) const {
     return prop_0_ == rhs.prop_0_ &&
-        prop_1_ == rhs.prop_1_;
+        prop_1_ == rhs.prop_1_ &&
+        prop_10_ == rhs.prop_10_;
 }
 
 simple_concept_model& simple_concept_model::operator=(simple_concept_model other) {
@@ -58,12 +62,28 @@ void simple_concept_model::prop_0(const int v) {
     prop_0_ = v;
 }
 
-int simple_concept_model::prop_1() const {
+const dogen::stereotypes::entity& simple_concept_model::prop_1() const {
     return prop_1_;
 }
 
-void simple_concept_model::prop_1(const int v) {
+dogen::stereotypes::entity& simple_concept_model::prop_1() {
+    return prop_1_;
+}
+
+void simple_concept_model::prop_1(const dogen::stereotypes::entity& v) {
     prop_1_ = v;
+}
+
+void simple_concept_model::prop_1(const dogen::stereotypes::entity&& v) {
+    prop_1_ = std::move(v);
+}
+
+int simple_concept_model::prop_10() const {
+    return prop_10_;
+}
+
+void simple_concept_model::prop_10(const int v) {
+    prop_10_ = v;
 }
 
 } }

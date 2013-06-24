@@ -3096,7 +3096,7 @@ These are the main cases:
         <dia:point val="107.938,3.0625"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="107.888,3.0125;115.24,6.7125"/>
+        <dia:rectangle val="107.888,3.0125;115.24,7.5125"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="107.938,3.0625"/>
@@ -3105,7 +3105,7 @@ These are the main cases:
         <dia:real val="7.2525000000000004"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="3.6000000000000001"/>
+        <dia:real val="4.4000000000000004"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#SimpleConcept#</dia:string>
@@ -3207,6 +3207,29 @@ These are the main cases:
           </dia:attribute>
           <dia:attribute name="comment">
             <dia:string>#This is a sample property in a concept.#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#prop_1#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>#entity#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>#Prove that includes of types get picked up.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -3331,7 +3354,7 @@ These are the main cases:
       <dia:attribute name="attributes">
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#prop_1#</dia:string>
+            <dia:string>#prop_10#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#int#</dia:string>

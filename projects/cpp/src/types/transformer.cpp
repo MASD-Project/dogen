@@ -183,7 +183,6 @@ void transformer::properties_for_concept(const sml::qname& qn,
     processed_qnames.insert(qn);
     const auto i(model_.concepts().find(qn));
     if (i == model_.concepts().end()) {
-        using dogen::cpp::transformation_error;
         BOOST_LOG_SEV(lg, error) << concept_not_found << qn.type_name();
         BOOST_THROW_EXCEPTION(transformation_error(concept_not_found +
                 qn.type_name()));
@@ -347,7 +346,6 @@ void transformer::transform(const sml::nested_qname& nqn,
     if (qn.meta_type() == meta_types::pod) {
         const auto i(model_.pods().find(qn));
         if (i == model_.pods().end()) {
-            using dogen::cpp::transformation_error;
             BOOST_LOG_SEV(lg, error) << pod_not_found << qn.type_name();
             BOOST_THROW_EXCEPTION(transformation_error(pod_not_found +
                 qn.type_name()));

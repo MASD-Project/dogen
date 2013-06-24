@@ -27,6 +27,7 @@
 
 #include <unordered_map>
 #include "dogen/sml/types/pod.hpp"
+#include "dogen/sml/types/concept.hpp"
 #include "dogen/cpp/types/boost_model_helper.hpp"
 #include "dogen/cpp/types/std_model_helper.hpp"
 #include "dogen/cpp/types/relationships.hpp"
@@ -44,11 +45,21 @@ public:
 
 public:
     typedef const std::unordered_map<sml::qname, sml::pod> pod_map;
+    typedef const std::unordered_map<sml::qname, sml::concept> concept_map;
 
 public:
-    extractor(const pod_map& pods) : pods_(pods), boost_(), std_() { }
+    extractor(const pod_map& pm, const concept_map& cm)
+        : pods_(pm), concepts_(cm), boost_(), std_() { }
 
 private:
+    /**
+     * @brief Collects all the properties associated with a concept,
+     * and any otheer concepts it may refine.
+     */
+    void properties_for_concept(const sml::qname& qn,
+        std::list<sml::property>& properties,
+        std::unordered_set<sml::qname>& processed_qnames) const;
+
     /**
      * @brief Iterates through the nested qname recursively, picking
      * up dependencies as it goes along.
@@ -77,6 +88,7 @@ public:
 
 private:
     const pod_map& pods_;
+    const concept_map& concepts_;
     const boost_model_helper boost_;
     const std_model_helper std_;
 };

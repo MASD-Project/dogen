@@ -69,7 +69,7 @@ BOOST_AUTO_TEST_CASE(dependency_graph_of_pod_with_no_properties_and_no_inheritan
     BOOST_LOG_SEV(lg, debug) << "input model: " << m;
     BOOST_CHECK(m.pods().size() == 1);
 
-    dogen::cpp::extractor x(m.pods());
+    dogen::cpp::extractor x(m.pods(), m.concepts());
     const auto r(x.extract_dependency_graph(m.pods().begin()->second));
     BOOST_LOG_SEV(lg, debug) << "relationships: " << r;
 
@@ -92,7 +92,7 @@ BOOST_AUTO_TEST_CASE(dependency_graph_of_pod_with_parent_has_one_name_in_relatio
     BOOST_LOG_SEV(lg, debug) << "input model: " << m;
     BOOST_CHECK(!m.pods().empty());
 
-    dogen::cpp::extractor x(m.pods());
+    dogen::cpp::extractor x(m.pods(), m.concepts());
 
     std::array<bool, 2> found({{ false, false }});
     for (const auto pair : m.pods()) {
@@ -146,7 +146,7 @@ BOOST_AUTO_TEST_CASE(dependency_graph_of_pod_with_unsigned_int_property_has_expe
     BOOST_REQUIRE(m.pods().size() == 1);
     BOOST_REQUIRE(m.pods().begin()->second.properties().size() == 1);
 
-    dogen::cpp::extractor x(m.pods());
+    dogen::cpp::extractor x(m.pods(), m.concepts());
     const auto r(x.extract_dependency_graph(m.pods().begin()->second));
     BOOST_LOG_SEV(lg, debug) << "relationships: " << r;
 
@@ -172,7 +172,7 @@ BOOST_AUTO_TEST_CASE(dependency_graph_of_pod_with_boolean_property_has_expected_
     BOOST_REQUIRE(m.pods().size() == 1);
     BOOST_REQUIRE(m.pods().begin()->second.properties().size() == 1);
 
-    dogen::cpp::extractor x(m.pods());
+    dogen::cpp::extractor x(m.pods(), m.concepts());
     const auto r(x.extract_dependency_graph(m.pods().begin()->second));
     BOOST_LOG_SEV(lg, debug) << "relationships: " << r;
 
@@ -197,7 +197,7 @@ BOOST_AUTO_TEST_CASE(dependency_graph_of_pod_with_other_pod_property_has_expecte
     BOOST_LOG_SEV(lg, debug) << "input model: " << m;
     BOOST_REQUIRE(m.pods().size() == 2);
 
-    dogen::cpp::extractor x(m.pods());
+    dogen::cpp::extractor x(m.pods(), m.concepts());
     bool found(false);
     for (const auto pair : m.pods()) {
         if (is_type_zero(pair.first)) {
@@ -232,7 +232,7 @@ BOOST_AUTO_TEST_CASE(dependency_graph_of_pod_with_missing_pod_property_throws) {
     BOOST_LOG_SEV(lg, debug) << "input model: " << m;
     BOOST_REQUIRE(m.pods().size() == 1);
 
-    dogen::cpp::extractor x(m.pods());
+    dogen::cpp::extractor x(m.pods(), m.concepts());
     const auto p(m.pods().begin()->second);
 
     using dogen::cpp::extraction_error;
@@ -249,7 +249,7 @@ BOOST_AUTO_TEST_CASE(dependency_graph_of_pod_with_pair_property_has_expected_nam
     BOOST_REQUIRE(m.pods().size() == 1);
     BOOST_REQUIRE(m.pods().begin()->second.properties().size() == 1);
 
-    dogen::cpp::extractor x(m.pods());
+    dogen::cpp::extractor x(m.pods(), m.concepts());
     const auto r(x.extract_dependency_graph(m.pods().begin()->second));
     BOOST_LOG_SEV(lg, debug) << "relationships: " << r;
 
@@ -274,7 +274,7 @@ BOOST_AUTO_TEST_CASE(dependency_graph_of_pod_with_variant_property_has_expected_
     BOOST_REQUIRE(m.pods().size() == 1);
     BOOST_REQUIRE(m.pods().begin()->second.properties().size() == 1);
 
-    dogen::cpp::extractor x(m.pods());
+    dogen::cpp::extractor x(m.pods(), m.concepts());
     const auto r(x.extract_dependency_graph(m.pods().begin()->second));
     BOOST_LOG_SEV(lg, debug) << "relationships: " << r;
 
@@ -299,7 +299,7 @@ BOOST_AUTO_TEST_CASE(dependency_graph_of_pod_with_std_string_property_has_expect
     BOOST_REQUIRE(m.pods().size() == 1);
     BOOST_REQUIRE(m.pods().begin()->second.properties().size() == 1);
 
-    dogen::cpp::extractor x(m.pods());
+    dogen::cpp::extractor x(m.pods(), m.concepts());
     const auto r(x.extract_dependency_graph(m.pods().begin()->second));
     BOOST_LOG_SEV(lg, debug) << "relationships: " << r;
 
@@ -325,7 +325,7 @@ BOOST_AUTO_TEST_CASE(dependency_graph_of_pod_with_boost_shared_ptr_property_has_
     BOOST_REQUIRE(m.pods().size() == 3);
 
     bool found(false);
-    dogen::cpp::extractor x(m.pods());
+    dogen::cpp::extractor x(m.pods(), m.concepts());
     for (const auto pair : m.pods()) {
         if (is_type_zero(pair.first)) {
             BOOST_LOG_SEV(lg, debug) << "found pod: " << pair.first;
@@ -357,7 +357,7 @@ BOOST_AUTO_TEST_CASE(inheritance_graph_of_pod_with_no_parents_has_one_name_in_re
     BOOST_LOG_SEV(lg, debug) << "input model: " << m;
     BOOST_CHECK(m.pods().size() == 1);
 
-    dogen::cpp::extractor x(m.pods());
+    dogen::cpp::extractor x(m.pods(), m.concepts());
     const auto r(x.extract_inheritance_graph(m.pods().begin()->second.name()));
     BOOST_LOG_SEV(lg, debug) << "relationships: " << r;
 
@@ -382,7 +382,7 @@ BOOST_AUTO_TEST_CASE(inheritance_graph_of_pod_with_no_parents_and_one_property_h
     BOOST_LOG_SEV(lg, debug) << "input model: " << m;
     BOOST_CHECK(m.pods().size() == 2);
 
-    dogen::cpp::extractor x(m.pods());
+    dogen::cpp::extractor x(m.pods(), m.concepts());
     std::array<bool, 2> found({{ false, false }});
     for (const auto pair : m.pods()) {
         if (is_type_zero(pair.first)) {
@@ -434,7 +434,7 @@ BOOST_AUTO_TEST_CASE(inheritance_graph_of_pod_with_parent_has_two_names_in_relat
     BOOST_LOG_SEV(lg, debug) << "input model: " << m;
     BOOST_CHECK(m.pods().size() == 2);
 
-    dogen::cpp::extractor x(m.pods());
+    dogen::cpp::extractor x(m.pods(), m.concepts());
 
     std::array<bool, 2> found({{ false, false }});
     for (const auto pair : m.pods()) {
@@ -493,7 +493,7 @@ BOOST_AUTO_TEST_CASE(inheritance_graph_of_pod_with_missing_parent_throws) {
     BOOST_LOG_SEV(lg, debug) << "input model: " << m;
     BOOST_CHECK(m.pods().size() == 1);
 
-    dogen::cpp::extractor x(m.pods());
+    dogen::cpp::extractor x(m.pods(), m.concepts());
 
     const auto qn(m.pods().begin()->second.name());
     using dogen::cpp::extraction_error;
@@ -509,7 +509,7 @@ BOOST_AUTO_TEST_CASE(inheritance_graph_of_pod_with_third_degree_children_has_fou
     BOOST_LOG_SEV(lg, debug) << "input model: " << m;
     BOOST_CHECK(m.pods().size() == 4);
 
-    dogen::cpp::extractor x(m.pods());
+    dogen::cpp::extractor x(m.pods(), m.concepts());
 
     std::array<bool, 4> found({{ false, false, false, false }});
     for (const auto pair : m.pods()) {
@@ -618,7 +618,7 @@ BOOST_AUTO_TEST_CASE(inheritance_graph_of_pod_with_three_children_has_four_names
     BOOST_LOG_SEV(lg, debug) << "input model: " << m;
     BOOST_CHECK(m.pods().size() == 4);
 
-    dogen::cpp::extractor x(m.pods());
+    dogen::cpp::extractor x(m.pods(), m.concepts());
 
     std::array<bool, 4> found({{ false, false, false, false }});
     for (const auto pair : m.pods()) {

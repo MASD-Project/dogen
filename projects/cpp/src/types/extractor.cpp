@@ -37,6 +37,7 @@ const std::string bool_type("bool");
 const std::string double_type("double");
 const std::string float_type("float");
 
+const std::string concept_not_found("Concept not found in concept container: ");
 const std::string qname_could_not_be_found(
     "Could not find QName in pod container: ");
 const std::string type_does_not_have_a_parent(
@@ -88,6 +89,28 @@ recurse_nested_qnames(const sml::nested_qname& nqn, relationships& rel,
         recurse_nested_qnames(c, rel, is_pointer);
 }
 
+void extractor::properties_for_concept(const sml::qname& qn,
+    std::list<sml::property>& properties,
+    std::unordered_set<sml::qname>& processed_qnames) const {
+
+    if (processed_qnames.find(qn) != processed_qnames.end())
+        return;
+
+    processed_qnames.insert(qn);
+    const auto i(concepts_.find(qn));
+    if (i == concepts_.end()) {
+        BOOST_LOG_SEV(lg, error) << concept_not_found << qn.type_name();
+        BOOST_THROW_EXCEPTION(extraction_error(concept_not_found +
+                qn.type_name()));
+    }
+
+    for (const auto& c : i->second.refines())
+        properties_for_concept(c, properties, processed_qnames);
+
+    const auto& props(i->second.properties());
+    properties.insert(properties.end(), props.begin(), props.end());
+}
+
 relationships extractor::
 extract_dependency_graph(const sml::pod& p) const {
     relationships r;
@@ -118,7 +141,13 @@ extract_dependency_graph(const sml::pod& p) const {
     r.is_child(p.parent_name());
     r.leaves().insert(p.leaves().begin(), p.leaves().end());
 
-    for (const auto prop : p.properties()) {
+    std::list<sml::property> props;
+    std::unordered_set<sml::qname> processed_qnames;
+    for (const auto& qn : p.modeled_concepts())
+        properties_for_concept(qn, props, processed_qnames);
+    props.insert(props.end(), p.properties().begin(), p.properties().end());
+
+    for (const auto prop : props) {
         const auto nqn(prop.type_name());
         bool is_pointer(nqn.is_pointer());
         recurse_nested_qnames(nqn, r, is_pointer);

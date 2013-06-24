@@ -27,6 +27,7 @@
 
 #include <algorithm>
 #include "dogen/stereotypes/serialization/simple_concept_model_fwd_ser.hpp"
+#include "dogen/stereotypes/types/entity.hpp"
 
 namespace dogen {
 namespace stereotypes {
@@ -46,7 +47,8 @@ public:
 public:
     simple_concept_model(
         const int prop_0,
-        const int prop_1);
+        const dogen::stereotypes::entity& prop_1,
+        const int prop_10);
 
 private:
     template<typename Archive>
@@ -65,11 +67,21 @@ public:
     /**@}*/
 
     /**
+     * @brief Prove that includes of types get picked up.
+     */
+    /**@{*/
+    const dogen::stereotypes::entity& prop_1() const;
+    dogen::stereotypes::entity& prop_1();
+    void prop_1(const dogen::stereotypes::entity& v);
+    void prop_1(const dogen::stereotypes::entity&& v);
+    /**@}*/
+
+    /**
      * @brief Property that belongs to class.
      */
     /**@{*/
-    int prop_1() const;
-    void prop_1(const int v);
+    int prop_10() const;
+    void prop_10(const int v);
     /**@}*/
 
 public:
@@ -84,7 +96,8 @@ public:
 
 private:
     int prop_0_;
-    int prop_1_;
+    dogen::stereotypes::entity prop_1_;
+    int prop_10_;
 };
 
 } }
