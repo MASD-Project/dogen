@@ -10,19 +10,19 @@ This file contains all stories that were closed during sprint 29.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-06-24 Mon 18:39]
+Clock summary at [2013-06-24 Mon 21:48]
 
 | Headline                                                           | Time    |       |      |
 |--------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                       | *16:04* |       |      |
+| *Total time*                                                       | *16:33* |       |      |
 |--------------------------------------------------------------------+---------+-------+------|
-| Development Stories Implemented                                    |         | 16:04 |      |
+| Development Stories Implemented                                    |         | 16:33 |      |
 | IMPLEMENTATION Release notes and backlog grooming                  |         |       | 0:53 |
 | COMPLETED Make design by contract methods consistent in dia to sml |         |       | 0:52 |
 | COMPLETED Split resolver from merger                               |         |       | 3:18 |
 | COMPLETED Property container should be a list not a vector         |         |       | 0:18 |
 | COMPLETED Implement concepts in SML                                |         |       | 9:18 |
-| IMPLEMENTATION Design the inheritance tree of DDD classes in SML   |         |       | 1:25 |
+| IMPLEMENTATION Design the inheritance tree of DDD classes in SML   |         |       | 1:54 |
 #+end:
 
 *** IMPLEMENTATION Release notes and backlog grooming                  :task:
@@ -142,16 +142,17 @@ story.
 
 **** COMPLETED List of SML concepts                                    :note:
      CLOSED: [2013-06-20 Thu 08:08]
+     CLOCK: [2013-06-24 Mon 20:01]--[2013-06-24 Mon 20:30] =>  0:29
      CLOCK: [2013-06-20 Thu 08:00]--[2013-06-20 Thu 08:15] =>  0:15
 
 - =Nameable=: type has can be uniquely identified by its qualified name.
 - =Documentable=: type can be documented.
 - =Parameterisable=: type supports pass-through parameters
   (implementation specific parameters).
-- =Generatable=: type has properties related to code generation.
 - =Element=: A unit of modeling. Refinement of =Namable=,
   =Documentable=, =Parameterisable=.
-- GeneratableElement: A unit of modeling that can be code
+- =Generatable=: type has properties related to code generation.
+- =GeneratableElement=: A unit of modeling that can be code
   generated. Refinement of =Element= and =Generatable=. Modeled by
   "special" value types such as =sml::enumeration= and
   =sml::primitive=; modeled by =sml::model=, =sml::concept= and
@@ -217,6 +218,12 @@ compliance):
 - =abstract_entity= derives from =abstract_object=, and provides a set
   of properties that make its identity function.
 - =entity= and =keyed_entity= descend from =abstract_entity=.
+
+*** Check concept properties for identity                             :spike:
+
+When we added concepts we didn't had a link to the processing of
+identity attributes. This means that if we get a property via modeling
+a concept it is not processed.
 
 *** Model name should be a qname                                      :story:
 
