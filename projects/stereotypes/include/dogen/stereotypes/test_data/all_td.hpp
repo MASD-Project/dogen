@@ -19,6 +19,7 @@
  *
  */
 #include "dogen/stereotypes/test_data/aggregate_root_td.hpp"
+#include "dogen/stereotypes/test_data/base_concept_model_td.hpp"
 #include "dogen/stereotypes/test_data/composite_identity_td.hpp"
 #include "dogen/stereotypes/test_data/composite_identity_unversioned_key_td.hpp"
 #include "dogen/stereotypes/test_data/composite_identity_ver_td.hpp"
@@ -46,6 +47,7 @@
 #include "dogen/stereotypes/test_data/just_identity_ver_versioned_key_td.hpp"
 #include "dogen/stereotypes/test_data/pkg1/keyed_in_package_td.hpp"
 #include "dogen/stereotypes/test_data/pkg1/keyed_in_package_unversioned_key_td.hpp"
+#include "dogen/stereotypes/test_data/refinement_concept_model_td.hpp"
 #include "dogen/stereotypes/test_data/simple_concept_model_td.hpp"
 #include "dogen/stereotypes/test_data/some_type_td.hpp"
 #include "dogen/stereotypes/test_data/value_td.hpp"

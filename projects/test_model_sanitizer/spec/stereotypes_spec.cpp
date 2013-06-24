@@ -78,6 +78,8 @@ BOOST_AUTO_TEST_CASE(validate_equality) {
     test_equality<versioned_generator>();
     test_equality<aggregate_root_generator>();
     test_equality<simple_concept_model_generator>();
+    test_equality<base_concept_model_generator>();
+    test_equality<refinement_concept_model_generator>();
 }
 
 BOOST_AUTO_TEST_CASE(validate_serialisation) {
@@ -114,6 +116,8 @@ BOOST_AUTO_TEST_CASE(validate_serialisation) {
     rountrip_type<versioned_generator>();
     rountrip_type<aggregate_root_generator>();
     rountrip_type<simple_concept_model_generator>();
+    rountrip_type<base_concept_model_generator>();
+    rountrip_type<refinement_concept_model_generator>();
 }
 
 BOOST_AUTO_TEST_CASE(validate_hashing) {
@@ -150,6 +154,8 @@ BOOST_AUTO_TEST_CASE(validate_hashing) {
     test_hashing<versioned_generator>();
     test_hashing<aggregate_root_generator>();
     test_hashing<simple_concept_model_generator>();
+    test_hashing<base_concept_model_generator>();
+    test_hashing<refinement_concept_model_generator>();
 }
 
 BOOST_AUTO_TEST_CASE(validate_swap) {
@@ -182,6 +188,8 @@ BOOST_AUTO_TEST_CASE(validate_swap) {
     test_swap<versioned_generator>();
     test_swap<aggregate_root_generator>();
     test_swap<simple_concept_model_generator>();
+    test_swap<base_concept_model_generator>();
+    test_swap<refinement_concept_model_generator>();
 }
 
 BOOST_AUTO_TEST_CASE(validate_io) {
@@ -219,6 +227,8 @@ BOOST_AUTO_TEST_CASE(validate_io) {
     test_io<versioned_generator>();
     test_io<aggregate_root_generator>();
     test_io<simple_concept_model_generator>();
+    test_io<base_concept_model_generator>();
+    test_io<refinement_concept_model_generator>();
 }
 
 BOOST_AUTO_TEST_CASE(validate_move_assignment_copy) {
@@ -257,6 +267,8 @@ BOOST_AUTO_TEST_CASE(validate_move_assignment_copy) {
     test_move_assignment_copy<versioned_generator>();
     test_move_assignment_copy<aggregate_root_generator>();
     test_move_assignment_copy<simple_concept_model_generator>();
+    test_move_assignment_copy<base_concept_model_generator>();
+    test_move_assignment_copy<refinement_concept_model_generator>();
 }
 
 BOOST_AUTO_TEST_CASE(setting_properties_using_the_fluent_interface_produces_expected_result) {

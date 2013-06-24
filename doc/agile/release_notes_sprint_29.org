@@ -10,18 +10,19 @@ This file contains all stories that were closed during sprint 29.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-06-23 Sun 22:06]
+Clock summary at [2013-06-24 Mon 09:06]
 
 | Headline                                                           | Time    |       |      |
 |--------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                       | *13:37* |       |      |
+| *Total time*                                                       | *15:31* |       |      |
 |--------------------------------------------------------------------+---------+-------+------|
-| Development Stories Implemented                                    |         | 13:37 |      |
+| Development Stories Implemented                                    |         | 15:31 |      |
 | IMPLEMENTATION Release notes and backlog grooming                  |         |       | 0:53 |
 | COMPLETED Make design by contract methods consistent in dia to sml |         |       | 0:52 |
 | COMPLETED Split resolver from merger                               |         |       | 3:18 |
+| COMPLETED Property container should be a list not a vector         |         |       | 0:18 |
 | IMPLEMENTATION Design the inheritance tree of DDD classes in SML   |         |       | 1:25 |
-| IMPLEMENTATION Implement concepts in SML                           |         |       | 7:09 |
+| IMPLEMENTATION Implement concepts in SML                           |         |       | 8:45 |
 #+end:
 
 *** IMPLEMENTATION Release notes and backlog grooming                  :task:
@@ -203,6 +204,10 @@ to start making use of them.
 - in CPP model's transformer, traverse concepts and add properties.
 
 **** IMPLEMENTATION Add test to stereotypes model                      :task:
+     CLOCK: [2013-06-24 Mon 09:03]--[2013-06-24 Mon 09:06] =>  0:03
+     CLOCK: [2013-06-24 Mon 08:29]--[2013-06-24 Mon 08:39] =>  0:10
+     CLOCK: [2013-06-24 Mon 08:02]--[2013-06-24 Mon 08:29] =>  0:27
+     CLOCK: [2013-06-24 Mon 07:36]--[2013-06-24 Mon 07:45] =>  0:09
      CLOCK: [2013-06-23 Sun 23:22]--[2013-06-23 Sun 23:37] =>  0:15
 
 - stand-alone concept

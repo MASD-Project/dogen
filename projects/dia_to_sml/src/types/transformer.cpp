@@ -476,6 +476,7 @@ void transformer::transform_concept(const processed_object& o) {
     const std::string pkg_id(o.child_node_id());
     using sml::meta_types;
     c.name(transform_qname(o.name(), meta_types::concept, pkg_id));
+    context_.id_to_qname().insert(std::make_pair(o.id(), c.name()));
 
     for (const auto& prop : o.properties()) {
         auto property(transform_property(prop));

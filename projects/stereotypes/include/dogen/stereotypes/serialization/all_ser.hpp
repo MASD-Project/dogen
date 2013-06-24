@@ -19,6 +19,7 @@
  *
  */
 #include "dogen/stereotypes/serialization/aggregate_root_ser.hpp"
+#include "dogen/stereotypes/serialization/base_concept_model_ser.hpp"
 #include "dogen/stereotypes/serialization/composite_identity_ser.hpp"
 #include "dogen/stereotypes/serialization/composite_identity_unversioned_key_ser.hpp"
 #include "dogen/stereotypes/serialization/composite_identity_ver_ser.hpp"
@@ -46,6 +47,7 @@
 #include "dogen/stereotypes/serialization/just_identity_ver_versioned_key_ser.hpp"
 #include "dogen/stereotypes/serialization/pkg1/keyed_in_package_ser.hpp"
 #include "dogen/stereotypes/serialization/pkg1/keyed_in_package_unversioned_key_ser.hpp"
+#include "dogen/stereotypes/serialization/refinement_concept_model_ser.hpp"
 #include "dogen/stereotypes/serialization/registrar_ser.hpp"
 #include "dogen/stereotypes/serialization/simple_concept_model_ser.hpp"
 #include "dogen/stereotypes/serialization/some_type_ser.hpp"
