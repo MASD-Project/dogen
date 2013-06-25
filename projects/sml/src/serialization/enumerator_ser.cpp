@@ -28,44 +28,32 @@
 #include <boost/archive/xml_oarchive.hpp>
 #include <boost/serialization/nvp.hpp>
 #include <boost/serialization/string.hpp>
-#include <boost/serialization/utility.hpp>
-#include <boost/serialization/vector.hpp>
-#include "dogen/sml/serialization/enumeration_ser.hpp"
-#include "dogen/sml/serialization/generation_types_ser.hpp"
-#include "dogen/sml/serialization/primitive_ser.hpp"
-#include "dogen/sml/serialization/qname_ser.hpp"
-#include "dogen/sml/serialization/type_ser.hpp"
+#include "dogen/sml/serialization/enumerator_ser.hpp"
 
 #ifdef __linux__
 #include "eos/portable_iarchive.hpp"
 #include "eos/portable_oarchive.hpp"
 #endif
 
-BOOST_CLASS_TRACKING(
-    dogen::sml::type,
-    boost::serialization::track_selectively)
-
 namespace boost {
 namespace serialization {
 
 template<typename Archive>
 void save(Archive& ar,
-    const dogen::sml::type& v,
+    const dogen::sml::enumerator& v,
     const unsigned int /*version*/) {
     ar << make_nvp("documentation", v.documentation_);
-    ar << make_nvp("implementation_specific_parameters", v.implementation_specific_parameters_);
     ar << make_nvp("name", v.name_);
-    ar << make_nvp("generation_type", v.generation_type_);
+    ar << make_nvp("value", v.value_);
 }
 
 template<typename Archive>
 void load(Archive& ar,
-    dogen::sml::type& v,
+    dogen::sml::enumerator& v,
     const unsigned int /*version*/) {
     ar >> make_nvp("documentation", v.documentation_);
-    ar >> make_nvp("implementation_specific_parameters", v.implementation_specific_parameters_);
     ar >> make_nvp("name", v.name_);
-    ar >> make_nvp("generation_type", v.generation_type_);
+    ar >> make_nvp("value", v.value_);
 }
 
 } }
@@ -73,21 +61,21 @@ void load(Archive& ar,
 namespace boost {
 namespace serialization {
 
-template void save(archive::polymorphic_oarchive& ar, const dogen::sml::type& v, unsigned int version);
-template void load(archive::polymorphic_iarchive& ar, dogen::sml::type& v, unsigned int version);
+template void save(archive::polymorphic_oarchive& ar, const dogen::sml::enumerator& v, unsigned int version);
+template void load(archive::polymorphic_iarchive& ar, dogen::sml::enumerator& v, unsigned int version);
 
-template void save(archive::text_oarchive& ar, const dogen::sml::type& v, unsigned int version);
-template void load(archive::text_iarchive& ar, dogen::sml::type& v, unsigned int version);
+template void save(archive::text_oarchive& ar, const dogen::sml::enumerator& v, unsigned int version);
+template void load(archive::text_iarchive& ar, dogen::sml::enumerator& v, unsigned int version);
 
-template void save(archive::binary_oarchive& ar, const dogen::sml::type& v, unsigned int version);
-template void load(archive::binary_iarchive& ar, dogen::sml::type& v, unsigned int version);
+template void save(archive::binary_oarchive& ar, const dogen::sml::enumerator& v, unsigned int version);
+template void load(archive::binary_iarchive& ar, dogen::sml::enumerator& v, unsigned int version);
 
-template void save(archive::xml_oarchive& ar, const dogen::sml::type& v, unsigned int version);
-template void load(archive::xml_iarchive& ar, dogen::sml::type& v, unsigned int version);
+template void save(archive::xml_oarchive& ar, const dogen::sml::enumerator& v, unsigned int version);
+template void load(archive::xml_iarchive& ar, dogen::sml::enumerator& v, unsigned int version);
 
 #ifdef __linux__
-template void save(eos::portable_oarchive& ar, const dogen::sml::type& v, unsigned int version);
-template void load(eos::portable_iarchive& ar, dogen::sml::type& v, unsigned int version);
+template void save(eos::portable_oarchive& ar, const dogen::sml::enumerator& v, unsigned int version);
+template void load(eos::portable_iarchive& ar, dogen::sml::enumerator& v, unsigned int version);
 #endif
 
 } }

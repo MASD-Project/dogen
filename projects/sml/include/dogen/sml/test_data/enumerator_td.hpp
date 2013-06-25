@@ -18,47 +18,35 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_SML_TYPES_TYPE_VISITOR_HPP
-#define DOGEN_SML_TYPES_TYPE_VISITOR_HPP
+#ifndef DOGEN_SML_TEST_DATA_ENUMERATOR_TD_HPP
+#define DOGEN_SML_TEST_DATA_ENUMERATOR_TD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/sml/types/enumeration_fwd.hpp"
-#include "dogen/sml/types/primitive_fwd.hpp"
-#include "dogen/sml/types/type_fwd.hpp"
+#include "dogen/sml/types/enumerator.hpp"
 
 namespace dogen {
 namespace sml {
 
-class type_visitor {
+class enumerator_generator {
 public:
-    virtual ~type_visitor() noexcept = 0;
+    enumerator_generator();
 
 public:
-    /**
-     * @brief Accept visits for type dogen::sml::primitive
-     */
-    /**@{*/
-    virtual void visit(const dogen::sml::primitive&) const { }
-    virtual void visit(const dogen::sml::primitive&) { }
-    virtual void visit(dogen::sml::primitive&) const { }
-    virtual void visit(dogen::sml::primitive&) { }
-    /**@}*/
+    typedef dogen::sml::enumerator result_type;
 
-    /**
-     * @brief Accept visits for type dogen::sml::enumeration
-     */
-    /**@{*/
-    virtual void visit(const dogen::sml::enumeration&) const { }
-    virtual void visit(const dogen::sml::enumeration&) { }
-    virtual void visit(dogen::sml::enumeration&) const { }
-    virtual void visit(dogen::sml::enumeration&) { }
-    /**@}*/
+public:
+    static void populate(const unsigned int position, result_type& v);
+    static result_type create(const unsigned int position);
+    result_type operator()();
+
+private:
+    unsigned int position_;
+public:
+    static result_type* create_ptr(const unsigned int position);
 };
-
-inline type_visitor::~type_visitor() noexcept { }
 
 } }
 

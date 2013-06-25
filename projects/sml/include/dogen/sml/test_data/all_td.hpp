@@ -21,6 +21,8 @@
 #include "dogen/sml/test_data/category_types_td.hpp"
 #include "dogen/sml/test_data/concept_td.hpp"
 #include "dogen/sml/test_data/entity_td.hpp"
+#include "dogen/sml/test_data/enumeration_td.hpp"
+#include "dogen/sml/test_data/enumerator_td.hpp"
 #include "dogen/sml/test_data/factory_td.hpp"
 #include "dogen/sml/test_data/generation_types_td.hpp"
 #include "dogen/sml/test_data/meta_types_td.hpp"

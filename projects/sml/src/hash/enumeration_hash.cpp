@@ -18,28 +18,39 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/sml/hash/category_types_hash.hpp"
-#include "dogen/sml/hash/concept_hash.hpp"
-#include "dogen/sml/hash/entity_hash.hpp"
 #include "dogen/sml/hash/enumeration_hash.hpp"
 #include "dogen/sml/hash/enumerator_hash.hpp"
-#include "dogen/sml/hash/factory_hash.hpp"
-#include "dogen/sml/hash/generation_types_hash.hpp"
-#include "dogen/sml/hash/meta_types_hash.hpp"
-#include "dogen/sml/hash/model_element_hash.hpp"
-#include "dogen/sml/hash/model_hash.hpp"
-#include "dogen/sml/hash/module_hash.hpp"
-#include "dogen/sml/hash/nested_qname_hash.hpp"
-#include "dogen/sml/hash/pod_hash.hpp"
-#include "dogen/sml/hash/pod_types_hash.hpp"
-#include "dogen/sml/hash/primitive_hash.hpp"
-#include "dogen/sml/hash/property_hash.hpp"
-#include "dogen/sml/hash/qname_hash.hpp"
-#include "dogen/sml/hash/reference_hash.hpp"
-#include "dogen/sml/hash/repository_hash.hpp"
-#include "dogen/sml/hash/service_hash.hpp"
-#include "dogen/sml/hash/service_types_hash.hpp"
 #include "dogen/sml/hash/type_hash.hpp"
-#include "dogen/sml/hash/typed_element_hash.hpp"
-#include "dogen/sml/hash/value_hash.hpp"
-#include "dogen/sml/hash/value_types_hash.hpp"
+
+namespace {
+
+template <typename HashableType>
+inline void combine(std::size_t& seed, const HashableType& value)
+{
+    std::hash<HashableType> hasher;
+    seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
+}
+
+inline std::size_t hash_std_vector_dogen_sml_enumerator(const std::vector<dogen::sml::enumerator>& v){
+    std::size_t seed(0);
+    for (const auto i : v) {
+        combine(seed, i);
+    }
+    return seed;
+}
+
+}
+
+namespace dogen {
+namespace sml {
+
+std::size_t enumeration_hasher::hash(const enumeration&v) {
+    std::size_t seed(0);
+
+    combine(seed, dynamic_cast<const dogen::sml::type&>(v));
+
+    combine(seed, hash_std_vector_dogen_sml_enumerator(v.enumerators()));
+    return seed;
+}
+
+} }
