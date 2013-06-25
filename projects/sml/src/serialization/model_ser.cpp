@@ -35,6 +35,7 @@
 #include "dogen/sml/serialization/model_ser.hpp"
 #include "dogen/sml/serialization/module_ser.hpp"
 #include "dogen/sml/serialization/pod_ser.hpp"
+#include "dogen/sml/serialization/primitive_ser.hpp"
 #include "dogen/sml/serialization/qname_ser.hpp"
 #include "dogen/sml/serialization/reference_ser.hpp"
 #include "dogen/sml/serialization/service_ser.hpp"

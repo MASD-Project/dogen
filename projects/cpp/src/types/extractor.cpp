@@ -32,7 +32,6 @@ namespace {
 auto lg(logger_factory("cpp.extractor"));
 
 const std::string empty;
-const std::string primitive_model("primitive_model");
 const std::string bool_type("bool");
 const std::string double_type("double");
 const std::string float_type("float");

@@ -23,6 +23,7 @@
 #include "dogen/sml/test_data/model_td.hpp"
 #include "dogen/sml/test_data/module_td.hpp"
 #include "dogen/sml/test_data/pod_td.hpp"
+#include "dogen/sml/test_data/primitive_td.hpp"
 #include "dogen/sml/test_data/qname_td.hpp"
 #include "dogen/sml/test_data/reference_td.hpp"
 #include "dogen/sml/test_data/service_td.hpp"
@@ -50,6 +51,19 @@ std::unordered_map<dogen::sml::qname, dogen::sml::pod> create_std_unordered_map_
     std::unordered_map<dogen::sml::qname, dogen::sml::pod> r;
     for (unsigned int i(0); i < 10; ++i) {
         r.insert(std::make_pair(create_dogen_sml_qname(position + i), create_dogen_sml_pod(position + i)));
+    }
+    return r;
+}
+
+dogen::sml::primitive
+create_dogen_sml_primitive(const unsigned int position) {
+    return dogen::sml::primitive_generator::create(position);
+}
+
+std::unordered_map<dogen::sml::qname, dogen::sml::primitive> create_std_unordered_map_dogen_sml_qname_dogen_sml_primitive(unsigned int position) {
+    std::unordered_map<dogen::sml::qname, dogen::sml::primitive> r;
+    for (unsigned int i(0); i < 10; ++i) {
+        r.insert(std::make_pair(create_dogen_sml_qname(position + i), create_dogen_sml_primitive(position + i)));
     }
     return r;
 }
@@ -166,7 +180,7 @@ void model_generator::
 populate(const unsigned int position, result_type& v) {
     v.name(create_std_string(position + 0));
     v.pods(create_std_unordered_map_dogen_sml_qname_dogen_sml_pod(position + 1));
-    v.primitives(create_std_unordered_map_dogen_sml_qname_dogen_sml_value(position + 2));
+    v.primitives(create_std_unordered_map_dogen_sml_qname_dogen_sml_primitive(position + 2));
     v.enumerations(create_std_unordered_map_dogen_sml_qname_dogen_sml_value(position + 3));
     v.exceptions(create_std_unordered_map_dogen_sml_qname_dogen_sml_value(position + 4));
     v.external_module_path(create_std_list_std_string(position + 5));

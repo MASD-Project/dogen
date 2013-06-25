@@ -59,15 +59,14 @@ const std::string uint64_t_name("uint64_t");
 namespace dogen {
 namespace sml {
 
-value std_model_factory::create_primitive(const std::string& name) {
+primitive std_model_factory::create_primitive(const std::string& name) {
     qname q;
     q.type_name(name);
     q.meta_type(meta_types::primitive);
     q.model_name(model_name);
 
-    value r;
+    primitive r;
     r.name(q);
-    r.type(value_types::primitive);
     r.generation_type(generation_types::no_generation);
     return r;
 }

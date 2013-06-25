@@ -43,13 +43,13 @@ const std::string float_name("float");
 namespace dogen {
 namespace sml {
 
-value primitive_model_factory::create(const std::string& name) {
+primitive primitive_model_factory::create(const std::string& name) {
     qname q;
     q.type_name(name);
     q.meta_type(meta_types::primitive);
-    value r;
+
+    primitive r;
     r.name(q);
-    r.type(value_types::primitive);
     r.generation_type(generation_types::no_generation);
     return r;
 }
