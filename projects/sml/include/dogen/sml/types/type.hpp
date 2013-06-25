@@ -33,6 +33,7 @@
 #include "dogen/sml/serialization/type_fwd_ser.hpp"
 #include "dogen/sml/types/generation_types.hpp"
 #include "dogen/sml/types/qname.hpp"
+#include "dogen/sml/types/type_visitor.hpp"
 
 namespace dogen {
 namespace sml {
@@ -63,6 +64,12 @@ private:
 
     template<typename Archive>
     friend void boost::serialization::load(Archive& ar, type& v, unsigned int version);
+
+public:
+    virtual void accept(const type_visitor& v) const = 0;
+    virtual void accept(type_visitor& v) const = 0;
+    virtual void accept(const type_visitor& v) = 0;
+    virtual void accept(type_visitor& v) = 0;
 
 public:
     virtual void to_stream(std::ostream& s) const;

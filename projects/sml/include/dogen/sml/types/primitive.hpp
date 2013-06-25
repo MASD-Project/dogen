@@ -29,6 +29,7 @@
 #include <iosfwd>
 #include "dogen/sml/serialization/primitive_fwd_ser.hpp"
 #include "dogen/sml/types/type.hpp"
+#include "dogen/sml/types/type_visitor.hpp"
 
 namespace dogen {
 namespace sml {
@@ -57,6 +58,23 @@ private:
 
     template<typename Archive>
     friend void boost::serialization::load(Archive& ar, primitive& v, unsigned int version);
+
+public:
+    virtual void accept(const type_visitor& v) const override {
+        v.visit(*this);
+    }
+
+    virtual void accept(type_visitor& v) const override {
+        v.visit(*this);
+    }
+
+    virtual void accept(const type_visitor& v) override {
+        v.visit(*this);
+    }
+
+    virtual void accept(type_visitor& v) override {
+        v.visit(*this);
+    }
 
 public:
     void to_stream(std::ostream& s) const override;

@@ -74,7 +74,7 @@
         <dia:point val="20,60"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="32.839999999999996"/>
+        <dia:real val="32.840000000000003"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="14.000000000000002"/>
@@ -748,7 +748,7 @@ This is only needed because we don't have a type base class.#</dia:string>
         <dia:point val="-38,29"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="32.839999999999996"/>
+        <dia:real val="32.840000000000003"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="20.400000000000006"/>
@@ -1377,7 +1377,7 @@ or other comparable model types.#</dia:string>
         <dia:point val="-80,60"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="32.839999999999996"/>
+        <dia:real val="32.840000000000003"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="6.8000000000000007"/>
@@ -3419,7 +3419,7 @@ which make code generation different.#</dia:string>
         <dia:point val="-32,60"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="8.3349999999999991"/>
+        <dia:real val="8.3350000000000009"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="5.2000000000000011"/>
@@ -5063,7 +5063,7 @@ and all of the supported types within those models.#</dia:string>
         <dia:real val="24.77"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="4.0999999999999996"/>
+        <dia:real val="4.1000000000000005"/>
       </dia:attribute>
       <dia:attribute name="line_width">
         <dia:real val="0.10000000000000001"/>
@@ -5437,7 +5437,7 @@ all types in the combined model.#</dia:string>
         <dia:point val="3,11"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="31.685000000000002"/>
+        <dia:real val="31.684999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="7.5999999999999996"/>
@@ -6020,10 +6020,10 @@ all types in the combined model.#</dia:string>
         <dia:point val="-79,-11"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="27.850000000000001"/>
+        <dia:real val="27.849999999999998"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="7.2999999999999998"/>
+        <dia:real val="7.3000000000000007"/>
       </dia:attribute>
       <dia:attribute name="line_width">
         <dia:real val="0.10000000149011612"/>
@@ -6075,7 +6075,7 @@ but with a focus only on data structures and domain driven constructs.
         <dia:point val="-32,-6"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="7.0924999999999994"/>
+        <dia:real val="7.0925000000000002"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -6611,7 +6611,7 @@ but with a focus only on data structures and domain driven constructs.
         <dia:point val="-65,129"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="6.6225000000000005"/>
+        <dia:real val="6.6224999999999996"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="5.2000000000000011"/>
@@ -6791,7 +6791,7 @@ but with a focus only on data structures and domain driven constructs.
         <dia:point val="-122,76"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="32.839999999999996"/>
+        <dia:real val="32.840000000000003"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="6.0000000000000009"/>
@@ -10023,7 +10023,7 @@ for Java, etc.#</dia:string>
         <dia:point val="-160,21"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="32.839999999999996"/>
+        <dia:real val="32.840000000000003"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3.6000000000000001"/>
@@ -10524,7 +10524,7 @@ for Java, etc.#</dia:string>
         <dia:point val="-148,48"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="9.7525000000000013"/>
+        <dia:real val="9.7524999999999995"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -10997,7 +10997,7 @@ Does not include inherited attributes.#</dia:string>
         <dia:point val="-143.124,51"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-155.683,50.95;-142.274,60.05"/>
+        <dia:rectangle val="-155.682,50.95;-142.274,60.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -11074,7 +11074,7 @@ Does not include inherited attributes.#</dia:string>
         <dia:point val="20,74"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="8.975,73.25;20.75,85.5502"/>
+        <dia:rectangle val="8.975,73.25;20.75,84.7502"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -11145,7 +11145,7 @@ Does not include inherited attributes.#</dia:string>
         <dia:point val="36.42,74"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="28.205,73.25;37.17,85.6"/>
+        <dia:rectangle val="28.205,73.25;37.17,84.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -11177,13 +11177,13 @@ Does not include inherited attributes.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O84">
       <dia:attribute name="obj_pos">
-        <dia:point val="28,98"/>
+        <dia:point val="32.1667,98.1667"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="27.95,97.95;32.6225,101.05"/>
+        <dia:rectangle val="32.1167,98.1167;36.7892,101.217"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="28,98"/>
+        <dia:point val="32.1667,98.1667"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="4.5724999999999998"/>
@@ -11287,16 +11287,16 @@ Does not include inherited attributes.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O85">
       <dia:attribute name="obj_pos">
-        <dia:point val="40,84"/>
+        <dia:point val="38,84"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="39.95,83.95;49.02,87.05"/>
+        <dia:rectangle val="37.95,83.95;51.255,87.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="40,84"/>
+        <dia:point val="38,84"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="8.9700000000000006"/>
+        <dia:real val="13.205"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -11305,7 +11305,7 @@ Does not include inherited attributes.#</dia:string>
         <dia:string>#type#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#GeneratableElement#</dia:string>
+        <dia:string>#visitable, GeneratableElement#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#Represents a type within the type system.#</dia:string>
@@ -11397,19 +11397,19 @@ Does not include inherited attributes.#</dia:string>
     </dia:object>
     <dia:object type="UML - Generalization" version="1" id="O86">
       <dia:attribute name="obj_pos">
-        <dia:point val="44.485,87"/>
+        <dia:point val="44.6025,87"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="30.2362,86.95;45.335,98.05"/>
+        <dia:rectangle val="34.4029,86.95;45.4525,98.2167"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="44.485,87"/>
-        <dia:point val="44.485,94"/>
-        <dia:point val="30.2862,94"/>
-        <dia:point val="30.2862,98"/>
+        <dia:point val="44.6025,87"/>
+        <dia:point val="44.6025,94"/>
+        <dia:point val="34.4529,94"/>
+        <dia:point val="34.4529,98.1667"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -11477,7 +11477,7 @@ Does not include inherited attributes.#</dia:string>
         <dia:point val="36.42,74.0496"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="35.67,73.2996;44.685,85.6"/>
+        <dia:rectangle val="35.67,73.2996;44.8025,84.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -11485,8 +11485,8 @@ Does not include inherited attributes.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="36.42,74.0496"/>
         <dia:point val="36.42,79"/>
-        <dia:point val="44.485,79"/>
-        <dia:point val="44.485,84"/>
+        <dia:point val="44.6025,79"/>
+        <dia:point val="44.6025,84"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
