@@ -222,15 +222,15 @@ transformer::transform_into_namespace_list(const sml::qname& qn) const {
 }
 
 enumerator_info
-transformer::transform_enumerator(const sml::property& e) const {
+transformer::transform_enumerator(const sml::enumerator& e) const {
     enumerator_info r;
     r.name(e.name());
-    r.value(e.default_value());
+    r.value(e.value());
     r.documentation(e.documentation());
     return r;
 }
 
-enum_info transformer::transform_enumeration(const sml::value& e) const {
+enum_info transformer::transform_enumeration(const sml::enumeration& e) const {
     BOOST_LOG_SEV(lg, debug) << "Transforming enumeration: " << e.name();
 
     enum_info r;
@@ -239,7 +239,7 @@ enum_info transformer::transform_enumeration(const sml::value& e) const {
     r.documentation(e.documentation());
 
     // FIXME: check the type of the first property
-    for (const auto& en : e.properties())
+    for (const auto& en : e.enumerators())
         r.enumerators().push_back(transform_enumerator(en));
 
     BOOST_LOG_SEV(lg, debug) << "Transformed enumeration: " << e.name();

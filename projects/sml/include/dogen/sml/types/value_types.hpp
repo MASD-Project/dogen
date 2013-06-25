@@ -33,12 +33,11 @@ enum class value_types : unsigned int {
     user_defined = 1, ///< Value was created by the user.
     unversioned_key = 2, ///< Value is an unversioned key.
     versioned_key = 3, ///< Value is a versioned key.
-    enumeration = 4, ///< Value is an enumeration.
-    exception = 5, ///< Value represents an exception type.
-    string_table = 6, ///< Value is a list of strings.
-    smart_pointer = 7, ///< Value is a smart pointer.
-    associative_container = 8, ///< Type is an associative container.
-    sequence_container = 9 ///< Type is a sequence container.
+    exception = 4, ///< Value represents an exception type.
+    string_table = 5, ///< Value is a list of strings.
+    smart_pointer = 6, ///< Value is a smart pointer.
+    associative_container = 7, ///< Type is an associative container.
+    sequence_container = 8 ///< Type is a sequence container.
 };
 
 } }

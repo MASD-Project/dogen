@@ -35,6 +35,7 @@
 #include "dogen/sml/hash/qname_hash.hpp"
 #include "dogen/sml/serialization/model_fwd_ser.hpp"
 #include "dogen/sml/types/concept.hpp"
+#include "dogen/sml/types/enumeration.hpp"
 #include "dogen/sml/types/module.hpp"
 #include "dogen/sml/types/pod.hpp"
 #include "dogen/sml/types/primitive.hpp"
@@ -63,7 +64,7 @@ public:
         const std::string& name,
         const std::unordered_map<dogen::sml::qname, dogen::sml::pod>& pods,
         const std::unordered_map<dogen::sml::qname, dogen::sml::primitive>& primitives,
-        const std::unordered_map<dogen::sml::qname, dogen::sml::value>& enumerations,
+        const std::unordered_map<dogen::sml::qname, dogen::sml::enumeration>& enumerations,
         const std::unordered_map<dogen::sml::qname, dogen::sml::value>& exceptions,
         const std::list<std::string>& external_module_path,
         const bool is_system,
@@ -121,10 +122,10 @@ public:
      * @brief Enumerations contained in the model.
      */
     /**@{*/
-    const std::unordered_map<dogen::sml::qname, dogen::sml::value>& enumerations() const;
-    std::unordered_map<dogen::sml::qname, dogen::sml::value>& enumerations();
-    void enumerations(const std::unordered_map<dogen::sml::qname, dogen::sml::value>& v);
-    void enumerations(const std::unordered_map<dogen::sml::qname, dogen::sml::value>&& v);
+    const std::unordered_map<dogen::sml::qname, dogen::sml::enumeration>& enumerations() const;
+    std::unordered_map<dogen::sml::qname, dogen::sml::enumeration>& enumerations();
+    void enumerations(const std::unordered_map<dogen::sml::qname, dogen::sml::enumeration>& v);
+    void enumerations(const std::unordered_map<dogen::sml::qname, dogen::sml::enumeration>&& v);
     /**@}*/
 
     /**
@@ -247,7 +248,7 @@ private:
     std::string name_;
     std::unordered_map<dogen::sml::qname, dogen::sml::pod> pods_;
     std::unordered_map<dogen::sml::qname, dogen::sml::primitive> primitives_;
-    std::unordered_map<dogen::sml::qname, dogen::sml::value> enumerations_;
+    std::unordered_map<dogen::sml::qname, dogen::sml::enumeration> enumerations_;
     std::unordered_map<dogen::sml::qname, dogen::sml::value> exceptions_;
     std::list<std::string> external_module_path_;
     bool is_system_;

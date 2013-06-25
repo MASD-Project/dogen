@@ -74,7 +74,7 @@
         <dia:point val="20,60"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="32.840000000000003"/>
+        <dia:real val="32.839999999999996"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="14.000000000000002"/>
@@ -246,7 +246,7 @@ name folders in the file-system.
             <dia:string>#enumerations#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::unordered_map&lt;qname,value&gt;#</dia:string>
+            <dia:string>#std::unordered_map&lt;qname,enumeration&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -748,7 +748,7 @@ This is only needed because we don't have a type base class.#</dia:string>
         <dia:point val="-38,29"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="32.840000000000003"/>
+        <dia:real val="32.839999999999996"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="20.400000000000006"/>
@@ -1377,7 +1377,7 @@ or other comparable model types.#</dia:string>
         <dia:point val="-80,60"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="32.840000000000003"/>
+        <dia:real val="32.839999999999996"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="6.8000000000000007"/>
@@ -3419,7 +3419,7 @@ which make code generation different.#</dia:string>
         <dia:point val="-32,60"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="8.3350000000000009"/>
+        <dia:real val="8.3349999999999991"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="5.2000000000000011"/>
@@ -5063,7 +5063,7 @@ and all of the supported types within those models.#</dia:string>
         <dia:real val="24.77"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="4.1000000000000005"/>
+        <dia:real val="4.0999999999999996"/>
       </dia:attribute>
       <dia:attribute name="line_width">
         <dia:real val="0.10000000000000001"/>
@@ -5437,7 +5437,7 @@ all types in the combined model.#</dia:string>
         <dia:point val="3,11"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="31.684999999999999"/>
+        <dia:real val="31.685000000000002"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="7.5999999999999996"/>
@@ -6020,10 +6020,10 @@ all types in the combined model.#</dia:string>
         <dia:point val="-79,-11"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="27.849999999999998"/>
+        <dia:real val="27.850000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="7.3000000000000007"/>
+        <dia:real val="7.2999999999999998"/>
       </dia:attribute>
       <dia:attribute name="line_width">
         <dia:real val="0.10000000149011612"/>
@@ -6075,7 +6075,7 @@ but with a focus only on data structures and domain driven constructs.
         <dia:point val="-32,-6"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="7.0925000000000002"/>
+        <dia:real val="7.0924999999999994"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -6611,7 +6611,7 @@ but with a focus only on data structures and domain driven constructs.
         <dia:point val="-65,129"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="6.6224999999999996"/>
+        <dia:real val="6.6225000000000005"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="5.2000000000000011"/>
@@ -6791,7 +6791,7 @@ but with a focus only on data structures and domain driven constructs.
         <dia:point val="-122,76"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="32.840000000000003"/>
+        <dia:real val="32.839999999999996"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="6.0000000000000009"/>
@@ -7893,7 +7893,7 @@ requirements of the underlying typed element.#</dia:string>
         <dia:point val="-128,129"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-128.05,128.95;-118.98,139.05"/>
+        <dia:rectangle val="-128.05,128.95;-118.98,138.25"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-128,129"/>
@@ -7902,7 +7902,7 @@ requirements of the underlying typed element.#</dia:string>
         <dia:real val="8.9700000000000006"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="10"/>
+        <dia:real val="9.2000000000000011"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#value_types#</dia:string>
@@ -8050,29 +8050,6 @@ requirements of the underlying typed element.#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
             <dia:string>#Value is a versioned key.#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#enumeration#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>#Value is an enumeration.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -10000,7 +9977,7 @@ for Java, etc.#</dia:string>
         <dia:point val="-160,21"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="32.840000000000003"/>
+        <dia:real val="32.839999999999996"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3.6000000000000001"/>
@@ -10501,7 +10478,7 @@ for Java, etc.#</dia:string>
         <dia:point val="-148,48"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="9.7524999999999995"/>
+        <dia:real val="9.7525000000000013"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -11489,7 +11466,7 @@ Does not include inherited attributes.#</dia:string>
         <dia:point val="41,98"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="40.95,97.95;55.795,101.65"/>
+        <dia:rectangle val="40.95,97.95;55.795,102.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="41,98"/>
@@ -11498,7 +11475,7 @@ Does not include inherited attributes.#</dia:string>
         <dia:real val="14.744999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="3.6000000000000001"/>
+        <dia:real val="4.4000000000000004"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#enumeration#</dia:string>
@@ -11588,6 +11565,29 @@ Does not include inherited attributes.#</dia:string>
         <dia:real val="0.69999999999999996"/>
       </dia:attribute>
       <dia:attribute name="attributes">
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#underlying_type#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>#qname#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>#Underlying type of each instance of the enumeration.#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
             <dia:string>#enumerators#</dia:string>
@@ -11817,16 +11817,16 @@ It must be castable to instance of the type defined in the enumeration.#</dia:st
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="48.3725,101.6"/>
+        <dia:point val="48.3725,102.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="47.6225,100.85;53.1075,110.8"/>
+        <dia:rectangle val="47.6225,101.65;53.1075,110.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="48.3725,101.6"/>
+        <dia:point val="48.3725,102.4"/>
         <dia:point val="48.3725,106"/>
         <dia:point val="52.9075,106"/>
         <dia:point val="52.9075,110"/>

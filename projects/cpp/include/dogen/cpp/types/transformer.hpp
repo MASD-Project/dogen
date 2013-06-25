@@ -35,6 +35,7 @@
 #include "dogen/sml/hash/qname_hash.hpp"
 #include "dogen/sml/types/module.hpp"
 #include "dogen/sml/types/value.hpp"
+#include "dogen/sml/types/enumeration.hpp"
 #include "dogen/sml/types/nested_qname.hpp"
 #include "dogen/cpp/types/class_info.hpp"
 #include "dogen/cpp/types/namespace_info.hpp"
@@ -90,7 +91,7 @@ private:
     /**
      * @brief Transforms an SML property to an enumerator info.
      */
-    enumerator_info transform_enumerator(const sml::property& e) const;
+    enumerator_info transform_enumerator(const sml::enumerator& e) const;
 
     /**
      * @brief Transforms the SML nested qname into a nested type info.
@@ -125,7 +126,7 @@ public:
      * @brief Transforms a SML value containing an enumeration into an
      * enumeration info.
      */
-    enum_info transform_enumeration(const sml::value& e) const;
+    enum_info transform_enumeration(const sml::enumeration& e) const;
 
     /**
      * @brief Transforms a SML value containing an exception into an

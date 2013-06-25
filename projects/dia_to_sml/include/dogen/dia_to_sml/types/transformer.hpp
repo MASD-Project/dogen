@@ -87,6 +87,15 @@ private:
     sml::property transform_property(const processed_property& p) const;
 
     /**
+     * @brief Converts a Dia composite storing the UML attribute into
+     * an SML enumerator
+     *
+     * @param uml_attribute the Dia UML attribute
+     */
+    sml::enumerator transform_enumerator(const processed_property& p,
+        const unsigned int position) const;
+
+    /**
      * @brief Converts a object containing a class into an pod.
      */
     void transform_pod(const processed_object& o, const profile& p);

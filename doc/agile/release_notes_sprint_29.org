@@ -10,13 +10,13 @@ This file contains all stories that were closed during sprint 29.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-06-25 Tue 20:00]
+Clock summary at [2013-06-25 Tue 22:10]
 
 | Headline                                                           | Time    |       |      |
 |--------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                       | *19:29* |       |      |
+| *Total time*                                                       | *20:11* |       |      |
 |--------------------------------------------------------------------+---------+-------+------|
-| Development Stories Implemented                                    |         | 19:29 |      |
+| Development Stories Implemented                                    |         | 20:11 |      |
 | IMPLEMENTATION Release notes and backlog grooming                  |         |       | 0:53 |
 | COMPLETED Make design by contract methods consistent in dia to sml |         |       | 0:52 |
 | COMPLETED Split resolver from merger                               |         |       | 3:18 |
@@ -25,7 +25,7 @@ Clock summary at [2013-06-25 Tue 20:00]
 | COMPLETED Design the inheritance tree of DDD classes in SML        |         |       | 2:02 |
 | COMPLETED Add concept properties in order of inheritance           |         |       | 0:18 |
 | COMPLETED Ensure extractor takes concepts into account             |         |       | 0:22 |
-| IMPLEMENTATION Update SML to make use of concepts                  |         |       | 2:02 |
+| IMPLEMENTATION Update SML to make use of concepts                  |         |       | 2:44 |
 #+end:
 
 *** IMPLEMENTATION Release notes and backlog grooming                  :task:
@@ -281,7 +281,9 @@ using. Attempt to make use of these to simplify the model.
 - update C++ transformer
 - remove primitive from value types
 
-**** IMPLEMENTATION Revert back to an enumeration class but now based on concepts :task:
+**** COMPLETED Revert back to an enumeration class but now based on concepts :task:
+     CLOSED: [2013-06-25 Tue 22:09]
+     CLOCK: [2013-06-25 Tue 21:27]--[2013-06-25 Tue 22:09] =>  0:42
      CLOCK: [2013-06-25 Tue 18:49]--[2013-06-25 Tue 19:00] =>  0:11
      CLOCK: [2013-06-25 Tue 18:34]--[2013-06-25 Tue 18:49] =>  0:15
      CLOCK: [2013-06-25 Tue 18:16]--[2013-06-25 Tue 18:24] =>  0:08

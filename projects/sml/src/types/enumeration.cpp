@@ -20,6 +20,7 @@
  */
 #include <ostream>
 #include "dogen/sml/io/enumerator_io.hpp"
+#include "dogen/sml/io/qname_io.hpp"
 #include "dogen/sml/io/type_io.hpp"
 #include "dogen/sml/types/enumeration.hpp"
 
@@ -45,11 +46,13 @@ enumeration::enumeration(
     const std::vector<std::pair<std::string, std::string> >& implementation_specific_parameters,
     const dogen::sml::qname& name,
     const dogen::sml::generation_types& generation_type,
+    const dogen::sml::qname& underlying_type,
     const std::vector<dogen::sml::enumerator>& enumerators)
     : dogen::sml::type(documentation,
       implementation_specific_parameters,
       name,
       generation_type),
+      underlying_type_(underlying_type),
       enumerators_(enumerators) { }
 
 void enumeration::to_stream(std::ostream& s) const {
@@ -58,6 +61,7 @@ void enumeration::to_stream(std::ostream& s) const {
       << "\"__parent_0__\": ";
     type::to_stream(s);
     s << ", "
+      << "\"underlying_type\": " << underlying_type_ << ", "
       << "\"enumerators\": " << enumerators_
       << " }";
 }
@@ -66,6 +70,7 @@ void enumeration::swap(enumeration& other) noexcept {
     type::swap(other);
 
     using std::swap;
+    swap(underlying_type_, other.underlying_type_);
     swap(enumerators_, other.enumerators_);
 }
 
@@ -77,6 +82,7 @@ bool enumeration::equals(const dogen::sml::type& other) const {
 
 bool enumeration::operator==(const enumeration& rhs) const {
     return type::compare(rhs) &&
+        underlying_type_ == rhs.underlying_type_ &&
         enumerators_ == rhs.enumerators_;
 }
 
@@ -84,6 +90,22 @@ enumeration& enumeration::operator=(enumeration other) {
     using std::swap;
     swap(*this, other);
     return *this;
+}
+
+const dogen::sml::qname& enumeration::underlying_type() const {
+    return underlying_type_;
+}
+
+dogen::sml::qname& enumeration::underlying_type() {
+    return underlying_type_;
+}
+
+void enumeration::underlying_type(const dogen::sml::qname& v) {
+    underlying_type_ = v;
+}
+
+void enumeration::underlying_type(const dogen::sml::qname&& v) {
+    underlying_type_ = std::move(v);
 }
 
 const std::vector<dogen::sml::enumerator>& enumeration::enumerators() const {

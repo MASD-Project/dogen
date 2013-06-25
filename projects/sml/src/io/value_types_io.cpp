@@ -42,9 +42,6 @@ std::ostream& operator<<(std::ostream& s, const value_types& v) {
     case value_types::versioned_key:
         attr = "\"versioned_key\"";
         break;
-    case value_types::enumeration:
-        attr = "\"enumeration\"";
-        break;
     case value_types::exception:
         attr = "\"exception\"";
         break;

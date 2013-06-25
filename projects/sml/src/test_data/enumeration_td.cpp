@@ -20,9 +20,15 @@
  */
 #include "dogen/sml/test_data/enumeration_td.hpp"
 #include "dogen/sml/test_data/enumerator_td.hpp"
+#include "dogen/sml/test_data/qname_td.hpp"
 #include "dogen/sml/test_data/type_td.hpp"
 
 namespace {
+
+dogen::sml::qname
+create_dogen_sml_qname(const unsigned int position) {
+    return dogen::sml::qname_generator::create(position);
+}
 
 dogen::sml::enumerator
 create_dogen_sml_enumerator(const unsigned int position) {
@@ -47,7 +53,8 @@ enumeration_generator::enumeration_generator() : position_(0) { }
 void enumeration_generator::
 populate(const unsigned int position, result_type& v) {
     dogen::sml::type_generator::populate(position, v);
-    v.enumerators(create_std_vector_dogen_sml_enumerator(position + 0));
+    v.underlying_type(create_dogen_sml_qname(position + 0));
+    v.enumerators(create_std_vector_dogen_sml_enumerator(position + 1));
 }
 
 enumeration_generator::result_type

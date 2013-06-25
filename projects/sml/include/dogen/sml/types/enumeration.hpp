@@ -30,6 +30,7 @@
 #include <vector>
 #include "dogen/sml/serialization/enumeration_fwd_ser.hpp"
 #include "dogen/sml/types/enumerator.hpp"
+#include "dogen/sml/types/qname.hpp"
 #include "dogen/sml/types/type.hpp"
 #include "dogen/sml/types/type_visitor.hpp"
 
@@ -53,6 +54,7 @@ public:
         const std::vector<std::pair<std::string, std::string> >& implementation_specific_parameters,
         const dogen::sml::qname& name,
         const dogen::sml::generation_types& generation_type,
+        const dogen::sml::qname& underlying_type,
         const std::vector<dogen::sml::enumerator>& enumerators);
 
 private:
@@ -84,6 +86,16 @@ public:
 
 public:
     /**
+     * @brief Underlying type of each instance of the enumeration.
+     */
+    /**@{*/
+    const dogen::sml::qname& underlying_type() const;
+    dogen::sml::qname& underlying_type();
+    void underlying_type(const dogen::sml::qname& v);
+    void underlying_type(const dogen::sml::qname&& v);
+    /**@}*/
+
+    /**
      * @brief Enumerators for this enumeration.
      */
     /**@{*/
@@ -107,6 +119,7 @@ public:
     enumeration& operator=(enumeration other);
 
 private:
+    dogen::sml::qname underlying_type_;
     std::vector<dogen::sml::enumerator> enumerators_;
 };
 

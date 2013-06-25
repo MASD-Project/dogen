@@ -5,7 +5,7 @@
 	<name>two_layers_with_objects</name>
 	<pods class_id="1" tracking_level="0" version="0">
 		<count>2</count>
-		<bucket_count>23</bucket_count>
+		<bucket_count>11</bucket_count>
 		<item_version>0</item_version>
 		<item class_id="2" tracking_level="0" version="0">
 			<first class_id="3" tracking_level="0" version="0">
@@ -216,17 +216,17 @@
 	</pods>
 	<primitives class_id="13" tracking_level="0" version="0">
 		<count>0</count>
-		<bucket_count>23</bucket_count>
+		<bucket_count>11</bucket_count>
 		<item_version>0</item_version>
 	</primitives>
 	<enumerations class_id="14" tracking_level="0" version="0">
 		<count>0</count>
-		<bucket_count>23</bucket_count>
+		<bucket_count>11</bucket_count>
 		<item_version>0</item_version>
 	</enumerations>
-	<exceptions>
+	<exceptions class_id="15" tracking_level="0" version="0">
 		<count>0</count>
-		<bucket_count>23</bucket_count>
+		<bucket_count>11</bucket_count>
 		<item_version>0</item_version>
 	</exceptions>
 	<external_module_path>
@@ -234,14 +234,14 @@
 		<item_version>0</item_version>
 	</external_module_path>
 	<is_system>0</is_system>
-	<dependencies class_id="15" tracking_level="0" version="0">
+	<dependencies class_id="16" tracking_level="0" version="0">
 		<count>0</count>
-		<bucket_count>23</bucket_count>
+		<bucket_count>11</bucket_count>
 		<item_version>0</item_version>
 	</dependencies>
-	<leaves class_id="16" tracking_level="0" version="0">
+	<leaves class_id="17" tracking_level="0" version="0">
 		<count>0</count>
-		<bucket_count>23</bucket_count>
+		<bucket_count>11</bucket_count>
 		<item_version>0</item_version>
 	</leaves>
 	<documentation></documentation>
@@ -249,16 +249,16 @@
 		<count>0</count>
 		<item_version>0</item_version>
 	</implementation_specific_parameters>
-	<services class_id="17" tracking_level="0" version="0">
+	<services class_id="18" tracking_level="0" version="0">
 		<count>0</count>
-		<bucket_count>23</bucket_count>
+		<bucket_count>11</bucket_count>
 		<item_version>0</item_version>
 	</services>
-	<modules class_id="18" tracking_level="0" version="0">
+	<modules class_id="19" tracking_level="0" version="0">
 		<count>2</count>
-		<bucket_count>23</bucket_count>
+		<bucket_count>11</bucket_count>
 		<item_version>0</item_version>
-		<item class_id="19" tracking_level="0" version="0">
+		<item class_id="20" tracking_level="0" version="0">
 			<first>
 				<model_name>two_layers_with_objects</model_name>
 				<external_module_path>
@@ -272,7 +272,7 @@
 				<type_name>Package_2</type_name>
 				<meta_type>6</meta_type>
 			</first>
-			<second class_id="20" tracking_level="0" version="0">
+			<second class_id="21" tracking_level="0" version="0">
 				<documentation></documentation>
 				<implementation_specific_parameters>
 					<count>0</count>
@@ -339,9 +339,9 @@
 			</second>
 		</item>
 	</modules>
-	<concepts class_id="21" tracking_level="0" version="0">
+	<concepts class_id="22" tracking_level="0" version="0">
 		<count>0</count>
-		<bucket_count>23</bucket_count>
+		<bucket_count>11</bucket_count>
 		<item_version>0</item_version>
 	</concepts>
 </entity>

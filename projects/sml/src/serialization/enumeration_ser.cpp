@@ -30,6 +30,7 @@
 #include <boost/serialization/vector.hpp>
 #include "dogen/sml/serialization/enumeration_ser.hpp"
 #include "dogen/sml/serialization/enumerator_ser.hpp"
+#include "dogen/sml/serialization/qname_ser.hpp"
 #include "dogen/sml/serialization/type_ser.hpp"
 
 #ifdef __linux__
@@ -50,6 +51,7 @@ void save(Archive& ar,
     const unsigned int /*version*/) {
     ar << make_nvp("type", base_object<dogen::sml::type>(v));
 
+    ar << make_nvp("underlying_type", v.underlying_type_);
     ar << make_nvp("enumerators", v.enumerators_);
 }
 
@@ -59,6 +61,7 @@ void load(Archive& ar,
     const unsigned int /*version*/) {
     ar >> make_nvp("type", base_object<dogen::sml::type>(v));
 
+    ar >> make_nvp("underlying_type", v.underlying_type_);
     ar >> make_nvp("enumerators", v.enumerators_);
 }
 

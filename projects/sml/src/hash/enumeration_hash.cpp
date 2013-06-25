@@ -20,6 +20,7 @@
  */
 #include "dogen/sml/hash/enumeration_hash.hpp"
 #include "dogen/sml/hash/enumerator_hash.hpp"
+#include "dogen/sml/hash/qname_hash.hpp"
 #include "dogen/sml/hash/type_hash.hpp"
 
 namespace {
@@ -49,7 +50,9 @@ std::size_t enumeration_hasher::hash(const enumeration&v) {
 
     combine(seed, dynamic_cast<const dogen::sml::type&>(v));
 
+    combine(seed, v.underlying_type());
     combine(seed, hash_std_vector_dogen_sml_enumerator(v.enumerators()));
+
     return seed;
 }
 

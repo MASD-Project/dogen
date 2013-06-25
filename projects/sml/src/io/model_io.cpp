@@ -22,6 +22,7 @@
 #include <boost/io/ios_state.hpp>
 #include <ostream>
 #include "dogen/sml/io/concept_io.hpp"
+#include "dogen/sml/io/enumeration_io.hpp"
 #include "dogen/sml/io/model_io.hpp"
 #include "dogen/sml/io/module_io.hpp"
 #include "dogen/sml/io/pod_io.hpp"
@@ -60,6 +61,24 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen:
 namespace std {
 
 inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen::sml::qname, dogen::sml::primitive>& v) {
+    s << "[";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
+        s << i->first;
+        s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
+        s << i->second;
+        s << " } ]";
+    }
+    s << " ] ";
+    return s;
+}
+
+}
+
+namespace std {
+
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen::sml::qname, dogen::sml::enumeration>& v) {
     s << "[";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";

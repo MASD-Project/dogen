@@ -185,7 +185,7 @@ dogen::sml::pod mock_pod(unsigned int i, const unsigned int module_n = 0) {
     return mock_pod(i, model_name(i), module_n);
 }
 
-dogen::sml::value
+dogen::sml::enumeration
 mock_enumeration(const unsigned int i, const std::string& model_name,
     const unsigned int module_n = 0) {
     dogen::sml::qname qn;
@@ -196,28 +196,25 @@ mock_enumeration(const unsigned int i, const std::string& model_name,
     for (unsigned int i(0); i < module_n; ++i)
         qn.module_path().push_back(module_name(i));
 
-    dogen::sml::value r;
+    dogen::sml::enumeration r;
     r.name(qn);
     r.generation_type(dogen::sml::generation_types::full_generation);
     r.documentation(documentation);
 
-    const auto lambda([](const unsigned int n) -> dogen::sml::property {
-            dogen::sml::qname qn;
-            qn.type_name(unsigned_int);
-            qn.meta_type(dogen::sml::meta_types::primitive);
+    dogen::sml::qname uqn;
+    uqn.type_name(unsigned_int);
+    uqn.meta_type(dogen::sml::meta_types::primitive);
+    r.underlying_type(uqn);
 
-            dogen::sml::nested_qname nqn;
-            nqn.type(qn);
-
-            dogen::sml::property r;
+    const auto lambda([](const unsigned int n) -> dogen::sml::enumerator {
+            dogen::sml::enumerator r;
             r.name(type_name(n));
-            r.type_name(nqn);
-            r.default_value(boost::lexical_cast<std::string>(n));
+            r.value(boost::lexical_cast<std::string>(n));
             return r;
         });
 
-    r.properties().push_back(lambda(0));
-    r.properties().push_back(lambda(1));
+    r.enumerators().push_back(lambda(0));
+    r.enumerators().push_back(lambda(1));
     return r;
 }
 
