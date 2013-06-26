@@ -10,19 +10,19 @@ This file contains all stories that were closed during sprint 29.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-06-26 Wed 19:40]
+Clock summary at [2013-06-26 Wed 20:54]
 
 | Headline                                                           | Time    |       |      |
 |--------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                       | *23:08* |       |      |
+| *Total time*                                                       | *23:22* |       |      |
 |--------------------------------------------------------------------+---------+-------+------|
-| Development Stories Implemented                                    |         | 23:08 |      |
+| Development Stories Implemented                                    |         | 23:22 |      |
 | IMPLEMENTATION Release notes and backlog grooming                  |         |       | 0:53 |
 | COMPLETED Make design by contract methods consistent in dia to sml |         |       | 0:52 |
 | COMPLETED Split resolver from merger                               |         |       | 3:18 |
 | COMPLETED Property container should be a list not a vector         |         |       | 0:18 |
 | COMPLETED Implement concepts in SML                                |         |       | 9:24 |
-| COMPLETED Design the inheritance tree of DDD classes in SML        |         |       | 2:02 |
+| COMPLETED Design the inheritance tree of DDD classes in SML        |         |       | 2:16 |
 | COMPLETED Add concept properties in order of inheritance           |         |       | 0:18 |
 | COMPLETED Ensure extractor takes concepts into account             |         |       | 0:22 |
 | COMPLETED Descendents modeling different concepts from base break  |         |       | 2:20 |
@@ -149,6 +149,7 @@ story.
 
 **** COMPLETED List of SML concepts                                    :note:
      CLOSED: [2013-06-20 Thu 08:08]
+     CLOCK: [2013-06-26 Wed 20:40]--[2013-06-26 Wed 20:54] =>  0:14
      CLOCK: [2013-06-24 Mon 22:29]--[2013-06-24 Mon 22:31] =>  0:02
      CLOCK: [2013-06-24 Mon 22:12]--[2013-06-24 Mon 22:18] =>  0:06
      CLOCK: [2013-06-24 Mon 20:01]--[2013-06-24 Mon 20:30] =>  0:29
@@ -158,18 +159,14 @@ story.
 - =Documentable=: type can be documented.
 - =Parameterisable=: type supports pass-through parameters
   (implementation specific parameters).
-- =Element=: A unit of modeling. Refinement of =Namable=,
-  =Documentable=, =Parameterisable=.
 - =Generatable=: type has properties related to code generation.
-- =GeneratableElement=: A unit of modeling that can be code
-  generated. Refinement of =Element= and =Generatable=. Modeled by
-  "special" value types such as =sml::enumeration= and
-  =sml::primitive=; modeled by =sml::model= and
-  =sml::module=.
-- =Inheritable=: type provides support for inheritance.
+- =Element=: A unit of modeling that can be code generated. Refinement
+  of =Nameable=, =Documentable=, =Parameterisable= and
+  =Generatable=. Modeled by value types such as =sml::enumeration= and
+  =sml::primitive=; modeled by =sml::model= and =sml::module=.
 - =Stateful=: type has properties.
 - =Operatable=: type has methods (operations).
-- =Object=: refinement of =GeneratableElement=, =Stateful= and
+- =Object=: refinement of =Element=, =Stateful= and
   =Operatable=. Modeled by =sml::abstract_entity=,
   =sml::value_object=, =sml::service=, =sml::factory=,
   =sml::repository= and =sml::concept=. Note that concepts are
