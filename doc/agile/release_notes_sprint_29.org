@@ -10,13 +10,13 @@ This file contains all stories that were closed during sprint 29.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-06-26 Wed 08:32]
+Clock summary at [2013-06-26 Wed 19:40]
 
 | Headline                                                           | Time    |       |      |
 |--------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                       | *23:02* |       |      |
+| *Total time*                                                       | *23:08* |       |      |
 |--------------------------------------------------------------------+---------+-------+------|
-| Development Stories Implemented                                    |         | 23:02 |      |
+| Development Stories Implemented                                    |         | 23:08 |      |
 | IMPLEMENTATION Release notes and backlog grooming                  |         |       | 0:53 |
 | COMPLETED Make design by contract methods consistent in dia to sml |         |       | 0:52 |
 | COMPLETED Split resolver from merger                               |         |       | 3:18 |
@@ -26,7 +26,7 @@ Clock summary at [2013-06-26 Wed 08:32]
 | COMPLETED Add concept properties in order of inheritance           |         |       | 0:18 |
 | COMPLETED Ensure extractor takes concepts into account             |         |       | 0:22 |
 | COMPLETED Descendents modeling different concepts from base break  |         |       | 2:20 |
-| IMPLEMENTATION Update SML to make use of concepts                  |         |       | 3:15 |
+| IMPLEMENTATION Update SML to make use of concepts                  |         |       | 3:21 |
 #+end:
 
 *** IMPLEMENTATION Release notes and backlog grooming                  :task:
@@ -310,9 +310,14 @@ using. Attempt to make use of these to simplify the model.
 - update C++ transformer
 - remove enumeration from value types
 
-**** IMPLEMENTATION Add support for value objects                      :task:
+**** COMPLETED Add support for value objects                           :task:
+     CLOSED: [2013-06-26 Wed 18:01]
      CLOCK: [2013-06-25 Tue 22:28]--[2013-06-25 Tue 22:40] =>  0:12
      CLOCK: [2013-06-25 Tue 22:09]--[2013-06-25 Tue 22:28] =>  0:19
+
+**** COMPLETED Implement exceptions in terms of value objects          :task:
+     CLOSED: [2013-06-26 Wed 19:41]
+     CLOCK: [2013-06-26 Wed 18:01]--[2013-06-26 Wed 18:07] =>  0:06
 
 **** Convert pods into entities, values or services                    :task:
 

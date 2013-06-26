@@ -33,7 +33,6 @@
 #include "dogen/sml/serialization/repository_ser.hpp"
 #include "dogen/sml/serialization/service_ser.hpp"
 #include "dogen/sml/serialization/value_object_ser.hpp"
-#include "dogen/sml/serialization/value_ser.hpp"
 #ifdef __linux__
 #include "eos/portable_iarchive.hpp"
 #include "eos/portable_oarchive.hpp"
@@ -50,7 +49,6 @@ void register_types(Archive& ar) {
     ar.template register_type<dogen::sml::primitive>();
     ar.template register_type<dogen::sml::repository>();
     ar.template register_type<dogen::sml::service>();
-    ar.template register_type<dogen::sml::value>();
     ar.template register_type<dogen::sml::value_object>();
 }
 

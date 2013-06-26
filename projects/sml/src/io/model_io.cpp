@@ -30,7 +30,7 @@
 #include "dogen/sml/io/qname_io.hpp"
 #include "dogen/sml/io/reference_io.hpp"
 #include "dogen/sml/io/service_io.hpp"
-#include "dogen/sml/io/value_io.hpp"
+#include "dogen/sml/io/value_object_io.hpp"
 
 
 inline std::string tidy_up_string(std::string s) {
@@ -96,7 +96,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen:
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen::sml::qname, dogen::sml::value>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen::sml::qname, dogen::sml::value_object>& v) {
     s << "[";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";

@@ -34,7 +34,7 @@
 #include "dogen/sml/types/qname.hpp"
 #include "dogen/sml/hash/qname_hash.hpp"
 #include "dogen/sml/types/module.hpp"
-#include "dogen/sml/types/value.hpp"
+#include "dogen/sml/types/value_object.hpp"
 #include "dogen/sml/types/enumeration.hpp"
 #include "dogen/sml/types/nested_qname.hpp"
 #include "dogen/cpp/types/class_info.hpp"
@@ -132,7 +132,7 @@ public:
      * @brief Transforms a SML value containing an exception into an
      * exception info.
      */
-    exception_info transform_exception(const sml::value& e) const;
+    exception_info transform_exception(const sml::value_object& e) const;
 
     /**
      * @brief Transforms a SML module into a namespace info.

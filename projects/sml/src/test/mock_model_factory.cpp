@@ -218,7 +218,7 @@ mock_enumeration(const unsigned int i, const std::string& model_name,
     return r;
 }
 
-dogen::sml::value
+dogen::sml::value_object
 mock_exception(const unsigned int i, const std::string& model_name,
     const unsigned int module_n = 0) {
     dogen::sml::qname qn;
@@ -229,7 +229,7 @@ mock_exception(const unsigned int i, const std::string& model_name,
     for (unsigned int i(0); i < module_n; ++i)
         qn.module_path().push_back(module_name(i));
 
-    dogen::sml::value r;
+    dogen::sml::value_object r;
     r.name(qn);
     r.generation_type(dogen::sml::generation_types::full_generation);
     r.documentation(documentation);

@@ -26,7 +26,6 @@
 #include "dogen/sml/test_data/repository_td.hpp"
 #include "dogen/sml/test_data/service_td.hpp"
 #include "dogen/sml/test_data/typed_element_td.hpp"
-#include "dogen/sml/test_data/value_td.hpp"
 
 namespace {
 
@@ -96,15 +95,13 @@ populate(const unsigned int position, result_type& v) {
 
 typed_element_generator::result_type*
 typed_element_generator::create_ptr(const unsigned int position) {
-    if ((position % 4) == 0)
-        return dogen::sml::entity_generator::create_ptr(position);
-    if ((position % 4) == 1)
+    if ((position % 3) == 0)
         return dogen::sml::service_generator::create_ptr(position);
-    if ((position % 4) == 2)
+    if ((position % 3) == 1)
         return dogen::sml::factory_generator::create_ptr(position);
-    if ((position % 4) == 3)
+    if ((position % 3) == 2)
         return dogen::sml::repository_generator::create_ptr(position);
-    return dogen::sml::value_generator::create_ptr(position);
+    return dogen::sml::entity_generator::create_ptr(position);
 }
 
 

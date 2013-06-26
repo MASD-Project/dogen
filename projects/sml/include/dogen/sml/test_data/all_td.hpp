@@ -43,5 +43,4 @@
 #include "dogen/sml/test_data/type_td.hpp"
 #include "dogen/sml/test_data/typed_element_td.hpp"
 #include "dogen/sml/test_data/value_object_td.hpp"
-#include "dogen/sml/test_data/value_td.hpp"
 #include "dogen/sml/test_data/value_types_td.hpp"

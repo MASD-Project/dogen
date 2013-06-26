@@ -5,7 +5,7 @@
 	<name>exception</name>
 	<pods class_id="1" tracking_level="0" version="0">
 		<count>1</count>
-		<bucket_count>11</bucket_count>
+		<bucket_count>23</bucket_count>
 		<item_version>0</item_version>
 		<item class_id="2" tracking_level="0" version="0">
 			<first class_id="3" tracking_level="0" version="0">
@@ -111,17 +111,17 @@
 	</pods>
 	<primitives class_id="13" tracking_level="0" version="0">
 		<count>0</count>
-		<bucket_count>11</bucket_count>
+		<bucket_count>23</bucket_count>
 		<item_version>0</item_version>
 	</primitives>
 	<enumerations class_id="14" tracking_level="0" version="0">
 		<count>0</count>
-		<bucket_count>11</bucket_count>
+		<bucket_count>23</bucket_count>
 		<item_version>0</item_version>
 	</enumerations>
 	<exceptions class_id="15" tracking_level="0" version="0">
 		<count>2</count>
-		<bucket_count>11</bucket_count>
+		<bucket_count>23</bucket_count>
 		<item_version>0</item_version>
 		<item class_id="16" tracking_level="0" version="0">
 			<first>
@@ -139,8 +139,13 @@
 				<meta_type>4</meta_type>
 			</first>
 			<second class_id="17" tracking_level="1" version="0" object_id="_0">
-				<typed_element class_id="18" tracking_level="0" version="0">
-					<model_element class_id="19" tracking_level="0" version="0">
+				<abstract_object class_id="18" tracking_level="0" version="0">
+					<type class_id="19" tracking_level="0" version="0">
+						<documentation></documentation>
+						<implementation_specific_parameters>
+							<count>0</count>
+							<item_version>0</item_version>
+						</implementation_specific_parameters>
 						<name>
 							<model_name>exception</model_name>
 							<external_module_path>
@@ -155,13 +160,8 @@
 							<type_name>catastrophic_error</type_name>
 							<meta_type>4</meta_type>
 						</name>
-						<documentation></documentation>
-						<implementation_specific_parameters>
-							<count>0</count>
-							<item_version>0</item_version>
-						</implementation_specific_parameters>
 						<generation_type>1</generation_type>
-					</model_element>
+					</type>
 					<properties>
 						<count>0</count>
 						<item_version>0</item_version>
@@ -176,18 +176,20 @@
 						<count>0</count>
 						<item_version>0</item_version>
 					</leaves>
-					<number_of_type_arguments>0</number_of_type_arguments>
 					<is_parent>0</is_parent>
+					<number_of_type_arguments>0</number_of_type_arguments>
 					<is_visitable>0</is_visitable>
 					<is_immutable>0</is_immutable>
 					<is_versioned>0</is_versioned>
+					<is_keyed>0</is_keyed>
 					<is_comparable>0</is_comparable>
 					<is_fluent>0</is_fluent>
+					<is_aggregate_root>0</is_aggregate_root>
 					<modeled_concepts>
 						<count>0</count>
 						<item_version>0</item_version>
 					</modeled_concepts>
-				</typed_element>
+				</abstract_object>
 				<type>4</type>
 			</second>
 		</item>
@@ -206,8 +208,13 @@
 				<meta_type>4</meta_type>
 			</first>
 			<second object_id="_1">
-				<typed_element>
-					<model_element>
+				<abstract_object>
+					<type>
+						<documentation>this is an exception</documentation>
+						<implementation_specific_parameters>
+							<count>0</count>
+							<item_version>0</item_version>
+						</implementation_specific_parameters>
 						<name>
 							<model_name>exception</model_name>
 							<external_module_path>
@@ -221,13 +228,8 @@
 							<type_name>my_error</type_name>
 							<meta_type>4</meta_type>
 						</name>
-						<documentation>this is an exception</documentation>
-						<implementation_specific_parameters>
-							<count>0</count>
-							<item_version>0</item_version>
-						</implementation_specific_parameters>
 						<generation_type>1</generation_type>
-					</model_element>
+					</type>
 					<properties>
 						<count>0</count>
 						<item_version>0</item_version>
@@ -242,18 +244,20 @@
 						<count>0</count>
 						<item_version>0</item_version>
 					</leaves>
-					<number_of_type_arguments>0</number_of_type_arguments>
 					<is_parent>0</is_parent>
+					<number_of_type_arguments>0</number_of_type_arguments>
 					<is_visitable>0</is_visitable>
 					<is_immutable>0</is_immutable>
 					<is_versioned>0</is_versioned>
+					<is_keyed>0</is_keyed>
 					<is_comparable>0</is_comparable>
 					<is_fluent>0</is_fluent>
+					<is_aggregate_root>0</is_aggregate_root>
 					<modeled_concepts>
 						<count>0</count>
 						<item_version>0</item_version>
 					</modeled_concepts>
-				</typed_element>
+				</abstract_object>
 				<type>4</type>
 			</second>
 		</item>
@@ -265,12 +269,12 @@
 	<is_system>0</is_system>
 	<dependencies class_id="20" tracking_level="0" version="0">
 		<count>0</count>
-		<bucket_count>11</bucket_count>
+		<bucket_count>23</bucket_count>
 		<item_version>0</item_version>
 	</dependencies>
 	<leaves class_id="21" tracking_level="0" version="0">
 		<count>0</count>
-		<bucket_count>11</bucket_count>
+		<bucket_count>23</bucket_count>
 		<item_version>0</item_version>
 	</leaves>
 	<documentation></documentation>
@@ -280,12 +284,12 @@
 	</implementation_specific_parameters>
 	<services class_id="22" tracking_level="0" version="0">
 		<count>0</count>
-		<bucket_count>11</bucket_count>
+		<bucket_count>23</bucket_count>
 		<item_version>0</item_version>
 	</services>
 	<modules class_id="23" tracking_level="0" version="0">
 		<count>1</count>
-		<bucket_count>11</bucket_count>
+		<bucket_count>23</bucket_count>
 		<item_version>0</item_version>
 		<item class_id="24" tracking_level="0" version="0">
 			<first>
@@ -330,7 +334,7 @@
 	</modules>
 	<concepts class_id="26" tracking_level="0" version="0">
 		<count>0</count>
-		<bucket_count>11</bucket_count>
+		<bucket_count>23</bucket_count>
 		<item_version>0</item_version>
 	</concepts>
 </entity>

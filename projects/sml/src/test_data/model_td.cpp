@@ -28,7 +28,7 @@
 #include "dogen/sml/test_data/qname_td.hpp"
 #include "dogen/sml/test_data/reference_td.hpp"
 #include "dogen/sml/test_data/service_td.hpp"
-#include "dogen/sml/test_data/value_td.hpp"
+#include "dogen/sml/test_data/value_object_td.hpp"
 
 namespace {
 
@@ -82,15 +82,15 @@ std::unordered_map<dogen::sml::qname, dogen::sml::enumeration> create_std_unorde
     return r;
 }
 
-dogen::sml::value
-create_dogen_sml_value(const unsigned int position) {
-    return dogen::sml::value_generator::create(position);
+dogen::sml::value_object
+create_dogen_sml_value_object(const unsigned int position) {
+    return dogen::sml::value_object_generator::create(position);
 }
 
-std::unordered_map<dogen::sml::qname, dogen::sml::value> create_std_unordered_map_dogen_sml_qname_dogen_sml_value(unsigned int position) {
-    std::unordered_map<dogen::sml::qname, dogen::sml::value> r;
+std::unordered_map<dogen::sml::qname, dogen::sml::value_object> create_std_unordered_map_dogen_sml_qname_dogen_sml_value_object(unsigned int position) {
+    std::unordered_map<dogen::sml::qname, dogen::sml::value_object> r;
     for (unsigned int i(0); i < 10; ++i) {
-        r.insert(std::make_pair(create_dogen_sml_qname(position + i), create_dogen_sml_value(position + i)));
+        r.insert(std::make_pair(create_dogen_sml_qname(position + i), create_dogen_sml_value_object(position + i)));
     }
     return r;
 }
@@ -196,7 +196,7 @@ populate(const unsigned int position, result_type& v) {
     v.pods(create_std_unordered_map_dogen_sml_qname_dogen_sml_pod(position + 1));
     v.primitives(create_std_unordered_map_dogen_sml_qname_dogen_sml_primitive(position + 2));
     v.enumerations(create_std_unordered_map_dogen_sml_qname_dogen_sml_enumeration(position + 3));
-    v.exceptions(create_std_unordered_map_dogen_sml_qname_dogen_sml_value(position + 4));
+    v.exceptions(create_std_unordered_map_dogen_sml_qname_dogen_sml_value_object(position + 4));
     v.external_module_path(create_std_list_std_string(position + 5));
     v.is_system(create_bool(position + 6));
     v.dependencies(create_std_unordered_map_std_string_dogen_sml_reference(position + 7));

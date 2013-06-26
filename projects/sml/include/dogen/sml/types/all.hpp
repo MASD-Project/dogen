@@ -54,7 +54,6 @@
 #include "dogen/sml/types/type.hpp"
 #include "dogen/sml/types/type_visitor.hpp"
 #include "dogen/sml/types/typed_element.hpp"
-#include "dogen/sml/types/value.hpp"
 #include "dogen/sml/types/value_object.hpp"
 #include "dogen/sml/types/value_types.hpp"
 #include "dogen/sml/types/workflow.hpp"

@@ -44,5 +44,4 @@
 #include "dogen/sml/serialization/type_ser.hpp"
 #include "dogen/sml/serialization/typed_element_ser.hpp"
 #include "dogen/sml/serialization/value_object_ser.hpp"
-#include "dogen/sml/serialization/value_ser.hpp"
 #include "dogen/sml/serialization/value_types_ser.hpp"

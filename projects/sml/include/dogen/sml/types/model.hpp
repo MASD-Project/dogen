@@ -42,7 +42,7 @@
 #include "dogen/sml/types/qname.hpp"
 #include "dogen/sml/types/reference.hpp"
 #include "dogen/sml/types/service.hpp"
-#include "dogen/sml/types/value.hpp"
+#include "dogen/sml/types/value_object.hpp"
 
 namespace dogen {
 namespace sml {
@@ -65,7 +65,7 @@ public:
         const std::unordered_map<dogen::sml::qname, dogen::sml::pod>& pods,
         const std::unordered_map<dogen::sml::qname, dogen::sml::primitive>& primitives,
         const std::unordered_map<dogen::sml::qname, dogen::sml::enumeration>& enumerations,
-        const std::unordered_map<dogen::sml::qname, dogen::sml::value>& exceptions,
+        const std::unordered_map<dogen::sml::qname, dogen::sml::value_object>& exceptions,
         const std::list<std::string>& external_module_path,
         const bool is_system,
         const std::unordered_map<std::string, dogen::sml::reference>& dependencies,
@@ -132,10 +132,10 @@ public:
      * @brief Exceptions contained in the model.
      */
     /**@{*/
-    const std::unordered_map<dogen::sml::qname, dogen::sml::value>& exceptions() const;
-    std::unordered_map<dogen::sml::qname, dogen::sml::value>& exceptions();
-    void exceptions(const std::unordered_map<dogen::sml::qname, dogen::sml::value>& v);
-    void exceptions(const std::unordered_map<dogen::sml::qname, dogen::sml::value>&& v);
+    const std::unordered_map<dogen::sml::qname, dogen::sml::value_object>& exceptions() const;
+    std::unordered_map<dogen::sml::qname, dogen::sml::value_object>& exceptions();
+    void exceptions(const std::unordered_map<dogen::sml::qname, dogen::sml::value_object>& v);
+    void exceptions(const std::unordered_map<dogen::sml::qname, dogen::sml::value_object>&& v);
     /**@}*/
 
     /**
@@ -249,7 +249,7 @@ private:
     std::unordered_map<dogen::sml::qname, dogen::sml::pod> pods_;
     std::unordered_map<dogen::sml::qname, dogen::sml::primitive> primitives_;
     std::unordered_map<dogen::sml::qname, dogen::sml::enumeration> enumerations_;
-    std::unordered_map<dogen::sml::qname, dogen::sml::value> exceptions_;
+    std::unordered_map<dogen::sml::qname, dogen::sml::value_object> exceptions_;
     std::list<std::string> external_module_path_;
     bool is_system_;
     std::unordered_map<std::string, dogen::sml::reference> dependencies_;

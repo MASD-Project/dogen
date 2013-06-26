@@ -54,40 +54,13 @@ BOOST_AUTO_TEST_CASE(validate_equality) {
     test_equality<pod_types_generator>();
     test_equality<property_generator>();
     test_equality<qname_generator>();
-    test_equality<value_generator>();
+    test_equality<value_object_generator>();
     test_equality<entity_generator>();
     test_equality<service_generator>();
     test_equality<module_generator>();
     test_equality<repository_generator>();
     test_equality<factory_generator>();
     test_equality<concept_generator>();
-}
-
-BOOST_AUTO_TEST_CASE(moving_a_value_results_in_an_equal_object) {
-    SETUP_TEST_LOG_SOURCE("moving_a_value_results_in_an_equal_object");
-
-    value_generator g;
-    const auto e(g());
-    auto tmp(e);
-    const auto a(std::move(tmp));
-    BOOST_CHECK(asserter::assert_object(e, a));
-
-    std::unordered_map<dogen::sml::qname, dogen::sml::value> map;
-    map.insert(std::make_pair(e.name(), e));
-    BOOST_LOG_SEV(lg, debug) << "map: " << map;
-    BOOST_CHECK(asserter::assert_object(e, map.begin()->second));
-}
-
-BOOST_AUTO_TEST_CASE(assigning_a_value_results_in_an_equal_object) {
-    SETUP_TEST_LOG_SOURCE("assigning_a_value_results_in_an_equal_object");
-
-    value_generator g;
-    const auto e(g());
-    dogen::sml::value a;
-    BOOST_CHECK(!asserter::assert_object(e, a));
-
-    a = e;
-    BOOST_CHECK(asserter::assert_object(e, a));
 }
 
 BOOST_AUTO_TEST_SUITE_END()

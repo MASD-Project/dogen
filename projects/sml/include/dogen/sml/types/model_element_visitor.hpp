@@ -31,7 +31,6 @@
 #include "dogen/sml/types/repository_fwd.hpp"
 #include "dogen/sml/types/service_fwd.hpp"
 #include "dogen/sml/types/typed_element_fwd.hpp"
-#include "dogen/sml/types/value_fwd.hpp"
 
 namespace dogen {
 namespace sml {
@@ -41,16 +40,6 @@ public:
     virtual ~model_element_visitor() noexcept = 0;
 
 public:
-    /**
-     * @brief Accept visits for type dogen::sml::value
-     */
-    /**@{*/
-    virtual void visit(const dogen::sml::value&) const { }
-    virtual void visit(const dogen::sml::value&) { }
-    virtual void visit(dogen::sml::value&) const { }
-    virtual void visit(dogen::sml::value&) { }
-    /**@}*/
-
     /**
      * @brief Accept visits for type dogen::sml::entity
      */

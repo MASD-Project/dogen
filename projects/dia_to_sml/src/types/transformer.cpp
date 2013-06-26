@@ -28,8 +28,8 @@
 #include "dogen/sml/types/service.hpp"
 #include "dogen/dia/types/composite.hpp"
 #include "dogen/dia/types/attribute.hpp"
-#include "dogen/sml/types/value.hpp"
-#include "dogen/sml/io/value_io.hpp"
+#include "dogen/sml/types/value_object.hpp"
+#include "dogen/sml/io/value_object_io.hpp"
 #include "dogen/dia_to_sml/types/transformation_error.hpp"
 #include "dogen/dia_to_sml/io/object_types_io.hpp"
 #include "dogen/dia_to_sml/types/processed_object.hpp"
@@ -460,7 +460,7 @@ void transformer::transform_note(const processed_object& o) {
 void transformer::transform_exception(const processed_object& o) {
     BOOST_LOG_SEV(lg, debug) << "Object is an exception: " << o.id();
 
-    sml::value e;
+    sml::value_object e;
     e.type(sml::value_types::exception);
     e.generation_type(context_.is_target() ?
         sml::generation_types::full_generation :
@@ -471,11 +471,7 @@ void transformer::transform_exception(const processed_object& o) {
     e.name(transform_qname(o.name(), meta_types::exception, pkg_id));
     e.documentation(o.comment());
     context_.model().exceptions().insert(std::make_pair(e.name(), e));
-
-    // FIXME: dumping all exceptions???
-    for (const auto p : context_.model().exceptions()) {
-        BOOST_LOG_SEV(lg, debug) << "Created exception: " << p.second;
-    }
+    BOOST_LOG_SEV(lg, debug) << "Created exception: " << e;
 }
 
 void transformer::transform_concept(const processed_object& o) {

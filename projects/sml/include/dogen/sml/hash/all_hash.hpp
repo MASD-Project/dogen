@@ -42,6 +42,5 @@
 #include "dogen/sml/hash/service_types_hash.hpp"
 #include "dogen/sml/hash/type_hash.hpp"
 #include "dogen/sml/hash/typed_element_hash.hpp"
-#include "dogen/sml/hash/value_hash.hpp"
 #include "dogen/sml/hash/value_object_hash.hpp"
 #include "dogen/sml/hash/value_types_hash.hpp"

@@ -53,7 +53,7 @@ BOOST_AUTO_TEST_CASE(validate_hashing) {
     test_hashing<property_generator>();
     test_hashing<qname_generator>();
     test_hashing<reference_generator>();
-    test_hashing<value_generator>();
+    test_hashing<value_object_generator>();
     test_hashing<entity_generator>();
     test_hashing<service_generator>();
     test_hashing<module_generator>();

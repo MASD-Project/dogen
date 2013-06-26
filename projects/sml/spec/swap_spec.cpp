@@ -51,7 +51,7 @@ BOOST_AUTO_TEST_CASE(validate_swap) {
     test_swap<property_generator>();
     test_swap<qname_generator>();
     test_swap<reference_generator>();
-    test_swap<value_generator>();
+    test_swap<value_object_generator>();
     test_swap<entity_generator>();
     test_swap<service_generator>();
     test_swap<module_generator>();

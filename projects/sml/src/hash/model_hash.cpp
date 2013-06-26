@@ -27,7 +27,7 @@
 #include "dogen/sml/hash/qname_hash.hpp"
 #include "dogen/sml/hash/reference_hash.hpp"
 #include "dogen/sml/hash/service_hash.hpp"
-#include "dogen/sml/hash/value_hash.hpp"
+#include "dogen/sml/hash/value_object_hash.hpp"
 
 namespace {
 
@@ -65,7 +65,7 @@ inline std::size_t hash_std_unordered_map_dogen_sml_qname_dogen_sml_enumeration(
     return seed;
 }
 
-inline std::size_t hash_std_unordered_map_dogen_sml_qname_dogen_sml_value(const std::unordered_map<dogen::sml::qname, dogen::sml::value>& v){
+inline std::size_t hash_std_unordered_map_dogen_sml_qname_dogen_sml_value_object(const std::unordered_map<dogen::sml::qname, dogen::sml::value_object>& v){
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i.first);
@@ -154,7 +154,7 @@ std::size_t model_hasher::hash(const model&v) {
     combine(seed, hash_std_unordered_map_dogen_sml_qname_dogen_sml_pod(v.pods()));
     combine(seed, hash_std_unordered_map_dogen_sml_qname_dogen_sml_primitive(v.primitives()));
     combine(seed, hash_std_unordered_map_dogen_sml_qname_dogen_sml_enumeration(v.enumerations()));
-    combine(seed, hash_std_unordered_map_dogen_sml_qname_dogen_sml_value(v.exceptions()));
+    combine(seed, hash_std_unordered_map_dogen_sml_qname_dogen_sml_value_object(v.exceptions()));
     combine(seed, hash_std_list_std_string(v.external_module_path()));
     combine(seed, v.is_system());
     combine(seed, hash_std_unordered_map_std_string_dogen_sml_reference(v.dependencies()));

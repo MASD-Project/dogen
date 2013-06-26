@@ -27,7 +27,6 @@
 
 #include <string>
 #include "dogen/sml/types/pod.hpp"
-#include "dogen/sml/types/value.hpp"
 #include "dogen/sml/types/model.hpp"
 
 namespace dogen {

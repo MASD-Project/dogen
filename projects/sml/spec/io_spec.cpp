@@ -51,7 +51,7 @@ BOOST_AUTO_TEST_CASE(validate_io) {
     test_io<property_generator>();
     test_io<qname_generator>();
     test_io<reference_generator>();
-    test_io<value_generator>();
+    test_io<value_object_generator>();
     test_io<entity_generator>();
     test_io<service_generator>();
     test_io<module_generator>();

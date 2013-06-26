@@ -37,7 +37,6 @@
 #include "dogen/sml/serialization/repository_ser.hpp"
 #include "dogen/sml/serialization/service_ser.hpp"
 #include "dogen/sml/serialization/typed_element_ser.hpp"
-#include "dogen/sml/serialization/value_ser.hpp"
 
 #ifdef __linux__
 #include "eos/portable_iarchive.hpp"
