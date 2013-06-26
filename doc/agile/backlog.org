@@ -11,6 +11,20 @@ This file contains all stories that haven't been assigned to a sprint.
 
 Stories that we intend to look at, at some point.
 
+*** Improve logging of disconnected inheritance objects
+
+At present the error message for an inheritance object in dia which
+has less than two connections is less than helpful:
+
+: 2013-06-26 22:58:50.236488 [ERROR] [dia_to_sml.processor] Expected 2 connections but found: 1
+: 2013-06-26 22:58:50.236917 [FATAL] [dogen] Error: /home/marco/Development/kitanda/dogen/projects/dia_to_sml/src/types/processor.cpp(166): Throw in function dogen::dia_to_sml::processed_object dogen::dia_to_sml::processor::process(const dogen::dia::object&)
+: Dynamic exception type: boost::exception_detail::clone_impl<dogen::dia_to_sml::processing_error>
+: std::exception::what: Expected 2 connections but found: 1
+: [tag_workflow*] = Code generation failure.
+
+We should really try to detail which object ID failed, as well as
+details of the connected object if possible, etc.
+
 *** Check concept properties for identity              :story:
     CLOCK: [2013-06-24 Mon 22:33]--[2013-06-24 Mon 22:36] =>  0:03
 
