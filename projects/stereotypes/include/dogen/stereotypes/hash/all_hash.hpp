@@ -20,6 +20,7 @@
  */
 #include "dogen/stereotypes/hash/aggregate_root_hash.hpp"
 #include "dogen/stereotypes/hash/base_concept_model_hash.hpp"
+#include "dogen/stereotypes/hash/base_with_concept_hash.hpp"
 #include "dogen/stereotypes/hash/composite_identity_hash.hpp"
 #include "dogen/stereotypes/hash/composite_identity_unversioned_key_hash.hpp"
 #include "dogen/stereotypes/hash/composite_identity_ver_hash.hpp"
@@ -27,6 +28,7 @@
 #include "dogen/stereotypes/hash/composite_identity_ver_versioned_key_hash.hpp"
 #include "dogen/stereotypes/hash/entity_hash.hpp"
 #include "dogen/stereotypes/hash/fluent_hash.hpp"
+#include "dogen/stereotypes/hash/further_refined_hash.hpp"
 #include "dogen/stereotypes/hash/identity_and_other_hash.hpp"
 #include "dogen/stereotypes/hash/identity_and_other_unversioned_key_hash.hpp"
 #include "dogen/stereotypes/hash/identity_and_other_ver_hash.hpp"

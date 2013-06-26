@@ -18,9 +18,16 @@
  * MA 02110-1301, USA.
  *
  */
+#include <set>
 #include <sstream>
+#include <iterator>
+#include <algorithm>
+// #include <iostream>
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
+#include "dogen/utility/io/set_io.hpp"
+#include "dogen/utility/io/list_io.hpp"
+#include "dogen/utility/io/unordered_set_io.hpp"
 #include "dogen/sml/types/resolution_error.hpp"
 #include "dogen/sml/io/qname_io.hpp"
 #include "dogen/sml/io/nested_qname_io.hpp"
@@ -49,7 +56,38 @@ typedef boost::error_info<struct tag_errmsg, std::string> errmsg_info;
 namespace dogen {
 namespace sml {
 
+// FIXME: hack
+bool operator<(const qname& lhs, const qname& rhs) {
+    return
+        lhs.model_name() < rhs.model_name() ||
+        (lhs.model_name() == rhs.model_name() &&
+            (lhs.external_module_path() < rhs.external_module_path() ||
+                (lhs.external_module_path() == rhs.external_module_path() &&
+                    (lhs.type_name() < rhs.type_name() ||
+                        (lhs.type_name() == rhs.type_name() &&
+                            lhs.meta_type() < rhs.meta_type())))));
+}
+
 resolver::resolver(model& m) : model_(m), has_resolved_(false) { }
+
+void resolver::
+expand_concept_hierarchy(const qname& qn, std::list<qname>& concepts) const {
+
+    const auto i(model_.concepts().find(qn));
+    if (i == model_.concepts().end()) {
+        std::ostringstream stream;
+        stream << orphan_concept << ". concept: "
+               << qn.type_name() << " could not be found.";
+
+        BOOST_LOG_SEV(lg, error) << stream.str();
+        BOOST_THROW_EXCEPTION(resolution_error(stream.str()));
+    }
+
+    for (const auto& c : i->second.refines())
+        expand_concept_hierarchy(c, concepts);
+
+    concepts.push_back(qn);
+}
 
 void resolver::validate_inheritance_graph(const pod& p) const {
     // FIXME: we should really just check that the parent exists since
@@ -240,14 +278,74 @@ void resolver::resolve_pods() {
 
         validate_inheritance_graph(p);
         p.properties(resolve_properties(p.name(), p.properties()));
+
+        //FIXME: biggest hack ever
+        if (p.modeled_concepts().empty())
+            continue;
+
+        std::list<qname> expanded_modeled_concepts;
+        for (const auto& qn : p.modeled_concepts())
+            expand_concept_hierarchy(qn, expanded_modeled_concepts);
+
+        // std::cout << "type: " << p.name().type_name() << std::endl;
+
+        // std::cout << "after expand: " << expanded_modeled_concepts.size()
+        //           << std::endl
+        //           << " " << expanded_modeled_concepts << std::endl;
+
+        p.modeled_concepts().clear();
+        for (const auto& qn : expanded_modeled_concepts)
+            p.modeled_concepts().push_back(qn);
+
+        // std::cout << "modeled: " << p.modeled_concepts().size() << std::endl;
+    }
+
+    //FIXME: biggest hack ever - continued
+    for (auto& pair : model_.pods()) {
+        pod& p(pair.second);
+
+        if (p.modeled_concepts().empty())
+            continue;
+
+        // std::cout << "type2: " << p.name().type_name() << std::endl;
+        // std::cout << "modeled: " << p.modeled_concepts().size() << std::endl;
+
+        std::set<qname> mc;
+        for (const auto& qn : p.modeled_concepts())
+            mc.insert(qn);
+
+        std::set<qname> pmc;
+        auto parent(p.parent_name());
+        while (parent) {
+            qname pqn(*parent);
+            const auto i(model_.pods().find(pqn));
+            for (const auto& qn : i->second.modeled_concepts())
+                pmc.insert(qn);
+            parent = i->second.parent_name();
+        }
+
+        // std::cout << "pmc: " << pmc << std::endl
+        //           << "mc: " << mc  << std::endl;
+
+        std::set<qname> result;
+        std::set_difference(mc.begin(), mc.end(), pmc.begin(), pmc.end(),
+            std::inserter(result, result.end()));
+
+        // std::cout << "result: " << result << std::endl;
+        auto tmp(p.modeled_concepts());
+        p.modeled_concepts().clear();
+        for (const auto& qn : tmp) {
+            if (result.find(qn) != result.end())
+                p.modeled_concepts().push_back(qn);
+        }
     }
 }
 
 void resolver::resolve() {
     require_not_has_resolved();
     resolve_references();
-    resolve_pods();
     resolve_concepts();
+    resolve_pods();
     has_resolved_ = true;
 }
 

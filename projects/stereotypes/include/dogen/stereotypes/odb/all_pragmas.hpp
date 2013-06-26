@@ -20,6 +20,7 @@
  */
 #include "dogen/stereotypes/odb/aggregate_root_pragmas.hpp"
 #include "dogen/stereotypes/odb/base_concept_model_pragmas.hpp"
+#include "dogen/stereotypes/odb/base_with_concept_pragmas.hpp"
 #include "dogen/stereotypes/odb/composite_identity_pragmas.hpp"
 #include "dogen/stereotypes/odb/composite_identity_unversioned_key_pragmas.hpp"
 #include "dogen/stereotypes/odb/composite_identity_ver_pragmas.hpp"
@@ -27,6 +28,7 @@
 #include "dogen/stereotypes/odb/composite_identity_ver_versioned_key_pragmas.hpp"
 #include "dogen/stereotypes/odb/entity_pragmas.hpp"
 #include "dogen/stereotypes/odb/fluent_pragmas.hpp"
+#include "dogen/stereotypes/odb/further_refined_pragmas.hpp"
 #include "dogen/stereotypes/odb/identity_and_other_pragmas.hpp"
 #include "dogen/stereotypes/odb/identity_and_other_unversioned_key_pragmas.hpp"
 #include "dogen/stereotypes/odb/identity_and_other_ver_pragmas.hpp"

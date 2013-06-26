@@ -188,8 +188,9 @@ void transformer::properties_for_concept(const sml::qname& qn,
                 qn.type_name()));
     }
 
-    for (const auto& c : i->second.refines())
-        properties_for_concept(c, properties, processed_qnames);
+    // FIXME: mega hack
+    // for (const auto& c : i->second.refines())
+    //     properties_for_concept(c, properties, processed_qnames);
 
     const auto& props(i->second.properties());
     properties.insert(properties.end(), props.begin(), props.end());

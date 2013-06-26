@@ -58,6 +58,13 @@ public:
 
 private:
     /**
+     * @brief Expand concept hierarchy into a list of all concepts.
+     */
+    void expand_concept_hierarchy(const qname& qn,
+        std::list<qname>& concepts) const;
+
+private:
+    /**
      * @brief Resolves a partially formed qname into a full qname.
      */
     qname resolve_partial_type(const qname& n) const;

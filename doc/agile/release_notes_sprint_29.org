@@ -10,23 +10,23 @@ This file contains all stories that were closed during sprint 29.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-06-26 Wed 07:54]
+Clock summary at [2013-06-26 Wed 08:32]
 
-| Headline                                                               | Time    |       |      |
-|------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                           | *22:26* |       |      |
-|------------------------------------------------------------------------+---------+-------+------|
-| Development Stories Implemented                                        |         | 22:26 |      |
-| IMPLEMENTATION Release notes and backlog grooming                      |         |       | 0:53 |
-| COMPLETED Make design by contract methods consistent in dia to sml     |         |       | 0:52 |
-| COMPLETED Split resolver from merger                                   |         |       | 3:18 |
-| COMPLETED Property container should be a list not a vector             |         |       | 0:18 |
-| COMPLETED Implement concepts in SML                                    |         |       | 9:24 |
-| COMPLETED Design the inheritance tree of DDD classes in SML            |         |       | 2:02 |
-| COMPLETED Add concept properties in order of inheritance               |         |       | 0:18 |
-| COMPLETED Ensure extractor takes concepts into account                 |         |       | 0:22 |
-| IMPLEMENTATION Descendents modeling different concepts from base break |         |       | 1:44 |
-| IMPLEMENTATION Update SML to make use of concepts                      |         |       | 3:15 |
+| Headline                                                           | Time    |       |      |
+|--------------------------------------------------------------------+---------+-------+------|
+| *Total time*                                                       | *23:02* |       |      |
+|--------------------------------------------------------------------+---------+-------+------|
+| Development Stories Implemented                                    |         | 23:02 |      |
+| IMPLEMENTATION Release notes and backlog grooming                  |         |       | 0:53 |
+| COMPLETED Make design by contract methods consistent in dia to sml |         |       | 0:52 |
+| COMPLETED Split resolver from merger                               |         |       | 3:18 |
+| COMPLETED Property container should be a list not a vector         |         |       | 0:18 |
+| COMPLETED Implement concepts in SML                                |         |       | 9:24 |
+| COMPLETED Design the inheritance tree of DDD classes in SML        |         |       | 2:02 |
+| COMPLETED Add concept properties in order of inheritance           |         |       | 0:18 |
+| COMPLETED Ensure extractor takes concepts into account             |         |       | 0:22 |
+| COMPLETED Descendents modeling different concepts from base break  |         |       | 2:20 |
+| IMPLEMENTATION Update SML to make use of concepts                  |         |       | 3:15 |
 #+end:
 
 *** IMPLEMENTATION Release notes and backlog grooming                  :task:
@@ -253,7 +253,10 @@ we didn't notice that the inclusion management was not being done
 properly. Update extractor to take properties obtained via concepts
 into account.
 
-*** IMPLEMENTATION Descendents modeling different concepts from base break :spike:
+*** COMPLETED Descendents modeling different concepts from base break :spike:
+    CLOSED: [2013-06-26 Wed 08:31]
+    CLOCK: [2013-06-26 Wed 08:29]--[2013-06-26 Wed 08:31] =>  0:02
+    CLOCK: [2013-06-26 Wed 07:45]--[2013-06-26 Wed 08:19] =>  0:34
     CLOCK: [2013-06-26 Wed 07:35]--[2013-06-26 Wed 07:45] =>  0:10
     CLOCK: [2013-06-25 Tue 22:41]--[2013-06-26 Wed 00:15] =>  1:34
 
