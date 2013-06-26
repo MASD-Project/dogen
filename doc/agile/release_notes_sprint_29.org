@@ -10,22 +10,23 @@ This file contains all stories that were closed during sprint 29.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-06-25 Tue 22:10]
+Clock summary at [2013-06-26 Wed 07:54]
 
-| Headline                                                           | Time    |       |      |
-|--------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                       | *20:11* |       |      |
-|--------------------------------------------------------------------+---------+-------+------|
-| Development Stories Implemented                                    |         | 20:11 |      |
-| IMPLEMENTATION Release notes and backlog grooming                  |         |       | 0:53 |
-| COMPLETED Make design by contract methods consistent in dia to sml |         |       | 0:52 |
-| COMPLETED Split resolver from merger                               |         |       | 3:18 |
-| COMPLETED Property container should be a list not a vector         |         |       | 0:18 |
-| COMPLETED Implement concepts in SML                                |         |       | 9:24 |
-| COMPLETED Design the inheritance tree of DDD classes in SML        |         |       | 2:02 |
-| COMPLETED Add concept properties in order of inheritance           |         |       | 0:18 |
-| COMPLETED Ensure extractor takes concepts into account             |         |       | 0:22 |
-| IMPLEMENTATION Update SML to make use of concepts                  |         |       | 2:44 |
+| Headline                                                               | Time    |       |      |
+|------------------------------------------------------------------------+---------+-------+------|
+| *Total time*                                                           | *22:26* |       |      |
+|------------------------------------------------------------------------+---------+-------+------|
+| Development Stories Implemented                                        |         | 22:26 |      |
+| IMPLEMENTATION Release notes and backlog grooming                      |         |       | 0:53 |
+| COMPLETED Make design by contract methods consistent in dia to sml     |         |       | 0:52 |
+| COMPLETED Split resolver from merger                                   |         |       | 3:18 |
+| COMPLETED Property container should be a list not a vector             |         |       | 0:18 |
+| COMPLETED Implement concepts in SML                                    |         |       | 9:24 |
+| COMPLETED Design the inheritance tree of DDD classes in SML            |         |       | 2:02 |
+| COMPLETED Add concept properties in order of inheritance               |         |       | 0:18 |
+| COMPLETED Ensure extractor takes concepts into account                 |         |       | 0:22 |
+| IMPLEMENTATION Descendents modeling different concepts from base break |         |       | 1:44 |
+| IMPLEMENTATION Update SML to make use of concepts                      |         |       | 3:15 |
 #+end:
 
 *** IMPLEMENTATION Release notes and backlog grooming                  :task:
@@ -252,6 +253,19 @@ we didn't notice that the inclusion management was not being done
 properly. Update extractor to take properties obtained via concepts
 into account.
 
+*** IMPLEMENTATION Descendents modeling different concepts from base break :spike:
+    CLOCK: [2013-06-26 Wed 07:35]--[2013-06-26 Wed 07:45] =>  0:10
+    CLOCK: [2013-06-25 Tue 22:41]--[2013-06-26 Wed 00:15] =>  1:34
+
+The current concepts implementation does not support the scenario
+where the base models a concept say A, and a descendent models a
+refinement of A, say B. We just duplicate the properties when in
+reality we need to exclude the intersections.
+
+We should just expand the refinements container at inception to all of
+the qnames for all the concepts, excluding all the concepts found in
+the inheritance path of a class.
+
 *** IMPLEMENTATION Update SML to make use of concepts                 :story:
 
 In S28 as part of "Break down SML into concepts at the design level"
@@ -292,6 +306,10 @@ using. Attempt to make use of these to simplify the model.
 - update model to use enumeration
 - update C++ transformer
 - remove enumeration from value types
+
+**** IMPLEMENTATION Add support for value objects                      :task:
+     CLOCK: [2013-06-25 Tue 22:28]--[2013-06-25 Tue 22:40] =>  0:12
+     CLOCK: [2013-06-25 Tue 22:09]--[2013-06-25 Tue 22:28] =>  0:19
 
 **** Convert pods into entities, values or services                    :task:
 
