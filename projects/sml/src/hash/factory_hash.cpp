@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen/sml/hash/abstract_object_hash.hpp"
 #include "dogen/sml/hash/factory_hash.hpp"
-#include "dogen/sml/hash/typed_element_hash.hpp"
 
 namespace {
 
@@ -38,7 +38,7 @@ namespace sml {
 std::size_t factory_hasher::hash(const factory&v) {
     std::size_t seed(0);
 
-    combine(seed, dynamic_cast<const dogen::sml::typed_element&>(v));
+    combine(seed, dynamic_cast<const dogen::sml::abstract_object&>(v));
     return seed;
 }
 

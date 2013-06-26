@@ -33,9 +33,14 @@
 #include <boost/serialization/utility.hpp>
 #include <boost/serialization/vector.hpp>
 #include "dogen/sml/serialization/abstract_object_ser.hpp"
+#include "dogen/sml/serialization/entity_ser.hpp"
+#include "dogen/sml/serialization/factory_ser.hpp"
 #include "dogen/sml/serialization/generation_types_ser.hpp"
+#include "dogen/sml/serialization/keyed_entity_ser.hpp"
 #include "dogen/sml/serialization/property_ser.hpp"
 #include "dogen/sml/serialization/qname_ser.hpp"
+#include "dogen/sml/serialization/repository_ser.hpp"
+#include "dogen/sml/serialization/service_ser.hpp"
 #include "dogen/sml/serialization/type_ser.hpp"
 #include "dogen/sml/serialization/value_object_ser.hpp"
 
@@ -69,7 +74,6 @@ void save(Archive& ar,
     ar << make_nvp("is_keyed", v.is_keyed_);
     ar << make_nvp("is_comparable", v.is_comparable_);
     ar << make_nvp("is_fluent", v.is_fluent_);
-    ar << make_nvp("is_aggregate_root", v.is_aggregate_root_);
     ar << make_nvp("modeled_concepts", v.modeled_concepts_);
 }
 
@@ -91,7 +95,6 @@ void load(Archive& ar,
     ar >> make_nvp("is_keyed", v.is_keyed_);
     ar >> make_nvp("is_comparable", v.is_comparable_);
     ar >> make_nvp("is_fluent", v.is_fluent_);
-    ar >> make_nvp("is_aggregate_root", v.is_aggregate_root_);
     ar >> make_nvp("modeled_concepts", v.modeled_concepts_);
 }
 

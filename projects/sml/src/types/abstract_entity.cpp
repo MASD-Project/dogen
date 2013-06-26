@@ -18,18 +18,33 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/io/ios_state.hpp>
 #include <ostream>
 #include "dogen/sml/io/abstract_object_io.hpp"
-#include "dogen/sml/io/value_types_io.hpp"
-#include "dogen/sml/types/value_object.hpp"
+#include "dogen/sml/io/property_io.hpp"
+#include "dogen/sml/types/abstract_entity.hpp"
+
+namespace std {
+
+inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::sml::property>& v) {
+    s << "[ ";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << *i;
+    }
+    s << "] ";
+    return s;
+}
+
+}
 
 namespace dogen {
 namespace sml {
 
-value_object::value_object()
-    : type_(static_cast<dogen::sml::value_types>(0)) { }
+abstract_entity::abstract_entity()
+    : is_aggregate_root_(static_cast<bool>(0)) { }
 
-value_object::value_object(
+abstract_entity::abstract_entity(
     const std::string& documentation,
     const std::vector<std::pair<std::string, std::string> >& implementation_specific_parameters,
     const dogen::sml::qname& name,
@@ -47,7 +62,8 @@ value_object::value_object(
     const bool is_comparable,
     const bool is_fluent,
     const std::list<dogen::sml::qname>& modeled_concepts,
-    const dogen::sml::value_types& type)
+    const bool is_aggregate_root,
+    const std::list<dogen::sml::property>& identity_operation)
     : dogen::sml::abstract_object(documentation,
       implementation_specific_parameters,
       name,
@@ -65,48 +81,62 @@ value_object::value_object(
       is_comparable,
       is_fluent,
       modeled_concepts),
-      type_(type) { }
+      is_aggregate_root_(is_aggregate_root),
+      identity_operation_(identity_operation) { }
 
-void value_object::to_stream(std::ostream& s) const {
+void abstract_entity::to_stream(std::ostream& s) const {
+    boost::io::ios_flags_saver ifs(s);
+    s.setf(std::ios_base::boolalpha);
+    s.setf(std::ios::fixed, std::ios::floatfield);
+    s.precision(6);
+    s.setf(std::ios::showpoint);
+
     s << " { "
-      << "\"__type__\": " << "\"dogen::sml::value_object\"" << ", "
+      << "\"__type__\": " << "\"dogen::sml::abstract_entity\"" << ", "
       << "\"__parent_0__\": ";
     abstract_object::to_stream(s);
     s << ", "
-      << "\"type\": " << type_
+      << "\"is_aggregate_root\": " << is_aggregate_root_ << ", "
+      << "\"identity_operation\": " << identity_operation_
       << " }";
 }
 
-void value_object::swap(value_object& other) noexcept {
+void abstract_entity::swap(abstract_entity& other) noexcept {
     abstract_object::swap(other);
 
     using std::swap;
-    swap(type_, other.type_);
+    swap(is_aggregate_root_, other.is_aggregate_root_);
+    swap(identity_operation_, other.identity_operation_);
 }
 
-bool value_object::equals(const dogen::sml::type& other) const {
-    const value_object* const p(dynamic_cast<const value_object* const>(&other));
-    if (!p) return false;
-    return *this == *p;
-}
-
-bool value_object::operator==(const value_object& rhs) const {
+bool abstract_entity::compare(const abstract_entity& rhs) const {
     return abstract_object::compare(rhs) &&
-        type_ == rhs.type_;
+        is_aggregate_root_ == rhs.is_aggregate_root_ &&
+        identity_operation_ == rhs.identity_operation_;
 }
 
-value_object& value_object::operator=(value_object other) {
-    using std::swap;
-    swap(*this, other);
-    return *this;
+bool abstract_entity::is_aggregate_root() const {
+    return is_aggregate_root_;
 }
 
-dogen::sml::value_types value_object::type() const {
-    return type_;
+void abstract_entity::is_aggregate_root(const bool v) {
+    is_aggregate_root_ = v;
 }
 
-void value_object::type(const dogen::sml::value_types& v) {
-    type_ = v;
+const std::list<dogen::sml::property>& abstract_entity::identity_operation() const {
+    return identity_operation_;
+}
+
+std::list<dogen::sml::property>& abstract_entity::identity_operation() {
+    return identity_operation_;
+}
+
+void abstract_entity::identity_operation(const std::list<dogen::sml::property>& v) {
+    identity_operation_ = v;
+}
+
+void abstract_entity::identity_operation(const std::list<dogen::sml::property>&& v) {
+    identity_operation_ = std::move(v);
 }
 
 } }

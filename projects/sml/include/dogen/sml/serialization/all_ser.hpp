@@ -18,6 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen/sml/serialization/abstract_entity_ser.hpp"
 #include "dogen/sml/serialization/abstract_object_ser.hpp"
 #include "dogen/sml/serialization/category_types_ser.hpp"
 #include "dogen/sml/serialization/concept_ser.hpp"
@@ -26,8 +27,8 @@
 #include "dogen/sml/serialization/enumerator_ser.hpp"
 #include "dogen/sml/serialization/factory_ser.hpp"
 #include "dogen/sml/serialization/generation_types_ser.hpp"
+#include "dogen/sml/serialization/keyed_entity_ser.hpp"
 #include "dogen/sml/serialization/meta_types_ser.hpp"
-#include "dogen/sml/serialization/model_element_ser.hpp"
 #include "dogen/sml/serialization/model_ser.hpp"
 #include "dogen/sml/serialization/module_ser.hpp"
 #include "dogen/sml/serialization/nested_qname_ser.hpp"
@@ -42,6 +43,5 @@
 #include "dogen/sml/serialization/service_ser.hpp"
 #include "dogen/sml/serialization/service_types_ser.hpp"
 #include "dogen/sml/serialization/type_ser.hpp"
-#include "dogen/sml/serialization/typed_element_ser.hpp"
 #include "dogen/sml/serialization/value_object_ser.hpp"
 #include "dogen/sml/serialization/value_types_ser.hpp"

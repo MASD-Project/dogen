@@ -18,28 +18,17 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_SML_SERIALIZATION_TYPED_ELEMENT_SER_HPP
-#define DOGEN_SML_SERIALIZATION_TYPED_ELEMENT_SER_HPP
+#ifndef DOGEN_SML_TYPES_ABSTRACT_ENTITY_FWD_HPP
+#define DOGEN_SML_TYPES_ABSTRACT_ENTITY_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <boost/serialization/assume_abstract.hpp>
-#include <boost/serialization/split_free.hpp>
-#include "dogen/sml/types/typed_element.hpp"
+namespace dogen {
+namespace sml {
 
-BOOST_SERIALIZATION_SPLIT_FREE(dogen::sml::typed_element)
-BOOST_SERIALIZATION_ASSUME_ABSTRACT(dogen::sml::typed_element)
-
-namespace boost {
-namespace serialization {
-
-template<typename Archive>
-void save(Archive& ar, const dogen::sml::typed_element& v, unsigned int version);
-
-template<typename Archive>
-void load(Archive& ar, dogen::sml::typed_element& v, unsigned int version);
+class abstract_entity;
 
 } }
 

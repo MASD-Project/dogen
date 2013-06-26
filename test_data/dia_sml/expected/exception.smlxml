@@ -189,7 +189,6 @@
 					<is_keyed>0</is_keyed>
 					<is_comparable>0</is_comparable>
 					<is_fluent>0</is_fluent>
-					<is_aggregate_root>0</is_aggregate_root>
 					<modeled_concepts>
 						<count>0</count>
 						<item_version>0</item_version>
@@ -257,7 +256,6 @@
 					<is_keyed>0</is_keyed>
 					<is_comparable>0</is_comparable>
 					<is_fluent>0</is_fluent>
-					<is_aggregate_root>0</is_aggregate_root>
 					<modeled_concepts>
 						<count>0</count>
 						<item_version>0</item_version>

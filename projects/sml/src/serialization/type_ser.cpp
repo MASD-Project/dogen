@@ -30,10 +30,15 @@
 #include <boost/serialization/string.hpp>
 #include <boost/serialization/utility.hpp>
 #include <boost/serialization/vector.hpp>
+#include "dogen/sml/serialization/entity_ser.hpp"
 #include "dogen/sml/serialization/enumeration_ser.hpp"
+#include "dogen/sml/serialization/factory_ser.hpp"
 #include "dogen/sml/serialization/generation_types_ser.hpp"
+#include "dogen/sml/serialization/keyed_entity_ser.hpp"
 #include "dogen/sml/serialization/primitive_ser.hpp"
 #include "dogen/sml/serialization/qname_ser.hpp"
+#include "dogen/sml/serialization/repository_ser.hpp"
+#include "dogen/sml/serialization/service_ser.hpp"
 #include "dogen/sml/serialization/type_ser.hpp"
 #include "dogen/sml/serialization/value_object_ser.hpp"
 

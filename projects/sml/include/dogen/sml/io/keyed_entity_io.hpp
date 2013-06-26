@@ -18,30 +18,22 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_SML_TEST_DATA_MODEL_ELEMENT_TD_HPP
-#define DOGEN_SML_TEST_DATA_MODEL_ELEMENT_TD_HPP
+#ifndef DOGEN_SML_IO_KEYED_ENTITY_IO_HPP
+#define DOGEN_SML_IO_KEYED_ENTITY_IO_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/sml/types/model_element.hpp"
+#include <iosfwd>
+#include "dogen/sml/types/keyed_entity.hpp"
 
 namespace dogen {
 namespace sml {
 
-class model_element_generator {
-public:
-    model_element_generator();
-
-public:
-    typedef dogen::sml::model_element result_type;
-
-public:
-    static void populate(const unsigned int position, result_type& v);
-public:
-    static result_type* create_ptr(const unsigned int position);
-};
+std::ostream&
+operator<<(std::ostream& s,
+     const dogen::sml::keyed_entity& v);
 
 } }
 

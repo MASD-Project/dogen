@@ -81,7 +81,6 @@ std::size_t abstract_object_hasher::hash(const abstract_object&v) {
     combine(seed, v.is_keyed());
     combine(seed, v.is_comparable());
     combine(seed, v.is_fluent());
-    combine(seed, v.is_aggregate_root());
     combine(seed, hash_std_list_dogen_sml_qname(v.modeled_concepts()));
 
     return seed;

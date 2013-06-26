@@ -18,17 +18,23 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_SML_TYPES_MODEL_ELEMENT_FWD_HPP
-#define DOGEN_SML_TYPES_MODEL_ELEMENT_FWD_HPP
+#ifndef DOGEN_SML_SERIALIZATION_ABSTRACT_ENTITY_FWD_SER_HPP
+#define DOGEN_SML_SERIALIZATION_ABSTRACT_ENTITY_FWD_SER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-namespace dogen {
-namespace sml {
+#include "dogen/sml/types/abstract_entity_fwd.hpp"
 
-class model_element;
+namespace boost {
+namespace serialization {
+
+template<class Archive>
+void save(Archive& ar, const dogen::sml::abstract_entity& v, unsigned int version);
+
+template<class Archive>
+void load(Archive& ar, dogen::sml::abstract_entity& v, unsigned int version);
 
 } }
 

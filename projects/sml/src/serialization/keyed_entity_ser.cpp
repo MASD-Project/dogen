@@ -27,8 +27,10 @@
 #include <boost/archive/xml_iarchive.hpp>
 #include <boost/archive/xml_oarchive.hpp>
 #include <boost/serialization/nvp.hpp>
+#include <boost/serialization/optional.hpp>
 #include "dogen/sml/serialization/abstract_entity_ser.hpp"
-#include "dogen/sml/serialization/entity_ser.hpp"
+#include "dogen/sml/serialization/keyed_entity_ser.hpp"
+#include "dogen/sml/serialization/qname_ser.hpp"
 
 #ifdef __linux__
 #include "eos/portable_iarchive.hpp"
@@ -36,7 +38,7 @@
 #endif
 
 BOOST_CLASS_TRACKING(
-    dogen::sml::entity,
+    dogen::sml::keyed_entity,
     boost::serialization::track_selectively)
 
 namespace boost {
@@ -44,16 +46,22 @@ namespace serialization {
 
 template<typename Archive>
 void save(Archive& ar,
-    const dogen::sml::entity& v,
+    const dogen::sml::keyed_entity& v,
     const unsigned int /*version*/) {
     ar << make_nvp("abstract_entity", base_object<dogen::sml::abstract_entity>(v));
+
+    ar << make_nvp("unversioned_key", v.unversioned_key_);
+    ar << make_nvp("versioned_key", v.versioned_key_);
 }
 
 template<typename Archive>
 void load(Archive& ar,
-    dogen::sml::entity& v,
+    dogen::sml::keyed_entity& v,
     const unsigned int /*version*/) {
     ar >> make_nvp("abstract_entity", base_object<dogen::sml::abstract_entity>(v));
+
+    ar >> make_nvp("unversioned_key", v.unversioned_key_);
+    ar >> make_nvp("versioned_key", v.versioned_key_);
 }
 
 } }
@@ -61,21 +69,21 @@ void load(Archive& ar,
 namespace boost {
 namespace serialization {
 
-template void save(archive::polymorphic_oarchive& ar, const dogen::sml::entity& v, unsigned int version);
-template void load(archive::polymorphic_iarchive& ar, dogen::sml::entity& v, unsigned int version);
+template void save(archive::polymorphic_oarchive& ar, const dogen::sml::keyed_entity& v, unsigned int version);
+template void load(archive::polymorphic_iarchive& ar, dogen::sml::keyed_entity& v, unsigned int version);
 
-template void save(archive::text_oarchive& ar, const dogen::sml::entity& v, unsigned int version);
-template void load(archive::text_iarchive& ar, dogen::sml::entity& v, unsigned int version);
+template void save(archive::text_oarchive& ar, const dogen::sml::keyed_entity& v, unsigned int version);
+template void load(archive::text_iarchive& ar, dogen::sml::keyed_entity& v, unsigned int version);
 
-template void save(archive::binary_oarchive& ar, const dogen::sml::entity& v, unsigned int version);
-template void load(archive::binary_iarchive& ar, dogen::sml::entity& v, unsigned int version);
+template void save(archive::binary_oarchive& ar, const dogen::sml::keyed_entity& v, unsigned int version);
+template void load(archive::binary_iarchive& ar, dogen::sml::keyed_entity& v, unsigned int version);
 
-template void save(archive::xml_oarchive& ar, const dogen::sml::entity& v, unsigned int version);
-template void load(archive::xml_iarchive& ar, dogen::sml::entity& v, unsigned int version);
+template void save(archive::xml_oarchive& ar, const dogen::sml::keyed_entity& v, unsigned int version);
+template void load(archive::xml_iarchive& ar, dogen::sml::keyed_entity& v, unsigned int version);
 
 #ifdef __linux__
-template void save(eos::portable_oarchive& ar, const dogen::sml::entity& v, unsigned int version);
-template void load(eos::portable_iarchive& ar, dogen::sml::entity& v, unsigned int version);
+template void save(eos::portable_oarchive& ar, const dogen::sml::keyed_entity& v, unsigned int version);
+template void load(eos::portable_iarchive& ar, dogen::sml::keyed_entity& v, unsigned int version);
 #endif
 
 } }

@@ -18,6 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen/sml/hash/abstract_entity_hash.hpp"
 #include "dogen/sml/hash/abstract_object_hash.hpp"
 #include "dogen/sml/hash/category_types_hash.hpp"
 #include "dogen/sml/hash/concept_hash.hpp"
@@ -26,8 +27,8 @@
 #include "dogen/sml/hash/enumerator_hash.hpp"
 #include "dogen/sml/hash/factory_hash.hpp"
 #include "dogen/sml/hash/generation_types_hash.hpp"
+#include "dogen/sml/hash/keyed_entity_hash.hpp"
 #include "dogen/sml/hash/meta_types_hash.hpp"
-#include "dogen/sml/hash/model_element_hash.hpp"
 #include "dogen/sml/hash/model_hash.hpp"
 #include "dogen/sml/hash/module_hash.hpp"
 #include "dogen/sml/hash/nested_qname_hash.hpp"
@@ -41,6 +42,5 @@
 #include "dogen/sml/hash/service_hash.hpp"
 #include "dogen/sml/hash/service_types_hash.hpp"
 #include "dogen/sml/hash/type_hash.hpp"
-#include "dogen/sml/hash/typed_element_hash.hpp"
 #include "dogen/sml/hash/value_object_hash.hpp"
 #include "dogen/sml/hash/value_types_hash.hpp"

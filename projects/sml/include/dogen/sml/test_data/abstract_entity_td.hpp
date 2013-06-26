@@ -18,22 +18,30 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_SML_IO_TYPED_ELEMENT_IO_HPP
-#define DOGEN_SML_IO_TYPED_ELEMENT_IO_HPP
+#ifndef DOGEN_SML_TEST_DATA_ABSTRACT_ENTITY_TD_HPP
+#define DOGEN_SML_TEST_DATA_ABSTRACT_ENTITY_TD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <iosfwd>
-#include "dogen/sml/types/typed_element.hpp"
+#include "dogen/sml/types/abstract_entity.hpp"
 
 namespace dogen {
 namespace sml {
 
-std::ostream&
-operator<<(std::ostream& s,
-     const dogen::sml::typed_element& v);
+class abstract_entity_generator {
+public:
+    abstract_entity_generator();
+
+public:
+    typedef dogen::sml::abstract_entity result_type;
+
+public:
+    static void populate(const unsigned int position, result_type& v);
+public:
+    static result_type* create_ptr(const unsigned int position);
+};
 
 } }
 

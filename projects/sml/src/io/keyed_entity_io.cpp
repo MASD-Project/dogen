@@ -18,24 +18,17 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_SML_SERIALIZATION_TYPED_ELEMENT_FWD_SER_HPP
-#define DOGEN_SML_SERIALIZATION_TYPED_ELEMENT_FWD_SER_HPP
+#include <ostream>
+#include "dogen/sml/io/abstract_entity_io.hpp"
+#include "dogen/sml/io/keyed_entity_io.hpp"
+#include "dogen/sml/io/qname_io.hpp"
 
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
+namespace dogen {
+namespace sml {
 
-#include "dogen/sml/types/typed_element_fwd.hpp"
-
-namespace boost {
-namespace serialization {
-
-template<class Archive>
-void save(Archive& ar, const dogen::sml::typed_element& v, unsigned int version);
-
-template<class Archive>
-void load(Archive& ar, dogen::sml::typed_element& v, unsigned int version);
+std::ostream& operator<<(std::ostream& s, const keyed_entity& v) {
+    v.to_stream(s);
+    return(s);
+}
 
 } }
-
-#endif

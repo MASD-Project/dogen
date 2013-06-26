@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen/sml/test_data/abstract_object_td.hpp"
 #include "dogen/sml/test_data/repository_td.hpp"
-#include "dogen/sml/test_data/typed_element_td.hpp"
 
 
 
@@ -30,7 +30,7 @@ repository_generator::repository_generator() : position_(0) { }
 
 void repository_generator::
 populate(const unsigned int position, result_type& v) {
-    dogen::sml::typed_element_generator::populate(position, v);
+    dogen::sml::abstract_object_generator::populate(position, v);
 }
 
 repository_generator::result_type

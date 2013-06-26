@@ -18,9 +18,9 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen/sml/hash/abstract_object_hash.hpp"
 #include "dogen/sml/hash/service_hash.hpp"
 #include "dogen/sml/hash/service_types_hash.hpp"
-#include "dogen/sml/hash/typed_element_hash.hpp"
 
 namespace {
 
@@ -39,7 +39,7 @@ namespace sml {
 std::size_t service_hasher::hash(const service&v) {
     std::size_t seed(0);
 
-    combine(seed, dynamic_cast<const dogen::sml::typed_element&>(v));
+    combine(seed, dynamic_cast<const dogen::sml::abstract_object&>(v));
 
     combine(seed, v.type());
     return seed;

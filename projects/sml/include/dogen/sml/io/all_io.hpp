@@ -18,6 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen/sml/io/abstract_entity_io.hpp"
 #include "dogen/sml/io/abstract_object_io.hpp"
 #include "dogen/sml/io/category_types_io.hpp"
 #include "dogen/sml/io/concept_io.hpp"
@@ -26,8 +27,8 @@
 #include "dogen/sml/io/enumerator_io.hpp"
 #include "dogen/sml/io/factory_io.hpp"
 #include "dogen/sml/io/generation_types_io.hpp"
+#include "dogen/sml/io/keyed_entity_io.hpp"
 #include "dogen/sml/io/meta_types_io.hpp"
-#include "dogen/sml/io/model_element_io.hpp"
 #include "dogen/sml/io/model_io.hpp"
 #include "dogen/sml/io/module_io.hpp"
 #include "dogen/sml/io/nested_qname_io.hpp"
@@ -41,6 +42,5 @@
 #include "dogen/sml/io/service_io.hpp"
 #include "dogen/sml/io/service_types_io.hpp"
 #include "dogen/sml/io/type_io.hpp"
-#include "dogen/sml/io/typed_element_io.hpp"
 #include "dogen/sml/io/value_object_io.hpp"
 #include "dogen/sml/io/value_types_io.hpp"

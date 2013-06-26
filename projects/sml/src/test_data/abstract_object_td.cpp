@@ -20,9 +20,14 @@
  */
 #include <sstream>
 #include "dogen/sml/test_data/abstract_object_td.hpp"
+#include "dogen/sml/test_data/entity_td.hpp"
+#include "dogen/sml/test_data/factory_td.hpp"
 #include "dogen/sml/test_data/generation_types_td.hpp"
+#include "dogen/sml/test_data/keyed_entity_td.hpp"
 #include "dogen/sml/test_data/property_td.hpp"
 #include "dogen/sml/test_data/qname_td.hpp"
+#include "dogen/sml/test_data/repository_td.hpp"
+#include "dogen/sml/test_data/service_td.hpp"
 #include "dogen/sml/test_data/type_td.hpp"
 #include "dogen/sml/test_data/value_object_td.hpp"
 
@@ -90,13 +95,22 @@ populate(const unsigned int position, result_type& v) {
     v.is_keyed(create_bool(position + 9));
     v.is_comparable(create_bool(position + 10));
     v.is_fluent(create_bool(position + 11));
-    v.is_aggregate_root(create_bool(position + 12));
-    v.modeled_concepts(create_std_list_dogen_sml_qname(position + 13));
+    v.modeled_concepts(create_std_list_dogen_sml_qname(position + 12));
 }
 
 abstract_object_generator::result_type*
 abstract_object_generator::create_ptr(const unsigned int position) {
-    return dogen::sml::value_object_generator::create_ptr(position);
+    if ((position % 5) == 0)
+        return dogen::sml::factory_generator::create_ptr(position);
+    if ((position % 5) == 1)
+        return dogen::sml::repository_generator::create_ptr(position);
+    if ((position % 5) == 2)
+        return dogen::sml::value_object_generator::create_ptr(position);
+    if ((position % 5) == 3)
+        return dogen::sml::keyed_entity_generator::create_ptr(position);
+    if ((position % 5) == 4)
+        return dogen::sml::entity_generator::create_ptr(position);
+    return dogen::sml::service_generator::create_ptr(position);
 }
 
 

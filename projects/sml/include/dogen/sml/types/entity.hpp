@@ -26,63 +26,46 @@
 #endif
 
 #include <algorithm>
-#include <boost/optional.hpp>
 #include <iosfwd>
 #include "dogen/sml/serialization/entity_fwd_ser.hpp"
-#include "dogen/sml/types/model_element_visitor.hpp"
-#include "dogen/sml/types/qname.hpp"
-#include "dogen/sml/types/typed_element.hpp"
+#include "dogen/sml/types/abstract_entity.hpp"
+#include "dogen/sml/types/type_visitor.hpp"
 
 namespace dogen {
 namespace sml {
 
 /**
- * @brief Represents a type in the domain which has identity.
- *
- * Identity here is understood in the strong sense, not just of the basic identity
- * provided by the programming language (e.g. unique memory address for the
- * object) but in a domain sense, such that this identity could be perserved
- * regardless of how the object was stored (e.g. persisted in a database).
- *
- * All entities have keys associated with them which are implementations of  the
- * identity function; they key could be a regular domain type such as a value, or it
- * could be a system generated type for this purpose. As with any typed element,
- * keys can be versioned or unversioned, depending on the versioning
- * requirements of the underlying typed element.
+ * @brief Concrete (instantiable) representation of an entity.
  */
-class entity final : public dogen::sml::typed_element {
+class entity final : public dogen::sml::abstract_entity {
 public:
+    entity() = default;
     entity(const entity&) = default;
-
-public:
-    entity();
+    entity(entity&&) = default;
 
     virtual ~entity() noexcept { }
 
 public:
-    entity(entity&& rhs);
-
-public:
     entity(
-        const dogen::sml::qname& name,
         const std::string& documentation,
         const std::vector<std::pair<std::string, std::string> >& implementation_specific_parameters,
+        const dogen::sml::qname& name,
         const dogen::sml::generation_types& generation_type,
         const std::list<dogen::sml::property>& properties,
         const boost::optional<dogen::sml::qname>& parent_name,
         const boost::optional<dogen::sml::qname>& original_parent_name,
         const std::list<dogen::sml::qname>& leaves,
-        const unsigned int number_of_type_arguments,
         const bool is_parent,
+        const unsigned int number_of_type_arguments,
         const bool is_visitable,
         const bool is_immutable,
         const bool is_versioned,
+        const bool is_keyed,
         const bool is_comparable,
         const bool is_fluent,
         const std::list<dogen::sml::qname>& modeled_concepts,
         const bool is_aggregate_root,
-        const dogen::sml::qname& unversioned_key,
-        const boost::optional<dogen::sml::qname>& versioned_key);
+        const std::list<dogen::sml::property>& identity_operation);
 
 private:
     template<typename Archive>
@@ -92,53 +75,24 @@ private:
     friend void boost::serialization::load(Archive& ar, entity& v, unsigned int version);
 
 public:
-    virtual void accept(const model_element_visitor& v) const override {
+    virtual void accept(const type_visitor& v) const override {
         v.visit(*this);
     }
 
-    virtual void accept(model_element_visitor& v) const override {
+    virtual void accept(type_visitor& v) const override {
         v.visit(*this);
     }
 
-    virtual void accept(const model_element_visitor& v) override {
+    virtual void accept(const type_visitor& v) override {
         v.visit(*this);
     }
 
-    virtual void accept(model_element_visitor& v) override {
+    virtual void accept(type_visitor& v) override {
         v.visit(*this);
     }
 
 public:
     void to_stream(std::ostream& s) const override;
-
-public:
-    /**
-     * @brief If true, this type is a root of an aggregate.
-     */
-    /**@{*/
-    bool is_aggregate_root() const;
-    void is_aggregate_root(const bool v);
-    /**@}*/
-
-    /**
-     * @brief Identity operation for the entity, without taking version into account.
-     */
-    /**@{*/
-    const dogen::sml::qname& unversioned_key() const;
-    dogen::sml::qname& unversioned_key();
-    void unversioned_key(const dogen::sml::qname& v);
-    void unversioned_key(const dogen::sml::qname&& v);
-    /**@}*/
-
-    /**
-     * @brief If the type is a versioned keyed entity, its versioned key.
-     */
-    /**@{*/
-    const boost::optional<dogen::sml::qname>& versioned_key() const;
-    boost::optional<dogen::sml::qname>& versioned_key();
-    void versioned_key(const boost::optional<dogen::sml::qname>& v);
-    void versioned_key(const boost::optional<dogen::sml::qname>&& v);
-    /**@}*/
 
 public:
     bool operator==(const entity& rhs) const;
@@ -147,16 +101,12 @@ public:
     }
 
 public:
-    bool equals(const dogen::sml::model_element& other) const override;
+    bool equals(const dogen::sml::type& other) const override;
 
 public:
     void swap(entity& other) noexcept;
     entity& operator=(entity other);
 
-private:
-    bool is_aggregate_root_;
-    dogen::sml::qname unversioned_key_;
-    boost::optional<dogen::sml::qname> versioned_key_;
 };
 
 } }

@@ -28,8 +28,8 @@
 #include <algorithm>
 #include <iosfwd>
 #include "dogen/sml/serialization/factory_fwd_ser.hpp"
-#include "dogen/sml/types/model_element_visitor.hpp"
-#include "dogen/sml/types/typed_element.hpp"
+#include "dogen/sml/types/abstract_object.hpp"
+#include "dogen/sml/types/type_visitor.hpp"
 
 namespace dogen {
 namespace sml {
@@ -37,7 +37,7 @@ namespace sml {
 /**
  * @brief Type whose responsibility is to create other types.
  */
-class factory final : public dogen::sml::typed_element {
+class factory final : public dogen::sml::abstract_object {
 public:
     factory() = default;
     factory(const factory&) = default;
@@ -47,19 +47,20 @@ public:
 
 public:
     factory(
-        const dogen::sml::qname& name,
         const std::string& documentation,
         const std::vector<std::pair<std::string, std::string> >& implementation_specific_parameters,
+        const dogen::sml::qname& name,
         const dogen::sml::generation_types& generation_type,
         const std::list<dogen::sml::property>& properties,
         const boost::optional<dogen::sml::qname>& parent_name,
         const boost::optional<dogen::sml::qname>& original_parent_name,
         const std::list<dogen::sml::qname>& leaves,
-        const unsigned int number_of_type_arguments,
         const bool is_parent,
+        const unsigned int number_of_type_arguments,
         const bool is_visitable,
         const bool is_immutable,
         const bool is_versioned,
+        const bool is_keyed,
         const bool is_comparable,
         const bool is_fluent,
         const std::list<dogen::sml::qname>& modeled_concepts);
@@ -72,19 +73,19 @@ private:
     friend void boost::serialization::load(Archive& ar, factory& v, unsigned int version);
 
 public:
-    virtual void accept(const model_element_visitor& v) const override {
+    virtual void accept(const type_visitor& v) const override {
         v.visit(*this);
     }
 
-    virtual void accept(model_element_visitor& v) const override {
+    virtual void accept(type_visitor& v) const override {
         v.visit(*this);
     }
 
-    virtual void accept(const model_element_visitor& v) override {
+    virtual void accept(const type_visitor& v) override {
         v.visit(*this);
     }
 
-    virtual void accept(model_element_visitor& v) override {
+    virtual void accept(type_visitor& v) override {
         v.visit(*this);
     }
 
@@ -98,7 +99,7 @@ public:
     }
 
 public:
-    bool equals(const dogen::sml::model_element& other) const override;
+    bool equals(const dogen::sml::type& other) const override;
 
 public:
     void swap(factory& other) noexcept;

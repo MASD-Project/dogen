@@ -18,24 +18,35 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_SML_SERIALIZATION_MODEL_ELEMENT_FWD_SER_HPP
-#define DOGEN_SML_SERIALIZATION_MODEL_ELEMENT_FWD_SER_HPP
+#ifndef DOGEN_SML_HASH_KEYED_ENTITY_HASH_HPP
+#define DOGEN_SML_HASH_KEYED_ENTITY_HASH_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/sml/types/model_element_fwd.hpp"
+#include <functional>
+#include "dogen/sml/types/keyed_entity.hpp"
 
-namespace boost {
-namespace serialization {
+namespace dogen {
+namespace sml {
 
-template<class Archive>
-void save(Archive& ar, const dogen::sml::model_element& v, unsigned int version);
-
-template<class Archive>
-void load(Archive& ar, dogen::sml::model_element& v, unsigned int version);
+class keyed_entity_hasher {
+public:
+    static std::size_t hash(const keyed_entity& v);
+};
 
 } }
 
+namespace std {
+
+template<>
+class hash<dogen::sml::keyed_entity> {
+public:
+    size_t operator()(const dogen::sml::keyed_entity& v) const {
+        return dogen::sml::keyed_entity_hasher::hash(v);
+    }
+};
+
+}
 #endif

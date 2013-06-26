@@ -18,35 +18,29 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_SML_HASH_MODEL_ELEMENT_HASH_HPP
-#define DOGEN_SML_HASH_MODEL_ELEMENT_HASH_HPP
+#ifndef DOGEN_SML_SERIALIZATION_ABSTRACT_ENTITY_SER_HPP
+#define DOGEN_SML_SERIALIZATION_ABSTRACT_ENTITY_SER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <functional>
-#include "dogen/sml/types/model_element.hpp"
+#include <boost/serialization/assume_abstract.hpp>
+#include <boost/serialization/split_free.hpp>
+#include "dogen/sml/types/abstract_entity.hpp"
 
-namespace dogen {
-namespace sml {
+BOOST_SERIALIZATION_SPLIT_FREE(dogen::sml::abstract_entity)
+BOOST_SERIALIZATION_ASSUME_ABSTRACT(dogen::sml::abstract_entity)
 
-class model_element_hasher {
-public:
-    static std::size_t hash(const model_element& v);
-};
+namespace boost {
+namespace serialization {
+
+template<typename Archive>
+void save(Archive& ar, const dogen::sml::abstract_entity& v, unsigned int version);
+
+template<typename Archive>
+void load(Archive& ar, dogen::sml::abstract_entity& v, unsigned int version);
 
 } }
 
-namespace std {
-
-template<>
-class hash<dogen::sml::model_element> {
-public:
-    size_t operator()(const dogen::sml::model_element& v) const {
-        return dogen::sml::model_element_hasher::hash(v);
-    }
-};
-
-}
 #endif

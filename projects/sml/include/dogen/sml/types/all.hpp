@@ -18,6 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen/sml/types/abstract_entity.hpp"
 #include "dogen/sml/types/abstract_object.hpp"
 #include "dogen/sml/types/boost_model_factory.hpp"
 #include "dogen/sml/types/category_types.hpp"
@@ -29,12 +30,11 @@
 #include "dogen/sml/types/generation_types.hpp"
 #include "dogen/sml/types/injection_error.hpp"
 #include "dogen/sml/types/injector.hpp"
+#include "dogen/sml/types/keyed_entity.hpp"
 #include "dogen/sml/types/merger.hpp"
 #include "dogen/sml/types/merging_error.hpp"
 #include "dogen/sml/types/meta_types.hpp"
 #include "dogen/sml/types/model.hpp"
-#include "dogen/sml/types/model_element.hpp"
-#include "dogen/sml/types/model_element_visitor.hpp"
 #include "dogen/sml/types/module.hpp"
 #include "dogen/sml/types/nested_qname.hpp"
 #include "dogen/sml/types/pod.hpp"
@@ -53,7 +53,6 @@
 #include "dogen/sml/types/std_model_factory.hpp"
 #include "dogen/sml/types/type.hpp"
 #include "dogen/sml/types/type_visitor.hpp"
-#include "dogen/sml/types/typed_element.hpp"
 #include "dogen/sml/types/value_object.hpp"
 #include "dogen/sml/types/value_types.hpp"
 #include "dogen/sml/types/workflow.hpp"

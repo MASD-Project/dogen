@@ -75,7 +75,6 @@ public:
         const bool is_keyed,
         const bool is_comparable,
         const bool is_fluent,
-        const bool is_aggregate_root,
         const std::list<dogen::sml::qname>& modeled_concepts);
 
 private:
@@ -201,14 +200,6 @@ public:
     /**@}*/
 
     /**
-     * @brief If true, this pod is a root of an aggregate.
-     */
-    /**@{*/
-    bool is_aggregate_root() const;
-    void is_aggregate_root(const bool v);
-    /**@}*/
-
-    /**
      * @brief List of concepts this pod models.
      */
     /**@{*/
@@ -239,7 +230,6 @@ private:
     bool is_keyed_;
     bool is_comparable_;
     bool is_fluent_;
-    bool is_aggregate_root_;
     std::list<dogen::sml::qname> modeled_concepts_;
 };
 

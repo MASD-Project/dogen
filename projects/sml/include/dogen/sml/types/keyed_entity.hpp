@@ -18,42 +18,39 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_SML_TYPES_VALUE_OBJECT_HPP
-#define DOGEN_SML_TYPES_VALUE_OBJECT_HPP
+#ifndef DOGEN_SML_TYPES_KEYED_ENTITY_HPP
+#define DOGEN_SML_TYPES_KEYED_ENTITY_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <algorithm>
+#include <boost/optional.hpp>
 #include <iosfwd>
-#include "dogen/sml/serialization/value_object_fwd_ser.hpp"
-#include "dogen/sml/types/abstract_object.hpp"
+#include "dogen/sml/serialization/keyed_entity_fwd_ser.hpp"
+#include "dogen/sml/types/abstract_entity.hpp"
+#include "dogen/sml/types/qname.hpp"
 #include "dogen/sml/types/type_visitor.hpp"
-#include "dogen/sml/types/value_types.hpp"
 
 namespace dogen {
 namespace sml {
 
 /**
- * @brief Represents a descriptive aspect of the domain.
- *
- * A value (or value object) does not have an identity, but instead are used
- * to describe some aspect of the domain. For example colour is a value
- * object.
+ * @brief Entity which has keys as an external representation of its identity operation.
  */
-class value_object final : public dogen::sml::abstract_object {
+class keyed_entity final : public dogen::sml::abstract_entity {
 public:
-    value_object(const value_object&) = default;
-    value_object(value_object&&) = default;
+    keyed_entity() = default;
+    keyed_entity(const keyed_entity&) = default;
+
+    virtual ~keyed_entity() noexcept { }
 
 public:
-    value_object();
-
-    virtual ~value_object() noexcept { }
+    keyed_entity(keyed_entity&& rhs);
 
 public:
-    value_object(
+    keyed_entity(
         const std::string& documentation,
         const std::vector<std::pair<std::string, std::string> >& implementation_specific_parameters,
         const dogen::sml::qname& name,
@@ -71,14 +68,17 @@ public:
         const bool is_comparable,
         const bool is_fluent,
         const std::list<dogen::sml::qname>& modeled_concepts,
-        const dogen::sml::value_types& type);
+        const bool is_aggregate_root,
+        const std::list<dogen::sml::property>& identity_operation,
+        const dogen::sml::qname& unversioned_key,
+        const boost::optional<dogen::sml::qname>& versioned_key);
 
 private:
     template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const value_object& v, unsigned int version);
+    friend void boost::serialization::save(Archive& ar, const keyed_entity& v, unsigned int version);
 
     template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, value_object& v, unsigned int version);
+    friend void boost::serialization::load(Archive& ar, keyed_entity& v, unsigned int version);
 
 public:
     virtual void accept(const type_visitor& v) const override {
@@ -102,16 +102,28 @@ public:
 
 public:
     /**
-     * @brief Type of this value object.
+     * @brief Identity operation for the entity, without taking version into account.
      */
     /**@{*/
-    dogen::sml::value_types type() const;
-    void type(const dogen::sml::value_types& v);
+    const dogen::sml::qname& unversioned_key() const;
+    dogen::sml::qname& unversioned_key();
+    void unversioned_key(const dogen::sml::qname& v);
+    void unversioned_key(const dogen::sml::qname&& v);
+    /**@}*/
+
+    /**
+     * @brief If the type is a versioned keyed entity, its versioned key.
+     */
+    /**@{*/
+    const boost::optional<dogen::sml::qname>& versioned_key() const;
+    boost::optional<dogen::sml::qname>& versioned_key();
+    void versioned_key(const boost::optional<dogen::sml::qname>& v);
+    void versioned_key(const boost::optional<dogen::sml::qname>&& v);
     /**@}*/
 
 public:
-    bool operator==(const value_object& rhs) const;
-    bool operator!=(const value_object& rhs) const {
+    bool operator==(const keyed_entity& rhs) const;
+    bool operator!=(const keyed_entity& rhs) const {
         return !this->operator==(rhs);
     }
 
@@ -119,11 +131,12 @@ public:
     bool equals(const dogen::sml::type& other) const override;
 
 public:
-    void swap(value_object& other) noexcept;
-    value_object& operator=(value_object other);
+    void swap(keyed_entity& other) noexcept;
+    keyed_entity& operator=(keyed_entity other);
 
 private:
-    dogen::sml::value_types type_;
+    dogen::sml::qname unversioned_key_;
+    boost::optional<dogen::sml::qname> versioned_key_;
 };
 
 } }
@@ -132,8 +145,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::sml::value_object& lhs,
-    dogen::sml::value_object& rhs) {
+    dogen::sml::keyed_entity& lhs,
+    dogen::sml::keyed_entity& rhs) {
     lhs.swap(rhs);
 }
 

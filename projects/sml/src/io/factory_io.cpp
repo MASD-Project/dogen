@@ -19,8 +19,8 @@
  *
  */
 #include <ostream>
+#include "dogen/sml/io/abstract_object_io.hpp"
 #include "dogen/sml/io/factory_io.hpp"
-#include "dogen/sml/io/typed_element_io.hpp"
 
 namespace dogen {
 namespace sml {

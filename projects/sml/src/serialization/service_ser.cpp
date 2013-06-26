@@ -27,9 +27,9 @@
 #include <boost/archive/xml_iarchive.hpp>
 #include <boost/archive/xml_oarchive.hpp>
 #include <boost/serialization/nvp.hpp>
+#include "dogen/sml/serialization/abstract_object_ser.hpp"
 #include "dogen/sml/serialization/service_ser.hpp"
 #include "dogen/sml/serialization/service_types_ser.hpp"
-#include "dogen/sml/serialization/typed_element_ser.hpp"
 
 #ifdef __linux__
 #include "eos/portable_iarchive.hpp"
@@ -47,7 +47,7 @@ template<typename Archive>
 void save(Archive& ar,
     const dogen::sml::service& v,
     const unsigned int /*version*/) {
-    ar << make_nvp("typed_element", base_object<dogen::sml::typed_element>(v));
+    ar << make_nvp("abstract_object", base_object<dogen::sml::abstract_object>(v));
 
     ar << make_nvp("type", v.type_);
 }
@@ -56,7 +56,7 @@ template<typename Archive>
 void load(Archive& ar,
     dogen::sml::service& v,
     const unsigned int /*version*/) {
-    ar >> make_nvp("typed_element", base_object<dogen::sml::typed_element>(v));
+    ar >> make_nvp("abstract_object", base_object<dogen::sml::abstract_object>(v));
 
     ar >> make_nvp("type", v.type_);
 }

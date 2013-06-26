@@ -18,35 +18,37 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_SML_HASH_TYPED_ELEMENT_HASH_HPP
-#define DOGEN_SML_HASH_TYPED_ELEMENT_HASH_HPP
+#ifndef DOGEN_SML_SERIALIZATION_KEYED_ENTITY_SER_HPP
+#define DOGEN_SML_SERIALIZATION_KEYED_ENTITY_SER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <functional>
-#include "dogen/sml/types/typed_element.hpp"
+#include <boost/serialization/split_free.hpp>
+#include <boost/type_traits/is_virtual_base_of.hpp>
+#include "dogen/sml/types/keyed_entity.hpp"
 
-namespace dogen {
-namespace sml {
+namespace boost {
 
-class typed_element_hasher {
-public:
-    static std::size_t hash(const typed_element& v);
-};
+template<>struct
+is_virtual_base_of<
+    dogen::sml::abstract_entity,
+    dogen::sml::keyed_entity
+> : public mpl::true_ {};
+
+}
+
+BOOST_SERIALIZATION_SPLIT_FREE(dogen::sml::keyed_entity)
+namespace boost {
+namespace serialization {
+
+template<typename Archive>
+void save(Archive& ar, const dogen::sml::keyed_entity& v, unsigned int version);
+
+template<typename Archive>
+void load(Archive& ar, dogen::sml::keyed_entity& v, unsigned int version);
 
 } }
 
-namespace std {
-
-template<>
-class hash<dogen::sml::typed_element> {
-public:
-    size_t operator()(const dogen::sml::typed_element& v) const {
-        return dogen::sml::typed_element_hasher::hash(v);
-    }
-};
-
-}
 #endif

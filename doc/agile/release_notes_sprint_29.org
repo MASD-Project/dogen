@@ -328,7 +328,8 @@ using. Attempt to make use of these to simplify the model.
      CLOSED: [2013-06-26 Wed 19:41]
      CLOCK: [2013-06-26 Wed 18:01]--[2013-06-26 Wed 18:07] =>  0:06
 
-**** Convert pods into entities, values or services                    :task:
+**** IMPLEMENTATION Convert pods into entities, values or services     :task:
+     CLOCK: [2013-06-26 Wed 22:23]--[2013-06-26 Wed 22:45] =>  0:22
 
 *** Add content to the introduction in manual                         :story:
 *** Rename implementation specific parameters                         :story:

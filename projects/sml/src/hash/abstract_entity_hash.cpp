@@ -18,9 +18,9 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/sml/hash/generation_types_hash.hpp"
-#include "dogen/sml/hash/model_element_hash.hpp"
-#include "dogen/sml/hash/qname_hash.hpp"
+#include "dogen/sml/hash/abstract_entity_hash.hpp"
+#include "dogen/sml/hash/abstract_object_hash.hpp"
+#include "dogen/sml/hash/property_hash.hpp"
 
 namespace {
 
@@ -31,18 +31,10 @@ inline void combine(std::size_t& seed, const HashableType& value)
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 }
 
-inline std::size_t hash_std_pair_std_string_std_string(const std::pair<std::string, std::string>& v){
-    std::size_t seed(0);
-
-    combine(seed, v.first);
-    combine(seed, v.second);
-    return seed;
-}
-
-inline std::size_t hash_std_vector_std_pair_std_string_std_string_(const std::vector<std::pair<std::string, std::string> >& v){
+inline std::size_t hash_std_list_dogen_sml_property(const std::list<dogen::sml::property>& v){
     std::size_t seed(0);
     for (const auto i : v) {
-        combine(seed, hash_std_pair_std_string_std_string(i));
+        combine(seed, i);
     }
     return seed;
 }
@@ -52,13 +44,13 @@ inline std::size_t hash_std_vector_std_pair_std_string_std_string_(const std::ve
 namespace dogen {
 namespace sml {
 
-std::size_t model_element_hasher::hash(const model_element&v) {
+std::size_t abstract_entity_hasher::hash(const abstract_entity&v) {
     std::size_t seed(0);
 
-    combine(seed, v.name());
-    combine(seed, v.documentation());
-    combine(seed, hash_std_vector_std_pair_std_string_std_string_(v.implementation_specific_parameters()));
-    combine(seed, v.generation_type());
+    combine(seed, dynamic_cast<const dogen::sml::abstract_object&>(v));
+
+    combine(seed, v.is_aggregate_root());
+    combine(seed, hash_std_list_dogen_sml_property(v.identity_operation()));
 
     return seed;
 }

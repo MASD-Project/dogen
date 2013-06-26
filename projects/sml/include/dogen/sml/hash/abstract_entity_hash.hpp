@@ -18,23 +18,35 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_SML_IO_MODEL_ELEMENT_IO_HPP
-#define DOGEN_SML_IO_MODEL_ELEMENT_IO_HPP
+#ifndef DOGEN_SML_HASH_ABSTRACT_ENTITY_HASH_HPP
+#define DOGEN_SML_HASH_ABSTRACT_ENTITY_HASH_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <iosfwd>
-#include "dogen/sml/types/model_element.hpp"
+#include <functional>
+#include "dogen/sml/types/abstract_entity.hpp"
 
 namespace dogen {
 namespace sml {
 
-std::ostream&
-operator<<(std::ostream& s,
-     const dogen::sml::model_element& v);
+class abstract_entity_hasher {
+public:
+    static std::size_t hash(const abstract_entity& v);
+};
 
 } }
 
+namespace std {
+
+template<>
+class hash<dogen::sml::abstract_entity> {
+public:
+    size_t operator()(const dogen::sml::abstract_entity& v) const {
+        return dogen::sml::abstract_entity_hasher::hash(v);
+    }
+};
+
+}
 #endif

@@ -18,37 +18,18 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/sml/test_data/abstract_object_td.hpp"
-#include "dogen/sml/test_data/factory_td.hpp"
-
-
+#include <boost/io/ios_state.hpp>
+#include <ostream>
+#include "dogen/sml/io/abstract_entity_io.hpp"
+#include "dogen/sml/io/abstract_object_io.hpp"
+#include "dogen/sml/io/property_io.hpp"
 
 namespace dogen {
 namespace sml {
 
-factory_generator::factory_generator() : position_(0) { }
-
-void factory_generator::
-populate(const unsigned int position, result_type& v) {
-    dogen::sml::abstract_object_generator::populate(position, v);
-}
-
-factory_generator::result_type
-factory_generator::create(const unsigned int position) {
-    factory r;
-    factory_generator::populate(position, r);
-    return r;
-}
-factory_generator::result_type*
-factory_generator::create_ptr(const unsigned int position) {
-    factory* p = new factory();
-    factory_generator::populate(position, *p);
-    return p;
-}
-
-factory_generator::result_type
-factory_generator::operator()() {
-    return create(position_++);
+std::ostream& operator<<(std::ostream& s, const abstract_entity& v) {
+    v.to_stream(s);
+    return(s);
 }
 
 } }
