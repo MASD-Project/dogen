@@ -753,6 +753,10 @@ Relation to keys:
 - comparable versioned keys always compare the version after all other
   comparable properties.
 
+If a pod itself is marked as comparable, then it is equivalent to mark
+all properties as comparable using their relative position as the
+comparison order.
+
 *** Private and public includes
 
 NOTE: We should use the terms =internal= and =external= to avoid
