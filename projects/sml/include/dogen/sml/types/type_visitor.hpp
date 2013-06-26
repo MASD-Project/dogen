@@ -25,9 +25,11 @@
 #pragma once
 #endif
 
+#include "dogen/sml/types/abstract_object_fwd.hpp"
 #include "dogen/sml/types/enumeration_fwd.hpp"
 #include "dogen/sml/types/primitive_fwd.hpp"
 #include "dogen/sml/types/type_fwd.hpp"
+#include "dogen/sml/types/value_object_fwd.hpp"
 
 namespace dogen {
 namespace sml {
@@ -55,6 +57,16 @@ public:
     virtual void visit(const dogen::sml::enumeration&) { }
     virtual void visit(dogen::sml::enumeration&) const { }
     virtual void visit(dogen::sml::enumeration&) { }
+    /**@}*/
+
+    /**
+     * @brief Accept visits for type dogen::sml::value_object
+     */
+    /**@{*/
+    virtual void visit(const dogen::sml::value_object&) const { }
+    virtual void visit(const dogen::sml::value_object&) { }
+    virtual void visit(dogen::sml::value_object&) const { }
+    virtual void visit(dogen::sml::value_object&) { }
     /**@}*/
 };
 

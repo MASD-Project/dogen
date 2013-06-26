@@ -24,6 +24,7 @@
 #include "dogen/sml/test_data/primitive_td.hpp"
 #include "dogen/sml/test_data/qname_td.hpp"
 #include "dogen/sml/test_data/type_td.hpp"
+#include "dogen/sml/test_data/value_object_td.hpp"
 
 namespace {
 
@@ -75,8 +76,10 @@ populate(const unsigned int position, result_type& v) {
 
 type_generator::result_type*
 type_generator::create_ptr(const unsigned int position) {
-    if ((position % 1) == 0)
+    if ((position % 2) == 0)
         return dogen::sml::enumeration_generator::create_ptr(position);
+    if ((position % 2) == 1)
+        return dogen::sml::value_object_generator::create_ptr(position);
     return dogen::sml::primitive_generator::create_ptr(position);
 }
 

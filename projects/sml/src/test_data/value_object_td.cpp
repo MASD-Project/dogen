@@ -18,26 +18,45 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen/sml/test_data/abstract_object_td.hpp"
+#include "dogen/sml/test_data/value_object_td.hpp"
 #include "dogen/sml/test_data/value_types_td.hpp"
+
+namespace {
+
+dogen::sml::value_types
+create_dogen_sml_value_types(const unsigned int position) {
+    return dogen::sml::value_types_generator::create(position);
+}
+
+}
 
 namespace dogen {
 namespace sml {
 
-value_types_generator::value_types_generator() : position_(0) { }
-void value_types_generator::
+value_object_generator::value_object_generator() : position_(0) { }
+
+void value_object_generator::
 populate(const unsigned int position, result_type& v) {
-    v = static_cast<value_types>(position % 8);
+    dogen::sml::abstract_object_generator::populate(position, v);
+    v.type(create_dogen_sml_value_types(position + 0));
 }
 
-value_types_generator::result_type
-value_types_generator::create(const unsigned int  position) {
-    result_type r;
-    value_types_generator::populate(position, r);
+value_object_generator::result_type
+value_object_generator::create(const unsigned int position) {
+    value_object r;
+    value_object_generator::populate(position, r);
     return r;
 }
+value_object_generator::result_type*
+value_object_generator::create_ptr(const unsigned int position) {
+    value_object* p = new value_object();
+    value_object_generator::populate(position, *p);
+    return p;
+}
 
-value_types_generator::result_type
-value_types_generator::operator()() {
+value_object_generator::result_type
+value_object_generator::operator()() {
     return create(position_++);
 }
 

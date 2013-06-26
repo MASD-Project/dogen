@@ -18,6 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen/sml/types/abstract_object.hpp"
 #include "dogen/sml/types/boost_model_factory.hpp"
 #include "dogen/sml/types/category_types.hpp"
 #include "dogen/sml/types/concept.hpp"
@@ -54,5 +55,6 @@
 #include "dogen/sml/types/type_visitor.hpp"
 #include "dogen/sml/types/typed_element.hpp"
 #include "dogen/sml/types/value.hpp"
+#include "dogen/sml/types/value_object.hpp"
 #include "dogen/sml/types/value_types.hpp"
 #include "dogen/sml/types/workflow.hpp"

@@ -45,9 +45,6 @@ std::ostream& operator<<(std::ostream& s, const value_types& v) {
     case value_types::exception:
         attr = "\"exception\"";
         break;
-    case value_types::string_table:
-        attr = "\"string_table\"";
-        break;
     case value_types::smart_pointer:
         attr = "\"smart_pointer\"";
         break;

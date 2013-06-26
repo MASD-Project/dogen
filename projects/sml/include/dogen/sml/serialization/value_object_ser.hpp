@@ -18,26 +18,36 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_SML_TYPES_VALUE_TYPES_HPP
-#define DOGEN_SML_TYPES_VALUE_TYPES_HPP
+#ifndef DOGEN_SML_SERIALIZATION_VALUE_OBJECT_SER_HPP
+#define DOGEN_SML_SERIALIZATION_VALUE_OBJECT_SER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-namespace dogen {
-namespace sml {
+#include <boost/serialization/split_free.hpp>
+#include <boost/type_traits/is_virtual_base_of.hpp>
+#include "dogen/sml/types/value_object.hpp"
 
-enum class value_types : unsigned int {
-    invalid = 0, ///< Represents an uninitialised enum
-    user_defined = 1, ///< Value was created by the user.
-    unversioned_key = 2, ///< Value is an unversioned key.
-    versioned_key = 3, ///< Value is a versioned key.
-    exception = 4, ///< Value represents an exception type.
-    smart_pointer = 5, ///< Value is a smart pointer.
-    associative_container = 6, ///< Type is an associative container.
-    sequence_container = 7 ///< Type is a sequence container.
-};
+namespace boost {
+
+template<>struct
+is_virtual_base_of<
+    dogen::sml::abstract_object,
+    dogen::sml::value_object
+> : public mpl::true_ {};
+
+}
+
+BOOST_SERIALIZATION_SPLIT_FREE(dogen::sml::value_object)
+namespace boost {
+namespace serialization {
+
+template<typename Archive>
+void save(Archive& ar, const dogen::sml::value_object& v, unsigned int version);
+
+template<typename Archive>
+void load(Archive& ar, dogen::sml::value_object& v, unsigned int version);
 
 } }
 

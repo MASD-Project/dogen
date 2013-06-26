@@ -18,27 +18,31 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_SML_TYPES_VALUE_TYPES_HPP
-#define DOGEN_SML_TYPES_VALUE_TYPES_HPP
+#include "dogen/sml/hash/abstract_object_hash.hpp"
+#include "dogen/sml/hash/value_object_hash.hpp"
+#include "dogen/sml/hash/value_types_hash.hpp"
 
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
+namespace {
+
+template <typename HashableType>
+inline void combine(std::size_t& seed, const HashableType& value)
+{
+    std::hash<HashableType> hasher;
+    seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
+}
+
+}
 
 namespace dogen {
 namespace sml {
 
-enum class value_types : unsigned int {
-    invalid = 0, ///< Represents an uninitialised enum
-    user_defined = 1, ///< Value was created by the user.
-    unversioned_key = 2, ///< Value is an unversioned key.
-    versioned_key = 3, ///< Value is a versioned key.
-    exception = 4, ///< Value represents an exception type.
-    smart_pointer = 5, ///< Value is a smart pointer.
-    associative_container = 6, ///< Type is an associative container.
-    sequence_container = 7 ///< Type is a sequence container.
-};
+std::size_t value_object_hasher::hash(const value_object&v) {
+    std::size_t seed(0);
+
+    combine(seed, dynamic_cast<const dogen::sml::abstract_object&>(v));
+
+    combine(seed, v.type());
+    return seed;
+}
 
 } }
-
-#endif
