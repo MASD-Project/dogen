@@ -42,6 +42,33 @@ inline std::string tidy_up_string(std::string s) {
 
 namespace std {
 
+inline std::ostream& operator<<(std::ostream& s, const std::pair<std::string, std::string>& v) {
+    s << "{ " << "\"__type__\": " << "\"std::pair\"" << ", ";
+
+    s << "\"first\": " << "\"" << tidy_up_string(v.first) << "\"" << ", ";
+    s << "\"second\": " << "\"" << tidy_up_string(v.second) << "\"";
+    s << " }";
+    return s;
+}
+
+}
+
+namespace std {
+
+inline std::ostream& operator<<(std::ostream& s, const std::vector<std::pair<std::string, std::string> >& v) {
+    s << "[ ";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << *i;
+    }
+    s << "] ";
+    return s;
+}
+
+}
+
+namespace std {
+
 inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen::sml::qname, dogen::sml::pod>& v) {
     s << "[";
     for (auto i(v.begin()); i != v.end(); ++i) {
@@ -160,33 +187,6 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_set<dogen:
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::pair<std::string, std::string>& v) {
-    s << "{ " << "\"__type__\": " << "\"std::pair\"" << ", ";
-
-    s << "\"first\": " << "\"" << tidy_up_string(v.first) << "\"" << ", ";
-    s << "\"second\": " << "\"" << tidy_up_string(v.second) << "\"";
-    s << " }";
-    return s;
-}
-
-}
-
-namespace std {
-
-inline std::ostream& operator<<(std::ostream& s, const std::vector<std::pair<std::string, std::string> >& v) {
-    s << "[ ";
-    for (auto i(v.begin()); i != v.end(); ++i) {
-        if (i != v.begin()) s << ", ";
-        s << *i;
-    }
-    s << "] ";
-    return s;
-}
-
-}
-
-namespace std {
-
 inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen::sml::qname, dogen::sml::service>& v) {
     s << "[";
     for (auto i(v.begin()); i != v.end(); ++i) {
@@ -251,6 +251,8 @@ std::ostream& operator<<(std::ostream& s, const model& v) {
 
     s << " { "
       << "\"__type__\": " << "\"dogen::sml::model\"" << ", "
+      << "\"documentation\": " << "\"" << tidy_up_string(v.documentation()) << "\"" << ", "
+      << "\"implementation_specific_parameters\": " << v.implementation_specific_parameters() << ", "
       << "\"name\": " << "\"" << tidy_up_string(v.name()) << "\"" << ", "
       << "\"pods\": " << v.pods() << ", "
       << "\"primitives\": " << v.primitives() << ", "
@@ -260,8 +262,6 @@ std::ostream& operator<<(std::ostream& s, const model& v) {
       << "\"is_system\": " << v.is_system() << ", "
       << "\"dependencies\": " << v.dependencies() << ", "
       << "\"leaves\": " << v.leaves() << ", "
-      << "\"documentation\": " << "\"" << tidy_up_string(v.documentation()) << "\"" << ", "
-      << "\"implementation_specific_parameters\": " << v.implementation_specific_parameters() << ", "
       << "\"services\": " << v.services() << ", "
       << "\"modules\": " << v.modules() << ", "
       << "\"concepts\": " << v.concepts()

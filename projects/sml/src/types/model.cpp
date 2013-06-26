@@ -27,6 +27,8 @@ model::model()
     : is_system_(static_cast<bool>(0)) { }
 
 model::model(
+    const std::string& documentation,
+    const std::vector<std::pair<std::string, std::string> >& implementation_specific_parameters,
     const std::string& name,
     const std::unordered_map<dogen::sml::qname, dogen::sml::pod>& pods,
     const std::unordered_map<dogen::sml::qname, dogen::sml::primitive>& primitives,
@@ -36,12 +38,12 @@ model::model(
     const bool is_system,
     const std::unordered_map<std::string, dogen::sml::reference>& dependencies,
     const std::unordered_set<dogen::sml::qname>& leaves,
-    const std::string& documentation,
-    const std::vector<std::pair<std::string, std::string> >& implementation_specific_parameters,
     const std::unordered_map<dogen::sml::qname, dogen::sml::service>& services,
     const std::unordered_map<dogen::sml::qname, dogen::sml::module>& modules,
     const std::unordered_map<dogen::sml::qname, dogen::sml::concept>& concepts)
-    : name_(name),
+    : documentation_(documentation),
+      implementation_specific_parameters_(implementation_specific_parameters),
+      name_(name),
       pods_(pods),
       primitives_(primitives),
       enumerations_(enumerations),
@@ -50,14 +52,14 @@ model::model(
       is_system_(is_system),
       dependencies_(dependencies),
       leaves_(leaves),
-      documentation_(documentation),
-      implementation_specific_parameters_(implementation_specific_parameters),
       services_(services),
       modules_(modules),
       concepts_(concepts) { }
 
 void model::swap(model& other) noexcept {
     using std::swap;
+    swap(documentation_, other.documentation_);
+    swap(implementation_specific_parameters_, other.implementation_specific_parameters_);
     swap(name_, other.name_);
     swap(pods_, other.pods_);
     swap(primitives_, other.primitives_);
@@ -67,15 +69,15 @@ void model::swap(model& other) noexcept {
     swap(is_system_, other.is_system_);
     swap(dependencies_, other.dependencies_);
     swap(leaves_, other.leaves_);
-    swap(documentation_, other.documentation_);
-    swap(implementation_specific_parameters_, other.implementation_specific_parameters_);
     swap(services_, other.services_);
     swap(modules_, other.modules_);
     swap(concepts_, other.concepts_);
 }
 
 bool model::operator==(const model& rhs) const {
-    return name_ == rhs.name_ &&
+    return documentation_ == rhs.documentation_ &&
+        implementation_specific_parameters_ == rhs.implementation_specific_parameters_ &&
+        name_ == rhs.name_ &&
         pods_ == rhs.pods_ &&
         primitives_ == rhs.primitives_ &&
         enumerations_ == rhs.enumerations_ &&
@@ -84,8 +86,6 @@ bool model::operator==(const model& rhs) const {
         is_system_ == rhs.is_system_ &&
         dependencies_ == rhs.dependencies_ &&
         leaves_ == rhs.leaves_ &&
-        documentation_ == rhs.documentation_ &&
-        implementation_specific_parameters_ == rhs.implementation_specific_parameters_ &&
         services_ == rhs.services_ &&
         modules_ == rhs.modules_ &&
         concepts_ == rhs.concepts_;
@@ -95,6 +95,38 @@ model& model::operator=(model other) {
     using std::swap;
     swap(*this, other);
     return *this;
+}
+
+const std::string& model::documentation() const {
+    return documentation_;
+}
+
+std::string& model::documentation() {
+    return documentation_;
+}
+
+void model::documentation(const std::string& v) {
+    documentation_ = v;
+}
+
+void model::documentation(const std::string&& v) {
+    documentation_ = std::move(v);
+}
+
+const std::vector<std::pair<std::string, std::string> >& model::implementation_specific_parameters() const {
+    return implementation_specific_parameters_;
+}
+
+std::vector<std::pair<std::string, std::string> >& model::implementation_specific_parameters() {
+    return implementation_specific_parameters_;
+}
+
+void model::implementation_specific_parameters(const std::vector<std::pair<std::string, std::string> >& v) {
+    implementation_specific_parameters_ = v;
+}
+
+void model::implementation_specific_parameters(const std::vector<std::pair<std::string, std::string> >&& v) {
+    implementation_specific_parameters_ = std::move(v);
 }
 
 const std::string& model::name() const {
@@ -231,38 +263,6 @@ void model::leaves(const std::unordered_set<dogen::sml::qname>& v) {
 
 void model::leaves(const std::unordered_set<dogen::sml::qname>&& v) {
     leaves_ = std::move(v);
-}
-
-const std::string& model::documentation() const {
-    return documentation_;
-}
-
-std::string& model::documentation() {
-    return documentation_;
-}
-
-void model::documentation(const std::string& v) {
-    documentation_ = v;
-}
-
-void model::documentation(const std::string&& v) {
-    documentation_ = std::move(v);
-}
-
-const std::vector<std::pair<std::string, std::string> >& model::implementation_specific_parameters() const {
-    return implementation_specific_parameters_;
-}
-
-std::vector<std::pair<std::string, std::string> >& model::implementation_specific_parameters() {
-    return implementation_specific_parameters_;
-}
-
-void model::implementation_specific_parameters(const std::vector<std::pair<std::string, std::string> >& v) {
-    implementation_specific_parameters_ = v;
-}
-
-void model::implementation_specific_parameters(const std::vector<std::pair<std::string, std::string> >&& v) {
-    implementation_specific_parameters_ = std::move(v);
 }
 
 const std::unordered_map<dogen::sml::qname, dogen::sml::service>& model::services() const {

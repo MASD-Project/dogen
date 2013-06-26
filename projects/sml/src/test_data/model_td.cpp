@@ -38,6 +38,22 @@ std::string create_std_string(const unsigned int position) {
     return s.str();
 }
 
+std::pair<std::string, std::string>
+create_std_pair_std_string_std_string(unsigned int position) {
+    std::pair<std::string, std::string> r(
+        create_std_string(position),
+        create_std_string(position));
+    return r;
+}
+
+std::vector<std::pair<std::string, std::string> > create_std_vector_std_pair_std_string_std_string_(unsigned int position) {
+    std::vector<std::pair<std::string, std::string> > r;
+    for (unsigned int i(0); i < 10; ++i) {
+        r.push_back(create_std_pair_std_string_std_string(position + i));
+    }
+    return r;
+}
+
 dogen::sml::qname
 create_dogen_sml_qname(const unsigned int position) {
     return dogen::sml::qname_generator::create(position);
@@ -128,22 +144,6 @@ std::unordered_set<dogen::sml::qname> create_std_unordered_set_dogen_sml_qname(u
     return r;
 }
 
-std::pair<std::string, std::string>
-create_std_pair_std_string_std_string(unsigned int position) {
-    std::pair<std::string, std::string> r(
-        create_std_string(position),
-        create_std_string(position));
-    return r;
-}
-
-std::vector<std::pair<std::string, std::string> > create_std_vector_std_pair_std_string_std_string_(unsigned int position) {
-    std::vector<std::pair<std::string, std::string> > r;
-    for (unsigned int i(0); i < 10; ++i) {
-        r.push_back(create_std_pair_std_string_std_string(position + i));
-    }
-    return r;
-}
-
 dogen::sml::service
 create_dogen_sml_service(const unsigned int position) {
     return dogen::sml::service_generator::create(position);
@@ -192,17 +192,17 @@ model_generator::model_generator() : position_(0) { }
 
 void model_generator::
 populate(const unsigned int position, result_type& v) {
-    v.name(create_std_string(position + 0));
-    v.pods(create_std_unordered_map_dogen_sml_qname_dogen_sml_pod(position + 1));
-    v.primitives(create_std_unordered_map_dogen_sml_qname_dogen_sml_primitive(position + 2));
-    v.enumerations(create_std_unordered_map_dogen_sml_qname_dogen_sml_enumeration(position + 3));
-    v.exceptions(create_std_unordered_map_dogen_sml_qname_dogen_sml_value_object(position + 4));
-    v.external_module_path(create_std_list_std_string(position + 5));
-    v.is_system(create_bool(position + 6));
-    v.dependencies(create_std_unordered_map_std_string_dogen_sml_reference(position + 7));
-    v.leaves(create_std_unordered_set_dogen_sml_qname(position + 8));
-    v.documentation(create_std_string(position + 9));
-    v.implementation_specific_parameters(create_std_vector_std_pair_std_string_std_string_(position + 10));
+    v.documentation(create_std_string(position + 0));
+    v.implementation_specific_parameters(create_std_vector_std_pair_std_string_std_string_(position + 1));
+    v.name(create_std_string(position + 2));
+    v.pods(create_std_unordered_map_dogen_sml_qname_dogen_sml_pod(position + 3));
+    v.primitives(create_std_unordered_map_dogen_sml_qname_dogen_sml_primitive(position + 4));
+    v.enumerations(create_std_unordered_map_dogen_sml_qname_dogen_sml_enumeration(position + 5));
+    v.exceptions(create_std_unordered_map_dogen_sml_qname_dogen_sml_value_object(position + 6));
+    v.external_module_path(create_std_list_std_string(position + 7));
+    v.is_system(create_bool(position + 8));
+    v.dependencies(create_std_unordered_map_std_string_dogen_sml_reference(position + 9));
+    v.leaves(create_std_unordered_set_dogen_sml_qname(position + 10));
     v.services(create_std_unordered_map_dogen_sml_qname_dogen_sml_service(position + 11));
     v.modules(create_std_unordered_map_dogen_sml_qname_dogen_sml_module(position + 12));
     v.concepts(create_std_unordered_map_dogen_sml_qname_dogen_sml_concept(position + 13));

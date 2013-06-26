@@ -61,6 +61,8 @@ public:
 
 public:
     model(
+        const std::string& documentation,
+        const std::vector<std::pair<std::string, std::string> >& implementation_specific_parameters,
         const std::string& name,
         const std::unordered_map<dogen::sml::qname, dogen::sml::pod>& pods,
         const std::unordered_map<dogen::sml::qname, dogen::sml::primitive>& primitives,
@@ -70,8 +72,6 @@ public:
         const bool is_system,
         const std::unordered_map<std::string, dogen::sml::reference>& dependencies,
         const std::unordered_set<dogen::sml::qname>& leaves,
-        const std::string& documentation,
-        const std::vector<std::pair<std::string, std::string> >& implementation_specific_parameters,
         const std::unordered_map<dogen::sml::qname, dogen::sml::service>& services,
         const std::unordered_map<dogen::sml::qname, dogen::sml::module>& modules,
         const std::unordered_map<dogen::sml::qname, dogen::sml::concept>& concepts);
@@ -84,6 +84,30 @@ private:
     friend void boost::serialization::load(Archive& ar, model& v, unsigned int version);
 
 public:
+    /**
+     * @brief Code comments.
+     *
+     * These are expected to follow the grammer of the comment processing tools
+     * of the programming language in question, e.g. Doxygen for C++, JavaDoc
+     * for Java, etc.
+     */
+    /**@{*/
+    const std::string& documentation() const;
+    std::string& documentation();
+    void documentation(const std::string& v);
+    void documentation(const std::string&& v);
+    /**@}*/
+
+    /**
+     * @brief Associated generic parameters which may be opaque.
+     */
+    /**@{*/
+    const std::vector<std::pair<std::string, std::string> >& implementation_specific_parameters() const;
+    std::vector<std::pair<std::string, std::string> >& implementation_specific_parameters();
+    void implementation_specific_parameters(const std::vector<std::pair<std::string, std::string> >& v);
+    void implementation_specific_parameters(const std::vector<std::pair<std::string, std::string> >&& v);
+    /**@}*/
+
     /**
      * @brief Name of the domain model.
      *
@@ -185,26 +209,6 @@ public:
     /**@}*/
 
     /**
-     * @brief Doxygen documentation for the model itself.
-     */
-    /**@{*/
-    const std::string& documentation() const;
-    std::string& documentation();
-    void documentation(const std::string& v);
-    void documentation(const std::string&& v);
-    /**@}*/
-
-    /**
-     * @brief Parameters associated with the model which are opaque to SML.
-     */
-    /**@{*/
-    const std::vector<std::pair<std::string, std::string> >& implementation_specific_parameters() const;
-    std::vector<std::pair<std::string, std::string> >& implementation_specific_parameters();
-    void implementation_specific_parameters(const std::vector<std::pair<std::string, std::string> >& v);
-    void implementation_specific_parameters(const std::vector<std::pair<std::string, std::string> >&& v);
-    /**@}*/
-
-    /**
      * @brief Services contained in the model.
      */
     /**@{*/
@@ -245,6 +249,8 @@ public:
     model& operator=(model other);
 
 private:
+    std::string documentation_;
+    std::vector<std::pair<std::string, std::string> > implementation_specific_parameters_;
     std::string name_;
     std::unordered_map<dogen::sml::qname, dogen::sml::pod> pods_;
     std::unordered_map<dogen::sml::qname, dogen::sml::primitive> primitives_;
@@ -254,8 +260,6 @@ private:
     bool is_system_;
     std::unordered_map<std::string, dogen::sml::reference> dependencies_;
     std::unordered_set<dogen::sml::qname> leaves_;
-    std::string documentation_;
-    std::vector<std::pair<std::string, std::string> > implementation_specific_parameters_;
     std::unordered_map<dogen::sml::qname, dogen::sml::service> services_;
     std::unordered_map<dogen::sml::qname, dogen::sml::module> modules_;
     std::unordered_map<dogen::sml::qname, dogen::sml::concept> concepts_;

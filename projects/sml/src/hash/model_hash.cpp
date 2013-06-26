@@ -38,6 +38,22 @@ inline void combine(std::size_t& seed, const HashableType& value)
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 }
 
+inline std::size_t hash_std_pair_std_string_std_string(const std::pair<std::string, std::string>& v){
+    std::size_t seed(0);
+
+    combine(seed, v.first);
+    combine(seed, v.second);
+    return seed;
+}
+
+inline std::size_t hash_std_vector_std_pair_std_string_std_string_(const std::vector<std::pair<std::string, std::string> >& v){
+    std::size_t seed(0);
+    for (const auto i : v) {
+        combine(seed, hash_std_pair_std_string_std_string(i));
+    }
+    return seed;
+}
+
 inline std::size_t hash_std_unordered_map_dogen_sml_qname_dogen_sml_pod(const std::unordered_map<dogen::sml::qname, dogen::sml::pod>& v){
     std::size_t seed(0);
     for (const auto i : v) {
@@ -99,22 +115,6 @@ inline std::size_t hash_std_unordered_set_dogen_sml_qname(const std::unordered_s
     return seed;
 }
 
-inline std::size_t hash_std_pair_std_string_std_string(const std::pair<std::string, std::string>& v){
-    std::size_t seed(0);
-
-    combine(seed, v.first);
-    combine(seed, v.second);
-    return seed;
-}
-
-inline std::size_t hash_std_vector_std_pair_std_string_std_string_(const std::vector<std::pair<std::string, std::string> >& v){
-    std::size_t seed(0);
-    for (const auto i : v) {
-        combine(seed, hash_std_pair_std_string_std_string(i));
-    }
-    return seed;
-}
-
 inline std::size_t hash_std_unordered_map_dogen_sml_qname_dogen_sml_service(const std::unordered_map<dogen::sml::qname, dogen::sml::service>& v){
     std::size_t seed(0);
     for (const auto i : v) {
@@ -150,6 +150,8 @@ namespace sml {
 std::size_t model_hasher::hash(const model&v) {
     std::size_t seed(0);
 
+    combine(seed, v.documentation());
+    combine(seed, hash_std_vector_std_pair_std_string_std_string_(v.implementation_specific_parameters()));
     combine(seed, v.name());
     combine(seed, hash_std_unordered_map_dogen_sml_qname_dogen_sml_pod(v.pods()));
     combine(seed, hash_std_unordered_map_dogen_sml_qname_dogen_sml_primitive(v.primitives()));
@@ -159,8 +161,6 @@ std::size_t model_hasher::hash(const model&v) {
     combine(seed, v.is_system());
     combine(seed, hash_std_unordered_map_std_string_dogen_sml_reference(v.dependencies()));
     combine(seed, hash_std_unordered_set_dogen_sml_qname(v.leaves()));
-    combine(seed, v.documentation());
-    combine(seed, hash_std_vector_std_pair_std_string_std_string_(v.implementation_specific_parameters()));
     combine(seed, hash_std_unordered_map_dogen_sml_qname_dogen_sml_service(v.services()));
     combine(seed, hash_std_unordered_map_dogen_sml_qname_dogen_sml_module(v.modules()));
     combine(seed, hash_std_unordered_map_dogen_sml_qname_dogen_sml_concept(v.concepts()));
