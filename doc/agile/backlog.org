@@ -11,6 +11,14 @@ This file contains all stories that haven't been assigned to a sprint.
 
 Stories that we intend to look at, at some point.
 
+*** Visitor adaptor for usage in rages
+
+It would be great if we automatically generated an adaptor to visitors
+which could be plugged into a range. Internally the adaptor would
+perform the accept on its =operator()=. We could also have an adaptor
+for a =std::pair= which would be templatised on the first member of
+the pair. Or should one just use a keys or values range iterator.
+
 *** Visitor with =std::function= for each =visit= method
 
 It would be nice if the code generator created a visitor which has as
