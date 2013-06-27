@@ -11,6 +11,13 @@ This file contains all stories that haven't been assigned to a sprint.
 
 Stories that we intend to look at, at some point.
 
+*** Visitor with =std::function= for each =visit= method
+
+It would be nice if the code generator created a visitor which has as
+its properties a set of =std::function= which match the signature of
+the visit functions; then the visit functions would just check that
+the functions have been assigned and call them. If not, throw.
+
 *** Improve logging of disconnected inheritance objects
 
 At present the error message for an inheritance object in dia which
