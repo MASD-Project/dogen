@@ -997,6 +997,10 @@ code. In theory all we need is:
 5. we should also generate a typedef for the key if the class is an
    entity. See Typedef keys for each type.
 
+We could also always generate a typedef for smart pointers in the
+class that uses the smart pointer, with a simple convention such as
+=attribute_value_ptr_type= or =shared_attribute_value_type=.
+
 *** Add support for iterable enumerations                             :story:
 
 We should create an additional aspect for each enumerations which
