@@ -1,5 +1,5 @@
 diff --git a/diagrams/sml.dia b/diagrams/sml.dia
-index c13f648..bbedd5a 100644
+index c13f648..d48a4c4 100644
 --- a/diagrams/sml.dia
 +++ b/diagrams/sml.dia
 @@ -65,19 +65,19 @@
@@ -218,7 +218,8 @@ index c13f648..bbedd5a 100644
 +        <dia:point val="-48,72"/>
        </dia:attribute>
        <dia:attribute name="elem_width">
-         <dia:real val="32.839999999999996"/>
+-        <dia:real val="32.839999999999996"/>
++        <dia:real val="32.840000000000003"/>
        </dia:attribute>
        <dia:attribute name="elem_height">
 -        <dia:real val="20.400000000000006"/>
@@ -387,7 +388,7 @@ index c13f648..bbedd5a 100644
 +        <dia:point val="-63,6"/>
 +      </dia:attribute>
 +      <dia:attribute name="obj_bb">
-+        <dia:rectangle val="-63.05,5.95;-56.675,18.45"/>
++        <dia:rectangle val="-63.05,5.95;-56.675,16.85"/>
 +      </dia:attribute>
 +      <dia:attribute name="elem_corner">
 +        <dia:point val="-63,6"/>
@@ -396,7 +397,7 @@ index c13f648..bbedd5a 100644
 +        <dia:real val="6.2750000000000004"/>
 +      </dia:attribute>
 +      <dia:attribute name="elem_height">
-+        <dia:real val="12.4"/>
++        <dia:real val="10.799999999999999"/>
 +      </dia:attribute>
 +      <dia:attribute name="name">
 +        <dia:string>#meta_types#</dia:string>
@@ -509,7 +510,7 @@ index c13f648..bbedd5a 100644
          <dia:composite type="umlattribute">
            <dia:attribute name="name">
 -            <dia:string>#category_type#</dia:string>
-+            <dia:string>#pod#</dia:string>
++            <dia:string>#primitive#</dia:string>
            </dia:attribute>
            <dia:attribute name="type">
 -            <dia:string>#category_types#</dia:string>
@@ -520,7 +521,7 @@ index c13f648..bbedd5a 100644
            </dia:attribute>
            <dia:attribute name="comment">
 -            <dia:string>#Category of this type - whether its system or user defined.#</dia:string>
-+            <dia:string>#Type is a pod#</dia:string>
++            <dia:string>#Type is a primitive#</dia:string>
            </dia:attribute>
            <dia:attribute name="visibility">
              <dia:enum val="0"/>
@@ -529,7 +530,7 @@ index c13f648..bbedd5a 100644
          <dia:composite type="umlattribute">
            <dia:attribute name="name">
 -            <dia:string>#pod_type#</dia:string>
-+            <dia:string>#primitive#</dia:string>
++            <dia:string>#exception#</dia:string>
            </dia:attribute>
            <dia:attribute name="type">
 -            <dia:string>#pod_types#</dia:string>
@@ -540,7 +541,7 @@ index c13f648..bbedd5a 100644
            </dia:attribute>
            <dia:attribute name="comment">
 -            <dia:string>#What kind of pod is this.#</dia:string>
-+            <dia:string>#Type is a primitive#</dia:string>
++            <dia:string>#Type is an exception#</dia:string>
            </dia:attribute>
            <dia:attribute name="visibility">
              <dia:enum val="0"/>
@@ -549,7 +550,7 @@ index c13f648..bbedd5a 100644
          <dia:composite type="umlattribute">
            <dia:attribute name="name">
 -            <dia:string>#documentation#</dia:string>
-+            <dia:string>#exception#</dia:string>
++            <dia:string>#module#</dia:string>
            </dia:attribute>
            <dia:attribute name="type">
 -            <dia:string>#std::string#</dia:string>
@@ -582,7 +583,7 @@ index c13f648..bbedd5a 100644
            </dia:attribute>
            <dia:attribute name="comment">
 -            <dia:string>#How many type arguments does this type have#</dia:string>
-+            <dia:string>#Type is an exception#</dia:string>
++            <dia:string>#Type is a module#</dia:string>
            </dia:attribute>
            <dia:attribute name="visibility">
              <dia:enum val="0"/>
@@ -591,7 +592,7 @@ index c13f648..bbedd5a 100644
          <dia:composite type="umlattribute">
            <dia:attribute name="name">
 -            <dia:string>#implementation_specific_parameters#</dia:string>
-+            <dia:string>#string_table#</dia:string>
++            <dia:string>#service#</dia:string>
            </dia:attribute>
            <dia:attribute name="type">
 -            <dia:string>#std::vector&lt;std::pair&lt;std::string,std::string&gt;&gt;#</dia:string>
@@ -626,16 +627,16 @@ index c13f648..bbedd5a 100644
 -            <dia:string>#If true, a visitor is to be generated for this type and its descendants.
 -
 -Only applicable if is_parent is true.#</dia:string>
-+            <dia:string>#Type is a string table.#</dia:string>
++            <dia:string>#Type is a service#</dia:string>
            </dia:attribute>
            <dia:attribute name="visibility">
              <dia:enum val="0"/>
-@@ -1105,63 +1071,17 @@ Only applicable if is_parent is true.#</dia:string>
+@@ -1105,39 +1071,16 @@ Only applicable if is_parent is true.#</dia:string>
          </dia:composite>
          <dia:composite type="umlattribute">
            <dia:attribute name="name">
 -            <dia:string>#is_immutable#</dia:string>
-+            <dia:string>#module#</dia:string>
++            <dia:string>#entity#</dia:string>
            </dia:attribute>
            <dia:attribute name="type">
 -            <dia:string>#bool#</dia:string>
@@ -668,6 +669,25 @@ index c13f648..bbedd5a 100644
            </dia:attribute>
            <dia:attribute name="comment">
 -            <dia:string>#If true, add a version property to the type.#</dia:string>
++            <dia:string>#Type is an entity#</dia:string>
+           </dia:attribute>
+           <dia:attribute name="visibility">
+             <dia:enum val="0"/>
+@@ -1151,42 +1094,16 @@ Only applicable if is_parent is true.#</dia:string>
+         </dia:composite>
+         <dia:composite type="umlattribute">
+           <dia:attribute name="name">
+-            <dia:string>#is_keyed#</dia:string>
++            <dia:string>#value_object#</dia:string>
+           </dia:attribute>
+           <dia:attribute name="type">
+-            <dia:string>#bool#</dia:string>
+-          </dia:attribute>
+-          <dia:attribute name="value">
+             <dia:string>##</dia:string>
+           </dia:attribute>
+-          <dia:attribute name="comment">
+-            <dia:string>#If true, add key support for the type.#</dia:string>
 -          </dia:attribute>
 -          <dia:attribute name="visibility">
 -            <dia:enum val="0"/>
@@ -681,31 +701,11 @@ index c13f648..bbedd5a 100644
 -        </dia:composite>
 -        <dia:composite type="umlattribute">
 -          <dia:attribute name="name">
--            <dia:string>#is_keyed#</dia:string>
+-            <dia:string>#is_comparable#</dia:string>
 -          </dia:attribute>
 -          <dia:attribute name="type">
 -            <dia:string>#bool#</dia:string>
 -          </dia:attribute>
--          <dia:attribute name="value">
-             <dia:string>##</dia:string>
-           </dia:attribute>
--          <dia:attribute name="comment">
--            <dia:string>#If true, add key support for the type.#</dia:string>
--          </dia:attribute>
-           <dia:attribute name="visibility">
-             <dia:enum val="0"/>
-           </dia:attribute>
-@@ -1174,19 +1094,16 @@ Only applicable if is_parent is true.#</dia:string>
-         </dia:composite>
-         <dia:composite type="umlattribute">
-           <dia:attribute name="name">
--            <dia:string>#is_comparable#</dia:string>
-+            <dia:string>#service#</dia:string>
-           </dia:attribute>
-           <dia:attribute name="type">
--            <dia:string>#bool#</dia:string>
-+            <dia:string>##</dia:string>
-           </dia:attribute>
            <dia:attribute name="value">
              <dia:string>##</dia:string>
            </dia:attribute>
@@ -714,91 +714,95 @@ index c13f648..bbedd5a 100644
 -
 -A type is only comparable if all of its properties are primitives or strings,
 -or other comparable model types.#</dia:string>
-+            <dia:string>##</dia:string>
++            <dia:string>#Type is a value object#</dia:string>
            </dia:attribute>
            <dia:attribute name="visibility">
              <dia:enum val="0"/>
-@@ -1200,16 +1117,16 @@ or other comparable model types.#</dia:string>
+@@ -1200,39 +1117,16 @@ or other comparable model types.#</dia:string>
          </dia:composite>
          <dia:composite type="umlattribute">
            <dia:attribute name="name">
 -            <dia:string>#is_fluent#</dia:string>
-+            <dia:string>#entity#</dia:string>
++            <dia:string>#factory#</dia:string>
            </dia:attribute>
            <dia:attribute name="type">
 -            <dia:string>#bool#</dia:string>
-+            <dia:string>##</dia:string>
-           </dia:attribute>
-           <dia:attribute name="value">
+-          </dia:attribute>
+-          <dia:attribute name="value">
              <dia:string>##</dia:string>
            </dia:attribute>
-           <dia:attribute name="comment">
+-          <dia:attribute name="comment">
 -            <dia:string>#If true, generate fluent setters.#</dia:string>
-+            <dia:string>##</dia:string>
-           </dia:attribute>
-           <dia:attribute name="visibility">
-             <dia:enum val="0"/>
-@@ -1223,16 +1140,16 @@ or other comparable model types.#</dia:string>
-         </dia:composite>
-         <dia:composite type="umlattribute">
-           <dia:attribute name="name">
+-          </dia:attribute>
+-          <dia:attribute name="visibility">
+-            <dia:enum val="0"/>
+-          </dia:attribute>
+-          <dia:attribute name="abstract">
+-            <dia:boolean val="false"/>
+-          </dia:attribute>
+-          <dia:attribute name="class_scope">
+-            <dia:boolean val="false"/>
+-          </dia:attribute>
+-        </dia:composite>
+-        <dia:composite type="umlattribute">
+-          <dia:attribute name="name">
 -            <dia:string>#is_aggregate_root#</dia:string>
-+            <dia:string>#value#</dia:string>
-           </dia:attribute>
-           <dia:attribute name="type">
+-          </dia:attribute>
+-          <dia:attribute name="type">
 -            <dia:string>#bool#</dia:string>
-+            <dia:string>##</dia:string>
-           </dia:attribute>
+-          </dia:attribute>
            <dia:attribute name="value">
              <dia:string>##</dia:string>
            </dia:attribute>
            <dia:attribute name="comment">
 -            <dia:string>#If true, this pod is a root of an aggregate.#</dia:string>
-+            <dia:string>##</dia:string>
++            <dia:string>#Type is a factory#</dia:string>
            </dia:attribute>
            <dia:attribute name="visibility">
              <dia:enum val="0"/>
-@@ -1246,16 +1163,16 @@ or other comparable model types.#</dia:string>
+@@ -1246,39 +1140,16 @@ or other comparable model types.#</dia:string>
          </dia:composite>
          <dia:composite type="umlattribute">
            <dia:attribute name="name">
 -            <dia:string>#versioned_key#</dia:string>
-+            <dia:string>#factory#</dia:string>
-           </dia:attribute>
-           <dia:attribute name="type">
--            <dia:string>#boost::optional&lt;qname&gt;#</dia:string>
-+            <dia:string>##</dia:string>
-           </dia:attribute>
-           <dia:attribute name="value">
-             <dia:string>##</dia:string>
-           </dia:attribute>
-           <dia:attribute name="comment">
--            <dia:string>#If the pod is a versioned keyed entity, its versioned key.#</dia:string>
-+            <dia:string>##</dia:string>
-           </dia:attribute>
-           <dia:attribute name="visibility">
-             <dia:enum val="0"/>
-@@ -1269,16 +1186,16 @@ or other comparable model types.#</dia:string>
-         </dia:composite>
-         <dia:composite type="umlattribute">
-           <dia:attribute name="name">
--            <dia:string>#unversioned_key#</dia:string>
 +            <dia:string>#repository#</dia:string>
            </dia:attribute>
            <dia:attribute name="type">
 -            <dia:string>#boost::optional&lt;qname&gt;#</dia:string>
-+            <dia:string>##</dia:string>
+-          </dia:attribute>
+-          <dia:attribute name="value">
+             <dia:string>##</dia:string>
            </dia:attribute>
+-          <dia:attribute name="comment">
+-            <dia:string>#If the pod is a versioned keyed entity, its versioned key.#</dia:string>
+-          </dia:attribute>
+-          <dia:attribute name="visibility">
+-            <dia:enum val="0"/>
+-          </dia:attribute>
+-          <dia:attribute name="abstract">
+-            <dia:boolean val="false"/>
+-          </dia:attribute>
+-          <dia:attribute name="class_scope">
+-            <dia:boolean val="false"/>
+-          </dia:attribute>
+-        </dia:composite>
+-        <dia:composite type="umlattribute">
+-          <dia:attribute name="name">
+-            <dia:string>#unversioned_key#</dia:string>
+-          </dia:attribute>
+-          <dia:attribute name="type">
+-            <dia:string>#boost::optional&lt;qname&gt;#</dia:string>
+-          </dia:attribute>
            <dia:attribute name="value">
              <dia:string>##</dia:string>
            </dia:attribute>
            <dia:attribute name="comment">
 -            <dia:string>#If the pod is an unversioned keyed entity, its unversioned key.#</dia:string>
-+            <dia:string>##</dia:string>
++            <dia:string>#Type is a repository#</dia:string>
            </dia:attribute>
            <dia:attribute name="visibility">
              <dia:enum val="0"/>
-@@ -1292,16 +1209,16 @@ or other comparable model types.#</dia:string>
+@@ -1292,16 +1163,16 @@ or other comparable model types.#</dia:string>
          </dia:composite>
          <dia:composite type="umlattribute">
            <dia:attribute name="name">
@@ -814,11 +818,11 @@ index c13f648..bbedd5a 100644
            </dia:attribute>
            <dia:attribute name="comment">
 -            <dia:string>#List of concepts this pod models.#</dia:string>
-+            <dia:string>##</dia:string>
++            <dia:string>#Type is a concept#</dia:string>
            </dia:attribute>
            <dia:attribute name="visibility">
              <dia:enum val="0"/>
-@@ -1320,30 +1237,101 @@ or other comparable model types.#</dia:string>
+@@ -1320,30 +1191,101 @@ or other comparable model types.#</dia:string>
        </dia:attribute>
        <dia:attribute name="templates"/>
      </dia:object>
@@ -864,7 +868,7 @@ index c13f648..bbedd5a 100644
 +        <dia:point val="-52.0875,29"/>
 +      </dia:attribute>
 +      <dia:attribute name="obj_bb">
-+        <dia:rectangle val="-59.9125,18.35;-51.3375,29.8"/>
++        <dia:rectangle val="-59.9125,16.75;-51.3375,29.8"/>
 +      </dia:attribute>
 +      <dia:attribute name="meta">
 +        <dia:composite type="dict"/>
@@ -873,7 +877,7 @@ index c13f648..bbedd5a 100644
 +        <dia:point val="-52.0875,29"/>
 +        <dia:point val="-52.0875,24"/>
 +        <dia:point val="-59.8625,24"/>
-+        <dia:point val="-59.8625,18.4"/>
++        <dia:point val="-59.8625,16.8"/>
 +      </dia:attribute>
 +      <dia:attribute name="orth_orient">
 +        <dia:enum val="1"/>
@@ -929,7 +933,7 @@ index c13f648..bbedd5a 100644
        </dia:attribute>
        <dia:attribute name="abstract">
          <dia:boolean val="false"/>
-@@ -1364,7 +1352,7 @@ or other comparable model types.#</dia:string>
+@@ -1364,7 +1306,7 @@ or other comparable model types.#</dia:string>
          <dia:boolean val="false"/>
        </dia:attribute>
        <dia:attribute name="wrap_operations">
@@ -938,7 +942,7 @@ index c13f648..bbedd5a 100644
        </dia:attribute>
        <dia:attribute name="wrap_after_char">
          <dia:int val="40"/>
-@@ -1391,19 +1379,19 @@ or other comparable model types.#</dia:string>
+@@ -1391,19 +1333,19 @@ or other comparable model types.#</dia:string>
          <dia:font family="monospace" style="0" name="Courier"/>
        </dia:attribute>
        <dia:attribute name="abstract_font">
@@ -962,7 +966,7 @@ index c13f648..bbedd5a 100644
        </dia:attribute>
        <dia:attribute name="normal_font_height">
          <dia:real val="0.80000000000000004"/>
-@@ -1423,320 +1411,37 @@ or other comparable model types.#</dia:string>
+@@ -1423,1327 +1365,37 @@ or other comparable model types.#</dia:string>
        <dia:attribute name="comment_font_height">
          <dia:real val="0.69999999999999996"/>
        </dia:attribute>
@@ -1108,13 +1112,12 @@ index c13f648..bbedd5a 100644
 -          </dia:attribute>
 -        </dia:composite>
 -      </dia:attribute>
-+      <dia:attribute name="attributes"/>
-       <dia:attribute name="operations"/>
-       <dia:attribute name="template">
-         <dia:boolean val="false"/>
-       </dia:attribute>
-       <dia:attribute name="templates"/>
-     </dia:object>
+-      <dia:attribute name="operations"/>
+-      <dia:attribute name="template">
+-        <dia:boolean val="false"/>
+-      </dia:attribute>
+-      <dia:attribute name="templates"/>
+-    </dia:object>
 -    <dia:object type="UML - Association" version="2" id="O4">
 -      <dia:attribute name="name">
 -        <dia:string>##</dia:string>
@@ -1257,45 +1260,76 @@ index c13f648..bbedd5a 100644
 -        <dia:connection handle="1" to="O0" connection="0"/>
 -      </dia:connections>
 -    </dia:object>
-     <dia:object type="UML - Class" version="0" id="O6">
-       <dia:attribute name="obj_pos">
+-    <dia:object type="UML - Class" version="0" id="O6">
+-      <dia:attribute name="obj_pos">
 -        <dia:point val="-75.9286,3.71429"/>
-+        <dia:point val="-16,52"/>
-       </dia:attribute>
-       <dia:attribute name="obj_bb">
+-      </dia:attribute>
+-      <dia:attribute name="obj_bb">
 -        <dia:rectangle val="-75.9786,3.66429;-69.6036,16.1643"/>
-+        <dia:rectangle val="-16.05,51.95;-2.36,56.45"/>
-       </dia:attribute>
-       <dia:attribute name="elem_corner">
+-      </dia:attribute>
+-      <dia:attribute name="elem_corner">
 -        <dia:point val="-75.9286,3.71429"/>
-+        <dia:point val="-16,52"/>
-       </dia:attribute>
-       <dia:attribute name="elem_width">
+-      </dia:attribute>
+-      <dia:attribute name="elem_width">
 -        <dia:real val="6.2750000000000004"/>
-+        <dia:real val="13.59"/>
-       </dia:attribute>
-       <dia:attribute name="elem_height">
+-      </dia:attribute>
+-      <dia:attribute name="elem_height">
 -        <dia:real val="12.4"/>
-+        <dia:real val="4.4000000000000004"/>
-       </dia:attribute>
-       <dia:attribute name="name">
+-      </dia:attribute>
+-      <dia:attribute name="name">
 -        <dia:string>#meta_types#</dia:string>
-+        <dia:string>#nested_qname#</dia:string>
-       </dia:attribute>
-       <dia:attribute name="stereotype">
+-      </dia:attribute>
+-      <dia:attribute name="stereotype">
 -        <dia:string>#enumeration#</dia:string>
-+        <dia:string>##</dia:string>
-       </dia:attribute>
-       <dia:attribute name="comment">
+-      </dia:attribute>
+-      <dia:attribute name="comment">
 -        <dia:string>#Type of type.#</dia:string>
-+        <dia:string>#A composite qname.#</dia:string>
-       </dia:attribute>
-       <dia:attribute name="abstract">
-         <dia:boolean val="false"/>
-@@ -1783,1128 +1488,52 @@ Must only contain characters that can be used for identifiers in the target back
-       <dia:attribute name="normal_font">
-         <dia:font family="monospace" style="0" name="Courier"/>
-       </dia:attribute>
+-      </dia:attribute>
+-      <dia:attribute name="abstract">
+-        <dia:boolean val="false"/>
+-      </dia:attribute>
+-      <dia:attribute name="suppress_attributes">
+-        <dia:boolean val="false"/>
+-      </dia:attribute>
+-      <dia:attribute name="suppress_operations">
+-        <dia:boolean val="false"/>
+-      </dia:attribute>
+-      <dia:attribute name="visible_attributes">
+-        <dia:boolean val="true"/>
+-      </dia:attribute>
+-      <dia:attribute name="visible_operations">
+-        <dia:boolean val="true"/>
+-      </dia:attribute>
+-      <dia:attribute name="visible_comments">
+-        <dia:boolean val="false"/>
+-      </dia:attribute>
+-      <dia:attribute name="wrap_operations">
+-        <dia:boolean val="true"/>
+-      </dia:attribute>
+-      <dia:attribute name="wrap_after_char">
+-        <dia:int val="40"/>
+-      </dia:attribute>
+-      <dia:attribute name="comment_line_length">
+-        <dia:int val="17"/>
+-      </dia:attribute>
+-      <dia:attribute name="comment_tagging">
+-        <dia:boolean val="false"/>
+-      </dia:attribute>
+-      <dia:attribute name="line_width">
+-        <dia:real val="0.10000000000000001"/>
+-      </dia:attribute>
+-      <dia:attribute name="line_color">
+-        <dia:color val="#000000"/>
+-      </dia:attribute>
+-      <dia:attribute name="fill_color">
+-        <dia:color val="#ffffff"/>
+-      </dia:attribute>
+-      <dia:attribute name="text_color">
+-        <dia:color val="#000000"/>
+-      </dia:attribute>
+-      <dia:attribute name="normal_font">
+-        <dia:font family="monospace" style="0" name="Courier"/>
+-      </dia:attribute>
 -      <dia:attribute name="abstract_font">
 -        <dia:font family="monospace" style="88" name="Courier-BoldOblique"/>
 -      </dia:attribute>
@@ -2224,85 +2258,56 @@ index c13f648..bbedd5a 100644
 -          </dia:attribute>
 -        </dia:composite>
 -      </dia:attribute>
--      <dia:attribute name="operations"/>
--      <dia:attribute name="template">
--        <dia:boolean val="false"/>
--      </dia:attribute>
--      <dia:attribute name="templates"/>
--    </dia:object>
++      <dia:attribute name="attributes"/>
+       <dia:attribute name="operations"/>
+       <dia:attribute name="template">
+         <dia:boolean val="false"/>
+       </dia:attribute>
+       <dia:attribute name="templates"/>
+     </dia:object>
 -    <dia:object type="UML - Class" version="0" id="O12">
--      <dia:attribute name="obj_pos">
++    <dia:object type="UML - Class" version="0" id="O6">
+       <dia:attribute name="obj_pos">
 -        <dia:point val="-20,11"/>
--      </dia:attribute>
--      <dia:attribute name="obj_bb">
++        <dia:point val="-16,52"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
 -        <dia:rectangle val="-20.05,10.95;-10.98,18.65"/>
--      </dia:attribute>
--      <dia:attribute name="elem_corner">
++        <dia:rectangle val="-16.05,51.95;-2.36,56.45"/>
+       </dia:attribute>
+       <dia:attribute name="elem_corner">
 -        <dia:point val="-20,11"/>
--      </dia:attribute>
--      <dia:attribute name="elem_width">
++        <dia:point val="-16,52"/>
+       </dia:attribute>
+       <dia:attribute name="elem_width">
 -        <dia:real val="8.9700000000000006"/>
--      </dia:attribute>
--      <dia:attribute name="elem_height">
++        <dia:real val="13.59"/>
+       </dia:attribute>
+       <dia:attribute name="elem_height">
 -        <dia:real val="7.6000000000000005"/>
--      </dia:attribute>
--      <dia:attribute name="name">
++        <dia:real val="4.4000000000000004"/>
+       </dia:attribute>
+       <dia:attribute name="name">
 -        <dia:string>#pod_types#</dia:string>
--      </dia:attribute>
--      <dia:attribute name="stereotype">
++        <dia:string>#nested_qname#</dia:string>
+       </dia:attribute>
+       <dia:attribute name="stereotype">
 -        <dia:string>#enumeration#</dia:string>
--      </dia:attribute>
--      <dia:attribute name="comment">
++        <dia:string>##</dia:string>
+       </dia:attribute>
+       <dia:attribute name="comment">
 -        <dia:string>#Types of pods.
 -
 -We need to classify pods with regards to distinguishing properties
 -which make code generation different.#</dia:string>
--      </dia:attribute>
--      <dia:attribute name="abstract">
--        <dia:boolean val="false"/>
--      </dia:attribute>
--      <dia:attribute name="suppress_attributes">
--        <dia:boolean val="false"/>
--      </dia:attribute>
--      <dia:attribute name="suppress_operations">
--        <dia:boolean val="false"/>
--      </dia:attribute>
--      <dia:attribute name="visible_attributes">
--        <dia:boolean val="true"/>
--      </dia:attribute>
--      <dia:attribute name="visible_operations">
--        <dia:boolean val="true"/>
--      </dia:attribute>
--      <dia:attribute name="visible_comments">
--        <dia:boolean val="false"/>
--      </dia:attribute>
--      <dia:attribute name="wrap_operations">
--        <dia:boolean val="true"/>
--      </dia:attribute>
--      <dia:attribute name="wrap_after_char">
--        <dia:int val="40"/>
--      </dia:attribute>
--      <dia:attribute name="comment_line_length">
--        <dia:int val="17"/>
--      </dia:attribute>
--      <dia:attribute name="comment_tagging">
--        <dia:boolean val="false"/>
--      </dia:attribute>
--      <dia:attribute name="line_width">
--        <dia:real val="0.10000000000000001"/>
--      </dia:attribute>
--      <dia:attribute name="line_color">
--        <dia:color val="#000000"/>
--      </dia:attribute>
--      <dia:attribute name="fill_color">
--        <dia:color val="#ffffff"/>
--      </dia:attribute>
--      <dia:attribute name="text_color">
--        <dia:color val="#000000"/>
--      </dia:attribute>
--      <dia:attribute name="normal_font">
--        <dia:font family="monospace" style="0" name="Courier"/>
--      </dia:attribute>
++        <dia:string>#A composite qname.#</dia:string>
+       </dia:attribute>
+       <dia:attribute name="abstract">
+         <dia:boolean val="false"/>
+@@ -2790,121 +1442,52 @@ which make code generation different.#</dia:string>
+       <dia:attribute name="normal_font">
+         <dia:font family="monospace" style="0" name="Courier"/>
+       </dia:attribute>
 -      <dia:attribute name="abstract_font">
 -        <dia:font family="monospace" style="88" name="Courier-BoldOblique"/>
 -      </dia:attribute>
@@ -2458,7 +2463,7 @@ index c13f648..bbedd5a 100644
            </dia:attribute>
            <dia:attribute name="visibility">
              <dia:enum val="0"/>
-@@ -2918,16 +1547,16 @@ which make code generation different.#</dia:string>
+@@ -2918,16 +1501,16 @@ which make code generation different.#</dia:string>
          </dia:composite>
          <dia:composite type="umlattribute">
            <dia:attribute name="name">
@@ -2478,7 +2483,7 @@ index c13f648..bbedd5a 100644
            </dia:attribute>
            <dia:attribute name="visibility">
              <dia:enum val="0"/>
-@@ -2941,16 +1570,16 @@ which make code generation different.#</dia:string>
+@@ -2941,16 +1524,16 @@ which make code generation different.#</dia:string>
          </dia:composite>
          <dia:composite type="umlattribute">
            <dia:attribute name="name">
@@ -2498,7 +2503,7 @@ index c13f648..bbedd5a 100644
            </dia:attribute>
            <dia:attribute name="visibility">
              <dia:enum val="0"/>
-@@ -2969,86 +1598,15 @@ which make code generation different.#</dia:string>
+@@ -2969,86 +1552,15 @@ which make code generation different.#</dia:string>
        </dia:attribute>
        <dia:attribute name="templates"/>
      </dia:object>
@@ -2589,7 +2594,7 @@ index c13f648..bbedd5a 100644
        </dia:attribute>
        <dia:attribute name="elem_width">
          <dia:real val="17.824999999999999"/>
-@@ -3220,7 +1778,7 @@ which make code generation different.#</dia:string>
+@@ -3220,7 +1732,7 @@ which make code generation different.#</dia:string>
        </dia:attribute>
        <dia:attribute name="templates"/>
      </dia:object>
@@ -2598,7 +2603,7 @@ index c13f648..bbedd5a 100644
        <dia:attribute name="name">
          <dia:string>##</dia:string>
        </dia:attribute>
-@@ -3258,19 +1816,19 @@ which make code generation different.#</dia:string>
+@@ -3258,19 +1770,19 @@ which make code generation different.#</dia:string>
          <dia:boolean val="false"/>
        </dia:attribute>
        <dia:attribute name="obj_pos">
@@ -2624,7 +2629,7 @@ index c13f648..bbedd5a 100644
        </dia:attribute>
        <dia:attribute name="orth_orient">
          <dia:enum val="1"/>
-@@ -3288,10 +1846,10 @@ which make code generation different.#</dia:string>
+@@ -3288,10 +1800,10 @@ which make code generation different.#</dia:string>
        </dia:attribute>
        <dia:connections>
          <dia:connection handle="0" to="O0" connection="7"/>
@@ -2637,7 +2642,7 @@ index c13f648..bbedd5a 100644
        <dia:attribute name="name">
          <dia:string>##</dia:string>
        </dia:attribute>
-@@ -3329,19 +1887,19 @@ which make code generation different.#</dia:string>
+@@ -3329,19 +1841,19 @@ which make code generation different.#</dia:string>
          <dia:boolean val="false"/>
        </dia:attribute>
        <dia:attribute name="obj_pos">
@@ -2663,7 +2668,7 @@ index c13f648..bbedd5a 100644
        </dia:attribute>
        <dia:attribute name="orth_orient">
          <dia:enum val="1"/>
-@@ -3358,19 +1916,19 @@ which make code generation different.#</dia:string>
+@@ -3358,22 +1870,22 @@ which make code generation different.#</dia:string>
          <dia:color val="#000000"/>
        </dia:attribute>
        <dia:connections>
@@ -2688,8 +2693,12 @@ index c13f648..bbedd5a 100644
 +        <dia:point val="-95,35"/>
        </dia:attribute>
        <dia:attribute name="elem_width">
-         <dia:real val="8.3349999999999991"/>
-@@ -3542,7 +2100,7 @@ which make code generation different.#</dia:string>
+-        <dia:real val="8.3349999999999991"/>
++        <dia:real val="8.3350000000000009"/>
+       </dia:attribute>
+       <dia:attribute name="elem_height">
+         <dia:real val="5.2000000000000011"/>
+@@ -3542,7 +2054,7 @@ which make code generation different.#</dia:string>
        </dia:attribute>
        <dia:attribute name="templates"/>
      </dia:object>
@@ -2698,7 +2707,7 @@ index c13f648..bbedd5a 100644
        <dia:attribute name="obj_pos">
          <dia:point val="11,-6"/>
        </dia:attribute>
-@@ -3878,7 +2436,7 @@ which make code generation different.#</dia:string>
+@@ -3878,7 +2390,7 @@ which make code generation different.#</dia:string>
        </dia:attribute>
        <dia:attribute name="templates"/>
      </dia:object>
@@ -2707,7 +2716,7 @@ index c13f648..bbedd5a 100644
        <dia:attribute name="obj_pos">
          <dia:point val="47,29"/>
        </dia:attribute>
-@@ -4349,7 +2907,7 @@ which make code generation different.#</dia:string>
+@@ -4349,7 +2861,7 @@ which make code generation different.#</dia:string>
        </dia:attribute>
        <dia:attribute name="templates"/>
      </dia:object>
@@ -2716,7 +2725,7 @@ index c13f648..bbedd5a 100644
        <dia:attribute name="name">
          <dia:string>#&lt; merges one or more#</dia:string>
        </dia:attribute>
-@@ -4387,18 +2945,18 @@ which make code generation different.#</dia:string>
+@@ -4387,18 +2899,18 @@ which make code generation different.#</dia:string>
          <dia:boolean val="false"/>
        </dia:attribute>
        <dia:attribute name="obj_pos">
@@ -2740,7 +2749,7 @@ index c13f648..bbedd5a 100644
          <dia:point val="61.11,40.4"/>
        </dia:attribute>
        <dia:attribute name="orth_orient">
-@@ -4417,10 +2975,10 @@ which make code generation different.#</dia:string>
+@@ -4417,10 +2929,10 @@ which make code generation different.#</dia:string>
        </dia:attribute>
        <dia:connections>
          <dia:connection handle="0" to="O0" connection="2"/>
@@ -2753,7 +2762,7 @@ index c13f648..bbedd5a 100644
        <dia:attribute name="obj_pos">
          <dia:point val="71,-6"/>
        </dia:attribute>
-@@ -4691,7 +3249,7 @@ which make code generation different.#</dia:string>
+@@ -4691,7 +3203,7 @@ which make code generation different.#</dia:string>
        </dia:attribute>
        <dia:attribute name="templates"/>
      </dia:object>
@@ -2762,7 +2771,7 @@ index c13f648..bbedd5a 100644
        <dia:attribute name="obj_pos">
          <dia:point val="47,-6"/>
        </dia:attribute>
-@@ -4880,7 +3438,7 @@ which make code generation different.#</dia:string>
+@@ -4880,7 +3392,7 @@ which make code generation different.#</dia:string>
        </dia:attribute>
        <dia:attribute name="templates"/>
      </dia:object>
@@ -2771,7 +2780,7 @@ index c13f648..bbedd5a 100644
        <dia:attribute name="obj_pos">
          <dia:point val="46,16"/>
        </dia:attribute>
-@@ -4932,7 +3490,7 @@ and all of the supported types within those models.#</dia:string>
+@@ -4932,7 +3444,7 @@ and all of the supported types within those models.#</dia:string>
          </dia:composite>
        </dia:attribute>
      </dia:object>
@@ -2780,7 +2789,7 @@ index c13f648..bbedd5a 100644
        <dia:attribute name="obj_pos">
          <dia:point val="56.2675,16"/>
        </dia:attribute>
-@@ -4962,22 +3520,22 @@ and all of the supported types within those models.#</dia:string>
+@@ -4962,22 +3474,22 @@ and all of the supported types within those models.#</dia:string>
          <dia:point val="45.4763,13.9999"/>
        </dia:attribute>
        <dia:connections>
@@ -2809,7 +2818,7 @@ index c13f648..bbedd5a 100644
          <dia:point val="75.22,40.4"/>
        </dia:attribute>
        <dia:attribute name="text_colour">
-@@ -4993,25 +3551,25 @@ and all of the supported types within those models.#</dia:string>
+@@ -4993,31 +3505,31 @@ and all of the supported types within those models.#</dia:string>
          <dia:enum val="0"/>
        </dia:attribute>
        <dia:attribute name="text_pos">
@@ -2842,7 +2851,14 @@ index c13f648..bbedd5a 100644
        </dia:attribute>
        <dia:attribute name="elem_width">
          <dia:real val="24.77"/>
-@@ -5043,7 +3601,7 @@ all types in the combined model.#</dia:string>
+       </dia:attribute>
+       <dia:attribute name="elem_height">
+-        <dia:real val="4.0999999999999996"/>
++        <dia:real val="4.1000000000000005"/>
+       </dia:attribute>
+       <dia:attribute name="line_width">
+         <dia:real val="0.10000000000000001"/>
+@@ -5043,7 +3555,7 @@ all types in the combined model.#</dia:string>
              <dia:real val="0.80000000000000004"/>
            </dia:attribute>
            <dia:attribute name="pos">
@@ -2851,7 +2867,7 @@ index c13f648..bbedd5a 100644
            </dia:attribute>
            <dia:attribute name="color">
              <dia:color val="#000000"/>
-@@ -5054,7 +3612,7 @@ all types in the combined model.#</dia:string>
+@@ -5054,7 +3566,7 @@ all types in the combined model.#</dia:string>
          </dia:composite>
        </dia:attribute>
      </dia:object>
@@ -2860,7 +2876,7 @@ index c13f648..bbedd5a 100644
        <dia:attribute name="name">
          <dia:string>#throws on failure &gt;#</dia:string>
        </dia:attribute>
-@@ -5121,11 +3679,11 @@ all types in the combined model.#</dia:string>
+@@ -5121,11 +3633,11 @@ all types in the combined model.#</dia:string>
          <dia:color val="#000000"/>
        </dia:attribute>
        <dia:connections>
@@ -2875,7 +2891,7 @@ index c13f648..bbedd5a 100644
        <dia:attribute name="obj_pos">
          <dia:point val="-16,-6"/>
        </dia:attribute>
-@@ -5380,7 +3938,7 @@ all types in the combined model.#</dia:string>
+@@ -5380,7 +3892,7 @@ all types in the combined model.#</dia:string>
        </dia:attribute>
        <dia:attribute name="templates"/>
      </dia:object>
@@ -2884,7 +2900,16 @@ index c13f648..bbedd5a 100644
        <dia:attribute name="obj_pos">
          <dia:point val="3,11"/>
        </dia:attribute>
-@@ -5747,7 +4305,7 @@ all types in the combined model.#</dia:string>
+@@ -5391,7 +3903,7 @@ all types in the combined model.#</dia:string>
+         <dia:point val="3,11"/>
+       </dia:attribute>
+       <dia:attribute name="elem_width">
+-        <dia:real val="31.685000000000002"/>
++        <dia:real val="31.684999999999999"/>
+       </dia:attribute>
+       <dia:attribute name="elem_height">
+         <dia:real val="7.5999999999999996"/>
+@@ -5747,7 +4259,7 @@ all types in the combined model.#</dia:string>
        </dia:attribute>
        <dia:attribute name="templates"/>
      </dia:object>
@@ -2893,7 +2918,7 @@ index c13f648..bbedd5a 100644
        <dia:attribute name="name">
          <dia:string>#merges models using &gt;#</dia:string>
        </dia:attribute>
-@@ -5814,11 +4372,11 @@ all types in the combined model.#</dia:string>
+@@ -5814,11 +4326,11 @@ all types in the combined model.#</dia:string>
          <dia:color val="#000000"/>
        </dia:attribute>
        <dia:connections>
@@ -2908,7 +2933,7 @@ index c13f648..bbedd5a 100644
        <dia:attribute name="name">
          <dia:string>#injects system types for &gt;#</dia:string>
        </dia:attribute>
-@@ -5885,11 +4443,11 @@ all types in the combined model.#</dia:string>
+@@ -5885,11 +4397,11 @@ all types in the combined model.#</dia:string>
          <dia:color val="#000000"/>
        </dia:attribute>
        <dia:connections>
@@ -2923,7 +2948,7 @@ index c13f648..bbedd5a 100644
        <dia:attribute name="name">
          <dia:string>##</dia:string>
        </dia:attribute>
-@@ -5927,19 +4485,19 @@ all types in the combined model.#</dia:string>
+@@ -5927,19 +4439,19 @@ all types in the combined model.#</dia:string>
          <dia:boolean val="false"/>
        </dia:attribute>
        <dia:attribute name="obj_pos">
@@ -2949,7 +2974,7 @@ index c13f648..bbedd5a 100644
        </dia:attribute>
        <dia:attribute name="orth_orient">
          <dia:enum val="1"/>
-@@ -5956,11 +4514,11 @@ all types in the combined model.#</dia:string>
+@@ -5956,11 +4468,11 @@ all types in the combined model.#</dia:string>
          <dia:color val="#000000"/>
        </dia:attribute>
        <dia:connections>
@@ -2964,7 +2989,20 @@ index c13f648..bbedd5a 100644
        <dia:attribute name="obj_pos">
          <dia:point val="-79,-11"/>
        </dia:attribute>
-@@ -6018,7 +4576,7 @@ but with a focus only on data structures and domain driven constructs.
+@@ -5974,10 +4486,10 @@ all types in the combined model.#</dia:string>
+         <dia:point val="-79,-11"/>
+       </dia:attribute>
+       <dia:attribute name="elem_width">
+-        <dia:real val="27.850000000000001"/>
++        <dia:real val="27.849999999999998"/>
+       </dia:attribute>
+       <dia:attribute name="elem_height">
+-        <dia:real val="7.2999999999999998"/>
++        <dia:real val="7.3000000000000007"/>
+       </dia:attribute>
+       <dia:attribute name="line_width">
+         <dia:real val="0.10000000149011612"/>
+@@ -6018,7 +4530,7 @@ but with a focus only on data structures and domain driven constructs.
          </dia:composite>
        </dia:attribute>
      </dia:object>
@@ -2973,7 +3011,16 @@ index c13f648..bbedd5a 100644
        <dia:attribute name="obj_pos">
          <dia:point val="-32,-6"/>
        </dia:attribute>
-@@ -6128,7 +4686,7 @@ but with a focus only on data structures and domain driven constructs.
+@@ -6029,7 +4541,7 @@ but with a focus only on data structures and domain driven constructs.
+         <dia:point val="-32,-6"/>
+       </dia:attribute>
+       <dia:attribute name="elem_width">
+-        <dia:real val="7.0924999999999994"/>
++        <dia:real val="7.0925000000000002"/>
+       </dia:attribute>
+       <dia:attribute name="elem_height">
+         <dia:real val="3"/>
+@@ -6128,7 +4640,7 @@ but with a focus only on data structures and domain driven constructs.
        </dia:attribute>
        <dia:attribute name="templates"/>
      </dia:object>
@@ -2982,7 +3029,7 @@ index c13f648..bbedd5a 100644
        <dia:attribute name="name">
          <dia:string>#&lt; throws on failure#</dia:string>
        </dia:attribute>
-@@ -6195,11 +4753,11 @@ but with a focus only on data structures and domain driven constructs.
+@@ -6195,11 +4707,11 @@ but with a focus only on data structures and domain driven constructs.
          <dia:color val="#000000"/>
        </dia:attribute>
        <dia:connections>
@@ -2997,7 +3044,7 @@ index c13f648..bbedd5a 100644
        <dia:attribute name="name">
          <dia:string>##</dia:string>
        </dia:attribute>
-@@ -6237,19 +4795,19 @@ but with a focus only on data structures and domain driven constructs.
+@@ -6237,19 +4749,19 @@ but with a focus only on data structures and domain driven constructs.
          <dia:boolean val="false"/>
        </dia:attribute>
        <dia:attribute name="obj_pos">
@@ -3023,7 +3070,7 @@ index c13f648..bbedd5a 100644
        </dia:attribute>
        <dia:attribute name="orth_orient">
          <dia:enum val="1"/>
-@@ -6266,11 +4824,11 @@ but with a focus only on data structures and domain driven constructs.
+@@ -6266,11 +4778,11 @@ but with a focus only on data structures and domain driven constructs.
          <dia:color val="#000000"/>
        </dia:attribute>
        <dia:connections>
@@ -3038,7 +3085,7 @@ index c13f648..bbedd5a 100644
        <dia:attribute name="name">
          <dia:string>##</dia:string>
        </dia:attribute>
-@@ -6308,19 +4866,19 @@ but with a focus only on data structures and domain driven constructs.
+@@ -6308,19 +4820,19 @@ but with a focus only on data structures and domain driven constructs.
          <dia:boolean val="false"/>
        </dia:attribute>
        <dia:attribute name="obj_pos">
@@ -3064,7 +3111,7 @@ index c13f648..bbedd5a 100644
        </dia:attribute>
        <dia:attribute name="orth_orient">
          <dia:enum val="1"/>
-@@ -6337,11 +4895,11 @@ but with a focus only on data structures and domain driven constructs.
+@@ -6337,11 +4849,11 @@ but with a focus only on data structures and domain driven constructs.
          <dia:color val="#000000"/>
        </dia:attribute>
        <dia:connections>
@@ -3079,7 +3126,7 @@ index c13f648..bbedd5a 100644
        <dia:attribute name="name">
          <dia:string>##</dia:string>
        </dia:attribute>
-@@ -6408,11 +4966,11 @@ but with a focus only on data structures and domain driven constructs.
+@@ -6408,11 +4920,11 @@ but with a focus only on data structures and domain driven constructs.
          <dia:color val="#000000"/>
        </dia:attribute>
        <dia:connections>
@@ -3094,7 +3141,7 @@ index c13f648..bbedd5a 100644
        <dia:attribute name="name">
          <dia:string>##</dia:string>
        </dia:attribute>
-@@ -6479,11 +5037,11 @@ but with a focus only on data structures and domain driven constructs.
+@@ -6479,11 +4991,11 @@ but with a focus only on data structures and domain driven constructs.
          <dia:color val="#000000"/>
        </dia:attribute>
        <dia:connections>
@@ -3109,7 +3156,7 @@ index c13f648..bbedd5a 100644
        <dia:attribute name="name">
          <dia:string>##</dia:string>
        </dia:attribute>
-@@ -6550,19 +5108,19 @@ but with a focus only on data structures and domain driven constructs.
+@@ -6550,22 +5062,22 @@ but with a focus only on data structures and domain driven constructs.
          <dia:color val="#000000"/>
        </dia:attribute>
        <dia:connections>
@@ -3134,8 +3181,12 @@ index c13f648..bbedd5a 100644
 +        <dia:point val="77,125"/>
        </dia:attribute>
        <dia:attribute name="elem_width">
-         <dia:real val="6.6225000000000005"/>
-@@ -6734,15 +5292,15 @@ but with a focus only on data structures and domain driven constructs.
+-        <dia:real val="6.6225000000000005"/>
++        <dia:real val="6.6224999999999996"/>
+       </dia:attribute>
+       <dia:attribute name="elem_height">
+         <dia:real val="5.2000000000000011"/>
+@@ -6734,15 +5246,15 @@ but with a focus only on data structures and domain driven constructs.
        </dia:attribute>
        <dia:attribute name="templates"/>
      </dia:object>
@@ -3155,7 +3206,7 @@ index c13f648..bbedd5a 100644
        </dia:attribute>
        <dia:attribute name="elem_width">
          <dia:real val="10.51"/>
-@@ -6870,15 +5428,15 @@ Aggregates a group of logically related types into a unit.#</dia:string>
+@@ -6870,15 +5382,15 @@ Aggregates a group of logically related types into a unit.#</dia:string>
        </dia:attribute>
        <dia:attribute name="templates"/>
      </dia:object>
@@ -3175,7 +3226,7 @@ index c13f648..bbedd5a 100644
        </dia:attribute>
        <dia:attribute name="elem_width">
          <dia:real val="15.9"/>
-@@ -7038,15 +5596,15 @@ requirements of the underlying typed element.#</dia:string>
+@@ -7038,15 +5550,15 @@ requirements of the underlying typed element.#</dia:string>
        </dia:attribute>
        <dia:attribute name="templates"/>
      </dia:object>
@@ -3195,7 +3246,7 @@ index c13f648..bbedd5a 100644
        </dia:attribute>
        <dia:attribute name="elem_width">
          <dia:real val="10.51"/>
-@@ -7176,21 +5734,21 @@ generation constraints, services tend to be where all the behaviour sits.#</dia:
+@@ -7176,21 +5688,21 @@ generation constraints, services tend to be where all the behaviour sits.#</dia:
        </dia:attribute>
        <dia:attribute name="templates"/>
      </dia:object>
@@ -3224,7 +3275,7 @@ index c13f648..bbedd5a 100644
        </dia:attribute>
        <dia:attribute name="orth_orient">
          <dia:enum val="1"/>
-@@ -7213,11 +5771,11 @@ generation constraints, services tend to be where all the behaviour sits.#</dia:
+@@ -7213,11 +5725,11 @@ generation constraints, services tend to be where all the behaviour sits.#</dia:
          <dia:string>##</dia:string>
        </dia:attribute>
        <dia:connections>
@@ -3239,7 +3290,7 @@ index c13f648..bbedd5a 100644
        <dia:attribute name="name">
          <dia:string>##</dia:string>
        </dia:attribute>
-@@ -7255,19 +5813,19 @@ generation constraints, services tend to be where all the behaviour sits.#</dia:
+@@ -7255,19 +5767,19 @@ generation constraints, services tend to be where all the behaviour sits.#</dia:
          <dia:boolean val="false"/>
        </dia:attribute>
        <dia:attribute name="obj_pos">
@@ -3265,7 +3316,7 @@ index c13f648..bbedd5a 100644
        </dia:attribute>
        <dia:attribute name="orth_orient">
          <dia:enum val="1"/>
-@@ -7284,19 +5842,19 @@ generation constraints, services tend to be where all the behaviour sits.#</dia:
+@@ -7284,19 +5796,19 @@ generation constraints, services tend to be where all the behaviour sits.#</dia:
          <dia:color val="#000000"/>
        </dia:attribute>
        <dia:connections>
@@ -3291,7 +3342,7 @@ index c13f648..bbedd5a 100644
        </dia:attribute>
        <dia:attribute name="elem_width">
          <dia:real val="10.51"/>
-@@ -7398,21 +5956,21 @@ generation constraints, services tend to be where all the behaviour sits.#</dia:
+@@ -7398,21 +5910,21 @@ generation constraints, services tend to be where all the behaviour sits.#</dia:
        </dia:attribute>
        <dia:attribute name="templates"/>
      </dia:object>
@@ -3320,7 +3371,7 @@ index c13f648..bbedd5a 100644
        </dia:attribute>
        <dia:attribute name="orth_orient">
          <dia:enum val="1"/>
-@@ -7435,19 +5993,19 @@ generation constraints, services tend to be where all the behaviour sits.#</dia:
+@@ -7435,19 +5947,19 @@ generation constraints, services tend to be where all the behaviour sits.#</dia:
          <dia:string>##</dia:string>
        </dia:attribute>
        <dia:connections>
@@ -3346,7 +3397,7 @@ index c13f648..bbedd5a 100644
        </dia:attribute>
        <dia:attribute name="elem_width">
          <dia:real val="10.51"/>
-@@ -7554,21 +6112,21 @@ underlying storage (for example, a relational database).#</dia:string>
+@@ -7554,21 +6066,21 @@ underlying storage (for example, a relational database).#</dia:string>
        </dia:attribute>
        <dia:attribute name="templates"/>
      </dia:object>
@@ -3375,7 +3426,7 @@ index c13f648..bbedd5a 100644
        </dia:attribute>
        <dia:attribute name="orth_orient">
          <dia:enum val="1"/>
-@@ -7591,19 +6149,19 @@ underlying storage (for example, a relational database).#</dia:string>
+@@ -7591,19 +6103,19 @@ underlying storage (for example, a relational database).#</dia:string>
          <dia:string>##</dia:string>
        </dia:attribute>
        <dia:connections>
@@ -3401,7 +3452,7 @@ index c13f648..bbedd5a 100644
        </dia:attribute>
        <dia:attribute name="elem_width">
          <dia:real val="10.51"/>
-@@ -7729,19 +6287,19 @@ underlying storage (for example, a relational database).#</dia:string>
+@@ -7729,19 +6241,19 @@ underlying storage (for example, a relational database).#</dia:string>
        </dia:attribute>
        <dia:attribute name="templates"/>
      </dia:object>
@@ -3426,7 +3477,7 @@ index c13f648..bbedd5a 100644
        </dia:attribute>
        <dia:attribute name="text_colour">
          <dia:color val="#000000"/>
-@@ -7756,25 +6314,25 @@ underlying storage (for example, a relational database).#</dia:string>
+@@ -7756,25 +6268,25 @@ underlying storage (for example, a relational database).#</dia:string>
          <dia:enum val="0"/>
        </dia:attribute>
        <dia:attribute name="text_pos">
@@ -3459,7 +3510,7 @@ index c13f648..bbedd5a 100644
        </dia:attribute>
        <dia:attribute name="elem_width">
          <dia:real val="12.450000000000001"/>
-@@ -7805,7 +6363,7 @@ all types in the merged model.#</dia:string>
+@@ -7805,7 +6317,7 @@ all types in the merged model.#</dia:string>
              <dia:real val="0.80000000000000004"/>
            </dia:attribute>
            <dia:attribute name="pos">
@@ -3468,7 +3519,7 @@ index c13f648..bbedd5a 100644
            </dia:attribute>
            <dia:attribute name="color">
              <dia:color val="#000000"/>
-@@ -7816,7 +6374,7 @@ all types in the merged model.#</dia:string>
+@@ -7816,7 +6328,7 @@ all types in the merged model.#</dia:string>
          </dia:composite>
        </dia:attribute>
      </dia:object>
@@ -3477,7 +3528,7 @@ index c13f648..bbedd5a 100644
        <dia:attribute name="name">
          <dia:string>#resolves all types using &gt;#</dia:string>
        </dia:attribute>
-@@ -7857,7 +6415,7 @@ all types in the merged model.#</dia:string>
+@@ -7857,7 +6369,7 @@ all types in the merged model.#</dia:string>
          <dia:point val="3,18.6"/>
        </dia:attribute>
        <dia:attribute name="obj_bb">
@@ -3486,7 +3537,7 @@ index c13f648..bbedd5a 100644
        </dia:attribute>
        <dia:attribute name="meta">
          <dia:composite type="dict"/>
-@@ -7865,8 +6423,8 @@ all types in the merged model.#</dia:string>
+@@ -7865,8 +6377,8 @@ all types in the merged model.#</dia:string>
        <dia:attribute name="orth_points">
          <dia:point val="3,18.6"/>
          <dia:point val="3,24.15"/>
@@ -3497,7 +3548,7 @@ index c13f648..bbedd5a 100644
        </dia:attribute>
        <dia:attribute name="orth_orient">
          <dia:enum val="1"/>
-@@ -7883,19 +6441,19 @@ all types in the merged model.#</dia:string>
+@@ -7883,19 +6395,19 @@ all types in the merged model.#</dia:string>
          <dia:color val="#000000"/>
        </dia:attribute>
        <dia:connections>
@@ -3523,7 +3574,7 @@ index c13f648..bbedd5a 100644
        </dia:attribute>
        <dia:attribute name="elem_width">
          <dia:real val="20.52"/>
-@@ -8142,9 +6700,9 @@ all types in the merged model.#</dia:string>
+@@ -8142,9 +6654,9 @@ all types in the merged model.#</dia:string>
        </dia:attribute>
        <dia:attribute name="templates"/>
      </dia:object>
@@ -3535,7 +3586,7 @@ index c13f648..bbedd5a 100644
        </dia:attribute>
        <dia:attribute name="direction">
          <dia:enum val="1"/>
-@@ -8180,19 +6738,19 @@ all types in the merged model.#</dia:string>
+@@ -8180,19 +6692,19 @@ all types in the merged model.#</dia:string>
          <dia:boolean val="false"/>
        </dia:attribute>
        <dia:attribute name="obj_pos">
@@ -3561,7 +3612,7 @@ index c13f648..bbedd5a 100644
        </dia:attribute>
        <dia:attribute name="orth_orient">
          <dia:enum val="1"/>
-@@ -8209,19 +6767,19 @@ all types in the merged model.#</dia:string>
+@@ -8209,19 +6721,19 @@ all types in the merged model.#</dia:string>
          <dia:color val="#000000"/>
        </dia:attribute>
        <dia:connections>
@@ -3587,7 +3638,7 @@ index c13f648..bbedd5a 100644
        </dia:attribute>
        <dia:attribute name="elem_width">
          <dia:real val="7.7625000000000002"/>
-@@ -8323,9 +6881,9 @@ all types in the merged model.#</dia:string>
+@@ -8323,9 +6835,9 @@ all types in the merged model.#</dia:string>
        </dia:attribute>
        <dia:attribute name="templates"/>
      </dia:object>
@@ -3599,7 +3650,7 @@ index c13f648..bbedd5a 100644
        </dia:attribute>
        <dia:attribute name="direction">
          <dia:enum val="1"/>
-@@ -8361,19 +6919,19 @@ all types in the merged model.#</dia:string>
+@@ -8361,19 +6873,19 @@ all types in the merged model.#</dia:string>
          <dia:boolean val="false"/>
        </dia:attribute>
        <dia:attribute name="obj_pos">
@@ -3625,7 +3676,7 @@ index c13f648..bbedd5a 100644
        </dia:attribute>
        <dia:attribute name="orth_orient">
          <dia:enum val="1"/>
-@@ -8390,19 +6948,19 @@ all types in the merged model.#</dia:string>
+@@ -8390,19 +6902,19 @@ all types in the merged model.#</dia:string>
          <dia:color val="#000000"/>
        </dia:attribute>
        <dia:connections>
@@ -3651,7 +3702,7 @@ index c13f648..bbedd5a 100644
        </dia:attribute>
        <dia:attribute name="elem_width">
          <dia:real val="5.1200000000000001"/>
-@@ -8530,15 +7088,15 @@ all types in the merged model.#</dia:string>
+@@ -8530,15 +7042,15 @@ all types in the merged model.#</dia:string>
        </dia:attribute>
        <dia:attribute name="templates"/>
      </dia:object>
@@ -3671,7 +3722,7 @@ index c13f648..bbedd5a 100644
        </dia:attribute>
        <dia:attribute name="elem_width">
          <dia:real val="10.895"/>
-@@ -8668,15 +7226,15 @@ for Java, etc.#</dia:string>
+@@ -8668,18 +7180,18 @@ for Java, etc.#</dia:string>
        </dia:attribute>
        <dia:attribute name="templates"/>
      </dia:object>
@@ -3690,8 +3741,12 @@ index c13f648..bbedd5a 100644
 +        <dia:point val="-87,52"/>
        </dia:attribute>
        <dia:attribute name="elem_width">
-         <dia:real val="32.839999999999996"/>
-@@ -8802,15 +7360,15 @@ for Java, etc.#</dia:string>
+-        <dia:real val="32.839999999999996"/>
++        <dia:real val="32.840000000000003"/>
+       </dia:attribute>
+       <dia:attribute name="elem_height">
+         <dia:real val="3.6000000000000001"/>
+@@ -8802,15 +7314,15 @@ for Java, etc.#</dia:string>
        </dia:attribute>
        <dia:attribute name="templates"/>
      </dia:object>
@@ -3711,7 +3766,7 @@ index c13f648..bbedd5a 100644
        </dia:attribute>
        <dia:attribute name="elem_width">
          <dia:real val="13.59"/>
-@@ -8936,21 +7494,21 @@ for Java, etc.#</dia:string>
+@@ -8936,21 +7448,21 @@ for Java, etc.#</dia:string>
        </dia:attribute>
        <dia:attribute name="templates"/>
      </dia:object>
@@ -3740,7 +3795,7 @@ index c13f648..bbedd5a 100644
        </dia:attribute>
        <dia:attribute name="orth_orient">
          <dia:enum val="1"/>
-@@ -8973,25 +7531,25 @@ for Java, etc.#</dia:string>
+@@ -8973,25 +7485,25 @@ for Java, etc.#</dia:string>
          <dia:string>##</dia:string>
        </dia:attribute>
        <dia:connections>
@@ -3775,7 +3830,7 @@ index c13f648..bbedd5a 100644
        </dia:attribute>
        <dia:attribute name="orth_orient">
          <dia:enum val="1"/>
-@@ -9014,25 +7572,25 @@ for Java, etc.#</dia:string>
+@@ -9014,25 +7526,25 @@ for Java, etc.#</dia:string>
          <dia:string>##</dia:string>
        </dia:attribute>
        <dia:connections>
@@ -3810,7 +3865,7 @@ index c13f648..bbedd5a 100644
        </dia:attribute>
        <dia:attribute name="orth_orient">
          <dia:enum val="1"/>
-@@ -9055,19 +7613,19 @@ for Java, etc.#</dia:string>
+@@ -9055,19 +7567,19 @@ for Java, etc.#</dia:string>
          <dia:string>##</dia:string>
        </dia:attribute>
        <dia:connections>
@@ -3836,7 +3891,7 @@ index c13f648..bbedd5a 100644
        </dia:attribute>
        <dia:attribute name="elem_width">
          <dia:real val="4.7350000000000003"/>
-@@ -9169,21 +7727,21 @@ for Java, etc.#</dia:string>
+@@ -9169,21 +7681,21 @@ for Java, etc.#</dia:string>
        </dia:attribute>
        <dia:attribute name="templates"/>
      </dia:object>
@@ -3865,7 +3920,7 @@ index c13f648..bbedd5a 100644
        </dia:attribute>
        <dia:attribute name="orth_orient">
          <dia:enum val="1"/>
-@@ -9206,19 +7764,19 @@ for Java, etc.#</dia:string>
+@@ -9206,19 +7718,19 @@ for Java, etc.#</dia:string>
          <dia:string>##</dia:string>
        </dia:attribute>
        <dia:connections>
@@ -3891,7 +3946,7 @@ index c13f648..bbedd5a 100644
        </dia:attribute>
        <dia:attribute name="elem_width">
          <dia:real val="12.82"/>
-@@ -9346,15 +7904,15 @@ Does not include inherited attributes.#</dia:string>
+@@ -9346,15 +7858,15 @@ Does not include inherited attributes.#</dia:string>
        </dia:attribute>
        <dia:attribute name="templates"/>
      </dia:object>
@@ -3911,7 +3966,7 @@ index c13f648..bbedd5a 100644
        </dia:attribute>
        <dia:attribute name="elem_width">
          <dia:real val="4.7350000000000003"/>
-@@ -9456,21 +8014,21 @@ Does not include inherited attributes.#</dia:string>
+@@ -9456,21 +7968,21 @@ Does not include inherited attributes.#</dia:string>
        </dia:attribute>
        <dia:attribute name="templates"/>
      </dia:object>
@@ -3940,7 +3995,7 @@ index c13f648..bbedd5a 100644
        </dia:attribute>
        <dia:attribute name="orth_orient">
          <dia:enum val="1"/>
-@@ -9493,25 +8051,25 @@ Does not include inherited attributes.#</dia:string>
+@@ -9493,25 +8005,25 @@ Does not include inherited attributes.#</dia:string>
          <dia:string>##</dia:string>
        </dia:attribute>
        <dia:connections>
@@ -3975,7 +4030,7 @@ index c13f648..bbedd5a 100644
        </dia:attribute>
        <dia:attribute name="orth_orient">
          <dia:enum val="1"/>
-@@ -9534,11 +8092,11 @@ Does not include inherited attributes.#</dia:string>
+@@ -9534,11 +8046,11 @@ Does not include inherited attributes.#</dia:string>
          <dia:string>##</dia:string>
        </dia:attribute>
        <dia:connections>
@@ -3990,7 +4045,7 @@ index c13f648..bbedd5a 100644
        <dia:attribute name="name">
          <dia:string>##</dia:string>
        </dia:attribute>
-@@ -9576,19 +8134,19 @@ Does not include inherited attributes.#</dia:string>
+@@ -9576,19 +8088,19 @@ Does not include inherited attributes.#</dia:string>
          <dia:boolean val="false"/>
        </dia:attribute>
        <dia:attribute name="obj_pos">
@@ -4016,7 +4071,7 @@ index c13f648..bbedd5a 100644
        </dia:attribute>
        <dia:attribute name="orth_orient">
          <dia:enum val="1"/>
-@@ -9606,10 +8164,10 @@ Does not include inherited attributes.#</dia:string>
+@@ -9606,10 +8118,10 @@ Does not include inherited attributes.#</dia:string>
        </dia:attribute>
        <dia:connections>
          <dia:connection handle="0" to="O0" connection="5"/>
@@ -4029,7 +4084,7 @@ index c13f648..bbedd5a 100644
        <dia:attribute name="name">
          <dia:string>##</dia:string>
        </dia:attribute>
-@@ -9647,19 +8205,19 @@ Does not include inherited attributes.#</dia:string>
+@@ -9647,19 +8159,19 @@ Does not include inherited attributes.#</dia:string>
          <dia:boolean val="false"/>
        </dia:attribute>
        <dia:attribute name="obj_pos">
@@ -4055,7 +4110,7 @@ index c13f648..bbedd5a 100644
        </dia:attribute>
        <dia:attribute name="orth_orient">
          <dia:enum val="1"/>
-@@ -9677,18 +8235,18 @@ Does not include inherited attributes.#</dia:string>
+@@ -9677,18 +8189,18 @@ Does not include inherited attributes.#</dia:string>
        </dia:attribute>
        <dia:connections>
          <dia:connection handle="0" to="O0" connection="6"/>
@@ -4079,7 +4134,7 @@ index c13f648..bbedd5a 100644
        </dia:attribute>
        <dia:attribute name="elem_width">
          <dia:real val="4.5724999999999998"/>
-@@ -9790,15 +8348,15 @@ Does not include inherited attributes.#</dia:string>
+@@ -9790,15 +8302,15 @@ Does not include inherited attributes.#</dia:string>
        </dia:attribute>
        <dia:attribute name="templates"/>
      </dia:object>
@@ -4099,7 +4154,7 @@ index c13f648..bbedd5a 100644
        </dia:attribute>
        <dia:attribute name="elem_width">
          <dia:real val="8.9700000000000006"/>
-@@ -9900,21 +8458,21 @@ Does not include inherited attributes.#</dia:string>
+@@ -9900,21 +8412,21 @@ Does not include inherited attributes.#</dia:string>
        </dia:attribute>
        <dia:attribute name="templates"/>
      </dia:object>
@@ -4111,7 +4166,7 @@ index c13f648..bbedd5a 100644
        </dia:attribute>
        <dia:attribute name="obj_bb">
 -        <dia:rectangle val="31.2362,86.95;45.335,98.05"/>
-+        <dia:rectangle val="32.2362,74.95;44.335,87.05"/>
++        <dia:rectangle val="32.2363,74.95;44.335,87.05"/>
        </dia:attribute>
        <dia:attribute name="meta">
          <dia:composite type="dict"/>
@@ -4128,7 +4183,7 @@ index c13f648..bbedd5a 100644
        </dia:attribute>
        <dia:attribute name="orth_orient">
          <dia:enum val="1"/>
-@@ -9937,11 +8495,11 @@ Does not include inherited attributes.#</dia:string>
+@@ -9937,11 +8449,11 @@ Does not include inherited attributes.#</dia:string>
          <dia:string>##</dia:string>
        </dia:attribute>
        <dia:connections>
@@ -4143,7 +4198,7 @@ index c13f648..bbedd5a 100644
        <dia:attribute name="name">
          <dia:string>##</dia:string>
        </dia:attribute>
-@@ -9979,19 +8537,19 @@ Does not include inherited attributes.#</dia:string>
+@@ -9979,19 +8491,19 @@ Does not include inherited attributes.#</dia:string>
          <dia:boolean val="false"/>
        </dia:attribute>
        <dia:attribute name="obj_pos">
@@ -4169,7 +4224,7 @@ index c13f648..bbedd5a 100644
        </dia:attribute>
        <dia:attribute name="orth_orient">
          <dia:enum val="1"/>
-@@ -10008,19 +8566,19 @@ Does not include inherited attributes.#</dia:string>
+@@ -10008,19 +8520,19 @@ Does not include inherited attributes.#</dia:string>
          <dia:color val="#000000"/>
        </dia:attribute>
        <dia:connections>
@@ -4195,7 +4250,7 @@ index c13f648..bbedd5a 100644
        </dia:attribute>
        <dia:attribute name="elem_width">
          <dia:real val="14.744999999999999"/>
-@@ -10169,15 +8727,15 @@ Does not include inherited attributes.#</dia:string>
+@@ -10169,15 +8681,15 @@ Does not include inherited attributes.#</dia:string>
        </dia:attribute>
        <dia:attribute name="templates"/>
      </dia:object>
@@ -4215,7 +4270,7 @@ index c13f648..bbedd5a 100644
        </dia:attribute>
        <dia:attribute name="elem_width">
          <dia:real val="7.8150000000000004"/>
-@@ -10330,7 +8888,7 @@ It must be castable to instance of the type defined in the enumeration.#</dia:st
+@@ -10330,7 +8842,7 @@ It must be castable to instance of the type defined in the enumeration.#</dia:st
        </dia:attribute>
        <dia:attribute name="templates"/>
      </dia:object>
@@ -4224,7 +4279,7 @@ index c13f648..bbedd5a 100644
        <dia:attribute name="name">
          <dia:string>##</dia:string>
        </dia:attribute>
-@@ -10368,19 +8926,19 @@ It must be castable to instance of the type defined in the enumeration.#</dia:st
+@@ -10368,19 +8880,19 @@ It must be castable to instance of the type defined in the enumeration.#</dia:st
          <dia:boolean val="false"/>
        </dia:attribute>
        <dia:attribute name="obj_pos">
@@ -4250,7 +4305,7 @@ index c13f648..bbedd5a 100644
        </dia:attribute>
        <dia:attribute name="orth_orient">
          <dia:enum val="1"/>
-@@ -10397,25 +8955,25 @@ It must be castable to instance of the type defined in the enumeration.#</dia:st
+@@ -10397,25 +8909,25 @@ It must be castable to instance of the type defined in the enumeration.#</dia:st
          <dia:color val="#000000"/>
        </dia:attribute>
        <dia:connections>
@@ -4285,7 +4340,7 @@ index c13f648..bbedd5a 100644
        </dia:attribute>
        <dia:attribute name="orth_orient">
          <dia:enum val="1"/>
-@@ -10438,25 +8996,25 @@ It must be castable to instance of the type defined in the enumeration.#</dia:st
+@@ -10438,25 +8950,25 @@ It must be castable to instance of the type defined in the enumeration.#</dia:st
          <dia:string>##</dia:string>
        </dia:attribute>
        <dia:connections>
@@ -4320,7 +4375,7 @@ index c13f648..bbedd5a 100644
        </dia:attribute>
        <dia:attribute name="orth_orient">
          <dia:enum val="1"/>
-@@ -10479,19 +9037,19 @@ It must be castable to instance of the type defined in the enumeration.#</dia:st
+@@ -10479,19 +8991,19 @@ It must be castable to instance of the type defined in the enumeration.#</dia:st
          <dia:string>##</dia:string>
        </dia:attribute>
        <dia:connections>
@@ -4346,7 +4401,7 @@ index c13f648..bbedd5a 100644
        </dia:attribute>
        <dia:attribute name="elem_width">
          <dia:real val="17.824999999999999"/>
-@@ -10875,15 +9433,15 @@ or other comparable model types.#</dia:string>
+@@ -10875,15 +9387,15 @@ or other comparable model types.#</dia:string>
        </dia:attribute>
        <dia:attribute name="templates"/>
      </dia:object>
@@ -4366,7 +4421,7 @@ index c13f648..bbedd5a 100644
        </dia:attribute>
        <dia:attribute name="elem_width">
          <dia:real val="10.51"/>
-@@ -10988,7 +9546,7 @@ object.#</dia:string>
+@@ -10988,7 +9500,7 @@ object.#</dia:string>
              <dia:string>#type#</dia:string>
            </dia:attribute>
            <dia:attribute name="type">
@@ -4375,7 +4430,7 @@ index c13f648..bbedd5a 100644
            </dia:attribute>
            <dia:attribute name="value">
              <dia:string>##</dia:string>
-@@ -11013,30 +9571,30 @@ object.#</dia:string>
+@@ -11013,30 +9525,30 @@ object.#</dia:string>
        </dia:attribute>
        <dia:attribute name="templates"/>
      </dia:object>
@@ -4413,7 +4468,7 @@ index c13f648..bbedd5a 100644
        </dia:attribute>
        <dia:attribute name="abstract">
          <dia:boolean val="false"/>
-@@ -11119,7 +9677,7 @@ object.#</dia:string>
+@@ -11119,7 +9631,7 @@ object.#</dia:string>
        <dia:attribute name="attributes">
          <dia:composite type="umlattribute">
            <dia:attribute name="name">
@@ -4422,7 +4477,7 @@ index c13f648..bbedd5a 100644
            </dia:attribute>
            <dia:attribute name="type">
              <dia:string>##</dia:string>
-@@ -11128,7 +9686,7 @@ object.#</dia:string>
+@@ -11128,7 +9640,7 @@ object.#</dia:string>
              <dia:string>##</dia:string>
            </dia:attribute>
            <dia:attribute name="comment">
@@ -4431,7 +4486,7 @@ index c13f648..bbedd5a 100644
            </dia:attribute>
            <dia:attribute name="visibility">
              <dia:enum val="0"/>
-@@ -11285,7 +9843,7 @@ object.#</dia:string>
+@@ -11285,7 +9797,7 @@ object.#</dia:string>
        </dia:attribute>
        <dia:attribute name="templates"/>
      </dia:object>
@@ -4440,7 +4495,7 @@ index c13f648..bbedd5a 100644
        <dia:attribute name="name">
          <dia:string>##</dia:string>
        </dia:attribute>
-@@ -11323,19 +9881,19 @@ object.#</dia:string>
+@@ -11323,19 +9835,19 @@ object.#</dia:string>
          <dia:boolean val="false"/>
        </dia:attribute>
        <dia:attribute name="obj_pos">
@@ -4449,7 +4504,7 @@ index c13f648..bbedd5a 100644
        </dia:attribute>
        <dia:attribute name="obj_bb">
 -        <dia:rectangle val="46.435,124.85;56.005,135.8"/>
-+        <dia:rectangle val="42.4712,113.85;56.005,124.8"/>
++        <dia:rectangle val="42.4713,113.85;56.005,124.8"/>
        </dia:attribute>
        <dia:attribute name="meta">
          <dia:composite type="dict"/>
@@ -4466,7 +4521,7 @@ index c13f648..bbedd5a 100644
        </dia:attribute>
        <dia:attribute name="orth_orient">
          <dia:enum val="1"/>
-@@ -11352,25 +9910,25 @@ object.#</dia:string>
+@@ -11352,25 +9864,25 @@ object.#</dia:string>
          <dia:color val="#000000"/>
        </dia:attribute>
        <dia:connections>
@@ -4501,7 +4556,7 @@ index c13f648..bbedd5a 100644
        </dia:attribute>
        <dia:attribute name="orth_orient">
          <dia:enum val="1"/>
-@@ -11393,25 +9951,25 @@ object.#</dia:string>
+@@ -11393,25 +9905,25 @@ object.#</dia:string>
          <dia:string>##</dia:string>
        </dia:attribute>
        <dia:connections>
@@ -4536,7 +4591,7 @@ index c13f648..bbedd5a 100644
        </dia:attribute>
        <dia:attribute name="orth_orient">
          <dia:enum val="1"/>
-@@ -11434,19 +9992,19 @@ object.#</dia:string>
+@@ -11434,19 +9946,19 @@ object.#</dia:string>
          <dia:string>##</dia:string>
        </dia:attribute>
        <dia:connections>
@@ -4562,7 +4617,7 @@ index c13f648..bbedd5a 100644
        </dia:attribute>
        <dia:attribute name="elem_width">
          <dia:real val="15.130000000000001"/>
-@@ -11595,21 +10153,21 @@ object.#</dia:string>
+@@ -11595,21 +10107,21 @@ object.#</dia:string>
        </dia:attribute>
        <dia:attribute name="templates"/>
      </dia:object>
@@ -4591,7 +4646,7 @@ index c13f648..bbedd5a 100644
        </dia:attribute>
        <dia:attribute name="orth_orient">
          <dia:enum val="1"/>
-@@ -11632,19 +10190,19 @@ object.#</dia:string>
+@@ -11632,19 +10144,19 @@ object.#</dia:string>
          <dia:string>##</dia:string>
        </dia:attribute>
        <dia:connections>
@@ -4617,7 +4672,7 @@ index c13f648..bbedd5a 100644
        </dia:attribute>
        <dia:attribute name="elem_width">
          <dia:real val="4.3499999999999996"/>
-@@ -11746,21 +10304,21 @@ object.#</dia:string>
+@@ -11746,21 +10258,21 @@ object.#</dia:string>
        </dia:attribute>
        <dia:attribute name="templates"/>
      </dia:object>
@@ -4646,7 +4701,7 @@ index c13f648..bbedd5a 100644
        </dia:attribute>
        <dia:attribute name="orth_orient">
          <dia:enum val="1"/>
-@@ -11783,8 +10341,79 @@ object.#</dia:string>
+@@ -11783,8 +10295,79 @@ object.#</dia:string>
          <dia:string>##</dia:string>
        </dia:attribute>
        <dia:connections>
@@ -4697,7 +4752,7 @@ index c13f648..bbedd5a 100644
 +        <dia:point val="-60.59,71.9528"/>
 +      </dia:attribute>
 +      <dia:attribute name="obj_bb">
-+        <dia:rectangle val="-61.34,65.95;-47.8,73.6"/>
++        <dia:rectangle val="-61.34,65.25;-47.8,72.8"/>
 +      </dia:attribute>
 +      <dia:attribute name="meta">
 +        <dia:composite type="dict"/>
@@ -4729,14 +4784,67 @@ index c13f648..bbedd5a 100644
      </dia:object>
    </dia:layer>
 diff --git a/doc/agile/release_notes_sprint_29.org b/doc/agile/release_notes_sprint_29.org
-index e1dd5e4..8c98d6f 100644
+index e1dd5e4..64aefeb 100644
 --- a/doc/agile/release_notes_sprint_29.org
 +++ b/doc/agile/release_notes_sprint_29.org
-@@ -329,6 +329,7 @@ using. Attempt to make use of these to simplify the model.
+@@ -10,13 +10,13 @@ This file contains all stories that were closed during sprint 29.
+ ** Development Stories Implemented
+ 
+ #+begin: clocktable :maxlevel 3 :scope subtree
+-Clock summary at [2013-06-26 Wed 22:19]
++Clock summary at [2013-06-28 Fri 08:16]
+ 
+ | Headline                                                           | Time    |       |      |
+ |--------------------------------------------------------------------+---------+-------+------|
+-| *Total time*                                                       | *23:41* |       |      |
++| *Total time*                                                       | *26:51* |       |      |
+ |--------------------------------------------------------------------+---------+-------+------|
+-| Development Stories Implemented                                    |         | 23:41 |      |
++| Development Stories Implemented                                    |         | 26:51 |      |
+ | IMPLEMENTATION Release notes and backlog grooming                  |         |       | 0:53 |
+ | COMPLETED Make design by contract methods consistent in dia to sml |         |       | 0:52 |
+ | COMPLETED Split resolver from merger                               |         |       | 3:18 |
+@@ -27,7 +27,7 @@ Clock summary at [2013-06-26 Wed 22:19]
+ | COMPLETED Ensure extractor takes concepts into account             |         |       | 0:22 |
+ | COMPLETED Descendents modeling different concepts from base break  |         |       | 2:20 |
+ | COMPLETED Model should model appropriate concepts                  |         |       | 0:19 |
+-| IMPLEMENTATION Update SML to make use of concepts                  |         |       | 3:21 |
++| IMPLEMENTATION Update SML to make use of concepts                  |         |       | 6:31 |
+ #+end:
+ 
+ *** IMPLEMENTATION Release notes and backlog grooming                  :task:
+@@ -267,14 +267,16 @@ We should just expand the refinements container at inception to all of
+ the qnames for all the concepts, excluding all the concepts found in
+ the inheritance path of a class.
+ 
+-*** COMPLETED Model should model appropriate concepts                 :story:
+-    CLOSED: [2013-06-26 Wed 22:11]
++*** IMPLEMENTATION Model should model appropriate concepts            :story:
+     CLOCK: [2013-06-26 Wed 22:04]--[2013-06-26 Wed 22:23] =>  0:19
+ 
+-NOTE: model name cannot be a qname because then qnames would have to
++NOTE 1: model name cannot be a qname because then qnames would have to
+ have a qname for the model name for consistency. Instead, we modeled
+ other suitable concepts; story was rename to reflect this.
+ 
++NOTE 2: actually, we do the exact same thing for modules so we should
++continue with this logic.
++
+ We already have most of the qname properties in the model anyway, so
+ might as well just use a qname.
+ 
+@@ -329,6 +331,14 @@ using. Attempt to make use of these to simplify the model.
       CLOCK: [2013-06-26 Wed 18:01]--[2013-06-26 Wed 18:07] =>  0:06
  
  **** IMPLEMENTATION Convert pods into entities, values or services     :task:
-+     CLOCK: [2013-06-26 Wed 22:46]
++     CLOCK: [2013-06-28 Fri 17:56]
++     CLOCK: [2013-06-28 Fri 08:27]--[2013-06-28 Fri 08:33] =>  0:06
++     CLOCK: [2013-06-28 Fri 07:49]--[2013-06-28 Fri 08:16] =>  0:27
++     CLOCK: [2013-06-28 Fri 07:33]--[2013-06-28 Fri 07:44] =>  0:43
++     CLOCK: [2013-06-27 Thu 08:25]--[2013-06-27 Thu 08:35] =>  0:10
++     CLOCK: [2013-06-27 Thu 07:50]--[2013-06-27 Thu 08:19] =>  0:29
++     CLOCK: [2013-06-27 Thu 07:36]--[2013-06-27 Thu 07:43] =>  0:07
++     CLOCK: [2013-06-26 Wed 22:46]--[2013-06-27 Thu 00:10] =>  1:24
       CLOCK: [2013-06-26 Wed 22:23]--[2013-06-26 Wed 22:45] =>  0:22
  
  *** Add content to the introduction in manual                         :story:
@@ -6107,6 +6215,51 @@ index 6f51d29..a5886b7 100644
  
      /**
       * @brief Injects the version property on any types marked as
+diff --git a/projects/sml/include/dogen/sml/types/merger.hpp b/projects/sml/include/dogen/sml/types/merger.hpp
+index 48cfe9f..8ebd9fd 100644
+--- a/projects/sml/include/dogen/sml/types/merger.hpp
++++ b/projects/sml/include/dogen/sml/types/merger.hpp
+@@ -55,8 +55,7 @@ private:
+     /**
+      * @brief Validates the qname.
+      */
+-    void check_qname(const std::string& model_name,
+-        const meta_types meta_type, const qname& key,
++    void check_qname(const std::string& model_name, const qname& key,
+         const qname& value) const;
+ 
+     /**
+diff --git a/projects/sml/include/dogen/sml/types/meta_types.hpp b/projects/sml/include/dogen/sml/types/meta_types.hpp
+index 00ba96a..96acc81 100644
+--- a/projects/sml/include/dogen/sml/types/meta_types.hpp
++++ b/projects/sml/include/dogen/sml/types/meta_types.hpp
+@@ -34,17 +34,15 @@ namespace sml {
+ enum class meta_types : unsigned int {
+     invalid = 0, ///< Represents an uninitialised enum
+     enumeration = 1, ///< Type is an enumeration
+-    pod = 2, ///< Type is a pod
+-    primitive = 3, ///< Type is a primitive
+-    exception = 4, ///< Type is an exception
+-    string_table = 5, ///< Type is a string table.
+-    module = 6,
+-    service = 7,
+-    entity = 8,
+-    value = 9,
+-    factory = 10,
+-    repository = 11,
+-    concept = 12
++    primitive = 2, ///< Type is a primitive
++    exception = 3, ///< Type is an exception
++    module = 4, ///< Type is a module
++    service = 5, ///< Type is a service
++    entity = 6, ///< Type is an entity
++    value_object = 7, ///< Type is a value object
++    factory = 8, ///< Type is a factory
++    repository = 9, ///< Type is a repository
++    concept = 10 ///< Type is a concept
+ };
+ 
+ } }
 diff --git a/projects/sml/include/dogen/sml/types/model.hpp b/projects/sml/include/dogen/sml/types/model.hpp
 index 77601c4..dd1ac45 100644
 --- a/projects/sml/include/dogen/sml/types/model.hpp
@@ -6781,6 +6934,27 @@ index 2601ce9..a611eee 100644
      static model create();
  };
  
+diff --git a/projects/sml/include/dogen/sml/types/resolver.hpp b/projects/sml/include/dogen/sml/types/resolver.hpp
+index 8294374..80aa547 100644
+--- a/projects/sml/include/dogen/sml/types/resolver.hpp
++++ b/projects/sml/include/dogen/sml/types/resolver.hpp
+@@ -29,6 +29,7 @@
+ #include <unordered_map>
+ #include "dogen/sml/types/nested_qname.hpp"
+ #include "dogen/sml/types/reference.hpp"
++#include "dogen/sml/types/abstract_object.hpp"
+ #include "dogen/sml/types/model.hpp"
+ 
+ namespace dogen {
+@@ -85,7 +86,7 @@ private:
+      *
+      * @note should really be moved to validator.
+      */
+-    void validate_inheritance_graph(const pod& p) const;
++    void validate_inheritance_graph(const abstract_object& ao) const;
+ 
+     /**
+      * @brief Ensures that all concepts refined by the current concept
 diff --git a/projects/sml/include/dogen/sml/types/std_model_factory.hpp b/projects/sml/include/dogen/sml/types/std_model_factory.hpp
 index cc19578..033a699 100644
 --- a/projects/sml/include/dogen/sml/types/std_model_factory.hpp
@@ -7366,6 +7540,40 @@ index 959b881..0000000
 -
 -} }
 \ No newline at end of file
+diff --git a/projects/sml/src/io/meta_types_io.cpp b/projects/sml/src/io/meta_types_io.cpp
+index 5216989..4e05b04 100644
+--- a/projects/sml/src/io/meta_types_io.cpp
++++ b/projects/sml/src/io/meta_types_io.cpp
+@@ -36,18 +36,12 @@ std::ostream& operator<<(std::ostream& s, const meta_types& v) {
+     case meta_types::enumeration:
+         attr = "\"enumeration\"";
+         break;
+-    case meta_types::pod:
+-        attr = "\"pod\"";
+-        break;
+     case meta_types::primitive:
+         attr = "\"primitive\"";
+         break;
+     case meta_types::exception:
+         attr = "\"exception\"";
+         break;
+-    case meta_types::string_table:
+-        attr = "\"string_table\"";
+-        break;
+     case meta_types::module:
+         attr = "\"module\"";
+         break;
+@@ -57,8 +51,8 @@ std::ostream& operator<<(std::ostream& s, const meta_types& v) {
+     case meta_types::entity:
+         attr = "\"entity\"";
+         break;
+-    case meta_types::value:
+-        attr = "\"value\"";
++    case meta_types::value_object:
++        attr = "\"value_object\"";
+         break;
+     case meta_types::factory:
+         attr = "\"factory\"";
 diff --git a/projects/sml/src/io/model_io.cpp b/projects/sml/src/io/model_io.cpp
 index 6333fb2..2df784d 100644
 --- a/projects/sml/src/io/model_io.cpp
@@ -8171,6 +8379,19 @@ index f7d9c97..0000000
 -
 -} }
 \ No newline at end of file
+diff --git a/projects/sml/src/test_data/meta_types_td.cpp b/projects/sml/src/test_data/meta_types_td.cpp
+index fa3de10..c9aca45 100644
+--- a/projects/sml/src/test_data/meta_types_td.cpp
++++ b/projects/sml/src/test_data/meta_types_td.cpp
+@@ -26,7 +26,7 @@ namespace sml {
+ meta_types_generator::meta_types_generator() : position_(0) { }
+ void meta_types_generator::
+ populate(const unsigned int position, result_type& v) {
+-    v = static_cast<meta_types>(position % 13);
++    v = static_cast<meta_types>(position % 11);
+ }
+ 
+ meta_types_generator::result_type
 diff --git a/projects/sml/src/test_data/model_td.cpp b/projects/sml/src/test_data/model_td.cpp
 index 19c8472..cd11f96 100644
 --- a/projects/sml/src/test_data/model_td.cpp
@@ -8691,7 +8912,7 @@ index ce4df8d..0000000
 -} }
 \ No newline at end of file
 diff --git a/projects/sml/src/types/boost_model_factory.cpp b/projects/sml/src/types/boost_model_factory.cpp
-index 4ae1b3f..9c1a142 100644
+index 4ae1b3f..4ab37c7 100644
 --- a/projects/sml/src/types/boost_model_factory.cpp
 +++ b/projects/sml/src/types/boost_model_factory.cpp
 @@ -18,6 +18,8 @@
@@ -8715,7 +8936,8 @@ index 4ae1b3f..9c1a142 100644
 +
      qname q;
      q.type_name(name);
-     q.meta_type(meta_types::pod);
+-    q.meta_type(meta_types::pod);
++    q.meta_type(meta_types::value_object);
      q.model_name(model_name);
      q.module_path(module_path);
  
@@ -8747,7 +8969,7 @@ index 4ae1b3f..9c1a142 100644
      qname qn;
      qn.model_name(model_name);
      qn.type_name(name);
-@@ -87,28 +91,29 @@ model boost_model_factory::create() {
+@@ -87,28 +91,28 @@ model boost_model_factory::create() {
      r.name(model_name);
      r.is_system(true);
  
@@ -8756,8 +8978,7 @@ index 4ae1b3f..9c1a142 100644
 -            pod p(create_pod(name, pt, module_path));
 -            r.pods().insert(std::make_pair(p.name(), p));
 +    const auto pi([&](const std::string& name,
-+            const std::list<std::string>& module_path,
-+            value_object_types vot = value_object_types::plain) {
++            const std::list<std::string>& module_path, value_object_types vot) {
 +            const auto vo(create_value_object(name, module_path, vot));
 +            r.types().insert(std::make_pair(vo->name(), vo));
          });
@@ -8779,37 +9000,37 @@ index 4ae1b3f..9c1a142 100644
 +    pi(shared_ptr_name, module_path, value_object_types::smart_pointer);
 +    pi(weak_ptr_name, module_path, value_object_types::smart_pointer);
 +    pi(scoped_ptr_name, module_path, value_object_types::smart_pointer);
-+    pi(optional_name, module_path);
-+    pi(variant_name, module_path);
++    pi(optional_name, module_path, value_object_types::plain);
++    pi(variant_name, module_path, value_object_types::plain);
  
      gamma(asio_name, module_path);
      module_path.push_back(asio_name);
 -    pi(io_service_name, pod_types::value, module_path);
-+    pi(io_service_name, module_path);
++    pi(io_service_name, module_path, value_object_types::plain);
  
      gamma(ip_name, module_path);
      module_path.push_back(ip_name);
-@@ -116,26 +121,26 @@ model boost_model_factory::create() {
+@@ -116,26 +120,26 @@ model boost_model_factory::create() {
      gamma(tcp_name, module_path);
      module_path.push_back(tcp_name);
  
 -    pi(socket_name, pod_types::value, module_path);
 -    pi(acceptor_name, pod_types::value, module_path);
-+    pi(socket_name, module_path);
-+    pi(acceptor_name, module_path);
++    pi(socket_name, module_path, value_object_types::plain);
++    pi(acceptor_name, module_path, value_object_types::plain);
  
      module_path.clear();
      gamma(filesystem_name, module_path);
      module_path.push_back(filesystem_name);
 -    pi(path_name, pod_types::value, module_path);
-+    pi(path_name, module_path);
++    pi(path_name, module_path, value_object_types::plain);
  
      module_path.clear();
      gamma(gregorian_name, module_path);
  
      module_path.push_back(gregorian_name);
 -    pi(date_name, pod_types::value, module_path);
-+    pi(date_name, module_path);
++    pi(date_name, module_path, value_object_types::plain);
  
      module_path.clear();
      gamma(posix_time_name, module_path);
@@ -8817,11 +9038,376 @@ index 4ae1b3f..9c1a142 100644
      module_path.push_back(posix_time_name);
 -    pi(ptime_name, pod_types::value, module_path);
 -    pi(time_duration_name, pod_types::value, module_path);
-+    pi(ptime_name, module_path);
-+    pi(time_duration_name, module_path);
++    pi(ptime_name, module_path, value_object_types::plain);
++    pi(time_duration_name, module_path, value_object_types::plain);
  
      return r;
  }
+diff --git a/projects/sml/src/types/injector.cpp b/projects/sml/src/types/injector.cpp
+index 405c22b..77ee972 100644
+--- a/projects/sml/src/types/injector.cpp
++++ b/projects/sml/src/types/injector.cpp
+@@ -18,6 +18,16 @@
+  * MA 02110-1301, USA.
+  *
+  */
++#include <memory>
++#include <functional>
++#include "dogen/sml/types/value_object.hpp"
++#include "dogen/sml/types/keyed_entity.hpp"
++#include "dogen/sml/types/service.hpp"
++#include "dogen/sml/types/factory.hpp"
++#include "dogen/sml/types/repository.hpp"
++#include "dogen/sml/types/entity.hpp"
++#include "dogen/sml/types/keyed_entity.hpp"
++#include "dogen/sml/types/type_visitor.hpp"
+ #include <boost/lexical_cast.hpp>
+ #include <boost/throw_exception.hpp>
+ #include "dogen/utility/log/logger.hpp"
+@@ -43,22 +53,60 @@ const std::string unversioned_name("unversioned_key");
+ const std::string uint_name("unsigned int");
+ const std::string id_name("id");
+ const std::string version_name("version");
+-const std::string unversioned_key_doxygen("Unversioned key for ");
+-const std::string versioned_doxygen("Object instance's version.");
+-
+-const std::string versioned_key_doxygen("Versioned key for ");
++const std::string unversioned_key_doc("Unversioned key for ");
++const std::string versioned_key_doc("Versioned key for ");
++const std::string versioned_property_doc("Object instance's version.");
+ const std::string missing_identity_attribute(
+     "Expected entity to have at least one identity attribute: ");
+ const std::string duplicate_qname(
+     "Attempt to add pod with a name that already exists in model: ");
+ 
++class keyed_entity_visitor : public dogen::sml::type_visitor {
++public:
++    typedef std::function<void(const dogen::sml::keyed_entity&)> function_type;
++
++public:
++    explicit keyed_entity_visitor(const function_type& fn) : fn_(fn) {}
++    ~keyed_entity_visitor() noexcept { }
++
++public:
++    using type_visitor::visit;
++    virtual void visit(dogen::sml::keyed_entity& ke) const override { fn_(ke); }
++
++private:
++    function_type fn_;
++};
++
++class abstract_object_visitor : public dogen::sml::type_visitor {
++public:
++    typedef std::function<void(dogen::sml::abstract_object&)>
++    function_type;
++
++public:
++    explicit abstract_object_visitor(const function_type& fn) : fn_(fn) {}
++    ~abstract_object_visitor() noexcept { }
++
++public:
++    using type_visitor::visit;
++    virtual void visit(dogen::sml::value_object& ke) const override { fn_(ke); }
++    virtual void visit(dogen::sml::service& s) const override { fn_(s); }
++    virtual void visit(dogen::sml::factory& f) const override { fn_(f); }
++    virtual void visit(dogen::sml::repository& r) const override { fn_(r); }
++    virtual void visit(dogen::sml::keyed_entity& ke) const override { fn_(ke); }
++    virtual void visit(dogen::sml::entity& e) const override { fn_(e); }
++
++private:
++    function_type fn_;
++};
++
+ }
+ 
+ namespace dogen {
+ namespace sml {
+ 
+-pod injector::create_key(const qname& qn, const generation_types gt,
+-    const std::list<property>& properties, const bool versioned) const {
++boost::shared_ptr<type> injector::create_key(const qname& qn,
++    const generation_types gt, const std::list<property>& properties,
++    const bool versioned) const {
+ 
+     qname kqn;
+     kqn.type_name(qn.type_name() + "_" +
+@@ -66,82 +114,83 @@ pod injector::create_key(const qname& qn, const generation_types gt,
+     kqn.model_name(qn.model_name());
+     kqn.module_path(qn.module_path());
+     kqn.external_module_path(qn.external_module_path());
+-    kqn.meta_type(meta_types::pod);
++    kqn.meta_type(meta_types::value_object);
+ 
+-    pod r;
+-    r.name(kqn);
+-    r.generation_type(gt);
+-    r.pod_type(pod_types::value);
+-    r.documentation(
+-        (versioned ? versioned_key_doxygen : unversioned_key_doxygen) +
+-        qn.type_name());
++    std::unique_ptr<value_object> r(new value_object());
++    r->name(kqn);
++    r->generation_type(gt);
++    const auto vk(value_object_types::versioned_key);
++    const auto uvk(value_object_types::unversioned_key);
++    r->type(versioned ? vk : uvk);
+ 
+-    const auto vtc(category_types::versioned_key);
+-    const auto uvtc(category_types::unversioned_key);
+-    r.category_type(versioned ? vtc : uvtc);
+-    r.properties(properties);
++    const auto doc(versioned ? versioned_key_doc : unversioned_key_doc);
++    r->documentation(doc + qn.type_name());
++
++    r->properties(properties);
+ 
+     if (versioned)
+-        inject_version(r);
++        inject_version(*r);
+ 
+     BOOST_LOG_SEV(lg, debug) << "Created key: " << kqn.type_name();
+-    return r;
++    return boost::shared_ptr<type>(r.release());
+ }
+ 
+ void injector::inject_keys(model& m) const {
+     BOOST_LOG_SEV(lg, debug) << "Injecting keys.";
+ 
+-    std::list<pod> keys;
+-    for (auto& pair : m.pods()) {
+-        auto& pod(pair.second);
+-
+-        if (!pod.is_keyed())
+-            continue;
+-
+-        std::list<property> identity_properties;
+-        for (const auto& prop : pod.properties()) {
+-            if (prop.is_identity_attribute())
+-                identity_properties.push_back(prop);
+-        }
+-
+-        if (identity_properties.empty()) {
+-            BOOST_LOG_SEV(lg, error) << missing_identity_attribute
+-                                     << pod.name();
+-
+-            BOOST_THROW_EXCEPTION(injection_error(missing_identity_attribute +
+-                    boost::lexical_cast<std::string>(pod.name())));
+-        }
+-
+-        const bool unversioned(false);
+-        const auto gt(pod.generation_type());
+-        const auto qn(pod.name());
+-        const auto uvk(create_key(qn, gt, identity_properties, unversioned));
+-        keys.push_back(uvk);
+-        pod.unversioned_key(uvk.name());
+-
+-        const bool versioned(true);
+-        if (pod.is_versioned()) {
+-            auto vk(create_key(qn, gt, identity_properties, versioned));
+-            pod.versioned_key(vk.name());
+-            vk.unversioned_key(uvk.name());
+-            keys.push_back(vk);
+-        }
++    std::list<boost::shared_ptr<type> > keys;
++    const auto lambda([&](keyed_entity& ke) {
++            std::list<property> identity_props;
++            for (const auto& prop : ke.properties()) {
++                if (prop.is_identity_attribute())
++                    identity_props.push_back(prop);
++            }
++
++            if (identity_props.empty()) {
++                BOOST_LOG_SEV(lg, error) << missing_identity_attribute
++                                         << ke.name();
++
++                BOOST_THROW_EXCEPTION(
++                    injection_error(missing_identity_attribute +
++                        boost::lexical_cast<std::string>(ke.name())));
++            }
++
++            const bool unversioned(false);
++            const auto gt(ke.generation_type());
++            const auto qn(ke.name());
++            const auto uvk(create_key(qn, gt, identity_props, unversioned));
++            keys.push_back(uvk);
++            ke.unversioned_key(uvk->name());
++
++            const bool versioned(true);
++            if (ke.is_versioned()) {
++                auto vk(create_key(qn, gt, identity_props, versioned));
++                ke.versioned_key(vk->name());
++                keys.push_back(vk);
++            }
++        });
++
++    keyed_entity_visitor v(lambda);
++    for (auto& pair : m.types()) {
++        auto& t(pair.second);
++        t->accept(v);
+     }
+ 
+     for (const auto& k : keys) {
+-        const auto r(m.pods().insert(std::make_pair(k.name(), k)));
+-        if (!r.second) {
+-            BOOST_LOG_SEV(lg, error) << duplicate_qname << k.name();
++        const auto i(m.types().insert(std::make_pair(k->name(), k)));
+ 
++        //FIXME: should really be in validator
++        if (!i.second) {
++            BOOST_LOG_SEV(lg, error) << duplicate_qname << k->name();
+             BOOST_THROW_EXCEPTION(injection_error(duplicate_qname +
+-                    boost::lexical_cast<std::string>(k.name())));
++                    boost::lexical_cast<std::string>(k->name())));
+         }
+     }
+ 
+     BOOST_LOG_SEV(lg, debug) << "Done injecting keys. Total: " << keys.size();
+ }
+ 
+-void injector::inject_version(pod& p) const {
++void injector::inject_version(abstract_object& p) const {
+     BOOST_LOG_SEV(lg, debug) << "Injecting version property to type: "
+                              << p.name();
+ 
+@@ -155,7 +204,7 @@ void injector::inject_version(pod& p) const {
+     property v;
+     v.name(version_name);
+     v.type_name(nqn);
+-    v.documentation(versioned_doxygen);
++    v.documentation(versioned_property_doc);
+ 
+     p.properties().push_back(v);
+ }
+@@ -163,11 +212,15 @@ void injector::inject_version(pod& p) const {
+ void injector::inject_version(model& m) const {
+     BOOST_LOG_SEV(lg, debug) << "Injecting version property.";
+ 
+-    for (auto& pair : m.pods()) {
+-        auto& pod(pair.second);
++    auto lambda([&](dogen::sml::abstract_object& ao) {
++            if (ao.is_versioned())
++                inject_version(ao);
++        });
+ 
+-        if (pod.is_versioned())
+-            inject_version(pod);
++    abstract_object_visitor v(lambda);
++    for (auto& pair : m.types()) {
++        auto& t(pair.second);
++        t->accept(v);
+     }
+ 
+     BOOST_LOG_SEV(lg, debug) << "Done injecting version property.";
+diff --git a/projects/sml/src/types/merger.cpp b/projects/sml/src/types/merger.cpp
+index e4866b1..72f67d6 100644
+--- a/projects/sml/src/types/merger.cpp
++++ b/projects/sml/src/types/merger.cpp
+@@ -25,7 +25,7 @@
+ #include "dogen/sml/io/qname_io.hpp"
+ #include "dogen/sml/io/nested_qname_io.hpp"
+ #include "dogen/sml/io/property_io.hpp"
+-#include "dogen/sml/io/pod_io.hpp"
++#include "dogen/sml/io/type_io.hpp"
+ #include "dogen/sml/io/model_io.hpp"
+ #include "dogen/sml/types/merger.hpp"
+ 
+@@ -46,30 +46,30 @@ namespace sml {
+ 
+ merger::merger() : has_target_(false), has_merged_(false) { }
+ 
+-void merger::check_qname(const std::string& model_name,
+-    const meta_types meta_type, const qname& key, const qname& value) const {
++void merger::check_qname(const std::string& model_name, const qname& key,
++    const qname& value) const {
++
+     if (key.model_name() != model_name) {
+-        std::ostringstream stream;
+-        stream << "Pod does not belong to this model. Model name: '"
+-               << model_name << "'. Pod qname: "
+-               << key;
+-        BOOST_LOG_SEV(lg, error) << stream.str();
+-        BOOST_THROW_EXCEPTION(merging_error(stream.str()));
++        std::ostringstream s;
++        s << "Type does not belong to this model. Model name: '"
++          << model_name << "'. Type qname: " << key;
++        BOOST_LOG_SEV(lg, error) << s.str();
++        BOOST_THROW_EXCEPTION(merging_error(s.str()));
+     }
+ 
+-    if (key.meta_type() != meta_type) {
+-        std::ostringstream stream;
+-        stream << "Pod has incorrect meta_type: '" << key;
+-        BOOST_LOG_SEV(lg, error) << stream.str();
+-        BOOST_THROW_EXCEPTION(merging_error(stream.str()));
++    if (key.meta_type() != value.meta_type()) {
++        std::ostringstream s;
++        s << "Type has incorrect meta_type: '" << key;
++        BOOST_LOG_SEV(lg, error) << s.str();
++        BOOST_THROW_EXCEPTION(merging_error(s.str()));
+     }
+ 
+     if (key != value) {
+-        std::ostringstream stream;
+-        stream << "Inconsistency between key and value qnames: "
+-               << " key: " << key << " value: " << value;
+-        BOOST_LOG_SEV(lg, error) << stream.str();
+-        BOOST_THROW_EXCEPTION(merging_error(stream.str()));
++        std::ostringstream s;
++        s << "Inconsistency between key and value qnames: "
++          << " key: " << key << " value: " << value;
++        BOOST_LOG_SEV(lg, error) << s.str();
++        BOOST_THROW_EXCEPTION(merging_error(s.str()));
+     }
+ }
+ 
+@@ -140,41 +140,18 @@ void merger::add(const model& m) {
+ }
+ 
+ void merger::merge_model(const model& m) {
+-    const auto n(m.name());
+     BOOST_LOG_SEV(lg, info) << "Merging model: '" << m.name()
+-                            << "' pods: " << m.pods().size()
+-                            << " primitives: " << m.primitives().size()
+-                            << " concepts: " << m.concepts().size()
+-                            << " enumerations: " << m.enumerations().size()
+-                            << " exceptions: " << m.exceptions().size();
+-
+-    for (const auto& p : m.pods()) {
+-        check_qname(n, meta_types::pod, p.first, p.second.name());
+-        merged_model_.pods().insert(p);
++                            << "' types: " << m.types().size();
++
++    for (const auto& p : m.types()) {
++        check_qname(m.name(), p.first, p.second->name());
++        merged_model_.types().insert(p);
+     }
+ 
+     for (const auto& c : m.concepts()) {
+-        check_qname(n, meta_types::concept, c.first, c.second.name());
++        check_qname(m.name(), c.first, c.second.name());
+         merged_model_.concepts().insert(c);
+     }
+-
+-    for (const auto& p : m.primitives()) {
+-        // FIXME: mega hack to handle primitive model.
+-        check_qname(
+-            (n == primitive_model_name ? empty : n),
+-            meta_types::primitive, p.first, p.second.name());
+-        merged_model_.primitives().insert(p);
+-    }
+-
+-    for (const auto& p : m.enumerations()) {
+-        check_qname(n, meta_types::enumeration, p.first, p.second.name());
+-        merged_model_.enumerations().insert(p);
+-    }
+-
+-    for (const auto& p : m.exceptions()) {
+-        check_qname(n, meta_types::exception, p.first, p.second.name());
+-        merged_model_.exceptions().insert(p);
+-    }
+ }
+ 
+ void merger::merge_models() {
 diff --git a/projects/sml/src/types/model.cpp b/projects/sml/src/types/model.cpp
 index c905dda..e2858b6 100644
 --- a/projects/sml/src/types/model.cpp
@@ -9508,6 +10094,204 @@ index fc33159..0019268 100644
          });
  
      lambda(bool_name);
+diff --git a/projects/sml/src/types/resolver.cpp b/projects/sml/src/types/resolver.cpp
+index a59aa76..a1428e4 100644
+--- a/projects/sml/src/types/resolver.cpp
++++ b/projects/sml/src/types/resolver.cpp
+@@ -32,7 +32,6 @@
+ #include "dogen/sml/io/qname_io.hpp"
+ #include "dogen/sml/io/nested_qname_io.hpp"
+ #include "dogen/sml/io/property_io.hpp"
+-#include "dogen/sml/io/pod_io.hpp"
+ #include "dogen/sml/io/model_io.hpp"
+ #include "dogen/sml/types/resolver.hpp"
+ 
+@@ -43,7 +42,7 @@ namespace {
+ auto lg(logger_factory("sml.resolver"));
+ 
+ const std::string empty;
+-const std::string orphan_pod("Pod's parent could not be located: ");
++const std::string orphan_object("Object's parent could not be located: ");
+ const std::string orphan_concept("Refined concept could not be located: ");
+ const std::string undefined_type("Pod has property with undefined type: ");
+ const std::string missing_dependency("Cannot find dependency: ");
+@@ -89,23 +88,23 @@ expand_concept_hierarchy(const qname& qn, std::list<qname>& concepts) const {
+     concepts.push_back(qn);
+ }
+ 
+-void resolver::validate_inheritance_graph(const pod& p) const {
++void resolver::validate_inheritance_graph(const abstract_object& ao) const {
+     // FIXME: we should really just check that the parent exists since
+     // we know all pods get checked anyway. this results in a lot of
+     // double-checks for no reason.
+-    auto parent(p.parent_name());
++    auto parent(ao.parent_name());
+     while (parent) {
+         qname pqn(*parent);
+-        const auto i(model_.pods().find(pqn));
+-        if (i == model_.pods().end()) {
+-            std::ostringstream stream;
+-            stream << orphan_pod << ". pod: "
+-                   << p.name().type_name() << ". parent: "
+-                   << pqn.type_name();
+-            BOOST_LOG_SEV(lg, error) << stream.str();
+-            BOOST_THROW_EXCEPTION(resolution_error(stream.str()));
++        const auto i(model_.types().find(pqn));
++        if (i == model_.types().end()) {
++            std::ostringstream s;
++            s << orphan_object << ". pod: " << ao.name().type_name()
++              << ". parent: " << pqn.type_name();
++
++            BOOST_LOG_SEV(lg, error) << s.str();
++            BOOST_THROW_EXCEPTION(resolution_error(s.str()));
+         }
+-        parent = i->second.parent_name();
++        parent = i->second->parent_name();
+     }
+ }
+ 
+@@ -128,24 +127,24 @@ qname resolver::resolve_partial_type(const qname& n) const {
+     qname r(n);
+ 
+     // first try the type as it was read originally.
+-    const auto& pods(model_.pods());
+-    r.meta_type(meta_types::pod);
+-    auto i(pods.find(r));
+-    if (i != pods.end())
++    const auto& types(model_.types());
++    r.meta_type(meta_types::value_object);
++    auto i(types.find(r));
++    if (i != types.end())
+         return r;
+ 
+     // then try setting module path to the target one
+     r.external_module_path(model_.external_module_path());
+-    i = pods.find(r);
+-    if (i != pods.end())
++    i = types.find(r);
++    if (i != types.end())
+         return r;
+ 
+     // now try all available module paths from references
+     for (const auto& pair : references_) {
+         const auto ref(pair.second);
+         r.external_module_path(ref.external_module_path());
+-        i = pods.find(r);
+-        if (i != pods.end())
++        i = types.find(r);
++        if (i != types.end())
+             return r;
+     }
+ 
+@@ -153,47 +152,44 @@ qname resolver::resolve_partial_type(const qname& n) const {
+     r.external_module_path(std::list<std::string>{});
+ 
+     // its not a pod, could it be a primitive?
+-    const auto& primitives(model_.primitives());
+     r.meta_type(meta_types::primitive);
+-    auto j(primitives.find(r));
+-    if (j != primitives.end())
++    auto j(types.find(r));
++    if (j != types.end())
+         return r;
+ 
+     // try enumerations
+-    const auto& enumerations(model_.enumerations());
+     r.meta_type(meta_types::enumeration);
+-    auto k(enumerations.find(r));
+-    if (k != enumerations.end())
++    auto k(types.find(r));
++    if (k != types.end())
+         return r;
+ 
+     // then try setting module path to the target one
+     r.external_module_path(model_.external_module_path());
+-    k = enumerations.find(r);
+-    if (k != enumerations.end())
++    k = types.find(r);
++    if (k != types.end())
+         return r;
+ 
+     // now try all available module paths from references
+     for (const auto& pair : references_) {
+         const auto ref(pair.second);
+         r.external_module_path(ref.external_module_path());
+-        k = enumerations.find(r);
+-        if (k != enumerations.end())
++        k = types.find(r);
++        if (k != types.end())
+             return r;
+     }
+ 
+     if (r.model_name().empty()) {
+         // it could be a type defined in this model
+-        r.meta_type(meta_types::pod);
++        r.meta_type(meta_types::value_object);
+         r.model_name(model_.name());
+         r.external_module_path(model_.external_module_path());
+-        i = pods.find(r);
+-        if (i != pods.end())
++        i = types.find(r);
++        if (i != types.end())
+             return r;
+ 
+-        const auto& enumerations(model_.enumerations());
+         r.meta_type(meta_types::enumeration);
+-        auto k(enumerations.find(r));
+-        if (k != enumerations.end())
++        auto k(types.find(r));
++        if (k != types.end())
+             return r;
+     }
+ 
+@@ -271,37 +267,37 @@ void resolver::resolve_concepts() {
+ }
+ 
+ void resolver::resolve_pods() {
+-    for (auto& pair : model_.pods()) {
+-        pod& p(pair.second);
+-        if (p.generation_type() == generation_types::no_generation)
++    for (auto& pair : model_.types()) {
++        auto& t(*pair.second);
++        if (t.generation_type() == generation_types::no_generation)
+             continue;
+ 
+-        validate_inheritance_graph(p);
+-        p.properties(resolve_properties(p.name(), p.properties()));
++        validate_inheritance_graph(t);
++        p.properties(resolve_properties(t.name(), t.properties()));
+ 
+         //FIXME: biggest hack ever
+         if (p.modeled_concepts().empty())
+             continue;
+ 
+         std::list<qname> expanded_modeled_concepts;
+-        for (const auto& qn : p.modeled_concepts())
++        for (const auto& qn : t.modeled_concepts())
+             expand_concept_hierarchy(qn, expanded_modeled_concepts);
+ 
+-        // std::cout << "type: " << p.name().type_name() << std::endl;
++        // std::cout << "type: " << t.name().type_name() << std::endl;
+ 
+         // std::cout << "after expand: " << expanded_modeled_concepts.size()
+         //           << std::endl
+         //           << " " << expanded_modeled_concepts << std::endl;
+ 
+-        p.modeled_concepts().clear();
++        t.modeled_concepts().clear();
+         for (const auto& qn : expanded_modeled_concepts)
+-            p.modeled_concepts().push_back(qn);
++            t.modeled_concepts().push_back(qn);
+ 
+         // std::cout << "modeled: " << p.modeled_concepts().size() << std::endl;
+     }
+ 
+     //FIXME: biggest hack ever - continued
+-    for (auto& pair : model_.pods()) {
++    for (auto& pair : model_.types()) {
+         pod& p(pair.second);
+ 
+         if (p.modeled_concepts().empty())
 diff --git a/projects/sml/src/types/std_model_factory.cpp b/projects/sml/src/types/std_model_factory.cpp
 index 885f24b..2f96623 100644
 --- a/projects/sml/src/types/std_model_factory.cpp
@@ -9687,5 +10471,41 @@ index 507c6f5..29fae05 100644
 -void value_object::type(const dogen::sml::value_types& v) {
 +void value_object::type(const dogen::sml::value_object_types& v) {
      type_ = v;
+ }
+ 
+diff --git a/projects/sml/src/types/workflow.cpp b/projects/sml/src/types/workflow.cpp
+index e5aba06..f17e77a 100644
+--- a/projects/sml/src/types/workflow.cpp
++++ b/projects/sml/src/types/workflow.cpp
+@@ -36,27 +36,12 @@ workflow(const bool add_system_models)
+     : add_system_models_(add_system_models) {}
+ 
+ bool workflow::has_generatable_types(const sml::model& m) const {
+-    auto lambda([](sml::generation_types gt) {
+-            return
+-                gt == sml::generation_types::full_generation ||
+-                gt == sml::generation_types::partial_generation;
+-        });
+-
+-    for (const auto pair : m.pods()) {
+-        if (lambda(pair.second.generation_type()))
+-            return true;
+-    }
+-
+-    for (const auto pair : m.enumerations()) {
+-        if (lambda(pair.second.generation_type()))
++    for (const auto pair : m.types()) {
++        const auto gt(pair.second->generation_type());
++        if (gt == sml::generation_types::full_generation ||
++            gt == sml::generation_types::partial_generation)
+             return true;
+     }
+-
+-    for (const auto pair : m.exceptions()) {
+-        if (lambda(pair.second.generation_type()))
+-            return true;
+-    }
+-
+     return false;
  }
  
