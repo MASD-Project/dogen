@@ -10,13 +10,13 @@ This file contains all stories that were closed during sprint 29.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-06-29 Sat 19:08]
+Clock summary at [2013-06-29 Sat 22:24]
 
 | Headline                                                           | Time    |       |       |
 |--------------------------------------------------------------------+---------+-------+-------|
-| *Total time*                                                       | *33:21* |       |       |
+| *Total time*                                                       | *35:34* |       |       |
 |--------------------------------------------------------------------+---------+-------+-------|
-| Development Stories Implemented                                    |         | 33:21 |       |
+| Development Stories Implemented                                    |         | 35:34 |       |
 | IMPLEMENTATION Release notes and backlog grooming                  |         |       |  0:53 |
 | COMPLETED Make design by contract methods consistent in dia to sml |         |       |  0:52 |
 | COMPLETED Split resolver from merger                               |         |       |  3:18 |
@@ -26,8 +26,8 @@ Clock summary at [2013-06-29 Sat 19:08]
 | COMPLETED Add concept properties in order of inheritance           |         |       |  0:18 |
 | COMPLETED Ensure extractor takes concepts into account             |         |       |  0:22 |
 | COMPLETED Descendents modeling different concepts from base break  |         |       |  2:20 |
-| IMPLEMENTATION Model should model appropriate concepts             |         |       |  0:19 |
-| IMPLEMENTATION Update SML to make use of concepts                  |         |       | 13:01 |
+| COMPLETED Model should model appropriate concepts                  |         |       |  2:15 |
+| IMPLEMENTATION Update SML to make use of concepts                  |         |       | 13:18 |
 #+end:
 
 *** IMPLEMENTATION Release notes and backlog grooming                  :task:
@@ -267,7 +267,9 @@ We should just expand the refinements container at inception to all of
 the qnames for all the concepts, excluding all the concepts found in
 the inheritance path of a class.
 
-*** IMPLEMENTATION Model should model appropriate concepts            :story:
+*** COMPLETED Model should model appropriate concepts                 :story:
+    CLOSED: [2013-06-29 Sat 22:24]
+    CLOCK: [2013-06-29 Sat 20:28]--[2013-06-29 Sat 22:24] =>  1:56
     CLOCK: [2013-06-26 Wed 22:04]--[2013-06-26 Wed 22:23] =>  0:19
 
 NOTE 1: model name cannot be a qname because then qnames would have to

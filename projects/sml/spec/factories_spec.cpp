@@ -41,7 +41,7 @@ BOOST_AUTO_TEST_CASE(producing_boost_model_generates_expected_types) {
 
     const auto m(dogen::sml::boost_model_factory::create());
     BOOST_LOG_SEV(lg, debug) << m;
-    BOOST_CHECK(m.name() == boost_model);
+    BOOST_CHECK(m.name().model_name() == boost_model);
     BOOST_CHECK(m.is_system() == true);
 
     const auto& objects(m.objects());
@@ -56,7 +56,7 @@ BOOST_AUTO_TEST_CASE(producing_boost_model_generates_expected_types) {
             for (const auto& pair : m.modules()) {
                 const auto mod(pair.second);
                 auto pp(mod.name().module_path());
-                pp.push_back(mod.name().type_name());
+                pp.push_back(mod.name().simple_name());
                 BOOST_LOG_SEV(lg, info) << "Converted path: " << pp;
                 if (qn.module_path() == pp) {
                     module_found = true;
@@ -72,9 +72,9 @@ BOOST_AUTO_TEST_CASE(producing_boost_model_generates_expected_types) {
     BOOST_CHECK(m.primitives().empty());
     BOOST_CHECK(m.enumerations().empty());
     BOOST_CHECK(!m.modules().empty());
-    BOOST_CHECK(m.dependencies().empty());
+    BOOST_CHECK(m.references().empty());
     BOOST_CHECK(m.leaves().empty());
-    BOOST_CHECK(m.external_module_path().empty());
+    BOOST_CHECK(m.name().external_module_path().empty());
 }
 
 BOOST_AUTO_TEST_CASE(producing_std_model_generates_expected_types) {
@@ -82,7 +82,7 @@ BOOST_AUTO_TEST_CASE(producing_std_model_generates_expected_types) {
 
     const auto m(dogen::sml::std_model_factory::create());
     BOOST_LOG_SEV(lg, debug) << m;
-    BOOST_CHECK(m.name() == std_model);
+    BOOST_CHECK(m.name().model_name() == std_model);
     BOOST_CHECK(m.is_system() == true);
 
     const auto& objects(m.objects());
@@ -105,9 +105,9 @@ BOOST_AUTO_TEST_CASE(producing_std_model_generates_expected_types) {
 
     BOOST_CHECK(m.enumerations().empty());
     BOOST_CHECK(m.modules().empty());
-    BOOST_CHECK(m.dependencies().empty());
+    BOOST_CHECK(m.references().empty());
     BOOST_CHECK(m.leaves().empty());
-    BOOST_CHECK(m.external_module_path().empty());
+    BOOST_CHECK(m.name().external_module_path().empty());
 }
 
 BOOST_AUTO_TEST_CASE(producing_primitive_model_generates_expected_types) {
@@ -115,7 +115,7 @@ BOOST_AUTO_TEST_CASE(producing_primitive_model_generates_expected_types) {
 
     const auto m(dogen::sml::primitive_model_factory::create());
     BOOST_LOG_SEV(lg, debug) << m;
-    BOOST_CHECK(m.name() == primitive_model);
+    BOOST_CHECK(m.name().model_name() == primitive_model);
     BOOST_CHECK(m.is_system() == true);
 
     BOOST_CHECK(m.objects().empty());
@@ -130,9 +130,9 @@ BOOST_AUTO_TEST_CASE(producing_primitive_model_generates_expected_types) {
 
     BOOST_CHECK(m.enumerations().empty());
     BOOST_CHECK(m.modules().empty());
-    BOOST_CHECK(m.dependencies().empty());
+    BOOST_CHECK(m.references().empty());
     BOOST_CHECK(m.leaves().empty());
-    BOOST_CHECK(m.external_module_path().empty());
+    BOOST_CHECK(m.name().external_module_path().empty());
 }
 
 BOOST_AUTO_TEST_SUITE_END()

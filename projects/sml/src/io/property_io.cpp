@@ -64,11 +64,11 @@ namespace sml {
 std::ostream& operator<<(std::ostream& s, const property& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::sml::property\"" << ", "
-      << "\"name\": " << "\"" << tidy_up_string(v.name()) << "\"" << ", "
-      << "\"type_name\": " << v.type_name() << ", "
-      << "\"default_value\": " << "\"" << tidy_up_string(v.default_value()) << "\"" << ", "
       << "\"documentation\": " << "\"" << tidy_up_string(v.documentation()) << "\"" << ", "
-      << "\"implementation_specific_parameters\": " << v.implementation_specific_parameters()
+      << "\"implementation_specific_parameters\": " << v.implementation_specific_parameters() << ", "
+      << "\"name\": " << "\"" << tidy_up_string(v.name()) << "\"" << ", "
+      << "\"type\": " << v.type() << ", "
+      << "\"default_value\": " << "\"" << tidy_up_string(v.default_value()) << "\""
       << " }";
     return(s);
 }

@@ -40,7 +40,6 @@
 #include "dogen/sml/types/primitive_model_factory.hpp"
 #include "dogen/sml/types/property.hpp"
 #include "dogen/sml/types/qname.hpp"
-#include "dogen/sml/types/reference.hpp"
 #include "dogen/sml/types/repository.hpp"
 #include "dogen/sml/types/resolution_error.hpp"
 #include "dogen/sml/types/resolver.hpp"

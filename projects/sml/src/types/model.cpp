@@ -34,15 +34,16 @@ namespace dogen {
 namespace sml {
 
 model::model()
-    : is_system_(static_cast<bool>(0)) { }
+    : generation_type_(static_cast<dogen::sml::generation_types>(0)),
+      is_system_(static_cast<bool>(0)) { }
 
 model::model(
     const std::string& documentation,
     const std::vector<std::pair<std::string, std::string> >& implementation_specific_parameters,
-    const std::string& name,
-    const std::list<std::string>& external_module_path,
+    const dogen::sml::qname& name,
+    const dogen::sml::generation_types& generation_type,
     const bool is_system,
-    const std::unordered_map<std::string, dogen::sml::reference>& dependencies,
+    const std::unordered_set<dogen::sml::qname>& references,
     const std::unordered_set<dogen::sml::qname>& leaves,
     const std::unordered_map<dogen::sml::qname, dogen::sml::module>& modules,
     const std::unordered_map<dogen::sml::qname, dogen::sml::concept>& concepts,
@@ -52,9 +53,9 @@ model::model(
     : documentation_(documentation),
       implementation_specific_parameters_(implementation_specific_parameters),
       name_(name),
-      external_module_path_(external_module_path),
+      generation_type_(generation_type),
       is_system_(is_system),
-      dependencies_(dependencies),
+      references_(references),
       leaves_(leaves),
       modules_(modules),
       concepts_(concepts),
@@ -67,9 +68,9 @@ void model::swap(model& other) noexcept {
     swap(documentation_, other.documentation_);
     swap(implementation_specific_parameters_, other.implementation_specific_parameters_);
     swap(name_, other.name_);
-    swap(external_module_path_, other.external_module_path_);
+    swap(generation_type_, other.generation_type_);
     swap(is_system_, other.is_system_);
-    swap(dependencies_, other.dependencies_);
+    swap(references_, other.references_);
     swap(leaves_, other.leaves_);
     swap(modules_, other.modules_);
     swap(concepts_, other.concepts_);
@@ -82,9 +83,9 @@ bool model::operator==(const model& rhs) const {
     return documentation_ == rhs.documentation_ &&
         implementation_specific_parameters_ == rhs.implementation_specific_parameters_ &&
         name_ == rhs.name_ &&
-        external_module_path_ == rhs.external_module_path_ &&
+        generation_type_ == rhs.generation_type_ &&
         is_system_ == rhs.is_system_ &&
-        dependencies_ == rhs.dependencies_ &&
+        references_ == rhs.references_ &&
         leaves_ == rhs.leaves_ &&
         modules_ == rhs.modules_ &&
         concepts_ == rhs.concepts_ &&
@@ -131,36 +132,28 @@ void model::implementation_specific_parameters(const std::vector<std::pair<std::
     implementation_specific_parameters_ = std::move(v);
 }
 
-const std::string& model::name() const {
+const dogen::sml::qname& model::name() const {
     return name_;
 }
 
-std::string& model::name() {
+dogen::sml::qname& model::name() {
     return name_;
 }
 
-void model::name(const std::string& v) {
+void model::name(const dogen::sml::qname& v) {
     name_ = v;
 }
 
-void model::name(const std::string&& v) {
+void model::name(const dogen::sml::qname&& v) {
     name_ = std::move(v);
 }
 
-const std::list<std::string>& model::external_module_path() const {
-    return external_module_path_;
+dogen::sml::generation_types model::generation_type() const {
+    return generation_type_;
 }
 
-std::list<std::string>& model::external_module_path() {
-    return external_module_path_;
-}
-
-void model::external_module_path(const std::list<std::string>& v) {
-    external_module_path_ = v;
-}
-
-void model::external_module_path(const std::list<std::string>&& v) {
-    external_module_path_ = std::move(v);
+void model::generation_type(const dogen::sml::generation_types& v) {
+    generation_type_ = v;
 }
 
 bool model::is_system() const {
@@ -171,20 +164,20 @@ void model::is_system(const bool v) {
     is_system_ = v;
 }
 
-const std::unordered_map<std::string, dogen::sml::reference>& model::dependencies() const {
-    return dependencies_;
+const std::unordered_set<dogen::sml::qname>& model::references() const {
+    return references_;
 }
 
-std::unordered_map<std::string, dogen::sml::reference>& model::dependencies() {
-    return dependencies_;
+std::unordered_set<dogen::sml::qname>& model::references() {
+    return references_;
 }
 
-void model::dependencies(const std::unordered_map<std::string, dogen::sml::reference>& v) {
-    dependencies_ = v;
+void model::references(const std::unordered_set<dogen::sml::qname>& v) {
+    references_ = v;
 }
 
-void model::dependencies(const std::unordered_map<std::string, dogen::sml::reference>&& v) {
-    dependencies_ = std::move(v);
+void model::references(const std::unordered_set<dogen::sml::qname>&& v) {
+    references_ = std::move(v);
 }
 
 const std::unordered_set<dogen::sml::qname>& model::leaves() const {

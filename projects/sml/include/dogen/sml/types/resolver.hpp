@@ -26,11 +26,10 @@
 #endif
 
 #include <list>
-#include <unordered_map>
-#include "dogen/sml/types/nested_qname.hpp"
-#include "dogen/sml/types/reference.hpp"
-#include "dogen/sml/types/abstract_object.hpp"
 #include "dogen/sml/types/model.hpp"
+#include "dogen/sml/types/qname.hpp"
+#include "dogen/sml/types/concept.hpp"
+#include "dogen/sml/types/abstract_object.hpp"
 
 namespace dogen {
 namespace sml {
@@ -97,11 +96,6 @@ private:
     void validate_refinements(const concept& c) const;
 
     /**
-     * @brief Resolve model references.
-     */
-    void resolve_references();
-
-    /**
      * @brief Resolution must not yet have taken place.
      */
     void require_not_has_resolved() const;
@@ -124,13 +118,6 @@ public:
     bool has_resolved() const { return has_resolved_; }
 
     /**
-     * @brief Add a reference to a dependent model.
-     *
-     * @pre Resolution has not been performed yet.
-     */
-    void add_reference(const reference& ref);
-
-    /**
      * @brief Resolve all references to types within model.
      *
      * @pre Resolution has not been performed yet.
@@ -140,7 +127,6 @@ public:
 private:
     model& model_;
     bool has_resolved_;
-    std::unordered_map<std::string, reference> references_;
 };
 
 } }

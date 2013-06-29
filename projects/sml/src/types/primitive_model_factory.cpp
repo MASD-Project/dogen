@@ -47,7 +47,7 @@ namespace sml {
 
 primitive primitive_model_factory::create_primitive(const std::string& name) {
     qname q;
-    q.type_name(name);
+    q.simple_name(name);
     q.meta_type(meta_types::primitive);
 
     primitive r;
@@ -57,8 +57,11 @@ primitive primitive_model_factory::create_primitive(const std::string& name) {
 }
 
 model primitive_model_factory::create() {
+    qname qn;
+    qn.model_name(model_name);
+
     model r;
-    r.name(model_name);
+    r.name(qn);
     r.is_system(true);
 
     const auto lambda([&](const std::string& name){

@@ -47,7 +47,7 @@ void save(Archive& ar,
     ar << make_nvp("model_name", v.model_name_);
     ar << make_nvp("external_module_path", v.external_module_path_);
     ar << make_nvp("module_path", v.module_path_);
-    ar << make_nvp("type_name", v.type_name_);
+    ar << make_nvp("simple_name", v.simple_name_);
     ar << make_nvp("meta_type", v.meta_type_);
 }
 
@@ -58,7 +58,7 @@ void load(Archive& ar,
     ar >> make_nvp("model_name", v.model_name_);
     ar >> make_nvp("external_module_path", v.external_module_path_);
     ar >> make_nvp("module_path", v.module_path_);
-    ar >> make_nvp("type_name", v.type_name_);
+    ar >> make_nvp("simple_name", v.simple_name_);
     ar >> make_nvp("meta_type", v.meta_type_);
 }
 

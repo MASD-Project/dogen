@@ -24,11 +24,11 @@
 #include "dogen/sml/io/abstract_object_io.hpp"
 #include "dogen/sml/io/concept_io.hpp"
 #include "dogen/sml/io/enumeration_io.hpp"
+#include "dogen/sml/io/generation_types_io.hpp"
 #include "dogen/sml/io/model_io.hpp"
 #include "dogen/sml/io/module_io.hpp"
 #include "dogen/sml/io/primitive_io.hpp"
 #include "dogen/sml/io/qname_io.hpp"
-#include "dogen/sml/io/reference_io.hpp"
 
 
 inline std::string tidy_up_string(std::string s) {
@@ -60,38 +60,6 @@ inline std::ostream& operator<<(std::ostream& s, const std::vector<std::pair<std
         s << *i;
     }
     s << "] ";
-    return s;
-}
-
-}
-
-namespace std {
-
-inline std::ostream& operator<<(std::ostream& s, const std::list<std::string>& v) {
-    s << "[ ";
-    for (auto i(v.begin()); i != v.end(); ++i) {
-        if (i != v.begin()) s << ", ";
-        s << "\"" << tidy_up_string(*i) << "\"";
-    }
-    s << "] ";
-    return s;
-}
-
-}
-
-namespace std {
-
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, dogen::sml::reference>& v) {
-    s << "[";
-    for (auto i(v.begin()); i != v.end(); ++i) {
-        if (i != v.begin()) s << ", ";
-        s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
-        s << "\"" << tidy_up_string(i->first) << "\"";
-        s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
-        s << i->second;
-        s << " } ]";
-    }
-    s << " ] ";
     return s;
 }
 
@@ -231,10 +199,10 @@ std::ostream& operator<<(std::ostream& s, const model& v) {
       << "\"__type__\": " << "\"dogen::sml::model\"" << ", "
       << "\"documentation\": " << "\"" << tidy_up_string(v.documentation()) << "\"" << ", "
       << "\"implementation_specific_parameters\": " << v.implementation_specific_parameters() << ", "
-      << "\"name\": " << "\"" << tidy_up_string(v.name()) << "\"" << ", "
-      << "\"external_module_path\": " << v.external_module_path() << ", "
+      << "\"name\": " << v.name() << ", "
+      << "\"generation_type\": " << v.generation_type() << ", "
       << "\"is_system\": " << v.is_system() << ", "
-      << "\"dependencies\": " << v.dependencies() << ", "
+      << "\"references\": " << v.references() << ", "
       << "\"leaves\": " << v.leaves() << ", "
       << "\"modules\": " << v.modules() << ", "
       << "\"concepts\": " << v.concepts() << ", "

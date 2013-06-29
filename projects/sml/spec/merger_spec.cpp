@@ -78,7 +78,7 @@ BOOST_AUTO_TEST_CASE(merging_n_distinct_models_with_one_object_each_results_in_n
     std::set<std::string> model_names;
     for (const auto& pair : combined.objects()) {
         const auto& qn(pair.first);
-        object_names.insert(qn.model_name() + "_" + qn.type_name());
+        object_names.insert(qn.model_name() + "_" + qn.simple_name());
         model_names.insert(qn.model_name());
     }
 
@@ -125,7 +125,7 @@ BOOST_AUTO_TEST_CASE(merging_empty_model_results_in_empty_merged_model) {
 BOOST_AUTO_TEST_CASE(type_with_incorrect_model_name_throws) {
     SETUP_TEST_LOG("type_with_incorrect_model_name_throws");
     auto m(mock_model_factory::build_single_type_model());
-    m.name(invalid_model_name);
+    m.name().model_name(invalid_model_name);
 
     dogen::sml::merger mg;
     mg.add_target(m);
@@ -138,7 +138,7 @@ BOOST_AUTO_TEST_CASE(type_with_inconsistent_key_value_pair_throws) {
     SETUP_TEST_LOG("type_with_inconsistent_key_value_pair_throws");
 
     auto m(mock_model_factory::build_multi_type_model(0, 2));
-    m.objects().begin()->second->name().type_name(invalid_type_name);
+    m.objects().begin()->second->name().simple_name(invalid_type_name);
 
     dogen::sml::merger mg;
     mg.add_target(m);

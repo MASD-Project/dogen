@@ -88,7 +88,7 @@ boost::shared_ptr<abstract_object> injector::create_key(const qname& qn,
     const bool versioned) const {
 
     qname kqn;
-    kqn.type_name(qn.type_name() + "_" +
+    kqn.simple_name(qn.simple_name() + "_" +
         (versioned ? versioned_name : unversioned_name));
     kqn.model_name(qn.model_name());
     kqn.module_path(qn.module_path());
@@ -103,14 +103,14 @@ boost::shared_ptr<abstract_object> injector::create_key(const qname& qn,
     r->type(versioned ? vk : uvk);
 
     const auto doc(versioned ? versioned_key_doc : unversioned_key_doc);
-    r->documentation(doc + qn.type_name());
+    r->documentation(doc + qn.simple_name());
 
     r->properties(properties);
 
     if (versioned)
         inject_version(*r);
 
-    BOOST_LOG_SEV(lg, debug) << "Created key: " << kqn.type_name();
+    BOOST_LOG_SEV(lg, debug) << "Created key: " << kqn.simple_name();
     return r;
 }
 
@@ -179,7 +179,7 @@ void injector::inject_version(abstract_object& p) const {
                              << p.name();
 
     qname qn;
-    qn.type_name(uint_name);
+    qn.simple_name(uint_name);
     qn.meta_type(meta_types::primitive);
 
     nested_qname nqn;
@@ -187,7 +187,7 @@ void injector::inject_version(abstract_object& p) const {
 
     property v;
     v.name(version_name);
-    v.type_name(nqn);
+    v.type(nqn);
     v.documentation(versioned_property_doc);
 
     p.properties().push_back(v);

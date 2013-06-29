@@ -24,86 +24,38 @@ namespace dogen {
 namespace sml {
 
 property::property(
-    const std::string& name,
-    const dogen::sml::nested_qname& type_name,
-    const std::string& default_value,
     const std::string& documentation,
-    const std::vector<std::pair<std::string, std::string> >& implementation_specific_parameters)
-    : name_(name),
-      type_name_(type_name),
-      default_value_(default_value),
-      documentation_(documentation),
-      implementation_specific_parameters_(implementation_specific_parameters) { }
+    const std::vector<std::pair<std::string, std::string> >& implementation_specific_parameters,
+    const std::string& name,
+    const dogen::sml::nested_qname& type,
+    const std::string& default_value)
+    : documentation_(documentation),
+      implementation_specific_parameters_(implementation_specific_parameters),
+      name_(name),
+      type_(type),
+      default_value_(default_value) { }
 
 void property::swap(property& other) noexcept {
     using std::swap;
-    swap(name_, other.name_);
-    swap(type_name_, other.type_name_);
-    swap(default_value_, other.default_value_);
     swap(documentation_, other.documentation_);
     swap(implementation_specific_parameters_, other.implementation_specific_parameters_);
+    swap(name_, other.name_);
+    swap(type_, other.type_);
+    swap(default_value_, other.default_value_);
 }
 
 bool property::operator==(const property& rhs) const {
-    return name_ == rhs.name_ &&
-        type_name_ == rhs.type_name_ &&
-        default_value_ == rhs.default_value_ &&
-        documentation_ == rhs.documentation_ &&
-        implementation_specific_parameters_ == rhs.implementation_specific_parameters_;
+    return documentation_ == rhs.documentation_ &&
+        implementation_specific_parameters_ == rhs.implementation_specific_parameters_ &&
+        name_ == rhs.name_ &&
+        type_ == rhs.type_ &&
+        default_value_ == rhs.default_value_;
 }
 
 property& property::operator=(property other) {
     using std::swap;
     swap(*this, other);
     return *this;
-}
-
-const std::string& property::name() const {
-    return name_;
-}
-
-std::string& property::name() {
-    return name_;
-}
-
-void property::name(const std::string& v) {
-    name_ = v;
-}
-
-void property::name(const std::string&& v) {
-    name_ = std::move(v);
-}
-
-const dogen::sml::nested_qname& property::type_name() const {
-    return type_name_;
-}
-
-dogen::sml::nested_qname& property::type_name() {
-    return type_name_;
-}
-
-void property::type_name(const dogen::sml::nested_qname& v) {
-    type_name_ = v;
-}
-
-void property::type_name(const dogen::sml::nested_qname&& v) {
-    type_name_ = std::move(v);
-}
-
-const std::string& property::default_value() const {
-    return default_value_;
-}
-
-std::string& property::default_value() {
-    return default_value_;
-}
-
-void property::default_value(const std::string& v) {
-    default_value_ = v;
-}
-
-void property::default_value(const std::string&& v) {
-    default_value_ = std::move(v);
 }
 
 const std::string& property::documentation() const {
@@ -136,6 +88,54 @@ void property::implementation_specific_parameters(const std::vector<std::pair<st
 
 void property::implementation_specific_parameters(const std::vector<std::pair<std::string, std::string> >&& v) {
     implementation_specific_parameters_ = std::move(v);
+}
+
+const std::string& property::name() const {
+    return name_;
+}
+
+std::string& property::name() {
+    return name_;
+}
+
+void property::name(const std::string& v) {
+    name_ = v;
+}
+
+void property::name(const std::string&& v) {
+    name_ = std::move(v);
+}
+
+const dogen::sml::nested_qname& property::type() const {
+    return type_;
+}
+
+dogen::sml::nested_qname& property::type() {
+    return type_;
+}
+
+void property::type(const dogen::sml::nested_qname& v) {
+    type_ = v;
+}
+
+void property::type(const dogen::sml::nested_qname&& v) {
+    type_ = std::move(v);
+}
+
+const std::string& property::default_value() const {
+    return default_value_;
+}
+
+std::string& property::default_value() {
+    return default_value_;
+}
+
+void property::default_value(const std::string& v) {
+    default_value_ = v;
+}
+
+void property::default_value(const std::string&& v) {
+    default_value_ = std::move(v);
 }
 
 } }

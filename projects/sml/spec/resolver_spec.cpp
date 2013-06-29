@@ -39,8 +39,6 @@ namespace {
 const std::string test_module("sml");
 const std::string test_suite("resolver_spec");
 
-const std::string invalid_model_name("INVALID");
-const std::string invalid_type_name("INVALID");
 const std::string zero_postfix("_0");
 const std::string one_postfix("_1");
 const std::string two_postfix("_2");
@@ -62,15 +60,15 @@ bool is_model_one(const dogen::sml::qname& qn) {
 }
 
 bool is_type_zero(const dogen::sml::qname& qn) {
-    return mock_model_factory::type_name(0) == qn.type_name();
+    return mock_model_factory::type_name(0) == qn.simple_name();
 }
 
 bool is_type_one(const dogen::sml::qname& qn) {
-    return mock_model_factory::type_name(1) == qn.type_name();
+    return mock_model_factory::type_name(1) == qn.simple_name();
 }
 
 bool is_type_two(const dogen::sml::qname& qn) {
-    return mock_model_factory::type_name(2) == qn.type_name();
+    return mock_model_factory::type_name(2) == qn.simple_name();
 }
 
 bool is_value_object(const dogen::sml::qname& qn) {
@@ -114,9 +112,9 @@ BOOST_AUTO_TEST_CASE(object_with_property_type_in_the_same_model_resolves_succes
             BOOST_CHECK(o.properties().size() == 1);
             const auto& prop(o.properties().front());
             BOOST_LOG_SEV(lg, debug) << "property: " << prop;
-            BOOST_CHECK(is_type_one(prop.type_name().type()));
-            BOOST_CHECK(is_model_zero(prop.type_name().type()));
-            BOOST_CHECK(is_value_object(prop.type_name().type()));
+            BOOST_CHECK(is_type_one(prop.type().type()));
+            BOOST_CHECK(is_model_zero(prop.type().type()));
+            BOOST_CHECK(is_value_object(prop.type().type()));
         }
     }
     BOOST_CHECK(found);
@@ -149,9 +147,9 @@ BOOST_AUTO_TEST_CASE(object_with_property_type_in_different_model_results_in_suc
             const auto& prop(o.properties().front());
             BOOST_LOG_SEV(lg, debug) << "property: " << prop;
 
-            BOOST_CHECK(is_type_one(prop.type_name().type()));
-            BOOST_CHECK(is_model_one(prop.type_name().type()));
-            BOOST_CHECK(is_value_object(prop.type_name().type()));
+            BOOST_CHECK(is_type_one(prop.type().type()));
+            BOOST_CHECK(is_model_one(prop.type().type()));
+            BOOST_CHECK(is_value_object(prop.type().type()));
         }
     }
     BOOST_CHECK(found);

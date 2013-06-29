@@ -55,7 +55,7 @@ boost_model_factory::create_value_object(const std::string& name,
     const std::list<std::string> &module_path, value_object_types t) {
 
     qname q;
-    q.type_name(name);
+    q.simple_name(name);
     q.meta_type(meta_types::value_object);
     q.model_name(model_name);
     q.module_path(module_path);
@@ -76,7 +76,7 @@ module boost_model_factory::create_module(const std::string& name,
     const std::list<std::string>& module_path) {
     qname qn;
     qn.model_name(model_name);
-    qn.type_name(name);
+    qn.simple_name(name);
     qn.module_path(module_path);
 
     module r;
@@ -87,8 +87,11 @@ module boost_model_factory::create_module(const std::string& name,
 
 model boost_model_factory::create() {
     using namespace sml;
+    qname qn;
+    qn.model_name(model_name);
+
     model r;
-    r.name(model_name);
+    r.name(qn);
     r.is_system(true);
 
     const auto pi([&](const std::string& name,

@@ -34,7 +34,6 @@
 #include "dogen/sml/serialization/primitive_ser.hpp"
 #include "dogen/sml/serialization/property_ser.hpp"
 #include "dogen/sml/serialization/qname_ser.hpp"
-#include "dogen/sml/serialization/reference_ser.hpp"
 #include "dogen/sml/serialization/registrar_ser.hpp"
 #include "dogen/sml/serialization/repository_ser.hpp"
 #include "dogen/sml/serialization/service_ser.hpp"

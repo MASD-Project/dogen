@@ -33,6 +33,9 @@ std::ostream& operator<<(std::ostream& s, const meta_types& v) {
     case meta_types::invalid:
         attr = "\"invalid\"";
         break;
+    case meta_types::model:
+        attr = "\"model\"";
+        break;
     case meta_types::enumeration:
         attr = "\"enumeration\"";
         break;

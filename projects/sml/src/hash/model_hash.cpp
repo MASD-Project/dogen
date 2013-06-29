@@ -21,11 +21,11 @@
 #include "dogen/sml/hash/abstract_object_hash.hpp"
 #include "dogen/sml/hash/concept_hash.hpp"
 #include "dogen/sml/hash/enumeration_hash.hpp"
+#include "dogen/sml/hash/generation_types_hash.hpp"
 #include "dogen/sml/hash/model_hash.hpp"
 #include "dogen/sml/hash/module_hash.hpp"
 #include "dogen/sml/hash/primitive_hash.hpp"
 #include "dogen/sml/hash/qname_hash.hpp"
-#include "dogen/sml/hash/reference_hash.hpp"
 
 namespace {
 
@@ -48,23 +48,6 @@ inline std::size_t hash_std_vector_std_pair_std_string_std_string_(const std::ve
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, hash_std_pair_std_string_std_string(i));
-    }
-    return seed;
-}
-
-inline std::size_t hash_std_list_std_string(const std::list<std::string>& v){
-    std::size_t seed(0);
-    for (const auto i : v) {
-        combine(seed, i);
-    }
-    return seed;
-}
-
-inline std::size_t hash_std_unordered_map_std_string_dogen_sml_reference(const std::unordered_map<std::string, dogen::sml::reference>& v){
-    std::size_t seed(0);
-    for (const auto i : v) {
-        combine(seed, i.first);
-        combine(seed, i.second);
     }
     return seed;
 }
@@ -139,9 +122,9 @@ std::size_t model_hasher::hash(const model&v) {
     combine(seed, v.documentation());
     combine(seed, hash_std_vector_std_pair_std_string_std_string_(v.implementation_specific_parameters()));
     combine(seed, v.name());
-    combine(seed, hash_std_list_std_string(v.external_module_path()));
+    combine(seed, v.generation_type());
     combine(seed, v.is_system());
-    combine(seed, hash_std_unordered_map_std_string_dogen_sml_reference(v.dependencies()));
+    combine(seed, hash_std_unordered_set_dogen_sml_qname(v.references()));
     combine(seed, hash_std_unordered_set_dogen_sml_qname(v.leaves()));
     combine(seed, hash_std_unordered_map_dogen_sml_qname_dogen_sml_module(v.modules()));
     combine(seed, hash_std_unordered_map_dogen_sml_qname_dogen_sml_concept(v.concepts()));

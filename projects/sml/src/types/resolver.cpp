@@ -56,7 +56,6 @@ const std::string empty;
 const std::string orphan_object("Object's parent could not be located: ");
 const std::string orphan_concept("Refined concept could not be located: ");
 const std::string undefined_type("Object has property with undefined type: ");
-const std::string missing_dependency("Cannot find dependency: ");
 const std::string model_resolved("Resolution has already been done for model");
 
 typedef boost::error_info<struct tag_errmsg, std::string> errmsg_info;
@@ -73,8 +72,8 @@ bool operator<(const qname& lhs, const qname& rhs) {
         (lhs.model_name() == rhs.model_name() &&
             (lhs.external_module_path() < rhs.external_module_path() ||
                 (lhs.external_module_path() == rhs.external_module_path() &&
-                    (lhs.type_name() < rhs.type_name() ||
-                        (lhs.type_name() == rhs.type_name() &&
+                    (lhs.simple_name() < rhs.simple_name() ||
+                        (lhs.simple_name() == rhs.simple_name() &&
                             lhs.meta_type() < rhs.meta_type())))));
 }
 
@@ -87,7 +86,7 @@ expand_concept_hierarchy(const qname& qn, std::list<qname>& concepts) const {
     if (i == model_.concepts().end()) {
         std::ostringstream stream;
         stream << orphan_concept << ". concept: "
-               << qn.type_name() << " could not be found.";
+               << qn.simple_name() << " could not be found.";
 
         BOOST_LOG_SEV(lg, error) << stream.str();
         BOOST_THROW_EXCEPTION(resolution_error(stream.str()));
@@ -109,8 +108,8 @@ void resolver::validate_inheritance_graph(const abstract_object& ao) const {
         const auto i(model_.objects().find(pqn));
         if (i == model_.objects().end()) {
             std::ostringstream s;
-            s << orphan_object << ": " << ao.name().type_name()
-              << ". parent: " << pqn.type_name();
+            s << orphan_object << ": " << ao.name().simple_name()
+              << ". parent: " << pqn.simple_name();
 
             BOOST_LOG_SEV(lg, error) << s.str();
             BOOST_THROW_EXCEPTION(resolution_error(s.str()));
@@ -125,8 +124,8 @@ void resolver::validate_refinements(const concept& c) const {
         if (i == model_.concepts().end()) {
             std::ostringstream stream;
             stream << orphan_concept << ". concept: "
-                   << c.name().type_name() << ". refined concept: "
-                   << qn.type_name();
+                   << c.name().simple_name() << ". refined concept: "
+                   << qn.simple_name();
 
             BOOST_LOG_SEV(lg, error) << stream.str();
             BOOST_THROW_EXCEPTION(resolution_error(stream.str()));
@@ -145,15 +144,14 @@ qname resolver::resolve_partial_type(const qname& n) const {
         return r;
 
     // then try setting module path to the target one
-    r.external_module_path(model_.external_module_path());
+    r.external_module_path(model_.name().external_module_path());
     i = objects.find(r);
     if (i != objects.end())
         return r;
 
     // now try all available module paths from references
-    for (const auto& pair : references_) {
-        const auto ref(pair.second);
-        r.external_module_path(ref.external_module_path());
+    for (const auto& qn : model_.references()) {
+        r.external_module_path(qn.external_module_path());
         i = objects.find(r);
         if (i != objects.end())
             return r;
@@ -177,15 +175,14 @@ qname resolver::resolve_partial_type(const qname& n) const {
         return r;
 
     // then try setting module path to the target one
-    r.external_module_path(model_.external_module_path());
+    r.external_module_path(model_.name().external_module_path());
     k = enumerations.find(r);
     if (k != enumerations.end())
         return r;
 
     // now try all available module paths from references
-    for (const auto& pair : references_) {
-        const auto ref(pair.second);
-        r.external_module_path(ref.external_module_path());
+    for (const auto& qn : model_.references()) {
+        r.external_module_path(qn.external_module_path());
         k = enumerations.find(r);
         if (k != enumerations.end())
             return r;
@@ -194,8 +191,8 @@ qname resolver::resolve_partial_type(const qname& n) const {
     if (r.model_name().empty()) {
         // it could be a type defined in this model
         r.meta_type(meta_types::value_object);
-        r.model_name(model_.name());
-        r.external_module_path(model_.external_module_path());
+        r.model_name(model_.name().model_name());
+        r.external_module_path(model_.name().external_module_path());
         i = objects.find(r);
         if (i != objects.end())
             return r;
@@ -207,7 +204,7 @@ qname resolver::resolve_partial_type(const qname& n) const {
     }
 
     BOOST_LOG_SEV(lg, error) << undefined_type << n;
-    BOOST_THROW_EXCEPTION(resolution_error(undefined_type + n.type_name()));
+    BOOST_THROW_EXCEPTION(resolution_error(undefined_type + n.simple_name()));
 }
 
 void resolver::resolve_partial_type(nested_qname& n) const {
@@ -228,34 +225,20 @@ std::list<property> resolver::resolve_properties(const qname& owner,
 
     for (auto p : unresolved_properties) {
         try {
-            auto t(p.type_name());
+            auto t(p.type());
             resolve_partial_type(t);
-            p.type_name(t);
+            p.type(t);
             r.push_back(p);
         } catch (boost::exception& e) {
             std::ostringstream s;
-            s << "Owner type name: " << owner.type_name()
+            s << "Owner type name: " << owner.simple_name()
               << " Property name: " << p.name()
-              << " Property type: " << p.type_name();
+              << " Property type: " << p.type();
             e << errmsg_info(s.str());
             throw;
         }
     }
     return r;
-}
-
-void resolver::resolve_references() {
-    for (auto& pair : model_.dependencies()) {
-        auto& ref(pair.second);
-        const auto i(references_.find(ref.model_name()));
-
-        if (i == references_.end()) {
-            BOOST_LOG_SEV(lg, error) << missing_dependency << ref.model_name();
-            BOOST_THROW_EXCEPTION(
-                resolution_error(missing_dependency + ref.model_name()));
-        }
-        ref = i->second;
-    }
 }
 
 void resolver::require_not_has_resolved() const {
@@ -264,11 +247,6 @@ void resolver::require_not_has_resolved() const {
 
     BOOST_LOG_SEV(lg, error) << model_resolved;
     BOOST_THROW_EXCEPTION(resolution_error(model_resolved));
-}
-
-void resolver::add_reference(const reference& ref) {
-    require_not_has_resolved();
-    references_.insert(std::make_pair(ref.model_name(), ref));
 }
 
 void resolver::resolve_concepts() {
@@ -357,7 +335,6 @@ void resolver::resolve_objects() {
 
 void resolver::resolve() {
     require_not_has_resolved();
-    resolve_references();
     resolve_concepts();
     resolve_objects();
     has_resolved_ = true;

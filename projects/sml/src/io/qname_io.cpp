@@ -54,7 +54,7 @@ std::ostream& operator<<(std::ostream& s, const qname& v) {
       << "\"model_name\": " << "\"" << tidy_up_string(v.model_name()) << "\"" << ", "
       << "\"external_module_path\": " << v.external_module_path() << ", "
       << "\"module_path\": " << v.module_path() << ", "
-      << "\"type_name\": " << "\"" << tidy_up_string(v.type_name()) << "\"" << ", "
+      << "\"simple_name\": " << "\"" << tidy_up_string(v.simple_name()) << "\"" << ", "
       << "\"meta_type\": " << v.meta_type()
       << " }";
     return(s);

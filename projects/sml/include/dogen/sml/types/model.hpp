@@ -27,7 +27,6 @@
 
 #include <algorithm>
 #include <boost/shared_ptr.hpp>
-#include <list>
 #include <string>
 #include <unordered_map>
 #include <unordered_set>
@@ -38,16 +37,38 @@
 #include "dogen/sml/types/abstract_object_fwd.hpp"
 #include "dogen/sml/types/concept.hpp"
 #include "dogen/sml/types/enumeration.hpp"
+#include "dogen/sml/types/generation_types.hpp"
 #include "dogen/sml/types/module.hpp"
 #include "dogen/sml/types/primitive.hpp"
 #include "dogen/sml/types/qname.hpp"
-#include "dogen/sml/types/reference.hpp"
 
 namespace dogen {
 namespace sml {
 
 /**
- * @brief Represents a domain model.
+ * @brief Software representation of a domain model.
+ *
+ * Wikipedia provides the following definition of a @e domain @e model,
+ * (slightly abbreviated and modified):
+ *
+ * <blockquote>
+ * A domain model is a conceptual model of all the topics
+ * related to a specific problem. It describes the various entities,
+ * their attributes, roles and relationships, plus the constraints that
+ * govern the problem domain.
+ *
+ * The domain model is created in order to represent the vocabulary and
+ * key concepts of the problem domain. An important advantage of a domain
+ * model is that it describes and constrains the scope of the problem
+ * domain. The domain model can be effectively used to verify and
+ * validate the understanding of the problem domain among various
+ * stakeholders. It defines a vocabulary and is helpful as a
+ * communication tool. It can add precision and focus to discussion among
+ * the business team as well as between the technical and business teams.
+ * </blockquote>
+ *
+ * The objective of the model class is to encompass all the key members
+ * of the domain model which have expression in code.
  */
 class model final {
 public:
@@ -62,10 +83,10 @@ public:
     model(
         const std::string& documentation,
         const std::vector<std::pair<std::string, std::string> >& implementation_specific_parameters,
-        const std::string& name,
-        const std::list<std::string>& external_module_path,
+        const dogen::sml::qname& name,
+        const dogen::sml::generation_types& generation_type,
         const bool is_system,
-        const std::unordered_map<std::string, dogen::sml::reference>& dependencies,
+        const std::unordered_set<dogen::sml::qname>& references,
         const std::unordered_set<dogen::sml::qname>& leaves,
         const std::unordered_map<dogen::sml::qname, dogen::sml::module>& modules,
         const std::unordered_map<dogen::sml::qname, dogen::sml::concept>& concepts,
@@ -106,27 +127,22 @@ public:
     /**@}*/
 
     /**
-     * @brief Name of the domain model.
-     *
-     * Must not contain spaces or any special character as its used to
-     * name folders in the file-system.
+     * @brief Fully qualified name.
      *
      */
     /**@{*/
-    const std::string& name() const;
-    std::string& name();
-    void name(const std::string& v);
-    void name(const std::string&& v);
+    const dogen::sml::qname& name() const;
+    dogen::sml::qname& name();
+    void name(const dogen::sml::qname& v);
+    void name(const dogen::sml::qname&& v);
     /**@}*/
 
     /**
-     * @brief Path of modules that contain this model.
+     * @brief What to do with this pod in terms of code generation,
      */
     /**@{*/
-    const std::list<std::string>& external_module_path() const;
-    std::list<std::string>& external_module_path();
-    void external_module_path(const std::list<std::string>& v);
-    void external_module_path(const std::list<std::string>&& v);
+    dogen::sml::generation_types generation_type() const;
+    void generation_type(const dogen::sml::generation_types& v);
     /**@}*/
 
     /**
@@ -144,13 +160,13 @@ public:
     /**@}*/
 
     /**
-     * @brief All other models that this model depends on - both system and user defined.
+     * @brief All other models that this model depends on.
      */
     /**@{*/
-    const std::unordered_map<std::string, dogen::sml::reference>& dependencies() const;
-    std::unordered_map<std::string, dogen::sml::reference>& dependencies();
-    void dependencies(const std::unordered_map<std::string, dogen::sml::reference>& v);
-    void dependencies(const std::unordered_map<std::string, dogen::sml::reference>&& v);
+    const std::unordered_set<dogen::sml::qname>& references() const;
+    std::unordered_set<dogen::sml::qname>& references();
+    void references(const std::unordered_set<dogen::sml::qname>& v);
+    void references(const std::unordered_set<dogen::sml::qname>&& v);
     /**@}*/
 
     /**
@@ -228,10 +244,10 @@ public:
 private:
     std::string documentation_;
     std::vector<std::pair<std::string, std::string> > implementation_specific_parameters_;
-    std::string name_;
-    std::list<std::string> external_module_path_;
+    dogen::sml::qname name_;
+    dogen::sml::generation_types generation_type_;
     bool is_system_;
-    std::unordered_map<std::string, dogen::sml::reference> dependencies_;
+    std::unordered_set<dogen::sml::qname> references_;
     std::unordered_set<dogen::sml::qname> leaves_;
     std::unordered_map<dogen::sml::qname, dogen::sml::module> modules_;
     std::unordered_map<dogen::sml::qname, dogen::sml::concept> concepts_;

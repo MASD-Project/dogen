@@ -45,22 +45,22 @@ template<typename Archive>
 void save(Archive& ar,
     const dogen::sml::property& v,
     const unsigned int /*version*/) {
-    ar << make_nvp("name", v.name_);
-    ar << make_nvp("type_name", v.type_name_);
-    ar << make_nvp("default_value", v.default_value_);
     ar << make_nvp("documentation", v.documentation_);
     ar << make_nvp("implementation_specific_parameters", v.implementation_specific_parameters_);
+    ar << make_nvp("name", v.name_);
+    ar << make_nvp("type", v.type_);
+    ar << make_nvp("default_value", v.default_value_);
 }
 
 template<typename Archive>
 void load(Archive& ar,
     dogen::sml::property& v,
     const unsigned int /*version*/) {
-    ar >> make_nvp("name", v.name_);
-    ar >> make_nvp("type_name", v.type_name_);
-    ar >> make_nvp("default_value", v.default_value_);
     ar >> make_nvp("documentation", v.documentation_);
     ar >> make_nvp("implementation_specific_parameters", v.implementation_specific_parameters_);
+    ar >> make_nvp("name", v.name_);
+    ar >> make_nvp("type", v.type_);
+    ar >> make_nvp("default_value", v.default_value_);
 }
 
 } }

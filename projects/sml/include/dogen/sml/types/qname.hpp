@@ -51,7 +51,7 @@ public:
         const std::string& model_name,
         const std::list<std::string>& external_module_path,
         const std::list<std::string>& module_path,
-        const std::string& type_name,
+        const std::string& simple_name,
         const dogen::sml::meta_types& meta_type);
 
 private:
@@ -63,7 +63,7 @@ private:
 
 public:
     /**
-     * @brief Model to which the type belongs to.
+     * @brief Model to which the modeling element belongs to.
      */
     /**@{*/
     const std::string& model_name() const;
@@ -73,7 +73,8 @@ public:
     /**@}*/
 
     /**
-     * @brief Path of modules that contain the model from where the type came from.
+     * @brief Path of modules that contain the model from where the modeling element
+     * came from.
      */
     /**@{*/
     const std::list<std::string>& external_module_path() const;
@@ -83,7 +84,7 @@ public:
     /**@}*/
 
     /**
-     * @brief Path of modules that contain this type.
+     * @brief Path of modules that contain this modeling element.
      */
     /**@{*/
     const std::list<std::string>& module_path() const;
@@ -93,19 +94,17 @@ public:
     /**@}*/
 
     /**
-     * @brief Non-qualified type name.
+     * @brief Non-qualified name of the modeling element.
      */
     /**@{*/
-    const std::string& type_name() const;
-    std::string& type_name();
-    void type_name(const std::string& v);
-    void type_name(const std::string&& v);
+    const std::string& simple_name() const;
+    std::string& simple_name();
+    void simple_name(const std::string& v);
+    void simple_name(const std::string&& v);
     /**@}*/
 
     /**
-     * @brief Type of the type (e.g. its meta-type).
-     *
-     * This is only needed because we don't have a type base class.
+     * @brief Type of the modeling element.
      */
     /**@{*/
     dogen::sml::meta_types meta_type() const;
@@ -126,7 +125,7 @@ private:
     std::string model_name_;
     std::list<std::string> external_module_path_;
     std::list<std::string> module_path_;
-    std::string type_name_;
+    std::string simple_name_;
     dogen::sml::meta_types meta_type_;
 };
 

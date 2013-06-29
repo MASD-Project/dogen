@@ -36,7 +36,7 @@ namespace dogen {
 namespace sml {
 
 /**
- * @brief Memberof a pod that provides a mechanism to read and write values of a type.
+ * @brief Represents an attribute in an object.
  */
 class property final {
 public:
@@ -47,11 +47,11 @@ public:
 
 public:
     property(
-        const std::string& name,
-        const dogen::sml::nested_qname& type_name,
-        const std::string& default_value,
         const std::string& documentation,
-        const std::vector<std::pair<std::string, std::string> >& implementation_specific_parameters);
+        const std::vector<std::pair<std::string, std::string> >& implementation_specific_parameters,
+        const std::string& name,
+        const dogen::sml::nested_qname& type,
+        const std::string& default_value);
 
 private:
     template<typename Archive>
@@ -61,6 +61,30 @@ private:
     friend void boost::serialization::load(Archive& ar, property& v, unsigned int version);
 
 public:
+    /**
+     * @brief Code comments.
+     *
+     * These are expected to follow the grammer of the comment processing tools
+     * of the programming language in question, e.g. Doxygen for C++, JavaDoc
+     * for Java, etc.
+     */
+    /**@{*/
+    const std::string& documentation() const;
+    std::string& documentation();
+    void documentation(const std::string& v);
+    void documentation(const std::string&& v);
+    /**@}*/
+
+    /**
+     * @brief Associated generic parameters which may be opaque.
+     */
+    /**@{*/
+    const std::vector<std::pair<std::string, std::string> >& implementation_specific_parameters() const;
+    std::vector<std::pair<std::string, std::string> >& implementation_specific_parameters();
+    void implementation_specific_parameters(const std::vector<std::pair<std::string, std::string> >& v);
+    void implementation_specific_parameters(const std::vector<std::pair<std::string, std::string> >&& v);
+    /**@}*/
+
     /**
      * @brief Name of the property.
      *
@@ -74,43 +98,26 @@ public:
     /**@}*/
 
     /**
-     * @brief Type name for the property.
+     * @brief Qualified name for the type of the property.
      */
     /**@{*/
-    const dogen::sml::nested_qname& type_name() const;
-    dogen::sml::nested_qname& type_name();
-    void type_name(const dogen::sml::nested_qname& v);
-    void type_name(const dogen::sml::nested_qname&& v);
+    const dogen::sml::nested_qname& type() const;
+    dogen::sml::nested_qname& type();
+    void type(const dogen::sml::nested_qname& v);
+    void type(const dogen::sml::nested_qname&& v);
     /**@}*/
 
     /**
      * @brief Default value of the property.
+     *
+     * Only valid if the property has a primitive type. Must be a valid string
+     * representation of the primitive type.
      */
     /**@{*/
     const std::string& default_value() const;
     std::string& default_value();
     void default_value(const std::string& v);
     void default_value(const std::string&& v);
-    /**@}*/
-
-    /**
-     * @brief Doxygen documentation for the type.
-     */
-    /**@{*/
-    const std::string& documentation() const;
-    std::string& documentation();
-    void documentation(const std::string& v);
-    void documentation(const std::string&& v);
-    /**@}*/
-
-    /**
-     * @brief Parameters associated with the property which are opaque to SML.
-     */
-    /**@{*/
-    const std::vector<std::pair<std::string, std::string> >& implementation_specific_parameters() const;
-    std::vector<std::pair<std::string, std::string> >& implementation_specific_parameters();
-    void implementation_specific_parameters(const std::vector<std::pair<std::string, std::string> >& v);
-    void implementation_specific_parameters(const std::vector<std::pair<std::string, std::string> >&& v);
     /**@}*/
 
 public:
@@ -124,11 +131,11 @@ public:
     property& operator=(property other);
 
 private:
-    std::string name_;
-    dogen::sml::nested_qname type_name_;
-    std::string default_value_;
     std::string documentation_;
     std::vector<std::pair<std::string, std::string> > implementation_specific_parameters_;
+    std::string name_;
+    dogen::sml::nested_qname type_;
+    std::string default_value_;
 };
 
 } }

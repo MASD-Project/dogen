@@ -67,8 +67,7 @@ private:
     /**
      * @brief Resolve all types.
      */
-    void resolve_types_activity(model& merged_model,
-        const std::list<model>& references);
+    void resolve_types_activity(model& merged_model);
 
 private:
     /**

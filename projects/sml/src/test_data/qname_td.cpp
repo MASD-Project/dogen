@@ -55,7 +55,7 @@ populate(const unsigned int position, result_type& v) {
     v.model_name(create_std_string(position + 0));
     v.external_module_path(create_std_list_std_string(position + 1));
     v.module_path(create_std_list_std_string(position + 2));
-    v.type_name(create_std_string(position + 3));
+    v.simple_name(create_std_string(position + 3));
     v.meta_type(create_dogen_sml_meta_types(position + 4));
 }
 

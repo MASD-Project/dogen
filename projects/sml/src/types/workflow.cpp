@@ -89,14 +89,8 @@ model workflow::create_merged_model_activity(const model& target,
     return mg.merge();
 }
 
-void workflow::resolve_types_activity(model& merged_model,
-    const std::list<model>& references) {
+void workflow::resolve_types_activity(model& merged_model) {
     resolver res(merged_model);
-
-    for (const auto& m : references) {
-        const reference ref(m.name(), m.external_module_path(), m.is_system());
-        res.add_reference(ref);
-    }
     res.resolve();
 }
 
@@ -104,7 +98,7 @@ std::pair<bool, model> workflow::
 execute(const model& target, const std::list<model>& references) {
     const auto augment_references(augment_references_activity(references));
     auto r(create_merged_model_activity(target, augment_references));
-    resolve_types_activity(r, augment_references);
+    resolve_types_activity(r);
     return std::pair<bool, model> { has_generatable_types(r), r };
 }
 

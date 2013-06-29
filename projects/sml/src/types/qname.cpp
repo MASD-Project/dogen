@@ -30,12 +30,12 @@ qname::qname(
     const std::string& model_name,
     const std::list<std::string>& external_module_path,
     const std::list<std::string>& module_path,
-    const std::string& type_name,
+    const std::string& simple_name,
     const dogen::sml::meta_types& meta_type)
     : model_name_(model_name),
       external_module_path_(external_module_path),
       module_path_(module_path),
-      type_name_(type_name),
+      simple_name_(simple_name),
       meta_type_(meta_type) { }
 
 void qname::swap(qname& other) noexcept {
@@ -43,7 +43,7 @@ void qname::swap(qname& other) noexcept {
     swap(model_name_, other.model_name_);
     swap(external_module_path_, other.external_module_path_);
     swap(module_path_, other.module_path_);
-    swap(type_name_, other.type_name_);
+    swap(simple_name_, other.simple_name_);
     swap(meta_type_, other.meta_type_);
 }
 
@@ -51,7 +51,7 @@ bool qname::operator==(const qname& rhs) const {
     return model_name_ == rhs.model_name_ &&
         external_module_path_ == rhs.external_module_path_ &&
         module_path_ == rhs.module_path_ &&
-        type_name_ == rhs.type_name_ &&
+        simple_name_ == rhs.simple_name_ &&
         meta_type_ == rhs.meta_type_;
 }
 
@@ -109,20 +109,20 @@ void qname::module_path(const std::list<std::string>&& v) {
     module_path_ = std::move(v);
 }
 
-const std::string& qname::type_name() const {
-    return type_name_;
+const std::string& qname::simple_name() const {
+    return simple_name_;
 }
 
-std::string& qname::type_name() {
-    return type_name_;
+std::string& qname::simple_name() {
+    return simple_name_;
 }
 
-void qname::type_name(const std::string& v) {
-    type_name_ = v;
+void qname::simple_name(const std::string& v) {
+    simple_name_ = v;
 }
 
-void qname::type_name(const std::string&& v) {
-    type_name_ = std::move(v);
+void qname::simple_name(const std::string&& v) {
+    simple_name_ = std::move(v);
 }
 
 dogen::sml::meta_types qname::meta_type() const {

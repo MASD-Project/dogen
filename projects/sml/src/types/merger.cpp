@@ -106,9 +106,9 @@ void merger::check_qname(const std::string& model_name, const qname& key,
 }
 
 void merger::validate_references() const {
-    for (const auto pair : merged_model_.dependencies()) {
-        const auto mn(pair.second.model_name());
-        const auto i(models_.find(mn));
+    for (const auto& qn : merged_model_.references()) {
+        const auto mn(qn.model_name());
+        const auto i(models_.find(qn));
         if (i == models_.end()) {
             BOOST_LOG_SEV(lg, error) << msising_dependency << mn;
             BOOST_THROW_EXCEPTION(merging_error(msising_dependency + mn));
@@ -117,30 +117,30 @@ void merger::validate_references() const {
 }
 
 void merger::add_target(const model& target) {
-    require_not_has_target(target.name());
+    require_not_has_target(target.name().simple_name());
 
     has_target_ = true;
     merged_model_.name(target.name());
     merged_model_.documentation(target.documentation());
     merged_model_.leaves(target.leaves());
     merged_model_.modules(target.modules());
-    merged_model_.external_module_path(target.external_module_path());
-    merged_model_.dependencies(target.dependencies());
+    merged_model_.references(target.references());
 
     add(target);
-    BOOST_LOG_SEV(lg, debug) << "added target model: " << target.name();
+    BOOST_LOG_SEV(lg, debug) << "added target model: "
+                             << target.name().simple_name();
 }
 
 void merger::add(const model& m) {
     require_not_has_merged();
 
-    BOOST_LOG_SEV(lg, debug) << "adding model: " << m.name();
+    BOOST_LOG_SEV(lg, debug) << "adding model: " << m.name().model_name();
     BOOST_LOG_SEV(lg, debug) << "contents: " << m;
     models_.insert(std::make_pair(m.name(), m));
 }
 
 void merger::merge_model(const model& m) {
-    const auto mn(m.name());
+    const auto mn(m.name().model_name());
     BOOST_LOG_SEV(lg, info) << "Merging model: '" << mn
                             << " modules: " << m.modules().size()
                             << " concepts: " << m.concepts().size()
@@ -149,7 +149,7 @@ void merger::merge_model(const model& m) {
                             << " objects: " << m.objects().size();
 
     for (const auto& c : m.concepts()) {
-        check_qname(m.name(), c.first, c.second.name());
+        check_qname(m.name().model_name(), c.first, c.second.name());
         merged_model_.concepts().insert(c);
     }
 

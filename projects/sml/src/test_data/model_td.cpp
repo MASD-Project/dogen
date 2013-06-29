@@ -22,11 +22,11 @@
 #include "dogen/sml/test_data/abstract_object_td.hpp"
 #include "dogen/sml/test_data/concept_td.hpp"
 #include "dogen/sml/test_data/enumeration_td.hpp"
+#include "dogen/sml/test_data/generation_types_td.hpp"
 #include "dogen/sml/test_data/model_td.hpp"
 #include "dogen/sml/test_data/module_td.hpp"
 #include "dogen/sml/test_data/primitive_td.hpp"
 #include "dogen/sml/test_data/qname_td.hpp"
-#include "dogen/sml/test_data/reference_td.hpp"
 
 namespace {
 
@@ -52,34 +52,18 @@ std::vector<std::pair<std::string, std::string> > create_std_vector_std_pair_std
     return r;
 }
 
-std::list<std::string> create_std_list_std_string(unsigned int position) {
-    std::list<std::string> r;
-    for (unsigned int i(0); i < 10; ++i) {
-        r.push_back(create_std_string(position + i));
-    }
-    return r;
+dogen::sml::qname
+create_dogen_sml_qname(const unsigned int position) {
+    return dogen::sml::qname_generator::create(position);
+}
+
+dogen::sml::generation_types
+create_dogen_sml_generation_types(const unsigned int position) {
+    return dogen::sml::generation_types_generator::create(position);
 }
 
 bool create_bool(const unsigned int position) {
     return (position % 2) == 0;
-}
-
-dogen::sml::reference
-create_dogen_sml_reference(const unsigned int position) {
-    return dogen::sml::reference_generator::create(position);
-}
-
-std::unordered_map<std::string, dogen::sml::reference> create_std_unordered_map_std_string_dogen_sml_reference(unsigned int position) {
-    std::unordered_map<std::string, dogen::sml::reference> r;
-    for (unsigned int i(0); i < 10; ++i) {
-        r.insert(std::make_pair(create_std_string(position + i), create_dogen_sml_reference(position + i)));
-    }
-    return r;
-}
-
-dogen::sml::qname
-create_dogen_sml_qname(const unsigned int position) {
-    return dogen::sml::qname_generator::create(position);
 }
 
 std::unordered_set<dogen::sml::qname> create_std_unordered_set_dogen_sml_qname(unsigned int position) {
@@ -173,10 +157,10 @@ void model_generator::
 populate(const unsigned int position, result_type& v) {
     v.documentation(create_std_string(position + 0));
     v.implementation_specific_parameters(create_std_vector_std_pair_std_string_std_string_(position + 1));
-    v.name(create_std_string(position + 2));
-    v.external_module_path(create_std_list_std_string(position + 3));
+    v.name(create_dogen_sml_qname(position + 2));
+    v.generation_type(create_dogen_sml_generation_types(position + 3));
     v.is_system(create_bool(position + 4));
-    v.dependencies(create_std_unordered_map_std_string_dogen_sml_reference(position + 5));
+    v.references(create_std_unordered_set_dogen_sml_qname(position + 5));
     v.leaves(create_std_unordered_set_dogen_sml_qname(position + 6));
     v.modules(create_std_unordered_map_dogen_sml_qname_dogen_sml_module(position + 7));
     v.concepts(create_std_unordered_map_dogen_sml_qname_dogen_sml_concept(position + 8));

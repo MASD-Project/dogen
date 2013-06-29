@@ -53,7 +53,7 @@ namespace sml {
  */
 class merger {
 private:
-    typedef std::unordered_map<std::string, model> models_type;
+    typedef std::unordered_map<qname, model> models_type;
 
 public:
     merger(const merger&) = default;

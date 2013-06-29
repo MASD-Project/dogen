@@ -54,11 +54,11 @@ namespace sml {
 std::size_t property_hasher::hash(const property&v) {
     std::size_t seed(0);
 
-    combine(seed, v.name());
-    combine(seed, v.type_name());
-    combine(seed, v.default_value());
     combine(seed, v.documentation());
     combine(seed, hash_std_vector_std_pair_std_string_std_string_(v.implementation_specific_parameters()));
+    combine(seed, v.name());
+    combine(seed, v.type());
+    combine(seed, v.default_value());
 
     return seed;
 }

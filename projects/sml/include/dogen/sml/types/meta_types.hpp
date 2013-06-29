@@ -29,21 +29,22 @@ namespace dogen {
 namespace sml {
 
 /**
- * @brief Type of type.
+ * @brief Type of the model element.
  */
 enum class meta_types : unsigned int {
     invalid = 0, ///< Represents an uninitialised enum
-    enumeration = 1, ///< Type is an enumeration
-    primitive = 2, ///< Type is a primitive
-    exception = 3, ///< Type is an exception
-    module = 4, ///< Type is a module
-    service = 5, ///< Type is a service
-    entity = 6, ///< Type is an entity
-    keyed_entity = 7, ///< Type is a keyed entity
-    value_object = 8, ///< Type is a value object
-    factory = 9, ///< Type is a factory
-    repository = 10, ///< Type is a repository
-    concept = 11 ///< Type is a concept
+    model = 1, ///< Model element is a model.
+    enumeration = 2, ///< Model element is an enumeration
+    primitive = 3, ///< Model element is a primitive
+    exception = 4, ///< Model element is an exception
+    module = 5, ///< Model element is a module
+    service = 6, ///< Model element is a service
+    entity = 7, ///< Model element is an entity
+    keyed_entity = 8, ///< Model element is a keyed entity
+    value_object = 9, ///< Model element is a value object
+    factory = 10, ///< Model element is a factory
+    repository = 11, ///< Model element is a repository
+    concept = 12 ///< Model element is a concept
 };
 
 } }
