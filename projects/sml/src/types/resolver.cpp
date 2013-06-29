@@ -265,6 +265,10 @@ void resolver::add_reference(const reference& ref) {
 void resolver::resolve_concepts() {
     for (auto& pair : model_.concepts()) {
         concept& c(pair.second);
+
+        if (c.generation_type() == generation_types::no_generation)
+            continue;
+
         c.properties(resolve_properties(c.name(), c.properties()));
         validate_refinements(c);
     }

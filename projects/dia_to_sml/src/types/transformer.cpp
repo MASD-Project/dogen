@@ -481,6 +481,10 @@ void transformer::transform_concept(const processed_object& o) {
     c.name(transform_qname(o.name(), meta_types::concept, pkg_id));
     context_.id_to_qname().insert(std::make_pair(o.id(), c.name()));
 
+    c.generation_type(context_.is_target() ?
+        sml::generation_types::full_generation :
+        sml::generation_types::no_generation);
+
     for (const auto& prop : o.properties()) {
         auto property(transform_property(prop));
         property.type_name(transform_nested_qname(prop.type()));
