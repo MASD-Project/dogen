@@ -331,6 +331,7 @@ using. Attempt to make use of these to simplify the model.
      CLOCK: [2013-06-26 Wed 18:01]--[2013-06-26 Wed 18:07] =>  0:06
 
 **** IMPLEMENTATION Convert pods into entities, values or services     :task:
+     CLOCK: [2013-06-29 Sat 20:10]--[2013-06-29 Sat 20:27] =>  0:17
      CLOCK: [2013-06-29 Sat 15:32]--[2013-06-29 Sat 18:45] =>  3:13
      CLOCK: [2013-06-29 Sat 14:35]--[2013-06-29 Sat 15:10] =>  0:35
      CLOCK: [2013-06-29 Sat 14:33]--[2013-06-29 Sat 14:35] =>  0:02

@@ -105,16 +105,18 @@ BOOST_AUTO_TEST_CASE(object_with_property_type_in_the_same_model_resolves_succes
 
     bool found(false);
     for (const auto pair : combined.objects()) {
-        if (is_type_zero(pair.first)) {
-            BOOST_LOG_SEV(lg, debug) << "found object: " << pair.first;
-
+        const auto& qn(pair.first);
+        if (is_type_zero(qn)) {
+            BOOST_LOG_SEV(lg, debug) << "found object: " << qn;
             found = true;
-            BOOST_CHECK(pair.second.properties().size() == 1);
-            const auto prop(pair.second.properties().front());
+
+            const auto& o(*pair.second);
+            BOOST_CHECK(o.properties().size() == 1);
+            const auto& prop(o.properties().front());
             BOOST_LOG_SEV(lg, debug) << "property: " << prop;
             BOOST_CHECK(is_type_one(prop.type_name().type()));
             BOOST_CHECK(is_model_zero(prop.type_name().type()));
-            BOOST_CHECK(is_object(prop.type_name().type()));
+            BOOST_CHECK(is_value_object(prop.type_name().type()));
         }
     }
     BOOST_CHECK(found);
@@ -137,16 +139,19 @@ BOOST_AUTO_TEST_CASE(object_with_property_type_in_different_model_results_in_suc
 
     bool found(false);
     for (const auto pair : combined.objects()) {
-        if (is_type_zero(pair.first)) {
-            BOOST_LOG_SEV(lg, debug) << "found object: " << pair.first;
+        const auto& qn(pair.first);
+        if (is_type_zero(qn)) {
+            BOOST_LOG_SEV(lg, debug) << "found object: " << qn;
             found = true;
-            BOOST_CHECK(pair.second.properties().size() == 1);
-            const auto prop(pair.second.properties().front());
+
+            const auto& o(*pair.second);
+            BOOST_CHECK(o.properties().size() == 1);
+            const auto& prop(o.properties().front());
             BOOST_LOG_SEV(lg, debug) << "property: " << prop;
 
             BOOST_CHECK(is_type_one(prop.type_name().type()));
             BOOST_CHECK(is_model_one(prop.type_name().type()));
-            BOOST_CHECK(is_object(prop.type_name().type()));
+            BOOST_CHECK(is_value_object(prop.type_name().type()));
         }
     }
     BOOST_CHECK(found);
@@ -175,15 +180,18 @@ BOOST_AUTO_TEST_CASE(object_with_parent_in_the_same_model_merges_successfully) {
 
     bool found(false);
     for (const auto pair : combined.objects()) {
-        if (is_type_zero(pair.first)) {
-            BOOST_LOG_SEV(lg, debug) << "found object: " << pair.first;
+        const auto& qn(pair.first);
+        if (is_type_zero(qn)) {
+            BOOST_LOG_SEV(lg, debug) << "found object: " << qn;
             found = true;
-            const auto pn(pair.second.parent_name());
+
+            const auto& o(*pair.second);
+            const auto pn(o.parent_name());
             BOOST_REQUIRE(pn);
             BOOST_LOG_SEV(lg, debug) << "parent: " << *pn;
             BOOST_CHECK(is_type_one(*pn));
             BOOST_CHECK(is_model_zero(*pn));
-            BOOST_CHECK(is_object(*pn));
+            BOOST_CHECK(is_value_object(*pn));
         }
     }
     BOOST_CHECK(found);
@@ -204,15 +212,18 @@ BOOST_AUTO_TEST_CASE(object_with_parent_in_different_models_merges_successfully)
 
     bool found(false);
     for (const auto pair : combined.objects()) {
-        if (is_type_zero(pair.first)) {
-            BOOST_LOG_SEV(lg, debug) << "found object: " << pair.first;
+        const auto& qn(pair.first);
+        if (is_type_zero(qn)) {
+            BOOST_LOG_SEV(lg, debug) << "found object: " << qn;
             found = true;
-            const auto pn(pair.second.parent_name());
+
+            const auto& o(*pair.second);
+            const auto pn(o.parent_name());
             BOOST_REQUIRE(pn);
             BOOST_LOG_SEV(lg, debug) << "parent: " << *pn;
             BOOST_CHECK(is_type_one(*pn));
             BOOST_CHECK(is_model_one(*pn));
-            BOOST_CHECK(is_object(*pn));
+            BOOST_CHECK(is_value_object(*pn));
         }
     }
     BOOST_CHECK(found);
@@ -234,24 +245,29 @@ BOOST_AUTO_TEST_CASE(object_with_third_degree_parent_in_same_model_merges_succes
     bool found_one(false);
     bool found_two(false);
     for (const auto pair : combined.objects()) {
-        if (is_type_zero(pair.first)) {
-            BOOST_LOG_SEV(lg, debug) << "found object: " << pair.first;
+        const auto& qn(pair.first);
+        if (is_type_zero(qn)) {
+            BOOST_LOG_SEV(lg, debug) << "found object: " << qn;
             found_one = true;
-            const auto pn(pair.second.parent_name());
+
+            const auto& o(*pair.second);
+            const auto pn(o.parent_name());
             BOOST_REQUIRE(pn);
             BOOST_LOG_SEV(lg, debug) << "parent: " << *pn;
             BOOST_CHECK(is_type_one(*pn));
             BOOST_CHECK(is_model_zero(*pn));
-            BOOST_CHECK(is_object(*pn));
-        } else if (is_type_one(pair.first)) {
-            BOOST_LOG_SEV(lg, debug) << "found object: " << pair.first;
+            BOOST_CHECK(is_value_object(*pn));
+        } else if (is_type_one(qn)) {
+            BOOST_LOG_SEV(lg, debug) << "found object: " << qn;
             found_two = true;
-            const auto pn(pair.second.parent_name());
+
+            const auto& o(*pair.second);
+            const auto pn(o.parent_name());
             BOOST_REQUIRE(pn);
             BOOST_LOG_SEV(lg, debug) << "parent: " << *pn;
             BOOST_CHECK(is_type_two(*pn));
             BOOST_CHECK(is_model_zero(*pn));
-            BOOST_CHECK(is_object(*pn));
+            BOOST_CHECK(is_value_object(*pn));
         }
     }
     BOOST_CHECK(found_one);
@@ -289,15 +305,18 @@ BOOST_AUTO_TEST_CASE(object_with_third_degree_parent_in_different_models_merges_
 
     bool found(false);
     for (const auto pair : combined.objects()) {
-        if (is_type_zero(pair.first)) {
-            BOOST_LOG_SEV(lg, debug) << "found object: " << pair.first;
+        const auto& qn(pair.first);
+        if (is_type_zero(qn)) {
+            BOOST_LOG_SEV(lg, debug) << "found object: " << qn;
             found = true;
-            const auto pn(pair.second.parent_name());
+
+            const auto& o(*pair.second);
+            const auto pn(o.parent_name());
             BOOST_REQUIRE(pn);
             BOOST_LOG_SEV(lg, debug) << "parent: " << *pn;
             BOOST_CHECK(is_type_one(*pn));
             BOOST_CHECK(is_model_one(*pn));
-            BOOST_CHECK(is_object(*pn));
+            BOOST_CHECK(is_value_object(*pn));
         }
     }
     BOOST_CHECK(found);
