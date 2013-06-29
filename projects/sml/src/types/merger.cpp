@@ -21,11 +21,11 @@
 #include <sstream>
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
+#include "dogen/sml/types/abstract_object.hpp"
 #include "dogen/sml/types/merging_error.hpp"
 #include "dogen/sml/io/qname_io.hpp"
 #include "dogen/sml/io/nested_qname_io.hpp"
 #include "dogen/sml/io/property_io.hpp"
-#include "dogen/sml/io/pod_io.hpp"
 #include "dogen/sml/io/model_io.hpp"
 #include "dogen/sml/types/merger.hpp"
 
@@ -45,44 +45,6 @@ namespace dogen {
 namespace sml {
 
 merger::merger() : has_target_(false), has_merged_(false) { }
-
-void merger::check_qname(const std::string& model_name,
-    const meta_types meta_type, const qname& key, const qname& value) const {
-    if (key.model_name() != model_name) {
-        std::ostringstream stream;
-        stream << "Pod does not belong to this model. Model name: '"
-               << model_name << "'. Pod qname: "
-               << key;
-        BOOST_LOG_SEV(lg, error) << stream.str();
-        BOOST_THROW_EXCEPTION(merging_error(stream.str()));
-    }
-
-    if (key.meta_type() != meta_type) {
-        std::ostringstream stream;
-        stream << "Pod has incorrect meta_type: '" << key;
-        BOOST_LOG_SEV(lg, error) << stream.str();
-        BOOST_THROW_EXCEPTION(merging_error(stream.str()));
-    }
-
-    if (key != value) {
-        std::ostringstream stream;
-        stream << "Inconsistency between key and value qnames: "
-               << " key: " << key << " value: " << value;
-        BOOST_LOG_SEV(lg, error) << stream.str();
-        BOOST_THROW_EXCEPTION(merging_error(stream.str()));
-    }
-}
-
-void merger::validate_references() const {
-    for (const auto pair : merged_model_.dependencies()) {
-        const auto mn(pair.second.model_name());
-        const auto i(models_.find(mn));
-        if (i == models_.end()) {
-            BOOST_LOG_SEV(lg, error) << msising_dependency << mn;
-            BOOST_THROW_EXCEPTION(merging_error(msising_dependency + mn));
-        }
-    }
-}
 
 void merger::require_not_has_target(const std::string& name) const {
     if (!has_target())
@@ -116,6 +78,44 @@ void merger::require_not_has_merged() const {
     BOOST_THROW_EXCEPTION(merging_error(stream.str()));
 }
 
+void merger::check_qname(const std::string& model_name, const qname& key,
+    const qname& value) const {
+
+    if (key.model_name() != model_name) {
+        std::ostringstream s;
+        s << "Type does not belong to this model. Model name: '"
+          << model_name << "'. Type qname: " << key;
+        BOOST_LOG_SEV(lg, error) << s.str();
+        BOOST_THROW_EXCEPTION(merging_error(s.str()));
+    }
+
+    if (key.meta_type() != value.meta_type()) {
+        std::ostringstream s;
+        s << "Type has incorrect meta_type: '" << key;
+        BOOST_LOG_SEV(lg, error) << s.str();
+        BOOST_THROW_EXCEPTION(merging_error(s.str()));
+    }
+
+    if (key != value) {
+        std::ostringstream s;
+        s << "Inconsistency between key and value qnames: "
+          << " key: " << key << " value: " << value;
+        BOOST_LOG_SEV(lg, error) << s.str();
+        BOOST_THROW_EXCEPTION(merging_error(s.str()));
+    }
+}
+
+void merger::validate_references() const {
+    for (const auto pair : merged_model_.dependencies()) {
+        const auto mn(pair.second.model_name());
+        const auto i(models_.find(mn));
+        if (i == models_.end()) {
+            BOOST_LOG_SEV(lg, error) << msising_dependency << mn;
+            BOOST_THROW_EXCEPTION(merging_error(msising_dependency + mn));
+        }
+    }
+}
+
 void merger::add_target(const model& target) {
     require_not_has_target(target.name());
 
@@ -140,40 +140,34 @@ void merger::add(const model& m) {
 }
 
 void merger::merge_model(const model& m) {
-    const auto n(m.name());
-    BOOST_LOG_SEV(lg, info) << "Merging model: '" << m.name()
-                            << "' pods: " << m.pods().size()
-                            << " primitives: " << m.primitives().size()
+    const auto mn(m.name());
+    BOOST_LOG_SEV(lg, info) << "Merging model: '" << mn
+                            << " modules: " << m.modules().size()
                             << " concepts: " << m.concepts().size()
+                            << " primitives: " << m.primitives().size()
                             << " enumerations: " << m.enumerations().size()
-                            << " exceptions: " << m.exceptions().size();
-
-    for (const auto& p : m.pods()) {
-        check_qname(n, meta_types::pod, p.first, p.second.name());
-        merged_model_.pods().insert(p);
-    }
+                            << " objects: " << m.objects().size();
 
     for (const auto& c : m.concepts()) {
-        check_qname(n, meta_types::concept, c.first, c.second.name());
+        check_qname(m.name(), c.first, c.second.name());
         merged_model_.concepts().insert(c);
     }
 
     for (const auto& p : m.primitives()) {
         // FIXME: mega hack to handle primitive model.
-        check_qname(
-            (n == primitive_model_name ? empty : n),
-            meta_types::primitive, p.first, p.second.name());
+        const auto pmn(mn == primitive_model_name ? empty : mn);
+        check_qname(pmn, p.first, p.second.name());
         merged_model_.primitives().insert(p);
     }
 
     for (const auto& p : m.enumerations()) {
-        check_qname(n, meta_types::enumeration, p.first, p.second.name());
+        check_qname(mn, p.first, p.second.name());
         merged_model_.enumerations().insert(p);
     }
 
-    for (const auto& p : m.exceptions()) {
-        check_qname(n, meta_types::exception, p.first, p.second.name());
-        merged_model_.exceptions().insert(p);
+    for (const auto& o : m.objects()) {
+        check_qname(mn, o.first, o.second->name());
+        merged_model_.objects().insert(o);
     }
 }
 

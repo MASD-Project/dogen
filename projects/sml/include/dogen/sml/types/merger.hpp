@@ -36,7 +36,20 @@ namespace dogen {
 namespace sml {
 
 /**
- * @brief Combines a number of models into a merged model.
+ * @brief Combines a number of models into a single model.
+ *
+ * The role of the merger is to aggregate a number of models into a
+ * single, coherent model called the @e merged model. There are two
+ * types of models that contribute to the aggregation:
+ *
+ * @li the @e target model: the model which the user is focusing on, most
+ * likely with the intention of code generating it. There can only be
+ * one target model for a given merge.
+ *
+ * @lie the @e reference models; a model is a reference model if the
+ * target model refers to one or more of its types, and thus is not
+ * evaluatable without their definition. Merging will fail if one or
+ * more of the referenced models have not been supplied.
  */
 class merger {
 private:
@@ -53,20 +66,6 @@ public:
 
 private:
     /**
-     * @brief Validates the qname.
-     */
-    void check_qname(const std::string& model_name,
-        const meta_types meta_type, const qname& key,
-        const qname& value) const;
-
-    /**
-     * @brief Ensure that all known references have been added.
-     *
-     * @note should really be moved to validator.
-     */
-    void validate_references() const;
-
-    /**
      * @brief Target model must have been set.
      */
     void require_has_target() const;
@@ -81,6 +80,23 @@ private:
      */
     void require_not_has_merged() const;
 
+private:
+    /**
+     * @brief Ensure the qualified name is consistent.
+     *
+     * @note should be moved to validator.
+     */
+    void check_qname(const std::string& model_name, const qname& key,
+        const qname& value) const;
+
+    /**
+     * @brief Ensure that all known references have been added.
+     *
+     * @note should really be moved to validator.
+     */
+    void validate_references() const;
+
+private:
     /**
      * @brief Merge supplied model.
      */

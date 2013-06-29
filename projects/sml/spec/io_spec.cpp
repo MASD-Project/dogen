@@ -41,23 +41,23 @@ BOOST_AUTO_TEST_SUITE(io)
 BOOST_AUTO_TEST_CASE(validate_io) {
     SETUP_TEST_LOG("validate_io");
 
-    test_io<category_types_generator>();
     test_io<generation_types_generator>();
     test_io<meta_types_generator>();
-    test_io<model_generator>();
     test_io<nested_qname_generator>();
-    test_io<pod_generator>();
-    test_io<pod_types_generator>();
     test_io<property_generator>();
     test_io<qname_generator>();
-    test_io<reference_generator>();
+    test_io<primitive_generator>();
+    test_io<enumerator_generator>();
+    test_io<enumeration_generator>();
     test_io<value_object_generator>();
     test_io<entity_generator>();
+    test_io<keyed_entity_generator>();
     test_io<service_generator>();
     test_io<module_generator>();
     test_io<repository_generator>();
     test_io<factory_generator>();
     test_io<concept_generator>();
+    test_io<model_generator>();
 }
 
 BOOST_AUTO_TEST_SUITE_END()

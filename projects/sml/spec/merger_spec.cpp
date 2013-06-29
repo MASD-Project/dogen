@@ -41,12 +41,13 @@ const std::string test_suite("merger_spec");
 const std::string invalid_type_name("INVALID");
 const std::string invalid_model_name("INVALID");
 
-const std::string incorrect_model("Pod does not belong to this model");
+const std::string incorrect_model("Type does not belong to this model");
 const std::string double_merging("Attempt to merge more than once");
 const std::string inconsistent_kvp("Inconsistency between key and value");
+
 const std::string missing_target("Target model not present");
 const std::string too_many_targets("Only one target expected.");
-const std::string incorrect_meta_type("Pod has incorrect meta_type");
+const std::string incorrect_meta_type("Type has incorrect meta_type");
 
 }
 
@@ -55,8 +56,8 @@ using dogen::sml::merging_error;
 
 BOOST_AUTO_TEST_SUITE(merger)
 
-BOOST_AUTO_TEST_CASE(merging_n_distinct_models_with_one_pod_each_results_in_n_pods_in_merged_model) {
-    SETUP_TEST_LOG_SOURCE("merging_n_distinct_models_with_one_pod_each_results_in_n_pods_in_merged_model");
+BOOST_AUTO_TEST_CASE(merging_n_distinct_models_with_one_object_each_results_in_n_objects_in_merged_model) {
+    SETUP_TEST_LOG_SOURCE("merging_n_distinct_models_with_one_object_each_results_in_n_objects_in_merged_model");
     const unsigned int n(5);
     dogen::sml::merger mg;
     for (unsigned int i(0); i < n; ++i) {
@@ -67,40 +68,43 @@ BOOST_AUTO_TEST_CASE(merging_n_distinct_models_with_one_pod_each_results_in_n_po
     BOOST_CHECK(!mg.has_merged());
     const auto combined(mg.merge());
     BOOST_CHECK(mg.has_merged());
-    BOOST_CHECK(combined.pods().size() == n);
+    BOOST_CHECK(combined.objects().size() == n);
     BOOST_CHECK(combined.primitives().empty());
+    BOOST_CHECK(combined.enumerations().empty());
+    BOOST_CHECK(combined.concepts().empty());
+    BOOST_CHECK(combined.modules().empty());
 
-    std::set<std::string> pod_names;
+    std::set<std::string> object_names;
     std::set<std::string> model_names;
-    for (const auto& pair : combined.pods()) {
+    for (const auto& pair : combined.objects()) {
         const auto& qn(pair.first);
-        pod_names.insert(qn.model_name() + "_" + qn.type_name());
+        object_names.insert(qn.model_name() + "_" + qn.type_name());
         model_names.insert(qn.model_name());
     }
 
-    BOOST_REQUIRE(pod_names.size() == n);
+    BOOST_REQUIRE(object_names.size() == n);
     BOOST_REQUIRE(model_names.size() == n);
 
-    auto pod_i(pod_names.cbegin());
+    auto object_i(object_names.cbegin());
     auto model_i(model_names.cbegin());
     for (unsigned int i(0); i < n; ++i) {
-        BOOST_REQUIRE(pod_i != pod_names.cend());
+        BOOST_REQUIRE(object_i != object_names.cend());
         BOOST_REQUIRE(model_i != model_names.cend());
 
-        BOOST_LOG_SEV(lg, debug) << "pod name: " << *pod_i;
+        BOOST_LOG_SEV(lg, debug) << "object name: " << *object_i;
         BOOST_LOG_SEV(lg, debug) << "model name: " << *model_i;
 
         const auto expected_model_name(mock_model_factory::model_name(i));
-        const auto expected_pod_name(mock_model_factory::type_name(0));
-        BOOST_LOG_SEV(lg, debug) << "expected pod name: "
-                                 << expected_pod_name;
+        const auto expected_object_name(mock_model_factory::type_name(0));
+        BOOST_LOG_SEV(lg, debug) << "expected object name: "
+                                 << expected_object_name;
         BOOST_LOG_SEV(lg, debug) << "expected model name: "
                                  << expected_model_name;
 
-        BOOST_CHECK(boost::ends_with(*pod_i, expected_pod_name));
-        BOOST_CHECK(boost::starts_with(*pod_i, expected_model_name));
+        BOOST_CHECK(boost::ends_with(*object_i, expected_object_name));
+        BOOST_CHECK(boost::starts_with(*object_i, expected_model_name));
         BOOST_CHECK(*model_i == expected_model_name);
-        ++pod_i;
+        ++object_i;
         ++model_i;
     }
 }
@@ -114,7 +118,7 @@ BOOST_AUTO_TEST_CASE(merging_empty_model_results_in_empty_merged_model) {
     BOOST_CHECK(mg.has_target());
 
     const auto combined(mg.merge());
-    BOOST_CHECK(combined.pods().empty());
+    BOOST_CHECK(combined.objects().empty());
     BOOST_CHECK(combined.primitives().empty());
 }
 
@@ -134,7 +138,7 @@ BOOST_AUTO_TEST_CASE(type_with_inconsistent_key_value_pair_throws) {
     SETUP_TEST_LOG("type_with_inconsistent_key_value_pair_throws");
 
     auto m(mock_model_factory::build_multi_type_model(0, 2));
-    m.pods().begin()->second.name().type_name(invalid_type_name);
+    m.objects().begin()->second->name().type_name(invalid_type_name);
 
     dogen::sml::merger mg;
     mg.add_target(m);
@@ -177,16 +181,14 @@ BOOST_AUTO_TEST_CASE(merging_more_than_once_throws) {
     BOOST_CHECK_EXCEPTION(mg.merge(), merging_error, c);
 }
 
-BOOST_AUTO_TEST_CASE(pod_incorrect_meta_type_throws) {
-    SETUP_TEST_LOG("pod_incorrect_meta_type_throws");
+BOOST_AUTO_TEST_CASE(object_incorrect_meta_type_throws) {
+    SETUP_TEST_LOG("object_incorrect_meta_type_throws");
 
     auto m(mock_model_factory::build_single_type_model());
-    BOOST_CHECK(m.pods().size() == 1);
+    BOOST_CHECK(m.objects().size() == 1);
 
-    auto p(m.pods().begin()->second);
+    auto& p(*m.objects().begin()->second);
     p.name().meta_type(dogen::sml::meta_types::primitive);
-    m.pods().clear();
-    m.pods().insert(std::make_pair(p.name(), p));
 
     dogen::sml::merger mg;
     mg.add_target(m);

@@ -35,25 +35,26 @@ workflow::
 workflow(const bool add_system_models)
     : add_system_models_(add_system_models) {}
 
-bool workflow::has_generatable_types(const sml::model& m) const {
-    auto lambda([](sml::generation_types gt) {
-            return
-                gt == sml::generation_types::full_generation ||
-                gt == sml::generation_types::partial_generation;
-        });
+bool workflow::is_generatable(const type& t) const {
+    const auto gt(t.generation_type());
+    return
+        gt == sml::generation_types::full_generation ||
+        gt == sml::generation_types::partial_generation;
+}
 
-    for (const auto pair : m.pods()) {
-        if (lambda(pair.second.generation_type()))
+bool workflow::has_generatable_types(const sml::model& m) const {
+    for (const auto pair : m.objects()) {
+        if (is_generatable(*pair.second))
             return true;
     }
 
     for (const auto pair : m.enumerations()) {
-        if (lambda(pair.second.generation_type()))
+        if (is_generatable(pair.second))
             return true;
     }
 
-    for (const auto pair : m.exceptions()) {
-        if (lambda(pair.second.generation_type()))
+    for (const auto pair : m.enumerations()) {
+        if (is_generatable(pair.second))
             return true;
     }
 

@@ -79,7 +79,6 @@ abstract_object::abstract_object()
       is_visitable_(static_cast<bool>(0)),
       is_immutable_(static_cast<bool>(0)),
       is_versioned_(static_cast<bool>(0)),
-      is_keyed_(static_cast<bool>(0)),
       is_comparable_(static_cast<bool>(0)),
       is_fluent_(static_cast<bool>(0)) { }
 
@@ -95,7 +94,6 @@ abstract_object::abstract_object(abstract_object&& rhs)
       is_visitable_(std::move(rhs.is_visitable_)),
       is_immutable_(std::move(rhs.is_immutable_)),
       is_versioned_(std::move(rhs.is_versioned_)),
-      is_keyed_(std::move(rhs.is_keyed_)),
       is_comparable_(std::move(rhs.is_comparable_)),
       is_fluent_(std::move(rhs.is_fluent_)),
       modeled_concepts_(std::move(rhs.modeled_concepts_)) { }
@@ -114,7 +112,6 @@ abstract_object::abstract_object(
     const bool is_visitable,
     const bool is_immutable,
     const bool is_versioned,
-    const bool is_keyed,
     const bool is_comparable,
     const bool is_fluent,
     const std::list<dogen::sml::qname>& modeled_concepts)
@@ -131,7 +128,6 @@ abstract_object::abstract_object(
       is_visitable_(is_visitable),
       is_immutable_(is_immutable),
       is_versioned_(is_versioned),
-      is_keyed_(is_keyed),
       is_comparable_(is_comparable),
       is_fluent_(is_fluent),
       modeled_concepts_(modeled_concepts) { }
@@ -157,7 +153,6 @@ void abstract_object::to_stream(std::ostream& s) const {
       << "\"is_visitable\": " << is_visitable_ << ", "
       << "\"is_immutable\": " << is_immutable_ << ", "
       << "\"is_versioned\": " << is_versioned_ << ", "
-      << "\"is_keyed\": " << is_keyed_ << ", "
       << "\"is_comparable\": " << is_comparable_ << ", "
       << "\"is_fluent\": " << is_fluent_ << ", "
       << "\"modeled_concepts\": " << modeled_concepts_
@@ -177,7 +172,6 @@ void abstract_object::swap(abstract_object& other) noexcept {
     swap(is_visitable_, other.is_visitable_);
     swap(is_immutable_, other.is_immutable_);
     swap(is_versioned_, other.is_versioned_);
-    swap(is_keyed_, other.is_keyed_);
     swap(is_comparable_, other.is_comparable_);
     swap(is_fluent_, other.is_fluent_);
     swap(modeled_concepts_, other.modeled_concepts_);
@@ -194,7 +188,6 @@ bool abstract_object::compare(const abstract_object& rhs) const {
         is_visitable_ == rhs.is_visitable_ &&
         is_immutable_ == rhs.is_immutable_ &&
         is_versioned_ == rhs.is_versioned_ &&
-        is_keyed_ == rhs.is_keyed_ &&
         is_comparable_ == rhs.is_comparable_ &&
         is_fluent_ == rhs.is_fluent_ &&
         modeled_concepts_ == rhs.modeled_concepts_;
@@ -302,14 +295,6 @@ bool abstract_object::is_versioned() const {
 
 void abstract_object::is_versioned(const bool v) {
     is_versioned_ = v;
-}
-
-bool abstract_object::is_keyed() const {
-    return is_keyed_;
-}
-
-void abstract_object::is_keyed(const bool v) {
-    is_keyed_ = v;
 }
 
 bool abstract_object::is_comparable() const {

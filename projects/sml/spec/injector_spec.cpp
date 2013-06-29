@@ -38,13 +38,10 @@ namespace {
 
 const std::string test_module("sml");
 const std::string test_suite("injector_spec");
-const std::string key("IDENTITY_ATTRIBUTE");
-const std::string value("true");
 const std::string version_name("version");
 const std::string versioned_postfix("_versioned");
 const std::string unversioned_postfix("_unversioned");
-const std::string missing_identity(
-    "Expected entity to have at least one identity");
+const std::string missing_identity("Identity must have at least");
 
 bool is_type_zero(const dogen::sml::qname& qn) {
     return mock_model_factory::type_name(0) == qn.type_name();
@@ -76,7 +73,7 @@ BOOST_AUTO_TEST_CASE(model_that_doesnt_require_any_new_types_is_untouched_by_inj
     SETUP_TEST_LOG_SOURCE("model_that_doesnt_require_any_new_types_is_untouched_by_injector");
 
     auto a(mock_model_factory::build_single_type_model());
-    BOOST_REQUIRE(a.pods().size() == 1);
+    BOOST_REQUIRE(a.objects().size() == 1);
 
     const auto e(a);
     dogen::sml::injector i;
@@ -84,18 +81,21 @@ BOOST_AUTO_TEST_CASE(model_that_doesnt_require_any_new_types_is_untouched_by_inj
     BOOST_CHECK(asserter::assert_object(e, a));
 }
 
-BOOST_AUTO_TEST_CASE(entity_pod_does_not_result_in_injected_keys) {
-    SETUP_TEST_LOG_SOURCE("entity_pod_does_not_result_in_injected_keys");
+BOOST_AUTO_TEST_CASE(entity_object_does_not_result_in_injected_keys) {
+    SETUP_TEST_LOG_SOURCE("entity_object_does_not_result_in_injected_keys");
 
-    auto a(mock_model_factory::pod_with_property());
-    BOOST_REQUIRE(a.pods().size() == 2);
-    for (auto& pair : a.pods()) {
-        if (is_type_zero(pair.first)) {
-            BOOST_LOG_SEV(lg, debug) << "found pod: " << pair.first;
-            pair.second.pod_type(dogen::sml::pod_types::entity);
-
-            BOOST_REQUIRE(pair.second.properties().size() == 1);
-            pair.second.properties().front().is_identity_attribute(true);
+    const auto ot(mock_model_factory::object_types::entity);
+    auto a(mock_model_factory::object_with_property(ot));
+    BOOST_REQUIRE(a.objects().size() == 2);
+    for (const auto& pair : a.objects()) {
+        const auto& qn(pair.first);
+        if (is_type_zero(qn)) {
+            BOOST_LOG_SEV(lg, debug) << "found object: " << qn;
+            const auto& o(dynamic_cast<dogen::sml::entity&>(*pair.second));
+            const auto mt(dogen::sml::meta_types::entity);
+            BOOST_REQUIRE(o.name().meta_type() == mt);
+            BOOST_REQUIRE(o.properties().size() == 1);
+            BOOST_REQUIRE(!o.identity().empty());
         }
     }
 
@@ -105,17 +105,25 @@ BOOST_AUTO_TEST_CASE(entity_pod_does_not_result_in_injected_keys) {
     BOOST_CHECK(asserter::assert_object(e, a));
 }
 
-BOOST_AUTO_TEST_CASE(unversioned_keyed_pod_with_no_identity_attributes_throws) {
-    SETUP_TEST_LOG_SOURCE("unversioned_keyed_pod_with_no_identity_attributes_throws");
+BOOST_AUTO_TEST_CASE(unversioned_keyed_object_with_no_identity_attributes_throws) {
+    SETUP_TEST_LOG_SOURCE("unversioned_keyed_object_with_no_identity_attributes_throws");
 
-    auto m(mock_model_factory::pod_with_property());
-    BOOST_REQUIRE(m.pods().size() == 2);
-    for (auto& pair : m.pods()) {
-        if (is_type_zero(pair.first)) {
-            BOOST_LOG_SEV(lg, debug) << "found pod: " << pair.first;
-            pair.second.pod_type(dogen::sml::pod_types::entity);
-            pair.second.is_keyed(true);
-            pair.second.is_versioned(false);
+    const auto ot(mock_model_factory::object_types::keyed_entity);
+    auto m(mock_model_factory::object_with_property(ot));
+    BOOST_LOG_SEV(lg, debug) << "model: " << m;
+
+    BOOST_REQUIRE(m.objects().size() == 2);
+    for (auto& pair : m.objects()) {
+        const auto& qn(pair.first);
+        if (is_type_zero(qn)) {
+            BOOST_LOG_SEV(lg, debug) << "found object: " << qn;
+            using dogen::sml::keyed_entity;
+            auto& o(dynamic_cast<keyed_entity&>(*pair.second));
+            const auto mt(dogen::sml::meta_types::keyed_entity);
+            BOOST_REQUIRE(o.name().meta_type() == mt);
+            BOOST_REQUIRE(o.properties().size() == 1);
+            BOOST_REQUIRE(!o.is_versioned());
+            o.identity().clear();
         }
     }
 
@@ -125,119 +133,148 @@ BOOST_AUTO_TEST_CASE(unversioned_keyed_pod_with_no_identity_attributes_throws) {
     BOOST_CHECK_EXCEPTION(i.inject(m), injection_error, c);
 }
 
-BOOST_AUTO_TEST_CASE(unversioned_keyed_pod_has_unversioned_key_injected) {
-    SETUP_TEST_LOG_SOURCE("unversioned_keyed_pod_has_unversioned_key_injected");
+BOOST_AUTO_TEST_CASE(unversioned_keyed_object_has_unversioned_key_injected) {
+    SETUP_TEST_LOG_SOURCE("unversioned_keyed_object_has_unversioned_key_injected");
 
-    auto a(mock_model_factory::pod_with_property());
-    BOOST_REQUIRE(a.pods().size() == 2);
-    for (auto& pair : a.pods()) {
-        if (is_type_zero(pair.first)) {
-            BOOST_LOG_SEV(lg, debug) << "found pod: " << pair.first;
-            pair.second.pod_type(dogen::sml::pod_types::entity);
-            pair.second.is_keyed(true);
-            pair.second.is_versioned(false);
-
-            BOOST_REQUIRE(pair.second.properties().size() == 1);
-            pair.second.properties().front().is_identity_attribute(true);
-        }
-    }
-
-    const auto e(a);
-    dogen::sml::injector i;
-    i.inject(a);
-
-    BOOST_CHECK(a.pods().size() == 3);
-    bool type_zero(false), unversioned_key(false);
-    for (auto& pair : a.pods()) {
+    const auto ot(mock_model_factory::object_types::keyed_entity);
+    auto m(mock_model_factory::object_with_property(ot));
+    BOOST_REQUIRE(m.objects().size() == 2);
+    for (auto& pair : m.objects()) {
         const auto& qn(pair.first);
-        BOOST_LOG_SEV(lg, debug) << "checking pod: " << qn;
-
         if (is_type_zero(qn)) {
-            type_zero = true;
-            BOOST_CHECK(!pair.second.versioned_key());
-            BOOST_CHECK(pair.second.unversioned_key());
-        }
-        else if (is_type_zero_unversioned(qn))
-            unversioned_key = true;
-        BOOST_CHECK(!is_type_zero_versioned(qn));
-    }
-
-    BOOST_CHECK(type_zero);
-    BOOST_CHECK(unversioned_key);
-}
-
-BOOST_AUTO_TEST_CASE(versioned_keyed_pod_has_both_keys_injected) {
-    SETUP_TEST_LOG_SOURCE("versioned_keyed_pod_has_both_keys_injected");
-
-    auto a(mock_model_factory::pod_with_property());
-    BOOST_REQUIRE(a.pods().size() == 2);
-    for (auto& pair : a.pods()) {
-        if (is_type_zero(pair.first)) {
-            BOOST_LOG_SEV(lg, debug) << "found pod: " << pair.first;
-            pair.second.pod_type(dogen::sml::pod_types::entity);
-            pair.second.is_keyed(true);
-            pair.second.is_versioned(true);
-
-            BOOST_REQUIRE(pair.second.properties().size() == 1);
-            pair.second.properties().front().is_identity_attribute(true);
+            BOOST_LOG_SEV(lg, debug) << "found object: " << qn;
+            auto& ae(dynamic_cast<dogen::sml::abstract_entity&>(*pair.second));
+            const auto mt(dogen::sml::meta_types::keyed_entity);
+            BOOST_REQUIRE(ae.name().meta_type() == mt);
+            BOOST_REQUIRE(ae.properties().size() == 1);
+            BOOST_REQUIRE(!ae.is_versioned());
+            BOOST_REQUIRE(ae.identity().size() == 1);
         }
     }
-
-    const auto e(a);
-    dogen::sml::injector i;
-    i.inject(a);
-
-    BOOST_CHECK(a.pods().size() == 4);
-    bool type_zero(false), unversioned_key(false), versioned_key(false);
-    for (auto& pair : a.pods()) {
-        BOOST_LOG_SEV(lg, debug) << "checking pod: " << pair.first;
-
-        if (is_type_zero(pair.first)) {
-            BOOST_CHECK(pair.second.versioned_key());
-            BOOST_CHECK(pair.second.unversioned_key());
-            type_zero = true;
-        } else if (is_type_zero_unversioned(pair.first)) {
-            unversioned_key = true;
-            BOOST_CHECK(!pair.second.documentation().empty());
-            BOOST_CHECK(!pair.second.versioned_key());
-            BOOST_CHECK(!pair.second.unversioned_key());
-        } else if (is_type_zero_versioned(pair.first)) {
-            versioned_key = true;
-            BOOST_CHECK(!pair.second.documentation().empty());
-            BOOST_CHECK(!pair.second.versioned_key());
-            BOOST_CHECK(pair.second.unversioned_key());
-        }
-    }
-
-    BOOST_CHECK(type_zero);
-    BOOST_CHECK(unversioned_key);
-    BOOST_CHECK(versioned_key);
-}
-
-BOOST_AUTO_TEST_CASE(versioned_pod_has_version_propery_injected) {
-    SETUP_TEST_LOG_SOURCE("versioned_pod_has_version_propery_injected");
-
-    auto m(mock_model_factory::build_single_type_model());
-    BOOST_REQUIRE(m.pods().size() == 1);
-    BOOST_REQUIRE(m.pods().begin()->second.properties().empty());
-
-    BOOST_LOG_SEV(lg, debug) << "pod before: " << m.pods().begin()->second;
-    m.pods().begin()->second.pod_type(dogen::sml::pod_types::entity);
-    m.pods().begin()->second.is_keyed(false);
-    m.pods().begin()->second.is_versioned(true);
 
     dogen::sml::injector i;
     i.inject(m);
 
-    BOOST_LOG_SEV(lg, debug) << "pod after: " << m.pods().begin()->second;
-    BOOST_CHECK(m.pods().size() == 1);
-    BOOST_CHECK(!m.pods().begin()->second.versioned_key());
-    BOOST_CHECK(!m.pods().begin()->second.unversioned_key());
+    BOOST_CHECK(m.objects().size() == 3);
+    bool type_zero(false);
+    dogen::sml::qname ukqn;
+    for (const auto& pair : m.objects()) {
+        const auto& qn(pair.first);
+        if (is_type_zero(qn)) {
+            type_zero = true;
+            BOOST_LOG_SEV(lg, debug) << "found object: " << qn;
+            using dogen::sml::keyed_entity;
+            const auto& ae(dynamic_cast<const keyed_entity&>(*pair.second));
+            const auto mt(dogen::sml::meta_types::keyed_entity);
+            BOOST_REQUIRE(ae.name().meta_type() == mt);
+            BOOST_REQUIRE(!ae.is_versioned());
+            BOOST_CHECK(!ae.versioned_key());
+            ukqn = ae.unversioned_key();
 
-    const auto& props(m.pods().begin()->second.properties());
-    BOOST_REQUIRE(props.size() == 1);
-    BOOST_CHECK(props.front().name() == version_name);
-    BOOST_CHECK(!props.front().documentation().empty());
+            BOOST_CHECK(is_type_zero_unversioned(ukqn));
+            BOOST_CHECK(!is_type_zero_versioned(ukqn));
+            BOOST_LOG_SEV(lg, debug) << "Found unversioned key qname: " << ukqn;
+        }
+    }
+
+    BOOST_REQUIRE(type_zero);
+    const auto j(m.objects().find(ukqn));
+    BOOST_REQUIRE(j != m.objects().end());
+
+    const auto& uk(dynamic_cast<const dogen::sml::value_object&>(*(j->second)));
+    BOOST_LOG_SEV(lg, debug) << "Found unversioned key: " << uk;
+    const auto mt(dogen::sml::meta_types::value_object);
+    BOOST_REQUIRE(uk.name().meta_type() == mt);
+    BOOST_REQUIRE(!uk.is_versioned());
+}
+
+BOOST_AUTO_TEST_CASE(versioned_keyed_object_has_both_keys_injected) {
+    SETUP_TEST_LOG_SOURCE("versioned_keyed_object_has_both_keys_injected");
+
+    const auto ot(mock_model_factory::object_types::keyed_entity);
+    auto m(mock_model_factory::object_with_property(ot));
+    BOOST_REQUIRE(m.objects().size() == 2);
+    for (auto& pair : m.objects()) {
+        const auto& qn(pair.first);
+        if (is_type_zero(qn)) {
+            BOOST_LOG_SEV(lg, debug) << "found object: " << qn;
+            auto& ae(dynamic_cast<dogen::sml::abstract_entity&>(*pair.second));
+            const auto mt(dogen::sml::meta_types::keyed_entity);
+            BOOST_REQUIRE(ae.name().meta_type() == mt);
+            BOOST_REQUIRE(ae.properties().size() == 1);
+            BOOST_REQUIRE(!ae.is_versioned());
+            BOOST_REQUIRE(ae.identity().size() == 1);
+            ae.is_versioned(true);
+        }
+    }
+
+    dogen::sml::injector i;
+    i.inject(m);
+
+    BOOST_CHECK(m.objects().size() == 4);
+    bool type_zero(false);
+    dogen::sml::qname ukqn, vkqn;
+    for (const auto& pair : m.objects()) {
+        const auto& qn(pair.first);
+        if (is_type_zero(qn)) {
+            type_zero = true;
+            BOOST_LOG_SEV(lg, debug) << "found object: " << qn;
+            using dogen::sml::keyed_entity;
+            const auto& ae(dynamic_cast<const keyed_entity&>(*pair.second));
+            const auto mt(dogen::sml::meta_types::keyed_entity);
+            BOOST_REQUIRE(ae.name().meta_type() == mt);
+            BOOST_REQUIRE(ae.is_versioned());
+
+            BOOST_CHECK(ae.versioned_key());
+            vkqn = *ae.versioned_key();
+            BOOST_CHECK(!is_type_zero_unversioned(vkqn));
+            BOOST_CHECK(is_type_zero_versioned(vkqn));
+
+            ukqn = ae.unversioned_key();
+            BOOST_CHECK(is_type_zero_unversioned(ukqn));
+            BOOST_CHECK(!is_type_zero_versioned(ukqn));
+            BOOST_LOG_SEV(lg, debug) << "Found unversioned key qname: " << ukqn;
+        }
+    }
+
+    BOOST_REQUIRE(type_zero);
+    auto j(m.objects().find(ukqn));
+    BOOST_REQUIRE(j != m.objects().end());
+
+    const auto& uk(dynamic_cast<const dogen::sml::value_object&>(*(j->second)));
+    BOOST_LOG_SEV(lg, debug) << "Found unversioned key: " << uk;
+    const auto mt(dogen::sml::meta_types::value_object);
+    BOOST_REQUIRE(uk.name().meta_type() == mt);
+    BOOST_REQUIRE(!uk.is_versioned());
+
+    j = m.objects().find(vkqn);
+    BOOST_REQUIRE(j != m.objects().end());
+
+    const auto& vk(dynamic_cast<const dogen::sml::value_object&>(*(j->second)));
+    BOOST_LOG_SEV(lg, debug) << "Found versioned key: " << vk;
+    BOOST_REQUIRE(vk.name().meta_type() == mt);
+    BOOST_REQUIRE(!vk.is_versioned());
+}
+
+BOOST_AUTO_TEST_CASE(versioned_object_has_version_propery_injected) {
+    SETUP_TEST_LOG_SOURCE("versioned_object_has_version_propery_injected");
+
+    auto m(mock_model_factory::build_single_type_model());
+    BOOST_REQUIRE(m.objects().size() == 1);
+    auto& ob(*m.objects().begin()->second);
+    BOOST_REQUIRE(ob.properties().empty());
+    ob.is_versioned(true);
+    BOOST_LOG_SEV(lg, debug) << "before: " << ob;
+
+    dogen::sml::injector i;
+    i.inject(m);
+
+    BOOST_REQUIRE(m.objects().size() == 1);
+    auto& oa(*m.objects().begin()->second);
+    BOOST_LOG_SEV(lg, debug) << "object after: " << oa;
+    BOOST_REQUIRE(oa.properties().size() == 1);
+    BOOST_CHECK(oa.properties().front().name() == version_name);
+    BOOST_CHECK(!oa.properties().front().documentation().empty());
 }
 
 BOOST_AUTO_TEST_SUITE_END()

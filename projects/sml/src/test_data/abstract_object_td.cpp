@@ -92,10 +92,9 @@ populate(const unsigned int position, result_type& v) {
     v.is_visitable(create_bool(position + 6));
     v.is_immutable(create_bool(position + 7));
     v.is_versioned(create_bool(position + 8));
-    v.is_keyed(create_bool(position + 9));
-    v.is_comparable(create_bool(position + 10));
-    v.is_fluent(create_bool(position + 11));
-    v.modeled_concepts(create_std_list_dogen_sml_qname(position + 12));
+    v.is_comparable(create_bool(position + 9));
+    v.is_fluent(create_bool(position + 10));
+    v.modeled_concepts(create_std_list_dogen_sml_qname(position + 11));
 }
 
 abstract_object_generator::result_type*

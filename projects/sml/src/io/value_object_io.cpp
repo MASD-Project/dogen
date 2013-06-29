@@ -21,7 +21,7 @@
 #include <ostream>
 #include "dogen/sml/io/abstract_object_io.hpp"
 #include "dogen/sml/io/value_object_io.hpp"
-#include "dogen/sml/io/value_types_io.hpp"
+#include "dogen/sml/io/value_object_types_io.hpp"
 
 namespace dogen {
 namespace sml {

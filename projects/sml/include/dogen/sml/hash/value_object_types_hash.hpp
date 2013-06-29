@@ -18,34 +18,26 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_SML_TEST_DATA_CATEGORY_TYPES_TD_HPP
-#define DOGEN_SML_TEST_DATA_CATEGORY_TYPES_TD_HPP
+#ifndef DOGEN_SML_HASH_VALUE_OBJECT_TYPES_HASH_HPP
+#define DOGEN_SML_HASH_VALUE_OBJECT_TYPES_HASH_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/sml/types/category_types.hpp"
+#include <functional>
+#include "dogen/sml/types/value_object_types.hpp"
 
-namespace dogen {
-namespace sml {
+namespace std {
 
-class category_types_generator {
+template<>
+class hash<dogen::sml::value_object_types> {
 public:
-    category_types_generator();
-
-public:
-    typedef dogen::sml::category_types result_type;
-
-public:
-    static void populate(const unsigned int position, result_type& v);
-    static result_type create(const unsigned int position);
-    result_type operator()();
-
-private:
-    unsigned int position_;
+    size_t operator()(const dogen::sml::value_object_types& v) const {
+        return std::hash<unsigned int>()(static_cast<unsigned int>(v));
+    }
 };
 
-} }
+}
 
 #endif

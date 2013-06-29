@@ -20,7 +20,6 @@
  */
 #include "dogen/sml/test_data/abstract_entity_td.hpp"
 #include "dogen/sml/test_data/abstract_object_td.hpp"
-#include "dogen/sml/test_data/category_types_td.hpp"
 #include "dogen/sml/test_data/concept_td.hpp"
 #include "dogen/sml/test_data/entity_td.hpp"
 #include "dogen/sml/test_data/enumeration_td.hpp"
@@ -32,8 +31,6 @@
 #include "dogen/sml/test_data/model_td.hpp"
 #include "dogen/sml/test_data/module_td.hpp"
 #include "dogen/sml/test_data/nested_qname_td.hpp"
-#include "dogen/sml/test_data/pod_td.hpp"
-#include "dogen/sml/test_data/pod_types_td.hpp"
 #include "dogen/sml/test_data/primitive_td.hpp"
 #include "dogen/sml/test_data/property_td.hpp"
 #include "dogen/sml/test_data/qname_td.hpp"
@@ -43,4 +40,4 @@
 #include "dogen/sml/test_data/service_types_td.hpp"
 #include "dogen/sml/test_data/type_td.hpp"
 #include "dogen/sml/test_data/value_object_td.hpp"
-#include "dogen/sml/test_data/value_types_td.hpp"
+#include "dogen/sml/test_data/value_object_types_td.hpp"

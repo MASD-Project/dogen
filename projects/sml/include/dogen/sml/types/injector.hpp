@@ -26,12 +26,26 @@
 #endif
 
 #include <list>
-#include "dogen/sml/types/pod.hpp"
+#include "dogen/sml/types/abstract_object.hpp"
 #include "dogen/sml/types/model.hpp"
 
 namespace dogen {
 namespace sml {
 
+/**
+ * @brief Injects types into a model.
+ *
+ * Injector is responsible for analysing all of the types defined by
+ * the user and deciding:
+ *
+ * @li whether to augment that type; that is, due to the configuration
+ * of that type, we may need to add additional properties to the
+ * type. This is the case with versioning, for example.
+ *
+ * @li whether to create supporting types that enhance the current
+ * type. This is the case with the generation of keys, visitors, etc.
+ *
+ */
 class injector {
 public:
     injector() = default;
@@ -42,14 +56,28 @@ public:
 
 private:
     /**
-     * @brief Creates a key for the given pod.
+     * @brief Creates a key for the given entity.
      *
-     * @param p pod for which to create a key
+     * @param qn name of the entity for which to create the key
+     * @param gt type of the generation to apply to the key
+     * @param properties identity function for the entity
      * @param versioned if true, create a versioned key. Otherwise,
      * creates an unversioned key.
      */
-    pod create_key(const qname& qn, const generation_types gt,
-        const std::list<property>& properties, const bool versioned) const;
+    boost::shared_ptr<abstract_object> create_key(const qname& qn,
+        const generation_types gt, const std::list<property>& properties,
+        const bool versioned) const;
+
+    /**
+     * @brief Helper functions for create key just for the sake of
+     * clarity.
+     */
+    /**@{*/
+    boost::shared_ptr<abstract_object> create_versioned_key(const qname& qn,
+        const generation_types gt, const std::list<property>& properties) const;
+    boost::shared_ptr<abstract_object> create_unversioned_key(const qname& qn,
+        const generation_types gt, const std::list<property>& properties) const;
+    /**@}*/
 
     /**
      * @brief Injects versioned and unversioned keys for keyed entities.
@@ -57,9 +85,9 @@ private:
     void inject_keys(model& m) const;
 
     /**
-     * @brief Injects the version property on the pod passed in.
+     * @brief Injects the version property on the object passed in.
      */
-    void inject_version(pod& p) const;
+    void inject_version(abstract_object& p) const;
 
     /**
      * @brief Injects the version property on any types marked as

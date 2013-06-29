@@ -34,17 +34,16 @@ namespace sml {
 enum class meta_types : unsigned int {
     invalid = 0, ///< Represents an uninitialised enum
     enumeration = 1, ///< Type is an enumeration
-    pod = 2, ///< Type is a pod
-    primitive = 3, ///< Type is a primitive
-    exception = 4, ///< Type is an exception
-    string_table = 5, ///< Type is a string table.
-    module = 6,
-    service = 7,
-    entity = 8,
-    value = 9,
-    factory = 10,
-    repository = 11,
-    concept = 12
+    primitive = 2, ///< Type is a primitive
+    exception = 3, ///< Type is an exception
+    module = 4, ///< Type is a module
+    service = 5, ///< Type is a service
+    entity = 6, ///< Type is an entity
+    keyed_entity = 7, ///< Type is a keyed entity
+    value_object = 8, ///< Type is a value object
+    factory = 9, ///< Type is a factory
+    repository = 10, ///< Type is a repository
+    concept = 11 ///< Type is a concept
 };
 
 } }

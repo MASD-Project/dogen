@@ -71,7 +71,6 @@ void save(Archive& ar,
     ar << make_nvp("is_visitable", v.is_visitable_);
     ar << make_nvp("is_immutable", v.is_immutable_);
     ar << make_nvp("is_versioned", v.is_versioned_);
-    ar << make_nvp("is_keyed", v.is_keyed_);
     ar << make_nvp("is_comparable", v.is_comparable_);
     ar << make_nvp("is_fluent", v.is_fluent_);
     ar << make_nvp("modeled_concepts", v.modeled_concepts_);
@@ -92,7 +91,6 @@ void load(Archive& ar,
     ar >> make_nvp("is_visitable", v.is_visitable_);
     ar >> make_nvp("is_immutable", v.is_immutable_);
     ar >> make_nvp("is_versioned", v.is_versioned_);
-    ar >> make_nvp("is_keyed", v.is_keyed_);
     ar >> make_nvp("is_comparable", v.is_comparable_);
     ar >> make_nvp("is_fluent", v.is_fluent_);
     ar >> make_nvp("modeled_concepts", v.modeled_concepts_);

@@ -18,6 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
+#include <memory>
+#include "dogen/sml/types/value_object.hpp"
 #include "dogen/sml/types/boost_model_factory.hpp"
 
 namespace {
@@ -48,28 +50,30 @@ const std::string time_duration_name("time_duration");
 namespace dogen {
 namespace sml {
 
-pod boost_model_factory::create_pod(const std::string& name, pod_types pt,
-    std::list<std::string> module_path) {
+boost::shared_ptr<abstract_object>
+boost_model_factory::create_value_object(const std::string& name,
+    const std::list<std::string> &module_path, value_object_types t) {
+
     qname q;
     q.type_name(name);
-    q.meta_type(meta_types::pod);
+    q.meta_type(meta_types::value_object);
     q.model_name(model_name);
     q.module_path(module_path);
 
-    pod r;
-    r.name(q);
-    r.generation_type(generation_types::no_generation);
-    if (pt == pod_types::sequence_container)
-        r.number_of_type_arguments(1);
-    else if (pt == pod_types::associative_container)
-        r.number_of_type_arguments(2);
+    std::unique_ptr<value_object> r(new value_object());
+    r->name(q);
+    r->generation_type(generation_types::no_generation);
+    r->type(t);
+    if (t == value_object_types::sequence_container)
+        r->number_of_type_arguments(1);
+    else if (t == value_object_types::associative_container)
+        r->number_of_type_arguments(2);
 
-    r.pod_type(pt);
-    return r;
+    return boost::shared_ptr<abstract_object>(r.release());
 }
 
-module boost_model_factory::
-create_module(const std::string& name, std::list<std::string> module_path) {
+module boost_model_factory::create_module(const std::string& name,
+    const std::list<std::string>& module_path) {
     qname qn;
     qn.model_name(model_name);
     qn.type_name(name);
@@ -87,28 +91,28 @@ model boost_model_factory::create() {
     r.name(model_name);
     r.is_system(true);
 
-    const auto pi([&](std::string name, pod_types pt,
-            std::list<std::string> module_path) {
-            pod p(create_pod(name, pt, module_path));
-            r.pods().insert(std::make_pair(p.name(), p));
+    const auto pi([&](const std::string& name,
+            const std::list<std::string>& module_path, value_object_types vot) {
+            const auto vo(create_value_object(name, module_path, vot));
+            r.objects().insert(std::make_pair(vo->name(), vo));
         });
 
     const auto gamma([&](std::string name,
             std::list<std::string> module_path) {
-            module p(create_module(name, module_path));
-            r.modules().insert(std::make_pair(p.name(), p));
+            const auto m(create_module(name, module_path));
+            r.modules().insert(std::make_pair(m.name(), m));
         });
 
     std::list<std::string> module_path;
-    pi(shared_ptr_name, pod_types::smart_pointer, module_path);
-    pi(weak_ptr_name, pod_types::smart_pointer, module_path);
-    pi(scoped_ptr_name, pod_types::smart_pointer, module_path);
-    pi(optional_name, pod_types::value, module_path);
-    pi(variant_name, pod_types::value, module_path);
+    pi(shared_ptr_name, module_path, value_object_types::smart_pointer);
+    pi(weak_ptr_name, module_path, value_object_types::smart_pointer);
+    pi(scoped_ptr_name, module_path, value_object_types::smart_pointer);
+    pi(optional_name, module_path, value_object_types::plain);
+    pi(variant_name, module_path, value_object_types::plain);
 
     gamma(asio_name, module_path);
     module_path.push_back(asio_name);
-    pi(io_service_name, pod_types::value, module_path);
+    pi(io_service_name, module_path, value_object_types::plain);
 
     gamma(ip_name, module_path);
     module_path.push_back(ip_name);
@@ -116,26 +120,26 @@ model boost_model_factory::create() {
     gamma(tcp_name, module_path);
     module_path.push_back(tcp_name);
 
-    pi(socket_name, pod_types::value, module_path);
-    pi(acceptor_name, pod_types::value, module_path);
+    pi(socket_name, module_path, value_object_types::plain);
+    pi(acceptor_name, module_path, value_object_types::plain);
 
     module_path.clear();
     gamma(filesystem_name, module_path);
     module_path.push_back(filesystem_name);
-    pi(path_name, pod_types::value, module_path);
+    pi(path_name, module_path, value_object_types::plain);
 
     module_path.clear();
     gamma(gregorian_name, module_path);
 
     module_path.push_back(gregorian_name);
-    pi(date_name, pod_types::value, module_path);
+    pi(date_name, module_path, value_object_types::plain);
 
     module_path.clear();
     gamma(posix_time_name, module_path);
 
     module_path.push_back(posix_time_name);
-    pi(ptime_name, pod_types::value, module_path);
-    pi(time_duration_name, pod_types::value, module_path);
+    pi(ptime_name, module_path, value_object_types::plain);
+    pi(time_duration_name, module_path, value_object_types::plain);
 
     return r;
 }

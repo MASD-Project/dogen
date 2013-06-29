@@ -20,42 +20,42 @@
  */
 #include <ostream>
 #include <stdexcept>
-#include "dogen/sml/io/value_types_io.hpp"
+#include "dogen/sml/io/value_object_types_io.hpp"
 
 namespace dogen {
 namespace sml {
 
-std::ostream& operator<<(std::ostream& s, const value_types& v) {
-    s << "{ " << "\"__type__\": " << "\"value_types\", " << "\"value\": ";
+std::ostream& operator<<(std::ostream& s, const value_object_types& v) {
+    s << "{ " << "\"__type__\": " << "\"value_object_types\", " << "\"value\": ";
 
     std::string attr;
     switch (v) {
-    case value_types::invalid:
+    case value_object_types::invalid:
         attr = "\"invalid\"";
         break;
-    case value_types::user_defined:
-        attr = "\"user_defined\"";
+    case value_object_types::plain:
+        attr = "\"plain\"";
         break;
-    case value_types::unversioned_key:
+    case value_object_types::unversioned_key:
         attr = "\"unversioned_key\"";
         break;
-    case value_types::versioned_key:
+    case value_object_types::versioned_key:
         attr = "\"versioned_key\"";
         break;
-    case value_types::exception:
+    case value_object_types::exception:
         attr = "\"exception\"";
         break;
-    case value_types::smart_pointer:
+    case value_object_types::smart_pointer:
         attr = "\"smart_pointer\"";
         break;
-    case value_types::associative_container:
+    case value_object_types::associative_container:
         attr = "\"associative_container\"";
         break;
-    case value_types::sequence_container:
+    case value_object_types::sequence_container:
         attr = "\"sequence_container\"";
         break;
     default:
-        throw std::invalid_argument("Invalid value for value_types");
+        throw std::invalid_argument("Invalid value for value_object_types");
     }
     s << attr << " }";
     return s;

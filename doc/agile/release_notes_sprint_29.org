@@ -10,24 +10,24 @@ This file contains all stories that were closed during sprint 29.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-06-26 Wed 22:19]
+Clock summary at [2013-06-29 Sat 19:08]
 
-| Headline                                                           | Time    |       |      |
-|--------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                       | *23:41* |       |      |
-|--------------------------------------------------------------------+---------+-------+------|
-| Development Stories Implemented                                    |         | 23:41 |      |
-| IMPLEMENTATION Release notes and backlog grooming                  |         |       | 0:53 |
-| COMPLETED Make design by contract methods consistent in dia to sml |         |       | 0:52 |
-| COMPLETED Split resolver from merger                               |         |       | 3:18 |
-| COMPLETED Property container should be a list not a vector         |         |       | 0:18 |
-| COMPLETED Implement concepts in SML                                |         |       | 9:24 |
-| COMPLETED Design the inheritance tree of DDD classes in SML        |         |       | 2:16 |
-| COMPLETED Add concept properties in order of inheritance           |         |       | 0:18 |
-| COMPLETED Ensure extractor takes concepts into account             |         |       | 0:22 |
-| COMPLETED Descendents modeling different concepts from base break  |         |       | 2:20 |
-| COMPLETED Model should model appropriate concepts                  |         |       | 0:19 |
-| IMPLEMENTATION Update SML to make use of concepts                  |         |       | 3:21 |
+| Headline                                                           | Time    |       |       |
+|--------------------------------------------------------------------+---------+-------+-------|
+| *Total time*                                                       | *33:21* |       |       |
+|--------------------------------------------------------------------+---------+-------+-------|
+| Development Stories Implemented                                    |         | 33:21 |       |
+| IMPLEMENTATION Release notes and backlog grooming                  |         |       |  0:53 |
+| COMPLETED Make design by contract methods consistent in dia to sml |         |       |  0:52 |
+| COMPLETED Split resolver from merger                               |         |       |  3:18 |
+| COMPLETED Property container should be a list not a vector         |         |       |  0:18 |
+| COMPLETED Implement concepts in SML                                |         |       |  9:24 |
+| COMPLETED Design the inheritance tree of DDD classes in SML        |         |       |  2:16 |
+| COMPLETED Add concept properties in order of inheritance           |         |       |  0:18 |
+| COMPLETED Ensure extractor takes concepts into account             |         |       |  0:22 |
+| COMPLETED Descendents modeling different concepts from base break  |         |       |  2:20 |
+| IMPLEMENTATION Model should model appropriate concepts             |         |       |  0:19 |
+| IMPLEMENTATION Update SML to make use of concepts                  |         |       | 13:01 |
 #+end:
 
 *** IMPLEMENTATION Release notes and backlog grooming                  :task:
@@ -267,13 +267,15 @@ We should just expand the refinements container at inception to all of
 the qnames for all the concepts, excluding all the concepts found in
 the inheritance path of a class.
 
-*** COMPLETED Model should model appropriate concepts                 :story:
-    CLOSED: [2013-06-26 Wed 22:11]
+*** IMPLEMENTATION Model should model appropriate concepts            :story:
     CLOCK: [2013-06-26 Wed 22:04]--[2013-06-26 Wed 22:23] =>  0:19
 
-NOTE: model name cannot be a qname because then qnames would have to
+NOTE 1: model name cannot be a qname because then qnames would have to
 have a qname for the model name for consistency. Instead, we modeled
 other suitable concepts; story was rename to reflect this.
+
+NOTE 2: actually, we do the exact same thing for modules so we should
+continue with this logic.
 
 We already have most of the qname properties in the model anyway, so
 might as well just use a qname.
@@ -329,6 +331,19 @@ using. Attempt to make use of these to simplify the model.
      CLOCK: [2013-06-26 Wed 18:01]--[2013-06-26 Wed 18:07] =>  0:06
 
 **** IMPLEMENTATION Convert pods into entities, values or services     :task:
+     CLOCK: [2013-06-29 Sat 15:32]--[2013-06-29 Sat 18:45] =>  3:13
+     CLOCK: [2013-06-29 Sat 14:35]--[2013-06-29 Sat 15:10] =>  0:35
+     CLOCK: [2013-06-29 Sat 14:33]--[2013-06-29 Sat 14:35] =>  0:02
+     CLOCK: [2013-06-28 Fri 21:54]--[2013-06-28 Fri 23:40] =>  1:46
+     CLOCK: [2013-06-28 Fri 21:15]--[2013-06-28 Fri 21:54] =>  0:39
+     CLOCK: [2013-06-28 Fri 17:56]--[2013-06-28 Fri 18:05] =>  0:09
+     CLOCK: [2013-06-28 Fri 08:27]--[2013-06-28 Fri 08:33] =>  0:06
+     CLOCK: [2013-06-28 Fri 07:49]--[2013-06-28 Fri 08:16] =>  0:27
+     CLOCK: [2013-06-28 Fri 07:33]--[2013-06-28 Fri 07:44] =>  0:43
+     CLOCK: [2013-06-27 Thu 08:25]--[2013-06-27 Thu 08:35] =>  0:10
+     CLOCK: [2013-06-27 Thu 07:50]--[2013-06-27 Thu 08:19] =>  0:29
+     CLOCK: [2013-06-27 Thu 07:36]--[2013-06-27 Thu 07:43] =>  0:07
+     CLOCK: [2013-06-26 Wed 22:46]--[2013-06-27 Thu 00:10] =>  1:24
      CLOCK: [2013-06-26 Wed 22:23]--[2013-06-26 Wed 22:45] =>  0:22
 
 *** Add content to the introduction in manual                         :story:

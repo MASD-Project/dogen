@@ -29,7 +29,7 @@
 #include <boost/serialization/nvp.hpp>
 #include "dogen/sml/serialization/abstract_object_ser.hpp"
 #include "dogen/sml/serialization/value_object_ser.hpp"
-#include "dogen/sml/serialization/value_types_ser.hpp"
+#include "dogen/sml/serialization/value_object_types_ser.hpp"
 
 #ifdef __linux__
 #include "eos/portable_iarchive.hpp"

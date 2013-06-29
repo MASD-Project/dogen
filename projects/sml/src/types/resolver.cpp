@@ -20,19 +20,29 @@
  */
 #include <set>
 #include <sstream>
+#include <memory>
+#include <functional>
 #include <iterator>
 #include <algorithm>
 // #include <iostream>
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/utility/io/set_io.hpp"
-#include "dogen/utility/io/list_io.hpp"
+// #include "dogen/utility/io/set_io.hpp"
+// #include "dogen/utility/io/list_io.hpp"
 #include "dogen/utility/io/unordered_set_io.hpp"
+#include "dogen/sml/types/abstract_object.hpp"
+#include "dogen/sml/types/value_object.hpp"
+#include "dogen/sml/types/keyed_entity.hpp"
+#include "dogen/sml/types/service.hpp"
+#include "dogen/sml/types/factory.hpp"
+#include "dogen/sml/types/repository.hpp"
+#include "dogen/sml/types/entity.hpp"
+#include "dogen/sml/types/keyed_entity.hpp"
+#include "dogen/sml/types/type_visitor.hpp"
 #include "dogen/sml/types/resolution_error.hpp"
 #include "dogen/sml/io/qname_io.hpp"
 #include "dogen/sml/io/nested_qname_io.hpp"
 #include "dogen/sml/io/property_io.hpp"
-#include "dogen/sml/io/pod_io.hpp"
 #include "dogen/sml/io/model_io.hpp"
 #include "dogen/sml/types/resolver.hpp"
 
@@ -43,9 +53,9 @@ namespace {
 auto lg(logger_factory("sml.resolver"));
 
 const std::string empty;
-const std::string orphan_pod("Pod's parent could not be located: ");
+const std::string orphan_object("Object's parent could not be located: ");
 const std::string orphan_concept("Refined concept could not be located: ");
-const std::string undefined_type("Pod has property with undefined type: ");
+const std::string undefined_type("Object has property with undefined type: ");
 const std::string missing_dependency("Cannot find dependency: ");
 const std::string model_resolved("Resolution has already been done for model");
 
@@ -89,23 +99,23 @@ expand_concept_hierarchy(const qname& qn, std::list<qname>& concepts) const {
     concepts.push_back(qn);
 }
 
-void resolver::validate_inheritance_graph(const pod& p) const {
+void resolver::validate_inheritance_graph(const abstract_object& ao) const {
     // FIXME: we should really just check that the parent exists since
-    // we know all pods get checked anyway. this results in a lot of
+    // we know all objects get checked anyway. this results in a lot of
     // double-checks for no reason.
-    auto parent(p.parent_name());
+    auto parent(ao.parent_name());
     while (parent) {
         qname pqn(*parent);
-        const auto i(model_.pods().find(pqn));
-        if (i == model_.pods().end()) {
-            std::ostringstream stream;
-            stream << orphan_pod << ". pod: "
-                   << p.name().type_name() << ". parent: "
-                   << pqn.type_name();
-            BOOST_LOG_SEV(lg, error) << stream.str();
-            BOOST_THROW_EXCEPTION(resolution_error(stream.str()));
+        const auto i(model_.objects().find(pqn));
+        if (i == model_.objects().end()) {
+            std::ostringstream s;
+            s << orphan_object << ": " << ao.name().type_name()
+              << ". parent: " << pqn.type_name();
+
+            BOOST_LOG_SEV(lg, error) << s.str();
+            BOOST_THROW_EXCEPTION(resolution_error(s.str()));
         }
-        parent = i->second.parent_name();
+        parent = i->second->parent_name();
     }
 }
 
@@ -128,33 +138,33 @@ qname resolver::resolve_partial_type(const qname& n) const {
     qname r(n);
 
     // first try the type as it was read originally.
-    const auto& pods(model_.pods());
-    r.meta_type(meta_types::pod);
-    auto i(pods.find(r));
-    if (i != pods.end())
+    const auto& objects(model_.objects());
+    r.meta_type(meta_types::value_object);
+    auto i(objects.find(r));
+    if (i != objects.end())
         return r;
 
     // then try setting module path to the target one
     r.external_module_path(model_.external_module_path());
-    i = pods.find(r);
-    if (i != pods.end())
+    i = objects.find(r);
+    if (i != objects.end())
         return r;
 
     // now try all available module paths from references
     for (const auto& pair : references_) {
         const auto ref(pair.second);
         r.external_module_path(ref.external_module_path());
-        i = pods.find(r);
-        if (i != pods.end())
+        i = objects.find(r);
+        if (i != objects.end())
             return r;
     }
 
     // reset external module path
     r.external_module_path(std::list<std::string>{});
 
-    // its not a pod, could it be a primitive?
-    const auto& primitives(model_.primitives());
+    // its not a object, could it be a primitive?
     r.meta_type(meta_types::primitive);
+    const auto& primitives(model_.primitives());
     auto j(primitives.find(r));
     if (j != primitives.end())
         return r;
@@ -183,14 +193,13 @@ qname resolver::resolve_partial_type(const qname& n) const {
 
     if (r.model_name().empty()) {
         // it could be a type defined in this model
-        r.meta_type(meta_types::pod);
+        r.meta_type(meta_types::value_object);
         r.model_name(model_.name());
         r.external_module_path(model_.external_module_path());
-        i = pods.find(r);
-        if (i != pods.end())
+        i = objects.find(r);
+        if (i != objects.end())
             return r;
 
-        const auto& enumerations(model_.enumerations());
         r.meta_type(meta_types::enumeration);
         auto k(enumerations.find(r));
         if (k != enumerations.end())
@@ -225,9 +234,9 @@ std::list<property> resolver::resolve_properties(const qname& owner,
             r.push_back(p);
         } catch (boost::exception& e) {
             std::ostringstream s;
-            s << "Pod: " << owner.type_name()
-              << " Property: " << p.name()
-              << " type: " << p.type_name();
+            s << "Owner type name: " << owner.type_name()
+              << " Property name: " << p.name()
+              << " Property type: " << p.type_name();
             e << errmsg_info(s.str());
             throw;
         }
@@ -274,58 +283,59 @@ void resolver::resolve_concepts() {
     }
 }
 
-void resolver::resolve_pods() {
-    for (auto& pair : model_.pods()) {
-        pod& p(pair.second);
-        if (p.generation_type() == generation_types::no_generation)
-            continue;
+void resolver::resolve_objects() {
+    for (auto& pair : model_.objects()) {
+        auto& o(*pair.second);
+        if (o.generation_type() == generation_types::no_generation)
+            return;
 
-        validate_inheritance_graph(p);
-        p.properties(resolve_properties(p.name(), p.properties()));
+        validate_inheritance_graph(o);
+        o.properties(resolve_properties(o.name(), o.properties()));
 
-        //FIXME: biggest hack ever
-        if (p.modeled_concepts().empty())
-            continue;
+        //FIXME: start of biggest hack ever
+        if (o.modeled_concepts().empty())
+            return;
 
         std::list<qname> expanded_modeled_concepts;
-        for (const auto& qn : p.modeled_concepts())
+        for (const auto& qn : o.modeled_concepts())
             expand_concept_hierarchy(qn, expanded_modeled_concepts);
 
-        // std::cout << "type: " << p.name().type_name() << std::endl;
+        // std::cout << "type: " << o.name().type_name() << std::endl;
 
         // std::cout << "after expand: " << expanded_modeled_concepts.size()
         //           << std::endl
         //           << " " << expanded_modeled_concepts << std::endl;
 
-        p.modeled_concepts().clear();
+        o.modeled_concepts().clear();
         for (const auto& qn : expanded_modeled_concepts)
-            p.modeled_concepts().push_back(qn);
+            o.modeled_concepts().push_back(qn);
 
-        // std::cout << "modeled: " << p.modeled_concepts().size() << std::endl;
+        // std::cout << "modeled: " << o.modeled_concepts().size() << std::endl;
     }
 
     //FIXME: biggest hack ever - continued
-    for (auto& pair : model_.pods()) {
-        pod& p(pair.second);
+    for (auto& pair : model_.objects()) {
+        auto& o(*pair.second);
 
-        if (p.modeled_concepts().empty())
-            continue;
+        if (o.modeled_concepts().empty())
+            return;
 
-        // std::cout << "type2: " << p.name().type_name() << std::endl;
-        // std::cout << "modeled: " << p.modeled_concepts().size() << std::endl;
+        // std::cout << "type2: " << o.name().type_name() << std::endl;
+        // std::cout << "modeled: " << o.modeled_concepts().size()
+        // << std::endl;
 
         std::set<qname> mc;
-        for (const auto& qn : p.modeled_concepts())
+        for (const auto& qn : o.modeled_concepts())
             mc.insert(qn);
 
         std::set<qname> pmc;
-        auto parent(p.parent_name());
+        auto parent(o.parent_name());
         while (parent) {
             qname pqn(*parent);
-            const auto i(model_.pods().find(pqn));
-            for (const auto& qn : i->second.modeled_concepts())
+            const auto i(model_.objects().find(pqn));
+            for (const auto& qn : i->second->modeled_concepts())
                 pmc.insert(qn);
-            parent = i->second.parent_name();
+            parent = i->second->parent_name();
         }
 
         // std::cout << "pmc: " << pmc << std::endl
@@ -336,11 +346,11 @@ void resolver::resolve_pods() {
             std::inserter(result, result.end()));
 
         // std::cout << "result: " << result << std::endl;
-        auto tmp(p.modeled_concepts());
-        p.modeled_concepts().clear();
+        auto tmp(o.modeled_concepts());
+        o.modeled_concepts().clear();
         for (const auto& qn : tmp) {
             if (result.find(qn) != result.end())
-                p.modeled_concepts().push_back(qn);
+                o.modeled_concepts().push_back(qn);
         }
     }
 }
@@ -349,7 +359,7 @@ void resolver::resolve() {
     require_not_has_resolved();
     resolve_references();
     resolve_concepts();
-    resolve_pods();
+    resolve_objects();
     has_resolved_ = true;
 }
 

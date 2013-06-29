@@ -45,6 +45,13 @@ public:
 
 private:
     /**
+     * @brief Returns true if the type is generatable, false
+     * otherwise.
+     */
+    bool is_generatable(const type& t) const;
+
+private:
+    /**
      * @brief Add any additional models to the original list of
      * references passed in by user.
      */

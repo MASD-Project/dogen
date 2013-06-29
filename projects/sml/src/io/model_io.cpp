@@ -21,16 +21,14 @@
 #include <boost/algorithm/string.hpp>
 #include <boost/io/ios_state.hpp>
 #include <ostream>
+#include "dogen/sml/io/abstract_object_io.hpp"
 #include "dogen/sml/io/concept_io.hpp"
 #include "dogen/sml/io/enumeration_io.hpp"
 #include "dogen/sml/io/model_io.hpp"
 #include "dogen/sml/io/module_io.hpp"
-#include "dogen/sml/io/pod_io.hpp"
 #include "dogen/sml/io/primitive_io.hpp"
 #include "dogen/sml/io/qname_io.hpp"
 #include "dogen/sml/io/reference_io.hpp"
-#include "dogen/sml/io/service_io.hpp"
-#include "dogen/sml/io/value_object_io.hpp"
 
 
 inline std::string tidy_up_string(std::string s) {
@@ -62,78 +60,6 @@ inline std::ostream& operator<<(std::ostream& s, const std::vector<std::pair<std
         s << *i;
     }
     s << "] ";
-    return s;
-}
-
-}
-
-namespace std {
-
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen::sml::qname, dogen::sml::pod>& v) {
-    s << "[";
-    for (auto i(v.begin()); i != v.end(); ++i) {
-        if (i != v.begin()) s << ", ";
-        s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
-        s << i->first;
-        s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
-        s << i->second;
-        s << " } ]";
-    }
-    s << " ] ";
-    return s;
-}
-
-}
-
-namespace std {
-
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen::sml::qname, dogen::sml::primitive>& v) {
-    s << "[";
-    for (auto i(v.begin()); i != v.end(); ++i) {
-        if (i != v.begin()) s << ", ";
-        s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
-        s << i->first;
-        s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
-        s << i->second;
-        s << " } ]";
-    }
-    s << " ] ";
-    return s;
-}
-
-}
-
-namespace std {
-
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen::sml::qname, dogen::sml::enumeration>& v) {
-    s << "[";
-    for (auto i(v.begin()); i != v.end(); ++i) {
-        if (i != v.begin()) s << ", ";
-        s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
-        s << i->first;
-        s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
-        s << i->second;
-        s << " } ]";
-    }
-    s << " ] ";
-    return s;
-}
-
-}
-
-namespace std {
-
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen::sml::qname, dogen::sml::value_object>& v) {
-    s << "[";
-    for (auto i(v.begin()); i != v.end(); ++i) {
-        if (i != v.begin()) s << ", ";
-        s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
-        s << i->first;
-        s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
-        s << i->second;
-        s << " } ]";
-    }
-    s << " ] ";
     return s;
 }
 
@@ -187,24 +113,6 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_set<dogen:
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen::sml::qname, dogen::sml::service>& v) {
-    s << "[";
-    for (auto i(v.begin()); i != v.end(); ++i) {
-        if (i != v.begin()) s << ", ";
-        s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
-        s << i->first;
-        s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
-        s << i->second;
-        s << " } ]";
-    }
-    s << " ] ";
-    return s;
-}
-
-}
-
-namespace std {
-
 inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen::sml::qname, dogen::sml::module>& v) {
     s << "[";
     for (auto i(v.begin()); i != v.end(); ++i) {
@@ -239,6 +147,76 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen:
 
 }
 
+namespace std {
+
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen::sml::qname, dogen::sml::primitive>& v) {
+    s << "[";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
+        s << i->first;
+        s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
+        s << i->second;
+        s << " } ]";
+    }
+    s << " ] ";
+    return s;
+}
+
+}
+
+namespace std {
+
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen::sml::qname, dogen::sml::enumeration>& v) {
+    s << "[";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
+        s << i->first;
+        s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
+        s << i->second;
+        s << " } ]";
+    }
+    s << " ] ";
+    return s;
+}
+
+}
+
+namespace boost {
+
+inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<dogen::sml::abstract_object>& v) {
+    s << "{ " << "\"__type__\": " << "\"boost::shared_ptr\"" << ", "
+      << "\"memory\": " << "\"" << static_cast<void*>(v.get()) << "\"" << ", ";
+
+    if (v)
+        s << "\"data\": " << *v;
+    else
+        s << "\"data\": ""\"<empty>\"";
+    s<< " }";
+    return s;
+}
+
+}
+
+namespace std {
+
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::sml::abstract_object> >& v) {
+    s << "[";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
+        s << i->first;
+        s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
+        s << i->second;
+        s << " } ]";
+    }
+    s << " ] ";
+    return s;
+}
+
+}
+
 namespace dogen {
 namespace sml {
 
@@ -254,17 +232,15 @@ std::ostream& operator<<(std::ostream& s, const model& v) {
       << "\"documentation\": " << "\"" << tidy_up_string(v.documentation()) << "\"" << ", "
       << "\"implementation_specific_parameters\": " << v.implementation_specific_parameters() << ", "
       << "\"name\": " << "\"" << tidy_up_string(v.name()) << "\"" << ", "
-      << "\"pods\": " << v.pods() << ", "
-      << "\"primitives\": " << v.primitives() << ", "
-      << "\"enumerations\": " << v.enumerations() << ", "
-      << "\"exceptions\": " << v.exceptions() << ", "
       << "\"external_module_path\": " << v.external_module_path() << ", "
       << "\"is_system\": " << v.is_system() << ", "
       << "\"dependencies\": " << v.dependencies() << ", "
       << "\"leaves\": " << v.leaves() << ", "
-      << "\"services\": " << v.services() << ", "
       << "\"modules\": " << v.modules() << ", "
-      << "\"concepts\": " << v.concepts()
+      << "\"concepts\": " << v.concepts() << ", "
+      << "\"primitives\": " << v.primitives() << ", "
+      << "\"enumerations\": " << v.enumerations() << ", "
+      << "\"objects\": " << v.objects()
       << " }";
     return(s);
 }

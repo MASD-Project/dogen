@@ -20,7 +20,7 @@
  */
 #include "dogen/sml/hash/abstract_object_hash.hpp"
 #include "dogen/sml/hash/value_object_hash.hpp"
-#include "dogen/sml/hash/value_types_hash.hpp"
+#include "dogen/sml/hash/value_object_types_hash.hpp"
 
 namespace {
 

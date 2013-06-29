@@ -20,13 +20,13 @@
  */
 #include "dogen/sml/test_data/abstract_object_td.hpp"
 #include "dogen/sml/test_data/value_object_td.hpp"
-#include "dogen/sml/test_data/value_types_td.hpp"
+#include "dogen/sml/test_data/value_object_types_td.hpp"
 
 namespace {
 
-dogen::sml::value_types
-create_dogen_sml_value_types(const unsigned int position) {
-    return dogen::sml::value_types_generator::create(position);
+dogen::sml::value_object_types
+create_dogen_sml_value_object_types(const unsigned int position) {
+    return dogen::sml::value_object_types_generator::create(position);
 }
 
 }
@@ -39,7 +39,7 @@ value_object_generator::value_object_generator() : position_(0) { }
 void value_object_generator::
 populate(const unsigned int position, result_type& v) {
     dogen::sml::abstract_object_generator::populate(position, v);
-    v.type(create_dogen_sml_value_types(position + 0));
+    v.type(create_dogen_sml_value_object_types(position + 0));
 }
 
 value_object_generator::result_type

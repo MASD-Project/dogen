@@ -41,22 +41,23 @@ BOOST_AUTO_TEST_SUITE(move_assignment_copy)
 BOOST_AUTO_TEST_CASE(validate_move_assignment_copy) {
     SETUP_TEST_LOG("validate_move_assignment_copy");
 
-    test_move_assignment_copy<category_types_generator>();
     test_move_assignment_copy<generation_types_generator>();
     test_move_assignment_copy<meta_types_generator>();
-    test_move_assignment_copy<model_generator>();
     test_move_assignment_copy<nested_qname_generator>();
-    test_move_assignment_copy<pod_generator>();
-    test_move_assignment_copy<pod_types_generator>();
     test_move_assignment_copy<property_generator>();
     test_move_assignment_copy<qname_generator>();
+    test_move_assignment_copy<primitive_generator>();
+    test_move_assignment_copy<enumerator_generator>();
+    test_move_assignment_copy<enumeration_generator>();
     test_move_assignment_copy<value_object_generator>();
     test_move_assignment_copy<entity_generator>();
+    test_move_assignment_copy<keyed_entity_generator>();
     test_move_assignment_copy<service_generator>();
     test_move_assignment_copy<module_generator>();
     test_move_assignment_copy<repository_generator>();
     test_move_assignment_copy<factory_generator>();
     test_move_assignment_copy<concept_generator>();
+    test_move_assignment_copy<model_generator>();
 }
 
 BOOST_AUTO_TEST_SUITE_END()

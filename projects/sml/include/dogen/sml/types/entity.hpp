@@ -60,12 +60,11 @@ public:
         const bool is_visitable,
         const bool is_immutable,
         const bool is_versioned,
-        const bool is_keyed,
         const bool is_comparable,
         const bool is_fluent,
         const std::list<dogen::sml::qname>& modeled_concepts,
         const bool is_aggregate_root,
-        const std::list<dogen::sml::property>& identity_operation);
+        const std::list<dogen::sml::property>& identity);
 
 private:
     template<typename Archive>

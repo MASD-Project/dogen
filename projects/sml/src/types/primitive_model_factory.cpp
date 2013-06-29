@@ -18,6 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
+#include <memory>
+#include "dogen/sml/types/primitive.hpp"
 #include "dogen/sml/types/primitive_model_factory.hpp"
 
 namespace {
@@ -43,7 +45,7 @@ const std::string float_name("float");
 namespace dogen {
 namespace sml {
 
-primitive primitive_model_factory::create(const std::string& name) {
+primitive primitive_model_factory::create_primitive(const std::string& name) {
     qname q;
     q.type_name(name);
     q.meta_type(meta_types::primitive);
@@ -60,8 +62,8 @@ model primitive_model_factory::create() {
     r.is_system(true);
 
     const auto lambda([&](const std::string& name){
-            const auto prim(create(name));
-            r.primitives().insert(std::make_pair(prim.name(), prim));
+            const auto p(create_primitive(name));
+            r.primitives().insert(std::make_pair(p.name(), p));
         });
 
     lambda(bool_name);

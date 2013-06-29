@@ -39,7 +39,6 @@ repository::repository(
     const bool is_visitable,
     const bool is_immutable,
     const bool is_versioned,
-    const bool is_keyed,
     const bool is_comparable,
     const bool is_fluent,
     const std::list<dogen::sml::qname>& modeled_concepts)
@@ -56,7 +55,6 @@ repository::repository(
       is_visitable,
       is_immutable,
       is_versioned,
-      is_keyed,
       is_comparable,
       is_fluent,
       modeled_concepts) { }

@@ -36,17 +36,11 @@ std::ostream& operator<<(std::ostream& s, const meta_types& v) {
     case meta_types::enumeration:
         attr = "\"enumeration\"";
         break;
-    case meta_types::pod:
-        attr = "\"pod\"";
-        break;
     case meta_types::primitive:
         attr = "\"primitive\"";
         break;
     case meta_types::exception:
         attr = "\"exception\"";
-        break;
-    case meta_types::string_table:
-        attr = "\"string_table\"";
         break;
     case meta_types::module:
         attr = "\"module\"";
@@ -57,8 +51,11 @@ std::ostream& operator<<(std::ostream& s, const meta_types& v) {
     case meta_types::entity:
         attr = "\"entity\"";
         break;
-    case meta_types::value:
-        attr = "\"value\"";
+    case meta_types::keyed_entity:
+        attr = "\"keyed_entity\"";
+        break;
+    case meta_types::value_object:
+        attr = "\"value_object\"";
         break;
     case meta_types::factory:
         attr = "\"factory\"";

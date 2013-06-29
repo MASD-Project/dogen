@@ -28,19 +28,18 @@
 #include <boost/archive/xml_oarchive.hpp>
 #include <boost/serialization/list.hpp>
 #include <boost/serialization/nvp.hpp>
+#include <boost/serialization/shared_ptr.hpp>
 #include <boost/serialization/string.hpp>
 #include <boost/serialization/utility.hpp>
 #include <boost/serialization/vector.hpp>
+#include "dogen/sml/serialization/abstract_object_ser.hpp"
 #include "dogen/sml/serialization/concept_ser.hpp"
 #include "dogen/sml/serialization/enumeration_ser.hpp"
 #include "dogen/sml/serialization/model_ser.hpp"
 #include "dogen/sml/serialization/module_ser.hpp"
-#include "dogen/sml/serialization/pod_ser.hpp"
 #include "dogen/sml/serialization/primitive_ser.hpp"
 #include "dogen/sml/serialization/qname_ser.hpp"
 #include "dogen/sml/serialization/reference_ser.hpp"
-#include "dogen/sml/serialization/service_ser.hpp"
-#include "dogen/sml/serialization/value_object_ser.hpp"
 #include "dogen/utility/serialization/unordered_map.hpp"
 #include "dogen/utility/serialization/unordered_set.hpp"
 
@@ -59,17 +58,15 @@ void save(Archive& ar,
     ar << make_nvp("documentation", v.documentation_);
     ar << make_nvp("implementation_specific_parameters", v.implementation_specific_parameters_);
     ar << make_nvp("name", v.name_);
-    ar << make_nvp("pods", v.pods_);
-    ar << make_nvp("primitives", v.primitives_);
-    ar << make_nvp("enumerations", v.enumerations_);
-    ar << make_nvp("exceptions", v.exceptions_);
     ar << make_nvp("external_module_path", v.external_module_path_);
     ar << make_nvp("is_system", v.is_system_);
     ar << make_nvp("dependencies", v.dependencies_);
     ar << make_nvp("leaves", v.leaves_);
-    ar << make_nvp("services", v.services_);
     ar << make_nvp("modules", v.modules_);
     ar << make_nvp("concepts", v.concepts_);
+    ar << make_nvp("primitives", v.primitives_);
+    ar << make_nvp("enumerations", v.enumerations_);
+    ar << make_nvp("objects", v.objects_);
 }
 
 template<typename Archive>
@@ -79,17 +76,15 @@ void load(Archive& ar,
     ar >> make_nvp("documentation", v.documentation_);
     ar >> make_nvp("implementation_specific_parameters", v.implementation_specific_parameters_);
     ar >> make_nvp("name", v.name_);
-    ar >> make_nvp("pods", v.pods_);
-    ar >> make_nvp("primitives", v.primitives_);
-    ar >> make_nvp("enumerations", v.enumerations_);
-    ar >> make_nvp("exceptions", v.exceptions_);
     ar >> make_nvp("external_module_path", v.external_module_path_);
     ar >> make_nvp("is_system", v.is_system_);
     ar >> make_nvp("dependencies", v.dependencies_);
     ar >> make_nvp("leaves", v.leaves_);
-    ar >> make_nvp("services", v.services_);
     ar >> make_nvp("modules", v.modules_);
     ar >> make_nvp("concepts", v.concepts_);
+    ar >> make_nvp("primitives", v.primitives_);
+    ar >> make_nvp("enumerations", v.enumerations_);
+    ar >> make_nvp("objects", v.objects_);
 }
 
 } }

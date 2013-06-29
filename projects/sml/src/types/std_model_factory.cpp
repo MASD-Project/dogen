@@ -18,6 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
+#include <memory>
+#include "dogen/sml/types/value_object.hpp"
 #include "dogen/sml/types/std_model_factory.hpp"
 
 namespace {
@@ -71,22 +73,24 @@ primitive std_model_factory::create_primitive(const std::string& name) {
     return r;
 }
 
-pod std_model_factory::
-create_pod(const std::string& name, pod_types pt) {
+boost::shared_ptr<abstract_object> std_model_factory::create_value_object(
+    const std::string& name, value_object_types t) {
+
     qname q;
     q.type_name(name);
-    q.meta_type(meta_types::pod);
+    q.meta_type(meta_types::value_object);
     q.model_name(model_name);
-    pod r;
-    r.name(q);
-    r.generation_type(generation_types::no_generation);
-    if (pt == pod_types::sequence_container)
-        r.number_of_type_arguments(1);
-    else if (pt == pod_types::associative_container)
-        r.number_of_type_arguments(2);
 
-    r.pod_type(pt);
-    return r;
+    std::unique_ptr<value_object> r(new value_object());
+    r->name(q);
+    r->generation_type(generation_types::no_generation);
+    r->type(t);
+    if (t == value_object_types::sequence_container)
+        r->number_of_type_arguments(1);
+    else if (t == value_object_types::associative_container)
+        r->number_of_type_arguments(2);
+
+    return boost::shared_ptr<abstract_object>(r.release());
 }
 
 model std_model_factory::create() {
@@ -94,14 +98,14 @@ model std_model_factory::create() {
     r.name(model_name);
     r.is_system(true);
 
-    const auto lambda([&](std::string name){
+    const auto lambda([&](const std::string& name){
             const auto p(create_primitive(name));
             r.primitives().insert(std::make_pair(p.name(), p));
         });
 
-    const auto pi([&](std::string name, pod_types pt) {
-            const auto p(create_pod(name, pt));
-            r.pods().insert(std::make_pair(p.name(), p));
+    const auto pi([&](const std::string& name, value_object_types vot) {
+            const auto vo(create_value_object(name, vot));
+            r.objects().insert(std::make_pair(vo->name(), vo));
         });
 
     lambda(int8_t_name);
@@ -113,27 +117,27 @@ model std_model_factory::create() {
     lambda(uint32_t_name);
     lambda(uint64_t_name);
 
-    pi(string_name, pod_types::value);
-    pi(vector_name, pod_types::sequence_container);
-    pi(deque_name, pod_types::sequence_container);
-    pi(array_name, pod_types::sequence_container);
-    pi(list_name, pod_types::sequence_container);
-    pi(forward_list_name, pod_types::sequence_container);
+    pi(string_name, value_object_types::plain);
+    pi(vector_name, value_object_types::sequence_container);
+    pi(deque_name, value_object_types::sequence_container);
+    pi(array_name, value_object_types::sequence_container);
+    pi(list_name, value_object_types::sequence_container);
+    pi(forward_list_name, value_object_types::sequence_container);
 
-    pi(set_name, pod_types::associative_container);
-    pi(multiset_name, pod_types::associative_container);
-    pi(unordered_set_name, pod_types::associative_container);
-    pi(unordered_multiset_name, pod_types::associative_container);
-    pi(map_name, pod_types::associative_container);
-    pi(multimap_name, pod_types::associative_container);
-    pi(unordered_map_name, pod_types::associative_container);
-    pi(pair_name, pod_types::value);
+    pi(set_name, value_object_types::associative_container);
+    pi(multiset_name, value_object_types::associative_container);
+    pi(unordered_set_name, value_object_types::associative_container);
+    pi(unordered_multiset_name, value_object_types::associative_container);
+    pi(map_name, value_object_types::associative_container);
+    pi(multimap_name, value_object_types::associative_container);
+    pi(unordered_map_name, value_object_types::associative_container);
+    pi(pair_name, value_object_types::plain);
 
-    pi(shared_ptr_name, pod_types::smart_pointer);
-    pi(weak_ptr_name, pod_types::smart_pointer);
-    pi(unique_ptr_name, pod_types::smart_pointer);
+    pi(shared_ptr_name, value_object_types::smart_pointer);
+    pi(weak_ptr_name, value_object_types::smart_pointer);
+    pi(unique_ptr_name, value_object_types::smart_pointer);
 
-    pi(function_name, pod_types::value);
+    pi(function_name, value_object_types::plain);
 
     return r;
 }

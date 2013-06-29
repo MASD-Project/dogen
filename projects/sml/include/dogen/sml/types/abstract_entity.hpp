@@ -39,16 +39,27 @@ namespace sml {
 /**
  * @brief Represents a type in the domain which has identity.
  *
- * Identity here is understood in the strong sense, not just of the basic identity
- * provided by the programming language (e.g. unique memory address for the
- * object) but in a domain sense, such that this identity could be perserved
- * regardless of how the object was stored (e.g. persisted in a database).
+ * Identity here is understood in a stronger sense than just the basic
+ * OOP guarantee of identity - say, by providing a unique memory address
+ * for an object. We mean identity in a @b domain sense, such that it
+ * could be preserved regardless of the object life-time in memory
+ * (e.g. it could be persisted in a database or to file).
  *
- * All entities have keys associated with them which are implementations of  the
- * identity function; they key could be a regular domain type such as a value, or it
- * could be a system generated type for this purpose. As with any typed element,
- * keys can be versioned or unversioned, depending on the versioning
- * requirements of the underlying typed element.
+ * Identity emerges by deep domain analysis and is then expressed in the
+ * model by manually defining of a set of properties which uniquely
+ * identify an entity. These properties form part of the state of the
+ * entity. The identity function (or operation) can be understood as a
+ * conceptual device that maps the entity's identity to the entity.
+ *
+ * As with any typed element, entities can be versioned or unversioned,
+ * depending on the requirements of the underlying typed element.
+ *
+ * @note Identity properties can only be supplied once when in an
+ * inheritance tree. This means that an identity can be obtained by
+ * either refining a concept that provides an identity, or by inheriting
+ * from a parent which provides an identity but not both; and when this
+ * occurs the type can no longer provide an identity itself. Across an
+ * inheritance graph, the identity operation can only be defined once.
  */
 class abstract_entity : public dogen::sml::abstract_object {
 public:
@@ -75,12 +86,11 @@ public:
         const bool is_visitable,
         const bool is_immutable,
         const bool is_versioned,
-        const bool is_keyed,
         const bool is_comparable,
         const bool is_fluent,
         const std::list<dogen::sml::qname>& modeled_concepts,
         const bool is_aggregate_root,
-        const std::list<dogen::sml::property>& identity_operation);
+        const std::list<dogen::sml::property>& identity);
 
 private:
     template<typename Archive>
@@ -102,13 +112,16 @@ public:
     /**@}*/
 
     /**
-     * @brief List of properties that make up the identity operation, uniquely identifying this entity.
+     * @brief List of properties that make up the identity operation.
+     *
+     * @note These properties are copied from the original source such as
+     * a concept, parent or the main properties container.
      */
     /**@{*/
-    const std::list<dogen::sml::property>& identity_operation() const;
-    std::list<dogen::sml::property>& identity_operation();
-    void identity_operation(const std::list<dogen::sml::property>& v);
-    void identity_operation(const std::list<dogen::sml::property>&& v);
+    const std::list<dogen::sml::property>& identity() const;
+    std::list<dogen::sml::property>& identity();
+    void identity(const std::list<dogen::sml::property>& v);
+    void identity(const std::list<dogen::sml::property>&& v);
     /**@}*/
 
 protected:
@@ -121,7 +134,7 @@ protected:
 
 private:
     bool is_aggregate_root_;
-    std::list<dogen::sml::property> identity_operation_;
+    std::list<dogen::sml::property> identity_;
 };
 
 inline abstract_entity::~abstract_entity() noexcept { }

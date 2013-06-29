@@ -18,25 +18,29 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_SML_SERIALIZATION_POD_SER_HPP
-#define DOGEN_SML_SERIALIZATION_POD_SER_HPP
+#ifndef DOGEN_SML_TYPES_VALUE_OBJECT_TYPES_HPP
+#define DOGEN_SML_TYPES_VALUE_OBJECT_TYPES_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <boost/serialization/split_free.hpp>
-#include "dogen/sml/types/pod.hpp"
+namespace dogen {
+namespace sml {
 
-BOOST_SERIALIZATION_SPLIT_FREE(dogen::sml::pod)
-namespace boost {
-namespace serialization {
-
-template<typename Archive>
-void save(Archive& ar, const dogen::sml::pod& v, unsigned int version);
-
-template<typename Archive>
-void load(Archive& ar, dogen::sml::pod& v, unsigned int version);
+/**
+ * @brief Types of value objects.
+ */
+enum class value_object_types : unsigned int {
+    invalid = 0, ///< Represents an uninitialised enum
+    plain = 1, ///< Regular value object with no distinguishing features.
+    unversioned_key = 2, ///< Value is an unversioned key.
+    versioned_key = 3, ///< Value is a versioned key.
+    exception = 4, ///< Value represents an exception type.
+    smart_pointer = 5, ///< Value is a smart pointer.
+    associative_container = 6, ///< Type is an associative container.
+    sequence_container = 7 ///< Type is a sequence container.
+};
 
 } }
 

@@ -47,23 +47,23 @@ BOOST_AUTO_TEST_SUITE(serialization)
 BOOST_AUTO_TEST_CASE(validate_serialization) {
     SETUP_TEST_LOG("validate_serialization");
 
-    rountrip_type<category_types_generator>();
     rountrip_type<generation_types_generator>();
     rountrip_type<meta_types_generator>();
-    rountrip_type<model_generator>();
     rountrip_type<nested_qname_generator>();
-    rountrip_type<pod_generator>();
-    rountrip_type<pod_types_generator>();
     rountrip_type<property_generator>();
     rountrip_type<qname_generator>();
-    rountrip_type<reference_generator>();
+    rountrip_type<primitive_generator>();
+    rountrip_type<enumerator_generator>();
+    rountrip_type<enumeration_generator>();
     rountrip_type<value_object_generator>();
     rountrip_type<entity_generator>();
+    rountrip_type<keyed_entity_generator>();
     rountrip_type<service_generator>();
     rountrip_type<module_generator>();
     rountrip_type<repository_generator>();
     rountrip_type<factory_generator>();
     rountrip_type<concept_generator>();
+    rountrip_type<model_generator>();
 }
 
 BOOST_AUTO_TEST_SUITE_END()

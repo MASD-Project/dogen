@@ -30,7 +30,7 @@
 #include "dogen/sml/serialization/value_object_fwd_ser.hpp"
 #include "dogen/sml/types/abstract_object.hpp"
 #include "dogen/sml/types/type_visitor.hpp"
-#include "dogen/sml/types/value_types.hpp"
+#include "dogen/sml/types/value_object_types.hpp"
 
 namespace dogen {
 namespace sml {
@@ -67,11 +67,10 @@ public:
         const bool is_visitable,
         const bool is_immutable,
         const bool is_versioned,
-        const bool is_keyed,
         const bool is_comparable,
         const bool is_fluent,
         const std::list<dogen::sml::qname>& modeled_concepts,
-        const dogen::sml::value_types& type);
+        const dogen::sml::value_object_types& type);
 
 private:
     template<typename Archive>
@@ -105,8 +104,8 @@ public:
      * @brief Type of this value object.
      */
     /**@{*/
-    dogen::sml::value_types type() const;
-    void type(const dogen::sml::value_types& v);
+    dogen::sml::value_object_types type() const;
+    void type(const dogen::sml::value_object_types& v);
     /**@}*/
 
 public:
@@ -123,7 +122,7 @@ public:
     value_object& operator=(value_object other);
 
 private:
-    dogen::sml::value_types type_;
+    dogen::sml::value_object_types type_;
 };
 
 } }

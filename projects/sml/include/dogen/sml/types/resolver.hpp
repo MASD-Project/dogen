@@ -29,6 +29,7 @@
 #include <unordered_map>
 #include "dogen/sml/types/nested_qname.hpp"
 #include "dogen/sml/types/reference.hpp"
+#include "dogen/sml/types/abstract_object.hpp"
 #include "dogen/sml/types/model.hpp"
 
 namespace dogen {
@@ -81,11 +82,11 @@ private:
         const std::list<property>& unresolved_properties) const;
 
     /**
-     * @brief Validates the inheritance graph for the pod.
+     * @brief Validates the inheritance graph for the object.
      *
      * @note should really be moved to validator.
      */
-    void validate_inheritance_graph(const pod& p) const;
+    void validate_inheritance_graph(const abstract_object& ao) const;
 
     /**
      * @brief Ensures that all concepts refined by the current concept
@@ -111,9 +112,9 @@ private:
     void resolve_concepts();
 
     /**
-     * @brief Resolve all pods.
+     * @brief Resolve all objects.
      */
-    void resolve_pods();
+    void resolve_objects();
 
 public:
     /**

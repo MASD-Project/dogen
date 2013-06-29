@@ -26,12 +26,16 @@
 #endif
 
 #include <string>
+#include <boost/shared_ptr.hpp>
 #include "dogen/sml/types/primitive.hpp"
 #include "dogen/sml/types/model.hpp"
 
 namespace dogen {
 namespace sml {
 
+/**
+ * @brief Generates the system model for the primitive types.
+ */
 class primitive_model_factory {
 public:
     primitive_model_factory() = delete;
@@ -41,9 +45,15 @@ public:
     primitive_model_factory& operator=(const primitive_model_factory&) = delete;
 
 private:
-    static primitive create(const std::string& name);
+    /**
+     * @brief Create a new primitive.
+     */
+    static primitive create_primitive(const std::string& name);
 
 public:
+    /**
+     * @brief Create all primitives.
+     */
     static model create();
 };
 

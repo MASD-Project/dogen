@@ -72,7 +72,6 @@ public:
         const bool is_visitable,
         const bool is_immutable,
         const bool is_versioned,
-        const bool is_keyed,
         const bool is_comparable,
         const bool is_fluent,
         const std::list<dogen::sml::qname>& modeled_concepts);
@@ -173,14 +172,6 @@ public:
     /**@}*/
 
     /**
-     * @brief If true, add key support for the type.
-     */
-    /**@{*/
-    bool is_keyed() const;
-    void is_keyed(const bool v);
-    /**@}*/
-
-    /**
      * @brief If true, generates the less than operator.
      *
      * A type is only comparable if all of its properties are primitives or strings,
@@ -227,7 +218,6 @@ private:
     bool is_visitable_;
     bool is_immutable_;
     bool is_versioned_;
-    bool is_keyed_;
     bool is_comparable_;
     bool is_fluent_;
     std::list<dogen::sml::qname> modeled_concepts_;

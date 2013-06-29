@@ -18,7 +18,17 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen/sml/types/abstract_object.hpp"
 #include "dogen/sml/types/model.hpp"
+
+namespace boost {
+
+inline bool operator==(const boost::shared_ptr<dogen::sml::abstract_object>& lhs,
+const boost::shared_ptr<dogen::sml::abstract_object>& rhs) {
+    return (!lhs && !rhs) ||(lhs && rhs && (*lhs == *rhs));
+}
+
+}
 
 namespace dogen {
 namespace sml {
@@ -30,65 +40,57 @@ model::model(
     const std::string& documentation,
     const std::vector<std::pair<std::string, std::string> >& implementation_specific_parameters,
     const std::string& name,
-    const std::unordered_map<dogen::sml::qname, dogen::sml::pod>& pods,
-    const std::unordered_map<dogen::sml::qname, dogen::sml::primitive>& primitives,
-    const std::unordered_map<dogen::sml::qname, dogen::sml::enumeration>& enumerations,
-    const std::unordered_map<dogen::sml::qname, dogen::sml::value_object>& exceptions,
     const std::list<std::string>& external_module_path,
     const bool is_system,
     const std::unordered_map<std::string, dogen::sml::reference>& dependencies,
     const std::unordered_set<dogen::sml::qname>& leaves,
-    const std::unordered_map<dogen::sml::qname, dogen::sml::service>& services,
     const std::unordered_map<dogen::sml::qname, dogen::sml::module>& modules,
-    const std::unordered_map<dogen::sml::qname, dogen::sml::concept>& concepts)
+    const std::unordered_map<dogen::sml::qname, dogen::sml::concept>& concepts,
+    const std::unordered_map<dogen::sml::qname, dogen::sml::primitive>& primitives,
+    const std::unordered_map<dogen::sml::qname, dogen::sml::enumeration>& enumerations,
+    const std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::sml::abstract_object> >& objects)
     : documentation_(documentation),
       implementation_specific_parameters_(implementation_specific_parameters),
       name_(name),
-      pods_(pods),
-      primitives_(primitives),
-      enumerations_(enumerations),
-      exceptions_(exceptions),
       external_module_path_(external_module_path),
       is_system_(is_system),
       dependencies_(dependencies),
       leaves_(leaves),
-      services_(services),
       modules_(modules),
-      concepts_(concepts) { }
+      concepts_(concepts),
+      primitives_(primitives),
+      enumerations_(enumerations),
+      objects_(objects) { }
 
 void model::swap(model& other) noexcept {
     using std::swap;
     swap(documentation_, other.documentation_);
     swap(implementation_specific_parameters_, other.implementation_specific_parameters_);
     swap(name_, other.name_);
-    swap(pods_, other.pods_);
-    swap(primitives_, other.primitives_);
-    swap(enumerations_, other.enumerations_);
-    swap(exceptions_, other.exceptions_);
     swap(external_module_path_, other.external_module_path_);
     swap(is_system_, other.is_system_);
     swap(dependencies_, other.dependencies_);
     swap(leaves_, other.leaves_);
-    swap(services_, other.services_);
     swap(modules_, other.modules_);
     swap(concepts_, other.concepts_);
+    swap(primitives_, other.primitives_);
+    swap(enumerations_, other.enumerations_);
+    swap(objects_, other.objects_);
 }
 
 bool model::operator==(const model& rhs) const {
     return documentation_ == rhs.documentation_ &&
         implementation_specific_parameters_ == rhs.implementation_specific_parameters_ &&
         name_ == rhs.name_ &&
-        pods_ == rhs.pods_ &&
-        primitives_ == rhs.primitives_ &&
-        enumerations_ == rhs.enumerations_ &&
-        exceptions_ == rhs.exceptions_ &&
         external_module_path_ == rhs.external_module_path_ &&
         is_system_ == rhs.is_system_ &&
         dependencies_ == rhs.dependencies_ &&
         leaves_ == rhs.leaves_ &&
-        services_ == rhs.services_ &&
         modules_ == rhs.modules_ &&
-        concepts_ == rhs.concepts_;
+        concepts_ == rhs.concepts_ &&
+        primitives_ == rhs.primitives_ &&
+        enumerations_ == rhs.enumerations_ &&
+        objects_ == rhs.objects_;
 }
 
 model& model::operator=(model other) {
@@ -143,70 +145,6 @@ void model::name(const std::string& v) {
 
 void model::name(const std::string&& v) {
     name_ = std::move(v);
-}
-
-const std::unordered_map<dogen::sml::qname, dogen::sml::pod>& model::pods() const {
-    return pods_;
-}
-
-std::unordered_map<dogen::sml::qname, dogen::sml::pod>& model::pods() {
-    return pods_;
-}
-
-void model::pods(const std::unordered_map<dogen::sml::qname, dogen::sml::pod>& v) {
-    pods_ = v;
-}
-
-void model::pods(const std::unordered_map<dogen::sml::qname, dogen::sml::pod>&& v) {
-    pods_ = std::move(v);
-}
-
-const std::unordered_map<dogen::sml::qname, dogen::sml::primitive>& model::primitives() const {
-    return primitives_;
-}
-
-std::unordered_map<dogen::sml::qname, dogen::sml::primitive>& model::primitives() {
-    return primitives_;
-}
-
-void model::primitives(const std::unordered_map<dogen::sml::qname, dogen::sml::primitive>& v) {
-    primitives_ = v;
-}
-
-void model::primitives(const std::unordered_map<dogen::sml::qname, dogen::sml::primitive>&& v) {
-    primitives_ = std::move(v);
-}
-
-const std::unordered_map<dogen::sml::qname, dogen::sml::enumeration>& model::enumerations() const {
-    return enumerations_;
-}
-
-std::unordered_map<dogen::sml::qname, dogen::sml::enumeration>& model::enumerations() {
-    return enumerations_;
-}
-
-void model::enumerations(const std::unordered_map<dogen::sml::qname, dogen::sml::enumeration>& v) {
-    enumerations_ = v;
-}
-
-void model::enumerations(const std::unordered_map<dogen::sml::qname, dogen::sml::enumeration>&& v) {
-    enumerations_ = std::move(v);
-}
-
-const std::unordered_map<dogen::sml::qname, dogen::sml::value_object>& model::exceptions() const {
-    return exceptions_;
-}
-
-std::unordered_map<dogen::sml::qname, dogen::sml::value_object>& model::exceptions() {
-    return exceptions_;
-}
-
-void model::exceptions(const std::unordered_map<dogen::sml::qname, dogen::sml::value_object>& v) {
-    exceptions_ = v;
-}
-
-void model::exceptions(const std::unordered_map<dogen::sml::qname, dogen::sml::value_object>&& v) {
-    exceptions_ = std::move(v);
 }
 
 const std::list<std::string>& model::external_module_path() const {
@@ -265,22 +203,6 @@ void model::leaves(const std::unordered_set<dogen::sml::qname>&& v) {
     leaves_ = std::move(v);
 }
 
-const std::unordered_map<dogen::sml::qname, dogen::sml::service>& model::services() const {
-    return services_;
-}
-
-std::unordered_map<dogen::sml::qname, dogen::sml::service>& model::services() {
-    return services_;
-}
-
-void model::services(const std::unordered_map<dogen::sml::qname, dogen::sml::service>& v) {
-    services_ = v;
-}
-
-void model::services(const std::unordered_map<dogen::sml::qname, dogen::sml::service>&& v) {
-    services_ = std::move(v);
-}
-
 const std::unordered_map<dogen::sml::qname, dogen::sml::module>& model::modules() const {
     return modules_;
 }
@@ -311,6 +233,54 @@ void model::concepts(const std::unordered_map<dogen::sml::qname, dogen::sml::con
 
 void model::concepts(const std::unordered_map<dogen::sml::qname, dogen::sml::concept>&& v) {
     concepts_ = std::move(v);
+}
+
+const std::unordered_map<dogen::sml::qname, dogen::sml::primitive>& model::primitives() const {
+    return primitives_;
+}
+
+std::unordered_map<dogen::sml::qname, dogen::sml::primitive>& model::primitives() {
+    return primitives_;
+}
+
+void model::primitives(const std::unordered_map<dogen::sml::qname, dogen::sml::primitive>& v) {
+    primitives_ = v;
+}
+
+void model::primitives(const std::unordered_map<dogen::sml::qname, dogen::sml::primitive>&& v) {
+    primitives_ = std::move(v);
+}
+
+const std::unordered_map<dogen::sml::qname, dogen::sml::enumeration>& model::enumerations() const {
+    return enumerations_;
+}
+
+std::unordered_map<dogen::sml::qname, dogen::sml::enumeration>& model::enumerations() {
+    return enumerations_;
+}
+
+void model::enumerations(const std::unordered_map<dogen::sml::qname, dogen::sml::enumeration>& v) {
+    enumerations_ = v;
+}
+
+void model::enumerations(const std::unordered_map<dogen::sml::qname, dogen::sml::enumeration>&& v) {
+    enumerations_ = std::move(v);
+}
+
+const std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::sml::abstract_object> >& model::objects() const {
+    return objects_;
+}
+
+std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::sml::abstract_object> >& model::objects() {
+    return objects_;
+}
+
+void model::objects(const std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::sml::abstract_object> >& v) {
+    objects_ = v;
+}
+
+void model::objects(const std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::sml::abstract_object> >&& v) {
+    objects_ = std::move(v);
 }
 
 } }

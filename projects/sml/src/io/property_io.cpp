@@ -19,7 +19,6 @@
  *
  */
 #include <boost/algorithm/string.hpp>
-#include <boost/io/ios_state.hpp>
 #include <ostream>
 #include "dogen/sml/io/nested_qname_io.hpp"
 #include "dogen/sml/io/property_io.hpp"
@@ -63,19 +62,12 @@ namespace dogen {
 namespace sml {
 
 std::ostream& operator<<(std::ostream& s, const property& v) {
-    boost::io::ios_flags_saver ifs(s);
-    s.setf(std::ios_base::boolalpha);
-    s.setf(std::ios::fixed, std::ios::floatfield);
-    s.precision(6);
-    s.setf(std::ios::showpoint);
-
     s << " { "
       << "\"__type__\": " << "\"dogen::sml::property\"" << ", "
       << "\"name\": " << "\"" << tidy_up_string(v.name()) << "\"" << ", "
       << "\"type_name\": " << v.type_name() << ", "
       << "\"default_value\": " << "\"" << tidy_up_string(v.default_value()) << "\"" << ", "
       << "\"documentation\": " << "\"" << tidy_up_string(v.documentation()) << "\"" << ", "
-      << "\"is_identity_attribute\": " << v.is_identity_attribute() << ", "
       << "\"implementation_specific_parameters\": " << v.implementation_specific_parameters()
       << " }";
     return(s);

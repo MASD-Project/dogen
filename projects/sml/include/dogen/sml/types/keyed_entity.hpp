@@ -37,7 +37,14 @@ namespace dogen {
 namespace sml {
 
 /**
- * @brief Entity which has keys as an external representation of its identity operation.
+ * @brief Entity which supports an external representation of its identity.
+ *
+ * Entities may choose to create a class which aggregates all properties
+ * which make up its identity. Such entities are known as @e keyed @e
+ * entities and the aggregate class is known as its @key.
+ *
+ * If an entity is versioned, it will have two types of keys: the @e versioned
+ * key and the @e unversioned key. The first will contain the version property.
  */
 class keyed_entity final : public dogen::sml::abstract_entity {
 public:
@@ -64,12 +71,11 @@ public:
         const bool is_visitable,
         const bool is_immutable,
         const bool is_versioned,
-        const bool is_keyed,
         const bool is_comparable,
         const bool is_fluent,
         const std::list<dogen::sml::qname>& modeled_concepts,
         const bool is_aggregate_root,
-        const std::list<dogen::sml::property>& identity_operation,
+        const std::list<dogen::sml::property>& identity,
         const dogen::sml::qname& unversioned_key,
         const boost::optional<dogen::sml::qname>& versioned_key);
 
@@ -102,7 +108,7 @@ public:
 
 public:
     /**
-     * @brief Identity operation for the entity, without taking version into account.
+     * @brief Identity properties for the underlying entity.
      */
     /**@{*/
     const dogen::sml::qname& unversioned_key() const;

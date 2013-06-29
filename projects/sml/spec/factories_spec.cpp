@@ -44,11 +44,11 @@ BOOST_AUTO_TEST_CASE(producing_boost_model_generates_expected_types) {
     BOOST_CHECK(m.name() == boost_model);
     BOOST_CHECK(m.is_system() == true);
 
-    const auto pods(m.pods());
-    BOOST_CHECK(!pods.empty());
-    for (const auto& pair : pods) {
-        const auto p(pair.second);
-        const auto qn(p.name());
+    const auto& objects(m.objects());
+    BOOST_CHECK(!objects.empty());
+    for (const auto& pair : objects) {
+        const auto& o(*pair.second);
+        const auto qn(o.name());
         BOOST_CHECK(qn.model_name() == boost_model);
         BOOST_CHECK(qn.external_module_path().empty());
         if (!qn.module_path().empty()) {
@@ -71,7 +71,6 @@ BOOST_AUTO_TEST_CASE(producing_boost_model_generates_expected_types) {
     }
     BOOST_CHECK(m.primitives().empty());
     BOOST_CHECK(m.enumerations().empty());
-    BOOST_CHECK(m.exceptions().empty());
     BOOST_CHECK(!m.modules().empty());
     BOOST_CHECK(m.dependencies().empty());
     BOOST_CHECK(m.leaves().empty());
@@ -86,12 +85,11 @@ BOOST_AUTO_TEST_CASE(producing_std_model_generates_expected_types) {
     BOOST_CHECK(m.name() == std_model);
     BOOST_CHECK(m.is_system() == true);
 
-
-    const auto pods(m.pods());
-    BOOST_CHECK(!m.pods().empty());
-    for (const auto& pair : pods) {
-        const auto p(pair.second);
-        const auto qn(p.name());
+    const auto& objects(m.objects());
+    BOOST_CHECK(!objects.empty());
+    for (const auto& pair : objects) {
+        const auto& o(*pair.second);
+        const auto qn(o.name());
         BOOST_CHECK(qn.model_name() == std_model);
         BOOST_CHECK(qn.external_module_path().empty());
     }
@@ -106,7 +104,6 @@ BOOST_AUTO_TEST_CASE(producing_std_model_generates_expected_types) {
     }
 
     BOOST_CHECK(m.enumerations().empty());
-    BOOST_CHECK(m.exceptions().empty());
     BOOST_CHECK(m.modules().empty());
     BOOST_CHECK(m.dependencies().empty());
     BOOST_CHECK(m.leaves().empty());
@@ -121,7 +118,7 @@ BOOST_AUTO_TEST_CASE(producing_primitive_model_generates_expected_types) {
     BOOST_CHECK(m.name() == primitive_model);
     BOOST_CHECK(m.is_system() == true);
 
-    BOOST_CHECK(m.pods().empty());
+    BOOST_CHECK(m.objects().empty());
     const auto primitives(m.primitives());
     BOOST_CHECK(!primitives.empty());
     for (const auto& pair : primitives) {
@@ -130,8 +127,8 @@ BOOST_AUTO_TEST_CASE(producing_primitive_model_generates_expected_types) {
         BOOST_CHECK(qn.model_name().empty());
         BOOST_CHECK(qn.external_module_path().empty());
     }
+
     BOOST_CHECK(m.enumerations().empty());
-    BOOST_CHECK(m.exceptions().empty());
     BOOST_CHECK(m.modules().empty());
     BOOST_CHECK(m.dependencies().empty());
     BOOST_CHECK(m.leaves().empty());

@@ -53,7 +53,7 @@ void save(Archive& ar,
     ar << make_nvp("abstract_object", base_object<dogen::sml::abstract_object>(v));
 
     ar << make_nvp("is_aggregate_root", v.is_aggregate_root_);
-    ar << make_nvp("identity_operation", v.identity_operation_);
+    ar << make_nvp("identity", v.identity_);
 }
 
 template<typename Archive>
@@ -63,7 +63,7 @@ void load(Archive& ar,
     ar >> make_nvp("abstract_object", base_object<dogen::sml::abstract_object>(v));
 
     ar >> make_nvp("is_aggregate_root", v.is_aggregate_root_);
-    ar >> make_nvp("identity_operation", v.identity_operation_);
+    ar >> make_nvp("identity", v.identity_);
 }
 
 } }

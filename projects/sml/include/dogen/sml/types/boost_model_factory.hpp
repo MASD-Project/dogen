@@ -26,12 +26,18 @@
 #endif
 
 #include <string>
-#include "dogen/sml/types/pod.hpp"
+#include <boost/shared_ptr.hpp>
+#include "dogen/sml/types/abstract_object.hpp"
+#include "dogen/sml/types/module.hpp"
+#include "dogen/sml/types/value_object_types.hpp"
 #include "dogen/sml/types/model.hpp"
 
 namespace dogen {
 namespace sml {
 
+/**
+ * @brief Generates the system model for the boost libraries.
+ */
 class boost_model_factory {
 public:
     boost_model_factory() = delete;
@@ -41,12 +47,23 @@ public:
     boost_model_factory& operator=(const boost_model_factory&) = delete;
 
 private:
+    /**
+     * @brief Create a new module.
+     */
     static module create_module(const std::string& name,
-        std::list<std::string> module_path);
-    static pod create_pod(const std::string& name, pod_types pt,
-        std::list<std::string> module_path);
+        const std::list<std::string>& module_path);
+
+    /**
+     * @brief Create a new value object.
+     */
+    static boost::shared_ptr<abstract_object>
+    create_value_object(const std::string& name,
+        const std::list<std::string>& module_path, value_object_types t);
 
 public:
+    /**
+     * @brief Create the boost model.
+     */
     static model create();
 };
 

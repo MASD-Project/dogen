@@ -20,7 +20,6 @@
  */
 #include "dogen/sml/hash/abstract_entity_hash.hpp"
 #include "dogen/sml/hash/abstract_object_hash.hpp"
-#include "dogen/sml/hash/category_types_hash.hpp"
 #include "dogen/sml/hash/concept_hash.hpp"
 #include "dogen/sml/hash/entity_hash.hpp"
 #include "dogen/sml/hash/enumeration_hash.hpp"
@@ -32,8 +31,6 @@
 #include "dogen/sml/hash/model_hash.hpp"
 #include "dogen/sml/hash/module_hash.hpp"
 #include "dogen/sml/hash/nested_qname_hash.hpp"
-#include "dogen/sml/hash/pod_hash.hpp"
-#include "dogen/sml/hash/pod_types_hash.hpp"
 #include "dogen/sml/hash/primitive_hash.hpp"
 #include "dogen/sml/hash/property_hash.hpp"
 #include "dogen/sml/hash/qname_hash.hpp"
@@ -43,4 +40,4 @@
 #include "dogen/sml/hash/service_types_hash.hpp"
 #include "dogen/sml/hash/type_hash.hpp"
 #include "dogen/sml/hash/value_object_hash.hpp"
-#include "dogen/sml/hash/value_types_hash.hpp"
+#include "dogen/sml/hash/value_object_types_hash.hpp"

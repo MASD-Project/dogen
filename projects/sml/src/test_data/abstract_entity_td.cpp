@@ -53,7 +53,7 @@ void abstract_entity_generator::
 populate(const unsigned int position, result_type& v) {
     dogen::sml::abstract_object_generator::populate(position, v);
     v.is_aggregate_root(create_bool(position + 0));
-    v.identity_operation(create_std_list_dogen_sml_property(position + 1));
+    v.identity(create_std_list_dogen_sml_property(position + 1));
 }
 
 abstract_entity_generator::result_type*

@@ -45,22 +45,23 @@ BOOST_AUTO_TEST_SUITE(equality)
 BOOST_AUTO_TEST_CASE(validate_equality) {
     SETUP_TEST_LOG("validate_equality");
 
-    test_equality<category_types_generator>();
     test_equality<generation_types_generator>();
     test_equality<meta_types_generator>();
-    test_equality<model_generator>();
     test_equality<nested_qname_generator>();
-    test_equality<pod_generator>();
-    test_equality<pod_types_generator>();
     test_equality<property_generator>();
     test_equality<qname_generator>();
+    test_equality<primitive_generator>();
+    test_equality<enumerator_generator>();
+    test_equality<enumeration_generator>();
     test_equality<value_object_generator>();
     test_equality<entity_generator>();
+    test_equality<keyed_entity_generator>();
     test_equality<service_generator>();
     test_equality<module_generator>();
     test_equality<repository_generator>();
     test_equality<factory_generator>();
     test_equality<concept_generator>();
+    test_equality<model_generator>();
 }
 
 BOOST_AUTO_TEST_SUITE_END()

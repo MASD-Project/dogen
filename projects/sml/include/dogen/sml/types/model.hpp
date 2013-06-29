@@ -26,6 +26,7 @@
 #endif
 
 #include <algorithm>
+#include <boost/shared_ptr.hpp>
 #include <list>
 #include <string>
 #include <unordered_map>
@@ -34,15 +35,13 @@
 #include <vector>
 #include "dogen/sml/hash/qname_hash.hpp"
 #include "dogen/sml/serialization/model_fwd_ser.hpp"
+#include "dogen/sml/types/abstract_object_fwd.hpp"
 #include "dogen/sml/types/concept.hpp"
 #include "dogen/sml/types/enumeration.hpp"
 #include "dogen/sml/types/module.hpp"
-#include "dogen/sml/types/pod.hpp"
 #include "dogen/sml/types/primitive.hpp"
 #include "dogen/sml/types/qname.hpp"
 #include "dogen/sml/types/reference.hpp"
-#include "dogen/sml/types/service.hpp"
-#include "dogen/sml/types/value_object.hpp"
 
 namespace dogen {
 namespace sml {
@@ -64,17 +63,15 @@ public:
         const std::string& documentation,
         const std::vector<std::pair<std::string, std::string> >& implementation_specific_parameters,
         const std::string& name,
-        const std::unordered_map<dogen::sml::qname, dogen::sml::pod>& pods,
-        const std::unordered_map<dogen::sml::qname, dogen::sml::primitive>& primitives,
-        const std::unordered_map<dogen::sml::qname, dogen::sml::enumeration>& enumerations,
-        const std::unordered_map<dogen::sml::qname, dogen::sml::value_object>& exceptions,
         const std::list<std::string>& external_module_path,
         const bool is_system,
         const std::unordered_map<std::string, dogen::sml::reference>& dependencies,
         const std::unordered_set<dogen::sml::qname>& leaves,
-        const std::unordered_map<dogen::sml::qname, dogen::sml::service>& services,
         const std::unordered_map<dogen::sml::qname, dogen::sml::module>& modules,
-        const std::unordered_map<dogen::sml::qname, dogen::sml::concept>& concepts);
+        const std::unordered_map<dogen::sml::qname, dogen::sml::concept>& concepts,
+        const std::unordered_map<dogen::sml::qname, dogen::sml::primitive>& primitives,
+        const std::unordered_map<dogen::sml::qname, dogen::sml::enumeration>& enumerations,
+        const std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::sml::abstract_object> >& objects);
 
 private:
     template<typename Archive>
@@ -120,46 +117,6 @@ public:
     std::string& name();
     void name(const std::string& v);
     void name(const std::string&& v);
-    /**@}*/
-
-    /**
-     * @brief Pods contained in the model.
-     */
-    /**@{*/
-    const std::unordered_map<dogen::sml::qname, dogen::sml::pod>& pods() const;
-    std::unordered_map<dogen::sml::qname, dogen::sml::pod>& pods();
-    void pods(const std::unordered_map<dogen::sml::qname, dogen::sml::pod>& v);
-    void pods(const std::unordered_map<dogen::sml::qname, dogen::sml::pod>&& v);
-    /**@}*/
-
-    /**
-     * @brief Primitives contained in the model.
-     */
-    /**@{*/
-    const std::unordered_map<dogen::sml::qname, dogen::sml::primitive>& primitives() const;
-    std::unordered_map<dogen::sml::qname, dogen::sml::primitive>& primitives();
-    void primitives(const std::unordered_map<dogen::sml::qname, dogen::sml::primitive>& v);
-    void primitives(const std::unordered_map<dogen::sml::qname, dogen::sml::primitive>&& v);
-    /**@}*/
-
-    /**
-     * @brief Enumerations contained in the model.
-     */
-    /**@{*/
-    const std::unordered_map<dogen::sml::qname, dogen::sml::enumeration>& enumerations() const;
-    std::unordered_map<dogen::sml::qname, dogen::sml::enumeration>& enumerations();
-    void enumerations(const std::unordered_map<dogen::sml::qname, dogen::sml::enumeration>& v);
-    void enumerations(const std::unordered_map<dogen::sml::qname, dogen::sml::enumeration>&& v);
-    /**@}*/
-
-    /**
-     * @brief Exceptions contained in the model.
-     */
-    /**@{*/
-    const std::unordered_map<dogen::sml::qname, dogen::sml::value_object>& exceptions() const;
-    std::unordered_map<dogen::sml::qname, dogen::sml::value_object>& exceptions();
-    void exceptions(const std::unordered_map<dogen::sml::qname, dogen::sml::value_object>& v);
-    void exceptions(const std::unordered_map<dogen::sml::qname, dogen::sml::value_object>&& v);
     /**@}*/
 
     /**
@@ -209,16 +166,6 @@ public:
     /**@}*/
 
     /**
-     * @brief Services contained in the model.
-     */
-    /**@{*/
-    const std::unordered_map<dogen::sml::qname, dogen::sml::service>& services() const;
-    std::unordered_map<dogen::sml::qname, dogen::sml::service>& services();
-    void services(const std::unordered_map<dogen::sml::qname, dogen::sml::service>& v);
-    void services(const std::unordered_map<dogen::sml::qname, dogen::sml::service>&& v);
-    /**@}*/
-
-    /**
      * @brief Modules contained in the model.
      */
     /**@{*/
@@ -238,6 +185,36 @@ public:
     void concepts(const std::unordered_map<dogen::sml::qname, dogen::sml::concept>&& v);
     /**@}*/
 
+    /**
+     * @brief All primitives contained in this model.
+     */
+    /**@{*/
+    const std::unordered_map<dogen::sml::qname, dogen::sml::primitive>& primitives() const;
+    std::unordered_map<dogen::sml::qname, dogen::sml::primitive>& primitives();
+    void primitives(const std::unordered_map<dogen::sml::qname, dogen::sml::primitive>& v);
+    void primitives(const std::unordered_map<dogen::sml::qname, dogen::sml::primitive>&& v);
+    /**@}*/
+
+    /**
+     * @brief All enumerations contained in this model.
+     */
+    /**@{*/
+    const std::unordered_map<dogen::sml::qname, dogen::sml::enumeration>& enumerations() const;
+    std::unordered_map<dogen::sml::qname, dogen::sml::enumeration>& enumerations();
+    void enumerations(const std::unordered_map<dogen::sml::qname, dogen::sml::enumeration>& v);
+    void enumerations(const std::unordered_map<dogen::sml::qname, dogen::sml::enumeration>&& v);
+    /**@}*/
+
+    /**
+     * @brief All objects contained in this model.
+     */
+    /**@{*/
+    const std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::sml::abstract_object> >& objects() const;
+    std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::sml::abstract_object> >& objects();
+    void objects(const std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::sml::abstract_object> >& v);
+    void objects(const std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::sml::abstract_object> >&& v);
+    /**@}*/
+
 public:
     bool operator==(const model& rhs) const;
     bool operator!=(const model& rhs) const {
@@ -252,17 +229,15 @@ private:
     std::string documentation_;
     std::vector<std::pair<std::string, std::string> > implementation_specific_parameters_;
     std::string name_;
-    std::unordered_map<dogen::sml::qname, dogen::sml::pod> pods_;
-    std::unordered_map<dogen::sml::qname, dogen::sml::primitive> primitives_;
-    std::unordered_map<dogen::sml::qname, dogen::sml::enumeration> enumerations_;
-    std::unordered_map<dogen::sml::qname, dogen::sml::value_object> exceptions_;
     std::list<std::string> external_module_path_;
     bool is_system_;
     std::unordered_map<std::string, dogen::sml::reference> dependencies_;
     std::unordered_set<dogen::sml::qname> leaves_;
-    std::unordered_map<dogen::sml::qname, dogen::sml::service> services_;
     std::unordered_map<dogen::sml::qname, dogen::sml::module> modules_;
     std::unordered_map<dogen::sml::qname, dogen::sml::concept> concepts_;
+    std::unordered_map<dogen::sml::qname, dogen::sml::primitive> primitives_;
+    std::unordered_map<dogen::sml::qname, dogen::sml::enumeration> enumerations_;
+    std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::sml::abstract_object> > objects_;
 };
 
 } }

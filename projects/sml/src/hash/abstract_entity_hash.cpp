@@ -50,7 +50,7 @@ std::size_t abstract_entity_hasher::hash(const abstract_entity&v) {
     combine(seed, dynamic_cast<const dogen::sml::abstract_object&>(v));
 
     combine(seed, v.is_aggregate_root());
-    combine(seed, hash_std_list_dogen_sml_property(v.identity_operation()));
+    combine(seed, hash_std_list_dogen_sml_property(v.identity()));
 
     return seed;
 }
