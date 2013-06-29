@@ -11,6 +11,25 @@ This file contains all stories that haven't been assigned to a sprint.
 
 Stories that we intend to look at, at some point.
 
+*** Type resolution in referenced models
+
+We did a hack a while ago whereby if a type is of a referenced model,
+we don't bother resolving it. As an optimisation this is probably
+fine, but however, it hides a bug which is that we fail to resolve
+properties of referenced models properly. The reason why is that these
+properties have a blank model name. We could simply force it to be the
+name of the referenced model but then it would fail to find
+primitives. So we leave it blank during the dia to sml translation and
+then if it gets to the resolver, it will not be able to resolve the
+type. We could add yet another layer of try-logic (e.g. try every
+model name in the references) but it seems that this is just another
+hack to solve a more fundamental problem. The sort of errors one gets
+due to this are like so:
+
+: 2013-06-29 23:10:34.831009 [ERROR] [sml.resolver] Pod has property with undefined type:  { "__type__": "dogen::sml::qname", "model_name": "", "external_module_path": [ ] , "module_path": [ ] , "type_name": "qname", "meta_type": { "__type__": "meta_types", "value": "invalid" } }
+: 2013-06-29 23:10:34.831294 [FATAL] [dogen] Error: /home/marco/Development/kitanda/dogen/projects/sml/src/types/resolver.cpp(202): Throw in function dogen::sml::qname dogen::sml::resolver::resolve_partial_type(const dogen::sml::qname&) const
+: Dynamic exception type: boost::exception_detail::clone_impl<dogen::sml::resolution_error>
+
 *** Visitor adaptor for usage in rages
 
 It would be great if we automatically generated an adaptor to visitors
