@@ -58,7 +58,7 @@ void nested_qname_builder::add_name(const std::string& n) {
 void nested_qname_builder::add_primitive(const std::string& n) {
     BOOST_LOG_SEV(lg, debug) << "pushing back primitive :" << n;
     auto qn(current_->data());
-    qn.type_name(n);
+    qn.simple_name(n);
     current_->data(qn);
 }
 
@@ -71,9 +71,9 @@ void nested_qname_builder::finish_current_node() {
         return;
 
     if (names_.size() == 1) {
-        qn.type_name(names_.front());
+        qn.simple_name(names_.front());
         names_.clear();
-        BOOST_LOG_SEV(lg, debug) << "type name: " << qn.type_name();
+        BOOST_LOG_SEV(lg, debug) << "simple name: " << qn.simple_name();
         current_->data(qn);
         return;
     }
@@ -88,8 +88,8 @@ void nested_qname_builder::finish_current_node() {
         names_.pop_front();
     }
 
-    qn.type_name(names_.back());
-    BOOST_LOG_SEV(lg, debug) << "type name: " << qn.type_name();
+    qn.simple_name(names_.back());
+    BOOST_LOG_SEV(lg, debug) << "simple name: " << qn.simple_name();
 
     names_.pop_back();
     qn.module_path(names_);
@@ -137,7 +137,7 @@ build_node(sml::nested_qname& qn, boost::shared_ptr<node> node) {
     BOOST_LOG_SEV(lg, debug) << "bulding node: "
                              << node->data().model_name()
                              << " "
-                             << node->data().type_name();
+                             << node->data().simple_name();
 
     qn.type(node->data());
     std::list<sml::nested_qname> children;

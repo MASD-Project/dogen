@@ -32,13 +32,15 @@ static logger lg(logger_factory("dia_to_sml.profiler"));
 const std::string concept("concept");
 const std::string enumeration("enumeration");
 const std::string exception("exception");
-const std::string entity("entity");
-const std::string value("value");
+const std::string value_object("value object");
 const std::string service("service");
+const std::string factory("factory");
+const std::string repository("repository");
 const std::string nongeneratable("nongeneratable");
 const std::string visitable("visitable");
 const std::string immutable("immutable");
-const std::string keyed("keyed");
+const std::string entity("entity");
+const std::string keyed_entity("keyed entity");
 const std::string fluent("fluent");
 const std::string versioned("versioned");
 const std::string aggregate_root("aggregate root");
@@ -77,8 +79,8 @@ process_stereotype(profile& o, const std::string& s) const {
             o.is_exception(true);
         else if (stereotype == entity)
             o.is_entity(true);
-        else if (stereotype == value)
-            o.is_value(true);
+        else if (stereotype == value_object)
+            o.is_value_object(true);
         else if (stereotype == service)
             o.is_service(true);
         else if (stereotype == nongeneratable)
@@ -87,8 +89,8 @@ process_stereotype(profile& o, const std::string& s) const {
             o.is_visitable(true);
         else if (stereotype == immutable)
             o.is_immutable(true);
-        else if (stereotype == keyed)
-            o.is_keyed(true);
+        else if (stereotype == keyed_entity)
+            o.is_keyed_entity(true);
         else if (stereotype == fluent)
             o.is_fluent(true);
         else if (stereotype == versioned)
@@ -97,6 +99,10 @@ process_stereotype(profile& o, const std::string& s) const {
             o.is_aggregate_root(true);
         else if (stereotype == concept)
             o.is_concept(true);
+        else if (stereotype == factory)
+            o.is_factory(true);
+        else if (stereotype == repository)
+            o.is_repository(true);
         else
             o.unknown_stereotypes().push_back(stereotype);
     }

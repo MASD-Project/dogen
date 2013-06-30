@@ -57,18 +57,19 @@ public:
         const bool is_enumeration,
         const bool is_exception,
         const bool is_entity,
-        const bool is_value,
+        const bool is_value_object,
         const bool is_service,
         const bool is_non_generatable,
         const bool is_versioned,
-        const bool is_keyed,
+        const bool is_keyed_entity,
         const bool is_visitable,
         const bool is_immutable,
         const bool is_fluent,
         const bool is_aggregate_root,
-        const bool is_string_table,
         const bool is_concept,
-        const std::list<std::string>& unknown_stereotypes);
+        const std::list<std::string>& unknown_stereotypes,
+        const bool is_repository,
+        const bool is_factory);
 
 private:
     template<typename Archive>
@@ -162,8 +163,8 @@ public:
      * @brief If true, the underlying object is a value object.
      */
     /**@{*/
-    bool is_value() const;
-    void is_value(const bool v);
+    bool is_value_object() const;
+    void is_value_object(const bool v);
     /**@}*/
 
     /**
@@ -191,11 +192,11 @@ public:
     /**@}*/
 
     /**
-     * @brief If true, the underlying object is has keyes for its identity function.
+     * @brief If true, the underlying object is an entity with keyes for its identity function.
      */
     /**@{*/
-    bool is_keyed() const;
-    void is_keyed(const bool v);
+    bool is_keyed_entity() const;
+    void is_keyed_entity(const bool v);
     /**@}*/
 
     /**
@@ -231,14 +232,6 @@ public:
     /**@}*/
 
     /**
-     * @brief If true, the underlying object is a table of strings.
-     */
-    /**@{*/
-    bool is_string_table() const;
-    void is_string_table(const bool v);
-    /**@}*/
-
-    /**
      * @brief If true, the underlying object represents a concept.
      */
     /**@{*/
@@ -254,6 +247,22 @@ public:
     std::list<std::string>& unknown_stereotypes();
     void unknown_stereotypes(const std::list<std::string>& v);
     void unknown_stereotypes(const std::list<std::string>&& v);
+    /**@}*/
+
+    /**
+     * @brief If true, the underlying object represents a repository.
+     */
+    /**@{*/
+    bool is_repository() const;
+    void is_repository(const bool v);
+    /**@}*/
+
+    /**
+     * @brief If true, the underlying object represents a factory.
+     */
+    /**@{*/
+    bool is_factory() const;
+    void is_factory(const bool v);
     /**@}*/
 
 public:
@@ -277,18 +286,19 @@ private:
     bool is_enumeration_;
     bool is_exception_;
     bool is_entity_;
-    bool is_value_;
+    bool is_value_object_;
     bool is_service_;
     bool is_non_generatable_;
     bool is_versioned_;
-    bool is_keyed_;
+    bool is_keyed_entity_;
     bool is_visitable_;
     bool is_immutable_;
     bool is_fluent_;
     bool is_aggregate_root_;
-    bool is_string_table_;
     bool is_concept_;
     std::list<std::string> unknown_stereotypes_;
+    bool is_repository_;
+    bool is_factory_;
 };
 
 } }

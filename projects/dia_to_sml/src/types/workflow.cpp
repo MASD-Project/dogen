@@ -51,8 +51,8 @@ void workflow::initialise_context_activity(const std::string& model_name,
     context_ = context();
 
     const auto epp(identifier_parser::parse_scoped_name(external_module_path));
-    context_.model().external_module_path(epp);
-    context_.model().name(model_name);
+    context_.model().name().external_module_path(epp);
+    context_.model().name().model_name(model_name);
     context_.is_target(is_target);
     context_.model().is_system(false);
 }
@@ -94,7 +94,7 @@ void workflow::graph_to_context_activity(const graph_type& g) {
 }
 
 void workflow::post_process_model_activity() {
-    for (auto& pair : context_.model().pods()) {
+    for (auto& pair : context_.model().objects()) {
         auto i(context_.leaves().find(pair.first));
         if (i == context_.leaves().end())
             continue;
@@ -103,7 +103,7 @@ void workflow::post_process_model_activity() {
         // implementations (leafs), find them and add them to the type
         // itself; then add each leaf type to the model's leaf
         // container.
-        pair.second.leaves(i->second);
+        pair.second->leaves(i->second);
         for (const auto& j : i->second)
             context_.model().leaves().insert(j);
     }

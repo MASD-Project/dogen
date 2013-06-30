@@ -30,6 +30,8 @@
 #include "dogen/dia/types/object.hpp"
 #include "dogen/sml/types/nested_qname.hpp"
 #include "dogen/sml/types/meta_types.hpp"
+#include "dogen/sml/types/abstract_object.hpp"
+#include "dogen/sml/types/abstract_entity.hpp"
 #include "dogen/dia_to_sml/types/processed_object.hpp"
 #include "dogen/dia_to_sml/types/processed_property.hpp"
 #include "dogen/dia_to_sml/types/identifier_parser.hpp"
@@ -41,7 +43,7 @@ namespace dogen {
 namespace dia_to_sml {
 
 /**
- * @brief Transforms dia objects
+ * @brief Transforms dia objects into their SML counterpart.
  */
 class transformer {
 public:
@@ -65,6 +67,12 @@ private:
      * type.
      */
     void require_is_transformable(const processed_object& o) const;
+
+private:
+    /**
+     * @brief Compute the appropriate generation type for the profile.
+     */
+    sml::generation_types generation_type(const profile& p) const;
 
 private:
     /**
@@ -96,10 +104,26 @@ private:
         const unsigned int position) const;
 
     /**
-     * @brief Converts a object containing a class into an pod.
+     * @brief Update the SML abstract object using the processed
+     * object and the profile.
      */
-    void transform_pod(const processed_object& o, const profile& p);
+    void transform_abstract_object(sml::abstract_object& ao, sml::meta_types mt,
+        const processed_object& o, const profile& p);
 
+    /**
+     * @brief Update the SML abstract entity using the processed
+     * object and the profile.
+     */
+    void transform_abstract_entity(sml::abstract_entity& ae, sml::meta_types mt,
+        const processed_object& o, const profile& p);
+
+    void transform_keyed_entity(const processed_object& o, const profile& p);
+    void transform_entity(const processed_object& o, const profile& p);
+    void transform_exception(const processed_object& o, const profile& p);
+    void transform_service(const processed_object& o, const profile& p);
+    void transform_factory(const processed_object& o, const profile& p);
+    void transform_repository(const processed_object& o, const profile& p);
+    void transform_value_object(const processed_object& o, const profile& p);
     /**
      * @brief Converts a object containing a class into an enumeration.
      *
@@ -138,6 +162,14 @@ private:
      * @param o Dia object which contains a concept.
      */
     void transform_concept(const processed_object& o);
+
+private:
+    /**
+     * @brief Dispatches the objects to the correct transformation.
+     *
+     * @pre Object must be transformable.
+     */
+    void dispatch(const processed_object& o, const profile& p);
 
 public:
     /**

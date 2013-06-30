@@ -48,7 +48,6 @@ count_stereotypes_non_types(const profile& p) const {
 
     if (p.is_non_generatable()) ++r;
     if (p.is_versioned()) ++r;
-    if (p.is_keyed()) ++r;
 
     return r;
 }
@@ -59,8 +58,11 @@ unsigned int validator::count_stereotypes_types(const profile& p) const {
     if (p.is_enumeration()) ++r;
     if (p.is_exception()) ++r;
     if (p.is_entity()) ++r;
-    if (p.is_value()) ++r;
+    if (p.is_keyed_entity()) ++r;
+    if (p.is_value_object()) ++r;
     if (p.is_service()) ++r;
+    if (p.is_factory()) ++r;
+    if (p.is_repository()) ++r;
     if (p.is_concept()) ++r;
 
     return r;

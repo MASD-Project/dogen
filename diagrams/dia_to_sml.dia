@@ -5241,13 +5241,13 @@ finds.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O30">
       <dia:attribute name="obj_pos">
-        <dia:point val="87.0335,122.041"/>
+        <dia:point val="91,123"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="86.9835,121.991;105.294,126.491"/>
+        <dia:rectangle val="90.95,122.95;109.26,127.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="87.0335,122.041"/>
+        <dia:point val="91,123"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="18.210000000000001"/>
@@ -5457,17 +5457,17 @@ finds.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="96.1385,122.041"/>
+        <dia:point val="100.105,123"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="96.0885,112.041;109.743,122.841"/>
+        <dia:rectangle val="100.055,112.041;109.743,123.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="96.1385,122.041"/>
-        <dia:point val="96.1385,118.025"/>
+        <dia:point val="100.105,123"/>
+        <dia:point val="100.105,118.025"/>
         <dia:point val="108.993,118.025"/>
         <dia:point val="108.993,112.791"/>
       </dia:attribute>
@@ -6441,7 +6441,7 @@ finds.#</dia:string>
         <dia:point val="62.9579,114.041"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="62.9079,113.991;80.4479,133.691"/>
+        <dia:rectangle val="62.9079,113.991;80.4479,134.491"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="62.9579,114.041"/>
@@ -6450,7 +6450,7 @@ finds.#</dia:string>
         <dia:real val="17.440000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="19.600000000000005"/>
+        <dia:real val="20.400000000000006"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#profile#</dia:string>
@@ -6772,7 +6772,7 @@ finds.#</dia:string>
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#is_value#</dia:string>
+            <dia:string>#is_value_object#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#bool#</dia:string>
@@ -6864,7 +6864,7 @@ finds.#</dia:string>
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#is_keyed#</dia:string>
+            <dia:string>#is_keyed_entity#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#bool#</dia:string>
@@ -6873,7 +6873,7 @@ finds.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>#If true, the underlying object is has keyes for its identity function.#</dia:string>
+            <dia:string>#If true, the underlying object is an entity with keyes for its identity function.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -6979,29 +6979,6 @@ finds.#</dia:string>
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#is_string_table#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>#bool#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>#If true, the underlying object is a table of strings.#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
             <dia:string>#is_concept#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
@@ -7035,6 +7012,52 @@ finds.#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
             <dia:string>#List of all unknown stereotypes.#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#is_repository#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>#bool#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>#If true, the underlying object represents a repository.#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#is_factory#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>#bool#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>#If true, the underlying object represents a factory.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -8286,16 +8309,16 @@ finds.#</dia:string>
         <dia:point val="39.1,142.95"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="38.35,133.591;71.8779,143.75"/>
+        <dia:rectangle val="38.35,134.391;71.8779,143.75"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
         <dia:point val="39.1,142.95"/>
-        <dia:point val="39.1,138"/>
-        <dia:point val="71.6779,138"/>
-        <dia:point val="71.6779,133.641"/>
+        <dia:point val="39.1,139"/>
+        <dia:point val="71.6779,139"/>
+        <dia:point val="71.6779,134.441"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>

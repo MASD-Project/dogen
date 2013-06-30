@@ -53,18 +53,19 @@ void save(Archive& ar,
     ar << make_nvp("is_enumeration", v.is_enumeration_);
     ar << make_nvp("is_exception", v.is_exception_);
     ar << make_nvp("is_entity", v.is_entity_);
-    ar << make_nvp("is_value", v.is_value_);
+    ar << make_nvp("is_value_object", v.is_value_object_);
     ar << make_nvp("is_service", v.is_service_);
     ar << make_nvp("is_non_generatable", v.is_non_generatable_);
     ar << make_nvp("is_versioned", v.is_versioned_);
-    ar << make_nvp("is_keyed", v.is_keyed_);
+    ar << make_nvp("is_keyed_entity", v.is_keyed_entity_);
     ar << make_nvp("is_visitable", v.is_visitable_);
     ar << make_nvp("is_immutable", v.is_immutable_);
     ar << make_nvp("is_fluent", v.is_fluent_);
     ar << make_nvp("is_aggregate_root", v.is_aggregate_root_);
-    ar << make_nvp("is_string_table", v.is_string_table_);
     ar << make_nvp("is_concept", v.is_concept_);
     ar << make_nvp("unknown_stereotypes", v.unknown_stereotypes_);
+    ar << make_nvp("is_repository", v.is_repository_);
+    ar << make_nvp("is_factory", v.is_factory_);
 }
 
 template<typename Archive>
@@ -81,18 +82,19 @@ void load(Archive& ar,
     ar >> make_nvp("is_enumeration", v.is_enumeration_);
     ar >> make_nvp("is_exception", v.is_exception_);
     ar >> make_nvp("is_entity", v.is_entity_);
-    ar >> make_nvp("is_value", v.is_value_);
+    ar >> make_nvp("is_value_object", v.is_value_object_);
     ar >> make_nvp("is_service", v.is_service_);
     ar >> make_nvp("is_non_generatable", v.is_non_generatable_);
     ar >> make_nvp("is_versioned", v.is_versioned_);
-    ar >> make_nvp("is_keyed", v.is_keyed_);
+    ar >> make_nvp("is_keyed_entity", v.is_keyed_entity_);
     ar >> make_nvp("is_visitable", v.is_visitable_);
     ar >> make_nvp("is_immutable", v.is_immutable_);
     ar >> make_nvp("is_fluent", v.is_fluent_);
     ar >> make_nvp("is_aggregate_root", v.is_aggregate_root_);
-    ar >> make_nvp("is_string_table", v.is_string_table_);
     ar >> make_nvp("is_concept", v.is_concept_);
     ar >> make_nvp("unknown_stereotypes", v.unknown_stereotypes_);
+    ar >> make_nvp("is_repository", v.is_repository_);
+    ar >> make_nvp("is_factory", v.is_factory_);
 }
 
 } }

@@ -19,12 +19,18 @@
  *
  */
 #include <set>
+#include <boost/make_shared.hpp>
 #include <boost/variant/get.hpp>
 #include <boost/lexical_cast.hpp>
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/sml/types/module.hpp"
-#include "dogen/sml/types/pod.hpp"
+#include "dogen/sml/types/keyed_entity.hpp"
+#include "dogen/sml/types/entity.hpp"
+#include "dogen/sml/types/service.hpp"
+#include "dogen/sml/types/factory.hpp"
+#include "dogen/sml/types/repository.hpp"
+#include "dogen/sml/types/value_object.hpp"
 #include "dogen/sml/types/service.hpp"
 #include "dogen/dia/types/composite.hpp"
 #include "dogen/dia/types/attribute.hpp"
@@ -75,7 +81,8 @@ transformer::transformer(context& c)
     : context_(c),
       identifier_parser_(
           new identifier_parser(c.top_level_module_names(),
-              c.model().external_module_path(), c.model().name())),
+              c.model().name().external_module_path(),
+              c.model().name().model_name())),
       comments_parser_(new comments_parser()) {
 
     BOOST_LOG_SEV(lg, debug) << "Initial context: " << context_;
@@ -85,13 +92,13 @@ void transformer::
 compute_model_dependencies(const sml::nested_qname& nqn) {
     // primitives model is empty
     const auto mn(nqn.type().model_name());
-    if (!mn.empty() && mn != context_.model().name()) {
-        sml::reference ref;
-        ref.model_name(mn);
-        context_.model().dependencies().insert(std::make_pair(mn, ref));
+    if (!mn.empty() && mn != context_.model().name().model_name()) {
+        sml::qname qn;
+        qn.model_name(mn);
+        context_.model().references().insert(qn);
         BOOST_LOG_SEV(lg, debug) << "Adding model dependency: "
                                  << mn << ". Current model: "
-                                 << context_.model().name();
+                                 << context_.model().name().model_name();
     }
 
     for (const auto c : nqn.children())
@@ -107,6 +114,18 @@ void transformer::require_is_transformable(const processed_object& po) const {
     }
 }
 
+sml::generation_types transformer::generation_type(const profile& p) const {
+    using sml::generation_types;
+    if (!context_.is_target())
+        return generation_types::no_generation;
+
+    if (p.is_non_generatable() || p.is_service() || p.is_factory() ||
+        p.is_repository())
+        return generation_types::partial_generation;
+
+    return generation_types::full_generation;
+}
+
 sml::qname transformer::transform_qname(const std::string& n,
     sml::meta_types meta_type, const std::string& pkg_id) const {
 
@@ -116,9 +135,9 @@ sml::qname transformer::transform_qname(const std::string& n,
     }
 
     sml::qname name;
-    name.model_name(context_.model().name());
+    name.model_name(context_.model().name().model_name());
     name.meta_type(meta_type);
-    name.external_module_path(context_.model().external_module_path());
+    name.external_module_path(context_.model().name().external_module_path());
 
     if (!pkg_id.empty()) {
         const auto i(context_.id_to_qname().find(pkg_id));
@@ -131,20 +150,20 @@ sml::qname transformer::transform_qname(const std::string& n,
         auto j(context_.model().modules().find(i->second));
         if (j == context_.model().modules().end()) {
             BOOST_LOG_SEV(lg, error) << missing_module_for_qname
-                                     << i->second.type_name();
+                                     << i->second.simple_name();
 
             BOOST_THROW_EXCEPTION(
                 transformation_error(missing_module_for_qname +
-                    i->second.type_name()));
+                    i->second.simple_name()));
         }
 
         auto pp(j->second.name().module_path());
-        pp.push_back(j->second.name().type_name());
+        pp.push_back(j->second.name().simple_name());
         name.module_path(pp);
     }
 
-    name.type_name(n);
-    if (name.type_name().empty()) {
+    name.simple_name(n);
+    if (name.simple_name().empty()) {
         BOOST_LOG_SEV(lg, error) << empty_dia_object_name;
         BOOST_THROW_EXCEPTION(transformation_error(empty_dia_object_name));
     }
@@ -154,7 +173,7 @@ sml::qname transformer::transform_qname(const std::string& n,
 sml::nested_qname
 transformer::transform_nested_qname(const std::string& n) const {
     sml::nested_qname r(identifier_parser_->parse_qname(n));
-    if (r.type().type_name().empty()) {
+    if (r.type().simple_name().empty()) {
         BOOST_LOG_SEV(lg, error) << invalid_type_string << n;
         BOOST_THROW_EXCEPTION(transformation_error(invalid_type_string + n));
     }
@@ -170,14 +189,6 @@ transform_property(const processed_property& p) const {
     const auto pair(comments_parser_->parse(p.comment()));
     r.documentation(pair.first);
     r.implementation_specific_parameters(pair.second);
-
-    for (const auto pair : r.implementation_specific_parameters()) {
-        if (pair.first != identity_attribute_key)
-            continue;
-
-        r.is_identity_attribute(true);
-        break;
-    }
 
     if (r.name().empty()) {
         BOOST_LOG_SEV(lg, error) << empty_dia_object_name;
@@ -204,55 +215,35 @@ sml::enumerator transformer::transform_enumerator(const processed_property& p,
 }
 
 void transformer::
-transform_pod(const processed_object& o, const profile& p) {
-    BOOST_LOG_SEV(lg, debug) << "Object is a pod: " << o.id();
-
-    sml::pod pod;
-    pod.category_type(sml::category_types::user_defined);
+transform_abstract_object(sml::abstract_object& ao, sml::meta_types mt,
+    const processed_object& o, const profile& p) {
 
     const std::string pkg_id(o.child_node_id());
     using sml::meta_types;
-    pod.name(transform_qname(o.name(), meta_types::pod, pkg_id));
+    ao.name(transform_qname(o.name(), mt, pkg_id));
+    ao.generation_type(generation_type(p));
 
-    using sml::pod_types;
-    pod.pod_type(pod_types::value);
-    if (p.is_entity())
-        pod.pod_type(pod_types::entity);
-    else if (p.is_service()) // FIXME: service HACK
-        pod.pod_type(pod_types::service);
-
-    pod.is_fluent(p.is_fluent());
-    pod.is_versioned(p.is_versioned());
-    pod.is_visitable(p.is_visitable());
-    pod.is_keyed(p.is_keyed());
+    ao.is_fluent(p.is_fluent());
+    ao.is_versioned(p.is_versioned());
+    ao.is_visitable(p.is_visitable());
 
     for (const auto us : p.unknown_stereotypes()) {
         const auto c(transform_qname(us, meta_types::concept, empty));
-        pod.modeled_concepts().push_back(c);
+        ao.modeled_concepts().push_back(c);
     }
 
-    using sml::generation_types;
-    pod.generation_type(context_.is_target() ?
-        generation_types::full_generation :
-        generation_types::no_generation);
-
-    // FIXME: service hack
-    // if (context_.is_target() && p.is_non_generatable())
-    if (context_.is_target() && (p.is_non_generatable() || p.is_service()))
-        pod.generation_type(generation_types::partial_generation);
-
     const auto pair(comments_parser_->parse(o.comment()));
-    pod.documentation(pair.first);
-    pod.implementation_specific_parameters(pair.second);
+    ao.documentation(pair.first);
+    ao.implementation_specific_parameters(pair.second);
 
     for (const auto& p : o.properties()) {
         auto property(transform_property(p));
-        property.type_name(transform_nested_qname(p.type()));
-        compute_model_dependencies(property.type_name());
-        pod.properties().push_back(property);
+        property.type(transform_nested_qname(p.type()));
+        compute_model_dependencies(property.type());
+        ao.properties().push_back(property);
     }
 
-    if (pod.name().type_name().empty()) {
+    if (ao.name().simple_name().empty()) {
         BOOST_LOG_SEV(lg, error) << empty_dia_object_name + o.id();
         BOOST_THROW_EXCEPTION(
             transformation_error(empty_dia_object_name + o.id()));
@@ -285,69 +276,157 @@ transform_pod(const processed_object& o, const profile& p) {
         }
 
         BOOST_LOG_SEV(lg, debug) << "Setting parent for: "
-                                 << pod.name().type_name() << " as "
-                                 << j->second.type_name();
-        pod.parent_name(j->second);
+                                 << ao.name().simple_name() << " as "
+                                 << j->second.simple_name();
+        ao.parent_name(j->second);
     } else {
-        BOOST_LOG_SEV(lg, debug) << "Pod has no parent: "
-                                 << pod.name().type_name();
+        BOOST_LOG_SEV(lg, debug) << "Object has no parent: "
+                                 << ao.name().simple_name();
     }
 
     const auto j(context_.parent_ids().find(o.id()));
-    pod.is_parent(j != context_.parent_ids().end());
-    context_.id_to_qname().insert(std::make_pair(o.id(), pod.name()));
+    ao.is_parent(j != context_.parent_ids().end());
+    context_.id_to_qname().insert(std::make_pair(o.id(), ao.name()));
 
-    if (!pod.parent_name()) {
+    if (!ao.parent_name()) {
         context_.original_parent().insert(
-            std::make_pair(pod.name(), pod.name()));
+            std::make_pair(ao.name(), ao.name()));
     } else {
-        const auto k(context_.original_parent().find(*pod.parent_name()));
+        const auto k(context_.original_parent().find(*ao.parent_name()));
         if (k == context_.original_parent().end()) {
             BOOST_LOG_SEV(lg, error) << "Could not find the original parent of "
-                                     << pod.name().type_name();
+                                     << ao.name().simple_name();
 
             BOOST_THROW_EXCEPTION(
                 transformation_error(original_parent_not_found +
-                    pod.name().type_name()));
+                    ao.name().simple_name()));
         }
-        pod.original_parent_name(k->second);
+        ao.original_parent_name(k->second);
         context_.original_parent().insert(
-            std::make_pair(pod.name(), k->second));
+            std::make_pair(ao.name(), k->second));
     }
 
-    if (!pod.is_parent() && pod.parent_name() &&
-        pod.generation_type() == generation_types::full_generation) {
-        auto parent(pod.parent_name());
+    using sml::generation_types;
+    if (!ao.is_parent() && ao.parent_name() &&
+        ao.generation_type() == generation_types::full_generation) {
+        auto parent(ao.parent_name());
         while (parent) {
             auto k(context_.leaves().find(*parent));
             if (k == context_.leaves().end()) {
-                const std::list<sml::qname> l { pod.name() };
+                const std::list<sml::qname> l { ao.name() };
                 context_.leaves().insert(std::make_pair(*parent, l));
             } else
-                k->second.push_back(pod.name());
+                k->second.push_back(ao.name());
 
-            auto j(context_.model().pods().find(*parent));
-            if (j == context_.model().pods().end()) {
+            auto j(context_.model().objects().find(*parent));
+            if (j == context_.model().objects().end()) {
                 BOOST_LOG_SEV(lg, error) << "Could not find the parent of "
-                                         << parent->type_name();
+                                         << parent->simple_name();
                 BOOST_THROW_EXCEPTION(transformation_error(parent_not_found +
-                        parent->type_name()));
+                        parent->simple_name()));
             }
-            parent = j->second.parent_name();
+            parent = j->second->parent_name();
         }
     }
 
-    pod.is_immutable(p.is_immutable());
-    if ((pod.is_parent() || pod.parent_name()) && p.is_immutable())  {
+    ao.is_immutable(p.is_immutable());
+    if ((ao.is_parent() || ao.parent_name()) && p.is_immutable())  {
         BOOST_LOG_SEV(lg, error) << immutabilty_with_inheritance
-                                 << pod.name().type_name();
+                                 << ao.name().simple_name();
 
         BOOST_THROW_EXCEPTION(
             transformation_error(immutabilty_with_inheritance +
-                pod.name().type_name()));
+                ao.name().simple_name()));
     }
+}
 
-    context_.model().pods().insert(std::make_pair(pod.name(), pod));
+void transformer::
+transform_abstract_entity(sml::abstract_entity& ae, sml::meta_types mt,
+    const processed_object& o, const profile& p) {
+    transform_abstract_object(ae, mt, o, p);
+    ae.is_aggregate_root(p.is_aggregate_root());
+
+    for (const auto& p : ae.properties()) {
+        for (const auto pair : p.implementation_specific_parameters()) {
+            if (pair.first != identity_attribute_key)
+                continue;
+
+            ae.identity().push_back(p);
+            break;
+        }
+    }
+}
+
+void transformer::
+transform_keyed_entity(const processed_object& o, const profile& p) {
+    BOOST_LOG_SEV(lg, debug) << "Object is a keyed entity: " << o.id();
+
+    auto ke(boost::make_shared<sml::keyed_entity>());
+    const auto mt(sml::meta_types::keyed_entity);
+    transform_abstract_entity(*ke, mt, o, p);
+    context_.model().objects().insert(std::make_pair(ke->name(), ke));
+}
+
+void transformer::
+transform_entity(const processed_object& o, const profile& p) {
+    BOOST_LOG_SEV(lg, debug) << "Object is an entity: " << o.id();
+
+    auto e(boost::make_shared<sml::entity>());
+    const auto mt(sml::meta_types::entity);
+    transform_abstract_entity(*e, mt, o, p);
+    context_.model().objects().insert(std::make_pair(e->name(), e));
+}
+
+void transformer::
+transform_exception(const processed_object& o, const profile& p) {
+    BOOST_LOG_SEV(lg, debug) << "Object is an exception: " << o.id();
+
+    auto vo(boost::make_shared<sml::value_object>());
+    const auto mt(sml::meta_types::value_object);
+    transform_abstract_object(*vo, mt, o, p);
+    vo->type(sml::value_object_types::exception);
+    context_.model().objects().insert(std::make_pair(vo->name(), vo));
+}
+
+void transformer::
+transform_service(const processed_object& o, const profile& p) {
+    BOOST_LOG_SEV(lg, debug) << "Object is a service: " << o.id();
+
+    auto s(boost::make_shared<sml::service>());
+    const auto mt(sml::meta_types::service);
+    transform_abstract_object(*s, mt, o, p);
+    context_.model().objects().insert(std::make_pair(s->name(), s));
+}
+
+void transformer::
+transform_factory(const processed_object& o, const profile& p) {
+    BOOST_LOG_SEV(lg, debug) << "Object is a factory: " << o.id();
+
+    auto f(boost::make_shared<sml::factory>());
+    const auto mt(sml::meta_types::factory);
+    transform_abstract_object(*f, mt, o, p);
+    context_.model().objects().insert(std::make_pair(f->name(), f));
+}
+
+void transformer::
+transform_repository(const processed_object& o, const profile& p) {
+    BOOST_LOG_SEV(lg, debug) << "Object is a repostory: " << o.id();
+
+    auto r(boost::make_shared<sml::repository>());
+    const auto mt(sml::meta_types::repository);
+    transform_abstract_object(*r, mt, o, p);
+    context_.model().objects().insert(std::make_pair(r->name(), r));
+}
+
+void transformer::
+transform_value_object(const processed_object& o, const profile& p) {
+    BOOST_LOG_SEV(lg, debug) << "Object is a value object: " << o.id();
+
+    auto vo(boost::make_shared<sml::value_object>());
+    const auto mt(sml::meta_types::value_object);
+    transform_abstract_object(*vo, mt, o, p);
+    vo->type(sml::value_object_types::plain);
+    context_.model().objects().insert(std::make_pair(vo->name(), vo));
 }
 
 void transformer::transform_enumeration(const processed_object& o) {
@@ -364,7 +443,7 @@ void transformer::transform_enumeration(const processed_object& o) {
     e.documentation(o.comment());
 
     dogen::sml::qname qn;
-    qn.type_name(unsigned_int);
+    qn.simple_name(unsigned_int);
     qn.meta_type(dogen::sml::meta_types::primitive);
     e.underlying_type(qn);
 
@@ -403,7 +482,7 @@ void transformer::transform_module(const processed_object& o) {
     p.name(transform_qname(o.name(), meta_types::module, pkg_id));
     p.documentation(o.comment());
 
-    if (p.name().type_name().empty()) {
+    if (p.name().simple_name().empty()) {
         BOOST_THROW_EXCEPTION(
             transformation_error(empty_dia_object_name + o.id()));
         BOOST_LOG_SEV(lg, error) << empty_dia_object_name + o.id();
@@ -447,31 +526,14 @@ void transformer::transform_note(const processed_object& o) {
     auto j(context_.model().modules().find(i->second));
     if (j == context_.model().modules().end()) {
         BOOST_LOG_SEV(lg, error) << missing_module_for_qname
-                                 << i->second.type_name();
+                                 << i->second.simple_name();
 
         BOOST_THROW_EXCEPTION(
             transformation_error(missing_module_for_qname +
-                i->second.type_name()));
+                i->second.simple_name()));
     }
     j->second.documentation(pair.first);
     j->second.implementation_specific_parameters(pair.second);
-}
-
-void transformer::transform_exception(const processed_object& o) {
-    BOOST_LOG_SEV(lg, debug) << "Object is an exception: " << o.id();
-
-    sml::value_object e;
-    e.type(sml::value_types::exception);
-    e.generation_type(context_.is_target() ?
-        sml::generation_types::full_generation :
-        sml::generation_types::no_generation);
-
-    const std::string pkg_id(o.child_node_id());
-    using sml::meta_types;
-    e.name(transform_qname(o.name(), meta_types::exception, pkg_id));
-    e.documentation(o.comment());
-    context_.model().exceptions().insert(std::make_pair(e.name(), e));
-    BOOST_LOG_SEV(lg, debug) << "Created exception: " << e;
 }
 
 void transformer::transform_concept(const processed_object& o) {
@@ -487,8 +549,8 @@ void transformer::transform_concept(const processed_object& o) {
 
     for (const auto& prop : o.properties()) {
         auto property(transform_property(prop));
-        property.type_name(transform_nested_qname(prop.type()));
-        compute_model_dependencies(property.type_name());
+        property.type(transform_nested_qname(prop.type()));
+        compute_model_dependencies(property.type());
         c.properties().push_back(property);
     }
 
@@ -527,25 +589,38 @@ bool transformer::is_transformable(const processed_object& o) const {
         ot == object_types::uml_note;
 }
 
-void transformer::
-transform(const processed_object& o, const profile& p) {
-    BOOST_LOG_SEV(lg, debug) << "Starting to transform: " << o.id();
-    BOOST_LOG_SEV(lg, debug) << "Object contents: " << o;
-
-    require_is_transformable(o);
-
+void  transformer::dispatch(const processed_object& o, const profile& p) {
     if (p.is_uml_large_package())
         transform_module(o);
     else if (p.is_uml_note())
         transform_note(o);
     else if (p.is_enumeration())
         transform_enumeration(o);
-    else if (p.is_exception())
-        transform_exception(o);
     else if (p.is_concept())
         transform_concept(o);
+    else if (p.is_exception())
+        transform_exception(o, p);
+    else if (p.is_entity())
+        transform_keyed_entity(o, p);
+    else if (p.is_keyed_entity())
+        transform_entity(o, p);
+    else if (p.is_service())
+        transform_service(o, p);
+    else if (p.is_factory())
+        transform_factory(o, p);
+    else if (p.is_repository())
+        transform_repository(o, p);
     else
-        transform_pod(o, p);
+        transform_value_object(o, p);
+}
+
+void transformer::
+transform(const processed_object& o, const profile& p) {
+    BOOST_LOG_SEV(lg, debug) << "Starting to transform: " << o.id();
+    BOOST_LOG_SEV(lg, debug) << "Object contents: " << o;
+
+    require_is_transformable(o);
+    dispatch(o, p);
 
     BOOST_LOG_SEV(lg, debug) << "Transformed: " << o.id();
 }

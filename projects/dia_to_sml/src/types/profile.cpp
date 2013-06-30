@@ -34,17 +34,18 @@ profile::profile()
       is_enumeration_(static_cast<bool>(0)),
       is_exception_(static_cast<bool>(0)),
       is_entity_(static_cast<bool>(0)),
-      is_value_(static_cast<bool>(0)),
+      is_value_object_(static_cast<bool>(0)),
       is_service_(static_cast<bool>(0)),
       is_non_generatable_(static_cast<bool>(0)),
       is_versioned_(static_cast<bool>(0)),
-      is_keyed_(static_cast<bool>(0)),
+      is_keyed_entity_(static_cast<bool>(0)),
       is_visitable_(static_cast<bool>(0)),
       is_immutable_(static_cast<bool>(0)),
       is_fluent_(static_cast<bool>(0)),
       is_aggregate_root_(static_cast<bool>(0)),
-      is_string_table_(static_cast<bool>(0)),
-      is_concept_(static_cast<bool>(0)) { }
+      is_concept_(static_cast<bool>(0)),
+      is_repository_(static_cast<bool>(0)),
+      is_factory_(static_cast<bool>(0)) { }
 
 profile::profile(
     const bool is_uml_large_package,
@@ -57,18 +58,19 @@ profile::profile(
     const bool is_enumeration,
     const bool is_exception,
     const bool is_entity,
-    const bool is_value,
+    const bool is_value_object,
     const bool is_service,
     const bool is_non_generatable,
     const bool is_versioned,
-    const bool is_keyed,
+    const bool is_keyed_entity,
     const bool is_visitable,
     const bool is_immutable,
     const bool is_fluent,
     const bool is_aggregate_root,
-    const bool is_string_table,
     const bool is_concept,
-    const std::list<std::string>& unknown_stereotypes)
+    const std::list<std::string>& unknown_stereotypes,
+    const bool is_repository,
+    const bool is_factory)
     : is_uml_large_package_(is_uml_large_package),
       is_uml_class_(is_uml_class),
       is_uml_generalization_(is_uml_generalization),
@@ -79,18 +81,19 @@ profile::profile(
       is_enumeration_(is_enumeration),
       is_exception_(is_exception),
       is_entity_(is_entity),
-      is_value_(is_value),
+      is_value_object_(is_value_object),
       is_service_(is_service),
       is_non_generatable_(is_non_generatable),
       is_versioned_(is_versioned),
-      is_keyed_(is_keyed),
+      is_keyed_entity_(is_keyed_entity),
       is_visitable_(is_visitable),
       is_immutable_(is_immutable),
       is_fluent_(is_fluent),
       is_aggregate_root_(is_aggregate_root),
-      is_string_table_(is_string_table),
       is_concept_(is_concept),
-      unknown_stereotypes_(unknown_stereotypes) { }
+      unknown_stereotypes_(unknown_stereotypes),
+      is_repository_(is_repository),
+      is_factory_(is_factory) { }
 
 void profile::swap(profile& other) noexcept {
     using std::swap;
@@ -104,18 +107,19 @@ void profile::swap(profile& other) noexcept {
     swap(is_enumeration_, other.is_enumeration_);
     swap(is_exception_, other.is_exception_);
     swap(is_entity_, other.is_entity_);
-    swap(is_value_, other.is_value_);
+    swap(is_value_object_, other.is_value_object_);
     swap(is_service_, other.is_service_);
     swap(is_non_generatable_, other.is_non_generatable_);
     swap(is_versioned_, other.is_versioned_);
-    swap(is_keyed_, other.is_keyed_);
+    swap(is_keyed_entity_, other.is_keyed_entity_);
     swap(is_visitable_, other.is_visitable_);
     swap(is_immutable_, other.is_immutable_);
     swap(is_fluent_, other.is_fluent_);
     swap(is_aggregate_root_, other.is_aggregate_root_);
-    swap(is_string_table_, other.is_string_table_);
     swap(is_concept_, other.is_concept_);
     swap(unknown_stereotypes_, other.unknown_stereotypes_);
+    swap(is_repository_, other.is_repository_);
+    swap(is_factory_, other.is_factory_);
 }
 
 bool profile::operator==(const profile& rhs) const {
@@ -129,18 +133,19 @@ bool profile::operator==(const profile& rhs) const {
         is_enumeration_ == rhs.is_enumeration_ &&
         is_exception_ == rhs.is_exception_ &&
         is_entity_ == rhs.is_entity_ &&
-        is_value_ == rhs.is_value_ &&
+        is_value_object_ == rhs.is_value_object_ &&
         is_service_ == rhs.is_service_ &&
         is_non_generatable_ == rhs.is_non_generatable_ &&
         is_versioned_ == rhs.is_versioned_ &&
-        is_keyed_ == rhs.is_keyed_ &&
+        is_keyed_entity_ == rhs.is_keyed_entity_ &&
         is_visitable_ == rhs.is_visitable_ &&
         is_immutable_ == rhs.is_immutable_ &&
         is_fluent_ == rhs.is_fluent_ &&
         is_aggregate_root_ == rhs.is_aggregate_root_ &&
-        is_string_table_ == rhs.is_string_table_ &&
         is_concept_ == rhs.is_concept_ &&
-        unknown_stereotypes_ == rhs.unknown_stereotypes_;
+        unknown_stereotypes_ == rhs.unknown_stereotypes_ &&
+        is_repository_ == rhs.is_repository_ &&
+        is_factory_ == rhs.is_factory_;
 }
 
 profile& profile::operator=(profile other) {
@@ -229,12 +234,12 @@ void profile::is_entity(const bool v) {
     is_entity_ = v;
 }
 
-bool profile::is_value() const {
-    return is_value_;
+bool profile::is_value_object() const {
+    return is_value_object_;
 }
 
-void profile::is_value(const bool v) {
-    is_value_ = v;
+void profile::is_value_object(const bool v) {
+    is_value_object_ = v;
 }
 
 bool profile::is_service() const {
@@ -261,12 +266,12 @@ void profile::is_versioned(const bool v) {
     is_versioned_ = v;
 }
 
-bool profile::is_keyed() const {
-    return is_keyed_;
+bool profile::is_keyed_entity() const {
+    return is_keyed_entity_;
 }
 
-void profile::is_keyed(const bool v) {
-    is_keyed_ = v;
+void profile::is_keyed_entity(const bool v) {
+    is_keyed_entity_ = v;
 }
 
 bool profile::is_visitable() const {
@@ -301,14 +306,6 @@ void profile::is_aggregate_root(const bool v) {
     is_aggregate_root_ = v;
 }
 
-bool profile::is_string_table() const {
-    return is_string_table_;
-}
-
-void profile::is_string_table(const bool v) {
-    is_string_table_ = v;
-}
-
 bool profile::is_concept() const {
     return is_concept_;
 }
@@ -331,6 +328,22 @@ void profile::unknown_stereotypes(const std::list<std::string>& v) {
 
 void profile::unknown_stereotypes(const std::list<std::string>&& v) {
     unknown_stereotypes_ = std::move(v);
+}
+
+bool profile::is_repository() const {
+    return is_repository_;
+}
+
+void profile::is_repository(const bool v) {
+    is_repository_ = v;
+}
+
+bool profile::is_factory() const {
+    return is_factory_;
+}
+
+void profile::is_factory(const bool v) {
+    is_factory_ = v;
 }
 
 } }

@@ -60,18 +60,19 @@ populate(const unsigned int position, result_type& v) {
     v.is_enumeration(create_bool(position + 7));
     v.is_exception(create_bool(position + 8));
     v.is_entity(create_bool(position + 9));
-    v.is_value(create_bool(position + 10));
+    v.is_value_object(create_bool(position + 10));
     v.is_service(create_bool(position + 11));
     v.is_non_generatable(create_bool(position + 12));
     v.is_versioned(create_bool(position + 13));
-    v.is_keyed(create_bool(position + 14));
+    v.is_keyed_entity(create_bool(position + 14));
     v.is_visitable(create_bool(position + 15));
     v.is_immutable(create_bool(position + 16));
     v.is_fluent(create_bool(position + 17));
     v.is_aggregate_root(create_bool(position + 18));
-    v.is_string_table(create_bool(position + 19));
-    v.is_concept(create_bool(position + 20));
-    v.unknown_stereotypes(create_std_list_std_string(position + 21));
+    v.is_concept(create_bool(position + 19));
+    v.unknown_stereotypes(create_std_list_std_string(position + 20));
+    v.is_repository(create_bool(position + 21));
+    v.is_factory(create_bool(position + 22));
 }
 
 profile_generator::result_type
