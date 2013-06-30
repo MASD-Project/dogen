@@ -26,11 +26,11 @@
 #include <boost/archive/text_oarchive.hpp>
 #include <boost/archive/xml_iarchive.hpp>
 #include <boost/archive/xml_oarchive.hpp>
+#include <boost/serialization/list.hpp>
 #include <boost/serialization/nvp.hpp>
 #include <boost/serialization/optional.hpp>
 #include <boost/serialization/string.hpp>
 #include <boost/serialization/utility.hpp>
-#include <boost/serialization/vector.hpp>
 #include "dogen/dia_to_sml/serialization/object_types_ser.hpp"
 #include "dogen/dia_to_sml/serialization/processed_object_ser.hpp"
 #include "dogen/dia_to_sml/serialization/processed_property_ser.hpp"

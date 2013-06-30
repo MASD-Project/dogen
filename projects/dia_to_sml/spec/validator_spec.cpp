@@ -310,6 +310,27 @@ BOOST_AUTO_TEST_CASE(setting_sml_object_flags_on_non_objects_throws) {
 
     contains_checker<validation_error> cc1(object_options_on_non_object);
     BOOST_CHECK_EXCEPTION(v.validate(p1), validation_error, cc1);
+
+    dogen::dia_to_sml::profile p2;
+    p2.is_uml_class(true);
+    p2.is_enumeration(true);
+    p2.is_fluent(true);
+    BOOST_LOG_SEV(lg, debug) << "input p2: " << p2;
+    BOOST_CHECK_EXCEPTION(v.validate(p2), validation_error, cc1);
+
+    dogen::dia_to_sml::profile p3;
+    p3.is_uml_class(true);
+    p3.is_enumeration(true);
+    p3.is_immutable(true);
+    BOOST_LOG_SEV(lg, debug) << "input p3: " << p3;
+    BOOST_CHECK_EXCEPTION(v.validate(p3), validation_error, cc1);
+
+    dogen::dia_to_sml::profile p4;
+    p4.is_uml_class(true);
+    p4.is_enumeration(true);
+    p4.is_visitable(true);
+    BOOST_LOG_SEV(lg, debug) << "input p4: " << p4;
+    BOOST_CHECK_EXCEPTION(v.validate(p4), validation_error, cc1);
 }
 
 BOOST_AUTO_TEST_CASE(setting_sml_object_flags_on_objects_validates) {

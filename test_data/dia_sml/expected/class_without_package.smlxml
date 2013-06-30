@@ -1,21 +1,64 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <!DOCTYPE boost_serialization>
 <boost_serialization signature="serialization::archive" version="9">
-<entity class_id="0" tracking_level="0" version="0">
+<entity class_id="8" tracking_level="0" version="0">
 	<documentation></documentation>
-	<implementation_specific_parameters class_id="1" tracking_level="0" version="0">
+	<implementation_specific_parameters class_id="9" tracking_level="0" version="0">
 		<count>0</count>
 		<item_version>0</item_version>
 	</implementation_specific_parameters>
-	<name>class_without_package</name>
-	<pods class_id="2" tracking_level="0" version="0">
+	<name class_id="10" tracking_level="0" version="0">
+		<model_name>class_without_package</model_name>
+		<external_module_path class_id="11" tracking_level="0" version="0">
+			<count>0</count>
+			<item_version>0</item_version>
+		</external_module_path>
+		<module_path>
+			<count>0</count>
+			<item_version>0</item_version>
+		</module_path>
+		<simple_name></simple_name>
+	</name>
+	<generation_type>0</generation_type>
+	<is_system>0</is_system>
+	<references class_id="12" tracking_level="0" version="0">
+		<count>0</count>
+		<bucket_count>11</bucket_count>
+		<item_version>0</item_version>
+	</references>
+	<leaves>
+		<count>0</count>
+		<bucket_count>11</bucket_count>
+		<item_version>0</item_version>
+	</leaves>
+	<modules class_id="13" tracking_level="0" version="0">
+		<count>0</count>
+		<bucket_count>11</bucket_count>
+		<item_version>0</item_version>
+	</modules>
+	<concepts class_id="14" tracking_level="0" version="0">
+		<count>0</count>
+		<bucket_count>11</bucket_count>
+		<item_version>0</item_version>
+	</concepts>
+	<primitives class_id="15" tracking_level="0" version="0">
+		<count>0</count>
+		<bucket_count>11</bucket_count>
+		<item_version>0</item_version>
+	</primitives>
+	<enumerations class_id="16" tracking_level="0" version="0">
+		<count>0</count>
+		<bucket_count>11</bucket_count>
+		<item_version>0</item_version>
+	</enumerations>
+	<objects class_id="17" tracking_level="0" version="0">
 		<count>1</count>
 		<bucket_count>11</bucket_count>
 		<item_version>0</item_version>
-		<item class_id="3" tracking_level="0" version="0">
-			<first class_id="4" tracking_level="0" version="0">
+		<item class_id="18" tracking_level="0" version="0">
+			<first>
 				<model_name>class_without_package</model_name>
-				<external_module_path class_id="5" tracking_level="0" version="0">
+				<external_module_path>
 					<count>0</count>
 					<item_version>0</item_version>
 				</external_module_path>
@@ -23,31 +66,19 @@
 					<count>0</count>
 					<item_version>0</item_version>
 				</module_path>
-				<type_name>class_1</type_name>
-				<meta_type>2</meta_type>
+				<simple_name>class_1</simple_name>
 			</first>
-			<second class_id="6" tracking_level="0" version="0">
-				<name>
-					<model_name>class_without_package</model_name>
-					<external_module_path>
-						<count>0</count>
-						<item_version>0</item_version>
-					</external_module_path>
-					<module_path>
-						<count>0</count>
-						<item_version>0</item_version>
-					</module_path>
-					<type_name>class_1</type_name>
-					<meta_type>2</meta_type>
-				</name>
-				<properties class_id="7" tracking_level="0" version="0">
-					<count>1</count>
-					<item_version>0</item_version>
-					<item class_id="8" tracking_level="0" version="0">
-						<name>an_attribute</name>
-						<type_name class_id="9" tracking_level="0" version="0">
-							<type>
-								<model_name></model_name>
+			<second class_id="19" tracking_level="0" version="1">
+				<px class_id="7" tracking_level="1" version="0" object_id="_0">
+					<abstract_object class_id="20" tracking_level="0" version="0">
+						<type class_id="21" tracking_level="0" version="0">
+							<documentation></documentation>
+							<implementation_specific_parameters>
+								<count>0</count>
+								<item_version>0</item_version>
+							</implementation_specific_parameters>
+							<name>
+								<model_name>class_without_package</model_name>
 								<external_module_path>
 									<count>0</count>
 									<item_version>0</item_version>
@@ -56,109 +87,69 @@
 									<count>0</count>
 									<item_version>0</item_version>
 								</module_path>
-								<type_name>int</type_name>
-								<meta_type>0</meta_type>
-							</type>
-							<children class_id="10" tracking_level="0" version="0">
-								<count>0</count>
-								<item_version>0</item_version>
-							</children>
-							<is_pointer>0</is_pointer>
-						</type_name>
-						<default_value></default_value>
-						<documentation></documentation>
-						<is_identity_attribute>0</is_identity_attribute>
-						<implementation_specific_parameters>
+								<simple_name>class_1</simple_name>
+							</name>
+							<generation_type>1</generation_type>
+						</type>
+						<properties class_id="22" tracking_level="0" version="0">
+							<count>1</count>
+							<item_version>0</item_version>
+							<item class_id="23" tracking_level="0" version="0">
+								<documentation></documentation>
+								<implementation_specific_parameters>
+									<count>0</count>
+									<item_version>0</item_version>
+								</implementation_specific_parameters>
+								<name>an_attribute</name>
+								<type class_id="24" tracking_level="0" version="0">
+									<type>
+										<model_name></model_name>
+										<external_module_path>
+											<count>0</count>
+											<item_version>0</item_version>
+										</external_module_path>
+										<module_path>
+											<count>0</count>
+											<item_version>0</item_version>
+										</module_path>
+										<simple_name>int</simple_name>
+									</type>
+									<children class_id="25" tracking_level="0" version="0">
+										<count>0</count>
+										<item_version>0</item_version>
+									</children>
+									<is_pointer>0</is_pointer>
+								</type>
+								<default_value></default_value>
+							</item>
+						</properties>
+						<parent_name class_id="26" tracking_level="0" version="0">
+							<initialized>0</initialized>
+						</parent_name>
+						<original_parent_name>
+							<initialized>0</initialized>
+						</original_parent_name>
+						<leaves class_id="27" tracking_level="0" version="0">
 							<count>0</count>
 							<item_version>0</item_version>
-						</implementation_specific_parameters>
-					</item>
-				</properties>
-				<parent_name class_id="11" tracking_level="0" version="0">
-					<initialized>0</initialized>
-				</parent_name>
-				<original_parent_name>
-					<initialized>0</initialized>
-				</original_parent_name>
-				<leaves class_id="12" tracking_level="0" version="0">
-					<count>0</count>
-					<item_version>0</item_version>
-				</leaves>
-				<generation_type>1</generation_type>
-				<is_parent>0</is_parent>
-				<category_type>1</category_type>
-				<pod_type>5</pod_type>
-				<documentation></documentation>
-				<number_of_type_arguments>0</number_of_type_arguments>
-				<implementation_specific_parameters>
-					<count>0</count>
-					<item_version>0</item_version>
-				</implementation_specific_parameters>
-				<is_visitable>0</is_visitable>
-				<is_immutable>0</is_immutable>
-				<is_versioned>0</is_versioned>
-				<is_keyed>0</is_keyed>
-				<is_comparable>0</is_comparable>
-				<is_fluent>0</is_fluent>
-				<is_aggregate_root>0</is_aggregate_root>
-				<versioned_key>
-					<initialized>0</initialized>
-				</versioned_key>
-				<unversioned_key>
-					<initialized>0</initialized>
-				</unversioned_key>
-				<modeled_concepts>
-					<count>0</count>
-					<item_version>0</item_version>
-				</modeled_concepts>
+						</leaves>
+						<is_parent>0</is_parent>
+						<number_of_type_arguments>0</number_of_type_arguments>
+						<is_visitable>0</is_visitable>
+						<is_immutable>0</is_immutable>
+						<is_versioned>0</is_versioned>
+						<is_comparable>0</is_comparable>
+						<is_fluent>0</is_fluent>
+						<modeled_concepts>
+							<count>0</count>
+							<item_version>0</item_version>
+						</modeled_concepts>
+					</abstract_object>
+					<type>1</type>
+				</px>
 			</second>
 		</item>
-	</pods>
-	<primitives class_id="13" tracking_level="0" version="0">
-		<count>0</count>
-		<bucket_count>11</bucket_count>
-		<item_version>0</item_version>
-	</primitives>
-	<enumerations class_id="14" tracking_level="0" version="0">
-		<count>0</count>
-		<bucket_count>11</bucket_count>
-		<item_version>0</item_version>
-	</enumerations>
-	<exceptions class_id="15" tracking_level="0" version="0">
-		<count>0</count>
-		<bucket_count>11</bucket_count>
-		<item_version>0</item_version>
-	</exceptions>
-	<external_module_path>
-		<count>0</count>
-		<item_version>0</item_version>
-	</external_module_path>
-	<is_system>0</is_system>
-	<dependencies class_id="16" tracking_level="0" version="0">
-		<count>0</count>
-		<bucket_count>11</bucket_count>
-		<item_version>0</item_version>
-	</dependencies>
-	<leaves class_id="17" tracking_level="0" version="0">
-		<count>0</count>
-		<bucket_count>11</bucket_count>
-		<item_version>0</item_version>
-	</leaves>
-	<services class_id="18" tracking_level="0" version="0">
-		<count>0</count>
-		<bucket_count>11</bucket_count>
-		<item_version>0</item_version>
-	</services>
-	<modules class_id="19" tracking_level="0" version="0">
-		<count>0</count>
-		<bucket_count>11</bucket_count>
-		<item_version>0</item_version>
-	</modules>
-	<concepts class_id="20" tracking_level="0" version="0">
-		<count>0</count>
-		<bucket_count>11</bucket_count>
-		<item_version>0</item_version>
-	</concepts>
+	</objects>
 </entity>
 </boost_serialization>
 

@@ -86,6 +86,9 @@ unsigned int validator::count_sml_entity_flags(const profile& p) const {
 unsigned int validator::count_sml_object_flags(const profile& p) const {
     unsigned int r(0);
     if (p.is_non_generatable()) ++r;
+    if (p.is_visitable()) ++r;
+    if (p.is_immutable()) ++r;
+    if (p.is_fluent()) ++r;
     return r;
 }
 

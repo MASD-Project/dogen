@@ -1,310 +1,48 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <!DOCTYPE boost_serialization>
 <boost_serialization signature="serialization::archive" version="9">
-<entity class_id="0" tracking_level="0" version="0">
+<entity class_id="8" tracking_level="0" version="0">
 	<documentation>This model demonstrates the use of comments in dogen.
 
 This comment will be applied to the model namespace itself.
 </documentation>
-	<implementation_specific_parameters class_id="1" tracking_level="0" version="0">
+	<implementation_specific_parameters class_id="9" tracking_level="0" version="0">
 		<count>1</count>
 		<item_version>0</item_version>
-		<item class_id="2" tracking_level="0" version="0">
+		<item class_id="10" tracking_level="0" version="0">
 			<first>COMMENT</first>
 			<second>true</second>
 		</item>
 	</implementation_specific_parameters>
-	<name>comments</name>
-	<pods class_id="3" tracking_level="0" version="0">
-		<count>2</count>
-		<bucket_count>11</bucket_count>
-		<item_version>0</item_version>
-		<item class_id="4" tracking_level="0" version="0">
-			<first class_id="5" tracking_level="0" version="0">
-				<model_name>comments</model_name>
-				<external_module_path class_id="6" tracking_level="0" version="0">
-					<count>0</count>
-					<item_version>0</item_version>
-				</external_module_path>
-				<module_path>
-					<count>0</count>
-					<item_version>0</item_version>
-				</module_path>
-				<type_name>multi_line</type_name>
-				<meta_type>2</meta_type>
-			</first>
-			<second class_id="7" tracking_level="0" version="0">
-				<name>
-					<model_name>comments</model_name>
-					<external_module_path>
-						<count>0</count>
-						<item_version>0</item_version>
-					</external_module_path>
-					<module_path>
-						<count>0</count>
-						<item_version>0</item_version>
-					</module_path>
-					<type_name>multi_line</type_name>
-					<meta_type>2</meta_type>
-				</name>
-				<properties class_id="8" tracking_level="0" version="0">
-					<count>0</count>
-					<item_version>0</item_version>
-				</properties>
-				<parent_name class_id="9" tracking_level="0" version="0">
-					<initialized>0</initialized>
-				</parent_name>
-				<original_parent_name>
-					<initialized>0</initialized>
-				</original_parent_name>
-				<leaves class_id="10" tracking_level="0" version="0">
-					<count>0</count>
-					<item_version>0</item_version>
-				</leaves>
-				<generation_type>1</generation_type>
-				<is_parent>0</is_parent>
-				<category_type>1</category_type>
-				<pod_type>5</pod_type>
-				<documentation>first line
-
-second line
-third line with &quot;quote&quot;
-</documentation>
-				<number_of_type_arguments>0</number_of_type_arguments>
-				<implementation_specific_parameters>
-					<count>1</count>
-					<item_version>0</item_version>
-					<item>
-						<first>key</first>
-						<second>value</second>
-					</item>
-				</implementation_specific_parameters>
-				<is_visitable>0</is_visitable>
-				<is_immutable>0</is_immutable>
-				<is_versioned>0</is_versioned>
-				<is_keyed>0</is_keyed>
-				<is_comparable>0</is_comparable>
-				<is_fluent>0</is_fluent>
-				<is_aggregate_root>0</is_aggregate_root>
-				<versioned_key>
-					<initialized>0</initialized>
-				</versioned_key>
-				<unversioned_key>
-					<initialized>0</initialized>
-				</unversioned_key>
-				<modeled_concepts>
-					<count>0</count>
-					<item_version>0</item_version>
-				</modeled_concepts>
-			</second>
-		</item>
-		<item>
-			<first>
-				<model_name>comments</model_name>
-				<external_module_path>
-					<count>0</count>
-					<item_version>0</item_version>
-				</external_module_path>
-				<module_path>
-					<count>0</count>
-					<item_version>0</item_version>
-				</module_path>
-				<type_name>one_line</type_name>
-				<meta_type>2</meta_type>
-			</first>
-			<second>
-				<name>
-					<model_name>comments</model_name>
-					<external_module_path>
-						<count>0</count>
-						<item_version>0</item_version>
-					</external_module_path>
-					<module_path>
-						<count>0</count>
-						<item_version>0</item_version>
-					</module_path>
-					<type_name>one_line</type_name>
-					<meta_type>2</meta_type>
-				</name>
-				<properties>
-					<count>3</count>
-					<item_version>0</item_version>
-					<item class_id="11" tracking_level="0" version="0">
-						<name>prop_0</name>
-						<type_name class_id="12" tracking_level="0" version="0">
-							<type>
-								<model_name></model_name>
-								<external_module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</external_module_path>
-								<module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</module_path>
-								<type_name>int</type_name>
-								<meta_type>0</meta_type>
-							</type>
-							<children class_id="13" tracking_level="0" version="0">
-								<count>0</count>
-								<item_version>0</item_version>
-							</children>
-							<is_pointer>0</is_pointer>
-						</type_name>
-						<default_value></default_value>
-						<documentation>another brief comment
-</documentation>
-						<is_identity_attribute>0</is_identity_attribute>
-						<implementation_specific_parameters>
-							<count>0</count>
-							<item_version>0</item_version>
-						</implementation_specific_parameters>
-					</item>
-					<item>
-						<name>prop_1</name>
-						<type_name>
-							<type>
-								<model_name></model_name>
-								<external_module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</external_module_path>
-								<module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</module_path>
-								<type_name>int</type_name>
-								<meta_type>0</meta_type>
-							</type>
-							<children>
-								<count>0</count>
-								<item_version>0</item_version>
-							</children>
-							<is_pointer>0</is_pointer>
-						</type_name>
-						<default_value></default_value>
-						<documentation>the brief comment
-
-a second line
-</documentation>
-						<is_identity_attribute>0</is_identity_attribute>
-						<implementation_specific_parameters>
-							<count>0</count>
-							<item_version>0</item_version>
-						</implementation_specific_parameters>
-					</item>
-					<item>
-						<name>prop_2</name>
-						<type_name>
-							<type>
-								<model_name></model_name>
-								<external_module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</external_module_path>
-								<module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</module_path>
-								<type_name>int</type_name>
-								<meta_type>0</meta_type>
-							</type>
-							<children>
-								<count>0</count>
-								<item_version>0</item_version>
-							</children>
-							<is_pointer>0</is_pointer>
-						</type_name>
-						<default_value></default_value>
-						<documentation></documentation>
-						<is_identity_attribute>0</is_identity_attribute>
-						<implementation_specific_parameters>
-							<count>0</count>
-							<item_version>0</item_version>
-						</implementation_specific_parameters>
-					</item>
-				</properties>
-				<parent_name>
-					<initialized>0</initialized>
-				</parent_name>
-				<original_parent_name>
-					<initialized>0</initialized>
-				</original_parent_name>
-				<leaves>
-					<count>0</count>
-					<item_version>0</item_version>
-				</leaves>
-				<generation_type>1</generation_type>
-				<is_parent>0</is_parent>
-				<category_type>1</category_type>
-				<pod_type>5</pod_type>
-				<documentation>this is the brief comment
-</documentation>
-				<number_of_type_arguments>0</number_of_type_arguments>
-				<implementation_specific_parameters>
-					<count>0</count>
-					<item_version>0</item_version>
-				</implementation_specific_parameters>
-				<is_visitable>0</is_visitable>
-				<is_immutable>0</is_immutable>
-				<is_versioned>0</is_versioned>
-				<is_keyed>0</is_keyed>
-				<is_comparable>0</is_comparable>
-				<is_fluent>0</is_fluent>
-				<is_aggregate_root>0</is_aggregate_root>
-				<versioned_key>
-					<initialized>0</initialized>
-				</versioned_key>
-				<unversioned_key>
-					<initialized>0</initialized>
-				</unversioned_key>
-				<modeled_concepts>
-					<count>0</count>
-					<item_version>0</item_version>
-				</modeled_concepts>
-			</second>
-		</item>
-	</pods>
-	<primitives class_id="14" tracking_level="0" version="0">
-		<count>0</count>
-		<bucket_count>11</bucket_count>
-		<item_version>0</item_version>
-	</primitives>
-	<enumerations class_id="15" tracking_level="0" version="0">
-		<count>0</count>
-		<bucket_count>11</bucket_count>
-		<item_version>0</item_version>
-	</enumerations>
-	<exceptions class_id="16" tracking_level="0" version="0">
-		<count>0</count>
-		<bucket_count>11</bucket_count>
-		<item_version>0</item_version>
-	</exceptions>
-	<external_module_path>
-		<count>0</count>
-		<item_version>0</item_version>
-	</external_module_path>
+	<name class_id="11" tracking_level="0" version="0">
+		<model_name>comments</model_name>
+		<external_module_path class_id="12" tracking_level="0" version="0">
+			<count>0</count>
+			<item_version>0</item_version>
+		</external_module_path>
+		<module_path>
+			<count>0</count>
+			<item_version>0</item_version>
+		</module_path>
+		<simple_name></simple_name>
+	</name>
+	<generation_type>0</generation_type>
 	<is_system>0</is_system>
-	<dependencies class_id="17" tracking_level="0" version="0">
+	<references class_id="13" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>11</bucket_count>
 		<item_version>0</item_version>
-	</dependencies>
-	<leaves class_id="18" tracking_level="0" version="0">
+	</references>
+	<leaves>
 		<count>0</count>
 		<bucket_count>11</bucket_count>
 		<item_version>0</item_version>
 	</leaves>
-	<services class_id="19" tracking_level="0" version="0">
-		<count>0</count>
-		<bucket_count>11</bucket_count>
-		<item_version>0</item_version>
-	</services>
-	<modules class_id="20" tracking_level="0" version="0">
+	<modules class_id="14" tracking_level="0" version="0">
 		<count>2</count>
 		<bucket_count>11</bucket_count>
 		<item_version>0</item_version>
-		<item class_id="21" tracking_level="0" version="0">
+		<item class_id="15" tracking_level="0" version="0">
 			<first>
 				<model_name>comments</model_name>
 				<external_module_path>
@@ -316,10 +54,9 @@ a second line
 					<item_version>0</item_version>
 					<item>package</item>
 				</module_path>
-				<type_name>package2</type_name>
-				<meta_type>6</meta_type>
+				<simple_name>package2</simple_name>
 			</first>
-			<second class_id="22" tracking_level="0" version="0">
+			<second class_id="16" tracking_level="0" version="0">
 				<documentation>package2
 </documentation>
 				<implementation_specific_parameters>
@@ -341,11 +78,10 @@ a second line
 						<item_version>0</item_version>
 						<item>package</item>
 					</module_path>
-					<type_name>package2</type_name>
-					<meta_type>6</meta_type>
+					<simple_name>package2</simple_name>
 				</name>
 				<generation_type>0</generation_type>
-				<members>
+				<members class_id="17" tracking_level="0" version="0">
 					<count>0</count>
 					<item_version>0</item_version>
 				</members>
@@ -362,8 +98,7 @@ a second line
 					<count>0</count>
 					<item_version>0</item_version>
 				</module_path>
-				<type_name>package</type_name>
-				<meta_type>6</meta_type>
+				<simple_name>package</simple_name>
 			</first>
 			<second>
 				<documentation>package
@@ -386,8 +121,7 @@ a second line
 						<count>0</count>
 						<item_version>0</item_version>
 					</module_path>
-					<type_name>package</type_name>
-					<meta_type>6</meta_type>
+					<simple_name>package</simple_name>
 				</name>
 				<generation_type>0</generation_type>
 				<members>
@@ -397,11 +131,255 @@ a second line
 			</second>
 		</item>
 	</modules>
-	<concepts class_id="23" tracking_level="0" version="0">
+	<concepts class_id="18" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>11</bucket_count>
 		<item_version>0</item_version>
 	</concepts>
+	<primitives class_id="19" tracking_level="0" version="0">
+		<count>0</count>
+		<bucket_count>11</bucket_count>
+		<item_version>0</item_version>
+	</primitives>
+	<enumerations class_id="20" tracking_level="0" version="0">
+		<count>0</count>
+		<bucket_count>11</bucket_count>
+		<item_version>0</item_version>
+	</enumerations>
+	<objects class_id="21" tracking_level="0" version="0">
+		<count>2</count>
+		<bucket_count>11</bucket_count>
+		<item_version>0</item_version>
+		<item class_id="22" tracking_level="0" version="0">
+			<first>
+				<model_name>comments</model_name>
+				<external_module_path>
+					<count>0</count>
+					<item_version>0</item_version>
+				</external_module_path>
+				<module_path>
+					<count>0</count>
+					<item_version>0</item_version>
+				</module_path>
+				<simple_name>multi_line</simple_name>
+			</first>
+			<second class_id="23" tracking_level="0" version="1">
+				<px class_id="7" tracking_level="1" version="0" object_id="_0">
+					<abstract_object class_id="24" tracking_level="0" version="0">
+						<type class_id="25" tracking_level="0" version="0">
+							<documentation>first line
+
+second line
+third line with &quot;quote&quot;
+</documentation>
+							<implementation_specific_parameters>
+								<count>1</count>
+								<item_version>0</item_version>
+								<item>
+									<first>key</first>
+									<second>value</second>
+								</item>
+							</implementation_specific_parameters>
+							<name>
+								<model_name>comments</model_name>
+								<external_module_path>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_module_path>
+								<module_path>
+									<count>0</count>
+									<item_version>0</item_version>
+								</module_path>
+								<simple_name>multi_line</simple_name>
+							</name>
+							<generation_type>1</generation_type>
+						</type>
+						<properties class_id="26" tracking_level="0" version="0">
+							<count>0</count>
+							<item_version>0</item_version>
+						</properties>
+						<parent_name class_id="27" tracking_level="0" version="0">
+							<initialized>0</initialized>
+						</parent_name>
+						<original_parent_name>
+							<initialized>0</initialized>
+						</original_parent_name>
+						<leaves>
+							<count>0</count>
+							<item_version>0</item_version>
+						</leaves>
+						<is_parent>0</is_parent>
+						<number_of_type_arguments>0</number_of_type_arguments>
+						<is_visitable>0</is_visitable>
+						<is_immutable>0</is_immutable>
+						<is_versioned>0</is_versioned>
+						<is_comparable>0</is_comparable>
+						<is_fluent>0</is_fluent>
+						<modeled_concepts>
+							<count>0</count>
+							<item_version>0</item_version>
+						</modeled_concepts>
+					</abstract_object>
+					<type>1</type>
+				</px>
+			</second>
+		</item>
+		<item>
+			<first>
+				<model_name>comments</model_name>
+				<external_module_path>
+					<count>0</count>
+					<item_version>0</item_version>
+				</external_module_path>
+				<module_path>
+					<count>0</count>
+					<item_version>0</item_version>
+				</module_path>
+				<simple_name>one_line</simple_name>
+			</first>
+			<second>
+				<px class_id_reference="7" object_id="_1">
+					<abstract_object>
+						<type>
+							<documentation>this is the brief comment
+</documentation>
+							<implementation_specific_parameters>
+								<count>0</count>
+								<item_version>0</item_version>
+							</implementation_specific_parameters>
+							<name>
+								<model_name>comments</model_name>
+								<external_module_path>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_module_path>
+								<module_path>
+									<count>0</count>
+									<item_version>0</item_version>
+								</module_path>
+								<simple_name>one_line</simple_name>
+							</name>
+							<generation_type>1</generation_type>
+						</type>
+						<properties>
+							<count>3</count>
+							<item_version>0</item_version>
+							<item class_id="28" tracking_level="0" version="0">
+								<documentation>another brief comment
+</documentation>
+								<implementation_specific_parameters>
+									<count>0</count>
+									<item_version>0</item_version>
+								</implementation_specific_parameters>
+								<name>prop_0</name>
+								<type class_id="29" tracking_level="0" version="0">
+									<type>
+										<model_name></model_name>
+										<external_module_path>
+											<count>0</count>
+											<item_version>0</item_version>
+										</external_module_path>
+										<module_path>
+											<count>0</count>
+											<item_version>0</item_version>
+										</module_path>
+										<simple_name>int</simple_name>
+									</type>
+									<children class_id="30" tracking_level="0" version="0">
+										<count>0</count>
+										<item_version>0</item_version>
+									</children>
+									<is_pointer>0</is_pointer>
+								</type>
+								<default_value></default_value>
+							</item>
+							<item>
+								<documentation>the brief comment
+
+a second line
+</documentation>
+								<implementation_specific_parameters>
+									<count>0</count>
+									<item_version>0</item_version>
+								</implementation_specific_parameters>
+								<name>prop_1</name>
+								<type>
+									<type>
+										<model_name></model_name>
+										<external_module_path>
+											<count>0</count>
+											<item_version>0</item_version>
+										</external_module_path>
+										<module_path>
+											<count>0</count>
+											<item_version>0</item_version>
+										</module_path>
+										<simple_name>int</simple_name>
+									</type>
+									<children>
+										<count>0</count>
+										<item_version>0</item_version>
+									</children>
+									<is_pointer>0</is_pointer>
+								</type>
+								<default_value></default_value>
+							</item>
+							<item>
+								<documentation></documentation>
+								<implementation_specific_parameters>
+									<count>0</count>
+									<item_version>0</item_version>
+								</implementation_specific_parameters>
+								<name>prop_2</name>
+								<type>
+									<type>
+										<model_name></model_name>
+										<external_module_path>
+											<count>0</count>
+											<item_version>0</item_version>
+										</external_module_path>
+										<module_path>
+											<count>0</count>
+											<item_version>0</item_version>
+										</module_path>
+										<simple_name>int</simple_name>
+									</type>
+									<children>
+										<count>0</count>
+										<item_version>0</item_version>
+									</children>
+									<is_pointer>0</is_pointer>
+								</type>
+								<default_value></default_value>
+							</item>
+						</properties>
+						<parent_name>
+							<initialized>0</initialized>
+						</parent_name>
+						<original_parent_name>
+							<initialized>0</initialized>
+						</original_parent_name>
+						<leaves>
+							<count>0</count>
+							<item_version>0</item_version>
+						</leaves>
+						<is_parent>0</is_parent>
+						<number_of_type_arguments>0</number_of_type_arguments>
+						<is_visitable>0</is_visitable>
+						<is_immutable>0</is_immutable>
+						<is_versioned>0</is_versioned>
+						<is_comparable>0</is_comparable>
+						<is_fluent>0</is_fluent>
+						<modeled_concepts>
+							<count>0</count>
+							<item_version>0</item_version>
+						</modeled_concepts>
+					</abstract_object>
+					<type>1</type>
+				</px>
+			</second>
+		</item>
+	</objects>
 </entity>
 </boost_serialization>
 

@@ -112,6 +112,15 @@ public:
         const std::string& st = std::string());
 
     /**
+     * @brief Generates a new UML class with a property
+     *
+     * @param n identifier used for object ID generation.
+     * @param st stereotype to apply to class.
+     */
+    static processed_object build_class_with_property(const unsigned int n = 0,
+        const std::string& st = std::string());
+
+    /**
      * @brief Generates a new UML class with an empty name.
      *
      * @param n identifier used for object ID generation.

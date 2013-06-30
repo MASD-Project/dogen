@@ -587,9 +587,9 @@ void  transformer::dispatch(const processed_object& o, const profile& p) {
     else if (p.is_exception())
         transform_exception(o, p);
     else if (p.is_entity())
-        transform_keyed_entity(o, p);
-    else if (p.is_keyed_entity())
         transform_entity(o, p);
+    else if (p.is_keyed_entity())
+        transform_keyed_entity(o, p);
     else if (p.is_service())
         transform_service(o, p);
     else if (p.is_factory())

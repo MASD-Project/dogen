@@ -45,7 +45,7 @@ processed_object::processed_object(
     const std::string& comment,
     const std::string& child_node_id,
     const boost::optional<std::pair<std::string, std::string> >& connection,
-    const std::vector<dogen::dia_to_sml::processed_property>& properties,
+    const std::list<dogen::dia_to_sml::processed_property>& properties,
     const std::string& text)
     : id_(id),
       name_(name),
@@ -192,19 +192,19 @@ void processed_object::connection(const boost::optional<std::pair<std::string, s
     connection_ = std::move(v);
 }
 
-const std::vector<dogen::dia_to_sml::processed_property>& processed_object::properties() const {
+const std::list<dogen::dia_to_sml::processed_property>& processed_object::properties() const {
     return properties_;
 }
 
-std::vector<dogen::dia_to_sml::processed_property>& processed_object::properties() {
+std::list<dogen::dia_to_sml::processed_property>& processed_object::properties() {
     return properties_;
 }
 
-void processed_object::properties(const std::vector<dogen::dia_to_sml::processed_property>& v) {
+void processed_object::properties(const std::list<dogen::dia_to_sml::processed_property>& v) {
     properties_ = v;
 }
 
-void processed_object::properties(const std::vector<dogen::dia_to_sml::processed_property>&& v) {
+void processed_object::properties(const std::list<dogen::dia_to_sml::processed_property>&& v) {
     properties_ = std::move(v);
 }
 

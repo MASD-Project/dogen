@@ -62,7 +62,7 @@ inline std::ostream& operator<<(std::ostream& s, const boost::optional<std::pair
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::vector<dogen::dia_to_sml::processed_property>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::dia_to_sml::processed_property>& v) {
     s << "[ ";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";

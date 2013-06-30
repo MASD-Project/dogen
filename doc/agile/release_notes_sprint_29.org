@@ -10,13 +10,13 @@ This file contains all stories that were closed during sprint 29.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-06-30 Sun 13:28]
+Clock summary at [2013-06-30 Sun 18:42]
 
 | Headline                                                           | Time    |       |       |
 |--------------------------------------------------------------------+---------+-------+-------|
-| *Total time*                                                       | *41:38* |       |       |
+| *Total time*                                                       | *47:13* |       |       |
 |--------------------------------------------------------------------+---------+-------+-------|
-| Development Stories Implemented                                    |         | 41:38 |       |
+| Development Stories Implemented                                    |         | 47:13 |       |
 | IMPLEMENTATION Release notes and backlog grooming                  |         |       |  0:53 |
 | COMPLETED Make design by contract methods consistent in dia to sml |         |       |  0:52 |
 | COMPLETED Split resolver from merger                               |         |       |  3:18 |
@@ -27,7 +27,8 @@ Clock summary at [2013-06-30 Sun 13:28]
 | COMPLETED Ensure extractor takes concepts into account             |         |       |  0:22 |
 | COMPLETED Descendents modeling different concepts from base break  |         |       |  2:20 |
 | COMPLETED Model should model appropriate concepts                  |         |       |  2:15 |
-| IMPLEMENTATION Update SML to make use of concepts                  |         |       | 19:22 |
+| COMPLETED Remove meta types enumeration                            |         |       |  0:58 |
+| IMPLEMENTATION Update SML to make use of concepts                  |         |       | 23:59 |
 #+end:
 
 *** IMPLEMENTATION Release notes and backlog grooming                  :task:
@@ -342,6 +343,9 @@ using. Attempt to make use of these to simplify the model.
      CLOCK: [2013-06-26 Wed 18:01]--[2013-06-26 Wed 18:07] =>  0:06
 
 **** IMPLEMENTATION Convert pods into entities, values or services     :task:
+     CLOCK: [2013-06-30 Sun 16:53]--[2013-06-30 Sun 18:42] =>  1:49
+     CLOCK: [2013-06-30 Sun 16:05]--[2013-06-30 Sun 16:53] =>  0:48
+     CLOCK: [2013-06-30 Sun 14:05]--[2013-06-30 Sun 16:05] =>  2:00
      CLOCK: [2013-06-30 Sun 10:29]--[2013-06-30 Sun 13:28] =>  2:59
      CLOCK: [2013-06-30 Sun 00:31]--[2013-06-30 Sun 01:29] =>  0:58
      CLOCK: [2013-06-29 Sat 22:24]--[2013-06-30 Sun 00:31] =>  2:07

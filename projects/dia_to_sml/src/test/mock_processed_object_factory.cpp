@@ -38,8 +38,10 @@ const std::string uml_association("UML - Association");
 const std::string uml_note("UML - Note");
 const std::string uml_message("UML - Message");
 const std::string uml_realization("UML - Realizes");
+const std::string unsigned_int("unsigned int");
 
 using dogen::dia_to_sml::processed_object;
+using dogen::dia_to_sml::processed_property;
 using dogen::dia_to_sml::test::mock_processed_object_factory;
 
 processed_object
@@ -60,6 +62,15 @@ processed_object create_named_object(const dogen::dia_to_sml::object_types ot,
     const unsigned int n) {
     processed_object r(create_object(ot, n));
     r.name(name(n));
+    return r;
+}
+
+processed_property
+create_processed_property(const unsigned int n) {
+    processed_property r;
+    r.name(name(n));
+    r.type(unsigned_int);
+    r.comment(doxygen_comment);
     return r;
 }
 
@@ -148,6 +159,13 @@ build_class(const unsigned int n, const std::string& st) {
     auto r(create_named_object(object_types::uml_class, n));
     r.stereotype(st);
     r.comment(doxygen_comment);
+    return r;
+}
+
+processed_object mock_processed_object_factory::
+build_class_with_property(const unsigned int n, const std::string& st) {
+    auto r(build_class(n, st));
+    r.properties().push_back(create_processed_property(n));
     return r;
 }
 

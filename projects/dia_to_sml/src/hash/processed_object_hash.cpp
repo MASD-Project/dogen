@@ -49,7 +49,7 @@ inline std::size_t hash_boost_optional_std_pair_std_string_std_string_(const boo
     return seed;
 }
 
-inline std::size_t hash_std_vector_dogen_dia_to_sml_processed_property(const std::vector<dogen::dia_to_sml::processed_property>& v){
+inline std::size_t hash_std_list_dogen_dia_to_sml_processed_property(const std::list<dogen::dia_to_sml::processed_property>& v){
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i);
@@ -72,7 +72,7 @@ std::size_t processed_object_hasher::hash(const processed_object&v) {
     combine(seed, v.comment());
     combine(seed, v.child_node_id());
     combine(seed, hash_boost_optional_std_pair_std_string_std_string_(v.connection()));
-    combine(seed, hash_std_vector_dogen_dia_to_sml_processed_property(v.properties()));
+    combine(seed, hash_std_list_dogen_dia_to_sml_processed_property(v.properties()));
     combine(seed, v.text());
 
     return seed;

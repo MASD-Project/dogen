@@ -71,20 +71,20 @@ private:
         using namespace dogen::utility::log;
         logger lg(logger_factory("utility.test.serialization_tester"));
         BOOST_LOG_SEV(lg, debug) << "original: " << jsonify(a);
-        std::ostringstream output_stream;
+        std::ostringstream os;
         {
-            OutputArchive output_archive(output_stream);
-            register_types<OutputArchive>(output_archive);
-            output_archive << BOOST_SERIALIZATION_NVP(a);
+            OutputArchive oa(os);
+            register_types<OutputArchive>(oa);
+            oa << BOOST_SERIALIZATION_NVP(a);
         }
 
         entity_type b = entity_type();
         BOOST_LOG_SEV(lg, debug) << "before load: " << jsonify(b);
-        std::istringstream input_stream(output_stream.str());
+        std::istringstream is(os.str());
         {
-            InputArchive input_archive(input_stream);
-            register_types<InputArchive>(input_archive);
-            input_archive >> BOOST_SERIALIZATION_NVP(b);
+            InputArchive ia(is);
+            register_types<InputArchive>(ia);
+            ia >> BOOST_SERIALIZATION_NVP(b);
         }
         BOOST_LOG_SEV(lg, debug) << "after load: " << jsonify(b);
         BOOST_CHECK(a == b);

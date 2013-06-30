@@ -56,8 +56,8 @@ create_dogen_dia_to_sml_processed_property(const unsigned int position) {
     return dogen::dia_to_sml::processed_property_generator::create(position);
 }
 
-std::vector<dogen::dia_to_sml::processed_property> create_std_vector_dogen_dia_to_sml_processed_property(unsigned int position) {
-    std::vector<dogen::dia_to_sml::processed_property> r;
+std::list<dogen::dia_to_sml::processed_property> create_std_list_dogen_dia_to_sml_processed_property(unsigned int position) {
+    std::list<dogen::dia_to_sml::processed_property> r;
     for (unsigned int i(0); i < 10; ++i) {
         r.push_back(create_dogen_dia_to_sml_processed_property(position + i));
     }
@@ -80,7 +80,7 @@ populate(const unsigned int position, result_type& v) {
     v.comment(create_std_string(position + 4));
     v.child_node_id(create_std_string(position + 5));
     v.connection(create_boost_optional_std_pair_std_string_std_string_(position + 6));
-    v.properties(create_std_vector_dogen_dia_to_sml_processed_property(position + 7));
+    v.properties(create_std_list_dogen_dia_to_sml_processed_property(position + 7));
     v.text(create_std_string(position + 8));
 }
 

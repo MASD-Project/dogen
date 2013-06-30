@@ -27,9 +27,9 @@
 
 #include <algorithm>
 #include <boost/optional.hpp>
+#include <list>
 #include <string>
 #include <utility>
-#include <vector>
 #include "dogen/dia_to_sml/serialization/processed_object_fwd_ser.hpp"
 #include "dogen/dia_to_sml/types/object_types.hpp"
 #include "dogen/dia_to_sml/types/processed_property.hpp"
@@ -37,6 +37,9 @@
 namespace dogen {
 namespace dia_to_sml {
 
+/**
+ * @brief Representation of a dia object after first stage processing.
+ */
 class processed_object final {
 public:
     processed_object(const processed_object&) = default;
@@ -57,7 +60,7 @@ public:
         const std::string& comment,
         const std::string& child_node_id,
         const boost::optional<std::pair<std::string, std::string> >& connection,
-        const std::vector<dogen::dia_to_sml::processed_property>& properties,
+        const std::list<dogen::dia_to_sml::processed_property>& properties,
         const std::string& text);
 
 private:
@@ -68,43 +71,83 @@ private:
     friend void boost::serialization::load(Archive& ar, processed_object& v, unsigned int version);
 
 public:
+    /**
+     * @brief Dia object id.
+     */
+    /**@{*/
     const std::string& id() const;
     std::string& id();
     void id(const std::string& v);
     void id(const std::string&& v);
+    /**@}*/
 
+    /**
+     * @brief Name of the object in dia format.
+     */
+    /**@{*/
     const std::string& name() const;
     std::string& name();
     void name(const std::string& v);
     void name(const std::string&& v);
+    /**@}*/
 
+    /**
+     * @brief Type of the dia object.
+     */
+    /**@{*/
     dogen::dia_to_sml::object_types object_type() const;
     void object_type(const dogen::dia_to_sml::object_types& v);
+    /**@}*/
 
+    /**
+     * @brief CSV list of stereotypes.
+     */
+    /**@{*/
     const std::string& stereotype() const;
     std::string& stereotype();
     void stereotype(const std::string& v);
     void stereotype(const std::string&& v);
+    /**@}*/
 
+    /**
+     * @brief Any comments associated with object.
+     */
+    /**@{*/
     const std::string& comment() const;
     std::string& comment();
     void comment(const std::string& v);
     void comment(const std::string&& v);
+    /**@}*/
 
+    /**
+     * @brief If the object is contained in another object, its node id.
+     */
+    /**@{*/
     const std::string& child_node_id() const;
     std::string& child_node_id();
     void child_node_id(const std::string& v);
     void child_node_id(const std::string&& v);
+    /**@}*/
 
+    /**
+     * @brief Connections this object may have with other objects.
+     */
+    /**@{*/
     const boost::optional<std::pair<std::string, std::string> >& connection() const;
     boost::optional<std::pair<std::string, std::string> >& connection();
     void connection(const boost::optional<std::pair<std::string, std::string> >& v);
     void connection(const boost::optional<std::pair<std::string, std::string> >&& v);
+    /**@}*/
 
-    const std::vector<dogen::dia_to_sml::processed_property>& properties() const;
-    std::vector<dogen::dia_to_sml::processed_property>& properties();
-    void properties(const std::vector<dogen::dia_to_sml::processed_property>& v);
-    void properties(const std::vector<dogen::dia_to_sml::processed_property>&& v);
+    /**
+     * @brief All properties associated with dia object.
+     */
+    /**@{*/
+    const std::list<dogen::dia_to_sml::processed_property>& properties() const;
+    std::list<dogen::dia_to_sml::processed_property>& properties();
+    void properties(const std::list<dogen::dia_to_sml::processed_property>& v);
+    void properties(const std::list<dogen::dia_to_sml::processed_property>&& v);
+    /**@}*/
 
     /**
      * @brief Text contents of a UML note.
@@ -134,7 +177,7 @@ private:
     std::string comment_;
     std::string child_node_id_;
     boost::optional<std::pair<std::string, std::string> > connection_;
-    std::vector<dogen::dia_to_sml::processed_property> properties_;
+    std::list<dogen::dia_to_sml::processed_property> properties_;
     std::string text_;
 };
 

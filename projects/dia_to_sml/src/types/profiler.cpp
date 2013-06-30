@@ -20,6 +20,7 @@
  */
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
+#include "dogen/dia_to_sml/io/profile_io.hpp"
 #include "dogen/dia_to_sml/types/identifier_parser.hpp"
 #include "dogen/dia_to_sml/types/processed_object.hpp"
 #include "dogen/dia_to_sml/types/profiler.hpp"
@@ -109,9 +110,14 @@ process_stereotype(profile& o, const std::string& s) const {
 }
 
 profile profiler::generate(const processed_object& o) {
+    BOOST_LOG_SEV(lg, debug) << "Generating profile for: " << o.id();
+
     profile r;
     process_object_type(r, o.object_type());
     process_stereotype(r, o.stereotype());
+
+    BOOST_LOG_SEV(lg, debug) << "Generated profile for "  << o.id()
+                             << ". result: " << r;
     return r;
 }
 

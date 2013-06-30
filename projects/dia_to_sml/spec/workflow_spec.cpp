@@ -18,7 +18,9 @@
  * MA 02110-1301, USA.
  *
  */
+#include <fstream>
 #include <sstream>
+#include <boost/filesystem/fstream.hpp>
 #include <boost/test/unit_test.hpp>
 #include "dogen/utility/test/xml_serialization_helper.hpp"
 #include "dogen/utility/test/asserter.hpp"
@@ -29,10 +31,15 @@
 #include "dogen/sml/types/model.hpp"
 #include "dogen/sml/io/model_io.hpp"
 #include "dogen/sml/io/qname_io.hpp"
-#include "dogen/dia/serialization/diagram_ser.hpp"
 #include "dogen/sml/serialization/model_ser.hpp"
 #include "dogen/utility/test/exception_checkers.hpp"
+#include "dogen/dia/test/diagram_serialization_helper.hpp"
+#include "dogen/sml/serialization/registrar_ser.hpp"
 #include "dogen/dia_to_sml/types/workflow.hpp"
+
+template<typename Archive> void register_types(Archive& ar) {
+    dogen::sml::register_types<Archive>(ar);
+}
 
 using namespace dogen::dia_to_sml;
 using dogen::utility::test::asserter;
@@ -47,8 +54,9 @@ bool test_workflow(
     boost::filesystem::path expected_path,
     boost::filesystem::path actual_path) {
 
-    using dogen::utility::test::xml_deserialize;
-    const auto i(xml_deserialize<dogen::dia::diagram>(input_path));
+    boost::filesystem::ifstream s(input_path);
+    using dogen::dia::test::diagram_serialization_helper;
+    const auto i(diagram_serialization_helper::from_xml(s));
 
     const std::string epp;
     const bool is_target(true);
@@ -65,7 +73,7 @@ using dogen::utility::test_data::dia_sml;
 using dogen::utility::test::contains_checker;
 
 BOOST_AUTO_TEST_SUITE(workflow)
-/*
+
 BOOST_AUTO_TEST_CASE(class_in_a_package_dia_transforms_into_expected_sml) {
     SETUP_TEST_LOG("class_in_a_package_dia_transforms_into_expected_sml");
     const auto input_path(dia_sml::expected_class_in_a_package_dia_xml());
@@ -185,5 +193,5 @@ BOOST_AUTO_TEST_CASE(exception_dia_transforms_into_expected_sml) {
     const auto expected_path(dia_sml::expected_exception_sml_xml());
     BOOST_CHECK(test_workflow(input_path, expected_path, actual_path));
 }
-*/
+
 BOOST_AUTO_TEST_SUITE_END()

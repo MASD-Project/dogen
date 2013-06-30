@@ -236,7 +236,6 @@ processed_object processor::process(const dia::object& o) {
                                          << c.type();
 
                 processed_property p;
-                r.properties().reserve(c.value().size());
                 for (const auto a : c.value()) {
                     if (a->name() == dia_name)
                         p.name(parse_string_attribute(*a));
