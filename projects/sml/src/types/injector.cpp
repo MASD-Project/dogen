@@ -52,6 +52,7 @@ const std::string sml_model("sml");
 const std::string visitor_name("visitor");
 const std::string versioned_name("versioned_key");
 const std::string unversioned_name("unversioned_key");
+const std::string extract_name("extract");
 const std::string uint_name("unsigned int");
 const std::string id_name("id");
 const std::string version_name("version");
@@ -129,10 +130,39 @@ create_unversioned_key(const qname& qn, const generation_types gt,
     return create_key(qn, gt, properties, false);
 }
 
+boost::shared_ptr<abstract_object>
+injector::create_key_extractor(const keyed_entity& ke) const {
+    auto r(boost::make_shared<service>());
+    qname qn;
+    qn.simple_name(ke.name().simple_name() + "_" + visitor_name);
+    qn.model_name(ke.name().model_name());
+    qn.module_path(ke.name().module_path());
+    qn.external_module_path(ke.name().external_module_path());
+
+    BOOST_LOG_SEV(lg, debug) << "Creating visitor: " << qn.simple_name();
+
+    r->name(qn);
+    r->generation_type(ke.generation_type());
+    r->type(service_types::visitor);
+    r->documentation(visitor_doc + ke.name().simple_name());
+
+    operation opuv;
+    opuv.name(unversioned_name);
+
+    nested_qname nqn;
+    nqn.type(ke.unversioned_key());
+    opuv.arguments().push_back(nqn);
+    // opuv.documentation(visit_operation_doc + l.simple_name());
+    r->operations().push_back(opuv);
+
+    BOOST_LOG_SEV(lg, debug) << "Created visitor: " << qn.simple_name();
+    return r;
+}
+
 void injector::inject_keys(model& m) const {
     BOOST_LOG_SEV(lg, debug) << "Injecting keys.";
 
-    std::list<boost::shared_ptr<abstract_object> > keys;
+    std::list<boost::shared_ptr<abstract_object> > objects;
     const auto lambda([&](keyed_entity& ke) {
             if (ke.identity().empty()) {
                 BOOST_LOG_SEV(lg, error) << empty_identity << ke.name();
@@ -147,14 +177,17 @@ void injector::inject_keys(model& m) const {
             const auto gt(ke.generation_type());
             const auto qn(ke.name());
             const auto uvk(create_unversioned_key(qn, gt, ke.identity()));
-            keys.push_back(uvk);
+            objects.push_back(uvk);
             ke.unversioned_key(uvk->name());
 
             if (ke.is_versioned()) {
                 auto vk(create_versioned_key(qn, gt, ke.identity()));
                 ke.versioned_key(vk->name());
-                keys.push_back(vk);
+                objects.push_back(vk);
             }
+
+            // FIXME
+            // objects.push_back(create_key_extractor(ke));
         });
 
     keyed_entity_visitor v(lambda);
@@ -163,16 +196,17 @@ void injector::inject_keys(model& m) const {
         pair.second->accept(v);
     }
 
-    for (const auto& k : keys) {
-        const auto i(m.objects().insert(std::make_pair(k->name(), k)));
+    for (const auto& o : objects) {
+        const auto i(m.objects().insert(std::make_pair(o->name(), o)));
         if (!i.second) {
-            BOOST_LOG_SEV(lg, error) << duplicate_qname << k->name();
+            BOOST_LOG_SEV(lg, error) << duplicate_qname << o->name();
             BOOST_THROW_EXCEPTION(injection_error(duplicate_qname +
-                    boost::lexical_cast<std::string>(k->name())));
+                    boost::lexical_cast<std::string>(o->name())));
         }
     }
 
-    BOOST_LOG_SEV(lg, debug) << "Done injecting keys. Total: " << keys.size();
+    BOOST_LOG_SEV(lg, debug) << "Done injecting keys. Total: "
+                             << objects.size();
 }
 
 void injector::inject_version(abstract_object& p) const {
@@ -269,10 +303,6 @@ void injector::inject_visitors(model& m) const {
     }
 
     BOOST_LOG_SEV(lg, debug) << "Done injecting visitors.";
-}
-
-void injector::inject_key_extractors(model& ) const {
-    
 }
 
 void injector::inject(model& m) const {

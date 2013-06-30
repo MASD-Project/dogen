@@ -84,7 +84,14 @@ private:
     /**@}*/
 
     /**
-     * @brief Injects versioned and unversioned keys for keyed entities.
+     * @brief Create a visitor for the object.
+     */
+    boost::shared_ptr<abstract_object>
+    create_key_extractor(const keyed_entity& ke) const;
+
+    /**
+     * @brief Injects versioned and unversioned keys for keyed
+     * entities, and the associated key extractor.
      */
     void inject_keys(model& m) const;
 
@@ -109,11 +116,6 @@ private:
      * @brief Injects visitors for objects that require them.
      */
     void inject_visitors(model& m) const;
-
-    /**
-     * @brief Injects key extractors for all keyed entities.
-     */
-    void inject_key_extractors(model& m) const;
 
 public:
 
