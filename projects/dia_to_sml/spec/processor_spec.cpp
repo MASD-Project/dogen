@@ -57,7 +57,7 @@ using dogen::dia_to_sml::object_types;
 BOOST_AUTO_TEST_SUITE(processor)
 
 BOOST_AUTO_TEST_CASE(uml_class_with_no_stereotype_transforms_into_expected_processed_object) {
-    SETUP_TEST_LOG_SOURCE("uml_class_with_no_stereotype_transforms_into_expected_pod");
+    SETUP_TEST_LOG_SOURCE("uml_class_with_no_stereotype_transforms_into_expected_object");
     dogen::dia_to_sml::processor p;
     const auto o(p.process(mock_object_factory::build_class(0)));
     BOOST_LOG_SEV(lg, debug) << "actual:" << o;

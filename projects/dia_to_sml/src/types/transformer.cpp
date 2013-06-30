@@ -54,7 +54,7 @@ const std::string unsigned_int("unsigned int");
 const std::string identity_attribute_key("IDENTITY_ATTRIBUTE");
 const std::string comment_key("COMMENT");
 const std::string empty_dia_object_name("Dia object name is empty");
-const std::string original_parent_not_found("Pod has no original parent: ");
+const std::string original_parent_not_found("Object has no original parent: ");
 const std::string parent_not_found("Object has a parent but its not defined: ");
 const std::string empty_parent_container(
     "Object has an entry in child to parent container but its empty: ");
