@@ -49,11 +49,14 @@ const std::string text_extension(".txt");
 const std::string binary_extension(".bin");
 const std::string dia_model("dia");
 const std::string sml_model("sml");
+const std::string visitor_name("visitor");
 const std::string versioned_name("versioned_key");
 const std::string unversioned_name("unversioned_key");
 const std::string uint_name("unsigned int");
 const std::string id_name("id");
 const std::string version_name("version");
+const std::string visitor_doc("Visitor for ");
+const std::string visit_operation_doc("Accept visits for type ");
 const std::string unversioned_key_doc("Unversioned key for ");
 const std::string versioned_key_doc("Versioned key for ");
 const std::string versioned_property_doc("Object instance's version.");
@@ -61,6 +64,7 @@ const std::string empty_identity(
     "Identity must have at least one attribute: ");
 const std::string duplicate_qname(
     "Attempt to add object with a name that already exists in model: ");
+const std::string zero_leaves("Type marked as visitable but has no leaves: ");
 
 class keyed_entity_visitor : public dogen::sml::type_visitor {
 public:
@@ -161,8 +165,6 @@ void injector::inject_keys(model& m) const {
 
     for (const auto& k : keys) {
         const auto i(m.objects().insert(std::make_pair(k->name(), k)));
-
-        //FIXME: should really be in validator
         if (!i.second) {
             BOOST_LOG_SEV(lg, error) << duplicate_qname << k->name();
             BOOST_THROW_EXCEPTION(injection_error(duplicate_qname +
@@ -192,7 +194,7 @@ void injector::inject_version(abstract_object& p) const {
 }
 
 void injector::inject_version(model& m) const {
-    BOOST_LOG_SEV(lg, debug) << "Injecting version property.";
+    BOOST_LOG_SEV(lg, debug) << "Injecting version property on all types.";
 
     for (auto& pair : m.objects()) {
         auto& ao(*pair.second);
@@ -201,12 +203,82 @@ void injector::inject_version(model& m) const {
             inject_version(ao);
     }
 
-    BOOST_LOG_SEV(lg, debug) << "Done injecting version property.";
+    BOOST_LOG_SEV(lg, debug) << "Done injecting version property on all types.";
+}
+
+boost::shared_ptr<abstract_object>
+injector::create_visitor(const abstract_object& ao) const {
+    auto r(boost::make_shared<service>());
+    qname qn;
+    qn.simple_name(ao.name().simple_name() + "_" + visitor_name);
+    qn.model_name(ao.name().model_name());
+    qn.module_path(ao.name().module_path());
+    qn.external_module_path(ao.name().external_module_path());
+
+    BOOST_LOG_SEV(lg, debug) << "Creating visitor: " << qn.simple_name();
+
+    r->name(qn);
+    r->generation_type(ao.generation_type());
+    r->type(service_types::visitor);
+    r->documentation(visitor_doc + ao.name().simple_name());
+
+    for (const auto& l : ao.leaves()) {
+        operation op;
+        op.name("visit");
+
+        nested_qname nqn;
+        nqn.type(l);
+        op.arguments().push_back(nqn);
+        op.documentation(visit_operation_doc + l.simple_name());
+        r->operations().push_back(op);
+    }
+
+    BOOST_LOG_SEV(lg, debug) << "Created visitor: " << qn.simple_name();
+    return r;
+}
+
+void injector::inject_visitors(model& m) const {
+    BOOST_LOG_SEV(lg, debug) << "Injecting visitors.";
+
+    std::list<boost::shared_ptr<abstract_object> > visitors;
+    for (auto& pair : m.objects()) {
+        auto& ao(*pair.second);
+
+        if (!ao.is_visitable())
+            continue;
+
+        if (ao.leaves().empty()) {
+            BOOST_LOG_SEV(lg, error) << zero_leaves << ao.name();
+            BOOST_THROW_EXCEPTION(injection_error(zero_leaves +
+                    boost::lexical_cast<std::string>(ao.name())));
+        }
+        visitors.push_back(create_visitor(ao));
+    }
+
+    for (const auto v : visitors) {
+        BOOST_LOG_SEV(lg, debug) << "Adding visitor: "
+                                 << v->name().simple_name();
+
+        const auto i(m.objects().insert(std::make_pair(v->name(), v)));
+
+        if (!i.second) {
+            BOOST_LOG_SEV(lg, error) << duplicate_qname << v->name();
+            BOOST_THROW_EXCEPTION(injection_error(duplicate_qname +
+                    boost::lexical_cast<std::string>(v->name())));
+        }
+    }
+
+    BOOST_LOG_SEV(lg, debug) << "Done injecting visitors.";
+}
+
+void injector::inject_key_extractors(model& ) const {
+    
 }
 
 void injector::inject(model& m) const {
     inject_version(m);
     inject_keys(m);
+    inject_visitors(m);
 }
 
 } }

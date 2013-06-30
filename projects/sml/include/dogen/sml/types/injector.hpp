@@ -45,6 +45,10 @@ namespace sml {
  * @li whether to create supporting types that enhance the current
  * type. This is the case with the generation of keys, visitors, etc.
  *
+ * Note: we have taken the simplistic approach of looping over the
+ * object collection as many times as required, to keep the logic
+ * simple. We should probably optimise this at some point.
+ *
  */
 class injector {
 public:
@@ -94,6 +98,22 @@ private:
      * versioned.
      */
     void inject_version(model& m) const;
+
+    /**
+     * @brief Create a visitor for the object.
+     */
+    boost::shared_ptr<abstract_object>
+    create_visitor(const abstract_object& ao) const;
+
+    /**
+     * @brief Injects visitors for objects that require them.
+     */
+    void inject_visitors(model& m) const;
+
+    /**
+     * @brief Injects key extractors for all keyed entities.
+     */
+    void inject_key_extractors(model& m) const;
 
 public:
 

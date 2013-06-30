@@ -293,6 +293,20 @@ might as well just use a qname.
 This is largely historical and we're not even sure why we have it, so
 try removing it.
 
+*** COMPLETED Visitor as an injected system type                      :story:
+    CLOSED: [2013-06-30 Sun 21:41]
+    CLOCK: [2013-06-30 Sun 21:26]--[2013-06-30 Sun 21:41] =>  0:15
+    CLOCK: [2013-06-30 Sun 20:09]--[2013-06-30 Sun 21:00] =>  0:51
+    CLOCK: [2013-06-30 Sun 20:05]--[2013-06-30 Sun 20:09] =>  0:04
+    CLOCK: [2013-06-30 Sun 20:02]--[2013-06-30 Sun 20:05] =>  0:03
+    CLOCK: [2013-06-30 Sun 19:56]--[2013-06-30 Sun 20:02] =>  0:06
+    CLOCK: [2013-06-30 Sun 19:25]--[2013-06-30 Sun 19:56] =>  0:31
+
+The current implementation of visitor relies on creating a view model
+without a corresponding type. In reality we should do as we did for
+keys and create a category type of visitor. This is really a SML
+concept, not a backend specific concept.
+
 *** IMPLEMENTATION Update SML to make use of concepts                 :story:
 
 In S28 as part of "Break down SML into concepts at the design level"
@@ -393,28 +407,40 @@ Name choices:
 - opaque parameters
 - untyped parameters
 
-*** Rename nested qname to composite qname                            :story:
+*** CANCELLED Rename nested qname to composite qname                  :story:
+    CLOSED: [2013-06-30 Sun 21:44]
+
+New understanding:
+
+This story requires further analysis. Blindly following the composite
+pattern was tried but it resulted in a lot of inconsistencies because
+we then had to follow MEC-33 and create =abstract_qname=; however, the
+nested qname does not really behave like a composite qname; its more
+like the difference between a type in isolation and a type
+instantiated as an argument of a function. For example, whilst the
+type in isolation may have unknown template parameters, presumably, as
+an argument of a function these have been instantiated with real
+types.
+
+Previous understanding:
 
 We should just follow the composite pattern in the naming.
-
-*** IMPLEMENTATION Visitor as an injected system type                 :story:
-    CLOCK: [2013-06-30 Sun 20:05]--[2013-06-30 Sun 20:09] =>  0:04
-    CLOCK: [2013-06-30 Sun 20:02]--[2013-06-30 Sun 20:05] =>  0:03
-    CLOCK: [2013-06-30 Sun 19:56]--[2013-06-30 Sun 20:02] =>  0:06
-    CLOCK: [2013-06-30 Sun 19:25]--[2013-06-30 Sun 19:56] =>  0:31
-
-The current implementation of visitor relies on creating a view model
-without a corresponding type. In reality we should do as we did for
-keys and create a category type of visitor. This is really a SML
-concept, not a backend specific concept.
 
 *** Use explicit casting for versioned to unversioned conversions     :story:
 
 Continuing from previous iteration, see description in Sprint 26.
 
-*** Add =extract_key= function                                        :story:
+*** IMPLEMENTATION Create a =key_extractor= service                   :story:
+    CLOCK: [2013-06-30 Sun 21:43]
 
-Continuing from previous iteration, see description in Sprint 26.
+Continuing from Sprint 26.
+
+We need a way to automatically extract a key for a =keyed_entity=.
+The right solution is to create a service to represent this
+concept.
+
+Injector creates objects for these just like it does with keys; the
+C++ transformer intercepts them and generates the correct view models.
 
 *** Consider not creating unversioned keys for single property        :story:
 

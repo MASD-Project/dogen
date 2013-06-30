@@ -39,12 +39,18 @@ namespace {
 const std::string test_module("sml");
 const std::string test_suite("injector_spec");
 const std::string version_name("version");
+const std::string visitor_postfix("_visitor");
 const std::string versioned_postfix("_versioned");
 const std::string unversioned_postfix("_unversioned");
 const std::string missing_identity("Identity must have at least");
+const std::string no_leaves("Type marked as visitable but has no leaves");
 
 bool is_type_zero(const dogen::sml::qname& qn) {
     return mock_model_factory::type_name(0) == qn.simple_name();
+}
+
+bool is_type_one(const dogen::sml::qname& qn) {
+    return mock_model_factory::type_name(1) == qn.simple_name();
 }
 
 bool is_type_zero_unversioned(const dogen::sml::qname& qn) {
@@ -59,6 +65,13 @@ bool is_type_zero_versioned(const dogen::sml::qname& qn) {
     return
         boost::contains(s, mock_model_factory::type_name(0)) &&
         boost::contains(s, versioned_postfix);
+}
+
+bool is_type_one_visitor(const dogen::sml::qname& qn) {
+    const auto s(qn.simple_name());
+    return
+        boost::contains(s, mock_model_factory::type_name(1)) &&
+        boost::contains(s, visitor_postfix);
 }
 
 }
@@ -258,6 +271,76 @@ BOOST_AUTO_TEST_CASE(versioned_object_has_version_propery_injected) {
     BOOST_REQUIRE(oa.properties().size() == 1);
     BOOST_CHECK(oa.properties().front().name() == version_name);
     BOOST_CHECK(!oa.properties().front().documentation().empty());
+}
+
+BOOST_AUTO_TEST_CASE(visitable_object_with_no_leaves_throws) {
+    SETUP_TEST_LOG_SOURCE("visitable_object_with_no_leaves_throws");
+
+    auto m(mock_model_factory::build_single_type_model());
+    BOOST_REQUIRE(m.objects().size() == 1);
+    auto& ob(*m.objects().begin()->second);
+    ob.is_visitable(true);
+    BOOST_LOG_SEV(lg, debug) << "model: " << m;
+
+    dogen::sml::injector i;
+    contains_checker<injection_error> c(no_leaves);
+    BOOST_CHECK_EXCEPTION(i.inject(m), injection_error, c);
+}
+
+
+BOOST_AUTO_TEST_CASE(visitable_object_has_visitor_injected) {
+    SETUP_TEST_LOG_SOURCE("visitable_object_has_visitor_injected");
+
+    auto m(mock_model_factory::object_with_parent_in_the_same_model());
+    BOOST_REQUIRE(m.objects().size() == 2);
+    for (auto& pair : m.objects()) {
+        const auto& qn(pair.first);
+        if (is_type_one(qn)) {
+            auto& ao(*pair.second);
+            BOOST_LOG_SEV(lg, debug) << "found object: " << qn;
+            ao.is_visitable(true);
+        }
+    }
+    BOOST_LOG_SEV(lg, debug) << "before: " << m;
+
+    dogen::sml::injector i;
+    i.inject(m);
+    BOOST_LOG_SEV(lg, debug) << "after: " << m;
+
+    BOOST_CHECK(m.objects().size() == 3);
+    bool type_one(false), visitor(false);
+    for (const auto& pair : m.objects()) {
+        const auto& qn(pair.first);
+        if (is_type_one(qn)) {
+            BOOST_LOG_SEV(lg, debug) << "found object: " << qn;
+            type_one = true;
+            BOOST_REQUIRE(!pair.second->is_versioned());
+        } else if (is_type_one_visitor(qn)) {
+            visitor = true;
+            BOOST_LOG_SEV(lg, debug) << "found object: " << qn;
+
+            using dogen::sml::service;
+            const auto& s(dynamic_cast<const service&>(*pair.second));
+            BOOST_CHECK(!s.is_versioned());
+            BOOST_CHECK(!s.is_visitable());
+            BOOST_CHECK(!s.is_immutable());
+            BOOST_CHECK(!s.parent_name());
+            BOOST_CHECK(!s.original_parent_name());
+            BOOST_CHECK(s.leaves().empty());
+            BOOST_CHECK(s.modeled_concepts().empty());
+            BOOST_CHECK(s.number_of_type_arguments() == 0);
+
+            BOOST_REQUIRE(s.operations().size() == 1);
+            const auto op(s.operations().front());
+            BOOST_CHECK(!op.name().empty());
+            BOOST_CHECK(!op.documentation().empty());
+            BOOST_REQUIRE(op.arguments().size() == 1);
+            BOOST_CHECK(is_type_zero(op.arguments().front().type()));
+        }
+    }
+
+    BOOST_CHECK(type_one);
+    BOOST_CHECK(visitor);
 }
 
 BOOST_AUTO_TEST_SUITE_END()
