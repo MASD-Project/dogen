@@ -10,13 +10,13 @@ This file contains all stories that were closed during sprint 29.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-06-30 Sun 18:59]
+Clock summary at [2013-06-30 Sun 20:09]
 
 | Headline                                                           | Time    |       |       |
 |--------------------------------------------------------------------+---------+-------+-------|
-| *Total time*                                                       | *47:13* |       |       |
+| *Total time*                                                       | *48:30* |       |       |
 |--------------------------------------------------------------------+---------+-------+-------|
-| Development Stories Implemented                                    |         | 47:13 |       |
+| Development Stories Implemented                                    |         | 48:30 |       |
 | IMPLEMENTATION Release notes and backlog grooming                  |         |       |  0:53 |
 | COMPLETED Make design by contract methods consistent in dia to sml |         |       |  0:52 |
 | COMPLETED Split resolver from merger                               |         |       |  3:18 |
@@ -28,7 +28,8 @@ Clock summary at [2013-06-30 Sun 18:59]
 | COMPLETED Descendents modeling different concepts from base break  |         |       |  2:20 |
 | COMPLETED Model should model appropriate concepts                  |         |       |  2:15 |
 | COMPLETED Remove meta types enumeration                            |         |       |  0:58 |
-| IMPLEMENTATION Update SML to make use of concepts                  |         |       | 23:59 |
+| IMPLEMENTATION Update SML to make use of concepts                  |         |       | 24:32 |
+| IMPLEMENTATION Visitor as an injected system type                  |         |       |  0:44 |
 #+end:
 
 *** IMPLEMENTATION Release notes and backlog grooming                  :task:
@@ -397,6 +398,7 @@ Name choices:
 We should just follow the composite pattern in the naming.
 
 *** IMPLEMENTATION Visitor as an injected system type                 :story:
+    CLOCK: [2013-06-30 Sun 20:05]--[2013-06-30 Sun 20:09] =>  0:04
     CLOCK: [2013-06-30 Sun 20:02]--[2013-06-30 Sun 20:05] =>  0:03
     CLOCK: [2013-06-30 Sun 19:56]--[2013-06-30 Sun 20:02] =>  0:06
     CLOCK: [2013-06-30 Sun 19:25]--[2013-06-30 Sun 19:56] =>  0:31

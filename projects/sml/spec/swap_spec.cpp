@@ -44,6 +44,7 @@ BOOST_AUTO_TEST_CASE(validate_swap) {
     test_swap<generation_types_generator>();
     test_swap<nested_qname_generator>();
     test_swap<property_generator>();
+    test_swap<operation_generator>();
     test_swap<qname_generator>();
     test_swap<primitive_generator>();
     test_swap<enumerator_generator>();
