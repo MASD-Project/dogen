@@ -1,0 +1,71 @@
+#+title: Release Notes for Sprint 30
+#+options: date:nil toc:nil author:nil num:nil
+#+todo: ANALYSIS IMPLEMENTATION TESTING | COMPLETED CANCELLED
+#+tags: story(s) epic(e) task(t) note(n) spike(p)
+
+* Release Notes
+
+This file contains all stories that were closed during sprint 30.
+
+** Development Stories Implemented
+
+#+begin: clocktable :maxlevel 3 :scope subtree
+Clock summary at [2013-06-30 Sun 22:14]
+
+| Headline     | Time   |
+|--------------+--------|
+| *Total time* | *0:00* |
+#+end:
+
+*** IMPLEMENTATION Release notes and backlog grooming                  :task:
+    CLOCK: [2013-06-30 Sun 22:00]
+
+*** Create a =key_extractor= service                                  :story:
+
+Continuing from Sprint 26.
+
+We need a way to automatically extract a key for a =keyed_entity=.
+The right solution is to create a service to represent this
+concept.
+
+Injector creates objects for these just like it does with keys; the
+C++ transformer intercepts them and generates the correct view models.
+
+*** Add content to the introduction in manual                         :story:
+*** Rename implementation specific parameters                         :story:
+    CLOSED: [2013-06-30 Sun 21:50]
+
+These should really be called back end specific parameters at the SML
+level. At the dia level, if a parameter is passed in which has a
+representation at the SML level it should simply be converted to this
+representation instead of being added to the KVP.
+
+Actually, these are more like generic parameters:
+
+- at the dia level they are used to fill in gaps in dia (e.g. packages
+  and diagrams do not have comments)
+- at the SML level, they are used to add information which does not
+  make sense for it to be in dia: is property key.
+- at the backend level, they are used to provide information which
+  does not make sense to live in SML: for example the ODB parameters.
+
+Also, when the string table support has been added, we need to create
+a string table with all valid values for the parameter keys.
+
+Name choices:
+
+- opaque parameters
+- untyped parameters
+
+*** Use explicit casting for versioned to unversioned conversions     :story:
+
+Continuing from previous iteration, see description in Sprint 26.
+
+*** Consider not creating unversioned keys for single property        :story:
+
+If a key is made up of a single property, its a bit nonsensical to
+create an unversioned key. We should only generate the versioned
+key. However, it does make life easier. Wait for real world use cases
+to decide.
+
+** Deprecated Development Stories

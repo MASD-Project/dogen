@@ -11,6 +11,45 @@ This file contains all stories that haven't been assigned to a sprint.
 
 Stories that we intend to look at, at some point.
 
+*** Rename nested qname to composite qname                  :story:
+
+New understanding:
+
+This story requires further analysis. Blindly following the composite
+pattern was tried but it resulted in a lot of inconsistencies because
+we then had to follow MEC-33 and create =abstract_qname=; however, the
+nested qname does not really behave like a composite qname; its more
+like the difference between a type in isolation and a type
+instantiated as an argument of a function. For example, whilst the
+type in isolation may have unknown template parameters, presumably, as
+an argument of a function these have been instantiated with real
+types.
+
+Previous understanding:
+
+We should just follow the composite pattern in the naming.
+
+*** Injection framework
+
+We need a more generic way of handling system types injection into
+models. This is because there is a number of things that can be
+derived from the existing model types:
+
+- keys
+- diff support
+- reflection
+- cache code
+- etc.
+
+So we need to:
+
+- make injector a composite of injectors that do the real work such as
+  =key_injector=. internally =injector= just delegates the work to
+  these classes.
+- injector decides which internal injectors to use based on options
+  passed in.
+- in the IoC spirit, we should probably create a =injector_interface=.
+
 *** Register types for multiple models is misbehaving
 
 It seems that somehow we're clobbering the type registration of one
