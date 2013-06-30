@@ -10,17 +10,18 @@ This file contains all stories that were closed during sprint 30.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-06-30 Sun 22:16]
+Clock summary at [2013-06-30 Sun 22:29]
 
 | Headline                                          | Time   |      |      |
 |---------------------------------------------------+--------+------+------|
-| *Total time*                                      | *0:16* |      |      |
+| *Total time*                                      | *0:17* |      |      |
 |---------------------------------------------------+--------+------+------|
-| Development Stories Implemented                   |        | 0:16 |      |
-| IMPLEMENTATION Release notes and backlog grooming |        |      | 0:16 |
+| Development Stories Implemented                   |        | 0:17 |      |
+| IMPLEMENTATION Release notes and backlog grooming |        |      | 0:17 |
 #+end:
 
 *** IMPLEMENTATION Release notes and backlog grooming                  :task:
+    CLOCK: [2013-06-30 Sun 22:28]--[2013-06-30 Sun 22:29] =>  0:01
     CLOCK: [2013-06-30 Sun 22:00]--[2013-06-30 Sun 22:16] =>  0:16
 
 *** Create a =key_extractor= service                                  :story:
