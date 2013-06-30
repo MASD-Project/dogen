@@ -11,6 +11,12 @@ This file contains all stories that haven't been assigned to a sprint.
 
 Stories that we intend to look at, at some point.
 
+*** Comments seem to be trimmed
+
+For some reason we seem to be munching any blank lines at the end of
+comments. We should only remove the lines with the well known dogen
+marker, all other lines should be left untouched.
+
 *** Type resolution in referenced models
 
 We did a hack a while ago whereby if a type is of a referenced model,
