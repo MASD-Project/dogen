@@ -29,7 +29,6 @@
 #include <memory>
 #include "dogen/dia/types/object.hpp"
 #include "dogen/sml/types/nested_qname.hpp"
-#include "dogen/sml/types/meta_types.hpp"
 #include "dogen/sml/types/abstract_object.hpp"
 #include "dogen/sml/types/abstract_entity.hpp"
 #include "dogen/dia_to_sml/types/processed_object.hpp"
@@ -79,7 +78,7 @@ private:
      * @brief Converts the Dia attribute into a qname.
      */
     sml::qname transform_qname(const std::string& n,
-        sml::meta_types meta_type, const std::string& pkg_id) const;
+        const std::string& pkg_id) const;
 
     /**
      * @brief Converts the string into a nested qname.
@@ -107,14 +106,14 @@ private:
      * @brief Update the SML abstract object using the processed
      * object and the profile.
      */
-    void transform_abstract_object(sml::abstract_object& ao, sml::meta_types mt,
+    void transform_abstract_object(sml::abstract_object& ao,
         const processed_object& o, const profile& p);
 
     /**
      * @brief Update the SML abstract entity using the processed
      * object and the profile.
      */
-    void transform_abstract_entity(sml::abstract_entity& ae, sml::meta_types mt,
+    void transform_abstract_entity(sml::abstract_entity& ae,
         const processed_object& o, const profile& p);
 
     void transform_keyed_entity(const processed_object& o, const profile& p);

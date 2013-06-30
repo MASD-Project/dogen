@@ -282,7 +282,9 @@ continue with this logic.
 We already have most of the qname properties in the model anyway, so
 might as well just use a qname.
 
-*** IMPLEMENTATION Remove meta types enumeration                      :spike:
+*** COMPLETED Remove meta types enumeration                           :spike:
+    CLOSED: [2013-06-30 Sun 14:26]
+    CLOCK: [2013-06-30 Sun 14:18]--[2013-06-30 Sun 14:26] =>  0:08
     CLOCK: [2013-06-30 Sun 14:00]--[2013-06-30 Sun 14:18] =>  0:18
     CLOCK: [2013-06-30 Sun 13:28]--[2013-06-30 Sun 14:00] =>  0:32
 

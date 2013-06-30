@@ -126,8 +126,8 @@ sml::generation_types transformer::generation_type(const profile& p) const {
     return generation_types::full_generation;
 }
 
-sml::qname transformer::transform_qname(const std::string& n,
-    sml::meta_types meta_type, const std::string& pkg_id) const {
+sml::qname transformer::
+transform_qname(const std::string& n, const std::string& pkg_id) const {
 
     if (n.empty()) {
         BOOST_LOG_SEV(lg, error) << empty_dia_object_name;
@@ -136,7 +136,6 @@ sml::qname transformer::transform_qname(const std::string& n,
 
     sml::qname name;
     name.model_name(context_.model().name().model_name());
-    name.meta_type(meta_type);
     name.external_module_path(context_.model().name().external_module_path());
 
     if (!pkg_id.empty()) {
@@ -215,12 +214,11 @@ sml::enumerator transformer::transform_enumerator(const processed_property& p,
 }
 
 void transformer::
-transform_abstract_object(sml::abstract_object& ao, sml::meta_types mt,
+transform_abstract_object(sml::abstract_object& ao,
     const processed_object& o, const profile& p) {
 
     const std::string pkg_id(o.child_node_id());
-    using sml::meta_types;
-    ao.name(transform_qname(o.name(), mt, pkg_id));
+    ao.name(transform_qname(o.name(), pkg_id));
     ao.generation_type(generation_type(p));
 
     ao.is_fluent(p.is_fluent());
@@ -228,7 +226,7 @@ transform_abstract_object(sml::abstract_object& ao, sml::meta_types mt,
     ao.is_visitable(p.is_visitable());
 
     for (const auto us : p.unknown_stereotypes()) {
-        const auto c(transform_qname(us, meta_types::concept, empty));
+        const auto c(transform_qname(us, empty));
         ao.modeled_concepts().push_back(c);
     }
 
@@ -340,10 +338,9 @@ transform_abstract_object(sml::abstract_object& ao, sml::meta_types mt,
     }
 }
 
-void transformer::
-transform_abstract_entity(sml::abstract_entity& ae, sml::meta_types mt,
+void transformer::transform_abstract_entity(sml::abstract_entity& ae,
     const processed_object& o, const profile& p) {
-    transform_abstract_object(ae, mt, o, p);
+    transform_abstract_object(ae, o, p);
     ae.is_aggregate_root(p.is_aggregate_root());
 
     for (const auto& p : ae.properties()) {
@@ -362,8 +359,7 @@ transform_keyed_entity(const processed_object& o, const profile& p) {
     BOOST_LOG_SEV(lg, debug) << "Object is a keyed entity: " << o.id();
 
     auto ke(boost::make_shared<sml::keyed_entity>());
-    const auto mt(sml::meta_types::keyed_entity);
-    transform_abstract_entity(*ke, mt, o, p);
+    transform_abstract_entity(*ke, o, p);
     context_.model().objects().insert(std::make_pair(ke->name(), ke));
 }
 
@@ -372,8 +368,7 @@ transform_entity(const processed_object& o, const profile& p) {
     BOOST_LOG_SEV(lg, debug) << "Object is an entity: " << o.id();
 
     auto e(boost::make_shared<sml::entity>());
-    const auto mt(sml::meta_types::entity);
-    transform_abstract_entity(*e, mt, o, p);
+    transform_abstract_entity(*e, o, p);
     context_.model().objects().insert(std::make_pair(e->name(), e));
 }
 
@@ -382,8 +377,7 @@ transform_exception(const processed_object& o, const profile& p) {
     BOOST_LOG_SEV(lg, debug) << "Object is an exception: " << o.id();
 
     auto vo(boost::make_shared<sml::value_object>());
-    const auto mt(sml::meta_types::value_object);
-    transform_abstract_object(*vo, mt, o, p);
+    transform_abstract_object(*vo, o, p);
     vo->type(sml::value_object_types::exception);
     context_.model().objects().insert(std::make_pair(vo->name(), vo));
 }
@@ -393,8 +387,7 @@ transform_service(const processed_object& o, const profile& p) {
     BOOST_LOG_SEV(lg, debug) << "Object is a service: " << o.id();
 
     auto s(boost::make_shared<sml::service>());
-    const auto mt(sml::meta_types::service);
-    transform_abstract_object(*s, mt, o, p);
+    transform_abstract_object(*s, o, p);
     context_.model().objects().insert(std::make_pair(s->name(), s));
 }
 
@@ -403,8 +396,7 @@ transform_factory(const processed_object& o, const profile& p) {
     BOOST_LOG_SEV(lg, debug) << "Object is a factory: " << o.id();
 
     auto f(boost::make_shared<sml::factory>());
-    const auto mt(sml::meta_types::factory);
-    transform_abstract_object(*f, mt, o, p);
+    transform_abstract_object(*f, o, p);
     context_.model().objects().insert(std::make_pair(f->name(), f));
 }
 
@@ -413,8 +405,7 @@ transform_repository(const processed_object& o, const profile& p) {
     BOOST_LOG_SEV(lg, debug) << "Object is a repostory: " << o.id();
 
     auto r(boost::make_shared<sml::repository>());
-    const auto mt(sml::meta_types::repository);
-    transform_abstract_object(*r, mt, o, p);
+    transform_abstract_object(*r, o, p);
     context_.model().objects().insert(std::make_pair(r->name(), r));
 }
 
@@ -423,8 +414,7 @@ transform_value_object(const processed_object& o, const profile& p) {
     BOOST_LOG_SEV(lg, debug) << "Object is a value object: " << o.id();
 
     auto vo(boost::make_shared<sml::value_object>());
-    const auto mt(sml::meta_types::value_object);
-    transform_abstract_object(*vo, mt, o, p);
+    transform_abstract_object(*vo, o, p);
     vo->type(sml::value_object_types::plain);
     context_.model().objects().insert(std::make_pair(vo->name(), vo));
 }
@@ -438,13 +428,11 @@ void transformer::transform_enumeration(const processed_object& o) {
         sml::generation_types::no_generation);
 
     const std::string pkg_id(o.child_node_id());
-    using sml::meta_types;
-    e.name(transform_qname(o.name(), meta_types::enumeration, pkg_id));
+    e.name(transform_qname(o.name(), pkg_id));
     e.documentation(o.comment());
 
     dogen::sml::qname qn;
     qn.simple_name(unsigned_int);
-    qn.meta_type(dogen::sml::meta_types::primitive);
     e.underlying_type(qn);
 
     dogen::sml::enumerator invalid;
@@ -478,8 +466,7 @@ void transformer::transform_module(const processed_object& o) {
 
     sml::module p;
     const std::string pkg_id(o.child_node_id());
-    using sml::meta_types;
-    p.name(transform_qname(o.name(), meta_types::module, pkg_id));
+    p.name(transform_qname(o.name(), pkg_id));
     p.documentation(o.comment());
 
     if (p.name().simple_name().empty()) {
@@ -539,8 +526,7 @@ void transformer::transform_note(const processed_object& o) {
 void transformer::transform_concept(const processed_object& o) {
     sml::concept c;
     const std::string pkg_id(o.child_node_id());
-    using sml::meta_types;
-    c.name(transform_qname(o.name(), meta_types::concept, pkg_id));
+    c.name(transform_qname(o.name(), pkg_id));
     context_.id_to_qname().insert(std::make_pair(o.id(), c.name()));
 
     c.generation_type(context_.is_target() ?
