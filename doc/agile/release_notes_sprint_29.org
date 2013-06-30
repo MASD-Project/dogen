@@ -10,14 +10,14 @@ This file contains all stories that were closed during sprint 29.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-06-30 Sun 20:09]
+Clock summary at [2013-06-30 Sun 22:10]
 
 | Headline                                                           | Time    |       |       |
 |--------------------------------------------------------------------+---------+-------+-------|
-| *Total time*                                                       | *48:30* |       |       |
+| *Total time*                                                       | *50:03* |       |       |
 |--------------------------------------------------------------------+---------+-------+-------|
-| Development Stories Implemented                                    |         | 48:30 |       |
-| IMPLEMENTATION Release notes and backlog grooming                  |         |       |  0:53 |
+| Development Stories Implemented                                    |         | 50:03 |       |
+| COMPLETED Release notes and backlog grooming                       |         |       |  0:53 |
 | COMPLETED Make design by contract methods consistent in dia to sml |         |       |  0:52 |
 | COMPLETED Split resolver from merger                               |         |       |  3:18 |
 | COMPLETED Property container should be a list not a vector         |         |       |  0:18 |
@@ -28,11 +28,13 @@ Clock summary at [2013-06-30 Sun 20:09]
 | COMPLETED Descendents modeling different concepts from base break  |         |       |  2:20 |
 | COMPLETED Model should model appropriate concepts                  |         |       |  2:15 |
 | COMPLETED Remove meta types enumeration                            |         |       |  0:58 |
-| IMPLEMENTATION Update SML to make use of concepts                  |         |       | 24:32 |
-| IMPLEMENTATION Visitor as an injected system type                  |         |       |  0:44 |
+| COMPLETED Visitor as an injected system type                       |         |       |  1:50 |
+| COMPLETED Update SML to make use of concepts                       |         |       | 24:32 |
+| CANCELLED Create a =key_extractor= service                         |         |       |  0:27 |
 #+end:
 
-*** IMPLEMENTATION Release notes and backlog grooming                  :task:
+*** COMPLETED Release notes and backlog grooming                       :task:
+    CLOSED: [2013-06-30 Sun 22:10]
     CLOCK: [2013-06-23 Sun 20:50]--[2013-06-23 Sun 21:11] =>  0:21
     CLOCK: [2013-06-22 Sat 17:06]--[2013-06-22 Sat 17:14] =>  0:08
     CLOCK: [2013-06-17 Mon 08:07]--[2013-06-17 Mon 08:20] =>  0:13
@@ -307,7 +309,8 @@ without a corresponding type. In reality we should do as we did for
 keys and create a category type of visitor. This is really a SML
 concept, not a backend specific concept.
 
-*** IMPLEMENTATION Update SML to make use of concepts                 :story:
+*** COMPLETED Update SML to make use of concepts                      :story:
+    CLOSED: [2013-06-30 Sun 22:10]
 
 In S28 as part of "Break down SML into concepts at the design level"
 we have defined all of the main concepts that SML types should be
@@ -382,8 +385,9 @@ using. Attempt to make use of these to simplify the model.
      CLOCK: [2013-06-26 Wed 22:46]--[2013-06-27 Thu 00:10] =>  1:24
      CLOCK: [2013-06-26 Wed 22:23]--[2013-06-26 Wed 22:45] =>  0:22
 
-*** IMPLEMENTATION Create a =key_extractor= service                   :story:
-    CLOCK: [2013-06-30 Sun 21:43]
+*** CANCELLED Create a =key_extractor= service                        :story:
+    CLOSED: [2013-06-30 Sun 22:10]
+    CLOCK: [2013-06-30 Sun 21:43]--[2013-06-30 Sun 22:10] =>  0:27
 
 Continuing from Sprint 26.
 
