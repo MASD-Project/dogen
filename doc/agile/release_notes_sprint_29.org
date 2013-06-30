@@ -10,7 +10,7 @@ This file contains all stories that were closed during sprint 29.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-06-30 Sun 18:42]
+Clock summary at [2013-06-30 Sun 18:59]
 
 | Headline                                                           | Time    |       |       |
 |--------------------------------------------------------------------+---------+-------+-------|
