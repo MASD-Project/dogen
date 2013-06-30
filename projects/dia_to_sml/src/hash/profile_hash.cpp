@@ -65,9 +65,9 @@ std::size_t profile_hasher::hash(const profile&v) {
     combine(seed, v.is_fluent());
     combine(seed, v.is_aggregate_root());
     combine(seed, v.is_concept());
-    combine(seed, hash_std_list_std_string(v.unknown_stereotypes()));
     combine(seed, v.is_repository());
     combine(seed, v.is_factory());
+    combine(seed, hash_std_list_std_string(v.unknown_stereotypes()));
 
     return seed;
 }

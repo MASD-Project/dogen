@@ -70,9 +70,9 @@ populate(const unsigned int position, result_type& v) {
     v.is_fluent(create_bool(position + 17));
     v.is_aggregate_root(create_bool(position + 18));
     v.is_concept(create_bool(position + 19));
-    v.unknown_stereotypes(create_std_list_std_string(position + 20));
-    v.is_repository(create_bool(position + 21));
-    v.is_factory(create_bool(position + 22));
+    v.is_repository(create_bool(position + 20));
+    v.is_factory(create_bool(position + 21));
+    v.unknown_stereotypes(create_std_list_std_string(position + 22));
 }
 
 profile_generator::result_type

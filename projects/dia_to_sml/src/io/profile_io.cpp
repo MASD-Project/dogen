@@ -77,9 +77,9 @@ std::ostream& operator<<(std::ostream& s, const profile& v) {
       << "\"is_fluent\": " << v.is_fluent() << ", "
       << "\"is_aggregate_root\": " << v.is_aggregate_root() << ", "
       << "\"is_concept\": " << v.is_concept() << ", "
-      << "\"unknown_stereotypes\": " << v.unknown_stereotypes() << ", "
       << "\"is_repository\": " << v.is_repository() << ", "
-      << "\"is_factory\": " << v.is_factory()
+      << "\"is_factory\": " << v.is_factory() << ", "
+      << "\"unknown_stereotypes\": " << v.unknown_stereotypes()
       << " }";
     return(s);
 }

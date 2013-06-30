@@ -68,9 +68,9 @@ profile::profile(
     const bool is_fluent,
     const bool is_aggregate_root,
     const bool is_concept,
-    const std::list<std::string>& unknown_stereotypes,
     const bool is_repository,
-    const bool is_factory)
+    const bool is_factory,
+    const std::list<std::string>& unknown_stereotypes)
     : is_uml_large_package_(is_uml_large_package),
       is_uml_class_(is_uml_class),
       is_uml_generalization_(is_uml_generalization),
@@ -91,9 +91,9 @@ profile::profile(
       is_fluent_(is_fluent),
       is_aggregate_root_(is_aggregate_root),
       is_concept_(is_concept),
-      unknown_stereotypes_(unknown_stereotypes),
       is_repository_(is_repository),
-      is_factory_(is_factory) { }
+      is_factory_(is_factory),
+      unknown_stereotypes_(unknown_stereotypes) { }
 
 void profile::swap(profile& other) noexcept {
     using std::swap;
@@ -117,9 +117,9 @@ void profile::swap(profile& other) noexcept {
     swap(is_fluent_, other.is_fluent_);
     swap(is_aggregate_root_, other.is_aggregate_root_);
     swap(is_concept_, other.is_concept_);
-    swap(unknown_stereotypes_, other.unknown_stereotypes_);
     swap(is_repository_, other.is_repository_);
     swap(is_factory_, other.is_factory_);
+    swap(unknown_stereotypes_, other.unknown_stereotypes_);
 }
 
 bool profile::operator==(const profile& rhs) const {
@@ -143,9 +143,9 @@ bool profile::operator==(const profile& rhs) const {
         is_fluent_ == rhs.is_fluent_ &&
         is_aggregate_root_ == rhs.is_aggregate_root_ &&
         is_concept_ == rhs.is_concept_ &&
-        unknown_stereotypes_ == rhs.unknown_stereotypes_ &&
         is_repository_ == rhs.is_repository_ &&
-        is_factory_ == rhs.is_factory_;
+        is_factory_ == rhs.is_factory_ &&
+        unknown_stereotypes_ == rhs.unknown_stereotypes_;
 }
 
 profile& profile::operator=(profile other) {
@@ -314,22 +314,6 @@ void profile::is_concept(const bool v) {
     is_concept_ = v;
 }
 
-const std::list<std::string>& profile::unknown_stereotypes() const {
-    return unknown_stereotypes_;
-}
-
-std::list<std::string>& profile::unknown_stereotypes() {
-    return unknown_stereotypes_;
-}
-
-void profile::unknown_stereotypes(const std::list<std::string>& v) {
-    unknown_stereotypes_ = v;
-}
-
-void profile::unknown_stereotypes(const std::list<std::string>&& v) {
-    unknown_stereotypes_ = std::move(v);
-}
-
 bool profile::is_repository() const {
     return is_repository_;
 }
@@ -344,6 +328,22 @@ bool profile::is_factory() const {
 
 void profile::is_factory(const bool v) {
     is_factory_ = v;
+}
+
+const std::list<std::string>& profile::unknown_stereotypes() const {
+    return unknown_stereotypes_;
+}
+
+std::list<std::string>& profile::unknown_stereotypes() {
+    return unknown_stereotypes_;
+}
+
+void profile::unknown_stereotypes(const std::list<std::string>& v) {
+    unknown_stereotypes_ = v;
+}
+
+void profile::unknown_stereotypes(const std::list<std::string>&& v) {
+    unknown_stereotypes_ = std::move(v);
 }
 
 } }

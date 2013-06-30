@@ -58,11 +58,17 @@ mock_profile(const dogen::dia_to_sml::processed_object& o) {
 }
 
 bool is_type_one(const dogen::sml::qname& qn) {
-    return mock_processed_object_factory::to_object_name(1) == qn.type_name();
+    return mock_processed_object_factory::to_object_name(1) == qn.simple_name();
 }
 
 bool is_type_two(const dogen::sml::qname& qn) {
-    return mock_processed_object_factory::to_object_name(2) == qn.type_name();
+    return mock_processed_object_factory::to_object_name(2) == qn.simple_name();
+}
+
+dogen::sml::qname mock_model_name(const std::string& mn) {
+    dogen::sml::qname r;
+    r.model_name(mn);
+    return r;
 }
 
 }
@@ -71,30 +77,30 @@ using dogen::utility::test::contains_checker;
 
 BOOST_AUTO_TEST_SUITE(transformer)
 
-BOOST_AUTO_TEST_CASE(uml_class_with_no_stereotype_transforms_into_expected_pod) {
-    SETUP_TEST_LOG_SOURCE("uml_class_with_no_stereotype_transforms_into_expected_pod");
+BOOST_AUTO_TEST_CASE(uml_class_with_no_stereotype_transforms_into_expected_object) {
+    SETUP_TEST_LOG_SOURCE("uml_class_with_no_stereotype_transforms_into_expected_object");
     dogen::dia_to_sml::context c;
-    c.model().name(model_name);
+    c.model().name(mock_model_name(model_name));
 
     const auto o(mock_processed_object_factory::build_class());
     dogen::dia_to_sml::transformer t(c);
     t.transform(o, mock_profile(o));
 
     BOOST_LOG_SEV(lg, debug) << "context: " << c;
-    BOOST_REQUIRE(c.model().pods().size() == 1);
+    BOOST_REQUIRE(c.model().objects().size() == 1);
 
-    const auto p(c.model().pods().begin()->second);
-    BOOST_CHECK(p.name().model_name() == model_name);
-    BOOST_CHECK(!p.name().type_name().empty());
-    BOOST_CHECK(p.properties().empty());
-    BOOST_CHECK(p.pod_type() == dogen::sml::pod_types::value);
-    BOOST_CHECK(!p.documentation().empty());
+    const auto& obj(*c.model().objects().begin()->second);
+    BOOST_CHECK(obj.name().model_name() == model_name);
+    BOOST_CHECK(!obj.name().simple_name().empty());
+    BOOST_CHECK(obj.properties().empty());
+    BOOST_CHECK(obj.name().meta_type() == dogen::sml::meta_types::value_object);
+    BOOST_CHECK(!obj.documentation().empty());
 }
 
 BOOST_AUTO_TEST_CASE(empty_named_uml_class_throws) {
     SETUP_TEST_LOG_SOURCE("empty_named_uml_class_throws");
     dogen::dia_to_sml::context c;
-    c.model().name(model_name);
+    c.model().name(mock_model_name(model_name));
 
     dogen::dia_to_sml::transformer t(c);
     const auto o(mock_processed_object_factory::build_empty_named_class());
@@ -105,7 +111,7 @@ BOOST_AUTO_TEST_CASE(empty_named_uml_class_throws) {
 BOOST_AUTO_TEST_CASE(uml_class_with_enumeration_stereotype_transforms_into_expected_enumeration) {
     SETUP_TEST_LOG_SOURCE("uml_class_with_enumeration_stereotype_transforms_into_expected_enumeration");
     dogen::dia_to_sml::context c;
-    c.model().name(model_name);
+    c.model().name(mock_model_name(model_name));
 
     dogen::dia_to_sml::transformer t(c);
     const auto st(enumeration_stereotype);
@@ -113,19 +119,19 @@ BOOST_AUTO_TEST_CASE(uml_class_with_enumeration_stereotype_transforms_into_expec
     t.transform(o, mock_profile(o));
 
     BOOST_LOG_SEV(lg, debug) << "context: " << c;
-    BOOST_CHECK(c.model().pods().empty());
+    BOOST_CHECK(c.model().objects().empty());
     BOOST_REQUIRE(c.model().enumerations().size() == 1);
 
     const auto e(c.model().enumerations().begin()->second);
     BOOST_CHECK(e.name().model_name() == model_name);
-    BOOST_CHECK(!e.name().type_name().empty());
+    BOOST_CHECK(!e.name().simple_name().empty());
     BOOST_CHECK(!e.documentation().empty());
 }
 
 BOOST_AUTO_TEST_CASE(uml_class_with_exception_stereotype_transforms_into_expected_exception) {
     SETUP_TEST_LOG_SOURCE("uml_class_with_exception_stereotype_transforms_into_expected_exception");
     dogen::dia_to_sml::context c;
-    c.model().name(model_name);
+    c.model().name(mock_model_name(model_name));
 
     dogen::dia_to_sml::transformer t(c);
     const auto st(exception_stereotype);
@@ -133,12 +139,13 @@ BOOST_AUTO_TEST_CASE(uml_class_with_exception_stereotype_transforms_into_expecte
     t.transform(o, mock_profile(o));
 
     BOOST_LOG_SEV(lg, debug) << "context: " << c;
-    BOOST_CHECK(c.model().pods().empty());
-    BOOST_REQUIRE(c.model().exceptions().size() == 1);
+    BOOST_CHECK(c.model().enumerations().empty());
+    BOOST_CHECK(c.model().primitives().empty());
+    BOOST_REQUIRE(c.model().objects().size() == 1);
 
-    const auto e(c.model().exceptions().begin()->second);
+    const auto& e(*c.model().objects().begin()->second);
     BOOST_CHECK(e.name().model_name() == model_name);
-    BOOST_CHECK(!e.name().type_name().empty());
+    BOOST_CHECK(!e.name().simple_name().empty());
     BOOST_CHECK(!e.documentation().empty());
 }
 
@@ -153,12 +160,12 @@ BOOST_AUTO_TEST_CASE(uml_class_with_exception_stereotype_transforms_into_expecte
 //     t.transform(o, mock_profile(o));
 
 //     BOOST_LOG_SEV(lg, debug) << "context: " << c;
-//     BOOST_CHECK(c.model().pods().empty());
+//     BOOST_CHECK(c.model().objects().empty());
 //     BOOST_REQUIRE(c.model().services().size() == 1);
 
 //     const auto s(c.model().services().begin()->second);
 //     BOOST_CHECK(s.name().model_name() == model_name);
-//     BOOST_CHECK(!s.name().type_name().empty());
+//     BOOST_CHECK(!s.name().simple_name().empty());
 //     BOOST_CHECK(s.service_type() == dogen::sml::service_types::user_defined);
 //     BOOST_CHECK(!s.documentation().empty());
 // }
@@ -166,26 +173,26 @@ BOOST_AUTO_TEST_CASE(uml_class_with_exception_stereotype_transforms_into_expecte
 BOOST_AUTO_TEST_CASE(uml_large_package_transforms_into_expected_module) {
     SETUP_TEST_LOG_SOURCE("uml_large_package_transforms_into_expected_module");
     dogen::dia_to_sml::context c;
-    c.model().name(model_name);
+    c.model().name(mock_model_name(model_name));
 
     dogen::dia_to_sml::transformer t(c);
     const auto o(mock_processed_object_factory::build_large_package());
     t.transform(o, mock_profile(o));
 
     BOOST_LOG_SEV(lg, debug) << "context: " << c;
-    BOOST_CHECK(c.model().pods().empty());
+    BOOST_CHECK(c.model().objects().empty());
 
     BOOST_REQUIRE(c.model().modules().size() == 1);
     const auto p(c.model().modules().begin()->second);
     BOOST_CHECK(p.name().model_name() == model_name);
-    BOOST_CHECK(!p.name().type_name().empty());
+    BOOST_CHECK(!p.name().simple_name().empty());
     BOOST_CHECK(p.documentation().empty());
 }
 
-BOOST_AUTO_TEST_CASE(uml_class_in_package_transforms_into_expected_pod) {
-    SETUP_TEST_LOG_SOURCE("uml_class_in_package_transforms_into_expected_pod");
+BOOST_AUTO_TEST_CASE(uml_class_in_package_transforms_into_expected_object) {
+    SETUP_TEST_LOG_SOURCE("uml_class_in_package_transforms_into_expected_object");
     dogen::dia_to_sml::context c;
-    c.model().name(model_name);
+    c.model().name(mock_model_name(model_name));
 
     dogen::dia_to_sml::transformer t(c);
     const auto a(
@@ -198,24 +205,24 @@ BOOST_AUTO_TEST_CASE(uml_class_in_package_transforms_into_expected_pod) {
     BOOST_REQUIRE(c.model().modules().size() == 1);
     const auto pkg(c.model().modules().begin()->second);
     BOOST_CHECK(pkg.name().model_name() == model_name);
-    BOOST_CHECK(!pkg.name().type_name().empty());
+    BOOST_CHECK(!pkg.name().simple_name().empty());
     BOOST_CHECK(pkg.name().module_path().empty());
 
-    BOOST_REQUIRE(c.model().pods().size() == 1);
-    const auto p(c.model().pods().begin()->second);
-    BOOST_CHECK(p.name().model_name() == model_name);
-    BOOST_CHECK(!p.name().type_name().empty());
-    BOOST_CHECK(p.properties().empty());
-    BOOST_CHECK(p.pod_type() == dogen::sml::pod_types::value);
-    BOOST_REQUIRE(p.name().module_path().size() == 1);
-    BOOST_CHECK(p.name().module_path().front() == pkg.name().type_name());
-    BOOST_CHECK(!p.documentation().empty());
+    BOOST_REQUIRE(c.model().objects().size() == 1);
+    const auto& obj(*c.model().objects().begin()->second);
+    BOOST_CHECK(obj.name().model_name() == model_name);
+    BOOST_CHECK(!obj.name().simple_name().empty());
+    BOOST_CHECK(obj.properties().empty());
+    BOOST_CHECK(obj.name().meta_type() == dogen::sml::meta_types::value_object);
+    BOOST_REQUIRE(obj.name().module_path().size() == 1);
+    BOOST_CHECK(obj.name().module_path().front() == pkg.name().simple_name());
+    BOOST_CHECK(!obj.documentation().empty());
 }
 
 BOOST_AUTO_TEST_CASE(uml_class_with_enumeration_stereotype_in_package_transforms_into_expected_enumeration) {
     SETUP_TEST_LOG_SOURCE("uml_class_with_enumeration_stereotype_in_package_transforms_into_expected_enumeration");
     dogen::dia_to_sml::context c;
-    c.model().name(model_name);
+    c.model().name(mock_model_name(model_name));
 
     dogen::dia_to_sml::transformer t(c);
     const auto st(enumeration_stereotype);
@@ -229,22 +236,22 @@ BOOST_AUTO_TEST_CASE(uml_class_with_enumeration_stereotype_in_package_transforms
     BOOST_REQUIRE(c.model().modules().size() == 1);
     const auto pkg(c.model().modules().begin()->second);
     BOOST_CHECK(pkg.name().model_name() == model_name);
-    BOOST_CHECK(!pkg.name().type_name().empty());
+    BOOST_CHECK(!pkg.name().simple_name().empty());
     BOOST_CHECK(pkg.name().module_path().empty());
 
     BOOST_REQUIRE(c.model().enumerations().size() == 1);
     const auto e(c.model().enumerations().begin()->second);
     BOOST_CHECK(e.name().model_name() == model_name);
-    BOOST_CHECK(!e.name().type_name().empty());
+    BOOST_CHECK(!e.name().simple_name().empty());
     BOOST_REQUIRE(e.name().module_path().size() == 1);
-    BOOST_CHECK(e.name().module_path().front() == pkg.name().type_name());
+    BOOST_CHECK(e.name().module_path().front() == pkg.name().simple_name());
     BOOST_CHECK(!e.documentation().empty());
 }
 
 BOOST_AUTO_TEST_CASE(uml_class_with_exception_stereotype_in_package_transforms_into_expected_exception) {
     SETUP_TEST_LOG_SOURCE("uml_class_with_exception_stereotype_in_package_transforms_into_expected_exception");
     dogen::dia_to_sml::context c;
-    c.model().name(model_name);
+    c.model().name(mock_model_name(model_name));
 
     dogen::dia_to_sml::transformer t(c);
     const auto st(exception_stereotype);
@@ -258,15 +265,15 @@ BOOST_AUTO_TEST_CASE(uml_class_with_exception_stereotype_in_package_transforms_i
     BOOST_REQUIRE(c.model().modules().size() == 1);
     const auto pkg(c.model().modules().begin()->second);
     BOOST_CHECK(pkg.name().model_name() == model_name);
-    BOOST_CHECK(!pkg.name().type_name().empty());
+    BOOST_CHECK(!pkg.name().simple_name().empty());
     BOOST_CHECK(pkg.name().module_path().empty());
 
-    BOOST_REQUIRE(c.model().exceptions().size() == 1);
-    const auto e(c.model().exceptions().begin()->second);
+    BOOST_REQUIRE(c.model().objects().size() == 1);
+    const auto& e(*c.model().objects().begin()->second);
     BOOST_CHECK(e.name().model_name() == model_name);
-    BOOST_CHECK(!e.name().type_name().empty());
+    BOOST_CHECK(!e.name().simple_name().empty());
     BOOST_REQUIRE(e.name().module_path().size() == 1);
-    BOOST_CHECK(e.name().module_path().front() == pkg.name().type_name());
+    BOOST_CHECK(e.name().module_path().front() == pkg.name().simple_name());
     BOOST_CHECK(!e.documentation().empty());
 }
 
@@ -287,22 +294,22 @@ BOOST_AUTO_TEST_CASE(uml_class_with_exception_stereotype_in_package_transforms_i
 //     BOOST_REQUIRE(c.model().modules().size() == 1);
 //     const auto pkg(c.model().modules().begin()->second);
 //     BOOST_CHECK(pkg.name().model_name() == model_name);
-//     BOOST_CHECK(!pkg.name().type_name().empty());
+//     BOOST_CHECK(!pkg.name().simple_name().empty());
 //     BOOST_CHECK(pkg.name().module_path().empty());
 
 //     BOOST_REQUIRE(c.model().services().size() == 1);
 //     const auto e(c.model().services().begin()->second);
 //     BOOST_CHECK(e.name().model_name() == model_name);
-//     BOOST_CHECK(!e.name().type_name().empty());
+//     BOOST_CHECK(!e.name().simple_name().empty());
 //     BOOST_REQUIRE(e.name().module_path().size() == 1);
-//     BOOST_CHECK(e.name().module_path().front() == pkg.name().type_name());
+//     BOOST_CHECK(e.name().module_path().front() == pkg.name().simple_name());
 //     BOOST_CHECK(!e.documentation().empty());
 // }
 
 BOOST_AUTO_TEST_CASE(uml_class_in_non_existing_package_throws) {
     SETUP_TEST_LOG_SOURCE("uml_class_in_non_existing_package_throws");
     dogen::dia_to_sml::context c;
-    c.model().name(model_name);
+    c.model().name(mock_model_name(model_name));
 
     dogen::dia_to_sml::transformer t(c);
     auto a(
@@ -331,10 +338,10 @@ BOOST_AUTO_TEST_CASE(uml_class_in_non_existing_package_throws) {
     BOOST_CHECK_EXCEPTION(t.transform(o, op), transformation_error, cc);
 }
 
-BOOST_AUTO_TEST_CASE(uml_class_in_two_packages_transforms_into_expected_pod) {
-    SETUP_TEST_LOG_SOURCE("uml_class_in_two_packages_transforms_into_expected_pod");
+BOOST_AUTO_TEST_CASE(uml_class_in_two_packages_transforms_into_expected_object) {
+    SETUP_TEST_LOG_SOURCE("uml_class_in_two_packages_transforms_into_expected_object");
     dogen::dia_to_sml::context c;
-    c.model().name(model_name);
+    c.model().name(mock_model_name(model_name));
 
     dogen::dia_to_sml::transformer t(c);
     const auto a(
@@ -350,11 +357,11 @@ BOOST_AUTO_TEST_CASE(uml_class_in_two_packages_transforms_into_expected_pod) {
 
     const auto pkg1(i->second);
     BOOST_CHECK(pkg1.name().model_name() == model_name);
-    BOOST_CHECK(!pkg1.name().type_name().empty());
+    BOOST_CHECK(!pkg1.name().simple_name().empty());
 
     const auto pkg2((++i)->second);
     BOOST_CHECK(pkg2.name().model_name() == model_name);
-    BOOST_CHECK(!pkg2.name().type_name().empty());
+    BOOST_CHECK(!pkg2.name().simple_name().empty());
 
     BOOST_CHECK(
         pkg1.name().module_path().empty() ||
@@ -366,31 +373,31 @@ BOOST_AUTO_TEST_CASE(uml_class_in_two_packages_transforms_into_expected_pod) {
 
     std::string first, second;
     if (pkg1.name().module_path().empty()) {
-        first = pkg1.name().type_name();
-        second = pkg2.name().type_name();
+        first = pkg1.name().simple_name();
+        second = pkg2.name().simple_name();
         BOOST_CHECK(pkg2.name().module_path().front() == first);
     } else {
-        first = pkg2.name().type_name();
-        second = pkg1.name().type_name();
+        first = pkg2.name().simple_name();
+        second = pkg1.name().simple_name();
         BOOST_CHECK(pkg1.name().module_path().front() == first);
     }
 
-    BOOST_REQUIRE(c.model().pods().size() == 1);
-    const auto p(c.model().pods().begin()->second);
-    BOOST_CHECK(p.name().model_name() == model_name);
-    BOOST_CHECK(!p.name().type_name().empty());
-    BOOST_CHECK(p.properties().empty());
-    BOOST_CHECK(p.pod_type() == dogen::sml::pod_types::value);
-    BOOST_REQUIRE(p.name().module_path().size() == 2);
-    BOOST_CHECK(p.name().module_path().front() == first);
-    BOOST_CHECK(p.name().module_path().back() == second);
-    BOOST_CHECK(!p.documentation().empty());
+    BOOST_REQUIRE(c.model().objects().size() == 1);
+    const auto& obj(*c.model().objects().begin()->second);
+    BOOST_CHECK(obj.name().model_name() == model_name);
+    BOOST_CHECK(!obj.name().simple_name().empty());
+    BOOST_CHECK(obj.properties().empty());
+    BOOST_CHECK(obj.name().meta_type() == dogen::sml::meta_types::value_object);
+    BOOST_REQUIRE(obj.name().module_path().size() == 2);
+    BOOST_CHECK(obj.name().module_path().front() == first);
+    BOOST_CHECK(obj.name().module_path().back() == second);
+    BOOST_CHECK(!obj.documentation().empty());
 }
 
 BOOST_AUTO_TEST_CASE(uml_class_with_enumeration_stereotype_in_two_packages_transforms_into_expected_enumeration) {
     SETUP_TEST_LOG_SOURCE("uml_class_with_enumeration_stereotype_in_two_packages_transforms_into_expected_enumeration");
     dogen::dia_to_sml::context c;
-    c.model().name(model_name);
+    c.model().name(mock_model_name(model_name));
 
     dogen::dia_to_sml::transformer t(c);
     const auto st(enumeration_stereotype);
@@ -407,11 +414,11 @@ BOOST_AUTO_TEST_CASE(uml_class_with_enumeration_stereotype_in_two_packages_trans
 
     const auto pkg1(i->second);
     BOOST_CHECK(pkg1.name().model_name() == model_name);
-    BOOST_CHECK(!pkg1.name().type_name().empty());
+    BOOST_CHECK(!pkg1.name().simple_name().empty());
 
     const auto pkg2((++i)->second);
     BOOST_CHECK(pkg2.name().model_name() == model_name);
-    BOOST_CHECK(!pkg2.name().type_name().empty());
+    BOOST_CHECK(!pkg2.name().simple_name().empty());
 
     BOOST_CHECK(
         pkg1.name().module_path().empty() ||
@@ -423,19 +430,19 @@ BOOST_AUTO_TEST_CASE(uml_class_with_enumeration_stereotype_in_two_packages_trans
 
     std::string first, second;
     if (pkg1.name().module_path().empty()) {
-        first = pkg1.name().type_name();
-        second = pkg2.name().type_name();
+        first = pkg1.name().simple_name();
+        second = pkg2.name().simple_name();
         BOOST_CHECK(pkg2.name().module_path().front() == first);
     } else {
-        first = pkg2.name().type_name();
-        second = pkg1.name().type_name();
+        first = pkg2.name().simple_name();
+        second = pkg1.name().simple_name();
         BOOST_CHECK(pkg1.name().module_path().front() == first);
     }
 
     BOOST_REQUIRE(c.model().enumerations().size() == 1);
     const auto e(c.model().enumerations().begin()->second);
     BOOST_CHECK(e.name().model_name() == model_name);
-    BOOST_CHECK(!e.name().type_name().empty());
+    BOOST_CHECK(!e.name().simple_name().empty());
     BOOST_REQUIRE(e.name().module_path().size() == 2);
     BOOST_CHECK(e.name().module_path().front() == first);
     BOOST_CHECK(e.name().module_path().back() == second);
@@ -445,7 +452,7 @@ BOOST_AUTO_TEST_CASE(uml_class_with_enumeration_stereotype_in_two_packages_trans
 BOOST_AUTO_TEST_CASE(uml_class_with_exception_stereotype_in_two_packages_transforms_into_expected_exception) {
     SETUP_TEST_LOG_SOURCE("uml_class_with_exception_stereotype_in_two_packages_transforms_into_expected_exception");
     dogen::dia_to_sml::context c;
-    c.model().name(model_name);
+    c.model().name(mock_model_name(model_name));
 
     dogen::dia_to_sml::transformer t(c);
     const auto st(exception_stereotype);
@@ -462,11 +469,11 @@ BOOST_AUTO_TEST_CASE(uml_class_with_exception_stereotype_in_two_packages_transfo
 
     const auto pkg1(i->second);
     BOOST_CHECK(pkg1.name().model_name() == model_name);
-    BOOST_CHECK(!pkg1.name().type_name().empty());
+    BOOST_CHECK(!pkg1.name().simple_name().empty());
 
     const auto pkg2((++i)->second);
     BOOST_CHECK(pkg2.name().model_name() == model_name);
-    BOOST_CHECK(!pkg2.name().type_name().empty());
+    BOOST_CHECK(!pkg2.name().simple_name().empty());
 
     BOOST_CHECK(
         pkg1.name().module_path().empty() ||
@@ -478,19 +485,19 @@ BOOST_AUTO_TEST_CASE(uml_class_with_exception_stereotype_in_two_packages_transfo
 
     std::string first, second;
     if (pkg1.name().module_path().empty()) {
-        first = pkg1.name().type_name();
-        second = pkg2.name().type_name();
+        first = pkg1.name().simple_name();
+        second = pkg2.name().simple_name();
         BOOST_CHECK(pkg2.name().module_path().front() == first);
     } else {
-        first = pkg2.name().type_name();
-        second = pkg1.name().type_name();
+        first = pkg2.name().simple_name();
+        second = pkg1.name().simple_name();
         BOOST_CHECK(pkg1.name().module_path().front() == first);
     }
 
-    BOOST_REQUIRE(c.model().exceptions().size() == 1);
-    const auto e(c.model().exceptions().begin()->second);
+    BOOST_REQUIRE(c.model().objects().size() == 1);
+    const auto& e(*c.model().objects().begin()->second);
     BOOST_CHECK(e.name().model_name() == model_name);
-    BOOST_CHECK(!e.name().type_name().empty());
+    BOOST_CHECK(!e.name().simple_name().empty());
     BOOST_REQUIRE(e.name().module_path().size() == 2);
     BOOST_CHECK(e.name().module_path().front() == first);
     BOOST_CHECK(e.name().module_path().back() == second);
@@ -500,8 +507,7 @@ BOOST_AUTO_TEST_CASE(uml_class_with_exception_stereotype_in_two_packages_transfo
 // BOOST_IGNORE_AUTO_TEST_CASE(uml_class_with_service_stereotype_in_two_packages_transforms_into_expected_service) {
 //     SETUP_TEST_LOG_SOURCE("uml_class_with_service_stereotype_in_two_packages_transforms_into_expected_service");
 //     dogen::dia_to_sml::context c;
-//     c.model().name(model_name);
-
+//     c.model().name(mock_model_name(model_name));
 //     dogen::dia_to_sml::transformer t(c);
 //     const auto st(service_stereotype);
 //     const auto a(mock_processed_object_factory::
@@ -517,11 +523,11 @@ BOOST_AUTO_TEST_CASE(uml_class_with_exception_stereotype_in_two_packages_transfo
 
 //     const auto pkg1(i->second);
 //     BOOST_CHECK(pkg1.name().model_name() == model_name);
-//     BOOST_CHECK(!pkg1.name().type_name().empty());
+//     BOOST_CHECK(!pkg1.name().simple_name().empty());
 
 //     const auto pkg2((++i)->second);
 //     BOOST_CHECK(pkg2.name().model_name() == model_name);
-//     BOOST_CHECK(!pkg2.name().type_name().empty());
+//     BOOST_CHECK(!pkg2.name().simple_name().empty());
 
 //     BOOST_CHECK(
 //         pkg1.name().module_path().empty() ||
@@ -533,19 +539,19 @@ BOOST_AUTO_TEST_CASE(uml_class_with_exception_stereotype_in_two_packages_transfo
 
 //     std::string first, second;
 //     if (pkg1.name().module_path().empty()) {
-//         first = pkg1.name().type_name();
-//         second = pkg2.name().type_name();
+//         first = pkg1.name().simple_name();
+//         second = pkg2.name().simple_name();
 //         BOOST_CHECK(pkg2.name().module_path().front() == first);
 //     } else {
-//         first = pkg2.name().type_name();
-//         second = pkg1.name().type_name();
+//         first = pkg2.name().simple_name();
+//         second = pkg1.name().simple_name();
 //         BOOST_CHECK(pkg1.name().module_path().front() == first);
 //     }
 
 //     BOOST_REQUIRE(c.model().services().size() == 1);
 //     const auto e(c.model().services().begin()->second);
 //     BOOST_CHECK(e.name().model_name() == model_name);
-//     BOOST_CHECK(!e.name().type_name().empty());
+//     BOOST_CHECK(!e.name().simple_name().empty());
 //     BOOST_REQUIRE(e.name().module_path().size() == 2);
 //     BOOST_CHECK(e.name().module_path().front() == first);
 //     BOOST_CHECK(e.name().module_path().back() == second);
@@ -553,10 +559,11 @@ BOOST_AUTO_TEST_CASE(uml_class_with_exception_stereotype_in_two_packages_transfo
 // }
 
 BOOST_AUTO_TEST_CASE(uml_note_with_marker_transforms_into_model_comments) {
-    SETUP_TEST_LOG_SOURCE("uml_class_in_two_packages_transforms_into_expected_pod");
+    SETUP_TEST_LOG_SOURCE("uml_class_in_two_packages_transforms_into_expected_object");
 
     dogen::dia_to_sml::context c;
-    c.model().name(model_name);
+    c.model().name(mock_model_name(model_name));
+
     dogen::dia_to_sml::transformer t(c);
     const auto o(mock_processed_object_factory::build_uml_note_with_marker());
     t.transform(o, mock_profile(o));
@@ -570,7 +577,8 @@ BOOST_AUTO_TEST_CASE(uml_note_with_text_but_no_marker_does_nothing) {
     SETUP_TEST_LOG_SOURCE("uml_note_with_text_but_no_marker_does_nothing");
 
     dogen::dia_to_sml::context c;
-    c.model().name(model_name);
+    c.model().name(mock_model_name(model_name));
+
     dogen::dia_to_sml::transformer t(c);
     const auto o(mock_processed_object_factory::build_uml_note());
     t.transform(o, mock_profile(o));
@@ -584,7 +592,8 @@ BOOST_AUTO_TEST_CASE(empty_uml_note_does_nothing) {
     SETUP_TEST_LOG_SOURCE("empty_uml_note_does_nothing");
 
     dogen::dia_to_sml::context c;
-    c.model().name(model_name);
+    c.model().name(mock_model_name(model_name));
+
     dogen::dia_to_sml::transformer t(c);
     const auto o(mock_processed_object_factory::build_empty_uml_note());
     t.transform(o, mock_profile(o));
@@ -597,7 +606,8 @@ BOOST_AUTO_TEST_CASE(empty_uml_note_does_nothing) {
 BOOST_AUTO_TEST_CASE(uml_note_with_marker_inside_package_transforms_into_package_comments) {
     SETUP_TEST_LOG_SOURCE("uml_note_with_marker_inside_package_transforms_into_package_comments");
     dogen::dia_to_sml::context c;
-    c.model().name(model_name);
+    c.model().name(mock_model_name(model_name));
+
     dogen::dia_to_sml::transformer t(c);
     const auto a(mock_processed_object_factory::
         build_uml_note_with_marker_inside_large_package());
@@ -617,7 +627,8 @@ BOOST_AUTO_TEST_CASE(uml_note_with_marker_inside_package_transforms_into_package
 BOOST_AUTO_TEST_CASE(uml_note_with_text_but_no_marker_inside_package_does_nothing) {
     SETUP_TEST_LOG_SOURCE("uml_note_with_text_but_no_marker_inside_package_does_nothing");
     dogen::dia_to_sml::context c;
-    c.model().name(model_name);
+    c.model().name(mock_model_name(model_name));
+
     dogen::dia_to_sml::transformer t(c);
     const auto a(mock_processed_object_factory::
         build_uml_note_inside_large_package());
@@ -637,7 +648,8 @@ BOOST_AUTO_TEST_CASE(uml_note_with_text_but_no_marker_inside_package_does_nothin
 BOOST_AUTO_TEST_CASE(empty_uml_note_inside_package_does_nothing) {
     SETUP_TEST_LOG_SOURCE("empty_uml_note_inside_package_does_nothing");
     dogen::dia_to_sml::context c;
-    c.model().name(model_name);
+    c.model().name(mock_model_name(model_name));
+
     dogen::dia_to_sml::transformer t(c);
     const auto a(mock_processed_object_factory::
         build_empty_uml_note_inside_large_package());
@@ -657,7 +669,8 @@ BOOST_AUTO_TEST_CASE(empty_uml_note_inside_package_does_nothing) {
 BOOST_AUTO_TEST_CASE(inheritance_with_immutability_throws) {
     SETUP_TEST_LOG_SOURCE("inheritance_with_immutability_throws");
     dogen::dia_to_sml::context c;
-    c.model().name(model_name);
+    c.model().name(mock_model_name(model_name));
+
 
     const auto a(mock_processed_object_factory::build_generalization());
     const auto con(a[0].connection());
@@ -682,10 +695,10 @@ BOOST_AUTO_TEST_CASE(inheritance_with_immutability_throws) {
     BOOST_CHECK_EXCEPTION(t1.transform(po2, op2), transformation_error, cc);
 }
 
-BOOST_AUTO_TEST_CASE(uml_class_with_inheritance_results_in_expected_pod) {
-    SETUP_TEST_LOG_SOURCE("uml_class_with_inheritance_results_in_expected_pod");
+BOOST_AUTO_TEST_CASE(uml_class_with_inheritance_results_in_expected_object) {
+    SETUP_TEST_LOG_SOURCE("uml_class_with_inheritance_results_in_expected_object");
     dogen::dia_to_sml::context c;
-    c.model().name(model_name);
+    c.model().name(mock_model_name(model_name));
 
     const auto a(mock_processed_object_factory::build_generalization());
     const auto con(a[0].connection());
@@ -701,16 +714,18 @@ BOOST_AUTO_TEST_CASE(uml_class_with_inheritance_results_in_expected_pod) {
     BOOST_LOG_SEV(lg, debug) << "context: " << c;
 
     BOOST_CHECK(c.model().modules().empty());
-    BOOST_REQUIRE(c.model().pods().size() == 2);
-    for (const auto& p : c.model().pods()) {
-        if (is_type_one(p.first)) {
-            BOOST_CHECK(!p.second.parent_name());
-            BOOST_CHECK(!p.second.original_parent_name());
-        } else if (is_type_two(p.first)) {
-            BOOST_REQUIRE(p.second.parent_name());
-            BOOST_REQUIRE(is_type_one(*p.second.parent_name()));
+    BOOST_REQUIRE(c.model().objects().size() == 2);
+    for (const auto& pair : c.model().objects()) {
+        const auto& qn(pair.first);
+        const auto& o(*pair.second);
+        if (is_type_one(qn)) {
+            BOOST_CHECK(!o.parent_name());
+            BOOST_CHECK(!o.original_parent_name());
+        } else if (is_type_two(qn)) {
+            BOOST_REQUIRE(o.parent_name());
+            BOOST_REQUIRE(is_type_one(*o.parent_name()));
         } else {
-            BOOST_LOG_SEV(lg, error) << "Unexpected type name: " << p.first;
+            BOOST_LOG_SEV(lg, error) << "Unexpected type name: " << qn;
             BOOST_FAIL("Unexpected type name");
         }
     }
@@ -719,8 +734,7 @@ BOOST_AUTO_TEST_CASE(uml_class_with_inheritance_results_in_expected_pod) {
 // BOOST_IGNORE_AUTO_TEST_CASE(uml_class_with_servivce_stereotype_and_inheritance_results_in_expected_service) {
 //     SETUP_TEST_LOG_SOURCE("uml_class_with_servivce_stereotype_and_inheritance_results_in_expected_service");
 //     dogen::dia_to_sml::context c;
-//     c.model().name(model_name);
-
+//     c.model().name(mock_model_name(model_name));
 //     const auto st(service_stereotype);
 //     const auto a(mock_processed_object_factory::build_generalization(0, st));
 //     const auto con(a[0].connection());

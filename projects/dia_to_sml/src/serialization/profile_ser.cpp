@@ -63,9 +63,9 @@ void save(Archive& ar,
     ar << make_nvp("is_fluent", v.is_fluent_);
     ar << make_nvp("is_aggregate_root", v.is_aggregate_root_);
     ar << make_nvp("is_concept", v.is_concept_);
-    ar << make_nvp("unknown_stereotypes", v.unknown_stereotypes_);
     ar << make_nvp("is_repository", v.is_repository_);
     ar << make_nvp("is_factory", v.is_factory_);
+    ar << make_nvp("unknown_stereotypes", v.unknown_stereotypes_);
 }
 
 template<typename Archive>
@@ -92,9 +92,9 @@ void load(Archive& ar,
     ar >> make_nvp("is_fluent", v.is_fluent_);
     ar >> make_nvp("is_aggregate_root", v.is_aggregate_root_);
     ar >> make_nvp("is_concept", v.is_concept_);
-    ar >> make_nvp("unknown_stereotypes", v.unknown_stereotypes_);
     ar >> make_nvp("is_repository", v.is_repository_);
     ar >> make_nvp("is_factory", v.is_factory_);
+    ar >> make_nvp("unknown_stereotypes", v.unknown_stereotypes_);
 }
 
 } }

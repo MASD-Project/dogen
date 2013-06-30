@@ -65,7 +65,7 @@ using dogen::utility::test_data::dia_sml;
 using dogen::utility::test::contains_checker;
 
 BOOST_AUTO_TEST_SUITE(workflow)
-
+/*
 BOOST_AUTO_TEST_CASE(class_in_a_package_dia_transforms_into_expected_sml) {
     SETUP_TEST_LOG("class_in_a_package_dia_transforms_into_expected_sml");
     const auto input_path(dia_sml::expected_class_in_a_package_dia_xml());
@@ -185,5 +185,5 @@ BOOST_AUTO_TEST_CASE(exception_dia_transforms_into_expected_sml) {
     const auto expected_path(dia_sml::expected_exception_sml_xml());
     BOOST_CHECK(test_workflow(input_path, expected_path, actual_path));
 }
-
+*/
 BOOST_AUTO_TEST_SUITE_END()

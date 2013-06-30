@@ -32,7 +32,21 @@ namespace dogen {
 namespace dia_to_sml {
 
 /**
- * @brief Checks the profile for consistency.
+ * @brief Validates the consistency of the profile.
+ *
+ * The following are the rules a profile is expected to follow:
+ *
+ * @li have exactly one UML type, such as class, generalisation, etc.
+ *
+ * @li have zero or one stereotype with SML type information, such as
+ * enumeration, value object, etc. The SML type must be compatible
+ * with the UML type.
+ *
+ * @li have any number of known stereotypes that are options dependent
+ * on the SML type.
+ *
+ * Unknown stereotypes are largely ignored by the validator, other
+ * than making sure that they belong to SML types which support them.
  */
 class validator {
 public:
@@ -42,30 +56,68 @@ public:
 
 private:
     /**
-     * @brief Returns the number of stereotypes flags set that are not
-     * type related.
+     * @brief Returns true if the SML flags with type information
+     * describe a type which is a descendant of @ref abstract_entity.
      */
-    unsigned int count_stereotypes_non_types(const profile& p) const;
+    bool is_entity(const profile& p) const;
 
     /**
-     * @brief Returns the number of type related stereotypes flags set.
+     * @brief Returns true if the SML flags with type information
+     * describe a type which can support versioning.
      */
-    unsigned int count_stereotypes_types(const profile& p) const;
+    bool is_versionable(const profile& p) const;
 
     /**
-     * @brief Checks the stereotype flags.
+     * @brief Returns true if the SML flags with type information
+     * describe a type which is a descendant of @ref abstract_object.
+     *
+     * @pre flags must have been validated for consistency.
      */
-    void validate_stereotypes(const profile& p) const;
+    bool is_object(const profile& p) const;
+
+private:
+    /**
+     * @brief Returns the number of flags that are related to
+     * versioning.
+     */
+    unsigned int count_sml_versioning_flags(const profile& p) const;
 
     /**
-     * @brief Returns the number of type flags set.
+     * @brief Returns the number of flags that are options on SML
+     * entity objects.
      */
-    unsigned int count_types(const profile& p) const;
+    unsigned int count_sml_entity_flags(const profile& p) const;
 
     /**
-     * @brief Check the object type flags.
+     * @brief Returns the number of flags that are options on SML
+     * objects.
+     *
+     * By @e object we mean any descendent of @ref abstract_object.
      */
-    void validate_type(const profile& p);
+    unsigned int count_sml_object_flags(const profile& p) const;
+
+    /**
+     * @brief Returns the number of flags that convey type information
+     * on SML modeling elements.
+     */
+    unsigned int count_sml_types(const profile& p) const;
+
+    /**
+     * @brief Returns the number of flags set that convey UML type
+     * information.
+     */
+    unsigned int count_uml_types(const profile& p) const;
+
+private:
+    /**
+     * @brief Checks all flags that are related to SML.
+     */
+    void validate_sml(const profile& p) const;
+
+    /**
+     * @brief Check the UML related flags.
+     */
+    void validate_uml(const profile& p);
 
 public:
     /**

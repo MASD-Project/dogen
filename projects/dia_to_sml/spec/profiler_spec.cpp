@@ -49,16 +49,19 @@ unsigned int stereotype_count(const profile& p) {
     if (p.is_enumeration()) ++r;
     if (p.is_exception()) ++r;
     if (p.is_entity()) ++r;
-    if (p.is_value()) ++r;
+    if (p.is_keyed_entity()) ++r;
+    if (p.is_value_object()) ++r;
+    if (p.is_service()) ++r;
+    if (p.is_factory()) ++r;
+    if (p.is_repository()) ++r;
+    if (p.is_service()) ++r;
     if (p.is_service()) ++r;
     if (p.is_non_generatable()) ++r;
     if (p.is_versioned()) ++r;
-    if (p.is_keyed()) ++r;
     if (p.is_visitable()) ++r;
     if (p.is_immutable()) ++r;
     if (p.is_fluent()) ++r;
     if (p.is_aggregate_root()) ++r;
-    if (p.is_string_table()) ++r;
 
     return r;
 }
@@ -208,7 +211,7 @@ BOOST_AUTO_TEST_CASE(stereotyped_class_transforms_into_expected_profile) {
     BOOST_CHECK(p.is_aggregate_root());
     BOOST_CHECK(p.is_entity());
 
-    s = "nongeneratable, versioned, keyed, visitable, immutable, fluent";
+    s = "nongeneratable, versioned, keyed entity, visitable, immutable, fluent";
     o = mock_processed_object_factory::build_class(0, s);
     p = profiler.generate(o);
 
@@ -217,7 +220,7 @@ BOOST_AUTO_TEST_CASE(stereotyped_class_transforms_into_expected_profile) {
     BOOST_CHECK(stereotype_count(p) == 6);
     BOOST_CHECK(p.is_non_generatable());
     BOOST_CHECK(p.is_versioned());
-    BOOST_CHECK(p.is_keyed());
+    BOOST_CHECK(p.is_keyed_entity());
     BOOST_CHECK(p.is_visitable());
     BOOST_CHECK(p.is_immutable());
     BOOST_CHECK(p.is_fluent());

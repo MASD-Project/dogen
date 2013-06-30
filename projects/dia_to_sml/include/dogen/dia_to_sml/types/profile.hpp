@@ -34,7 +34,28 @@ namespace dogen {
 namespace dia_to_sml {
 
 /**
- * @brief Provides a more useful view of processed objects.
+ * @brief Provides a flattened view of processed objects.
+ *
+ * Profiles aggregate two types of information from processed objects:
+ *
+ * @li the UML type of the dia object
+ * @li SML related information
+ *
+ * Most of this information is provided in flag form. All flags starting
+ * with @e is_uml are of the first kind; the rest belong to the
+ * latter.
+ *
+ * SML information is all gathered via processing the stereotype of the
+ * object. There are two kinds of SML information we're interested in:
+ *
+ * @li the type of the SML modeling element, e.g. enumeration, value
+ * object, etc.
+ * @li any additional properties that SML modeling elements may have,
+ * dependent on type, such as versioning, etc.
+ *
+ * Any additional stereotypes which were not recognised by the system are
+ * appended to the unknown stereotypes bucket. These are expected to map
+ * to SML concepts at a later stage.
  */
 class profile final {
 public:
@@ -67,9 +88,9 @@ public:
         const bool is_fluent,
         const bool is_aggregate_root,
         const bool is_concept,
-        const std::list<std::string>& unknown_stereotypes,
         const bool is_repository,
-        const bool is_factory);
+        const bool is_factory,
+        const std::list<std::string>& unknown_stereotypes);
 
 private:
     template<typename Archive>
@@ -240,16 +261,6 @@ public:
     /**@}*/
 
     /**
-     * @brief List of all unknown stereotypes.
-     */
-    /**@{*/
-    const std::list<std::string>& unknown_stereotypes() const;
-    std::list<std::string>& unknown_stereotypes();
-    void unknown_stereotypes(const std::list<std::string>& v);
-    void unknown_stereotypes(const std::list<std::string>&& v);
-    /**@}*/
-
-    /**
      * @brief If true, the underlying object represents a repository.
      */
     /**@{*/
@@ -263,6 +274,16 @@ public:
     /**@{*/
     bool is_factory() const;
     void is_factory(const bool v);
+    /**@}*/
+
+    /**
+     * @brief List of all unknown stereotypes.
+     */
+    /**@{*/
+    const std::list<std::string>& unknown_stereotypes() const;
+    std::list<std::string>& unknown_stereotypes();
+    void unknown_stereotypes(const std::list<std::string>& v);
+    void unknown_stereotypes(const std::list<std::string>&& v);
     /**@}*/
 
 public:
@@ -296,9 +317,9 @@ private:
     bool is_fluent_;
     bool is_aggregate_root_;
     bool is_concept_;
-    std::list<std::string> unknown_stereotypes_;
     bool is_repository_;
     bool is_factory_;
+    std::list<std::string> unknown_stereotypes_;
 };
 
 } }

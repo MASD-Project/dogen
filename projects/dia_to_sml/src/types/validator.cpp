@@ -28,31 +28,68 @@ namespace {
 using namespace dogen::utility::log;
 static logger lg(logger_factory("dia_to_sml.validator"));
 
-const std::string too_many_type_flags_set("Too many type flags have been set.");
-const std::string no_type_flags_set("A type must be set.");
+/*
+ * Note: we use the terminology "options" and "stereotypes" for error
+ * messages - rather than "flags" - to reflect the fact that external
+ * clients don't particularly care that we chose to represent the
+ * stereotypes as flags.
+ */
+const std::string no_uml_type("No UML type.");
+const std::string too_many_uml_types("Too many UML types.");
+const std::string too_many_sml_types("Can only have one SML type set.");
 const std::string stereotypes_require_uml_class(
     "Only UML classes can have stereotypes.");
-const std::string too_many_type_related_stereotypes(
-    "Can only have one type related stereotype set.");
-const std::string type_does_not_support_further_stereotypes(
-    "Type does not support further stereotypes.");
+
+const std::string entity_options_on_a_non_entity(
+    "Only SML entities can have entity options.");
+const std::string versioning_options_on_non_versionable(
+    "Versioning options used on a SML type which does not support it.");
+const std::string object_options_on_non_object(
+    "Only SML objects can have object options");
+const std::string concepts_require_sml_object(
+    "Only SML objects can have concepts");
 
 }
 
 namespace dogen {
 namespace dia_to_sml {
 
-unsigned int validator::
-count_stereotypes_non_types(const profile& p) const {
+bool validator::is_entity(const profile& p) const {
+    return p.is_entity() || p.is_keyed_entity() ;
+}
+
+bool validator::is_versionable(const profile& p) const {
+    return
+        p.is_entity() || p.is_keyed_entity() ||
+        p.is_value_object() || p.is_exception();
+}
+
+bool validator::is_object(const profile& p) const {
+    return
+        p.is_entity() || p.is_keyed_entity() || p.is_value_object() ||
+        p.is_exception() || p.is_service() || p.is_factory() ||
+        p.is_repository();
+}
+
+unsigned int validator::count_sml_versioning_flags(const profile& p) const {
     unsigned int r(0);
-
-    if (p.is_non_generatable()) ++r;
     if (p.is_versioned()) ++r;
-
     return r;
 }
 
-unsigned int validator::count_stereotypes_types(const profile& p) const {
+unsigned int validator::count_sml_entity_flags(const profile& p) const {
+    unsigned int r(0);
+    if (p.is_aggregate_root()) ++r;
+    return r;
+}
+
+unsigned int validator::count_sml_object_flags(const profile& p) const {
+    unsigned int r(0);
+    if (p.is_non_generatable()) ++r;
+    return r;
+}
+
+unsigned int validator::count_sml_types(const profile& p) const {
     unsigned int r(0);
 
     if (p.is_enumeration()) ++r;
@@ -68,31 +105,7 @@ unsigned int validator::count_stereotypes_types(const profile& p) const {
     return r;
 }
 
-void validator::validate_stereotypes(const profile& p) const {
-    const auto types(count_stereotypes_types(p));
-    const auto non_types(count_stereotypes_non_types(p));
-
-    if (!p.is_uml_class() && (types != 0 || non_types != 0)) {
-        BOOST_LOG_SEV(lg, error) << stereotypes_require_uml_class;
-        BOOST_THROW_EXCEPTION(validation_error(stereotypes_require_uml_class));
-    }
-
-    if (types > 1) {
-        BOOST_LOG_SEV(lg, error) << too_many_type_related_stereotypes;
-        BOOST_THROW_EXCEPTION(
-            validation_error(too_many_type_related_stereotypes));
-    }
-
-    if ((p.is_enumeration() || p.is_exception() || p.is_service() ||
-            p.is_concept()) && non_types > 0) {
-        BOOST_LOG_SEV(lg, error) << type_does_not_support_further_stereotypes;
-
-        BOOST_THROW_EXCEPTION(
-            validation_error(type_does_not_support_further_stereotypes));
-    }
-}
-
-unsigned int validator::count_types(const profile& p) const {
+unsigned int validator::count_uml_types(const profile& p) const {
     unsigned int r(0);
 
     if (p.is_uml_large_package()) ++r;
@@ -106,23 +119,90 @@ unsigned int validator::count_types(const profile& p) const {
     return r;
 }
 
-void validator::validate_type(const profile& p) {
-    const auto types(count_types(p));
+void validator::validate_sml(const profile& p) const {
+    const auto types(count_sml_types(p));
+    const auto object_flags(count_sml_object_flags(p));
+    const auto entity_flags(count_sml_entity_flags(p));
+    const auto versioning_flags(count_sml_versioning_flags(p));
+    const bool has_sml_flags(
+        types != 0 || object_flags != 0 || entity_flags != 0 ||
+        versioning_flags  != 0 || !p.unknown_stereotypes().empty());
+
+    if (!has_sml_flags)
+        return; // nothing to validate.
+
+    /*
+     * rule 1: only UML classes are allowed to have SML flags.
+     */
+    if (!p.is_uml_class()) {
+        BOOST_LOG_SEV(lg, error) << stereotypes_require_uml_class;
+        BOOST_THROW_EXCEPTION(validation_error(stereotypes_require_uml_class));
+    }
+
+    /*
+     * rule 2: we can have at most one SML type. Zero is fine as
+     * someone above us will provide defaulting.
+     */
+    if (types > 1) {
+        BOOST_LOG_SEV(lg, error) << too_many_sml_types;
+        BOOST_THROW_EXCEPTION(validation_error(too_many_sml_types));
+    }
+
+    /*
+     * rule 3: only SML entities are allowed to have entity flags.
+     */
+    if (entity_flags > 0 && !is_entity(p)) {
+        BOOST_LOG_SEV(lg, error) << entity_options_on_a_non_entity;
+        BOOST_THROW_EXCEPTION(validation_error(entity_options_on_a_non_entity));
+    }
+
+    /**
+     * @brief rule 4: only versionable types are allowed to have
+     * versioning flags.
+     */
+    if (versioning_flags > 0 && !is_versionable(p)) {
+        BOOST_LOG_SEV(lg, error) << versioning_options_on_non_versionable;
+        BOOST_THROW_EXCEPTION(validation_error(
+                versioning_options_on_non_versionable));
+    }
+
+    if (is_object(p))
+        return; // nothing else to validate for SML objects.
+
+    /*
+     * rule 5: non SML objects are not allowed to have object flags.
+     */
+    if (object_flags > 0) {
+        BOOST_LOG_SEV(lg, error) << object_options_on_non_object;
+        BOOST_THROW_EXCEPTION(validation_error(object_options_on_non_object));
+    }
+
+    /*
+     * rule 6: non SML objects are not allowed to have concepts.
+     */
+    if (!p.unknown_stereotypes().empty()) {
+        BOOST_LOG_SEV(lg, error) << concepts_require_sml_object;
+        BOOST_THROW_EXCEPTION(validation_error(concepts_require_sml_object));
+    }
+}
+
+void validator::validate_uml(const profile& p) {
+    const auto types(count_uml_types(p));
 
     if (types == 0) {
-        BOOST_LOG_SEV(lg, error) << no_type_flags_set;
-        BOOST_THROW_EXCEPTION(validation_error(no_type_flags_set));
+        BOOST_LOG_SEV(lg, error) << no_uml_type;
+        BOOST_THROW_EXCEPTION(validation_error(no_uml_type));
     }
 
     if (types > 1) {
-        BOOST_LOG_SEV(lg, error) << too_many_type_flags_set;
-        BOOST_THROW_EXCEPTION(validation_error(too_many_type_flags_set));
+        BOOST_LOG_SEV(lg, error) << too_many_uml_types;
+        BOOST_THROW_EXCEPTION(validation_error(too_many_uml_types));
     }
 }
 
 void validator::validate(const profile& p) {
-    validate_type(p);
-    validate_stereotypes(p);
+    validate_uml(p);
+    validate_sml(p);
 }
 
 } }
