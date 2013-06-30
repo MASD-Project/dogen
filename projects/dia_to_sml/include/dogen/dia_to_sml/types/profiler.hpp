@@ -34,7 +34,7 @@ namespace dogen {
 namespace dia_to_sml {
 
 /**
- * @brief Generates a type profile for the processed object.
+ * @brief Generates a @ref profile of the processed object.
  */
 class profiler {
 public:
