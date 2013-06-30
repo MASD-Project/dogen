@@ -382,8 +382,22 @@ using. Attempt to make use of these to simplify the model.
      CLOCK: [2013-06-26 Wed 22:46]--[2013-06-27 Thu 00:10] =>  1:24
      CLOCK: [2013-06-26 Wed 22:23]--[2013-06-26 Wed 22:45] =>  0:22
 
-*** Add content to the introduction in manual                         :story:
-*** Rename implementation specific parameters                         :story:
+*** IMPLEMENTATION Create a =key_extractor= service                   :story:
+    CLOCK: [2013-06-30 Sun 21:43]
+
+Continuing from Sprint 26.
+
+We need a way to automatically extract a key for a =keyed_entity=.
+The right solution is to create a service to represent this
+concept.
+
+Injector creates objects for these just like it does with keys; the
+C++ transformer intercepts them and generates the correct view models.
+
+*** CANCELLED Add content to the introduction in manual               :story:
+    CLOSED: [2013-06-30 Sun 21:49]
+*** CANCELLED Rename implementation specific parameters               :story:
+    CLOSED: [2013-06-30 Sun 21:50]
 
 These should really be called back end specific parameters at the SML
 level. At the dia level, if a parameter is passed in which has a
@@ -407,6 +421,19 @@ Name choices:
 - opaque parameters
 - untyped parameters
 
+*** CANCELLED Use explicit casting for versioned to unversioned conversions :story:
+    CLOSED: [2013-06-30 Sun 21:50]
+
+Continuing from previous iteration, see description in Sprint 26.
+
+*** CANCELLED Consider not creating unversioned keys for single property :story:
+    CLOSED: [2013-06-30 Sun 21:49]
+
+If a key is made up of a single property, its a bit nonsensical to
+create an unversioned key. We should only generate the versioned
+key. However, it does make life easier. Wait for real world use cases
+to decide.
+
 *** CANCELLED Rename nested qname to composite qname                  :story:
     CLOSED: [2013-06-30 Sun 21:44]
 
@@ -426,30 +453,8 @@ Previous understanding:
 
 We should just follow the composite pattern in the naming.
 
-*** Use explicit casting for versioned to unversioned conversions     :story:
-
-Continuing from previous iteration, see description in Sprint 26.
-
-*** IMPLEMENTATION Create a =key_extractor= service                   :story:
-    CLOCK: [2013-06-30 Sun 21:43]
-
-Continuing from Sprint 26.
-
-We need a way to automatically extract a key for a =keyed_entity=.
-The right solution is to create a service to represent this
-concept.
-
-Injector creates objects for these just like it does with keys; the
-C++ transformer intercepts them and generates the correct view models.
-
-*** Consider not creating unversioned keys for single property        :story:
-
-If a key is made up of a single property, its a bit nonsensical to
-create an unversioned key. We should only generate the versioned
-key. However, it does make life easier. Wait for real world use cases
-to decide.
-
-*** Injection framework
+*** CANCELLED Injection framework
+    CLOSED: [2013-06-30 Sun 21:49]
 
 We need a more generic way of handling system types injection into
 models. This is because there is a number of things that can be
