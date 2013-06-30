@@ -343,6 +343,8 @@ using. Attempt to make use of these to simplify the model.
      CLOCK: [2013-06-26 Wed 18:01]--[2013-06-26 Wed 18:07] =>  0:06
 
 **** IMPLEMENTATION Convert pods into entities, values or services     :task:
+     CLOCK: [2013-06-30 Sun 19:24]--[2013-06-30 Sun 19:25] =>  0:01
+     CLOCK: [2013-06-30 Sun 18:52]--[2013-06-30 Sun 19:24] =>  0:32
      CLOCK: [2013-06-30 Sun 16:53]--[2013-06-30 Sun 18:42] =>  1:49
      CLOCK: [2013-06-30 Sun 16:05]--[2013-06-30 Sun 16:53] =>  0:48
      CLOCK: [2013-06-30 Sun 14:05]--[2013-06-30 Sun 16:05] =>  2:00
@@ -394,7 +396,8 @@ Name choices:
 
 We should just follow the composite pattern in the naming.
 
-*** Visitor as an injected system type                                :story:
+*** IMPLEMENTATION Visitor as an injected system type                 :story:
+    CLOCK: [2013-06-30 Sun 19:25]--[2013-06-30 Sun 19:56] =>  0:31
 
 The current implementation of visitor relies on creating a view model
 without a corresponding type. In reality we should do as we did for
