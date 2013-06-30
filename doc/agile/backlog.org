@@ -20,6 +20,10 @@ were not using inheritance in anger but with the sml changes, it is a
 problem as one cannot load dia and sml types off the same registration
 (e.g. as in XML serialisation helper).
 
+One solution for this problem would be to create serialisers which
+hide the machinery of serialisation internally; one should be able to
+just pass in a stream in and get a type out.
+
 *** Comments seem to be trimmed
 
 For some reason we seem to be munching any blank lines at the end of
