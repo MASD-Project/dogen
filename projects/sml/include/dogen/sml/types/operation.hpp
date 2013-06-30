@@ -18,53 +18,51 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_SML_TYPES_MODULE_HPP
-#define DOGEN_SML_TYPES_MODULE_HPP
+#ifndef DOGEN_SML_TYPES_OPERATION_HPP
+#define DOGEN_SML_TYPES_OPERATION_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <algorithm>
+#include <boost/optional.hpp>
 #include <list>
 #include <string>
 #include <utility>
 #include <vector>
-#include "dogen/sml/serialization/module_fwd_ser.hpp"
-#include "dogen/sml/types/generation_types.hpp"
-#include "dogen/sml/types/qname.hpp"
+#include "dogen/sml/serialization/operation_fwd_ser.hpp"
+#include "dogen/sml/types/nested_qname.hpp"
 
 namespace dogen {
 namespace sml {
 
 /**
- * @brief Packaging unit.
- *
- * Aggregates a group of logically related types into a unit.
+ * @brief Represents a method in an object.
  */
-class module final {
+class operation final {
 public:
-    module(const module&) = default;
-    module(module&&) = default;
-    ~module() = default;
+    operation() = default;
+    operation(const operation&) = default;
+    ~operation() = default;
 
 public:
-    module();
+    operation(operation&& rhs);
 
 public:
-    module(
+    operation(
         const std::string& documentation,
         const std::vector<std::pair<std::string, std::string> >& implementation_specific_parameters,
-        const dogen::sml::qname& name,
-        const dogen::sml::generation_types& generation_type,
-        const std::list<dogen::sml::qname>& members);
+        const std::string& name,
+        const std::list<dogen::sml::nested_qname>& arguments,
+        const boost::optional<dogen::sml::nested_qname>& return_type);
 
 private:
     template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const module& v, unsigned int version);
+    friend void boost::serialization::save(Archive& ar, const operation& v, unsigned int version);
 
     template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, module& v, unsigned int version);
+    friend void boost::serialization::load(Archive& ar, operation& v, unsigned int version);
 
 public:
     /**
@@ -92,50 +90,51 @@ public:
     /**@}*/
 
     /**
-     * @brief Fully qualified name.
-     *
+     * @brief Name of the operation.
      */
     /**@{*/
-    const dogen::sml::qname& name() const;
-    dogen::sml::qname& name();
-    void name(const dogen::sml::qname& v);
-    void name(const dogen::sml::qname&& v);
+    const std::string& name() const;
+    std::string& name();
+    void name(const std::string& v);
+    void name(const std::string&& v);
     /**@}*/
 
     /**
-     * @brief What to do with this type in terms of code generation.
+     * @brief List of arguments that can be passed in to the operation.
      */
     /**@{*/
-    dogen::sml::generation_types generation_type() const;
-    void generation_type(const dogen::sml::generation_types& v);
+    const std::list<dogen::sml::nested_qname>& arguments() const;
+    std::list<dogen::sml::nested_qname>& arguments();
+    void arguments(const std::list<dogen::sml::nested_qname>& v);
+    void arguments(const std::list<dogen::sml::nested_qname>&& v);
     /**@}*/
 
     /**
-     * @brief All the model elements contained in this module.
+     * @brief Result of the operation, if any.
      */
     /**@{*/
-    const std::list<dogen::sml::qname>& members() const;
-    std::list<dogen::sml::qname>& members();
-    void members(const std::list<dogen::sml::qname>& v);
-    void members(const std::list<dogen::sml::qname>&& v);
+    const boost::optional<dogen::sml::nested_qname>& return_type() const;
+    boost::optional<dogen::sml::nested_qname>& return_type();
+    void return_type(const boost::optional<dogen::sml::nested_qname>& v);
+    void return_type(const boost::optional<dogen::sml::nested_qname>&& v);
     /**@}*/
 
 public:
-    bool operator==(const module& rhs) const;
-    bool operator!=(const module& rhs) const {
+    bool operator==(const operation& rhs) const;
+    bool operator!=(const operation& rhs) const {
         return !this->operator==(rhs);
     }
 
 public:
-    void swap(module& other) noexcept;
-    module& operator=(module other);
+    void swap(operation& other) noexcept;
+    operation& operator=(operation other);
 
 private:
     std::string documentation_;
     std::vector<std::pair<std::string, std::string> > implementation_specific_parameters_;
-    dogen::sml::qname name_;
-    dogen::sml::generation_types generation_type_;
-    std::list<dogen::sml::qname> members_;
+    std::string name_;
+    std::list<dogen::sml::nested_qname> arguments_;
+    boost::optional<dogen::sml::nested_qname> return_type_;
 };
 
 } }
@@ -144,8 +143,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::sml::module& lhs,
-    dogen::sml::module& rhs) {
+    dogen::sml::operation& lhs,
+    dogen::sml::operation& rhs) {
     lhs.swap(rhs);
 }
 

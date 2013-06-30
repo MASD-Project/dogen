@@ -24,6 +24,7 @@
 #include "dogen/sml/test_data/factory_td.hpp"
 #include "dogen/sml/test_data/generation_types_td.hpp"
 #include "dogen/sml/test_data/keyed_entity_td.hpp"
+#include "dogen/sml/test_data/operation_td.hpp"
 #include "dogen/sml/test_data/property_td.hpp"
 #include "dogen/sml/test_data/qname_td.hpp"
 #include "dogen/sml/test_data/repository_td.hpp"
@@ -42,6 +43,19 @@ std::list<dogen::sml::property> create_std_list_dogen_sml_property(unsigned int 
     std::list<dogen::sml::property> r;
     for (unsigned int i(0); i < 10; ++i) {
         r.push_back(create_dogen_sml_property(position + i));
+    }
+    return r;
+}
+
+dogen::sml::operation
+create_dogen_sml_operation(const unsigned int position) {
+    return dogen::sml::operation_generator::create(position);
+}
+
+std::list<dogen::sml::operation> create_std_list_dogen_sml_operation(unsigned int position) {
+    std::list<dogen::sml::operation> r;
+    for (unsigned int i(0); i < 10; ++i) {
+        r.push_back(create_dogen_sml_operation(position + i));
     }
     return r;
 }
@@ -84,17 +98,18 @@ void abstract_object_generator::
 populate(const unsigned int position, result_type& v) {
     dogen::sml::type_generator::populate(position, v);
     v.properties(create_std_list_dogen_sml_property(position + 0));
-    v.parent_name(create_boost_optional_dogen_sml_qname(position + 1));
-    v.original_parent_name(create_boost_optional_dogen_sml_qname(position + 2));
-    v.leaves(create_std_list_dogen_sml_qname(position + 3));
-    v.is_parent(create_bool(position + 4));
-    v.number_of_type_arguments(create_unsigned_int(position + 5));
-    v.is_visitable(create_bool(position + 6));
-    v.is_immutable(create_bool(position + 7));
-    v.is_versioned(create_bool(position + 8));
-    v.is_comparable(create_bool(position + 9));
-    v.is_fluent(create_bool(position + 10));
-    v.modeled_concepts(create_std_list_dogen_sml_qname(position + 11));
+    v.operations(create_std_list_dogen_sml_operation(position + 1));
+    v.parent_name(create_boost_optional_dogen_sml_qname(position + 2));
+    v.original_parent_name(create_boost_optional_dogen_sml_qname(position + 3));
+    v.leaves(create_std_list_dogen_sml_qname(position + 4));
+    v.is_parent(create_bool(position + 5));
+    v.number_of_type_arguments(create_unsigned_int(position + 6));
+    v.is_visitable(create_bool(position + 7));
+    v.is_immutable(create_bool(position + 8));
+    v.is_versioned(create_bool(position + 9));
+    v.is_comparable(create_bool(position + 10));
+    v.is_fluent(create_bool(position + 11));
+    v.modeled_concepts(create_std_list_dogen_sml_qname(position + 12));
 }
 
 abstract_object_generator::result_type*

@@ -65,7 +65,8 @@ BOOST_AUTO_TEST_CASE(producing_boost_model_generates_expected_types) {
             }
 
             if (!module_found)
-                BOOST_LOG_SEV(lg, error) << "Pod has undefined module: " << qn;
+                BOOST_LOG_SEV(lg, error) << "Object has undefined module: "
+                                         << qn;
             BOOST_CHECK(module_found);
         }
     }

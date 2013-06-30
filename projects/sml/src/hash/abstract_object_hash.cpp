@@ -20,6 +20,7 @@
  */
 #include "dogen/sml/hash/abstract_object_hash.hpp"
 #include "dogen/sml/hash/generation_types_hash.hpp"
+#include "dogen/sml/hash/operation_hash.hpp"
 #include "dogen/sml/hash/property_hash.hpp"
 #include "dogen/sml/hash/qname_hash.hpp"
 #include "dogen/sml/hash/type_hash.hpp"
@@ -34,6 +35,14 @@ inline void combine(std::size_t& seed, const HashableType& value)
 }
 
 inline std::size_t hash_std_list_dogen_sml_property(const std::list<dogen::sml::property>& v){
+    std::size_t seed(0);
+    for (const auto i : v) {
+        combine(seed, i);
+    }
+    return seed;
+}
+
+inline std::size_t hash_std_list_dogen_sml_operation(const std::list<dogen::sml::operation>& v){
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i);
@@ -70,6 +79,7 @@ std::size_t abstract_object_hasher::hash(const abstract_object&v) {
     combine(seed, dynamic_cast<const dogen::sml::type&>(v));
 
     combine(seed, hash_std_list_dogen_sml_property(v.properties()));
+    combine(seed, hash_std_list_dogen_sml_operation(v.operations()));
     combine(seed, hash_boost_optional_dogen_sml_qname(v.parent_name()));
     combine(seed, hash_boost_optional_dogen_sml_qname(v.original_parent_name()));
     combine(seed, hash_std_list_dogen_sml_qname(v.leaves()));

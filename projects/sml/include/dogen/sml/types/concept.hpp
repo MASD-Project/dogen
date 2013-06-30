@@ -32,6 +32,7 @@
 #include <vector>
 #include "dogen/sml/serialization/concept_fwd_ser.hpp"
 #include "dogen/sml/types/generation_types.hpp"
+#include "dogen/sml/types/operation.hpp"
 #include "dogen/sml/types/property.hpp"
 #include "dogen/sml/types/qname.hpp"
 
@@ -57,6 +58,7 @@ public:
         const std::vector<std::pair<std::string, std::string> >& implementation_specific_parameters,
         const dogen::sml::qname& name,
         const dogen::sml::generation_types& generation_type,
+        const std::list<dogen::sml::operation>& operations,
         const std::list<dogen::sml::qname>& refines);
 
 private:
@@ -115,11 +117,21 @@ public:
     /**@}*/
 
     /**
-     * @brief What to do with this pod in terms of code generation,
+     * @brief What to do with this type in terms of code generation.
      */
     /**@{*/
     dogen::sml::generation_types generation_type() const;
     void generation_type(const dogen::sml::generation_types& v);
+    /**@}*/
+
+    /**
+     * @brief Operations (methods) that can be executed.
+     */
+    /**@{*/
+    const std::list<dogen::sml::operation>& operations() const;
+    std::list<dogen::sml::operation>& operations();
+    void operations(const std::list<dogen::sml::operation>& v);
+    void operations(const std::list<dogen::sml::operation>&& v);
     /**@}*/
 
     /**
@@ -148,6 +160,7 @@ private:
     std::vector<std::pair<std::string, std::string> > implementation_specific_parameters_;
     dogen::sml::qname name_;
     dogen::sml::generation_types generation_type_;
+    std::list<dogen::sml::operation> operations_;
     std::list<dogen::sml::qname> refines_;
 };
 

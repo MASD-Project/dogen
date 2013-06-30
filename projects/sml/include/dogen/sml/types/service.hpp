@@ -59,6 +59,7 @@ public:
         const dogen::sml::qname& name,
         const dogen::sml::generation_types& generation_type,
         const std::list<dogen::sml::property>& properties,
+        const std::list<dogen::sml::operation>& operations,
         const boost::optional<dogen::sml::qname>& parent_name,
         const boost::optional<dogen::sml::qname>& original_parent_name,
         const std::list<dogen::sml::qname>& leaves,

@@ -20,25 +20,8 @@
  */
 #include <boost/algorithm/string.hpp>
 #include <ostream>
-#include "dogen/sml/io/concept_io.hpp"
-#include "dogen/sml/io/generation_types_io.hpp"
+#include "dogen/sml/io/nested_qname_io.hpp"
 #include "dogen/sml/io/operation_io.hpp"
-#include "dogen/sml/io/property_io.hpp"
-#include "dogen/sml/io/qname_io.hpp"
-
-namespace std {
-
-inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::sml::property>& v) {
-    s << "[ ";
-    for (auto i(v.begin()); i != v.end(); ++i) {
-        if (i != v.begin()) s << ", ";
-        s << *i;
-    }
-    s << "] ";
-    return s;
-}
-
-}
 
 
 inline std::string tidy_up_string(std::string s) {
@@ -77,7 +60,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::vector<std::pair<std
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::sml::operation>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::sml::nested_qname>& v) {
     s << "[ ";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -89,15 +72,16 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::sml::ope
 
 }
 
-namespace std {
+namespace boost {
 
-inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::sml::qname>& v) {
-    s << "[ ";
-    for (auto i(v.begin()); i != v.end(); ++i) {
-        if (i != v.begin()) s << ", ";
-        s << *i;
-    }
-    s << "] ";
+inline std::ostream& operator<<(std::ostream& s, const boost::optional<dogen::sml::nested_qname>& v) {
+    s << "{ " << "\"__type__\": " << "\"boost::optional\"" << ", ";
+
+    if (v)
+        s << "\"data\": " << *v;
+    else
+        s << "\"data\": ""\"<empty>\"";
+    s << " }";
     return s;
 }
 
@@ -106,16 +90,14 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::sml::qna
 namespace dogen {
 namespace sml {
 
-std::ostream& operator<<(std::ostream& s, const concept& v) {
+std::ostream& operator<<(std::ostream& s, const operation& v) {
     s << " { "
-      << "\"__type__\": " << "\"dogen::sml::concept\"" << ", "
-      << "\"properties\": " << v.properties() << ", "
+      << "\"__type__\": " << "\"dogen::sml::operation\"" << ", "
       << "\"documentation\": " << "\"" << tidy_up_string(v.documentation()) << "\"" << ", "
       << "\"implementation_specific_parameters\": " << v.implementation_specific_parameters() << ", "
-      << "\"name\": " << v.name() << ", "
-      << "\"generation_type\": " << v.generation_type() << ", "
-      << "\"operations\": " << v.operations() << ", "
-      << "\"refines\": " << v.refines()
+      << "\"name\": " << "\"" << tidy_up_string(v.name()) << "\"" << ", "
+      << "\"arguments\": " << v.arguments() << ", "
+      << "\"return_type\": " << v.return_type()
       << " }";
     return(s);
 }

@@ -28,14 +28,12 @@
 #include <boost/archive/xml_oarchive.hpp>
 #include <boost/serialization/list.hpp>
 #include <boost/serialization/nvp.hpp>
+#include <boost/serialization/optional.hpp>
 #include <boost/serialization/string.hpp>
 #include <boost/serialization/utility.hpp>
 #include <boost/serialization/vector.hpp>
-#include "dogen/sml/serialization/concept_ser.hpp"
-#include "dogen/sml/serialization/generation_types_ser.hpp"
+#include "dogen/sml/serialization/nested_qname_ser.hpp"
 #include "dogen/sml/serialization/operation_ser.hpp"
-#include "dogen/sml/serialization/property_ser.hpp"
-#include "dogen/sml/serialization/qname_ser.hpp"
 
 #ifdef __linux__
 #include "eos/portable_iarchive.hpp"
@@ -47,28 +45,24 @@ namespace serialization {
 
 template<typename Archive>
 void save(Archive& ar,
-    const dogen::sml::concept& v,
+    const dogen::sml::operation& v,
     const unsigned int /*version*/) {
-    ar << make_nvp("properties", v.properties_);
     ar << make_nvp("documentation", v.documentation_);
     ar << make_nvp("implementation_specific_parameters", v.implementation_specific_parameters_);
     ar << make_nvp("name", v.name_);
-    ar << make_nvp("generation_type", v.generation_type_);
-    ar << make_nvp("operations", v.operations_);
-    ar << make_nvp("refines", v.refines_);
+    ar << make_nvp("arguments", v.arguments_);
+    ar << make_nvp("return_type", v.return_type_);
 }
 
 template<typename Archive>
 void load(Archive& ar,
-    dogen::sml::concept& v,
+    dogen::sml::operation& v,
     const unsigned int /*version*/) {
-    ar >> make_nvp("properties", v.properties_);
     ar >> make_nvp("documentation", v.documentation_);
     ar >> make_nvp("implementation_specific_parameters", v.implementation_specific_parameters_);
     ar >> make_nvp("name", v.name_);
-    ar >> make_nvp("generation_type", v.generation_type_);
-    ar >> make_nvp("operations", v.operations_);
-    ar >> make_nvp("refines", v.refines_);
+    ar >> make_nvp("arguments", v.arguments_);
+    ar >> make_nvp("return_type", v.return_type_);
 }
 
 } }
@@ -76,21 +70,21 @@ void load(Archive& ar,
 namespace boost {
 namespace serialization {
 
-template void save(archive::polymorphic_oarchive& ar, const dogen::sml::concept& v, unsigned int version);
-template void load(archive::polymorphic_iarchive& ar, dogen::sml::concept& v, unsigned int version);
+template void save(archive::polymorphic_oarchive& ar, const dogen::sml::operation& v, unsigned int version);
+template void load(archive::polymorphic_iarchive& ar, dogen::sml::operation& v, unsigned int version);
 
-template void save(archive::text_oarchive& ar, const dogen::sml::concept& v, unsigned int version);
-template void load(archive::text_iarchive& ar, dogen::sml::concept& v, unsigned int version);
+template void save(archive::text_oarchive& ar, const dogen::sml::operation& v, unsigned int version);
+template void load(archive::text_iarchive& ar, dogen::sml::operation& v, unsigned int version);
 
-template void save(archive::binary_oarchive& ar, const dogen::sml::concept& v, unsigned int version);
-template void load(archive::binary_iarchive& ar, dogen::sml::concept& v, unsigned int version);
+template void save(archive::binary_oarchive& ar, const dogen::sml::operation& v, unsigned int version);
+template void load(archive::binary_iarchive& ar, dogen::sml::operation& v, unsigned int version);
 
-template void save(archive::xml_oarchive& ar, const dogen::sml::concept& v, unsigned int version);
-template void load(archive::xml_iarchive& ar, dogen::sml::concept& v, unsigned int version);
+template void save(archive::xml_oarchive& ar, const dogen::sml::operation& v, unsigned int version);
+template void load(archive::xml_iarchive& ar, dogen::sml::operation& v, unsigned int version);
 
 #ifdef __linux__
-template void save(eos::portable_oarchive& ar, const dogen::sml::concept& v, unsigned int version);
-template void load(eos::portable_iarchive& ar, dogen::sml::concept& v, unsigned int version);
+template void save(eos::portable_oarchive& ar, const dogen::sml::operation& v, unsigned int version);
+template void load(eos::portable_iarchive& ar, dogen::sml::operation& v, unsigned int version);
 #endif
 
 } }

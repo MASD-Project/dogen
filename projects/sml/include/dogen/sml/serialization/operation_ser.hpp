@@ -18,22 +18,26 @@
  * MA 02110-1301, USA.
  *
  */
-#include <boost/algorithm/string.hpp>
-#include <boost/io/ios_state.hpp>
-#include <ostream>
-#include "dogen/sml/io/abstract_object_io.hpp"
-#include "dogen/sml/io/generation_types_io.hpp"
-#include "dogen/sml/io/operation_io.hpp"
-#include "dogen/sml/io/property_io.hpp"
-#include "dogen/sml/io/qname_io.hpp"
-#include "dogen/sml/io/type_io.hpp"
+#ifndef DOGEN_SML_SERIALIZATION_OPERATION_SER_HPP
+#define DOGEN_SML_SERIALIZATION_OPERATION_SER_HPP
 
-namespace dogen {
-namespace sml {
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
-std::ostream& operator<<(std::ostream& s, const abstract_object& v) {
-    v.to_stream(s);
-    return(s);
-}
+#include <boost/serialization/split_free.hpp>
+#include "dogen/sml/types/operation.hpp"
+
+BOOST_SERIALIZATION_SPLIT_FREE(dogen::sml::operation)
+namespace boost {
+namespace serialization {
+
+template<typename Archive>
+void save(Archive& ar, const dogen::sml::operation& v, unsigned int version);
+
+template<typename Archive>
+void load(Archive& ar, dogen::sml::operation& v, unsigned int version);
 
 } }
+
+#endif

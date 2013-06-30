@@ -34,6 +34,7 @@
 #include <vector>
 #include "dogen/sml/serialization/abstract_object_fwd_ser.hpp"
 #include "dogen/sml/types/generation_types.hpp"
+#include "dogen/sml/types/operation.hpp"
 #include "dogen/sml/types/property.hpp"
 #include "dogen/sml/types/qname.hpp"
 #include "dogen/sml/types/type.hpp"
@@ -64,6 +65,7 @@ public:
         const dogen::sml::qname& name,
         const dogen::sml::generation_types& generation_type,
         const std::list<dogen::sml::property>& properties,
+        const std::list<dogen::sml::operation>& operations,
         const boost::optional<dogen::sml::qname>& parent_name,
         const boost::optional<dogen::sml::qname>& original_parent_name,
         const std::list<dogen::sml::qname>& leaves,
@@ -100,7 +102,17 @@ public:
     /**@}*/
 
     /**
-     * @brief Qualified name for the pod's parent, if the pod has one.
+     * @brief Operations (methods) that can be executed.
+     */
+    /**@{*/
+    const std::list<dogen::sml::operation>& operations() const;
+    std::list<dogen::sml::operation>& operations();
+    void operations(const std::list<dogen::sml::operation>& v);
+    void operations(const std::list<dogen::sml::operation>&& v);
+    /**@}*/
+
+    /**
+     * @brief Qualified name for the object's parent, if it it has one.
      */
     /**@{*/
     const boost::optional<dogen::sml::qname>& parent_name() const;
@@ -110,7 +122,7 @@ public:
     /**@}*/
 
     /**
-     * @brief Qualified name for the root of the inheritance hierarchy, if the pod is part of one.
+     * @brief Qualified name for the root of the inheritance hierarchy, if the object is part of one.
      */
     /**@{*/
     const boost::optional<dogen::sml::qname>& original_parent_name() const;
@@ -191,7 +203,7 @@ public:
     /**@}*/
 
     /**
-     * @brief List of concepts this pod models.
+     * @brief List of concepts modeled by this object.
      */
     /**@{*/
     const std::list<dogen::sml::qname>& modeled_concepts() const;
@@ -210,6 +222,7 @@ protected:
 
 private:
     std::list<dogen::sml::property> properties_;
+    std::list<dogen::sml::operation> operations_;
     boost::optional<dogen::sml::qname> parent_name_;
     boost::optional<dogen::sml::qname> original_parent_name_;
     std::list<dogen::sml::qname> leaves_;

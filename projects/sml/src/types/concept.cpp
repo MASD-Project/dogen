@@ -32,12 +32,14 @@ concept::concept(
     const std::vector<std::pair<std::string, std::string> >& implementation_specific_parameters,
     const dogen::sml::qname& name,
     const dogen::sml::generation_types& generation_type,
+    const std::list<dogen::sml::operation>& operations,
     const std::list<dogen::sml::qname>& refines)
     : properties_(properties),
       documentation_(documentation),
       implementation_specific_parameters_(implementation_specific_parameters),
       name_(name),
       generation_type_(generation_type),
+      operations_(operations),
       refines_(refines) { }
 
 void concept::swap(concept& other) noexcept {
@@ -47,6 +49,7 @@ void concept::swap(concept& other) noexcept {
     swap(implementation_specific_parameters_, other.implementation_specific_parameters_);
     swap(name_, other.name_);
     swap(generation_type_, other.generation_type_);
+    swap(operations_, other.operations_);
     swap(refines_, other.refines_);
 }
 
@@ -56,6 +59,7 @@ bool concept::operator==(const concept& rhs) const {
         implementation_specific_parameters_ == rhs.implementation_specific_parameters_ &&
         name_ == rhs.name_ &&
         generation_type_ == rhs.generation_type_ &&
+        operations_ == rhs.operations_ &&
         refines_ == rhs.refines_;
 }
 
@@ -135,6 +139,22 @@ dogen::sml::generation_types concept::generation_type() const {
 
 void concept::generation_type(const dogen::sml::generation_types& v) {
     generation_type_ = v;
+}
+
+const std::list<dogen::sml::operation>& concept::operations() const {
+    return operations_;
+}
+
+std::list<dogen::sml::operation>& concept::operations() {
+    return operations_;
+}
+
+void concept::operations(const std::list<dogen::sml::operation>& v) {
+    operations_ = v;
+}
+
+void concept::operations(const std::list<dogen::sml::operation>&& v) {
+    operations_ = std::move(v);
 }
 
 const std::list<dogen::sml::qname>& concept::refines() const {

@@ -37,6 +37,7 @@
 #include "dogen/sml/serialization/factory_ser.hpp"
 #include "dogen/sml/serialization/generation_types_ser.hpp"
 #include "dogen/sml/serialization/keyed_entity_ser.hpp"
+#include "dogen/sml/serialization/operation_ser.hpp"
 #include "dogen/sml/serialization/property_ser.hpp"
 #include "dogen/sml/serialization/qname_ser.hpp"
 #include "dogen/sml/serialization/repository_ser.hpp"
@@ -63,6 +64,7 @@ void save(Archive& ar,
     ar << make_nvp("type", base_object<dogen::sml::type>(v));
 
     ar << make_nvp("properties", v.properties_);
+    ar << make_nvp("operations", v.operations_);
     ar << make_nvp("parent_name", v.parent_name_);
     ar << make_nvp("original_parent_name", v.original_parent_name_);
     ar << make_nvp("leaves", v.leaves_);
@@ -83,6 +85,7 @@ void load(Archive& ar,
     ar >> make_nvp("type", base_object<dogen::sml::type>(v));
 
     ar >> make_nvp("properties", v.properties_);
+    ar >> make_nvp("operations", v.operations_);
     ar >> make_nvp("parent_name", v.parent_name_);
     ar >> make_nvp("original_parent_name", v.original_parent_name_);
     ar >> make_nvp("leaves", v.leaves_);

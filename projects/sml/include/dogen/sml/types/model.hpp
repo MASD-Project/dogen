@@ -138,7 +138,7 @@ public:
     /**@}*/
 
     /**
-     * @brief What to do with this pod in terms of code generation,
+     * @brief What to do with this type in terms of code generation.
      */
     /**@{*/
     dogen::sml::generation_types generation_type() const;

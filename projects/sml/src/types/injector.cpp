@@ -60,7 +60,7 @@ const std::string versioned_property_doc("Object instance's version.");
 const std::string empty_identity(
     "Identity must have at least one attribute: ");
 const std::string duplicate_qname(
-    "Attempt to add pod with a name that already exists in model: ");
+    "Attempt to add object with a name that already exists in model: ");
 
 class keyed_entity_visitor : public dogen::sml::type_visitor {
 public:

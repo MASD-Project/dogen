@@ -6229,7 +6229,7 @@ for Java, etc.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>#What to do with this pod in terms of code generation,#</dia:string>
+            <dia:string>#What to do with this type in terms of code generation.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -7910,7 +7910,7 @@ It must be castable to instance of the type defined in the enumeration.#</dia:st
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>#Qualified name for the pod's parent, if the pod has one.#</dia:string>
+            <dia:string>#Qualified name for the object's parent, if it it has one.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -7933,7 +7933,7 @@ It must be castable to instance of the type defined in the enumeration.#</dia:st
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>#Qualified name for the root of the inheritance hierarchy, if the pod is part of one.#</dia:string>
+            <dia:string>#Qualified name for the root of the inheritance hierarchy, if the object is part of one.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -8145,7 +8145,7 @@ or other comparable model types.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>#List of concepts this pod models.#</dia:string>
+            <dia:string>#List of concepts modeled by this object.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>

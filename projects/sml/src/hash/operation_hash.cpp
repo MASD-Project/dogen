@@ -18,11 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/sml/hash/concept_hash.hpp"
-#include "dogen/sml/hash/generation_types_hash.hpp"
+#include "dogen/sml/hash/nested_qname_hash.hpp"
 #include "dogen/sml/hash/operation_hash.hpp"
-#include "dogen/sml/hash/property_hash.hpp"
-#include "dogen/sml/hash/qname_hash.hpp"
 
 namespace {
 
@@ -31,14 +28,6 @@ inline void combine(std::size_t& seed, const HashableType& value)
 {
     std::hash<HashableType> hasher;
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
-}
-
-inline std::size_t hash_std_list_dogen_sml_property(const std::list<dogen::sml::property>& v){
-    std::size_t seed(0);
-    for (const auto i : v) {
-        combine(seed, i);
-    }
-    return seed;
 }
 
 inline std::size_t hash_std_pair_std_string_std_string(const std::pair<std::string, std::string>& v){
@@ -57,7 +46,7 @@ inline std::size_t hash_std_vector_std_pair_std_string_std_string_(const std::ve
     return seed;
 }
 
-inline std::size_t hash_std_list_dogen_sml_operation(const std::list<dogen::sml::operation>& v){
+inline std::size_t hash_std_list_dogen_sml_nested_qname(const std::list<dogen::sml::nested_qname>& v){
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i);
@@ -65,11 +54,13 @@ inline std::size_t hash_std_list_dogen_sml_operation(const std::list<dogen::sml:
     return seed;
 }
 
-inline std::size_t hash_std_list_dogen_sml_qname(const std::list<dogen::sml::qname>& v){
+inline std::size_t hash_boost_optional_dogen_sml_nested_qname(const boost::optional<dogen::sml::nested_qname>& v){
     std::size_t seed(0);
-    for (const auto i : v) {
-        combine(seed, i);
-    }
+
+    if (!v)
+        return seed;
+
+    combine(seed, *v);
     return seed;
 }
 
@@ -78,16 +69,14 @@ inline std::size_t hash_std_list_dogen_sml_qname(const std::list<dogen::sml::qna
 namespace dogen {
 namespace sml {
 
-std::size_t concept_hasher::hash(const concept&v) {
+std::size_t operation_hasher::hash(const operation&v) {
     std::size_t seed(0);
 
-    combine(seed, hash_std_list_dogen_sml_property(v.properties()));
     combine(seed, v.documentation());
     combine(seed, hash_std_vector_std_pair_std_string_std_string_(v.implementation_specific_parameters()));
     combine(seed, v.name());
-    combine(seed, v.generation_type());
-    combine(seed, hash_std_list_dogen_sml_operation(v.operations()));
-    combine(seed, hash_std_list_dogen_sml_qname(v.refines()));
+    combine(seed, hash_std_list_dogen_sml_nested_qname(v.arguments()));
+    combine(seed, hash_boost_optional_dogen_sml_nested_qname(v.return_type()));
 
     return seed;
 }

@@ -397,6 +397,8 @@ Name choices:
 We should just follow the composite pattern in the naming.
 
 *** IMPLEMENTATION Visitor as an injected system type                 :story:
+    CLOCK: [2013-06-30 Sun 20:02]--[2013-06-30 Sun 20:05] =>  0:03
+    CLOCK: [2013-06-30 Sun 19:56]--[2013-06-30 Sun 20:02] =>  0:06
     CLOCK: [2013-06-30 Sun 19:25]--[2013-06-30 Sun 19:56] =>  0:31
 
 The current implementation of visitor relies on creating a view model

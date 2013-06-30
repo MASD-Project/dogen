@@ -18,22 +18,23 @@
  * MA 02110-1301, USA.
  *
  */
-#include <boost/algorithm/string.hpp>
-#include <boost/io/ios_state.hpp>
-#include <ostream>
-#include "dogen/sml/io/abstract_object_io.hpp"
-#include "dogen/sml/io/generation_types_io.hpp"
-#include "dogen/sml/io/operation_io.hpp"
-#include "dogen/sml/io/property_io.hpp"
-#include "dogen/sml/io/qname_io.hpp"
-#include "dogen/sml/io/type_io.hpp"
+#ifndef DOGEN_SML_IO_OPERATION_IO_HPP
+#define DOGEN_SML_IO_OPERATION_IO_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include <iosfwd>
+#include "dogen/sml/types/operation.hpp"
 
 namespace dogen {
 namespace sml {
 
-std::ostream& operator<<(std::ostream& s, const abstract_object& v) {
-    v.to_stream(s);
-    return(s);
-}
+std::ostream&
+operator<<(std::ostream& s,
+     const dogen::sml::operation& v);
 
 } }
+
+#endif
