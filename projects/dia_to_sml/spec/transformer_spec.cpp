@@ -23,6 +23,12 @@
 #include <boost/algorithm/string/predicate.hpp>
 #include "dogen/utility/test/asserter.hpp"
 #include "dogen/utility/test/logging.hpp"
+#include "dogen/sml/types/value_object.hpp"
+#include "dogen/sml/types/service.hpp"
+#include "dogen/sml/types/factory.hpp"
+#include "dogen/sml/types/repository.hpp"
+#include "dogen/sml/types/keyed_entity.hpp"
+#include "dogen/sml/types/entity.hpp"
 #include "dogen/sml/io/qname_io.hpp"
 #include "dogen/dia_to_sml/types/transformer.hpp"
 #include "dogen/dia_to_sml/types/profiler.hpp"
@@ -71,14 +77,20 @@ dogen::sml::qname mock_model_name(const std::string& mn) {
     return r;
 }
 
+dogen::dia_to_sml::context mock_context() {
+    dogen::dia_to_sml::context r;
+    r.model().name(mock_model_name(model_name));
+    return r;
+}
+
 }
 
 using dogen::utility::test::contains_checker;
 
 BOOST_AUTO_TEST_SUITE(transformer)
 
-BOOST_AUTO_TEST_CASE(uml_class_with_no_stereotype_transforms_into_expected_object) {
-    SETUP_TEST_LOG_SOURCE("uml_class_with_no_stereotype_transforms_into_expected_object");
+BOOST_AUTO_TEST_CASE(uml_class_with_no_stereotype_transforms_into_expected_value_object) {
+    SETUP_TEST_LOG_SOURCE("uml_class_with_no_stereotype_transforms_into_expected_value_object");
     dogen::dia_to_sml::context c;
     c.model().name(mock_model_name(model_name));
 
@@ -99,9 +111,8 @@ BOOST_AUTO_TEST_CASE(uml_class_with_no_stereotype_transforms_into_expected_objec
 
 BOOST_AUTO_TEST_CASE(empty_named_uml_class_throws) {
     SETUP_TEST_LOG_SOURCE("empty_named_uml_class_throws");
-    dogen::dia_to_sml::context c;
-    c.model().name(mock_model_name(model_name));
 
+    auto c(mock_context());
     dogen::dia_to_sml::transformer t(c);
     const auto o(mock_processed_object_factory::build_empty_named_class());
     contains_checker<transformation_error> cc(empty_name);
@@ -110,9 +121,8 @@ BOOST_AUTO_TEST_CASE(empty_named_uml_class_throws) {
 
 BOOST_AUTO_TEST_CASE(uml_class_with_enumeration_stereotype_transforms_into_expected_enumeration) {
     SETUP_TEST_LOG_SOURCE("uml_class_with_enumeration_stereotype_transforms_into_expected_enumeration");
-    dogen::dia_to_sml::context c;
-    c.model().name(mock_model_name(model_name));
 
+    auto c(mock_context());
     dogen::dia_to_sml::transformer t(c);
     const auto st(enumeration_stereotype);
     const auto o(mock_processed_object_factory::build_class(0, st));
@@ -120,6 +130,7 @@ BOOST_AUTO_TEST_CASE(uml_class_with_enumeration_stereotype_transforms_into_expec
 
     BOOST_LOG_SEV(lg, debug) << "context: " << c;
     BOOST_CHECK(c.model().objects().empty());
+    BOOST_CHECK(c.model().primitives().empty());
     BOOST_REQUIRE(c.model().enumerations().size() == 1);
 
     const auto e(c.model().enumerations().begin()->second);
@@ -128,11 +139,10 @@ BOOST_AUTO_TEST_CASE(uml_class_with_enumeration_stereotype_transforms_into_expec
     BOOST_CHECK(!e.documentation().empty());
 }
 
-BOOST_AUTO_TEST_CASE(uml_class_with_exception_stereotype_transforms_into_expected_exception) {
-    SETUP_TEST_LOG_SOURCE("uml_class_with_exception_stereotype_transforms_into_expected_exception");
-    dogen::dia_to_sml::context c;
-    c.model().name(mock_model_name(model_name));
+BOOST_AUTO_TEST_CASE(uml_class_with_exception_stereotype_transforms_into_expected_value_object) {
+    SETUP_TEST_LOG_SOURCE("uml_class_with_exception_stereotype_transforms_into_expected_value_object");
 
+    auto c(mock_context());
     dogen::dia_to_sml::transformer t(c);
     const auto st(exception_stereotype);
     const auto o(mock_processed_object_factory::build_class(0, st));
@@ -145,30 +155,33 @@ BOOST_AUTO_TEST_CASE(uml_class_with_exception_stereotype_transforms_into_expecte
 
     const auto& e(*c.model().objects().begin()->second);
     BOOST_CHECK(e.name().model_name() == model_name);
+    BOOST_CHECK(e.name().meta_type() == dogen::sml::meta_types::exception);
+    dynamic_cast<const dogen::sml::value_object&>(e);
     BOOST_CHECK(!e.name().simple_name().empty());
     BOOST_CHECK(!e.documentation().empty());
 }
 
-// BOOST_IGNORE_AUTO_TEST_CASE(uml_class_with_service_stereotype_transforms_into_expected_service) {
-//     SETUP_TEST_LOG_SOURCE("uml_class_with_service_stereotype_transforms_into_expected_service");
-//     dogen::dia_to_sml::context c;
-//     c.model().name(model_name);
+BOOST_AUTO_TEST_CASE(uml_class_with_service_stereotype_transforms_into_expected_service) {
+    SETUP_TEST_LOG_SOURCE("uml_class_with_service_stereotype_transforms_into_expected_service");
 
-//     dogen::dia_to_sml::transformer t(c);
-//     const auto st(service_stereotype);
-//     const auto o(mock_processed_object_factory::build_class(0, st));
-//     t.transform(o, mock_profile(o));
+    auto c(mock_context());
+    dogen::dia_to_sml::transformer t(c);
+    const auto st(service_stereotype);
+    const auto o(mock_processed_object_factory::build_class(0, st));
+    t.transform(o, mock_profile(o));
 
-//     BOOST_LOG_SEV(lg, debug) << "context: " << c;
-//     BOOST_CHECK(c.model().objects().empty());
-//     BOOST_REQUIRE(c.model().services().size() == 1);
+    BOOST_LOG_SEV(lg, debug) << "context: " << c;
+    BOOST_CHECK(c.model().enumerations().empty());
+    BOOST_CHECK(c.model().primitives().empty());
+    BOOST_REQUIRE(c.model().objects().size() == 1);
 
-//     const auto s(c.model().services().begin()->second);
-//     BOOST_CHECK(s.name().model_name() == model_name);
-//     BOOST_CHECK(!s.name().simple_name().empty());
-//     BOOST_CHECK(s.service_type() == dogen::sml::service_types::user_defined);
-//     BOOST_CHECK(!s.documentation().empty());
-// }
+    const auto& s(*c.model().objects().begin()->second);
+    BOOST_CHECK(s.name().model_name() == model_name);
+    BOOST_CHECK(s.name().meta_type() == dogen::sml::meta_types::exception);
+    dynamic_cast<const dogen::sml::service&>(s);
+    BOOST_CHECK(!s.name().simple_name().empty());
+    BOOST_CHECK(!s.documentation().empty());
+}
 
 BOOST_AUTO_TEST_CASE(uml_large_package_transforms_into_expected_module) {
     SETUP_TEST_LOG_SOURCE("uml_large_package_transforms_into_expected_module");
@@ -185,6 +198,7 @@ BOOST_AUTO_TEST_CASE(uml_large_package_transforms_into_expected_module) {
     BOOST_REQUIRE(c.model().modules().size() == 1);
     const auto p(c.model().modules().begin()->second);
     BOOST_CHECK(p.name().model_name() == model_name);
+    BOOST_CHECK(p.name().meta_type() == dogen::sml::meta_types::module);
     BOOST_CHECK(!p.name().simple_name().empty());
     BOOST_CHECK(p.documentation().empty());
 }
