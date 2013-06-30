@@ -46,7 +46,6 @@ BOOST_AUTO_TEST_CASE(validate_equality) {
     SETUP_TEST_LOG("validate_equality");
 
     test_equality<generation_types_generator>();
-    test_equality<meta_types_generator>();
     test_equality<nested_qname_generator>();
     test_equality<property_generator>();
     test_equality<qname_generator>();

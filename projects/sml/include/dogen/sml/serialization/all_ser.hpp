@@ -27,7 +27,6 @@
 #include "dogen/sml/serialization/factory_ser.hpp"
 #include "dogen/sml/serialization/generation_types_ser.hpp"
 #include "dogen/sml/serialization/keyed_entity_ser.hpp"
-#include "dogen/sml/serialization/meta_types_ser.hpp"
 #include "dogen/sml/serialization/model_ser.hpp"
 #include "dogen/sml/serialization/module_ser.hpp"
 #include "dogen/sml/serialization/nested_qname_ser.hpp"

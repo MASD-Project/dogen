@@ -93,7 +93,6 @@ boost::shared_ptr<abstract_object> injector::create_key(const qname& qn,
     kqn.model_name(qn.model_name());
     kqn.module_path(qn.module_path());
     kqn.external_module_path(qn.external_module_path());
-    kqn.meta_type(meta_types::value_object);
 
     auto r(boost::make_shared<value_object>());
     r->name(kqn);
@@ -180,7 +179,6 @@ void injector::inject_version(abstract_object& p) const {
 
     qname qn;
     qn.simple_name(uint_name);
-    qn.meta_type(meta_types::primitive);
 
     nested_qname nqn;
     nqn.type(qn);

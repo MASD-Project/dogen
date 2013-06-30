@@ -19,7 +19,6 @@
  *
  */
 #include <sstream>
-#include "dogen/sml/test_data/meta_types_td.hpp"
 #include "dogen/sml/test_data/qname_td.hpp"
 
 namespace {
@@ -38,11 +37,6 @@ std::list<std::string> create_std_list_std_string(unsigned int position) {
     return r;
 }
 
-dogen::sml::meta_types
-create_dogen_sml_meta_types(const unsigned int position) {
-    return dogen::sml::meta_types_generator::create(position);
-}
-
 }
 
 namespace dogen {
@@ -56,7 +50,6 @@ populate(const unsigned int position, result_type& v) {
     v.external_module_path(create_std_list_std_string(position + 1));
     v.module_path(create_std_list_std_string(position + 2));
     v.simple_name(create_std_string(position + 3));
-    v.meta_type(create_dogen_sml_meta_types(position + 4));
 }
 
 qname_generator::result_type

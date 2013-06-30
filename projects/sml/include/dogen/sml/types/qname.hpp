@@ -29,7 +29,6 @@
 #include <list>
 #include <string>
 #include "dogen/sml/serialization/qname_fwd_ser.hpp"
-#include "dogen/sml/types/meta_types.hpp"
 
 namespace dogen {
 namespace sml {
@@ -39,20 +38,17 @@ namespace sml {
  */
 class qname final {
 public:
+    qname() = default;
     qname(const qname&) = default;
     qname(qname&&) = default;
     ~qname() = default;
-
-public:
-    qname();
 
 public:
     qname(
         const std::string& model_name,
         const std::list<std::string>& external_module_path,
         const std::list<std::string>& module_path,
-        const std::string& simple_name,
-        const dogen::sml::meta_types& meta_type);
+        const std::string& simple_name);
 
 private:
     template<typename Archive>
@@ -103,14 +99,6 @@ public:
     void simple_name(const std::string&& v);
     /**@}*/
 
-    /**
-     * @brief Type of the modeling element.
-     */
-    /**@{*/
-    dogen::sml::meta_types meta_type() const;
-    void meta_type(const dogen::sml::meta_types& v);
-    /**@}*/
-
 public:
     bool operator==(const qname& rhs) const;
     bool operator!=(const qname& rhs) const {
@@ -126,7 +114,6 @@ private:
     std::list<std::string> external_module_path_;
     std::list<std::string> module_path_;
     std::string simple_name_;
-    dogen::sml::meta_types meta_type_;
 };
 
 } }

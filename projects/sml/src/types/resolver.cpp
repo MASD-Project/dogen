@@ -73,8 +73,7 @@ bool operator<(const qname& lhs, const qname& rhs) {
             (lhs.external_module_path() < rhs.external_module_path() ||
                 (lhs.external_module_path() == rhs.external_module_path() &&
                     (lhs.simple_name() < rhs.simple_name() ||
-                        (lhs.simple_name() == rhs.simple_name() &&
-                            lhs.meta_type() < rhs.meta_type())))));
+                        (lhs.simple_name() == rhs.simple_name())))));
 }
 
 resolver::resolver(model& m) : model_(m), has_resolved_(false) { }
@@ -138,7 +137,6 @@ qname resolver::resolve_partial_type(const qname& n) const {
 
     // first try the type as it was read originally.
     const auto& objects(model_.objects());
-    r.meta_type(meta_types::value_object);
     auto i(objects.find(r));
     if (i != objects.end())
         return r;
@@ -161,7 +159,6 @@ qname resolver::resolve_partial_type(const qname& n) const {
     r.external_module_path(std::list<std::string>{});
 
     // its not a object, could it be a primitive?
-    r.meta_type(meta_types::primitive);
     const auto& primitives(model_.primitives());
     auto j(primitives.find(r));
     if (j != primitives.end())
@@ -169,7 +166,6 @@ qname resolver::resolve_partial_type(const qname& n) const {
 
     // try enumerations
     const auto& enumerations(model_.enumerations());
-    r.meta_type(meta_types::enumeration);
     auto k(enumerations.find(r));
     if (k != enumerations.end())
         return r;
@@ -190,14 +186,12 @@ qname resolver::resolve_partial_type(const qname& n) const {
 
     if (r.model_name().empty()) {
         // it could be a type defined in this model
-        r.meta_type(meta_types::value_object);
         r.model_name(model_.name().model_name());
         r.external_module_path(model_.name().external_module_path());
         i = objects.find(r);
         if (i != objects.end())
             return r;
 
-        r.meta_type(meta_types::enumeration);
         auto k(enumerations.find(r));
         if (k != enumerations.end())
             return r;

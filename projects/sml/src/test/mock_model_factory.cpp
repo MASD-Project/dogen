@@ -48,7 +48,6 @@ const std::string unsigned_int("unsigned int");
 const std::string documentation("Some documentation");
 
 const std::string invalid_property_type("Unknown property type.");
-const std::string invalid_meta_type("Invalid or unsupported meta type.");
 const std::string invalid_object_type("Invalid or unsupported object type.");
 
 std::string type_name(unsigned int i) {
@@ -79,7 +78,6 @@ dogen::sml::nested_qname mock_qname(const dogen::sml::abstract_object& o) {
     dogen::sml::qname qn;
     qn.simple_name(o.name().simple_name());
     qn.model_name(o.name().model_name());
-    qn.meta_type(dogen::sml::meta_types::value_object);
 
     dogen::sml::nested_qname r;
     r.type(qn);
@@ -89,7 +87,6 @@ dogen::sml::nested_qname mock_qname(const dogen::sml::abstract_object& o) {
 dogen::sml::qname mock_model_qname(unsigned int i) {
     dogen::sml::qname r;
     r.model_name(model_name(i));
-    r.meta_type(dogen::sml::meta_types::model);
     return r;
 }
 
@@ -98,7 +95,6 @@ mock_qname_shared_ptr(const dogen::sml::type& o) {
     dogen::sml::qname e;
     e.simple_name("boost");
     e.model_name("shared_ptr");
-    e.meta_type(dogen::sml::meta_types::value_object);
 
     dogen::sml::nested_qname r;
     r.type(e);
@@ -122,12 +118,10 @@ dogen::sml::nested_qname mock_qname(
     switch(pt) {
     case property_types::unsigned_int:
         qn.simple_name(unsigned_int);
-        qn.meta_type(meta_types::primitive);
         r.type(qn);
         break;
     case property_types::boolean:
         qn.simple_name(boolean);
-        qn.meta_type(meta_types::primitive);
         r.type(qn);
         break;
     case property_types::boost_variant: {
@@ -178,15 +172,12 @@ dogen::sml::nested_qname mock_qname(
     return r;
 }
 
-void populate_object(dogen::sml::abstract_object& o,
-    const dogen::sml::meta_types mt, const unsigned int i,
-    const dogen::sml::qname& model_qname,
-    const unsigned int module_n) {
+void populate_object(dogen::sml::abstract_object& o, const unsigned int i,
+    const dogen::sml::qname& model_qname, const unsigned int module_n) {
 
     dogen::sml::qname qn;
     qn.model_name(model_qname.model_name());
     qn.simple_name(type_name(i));
-    qn.meta_type(mt);
 
     for (unsigned int i(0); i < module_n; ++i)
         qn.module_path().push_back(module_name(i));
@@ -202,8 +193,7 @@ mock_value_object(const unsigned int i, const dogen::sml::qname& model_qname,
 
     using dogen::sml::value_object;
     auto r(boost::make_shared<value_object>());
-    const auto mt(dogen::sml::meta_types::value_object);
-    populate_object(*r, mt, i, model_qname, module_n);
+    populate_object(*r, i, model_qname, module_n);
     r->type(dogen::sml::value_object_types::plain);
     return r;
 }
@@ -215,16 +205,12 @@ mock_entity(const dogen::sml::property& prop, const bool keyed,
 
     using namespace dogen::sml;
     boost::shared_ptr<abstract_entity> r;
-    meta_types mt;
-    if (keyed) {
+    if (keyed)
         r = boost::shared_ptr<abstract_entity>(new keyed_entity());
-        mt = meta_types::keyed_entity;
-    } else {
+    else
         r = boost::shared_ptr<abstract_entity>(new entity());
-        mt = meta_types::entity;
-    }
 
-    populate_object(*r, mt, i, model_qname, module_n);
+    populate_object(*r, i, model_qname, module_n);
     r->identity().push_back(prop);
     return r;
 }
@@ -240,7 +226,6 @@ mock_enumeration(const unsigned int i, const dogen::sml::qname& model_qname,
     dogen::sml::qname qn;
     qn.model_name(model_qname.model_name());
     qn.simple_name(type_name(i));
-    qn.meta_type(dogen::sml::meta_types::enumeration);
 
     for (unsigned int i(0); i < module_n; ++i)
         qn.module_path().push_back(module_name(i));
@@ -252,7 +237,6 @@ mock_enumeration(const unsigned int i, const dogen::sml::qname& model_qname,
 
     dogen::sml::qname uqn;
     uqn.simple_name(unsigned_int);
-    uqn.meta_type(dogen::sml::meta_types::primitive);
     r.underlying_type(uqn);
 
     const auto lambda([](const unsigned int n) -> dogen::sml::enumerator {
@@ -273,7 +257,6 @@ mock_exception(const unsigned int i, const dogen::sml::qname& model_qname,
     dogen::sml::qname qn;
     qn.model_name(model_qname.model_name());
     qn.simple_name(type_name(i));
-    qn.meta_type(dogen::sml::meta_types::exception);
 
     for (unsigned int i(0); i < module_n; ++i)
         qn.module_path().push_back(module_name(i));
@@ -308,18 +291,19 @@ std::string mock_model_factory::module_name(const unsigned int n) {
 }
 
 model mock_model_factory::
-build_single_type_model(const unsigned int n, const meta_types mt) {
-    return build_multi_type_model(n, 1, mt);
+build_single_type_model(const unsigned int n, const object_types ot) {
+    return build_multi_type_model(n, 1, ot);
 }
 
 model mock_model_factory::
-build_single_type_model_in_module(const unsigned int n, const meta_types mt,
+build_single_type_model_in_module(const unsigned int n, const object_types ot,
     const unsigned int mod_n) {
-    return build_multi_type_model(n, 1, mt, mod_n);
+    return build_multi_type_model(n, 1, ot, mod_n);
 }
 
-model mock_model_factory::build_multi_type_model(const unsigned int n,
-    const unsigned int type_n, const meta_types mt, const unsigned int mod_n) {
+model mock_model_factory::
+build_multi_type_model(const unsigned int n, const unsigned int type_n,
+    const object_types ot, const unsigned int mod_n) {
 
     model r;
     r.name(mock_model_qname(n));
@@ -330,7 +314,6 @@ model mock_model_factory::build_multi_type_model(const unsigned int n,
         qname qn;
         qn.simple_name(module_name(i));
         qn.module_path(pp);
-        qn.meta_type(dogen::sml::meta_types::module);
 
         module p;
         p.name(qn);
@@ -340,28 +323,28 @@ model mock_model_factory::build_multi_type_model(const unsigned int n,
         pp.push_back(module_name(i));
     }
 
-    switch (mt) {
-    case meta_types::value_object:
+    switch (ot) {
+    case object_types::value_object:
         for (unsigned int i(0); i < type_n; ++i) {
             const auto o(mock_value_object(i, r.name(), mod_n));
             r.objects().insert(std::make_pair(o->name(), o));
         }
         break;
-    case meta_types::enumeration:
+    case object_types::enumeration:
         for (unsigned int i(0); i < type_n; ++i) {
             const auto e(mock_enumeration(i, r.name(), mod_n));
             r.enumerations().insert(std::make_pair(e.name(), e));
         }
         break;
-    case meta_types::exception:
+    case object_types::exception:
         for (unsigned int i(0); i < type_n; ++i) {
             const auto e(mock_exception(i, r.name(), mod_n));
             r.objects().insert(std::make_pair(e->name(), e));
         }
         break;
     default:
-        BOOST_LOG_SEV(lg, error) << invalid_meta_type;
-        BOOST_THROW_EXCEPTION(building_error(invalid_meta_type));
+        BOOST_LOG_SEV(lg, error) << invalid_object_type;
+        BOOST_THROW_EXCEPTION(building_error(invalid_object_type));
     }
 
     return r;
@@ -378,7 +361,6 @@ object_with_property(const object_types ot, const property_types pt) {
     dogen::sml::qname qn;
     qn.simple_name("boost");
     qn.model_name("shared_ptr");
-    qn.meta_type(dogen::sml::meta_types::value_object);
     o2->name(qn);
     o2->type(dogen::sml::value_object_types::smart_pointer);
 

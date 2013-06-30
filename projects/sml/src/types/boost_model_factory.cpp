@@ -56,7 +56,6 @@ boost_model_factory::create_value_object(const std::string& name,
 
     qname q;
     q.simple_name(name);
-    q.meta_type(meta_types::value_object);
     q.model_name(model_name);
     q.module_path(module_path);
 

@@ -43,7 +43,6 @@ BOOST_AUTO_TEST_CASE(validate_hashing) {
     SETUP_TEST_LOG("validate_hashing");
 
     test_hashing<generation_types_generator>();
-    test_hashing<meta_types_generator>();
     // FIXME: bug in composition?
     // test_hashing<nested_qname_generator>();
     test_hashing<property_generator>();

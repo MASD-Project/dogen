@@ -32,7 +32,6 @@
 #include "dogen/sml/types/keyed_entity.hpp"
 #include "dogen/sml/types/merger.hpp"
 #include "dogen/sml/types/merging_error.hpp"
-#include "dogen/sml/types/meta_types.hpp"
 #include "dogen/sml/types/model.hpp"
 #include "dogen/sml/types/module.hpp"
 #include "dogen/sml/types/nested_qname.hpp"

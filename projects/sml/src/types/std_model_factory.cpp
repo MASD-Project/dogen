@@ -64,7 +64,6 @@ namespace sml {
 primitive std_model_factory::create_primitive(const std::string& name) {
     qname q;
     q.simple_name(name);
-    q.meta_type(meta_types::primitive);
     q.model_name(model_name);
 
     primitive r;
@@ -78,7 +77,6 @@ boost::shared_ptr<abstract_object> std_model_factory::create_value_object(
 
     qname q;
     q.simple_name(name);
-    q.meta_type(meta_types::value_object);
     q.model_name(model_name);
 
     std::unique_ptr<value_object> r(new value_object());

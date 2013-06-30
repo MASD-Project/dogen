@@ -92,8 +92,6 @@ BOOST_AUTO_TEST_CASE(entity_object_does_not_result_in_injected_keys) {
         if (is_type_zero(qn)) {
             BOOST_LOG_SEV(lg, debug) << "found object: " << qn;
             const auto& o(dynamic_cast<dogen::sml::entity&>(*pair.second));
-            const auto mt(dogen::sml::meta_types::entity);
-            BOOST_REQUIRE(o.name().meta_type() == mt);
             BOOST_REQUIRE(o.properties().size() == 1);
             BOOST_REQUIRE(!o.identity().empty());
         }
@@ -119,8 +117,6 @@ BOOST_AUTO_TEST_CASE(unversioned_keyed_object_with_no_identity_attributes_throws
             BOOST_LOG_SEV(lg, debug) << "found object: " << qn;
             using dogen::sml::keyed_entity;
             auto& o(dynamic_cast<keyed_entity&>(*pair.second));
-            const auto mt(dogen::sml::meta_types::keyed_entity);
-            BOOST_REQUIRE(o.name().meta_type() == mt);
             BOOST_REQUIRE(o.properties().size() == 1);
             BOOST_REQUIRE(!o.is_versioned());
             o.identity().clear();
@@ -144,8 +140,6 @@ BOOST_AUTO_TEST_CASE(unversioned_keyed_object_has_unversioned_key_injected) {
         if (is_type_zero(qn)) {
             BOOST_LOG_SEV(lg, debug) << "found object: " << qn;
             auto& ae(dynamic_cast<dogen::sml::abstract_entity&>(*pair.second));
-            const auto mt(dogen::sml::meta_types::keyed_entity);
-            BOOST_REQUIRE(ae.name().meta_type() == mt);
             BOOST_REQUIRE(ae.properties().size() == 1);
             BOOST_REQUIRE(!ae.is_versioned());
             BOOST_REQUIRE(ae.identity().size() == 1);
@@ -165,8 +159,6 @@ BOOST_AUTO_TEST_CASE(unversioned_keyed_object_has_unversioned_key_injected) {
             BOOST_LOG_SEV(lg, debug) << "found object: " << qn;
             using dogen::sml::keyed_entity;
             const auto& ae(dynamic_cast<const keyed_entity&>(*pair.second));
-            const auto mt(dogen::sml::meta_types::keyed_entity);
-            BOOST_REQUIRE(ae.name().meta_type() == mt);
             BOOST_REQUIRE(!ae.is_versioned());
             BOOST_CHECK(!ae.versioned_key());
             ukqn = ae.unversioned_key();
@@ -183,8 +175,6 @@ BOOST_AUTO_TEST_CASE(unversioned_keyed_object_has_unversioned_key_injected) {
 
     const auto& uk(dynamic_cast<const dogen::sml::value_object&>(*(j->second)));
     BOOST_LOG_SEV(lg, debug) << "Found unversioned key: " << uk;
-    const auto mt(dogen::sml::meta_types::value_object);
-    BOOST_REQUIRE(uk.name().meta_type() == mt);
     BOOST_REQUIRE(!uk.is_versioned());
 }
 
@@ -199,8 +189,6 @@ BOOST_AUTO_TEST_CASE(versioned_keyed_object_has_both_keys_injected) {
         if (is_type_zero(qn)) {
             BOOST_LOG_SEV(lg, debug) << "found object: " << qn;
             auto& ae(dynamic_cast<dogen::sml::abstract_entity&>(*pair.second));
-            const auto mt(dogen::sml::meta_types::keyed_entity);
-            BOOST_REQUIRE(ae.name().meta_type() == mt);
             BOOST_REQUIRE(ae.properties().size() == 1);
             BOOST_REQUIRE(!ae.is_versioned());
             BOOST_REQUIRE(ae.identity().size() == 1);
@@ -221,8 +209,6 @@ BOOST_AUTO_TEST_CASE(versioned_keyed_object_has_both_keys_injected) {
             BOOST_LOG_SEV(lg, debug) << "found object: " << qn;
             using dogen::sml::keyed_entity;
             const auto& ae(dynamic_cast<const keyed_entity&>(*pair.second));
-            const auto mt(dogen::sml::meta_types::keyed_entity);
-            BOOST_REQUIRE(ae.name().meta_type() == mt);
             BOOST_REQUIRE(ae.is_versioned());
 
             BOOST_CHECK(ae.versioned_key());
@@ -243,8 +229,6 @@ BOOST_AUTO_TEST_CASE(versioned_keyed_object_has_both_keys_injected) {
 
     const auto& uk(dynamic_cast<const dogen::sml::value_object&>(*(j->second)));
     BOOST_LOG_SEV(lg, debug) << "Found unversioned key: " << uk;
-    const auto mt(dogen::sml::meta_types::value_object);
-    BOOST_REQUIRE(uk.name().meta_type() == mt);
     BOOST_REQUIRE(!uk.is_versioned());
 
     j = m.objects().find(vkqn);
@@ -252,7 +236,6 @@ BOOST_AUTO_TEST_CASE(versioned_keyed_object_has_both_keys_injected) {
 
     const auto& vk(dynamic_cast<const dogen::sml::value_object&>(*(j->second)));
     BOOST_LOG_SEV(lg, debug) << "Found versioned key: " << vk;
-    BOOST_REQUIRE(vk.name().meta_type() == mt);
     BOOST_REQUIRE(!vk.is_versioned());
 }
 

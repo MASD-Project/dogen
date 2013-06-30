@@ -89,13 +89,6 @@ void merger::check_qname(const std::string& model_name, const qname& key,
         BOOST_THROW_EXCEPTION(merging_error(s.str()));
     }
 
-    if (key.meta_type() != value.meta_type()) {
-        std::ostringstream s;
-        s << "Type has incorrect meta_type: '" << key;
-        BOOST_LOG_SEV(lg, error) << s.str();
-        BOOST_THROW_EXCEPTION(merging_error(s.str()));
-    }
-
     if (key != value) {
         std::ostringstream s;
         s << "Inconsistency between key and value qnames: "

@@ -18,7 +18,6 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/sml/hash/meta_types_hash.hpp"
 #include "dogen/sml/hash/qname_hash.hpp"
 
 namespace {
@@ -50,7 +49,6 @@ std::size_t qname_hasher::hash(const qname&v) {
     combine(seed, hash_std_list_std_string(v.external_module_path()));
     combine(seed, hash_std_list_std_string(v.module_path()));
     combine(seed, v.simple_name());
-    combine(seed, v.meta_type());
 
     return seed;
 }

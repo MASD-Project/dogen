@@ -29,7 +29,6 @@
 #include <boost/serialization/list.hpp>
 #include <boost/serialization/nvp.hpp>
 #include <boost/serialization/string.hpp>
-#include "dogen/sml/serialization/meta_types_ser.hpp"
 #include "dogen/sml/serialization/qname_ser.hpp"
 
 #ifdef __linux__
@@ -48,7 +47,6 @@ void save(Archive& ar,
     ar << make_nvp("external_module_path", v.external_module_path_);
     ar << make_nvp("module_path", v.module_path_);
     ar << make_nvp("simple_name", v.simple_name_);
-    ar << make_nvp("meta_type", v.meta_type_);
 }
 
 template<typename Archive>
@@ -59,7 +57,6 @@ void load(Archive& ar,
     ar >> make_nvp("external_module_path", v.external_module_path_);
     ar >> make_nvp("module_path", v.module_path_);
     ar >> make_nvp("simple_name", v.simple_name_);
-    ar >> make_nvp("meta_type", v.meta_type_);
 }
 
 } }

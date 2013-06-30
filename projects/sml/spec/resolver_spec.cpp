@@ -71,11 +71,6 @@ bool is_type_two(const dogen::sml::qname& qn) {
     return mock_model_factory::type_name(2) == qn.simple_name();
 }
 
-bool is_value_object(const dogen::sml::qname& qn) {
-    using dogen::sml::meta_types;
-    return qn.meta_type() == meta_types::value_object;
-}
-
 }
 
 using dogen::utility::test::contains_checker;
@@ -114,7 +109,7 @@ BOOST_AUTO_TEST_CASE(object_with_property_type_in_the_same_model_resolves_succes
             BOOST_LOG_SEV(lg, debug) << "property: " << prop;
             BOOST_CHECK(is_type_one(prop.type().type()));
             BOOST_CHECK(is_model_zero(prop.type().type()));
-            BOOST_CHECK(is_value_object(prop.type().type()));
+            dynamic_cast<const dogen::sml::value_object&>(o);
         }
     }
     BOOST_CHECK(found);
@@ -149,7 +144,7 @@ BOOST_AUTO_TEST_CASE(object_with_property_type_in_different_model_results_in_suc
 
             BOOST_CHECK(is_type_one(prop.type().type()));
             BOOST_CHECK(is_model_one(prop.type().type()));
-            BOOST_CHECK(is_value_object(prop.type().type()));
+            dynamic_cast<const dogen::sml::value_object&>(o);
         }
     }
     BOOST_CHECK(found);
@@ -189,7 +184,7 @@ BOOST_AUTO_TEST_CASE(object_with_parent_in_the_same_model_merges_successfully) {
             BOOST_LOG_SEV(lg, debug) << "parent: " << *pn;
             BOOST_CHECK(is_type_one(*pn));
             BOOST_CHECK(is_model_zero(*pn));
-            BOOST_CHECK(is_value_object(*pn));
+            dynamic_cast<const dogen::sml::value_object&>(o);
         }
     }
     BOOST_CHECK(found);
@@ -221,7 +216,7 @@ BOOST_AUTO_TEST_CASE(object_with_parent_in_different_models_merges_successfully)
             BOOST_LOG_SEV(lg, debug) << "parent: " << *pn;
             BOOST_CHECK(is_type_one(*pn));
             BOOST_CHECK(is_model_one(*pn));
-            BOOST_CHECK(is_value_object(*pn));
+            dynamic_cast<const dogen::sml::value_object&>(o);
         }
     }
     BOOST_CHECK(found);
@@ -254,7 +249,7 @@ BOOST_AUTO_TEST_CASE(object_with_third_degree_parent_in_same_model_merges_succes
             BOOST_LOG_SEV(lg, debug) << "parent: " << *pn;
             BOOST_CHECK(is_type_one(*pn));
             BOOST_CHECK(is_model_zero(*pn));
-            BOOST_CHECK(is_value_object(*pn));
+            dynamic_cast<const dogen::sml::value_object&>(o);
         } else if (is_type_one(qn)) {
             BOOST_LOG_SEV(lg, debug) << "found object: " << qn;
             found_two = true;
@@ -265,7 +260,7 @@ BOOST_AUTO_TEST_CASE(object_with_third_degree_parent_in_same_model_merges_succes
             BOOST_LOG_SEV(lg, debug) << "parent: " << *pn;
             BOOST_CHECK(is_type_two(*pn));
             BOOST_CHECK(is_model_zero(*pn));
-            BOOST_CHECK(is_value_object(*pn));
+            dynamic_cast<const dogen::sml::value_object&>(o);
         }
     }
     BOOST_CHECK(found_one);
@@ -314,7 +309,7 @@ BOOST_AUTO_TEST_CASE(object_with_third_degree_parent_in_different_models_merges_
             BOOST_LOG_SEV(lg, debug) << "parent: " << *pn;
             BOOST_CHECK(is_type_one(*pn));
             BOOST_CHECK(is_model_one(*pn));
-            BOOST_CHECK(is_value_object(*pn));
+            dynamic_cast<const dogen::sml::value_object&>(o);
         }
     }
     BOOST_CHECK(found);

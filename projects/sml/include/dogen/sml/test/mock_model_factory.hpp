@@ -37,6 +37,31 @@ namespace test {
  */
 class mock_model_factory {
 public:
+    enum class object_types {
+        invalid = 0,
+        value_object,
+        service,
+        repository,
+        factory,
+        entity,
+        keyed_entity,
+        enumeration,
+        exception
+    };
+
+    enum class property_types {
+        invalid = 0,
+        unsigned_int,
+        boolean,
+        entity,
+        value_object,
+        boost_variant,
+        std_string,
+        std_pair,
+        boost_shared_ptr
+    };
+
+public:
     /**
      * @brief Returns the model name derived from n.
      */
@@ -58,14 +83,14 @@ public:
      * single type with a name also deriving from n.
      */
     static model build_single_type_model(const unsigned int n = 0,
-        const meta_types mt = meta_types::value_object);
+        const object_types ot = object_types::value_object);
 
     /**
      * @brief Builds a model with a name derived from n, containing a
      * single type with a name also deriving from n, inside mod_n module.
      */
     static model build_single_type_model_in_module(const unsigned int n = 0,
-        const meta_types mt = meta_types::value_object,
+        const object_types ot = object_types::value_object,
         const unsigned int mod_n = 0);
 
     /**
@@ -74,31 +99,8 @@ public:
      */
     static model build_multi_type_model(const unsigned int n,
         const unsigned int type_n,
-        const meta_types mt = meta_types::value_object,
+        const object_types ot = object_types::value_object,
         const unsigned int mod_n = 0);
-
-public:
-    enum class object_types : unsigned int {
-        invalid = 0,
-        value_object,
-        service,
-        repository,
-        factory,
-        entity,
-        keyed_entity
-    };
-
-    enum class property_types : unsigned int {
-        invalid = 0,
-        unsigned_int,
-        boolean,
-        entity,
-        value_object,
-        boost_variant,
-        std_string,
-        std_pair,
-        boost_shared_ptr
-    };
 
 public:
     /**

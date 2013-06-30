@@ -23,20 +23,15 @@
 namespace dogen {
 namespace sml {
 
-qname::qname()
-    : meta_type_(static_cast<dogen::sml::meta_types>(0)) { }
-
 qname::qname(
     const std::string& model_name,
     const std::list<std::string>& external_module_path,
     const std::list<std::string>& module_path,
-    const std::string& simple_name,
-    const dogen::sml::meta_types& meta_type)
+    const std::string& simple_name)
     : model_name_(model_name),
       external_module_path_(external_module_path),
       module_path_(module_path),
-      simple_name_(simple_name),
-      meta_type_(meta_type) { }
+      simple_name_(simple_name) { }
 
 void qname::swap(qname& other) noexcept {
     using std::swap;
@@ -44,15 +39,13 @@ void qname::swap(qname& other) noexcept {
     swap(external_module_path_, other.external_module_path_);
     swap(module_path_, other.module_path_);
     swap(simple_name_, other.simple_name_);
-    swap(meta_type_, other.meta_type_);
 }
 
 bool qname::operator==(const qname& rhs) const {
     return model_name_ == rhs.model_name_ &&
         external_module_path_ == rhs.external_module_path_ &&
         module_path_ == rhs.module_path_ &&
-        simple_name_ == rhs.simple_name_ &&
-        meta_type_ == rhs.meta_type_;
+        simple_name_ == rhs.simple_name_;
 }
 
 qname& qname::operator=(qname other) {
@@ -123,14 +116,6 @@ void qname::simple_name(const std::string& v) {
 
 void qname::simple_name(const std::string&& v) {
     simple_name_ = std::move(v);
-}
-
-dogen::sml::meta_types qname::meta_type() const {
-    return meta_type_;
-}
-
-void qname::meta_type(const dogen::sml::meta_types& v) {
-    meta_type_ = v;
 }
 
 } }

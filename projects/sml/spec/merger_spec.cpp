@@ -181,20 +181,4 @@ BOOST_AUTO_TEST_CASE(merging_more_than_once_throws) {
     BOOST_CHECK_EXCEPTION(mg.merge(), merging_error, c);
 }
 
-BOOST_AUTO_TEST_CASE(object_incorrect_meta_type_throws) {
-    SETUP_TEST_LOG("object_incorrect_meta_type_throws");
-
-    auto m(mock_model_factory::build_single_type_model());
-    BOOST_CHECK(m.objects().size() == 1);
-
-    auto& p(*m.objects().begin()->second);
-    p.name().meta_type(dogen::sml::meta_types::primitive);
-
-    dogen::sml::merger mg;
-    mg.add_target(m);
-
-    contains_checker<merging_error> c(incorrect_meta_type);
-    BOOST_CHECK_EXCEPTION(mg.merge(), merging_error, c);
-}
-
 BOOST_AUTO_TEST_SUITE_END()

@@ -20,7 +20,6 @@
  */
 #include <boost/algorithm/string.hpp>
 #include <ostream>
-#include "dogen/sml/io/meta_types_io.hpp"
 #include "dogen/sml/io/qname_io.hpp"
 
 
@@ -54,8 +53,7 @@ std::ostream& operator<<(std::ostream& s, const qname& v) {
       << "\"model_name\": " << "\"" << tidy_up_string(v.model_name()) << "\"" << ", "
       << "\"external_module_path\": " << v.external_module_path() << ", "
       << "\"module_path\": " << v.module_path() << ", "
-      << "\"simple_name\": " << "\"" << tidy_up_string(v.simple_name()) << "\"" << ", "
-      << "\"meta_type\": " << v.meta_type()
+      << "\"simple_name\": " << "\"" << tidy_up_string(v.simple_name()) << "\""
       << " }";
     return(s);
 }

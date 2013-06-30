@@ -48,7 +48,6 @@ namespace sml {
 primitive primitive_model_factory::create_primitive(const std::string& name) {
     qname q;
     q.simple_name(name);
-    q.meta_type(meta_types::primitive);
 
     primitive r;
     r.name(q);

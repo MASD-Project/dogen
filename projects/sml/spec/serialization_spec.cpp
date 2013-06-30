@@ -48,7 +48,6 @@ BOOST_AUTO_TEST_CASE(validate_serialization) {
     SETUP_TEST_LOG("validate_serialization");
 
     rountrip_type<generation_types_generator>();
-    rountrip_type<meta_types_generator>();
     rountrip_type<nested_qname_generator>();
     rountrip_type<property_generator>();
     rountrip_type<qname_generator>();

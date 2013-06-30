@@ -282,6 +282,13 @@ continue with this logic.
 We already have most of the qname properties in the model anyway, so
 might as well just use a qname.
 
+*** IMPLEMENTATION Remove meta types enumeration                      :spike:
+    CLOCK: [2013-06-30 Sun 14:00]--[2013-06-30 Sun 14:18] =>  0:18
+    CLOCK: [2013-06-30 Sun 13:28]--[2013-06-30 Sun 14:00] =>  0:32
+
+This is largely historical and we're not even sure why we have it, so
+try removing it.
+
 *** IMPLEMENTATION Update SML to make use of concepts                 :story:
 
 In S28 as part of "Break down SML into concepts at the design level"
