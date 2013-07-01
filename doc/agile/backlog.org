@@ -11,6 +11,15 @@ This file contains all stories that haven't been assigned to a sprint.
 
 Stories that we intend to look at, at some point.
 
+*** Add tests for SML workflow
+
+We don't seem to have any. A few come to mind:
+
+- model with no generatable types returns false
+- model with generatable types returns true
+- multiple models get merged
+- system models get injected
+
 *** Rename nested qname to composite qname                  :story:
 
 New understanding:
