@@ -424,7 +424,11 @@
 								<default_value></default_value>
 							</item>
 						</properties>
-						<parent_name class_id="29" tracking_level="0" version="0">
+						<operations class_id="29" tracking_level="0" version="0">
+							<count>0</count>
+							<item_version>0</item_version>
+						</operations>
+						<parent_name class_id="30" tracking_level="0" version="0">
 							<initialized>0</initialized>
 						</parent_name>
 						<original_parent_name>
@@ -581,6 +585,10 @@
 								<default_value></default_value>
 							</item>
 						</properties>
+						<operations>
+							<count>0</count>
+							<item_version>0</item_version>
+						</operations>
 						<parent_name>
 							<initialized>0</initialized>
 						</parent_name>
@@ -855,6 +863,10 @@
 								<default_value></default_value>
 							</item>
 						</properties>
+						<operations>
+							<count>0</count>
+							<item_version>0</item_version>
+						</operations>
 						<parent_name>
 							<initialized>0</initialized>
 						</parent_name>
@@ -949,6 +961,10 @@
 								<default_value></default_value>
 							</item>
 						</properties>
+						<operations>
+							<count>0</count>
+							<item_version>0</item_version>
+						</operations>
 						<parent_name>
 							<initialized>1</initialized>
 							<item_version>0</item_version>
@@ -1069,6 +1085,10 @@
 								<default_value></default_value>
 							</item>
 						</properties>
+						<operations>
+							<count>0</count>
+							<item_version>0</item_version>
+						</operations>
 						<parent_name>
 							<initialized>0</initialized>
 						</parent_name>
@@ -1224,6 +1244,10 @@
 								<default_value></default_value>
 							</item>
 						</properties>
+						<operations>
+							<count>0</count>
+							<item_version>0</item_version>
+						</operations>
 						<parent_name>
 							<initialized>0</initialized>
 						</parent_name>
@@ -1406,6 +1430,10 @@
 								<default_value></default_value>
 							</item>
 						</properties>
+						<operations>
+							<count>0</count>
+							<item_version>0</item_version>
+						</operations>
 						<parent_name>
 							<initialized>0</initialized>
 						</parent_name>
@@ -1500,6 +1528,10 @@
 								<default_value></default_value>
 							</item>
 						</properties>
+						<operations>
+							<count>0</count>
+							<item_version>0</item_version>
+						</operations>
 						<parent_name>
 							<initialized>0</initialized>
 						</parent_name>
@@ -1954,6 +1986,10 @@
 								<default_value></default_value>
 							</item>
 						</properties>
+						<operations>
+							<count>0</count>
+							<item_version>0</item_version>
+						</operations>
 						<parent_name>
 							<initialized>0</initialized>
 						</parent_name>

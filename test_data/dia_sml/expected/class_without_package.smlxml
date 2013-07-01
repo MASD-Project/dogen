@@ -123,13 +123,17 @@
 								<default_value></default_value>
 							</item>
 						</properties>
-						<parent_name class_id="26" tracking_level="0" version="0">
+						<operations class_id="26" tracking_level="0" version="0">
+							<count>0</count>
+							<item_version>0</item_version>
+						</operations>
+						<parent_name class_id="27" tracking_level="0" version="0">
 							<initialized>0</initialized>
 						</parent_name>
 						<original_parent_name>
 							<initialized>0</initialized>
 						</original_parent_name>
-						<leaves class_id="27" tracking_level="0" version="0">
+						<leaves class_id="28" tracking_level="0" version="0">
 							<count>0</count>
 							<item_version>0</item_version>
 						</leaves>

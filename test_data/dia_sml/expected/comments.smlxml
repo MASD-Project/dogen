@@ -198,7 +198,11 @@ third line with &quot;quote&quot;
 							<count>0</count>
 							<item_version>0</item_version>
 						</properties>
-						<parent_name class_id="27" tracking_level="0" version="0">
+						<operations class_id="27" tracking_level="0" version="0">
+							<count>0</count>
+							<item_version>0</item_version>
+						</operations>
+						<parent_name class_id="28" tracking_level="0" version="0">
 							<initialized>0</initialized>
 						</parent_name>
 						<original_parent_name>
@@ -264,7 +268,7 @@ third line with &quot;quote&quot;
 						<properties>
 							<count>3</count>
 							<item_version>0</item_version>
-							<item class_id="28" tracking_level="0" version="0">
+							<item class_id="29" tracking_level="0" version="0">
 								<documentation>another brief comment
 </documentation>
 								<implementation_specific_parameters>
@@ -272,7 +276,7 @@ third line with &quot;quote&quot;
 									<item_version>0</item_version>
 								</implementation_specific_parameters>
 								<name>prop_0</name>
-								<type class_id="29" tracking_level="0" version="0">
+								<type class_id="30" tracking_level="0" version="0">
 									<type>
 										<model_name></model_name>
 										<external_module_path>
@@ -285,7 +289,7 @@ third line with &quot;quote&quot;
 										</module_path>
 										<simple_name>int</simple_name>
 									</type>
-									<children class_id="30" tracking_level="0" version="0">
+									<children class_id="31" tracking_level="0" version="0">
 										<count>0</count>
 										<item_version>0</item_version>
 									</children>
@@ -353,6 +357,10 @@ a second line
 								<default_value></default_value>
 							</item>
 						</properties>
+						<operations>
+							<count>0</count>
+							<item_version>0</item_version>
+						</operations>
 						<parent_name>
 							<initialized>0</initialized>
 						</parent_name>

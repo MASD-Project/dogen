@@ -445,7 +445,11 @@ in the context of inheritance.
 								<default_value></default_value>
 							</item>
 						</properties>
-						<parent_name class_id="30" tracking_level="0" version="0">
+						<operations class_id="30" tracking_level="0" version="0">
+							<count>0</count>
+							<item_version>0</item_version>
+						</operations>
+						<parent_name class_id="31" tracking_level="0" version="0">
 							<initialized>0</initialized>
 						</parent_name>
 						<original_parent_name>
@@ -525,6 +529,10 @@ in the context of inheritance.
 							<count>0</count>
 							<item_version>0</item_version>
 						</properties>
+						<operations>
+							<count>0</count>
+							<item_version>0</item_version>
+						</operations>
 						<parent_name>
 							<initialized>1</initialized>
 							<item_version>0</item_version>
@@ -647,6 +655,10 @@ in the context of inheritance.
 								<default_value></default_value>
 							</item>
 						</properties>
+						<operations>
+							<count>0</count>
+							<item_version>0</item_version>
+						</operations>
 						<parent_name>
 							<initialized>1</initialized>
 							<item_version>0</item_version>
@@ -767,6 +779,10 @@ in the context of inheritance.
 								<default_value></default_value>
 							</item>
 						</properties>
+						<operations>
+							<count>0</count>
+							<item_version>0</item_version>
+						</operations>
 						<parent_name>
 							<initialized>1</initialized>
 							<item_version>0</item_version>
@@ -911,6 +927,10 @@ in the context of inheritance.
 								<default_value></default_value>
 							</item>
 						</properties>
+						<operations>
+							<count>0</count>
+							<item_version>0</item_version>
+						</operations>
 						<parent_name>
 							<initialized>1</initialized>
 							<item_version>0</item_version>
@@ -1033,6 +1053,10 @@ in the context of inheritance.
 								<default_value></default_value>
 							</item>
 						</properties>
+						<operations>
+							<count>0</count>
+							<item_version>0</item_version>
+						</operations>
 						<parent_name>
 							<initialized>0</initialized>
 						</parent_name>
@@ -1112,6 +1136,10 @@ in the context of inheritance.
 							<count>0</count>
 							<item_version>0</item_version>
 						</properties>
+						<operations>
+							<count>0</count>
+							<item_version>0</item_version>
+						</operations>
 						<parent_name>
 							<initialized>1</initialized>
 							<item_version>0</item_version>
@@ -1204,6 +1232,10 @@ in the context of inheritance.
 							<count>0</count>
 							<item_version>0</item_version>
 						</properties>
+						<operations>
+							<count>0</count>
+							<item_version>0</item_version>
+						</operations>
 						<parent_name>
 							<initialized>1</initialized>
 							<item_version>0</item_version>
@@ -1324,6 +1356,10 @@ in the context of inheritance.
 								<default_value></default_value>
 							</item>
 						</properties>
+						<operations>
+							<count>0</count>
+							<item_version>0</item_version>
+						</operations>
 						<parent_name>
 							<initialized>1</initialized>
 							<item_version>0</item_version>
@@ -1446,6 +1482,10 @@ in the context of inheritance.
 								<default_value></default_value>
 							</item>
 						</properties>
+						<operations>
+							<count>0</count>
+							<item_version>0</item_version>
+						</operations>
 						<parent_name>
 							<initialized>1</initialized>
 							<item_version>0</item_version>
@@ -1568,6 +1608,10 @@ in the context of inheritance.
 								<default_value></default_value>
 							</item>
 						</properties>
+						<operations>
+							<count>0</count>
+							<item_version>0</item_version>
+						</operations>
 						<parent_name>
 							<initialized>0</initialized>
 						</parent_name>
@@ -1670,6 +1714,10 @@ in the context of inheritance.
 							<count>0</count>
 							<item_version>0</item_version>
 						</properties>
+						<operations>
+							<count>0</count>
+							<item_version>0</item_version>
+						</operations>
 						<parent_name>
 							<initialized>1</initialized>
 							<item_version>0</item_version>
@@ -1790,6 +1838,10 @@ in the context of inheritance.
 								<default_value></default_value>
 							</item>
 						</properties>
+						<operations>
+							<count>0</count>
+							<item_version>0</item_version>
+						</operations>
 						<parent_name>
 							<initialized>1</initialized>
 							<item_version>0</item_version>
@@ -1913,6 +1965,10 @@ in the context of inheritance.
 								<default_value></default_value>
 							</item>
 						</properties>
+						<operations>
+							<count>0</count>
+							<item_version>0</item_version>
+						</operations>
 						<parent_name>
 							<initialized>1</initialized>
 							<item_version>0</item_version>
@@ -2033,6 +2089,10 @@ in the context of inheritance.
 								<default_value></default_value>
 							</item>
 						</properties>
+						<operations>
+							<count>0</count>
+							<item_version>0</item_version>
+						</operations>
 						<parent_name>
 							<initialized>0</initialized>
 						</parent_name>
@@ -2112,6 +2172,10 @@ in the context of inheritance.
 							<count>0</count>
 							<item_version>0</item_version>
 						</properties>
+						<operations>
+							<count>0</count>
+							<item_version>0</item_version>
+						</operations>
 						<parent_name>
 							<initialized>0</initialized>
 						</parent_name>
@@ -2178,6 +2242,10 @@ in the context of inheritance.
 							<count>0</count>
 							<item_version>0</item_version>
 						</properties>
+						<operations>
+							<count>0</count>
+							<item_version>0</item_version>
+						</operations>
 						<parent_name>
 							<initialized>0</initialized>
 						</parent_name>
@@ -2244,6 +2312,10 @@ in the context of inheritance.
 							<count>0</count>
 							<item_version>0</item_version>
 						</properties>
+						<operations>
+							<count>0</count>
+							<item_version>0</item_version>
+						</operations>
 						<parent_name>
 							<initialized>0</initialized>
 						</parent_name>
@@ -2334,6 +2406,10 @@ in the context of inheritance.
 							<count>0</count>
 							<item_version>0</item_version>
 						</properties>
+						<operations>
+							<count>0</count>
+							<item_version>0</item_version>
+						</operations>
 						<parent_name>
 							<initialized>0</initialized>
 						</parent_name>
@@ -2424,6 +2500,10 @@ in the context of inheritance.
 							<count>0</count>
 							<item_version>0</item_version>
 						</properties>
+						<operations>
+							<count>0</count>
+							<item_version>0</item_version>
+						</operations>
 						<parent_name>
 							<initialized>1</initialized>
 							<item_version>0</item_version>
@@ -2556,6 +2636,10 @@ in the context of inheritance.
 								<default_value></default_value>
 							</item>
 						</properties>
+						<operations>
+							<count>0</count>
+							<item_version>0</item_version>
+						</operations>
 						<parent_name>
 							<initialized>1</initialized>
 							<item_version>0</item_version>
@@ -2678,6 +2762,10 @@ in the context of inheritance.
 								<default_value></default_value>
 							</item>
 						</properties>
+						<operations>
+							<count>0</count>
+							<item_version>0</item_version>
+						</operations>
 						<parent_name>
 							<initialized>1</initialized>
 							<item_version>0</item_version>
@@ -2803,6 +2891,10 @@ in the context of inheritance.
 								<default_value></default_value>
 							</item>
 						</properties>
+						<operations>
+							<count>0</count>
+							<item_version>0</item_version>
+						</operations>
 						<parent_name>
 							<initialized>0</initialized>
 						</parent_name>
