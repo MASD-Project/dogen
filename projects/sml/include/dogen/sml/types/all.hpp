@@ -36,6 +36,7 @@
 #include "dogen/sml/types/module.hpp"
 #include "dogen/sml/types/nested_qname.hpp"
 #include "dogen/sml/types/operation.hpp"
+#include "dogen/sml/types/origin_types.hpp"
 #include "dogen/sml/types/primitive.hpp"
 #include "dogen/sml/types/primitive_model_factory.hpp"
 #include "dogen/sml/types/property.hpp"

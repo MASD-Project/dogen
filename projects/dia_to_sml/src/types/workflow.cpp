@@ -54,7 +54,7 @@ void workflow::initialise_context_activity(const std::string& model_name,
     context_.model().name().external_module_path(epp);
     context_.model().name().model_name(model_name);
     context_.is_target(is_target);
-    context_.model().is_system(false);
+    context_.model().origin_type(sml::origin_types::user);
 }
 
 graph_type workflow::build_graph_activity(const dia::diagram& diagram) {

@@ -23,6 +23,7 @@
 #include "dogen/sml/io/concept_io.hpp"
 #include "dogen/sml/io/generation_types_io.hpp"
 #include "dogen/sml/io/operation_io.hpp"
+#include "dogen/sml/io/origin_types_io.hpp"
 #include "dogen/sml/io/property_io.hpp"
 #include "dogen/sml/io/qname_io.hpp"
 
@@ -114,6 +115,7 @@ std::ostream& operator<<(std::ostream& s, const concept& v) {
       << "\"implementation_specific_parameters\": " << v.implementation_specific_parameters() << ", "
       << "\"name\": " << v.name() << ", "
       << "\"generation_type\": " << v.generation_type() << ", "
+      << "\"origin_type\": " << v.origin_type() << ", "
       << "\"operations\": " << v.operations() << ", "
       << "\"refines\": " << v.refines()
       << " }";

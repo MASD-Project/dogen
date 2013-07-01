@@ -35,6 +35,7 @@
 #include "dogen/sml/serialization/abstract_object_fwd_ser.hpp"
 #include "dogen/sml/types/generation_types.hpp"
 #include "dogen/sml/types/operation.hpp"
+#include "dogen/sml/types/origin_types.hpp"
 #include "dogen/sml/types/property.hpp"
 #include "dogen/sml/types/qname.hpp"
 #include "dogen/sml/types/type.hpp"
@@ -64,6 +65,7 @@ public:
         const std::vector<std::pair<std::string, std::string> >& implementation_specific_parameters,
         const dogen::sml::qname& name,
         const dogen::sml::generation_types& generation_type,
+        const dogen::sml::origin_types& origin_type,
         const std::list<dogen::sml::property>& properties,
         const std::list<dogen::sml::operation>& operations,
         const boost::optional<dogen::sml::qname>& parent_name,

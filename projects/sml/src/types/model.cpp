@@ -35,14 +35,14 @@ namespace sml {
 
 model::model()
     : generation_type_(static_cast<dogen::sml::generation_types>(0)),
-      is_system_(static_cast<bool>(0)) { }
+      origin_type_(static_cast<dogen::sml::origin_types>(0)) { }
 
 model::model(
     const std::string& documentation,
     const std::vector<std::pair<std::string, std::string> >& implementation_specific_parameters,
     const dogen::sml::qname& name,
     const dogen::sml::generation_types& generation_type,
-    const bool is_system,
+    const dogen::sml::origin_types& origin_type,
     const std::unordered_set<dogen::sml::qname>& references,
     const std::unordered_set<dogen::sml::qname>& leaves,
     const std::unordered_map<dogen::sml::qname, dogen::sml::module>& modules,
@@ -54,7 +54,7 @@ model::model(
       implementation_specific_parameters_(implementation_specific_parameters),
       name_(name),
       generation_type_(generation_type),
-      is_system_(is_system),
+      origin_type_(origin_type),
       references_(references),
       leaves_(leaves),
       modules_(modules),
@@ -69,7 +69,7 @@ void model::swap(model& other) noexcept {
     swap(implementation_specific_parameters_, other.implementation_specific_parameters_);
     swap(name_, other.name_);
     swap(generation_type_, other.generation_type_);
-    swap(is_system_, other.is_system_);
+    swap(origin_type_, other.origin_type_);
     swap(references_, other.references_);
     swap(leaves_, other.leaves_);
     swap(modules_, other.modules_);
@@ -84,7 +84,7 @@ bool model::operator==(const model& rhs) const {
         implementation_specific_parameters_ == rhs.implementation_specific_parameters_ &&
         name_ == rhs.name_ &&
         generation_type_ == rhs.generation_type_ &&
-        is_system_ == rhs.is_system_ &&
+        origin_type_ == rhs.origin_type_ &&
         references_ == rhs.references_ &&
         leaves_ == rhs.leaves_ &&
         modules_ == rhs.modules_ &&
@@ -156,12 +156,12 @@ void model::generation_type(const dogen::sml::generation_types& v) {
     generation_type_ = v;
 }
 
-bool model::is_system() const {
-    return is_system_;
+dogen::sml::origin_types model::origin_type() const {
+    return origin_type_;
 }
 
-void model::is_system(const bool v) {
-    is_system_ = v;
+void model::origin_type(const dogen::sml::origin_types& v) {
+    origin_type_ = v;
 }
 
 const std::unordered_set<dogen::sml::qname>& model::references() const {

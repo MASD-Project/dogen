@@ -24,6 +24,7 @@
 #include "dogen/sml/hash/generation_types_hash.hpp"
 #include "dogen/sml/hash/model_hash.hpp"
 #include "dogen/sml/hash/module_hash.hpp"
+#include "dogen/sml/hash/origin_types_hash.hpp"
 #include "dogen/sml/hash/primitive_hash.hpp"
 #include "dogen/sml/hash/qname_hash.hpp"
 
@@ -123,7 +124,7 @@ std::size_t model_hasher::hash(const model&v) {
     combine(seed, hash_std_vector_std_pair_std_string_std_string_(v.implementation_specific_parameters()));
     combine(seed, v.name());
     combine(seed, v.generation_type());
-    combine(seed, v.is_system());
+    combine(seed, v.origin_type());
     combine(seed, hash_std_unordered_set_dogen_sml_qname(v.references()));
     combine(seed, hash_std_unordered_set_dogen_sml_qname(v.leaves()));
     combine(seed, hash_std_unordered_map_dogen_sml_qname_dogen_sml_module(v.modules()));

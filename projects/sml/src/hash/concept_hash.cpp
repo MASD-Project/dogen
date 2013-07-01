@@ -21,6 +21,7 @@
 #include "dogen/sml/hash/concept_hash.hpp"
 #include "dogen/sml/hash/generation_types_hash.hpp"
 #include "dogen/sml/hash/operation_hash.hpp"
+#include "dogen/sml/hash/origin_types_hash.hpp"
 #include "dogen/sml/hash/property_hash.hpp"
 #include "dogen/sml/hash/qname_hash.hpp"
 
@@ -86,6 +87,7 @@ std::size_t concept_hasher::hash(const concept&v) {
     combine(seed, hash_std_vector_std_pair_std_string_std_string_(v.implementation_specific_parameters()));
     combine(seed, v.name());
     combine(seed, v.generation_type());
+    combine(seed, v.origin_type());
     combine(seed, hash_std_list_dogen_sml_operation(v.operations()));
     combine(seed, hash_std_list_dogen_sml_qname(v.refines()));
 

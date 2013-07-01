@@ -52,6 +52,7 @@ primitive primitive_model_factory::create_primitive(const std::string& name) {
     primitive r;
     r.name(q);
     r.generation_type(generation_types::no_generation);
+    r.origin_type(origin_types::system);
     return r;
 }
 
@@ -61,7 +62,7 @@ model primitive_model_factory::create() {
 
     model r;
     r.name(qn);
-    r.is_system(true);
+    r.origin_type(origin_types::system);
 
     const auto lambda([&](const std::string& name){
             const auto p(create_primitive(name));

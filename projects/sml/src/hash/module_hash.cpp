@@ -20,6 +20,7 @@
  */
 #include "dogen/sml/hash/generation_types_hash.hpp"
 #include "dogen/sml/hash/module_hash.hpp"
+#include "dogen/sml/hash/origin_types_hash.hpp"
 #include "dogen/sml/hash/qname_hash.hpp"
 
 namespace {
@@ -67,6 +68,7 @@ std::size_t module_hasher::hash(const module&v) {
     combine(seed, hash_std_vector_std_pair_std_string_std_string_(v.implementation_specific_parameters()));
     combine(seed, v.name());
     combine(seed, v.generation_type());
+    combine(seed, v.origin_type());
     combine(seed, hash_std_list_dogen_sml_qname(v.members()));
 
     return seed;

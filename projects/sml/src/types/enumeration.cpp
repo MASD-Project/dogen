@@ -46,12 +46,14 @@ enumeration::enumeration(
     const std::vector<std::pair<std::string, std::string> >& implementation_specific_parameters,
     const dogen::sml::qname& name,
     const dogen::sml::generation_types& generation_type,
+    const dogen::sml::origin_types& origin_type,
     const dogen::sml::qname& underlying_type,
     const std::vector<dogen::sml::enumerator>& enumerators)
     : dogen::sml::type(documentation,
       implementation_specific_parameters,
       name,
-      generation_type),
+      generation_type,
+      origin_type),
       underlying_type_(underlying_type),
       enumerators_(enumerators) { }
 

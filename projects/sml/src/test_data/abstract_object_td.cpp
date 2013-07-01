@@ -25,6 +25,7 @@
 #include "dogen/sml/test_data/generation_types_td.hpp"
 #include "dogen/sml/test_data/keyed_entity_td.hpp"
 #include "dogen/sml/test_data/operation_td.hpp"
+#include "dogen/sml/test_data/origin_types_td.hpp"
 #include "dogen/sml/test_data/property_td.hpp"
 #include "dogen/sml/test_data/qname_td.hpp"
 #include "dogen/sml/test_data/repository_td.hpp"

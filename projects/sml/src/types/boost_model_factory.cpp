@@ -62,6 +62,7 @@ boost_model_factory::create_value_object(const std::string& name,
     std::unique_ptr<value_object> r(new value_object());
     r->name(q);
     r->generation_type(generation_types::no_generation);
+    r->origin_type(origin_types::system);
     r->type(t);
     if (t == value_object_types::sequence_container)
         r->number_of_type_arguments(1);
@@ -80,6 +81,7 @@ module boost_model_factory::create_module(const std::string& name,
 
     module r;
     r.name(qn);
+    r.origin_type(origin_types::system);
 
     return r;
 }
@@ -91,7 +93,7 @@ model boost_model_factory::create() {
 
     model r;
     r.name(qn);
-    r.is_system(true);
+    r.origin_type(origin_types::system);
 
     const auto pi([&](const std::string& name,
             const std::list<std::string>& module_path, value_object_types vot) {

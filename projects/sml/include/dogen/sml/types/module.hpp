@@ -32,6 +32,7 @@
 #include <vector>
 #include "dogen/sml/serialization/module_fwd_ser.hpp"
 #include "dogen/sml/types/generation_types.hpp"
+#include "dogen/sml/types/origin_types.hpp"
 #include "dogen/sml/types/qname.hpp"
 
 namespace dogen {
@@ -57,6 +58,7 @@ public:
         const std::vector<std::pair<std::string, std::string> >& implementation_specific_parameters,
         const dogen::sml::qname& name,
         const dogen::sml::generation_types& generation_type,
+        const dogen::sml::origin_types& origin_type,
         const std::list<dogen::sml::qname>& members);
 
 private:
@@ -111,6 +113,14 @@ public:
     /**@}*/
 
     /**
+     * @brief How was this model element originated.
+     */
+    /**@{*/
+    dogen::sml::origin_types origin_type() const;
+    void origin_type(const dogen::sml::origin_types& v);
+    /**@}*/
+
+    /**
      * @brief All the model elements contained in this module.
      */
     /**@{*/
@@ -135,6 +145,7 @@ private:
     std::vector<std::pair<std::string, std::string> > implementation_specific_parameters_;
     dogen::sml::qname name_;
     dogen::sml::generation_types generation_type_;
+    dogen::sml::origin_types origin_type_;
     std::list<dogen::sml::qname> members_;
 };
 

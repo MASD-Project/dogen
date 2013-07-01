@@ -34,6 +34,8 @@ const std::string std_model("std");
 
 }
 
+using dogen::sml::origin_types;
+
 BOOST_AUTO_TEST_SUITE(factories)
 
 BOOST_AUTO_TEST_CASE(producing_boost_model_generates_expected_types) {
@@ -42,7 +44,7 @@ BOOST_AUTO_TEST_CASE(producing_boost_model_generates_expected_types) {
     const auto m(dogen::sml::boost_model_factory::create());
     BOOST_LOG_SEV(lg, debug) << m;
     BOOST_CHECK(m.name().model_name() == boost_model);
-    BOOST_CHECK(m.is_system() == true);
+    BOOST_CHECK(m.origin_type() == origin_types::system);
 
     const auto& objects(m.objects());
     BOOST_CHECK(!objects.empty());
@@ -84,7 +86,7 @@ BOOST_AUTO_TEST_CASE(producing_std_model_generates_expected_types) {
     const auto m(dogen::sml::std_model_factory::create());
     BOOST_LOG_SEV(lg, debug) << m;
     BOOST_CHECK(m.name().model_name() == std_model);
-    BOOST_CHECK(m.is_system() == true);
+    BOOST_CHECK(m.origin_type() == origin_types::system);
 
     const auto& objects(m.objects());
     BOOST_CHECK(!objects.empty());
@@ -117,7 +119,7 @@ BOOST_AUTO_TEST_CASE(producing_primitive_model_generates_expected_types) {
     const auto m(dogen::sml::primitive_model_factory::create());
     BOOST_LOG_SEV(lg, debug) << m;
     BOOST_CHECK(m.name().model_name() == primitive_model);
-    BOOST_CHECK(m.is_system() == true);
+    BOOST_CHECK(m.origin_type() == origin_types::system);
 
     BOOST_CHECK(m.objects().empty());
     const auto primitives(m.primitives());

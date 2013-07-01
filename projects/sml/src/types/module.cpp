@@ -24,18 +24,21 @@ namespace dogen {
 namespace sml {
 
 module::module()
-    : generation_type_(static_cast<dogen::sml::generation_types>(0)) { }
+    : generation_type_(static_cast<dogen::sml::generation_types>(0)),
+      origin_type_(static_cast<dogen::sml::origin_types>(0)) { }
 
 module::module(
     const std::string& documentation,
     const std::vector<std::pair<std::string, std::string> >& implementation_specific_parameters,
     const dogen::sml::qname& name,
     const dogen::sml::generation_types& generation_type,
+    const dogen::sml::origin_types& origin_type,
     const std::list<dogen::sml::qname>& members)
     : documentation_(documentation),
       implementation_specific_parameters_(implementation_specific_parameters),
       name_(name),
       generation_type_(generation_type),
+      origin_type_(origin_type),
       members_(members) { }
 
 void module::swap(module& other) noexcept {
@@ -44,6 +47,7 @@ void module::swap(module& other) noexcept {
     swap(implementation_specific_parameters_, other.implementation_specific_parameters_);
     swap(name_, other.name_);
     swap(generation_type_, other.generation_type_);
+    swap(origin_type_, other.origin_type_);
     swap(members_, other.members_);
 }
 
@@ -52,6 +56,7 @@ bool module::operator==(const module& rhs) const {
         implementation_specific_parameters_ == rhs.implementation_specific_parameters_ &&
         name_ == rhs.name_ &&
         generation_type_ == rhs.generation_type_ &&
+        origin_type_ == rhs.origin_type_ &&
         members_ == rhs.members_;
 }
 
@@ -115,6 +120,14 @@ dogen::sml::generation_types module::generation_type() const {
 
 void module::generation_type(const dogen::sml::generation_types& v) {
     generation_type_ = v;
+}
+
+dogen::sml::origin_types module::origin_type() const {
+    return origin_type_;
+}
+
+void module::origin_type(const dogen::sml::origin_types& v) {
+    origin_type_ = v;
 }
 
 const std::list<dogen::sml::qname>& module::members() const {

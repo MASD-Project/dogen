@@ -77,6 +77,7 @@ public:
         const std::vector<std::pair<std::string, std::string> >& implementation_specific_parameters,
         const dogen::sml::qname& name,
         const dogen::sml::generation_types& generation_type,
+        const dogen::sml::origin_types& origin_type,
         const std::list<dogen::sml::property>& properties,
         const std::list<dogen::sml::operation>& operations,
         const boost::optional<dogen::sml::qname>& parent_name,

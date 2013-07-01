@@ -39,6 +39,7 @@
 #include "dogen/sml/types/enumeration.hpp"
 #include "dogen/sml/types/generation_types.hpp"
 #include "dogen/sml/types/module.hpp"
+#include "dogen/sml/types/origin_types.hpp"
 #include "dogen/sml/types/primitive.hpp"
 #include "dogen/sml/types/qname.hpp"
 
@@ -85,7 +86,7 @@ public:
         const std::vector<std::pair<std::string, std::string> >& implementation_specific_parameters,
         const dogen::sml::qname& name,
         const dogen::sml::generation_types& generation_type,
-        const bool is_system,
+        const dogen::sml::origin_types& origin_type,
         const std::unordered_set<dogen::sml::qname>& references,
         const std::unordered_set<dogen::sml::qname>& leaves,
         const std::unordered_map<dogen::sml::qname, dogen::sml::module>& modules,
@@ -146,17 +147,11 @@ public:
     /**@}*/
 
     /**
-     * @brief If true, the model is a system model such as STL, boost, etc. If false, it is a user generated model.
-     *
-     * System models are a way to expose third party code into Dogen
-     * so that we can make use of these types. They need to be
-     * hand-coded in, because they require changes to the formatters.
-     *
-     * User models are regular Dogen models, normally made using Dia.
+     * @brief How was this model element originated.
      */
     /**@{*/
-    bool is_system() const;
-    void is_system(const bool v);
+    dogen::sml::origin_types origin_type() const;
+    void origin_type(const dogen::sml::origin_types& v);
     /**@}*/
 
     /**
@@ -246,7 +241,7 @@ private:
     std::vector<std::pair<std::string, std::string> > implementation_specific_parameters_;
     dogen::sml::qname name_;
     dogen::sml::generation_types generation_type_;
-    bool is_system_;
+    dogen::sml::origin_types origin_type_;
     std::unordered_set<dogen::sml::qname> references_;
     std::unordered_set<dogen::sml::qname> leaves_;
     std::unordered_map<dogen::sml::qname, dogen::sml::module> modules_;

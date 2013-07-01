@@ -23,6 +23,7 @@
 #include <ostream>
 #include "dogen/sml/io/generation_types_io.hpp"
 #include "dogen/sml/io/operation_io.hpp"
+#include "dogen/sml/io/origin_types_io.hpp"
 #include "dogen/sml/io/property_io.hpp"
 #include "dogen/sml/io/qname_io.hpp"
 #include "dogen/sml/io/type_io.hpp"
@@ -119,6 +120,7 @@ abstract_object::abstract_object(
     const std::vector<std::pair<std::string, std::string> >& implementation_specific_parameters,
     const dogen::sml::qname& name,
     const dogen::sml::generation_types& generation_type,
+    const dogen::sml::origin_types& origin_type,
     const std::list<dogen::sml::property>& properties,
     const std::list<dogen::sml::operation>& operations,
     const boost::optional<dogen::sml::qname>& parent_name,
@@ -135,7 +137,8 @@ abstract_object::abstract_object(
     : dogen::sml::type(documentation,
       implementation_specific_parameters,
       name,
-      generation_type),
+      generation_type,
+      origin_type),
       properties_(properties),
       operations_(operations),
       parent_name_(parent_name),

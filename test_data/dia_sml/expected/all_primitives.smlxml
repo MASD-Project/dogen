@@ -20,7 +20,7 @@
 		<simple_name></simple_name>
 	</name>
 	<generation_type>0</generation_type>
-	<is_system>0</is_system>
+	<origin_type>1</origin_type>
 	<references class_id="12" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>11</bucket_count>
@@ -91,6 +91,7 @@
 									<simple_name>a_class</simple_name>
 								</name>
 								<generation_type>1</generation_type>
+								<origin_type>1</origin_type>
 							</type>
 							<properties class_id="23" tracking_level="0" version="0">
 								<count>13</count>

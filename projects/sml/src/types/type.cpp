@@ -21,6 +21,7 @@
 #include <boost/algorithm/string.hpp>
 #include <ostream>
 #include "dogen/sml/io/generation_types_io.hpp"
+#include "dogen/sml/io/origin_types_io.hpp"
 #include "dogen/sml/io/qname_io.hpp"
 #include "dogen/sml/types/type.hpp"
 
@@ -63,17 +64,20 @@ namespace dogen {
 namespace sml {
 
 type::type()
-    : generation_type_(static_cast<dogen::sml::generation_types>(0)) { }
+    : generation_type_(static_cast<dogen::sml::generation_types>(0)),
+      origin_type_(static_cast<dogen::sml::origin_types>(0)) { }
 
 type::type(
     const std::string& documentation,
     const std::vector<std::pair<std::string, std::string> >& implementation_specific_parameters,
     const dogen::sml::qname& name,
-    const dogen::sml::generation_types& generation_type)
+    const dogen::sml::generation_types& generation_type,
+    const dogen::sml::origin_types& origin_type)
     : documentation_(documentation),
       implementation_specific_parameters_(implementation_specific_parameters),
       name_(name),
-      generation_type_(generation_type) { }
+      generation_type_(generation_type),
+      origin_type_(origin_type) { }
 
 void type::to_stream(std::ostream& s) const {
     s << " { "
@@ -81,7 +85,8 @@ void type::to_stream(std::ostream& s) const {
       << "\"documentation\": " << "\"" << tidy_up_string(documentation_) << "\"" << ", "
       << "\"implementation_specific_parameters\": " << implementation_specific_parameters_ << ", "
       << "\"name\": " << name_ << ", "
-      << "\"generation_type\": " << generation_type_
+      << "\"generation_type\": " << generation_type_ << ", "
+      << "\"origin_type\": " << origin_type_
       << " }";
 }
 
@@ -91,13 +96,15 @@ void type::swap(type& other) noexcept {
     swap(implementation_specific_parameters_, other.implementation_specific_parameters_);
     swap(name_, other.name_);
     swap(generation_type_, other.generation_type_);
+    swap(origin_type_, other.origin_type_);
 }
 
 bool type::compare(const type& rhs) const {
     return documentation_ == rhs.documentation_ &&
         implementation_specific_parameters_ == rhs.implementation_specific_parameters_ &&
         name_ == rhs.name_ &&
-        generation_type_ == rhs.generation_type_;
+        generation_type_ == rhs.generation_type_ &&
+        origin_type_ == rhs.origin_type_;
 }
 
 const std::string& type::documentation() const {
@@ -154,6 +161,14 @@ dogen::sml::generation_types type::generation_type() const {
 
 void type::generation_type(const dogen::sml::generation_types& v) {
     generation_type_ = v;
+}
+
+dogen::sml::origin_types type::origin_type() const {
+    return origin_type_;
+}
+
+void type::origin_type(const dogen::sml::origin_types& v) {
+    origin_type_ = v;
 }
 
 } }

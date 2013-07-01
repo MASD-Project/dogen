@@ -18,19 +18,26 @@
  * MA 02110-1301, USA.
  *
  */
-#include <boost/algorithm/string.hpp>
-#include <ostream>
-#include "dogen/sml/io/generation_types_io.hpp"
-#include "dogen/sml/io/origin_types_io.hpp"
-#include "dogen/sml/io/qname_io.hpp"
-#include "dogen/sml/io/type_io.hpp"
+#ifndef DOGEN_SML_HASH_ORIGIN_TYPES_HASH_HPP
+#define DOGEN_SML_HASH_ORIGIN_TYPES_HASH_HPP
 
-namespace dogen {
-namespace sml {
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
-std::ostream& operator<<(std::ostream& s, const type& v) {
-    v.to_stream(s);
-    return(s);
+#include <functional>
+#include "dogen/sml/types/origin_types.hpp"
+
+namespace std {
+
+template<>
+class hash<dogen::sml::origin_types> {
+public:
+    size_t operator()(const dogen::sml::origin_types& v) const {
+        return std::hash<unsigned int>()(static_cast<unsigned int>(v));
+    }
+};
+
 }
 
-} }
+#endif

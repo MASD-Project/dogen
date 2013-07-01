@@ -102,6 +102,8 @@ boost::shared_ptr<abstract_object> injector::create_key(const qname& qn,
     auto r(boost::make_shared<value_object>());
     r->name(kqn);
     r->generation_type(gt);
+    r->origin_type(origin_types::system);
+
     const auto vk(value_object_types::versioned_key);
     const auto uvk(value_object_types::unversioned_key);
     r->type(versioned ? vk : uvk);
@@ -143,7 +145,8 @@ injector::create_key_extractor(const keyed_entity& ke) const {
 
     r->name(qn);
     r->generation_type(ke.generation_type());
-    r->type(service_types::visitor);
+    r->origin_type(origin_types::system);
+    r->type(service_types::key_extractor);
     r->documentation(visitor_doc + ke.name().simple_name());
 
     operation opuv;
@@ -253,6 +256,7 @@ injector::create_visitor(const abstract_object& ao) const {
 
     r->name(qn);
     r->generation_type(ao.generation_type());
+    r->origin_type(origin_types::system);
     r->type(service_types::visitor);
     r->documentation(visitor_doc + ao.name().simple_name());
 

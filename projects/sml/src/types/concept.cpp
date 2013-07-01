@@ -24,7 +24,8 @@ namespace dogen {
 namespace sml {
 
 concept::concept()
-    : generation_type_(static_cast<dogen::sml::generation_types>(0)) { }
+    : generation_type_(static_cast<dogen::sml::generation_types>(0)),
+      origin_type_(static_cast<dogen::sml::origin_types>(0)) { }
 
 concept::concept(
     const std::list<dogen::sml::property>& properties,
@@ -32,6 +33,7 @@ concept::concept(
     const std::vector<std::pair<std::string, std::string> >& implementation_specific_parameters,
     const dogen::sml::qname& name,
     const dogen::sml::generation_types& generation_type,
+    const dogen::sml::origin_types& origin_type,
     const std::list<dogen::sml::operation>& operations,
     const std::list<dogen::sml::qname>& refines)
     : properties_(properties),
@@ -39,6 +41,7 @@ concept::concept(
       implementation_specific_parameters_(implementation_specific_parameters),
       name_(name),
       generation_type_(generation_type),
+      origin_type_(origin_type),
       operations_(operations),
       refines_(refines) { }
 
@@ -49,6 +52,7 @@ void concept::swap(concept& other) noexcept {
     swap(implementation_specific_parameters_, other.implementation_specific_parameters_);
     swap(name_, other.name_);
     swap(generation_type_, other.generation_type_);
+    swap(origin_type_, other.origin_type_);
     swap(operations_, other.operations_);
     swap(refines_, other.refines_);
 }
@@ -59,6 +63,7 @@ bool concept::operator==(const concept& rhs) const {
         implementation_specific_parameters_ == rhs.implementation_specific_parameters_ &&
         name_ == rhs.name_ &&
         generation_type_ == rhs.generation_type_ &&
+        origin_type_ == rhs.origin_type_ &&
         operations_ == rhs.operations_ &&
         refines_ == rhs.refines_;
 }
@@ -139,6 +144,14 @@ dogen::sml::generation_types concept::generation_type() const {
 
 void concept::generation_type(const dogen::sml::generation_types& v) {
     generation_type_ = v;
+}
+
+dogen::sml::origin_types concept::origin_type() const {
+    return origin_type_;
+}
+
+void concept::origin_type(const dogen::sml::origin_types& v) {
+    origin_type_ = v;
 }
 
 const std::list<dogen::sml::operation>& concept::operations() const {

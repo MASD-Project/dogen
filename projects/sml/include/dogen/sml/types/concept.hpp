@@ -33,6 +33,7 @@
 #include "dogen/sml/serialization/concept_fwd_ser.hpp"
 #include "dogen/sml/types/generation_types.hpp"
 #include "dogen/sml/types/operation.hpp"
+#include "dogen/sml/types/origin_types.hpp"
 #include "dogen/sml/types/property.hpp"
 #include "dogen/sml/types/qname.hpp"
 
@@ -58,6 +59,7 @@ public:
         const std::vector<std::pair<std::string, std::string> >& implementation_specific_parameters,
         const dogen::sml::qname& name,
         const dogen::sml::generation_types& generation_type,
+        const dogen::sml::origin_types& origin_type,
         const std::list<dogen::sml::operation>& operations,
         const std::list<dogen::sml::qname>& refines);
 
@@ -125,6 +127,14 @@ public:
     /**@}*/
 
     /**
+     * @brief How was this model element originated.
+     */
+    /**@{*/
+    dogen::sml::origin_types origin_type() const;
+    void origin_type(const dogen::sml::origin_types& v);
+    /**@}*/
+
+    /**
      * @brief Operations (methods) that can be executed.
      */
     /**@{*/
@@ -160,6 +170,7 @@ private:
     std::vector<std::pair<std::string, std::string> > implementation_specific_parameters_;
     dogen::sml::qname name_;
     dogen::sml::generation_types generation_type_;
+    dogen::sml::origin_types origin_type_;
     std::list<dogen::sml::operation> operations_;
     std::list<dogen::sml::qname> refines_;
 };

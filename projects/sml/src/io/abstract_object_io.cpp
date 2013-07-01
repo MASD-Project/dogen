@@ -24,6 +24,7 @@
 #include "dogen/sml/io/abstract_object_io.hpp"
 #include "dogen/sml/io/generation_types_io.hpp"
 #include "dogen/sml/io/operation_io.hpp"
+#include "dogen/sml/io/origin_types_io.hpp"
 #include "dogen/sml/io/property_io.hpp"
 #include "dogen/sml/io/qname_io.hpp"
 #include "dogen/sml/io/type_io.hpp"

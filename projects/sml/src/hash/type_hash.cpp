@@ -19,6 +19,7 @@
  *
  */
 #include "dogen/sml/hash/generation_types_hash.hpp"
+#include "dogen/sml/hash/origin_types_hash.hpp"
 #include "dogen/sml/hash/qname_hash.hpp"
 #include "dogen/sml/hash/type_hash.hpp"
 
@@ -59,6 +60,7 @@ std::size_t type_hasher::hash(const type&v) {
     combine(seed, hash_std_vector_std_pair_std_string_std_string_(v.implementation_specific_parameters()));
     combine(seed, v.name());
     combine(seed, v.generation_type());
+    combine(seed, v.origin_type());
 
     return seed;
 }

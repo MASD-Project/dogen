@@ -29,11 +29,13 @@ primitive::primitive(
     const std::string& documentation,
     const std::vector<std::pair<std::string, std::string> >& implementation_specific_parameters,
     const dogen::sml::qname& name,
-    const dogen::sml::generation_types& generation_type)
+    const dogen::sml::generation_types& generation_type,
+    const dogen::sml::origin_types& origin_type)
     : dogen::sml::type(documentation,
       implementation_specific_parameters,
       name,
-      generation_type) { }
+      generation_type,
+      origin_type) { }
 
 void primitive::to_stream(std::ostream& s) const {
     s << " { "

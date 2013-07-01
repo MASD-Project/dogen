@@ -37,6 +37,7 @@
 #include "dogen/sml/serialization/generation_types_ser.hpp"
 #include "dogen/sml/serialization/model_ser.hpp"
 #include "dogen/sml/serialization/module_ser.hpp"
+#include "dogen/sml/serialization/origin_types_ser.hpp"
 #include "dogen/sml/serialization/primitive_ser.hpp"
 #include "dogen/sml/serialization/qname_ser.hpp"
 #include "dogen/utility/serialization/unordered_map.hpp"
@@ -58,7 +59,7 @@ void save(Archive& ar,
     ar << make_nvp("implementation_specific_parameters", v.implementation_specific_parameters_);
     ar << make_nvp("name", v.name_);
     ar << make_nvp("generation_type", v.generation_type_);
-    ar << make_nvp("is_system", v.is_system_);
+    ar << make_nvp("origin_type", v.origin_type_);
     ar << make_nvp("references", v.references_);
     ar << make_nvp("leaves", v.leaves_);
     ar << make_nvp("modules", v.modules_);
@@ -76,7 +77,7 @@ void load(Archive& ar,
     ar >> make_nvp("implementation_specific_parameters", v.implementation_specific_parameters_);
     ar >> make_nvp("name", v.name_);
     ar >> make_nvp("generation_type", v.generation_type_);
-    ar >> make_nvp("is_system", v.is_system_);
+    ar >> make_nvp("origin_type", v.origin_type_);
     ar >> make_nvp("references", v.references_);
     ar >> make_nvp("leaves", v.leaves_);
     ar >> make_nvp("modules", v.modules_);

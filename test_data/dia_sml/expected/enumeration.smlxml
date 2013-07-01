@@ -20,7 +20,7 @@
 		<simple_name></simple_name>
 	</name>
 	<generation_type>0</generation_type>
-	<is_system>0</is_system>
+	<origin_type>1</origin_type>
 	<references class_id="12" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>11</bucket_count>
@@ -66,7 +66,8 @@
 					</module_path>
 					<simple_name>pkg1</simple_name>
 				</name>
-				<generation_type>0</generation_type>
+				<generation_type>1</generation_type>
+				<origin_type>1</origin_type>
 				<members class_id="16" tracking_level="0" version="0">
 					<count>0</count>
 					<item_version>0</item_version>
@@ -123,6 +124,7 @@
 						<simple_name>shape_types</simple_name>
 					</name>
 					<generation_type>1</generation_type>
+					<origin_type>1</origin_type>
 				</type>
 				<underlying_type>
 					<model_name></model_name>
@@ -203,6 +205,7 @@
 						<simple_name>colour_types</simple_name>
 					</name>
 					<generation_type>1</generation_type>
+					<origin_type>1</origin_type>
 				</type>
 				<underlying_type>
 					<model_name></model_name>
@@ -285,6 +288,7 @@ this is a long comment</documentation>
 						<simple_name>book_types</simple_name>
 					</name>
 					<generation_type>1</generation_type>
+					<origin_type>1</origin_type>
 				</type>
 				<underlying_type>
 					<model_name></model_name>
@@ -364,6 +368,7 @@ this is a long comment</documentation>
 								<simple_name>a_class</simple_name>
 							</name>
 							<generation_type>1</generation_type>
+							<origin_type>1</origin_type>
 						</type>
 						<properties class_id="28" tracking_level="0" version="0">
 							<count>3</count>

@@ -25,6 +25,7 @@
 #include "dogen/sml/test_data/generation_types_td.hpp"
 #include "dogen/sml/test_data/model_td.hpp"
 #include "dogen/sml/test_data/module_td.hpp"
+#include "dogen/sml/test_data/origin_types_td.hpp"
 #include "dogen/sml/test_data/primitive_td.hpp"
 #include "dogen/sml/test_data/qname_td.hpp"
 
@@ -62,8 +63,9 @@ create_dogen_sml_generation_types(const unsigned int position) {
     return dogen::sml::generation_types_generator::create(position);
 }
 
-bool create_bool(const unsigned int position) {
-    return (position % 2) == 0;
+dogen::sml::origin_types
+create_dogen_sml_origin_types(const unsigned int position) {
+    return dogen::sml::origin_types_generator::create(position);
 }
 
 std::unordered_set<dogen::sml::qname> create_std_unordered_set_dogen_sml_qname(unsigned int position) {
@@ -159,7 +161,7 @@ populate(const unsigned int position, result_type& v) {
     v.implementation_specific_parameters(create_std_vector_std_pair_std_string_std_string_(position + 1));
     v.name(create_dogen_sml_qname(position + 2));
     v.generation_type(create_dogen_sml_generation_types(position + 3));
-    v.is_system(create_bool(position + 4));
+    v.origin_type(create_dogen_sml_origin_types(position + 4));
     v.references(create_std_unordered_set_dogen_sml_qname(position + 5));
     v.leaves(create_std_unordered_set_dogen_sml_qname(position + 6));
     v.modules(create_std_unordered_map_dogen_sml_qname_dogen_sml_module(position + 7));

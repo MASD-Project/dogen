@@ -29,7 +29,7 @@ in the context of inheritance.
 		<simple_name></simple_name>
 	</name>
 	<generation_type>0</generation_type>
-	<is_system>0</is_system>
+	<origin_type>1</origin_type>
 	<references class_id="13" tracking_level="0" version="0">
 		<count>1</count>
 		<bucket_count>11</bucket_count>
@@ -234,7 +234,8 @@ in the context of inheritance.
 					</module_path>
 					<simple_name>pkg4</simple_name>
 				</name>
-				<generation_type>0</generation_type>
+				<generation_type>1</generation_type>
+				<origin_type>1</origin_type>
 				<members class_id="17" tracking_level="0" version="0">
 					<count>0</count>
 					<item_version>0</item_version>
@@ -272,7 +273,8 @@ in the context of inheritance.
 					</module_path>
 					<simple_name>pkg3</simple_name>
 				</name>
-				<generation_type>0</generation_type>
+				<generation_type>1</generation_type>
+				<origin_type>1</origin_type>
 				<members>
 					<count>0</count>
 					<item_version>0</item_version>
@@ -310,7 +312,8 @@ in the context of inheritance.
 					</module_path>
 					<simple_name>pkg2</simple_name>
 				</name>
-				<generation_type>0</generation_type>
+				<generation_type>1</generation_type>
+				<origin_type>1</origin_type>
 				<members>
 					<count>0</count>
 					<item_version>0</item_version>
@@ -348,7 +351,8 @@ in the context of inheritance.
 					</module_path>
 					<simple_name>pkg1</simple_name>
 				</name>
-				<generation_type>0</generation_type>
+				<generation_type>1</generation_type>
+				<origin_type>1</origin_type>
 				<members>
 					<count>0</count>
 					<item_version>0</item_version>
@@ -412,6 +416,7 @@ in the context of inheritance.
 								<simple_name>parent</simple_name>
 							</name>
 							<generation_type>1</generation_type>
+							<origin_type>1</origin_type>
 						</type>
 						<properties class_id="26" tracking_level="0" version="0">
 							<count>1</count>
@@ -524,6 +529,7 @@ in the context of inheritance.
 								<simple_name>move_ctor_empty_descendant</simple_name>
 							</name>
 							<generation_type>1</generation_type>
+							<origin_type>1</origin_type>
 						</type>
 						<properties>
 							<count>0</count>
@@ -622,6 +628,7 @@ in the context of inheritance.
 								<simple_name>child</simple_name>
 							</name>
 							<generation_type>1</generation_type>
+							<origin_type>1</origin_type>
 						</type>
 						<properties>
 							<count>1</count>
@@ -746,6 +753,7 @@ in the context of inheritance.
 								<simple_name>third_child_with_members</simple_name>
 							</name>
 							<generation_type>1</generation_type>
+							<origin_type>1</origin_type>
 						</type>
 						<properties>
 							<count>1</count>
@@ -894,6 +902,7 @@ in the context of inheritance.
 								<simple_name>child_with_members</simple_name>
 							</name>
 							<generation_type>1</generation_type>
+							<origin_type>1</origin_type>
 						</type>
 						<properties>
 							<count>1</count>
@@ -1020,6 +1029,7 @@ in the context of inheritance.
 								<simple_name>parent</simple_name>
 							</name>
 							<generation_type>1</generation_type>
+							<origin_type>1</origin_type>
 						</type>
 						<properties>
 							<count>1</count>
@@ -1131,6 +1141,7 @@ in the context of inheritance.
 								<simple_name>second_child_without_members</simple_name>
 							</name>
 							<generation_type>1</generation_type>
+							<origin_type>1</origin_type>
 						</type>
 						<properties>
 							<count>0</count>
@@ -1227,6 +1238,7 @@ in the context of inheritance.
 								<simple_name>child_without_members</simple_name>
 							</name>
 							<generation_type>1</generation_type>
+							<origin_type>1</origin_type>
 						</type>
 						<properties>
 							<count>0</count>
@@ -1323,6 +1335,7 @@ in the context of inheritance.
 								<simple_name>child_of_a_child2</simple_name>
 							</name>
 							<generation_type>1</generation_type>
+							<origin_type>1</origin_type>
 						</type>
 						<properties>
 							<count>1</count>
@@ -1449,6 +1462,7 @@ in the context of inheritance.
 								<simple_name>child</simple_name>
 							</name>
 							<generation_type>1</generation_type>
+							<origin_type>1</origin_type>
 						</type>
 						<properties>
 							<count>1</count>
@@ -1575,6 +1589,7 @@ in the context of inheritance.
 								<simple_name>parent_with_members</simple_name>
 							</name>
 							<generation_type>1</generation_type>
+							<origin_type>1</origin_type>
 						</type>
 						<properties>
 							<count>1</count>
@@ -1709,6 +1724,7 @@ in the context of inheritance.
 								<simple_name>child_of_a_child1</simple_name>
 							</name>
 							<generation_type>1</generation_type>
+							<origin_type>1</origin_type>
 						</type>
 						<properties>
 							<count>0</count>
@@ -1805,6 +1821,7 @@ in the context of inheritance.
 								<simple_name>descendant2</simple_name>
 							</name>
 							<generation_type>1</generation_type>
+							<origin_type>1</origin_type>
 						</type>
 						<properties>
 							<count>1</count>
@@ -1930,6 +1947,7 @@ in the context of inheritance.
 								<simple_name>move_ctor_descendant</simple_name>
 							</name>
 							<generation_type>1</generation_type>
+							<origin_type>1</origin_type>
 						</type>
 						<properties>
 							<count>1</count>
@@ -2056,6 +2074,7 @@ in the context of inheritance.
 								<simple_name>parent_outside</simple_name>
 							</name>
 							<generation_type>1</generation_type>
+							<origin_type>1</origin_type>
 						</type>
 						<properties>
 							<count>1</count>
@@ -2167,6 +2186,7 @@ in the context of inheritance.
 								<simple_name>service_interface</simple_name>
 							</name>
 							<generation_type>2</generation_type>
+							<origin_type>1</origin_type>
 						</type>
 						<properties>
 							<count>0</count>
@@ -2237,6 +2257,7 @@ in the context of inheritance.
 								<simple_name>service</simple_name>
 							</name>
 							<generation_type>2</generation_type>
+							<origin_type>1</origin_type>
 						</type>
 						<properties>
 							<count>0</count>
@@ -2307,6 +2328,7 @@ in the context of inheritance.
 								<simple_name>base</simple_name>
 							</name>
 							<generation_type>1</generation_type>
+							<origin_type>1</origin_type>
 						</type>
 						<properties>
 							<count>0</count>
@@ -2401,6 +2423,7 @@ in the context of inheritance.
 								<simple_name>parent_without_members</simple_name>
 							</name>
 							<generation_type>1</generation_type>
+							<origin_type>1</origin_type>
 						</type>
 						<properties>
 							<count>0</count>
@@ -2495,6 +2518,7 @@ in the context of inheritance.
 								<simple_name>descendant1</simple_name>
 							</name>
 							<generation_type>1</generation_type>
+							<origin_type>1</origin_type>
 						</type>
 						<properties>
 							<count>0</count>
@@ -2603,6 +2627,7 @@ in the context of inheritance.
 								<simple_name>descendant3</simple_name>
 							</name>
 							<generation_type>1</generation_type>
+							<origin_type>1</origin_type>
 						</type>
 						<properties>
 							<count>1</count>
@@ -2729,6 +2754,7 @@ in the context of inheritance.
 								<simple_name>child</simple_name>
 							</name>
 							<generation_type>1</generation_type>
+							<origin_type>1</origin_type>
 						</type>
 						<properties>
 							<count>1</count>
@@ -2856,6 +2882,7 @@ in the context of inheritance.
 								<simple_name>move_ctor_base</simple_name>
 							</name>
 							<generation_type>1</generation_type>
+							<origin_type>1</origin_type>
 						</type>
 						<properties>
 							<count>1</count>

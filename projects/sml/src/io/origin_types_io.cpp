@@ -18,19 +18,32 @@
  * MA 02110-1301, USA.
  *
  */
-#include <boost/algorithm/string.hpp>
 #include <ostream>
-#include "dogen/sml/io/generation_types_io.hpp"
+#include <stdexcept>
 #include "dogen/sml/io/origin_types_io.hpp"
-#include "dogen/sml/io/qname_io.hpp"
-#include "dogen/sml/io/type_io.hpp"
 
 namespace dogen {
 namespace sml {
 
-std::ostream& operator<<(std::ostream& s, const type& v) {
-    v.to_stream(s);
-    return(s);
+std::ostream& operator<<(std::ostream& s, const origin_types& v) {
+    s << "{ " << "\"__type__\": " << "\"origin_types\", " << "\"value\": ";
+
+    std::string attr;
+    switch (v) {
+    case origin_types::invalid:
+        attr = "\"invalid\"";
+        break;
+    case origin_types::user:
+        attr = "\"user\"";
+        break;
+    case origin_types::system:
+        attr = "\"system\"";
+        break;
+    default:
+        throw std::invalid_argument("Invalid value for origin_types");
+    }
+    s << attr << " }";
+    return s;
 }
 
 } }

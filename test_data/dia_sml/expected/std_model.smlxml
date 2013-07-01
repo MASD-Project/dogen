@@ -20,7 +20,7 @@
 		<simple_name></simple_name>
 	</name>
 	<generation_type>0</generation_type>
-	<is_system>0</is_system>
+	<origin_type>1</origin_type>
 	<references class_id="12" tracking_level="0" version="0">
 		<count>1</count>
 		<bucket_count>11</bucket_count>
@@ -90,7 +90,8 @@
 					</module_path>
 					<simple_name>pkg1</simple_name>
 				</name>
-				<generation_type>0</generation_type>
+				<generation_type>1</generation_type>
+				<origin_type>1</origin_type>
 				<members class_id="16" tracking_level="0" version="0">
 					<count>0</count>
 					<item_version>0</item_version>
@@ -152,6 +153,7 @@
 								<simple_name>some_service</simple_name>
 							</name>
 							<generation_type>2</generation_type>
+							<origin_type>1</origin_type>
 						</type>
 						<properties class_id="25" tracking_level="0" version="0">
 							<count>4</count>
@@ -391,6 +393,7 @@
 								<simple_name>primitives</simple_name>
 							</name>
 							<generation_type>1</generation_type>
+							<origin_type>1</origin_type>
 						</type>
 						<properties>
 							<count>8</count>
@@ -685,6 +688,7 @@
 								<simple_name>class_b</simple_name>
 							</name>
 							<generation_type>1</generation_type>
+							<origin_type>1</origin_type>
 						</type>
 						<properties>
 							<count>6</count>
@@ -1057,6 +1061,7 @@
 								<simple_name>class_g</simple_name>
 							</name>
 							<generation_type>1</generation_type>
+							<origin_type>1</origin_type>
 						</type>
 						<properties>
 							<count>4</count>
@@ -1431,6 +1436,7 @@
 								<simple_name>base</simple_name>
 							</name>
 							<generation_type>1</generation_type>
+							<origin_type>1</origin_type>
 						</type>
 						<properties>
 							<count>1</count>
@@ -1561,6 +1567,7 @@
 									<simple_name>class_a</simple_name>
 								</name>
 								<generation_type>1</generation_type>
+								<origin_type>1</origin_type>
 							</type>
 							<properties>
 								<count>2</count>
@@ -1743,6 +1750,7 @@
 								<simple_name>class_c</simple_name>
 							</name>
 							<generation_type>1</generation_type>
+							<origin_type>1</origin_type>
 						</type>
 						<properties>
 							<count>4</count>
@@ -1982,6 +1990,7 @@
 								<simple_name>class_f</simple_name>
 							</name>
 							<generation_type>1</generation_type>
+							<origin_type>1</origin_type>
 						</type>
 						<properties>
 							<count>3</count>
@@ -2251,6 +2260,7 @@
 								<simple_name>class_j</simple_name>
 							</name>
 							<generation_type>1</generation_type>
+							<origin_type>1</origin_type>
 						</type>
 						<properties>
 							<count>3</count>
@@ -2538,6 +2548,7 @@
 								<simple_name>class_d</simple_name>
 							</name>
 							<generation_type>1</generation_type>
+							<origin_type>1</origin_type>
 						</type>
 						<properties>
 							<count>6</count>
@@ -2910,6 +2921,7 @@
 								<simple_name>class_h</simple_name>
 							</name>
 							<generation_type>1</generation_type>
+							<origin_type>1</origin_type>
 						</type>
 						<properties>
 							<count>2</count>
@@ -3075,6 +3087,7 @@
 								<simple_name>class_e</simple_name>
 							</name>
 							<generation_type>1</generation_type>
+							<origin_type>1</origin_type>
 						</type>
 						<properties>
 							<count>6</count>
@@ -3447,6 +3460,7 @@
 								<simple_name>derived</simple_name>
 							</name>
 							<generation_type>1</generation_type>
+							<origin_type>1</origin_type>
 						</type>
 						<properties>
 							<count>1</count>

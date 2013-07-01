@@ -33,6 +33,7 @@
 #include <boost/serialization/vector.hpp>
 #include "dogen/sml/serialization/generation_types_ser.hpp"
 #include "dogen/sml/serialization/module_ser.hpp"
+#include "dogen/sml/serialization/origin_types_ser.hpp"
 #include "dogen/sml/serialization/qname_ser.hpp"
 
 #ifdef __linux__
@@ -51,6 +52,7 @@ void save(Archive& ar,
     ar << make_nvp("implementation_specific_parameters", v.implementation_specific_parameters_);
     ar << make_nvp("name", v.name_);
     ar << make_nvp("generation_type", v.generation_type_);
+    ar << make_nvp("origin_type", v.origin_type_);
     ar << make_nvp("members", v.members_);
 }
 
@@ -62,6 +64,7 @@ void load(Archive& ar,
     ar >> make_nvp("implementation_specific_parameters", v.implementation_specific_parameters_);
     ar >> make_nvp("name", v.name_);
     ar >> make_nvp("generation_type", v.generation_type_);
+    ar >> make_nvp("origin_type", v.origin_type_);
     ar >> make_nvp("members", v.members_);
 }
 

@@ -38,6 +38,7 @@
 #include "dogen/sml/serialization/generation_types_ser.hpp"
 #include "dogen/sml/serialization/keyed_entity_ser.hpp"
 #include "dogen/sml/serialization/operation_ser.hpp"
+#include "dogen/sml/serialization/origin_types_ser.hpp"
 #include "dogen/sml/serialization/property_ser.hpp"
 #include "dogen/sml/serialization/qname_ser.hpp"
 #include "dogen/sml/serialization/repository_ser.hpp"

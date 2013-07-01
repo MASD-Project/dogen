@@ -20,7 +20,7 @@
 		<simple_name></simple_name>
 	</name>
 	<generation_type>0</generation_type>
-	<is_system>0</is_system>
+	<origin_type>1</origin_type>
 	<references class_id="12" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>11</bucket_count>
@@ -66,7 +66,8 @@
 					</module_path>
 					<simple_name>Package_2</simple_name>
 				</name>
-				<generation_type>0</generation_type>
+				<generation_type>1</generation_type>
+				<origin_type>1</origin_type>
 				<members class_id="16" tracking_level="0" version="0">
 					<count>0</count>
 					<item_version>0</item_version>
@@ -104,7 +105,8 @@
 					</module_path>
 					<simple_name>package_1</simple_name>
 				</name>
-				<generation_type>0</generation_type>
+				<generation_type>1</generation_type>
+				<origin_type>1</origin_type>
 				<members>
 					<count>0</count>
 					<item_version>0</item_version>
@@ -168,6 +170,7 @@
 								<simple_name>class_2</simple_name>
 							</name>
 							<generation_type>1</generation_type>
+							<origin_type>1</origin_type>
 						</type>
 						<properties class_id="25" tracking_level="0" version="0">
 							<count>1</count>
@@ -268,6 +271,7 @@
 								<simple_name>class_1</simple_name>
 							</name>
 							<generation_type>1</generation_type>
+							<origin_type>1</origin_type>
 						</type>
 						<properties>
 							<count>1</count>

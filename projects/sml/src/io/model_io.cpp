@@ -19,7 +19,6 @@
  *
  */
 #include <boost/algorithm/string.hpp>
-#include <boost/io/ios_state.hpp>
 #include <ostream>
 #include "dogen/sml/io/abstract_object_io.hpp"
 #include "dogen/sml/io/concept_io.hpp"
@@ -27,6 +26,7 @@
 #include "dogen/sml/io/generation_types_io.hpp"
 #include "dogen/sml/io/model_io.hpp"
 #include "dogen/sml/io/module_io.hpp"
+#include "dogen/sml/io/origin_types_io.hpp"
 #include "dogen/sml/io/primitive_io.hpp"
 #include "dogen/sml/io/qname_io.hpp"
 
@@ -189,19 +189,13 @@ namespace dogen {
 namespace sml {
 
 std::ostream& operator<<(std::ostream& s, const model& v) {
-    boost::io::ios_flags_saver ifs(s);
-    s.setf(std::ios_base::boolalpha);
-    s.setf(std::ios::fixed, std::ios::floatfield);
-    s.precision(6);
-    s.setf(std::ios::showpoint);
-
     s << " { "
       << "\"__type__\": " << "\"dogen::sml::model\"" << ", "
       << "\"documentation\": " << "\"" << tidy_up_string(v.documentation()) << "\"" << ", "
       << "\"implementation_specific_parameters\": " << v.implementation_specific_parameters() << ", "
       << "\"name\": " << v.name() << ", "
       << "\"generation_type\": " << v.generation_type() << ", "
-      << "\"is_system\": " << v.is_system() << ", "
+      << "\"origin_type\": " << v.origin_type() << ", "
       << "\"references\": " << v.references() << ", "
       << "\"leaves\": " << v.leaves() << ", "
       << "\"modules\": " << v.modules() << ", "

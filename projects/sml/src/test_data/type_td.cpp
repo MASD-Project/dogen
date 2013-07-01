@@ -24,6 +24,7 @@
 #include "dogen/sml/test_data/factory_td.hpp"
 #include "dogen/sml/test_data/generation_types_td.hpp"
 #include "dogen/sml/test_data/keyed_entity_td.hpp"
+#include "dogen/sml/test_data/origin_types_td.hpp"
 #include "dogen/sml/test_data/primitive_td.hpp"
 #include "dogen/sml/test_data/qname_td.hpp"
 #include "dogen/sml/test_data/repository_td.hpp"
@@ -65,6 +66,11 @@ create_dogen_sml_generation_types(const unsigned int position) {
     return dogen::sml::generation_types_generator::create(position);
 }
 
+dogen::sml::origin_types
+create_dogen_sml_origin_types(const unsigned int position) {
+    return dogen::sml::origin_types_generator::create(position);
+}
+
 }
 
 namespace dogen {
@@ -77,6 +83,7 @@ populate(const unsigned int position, result_type& v) {
     v.implementation_specific_parameters(create_std_vector_std_pair_std_string_std_string_(position + 1));
     v.name(create_dogen_sml_qname(position + 2));
     v.generation_type(create_dogen_sml_generation_types(position + 3));
+    v.origin_type(create_dogen_sml_origin_types(position + 4));
 }
 
 type_generator::result_type*

@@ -220,6 +220,7 @@ transform_abstract_object(sml::abstract_object& ao,
     const std::string pkg_id(o.child_node_id());
     ao.name(transform_qname(o.name(), pkg_id));
     ao.generation_type(generation_type(p));
+    ao.origin_type(sml::origin_types::user);
 
     ao.is_fluent(p.is_fluent());
     ao.is_versioned(p.is_versioned());
@@ -426,6 +427,7 @@ void transformer::transform_enumeration(const processed_object& o) {
     e.generation_type(context_.is_target() ?
         sml::generation_types::full_generation :
         sml::generation_types::no_generation);
+    e.origin_type(sml::origin_types::user);
 
     const std::string pkg_id(o.child_node_id());
     e.name(transform_qname(o.name(), pkg_id));
@@ -464,19 +466,23 @@ void transformer::transform_enumeration(const processed_object& o) {
 void transformer::transform_module(const processed_object& o) {
     BOOST_LOG_SEV(lg, debug) << "Object is a module: " << o.id();
 
-    sml::module p;
+    sml::module m;
     const std::string pkg_id(o.child_node_id());
-    p.name(transform_qname(o.name(), pkg_id));
-    p.documentation(o.comment());
+    m.name(transform_qname(o.name(), pkg_id));
+    m.documentation(o.comment());
+    m.generation_type(context_.is_target() ?
+        sml::generation_types::full_generation :
+        sml::generation_types::no_generation);
+    m.origin_type(sml::origin_types::user);
 
-    if (p.name().simple_name().empty()) {
+    if (m.name().simple_name().empty()) {
         BOOST_THROW_EXCEPTION(
             transformation_error(empty_dia_object_name + o.id()));
         BOOST_LOG_SEV(lg, error) << empty_dia_object_name + o.id();
     }
 
-    context_.id_to_qname().insert(std::make_pair(o.id(), p.name()));
-    context_.model().modules().insert(std::make_pair(p.name(), p));
+    context_.id_to_qname().insert(std::make_pair(o.id(), m.name()));
+    context_.model().modules().insert(std::make_pair(m.name(), m));
 }
 
 void transformer::transform_note(const processed_object& o) {
@@ -532,6 +538,7 @@ void transformer::transform_concept(const processed_object& o) {
     c.generation_type(context_.is_target() ?
         sml::generation_types::full_generation :
         sml::generation_types::no_generation);
+    c.origin_type(sml::origin_types::user);
 
     for (const auto& prop : o.properties()) {
         auto property(transform_property(prop));
