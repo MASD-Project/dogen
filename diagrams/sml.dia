@@ -2129,16 +2129,16 @@ representation of the primitive type.#</dia:string>
     </dia:object>
     <dia:object type="UML - Note" version="0" id="O10">
       <dia:attribute name="obj_pos">
-        <dia:point val="46,16"/>
+        <dia:point val="43,14"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="45.95,15.95;66.585,18.55"/>
+        <dia:rectangle val="42.95,13.95;63.585,16.55"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="46,16"/>
+        <dia:point val="43,14"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="20.535"/>
@@ -2168,7 +2168,7 @@ and all of the supported types within those models.#</dia:string>
             <dia:real val="0.80000000000000004"/>
           </dia:attribute>
           <dia:attribute name="pos">
-            <dia:point val="46.35,17.245"/>
+            <dia:point val="43.35,15.245"/>
           </dia:attribute>
           <dia:attribute name="color">
             <dia:color val="#000000"/>
@@ -2181,17 +2181,17 @@ and all of the supported types within those models.#</dia:string>
     </dia:object>
     <dia:object type="UML - Message" version="0" id="O11">
       <dia:attribute name="obj_pos">
-        <dia:point val="56.2675,16"/>
+        <dia:point val="43,15.25"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="34.546,10.599;56.3275,16.06"/>
+        <dia:rectangle val="34.6182,14.4983;43.0521,15.7749"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="conn_endpoints">
-        <dia:point val="56.2675,16"/>
-        <dia:point val="34.685,11"/>
+        <dia:point val="43,15.25"/>
+        <dia:point val="34.685,14.9"/>
       </dia:attribute>
       <dia:attribute name="text_colour">
         <dia:color val="#000000"/>
@@ -2206,11 +2206,11 @@ and all of the supported types within those models.#</dia:string>
         <dia:enum val="0"/>
       </dia:attribute>
       <dia:attribute name="text_pos">
-        <dia:point val="45.4763,13.9999"/>
+        <dia:point val="38.8426,15.5749"/>
       </dia:attribute>
       <dia:connections>
-        <dia:connection handle="0" to="O10" connection="1"/>
-        <dia:connection handle="1" to="O16" connection="2"/>
+        <dia:connection handle="0" to="O10" connection="3"/>
+        <dia:connection handle="1" to="O16" connection="11"/>
       </dia:connections>
     </dia:object>
     <dia:object type="UML - Message" version="0" id="O12">
