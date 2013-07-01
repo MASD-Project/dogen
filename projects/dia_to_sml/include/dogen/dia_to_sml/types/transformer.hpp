@@ -103,6 +103,24 @@ private:
         const unsigned int position) const;
 
     /**
+     * @brief Update the SML element using the processed object and the
+     * profile.
+     */
+    template<typename Element>
+    void transform_element(Element& e, const processed_object& o,
+        const profile& p) {
+        const std::string pkg_id(o.child_node_id());
+        e.name(transform_qname(o.name(), pkg_id));
+        context_.id_to_qname().insert(std::make_pair(o.id(), e.name()));
+        e.generation_type(generation_type(p));
+        e.origin_type(sml::origin_types::user);
+
+        const auto pair(comments_parser_->parse(o.comment()));
+        e.documentation(pair.first);
+        e.implementation_specific_parameters(pair.second);
+    }
+
+    /**
      * @brief Update the SML abstract object using the processed
      * object and the profile.
      */
@@ -128,7 +146,7 @@ private:
      *
      * @param o the Dia UML class containing an enumeration.
      */
-    void transform_enumeration(const processed_object& o);
+    void transform_enumeration(const processed_object& o, const profile& p);
 
     /**
      * @brief Converts a dia object of type large UML package into a
@@ -136,7 +154,7 @@ private:
      *
      * @param o Dia object which contains a UML package.
      */
-    void transform_module(const processed_object& o);
+    void transform_module(const processed_object& o, const profile& p);
 
     /**
      * @brief Converts a dia object of type UML note into
@@ -147,20 +165,12 @@ private:
     void transform_note(const processed_object& o);
 
     /**
-     * @brief Converts a dia object with a stereotype of exception
-     * into a SML exception.
-     *
-     * @param o Dia object which contains an exception.
-     */
-    void transform_exception(const processed_object& o);
-
-    /**
      * @brief Converts a dia object with a stereotype of concept
      * into a SML concept.
      *
      * @param o Dia object which contains a concept.
      */
-    void transform_concept(const processed_object& o);
+    void transform_concept(const processed_object& o, const profile& p);
 
 private:
     /**

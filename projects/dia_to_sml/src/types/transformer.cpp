@@ -221,10 +221,7 @@ void transformer::
 transform_abstract_object(sml::abstract_object& ao,
     const processed_object& o, const profile& p) {
 
-    const std::string pkg_id(o.child_node_id());
-    ao.name(transform_qname(o.name(), pkg_id));
-    ao.generation_type(generation_type(p));
-    ao.origin_type(sml::origin_types::user);
+    transform_element(ao, o, p);
 
     ao.is_fluent(p.is_fluent());
     ao.is_versioned(p.is_versioned());
@@ -235,21 +232,11 @@ transform_abstract_object(sml::abstract_object& ao,
         ao.modeled_concepts().push_back(c);
     }
 
-    const auto pair(comments_parser_->parse(o.comment()));
-    ao.documentation(pair.first);
-    ao.implementation_specific_parameters(pair.second);
-
     for (const auto& p : o.properties()) {
         auto property(transform_property(p));
         property.type(transform_nested_qname(p.type()));
         compute_model_dependencies(property.type());
         ao.properties().push_back(property);
-    }
-
-    if (ao.name().simple_name().empty()) {
-        BOOST_LOG_SEV(lg, error) << empty_dia_object_name + o.id();
-        BOOST_THROW_EXCEPTION(
-            transformation_error(empty_dia_object_name + o.id()));
     }
 
     const auto i(context_.child_id_to_parent_ids().find(o.id()));
@@ -424,18 +411,11 @@ transform_value_object(const processed_object& o, const profile& p) {
     context_.model().objects().insert(std::make_pair(vo->name(), vo));
 }
 
-void transformer::transform_enumeration(const processed_object& o) {
+void transformer::
+transform_enumeration(const processed_object& o, const profile& p) {
     BOOST_LOG_SEV(lg, debug) << "Object is an enumeration: " << o.id();
     sml::enumeration e;
-
-    e.generation_type(context_.is_target() ?
-        sml::generation_types::full_generation :
-        sml::generation_types::no_generation);
-    e.origin_type(sml::origin_types::user);
-
-    const std::string pkg_id(o.child_node_id());
-    e.name(transform_qname(o.name(), pkg_id));
-    e.documentation(o.comment());
+    transform_element(e, o, p);
 
     dogen::sml::qname qn;
     qn.simple_name(unsigned_int);
@@ -467,25 +447,12 @@ void transformer::transform_enumeration(const processed_object& o) {
     context_.model().enumerations().insert(std::make_pair(e.name(), e));
 }
 
-void transformer::transform_module(const processed_object& o) {
+void transformer::
+transform_module(const processed_object& o, const profile& p) {
     BOOST_LOG_SEV(lg, debug) << "Object is a module: " << o.id();
 
     sml::module m;
-    const std::string pkg_id(o.child_node_id());
-    m.name(transform_qname(o.name(), pkg_id));
-    m.documentation(o.comment());
-    m.generation_type(context_.is_target() ?
-        sml::generation_types::full_generation :
-        sml::generation_types::no_generation);
-    m.origin_type(sml::origin_types::user);
-
-    if (m.name().simple_name().empty()) {
-        BOOST_THROW_EXCEPTION(
-            transformation_error(empty_dia_object_name + o.id()));
-        BOOST_LOG_SEV(lg, error) << empty_dia_object_name + o.id();
-    }
-
-    context_.id_to_qname().insert(std::make_pair(o.id(), m.name()));
+    transform_element(m, o, p);
     context_.model().modules().insert(std::make_pair(m.name(), m));
 }
 
@@ -533,16 +500,10 @@ void transformer::transform_note(const processed_object& o) {
     j->second.implementation_specific_parameters(pair.second);
 }
 
-void transformer::transform_concept(const processed_object& o) {
+void transformer::
+transform_concept(const processed_object& o, const profile& p) {
     sml::concept c;
-    const std::string pkg_id(o.child_node_id());
-    c.name(transform_qname(o.name(), pkg_id));
-    context_.id_to_qname().insert(std::make_pair(o.id(), c.name()));
-
-    c.generation_type(context_.is_target() ?
-        sml::generation_types::full_generation :
-        sml::generation_types::no_generation);
-    c.origin_type(sml::origin_types::user);
+    transform_element(c, o, p);
 
     for (const auto& prop : o.properties()) {
         auto property(transform_property(prop));
@@ -588,13 +549,13 @@ bool transformer::is_transformable(const processed_object& o) const {
 
 void  transformer::dispatch(const processed_object& o, const profile& p) {
     if (p.is_uml_large_package())
-        transform_module(o);
+        transform_module(o, p);
     else if (p.is_uml_note())
         transform_note(o);
     else if (p.is_enumeration())
-        transform_enumeration(o);
+        transform_enumeration(o, p);
     else if (p.is_concept())
-        transform_concept(o);
+        transform_concept(o, p);
     else if (p.is_exception())
         transform_exception(o, p);
     else if (p.is_entity())

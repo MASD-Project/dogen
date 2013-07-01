@@ -270,7 +270,8 @@
 				<type>
 					<documentation>this is a brief comment
 
-this is a long comment</documentation>
+this is a long comment
+</documentation>
 					<implementation_specific_parameters>
 						<count>0</count>
 						<item_version>0</item_version>
