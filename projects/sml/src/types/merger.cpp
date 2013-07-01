@@ -99,16 +99,29 @@ void merger::check_qname(const std::string& model_name, const qname& key,
 }
 
 void merger::update_references() {
+    typedef std::pair<qname, origin_types> value_type;
+    std::map<std::string, value_type> references_by_model_name;
+    for (const auto& pair : models_) {
+        const auto& model(pair.second);
+        const auto value(std::make_pair(model.name(), model.origin_type()));
+        const auto p(std::make_pair(model.name().model_name(), value));
+        references_by_model_name.insert(p);
+    }
+
+    std::unordered_map<qname, origin_types> updated_references;
     for (auto& pair : merged_model_.references()) {
         const auto qn(pair.first);
         const auto mn(qn.model_name());
-        const auto i(models_.find(qn));
-        if (i == models_.end()) {
+        const auto i(references_by_model_name.find(mn));
+        if (i == references_by_model_name.end()) {
             BOOST_LOG_SEV(lg, error) << msising_dependency << mn;
             BOOST_THROW_EXCEPTION(merging_error(msising_dependency + mn));
         }
-        pair.second = i->second.origin_type();
+
+        const auto p(std::make_pair(i->second.first, i->second.second));
+        updated_references.insert(p);
     }
+    merged_model_.references(updated_references);
 }
 
 void merger::add_target(const model& target) {
