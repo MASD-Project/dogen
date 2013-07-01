@@ -185,6 +185,7 @@ void populate_object(dogen::sml::abstract_object& o, const unsigned int i,
     o.name(qn);
     o.generation_type(dogen::sml::generation_types::full_generation);
     o.documentation(documentation);
+    o.origin_type(dogen::sml::origin_types::user);
 }
 
 boost::shared_ptr<dogen::sml::abstract_object>
@@ -308,6 +309,7 @@ build_multi_type_model(const unsigned int n, const unsigned int type_n,
     model r;
     r.name(mock_model_qname(n));
     r.documentation(documentation);
+    r.origin_type(origin_types::user);
 
     std::list<std::string> pp;
     for (unsigned int i(0); i < mod_n; ++i) {
@@ -507,10 +509,12 @@ object_with_parent_in_different_models() {
     model m0;
     m0.objects().insert(std::make_pair(o0->name(), o0));
     m0.name(mock_model_qname(0));
+    m0.origin_type(origin_types::user);
 
     model m1;
     m1.objects().insert(std::make_pair(o1->name(), o1));
     m1.name(mock_model_qname(1));
+    m1.origin_type(origin_types::user);
 
     return std::array<model, 2> {{ m0, m1 }};
 }
@@ -537,6 +541,7 @@ model mock_model_factory::object_with_three_children_in_same_model() {
     o3->leaves().push_back(o2->name());
 
     model r;
+    r.origin_type(origin_types::user);
     r.objects().insert(std::make_pair(o0->name(), o0));
     r.objects().insert(std::make_pair(o1->name(), o1));
     r.objects().insert(std::make_pair(o2->name(), o2));
@@ -599,6 +604,7 @@ object_with_third_degree_parent_in_same_model(bool add_property) {
     o3->is_parent(true);
 
     model r;
+    r.origin_type(origin_types::user);
     r.objects().insert(std::make_pair(o0->name(), o0));
     r.objects().insert(std::make_pair(o1->name(), o1));
     r.objects().insert(std::make_pair(o2->name(), o2));
@@ -631,6 +637,7 @@ model mock_model_factory::object_with_third_degree_parent_missing() {
     o3->leaves().push_back(o0->name());
 
     model r;
+    r.origin_type(origin_types::user);
     r.objects().insert(std::make_pair(o0->name(), o0));
     r.objects().insert(std::make_pair(o1->name(), o1));
     r.objects().insert(std::make_pair(o2->name(), o2));
@@ -662,18 +669,22 @@ mock_model_factory::object_with_third_degree_parent_in_different_models() {
     o3->leaves().push_back(o0->name());
 
     model m0;
+    m0.origin_type(origin_types::user);
     m0.objects().insert(std::make_pair(o0->name(), o0));
     m0.name(mock_model_qname(0));
 
     model m1;
+    m1.origin_type(origin_types::user);
     m1.objects().insert(std::make_pair(o1->name(), o1));
     m1.name(mock_model_qname(1));
 
     model m2;
+    m2.origin_type(origin_types::user);
     m2.objects().insert(std::make_pair(o2->name(), o2));
     m2.name(mock_model_qname(2));
 
     model m3;
+    m3.origin_type(origin_types::user);
     m3.objects().insert(std::make_pair(o3->name(), o3));
     m3.name(mock_model_qname(3));
 
@@ -704,14 +715,17 @@ object_with_missing_third_degree_parent_in_different_models() {
     o3->leaves().push_back(o0->name());
 
     model m0;
+    m0.origin_type(origin_types::user);
     m0.objects().insert(std::make_pair(o0->name(), o0));
     m0.name(mock_model_qname(0));
 
     model m1;
+    m1.origin_type(origin_types::user);
     m1.objects().insert(std::make_pair(o1->name(), o1));
     m1.name(mock_model_qname(1));
 
     model m2;
+    m2.origin_type(origin_types::user);
     m2.objects().insert(std::make_pair(o2->name(), o2));
     m2.name(mock_model_qname(2));
 

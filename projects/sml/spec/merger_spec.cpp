@@ -40,6 +40,7 @@ const std::string test_suite("merger_spec");
 
 const std::string invalid_type_name("INVALID");
 const std::string invalid_model_name("INVALID");
+const std::string some_path("some_path");
 
 const std::string incorrect_model("Type does not belong to this model");
 const std::string double_merging("Attempt to merge more than once");
@@ -58,11 +59,23 @@ BOOST_AUTO_TEST_SUITE(merger)
 
 BOOST_AUTO_TEST_CASE(merging_n_distinct_models_with_one_object_each_results_in_n_objects_in_merged_model) {
     SETUP_TEST_LOG_SOURCE("merging_n_distinct_models_with_one_object_each_results_in_n_objects_in_merged_model");
+
+    auto target(mock_model_factory::build_single_type_model(0));
     const unsigned int n(5);
+    for (unsigned int i(1); i < n; ++i) {
+        dogen::sml::qname qn;
+        qn.model_name(mock_model_factory::model_name(i));
+        const auto ot(dogen::sml::origin_types::unknown);
+        target.references().insert(std::make_pair(qn, ot));
+    }
+
     dogen::sml::merger mg;
-    for (unsigned int i(0); i < n; ++i) {
-        const auto m(mock_model_factory::build_single_type_model(i));
-        i == 0 ? mg.add_target(m) : mg.add(m);
+    mg.add_target(target);
+
+    for (unsigned int i(1); i < n; ++i) {
+        auto m(mock_model_factory::build_single_type_model(i));
+        m.name().external_module_path().push_back(some_path);
+        mg.add(m);
     }
 
     BOOST_CHECK(!mg.has_merged());
@@ -73,6 +86,12 @@ BOOST_AUTO_TEST_CASE(merging_n_distinct_models_with_one_object_each_results_in_n
     BOOST_CHECK(combined.enumerations().empty());
     BOOST_CHECK(combined.concepts().empty());
     BOOST_CHECK(combined.modules().empty());
+    BOOST_CHECK(combined.references().size() == 4);
+
+    for (const auto pair : combined.references()) {
+        BOOST_CHECK(pair.first.external_module_path().front() == some_path);
+        BOOST_CHECK(pair.second == dogen::sml::origin_types::user);
+    }
 
     std::set<std::string> object_names;
     std::set<std::string> model_names;
