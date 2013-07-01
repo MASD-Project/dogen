@@ -98,14 +98,16 @@ void merger::check_qname(const std::string& model_name, const qname& key,
     }
 }
 
-void merger::validate_references() const {
-    for (const auto& qn : merged_model_.references()) {
+void merger::update_references() {
+    for (auto& pair : merged_model_.references()) {
+        const auto qn(pair.first);
         const auto mn(qn.model_name());
         const auto i(models_.find(qn));
         if (i == models_.end()) {
             BOOST_LOG_SEV(lg, error) << msising_dependency << mn;
             BOOST_THROW_EXCEPTION(merging_error(msising_dependency + mn));
         }
+        pair.second = i->second.origin_type();
     }
 }
 
@@ -172,7 +174,7 @@ void merger::merge_models() {
 model merger::merge() {
     require_has_target();
     require_not_has_merged();
-    validate_references();
+    update_references();
     merge_models();
     has_merged_ = true;
     return merged_model_;

@@ -53,6 +53,15 @@ inline std::size_t hash_std_vector_std_pair_std_string_std_string_(const std::ve
     return seed;
 }
 
+inline std::size_t hash_std_unordered_map_dogen_sml_qname_dogen_sml_origin_types(const std::unordered_map<dogen::sml::qname, dogen::sml::origin_types>& v){
+    std::size_t seed(0);
+    for (const auto i : v) {
+        combine(seed, i.first);
+        combine(seed, i.second);
+    }
+    return seed;
+}
+
 inline std::size_t hash_std_unordered_set_dogen_sml_qname(const std::unordered_set<dogen::sml::qname>& v){
     std::size_t seed(0);
     for (const auto i : v) {
@@ -125,7 +134,7 @@ std::size_t model_hasher::hash(const model&v) {
     combine(seed, v.name());
     combine(seed, v.generation_type());
     combine(seed, v.origin_type());
-    combine(seed, hash_std_unordered_set_dogen_sml_qname(v.references()));
+    combine(seed, hash_std_unordered_map_dogen_sml_qname_dogen_sml_origin_types(v.references()));
     combine(seed, hash_std_unordered_set_dogen_sml_qname(v.leaves()));
     combine(seed, hash_std_unordered_map_dogen_sml_qname_dogen_sml_module(v.modules()));
     combine(seed, hash_std_unordered_map_dogen_sml_qname_dogen_sml_concept(v.concepts()));

@@ -25,20 +25,23 @@
 		<count>1</count>
 		<bucket_count>11</bucket_count>
 		<item_version>0</item_version>
-		<item>
-			<model_name>std</model_name>
-			<external_module_path>
-				<count>0</count>
-				<item_version>0</item_version>
-			</external_module_path>
-			<module_path>
-				<count>0</count>
-				<item_version>0</item_version>
-			</module_path>
-			<simple_name></simple_name>
+		<item class_id="13" tracking_level="0" version="0">
+			<first>
+				<model_name>std</model_name>
+				<external_module_path>
+					<count>0</count>
+					<item_version>0</item_version>
+				</external_module_path>
+				<module_path>
+					<count>0</count>
+					<item_version>0</item_version>
+				</module_path>
+				<simple_name></simple_name>
+			</first>
+			<second>3</second>
 		</item>
 	</references>
-	<leaves>
+	<leaves class_id="14" tracking_level="0" version="0">
 		<count>1</count>
 		<bucket_count>11</bucket_count>
 		<item_version>0</item_version>
@@ -55,11 +58,11 @@
 			<simple_name>derived</simple_name>
 		</item>
 	</leaves>
-	<modules class_id="13" tracking_level="0" version="0">
+	<modules class_id="15" tracking_level="0" version="0">
 		<count>1</count>
 		<bucket_count>11</bucket_count>
 		<item_version>0</item_version>
-		<item class_id="14" tracking_level="0" version="0">
+		<item class_id="16" tracking_level="0" version="0">
 			<first>
 				<model_name>std_model</model_name>
 				<external_module_path>
@@ -72,7 +75,7 @@
 				</module_path>
 				<simple_name>pkg1</simple_name>
 			</first>
-			<second class_id="15" tracking_level="0" version="0">
+			<second class_id="17" tracking_level="0" version="0">
 				<documentation></documentation>
 				<implementation_specific_parameters>
 					<count>0</count>
@@ -92,33 +95,33 @@
 				</name>
 				<generation_type>1</generation_type>
 				<origin_type>1</origin_type>
-				<members class_id="16" tracking_level="0" version="0">
+				<members class_id="18" tracking_level="0" version="0">
 					<count>0</count>
 					<item_version>0</item_version>
 				</members>
 			</second>
 		</item>
 	</modules>
-	<concepts class_id="17" tracking_level="0" version="0">
+	<concepts class_id="19" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>11</bucket_count>
 		<item_version>0</item_version>
 	</concepts>
-	<primitives class_id="18" tracking_level="0" version="0">
+	<primitives class_id="20" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>11</bucket_count>
 		<item_version>0</item_version>
 	</primitives>
-	<enumerations class_id="19" tracking_level="0" version="0">
+	<enumerations class_id="21" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>11</bucket_count>
 		<item_version>0</item_version>
 	</enumerations>
-	<objects class_id="20" tracking_level="0" version="0">
+	<objects class_id="22" tracking_level="0" version="0">
 		<count>13</count>
 		<bucket_count>23</bucket_count>
 		<item_version>0</item_version>
-		<item class_id="21" tracking_level="0" version="0">
+		<item class_id="23" tracking_level="0" version="0">
 			<first>
 				<model_name>std_model</model_name>
 				<external_module_path>
@@ -131,10 +134,10 @@
 				</module_path>
 				<simple_name>some_service</simple_name>
 			</first>
-			<second class_id="22" tracking_level="0" version="1">
+			<second class_id="24" tracking_level="0" version="1">
 				<px class_id="6" tracking_level="1" version="0" object_id="_0">
-					<abstract_object class_id="23" tracking_level="0" version="0">
-						<type class_id="24" tracking_level="0" version="0">
+					<abstract_object class_id="25" tracking_level="0" version="0">
+						<type class_id="26" tracking_level="0" version="0">
 							<documentation></documentation>
 							<implementation_specific_parameters>
 								<count>0</count>
@@ -155,17 +158,17 @@
 							<generation_type>2</generation_type>
 							<origin_type>1</origin_type>
 						</type>
-						<properties class_id="25" tracking_level="0" version="0">
+						<properties class_id="27" tracking_level="0" version="0">
 							<count>4</count>
 							<item_version>0</item_version>
-							<item class_id="26" tracking_level="0" version="0">
+							<item class_id="28" tracking_level="0" version="0">
 								<documentation></documentation>
 								<implementation_specific_parameters>
 									<count>0</count>
 									<item_version>0</item_version>
 								</implementation_specific_parameters>
 								<name>prop_0</name>
-								<type class_id="27" tracking_level="0" version="0">
+								<type class_id="29" tracking_level="0" version="0">
 									<type>
 										<model_name>std</model_name>
 										<external_module_path>
@@ -178,7 +181,7 @@
 										</module_path>
 										<simple_name>shared_ptr</simple_name>
 									</type>
-									<children class_id="28" tracking_level="0" version="0">
+									<children class_id="30" tracking_level="0" version="0">
 										<count>1</count>
 										<item_version>0</item_version>
 										<item>
@@ -328,11 +331,11 @@
 								<default_value></default_value>
 							</item>
 						</properties>
-						<operations class_id="29" tracking_level="0" version="0">
+						<operations class_id="31" tracking_level="0" version="0">
 							<count>0</count>
 							<item_version>0</item_version>
 						</operations>
-						<parent_name class_id="30" tracking_level="0" version="0">
+						<parent_name class_id="32" tracking_level="0" version="0">
 							<initialized>0</initialized>
 						</parent_name>
 						<original_parent_name>
@@ -1546,7 +1549,7 @@
 			</first>
 			<second>
 				<px class_id="0" tracking_level="1" version="0" object_id="_5">
-					<abstract_entity class_id="31" tracking_level="0" version="0">
+					<abstract_entity class_id="33" tracking_level="0" version="0">
 						<abstract_object>
 							<type>
 								<documentation></documentation>
@@ -1577,7 +1580,7 @@
 									<implementation_specific_parameters>
 										<count>1</count>
 										<item_version>0</item_version>
-										<item class_id="32" tracking_level="0" version="0">
+										<item class_id="34" tracking_level="0" version="0">
 											<first>IDENTITY_ATTRIBUTE</first>
 											<second>true</second>
 										</item>

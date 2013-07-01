@@ -90,12 +90,16 @@ transformer::transformer(context& c)
 
 void transformer::
 compute_model_dependencies(const sml::nested_qname& nqn) {
-    // primitives model is empty
     const auto mn(nqn.type().model_name());
-    if (!mn.empty() && mn != context_.model().name().model_name()) {
+    const bool is_primitives_model(mn.empty());
+    const bool is_current_model(mn != context_.model().name().model_name());
+
+    if (!is_primitives_model && is_current_model) {
         sml::qname qn;
         qn.model_name(mn);
-        context_.model().references().insert(qn);
+        const auto p(std::make_pair(qn, sml::origin_types::unknown));
+        context_.model().references().insert(p);
+
         BOOST_LOG_SEV(lg, debug) << "Adding model dependency: "
                                  << mn << ". Current model: "
                                  << context_.model().name().model_name();

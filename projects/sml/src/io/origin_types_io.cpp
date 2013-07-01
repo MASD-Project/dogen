@@ -39,6 +39,9 @@ std::ostream& operator<<(std::ostream& s, const origin_types& v) {
     case origin_types::system:
         attr = "\"system\"";
         break;
+    case origin_types::unknown:
+        attr = "\"unknown\"";
+        break;
     default:
         throw std::invalid_argument("Invalid value for origin_types");
     }

@@ -43,7 +43,7 @@ model::model(
     const dogen::sml::qname& name,
     const dogen::sml::generation_types& generation_type,
     const dogen::sml::origin_types& origin_type,
-    const std::unordered_set<dogen::sml::qname>& references,
+    const std::unordered_map<dogen::sml::qname, dogen::sml::origin_types>& references,
     const std::unordered_set<dogen::sml::qname>& leaves,
     const std::unordered_map<dogen::sml::qname, dogen::sml::module>& modules,
     const std::unordered_map<dogen::sml::qname, dogen::sml::concept>& concepts,
@@ -164,19 +164,19 @@ void model::origin_type(const dogen::sml::origin_types& v) {
     origin_type_ = v;
 }
 
-const std::unordered_set<dogen::sml::qname>& model::references() const {
+const std::unordered_map<dogen::sml::qname, dogen::sml::origin_types>& model::references() const {
     return references_;
 }
 
-std::unordered_set<dogen::sml::qname>& model::references() {
+std::unordered_map<dogen::sml::qname, dogen::sml::origin_types>& model::references() {
     return references_;
 }
 
-void model::references(const std::unordered_set<dogen::sml::qname>& v) {
+void model::references(const std::unordered_map<dogen::sml::qname, dogen::sml::origin_types>& v) {
     references_ = v;
 }
 
-void model::references(const std::unordered_set<dogen::sml::qname>&& v) {
+void model::references(const std::unordered_map<dogen::sml::qname, dogen::sml::origin_types>&& v) {
     references_ = std::move(v);
 }
 

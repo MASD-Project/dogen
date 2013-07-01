@@ -148,7 +148,8 @@ qname resolver::resolve_partial_type(const qname& n) const {
         return r;
 
     // now try all available module paths from references
-    for (const auto& qn : model_.references()) {
+    for (const auto& pair : model_.references()) {
+        const auto qn(pair.first);
         r.external_module_path(qn.external_module_path());
         i = objects.find(r);
         if (i != objects.end())
@@ -177,7 +178,8 @@ qname resolver::resolve_partial_type(const qname& n) const {
         return r;
 
     // now try all available module paths from references
-    for (const auto& qn : model_.references()) {
+    for (const auto& pair : model_.references()) {
+        const auto qn(pair.first);
         r.external_module_path(qn.external_module_path());
         k = enumerations.find(r);
         if (k != enumerations.end())

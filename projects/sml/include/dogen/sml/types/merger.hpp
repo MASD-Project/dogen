@@ -90,11 +90,9 @@ private:
         const qname& value) const;
 
     /**
-     * @brief Ensure that all known references have been added.
-     *
-     * @note should really be moved to validator.
+     * @brief Update all references to external models.
      */
-    void validate_references() const;
+    void update_references();
 
 private:
     /**

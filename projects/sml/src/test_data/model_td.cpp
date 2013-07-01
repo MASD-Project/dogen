@@ -68,6 +68,14 @@ create_dogen_sml_origin_types(const unsigned int position) {
     return dogen::sml::origin_types_generator::create(position);
 }
 
+std::unordered_map<dogen::sml::qname, dogen::sml::origin_types> create_std_unordered_map_dogen_sml_qname_dogen_sml_origin_types(unsigned int position) {
+    std::unordered_map<dogen::sml::qname, dogen::sml::origin_types> r;
+    for (unsigned int i(0); i < 10; ++i) {
+        r.insert(std::make_pair(create_dogen_sml_qname(position + i), create_dogen_sml_origin_types(position + i)));
+    }
+    return r;
+}
+
 std::unordered_set<dogen::sml::qname> create_std_unordered_set_dogen_sml_qname(unsigned int position) {
     std::unordered_set<dogen::sml::qname> r;
     for (unsigned int i(0); i < 10; ++i) {
@@ -162,7 +170,7 @@ populate(const unsigned int position, result_type& v) {
     v.name(create_dogen_sml_qname(position + 2));
     v.generation_type(create_dogen_sml_generation_types(position + 3));
     v.origin_type(create_dogen_sml_origin_types(position + 4));
-    v.references(create_std_unordered_set_dogen_sml_qname(position + 5));
+    v.references(create_std_unordered_map_dogen_sml_qname_dogen_sml_origin_types(position + 5));
     v.leaves(create_std_unordered_set_dogen_sml_qname(position + 6));
     v.modules(create_std_unordered_map_dogen_sml_qname_dogen_sml_module(position + 7));
     v.concepts(create_std_unordered_map_dogen_sml_qname_dogen_sml_concept(position + 8));

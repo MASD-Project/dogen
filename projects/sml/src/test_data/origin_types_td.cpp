@@ -26,7 +26,7 @@ namespace sml {
 origin_types_generator::origin_types_generator() : position_(0) { }
 void origin_types_generator::
 populate(const unsigned int position, result_type& v) {
-    v = static_cast<origin_types>(position % 3);
+    v = static_cast<origin_types>(position % 4);
 }
 
 origin_types_generator::result_type
