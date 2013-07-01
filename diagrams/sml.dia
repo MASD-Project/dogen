@@ -4602,16 +4602,16 @@ generation constraints, services tend to be where all the behaviour sits.#</dia:
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O34">
       <dia:attribute name="obj_pos">
-        <dia:point val="85,111"/>
+        <dia:point val="86,111"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="84.95,110.95;95.56,114.05"/>
+        <dia:rectangle val="85.95,110.95;90.4,114.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="85,111"/>
+        <dia:point val="86,111"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="10.51"/>
+        <dia:real val="4.3499999999999996"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -4620,7 +4620,7 @@ generation constraints, services tend to be where all the behaviour sits.#</dia:
         <dia:string>#factory#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#entity, aggregate root#</dia:string>
+        <dia:string>#entity#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#Type whose responsibility is to create other types.#</dia:string>
@@ -4715,7 +4715,7 @@ generation constraints, services tend to be where all the behaviour sits.#</dia:
         <dia:point val="85.9125,98.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="85.0625,98.55;90.305,111.05"/>
+        <dia:rectangle val="85.0625,98.55;88.225,111.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -4723,8 +4723,8 @@ generation constraints, services tend to be where all the behaviour sits.#</dia:
       <dia:attribute name="orth_points">
         <dia:point val="85.9125,98.6"/>
         <dia:point val="85.9125,106"/>
-        <dia:point val="90.255,106"/>
-        <dia:point val="90.255,111"/>
+        <dia:point val="88.175,106"/>
+        <dia:point val="88.175,111"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -4756,13 +4756,13 @@ generation constraints, services tend to be where all the behaviour sits.#</dia:
         <dia:point val="101,111"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="100.95,110.95;111.56,114.05"/>
+        <dia:rectangle val="100.95,110.95;106.21,114.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="101,111"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="10.51"/>
+        <dia:real val="5.1600000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -4771,7 +4771,7 @@ generation constraints, services tend to be where all the behaviour sits.#</dia:
         <dia:string>#repository#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#entity, aggregate root#</dia:string>
+        <dia:string>#entity#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#Represents all objects of a certain type as a conceptual set.
@@ -4871,7 +4871,7 @@ underlying storage (for example, a relational database).#</dia:string>
         <dia:point val="85.9125,98.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="85.0625,98.55;106.305,111.05"/>
+        <dia:rectangle val="85.0625,98.55;103.63,111.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -4879,8 +4879,8 @@ underlying storage (for example, a relational database).#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="85.9125,98.6"/>
         <dia:point val="85.9125,106"/>
-        <dia:point val="106.255,106"/>
-        <dia:point val="106.255,111"/>
+        <dia:point val="103.58,106"/>
+        <dia:point val="103.58,111"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
