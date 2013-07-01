@@ -290,9 +290,9 @@ registrar_info transformer::transform_model_into_registrar() const {
     registrar_info r;
     r.namespaces(transform_into_namespace_list(model_.name()));
 
-    for (const auto& qn : model_.references()) {
-        if (!d.is_system())
-            r.model_dependencies().push_back(d.model_name());
+    for (const auto& pair : model_.references()) {
+        if (pair.second != sml::origin_types::system)
+            r.model_dependencies().push_back(pair.first.model_name());
     }
 
     for (const auto& l : model_.leaves())
