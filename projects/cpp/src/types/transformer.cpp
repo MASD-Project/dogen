@@ -183,14 +183,10 @@ void transformer::properties_for_concept(const sml::qname& qn,
     processed_qnames.insert(qn);
     const auto i(model_.concepts().find(qn));
     if (i == model_.concepts().end()) {
-        BOOST_LOG_SEV(lg, error) << concept_not_found << qn.type_name();
-        BOOST_THROW_EXCEPTION(transformation_error(concept_not_found +
-                qn.type_name()));
+        BOOST_LOG_SEV(lg, error) << concept_not_found << qn.simple_name();
+        BOOST_THROW_EXCEPTION(
+            transformation_error(concept_not_found + qn.simple_name()));
     }
-
-    // FIXME: mega hack
-    // for (const auto& c : i->second.refines())
-    //     properties_for_concept(c, properties, processed_qnames);
 
     const auto& props(i->second.properties());
     properties.insert(properties.end(), props.begin(), props.end());
@@ -199,7 +195,7 @@ void transformer::properties_for_concept(const sml::qname& qn,
 std::string
 transformer::transform_into_qualified_name(const sml::qname& qn) const {
     std::list<std::string> l(transform_into_namespace_list(qn));
-    l.push_back(qn.type_name());
+    l.push_back(qn.simple_name());
 
     using boost::algorithm::join;
     std::string r(join(l, namespace_separator));
@@ -216,8 +212,9 @@ transformer::transform_into_namespace_list(const sml::qname& qn) const {
     const std::list<std::string> pp(qn.module_path());
     r.insert(r.end(), pp.begin(), pp.end());
 
-    if (qn.meta_type() == sml::meta_types::module)
-        r.push_back(qn.type_name());
+    const auto i(model_.modules().find(qn));
+    if (i != model_.modules().end())
+        r.push_back(qn.simple_name());
 
     return r;
 }
@@ -235,7 +232,7 @@ enum_info transformer::transform_enumeration(const sml::enumeration& e) const {
     BOOST_LOG_SEV(lg, debug) << "Transforming enumeration: " << e.name();
 
     enum_info r;
-    r.name(e.name().type_name());
+    r.name(e.name().simple_name());
     r.namespaces(transform_into_namespace_list(e.name()));
     r.documentation(e.documentation());
 
@@ -253,7 +250,7 @@ transformer::transform_exception(const sml::value_object& e) const {
     BOOST_LOG_SEV(lg, debug) << "Transforming exception: " << e.name();
 
     exception_info r;
-    r.name(e.name().type_name());
+    r.name(e.name().simple_name());
     r.namespaces(transform_into_namespace_list(e.name()));
     r.documentation(e.documentation());
 
@@ -275,36 +272,25 @@ namespace_info transformer::transform(const sml::module& p) const {
 }
 
 namespace_info transformer::transform_model_into_namespace() const {
-    const std::string n(model_.name());
+    const std::string n(model_.name().simple_name());
     BOOST_LOG_SEV(lg, debug) << "Transforming model into namespace: " << n;
 
     namespace_info r;
     r.documentation(model_.documentation());
-
-    sml::qname qn;
-    qn.type_name(n);
-    qn.external_module_path(model_.external_module_path());
-    qn.meta_type(sml::meta_types::module);
-    r.namespaces(transform_into_namespace_list(qn));
+    r.namespaces(transform_into_namespace_list(model_.name()));
 
     BOOST_LOG_SEV(lg, debug) << "Transformed model into namespace: " << n;
     return r;
 }
 
 registrar_info transformer::transform_model_into_registrar() const {
-    const std::string n(model_.name());
+    const std::string n(model_.name().simple_name());
     BOOST_LOG_SEV(lg, debug) << "Transforming model into registrar: " << n;
 
-    sml::qname qn;
-    qn.model_name(n);
-    qn.external_module_path(model_.external_module_path());
-    qn.meta_type(sml::meta_types::pod);
-
     registrar_info r;
-    r.namespaces(transform_into_namespace_list(qn));
+    r.namespaces(transform_into_namespace_list(model_.name()));
 
-    for (const auto& pair : model_.dependencies()) {
-        const auto d(pair.second);
+    for (const auto& qn : model_.references()) {
         if (!d.is_system())
             r.model_dependencies().push_back(d.model_name());
     }
