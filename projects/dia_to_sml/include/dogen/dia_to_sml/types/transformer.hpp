@@ -42,7 +42,7 @@ namespace dogen {
 namespace dia_to_sml {
 
 /**
- * @brief Transforms dia objects into their SML counterpart.
+ * @brief Transforms Dia objects into their SML counterpart.
  */
 class transformer {
 public:
@@ -52,18 +52,23 @@ public:
     ~transformer() noexcept = default;
 
 public:
+    /**
+     * @brief Initialises the transformer.
+     *
+     * @pre model in context must be populated.
+     */
     explicit transformer(context& c);
 
 private:
     /**
-     * @brief Compute all the model dependencies implied by a given
-     * nested qname
+     * @brief Update the model references with those which are implied
+     * by the given nested qname.
      */
-    void compute_model_dependencies(const sml::nested_qname& nqn);
+    void update_model_references(const sml::nested_qname& nqn);
 
     /**
-     * @brief Checks that the type of the object is a processable
-     * type.
+     * @brief Ensure that the processed object implies an SML type
+     * which is supported by the transformer.
      */
     void require_is_transformable(const processed_object& o) const;
 
@@ -75,45 +80,58 @@ private:
 
 private:
     /**
-     * @brief Converts the Dia attribute into a qname.
-     */
-    sml::qname transform_qname(const std::string& n,
-        const std::string& pkg_id) const;
-
-    /**
-     * @brief Converts the string into a nested qname.
-     */
-    sml::nested_qname transform_nested_qname(const std::string& n) const;
-
-    /**
-     * @brief Converts a Dia composite storing the UML attribute into
-     * an SML property
+     * @brief Creates a qname using the name provided and the package
+     * ID.
      *
-     * @param uml_attribute the Dia UML attribute
+     * @pre n must not be empty.
+     * @pre n must be a simple name, not a qualified name.
+     * @pre if supplied pkg_id must be the object ID of a package.
      */
-    sml::property transform_property(const processed_property& p) const;
+    sml::qname to_qname(const std::string& n,
+        const std::string& pkg_id = std::string()) const;
 
     /**
-     * @brief Converts a Dia composite storing the UML attribute into
-     * an SML enumerator
+     * @brief Creates a nested qname from a string representation of a
+     * qualified name.
      *
-     * @param uml_attribute the Dia UML attribute
+     * @pre n must not be empty.
      */
-    sml::enumerator transform_enumerator(const processed_property& p,
-        const unsigned int position) const;
+    sml::nested_qname to_nested_qname(const std::string& n) const;
 
+    /**
+     * @brief Converts processed property into an SML property.
+     *
+     * @param p the Dia UML attribute in processed form.
+     *
+     * @pre name of property must not be empty.
+     * @pre type of property must not be empty.
+     */
+    sml::property to_property(const processed_property& p) const;
+
+    /**
+     * @brief Converts processed property into an SML enumerator.
+     *
+     * @param p the Dia UML attribute in processed form.
+     * @param value what value should the enumeration take.
+     *
+     * @pre name of property must not be empty.
+     * @pre type of property must be empty.
+     */
+    sml::enumerator to_enumerator(const processed_property& p,
+        const unsigned int value) const;
+
+private:
     /**
      * @brief Update the SML element using the processed object and the
      * profile.
      */
     template<typename Element>
-    void transform_element(Element& e, const processed_object& o,
+    void update_element(Element& e, const processed_object& o,
         const profile& p) {
-        const std::string pkg_id(o.child_node_id());
-        e.name(transform_qname(o.name(), pkg_id));
-        context_.id_to_qname().insert(std::make_pair(o.id(), e.name()));
         e.generation_type(generation_type(p));
         e.origin_type(sml::origin_types::user);
+        e.name(to_qname(o.name(), o.child_node_id()));
+        context_.id_to_qname().insert(std::make_pair(o.id(), e.name()));
 
         const auto pair(comments_parser_->parse(o.comment()));
         e.documentation(pair.first);
@@ -124,29 +142,100 @@ private:
      * @brief Update the SML abstract object using the processed
      * object and the profile.
      */
-    void transform_abstract_object(sml::abstract_object& ao,
+    void update_abstract_object(sml::abstract_object& ao,
         const processed_object& o, const profile& p);
 
     /**
      * @brief Update the SML abstract entity using the processed
      * object and the profile.
      */
-    void transform_abstract_entity(sml::abstract_entity& ae,
+    void update_abstract_entity(sml::abstract_entity& ae,
         const processed_object& o, const profile& p);
 
-    void transform_keyed_entity(const processed_object& o, const profile& p);
-    void transform_entity(const processed_object& o, const profile& p);
-    void transform_exception(const processed_object& o, const profile& p);
-    void transform_service(const processed_object& o, const profile& p);
-    void transform_factory(const processed_object& o, const profile& p);
-    void transform_repository(const processed_object& o, const profile& p);
-    void transform_value_object(const processed_object& o, const profile& p);
+private:
+    /**
+     * @brief Converts a processed object containing a UML class with
+     * a stereotype of keyed entity to an SML keyed entity.
+     *
+     * @param o the processed object containing a keyed entity.
+     * @param p profile of the object.
+     *
+     * @pre profile must have the keyed entity flag set.
+     */
+    void to_keyed_entity(const processed_object& o, const profile& p);
+
+    /**
+     * @brief Converts a processed object containing a UML class with a
+     * stereotype of entity to an SML entity.
+     *
+     * @param o the processed object containing an entity.
+     * @param p profile of the object.
+     *
+     * @pre profile must have the entity flag set.
+     */
+    void to_entity(const processed_object& o, const profile& p);
+
+    /**
+     * @brief Converts a processed object containing a UML class with
+     * a stereotype of exception to a SML exception.
+     *
+     * @param o the Dia UML class containing an enumeration.
+     * @param p profile of the object.
+     *
+     * @pre profile must have the exception flag set.
+     */
+    void to_exception(const processed_object& o, const profile& p);
+
+    /**
+     * @brief Converts Dia a object containing a UML class with a
+     * stereotype of service to a SML service.
+     *
+     * @param o the Dia UML class containing an enumeration.
+     * @param p profile of the object.
+     *
+     * @pre profile must have the service flag set.
+     */
+    void to_service(const processed_object& o, const profile& p);
+
+    /**
+     * @brief Converts Dia a object containing a UML class with a
+     * stereotype of factory to a SML service.
+     *
+     * @param o the Dia UML class containing an enumeration.
+     * @param p profile of the object.
+     *
+     * @pre profile must have the factory flag set.
+     */
+    void to_factory(const processed_object& o, const profile& p);
+
+    /**
+     * @brief Converts Dia a object containing a UML class with a
+     * stereotype of repository to a SML service.
+     *
+     * @param o the Dia UML class containing an repository.
+     * @param p profile of the object.
+     *
+     * @pre profile must have the repository flag set.
+     */
+    void to_repository(const processed_object& o, const profile& p);
+
+    /**
+     * @brief Converts Dia a object containing a UML class with a
+     * stereotype of value object to a SML service.
+     *
+     * @param o the Dia UML class containing a value object.
+     * @param p profile of the object.
+     *
+     * @pre profile must have the value object flag set.
+     */
+    void to_value_object(const processed_object& o, const profile& p);
+
     /**
      * @brief Converts a object containing a class into an enumeration.
      *
      * @param o the Dia UML class containing an enumeration.
      */
-    void transform_enumeration(const processed_object& o, const profile& p);
+    void to_enumeration(const processed_object& o, const profile& p);
 
     /**
      * @brief Converts a dia object of type large UML package into a
@@ -154,7 +243,7 @@ private:
      *
      * @param o Dia object which contains a UML package.
      */
-    void transform_module(const processed_object& o, const profile& p);
+    void to_module(const processed_object& o, const profile& p);
 
     /**
      * @brief Converts a dia object of type UML note into
@@ -162,7 +251,7 @@ private:
      *
      * @param o Dia object which contains a UML note.
      */
-    void transform_note(const processed_object& o);
+    void from_note(const processed_object& o);
 
     /**
      * @brief Converts a dia object with a stereotype of concept
@@ -170,7 +259,7 @@ private:
      *
      * @param o Dia object which contains a concept.
      */
-    void transform_concept(const processed_object& o, const profile& p);
+    void to_concept(const processed_object& o, const profile& p);
 
 private:
     /**
@@ -182,8 +271,8 @@ private:
 
 public:
     /**
-     * @brief Returns true if the object is supported by the
-     * transformer, false otherwise.
+     * @brief Checks if the processed object implies an SML type which
+     * is supported by the transformer.
      */
     bool is_transformable(const processed_object& o) const;
 
