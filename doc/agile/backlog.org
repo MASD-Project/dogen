@@ -11,6 +11,17 @@ This file contains all stories that haven't been assigned to a sprint.
 
 Stories that we intend to look at, at some point.
 
+*** Refactor Dia to SML transformer
+
+- remove all properties from context which are used only internally in
+  the transformer.
+- split context into inputs and outputs: =transformation_result= as a
+  candidate for the outputs.
+- inputs are passed in at construction time and remain constant.
+- each transformation method returns a value which can be slotted into
+  the model by the workflow, contained in a transformation result.
+- this does mean a lot of concatenation at the workflow level though.
+
 *** Add tests for SML workflow
 
 We don't seem to have any. A few come to mind:
