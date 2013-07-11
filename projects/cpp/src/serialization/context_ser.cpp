@@ -26,9 +26,17 @@
 #include <boost/archive/text_oarchive.hpp>
 #include <boost/archive/xml_iarchive.hpp>
 #include <boost/archive/xml_oarchive.hpp>
+#include <boost/serialization/list.hpp>
 #include <boost/serialization/nvp.hpp>
+#include <boost/serialization/optional.hpp>
 #include "dogen/cpp/serialization/class_info_ser.hpp"
 #include "dogen/cpp/serialization/context_ser.hpp"
+#include "dogen/cpp/serialization/enum_info_ser.hpp"
+#include "dogen/cpp/serialization/exception_info_ser.hpp"
+#include "dogen/cpp/serialization/namespace_info_ser.hpp"
+#include "dogen/cpp/serialization/registrar_info_ser.hpp"
+#include "dogen/cpp/serialization/string_table_info_ser.hpp"
+#include "dogen/cpp/serialization/visitor_info_ser.hpp"
 #include "dogen/sml/serialization/qname_ser.hpp"
 #include "dogen/utility/serialization/unordered_map.hpp"
 
@@ -45,6 +53,13 @@ void save(Archive& ar,
     const dogen::cpp::context& v,
     const unsigned int /*version*/) {
     ar << make_nvp("qname_to_class_info", v.qname_to_class_info_);
+    ar << make_nvp("exceptions", v.exceptions_);
+    ar << make_nvp("classes", v.classes_);
+    ar << make_nvp("enumerations", v.enumerations_);
+    ar << make_nvp("registrar", v.registrar_);
+    ar << make_nvp("namespaces", v.namespaces_);
+    ar << make_nvp("visitors", v.visitors_);
+    ar << make_nvp("string_tables", v.string_tables_);
 }
 
 template<typename Archive>
@@ -52,6 +67,13 @@ void load(Archive& ar,
     dogen::cpp::context& v,
     const unsigned int /*version*/) {
     ar >> make_nvp("qname_to_class_info", v.qname_to_class_info_);
+    ar >> make_nvp("exceptions", v.exceptions_);
+    ar >> make_nvp("classes", v.classes_);
+    ar >> make_nvp("enumerations", v.enumerations_);
+    ar >> make_nvp("registrar", v.registrar_);
+    ar >> make_nvp("namespaces", v.namespaces_);
+    ar >> make_nvp("visitors", v.visitors_);
+    ar >> make_nvp("string_tables", v.string_tables_);
 }
 
 } }

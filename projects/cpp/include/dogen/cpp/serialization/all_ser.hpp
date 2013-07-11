@@ -21,6 +21,7 @@
 #include "dogen/cpp/serialization/aspect_types_ser.hpp"
 #include "dogen/cpp/serialization/boost_types_ser.hpp"
 #include "dogen/cpp/serialization/class_info_ser.hpp"
+#include "dogen/cpp/serialization/class_types_ser.hpp"
 #include "dogen/cpp/serialization/cmakelists_info_ser.hpp"
 #include "dogen/cpp/serialization/content_descriptor_ser.hpp"
 #include "dogen/cpp/serialization/context_ser.hpp"

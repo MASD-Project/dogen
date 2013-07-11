@@ -31,6 +31,7 @@
 #include <utility>
 #include <vector>
 #include "dogen/cpp/serialization/class_info_fwd_ser.hpp"
+#include "dogen/cpp/types/class_types.hpp"
 #include "dogen/cpp/types/parent_info.hpp"
 #include "dogen/cpp/types/property_info.hpp"
 
@@ -69,7 +70,8 @@ public:
         const bool is_comparable,
         const bool is_visitable,
         const bool is_immutable,
-        const bool is_original_parent_visitable);
+        const bool is_original_parent_visitable,
+        const dogen::cpp::class_types& class_type);
 
 private:
     template<typename Archive>
@@ -256,6 +258,14 @@ public:
     void is_original_parent_visitable(const bool v);
     /**@}*/
 
+    /**
+     * @brief Type of the class.
+     */
+    /**@{*/
+    dogen::cpp::class_types class_type() const;
+    void class_type(const dogen::cpp::class_types& v);
+    /**@}*/
+
 public:
     bool operator==(const class_info& rhs) const;
     bool operator!=(const class_info& rhs) const {
@@ -286,6 +296,7 @@ private:
     bool is_visitable_;
     bool is_immutable_;
     bool is_original_parent_visitable_;
+    dogen::cpp::class_types class_type_;
 };
 
 } }

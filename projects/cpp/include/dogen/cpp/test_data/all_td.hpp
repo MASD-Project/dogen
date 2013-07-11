@@ -21,6 +21,7 @@
 #include "dogen/cpp/test_data/aspect_types_td.hpp"
 #include "dogen/cpp/test_data/boost_types_td.hpp"
 #include "dogen/cpp/test_data/class_info_td.hpp"
+#include "dogen/cpp/test_data/class_types_td.hpp"
 #include "dogen/cpp/test_data/cmakelists_info_td.hpp"
 #include "dogen/cpp/test_data/content_descriptor_td.hpp"
 #include "dogen/cpp/test_data/context_td.hpp"

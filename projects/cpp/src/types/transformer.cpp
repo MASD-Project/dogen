@@ -18,6 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/pointer_cast.hpp>
 #include <boost/algorithm/string.hpp>
 #include <boost/algorithm/string/join.hpp>
 #include <boost/algorithm/string/predicate.hpp>
@@ -171,7 +172,8 @@ std::string to_identifiable_name(const std::string n) {
 namespace dogen {
 namespace cpp {
 
-transformer::transformer(const sml::model& m) : model_(m) { }
+transformer::transformer(const sml::model& m, context& c)
+    : model_(m), context_(c) { }
 
 void transformer::properties_for_concept(const sml::qname& qn,
     std::list<sml::property>& properties,
@@ -216,6 +218,126 @@ transformer::to_namespace_list(const sml::qname& qn) const {
     return r;
 }
 
+void transformer::to_nested_type_info(const sml::nested_qname& nqn,
+    cpp::nested_type_info& nti, std::string& complete_name,
+    bool& requires_stream_manipulators) const {
+
+    const auto qn(nqn.type());
+    const auto qualified_name(to_qualified_name(qn));
+    nti.name(qualified_name);
+    nti.namespaces(to_namespace_list(qn));
+
+    const auto i(model_.enumerations().find(qn));
+    const bool is_enumeration(i != model_.enumerations().end());
+    nti.is_enumeration(is_enumeration);
+
+    const auto j(model_.primitives().find(qn));
+    const bool is_primitive(j != model_.primitives().end());
+    nti.is_primitive(is_primitive);
+
+    if (nti.is_primitive()) {
+        if (::requires_stream_manipulators(nti.name()))
+            requires_stream_manipulators = true;
+
+        nti.is_char_like(is_char_like(nti.name()));
+        nti.is_int_like(is_int_like(nti.name()));
+    }
+    nti.is_string_like(is_string_like(nti.name()));
+    nti.is_optional_like(is_optional_like(nti.name()));
+    nti.is_pair(is_pair(nti.name()));
+    nti.is_variant_like(is_variant_like(nti.name()));
+    nti.is_filesystem_path(is_filesystem_path(nti.name()));
+    nti.is_date(is_gregorian_date(nti.name()));
+    nti.is_ptime(is_ptime(nti.name()));
+    nti.is_time_duration(is_time_duration(nti.name()));
+
+    const auto k(model_.objects().find(qn));
+    if (k != model_.objects().end()) {
+        using boost::dynamic_pointer_cast;
+        const auto vo(dynamic_pointer_cast<const sml::value_object>(k->second));
+        if (vo) {
+            const auto pt(vo->type());
+            typedef sml::value_object_types vot;
+            nti.is_sequence_container(pt == vot::sequence_container);
+            nti.is_associative_container(pt == vot::associative_container);
+            nti.is_smart_pointer(pt == vot::smart_pointer);
+        }
+    }
+
+    using dogen::cpp::nested_type_info;
+    const auto nqn_children(nqn.children());
+
+    std::string my_complete_name(nti.name());
+    auto lambda([&](char c) {
+            if (!nqn_children.empty()) {
+                if (my_complete_name[my_complete_name.length() - 1] == c)
+                    my_complete_name += " ";
+                my_complete_name += c;
+            }
+        });
+
+    std::list<nested_type_info> children;
+    lambda('<');
+    bool is_first(true);
+    for (const auto c : nqn.children()) {
+        if (!is_first)
+            my_complete_name += ", ";
+
+        nested_type_info ci;
+        to_nested_type_info(c, ci, my_complete_name,
+            requires_stream_manipulators);
+        children.push_back(ci);
+        is_first = false;
+    }
+    lambda('>');
+
+    nti.identifiable_name(to_identifiable_name(qualified_name));
+    nti.complete_identifiable_name(to_identifiable_name(my_complete_name));
+    nti.complete_name(my_complete_name);
+    nti.children(children);
+    complete_name += my_complete_name;
+}
+
+std::tuple<property_info, bool, bool, bool, bool>
+transformer::to_property(const sml::property p, const bool is_immutable,
+    const bool is_fluent) const {
+
+    property_info pi;
+    pi.name(p.name());
+    pi.documentation(p.documentation());
+    pi.is_immutable(is_immutable);
+    pi.is_fluent(is_fluent);
+
+    bool has_primitive_properties(false);
+    bool requires_stream_manipulators(false);
+    bool requires_manual_move_constructor(false);
+    bool requires_manual_default_constructor(false);
+
+    nested_type_info nti;
+    std::string complete_name;
+    const auto t(p.type());
+    if (::requires_manual_move_constructor(t.type().simple_name()))
+        requires_manual_move_constructor = true;
+
+    to_nested_type_info(t, nti, complete_name, requires_stream_manipulators);
+    if (nti.is_primitive()) {
+        has_primitive_properties = true;
+        requires_manual_default_constructor = true;
+    } else if (nti.is_enumeration())
+        requires_manual_default_constructor = true;
+
+    nti.complete_name(complete_name);
+    pi.type(nti);
+    pi.implementation_specific_parameters(
+        p.implementation_specific_parameters());
+
+    return std::make_tuple(pi,
+        has_primitive_properties,
+        requires_stream_manipulators,
+        requires_manual_move_constructor,
+        requires_manual_default_constructor);
+}
+
 enumerator_info
 transformer::to_enumerator_info(const sml::enumerator& e) const {
     enumerator_info r;
@@ -242,49 +364,50 @@ enum_info transformer::to_enumeration_info(const sml::enumeration& e) const {
     return r;
 }
 
-exception_info transformer::to_exception(const sml::value_object& e) const {
-    BOOST_LOG_SEV(lg, debug) << "Transforming exception: " << e.name();
+exception_info
+transformer::to_exception_info(const sml::value_object& vo) const {
+    BOOST_LOG_SEV(lg, debug) << "Transforming exception: " << vo.name();
 
     exception_info r;
-    r.name(e.name().simple_name());
-    r.namespaces(transform_into_namespace_list(e.name()));
-    r.documentation(e.documentation());
+    r.name(vo.name().simple_name());
+    r.namespaces(to_namespace_list(vo.name()));
+    r.documentation(vo.documentation());
 
-    BOOST_LOG_SEV(lg, debug) << "Transformed exception: " << e.name();
+    BOOST_LOG_SEV(lg, debug) << "Transformed exception: " << vo.name();
 
     return r;
 }
 
-namespace_info transformer::transform(const sml::module& p) const {
-    BOOST_LOG_SEV(lg, debug) << "Transforming module: " << p.name();
+namespace_info transformer::to_namespace_info(const sml::module& m) const {
+    BOOST_LOG_SEV(lg, debug) << "Transforming module: " << m.name();
 
     namespace_info r;
-    r.documentation(p.documentation());
-    r.namespaces(transform_into_namespace_list(p.name()));
+    r.documentation(m.documentation());
+    r.namespaces(to_namespace_list(m.name()));
 
-    BOOST_LOG_SEV(lg, debug) << "Transformed module: " << p.name();
+    BOOST_LOG_SEV(lg, debug) << "Transformed module: " << m.name();
 
     return r;
 }
 
-namespace_info transformer::transform_model_into_namespace() const {
+namespace_info transformer::model_to_namespace_info() const {
     const std::string n(model_.name().simple_name());
     BOOST_LOG_SEV(lg, debug) << "Transforming model into namespace: " << n;
 
     namespace_info r;
     r.documentation(model_.documentation());
-    r.namespaces(transform_into_namespace_list(model_.name()));
+    r.namespaces(to_namespace_list(model_.name()));
 
     BOOST_LOG_SEV(lg, debug) << "Transformed model into namespace: " << n;
     return r;
 }
 
-registrar_info transformer::transform_model_into_registrar() const {
+registrar_info transformer::model_to_registrar_info() const {
     const std::string n(model_.name().simple_name());
     BOOST_LOG_SEV(lg, debug) << "Transforming model into registrar: " << n;
 
     registrar_info r;
-    r.namespaces(transform_into_namespace_list(model_.name()));
+    r.namespaces(to_namespace_list(model_.name()));
 
     for (const auto& pair : model_.references()) {
         if (pair.second != sml::origin_types::system)
@@ -292,125 +415,11 @@ registrar_info transformer::transform_model_into_registrar() const {
     }
 
     for (const auto& l : model_.leaves())
-        r.leaves().push_back(transform_into_qualified_name(l));
+        r.leaves().push_back(to_qualified_name(l));
     r.leaves().sort();
 
     BOOST_LOG_SEV(lg, debug) << "Transformed model into registrar: " << n;
     return r;
-}
-
-void transformer::transform(const sml::nested_qname& nqn,
-    cpp::nested_type_info& nti, std::string& complete_name,
-    bool& requires_stream_manipulators) const {
-
-    const auto qn(nqn.type());
-    const auto qualified_name(transform_into_qualified_name(qn));
-    nti.name(qualified_name);
-    nti.namespaces(transform_into_namespace_list(qn));
-
-    using sml::meta_types;
-    nti.is_enumeration(qn.meta_type() == meta_types::enumeration);
-    nti.is_primitive(qn.meta_type() == meta_types::primitive);
-    if (nti.is_primitive()) {
-        if (::requires_stream_manipulators(nti.name()))
-            requires_stream_manipulators = true;
-
-        nti.is_char_like(is_char_like(nti.name()));
-        nti.is_int_like(is_int_like(nti.name()));
-    }
-    nti.is_string_like(is_string_like(nti.name()));
-    nti.is_optional_like(is_optional_like(nti.name()));
-    nti.is_pair(is_pair(nti.name()));
-    nti.is_variant_like(is_variant_like(nti.name()));
-    nti.is_filesystem_path(is_filesystem_path(nti.name()));
-    nti.is_date(is_gregorian_date(nti.name()));
-    nti.is_ptime(is_ptime(nti.name()));
-    nti.is_time_duration(is_time_duration(nti.name()));
-
-    if (qn.meta_type() == meta_types::pod) {
-        const auto i(model_.pods().find(qn));
-        if (i == model_.pods().end()) {
-            BOOST_LOG_SEV(lg, error) << pod_not_found << qn.type_name();
-            BOOST_THROW_EXCEPTION(transformation_error(pod_not_found +
-                qn.type_name()));
-        }
-        const auto pt(i->second.pod_type());
-        using sml::pod_types;
-        nti.is_sequence_container(pt == pod_types::sequence_container);
-        nti.is_associative_container(pt == pod_types::associative_container);
-        nti.is_smart_pointer(pt == pod_types::smart_pointer);
-    }
-
-    using dogen::cpp::nested_type_info;
-    const auto nqn_children(nqn.children());
-
-    std::string my_complete_name(nti.name());
-    auto lambda([&](char c) {
-            if (!nqn_children.empty()) {
-                if (my_complete_name[my_complete_name.length() - 1] == c)
-                    my_complete_name += " ";
-                my_complete_name += c;
-            }
-        });
-
-    std::list<nested_type_info> children;
-    lambda('<');
-    bool is_first(true);
-    for (const auto c : nqn.children()) {
-        if (!is_first)
-            my_complete_name += ", ";
-
-        nested_type_info ci;
-        transform(c, ci, my_complete_name, requires_stream_manipulators);
-        children.push_back(ci);
-        is_first = false;
-    }
-    lambda('>');
-
-    nti.identifiable_name(to_identifiable_name(qualified_name));
-    nti.complete_identifiable_name(to_identifiable_name(my_complete_name));
-    nti.complete_name(my_complete_name);
-    nti.children(children);
-    complete_name += my_complete_name;
-}
-
-std::tuple<property_info, bool, bool, bool, bool>
-transformer::transform(const sml::property p, const bool is_immutable,
-    const bool is_fluent) const {
-
-    property_info pi;
-    pi.name(p.name());
-    pi.documentation(p.documentation());
-    pi.is_immutable(is_immutable);
-    pi.is_fluent(is_fluent);
-
-    bool has_primitive_properties(false);
-    bool requires_stream_manipulators(false);
-    bool requires_manual_move_constructor(false);
-    bool requires_manual_default_constructor(false);
-
-    nested_type_info nti;
-    std::string complete_name;
-    if (::requires_manual_move_constructor(p.type_name().type().type_name()))
-        requires_manual_move_constructor = true;
-
-    transform(p.type_name(), nti, complete_name, requires_stream_manipulators);
-    if (nti.is_primitive()) {
-        has_primitive_properties = true;
-        requires_manual_default_constructor = true;
-    } else if (nti.is_enumeration())
-        requires_manual_default_constructor = true;
-
-    nti.complete_name(complete_name);
-    pi.type(nti);
-    pi.implementation_specific_parameters(
-        p.implementation_specific_parameters());
-
-    return std::make_tuple(pi,
-        has_primitive_properties,
-        requires_stream_manipulators,
-        requires_manual_move_constructor,
-        requires_manual_default_constructor);
 }
 
 class_info transformer::
@@ -508,5 +517,53 @@ visitor_info transformer::transform_into_visitor(const sml::pod& p) const {
 
     return r;
 }
+
+void transformer::visit(const dogen::sml::service&) {
+}
+
+void transformer::visit(const dogen::sml::factory&) {
+}
+
+void transformer::visit(const dogen::sml::repository&) {
+}
+
+void transformer::visit(const dogen::sml::enumeration& e) {
+    BOOST_LOG_SEV(lg, debug) << "Transforming enumeration: " << e.name();
+
+    enum_info ei;
+    ei.name(e.name().simple_name());
+    ei.namespaces(to_namespace_list(e.name()));
+    ei.documentation(e.documentation());
+    ei.type(e.underlying_type().simple_name());
+
+    for (const auto& en : e.enumerators())
+        ei.enumerators().push_back(to_enumerator_info(en));
+
+    context_.enumerations().push_back(ei);
+    BOOST_LOG_SEV(lg, debug) << "Transformed enumeration: " << e.name();
+}
+
+void transformer::visit(const dogen::sml::value_object& vo) {
+    BOOST_LOG_SEV(lg, debug) << "Transforming value object: " << vo.name();
+
+    switch(vo.type()) {
+    case sml::value_object_types::exception:
+        context_.exceptions().push_back(to_exception_info(vo));
+        break;
+    case sml::value_object_types::plain:
+    case sml::value_object_types::versioned_key:
+    case sml::value_object_types::unversioned_key:
+    default:
+    };
+
+    BOOST_LOG_SEV(lg, debug) << "Transformed value object: " << vo.name();
+}
+
+void transformer::visit(const dogen::sml::keyed_entity& ke) {
+}
+
+void transformer::visit(const dogen::sml::entity&) {
+}
+
 
 } }

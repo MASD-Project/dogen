@@ -21,6 +21,7 @@
 #include "dogen/cpp/io/aspect_types_io.hpp"
 #include "dogen/cpp/io/boost_types_io.hpp"
 #include "dogen/cpp/io/class_info_io.hpp"
+#include "dogen/cpp/io/class_types_io.hpp"
 #include "dogen/cpp/io/cmakelists_info_io.hpp"
 #include "dogen/cpp/io/content_descriptor_io.hpp"
 #include "dogen/cpp/io/context_io.hpp"

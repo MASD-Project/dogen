@@ -45,6 +45,7 @@
 #include "dogen/cpp/types/registrar_info.hpp"
 #include "dogen/cpp/types/visitor_info.hpp"
 #include "dogen/cpp/types/context.hpp"
+#include "dogen/sml/types/type_visitor.hpp"
 
 namespace dogen {
 namespace cpp {
@@ -52,16 +53,16 @@ namespace cpp {
 /**
  * @brief Transforms an SML type into its corresponding CPP type.
  */
-class transformer {
+class transformer : public sml::type_visitor {
 public:
     transformer() = delete;
     transformer(const transformer&) = default;
-    ~transformer() = default;
     transformer& operator=(const transformer&) = delete;
     transformer(transformer&& rhs) = default;
 
 public:
-    explicit transformer(const sml::model& m);
+    transformer(const sml::model& m, context& c);
+    virtual ~transformer() noexcept { }
 
 public:
     typedef boost::optional<class_info> optional_class_info;
@@ -86,11 +87,6 @@ private:
      * into a list of strings with C++ namespaces.
      */
     std::list<std::string> to_namespace_list(const sml::qname& qn) const;
-
-    /**
-     * @brief Transforms an SML property to an enumerator info.
-     */
-    enumerator_info to_enumerator_info(const sml::enumerator& e) const;
 
     /**
      * @brief Transforms the SML nested qname into a nested type info.
@@ -120,7 +116,11 @@ private:
     to_property(const sml::property p, const bool is_immutable,
         const bool is_fluent) const;
 
-public:
+    /**
+     * @brief Transforms an SML property to an enumerator info.
+     */
+    enumerator_info to_enumerator_info(const sml::enumerator& e) const;
+
     /**
      * @brief Transforms a SML value containing an enumeration into an
      * enumeration info.
@@ -131,12 +131,12 @@ public:
      * @brief Transforms a SML value containing an exception into an
      * exception info.
      */
-    exception_info to_exception_info(const sml::value_object& e) const;
+    exception_info to_exception_info(const sml::value_object& vo) const;
 
     /**
      * @brief Transforms a SML module into a namespace info.
      */
-    namespace_info to_namespace_info(const sml::module& p) const;
+    namespace_info to_namespace_info(const sml::module& m) const;
 
     /**
      * @brief Transforms a SML model into a namespace info.
@@ -170,7 +170,18 @@ public:
     visitor_info to_visitor(const sml::value_object& ao) const;
 
 private:
+    using type_visitor::visit;
+    void visit(const dogen::sml::service& s) override;
+    void visit(const dogen::sml::factory& f) override;
+    void visit(const dogen::sml::repository& r) override;
+    void visit(const dogen::sml::enumeration& e) override;
+    void visit(const dogen::sml::value_object& vo) override;
+    void visit(const dogen::sml::keyed_entity& ke) override;
+    void visit(const dogen::sml::entity& e) override;
+
+private:
     const sml::model& model_;
+    context& context_;
 };
 
 } }

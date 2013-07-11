@@ -20,6 +20,12 @@
  */
 #include "dogen/cpp/test_data/class_info_td.hpp"
 #include "dogen/cpp/test_data/context_td.hpp"
+#include "dogen/cpp/test_data/enum_info_td.hpp"
+#include "dogen/cpp/test_data/exception_info_td.hpp"
+#include "dogen/cpp/test_data/namespace_info_td.hpp"
+#include "dogen/cpp/test_data/registrar_info_td.hpp"
+#include "dogen/cpp/test_data/string_table_info_td.hpp"
+#include "dogen/cpp/test_data/visitor_info_td.hpp"
 #include "dogen/sml/test_data/qname_td.hpp"
 
 namespace {
@@ -42,6 +48,91 @@ std::unordered_map<dogen::sml::qname, dogen::cpp::class_info> create_std_unorder
     return r;
 }
 
+dogen::cpp::exception_info
+create_dogen_cpp_exception_info(const unsigned int position) {
+    return dogen::cpp::exception_info_generator::create(position);
+}
+
+std::list<dogen::cpp::exception_info> create_std_list_dogen_cpp_exception_info(unsigned int position) {
+    std::list<dogen::cpp::exception_info> r;
+    for (unsigned int i(0); i < 10; ++i) {
+        r.push_back(create_dogen_cpp_exception_info(position + i));
+    }
+    return r;
+}
+
+std::list<dogen::cpp::class_info> create_std_list_dogen_cpp_class_info(unsigned int position) {
+    std::list<dogen::cpp::class_info> r;
+    for (unsigned int i(0); i < 10; ++i) {
+        r.push_back(create_dogen_cpp_class_info(position + i));
+    }
+    return r;
+}
+
+dogen::cpp::enum_info
+create_dogen_cpp_enum_info(const unsigned int position) {
+    return dogen::cpp::enum_info_generator::create(position);
+}
+
+std::list<dogen::cpp::enum_info> create_std_list_dogen_cpp_enum_info(unsigned int position) {
+    std::list<dogen::cpp::enum_info> r;
+    for (unsigned int i(0); i < 10; ++i) {
+        r.push_back(create_dogen_cpp_enum_info(position + i));
+    }
+    return r;
+}
+
+dogen::cpp::registrar_info
+create_dogen_cpp_registrar_info(const unsigned int position) {
+    return dogen::cpp::registrar_info_generator::create(position);
+}
+
+boost::optional<dogen::cpp::registrar_info>
+create_boost_optional_dogen_cpp_registrar_info(unsigned int position) {
+    boost::optional<dogen::cpp::registrar_info> r(
+        create_dogen_cpp_registrar_info(position));
+    return r;
+}
+
+dogen::cpp::namespace_info
+create_dogen_cpp_namespace_info(const unsigned int position) {
+    return dogen::cpp::namespace_info_generator::create(position);
+}
+
+std::list<dogen::cpp::namespace_info> create_std_list_dogen_cpp_namespace_info(unsigned int position) {
+    std::list<dogen::cpp::namespace_info> r;
+    for (unsigned int i(0); i < 10; ++i) {
+        r.push_back(create_dogen_cpp_namespace_info(position + i));
+    }
+    return r;
+}
+
+dogen::cpp::visitor_info
+create_dogen_cpp_visitor_info(const unsigned int position) {
+    return dogen::cpp::visitor_info_generator::create(position);
+}
+
+std::list<dogen::cpp::visitor_info> create_std_list_dogen_cpp_visitor_info(unsigned int position) {
+    std::list<dogen::cpp::visitor_info> r;
+    for (unsigned int i(0); i < 10; ++i) {
+        r.push_back(create_dogen_cpp_visitor_info(position + i));
+    }
+    return r;
+}
+
+dogen::cpp::string_table_info
+create_dogen_cpp_string_table_info(const unsigned int position) {
+    return dogen::cpp::string_table_info_generator::create(position);
+}
+
+std::list<dogen::cpp::string_table_info> create_std_list_dogen_cpp_string_table_info(unsigned int position) {
+    std::list<dogen::cpp::string_table_info> r;
+    for (unsigned int i(0); i < 10; ++i) {
+        r.push_back(create_dogen_cpp_string_table_info(position + i));
+    }
+    return r;
+}
+
 }
 
 namespace dogen {
@@ -52,6 +143,13 @@ context_generator::context_generator() : position_(0) { }
 void context_generator::
 populate(const unsigned int position, result_type& v) {
     v.qname_to_class_info(create_std_unordered_map_dogen_sml_qname_dogen_cpp_class_info(position + 0));
+    v.exceptions(create_std_list_dogen_cpp_exception_info(position + 1));
+    v.classes(create_std_list_dogen_cpp_class_info(position + 2));
+    v.enumerations(create_std_list_dogen_cpp_enum_info(position + 3));
+    v.registrar(create_boost_optional_dogen_cpp_registrar_info(position + 4));
+    v.namespaces(create_std_list_dogen_cpp_namespace_info(position + 5));
+    v.visitors(create_std_list_dogen_cpp_visitor_info(position + 6));
+    v.string_tables(create_std_list_dogen_cpp_string_table_info(position + 7));
 }
 
 context_generator::result_type

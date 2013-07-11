@@ -20,6 +20,7 @@
  */
 #include <sstream>
 #include "dogen/cpp/test_data/class_info_td.hpp"
+#include "dogen/cpp/test_data/class_types_td.hpp"
 #include "dogen/cpp/test_data/parent_info_td.hpp"
 #include "dogen/cpp/test_data/property_info_td.hpp"
 
@@ -85,6 +86,11 @@ std::vector<std::pair<std::string, std::string> > create_std_vector_std_pair_std
     return r;
 }
 
+dogen::cpp::class_types
+create_dogen_cpp_class_types(const unsigned int position) {
+    return dogen::cpp::class_types_generator::create(position);
+}
+
 }
 
 namespace dogen {
@@ -113,6 +119,7 @@ populate(const unsigned int position, result_type& v) {
     v.is_visitable(create_bool(position + 16));
     v.is_immutable(create_bool(position + 17));
     v.is_original_parent_visitable(create_bool(position + 18));
+    v.class_type(create_dogen_cpp_class_types(position + 19));
 }
 
 class_info_generator::result_type

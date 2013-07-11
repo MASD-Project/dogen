@@ -19,6 +19,7 @@
  *
  */
 #include "dogen/cpp/hash/class_info_hash.hpp"
+#include "dogen/cpp/hash/class_types_hash.hpp"
 #include "dogen/cpp/hash/parent_info_hash.hpp"
 #include "dogen/cpp/hash/property_info_hash.hpp"
 
@@ -98,6 +99,7 @@ std::size_t class_info_hasher::hash(const class_info&v) {
     combine(seed, v.is_visitable());
     combine(seed, v.is_immutable());
     combine(seed, v.is_original_parent_visitable());
+    combine(seed, v.class_type());
 
     return seed;
 }

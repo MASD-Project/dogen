@@ -22,6 +22,7 @@
 #include <boost/io/ios_state.hpp>
 #include <ostream>
 #include "dogen/cpp/io/class_info_io.hpp"
+#include "dogen/cpp/io/class_types_io.hpp"
 #include "dogen/cpp/io/parent_info_io.hpp"
 #include "dogen/cpp/io/property_info_io.hpp"
 
@@ -132,7 +133,8 @@ std::ostream& operator<<(std::ostream& s, const class_info& v) {
       << "\"is_comparable\": " << v.is_comparable() << ", "
       << "\"is_visitable\": " << v.is_visitable() << ", "
       << "\"is_immutable\": " << v.is_immutable() << ", "
-      << "\"is_original_parent_visitable\": " << v.is_original_parent_visitable()
+      << "\"is_original_parent_visitable\": " << v.is_original_parent_visitable() << ", "
+      << "\"class_type\": " << v.class_type()
       << " }";
     return(s);
 }

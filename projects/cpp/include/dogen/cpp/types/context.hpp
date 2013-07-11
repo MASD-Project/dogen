@@ -26,9 +26,17 @@
 #endif
 
 #include <algorithm>
+#include <boost/optional.hpp>
+#include <list>
 #include <unordered_map>
 #include "dogen/cpp/serialization/context_fwd_ser.hpp"
 #include "dogen/cpp/types/class_info.hpp"
+#include "dogen/cpp/types/enum_info.hpp"
+#include "dogen/cpp/types/exception_info.hpp"
+#include "dogen/cpp/types/namespace_info.hpp"
+#include "dogen/cpp/types/registrar_info.hpp"
+#include "dogen/cpp/types/string_table_info.hpp"
+#include "dogen/cpp/types/visitor_info.hpp"
 #include "dogen/sml/hash/qname_hash.hpp"
 #include "dogen/sml/types/qname.hpp"
 
@@ -42,11 +50,21 @@ class context final {
 public:
     context() = default;
     context(const context&) = default;
-    context(context&&) = default;
     ~context() = default;
 
 public:
-    explicit context(const std::unordered_map<dogen::sml::qname, dogen::cpp::class_info>& qname_to_class_info);
+    context(context&& rhs);
+
+public:
+    context(
+        const std::unordered_map<dogen::sml::qname, dogen::cpp::class_info>& qname_to_class_info,
+        const std::list<dogen::cpp::exception_info>& exceptions,
+        const std::list<dogen::cpp::class_info>& classes,
+        const std::list<dogen::cpp::enum_info>& enumerations,
+        const boost::optional<dogen::cpp::registrar_info>& registrar,
+        const std::list<dogen::cpp::namespace_info>& namespaces,
+        const std::list<dogen::cpp::visitor_info>& visitors,
+        const std::list<dogen::cpp::string_table_info>& string_tables);
 
 private:
     template<typename Archive>
@@ -66,6 +84,76 @@ public:
     void qname_to_class_info(const std::unordered_map<dogen::sml::qname, dogen::cpp::class_info>&& v);
     /**@}*/
 
+    /**
+     * @brief All C++ exceptions.
+     */
+    /**@{*/
+    const std::list<dogen::cpp::exception_info>& exceptions() const;
+    std::list<dogen::cpp::exception_info>& exceptions();
+    void exceptions(const std::list<dogen::cpp::exception_info>& v);
+    void exceptions(const std::list<dogen::cpp::exception_info>&& v);
+    /**@}*/
+
+    /**
+     * @brief All C++ classes.
+     */
+    /**@{*/
+    const std::list<dogen::cpp::class_info>& classes() const;
+    std::list<dogen::cpp::class_info>& classes();
+    void classes(const std::list<dogen::cpp::class_info>& v);
+    void classes(const std::list<dogen::cpp::class_info>&& v);
+    /**@}*/
+
+    /**
+     * @brief All C++ enumerations.
+     */
+    /**@{*/
+    const std::list<dogen::cpp::enum_info>& enumerations() const;
+    std::list<dogen::cpp::enum_info>& enumerations();
+    void enumerations(const std::list<dogen::cpp::enum_info>& v);
+    void enumerations(const std::list<dogen::cpp::enum_info>&& v);
+    /**@}*/
+
+    /**
+     * @brief The C++ registrar, if available.
+     */
+    /**@{*/
+    const boost::optional<dogen::cpp::registrar_info>& registrar() const;
+    boost::optional<dogen::cpp::registrar_info>& registrar();
+    void registrar(const boost::optional<dogen::cpp::registrar_info>& v);
+    void registrar(const boost::optional<dogen::cpp::registrar_info>&& v);
+    /**@}*/
+
+    /**
+     * @brief All C++ namespaces.
+     */
+    /**@{*/
+    const std::list<dogen::cpp::namespace_info>& namespaces() const;
+    std::list<dogen::cpp::namespace_info>& namespaces();
+    void namespaces(const std::list<dogen::cpp::namespace_info>& v);
+    void namespaces(const std::list<dogen::cpp::namespace_info>&& v);
+    /**@}*/
+
+    /**
+     * @brief All C++ visitors.
+     */
+    /**@{*/
+    const std::list<dogen::cpp::visitor_info>& visitors() const;
+    std::list<dogen::cpp::visitor_info>& visitors();
+    void visitors(const std::list<dogen::cpp::visitor_info>& v);
+    void visitors(const std::list<dogen::cpp::visitor_info>&& v);
+    /**@}*/
+
+    /**
+     * @brief All C++ string tables.
+     */
+    /**@{*/
+    const std::list<dogen::cpp::string_table_info>& string_tables() const;
+    std::list<dogen::cpp::string_table_info>& string_tables();
+    void string_tables(const std::list<dogen::cpp::string_table_info>& v);
+    void string_tables(const std::list<dogen::cpp::string_table_info>&& v);
+    /**@}*/
+
 public:
     bool operator==(const context& rhs) const;
     bool operator!=(const context& rhs) const {
@@ -78,6 +166,13 @@ public:
 
 private:
     std::unordered_map<dogen::sml::qname, dogen::cpp::class_info> qname_to_class_info_;
+    std::list<dogen::cpp::exception_info> exceptions_;
+    std::list<dogen::cpp::class_info> classes_;
+    std::list<dogen::cpp::enum_info> enumerations_;
+    boost::optional<dogen::cpp::registrar_info> registrar_;
+    std::list<dogen::cpp::namespace_info> namespaces_;
+    std::list<dogen::cpp::visitor_info> visitors_;
+    std::list<dogen::cpp::string_table_info> string_tables_;
 };
 
 } }

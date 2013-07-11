@@ -23,6 +23,7 @@
 #include "dogen/cpp/types/boost_types.hpp"
 #include "dogen/cpp/types/building_error.hpp"
 #include "dogen/cpp/types/class_info.hpp"
+#include "dogen/cpp/types/class_types.hpp"
 #include "dogen/cpp/types/cmakelists_info.hpp"
 #include "dogen/cpp/types/content_descriptor.hpp"
 #include "dogen/cpp/types/content_descriptor_factory.hpp"

@@ -21,6 +21,7 @@
 #include "dogen/cpp/hash/aspect_types_hash.hpp"
 #include "dogen/cpp/hash/boost_types_hash.hpp"
 #include "dogen/cpp/hash/class_info_hash.hpp"
+#include "dogen/cpp/hash/class_types_hash.hpp"
 #include "dogen/cpp/hash/cmakelists_info_hash.hpp"
 #include "dogen/cpp/hash/content_descriptor_hash.hpp"
 #include "dogen/cpp/hash/context_hash.hpp"

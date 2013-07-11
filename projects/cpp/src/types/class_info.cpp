@@ -32,7 +32,8 @@ class_info::class_info()
       is_comparable_(static_cast<bool>(0)),
       is_visitable_(static_cast<bool>(0)),
       is_immutable_(static_cast<bool>(0)),
-      is_original_parent_visitable_(static_cast<bool>(0)) { }
+      is_original_parent_visitable_(static_cast<bool>(0)),
+      class_type_(static_cast<dogen::cpp::class_types>(0)) { }
 
 class_info::class_info(
     const std::string& name,
@@ -53,7 +54,8 @@ class_info::class_info(
     const bool is_comparable,
     const bool is_visitable,
     const bool is_immutable,
-    const bool is_original_parent_visitable)
+    const bool is_original_parent_visitable,
+    const dogen::cpp::class_types& class_type)
     : name_(name),
       namespaces_(namespaces),
       properties_(properties),
@@ -72,7 +74,8 @@ class_info::class_info(
       is_comparable_(is_comparable),
       is_visitable_(is_visitable),
       is_immutable_(is_immutable),
-      is_original_parent_visitable_(is_original_parent_visitable) { }
+      is_original_parent_visitable_(is_original_parent_visitable),
+      class_type_(class_type) { }
 
 void class_info::swap(class_info& other) noexcept {
     using std::swap;
@@ -95,6 +98,7 @@ void class_info::swap(class_info& other) noexcept {
     swap(is_visitable_, other.is_visitable_);
     swap(is_immutable_, other.is_immutable_);
     swap(is_original_parent_visitable_, other.is_original_parent_visitable_);
+    swap(class_type_, other.class_type_);
 }
 
 bool class_info::operator==(const class_info& rhs) const {
@@ -116,7 +120,8 @@ bool class_info::operator==(const class_info& rhs) const {
         is_comparable_ == rhs.is_comparable_ &&
         is_visitable_ == rhs.is_visitable_ &&
         is_immutable_ == rhs.is_immutable_ &&
-        is_original_parent_visitable_ == rhs.is_original_parent_visitable_;
+        is_original_parent_visitable_ == rhs.is_original_parent_visitable_ &&
+        class_type_ == rhs.class_type_;
 }
 
 class_info& class_info::operator=(class_info other) {
@@ -355,6 +360,14 @@ bool class_info::is_original_parent_visitable() const {
 
 void class_info::is_original_parent_visitable(const bool v) {
     is_original_parent_visitable_ = v;
+}
+
+dogen::cpp::class_types class_info::class_type() const {
+    return class_type_;
+}
+
+void class_info::class_type(const dogen::cpp::class_types& v) {
+    class_type_ = v;
 }
 
 } }

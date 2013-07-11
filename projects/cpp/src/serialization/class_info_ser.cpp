@@ -32,6 +32,7 @@
 #include <boost/serialization/utility.hpp>
 #include <boost/serialization/vector.hpp>
 #include "dogen/cpp/serialization/class_info_ser.hpp"
+#include "dogen/cpp/serialization/class_types_ser.hpp"
 #include "dogen/cpp/serialization/parent_info_ser.hpp"
 #include "dogen/cpp/serialization/property_info_ser.hpp"
 
@@ -66,6 +67,7 @@ void save(Archive& ar,
     ar << make_nvp("is_visitable", v.is_visitable_);
     ar << make_nvp("is_immutable", v.is_immutable_);
     ar << make_nvp("is_original_parent_visitable", v.is_original_parent_visitable_);
+    ar << make_nvp("class_type", v.class_type_);
 }
 
 template<typename Archive>
@@ -91,6 +93,7 @@ void load(Archive& ar,
     ar >> make_nvp("is_visitable", v.is_visitable_);
     ar >> make_nvp("is_immutable", v.is_immutable_);
     ar >> make_nvp("is_original_parent_visitable", v.is_original_parent_visitable_);
+    ar >> make_nvp("class_type", v.class_type_);
 }
 
 } }
