@@ -23,6 +23,7 @@
 #include "dogen/cpp/io/class_info_io.hpp"
 #include "dogen/cpp/io/cmakelists_info_io.hpp"
 #include "dogen/cpp/io/content_descriptor_io.hpp"
+#include "dogen/cpp/io/context_io.hpp"
 #include "dogen/cpp/io/enum_info_io.hpp"
 #include "dogen/cpp/io/enumerator_info_io.hpp"
 #include "dogen/cpp/io/exception_info_io.hpp"

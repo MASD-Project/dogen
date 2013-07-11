@@ -10,19 +10,41 @@ This file contains all stories that were closed during sprint 30.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-06-30 Sun 22:29]
+Clock summary at [2013-07-09 Tue 08:16]
 
-| Headline                                          | Time   |      |      |
-|---------------------------------------------------+--------+------+------|
-| *Total time*                                      | *0:17* |      |      |
-|---------------------------------------------------+--------+------+------|
-| Development Stories Implemented                   |        | 0:17 |      |
-| IMPLEMENTATION Release notes and backlog grooming |        |      | 0:17 |
+| Headline                                                 | Time   |      |      |
+|----------------------------------------------------------+--------+------+------|
+| *Total time*                                             | *6:11* |      |      |
+|----------------------------------------------------------+--------+------+------|
+| Development Stories Implemented                          |        | 6:11 |      |
+| IMPLEMENTATION Release notes and backlog grooming        |        |      | 0:21 |
+| IMPLEMENTATION Update C++ model after latest SML changes |        |      | 5:50 |
 #+end:
 
 *** IMPLEMENTATION Release notes and backlog grooming                  :task:
+    CLOCK: [2013-07-02 Tue 07:50]--[2013-07-02 Tue 07:54] =>  0:03
     CLOCK: [2013-06-30 Sun 22:28]--[2013-06-30 Sun 22:29] =>  0:01
     CLOCK: [2013-06-30 Sun 22:00]--[2013-06-30 Sun 22:16] =>  0:16
+
+*** IMPLEMENTATION Update C++ model after latest SML changes
+    CLOCK: [2013-07-02 Tue 07:47]--[2013-07-02 Tue 08:20] =>  0:33
+    CLOCK: [2013-07-02 Tue 07:33]--[2013-07-02 Tue 07:42] =>  0:09
+    CLOCK: [2013-07-01 Mon 13:20]--[2013-07-01 Mon 14:30] =>  1:10
+    CLOCK: [2013-07-01 Mon 20:10]--[2013-07-01 Mon 23:30] =>  3:20
+
+**** IMPLEMENTATION Update transformer
+     CLOCK: [2013-07-11 Thu 18:14]--[2013-07-11 Thu 18:22] =>  0:08
+     CLOCK: [2013-07-11 Thu 17:54]--[2013-07-11 Thu 18:02] =>  0:08
+     CLOCK: [2013-07-11 Thu 17:47]--[2013-07-11 Thu 17:53] =>  0:06
+     CLOCK: [2013-07-11 Thu 08:26]--[2013-07-11 Thu 08:34] =>  0:08
+     CLOCK: [2013-07-11 Thu 07:47]--[2013-07-11 Thu 08:20] =>  0:33
+     CLOCK: [2013-07-11 Thu 07:36]--[2013-07-11 Thu 07:44] =>  0:08
+     CLOCK: [2013-07-09 Tue 08:24]--[2013-07-09 Tue 08:35] =>  0:11
+     CLOCK: [2013-07-09 Tue 07:46]--[2013-07-09 Tue 08:16] =>  0:30
+     CLOCK: [2013-07-09 Tue 07:33]--[2013-07-09 Tue 07:44] =>  0:11
+     CLOCK: [2013-07-02 Tue 07:54]--[2013-07-02 Tue 08:20] =>  0:26
+
+**** Update workflow
 
 *** Create a =key_extractor= service                                  :story:
 

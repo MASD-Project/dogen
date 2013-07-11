@@ -26,16 +26,12 @@ namespace cpp {
 file_info::file_info()
     : facet_type_(static_cast<dogen::config::cpp_facet_types>(0)),
       file_type_(static_cast<dogen::cpp::file_types>(0)),
-      aspect_type_(static_cast<dogen::cpp::aspect_types>(0)),
-      category_type_(static_cast<dogen::sml::category_types>(0)),
-      meta_type_(static_cast<dogen::sml::meta_types>(0)) { }
+      aspect_type_(static_cast<dogen::cpp::aspect_types>(0)) { }
 
 file_info::file_info(file_info&& rhs)
     : facet_type_(std::move(rhs.facet_type_)),
       file_type_(std::move(rhs.file_type_)),
       aspect_type_(std::move(rhs.aspect_type_)),
-      category_type_(std::move(rhs.category_type_)),
-      meta_type_(std::move(rhs.meta_type_)),
       class_info_(std::move(rhs.class_info_)),
       enum_info_(std::move(rhs.enum_info_)),
       exception_info_(std::move(rhs.exception_info_)),
@@ -52,8 +48,6 @@ file_info::file_info(
     const dogen::config::cpp_facet_types& facet_type,
     const dogen::cpp::file_types& file_type,
     const dogen::cpp::aspect_types& aspect_type,
-    const dogen::sml::category_types& category_type,
-    const dogen::sml::meta_types& meta_type,
     const boost::optional<dogen::cpp::class_info>& class_info,
     const boost::optional<dogen::cpp::enum_info>& enum_info,
     const boost::optional<dogen::cpp::exception_info>& exception_info,
@@ -68,8 +62,6 @@ file_info::file_info(
     : facet_type_(facet_type),
       file_type_(file_type),
       aspect_type_(aspect_type),
-      category_type_(category_type),
-      meta_type_(meta_type),
       class_info_(class_info),
       enum_info_(enum_info),
       exception_info_(exception_info),
@@ -87,8 +79,6 @@ void file_info::swap(file_info& other) noexcept {
     swap(facet_type_, other.facet_type_);
     swap(file_type_, other.file_type_);
     swap(aspect_type_, other.aspect_type_);
-    swap(category_type_, other.category_type_);
-    swap(meta_type_, other.meta_type_);
     swap(class_info_, other.class_info_);
     swap(enum_info_, other.enum_info_);
     swap(exception_info_, other.exception_info_);
@@ -106,8 +96,6 @@ bool file_info::operator==(const file_info& rhs) const {
     return facet_type_ == rhs.facet_type_ &&
         file_type_ == rhs.file_type_ &&
         aspect_type_ == rhs.aspect_type_ &&
-        category_type_ == rhs.category_type_ &&
-        meta_type_ == rhs.meta_type_ &&
         class_info_ == rhs.class_info_ &&
         enum_info_ == rhs.enum_info_ &&
         exception_info_ == rhs.exception_info_ &&
@@ -149,22 +137,6 @@ dogen::cpp::aspect_types file_info::aspect_type() const {
 
 void file_info::aspect_type(const dogen::cpp::aspect_types& v) {
     aspect_type_ = v;
-}
-
-dogen::sml::category_types file_info::category_type() const {
-    return category_type_;
-}
-
-void file_info::category_type(const dogen::sml::category_types& v) {
-    category_type_ = v;
-}
-
-dogen::sml::meta_types file_info::meta_type() const {
-    return meta_type_;
-}
-
-void file_info::meta_type(const dogen::sml::meta_types& v) {
-    meta_type_ = v;
 }
 
 const boost::optional<dogen::cpp::class_info>& file_info::class_info() const {

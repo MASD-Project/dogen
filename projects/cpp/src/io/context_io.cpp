@@ -19,22 +19,35 @@
  *
  */
 #include <ostream>
-#include "dogen/config/io/cpp_facet_types_io.hpp"
-#include "dogen/cpp/io/aspect_types_io.hpp"
-#include "dogen/cpp/io/content_descriptor_io.hpp"
-#include "dogen/cpp/io/file_types_io.hpp"
+#include "dogen/cpp/io/class_info_io.hpp"
+#include "dogen/cpp/io/context_io.hpp"
 #include "dogen/sml/io/qname_io.hpp"
+
+namespace std {
+
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen::sml::qname, dogen::cpp::class_info>& v) {
+    s << "[";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
+        s << i->first;
+        s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
+        s << i->second;
+        s << " } ]";
+    }
+    s << " ] ";
+    return s;
+}
+
+}
 
 namespace dogen {
 namespace cpp {
 
-std::ostream& operator<<(std::ostream& s, const content_descriptor& v) {
+std::ostream& operator<<(std::ostream& s, const context& v) {
     s << " { "
-      << "\"__type__\": " << "\"dogen::cpp::content_descriptor\"" << ", "
-      << "\"file_type\": " << v.file_type() << ", "
-      << "\"facet_type\": " << v.facet_type() << ", "
-      << "\"aspect_type\": " << v.aspect_type() << ", "
-      << "\"name\": " << v.name()
+      << "\"__type__\": " << "\"dogen::cpp::context\"" << ", "
+      << "\"qname_to_class_info\": " << v.qname_to_class_info()
       << " }";
     return(s);
 }

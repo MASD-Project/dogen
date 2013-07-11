@@ -48,6 +48,7 @@ void save(Archive& ar,
     ar << make_nvp("namespaces", v.namespaces_);
     ar << make_nvp("enumerators", v.enumerators_);
     ar << make_nvp("documentation", v.documentation_);
+    ar << make_nvp("type", v.type_);
 }
 
 template<typename Archive>
@@ -58,6 +59,7 @@ void load(Archive& ar,
     ar >> make_nvp("namespaces", v.namespaces_);
     ar >> make_nvp("enumerators", v.enumerators_);
     ar >> make_nvp("documentation", v.documentation_);
+    ar >> make_nvp("type", v.type_);
 }
 
 } }

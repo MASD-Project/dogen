@@ -18,25 +18,36 @@
  * MA 02110-1301, USA.
  *
  */
-#include <ostream>
-#include "dogen/config/io/cpp_facet_types_io.hpp"
-#include "dogen/cpp/io/aspect_types_io.hpp"
-#include "dogen/cpp/io/content_descriptor_io.hpp"
-#include "dogen/cpp/io/file_types_io.hpp"
-#include "dogen/sml/io/qname_io.hpp"
+#ifndef DOGEN_CPP_TEST_DATA_CONTEXT_TD_HPP
+#define DOGEN_CPP_TEST_DATA_CONTEXT_TD_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include "dogen/cpp/types/context.hpp"
 
 namespace dogen {
 namespace cpp {
 
-std::ostream& operator<<(std::ostream& s, const content_descriptor& v) {
-    s << " { "
-      << "\"__type__\": " << "\"dogen::cpp::content_descriptor\"" << ", "
-      << "\"file_type\": " << v.file_type() << ", "
-      << "\"facet_type\": " << v.facet_type() << ", "
-      << "\"aspect_type\": " << v.aspect_type() << ", "
-      << "\"name\": " << v.name()
-      << " }";
-    return(s);
-}
+class context_generator {
+public:
+    context_generator();
+
+public:
+    typedef dogen::cpp::context result_type;
+
+public:
+    static void populate(const unsigned int position, result_type& v);
+    static result_type create(const unsigned int position);
+    result_type operator()();
+
+private:
+    unsigned int position_;
+public:
+    static result_type* create_ptr(const unsigned int position);
+};
 
 } }
+
+#endif

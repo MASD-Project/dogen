@@ -30,7 +30,6 @@
 #include "dogen/cpp/serialization/content_descriptor_fwd_ser.hpp"
 #include "dogen/cpp/types/aspect_types.hpp"
 #include "dogen/cpp/types/file_types.hpp"
-#include "dogen/sml/types/category_types.hpp"
 #include "dogen/sml/types/qname.hpp"
 
 namespace dogen {
@@ -53,7 +52,6 @@ public:
         const dogen::cpp::file_types& file_type,
         const dogen::config::cpp_facet_types& facet_type,
         const dogen::cpp::aspect_types& aspect_type,
-        const dogen::sml::category_types& category_type,
         const dogen::sml::qname& name);
 
 private:
@@ -89,14 +87,6 @@ public:
     /**@}*/
 
     /**
-     * @brief Category of the type stored, when its a pod.
-     */
-    /**@{*/
-    dogen::sml::category_types category_type() const;
-    void category_type(const dogen::sml::category_types& v);
-    /**@}*/
-
-    /**
      * @brief Qualified name of the type contained in file.
      */
     /**@{*/
@@ -120,7 +110,6 @@ private:
     dogen::cpp::file_types file_type_;
     dogen::config::cpp_facet_types facet_type_;
     dogen::cpp::aspect_types aspect_type_;
-    dogen::sml::category_types category_type_;
     dogen::sml::qname name_;
 };
 

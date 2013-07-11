@@ -18,25 +18,23 @@
  * MA 02110-1301, USA.
  *
  */
-#include <ostream>
-#include "dogen/config/io/cpp_facet_types_io.hpp"
-#include "dogen/cpp/io/aspect_types_io.hpp"
-#include "dogen/cpp/io/content_descriptor_io.hpp"
-#include "dogen/cpp/io/file_types_io.hpp"
-#include "dogen/sml/io/qname_io.hpp"
+#ifndef DOGEN_CPP_IO_CONTEXT_IO_HPP
+#define DOGEN_CPP_IO_CONTEXT_IO_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include <iosfwd>
+#include "dogen/cpp/types/context.hpp"
 
 namespace dogen {
 namespace cpp {
 
-std::ostream& operator<<(std::ostream& s, const content_descriptor& v) {
-    s << " { "
-      << "\"__type__\": " << "\"dogen::cpp::content_descriptor\"" << ", "
-      << "\"file_type\": " << v.file_type() << ", "
-      << "\"facet_type\": " << v.facet_type() << ", "
-      << "\"aspect_type\": " << v.aspect_type() << ", "
-      << "\"name\": " << v.name()
-      << " }";
-    return(s);
-}
+std::ostream&
+operator<<(std::ostream& s,
+     const dogen::cpp::context& v);
 
 } }
+
+#endif

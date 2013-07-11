@@ -68,7 +68,8 @@ std::ostream& operator<<(std::ostream& s, const enum_info& v) {
       << "\"name\": " << "\"" << tidy_up_string(v.name()) << "\"" << ", "
       << "\"namespaces\": " << v.namespaces() << ", "
       << "\"enumerators\": " << v.enumerators() << ", "
-      << "\"documentation\": " << "\"" << tidy_up_string(v.documentation()) << "\""
+      << "\"documentation\": " << "\"" << tidy_up_string(v.documentation()) << "\"" << ", "
+      << "\"type\": " << "\"" << tidy_up_string(v.type()) << "\""
       << " }";
     return(s);
 }

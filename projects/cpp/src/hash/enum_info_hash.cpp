@@ -58,6 +58,7 @@ std::size_t enum_info_hasher::hash(const enum_info&v) {
     combine(seed, hash_std_list_std_string(v.namespaces()));
     combine(seed, hash_std_list_dogen_cpp_enumerator_info(v.enumerators()));
     combine(seed, v.documentation());
+    combine(seed, v.type());
 
     return seed;
 }

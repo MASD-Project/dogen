@@ -40,8 +40,6 @@
 #include "dogen/cpp/serialization/namespace_info_ser.hpp"
 #include "dogen/cpp/serialization/registrar_info_ser.hpp"
 #include "dogen/cpp/serialization/visitor_info_ser.hpp"
-#include "dogen/sml/serialization/category_types_ser.hpp"
-#include "dogen/sml/serialization/meta_types_ser.hpp"
 
 #ifdef __linux__
 #include "eos/portable_iarchive.hpp"
@@ -58,8 +56,6 @@ void save(Archive& ar,
     ar << make_nvp("facet_type", v.facet_type_);
     ar << make_nvp("file_type", v.file_type_);
     ar << make_nvp("aspect_type", v.aspect_type_);
-    ar << make_nvp("category_type", v.category_type_);
-    ar << make_nvp("meta_type", v.meta_type_);
     ar << make_nvp("class_info", v.class_info_);
     ar << make_nvp("enum_info", v.enum_info_);
     ar << make_nvp("exception_info", v.exception_info_);
@@ -80,8 +76,6 @@ void load(Archive& ar,
     ar >> make_nvp("facet_type", v.facet_type_);
     ar >> make_nvp("file_type", v.file_type_);
     ar >> make_nvp("aspect_type", v.aspect_type_);
-    ar >> make_nvp("category_type", v.category_type_);
-    ar >> make_nvp("meta_type", v.meta_type_);
     ar >> make_nvp("class_info", v.class_info_);
     ar >> make_nvp("enum_info", v.enum_info_);
     ar >> make_nvp("exception_info", v.exception_info_);

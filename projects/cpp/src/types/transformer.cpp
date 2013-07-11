@@ -183,34 +183,31 @@ void transformer::properties_for_concept(const sml::qname& qn,
     processed_qnames.insert(qn);
     const auto i(model_.concepts().find(qn));
     if (i == model_.concepts().end()) {
-        BOOST_LOG_SEV(lg, error) << concept_not_found << qn.simple_name();
-        BOOST_THROW_EXCEPTION(
-            transformation_error(concept_not_found + qn.simple_name()));
+        const auto& sn(qn.simple_name());
+        BOOST_LOG_SEV(lg, error) << concept_not_found << sn;
+        BOOST_THROW_EXCEPTION(transformation_error(concept_not_found + sn));
     }
 
-    const auto& props(i->second.properties());
-    properties.insert(properties.end(), props.begin(), props.end());
+    const auto& concept(i->second);
+    const auto& cp(concept.properties());
+    properties.insert(properties.end(), cp.begin(), cp.end());
 }
 
-std::string
-transformer::transform_into_qualified_name(const sml::qname& qn) const {
-    std::list<std::string> l(transform_into_namespace_list(qn));
+std::string transformer::to_qualified_name(const sml::qname& qn) const {
+    std::list<std::string> l(to_namespace_list(qn));
     l.push_back(qn.simple_name());
-
-    using boost::algorithm::join;
-    std::string r(join(l, namespace_separator));
-    return r;
+    return boost::algorithm::join(l, namespace_separator);
 }
 
 std::list<std::string>
-transformer::transform_into_namespace_list(const sml::qname& qn) const {
+transformer::to_namespace_list(const sml::qname& qn) const {
     std::list<std::string> r(qn.external_module_path());
 
     if (!qn.model_name().empty())
         r.push_back(qn.model_name());
 
-    const std::list<std::string> pp(qn.module_path());
-    r.insert(r.end(), pp.begin(), pp.end());
+    const auto mp(qn.module_path());
+    r.insert(r.end(), mp.begin(), mp.end());
 
     const auto i(model_.modules().find(qn));
     if (i != model_.modules().end())
@@ -220,7 +217,7 @@ transformer::transform_into_namespace_list(const sml::qname& qn) const {
 }
 
 enumerator_info
-transformer::transform_enumerator(const sml::enumerator& e) const {
+transformer::to_enumerator_info(const sml::enumerator& e) const {
     enumerator_info r;
     r.name(e.name());
     r.value(e.value());
@@ -228,25 +225,24 @@ transformer::transform_enumerator(const sml::enumerator& e) const {
     return r;
 }
 
-enum_info transformer::transform_enumeration(const sml::enumeration& e) const {
+enum_info transformer::to_enumeration_info(const sml::enumeration& e) const {
     BOOST_LOG_SEV(lg, debug) << "Transforming enumeration: " << e.name();
 
     enum_info r;
     r.name(e.name().simple_name());
-    r.namespaces(transform_into_namespace_list(e.name()));
+    r.namespaces(to_namespace_list(e.name()));
     r.documentation(e.documentation());
+    r.type(e.underlying_type().simple_name());
 
-    // FIXME: check the type of the first property
     for (const auto& en : e.enumerators())
-        r.enumerators().push_back(transform_enumerator(en));
+        r.enumerators().push_back(to_enumerator_info(en));
 
     BOOST_LOG_SEV(lg, debug) << "Transformed enumeration: " << e.name();
 
     return r;
 }
 
-exception_info
-transformer::transform_exception(const sml::value_object& e) const {
+exception_info transformer::to_exception(const sml::value_object& e) const {
     BOOST_LOG_SEV(lg, debug) << "Transforming exception: " << e.name();
 
     exception_info r;

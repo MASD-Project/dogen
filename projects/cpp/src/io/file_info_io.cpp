@@ -30,8 +30,6 @@
 #include "dogen/cpp/io/namespace_info_io.hpp"
 #include "dogen/cpp/io/registrar_info_io.hpp"
 #include "dogen/cpp/io/visitor_info_io.hpp"
-#include "dogen/sml/io/category_types_io.hpp"
-#include "dogen/sml/io/meta_types_io.hpp"
 
 namespace boost {
 
@@ -154,8 +152,6 @@ std::ostream& operator<<(std::ostream& s, const file_info& v) {
       << "\"facet_type\": " << v.facet_type() << ", "
       << "\"file_type\": " << v.file_type() << ", "
       << "\"aspect_type\": " << v.aspect_type() << ", "
-      << "\"category_type\": " << v.category_type() << ", "
-      << "\"meta_type\": " << v.meta_type() << ", "
       << "\"class_info\": " << v.class_info() << ", "
       << "\"enum_info\": " << v.enum_info() << ", "
       << "\"exception_info\": " << v.exception_info() << ", "

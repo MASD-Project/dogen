@@ -23,6 +23,7 @@
 #include "dogen/cpp/hash/class_info_hash.hpp"
 #include "dogen/cpp/hash/cmakelists_info_hash.hpp"
 #include "dogen/cpp/hash/content_descriptor_hash.hpp"
+#include "dogen/cpp/hash/context_hash.hpp"
 #include "dogen/cpp/hash/enum_info_hash.hpp"
 #include "dogen/cpp/hash/enumerator_info_hash.hpp"
 #include "dogen/cpp/hash/exception_info_hash.hpp"

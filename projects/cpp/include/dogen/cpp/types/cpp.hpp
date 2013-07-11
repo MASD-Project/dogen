@@ -34,7 +34,7 @@ namespace dogen {
  * into compilable C++ code, according to a set of well-defined
  * conventions.
  *
- * <b>Info postfix</b>
+ * @section cpp_0 Info postfix
  *
  * The types in the C++ meta-model should not have any prefixes or post-fixes
  * since they naturally belong to the CPP model. However, because names like
@@ -43,7 +43,7 @@ namespace dogen {
  * which are part of the meta-model. Info was chosen very randomly, but it is
  * used by @e type_info, so that's at least one excuse.
  *
- * <b>Using Clang AST as a C++ meta model</b>
+ * @section cpp_1 Using Clang AST as a C++ meta model
  *
  * If implemented properly, the C++ model should really just generate
  * Clang AST and use the clang framework to perform the code generation.

@@ -27,11 +27,13 @@ enum_info::enum_info(
     const std::string& name,
     const std::list<std::string>& namespaces,
     const std::list<dogen::cpp::enumerator_info>& enumerators,
-    const std::string& documentation)
+    const std::string& documentation,
+    const std::string& type)
     : name_(name),
       namespaces_(namespaces),
       enumerators_(enumerators),
-      documentation_(documentation) { }
+      documentation_(documentation),
+      type_(type) { }
 
 void enum_info::swap(enum_info& other) noexcept {
     using std::swap;
@@ -39,13 +41,15 @@ void enum_info::swap(enum_info& other) noexcept {
     swap(namespaces_, other.namespaces_);
     swap(enumerators_, other.enumerators_);
     swap(documentation_, other.documentation_);
+    swap(type_, other.type_);
 }
 
 bool enum_info::operator==(const enum_info& rhs) const {
     return name_ == rhs.name_ &&
         namespaces_ == rhs.namespaces_ &&
         enumerators_ == rhs.enumerators_ &&
-        documentation_ == rhs.documentation_;
+        documentation_ == rhs.documentation_ &&
+        type_ == rhs.type_;
 }
 
 enum_info& enum_info::operator=(enum_info other) {
@@ -116,6 +120,22 @@ void enum_info::documentation(const std::string& v) {
 
 void enum_info::documentation(const std::string&& v) {
     documentation_ = std::move(v);
+}
+
+const std::string& enum_info::type() const {
+    return type_;
+}
+
+std::string& enum_info::type() {
+    return type_;
+}
+
+void enum_info::type(const std::string& v) {
+    type_ = v;
+}
+
+void enum_info::type(const std::string&& v) {
+    type_ = std::move(v);
 }
 
 } }

@@ -18,25 +18,35 @@
  * MA 02110-1301, USA.
  *
  */
-#include <ostream>
-#include "dogen/config/io/cpp_facet_types_io.hpp"
-#include "dogen/cpp/io/aspect_types_io.hpp"
-#include "dogen/cpp/io/content_descriptor_io.hpp"
-#include "dogen/cpp/io/file_types_io.hpp"
-#include "dogen/sml/io/qname_io.hpp"
+#ifndef DOGEN_CPP_HASH_CONTEXT_HASH_HPP
+#define DOGEN_CPP_HASH_CONTEXT_HASH_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include <functional>
+#include "dogen/cpp/types/context.hpp"
 
 namespace dogen {
 namespace cpp {
 
-std::ostream& operator<<(std::ostream& s, const content_descriptor& v) {
-    s << " { "
-      << "\"__type__\": " << "\"dogen::cpp::content_descriptor\"" << ", "
-      << "\"file_type\": " << v.file_type() << ", "
-      << "\"facet_type\": " << v.facet_type() << ", "
-      << "\"aspect_type\": " << v.aspect_type() << ", "
-      << "\"name\": " << v.name()
-      << " }";
-    return(s);
-}
+class context_hasher {
+public:
+    static std::size_t hash(const context& v);
+};
 
 } }
+
+namespace std {
+
+template<>
+class hash<dogen::cpp::context> {
+public:
+    size_t operator()(const dogen::cpp::context& v) const {
+        return dogen::cpp::context_hasher::hash(v);
+    }
+};
+
+}
+#endif

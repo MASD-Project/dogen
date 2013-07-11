@@ -22,7 +22,6 @@
 #include "dogen/cpp/test_data/aspect_types_td.hpp"
 #include "dogen/cpp/test_data/content_descriptor_td.hpp"
 #include "dogen/cpp/test_data/file_types_td.hpp"
-#include "dogen/sml/test_data/category_types_td.hpp"
 #include "dogen/sml/test_data/qname_td.hpp"
 
 namespace {
@@ -42,11 +41,6 @@ create_dogen_cpp_aspect_types(const unsigned int position) {
     return dogen::cpp::aspect_types_generator::create(position);
 }
 
-dogen::sml::category_types
-create_dogen_sml_category_types(const unsigned int position) {
-    return dogen::sml::category_types_generator::create(position);
-}
-
 dogen::sml::qname
 create_dogen_sml_qname(const unsigned int position) {
     return dogen::sml::qname_generator::create(position);
@@ -64,8 +58,7 @@ populate(const unsigned int position, result_type& v) {
     v.file_type(create_dogen_cpp_file_types(position + 0));
     v.facet_type(create_dogen_config_cpp_facet_types(position + 1));
     v.aspect_type(create_dogen_cpp_aspect_types(position + 2));
-    v.category_type(create_dogen_sml_category_types(position + 3));
-    v.name(create_dogen_sml_qname(position + 4));
+    v.name(create_dogen_sml_qname(position + 3));
 }
 
 content_descriptor_generator::result_type

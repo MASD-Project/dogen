@@ -26,6 +26,7 @@
 #include "dogen/cpp/types/cmakelists_info.hpp"
 #include "dogen/cpp/types/content_descriptor.hpp"
 #include "dogen/cpp/types/content_descriptor_factory.hpp"
+#include "dogen/cpp/types/context.hpp"
 #include "dogen/cpp/types/cpp.hpp"
 #include "dogen/cpp/types/enum_info.hpp"
 #include "dogen/cpp/types/enumerator_info.hpp"

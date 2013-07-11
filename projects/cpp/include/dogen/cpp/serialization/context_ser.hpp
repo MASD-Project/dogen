@@ -18,25 +18,26 @@
  * MA 02110-1301, USA.
  *
  */
-#include <ostream>
-#include "dogen/config/io/cpp_facet_types_io.hpp"
-#include "dogen/cpp/io/aspect_types_io.hpp"
-#include "dogen/cpp/io/content_descriptor_io.hpp"
-#include "dogen/cpp/io/file_types_io.hpp"
-#include "dogen/sml/io/qname_io.hpp"
+#ifndef DOGEN_CPP_SERIALIZATION_CONTEXT_SER_HPP
+#define DOGEN_CPP_SERIALIZATION_CONTEXT_SER_HPP
 
-namespace dogen {
-namespace cpp {
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
-std::ostream& operator<<(std::ostream& s, const content_descriptor& v) {
-    s << " { "
-      << "\"__type__\": " << "\"dogen::cpp::content_descriptor\"" << ", "
-      << "\"file_type\": " << v.file_type() << ", "
-      << "\"facet_type\": " << v.facet_type() << ", "
-      << "\"aspect_type\": " << v.aspect_type() << ", "
-      << "\"name\": " << v.name()
-      << " }";
-    return(s);
-}
+#include <boost/serialization/split_free.hpp>
+#include "dogen/cpp/types/context.hpp"
+
+BOOST_SERIALIZATION_SPLIT_FREE(dogen::cpp::context)
+namespace boost {
+namespace serialization {
+
+template<typename Archive>
+void save(Archive& ar, const dogen::cpp::context& v, unsigned int version);
+
+template<typename Archive>
+void load(Archive& ar, dogen::cpp::context& v, unsigned int version);
 
 } }
+
+#endif

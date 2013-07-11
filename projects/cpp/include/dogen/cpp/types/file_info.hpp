@@ -40,8 +40,6 @@
 #include "dogen/cpp/types/namespace_info.hpp"
 #include "dogen/cpp/types/registrar_info.hpp"
 #include "dogen/cpp/types/visitor_info.hpp"
-#include "dogen/sml/types/category_types.hpp"
-#include "dogen/sml/types/meta_types.hpp"
 
 namespace dogen {
 namespace cpp {
@@ -65,8 +63,6 @@ public:
         const dogen::config::cpp_facet_types& facet_type,
         const dogen::cpp::file_types& file_type,
         const dogen::cpp::aspect_types& aspect_type,
-        const dogen::sml::category_types& category_type,
-        const dogen::sml::meta_types& meta_type,
         const boost::optional<dogen::cpp::class_info>& class_info,
         const boost::optional<dogen::cpp::enum_info>& enum_info,
         const boost::optional<dogen::cpp::exception_info>& exception_info,
@@ -109,22 +105,6 @@ public:
     /**@{*/
     dogen::cpp::aspect_types aspect_type() const;
     void aspect_type(const dogen::cpp::aspect_types& v);
-    /**@}*/
-
-    /**
-     * @brief Category of the contained pod.
-     */
-    /**@{*/
-    dogen::sml::category_types category_type() const;
-    void category_type(const dogen::sml::category_types& v);
-    /**@}*/
-
-    /**
-     * @brief Meta type of the contained type.
-     */
-    /**@{*/
-    dogen::sml::meta_types meta_type() const;
-    void meta_type(const dogen::sml::meta_types& v);
     /**@}*/
 
     /**
@@ -251,8 +231,6 @@ private:
     dogen::config::cpp_facet_types facet_type_;
     dogen::cpp::file_types file_type_;
     dogen::cpp::aspect_types aspect_type_;
-    dogen::sml::category_types category_type_;
-    dogen::sml::meta_types meta_type_;
     boost::optional<dogen::cpp::class_info> class_info_;
     boost::optional<dogen::cpp::enum_info> enum_info_;
     boost::optional<dogen::cpp::exception_info> exception_info_;

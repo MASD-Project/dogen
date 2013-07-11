@@ -64,6 +64,7 @@ populate(const unsigned int position, result_type& v) {
     v.namespaces(create_std_list_std_string(position + 1));
     v.enumerators(create_std_list_dogen_cpp_enumerator_info(position + 2));
     v.documentation(create_std_string(position + 3));
+    v.type(create_std_string(position + 4));
 }
 
 enum_info_generator::result_type

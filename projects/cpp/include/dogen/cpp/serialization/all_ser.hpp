@@ -23,6 +23,7 @@
 #include "dogen/cpp/serialization/class_info_ser.hpp"
 #include "dogen/cpp/serialization/cmakelists_info_ser.hpp"
 #include "dogen/cpp/serialization/content_descriptor_ser.hpp"
+#include "dogen/cpp/serialization/context_ser.hpp"
 #include "dogen/cpp/serialization/enum_info_ser.hpp"
 #include "dogen/cpp/serialization/enumerator_info_ser.hpp"
 #include "dogen/cpp/serialization/exception_info_ser.hpp"

@@ -18,25 +18,38 @@
  * MA 02110-1301, USA.
  *
  */
-#include <ostream>
-#include "dogen/config/io/cpp_facet_types_io.hpp"
-#include "dogen/cpp/io/aspect_types_io.hpp"
-#include "dogen/cpp/io/content_descriptor_io.hpp"
-#include "dogen/cpp/io/file_types_io.hpp"
-#include "dogen/sml/io/qname_io.hpp"
+#include "dogen/cpp/hash/class_info_hash.hpp"
+#include "dogen/cpp/hash/context_hash.hpp"
+#include "dogen/sml/hash/qname_hash.hpp"
+
+namespace {
+
+template <typename HashableType>
+inline void combine(std::size_t& seed, const HashableType& value)
+{
+    std::hash<HashableType> hasher;
+    seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
+}
+
+inline std::size_t hash_std_unordered_map_dogen_sml_qname_dogen_cpp_class_info(const std::unordered_map<dogen::sml::qname, dogen::cpp::class_info>& v){
+    std::size_t seed(0);
+    for (const auto i : v) {
+        combine(seed, i.first);
+        combine(seed, i.second);
+    }
+    return seed;
+}
+
+}
 
 namespace dogen {
 namespace cpp {
 
-std::ostream& operator<<(std::ostream& s, const content_descriptor& v) {
-    s << " { "
-      << "\"__type__\": " << "\"dogen::cpp::content_descriptor\"" << ", "
-      << "\"file_type\": " << v.file_type() << ", "
-      << "\"facet_type\": " << v.facet_type() << ", "
-      << "\"aspect_type\": " << v.aspect_type() << ", "
-      << "\"name\": " << v.name()
-      << " }";
-    return(s);
+std::size_t context_hasher::hash(const context&v) {
+    std::size_t seed(0);
+
+    combine(seed, hash_std_unordered_map_dogen_sml_qname_dogen_cpp_class_info(v.qname_to_class_info()));
+    return seed;
 }
 
 } }

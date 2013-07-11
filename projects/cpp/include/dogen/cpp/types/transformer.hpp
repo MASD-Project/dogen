@@ -44,6 +44,7 @@
 #include "dogen/cpp/types/nested_type_info.hpp"
 #include "dogen/cpp/types/registrar_info.hpp"
 #include "dogen/cpp/types/visitor_info.hpp"
+#include "dogen/cpp/types/context.hpp"
 
 namespace dogen {
 namespace cpp {
@@ -78,25 +79,23 @@ private:
     /**
      * @brief Converts an SML qname into a C++ qualified name.
      */
-    std::string
-    transform_into_qualified_name(const sml::qname& qn) const;
+    std::string to_qualified_name(const sml::qname& qn) const;
 
     /**
      * @brief Flattens all the SML namespace information stored in qname
      * into a list of strings with C++ namespaces.
      */
-    std::list<std::string>
-    transform_into_namespace_list(const sml::qname& qn) const;
+    std::list<std::string> to_namespace_list(const sml::qname& qn) const;
 
     /**
      * @brief Transforms an SML property to an enumerator info.
      */
-    enumerator_info transform_enumerator(const sml::enumerator& e) const;
+    enumerator_info to_enumerator_info(const sml::enumerator& e) const;
 
     /**
      * @brief Transforms the SML nested qname into a nested type info.
      */
-    void transform(const sml::nested_qname& nqn,
+    void to_nested_type_info(const sml::nested_qname& nqn,
         cpp::nested_type_info& nti, std::string& complete_name,
         bool& requires_stream_manipulators) const;
 
@@ -118,7 +117,7 @@ private:
      * generated default constructor.
      */
     std::tuple<property_info, bool, bool, bool, bool>
-    transform(const sml::property p, const bool is_immutable,
+    to_property(const sml::property p, const bool is_immutable,
         const bool is_fluent) const;
 
 public:
@@ -126,39 +125,39 @@ public:
      * @brief Transforms a SML value containing an enumeration into an
      * enumeration info.
      */
-    enum_info transform_enumeration(const sml::enumeration& e) const;
+    enum_info to_enumeration_info(const sml::enumeration& e) const;
 
     /**
      * @brief Transforms a SML value containing an exception into an
      * exception info.
      */
-    exception_info transform_exception(const sml::value_object& e) const;
+    exception_info to_exception_info(const sml::value_object& e) const;
 
     /**
      * @brief Transforms a SML module into a namespace info.
      */
-    namespace_info transform(const sml::module& p) const;
+    namespace_info to_namespace_info(const sml::module& p) const;
 
     /**
      * @brief Transforms a SML model into a namespace info.
      *
      * @todo Create an attribute of type module in model.
      */
-    namespace_info transform_model_into_namespace() const;
+    namespace_info model_to_namespace_info() const;
 
     /**
      * @brief Transforms a SML model into a registrar info.
      */
-    registrar_info transform_model_into_registrar() const;
+    registrar_info model_to_registrar_info() const;
 
     /**
-     * @brief Transform a SML pod into a class info.
+     * @brief Transform a SML object into a class info.
      *
-     * @param ao pod to transform.
-     * @param pci if the pod has a parent, its class info.
-     * @param opci if the parent pod was not the root parent, the root parent.
+     * @param ao object to transform.
+     * @param pci if the object has a parent, its class info.
+     * @param opci the top-most object if in a inheritance hierarchy.
      */
-    class_info transform(const sml::abstract_object& ao,
+    class_info to_class_info(const sml::abstract_object& ao,
         const optional_class_info pci = optional_class_info(),
         const optional_class_info opci = optional_class_info()) const;
 
@@ -168,7 +167,7 @@ public:
      *
      * @pre value object must have a visitor type.
      */
-    visitor_info transform_into_visitor(const sml::value_object& ao) const;
+    visitor_info to_visitor(const sml::value_object& ao) const;
 
 private:
     const sml::model& model_;

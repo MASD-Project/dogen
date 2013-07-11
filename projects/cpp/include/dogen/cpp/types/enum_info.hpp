@@ -49,7 +49,8 @@ public:
         const std::string& name,
         const std::list<std::string>& namespaces,
         const std::list<dogen::cpp::enumerator_info>& enumerators,
-        const std::string& documentation);
+        const std::string& documentation,
+        const std::string& type);
 
 private:
     template<typename Archive>
@@ -99,6 +100,16 @@ public:
     void documentation(const std::string&& v);
     /**@}*/
 
+    /**
+     * @brief Underlying primitive type.
+     */
+    /**@{*/
+    const std::string& type() const;
+    std::string& type();
+    void type(const std::string& v);
+    void type(const std::string&& v);
+    /**@}*/
+
 public:
     bool operator==(const enum_info& rhs) const;
     bool operator!=(const enum_info& rhs) const {
@@ -114,6 +125,7 @@ private:
     std::list<std::string> namespaces_;
     std::list<dogen::cpp::enumerator_info> enumerators_;
     std::string documentation_;
+    std::string type_;
 };
 
 } }

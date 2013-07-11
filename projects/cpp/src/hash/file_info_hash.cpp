@@ -28,8 +28,6 @@
 #include "dogen/cpp/hash/namespace_info_hash.hpp"
 #include "dogen/cpp/hash/registrar_info_hash.hpp"
 #include "dogen/cpp/hash/visitor_info_hash.hpp"
-#include "dogen/sml/hash/category_types_hash.hpp"
-#include "dogen/sml/hash/meta_types_hash.hpp"
 
 namespace {
 
@@ -119,8 +117,6 @@ std::size_t file_info_hasher::hash(const file_info&v) {
     combine(seed, v.facet_type());
     combine(seed, v.file_type());
     combine(seed, v.aspect_type());
-    combine(seed, v.category_type());
-    combine(seed, v.meta_type());
     combine(seed, hash_boost_optional_dogen_cpp_class_info(v.class_info()));
     combine(seed, hash_boost_optional_dogen_cpp_enum_info(v.enum_info()));
     combine(seed, hash_boost_optional_dogen_cpp_exception_info(v.exception_info()));
