@@ -25,6 +25,11 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/sml/io/qname_io.hpp"
 #include "dogen/cpp/types/transformation_error.hpp"
+#include "dogen/sml/types/entity.hpp"
+#include "dogen/sml/types/keyed_entity.hpp"
+#include "dogen/sml/types/service.hpp"
+#include "dogen/sml/types/repository.hpp"
+#include "dogen/sml/types/visitor.hpp"
 #include "dogen/cpp/types/transformer.hpp"
 
 using namespace dogen::utility::log;
@@ -77,11 +82,8 @@ const std::string uint64_t_type("std::uint64_t");
 
 const std::string pod_not_found("pod not found in pod container: ");
 const std::string concept_not_found("Concept not found in concept container: ");
-const std::string parent_info_not_supplied(
-    "Type has a parent but no parent info supplied: ");
-const std::string parent_info_supplied(
-    "Type does not have a parent parent info was supplied: ");
-const std::string non_visitable_pod_supplied("Pod is non-visitable: ");
+const std::string parent_class_info_not_found(
+    "Type has a parent but no parent class info found: ");
 
 bool is_char_like(const std::string& type_name) {
     return
@@ -299,7 +301,7 @@ void transformer::to_nested_type_info(const sml::nested_qname& nqn,
 }
 
 std::tuple<property_info, bool, bool, bool, bool>
-transformer::to_property(const sml::property p, const bool is_immutable,
+transformer::to_property_info(const sml::property p, const bool is_immutable,
     const bool is_fluent) const {
 
     property_info pi;
@@ -378,105 +380,67 @@ transformer::to_exception_info(const sml::value_object& vo) const {
     return r;
 }
 
-namespace_info transformer::to_namespace_info(const sml::module& m) const {
-    BOOST_LOG_SEV(lg, debug) << "Transforming module: " << m.name();
-
-    namespace_info r;
-    r.documentation(m.documentation());
-    r.namespaces(to_namespace_list(m.name()));
-
-    BOOST_LOG_SEV(lg, debug) << "Transformed module: " << m.name();
-
-    return r;
-}
-
-namespace_info transformer::model_to_namespace_info() const {
-    const std::string n(model_.name().simple_name());
-    BOOST_LOG_SEV(lg, debug) << "Transforming model into namespace: " << n;
-
-    namespace_info r;
-    r.documentation(model_.documentation());
-    r.namespaces(to_namespace_list(model_.name()));
-
-    BOOST_LOG_SEV(lg, debug) << "Transformed model into namespace: " << n;
-    return r;
-}
-
-registrar_info transformer::model_to_registrar_info() const {
-    const std::string n(model_.name().simple_name());
-    BOOST_LOG_SEV(lg, debug) << "Transforming model into registrar: " << n;
-
-    registrar_info r;
-    r.namespaces(to_namespace_list(model_.name()));
-
-    for (const auto& pair : model_.references()) {
-        if (pair.second != sml::origin_types::system)
-            r.model_dependencies().push_back(pair.first.model_name());
-    }
-
-    for (const auto& l : model_.leaves())
-        r.leaves().push_back(to_qualified_name(l));
-    r.leaves().sort();
-
-    BOOST_LOG_SEV(lg, debug) << "Transformed model into registrar: " << n;
-    return r;
-}
-
-class_info transformer::
-transform(const sml::pod& p, const optional_class_info pci,
-    const optional_class_info opci) const {
-
-    if (p.parent_name() && (!pci || !opci)) {
-        BOOST_LOG_SEV(lg, error) << parent_info_not_supplied
-                                 << p.name().type_name();
-        BOOST_THROW_EXCEPTION(
-            transformation_error(parent_info_not_supplied +
-                p.name().type_name()));
-    } else if (!p.parent_name() && (pci || opci)) {
-        BOOST_LOG_SEV(lg, error) << parent_info_supplied
-                                 << p.name().type_name();
-        BOOST_THROW_EXCEPTION(
-            transformation_error(parent_info_supplied +
-                p.name().type_name()));
-    }
-
+class_info transformer::to_class_info(const sml::abstract_object& ao) const {
     class_info r;
-    r.name(p.name().type_name());
-    r.namespaces(transform_into_namespace_list(p.name()));
-    r.documentation(p.documentation());
-    r.is_immutable(p.is_immutable());
-    r.is_visitable(p.is_visitable());
-    r.is_parent(p.is_parent());
-    r.implementation_specific_parameters(
-        p.implementation_specific_parameters());
+    r.name(ao.name().simple_name());
+    r.namespaces(to_namespace_list(ao.name()));
+    r.documentation(ao.documentation());
+    r.is_immutable(ao.is_immutable());
+    r.is_visitable(ao.is_visitable());
+    r.is_parent(ao.is_parent());
 
-    if (p.parent_name()) {
+    const auto& isp(ao.implementation_specific_parameters());
+    r.implementation_specific_parameters(isp);
+
+    const auto pn(ao.parent_name());
+    if (pn) {
+        const auto i(context_.qname_to_class_info().find(*ao.parent_name()));
+        if (i == context_.qname_to_class_info().end()) {
+            const auto& sn(ao.parent_name()->simple_name());
+            BOOST_LOG_SEV(lg, error) << parent_class_info_not_found << sn;
+            BOOST_THROW_EXCEPTION(transformation_error(
+                    parent_class_info_not_found + sn));
+        }
+
+        const auto pci(i->second);
         parent_info pi;
-        pi.name(pci->name());
-        pi.properties(pci->all_properties());
-        pi.namespaces(pci->namespaces());
+        pi.name(pci.name());
+        pi.properties(pci.all_properties());
+        pi.namespaces(pci.namespaces());
         r.parents().push_back(pi);
-        r.all_properties(pci->all_properties());
+        r.all_properties(pci.all_properties());
     }
 
-    if (opci) {
-        std::list<std::string> ns(opci->namespaces());
-        ns.push_back(opci->name());
+    const auto opn(ao.original_parent_name());
+    if (opn) {
+        const auto i(context_.qname_to_class_info().find(*opn));
+        if (i == context_.qname_to_class_info().end()) {
+            const auto& sn(ao.parent_name()->simple_name());
+            BOOST_LOG_SEV(lg, error) << parent_class_info_not_found << sn;
+            BOOST_THROW_EXCEPTION(transformation_error(
+                    parent_class_info_not_found + sn));
+        }
+
+        const auto opci(i->second);
+        std::list<std::string> ns(opci.namespaces());
+        ns.push_back(opci.name());
 
         using boost::join;
         r.original_parent_name_qualified(join(ns, namespace_separator));
-        r.original_parent_name(opci->name());
-        r.is_original_parent_visitable(opci->is_visitable());
+        r.original_parent_name(opci.name());
+        r.is_original_parent_visitable(opci.is_visitable());
     }
 
     std::list<sml::property> props;
     std::unordered_set<sml::qname> processed_qnames;
-    for (const auto& qn : p.modeled_concepts())
+    for (const auto& qn : ao.modeled_concepts())
         properties_for_concept(qn, props, processed_qnames);
-    props.insert(props.end(), p.properties().begin(), p.properties().end());
+    props.insert(props.end(), ao.properties().begin(), ao.properties().end());
 
     for (const auto& prop : props) {
-        const auto tuple(transform(prop, p.is_immutable(), p.is_fluent()));
+        const auto tuple(to_property_info(
+                prop, ao.is_immutable(), ao.is_fluent()));
+
         r.properties().push_back(std::get<0>(tuple));
         r.all_properties().push_back(std::get<0>(tuple));
 
@@ -493,13 +457,13 @@ transform(const sml::pod& p, const optional_class_info pci,
             r.requires_manual_default_constructor(true);
     }
 
-    for (const auto l : p.leaves())
-        r.leaves().push_back(transform_into_qualified_name(l));
+    for (const auto l : ao.leaves())
+        r.leaves().push_back(to_qualified_name(l));
 
     return r;
 }
 
-visitor_info transformer::transform_into_visitor(const sml::pod& p) const {
+visitor_info transformer::to_visitor(const sml::value_object& ao) const {
     if (!p.is_visitable()) {
         BOOST_LOG_SEV(lg, error) << non_visitable_pod_supplied
                                  << p.name().type_name();
@@ -518,13 +482,31 @@ visitor_info transformer::transform_into_visitor(const sml::pod& p) const {
     return r;
 }
 
-void transformer::visit(const dogen::sml::service&) {
+void transformer::visit(const dogen::sml::service& s) {
+    BOOST_LOG_SEV(lg, debug) << "Transforming service: " << s.name();
+
+    auto ci(to_class_info(s));
+    context_.classes().push_back(ci);
+
+    BOOST_LOG_SEV(lg, debug) << "Transformed service: " << s.name();
 }
 
-void transformer::visit(const dogen::sml::factory&) {
+void transformer::visit(const dogen::sml::factory& f) {
+    BOOST_LOG_SEV(lg, debug) << "Transforming service: " << f.name();
+
+    auto ci(to_class_info(f));
+    context_.classes().push_back(ci);
+
+    BOOST_LOG_SEV(lg, debug) << "Transformed service: " << f.name();
 }
 
-void transformer::visit(const dogen::sml::repository&) {
+void transformer::visit(const dogen::sml::repository& r) {
+    BOOST_LOG_SEV(lg, debug) << "Transforming service: " << r.name();
+
+    auto ci(to_class_info(r));
+    context_.classes().push_back(ci);
+
+    BOOST_LOG_SEV(lg, debug) << "Transformed service: " << r.name();
 }
 
 void transformer::visit(const dogen::sml::enumeration& e) {
@@ -553,6 +535,8 @@ void transformer::visit(const dogen::sml::value_object& vo) {
     case sml::value_object_types::plain:
     case sml::value_object_types::versioned_key:
     case sml::value_object_types::unversioned_key:
+        context_.classes().push_back(to_class_info(vo));
+
     default:
     };
 
@@ -560,10 +544,68 @@ void transformer::visit(const dogen::sml::value_object& vo) {
 }
 
 void transformer::visit(const dogen::sml::keyed_entity& ke) {
+    BOOST_LOG_SEV(lg, debug) << "Transforming keyed entity: " << ke.name();
+
+    auto ci(to_class_info(ke));
+    context_.classes().push_back(ci);
+
+    BOOST_LOG_SEV(lg, debug) << "Transformed keyed entity: " << ke.name();
 }
 
-void transformer::visit(const dogen::sml::entity&) {
+void transformer::visit(const dogen::sml::entity& e) {
+    BOOST_LOG_SEV(lg, debug) << "Transforming entity: " << e.name();
+
+    auto ci(to_class_info(e));
+    context_.classes().push_back(ci);
+
+    BOOST_LOG_SEV(lg, debug) << "Transformed entity: " << e.name();
 }
 
+void transformer::from_abstract_object(const sml::abstract_object& ao) {
+    ao.accept(*this);
+}
+
+void transformer::to_namespace_info(const sml::module& m) {
+    BOOST_LOG_SEV(lg, debug) << "Transforming module: " << m.name();
+
+    namespace_info ni;
+    ni.documentation(m.documentation());
+    ni.namespaces(to_namespace_list(m.name()));
+
+    context_.namespaces().push_back(ni);
+    BOOST_LOG_SEV(lg, debug) << "Transformed module: " << m.name();
+}
+
+void transformer::model_to_namespace_info() {
+    const std::string n(model_.name().simple_name());
+    BOOST_LOG_SEV(lg, debug) << "Transforming model into namespace: " << n;
+
+    namespace_info ni;
+    ni.documentation(model_.documentation());
+    ni.namespaces(to_namespace_list(model_.name()));
+
+    BOOST_LOG_SEV(lg, debug) << "Transformed model into namespace: " << n;
+    context_.namespaces().push_back(ni);
+}
+
+void transformer::model_to_registrar_info() {
+    const std::string n(model_.name().simple_name());
+    BOOST_LOG_SEV(lg, debug) << "Transforming model into registrar: " << n;
+
+    registrar_info ri;
+    ri.namespaces(to_namespace_list(model_.name()));
+
+    for (const auto& pair : model_.references()) {
+        if (pair.second != sml::origin_types::system)
+            ri.model_dependencies().push_back(pair.first.model_name());
+    }
+
+    for (const auto& l : model_.leaves())
+        ri.leaves().push_back(to_qualified_name(l));
+    ri.leaves().sort();
+
+    context_.registrar(ri);
+    BOOST_LOG_SEV(lg, debug) << "Transformed model into registrar: " << n;
+}
 
 } }

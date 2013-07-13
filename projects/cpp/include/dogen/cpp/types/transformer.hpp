@@ -113,7 +113,7 @@ private:
      * generated default constructor.
      */
     std::tuple<property_info, bool, bool, bool, bool>
-    to_property(const sml::property p, const bool is_immutable,
+    to_property_info(const sml::property p, const bool is_immutable,
         const bool is_fluent) const;
 
     /**
@@ -134,32 +134,11 @@ private:
     exception_info to_exception_info(const sml::value_object& vo) const;
 
     /**
-     * @brief Transforms a SML module into a namespace info.
-     */
-    namespace_info to_namespace_info(const sml::module& m) const;
-
-    /**
-     * @brief Transforms a SML model into a namespace info.
-     *
-     * @todo Create an attribute of type module in model.
-     */
-    namespace_info model_to_namespace_info() const;
-
-    /**
-     * @brief Transforms a SML model into a registrar info.
-     */
-    registrar_info model_to_registrar_info() const;
-
-    /**
      * @brief Transform a SML object into a class info.
      *
      * @param ao object to transform.
-     * @param pci if the object has a parent, its class info.
-     * @param opci the top-most object if in a inheritance hierarchy.
      */
-    class_info to_class_info(const sml::abstract_object& ao,
-        const optional_class_info pci = optional_class_info(),
-        const optional_class_info opci = optional_class_info()) const;
+    class_info to_class_info(const sml::abstract_object& ao) const;
 
     /**
      * @brief Transform a SML object representing a visitor into a
@@ -178,6 +157,30 @@ private:
     void visit(const dogen::sml::value_object& vo) override;
     void visit(const dogen::sml::keyed_entity& ke) override;
     void visit(const dogen::sml::entity& e) override;
+
+public:
+    /**
+     * @brief Transforms an SML abstract object into the appropriate
+     * C++ object.
+     */
+    void from_abstract_object(const sml::abstract_object& ao);
+
+    /**
+     * @brief Transforms a SML module into a namespace info.
+     */
+    void to_namespace_info(const sml::module& m);
+
+    /**
+     * @brief Transforms a SML model into a namespace info.
+     *
+     * @todo Create an attribute of type module in model.
+     */
+    void model_to_namespace_info();
+
+    /**
+     * @brief Transforms a SML model into a registrar info.
+     */
+    void model_to_registrar_info();
 
 private:
     const sml::model& model_;
