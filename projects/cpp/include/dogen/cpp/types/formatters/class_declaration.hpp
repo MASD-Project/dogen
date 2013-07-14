@@ -49,9 +49,9 @@ public:
     virtual ~class_declaration() noexcept {}
 
 private:
-    void non_pod_getters_and_setters(const std::string class_name,
+    void non_object_getters_and_setters(const std::string class_name,
         const property_info& pi);
-    void pod_getters_and_setters(const std::string class_name,
+    void object_getters_and_setters(const std::string class_name,
         const property_info& pi);
 
 protected:

@@ -47,8 +47,8 @@ const std::string invalid_associative_container(
     "Associative containers have one or two type arguments");
 const std::string invalid_smart_pointer(
     "Smart pointers have exactly one type argument");
-const std::string missing_class_info(
-    "Meta type is pod but class view model is empty");
+const std::string missing_class_info("Class info is empty");
+const std::string missing_enum_info("Enumeration info is empty");
 const std::string enum_info_not_supported(
     "Enumerations do not have an implementation");
 

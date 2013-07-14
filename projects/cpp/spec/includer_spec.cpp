@@ -27,6 +27,7 @@
 #include "dogen/utility/test_data/tds_test_good.hpp"
 #include "dogen/utility/test/logging.hpp"
 #include "dogen/config/io/cpp_facet_types_io.hpp"
+#include "dogen/sml/types/abstract_object.hpp"
 #include "dogen/cpp/types/locator.hpp"
 #include "dogen/config/test/mock_settings_factory.hpp"
 #include "dogen/cpp/types/includer.hpp"
@@ -82,22 +83,22 @@ dogen::config::cpp_settings mock_settings() {
         build_cpp_settings(project_dir);
 }
 
-std::string pod_name() {
-    return dogen::sml::test::mock_model_factory::type_name(0);
+std::string object_name() {
+    return dogen::sml::test::mock_model_factory::simple_name(0);
 }
 
 includer default_includer(const dogen::sml::model& m) {
     auto s(mock_settings());
     s.use_integrated_io(false);
 
-    locator lm(m.name(), s);
+    locator lm(m.name().simple_name(), s);
     return includer(m, lm, s);
 }
 
 includer includer_with_no_keys(const dogen::sml::model& m) {
     auto s(mock_settings());
     s.use_integrated_io(false);
-    locator lm(m.name(), s);
+    locator lm(m.name().simple_name(), s);
     return includer(m, lm, s);
 }
 
@@ -107,13 +108,12 @@ typedef std::function<
     > includer_factory;
 
 std::vector<std::list<std::string> >
-includes_for_one_pod_model(cpp_facet_types ft,
+includes_for_one_object_model(cpp_facet_types ft,
     const includer_factory& factory) {
     using dogen::sml::test::mock_model_factory;
     const auto m(mock_model_factory::build_single_type_model());
-    const auto pods(m.pods());
-    BOOST_REQUIRE(pods.size() == 1);
-    const auto p(pods.begin()->second);
+    BOOST_REQUIRE(m.objects().size() == 1);
+    const auto& p(*m.objects().begin()->second);
 
     auto im(factory(m));
     std::vector<std::list<std::string> > r;
@@ -126,12 +126,12 @@ includes_for_one_pod_model(cpp_facet_types ft,
     cd.file_type(file_types::header);
     cd.aspect_type(main);
     dogen::cpp::relationships rel;
-    const auto i0(im.includes_for_pod(cd, rel));
+    const auto i0(im.includes_for_object(cd, rel));
     r.push_back(i0.system());
     r.push_back(i0.user());
 
     cd.file_type(file_types::implementation);
-    const auto i1(im.includes_for_pod(cd, rel));
+    const auto i1(im.includes_for_object(cd, rel));
     r.push_back(i1.system());
     r.push_back(i1.user());
     return r;
@@ -148,11 +148,11 @@ using dogen::utility::test::asserter;
 
 BOOST_AUTO_TEST_SUITE(includer)
 
-BOOST_AUTO_TEST_CASE(processing_one_pod_model_with_default_configuration_generates_expected_domain_includes) {
-    SETUP_TEST_LOG_SOURCE("processing_one_pod_model_with_default_configuration_generates_expected_domain_includes");
+BOOST_AUTO_TEST_CASE(processing_one_object_model_with_default_configuration_generates_expected_domain_includes) {
+    SETUP_TEST_LOG_SOURCE("processing_one_object_model_with_default_configuration_generates_expected_domain_includes");
 
     const auto f(default_includer);
-    const auto i(includes_for_one_pod_model(cpp_facet_types::types, f));
+    const auto i(includes_for_one_object_model(cpp_facet_types::types, f));
     BOOST_REQUIRE(i.size() == 4);
 
     // header
@@ -170,7 +170,7 @@ BOOST_AUTO_TEST_CASE(processing_one_pod_model_with_default_configuration_generat
     const auto iu(i[implementation_user]);
     BOOST_LOG_SEV(lg, debug) << "implementation user dependencies: " << iu;
     BOOST_REQUIRE(iu.size() == 1);
-    BOOST_CHECK(boost::contains(iu.front(), pod_name()) &&
+    BOOST_CHECK(boost::contains(iu.front(), object_name()) &&
         boost::contains(iu.front(), types));
 
     const auto is(i[implementation_system]);
@@ -178,18 +178,18 @@ BOOST_AUTO_TEST_CASE(processing_one_pod_model_with_default_configuration_generat
     BOOST_REQUIRE(is.empty());
 }
 
-BOOST_AUTO_TEST_CASE(processing_one_pod_model_with_default_configuration_generates_expected_io_includes) {
-    SETUP_TEST_LOG_SOURCE("processing_one_pod_model_with_default_configuration_generates_expected_io_includes");
+BOOST_AUTO_TEST_CASE(processing_one_object_model_with_default_configuration_generates_expected_io_includes) {
+    SETUP_TEST_LOG_SOURCE("processing_one_object_model_with_default_configuration_generates_expected_io_includes");
 
     const auto f(default_includer);
-    const auto i(includes_for_one_pod_model(cpp_facet_types::io, f));
+    const auto i(includes_for_one_object_model(cpp_facet_types::io, f));
     BOOST_REQUIRE(i.size() == 4);
 
     // header
     const auto hu(i[header_user]);
     BOOST_LOG_SEV(lg, debug) << "header user dependencies: " << hu;
     BOOST_REQUIRE(hu.size() == 1);
-    BOOST_CHECK(asserter::assert_contains(pod_name(), hu.front()));
+    BOOST_CHECK(asserter::assert_contains(object_name(), hu.front()));
     BOOST_CHECK(asserter::assert_contains(types, hu.front()));
 
     const auto hs(i[header_system]);
@@ -201,7 +201,7 @@ BOOST_AUTO_TEST_CASE(processing_one_pod_model_with_default_configuration_generat
     const auto iu(i[implementation_user]);
     BOOST_LOG_SEV(lg, debug) << "implementation user dependencies: " << iu;
     BOOST_REQUIRE(iu.size() == 1);
-    BOOST_CHECK(boost::contains(iu.front(), pod_name()) &&
+    BOOST_CHECK(boost::contains(iu.front(), object_name()) &&
         boost::contains(iu.front(), io));
 
     const auto is(i[implementation_system]);
@@ -210,18 +210,18 @@ BOOST_AUTO_TEST_CASE(processing_one_pod_model_with_default_configuration_generat
     BOOST_CHECK(asserter::assert_contains(ostream, is.front()));
 }
 
-BOOST_AUTO_TEST_CASE(processing_one_pod_model_with_default_configuration_generates_expected_serialisation_includes) {
-    SETUP_TEST_LOG_SOURCE("processing_one_pod_model_with_default_configuration_generates_expected_serialisation_includes");
+BOOST_AUTO_TEST_CASE(processing_one_object_model_with_default_configuration_generates_expected_serialisation_includes) {
+    SETUP_TEST_LOG_SOURCE("processing_one_object_model_with_default_configuration_generates_expected_serialisation_includes");
 
     const auto f(default_includer);
-    const auto i(includes_for_one_pod_model(cpp_facet_types::serialization, f));
+    const auto i(includes_for_one_object_model(cpp_facet_types::serialization, f));
     BOOST_REQUIRE(i.size() == 4);
 
     // header
     const auto hu(i[header_user]);
     BOOST_LOG_SEV(lg, debug) << "header user dependencies: " << hu;
     BOOST_REQUIRE(hu.size() == 1);
-    BOOST_CHECK(asserter::assert_contains(pod_name(), hu.front()));
+    BOOST_CHECK(asserter::assert_contains(object_name(), hu.front()));
     BOOST_CHECK(asserter::assert_contains(types, hu.front()));
 
     const auto hs(i[header_system]);
@@ -234,7 +234,7 @@ BOOST_AUTO_TEST_CASE(processing_one_pod_model_with_default_configuration_generat
     BOOST_LOG_SEV(lg, debug) << "implementation user dependencies: " << iu;
 
     BOOST_CHECK(boost::ends_with(iu.front(), serialization_postfix));
-    BOOST_CHECK(asserter::assert_contains(pod_name(), iu.front()));
+    BOOST_CHECK(asserter::assert_contains(object_name(), iu.front()));
     BOOST_CHECK(asserter::assert_contains(serialization, iu.front()));
 
     const auto is(i[implementation_system]);
@@ -242,18 +242,18 @@ BOOST_AUTO_TEST_CASE(processing_one_pod_model_with_default_configuration_generat
     BOOST_REQUIRE(is.size() == 9);
 }
 
-BOOST_AUTO_TEST_CASE(processing_one_pod_model_with_default_configuration_generates_expected_hash_includes) {
-    SETUP_TEST_LOG_SOURCE("processing_one_pod_model_with_default_configuration_generates_expected_hash_includes");
+BOOST_AUTO_TEST_CASE(processing_one_object_model_with_default_configuration_generates_expected_hash_includes) {
+    SETUP_TEST_LOG_SOURCE("processing_one_object_model_with_default_configuration_generates_expected_hash_includes");
 
     const auto f(default_includer);
-    const auto i(includes_for_one_pod_model(cpp_facet_types::hash, f));
+    const auto i(includes_for_one_object_model(cpp_facet_types::hash, f));
     BOOST_REQUIRE(i.size() == 4);
 
     // header
     const auto hu(i[header_user]);
     BOOST_LOG_SEV(lg, debug) << "header user dependencies: " << hu;
     BOOST_REQUIRE(hu.size() == 1);
-    BOOST_CHECK(boost::contains(hu.front(), pod_name()) &&
+    BOOST_CHECK(boost::contains(hu.front(), object_name()) &&
         boost::contains(hu.front(), types));
 
     const auto hs(i[header_system]);
@@ -265,7 +265,7 @@ BOOST_AUTO_TEST_CASE(processing_one_pod_model_with_default_configuration_generat
     const auto iu(i[implementation_user]);
     BOOST_LOG_SEV(lg, debug) << "implementation user dependencies: " << iu;
     BOOST_REQUIRE(iu.size() == 1);
-    BOOST_CHECK(boost::contains(iu.front(), pod_name()) &&
+    BOOST_CHECK(boost::contains(iu.front(), object_name()) &&
         boost::contains(iu.front(), hash));
 
     const auto is(i[implementation_system]);
@@ -273,18 +273,18 @@ BOOST_AUTO_TEST_CASE(processing_one_pod_model_with_default_configuration_generat
     BOOST_CHECK(is.empty());
 }
 
-BOOST_AUTO_TEST_CASE(processing_one_pod_model_with_default_configuration_generates_expected_test_data_includes) {
-    SETUP_TEST_LOG_SOURCE("processing_one_pod_model_with_default_configuration_generates_expected_test_data_includes");
+BOOST_AUTO_TEST_CASE(processing_one_object_model_with_default_configuration_generates_expected_test_data_includes) {
+    SETUP_TEST_LOG_SOURCE("processing_one_object_model_with_default_configuration_generates_expected_test_data_includes");
 
     const auto f(default_includer);
-    const auto i(includes_for_one_pod_model(cpp_facet_types::test_data, f));
+    const auto i(includes_for_one_object_model(cpp_facet_types::test_data, f));
     BOOST_REQUIRE(i.size() == 4);
 
     // header
     const auto hu(i[header_user]);
     BOOST_LOG_SEV(lg, debug) << "header user dependencies: " << hu;
     BOOST_REQUIRE(hu.size() == 1);
-    BOOST_CHECK(boost::contains(hu.front(), pod_name()) &&
+    BOOST_CHECK(boost::contains(hu.front(), object_name()) &&
         boost::contains(hu.front(), types));
 
     const auto hs(i[header_system]);
@@ -295,7 +295,7 @@ BOOST_AUTO_TEST_CASE(processing_one_pod_model_with_default_configuration_generat
     const auto iu(i[implementation_user]);
     BOOST_LOG_SEV(lg, debug) << "implementation user dependencies: " << iu;
     BOOST_REQUIRE(iu.size() == 1);
-    BOOST_CHECK(boost::contains(iu.front(), pod_name()) &&
+    BOOST_CHECK(boost::contains(iu.front(), object_name()) &&
         boost::contains(iu.front(), test_data));
 
     const auto is(i[implementation_system]);
@@ -303,12 +303,12 @@ BOOST_AUTO_TEST_CASE(processing_one_pod_model_with_default_configuration_generat
     BOOST_CHECK(is.empty());
 }
 
-BOOST_AUTO_TEST_CASE(processing_one_pod_model_with_no_keys_configuration_generates_no_key_includes) {
-    SETUP_TEST_LOG_SOURCE("processing_one_pod_model_with_no_keys_configuration_generates_no_key_includes");
+BOOST_AUTO_TEST_CASE(processing_one_object_model_with_no_keys_configuration_generates_no_key_includes) {
+    SETUP_TEST_LOG_SOURCE("processing_one_object_model_with_no_keys_configuration_generates_no_key_includes");
 
     const auto f(includer_with_no_keys);
     for (const auto facet : facets) {
-        auto i(includes_for_one_pod_model(facet, f));
+        auto i(includes_for_one_object_model(facet, f));
         BOOST_REQUIRE(i.size() == 4);
 
         auto all(i[header_user]);

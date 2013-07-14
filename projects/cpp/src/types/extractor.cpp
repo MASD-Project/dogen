@@ -41,7 +41,7 @@ const std::string float_type("float");
 
 const std::string concept_not_found("Concept not found in concept container: ");
 const std::string qname_could_not_be_found(
-    "Could not find QName in pod container: ");
+    "Could not find QName in object container: ");
 const std::string type_does_not_have_a_parent(
     "Type in inheritance graph does not have a parent: ");
 

@@ -40,10 +40,8 @@ const std::string std_ns("std");
 const std::string odb_pragma("#pragma db");
 const std::string odb_key("ODB_PRAGMA");
 
-const std::string missing_class_info(
-    "Meta type is pod but class view model is empty");
-const std::string missing_enum_info(
-    "Meta type is enumeration but enumeration view model is empty");
+const std::string missing_class_info("Class info is empty");
+const std::string missing_enum_info("Enumeration info is empty");
 
 }
 

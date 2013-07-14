@@ -49,10 +49,8 @@ const std::string invalid_smart_pointer(
     "Smart pointers have exactly one type argument");
 const std::string invalid_pair(
     "Pairs  have exactly two type arguments");
-const std::string missing_class_info(
-    "Meta type is pod but class view model is empty");
-const std::string missing_enum_info(
-    "Meta type is enumeration but enumeration view model is empty");
+const std::string missing_class_info("Class info is empty");
+const std::string missing_enum_info("Enumeration info is empty");
 
 }
 

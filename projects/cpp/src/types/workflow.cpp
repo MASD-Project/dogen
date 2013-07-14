@@ -43,7 +43,7 @@ const std::string registrar_name("registrar");
 const std::string cmakelists_file_name("CMakeLists.txt");
 const std::string odb_options_file_name("options.odb");
 const std::string domain_facet_must_be_enabled("Domain facet must be enabled");
-const std::string could_not_find_pod("Could not find pod: ");
+const std::string could_not_find_object("Could not find object: ");
 const std::string integrated_io_incompatible_with_io_facet(
     "Integrated IO cannot be used with the IO facet");
 
@@ -99,8 +99,8 @@ void workflow::generate_classes_recursive(const sml::qname& qn) {
 
     const auto i(model_.objects().find(qn));
     if (i == model_.objects().end()) {
-        BOOST_LOG_SEV(lg, error) << could_not_find_pod << qn;
-        BOOST_THROW_EXCEPTION(workflow_failure(could_not_find_pod +
+        BOOST_LOG_SEV(lg, error) << could_not_find_object << qn;
+        BOOST_THROW_EXCEPTION(workflow_failure(could_not_find_object +
                 boost::lexical_cast<std::string>(qn)));
     }
 
@@ -160,7 +160,7 @@ workflow::result_type workflow::generate_classes_activity() const {
         const auto ci(generate_class_info_recursive(infos, p.name()));
         const auto rel(extractor_.extract_dependency_graph(p));
         for (const auto& cd : descriptor_factory_.create(p.name(), ct, pt)) {
-            const auto il(includer_.includes_for_pod(cd, rel));
+            const auto il(includer_.includes_for_object(cd, rel));
             auto fi(file_info_factory_.create(ci, cd, il));
 
             // we want to make sure we do not actually generate code
@@ -227,9 +227,6 @@ workflow::result_type workflow::generate_registrars_activity() const {
     qn.external_module_path(model_.external_module_path());
     qn.type_name(registrar_name);
 
-    // FIXME: we should probably have "a not SML type" instead of lying
-    qn.meta_type(sml::meta_types::pod);
-
     workflow::result_type r;
     const auto ri(transformer_.transform_model_into_registrar());
     for (const auto& cd : descriptor_factory_.create_registrar(qn)) {
@@ -253,9 +250,6 @@ workflow::result_type workflow::generate_includers_activity() const {
     qn.external_module_path(model_.external_module_path());
     qn.model_name(model_.name());
 
-    // FIXME: we should probably have "a not SML type" instead of lying
-    qn.meta_type(sml::meta_types::pod);
-
     workflow::result_type r;
     for (const auto& cd : descriptor_factory_.create_includer(qn)) {
         const auto il(includer_.includes_for_includer_files(cd));
@@ -270,7 +264,7 @@ workflow::result_type workflow::generate_visitors_activity() const {
     BOOST_LOG_SEV(lg, debug) << "Started generate visitors activity.";
 
     workflow::result_type r;
-    for (const auto& pair : model_.pods()) {
+    for (const auto& pair : model_.objects()) {
         const auto p(pair.second);
         const auto no_generation(sml::generation_types::no_generation);
         if (!p.is_visitable() || p.generation_type() == no_generation)

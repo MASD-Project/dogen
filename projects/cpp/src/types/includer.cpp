@@ -742,8 +742,8 @@ inclusion_lists includer::includes_for_visitor(const content_descriptor& cd,
     return r;
 }
 
-inclusion_lists includer::
-includes_for_pod(const content_descriptor& cd, const relationships& rel) const {
+inclusion_lists includer::includes_for_object(
+    const content_descriptor& cd, const relationships& rel) const {
     inclusion_lists r;
     if (cd.aspect_type() == aspect_types::forward_decls) {
         append_self_dependencies(cd, r);

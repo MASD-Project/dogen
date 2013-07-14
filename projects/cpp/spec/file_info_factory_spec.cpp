@@ -243,8 +243,8 @@ BOOST_AUTO_TEST_CASE(creating_file_info_for_module_produces_expected_results) {
         BOOST_CHECK(found_facets.find(d.facet_type()) != found_facets.end());
 }
 
-BOOST_AUTO_TEST_CASE(creating_file_info_for_pod_produces_expected_results) {
-    SETUP_TEST_LOG_SOURCE("creating_file_info_for_pod_produces_expected_results");
+BOOST_AUTO_TEST_CASE(creating_file_info_for_object_produces_expected_results) {
+    SETUP_TEST_LOG_SOURCE("creating_file_info_for_object_produces_expected_results");
 
     const auto m(mock_model_factory::build_single_type_model());
     BOOST_LOG_SEV(lg, debug) << "model: " << m;

@@ -50,8 +50,7 @@ const std::string semi_colon(";");
 const std::string space(" ");
 const std::string comma(",");
 
-const std::string missing_class_info(
-    "Meta type is pod but class view model is empty");
+const std::string missing_class_info("Class info is empty");
 const std::string enum_info_not_supported(
     "Enumerations do not have an implementation");
 const std::string invalid_smart_pointer(

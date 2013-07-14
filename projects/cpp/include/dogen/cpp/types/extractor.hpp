@@ -73,11 +73,11 @@ private:
 
 public:
     /**
-     * @brief Flattens the given pod into all qnames it is related to,
-     * except itself.
+     * @brief Flattens the given object into all qnames it is related
+     * to, except itself.
      *
-     * The qnames include all types used by the properties of the pod,
-     * as well as its parent, if any.
+     * The qnames include all types used by the properties of the
+     * object, as well as its parent, if any.
      */
     relationships extract_dependency_graph(const sml::abstract_object& ao) const;
 

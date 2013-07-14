@@ -45,12 +45,10 @@ const std::string boost_ns("boost");
 const std::string serialization_ns("serialization");
 const std::string invalid_aspect_type("Invalid value for aspect_types");
 const std::string invalid_category_type("Invalid value for category_types");
-const std::string missing_class_info(
-    "Meta type is pod but class view model is empty");
-const std::string missing_enum_info(
-    "Meta type is enumeration but enumeration view model is empty");
-const std::string missing_exception_info(
-    "Meta type is exception but exception view model is empty");
+const std::string missing_class_info("Class info is empty");
+const std::string missing_enum_info("Enumeration info is empty");
+const std::string missing_exception_info("Exception info is empty");
+
 }
 
 namespace dogen {

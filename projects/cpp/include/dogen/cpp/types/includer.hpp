@@ -168,8 +168,8 @@ public:
      * all files in a given facet. This method returns that list of
      * includes.
      *
-     * This method must be called after all pods have been processed,
-     * as the list is built up from previous calls.
+     * This method must be called after all objects have been
+     * processed, as the list is built up from previous calls.
      *
      * @param ft Facet for which we want the inclusion lists.
      */
@@ -177,9 +177,9 @@ public:
     includes_for_includer_files(const content_descriptor& cd) const;
 
     /**
-     * @brief Returns all the includes required for the given pod.
+     * @brief Returns all the includes required for the given object.
      */
-    inclusion_lists includes_for_pod(const content_descriptor& cd,
+    inclusion_lists includes_for_object(const content_descriptor& cd,
         const relationships& rel) const;
 
     /**

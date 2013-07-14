@@ -200,7 +200,7 @@ void class_declaration::friends(const class_info& ci) {
 }
 
 void class_declaration::
-non_pod_getters_and_setters(const std::string class_name,
+non_object_getters_and_setters(const std::string class_name,
     const property_info& pi) {
     doxygen_comments dc(stream_, indenter_);
     dc.format(pi.documentation());
@@ -231,7 +231,7 @@ non_pod_getters_and_setters(const std::string class_name,
 }
 
 void class_declaration::
-pod_getters_and_setters(const std::string class_name,
+object_getters_and_setters(const std::string class_name,
     const property_info& pi) {
     doxygen_comments dc(stream_, indenter_);
     dc.format(pi.documentation());
@@ -286,11 +286,11 @@ void class_declaration::getters_and_setters(const class_info& ci) {
     utility_.public_access_specifier();
     for (const auto p : ci.properties()) {
         if (p.type().is_primitive() || p.type().is_enumeration()) {
-            non_pod_getters_and_setters(ci.name(), p);
+            non_object_getters_and_setters(ci.name(), p);
             continue;
         }
 
-        pod_getters_and_setters(ci.name(), p);
+        object_getters_and_setters(ci.name(), p);
     }
 }
 

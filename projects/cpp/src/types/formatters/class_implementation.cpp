@@ -307,7 +307,7 @@ void class_implementation::equals_operator(const class_info& ci) {
 }
 
 void class_implementation::
-non_pod_getters_and_setters(const std::string class_name,
+non_object_getters_and_setters(const std::string class_name,
     const property_info& ci) {
     stream_ << indenter_ << ci.type().complete_name() << " " << class_name
             << "::" << ci.name() << "() const ";
@@ -351,7 +351,7 @@ non_pod_getters_and_setters(const std::string class_name,
 }
 
 void class_implementation::
-pod_getters_and_setters(const std::string class_name,
+object_getters_and_setters(const std::string class_name,
     const property_info& ci) {
     // const getter
     stream_ << indenter_ << "const " << ci.type().complete_name()
@@ -438,9 +438,9 @@ void class_implementation::getters_and_setters(const class_info& ci) {
 
     for (const auto p : ci.properties()) {
         if (p.type().is_primitive() || p.type().is_enumeration())
-            non_pod_getters_and_setters(ci.name(), p);
+            non_object_getters_and_setters(ci.name(), p);
         else
-            pod_getters_and_setters(ci.name(), p);
+            object_getters_and_setters(ci.name(), p);
     }
 }
 

@@ -36,10 +36,8 @@ namespace {
 
 auto lg(logger_factory("cpp.formatters.io_header"));
 
-const std::string missing_class_info(
-    "Meta type is pod but class view model is empty");
-const std::string missing_enum_info(
-    "Meta type is enumeration but enumeration view model is empty");
+const std::string missing_class_info("Class info is empty");
+const std::string missing_enum_info("Enumeration info is empty");
 
 }
 

@@ -45,10 +45,8 @@ const std::string colon(": ");
 const std::string comma(", ");
 const std::string semi_colon(";");
 
-const std::string missing_class_info(
-    "Meta type is pod but class view model is empty");
-const std::string missing_enum_info(
-    "Meta type is enumeration but enumeration view model is empty");
+const std::string missing_class_info("Class info is empty");
+const std::string missing_enum_info("Enumeration info is empty");
 
 }
 
