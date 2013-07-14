@@ -245,7 +245,7 @@ stuff. Perhaps we should consider removing it altogether?
 
 *** Add support for boost concept
 
-Once dogen supports concepts, the natural thing to do is to express
+Now dogen supports concepts, the natural thing to do is to express
 them in C++ code. This could easily be done using boost concept, or
 the C++-14 concepts light.
 
