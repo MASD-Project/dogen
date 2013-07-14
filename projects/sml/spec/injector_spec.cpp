@@ -46,31 +46,31 @@ const std::string missing_identity("Identity must have at least");
 const std::string no_leaves("Type marked as visitable but has no leaves");
 
 bool is_type_zero(const dogen::sml::qname& qn) {
-    return mock_model_factory::type_name(0) == qn.simple_name();
+    return mock_model_factory::simple_name(0) == qn.simple_name();
 }
 
 bool is_type_one(const dogen::sml::qname& qn) {
-    return mock_model_factory::type_name(1) == qn.simple_name();
+    return mock_model_factory::simple_name(1) == qn.simple_name();
 }
 
 bool is_type_zero_unversioned(const dogen::sml::qname& qn) {
     const auto s(qn.simple_name());
     return
-        boost::contains(s, mock_model_factory::type_name(0)) &&
+        boost::contains(s, mock_model_factory::simple_name(0)) &&
         boost::contains(s, unversioned_postfix);
 }
 
 bool is_type_zero_versioned(const dogen::sml::qname& qn) {
     const auto s(qn.simple_name());
     return
-        boost::contains(s, mock_model_factory::type_name(0)) &&
+        boost::contains(s, mock_model_factory::simple_name(0)) &&
         boost::contains(s, versioned_postfix);
 }
 
 bool is_type_one_visitor(const dogen::sml::qname& qn) {
     const auto s(qn.simple_name());
     return
-        boost::contains(s, mock_model_factory::type_name(1)) &&
+        boost::contains(s, mock_model_factory::simple_name(1)) &&
         boost::contains(s, visitor_postfix);
 }
 

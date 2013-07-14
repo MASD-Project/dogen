@@ -72,7 +72,7 @@ dogen::config::cpp_settings split_project_settings() {
 }
 
 content_descriptor mock_descriptor(cpp_facet_types ft, file_types flt,
-    std::string type_name, std::list<std::string> module_path,
+    std::string simple_name, std::list<std::string> module_path,
     std::list<std::string> external_module_path) {
 
     content_descriptor r;
@@ -81,7 +81,7 @@ content_descriptor mock_descriptor(cpp_facet_types ft, file_types flt,
     r.aspect_type(aspect_types::main);
     r.name().model_name(test_model_name);
     r.name().module_path(module_path);
-    r.name().type_name(type_name);
+    r.name().simple_name(simple_name);
     r.name().external_module_path(external_module_path);
 
     return r;

@@ -38,7 +38,7 @@ namespace {
 const std::string test_module("sml");
 const std::string test_suite("merger_spec");
 
-const std::string invalid_type_name("INVALID");
+const std::string invalid_simple_name("INVALID");
 const std::string invalid_model_name("INVALID");
 const std::string some_path("some_path");
 
@@ -114,7 +114,7 @@ BOOST_AUTO_TEST_CASE(merging_n_distinct_models_with_one_object_each_results_in_n
         BOOST_LOG_SEV(lg, debug) << "model name: " << *model_i;
 
         const auto expected_model_name(mock_model_factory::model_name(i));
-        const auto expected_object_name(mock_model_factory::type_name(0));
+        const auto expected_object_name(mock_model_factory::simple_name(0));
         BOOST_LOG_SEV(lg, debug) << "expected object name: "
                                  << expected_object_name;
         BOOST_LOG_SEV(lg, debug) << "expected model name: "
@@ -157,7 +157,7 @@ BOOST_AUTO_TEST_CASE(type_with_inconsistent_key_value_pair_throws) {
     SETUP_TEST_LOG("type_with_inconsistent_key_value_pair_throws");
 
     auto m(mock_model_factory::build_multi_type_model(0, 2));
-    m.objects().begin()->second->name().simple_name(invalid_type_name);
+    m.objects().begin()->second->name().simple_name(invalid_simple_name);
 
     dogen::sml::merger mg;
     mg.add_target(m);

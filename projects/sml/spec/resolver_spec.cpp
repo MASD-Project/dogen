@@ -60,15 +60,15 @@ bool is_model_one(const dogen::sml::qname& qn) {
 }
 
 bool is_type_zero(const dogen::sml::qname& qn) {
-    return mock_model_factory::type_name(0) == qn.simple_name();
+    return mock_model_factory::simple_name(0) == qn.simple_name();
 }
 
 bool is_type_one(const dogen::sml::qname& qn) {
-    return mock_model_factory::type_name(1) == qn.simple_name();
+    return mock_model_factory::simple_name(1) == qn.simple_name();
 }
 
 bool is_type_two(const dogen::sml::qname& qn) {
-    return mock_model_factory::type_name(2) == qn.simple_name();
+    return mock_model_factory::simple_name(2) == qn.simple_name();
 }
 
 }

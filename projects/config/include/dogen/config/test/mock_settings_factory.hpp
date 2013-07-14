@@ -42,34 +42,36 @@ public:
     mock_settings_factory& operator=(const mock_settings_factory&) = delete;
 
 public:
-    static config::output_settings build_output_settings(bool verbose = true);
+    static std::set<cpp_facet_types> build_facets(const bool all = true);
 
-    static config::troubleshooting_settings
+    static output_settings build_output_settings(bool verbose = true);
+
+    static troubleshooting_settings
     build_troubleshooting_settings(bool verbose = true);
 
-    static config::cpp_settings build_cpp_settings();
+    static cpp_settings build_cpp_settings();
 
-    static config::cpp_settings build_cpp_settings(
+    static cpp_settings build_cpp_settings(
         boost::filesystem::path src_dir,
         boost::filesystem::path include_dir,
         bool verbose = true);
 
-    static config::cpp_settings build_cpp_settings(
+    static cpp_settings build_cpp_settings(
         boost::filesystem::path project_dir,
         bool verbose = true);
 
-    static config::modeling_settings build_modeling_settings(
+    static modeling_settings build_modeling_settings(
         boost::filesystem::path target,
         std::string module_path,
         bool verbose = true);
 
-    static config::settings build_settings(boost::filesystem::path target,
+    static settings build_settings(boost::filesystem::path target,
         boost::filesystem::path src_dir,
         boost::filesystem::path include_dir,
         std::string module_path,
         bool verbose = true);
 
-    static config::settings build_settings(boost::filesystem::path target,
+    static settings build_settings(boost::filesystem::path target,
         boost::filesystem::path project_dir,
         std::string module_path,
         bool verbose = true);

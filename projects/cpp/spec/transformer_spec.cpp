@@ -42,23 +42,23 @@ const std::string no_parent_info("Type has a parent ");
 const std::string unexpected_parent_info("Type does not have a parent");
 
 bool ends_with_type_zero(const std::string& n) {
-    return boost::ends_with(n, mock_model_factory::type_name(0));
+    return boost::ends_with(n, mock_model_factory::simple_name(0));
 }
 
 bool is_type_zero(const std::string& n) {
-    return mock_model_factory::type_name(0) == n;
+    return mock_model_factory::simple_name(0) == n;
 }
 
 bool is_type_one(const std::string& n) {
-    return mock_model_factory::type_name(1) == n;
+    return mock_model_factory::simple_name(1) == n;
 }
 
 bool is_type_two(const std::string& n) {
-    return mock_model_factory::type_name(2) == n;
+    return mock_model_factory::simple_name(2) == n;
 }
 
 bool is_type_three(const std::string& n) {
-    return mock_model_factory::type_name(3) == n;
+    return mock_model_factory::simple_name(3) == n;
 }
 
 bool is_module_zero(const std::string& n) {
@@ -87,19 +87,25 @@ bool check_scoped_name(const std::string& n) {
 }
 
 using dogen::utility::test::contains_checker;
+typedef dogen::sml::test::mock_model_factory::object_types object_types;
+typedef dogen::sml::test::mock_model_factory::property_types property_types;
 
 BOOST_AUTO_TEST_SUITE(transformer)
 
 BOOST_AUTO_TEST_CASE(transforming_enumeration_results_in_expected_enum_info) {
     SETUP_TEST_LOG_SOURCE("transforming_enumeration_results_in_expected_enum_info");
 
-    const auto mt(dogen::sml::meta_types::enumeration);
-    const auto m(mock_model_factory::build_single_type_model(0, mt));
+    const auto ot(object_types::enumeration);
+    const auto m(mock_model_factory::build_single_type_model(0, ot));
     BOOST_LOG_SEV(lg, debug) << "model: " << m;
     BOOST_REQUIRE(m.enumerations().size() == 1);
 
-    dogen::cpp::transformer t(m);
-    const auto e(t.transform_enumeration(m.enumerations().begin()->second));
+    dogen::cpp::context c;
+    dogen::cpp::transformer t(m, c);
+    t.from_type(*m.objects().begin()->second);
+
+    BOOST_REQUIRE(c.enumerations().size() == 1);
+    const auto e(c.enumerations().front());
     BOOST_LOG_SEV(lg, debug) << "enumeration: " << e;
 
     BOOST_CHECK(is_type_zero(e.name()));
@@ -114,14 +120,17 @@ BOOST_AUTO_TEST_CASE(transforming_enumeration_results_in_expected_enum_info) {
 BOOST_AUTO_TEST_CASE(transforming_enumeration_in_module_results_in_expected_enum_info) {
     SETUP_TEST_LOG_SOURCE("transforming_enumeration_in_module_results_in_expected_enum_info");
 
-    const auto mt(dogen::sml::meta_types::enumeration);
+    const auto ot(object_types::enumeration);
     const auto m0(
-        mock_model_factory::build_single_type_model_in_module(0, mt, 1));
+        mock_model_factory::build_single_type_model_in_module(0, ot, 1));
     BOOST_LOG_SEV(lg, debug) << "model 0: " << m0;
-    BOOST_REQUIRE(m0.enumerations().size() == 1);
+    BOOST_REQUIRE(m0.objects().size() == 1);
 
-    dogen::cpp::transformer t(m0);
-    const auto e0(t.transform_enumeration(m0.enumerations().begin()->second));
+    dogen::cpp::context c;
+    dogen::cpp::transformer t(m0, c);
+    BOOST_REQUIRE(c.enumerations().size() == 1);
+    t.from_type(*m0.objects().begin()->second);
+    const auto e0(c.enumerations().front());
     BOOST_LOG_SEV(lg, debug) << "enumeration 0: " << e0;
 
     BOOST_CHECK(is_type_zero(e0.name()));
@@ -135,11 +144,12 @@ BOOST_AUTO_TEST_CASE(transforming_enumeration_in_module_results_in_expected_enum
     BOOST_CHECK(is_type_one(e0.enumerators().back().name()));
 
     const auto m1(
-        mock_model_factory::build_single_type_model_in_module(0, mt, 2));
+        mock_model_factory::build_single_type_model_in_module(0, ot, 2));
     BOOST_LOG_SEV(lg, debug) << "model 1: " << m1;
     BOOST_REQUIRE(m0.enumerations().size() == 1);
 
-    const auto e1(t.transform_enumeration(m1.enumerations().begin()->second));
+    t.from_type(*m1.objects().begin()->second);
+    const auto e1(c.enumerations().front());
     BOOST_LOG_SEV(lg, debug) << "enumeration 1: " << e1;
     BOOST_CHECK(is_type_zero(e1.name()));
     BOOST_CHECK(!e1.documentation().empty());
@@ -155,15 +165,17 @@ BOOST_AUTO_TEST_CASE(transforming_enumeration_in_module_results_in_expected_enum
 BOOST_AUTO_TEST_CASE(transforming_enumeration_in_external_module_results_in_expected_enum_info) {
     SETUP_TEST_LOG_SOURCE("transforming_enumeration_in_external_module_results_in_expected_enum_info");
 
-    const auto mt(dogen::sml::meta_types::enumeration);
-    auto m(mock_model_factory::build_single_type_model_in_module(0, mt));
-    BOOST_REQUIRE(m.enumerations().size() == 1);
+    const auto ot(object_types::enumeration);
+    auto m(mock_model_factory::build_single_type_model_in_module(0, ot));
+    BOOST_REQUIRE(m.objects().size() == 1);
     auto enumeration(m.enumerations().begin()->second);
     enumeration.name().external_module_path().push_back(external_module);
     BOOST_LOG_SEV(lg, debug) << "model: " << m;
 
-    dogen::cpp::transformer t(m);
-    const auto e(t.transform_enumeration(enumeration));
+    dogen::cpp::context c;
+    dogen::cpp::transformer t(m, c);
+    t.from_type(*m.objects().begin()->second);
+    const auto e(c.enumerations().front());
     BOOST_LOG_SEV(lg, debug) << "enumeration: " << e;
 
     BOOST_REQUIRE(e.namespaces().size() == 2);
@@ -174,13 +186,15 @@ BOOST_AUTO_TEST_CASE(transforming_enumeration_in_external_module_results_in_expe
 BOOST_AUTO_TEST_CASE(transforming_exception_results_in_expected_exception_info) {
     SETUP_TEST_LOG_SOURCE("transforming_exception_results_in_expected_exception_info");
 
-    const auto mt(dogen::sml::meta_types::exception);
-    const auto m(mock_model_factory::build_single_type_model(0, mt));
+    const auto ot(object_types::exception);
+    const auto m(mock_model_factory::build_single_type_model(0, ot));
     BOOST_LOG_SEV(lg, debug) << "model: " << m;
-    BOOST_REQUIRE(m.exceptions().size() == 1);
+    BOOST_REQUIRE(m.objects().size() == 1);
 
-    dogen::cpp::transformer t(m);
-    const auto e(t.transform_exception(m.exceptions().begin()->second));
+    dogen::cpp::context c;
+    dogen::cpp::transformer t(m, c);
+    t.from_type(*m.objects().begin()->second);
+    const auto e(c.exceptions().front());
     BOOST_LOG_SEV(lg, debug) << "exception: " << e;
 
     BOOST_CHECK(is_type_zero(e.name()));
@@ -192,14 +206,16 @@ BOOST_AUTO_TEST_CASE(transforming_exception_results_in_expected_exception_info) 
 BOOST_AUTO_TEST_CASE(transforming_exception_in_module_results_in_expected_exception_info) {
     SETUP_TEST_LOG_SOURCE("transforming_exception_in_module_results_in_expected_exception_info");
 
-    const auto mt(dogen::sml::meta_types::exception);
+    const auto ot(object_types::exception);
     const auto m0(
-        mock_model_factory::build_single_type_model_in_module(0, mt, 1));
+        mock_model_factory::build_single_type_model_in_module(0, ot, 1));
     BOOST_LOG_SEV(lg, debug) << "model 0: " << m0;
-    BOOST_REQUIRE(m0.exceptions().size() == 1);
+    BOOST_REQUIRE(m0.objects().size() == 1);
 
-    dogen::cpp::transformer t(m0);
-    const auto e0(t.transform_exception(m0.exceptions().begin()->second));
+    dogen::cpp::context c;
+    dogen::cpp::transformer t(m0, c);
+    t.from_type(*m0.objects().begin()->second);
+    const auto e0(c.exceptions().front());
     BOOST_LOG_SEV(lg, debug) << "exception 0: " << e0;
 
     BOOST_CHECK(is_type_zero(e0.name()));
@@ -209,11 +225,12 @@ BOOST_AUTO_TEST_CASE(transforming_exception_in_module_results_in_expected_except
     BOOST_CHECK(is_module_zero(e0.namespaces().back()));
 
     const auto m1(
-        mock_model_factory::build_single_type_model_in_module(0, mt, 2));
+        mock_model_factory::build_single_type_model_in_module(0, ot, 2));
     BOOST_LOG_SEV(lg, debug) << "model 1: " << m1;
-    BOOST_REQUIRE(m0.exceptions().size() == 1);
+    BOOST_REQUIRE(m0.objects().size() == 1);
 
-    const auto e1(t.transform_exception(m1.exceptions().begin()->second));
+    t.from_type(*m1.objects().begin()->second);
+    const auto e1(c.exceptions().front());
     BOOST_LOG_SEV(lg, debug) << "exception 1: " << e1;
     BOOST_CHECK(is_type_zero(e1.name()));
     BOOST_CHECK(!e1.documentation().empty());
@@ -225,15 +242,17 @@ BOOST_AUTO_TEST_CASE(transforming_exception_in_module_results_in_expected_except
 BOOST_AUTO_TEST_CASE(transforming_exception_in_external_module_results_in_expected_exception_info) {
     SETUP_TEST_LOG_SOURCE("transforming_exception_in_external_module_results_in_expected_exception_info");
 
-    const auto mt(dogen::sml::meta_types::exception);
-    auto m(mock_model_factory::build_single_type_model_in_module(0, mt));
-    BOOST_REQUIRE(m.exceptions().size() == 1);
-    auto exception(m.exceptions().begin()->second);
+    const auto ot(object_types::exception);
+    auto m(mock_model_factory::build_single_type_model_in_module(0, ot));
+    BOOST_REQUIRE(m.objects().size() == 1);
+    auto& exception(*m.objects().begin()->second);
     exception.name().external_module_path().push_back(external_module);
     BOOST_LOG_SEV(lg, debug) << "model: " << m;
 
-    dogen::cpp::transformer t(m);
-    const auto e(t.transform_exception(exception));
+    dogen::cpp::context c;
+    dogen::cpp::transformer t(m, c);
+    t.from_type(*m.objects().begin()->second);
+    const auto e(c.exceptions().front());
     BOOST_LOG_SEV(lg, debug) << "exception: " << e;
 
     BOOST_REQUIRE(e.namespaces().size() == 2);
@@ -244,33 +263,37 @@ BOOST_AUTO_TEST_CASE(transforming_exception_in_external_module_results_in_expect
 BOOST_AUTO_TEST_CASE(transforming_module_results_in_expected_namespace_info) {
     SETUP_TEST_LOG_SOURCE("transforming_module_results_in_expected_namespace_info");
 
-    const auto mt(dogen::sml::meta_types::pod);
+    const auto ot(object_types::exception);
     const auto m0(
-        mock_model_factory::build_single_type_model_in_module(0, mt, 1));
+        mock_model_factory::build_single_type_model_in_module(0, ot, 1));
     BOOST_LOG_SEV(lg, debug) << "model 0: " << m0;
     BOOST_REQUIRE(m0.modules().size() == 1);
 
-    dogen::cpp::transformer t(m0);
-    const auto p0(t.transform(m0.modules().begin()->second));
-    BOOST_LOG_SEV(lg, debug) << "module 0: " << p0;
+    dogen::cpp::context c;
+    dogen::cpp::transformer t(m0, c);
+    t.from_type(*m0.objects().begin()->second);
+    const auto n0(c.namespaces().front());
+    BOOST_LOG_SEV(lg, debug) << "namespace 0: " << n0;
 
-    BOOST_CHECK(!p0.documentation().empty());
-    BOOST_REQUIRE(p0.namespaces().size() == 1);
-    BOOST_CHECK(is_module_zero(p0.namespaces().front()));
+    BOOST_CHECK(!n0.documentation().empty());
+    BOOST_REQUIRE(n0.namespaces().size() == 1);
+    BOOST_CHECK(is_module_zero(n0.namespaces().front()));
 
     const auto m1(
-        mock_model_factory::build_single_type_model_in_module(0, mt, 2));
+        mock_model_factory::build_single_type_model_in_module(0, ot, 2));
     BOOST_LOG_SEV(lg, debug) << "model 1: " << m1;
     BOOST_REQUIRE(m1.modules().size() == 2);
 
     auto i(m1.modules().begin());
-    if (!is_module_one(i->first.type_name()) && i != m1.modules().end())
+    if (!is_module_one(i->first.simple_name()) && i != m1.modules().end())
         ++i;
 
     BOOST_REQUIRE(i != m1.modules().end());
 
-    BOOST_CHECK(is_module_one(i->first.type_name()));
-    const auto p1(t.transform(i->second));
+    BOOST_CHECK(is_module_one(i->first.simple_name()));
+    t.to_namespace_info(m0.modules().begin()->second);
+    const auto p1(c.namespaces().front());
+
     BOOST_LOG_SEV(lg, debug) << "module 1: " << p1;
 
     BOOST_CHECK(!p1.documentation().empty());
@@ -282,44 +305,49 @@ BOOST_AUTO_TEST_CASE(transforming_module_results_in_expected_namespace_info) {
 BOOST_AUTO_TEST_CASE(transforming_model_results_in_expected_namespace_info) {
     SETUP_TEST_LOG_SOURCE("transforming_model_results_in_expected_namespace_info");
 
-    const auto mt(dogen::sml::meta_types::pod);
-    const auto m(mock_model_factory::build_single_type_model_in_module(0, mt));
+    const auto ot(object_types::exception);
+    const auto m(mock_model_factory::build_single_type_model_in_module(0, ot));
     BOOST_LOG_SEV(lg, debug) << "model: " << m;
 
-    dogen::cpp::transformer t(m);
-    const auto p(t.transform_model_into_namespace());
-    BOOST_LOG_SEV(lg, debug) << "module: " << p;
+    dogen::cpp::context c;
+    dogen::cpp::transformer t(m, c);
+    t.model_to_namespace_info();
+    const auto n(c.namespaces().front());
+    BOOST_LOG_SEV(lg, debug) << "namespace: " << n;
 
-    BOOST_CHECK(!p.documentation().empty());
-    BOOST_REQUIRE(p.namespaces().size() == 1);
-    BOOST_CHECK(is_model_zero(p.namespaces().front()));
+    BOOST_CHECK(!n.documentation().empty());
+    BOOST_REQUIRE(n.namespaces().size() == 1);
+    BOOST_CHECK(is_model_zero(n.namespaces().front()));
 }
 
 BOOST_AUTO_TEST_CASE(transforming_module_in_external_module_results_in_expected_namespace_info) {
     SETUP_TEST_LOG_SOURCE("transforming_module_in_external_module_results_in_expected_namespace_info");
 
-    const auto mt(dogen::sml::meta_types::pod);
-    auto m(mock_model_factory::build_single_type_model_in_module(0, mt, 1));
-    m.external_module_path().push_back(external_module);
+    const auto ot(object_types::value_object);
+    auto m(mock_model_factory::build_single_type_model_in_module(0, ot, 1));
+    m.name().external_module_path().push_back(external_module);
     BOOST_REQUIRE(m.modules().size() == 1);
     auto module(m.modules().begin()->second);
     module.name().external_module_path().push_back(external_module);
     BOOST_LOG_SEV(lg, debug) << "model: " << m;
 
-    dogen::cpp::transformer t(m);
-    const auto p0(t.transform(module));
-    BOOST_LOG_SEV(lg, debug) << "module 0: " << p0;
+    dogen::cpp::context c;
+    dogen::cpp::transformer t(m, c);
+    t.to_namespace_info(module);
+    const auto n0(c.namespaces().front());
+    BOOST_LOG_SEV(lg, debug) << "module 0: " << n0;
 
-    BOOST_REQUIRE(p0.namespaces().size() == 2);
-    BOOST_CHECK(p0.namespaces().front() == external_module);
-    BOOST_CHECK(is_module_zero(p0.namespaces().back()));
+    BOOST_REQUIRE(n0.namespaces().size() == 2);
+    BOOST_CHECK(n0.namespaces().front() == external_module);
+    BOOST_CHECK(is_module_zero(n0.namespaces().back()));
 
-    const auto p1(t.transform_model_into_namespace());
-    BOOST_LOG_SEV(lg, debug) << "module 1: " << p1;
+    t.model_to_namespace_info();
+    const auto n1(c.namespaces().front());
+    BOOST_LOG_SEV(lg, debug) << "module 1: " << n1;
 
-    BOOST_REQUIRE(p1.namespaces().size() == 2);
-    BOOST_CHECK(p1.namespaces().front() == external_module);
-    BOOST_CHECK(is_model_zero(p1.namespaces().back()));
+    BOOST_REQUIRE(n1.namespaces().size() == 2);
+    BOOST_CHECK(n1.namespaces().front() == external_module);
+    BOOST_CHECK(is_model_zero(n1.namespaces().back()));
 }
 
 BOOST_AUTO_TEST_CASE(transforming_pod_results_in_expected_class_info) {
@@ -328,8 +356,11 @@ BOOST_AUTO_TEST_CASE(transforming_pod_results_in_expected_class_info) {
     auto m(mock_model_factory::build_single_type_model_in_module());
     BOOST_LOG_SEV(lg, debug) << "model: " << m;
 
-    dogen::cpp::transformer t(m);
-    const auto p(t.transform(m.pods().begin()->second));
+    dogen::cpp::context c;
+    dogen::cpp::transformer t(m, c);
+    const auto ot(object_types::exception);
+    const auto p(t.from_type(*m.objects().begin()->second));
+    t.from_type(*m0.objects().begin()->second);
     BOOST_LOG_SEV(lg, debug) << "class: " << p;
     BOOST_CHECK(is_type_zero(p.name()));
     BOOST_CHECK(!p.documentation().empty());
@@ -369,7 +400,7 @@ BOOST_AUTO_TEST_CASE(transforming_pod_with_property_results_in_expected_class_in
     dogen::cpp::transformer t(m);
     const auto p(t.transform(i->second));
     BOOST_LOG_SEV(lg, debug) << "class: " << p;
-
+    
     BOOST_CHECK(p.all_properties().size() == 1);
     BOOST_REQUIRE(p.properties().size() == 1);
     const auto type(p.properties().begin()->type());

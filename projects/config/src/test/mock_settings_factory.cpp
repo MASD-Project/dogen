@@ -38,20 +38,36 @@ namespace dogen {
 namespace config {
 namespace test {
 
-config::modeling_settings mock_settings_factory::
+std::set<cpp_facet_types>
+mock_settings_factory::build_facets(const bool all) {
+    if (all)
+        return std::set<cpp_facet_types> {
+            cpp_facet_types::types,
+            cpp_facet_types::hash,
+            cpp_facet_types::serialization,
+            cpp_facet_types::io,
+            cpp_facet_types::test_data,
+            cpp_facet_types::odb
+        };
+
+    return std::set<cpp_facet_types> {
+        cpp_facet_types::types,
+        cpp_facet_types::hash,
+    };
+}
+
+modeling_settings mock_settings_factory::
 build_modeling_settings(boost::filesystem::path target,
     std::string module_path, bool verbose) {
-    config::modeling_settings r;
+    modeling_settings r;
     r.verbose(verbose);
     r.external_module_path(module_path);
     r.target(target);
     return r;
 }
 
-
-config::output_settings
-mock_settings_factory::build_output_settings(bool verbose) {
-    config::output_settings r;
+output_settings mock_settings_factory::build_output_settings(bool verbose) {
+    output_settings r;
     r.verbose(verbose);
     r.output_to_stdout(false);
     r.output_to_file(true);
@@ -60,29 +76,28 @@ mock_settings_factory::build_output_settings(bool verbose) {
     return r;
 }
 
-config::troubleshooting_settings mock_settings_factory::
-build_troubleshooting_settings(bool verbose) {
-    config::troubleshooting_settings r;
+troubleshooting_settings
+mock_settings_factory::build_troubleshooting_settings(bool verbose) {
+    troubleshooting_settings r;
     r.verbose(verbose);
     return r;
 }
 
-config::cpp_settings mock_settings_factory::build_cpp_settings() {
+cpp_settings mock_settings_factory::build_cpp_settings() {
     return build_cpp_settings(empty, empty);
 }
 
-config::cpp_settings mock_settings_factory::build_cpp_settings(
+cpp_settings mock_settings_factory::build_cpp_settings(
     boost::filesystem::path src_dir,
     boost::filesystem::path include_dir,
     bool verbose) {
 
-    config::cpp_settings r;
+    cpp_settings r;
     r.verbose(verbose);
     r.split_project(true);
     r.source_directory(src_dir);
     r.include_directory(include_dir);
 
-    using config::cpp_facet_types;
     std::set<cpp_facet_types> f = {
         cpp_facet_types::types,
         cpp_facet_types::hash,
@@ -103,23 +118,22 @@ config::cpp_settings mock_settings_factory::build_cpp_settings(
     return r;
 }
 
-config::cpp_settings mock_settings_factory::build_cpp_settings(
+cpp_settings mock_settings_factory::build_cpp_settings(
     boost::filesystem::path project_dir,
     bool verbose) {
 
-    config::cpp_settings r(build_cpp_settings(empty, empty, verbose));
+    cpp_settings r(build_cpp_settings(empty, empty, verbose));
     r.split_project(false);
     r.project_directory(project_dir);
     return r;
 }
 
-config::settings
-mock_settings_factory::build_settings(boost::filesystem::path target,
+settings mock_settings_factory::build_settings(boost::filesystem::path target,
     boost::filesystem::path src_dir,
     boost::filesystem::path include_dir,
     std::string module_path,
     bool verbose) {
-    config::settings r;
+    settings r;
     r.modeling(build_modeling_settings(target, module_path, verbose));
     r.cpp(build_cpp_settings(src_dir, include_dir, verbose));
     r.troubleshooting(build_troubleshooting_settings(verbose));
@@ -127,12 +141,11 @@ mock_settings_factory::build_settings(boost::filesystem::path target,
     return r;
 }
 
-config::settings
-mock_settings_factory::build_settings(boost::filesystem::path target,
+settings mock_settings_factory::build_settings(boost::filesystem::path target,
     boost::filesystem::path project_dir,
     std::string module_path,
     bool verbose) {
-    config::settings r;
+    settings r;
     r.modeling(build_modeling_settings(target, module_path, verbose));
     r.cpp(build_cpp_settings(project_dir, verbose));
     r.troubleshooting(build_troubleshooting_settings(verbose));

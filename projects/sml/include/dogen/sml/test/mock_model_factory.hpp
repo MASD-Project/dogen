@@ -70,7 +70,7 @@ public:
     /**
      * @brief Returns the type name derived from n.
      */
-    static std::string type_name(const unsigned int n = 0);
+    static std::string simple_name(const unsigned int n = 0);
 
     /**
      * @brief Returns the module name derived from n.
@@ -78,6 +78,12 @@ public:
     static std::string module_name(const unsigned int n = 0);
 
 public:
+    /**
+     * @brief Returns a qname derived from the input parameters
+     */
+    static qname build_qname(
+        const unsigned int model_n = 0, const unsigned int simple_n = 0);
+
     /**
      * @brief Builds a model with a name derived from n, containing a
      * single type with a name also deriving from n.

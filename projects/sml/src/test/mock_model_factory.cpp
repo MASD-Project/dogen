@@ -38,7 +38,7 @@ using namespace dogen::utility::log;
 static logger lg(logger_factory("sml.mock_model_factory"));
 
 const std::string model_name_prefix("some_model_");
-const std::string type_name_prefix("some_type_");
+const std::string simple_name_prefix("some_type_");
 const std::string property_name_prefix("some_property_");
 const std::string module_name_prefix("some_module_");
 
@@ -50,9 +50,9 @@ const std::string documentation("Some documentation");
 const std::string invalid_property_type("Unknown property type.");
 const std::string invalid_object_type("Invalid or unsupported object type.");
 
-std::string type_name(unsigned int i) {
+std::string simple_name(unsigned int i) {
     std::ostringstream stream;
-    stream << type_name_prefix << i;
+    stream << simple_name_prefix << i;
     return stream.str();
 }
 
@@ -177,7 +177,7 @@ void populate_object(dogen::sml::abstract_object& o, const unsigned int i,
 
     dogen::sml::qname qn;
     qn.model_name(model_qname.model_name());
-    qn.simple_name(type_name(i));
+    qn.simple_name(simple_name(i));
 
     for (unsigned int i(0); i < module_n; ++i)
         qn.module_path().push_back(module_name(i));
@@ -226,7 +226,7 @@ mock_enumeration(const unsigned int i, const dogen::sml::qname& model_qname,
     const unsigned int module_n = 0) {
     dogen::sml::qname qn;
     qn.model_name(model_qname.model_name());
-    qn.simple_name(type_name(i));
+    qn.simple_name(simple_name(i));
 
     for (unsigned int i(0); i < module_n; ++i)
         qn.module_path().push_back(module_name(i));
@@ -242,7 +242,7 @@ mock_enumeration(const unsigned int i, const dogen::sml::qname& model_qname,
 
     const auto lambda([](const unsigned int n) -> dogen::sml::enumerator {
             dogen::sml::enumerator r;
-            r.name(type_name(n));
+            r.name(simple_name(n));
             r.value(boost::lexical_cast<std::string>(n));
             return r;
         });
@@ -257,7 +257,7 @@ mock_exception(const unsigned int i, const dogen::sml::qname& model_qname,
     const unsigned int module_n = 0) {
     dogen::sml::qname qn;
     qn.model_name(model_qname.model_name());
-    qn.simple_name(type_name(i));
+    qn.simple_name(simple_name(i));
 
     for (unsigned int i(0); i < module_n; ++i)
         qn.module_path().push_back(module_name(i));
@@ -283,12 +283,21 @@ std::string mock_model_factory::model_name(const unsigned int n) {
     return ::model_name(n);
 }
 
-std::string mock_model_factory::type_name(const unsigned int n) {
-    return ::type_name(n);
+std::string mock_model_factory::simple_name(const unsigned int n) {
+    return ::simple_name(n);
 }
 
 std::string mock_model_factory::module_name(const unsigned int n) {
     return ::module_name(n);
+}
+
+qname mock_model_factory::build_qname(const unsigned int model_n,
+    const unsigned int simple_n) {
+
+    dogen::sml::qname r;
+    r.model_name(model_name(model_n));
+    r.simple_name(simple_name(simple_n));
+    return r;
 }
 
 model mock_model_factory::
