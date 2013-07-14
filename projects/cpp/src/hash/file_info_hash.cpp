@@ -18,13 +18,11 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/config/hash/cpp_facet_types_hash.hpp"
-#include "dogen/cpp/hash/aspect_types_hash.hpp"
 #include "dogen/cpp/hash/class_info_hash.hpp"
+#include "dogen/cpp/hash/content_descriptor_hash.hpp"
 #include "dogen/cpp/hash/enum_info_hash.hpp"
 #include "dogen/cpp/hash/exception_info_hash.hpp"
 #include "dogen/cpp/hash/file_info_hash.hpp"
-#include "dogen/cpp/hash/file_types_hash.hpp"
 #include "dogen/cpp/hash/namespace_info_hash.hpp"
 #include "dogen/cpp/hash/registrar_info_hash.hpp"
 #include "dogen/cpp/hash/visitor_info_hash.hpp"
@@ -114,9 +112,7 @@ namespace cpp {
 std::size_t file_info_hasher::hash(const file_info&v) {
     std::size_t seed(0);
 
-    combine(seed, v.facet_type());
-    combine(seed, v.file_type());
-    combine(seed, v.aspect_type());
+    combine(seed, v.descriptor());
     combine(seed, hash_boost_optional_dogen_cpp_class_info(v.class_info()));
     combine(seed, hash_boost_optional_dogen_cpp_enum_info(v.enum_info()));
     combine(seed, hash_boost_optional_dogen_cpp_exception_info(v.exception_info()));

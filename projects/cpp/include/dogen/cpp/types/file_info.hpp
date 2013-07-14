@@ -30,13 +30,11 @@
 #include <boost/optional.hpp>
 #include <list>
 #include <string>
-#include "dogen/config/types/cpp_facet_types.hpp"
 #include "dogen/cpp/serialization/file_info_fwd_ser.hpp"
-#include "dogen/cpp/types/aspect_types.hpp"
 #include "dogen/cpp/types/class_info.hpp"
+#include "dogen/cpp/types/content_descriptor.hpp"
 #include "dogen/cpp/types/enum_info.hpp"
 #include "dogen/cpp/types/exception_info.hpp"
-#include "dogen/cpp/types/file_types.hpp"
 #include "dogen/cpp/types/namespace_info.hpp"
 #include "dogen/cpp/types/registrar_info.hpp"
 #include "dogen/cpp/types/visitor_info.hpp"
@@ -49,20 +47,16 @@ namespace cpp {
  */
 class file_info final {
 public:
+    file_info() = default;
     file_info(const file_info&) = default;
     ~file_info() = default;
-
-public:
-    file_info();
 
 public:
     file_info(file_info&& rhs);
 
 public:
     file_info(
-        const dogen::config::cpp_facet_types& facet_type,
-        const dogen::cpp::file_types& file_type,
-        const dogen::cpp::aspect_types& aspect_type,
+        const dogen::cpp::content_descriptor& descriptor,
         const boost::optional<dogen::cpp::class_info>& class_info,
         const boost::optional<dogen::cpp::enum_info>& enum_info,
         const boost::optional<dogen::cpp::exception_info>& exception_info,
@@ -84,27 +78,13 @@ private:
 
 public:
     /**
-     * @brief Facet that this file represents.
+     * @brief Description of the file's content.
      */
     /**@{*/
-    dogen::config::cpp_facet_types facet_type() const;
-    void facet_type(const dogen::config::cpp_facet_types& v);
-    /**@}*/
-
-    /**
-     * @brief Type of the file.
-     */
-    /**@{*/
-    dogen::cpp::file_types file_type() const;
-    void file_type(const dogen::cpp::file_types& v);
-    /**@}*/
-
-    /**
-     * @brief Aspect that this file represents.
-     */
-    /**@{*/
-    dogen::cpp::aspect_types aspect_type() const;
-    void aspect_type(const dogen::cpp::aspect_types& v);
+    const dogen::cpp::content_descriptor& descriptor() const;
+    dogen::cpp::content_descriptor& descriptor();
+    void descriptor(const dogen::cpp::content_descriptor& v);
+    void descriptor(const dogen::cpp::content_descriptor&& v);
     /**@}*/
 
     /**
@@ -228,9 +208,7 @@ public:
     file_info& operator=(file_info other);
 
 private:
-    dogen::config::cpp_facet_types facet_type_;
-    dogen::cpp::file_types file_type_;
-    dogen::cpp::aspect_types aspect_type_;
+    dogen::cpp::content_descriptor descriptor_;
     boost::optional<dogen::cpp::class_info> class_info_;
     boost::optional<dogen::cpp::enum_info> enum_info_;
     boost::optional<dogen::cpp::exception_info> exception_info_;

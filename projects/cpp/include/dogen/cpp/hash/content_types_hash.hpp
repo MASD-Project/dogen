@@ -18,35 +18,26 @@
  * MA 02110-1301, USA.
  *
  */
-#include <ostream>
-#include <stdexcept>
-#include "dogen/cpp/io/aspect_types_io.hpp"
+#ifndef DOGEN_CPP_HASH_CONTENT_TYPES_HASH_HPP
+#define DOGEN_CPP_HASH_CONTENT_TYPES_HASH_HPP
 
-namespace dogen {
-namespace cpp {
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
-std::ostream& operator<<(std::ostream& s, const aspect_types& v) {
-    s << "{ " << "\"__type__\": " << "\"aspect_types\", " << "\"value\": ";
+#include <functional>
+#include "dogen/cpp/types/content_types.hpp"
 
-    std::string attr;
-    switch (v) {
-    case aspect_types::invalid:
-        attr = "\"invalid\"";
-        break;
-    case aspect_types::main:
-        attr = "\"main\"";
-        break;
-    case aspect_types::forward_decls:
-        attr = "\"forward_decls\"";
-        break;
-    case aspect_types::null_aspect:
-        attr = "\"null_aspect\"";
-        break;
-    default:
-        throw std::invalid_argument("Invalid value for aspect_types");
+namespace std {
+
+template<>
+class hash<dogen::cpp::content_types> {
+public:
+    size_t operator()(const dogen::cpp::content_types& v) const {
+        return std::hash<unsigned int>()(static_cast<unsigned int>(v));
     }
-    s << attr << " }";
-    return s;
+};
+
 }
 
-} }
+#endif

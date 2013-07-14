@@ -134,11 +134,7 @@ locator::aspect_postfix(const aspect_types at) const {
 
     switch(at) {
     case aspect_types::forward_decls: return forward_decls_postfix; break;
-    case aspect_types::visitor: return visitor_postfix; break;
     case aspect_types::main:
-    case aspect_types::includers:
-    case aspect_types::registrar:
-    case aspect_types::namespace_doc:
         return empty; break;
 
     default:
@@ -199,7 +195,7 @@ boost::filesystem::path locator::relative_physical_path(
         r /= n;
 
     std::ostringstream stream;
-    stream << cd.name().type_name()
+    stream << cd.name().simple_name()
            << aspect_postfix(cd.aspect_type())
            << facet_postfix(cd.facet_type())
            << extension(cd.file_type());

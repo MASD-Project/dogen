@@ -133,16 +133,17 @@ swap_method(const class_info& ci) {
 }
 
 void domain_header::
-class_declaration(const sml::category_types ct, const class_info& ci) {
+class_declaration(const content_descriptor& cd, const class_info& ci) {
     using dogen::utility::exception::invalid_enum_value;
-    if (ct == sml::category_types::versioned_key ||
-        ct == sml::category_types::unversioned_key) {
+    const auto ct(cd.content_type());
+    if (ct == content_types::versioned_key ||
+        ct == content_types::unversioned_key) {
         key_class_declaration
             f(stream_, disable_complete_constructor_, disable_io_,
                 disable_serialization_);
         f.format(ci);
         return;
-    } else if (ct == sml::category_types::user_defined) {
+    } else if (ct == content_types::value_object) {
         domain_class_declaration
             f(stream_, disable_complete_constructor_, disable_io_,
                 disable_serialization_);
@@ -154,13 +155,13 @@ class_declaration(const sml::category_types ct, const class_info& ci) {
     BOOST_THROW_EXCEPTION(invalid_enum_value(invalid_category_type));
 }
 
-void domain_header::format_main(const sml::category_types ct,
-    const class_info& ci) {
+void domain_header::
+format_main(const content_descriptor& cd, const class_info& ci) {
 
     {
         namespace_helper ns(stream_, ci.namespaces());
         utility_.blank_line();
-        class_declaration(ct, ci);
+        class_declaration(cd, ci);
 
         if (ci.is_parent()) {
             stream_ << indenter_ << "inline " << ci.name() << "::~"<< ci.name()
@@ -184,11 +185,10 @@ void domain_header::format_class(const file_info& fi) {
         BOOST_LOG_SEV(lg, error) << missing_class_info;
         BOOST_THROW_EXCEPTION(formatting_error(missing_class_info));
     }
-    const auto at(fi.aspect_type());
-    const auto ct(fi.category_type());
+    const auto at(fi.descriptor().aspect_type());
     const class_info& ci(*o);
     if (at == aspect_types::main)
-        format_main(ct, ci);
+        format_main(fi.descriptor(), ci);
     else {
         using dogen::utility::exception::invalid_enum_value;
         BOOST_LOG_SEV(lg, error) << missing_class_info;
@@ -239,11 +239,13 @@ void domain_header::format(const file_info& fi) {
     includes includes(stream_);
     includes.format(fi);
 
-    if (fi.meta_type() == sml::meta_types::enumeration)
-        format_enumeration(fi);
-    else if (fi.meta_type() == sml::meta_types::pod)
+    if (fi.descriptor().content_type() == content_types::value_object ||
+        fi.descriptor().content_type() == content_types::entity ||
+        fi.descriptor().content_type() == content_types::keyed_entity)
         format_class(fi);
-    else if (fi.meta_type() == sml::meta_types::exception)
+    else if (fi.descriptor().content_type() == content_types::enumeration)
+        format_enumeration(fi);
+    else if (fi.descriptor().content_type() == content_types::exception)
         format_exception(fi);
 
     guards.format_end();

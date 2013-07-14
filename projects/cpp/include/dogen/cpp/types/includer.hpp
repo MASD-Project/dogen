@@ -32,9 +32,8 @@
 #include <boost/filesystem/path.hpp>
 #include "dogen/cpp/types/boost_model_helper.hpp"
 #include "dogen/cpp/types/std_model_helper.hpp"
-#include "dogen/sml/types/category_types.hpp"
+#include "dogen/cpp/types/content_types.hpp"
 #include "dogen/config/types/cpp_settings.hpp"
-#include "dogen/sml/types/meta_types.hpp"
 #include "dogen/cpp/types/relationships.hpp"
 #include "dogen/cpp/types/locator.hpp"
 #include "dogen/cpp/types/aspect_types.hpp"

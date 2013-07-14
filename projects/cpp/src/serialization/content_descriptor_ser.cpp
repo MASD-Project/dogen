@@ -30,6 +30,7 @@
 #include "dogen/config/serialization/cpp_facet_types_ser.hpp"
 #include "dogen/cpp/serialization/aspect_types_ser.hpp"
 #include "dogen/cpp/serialization/content_descriptor_ser.hpp"
+#include "dogen/cpp/serialization/content_types_ser.hpp"
 #include "dogen/cpp/serialization/file_types_ser.hpp"
 #include "dogen/sml/serialization/qname_ser.hpp"
 
@@ -49,6 +50,7 @@ void save(Archive& ar,
     ar << make_nvp("facet_type", v.facet_type_);
     ar << make_nvp("aspect_type", v.aspect_type_);
     ar << make_nvp("name", v.name_);
+    ar << make_nvp("content_type", v.content_type_);
 }
 
 template<typename Archive>
@@ -59,6 +61,7 @@ void load(Archive& ar,
     ar >> make_nvp("facet_type", v.facet_type_);
     ar >> make_nvp("aspect_type", v.aspect_type_);
     ar >> make_nvp("name", v.name_);
+    ar >> make_nvp("content_type", v.content_type_);
 }
 
 } }

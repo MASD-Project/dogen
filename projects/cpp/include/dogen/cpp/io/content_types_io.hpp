@@ -18,35 +18,21 @@
  * MA 02110-1301, USA.
  *
  */
-#include <ostream>
-#include <stdexcept>
-#include "dogen/cpp/io/aspect_types_io.hpp"
+#ifndef DOGEN_CPP_IO_CONTENT_TYPES_IO_HPP
+#define DOGEN_CPP_IO_CONTENT_TYPES_IO_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include <iosfwd>
+#include "dogen/cpp/types/content_types.hpp"
 
 namespace dogen {
 namespace cpp {
 
-std::ostream& operator<<(std::ostream& s, const aspect_types& v) {
-    s << "{ " << "\"__type__\": " << "\"aspect_types\", " << "\"value\": ";
-
-    std::string attr;
-    switch (v) {
-    case aspect_types::invalid:
-        attr = "\"invalid\"";
-        break;
-    case aspect_types::main:
-        attr = "\"main\"";
-        break;
-    case aspect_types::forward_decls:
-        attr = "\"forward_decls\"";
-        break;
-    case aspect_types::null_aspect:
-        attr = "\"null_aspect\"";
-        break;
-    default:
-        throw std::invalid_argument("Invalid value for aspect_types");
-    }
-    s << attr << " }";
-    return s;
-}
+std::ostream& operator<<(std::ostream& s, const content_types& v);
 
 } }
+
+#endif

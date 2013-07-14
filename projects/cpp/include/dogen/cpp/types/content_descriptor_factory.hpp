@@ -26,10 +26,7 @@
 #endif
 
 #include <set>
-#include "dogen/sml/types/pod.hpp"
 #include "dogen/sml/types/model.hpp"
-#include "dogen/sml/types/meta_types.hpp"
-#include "dogen/sml/types/pod_types.hpp"
 #include "dogen/config/types/cpp_facet_types.hpp"
 #include "dogen/cpp/types/content_descriptor.hpp"
 
@@ -53,36 +50,31 @@ public:
 
 private:
     /**
-     * @brief Returns the available facets for the given inputs.
-     *
-     * @param mt Meta-type which we want to process.
-     * @param pt Pod type to process; must be set to invalid if the
-     * meta-type is not a pod.
+     * @brief Returns the available facets for the given content.
      */
-    std::set<config::cpp_facet_types> enabled_facets(const sml::meta_types mt,
-        const sml::pod_types pt) const;
+    std::set<config::cpp_facet_types>
+    enabled_facets(const content_types ct) const;
 
     /**
      * @brief Returns true if the facet requires a C++ source file,
      * false otherwise.
      */
     bool has_implementation(const config::cpp_facet_types ft,
-        const sml::meta_types mt) const;
+        const content_types ct) const;
 
     /**
      * @brief Returns true if facet has forward declarations, false otherwise.
      */
     bool has_forward_decls(const config::cpp_facet_types ft,
-        const sml::meta_types mt) const;
+        const content_types ct) const;
 
 public:
     /**
      * @brief Generate all of the content descriptors for the given
      * parameters.
      */
-    std::list<content_descriptor> create(const sml::qname& qn,
-        const sml::category_types ct = sml::category_types::invalid,
-        const sml::pod_types pt = sml::pod_types::invalid) const;
+    std::list<content_descriptor>
+    create(const sml::qname& qn, const content_types ct) const;
 
     /**
      * @brief Generate a content descriptor for the model.

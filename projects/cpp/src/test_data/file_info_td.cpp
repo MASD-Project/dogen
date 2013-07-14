@@ -19,32 +19,20 @@
  *
  */
 #include <sstream>
-#include "dogen/config/test_data/cpp_facet_types_td.hpp"
-#include "dogen/cpp/test_data/aspect_types_td.hpp"
 #include "dogen/cpp/test_data/class_info_td.hpp"
+#include "dogen/cpp/test_data/content_descriptor_td.hpp"
 #include "dogen/cpp/test_data/enum_info_td.hpp"
 #include "dogen/cpp/test_data/exception_info_td.hpp"
 #include "dogen/cpp/test_data/file_info_td.hpp"
-#include "dogen/cpp/test_data/file_types_td.hpp"
 #include "dogen/cpp/test_data/namespace_info_td.hpp"
 #include "dogen/cpp/test_data/registrar_info_td.hpp"
 #include "dogen/cpp/test_data/visitor_info_td.hpp"
 
 namespace {
 
-dogen::config::cpp_facet_types
-create_dogen_config_cpp_facet_types(const unsigned int position) {
-    return dogen::config::cpp_facet_types_generator::create(position);
-}
-
-dogen::cpp::file_types
-create_dogen_cpp_file_types(const unsigned int position) {
-    return dogen::cpp::file_types_generator::create(position);
-}
-
-dogen::cpp::aspect_types
-create_dogen_cpp_aspect_types(const unsigned int position) {
-    return dogen::cpp::aspect_types_generator::create(position);
+dogen::cpp::content_descriptor
+create_dogen_cpp_content_descriptor(const unsigned int position) {
+    return dogen::cpp::content_descriptor_generator::create(position);
 }
 
 dogen::cpp::class_info
@@ -149,20 +137,18 @@ file_info_generator::file_info_generator() : position_(0) { }
 
 void file_info_generator::
 populate(const unsigned int position, result_type& v) {
-    v.facet_type(create_dogen_config_cpp_facet_types(position + 0));
-    v.file_type(create_dogen_cpp_file_types(position + 1));
-    v.aspect_type(create_dogen_cpp_aspect_types(position + 2));
-    v.class_info(create_boost_optional_dogen_cpp_class_info(position + 3));
-    v.enum_info(create_boost_optional_dogen_cpp_enum_info(position + 4));
-    v.exception_info(create_boost_optional_dogen_cpp_exception_info(position + 5));
-    v.registrar_info(create_boost_optional_dogen_cpp_registrar_info(position + 6));
-    v.header_guard(create_std_string(position + 7));
-    v.system_includes(create_std_list_std_string(position + 8));
-    v.user_includes(create_std_list_std_string(position + 9));
-    v.file_path(create_boost_filesystem_path(position + 10));
-    v.namespace_info(create_boost_optional_dogen_cpp_namespace_info(position + 11));
-    v.visitor_info(create_boost_optional_dogen_cpp_visitor_info(position + 12));
-    v.relative_path(create_boost_filesystem_path(position + 13));
+    v.descriptor(create_dogen_cpp_content_descriptor(position + 0));
+    v.class_info(create_boost_optional_dogen_cpp_class_info(position + 1));
+    v.enum_info(create_boost_optional_dogen_cpp_enum_info(position + 2));
+    v.exception_info(create_boost_optional_dogen_cpp_exception_info(position + 3));
+    v.registrar_info(create_boost_optional_dogen_cpp_registrar_info(position + 4));
+    v.header_guard(create_std_string(position + 5));
+    v.system_includes(create_std_list_std_string(position + 6));
+    v.user_includes(create_std_list_std_string(position + 7));
+    v.file_path(create_boost_filesystem_path(position + 8));
+    v.namespace_info(create_boost_optional_dogen_cpp_namespace_info(position + 9));
+    v.visitor_info(create_boost_optional_dogen_cpp_visitor_info(position + 10));
+    v.relative_path(create_boost_filesystem_path(position + 11));
 }
 
 file_info_generator::result_type

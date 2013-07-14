@@ -27,7 +27,6 @@
 
 #include <iosfwd>
 #include <boost/filesystem/path.hpp>
-#include "dogen/sml/types/category_types.hpp"
 #include "dogen/cpp/types/formatters/indenter.hpp"
 #include "dogen/cpp/types/formatters/utility.hpp"
 #include "dogen/cpp/types/class_info.hpp"
@@ -62,9 +61,8 @@ private:
     void inserter_operator(const class_info& ci);
     void equality_operator(const class_info& ci);
     void swap_method(const class_info& ci);
-    void class_declaration(const sml::category_types ct,
-        const class_info& ci);
-    void format_main(const sml::category_types ct, const class_info& ci);
+    void class_declaration(const content_descriptor& cd, const class_info& ci);
+    void format_main(const content_descriptor& cd, const class_info& ci);
 
 private:
     void format_class(const file_info& fi);

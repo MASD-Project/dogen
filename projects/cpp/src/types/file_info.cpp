@@ -23,15 +23,8 @@
 namespace dogen {
 namespace cpp {
 
-file_info::file_info()
-    : facet_type_(static_cast<dogen::config::cpp_facet_types>(0)),
-      file_type_(static_cast<dogen::cpp::file_types>(0)),
-      aspect_type_(static_cast<dogen::cpp::aspect_types>(0)) { }
-
 file_info::file_info(file_info&& rhs)
-    : facet_type_(std::move(rhs.facet_type_)),
-      file_type_(std::move(rhs.file_type_)),
-      aspect_type_(std::move(rhs.aspect_type_)),
+    : descriptor_(std::move(rhs.descriptor_)),
       class_info_(std::move(rhs.class_info_)),
       enum_info_(std::move(rhs.enum_info_)),
       exception_info_(std::move(rhs.exception_info_)),
@@ -45,9 +38,7 @@ file_info::file_info(file_info&& rhs)
       relative_path_(std::move(rhs.relative_path_)) { }
 
 file_info::file_info(
-    const dogen::config::cpp_facet_types& facet_type,
-    const dogen::cpp::file_types& file_type,
-    const dogen::cpp::aspect_types& aspect_type,
+    const dogen::cpp::content_descriptor& descriptor,
     const boost::optional<dogen::cpp::class_info>& class_info,
     const boost::optional<dogen::cpp::enum_info>& enum_info,
     const boost::optional<dogen::cpp::exception_info>& exception_info,
@@ -59,9 +50,7 @@ file_info::file_info(
     const boost::optional<dogen::cpp::namespace_info>& namespace_info,
     const boost::optional<dogen::cpp::visitor_info>& visitor_info,
     const boost::filesystem::path& relative_path)
-    : facet_type_(facet_type),
-      file_type_(file_type),
-      aspect_type_(aspect_type),
+    : descriptor_(descriptor),
       class_info_(class_info),
       enum_info_(enum_info),
       exception_info_(exception_info),
@@ -76,9 +65,7 @@ file_info::file_info(
 
 void file_info::swap(file_info& other) noexcept {
     using std::swap;
-    swap(facet_type_, other.facet_type_);
-    swap(file_type_, other.file_type_);
-    swap(aspect_type_, other.aspect_type_);
+    swap(descriptor_, other.descriptor_);
     swap(class_info_, other.class_info_);
     swap(enum_info_, other.enum_info_);
     swap(exception_info_, other.exception_info_);
@@ -93,9 +80,7 @@ void file_info::swap(file_info& other) noexcept {
 }
 
 bool file_info::operator==(const file_info& rhs) const {
-    return facet_type_ == rhs.facet_type_ &&
-        file_type_ == rhs.file_type_ &&
-        aspect_type_ == rhs.aspect_type_ &&
+    return descriptor_ == rhs.descriptor_ &&
         class_info_ == rhs.class_info_ &&
         enum_info_ == rhs.enum_info_ &&
         exception_info_ == rhs.exception_info_ &&
@@ -115,28 +100,20 @@ file_info& file_info::operator=(file_info other) {
     return *this;
 }
 
-dogen::config::cpp_facet_types file_info::facet_type() const {
-    return facet_type_;
+const dogen::cpp::content_descriptor& file_info::descriptor() const {
+    return descriptor_;
 }
 
-void file_info::facet_type(const dogen::config::cpp_facet_types& v) {
-    facet_type_ = v;
+dogen::cpp::content_descriptor& file_info::descriptor() {
+    return descriptor_;
 }
 
-dogen::cpp::file_types file_info::file_type() const {
-    return file_type_;
+void file_info::descriptor(const dogen::cpp::content_descriptor& v) {
+    descriptor_ = v;
 }
 
-void file_info::file_type(const dogen::cpp::file_types& v) {
-    file_type_ = v;
-}
-
-dogen::cpp::aspect_types file_info::aspect_type() const {
-    return aspect_type_;
-}
-
-void file_info::aspect_type(const dogen::cpp::aspect_types& v) {
-    aspect_type_ = v;
+void file_info::descriptor(const dogen::cpp::content_descriptor&& v) {
+    descriptor_ = std::move(v);
 }
 
 const boost::optional<dogen::cpp::class_info>& file_info::class_info() const {

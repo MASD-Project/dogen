@@ -22,8 +22,7 @@
 #include <boost/lexical_cast.hpp>
 #include <boost/algorithm/string.hpp>
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/sml/io/meta_types_io.hpp"
-#include "dogen/sml/io/pod_types_io.hpp"
+#include "dogen/cpp/io/content_types_io.hpp"
 #include "dogen/cpp/types/building_error.hpp"
 #include "dogen/cpp/types/file_info_factory.hpp"
 
@@ -61,11 +60,7 @@ to_header_guard_name(const boost::filesystem::path& rp) const {
 
 file_info file_info_factory::create(const content_descriptor& cd) const {
     file_info r;
-    r.facet_type(cd.facet_type());
-    r.file_type(cd.file_type());
-    r.aspect_type(cd.aspect_type());
-    r.category_type(cd.category_type());
-    r.meta_type(cd.name().meta_type());
+    r.descriptor(cd);
     r.file_path(locator_.absolute_path(cd));
 
     const auto rp(locator_.relative_logical_path(cd));
@@ -113,7 +108,7 @@ file_info file_info_factory::create(const class_info& ci,
 file_info file_info_factory::create_includer(const content_descriptor& cd,
     const inclusion_lists& il) const {
     file_info r(create(cd));
-    r.aspect_type(aspect_types::includers);
+    r.descriptor().content_type(content_types::includer);
     r.system_includes(il.system());
     r.user_includes(il.user());
     return r;

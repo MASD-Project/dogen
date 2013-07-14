@@ -110,7 +110,7 @@ void forward_declarations_header::format_class(const file_info& fi) {
         BOOST_THROW_EXCEPTION(formatting_error(missing_class_info));
     }
 
-    const auto ft(fi.facet_type());
+    const auto ft(fi.descriptor().facet_type());
     const class_info& ci(*o);
     if (ft == config::cpp_facet_types::serialization)
         format_serialization_class(ci);
@@ -162,7 +162,7 @@ void forward_declarations_header::format_exception(const file_info& fi) {
 }
 
 void forward_declarations_header::format(const file_info& fi) {
-    if (fi.aspect_type() != aspect_types::forward_decls) {
+    if (fi.descriptor().aspect_type() != aspect_types::forward_decls) {
         using dogen::utility::exception::invalid_enum_value;
         BOOST_LOG_SEV(lg, error) << invalid_facet_types;
         BOOST_THROW_EXCEPTION(invalid_enum_value(invalid_facet_types));
@@ -178,11 +178,13 @@ void forward_declarations_header::format(const file_info& fi) {
     includes includes(stream_);
     includes.format(fi);
 
-    if (fi.meta_type() == sml::meta_types::enumeration)
-        format_enumeration(fi);
-    else if (fi.meta_type() == sml::meta_types::pod)
+    if (fi.descriptor().content_type() == content_types::value_object ||
+        fi.descriptor().content_type() == content_types::entity ||
+        fi.descriptor().content_type() == content_types::keyed_entity)
         format_class(fi);
-    else if (fi.meta_type() == sml::meta_types::exception)
+    else if (fi.descriptor().content_type() == content_types::enumeration)
+        format_enumeration(fi);
+    else if (fi.descriptor().content_type() == content_types::exception)
         format_exception(fi);
 
     guards.format_end();

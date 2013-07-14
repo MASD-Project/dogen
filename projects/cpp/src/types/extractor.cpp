@@ -18,9 +18,12 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/pointer_cast.hpp>
 #include <boost/lexical_cast.hpp>
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
+#include "dogen/sml/types/value_object.hpp"
+#include "dogen/sml/types/value_object_types.hpp"
 #include "dogen/sml/io/qname_io.hpp"
 #include "dogen/cpp/types/extraction_error.hpp"
 #include "dogen/cpp/types/extractor.hpp"
@@ -42,7 +45,6 @@ const std::string qname_could_not_be_found(
 const std::string type_does_not_have_a_parent(
     "Type in inheritance graph does not have a parent: ");
 
-
 }
 
 namespace dogen {
@@ -59,29 +61,26 @@ recurse_nested_qnames(const sml::nested_qname& nqn, relationships& rel,
         rel.names().insert(qn);
 
     is_pointer = false;
-    if (qn.meta_type() == sml::meta_types::pod) {
-        const auto i(pods_.find(qn));
-        if (i == pods_.end()) {
-            BOOST_LOG_SEV(lg, error) << qname_could_not_be_found << qn;
-            BOOST_THROW_EXCEPTION(extraction_error(qname_could_not_be_found +
-                    boost::lexical_cast<std::string>(qn)));
-        }
-
-        const auto pt(i->second.pod_type());
-        const auto is_ac(pt == sml::pod_types::associative_container);
-        if (is_ac && nqn.children().size() >= 1)
+    const auto i(objects_.find(qn));
+    if (i != objects_.end()) {
+        using sml::value_object;
+        const auto vo(boost::dynamic_pointer_cast<value_object>(i->second));
+        const auto ac(sml::value_object_types::associative_container);
+        if (vo->type() == ac && nqn.children().size() >= 1)
             rel.keys().insert(nqn.children().front().type());
-        is_pointer = pt == sml::pod_types::smart_pointer;
+
+        const auto sp(sml::value_object_types::smart_pointer);
+        is_pointer = vo->type() == sp;
     }
 
-    if (qn.type_name() == bool_type || qn.type_name() == double_type ||
-        qn.type_name() == float_type)
+    const auto sn(qn.simple_name());
+    if (sn == bool_type || sn == double_type || sn == float_type)
         rel.requires_stream_manipulators(true);
-    else if (qn.type_name() == std_.type(std_types::string))
+    else if (sn == std_.type(std_types::string))
         rel.has_std_string(true);
-    else if (qn.type_name() == boost_.type(boost_types::variant))
+    else if (sn == boost_.type(boost_types::variant))
         rel.has_variant(true);
-    else if (qn.type_name() == std_.type(std_types::pair))
+    else if (sn == std_.type(std_types::pair))
         rel.has_std_pair(true);
 
     for (const auto c : nqn.children())
@@ -98,9 +97,9 @@ void extractor::properties_for_concept(const sml::qname& qn,
     processed_qnames.insert(qn);
     const auto i(concepts_.find(qn));
     if (i == concepts_.end()) {
-        BOOST_LOG_SEV(lg, error) << concept_not_found << qn.type_name();
-        BOOST_THROW_EXCEPTION(extraction_error(concept_not_found +
-                qn.type_name()));
+        const auto sn(qn.simple_name());
+        BOOST_LOG_SEV(lg, error) << concept_not_found << sn;
+        BOOST_THROW_EXCEPTION(extraction_error(concept_not_found + sn));
     }
 
     for (const auto& c : i->second.refines())
@@ -110,44 +109,44 @@ void extractor::properties_for_concept(const sml::qname& qn,
     properties.insert(properties.end(), props.begin(), props.end());
 }
 
-relationships extractor::
-extract_dependency_graph(const sml::pod& p) const {
+relationships
+extractor::extract_dependency_graph(const sml::abstract_object& ao) const {
     relationships r;
 
-    if (p.parent_name())
-        r.names().insert(*p.parent_name());
+    if (ao.parent_name())
+        r.names().insert(*ao.parent_name());
 
-    if (p.is_visitable()) {
-        auto qn(p.name());
-        qn.type_name(qn.type_name() + "_visitor");
+    if (ao.is_visitable()) {
+        auto qn(ao.name());
+        qn.simple_name(qn.simple_name() + "_visitor");
         r.visitor(qn);
-    } else if (p.original_parent_name()) {
-        auto opn(*p.original_parent_name());
-        auto i(pods_.find(opn));
-        if (i == pods_.end()) {
+    } else if (ao.original_parent_name()) {
+        auto opn(*ao.original_parent_name());
+        auto i(objects_.find(opn));
+        if (i == objects_.end()) {
             BOOST_LOG_SEV(lg, error) << qname_could_not_be_found << opn;
             BOOST_THROW_EXCEPTION(extraction_error(qname_could_not_be_found +
                     boost::lexical_cast<std::string>(opn)));
         }
 
-        if (i->second.is_visitable()) {
-            opn.type_name(opn.type_name() + "_visitor");
+        if (i->second->is_visitable()) {
+            opn.simple_name(opn.simple_name() + "_visitor");
             r.visitor(opn);
         }
     }
 
-    r.is_parent(p.is_parent());
-    r.is_child(p.parent_name());
-    r.leaves().insert(p.leaves().begin(), p.leaves().end());
+    r.is_parent(ao.is_parent());
+    r.is_child(ao.parent_name());
+    r.leaves().insert(ao.leaves().begin(), ao.leaves().end());
 
     std::list<sml::property> props;
     std::unordered_set<sml::qname> processed_qnames;
-    for (const auto& qn : p.modeled_concepts())
+    for (const auto& qn : ao.modeled_concepts())
         properties_for_concept(qn, props, processed_qnames);
-    props.insert(props.end(), p.properties().begin(), p.properties().end());
+    props.insert(props.end(), ao.properties().begin(), ao.properties().end());
 
     for (const auto prop : props) {
-        const auto nqn(prop.type_name());
+        const auto nqn(prop.type());
         bool is_pointer(nqn.is_pointer());
         recurse_nested_qnames(nqn, r, is_pointer);
     }
@@ -163,12 +162,12 @@ extract_dependency_graph(const sml::pod& p) const {
 relationships extractor::
 extract_inheritance_graph(const sml::qname& qn) const {
     BOOST_LOG_SEV(lg, debug) << "Extracting inheritance graph for "
-                             << qn.type_name();
+                             << qn.simple_name();
 
     relationships r;
 
-    auto i(pods_.find(qn));
-    if (i == pods_.end()) {
+    auto i(objects_.find(qn));
+    if (i == objects_.end()) {
         BOOST_LOG_SEV(lg, error) << qname_could_not_be_found << qn;
         BOOST_THROW_EXCEPTION(extraction_error(qname_could_not_be_found +
                 boost::lexical_cast<std::string>(qn)));
@@ -183,27 +182,28 @@ extract_inheritance_graph(const sml::qname& qn) const {
                     boost::lexical_cast<std::string>(qn)));
         });
 
-    if (i->second.leaves().empty())
+    const auto& ao(*i->second);
+    if (ao.leaves().empty())
         BOOST_LOG_SEV(lg, debug) << "type has no leaves.";
 
-    for (const auto& l : i->second.leaves()) {
-        i = pods_.find(l);
-        if (i == pods_.end())
+    for (const auto& l : ao.leaves()) {
+        i = objects_.find(l);
+        if (i == objects_.end())
             lambda(l, qname_could_not_be_found);
 
         do {
-           BOOST_LOG_SEV(lg, debug) << "adding " << i->second.name();
-            r.names().insert(i->second.name());
+            BOOST_LOG_SEV(lg, debug) << "adding " << ao.name();
+            r.names().insert(ao.name());
 
-            if (!i->second.parent_name())
-                lambda(i->second.name(), type_does_not_have_a_parent);
+            if (!ao.parent_name())
+                lambda(ao.name(), type_does_not_have_a_parent);
 
-            i = pods_.find(*i->second.parent_name());
-        } while (i->second.name() != qn);
+            i = objects_.find(*ao.parent_name());
+        } while (ao.name() != qn);
     }
 
     BOOST_LOG_SEV(lg, debug) << "Done extracting inheritance graph for "
-                             << qn.type_name();
+                             << qn.simple_name();
 
     return r;
 }

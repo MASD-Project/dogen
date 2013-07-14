@@ -20,13 +20,11 @@
  */
 #include <boost/algorithm/string.hpp>
 #include <ostream>
-#include "dogen/config/io/cpp_facet_types_io.hpp"
-#include "dogen/cpp/io/aspect_types_io.hpp"
 #include "dogen/cpp/io/class_info_io.hpp"
+#include "dogen/cpp/io/content_descriptor_io.hpp"
 #include "dogen/cpp/io/enum_info_io.hpp"
 #include "dogen/cpp/io/exception_info_io.hpp"
 #include "dogen/cpp/io/file_info_io.hpp"
-#include "dogen/cpp/io/file_types_io.hpp"
 #include "dogen/cpp/io/namespace_info_io.hpp"
 #include "dogen/cpp/io/registrar_info_io.hpp"
 #include "dogen/cpp/io/visitor_info_io.hpp"
@@ -149,9 +147,7 @@ namespace cpp {
 std::ostream& operator<<(std::ostream& s, const file_info& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::cpp::file_info\"" << ", "
-      << "\"facet_type\": " << v.facet_type() << ", "
-      << "\"file_type\": " << v.file_type() << ", "
-      << "\"aspect_type\": " << v.aspect_type() << ", "
+      << "\"descriptor\": " << v.descriptor() << ", "
       << "\"class_info\": " << v.class_info() << ", "
       << "\"enum_info\": " << v.enum_info() << ", "
       << "\"exception_info\": " << v.exception_info() << ", "

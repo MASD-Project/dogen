@@ -103,7 +103,7 @@ void namespace_documentation::format(const file_info& fi) {
     includes includes(stream_);
     includes.format(fi);
 
-    if (fi.meta_type() == sml::meta_types::module)
+    if (fi.descriptor().content_type() == content_types::namespace_doc)
         format_namespace(fi);
 
     guards.format_end();

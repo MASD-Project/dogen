@@ -21,6 +21,7 @@
 #include "dogen/config/hash/cpp_facet_types_hash.hpp"
 #include "dogen/cpp/hash/aspect_types_hash.hpp"
 #include "dogen/cpp/hash/content_descriptor_hash.hpp"
+#include "dogen/cpp/hash/content_types_hash.hpp"
 #include "dogen/cpp/hash/file_types_hash.hpp"
 #include "dogen/sml/hash/qname_hash.hpp"
 
@@ -45,6 +46,7 @@ std::size_t content_descriptor_hasher::hash(const content_descriptor&v) {
     combine(seed, v.facet_type());
     combine(seed, v.aspect_type());
     combine(seed, v.name());
+    combine(seed, v.content_type());
 
     return seed;
 }

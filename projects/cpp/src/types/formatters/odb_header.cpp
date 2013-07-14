@@ -154,9 +154,11 @@ void odb_header::format(const file_info& fi) {
     includes includes(stream_);
     includes.format(fi);
 
-    if (fi.meta_type() == sml::meta_types::pod)
+    if (fi.descriptor().content_type() == content_types::value_object ||
+        fi.descriptor().content_type() == content_types::entity ||
+        fi.descriptor().content_type() == content_types::keyed_entity)
         format_class(fi);
-    if (fi.meta_type() == sml::meta_types::enumeration)
+    else if (fi.descriptor().content_type() == content_types::enumeration)
         format_enumeration(fi);
 
     guards.format_end();

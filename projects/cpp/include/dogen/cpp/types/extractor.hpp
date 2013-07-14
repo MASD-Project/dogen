@@ -26,7 +26,8 @@
 #endif
 
 #include <unordered_map>
-#include "dogen/sml/types/pod.hpp"
+#include <boost/shared_ptr.hpp>
+#include "dogen/sml/types/abstract_object.hpp"
 #include "dogen/sml/types/concept.hpp"
 #include "dogen/cpp/types/boost_model_helper.hpp"
 #include "dogen/cpp/types/std_model_helper.hpp"
@@ -44,12 +45,15 @@ public:
     extractor& operator=(const extractor&) = delete;
 
 public:
-    typedef const std::unordered_map<sml::qname, sml::pod> pod_map;
+    typedef const std::unordered_map<
+    sml::qname,
+    boost::shared_ptr<sml::abstract_object>
+    > object_map;
     typedef const std::unordered_map<sml::qname, sml::concept> concept_map;
 
 public:
-    extractor(const pod_map& pm, const concept_map& cm)
-        : pods_(pm), concepts_(cm), boost_(), std_() { }
+    extractor(const object_map& om, const concept_map& cm)
+        : objects_(om), concepts_(cm), boost_(), std_() { }
 
 private:
     /**
@@ -75,7 +79,7 @@ public:
      * The qnames include all types used by the properties of the pod,
      * as well as its parent, if any.
      */
-    relationships extract_dependency_graph(const sml::pod& p) const;
+    relationships extract_dependency_graph(const sml::abstract_object& ao) const;
 
     /**
      * @brief Flattens the given qname into a object inheritance
@@ -87,7 +91,7 @@ public:
     relationships extract_inheritance_graph(const sml::qname& qn) const;
 
 private:
-    const pod_map& pods_;
+    const object_map& objects_;
     const concept_map& concepts_;
     const boost_model_helper boost_;
     const std_model_helper std_;

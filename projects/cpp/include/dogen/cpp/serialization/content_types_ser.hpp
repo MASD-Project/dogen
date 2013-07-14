@@ -18,35 +18,20 @@
  * MA 02110-1301, USA.
  *
  */
-#include <ostream>
-#include <stdexcept>
-#include "dogen/cpp/io/aspect_types_io.hpp"
+#ifndef DOGEN_CPP_SERIALIZATION_CONTENT_TYPES_SER_HPP
+#define DOGEN_CPP_SERIALIZATION_CONTENT_TYPES_SER_HPP
 
-namespace dogen {
-namespace cpp {
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
-std::ostream& operator<<(std::ostream& s, const aspect_types& v) {
-    s << "{ " << "\"__type__\": " << "\"aspect_types\", " << "\"value\": ";
+#include <boost/serialization/nvp.hpp>
+#include "dogen/cpp/types/content_types.hpp"
 
-    std::string attr;
-    switch (v) {
-    case aspect_types::invalid:
-        attr = "\"invalid\"";
-        break;
-    case aspect_types::main:
-        attr = "\"main\"";
-        break;
-    case aspect_types::forward_decls:
-        attr = "\"forward_decls\"";
-        break;
-    case aspect_types::null_aspect:
-        attr = "\"null_aspect\"";
-        break;
-    default:
-        throw std::invalid_argument("Invalid value for aspect_types");
-    }
-    s << attr << " }";
-    return s;
+template<class Archive>
+void serialize(Archive& ar, dogen::cpp::content_types& v, unsigned int /*version*/){
+    using boost::serialization::make_nvp;
+    ar & make_nvp("content_types", v);
 }
 
-} }
+#endif

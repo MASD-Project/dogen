@@ -59,8 +59,8 @@ private:
 
     void io_helper_methods(const class_info& ci);
     void inserter_operator(const class_info& ci);
-    void class_implementation(const aspect_types at,
-        const sml::category_types ct, const class_info& ci);
+    void class_implementation(const content_descriptor& cd,
+        const class_info& ci);
 
 public:
     static file_formatter::shared_ptr create(std::ostream& stream,

@@ -72,14 +72,13 @@ factory::factory(const config::cpp_settings& settings)
       disable_serialization_(!contains(settings_.enabled_facets(),
               config::cpp_facet_types::serialization)) { }
 
-factory::result_type
-factory::create_main_formatter(std::ostream& s, config::cpp_facet_types ft,
-    file_types flt) const {
+factory::result_type factory::
+create_main_formatter(std::ostream& s, const content_descriptor& cd) const {
 
     using config::cpp_facet_types;
-    switch (ft) {
+    switch (cd.facet_type()) {
     case cpp_facet_types::types:
-        if (flt == file_types::header)
+        if (cd.file_type() == file_types::header)
             return domain_header::create(s,
                 settings_.disable_complete_constructor(),
                 settings_.use_integrated_io(),
@@ -91,19 +90,19 @@ factory::create_main_formatter(std::ostream& s, config::cpp_facet_types ft,
                 disable_io_);
         break;
     case cpp_facet_types::io:
-        if (flt == file_types::header)
+        if (cd.file_type() == file_types::header)
             return io_header::create(s);
         else
             return io_implementation::create(s);
         break;
     case cpp_facet_types::hash:
-        if (flt == file_types::header)
+        if (cd.file_type() == file_types::header)
             return hash_header::create(s);
         else
             return hash_implementation::create(s);
         break;
     case cpp_facet_types::serialization:
-        if (flt == file_types::header)
+        if (cd.file_type() == file_types::header)
             return serialization_header::create(s,
                 settings_.disable_xml_serialization());
         else
@@ -111,26 +110,27 @@ factory::create_main_formatter(std::ostream& s, config::cpp_facet_types ft,
                 settings_.disable_xml_serialization());
         break;
     case cpp_facet_types::test_data:
-        if (flt == file_types::header)
+        if (cd.file_type() == file_types::header)
             return generator_header::create(s);
         else
             return generator_implementation::create(s);
         break;
     case cpp_facet_types::odb:
-        if (flt == file_types::header)
+        if (cd.file_type() == file_types::header)
             return odb_header::create(s);
 
     default: {
         std::ostringstream s;
-        s << production_failure_msg << ft << ", " << flt;
+        s << production_failure_msg << cd.facet_type()
+          << ", " << cd.file_type() ;
         BOOST_THROW_EXCEPTION(production_failure(s.str()));
     } }
 }
 
 factory::result_type factory::create_registrar_formatter(
-    std::ostream& s, file_types flt) const {
+    std::ostream& s, const content_descriptor& cd) const {
 
-    switch (flt) {
+    switch (cd.file_type()) {
     case file_types::header:
         return registrar_header::create(s);
         break;
@@ -142,7 +142,7 @@ factory::result_type factory::create_registrar_formatter(
 
     default: {
         std::ostringstream ss;
-        ss << production_failure_msg << flt;
+        ss << production_failure_msg << cd.file_type();
         BOOST_LOG_SEV(lg, error) << ss.str();
         BOOST_THROW_EXCEPTION(production_failure(ss.str()));
     } }
@@ -153,34 +153,43 @@ factory::result_type factory::create_null_formatter(std::ostream& s) const {
 }
 
 factory::result_type
-factory::create(std::ostream& s, config::cpp_facet_types ft, file_types flt,
-    aspect_types at) const {
+factory::create(std::ostream& s, const content_descriptor& cd) const {
 
-    switch (at) {
+    switch (cd.aspect_type()) {
     case aspect_types::main:
-        return create_main_formatter(s, ft, flt);
-        break;
-    case aspect_types::includers:
-        return facet_includer::create(s);
-        break;
+        switch(cd.content_type()) {
+        case content_types::includer:
+            return facet_includer::create(s);
+            break;
+        case content_types::registrar:
+            return create_registrar_formatter(s, cd);
+            break;
+        case content_types::namespace_doc:
+            return namespace_documentation::create(s);
+            break;
+        case content_types::visitor:
+            return visitor::create(s);
+            break;
+        case content_types::value_object:
+            return create_main_formatter(s, cd);
+            break;
+        default: {
+            std::ostringstream s;
+            s << production_failure_msg << cd.facet_type() << ", "
+              << cd.file_type() << ", " << cd.aspect_type();
+            BOOST_LOG_SEV(lg, error) << s.str();
+            BOOST_THROW_EXCEPTION(production_failure(s.str()));
+        } };
     case aspect_types::forward_decls:
         return forward_declarations_header::create(s);
-        break;
-    case aspect_types::registrar:
-        return create_registrar_formatter(s, flt);
-        break;
-    case aspect_types::namespace_doc:
-        return namespace_documentation::create(s);
         break;
     case aspect_types::null_aspect:
         return create_null_formatter(s);
         break;
-    case aspect_types::visitor:
-        return visitor::create(s);
-        break;
     default: {
         std::ostringstream s;
-        s << production_failure_msg << ft << ", " << flt << ", " << at;
+        s << production_failure_msg << cd.facet_type() << ", "
+          << cd.file_type() << ", " << cd.aspect_type();
         BOOST_LOG_SEV(lg, error) << s.str();
         BOOST_THROW_EXCEPTION(production_failure(s.str()));
     } }

@@ -30,13 +30,11 @@
 #include <boost/serialization/nvp.hpp>
 #include <boost/serialization/optional.hpp>
 #include <boost/serialization/string.hpp>
-#include "dogen/config/serialization/cpp_facet_types_ser.hpp"
-#include "dogen/cpp/serialization/aspect_types_ser.hpp"
 #include "dogen/cpp/serialization/class_info_ser.hpp"
+#include "dogen/cpp/serialization/content_descriptor_ser.hpp"
 #include "dogen/cpp/serialization/enum_info_ser.hpp"
 #include "dogen/cpp/serialization/exception_info_ser.hpp"
 #include "dogen/cpp/serialization/file_info_ser.hpp"
-#include "dogen/cpp/serialization/file_types_ser.hpp"
 #include "dogen/cpp/serialization/namespace_info_ser.hpp"
 #include "dogen/cpp/serialization/registrar_info_ser.hpp"
 #include "dogen/cpp/serialization/visitor_info_ser.hpp"
@@ -53,9 +51,7 @@ template<typename Archive>
 void save(Archive& ar,
     const dogen::cpp::file_info& v,
     const unsigned int /*version*/) {
-    ar << make_nvp("facet_type", v.facet_type_);
-    ar << make_nvp("file_type", v.file_type_);
-    ar << make_nvp("aspect_type", v.aspect_type_);
+    ar << make_nvp("descriptor", v.descriptor_);
     ar << make_nvp("class_info", v.class_info_);
     ar << make_nvp("enum_info", v.enum_info_);
     ar << make_nvp("exception_info", v.exception_info_);
@@ -73,9 +69,7 @@ template<typename Archive>
 void load(Archive& ar,
     dogen::cpp::file_info& v,
     const unsigned int /*version*/) {
-    ar >> make_nvp("facet_type", v.facet_type_);
-    ar >> make_nvp("file_type", v.file_type_);
-    ar >> make_nvp("aspect_type", v.aspect_type_);
+    ar >> make_nvp("descriptor", v.descriptor_);
     ar >> make_nvp("class_info", v.class_info_);
     ar >> make_nvp("enum_info", v.enum_info_);
     ar >> make_nvp("exception_info", v.exception_info_);

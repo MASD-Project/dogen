@@ -26,17 +26,20 @@ namespace cpp {
 content_descriptor::content_descriptor()
     : file_type_(static_cast<dogen::cpp::file_types>(0)),
       facet_type_(static_cast<dogen::config::cpp_facet_types>(0)),
-      aspect_type_(static_cast<dogen::cpp::aspect_types>(0)) { }
+      aspect_type_(static_cast<dogen::cpp::aspect_types>(0)),
+      content_type_(static_cast<dogen::cpp::content_types>(0)) { }
 
 content_descriptor::content_descriptor(
     const dogen::cpp::file_types& file_type,
     const dogen::config::cpp_facet_types& facet_type,
     const dogen::cpp::aspect_types& aspect_type,
-    const dogen::sml::qname& name)
+    const dogen::sml::qname& name,
+    const dogen::cpp::content_types& content_type)
     : file_type_(file_type),
       facet_type_(facet_type),
       aspect_type_(aspect_type),
-      name_(name) { }
+      name_(name),
+      content_type_(content_type) { }
 
 void content_descriptor::swap(content_descriptor& other) noexcept {
     using std::swap;
@@ -44,13 +47,15 @@ void content_descriptor::swap(content_descriptor& other) noexcept {
     swap(facet_type_, other.facet_type_);
     swap(aspect_type_, other.aspect_type_);
     swap(name_, other.name_);
+    swap(content_type_, other.content_type_);
 }
 
 bool content_descriptor::operator==(const content_descriptor& rhs) const {
     return file_type_ == rhs.file_type_ &&
         facet_type_ == rhs.facet_type_ &&
         aspect_type_ == rhs.aspect_type_ &&
-        name_ == rhs.name_;
+        name_ == rhs.name_ &&
+        content_type_ == rhs.content_type_;
 }
 
 content_descriptor& content_descriptor::operator=(content_descriptor other) {
@@ -97,6 +102,14 @@ void content_descriptor::name(const dogen::sml::qname& v) {
 
 void content_descriptor::name(const dogen::sml::qname&& v) {
     name_ = std::move(v);
+}
+
+dogen::cpp::content_types content_descriptor::content_type() const {
+    return content_type_;
+}
+
+void content_descriptor::content_type(const dogen::cpp::content_types& v) {
+    content_type_ = v;
 }
 
 } }

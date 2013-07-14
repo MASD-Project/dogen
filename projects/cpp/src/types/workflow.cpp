@@ -21,6 +21,7 @@
 #include <boost/lexical_cast.hpp>
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
+#include "dogen/sml/types/abstract_object.hpp"
 #include "dogen/sml/io/qname_io.hpp"
 #include "dogen/cpp/types/workflow_failure.hpp"
 #include "dogen/cpp/types/formatters/factory.hpp"
@@ -53,12 +54,13 @@ namespace cpp {
 
 workflow::
 workflow(const sml::model& model, const config::cpp_settings& settings) :
-    model_(model), settings_(settings), locator_(model.name(), settings_),
+    model_(model), settings_(settings),
+    locator_(model.name().model_name(), settings_),
     includer_(model_, locator_, settings_),
     file_info_factory_(locator_),
-    transformer_(model_),
+    transformer_(model_, context_),
     descriptor_factory_(settings_.enabled_facets()),
-    extractor_(model_.pods(), model_.concepts()) {
+    extractor_(model_.objects(), model_.concepts()) {
 
     validate_settings();
 }
@@ -87,52 +89,61 @@ workflow::result_entry_type workflow::format(const file_info& fi) const {
     formatters::factory factory(settings_);
     formatters::file_formatter::shared_ptr ff;
     std::ostringstream s;
-    ff = factory.create(s, fi.facet_type(), fi.file_type(), fi.aspect_type());
+    ff = factory.create(s, fi.descriptor());
     ff->format(fi);
     return std::make_pair(fi.file_path(), s.str());
 }
 
-class_info workflow::
-generate_class_info_recursive(std::unordered_map<sml::qname, class_info>& infos,
-    const sml::qname& qn) const {
+/*
+void workflow::generate_classes_recursive(const sml::qname& qn) {
 
-    const auto i(model_.pods().find(qn));
-    if (i == model_.pods().end()) {
+    const auto i(model_.objects().find(qn));
+    if (i == model_.objects().end()) {
         BOOST_LOG_SEV(lg, error) << could_not_find_pod << qn;
         BOOST_THROW_EXCEPTION(workflow_failure(could_not_find_pod +
                 boost::lexical_cast<std::string>(qn)));
     }
 
-    boost::optional<class_info> pci;
-    const auto p(i->second);
-    const auto pn(p.parent_name());
+    const auto& ao(*i->second);
+    const auto pn(ao.parent_name());
+    auto& infos(context_.qname_to_class_info());
     if (pn) {
         auto j(infos.find(*pn));
-        if (j == infos.end()) {
-            pci = generate_class_info_recursive(infos, *pn);
-            infos.insert(std::make_pair(*p.parent_name(), *pci));
-        } else
-            pci = j->second;
+        if (j == infos.end())
+            generate_classes_recursive(*pn);
     }
 
-    boost::optional<class_info> opci;
-    const auto opn(p.original_parent_name());
+    const auto opn(ao.original_parent_name());
     if (opn) {
         auto j(infos.find(*opn));
         if (j == infos.end()) {
-            opci = generate_class_info_recursive(infos, *opn);
-            infos.insert(std::make_pair(*p.original_parent_name(), *opci));
-        } else
-            opci = j->second;
+            generate_classes_recursive(*opn);
+        }
     }
 
-    return transformer_.transform(p, pci, opci);
+    transformer_.from_type(ao);
 }
 
 void workflow::register_header(const file_info& fi) const {
     const auto header(file_types::header);
-    if (fi.file_type() == header)
-        includer_.register_header(fi.facet_type(), fi.relative_path());
+    const auto cd(fi.descriptor());
+    if (cd.file_type() == header)
+        includer_.register_header(cd.facet_type(), fi.relative_path());
+}
+
+void workflow::populate_context_activity() {
+    BOOST_LOG_SEV(lg, debug) << "Started generate classes activity.";
+
+    for (const auto& pair : model_.objects()) {
+        const auto& ao(*pair.second);
+
+        if (ao.generation_type() == sml::generation_types::no_generation)
+            continue;
+
+        generate_classes_recursive(ao.name());
+    }
+
+    BOOST_LOG_SEV(lg, debug) << "Finished generate classes activity";
 }
 
 workflow::result_type workflow::generate_classes_activity() const {
@@ -140,14 +151,12 @@ workflow::result_type workflow::generate_classes_activity() const {
 
     workflow::result_type r;
     std::unordered_map<sml::qname, class_info> infos;
-    for (const auto& pair : model_.pods()) {
-        const auto p(pair.second);
+    for (const auto& pair : model_.objects()) {
+        const auto ao(pair.second);
 
-        if (p.generation_type() == sml::generation_types::no_generation)
+        if (ao.generation_type() == sml::generation_types::no_generation)
             continue;
 
-        const auto pt(p.pod_type());
-        const auto ct(p.category_type());
         const auto ci(generate_class_info_recursive(infos, p.name()));
         const auto rel(extractor_.extract_dependency_graph(p));
         for (const auto& cd : descriptor_factory_.create(p.name(), ct, pt)) {
@@ -433,5 +442,5 @@ workflow::result_type workflow::execute() {
     BOOST_LOG_SEV(lg, info) << "C++ backend finished.";
     return r;
 }
-
+*/
 } }

@@ -8639,7 +8639,7 @@ object.#</dia:string>
         <dia:point val="55.255,107.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="37.4712,106.85;56.005,117.8"/>
+        <dia:rectangle val="37.4713,106.85;56.005,117.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -10074,7 +10074,7 @@ came from.#</dia:string>
         <dia:point val="-96.3975,65"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-109.522,55.15;-95.6475,66.6"/>
+        <dia:rectangle val="-109.522,55.15;-95.6475,65.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -10331,7 +10331,7 @@ User models are regular Dogen models, normally made using Dia.#</dia:string>
         <dia:point val="-66,65"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-77.9125,61.95;-65.25,66.6"/>
+        <dia:rectangle val="-77.9125,61.25;-65.25,65.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>

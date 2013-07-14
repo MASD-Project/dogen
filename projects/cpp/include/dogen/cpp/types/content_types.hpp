@@ -18,35 +18,39 @@
  * MA 02110-1301, USA.
  *
  */
-#include <ostream>
-#include <stdexcept>
-#include "dogen/cpp/io/aspect_types_io.hpp"
+#ifndef DOGEN_CPP_TYPES_CONTENT_TYPES_HPP
+#define DOGEN_CPP_TYPES_CONTENT_TYPES_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
 namespace dogen {
 namespace cpp {
 
-std::ostream& operator<<(std::ostream& s, const aspect_types& v) {
-    s << "{ " << "\"__type__\": " << "\"aspect_types\", " << "\"value\": ";
-
-    std::string attr;
-    switch (v) {
-    case aspect_types::invalid:
-        attr = "\"invalid\"";
-        break;
-    case aspect_types::main:
-        attr = "\"main\"";
-        break;
-    case aspect_types::forward_decls:
-        attr = "\"forward_decls\"";
-        break;
-    case aspect_types::null_aspect:
-        attr = "\"null_aspect\"";
-        break;
-    default:
-        throw std::invalid_argument("Invalid value for aspect_types");
-    }
-    s << attr << " }";
-    return s;
-}
+/**
+ * @brief Supported types of content.
+ */
+enum class content_types : unsigned int {
+    invalid = 0, ///< Represents an uninitialised enum
+    exception = 1,
+    enumeration = 2,
+    primitive = 3,
+    value_object = 4,
+    user_defined_service = 5,
+    visitor = 6,
+    key_extractor = 7,
+    factory = 8,
+    repository = 9,
+    keyed_entity = 10,
+    entity = 11,
+    registrar = 12,
+    namespace_doc = 13,
+    includer = 14,
+    versioned_key = 15,
+    unversioned_key = 16
+};
 
 } }
+
+#endif

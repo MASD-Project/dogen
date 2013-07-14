@@ -27,6 +27,7 @@
 
 #include <iosfwd>
 #include "dogen/config/types/cpp_settings.hpp"
+#include "dogen/cpp/types/content_descriptor.hpp"
 #include "dogen/cpp/types/formatters/file_formatter.hpp"
 
 namespace dogen {
@@ -49,16 +50,15 @@ public:
 
 private:
     result_type create_main_formatter(std::ostream& s,
-        config::cpp_facet_types ft, file_types flt) const;
+        const content_descriptor& cd) const;
 
     result_type create_registrar_formatter(
-        std::ostream& s, file_types flt) const;
+        std::ostream& s, const content_descriptor& cd) const;
 
     result_type create_null_formatter(std::ostream& s) const;
 
 public:
-    result_type create(std::ostream& s, config::cpp_facet_types ft,
-        file_types flt, aspect_types at) const;
+    result_type create(std::ostream& s, const content_descriptor& cd) const;
 
 private:
     const config::cpp_settings settings_;

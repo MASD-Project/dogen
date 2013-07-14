@@ -29,6 +29,7 @@
 #include "dogen/config/types/cpp_facet_types.hpp"
 #include "dogen/cpp/serialization/content_descriptor_fwd_ser.hpp"
 #include "dogen/cpp/types/aspect_types.hpp"
+#include "dogen/cpp/types/content_types.hpp"
 #include "dogen/cpp/types/file_types.hpp"
 #include "dogen/sml/types/qname.hpp"
 
@@ -52,7 +53,8 @@ public:
         const dogen::cpp::file_types& file_type,
         const dogen::config::cpp_facet_types& facet_type,
         const dogen::cpp::aspect_types& aspect_type,
-        const dogen::sml::qname& name);
+        const dogen::sml::qname& name,
+        const dogen::cpp::content_types& content_type);
 
 private:
     template<typename Archive>
@@ -96,6 +98,14 @@ public:
     void name(const dogen::sml::qname&& v);
     /**@}*/
 
+    /**
+     * @brief Type of the content we're describing.
+     */
+    /**@{*/
+    dogen::cpp::content_types content_type() const;
+    void content_type(const dogen::cpp::content_types& v);
+    /**@}*/
+
 public:
     bool operator==(const content_descriptor& rhs) const;
     bool operator!=(const content_descriptor& rhs) const {
@@ -111,6 +121,7 @@ private:
     dogen::config::cpp_facet_types facet_type_;
     dogen::cpp::aspect_types aspect_type_;
     dogen::sml::qname name_;
+    dogen::cpp::content_types content_type_;
 };
 
 } }

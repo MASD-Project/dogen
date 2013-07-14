@@ -19,17 +19,23 @@
  *
  */
 #include <boost/pointer_cast.hpp>
+#include <boost/lexical_cast.hpp>
+#include <boost/throw_exception.hpp>
 #include <boost/algorithm/string.hpp>
 #include <boost/algorithm/string/join.hpp>
 #include <boost/algorithm/string/predicate.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/sml/io/qname_io.hpp"
 #include "dogen/cpp/types/transformation_error.hpp"
+#include "dogen/sml/types/value_object.hpp"
+#include "dogen/sml/io/value_object_types_io.hpp"
 #include "dogen/sml/types/entity.hpp"
 #include "dogen/sml/types/keyed_entity.hpp"
 #include "dogen/sml/types/service.hpp"
+#include "dogen/sml/io/service_types_io.hpp"
+#include "dogen/sml/types/factory.hpp"
 #include "dogen/sml/types/repository.hpp"
-#include "dogen/sml/types/visitor.hpp"
+#include "dogen/sml/types/type_visitor.hpp"
 #include "dogen/cpp/types/transformer.hpp"
 
 using namespace dogen::utility::log;
@@ -47,7 +53,6 @@ const std::string more_than(">");
 const std::string separator("_");
 const std::string extension("HPP");
 const std::string namespace_separator("::");
-const std::string visitor_postfix("_visitor");
 
 const std::string bool_type("bool");
 const std::string string_type("std::string");
@@ -80,7 +85,10 @@ const std::string uint16_t_type("std::uint16_t");
 const std::string uint32_t_type("std::uint32_t");
 const std::string uint64_t_type("std::uint64_t");
 
-const std::string pod_not_found("pod not found in pod container: ");
+const std::string unsupported_service_type("Service type is not supported: ");
+const std::string unsupported_value_object_type(
+    "Value object type is not supported: ");
+
 const std::string concept_not_found("Concept not found in concept container: ");
 const std::string parent_class_info_not_found(
     "Type has a parent but no parent class info found: ");
@@ -463,30 +471,38 @@ class_info transformer::to_class_info(const sml::abstract_object& ao) const {
     return r;
 }
 
-visitor_info transformer::to_visitor(const sml::value_object& ao) const {
-    if (!p.is_visitable()) {
-        BOOST_LOG_SEV(lg, error) << non_visitable_pod_supplied
-                                 << p.name().type_name();
-        BOOST_THROW_EXCEPTION(
-            transformation_error(non_visitable_pod_supplied +
-                p.name().type_name()));
-    }
+visitor_info transformer::to_visitor(const sml::service& s) const {
+    BOOST_LOG_SEV(lg, debug) << "Transforming visitor: " << s.name();
 
     visitor_info r;
-    r.name(p.name().type_name() + visitor_postfix);
-    r.namespaces(transform_into_namespace_list(p.name()));
+    r.name(s.name().simple_name());
+    r.namespaces(to_namespace_list(s.name()));
 
-    for (const auto l : p.leaves())
-        r.types().push_back(transform_into_qualified_name(l));
+    for (const auto l : s.leaves())
+        r.types().push_back(to_qualified_name(l));
 
     return r;
+}
+
+void transformer::add_class(const sml::qname& qn, const class_info& ci) {
+    context_.classes().push_back(ci);
+    context_.qname_to_class_info().insert(std::make_pair(qn, ci));
 }
 
 void transformer::visit(const dogen::sml::service& s) {
     BOOST_LOG_SEV(lg, debug) << "Transforming service: " << s.name();
 
-    auto ci(to_class_info(s));
-    context_.classes().push_back(ci);
+    switch(s.type()) {
+    case sml::service_types::user_defined:
+        add_class(s.name(), to_class_info(s));
+        break;
+    case sml::service_types::visitor:
+        context_.visitors().push_back(to_visitor(s));
+    default:
+        BOOST_LOG_SEV(lg, error) << unsupported_service_type << s.type();
+        BOOST_THROW_EXCEPTION(transformation_error(unsupported_service_type +
+                boost::lexical_cast<std::string>(s.type())));
+    };
 
     BOOST_LOG_SEV(lg, debug) << "Transformed service: " << s.name();
 }
@@ -495,7 +511,7 @@ void transformer::visit(const dogen::sml::factory& f) {
     BOOST_LOG_SEV(lg, debug) << "Transforming service: " << f.name();
 
     auto ci(to_class_info(f));
-    context_.classes().push_back(ci);
+    add_class(f.name(), ci);
 
     BOOST_LOG_SEV(lg, debug) << "Transformed service: " << f.name();
 }
@@ -504,7 +520,7 @@ void transformer::visit(const dogen::sml::repository& r) {
     BOOST_LOG_SEV(lg, debug) << "Transforming service: " << r.name();
 
     auto ci(to_class_info(r));
-    context_.classes().push_back(ci);
+    add_class(r.name(), ci);
 
     BOOST_LOG_SEV(lg, debug) << "Transformed service: " << r.name();
 }
@@ -535,9 +551,13 @@ void transformer::visit(const dogen::sml::value_object& vo) {
     case sml::value_object_types::plain:
     case sml::value_object_types::versioned_key:
     case sml::value_object_types::unversioned_key:
-        context_.classes().push_back(to_class_info(vo));
-
+        add_class(vo.name(), to_class_info(vo));
+        break;
     default:
+        BOOST_LOG_SEV(lg, error) << unsupported_value_object_type << vo.type();
+        BOOST_THROW_EXCEPTION(transformation_error(
+                unsupported_value_object_type +
+                boost::lexical_cast<std::string>(vo.type())));
     };
 
     BOOST_LOG_SEV(lg, debug) << "Transformed value object: " << vo.name();
@@ -547,7 +567,7 @@ void transformer::visit(const dogen::sml::keyed_entity& ke) {
     BOOST_LOG_SEV(lg, debug) << "Transforming keyed entity: " << ke.name();
 
     auto ci(to_class_info(ke));
-    context_.classes().push_back(ci);
+    add_class(ke.name(), ci);
 
     BOOST_LOG_SEV(lg, debug) << "Transformed keyed entity: " << ke.name();
 }
@@ -556,13 +576,13 @@ void transformer::visit(const dogen::sml::entity& e) {
     BOOST_LOG_SEV(lg, debug) << "Transforming entity: " << e.name();
 
     auto ci(to_class_info(e));
-    context_.classes().push_back(ci);
+    add_class(e.name(), ci);
 
     BOOST_LOG_SEV(lg, debug) << "Transformed entity: " << e.name();
 }
 
-void transformer::from_abstract_object(const sml::abstract_object& ao) {
-    ao.accept(*this);
+void transformer::from_type(const sml::type& t) {
+    t.accept(*this);
 }
 
 void transformer::to_namespace_info(const sml::module& m) {

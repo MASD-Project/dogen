@@ -39,6 +39,7 @@
 #include "dogen/cpp/types/cmakelists_info.hpp"
 #include "dogen/cpp/types/file_info.hpp"
 #include "dogen/cpp/types/extractor.hpp"
+#include "dogen/cpp/types/context.hpp"
 #include "dogen/cpp/types/file_info_factory.hpp"
 
 namespace dogen {
@@ -75,11 +76,9 @@ private:
     result_entry_type format(const file_info& fi) const;
 
     /**
-     * @brief Recursively generates pods.
+     * @brief Recursively generates all the classes.
      */
-    class_info generate_class_info_recursive(
-        std::unordered_map<sml::qname, class_info>& infos,
-        const sml::qname& qn) const;
+    void generate_classes_recursive(const sml::qname& qn);
 
     /**
      * @brief Register the file with registrar, if it's a header file.
@@ -88,39 +87,9 @@ private:
 
 private:
     /**
-     * @brief Creates all C++ files for enums in the model.
+     * @brief Creates all C++ types in the context.
      */
-    result_type generate_enums_activity() const;
-
-    /**
-     * @brief Creates all C++ files for exceptions in the model.
-     */
-    result_type generate_exceptions_activity() const;
-
-    /**
-     * @brief Creates all C++ files for classes in the model.
-     */
-    result_type generate_classes_activity() const;
-
-    /**
-     * @brief Creates all C++ files for namespaces in the model.
-     */
-    result_type generate_namespaces_activity() const;
-
-    /**
-     * @brief Creates all C++ files for registrars in the model.
-     */
-    result_type generate_registrars_activity() const;
-
-    /**
-     * @brief Creates all C++ files for includers in the model.
-     */
-    result_type generate_includers_activity() const;
-
-    /**
-     * @brief Creates all C++ files for visitors in the model.
-     */
-    result_type generate_visitors_activity() const;
+    void populate_context_activity();
 
     /**
      * @brief Composite activity that generates all C++ files.
@@ -151,12 +120,13 @@ public:
     std::vector<boost::filesystem::path> managed_directories() const;
 
 private:
+    context context_;
     const sml::model model_;
     const config::cpp_settings settings_;
     const locator locator_;
     mutable includer includer_;
     const file_info_factory file_info_factory_;
-    const transformer transformer_;
+    transformer transformer_;
     const content_descriptor_factory descriptor_factory_;
     const extractor extractor_;
 };

@@ -171,19 +171,19 @@ inserter_operator(const class_info& ci) {
     utility_.blank_line();
 }
 
-void domain_implementation::
-class_implementation(aspect_types at, const sml::category_types ct,
+void domain_implementation::class_implementation(const content_descriptor& cd,
     const class_info& ci) {
 
     using dogen::utility::exception::invalid_enum_value;
-    if (at == aspect_types::main) {
-        if (ct == sml::category_types::versioned_key ||
-            ct == sml::category_types::unversioned_key) {
+    if (cd.aspect_type() == aspect_types::main) {
+        const auto ct(cd.content_type());
+        if (ct == content_types::versioned_key ||
+            ct == content_types::unversioned_key) {
             key_class_implementation
                 f(stream_, disable_complete_constructor_, disable_io_);
             f.format(ci);
             return;
-        } else if (ct == sml::category_types::user_defined) {
+        } else if (ct == content_types::value_object) {
             domain_class_implementation
                 f(stream_, disable_complete_constructor_, disable_io_);
             f.format(ci);
@@ -212,7 +212,7 @@ void domain_implementation::format_class(const file_info& fi) {
 
     namespace_helper ns_helper(stream_, ci.namespaces());
     utility_.blank_line();
-    class_implementation(fi.aspect_type(), fi.category_type(), ci);
+    class_implementation(fi.descriptor(), ci);
     inserter_operator(ci);
 }
 
@@ -229,10 +229,12 @@ void domain_implementation::format(const file_info& fi) {
     includes includes(stream_);
     includes.format(fi);
 
-    if (fi.meta_type() == sml::meta_types::enumeration)
-        format_enumeration(fi);
-    else if (fi.meta_type() == sml::meta_types::pod)
+    if (fi.descriptor().content_type() == content_types::value_object ||
+        fi.descriptor().content_type() == content_types::entity ||
+        fi.descriptor().content_type() == content_types::keyed_entity)
         format_class(fi);
+    else if (fi.descriptor().content_type() == content_types::enumeration)
+        format_enumeration(fi);
 }
 
 } } }

@@ -22,6 +22,7 @@
 #include "dogen/config/io/cpp_facet_types_io.hpp"
 #include "dogen/cpp/io/aspect_types_io.hpp"
 #include "dogen/cpp/io/content_descriptor_io.hpp"
+#include "dogen/cpp/io/content_types_io.hpp"
 #include "dogen/cpp/io/file_types_io.hpp"
 #include "dogen/sml/io/qname_io.hpp"
 
@@ -34,7 +35,8 @@ std::ostream& operator<<(std::ostream& s, const content_descriptor& v) {
       << "\"file_type\": " << v.file_type() << ", "
       << "\"facet_type\": " << v.facet_type() << ", "
       << "\"aspect_type\": " << v.aspect_type() << ", "
-      << "\"name\": " << v.name()
+      << "\"name\": " << v.name() << ", "
+      << "\"content_type\": " << v.content_type()
       << " }";
     return(s);
 }
