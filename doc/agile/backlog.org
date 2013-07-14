@@ -11,6 +11,11 @@ This file contains all stories that haven't been assigned to a sprint.
 
 Stories that we intend to look at, at some point.
 
+*** Split C++ model
+
+We should move the transformation code outside of the C++ model, to a
+=sml_to_cpp= model. This would make maintenance a lot easier.
+
 *** Refactor Dia to SML transformer
 
 - remove all properties from context which are used only internally in
