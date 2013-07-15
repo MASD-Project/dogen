@@ -10,14 +10,15 @@ This file contains all stories that were closed during sprint 31.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-07-15 Mon 07:56]
+Clock summary at [2013-07-15 Mon 18:42]
 
-| Headline                                          | Time   |      |      |
-|---------------------------------------------------+--------+------+------|
-| *Total time*                                      | *0:06* |      |      |
-|---------------------------------------------------+--------+------+------|
-| Development Stories Implemented                   |        | 0:06 |      |
-| IMPLEMENTATION Release notes and backlog grooming |        |      | 0:06 |
+| Headline                                                 | Time   |      |      |
+|----------------------------------------------------------+--------+------+------|
+| *Total time*                                             | *1:16* |      |      |
+|----------------------------------------------------------+--------+------+------|
+| Development Stories Implemented                          |        | 1:16 |      |
+| IMPLEMENTATION Release notes and backlog grooming        |        |      | 0:06 |
+| IMPLEMENTATION Update C++ model after latest SML changes |        |      | 1:10 |
 #+end:
 
 *** IMPLEMENTATION Release notes and backlog grooming                  :task:
@@ -25,6 +26,10 @@ Clock summary at [2013-07-15 Mon 07:56]
 
 *** IMPLEMENTATION Update C++ model after latest SML changes          :story:
 **** IMPLEMENTATION Update workflow
+     CLOCK: [2013-07-15 Mon 18:15]--[2013-07-15 Mon 18:42] =>  0:27
+     CLOCK: [2013-07-15 Mon 18:00]--[2013-07-15 Mon 18:11] =>  0:11
+     CLOCK: [2013-07-15 Mon 08:28]--[2013-07-15 Mon 08:38] =>  0:10
+     CLOCK: [2013-07-15 Mon 07:58]--[2013-07-15 Mon 08:20] =>  0:22
 
 *** Create a =key_extractor= service                                  :story:
 

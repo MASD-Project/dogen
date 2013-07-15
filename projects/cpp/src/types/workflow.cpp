@@ -94,36 +94,6 @@ workflow::result_entry_type workflow::format(const file_info& fi) const {
     return std::make_pair(fi.file_path(), s.str());
 }
 
-/*
-void workflow::generate_classes_recursive(const sml::qname& qn) {
-
-    const auto i(model_.objects().find(qn));
-    if (i == model_.objects().end()) {
-        BOOST_LOG_SEV(lg, error) << could_not_find_object << qn;
-        BOOST_THROW_EXCEPTION(workflow_failure(could_not_find_object +
-                boost::lexical_cast<std::string>(qn)));
-    }
-
-    const auto& ao(*i->second);
-    const auto pn(ao.parent_name());
-    auto& infos(context_.qname_to_class_info());
-    if (pn) {
-        auto j(infos.find(*pn));
-        if (j == infos.end())
-            generate_classes_recursive(*pn);
-    }
-
-    const auto opn(ao.original_parent_name());
-    if (opn) {
-        auto j(infos.find(*opn));
-        if (j == infos.end()) {
-            generate_classes_recursive(*opn);
-        }
-    }
-
-    transformer_.from_type(ao);
-}
-
 void workflow::register_header(const file_info& fi) const {
     const auto header(file_types::header);
     const auto cd(fi.descriptor());
@@ -131,21 +101,104 @@ void workflow::register_header(const file_info& fi) const {
         includer_.register_header(cd.facet_type(), fi.relative_path());
 }
 
+void workflow::transform_abstract_object(const sml::abstract_object& ao) {
+    if (ao.generation_type() == sml::generation_types::no_generation)
+        return;
+
+    const auto lambda([&](const boost::optional<sml::qname>& qn) {
+            if (!qn)
+                return;
+
+            const auto i(context_.qname_to_class_info().find(*qn));
+            if (i != context_.qname_to_class_info().end())
+                return;
+
+            const auto j(model_.objects().find(*qn));
+            if (j == model_.objects().end()) {
+                BOOST_LOG_SEV(lg, error) << could_not_find_object << *qn;
+                BOOST_THROW_EXCEPTION(workflow_failure(could_not_find_object +
+                        boost::lexical_cast<std::string>(*qn)));
+            }
+            transform_abstract_object(*j->second);
+        });
+
+    lambda(ao.parent_name());
+    lambda(ao.original_parent_name());
+    transformer_.from_type(ao);
+}
+
+void workflow::transform_module(const sml::module& m) {
+    if (m.documentation().empty())
+        return;
+
+    transformer_.to_namespace_info(m);
+}
+
+void workflow::transform_registrar() {
+    const auto f(settings_.enabled_facets());
+    if (f.find(config::cpp_facet_types::serialization) == f.end())
+        return;
+
+    transformer_.model_to_registrar_info();
+}
+
+void workflow::transform_enumeration(const sml::enumeration& e) {
+    if (e.generation_type() == sml::generation_types::no_generation)
+        return;
+
+    transformer_.from_type(e);
+}
+
 void workflow::populate_context_activity() {
-    BOOST_LOG_SEV(lg, debug) << "Started generate classes activity.";
+    BOOST_LOG_SEV(lg, debug) << "Started populate context sub-workflow.";
 
-    for (const auto& pair : model_.objects()) {
-        const auto& ao(*pair.second);
+    for (const auto& pair : model_.objects())
+        transform_abstract_object(*pair.second);
 
-        if (ao.generation_type() == sml::generation_types::no_generation)
-            continue;
+    if (!model_.documentation().empty())
+        transformer_.model_to_namespace_info();
 
-        generate_classes_recursive(ao.name());
+    for (const auto& pair : model_.modules())
+        transform_module(pair.second);
+
+    for (const auto& pair : model_.enumerations())
+        transform_enumeration(pair.second);
+
+    transform_registrar();
+
+    BOOST_LOG_SEV(lg, debug) << "Finished populate context sub-workflow";
+}
+
+workflow::result_type workflow::generate_file_infos_activity() const {
+    result_type r;
+    for (const auto& ci : context_.classes()) {
+        const auto rel(extractor_.extract_dependency_graph(ci));
+        for (const auto& cd : descriptor_factory_.create(p.name(), ct, pt)) {
+            const auto il(includer_.includes_for_object(cd, rel));
+            auto fi(file_info_factory_.create(ci, cd, il));
+
+            // we want to make sure we do not actually generate code
+            // for partial generation, so override the output of the
+            // factory. however, as we still want to create forward
+            // declarations, ignore those.
+            using sml::generation_types;
+            if (cd.aspect_type() != aspect_types::forward_decls &&
+                p.generation_type() == generation_types::partial_generation) {
+                fi.aspect_type(aspect_types::null_aspect);
+            }
+            r.insert(format(fi));
+
+            const auto at(fi.aspect_type());
+            if (at == aspect_types::main || at == aspect_types::null_aspect)
+                register_header(fi);
+        }
     }
 
     BOOST_LOG_SEV(lg, debug) << "Finished generate classes activity";
+
 }
 
+/*
 workflow::result_type workflow::generate_classes_activity() const {
     BOOST_LOG_SEV(lg, debug) << "Started generate classes activity.";
 

@@ -32,6 +32,7 @@
 #include <boost/filesystem/path.hpp>
 #include "dogen/sml/types/model.hpp"
 #include "dogen/config/types/cpp_settings.hpp"
+#include "dogen/sml/types/abstract_object.hpp"
 #include "dogen/cpp/types/includer.hpp"
 #include "dogen/cpp/types/locator.hpp"
 #include "dogen/cpp/types/transformer.hpp"
@@ -76,14 +77,29 @@ private:
     result_entry_type format(const file_info& fi) const;
 
     /**
-     * @brief Recursively generates all the classes.
-     */
-    void generate_classes_recursive(const sml::qname& qn);
-
-    /**
      * @brief Register the file with registrar, if it's a header file.
      */
     void register_header(const file_info& fi) const;
+
+    /**
+     * @brief Recursively generates C++ class objects.
+     */
+    void transform_abstract_object(const sml::abstract_object& ao);
+
+    /**
+     * @brief Transforms the module into a C++ namespace.
+     */
+    void transform_module(const sml::module& m);
+
+    /**
+     * @brief Transforms the model into a registrar.
+     */
+    void transform_registrar();
+
+    /**
+     * @brief Transforms the enumerator into a C++ enumeration..
+     */
+    void transform_enumeration(const sml::enumeration& e);
 
 private:
     /**
