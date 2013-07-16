@@ -174,11 +174,10 @@ void workflow::populate_context_activity() {
     BOOST_LOG_SEV(lg, debug) << "Finished populate context sub-workflow";
 }
 
-/*
 workflow::result_type workflow::generate_file_infos_activity() const {
     result_type r;
-    for (const auto& ci : context_.classes()) {
-        const auto rel(extractor_.extract_dependency_graph(ci));
+    for (const auto& pair : context_.qname_to_class_info()) {
+        const auto& ci(pair.second);
         for (const auto& cd : descriptor_factory_.create(p.name(), ct, pt)) {
             const auto il(includer_.includes_for_object(cd, rel));
             auto fi(file_info_factory_.create(ci, cd, il));
@@ -203,6 +202,8 @@ workflow::result_type workflow::generate_file_infos_activity() const {
     BOOST_LOG_SEV(lg, debug) << "Finished generate classes activity";
 
 }
+
+/*
 
 workflow::result_type workflow::generate_classes_activity() const {
     BOOST_LOG_SEV(lg, debug) << "Started generate classes activity.";
