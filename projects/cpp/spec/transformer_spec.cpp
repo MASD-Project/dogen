@@ -359,7 +359,9 @@ BOOST_AUTO_TEST_CASE(transforming_object_results_in_expected_class_info) {
     dogen::cpp::context c;
     dogen::cpp::transformer t(m, c);
     t.from_type(*m.objects().begin()->second);
-    const auto ci(c.classes().front());
+
+    BOOST_REQUIRE(c.qname_to_class_info().size() == 1);
+    const auto ci(c.qname_to_class_info().begin()->second);
     BOOST_LOG_SEV(lg, debug) << "class: " << ci;
     BOOST_CHECK(is_type_zero(ci.name()));
     BOOST_CHECK(!ci.documentation().empty());
@@ -399,7 +401,9 @@ BOOST_AUTO_TEST_CASE(transforming_object_with_property_results_in_expected_class
     dogen::cpp::context c;
     dogen::cpp::transformer t(m, c);
     t.from_type(*i->second);
-    const auto ci(c.classes().front());
+
+    BOOST_REQUIRE(c.qname_to_class_info().size() == 1);
+    const auto ci(c.qname_to_class_info().begin()->second);
     BOOST_LOG_SEV(lg, debug) << "class: " << ci;
 
     BOOST_CHECK(ci.all_properties().size() == 1);
@@ -459,7 +463,9 @@ BOOST_AUTO_TEST_CASE(transforming_object_with_bool_property_results_in_expected_
     dogen::cpp::context c;
     dogen::cpp::transformer t(m, c);
     t.from_type(*i->second);
-    const auto ci(c.classes().front());
+
+    BOOST_REQUIRE(c.qname_to_class_info().size() == 1);
+    const auto ci(c.qname_to_class_info().begin()->second);
     BOOST_LOG_SEV(lg, debug) << "class: " << ci;
 
     BOOST_CHECK(ci.all_properties().size() == 1);
@@ -523,7 +529,9 @@ BOOST_AUTO_TEST_CASE(transforming_object_with_unsigned_int_property_results_in_e
     dogen::cpp::context c;
     dogen::cpp::transformer t(m, c);
     t.from_type(*i->second);
-    const auto ci(c.classes().front());
+
+    BOOST_REQUIRE(c.qname_to_class_info().size() == 1);
+    const auto ci(c.qname_to_class_info().begin()->second);
     BOOST_LOG_SEV(lg, debug) << "class: " << ci;
 
     BOOST_CHECK(ci.all_properties().size() == 1);
@@ -586,7 +594,9 @@ BOOST_AUTO_TEST_CASE(transforming_object_with_boost_variant_property_results_in_
     dogen::cpp::context c;
     dogen::cpp::transformer t(m, c);
     t.from_type(*i->second);
-    const auto ci(c.classes().front());
+
+    BOOST_REQUIRE(c.qname_to_class_info().size() == 1);
+    const auto ci(c.qname_to_class_info().begin()->second);
     BOOST_LOG_SEV(lg, debug) << "class: " << ci;
 
     BOOST_CHECK(ci.all_properties().size() == 1);
@@ -647,7 +657,11 @@ BOOST_AUTO_TEST_CASE(transforming_object_with_parent_results_in_expected_class_i
         if (is_type_one(pair.first.simple_name())) {
             found_one = true;
             t.from_type(*pair.second);
-            const auto c1(c.classes().front());
+
+            BOOST_REQUIRE(c.qname_to_class_info().size() == 1);
+            const auto i(c.qname_to_class_info().find(pair.first));
+            BOOST_REQUIRE(i != c.qname_to_class_info().end());
+            const auto c1(i->second);
             BOOST_LOG_SEV(lg, debug) << "class 1: " << c1;
 
             BOOST_CHECK(is_type_one(c1.name()));
@@ -668,8 +682,11 @@ BOOST_AUTO_TEST_CASE(transforming_object_with_parent_results_in_expected_class_i
         if (is_type_zero(pair.first.simple_name())) {
             found_zero = true;
             t.from_type(*pair.second);
-            BOOST_REQUIRE(c.classes().size() == 2);
-            const auto c0(c.classes().back());
+
+            BOOST_REQUIRE(c.qname_to_class_info().size() == 2);
+            const auto i(c.qname_to_class_info().find(pair.first));
+            BOOST_REQUIRE(i != c.qname_to_class_info().end());
+            const auto c0(i->second);
             BOOST_LOG_SEV(lg, debug) << "class 0: " << c0;
 
             BOOST_CHECK(is_type_zero(c0.name()));
@@ -739,7 +756,11 @@ BOOST_AUTO_TEST_CASE(not_supplying_original_parent_class_info_for_type_with_pare
         if (is_type_one(pair.first.simple_name())) {
             found_one = true;
             t.from_type(*pair.second);
-            const auto c1(c.classes().front());
+
+            BOOST_REQUIRE(c.qname_to_class_info().size() == 1);
+            const auto i(c.qname_to_class_info().find(pair.first));
+            BOOST_REQUIRE(i != c.qname_to_class_info().end());
+            const auto c1(i->second);
             BOOST_LOG_SEV(lg, debug) << "class 1: " << c1;
         }
     }
@@ -803,7 +824,9 @@ BOOST_AUTO_TEST_CASE(transforming_third_degree_object_results_in_expected_class_
     }
     BOOST_CHECK(found_zero);
 
-    for (const auto& ci : c.classes()) {
+    BOOST_REQUIRE(c.qname_to_class_info().size() == 4);
+    for (const auto& pair : c.qname_to_class_info()) {
+        const auto& ci(pair.second);
         if (is_type_three(ci.name())) {
             BOOST_LOG_SEV(lg, debug) << "class 3: " << ci;
             BOOST_CHECK(is_type_three(ci.name()));

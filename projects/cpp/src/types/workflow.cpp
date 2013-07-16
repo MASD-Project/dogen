@@ -105,26 +105,31 @@ void workflow::transform_abstract_object(const sml::abstract_object& ao) {
     if (ao.generation_type() == sml::generation_types::no_generation)
         return;
 
-    const auto lambda([&](const boost::optional<sml::qname>& qn) {
-            if (!qn)
+    const auto lambda([&](const boost::optional<sml::qname>& oqn) {
+            if (!oqn)
                 return;
 
-            const auto i(context_.qname_to_class_info().find(*qn));
+            const auto& qn(*oqn);
+            const auto i(context_.qname_to_class_info().find(qn));
             if (i != context_.qname_to_class_info().end())
                 return;
 
-            const auto j(model_.objects().find(*qn));
+            const auto j(model_.objects().find(qn));
             if (j == model_.objects().end()) {
-                BOOST_LOG_SEV(lg, error) << could_not_find_object << *qn;
+                BOOST_LOG_SEV(lg, error) << could_not_find_object << qn;
                 BOOST_THROW_EXCEPTION(workflow_failure(could_not_find_object +
-                        boost::lexical_cast<std::string>(*qn)));
+                        boost::lexical_cast<std::string>(qn)));
             }
+
             transform_abstract_object(*j->second);
         });
 
     lambda(ao.parent_name());
     lambda(ao.original_parent_name());
+
     transformer_.from_type(ao);
+    const auto rel(extractor_.extract_dependency_graph(ao));
+    context_.qname_to_relationships().insert(std::make_pair(ao.name(), rel));
 }
 
 void workflow::transform_module(const sml::module& m) {
@@ -169,6 +174,7 @@ void workflow::populate_context_activity() {
     BOOST_LOG_SEV(lg, debug) << "Finished populate context sub-workflow";
 }
 
+/*
 workflow::result_type workflow::generate_file_infos_activity() const {
     result_type r;
     for (const auto& ci : context_.classes()) {
@@ -198,7 +204,6 @@ workflow::result_type workflow::generate_file_infos_activity() const {
 
 }
 
-/*
 workflow::result_type workflow::generate_classes_activity() const {
     BOOST_LOG_SEV(lg, debug) << "Started generate classes activity.";
 

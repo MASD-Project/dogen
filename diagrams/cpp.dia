@@ -349,7 +349,7 @@
         <dia:point val="91,4"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="11.665000000000001"/>
+        <dia:real val="11.664999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="34.000000000000021"/>
@@ -1771,7 +1771,7 @@ components a facet has, which we choose to call @e aspects.#</dia:string>
         <dia:point val="-8,-37"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="31.685000000000002"/>
+        <dia:real val="31.684999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="18.599999999999998"/>
@@ -2548,7 +2548,7 @@ components a facet has, which we choose to call @e aspects.#</dia:string>
         <dia:point val="-73,-36"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="32.839999999999996"/>
+        <dia:real val="32.840000000000003"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="14.600000000000001"/>
@@ -3804,7 +3804,7 @@ pre-processor includes.#</dia:string>
         <dia:point val="56,-43"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="27.064999999999998"/>
+        <dia:real val="27.065000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="10.600000000000001"/>
@@ -6530,7 +6530,7 @@ pre-processor includes.#</dia:string>
         <dia:point val="-126.375,96.0625"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="11.997499999999999"/>
+        <dia:real val="11.9975"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -6641,7 +6641,7 @@ pre-processor includes.#</dia:string>
         <dia:point val="-125.312,72.75"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="7.4025000000000007"/>
+        <dia:real val="7.4024999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -7280,7 +7280,7 @@ pre-processor includes.#</dia:string>
         <dia:point val="-136.438,83.9375"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="10.442499999999999"/>
+        <dia:real val="10.442500000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -7502,7 +7502,7 @@ pre-processor includes.#</dia:string>
         <dia:point val="-58.625,64.9375"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="13.594999999999999"/>
+        <dia:real val="13.595000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -7919,7 +7919,7 @@ pre-processor includes.#</dia:string>
         <dia:point val="-105,65"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="6.2174999999999994"/>
+        <dia:real val="6.2175000000000002"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -8135,13 +8135,13 @@ pre-processor includes.#</dia:string>
         <dia:point val="-41.9375,89.9375"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-41.9875,89.8875;-32.925,92.9875"/>
+        <dia:rectangle val="-41.9875,89.8875;-32.924,92.9875"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-41.9375,89.9375"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="8.9625000000000004"/>
+        <dia:real val="8.9635156249999994"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -8474,7 +8474,7 @@ pre-processor includes.#</dia:string>
         <dia:point val="-51.8125,73.3125"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="11.620000000000001"/>
+        <dia:real val="11.619999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -8801,13 +8801,13 @@ pre-processor includes.#</dia:string>
         <dia:point val="-103.188,96.25"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-103.238,96.2;-92.9055,99.3"/>
+        <dia:rectangle val="-103.238,96.2;-92.9045,99.3"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-103.188,96.25"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="10.2325"/>
+        <dia:real val="10.233515625000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -8912,13 +8912,13 @@ pre-processor includes.#</dia:string>
         <dia:point val="-70,96"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-70.05,95.95;-57.6925,99.05"/>
+        <dia:rectangle val="-70.05,95.95;-57.6915,99.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-70,96"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="12.2575"/>
+        <dia:real val="12.258515624999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -9437,7 +9437,7 @@ pre-processor includes.#</dia:string>
         <dia:point val="-149,65"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="6.9575000000000005"/>
+        <dia:real val="6.9574999999999996"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -9881,7 +9881,7 @@ pre-processor includes.#</dia:string>
         <dia:point val="-166,65"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="9.6224999999999987"/>
+        <dia:real val="9.6225000000000005"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -9992,7 +9992,7 @@ pre-processor includes.#</dia:string>
         <dia:point val="-160,73"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="13.602500000000001"/>
+        <dia:real val="13.602499999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -10097,13 +10097,13 @@ pre-processor includes.#</dia:string>
         <dia:point val="-40.875,84.5"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-40.925,84.45;-33.7975,87.55"/>
+        <dia:rectangle val="-40.925,84.45;-33.7965,87.55"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-40.875,84.5"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="7.0275000000000007"/>
+        <dia:real val="7.0285156249999998"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -11543,7 +11543,7 @@ pre-processor includes.#</dia:string>
         <dia:point val="-89,96"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="14.022499999999999"/>
+        <dia:real val="14.022500000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -12453,7 +12453,7 @@ pre-processor includes.#</dia:string>
         <dia:point val="-191.425,83.8906"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="5.9700000000000006"/>
+        <dia:real val="5.9699999999999998"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -13064,7 +13064,7 @@ for a given type.#</dia:string>
         <dia:point val="31,-39"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="18.610000000000003"/>
+        <dia:real val="18.609999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="2.5"/>
@@ -13374,7 +13374,7 @@ of relationship information.#</dia:string>
         <dia:point val="-162,-31"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="29.390000000000001"/>
+        <dia:real val="29.389999999999997"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="25.700000000000003"/>
@@ -13786,7 +13786,7 @@ switch to Clang when it has 100% feature coverage.
         <dia:point val="-16,86"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="32.839999999999996"/>
+        <dia:real val="32.840000000000003"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="18.000000000000004"/>
@@ -16393,7 +16393,7 @@ Does not use characters which are not valid for C++ identifiers.#</dia:string>
         <dia:point val="-21.1875,116.062"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="32.839999999999996"/>
+        <dia:real val="32.840000000000003"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="6.8000000000000007"/>
@@ -18887,7 +18887,7 @@ Does not use characters which are not valid for C++ identifiers.#</dia:string>
         <dia:point val="68,28"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="7.6650000000000009"/>
+        <dia:real val="7.665"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -19178,7 +19178,7 @@ Does not use characters which are not valid for C++ identifiers.#</dia:string>
         <dia:point val="-71.7497,9"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="12.620000000000001"/>
+        <dia:real val="12.619999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -19359,7 +19359,7 @@ Does not use characters which are not valid for C++ identifiers.#</dia:string>
         <dia:point val="4,-9"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="12.434999999999999"/>
+        <dia:real val="12.435"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3.6000000000000001"/>
@@ -20006,16 +20006,16 @@ These are expected to use quotes and be on the user path.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O155">
       <dia:attribute name="obj_pos">
-        <dia:point val="-55,20"/>
+        <dia:point val="-57,20"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-55.05,19.95;-30.195,28.45"/>
+        <dia:rectangle val="-57.05,19.95;-29.885,28.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-55,20"/>
+        <dia:point val="-57,20"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="24.755000000000003"/>
+        <dia:real val="27.065000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="8.4000000000000004"/>
@@ -20133,16 +20133,16 @@ These are expected to use quotes and be on the user path.#</dia:string>
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#exceptions#</dia:string>
+            <dia:string>#qname_to_relationships#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::list&lt;exception_info&gt;#</dia:string>
+            <dia:string>#std::unordered_map&lt;sml::qname,relationships&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>#All C++ exceptions.#</dia:string>
+            <dia:string>#Maps the qname to its relationships.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -20156,16 +20156,16 @@ These are expected to use quotes and be on the user path.#</dia:string>
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#classes#</dia:string>
+            <dia:string>#exceptions#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::list&lt;class_info&gt;#</dia:string>
+            <dia:string>#std::list&lt;exception_info&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>#All C++ classes.#</dia:string>
+            <dia:string>#All C++ exceptions.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -20340,7 +20340,7 @@ These are expected to use quotes and be on the user path.#</dia:string>
         <dia:point val="-48.0375,7"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-48.7875,6.25;-42.4225,20.8"/>
+        <dia:rectangle val="-48.7875,6.25;-43.2675,20.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -20348,8 +20348,8 @@ These are expected to use quotes and be on the user path.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="-48.0375,7"/>
         <dia:point val="-48.0375,12"/>
-        <dia:point val="-42.6225,12"/>
-        <dia:point val="-42.6225,20"/>
+        <dia:point val="-43.4675,12"/>
+        <dia:point val="-43.4675,20"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -20408,18 +20408,18 @@ These are expected to use quotes and be on the user path.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="-30.245,23.5"/>
+        <dia:point val="-29.935,23.5"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-30.295,22.75;-20.25,26.35"/>
+        <dia:rectangle val="-29.985,22.75;-20.25,26.35"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="-30.245,23.5"/>
-        <dia:point val="-25.9725,23.5"/>
-        <dia:point val="-25.9725,25.5"/>
+        <dia:point val="-29.935,23.5"/>
+        <dia:point val="-25.8175,23.5"/>
+        <dia:point val="-25.8175,25.5"/>
         <dia:point val="-21,25.5"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
@@ -20703,7 +20703,7 @@ These are expected to use quotes and be on the user path.#</dia:string>
         <dia:point val="-107,-39"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="8.5849999999999991"/>
+        <dia:real val="8.5850000000000009"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="15.600000000000003"/>
@@ -21212,7 +21212,7 @@ These are expected to use quotes and be on the user path.#</dia:string>
         <dia:point val="-102.707,-23.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-103.457,-24.15;-99.62,-8.4"/>
+        <dia:rectangle val="-103.457,-24.15;-99.62,-9.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>

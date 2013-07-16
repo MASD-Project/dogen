@@ -485,7 +485,6 @@ visitor_info transformer::to_visitor(const sml::service& s) const {
 }
 
 void transformer::add_class(const sml::qname& qn, const class_info& ci) {
-    context_.classes().push_back(ci);
     context_.qname_to_class_info().insert(std::make_pair(qn, ci));
 }
 

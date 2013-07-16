@@ -35,6 +35,7 @@
 #include "dogen/cpp/types/exception_info.hpp"
 #include "dogen/cpp/types/namespace_info.hpp"
 #include "dogen/cpp/types/registrar_info.hpp"
+#include "dogen/cpp/types/relationships.hpp"
 #include "dogen/cpp/types/string_table_info.hpp"
 #include "dogen/cpp/types/visitor_info.hpp"
 #include "dogen/sml/hash/qname_hash.hpp"
@@ -58,8 +59,8 @@ public:
 public:
     context(
         const std::unordered_map<dogen::sml::qname, dogen::cpp::class_info>& qname_to_class_info,
+        const std::unordered_map<dogen::sml::qname, dogen::cpp::relationships>& qname_to_relationships,
         const std::list<dogen::cpp::exception_info>& exceptions,
-        const std::list<dogen::cpp::class_info>& classes,
         const std::list<dogen::cpp::enum_info>& enumerations,
         const boost::optional<dogen::cpp::registrar_info>& registrar,
         const std::list<dogen::cpp::namespace_info>& namespaces,
@@ -85,6 +86,16 @@ public:
     /**@}*/
 
     /**
+     * @brief Maps the qname to its relationships.
+     */
+    /**@{*/
+    const std::unordered_map<dogen::sml::qname, dogen::cpp::relationships>& qname_to_relationships() const;
+    std::unordered_map<dogen::sml::qname, dogen::cpp::relationships>& qname_to_relationships();
+    void qname_to_relationships(const std::unordered_map<dogen::sml::qname, dogen::cpp::relationships>& v);
+    void qname_to_relationships(const std::unordered_map<dogen::sml::qname, dogen::cpp::relationships>&& v);
+    /**@}*/
+
+    /**
      * @brief All C++ exceptions.
      */
     /**@{*/
@@ -92,16 +103,6 @@ public:
     std::list<dogen::cpp::exception_info>& exceptions();
     void exceptions(const std::list<dogen::cpp::exception_info>& v);
     void exceptions(const std::list<dogen::cpp::exception_info>&& v);
-    /**@}*/
-
-    /**
-     * @brief All C++ classes.
-     */
-    /**@{*/
-    const std::list<dogen::cpp::class_info>& classes() const;
-    std::list<dogen::cpp::class_info>& classes();
-    void classes(const std::list<dogen::cpp::class_info>& v);
-    void classes(const std::list<dogen::cpp::class_info>&& v);
     /**@}*/
 
     /**
@@ -166,8 +167,8 @@ public:
 
 private:
     std::unordered_map<dogen::sml::qname, dogen::cpp::class_info> qname_to_class_info_;
+    std::unordered_map<dogen::sml::qname, dogen::cpp::relationships> qname_to_relationships_;
     std::list<dogen::cpp::exception_info> exceptions_;
-    std::list<dogen::cpp::class_info> classes_;
     std::list<dogen::cpp::enum_info> enumerations_;
     boost::optional<dogen::cpp::registrar_info> registrar_;
     std::list<dogen::cpp::namespace_info> namespaces_;

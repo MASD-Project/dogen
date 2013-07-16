@@ -24,6 +24,7 @@
 #include "dogen/cpp/test_data/exception_info_td.hpp"
 #include "dogen/cpp/test_data/namespace_info_td.hpp"
 #include "dogen/cpp/test_data/registrar_info_td.hpp"
+#include "dogen/cpp/test_data/relationships_td.hpp"
 #include "dogen/cpp/test_data/string_table_info_td.hpp"
 #include "dogen/cpp/test_data/visitor_info_td.hpp"
 #include "dogen/sml/test_data/qname_td.hpp"
@@ -48,6 +49,19 @@ std::unordered_map<dogen::sml::qname, dogen::cpp::class_info> create_std_unorder
     return r;
 }
 
+dogen::cpp::relationships
+create_dogen_cpp_relationships(const unsigned int position) {
+    return dogen::cpp::relationships_generator::create(position);
+}
+
+std::unordered_map<dogen::sml::qname, dogen::cpp::relationships> create_std_unordered_map_dogen_sml_qname_dogen_cpp_relationships(unsigned int position) {
+    std::unordered_map<dogen::sml::qname, dogen::cpp::relationships> r;
+    for (unsigned int i(0); i < 10; ++i) {
+        r.insert(std::make_pair(create_dogen_sml_qname(position + i), create_dogen_cpp_relationships(position + i)));
+    }
+    return r;
+}
+
 dogen::cpp::exception_info
 create_dogen_cpp_exception_info(const unsigned int position) {
     return dogen::cpp::exception_info_generator::create(position);
@@ -57,14 +71,6 @@ std::list<dogen::cpp::exception_info> create_std_list_dogen_cpp_exception_info(u
     std::list<dogen::cpp::exception_info> r;
     for (unsigned int i(0); i < 10; ++i) {
         r.push_back(create_dogen_cpp_exception_info(position + i));
-    }
-    return r;
-}
-
-std::list<dogen::cpp::class_info> create_std_list_dogen_cpp_class_info(unsigned int position) {
-    std::list<dogen::cpp::class_info> r;
-    for (unsigned int i(0); i < 10; ++i) {
-        r.push_back(create_dogen_cpp_class_info(position + i));
     }
     return r;
 }
@@ -143,8 +149,8 @@ context_generator::context_generator() : position_(0) { }
 void context_generator::
 populate(const unsigned int position, result_type& v) {
     v.qname_to_class_info(create_std_unordered_map_dogen_sml_qname_dogen_cpp_class_info(position + 0));
-    v.exceptions(create_std_list_dogen_cpp_exception_info(position + 1));
-    v.classes(create_std_list_dogen_cpp_class_info(position + 2));
+    v.qname_to_relationships(create_std_unordered_map_dogen_sml_qname_dogen_cpp_relationships(position + 1));
+    v.exceptions(create_std_list_dogen_cpp_exception_info(position + 2));
     v.enumerations(create_std_list_dogen_cpp_enum_info(position + 3));
     v.registrar(create_boost_optional_dogen_cpp_registrar_info(position + 4));
     v.namespaces(create_std_list_dogen_cpp_namespace_info(position + 5));

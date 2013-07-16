@@ -25,6 +25,7 @@
 #include "dogen/cpp/io/exception_info_io.hpp"
 #include "dogen/cpp/io/namespace_info_io.hpp"
 #include "dogen/cpp/io/registrar_info_io.hpp"
+#include "dogen/cpp/io/relationships_io.hpp"
 #include "dogen/cpp/io/string_table_info_io.hpp"
 #include "dogen/cpp/io/visitor_info_io.hpp"
 #include "dogen/sml/io/qname_io.hpp"
@@ -49,13 +50,17 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen:
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::cpp::exception_info>& v) {
-    s << "[ ";
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen::sml::qname, dogen::cpp::relationships>& v) {
+    s << "[";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
-        s << *i;
+        s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
+        s << i->first;
+        s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
+        s << i->second;
+        s << " } ]";
     }
-    s << "] ";
+    s << " ] ";
     return s;
 }
 
@@ -63,7 +68,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::cpp::exc
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::cpp::class_info>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::cpp::exception_info>& v) {
     s << "[ ";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -153,8 +158,8 @@ std::ostream& operator<<(std::ostream& s, const context& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::cpp::context\"" << ", "
       << "\"qname_to_class_info\": " << v.qname_to_class_info() << ", "
+      << "\"qname_to_relationships\": " << v.qname_to_relationships() << ", "
       << "\"exceptions\": " << v.exceptions() << ", "
-      << "\"classes\": " << v.classes() << ", "
       << "\"enumerations\": " << v.enumerations() << ", "
       << "\"registrar\": " << v.registrar() << ", "
       << "\"namespaces\": " << v.namespaces() << ", "
