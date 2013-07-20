@@ -23,27 +23,17 @@
 namespace dogen {
 namespace cpp {
 
-context::context(context&& rhs)
-    : qname_to_class_info_(std::move(rhs.qname_to_class_info_)),
-      qname_to_relationships_(std::move(rhs.qname_to_relationships_)),
-      exceptions_(std::move(rhs.exceptions_)),
-      enumerations_(std::move(rhs.enumerations_)),
-      registrar_(std::move(rhs.registrar_)),
-      namespaces_(std::move(rhs.namespaces_)),
-      visitors_(std::move(rhs.visitors_)),
-      string_tables_(std::move(rhs.string_tables_)) { }
-
 context::context(
-    const std::unordered_map<dogen::sml::qname, dogen::cpp::class_info>& qname_to_class_info,
-    const std::unordered_map<dogen::sml::qname, dogen::cpp::relationships>& qname_to_relationships,
-    const std::list<dogen::cpp::exception_info>& exceptions,
-    const std::list<dogen::cpp::enum_info>& enumerations,
-    const boost::optional<dogen::cpp::registrar_info>& registrar,
-    const std::list<dogen::cpp::namespace_info>& namespaces,
-    const std::list<dogen::cpp::visitor_info>& visitors,
-    const std::list<dogen::cpp::string_table_info>& string_tables)
-    : qname_to_class_info_(qname_to_class_info),
-      qname_to_relationships_(qname_to_relationships),
+    const std::unordered_map<dogen::sml::qname, dogen::cpp::class_info>& classes,
+    const std::unordered_map<dogen::sml::qname, dogen::cpp::relationships>& relationships,
+    const std::unordered_map<dogen::sml::qname, dogen::cpp::exception_info>& exceptions,
+    const std::unordered_map<dogen::sml::qname, dogen::cpp::enum_info>& enumerations,
+    const std::unordered_map<dogen::sml::qname, dogen::cpp::registrar_info>& registrar,
+    const std::unordered_map<dogen::sml::qname, dogen::cpp::namespace_info>& namespaces,
+    const std::unordered_map<dogen::sml::qname, dogen::cpp::visitor_info>& visitors,
+    const std::unordered_map<dogen::sml::qname, dogen::cpp::string_table_info>& string_tables)
+    : classes_(classes),
+      relationships_(relationships),
       exceptions_(exceptions),
       enumerations_(enumerations),
       registrar_(registrar),
@@ -53,8 +43,8 @@ context::context(
 
 void context::swap(context& other) noexcept {
     using std::swap;
-    swap(qname_to_class_info_, other.qname_to_class_info_);
-    swap(qname_to_relationships_, other.qname_to_relationships_);
+    swap(classes_, other.classes_);
+    swap(relationships_, other.relationships_);
     swap(exceptions_, other.exceptions_);
     swap(enumerations_, other.enumerations_);
     swap(registrar_, other.registrar_);
@@ -64,8 +54,8 @@ void context::swap(context& other) noexcept {
 }
 
 bool context::operator==(const context& rhs) const {
-    return qname_to_class_info_ == rhs.qname_to_class_info_ &&
-        qname_to_relationships_ == rhs.qname_to_relationships_ &&
+    return classes_ == rhs.classes_ &&
+        relationships_ == rhs.relationships_ &&
         exceptions_ == rhs.exceptions_ &&
         enumerations_ == rhs.enumerations_ &&
         registrar_ == rhs.registrar_ &&
@@ -80,131 +70,131 @@ context& context::operator=(context other) {
     return *this;
 }
 
-const std::unordered_map<dogen::sml::qname, dogen::cpp::class_info>& context::qname_to_class_info() const {
-    return qname_to_class_info_;
+const std::unordered_map<dogen::sml::qname, dogen::cpp::class_info>& context::classes() const {
+    return classes_;
 }
 
-std::unordered_map<dogen::sml::qname, dogen::cpp::class_info>& context::qname_to_class_info() {
-    return qname_to_class_info_;
+std::unordered_map<dogen::sml::qname, dogen::cpp::class_info>& context::classes() {
+    return classes_;
 }
 
-void context::qname_to_class_info(const std::unordered_map<dogen::sml::qname, dogen::cpp::class_info>& v) {
-    qname_to_class_info_ = v;
+void context::classes(const std::unordered_map<dogen::sml::qname, dogen::cpp::class_info>& v) {
+    classes_ = v;
 }
 
-void context::qname_to_class_info(const std::unordered_map<dogen::sml::qname, dogen::cpp::class_info>&& v) {
-    qname_to_class_info_ = std::move(v);
+void context::classes(const std::unordered_map<dogen::sml::qname, dogen::cpp::class_info>&& v) {
+    classes_ = std::move(v);
 }
 
-const std::unordered_map<dogen::sml::qname, dogen::cpp::relationships>& context::qname_to_relationships() const {
-    return qname_to_relationships_;
+const std::unordered_map<dogen::sml::qname, dogen::cpp::relationships>& context::relationships() const {
+    return relationships_;
 }
 
-std::unordered_map<dogen::sml::qname, dogen::cpp::relationships>& context::qname_to_relationships() {
-    return qname_to_relationships_;
+std::unordered_map<dogen::sml::qname, dogen::cpp::relationships>& context::relationships() {
+    return relationships_;
 }
 
-void context::qname_to_relationships(const std::unordered_map<dogen::sml::qname, dogen::cpp::relationships>& v) {
-    qname_to_relationships_ = v;
+void context::relationships(const std::unordered_map<dogen::sml::qname, dogen::cpp::relationships>& v) {
+    relationships_ = v;
 }
 
-void context::qname_to_relationships(const std::unordered_map<dogen::sml::qname, dogen::cpp::relationships>&& v) {
-    qname_to_relationships_ = std::move(v);
+void context::relationships(const std::unordered_map<dogen::sml::qname, dogen::cpp::relationships>&& v) {
+    relationships_ = std::move(v);
 }
 
-const std::list<dogen::cpp::exception_info>& context::exceptions() const {
+const std::unordered_map<dogen::sml::qname, dogen::cpp::exception_info>& context::exceptions() const {
     return exceptions_;
 }
 
-std::list<dogen::cpp::exception_info>& context::exceptions() {
+std::unordered_map<dogen::sml::qname, dogen::cpp::exception_info>& context::exceptions() {
     return exceptions_;
 }
 
-void context::exceptions(const std::list<dogen::cpp::exception_info>& v) {
+void context::exceptions(const std::unordered_map<dogen::sml::qname, dogen::cpp::exception_info>& v) {
     exceptions_ = v;
 }
 
-void context::exceptions(const std::list<dogen::cpp::exception_info>&& v) {
+void context::exceptions(const std::unordered_map<dogen::sml::qname, dogen::cpp::exception_info>&& v) {
     exceptions_ = std::move(v);
 }
 
-const std::list<dogen::cpp::enum_info>& context::enumerations() const {
+const std::unordered_map<dogen::sml::qname, dogen::cpp::enum_info>& context::enumerations() const {
     return enumerations_;
 }
 
-std::list<dogen::cpp::enum_info>& context::enumerations() {
+std::unordered_map<dogen::sml::qname, dogen::cpp::enum_info>& context::enumerations() {
     return enumerations_;
 }
 
-void context::enumerations(const std::list<dogen::cpp::enum_info>& v) {
+void context::enumerations(const std::unordered_map<dogen::sml::qname, dogen::cpp::enum_info>& v) {
     enumerations_ = v;
 }
 
-void context::enumerations(const std::list<dogen::cpp::enum_info>&& v) {
+void context::enumerations(const std::unordered_map<dogen::sml::qname, dogen::cpp::enum_info>&& v) {
     enumerations_ = std::move(v);
 }
 
-const boost::optional<dogen::cpp::registrar_info>& context::registrar() const {
+const std::unordered_map<dogen::sml::qname, dogen::cpp::registrar_info>& context::registrar() const {
     return registrar_;
 }
 
-boost::optional<dogen::cpp::registrar_info>& context::registrar() {
+std::unordered_map<dogen::sml::qname, dogen::cpp::registrar_info>& context::registrar() {
     return registrar_;
 }
 
-void context::registrar(const boost::optional<dogen::cpp::registrar_info>& v) {
+void context::registrar(const std::unordered_map<dogen::sml::qname, dogen::cpp::registrar_info>& v) {
     registrar_ = v;
 }
 
-void context::registrar(const boost::optional<dogen::cpp::registrar_info>&& v) {
+void context::registrar(const std::unordered_map<dogen::sml::qname, dogen::cpp::registrar_info>&& v) {
     registrar_ = std::move(v);
 }
 
-const std::list<dogen::cpp::namespace_info>& context::namespaces() const {
+const std::unordered_map<dogen::sml::qname, dogen::cpp::namespace_info>& context::namespaces() const {
     return namespaces_;
 }
 
-std::list<dogen::cpp::namespace_info>& context::namespaces() {
+std::unordered_map<dogen::sml::qname, dogen::cpp::namespace_info>& context::namespaces() {
     return namespaces_;
 }
 
-void context::namespaces(const std::list<dogen::cpp::namespace_info>& v) {
+void context::namespaces(const std::unordered_map<dogen::sml::qname, dogen::cpp::namespace_info>& v) {
     namespaces_ = v;
 }
 
-void context::namespaces(const std::list<dogen::cpp::namespace_info>&& v) {
+void context::namespaces(const std::unordered_map<dogen::sml::qname, dogen::cpp::namespace_info>&& v) {
     namespaces_ = std::move(v);
 }
 
-const std::list<dogen::cpp::visitor_info>& context::visitors() const {
+const std::unordered_map<dogen::sml::qname, dogen::cpp::visitor_info>& context::visitors() const {
     return visitors_;
 }
 
-std::list<dogen::cpp::visitor_info>& context::visitors() {
+std::unordered_map<dogen::sml::qname, dogen::cpp::visitor_info>& context::visitors() {
     return visitors_;
 }
 
-void context::visitors(const std::list<dogen::cpp::visitor_info>& v) {
+void context::visitors(const std::unordered_map<dogen::sml::qname, dogen::cpp::visitor_info>& v) {
     visitors_ = v;
 }
 
-void context::visitors(const std::list<dogen::cpp::visitor_info>&& v) {
+void context::visitors(const std::unordered_map<dogen::sml::qname, dogen::cpp::visitor_info>&& v) {
     visitors_ = std::move(v);
 }
 
-const std::list<dogen::cpp::string_table_info>& context::string_tables() const {
+const std::unordered_map<dogen::sml::qname, dogen::cpp::string_table_info>& context::string_tables() const {
     return string_tables_;
 }
 
-std::list<dogen::cpp::string_table_info>& context::string_tables() {
+std::unordered_map<dogen::sml::qname, dogen::cpp::string_table_info>& context::string_tables() {
     return string_tables_;
 }
 
-void context::string_tables(const std::list<dogen::cpp::string_table_info>& v) {
+void context::string_tables(const std::unordered_map<dogen::sml::qname, dogen::cpp::string_table_info>& v) {
     string_tables_ = v;
 }
 
-void context::string_tables(const std::list<dogen::cpp::string_table_info>&& v) {
+void context::string_tables(const std::unordered_map<dogen::sml::qname, dogen::cpp::string_table_info>&& v) {
     string_tables_ = std::move(v);
 }
 

@@ -24,6 +24,7 @@
 #include "dogen/sml/types/abstract_object.hpp"
 #include "dogen/sml/io/qname_io.hpp"
 #include "dogen/cpp/types/workflow_failure.hpp"
+#include "dogen/cpp/io/class_types_io.hpp"
 #include "dogen/cpp/types/formatters/factory.hpp"
 #include "dogen/cpp/types/formatters/file_formatter.hpp"
 #include "dogen/cpp/types/formatters/src_cmakelists.hpp"
@@ -43,9 +44,12 @@ const std::string registrar_name("registrar");
 const std::string cmakelists_file_name("CMakeLists.txt");
 const std::string odb_options_file_name("options.odb");
 const std::string domain_facet_must_be_enabled("Domain facet must be enabled");
-const std::string could_not_find_object("Could not find object: ");
+const std::string missing_object("Could not find object: ");
 const std::string integrated_io_incompatible_with_io_facet(
     "Integrated IO cannot be used with the IO facet");
+const std::string missing_relationship(
+    "Could not find relationship for qname: ");
+const std::string unsupported_class_type("Class type is unsupported: ");
 
 }
 
@@ -116,8 +120,8 @@ void workflow::transform_abstract_object(const sml::abstract_object& ao) {
 
             const auto j(model_.objects().find(qn));
             if (j == model_.objects().end()) {
-                BOOST_LOG_SEV(lg, error) << could_not_find_object << qn;
-                BOOST_THROW_EXCEPTION(workflow_failure(could_not_find_object +
+                BOOST_LOG_SEV(lg, error) << missing_object << qn;
+                BOOST_THROW_EXCEPTION(workflow_failure(missing_object +
                         boost::lexical_cast<std::string>(qn)));
             }
 
@@ -174,11 +178,40 @@ void workflow::populate_context_activity() {
     BOOST_LOG_SEV(lg, debug) << "Finished populate context sub-workflow";
 }
 
-workflow::result_type workflow::generate_file_infos_activity() const {
+workflow::result_type
+workflow::generate_file_infos_for_classes_activity() const {
     result_type r;
     for (const auto& pair : context_.qname_to_class_info()) {
+        const auto& qn(pair.first);
+        const auto i(context_.qname_to_relationships().find(qn));
+        if (i == context_.qname_to_relationships().end()) {
+            BOOST_LOG_SEV(lg, error) << missing_relationship << qn;
+            BOOST_THROW_EXCEPTION(workflow_failure(missing_relationship +
+                    boost::lexical_cast<std::string>(qn)));
+        }
+
+        const auto& rel(i->second);
         const auto& ci(pair.second);
-        for (const auto& cd : descriptor_factory_.create(p.name(), ct, pt)) {
+        content_types ct;
+        // FIXME: big hack
+        switch(ci.class_type()) {
+        case class_types::user_defined:
+            ct = content_types::value_object;
+            break;
+        case class_types::unversioned_key:
+            ct = content_types::unversioned_key;
+            break;
+        case class_types::versioned_key:
+            ct = content_types::versioned_key;
+            break;
+        default:
+            BOOST_LOG_SEV(lg, error) << unsupported_class_type
+                                     << ci.class_type();
+            BOOST_THROW_EXCEPTION(workflow_failure(unsupported_class_type +
+                    boost::lexical_cast<std::string>(ci.class_type())));
+        };
+
+        for (const auto& cd : descriptor_factory_.create(qn, ct)) {
             const auto il(includer_.includes_for_object(cd, rel));
             auto fi(file_info_factory_.create(ci, cd, il));
 
@@ -188,83 +221,24 @@ workflow::result_type workflow::generate_file_infos_activity() const {
             // declarations, ignore those.
             using sml::generation_types;
             if (cd.aspect_type() != aspect_types::forward_decls &&
-                p.generation_type() == generation_types::partial_generation) {
-                fi.aspect_type(aspect_types::null_aspect);
+                ci.generation_type() == generation_types::partial_generation) {
+                fi.descriptor().aspect_type(aspect_types::null_aspect);
             }
             r.insert(format(fi));
 
-            const auto at(fi.aspect_type());
+            const auto at(fi.descriptor().aspect_type());
             if (at == aspect_types::main || at == aspect_types::null_aspect)
                 register_header(fi);
         }
     }
 
     BOOST_LOG_SEV(lg, debug) << "Finished generate classes activity";
-
 }
 
-/*
-
-workflow::result_type workflow::generate_classes_activity() const {
-    BOOST_LOG_SEV(lg, debug) << "Started generate classes activity.";
-
+workflow::result_type
+workflow::generate_file_infos_for_namespaces_activity() const {
     workflow::result_type r;
-    std::unordered_map<sml::qname, class_info> infos;
-    for (const auto& pair : model_.objects()) {
-        const auto ao(pair.second);
-
-        if (ao.generation_type() == sml::generation_types::no_generation)
-            continue;
-
-        const auto ci(generate_class_info_recursive(infos, p.name()));
-        const auto rel(extractor_.extract_dependency_graph(p));
-        for (const auto& cd : descriptor_factory_.create(p.name(), ct, pt)) {
-            const auto il(includer_.includes_for_object(cd, rel));
-            auto fi(file_info_factory_.create(ci, cd, il));
-
-            // we want to make sure we do not actually generate code
-            // for partial generation, so override the output of the
-            // factory. however, as we still want to create forward
-            // declarations, ignore those.
-            using sml::generation_types;
-            if (cd.aspect_type() != aspect_types::forward_decls &&
-                p.generation_type() == generation_types::partial_generation) {
-                fi.aspect_type(aspect_types::null_aspect);
-            }
-            r.insert(format(fi));
-
-            const auto at(fi.aspect_type());
-            if (at == aspect_types::main || at == aspect_types::null_aspect)
-                register_header(fi);
-        }
-    }
-
-    BOOST_LOG_SEV(lg, debug) << "Finished generate classes activity";
-    return r;
-}
-
-workflow::result_type workflow::generate_namespaces_activity() const {
-    BOOST_LOG_SEV(lg, debug) << "Started generate namespaces activity.";
-
-    workflow::result_type r;
-    if (!model_.documentation().empty()) {
-        const auto ni(transformer_.transform_model_into_namespace());
-        for (const auto& cd : descriptor_factory_.create(model_)) {
-            const auto fi(file_info_factory_.create(ni, cd));
-            r.insert(format(fi));
-
-            if (fi.aspect_type() == aspect_types::namespace_doc)
-                register_header(fi);
-        }
-    }
-
-    for (const auto& pair : model_.modules()) {
-        const auto& p(pair.second);
-
-        if (p.documentation().empty())
-            continue;
-
-        const auto ni(transformer_.transform(p));
+    for (const auto& m : context_.namespaces()) {
         for (const auto& cd : descriptor_factory_.create(p.name())) {
             const auto fi(file_info_factory_.create(ni, cd));
             r.insert(format(fi));
@@ -278,6 +252,7 @@ workflow::result_type workflow::generate_namespaces_activity() const {
     return r;
 }
 
+/*
 workflow::result_type workflow::generate_registrars_activity() const {
     BOOST_LOG_SEV(lg, debug) << "Started generate registrars activity.";
 

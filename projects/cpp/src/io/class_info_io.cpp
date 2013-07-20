@@ -25,6 +25,7 @@
 #include "dogen/cpp/io/class_types_io.hpp"
 #include "dogen/cpp/io/parent_info_io.hpp"
 #include "dogen/cpp/io/property_info_io.hpp"
+#include "dogen/sml/io/generation_types_io.hpp"
 
 
 inline std::string tidy_up_string(std::string s) {
@@ -134,7 +135,8 @@ std::ostream& operator<<(std::ostream& s, const class_info& v) {
       << "\"is_visitable\": " << v.is_visitable() << ", "
       << "\"is_immutable\": " << v.is_immutable() << ", "
       << "\"is_original_parent_visitable\": " << v.is_original_parent_visitable() << ", "
-      << "\"class_type\": " << v.class_type()
+      << "\"class_type\": " << v.class_type() << ", "
+      << "\"generation_type\": " << v.generation_type()
       << " }";
     return(s);
 }

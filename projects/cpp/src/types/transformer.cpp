@@ -75,6 +75,7 @@ const std::string gregorian_date_type("boost::gregorian::date");
 const std::string ptime_type("boost::posix_time::ptime");
 const std::string time_duration_type("boost::posix_time::time_duration");
 const std::string pair_type("std::pair");
+const std::string registrar_name("registrar");
 
 const std::string int8_t_type("std::int8_t");
 const std::string int16_t_type("std::int16_t");
@@ -396,14 +397,15 @@ class_info transformer::to_class_info(const sml::abstract_object& ao) const {
     r.is_immutable(ao.is_immutable());
     r.is_visitable(ao.is_visitable());
     r.is_parent(ao.is_parent());
+    r.generation_type(ao.generation_type());
 
     const auto& isp(ao.implementation_specific_parameters());
     r.implementation_specific_parameters(isp);
 
     const auto pn(ao.parent_name());
     if (pn) {
-        const auto i(context_.qname_to_class_info().find(*ao.parent_name()));
-        if (i == context_.qname_to_class_info().end()) {
+        const auto i(context_.classes().find(*ao.parent_name()));
+        if (i == context_.classes().end()) {
             const auto& sn(ao.parent_name()->simple_name());
             BOOST_LOG_SEV(lg, error) << parent_class_info_not_found << sn;
             BOOST_THROW_EXCEPTION(transformation_error(
@@ -421,8 +423,8 @@ class_info transformer::to_class_info(const sml::abstract_object& ao) const {
 
     const auto opn(ao.original_parent_name());
     if (opn) {
-        const auto i(context_.qname_to_class_info().find(*opn));
-        if (i == context_.qname_to_class_info().end()) {
+        const auto i(context_.classes().find(*opn));
+        if (i == context_.classes().end()) {
             const auto& sn(ao.parent_name()->simple_name());
             BOOST_LOG_SEV(lg, error) << parent_class_info_not_found << sn;
             BOOST_THROW_EXCEPTION(transformation_error(
@@ -485,7 +487,7 @@ visitor_info transformer::to_visitor(const sml::service& s) const {
 }
 
 void transformer::add_class(const sml::qname& qn, const class_info& ci) {
-    context_.qname_to_class_info().insert(std::make_pair(qn, ci));
+    context_.classes().insert(std::make_pair(qn, ci));
 }
 
 void transformer::visit(const dogen::sml::service& s) {
@@ -496,7 +498,7 @@ void transformer::visit(const dogen::sml::service& s) {
         add_class(s.name(), to_class_info(s));
         break;
     case sml::service_types::visitor:
-        context_.visitors().push_back(to_visitor(s));
+        context_.visitors().insert(std::make_pair(s.name(), to_visitor(s)));
     default:
         BOOST_LOG_SEV(lg, error) << unsupported_service_type << s.type();
         BOOST_THROW_EXCEPTION(transformation_error(unsupported_service_type +
@@ -536,7 +538,8 @@ void transformer::visit(const dogen::sml::enumeration& e) {
     for (const auto& en : e.enumerators())
         ei.enumerators().push_back(to_enumerator_info(en));
 
-    context_.enumerations().push_back(ei);
+    context_.enumerations().insert(std::make_pair(e.name(), ei));
+
     BOOST_LOG_SEV(lg, debug) << "Transformed enumeration: " << e.name();
 }
 
@@ -544,9 +547,11 @@ void transformer::visit(const dogen::sml::value_object& vo) {
     BOOST_LOG_SEV(lg, debug) << "Transforming value object: " << vo.name();
 
     switch(vo.type()) {
-    case sml::value_object_types::exception:
-        context_.exceptions().push_back(to_exception_info(vo));
+    case sml::value_object_types::exception: {
+        const auto e(to_exception_info(vo));
+        context_.exceptions().insert(std::make_pair(vo.name(), e));
         break;
+    }
     case sml::value_object_types::plain:
     case sml::value_object_types::versioned_key:
     case sml::value_object_types::unversioned_key:
@@ -591,7 +596,8 @@ void transformer::to_namespace_info(const sml::module& m) {
     ni.documentation(m.documentation());
     ni.namespaces(to_namespace_list(m.name()));
 
-    context_.namespaces().push_back(ni);
+    context_.namespaces().insert(std::make_pair(m.name(), ni));
+
     BOOST_LOG_SEV(lg, debug) << "Transformed module: " << m.name();
 }
 
@@ -603,8 +609,9 @@ void transformer::model_to_namespace_info() {
     ni.documentation(model_.documentation());
     ni.namespaces(to_namespace_list(model_.name()));
 
+    context_.namespaces().insert(std::make_pair(model_.name(), ni));
+
     BOOST_LOG_SEV(lg, debug) << "Transformed model into namespace: " << n;
-    context_.namespaces().push_back(ni);
 }
 
 void transformer::model_to_registrar_info() {
@@ -623,7 +630,12 @@ void transformer::model_to_registrar_info() {
         ri.leaves().push_back(to_qualified_name(l));
     ri.leaves().sort();
 
-    context_.registrar(ri);
+    sml::qname qn;
+    qn.simple_name(registrar_name);
+    qn.model_name(model_.name().model_name());
+    qn.external_module_path(model_.name().external_module_path());
+    context_.registrar().insert(std::make_pair(qn, ri));
+
     BOOST_LOG_SEV(lg, debug) << "Transformed model into registrar: " << n;
 }
 

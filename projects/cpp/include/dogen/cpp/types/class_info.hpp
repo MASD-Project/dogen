@@ -34,6 +34,7 @@
 #include "dogen/cpp/types/class_types.hpp"
 #include "dogen/cpp/types/parent_info.hpp"
 #include "dogen/cpp/types/property_info.hpp"
+#include "dogen/sml/types/generation_types.hpp"
 
 namespace dogen {
 namespace cpp {
@@ -71,7 +72,8 @@ public:
         const bool is_visitable,
         const bool is_immutable,
         const bool is_original_parent_visitable,
-        const dogen::cpp::class_types& class_type);
+        const dogen::cpp::class_types& class_type,
+        const dogen::sml::generation_types& generation_type);
 
 private:
     template<typename Archive>
@@ -266,6 +268,14 @@ public:
     void class_type(const dogen::cpp::class_types& v);
     /**@}*/
 
+    /**
+     * @brief Type of code generation to perform.
+     */
+    /**@{*/
+    dogen::sml::generation_types generation_type() const;
+    void generation_type(const dogen::sml::generation_types& v);
+    /**@}*/
+
 public:
     bool operator==(const class_info& rhs) const;
     bool operator!=(const class_info& rhs) const {
@@ -297,6 +307,7 @@ private:
     bool is_immutable_;
     bool is_original_parent_visitable_;
     dogen::cpp::class_types class_type_;
+    dogen::sml::generation_types generation_type_;
 };
 
 } }

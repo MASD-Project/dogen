@@ -13780,7 +13780,7 @@ switch to Clang when it has 100% feature coverage.
         <dia:point val="-16,86"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-16.05,85.95;16.89,104.05"/>
+        <dia:rectangle val="-16.05,85.95;16.89,104.85"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-16,86"/>
@@ -13789,7 +13789,7 @@ switch to Clang when it has 100% feature coverage.
         <dia:real val="32.840000000000003"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="18.000000000000004"/>
+        <dia:real val="18.800000000000004"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#class_info#</dia:string>
@@ -14339,6 +14339,29 @@ descend from it. Names are in identifiable name format.#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
             <dia:string>#Type of the class.#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#generation_type#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>#sml::generation_types#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>#Type of code generation to perform.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -16670,16 +16693,16 @@ Does not use characters which are not valid for C++ identifiers.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="-16,104"/>
+        <dia:point val="-16,104.8"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-16.75,103.25;-4.5675,116.813"/>
+        <dia:rectangle val="-16.75,104.05;-4.5675,116.813"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="-16,104"/>
+        <dia:point val="-16,104.8"/>
         <dia:point val="-16,109.063"/>
         <dia:point val="-4.7675,109.063"/>
         <dia:point val="-4.7675,116.013"/>
@@ -20009,13 +20032,13 @@ These are expected to use quotes and be on the user path.#</dia:string>
         <dia:point val="-57,20"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-57.05,19.95;-29.885,28.45"/>
+        <dia:rectangle val="-57.05,19.95;-31.81,28.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-57,20"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="27.065000000000001"/>
+        <dia:real val="25.140000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="8.4000000000000004"/>
@@ -20110,7 +20133,7 @@ These are expected to use quotes and be on the user path.#</dia:string>
       <dia:attribute name="attributes">
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#qname_to_class_info#</dia:string>
+            <dia:string>#classes#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#std::unordered_map&lt;sml::qname,class_info&gt;#</dia:string>
@@ -20119,7 +20142,7 @@ These are expected to use quotes and be on the user path.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>#Maps the processed class info to the source's qname.#</dia:string>
+            <dia:string>#All the C++ classes, by qname.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -20133,7 +20156,7 @@ These are expected to use quotes and be on the user path.#</dia:string>
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#qname_to_relationships#</dia:string>
+            <dia:string>#relationships#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#std::unordered_map&lt;sml::qname,relationships&gt;#</dia:string>
@@ -20142,7 +20165,7 @@ These are expected to use quotes and be on the user path.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>#Maps the qname to its relationships.#</dia:string>
+            <dia:string>#All the relationships, by qname.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -20159,7 +20182,7 @@ These are expected to use quotes and be on the user path.#</dia:string>
             <dia:string>#exceptions#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::list&lt;exception_info&gt;#</dia:string>
+            <dia:string>#std::unordered_map&lt;sml::qname,exception_info&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -20182,7 +20205,7 @@ These are expected to use quotes and be on the user path.#</dia:string>
             <dia:string>#enumerations#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::list&lt;enum_info&gt;#</dia:string>
+            <dia:string>#std::unordered_map&lt;sml::qname,enum_info&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -20205,7 +20228,7 @@ These are expected to use quotes and be on the user path.#</dia:string>
             <dia:string>#registrar#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#boost::optional&lt;registrar_info&gt;#</dia:string>
+            <dia:string>#std::unordered_map&lt;sml::qname,registrar_info&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -20228,7 +20251,7 @@ These are expected to use quotes and be on the user path.#</dia:string>
             <dia:string>#namespaces#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::list&lt;namespace_info&gt;#</dia:string>
+            <dia:string>#std::unordered_map&lt;sml::qname,namespace_info&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -20251,7 +20274,7 @@ These are expected to use quotes and be on the user path.#</dia:string>
             <dia:string>#visitors#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::list&lt;visitor_info&gt;#</dia:string>
+            <dia:string>#std::unordered_map&lt;sml::qname,visitor_info&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -20274,7 +20297,7 @@ These are expected to use quotes and be on the user path.#</dia:string>
             <dia:string>#string_tables#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::list&lt;string_table_info&gt;#</dia:string>
+            <dia:string>#std::unordered_map&lt;sml::qname,string_table_info&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -20340,7 +20363,7 @@ These are expected to use quotes and be on the user path.#</dia:string>
         <dia:point val="-48.0375,7"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-48.7875,6.25;-43.2675,20.8"/>
+        <dia:rectangle val="-48.7875,6.25;-44.23,20.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -20348,8 +20371,8 @@ These are expected to use quotes and be on the user path.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="-48.0375,7"/>
         <dia:point val="-48.0375,12"/>
-        <dia:point val="-43.4675,12"/>
-        <dia:point val="-43.4675,20"/>
+        <dia:point val="-44.43,12"/>
+        <dia:point val="-44.43,20"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -20408,18 +20431,18 @@ These are expected to use quotes and be on the user path.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="-29.935,23.5"/>
+        <dia:point val="-31.86,23.5"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-29.985,22.75;-20.25,26.35"/>
+        <dia:rectangle val="-31.91,22.75;-20.25,26.35"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="-29.935,23.5"/>
-        <dia:point val="-25.8175,23.5"/>
-        <dia:point val="-25.8175,25.5"/>
+        <dia:point val="-31.86,23.5"/>
+        <dia:point val="-26.78,23.5"/>
+        <dia:point val="-26.78,25.5"/>
         <dia:point val="-21,25.5"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
@@ -20659,16 +20682,16 @@ These are expected to use quotes and be on the user path.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="16.84,104"/>
+        <dia:point val="16.84,104.8"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="16.09,103.25;39.53,116.8"/>
+        <dia:rectangle val="16.09,104.05;39.53,116.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="16.84,104"/>
+        <dia:point val="16.84,104.8"/>
         <dia:point val="16.84,109"/>
         <dia:point val="39.33,109"/>
         <dia:point val="39.33,116"/>

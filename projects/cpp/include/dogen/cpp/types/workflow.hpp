@@ -108,9 +108,14 @@ private:
     void populate_context_activity();
 
     /**
-     * @brief Composite activity that generates all C++ files.
+     * @brief Generate C++ files for classes.
      */
-    result_type generate_file_infos_activity() const;
+    result_type generate_file_infos_for_classes_activity() const;
+
+    /**
+     * @brief Generate C++ files for classes.
+     */
+    result_type generate_file_infos_for_namespaces_activity() const;
 
     /**
      * @brief Create the cmakelists makefiles.

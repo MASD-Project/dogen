@@ -23,6 +23,7 @@
 #include "dogen/cpp/test_data/class_types_td.hpp"
 #include "dogen/cpp/test_data/parent_info_td.hpp"
 #include "dogen/cpp/test_data/property_info_td.hpp"
+#include "dogen/sml/test_data/generation_types_td.hpp"
 
 namespace {
 
@@ -91,6 +92,11 @@ create_dogen_cpp_class_types(const unsigned int position) {
     return dogen::cpp::class_types_generator::create(position);
 }
 
+dogen::sml::generation_types
+create_dogen_sml_generation_types(const unsigned int position) {
+    return dogen::sml::generation_types_generator::create(position);
+}
+
 }
 
 namespace dogen {
@@ -120,6 +126,7 @@ populate(const unsigned int position, result_type& v) {
     v.is_immutable(create_bool(position + 17));
     v.is_original_parent_visitable(create_bool(position + 18));
     v.class_type(create_dogen_cpp_class_types(position + 19));
+    v.generation_type(create_dogen_sml_generation_types(position + 20));
 }
 
 class_info_generator::result_type

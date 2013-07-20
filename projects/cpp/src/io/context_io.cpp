@@ -68,13 +68,17 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen:
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::cpp::exception_info>& v) {
-    s << "[ ";
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen::sml::qname, dogen::cpp::exception_info>& v) {
+    s << "[";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
-        s << *i;
+        s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
+        s << i->first;
+        s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
+        s << i->second;
+        s << " } ]";
     }
-    s << "] ";
+    s << " ] ";
     return s;
 }
 
@@ -82,28 +86,17 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::cpp::exc
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::cpp::enum_info>& v) {
-    s << "[ ";
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen::sml::qname, dogen::cpp::enum_info>& v) {
+    s << "[";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
-        s << *i;
+        s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
+        s << i->first;
+        s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
+        s << i->second;
+        s << " } ]";
     }
-    s << "] ";
-    return s;
-}
-
-}
-
-namespace boost {
-
-inline std::ostream& operator<<(std::ostream& s, const boost::optional<dogen::cpp::registrar_info>& v) {
-    s << "{ " << "\"__type__\": " << "\"boost::optional\"" << ", ";
-
-    if (v)
-        s << "\"data\": " << *v;
-    else
-        s << "\"data\": ""\"<empty>\"";
-    s << " }";
+    s << " ] ";
     return s;
 }
 
@@ -111,13 +104,17 @@ inline std::ostream& operator<<(std::ostream& s, const boost::optional<dogen::cp
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::cpp::namespace_info>& v) {
-    s << "[ ";
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen::sml::qname, dogen::cpp::registrar_info>& v) {
+    s << "[";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
-        s << *i;
+        s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
+        s << i->first;
+        s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
+        s << i->second;
+        s << " } ]";
     }
-    s << "] ";
+    s << " ] ";
     return s;
 }
 
@@ -125,13 +122,17 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::cpp::nam
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::cpp::visitor_info>& v) {
-    s << "[ ";
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen::sml::qname, dogen::cpp::namespace_info>& v) {
+    s << "[";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
-        s << *i;
+        s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
+        s << i->first;
+        s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
+        s << i->second;
+        s << " } ]";
     }
-    s << "] ";
+    s << " ] ";
     return s;
 }
 
@@ -139,13 +140,35 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::cpp::vis
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::cpp::string_table_info>& v) {
-    s << "[ ";
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen::sml::qname, dogen::cpp::visitor_info>& v) {
+    s << "[";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
-        s << *i;
+        s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
+        s << i->first;
+        s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
+        s << i->second;
+        s << " } ]";
     }
-    s << "] ";
+    s << " ] ";
+    return s;
+}
+
+}
+
+namespace std {
+
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen::sml::qname, dogen::cpp::string_table_info>& v) {
+    s << "[";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
+        s << i->first;
+        s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
+        s << i->second;
+        s << " } ]";
+    }
+    s << " ] ";
     return s;
 }
 
@@ -157,8 +180,8 @@ namespace cpp {
 std::ostream& operator<<(std::ostream& s, const context& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::cpp::context\"" << ", "
-      << "\"qname_to_class_info\": " << v.qname_to_class_info() << ", "
-      << "\"qname_to_relationships\": " << v.qname_to_relationships() << ", "
+      << "\"classes\": " << v.classes() << ", "
+      << "\"relationships\": " << v.relationships() << ", "
       << "\"exceptions\": " << v.exceptions() << ", "
       << "\"enumerations\": " << v.enumerations() << ", "
       << "\"registrar\": " << v.registrar() << ", "
