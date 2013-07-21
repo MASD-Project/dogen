@@ -321,6 +321,7 @@ build_multi_type_model(const unsigned int n, const unsigned int type_n,
     std::list<std::string> pp;
     for (unsigned int i(0); i < mod_n; ++i) {
         qname qn;
+        qn.model_name(r.name().model_name());
         qn.simple_name(module_name(i));
         qn.module_path(pp);
 

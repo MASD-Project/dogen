@@ -93,7 +93,7 @@ public:
 
     /**
      * @brief Builds a model with a name derived from n, containing a
-     * single type with a name also deriving from n, inside mod_n module.
+     * single type with a name also deriving from n, inside mod_n modules.
      */
     static model build_single_type_model_in_module(const unsigned int n = 0,
         const object_types ot = object_types::value_object,
