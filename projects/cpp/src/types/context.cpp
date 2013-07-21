@@ -28,7 +28,7 @@ context::context(
     const std::unordered_map<dogen::sml::qname, dogen::cpp::relationships>& relationships,
     const std::unordered_map<dogen::sml::qname, dogen::cpp::exception_info>& exceptions,
     const std::unordered_map<dogen::sml::qname, dogen::cpp::enum_info>& enumerations,
-    const std::unordered_map<dogen::sml::qname, dogen::cpp::registrar_info>& registrar,
+    const std::unordered_map<dogen::sml::qname, dogen::cpp::registrar_info>& registrars,
     const std::unordered_map<dogen::sml::qname, dogen::cpp::namespace_info>& namespaces,
     const std::unordered_map<dogen::sml::qname, dogen::cpp::visitor_info>& visitors,
     const std::unordered_map<dogen::sml::qname, dogen::cpp::string_table_info>& string_tables)
@@ -36,7 +36,7 @@ context::context(
       relationships_(relationships),
       exceptions_(exceptions),
       enumerations_(enumerations),
-      registrar_(registrar),
+      registrars_(registrars),
       namespaces_(namespaces),
       visitors_(visitors),
       string_tables_(string_tables) { }
@@ -47,7 +47,7 @@ void context::swap(context& other) noexcept {
     swap(relationships_, other.relationships_);
     swap(exceptions_, other.exceptions_);
     swap(enumerations_, other.enumerations_);
-    swap(registrar_, other.registrar_);
+    swap(registrars_, other.registrars_);
     swap(namespaces_, other.namespaces_);
     swap(visitors_, other.visitors_);
     swap(string_tables_, other.string_tables_);
@@ -58,7 +58,7 @@ bool context::operator==(const context& rhs) const {
         relationships_ == rhs.relationships_ &&
         exceptions_ == rhs.exceptions_ &&
         enumerations_ == rhs.enumerations_ &&
-        registrar_ == rhs.registrar_ &&
+        registrars_ == rhs.registrars_ &&
         namespaces_ == rhs.namespaces_ &&
         visitors_ == rhs.visitors_ &&
         string_tables_ == rhs.string_tables_;
@@ -134,20 +134,20 @@ void context::enumerations(const std::unordered_map<dogen::sml::qname, dogen::cp
     enumerations_ = std::move(v);
 }
 
-const std::unordered_map<dogen::sml::qname, dogen::cpp::registrar_info>& context::registrar() const {
-    return registrar_;
+const std::unordered_map<dogen::sml::qname, dogen::cpp::registrar_info>& context::registrars() const {
+    return registrars_;
 }
 
-std::unordered_map<dogen::sml::qname, dogen::cpp::registrar_info>& context::registrar() {
-    return registrar_;
+std::unordered_map<dogen::sml::qname, dogen::cpp::registrar_info>& context::registrars() {
+    return registrars_;
 }
 
-void context::registrar(const std::unordered_map<dogen::sml::qname, dogen::cpp::registrar_info>& v) {
-    registrar_ = v;
+void context::registrars(const std::unordered_map<dogen::sml::qname, dogen::cpp::registrar_info>& v) {
+    registrars_ = v;
 }
 
-void context::registrar(const std::unordered_map<dogen::sml::qname, dogen::cpp::registrar_info>&& v) {
-    registrar_ = std::move(v);
+void context::registrars(const std::unordered_map<dogen::sml::qname, dogen::cpp::registrar_info>&& v) {
+    registrars_ = std::move(v);
 }
 
 const std::unordered_map<dogen::sml::qname, dogen::cpp::namespace_info>& context::namespaces() const {

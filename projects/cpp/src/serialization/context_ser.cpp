@@ -55,7 +55,7 @@ void save(Archive& ar,
     ar << make_nvp("relationships", v.relationships_);
     ar << make_nvp("exceptions", v.exceptions_);
     ar << make_nvp("enumerations", v.enumerations_);
-    ar << make_nvp("registrar", v.registrar_);
+    ar << make_nvp("registrars", v.registrars_);
     ar << make_nvp("namespaces", v.namespaces_);
     ar << make_nvp("visitors", v.visitors_);
     ar << make_nvp("string_tables", v.string_tables_);
@@ -69,7 +69,7 @@ void load(Archive& ar,
     ar >> make_nvp("relationships", v.relationships_);
     ar >> make_nvp("exceptions", v.exceptions_);
     ar >> make_nvp("enumerations", v.enumerations_);
-    ar >> make_nvp("registrar", v.registrar_);
+    ar >> make_nvp("registrars", v.registrars_);
     ar >> make_nvp("namespaces", v.namespaces_);
     ar >> make_nvp("visitors", v.visitors_);
     ar >> make_nvp("string_tables", v.string_tables_);

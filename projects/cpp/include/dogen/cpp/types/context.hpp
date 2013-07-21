@@ -58,7 +58,7 @@ public:
         const std::unordered_map<dogen::sml::qname, dogen::cpp::relationships>& relationships,
         const std::unordered_map<dogen::sml::qname, dogen::cpp::exception_info>& exceptions,
         const std::unordered_map<dogen::sml::qname, dogen::cpp::enum_info>& enumerations,
-        const std::unordered_map<dogen::sml::qname, dogen::cpp::registrar_info>& registrar,
+        const std::unordered_map<dogen::sml::qname, dogen::cpp::registrar_info>& registrars,
         const std::unordered_map<dogen::sml::qname, dogen::cpp::namespace_info>& namespaces,
         const std::unordered_map<dogen::sml::qname, dogen::cpp::visitor_info>& visitors,
         const std::unordered_map<dogen::sml::qname, dogen::cpp::string_table_info>& string_tables);
@@ -115,10 +115,10 @@ public:
      * @brief The C++ registrar, if available.
      */
     /**@{*/
-    const std::unordered_map<dogen::sml::qname, dogen::cpp::registrar_info>& registrar() const;
-    std::unordered_map<dogen::sml::qname, dogen::cpp::registrar_info>& registrar();
-    void registrar(const std::unordered_map<dogen::sml::qname, dogen::cpp::registrar_info>& v);
-    void registrar(const std::unordered_map<dogen::sml::qname, dogen::cpp::registrar_info>&& v);
+    const std::unordered_map<dogen::sml::qname, dogen::cpp::registrar_info>& registrars() const;
+    std::unordered_map<dogen::sml::qname, dogen::cpp::registrar_info>& registrars();
+    void registrars(const std::unordered_map<dogen::sml::qname, dogen::cpp::registrar_info>& v);
+    void registrars(const std::unordered_map<dogen::sml::qname, dogen::cpp::registrar_info>&& v);
     /**@}*/
 
     /**
@@ -166,7 +166,7 @@ private:
     std::unordered_map<dogen::sml::qname, dogen::cpp::relationships> relationships_;
     std::unordered_map<dogen::sml::qname, dogen::cpp::exception_info> exceptions_;
     std::unordered_map<dogen::sml::qname, dogen::cpp::enum_info> enumerations_;
-    std::unordered_map<dogen::sml::qname, dogen::cpp::registrar_info> registrar_;
+    std::unordered_map<dogen::sml::qname, dogen::cpp::registrar_info> registrars_;
     std::unordered_map<dogen::sml::qname, dogen::cpp::namespace_info> namespaces_;
     std::unordered_map<dogen::sml::qname, dogen::cpp::visitor_info> visitors_;
     std::unordered_map<dogen::sml::qname, dogen::cpp::string_table_info> string_tables_;

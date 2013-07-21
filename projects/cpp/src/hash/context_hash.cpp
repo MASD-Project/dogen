@@ -122,7 +122,7 @@ std::size_t context_hasher::hash(const context&v) {
     combine(seed, hash_std_unordered_map_dogen_sml_qname_dogen_cpp_relationships(v.relationships()));
     combine(seed, hash_std_unordered_map_dogen_sml_qname_dogen_cpp_exception_info(v.exceptions()));
     combine(seed, hash_std_unordered_map_dogen_sml_qname_dogen_cpp_enum_info(v.enumerations()));
-    combine(seed, hash_std_unordered_map_dogen_sml_qname_dogen_cpp_registrar_info(v.registrar()));
+    combine(seed, hash_std_unordered_map_dogen_sml_qname_dogen_cpp_registrar_info(v.registrars()));
     combine(seed, hash_std_unordered_map_dogen_sml_qname_dogen_cpp_namespace_info(v.namespaces()));
     combine(seed, hash_std_unordered_map_dogen_sml_qname_dogen_cpp_visitor_info(v.visitors()));
     combine(seed, hash_std_unordered_map_dogen_sml_qname_dogen_cpp_string_table_info(v.string_tables()));

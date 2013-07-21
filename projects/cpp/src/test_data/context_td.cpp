@@ -153,7 +153,7 @@ populate(const unsigned int position, result_type& v) {
     v.relationships(create_std_unordered_map_dogen_sml_qname_dogen_cpp_relationships(position + 1));
     v.exceptions(create_std_unordered_map_dogen_sml_qname_dogen_cpp_exception_info(position + 2));
     v.enumerations(create_std_unordered_map_dogen_sml_qname_dogen_cpp_enum_info(position + 3));
-    v.registrar(create_std_unordered_map_dogen_sml_qname_dogen_cpp_registrar_info(position + 4));
+    v.registrars(create_std_unordered_map_dogen_sml_qname_dogen_cpp_registrar_info(position + 4));
     v.namespaces(create_std_unordered_map_dogen_sml_qname_dogen_cpp_namespace_info(position + 5));
     v.visitors(create_std_unordered_map_dogen_sml_qname_dogen_cpp_visitor_info(position + 6));
     v.string_tables(create_std_unordered_map_dogen_sml_qname_dogen_cpp_string_table_info(position + 7));

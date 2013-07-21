@@ -114,8 +114,8 @@ void workflow::transform_abstract_object(const sml::abstract_object& ao) {
                 return;
 
             const auto& qn(*oqn);
-            const auto i(context_.qname_to_class_info().find(qn));
-            if (i != context_.qname_to_class_info().end())
+            const auto i(context_.classes().find(qn));
+            if (i != context_.classes().end())
                 return;
 
             const auto j(model_.objects().find(qn));
@@ -125,7 +125,11 @@ void workflow::transform_abstract_object(const sml::abstract_object& ao) {
                         boost::lexical_cast<std::string>(qn)));
             }
 
-            transform_abstract_object(*j->second);
+            const auto& ao(*j->second);
+            if (ao.generation_type() == sml::generation_types::no_generation)
+                return;
+
+            transform_abstract_object(ao);
         });
 
     lambda(ao.parent_name());
@@ -133,7 +137,7 @@ void workflow::transform_abstract_object(const sml::abstract_object& ao) {
 
     transformer_.from_type(ao);
     const auto rel(extractor_.extract_dependency_graph(ao));
-    context_.qname_to_relationships().insert(std::make_pair(ao.name(), rel));
+    context_.relationships().insert(std::make_pair(ao.name(), rel));
 }
 
 void workflow::transform_module(const sml::module& m) {
@@ -181,10 +185,10 @@ void workflow::populate_context_activity() {
 workflow::result_type
 workflow::generate_file_infos_for_classes_activity() const {
     result_type r;
-    for (const auto& pair : context_.qname_to_class_info()) {
+    for (const auto& pair : context_.classes()) {
         const auto& qn(pair.first);
-        const auto i(context_.qname_to_relationships().find(qn));
-        if (i == context_.qname_to_relationships().end()) {
+        const auto i(context_.relationships().find(qn));
+        if (i == context_.relationships().end()) {
             BOOST_LOG_SEV(lg, error) << missing_relationship << qn;
             BOOST_THROW_EXCEPTION(workflow_failure(missing_relationship +
                     boost::lexical_cast<std::string>(qn)));
@@ -231,20 +235,21 @@ workflow::generate_file_infos_for_classes_activity() const {
                 register_header(fi);
         }
     }
-
     BOOST_LOG_SEV(lg, debug) << "Finished generate classes activity";
+    return r;
 }
 
 workflow::result_type
 workflow::generate_file_infos_for_namespaces_activity() const {
     workflow::result_type r;
-    for (const auto& m : context_.namespaces()) {
-        for (const auto& cd : descriptor_factory_.create(p.name())) {
+    for (const auto& pair : context_.namespaces()) {
+        const auto qn(pair.first);
+        const auto ni(pair.second);
+
+        const auto ct(content_types::namespace_doc);
+        for (const auto& cd : descriptor_factory_.create(qn, ct)) {
             const auto fi(file_info_factory_.create(ni, cd));
             r.insert(format(fi));
-
-            if (fi.aspect_type() == aspect_types::namespace_doc)
-                register_header(fi);
         }
     }
 
@@ -252,119 +257,88 @@ workflow::generate_file_infos_for_namespaces_activity() const {
     return r;
 }
 
-/*
 workflow::result_type workflow::generate_registrars_activity() const {
-    BOOST_LOG_SEV(lg, debug) << "Started generate registrars activity.";
-
-    sml::qname qn;
-    qn.model_name(model_.name());
-    qn.external_module_path(model_.external_module_path());
-    qn.type_name(registrar_name);
-
     workflow::result_type r;
-    const auto ri(transformer_.transform_model_into_registrar());
-    for (const auto& cd : descriptor_factory_.create_registrar(qn)) {
-        const auto il(includer_.includes_for_registrar(cd));
-        const auto fi(file_info_factory_.create_registrar(ri, cd, il));
-        r.insert(format(fi));
+    for (const auto& pair : context_.registrars()) {
+        const auto qn(pair.first);
+        const auto ri(pair.second);
 
-        if (fi.aspect_type() == aspect_types::registrar)
+        for (const auto& cd : descriptor_factory_.create_registrar(qn)) {
+            const auto il(includer_.includes_for_registrar(cd));
+            const auto fi(file_info_factory_.create_registrar(ri, cd, il));
+            r.insert(format(fi));
             register_header(fi);
+        }
     }
-
-    BOOST_LOG_SEV(lg, debug) << "Finished generate registrars activity";
     return r;
 }
 
 workflow::result_type workflow::generate_includers_activity() const {
-    BOOST_LOG_SEV(lg, debug) << "Started generate includers activity.";
-
     sml::qname qn;
-    qn.type_name(includer_name);
-    qn.external_module_path(model_.external_module_path());
-    qn.model_name(model_.name());
+    qn.simple_name(includer_name);
+    qn.external_module_path(model_.name().external_module_path());
+    qn.model_name(model_.name().model_name());
 
     workflow::result_type r;
     for (const auto& cd : descriptor_factory_.create_includer(qn)) {
         const auto il(includer_.includes_for_includer_files(cd));
         r.insert(format(file_info_factory_.create_includer(cd, il)));
     }
-
-    BOOST_LOG_SEV(lg, debug) << "Finished generate includers activity.";
     return r;
 }
 
 workflow::result_type workflow::generate_visitors_activity() const {
-    BOOST_LOG_SEV(lg, debug) << "Started generate visitors activity.";
-
     workflow::result_type r;
-    for (const auto& pair : model_.objects()) {
-        const auto p(pair.second);
-        const auto no_generation(sml::generation_types::no_generation);
-        if (!p.is_visitable() || p.generation_type() == no_generation)
-            continue;
+    for (const auto& pair : context_.visitors()) {
+        const auto& qn(pair.first);
+        const auto i(context_.relationships().find(qn));
+        if (i == context_.relationships().end()) {
+            BOOST_LOG_SEV(lg, error) << missing_relationship << qn;
+            BOOST_THROW_EXCEPTION(workflow_failure(missing_relationship +
+                    boost::lexical_cast<std::string>(qn)));
+        }
 
-        const auto vi(transformer_.transform_into_visitor(p));
-        const auto rel(extractor_.extract_inheritance_graph(p.name()));
-        for (const auto& cd : descriptor_factory_.create_visitor(p.name())) {
+        const auto& rel(i->second);
+        const auto vi(pair.second);
+        for (const auto& cd : descriptor_factory_.create_visitor(qn)) {
             const auto il(includer_.includes_for_visitor(cd, rel));
             const auto fi(file_info_factory_.create_visitor(vi, cd, il));
             r.insert(format(fi));
-            if (fi.aspect_type() == aspect_types::visitor) {
-                register_header(fi);
-            }
+            register_header(fi);
         }
     }
-
-    BOOST_LOG_SEV(lg, debug) << "Finished generate visitors activity.";
     return r;
 }
 
 workflow::result_type workflow::generate_enums_activity() const {
-    BOOST_LOG_SEV(lg, debug) << "Started generate enums activity.";
-
     workflow::result_type r;
-    for (const auto& pair : model_.enumerations()) {
-        const auto& e(pair.second);
-        if (e.generation_type() == sml::generation_types::no_generation)
-            continue;
+    for (const auto& pair : context_.enumerations()) {
+        const auto& qn(pair.first);
+        const auto& ei(pair.second);
 
-        const auto ei(transformer_.transform_enumeration(e));
-
-        const auto ct(sml::category_types::user_defined);
-        for (const auto& cd : descriptor_factory_.create(e.name(), ct)) {
+        const auto ct(content_types::enumeration);
+        for (const auto& cd : descriptor_factory_.create(qn, ct)) {
             const auto il(includer_.includes_for_enumeration(cd));
             const auto fi(file_info_factory_.create(ei, cd, il));
             r.insert(format(fi));
-
-            if (fi.aspect_type() == aspect_types::main)
-                register_header(fi);
+            register_header(fi);
         }
     }
-
-    BOOST_LOG_SEV(lg, debug) << "Finished generate enums activity.";
     return r;
 }
 
 workflow::result_type workflow::generate_exceptions_activity() const {
-    BOOST_LOG_SEV(lg, debug) << "Started generate exceptions activity.";
-
     workflow::result_type r;
-    for (const auto& pair : model_.exceptions()) {
-        const auto& e(pair.second);
-        if (e.generation_type() == sml::generation_types::no_generation)
-            continue;
+    for (const auto& pair : context_.exceptions()) {
+        const auto& qn(pair.first);
+        const auto& ei(pair.second);
 
-        const auto ei(transformer_.transform_exception(e));
-
-        const auto ct(sml::category_types::user_defined);
-        for (const auto& cd : descriptor_factory_.create(e.name(), ct)) {
+        const auto ct(content_types::exception);
+        for (const auto& cd : descriptor_factory_.create(qn, ct)) {
             const auto il(includer_.includes_for_exception(cd));
             const auto fi(file_info_factory_.create(ei, cd, il));
             r.insert(format(fi));
-
-            if (fi.aspect_type() == aspect_types::main)
-                register_header(fi);
+            register_header(fi);
         }
     }
 
@@ -375,8 +349,8 @@ workflow::result_type workflow::generate_exceptions_activity() const {
 workflow::result_type workflow::generate_file_infos_activity() const {
     const auto a(generate_enums_activity());
     const auto b(generate_exceptions_activity());
-    const auto c(generate_classes_activity());
-    const auto d(generate_namespaces_activity());
+    const auto c(generate_file_infos_for_classes_activity());
+    const auto d(generate_file_infos_for_namespaces_activity());
     const auto e(generate_registrars_activity());
     const auto f(generate_visitors_activity());
     const auto g(generate_includers_activity());
@@ -394,13 +368,13 @@ workflow::result_type workflow::generate_file_infos_activity() const {
 
 workflow::result_type workflow::generate_cmakelists_activity() const {
     cmakelists_info ci;
-    ci.model_name(model_.name());
+    ci.model_name(model_.name().model_name());
     ci.file_name(cmakelists_file_name);
     ci.file_path(locator_.absolute_path_to_src(ci.file_name()));
     BOOST_LOG_SEV(lg, debug) << "Formatting: " << ci.file_path().string();
 
-    if (!model_.external_module_path().empty())
-        ci.product_name(model_.external_module_path().front());
+    if (!model_.name().external_module_path().empty())
+        ci.product_name(model_.name().external_module_path().front());
 
     std::ostringstream stream;
     formatters::src_cmakelists src(stream);
@@ -431,11 +405,11 @@ workflow::result_entry_type workflow::generate_odb_options_activity() const {
     odb_options_info ooi;
     ooi.file_name(odb_options_file_name);
     ooi.file_path(locator_.absolute_path_to_src(ooi.file_name()));
-    ooi.model_name(model_.name());
+    ooi.model_name(model_.name().model_name());
     ooi.odb_folder(settings_.odb_facet_folder());
 
-    if (!model_.external_module_path().empty())
-        ooi.product_name(model_.external_module_path().front());
+    if (!model_.name().external_module_path().empty())
+        ooi.product_name(model_.name().external_module_path().front());
 
     BOOST_LOG_SEV(lg, debug) << "Formatting:" << ooi.file_path().string();
     std::ostringstream stream;
@@ -470,5 +444,5 @@ workflow::result_type workflow::execute() {
     BOOST_LOG_SEV(lg, info) << "C++ backend finished.";
     return r;
 }
-*/
+
 } }

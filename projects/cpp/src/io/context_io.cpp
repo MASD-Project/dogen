@@ -184,7 +184,7 @@ std::ostream& operator<<(std::ostream& s, const context& v) {
       << "\"relationships\": " << v.relationships() << ", "
       << "\"exceptions\": " << v.exceptions() << ", "
       << "\"enumerations\": " << v.enumerations() << ", "
-      << "\"registrar\": " << v.registrar() << ", "
+      << "\"registrars\": " << v.registrars() << ", "
       << "\"namespaces\": " << v.namespaces() << ", "
       << "\"visitors\": " << v.visitors() << ", "
       << "\"string_tables\": " << v.string_tables()

@@ -118,6 +118,31 @@ private:
     result_type generate_file_infos_for_namespaces_activity() const;
 
     /**
+     * @brief Generate C++ files for registrars.
+     */
+    result_type generate_registrars_activity() const;
+
+    /**
+     * @brief Generate C++ files for includers.
+     */
+    result_type generate_includers_activity() const;
+
+    /**
+     * @brief Generate C++ files for visitors.
+     */
+    result_type generate_visitors_activity() const;
+
+    /**
+     * @brief Generate C++ files for enumerations.
+     */
+    result_type generate_enums_activity() const;
+
+    /**
+     * @brief Generate C++ files for exceptions.
+     */
+    result_type generate_exceptions_activity() const;
+
+    /**
      * @brief Create the cmakelists makefiles.
      */
     result_type generate_cmakelists_activity() const;
@@ -126,6 +151,11 @@ private:
      * @brief Creates the ODB compiler options file.
      */
     result_entry_type generate_odb_options_activity() const;
+
+    /**
+     * @brief Generate all C++ files.
+     */
+    result_type generate_file_infos_activity() const;
 
 public:
     /**

@@ -634,7 +634,7 @@ void transformer::model_to_registrar_info() {
     qn.simple_name(registrar_name);
     qn.model_name(model_.name().model_name());
     qn.external_module_path(model_.name().external_module_path());
-    context_.registrar().insert(std::make_pair(qn, ri));
+    context_.registrars().insert(std::make_pair(qn, ri));
 
     BOOST_LOG_SEV(lg, debug) << "Transformed model into registrar: " << n;
 }
