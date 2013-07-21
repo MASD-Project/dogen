@@ -60,11 +60,31 @@ recurse_nested_qnames(const sml::nested_qname& nqn, relationships& rel,
     else
         rel.names().insert(qn);
 
-    is_pointer = false;
-    const auto i(objects_.find(qn));
-    if (i != objects_.end()) {
+    bool found(false);
+    const auto i(model_.primitives().find(qn));
+    if (i != model_.primitives().end()) {
+        found = true;
+        is_pointer = false;
+    }
+
+    if (!found) {
+        const auto j(model_.enumerations().find(qn));
+        if (j != model_.enumerations().end()) {
+            is_pointer = false;
+            found = true;
+        }
+    }
+
+    if (!found) {
+        const auto k(model_.objects().find(qn));
+        if (k == model_.objects().end()) {
+            BOOST_LOG_SEV(lg, error) << qname_could_not_be_found << qn;
+            BOOST_THROW_EXCEPTION(extraction_error(qname_could_not_be_found +
+                    boost::lexical_cast<std::string>(qn)));
+        }
+
         using sml::value_object;
-        const auto vo(boost::dynamic_pointer_cast<value_object>(i->second));
+        const auto vo(boost::dynamic_pointer_cast<value_object>(k->second));
         const auto ac(sml::value_object_types::associative_container);
         if (vo->type() == ac && nqn.children().size() >= 1)
             rel.keys().insert(nqn.children().front().type());
@@ -95,8 +115,8 @@ void extractor::properties_for_concept(const sml::qname& qn,
         return;
 
     processed_qnames.insert(qn);
-    const auto i(concepts_.find(qn));
-    if (i == concepts_.end()) {
+    const auto i(model_.concepts().find(qn));
+    if (i == model_.concepts().end()) {
         const auto sn(qn.simple_name());
         BOOST_LOG_SEV(lg, error) << concept_not_found << sn;
         BOOST_THROW_EXCEPTION(extraction_error(concept_not_found + sn));
@@ -111,19 +131,22 @@ void extractor::properties_for_concept(const sml::qname& qn,
 
 relationships
 extractor::extract_dependency_graph(const sml::abstract_object& ao) const {
+    BOOST_LOG_SEV(lg, debug) << "Extracting dependency graph for " << ao.name();
+
     relationships r;
 
     if (ao.parent_name())
         r.names().insert(*ao.parent_name());
 
     if (ao.is_visitable()) {
+        // FIXME: the whole visitor handling is not ideal
         auto qn(ao.name());
         qn.simple_name(qn.simple_name() + "_visitor");
         r.visitor(qn);
     } else if (ao.original_parent_name()) {
         auto opn(*ao.original_parent_name());
-        auto i(objects_.find(opn));
-        if (i == objects_.end()) {
+        auto i(model_.objects().find(opn));
+        if (i == model_.objects().end()) {
             BOOST_LOG_SEV(lg, error) << qname_could_not_be_found << opn;
             BOOST_THROW_EXCEPTION(extraction_error(qname_could_not_be_found +
                     boost::lexical_cast<std::string>(opn)));
@@ -156,18 +179,18 @@ extractor::extract_dependency_graph(const sml::abstract_object& ao) const {
             r.forward_decls().erase(n);
     }
 
+    BOOST_LOG_SEV(lg, debug) << "Extracted dependency graph for " << ao.name();
     return r;
 }
 
-relationships extractor::
-extract_inheritance_graph(const sml::qname& qn) const {
+relationships extractor::extract_inheritance_graph(const sml::qname& qn) const {
     BOOST_LOG_SEV(lg, debug) << "Extracting inheritance graph for "
                              << qn.simple_name();
 
     relationships r;
 
-    auto i(objects_.find(qn));
-    if (i == objects_.end()) {
+    auto i(model_.objects().find(qn));
+    if (i == model_.objects().end()) {
         BOOST_LOG_SEV(lg, error) << qname_could_not_be_found << qn;
         BOOST_THROW_EXCEPTION(extraction_error(qname_could_not_be_found +
                 boost::lexical_cast<std::string>(qn)));
@@ -187,19 +210,22 @@ extract_inheritance_graph(const sml::qname& qn) const {
         BOOST_LOG_SEV(lg, debug) << "type has no leaves.";
 
     for (const auto& l : ao.leaves()) {
-        i = objects_.find(l);
-        if (i == objects_.end())
+        i = model_.objects().find(l);
+        if (i == model_.objects().end())
             lambda(l, qname_could_not_be_found);
 
         do {
-            BOOST_LOG_SEV(lg, debug) << "adding " << ao.name();
-            r.names().insert(ao.name());
+            const auto& lao(*i->second);
+            BOOST_LOG_SEV(lg, debug) << "adding " << lao.name();
+            r.names().insert(lao.name());
 
-            if (!ao.parent_name())
-                lambda(ao.name(), type_does_not_have_a_parent);
+            if (!lao.parent_name())
+                lambda(lao.name(), type_does_not_have_a_parent);
 
-            i = objects_.find(*ao.parent_name());
-        } while (ao.name() != qn);
+            i = model_.objects().find(*lao.parent_name());
+            if (i == model_.objects().end())
+                lambda(*lao.parent_name(), qname_could_not_be_found);
+        } while (i->second->name() != qn);
     }
 
     BOOST_LOG_SEV(lg, debug) << "Done extracting inheritance graph for "

@@ -27,6 +27,7 @@
 
 #include <unordered_map>
 #include <boost/shared_ptr.hpp>
+#include "dogen/sml/types/model.hpp"
 #include "dogen/sml/types/abstract_object.hpp"
 #include "dogen/sml/types/concept.hpp"
 #include "dogen/cpp/types/boost_model_helper.hpp"
@@ -52,8 +53,7 @@ public:
     typedef const std::unordered_map<sml::qname, sml::concept> concept_map;
 
 public:
-    extractor(const object_map& om, const concept_map& cm)
-        : objects_(om), concepts_(cm), boost_(), std_() { }
+    explicit extractor(const sml::model& m) : model_(m), boost_(), std_() { }
 
 private:
     /**
@@ -68,7 +68,7 @@ private:
      * @brief Iterates through the nested qname recursively, picking
      * up dependencies as it goes along.
      */
-    void recurse_nested_qnames(const dogen::sml::nested_qname& nqn,
+    void recurse_nested_qnames(const sml::nested_qname& nqn,
         relationships& rel, bool& is_pointer) const;
 
 public:
@@ -79,7 +79,8 @@ public:
      * The qnames include all types used by the properties of the
      * object, as well as its parent, if any.
      */
-    relationships extract_dependency_graph(const sml::abstract_object& ao) const;
+    relationships
+    extract_dependency_graph(const sml::abstract_object& ao) const;
 
     /**
      * @brief Flattens the given qname into a object inheritance
@@ -91,8 +92,7 @@ public:
     relationships extract_inheritance_graph(const sml::qname& qn) const;
 
 private:
-    const object_map& objects_;
-    const concept_map& concepts_;
+    const sml::model& model_;
     const boost_model_helper boost_;
     const std_model_helper std_;
 };

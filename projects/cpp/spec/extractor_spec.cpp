@@ -69,7 +69,7 @@ BOOST_AUTO_TEST_CASE(dependency_graph_of_object_with_no_properties_and_no_inheri
     BOOST_LOG_SEV(lg, debug) << "input model: " << m;
     BOOST_CHECK(m.objects().size() == 1);
 
-    dogen::cpp::extractor x(m.objects(), m.concepts());
+    dogen::cpp::extractor x(m);
     const auto r(x.extract_dependency_graph(*m.objects().begin()->second));
     BOOST_LOG_SEV(lg, debug) << "relationships: " << r;
 
@@ -92,7 +92,7 @@ BOOST_AUTO_TEST_CASE(dependency_graph_of_object_with_parent_has_one_name_in_rela
     BOOST_LOG_SEV(lg, debug) << "input model: " << m;
     BOOST_CHECK(!m.objects().empty());
 
-    dogen::cpp::extractor x(m.objects(), m.concepts());
+    dogen::cpp::extractor x(m);
 
     std::array<bool, 2> found({{ false, false }});
     for (const auto pair : m.objects()) {
@@ -147,7 +147,7 @@ BOOST_AUTO_TEST_CASE(dependency_graph_of_object_with_unsigned_int_property_has_e
     BOOST_REQUIRE(m.objects().size() == 1);
     BOOST_REQUIRE(m.objects().begin()->second->properties().size() == 1);
 
-    dogen::cpp::extractor x(m.objects(), m.concepts());
+    dogen::cpp::extractor x(m);
     const auto r(x.extract_dependency_graph(*m.objects().begin()->second));
     BOOST_LOG_SEV(lg, debug) << "relationships: " << r;
 
@@ -175,7 +175,7 @@ BOOST_AUTO_TEST_CASE(dependency_graph_of_object_with_boolean_property_has_expect
     BOOST_REQUIRE(m.objects().size() == 1);
     BOOST_REQUIRE(m.objects().begin()->second->properties().size() == 1);
 
-    dogen::cpp::extractor x(m.objects(), m.concepts());
+    dogen::cpp::extractor x(m);
     const auto r(x.extract_dependency_graph(*m.objects().begin()->second));
     BOOST_LOG_SEV(lg, debug) << "relationships: " << r;
 
@@ -201,7 +201,7 @@ BOOST_AUTO_TEST_CASE(dependency_graph_of_object_with_other_object_property_has_e
     BOOST_LOG_SEV(lg, debug) << "input model: " << m;
     BOOST_REQUIRE(m.objects().size() == 2);
 
-    dogen::cpp::extractor x(m.objects(), m.concepts());
+    dogen::cpp::extractor x(m);
     bool found(false);
     for (const auto pair : m.objects()) {
         if (is_type_zero(pair.first)) {
@@ -236,7 +236,7 @@ BOOST_AUTO_TEST_CASE(dependency_graph_of_object_with_missing_object_property_thr
     BOOST_LOG_SEV(lg, debug) << "input model: " << m;
     BOOST_REQUIRE(m.objects().size() == 1);
 
-    dogen::cpp::extractor x(m.objects(), m.concepts());
+    dogen::cpp::extractor x(m);
     const auto& p(*m.objects().begin()->second);
 
     using dogen::cpp::extraction_error;
@@ -251,23 +251,30 @@ BOOST_AUTO_TEST_CASE(dependency_graph_of_object_with_pair_property_has_expected_
     const auto pt(property_types::std_pair);
     const auto m(mock_model_factory::object_with_property(ot, pt));
     BOOST_LOG_SEV(lg, debug) << "input model: " << m;
-    BOOST_REQUIRE(m.objects().size() == 1);
-    BOOST_REQUIRE(m.objects().begin()->second->properties().size() == 1);
+    BOOST_REQUIRE(m.objects().size() == 2);
 
-    dogen::cpp::extractor x(m.objects(), m.concepts());
-    const auto r(x.extract_dependency_graph(*m.objects().begin()->second));
-    BOOST_LOG_SEV(lg, debug) << "relationships: " << r;
-
-    BOOST_REQUIRE(r.names().size() == 2);
-    BOOST_CHECK(r.forward_decls().empty());
-    BOOST_CHECK(r.keys().empty());
-    BOOST_CHECK(r.leaves().empty());
-    BOOST_CHECK(!r.has_std_string());
-    BOOST_CHECK(!r.has_variant());
-    BOOST_CHECK(!r.is_parent());
-    BOOST_CHECK(!r.is_child());
-    BOOST_CHECK(r.requires_stream_manipulators());
-    BOOST_CHECK(r.has_std_pair());
+    bool found(false);
+    dogen::cpp::extractor x(m);
+    for (const auto pair : m.objects()) {
+        if (is_type_zero(pair.first)) {
+            BOOST_LOG_SEV(lg, debug) << "found child object: " << pair.first;
+            BOOST_REQUIRE(pair.second->properties().size() == 1);
+            const auto r(x.extract_dependency_graph(*pair.second));
+            BOOST_LOG_SEV(lg, debug) << "relationships: " << r;
+            BOOST_REQUIRE(r.names().size() == 2);
+            BOOST_CHECK(r.forward_decls().empty());
+            BOOST_CHECK(r.keys().empty());
+            BOOST_CHECK(r.leaves().empty());
+            BOOST_CHECK(!r.has_std_string());
+            BOOST_CHECK(!r.has_variant());
+            BOOST_CHECK(!r.is_parent());
+            BOOST_CHECK(!r.is_child());
+            BOOST_CHECK(r.requires_stream_manipulators());
+            BOOST_CHECK(r.has_std_pair());
+            found = true;
+        }
+    }
+    BOOST_CHECK(found);
 }
 
 BOOST_AUTO_TEST_CASE(dependency_graph_of_object_with_variant_property_has_expected_names_in_relationships) {
@@ -277,23 +284,32 @@ BOOST_AUTO_TEST_CASE(dependency_graph_of_object_with_variant_property_has_expect
     const auto pt(property_types::boost_variant);
     const auto m(mock_model_factory::object_with_property(ot, pt));
     BOOST_LOG_SEV(lg, debug) << "input model: " << m;
-    BOOST_REQUIRE(m.objects().size() == 1);
-    BOOST_REQUIRE(m.objects().begin()->second->properties().size() == 1);
+    BOOST_REQUIRE(m.objects().size() == 2);
+    BOOST_REQUIRE(m.primitives().size() == 2);
 
-    dogen::cpp::extractor x(m.objects(), m.concepts());
-    const auto r(x.extract_dependency_graph(*m.objects().begin()->second));
-    BOOST_LOG_SEV(lg, debug) << "relationships: " << r;
+    bool found(false);
+    dogen::cpp::extractor x(m);
+    for (const auto pair : m.objects()) {
+        if (is_type_zero(pair.first)) {
+            BOOST_LOG_SEV(lg, debug) << "found object: " << pair.first;
+            BOOST_REQUIRE(pair.second->properties().size() == 1);
+            const auto r(x.extract_dependency_graph(*pair.second));
+            BOOST_LOG_SEV(lg, debug) << "relationships: " << r;
 
-    BOOST_REQUIRE(r.names().size() == 3);
-    BOOST_CHECK(r.forward_decls().empty());
-    BOOST_CHECK(r.keys().empty());
-    BOOST_CHECK(r.leaves().empty());
-    BOOST_CHECK(!r.has_std_string());
-    BOOST_CHECK(r.has_variant());
-    BOOST_CHECK(!r.is_parent());
-    BOOST_CHECK(!r.is_child());
-    BOOST_CHECK(r.requires_stream_manipulators());
-    BOOST_CHECK(!r.has_std_pair());
+            BOOST_REQUIRE(r.names().size() == 3);
+            BOOST_CHECK(r.forward_decls().empty());
+            BOOST_CHECK(r.keys().empty());
+            BOOST_CHECK(r.leaves().empty());
+            BOOST_CHECK(!r.has_std_string());
+            BOOST_CHECK(r.has_variant());
+            BOOST_CHECK(!r.is_parent());
+            BOOST_CHECK(!r.is_child());
+            BOOST_CHECK(r.requires_stream_manipulators());
+            BOOST_CHECK(!r.has_std_pair());
+            found = true;
+        }
+    }
+    BOOST_CHECK(found);
 }
 
 BOOST_AUTO_TEST_CASE(dependency_graph_of_object_with_std_string_property_has_expected_name_in_relationships) {
@@ -303,24 +319,32 @@ BOOST_AUTO_TEST_CASE(dependency_graph_of_object_with_std_string_property_has_exp
     const auto pt(property_types::std_string);
     const auto m(mock_model_factory::object_with_property(ot, pt));
     BOOST_LOG_SEV(lg, debug) << "input model: " << m;
-    BOOST_REQUIRE(m.objects().size() == 1);
-    BOOST_REQUIRE(m.objects().begin()->second->properties().size() == 1);
+    BOOST_REQUIRE(m.objects().size() == 2);
 
-    dogen::cpp::extractor x(m.objects(), m.concepts());
-    const auto r(x.extract_dependency_graph(*m.objects().begin()->second));
-    BOOST_LOG_SEV(lg, debug) << "relationships: " << r;
+    bool found(false);
+    dogen::cpp::extractor x(m);
+    for (const auto pair : m.objects()) {
+        if (is_type_zero(pair.first)) {
+            BOOST_LOG_SEV(lg, debug) << "found object: " << pair.first;
+            BOOST_REQUIRE(pair.second->properties().size() == 1);
+            const auto r(x.extract_dependency_graph(*pair.second));
+            BOOST_LOG_SEV(lg, debug) << "relationships: " << r;
 
-    BOOST_REQUIRE(r.names().size() == 1);
-    BOOST_CHECK(r.names().begin()->simple_name() == "string");
-    BOOST_CHECK(r.forward_decls().empty());
-    BOOST_CHECK(r.keys().empty());
-    BOOST_CHECK(r.leaves().empty());
-    BOOST_CHECK(r.has_std_string());
-    BOOST_CHECK(!r.has_variant());
-    BOOST_CHECK(!r.is_parent());
-    BOOST_CHECK(!r.is_child());
-    BOOST_CHECK(!r.requires_stream_manipulators());
-    BOOST_CHECK(!r.has_std_pair());
+            BOOST_REQUIRE(r.names().size() == 1);
+            BOOST_CHECK(r.names().begin()->simple_name() == "string");
+            BOOST_CHECK(r.forward_decls().empty());
+            BOOST_CHECK(r.keys().empty());
+            BOOST_CHECK(r.leaves().empty());
+            BOOST_CHECK(r.has_std_string());
+            BOOST_CHECK(!r.has_variant());
+            BOOST_CHECK(!r.is_parent());
+            BOOST_CHECK(!r.is_child());
+            BOOST_CHECK(!r.requires_stream_manipulators());
+            BOOST_CHECK(!r.has_std_pair());
+            found = true;
+        }
+    }
+    BOOST_CHECK(found);
 }
 
 BOOST_AUTO_TEST_CASE(dependency_graph_of_object_with_boost_shared_ptr_property_has_expected_name_in_relationships) {
@@ -333,7 +357,7 @@ BOOST_AUTO_TEST_CASE(dependency_graph_of_object_with_boost_shared_ptr_property_h
     BOOST_REQUIRE(m.objects().size() == 3);
 
     bool found(false);
-    dogen::cpp::extractor x(m.objects(), m.concepts());
+    dogen::cpp::extractor x(m);
     for (const auto pair : m.objects()) {
         if (is_type_zero(pair.first)) {
             BOOST_LOG_SEV(lg, debug) << "found object: " << pair.first;
@@ -365,7 +389,7 @@ BOOST_AUTO_TEST_CASE(inheritance_graph_of_object_with_no_parents_has_one_name_in
     BOOST_LOG_SEV(lg, debug) << "input model: " << m;
     BOOST_CHECK(m.objects().size() == 1);
 
-    dogen::cpp::extractor x(m.objects(), m.concepts());
+    dogen::cpp::extractor x(m);
     const auto r(
         x.extract_inheritance_graph(m.objects().begin()->second->name()));
     BOOST_LOG_SEV(lg, debug) << "relationships: " << r;
@@ -391,7 +415,7 @@ BOOST_AUTO_TEST_CASE(inheritance_graph_of_object_with_no_parents_and_one_propert
     BOOST_LOG_SEV(lg, debug) << "input model: " << m;
     BOOST_CHECK(m.objects().size() == 2);
 
-    dogen::cpp::extractor x(m.objects(), m.concepts());
+    dogen::cpp::extractor x(m);
     std::array<bool, 2> found({{ false, false }});
     for (const auto pair : m.objects()) {
         if (is_type_zero(pair.first)) {
@@ -443,7 +467,7 @@ BOOST_AUTO_TEST_CASE(inheritance_graph_of_object_with_parent_has_two_names_in_re
     BOOST_LOG_SEV(lg, debug) << "input model: " << m;
     BOOST_CHECK(m.objects().size() == 2);
 
-    dogen::cpp::extractor x(m.objects(), m.concepts());
+    dogen::cpp::extractor x(m);
 
     std::array<bool, 2> found({{ false, false }});
     for (const auto pair : m.objects()) {
@@ -502,7 +526,7 @@ BOOST_AUTO_TEST_CASE(inheritance_graph_of_object_with_missing_parent_throws) {
     BOOST_LOG_SEV(lg, debug) << "input model: " << m;
     BOOST_CHECK(m.objects().size() == 1);
 
-    dogen::cpp::extractor x(m.objects(), m.concepts());
+    dogen::cpp::extractor x(m);
 
     const auto qn(m.objects().begin()->second->name());
     using dogen::cpp::extraction_error;
@@ -518,7 +542,7 @@ BOOST_AUTO_TEST_CASE(inheritance_graph_of_object_with_third_degree_children_has_
     BOOST_LOG_SEV(lg, debug) << "input model: " << m;
     BOOST_CHECK(m.objects().size() == 4);
 
-    dogen::cpp::extractor x(m.objects(), m.concepts());
+    dogen::cpp::extractor x(m);
 
     std::array<bool, 4> found({{ false, false, false, false }});
     for (const auto pair : m.objects()) {
@@ -628,7 +652,7 @@ BOOST_AUTO_TEST_CASE(inheritance_graph_of_object_with_three_children_has_four_na
     BOOST_LOG_SEV(lg, debug) << "input model: " << m;
     BOOST_CHECK(m.objects().size() == 4);
 
-    dogen::cpp::extractor x(m.objects(), m.concepts());
+    dogen::cpp::extractor x(m);
 
     std::array<bool, 4> found({{ false, false, false, false }});
     for (const auto pair : m.objects()) {

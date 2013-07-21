@@ -18,9 +18,9 @@
  * MA 02110-1301, USA.
  *
  */
-#include <memory>
 #include <sstream>
 #include <boost/lexical_cast.hpp>
+#include <boost/pointer_cast.hpp>
 #include <boost/make_shared.hpp>
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/exception/utility_exception.hpp"
@@ -93,8 +93,8 @@ dogen::sml::qname mock_model_qname(unsigned int i) {
 dogen::sml::nested_qname
 mock_qname_shared_ptr(const dogen::sml::type& o) {
     dogen::sml::qname e;
-    e.simple_name("boost");
-    e.model_name("shared_ptr");
+    e.simple_name("shared_ptr");
+    e.model_name("boost");
 
     dogen::sml::nested_qname r;
     r.type(e);
@@ -107,7 +107,7 @@ mock_qname_shared_ptr(const dogen::sml::type& o) {
     return r;
 }
 
-dogen::sml::nested_qname mock_qname(
+dogen::sml::nested_qname mock_nested_qname(
     dogen::sml::test::mock_model_factory::property_types pt) {
     using namespace dogen::sml;
 
@@ -263,14 +263,12 @@ mock_exception(const unsigned int i, const dogen::sml::qname& model_qname,
         qn.module_path().push_back(module_name(i));
 
     using dogen::sml::value_object;
-    std::unique_ptr<value_object> r(new value_object());
+    boost::shared_ptr<value_object> r(new value_object());
     r->name(qn);
     r->generation_type(dogen::sml::generation_types::full_generation);
     r->documentation(documentation);
     r->type(dogen::sml::value_object_types::exception);
-
-    using dogen::sml::abstract_object;
-    return boost::shared_ptr<abstract_object>(r.release());
+    return r;
 }
 
 }
@@ -367,13 +365,6 @@ object_with_property(const object_types ot, const property_types pt) {
 
     const auto mn(mock_model_qname(0));
     auto o1(mock_value_object(1, mn));
-    std::unique_ptr<value_object> o2(new value_object());
-
-    dogen::sml::qname qn;
-    qn.simple_name("boost");
-    qn.model_name("shared_ptr");
-    o2->name(qn);
-    o2->type(dogen::sml::value_object_types::smart_pointer);
 
     property p;
     p.name(property_name(0));
@@ -383,7 +374,7 @@ object_with_property(const object_types ot, const property_types pt) {
     else if (pt == property_types::boost_shared_ptr)
         p.type(mock_qname_shared_ptr(*o1));
     else
-        p.type(mock_qname(pt));
+        p.type(mock_nested_qname(pt));
 
     boost::shared_ptr<abstract_object> o0;
     if (ot == object_types::value_object)
@@ -403,10 +394,61 @@ object_with_property(const object_types ot, const property_types pt) {
         pt == property_types::boost_shared_ptr)
         r.objects().insert(std::make_pair(o1->name(), o1));
 
-    if (pt == property_types::boost_shared_ptr)
-        r.objects().insert(std::make_pair(o2->name(),
-                boost::shared_ptr<abstract_object>(o2.release())));
+    if (pt == property_types::unsigned_int ||
+        pt == property_types::boolean) {
+        sml::primitive ui;
+        ui.name(p.type().type());
+        r.primitives().insert(std::make_pair(ui.name(), ui));
+    } else if (pt == property_types::boost_shared_ptr) {
+        dogen::sml::qname qn;
+        qn.simple_name("shared_ptr");
+        qn.model_name("boost");
 
+        boost::shared_ptr<value_object> o2(new value_object());
+        o2->name(qn);
+        o2->type(dogen::sml::value_object_types::smart_pointer);
+        r.objects().insert(std::make_pair(o2->name(), o2));
+    } else if (pt == property_types::std_pair) {
+
+        sml::primitive b;
+        b.name().simple_name(boolean);
+        r.primitives().insert(std::make_pair(b.name(), b));
+
+        dogen::sml::qname qn;
+        qn.simple_name("pair");
+        qn.model_name("std");
+
+        boost::shared_ptr<value_object> o2(new value_object());
+        o2->name(qn);
+        o2->type(sml::value_object_types::plain);
+        r.objects().insert(std::make_pair(o2->name(), o2));
+    } else if (pt == property_types::boost_variant) {
+        sml::primitive b;
+        b.name().simple_name(boolean);
+        r.primitives().insert(std::make_pair(b.name(), b));
+
+        sml::primitive ui;
+        ui.name().simple_name(unsigned_int);
+        r.primitives().insert(std::make_pair(ui.name(), ui));
+
+        dogen::sml::qname qn;
+        qn.simple_name("variant");
+        qn.model_name("boost");
+
+        boost::shared_ptr<value_object> o2(new value_object());
+        o2->name(qn);
+        o2->type(sml::value_object_types::plain);
+        r.objects().insert(std::make_pair(o2->name(), o2));
+    } else if (pt == property_types::std_string) {
+        dogen::sml::qname qn;
+        qn.simple_name("string");
+        qn.model_name("std");
+
+        boost::shared_ptr<value_object> o2(new value_object());
+        o2->name(qn);
+        o2->type(sml::value_object_types::plain);
+        r.objects().insert(std::make_pair(o2->name(), o2));
+    }
 
     return r;
 }
@@ -461,19 +503,26 @@ model mock_model_factory::
 object_with_parent_in_the_same_model(bool add_property) {
     const auto mn(mock_model_qname(0));
 
+    model r;
+    r.name(mn);
+
     auto o0(mock_value_object(0, mn));
     if (add_property) {
         property p;
         p.name(property_name(0));
-        p.type(mock_qname(property_types::unsigned_int));
+        p.type(mock_nested_qname(property_types::unsigned_int));
         o0->properties().push_back(p);
+
+        sml::primitive ui;
+        ui.name(p.type().type());
+        r.primitives().insert(std::make_pair(ui.name(), ui));
     }
 
     auto o1(mock_value_object(1, mn));
     if (add_property) {
         property p;
         p.name(property_name(1));
-        p.type(mock_qname(property_types::unsigned_int));
+        p.type(mock_nested_qname(property_types::unsigned_int));
         o1->properties().push_back(p);
     }
 
@@ -482,8 +531,6 @@ object_with_parent_in_the_same_model(bool add_property) {
     o1->is_parent(true);
     o1->leaves().push_back(o0->name());
 
-    model r;
-    r.name(mn);
     r.objects().insert(std::make_pair(o0->name(), o0));
     r.objects().insert(std::make_pair(o1->name(), o1));
 
@@ -564,19 +611,27 @@ model mock_model_factory::
 object_with_third_degree_parent_in_same_model(bool add_property) {
     const auto mn(mock_model_qname(0));
 
+    model r;
+    r.origin_type(origin_types::user);
+    r.name(mn);
+
     auto o0(mock_value_object(0, mn));
     if (add_property) {
         property p;
         p.name(property_name(0));
-        p.type(mock_qname(property_types::unsigned_int));
+        p.type(mock_nested_qname(property_types::unsigned_int));
         o0->properties().push_back(p);
+
+        sml::primitive ui;
+        ui.name(p.type().type());
+        r.primitives().insert(std::make_pair(ui.name(), ui));
     }
 
     auto o1(mock_value_object(1, mn));
     if (add_property) {
         property p;
         p.name(property_name(1));
-        p.type(mock_qname(property_types::unsigned_int));
+        p.type(mock_nested_qname(property_types::unsigned_int));
         o1->properties().push_back(p);
     }
 
@@ -584,7 +639,7 @@ object_with_third_degree_parent_in_same_model(bool add_property) {
     if (add_property) {
         property p;
         p.name(property_name(2));
-        p.type(mock_qname(property_types::unsigned_int));
+        p.type(mock_nested_qname(property_types::unsigned_int));
         o2->properties().push_back(p);
     }
 
@@ -592,7 +647,7 @@ object_with_third_degree_parent_in_same_model(bool add_property) {
     if (add_property) {
         property p;
         p.name(property_name(3));
-        p.type(mock_qname(property_types::unsigned_int));
+        p.type(mock_nested_qname(property_types::unsigned_int));
         o3->properties().push_back(p);
     }
 
@@ -612,13 +667,11 @@ object_with_third_degree_parent_in_same_model(bool add_property) {
     o3->leaves().push_back(o0->name());
     o3->is_parent(true);
 
-    model r;
-    r.origin_type(origin_types::user);
     r.objects().insert(std::make_pair(o0->name(), o0));
     r.objects().insert(std::make_pair(o1->name(), o1));
     r.objects().insert(std::make_pair(o2->name(), o2));
     r.objects().insert(std::make_pair(o3->name(), o3));
-    r.name(mn);
+
     return r;
 }
 
