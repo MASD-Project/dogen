@@ -35,7 +35,8 @@ enum class class_types : unsigned int {
     invalid = 0, ///< Represents an uninitialised enum
     user_defined = 1, ///< The class was created by the user
     unversioned_key = 2, ///< The class represents a system defined unversioned key
-    versioned_key = 3 ///< The class represents a system defined versioned key
+    versioned_key = 3, ///< The class represents a system defined versioned key
+    service = 4
 };
 
 } }

@@ -26,7 +26,7 @@ namespace cpp {
 class_types_generator::class_types_generator() : position_(0) { }
 void class_types_generator::
 populate(const unsigned int position, result_type& v) {
-    v = static_cast<class_types>(position % 4);
+    v = static_cast<class_types>(position % 5);
 }
 
 class_types_generator::result_type

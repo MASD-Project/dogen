@@ -42,6 +42,9 @@ std::ostream& operator<<(std::ostream& s, const class_types& v) {
     case class_types::versioned_key:
         attr = "\"versioned_key\"";
         break;
+    case class_types::service:
+        attr = "\"service\"";
+        break;
     default:
         throw std::invalid_argument("Invalid value for class_types");
     }

@@ -210,6 +210,9 @@ workflow::generate_file_infos_for_classes_activity() const {
         case class_types::versioned_key:
             ct = content_types::versioned_key;
             break;
+        case class_types::service:
+            ct = content_types::user_defined_service;
+            break;
         default:
             BOOST_LOG_SEV(lg, error) << unsupported_class_type
                                      << ci.class_type();

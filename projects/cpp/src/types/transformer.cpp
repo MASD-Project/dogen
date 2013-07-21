@@ -495,9 +495,12 @@ void transformer::visit(const dogen::sml::service& s) {
     BOOST_LOG_SEV(lg, debug) << "Transforming service: " << s.name();
 
     switch(s.type()) {
-    case sml::service_types::user_defined:
-        add_class(s.name(), to_class_info(s));
+    case sml::service_types::user_defined: {
+        auto ci(to_class_info(s));
+        ci.class_type(class_types::service); // FIXME: mega-hack
+        add_class(s.name(), ci);
         break;
+    }
     case sml::service_types::visitor:
         context_.visitors().insert(std::make_pair(s.name(), to_visitor(s)));
         break;
@@ -515,6 +518,7 @@ void transformer::visit(const dogen::sml::factory& f) {
     BOOST_LOG_SEV(lg, debug) << "Transforming service: " << f.name();
 
     auto ci(to_class_info(f));
+    ci.class_type(class_types::service); // FIXME: mega-hack
     add_class(f.name(), ci);
 
     BOOST_LOG_SEV(lg, debug) << "Transformed service: " << f.name();
@@ -524,6 +528,7 @@ void transformer::visit(const dogen::sml::repository& r) {
     BOOST_LOG_SEV(lg, debug) << "Transforming service: " << r.name();
 
     auto ci(to_class_info(r));
+    ci.class_type(class_types::service); // FIXME: mega-hack
     add_class(r.name(), ci);
 
     BOOST_LOG_SEV(lg, debug) << "Transformed service: " << r.name();
