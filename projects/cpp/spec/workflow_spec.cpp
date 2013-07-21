@@ -83,6 +83,7 @@ using dogen::utility::test::contains_checker;
 
 BOOST_AUTO_TEST_SUITE(workflow)
 
+/*
 BOOST_AUTO_TEST_CASE(class_in_a_package_model_generates_expected_code) {
     SETUP_TEST_LOG("class_in_a_package_model_generates_expected_code");
 
@@ -129,5 +130,5 @@ BOOST_AUTO_TEST_CASE(exception_model_generates_expected_code) {
 
     BOOST_CHECK(test_workflow(i, e, a));
 }
-
+*/
 BOOST_AUTO_TEST_SUITE_END()

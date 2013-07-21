@@ -32,6 +32,9 @@
 #include "dogen/utility/filesystem/file_not_found.hpp"
 #include "dogen/utility/test_data/tds_test_good.hpp"
 
+template<typename Archive> void register_types(Archive&) {
+}
+
 namespace {
 
 const std::string test_module("utility");

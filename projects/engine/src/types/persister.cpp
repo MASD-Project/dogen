@@ -101,7 +101,7 @@ void persister::persist(const sml::model& m, const std::string& prefix) const {
         return;
 
     boost::filesystem::path p(settings_.troubleshooting().debug_dir());
-    p /= prefix + m.name();
+    p /= prefix + m.name().model_name();
 
     using config::archive_types;
     archive_types at(settings_.troubleshooting().save_sml_model());
