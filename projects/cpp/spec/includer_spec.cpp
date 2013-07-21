@@ -125,6 +125,7 @@ includes_for_one_object_model(cpp_facet_types ft,
     cd.facet_type(ft);
     cd.file_type(file_types::header);
     cd.aspect_type(main);
+    cd.content_type(dogen::cpp::content_types::value_object);
     dogen::cpp::relationships rel;
     const auto i0(im.includes_for_object(cd, rel));
     r.push_back(i0.system());

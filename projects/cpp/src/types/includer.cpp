@@ -107,17 +107,17 @@ append_implementation_dependencies(const relationships& rel,
      */
     // iosfwd:
     const bool is_header(cd.file_type() == file_types::header);
-    const bool is_domain(cd.facet_type() == cpp_facet_types::types);
+    const bool is_types(cd.facet_type() == cpp_facet_types::types);
     const bool is_io(cd.facet_type() == cpp_facet_types::io);
 
-    const bool domain_with_io(is_domain &&
+    const bool domain_with_io(is_types &&
         (settings_.use_integrated_io() || rel.is_parent() || rel.is_child()));
 
     if (is_header && io_enabled_ && (domain_with_io || is_io))
         il.system().push_back(std_.include(std_types::iosfwd));
 
     // algorithm: domain headers need it for the swap function.
-    if (is_header && is_domain)
+    if (is_header && is_types)
         il.system().push_back(std_.include(std_types::algorithm));
 
     // ostream:
@@ -203,9 +203,9 @@ void includer::append_boost_dependencies(
      * boost::shared_ptr
      */
     const bool is_header(cd.file_type() == file_types::header);
-    const bool is_domain(cd.facet_type() == cpp_facet_types::types);
+    const bool is_types(cd.facet_type() == cpp_facet_types::types);
     const bool is_sp(sn == boost_.type(boost_types::shared_ptr));
-    if (is_header && is_domain && is_sp)
+    if (is_header && is_types && is_sp)
         il.system().push_back(boost_.include(boost_types::shared_ptr));
 
     const bool is_serialization(
@@ -219,7 +219,7 @@ void includer::append_boost_dependencies(
      * boost::optional
      */
     const bool is_opt(sn == boost_.type(boost_types::optional));
-    if (is_header && is_domain && is_opt)
+    if (is_header && is_types && is_opt)
         il.system().push_back(boost_.include(boost_types::optional));
 
     if (is_implementation && is_serialization && is_opt)
@@ -230,7 +230,7 @@ void includer::append_boost_dependencies(
      * boost::variant
      */
     const bool is_variant(sn == boost_.type(boost_types::variant));
-    if (is_header && is_domain && is_variant)
+    if (is_header && is_types && is_variant)
         il.system().push_back(boost_.include(boost_types::variant));
 
     if (is_implementation && is_serialization && is_variant)
@@ -241,7 +241,7 @@ void includer::append_boost_dependencies(
      * boost::filesystem::path
      */
     const bool is_path(sn == boost_.type(boost_types::filesystem_path));
-    if (is_header && is_domain && is_path)
+    if (is_header && is_types && is_path)
         il.system().push_back(boost_.include(boost_types::filesystem_path));
 
     const bool is_test_data(cd.facet_type() == cpp_facet_types::test_data);
@@ -249,14 +249,14 @@ void includer::append_boost_dependencies(
         il.system().push_back(std_.include(std_types::sstream));
 
     const bool is_io(cd.facet_type() == cpp_facet_types::io);
-    const bool domain_with_io(is_domain && (settings_.use_integrated_io()));
+    const bool domain_with_io(is_types && (settings_.use_integrated_io()));
     const bool io_without_iio(is_io && !settings_.use_integrated_io());
 
     /*
      * boost::gregorian::date
      */
     const bool is_date(sn == boost_.type(boost_types::gregorian_date));
-    if (is_header && is_domain && is_date)
+    if (is_header && is_types && is_date)
         il.system().push_back(boost_.include(boost_types::gregorian_date));
 
     if (is_date && is_implementation && io_enabled_ &&
@@ -273,7 +273,7 @@ void includer::append_boost_dependencies(
      * boost::posix_time::ptime
      */
     const bool is_time(sn == boost_.type(boost_types::ptime));
-    if (is_header && is_domain && is_time)
+    if (is_header && is_types && is_time)
         il.system().push_back(boost_.include(boost_types::ptime));
 
     if (is_time && is_implementation && io_enabled_ &&
@@ -289,7 +289,7 @@ void includer::append_boost_dependencies(
      * boost::posix_time::time_duration
      */
     const bool is_duration(sn == boost_.type(boost_types::time_duration));
-    if (is_header && is_domain && is_duration)
+    if (is_header && is_types && is_duration)
         il.system().push_back(boost_.include(boost_types::time_duration));
 
     if (is_duration && is_implementation && io_enabled_ &&
@@ -313,9 +313,9 @@ void includer::append_std_dependencies(const content_descriptor& cd,
      * std::string
      */
     const bool is_header(cd.file_type() == file_types::header);
-    const bool is_domain(cd.facet_type() == cpp_facet_types::types);
+    const bool is_types(cd.facet_type() == cpp_facet_types::types);
     const bool is_string(sn == std_.type(std_types::string));
-    if (is_header && is_domain && is_string)
+    if (is_header && is_types && is_string)
         il.system().push_back(std_.include(std_types::string));
 
     const auto ser(cpp_facet_types::serialization);
@@ -332,7 +332,7 @@ void includer::append_std_dependencies(const content_descriptor& cd,
      * std::vector
      */
     const bool is_vector(sn == std_.type(std_types::vector));
-    if (is_header && is_domain && is_vector)
+    if (is_header && is_types && is_vector)
         il.system().push_back(std_.include(std_types::vector));
 
     if (is_implementation && is_serialization && is_vector)
@@ -342,7 +342,7 @@ void includer::append_std_dependencies(const content_descriptor& cd,
      * std::list
      */
     const bool is_list(sn == std_.type(std_types::list));
-    if (is_header && is_domain && is_list)
+    if (is_header && is_types && is_list)
         il.system().push_back(std_.include(std_types::list));
 
     if (is_implementation && is_serialization && is_list)
@@ -352,7 +352,7 @@ void includer::append_std_dependencies(const content_descriptor& cd,
      * std::deque
      */
     const bool is_deque(sn == std_.type(std_types::deque));
-    if (is_header && is_domain && is_deque)
+    if (is_header && is_types && is_deque)
         il.system().push_back(std_.include(std_types::deque));
 
     if (is_implementation && is_serialization && is_deque)
@@ -362,7 +362,7 @@ void includer::append_std_dependencies(const content_descriptor& cd,
      * std::set
      */
     const bool is_set(sn == std_.type(std_types::set));
-    if (is_header && is_domain && is_set)
+    if (is_header && is_types && is_set)
         il.system().push_back(std_.include(std_types::set));
 
     if (is_implementation && is_serialization && is_set)
@@ -385,7 +385,7 @@ void includer::append_std_dependencies(const content_descriptor& cd,
      * std::unordered_map
      */
     const bool is_umap(sn == std_.type(std_types::unordered_map));
-    if (is_header && is_domain && is_umap)
+    if (is_header && is_types && is_umap)
         il.system().push_back(std_.include(std_types::unordered_map));
     lambda(std_.type(std_types::unordered_map));
 
@@ -393,14 +393,14 @@ void includer::append_std_dependencies(const content_descriptor& cd,
      * std::unordered_set
      */
     const bool is_uset(sn == std_.type(std_types::unordered_set));
-    if (is_header && is_domain && is_uset)
+    if (is_header && is_types && is_uset)
         il.system().push_back(std_.include(std_types::unordered_set));
     lambda(std_.type(std_types::unordered_set));
 
     /*
      * primitives
      */
-    if (is_header && is_domain && std_.is_primitive(sn)) {
+    if (is_header && is_types && std_.is_primitive(sn)) {
         const auto t(std_.string_to_type(sn));
         il.system().push_back(std_.include(t));
     }
@@ -409,7 +409,7 @@ void includer::append_std_dependencies(const content_descriptor& cd,
      * std::pair
      */
     const bool is_pair(sn == std_.type(std_types::pair));
-    if (is_header && is_domain && is_pair)
+    if (is_header && is_types && is_pair)
         il.system().push_back(std_.include(std_types::pair));
 }
 
@@ -419,10 +419,10 @@ void includer::append_relationship_dependencies(const relationships& rel,
     auto names(rel.names());
     using config::cpp_facet_types;
     const bool is_header(cd.file_type() == file_types::header);
-    const bool is_domain(cd.facet_type() == cpp_facet_types::types);
+    const bool is_types(cd.facet_type() == cpp_facet_types::types);
     for(const auto n : rel.forward_decls()) {
         const bool is_primitive(cd.content_type() == content_types::primitive);
-        const bool header_and_domain(is_header && is_domain);
+        const bool header_and_domain(is_header && is_types);
 
         if (n.model_name() == std_.model() ||
             n.model_name() == boost_.model() || !header_and_domain) {
@@ -469,7 +469,7 @@ void includer::append_relationship_dependencies(const relationships& rel,
          * for the dependency
          */
         const auto main(aspect_types::main);
-        if (is_header && !is_primitive && is_domain)
+        if (is_header && !is_primitive && is_types)
             il.user().push_back(header_dependency(n, cd.facet_type(), main));
 
         /*
@@ -500,14 +500,14 @@ void includer::append_relationship_dependencies(const relationships& rel,
          */
         const bool forwarded(rel.forward_decls().find(n) !=
             rel.forward_decls().end());
-        if (is_implementation && is_domain && forwarded)
+        if (is_implementation && is_types && forwarded)
             il.user().push_back(header_dependency(n, cd.facet_type(), main));
 
         /*
          * rule 7: parents and children with integrated IO require IO
          * headers in domain implementation.
          */
-        const bool domain_with_io(is_domain &&
+        const bool domain_with_io(is_types &&
             (settings_.use_integrated_io() || rel.is_parent() ||
                 rel.is_child()));
 
@@ -526,13 +526,13 @@ void includer::append_relationship_dependencies(const relationships& rel,
          * rule 8: domain headers require hashing for all keys.
          */
         const bool is_header(cd.file_type() == file_types::header);
-        const bool is_domain(cd.facet_type() == cpp_facet_types::types);
+        const bool is_types(cd.facet_type() == cpp_facet_types::types);
         const bool is_primitive(model_.primitives().find(k) !=
             model_.primitives().end());
 
         const auto main(aspect_types::main);
         const auto hash(cpp_facet_types::hash);
-        if (!is_primitive && is_header && hash_enabled_ && is_domain)
+        if (!is_primitive && is_header && hash_enabled_ && is_types)
             il.user().push_back(header_dependency(k, hash, main));
     }
 
@@ -558,7 +558,7 @@ void includer::append_relationship_dependencies(const relationships& rel,
         /*
          * rule 11: leaves require generators in test data.
          */
-        const bool header_and_domain(is_header && is_domain);
+        const bool header_and_domain(is_header && is_types);
         const auto main(aspect_types::main);
         if (header_and_domain)
             il.user().push_back(header_dependency(*rel.visitor(), cd.facet_type(), main));
@@ -569,14 +569,14 @@ void includer::append_self_dependencies(const content_descriptor& cd,
     inclusion_lists& il) const {
     using config::cpp_facet_types;
     const bool is_header(cd.file_type() == file_types::header);
-    const bool is_domain(cd.facet_type() == cpp_facet_types::types);
+    const bool is_types(cd.facet_type() == cpp_facet_types::types);
     const auto fwd(aspect_types::forward_decls);
     if (cd.aspect_type() == aspect_types::forward_decls) {
         /*
          * rule 1: non-domain forward declarations depend on the
          * domain header.
          */
-        if (is_header && !is_domain)
+        if (is_header && !is_types)
             il.user().push_back(domain_header_dependency(cd.name(), fwd));
         return;
     }
@@ -590,7 +590,7 @@ void includer::append_self_dependencies(const content_descriptor& cd,
         cd.content_type() == content_types::entity ||
         cd.content_type() == content_types::keyed_entity);
     const auto ser(cpp_facet_types::serialization);
-    if (is_header && is_domain && serialization_enabled_ && is_serialisable)
+    if (is_header && is_types && serialization_enabled_ && is_serialisable)
         il.user().push_back(header_dependency(cd.name(), ser, fwd));
 
     /*
@@ -598,7 +598,7 @@ void includer::append_self_dependencies(const content_descriptor& cd,
      * except for the domain header file itself.
      */
     const auto main(aspect_types::main);
-    if (is_header && !is_domain)
+    if (is_header && !is_types)
         il.user().push_back(domain_header_dependency(cd.name(), main));
 
     /*
@@ -674,12 +674,12 @@ includes_for_exception(const content_descriptor& cd) const {
     // exception info
     using config::cpp_facet_types;
     const bool is_header(flt == file_types::header);
-    const bool is_domain(ft == cpp_facet_types::types);
-    if (is_header && is_domain)
+    const bool is_types(ft == cpp_facet_types::types);
+    if (is_header && is_types)
         r.system().push_back(boost_.include(boost_types::exception_info));
 
     // string
-    if (is_header && is_domain)
+    if (is_header && is_types)
         r.system().push_back(std_.include(std_types::string));
 
     remove_duplicates(r);

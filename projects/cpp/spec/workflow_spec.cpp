@@ -38,7 +38,12 @@
 #include "dogen/sml/io/model_io.hpp"
 #include "dogen/dia_to_sml/types/workflow.hpp"
 #include "dogen/cpp/types/workflow_failure.hpp"
+#include "dogen/sml/serialization/registrar_ser.hpp"
 #include "dogen/cpp/types/workflow.hpp"
+
+template<typename Archive> void register_types(Archive& ar) {
+    dogen::sml::register_types<Archive>(ar);
+}
 
 using namespace dogen::cpp;
 using dogen::utility::test::asserter;
@@ -77,7 +82,7 @@ bool test_workflow(path t, path e, path a) {
 using dogen::utility::test::contains_checker;
 
 BOOST_AUTO_TEST_SUITE(workflow)
-/*
+
 BOOST_AUTO_TEST_CASE(class_in_a_package_model_generates_expected_code) {
     SETUP_TEST_LOG("class_in_a_package_model_generates_expected_code");
 
@@ -124,5 +129,5 @@ BOOST_AUTO_TEST_CASE(exception_model_generates_expected_code) {
 
     BOOST_CHECK(test_workflow(i, e, a));
 }
-*/
+
 BOOST_AUTO_TEST_SUITE_END()

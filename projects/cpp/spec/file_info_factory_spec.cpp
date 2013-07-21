@@ -404,7 +404,7 @@ BOOST_AUTO_TEST_CASE(creating_file_info_for_registrar_produces_expected_results)
     const auto ft(cpp_facet_types::serialization);
     BOOST_CHECK(fi.descriptor().facet_type() == ft);
     BOOST_CHECK(fi.descriptor().aspect_type() == aspect_types::main);
-    BOOST_CHECK(fi.descriptor().content_type() == content_types::includer);
+    BOOST_CHECK(fi.descriptor().content_type() == content_types::registrar);
     BOOST_CHECK(!fi.enum_info());
     BOOST_CHECK(!fi.class_info());
     BOOST_CHECK(!fi.exception_info());
