@@ -369,6 +369,7 @@ void transformer::to_service(const processed_object& o, const profile& p) {
 
     auto s(boost::make_shared<sml::service>());
     update_abstract_object(*s, o, p);
+    s->type(sml::service_types::user_defined);
     context_.model().objects().insert(std::make_pair(s->name(), s));
 }
 

@@ -20,6 +20,7 @@
  */
 #include <ostream>
 #include <boost/throw_exception.hpp>
+#include "dogen/cpp/io/file_info_io.hpp"
 #include "dogen/cpp/types/formatters/formatting_error.hpp"
 #include "dogen/cpp/types/formatters/licence.hpp"
 #include "dogen/cpp/types/formatters/header_guards.hpp"
@@ -108,7 +109,7 @@ void hash_header::hash_class(const class_info& ci) {
     stream_ << indenter_ << "};" << std::endl;
 }
 
-void hash_header::format_class(const file_info& fi) {
+void hash_header::format_enumeration(const file_info& fi) {
     const auto o(fi.enum_info());
     if (!o) {
         BOOST_LOG_SEV(lg, error) << missing_enum_info;
@@ -149,7 +150,7 @@ void hash_header::format_class(const file_info& fi) {
     utility_.blank_line(2);
 }
 
-void hash_header::format_enumeration(const file_info& fi) {
+void hash_header::format_class(const file_info& fi) {
     const auto o(fi.class_info());
     if (!o) {
         BOOST_LOG_SEV(lg, error) << missing_class_info;

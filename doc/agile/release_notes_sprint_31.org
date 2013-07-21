@@ -10,15 +10,15 @@ This file contains all stories that were closed during sprint 31.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-07-16 Tue 18:36]
+Clock summary at [2013-07-21 Sun 20:27]
 
 | Headline                                                 | Time   |      |      |
 |----------------------------------------------------------+--------+------+------|
-| *Total time*                                             | *2:13* |      |      |
+| *Total time*                                             | *2:45* |      |      |
 |----------------------------------------------------------+--------+------+------|
-| Development Stories Implemented                          |        | 2:13 |      |
+| Development Stories Implemented                          |        | 2:45 |      |
 | IMPLEMENTATION Release notes and backlog grooming        |        |      | 0:06 |
-| IMPLEMENTATION Update C++ model after latest SML changes |        |      | 2:07 |
+| IMPLEMENTATION Update C++ model after latest SML changes |        |      | 2:39 |
 #+end:
 
 *** IMPLEMENTATION Release notes and backlog grooming                  :task:

@@ -452,7 +452,8 @@ void includer::append_relationship_dependencies(const relationships& rel,
         } else if (n.model_name() == boost_.model()) {
             append_boost_dependencies(cd2, il);
             continue;
-        } else if (n.model_name() == primitive_model)
+        } else if (n.model_name() == primitive_model ||
+            n.model_name().empty())
             continue;
 
         /*

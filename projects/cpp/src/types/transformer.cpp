@@ -398,6 +398,7 @@ class_info transformer::to_class_info(const sml::abstract_object& ao) const {
     r.is_visitable(ao.is_visitable());
     r.is_parent(ao.is_parent());
     r.generation_type(ao.generation_type());
+    r.class_type(class_types::user_defined);
 
     const auto& isp(ao.implementation_specific_parameters());
     r.implementation_specific_parameters(isp);
@@ -499,8 +500,10 @@ void transformer::visit(const dogen::sml::service& s) {
         break;
     case sml::service_types::visitor:
         context_.visitors().insert(std::make_pair(s.name(), to_visitor(s)));
+        break;
     default:
-        BOOST_LOG_SEV(lg, error) << unsupported_service_type << s.type();
+        BOOST_LOG_SEV(lg, error) << unsupported_service_type << s.type()
+                                 << " service: " << s.name();
         BOOST_THROW_EXCEPTION(transformation_error(unsupported_service_type +
                 boost::lexical_cast<std::string>(s.type())));
     };
@@ -552,11 +555,22 @@ void transformer::visit(const dogen::sml::value_object& vo) {
         context_.exceptions().insert(std::make_pair(vo.name(), e));
         break;
     }
-    case sml::value_object_types::plain:
-    case sml::value_object_types::versioned_key:
-    case sml::value_object_types::unversioned_key:
+    case sml::value_object_types::plain: {
         add_class(vo.name(), to_class_info(vo));
         break;
+    }
+    case sml::value_object_types::versioned_key: {
+        auto ci(to_class_info(vo));
+        ci.class_type(class_types::versioned_key);
+        add_class(vo.name(), ci);
+        break;
+    }
+    case sml::value_object_types::unversioned_key: {
+        auto ci(to_class_info(vo));
+        ci.class_type(class_types::unversioned_key);
+        add_class(vo.name(), ci);
+        break;
+    }
     default:
         BOOST_LOG_SEV(lg, error) << unsupported_value_object_type << vo.type();
         BOOST_THROW_EXCEPTION(transformation_error(

@@ -25,6 +25,7 @@
 #include "dogen/sml/io/qname_io.hpp"
 #include "dogen/cpp/types/workflow_failure.hpp"
 #include "dogen/cpp/io/class_types_io.hpp"
+#include "dogen/cpp/io/context_io.hpp"
 #include "dogen/cpp/types/formatters/factory.hpp"
 #include "dogen/cpp/types/formatters/file_formatter.hpp"
 #include "dogen/cpp/types/formatters/src_cmakelists.hpp"
@@ -180,6 +181,7 @@ void workflow::populate_context_activity() {
     transform_registrar();
 
     BOOST_LOG_SEV(lg, debug) << "Finished populate context sub-workflow";
+    BOOST_LOG_SEV(lg, debug) << "context: " << context_;
 }
 
 workflow::result_type
@@ -426,6 +428,7 @@ std::vector<boost::filesystem::path> workflow::managed_directories() const {
 workflow::result_type workflow::execute() {
     BOOST_LOG_SEV(lg, info) << "C++ backend started.";
 
+    populate_context_activity();
     workflow::result_type r(generate_file_infos_activity());
     if (settings_.disable_cmakelists())
         BOOST_LOG_SEV(lg, info) << "CMakeLists generation disabled.";
