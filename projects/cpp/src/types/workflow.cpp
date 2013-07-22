@@ -255,6 +255,7 @@ workflow::generate_file_infos_for_namespaces_activity() const {
         for (const auto& cd : descriptor_factory_.create(qn, ct)) {
             const auto fi(file_info_factory_.create(ni, cd));
             r.insert(format(fi));
+            register_header(fi);
         }
     }
 

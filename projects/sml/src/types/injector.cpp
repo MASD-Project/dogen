@@ -260,6 +260,8 @@ injector::create_visitor(const abstract_object& ao) const {
     r->type(service_types::visitor);
     r->documentation(visitor_doc + ao.name().simple_name());
 
+    // FIXME: hack for now
+    r->leaves(ao.leaves());
     for (const auto& l : ao.leaves()) {
         operation op;
         op.name("visit");

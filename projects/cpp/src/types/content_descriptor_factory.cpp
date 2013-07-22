@@ -162,13 +162,20 @@ create(const sml::qname& qn, const content_types ct) const {
     if (ct == content_types::namespace_doc) {
         const auto ft(config::cpp_facet_types::types);
 
-        // content descriptors for modules must take into account the
-        // module name itself as they are used to name the files.
-        // if we didn't do this we'd place the file outside the
-        // module folder.
-        auto new_qn(qn);
-        new_qn.module_path().push_back(qn.simple_name());
-        r.push_back(content_descriptor(header, ft, main, new_qn, ct));
+        // FIXME: hack to handle model name.
+        if (qn.simple_name().empty()) {
+            auto new_qn(qn);
+            new_qn.simple_name(qn.model_name());
+            r.push_back(content_descriptor(header, ft, main, new_qn, ct));
+        } else {
+            // content descriptors for modules must take into account the
+            // module name itself as they are used to name the files.
+            // if we didn't do this we'd place the file outside the
+            // module folder.
+            auto new_qn(qn);
+            new_qn.module_path().push_back(qn.simple_name());
+            r.push_back(content_descriptor(header, ft, main, new_qn, ct));
+        }
         return r;
     }
 

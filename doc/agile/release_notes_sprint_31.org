@@ -10,21 +10,23 @@ This file contains all stories that were closed during sprint 31.
 ** Development Stories Implemented
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2013-07-21 Sun 20:27]
+Clock summary at [2013-07-22 Mon 08:56]
 
-| Headline                                                 | Time   |      |      |
-|----------------------------------------------------------+--------+------+------|
-| *Total time*                                             | *2:45* |      |      |
-|----------------------------------------------------------+--------+------+------|
-| Development Stories Implemented                          |        | 2:45 |      |
-| IMPLEMENTATION Release notes and backlog grooming        |        |      | 0:06 |
-| IMPLEMENTATION Update C++ model after latest SML changes |        |      | 2:39 |
+| Headline                                                           | Time   |      |      |
+|--------------------------------------------------------------------+--------+------+------|
+| *Total time*                                                       | *3:21* |      |      |
+|--------------------------------------------------------------------+--------+------+------|
+| Development Stories Implemented                                    |        | 3:21 |      |
+| IMPLEMENTATION Release notes and backlog grooming                  |        |      | 0:06 |
+| COMPLETED Update C++ model after latest SML changes                |        |      | 2:39 |
+| IMPLEMENTATION Get all unit tests to pass after latest SML changes |        |      | 0:36 |
 #+end:
 
 *** IMPLEMENTATION Release notes and backlog grooming                  :task:
     CLOCK: [2013-07-15 Mon 07:50]--[2013-07-15 Mon 07:56] =>  0:06
 
-*** IMPLEMENTATION Update C++ model after latest SML changes          :story:
+*** COMPLETED Update C++ model after latest SML changes               :story:
+    CLOSED: [2013-07-22 Mon 07:47]
 **** IMPLEMENTATION Update workflow
      CLOCK: [2013-07-16 Tue 18:38]--[2013-07-16 Tue 18:42] =>  0:04
      CLOCK: [2013-07-16 Tue 18:08]--[2013-07-16 Tue 18:36] =>  0:28
@@ -34,6 +36,15 @@ Clock summary at [2013-07-21 Sun 20:27]
      CLOCK: [2013-07-15 Mon 18:00]--[2013-07-15 Mon 18:11] =>  0:11
      CLOCK: [2013-07-15 Mon 08:28]--[2013-07-15 Mon 08:38] =>  0:10
      CLOCK: [2013-07-15 Mon 07:58]--[2013-07-15 Mon 08:20] =>  0:22
+
+*** IMPLEMENTATION Get all unit tests to pass after latest SML changes :story:
+**** COMPLETED Fix inclusion of model namespace documentation file
+     CLOSED: [2013-07-22 Mon 08:11]
+     CLOCK: [2013-07-22 Mon 07:48]--[2013-07-22 Mon 08:11] =>  0:23
+
+**** IMPLEMENTATION Fix visitor generation
+     CLOCK: [2013-07-22 Mon 08:26]--[2013-07-22 Mon 08:35] =>  0:09
+     CLOCK: [2013-07-22 Mon 08:12]--[2013-07-22 Mon 08:16] =>  0:04
 
 *** Create a =key_extractor= service                                  :story:
 
